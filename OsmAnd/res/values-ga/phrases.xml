@@ -409,7 +409,7 @@
     <string name="poi_traffic_calming_hump">Hump Luas</string>
     <string name="poi_traffic_calming_island">Oileán tráchta</string>
     <string name="poi_car_repair">Deisiú carranna</string>
-    <string name="poi_service_tyres">Boinn; Boinn</string>
+    <string name="poi_service_tyres">Boinn; Boinn; Boinn</string>
     <string name="poi_vehicle_inspection">Cigireacht feithicle</string>
     <string name="poi_car_wash">Nigh carranna</string>
     <string name="poi_fuel">Stáisiún gáis; Stáisiún gásailín; Stáisiún líonta; Stáisiún peitril</string>
@@ -831,11 +831,11 @@
     <string name="poi_material_aluminium">Ábhar: alúmanam</string>
     <string name="poi_archaeological_site_megalith">MegalithName</string>
     <string name="poi_archaeological_site_tumulus">An Bhearú</string>
-    <string name="poi_archaeological_site_fortification">Fortification</string>
+    <string name="poi_archaeological_site_fortification">Daingean</string>
     <string name="poi_archaeological_site_settlement">Socrú</string>
     <string name="poi_archaeological_site_city">Cathair</string>
     <string name="poi_archaeological_site_hut_circle">Ciorcal both</string>
-    <string name="poi_archaeological_site_petroglyph">Petroglyph</string>
+    <string name="poi_archaeological_site_petroglyph">Peitriglif</string>
     <string name="poi_megalith_type_menhir">Cineál Megalith: menhir</string>
     <string name="poi_megalith_type_dolmen">Cineál Megalith: dolmen</string>
     <string name="poi_megalith_type_nuraghe">Cineál Megalith: nuraghe</string>
@@ -878,7 +878,7 @@
     <string name="poi_healthcare_speciality_surgery">Máinliacht ghinearálta</string>
     <string name="poi_healthcare_speciality_radiology">Raideolaíocht</string>
     <string name="poi_healthcare_speciality_neurology">Néareolaíocht</string>
-    <string name="poi_healthcare_speciality_dermatovenereology">Dermato-venereology</string>
+    <string name="poi_healthcare_speciality_dermatovenereology">Deirmeolaíocht-venéireolaíocht</string>
     <string name="poi_healthcare_speciality_cardiology">Cairdeolaíocht</string>
     <string name="poi_healthcare_speciality_pulmonology">Leigheas riospráide</string>
     <string name="poi_healthcare_speciality_dental_oral_maxillo_facial_surgery">Máinliacht fiaclóireachta, béil agus maxillo-facial</string>
@@ -889,14 +889,14 @@
     <string name="poi_healthcare_speciality_stomatology">Fiaclóireacht</string>
     <string name="poi_healthcare_speciality_nephrology">Neifreolaíocht (galair duánacha)</string>
     <string name="poi_healthcare_speciality_neurosurgery">Máinliacht néareolaíoch</string>
-    <string name="poi_healthcare_speciality_neuropsychiatry">Neuropsychiatry</string>
+    <string name="poi_healthcare_speciality_neuropsychiatry">Néareashíciatracht</string>
     <string name="poi_healthcare_speciality_endocrinology">Inchríneolaíocht</string>
     <string name="poi_healthcare_speciality_nuclear">Leigheas núicléach</string>
     <string name="poi_healthcare_speciality_pathology">Anatamaíocht phaiteolaíoch</string>
     <string name="poi_health_specialty_obstetrics_postnatal_no">Speisialtacht sláinte: cnáimhseachas (iarbhreithe): níl</string>
     <string name="poi_healthcare_speciality_obstetrics_antenatal">Cnáimhseachas (réamhbhreith)</string>
     <string name="poi_health_specialty_obstetrics_antenatal_no">Speisialtacht sláinte: cnáimhseachas (réamhbhreithe): níl</string>
-    <string name="poi_healthcare_speciality_acupuncture">Acupuncture</string>
+    <string name="poi_healthcare_speciality_acupuncture">Snáthaidpholladh</string>
     <string name="poi_healthcare_speciality_traditional_chinese_medicine">Leigheas traidisiúnta na Síne</string>
     <string name="poi_healthcare_speciality_depth">Síceolaíocht doimhneachta</string>
     <string name="poi_healthcare_speciality_behavior">Oibriú</string>
@@ -1540,7 +1540,7 @@
     <string name="poi_healthcare_speciality_ayurveda">Ayurveda</string>
     <string name="poi_healthcare_speciality_reflexology">Reifléiceolaíocht</string>
     <string name="poi_healthcare_speciality_shiatsu">ShiatsuName</string>
-    <string name="poi_healthcare_speciality_anthroposophical">Anthroposophical</string>
+    <string name="poi_healthcare_speciality_anthroposophical">Antraipéiseach</string>
     <string name="poi_healthcare_speciality_tuina">TuinaName</string>
     <string name="poi_healthcare_speciality_unani">UnaniName</string>
     <string name="poi_healthcare_speciality_sophrologist">Soifreolaíocht</string>
@@ -1814,7 +1814,7 @@
     <string name="poi_healthcare_speciality_paediatrics">Péidiatraic</string>
     <string name="poi_health_specialty_paediatrics_no">Speisialtacht sláinte: péidiatraic: níl</string>
     <string name="poi_healthcare_speciality_urology">Úireolaíocht</string>
-    <string name="poi_healthcare_speciality_podiatry">Podiatry</string>
+    <string name="poi_healthcare_speciality_podiatry">Podiatracht</string>
     <string name="poi_squash">Scuais</string>
     <string name="poi_inscription_nw">Inscríbhinn: NW</string>
     <string name="poi_inscription_w">Inscríbhinn: W</string>
@@ -2277,7 +2277,7 @@
     <string name="poi_social_facility_for_mental_health">Othair a bhfuil neamhoird mheabhracha orthu</string>
     <string name="poi_social_facility_for_juvenile">Ógánaigh</string>
     <string name="poi_theatre_genre_drama">Drámaíocht</string>
-    <string name="poi_theatre_genre_marionette">Marionette</string>
+    <string name="poi_theatre_genre_marionette">Marionet</string>
     <string name="poi_deaf_description">Cur síos ar na bodhair</string>
     <string name="poi_historic_civilization_ancient_greek">Sibhialtacht: sean-Ghréigis</string>
     <string name="poi_historic_civilization_greek_egyptian">Sibhialtacht: Gréigis Éigipteach (332 RC - 30 RC)</string>
@@ -2295,9 +2295,9 @@
     <string name="poi_concentration_camp_gulag">Cineál: gulag</string>
     <string name="poi_temperature">Teocht</string>
     <string name="poi_bathing_yes">Folcadh: tá</string>
-    <string name="poi_healthcare_speciality_trauma">Traumatology</string>
+    <string name="poi_healthcare_speciality_trauma">Trámaiteolaíocht</string>
     <string name="poi_healthcare_speciality_biology">Bitheolaíocht chliniciúil</string>
-    <string name="poi_healthcare_speciality_osteopathy">Osteopathy</string>
+    <string name="poi_healthcare_speciality_osteopathy">Oistéapaite</string>
     <string name="poi_healthcare_speciality_maternity">Máithreachas</string>
     <string name="poi_healthcare_speciality_biochemistry">Ceimic bhitheolaíoch</string>
     <string name="poi_healthcare_speciality_manual_therapy">Teiripe láimhe</string>
@@ -2708,7 +2708,7 @@
     <string name="poi_surface_carpet">Dromchla: cairpéad</string>
     <string name="poi_healthcare_speciality_travel_clinic">Clinic taistil</string>
     <string name="poi_healthcare_speciality_palliative">Maolaitheach</string>
-    <string name="poi_healthcare_speciality_denturist">Denturist</string>
+    <string name="poi_healthcare_speciality_denturist">Fiaclóir (fiacla bréige)</string>
     <string name="poi_healthcare_speciality_pharmacology">Cógaseolaíocht</string>
     <string name="poi_healthcare_speciality_pedorthist">Pedorthist</string>
     <string name="poi_healthcare_speciality_sleep">Codladh</string>
@@ -2727,7 +2727,7 @@
     <string name="poi_padus_public_access_open">Rochtain: oscailte</string>
     <string name="poi_padus_public_access_restricted">Rochtain: srianta</string>
     <string name="poi_us_maps_recreation_area_activity_backpacking">Málaí droma</string>
-    <string name="poi_us_maps_recreation_area_activity_beachcombing">Beachcombing</string>
+    <string name="poi_us_maps_recreation_area_activity_beachcombing">Cíoradh Trá</string>
     <string name="poi_us_maps_recreation_area_activity_boating_motorized">Bádóireacht mhótaraithe</string>
     <string name="poi_us_maps_recreation_area_facility_cabin_rentals">Cíosanna cábáin</string>
     <string name="poi_us_maps_recreation_area_activity_campground_camping">Campground campála</string>
@@ -2736,7 +2736,7 @@
     <string name="poi_us_maps_recreation_area_activity_fishing">Iascaireacht</string>
     <string name="poi_us_maps_recreation_area_activity_group_camping">Campáil ghrúpa</string>
     <string name="poi_us_maps_recreation_area_activity_other_activities">Gníomhaíochtaí eile</string>
-    <string name="poi_us_maps_recreation_area_activity_rockhounding">Rockhounding</string>
+    <string name="poi_us_maps_recreation_area_activity_rockhounding">Sealgaireacht carraige</string>
     <string name="poi_us_maps_recreation_area_open_season_start">Tús an tséasúir oscailte</string>
     <string name="poi_us_maps_recreation_area_facility_cabin">Cábán</string>
     <string name="poi_us_maps_recreation_area_facility_airplane_landing_strip">Stiall tuirlingthe eitleáin</string>
@@ -3809,7 +3809,7 @@
     <string name="poi_sport_free_flying">Eitilt saor in aisce (spórt)</string>
     <string name="poi_water_tap">Sconna uisce</string>
     <string name="poi_free_flying_site_landing">Tuirlingt</string>
-    <string name="poi_free_flying_site_toplanding">Toplanding</string>
+    <string name="poi_free_flying_site_toplanding">Barr-tuirlingt</string>
     <string name="poi_free_flying_site_towing">Tarraingt</string>
     <string name="poi_free_flying_site_training">Oiliúint</string>
     <string name="poi_free_flying_official_yes">Oifigiúil: tá</string>
@@ -4031,7 +4031,7 @@
     <string name="poi_cuisine_brunch">Bróinse</string>
     <string name="poi_cuisine_sub">Fo-</string>
     <string name="poi_cuisine_pita">PitaName</string>
-    <string name="poi_cuisine_fondue">Fondue</string>
+    <string name="poi_cuisine_fondue">Fondú</string>
     <string name="poi_cuisine_teriyaki">Teriyaki</string>
     <string name="poi_cuisine_shawarma">ShawarmaName</string>
     <string name="poi_cuisine_regional">Réigiúnach</string>
@@ -4466,7 +4466,7 @@
     <string name="poi_parking_space">Spás páirceála</string>
     <string name="poi_url">URL</string>
     <string name="poi_volcano_type_scoria">Slaig</string>
-    <string name="poi_volcano_type_stratovolcano">Stratovolcano</string>
+    <string name="poi_volcano_type_stratovolcano">Stratobolcán</string>
     <string name="poi_volcano_type_maar">Ach</string>
     <string name="poi_volcano_type_lava_dome">Cruinneachán laibhe</string>
     <string name="poi_volcano_type_mud">Láib</string>
@@ -4559,7 +4559,7 @@
     <string name="poi_telecom_medium_coaxial">Meánach: comhaiseach</string>
     <string name="poi_pest_control">Siopa rialaithe lotnaidí</string>
     <string name="poi_shop_water">Siopa uisce óil</string>
-    <string name="poi_pillory">Pillory</string>
+    <string name="poi_pillory">Pilléir</string>
     <string name="poi_outdoor_seating_poi">Suíocháin lasmuigh</string>
     <string name="poi_service_vehicle_inspection_yes">Cigireacht feithicle</string>
     <string name="poi_service_vehicle_rental_yes">Carr ar cíos</string>
@@ -4780,7 +4780,7 @@
     <string name="poi_healthcare_speciality_body">Síciteiripe dírithe ar an gcorp</string>
     <string name="poi_healthcare_speciality_systemic">Teiripe shistéamach</string>
     <string name="poi_healthcare_speciality_pediatric">Péidiatraiceach</string>
-    <string name="poi_healthcare_speciality_diabetology">Diabetology</string>
+    <string name="poi_healthcare_speciality_diabetology">Diaibéiteolaíocht</string>
     <string name="poi_healthcare_speciality_pain_control">Rialú péine</string>
     <string name="poi_healthcare_speciality_microbiology">Micribhitheolaíocht</string>
     <string name="poi_to">Chun</string>
