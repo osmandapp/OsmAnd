@@ -7,10 +7,10 @@ import static net.osmand.shared.grid.ButtonPositionSize.POS_BOTTOM;
 import static net.osmand.shared.grid.ButtonPositionSize.POS_LEFT;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.shared.grid.ButtonPositionSize;
 
@@ -53,7 +53,7 @@ public class DrawerMenuButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public String getDefaultIconName() {
+	public String getDefaultIconName(@Nullable Boolean nightMode) {
 		boolean dashboard = settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get();
 		return dashboard ? "ic_dashboard" : "ic_navigation_drawer";
 	}

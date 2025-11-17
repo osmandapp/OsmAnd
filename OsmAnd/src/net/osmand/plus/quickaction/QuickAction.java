@@ -68,6 +68,10 @@ public class QuickAction {
 		return actionType == null ? 0 : actionType.getIconRes();
 	}
 
+	public int getIconRes(Context context, boolean nightMode) {
+		return getIconRes(context);
+	}
+
 	public long getId() {
 		return id;
 	}
