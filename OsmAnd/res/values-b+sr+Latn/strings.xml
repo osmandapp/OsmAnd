@@ -5888,4 +5888,5 @@
     <string name="deleted_maps_warning">Spremate se da izbrišete %d stavke(e)\nNastavljate?</string>
     <string name="routing_attr_weightrating_name">Maksimalna težina pri punom opterećenju</string>
     <string name="routing_attr_maxaxleload_name">Maksimalno osovinsko opterećenje</string>
+    <string name="is_parking_time_limited">Da li je vreme parkiranja ograničeno?</string>
 </resources>
