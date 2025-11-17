@@ -5886,4 +5886,5 @@
     <string name="unsupported_maps">Неподржане мапе</string>
     <string name="routing_attr_weightrating_name">Максимална тежина при пуном оптерећењу</string>
     <string name="routing_attr_maxaxleload_name">Максимално осовинско оптерећење</string>
+    <string name="is_parking_time_limited">Да ли је време паркирања ограничено?</string>
 </resources>
