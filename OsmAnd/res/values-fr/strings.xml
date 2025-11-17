@@ -2699,7 +2699,7 @@
     <string name="public_transport_warning_title">Les itinéraires en transports en commun sont actuellement en phase de test. Des erreurs ou des imprécisions peuvent avoir lieu.</string>
     <string name="add_intermediate">Ajouter une étape</string>
     <string name="shared_string_walk">Marche</string>
-    <string name="save_poi_value_exceed_length">Réduisez la longueur d\'attribut « %s » à moins de 255 caractères.</string>
+    <string name="save_poi_value_exceed_length">Réduisez la longueur de l\'attribut « %s » à moins de 255 caractères.</string>
     <string name="save_poi_value_exceed_length_title">Taille de « %s »</string>
     <string name="avoid_pt_types_descr">Sélectionner les types de transports en commun à éviter pour le guidage :</string>
     <string name="avoid_pt_types">Éviter des types de transports…</string>
