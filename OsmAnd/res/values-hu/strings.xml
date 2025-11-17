@@ -1808,7 +1808,7 @@
     <string name="add_time_span">Időtartam megadása</string>
     <string name="road_blocked">Lezárt út</string>
     <string name="shared_string_select">Kijelölés</string>
-    <string name="switch_start_finish">Kiindulási pont és az úti cél felcserélése</string>
+    <string name="switch_start_finish">Kiindulási pont és az úticél felcserélése</string>
     <string name="rendering_attr_hideIcons_name">Érdekes helyek ikonjai</string>
     <string name="item_removed">Elem eltávolítva</string>
     <string name="n_items_removed">elem eltávolítva</string>
@@ -2233,7 +2233,7 @@
     <string name="coordinate_input">Koordináta bevitele</string>
     <string name="marker_save_as_track_descr">Jelölők exportálása az alábbi GPX-fájlba:</string>
     <string name="move_to_history">Áthelyezés az előzményekbe</string>
-    <string name="group_will_be_removed_after_restart">A csoport el fog tűnni, amikor legközelebb elindítod az alkalmazást.</string>
+    <string name="group_will_be_removed_after_restart">A csoport el fog tűnni, amikor legközelebb elindítja az alkalmazást.</string>
     <string name="show_guide_line">Irányjelző vonalak megjelenítése</string>
     <string name="show_arrows_on_the_map">Nyilak megjelenítése a térképen</string>
     <string name="show_passed">Elhagyottak megjelenítése</string>
@@ -2405,9 +2405,9 @@
     <string name="show_tunnels">Alagutak</string>
     <string name="distance_farthest">Először a legtávolabbi</string>
     <string name="distance_nearest">Először a legközelebbi</string>
-    <string name="enter_lon">Hosszúsági fok megadása</string>
-    <string name="enter_lat">Szélességi fok megadása</string>
-    <string name="enter_lat_and_lon">Szélességi és hosszúsági fok megadása</string>
+    <string name="enter_lon">Adjon meg hosszúsági fokot</string>
+    <string name="enter_lat">Adjon meg szélességi fokot</string>
+    <string name="enter_lat_and_lon">Adjon meg szélességi és hosszúsági fokot</string>
     <string name="dd_mm_ss_format">FF°PP′MM″</string>
     <string name="dd_dddddd_format">Fok (6 tizedessel)</string>
     <string name="dd_ddddd_format">Fok (5 tizedessel)</string>
@@ -3892,7 +3892,7 @@
     <string name="promo_subscription">Promóciós előfizetés</string>
     <string name="track_has_no_needed_data">A nyomvonal nem tartalmazza a szükséges adatokat.</string>
     <string name="backup_error_subscription_was_expired_descr">Az OsmAnd Pro előfizetése lejárt. A biztonsági mentés használatához meg kell újítania. Az OsmAnd Cloudból továbbra is visszaállíthatja az adatokat.</string>
-    <string name="contour_lines_hillshade_slope">Szintvonalak, domborzatárnyékolás, lejtésviszonyok</string>
+    <string name="contour_lines_hillshade_slope">Szintvonalak, domborzatárnyékolás, lejtviszonyok</string>
     <string name="backup_deleting_all_data">Összes adat törlése…</string>
     <string name="backup_deleted_all_data">Minden adat törölve.</string>
     <string name="backup_deleting_all_data_descr">Várjon, amíg az OsmAnd törli adatait a felhőből. Az eszközön lévő összes adat érintetlenül marad.</string>
@@ -5812,4 +5812,5 @@
     <string name="unsupported_maps">Nem támogatott térképek</string>
     <string name="routing_attr_weightrating_name">Megengedett össztömeg</string>
     <string name="routing_attr_maxaxleload_name">Megengedett maximális tengelyterhelés</string>
+    <string name="is_parking_time_limited">A parkolási idő korlátozott?</string>
 </resources>
