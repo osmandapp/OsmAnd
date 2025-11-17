@@ -203,20 +203,31 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
       boolean hasMarker;
       boolean history;
       float textScale;
+      String iconName;
+      String bgTypeName;
 
       MapLayerData(@NonNull WptPt wptPt, int color, boolean withShadow,
-                   boolean hasMarker, boolean history, float textScale) {
+              boolean hasMarker, boolean history, float textScale) {
          this.wptPt = wptPt;
          this.color = color;
          this.withShadow = withShadow;
          this.hasMarker = hasMarker;
          this.history = history;
          this.textScale = textScale;
+         this.iconName = wptPt.getIconNameOrDefault();
+         this.bgTypeName = wptPt.getBackgroundType();
       }
 
       long getKey() {
-         return ((long) color << 6) + ((long) wptPt.hashCode() << 4) + ((withShadow ? 1 : 0) << 3)
-                 + ((hasMarker ? 1 : 0) << 2) + (int) (textScale * 10) + (history ? 1 : 0);
+         int key = 1;
+         key = 31 * key + color;
+         key = 31 * key + (withShadow ? 1 : 0);
+         key = 31 * key + (hasMarker ? 1 : 0);
+         key = 31 * key + (history ? 1 : 0);
+         key = 31 * key + (int) (textScale * 10);
+         key = 31 * key + (iconName != null ? iconName.hashCode() : 0);
+         key = 31 * key + (bgTypeName != null ? bgTypeName.hashCode() : 0);
+         return key;
       }
    }
 }
