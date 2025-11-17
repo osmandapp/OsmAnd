@@ -147,3 +147,12 @@ dependencies {
 	implementation fileTree(include: ['*.jar'], dir: 'libs')
 }
 
+test {
+    int forks
+    try {
+        forks = Integer.parseInt(System.getenv('MAX_PARALLEL_FORKS'))
+    } catch (Exception ignored) {
+        forks = Runtime.runtime.availableProcessors()
+    }
+    maxParallelForks = forks > 0 ? forks : 1
+}
