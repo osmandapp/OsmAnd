@@ -107,6 +107,8 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 			LocalItem localItem = (LocalItem) item;
 			if (type == TERRAIN_DATA && SrtmDownloadItem.isSrtmFile(localItem.getFileName())) {
 				return R.drawable.ic_plugin_srtm;
+			} else if(localItem.isDeleted()) {
+				return R.drawable.ic_action_delete_dark;
 			}
 		}
 		return type.getIconId();
