@@ -37,6 +37,8 @@ public class SearchPhrase {
 	// Object consists of 2 part [known + unknown] 
 	private String fullTextSearchPhrase = "";
 	private String unknownSearchPhrase = "";
+	
+	private boolean likelyAddressSearch = false;
 
 	// words to be used for words span
 	private List<SearchWord> words = new ArrayList<>();
@@ -146,6 +148,7 @@ public class SearchPhrase {
 		sp.words = foundWords;
 		sp.fullTextSearchPhrase = fullText;
 		sp.unknownSearchPhrase = textToSearch;
+		
 		sp.lastUnknownSearchWordComplete = isTextComplete(fullText) ;
 		if (!reg.matcher(textToSearch).find()) {
 			sp.firstUnknownSearchWord = sp.unknownSearchPhrase.trim();
@@ -168,7 +171,19 @@ public class SearchPhrase {
 				}
 			}
 		}
+		sp.likelyAddressSearch = likelyAddressSearch(fullText) || !sp.lastUnknownSearchWordComplete;
 		return sp;
+	}
+
+	private boolean likelyAddressSearch(String fullText) {
+		// for now only simple check - we just check if it contains digit
+		for (int i = 0; i < fullText.length(); i++) {
+			char c = fullText.charAt(i);
+			if (c >= '0' && c <= '9') {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean needDecryptAbbreviations() {
@@ -182,6 +197,10 @@ public class SearchPhrase {
 			}
 		}
 		return false;
+	}
+	
+	public boolean isLikelyAddressSearch() {
+		return likelyAddressSearch;
 	}
 
 	public static List<String> splitWords(String w, List<String> ws, String delimiters) {
@@ -232,6 +251,7 @@ public class SearchPhrase {
 				genUnknownSearchPhrase.append(unknownWords.get(i)).append(" ");
 			}
 			sp.fullTextSearchPhrase = fullTextSearchPhrase; 
+			sp.likelyAddressSearch = likelyAddressSearch;
 			sp.unknownSearchPhrase = genUnknownSearchPhrase.toString().trim();
 		}
 		return sp;
