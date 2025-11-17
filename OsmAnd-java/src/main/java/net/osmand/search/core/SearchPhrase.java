@@ -27,7 +27,6 @@ public class SearchPhrase {
 	public static final String ALLDELIMITERS_WITH_HYPHEN = "\\s|,|-";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private static Comparator<String> commonWordsComparator;
-	private static Set<String> conjunctions = new TreeSet<>();
 	
 	private final Collator clt;
 	private final SearchSettings settings;
@@ -63,26 +62,6 @@ public class SearchPhrase {
 	private QuadRect cache1kmRect;
 	
 	static {
-		// the
-		conjunctions.add("the");
-		conjunctions.add("der");
-		conjunctions.add("den");
-		conjunctions.add("die");
-		conjunctions.add("das");
-		conjunctions.add("la");
-		conjunctions.add("le");
-		conjunctions.add("el");
-		conjunctions.add("il");
-		// and
-		conjunctions.add("and");
-		conjunctions.add("und");
-		conjunctions.add("en");
-		conjunctions.add("et");
-		conjunctions.add("y");
-		conjunctions.add("и");
-		
-		// Don't add short names !  issues for perfect matching "Drive A", ...
-//		conjunctions.add("f");
 
 		commonWordsComparator = new Comparator<String>() {
 
@@ -179,7 +158,7 @@ public class SearchPhrase {
 			boolean first = true;
 			for (int i = 0; i < ws.length ; i++) {
 				String wd = ws[i].trim();
-				boolean conjunction = conjunctions.contains(wd.toLowerCase());
+				boolean conjunction = Abbreviations.isConjunction(wd.toLowerCase());
 				boolean lastAndIncomplete = i == ws.length - 1 && !sp.lastUnknownSearchWordComplete;
 				boolean decryptAbbreviations = needDecryptAbbreviations();
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {

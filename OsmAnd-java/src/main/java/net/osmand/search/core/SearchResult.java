@@ -54,6 +54,7 @@ public class SearchResult {
 
 	public String localeName;
 	public String alternateName;
+	public String addressName;
 	public String cityName;
 	public Collection<String> otherNames;
 
