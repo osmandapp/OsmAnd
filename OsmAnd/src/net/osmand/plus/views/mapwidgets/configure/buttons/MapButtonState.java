@@ -91,7 +91,7 @@ public abstract class MapButtonState {
 	public abstract boolean isEnabled();
 
 	@NonNull
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
+	public ButtonAppearanceParams createDefaultAppearanceParams(@Nullable Boolean nightMode) {
 		MapButtonsHelper buttonsHelper = app.getMapButtonsHelper();
 		int size = buttonsHelper.getDefaultSizePref().get();
 		if (size <= 0) {
@@ -105,14 +105,14 @@ public abstract class MapButtonState {
 		if (cornerRadius < 0) {
 			cornerRadius = getDefaultCornerRadius();
 		}
-		return new ButtonAppearanceParams(getDefaultIconName(), size, opacity, cornerRadius);
+		return new ButtonAppearanceParams(getDefaultIconName(nightMode), size, opacity, cornerRadius);
 	}
 
 	@LayoutRes
 	public abstract int getDefaultLayoutId();
 
 	@NonNull
-	public abstract String getDefaultIconName();
+	public abstract String getDefaultIconName(@Nullable Boolean nightMode);
 
 	public int getDefaultSize() {
 		return BIG_SIZE_DP;
@@ -167,8 +167,8 @@ public abstract class MapButtonState {
 	}
 
 	@NonNull
-	public ButtonAppearanceParams createAppearanceParams() {
-		ButtonAppearanceParams defaultParams = createDefaultAppearanceParams();
+	public ButtonAppearanceParams createAppearanceParams(@Nullable Boolean nightMode) {
+		ButtonAppearanceParams defaultParams = createDefaultAppearanceParams(nightMode);
 
 		String iconName = getSavedIconName();
 		if (Algorithms.isEmpty(iconName)) {
@@ -224,20 +224,20 @@ public abstract class MapButtonState {
 		if (value != null && value > 0) {
 			position.fromLongValue(value);
 		}
-		int size = createAppearanceParams().getSize();
+		int size = createAppearanceParams(null).getSize();
 		size = (size / 8) + 1;
 		position.setSize(size, size);
 	}
 
 	@Nullable
 	public Drawable getIcon(@ColorInt int color, boolean nightMode, boolean mapIcon) {
-		int iconId = getIconId();
+		int iconId = getIconId(nightMode);
 		return iconId != 0 ? getIcon(iconId, color, nightMode, mapIcon) : null;
 	}
 
 	@DrawableRes
-	public int getIconId() {
-		String iconName = createAppearanceParams().getIconName();
+	public int getIconId(boolean nightMode) {
+		String iconName = createAppearanceParams(nightMode).getIconName();
 		int iconId = AndroidUtils.getDrawableId(app, iconName);
 		return iconId != 0 ? iconId : RenderingIcons.getBigIconResourceId(iconName);
 	}
@@ -278,7 +278,7 @@ public abstract class MapButtonState {
 	}
 
 	public boolean hasCustomAppearance() {
-		return !Algorithms.objectEquals(createAppearanceParams(), createDefaultAppearanceParams());
+		return !Algorithms.objectEquals(createAppearanceParams(null), createDefaultAppearanceParams(null));
 	}
 
 	@NonNull

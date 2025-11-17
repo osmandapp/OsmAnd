@@ -4,11 +4,11 @@ import androidx.annotation.NonNull;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,12 +22,16 @@ abstract class SettingsMapPointsStorage {
 	protected final CommonPreference<String> POINTS;
 	protected final CommonPreference<String> DESCRIPTIONS;
 
-
-	public SettingsMapPointsStorage(@NonNull OsmandSettings settings) {
+	public SettingsMapPointsStorage(@NonNull OsmandSettings settings, boolean shared) {
 		this.settings = settings;
 
-		POINTS = new StringPreference(settings, getPointsKey(), "").makeGlobal().makeShared();
-		DESCRIPTIONS = new StringPreference(settings, getDescriptionsKey(), "").makeGlobal().makeShared();
+		POINTS = new StringPreference(settings, getPointsKey(), "").makeGlobal();
+		DESCRIPTIONS = new StringPreference(settings, getDescriptionsKey(), "").makeGlobal();
+
+		if (shared) {
+			POINTS.makeShared();
+			DESCRIPTIONS.makeShared();
+		}
 	}
 
 	@NonNull
@@ -146,7 +150,8 @@ abstract class SettingsMapPointsStorage {
 			if (i > 0) {
 				pointsBuilder.append(",");
 			}
-			pointsBuilder.append(((float) points.get(i).getLatitude() + "")).append(",").append(((float) points.get(i).getLongitude() + ""));
+			pointsBuilder.append((float) points.get(i).getLatitude())
+					.append(",").append((float) points.get(i).getLongitude());
 		}
 		StringBuilder descriptionsBuilder = new StringBuilder();
 		for (int i = 0; i < descriptions.size(); i++) {
@@ -159,7 +164,12 @@ abstract class SettingsMapPointsStorage {
 				descriptionsBuilder.append(descriptions.get(i));
 			}
 		}
-		return POINTS.set(pointsBuilder.toString()) && DESCRIPTIONS.set(descriptionsBuilder.toString());
+		String pointsValue = pointsBuilder.toString();
+		String descriptionsValue = descriptionsBuilder.toString();
+		boolean pointsSaved = Algorithms.stringsEqual(POINTS.get(), pointsValue) || POINTS.set(pointsValue);
+		boolean descriptionsSaved = Algorithms.stringsEqual(DESCRIPTIONS.get(), descriptionsValue) || DESCRIPTIONS.set(descriptionsValue);
+
+		return pointsSaved && descriptionsSaved;
 	}
 
 	public boolean movePoint(LatLon latLonEx, LatLon latLonNew) {

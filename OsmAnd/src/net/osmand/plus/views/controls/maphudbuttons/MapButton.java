@@ -183,7 +183,7 @@ public abstract class MapButton extends FrameLayoutEx implements OnAttachStateCh
 	public ButtonAppearanceParams getAppearanceParams() {
 		MapButtonState buttonState = getButtonState();
 		if (buttonState != null) {
-			return useDefaultAppearance ? buttonState.createDefaultAppearanceParams() : buttonState.createAppearanceParams();
+			return useDefaultAppearance ? buttonState.createDefaultAppearanceParams(nightMode) : buttonState.createAppearanceParams(nightMode);
 		}
 		return createDefaultAppearanceParams();
 	}

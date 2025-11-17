@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="poi_sample_collection">Взяття біоматеріалу</string>
     <string name="poi_palaeontological_site">Палеонтологічний об’єкт</string>
     <string name="poi_bakery">Пекарня</string>
     <string name="poi_alcohol">Спиртні напої</string>
