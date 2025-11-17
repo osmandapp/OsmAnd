@@ -127,14 +127,7 @@ public class DeletedMapsFragment extends BaseFullScreenDialogFragment implements
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.removeType(Type.LANDSCAPE_SIDES);
-		Dialog dialog = getDialog();
-		boolean isInnerDialog = dialog != null && dialog.getWindow() != null;
-		if (!isInnerDialog) {
-			collection.removeType(Type.ROOT_INSET);
-		} else {
-			collection.add(InsetTarget.createHorizontalLandscape(R.id.sliding_tabs_container, R.id.freeVersionBanner, R.id.downloadProgressLayout, R.id.toolbar).build());
-		}
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.prompt_container));
 		return collection;
 	}
 
