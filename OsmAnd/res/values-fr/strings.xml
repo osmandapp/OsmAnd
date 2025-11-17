@@ -5813,4 +5813,5 @@
     <string name="unsupported_maps">Cartes non prises en charge</string>
     <string name="routing_attr_weightrating_name">Poids maximal à pleine charge</string>
     <string name="routing_attr_maxaxleload_name">Charge maximale par essieu</string>
+    <string name="is_parking_time_limited">Le temps de stationnement est-il limité ?</string>
 </resources>
