@@ -13,7 +13,7 @@ public class IntermediatePointsStorage extends SettingsMapPointsStorage {
 	public static final String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description";
 
 	public IntermediatePointsStorage(@NonNull OsmandSettings settings) {
-		super(settings);
+		super(settings, true);
 	}
 
 	@NonNull
