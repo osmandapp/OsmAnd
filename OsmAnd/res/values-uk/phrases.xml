@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="poi_sample_collection">Взяття біоматеріалу</string>
     <string name="poi_palaeontological_site">Палеонтологічний об’єкт</string>
     <string name="poi_bakery">Пекарня</string>
     <string name="poi_alcohol">Спиртні напої</string>
@@ -5160,7 +5159,7 @@
     <string name="poi_route_activity_type_skiing">Лижні маршрути</string>
     <string name="poi_sample_collection_filter">Збір зразків</string>
     <string name="x">X (раніше Твіттер)</string>
-    <string name="poi_sample_collection">Збір зразків</string>
+    <string name="poi_sample_collection">Взяття біоматеріалу</string>
     <string name="poi_sample_collection_yes">Так</string>
     <string name="poi_sample_collection_covid19">COVID19</string>
     <string name="poi_sample_collection_blood">Кров</string>
