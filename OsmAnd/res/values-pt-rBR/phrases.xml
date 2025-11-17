@@ -5153,4 +5153,11 @@
     <string name="x">X (anteriormente Twitter)</string>
     <string name="poi_sample_collection_filter">Coleta de amostras</string>
     <string name="poi_route_activity_type_skiing">Rotas de esqui</string>
+    <string name="poi_historic_spacecraft">Nave espacial histórica</string>
+    <string name="poi_barrier_chain">Barreira de corrente</string>
+    <string name="poi_barrier_sliding_gate">Porta deslizante</string>
+    <string name="poi_sample_collection">Coleta de amostras</string>
+    <string name="poi_sample_collection_yes">Sim</string>
+    <string name="poi_sample_collection_covid19">COVID19</string>
+    <string name="poi_sample_collection_blood">Sangue</string>
 </resources>
