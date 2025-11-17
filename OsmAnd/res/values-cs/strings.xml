@@ -5918,4 +5918,5 @@
     <string name="unsupported_maps">Nepodporované mapy</string>
     <string name="routing_attr_weightrating_name">Maximální hmotnost při plném zatížení</string>
     <string name="routing_attr_maxaxleload_name">Maximální zatížení nápravy</string>
+    <string name="is_parking_time_limited">Je omezený čas parkování?</string>
 </resources>
