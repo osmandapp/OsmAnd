@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
@@ -202,7 +203,17 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 			public boolean isEmpty() {
 				return false;
 			}
-		}, rect, false, null);
+		}, rect, false, null, new ResultMatcher<>() {
+			@Override
+			public boolean publish(Amenity amenity) {
+				return true;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return GpxReaderTask.this.isCancelled();
+			}
+		});
 
 		if (!Algorithms.isEmpty(cities)) {
 			sortAmenities(cities, cityTypes, latLon);

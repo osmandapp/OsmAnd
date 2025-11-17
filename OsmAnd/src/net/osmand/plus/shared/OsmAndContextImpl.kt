@@ -107,7 +107,7 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 			override fun isEmpty(): Boolean {
 				return false
 			}
-		}, rect, false, travelFileVisibility)
+		}, rect, false, travelFileVisibility, null)
 
 		if (cities.isNotEmpty()) {
 			sortAmenities(cities, cityTypes, latLon)

@@ -4988,7 +4988,7 @@
     <string name="poi_pentecostal_church">Letniční kostel</string>
     <string name="poi_consulate">Konzulát</string>
     <string name="poi_aerodrome_type_airfield">Letiště</string>
-    <string name="poi_hazard_landslide">Nebezpečí: sesuv půdy</string>
+    <string name="poi_hazard_landslide">Sesuv půdy</string>
     <string name="poi_hazard_additional_yes">Nebezpečí</string>
     <string name="poi_hazard_falling_rocks">Padající kamení</string>
     <string name="poi_hazard_contamination">Kontaminace</string>

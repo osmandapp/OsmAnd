@@ -5724,4 +5724,6 @@
     <string name="deleted_maps_warning">您將要刪除 %d 個項目\n要繼續嗎？</string>
     <string name="deleted_maps_prompt">這些地圖已不再受支援，並已被較小的區域取代。請移除它們並下載新版地圖。</string>
     <string name="unsupported_maps">不受支援的地圖</string>
+    <string name="routing_attr_weightrating_name">滿載時的最大重量</string>
+    <string name="routing_attr_maxaxleload_name">最大軸重</string>
 </resources>

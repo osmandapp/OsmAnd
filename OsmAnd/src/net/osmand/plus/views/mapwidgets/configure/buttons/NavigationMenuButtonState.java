@@ -58,7 +58,7 @@ public class NavigationMenuButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public String getDefaultIconName() {
+	public String getDefaultIconName(@Nullable Boolean nightMode) {
 		int routePlanningBtnImage = app.getRoutingHelper().getAppMode().getIconRes();
 		boolean isFollowingMode = app.getRoutingHelper().isFollowingMode();
 		if (routePlanningBtnImage != 0 && app.getRoutingHelper().isRoutePlanningMode() && !isFollowingMode) {

@@ -125,6 +125,10 @@ public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment impl
 			}
 		});
 
+		if(currentTrackFolder == null) {
+			dismiss();
+			return view;
+		}
 		setupToolbar();
 		setupAdapter();
 		updateToolBarTitle();

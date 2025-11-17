@@ -5,6 +5,7 @@ import static net.osmand.shared.grid.ButtonPositionSize.POS_BOTTOM;
 import static net.osmand.shared.grid.ButtonPositionSize.POS_RIGHT;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -50,7 +51,7 @@ public class ZoomOutButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public String getDefaultIconName() {
+	public String getDefaultIconName(@Nullable Boolean nightMode) {
 		return "ic_zoom_out";
 	}
 

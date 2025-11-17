@@ -79,7 +79,7 @@ class MapButtonIconController extends EditorIconController {
 
 	protected void initCustomCategory() {
 		Set<String> iconNames = new LinkedHashSet<>();
-		iconNames.add(buttonState.createDefaultAppearanceParams().getIconName());
+		iconNames.add(buttonState.createDefaultAppearanceParams(isNightMode()).getIconName());
 
 		if (buttonState instanceof QuickActionButtonState state) {
 			for (QuickAction action : state.getQuickActions()) {

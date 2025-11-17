@@ -174,18 +174,19 @@ public class QuickActionButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public ButtonAppearanceParams createAppearanceParams() {
-		ButtonAppearanceParams appearanceParams = super.createAppearanceParams();
+	public ButtonAppearanceParams createAppearanceParams(@Nullable Boolean nightMode) {
+		ButtonAppearanceParams appearanceParams = super.createAppearanceParams(nightMode);
 		if (Algorithms.isEmpty(getSavedIconName())) {
-			appearanceParams.setIconName(getDefaultIconName());
+			appearanceParams.setIconName(getDefaultIconName(nightMode));
 		}
 		return appearanceParams;
 	}
 
 	@NonNull
-	public String getDefaultIconName() {
+	public String getDefaultIconName(@Nullable Boolean nightMode) {
 		if (isSingleAction()) {
-			int iconId = getQuickActions().get(0).getIconRes(app);
+			QuickAction firstAction = getQuickActions().get(0);
+			int iconId = nightMode != null ? firstAction.getIconRes(app, nightMode) : firstAction.getIconRes(app);
 			if (iconId > 0) {
 				return app.getResources().getResourceEntryName(iconId);
 			}

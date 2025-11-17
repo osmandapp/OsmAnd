@@ -103,7 +103,7 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 		}
 		app.getGpxDbHelper().updateDataItem(item);
 
-		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(item.getFile().getParentFile().absolutePath());
+		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(item.getFile().absolutePath());
 		if (selectedGpxFile != null) {
 			selectedGpxFile.resetSplitProcessed();
 		}

@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
+import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -197,6 +199,16 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 						});
 						dismiss();
 						return true;
+					}, new ResultMatcher<>() {
+						@Override
+						public boolean publish(Amenity object) {
+							return true;
+						}
+
+						@Override
+						public boolean isCancelled() {
+							return !isAdded();
+						}
 					});
 				}
 			}

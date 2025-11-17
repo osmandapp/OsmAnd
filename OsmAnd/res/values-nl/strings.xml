@@ -6229,5 +6229,11 @@
     <string name="unsupported_maps">Niet-ondersteunde kaarten</string>
     <string name="enable_3d_objects">Activeer 3D-gebouwen</string>
     <string name="enable_3d_objects_description">Toon 3D-gebouwobjecten op de kaart</string>
-    <string name="efficient_grid">Efficiënt grid</string>
+    <string name="efficient_grid">Efficiënt raster</string>
+    <string name="visualizing_button_grid">Kaartknopraster</string>
+    <string name="button_frames">Randen van knoppen</string>
+    <string name="routing_attr_weightrating_name">Maximale massa bij volle belading</string>
+    <string name="routing_attr_maxaxleload_name">Maximale aslast</string>
+    <string name="deleted_maps_warning">Je staat op het punt om %d item(s) te verwijderen\nDoorgaan?</string>
+    <string name="slots">Plaatsen</string>
 </resources>

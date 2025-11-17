@@ -142,7 +142,7 @@ public class CreateEditActionDialog extends BaseFullScreenDialogFragment impleme
 			action.setName(nameEditText.getText().toString());
 		}
 		ImageView image = root.findViewById(R.id.image);
-		image.setImageResource(action.getIconRes(app));
+		image.setImageResource(action.getIconRes(app, nightMode));
 	}
 
 	private void setupFooter(@NonNull View root) {

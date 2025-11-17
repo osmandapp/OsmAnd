@@ -4989,7 +4989,7 @@
     <string name="poi_buddhist_temple">Templo budista</string>
     <string name="poi_aerodrome_type_airfield">Aeródromo</string>
     <string name="poi_consulate">Consulado</string>
-    <string name="poi_hazard_landslide">Peligro: deslizamiento de tierra</string>
+    <string name="poi_hazard_landslide">Deslizamiento de tierra</string>
     <string name="poi_hazard_yes">Advertencia de peligro</string>
     <string name="poi_hazard_additional_yes">Advertencia de peligro</string>
     <string name="poi_hazard_falling_rocks">Rocas en descenso</string>

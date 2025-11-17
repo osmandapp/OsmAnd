@@ -5811,4 +5811,6 @@
     <string name="deleted_maps_warning">Vous allez supprimer %d élement(s)\nPoursuivre ?</string>
     <string name="deleted_maps_prompt">Ces cartes ne sont plus prises en charge, elles ont été remplacées. Veuillez les supprimer et télécharger les nouvelles régions.</string>
     <string name="unsupported_maps">Cartes non prises en charge</string>
+    <string name="routing_attr_weightrating_name">Poids maximal à pleine charge</string>
+    <string name="routing_attr_maxaxleload_name">Charge maximale par essieu</string>
 </resources>

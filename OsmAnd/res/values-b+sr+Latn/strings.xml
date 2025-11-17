@@ -5886,4 +5886,6 @@
     <string name="deleted_maps_prompt">Ove mape više nisu podržane i zamenjene su manjim regionima. Molimo Vas da ih uklonite i preuzmete nove verzije.</string>
     <string name="unsupported_maps">Nepodržane mape</string>
     <string name="deleted_maps_warning">Spremate se da izbrišete %d stavke(e)\nNastavljate?</string>
+    <string name="routing_attr_weightrating_name">Maksimalna težina pri punom opterećenju</string>
+    <string name="routing_attr_maxaxleload_name">Maksimalno osovinsko opterećenje</string>
 </resources>

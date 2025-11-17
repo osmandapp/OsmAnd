@@ -25,6 +25,7 @@ import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -71,8 +72,8 @@ public class MapButtonAppearanceFragment extends BaseFullScreenFragment implemen
 			buttonState = app.getMapButtonsHelper().getMapButtonStateById(key);
 		}
 		if (buttonState != null) {
-			appearanceParams = buttonState.createAppearanceParams();
-			originalAppearanceParams = buttonState.createAppearanceParams();
+			appearanceParams = buttonState.createAppearanceParams(nightMode);
+			originalAppearanceParams = buttonState.createAppearanceParams(nightMode);
 			String savedIconName = buttonState.getSavedIconName();
 			appearanceParams.setIconName(savedIconName);
 			originalAppearanceParams.setIconName(savedIconName);
@@ -207,14 +208,14 @@ public class MapButtonAppearanceFragment extends BaseFullScreenFragment implemen
 		String iconName = appearanceParams.getIconName();
 		if (Algorithms.isEmpty(iconName)) {
 			params = new ButtonAppearanceParams(appearanceParams);
-			params.setIconName(buttonState.getDefaultIconName());
+			params.setIconName(buttonState.getDefaultIconName(nightMode));
 		}
 		mapButtonCard.updateButton(params);
 		applyButton.setEnabled(!Algorithms.objectEquals(originalAppearanceParams, appearanceParams));
 	}
 
 	private void resetAppearance() {
-		ButtonAppearanceParams defaultParams = buttonState.createDefaultAppearanceParams();
+		ButtonAppearanceParams defaultParams = buttonState.createDefaultAppearanceParams(nightMode);
 		appearanceParams.setIconName(null);
 		appearanceParams.setSize(defaultParams.getSize());
 		appearanceParams.setOpacity(defaultParams.getOpacity());

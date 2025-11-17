@@ -5946,4 +5946,6 @@
     <string name="deleted_maps_warning">Du er ved at slette %d element(er)\nFortsæt?</string>
     <string name="deleted_maps_prompt">Disse kort understøttes ikke længere og er blevet erstattet af mindre regioner. Fjern dem og download de nye versioner.</string>
     <string name="unsupported_maps">Ikke-understøttede kort</string>
+    <string name="routing_attr_weightrating_name">Maksimal vægt ved fuld last</string>
+    <string name="routing_attr_maxaxleload_name">Maksimal akselbelastning</string>
 </resources>

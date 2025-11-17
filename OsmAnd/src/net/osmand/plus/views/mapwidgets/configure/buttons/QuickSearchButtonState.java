@@ -6,6 +6,7 @@ import static net.osmand.shared.grid.ButtonPositionSize.POS_LEFT;
 import static net.osmand.shared.grid.ButtonPositionSize.POS_TOP;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -56,7 +57,7 @@ public class QuickSearchButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public String getDefaultIconName() {
+	public String getDefaultIconName(@Nullable Boolean nightMode) {
 		return "ic_action_search_dark";
 	}
 
