@@ -31,9 +31,12 @@ public class NativeUtilities {
 
 	public static final int MIN_ALTITUDE_VALUE = -20_000;
 
-	public static SingleSkImage createSkImageFromBitmap(@NonNull Bitmap inputBmp) {
-		return SwigUtilities.createSkImageARGB888With(
-				inputBmp.getWidth(), inputBmp.getHeight(), AndroidUtils.getByteArrayFromBitmap(inputBmp));
+	public static SingleSkImage createSkImageFromBitmap(@NonNull Bitmap bitmap) {
+		return createSkImage(bitmap.getWidth(), bitmap.getHeight(), AndroidUtils.getByteArrayFromBitmap(bitmap));
+	}
+
+	public static SingleSkImage createSkImage(long width, long height, byte[] pixels) {
+		return SwigUtilities.createSkImageARGB888With(width, height, pixels);
 	}
 
 	public static FColorRGB createFColorRGB(@ColorInt int color) {
