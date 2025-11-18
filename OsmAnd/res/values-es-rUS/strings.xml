@@ -918,7 +918,7 @@
     <string name="arrival_distance_factor_early">Lejos</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Cerca</string>
-    <string name="arrival_distance_factor_at_last">Muy tarde</string>
+    <string name="arrival_distance_factor_at_last">Muy cerca</string>
     <string name="arrival_distance">Anuncio de llegada</string>
     <string name="arrival_distance_descr">¿Cuándo quieres el anuncio de llegada?</string>
     <string name="rendering_out_of_memory">Memoria insuficiente para mostrar el área elegida</string>

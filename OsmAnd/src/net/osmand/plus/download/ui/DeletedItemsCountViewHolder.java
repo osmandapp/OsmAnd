@@ -39,7 +39,6 @@ public class DeletedItemsCountViewHolder {
 		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
 		int textColorSecondary = typedValue.data;
 		tvName.setTextColor(textColorPrimary);
-		tvName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 		tvDesc.setTextColor(textColorSecondary);
 	}
 

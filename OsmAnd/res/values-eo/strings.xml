@@ -1124,7 +1124,7 @@
     <string name="osmand_parking_event">Reprenu la aŭton el parkumejo</string>
     <string name="osmand_parking_warning">Averto</string>
     <string name="osmand_parking_warning_text">Averto pri repreno de via aŭto estis aldonita al la kalendaro kaj tie vi povas redakti aŭ forigi ĝin.</string>
-    <string name="osmand_parking_time_limit_title">Agordi tempolimon de parkumado</string>
+    <string name="osmand_parking_time_limit_title">Agordi tempolimon de parkumo</string>
     <string name="osmand_parking_delete_confirm">Ĉu forigi markon de parkumita aŭto?</string>
     <string name="osmand_parking_delete">Forigi markon de parkumita aŭto</string>
     <string name="osmand_parking_choose_type">Elekti specon de parkumejo</string>
@@ -1489,7 +1489,7 @@
     <string name="plugin_ski_name">Skiada map-vido</string>
     <string name="plugin_ski_descr">Projektita por navigi en vintraj sportejoj. Vidigas descendejojn, skiliftojn kaj skikuradajn kursojn kiel kolorajn liniojn, kiuj indikas malfacilecon. Por uzi la kromprogramon, aktivigu la map-aspekton “Vintro kaj skiado” en la menuo “Agordi mapon”.</string>
     <string name="osmand_parking_plugin_name">Pozicio de parkumo</string>
-    <string name="osmand_parking_plugin_description">Ebligas marki kie vi parkumis vian aŭtomobilon kaj aldoni sciigon al via kalendaro pri parkumada templimo. Por aldoni markon, frapetadu lokon sur la mapo kaj elektu “Marki kiel pozicion de parkumado” el la menuo “Agoj”.</string>
+    <string name="osmand_parking_plugin_description">Ebligas marki kie vi parkumis vian aŭtomobilon kaj aldoni sciigon al via kalendaro pri parkumada templimo. Por aldoni markon, frapetadu lokon sur la mapo kaj elektu “Marki kiel pozicion de parkumo” el la menuo “Agoj”.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulilo de distanco kaj planilo</string>
     <string name="osmand_distance_planning_plugin_description">Ebligas difini kursojn per frapeti la mapon kaj modifi ekzistajn GPX‑dosierojn – por plani vojaĝon kaj mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX‑dosierojn, kiujn oni povas estonte uzi por gvidado.</string>
     <string name="osm_editing_plugin_name">OSM-redaktilo</string>
@@ -2058,7 +2058,7 @@
     <string name="quick_action_add_osm_bug_descr">Butono por aldoni OSM‑rimarkon al la ekrana centro.</string>
     <string name="quick_action_add_poi_descr">Butono por aldoni interesejon al la ekrana centro.</string>
     <string name="quick_action_navigation_voice_descr">Butono por (mal)aktivigi voĉajn sciigojn dum navigado.</string>
-    <string name="quick_action_add_parking_descr">Butono por marki pozicion de parkumado en la ekrana centro.</string>
+    <string name="quick_action_add_parking_descr">Butono por marki pozicion de parkumo en la ekrana centro.</string>
     <string name="favorite_autofill_toast_text">" estas konservita al "</string>
     <string name="favorite_empty_place_name">Loko</string>
     <string name="quick_action_duplicates">Ŝanĝis nomon de rapida ago al %1$s por eviti duplikaton.</string>
@@ -2143,7 +2143,7 @@
     <string name="routing_attr_driving_style_safety_name">Preferi flankajn vojojn</string>
     <string name="routing_attr_relief_smoothness_factor_name">Elekti variecon de altitudo</string>
     <string name="full_version_thanks">Dankon al vi pro aĉeti la pagan version de OsmAnd!</string>
-    <string name="parking_options">Parkumadaj agordoj</string>
+    <string name="parking_options">Parkumaj agordoj</string>
     <string name="do_not_send_anonymous_app_usage">Ne sendi anoniman statistikon pri uzado</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd kolektas informojn pri uzataj partoj de la aplikaĵo. Via pozicio neniam estas sendata, nek ion ajn, kion vi entajpas en la aplikaĵo nek detaloj pri ejoj foliumataj, serĉataj aŭ elŝutataj.</string>
     <string name="do_not_show_startup_messages">Ne montri mesaĝojn je starto</string>
@@ -3378,7 +3378,7 @@
     <string name="quick_action_transport_descr">Butono por montri/kaŝi publikan transporton sur la mapo.</string>
     <string name="create_edit_poi">Krei aŭ redakti interesejon</string>
     <string name="add_edit_favorite">Aldoni aŭ forigi ŝatatan ejojn</string>
-    <string name="parking_positions">Pozicioj de parkumado</string>
+    <string name="parking_positions">Pozicioj de parkumo</string>
     <string name="reset_deafult_order">Restarigi implicitan ordigon de elementoj</string>
     <string name="back_to_editing">Reen al redaktado</string>
     <string name="shared_string_resume">Pluigi</string>
@@ -5754,7 +5754,7 @@
     <string name="battery">baterio</string>
     <string name="sensor_data">Datumoj de sentilo</string>
     <string name="battery_level">Nivelo de baterio</string>
-    <string name="set_parking_position">Agordi kiel pozicion de parkumado</string>
+    <string name="set_parking_position">Agordi kiel pozicion de parkumo</string>
     <string name="set_work">Agordi kiel laborejon</string>
     <string name="release_5_1">• subteno por aĉeti retejan kaj pluroperaciuman version\n\n• movis elekton de temperaturaj unuoj al Ĝeneralaj agordoj\n\n• aldonis subtenon por nivelo de baterio al BLE-sentiloj\n\n• nova, pli intuicia maniero elekti punktojn por navigi\n\n• plibonigita videblo de fenestraĵoj kun nova konturo\n\n• aldonis analizilon de (mal)supreniroj\n\n• plivastigita interago kun Vikipedio/Vikivojaĝoj al pliaj interesejoj</string>
     <string name="years_3">tri jaroj</string>
@@ -5848,21 +5848,7 @@
     <string name="max_axle_load_description">Enigu maksimuman mason prematan de akso de via veturilo por eviti vojojn kaj pontojn kun pezaj limigoj.</string>
     <string name="view_on_phone">Montri sur telefono</string>
     <string name="lang_en_barebones">Angla (minimuma)</string>
-    <string name="release_5_2">
-        • Aldonis strato- kaj urbodetalojn al serĉrezultoj\n\n
-        • Novaj vojaĝregistradaj fenestraĵoj: Maksimuma Rapido, Meza Deklivo kaj plibonigitaj Supreniro/Malsupreniro\n\n
-        • Nova "Mara" naŭtika mapstilo kun ampleksaj personigo-opcioj\n\n
-        • Plibonigita mapbildiga rapideco\n\n
-        • Plibonigita konektebleco kun OBDII BLE-adaptiloj\n\n
-        • Aldonis korfrekvencajn metrikojn al la "Analizi laŭ Intervalo"\n\n
-        • Aldonis daŭran montradon por planitaj spuroj\n\n
-        • Alteco-unuoj nun povas esti agorditaj aparte de distanco-unuoj\n\n
-        • Plibonigis la maporientiĝan Rapidan Agon kun elekteblaj kompasreĝimoj\n\n
-        • Por Android Auto, aldonis antaŭnavigadajn atentigojn pri mankantaj mapoj kaj privataj vojoj\n\n
-        • Solvis problemon kun malĝustaj grandecaj parametroj por la Radius-Regilo fenestraĵo\n\n
-        • Aldonis inversajn ekranorientiĝojn\n\n
-        • Plibonigis la uzantinterfacon por specifi kamionajn metrikojn\n\n
-    </string>
+    <string name="release_5_2">• aldonis detalojn pri strato kaj urbo por serĉrezultoj\n\n• novaj fenestraĵoj de Spur-registrilo: Maksimuma rapido, Mezuma dekliveco kaj plibonigitaj Malsupreniroj/Supreniroj\n\n• nova map-aspekto – Marnavigada 2 – alte alĝustigebla\n\n• plialtigita rapido de map-bildigado\n\n• plibonigita konekteblo kun adaptiloj OBDII BLE\n\n• aldonis mezuro de korbata frekvenco al “Analizi laŭ fragmentoj”\n\n• aldonis vidigon de tempo al planataj kursoj\n\n• eblo agordi unuojn de altitudo sendepende de unuoj de distanco\n\n• plibonigis la butonon de rapida ago Map-orientiĝo: eblo elekti reĝimon de kompaso\n\n• Android Auto: aldonis avertojn antaŭ navigi sen necesaj mapoj kaj tra vojoj kun privata aliro\n\n• riparis eraron pri malĝusta grando de la fenestraĵo Cirkelo kaj mezurilo\n\n• aldonis inversajn orientiĝojn de ekrano\n\n• plibonigita fasado de parametroj de kamiono</string>
     <string name="shared_sting_osm_link">OSM-ligilo</string>
     <string name="show_local_names">Montri lokajn nomojn</string>
     <string name="obd_alt_battery_voltage">Tensio de adaptilo</string>
@@ -5913,4 +5899,5 @@
     <string name="unsupported_maps">Nesubtenataj mapoj</string>
     <string name="routing_attr_weightrating_name">Maksimuma maso je plena ŝarĝo</string>
     <string name="routing_attr_maxaxleload_name">Maksimuma pezo sur akso</string>
+    <string name="is_parking_time_limited">Ĉu parkuma tempo estas limigita?</string>
 </resources>

@@ -51,7 +51,7 @@
     <string name="poi_border_control">Határátkelő</string>
     <string name="poi_traffic_signals">Jelzőlámpa</string>
     <string name="poi_car_repair">Autószerelő</string>
-    <string name="poi_service_tyres">Autógumi; Gumi</string>
+    <string name="poi_service_tyres">Kerék, autógumi</string>
     <string name="poi_car_wash">Autómosó</string>
     <string name="poi_fuel">Benzinkút;Töltőállomás;Gázolajtöltő-állomás</string>
     <string name="poi_electricity_combined_charging">Elektromos töltőállomás;Elektromos autó töltése;Villanyautó töltése;Elektromos töltőpont</string>

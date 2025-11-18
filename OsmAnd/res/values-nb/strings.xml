@@ -5808,4 +5808,9 @@
     <string name="routing_attr_allow_ferries_name">Tillat ferger</string>
     <string name="routing_attr_allow_ferries_description">Tillat ruting via ferger</string>
     <string name="route_part_of">Del av</string>
+    <string name="deleted_maps_warning">Du er i ferd med å slette %d element(er)\nFortsette?</string>
+    <string name="deleted_maps_prompt">Disse kartene støttes ikke lengre og er erstattet av mindre regioner. Fjern dem og last ned de nye versjonene.</string>
+    <string name="unsupported_maps">Ikke-støttede kart</string>
+    <string name="enable_3d_objects">Aktiver 3D-bygninger</string>
+    <string name="enable_3d_objects_description">Vis 3D-bygningsobjekter på kartet</string>
 </resources>

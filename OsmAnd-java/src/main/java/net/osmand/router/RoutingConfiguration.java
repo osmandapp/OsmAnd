@@ -388,10 +388,12 @@ public class RoutingConfiguration {
 		String type = parser.getAttributeValue("", "type");
 		String profilesList = parser.getAttributeValue("", "profiles");
 		String[] profiles = Algorithms.isEmpty(profilesList) ? null : profilesList.split(",");
-		boolean defaultValue = Boolean.parseBoolean(parser.getAttributeValue("", "default"));
 		if ("boolean".equalsIgnoreCase(type)) {
-			currentRouter.registerBooleanParameter(id, Algorithms.isEmpty(group) ? null : group, name, description, profiles, defaultValue);
+			boolean defaultBoolean = Boolean.parseBoolean(parser.getAttributeValue("", "default"));
+			currentRouter.registerBooleanParameter(id, Algorithms.isEmpty(group) ? null : group,
+					name, description, profiles, defaultBoolean);
 		} else if ("numeric".equalsIgnoreCase(type)) {
+			double defaultNumeric = Algorithms.parseDoubleSilently(parser.getAttributeValue("", "default"), 0);
 			String values = parser.getAttributeValue("", "values");
 			String valueDescriptions = parser.getAttributeValue("", "valueDescriptions");
 			String[] vlsDesc = valueDescriptions.split(",");
@@ -400,7 +402,7 @@ public class RoutingConfiguration {
 			for (int i = 0; i < vls.length; i++) {
 				vls[i] = Double.parseDouble(strValues[i].trim());
 			}
-			currentRouter.registerNumericParameter(id, name, description, profiles, vls , vlsDesc);
+			currentRouter.registerNumericParameter(id, name, description, profiles, vls , vlsDesc, defaultNumeric);
 		} else {
 			throw new UnsupportedOperationException("Unsupported routing parameter type - " + type);
 		}

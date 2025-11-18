@@ -6236,4 +6236,5 @@
     <string name="routing_attr_maxaxleload_name">Maximale aslast</string>
     <string name="deleted_maps_warning">Je staat op het punt om %d item(s) te verwijderen\nDoorgaan?</string>
     <string name="slots">Plaatsen</string>
+    <string name="is_parking_time_limited">Is de parkeertijd gelimiteerd?</string>
 </resources>

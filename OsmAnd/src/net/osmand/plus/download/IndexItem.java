@@ -352,4 +352,8 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 			isAsset = true;
 		}
 	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
 }
