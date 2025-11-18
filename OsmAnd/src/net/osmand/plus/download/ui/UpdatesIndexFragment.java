@@ -178,9 +178,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			newLocalIndexItems.add(LocalIndexItem.createDeletedMapsItem(deletedMapsCount));
 		}
 		for (DownloadItem item : downloadItems) {
-			if (!item.isOutdated()) {
-				newLocalIndexItems.add(LocalIndexItem.createDownloadItem(item));
-			}
+			newLocalIndexItems.add(LocalIndexItem.createDownloadItem(item));
 		}
 		return newLocalIndexItems;
 	}
