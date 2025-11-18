@@ -6135,7 +6135,7 @@
     <string name="deleting_history">Excluindo o histórico…</string>
     <string name="ski_route_switch_style_description">Explore rotas de esqui, pistas e teleféricos com o estilo de mapa Inverno e Esqui.</string>
     <string name="show_rasterization_debug_tile">Mostrar informações de rasterização de ladrilhos</string>
-    <string name="release_5_2">• Trabalho em andamento...</string>
+    <string name="release_5_2">• Adicionados detalhes de ruas e cidades aos resultados da pesquisa.\n\n • Novos widgets de registro de viagem: velocidade máxima, inclinação média e subida/descida aprimoradas.\n\n • Novo estilo de mapa náutico marítimo com amplas opções de personalização.\n\n • Velocidade de renderização do mapa aprimorada.\n\n • Conectividade aprimorada com adaptadores OBDII BLE.\n\n • Adicionadas métricas de frequência cardíaca à análise por intervalo.\n\n • Adicionada exibição da duração para trilhas planejadas\n\n • As unidades de altitude agora podem ser definidas separadamente das unidades de distância\n\n • Ação rápida de orientação do mapa aprimorada com modos de bússola selecionáveis\n\n • Para o Android Auto, adicionados alertas de pré-navegação para mapas ausentes e estradas particulares\n\n • Resolvido um problema com parâmetros de tamanho incorretos para o widget Régua de Raio\n\n • Adicionadas orientações de tela invertidas\n\n • Interface do usuário aprimorada para especificar métricas de caminhões</string>
     <string name="next_turn_information">Informações sobre a próxima curva</string>
     <string name="next_turn_information_desc">Mostra a direção da próxima curva e o nome da rua.</string>
     <string name="description_purchases_fastspring">Você pode gerenciar suas compras através do portal de gerenciamento de contas FastSpring.</string>
@@ -6270,4 +6270,8 @@
     <string name="efficient_grid">Grade eficiente</string>
     <string name="button_frames">Molduras de botão</string>
     <string name="slots">Slots</string>
+    <string name="is_parking_time_limited">O tempo de estacionamento é limitado?</string>
+    <string name="routing_attr_weightrating_name">Peso máximo com carga total</string>
+    <string name="routing_attr_maxaxleload_name">Carga máxima por eixo</string>
+    <string name="deleted_maps_prompt">Esses mapas não são mais compatíveis e foram substituídos por regiões menores. Remova-os e baixe as novas versões.</string>
 </resources>

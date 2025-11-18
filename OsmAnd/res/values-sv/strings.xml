@@ -5752,7 +5752,7 @@
     <string name="saved_to_device">Sparade till enhet</string>
     <string name="customize_grid_color">Anpassa rutnätsfärg</string>
     <string name="show_grids_description">Tillåt visning av rutnät ovanpå kartan</string>
-    <string name="save_favorite_default_appearance">Tillämpa ändringar på de existerande punkterna i mappen eller bara på nya?</string>
+    <string name="save_favorite_default_appearance">Tillämpa ändringar på alla existerande punkter i mappen eller bara på nyligen tillagda?</string>
     <string name="ais_address_settings">IP-adress-inställningar</string>
     <string name="ais_load_data">Ladda AIS-data från fil</string>
     <string name="deleting">Raderar…</string>
@@ -5848,13 +5848,13 @@
     <string name="position_animation">Positionsanimering</string>
     <string name="poi_source">POI-källa</string>
     <string name="add_widget">Lägg till widget</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Åtgärd för att kontrollera Koordinat-rutnätets synlighet på kartan.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Visa/dölj koordinatrutnätet på kartan.</string>
     <string name="layer_coordinates_grid">Koordinatrutnät</string>
     <string name="shared_string_manual">Manuell</string>
     <string name="shared_string_map_center">Kartans mitt</string>
-    <string name="original_color_description">Varje punkt behåller sin egen färg.</string>
-    <string name="original_icon_description">Varje punkt behåller sin egen ikon.</string>
-    <string name="original_shape_description">Varje punkt behåller sin egen form.</string>
+    <string name="original_color_description">Varje punkt behåller sin individuella färg.</string>
+    <string name="original_icon_description">Varje punkt behåller sin individuella ikon.</string>
+    <string name="original_shape_description">Varje punkt behåller sin individuella form.</string>
     <string name="hmd_promo_description">Gratis tillgång till funktioner som obegränsade kartnedladdningar, 3D-reliefer o.s.v. i %1$s månader</string>
     <string name="hmd_promo_description_years">Gratis tillgång till funktioner som obegränsade kartnedladdningar, 3D-reliefer o.s.v. i %1$s år</string>
     <string name="ais_object_lost_timeouts_description">Ställ in timeout-värde för att identifiera AIS-objekt som försvunna om ingen signal mottagits under en specifik tid.</string>
@@ -6035,7 +6035,7 @@
     <string name="shared_string_threads">Trådar</string>
     <string name="threads_allocated_for_rendering">Trådar allokerade för rendering</string>
     <string name="threads_allocated_for_rendering_desc">Lägre tråd-allokering kan i vissa fall snabba upp kartrenderingen.</string>
-    <string name="turn_by_turn_directions">Sväng för sväng vägbeskrivning</string>
+    <string name="turn_by_turn_directions">Vägbeskrivning sväng för sväng</string>
     <string name="failed_to_connect">Kunde inte ansluta till %1s</string>
     <string name="next_turn_information">Information om nästa sväng</string>
     <string name="next_turn_information_desc">Visar nästkommande svängriktning och gatunamn.</string>
@@ -6082,7 +6082,7 @@
     <string name="description_purchases_fastspring">Du kan hantera dina inköp via FastSpring-kontohanteringsportalen.</string>
     <string name="description_subscription_fastspring">Du kan hantera eller avbryta prenumerationen via FastSpring-kontohanteringsportalen.</string>
     <string name="shared_sting_osm_link">OSM-länk</string>
-    <string name="altitude_metrics_description">Ställ in displayenheten för höjd i widgets och statistik.</string>
+    <string name="altitude_metrics_description">Ställer in visningsenheten för höjd i widgets och statistik.</string>
     <string name="marine_renderer">Marin</string>
     <string name="marine_render_descr">Mycket anpassningsbar marin navigationsstil. Baserat på nautisk stil. Fungerar bättre med Nautical World Seamarks karta och valfria djupkartor.</string>
     <string name="rendering_attr_hideAreas_name">Djupområden</string>
@@ -6101,4 +6101,8 @@
     <string name="show_local_names">Visa lokala namn</string>
     <string name="efficient_grid">Effektivt rutnät</string>
     <string name="slots">rutor</string>
+    <string name="is_parking_time_limited">Är parkeringen tidsbegränsad?</string>
+    <string name="rendering_attr_pisteRoutes_name">Skidbackar och spår</string>
+    <string name="show_spherical_map">Visa sfärisk karta</string>
+    <string name="rendering_attr_watercolor_description">Färg på vatten</string>
 </resources>

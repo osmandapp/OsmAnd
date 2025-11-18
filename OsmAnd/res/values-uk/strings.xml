@@ -5923,4 +5923,5 @@
     <string name="unsupported_maps">Непідтримувані карти</string>
     <string name="routing_attr_weightrating_name">Максимальна вага при повному завантаженні</string>
     <string name="routing_attr_maxaxleload_name">Максимальне навантаження на вісь</string>
+    <string name="is_parking_time_limited">Чи обмежений час паркування?</string>
 </resources>
