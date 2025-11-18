@@ -20,7 +20,6 @@
 	</com.google.android.material.appbar.AppBarLayout>
 
 	<LinearLayout
-		android:id="@+id/prompt_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/list_background_color"
