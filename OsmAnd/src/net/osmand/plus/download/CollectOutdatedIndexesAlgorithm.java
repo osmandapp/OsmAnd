@@ -25,7 +25,7 @@ public class CollectOutdatedIndexesAlgorithm {
 
 	private final OsmandApplication app;
 
-	private Map<String, String> indexFileNames;
+	private final Map<String, String> indexFileNames;
 	private final Map<String, String> indexActivatedFileNames;
 
 	private CollectOutdatedIndexesAlgorithm(@NonNull OsmandApplication app,
@@ -87,7 +87,8 @@ public class CollectOutdatedIndexesAlgorithm {
 		return result;
 	}
 
-	public boolean checkIfItemOutdated(IndexItem item, java.text.DateFormat format) {
+	public boolean checkIfItemOutdated(@NonNull IndexItem item,
+	                                   @NonNull java.text.DateFormat format) {
 		boolean outdated = false;
 		item.setDownloaded(false);
 		item.setOutdated(false);
