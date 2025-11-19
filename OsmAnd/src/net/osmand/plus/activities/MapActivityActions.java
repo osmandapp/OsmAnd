@@ -31,6 +31,7 @@ import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.OutdatedIndexesType;
 import net.osmand.plus.help.HelpActivity;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;
@@ -513,7 +514,7 @@ public class MapActivityActions extends MapActions {
 
 		String d = getString(R.string.maps_and_resources);
 		if (app.getDownloadThread().getIndexes().isDownloadedFromInternet) {
-			List<IndexItem> items = app.getDownloadThread().getIndexes().getIndividualItemsToUpdate();
+			List<IndexItem> items = app.getDownloadThread().getIndexes().getItemsToUpdate(OutdatedIndexesType.ACTIVATED);
 			if (!Algorithms.isEmpty(items)) {
 				d += " (" + items.size() + ")";
 			}

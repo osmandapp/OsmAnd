@@ -15,6 +15,7 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.OutdatedIndexesType;
 import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.CategoryType;
 import net.osmand.plus.download.local.LocalCategory;
@@ -69,7 +70,7 @@ public abstract class LocalBaseFragment extends BaseFullScreenFragment implement
 
 	protected void reloadItemsToUpdate() {
 		itemsToUpdate.clear();
-		for (IndexItem item : app.getDownloadThread().getIndexes().getIndividualItemsToUpdate()) {
+		for (IndexItem item : app.getDownloadThread().getIndexes().getItemsToUpdate(OutdatedIndexesType.ALL)) {
 			itemsToUpdate.put(item.getTargetFileName(), item);
 		}
 	}

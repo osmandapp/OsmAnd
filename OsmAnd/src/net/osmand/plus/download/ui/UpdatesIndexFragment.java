@@ -46,6 +46,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.OutdatedIndexesType;
 import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
@@ -155,7 +156,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	public void invalidateListView(@NonNull Context context) {
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
 		OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
-		List<DownloadItem> downloadItems = new ArrayList<>(indexes.getGroupedItemsToUpdate());
+		List<DownloadItem> downloadItems = new ArrayList<>(indexes.getGroupedItemsToUpdate(OutdatedIndexesType.ACTIVATED));
 		boolean showBanner = !InAppPurchaseUtils.isLiveUpdatesAvailable(app)
 				|| settings.SHOULD_SHOW_FREE_VERSION_BANNER.get();
 
@@ -188,7 +189,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		if (view == null) return;
 
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
-		List<DownloadItem> downloadItems = indexes.getGroupedItemsToUpdate();
+		List<DownloadItem> downloadItems = indexes.getGroupedItemsToUpdate(OutdatedIndexesType.ACTIVATED);
 		if (getListAdapter() != null && downloadItems.isEmpty()) {
 			errorMessage = getString(indexes.isDownloadedFromInternet
 					? R.string.everything_up_to_date
@@ -204,7 +205,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		if (view == null) return;
 
 		DownloadResources indexes = requireMyActivity().getDownloadThread().getIndexes();
-		List<IndexItem> indexItems = indexes.getIndividualItemsToUpdate();
+		List<IndexItem> indexItems = indexes.getItemsToUpdate(OutdatedIndexesType.ACTIVATED);
 		TextView updateAllButton = view.findViewById(R.id.updateAllButton);
 		if (indexItems.isEmpty() || indexItems.get(0).getType() == null) {
 			if (!Algorithms.isEmpty(errorMessage)) {
