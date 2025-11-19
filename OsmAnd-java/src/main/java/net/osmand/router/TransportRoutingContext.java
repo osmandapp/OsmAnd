@@ -69,6 +69,7 @@ public class TransportRoutingContext {
 
 	private List<TransportRouteSegment> loadNativeTransportStops(int sx, int sy, boolean change, List<TransportRouteSegment> res) throws IOException {
 		long nanoTime = System.nanoTime();
+		TLongObjectHashMap<Boolean> alreadyLoaded = new TLongObjectHashMap<>();
 		int d = change ? walkChangeRadiusIn31 : walkRadiusIn31;
 		int lx = (sx - d ) >> (31 - cfg.ZOOM_TO_LOAD_TILES);
 		int rx = (sx + d ) >> (31 - cfg.ZOOM_TO_LOAD_TILES);
@@ -86,7 +87,8 @@ public class TransportRoutingContext {
 					TransportStop st = r.getStop(r.segStart);
 					if (Math.abs(st.x31 - sx) > walkRadiusIn31 || Math.abs(st.y31 - sy) > walkRadiusIn31) {
 						wrongLoadedWays++;
-					} else {
+					} else if (!alreadyLoaded.containsKey(r.getId())) {
+						alreadyLoaded.put(r.getId(), true);
 						loadedWays++;
 						res.add(r);
 					}
