@@ -1662,12 +1662,74 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@Override
 	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
 		if (result.getTileBox().getZoom() >= START_ZOOM) {
+			if (checkForLabels(result)) {
+				return;
+			}
+
 			collectWptFromPoint(result);
 
 			if (!rules.isOnlyTouchableObjects() && !rules.isOnlyPoints()) {
 				collectTracksFromPoint(result, false);
 			}
 		}
+	}
+
+	private boolean checkForLabels(@NonNull MapSelectionResult result) {
+		PointF point = result.getPoint();
+		RotatedTileBox tb = result.getTileBox();
+		MapRendererView mapRenderer = getMapRenderer();
+		MapSelectionResult labelsResult = new MapSelectionResult(app, tb, point);
+		collectTracksFromPoint(labelsResult, true);
+
+		float radius = getScaledTouchRadius(getApplication(), tb.getDefaultRadiusPoi()) * TOUCH_RADIUS_MULTIPLIER;
+		if (mapRenderer != null) {
+			QuadRect touchArea = new QuadRect(
+					point.x - radius,
+					point.y - radius,
+					point.x + radius,
+					point.y + radius
+			);
+
+			for (SelectedMapObject object : labelsResult.getAllObjects()) {
+				if (object.object() instanceof SelectedGpxPoint gpxPoint) {
+					boolean isVisible = mapRenderer.isAreaVisible(gpxPoint.getSelectedGpxFile().getAreaToDisplay());
+					if (isVisible && searchLabels(mapRenderer, tb, touchArea)) {
+						result.collect(gpxPoint, this);
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean searchLabels(MapRendererView mapRenderer, RotatedTileBox tb, QuadRect touchArea) {
+		for (int i = 0; i < additionalIconsProviders.size(); i++) {
+			GpxAdditionalIconsProvider provider = additionalIconsProviders.get(i);
+			SplitLabelList list = provider.getSplitLabels();
+			for (int j = 0; j < list.size(); j++) {
+				SplitLabel label = list.get(j);
+				PointF labelPoint = NativeUtilities.getPixelFrom31(mapRenderer, tb, label.getPos31());
+				QuadRect rect = getLabelRect(label, labelPoint.x, labelPoint.y);
+				if (QuadRect.intersects(rect, touchArea)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private QuadRect getLabelRect(SplitLabel label, float x, float y) {
+		Rect bounds = new Rect();
+		paint.getTextBounds(label.getText(), 0, label.getText().length(), bounds);
+		float height = bounds.height();
+
+		float width = AndroidUtils.getTextWidth(paint.getTextSize(), label.getText());
+		float top = y + height / 2;
+		float bottom = y - height / 2;
+		float right = x + width / 2;
+		float left = x - width / 2;
+		return new QuadRect(left, top, right, bottom);
 	}
 
 	@Override
