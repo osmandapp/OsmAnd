@@ -199,7 +199,7 @@ public class AmenitySearcher {
     }
 
     public Amenity searchDetailedAmenity(Request request, Settings settings) {
-        BaseDetailsObject detailed = searchDetailedObject(request, settings);
+        BaseDetailsObject detailed = searchDetailedObjectByRequest(request, settings);
         return detailed != null ? detailed.getSyntheticAmenity() : null;
     }
 
@@ -219,17 +219,18 @@ public class AmenitySearcher {
         }
         BaseDetailsObject detailsObject = null;
         if (request != null) {
-            detailsObject = searchDetailedObject(request, settings);
+            detailsObject = searchDetailedObjectByRequest(request, settings);
         }
         completeGeometry(detailsObject, object);
         return detailsObject;
     }
 
-    public BaseDetailsObject searchDetailedObject(Request request, Settings settings) {
-        return searchDetailedObject(request, settings, null);
+    public BaseDetailsObject searchDetailedObjectByRequest(Request request, Settings settings) {
+        return searchDetailedObjectByRequest(request, settings, null);
     }
 
-    public BaseDetailsObject searchDetailedObject(Request request, Settings settings, ResultMatcher<Amenity> matcher) {
+    public BaseDetailsObject searchDetailedObjectByRequest(Request request, Settings settings,
+                                                           ResultMatcher<Amenity> matcher) {
         LatLon latLon = request.latLon;
 		if (latLon != null) {
             int searchRadius = request.type == EntityType.RELATION ? AMENITY_SEARCH_RADIUS_FOR_RELATION : AMENITY_SEARCH_RADIUS;
@@ -659,7 +660,7 @@ public class AmenitySearcher {
         }
         singleThreadedExecutor.submit(() -> {
             Request request = new Request(renderedObject);
-            BaseDetailsObject detailsObject = searchDetailedObject(request, settings, matcher);
+            BaseDetailsObject detailsObject = searchDetailedObjectByRequest(request, settings, matcher);
             if (detailsObject != null) {
                 detailsObject.addObject(renderedObject);
 
