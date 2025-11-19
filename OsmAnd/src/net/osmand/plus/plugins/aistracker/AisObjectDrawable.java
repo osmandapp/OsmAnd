@@ -148,7 +148,8 @@ public class AisObjectDrawable {
 		Location ownPosition = getPlugin().getOwnPosition();
 		int cpaWarningTime = getPlugin().getCpaWarningTime();
 		float cpaWarningDistance = getPlugin().getCpaWarningDistance();
-		if (ais.isMovable() && (ais.getObjectClass() != AIS_AIRPLANE) && (cpaWarningTime > 0) && (ais.getSog() > 0.0d)) {
+		if (ais.isMovable() && (ais.getObjectClass() != AIS_AIRPLANE) && (cpaWarningTime > 0) &&
+                (ais.getSog() > AisObject.SPEED_CONSIDERED_IN_REST)) {
 			Cpa cpa = ais.getCpa();
 			if (checkForCpaTimeout() && (ownPosition != null)) {
 				Location aisPosition = ais.getCurrentLocation();
