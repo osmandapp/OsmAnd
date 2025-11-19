@@ -199,13 +199,15 @@ public class AmenitySearcher {
     }
 
     public Amenity searchDetailedAmenity(Request request, Settings settings) {
-        BaseDetailsObject detailed = searchDetailedObject(request, settings);
+        BaseDetailsObject detailed = searchDetailedObject(request, settings, null);
         return detailed != null ? detailed.getSyntheticAmenity() : null;
     }
 
     public BaseDetailsObject searchDetailedObject(Object object, Settings settings) {
         Request request = null;
-        if (object instanceof MapObject mapObject) {
+        if (object instanceof Request that) {
+            return searchDetailedObject(that, settings, null);
+        } else if (object instanceof MapObject mapObject) {
             request = new Request(mapObject);
         } else if (object instanceof BaseDetailsObject detailsObject) {
             if (detailsObject.isObjectFull()) {
@@ -219,14 +221,10 @@ public class AmenitySearcher {
         }
         BaseDetailsObject detailsObject = null;
         if (request != null) {
-            detailsObject = searchDetailedObject(request, settings);
+            detailsObject = searchDetailedObject(request, settings, null);
         }
         completeGeometry(detailsObject, object);
         return detailsObject;
-    }
-
-    public BaseDetailsObject searchDetailedObject(Request request, Settings settings) {
-        return searchDetailedObject(request, settings, null);
     }
 
     public BaseDetailsObject searchDetailedObject(Request request, Settings settings, ResultMatcher<Amenity> matcher) {
