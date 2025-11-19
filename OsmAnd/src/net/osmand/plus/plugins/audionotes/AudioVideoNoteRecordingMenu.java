@@ -54,6 +54,7 @@ public class AudioVideoNoteRecordingMenu {
 		MapActivity mapActivity = requireMapActivity();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		initView(mapActivity);
+		initAdditionalViews(mapActivity);
 	}
 
 	@Nullable
@@ -68,6 +69,9 @@ public class AudioVideoNoteRecordingMenu {
 
 	protected void initView(@NonNull MapActivity mapActivity) {
 		view = mapActivity.findViewById(R.id.recording_note_layout);
+	}
+
+	private void initAdditionalViews(@NonNull MapActivity mapActivity) {
 		viewfinder = view.findViewById(R.id.viewfinder);
 		showViewfinder = true;
 

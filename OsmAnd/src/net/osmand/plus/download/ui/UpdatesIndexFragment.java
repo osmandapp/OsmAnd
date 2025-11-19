@@ -56,6 +56,7 @@ import net.osmand.plus.download.local.dialogs.DeleteConfirmationDialogController
 import net.osmand.plus.download.local.dialogs.DeleteConfirmationDialogController.ConfirmDeletionListener;
 import net.osmand.plus.download.local.dialogs.LocalItemFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.importfiles.ImportTaskListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
@@ -77,7 +78,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class UpdatesIndexFragment extends BaseNestedListFragment implements DownloadEvents,
-		OperationListener, ConfirmDeletionListener, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener {
+		OperationListener, ConfirmDeletionListener, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener,
+		ImportTaskListener {
 	private static final int RELOAD_ID = 5;
 	private UpdateIndexAdapter listAdapter;
 	private String errorMessage;
@@ -152,7 +154,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		updateUpdateAllButton();
 	}
 
-	public void invalidateListView(@NonNull Context context) {
+	public void invalidateListView(@NonNull Context context) {//todo
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
 		OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
 		List<DownloadItem> downloadItems = new ArrayList<>(indexes.getGroupedItemsToUpdate());
@@ -450,6 +452,11 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		return (DownloadActivity) getActivity();
 	}
 
+	@Override
+	public void onImportFinished() {
+		invalidateListView(app);
+	}
+
 	private enum LocalIndexItemType {
 		BANNER,
 		DELETED_MAPS,
@@ -616,5 +623,17 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	@Override
 	public List<LocalItem> getMapsToUpdate() {
 		return LiveUpdatesFragment.getMapsToUpdate(listAdapter.localItems, settings);
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		app.getImportHelper().addImportTaskListener(this);
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		app.getImportHelper().removeImportTaskListener(this);
 	}
 }

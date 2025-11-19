@@ -34,6 +34,7 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 		progressBar = view.findViewById(R.id.progressBar);
 	}
 
+	@Override
 	protected void initView(@NonNull MapActivity mapActivity) {
 		mapActivity.getContextMenu().hide();
 		AudioVideoNoteRecordingMenuFullScreenFragment.showInstance(this);

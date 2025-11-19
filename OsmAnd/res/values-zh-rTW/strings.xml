@@ -5726,4 +5726,5 @@
     <string name="unsupported_maps">不受支援的地圖</string>
     <string name="routing_attr_weightrating_name">滿載時的最大重量</string>
     <string name="routing_attr_maxaxleload_name">最大軸重</string>
+    <string name="is_parking_time_limited">可停車的時間有限制嗎？</string>
 </resources>
