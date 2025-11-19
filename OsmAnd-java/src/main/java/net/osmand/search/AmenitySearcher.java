@@ -225,6 +225,10 @@ public class AmenitySearcher {
         return detailsObject;
     }
 
+    public BaseDetailsObject searchDetailedObject(Request request, Settings settings) {
+        return searchDetailedObject(request, settings, null);
+    }
+
     public BaseDetailsObject searchDetailedObject(Request request, Settings settings, ResultMatcher<Amenity> matcher) {
         LatLon latLon = request.latLon;
 		if (latLon != null) {
