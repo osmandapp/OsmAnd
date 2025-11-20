@@ -4951,7 +4951,7 @@
     <string name="terrain_maps">Cartes de terrain</string>
     <string name="sort_country_name_descending">Nom de pays : Z – A</string>
     <string name="delete_map_description">Effacer la carte %1$s ?</string>
-    <string name="maps_and_resources">Cartes et Ressources</string>
+    <string name="maps_and_resources">Cartes et ressources</string>
     <string name="shared_string_show_icon">Afficher l\'icône</string>
     <string name="smart_folder_name_present">Ce dossier intelligent est déjà présent</string>
     <string name="smart_folder_saved">Dossier intelligent enregistré</string>
