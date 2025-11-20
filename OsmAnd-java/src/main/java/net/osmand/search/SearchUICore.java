@@ -437,6 +437,8 @@ public class SearchUICore {
 
 						if (type1.equals("natural")) {
 							similarityRadius = 50000;
+						} else if (type1.equals("transportation")) {
+							similarityRadius = 1000;
 						} else if (subType1.equals(subType2)) {
 							if (subType1.contains("cn_ref") || subType1.contains("wn_ref")
 									|| (subType1.startsWith("route_hiking_") && subType1.endsWith("n_poi"))) {
@@ -1163,6 +1165,7 @@ public class SearchUICore {
 	private enum ResultCompareStep {
 		TOP_VISIBLE,
 		FOUND_WORD_COUNT, // more is better (top)
+		TRANSPORTATION_ORDER,
 		OBF_RESOURCE,
 		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
 		SEARCH_DISTANCE_IF_NOT_BY_NAME,
@@ -1263,6 +1266,18 @@ public class SearchUICore {
 				}
 				break;
 			}
+			case TRANSPORTATION_ORDER:
+				if (o1.object instanceof Amenity a1 && o2.object instanceof Amenity a2
+					&& a1.isTransport() && a2.isTransport()) {
+					int order1 = a1.getOrder();
+					int order2 = a2.getOrder();
+					String name1 = a1.getName();
+					String name2 = a2.getName();
+					if (order1 != order2 && name1.equals(name2)) {
+						return Double.compare(order1, order2);
+					}
+				}
+				break;
 			case COMPARE_BY_DISTANCE:
 				double s1 = o1.getSearchDistance(c.loc, 1);
 				double s2 = o2.getSearchDistance(c.loc, 1);

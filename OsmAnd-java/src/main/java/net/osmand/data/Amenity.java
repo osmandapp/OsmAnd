@@ -115,6 +115,19 @@ public class Amenity extends MapObject {
 	public int getOrder() {
 		return order;
 	}
+	public void initOrder() {
+		if (type == null || subType == null)
+			return;
+		int ord = 0;
+		for (String type : subType.split(";")) {
+			PoiType poiType = getType().getPoiTypeByKeyName(type);
+			if (poiType != null) {
+				int order = poiType.getOrder();
+				ord = ord == 0 ? order : Math.min(ord, order);
+			}
+		}
+		setOrder(ord);
+	}
 
 	public void setOrder(int order) {
 		this.order = order;
@@ -1032,5 +1045,9 @@ public class Amenity extends MapObject {
 		result.putAll(amenityTags); // unresolved residues
 
 		return result;
+	}
+
+	public boolean isTransport() {
+		return "transportation".equals(subType);
 	}
 }
