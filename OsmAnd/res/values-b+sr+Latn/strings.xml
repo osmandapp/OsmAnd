@@ -929,7 +929,7 @@
     <string name="number_of_rows_in_dash">Broj redova na tabli %1$s</string>
     <string name="local_index_items_deleted">%1$d of %2$d stavke(i) izbrisano.</string>
     <string name="local_index_items_backuped">%1$d od %2$d stavke(i) isključeno.</string>
-    <string name="shared_string_release">Izdat</string>
+    <string name="shared_string_release">Objavljeno</string>
     <string name="vector_data_missing">Preuzmi podatke (\'bez interneta\') radi upotrebe mapa bez interneta.</string>
     <string name="shared_string_no_thanks">Ne, hvala</string>
     <string name="shared_string_others">Ostalo</string>
