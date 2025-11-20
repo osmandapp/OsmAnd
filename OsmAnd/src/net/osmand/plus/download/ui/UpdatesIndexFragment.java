@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -56,6 +57,7 @@ import net.osmand.plus.download.local.dialogs.DeleteConfirmationDialogController
 import net.osmand.plus.download.local.dialogs.DeleteConfirmationDialogController.ConfirmDeletionListener;
 import net.osmand.plus.download.local.dialogs.LocalItemFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.importfiles.ImportTaskListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
@@ -77,7 +79,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class UpdatesIndexFragment extends BaseNestedListFragment implements DownloadEvents,
-		OperationListener, ConfirmDeletionListener, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener {
+		OperationListener, ConfirmDeletionListener, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener,
+		ImportTaskListener {
 	private static final int RELOAD_ID = 5;
 	private UpdateIndexAdapter listAdapter;
 	private String errorMessage;
@@ -115,13 +118,17 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 	private void setupOnItemLongClickListener() {
 		getListView().setOnItemLongClickListener((parent, v, position, id) -> {
-			if (position > 0) {
-				DownloadItem downloadItem = (DownloadItem) getListAdapter().getItem(position);
-				if (downloadItem instanceof IndexItem indexItem) {
-					LocalItem localItem = indexItem.toLocalItem(app);
-					if (localItem != null) {
-						askShowContextMenu(v, indexItem, localItem);
-						return true;
+			ListAdapter adapter = getListAdapter();
+			if (adapter != null) {
+				LocalIndexItem localIndexItem = (LocalIndexItem) adapter.getItem(position);
+				if (localIndexItem.isDownloadItem()) {
+					DownloadItem downloadItem = localIndexItem.downloadItem;
+					if (downloadItem instanceof IndexItem indexItem) {
+						LocalItem localItem = indexItem.toLocalItem(app);
+						if (localItem != null) {
+							askShowContextMenu(v, indexItem, localItem);
+							return true;
+						}
 					}
 				}
 			}
@@ -152,7 +159,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		updateUpdateAllButton();
 	}
 
-	public void invalidateListView(@NonNull Context context) {
+	public void invalidateListView(@NonNull Context context) {//todo
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
 		OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
 		List<DownloadItem> downloadItems = new ArrayList<>(indexes.getGroupedItemsToUpdate());
@@ -178,7 +185,9 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			newLocalIndexItems.add(LocalIndexItem.createDeletedMapsItem(deletedMapsCount));
 		}
 		for (DownloadItem item : downloadItems) {
-			newLocalIndexItems.add(LocalIndexItem.createDownloadItem(item));
+			if (!(item instanceof IndexItem) || !((IndexItem) item).isDeleted()) {
+				newLocalIndexItems.add(LocalIndexItem.createDownloadItem(item));
+			}
 		}
 		return newLocalIndexItems;
 	}
@@ -448,6 +457,11 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		return (DownloadActivity) getActivity();
 	}
 
+	@Override
+	public void onImportFinished() {
+		invalidateListView(app);
+	}
+
 	private enum LocalIndexItemType {
 		BANNER,
 		DELETED_MAPS,
@@ -614,5 +628,17 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	@Override
 	public List<LocalItem> getMapsToUpdate() {
 		return LiveUpdatesFragment.getMapsToUpdate(listAdapter.localItems, settings);
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		app.getImportHelper().addImportTaskListener(this);
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		app.getImportHelper().removeImportTaskListener(this);
 	}
 }
