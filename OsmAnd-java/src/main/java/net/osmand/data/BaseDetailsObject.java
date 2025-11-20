@@ -328,6 +328,15 @@ public class BaseDetailsObject {
 		if (syntheticAmenity.getType() == null && type != null) {
 			syntheticAmenity.setType(type);
 		}
+		if (syntheticAmenity.getOrder() != amenity.getOrder()) {
+			int original = syntheticAmenity.getOrder();
+			int external = amenity.getOrder();
+			syntheticAmenity.setOrder(original == 0 ? external : Math.min(original, external));
+			if (external < original && type != null) {
+				// set new type if order is less
+				syntheticAmenity.setType(type);
+			}
+		}
 		String subType = amenity.getSubType();
 		if (subType != null) {
 			updateAmenitySubTypes(syntheticAmenity, subType);

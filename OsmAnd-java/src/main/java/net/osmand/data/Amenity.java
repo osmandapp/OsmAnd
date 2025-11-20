@@ -1048,6 +1048,9 @@ public class Amenity extends MapObject {
 	}
 
 	public boolean isTransport() {
-		return "transportation".equals(subType);
+		if (type != null) {
+			return "transportation".equals(type.getKeyName());
+		}
+		return false;
 	}
 }
