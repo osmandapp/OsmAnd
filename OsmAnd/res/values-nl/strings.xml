@@ -14,7 +14,7 @@
     <string name="int_continuosly">continu</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden waarschijnlijk sneller weergegeven. Werkt mogelijk niet optimaal op sommige apparaten.</string>
     <string name="play_commands_of_currently_selected_voice">Kies een stem en test door aankondigingen af te spelen:</string>
-    <string name="debugging_and_development">OsmAnd fout-opsporing en ontwikkeling</string>
+    <string name="debugging_and_development">OsmAnd ontwikkeling</string>
     <string name="native_rendering">Interne kaartgeneratie</string>
     <string name="test_voice_prompts">Test stem-instructies</string>
     <string name="switch_to_raster_map_to_see">Download een offline vectorkaart voor deze locatie via het menu (\'Kaarten en hulpmiddelen\') of schakel over naar de \'Online Kaarten\'-plugin.</string>
@@ -531,7 +531,7 @@
     <string name="additional_settings">Extra instellingen</string>
     <string name="save_current_track_descr">Huidige GPX-track nu opslaan.</string>
     <string name="save_current_track">Huidige GPX-track opslaan</string>
-    <string name="save_track_interval">Registratie-interval bij navigatie</string>
+    <string name="save_track_interval">Logging-interval gedurende navigatie</string>
     <string name="save_track_interval_descr">Stel het logging-interval in voor track-opname tijdens navigatie</string>
     <string name="save_track_to_gpx">GPX-Track automatisch opnemen tijdens navigatie</string>
     <string name="update_tile">Updaten</string>
@@ -1229,7 +1229,7 @@
     <string name="speak_poi">Dichtbij POI</string>
     <string name="shared_string_all">Alles</string>
     <string name="index_tours">Reizen</string>
-    <string name="record_plugin_name">Trackopnames</string>
+    <string name="record_plugin_name">Trip opnames</string>
     <string name="int_hour">u.</string>
     <string name="duration">Duur</string>
     <string name="distance">Afstand</string>
@@ -1237,7 +1237,7 @@
 \n
 \nLees verder op %1$s.</string>
     <string name="save_track_to_gpx_globally_descr">Het registreren van de afgelegde weg in een GPX-bestand kan worden aan- en uitgeschakeld met de GPX opname widget op het kaartscherm.</string>
-    <string name="save_track_interval_globally">Interval tussen geregistreerde punten</string>
+    <string name="save_track_interval_globally">Logging interval</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus- en pendeltaxilijnen</string>
     <string name="confirm_every_run">Altijd vragen</string>
     <string name="save_global_track_interval">Standaard logging-interval</string>
@@ -1281,7 +1281,7 @@
     <string name="rendering_attr_tramTrainRoutes_name">Tram- en treinverbindingen</string>
     <string name="wake_on_voice">Zet het scherm aan</string>
     <string name="wake_on_voice_descr">Zet het scherm aan (indien het uit staat) bij het naderen van een bocht.</string>
-    <string name="impassable_road">Blokkeer wegen…</string>
+    <string name="impassable_road">Blokkeer wegen</string>
     <string name="rendering_category_hide">Verberg</string>
     <string name="lock_screen_request_explanation">%1$s heeft toestemming nodig om het scherm uit te kunnen schakelen (als onderdeel van de stroombesparende functie).</string>
     <string name="home_button">Thuis</string>
@@ -1463,7 +1463,7 @@
     <string name="shared_string_my_location">Huidige Positie</string>
     <string name="shared_string_my_favorites">Favorieten</string>
     <string name="shared_string_tracks">GPX-tracks</string>
-    <string name="shared_string_currently_recording_track">Huidige GPX-track</string>
+    <string name="shared_string_currently_recording_track">GPX-track opname wordt gemaakt</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d wijziging(en) naar OSM versturen\?</string>
     <string name="confirmation_to_clear_history">Wil je de geschiedenis verwijderen?</string>
     <string name="osmand_parking_overdue">overschreden</string>
@@ -1928,7 +1928,7 @@
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="map_widget_battery">Batterijniveau</string>
     <string name="lang_hu_formal">Hongaars (formeel)</string>
-    <string name="current_track">Huidig pad</string>
+    <string name="current_track">Huidige track</string>
     <string name="change_markers_position">Verschuif markering</string>
     <string name="lang_es_us">Spaans (Amerikaans)</string>
     <string name="lang_be_by">Wit-Russisch (latijns)</string>
@@ -2536,8 +2536,8 @@
     <string name="start_editing">Begin met bewerken</string>
     <string name="get_unlimited_access">Krijg onbeperkte toegang</string>
     <string name="welcome_to_open_beta">Welkom bij de open beta</string>
-    <string name="wikivoyage_travel_guide">Reisgids</string>
-    <string name="wikivoyage_travel_guide_descr">Voert je binnen OsmAnd naar de meest interessante plaatsen op aarde, zonder internetverbinding.</string>
+    <string name="wikivoyage_travel_guide">Reisgidsen</string>
+    <string name="wikivoyage_travel_guide_descr">Voert je - binnen OsmAnd, zonder internetverbinding - naar de meest interessante plaatsen op aarde.</string>
     <string name="monthly_map_updates">Maandelijkse kaartupdates</string>
     <string name="daily_map_updates">Kaartupdates: Elk uur</string>
     <string name="in_app_purchase">In-app aankoop</string>
@@ -2684,7 +2684,7 @@
     <string name="one_tap_active">\'Eén tik\' actief</string>
     <string name="looking_for_tracks_with_waypoints">Tracks met routepunten zoeken</string>
     <string name="add_track_to_markers_descr">Kies een track om de routepunten aan de Markeervlaggetjes toe te voegen.</string>
-    <string name="shared_string_gpx_waypoints">Track routepunten</string>
+    <string name="shared_string_gpx_waypoints">Track tussenpunten</string>
     <string name="add_group_descr">Importeer groepen vanuit Favorieten of GPX-routepunten.</string>
     <string name="empty_state_markers_active_desc">Druk lang of kort op de kaart en tik vervolgens op de Markeervlaggetje knop.</string>
     <string name="empty_state_markers_groups_desc">Importeer een Favorietengroep of routepunten als Markeervlaggetjes.</string>
@@ -2783,7 +2783,7 @@
     <string name="rendering_attr_highway_class_street_name">Straat</string>
     <string name="rendering_attr_highway_class_service_name">Dienstweg</string>
     <string name="rendering_attr_highway_class_footway_name">Voetpad</string>
-    <string name="rendering_attr_highway_class_track_name">Veld- of bosweg</string>
+    <string name="rendering_attr_highway_class_track_name">Track</string>
     <string name="rendering_attr_highway_class_bridleway_name">Ruiterpad</string>
     <string name="rendering_attr_highway_class_steps_name">Treden</string>
     <string name="rendering_attr_highway_class_path_name">Pad</string>
@@ -2939,9 +2939,9 @@
     <string name="rendering_attr_winter_road_name">Winterweg</string>
     <string name="rendering_attr_ice_road_name">IJsweg</string>
     <string name="routeInfo_winter_ice_road_name">Winter- en ijswegen</string>
-    <string name="rendering_attr_tracktype_grade1_name">Verhard</string>
-    <string name="rendering_attr_tracktype_grade2_name">Vast</string>
-    <string name="rendering_attr_tracktype_grade3_name">Grotendeels hard</string>
+    <string name="rendering_attr_tracktype_grade1_name">Verhard (bestraat)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Verhard (onbestraat)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Grotendeels verhard</string>
     <string name="rendering_attr_tracktype_grade4_name">Grotendeels zacht</string>
     <string name="rendering_attr_tracktype_grade5_name">Zacht</string>
     <string name="routeInfo_tracktype_name">Stevigheid van het oppervlak</string>
@@ -3050,11 +3050,11 @@
     <string name="clear_confirmation_msg">Wis %1$s\?</string>
     <string name="routing_attr_freeride_policy_name">Buiten de piste</string>
     <string name="default_speed_dialog_msg">Schat de aankomsttijd in voor onbekende wegtypes en beperkt de maximumsnelheid voor alle wegen (kan de route beïnvloeden)</string>
-    <string name="rendering_attr_highway_class_track_grade1_name">Toestand 1</string>
-    <string name="rendering_attr_highway_class_track_grade2_name">Toestand 2</string>
-    <string name="rendering_attr_highway_class_track_grade3_name">Toestand 3</string>
-    <string name="rendering_attr_highway_class_track_grade4_name">Toestand 4</string>
-    <string name="rendering_attr_highway_class_track_grade5_name">Toestand 5</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Graad 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Graad 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Graad 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Graad 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Graad 5</string>
     <string name="external_input_device">Uitwendig invoer apparaat</string>
     <string name="external_input_device_descr">Kies een uitwendige bediening, zoals een toetsenbord of een WunderLINQ.</string>
     <string name="sett_generic_ext_input">Toetsenbord</string>
@@ -3165,7 +3165,7 @@
     <string name="store_tracks_in_rec_directory">Sla tracks op in de \'rec\' folder</string>
     <string name="store_tracks_in_daily_directories">Sla tracks op in dagelijkse folders</string>
     <string name="store_tracks_in_daily_directories_descrp">Sla tracks op in sub-folders per opname dag (zoals 2018-01-01).</string>
-    <string name="simulate_your_location_gpx_descr">Simuleer je positie door een opgenomen GPX track te gebruiken.</string>
+    <string name="simulate_your_location_gpx_descr">Simuleer je positie door een opgenomen GPX-track te gebruiken.</string>
     <string name="quick_action_directions_from_desc">Een knop om het midden van het scherm in te stellen als vertrekpunt. Hierna wordt de bestemming gevraagd of de routeberekening gestart.</string>
     <string name="download_map_dialog">Dialoogvenster kaart downloads</string>
     <string name="dialogs_and_notifications_title">Dialogen en meldingen</string>
@@ -3236,7 +3236,7 @@
     <string name="accessibility_prefs_descr">Kies icoon, kleur en naam</string>
     <string name="live_monitoring_descr">Laat het delen van je positie met behulp van track-opname toe.</string>
     <string name="live_monitoring">Online volgen</string>
-    <string name="save_track_logging_accuracy">Opnamenauwkeurigheid</string>
+    <string name="save_track_logging_accuracy">Logging nauwkeurigheid</string>
     <string name="tracks_view_descr">De opgenomen tracks zijn opgeslagen in %1$s, of in de OsmAnd-map.</string>
     <string name="multimedia_notes_view_descr">Je kan al je notities terugvinden in %1$s.</string>
     <string name="video_notes">Videonotities</string>
@@ -3303,7 +3303,7 @@
     <string name="export_profile_dialog_description">Voeg extra gegevens toe om samen met het profiel te exporteren.</string>
     <string name="shared_string_app_default_w_val">App Standaardwaarde (%s)</string>
     <string name="no_recalculation_setting">Niet herberekenen</string>
-    <string name="route_recalculation_dist_title">Minimale afstand om route te herbereken</string>
+    <string name="route_recalculation_dist_title">Minimale afstand om route te herberekenen</string>
     <string name="route_recalculation_dist_descr">De route wordt herberekend wanneer de afstand tot die route groter is dan de opgegeven parameter</string>
     <string name="profile_type_custom_string">Eigen profiel</string>
     <string name="shared_string_angle_param">Hoek: %s°</string>
@@ -3562,7 +3562,7 @@
     <string name="osm_edit_closed_note">Opgeloste OSM-opmerking</string>
     <string name="app_mode_go_cart">Kart</string>
     <string name="map_widget_monitoring">Track opnemen</string>
-    <string name="save_global_track_interval_descr">Specificeer het registratie-interval voor de algemene trackregistratie (ingeschakeld via de track-widget op de kaart).</string>
+    <string name="save_global_track_interval_descr">Specificeer het logging-interval voor de algemene track-opname (ingeschakeld via de track-widget op de kaart).</string>
     <string name="gpx_monitoring_stop">Pauzeer track opname</string>
     <string name="gpx_monitoring_start">Hervat track opnemen</string>
     <string name="street_level_imagery">Beelden op straatniveau</string>
@@ -3578,7 +3578,7 @@
     <string name="next_segment">Volgende segment</string>
     <string name="all_next_segments">Alle volgende segmenten</string>
     <string name="all_next_segments_will_be_recalc">Alle volgende segmenten worden opnieuw berekend met het geselecteerde profiel.</string>
-    <string name="whole_track">De gehele route</string>
+    <string name="whole_track">Gehele track</string>
     <string name="route_between_points_whole_track_button_desc">De gehele route wordt herberekend volgens het geselecteerde profiel.</string>
     <string name="pass_whole_track_descr">Punt van de track om te navigeren</string>
     <string name="shared_string_save_as_gpx">Bewaar als nieuw trackbestand</string>
@@ -3605,10 +3605,10 @@
     <string name="add_to_a_track">Voeg toe aan een track</string>
     <string name="add_segment_to_the_track">Voeg toe aan een trackbestand</string>
     <string name="simplified_track">Vereenvoudigde track</string>
-    <string name="simplified_track_description">Alleen de routetrack wordt opgeslagen, de waypoints worden verwijderd.</string>
+    <string name="simplified_track_description">Alleen de route-lijn wordt opgeslagen, de tussenpunten worden verwijderd.</string>
     <string name="shared_string_done">Klaar</string>
     <string name="reverse_route">Route omkeren</string>
-    <string name="route_between_points_add_track_desc">Selecteer een track waaraan je een nieuw segment wil toevoegen.</string>
+    <string name="route_between_points_add_track_desc">Selecteer een track-bestand waaraan je een nieuw segment wil toevoegen.</string>
     <string name="plan_route_select_track_file_for_open">Selecteer een trackbestand om te openen.</string>
     <string name="plan_route_exit_dialog_descr">Alle wijzigingen in de geplande route verwerpen\?</string>
     <string name="plan_route_trim_before">Alles wegknippen voor dit punt</string>
@@ -3689,14 +3689,14 @@
     <string name="set_working_days_to_continue">Stel werkdagen in om door te gaan</string>
     <string name="gpx_split_interval_descr">Selecteer het interval waarmee markeringen met afstand of tijd op de track worden weergegeven.</string>
     <string name="gpx_split_interval_none_descr">Selecteer de gewenste splitsingsoptie: op tijd of op afstand.</string>
-    <string name="track_coloring_solid">Vaste</string>
+    <string name="track_coloring_solid">Verhard</string>
     <string name="overwrite_track">Overschrijf track</string>
     <string name="threshold_distance">Drempelafstand</string>
     <string name="navigation_profile">Navigatieprofiel</string>
     <string name="in_case_of_reverse_direction">In geval van een omgekeerde richting</string>
     <string name="shared_string_gpx_files">Routes</string>
     <string name="layer_gpx_layer">Routes</string>
-    <string name="show_gpx">Routes</string>
+    <string name="show_gpx">Tracks</string>
     <string name="save_track_to_gpx_globally">Log track naar GPX-bestand</string>
     <string name="shared_string_gpx_route">Volg route</string>
     <string name="empty_state_my_tracks">Voeg trackbestanden toe</string>
@@ -3775,7 +3775,7 @@
     <string name="markers_history">Markeervlaggetjes-geschiedenis</string>
     <string name="send_files_to_openstreetmap">Stuur het GPX-bestand naar OpenStreetMap</string>
     <string name="enter_text_separated">Voer tags in, gescheiden door komma\'s.</string>
-    <string name="gpx_upload_public_visibility_descr">\"Publiek\" betekent dat de track openbaar wordt getoond in \"Jouw GPS-tracks\" en in openbare GPS-track-lijsten. Trackpoints die d.m.v. de API worden gedownload zullen niet aan je oorspronkelijke trackpagina refereren. Tijden in de tracks zijn niet beschikbaar in de publieke GPS API, maar de punten zullen wel chronologisch geordend zijn. Echter, andere gebruikers kunnen de track van de openbare GPS-track-lijsten downloaden met alle tijdinformatie.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Publiek\" betekent dat de track openbaar wordt getoond in jouw GPS-tracks en in openbare GPS-track-lijsten. Kaartgegevens afkomstig van de API zullen niet aan je trackpagina refereren. Tijdregistraties in de tracks zijn niet beschikbaar in de publieke GPS API, en de track-punten zullen niet chronologisch geordend zijn.</string>
     <string name="gpx_upload_private_visibility_descr">\"Persoonlijk\" betekent dat de track niet wordt getoond in openbare GPS-track-lijsten, maar de trackpunten zijn wel beschikbaar in volgorde van tijd door de publieke GPS API, maar zonder tijdinformatie.</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Identificeerbaar\" betekent dat de track openbaar wordt getoond in je GPS-tracks en in openbare GPS-track-lijsten. Dat wil zeggen dat andere gebruikers de onbewerkte track kunnen downloaden en deze aan je gebruikersnaam kunnen koppelen. Gegevens die via de trackpoints-API worden aangeboden, verwijzen naar je oorspronkelijke trackpagina. Tijdaanduidingen van de traceerpunten zijn beschikbaar via de openbare GPS-API.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Traceerbaar\" betekent dat de track niet wordt getoond in openbare GPS-track-lijsten maar de trackpunten zijn wel beschikbaar door de publieke GPS API met tijdinformatie. Andere gebruikers kunnen alleen bewerkte trackpunten downloaden die niet aan jou herleid kunnen worden.</string>
@@ -3854,8 +3854,8 @@
     <string name="keep_it_empty_if_not">Laat leeg indien niet</string>
     <string name="analyze_by_intervals">Analyseer per interval</string>
     <string name="upload_to_openstreetmap">Uploaden naar OpenStreetMap</string>
-    <string name="edit_track">GPX-track bewerken</string>
-    <string name="rename_track">GPX-track hernoemen</string>
+    <string name="edit_track">Track bewerken</string>
+    <string name="rename_track">Track hernoemen</string>
     <string name="change_folder">Map wijzigen</string>
     <string name="shared_string_sec">sec</string>
     <string name="announcement_time_approach">Bij nadering</string>
@@ -3984,7 +3984,7 @@
     <string name="srtm_download_list_help_message">OsmAnd biedt contourlijngegevens in meters en voet aan. Je zal het bestand opnieuw moeten downloaden om het formaat te wijzigen.</string>
     <string name="srtm_download_single_help_message">Selecteer a.u.b. een eenheid. Je zal het bestand opnieuw moeten downloaden om het formaat te wijzigen.</string>
     <string name="exit_number">Afritnummer</string>
-    <string name="announce_when_exceeded">Aankondigen wanneer overschreden</string>
+    <string name="announce_when_exceeded">Waarschuwen indien overschreden</string>
     <string name="user_points">Gebruikerspunten</string>
     <string name="output">Output</string>
     <string name="route_line_use_gradient_coloring">De routelijn is ingekleurd op basis van het hoogteprofiel.</string>
@@ -4067,7 +4067,7 @@
     <string name="attribute">Eigenschappen</string>
     <string name="shared_string_purchased">Gekocht</string>
     <string name="routeInfo_surface_description">Vermeld informatie over het fysieke oppervlak van wegen en paden.</string>
-    <string name="routeInfo_roadClass_description">Kleur de route volgens de wegclassificatie.</string>
+    <string name="routeInfo_roadClass_description">Kleur de route of track volgens de wegclassificatie.</string>
     <string name="add_group_to_markers">Groep toevoegen aan markeringslijst</string>
     <string name="remove_group_from_markers">Groep uit markeringslijst verwijderen</string>
     <string name="start_point">Start</string>
@@ -4106,7 +4106,7 @@
     <string name="empty_category_name">Lege categorie naam</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Kleur in volgens netwerkrelatie.</string>
     <string name="option_available_only_in_osmand_pro">Beschikbaar als onderdeel van het OsmAnd Pro abonnement.</string>
-    <string name="track_has_no_needed_data">Het pad ontbreekt de nodige gegevens.</string>
+    <string name="track_has_no_needed_data">De track mist de nodige gegevens.</string>
     <string name="logout_from_osmand_cloud">Log uit bij OsmAnd Cloud</string>
     <string name="explore_wikipedia_offline">Verken Wikipedia offline.</string>
     <string name="backup_version_history_removed">Alle versiehistoriek is verwijderd.</string>
@@ -4308,7 +4308,7 @@
     <string name="shared_string_copy_to">Kopieer naar</string>
     <string name="skip_confirmation">Ja, sla over</string>
     <string name="shared_storage_second_step">Klik op \"Gebruik deze map\".</string>
-    <string name="routeInfo_winter_ice_road_description">Kleur de route- of tracklijn volgens de winterse wegcategorieën.</string>
+    <string name="routeInfo_winter_ice_road_description">Kleur de route of track-lijn volgens de winterse wegcategorieën.</string>
     <string name="unlimited_map_downloads">Onbeperkte kaart downloads</string>
     <string name="purchases_feature_desc_wikipedia">Biedt alle plaatsgerelateerde Wikipedia-artikelen offline, zodat u meer te weten komt over de plaatsen die u tijdens uw reis bezoekt door eenvoudig te tikken op de kaart. Vergeet niet de Wikipedia-kaartbestanden voor de specifieke regio\'s te downloaden.</string>
     <string name="routing_attr_avoid_tunnels_description">Tunnels vermijden</string>
@@ -4334,7 +4334,7 @@
 \nDe app zal vanaf nu de nieuwe gegevensmap gebruiken.</string>
     <string name="start_copying">Start kopiëren</string>
     <string name="shared_storage">Gedeeld geheugen</string>
-    <string name="explore_osmnad_plans_to_find_suitable">Verken de verschillende OsmAnd abonnementen om diegene te vinden die hebt best bij jouw past.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Verken de verschillende OsmAnd abonnementen om diegene te vinden die het best bij jou past.</string>
     <string name="shared_string_view_all">Bekijk alles</string>
     <string name="shared_string_discussion">Discussie</string>
     <string name="complete_purchase">Vervolledig aankoop</string>
@@ -4586,7 +4586,7 @@
 \nWilt u daarvoor de Play Store openen\?</string>
     <string name="map_widget_camera_distance_desc">Toont hoogte van camera boven de grond.</string>
     <string name="developer_widgets">Widgets voor ontwikkelaars</string>
-    <string name="attach_roads_descr">Koppel je track aan wegen om gedetailleerde route-informatie te krijgen, zoals: stapsgewijze aanwijzingen en wegkenmerken.</string>
+    <string name="attach_roads_descr">Koppel je track aan wegen om gedetailleerde route-informatie te krijgen, zoals richtingaanwijzingen en wegkenmerken.</string>
     <string name="connect_with_straight_line">Verbind met een rechte lijn</string>
     <string name="av_notes_photo_widget_desc">Door te tikken op de widget kun je een foto maken.</string>
     <string name="change_default_appearance">Standaard uiterlijk veranderen</string>
@@ -4836,7 +4836,7 @@
     <string name="rendering_attr_showRunningRoutes_description">Toon hardlooproutes</string>
     <string name="estimated_download_size">Verwachte bestandsgrootte</string>
     <string name="gpx_no_routes_descr">U kunt \"%1$s\" gebruiken om een route aan het bestand toe te voegen.</string>
-    <string name="save_track_to_gpx_descrp">Automatisch starten met opname van pad tijdens navigeren, en achteraf automatisch opslaan.</string>
+    <string name="save_track_to_gpx_descrp">Automatisch starten met opname van track tijdens navigeren, en achteraf automatisch opslaan.</string>
     <string name="rendering_attr_seabedDetail_description">Meer informatie over de zeebodem, bodemtypes, categorie en soort wier of zeegras</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">\'Fixme\' labels</string>
     <string name="turn_arrows_descr">Kies of Afslaan Pijlen zijn aangegeven op de route lijn.</string>
@@ -4881,7 +4881,7 @@
     <string name="si_nm_mt">Zeemijlen/meter</string>
     <string name="si_nm_ft">Zeemijlen/voet</string>
     <string name="av_audio_format_bottom_sheet_descr">Kies een audio bestandstype. Het bestandstype voor audio is 3GPP (.3gp).</string>
-    <string name="routeInfo_tracktype_description">Kleur de route of tracklijn op basis van de samenstelling van het oppervlak. Typisch aangezet wanneer het wegennet grotendeels onverhard is.</string>
+    <string name="routeInfo_tracktype_description">Kleur de route of track-lijn op basis van de samenstelling van het oppervlak. Schakel in wanneer het wegennet grotendeels onverhard is.</string>
     <string name="weight_limit_error">Minimumwaarde is \"%1$s\" ton. Gebruik het \"%2$s\"-profiel als het voertuig minder weegt dan de minimumwaarde.</string>
     <string name="share_link">Deel link</string>
     <string name="weather_online_cache">Online cache</string>
@@ -5141,7 +5141,7 @@
     <string name="verify_account">Je account verifiëren</string>
     <string name="slope_legend_description">De hellingshoek visualiseert de steilheid van het terrein met kleuren. Je kunt meer lezen over hellingen in %1$s.</string>
     <string name="calculate_offline_altitude_descr">Bereken de hoogte offline op basis van terreinkaartgegevens (3D). Verschillen ten opzichte van de door het apparaat geregistreerde hoogte kunnen worden gebruikt als hoogtecorrectie.</string>
-    <string name="write_data_from_sensor_to_track">Schrijf de gegevens van externe sensoren naar de GPX tijdens de ritopname.</string>
+    <string name="write_data_from_sensor_to_track">Schrijf de gegevens van externe sensoren naar de GPX tijdens de trip opname.</string>
     <string name="save_track_external_sensors_data">Gegevens</string>
     <string name="there_are_no_connected_sensors_of_this_type">Er zijn geen aangesloten sensoren van dit type</string>
     <string name="external_sensors_not_found">Geen sensoren gevonden</string>
@@ -5162,7 +5162,7 @@
     <string name="change_terrain_color_scheme">Wijzig terrein kleurschema</string>
     <string name="play_weather_forecast">Toon weersvoorspelling</string>
     <string name="height_legend_description">Hoogtekleurkaarten worden gebruikt om het reliëf te visualiseren.</string>
-    <string name="track_vertical_exaggeration_description">Door de schaalwaarde te veranderen, kun je de 3D-trackhoogte wijzigen.</string>
+    <string name="track_vertical_exaggeration_description">Door de schaalwaarde te veranderen, kun je de 3D track-hoogte wijzigen.</string>
     <string name="bottom">Onderkant</string>
     <string name="disable_map_layers">Kaartlagen uitschakelen</string>
     <string name="disable_map_layers_descr">Alle kaartlagen boven de vectorkaart uitschakelen (vereist opnieuw opstarten).</string>
@@ -5257,7 +5257,7 @@
     <string name="assigned_keys">Toegewezen toetsen</string>
     <string name="shared_string_automatically">Automatisch</string>
     <string name="ask_every_time">Vraag iedere keer</string>
-    <string name="detailed_track_guidance_description">OsmAnd vergelijkt je track met nabijgelegen wegen, om de richtingaanwijzingen te verbeteren.</string>
+    <string name="detailed_track_guidance_description">OsmAnd vergelijkt je track met nabijgelegen wegen, voor een betere richtingaanwijzing.</string>
     <string name="quick_action_routes_summary">Een schakel om %1$s te laten zien of verbergen op de kaart.</string>
     <string name="auto_25_chars_route_kr">Rechts aanhouden</string>
     <string name="auto_25_chars_route_tr">Rechts afslaan</string>
@@ -5558,7 +5558,7 @@
     <string name="shared_string_reset_all">Alles herstellen</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="filter_tracks_count">Filter: %d</string>
-    <string name="help_article_troubleshooting_track_recording_issues_name">Trackopnamen maken</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Track-opnamen maken</string>
     <string name="local_indexes_category_terrain">Terreinkaarten (3D)</string>
     <string name="terrain_map">Terreinkaart (3D)</string>
     <string name="approximate_bearing">Koersbenadering</string>
@@ -5641,7 +5641,7 @@
     <string name="map_widget_glide_target_desc">Laat de benodigde zweefhoek zien om het doel te bereiken.</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Navigeer met markeringen</string>
-    <string name="help_article_navigation_setup_gpx_navigation_name">Navigeer met een spoor</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Navigeer per track</string>
     <string name="help_article_search_search_poi_name">Zoek interessepunt (POI)</string>
     <string name="free_versions_descr">Download en installeer gratis OsmAnd-versie</string>
     <string name="telegram_chats_descr">Doe mee aan een van onze lokale Telegram-groepen.</string>
@@ -5922,7 +5922,7 @@
     <string name="show_minor_turns_descr">Bij alle kruispunten worden rijstroken weergegeven, ongeacht de spraakinstructies</string>
     <string name="show_minor_turns">Wordt getoond op kleinere kruispunten wanneer de route rechtdoor gaat</string>
     <string name="wunderlinq_datagrid">WunderLINQ Dataraster</string>
-    <string name="fuel_tank_capacity_description">Vul je tankgrootte in om het brandstofniveau en verbruik nauwkeurig bij te houden</string>
+    <string name="fuel_tank_capacity_description">Tank capaciteit invullen om het brandstofniveau en verbruik nauwkeurig bij te houden</string>
     <string name="fuel_tank_capacity">Tankgrootte</string>
     <string name="shared_strings_dimensions">Afmetingen</string>
     <string name="litres">Liters</string>
@@ -6038,7 +6038,7 @@
     <string name="unit_volt">V</string>
     <string name="wikimedia">Wikimedia</string>
     <string name="open_in_browser">Openen in webbrowser</string>
-    <string name="altitude_metrics_description">Stelt de weergave-eenheid voor hoogte in binnen widgets en statistieken.</string>
+    <string name="altitude_metrics_description">Stelt de weergave-eenheid voor hoogte in voor widgets en statistieken.</string>
     <string name="obd_fuel_type_diesel">Diesel</string>
     <string name="obd_fuel_type_lpg">LPG</string>
     <string name="obd_fuel_type_cng">CNG</string>
@@ -6106,9 +6106,9 @@
     <string name="rendering_attr_showDirtbikeTrails_description">Toon dirtbikeroutes</string>
     <string name="graph_axis">Grafiek-as</string>
     <string name="y_axis_description">Selecteer maximaal twee opties voor de Y-as.</string>
-    <string name="detailed_track_guidance">Gedetailleerde routebegeleiding</string>
+    <string name="detailed_track_guidance">Gedetailleerde track begeleiding</string>
     <string name="quick_action_terrain">Type terreinkleuring</string>
-    <string name="quick_action_track_waypoint">Track routepunt</string>
+    <string name="quick_action_track_waypoint">Track tussenpunt</string>
     <string name="key_event_action_continuous_zoom_out">Continu uitzoomen</string>
     <string name="key_event_action_continuous_zoom_in">Continu inzoomen</string>
     <string name="backup_error_failed_to_transfer_file">Overzetten van cloudbestand(en) mislukt.</string>
@@ -6220,4 +6220,21 @@
     <string name="private_access_routing_req_short">Toestaan privéwegen te gebruiken om je bestemming te bereiken?</string>
     <string name="download_wikipedia_label">Download Wikipedia</string>
     <string name="save_and_access_articles_offline">Bewaar gegevens en lees artikelen offline, waar je ook bent</string>
+    <string name="quick_action_weather_layers">Een knop om weerlagen al dan niet te tonen op de kaart.</string>
+    <string name="quick_action_wind_animation_layer">Een knop om de windanimatielaag al dan niet te tonen op de kaart.</string>
+    <string name="wind_animation_layer">Windanimatielaag</string>
+    <string name="weather_layers">Weerlagen</string>
+    <string name="lang_crh">Krim-Tataars (Latijns)</string>
+    <string name="deleted_maps_prompt">Deze kaarten worden niet meer ondersteund en zijn vervangen door kleinere regio\'s. Verwijder ze en download de nieuwe versies.</string>
+    <string name="unsupported_maps">Niet-ondersteunde kaarten</string>
+    <string name="enable_3d_objects">Activeer 3D-gebouwen</string>
+    <string name="enable_3d_objects_description">Toon 3D-gebouwobjecten op de kaart</string>
+    <string name="efficient_grid">Efficiënt raster</string>
+    <string name="visualizing_button_grid">Kaartknopraster</string>
+    <string name="button_frames">Randen van knoppen</string>
+    <string name="routing_attr_weightrating_name">Maximale massa bij volle belading</string>
+    <string name="routing_attr_maxaxleload_name">Maximale aslast</string>
+    <string name="deleted_maps_warning">Je staat op het punt om %d item(s) te verwijderen\nDoorgaan?</string>
+    <string name="slots">Plaatsen</string>
+    <string name="is_parking_time_limited">Is de parkeertijd gelimiteerd?</string>
 </resources>

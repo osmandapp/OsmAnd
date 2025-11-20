@@ -1,23 +1,24 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_3D_HUD_ID;
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 import static net.osmand.plus.settings.enums.Map3DModeVisibility.HIDDEN;
 import static net.osmand.plus.settings.enums.Map3DModeVisibility.VISIBLE;
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
+import static net.osmand.shared.grid.ButtonPositionSize.CELL_SIZE_DP;
 import static net.osmand.shared.grid.ButtonPositionSize.POS_BOTTOM;
 import static net.osmand.shared.grid.ButtonPositionSize.POS_RIGHT;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.shared.grid.ButtonPositionSize;
+
+import org.jetbrains.annotations.NotNull;
 
 public class Map3DButtonState extends MapButtonState {
 
@@ -79,12 +80,21 @@ public class Map3DButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public String getDefaultIconName() {
+	public String getDefaultIconName(@Nullable Boolean nightMode) {
 		return isFlatMapMode() ? "ic_action_3d" : "ic_action_2d";
 	}
 
 	public boolean isFlatMapMode() {
 		return app.getOsmandMap().getMapView().getElevationAngle() == DEFAULT_ELEVATION_ANGLE;
+	}
+
+	@Override
+	protected void updatePosition(@NonNull @NotNull ButtonPositionSize position) {
+		position.setMarginX(CELL_SIZE_DP);
+		position.setMarginY(CELL_SIZE_DP);
+		super.updatePosition(position);
+		position.setXMove(!portrait);
+		position.setYMove(portrait);
 	}
 
 	@NonNull

@@ -27,7 +27,6 @@ public class SearchPhrase {
 	public static final String ALLDELIMITERS_WITH_HYPHEN = "\\s|,|-";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private static Comparator<String> commonWordsComparator;
-	private static Set<String> conjunctions = new TreeSet<>();
 	
 	private final Collator clt;
 	private final SearchSettings settings;
@@ -38,6 +37,8 @@ public class SearchPhrase {
 	// Object consists of 2 part [known + unknown] 
 	private String fullTextSearchPhrase = "";
 	private String unknownSearchPhrase = "";
+	
+	private boolean likelyAddressSearch = false;
 
 	// words to be used for words span
 	private List<SearchWord> words = new ArrayList<>();
@@ -61,67 +62,6 @@ public class SearchPhrase {
 	private QuadRect cache1kmRect;
 	
 	static {
-		// the
-		conjunctions.add("the");
-		conjunctions.add("der");
-		conjunctions.add("den");
-		conjunctions.add("die");
-		conjunctions.add("das");
-		conjunctions.add("la");
-		conjunctions.add("le");
-		conjunctions.add("el");
-		conjunctions.add("il");
-		// and
-		conjunctions.add("and");
-		conjunctions.add("und");
-		conjunctions.add("en");
-		conjunctions.add("et");
-		conjunctions.add("y");
-		conjunctions.add("и");
-		
-		// short - issues for perfect matching "Drive A"
-//		conjunctions.add("f");
-//		conjunctions.add("u");
-//		conjunctions.add("jl.");
-//		conjunctions.add("j");
-//		conjunctions.add("sk");
-//		conjunctions.add("w");
-//		conjunctions.add("a.");
-//		conjunctions.add("of");
-//		conjunctions.add("k");
-//		conjunctions.add("r");
-//		conjunctions.add("h");
-//		conjunctions.add("mc");
-//		conjunctions.add("sw");
-//		conjunctions.add("g");
-//		conjunctions.add("v");
-//		conjunctions.add("m");
-//		conjunctions.add("c.");
-//		conjunctions.add("r.");
-//		conjunctions.add("ct");
-//		conjunctions.add("e.");
-//		conjunctions.add("dr.");
-//		conjunctions.add("j.");		
-//		conjunctions.add("in");
-//		conjunctions.add("al");
-//		conjunctions.add("út");
-//		conjunctions.add("per");
-//		conjunctions.add("ne");
-//		conjunctions.add("p");
-//		conjunctions.add("et");
-//		conjunctions.add("s.");
-//		conjunctions.add("f.");
-//		conjunctions.add("t");
-//		conjunctions.add("fe");
-//		conjunctions.add("à");
-//		conjunctions.add("i");
-//		conjunctions.add("c");
-//		conjunctions.add("le");
-//		conjunctions.add("s");
-//		conjunctions.add("av.");
-//		conjunctions.add("den");
-//		conjunctions.add("dr");
-//		conjunctions.add("y");
 
 		commonWordsComparator = new Comparator<String>() {
 
@@ -162,11 +102,6 @@ public class SearchPhrase {
 		return fileRequest;
 	}
 	
-	public SearchPhrase generateNewPhrase(SearchPhrase phrase, BinaryMapIndexReader file) {
-		SearchPhrase nphrase = generateNewPhrase(phrase.getUnknownSearchPhrase(), phrase.getSettings());
-		nphrase.fileRequest = file;
-		return nphrase;
-	}
 	
 	
 	public SearchPhrase generateNewPhrase(String text, SearchSettings settings) {
@@ -213,6 +148,7 @@ public class SearchPhrase {
 		sp.words = foundWords;
 		sp.fullTextSearchPhrase = fullText;
 		sp.unknownSearchPhrase = textToSearch;
+		
 		sp.lastUnknownSearchWordComplete = isTextComplete(fullText) ;
 		if (!reg.matcher(textToSearch).find()) {
 			sp.firstUnknownSearchWord = sp.unknownSearchPhrase.trim();
@@ -222,7 +158,7 @@ public class SearchPhrase {
 			boolean first = true;
 			for (int i = 0; i < ws.length ; i++) {
 				String wd = ws[i].trim();
-				boolean conjunction = conjunctions.contains(wd.toLowerCase());
+				boolean conjunction = Abbreviations.isConjunction(wd.toLowerCase());
 				boolean lastAndIncomplete = i == ws.length - 1 && !sp.lastUnknownSearchWordComplete;
 				boolean decryptAbbreviations = needDecryptAbbreviations();
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
@@ -235,7 +171,19 @@ public class SearchPhrase {
 				}
 			}
 		}
+		sp.likelyAddressSearch = likelyAddressSearch(fullText) || !sp.lastUnknownSearchWordComplete;
 		return sp;
+	}
+
+	private boolean likelyAddressSearch(String fullText) {
+		// for now only simple check - we just check if it contains digit
+		for (int i = 0; i < fullText.length(); i++) {
+			char c = fullText.charAt(i);
+			if (c >= '0' && c <= '9') {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean needDecryptAbbreviations() {
@@ -249,6 +197,10 @@ public class SearchPhrase {
 			}
 		}
 		return false;
+	}
+	
+	public boolean isLikelyAddressSearch() {
+		return likelyAddressSearch;
 	}
 
 	public static List<String> splitWords(String w, List<String> ws, String delimiters) {
@@ -299,11 +251,22 @@ public class SearchPhrase {
 				genUnknownSearchPhrase.append(unknownWords.get(i)).append(" ");
 			}
 			sp.fullTextSearchPhrase = fullTextSearchPhrase; 
+			sp.likelyAddressSearch = likelyAddressSearch;
 			sp.unknownSearchPhrase = genUnknownSearchPhrase.toString().trim();
 		}
 		return sp;
 	}
 	
+	public String selectMainUnknownWordToSearch(List<String> searchWords) {
+		Collections.sort(searchWords, commonWordsComparator);
+		for (String s : searchWords) {
+			s = s.trim();
+			if (s.length() > 0) {
+				return s;
+			}
+		}
+		return "";
+	}
 	
 	private void calcMainUnknownWordToSearch() {
 		if (mainUnknownWordToSearch != null) {
@@ -419,14 +382,19 @@ public class SearchPhrase {
 	}
 	
 	public QuadRect get1km31Rect() {
-		if(cache1kmRect != null) {
+		if (cache1kmRect != null) {
 			return cache1kmRect;
 		}
 		LatLon l = getLastTokenLocation();
 		if (l == null) {
 			return null;
 		}
-		float coeff = (float) (1000 / MapUtils.getTileDistanceWidth(SearchRequest.ZOOM_TO_SEARCH_POI));
+		cache1kmRect= calculateBbox(1000, l);
+		return cache1kmRect;
+	}
+
+	public static QuadRect calculateBbox(int radiusMeters, LatLon l) {
+		float coeff = (float) (radiusMeters / MapUtils.getTileDistanceWidth(SearchRequest.ZOOM_TO_SEARCH_POI));
 		double tx = MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLongitude());
 		double ty = MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLatitude());
 		double topLeftX = Math.max(0, tx - coeff);
@@ -435,8 +403,7 @@ public class SearchPhrase {
 		double bottomRightX = Math.min(max, tx + coeff);
 		double bottomRightY = Math.min(max, ty + coeff);
 		double pw = MapUtils.getPowZoom(31 - SearchRequest.ZOOM_TO_SEARCH_POI);
-		cache1kmRect = new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
-		return cache1kmRect;
+		return new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
 	}
 	
 	
@@ -675,16 +642,16 @@ public class SearchPhrase {
 	}
 
 	public SearchWord getLastSelectedWord() {
-		if(words.isEmpty()) {
+		if (words.isEmpty()) {
 			return null;
 		}
 		return words.get(words.size() - 1);
 	}
 	
 	public LatLon getWordLocation() {
-		for(int i = words.size() - 1; i >= 0; i--) {
+		for (int i = words.size() - 1; i >= 0; i--) {
 			SearchWord sw = words.get(i);
-			if(sw.getLocation() != null) {
+			if (sw.getLocation() != null) {
 				return sw.getLocation();
 			}
 		}
@@ -692,13 +659,13 @@ public class SearchPhrase {
 	}
 	
 	public LatLon getLastTokenLocation() {
-		for(int i = words.size() - 1; i >= 0; i--) {
+		for (int i = words.size() - 1; i >= 0; i--) {
 			SearchWord sw = words.get(i);
-			if(sw.getLocation() != null) {
+			if (sw.getLocation() != null) {
 				return sw.getLocation();
 			}
 		}
-		// last token or myLocationOrVisibleMap if not selected 
+		// last token or myLocationOrVisibleMap if not selected
 		if (settings != null) {
 			return settings.getOriginalLocation();
 		}
@@ -845,7 +812,7 @@ public class SearchPhrase {
 				}
 				if (match) {
 					if (sr.otherWordsMatch == null) {
-						sr.otherWordsMatch = new TreeSet<>();
+						sr.otherWordsMatch = new TreeSet<>(getCollator());
 					}
 					sr.otherWordsMatch.add(otherUnknownWords.get(i));
 					r++;
@@ -957,5 +924,17 @@ public class SearchPhrase {
 		return lastUnknownSearchWordComplete;
 	}
 
+	public static String stripBraces(String localeName) {
+		int i = localeName.indexOf('(');
+		String retName = localeName;
+		if (i > -1) {
+			retName = localeName.substring(0, i);
+			int j = localeName.indexOf(')', i);
+			if (j > -1) {
+				retName = (retName.trim() + ' ' + localeName.substring(j + 1)).trim();
+			}
+		}
+		return retName;
+	}
 	
 }

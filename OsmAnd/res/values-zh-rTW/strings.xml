@@ -5710,4 +5710,21 @@
     <string name="save_and_access_articles_offline">儲存資料並隨時隨地離線閱讀文章</string>
     <string name="private_access_routing_req_short">允許使用私人道路抵達目的地？</string>
     <string name="download_wikipedia_label">下載維基百科</string>
+    <string name="quick_action_weather_layers">切換開關，用來顯示或隱藏地圖上的天氣圖層。</string>
+    <string name="quick_action_wind_animation_layer">用於顯示或隱藏地圖上風力動畫圖層的切換按鈕。</string>
+    <string name="wind_animation_layer">風力動畫圖層</string>
+    <string name="weather_layers">天氣圖層</string>
+    <string name="lang_crh">克里米亞韃靼語（拉丁）</string>
+    <string name="efficient_grid">高效能網格</string>
+    <string name="slots">插槽</string>
+    <string name="button_frames">按鈕框架</string>
+    <string name="visualizing_button_grid">地圖按鈕網格</string>
+    <string name="enable_3d_objects">啟用 3D 建築物</string>
+    <string name="enable_3d_objects_description">在地圖上顯示 3D 建築物物件</string>
+    <string name="deleted_maps_warning">您將要刪除 %d 個項目\n要繼續嗎？</string>
+    <string name="deleted_maps_prompt">這些地圖已不再受支援，並已被較小的區域取代。請移除它們並下載新版地圖。</string>
+    <string name="unsupported_maps">不受支援的地圖</string>
+    <string name="routing_attr_weightrating_name">滿載時的最大重量</string>
+    <string name="routing_attr_maxaxleload_name">最大軸重</string>
+    <string name="is_parking_time_limited">可停車的時間有限制嗎？</string>
 </resources>

@@ -247,7 +247,7 @@ public class NetworkRouteSelector {
 			return fromShieldTags(combinedExtensionsTags);
 		}
 
-		private static final Map<String, String> SHIELD_TO_OSMC = Map.ofEntries(
+		public static final Map<String, String> SHIELD_TO_OSMC = Map.ofEntries(
 				Map.entry("shield_bg", "osmc_background"),
 				Map.entry("shield_fg", "osmc_foreground"),
 				Map.entry("shield_fg_2", "osmc_foreground2"),
@@ -262,10 +262,15 @@ public class NetworkRouteSelector {
 					String osmc = entry.getValue();
 					String value = shieldTags.get(shield);
 					if (value != null) {
-						shieldTags.put(osmc, value
-								.replaceFirst("^osmc_", "")
-								.replaceFirst("_bg$", "")
-						);
+						if (shield.startsWith("shield_fg") && !value.startsWith("osmc_")) {
+							// Apply native OsmAnd shield_fg icon (OsmcIconParams.OSMAND_FOREGROUND)
+							shieldTags.put(osmc.replaceFirst("osmc_", "osmand_"), value);
+						} else {
+							shieldTags.put(osmc, value
+									.replaceFirst("^osmc_", "")
+									.replaceFirst("_bg$", "")
+							);
+						}
 					}
 				}
 				RouteKey tagsAsRouteKey = new RouteKey(OsmRouteType.UNKNOWN);

@@ -81,19 +81,4 @@ public class ImageCardsHolder {
 			cardsByType.put(type, cards);
 		}
 	}
-
-	public void updateWikiMetadata(@NonNull Map<String, Map<String, String>> metadataMap) {
-		LinkedHashMap<String, ImageCard> wikiImages = cardsByType.get(WIKIMEDIA);
-		if (wikiImages == null) {
-			return;
-		}
-		for (String key : metadataMap.keySet()) {
-			ImageCard card = wikiImages.get(key);
-			if (card instanceof WikiImageCard wikiImageCard) {
-				WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
-				WikiMetadata.INSTANCE.updateMetadata(metadataMap, metadata);
-				wikiImageCard.setMetaDataDownloaded(true);
-			}
-		}
-	}
 }

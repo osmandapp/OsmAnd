@@ -41,7 +41,7 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 		this.settingsHelper = app.getNetworkSettingsHelper();
 
 		initListeners();
-		rescheduleAutoBackup();
+		app.getAppInitializer().addOnFinishListener(initializer -> rescheduleAutoBackup());
 
 		intervalListener = value -> rescheduleAutoBackup();
 		settings.AUTO_BACKUP_INTERVAL_MS.addListener(intervalListener);
@@ -53,7 +53,11 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 		}
 	}
 
-	public void runAutoBackup() {
+	public void requestAutoBackup() {
+		app.getAppInitializer().addOnFinishListener(initializer -> runAutoBackup());
+	}
+
+	private void runAutoBackup() {
 		long currentTime = System.currentTimeMillis();
 		long lastAttemptTime = settings.LAST_AUTO_BACKUP_TIMESTAMP.get();
 		long elapsedMillis = currentTime - lastAttemptTime;
@@ -137,7 +141,7 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 				app.getFavoritesHelper().addListener(new FavoritesListener() {
 					@Override
 					public void onSavingFavoritesFinished() {
-						runAutoBackup();
+						requestAutoBackup();
 					}
 				});
 			}

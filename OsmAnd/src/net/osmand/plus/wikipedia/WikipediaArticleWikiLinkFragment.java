@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
+import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -128,7 +130,13 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 			updateIndexFiles();
 			items.add(downloadWikiItem);
 		} else {
-			Drawable osmandLiveIcon = getIcon(R.drawable.ic_action_wikipedia_download_colored_day, 0);
+			int iconRes;
+			if (nightMode) {
+				iconRes = R.drawable.ic_action_wikipedia_download_colored_night;
+			} else {
+				iconRes = R.drawable.ic_action_wikipedia_download_colored_day;
+			}
+			Drawable osmandLiveIcon = getIcon(iconRes);
 			BaseBottomSheetItem wikiArticleOfflineItem = new BottomSheetItemWithDescription.Builder()
 					.setDescription(getString(R.string.save_and_access_articles_offline))
 					.setIcon(osmandLiveIcon)
@@ -137,7 +145,7 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 					.setOnClickListener(v -> {
 						FragmentActivity activity = getActivity();
 						if (activity != null) {
-							ChoosePlanFragment.showInstance(activity, OsmAndFeature.WIKIVOYAGE);
+							ChoosePlanFragment.showInstance(activity, OsmAndFeature.WIKIPEDIA);
 						}
 						dismiss();
 					})
@@ -191,6 +199,16 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 						});
 						dismiss();
 						return true;
+					}, new ResultMatcher<>() {
+						@Override
+						public boolean publish(Amenity object) {
+							return true;
+						}
+
+						@Override
+						public boolean isCancelled() {
+							return !isAdded();
+						}
 					});
 				}
 			}

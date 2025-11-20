@@ -57,8 +57,7 @@ public class AmenityExtensionsHelper {
 	}
 
 	@NonNull
-	public Map<String, String> getUpdatedAmenityExtensions(@NonNull Map<String, String> extensions,
-			@Nullable Amenity amenity) {
+	public Map<String, String> getUpdatedAmenityExtensions(@NonNull Map<String, String> extensions, @Nullable Amenity amenity) {
 		Map<String, String> updatedExtensions = new HashMap<>();
 		for (Map.Entry<String, String> entry : extensions.entrySet()) {
 			String key = entry.getKey();
@@ -115,7 +114,7 @@ public class AmenityExtensionsHelper {
 
 		List<String> metrics = new ArrayList<>();
 		if (distMeters > 0) {
-			metrics.add(dist);
+			metrics.add(TrkSegment.SegmentSlopeType.FLAT.getSymbol() + dist);
 			if (upMeters >= MIN_UPHILL_DOWNHILL_FIXED_TO_SHOW &&
 					upMeters / distMeters * 100 > MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW) {
 				metrics.add(TrkSegment.SegmentSlopeType.UPHILL.getSymbol() + uphill);

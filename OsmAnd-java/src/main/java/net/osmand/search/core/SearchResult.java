@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -22,12 +23,15 @@ public class SearchResult {
 
 	public static final String DELIMITER = " ";
 	private static final String HYPHEN = "-";
-	private static final int NEAREST_METERS_LIMIT = 30000;
+	static final int NEAREST_METERS_LIMIT = 30000;
 	
 	// MAX_TYPES_BASE_10 should be > ObjectType.getTypeWeight(objectType) = 5
 	public static final double MAX_TYPES_BASE_10 = 10;
 	// MAX_PHRASE_WEIGHT_TOTAL should be  > getSumPhraseMatchWeight
 	public static final double MAX_PHRASE_WEIGHT_TOTAL = MAX_TYPES_BASE_10 * MAX_TYPES_BASE_10;
+	
+	private static final int MIN_ELO_RATING = 1800;
+	private static final int MAX_ELO_RATING = 4300;
 
 	// search phrase that makes search result valid
 	public SearchPhrase requiredSearchPhrase;
@@ -50,6 +54,7 @@ public class SearchResult {
 
 	public String localeName;
 	public String alternateName;
+	public String addressName;
 	public String cityName;
 	public Collection<String> otherNames;
 
@@ -81,58 +86,98 @@ public class SearchResult {
 		if (unknownPhraseMatchWeight != 0) {
 			return unknownPhraseMatchWeight;
 		}
-		// normalize number to get as power, so we get numbers > 1
-		unknownPhraseMatchWeight = getSumPhraseMatchWeight() / Math.pow(MAX_PHRASE_WEIGHT_TOTAL, getDepth() - 1);
+		unknownPhraseMatchWeight = getSumPhraseMatchWeight(null);
 		return unknownPhraseMatchWeight;
 	}
 
-	private double getSumPhraseMatchWeight() {
-		double res = ObjectType.getTypeWeight(objectType);
+	private double getSumPhraseMatchWeight(SearchResult exactResult) {
+		double res = getTypeWeight(exactResult, objectType);
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
 		} else if (objectType == ObjectType.POI_TYPE) {
 			// don't overload with poi types
 		} else {
 			CheckWordsMatchCount completeMatchRes = new CheckWordsMatchCount();
-			boolean matched = false;
-			matched = allWordsMatched(localeName, completeMatchRes);
+			boolean matched = localeName != null && allWordsMatched(localeName, exactResult, completeMatchRes);
+			// incorrect fix
+//			if (!matched && object instanceof Street s) { // parentSearchResult == null &&
+//				matched = allWordsMatched(localeName + " " + s.getCity().getName(requiredSearchPhrase.getSettings().getLang()), exactResult, completeMatchRes);
+//			}
 			if (!matched && alternateName != null && !Algorithms.objectEquals(cityName, alternateName)) {
-				matched = allWordsMatched(alternateName, completeMatchRes);
+				matched = allWordsMatched(alternateName, exactResult, completeMatchRes);
 			}
 			if (!matched && otherNames != null) {
 				for (String otherName : otherNames) {
-					if (allWordsMatched(otherName, completeMatchRes)) {
+					if (allWordsMatched(otherName, exactResult, completeMatchRes)) {
 						matched = true;
 						break;
 					}
 				}
 			}
+			City selectedCity = null;
+			if (exactResult != null && exactResult.object instanceof Street s) {
+				selectedCity = s.getCity();
+			} else if (exactResult != null && 
+					exactResult.parentSearchResult != null && exactResult.parentSearchResult.object instanceof Street s) {
+				selectedCity = s.getCity();
+			}
+			if (matched && selectedCity != null && object instanceof City c) {
+				// city don't match because of boundary search -> lower priority
+				if (!Algorithms.objectEquals(selectedCity.getName(), c.getName())) {
+					matched = false;
+					// for unmatched cities calculate how close street is to boundary
+					// 1 - very close, 0 - very far
+					int[] bbox31 = selectedCity.getBbox31();
+					LatLon latlon = selectedCity.getLocation();
+					if (bbox31 != null) {
+						// even center is shifted probably best to do combination of bbox & center
+						double lon = MapUtils.get31LongitudeX(bbox31[0] / 2 + bbox31[2] / 2);
+						double lat = MapUtils.get31LatitudeY(bbox31[1] / 2 + bbox31[3] / 2);
+						latlon = new LatLon(lat, lon);
+					}
+					res += 100 / Math.max(100, MapUtils.getDistance(location, latlon));
+				}
+			}
 			// if all words from search phrase match (<) the search result words - we prioritize it higher
-			if (completeMatchRes.allWordsInPhraseAreInResult) {
-				res = getPhraseWeightForCompleteMatch(completeMatchRes);
+			if (matched) {
+				res = getPhraseWeightForCompleteMatch(exactResult, completeMatchRes);
+			}
+			if (object instanceof Amenity a) {
+				int elo = a.getTravelEloNumber();
+				if (elo > MIN_ELO_RATING) {
+					double rat = ((double)elo - MIN_ELO_RATING) / (MAX_ELO_RATING - MIN_ELO_RATING);
+					res += rat * MAX_PHRASE_WEIGHT_TOTAL * 2 / 3; 
+				}
 			}
 		}
 		if (parentSearchResult != null) {
 			// parent search result should not change weight of current result, so we divide by MAX_TYPES_BASE_10^2
-			res = res + parentSearchResult.getSumPhraseMatchWeight() / (MAX_PHRASE_WEIGHT_TOTAL);
+			res = res + parentSearchResult.getSumPhraseMatchWeight(exactResult == null ? this : exactResult) / (MAX_PHRASE_WEIGHT_TOTAL);
 		}
 		return res;
 	}
 
-	private double getPhraseWeightForCompleteMatch(CheckWordsMatchCount completeMatchRes) {
-		double res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10;
+	private double getPhraseWeightForCompleteMatch(SearchResult exactResult, CheckWordsMatchCount completeMatchRes) {
+		double res = getTypeWeight(exactResult, objectType) * MAX_TYPES_BASE_10;
 		// if all words from search phrase == the search result words - we prioritize it even higher
-		if (completeMatchRes.allWordsEqual && requiredSearchPhrase.getLastTokenLocation() != null && this.location != null) {
-			boolean closeDistance = MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(),
-					this.location) <= NEAREST_METERS_LIMIT;
-			if (objectType == ObjectType.CITY || objectType == ObjectType.VILLAGE || closeDistance) {
-				res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10 + MAX_PHRASE_WEIGHT_TOTAL / 2;
+		if (completeMatchRes.allWordsEqual) {
+			boolean closeDistance = requiredSearchPhrase.getLastTokenLocation() != null && this.location != null 
+					&& MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(), this.location) <= NEAREST_METERS_LIMIT;
+			if (objectType != ObjectType.POI || closeDistance) {
+				res = getTypeWeight(exactResult, objectType) * MAX_TYPES_BASE_10 + MAX_PHRASE_WEIGHT_TOTAL / 2;
 			}
 		}
 		return res;
 	}
 	
 	
+
+	private double getTypeWeight(SearchResult exactResult, ObjectType ot) {
+		if (exactResult == null && !requiredSearchPhrase.isLikelyAddressSearch()) {
+			return 1;
+		}
+		return ObjectType.getTypeWeight(ot);
+	}
 
 	public int getDepth() {
 		if (parentSearchResult != null) {
@@ -149,9 +194,13 @@ public class SearchResult {
 		return inc;
 	}
 
-	private boolean allWordsMatched(String name, CheckWordsMatchCount cnt) {
+	private boolean allWordsMatched(String name, SearchResult exactResult, CheckWordsMatchCount cnt) {
 		List<String> searchPhraseNames = getSearchPhraseNames();
+		name = CollatorStringMatcher.alignChars(name);
 		List<String> localResultNames;
+		if (!Algorithms.isEmpty(name) && name.indexOf('(') != -1) {
+			name = SearchPhrase.stripBraces(name);
+		}
 		if (!requiredSearchPhrase.getFullSearchPhrase().contains(HYPHEN)) {
 			// we split '-' words in result, so user can input same without '-'
 			localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS_WITH_HYPHEN);
@@ -163,6 +212,17 @@ public class SearchResult {
 		if (searchPhraseNames.isEmpty()) {
 			return false;
 		}
+		while (exactResult != null && exactResult != this) {
+			List<String> lst = exactResult.getSearchPhraseNames();
+			for (String l : lst) {
+				int i = searchPhraseNames.indexOf(l);
+				if (i != -1) {
+					searchPhraseNames.remove(i);
+				}
+			}
+			exactResult = exactResult.parentSearchResult;
+		}
+		
 		int idxMatchedWord = -1;
 		for (String searchPhraseName : searchPhraseNames) {
 			wordMatched = false;
@@ -196,10 +256,24 @@ public class SearchResult {
 		String fw = requiredSearchPhrase.getFirstUnknownSearchWord();
 		List<String> ow = requiredSearchPhrase.getUnknownSearchWords();
 		if (fw != null && fw.length() > 0) {
-			searchPhraseNames.add(fw);
+			searchPhraseNames.add(CollatorStringMatcher.alignChars(fw));
 		}
 		if (ow != null) {
-			searchPhraseNames.addAll(ow);
+			for(String o : ow) {
+				searchPhraseNames.add(CollatorStringMatcher.alignChars(o));
+			}
+			
+		}
+		// when parent result was recreated with same phrase (it doesn't have preselected word)
+		// SearchCoreFactory.subSearchApiOrPublish
+		if (parentSearchResult != null && requiredSearchPhrase == parentSearchResult.requiredSearchPhrase
+				&& parentSearchResult.getOtherWordsMatch() != null) {
+			for (String s : parentSearchResult.getOtherWordsMatch()) {
+				int i = searchPhraseNames.indexOf(CollatorStringMatcher.alignChars(s));
+				if (i != -1) {
+					searchPhraseNames.remove(i);
+				}
+			}
 		}
 
 		return searchPhraseNames;
@@ -320,5 +394,27 @@ public class SearchResult {
 
 	public boolean isFullPhraseEqualLocaleName() {
 		return requiredSearchPhrase.getFullSearchPhrase().equalsIgnoreCase(localeName);
+	}
+
+	public List<String> filterUnknownSearchWord(List<String> leftUnknownSearchWords) {
+		if (leftUnknownSearchWords == null) {
+			leftUnknownSearchWords = new ArrayList<String>(requiredSearchPhrase.getUnknownSearchWords());
+			leftUnknownSearchWords.add(0, requiredSearchPhrase.getFirstUnknownSearchWord());
+		}
+		if (firstUnknownWordMatches) {
+			leftUnknownSearchWords.remove(requiredSearchPhrase.getFirstUnknownSearchWord());
+		}
+		if (otherWordsMatch != null) {
+//			removeAll(res.otherWordsMatch); // incorrect 
+			for (String otherWord : otherWordsMatch) {
+				int ind = firstUnknownWordMatches ? leftUnknownSearchWords.indexOf(otherWord)
+						: leftUnknownSearchWords.lastIndexOf(otherWord);
+				if (ind != -1) {
+					leftUnknownSearchWords.remove(ind); // remove 1 by 1
+				}
+			}
+		}
+		
+		return leftUnknownSearchWords;
 	}
 }

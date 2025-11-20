@@ -15,11 +15,13 @@ import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.shared.gpx.primitives.WptPt;
 
+import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PointImageUtils {
 
-	private static final TreeMap<String, PointImageDrawable> DRAWABLE_CACHE = new TreeMap<>();
+	private static final Map<String, PointImageDrawable> DRAWABLE_CACHE = new ConcurrentHashMap<>();
 
 	@NonNull
 	private static PointImageDrawable getOrCreate(@NonNull Context context, @NonNull PointImageInfo info) {
@@ -30,9 +32,11 @@ public class PointImageUtils {
 		uniqueId = hash + uniqueId;
 		PointImageDrawable drawable = DRAWABLE_CACHE.get(uniqueId);
 		if (drawable == null) {
-			drawable = new PointImageDrawable(context, info);
-			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-			DRAWABLE_CACHE.put(uniqueId, drawable);
+			synchronized (PointImageUtils.class) {
+				drawable = new PointImageDrawable(context, info);
+				drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+				DRAWABLE_CACHE.put(uniqueId, drawable);
+			}
 		}
 		return drawable;
 	}

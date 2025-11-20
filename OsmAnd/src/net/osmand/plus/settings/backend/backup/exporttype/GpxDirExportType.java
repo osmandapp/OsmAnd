@@ -1,20 +1,22 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
+import static net.osmand.shared.gpx.GpxParameter.APPEARANCE_LAST_MODIFIED_TIME;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
-import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.GpxDirSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.shared.gpx.GpxDirItem;
+import net.osmand.shared.io.KFile;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,7 +35,15 @@ public class GpxDirExportType extends AbstractExportType {
 	@NonNull
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
-		return app.getGpxDbHelper().getDirItems();
+		List<GpxDirItem> items = new ArrayList<>();
+		for (GpxDirItem item : app.getGpxDbHelper().getDirItems()) {
+			KFile file = item.getFile();
+			Long time = item.getParameter(APPEARANCE_LAST_MODIFIED_TIME);
+			if (file.exists() && time != null && time > 0) {
+				items.add(item);
+			}
+		}
+		return items;
 	}
 
 	@NonNull

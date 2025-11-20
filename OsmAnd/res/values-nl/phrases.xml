@@ -528,8 +528,8 @@
     <string name="poi_military_naval_base">Militaire marinebasis</string>
     <string name="poi_man_made">Kunstmatig</string>
     <string name="poi_service">Dienst</string>
-    <string name="poi_rugby_union">Rugby bond</string>
-    <string name="poi_rugby_league">Rugby competitie</string>
+    <string name="poi_rugby_union">Rugby Union</string>
+    <string name="poi_rugby_league">Rugby league</string>
     <string name="poi_toboggan">Rodelen</string>
     <string name="poi_artwork">Kunst</string>
     <string name="poi_boundary_stone">Grenspaal</string>
@@ -4245,4 +4245,5 @@
     <string name="poi_socket_type2_voltage_high">Hoog</string>
     <string name="poi_climbing_rock_basalt">Klimrots: basalt</string>
     <string name="poi_climbing_rock_conglomerate">Klimrots: conglomeraat</string>
+    <string name="x">X (voorheen Twitter)</string>
 </resources>

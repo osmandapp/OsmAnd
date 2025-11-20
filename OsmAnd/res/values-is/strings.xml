@@ -5875,4 +5875,22 @@
     <string name="help_article_navigation_routing_ski_routing_name">Skíðabrekkur og leiðir</string>
     <string name="rendering_attr_pisteRoutes_name">Skíðabrekkur og leiðir</string>
     <string name="download_wikipedia_label">Sækja Wikipedíu</string>
+    <string name="is_parking_time_limited">Er tímatakmörkun á bílastæði?</string>
+    <string name="efficient_grid">Gagnlegt hnitanet</string>
+    <string name="slots">Hólf</string>
+    <string name="button_frames">Rammar hnappa</string>
+    <string name="visualizing_button_grid">Hnitanet kortahnappa</string>
+    <string name="routing_attr_weightrating_name">Hámarksþyngd með fulla hleðslu</string>
+    <string name="routing_attr_maxaxleload_name">Hámarks öxulþungi</string>
+    <string name="deleted_maps_warning">Þú ert um það bil að eyða %d atriði/atriðum\nViltu halda áfram?</string>
+    <string name="unsupported_maps">Óstudd kort</string>
+    <string name="quick_action_weather_layers">Víxlhnappur til að birta eða fela veðurlög á kortinu.</string>
+    <string name="quick_action_wind_animation_layer">Víxlhnappur til að birta eða fela vindhreyfingalag á kortinu.</string>
+    <string name="wind_animation_layer">Vindalag með hreyfingu</string>
+    <string name="weather_layers">Veðurlög</string>
+    <string name="enable_3d_objects">Virkja þrívíddarbyggingar</string>
+    <string name="enable_3d_objects_description">Birta þrívíddarbyggingar á kortinu</string>
+    <string name="lang_crh">Tataríska frá Krím (latnesk)</string>
+    <string name="deleted_maps_prompt">Ekki er lengur stuðningur við þessi kort og hefur þeim verið skipt út fyrir smærri svæði. Fjarlægðu þau og sæktu nýju útgáfurnar.</string>
+    <string name="release_5_0">• Finndu vinsæla merkisstaði með nýja uppgötvunarhamnum\n\n • Allar OSM-leiðir eru núna leitanlegar! Ganga, hjólreiðar, fjallahjól og fleira\n\n • Nýr leiðsagnarhluti sameinar beygjuörvar og leiðbeiningar\n\n • Núverandi viðmótshluti vegupplýsinga: Birtir ETA, komutíma og vegalengd\n\n • Veldu skíða- og and fjallahjólaleiðir á kortinu til að fá nákvæmar upplýsingar\n\n • Hægt að velja stærð viðmótshluta fyrir vinstri og hægri spjöld\n\n • Bætt við hnitamöskva með landfræðilegum hnitum\n\n • Bætt við möguleika á að sérsníða sjálfgefið útlit eftirlætishópa\n\n • Android Auto: skoða áætlaðan komutíma (ETA) og vegalengd að næsta ferilpunkti; nöfn borga birtast núna í leitarniðurstöðum\n\n • Hægt að finna staka fjallstinda á korti og með leit\n\n • Hæðir fjallatinda í fetum\n\n • Bætt við: Klettar og klifursvæði á kortinu\n\n • Leit að heimilisföngum í BNA hefur verið bætt\n\n • Bætt við TTS fyrir hebresku í raddleiðsögn</string>
 </resources>

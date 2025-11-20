@@ -56,7 +56,11 @@ public class RenderedObjectMenuController extends MenuController {
 	}
 
 	private void setRenderedObject(@NonNull RenderedObject renderedObject) {
+		nameStr = null;
 		this.renderedObject = renderedObject;
+		if (builder instanceof RenderedObjectMenuBuilder menuBuilder) {
+			menuBuilder.updateRenderedObject(renderedObject);
+		}
 	}
 
 	@Override
@@ -289,7 +293,7 @@ public class RenderedObjectMenuController extends MenuController {
 	@Nullable
 	private String getIconRes() {
 		if (mapPoiTypes != null && renderedObject.isPolygon()) {
-			Map<String, String> t  = renderedObject.getTags();
+			Map<String, String> t = renderedObject.getTags();
 			for (Map.Entry<String, String> e : t.entrySet()) {
 				PoiType pt = mapPoiTypes.getPoiTypeByKey(e.getValue());
 				if (pt != null) {

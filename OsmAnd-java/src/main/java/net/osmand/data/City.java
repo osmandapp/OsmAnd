@@ -17,7 +17,7 @@ public class City extends MapObject {
 		TOWN(4000, 20000), // 1. Town
 		VILLAGE(1300, 1000), // 2. Village 
 		HAMLET(1000, 100), // 3. Hamlet - Small village
-		SUBURB(400, 5000), // 4. Mostly district of the city (introduced to avoid duplicate streets in city) - 
+		SUBURB(1500, 5000), // 4. Mostly district of the city (introduced to avoid duplicate streets in city) - 
 						   // however BOROUGH, DISTRICT, NEIGHBOURHOOD could be used as well for that purpose
 						   // Main difference stores own streets to search and list by it  
 		// 5.2 stored in city / villages sections written as city type
@@ -26,10 +26,10 @@ public class City extends MapObject {
 		POSTCODE(500, 1000), // 6. write this could be activated after 5.2 release
 		
 		// not stored entities but registered to uniquely identify streets as SUBURB
-		BOROUGH(400, 2500),  
-		DISTRICT(400, 10000),
-		NEIGHBOURHOOD(300, 500),
-		CENSUS(400, 2500),
+		BOROUGH(2000, 2500),  
+		DISTRICT(1000, 10000),
+		NEIGHBOURHOOD(500, 500),
+		CENSUS(2000, 2500),
 		;
 		
 		private final double radius;
@@ -76,9 +76,6 @@ public class City extends MapObject {
 		public static CityType valueFromString(String place) {
 			if (place == null) {
 				return null;
-			}
-			if ("township".equals(place)) {
-				return CityType.TOWN;
 			}
 			if ("township".equals(place)) {
 				return CityType.TOWN;
@@ -242,6 +239,9 @@ public class City extends MapObject {
 		if (postcode != null) {
 			json.put("postcode", postcode);
 		}
+		if (bbox31 != null) {
+			json.put("bbox31", Arrays.toString(bbox31));
+		}
 		JSONArray listOfStreetsArr = new JSONArray();
 		for (Street s : listOfStreets) {
 			listOfStreetsArr.put(s.toJSON(includingBuildings));
@@ -263,6 +263,63 @@ public class City extends MapObject {
 
 		if (json.has("postcode")) {
 			c.postcode = json.getString("postcode");
+		}
+		if (json.has("bbox31")) {
+			Object bboxValue = json.get("bbox31");
+			int[] parsedBbox = null;
+			if (bboxValue instanceof JSONArray bboxArray) {
+				if (bboxArray.length() >= 4) {
+					int[] buffer = new int[4];
+					boolean valid = true;
+					for (int i = 0; i < buffer.length; i++) {
+						Object value = bboxArray.get(i);
+						if (value instanceof Number) {
+							buffer[i] = ((Number) value).intValue();
+						} else {
+							valid = false;
+							break;
+						}
+					}
+					if (valid) {
+						parsedBbox = buffer;
+					}
+				}
+			} else if (bboxValue instanceof String) {
+				String bboxString = ((String) bboxValue).trim();
+				if (!bboxString.isEmpty()) {
+					String normalized = bboxString;
+					if (normalized.startsWith("[")) {
+						normalized = normalized.substring(1);
+					}
+					if (normalized.endsWith("]")) {
+						normalized = normalized.substring(0, normalized.length() - 1);
+					}
+					String[] parts = normalized.split(",");
+					if (parts.length >= 4) {
+						int[] buffer = new int[4];
+						boolean valid = true;
+						for (int i = 0; i < buffer.length; i++) {
+							String part = parts[i].trim();
+							if (Algorithms.isEmpty(part)) {
+								valid = false;
+								break;
+							}
+							try {
+								buffer[i] = Integer.parseInt(part);
+							} catch (NumberFormatException ex) {
+								valid = false;
+								break;
+							}
+						}
+						if (valid) {
+							parsedBbox = buffer;
+						}
+					}
+				}
+			}
+			if (parsedBbox != null) {
+				c.bbox31 = parsedBbox;
+			}
 		}
 		if (json.has("listOfStreets")) {
 			JSONArray streetsArr = json.getJSONArray("listOfStreets");

@@ -474,9 +474,13 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	public boolean isAnyDataVisible() {
-		boolean isContoursEnabled = isAnyWeatherContourLinesEnabled();
-		boolean isAnyLayerEnabled = weatherHelper.hasVisibleBands();
-		return isWeatherEnabled() && (isAnyLayerEnabled || isContoursEnabled);
+		WeatherContourLayer weatherContourLayer = this.weatherContourLayer;
+		boolean shouldDrawContoursLayer = weatherContourLayer != null && weatherContourLayer.shouldDrawLayer();
+		WeatherRasterLayer weatherLayerHigh = this.weatherLayerHigh;
+		WeatherRasterLayer weatherLayerLow = this.weatherLayerLow;
+		boolean shouldDrawRasterLayers = weatherLayerHigh != null && weatherLayerHigh.shouldDrawLayer()
+				|| weatherLayerLow != null && weatherLayerLow.shouldDrawLayer();
+		return shouldDrawRasterLayers || shouldDrawContoursLayer;
 	}
 
 	public boolean isContoursEnabled() {

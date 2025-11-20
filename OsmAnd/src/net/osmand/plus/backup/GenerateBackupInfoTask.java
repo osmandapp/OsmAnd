@@ -121,8 +121,8 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 			boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName());
 			boolean toDelete = info.localFilesToDelete.contains(localFile);
 			if (!hasRemoteFile && !toDelete) {
-				boolean isEmpty = localFile.item instanceof CollectionSettingsItem<?> && ((CollectionSettingsItem<?>) localFile.item).isEmpty();
-				if (!isEmpty) {
+				boolean shouldSkip = shouldSkip(localFile);
+				if (!shouldSkip) {
 					info.filesToUpload.add(localFile);
 				}
 			}
@@ -160,6 +160,13 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 		}
 		operationLog.log("=== filesToMerge ===");
 		return info;
+	}
+
+	private boolean shouldSkip(@NonNull LocalFile localFile) {
+		if (localFile.item instanceof CollectionSettingsItem<?> collectionItem) {
+			return collectionItem.isEmpty();
+		}
+		return false;
 	}
 
 	@Override

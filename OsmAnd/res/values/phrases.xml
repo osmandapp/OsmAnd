@@ -193,6 +193,7 @@
 	<string name="poi_cafe_filter">Cafe</string>
 	<string name="poi_network_foot">Routes network (hiking)</string>
 	<string name="poi_network_cycling">Routes network (cycling)</string>
+	<string name="poi_sample_collection_filter">Sample collection</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -398,7 +399,7 @@
 	<string name="poi_traffic_signals">Stop light</string>
 
 	<string name="poi_car_repair">Car repair</string>
-	<string name="poi_service_tyres">Tyres;Tire</string>
+	<string name="poi_service_tyres">Tyres;Tire;Tires</string>
 	<string name="poi_vehicle_inspection">Vehicle inspection</string>
 	<string name="poi_car_wash">Car wash</string>
 	<string name="poi_fuel">Gas station;Gasoline station;Filling station;Petrol station</string>
@@ -660,6 +661,7 @@
 	<string name="poi_prison">Prison</string>
 	<string name="poi_register_office">Civil registry office</string>
 	<string name="poi_embassy">Embassy</string>
+	<string name="poi_consulate">Consulate</string>
 	<string name="poi_government">Government</string>
 	<string name="poi_bailiff">Bailiff</string>
 	<string name="poi_prosecutor">Prosecutor</string>
@@ -804,9 +806,6 @@
 	<string name="poi_archaeological_site">Archaeological site</string>
 	<string name="poi_battlefield">Battlefield</string>
 	<string name="poi_boundary_stone">Boundary stone</string>
-	<string name="poi_historic_aircraft">Historic aircraft</string>
-	<string name="poi_historic_cannon">Historic cannon</string>
-	<string name="poi_historic_tank">Historic tank</string>
 	<string name="poi_castle">Castle</string>
 	<string name="poi_city_gate">City gate</string>
 	<string name="poi_fort">Fort</string>
@@ -814,7 +813,11 @@
 	<string name="poi_historic_ruins">Historic ruins</string>
 	<string name="poi_rune_stone">Rune stone</string>
 	<string name="poi_wreck">Shipwreck</string>
+	<string name="poi_historic_aircraft">Historic aircraft</string>
+	<string name="poi_historic_cannon">Historic cannon</string>
+	<string name="poi_historic_tank">Historic tank</string>
 	<string name="poi_historic_ship">Historic ship</string>
+	<string name="poi_historic_spacecraft">Historic spacecraft</string>
 	<string name="poi_historic_mine">Historic mine</string>
 	<string name="poi_monument">Monument</string>
 	<string name="poi_zoo">Zoo</string>
@@ -1278,12 +1281,13 @@
 	<string name="poi_military_airfield">Military airfield</string>
 	<string name="poi_military_bunker">Military bunker</string>
 	<string name="poi_military_barracks">Barracks</string>
+	<string name="poi_military_checkpoint">Military checkpoint</string>
 	<string name="poi_military_danger_area">Danger area</string>
 	<string name="poi_military_range">Military range</string>
 	<string name="poi_military_office">Military office</string>
 	<string name="poi_military_naval_base">Military naval base</string>
 	<string name="poi_military_nuclear_explosion_site">Nuclear explosion site</string>
-
+		
 	<string name="poi_wiki_place">Wikipedia</string>
 	<string name="poi_wiki_lang_en">English wiki</string>
 	<string name="poi_wiki_lang_ar">Arabic wiki</string>
@@ -1436,8 +1440,9 @@
 	<string name="poi_email">Email</string>
 	<string name="poi_fax">Fax</string>
 	<string name="facebook">Facebook</string>
-        <string name="reddit">Reddit</string>
+	<string name="reddit">Reddit</string>
 	<string name="twitter">Twitter</string>
+	<string name="x">X (formerly Twitter)</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
@@ -3142,8 +3147,6 @@
 	<string name="poi_street_cabinet_water_management">Cabinet type: water management</string>
 	<string name="poi_street_cabinet_street_lighting">Cabinet type: street lighting</string>
 
-	<string name="poi_military_checkpoint">Military checkpoint</string>
-
 	<string name="poi_bicycle_parking_lockers">Lockers</string>
 	<string name="poi_bicycle_parking_tree">Bicycle tree</string>
 	<string name="poi_bicycle_parking_streetpod">Streetpod</string>
@@ -3188,6 +3191,7 @@
 	<string name="poi_aerodrome_type_military">Military</string>
 	<string name="poi_aerodrome_type_military_public">Military/public</string>
 	<string name="poi_aerodrome_type_private">Private</string>
+	<string name="poi_aerodrome_type_airfield">Airfield</string>
 
 	<string name="poi_valley_balka">Balka</string>
 
@@ -5199,6 +5203,9 @@
 	<string name="poi_barrier_board">Barrier board</string>
 	<string name="poi_barrier_tyres">Tyres</string>
 	<string name="poi_tank_trap">Tank trap</string>
+	<string name="poi_barrier_chain">Chain barrier</string>
+	<string name="poi_barrier_log">Log</string>
+	<string name="poi_barrier_sliding_gate">Sliding gate</string>
 
 	<string name="poi_toy_library">Toy library</string>
 
@@ -5652,17 +5659,23 @@
 	<string name="poi_presbyterian_church">Presbyterian church</string>
 	<string name="poi_access_main_tag">Access</string>
 
-	<string name="poi_aerodrome_type_airfield">Airfield</string>
-
-	<string name="poi_consulate">Consulate</string>
-
-	<string name="poi_hazard_additional_landslide">Hazard: landslide</string>
-	<string name="poi_hazard_additional_yes">Hazard</string>
 	<string name="poi_hazard_falling_rocks">Falling rocks</string>
 	<string name="poi_hazard_contamination">Contamination</string>
-	<string name="poi_hazard_yes">Hazard</string>
-	<string name="poi_hazard_additional_slippery_road">Slippery road</string>
-
+	<string name="poi_hazard_landslide">Landslide</string>
+	<string name="poi_hazard_hole">Hole</string>
+	<string name="poi_hazard_curve">Curve</string>
+	<string name="poi_hazard_curves">Curves</string>
+	<string name="poi_hazard_pedestrians">Pedestrians</string>
+	<string name="poi_hazard_children">Children</string>
+	<string name="poi_hazard_animal_crossing">Animal crossing</string>
+	<string name="poi_hazard_dangerous_junction">Dangerous junction</string>
+	<string name="poi_hazard_school_zone">School zone</string>
+	<string name="poi_hazard_cyclists">Cyclists</string>
+	<string name="poi_hazard_shooting_range">Shooting range</string>
+	<string name="poi_hazard_queues_likely">Queues likely</string>
+	<string name="poi_hazard_side_winds">Side winds</string>
+	<string name="poi_hazard_ice">Ice</string>
+	
 	<string name="poi_steps">Steps</string>
 	<string name="poi_footway">Walkway</string>
 	<string name="poi_area_highway">Mobility area</string>
@@ -5708,7 +5721,6 @@
 	<string name="poi_southern_baptist_church">Southern baptist church</string>
 	<string name="poi_congregational_church">Congregational church</string>
 	<string name="poi_spiritist_church">Spiritist church</string>
-
 	<string name="poi_christian_church">Christian church</string>
 
 	<string name="poi_financial_advisor">Financial advisor</string>
@@ -5741,23 +5753,8 @@
 	<string name="poi_canoe_put_in_egress">Canoe launch and take-out</string>
 	<string name="poi_whitewater_hazard">Whitewater hazard</string>
 
-	<string name="poi_hazard_additional_hole">Hole</string>
-	<string name="poi_hazard_additional_curve">Curve</string>
-	<string name="poi_hazard_additional_curves">Curves</string>
-	<string name="poi_hazard_additional_pedestrians">Pedestrians</string>
-	<string name="poi_hazard_additional_children">Children</string>
-	<string name="poi_hazard_additional_animal_crossing">Animal crossing</string>
-	<string name="poi_hazard_additional_dangerous_junction">Dangerous junction</string>
-	<string name="poi_hazard_additional_school_zone">School zone</string>
-	<string name="poi_hazard_additional_cyclists">Cyclists</string>
-	<string name="poi_hazard_additional_shooting_range">Shooting range</string>
-	<string name="poi_hazard_additional_queues_likely">Queues likely</string>
-	<string name="poi_hazard_additional_side_winds">Side winds</string>
-	<string name="poi_hazard_additional_ice">Ice</string>
-
-	<string name="poi_historic_spacecraft">Historic spacecraft</string>
-	<string name="poi_barrier_chain">Chain barrier</string>
-	<string name="poi_barrier_log">Log</string>
-	<string name="poi_barrier_sliding_gate">Sliding gate</string>
-
+	<string name="poi_sample_collection">Sample collection</string>
+	<string name="poi_sample_collection_yes">Yes</string>
+	<string name="poi_sample_collection_covid19">COVID19</string>
+	<string name="poi_sample_collection_blood">Blood</string>
 </resources>

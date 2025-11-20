@@ -5,6 +5,8 @@ import static net.osmand.plus.configmap.tracks.PreselectedTabParams.CALLING_FRAG
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_ID;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
 import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
+import static net.osmand.plus.importfiles.ImportHelper.getGpxDestinationDir;
+import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.mapcontextmenu.other.ShareMenu.KEY_SAVE_FILE_NAME;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
@@ -495,6 +497,21 @@ public class IntentHelper {
 						clearIntent(intent);
 					}
 				}
+			} else if (Intent.ACTION_SEND_MULTIPLE.equals(action)) {
+				List<Uri> uris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+				if (!Algorithms.isEmpty(uris) && "application/gpx+xml".equals(intent.getType())) {
+					mapActivity.getFragmentsHelper().closeAllFragments();
+					boolean singleTrack = uris.size() <= 1;
+					mapActivity.getImportHelper().handleGpxFilesImport(uris, getGpxDestinationDir(app, true), OPEN_GPX_CONTEXT_MENU, !singleTrack, singleTrack);
+					clearIntent(intent);
+				}
+			} else if (Intent.ACTION_SEND.equals(action)) {
+				Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+				if (uri != null) {
+					mapActivity.getFragmentsHelper().closeAllFragments();
+					mapActivity.getImportHelper().handleContentImport(uri, intent.getExtras(), true);
+					clearIntent(intent);
+				}
 			}
 			if (intent.getBooleanExtra(CLOSE_ALL_FRAGMENTS, false)) {
 				mapActivity.getFragmentsHelper().closeAllFragments();
@@ -506,7 +523,7 @@ public class IntentHelper {
 				}
 				clearIntent(intent);
 			}
-			if(intent.hasExtra(RequiredMapsFragment.OPEN_FRAGMENT_KEY)) {
+			if  (intent.hasExtra(RequiredMapsFragment.OPEN_FRAGMENT_KEY)) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				RequiredMapsFragment.showInstance(fragmentManager);
 				clearIntent(intent);

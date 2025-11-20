@@ -525,7 +525,7 @@ public class GpxUiHelper {
 					gpx.setHasAltitude(true);
 					point.setEle(l.getAltitude());
 				}
-				if (pts.size() == 0) {
+				if (pts.isEmpty()) {
 					if (l.hasSpeed() && l.getSpeed() > 0) {
 						point.setSpeed(l.getSpeed());
 					}

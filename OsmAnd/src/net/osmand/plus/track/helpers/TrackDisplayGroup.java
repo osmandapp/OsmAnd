@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.plus.R;
-import net.osmand.plus.track.GpxSplitParams;
+import net.osmand.plus.track.helpers.GpxDisplayHelper.GpxSplitParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 
 public class TrackDisplayGroup extends GpxDisplayGroup {
@@ -75,21 +75,21 @@ public class TrackDisplayGroup extends GpxDisplayGroup {
 
 	public void updateSplit(@NonNull GpxSplitParams splitParams) {
 		clearDisplayItems();
-		if (splitParams.splitType == NO_SPLIT) {
+		if (splitParams.splitType() == NO_SPLIT) {
 			splitDistance = -1;
 			splitTime = -1;
 			uphillDownhill = false;
-		} else if (splitParams.splitType == DISTANCE) {
-			splitDistance = splitParams.splitInterval;
+		} else if (splitParams.splitType() == DISTANCE) {
+			splitDistance = splitParams.splitInterval();
 			splitTime = -1;
 			uphillDownhill = false;
-		} else if (splitParams.splitType == TIME) {
+		} else if (splitParams.splitType() == TIME) {
 			splitDistance = -1;
-			splitTime = (int) splitParams.splitInterval;
+			splitTime = (int) splitParams.splitInterval();
 			uphillDownhill = false;
-		} else if (splitParams.splitType == UPHILL_DOWNHILL) {
+		} else if (splitParams.splitType() == UPHILL_DOWNHILL) {
 			splitDistance = -1;
-			splitTime = (int) splitParams.splitInterval;
+			splitTime = (int) splitParams.splitInterval();
 			uphillDownhill = true;
 		}
 	}

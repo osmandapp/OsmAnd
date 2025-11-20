@@ -66,8 +66,8 @@ public class LocalItemUtils {
 	private static final long OTHER_MIN_SIZE = 1024 * 1024; // 1MB
 
 	@NonNull
-	public static String getFormattedDate(@NonNull Date date) {
-		return DateFormat.getDateInstance(SHORT).format(date);
+	public static String getFormattedDate(@NonNull Context context, @NonNull Date date) {
+		return android.text.format.DateFormat.getMediumDateFormat(context).format(date);
 	}
 
 	public static void updateItem(@NonNull OsmandApplication app, @NonNull LocalItem item) {
@@ -290,7 +290,7 @@ public class LocalItemUtils {
 		} else if (item.getType() == COLOR_DATA) {
 			return ColorsPaletteUtils.getPaletteTypeName(context, item.getFile());
 		} else {
-			String formattedDate = getFormattedDate(new Date(item.getLastModified()));
+			String formattedDate = getFormattedDate(context, new Date(item.getLastModified()));
 			return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDate);
 		}
 	}

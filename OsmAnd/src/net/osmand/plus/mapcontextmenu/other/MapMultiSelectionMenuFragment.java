@@ -78,6 +78,10 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 
 		view = inflate(R.layout.menu_obj_selection_fragment, container, false);
 		Context context = view.getContext();
+		if (menu == null) {
+			dismiss();
+			return null;
+		}
 
 		if (menu.isLandscapeLayout()) {
 			int backgroundId = nightMode
@@ -160,12 +164,10 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 				}
 			}
 		};
-		view.post(() -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				activity.getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
-			}
-		});
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
+		}
 	}
 
 	@Override
@@ -226,7 +228,9 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 			minHeight = headerHeight + listItemHeight - navBarHeight;
 		}
 		if (scrollY <= minHeight && !initialScroll) {
-			menu.hide();
+			if (menu != null) {
+				menu.hide();
+			}
 		}
 	}
 
@@ -238,7 +242,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	@Override
 	public void onItemClicked(int position) {
 		MenuObject menuObject = listAdapter.getItem(position);
-		if (menuObject != null) {
+		if (menuObject != null && menu != null) {
 			menu.openContextMenu(menuObject);
 		}
 	}
@@ -251,13 +255,15 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 
 	@Override
 	public void updateNightMode() {
-		menu.updateNightMode();
+		if (menu != null) {
+			menu.updateNightMode();
+		}
 		super.updateNightMode();
 	}
 
 	@Override
-	public boolean resolveNightMode() {
-		return !menu.isLight();
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	@Override
@@ -301,7 +307,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	public void onStop() {
 		super.onStop();
 		callMapActivity(mapActivity -> {
-			if (!dismissing && !mapActivity.isChangingConfigurations()) {
+			if (!dismissing && !mapActivity.isChangingConfigurations() && menu != null) {
 				menu.onStop();
 			}
 			mapActivity.getContextMenu().setBaseFragmentVisibility(true);

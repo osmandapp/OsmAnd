@@ -99,6 +99,7 @@ public class BinaryMapIndexReader {
 	public static final int LABEL_ZOOM_ENCODE = 31 - SHIFT_COORDINATES;
 	private final static Log log = PlatformUtil.getLog(BinaryMapIndexReader.class);
 	public static boolean READ_STATS = false;
+	private static boolean TRACE_SEARCH = false; 
 	public static final SearchPoiTypeFilter ACCEPT_ALL_POI_TYPE_FILTER = new SearchPoiTypeFilter() {
 		@Override
 		public boolean isEmpty() {
@@ -669,7 +670,7 @@ public class BinaryMapIndexReader {
 		for (TransportIndex index : transportIndexes) {
 			searchTransportIndex(index, req);
 		}
-		if (req.numberOfVisitedObjects > 0 && req.log) {
+		if (TRACE_SEARCH && req.numberOfVisitedObjects > 0 && req.log) {
 			log.debug("Search is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			log.debug("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 		}
@@ -1031,7 +1032,7 @@ public class BinaryMapIndexReader {
 				}
 			}
 		}
-		if (req.numberOfVisitedObjects > 0 && req.log) {
+		if (TRACE_SEARCH && req.numberOfVisitedObjects > 0 && req.log) {
 			log.info("Search is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 		}
@@ -1859,7 +1860,7 @@ public class BinaryMapIndexReader {
 			top = (int) (y - cf31);
 			bottom = (int) (y + cf31);
 		}
-
+		
 		public void setBBox(int x31, int y31, int left, int top, int right, int bottom) {
 			x = x31;
 			y = y31;
@@ -2340,7 +2341,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File(System.getProperty("maps") +"/Us_pennsylvania_northamerica_3.obf");
+		fl = new File(System.getProperty("maps") +"/Map.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		SearchStat stat = new SearchStat();
@@ -2595,9 +2596,10 @@ req.setSearchStat(stat);
 
 	}
 
-	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets, TIntArrayList matchedCharacters) throws IOException {
-		String key = null;
+	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
+			TIntArrayList matchedCharacters) throws IOException {
 		boolean[] matched = new boolean[matchedCharacters.size()];
+		String key = null;
 		boolean shouldWeReadSubtable = false;
 		while (true) {
 			int t = codedIS.readTag();
@@ -2610,39 +2612,11 @@ req.setSearchStat(stat);
 				if (prefix.length() > 0) {
 					key = prefix + key;
 				}
-				shouldWeReadSubtable = false;
-				for (int i = 0; i < queries.size(); i++) {
-					int charMatches = matchedCharacters.get(i);
-					String query = queries.get(i);
-					matched[i] = false;
-					if (query == null) {
-						continue;
-					}
-					
-					// check query is part of key (the best matching)
-					if (CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
-						if (query.length() >= charMatches) {
-							if (query.length() > charMatches) {
-								matchedCharacters.set(i, query.length());
-								listOffsets.get(i).clear();
-							}
-							matched[i] = true;
-						}
-						// check key is part of query
-					} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
-						if (key.length() >= charMatches) {
-							if (key.length() > charMatches) {
-								matchedCharacters.set(i, key.length());
-								listOffsets.get(i).clear();
-							}
-							matched[i] = true;
-						}
-					}
-					shouldWeReadSubtable |= matched[i];
-				}
+				shouldWeReadSubtable = matchIndexByNameKey(instance, queries, listOffsets, matchedCharacters, key,
+						matched);
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
-				int val = (int) readInt(); // FIXME
+				int val = (int) readInt(); // FIXME for 64 bit support
 				for (int i = 0; i < queries.size(); i++) {
 					if (matched[i]) {
 						listOffsets.get(i).add(val);
@@ -2673,6 +2647,41 @@ req.setSearchStat(stat);
 		}
 	}
 
+	private boolean matchIndexByNameKey(Collator instance, List<String> queries, List<TIntArrayList> listOffsets,
+			TIntArrayList matchedCharacters, String key, boolean[] matched) {
+		boolean shouldWeReadSubtable = false;
+		for (int i = 0; i < queries.size(); i++) {
+			int charMatches = matchedCharacters.get(i);
+			String query = queries.get(i);
+			matched[i] = false;
+			if (query == null) {
+				continue;
+			}
+			
+			// check query is part of key (the best matching)
+			if (CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+				if (query.length() >= charMatches) {
+					if (query.length() > charMatches) {
+						matchedCharacters.set(i, query.length());
+						listOffsets.get(i).clear();
+					}
+					matched[i] = true;
+				}
+				// check key is part of query
+			} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+				if (key.length() >= charMatches) {
+					if (key.length() > charMatches) {
+						matchedCharacters.set(i, key.length());
+						listOffsets.get(i).clear();
+					}
+					matched[i] = true;
+				}
+			}
+			shouldWeReadSubtable |= matched[i];
+		}
+		return shouldWeReadSubtable;
+	}
+
 	private static void testAddressSearchByName(BinaryMapIndexReader reader, SearchStat stat) throws IOException {
 		SearchRequest<MapObject> req = buildAddressByNameRequest(new ResultMatcher<MapObject>() {
 			@Override
@@ -2689,7 +2698,7 @@ req.setSearchStat(stat);
 			public boolean isCancelled() {
 				return false;
 			}
-		}, "Mountain", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+		}, "terra", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 		req.setSearchStat(stat);
 //		req.setBBoxRadius(52.276142, 4.8608723, 15000);
 		reader.searchAddressDataByName(req);

@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
@@ -38,6 +39,14 @@ public abstract class GroupEditorFragment extends EditorFragment {
 	@Override
 	protected int getLayoutId() {
 		return R.layout.category_editor_fragment;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+
+		collection.replace(InsetTarget.createScrollable(R.id.editor_scroll_view).build());
+		return collection;
 	}
 
 	@Override

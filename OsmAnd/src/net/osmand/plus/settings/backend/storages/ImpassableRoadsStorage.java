@@ -8,6 +8,7 @@ import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
+import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -28,12 +29,12 @@ public class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 	protected final CommonPreference<String> APP_MODES;
 
 	public ImpassableRoadsStorage(@NonNull OsmandSettings settings) {
-		super(settings);
+		super(settings, false);
 		POINTS.storeLastModifiedTime();
 
-		ROADS_IDS = new StringPreference(settings, ROADS_IDS_KEY, "").makeGlobal().makeShared();
-		DIRECTIONS = new StringPreference(settings, DIRECTIONS_KEY, "").makeGlobal().makeShared();
-		APP_MODES = new StringPreference(settings, APP_MODES_KEY, "").makeGlobal().makeShared();
+		ROADS_IDS = new StringPreference(settings, ROADS_IDS_KEY, "").makeGlobal();
+		DIRECTIONS = new StringPreference(settings, DIRECTIONS_KEY, "").makeGlobal();
+		APP_MODES = new StringPreference(settings, APP_MODES_KEY, "").makeGlobal();
 	}
 
 	@NonNull
@@ -216,40 +217,43 @@ public class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 				&& saveAppModeKeys(appModeKeys) && saveDirections(directions);
 	}
 
-	public boolean saveRoadIds(@NonNull List<Long> roadIds) {
+	public boolean saveRoadIds(@NonNull List<Long> list) {
 		StringBuilder builder = new StringBuilder();
-		Iterator<Long> iterator = roadIds.iterator();
+		Iterator<Long> iterator = list.iterator();
 		while (iterator.hasNext()) {
 			builder.append(iterator.next());
 			if (iterator.hasNext()) {
 				builder.append(",");
 			}
 		}
-		return ROADS_IDS.set(builder.toString());
+		String value = builder.toString();
+		return Algorithms.stringsEqual(ROADS_IDS.get(), value) || ROADS_IDS.set(value);
 	}
 
-	public boolean saveDirections(@NonNull List<Double> directions) {
+	public boolean saveDirections(@NonNull List<Double> list) {
 		StringBuilder builder = new StringBuilder();
-		Iterator<Double> iterator = directions.iterator();
+		Iterator<Double> iterator = list.iterator();
 		while (iterator.hasNext()) {
 			builder.append(iterator.next());
 			if (iterator.hasNext()) {
 				builder.append(",");
 			}
 		}
-		return DIRECTIONS.set(builder.toString());
+		String value = builder.toString();
+		return Algorithms.stringsEqual(DIRECTIONS.get(), value) || DIRECTIONS.set(value);
 	}
 
-	public boolean saveAppModeKeys(@NonNull List<String> appModeKeys) {
+	public boolean saveAppModeKeys(@NonNull List<String> list) {
 		StringBuilder builder = new StringBuilder();
-		Iterator<String> iterator = appModeKeys.iterator();
+		Iterator<String> iterator = list.iterator();
 		while (iterator.hasNext()) {
 			builder.append(iterator.next());
 			if (iterator.hasNext()) {
 				builder.append(",");
 			}
 		}
-		return APP_MODES.set(builder.toString());
+		String value = builder.toString();
+		return Algorithms.stringsEqual(APP_MODES.get(), value) || APP_MODES.set(value);
 	}
 
 	public static boolean isAvoidRoadsPref(@NonNull String id) {

@@ -608,7 +608,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 				}
 			}
 		};
-		view.post(() -> activity.getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback));
+		activity.getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
 	}
 
 	@Nullable
@@ -1006,8 +1006,9 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 	public void doZoomOut() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			RotatedTileBox tb = map.getRotatedTileBox();
-			boolean containsLatLon = NativeUtilities.containsLatLon(map.getMapRenderer(), tb, menu.getLatLon());
+			LatLon latLon = menu.getLatLon();
+			RotatedTileBox tileBox = map.getRotatedTileBox();
+			boolean containsLatLon = latLon != null && NativeUtilities.containsLatLon(map.getMapRenderer(), tileBox, latLon);
 			if (containsLatLon) {
 				setCustomMapRatio();
 			} else {
@@ -1410,17 +1411,6 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		super.onPause();
 	}
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && !mapActivity.isChangingConfigurations()) {
-			GalleryController galleryController = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
-			if (galleryController != null) {
-				galleryController.clearListeners();
-			}
-		}
-	}
 
 	@Override
 	public void onDestroyView() {

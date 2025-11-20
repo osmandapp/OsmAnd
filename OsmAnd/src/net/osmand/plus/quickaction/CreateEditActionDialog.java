@@ -30,6 +30,8 @@ import net.osmand.plus.quickaction.ConfirmationBottomSheet.OnConfirmButtonClickL
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
 import java.util.List;
@@ -78,6 +80,13 @@ public class CreateEditActionDialog extends BaseFullScreenDialogFragment impleme
 		setupFooter(view);
 		action.drawUI(view.findViewById(R.id.container), requireMapActivity(), nightMode);
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.action_name).build());
+		return collection;
 	}
 
 	@Override
@@ -133,7 +142,7 @@ public class CreateEditActionDialog extends BaseFullScreenDialogFragment impleme
 			action.setName(nameEditText.getText().toString());
 		}
 		ImageView image = root.findViewById(R.id.image);
-		image.setImageResource(action.getIconRes(app));
+		image.setImageResource(action.getIconRes(app, nightMode));
 	}
 
 	private void setupFooter(@NonNull View root) {
@@ -214,7 +223,7 @@ public class CreateEditActionDialog extends BaseFullScreenDialogFragment impleme
 	public void onDestroy() {
 		super.onDestroy();
 		FragmentActivity activity = getActivity();
-		if (activity != null && !activity.isChangingConfigurations()) {
+		if (controller != null && activity != null && !activity.isChangingConfigurations()) {
 			controller.unregisterDialog(TAG);
 		}
 	}

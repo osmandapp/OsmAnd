@@ -24,6 +24,7 @@ import com.google.android.material.slider.RangeSlider;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -38,7 +39,7 @@ import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 
-public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogFragment {
+public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = TripRecordingStartingBottomSheet.class.getSimpleName();
 

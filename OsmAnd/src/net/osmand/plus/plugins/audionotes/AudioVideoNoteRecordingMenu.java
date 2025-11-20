@@ -15,7 +15,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -55,6 +54,7 @@ public class AudioVideoNoteRecordingMenu {
 		MapActivity mapActivity = requireMapActivity();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		initView(mapActivity);
+		initAdditionalViews(mapActivity);
 	}
 
 	@Nullable
@@ -67,20 +67,17 @@ public class AudioVideoNoteRecordingMenu {
 		return plugin.requireMapActivity();
 	}
 
-	protected void initView(MapActivity mapActivity) {
+	protected void initView(@NonNull MapActivity mapActivity) {
 		view = mapActivity.findViewById(R.id.recording_note_layout);
+	}
+
+	private void initAdditionalViews(@NonNull MapActivity mapActivity) {
 		viewfinder = view.findViewById(R.id.viewfinder);
 		showViewfinder = true;
 
 		screenHeight = AndroidUtils.getScreenHeight(mapActivity);
 		buttonsHeight = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_route_buttons_height);
-
-		InsetsUtils.setWindowInsetsListener(view, (view, insets) -> {
-			Insets inset = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-			topInset = inset.top;
-			bottomInset = inset.bottom;
-			update();
-		}, false);
+		update();
 	}
 
 	public SurfaceView prepareSurfaceView() {
@@ -138,6 +135,7 @@ public class AudioVideoNoteRecordingMenu {
 
 	public void update() {
 		if (!plugin.isRecording()) return;
+		setupWindowInsets();
 		CurrentRecording recording = plugin.getCurrentRecording();
 		UiUtilities iconsCache = requireMapActivity().getApp().getUIUtilities();
 
@@ -327,5 +325,14 @@ public class AudioVideoNoteRecordingMenu {
 	}
 
 	public void hideFinalPhoto() {
+	}
+
+	private void setupWindowInsets() {
+		WindowInsetsCompat insets = plugin.getAudioNotesLayer().getWindowInsets();
+		if (insets != null) {
+			Insets inset = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+			topInset = inset.top;
+			bottomInset = inset.bottom;
+		}
 	}
 }

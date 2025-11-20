@@ -21,7 +21,7 @@ class ButtonPositionSize {
 	var yMove: Boolean = false
 	var moveDescendants: Int = MOVE_DESCENDANTS_ANY
 
-	private val bounds = KQuadRect()
+	internal val bounds = KQuadRect()
 
 	constructor(id: String) : this(id, 7, true, true)
 
@@ -51,6 +51,9 @@ class ButtonPositionSize {
 	fun setMoveDescendantsHorizontal() = apply { this.moveDescendants = MOVE_DESCENDANTS_HORIZONTAL }
 
 	fun setMoveHorizontal() = apply { this.xMove = true }
+
+	fun setNonMoveable() = apply { this.xMove = false; this.yMove = false; }
+
 
 	fun setSize(width8dp: Int, height8dp: Int) = apply {
 		this.width = width8dp
@@ -138,6 +141,10 @@ class ButtonPositionSize {
 		return ((width * CELL_SIZE_DP) * dpToPix).toInt()
 	}
 
+	fun getHeightPix(dpToPix: Float): Int {
+		return ((height * CELL_SIZE_DP) * dpToPix).toInt()
+	}
+
 	fun fromLongValue(v: Long) = apply {
 		var value = v
 		width = (value and SIZE_MASK.toLong()).toInt()
@@ -180,9 +187,17 @@ class ButtonPositionSize {
 		}
 		val xMoveIndicator = if (xMove) "+" else " "
 		val yMoveIndicator = if (yMove) "+" else " "
+
+		val moveDescendantsStr = when (moveDescendants) {
+			MOVE_DESCENDANTS_VERTICAL -> "vertical"
+			MOVE_DESCENDANTS_HORIZONTAL -> "horizontal"
+			else -> "any"
+		}
+
 		val paddedWidth = width.toString().padStart(2)
 		val paddedHeight = height.toString().padStart(2)
-		return "Pos ${id.padStart(10)} x=($posHStr->${marginX}$xMoveIndicator), y=($posVStr->${marginY}$yMoveIndicator), w=$paddedWidth, h=$paddedHeight"
+
+		return "Pos ${id.padStart(10)} x=($posHStr->${marginX}$xMoveIndicator), y=($posVStr->${marginY}$yMoveIndicator), w=$paddedWidth, h=$paddedHeight, move=$moveDescendantsStr"
 	}
 
 	fun overlap(position: ButtonPositionSize): Boolean {
@@ -229,6 +244,9 @@ class ButtonPositionSize {
 		private const val MAX_ITERATIONS = 1000
 		private const val MAX_STUCK_ATTEMPTS = 20
 
+		var DEBUG_PRINT: Boolean = false; // false
+		var DEBUG_PRINT_MOVE: Boolean = false; // false
+
 		const val CELL_SIZE_DP = 8
 		const val DEF_MARGIN_DP = 4
 
@@ -255,110 +273,137 @@ class ButtonPositionSize {
 			totalWidth: Int,
 			totalHeight: Int
 		): Boolean {
-			buttons.forEach { it.updateBounds(totalWidth, totalHeight) }
-
-			var iteration = 0
-			val moveAttempts = mutableMapOf<ButtonPositionSize, Int>()
-			var fixedPos = buttons.size - 1
-
-			while (fixedPos >= 0) {
-				if (iteration++ > MAX_ITERATIONS) {
-					LOG.error("Relayout is broken")
-					return false
+			buttons.forEach {
+				it.updateBounds(totalWidth, totalHeight);
+			}
+			if (DEBUG_PRINT) {
+				LOG.info("---- Layout w=$totalWidth h=$totalHeight spc=$space");
+				buttons.forEach {
+					LOG.info("Before Button $it ${it.bounds}");
 				}
-				var overlap = false
-				val button = buttons[fixedPos]
-				for (i in fixedPos + 1 until buttons.size) {
-					val check = buttons[i]
+			}
+			var iter = 0
+			// we do it in forward iteration (I step all [1, .. I-1] are arranged)
+			var i = 1;
+			while (i < buttons.size) {
+
+				var movedOnce = false;
+				var failMove = false;
+				val button = buttons[i]
+				var ox = button.marginX;
+				var oy = button.marginY;
+				var j = i - 1;
+				while (j >= 0) {
+					if (iter++ > MAX_ITERATIONS) {
+						LOG.error("Relayout is broken.")
+						return false
+					}
+					val check = buttons[j]
 					if (button.overlap(check)) {
-						val attempts = moveAttempts[check] ?: 0
-						if (attempts >= MAX_STUCK_ATTEMPTS) {
-							LOG.warn("Skipping move for $check (max attempts reached)")
-						} else if (moveButton(space, check, button, totalWidth, totalHeight)) {
-							overlap = true
-							check.updateBounds(totalWidth, totalHeight)
-							moveAttempts[check] = attempts + 1
-							fixedPos = i
-							break
+						val moved = moveButton(space, button, check, totalWidth, totalHeight)
+						if (!moved) {
+							failMove = true;
+							break;
 						}
+						if (check.xMove || check.yMove) {
+							// if overlapped button / panel moveable save it
+							// do not overlap buttons but allow to overlap buttons over pannels
+							ox = button.marginX;
+							oy = button.marginY;
+
+						}
+						movedOnce = true
+						if (DEBUG_PRINT_MOVE) {
+							LOG.info("Move $button because $check new bounds ${button.bounds}");
+						}
+						j = i - 1;
+					} else {
+						j --;
 					}
 				}
-				if (!overlap) {
-					fixedPos--
+				if (failMove) {
+					button.marginX = ox;
+					button.marginY = oy;
+					button.updateBounds(totalWidth, totalHeight);
+					i++
+				} else if (!movedOnce) {
+					i++
 				}
+			}
+			if (DEBUG_PRINT) {
+				buttons.forEach {
+					LOG.info("After Button $it ${it.bounds}");
+				}
+				LOG.info("++++ Layout w=$totalWidth h=$totalHeight spc=$space");
 			}
 			return true
 		}
 
-		private fun moveButton(
-			space: Int, toMove: ButtonPositionSize,
-			overlap: ButtonPositionSize, totalWidth: Int, totalHeight: Int
-		): Boolean {
+		private fun moveAndCheck(toMove: ButtonPositionSize, overlap: ButtonPositionSize,
+								 totalWidth: Int, totalHeight: Int, mx: Int, my: Int): Boolean {
+			toMove.marginX += mx;
+			toMove.marginY += my;
+			toMove.updateBounds(totalWidth, totalHeight);
+			return toMove.overlap(overlap);
+		}
+		private fun moveButton(space: Int, toMove: ButtonPositionSize, overlap: ButtonPositionSize,
+							   totalWidth: Int, totalHeight: Int): Boolean {
 			var xMove = false
 			var yMove = false
-			when (overlap.moveDescendants) {
-				MOVE_DESCENDANTS_ANY -> {
-					if (overlap.isFullWidth) {
-						yMove = true
-					} else if (overlap.isFullHeight) {
-						xMove = true
+			if (!toMove.xMove && !toMove.yMove) {
+				return false
+			}
+
+			if (overlap.moveDescendants == MOVE_DESCENDANTS_ANY) {
+				if (overlap.posH == POS_FULL_WIDTH) {
+					yMove = true
+				} else if (overlap.posV == POS_FULL_HEIGHT) {
+					xMove = true
+				} else {
+					xMove = toMove.xMove
+					yMove = toMove.yMove
+				}
+			} else if (overlap.moveDescendants == MOVE_DESCENDANTS_VERTICAL) {
+				yMove = true
+			} else if (overlap.moveDescendants == MOVE_DESCENDANTS_HORIZONTAL) {
+				xMove = true
+			}
+			var ox = toMove.marginX;
+			var oy = toMove.marginY;
+			var ok = false;
+			for (dist in 1 until totalHeight + totalWidth) {
+				if (ok) {
+					break;
+				}
+				for (x in 0 until dist + 1) {
+					var dy = dist - x;
+					var dx = x;
+					if (!xMove || !yMove) {
+						if (x > 0) {
+							break;
+						}
+						if (!yMove) {
+							dx = dist - x;
+							dy = x;
+						}
+					}
+					if (toMove.marginX + dx + toMove.width > totalWidth) {
+						continue;
+					}
+					if (toMove.marginY + dy + toMove.height > totalHeight) {
+						continue;
+					}
+					if (!moveAndCheck(toMove, overlap, totalWidth, totalHeight, dx, dy)) {
+						ok = true;
+						break;
 					} else {
-						if (toMove.xMove) xMove = true
-						if (toMove.yMove) yMove = true
+						toMove.marginX = ox;
+						toMove.marginY = oy;
+						toMove.updateBounds(totalWidth, totalHeight);
 					}
 				}
-				MOVE_DESCENDANTS_VERTICAL -> yMove = true
-				MOVE_DESCENDANTS_HORIZONTAL -> xMove = true
 			}
-
-			val forceYOnly = overlap.isFullWidth || overlap.moveDescendants == MOVE_DESCENDANTS_VERTICAL
-			val forceXOnly = overlap.isFullHeight || overlap.moveDescendants == MOVE_DESCENDANTS_HORIZONTAL
-			val overlapHorizontalOnly = overlap.xMove && !overlap.yMove
-			val overlapVerticalOnly   = overlap.yMove && !overlap.xMove
-			var planX = false
-			var planY = false
-			when {
-				forceYOnly && yMove -> planY = true
-				forceXOnly && xMove -> planX = true
-				overlapHorizontalOnly && yMove -> planY = true
-				overlapVerticalOnly && xMove   -> planX = true
-				else -> {
-					if (xMove) planX = true
-					if (yMove) planY = true
-				}
-			}
-
-			val desiredX = space + overlap.marginX + overlap.width
-			val desiredY = space + overlap.marginY + overlap.height
-			var newX = if (planX) desiredX else toMove.marginX
-			var newY = if (planY) desiredY else toMove.marginY
-			if (planY && desiredY < toMove.marginY && !overlap.isFullWidth) {
-				newY = toMove.marginY
-				if (!planX) newX = desiredX
-			}
-			if (planY && !overlap.isFullWidth && (newY + toMove.height > totalHeight)) {
-				newY = toMove.marginY
-				if (!planX) newX = desiredX
-			}
-			if (newX + toMove.width > totalWidth) {
-				newX = max(0, totalWidth - toMove.width)
-				if (!planY) {
-					val desired = space + overlap.marginY + overlap.height
-					newY = max(0, min(desired, totalHeight - toMove.height))
-				}
-			}
-			if (newY + toMove.height > totalHeight) {
-				newY = max(0, totalHeight - toMove.height)
-				if (!planX) {
-					val desired = space + overlap.marginX + overlap.width
-					newX = max(0, min(desired, totalWidth - toMove.width))
-				}
-			}
-			val moved = (newX != toMove.marginX) || (newY != toMove.marginY)
-			toMove.marginX = newX
-			toMove.marginY = newY
-
-			return moved
+			return ok;
 		}
 	}
 }

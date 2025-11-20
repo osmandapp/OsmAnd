@@ -224,32 +224,39 @@ public class SearchUICore {
 			Map<String, Integer> cities = new TreeMap<String, Integer>();
 			for (SearchResult s : searchResults) {
 				if (!Algorithms.isEmpty(s.cityName)) {
-					Integer freq = cities.get(s.cityName);
+					String mainCity = s.cityName;
+					if (mainCity.indexOf(",") != -1) {
+						mainCity = mainCity.substring(0, mainCity.indexOf(",")).trim();
+					}
+					Integer freq = cities.get(mainCity);
 					if (freq == null) {
 						freq = 0;
 					}
 					freq++;
 					if (freq >= DOMINATED_CITY_CRITERIA) {
-						dominatedCity = s.cityName;
+						dominatedCity = mainCity;
 						break;
 					}
-					cities.put(s.cityName, freq);
+					cities.put(mainCity, freq);
 
 				}
 			}
 			for (SearchResult s : searchResults) {
 				if (s.object instanceof Amenity amenity && Algorithms.isEmpty(s.alternateName)) {
 					String city = s.cityName == null ? "" : s.cityName; 
+					String mainCity = city;
+					if (city.indexOf(",") != -1) {
+						mainCity = city.substring(0, city.indexOf(",")).trim();
+					}
 					if (Algorithms.isEmpty(amenity.getStreetName())) {
-						s.alternateName = city;
-						continue;
+						s.addressName = city;
 					} else {
 						String hno = amenity.getHousenumber();
 						String addr = amenity.getStreetName() + (Algorithms.isEmpty(hno) ? "" : " " + hno);
-						if (dominatedCity.equals(s.cityName)) {
-							s.alternateName = addr + ", " + s.cityName;
+						if (dominatedCity.equals(mainCity)) {
+							s.addressName = addr + ", " + s.cityName;
 						} else {
-							s.alternateName = (city.length() == 0 ? "" : (s.cityName + ", ")) + addr;
+							s.addressName = (city.length() == 0 ? "" : (s.cityName + ", ")) + addr;
 						}
 					}
 				}
@@ -666,10 +673,13 @@ public class SearchUICore {
 	}
 
 	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
-		search(text, delayedExecution, matcher, searchSettings);
+		search(text, delayedExecution, matcher, null);
 	}
-
-	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher, final SearchSettings searchSettings) {
+	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher, 
+			SearchSettings overrideSettings) {
+		if (overrideSettings != null) {
+			this.searchSettings = overrideSettings;
+		}
 		final int request = requestNumber.incrementAndGet();
 		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		phrase.setAcceptPrivate(this.phrase.isAcceptPrivate());
@@ -981,6 +991,10 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
+			// disable boundary for end results
+			if (object.objectType == ObjectType.BOUNDARY) {
+				return false;
+			}
 			if (phrase != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)
 					&& Algorithms.isEmpty(object.alternateName)) {
 				boolean updateName = false;
@@ -1192,10 +1206,10 @@ public class SearchUICore {
 				double o1PhraseWeight = o1.getUnknownPhraseMatchWeight();
 				double o2PhraseWeight = o2.getUnknownPhraseMatchWeight();
 				if (o1PhraseWeight == o2PhraseWeight && o1PhraseWeight / SearchResult.MAX_PHRASE_WEIGHT_TOTAL > 1) {
-					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(stripBraces(o1.localeName))) {
+					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(SearchPhrase.stripBraces(o1.localeName))) {
 						o1PhraseWeight--;
 					}
-					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(stripBraces(o2.localeName))) {
+					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(SearchPhrase.stripBraces(o2.localeName))) {
 						o2PhraseWeight--;
 					}
 				}
@@ -1268,20 +1282,9 @@ public class SearchUICore {
 			}
 			return 0;
 		}
+
 	}
 	
-	private static String stripBraces(String localeName) {
-		int i = localeName.indexOf('(');
-		String retName = localeName;
-		if (i > -1) {
-			retName = localeName.substring(0, i);
-			int j = localeName.indexOf(')', i);
-			if (j > -1) {
-				retName = (retName.trim() + ' ' + localeName.substring(j + 1)).trim();
-			}
-		}
-		return retName;
-	}
 
 	public boolean isOnlineSearch() {
 		return searchSettings.hasCustomSearchType(ONLINE_SEARCH);

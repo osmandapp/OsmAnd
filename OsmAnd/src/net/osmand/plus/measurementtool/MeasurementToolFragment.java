@@ -26,7 +26,12 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.widget.*;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.DrawableRes;
@@ -60,6 +65,7 @@ import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
 import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
 import net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogMode;
@@ -262,7 +268,18 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		}
 		onBackPressedCallback = new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
-				quit(true);
+				boolean shouldQuit = true;
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					MapContextMenu contextMenu = activity.getContextMenu();
+					if (contextMenu.isVisible()) {
+						contextMenu.hide();
+						shouldQuit = false;
+					}
+				}
+				if (shouldQuit) {
+					quit(true);
+				}
 			}
 		};
 	}
@@ -313,7 +330,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 		measurementLayer.setEditingCtx(editingCtx);
 
-		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		portrait = AndroidUiHelper.isPortrait(mapActivity);
 		int btnWidth = getResources().getDimensionPixelOffset(R.dimen.gpx_group_button_width);
 
 		pointsSt = getString(R.string.shared_string_gpx_points).toLowerCase();
@@ -614,7 +631,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 			shiftMapControls(false);
 		}
 		updateMapDisplayPosition();
-		cardsContainer.setVisibility(View.VISIBLE);
+		AndroidUiHelper.updateVisibility(cardsContainer, true);
 		updateUpDownBtn();
 	}
 
@@ -627,7 +644,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	private void collapseInfoView() {
 		infoExpanded = false;
 		currentInfoType = null;
-		cardsContainer.setVisibility(View.GONE);
+		AndroidUiHelper.updateVisibility(cardsContainer, false);
 		if (!portrait) {
 			shiftMapControls(true);
 		}
@@ -676,7 +693,9 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 			params = new LinearLayout.LayoutParams(infoViewWidth, -1);
 		}
 		if (params != null) {
-			AndroidUtils.setMargins(params, 0, 0, 0, bottomMargin);
+			if (!InsetsUtils.isEdgeToEdgeSupported()) {
+				AndroidUtils.setMargins(params, 0, 0, 0, bottomMargin);
+			}
 			cardsContainer.setLayoutParams(params);
 		}
 	}
@@ -2036,6 +2055,12 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 			cancelAddPointBeforeOrAfterMode();
 			return;
 		}
+		callMapActivity(activity -> {
+			TrackMenuFragment fragment = activity.getFragmentsHelper().getTrackMenuFragment();
+			if (fragment != null && fragment.isHidden()) {
+				fragment.show();
+			}
+		});
 		if (isFollowTrackMode()) {
 			callMapActivity(mapActivity -> {
 				mapActivity.getMapActions().showRouteInfoControlDialog();

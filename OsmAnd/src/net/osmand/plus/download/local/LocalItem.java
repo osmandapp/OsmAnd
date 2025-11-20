@@ -21,6 +21,7 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	private final String fileName;
 	private long size;
 	private long sizeCalculationLimit = -1;
+	private boolean isDeleted;
 
 	@Nullable
 	private Object attachedObject;
@@ -130,5 +131,13 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	@Override
 	public String toString() {
 		return fileName;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }
