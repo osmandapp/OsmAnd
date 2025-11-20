@@ -1,10 +1,12 @@
 package net.osmand.plus.card.color.palette.main.data;
 
+import static net.osmand.IndexConstants.COLOR_PALETTE_DIR;
+import static net.osmand.plus.helpers.ColorsPaletteUtils.DEFAULT_USER_PALETTE_FILE;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.ColorPalette;
 import net.osmand.ColorPalette.ColorValue;
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 
 import java.io.BufferedWriter;
@@ -16,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileColorsCollection extends ColorsCollection {
-
-	private static final String DEFAULT_USER_PALETTE_FILE = "user_palette_default.txt";
 
 	private static boolean fileRecreated = false;
 
@@ -38,7 +38,6 @@ public class FileColorsCollection extends ColorsCollection {
 
 	@Override
 	protected void loadColorsInLastUsedOrder() throws IOException {
-		long now = System.currentTimeMillis();
 		ColorPalette palette = readFile();
 		for (ColorValue color : palette.getColors()) {
 			lastUsedOrder.add(new PaletteColor(color));
@@ -64,11 +63,10 @@ public class FileColorsCollection extends ColorsCollection {
 		StringBuilder content = new StringBuilder("# Index,R,G,B,A\n");
 		content.append(ColorPalette.writeColorPalette(colorValues));
 		try {
-			FileWriter writer = new FileWriter(file);
-			BufferedWriter w = new BufferedWriter(writer);
-			w.write(content.toString());
-			w.flush();
-			w.close();
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			writer.write(content.toString());
+			writer.flush();
+			writer.close();
 		} catch (IOException e) {
 			LOG.error("Error when trying to write to the file: " + e.getMessage());
 		}
@@ -76,7 +74,7 @@ public class FileColorsCollection extends ColorsCollection {
 
 	@NonNull
 	private static File getSourceFile(@NonNull OsmandApplication app) {
-		File dir = app.getAppPath(IndexConstants.COLOR_PALETTE_DIR);
+		File dir = app.getAppPath(COLOR_PALETTE_DIR);
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
