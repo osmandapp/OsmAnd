@@ -53,7 +53,7 @@ public class BaseDetailsObject {
 		this(Algorithms.isEmpty(lang) ? "en" : lang);
 
 		boolean containsAmenity = false;
-		for (MapObject mo : mapObjects) {
+		for (MapObject mo : visibleFirst(mapObjects)) {
 			addObject(mo);
 			if (mo instanceof Amenity) {
 				containsAmenity = true;
@@ -382,6 +382,28 @@ public class BaseDetailsObject {
 		sortObjectsByResourceType();
 		sortObjectsByClass();
 	}
+
+    /**
+     * Orders {@code mapObjects} so that these whose type (POI category) is <i>top-level visible</i>
+     * occur in the returned list before those whose type is not top-level visible. Non-visible
+     * amenities can be used to store auxiliary information (for example, reviews); in that case
+     * they should not influence the type of the synthetic amenity being created, and that is derived
+     * from the first amenity in the list.
+     */
+    private static List<? extends MapObject> visibleFirst(List<? extends MapObject> mapObjects) {
+        List<Amenity> sortedMapObjects = new ArrayList(mapObjects);
+		sortedMapObjects.sort((MapObject a1, MapObject a2) -> {
+            boolean a1Visible = a1 instanceof Amenity amenity && amenity.getType().isTopVisible();
+            boolean a2Visible = a2 instanceof Amenity amenity && amenity.getType().isTopVisible();
+            if (a1Visible && !a2Visible) {
+                return -1;
+            } else if (!a1Visible && a2Visible) {
+                return 1;
+            }
+            return 0;
+        });
+        return sortedMapObjects;
+    }
 
 	private void sortObjectsByLang() {
 		objects.sort((o1, o2) -> {

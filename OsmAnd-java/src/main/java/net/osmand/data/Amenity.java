@@ -64,6 +64,9 @@ public class Amenity extends MapObject {
 	public static final String IS_PARENT_OF = "is_parent_of";
 	public static final String IS_AGGR_PART = "is_aggr_part";
 	public static final String CONTENT_JSON = "content_json";
+	public static final String OSMREVIEWS = "osmreviews";
+	public static final String REVIEWS = "reviews";
+	public static final String REVIEWS_AGGREGATE_RATING = "reviews_aggregate_rating";
 	public static final String ROUTE_ID = "route_id";
 	public static final String ROUTE_ID_OSM_PREFIX_LEGACY = "OSM"; // non-indexed
 	public static final String ROUTE_ID_OSM_PREFIX = "O"; // indexed in POI-section
@@ -143,7 +146,7 @@ public class Amenity extends MapObject {
 		return regionName;
 	}
 
-    public static class AmenityRoutePoint {
+	public static class AmenityRoutePoint {
 		public double deviateDistance;
 		public boolean deviationDirectionRight;
 		public Location pointA;
@@ -388,11 +391,11 @@ public class Amenity extends MapObject {
 	public String getSite() {
 		return getAdditionalInfo(WEBSITE);
 	}
-	
+
 	public String getStreetName() {
 		return getAdditionalInfo(ADDR_STREET);
 	}
-	
+
 	public String getHousenumber() {
 		return getAdditionalInfo(ADDR_HOUSENUMBER);
 	}
@@ -1033,5 +1036,9 @@ public class Amenity extends MapObject {
 		result.putAll(amenityTags); // unresolved residues
 
 		return result;
+	}
+
+	public boolean isAuxiliaryData() {
+		return OSMREVIEWS.equals(getSubType());
 	}
 }

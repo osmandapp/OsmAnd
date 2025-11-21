@@ -34,9 +34,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
+import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
+import net.osmand.plus.reviews.Reviews;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -47,15 +49,19 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.reviews.Review;
+import net.osmand.reviews.ReviewJsonCodec;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -64,6 +70,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
 	public static final String WIKIPEDIA_ORG_WIKI_URL_PART = ".wikipedia.org/wiki/";
+	private static final int MAX_REVIEWS_TO_DISPLAY = 10;
+	private static final int MAX_REVIEW_CHARACTERS_TO_DISPLAY = 200;
 
 	protected AmenityUIHelper amenityUIHelper;
 	protected Map<String, String> extensions;
@@ -83,6 +91,55 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		infoBundle = new AdditionalInfoBundle(app, extensions);
 
 		super.build(view, object);
+	}
+
+	private void buildReviewsRow(View view) {
+		String reviewsJson = extensions.get(Amenity.REVIEWS);
+		if (reviewsJson == null) return;
+		String aggregateRatingStr = extensions.get(Amenity.REVIEWS_AGGREGATE_RATING);
+		if (aggregateRatingStr == null) {
+			LOG.error(String.format(Locale.US, "reviews specified without aggregate rating (%d:%s)", amenity.getOsmId(), amenity.getName()));
+			return;
+		}
+		int aggregateRating;
+		try {
+			aggregateRating = Integer.parseInt(aggregateRatingStr);
+		} catch (NumberFormatException ex) {
+			LOG.error(String.format(Locale.US, "invalid aggregate rating '%s' (%d:%s)", aggregateRatingStr, amenity.getOsmId(), amenity.getName()));
+			return;
+		}
+
+		ReviewJsonCodec codec = new ReviewJsonCodec();
+		List<Review> reviews = new ArrayList<>();
+		codec.fromJson(reviewsJson).forEach(reviews::add);
+		List<Review> reviewsToDisplay = truncateReviews(reviews);
+
+		CollapsableView cv = getReviewCollapsibleView(reviewsToDisplay);
+
+		String title = app.getString(R.string.aggregate_rating, Reviews.INSTANCE.numericalStarRating(aggregateRating), Reviews.INSTANCE.formatStarRating(aggregateRating), reviews.size());
+        BuildRowAttrs rowAttrs = new BuildRowAttrs.Builder()
+                .setIconId(R.drawable.ic_action_review)
+                .setTextPrefix(app.getString(R.string.reviews))
+                .setText(title)
+                .setCollapsableView(cv)
+                .setCollapsable(true)
+                .build();
+        buildRow(view, rowAttrs);
+	}
+
+	private List<Review> truncateReviews(List<Review> reviews) {
+		List<Review> result = new ArrayList<>();
+		for (int i = 0; i < Math.min(MAX_REVIEWS_TO_DISPLAY, reviews.size()); i++) {
+			result.add(truncateReview(reviews.get(i)));
+		}
+		return result;
+	}
+
+	private Review truncateReview(Review review) {
+		if (review.opinion().length() <= MAX_REVIEW_CHARACTERS_TO_DISPLAY) {
+			return review;
+		}
+		return review.withOpinion(review.opinion().substring(0, MAX_REVIEW_CHARACTERS_TO_DISPLAY - 1) + "…");
 	}
 
 	@Override
@@ -226,6 +283,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	@Override
 	public void buildInternal(View view) {
 		processRoutePointAmenityTags(view);
+		buildReviewsRow(view);
 		buildInternalRows(view);
 
 		buildNearestRows((ViewGroup) view);
@@ -347,5 +405,21 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	@Override
 	protected Map<String, String> getAdditionalCardParams() {
 		return AmenityExtensionsHelper.getImagesParams(extensions);
+	}
+
+	private CollapsableView getReviewCollapsibleView(List<Review> reviewData) {
+		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
+		for (Review review : reviewData) {
+			View container = createRowContainer(mapActivity, null);
+			buildReviewRow(container, review);
+			llv.addView(container);
+		}
+		return new CollapsableView(llv, this, true);
+	}
+
+	private void buildReviewRow(View container, Review review) {
+		String starRating = Reviews.INSTANCE.formatStarRating(review.rating());
+		String footer = String.format("%s - %s", review.date(), review.author());
+		buildDetailsRow(container, null, review.opinion(), starRating, footer, null, false, null);
 	}
 }
