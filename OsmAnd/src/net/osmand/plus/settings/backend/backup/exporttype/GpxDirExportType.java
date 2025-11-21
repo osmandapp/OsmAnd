@@ -29,7 +29,7 @@ public class GpxDirExportType extends AbstractExportType {
 
 	@Override
 	public int getIconId() {
-		return R.drawable.ic_action_folder_tracks;
+		return R.drawable.ic_action_folder_appearance;
 	}
 
 	@NonNull

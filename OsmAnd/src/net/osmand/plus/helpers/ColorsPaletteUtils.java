@@ -1,10 +1,11 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.IndexConstants.TXT_EXT;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
@@ -15,10 +16,14 @@ public class ColorsPaletteUtils {
 	public static final String ROUTE_PREFIX = "route_";
 	public static final String WEATHER_PREFIX = "weather_";
 	public static final String USER_PALETTE_PREFIX = "user_palette_";
+	public static final String DEFAULT_USER_PALETTE_FILE = USER_PALETTE_PREFIX + "default" + TXT_EXT;
 
 	@NonNull
-	public static String getPaletteName(@NonNull File file) {
+	public static String getPaletteName(@NonNull Context context, @NonNull File file) {
 		String fileName = file.getName();
+		if (DEFAULT_USER_PALETTE_FILE.equals(fileName)) {
+			return context.getString(R.string.user_palette);
+		}
 		String prefix = null;
 		if (fileName.startsWith(ROUTE_PREFIX)) {
 			prefix = ROUTE_PREFIX;
@@ -30,7 +35,7 @@ public class ColorsPaletteUtils {
 		if (prefix != null) {
 			fileName = fileName.replace(prefix, "");
 		}
-		fileName = fileName.replace(IndexConstants.TXT_EXT, "");
+		fileName = fileName.replace(TXT_EXT, "");
 		StringBuilder result = new StringBuilder();
 		for (String part : fileName.split("_")) {
 			result.append(Algorithms.capitalizeFirstLetter(part)).append(" ");

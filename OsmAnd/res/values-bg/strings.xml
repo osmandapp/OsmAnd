@@ -4134,7 +4134,7 @@
     <string name="rendering_value_managerName_name">По име на отговорника</string>
     <string name="auto_zoom">Автоматично мащабиране</string>
     <string name="gpx_approximation">Приближение на GPX</string>
-    <string name="shared_sting_all_colors">Всички цветове</string>
+    <string name="shared_string_all_colors">Всички цветове</string>
     <string name="routing_type">Вид маршрутизиране</string>
     <string name="rendering_attr_padusDisplayMode_name">Режим на показване на обществени земи</string>
     <string name="rendering_attr_padusDisplayMode_description">По вид на достъпа или име на отговорника</string>

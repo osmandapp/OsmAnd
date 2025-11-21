@@ -5200,7 +5200,7 @@
     <string name="routing_type">Врста избора путање</string>
     <string name="routing_type_a_star_2_phase">A* 2-фаза</string>
     <string name="java_safe">Јава (Сигурно)</string>
-    <string name="shared_sting_all_colors">Све боје</string>
+    <string name="shared_string_all_colors">Све боје</string>
     <string name="lang_ta_in">Тамилски (Индија)</string>
     <string name="release_4_7">• Нови справица \"Брзиномер\" усклађена са Андроидом Аутом\n\n • Подесите приказ карте додавањем више дугмади \"Брза радња\"\n\n • Побољшана читљивост података у графиконима\n\n • Додати услови према подацима пријемника за трагове\n\n • Побољшано прилагођавање изгледа за скуп путања\n\n • Додата подршка за додатне ГПКС-а ознаке\n\n • Прилагодите \"Удаљеност током навођења\": бирајте између тачних или заокружених бројева\n\n • Јединствено корисничко сучеље за избор трага\n\n • Пријава у ОпенСтритМап је пребачена на ОАут 2.0</string>
     <string name="distance_during_navigation">Растојање током навођења</string>
@@ -5836,7 +5836,7 @@
     <string name="max_weight_at_full_load_description">Наведите максималну тежину вашег возила при пуном оптерећењу како бисте избегли путеве и мостове са ограничењима тежине.</string>
     <string name="max_axle_load_description">Наведите максимално осовинско оптерећење вашег возила како бисте избегли путеве и мостове са ограничењима тежине.</string>
     <string name="lang_en_barebones">Енглески (основни)</string>
-    <string name="shared_sting_osm_link">Веза ОСМ-а</string>
+    <string name="shared_string_osm_link">Веза ОСМ-а</string>
     <string name="show_local_names">Прикажи локална имена</string>
     <string name="obd_alt_battery_voltage">Напон исправљача</string>
     <string name="liter_single">Литар</string>

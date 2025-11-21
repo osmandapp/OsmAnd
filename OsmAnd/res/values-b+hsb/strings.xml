@@ -1910,7 +1910,7 @@
     <string name="other_location">Dalše</string>
     <string name="map_settings_weather_wind_animation">Animacija wětřika</string>
     <string name="shared_string_details">Podrobnosće</string>
-    <string name="shared_sting_all_colors">Wšě barby</string>
+    <string name="shared_string_all_colors">Wšě barby</string>
     <string name="weather_data_sources_prompt">OsmAnd poskići wjedrowe daty z dweju žórłow:</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>

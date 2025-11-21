@@ -5410,7 +5410,7 @@
     <string name="default_buttons">Forvalgte knapper</string>
     <string name="avg_sensor_temperature">Temperatur, gjen.</string>
     <string name="max_sensor_temperature">Temperatur, maks.</string>
-    <string name="shared_sting_all_colors">Alle farger</string>
+    <string name="shared_string_all_colors">Alle farger</string>
     <string name="routing_type">Ruteberegningstype</string>
     <string name="shared_string_limit">Grense</string>
     <string name="speedometer_description">Viser hastigheten din fra GPS</string>
@@ -5750,7 +5750,7 @@
     <string name="ascent">Stigning</string>
     <string name="descent">Nedstigning</string>
     <string name="map_orientations">Kartorienteringer</string>
-    <string name="shared_sting_osm_link">OSM-lenke</string>
+    <string name="shared_string_osm_link">OSM-lenke</string>
     <string name="show_dms_grids">Bruk DMS istedenfor grader</string>
     <string name="show_dms_grids_description">Vis rutenett i grader, minutter, sekunder istedenfor grader</string>
     <string name="show_dm_grids">Bruk DM istedenfor grader eller DMS</string>

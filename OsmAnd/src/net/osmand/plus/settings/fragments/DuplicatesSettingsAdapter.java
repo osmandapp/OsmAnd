@@ -164,7 +164,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_folder_favorites, activeColorRes));
 				} else if (fileSubtype == FileSubtype.COLOR_PALETTE) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(fileSubtype.getIconId(), activeColorRes));
-					itemHolder.title.setText(ColorsPaletteUtils.getPaletteName(file));
+					itemHolder.title.setText(ColorsPaletteUtils.getPaletteName(app, file));
 					itemHolder.subTitle.setText(ColorsPaletteUtils.getPaletteTypeName(app, file));
 				} else if (fileSubtype.isMap()
 						|| fileSubtype == FileSubtype.TTS_VOICE

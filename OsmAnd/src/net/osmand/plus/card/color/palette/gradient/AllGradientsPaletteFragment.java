@@ -66,7 +66,7 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 
 		TextView title = toolbar.findViewById(R.id.toolbar_title);
-		title.setText(R.string.shared_sting_all_colors);
+		title.setText(R.string.shared_string_all_colors);
 
 		ImageView closeButton = toolbar.findViewById(R.id.close_button);
 		closeButton.setImageDrawable(getIcon(R.drawable.ic_action_close));

@@ -413,7 +413,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		} else if (fileSubtype == FileSubtype.FAVORITES_BACKUP) {
 			item.setIcon(getIcon(R.drawable.ic_action_folder_favorites, getItemIconColor(item.getTag())));
 		} else if (fileSubtype == FileSubtype.COLOR_PALETTE) {
-			item.setTitle(ColorsPaletteUtils.getPaletteName(file));
+			item.setTitle(ColorsPaletteUtils.getPaletteName(app, file));
 			item.setDescription(ColorsPaletteUtils.getPaletteTypeName(app, file));
 			item.setIcon(getIcon(R.drawable.ic_action_file_color_palette, getItemIconColor(item.getTag())));
 		} else if (fileSubtype.isMap()

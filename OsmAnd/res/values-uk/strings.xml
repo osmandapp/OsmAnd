@@ -5230,7 +5230,7 @@
     <string name="max_sensor_cadence">Каденція велосипеда, макс</string>
     <string name="avg_sensor_cadence">Каденція велосипеда, середня</string>
     <string name="lang_ta_in">Тамільська (Індія)</string>
-    <string name="shared_sting_all_colors">Всі кольори</string>
+    <string name="shared_string_all_colors">Всі кольори</string>
     <string name="routing_type_a_star_classic">A* класичний</string>
     <string name="auto_zoom_smooth">Плавно</string>
     <string name="auto_zoom">Автозум</string>
@@ -5873,7 +5873,7 @@
     <string name="max_weight_at_full_load_description">Вкажіть максимальну вагу вашого транспортного засобу при повному завантаженні, щоб уникнути доріг та мостів з обмеженнями ваги.</string>
     <string name="max_axle_load_description">Вкажіть максимальне навантаження на вісь вашого автомобіля, щоб уникнути доріг та мостів з обмеженнями ваги.</string>
     <string name="lang_en_barebones">Англійська (базова)</string>
-    <string name="shared_sting_osm_link">Посилання OSM</string>
+    <string name="shared_string_osm_link">Посилання OSM</string>
     <string name="show_local_names">Показати місцеві назви</string>
     <string name="obd_alt_battery_voltage">Напруга адаптера</string>
     <string name="liter_single">Літр</string>

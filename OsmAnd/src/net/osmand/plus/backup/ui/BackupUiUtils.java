@@ -11,18 +11,17 @@ import android.content.Context;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.GpxDirSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -98,6 +97,17 @@ public class BackupUiUtils {
 	@NonNull
 	public static String generateTimeString(@NonNull OsmandApplication app, @NonNull String summary, long time) {
 		return app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, getTimeString(app, time));
+	}
+
+	@NonNull
+	public static String getItemDescription(@NonNull OsmandApplication app, @NonNull String summary,
+			long time, @Nullable SettingsItem settingsItem) {
+		String description = generateTimeString(app, summary, time);
+		if (settingsItem instanceof GpxDirSettingsItem) {
+			String appearance = app.getString(R.string.shared_string_appearance);
+			description = app.getString(R.string.ltr_or_rtl_combine_via_bold_point, description, appearance);
+		}
+		return description;
 	}
 
 	@NonNull

@@ -5087,7 +5087,7 @@
     <string name="gpx_approximation">Aproximación GPX</string>
     <string name="routing_type">Tipo de navegación</string>
     <string name="lang_ta_in">Tamil (India)</string>
-    <string name="shared_sting_all_colors">Todos los colores</string>
+    <string name="shared_string_all_colors">Todos los colores</string>
     <string name="release_4_7">• Nuevo widget «Velocímetro» compatible con Android Auto\n\n• Configurá la pantalla agregando varios botones de «Acción rápida»\n\n• Se mejoró la legibilidad de los datos en los gráficos\n\n• Se agregaron filtros de datos del sensor para las trazas\n\n• Se mejoró la personalización de la interfaz para los grupos de trazas.\n\n• Ahora se admiten etiquetas GPX adicionales\n\n• Personalización de «Distancia al navegar»: elige entre números precisos o estimados\n\n• Interfaz de usuario unificada para la selección de trazas\n\n• Inicio de sesión en OpenStreetMap cambiado a OAuth2</string>
     <string name="precise">Preciso</string>
     <string name="round_up">Redondear</string>
@@ -5720,7 +5720,7 @@
     <string name="add_to_favorites">Agregar a favoritos</string>
     <string name="max_weight_at_full_load_description">Indicá el peso bruto máximo del vehículo, para así evitar caminos y puentes con restricciones de peso.</string>
     <string name="max_axle_load_description">Indicá la carga máxima por eje del vehículo, para así evitar caminos y puentes con restricciones de peso.</string>
-    <string name="shared_sting_osm_link">Enlace de OSM</string>
+    <string name="shared_string_osm_link">Enlace de OSM</string>
     <string name="lang_en_barebones">Inglés (básico)</string>
     <string name="show_local_names">Mostrar nombres locales</string>
     <string name="obd_alt_battery_voltage">Voltaje del adaptador</string>

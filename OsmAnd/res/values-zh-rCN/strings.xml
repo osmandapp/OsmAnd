@@ -5058,7 +5058,7 @@
     <string name="download_to_device">下载到设备</string>
     <string name="shared_string_limit">限制</string>
     <string name="delete_actions_button">删除按钮</string>
-    <string name="shared_sting_all_colors">所有颜色</string>
+    <string name="shared_string_all_colors">所有颜色</string>
     <string name="unchanged_parameter_summary">每条轨迹都将保留自己的参数。</string>
     <string name="map_widget_map_scale">地图比例</string>
     <string name="fix_north_up_descr">不要在北朝上的地图方向时允许手势旋转地图</string>
@@ -5820,7 +5820,7 @@
     <string name="description_subscription_fastspring">您可以通过 FastSpring 账号管理门户管理或取消您的订阅。</string>
     <string name="manage_purchases">管理购买</string>
     <string name="failed_to_connect">无法连接到 %1s</string>
-    <string name="shared_sting_osm_link">OSM 链接</string>
+    <string name="shared_string_osm_link">OSM 链接</string>
     <string name="shared_string_threads">线程</string>
     <string name="threads_allocated_for_rendering">分配用于渲染的线程</string>
     <string name="threads_allocated_for_rendering_desc">在某些情况下，较低的线程分配可能会加速地图渲染。</string>

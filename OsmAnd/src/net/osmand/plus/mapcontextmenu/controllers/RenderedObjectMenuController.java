@@ -27,6 +27,7 @@ public class RenderedObjectMenuController extends MenuController {
 	private RenderedObject renderedObject;
 
 	private String nameStr = null;
+	private String typeStr = null;
 
 	@Nullable
 	private final MapPoiTypes mapPoiTypes;
@@ -57,6 +58,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 	private void setRenderedObject(@NonNull RenderedObject renderedObject) {
 		nameStr = null;
+		typeStr = null;
 		this.renderedObject = renderedObject;
 		if (builder instanceof RenderedObjectMenuBuilder menuBuilder) {
 			menuBuilder.updateRenderedObject(renderedObject);
@@ -88,6 +90,13 @@ public class RenderedObjectMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getNameStr() {
+		String type = getTypeStr();
+		String name = getNameOnlyStr();
+		return Algorithms.isEmpty(name) ? type : name;
+	}
+
+	@NonNull
+	public String getNameOnlyStr() {
 		if (!Algorithms.isEmpty(nameStr)) {
 			return nameStr; // cached
 		}
@@ -105,14 +114,6 @@ public class RenderedObjectMenuController extends MenuController {
 			if (Algorithms.isEmpty(nameStr)) {
 				nameStr = renderedObject.getTagValue("name");
 			}
-		}
-
-		if (Algorithms.isEmpty(nameStr) && builder instanceof RenderedObjectMenuBuilder that) {
-			nameStr = searchObjectNameByAmenityTags(that.getAmenity());
-		}
-
-		if (Algorithms.isEmpty(nameStr)) {
-			nameStr = searchObjectNameByIconRes();
 		}
 
 		return nameStr != null ? nameStr : "";
@@ -150,10 +151,21 @@ public class RenderedObjectMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getTypeStr() {
-		if (renderedObject.isPolygon()) {
-			return getTranslatedType(renderedObject);
+		if (!Algorithms.isEmpty(typeStr)) {
+			return typeStr; // cached
 		}
-		return super.getTypeStr();
+
+		if (builder instanceof RenderedObjectMenuBuilder that) {
+			typeStr = searchObjectNameByAmenityTags(that.getAmenity());
+		} else {
+			typeStr = getTranslatedType(renderedObject); // probably never used
+		}
+
+		if (Algorithms.isEmpty(typeStr)) {
+			typeStr = searchObjectNameByIconRes();
+		}
+
+		return typeStr != null ? typeStr : super.getTypeStr();
 	}
 
 	private String getTranslatedType(RenderedObject renderedObject) {
@@ -235,7 +247,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Override
 	public boolean needStreetName() {
-		return !renderedObject.isPolygon() && (!getPointDescription().isAddress() || isObjectTypeRecognized());
+		return !renderedObject.isPolygon() && !getPointDescription().isAddress();
 	}
 
 	@Override
@@ -254,7 +266,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Override
 	public boolean needTypeStr() {
-		return renderedObject.isPolygon() || !isObjectTypeRecognized();
+		return !Algorithms.isEmpty(getNameOnlyStr());
 	}
 
 	private boolean isStartingWithRTLChar(String s) {
@@ -263,10 +275,6 @@ public class RenderedObjectMenuController extends MenuController {
 				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC
 				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_EMBEDDING
 				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_OVERRIDE;
-	}
-
-	private boolean isObjectTypeRecognized() {
-		return !Algorithms.isEmpty(getNameStr());
 	}
 
 	@Nullable

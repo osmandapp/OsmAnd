@@ -5226,7 +5226,7 @@
     <string name="rendering_attr_padusDisplayMode_description">Eftir tegund aðgangs eða nafni stjórnanda</string>
     <string name="rendering_value_access_name">Eftir tegund aðgangs</string>
     <string name="rendering_value_managerName_name">Eftir nafni stjórnanda</string>
-    <string name="shared_sting_all_colors">Allir litir</string>
+    <string name="shared_string_all_colors">Allir litir</string>
     <string name="visualized_by">Myndgert af</string>
     <string name="wall_color">Litur á vegg</string>
     <string name="track_line">Ferillína</string>
@@ -5838,7 +5838,7 @@
     <string name="map_orientations_choose_description">Skildu þetta eftir autt til að nota alla tiltæka hami, eða bættu við einungis þeim sem þú kýst að nota.</string>
     <string name="description_purchases_fastspring">Þú getur sýslað með innkaup þín í gegnum FastSpring aðgangsstýringavefinn.</string>
     <string name="description_subscription_fastspring">Þú getur sýslað með eða sagt upp áskriftinni þinni í gegnum FastSpring aðgangsstýringavefinn.</string>
-    <string name="shared_sting_osm_link">OSM-tengill</string>
+    <string name="shared_string_osm_link">OSM-tengill</string>
     <string name="obd_alt_battery_voltage">Spenna hleðslutækis</string>
     <string name="liter_single">Lítri</string>
     <string name="imperial_gallon">Breskt gallon</string>

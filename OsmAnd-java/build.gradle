@@ -51,6 +51,7 @@ tasks.register('collectTestPhrasesResources', Copy) {
 }
 
 tasks.register('collectTestResources', Copy) {
+	delete fileTree("src/test/resources/search")
 	into "src/test/resources/"
 	from("../../resources/test-resources") {
 		include "*"

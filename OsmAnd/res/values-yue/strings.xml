@@ -556,7 +556,7 @@
     <string name="round_up">大約</string>
     <string name="release_4_7">• 與 Android Auto 相容的新「速度計」小工具 \n \n • 透過新增多個「快速動作」按鈕來設定地圖畫面 \n \n • 改善圖表中資料的可讀性 \n \n • 新增了按軌跡的感應器資料過濾功能 \n \n • 改善的軌跡群組外觀自訂 \n \n • 新增了對其他 GPX 標籤的支援 \n \n • 自訂「導航期間的距離」：在精確數字或四捨五入數字之間進行選擇 \n \n • 用於軌跡選擇的統一使用者介面 \n \n • OpenStreetMap 登入已切換至 OAuth 2.0</string>
     <string name="lang_ta_in">印度泰米爾文</string>
-    <string name="shared_sting_all_colors">所有顏色</string>
+    <string name="shared_string_all_colors">所有顏色</string>
     <string name="routing_type_a_star_2_phase">A* 2-相</string>
     <string name="routing_type_a_star_classic">A* 經典</string>
     <string name="auto_zoom_smooth">平滑</string>
@@ -5637,7 +5637,7 @@
     <string name="add_to_a_folder">新增至資料夾</string>
     <string name="add_to_favorites">新增至收藏</string>
     <string name="max_weight_at_full_load_description">請提供你車輛滿載時的最大總重，以避開有限重的道路與橋樑。</string>
-    <string name="shared_sting_osm_link">OSM 連結</string>
+    <string name="shared_string_osm_link">OSM 連結</string>
     <string name="show_local_names">顯示本地名稱</string>
     <string name="lang_en_barebones">英文（精簡版）</string>
 </resources>

@@ -603,7 +603,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		if (!Algorithms.isEmpty(link)) {
 			Drawable icon = menuBuilder.getRowIcon(R.drawable.ic_action_openstreetmap_logo);
-			String textPrefix = app.getString(R.string.shared_sting_osm_link);
+			String textPrefix = app.getString(R.string.shared_string_osm_link);
 			menuBuilder.buildRow(view, new BuildRowAttrs.Builder()
 					.setIcon(icon).setTextPrefix(textPrefix).setText(link)
 					.setNeedLinks(true).setUrl(true).build());

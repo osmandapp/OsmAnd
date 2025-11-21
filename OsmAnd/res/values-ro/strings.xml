@@ -5508,7 +5508,7 @@
     <string name="routing_type">Tip de rutare</string>
     <string name="routing_type_a_star_2_phase">A* bi-fazică</string>
     <string name="java_safe">Java (Sigur)</string>
-    <string name="shared_sting_all_colors">Toate culorile</string>
+    <string name="shared_string_all_colors">Toate culorile</string>
     <string name="lang_ta_in">Tamil (India)</string>
     <string name="fix_north_up">Activează Nordul sus fixat</string>
     <string name="gpx_approximation_cpp">Bazat pe rutare (C++)</string>

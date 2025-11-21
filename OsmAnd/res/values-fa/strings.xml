@@ -4082,7 +4082,7 @@
     <string name="complex_widget_alert">ابزارک %1$s تنها میتواند در ردیف خود قرار بگیرد.</string>
     <string name="auto_zoom">بزرگنمایی خودکار</string>
     <string name="auto_zoom_smooth">نرم</string>
-    <string name="shared_sting_all_colors">تمام رنگ ها</string>
+    <string name="shared_string_all_colors">تمام رنگ ها</string>
     <string name="rendering_value_access_name">با نوع دسترسی</string>
     <string name="rendering_value_managerName_name">با نام مدی</string>
     <string name="rendering_attr_padusDisplayMode_name">حالت نمایش زمین های عمومی</string>
@@ -4201,7 +4201,7 @@
     <string name="description_subscription_fastspring">می‌توانید اشتراک خود را از طریق پرتال مدیریت حساب FastSpring مدیریت یا لغو کنید.</string>
     <string name="manage_purchases">مدیریت خریدها</string>
     <string name="failed_to_connect">اتصال به %1s شکست خورد</string>
-    <string name="shared_sting_osm_link">پیوند OSM</string>
+    <string name="shared_string_osm_link">پیوند OSM</string>
     <string name="deleting">در حال پاک کردن…</string>
     <string name="release_5_1">• افزودن پشتیبانی از خریدهای وب و چندسکویی\n\n • انتقال واحدهای دما به تنظیمات عمومی برای دسترسی آسان‌تر\n\n • افزودن نشانگر سطح باتری برای حسگرهای BLE\n\n • رابط کاربری جدید و شهودی‌تر برای انتخاب نقطه در ناوبری\n\n • بهبود دید ابزارک‌ها با حاشیه جدید\n\n • افزودن تحلیل‌گر سربالایی/سرازیری\n\n • گسترش یکپارچگی با ویکی‌پدیا و ویکی‌وویج برای نقاط دیدنی بیشتر.</string>
     <string name="shared_string_threads">رشته‌ها</string>

@@ -5213,7 +5213,7 @@
     <string name="java_safe">Java (безопасно)</string>
     <string name="gpx_approximation">Аппроксимация gpx</string>
     <string name="routing_type">Тип маршрутизации</string>
-    <string name="shared_sting_all_colors">Все цвета</string>
+    <string name="shared_string_all_colors">Все цвета</string>
     <string name="routing_type_a_star_2_phase">A* 2-фазный</string>
     <string name="rendering_attr_padusDisplayMode_name">Режим отображения общественных земель</string>
     <string name="rendering_attr_padusDisplayMode_description">По типу доступа или имени менеджера</string>

@@ -263,7 +263,7 @@ public class LocalItemUtils {
 				return RendererRegistry.getRendererName(context, (String) attachedObject);
 			}
 		} else if (type == COLOR_DATA) {
-			return ColorsPaletteUtils.getPaletteName(item.getFile());
+			return ColorsPaletteUtils.getPaletteName(context, item.getFile());
 		}
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		OsmandRegions regions = app.getResourceManager().getOsmandRegions();
