@@ -1402,7 +1402,7 @@
     <string name="shared_string_action_template">Action {0}</string>
     <string name="shared_string_video">Vidéo</string>
     <string name="shared_string_photo">Photo</string>
-    <string name="shared_string_release">Libéré</string>
+    <string name="shared_string_release">sorti le</string>
     <string name="drawer">Liste simple</string>
     <string name="waypoint_visit_after">Visiter après</string>
     <string name="waypoint_visit_before">Visiter avant</string>
