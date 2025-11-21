@@ -51,21 +51,18 @@ public class DownloadResources extends DownloadResourceGroup {
 	public boolean mapVersionIsIncreased;
 	private List<IndexItem> rawResources;
 	private Map<WorldRegion, List<IndexItem>> groupByRegion;
-	private LoadedIndexItemsHelper loadedIndexItemsHelper;
-	private List<IndexItem> deletedItems = new ArrayList<>();
-	private ItemsToUpdateCollection itemsToUpdate = ItemsToUpdateCollection.emptyInstance();
+	private OutdatedIndexesCollection outdatedItems = OutdatedIndexesCollection.emptyInstance();
 
 
 	public DownloadResources(OsmandApplication app) {
 		super(null, DownloadResourceGroupType.WORLD, "");
 		this.region = app.getRegions().getWorldRegion();
 		this.app = app;
-		this.loadedIndexItemsHelper = new LoadedIndexItemsHelper(app);
 	}
 
 	@NonNull
-	public ItemsToUpdateCollection getItemsToUpdate() {
-		return itemsToUpdate;
+	public OutdatedIndexesCollection getOutdatedItems() {
+		return outdatedItems;
 	}
 
 	@Nullable
@@ -178,25 +175,21 @@ public class DownloadResources extends DownloadResourceGroup {
 	public void updateLoadedFiles() {
 		List<IndexItem> filtered = rawResources;
 		if (filtered != null) {
-			loadedIndexItemsHelper.initAlreadyLoadedFiles();
-			itemsToUpdate = loadedIndexItemsHelper.collectItemsToUpdate(filtered);
-			deletedItems = loadedIndexItemsHelper.collectDeletedItems(getDeletedMapsGroup(), filtered);
+			DownloadResourceGroup deprecatedMapsGroup = getDeprecatedMapsGroup();
+			if (deprecatedMapsGroup != null) {
+				List<IndexItem> deprecatedItems = deprecatedMapsGroup.getIndividualResources();
+				outdatedItems = OutdatedIndexesCollector.collect(app, filtered, deprecatedItems);
+			}
 		}
 	}
 
-	protected void updateFilesToUpdate() {
-		loadedIndexItemsHelper.initAlreadyLoadedFiles();
-		itemsToUpdate = loadedIndexItemsHelper.collectItemsToUpdate(itemsToUpdate.all());
+	protected void updateOutdatedFiles() {
+		outdatedItems = OutdatedIndexesCollector.collect(app, outdatedItems);
 	}
 
 	@Nullable
-	private DownloadResourceGroup getDeletedMapsGroup() {
+	private DownloadResourceGroup getDeprecatedMapsGroup() {
 		return getSubGroupById(DownloadResourceGroupType.DELETED_MAPS.getDefaultId());
-	}
-
-	@NonNull
-	public List<IndexItem> getDeletedItems() {
-		return deletedItems;
 	}
 
 	protected boolean prepareData(List<IndexItem> resources) {

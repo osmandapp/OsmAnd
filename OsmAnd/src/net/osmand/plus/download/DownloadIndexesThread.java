@@ -503,7 +503,7 @@ public class DownloadIndexesThread {
 				}
 			}
 			currentRunningTask.remove(this);
-			indexes.updateFilesToUpdate();
+			indexes.updateOutdatedFiles();
 			downloadHasFinished();
 		}
 
@@ -553,7 +553,7 @@ public class DownloadIndexesThread {
 							}
 							filesToReindex.clear();
 							// slow down but let update all button work properly
-							indexes.updateFilesToUpdate();
+							indexes.updateOutdatedFiles();
 						}
 					}
 				} finally {

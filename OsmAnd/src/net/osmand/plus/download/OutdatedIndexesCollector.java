@@ -1,7 +1,6 @@
 package net.osmand.plus.download;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -10,7 +9,6 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -22,23 +20,35 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LoadedIndexItemsHelper {
+public class OutdatedIndexesCollector {
 
-	private static final Log LOG = PlatformUtil.getLog(LoadedIndexItemsHelper.class);
+	private static final Log LOG = PlatformUtil.getLog(OutdatedIndexesCollector.class);
 
 	private final OsmandApplication app;
 	private Map<String, String> indexFileNames = new LinkedHashMap<>();
 	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<>();
 
-	private boolean initialized = false;
+	@NonNull
+	public static OutdatedIndexesCollection collect(@NonNull OsmandApplication app,
+	                                                @NonNull OutdatedIndexesCollection outdatedIndexes) {
+		return collect(app, outdatedIndexes.all(), outdatedIndexes.deprecated());
+	}
 
-	public LoadedIndexItemsHelper(@NonNull OsmandApplication app) {
+	@NonNull
+	public static OutdatedIndexesCollection collect(@NonNull OsmandApplication app,
+	                                                @NonNull List<IndexItem> indexItems,
+	                                                @NonNull List<IndexItem> deprecatedItems) {
+		return new OutdatedIndexesCollector(app).collect(indexItems, deprecatedItems);
+	}
+
+	public OutdatedIndexesCollector(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 
 	@NonNull
-	public ItemsToUpdateCollection collectItemsToUpdate(@NonNull List<IndexItem> indexItems) {
-		if (!initialized) initAlreadyLoadedFiles();
+	private OutdatedIndexesCollection collect(@NonNull List<IndexItem> indexItems,
+	                                          @NonNull List<IndexItem> deprecatedItems) {
+		initAlreadyLoadedFiles();
 		List<IndexItem> outdatedIndexes = new ArrayList<>();
 		List<IndexItem> activatedOutdatedIndexes = new ArrayList<>();
 
@@ -54,26 +64,15 @@ public class LoadedIndexItemsHelper {
 		List<DownloadItem> groupedIndexes = groupItemsByRegion(outdatedIndexes);
 		List<DownloadItem> groupedActivatedIndexes = groupItemsByRegion(activatedOutdatedIndexes);
 
-		return new ItemsToUpdateCollection(outdatedIndexes,
-				activatedOutdatedIndexes, groupedIndexes, groupedActivatedIndexes);
-	}
-
-	@NonNull
-	public List<IndexItem> collectDeletedItems(@Nullable DownloadResourceGroup deletedMaps,
-	                                           @Nullable List<IndexItem> indexItems) {
-		if (!initialized) initAlreadyLoadedFiles();
-		List<IndexItem> itemsToDelete = new ArrayList<>();
-		if (deletedMaps != null) {
-			List<IndexItem> deletedMapsItems = deletedMaps.getIndividualResources();
-			if (!Algorithms.isEmpty(deletedMapsItems) && indexItems != null) {
-				for (IndexItem item : deletedMapsItems) {
-					if (indexActivatedFileNames.containsKey(item.getTargetFileName())) {
-						itemsToDelete.add(item);
-					}
-				}
+		List<IndexItem> deprecatedActivatedIndexes = new ArrayList<>();
+		for (IndexItem item : deprecatedItems) {
+			if (checkIfItemActivated(item)) {
+				deprecatedActivatedIndexes.add(item);
 			}
 		}
-		return itemsToDelete;
+		return new OutdatedIndexesCollection(outdatedIndexes,
+				activatedOutdatedIndexes, groupedIndexes,
+				groupedActivatedIndexes, deprecatedActivatedIndexes);
 	}
 
 	public void initAlreadyLoadedFiles() {
@@ -103,9 +102,9 @@ public class LoadedIndexItemsHelper {
 		app.getResourceManager().getBackupIndexes(indexFileNames);
 		this.indexFileNames = indexFileNames;
 		this.indexActivatedFileNames = indexActivatedFileNames;
-		initialized = true;
 	}
 
+	@NonNull
 	private Map<String, String> listWithAlternatives(java.text.DateFormat dateFormat, File file,
 	                                                 String ext, Map<String, String> files) {
 		if (file.isDirectory()) {
@@ -123,7 +122,8 @@ public class LoadedIndexItemsHelper {
 		return files;
 	}
 
-	private File findFileInDir(File file) {
+	@NonNull
+	private File findFileInDir(@NonNull File file) {
 		if (file.isDirectory()) {
 			File[] lf = file.listFiles();
 			if (lf != null) {
