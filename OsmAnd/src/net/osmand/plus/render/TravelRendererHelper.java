@@ -276,7 +276,7 @@ public class TravelRendererHelper implements RendererEventListener {
 			PoiCategory routes = app.getPoiTypes().getRoutes();
 			for (PoiType subType : routes.getPoiTypes()) {
 				String subTypeKeyName = subType.getKeyName();
-				if (subTypeKeyName.startsWith(ROUTES_PREFIX)) {
+				if (subTypeKeyName.startsWith(ROUTES_PREFIX) || subTypeKeyName.contains(";" + ROUTES_PREFIX)) {
 					routeTrackFilters.add(app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + subTypeKeyName));
 				}
 			}

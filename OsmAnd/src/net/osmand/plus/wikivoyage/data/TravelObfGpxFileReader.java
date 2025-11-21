@@ -318,7 +318,12 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             poiTypeFilter = new BinaryMapIndexReader.SearchPoiTypeFilter() {
                 @Override
                 public boolean accept(PoiCategory poiCategory, String s) {
-                    return subType.equals(s) || ROUTE_TRACK.equals(s) || ROUTE_TRACK_POINT.equals(s);
+                    for (String type : subType.split(";")) {
+                        if (type.equals(s) || ROUTE_TRACK.equals(s) || ROUTE_TRACK_POINT.equals(s)) {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
 
                 @Override
@@ -543,20 +548,21 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     private void reconstructActivityFromAmenity(@NonNull Amenity amenity,
                                                 @NonNull Map<String, String> gpxFileExtensions) {
         if (amenity.isRouteTrack() && amenity.getSubType() != null) {
-            String subType = amenity.getSubType();
-            if (subType.startsWith(ROUTES_PREFIX)) {
-                String osmValue = amenity.getType().getPoiTypeByKeyName(subType).getOsmValue();
-                if (!Algorithms.isEmpty(osmValue)) {
-                    if (amenity.hasOsmRouteId() || !"other".equals(osmValue)) {
-                        gpxFileExtensions.put(ROUTE_TYPE, osmValue); // do not litter gpx with default route_type
-                    }
-                    RouteActivityHelper helper = app.getRouteActivityHelper();
-                    for (String key : amenity.getAdditionalInfoKeys()) {
-                        if (key.startsWith(ROUTE_ACTIVITY_TYPE + "_")) {
-                            String activityType = amenity.getAdditionalInfo(key);
-                            if (!activityType.isEmpty() && helper.findRouteActivity(activityType) != null) {
-                                gpxFileExtensions.put(GpxUtilities.ACTIVITY_TYPE, activityType); // osmand:activity in gpx
-                                break;
+            for (String subType : amenity.getSubType().split(";")) {
+                if (subType.startsWith(ROUTES_PREFIX)) {
+                    String osmValue = amenity.getType().getPoiTypeByKeyName(subType).getOsmValue();
+                    if (!Algorithms.isEmpty(osmValue)) {
+                        if (amenity.hasOsmRouteId() || !"other".equals(osmValue)) {
+                            gpxFileExtensions.put(ROUTE_TYPE, osmValue); // do not litter gpx with default route_type
+                        }
+                        RouteActivityHelper helper = app.getRouteActivityHelper();
+                        for (String key : amenity.getAdditionalInfoKeys()) {
+                            if (key.startsWith(ROUTE_ACTIVITY_TYPE + "_")) {
+                                String activityType = amenity.getAdditionalInfo(key);
+                                if (!activityType.isEmpty() && helper.findRouteActivity(activityType) != null) {
+                                    gpxFileExtensions.put(GpxUtilities.ACTIVITY_TYPE, activityType); // osmand:activity in gpx
+                                    break;
+                                }
                             }
                         }
                     }

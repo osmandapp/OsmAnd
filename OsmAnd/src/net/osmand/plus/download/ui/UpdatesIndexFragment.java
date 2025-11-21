@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -117,13 +118,17 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 	private void setupOnItemLongClickListener() {
 		getListView().setOnItemLongClickListener((parent, v, position, id) -> {
-			if (position > 0) {
-				DownloadItem downloadItem = (DownloadItem) getListAdapter().getItem(position);
-				if (downloadItem instanceof IndexItem indexItem) {
-					LocalItem localItem = indexItem.toLocalItem(app);
-					if (localItem != null) {
-						askShowContextMenu(v, indexItem, localItem);
-						return true;
+			ListAdapter adapter = getListAdapter();
+			if (adapter != null) {
+				LocalIndexItem localIndexItem = (LocalIndexItem) adapter.getItem(position);
+				if (localIndexItem.isDownloadItem()) {
+					DownloadItem downloadItem = localIndexItem.downloadItem;
+					if (downloadItem instanceof IndexItem indexItem) {
+						LocalItem localItem = indexItem.toLocalItem(app);
+						if (localItem != null) {
+							askShowContextMenu(v, indexItem, localItem);
+							return true;
+						}
 					}
 				}
 			}

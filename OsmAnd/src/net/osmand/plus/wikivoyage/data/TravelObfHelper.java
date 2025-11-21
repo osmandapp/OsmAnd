@@ -344,7 +344,8 @@ public class TravelObfHelper implements TravelHelper {
 		SearchPoiTypeFilter poiTypeFilter = new BinaryMapIndexReader.SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory poiCategory, String subType) {
-				return subType.startsWith(ROUTES_PREFIX) || ROUTE_TRACK.equals(subType);
+				return subType.startsWith(ROUTES_PREFIX) || subType.contains(";" + ROUTES_PREFIX)
+						|| ROUTE_TRACK.equals(subType);
 			}
 
 			@Override
@@ -447,7 +448,8 @@ public class TravelObfHelper implements TravelHelper {
 					if (subcategory.equals(filter)) {
 						return true;
 					}
-					if (ROUTE_TRACK.equals(filter) && subcategory.startsWith(ROUTES_PREFIX)) {
+					if (ROUTE_TRACK.equals(filter)
+							&& (subcategory.startsWith(ROUTES_PREFIX) || subcategory.contains(";" + ROUTES_PREFIX))) {
 						return true; // include routes:routes_xxx with routes:route_track filter
 					}
 				}

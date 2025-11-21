@@ -546,8 +546,9 @@ public class OsmandApplication extends MultiDexApplication {
 
 			OsmandMap osmandMap = getOsmandMap();
 			if (osmandMap != null) {
-				osmandMap.getMapView().updateDisplayMetrics(displayMetrics, displayMetrics.widthPixels,
-						displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this));
+				int width = displayMetrics.widthPixels;
+				int height = displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this);
+				osmandMap.getMapView().updateDisplayMetrics(displayMetrics, width, height);
 			}
 		}
 
