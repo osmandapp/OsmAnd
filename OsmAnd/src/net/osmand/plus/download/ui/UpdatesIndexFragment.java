@@ -156,7 +156,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	public void invalidateListView(@NonNull Context context) {
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
 		OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
-		List<DownloadItem> downloadItems = new ArrayList<>(indexes.getGroupedItemsToUpdate(OutdatedIndexesType.ACTIVATED));
+		List<DownloadItem> downloadItems = new ArrayList<>(indexes.getItemsToUpdate().groupedActivated());
 		boolean showBanner = !InAppPurchaseUtils.isLiveUpdatesAvailable(app)
 				|| settings.SHOULD_SHOW_FREE_VERSION_BANNER.get();
 
@@ -189,7 +189,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		if (view == null) return;
 
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
-		List<DownloadItem> downloadItems = indexes.getGroupedItemsToUpdate(OutdatedIndexesType.ACTIVATED);
+		List<DownloadItem> downloadItems = indexes.getItemsToUpdate().groupedActivated();
 		if (getListAdapter() != null && downloadItems.isEmpty()) {
 			errorMessage = getString(indexes.isDownloadedFromInternet
 					? R.string.everything_up_to_date
@@ -205,7 +205,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		if (view == null) return;
 
 		DownloadResources indexes = requireMyActivity().getDownloadThread().getIndexes();
-		List<IndexItem> indexItems = indexes.getItemsToUpdate(OutdatedIndexesType.ACTIVATED);
+		List<IndexItem> indexItems = indexes.getItemsToUpdate().activated();
 		TextView updateAllButton = view.findViewById(R.id.updateAllButton);
 		if (indexItems.isEmpty() || indexItems.get(0).getType() == null) {
 			if (!Algorithms.isEmpty(errorMessage)) {

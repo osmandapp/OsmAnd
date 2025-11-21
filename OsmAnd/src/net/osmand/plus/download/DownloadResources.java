@@ -17,7 +17,6 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.custom.CustomRegion;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
@@ -26,9 +25,7 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -38,16 +35,7 @@ import java.util.Map;
 
 public class DownloadResources extends DownloadResourceGroup {
 
-	public boolean isDownloadedFromInternet;
-	public boolean downloadFromInternetFailed;
-	public boolean mapVersionIsIncreased;
-	public OsmandApplication app;
-	private Map<String, String> indexFileNames = new LinkedHashMap<>();
-	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<>();
-	private List<IndexItem> rawResources;
-	private Map<WorldRegion, List<IndexItem>> groupByRegion;
-	private List<IndexItem> deletedItems = new ArrayList<>();
-	private OutdatedIndexesBundle outdatedIndexes;
+	private static final Log LOG = PlatformUtil.getLog(DownloadResources.class);
 	public static final String WORLD_SEAMARKS_KEY = "world_seamarks";
 	public static final String WORLD_SEAMARKS_NAME = "World_seamarks";
 	public static final String WORLD_SEAMARKS_OLD_KEY = "world_seamarks_basemap";
@@ -55,33 +43,29 @@ public class DownloadResources extends DownloadResourceGroup {
 	public static final String WORLD_CONTOURS_SUFFIX = "world_contours";
 	public static final String NAUTICAL_DEPTH_POINTS_SUFFIX = "points";
 	public static final String WIKIVOYAGE_FILE_FILTER = "wikivoyage";
-	private static final Log LOG = PlatformUtil.getLog(DownloadResources.class);
+
+	public OsmandApplication app;
+
+	public boolean isDownloadedFromInternet;
+	public boolean downloadFromInternetFailed;
+	public boolean mapVersionIsIncreased;
+	private List<IndexItem> rawResources;
+	private Map<WorldRegion, List<IndexItem>> groupByRegion;
+	private LoadedIndexItemsHelper loadedIndexItemsHelper;
+	private List<IndexItem> deletedItems = new ArrayList<>();
+	private ItemsToUpdateCollection itemsToUpdate = ItemsToUpdateCollection.emptyInstance();
 
 
 	public DownloadResources(OsmandApplication app) {
 		super(null, DownloadResourceGroupType.WORLD, "");
 		this.region = app.getRegions().getWorldRegion();
 		this.app = app;
+		this.loadedIndexItemsHelper = new LoadedIndexItemsHelper(app);
 	}
 
 	@NonNull
-	public List<IndexItem> getItemsToUpdate(@NonNull OutdatedIndexesType type) {
-		if (outdatedIndexes != null) {
-			return type == OutdatedIndexesType.ALL
-					? outdatedIndexes.all()
-					: outdatedIndexes.activated();
-		}
-		return Collections.emptyList();
-	}
-
-	@NonNull
-	public List<DownloadItem> getGroupedItemsToUpdate(@NonNull OutdatedIndexesType type) {
-		if (outdatedIndexes != null) {
-			return type == OutdatedIndexesType.ALL
-					? outdatedIndexes.allGrouped()
-					: outdatedIndexes.activatedGrouped();
-		}
-		return Collections.emptyList();
+	public ItemsToUpdateCollection getItemsToUpdate() {
+		return itemsToUpdate;
 	}
 
 	@Nullable
@@ -192,106 +176,25 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	public void updateLoadedFiles() {
-		initAlreadyLoadedFiles();
-		prepareFilesToUpdate();
-		prepareDeletedFiles();
-	}
-
-	private void initAlreadyLoadedFiles() {
-		ResourceManager resourceManager = app.getResourceManager();
-		DateFormat dateFormat = resourceManager.getDateFormat();
-		Map<String, String> indexFileNames = resourceManager.getIndexFileNames();
-		Map<String, String> indexActivatedFileNames = resourceManager.getIndexFileNames();
-
-		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexActivatedFileNames);
-		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
-				IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT, indexActivatedFileNames);
-		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
-				IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, indexActivatedFileNames);
-		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WEATHER_FORECAST_DIR),
-				IndexConstants.WEATHER_EXT, indexActivatedFileNames);
-
-		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexFileNames);
-		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.TILES_INDEX_DIR), IndexConstants.SQLITE_EXT,
-				indexFileNames);
-		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
-				IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT, indexFileNames);
-		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
-				IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, indexFileNames);
-		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.GEOTIFF_DIR),
-				IndexConstants.TIF_EXT, indexFileNames);
-
-		app.getResourceManager().getBackupIndexes(indexFileNames);
-		this.indexFileNames = indexFileNames;
-		this.indexActivatedFileNames = indexActivatedFileNames;
-	}
-
-	private void prepareFilesToUpdate() {
 		List<IndexItem> filtered = rawResources;
 		if (filtered != null) {
-			outdatedIndexes = CollectOutdatedIndexesAlgorithm.collect(
-					app, indexFileNames, indexActivatedFileNames, filtered);
+			loadedIndexItemsHelper.initAlreadyLoadedFiles();
+			itemsToUpdate = loadedIndexItemsHelper.collectItemsToUpdate(filtered);
+			deletedItems = loadedIndexItemsHelper.collectDeletedItems(getDeletedMapsGroup(), filtered);
 		}
 	}
 
 	protected void updateFilesToUpdate() {
-		initAlreadyLoadedFiles();
-		recalculateFilesToUpdate();
+		loadedIndexItemsHelper.initAlreadyLoadedFiles();
+		itemsToUpdate = loadedIndexItemsHelper.collectItemsToUpdate(itemsToUpdate.all());
 	}
 
-	private void recalculateFilesToUpdate() {
-		outdatedIndexes = CollectOutdatedIndexesAlgorithm.collect(
-				app, indexFileNames, indexActivatedFileNames, getItemsToUpdate(OutdatedIndexesType.ALL));
+	@Nullable
+	private DownloadResourceGroup getDeletedMapsGroup() {
+		return getSubGroupById(DownloadResourceGroupType.DELETED_MAPS.getDefaultId());
 	}
 
-	private Map<String, String> listWithAlternatives(java.text.DateFormat dateFormat, File file,
-	                                                 String ext, Map<String, String> files) {
-		if (file.isDirectory()) {
-			file.list((dir, filename) -> {
-				if (filename.endsWith(ext)) {
-					String date = dateFormat.format(findFileInDir(new File(dir, filename)).lastModified());
-					files.put(filename, date);
-					return true;
-				} else {
-					return false;
-				}
-			});
-
-		}
-		return files;
-	}
-
-	private File findFileInDir(File file) {
-		if (file.isDirectory()) {
-			File[] lf = file.listFiles();
-			if (lf != null) {
-				for (File f : lf) {
-					if (f.isFile()) {
-						return f;
-					}
-				}
-			}
-		}
-		return file;
-	}
-
-	private void prepareDeletedFiles() {
-		this.deletedItems.clear();
-		List<IndexItem> itemsToDelete = new ArrayList<>();
-		DownloadResourceGroup deletedMaps = getSubGroupById(DownloadResourceGroupType.DELETED_MAPS.getDefaultId());
-		if (deletedMaps != null) {
-			List<IndexItem> deletedMapsItems = deletedMaps.getIndividualResources();
-			if (!Algorithms.isEmpty(deletedMapsItems) && rawResources != null) {
-				for (IndexItem item : deletedMapsItems) {
-					if (indexActivatedFileNames.containsKey(item.getTargetFileName())) {
-						itemsToDelete.add(item);
-					}
-				}
-			}
-		}
-		this.deletedItems.addAll(itemsToDelete);
-	}
-
+	@NonNull
 	public List<IndexItem> getDeletedItems() {
 		return deletedItems;
 	}

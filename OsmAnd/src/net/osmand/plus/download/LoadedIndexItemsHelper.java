@@ -1,6 +1,7 @@
 package net.osmand.plus.download;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -8,6 +9,8 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -19,25 +22,23 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CollectOutdatedIndexesAlgorithm {
+public class LoadedIndexItemsHelper {
 
-	private static final Log LOG = PlatformUtil.getLog(CollectOutdatedIndexesAlgorithm.class);
+	private static final Log LOG = PlatformUtil.getLog(LoadedIndexItemsHelper.class);
 
 	private final OsmandApplication app;
+	private Map<String, String> indexFileNames = new LinkedHashMap<>();
+	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<>();
 
-	private final Map<String, String> indexFileNames;
-	private final Map<String, String> indexActivatedFileNames;
+	private boolean initialized = false;
 
-	private CollectOutdatedIndexesAlgorithm(@NonNull OsmandApplication app,
-	                                        @NonNull Map<String, String> indexFileNames,
-	                                        @NonNull Map<String, String> indexActivatedFileNames) {
+	public LoadedIndexItemsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-		this.indexFileNames = indexFileNames;
-		this.indexActivatedFileNames = indexActivatedFileNames;
 	}
 
 	@NonNull
-	public OutdatedIndexesBundle collect(@NonNull List<IndexItem> indexItems) {
+	public ItemsToUpdateCollection collectItemsToUpdate(@NonNull List<IndexItem> indexItems) {
+		if (!initialized) initAlreadyLoadedFiles();
 		List<IndexItem> outdatedIndexes = new ArrayList<>();
 		List<IndexItem> activatedOutdatedIndexes = new ArrayList<>();
 
@@ -50,12 +51,90 @@ public class CollectOutdatedIndexesAlgorithm {
 				}
 			}
 		}
-		List<DownloadItem> groupedOutdatedIndexes = groupItemsByRegion(outdatedIndexes);
-		List<DownloadItem> groupedActivatedOutdatedIndexes = groupItemsByRegion(activatedOutdatedIndexes);
+		List<DownloadItem> groupedIndexes = groupItemsByRegion(outdatedIndexes);
+		List<DownloadItem> groupedActivatedIndexes = groupItemsByRegion(activatedOutdatedIndexes);
 
-		return new OutdatedIndexesBundle(
-				outdatedIndexes, activatedOutdatedIndexes,
-				groupedOutdatedIndexes, groupedActivatedOutdatedIndexes);
+		return new ItemsToUpdateCollection(outdatedIndexes,
+				activatedOutdatedIndexes, groupedIndexes, groupedActivatedIndexes);
+	}
+
+	@NonNull
+	public List<IndexItem> collectDeletedItems(@Nullable DownloadResourceGroup deletedMaps,
+	                                           @Nullable List<IndexItem> indexItems) {
+		if (!initialized) initAlreadyLoadedFiles();
+		List<IndexItem> itemsToDelete = new ArrayList<>();
+		if (deletedMaps != null) {
+			List<IndexItem> deletedMapsItems = deletedMaps.getIndividualResources();
+			if (!Algorithms.isEmpty(deletedMapsItems) && indexItems != null) {
+				for (IndexItem item : deletedMapsItems) {
+					if (indexActivatedFileNames.containsKey(item.getTargetFileName())) {
+						itemsToDelete.add(item);
+					}
+				}
+			}
+		}
+		return itemsToDelete;
+	}
+
+	public void initAlreadyLoadedFiles() {
+		ResourceManager resourceManager = app.getResourceManager();
+		DateFormat dateFormat = resourceManager.getDateFormat();
+		Map<String, String> indexFileNames = resourceManager.getIndexFileNames();
+		Map<String, String> indexActivatedFileNames = resourceManager.getIndexFileNames();
+
+		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexActivatedFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
+				IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT, indexActivatedFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
+				IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, indexActivatedFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WEATHER_FORECAST_DIR),
+				IndexConstants.WEATHER_EXT, indexActivatedFileNames);
+
+		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.TILES_INDEX_DIR), IndexConstants.SQLITE_EXT,
+				indexFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
+				IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT, indexFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
+				IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, indexFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.GEOTIFF_DIR),
+				IndexConstants.TIF_EXT, indexFileNames);
+
+		app.getResourceManager().getBackupIndexes(indexFileNames);
+		this.indexFileNames = indexFileNames;
+		this.indexActivatedFileNames = indexActivatedFileNames;
+		initialized = true;
+	}
+
+	private Map<String, String> listWithAlternatives(java.text.DateFormat dateFormat, File file,
+	                                                 String ext, Map<String, String> files) {
+		if (file.isDirectory()) {
+			file.list((dir, filename) -> {
+				if (filename.endsWith(ext)) {
+					String date = dateFormat.format(findFileInDir(new File(dir, filename)).lastModified());
+					files.put(filename, date);
+					return true;
+				} else {
+					return false;
+				}
+			});
+
+		}
+		return files;
+	}
+
+	private File findFileInDir(File file) {
+		if (file.isDirectory()) {
+			File[] lf = file.listFiles();
+			if (lf != null) {
+				for (File f : lf) {
+					if (f.isFile()) {
+						return f;
+					}
+				}
+			}
+		}
+		return file;
 	}
 
 	@NonNull
@@ -177,14 +256,4 @@ public class CollectOutdatedIndexesAlgorithm {
 	}
 
 	private record UpdateKey(DownloadActivityType type, WorldRegion region) {}
-
-	@NonNull
-	public static OutdatedIndexesBundle collect(@NonNull OsmandApplication app,
-												@NonNull Map<String, String> indexFileNames,
-												@NonNull Map<String, String> indexActivatedFileNames,
-	                                            @NonNull List<IndexItem> indexItems) {
-		CollectOutdatedIndexesAlgorithm algorithm =
-				new CollectOutdatedIndexesAlgorithm(app, indexFileNames, indexActivatedFileNames);
-		return algorithm.collect(indexItems);
-	}
 }
