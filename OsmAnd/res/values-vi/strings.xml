@@ -915,7 +915,7 @@
     <string name="battery_optimization_desc">Tối ưu hoá pin của Android có thể gây ra các khoảng trống và sai lệch trong các đường dẫn khi ghi.\n\nNếu bạn gặp phải vấn đề như vậy, bạn có thể thay đổi việc dùng pin thành \'Không giới hạn.\'</string>
     <string name="battery_optimization_settings">Cài đặt tối ưu hoá pin</string>
     <string name="routing_attr_allow_private_for_truck_name">Cho phép đi vào khu vực riêng tư (xe tải)</string>
-    <string name="shared_sting_all_colors">Tất cả màu sắc</string>
+    <string name="shared_string_all_colors">Tất cả màu sắc</string>
     <string name="routing_type_a_star_2_phase">A* 2-phase</string>
     <string name="auto_zoom_smooth">Mượt</string>
     <string name="shared_string_sunrise">Bình minh</string>
@@ -4361,7 +4361,7 @@
     <string name="south_east">nam-đông</string>
     <string name="manage_purchases">Quản lý gói đăng ký</string>
     <string name="failed_to_connect">Không thể kết nối đến %1s</string>
-    <string name="shared_sting_osm_link">Đường dẫn OSM</string>
+    <string name="shared_string_osm_link">Đường dẫn OSM</string>
     <string name="shared_string_threads">Luồng</string>
     <string name="threads_allocated_for_rendering">Luồng được phân bổ cho kết xuất</string>
     <string name="threads_allocated_for_rendering_desc">Phân bổ ít luồng hơn có thể tăng tốc kết xuất bản đồ trong một số trường hợp.</string>

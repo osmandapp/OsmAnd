@@ -5202,7 +5202,7 @@
     <string name="routing_type_a_star_2_phase">A* 2-fazni</string>
     <string name="auto_zoom">Autozum</string>
     <string name="routing_type">Tip rutiranja</string>
-    <string name="shared_sting_all_colors">Sve boje</string>
+    <string name="shared_string_all_colors">Sve boje</string>
     <string name="lang_ta_in">Tamilski (Indija)</string>
     <string name="release_4_7">• Novi vidžet \"brzinometar\" kompatibilan s Android Autom \n \n• Konfiguriši interfejs mape dodavanjem višestrukih dugmadi \"Brza radnja\". \n \n• Poboljšana čitljivost podataka u grafikonima \n \n• Dodani filteri prema podacima senzora za tragove \n \n• Poboljšano prilagođavanje izgleda za grupu putanja \n \n• Dodata podrška za dodatne GPX oznake \n \n• Prilagodi \"Udaljenost tokom navigacije\": biraj između tačnih ili zaokruženih brojeva \n \n• Jedinstven korisnički interfejs za odabir staza \n \n• Prijava na OpenStreetMap prebačena je na OAuth 2.0</string>
     <string name="distance_during_navigation_description">Odaberi način prikaza informacija o udaljenosti u vidžetima (udaljenost do tačke, sledeći skretanje, trake).
@@ -5838,7 +5838,7 @@
     <string name="manage_storage_delete_data_dialog_summary">Da li ste sigurni da želite da izbrišete %1$s iz OsmAnd Cloud?\n\nMožete ih vratiti iz kante u roku od 30 dana.</string>
     <string name="manage_storage">Upravljanje skladištem</string>
     <string name="lang_en_barebones">Engleski (osnovni)</string>
-    <string name="shared_sting_osm_link">OSM link</string>
+    <string name="shared_string_osm_link">OSM link</string>
     <string name="show_local_names">Prikaži lokalne nazive</string>
     <string name="obd_alt_battery_voltage">Napon adaptera</string>
     <string name="liter_single">Litar</string>
