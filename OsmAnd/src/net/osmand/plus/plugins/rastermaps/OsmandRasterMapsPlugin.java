@@ -455,8 +455,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerMapContextMenuActions(@NonNull MapActivity mapActivity,
-	                                          double latitude, double longitude,
-	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+											  double latitude, double longitude,
+											  @NonNull ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		boolean mapTileLayer = mapActivity.getMapView().getMainLayer() instanceof MapTileLayer
 				|| overlayLayer != null && overlayLayer.getMap() != null && overlayLayer.getMap().couldBeDownloadedFromInternet()
 				|| underlayLayer != null && underlayLayer.getMap() != null && underlayLayer.getMap().couldBeDownloadedFromInternet();

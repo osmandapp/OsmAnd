@@ -2632,8 +2632,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					scrollDistanceY = distanceY;
 					PointI touchPoint = new PointI((int) (e2.getX() + scrollDistanceX), (int) (e2.getY() + scrollDistanceY));
 					mapRenderer.setMapTarget(touchPoint, new PointI(firstTouchLocationX, firstTouchLocationY));
-					PointI target31 = mapRenderer.getState().getTarget31();
-					currentViewport.setLatLonCenter(MapUtils.get31LatitudeY(target31.getY()), MapUtils.get31LongitudeX(target31.getX()));
+					LatLon latLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, currentViewport, targetPixelX, targetPixelY);
+					currentViewport.setLatLonCenter(latLon.getLatitude(), latLon.getLongitude());
 					refreshMap();
 					notifyLocationListeners(getLatitude(), getLongitude());
 				} else

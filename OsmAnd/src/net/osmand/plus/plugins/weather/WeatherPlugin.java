@@ -445,7 +445,7 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
+	public void registerOptionsMenuItems(@NonNull MapActivity mapActivity, @NonNull ContextMenuAdapter helper) {
 		if (isActive()) {
 			helper.addItem(new ContextMenuItem(DRAWER_WEATHER_FORECAST_ID)
 					.setTitleId(R.string.shared_string_weather, mapActivity)

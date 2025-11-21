@@ -147,7 +147,9 @@ public enum WidgetType {
 
 	// Bottom panel
 	ROUTE_INFO("route_info", R.string.map_widget_route_information, R.string.map_widget_route_information_desc, R.drawable.widget_route_info_day, R.drawable.widget_route_info_night, 0, null, NAVIGATION_POINTS, BOTTOM),
-	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);
+	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM),
+
+	SKY_CHART_WIDGET("sky_chart", R.string.sky_chart_name, R.string.sky_chart_widget_desc, R.drawable.ic_action_world_globe, R.drawable.ic_action_world_globe, 0, SKY_CHARTS, BOTTOM);
 
 	public static final String INTERMEDIATE_TIME_WIDGET_LEGACY = "intermediate_time";
 	public static final String NAVIGATION_TIME_WIDGET_LEGACY = "time";
