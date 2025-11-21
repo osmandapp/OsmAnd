@@ -15,7 +15,6 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.OutdatedIndexesType;
 import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.CategoryType;
 import net.osmand.plus.download.local.LocalCategory;
