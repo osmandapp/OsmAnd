@@ -4841,7 +4841,7 @@
     <string name="round_up">Arrodoni</string>
     <string name="release_4_7">• Nou giny \"Speedometer\" compatible amb Android Auto\n\n • Configura la pantalla del mapa afegint múltiples botons \"Acció ràpida\"\n\n • Millora de la llegibilitat de les dades en gràfics\n\n • S\'han afegit filtres per dades del sensor per a les pistes\n\n • Millora de la personalització de l\'aparença per al grup de pistes\n\n • S\'ha afegit la implementació per a etiquetes GPX addicionals\n\n • Personalitza \"Distància durant la navegació\": tria entre números precisos o arrodonits\n\n • IU unificada per a la selecció de pistes\n\n • S\'ha canviat l\'inici de sessió OpenStreetMap a OAuth 2.0</string>
     <string name="lang_ta_in">Tàmil (Índia)</string>
-    <string name="shared_sting_all_colors">Tots els colors</string>
+    <string name="shared_string_all_colors">Tots els colors</string>
     <string name="routing_type_a_star_2_phase">A* 2-fase</string>
     <string name="routing_type_a_star_classic">A* clàssic</string>
     <string name="auto_zoom_smooth">Suavitzat</string>
@@ -5830,7 +5830,7 @@
     <string name="kilometers">Quilòmetres</string>
     <string name="miles">Milles</string>
     <string name="mpg">Milles per galó</string>
-    <string name="shared_sting_osm_link">Enllaç OSM</string>
+    <string name="shared_string_osm_link">Enllaç OSM</string>
     <string name="show_spherical_map">Mostra el mapa esfèric</string>
     <string name="show_spherical_map_description">Mostra el model esferoïdal de la Terra</string>
     <string name="show_local_names">Mostra les denominacions locals</string>

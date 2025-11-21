@@ -5242,7 +5242,7 @@
     <string name="routing_type">Routing-Typ</string>
     <string name="routing_type_a_star_2_phase">A* 2-Phase</string>
     <string name="routing_type_a_star_classic">A* classic</string>
-    <string name="shared_sting_all_colors">Alle Farben</string>
+    <string name="shared_string_all_colors">Alle Farben</string>
     <string name="lang_ta_in">Tamilisch (Indien)</string>
     <string name="release_4_7">- Neues Tachometer-Widget, kompatibel mit Android Auto\n\n - Konfigurieren Sie den Kartenbildschirm durch Hinzufügen mehrerer Quick-Action-Schaltflächen\n\n - Verbesserte Lesbarkeit der Daten in Diagrammen\n\n - Filter nach Sensordaten für Tracks hinzugefügt\n\n - Verbesserte Anpassung des Erscheinungsbildes für Gruppen von Tracks\n\n - Unterstützung für zusätzliche GPX-Tags hinzugefügt\n\n - Anpassen der Distanz während der Navigation, Auswahl zwischen genauen oder aufgerundeten Zahlen\n\n - Vereinheitlichte Benutzeroberfläche für die Trackauswahl\n\n - OpenStreetMap-Anmeldung auf OAuth 2.0 umgestellt</string>
     <string name="round_up">Aufrunden</string>
@@ -5872,7 +5872,7 @@
     <string name="rendering_attr_spotSize_name">Größe der Punktmessung</string>
     <string name="rendering_attr_spotSize_description">Größe der Punktmessung</string>
     <string name="show_local_names">Lokale Namen anzeigen</string>
-    <string name="shared_sting_osm_link">OSM-Link</string>
+    <string name="shared_string_osm_link">OSM-Link</string>
     <string name="rendering_attr_hideLightSectors_name">Helle Bereiche</string>
     <string name="rendering_attr_hideLightSectors_description">Helle Bereiche verbergen</string>
     <string name="rendering_attr_hideLightSectorSources_name">Quellen heller Bereiche</string>

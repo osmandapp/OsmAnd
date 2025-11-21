@@ -5464,7 +5464,7 @@
     <string name="retrieve_elevation_data_summary">OsmAnd kan hämta höjddata från närliggande vägar eller terrängkartor.</string>
     <string name="change_default_tracks_appearance_confirmation">Tillämpa ändringar på existerande spår i mappen eller bara på nya?</string>
     <string name="use_3d_track_visualization">3D-visualisering</string>
-    <string name="shared_sting_all_colors">Alla färger</string>
+    <string name="shared_string_all_colors">Alla färger</string>
     <string name="release_4_8">• Vad som ska förberedas inför 4.8</string>
     <string name="use_nearby_roads">Använd närliggande vägar</string>
     <string name="shared_string_unchanged">Oförändrad</string>
@@ -6081,7 +6081,7 @@
     <string name="response">Svar</string>
     <string name="description_purchases_fastspring">Du kan hantera dina inköp via FastSpring-kontohanteringsportalen.</string>
     <string name="description_subscription_fastspring">Du kan hantera eller avbryta prenumerationen via FastSpring-kontohanteringsportalen.</string>
-    <string name="shared_sting_osm_link">OSM-länk</string>
+    <string name="shared_string_osm_link">OSM-länk</string>
     <string name="altitude_metrics_description">Ställer in visningsenheten för höjd i widgets och statistik.</string>
     <string name="marine_renderer">Marin</string>
     <string name="marine_render_descr">Mycket anpassningsbar marin navigationsstil. Baserat på nautisk stil. Fungerar bättre med Nautical World Seamarks karta och valfria djupkartor.</string>
