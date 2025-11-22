@@ -5064,7 +5064,7 @@
 \n• OpenStreetMap 로그인은 OAuth 2.0으로 전환
 \n
 \n</string>
-    <string name="shared_sting_all_colors">모든 색상</string>
+    <string name="shared_string_all_colors">모든 색상</string>
     <string name="fixed_height">고정 높이</string>
     <string name="title_3d_track">3차원 트랙</string>
     <string name="explore_3d_track_description">대화형 3D의 트랙을 탐험하십시오! 지도에 고도, 속도 및 더 직접 시각화하십시오.</string>

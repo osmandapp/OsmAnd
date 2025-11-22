@@ -1714,7 +1714,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					FileOutputStream fos = new FileOutputStream(lastTakingPhoto);
 					fos.write(photoJpegData);
 					fos.close();
-					indexFile(true, lastTakingPhoto, false);
+					indexFile(true, lastTakingPhoto, true);
 				}
 			} catch (Exception error) {
 				logErr(error);

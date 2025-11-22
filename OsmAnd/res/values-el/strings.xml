@@ -4084,7 +4084,7 @@
     <string name="activity_type_walking_name">Περίπατος</string>
     <string name="clear_key_assignment_desc">Η ανάθεση κουμπιού για την επιλεγμένη ενέργεια θα καθαριστεί και θα τεθεί σε \"Καμία\".</string>
     <string name="map_widget_sun_position_desc">Δείχνει την ώρα μέχρι την ανατολή ή τη δύση του ηλίου.</string>
-    <string name="shared_sting_all_colors">Όλα τα χρώματα</string>
+    <string name="shared_string_all_colors">Όλα τα χρώματα</string>
     <string name="lang_ta_in">Ταμίλ (Ινδία)</string>
     <string name="auto_zoom">Αυτόματο ζουμ</string>
     <string name="map_settings_weather_wind">Άνεμος</string>
