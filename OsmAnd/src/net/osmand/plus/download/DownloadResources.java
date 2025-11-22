@@ -195,8 +195,8 @@ public class DownloadResources extends DownloadResourceGroup {
 	protected boolean prepareData(List<IndexItem> resources) {
 		this.rawResources = resources;
 
-		DownloadResourceGroup deletedMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.DELETED_MAPS);
-		addGroup(deletedMapsGroup);
+		DownloadResourceGroup deprecatedMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.DELETED_MAPS);
+		addGroup(deprecatedMapsGroup);
 		DownloadResourceGroup extraMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.EXTRA_MAPS);
 
 		DownloadResourceGroup otherMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.OTHER_MAPS_GROUP);
@@ -228,8 +228,8 @@ public class DownloadResources extends DownloadResourceGroup {
 		Map<WorldRegion, List<IndexItem>> groupByRegion = new LinkedHashMap<>();
 		OsmandRegions regs = app.getRegions();
 		for (IndexItem item : resources) {
-			if (item.isDeleted) {
-				deletedMapsGroup.addItem(item);
+			if (item.isDeprecated) {
+				deprecatedMapsGroup.addItem(item);
 				continue;
 			}
 			DownloadActivityType type = item.getType();

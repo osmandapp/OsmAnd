@@ -154,7 +154,7 @@ public class DeletedMapsFragment extends BaseFullScreenDialogFragment implements
 			LocalItemType type = LocalItemUtils.getItemType(app, fileToDelete);
 			if (type != null) {
 				LocalItem localItem = new LocalItem(fileToDelete, type);
-				localItem.setDeleted(true);
+				localItem.setDeprecated(true);
 				localItemsToDelete.add(localItem);
 			}
 		}

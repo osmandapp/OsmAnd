@@ -89,7 +89,7 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 		int iconId = getIconId(item);
 		LocalItemType type = item.getType();
 		if (item instanceof LocalItem localItem) {
-			if (localItem.isDeleted()) {
+			if (localItem.isDeprecated()) {
 				return uiUtilities.getThemedIcon(iconId);
 			} else if (type.isDownloadType() && !localItem.isBackuped(app)) {
 				boolean shouldUpdate = listener.itemUpdateAvailable(localItem);
