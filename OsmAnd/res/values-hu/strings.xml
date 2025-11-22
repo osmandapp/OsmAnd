@@ -1402,7 +1402,7 @@
     <string name="shared_string_collapse">Összecsukás</string>
     <string name="shared_string_video">Videó</string>
     <string name="shared_string_photo">Fénykép</string>
-    <string name="shared_string_release">Megjelent</string>
+    <string name="shared_string_release">Kiadva</string>
     <string name="days_behind">napos</string>
     <string name="welmode_download_maps">Térképek letöltése</string>
     <string name="confirm_usage_speed_cameras">Néhány országban (Németország, Franciaország, Olaszország stb.) tilos értesítéseket használni a sebességmérő kamerákhoz! Az OsmAnd nem vállal felelősséget a szabályok megsértéséért. Koppintson az Igen gombra, ha jogosult a funkció használatára.</string>
@@ -5127,7 +5127,7 @@
     <string name="auto_zoom_smooth">Fokozatmentes</string>
     <string name="routing_type_a_star_2_phase">A* 2-fázisú</string>
     <string name="java_safe">Java (biztonságos)</string>
-    <string name="shared_sting_all_colors">Összes szín</string>
+    <string name="shared_string_all_colors">Összes szín</string>
     <string name="lang_ta_in">Tamil (India)</string>
     <string name="release_4_7">• Új Sebességmérő modul, amely kompatibilis az Android Autóval \n \n • Térképképernyő konfigurálása több Gyors-művelet gombbal \n \n • Jobban olvasható adatok a grafikonokon \n \n • Érzékelőadat-alapú szűrők a nyomvonalakhoz \n \n • Nyomvonalcsoportok megjelenésének jobb testre szabhatósága \n \n • További GPX-címkék támogatása \n \n • A „Távolság navigáció közben” testreszabása: válasszon a pontos vagy a felkerekített értékek között \n \n • Egységes felhasználói felület a nyomvonal kiválasztásához \n \n • Az OpenStreetMap bejelentkezés OAuth 2.0-ra váltott</string>
     <string name="precise">Pontos</string>
@@ -5762,7 +5762,7 @@
     <string name="max_weight_at_full_load_description">Adja meg a járműve megengedett össztömegét, hogy navigáció közben a tömegkorlátozású utakat és hidakat elkerülhesse.</string>
     <string name="max_axle_load_description">Adja meg járműve megengedett legnagyobb tengelyterhelését, hogy elkerülje a tömegkorlátozású utakat és hidakat.</string>
     <string name="lang_en_barebones">Angol (csupasz)</string>
-    <string name="shared_sting_osm_link">OSM hivatkozás</string>
+    <string name="shared_string_osm_link">OSM hivatkozás</string>
     <string name="show_local_names">Helyi nevek megjelenítése</string>
     <string name="obd_alt_battery_voltage">Adapter feszültsége</string>
     <string name="liter_single">Liter</string>

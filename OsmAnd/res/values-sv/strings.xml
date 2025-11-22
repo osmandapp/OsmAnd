@@ -2466,7 +2466,7 @@
 \n • Ladda upp GPX-spår till OSM direkt från appen
 \n • Lägg till POI och ladda upp dem direkt till OSM (eller senare om du är frånkopplad)
 \n</string>
-    <string name="clear_all_intermediates">Rensa alla mellanliggande punkter</string>
+    <string name="clear_all_intermediates">Rensa alla mellanliggande destinationer</string>
     <string name="rendering_attr_whiteWaterSports_name">Strömsporter</string>
     <string name="osmand_extended_description_part8">OsmAnd är aktivt utvecklad programvara med öppen källkod. Alla kan bidra till appen genom att rapportera fel, förbättra översättningar eller koda nya funktioner. Dessutom bygger projektet på ekonomiska bidrag för att finansiera kodning och testning av nya funktioner.
 \nUngefärlig karttäckning och kvalitet:
@@ -5464,7 +5464,7 @@
     <string name="retrieve_elevation_data_summary">OsmAnd kan hämta höjddata från närliggande vägar eller terrängkartor.</string>
     <string name="change_default_tracks_appearance_confirmation">Tillämpa ändringar på existerande spår i mappen eller bara på nya?</string>
     <string name="use_3d_track_visualization">3D-visualisering</string>
-    <string name="shared_sting_all_colors">Alla färger</string>
+    <string name="shared_string_all_colors">Alla färger</string>
     <string name="release_4_8">• Vad som ska förberedas inför 4.8</string>
     <string name="use_nearby_roads">Använd närliggande vägar</string>
     <string name="shared_string_unchanged">Oförändrad</string>
@@ -5831,7 +5831,7 @@
     <string name="backup_error_failed_to_transfer_file">Misslyckades med att överföra molnfil(er).</string>
     <string name="cant_load_map_styles">Kan inte ladda kartstilar.</string>
     <string name="shared_string_switch">Byt</string>
-    <string name="ski_route_switch_style_description">Utforska skidbackar, -liftar, med mera, med kartstilen Vinter och skidor.</string>
+    <string name="ski_route_switch_style_description">Utforska skidleder, backar och liftar med vinter- och skidkartformatet.</string>
     <string name="set_parking_position">Ställ in parkeringsposition</string>
     <string name="set_home">Ställ in hem</string>
     <string name="read_on">Läs på %1$s</string>
@@ -6075,13 +6075,13 @@
     <string name="reverse_mode_calculate_route_desc">Beräkna en ny optimerad rutt till början.</string>
     <string name="reverse_mode_original_track">Original spår</string>
     <string name="reverse_mode_original_track_desc">Följ det exakta spåret tillbaka till början.\nVarning: Detta kan vara farligt eftersom det ignorerar envägstrafik på vägar.</string>
-    <string name="reverse_mode">Omvänt läge</string>
+    <string name="reverse_mode">Omvänd läge</string>
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Svar</string>
     <string name="description_purchases_fastspring">Du kan hantera dina inköp via FastSpring-kontohanteringsportalen.</string>
     <string name="description_subscription_fastspring">Du kan hantera eller avbryta prenumerationen via FastSpring-kontohanteringsportalen.</string>
-    <string name="shared_sting_osm_link">OSM-länk</string>
+    <string name="shared_string_osm_link">OSM-länk</string>
     <string name="altitude_metrics_description">Ställer in visningsenheten för höjd i widgets och statistik.</string>
     <string name="marine_renderer">Marin</string>
     <string name="marine_render_descr">Mycket anpassningsbar marin navigationsstil. Baserat på nautisk stil. Fungerar bättre med Nautical World Seamarks karta och valfria djupkartor.</string>
@@ -6105,4 +6105,29 @@
     <string name="rendering_attr_pisteRoutes_name">Skidbackar och spår</string>
     <string name="show_spherical_map">Visa sfärisk karta</string>
     <string name="rendering_attr_watercolor_description">Färg på vatten</string>
+    <string name="button_frames">Knappramar</string>
+    <string name="visualizing_button_grid">Rutnät för kartknappar</string>
+    <string name="routing_attr_weightrating_name">Maxvikt vid full belastning</string>
+    <string name="routing_attr_maxaxleload_name">Max axellast</string>
+    <string name="deleted_maps_warning">Du håller på att ta bort %d objekt\nFortsätt?</string>
+    <string name="deleted_maps_prompt">Dessa kartor stöds inte längre och har ersatts av mindre regioner. Ta bort dem och ladda ner de nya versionerna.</string>
+    <string name="unsupported_maps">Kartor som inte stöds</string>
+    <string name="quick_action_weather_layers">En växlingsknapp för att visa eller dölja väderlager på kartan.</string>
+    <string name="quick_action_wind_animation_layer">En växlingsknapp för att visa eller dölja vindens animationslager på kartan.</string>
+    <string name="wind_animation_layer">Vindanimeringslager</string>
+    <string name="weather_layers">Väderlager</string>
+    <string name="requires_internet_connection">Kräver en internetanslutning</string>
+    <string name="save_and_access_articles_offline">Spara data och få tillgång till artiklar offline var som helst</string>
+    <string name="track_folder_appearance">Utseende på spårmappen</string>
+    <string name="update_maps">Uppdatera kartor</string>
+    <string name="reconnect">Återanslut</string>
+    <string name="rendering_attr_showSkiSlopes_name">Visa skidbackar</string>
+    <string name="rendering_attr_showSkiSlopes_description">Visa förenklade skidbackar</string>
+    <string name="trip_recording_downhill_widget_desc">Visar summan av alla nedfarter eller den sista nedfarten för den aktuellt registrerade resan.</string>
+    <string name="trip_recording_uphill_widget_desc">Visar summan av alla stigningar eller den sista stigningen för den aktuellt registrerade turen.</string>
+    <string name="trip_recording_distance_widget_desc">Visar den totala sträckan för din aktuellt registrerade resa, med lägen för att visa sträckan för den senaste upp- och nedstigningen.</string>
+    <string name="trip_recording_max_speed_widget_description">Visar maxhastigheten för den aktuellt registrerade resan. Tryck för att växla mellan den totala maxhastigheten och maxhastigheten från den senaste uppförs- eller nedförsbacken.</string>
+    <string name="trip_recording_average_slope_widget_description">Visar den genomsnittliga lutningen för den sista nedförs- eller uppförsbacken av den aktuellt registrerade resan.</string>
+    <string name="write_location_provider_description">Spara platsleverantör till varje spårpunkt under inspelning</string>
+    <string name="n_a">Inte tillämpbar</string>
 </resources>

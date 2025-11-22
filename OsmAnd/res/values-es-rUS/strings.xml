@@ -5140,7 +5140,7 @@
     <string name="rendering_attr_padusHideBoundaries_name">Ocultar límites de tierras públicas</string>
     <string name="speedometer_description">Muestra la velocidad actual detectada por el GPS</string>
     <string name="shared_string_speedometer">Velocímetro</string>
-    <string name="shared_sting_all_colors">Todos los colores</string>
+    <string name="shared_string_all_colors">Todos los colores</string>
     <string name="routing_type_a_star_2_phase">A* bifásico</string>
     <string name="auto_zoom_smooth">Suave</string>
     <string name="gpx_approximation">Aproximación GPX</string>
@@ -5793,7 +5793,7 @@
     <string name="add_to_favorites">Agregar a favoritos</string>
     <string name="max_weight_at_full_load_description">Indica el peso bruto máximo del vehículo, para así evitar caminos y puentes con restricciones de peso.</string>
     <string name="max_axle_load_description">Indica la carga máxima por eje del vehículo, para así evitar caminos y puentes con restricciones de peso.</string>
-    <string name="shared_sting_osm_link">Enlace de OSM</string>
+    <string name="shared_string_osm_link">Enlace de OSM</string>
     <string name="show_spherical_map">Mostrar mapa esférico</string>
     <string name="show_spherical_map_description">Muestra un modelo esferoidal de la Tierra</string>
     <string name="show_local_names">Mostrar nombres locales</string>

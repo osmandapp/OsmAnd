@@ -4733,7 +4733,7 @@
     <string name="import_track">சிபிஎக்ச் கோப்பை இறக்குமதி செய்க</string>
     <string name="download_wikipedia_description">விக்கிபீடியா கட்டுரைகளை %1$s க்கு ஆஃப்லைனில் படிக்க பதிவிறக்கவும்.</string>
     <string name="backup_error_failed_to_transfer_file">முகில் கோப்பு (களை) மாற்றுவதில் தோல்வி.</string>
-    <string name="shared_sting_all_colors">அனைத்து வண்ணங்களும்</string>
+    <string name="shared_string_all_colors">அனைத்து வண்ணங்களும்</string>
     <string name="routing_type_a_star_2_phase">ஒரு* 2-கட்டம்</string>
     <string name="rendering_styles">வழங்குதல் ச்டைல்கள்</string>
     <string name="sample_wikivoyage">விக்கிவோயேச் எடுத்துக்காட்டு</string>

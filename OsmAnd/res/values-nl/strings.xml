@@ -5375,7 +5375,7 @@
     <string name="default_buttons">Standaardknoppen</string>
     <string name="change_default_appearance_confirmation">De standaardweergave van %1$s aanpassen?</string>
     <string name="shared_string_osm_id">OSM-ID</string>
-    <string name="shared_sting_all_colors">Alle kleuren</string>
+    <string name="shared_string_all_colors">Alle kleuren</string>
     <string name="routing_type_a_star_classic">Klassieke A*</string>
     <string name="shared_string_scale">Schaal</string>
     <string name="use_3d_track_visualization">3D-visualisatie</string>
@@ -6186,7 +6186,7 @@
     <string name="max_weight_at_full_load_description">Geef het maximaal toegestane gewicht van je voertuig bij volledige belading op om wegen en bruggen met gewichtsbeperkingen te vermijden.</string>
     <string name="max_axle_load_description">Geef de maximale asbelasting van je voertuig op om wegen en bruggen met gewichtsbeperkingen te vermijden.</string>
     <string name="lang_en_barebones">Engels (barebones)</string>
-    <string name="shared_sting_osm_link">OSM-link</string>
+    <string name="shared_string_osm_link">OSM-link</string>
     <string name="show_local_names">Toon plaatselijke namen</string>
     <string name="obd_alt_battery_voltage">Adapterspanning</string>
     <string name="liter_single">Liter</string>

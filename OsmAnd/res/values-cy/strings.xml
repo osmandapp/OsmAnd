@@ -4066,7 +4066,7 @@
     <string name="description_subscription_fastspring">Gallwch reoli neu ddiddymu eich tanysgrifiad drwy borth rheoli cyfrifon FastSpring.</string>
     <string name="manage_purchases">Rheoli pryniannau</string>
     <string name="failed_to_connect">Methwyd cysylltu â %1s</string>
-    <string name="shared_sting_osm_link">Cyswllt OSM</string>
+    <string name="shared_string_osm_link">Cyswllt OSM</string>
     <string name="deleting">Wrthi\'n dileu…</string>
     <string name="release_5_1">• Cefnogaeth ychwanegol ar gyfer pryniannau gwe a thraws-lwyfan\n\n• Unedau Tymheredd wedi\'u symud i osodiadau Cyffredinol er mwyn cael mynediad haws\n\n• Dangosydd lefel batri wedi\'i ychwanegu ar gyfer synwyryddion BLE\n\n• UI newydd, mwy greddfol ar gyfer dewis pwyntiau yn y Llywio\n\n• Gwelededd teclyn gwell gydag amlinelliad newydd\n\n• Dadansoddwr I Fyny/I Lawr Bryniau wedi\'i ychwanegu\n\n• Integreiddio Wicipedia a Wikivoyage wedi\'i ehangu ar gyfer mwy o BOIs.</string>
     <string name="shared_string_threads">Edafedd</string>

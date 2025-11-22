@@ -5215,7 +5215,7 @@
     <string name="gpx_approximation">Alproksimigo al GPX</string>
     <string name="routing_type">Speco de kurs-difinado</string>
     <string name="routing_type_a_star_2_phase">A* 2-faza</string>
-    <string name="shared_sting_all_colors">Ĉiuj koloroj</string>
+    <string name="shared_string_all_colors">Ĉiuj koloroj</string>
     <string name="lang_ta_in">Tamila (Hinda)</string>
     <string name="release_4_7">• nova fenestraĵo “Rapidmezurilo” kongrua kun Android Auto \n \n • eblo alĝustigi ekranon de mapo per aldoni plurajn butonojn “Rapida ago” \n \n • plibonigita legeblo de datumoj sur diagramoj \n \n • eblo filtri spurojn laŭ datumoj de eksteraj sentiloj \n \n • plibonigita alĝustigeblo de aspekto de grupoj de spuroj \n \n • subteno por pliajn etikedojn por GPX \n \n • elekto inter precizaj kaj rondigitaj valoroj por distancoj \n \n • samaspektigita ekrano de elekto de spuro \n \n • OpenStreetMap: transigo al ensalut-metodo OAuth 2.0</string>
     <string name="distance_during_navigation">Distanco dum navigi</string>
@@ -5849,7 +5849,7 @@
     <string name="view_on_phone">Montri sur telefono</string>
     <string name="lang_en_barebones">Angla (minimuma)</string>
     <string name="release_5_2">• aldonis detalojn pri strato kaj urbo por serĉrezultoj\n\n• novaj fenestraĵoj de Spur-registrilo: Maksimuma rapido, Mezuma dekliveco kaj plibonigitaj Malsupreniroj/Supreniroj\n\n• nova map-aspekto – Marnavigada 2 – alte alĝustigebla\n\n• plialtigita rapido de map-bildigado\n\n• plibonigita konekteblo kun adaptiloj OBDII BLE\n\n• aldonis mezuro de korbata frekvenco al “Analizi laŭ fragmentoj”\n\n• aldonis vidigon de tempo al planataj kursoj\n\n• eblo agordi unuojn de altitudo sendepende de unuoj de distanco\n\n• plibonigis la butonon de rapida ago Map-orientiĝo: eblo elekti reĝimon de kompaso\n\n• Android Auto: aldonis avertojn antaŭ navigi sen necesaj mapoj kaj tra vojoj kun privata aliro\n\n• riparis eraron pri malĝusta grando de la fenestraĵo Cirkelo kaj mezurilo\n\n• aldonis inversajn orientiĝojn de ekrano\n\n• plibonigita fasado de parametroj de kamiono</string>
-    <string name="shared_sting_osm_link">OSM-ligilo</string>
+    <string name="shared_string_osm_link">OSM-ligilo</string>
     <string name="show_local_names">Montri lokajn nomojn</string>
     <string name="obd_alt_battery_voltage">Tensio de adaptilo</string>
     <string name="liter_single">litro</string>
