@@ -18,7 +18,7 @@ public class TransportRoutingConfiguration {
 	
 	public int maxNumberOfChanges = 3;  
 	
-	public int finishTimeSeconds = 1200; // deprecated
+	public int finishTimeSeconds = 1200; // deprecated // TODO remove after JNI fix
 	
 	public double increaseForAlternativesRoutes = 2.0;
 	public double increaseForAltRoutesWalking = 3.0;
@@ -29,7 +29,6 @@ public class TransportRoutingConfiguration {
 	public int maxRouteTime = 60 * 60 * 10; // 10 hours
 	public int maxRouteDistance = 0; // distance for maxRouteTime
 	public int maxRouteIncreaseSpeed = 30; // speed to increase route time
-
 
 
 	public GeneralRouter router;
