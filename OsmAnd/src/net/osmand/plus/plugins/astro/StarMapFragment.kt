@@ -14,17 +14,17 @@ import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 
-class SkymapFragment : BaseFullScreenDialogFragment() {
+class StarMapFragment : BaseFullScreenDialogFragment() {
 	companion object {
-		val TAG: String = SkymapFragment::class.java.simpleName
+		val TAG: String = StarMapFragment::class.java.simpleName
 
 		fun showInstance(mapActivity: MapActivity) {
 			val manager: FragmentManager = mapActivity.supportFragmentManager
 			manager.findFragmentByTag(TAG)?.let { foundFragment ->
-				(foundFragment as SkymapFragment).dialog?.dismiss()
+				(foundFragment as StarMapFragment).dialog?.dismiss()
 			}
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-				val fragment = SkymapFragment()
+				val fragment = StarMapFragment()
 				fragment.show(manager, TAG)
 			}
 		}
@@ -55,7 +55,7 @@ class SkymapFragment : BaseFullScreenDialogFragment() {
 		container: ViewGroup?,
 		savedInstanceState: Bundle?): View {
 		updateNightMode()
-		val view = themedInflater.inflate(R.layout.fragment_sky_map, container, false)
+		val view = themedInflater.inflate(R.layout.fragment_star_map, container, false)
 		view.setBackgroundColor(
 			ContextCompat.getColor(
 				app,

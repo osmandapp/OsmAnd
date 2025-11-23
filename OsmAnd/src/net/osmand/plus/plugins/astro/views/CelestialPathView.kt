@@ -30,6 +30,7 @@ import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.searchRiseSet
+import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.AstroUtils
 import net.osmand.plus.utils.AndroidUtils
 import java.time.Instant
@@ -261,7 +262,7 @@ class CelestialPathView @JvmOverloads constructor(
 		val radius = 0.9f * min(cx, cy)
 
 		// title
-		canvas.drawText("Celestial Paths — ${config.date}", cx, dp(25f), titlePaint)
+		canvas.drawText(context.getString(R.string.ltr_or_rtl_combine_via_dash, context.getString(R.string.celestial_paths_name), config.date), cx, dp(25f), titlePaint)
 
 		polylines.clear()
 

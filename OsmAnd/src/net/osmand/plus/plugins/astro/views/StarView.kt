@@ -31,7 +31,7 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.text.format
 
-class SkyView @JvmOverloads constructor(
+class StarView @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,

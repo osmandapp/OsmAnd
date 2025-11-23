@@ -21,6 +21,8 @@ import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.searchAltitude
 import io.github.cosinekitty.astronomy.searchRiseSet
+import net.osmand.plus.R
+import net.osmand.plus.plugins.astro.AstroUtils
 import net.osmand.plus.utils.AndroidUtils
 import java.time.Duration
 import java.time.Instant
@@ -31,7 +33,7 @@ import java.time.format.DateTimeFormatter
 import kotlin.math.max
 import kotlin.math.min
 
-class PlanetsVisiblityChartView @JvmOverloads constructor(
+class StarVisiblityChartView @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
@@ -346,19 +348,13 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 		val rows = bodies.map { body ->
 			val spans = computeVisibleSpans(body, startLocal, endLocal)
 			val (rise, set) = computeRiseSet(body, startLocal, endLocal)
-			Row(body, bodyDisplayName(body), rise, set, spans)
+			Row(body, AstroUtils.bodyName(body), rise, set, spans)
 		}
 
 		val tw = computeTwilight(startLocal, endLocal)
 
-		val title = "Planets Visibility — ${startLocal.toLocalDate()}"
+		val title = context.getString(R.string.ltr_or_rtl_combine_via_dash, context.getString(R.string.star_visibility_name), startLocal.toLocalDate())
 		return Model(title, startLocal, endLocal, rows, tw)
-	}
-
-	private fun bodyDisplayName(b: Body) = when (b) {
-		Body.Sun -> "Sun"
-		Body.Moon -> "Moon"
-		else -> b.name   // Capitalized planet names from enum
 	}
 
 	private fun computeVisibleSpans(

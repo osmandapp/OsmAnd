@@ -8,7 +8,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.OsmandPlugin
-import net.osmand.plus.plugins.astro.widgets.SkyChartWidgetState
+import net.osmand.plus.plugins.astro.widgets.StarChartWidgetState
 import net.osmand.plus.plugins.astro.widgets.SkyChartsWidget
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper
@@ -21,23 +21,23 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
 
-class AstroPlugin(app: OsmandApplication) : OsmandPlugin(app) {
+class StarWatcherPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 
 	init {
 		val noAppMode = arrayOf<ApplicationMode?>()
-		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.SKY_CHART_WIDGET, *noAppMode)
+		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.STAR_CHART_WIDGET, *noAppMode)
 	}
 
 	override fun getId(): String {
-		return OsmAndCustomizationConstants.PLUGIN_SKYMAP
+		return OsmAndCustomizationConstants.PLUGIN_STAR_WATCHER
 	}
 
 	override fun getName(): String {
-		return app.getString(R.string.astro_plugin_name)
+		return app.getString(R.string.star_watcher_plugin_name)
 	}
 
 	override fun getDescription(linksEnabled: Boolean): CharSequence {
-		return app.getString(R.string.astro_plugin_description)
+		return app.getString(R.string.star_watcher_plugin_description)
 	}
 
 	override fun getLogoResourceId(): Int {
@@ -55,7 +55,7 @@ class AstroPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 	override fun createWidgets(mapActivity: MapActivity, widgetInfos: MutableList<MapWidgetInfo?>, appMode: ApplicationMode) {
 		val creator = WidgetInfoCreator(app, appMode)
 
-		val planetsVisibilityWidget = createMapWidgetForParams(mapActivity, WidgetType.SKY_CHART_WIDGET)
+		val planetsVisibilityWidget = createMapWidgetForParams(mapActivity, WidgetType.STAR_CHART_WIDGET)
 		if (planetsVisibilityWidget != null) {
 			widgetInfos.add(creator.createWidgetInfo(planetsVisibilityWidget))
 		}
@@ -68,8 +68,8 @@ class AstroPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 	override fun createMapWidgetForParams(mapActivity: MapActivity, widgetType: WidgetType,
 										  customId: String?, widgetsPanel: WidgetsPanel?): MapWidget? {
 		return when (widgetType) {
-			WidgetType.SKY_CHART_WIDGET ->
-				SkyChartsWidget(mapActivity, SkyChartWidgetState(app, customId), customId, widgetsPanel)
+			WidgetType.STAR_CHART_WIDGET ->
+				SkyChartsWidget(mapActivity, StarChartWidgetState(app, customId), customId, widgetsPanel)
 
 			else -> null
 		}
@@ -78,8 +78,8 @@ class AstroPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 	override fun registerOptionsMenuItems(mapActivity: MapActivity, helper: ContextMenuAdapter) {
 		if (isActive) {
 			helper.addItem(
-				ContextMenuItem(OsmAndCustomizationConstants.DRAWER_SKY_MAP_ID)
-					.setTitleId(R.string.show_skymap, mapActivity)
+				ContextMenuItem(OsmAndCustomizationConstants.DRAWER_STAR_MAP_ID)
+					.setTitleId(R.string.show_star_map, mapActivity)
 					.setIcon(R.drawable.ic_action_favorite)
 					.setOrder(18)
 					.setListener { uiAdapter: OnDataChangeUiAdapter?, view: View?, item: ContextMenuItem?, isChecked: Boolean ->
@@ -92,6 +92,6 @@ class AstroPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 	}
 
 	fun showSkymap(mapActivity: MapActivity) {
-		SkymapFragment.showInstance(mapActivity)
+		StarMapFragment.showInstance(mapActivity)
 	}
 }

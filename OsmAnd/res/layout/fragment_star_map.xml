@@ -63,7 +63,7 @@
 							android:layout_height="wrap_content"
 							android:layout_gravity="center_vertical"
 							android:layout_marginVertical="@dimen/content_padding_half"
-							android:text="@string/skymap_3d"
+							android:text="@string/star_map_3d"
 							android:textSize="@dimen/dialog_header_text_size"
 							app:typefaceWeight="medium" />
 
@@ -85,8 +85,8 @@
 
 		</com.google.android.material.appbar.AppBarLayout>
 
-		<net.osmand.plus.plugins.astro.views.SkyView
-			android:id="@+id/sky_view"
+		<net.osmand.plus.plugins.astro.views.StarView
+			android:id="@+id/star_view"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" />
 

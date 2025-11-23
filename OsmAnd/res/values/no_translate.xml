@@ -71,16 +71,16 @@
     <string name="osm_oauth2_dev_secret" translatable="false">Zujj3e_vQEUPGCbbbCGX-xUqbx1h0MQspUkIkT0sA8g</string>
     <string name="osm_oauth2_client_id" translatable="false">P-byvAHx1s3qB7cc8VsYikaVBUnMhimeE1VQ0rYot0k</string>
     <string name="osm_oauth2_client_secret" translatable="false">xegLrDp73nwh2IumrfhWnrRw0P615T-ZSmIhbsJD1sg</string>
-    <string name="astro_plugin_name">Astronomical</string>
-    <string name="astro_plugin_description">Sky charts, 3D sky map</string>
-    <string name="show_skymap">Show sky map</string>
-    <string name="skymap_3d">3D sky map</string>
-    <string name="sky_charts_name">Sky charts</string>
-    <string name="sky_charts_widget_group_desc">A set of views showing various astronomical information.</string>
-    <string name="sky_chart_name">Sky chart</string>
-    <string name="sky_chart_widget_desc">Shows planets visibility, altitude and celestial paths for the current map center.</string>
-    <string name="planets_visibility_name">Planets visibility</string>
-    <string name="planets_altitude_name">Planets altitude</string>
+    <string name="star_watcher_plugin_name">Star watcher</string>
+    <string name="star_watcher_plugin_description">Star charts, 3D star map</string>
+    <string name="show_star_map">Show star map</string>
+    <string name="star_map_3d">3D star map</string>
+    <string name="star_charts_name">Star charts</string>
+    <string name="star_charts_widget_group_desc">A set of views showing various astronomical information.</string>
+    <string name="star_chart_name">Star chart</string>
+    <string name="star_chart_widget_desc">Shows star/planet visibility, altitude and celestial paths for the current map center.</string>
+    <string name="star_visibility_name">Star visibility</string>
+    <string name="star_altitude_name">Star altitude</string>
     <string name="celestial_paths_name">Celestial paths</string>
 
 </resources>

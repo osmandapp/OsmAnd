@@ -9,22 +9,22 @@ import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState
 import net.osmand.util.Algorithms
 
-class SkyChartWidgetState(app: OsmandApplication, customId: String?) : WidgetState(app) {
-	private val typePreference: OsmandPreference<SkyChartType> = registerTypePreference(customId)
+class StarChartWidgetState(app: OsmandApplication, customId: String?) : WidgetState(app) {
+	private val typePreference: OsmandPreference<StarChartType> = registerTypePreference(customId)
 
-	enum class SkyChartType(@field:StringRes @param:StringRes val titleId: Int) {
-		PLANETS_VISIBLITY(R.string.planets_visibility_name),
-		PLANETS_ALTITUDE(R.string.planets_altitude_name),
+	enum class StarChartType(@field:StringRes @param:StringRes val titleId: Int) {
+		STAR_VISIBLITY(R.string.star_visibility_name),
+		STAR_ALTITUDE(R.string.star_altitude_name),
 		CELESTIAL_PATH(R.string.celestial_paths_name);
 
-		fun next(): SkyChartType {
+		fun next(): StarChartType {
 			val nextItemIndex: Int = (ordinal + 1) % entries.size
 			return entries[nextItemIndex]
 		}
 	}
 
 	override fun getTitle(): String {
-		return app.getString(getSkyChartType().titleId)
+		return app.getString(getStarChartType().titleId)
 	}
 
 	override fun getSettingsIconId(nightMode: Boolean): Int {
@@ -32,11 +32,11 @@ class SkyChartWidgetState(app: OsmandApplication, customId: String?) : WidgetSta
 	}
 
 	override fun changeToNextState() {
-		typePreference.set(getSkyChartType().next())
+		typePreference.set(getStarChartType().next())
 	}
 
 	override fun copyPrefs(appMode: ApplicationMode, customId: String?) {
-		registerTypePreference(customId).setModeValue(appMode, getSkyChartType())
+		registerTypePreference(customId).setModeValue(appMode, getStarChartType())
 	}
 
 	override fun copyPrefsFromMode(
@@ -46,20 +46,20 @@ class SkyChartWidgetState(app: OsmandApplication, customId: String?) : WidgetSta
 			appMode, typePreference.getModeValue(sourceAppMode))
 	}
 
-	fun getSkyChartTypePref() = typePreference
+	fun getStarChartTypePref() = typePreference
 
-	fun getSkyChartType(): SkyChartType = typePreference.get()
+	fun getStarChartType(): StarChartType = typePreference.get()
 
-	private fun registerTypePreference(customId: String?): OsmandPreference<SkyChartType> {
-		var prefId: String? = "sky_chart_type"
+	private fun registerTypePreference(customId: String?): OsmandPreference<StarChartType> {
+		var prefId: String? = "star_chart_type"
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += customId
 		}
 		return settings.registerEnumStringPreference(
 			prefId,
-			SkyChartType.PLANETS_VISIBLITY,
-			SkyChartType.entries.toTypedArray(),
-			SkyChartType::class.java
+			StarChartType.STAR_VISIBLITY,
+			StarChartType.entries.toTypedArray(),
+			StarChartType::class.java
 		).makeProfile()
 	}
 }

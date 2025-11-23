@@ -22,6 +22,8 @@ import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.searchAltitude
 import io.github.cosinekitty.astronomy.searchRiseSet
+import net.osmand.plus.R
+import net.osmand.plus.plugins.astro.AstroUtils
 import net.osmand.plus.utils.AndroidUtils
 import java.time.Duration
 import java.time.Instant
@@ -33,7 +35,7 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-class PlanetsAltitudeChartView @JvmOverloads constructor(
+class StarAltitudeChartView @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
@@ -277,17 +279,15 @@ class PlanetsAltitudeChartView @JvmOverloads constructor(
 			}
 			pts += Point(endLocal, altitude(body, endLocal, obs))
 			val (rise, set) = computeRiseSet(body)    // same method used in visibility view. :contentReference[oaicite:1]{index=1}
-			return Series(body, bodyDisplayName(body), pts, rise, set)
+			return Series(body, AstroUtils.bodyName(body), pts, rise, set)
 		}
 
 		val series = bodies.map { computeSeries(it) }
 		val tw = computeTwilight(startLocal, endLocal)
 
-		val title = "Planet Altitudes — ${startLocal.toLocalDate()}"
+		val title = context.getString(R.string.ltr_or_rtl_combine_via_dash, context.getString(R.string.star_altitude_name), startLocal.toLocalDate())
 		return Model(title, startLocal, endLocal, series, tw, config.yMin, config.yMax)
 	}
-
-	private fun bodyDisplayName(b: Body) = when (b) { Body.Sun -> "Sun"; Body.Moon -> "Moon"; else -> b.name }
 
 	// Apparent altitude using equator->horizon with refraction. :contentReference[oaicite:2]{index=2}
 	private fun altitude(body: Body, tLocal: ZonedDateTime, obs: Observer): Double {
