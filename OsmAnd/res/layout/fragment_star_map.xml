@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="?attr/activity_background_color"
-	android:clickable="true"
-	android:focusable="true"
-	android:orientation="vertical">
+	android:background="?attr/activity_background_color">
 
 	<LinearLayout
-		android:id="@+id/content"
 		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:layout_weight="1"
+		android:layout_height="match_parent"
 		android:orientation="vertical">
 
+		<!-- Toolbar -->
 		<com.google.android.material.appbar.AppBarLayout
 			android:id="@+id/app_bar_layout"
 			android:layout_width="match_parent"
@@ -27,69 +24,113 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:minHeight="@dimen/toolbar_height"
-				app:layout_collapseMode="pin"
-				app:titleMarginEnd="0dp"
-				app:titleMarginStart="0dp">
+				app:layout_collapseMode="pin">
 
 				<LinearLayout
-					android:id="@+id/toolbar_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:background="@color/color_transparent"
-					android:minHeight="@dimen/toolbar_height"
-					android:orientation="horizontal">
+					android:orientation="horizontal"
+					android:gravity="center_vertical">
 
 					<ImageButton
 						android:id="@+id/back_button"
 						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-						android:layout_width="@dimen/toolbar_height"
-						android:layout_height="@dimen/toolbar_height"
-						android:layout_gravity="center"
-						android:contentDescription="@string/shared_string_back"
+						android:layout_width="48dp"
+						android:layout_height="48dp"
 						app:srcCompat="@drawable/ic_arrow_back"
 						app:tint="@color/icon_color_default_light" />
 
-					<FrameLayout
+					<TextView
+						android:id="@+id/toolbar_title"
 						android:layout_width="0dp"
-						android:layout_height="match_parent"
-						android:layout_gravity="center_vertical"
-						android:layout_marginHorizontal="@dimen/content_padding"
+						android:layout_height="wrap_content"
 						android:layout_weight="1"
-						android:orientation="vertical">
+						android:text="Star Map 3D"
+						android:textSize="20sp"
+						android:textColor="@color/text_color_primary_light"
+						android:textStyle="bold" />
 
-						<net.osmand.plus.widgets.TextViewEx
-							android:id="@+id/toolbar_title"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_gravity="center_vertical"
-							android:layout_marginVertical="@dimen/content_padding_half"
-							android:text="@string/star_map_3d"
-							android:textSize="@dimen/dialog_header_text_size"
-							app:typefaceWeight="medium" />
-
-					</FrameLayout>
-
-					<androidx.appcompat.widget.AppCompatImageButton
-						android:id="@+id/clearButton"
-						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-						android:layout_width="@dimen/toolbar_height"
-						android:layout_height="@dimen/toolbar_height"
-						android:layout_gravity="center"
-						android:contentDescription="@string/shared_string_menu"
-						android:tint="?default_icon_color"
-						app:srcCompat="@drawable/ic_overflow_menu_white" />
-
+					<ImageButton
+						android:id="@+id/settings_button"
+						android:layout_width="48dp"
+						android:layout_height="48dp"
+						android:background="?attr/selectableItemBackgroundBorderless"
+						app:srcCompat="@drawable/ic_action_settings"
+						app:tint="@color/icon_color_default_light" />
 				</LinearLayout>
-
 			</androidx.appcompat.widget.Toolbar>
-
 		</com.google.android.material.appbar.AppBarLayout>
 
-		<net.osmand.plus.plugins.astro.views.StarView
-			android:id="@+id/star_view"
+		<FrameLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent" />
+			android:layout_height="0dp"
+			android:layout_weight="1">
+
+			<net.osmand.plus.plugins.astro.views.StarView
+				android:id="@+id/star_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" />
+
+			<!-- New Time Control Custom View -->
+			<net.osmand.plus.plugins.astro.views.DateTimeSelectionView
+				android:id="@+id/time_selection_view"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top|center_horizontal"
+				android:layout_marginTop="8dp" />
+
+			<!-- Reset Time Button -->
+			<Button
+				android:id="@+id/reset_time_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Now"
+				android:textSize="12sp"
+				android:minHeight="36dp"
+				android:layout_gravity="top|center_horizontal"
+				android:layout_marginTop="140dp"
+				android:visibility="gone"/>
+
+		</FrameLayout>
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/bottom_sheet"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:layout_gravity="bottom"
+		android:background="?attr/activity_background_color"
+		android:padding="16dp"
+		android:visibility="gone">
+
+		<TextView
+			android:id="@+id/sheet_title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="Object Name"
+			android:textSize="24sp"
+			android:textStyle="bold"
+			android:textColor="?android:textColorPrimary" />
+
+		<TextView
+			android:id="@+id/sheet_coords"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:text="Az: 000 Alt: 00"
+			android:textSize="16sp"
+			android:textColor="?android:textColorSecondary" />
+
+		<TextView
+			android:id="@+id/sheet_details"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="4dp"
+			android:text="Distance: 0.0 AU"
+			android:textSize="16sp"
+			android:textColor="?android:textColorSecondary" />
 
 	</LinearLayout>
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
