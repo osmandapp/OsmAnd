@@ -11,7 +11,6 @@ import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
@@ -58,7 +57,7 @@ public class ColorPaletteExportType extends LocalResourcesExportType {
 		Collator collator = OsmAndCollator.primaryCollator();
 		files.sort((lhs, rhs) -> {
 			int r = collator.compare(getPaletteTypeName(app, lhs), getPaletteTypeName(app, rhs));
-			return r == 0 ? collator.compare(getPaletteName(lhs), getPaletteName(rhs)) : r;
+			return r == 0 ? collator.compare(getPaletteName(app, lhs), getPaletteName(app, rhs)) : r;
 		});
 	}
 

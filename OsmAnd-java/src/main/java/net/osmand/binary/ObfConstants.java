@@ -23,14 +23,12 @@ public class ObfConstants {
 	public static final int SHIFT_PROPAGATED_NODE_IDS = 50;
 	public static final int SHIFT_PROPAGATED_NODES_BITS = 11;
 	public static final long MAX_ID_PROPAGATED_NODES = (1L << SHIFT_PROPAGATED_NODES_BITS) - 1;//2047
-	
-	
+
 	public static final long RELATION_BIT = 1L << (ObfConstants.SHIFT_MULTIPOLYGON_IDS - 1); // 1L << 42
 	public static final long PROPAGATE_NODE_BIT = 1L << (ObfConstants.SHIFT_PROPAGATED_NODE_IDS  - 1); // 1L << 49
 	public static final long SPLIT_BIT = 1L << (ObfConstants.SHIFT_NON_SPLIT_EXISTING_IDS - 1); // 1L << 40
 
 	public static final int DUPLICATE_SPLIT = 5;
-
 
 	public static String getOsmUrlForId(MapObject mapObject) {
 		EntityType type = getOsmEntityType(mapObject);
@@ -73,22 +71,28 @@ public class ObfConstants {
 			default -> osmId;
 		};
 	}
-	
-	
+
 	public static long getOsmObjectId(MapObject object) {
 		long originalId = -1;
 		Long id = object.getId();
 		if (id != null) {
 			if (object instanceof RenderedObject) {
-				id >>= 1;
+				id = shiftRenderedObjectId(id);
 			}
 			originalId = getOsmIdFromMapObjectId(id);
 		}
 		return originalId;
 	}
-	
 
-	// not correct for RenderedObject
+	private static long shiftRenderedObjectId(long id) {
+		if (isIdFromPropagatedNode(id >> 1) || isIdFromRelation(id >> 1)) {
+			return id >> 1;
+		} else {
+			return id >> SHIFT_ID;
+		}
+	}
+
+	// Use getOsmObjectId(MapObject) for RenderedObject
 	public static long getOsmIdFromMapObjectId(long id) {
 		long originalId;
 		if (isIdFromPropagatedNode(id)) {
@@ -173,8 +177,6 @@ public class ObfConstants {
 		return id != null && id > 0;
 	}
 
-	
-	
 	public static EntityType getOsmEntityType(BinaryMapDataObject object) {
 		if(isIdFromRelation(object.getId())) {
 			return EntityType.RELATION;
@@ -207,9 +209,7 @@ public class ObfConstants {
 	private static boolean isIdFromSplit(long id) {
 		return id > 0 && (id & SPLIT_BIT) == SPLIT_BIT;
 	}
-	
-	
-	///// 
+
 	public static boolean isTagIndexedForSearchAsName(String tag) {
 		if (tag != null) {
 			return tag.contains("name") || tag.contains("brand");
@@ -224,5 +224,4 @@ public class ObfConstants {
 		return false;
 	}
 
-	
 }

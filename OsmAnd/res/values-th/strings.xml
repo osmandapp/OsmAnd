@@ -238,7 +238,7 @@
     <string name="power_watts_unit">วัตต์</string>
     <string name="revolutions_per_minute_unit">รอบต่อนาที</string>
     <string name="lang_ta_in">ทมิฬ (อินเดีย)</string>
-    <string name="shared_sting_all_colors">สีทั้งหมด</string>
+    <string name="shared_string_all_colors">สีทั้งหมด</string>
     <string name="key_assignment_add_key">เพิ่มปุ่ม</string>
     <string name="missing_maps_ignore">ใช้แผนที่ที่ดาวน์โหลด</string>
     <string name="contact_support_retry">ลองอีกครั้ง หรือลองติดต่อผู้ช่วยเหลือ</string>
@@ -801,4 +801,6 @@
     <string name="rendering_attr_tramRoutes_name">เส้นทางรถราง</string>
     <string name="rendering_attr_busRoutes_name">เส้นทางรถประจำทาง</string>
     <string name="favourites">สถานที่ที่ชื่นชอบ</string>
+    <string name="configure_profile">ตั้งค่าโปรไฟล์</string>
+    <string name="routing_settings">การนำทาง</string>
 </resources>

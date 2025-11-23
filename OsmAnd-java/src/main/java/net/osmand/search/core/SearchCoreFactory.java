@@ -90,9 +90,9 @@ public class SearchCoreFactory {
 	public static final int SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2 = 500;
 
 	// context less (slower)
-	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 700;
-	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 700;
-	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 700;
+	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 500;
+	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 500;
+	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 500;
 	private static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
 	private static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
 	
@@ -196,6 +196,18 @@ public class SearchCoreFactory {
 			boolean match = false;
 			if (parent != null) {
 				phrase.countUnknownWordsMatchMainResult(parent);
+				List<String> leftUnknownSearchWords = parent.filterUnknownSearchWord(null);
+				SearchPhrase nphrase = phrase.selectWord(parent, leftUnknownSearchWords,
+						phrase.isLastUnknownSearchWordComplete()
+								|| !leftUnknownSearchWords.contains(phrase.getLastUnknownSearchWord()));
+//				NameStringMatcher unknownNameStringMatcher = nphrase.getMainUnknownNameStringMatcher();
+				for (String otherName : res.otherNames) {
+					// for now do full equals (in future we could count with matcher
+					// 	if (unknownNameStringMatcher.matches(otherName)) {
+					if (phrase.getCollator().equals(nphrase.getUnknownWordToSearch(), otherName)) {
+						return true;
+					}
+				}
 			}
 			if (!phrase.isUnknownSearchWordPresent()) {
 				return false;
@@ -204,7 +216,7 @@ public class SearchCoreFactory {
 //			phrase.countUnknownWordsMatchMainResult(res);
 			
 			NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
-			String localeName = res.localeName;
+			String localeName = SearchPhrase.stripBraces(res.localeName);
 			Collection<String> otherNames = res.otherNames;
 			// quick check
 			if (!fullMatch && (nm.matches(localeName) || nm.matches(otherNames))) {
@@ -217,13 +229,6 @@ public class SearchCoreFactory {
 					String lName = it.next();
 					if (phrase.getFirstUnknownNameStringMatcher().matches(lName)) {
 						it.remove();
-					}
-				}
-				for (String otherName : otherNames) {
-					if (phrase.getFirstUnknownNameStringMatcher().matches(otherName)) {
-						if (!fullMatch || phrase.getCollator().equals(phrase.getFirstUnknownSearchWord(), otherName)) {
-							return true;
-						}
 					}
 				}
 			}
@@ -239,13 +244,6 @@ public class SearchCoreFactory {
 					String lName = it.next();
 					if (phrase.getUnknownNameStringMatcher(i).matches(lName)) {
 						it.remove();
-					}
-				}
-				for (String otherName : otherNames) {
-					if (phrase.getUnknownNameStringMatcher(i).matches(otherName)) {
-						if (!fullMatch || phrase.getCollator().equals(phrase.getUnknownSearchWords().get(i), otherName)) {
-							return true;
-						}
 					}
 				}
 			}
@@ -407,6 +405,9 @@ public class SearchCoreFactory {
 					List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE, null, phrase.getSettings().getStat());
 					townCitiesInit.add(r.getRegionName());
 					for (City c  : l) {
+						if (phrase.getSettings().isExportObjects()) {
+							resultMatcher.exportCity(phrase, c);
+						}
 						c.setReferenceFile(r);
 						LatLon cl = c.getLocation();
 						
@@ -421,6 +422,9 @@ public class SearchCoreFactory {
 					}
 					l = r.getCities(null, CityBlocks.BOUNDARY_TYPE, null, phrase.getSettings().getStat());
 					for (City c  : l) {
+						if (phrase.getSettings().isExportObjects()) {
+							resultMatcher.exportCity(phrase, c);
+						}
 						c.setReferenceFile(r);
 						LatLon cl = c.getLocation();
 						int y = MapUtils.get31TileNumberY(cl.getLatitude());
@@ -442,9 +446,6 @@ public class SearchCoreFactory {
 				resArray = townCitiesQR.queryInBox(bbox, resArray);
 				int limit = 0;
 				for (City c : resArray) {
-					if (phrase.getSettings().isExportObjects()) {
-						resultMatcher.exportCity(phrase, c);
-					}
 					SearchResult res = new SearchResult(phrase);
 					res.object = c;
 					res.file = (BinaryMapIndexReader) c.getReferenceFile();
@@ -610,46 +611,45 @@ public class SearchCoreFactory {
 					};
 				}
 
-				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5,
-						SearchPhraseDataType.ADDRESS);
+				SearchWord lastWord = phrase.getLastSelectedWord();
+				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5, SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
 				Set<String> wordToSearchSplit = splitAddressSearchNames(wordToSearch);
 				if (wordToSearchSplit.size() > 1) {
 					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
 				}
+				SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
+						phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
+								: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+				if (locSpecified) {
+					QuadRect rect;
+					if (lastWord != null && lastWord.getResult() != null && lastWord.getResult().object instanceof City c) {
+						int x31 = MapUtils.get31TileNumberX(c.getLocation().getLongitude());
+						int y31 = MapUtils.get31TileNumberY(c.getLocation().getLatitude());
+						int[] bb = c.getBbox31();
+						if (bb != null && bb.length >= 4) {
+							int w = (bb[2] - bb[0]) / 3, h = (bb[3] - bb[1]) / 3; // enlarge for 1234 Golden Pond Road Woodhull
+							int left = bb[0] - w, top = bb[1] - h, right = bb[2] + w, bottom = bb[3] + h;
+							rect = new QuadRect(left, top, right, bottom);
+							req.setBBox(x31, y31, left, top, right, bottom);
+						} else {
+							int radius = (int) c.getType().getRadius() * 3;
+							rect = SearchPhrase.calculateBbox(radius, c.getLocation());
+							req.setBBoxRadius(c.getLocation().getLatitude(), c.getLocation().getLongitude(), radius);
+						}
+					} else {
+						int radius = phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
+						rect = SearchPhrase.calculateBbox(radius, loc);
+						req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(), radius);
+					}
+                    offlineIterator = phrase.getOfflineIndexes(rect, SearchPhraseDataType.ADDRESS);
+                }
 				
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
 					immediateResults.clear();
-					SearchWord lastWord = phrase.getLastSelectedWord();
-					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
-							phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
-									: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 					req.setSearchStat(phrase.getSettings().getStat());
-					if (locSpecified) {
-						if (lastWord != null && lastWord.getResult() != null
-								&& lastWord.getResult().object instanceof City c) {
-							int x31 = MapUtils.get31TileNumberX(c.getLocation().getLongitude());
-							int y31 = MapUtils.get31TileNumberY(c.getLocation().getLatitude());
-							int[] bb = c.getBbox31();
-							if (bb == null && !r.containsRouteData(x31, y31, x31, y31, 15)) {
-								continue;
-							} else if(bb != null && !r.containsRouteData(bb[0], bb[1], bb[2], bb[3], 15)) {
-								continue;
-							}
-							if (bb != null) {
-								int w = (bb[2] - bb[0]) / 3, h = (bb[3] - bb[1]) / 3; // enlarge for 1234 Golden Pond Road Woodhull	
-								req.setBBox(x31, y31, bb[0] - w, bb[1] - h, bb[2] + w, bb[3] + h);
-							} else {
-								req.setBBoxRadius(c.getLocation().getLatitude(), c.getLocation().getLongitude(),
-										(int) c.getType().getRadius() * 3);
-							}
-						} else {
-							req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(),
-								phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5));
-						}
-					}
 
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {
@@ -667,8 +667,9 @@ public class SearchCoreFactory {
 								cityResult.localeRelatedObjectName = res.file.getRegionName();
 								cityResult.file = res.file;
 								// include parent search result even if it is empty
-								// for street-city don't require exact matching 
+								// for street-city don't require exact matching
 								boolean match = matchAddressName(phrase, res, cityResult,  true);
+								
 								if (match) {
 									newParentSearchResult = cityResult;
 								} else {
@@ -981,6 +982,10 @@ public class SearchCoreFactory {
 			List<PoiType> additionals = pt.getPoiAdditionals();
 			if (additionals != null) {
 				for (PoiType a : additionals) {
+					if (a.getReferenceType() != null) {
+						// ignore reference types as duplicates
+						continue;
+					}
 					PoiTypeResult existingResult = results.get(a.getKeyName());
 					if (existingResult != null) {
 						PoiAdditionalCustomFilter f ;
@@ -2128,8 +2133,6 @@ public class SearchCoreFactory {
 		SearchSettings settings = phrase.getSettings();
 		result.otherNames = amenity.getOtherNames(true);
 		result.cityName = amenity.getCityFromTagGroups(settings.getLang());
-		// we can calculate alternate name possibly
-		result.alternateName = result.cityName;
 		result.localeName = amenity.getName(settings.getLang(), settings.isTransliterate());
 		if (Algorithms.isEmpty(result.localeName)) {
 			AbstractPoiType poiType = poiTypes.getAnyPoiTypeByKey(amenity.getSubType());

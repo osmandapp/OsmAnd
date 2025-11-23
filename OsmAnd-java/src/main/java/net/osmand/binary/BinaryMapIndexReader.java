@@ -2341,7 +2341,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File(System.getProperty("maps") +"/Us_pennsylvania_northamerica_3.obf");
+		fl = new File(System.getProperty("maps") +"/Map.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		SearchStat stat = new SearchStat();
@@ -2596,7 +2596,7 @@ req.setSearchStat(stat);
 
 	}
 
-	void readIndexedStringTable(BinaryIndexPart part, Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
+	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
 			TIntArrayList matchedCharacters) throws IOException {
 		boolean[] matched = new boolean[matchedCharacters.size()];
 		String key = null;
@@ -2634,7 +2634,7 @@ req.setSearchStat(stat);
 							subqueries.set(i, null);
 						}
 					}
-					readIndexedStringTable(part, instance, subqueries, key, listOffsets, matchedCharacters);
+					readIndexedStringTable(instance, subqueries, key, listOffsets, matchedCharacters);
 				} else {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}
@@ -2698,7 +2698,7 @@ req.setSearchStat(stat);
 			public boolean isCancelled() {
 				return false;
 			}
-		}, "Mountain", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+		}, "terra", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 		req.setSearchStat(stat);
 //		req.setBBoxRadius(52.276142, 4.8608723, 15000);
 		reader.searchAddressDataByName(req);

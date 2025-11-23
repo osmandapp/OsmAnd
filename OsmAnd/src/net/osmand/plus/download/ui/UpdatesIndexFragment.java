@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -56,6 +57,7 @@ import net.osmand.plus.download.local.dialogs.DeleteConfirmationDialogController
 import net.osmand.plus.download.local.dialogs.DeleteConfirmationDialogController.ConfirmDeletionListener;
 import net.osmand.plus.download.local.dialogs.LocalItemFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.importfiles.ImportTaskListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
@@ -77,7 +79,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class UpdatesIndexFragment extends BaseNestedListFragment implements DownloadEvents,
-		OperationListener, ConfirmDeletionListener, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener {
+		OperationListener, ConfirmDeletionListener, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener,
+		ImportTaskListener {
 	private static final int RELOAD_ID = 5;
 	private UpdateIndexAdapter listAdapter;
 	private String errorMessage;
@@ -115,13 +118,17 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 	private void setupOnItemLongClickListener() {
 		getListView().setOnItemLongClickListener((parent, v, position, id) -> {
-			if (position > 0) {
-				DownloadItem downloadItem = (DownloadItem) getListAdapter().getItem(position);
-				if (downloadItem instanceof IndexItem indexItem) {
-					LocalItem localItem = indexItem.toLocalItem(app);
-					if (localItem != null) {
-						askShowContextMenu(v, indexItem, localItem);
-						return true;
+			ListAdapter adapter = getListAdapter();
+			if (adapter != null) {
+				LocalIndexItem localIndexItem = (LocalIndexItem) adapter.getItem(position);
+				if (localIndexItem.isDownloadItem()) {
+					DownloadItem downloadItem = localIndexItem.downloadItem;
+					if (downloadItem instanceof IndexItem indexItem) {
+						LocalItem localItem = indexItem.toLocalItem(app);
+						if (localItem != null) {
+							askShowContextMenu(v, indexItem, localItem);
+							return true;
+						}
 					}
 				}
 			}
@@ -152,21 +159,37 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		updateUpdateAllButton();
 	}
 
-	public void invalidateListView(@NonNull Context context) {
+	public void invalidateListView(@NonNull Context context) {//todo
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
 		OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
 		List<DownloadItem> downloadItems = new ArrayList<>(indexes.getGroupedItemsToUpdate());
 		boolean showBanner = !InAppPurchaseUtils.isLiveUpdatesAvailable(app)
 				|| settings.SHOULD_SHOW_FREE_VERSION_BANNER.get();
 
-		listAdapter = new UpdateIndexAdapter(context, R.layout.download_index_list_item, downloadItems, showBanner);
 		Collator collator = OsmAndCollator.primaryCollator();
-		listAdapter.sort((item1, item2) -> collator.compare(
+		downloadItems.sort((item1, item2) -> collator.compare(
 				item1.getVisibleName(app, osmandRegions),
 				item2.getVisibleName(app, osmandRegions)
 		));
+		listAdapter = new UpdateIndexAdapter(context, R.layout.download_index_list_item, prepareData(downloadItems), showBanner);
 		setListAdapter(listAdapter);
 		updateErrorMessage();
+	}
+
+	private List<LocalIndexItem> prepareData(List<DownloadItem> downloadItems) {
+		List<LocalIndexItem> newLocalIndexItems = new ArrayList<>();
+		newLocalIndexItems.add(LocalIndexItem.createBannerItem());
+		DownloadResources downloadIndexes = app.getDownloadThread().getIndexes();
+		int deletedMapsCount = downloadIndexes.getDeletedItems().size();
+		if (deletedMapsCount > 0) {
+			newLocalIndexItems.add(LocalIndexItem.createDeletedMapsItem(deletedMapsCount));
+		}
+		for (DownloadItem item : downloadItems) {
+			if (!(item instanceof IndexItem) || !((IndexItem) item).isDeleted()) {
+				newLocalIndexItems.add(LocalIndexItem.createDownloadItem(item));
+			}
+		}
+		return newLocalIndexItems;
 	}
 
 	private void updateErrorMessage() {
@@ -231,6 +254,9 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (listAdapter != null) {
+			listAdapter.notifyDataSetChanged();
+		}
 		updateUpdateAllButton();
 	}
 
@@ -253,17 +279,20 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 	@Override
 	public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
-		if (position == 0) {
-			callActivity(activity -> {
-				if (!listAdapter.isShowSubscriptionPurchaseBanner()) {
-					LiveUpdatesFragment.showInstance(activity.getSupportFragmentManager(), this);
-				}
-			});
-		} else {
-			DownloadItem e = (DownloadItem) getListAdapter().getItem(position);
-			ItemViewHolder vh = (ItemViewHolder) v.getTag();
-			OnClickListener ls = vh.getRightButtonAction(e, vh.getClickAction(e));
-			ls.onClick(v);
+		LocalIndexItem item = listAdapter.getItem(position);
+		if (item != null) {
+			if (item.isBanner()) {
+				callActivity(activity -> {
+					if (!listAdapter.isShowSubscriptionPurchaseBanner()) {
+						LiveUpdatesFragment.showInstance(activity.getSupportFragmentManager(), this);
+					}
+				});
+			} else if (item.isDownloadItem()) {
+				DownloadItem e = item.downloadItem;
+				ItemViewHolder vh = (ItemViewHolder) v.getTag();
+				OnClickListener ls = vh.getRightButtonAction(e, vh.getClickAction(e));
+				ls.onClick(v);
+			}
 		}
 	}
 
@@ -428,12 +457,63 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		return (DownloadActivity) getActivity();
 	}
 
-	private class UpdateIndexAdapter extends ArrayAdapter<DownloadItem> implements LocalIndexInfoAdapter {
+	@Override
+	public void onImportFinished() {
+		invalidateListView(app);
+	}
+
+	private enum LocalIndexItemType {
+		BANNER,
+		DELETED_MAPS,
+		DOWNLOAD_ITEM
+	}
+
+	static class LocalIndexItem {
+		private LocalIndexItemType type;
+		private int deletedMapsCount;
+		DownloadItem downloadItem;
+
+		static LocalIndexItem createBannerItem() {
+			LocalIndexItem item = new LocalIndexItem();
+			item.type = LocalIndexItemType.BANNER;
+			return item;
+		}
+
+		static LocalIndexItem createDeletedMapsItem(int deletedMapsCount) {
+			LocalIndexItem item = new LocalIndexItem();
+			item.type = LocalIndexItemType.DELETED_MAPS;
+			item.deletedMapsCount = deletedMapsCount;
+			return item;
+		}
+
+		static LocalIndexItem createDownloadItem(DownloadItem downloadItem) {
+			LocalIndexItem item = new LocalIndexItem();
+			item.type = LocalIndexItemType.DOWNLOAD_ITEM;
+			item.downloadItem = downloadItem;
+			return item;
+		}
+
+		public boolean isBanner() {
+			return type == LocalIndexItemType.BANNER;
+		}
+
+		public boolean isDeletedMaps() {
+			return type == LocalIndexItemType.DELETED_MAPS;
+		}
+
+		public boolean isDownloadItem() {
+			return type == LocalIndexItemType.DOWNLOAD_ITEM;
+		}
+	}
+
+	private class UpdateIndexAdapter extends ArrayAdapter<LocalIndexItem> implements LocalIndexInfoAdapter {
 
 		private static final int DOWNLOAD_ITEM = 0;
 		private static final int OSM_LIVE_BANNER = 1;
+		private static final int DELETED_MAPS = 2;
 
 		private final List<LocalItem> localItems = new ArrayList<>();
+
 		private final boolean showSubscriptionPurchaseBanner;
 
 		@Override
@@ -448,7 +528,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			notifyDataSetChanged();
 		}
 
-		public UpdateIndexAdapter(Context context, int resource, List<DownloadItem> items, boolean showSubscriptionPurchaseBanner) {
+		public UpdateIndexAdapter(Context context, int resource, List<LocalIndexItem> items, boolean showSubscriptionPurchaseBanner) {
 			super(context, resource, items);
 			this.showSubscriptionPurchaseBanner = showSubscriptionPurchaseBanner;
 		}
@@ -458,32 +538,22 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		}
 
 		@Override
-		public int getCount() {
-			return super.getCount() + 1;
-		}
-
-		@Override
-		public DownloadItem getItem(int position) {
-			if (position == 0) {
-				return null;
-			} else {
-				return super.getItem(position - 1);
-			}
-		}
-
-		@Override
-		public int getPosition(DownloadItem item) {
-			return super.getPosition(item) + 1;
-		}
-
-		@Override
 		public int getViewTypeCount() {
-			return 2;
+			return 3;
 		}
 
 		@Override
 		public int getItemViewType(int position) {
-			return position == 0 ? OSM_LIVE_BANNER : DOWNLOAD_ITEM;
+			LocalIndexItem item = getItem(position);
+			if (item == null) {
+				return -1;
+			} else if (item.isBanner()) {
+				return OSM_LIVE_BANNER;
+			} else if (item.isDeletedMaps()) {
+				return DELETED_MAPS;
+			} else {
+				return DOWNLOAD_ITEM;
+			}
 		}
 
 		@NonNull
@@ -492,7 +562,10 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			View view = convertView;
 			int viewType = getItemViewType(position);
 			if (view == null) {
-				if (viewType == DOWNLOAD_ITEM) {
+				if (viewType == DELETED_MAPS) {
+					view = inflate(R.layout.item_with_title_desc, parent, false);
+					view.setTag(new DeletedItemsCountViewHolder(view, requireMyActivity()));
+				} else if (viewType == DOWNLOAD_ITEM) {
 					view = inflate(R.layout.two_line_with_images_list_item, parent, false);
 					view.setTag(new ItemViewHolder(view, requireMyActivity()));
 				} else if (viewType == OSM_LIVE_BANNER) {
@@ -530,14 +603,23 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 					}
 				}
 			}
-			if (viewType == DOWNLOAD_ITEM) {
-				DownloadItem downloadItem = Objects.requireNonNull(getItem(position));
-				ItemViewHolder holder = (ItemViewHolder) view.getTag();
-				holder.setShowRemoteDate(true);
-				holder.setShowTypeInDesc(true);
-				holder.setShowParentRegionName(true);
-				holder.setUpdatesMode(true);
-				holder.bindDownloadItem(downloadItem);
+			LocalIndexItem item = getItem(position);
+			if (item != null) {
+				if (viewType == DOWNLOAD_ITEM && item.isDownloadItem()) {
+					DownloadItem downloadItem = Objects.requireNonNull(item.downloadItem);
+					ItemViewHolder holder = (ItemViewHolder) view.getTag();
+					holder.setShowRemoteDate(true);
+					holder.setShowTypeInDesc(true);
+					holder.setShowParentRegionName(true);
+					holder.setUpdatesMode(true);
+					holder.bindDownloadItem(downloadItem);
+				} else if (viewType == DELETED_MAPS && item.isDeletedMaps()) {
+					DeletedItemsCountViewHolder holder = (DeletedItemsCountViewHolder) view.getTag();
+					holder.bindItem(item.deletedMapsCount);
+					view.setOnClickListener(v -> {
+						DeletedMapsFragment.showInstance(getActivity(), UpdatesIndexFragment.this);
+					});
+				}
 			}
 			return view;
 		}
@@ -546,5 +628,17 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	@Override
 	public List<LocalItem> getMapsToUpdate() {
 		return LiveUpdatesFragment.getMapsToUpdate(listAdapter.localItems, settings);
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		app.getImportHelper().addImportTaskListener(this);
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		app.getImportHelper().removeImportTaskListener(this);
 	}
 }

@@ -5230,7 +5230,7 @@
     <string name="max_sensor_cadence">Каденція велосипеда, макс</string>
     <string name="avg_sensor_cadence">Каденція велосипеда, середня</string>
     <string name="lang_ta_in">Тамільська (Індія)</string>
-    <string name="shared_sting_all_colors">Всі кольори</string>
+    <string name="shared_string_all_colors">Всі кольори</string>
     <string name="routing_type_a_star_classic">A* класичний</string>
     <string name="auto_zoom_smooth">Плавно</string>
     <string name="auto_zoom">Автозум</string>
@@ -5873,7 +5873,7 @@
     <string name="max_weight_at_full_load_description">Вкажіть максимальну вагу вашого транспортного засобу при повному завантаженні, щоб уникнути доріг та мостів з обмеженнями ваги.</string>
     <string name="max_axle_load_description">Вкажіть максимальне навантаження на вісь вашого автомобіля, щоб уникнути доріг та мостів з обмеженнями ваги.</string>
     <string name="lang_en_barebones">Англійська (базова)</string>
-    <string name="shared_sting_osm_link">Посилання OSM</string>
+    <string name="shared_string_osm_link">Посилання OSM</string>
     <string name="show_local_names">Показати місцеві назви</string>
     <string name="obd_alt_battery_voltage">Напруга адаптера</string>
     <string name="liter_single">Літр</string>
@@ -5911,5 +5911,17 @@
     <string name="quick_action_wind_animation_layer">Перемикач для відображення або приховування шару анімації вітру на карті.</string>
     <string name="wind_animation_layer">Шар анімації вітру</string>
     <string name="weather_layers">Погодні шари</string>
-    <string name="lang_crh">кримськотатарська (латиниця)</string>
+    <string name="lang_crh">Кримськотатарська (латиниця)</string>
+    <string name="efficient_grid">Ефективна мережа</string>
+    <string name="slots">Слоти</string>
+    <string name="button_frames">Рамки для ґудзиків</string>
+    <string name="visualizing_button_grid">Сітка кнопок карти</string>
+    <string name="enable_3d_objects">Увімкнути 3D-будівлі</string>
+    <string name="enable_3d_objects_description">Відображення 3D-об\'єктів будівель на карті</string>
+    <string name="deleted_maps_warning">Ви збираєтеся видалити %d елементів(ів)\nПродовжити?</string>
+    <string name="deleted_maps_prompt">Ці карти більше не підтримуються та були замінені меншими регіонами. Видаліть їх та завантажте нові версії.</string>
+    <string name="unsupported_maps">Непідтримувані карти</string>
+    <string name="routing_attr_weightrating_name">Максимальна вага при повному завантаженні</string>
+    <string name="routing_attr_maxaxleload_name">Максимальне навантаження на вісь</string>
+    <string name="is_parking_time_limited">Чи обмежений час паркування?</string>
 </resources>

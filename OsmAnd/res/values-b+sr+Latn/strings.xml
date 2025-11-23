@@ -929,7 +929,7 @@
     <string name="number_of_rows_in_dash">Broj redova na tabli %1$s</string>
     <string name="local_index_items_deleted">%1$d of %2$d stavke(i) izbrisano.</string>
     <string name="local_index_items_backuped">%1$d od %2$d stavke(i) isključeno.</string>
-    <string name="shared_string_release">Izdat</string>
+    <string name="shared_string_release">Objavljeno</string>
     <string name="vector_data_missing">Preuzmi podatke (\'bez interneta\') radi upotrebe mapa bez interneta.</string>
     <string name="shared_string_no_thanks">Ne, hvala</string>
     <string name="shared_string_others">Ostalo</string>
@@ -5202,7 +5202,7 @@
     <string name="routing_type_a_star_2_phase">A* 2-fazni</string>
     <string name="auto_zoom">Autozum</string>
     <string name="routing_type">Tip rutiranja</string>
-    <string name="shared_sting_all_colors">Sve boje</string>
+    <string name="shared_string_all_colors">Sve boje</string>
     <string name="lang_ta_in">Tamilski (Indija)</string>
     <string name="release_4_7">• Novi vidžet \"brzinometar\" kompatibilan s Android Autom \n \n• Konfiguriši interfejs mape dodavanjem višestrukih dugmadi \"Brza radnja\". \n \n• Poboljšana čitljivost podataka u grafikonima \n \n• Dodani filteri prema podacima senzora za tragove \n \n• Poboljšano prilagođavanje izgleda za grupu putanja \n \n• Dodata podrška za dodatne GPX oznake \n \n• Prilagodi \"Udaljenost tokom navigacije\": biraj između tačnih ili zaokruženih brojeva \n \n• Jedinstven korisnički interfejs za odabir staza \n \n• Prijava na OpenStreetMap prebačena je na OAuth 2.0</string>
     <string name="distance_during_navigation_description">Odaberi način prikaza informacija o udaljenosti u vidžetima (udaljenost do tačke, sledeći skretanje, trake).
@@ -5830,15 +5830,15 @@
     <string name="copy_as_new_folder">Kopiraj kao novi folder</string>
     <string name="add_to_a_folder">Dodajte u folder</string>
     <string name="add_to_favorites">Dodaj u favorite</string>
-    <string name="max_weight_at_full_load_description">Odredite maximalnu težinu vašeg vozila sa punim opterećenjem, da bi se izbegli putevi i mostovi sa ograničenjima u težini.</string>
-    <string name="max_axle_load_description">Obezbediti maximalno opterećenje po osovini vašeg vozila, da se izbegnu putevi i mostovi sa ograničenjima u težini.</string>
+    <string name="max_weight_at_full_load_description">Navedite maksimalnu težinu vašeg vozila pri punom opterećenju kako biste izbegli puteve i mostove sa ograničenjima težine.</string>
+    <string name="max_axle_load_description">Navedite maksimalno osovinsko opterećenje vašeg vozila kako biste izbegli puteve i mostove sa ograničenjima težine.</string>
     <string name="backup_delete_data_warning_extended">Ova akcija će trajno ukloniti sve izabrane podatke iz oblaka. Kasnije ga neće biti moguće obnoviti.</string>
     <string name="amount_of_total_used">%1$s od %2$s se koristi</string>
     <string name="delete_data">Izbriši podatke</string>
     <string name="manage_storage_delete_data_dialog_summary">Da li ste sigurni da želite da izbrišete %1$s iz OsmAnd Cloud?\n\nMožete ih vratiti iz kante u roku od 30 dana.</string>
     <string name="manage_storage">Upravljanje skladištem</string>
     <string name="lang_en_barebones">Engleski (osnovni)</string>
-    <string name="shared_sting_osm_link">OSM link</string>
+    <string name="shared_string_osm_link">OSM link</string>
     <string name="show_local_names">Prikaži lokalne nazive</string>
     <string name="obd_alt_battery_voltage">Napon adaptera</string>
     <string name="liter_single">Litar</string>
@@ -5877,4 +5877,16 @@
     <string name="wind_animation_layer">Sloj animacije vetra</string>
     <string name="weather_layers">Vremenski slojevi</string>
     <string name="lang_crh">Krimski tatarski (latinica)</string>
+    <string name="efficient_grid">Efikasna mreža</string>
+    <string name="slots">Slotovi</string>
+    <string name="button_frames">Okviri dugmeta</string>
+    <string name="visualizing_button_grid">Dugme za mrežu</string>
+    <string name="enable_3d_objects_description">Prikaz 3D zgrada na mapi</string>
+    <string name="enable_3d_objects">Omogućite 3D zgrade</string>
+    <string name="deleted_maps_prompt">Ove mape više nisu podržane i zamenjene su manjim regionima. Molimo Vas da ih uklonite i preuzmete nove verzije.</string>
+    <string name="unsupported_maps">Nepodržane mape</string>
+    <string name="deleted_maps_warning">Spremate se da izbrišete %d stavke(e)\nNastavljate?</string>
+    <string name="routing_attr_weightrating_name">Maksimalna težina pri punom opterećenju</string>
+    <string name="routing_attr_maxaxleload_name">Maksimalno osovinsko opterećenje</string>
+    <string name="is_parking_time_limited">Da li je vreme parkiranja ograničeno?</string>
 </resources>

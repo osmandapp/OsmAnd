@@ -3589,7 +3589,7 @@
     <string name="distance_during_navigation_description">Roghnaigh an chaoi a dtaispeántar faisnéis achair i ngiuirléidí nascleanúna (fad go pointe, an chéad chasadh eile, lánaí).\n\nRoghnaigh \" %1$s\" le haghaidh uimhreacha beachta, nó \"%2$s\" le haghaidh inléiteacht níos éasca.</string>
     <string name="distance_during_navigation">Fad le linn loingseoireachta</string>
     <string name="release_4_7">• Giuirléid nua \"Luasmhéadar\" comhoiriúnach le Android Auto\n\n• Cumraigh scáileán na léarscáile trí chnaipí iomadúla \"Quick Action\" a chur leis\n\n• Inléiteacht fheabhsaithe sonraí i ngraif\n\n• Scagairí curtha leis de réir sonraí braiteora le haghaidh rianta\n\n• Saincheaptha cuma feabhsaithe do ghrúpa rianta\n\n• Tacaíocht bhreise do chlibeanna breise GPX\n\n• Saincheap \"Fad le linn nascleanúna\": roghnaigh idir uimhreacha beachta nó cruinn\n\n• Chomhéadain Aontaithe le haghaidh roghnú rianta\n\n• OpenStreetMap logáil isteach aistrigh go OAuth 2.0</string>
-    <string name="shared_sting_all_colors">Gach dath</string>
+    <string name="shared_string_all_colors">Gach dath</string>
     <string name="routing_type_a_star_classic">A * clasaiceach</string>
     <string name="gpx_approximation">Comhfhogasú GPX</string>
     <string name="max_sensor_cadence">Cadence Rothar, max</string>
@@ -5669,7 +5669,7 @@
     <string name="max_weight_at_full_load_description">Cuir uasmheáchan d’fheithicle ar fáil ag lánualach chun bóithre agus droichid a bhfuil teorainneacha meáchain orthu a sheachaint.</string>
     <string name="max_axle_load_description">Cuir ualach acastóra uasta do fheithicle ar fáil chun bóithre agus droichid a bhfuil teorainneacha meáchain orthu a sheachaint.</string>
     <string name="lang_en_barebones">Béarla (lom)</string>
-    <string name="shared_sting_osm_link">Nasc OSM</string>
+    <string name="shared_string_osm_link">Nasc OSM</string>
     <string name="show_local_names">Taispeáin ainmneacha áitiúla</string>
     <string name="obd_alt_battery_voltage">Voltas an oiriúnaitheora</string>
     <string name="liter_single">Lítear</string>
@@ -5708,4 +5708,16 @@
     <string name="wind_animation_layer">Sraith beochana gaoithe</string>
     <string name="weather_layers">Sraitheanna aimsire</string>
     <string name="lang_crh">Tatairis Chrimé (Laidin)</string>
+    <string name="efficient_grid">Eangach éifeachtach</string>
+    <string name="slots">Sliotáin</string>
+    <string name="button_frames">Frámaí cnaipe</string>
+    <string name="visualizing_button_grid">Eangach cnaipe léarscáile</string>
+    <string name="deleted_maps_warning">Tá tú ar tí %d mír(eanna) a scriosadh\nLean ar aghaidh?</string>
+    <string name="deleted_maps_prompt">Ní thacaítear leis na léarscáileanna seo a thuilleadh agus tá réigiúin níos lú ina n-áit. Bain iad agus íoslódáil na leaganacha nua le do thoil.</string>
+    <string name="unsupported_maps">Léarscáileanna gan tacaíocht</string>
+    <string name="enable_3d_objects">Cumasaigh foirgnimh 3T</string>
+    <string name="enable_3d_objects_description">Taispeáin réada foirgnimh 3T ar an léarscáil</string>
+    <string name="is_parking_time_limited">An bhfuil teorainn ama páirceála?</string>
+    <string name="routing_attr_weightrating_name">Uasmheáchan ag ualach iomlán</string>
+    <string name="routing_attr_maxaxleload_name">Ualach uasta acastóra</string>
 </resources>

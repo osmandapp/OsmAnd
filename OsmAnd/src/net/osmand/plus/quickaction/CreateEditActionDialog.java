@@ -142,7 +142,7 @@ public class CreateEditActionDialog extends BaseFullScreenDialogFragment impleme
 			action.setName(nameEditText.getText().toString());
 		}
 		ImageView image = root.findViewById(R.id.image);
-		image.setImageResource(action.getIconRes(app));
+		image.setImageResource(action.getIconRes(app, nightMode));
 	}
 
 	private void setupFooter(@NonNull View root) {
@@ -223,7 +223,7 @@ public class CreateEditActionDialog extends BaseFullScreenDialogFragment impleme
 	public void onDestroy() {
 		super.onDestroy();
 		FragmentActivity activity = getActivity();
-		if (activity != null && !activity.isChangingConfigurations()) {
+		if (controller != null && activity != null && !activity.isChangingConfigurations()) {
 			controller.unregisterDialog(TAG);
 		}
 	}

@@ -207,8 +207,6 @@ public class MapSelectionHelper {
 			renderedObjects = nativeLib.searchRenderedObjectsFromContext(rc, coordX, coordY, true);
 		}
 		if (renderedObjects != null) {
-			double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
-			double sinRotateTileSize = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
 			Set<Long> uniqueRenderedObjectIds = new HashSet<>();
 			for (RenderedObject renderedObject : renderedObjects) {
 				Long objectId = renderedObject.getId();
@@ -216,7 +214,6 @@ public class MapSelectionHelper {
 					log.warn("selectObjectsFromNative(v1) got duplicate: " + renderedObject);
 					continue;
 				}
-				LatLon objectLatLon = null;
 				Map<String, String> tags = renderedObject.getTags();
 
 				boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
@@ -241,33 +238,37 @@ public class MapSelectionHelper {
 				} else {
 					double cx = renderedObject.getBbox().centerX();
 					double cy = renderedObject.getBbox().centerY();
+					double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
+					double sinRotateTileSize = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
 					double dTileX = (cx * cosRotateTileSize + cy * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
 					double dTileY = (cy * cosRotateTileSize - cx * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
 					int x31 = (int) ((dTileX + rc.leftX) * rc.tileDivisor);
 					int y31 = (int) ((dTileY + rc.topY) * rc.tileDivisor);
 					double lat = MapUtils.get31LatitudeY(y31);
 					double lon = MapUtils.get31LongitudeX(x31);
-					renderedObject.setLabelLatLon(new LatLon(lat, lon));
+					LatLon clickLatLon = new LatLon(lat, lon);
+					renderedObject.setLabelLatLon(snapLatLonToWayGeometry(clickLatLon, renderedObject));
 				}
 
+				LatLon objectLatLon;
 				if (renderedObject.isSimplePoint()) {
 					double lat = MapUtils.get31LatitudeY(renderedObject.getY().get(0));
 					double lon = MapUtils.get31LongitudeX(renderedObject.getX().get(0));
 					objectLatLon = new LatLon(lat, lon);
-				} else if (renderedObject.getLabelLatLon() != null) {
-					objectLatLon = renderedObject.getLabelLatLon();
+				} else {
+					objectLatLon = renderedObject.getLabelLatLon(); // @NonNull
 				}
 
 				if (isNewOsmRoute || isOldOsmRoute) {
 					NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
-					addFilteredOsmRoutesAtLatLon(result.getPointLatLon(), enabledRouteTypes, result);
+					addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, result);
 				}
 				if (isClickableWay) {
 					addClickableWay(result, app.getClickableWayHelper()
-							.loadClickableWay(result.getPointLatLon(), renderedObject));
+							.loadClickableWay(objectLatLon, renderedObject));
 				}
 				if (isTravelGpx && !isNewOsmRoute) {
-					addTravelGpx(result, routeId); // WikiVoyage or User TravelGpx
+					addTravelGpx(result, routeId, objectLatLon); // WikiVoyage or User TravelGpx
 				}
 
 				boolean allowAmenityObjects = !isSpecial && !renderedObject.isDrawOnPath();
@@ -278,8 +279,7 @@ public class MapSelectionHelper {
 					if (allowRenderedObjects) {
 						result.collect(renderedObject, null);
 					} else {
-						LatLon searchLatLon = objectLatLon != null ? objectLatLon : result.getPointLatLon();
-						addAmenity(result, renderedObject, searchLatLon);
+						addAmenity(result, renderedObject, objectLatLon);
 					}
 				}
 
@@ -316,7 +316,8 @@ public class MapSelectionHelper {
 					objectLatLon = fetchBillboardSymbolLatLon(symbolInfo, billboardMapSymbol);
 					jniAmenity = getJniAmenity(mapSymbol);
 				} else {
-					objectLatLon = NativeUtilities.getLatLonFromElevatedPixel(rendererView, tileBox, point);
+					LatLon clickLatLon = NativeUtilities.getLatLonFromElevatedPixel(rendererView, tileBox, point);
+					objectLatLon = snapLatLonToWayGeometry(clickLatLon, mapSymbol);
 				}
 
 				if (jniAmenity != null) {
@@ -329,7 +330,7 @@ public class MapSelectionHelper {
 
 					AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 					AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names);
-					detailsObject = amenitySearcher.searchDetailedObject(request, settings);
+					detailsObject = amenitySearcher.searchDetailedObject(request, settings, null);
 				} else {
 					ObfMapObject obfMapObject = getObfMapObject(mapSymbol);
 					if (obfMapObject != null) {
@@ -346,14 +347,14 @@ public class MapSelectionHelper {
 
 						if (isNewOsmRoute || isOldOsmRoute) {
 							NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
-									addFilteredOsmRoutesAtLatLon(result.getPointLatLon(), enabledRouteTypes, result);
+							addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, result);
 						}
 						if (isClickableWay) {
 							addClickableWay(result, app.getClickableWayHelper()
-									.loadClickableWay(result.getPointLatLon(), obfMapObject, tags));
+									.loadClickableWay(objectLatLon, obfMapObject, tags));
 						}
 						if (isTravelGpx && !isNewOsmRoute) {
-							addTravelGpx(result, routeId); // WikiVoyage or User TravelGpx
+							addTravelGpx(result, routeId, objectLatLon); // WikiVoyage or User TravelGpx
 						}
 
 						IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
@@ -368,7 +369,7 @@ public class MapSelectionHelper {
 								} else {
 									AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 									AmenitySearcher.Request request = new AmenitySearcher.Request(renderedObject);
-									detailsObject = amenitySearcher.searchDetailedObject(request, settings);
+									detailsObject = amenitySearcher.searchDetailedObject(request, settings, null);
 									if (detailsObject != null) {
 										detailsObject.setMapIconName(getMapIconName(symbolInfo));
 										addGeometry(detailsObject, obfMapObject);
@@ -385,6 +386,44 @@ public class MapSelectionHelper {
 				result.setObjectLatLon(objectLatLon);
 			}
 		}
+	}
+
+	@NonNull
+	private LatLon snapLatLonToWayGeometry(@NonNull LatLon location, @NonNull RenderedObject renderedObject) {
+		LatLon result = location;
+		double minDist = Double.POSITIVE_INFINITY;
+		for (int i = 0; i < renderedObject.getX().size(); i++) {
+			int x = renderedObject.getX().get(i);
+			int y = renderedObject.getY().get(i);
+			LatLon ll = new LatLon(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+			double dist = MapUtils.getDistance(ll, location);
+			if (dist < minDist) {
+				minDist = dist;
+				result = ll;
+			}
+		}
+		return result;
+	}
+
+
+	@NonNull
+	private LatLon snapLatLonToWayGeometry(@NonNull LatLon location, @NonNull MapSymbol mapSymbol) {
+		LatLon result = location;
+		ObfMapObject obfMapObject = getObfMapObject(mapSymbol);
+		if (obfMapObject != null) {
+			QVectorPointI points31 = obfMapObject.getPoints31();
+			double minDist = Double.POSITIVE_INFINITY;
+			for (int i = 0; i < points31.size(); i++) {
+				PointI p = points31.get(i);
+				LatLon ll = new LatLon(MapUtils.get31LatitudeY(p.getY()), MapUtils.get31LongitudeX(p.getX()));
+				double dist = MapUtils.getDistance(ll, location);
+				if (dist < minDist) {
+					minDist = dist;
+					result = ll;
+				}
+			}
+		}
+		return result;
 	}
 
 	@Nullable
@@ -522,8 +561,8 @@ public class MapSelectionHelper {
 		}
 	}
 
-	private void addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId) {
-		TravelGpx travelGpx = app.getTravelHelper().searchTravelGpx(result.getPointLatLon(), routeId);
+	private void addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId, @NonNull LatLon location) {
+		TravelGpx travelGpx = app.getTravelHelper().searchTravelGpx(location, routeId);
 		if (travelGpx != null && travelGpx.getAmenity() != null && isUniqueTravelGpx(result.getAllObjects(), travelGpx)) {
 			result.collect(travelGpx.getAmenity(), mapLayers.getPoiMapLayer());
 		} else if (travelGpx == null) {
@@ -602,7 +641,7 @@ public class MapSelectionHelper {
 		AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
 		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 		AmenitySearcher.Request request = new AmenitySearcher.Request(object);
-		BaseDetailsObject detail = amenitySearcher.searchDetailedObject(request, settings);
+		BaseDetailsObject detail = amenitySearcher.searchDetailedObject(request, settings, null);
 		if (detail != null) {
 			if (object.getX() != null && object.getX().size() > 1 && object.getY() != null && object.getY().size() > 1) {
 				detail.setX(object.getX());

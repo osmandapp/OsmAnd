@@ -84,6 +84,7 @@ import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.keyevent.TrackballController;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedFragment;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -568,6 +569,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
+		if(mapContextMenu.isVisible()) {
+			MenuController menuController = mapContextMenu.getMenuController();
+			if(menuController != null && menuController.hasBackAction()) {
+				mapContextMenu.backToolbarAction(menuController);
+				return;
+			}
+		}
 		super.onBackPressed();
 	}
 
@@ -720,7 +728,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
-		app.getAutoBackupHelper().runAutoBackup();
+		app.getAutoBackupHelper().requestAutoBackup();
 
 		if (System.currentTimeMillis() - time > 50) {
 			LOG.error("onResume for MapActivity took " + (System.currentTimeMillis() - time) + " ms");

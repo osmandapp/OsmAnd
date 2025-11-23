@@ -224,32 +224,39 @@ public class SearchUICore {
 			Map<String, Integer> cities = new TreeMap<String, Integer>();
 			for (SearchResult s : searchResults) {
 				if (!Algorithms.isEmpty(s.cityName)) {
-					Integer freq = cities.get(s.cityName);
+					String mainCity = s.cityName;
+					if (mainCity.indexOf(",") != -1) {
+						mainCity = mainCity.substring(0, mainCity.indexOf(",")).trim();
+					}
+					Integer freq = cities.get(mainCity);
 					if (freq == null) {
 						freq = 0;
 					}
 					freq++;
 					if (freq >= DOMINATED_CITY_CRITERIA) {
-						dominatedCity = s.cityName;
+						dominatedCity = mainCity;
 						break;
 					}
-					cities.put(s.cityName, freq);
+					cities.put(mainCity, freq);
 
 				}
 			}
 			for (SearchResult s : searchResults) {
 				if (s.object instanceof Amenity amenity && Algorithms.isEmpty(s.alternateName)) {
 					String city = s.cityName == null ? "" : s.cityName; 
+					String mainCity = city;
+					if (city.indexOf(",") != -1) {
+						mainCity = city.substring(0, city.indexOf(",")).trim();
+					}
 					if (Algorithms.isEmpty(amenity.getStreetName())) {
-						s.alternateName = city;
-						continue;
+						s.addressName = city;
 					} else {
 						String hno = amenity.getHousenumber();
 						String addr = amenity.getStreetName() + (Algorithms.isEmpty(hno) ? "" : " " + hno);
-						if (dominatedCity.equals(s.cityName)) {
-							s.alternateName = addr + ", " + s.cityName;
+						if (dominatedCity.equals(mainCity)) {
+							s.addressName = addr + ", " + s.cityName;
 						} else {
-							s.alternateName = (city.length() == 0 ? "" : (s.cityName + ", ")) + addr;
+							s.addressName = (city.length() == 0 ? "" : (s.cityName + ", ")) + addr;
 						}
 					}
 				}
@@ -984,6 +991,10 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
+			// disable boundary for end results
+			if (object.objectType == ObjectType.BOUNDARY) {
+				return false;
+			}
 			if (phrase != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)
 					&& Algorithms.isEmpty(object.alternateName)) {
 				boolean updateName = false;

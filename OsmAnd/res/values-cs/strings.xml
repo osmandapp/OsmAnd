@@ -4180,7 +4180,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Značky poznámek</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Zobrazit značky poznámek</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony při malém přiblížení</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematické zobrazení ikon při malých úrovních přiblížení pro body zájmu, které nejsou obvykle zobrazeny</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematická reprezentace ikon při malém přiblížení pro body zájmu, které nejsou obvykle zobrazeny</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Zvýšit viditelnost tunelů vodních cest</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Zvýšit viditelnost tunelů vodních cest</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -5209,7 +5209,7 @@
     <string name="rendering_attr_padusHideBoundaries_name">Skrýt hranice veřejných prostranství</string>
     <string name="default_buttons">Výchozí tlačítka</string>
     <string name="release_4_7">• Nový nástroj \"Tachometr\" kompatibilní s Android Auto \n \n• Možnost nastavení obrazovky přidáním více tlačítek \"rychlé akce\" \n \n• Vylepšená čitelnost dat v grafech \n \n• Přidané filtry pro stopy podle dat ze snímačů \n \n• Vylepšené přizpůsobení vzhledu pro skupiny stop \n \n• Přidaná podpora dalších GPX značek \n \n• Nastavitelná \"Vzdálenost během navigace\": zvolte mezi přesnými nebo zaokrouhlenými čísly \n \n• Sjednocené rozhraní pro výběr stop \n \n• Přihlášení do OpenStreetMap přepnuto na OAuth 2.0</string>
-    <string name="shared_sting_all_colors">Všechny barvy</string>
+    <string name="shared_string_all_colors">Všechny barvy</string>
     <string name="auto_zoom_smooth">Plynulé</string>
     <string name="auto_zoom_discrete">Skokové</string>
     <string name="auto_zoom">Automatické přiblížení</string>
@@ -5645,7 +5645,7 @@
     <string name="shared_string_avg_speed">Min. rychlost</string>
     <string name="shared_string_default_view">Výchozí zobrazení</string>
     <string name="map_widget_route_information">Informace o trase</string>
-    <string name="map_widget_route_information_desc">Zobrazí předpokládaný čas příjezdu, zbývající čas cesty a vzdálenost aktivní cesty navigace.</string>
+    <string name="map_widget_route_information_desc">Zobrazí předpokládaný čas příjezdu, zbývající čas cesty a vzdálenost aktivní trasy navigace.</string>
     <string name="ais_load_data">Načíst data AIS ze souboru</string>
     <string name="ais_address_settings">Nastavení IP adresy</string>
     <string name="ais_address_settings_description">Zvolte protokol NMEA (UDP/TCP) a určete odpovídající adresy a porty</string>
@@ -5725,7 +5725,7 @@
     <string name="prediction_time">Čas předpovědi</string>
     <string name="position_animation_empty_banner_description">Ikona polohy se aktualizuje na každé nové přijaté místo bez animace.</string>
     <string name="routing_attr_allow_ferries_name">Povolit trajekty</string>
-    <string name="routing_attr_allow_ferries_description">Povolit plánování trasy s trajekty</string>
+    <string name="routing_attr_allow_ferries_description">Povolit plánování trasy přes trajekty</string>
     <string name="grid_color">Barva mřížky</string>
     <string name="shared_string_edges">Okraje</string>
     <string name="labels_position">Pozice štítků</string>
@@ -5817,8 +5817,8 @@
     <string name="kilometers">Kilometry</string>
     <string name="add_to_a_folder">Přidat do složky</string>
     <string name="add_to_favorites">Přidat k oblíbeným</string>
-    <string name="max_weight_at_full_load_description">Uveďte maximální hmotnost vašeho vozidla při plném naložení, abyste se vyhnuli silnicím a mostům s hmotnostními omezeními.</string>
-    <string name="max_axle_load_description">Uveďte maximální nosnost náprav svého vozidla, abyste se vyhnuli silnicím a mostům s hmotnostními omezeními.</string>
+    <string name="max_weight_at_full_load_description">Zadejte maximální hmotnost svého vozidla při plném naložení pro vyhnutí se silnicím a mostům s omezením hmotnosti.</string>
+    <string name="max_axle_load_description">Zadejte maximální zatížení svého vozidla na jednu nápravu pro vyhnutí se silnicím a mostům s omezením hmotnosti.</string>
     <string name="obd_alt_battery_voltage">Napětí adaptéru</string>
     <string name="liter_single">Litr</string>
     <string name="miles">Míle</string>
@@ -5832,7 +5832,7 @@
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Odpověď</string>
-    <string name="shared_sting_osm_link">Odkaz na OSM</string>
+    <string name="shared_string_osm_link">Odkaz na OSM</string>
     <string name="marine_renderer">Námořní</string>
     <string name="marine_render_descr">Vysoce přizpůsobitelný Námořní styl navigace. Založený na Plavebním stylu. Funguje nejlépe s celosvětovou mapou námořních značek a volitelnými hloubkovými mapami.</string>
     <string name="rendering_attr_hideAreas_name">Hloubkové oblasti</string>
@@ -5853,12 +5853,12 @@
     <string name="rendering_attr_hideNoLNAM_description">Skrýt námořní značky OSM (některé)</string>
     <string name="rendering_attr_hideSpots_name">Bodová měření hloubky</string>
     <string name="rendering_attr_hideSpots_description">Skrýt bodová měření hloubky</string>
-    <string name="rendering_attr_hideTidalFlats_name">Wattová pobřeží</string>
-    <string name="rendering_attr_hideTidalFlats_description">Skrýt watttová pobřeží</string>
+    <string name="rendering_attr_hideTidalFlats_name">Přílivové plochy</string>
+    <string name="rendering_attr_hideTidalFlats_description">Skrýt přílivové plochy</string>
     <string name="rendering_attr_depthColorScheme_name">Hloubkové barevné schéma</string>
     <string name="rendering_attr_depthColorScheme_description">Hloubkové barevné schéma</string>
     <string name="rendering_attr_depthContoursDashed_name">Přerušované hloubkové vrstevnice</string>
-    <string name="rendering_attr_depthContoursDashed_description">Přerušované hloubkové vrstevnice</string>
+    <string name="rendering_attr_depthContoursDashed_description">Přerušované hloubkové kontury</string>
     <string name="rendering_attr_fairwayStyle_name">Barva splavné části</string>
     <string name="rendering_attr_fairwayStyle_description">Barva splavných částí</string>
     <string name="rendering_attr_safetyContour_name">Bezpečnostní hloubková vrstevnice</string>
@@ -5871,8 +5871,8 @@
     <string name="rendering_attr_spotDistance_description">Vzdálenost bodového měření</string>
     <string name="rendering_attr_spotSize_name">Velikost bodového měření</string>
     <string name="rendering_attr_spotSize_description">Velikost bodového měření</string>
-    <string name="rendering_attr_tidalFlatStyle_name">Styl wattových pobřeží</string>
-    <string name="rendering_attr_tidalFlatStyle_description">Styl wattových pobřeží</string>
+    <string name="rendering_attr_tidalFlatStyle_name">Styl přílivové plochy</string>
+    <string name="rendering_attr_tidalFlatStyle_description">Styl přílivových ploch</string>
     <string name="rendering_attr_watercolor_name">Barva vody</string>
     <string name="rendering_attr_watercolor_description">Barva vody</string>
     <string name="show_local_names">Zobrazit místní názvy</string>
@@ -5907,4 +5907,16 @@
     <string name="wind_animation_layer">Vrstva animace větru</string>
     <string name="weather_layers">Vrstvy počasí</string>
     <string name="lang_crh">Krymská tatarština (latinka)</string>
+    <string name="efficient_grid">Efektivní mřížka</string>
+    <string name="slots">Místa</string>
+    <string name="button_frames">Rámečky tlačítek</string>
+    <string name="visualizing_button_grid">Mřížka tlačítek na mapě</string>
+    <string name="enable_3d_objects">Povolit 3D stavby</string>
+    <string name="enable_3d_objects_description">Zobrazit 3D stavby na mapě</string>
+    <string name="deleted_maps_warning">Chystáte se odstranit %d položek\nChcete pokračovat?</string>
+    <string name="deleted_maps_prompt">Tyto mapy již nejsou podporovány a byly nahrazeny menšími regiony. Odstraňte je prosím a stáhněte si nové verze.</string>
+    <string name="unsupported_maps">Nepodporované mapy</string>
+    <string name="routing_attr_weightrating_name">Maximální hmotnost při plném zatížení</string>
+    <string name="routing_attr_maxaxleload_name">Maximální zatížení nápravy</string>
+    <string name="is_parking_time_limited">Je omezený čas parkování?</string>
 </resources>

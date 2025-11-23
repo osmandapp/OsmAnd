@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -177,6 +176,8 @@ public class NavigationService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		stopForeground(STOP_FOREGROUND_REMOVE);
+
 		OsmandApplication app = getApp();
 		app.setNavigationService(null);
 		usedBy = 0;
@@ -185,7 +186,6 @@ public class NavigationService extends Service {
 
 		LOG.info(">>>> NavigationService onDestroy");
 		// remove notification
-		stopForeground(STOP_FOREGROUND_REMOVE);
 		app.getNotificationHelper().resetTopNotification();
 		app.runInUIThread(() -> app.getNotificationHelper().refreshNotifications(), 500);
 	}

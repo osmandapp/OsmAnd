@@ -44,6 +44,8 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	boolean free;
 	String freeMessage;
 
+	boolean isDeleted;
+
 	public IndexItem(String fileName,
 	                 String description,
 	                 long timestamp,
@@ -349,5 +351,9 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 			this.assetName = assetName;
 			isAsset = true;
 		}
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
 	}
 }

@@ -708,6 +708,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		recordingMenu.show();
 	}
 
+	@Nullable
+	public AudioVideoNoteRecordingMenu getRecordingMenu() {
+		return recordingMenu;
+	}
+
 	private void initMediaRecorder(MediaRecorder mr, CamcorderProfile p, File f) {
 		mr.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
 		mr.setVideoSource(MediaRecorder.VideoSource.CAMERA);
@@ -1709,7 +1714,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					FileOutputStream fos = new FileOutputStream(lastTakingPhoto);
 					fos.write(photoJpegData);
 					fos.close();
-					indexFile(true, lastTakingPhoto, false);
+					indexFile(true, lastTakingPhoto, true);
 				}
 			} catch (Exception error) {
 				logErr(error);

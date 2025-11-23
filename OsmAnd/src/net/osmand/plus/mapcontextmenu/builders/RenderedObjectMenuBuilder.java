@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.ResultMatcher;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -34,6 +35,11 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		this.renderedObject = renderedObject;
 	}
 
+	public void updateRenderedObject(@NonNull RenderedObject renderedObject) {
+		this.renderedObject = renderedObject;
+		setAmenity(getSyntheticAmenity(mapActivity, renderedObject));
+	}
+
 	@Override
 	public void build(@NonNull ViewGroup view, @Nullable Object object) {
 		searchAmenity(view, object);
@@ -43,6 +49,7 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(view);
 		AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
 		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+
 		searcher.searchBaseDetailedObjectAsync(renderedObject, settings, detailsObject -> {
 			app.runInUIThread(() -> {
 				ViewGroup viewGroup = viewGroupRef.get();
@@ -59,6 +66,17 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 				}
 			});
 			return true;
+		}, new ResultMatcher<>() {
+			@Override
+			public boolean publish(Amenity object) {
+				return true;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				ViewGroup viewGroup = viewGroupRef.get();
+				return viewGroup == null || mapContextMenu == null;
+			}
 		});
 	}
 

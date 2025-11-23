@@ -1962,13 +1962,13 @@
     <string name="poi_contact_website">Nettsted</string>
     <string name="poi_travel_agency">Reisebyrå</string>
     <string name="poi_route_point_category">Reisekategori</string>
-    <string name="poi_hazard_additional_ice">Is</string>
-    <string name="poi_hazard_additional_side_winds">Sidevinder</string>
-    <string name="poi_hazard_additional_cyclists">Syklister</string>
-    <string name="poi_hazard_additional_pedestrians">Fotgjengere</string>
-    <string name="poi_hazard_additional_hole">Hull</string>
-    <string name="poi_hazard_additional_children">Barn</string>
-    <string name="poi_hazard_additional_dangerous_junction">Farlig kryss</string>
+    <string name="poi_hazard_ice">Is</string>
+    <string name="poi_hazard_side_winds">Sidevinder</string>
+    <string name="poi_hazard_cyclists">Syklister</string>
+    <string name="poi_hazard_pedestrians">Fotgjengere</string>
+    <string name="poi_hazard_hole">Hull</string>
+    <string name="poi_hazard_children">Barn</string>
+    <string name="poi_hazard_dangerous_junction">Farlig kryss</string>
     <string name="poi_hazard_additional_falling_rocks">Steinras</string>
     <string name="poi_hazard_additional_erosion">Erosjon</string>
     <string name="poi_route_activity_type_trekking">Fotturer</string>
@@ -1998,4 +1998,9 @@
     <string name="poi_shop_additional_yes">Med butikk</string>
     <string name="poi_park_ride_tram">Trikk</string>
     <string name="poi_park_ride_ferry">Ferge</string>
+    <string name="poi_hazard_landslide">Jordskred</string>
+    <string name="poi_sample_collection_blood">Blod</string>
+    <string name="x">X (tidligere Twitter)</string>
+    <string name="poi_water_supply_water_tank">Vanntank</string>
+    <string name="poi_sample_collection_yes">Ja</string>
 </resources>

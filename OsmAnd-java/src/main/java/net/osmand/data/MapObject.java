@@ -3,6 +3,7 @@ package net.osmand.data;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
+import net.osmand.binary.ObfConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.TransliterationHelper;
 
@@ -232,7 +233,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " " + name + "(" + id + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return getClass().getSimpleName() + " " + name + "(" + id + ")";
 	}
 
 	@Override

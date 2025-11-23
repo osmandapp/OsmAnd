@@ -365,7 +365,7 @@
     <string name="lang_mk">Македонски</string>
     <string name="read_more">Прочитај више</string>
     <string name="whats_new">Шта је ново</string>
-    <string name="rendering_attr_showProposed_name">Предложене објекте</string>
+    <string name="rendering_attr_showProposed_name">Предложени објекти</string>
     <string name="shared_string_update">Надгради</string>
     <string name="shared_string_upload">Отпреми</string>
     <string name="world_map_download_descr">Основна карта света (која покрива целу Земљу при погледу издалека) не постоји или је застарела. Преузмите основну карту света за употпуњавање радне средине.</string>
@@ -1211,7 +1211,7 @@
     <string name="favorite_group_name">Име групе</string>
     <string name="change_color">Промени боју</string>
     <string name="edit_name">Промени име</string>
-    <string name="animate_my_location">Оживи мој положај</string>
+    <string name="animate_my_location">Анимирај мој положај</string>
     <string name="shared_string_install">Угради</string>
     <string name="online_photos">Фотографије са интернета</string>
     <string name="shared_string_add_photos">Додај слике</string>
@@ -3496,7 +3496,7 @@
     <string name="threshold_distance">Праг удаљености</string>
     <string name="navigation_profile">Налог навођења</string>
     <string name="route_between_points_add_track_desc">Изаберите датотеку трага којој ће се додати нови чланак.</string>
-    <string name="street_level_imagery">Слике на ступњу улице</string>
+    <string name="street_level_imagery">Слике на нивоу улице</string>
     <string name="plan_route_exit_dialog_descr">Одбацити све промене на планираној путањи\?</string>
     <string name="in_case_of_reverse_direction">У случају обрнутог правца</string>
     <string name="shared_string_save_as_gpx">Сачувај као нову датотеку трага</string>
@@ -3794,7 +3794,7 @@
     <string name="release_4_0_beta">• Додата је могућност преузимања изохипси у стопама\n\n• Планирајте положене путање: додати су листови за прелазак између тачака или слика\n\n• Освежавања ОсмАнда уживо су премештена у \"Преузимања &gt; Освежења\"\n\n • Путање се сада могу обојити по висини, брзини или нагибу.\n\n • Додата је могућност измене изгледа линија трагова\n\n • Освежен је прозорчић \"Снимање путовања\"</string>
     <string name="copy_address">Умножи адресу</string>
     <string name="voice_prompts_timetable">Времена гласовних навођења</string>
-    <string name="profile_type_osmand_string">ОсмАндов пресек</string>
+    <string name="profile_type_osmand_string">OsmAnd профил</string>
     <string name="profile_type_user_string">Кориснички профил</string>
     <string name="reverse_all_points">Обрни све тачке</string>
     <string name="profile_by_default_description">Одаберите профил које ће се користити по покретању апликације.</string>
@@ -5200,7 +5200,7 @@
     <string name="routing_type">Врста избора путање</string>
     <string name="routing_type_a_star_2_phase">A* 2-фаза</string>
     <string name="java_safe">Јава (Сигурно)</string>
-    <string name="shared_sting_all_colors">Све боје</string>
+    <string name="shared_string_all_colors">Све боје</string>
     <string name="lang_ta_in">Тамилски (Индија)</string>
     <string name="release_4_7">• Нови справица \"Брзиномер\" усклађена са Андроидом Аутом\n\n • Подесите приказ карте додавањем више дугмади \"Брза радња\"\n\n • Побољшана читљивост података у графиконима\n\n • Додати услови према подацима пријемника за трагове\n\n • Побољшано прилагођавање изгледа за скуп путања\n\n • Додата подршка за додатне ГПКС-а ознаке\n\n • Прилагодите \"Удаљеност током навођења\": бирајте између тачних или заокружених бројева\n\n • Јединствено корисничко сучеље за избор трага\n\n • Пријава у ОпенСтритМап је пребачена на ОАут 2.0</string>
     <string name="distance_during_navigation">Растојање током навођења</string>
@@ -5833,10 +5833,10 @@
     <string name="copy_as_new_folder">Умножи као нови омот</string>
     <string name="add_to_a_folder">Додај у омот</string>
     <string name="add_to_favorites">Додај у омиљене</string>
-    <string name="max_weight_at_full_load_description">Наведите највећу тежину свог возила при пуном оптерећењу ради избегавања путева и мостова са ограничењима тежине.</string>
-    <string name="max_axle_load_description">Наведите највеће осовинско оптерећење свог возила ради избегавања путева и мостова са ограничењима тежине.</string>
+    <string name="max_weight_at_full_load_description">Наведите максималну тежину вашег возила при пуном оптерећењу како бисте избегли путеве и мостове са ограничењима тежине.</string>
+    <string name="max_axle_load_description">Наведите максимално осовинско оптерећење вашег возила како бисте избегли путеве и мостове са ограничењима тежине.</string>
     <string name="lang_en_barebones">Енглески (основни)</string>
-    <string name="shared_sting_osm_link">Веза ОСМ-а</string>
+    <string name="shared_string_osm_link">Веза ОСМ-а</string>
     <string name="show_local_names">Прикажи локална имена</string>
     <string name="obd_alt_battery_voltage">Напон исправљача</string>
     <string name="liter_single">Литар</string>
@@ -5875,4 +5875,16 @@
     <string name="wind_animation_layer">Слој живахности ветра</string>
     <string name="weather_layers">Слојеви временских прилика</string>
     <string name="lang_crh">Кримски Татарски (латиница)</string>
+    <string name="efficient_grid">Ефикасна мрежа</string>
+    <string name="slots">Слотови</string>
+    <string name="button_frames">Оквири за дугмад</string>
+    <string name="visualizing_button_grid">Мрежа дугмади карте</string>
+    <string name="enable_3d_objects">Омогући 3Д зграде</string>
+    <string name="enable_3d_objects_description">Приказ 3Д објеката зграда на мапи</string>
+    <string name="deleted_maps_warning">Управо ћете обрисати %d ставке(е)\nНаставити даље?</string>
+    <string name="deleted_maps_prompt">Ове карте више нису подржане и замењене су мањим областима. Уклоните их и преузмите нова издања.</string>
+    <string name="unsupported_maps">Неподржане карте</string>
+    <string name="routing_attr_weightrating_name">Највећа тежина при пуном оптерећењу</string>
+    <string name="routing_attr_maxaxleload_name">Највеће осовинско оптерећење</string>
+    <string name="is_parking_time_limited">Да ли је време паркирања ограничено?</string>
 </resources>

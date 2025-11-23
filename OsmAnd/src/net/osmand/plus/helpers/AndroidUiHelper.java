@@ -11,7 +11,6 @@ import static android.view.Surface.ROTATION_90;
 import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -27,6 +26,7 @@ import android.view.*;
 import android.view.View.OnAttachStateChangeListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.*;
 import androidx.appcompat.app.ActionBar;
@@ -42,6 +42,7 @@ import com.google.android.material.transition.MaterialContainerTransform;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.util.Algorithms;
 
 /**
  * Created by dummy on 28.01.15.
@@ -168,6 +169,14 @@ public class AndroidUiHelper {
 	public static boolean isTablet(@NonNull Context context) {
 		Configuration config = context.getResources().getConfiguration();
 		return config.smallestScreenWidthDp >= 600;
+	}
+
+	public static boolean isPortrait(@NonNull @UiContext Context context) {
+		int orientation = context.getResources().getConfiguration().orientation;
+		if (orientation == Configuration.ORIENTATION_PORTRAIT) return true;
+		if (orientation == Configuration.ORIENTATION_LANDSCAPE) return false;
+
+		return isOrientationPortrait(context);
 	}
 
 	public static boolean isOrientationPortrait(@NonNull @UiContext Context context) {
@@ -363,5 +372,12 @@ public class AndroidUiHelper {
 		transform.setScrimColor(Color.TRANSPARENT);
 		fragment.setSharedElementEnterTransition(transform);
 		view.setTransitionName(transitionName);
+	}
+
+	public static void setTextAndChangeVisibility (@Nullable TextView textView, String text) {
+		if (textView != null) {
+			textView.setText(text);
+			textView.setVisibility(Algorithms.isEmpty(text) ? View.GONE : View.VISIBLE);
+		}
 	}
 }

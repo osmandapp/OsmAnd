@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.importfiles.ImportHelper;
 
 import java.io.File;
@@ -51,6 +52,9 @@ public class ObfImportTask extends BaseImportAsyncTask<Void, Void, String> {
 
 	@NonNull
 	private File getObfDestFile(@NonNull String name) {
+		if(name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+			name = DownloadActivityType.NORMAL_FILE.getBasename(name, DownloadActivityType.NORMAL_FILE) + IndexConstants.BINARY_MAP_INDEX_EXT;
+		}
 		if (name.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 			return app.getAppPath(IndexConstants.ROADS_INDEX_DIR + name);
 		} else if (name.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {

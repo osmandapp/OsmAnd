@@ -327,9 +327,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public boolean init(@NonNull LatLon latLon,
-	                    @Nullable PointDescription pointDescription,
-	                    @Nullable Object object) {
-		return init(latLon, pointDescription, object, true, false);
+			@Nullable PointDescription pointDescription,
+			@Nullable Object object) {
+		return init(latLon, pointDescription, object, false, false);
 	}
 
 	public boolean init(@NonNull LatLon latLon,
@@ -374,7 +374,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		MenuController menuController = getMenuController();
 		boolean needAcquireMenuController = menuController == null
 				|| appModeChanged
-				|| update
+				|| !update
 				|| thisObject == null && object != null
 				|| thisObject != null && object == null
 				|| (thisObject != null && !thisObject.getClass().equals(object.getClass()));
@@ -520,6 +520,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				}
 				if (object != null) {
 					clearSelectedObject(object);
+				}
+				if (searchingAddress()) {
+					cancelSearchAddress();
 				}
 				result = hide(animated);
 				if (menuController != null) {

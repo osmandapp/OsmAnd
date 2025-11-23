@@ -133,6 +133,13 @@
 			</intent-filter>
 
 			<intent-filter>
+				<action android:name="android.intent.action.SEND" />
+				<action android:name="android.intent.action.SEND_MULTIPLE" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:mimeType="application/gpx+xml" />
+			</intent-filter>
+
+			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 				<category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
@@ -1135,6 +1142,7 @@
 
 		<!-- keep android:process on a separate line !! -->
 		<service
+			android:process="${applicationId}"
 			android:label="@string/process_navigation_service"
 			android:name="net.osmand.plus.NavigationService"
 			android:exported="true"

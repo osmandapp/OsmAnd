@@ -263,8 +263,9 @@ public class SearchUICoreTest {
 		}
 		return String.format(Locale.US, "%s [[%d, %s, %.3f, %.2f km]]", r.toString(),
 				r.getFoundWordCount(), r.objectType.toString(),
-				r.getUnknownPhraseMatchWeight(),
-				dist / 1000);
+				r.getUnknownPhraseMatchWeight(), //r.getSearchDistance(phrase.getSettings().getOriginalLocation())
+				dist / 1000
+				);
 	}
 
 	static class TestSearchTranslator implements MapPoiTypes.PoiTranslator {

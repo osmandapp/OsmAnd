@@ -31,6 +31,7 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
@@ -147,6 +148,7 @@ public class OsmandApplication extends MultiDexApplication {
 	NavigationService navigationService;
 	DownloadService downloadService;
 	OsmandAidlApi aidlApi;
+	OsmAndDiagnosticThread diagnosticThread;
 
 	NavigationCarAppService navigationCarAppService;
 	NavigationSession carNavigationSession;
@@ -241,11 +243,13 @@ public class OsmandApplication extends MultiDexApplication {
 			@Override
 			public void onStart(@NonNull LifecycleOwner owner) {
 				appInForeground = true;
+				startDiagnostics();
 			}
 
 			@Override
 			public void onStop(@NonNull LifecycleOwner owner) {
 				appInForeground = false;
+				stopDiagnostics();
 			}
 		};
 		ProcessLifecycleOwner.get().getLifecycle().addObserver(appLifecycleObserver);
@@ -299,6 +303,23 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean isExternalStorageDirectoryReadOnly() {
 		return externalStorageDirectoryReadOnly;
+	}
+
+	private synchronized void startDiagnostics() {
+		OsmAndDiagnosticThread diagnosticThread = this.diagnosticThread;
+		if (diagnosticThread == null || !diagnosticThread.isAlive()) {
+			diagnosticThread = new OsmAndDiagnosticThread(this);
+			diagnosticThread.start();
+			this.diagnosticThread = diagnosticThread;
+		}
+	}
+
+	private synchronized void stopDiagnostics() {
+		OsmAndDiagnosticThread diagnosticThread = this.diagnosticThread;
+		this.diagnosticThread = null;
+		if (diagnosticThread != null) {
+			diagnosticThread.interrupt();
+		}
 	}
 
 	@Override
@@ -525,8 +546,9 @@ public class OsmandApplication extends MultiDexApplication {
 
 			OsmandMap osmandMap = getOsmandMap();
 			if (osmandMap != null) {
-				osmandMap.getMapView().updateDisplayMetrics(displayMetrics, displayMetrics.widthPixels,
-						displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this));
+				int width = displayMetrics.widthPixels;
+				int height = displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this);
+				osmandMap.getMapView().updateDisplayMetrics(displayMetrics, width, height);
 			}
 		}
 
@@ -750,6 +772,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void onCarNavigationSessionStart(@NonNull NavigationSession carNavigationSession) {
 		androidAutoInForeground = true;
+		routingHelper.onCarNavigationStart();
 	}
 
 	public void onCarNavigationSessionStop(@NonNull NavigationSession carNavigationSession) {
@@ -764,6 +787,7 @@ public class OsmandApplication extends MultiDexApplication {
 				plugin.onCarNavigationSessionCreated();
 			}
 		}
+		routingHelper.onCarNavigationSessionChanged();
 	}
 
 	public void refreshCarScreen() {
@@ -1063,9 +1087,11 @@ public class OsmandApplication extends MultiDexApplication {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			runInUIThread(() -> {
 				try {
-					if (isAppInForeground()) {
+					if (isAppInForeground() && OsmAndLocationProvider.isLocationPermissionAvailable(this)) {
 						LOG.info(">>>> APP startForegroundService = " + usageIntent);
 						context.startForegroundService(intent);
+					} else {
+						LOG.info(">>>> Failed APP startForegroundService = " + usageIntent + "{foreground " + isAppInForeground() + ", permissions " + OsmAndLocationProvider.isLocationPermissionAvailable(this));
 					}
 				} catch (IllegalStateException e) {
 					LOG.error("Failed to start foreground service: " + e.getMessage(), e);

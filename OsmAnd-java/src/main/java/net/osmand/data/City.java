@@ -239,6 +239,9 @@ public class City extends MapObject {
 		if (postcode != null) {
 			json.put("postcode", postcode);
 		}
+		if (bbox31 != null) {
+			json.put("bbox31", Arrays.toString(bbox31));
+		}
 		JSONArray listOfStreetsArr = new JSONArray();
 		for (Street s : listOfStreets) {
 			listOfStreetsArr.put(s.toJSON(includingBuildings));
@@ -260,6 +263,63 @@ public class City extends MapObject {
 
 		if (json.has("postcode")) {
 			c.postcode = json.getString("postcode");
+		}
+		if (json.has("bbox31")) {
+			Object bboxValue = json.get("bbox31");
+			int[] parsedBbox = null;
+			if (bboxValue instanceof JSONArray bboxArray) {
+				if (bboxArray.length() >= 4) {
+					int[] buffer = new int[4];
+					boolean valid = true;
+					for (int i = 0; i < buffer.length; i++) {
+						Object value = bboxArray.get(i);
+						if (value instanceof Number) {
+							buffer[i] = ((Number) value).intValue();
+						} else {
+							valid = false;
+							break;
+						}
+					}
+					if (valid) {
+						parsedBbox = buffer;
+					}
+				}
+			} else if (bboxValue instanceof String) {
+				String bboxString = ((String) bboxValue).trim();
+				if (!bboxString.isEmpty()) {
+					String normalized = bboxString;
+					if (normalized.startsWith("[")) {
+						normalized = normalized.substring(1);
+					}
+					if (normalized.endsWith("]")) {
+						normalized = normalized.substring(0, normalized.length() - 1);
+					}
+					String[] parts = normalized.split(",");
+					if (parts.length >= 4) {
+						int[] buffer = new int[4];
+						boolean valid = true;
+						for (int i = 0; i < buffer.length; i++) {
+							String part = parts[i].trim();
+							if (Algorithms.isEmpty(part)) {
+								valid = false;
+								break;
+							}
+							try {
+								buffer[i] = Integer.parseInt(part);
+							} catch (NumberFormatException ex) {
+								valid = false;
+								break;
+							}
+						}
+						if (valid) {
+							parsedBbox = buffer;
+						}
+					}
+				}
+			}
+			if (parsedBbox != null) {
+				c.bbox31 = parsedBbox;
+			}
 		}
 		if (json.has("listOfStreets")) {
 			JSONArray streetsArr = json.getJSONArray("listOfStreets");

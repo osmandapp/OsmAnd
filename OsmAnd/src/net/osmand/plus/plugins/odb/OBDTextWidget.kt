@@ -106,7 +106,7 @@ open class OBDTextWidget(
 		val actions: MutableList<PopUpMenuItem> = ArrayList()
 		val uiUtilities = app.uiUtilities
 		val iconColor = ColorUtilities.getDefaultIconColor(app, nightMode)
-		if (!plugin.isConnected() && plugin.hasLastConnectedDevice()) {
+		if (!plugin.isConnected()) {
 			actions.add(
 				PopUpMenuItem.Builder(app)
 					.setIcon(
