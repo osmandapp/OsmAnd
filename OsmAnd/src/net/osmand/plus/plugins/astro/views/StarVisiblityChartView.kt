@@ -157,7 +157,7 @@ class StarVisiblityChartView @JvmOverloads constructor(
 			canvas.drawText(row.name, dp(12f), baseY, bodyPaint)
 
 			val riseText = row.rise?.toLocalTime()?.format(timeFmt) ?: "—"
-			val setText  = row.set ?.toLocalTime()?.format(timeFmt) ?: "—"
+			val setText  = row.set?.toLocalTime()?.format(timeFmt) ?: "—"
 			canvas.drawText("↑$riseText", leftLabelW, baseY, smallPaint)
 			canvas.drawText("↓$setText", leftLabelW + measureText(riseText) + dp(12f), baseY, smallPaint)
 

@@ -33,6 +33,8 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sin
 import kotlin.math.sqrt
+import androidx.core.graphics.toColorInt
+import androidx.core.graphics.withTranslation
 
 class StarView @JvmOverloads constructor(
 	context: Context,
@@ -48,25 +50,26 @@ class StarView @JvmOverloads constructor(
 		textSize = 30f
 	}
 	private val pathPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = Color.parseColor("#00FFFF")
+		color = "#00FFFF".toColorInt()
 		style = Paint.Style.STROKE
 		strokeWidth = 3f
 		pathEffect = DashPathEffect(floatArrayOf(10f, 15f), 0f)
 	}
 	private val notchPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = Color.parseColor("#00FFFF")
+		color = "#00FFFF".toColorInt()
 		style = Paint.Style.STROKE
 		strokeWidth = 3f
 	}
 	private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = Color.parseColor("#00FFFF")
+		color = "#00FFFF".toColorInt()
 		textSize = 24f
 		textAlign = Paint.Align.CENTER
 	}
 	private val arrowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = Color.parseColor("#00FFFF")
+		color = "#00FFFF".toColorInt()
 		style = Paint.Style.FILL
 	}
+	private val celestialpath = Path()
 
 	// --- View State ---
 	private var azimuthCenter = 180.0
@@ -271,7 +274,8 @@ class StarView @JvmOverloads constructor(
 		drawHorizon(canvas)
 
 		if (selectedObject != null && celestialPathPoints.size > 1) {
-			val path = Path()
+			celestialpath.reset()
+
 			var isPenDown = false
 
 			// 1. Draw Path
@@ -296,13 +300,13 @@ class StarView @JvmOverloads constructor(
 				}
 
 				if (!isPenDown) {
-					path.moveTo(curr.point.x, curr.point.y)
+					celestialpath.moveTo(curr.point.x, curr.point.y)
 					isPenDown = true
 				} else {
-					path.lineTo(curr.point.x, curr.point.y)
+					celestialpath.lineTo(curr.point.x, curr.point.y)
 				}
 			}
-			canvas.drawPath(path, pathPaint)
+			canvas.drawPath(celestialpath, pathPaint)
 
 			// 2. Draw Notches, Labels, Arrows
 			for (i in 1 until celestialPathPoints.size - 1) {
@@ -324,29 +328,12 @@ class StarView @JvmOverloads constructor(
 
 				// Hour Notch & Label
 				if (curr.hourLabel != null) {
-					canvas.save()
-					canvas.translate(curr.point.x, curr.point.y)
-					canvas.rotate(Math.toDegrees(angle.toDouble()).toFloat())
-
-					// Notch: Perpendicular to path.
-					canvas.drawLine(0f, -10f, 0f, 10f, notchPaint)
-					canvas.restore()
-
 					// Text: Offset perpendicular to path
 					val textDist = 30f
 					val px = curr.point.x + textDist * cos(angle - PI/2).toFloat()
 					val py = curr.point.y + textDist * sin(angle - PI/2).toFloat() + 8f
 
 					canvas.drawText(curr.hourLabel, px, py, labelPaint)
-				}
-
-				// Arrow Logic
-				val prevOffset = prev.timeOffsetHours
-				val currOffset = curr.timeOffsetHours
-				val interval = 2.0
-
-				// Draw arrow every 2 hours
-				if (floor(prevOffset / interval) != floor(currOffset / interval)) {
 					drawArrow(canvas, curr.point.x, curr.point.y, angle.toDouble())
 				}
 			}
@@ -372,23 +359,22 @@ class StarView @JvmOverloads constructor(
 	}
 
 	private fun drawArrow(canvas: Canvas, x: Float, y: Float, angleRad: Double) {
-		canvas.save()
-		canvas.translate(x, y)
-		canvas.rotate(Math.toDegrees(angleRad).toFloat())
+		canvas.withTranslation(x, y) {
+			rotate(Math.toDegrees(angleRad).toFloat())
 
-		val path = Path()
-		val size = 10f
-		path.moveTo(size, 0f)
-		path.lineTo(-size, -size * 0.6f)
-		path.lineTo(-size, size * 0.6f)
-		path.close()
+			val path = Path()
+			val size = 10f
+			path.moveTo(size, 0f)
+			path.lineTo(-size, -size * 0.6f)
+			path.lineTo(-size, size * 0.6f)
+			path.close()
 
-		canvas.drawPath(path, arrowPaint)
-		canvas.restore()
+			drawPath(path, arrowPaint)
+		}
 	}
 
 	private fun drawHorizon(canvas: Canvas) {
-		paint.color = Color.parseColor("#003300")
+		paint.color = "#003300".toColorInt()
 		paint.style = Paint.Style.FILL
 
 		val path = Path()
@@ -419,7 +405,7 @@ class StarView @JvmOverloads constructor(
 	}
 
 	private fun drawGrid(canvas: Canvas) {
-		paint.color = Color.parseColor("#333333")
+		paint.color = "#333333".toColorInt()
 		paint.strokeWidth = 2f
 		paint.style = Paint.Style.STROKE
 

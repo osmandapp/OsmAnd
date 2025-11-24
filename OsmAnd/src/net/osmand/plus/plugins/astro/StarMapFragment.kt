@@ -26,6 +26,8 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import java.util.Calendar
 import java.util.TimeZone
+import androidx.core.graphics.toColorInt
+import java.util.Locale
 
 class StarMapFragment : BaseFullScreenDialogFragment() {
 
@@ -122,10 +124,10 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 			Triple(Body.Sun, "Sun", Color.YELLOW),
 			Triple(Body.Moon, "Moon", Color.LTGRAY),
 			Triple(Body.Mercury, "Mercury", Color.GRAY),
-			Triple(Body.Venus, "Venus", Color.parseColor("#FFD700")),
+			Triple(Body.Venus, "Venus", "#FFD700".toColorInt()),
 			Triple(Body.Mars, "Mars", Color.RED),
-			Triple(Body.Jupiter, "Jupiter", Color.parseColor("#D2B48C")),
-			Triple(Body.Saturn, "Saturn", Color.parseColor("#F4A460")),
+			Triple(Body.Jupiter, "Jupiter", "#D2B48C".toColorInt()),
+			Triple(Body.Saturn, "Saturn", "#F4A460".toColorInt()),
 			Triple(Body.Uranus, "Uranus", Color.CYAN),
 			Triple(Body.Neptune, "Neptune", Color.BLUE)
 		)
@@ -190,8 +192,8 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 
 	private fun showObjectInfo(obj: SkyObject) {
 		sheetTitle.text = obj.name
-		val az = String.format("%.1f°", obj.azimuth)
-		val alt = String.format("%.1f°", obj.altitude)
+		val az = String.format(Locale.getDefault(), "%.1f°", obj.azimuth)
+		val alt = String.format(Locale.getDefault(), "%.1f°", obj.altitude)
 		sheetCoords.text = "Azimuth: $az  |  Altitude: $alt"
 
 		var details = "Magnitude: ${obj.magnitude}"
