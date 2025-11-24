@@ -14,11 +14,6 @@ import java.time.ZonedDateTime
 
 object AstroUtils {
 
-	val visibleBodies = listOf(
-		Body.Sun, Body.Moon, Body.Mercury, Body.Venus,
-		Body.Mars, Body.Jupiter, Body.Saturn
-	)
-
 	fun bodyName(b: Body) = when (b) {
 		Body.Sun -> "Sun"
 		Body.Moon -> "Moon"

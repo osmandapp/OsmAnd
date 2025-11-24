@@ -10,6 +10,8 @@ import android.graphics.Typeface
 import android.text.TextPaint
 import android.util.AttributeSet
 import androidx.core.graphics.toColorInt
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Direction
@@ -46,15 +48,13 @@ class StarVisiblityChartView @JvmOverloads constructor(
 
 	private var cachedModel: Model? = null
 
-	// Specific config for this chart type
+	// Configuration
 	var showTwilightBands: Boolean = true
-		set(value) { field = value; rebuildModel(); invalidate() }
-	var sampleMinutes: Int = 5
-		set(value) { field = value; rebuildModel(); invalidate() }
+		set(value) { field = value; triggerAsyncRebuild() }
 
 	// ---------- Layout metrics ----------
-	private val leftLabelW get() = measureText("Mercury") + dp(16f)
-	private val timesW get() = measureText("00:00") * 2 + dp(24f)
+	private val leftLabelW by lazy { measureText("Mercury") + dp(16f) }
+	private val timesW by lazy { measureText("00:00") * 2 + dp(24f) }
 	private val headerH = dp(40f)
 	private val rowH = dp(24f)
 	private val topAxisH = dp(28f)
@@ -91,30 +91,35 @@ class StarVisiblityChartView @JvmOverloads constructor(
 
 	private val timeFmt = DateTimeFormatter.ofPattern("HH:mm")
 
-	override fun rebuildModel() {
+	override suspend fun computeModel(config: Config, width: Int, height: Int): Any {
 		val zone = config.zoneId
 		val startLocal = config.date.atTime(12, 0).atZone(zone)
 		val endLocal = startLocal.plusDays(1)
 		val obs = Observer(config.latitude, config.longitude, config.elevation)
 
-		val rows = AstroUtils.visibleBodies.map { body ->
+		// Optimization: Use analytical searchRiseSet (Bisection) instead of iterating minutes.
+		// This changes complexity from O(1440) to O(constant) per body.
+		val rows = visibleBodies.map { body ->
+			currentCoroutineContext().ensureActive() // Check cancellation before processing next body
 			val spans = computeVisibleSpans(body, startLocal, endLocal, obs)
 			val (rise, set) = computeRiseSet(body, startLocal, endLocal, obs)
 			Row(body, AstroUtils.bodyName(body), rise, set, spans)
 		}
 
 		val tw = AstroUtils.computeTwilight(startLocal, endLocal, obs, zone)
-
 		val title = context.getString(R.string.ltr_or_rtl_combine_via_dash, context.getString(R.string.star_visibility_name), startLocal.toLocalDate())
-		cachedModel = Model(title, startLocal, endLocal, rows, tw)
+
+		return Model(title, startLocal, endLocal, rows, tw)
+	}
+
+	override fun onModelReady(model: Any?) {
+		cachedModel = model as? Model
 	}
 
 	@SuppressLint("DrawAllocation")
 	override fun onDraw(canvas: Canvas) {
 		super.onDraw(canvas)
-
-		if (cachedModel == null) rebuildModel()
-		val m = cachedModel!!
+		val m = cachedModel ?: return
 
 		val height = measureHeight()
 
@@ -126,20 +131,13 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		val chartRight = width - rightPad
 		val chartBottom = height - bottomPad
 
-		// Title
 		canvas.drawText(m.title, width / 2f, dp(25f), labelPaint)
-
-		// Time axis labels & vertical grid every 6 hours
 		drawTimeAxis(canvas, height, m.startLocal, m.endLocal, chartLeft, chartRight)
-
-		// Twilight/day bands
 		drawDayNight(canvas, m, chartLeft, chartTop, chartRight, chartBottom)
 
-		// Rows
 		var y = chartTop + rowH
 
 		m.rows.forEach { row ->
-			// labels: body name + rise/set
 			val baseY = y - rowH/2 + dp(6f)
 			canvas.drawText(row.name, dp(12f), baseY, bodyPaint)
 
@@ -148,14 +146,13 @@ class StarVisiblityChartView @JvmOverloads constructor(
 			canvas.drawText("↑$riseText", leftLabelW, baseY, smallPaint)
 			canvas.drawText("↓$setText", leftLabelW + measureText(riseText) + dp(12f), baseY, smallPaint)
 
-			// visibility bars
+			// Optimization: Draw Rects directly from calculated spans
 			row.visibleSpans.forEach { span ->
 				val x1 = timeToX(span.start, m.startLocal, m.endLocal, chartLeft, chartRight)
 				val x2 = timeToX(span.end  , m.startLocal, m.endLocal, chartLeft, chartRight)
-				val rect = RectF(x1, y - rowH + dp(6f), x2, y - dp(5f))
-				canvas.drawRect(rect, barPaint)
+				// Avoid allocations for temp RectF in onDraw
+				canvas.drawRect(x1, y - rowH + dp(6f), x2, y - dp(5f), barPaint)
 			}
-
 			y += rowH
 		}
 	}
@@ -171,25 +168,21 @@ class StarVisiblityChartView @JvmOverloads constructor(
 	private data class Row(
 		val body: Body,
 		val name: String,
-		val rise: ZonedDateTime?,     // next rise within window
-		val set: ZonedDateTime?,      // next set within window
-		val visibleSpans: List<Span>  // spans within [x0..x1] where alt>0
+		val rise: ZonedDateTime?,
+		val set: ZonedDateTime?,
+		val visibleSpans: List<Span>
 	)
 
 	private data class Span(val start: ZonedDateTime, val end: ZonedDateTime)
 
 	private fun measureText(s: String) = labelPaint.measureText(s)
-
-	private fun measureHeight(): Int {
-		return dp(300f).toInt()
-	}
+	private fun measureHeight() = dp(300f).toInt()
 
 	// ---------- Rendering helpers ----------
 
 	private fun drawTimeAxis(canvas: Canvas, height: Int, start: ZonedDateTime, end: ZonedDateTime, left: Float, right: Float) {
 		val hours = listOf(12, 18, 0, 6, 12)
-		val startNoon = start
-		var t = startNoon
+		var t = start
 		hours.forEachIndexed { idx, h ->
 			t = (if (idx == 0) t else t.plusHours(6))
 			val x = timeToX(t, start, end, left, right)
@@ -204,17 +197,11 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		canvas: Canvas, m: Model,
 		left: Float, top: Float, right: Float, bottom: Float
 	) {
-		// Base: darkest night
 		canvas.drawRect(left, top, right, bottom, nightPaint)
-
 		val tw = m.twilight
 
-		fun xOf(t: ZonedDateTime) =
-			timeToX(t, m.startLocal, m.endLocal, left, right)
-
-		fun clampX(t: ZonedDateTime) = xOf(
-			t.coerceIn(m.startLocal, m.endLocal)
-		)
+		fun xOf(t: ZonedDateTime) = timeToX(t, m.startLocal, m.endLocal, left, right)
+		fun clampX(t: ZonedDateTime) = xOf(t.coerceIn(m.startLocal, m.endLocal))
 
 		val sunrise = tw.sunrise
 		val sunset  = tw.sunset
@@ -233,22 +220,18 @@ class StarVisiblityChartView @JvmOverloads constructor(
 				}
 			}
 			sunrise != null -> {
+				// Polar conditions or invalid search
 				val obs = Observer(config.latitude, config.longitude, config.elevation)
 				val startAlt = altitude(Body.Sun, m.startLocal, obs)
-				if (startAlt > -0.833) {
-					fillDay(left, right)
-				} else {
-					fillDay(clampX(sunrise), right)
-				}
+				if (startAlt > -0.833) fillDay(left, right) else fillDay(clampX(sunrise), right)
 			}
 			sunset != null -> {
 				val obs = Observer(config.latitude, config.longitude, config.elevation)
 				val startAlt = altitude(Body.Sun, m.startLocal, obs)
-				if (startAlt > -0.833) {
-					fillDay(left, clampX(sunset))
-				}
+				if (startAlt > -0.833) fillDay(left, clampX(sunset))
 			}
 			else -> {
+				// Polar day or night
 				val obs = Observer(config.latitude, config.longitude, config.elevation)
 				val startAlt = altitude(Body.Sun, m.startLocal, obs)
 				if (startAlt > -0.833) fillDay(left, right)
@@ -258,24 +241,14 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		if (showTwilightBands) {
 			fun rect(a: ZonedDateTime?, b: ZonedDateTime?, paint: Paint) {
 				if (a == null || b == null) return
-
 				val x1 = timeToX(a, m.startLocal, m.endLocal, left, right, false)
 				val x2 = timeToX(b, m.startLocal, m.endLocal, left, right, false)
-
 				fun drawSeg(s: Float, e: Float) {
-					val lo = max(left, s)
-					val hi = min(right, e)
+					val lo = max(left, s); val hi = min(right, e)
 					if (hi > lo) canvas.drawRect(lo, top, hi, bottom, paint)
 				}
-
-				if (x2 >= x1) {
-					drawSeg(x1, x2)
-				} else {
-					drawSeg(x1, right)
-					drawSeg(left, x2)
-				}
+				if (x2 >= x1) drawSeg(x1, x2) else { drawSeg(x1, right); drawSeg(left, x2) }
 			}
-
 			rect(tw.nauticalDusk, tw.astroDusk, twiAstro)
 			rect(tw.civilDusk,    tw.nauticalDusk, twiNaut)
 			rect(tw.sunset,       tw.civilDusk,    twiCivil)
@@ -300,12 +273,13 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		}
 	}
 
-	private fun computeVisibleSpans(
+	private suspend fun computeVisibleSpans(
 		body: Body,
 		startLocal: ZonedDateTime,
 		endLocal: ZonedDateTime,
 		obs: Observer
 	): List<Span> {
+		// Replaced iterative search with event-based search
 		fun Time.toZdt() =
 			Instant.ofEpochMilli(this.toMillisecondsSince1970()).atZone(config.zoneId)
 
@@ -315,27 +289,36 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		}
 
 		val startAlt = altitude(body, startLocal, obs)
-		var up = startAlt > 0.0
+		var up = startAlt > 0.0 // Standard visible horizon
 
 		var cursor = startLocal
 		val spans = mutableListOf<Span>()
 		var openStart: ZonedDateTime? = if (up) startLocal else null
 
-		while (cursor.isBefore(endLocal)) {
+		// Safety break to prevent infinite loops in odd edge cases
+		var safety = 0
+		while (cursor.isBefore(endLocal) && safety++ < 5) {
+			currentCoroutineContext().ensureActive() // Cooperative cancellation check
 			val dir = if (up) Direction.Set else Direction.Rise
 			val evt = nextEvent(dir, cursor) ?: break
+
 			if (evt.isAfter(endLocal)) {
 				break
 			}
 			if (up) {
+				// Was up, found set. Close span.
 				spans += Span(openStart ?: startLocal, evt)
 				openStart = null
 			} else {
+				// Was down, found rise. Open span.
 				openStart = evt
 			}
 			up = !up
+			// Add minute to ensure we search *after* the event
 			cursor = evt.plusMinutes(1)
 		}
+
+		// Close pending span at end of graph
 		if (up) {
 			spans += Span(openStart ?: startLocal, endLocal)
 		}

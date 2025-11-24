@@ -3,6 +3,15 @@ package net.osmand.plus.plugins.astro.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import io.github.cosinekitty.astronomy.Body
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import net.osmand.plus.utils.AndroidUtils
 import java.time.LocalDate
 import java.time.ZoneId
@@ -16,14 +25,34 @@ abstract class BaseChartView @JvmOverloads constructor(
 	defStyleRes: Int = 0
 ) : View(context, attrs, defStyleAttr, defStyleRes) {
 
+	protected val visibleBodies = listOf(
+		Body.Sun, Body.Moon, Body.Mercury, Body.Venus,
+		Body.Mars, Body.Jupiter, Body.Saturn
+	)
+
+	// Coroutine scope for background calculations
+	protected val viewScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+	private var calculationJob: Job? = null
+
+	// Flag to track if a calculation is running to avoid cancellation starvation
+	private var isComputing = false
+	// Flag to indicate a pending update is requested
+	private var pendingRebuild = false
+
 	// Config holding only primitive data types needed for rendering calculations
 	protected var config = Config()
 
-	abstract fun rebuildModel()
+	/**
+	 * Implementation must compute the model on a background thread.
+	 * DO NOT touch View properties (width/height) inside here unless passed as arguments.
+	 */
+	protected abstract suspend fun computeModel(config: Config, width: Int, height: Int): Any?
 
 	/**
-	 * Pushes new data to the view. Checks for changes before triggering rebuild.
+	 * Called on Main Thread when the model is ready. Update your cached variables and invalidate.
 	 */
+	protected abstract fun onModelReady(model: Any?)
+
 	fun updateData(latitude: Double, longitude: Double, date: LocalDate = LocalDate.now()) {
 		val newConfig = config.copy(
 			latitude = latitude,
@@ -34,12 +63,59 @@ abstract class BaseChartView @JvmOverloads constructor(
 
 		if (!config.equalsTo(newConfig)) {
 			config = newConfig
-			rebuildModel()
-			invalidate()
+			triggerAsyncRebuild()
 		} else {
-			// Even if config is same, ensure we redraw if something external triggered this
 			invalidate()
 		}
+	}
+
+	override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+		super.onSizeChanged(w, h, oldw, oldh)
+		if (w > 0 && h > 0) {
+			triggerAsyncRebuild()
+		}
+	}
+
+	protected fun triggerAsyncRebuild() {
+		// Don't calculate if we have no size yet
+		if (width == 0 || height == 0) return
+
+		// Mark that we need a rebuild
+		pendingRebuild = true
+
+		// If already computing, let the current job finish.
+		// It will loop back and check pendingRebuild to pick up the latest state.
+		if (isComputing) return
+
+		calculationJob = viewScope.launch {
+			isComputing = true
+			// Keep processing as long as there are pending requests
+			while (pendingRebuild && isActive) {
+				// Consume the flag immediately
+				pendingRebuild = false
+
+				val w = width
+				val h = height
+				val currentConfig = config
+
+				// Offload heavy math to Default dispatcher
+				val result = withContext(Dispatchers.Default) {
+					computeModel(currentConfig, w, h)
+				}
+
+				// Back on Main Thread
+				if (isActive) {
+					onModelReady(result)
+					invalidate()
+				}
+			}
+			isComputing = false
+		}
+	}
+
+	override fun onDetachedFromWindow() {
+		super.onDetachedFromWindow()
+		viewScope.cancel()
 	}
 
 	open class BaseModel(
