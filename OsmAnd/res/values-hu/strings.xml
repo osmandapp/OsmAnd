@@ -71,9 +71,9 @@
     <string name="local_openstreetmap_uploadall">Összes feltöltése</string>
     <string name="local_openstreetmap_upload">Szerkesztés feltöltése az OSM-re</string>
     <string name="local_openstreetmap_delete">Szerkesztés törlése</string>
-    <string name="local_openstreetmap_descr_title">Aszinkron OSM szerkesztés:</string>
-    <string name="local_openstreetmap_settings">Eszközön tárolt OSM POI-k, jegyzetek</string>
-    <string name="local_openstreetmap_settings_descr">Az eszköz adatbázisában tárolt OSM POI-k és jegyzetek megjelenítése, kezelése.</string>
+    <string name="local_openstreetmap_descr_title">Aszinkron OSM-szerkesztés:</string>
+    <string name="local_openstreetmap_settings">Eszközön tárolt OSM POI-k, -jegyzetek</string>
+    <string name="local_openstreetmap_settings_descr">Az eszköz adatbázisában tárolt OSM POI-k és -jegyzetek megjelenítése, kezelése.</string>
     <string name="live_monitoring_interval_descr">Online útvonalrögzítés időközének megadása.</string>
     <string name="live_monitoring_interval">Online útvonalrögzítés időköze</string>
     <string name="live_monitoring_url_descr">A webcímet a következő paraméterszintaxissal kell megadni: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -534,7 +534,7 @@
     <string name="finished_task">Befejezve</string>
     <string name="use_online_routing_descr">Internet használata útvonaltervezéshez.</string>
     <string name="use_online_routing">Online navigáció használata</string>
-    <string name="osm_settings_descr">Adja meg az OSM feltöltéshez szükséges OpenStreetMap.org (OSM) adatait.</string>
+    <string name="osm_settings_descr">Adja meg az OSM-feltöltéshez szükséges OpenStreetMap.org (OSM) adatait.</string>
     <string name="data_settings_descr">Nyelv megadása, adatok letöltése/újratöltése.</string>
     <string name="data_settings">Adat</string>
     <string name="osm_editing_plugin_name">OpenStreetMap-szerkesztés</string>
@@ -769,7 +769,7 @@
     <string name="osmand_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM-térképekkel</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) \n \n Az OsmAnd nyílt forráskódú navigációs alkalmazás, amely a globális OSM-adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható az eszköz memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása az eszköz tárhelyén) \n - kompakt vektoros térképek az egész világról \n - Ország- és régiótérképek letöltése közvetlenül az alkalmazásból \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek, topográfiai jellemzők, mint szintvonalak, árnyékolás, lejtés \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n - Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - éjszakai/nappali nézet automatikus átkapcsolása \n - sebességfüggő térképnagyítás \n - térképigazítás iránytű vagy mozgásirány szerint \n - sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok \n \n Az OsmAnd ezen ingyenes verziójának korlátozásai: \n - letölthető térképek számának korlátozása \n - wikipédia-POI offline elérés nélkül \n \n Az OsmAnd-et aktívan fejlesztjük. Projektünk és a folyamatos előrelépés az új funkciók kifejlesztésére és tesztelésére kapott adományoktól függ. Fontolja meg az OsmAnd+ megvásárlását vagy konkrét új funkciók finanszírozását vagy egy általános adományt a https://osmand.net oldalon.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \n Az OsmAnd+ nyílt forráskódú navigációs alkalmazás, amely a globális OSM-adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható az eszköz memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Az OsmAnd+ az alkalmazás fizetős verziója, megvásárlásával támogatja a projektet, új funkciók kifejlesztését finanszírozza és megkapja a legújabb frissítéseket. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása az eszköz tárhelyén) \n - Kompakt vektoros térképek az egész világról \n - Korlátlan számú ország- és régiótérkép letöltése közvetlenül az alkalmazásból \n - Offline Wikipédia-funkció (Wikipédiához kapcsolódó érdekes pontok letöltése), városnézéshez kiváló \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek testre szabható átlátszósággal, topográfiai jellemzőkkel, például szintvonalakkal/domborzatárnyékolással/lejtési viszonyokkal \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n \n- Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - Éjszakai/nappali nézet automatikus átkapcsolása \n - Sebességfüggő térképnagyítás \n - Térképigazítás iránytű vagy mozgásirány szerint \n - Sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok</string>
-    <string name="osmand_plus_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM térképekkel</string>
+    <string name="osmand_plus_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM-térképekkel</string>
     <string name="avoid_motorway">Autópálya nélkül</string>
     <string name="snap_to_road">Úthoz illesztés</string>
     <string name="add_as_last_destination_point">Hozzáadás utolsó köztes célpontként</string>
@@ -936,9 +936,9 @@
     <string name="distance_measurement_finish_subtrack">Új alnyomvonal elkezdése</string>
     <string name="distance_measurement_clear_route">Pontok törlése</string>
     <string name="distance_measurement_load_gpx">Meglévő GPX-fájl megnyitása</string>
-    <string name="local_osm_changes_backup_successful">OSM módosításfájl létrehozva %1$s</string>
+    <string name="local_osm_changes_backup_successful">OSM-módosításfájl létrehozva %1$s</string>
     <string name="local_osm_changes_backup_failed">Nem sikerült biztonsági mentést készíteni az OSM-módosításokról.</string>
-    <string name="local_osm_changes_backup">Biztonsági mentés OSM módosítófájlként</string>
+    <string name="local_osm_changes_backup">Biztonsági mentés OSM-módosítófájlként</string>
     <string name="delete_point">Pont törlése</string>
     <string name="intermediate_items_sort_return">A köztes célpontok optimális rendezése az úti célhoz vezető útvonalon.</string>
     <string name="intermediate_items_sort_by_distance">Rendezés háztól-házig</string>
@@ -978,7 +978,7 @@
     <string name="speak_title">Bemondás…</string>
     <string name="speak_descr">Beállítások a következőkhöz: Utcanevek és forgalmi figyelmeztetések például: elsőbbségadás kötelező (stop) tábla, vagy fekvőrendőr bejelentése, figyelmeztetések a sebességmérő kamerákhoz és a sebességkorlátozásokra.</string>
     <string name="speak_street_names">Utcanevek (TTS)</string>
-    <string name="osb_author_dialog_password">OSM jelszó (opcionális)</string>
+    <string name="osb_author_dialog_password">OSM-jelszó (opcionális)</string>
     <string name="about_version">Verzió:</string>
     <string name="shared_string_about">Névjegy</string>
     <string name="about_settings_descr">Verzióinformáció, licencek, csapattagok</string>
@@ -1376,7 +1376,7 @@
     <string name="action_create">Létrehozás művelet</string>
     <string name="action_modify">Módosítási művelet</string>
     <string name="action_delete">Törlés művelet</string>
-    <string name="osm_edits">OSM szerkesztések</string>
+    <string name="osm_edits">OSM-szerkesztések</string>
     <string name="osmand_parking_hour">ó</string>
     <string name="shared_string_minute_lowercase">perc</string>
     <string name="osmand_parking_time_left">maradt</string>
@@ -1465,7 +1465,7 @@
     <string name="rendering_value_disabled_name">Letiltva</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Színezés az útvonal besorolása szerint</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Színezés OSMC-besorolás szerint</string>
-    <string name="osm_edit_context_menu_delete">OSM szerkesztés törlése</string>
+    <string name="osm_edit_context_menu_delete">OSM-szerkesztés törlése</string>
     <string name="shared_string_show_details">Részletek megjelenítése</string>
     <string name="read_full_article">Teljes cikk elolvasása (online)</string>
     <string name="shared_string_wikipedia">Wikipédia</string>
@@ -1672,7 +1672,7 @@
     <string name="osm_edit_deleted_poi">OSM POI törölve</string>
     <string name="context_menu_item_open_note">OSM-jegyzet nyitása</string>
     <string name="osm_edit_reopened_note">Újranyitott OSM-jegyzet</string>
-    <string name="osm_edit_commented_note">Kommentált OSM Jegyzet</string>
+    <string name="osm_edit_commented_note">Kommentált OSM-jegyzet</string>
     <string name="osm_edit_created_note">OSM-jegyzet létrehozva</string>
     <string name="osn_bug_name">OSM-jegyzet</string>
     <string name="osn_add_dialog_title">Jegyzet létrehozása</string>
@@ -1752,7 +1752,7 @@
     <string name="donations">Adományok</string>
     <string name="number_of_recipients">Címzettek száma</string>
     <string name="osm_user_stat">Szerkesztések: %1$s, helyezés: %2$s, összes szerkesztés: %3$s</string>
-    <string name="osm_editors_ranking">OSM szerkesztői rangsor</string>
+    <string name="osm_editors_ranking">OSM-szerkesztői rangsor</string>
     <string name="osm_live_subscription">OsmAnd Live előfizetés</string>
     <string name="osm_live_subscribe_btn">Előfizetés</string>
     <string name="osm_live_user_public_name">Nyilvános név</string>
@@ -1827,7 +1827,7 @@
     <string name="finish_navigation">Navigáció befejezése</string>
     <string name="avoid_road">Út elkerülése</string>
     <string name="full_report">Részletes jelentés</string>
-    <string name="open_street_map_login_and_pass">OSM felhasználónév és jelszó</string>
+    <string name="open_street_map_login_and_pass">OSM-felhasználónév és -jelszó</string>
     <string name="osm_live_email_desc">Ezzel kaphat friss tájékoztatást a szerkesztéseiről.</string>
     <string name="shared_string_undo_all">Összes visszavonása</string>
     <string name="file_name_containes_illegal_char">Érvénytelen karakter a fájlnévben</string>
@@ -1915,7 +1915,7 @@
     <string name="skip_map_downloading_desc">Nincs telepítve offline térkép. Kijelölhet egy térképet a listából, vagy töltse le később innen: „Menü - %1$s”.</string>
     <string name="osm_live_payment_desc">Az előfizetési díj a kiválasztott időnként lesz felszámítva. Az előfizetést bármikor lemondhatja a Google Play-en.</string>
     <string name="donation_to_osm">Adomány az OSM-közösségnek</string>
-    <string name="donation_to_osm_desc">Az adomány egy részét továbbítjuk az OSM szerkesztőknek. Az előfizetési díj változatlan marad.</string>
+    <string name="donation_to_osm_desc">Az adomány egy részét továbbítjuk az OSM-szerkesztőknek. Az előfizetési díj változatlan marad.</string>
     <string name="osm_live_subscription_desc">Az előfizetés lehetővé teszi bármely térkép óránkénti, napi vagy heti frissítését, valamint korlátlan számú térkép letöltését globálisan.</string>
     <string name="get_it">Beszerzés</string>
     <string name="osm_live_banner_desc">Szerezzen korlátlan számú térképletöltési lehetőséget, valamint heti, napi vagy akár óránkénti térképfrissítést.</string>
@@ -2161,7 +2161,7 @@
     <string name="animate_my_location_desc">Sima térképcsúsztatás mozgás közben. Enyhe késleltetést vezet be.</string>
     <string name="shared_string_overview">Áttekintés</string>
     <string name="route_is_too_long_v2">Hosszú távolságoknál: ha 10 percen belül nem kap eredményt, adjon hozzá köztes célpontokat.</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) egy térkép- és navigációs alkalmazás, amellyel hozzáférhet az ingyenes, globális és kiváló minőségű OSM adatokhoz. \n \nÉlvezze a hangalapú és vizuális navigációs szolgáltatást, tekintsen meg érdekes helyeket (POI-kat), hozzon létre és kezeljen GPX-nyomvonalakat, szintvonalak és topográfiai információk használatával (egy plugin segítségével), válasszon az autós, kerékpáros és gyalogos üzemmód közül, szerkessze az OSM-et és használja ki a számos egyéb lehetőséget.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) egy térkép- és navigációs alkalmazás, amellyel hozzáférhet az ingyenes, globális és kiváló minőségű OSM-adatokhoz. \n \nÉlvezze a hangalapú és vizuális navigációs szolgáltatást, tekintsen meg érdekes helyeket (POI-kat), hozzon létre és kezeljen GPX-nyomvonalakat, szintvonalak és topográfiai információk használatával (egy plugin segítségével), válasszon az autós, kerékpáros és gyalogos üzemmód közül, szerkessze az OSM-et, és használja ki a számos egyéb lehetőséget.</string>
     <string name="save_poi_too_many_uppercase">A név túl sok nagybetűt tartalmaz. Folytatja\?</string>
     <string name="private_access_routing_req">Az úti cél korlátozott hozzáférésű területen található. Engedélyezi a magánutak használatát ennél az útvonaltervnél?</string>
     <string name="restart_search">Keresés újraindítása</string>
@@ -2272,7 +2272,7 @@
     <string name="measurement_tool">Távolságmérés</string>
     <string name="osn_modify_dialog_error">Nem sikerült módosítani a jegyzetet.</string>
     <string name="osn_modify_dialog_title">Jegyzet módosítása</string>
-    <string name="context_menu_item_modify_note">OSM jegyzet módosítása</string>
+    <string name="context_menu_item_modify_note">OSM-jegyzet módosítása</string>
     <string name="make_round_trip_descr">Kiindulási pont másolatának hozzáadása úti célként.</string>
     <string name="make_round_trip">Körút készítése</string>
     <string name="show_map">Térkép megjelenítése</string>
@@ -2460,7 +2460,7 @@
     <string name="delete_search_history">Keresési előzmények törlése</string>
     <string name="download_images">Képek letöltése</string>
     <string name="read_wikipedia_offline_description">Szerezzen OsmAnd Live előfizetést, hogy offline módon is olvashasson Wikipédia- és Wikivoyage-szócikkeket.</string>
-    <string name="how_to_open_link">Hogyan nyisd meg a linket?</string>
+    <string name="how_to_open_link">Hogyan nyisd meg a hivatkozást?</string>
     <string name="purchase_cancelled_dialog_title">Lemondta az OsmAnd Live előfizetését</string>
     <string name="purchase_cancelled_dialog_descr">Előfizetés megújítása az alábbi funkciók használatának folytatásához:</string>
     <string name="travel_card_update_descr">Új Wikivoyage adat érhető el, a használatához frissíts.</string>
@@ -3547,15 +3547,13 @@
     <string name="user_login">Bejelentkezés</string>
     <string name="login_account">Fiók</string>
     <string name="use_login_password">Felhasználónév és jelszó használata</string>
-    <string name="open_street_map_login_mode">Új vagy módosított szerkesztések feltöltéséhez jelentkezzen be.
-\n
-\nHasználja az OAuth módszert vagy OSM felhasználónevét és jelszavát.</string>
+    <string name="open_street_map_login_mode">Új vagy módosított szerkesztések feltöltéséhez jelentkezzen be. \n \nHasználja az OAuth módszert vagy OSM-felhasználónevét és -jelszavát.</string>
     <string name="sign_in_with_open_street_map">Bejelentkezés OpenStreetMap-fiókkal</string>
     <string name="login_open_street_map">Bejelentkezés az OpenStreetMapre</string>
     <string name="login_open_street_map_org">Bejelentkezés az OpenStreetMap.org-ra</string>
     <string name="osm_edit_close_note">OSM-jegyzet lezárása</string>
     <string name="osm_edit_comment_note">Hozzászólás az OSM-jegyzethez</string>
-    <string name="osm_login_descr">Jelentkezzen be az OAuth módszerrel vagy OSM felhasználónevével és jelszavával.</string>
+    <string name="osm_login_descr">Jelentkezzen be az OAuth módszerrel vagy OSM-felhasználónevével és -jelszavával.</string>
     <string name="shared_string_add_photo">Fénykép hozzáadása</string>
     <string name="register_opr_create_new_account">Új fiók létrehozása</string>
     <string name="register_opr_have_account">Már van fiókom</string>
@@ -3571,7 +3569,7 @@
     <string name="export_not_enough_space">Nincs elég hely</string>
     <string name="select_groups_for_import">Importálandó csoportok kijelölése.</string>
     <string name="select_items_for_import">Importálandó elemek kijelölése.</string>
-    <string name="use_dev_url_descr">Átváltás a dev.openstreetmap.org használatára az openstreetmap.org helyett az OSM Note / POI / GPX-feltöltésének teszteléséhez.</string>
+    <string name="use_dev_url_descr">Átváltás a dev.openstreetmap.org használatára az openstreetmap.org helyett az OSM-jegyzet, POI vagy GPX-nyomvonal feltöltésének teszteléséhez.</string>
     <string name="use_dev_url">dev.openstreetmap.org használata</string>
     <string name="cannot_upload_image">Nem lehet feltölteni a képet, próbálja meg később</string>
     <string name="select_picture">Kép kijelölése</string>
@@ -3581,7 +3579,7 @@
     <string name="plan_route_split_before">Elvágás ez előtt:</string>
     <string name="plan_route_split_after">Elvágás ez után:</string>
     <string name="plan_route_add_new_segment">Új szakasz hozzáadása</string>
-    <string name="release_3_9">• Lehetőség az összes adat exportálására és importálására, beleértve a beállításokat, erőforrásokat és a kedvenceket is \n \n • Útvonaltervezés: grafikonok a nyomvonalszakaszokhoz útvonallal, valamint lehetőség több nyomvonalszakasz létrehozására és szerkesztésére \n \n • OAuth hitelesítési módszer az OpenStreetMap-hez, az OSM párbeszédpanelek felhasználói felületének javítása \n \n • Egyéni színek támogatása a kedvenceknél és a nyomvonalak útpontjainál</string>
+    <string name="release_3_9">• Lehetőség az összes adat exportálására és importálására, beleértve a beállításokat, erőforrásokat és a kedvenceket is \n \n • Útvonaltervezés: grafikonok a nyomvonalszakaszokhoz útvonallal, valamint lehetőség több nyomvonalszakasz létrehozására és szerkesztésére \n \n • OAuth hitelesítési módszer az OpenStreetMap-hez, az OSM-párbeszédpanelek felhasználói felületének javítása \n \n • Egyéni színek támogatása a kedvenceknél és a nyomvonalak útpontjainál</string>
     <string name="profile_type_osmand_string">OsmAnd profil</string>
     <string name="profile_type_user_string">Felhasználói profil</string>
     <string name="reverse_all_points">Összes pont megfordítása</string>
@@ -4634,7 +4632,7 @@
     <string name="shared_string_in_progress">Folyamatban</string>
     <string name="shared_string_original">Eredeti</string>
     <string name="movement_speed">Mozgási sebesség</string>
-    <string name="release_4_4">• Továbbfejlesztett „Nyomvonalak” menü a „Térkép konfigurálása” részben \n \n • A helyi menü most a POI lokalizált neveit jeleníti meg \n \n • Lehetőség az útvonal megosztására linken keresztül \n \n • „Tengeri mérföld/láb” hosszúságegység hozzáadva \n \n • A térképtájolás új rögzített móddal bővült \n \n • Egyszerűsített kezdőképernyő \n \n • Helypozíció javítása osztott képernyős módban az Android Auto-ban \n \n • Sebesség/lejtés grafikon hozzáadva a nyomvonal-elemzéshez \n \n • Az Android 13 áthelyezte az alkalmazás nyelvének kiválasztását a rendszerbeállításokba \n \n • Vegán helyek megjelenítésével kapcsolatos problémák javítása \n \n • Lehetőség Fedvény vagy Háttér térképként használt online csempék letöltésére \n \n • Angolszász mértékegységek támogatása a Járműparamétereknél \n \n • Új Moped profil \n \n • Kijelző pozíciónál hozzáadva egy új Automatikus opció \n \n • Gesztusok javítása a térkép döntéséhez, nagyításához, elforgatásához</string>
+    <string name="release_4_4">• Továbbfejlesztett „Nyomvonalak” menü a „Térkép konfigurálása” részben \n \n • A helyi menü most a POI lokalizált neveit jeleníti meg \n \n • Lehetőség az útvonal megosztására hivatkozáson keresztül \n \n • „Tengeri mérföld/láb” hosszúságegység hozzáadva \n \n • A térképtájolás új rögzített móddal bővült \n \n • Egyszerűsített kezdőképernyő \n \n • Helypozíció javítása osztott képernyős módban az Android Auto-ban \n \n • Sebesség/lejtés grafikon hozzáadva a nyomvonal-elemzéshez \n \n • Az Android 13 áthelyezte az alkalmazás nyelvének kiválasztását a rendszerbeállításokba \n \n • Vegán helyek megjelenítésével kapcsolatos problémák javítása \n \n • Lehetőség Fedvény vagy Háttér térképként használt online csempék letöltésére \n \n • Angolszász mértékegységek támogatása a Járműparamétereknél \n \n • Új Moped profil \n \n • Kijelző pozíciónál hozzáadva egy új Automatikus opció \n \n • Gesztusok javítása a térkép döntéséhez, nagyításához, elforgatásához</string>
     <string name="sort_duration_ascending">Először a legrövidebb időtartam</string>
     <string name="sort_duration_descending">Először a leghosszabb időtartam</string>
     <string name="sort_distance_ascending">Először a legrövidebb távolság</string>
@@ -5427,7 +5425,7 @@
     <string name="movies_list">Filmlista</string>
     <string name="quick_action_start_pause_recording">Gomb a GPX-nyomvonal rögzítésének indításához, szüneteltetéséhez vagy folytatásához.</string>
     <string name="quick_action_verb_start_pause">Indítás / szüneteltetés</string>
-    <string name="third_links">Harmadik linkek</string>
+    <string name="third_links">Harmadik hivatkozások</string>
     <string name="lock_screen">Képernyő zárolása</string>
     <string name="lock_screen_description">Engedélyezi vagy letiltja az érintőképernyő funkcióit a véletlen érintések elkerülése érdekében</string>
     <string name="quick_action_showhide_osm_edits_descr">Gomb OSM-szerkesztések megjelenítésére vagy rejtésére a térképen.</string>
@@ -5762,7 +5760,7 @@
     <string name="max_weight_at_full_load_description">Adja meg a járműve megengedett össztömegét, hogy navigáció közben a tömegkorlátozású utakat és hidakat elkerülhesse.</string>
     <string name="max_axle_load_description">Adja meg járműve megengedett legnagyobb tengelyterhelését, hogy elkerülje a tömegkorlátozású utakat és hidakat.</string>
     <string name="lang_en_barebones">Angol (csupasz)</string>
-    <string name="shared_string_osm_link">OSM hivatkozás</string>
+    <string name="shared_string_osm_link">OSM-hivatkozás</string>
     <string name="show_local_names">Helyi nevek megjelenítése</string>
     <string name="obd_alt_battery_voltage">Adapter feszültsége</string>
     <string name="liter_single">Liter</string>
