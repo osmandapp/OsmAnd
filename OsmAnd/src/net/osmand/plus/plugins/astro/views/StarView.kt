@@ -598,9 +598,13 @@ class StarView @JvmOverloads constructor(
 
 	override fun onTouchEvent(event: MotionEvent): Boolean {
 		scaleGestureDetector.onTouchEvent(event)
-		if (scaleGestureDetector.isInProgress) return true
+		if (scaleGestureDetector.isInProgress) {
+			lastTouchX = event.x
+			lastTouchY = event.y
+			return true
+		}
 
-		when (event.action) {
+		when (event.actionMasked) {
 			MotionEvent.ACTION_DOWN -> {
 				lastTouchX = event.x
 				lastTouchY = event.y
@@ -625,6 +629,12 @@ class StarView @JvmOverloads constructor(
 
 					selectedObject?.let { calculateCelestialPath(it) }
 					invalidate()
+				}
+			}
+			MotionEvent.ACTION_POINTER_UP -> {
+				if (event.actionIndex == 0 && event.pointerCount > 1) {
+					lastTouchX = event.getX(1)
+					lastTouchY = event.getY(1)
 				}
 			}
 			MotionEvent.ACTION_UP -> {
