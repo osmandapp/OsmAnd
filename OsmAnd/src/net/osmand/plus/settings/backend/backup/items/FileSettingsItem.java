@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.download.SrtmDownloadItem;
+import net.osmand.plus.helpers.ColorsPaletteUtils;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
@@ -228,6 +229,8 @@ public class FileSettingsItem extends StreamSettingsItem {
 			} else {
 				return Recording.getNameForMultimediaFile(app, file.getName(), getLastModifiedTime());
 			}
+		} else if (subtype == FileSubtype.COLOR_PALETTE) {
+			return ColorsPaletteUtils.getPaletteName(app, file);
 		}
 		return super.getPublicName(ctx);
 	}
