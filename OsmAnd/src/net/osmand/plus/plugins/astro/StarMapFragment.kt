@@ -1,24 +1,21 @@
 package net.osmand.plus.plugins.astro
 
 import android.app.Dialog
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import androidx.lifecycle.ViewModelProvider
 import io.github.cosinekitty.astronomy.Body
-import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.Direction
-import io.github.cosinekitty.astronomy.searchRiseSet
+import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.defineStar
+import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenDialogFragment
@@ -28,9 +25,8 @@ import net.osmand.plus.plugins.astro.views.StarView
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import java.util.Calendar
-import java.util.TimeZone
-import androidx.core.graphics.toColorInt
 import java.util.Locale
+import java.util.TimeZone
 
 class StarMapFragment : BaseFullScreenDialogFragment() {
 
@@ -42,7 +38,7 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 	private lateinit var sheetDetails: TextView
 	private lateinit var resetTimeButton: Button
 
-	private val skyObjects = mutableListOf<SkyObject>()
+	private lateinit var viewModel: StarMapViewModel
 	private var selectedObject: SkyObject? = null
 
 	companion object {
@@ -75,6 +71,8 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 		val view = themedInflater.inflate(R.layout.fragment_star_map, container, false)
 
+		viewModel = ViewModelProvider(this)[StarMapViewModel::class.java]
+
 		starView = view.findViewById(R.id.star_view)
 		timeSelectionView = view.findViewById(R.id.time_selection_view)
 		resetTimeButton = view.findViewById(R.id.reset_time_button)
@@ -90,12 +88,11 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 		settingsButton.setOnClickListener { showFilterDialog() }
 
 		resetTimeButton.setOnClickListener {
-			val now = Calendar.getInstance(TimeZone.getDefault()) // Use Local Time
-			timeSelectionView.setDateTime(now)
-			updateTime(now, animate = true)
+			viewModel.resetTime()
 			resetTimeButton.visibility = View.GONE
 		}
 
+		// Set initial location
 		val loc = app.osmandMap.mapView.currentRotatedTileBox.centerLatLon
 		starView.setObserverLocation(loc.latitude, loc.longitude, 0.0)
 
@@ -105,10 +102,36 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		initData()
+		setupObservers()
+		setupListeners()
+	}
 
+	private fun setupObservers() {
+		// Observe Time changes
+		viewModel.currentTime.observe(viewLifecycleOwner) { time ->
+			// Pass true for animate if it's a user interaction
+			starView.setDateTime(time, animate = true)
+
+			// Update Bottom Sheet if something is selected
+			if (selectedObject != null) {
+				showObjectInfo(selectedObject!!)
+			}
+		}
+
+		// Observe Calendar changes to update UI controls
+		viewModel.currentCalendar.observe(viewLifecycleOwner) { calendar ->
+			timeSelectionView.setDateTime(calendar)
+		}
+
+		// Observe Sky Objects
+		viewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
+			starView.setSkyObjects(objects)
+		}
+	}
+
+	private fun setupListeners() {
 		timeSelectionView.setOnDateTimeChangeListener { calendar ->
-			updateTime(calendar, animate = true)
+			viewModel.updateTime(calendar)
 			resetTimeButton.visibility = View.VISIBLE
 		}
 
@@ -128,80 +151,6 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 		}
 	}
 
-	private fun initData() {
-		skyObjects.clear()
-
-		// Planets
-		val planets = listOf(
-			Triple(Body.Sun, "Sun", Color.YELLOW),
-			Triple(Body.Moon, "Moon", Color.LTGRAY),
-			Triple(Body.Mercury, "Mercury", Color.GRAY),
-			Triple(Body.Venus, "Venus", "#FFD700".toColorInt()),
-			Triple(Body.Mars, "Mars", Color.RED),
-			Triple(Body.Jupiter, "Jupiter", "#D2B48C".toColorInt()),
-			Triple(Body.Saturn, "Saturn", "#F4A460".toColorInt()),
-			Triple(Body.Uranus, "Uranus", Color.CYAN),
-			Triple(Body.Neptune, "Neptune", Color.BLUE)
-		)
-
-		planets.forEach { (body, name, color) ->
-			skyObjects.add(SkyObject(
-				type = if(body == Body.Sun) SkyObject.Type.SUN else SkyObject.Type.PLANET,
-				body = body,
-				name = name,
-				ra = 0.0, dec = 0.0,
-				magnitude = -2f, // Placeholder, calculated dynamically later if needed or visual override
-				color = color
-			))
-		}
-
-		// Top 20 Brightest Stars (Approx J2000 RA/Dec)
-		val brightStars = listOf(
-			Pair("Sirius", Pair(6.75, -16.72)),
-			Pair("Canopus", Pair(6.40, -52.70)),
-			Pair("Alpha Centauri", Pair(14.66, -60.83)),
-			Pair("Arcturus", Pair(14.26, 19.18)),
-			Pair("Vega", Pair(18.62, 38.78)),
-			Pair("Capella", Pair(5.28, 46.00)),
-			Pair("Rigel", Pair(5.24, -8.20)),
-			Pair("Procyon", Pair(7.65, 5.21)),
-			Pair("Achernar", Pair(1.63, -57.23)),
-			Pair("Betelgeuse", Pair(5.92, 7.41)),
-			Pair("Hadar", Pair(14.06, -60.37)),
-			Pair("Altair", Pair(19.85, 8.87)),
-			Pair("Acrux", Pair(12.44, -63.10)),
-			Pair("Aldebaran", Pair(4.60, 16.51)),
-			Pair("Antares", Pair(16.49, -26.43)),
-			Pair("Spica", Pair(13.42, -11.16)),
-			Pair("Pollux", Pair(7.76, 28.03)),
-			Pair("Fomalhaut", Pair(22.96, -29.62)),
-			Pair("Deneb", Pair(20.69, 45.28)),
-			Pair("Mimosa", Pair(12.80, -59.69))
-		)
-
-		brightStars.forEach { (name, coords) ->
-			skyObjects.add(SkyObject(
-				type = SkyObject.Type.STAR,
-				body = null,
-				name = name,
-				ra = coords.first,
-				dec = coords.second,
-				magnitude = 1.0f, // Simplified magnitude for display logic
-				color = Color.WHITE
-			))
-		}
-
-		// Plus Polaris because it's useful
-		skyObjects.add(SkyObject(SkyObject.Type.STAR, null, "Polaris", 2.53, 89.26, 2.0f, Color.YELLOW))
-
-		starView.setSkyObjects(skyObjects)
-
-		// Initial Time Sync (Local)
-		val now = Calendar.getInstance(TimeZone.getDefault())
-		timeSelectionView.setDateTime(now)
-		updateTime(now, animate = false)
-	}
-
 	private fun showObjectInfo(obj: SkyObject) {
 		sheetTitle.text = obj.name
 		val az = String.format(Locale.getDefault(), "%.1f°", obj.azimuth)
@@ -213,22 +162,18 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 			details += "\nDistance: %.3f AU".format(obj.distAu)
 		}
 
-		// --- Rise / Set Calculation ---
+		// Rise / Set calculation (Performed in Fragment or could be moved to VM)
 		val observer = starView.observer
 		val currentTime = starView.currentTime
 
-		// Determine which astronomy Body to use.
-		// For manually added Stars, we use a custom star slot (Star1) as a temporary calculation helper.
 		val bodyToCheck: Body? = if (obj.type == SkyObject.Type.STAR) {
-			// Define the star properties in astronomy engine so we can run searchRiseSet on it
-			defineStar(Body.Star1, obj.ra, obj.dec, 1000.0) // Distance doesn't impact rise/set significantly
+			defineStar(Body.Star1, obj.ra, obj.dec, 1000.0)
 			Body.Star1
 		} else {
 			obj.body
 		}
 
 		if (bodyToCheck != null) {
-			// Search for next rise and next set events starting from current simulation time
 			val riseTime = searchRiseSet(bodyToCheck, observer, Direction.Rise, currentTime, 1.0)
 			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, currentTime, 1.0)
 
@@ -252,37 +197,15 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 			calendar.get(Calendar.MINUTE))
 	}
 
-	private fun updateTime(calendar: Calendar, animate: Boolean) {
-		// Convert Local Calendar to Astronomy Time (UTC)
-		// Astronomy engine expects UTC year, month, day...
-		// We must convert the local calendar timestamp to UTC components manually or use offsets.
-
-		// Easiest way: Get epoch millis, create UTC calendar, extract fields.
-		val utcCal = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-		utcCal.timeInMillis = calendar.timeInMillis
-
-		val t = Time(
-			utcCal.get(Calendar.YEAR),
-			utcCal.get(Calendar.MONTH) + 1,
-			utcCal.get(Calendar.DAY_OF_MONTH),
-			utcCal.get(Calendar.HOUR_OF_DAY),
-			utcCal.get(Calendar.MINUTE),
-			0.0
-		)
-		starView.setDateTime(t, animate)
-
-		if (selectedObject != null) {
-			showObjectInfo(selectedObject!!)
-		}
-	}
-
 	private fun showFilterDialog() {
-		// Combine lists: Toggles first, then Objects
+		// This logic relies on the View's internal state, which is acceptable for view-specific toggles
+		// ideally, this state would also be in the ViewModel
 		val toggleItems = arrayOf("Azimuthal Grid", "Equatorial Grid", "Ecliptic Line")
 		val toggleChecked = booleanArrayOf(starView.showAzimuthalGrid, starView.showEquatorialGrid, starView.showEclipticLine)
 
-		val objectNames = skyObjects.map { it.name }.toTypedArray()
-		val objectChecked = skyObjects.map { it.isVisible }.toBooleanArray()
+		val currentObjects = viewModel.skyObjects.value ?: emptyList()
+		val objectNames = currentObjects.map { it.name }.toTypedArray()
+		val objectChecked = currentObjects.map { it.isVisible }.toBooleanArray()
 
 		val allItems = toggleItems + objectNames
 		val allChecked = toggleChecked + objectChecked
@@ -291,16 +214,16 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 			.setTitle("Visible Layers & Objects")
 			.setMultiChoiceItems(allItems, allChecked) { _, which, isChecked ->
 				if (which < toggleItems.size) {
-					// It's a toggle setting
 					when (which) {
 						0 -> starView.showAzimuthalGrid = isChecked
 						1 -> starView.showEquatorialGrid = isChecked
 						2 -> starView.showEclipticLine = isChecked
 					}
 				} else {
-					// It's an object
 					val objIndex = which - toggleItems.size
-					skyObjects[objIndex].isVisible = isChecked
+					if (objIndex in currentObjects.indices) {
+						currentObjects[objIndex].isVisible = isChecked
+					}
 				}
 			}
 			.setPositiveButton("Apply") { _, _ ->
@@ -311,7 +234,7 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 				starView.showAzimuthalGrid = true
 				starView.showEquatorialGrid = true
 				starView.showEclipticLine = true
-				skyObjects.forEach { it.isVisible = true }
+				currentObjects.forEach { it.isVisible = true }
 				starView.updateVisibility()
 			}
 			.show()
