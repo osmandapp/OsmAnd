@@ -766,7 +766,7 @@
     <string name="day_night_info">Nappal/éjjel információ</string>
     <string name="map_widget_vector_attributes">Megjelenítési tulajdonságok</string>
     <string name="map_widget_renderer">Térképstílus</string>
-    <string name="osmand_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM-térképekkel</string>
+    <string name="osmand_short_description_80_chars">Globális hordozható térkép és navigáció, offline és online OSM-térképekkel</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) \n \n Az OsmAnd nyílt forráskódú navigációs alkalmazás, amely a globális OSM-adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható az eszköz memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása az eszköz tárhelyén) \n - kompakt vektoros térképek az egész világról \n - Ország- és régiótérképek letöltése közvetlenül az alkalmazásból \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek, topográfiai jellemzők, mint szintvonalak, árnyékolás, lejtés \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n - Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - éjszakai/nappali nézet automatikus átkapcsolása \n - sebességfüggő térképnagyítás \n - térképigazítás iránytű vagy mozgásirány szerint \n - sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok \n \n Az OsmAnd ezen ingyenes verziójának korlátozásai: \n - letölthető térképek számának korlátozása \n - wikipédia-POI offline elérés nélkül \n \n Az OsmAnd-et aktívan fejlesztjük. Projektünk és a folyamatos előrelépés az új funkciók kifejlesztésére és tesztelésére kapott adományoktól függ. Fontolja meg az OsmAnd+ megvásárlását vagy konkrét új funkciók finanszírozását vagy egy általános adományt a https://osmand.net oldalon.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \n Az OsmAnd+ nyílt forráskódú navigációs alkalmazás, amely a globális OSM-adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható az eszköz memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Az OsmAnd+ az alkalmazás fizetős verziója, megvásárlásával támogatja a projektet, új funkciók kifejlesztését finanszírozza és megkapja a legújabb frissítéseket. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása az eszköz tárhelyén) \n - Kompakt vektoros térképek az egész világról \n - Korlátlan számú ország- és régiótérkép letöltése közvetlenül az alkalmazásból \n - Offline Wikipédia-funkció (Wikipédiához kapcsolódó érdekes pontok letöltése), városnézéshez kiváló \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek testre szabható átlátszósággal, topográfiai jellemzőkkel, például szintvonalakkal/domborzatárnyékolással/lejtési viszonyokkal \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n \n- Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - Éjszakai/nappali nézet automatikus átkapcsolása \n - Sebességfüggő térképnagyítás \n - Térképigazítás iránytű vagy mozgásirány szerint \n - Sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok</string>
     <string name="osmand_plus_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM-térképekkel</string>
@@ -978,7 +978,7 @@
     <string name="speak_title">Bemondás…</string>
     <string name="speak_descr">Beállítások a következőkhöz: Utcanevek és forgalmi figyelmeztetések például: elsőbbségadás kötelező (stop) tábla, vagy fekvőrendőr bejelentése, figyelmeztetések a sebességmérő kamerákhoz és a sebességkorlátozásokra.</string>
     <string name="speak_street_names">Utcanevek (TTS)</string>
-    <string name="osb_author_dialog_password">OSM-jelszó (opcionális)</string>
+    <string name="osb_author_dialog_password">OSM-jelszó (nem kötelező)</string>
     <string name="about_version">Verzió:</string>
     <string name="shared_string_about">Névjegy</string>
     <string name="about_settings_descr">Verzióinformáció, licencek, csapattagok</string>
@@ -2417,7 +2417,7 @@
     <string name="west_abbreviation">Ny</string>
     <string name="south_abbreviation">D</string>
     <string name="north_abbreviation">É</string>
-    <string name="optional_point_name">Opcionális pont név</string>
+    <string name="optional_point_name">Pont neve - nem kötelező</string>
     <string name="enter_the_file_name">Írja be a fájlnevet.</string>
     <string name="map_import_error">Térképimportálási hiba</string>
     <string name="map_imported_successfully">Térkép importálva</string>
@@ -2460,7 +2460,7 @@
     <string name="delete_search_history">Keresési előzmények törlése</string>
     <string name="download_images">Képek letöltése</string>
     <string name="read_wikipedia_offline_description">Szerezzen OsmAnd Live előfizetést, hogy offline módon is olvashasson Wikipédia- és Wikivoyage-szócikkeket.</string>
-    <string name="how_to_open_link">Hogyan nyisd meg a hivatkozást?</string>
+    <string name="how_to_open_link">Hogyan nyithatja meg a hivatkozást?</string>
     <string name="purchase_cancelled_dialog_title">Lemondta az OsmAnd Live előfizetését</string>
     <string name="purchase_cancelled_dialog_descr">Előfizetés megújítása az alábbi funkciók használatának folytatásához:</string>
     <string name="travel_card_update_descr">Új Wikivoyage adat érhető el, a használatához frissíts.</string>
@@ -5707,7 +5707,7 @@
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Válasz</string>
     <string name="marine_renderer">Tengeri</string>
-    <string name="marine_render_descr">Részletesen testre szabható tengeri navigációs stílus. A Hajózási stíluson alapul. Jobban működik a Nautical World Seamarks térképpel és az opcionális mélységtérképekkel.</string>
+    <string name="marine_render_descr">Részletesen testre szabható tengeri navigációs stílus. A Hajózási stíluson alapul. Jobban működik a Nautical World Seamarks térképpel és a nem kötelező mélységtérképekkel.</string>
     <string name="rendering_attr_hideAreas_name">Mélységi területek</string>
     <string name="rendering_attr_hideAreas_description">Mélységi területek elrejtése</string>
     <string name="rendering_attr_hideContours_description">Mélységvonalak elrejtése</string>
