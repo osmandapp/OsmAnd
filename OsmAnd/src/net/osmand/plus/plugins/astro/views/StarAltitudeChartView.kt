@@ -20,18 +20,13 @@ import io.github.cosinekitty.astronomy.Refraction
 import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
-import io.github.cosinekitty.astronomy.searchAltitude
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.AstroUtils
-import net.osmand.plus.utils.AndroidUtils
 import java.time.Duration
 import java.time.Instant
-import java.time.LocalDate
-import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
@@ -47,56 +42,26 @@ class StarAltitudeChartView @JvmOverloads constructor(
 		override val startLocal: ZonedDateTime,
 		override val endLocal: ZonedDateTime,
 		val series: List<Series>,
-		val twilight: Twilight,
+		val twilight: AstroUtils.Twilight,
 		val yMin: Double,
 		val yMax: Double
 	) : BaseModel(startLocal, endLocal)
 
 	private var cachedModel: Model? = null
-	private var config = Config()
 
-	private data class Config(
-		override val date: LocalDate = LocalDate.now(),
-		override val zoneId: ZoneId = ZoneId.systemDefault(),
-		override val latitude: Double = 0.0,
-		override val longitude: Double = 0.0,
-		override val elevation: Double = 0.0,
-		val showTwilightBands: Boolean = true,
-		val sampleMinutes: Int = 5,
-		val yMin: Double = -30.0,
-		val yMax: Double = +90.0
-	) : BaseConfig(date, zoneId, latitude, longitude, elevation) {
-		fun equalsTo(other: Config): Boolean {
-			if (super.equalsTo(other)) return false
-
-			if (zoneId != other.zoneId) return false
-			if (showTwilightBands != other.showTwilightBands) return false
-			if (sampleMinutes != other.sampleMinutes) return false
-			return (abs(yMin - other.yMin) > 1.0 || abs(yMax - other.yMax) > 1.0)
-		}
-	}
-
-	private fun updateConfig() {
-		val loc = mapTileView.currentRotatedTileBox.centerLatLon
-		val config = Config(
-			date = LocalDate.now(),
-			zoneId = ZoneId.systemDefault(),
-			latitude = loc.latitude,
-			longitude = loc.longitude,
-			elevation = 0.0,
-			showTwilightBands = config.showTwilightBands,
-			sampleMinutes = config.sampleMinutes,
-			yMin = config.yMin,
-			yMax = config.yMax
-		)
-		if (!config.equalsTo(this.config)) { this.config = config; cachedModel = null }
-	}
-
-	private var bodies = listOf(Body.Sun, Body.Moon, Body.Mercury, Body.Venus, Body.Mars, Body.Jupiter, Body.Saturn)
+	// Config specific
+	var showTwilightBands: Boolean = true
+		set(value) { field = value; rebuildModel(); invalidate() }
+	var sampleMinutes: Int = 5
+		set(value) { field = value; rebuildModel(); invalidate() }
+	var yMin: Double = -30.0
+		set(value) { field = value; rebuildModel(); invalidate() }
+	var yMax: Double = +90.0
+		set(value) { field = value; rebuildModel(); invalidate() }
 
 	// ---------- Layout ----------
 	private val leftPad = dp(16f)
-	private val legendW get() = measureText("Jupiter 00:00 00:00") + dp(16f)   // vertical legend column
+	private val legendW get() = measureText("Jupiter 00:00 00:00") + dp(16f)
 	private val nameW get() = smallPaint.measureText("Mercury")
 	private val headerH = dp(40f)
 	private val topAxisH = dp(28f)
@@ -122,45 +87,68 @@ class StarAltitudeChartView @JvmOverloads constructor(
 	private val timePaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.LTGRAY; textSize = sp(14f) }
 	private val axisPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.LTGRAY; textSize = sp(14f) }
 
-	// Per-body colors
-	private val seriesPaints: Map<Body, Paint> = mapOf(
-		Body.Sun     to linePaint("#FFD54F"),
-		Body.Moon    to linePaint("#BDBDBD"),
-		Body.Mercury to linePaint("#F9A825"),
-		Body.Venus   to linePaint("#66BB6A"),
-		Body.Mars    to linePaint("#EF5350"),
-		Body.Jupiter to linePaint("#8D6E63"),
-		Body.Saturn  to linePaint("#D4A373")
-	)
-	private fun linePaint(hex: String) = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = hex.toColorInt(); strokeWidth = dp(2f); style = Paint.Style.STROKE
+	private val seriesPaints: Map<Body, Paint> = AstroUtils.visibleBodies.associateWith {
+		Paint(Paint.ANTI_ALIAS_FLAG).apply {
+			color = AstroUtils.bodyColor(it); strokeWidth = dp(2f); style = Paint.Style.STROKE
+		}
+	}
+
+	override fun rebuildModel() {
+		val zone = config.zoneId
+		val startLocal = config.date.atTime(12, 0).atZone(zone)
+		val endLocal = startLocal.plusDays(1)
+		val obs = Observer(config.latitude, config.longitude, config.elevation)
+		val stepMinutes = sampleMinutes.toLong()
+
+		fun computeRiseSet(body: Body): Pair<ZonedDateTime?, ZonedDateTime?> {
+			val searchStartUtc = Time.fromMillisecondsSince1970(startLocal.toInstant().toEpochMilli())
+			val limitDays = 2.0
+			val nextRise = searchRiseSet(body, obs, Direction.Rise, searchStartUtc, +limitDays)
+			val nextSet  = searchRiseSet(body, obs, Direction.Set , searchStartUtc, +limitDays)
+			fun Time?.toZ() = this?.let { Instant.ofEpochMilli(it.toMillisecondsSince1970()).atZone(config.zoneId) }
+			val r = nextRise.toZ()?.takeIf { !it.isBefore(startLocal) && !it.isAfter(endLocal) }
+			val s = nextSet .toZ()?.takeIf { !it.isBefore(startLocal) && !it.isAfter(endLocal) }
+			return r to s
+		}
+
+		fun computeSeries(body: Body): Series {
+			val pts = ArrayList<Point>()
+			var t = startLocal
+			while (!t.isAfter(endLocal)) {
+				pts += Point(t, altitude(body, t, obs))
+				t = t.plusMinutes(stepMinutes)
+			}
+			pts += Point(endLocal, altitude(body, endLocal, obs))
+			val (rise, set) = computeRiseSet(body)
+			return Series(body, AstroUtils.bodyName(body), pts, rise, set)
+		}
+
+		val series = AstroUtils.visibleBodies.map { computeSeries(it) }
+		val tw = AstroUtils.computeTwilight(startLocal, endLocal, obs, zone)
+
+		val title = context.getString(R.string.ltr_or_rtl_combine_via_dash, context.getString(R.string.star_altitude_name), startLocal.toLocalDate())
+		cachedModel = Model(title, startLocal, endLocal, series, tw, yMin, yMax)
 	}
 
 	@SuppressLint("DrawAllocation")
 	override fun onDraw(canvas: Canvas) {
 		super.onDraw(canvas)
 
-		updateConfig()
-		val m = cachedModel ?: buildModel().also { cachedModel = it }
+		if (cachedModel == null) rebuildModel()
+		val m = cachedModel!!
 
 		val height = measureHeight()
 		canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), bgPaint)
 
-		val chartLeft = leftPad + legendW + dp(12f)   // reserve a left legend column
+		val chartLeft = leftPad + legendW + dp(12f)
 		val chartTop = headerH + topAxisH
 		val chartRight = width - rightPad
 		val chartBottom = height - bottomPad
 
-		// Title
 		canvas.drawText(m.title, width / 2f, dp(25f), labelPaint)
 
-		// Time axis + vertical grid
 		drawTimeAxis(canvas, height, m.startLocal, m.endLocal, chartLeft, chartRight)
-
-		// Day/Night bands
 		drawDayNight(canvas, m, chartLeft, chartTop, chartRight, chartBottom)
-
-		// Y grid and horizon
 		drawYGrid(canvas, chartLeft, chartTop, chartRight, chartBottom, m.yMin, m.yMax)
 		drawZeroLine(canvas, chartLeft, chartRight, chartTop, chartBottom, m.yMin, m.yMax)
 
@@ -178,57 +166,39 @@ class StarAltitudeChartView @JvmOverloads constructor(
 
 			for (i in 1 until s.points.size) {
 				val curr = s.points[i]
-
 				val a0 = prev.alt
 				val a1 = curr.alt
-
 				val x0 = xAt(prev.time)
 				val y0 = altToY(a0, chartTop, chartBottom, m.yMin, m.yMax)
 				val x1 = xAt(curr.time)
 				val y1 = altToY(a1, chartTop, chartBottom, m.yMin, m.yMax)
 
 				when {
-					// both below floor -> lift pen / skip
-					a0 < yMinAlt && a1 < yMinAlt -> {
-						drawing = false
-					}
-
-					// both above (or on) floor -> draw straight segment
+					a0 < yMinAlt && a1 < yMinAlt -> { drawing = false }
 					a0 >= yMinAlt && a1 >= yMinAlt -> {
-						if (!drawing) {
-							path.moveTo(x0, y0)
-							drawing = true
-						}
+						if (!drawing) { path.moveTo(x0, y0); drawing = true }
 						path.lineTo(x1, y1)
 					}
-
-					// crosses floor: compute intersection at yMinAlt and clip
 					else -> {
-						val r = (yMinAlt - a0) / (a1 - a0)   // 0..1 along the segment
+						val r = (yMinAlt - a0) / (a1 - a0)
 						val xi = x0 + (x1 - x0) * r.toFloat()
 						val yi = yAtFloor
-
 						if (a0 >= yMinAlt && a1 < yMinAlt) {
-							// going down through floor: draw to intersection, then lift
 							if (!drawing) path.moveTo(x0, y0)
 							path.lineTo(xi, yi)
 							drawing = false
 						} else {
-							// coming up through floor: start at intersection
 							path.moveTo(xi, yi)
 							path.lineTo(x1, y1)
 							drawing = true
 						}
 					}
 				}
-
 				prev = curr
 			}
-
 			canvas.drawPath(path, paint)
 		}
 
-		// Vertical legend with rise/set
 		drawLegendLeft(canvas, m, chartTop, chartBottom)
 	}
 
@@ -250,71 +220,12 @@ class StarAltitudeChartView @JvmOverloads constructor(
 		val set: ZonedDateTime?
 	)
 
-	// ---------- Build model ----------
-
-	private fun buildModel(): Model {
-		val zone = config.zoneId
-		val startLocal = config.date.atTime(12, 0).atZone(zone)
-		val endLocal = startLocal.plusDays(1)
-		val obs = Observer(config.latitude, config.longitude, config.elevation)
-		val stepMinutes = config.sampleMinutes.toLong()
-
-		fun computeRiseSet(body: Body): Pair<ZonedDateTime?, ZonedDateTime?> {
-			val searchStartUtc = Time.fromMillisecondsSince1970(startLocal.toInstant().toEpochMilli())
-			val limitDays = 2.0
-			val nextRise = searchRiseSet(body, obs, Direction.Rise, searchStartUtc, +limitDays)
-			val nextSet  = searchRiseSet(body, obs, Direction.Set , searchStartUtc, +limitDays)
-			fun Time?.toZ() = this?.let { Instant.ofEpochMilli(it.toMillisecondsSince1970()).atZone(config.zoneId) }
-			val r = nextRise.toZ()?.takeIf { !it.isBefore(startLocal) && !it.isAfter(endLocal) }
-			val s = nextSet .toZ()?.takeIf { !it.isBefore(startLocal) && !it.isAfter(endLocal) }
-			return r to s
-		}
-
-		fun computeSeries(body: Body): Series {
-			val pts = ArrayList<Point>()
-			var t = startLocal
-			while (!t.isAfter(endLocal)) {
-				pts += Point(t, altitude(body, t, obs))
-				t = t.plusMinutes(stepMinutes)
-			}
-			pts += Point(endLocal, altitude(body, endLocal, obs))
-			val (rise, set) = computeRiseSet(body)    // same method used in visibility view. :contentReference[oaicite:1]{index=1}
-			return Series(body, AstroUtils.bodyName(body), pts, rise, set)
-		}
-
-		val series = bodies.map { computeSeries(it) }
-		val tw = computeTwilight(startLocal, endLocal)
-
-		val title = context.getString(R.string.ltr_or_rtl_combine_via_dash, context.getString(R.string.star_altitude_name), startLocal.toLocalDate())
-		return Model(title, startLocal, endLocal, series, tw, config.yMin, config.yMax)
-	}
-
-	// Apparent altitude using equator->horizon with refraction. :contentReference[oaicite:2]{index=2}
+	// Apparent altitude using equator->horizon with refraction.
 	private fun altitude(body: Body, tLocal: ZonedDateTime, obs: Observer): Double {
 		val tUtc = Time.fromMillisecondsSince1970(tLocal.toInstant().toEpochMilli())
 		val eq = equator(body, tUtc, obs, EquatorEpoch.OfDate, Aberration.Corrected)
 		val hor = horizon(tUtc, obs, eq.ra, eq.dec, Refraction.Normal)
 		return hor.altitude
-	}
-
-	private fun computeTwilight(startLocal: ZonedDateTime, endLocal: ZonedDateTime): Twilight {
-		val obs = Observer(config.latitude, config.longitude, config.elevation)
-		fun findAlt(direction: Direction, deg: Double): ZonedDateTime? {
-			val t0 = Time.fromMillisecondsSince1970(startLocal.toInstant().toEpochMilli())
-			val t = searchAltitude(Body.Sun, obs, direction, t0, 2.0, deg)
-			return t?.let { Instant.ofEpochMilli(it.toMillisecondsSince1970()).atZone(config.zoneId) }
-		}
-		// Prefer precise sunrise/sunset via searchRiseSet. :contentReference[oaicite:3]{index=3}
-		val sr = searchRiseSet(Body.Sun, obs, Direction.Rise, Time.fromMillisecondsSince1970(startLocal.toInstant().toEpochMilli()), 2.0)
-		val ss = searchRiseSet(Body.Sun, obs, Direction.Set , Time.fromMillisecondsSince1970(startLocal.toInstant().toEpochMilli()), 2.0)
-		val sunrise = sr?.let { Instant.ofEpochMilli(it.toMillisecondsSince1970()).atZone(config.zoneId) }
-		val sunset  = ss?.let { Instant.ofEpochMilli(it.toMillisecondsSince1970()).atZone(config.zoneId) }
-		return Twilight(
-			sunrise, sunset,
-			findAlt(Direction.Rise, -6.0),  findAlt(Direction.Set, -6.0),
-			findAlt(Direction.Rise, -12.0), findAlt(Direction.Set, -12.0),
-			findAlt(Direction.Rise, -18.0), findAlt(Direction.Set, -18.0)
-		)
 	}
 
 	// ---------- Drawing helpers ----------
@@ -324,11 +235,10 @@ class StarAltitudeChartView @JvmOverloads constructor(
 		var y = chartTop + smallPaint.textSize
 		val timeFmt = DateTimeFormatter.ofPattern("HH:mm")
 		m.series.forEach { s ->
-			// swatch
 			val sw = dp(16f)
 			val mid = y - smallPaint.textSize/3
 			canvas.drawLine(x0, mid, x0 + sw, mid, seriesPaints[s.body]!!)
-			// text: Name + rise/set
+
 			val rise = s.rise?.toLocalTime()?.format(timeFmt) ?: "—"
 			val set  = s.set ?.toLocalTime()?.format(timeFmt) ?: "—"
 			val name = s.name
@@ -336,7 +246,7 @@ class StarAltitudeChartView @JvmOverloads constructor(
 			val riseSet = "↑$rise  ↓$set"
 			canvas.drawText(riseSet, x0 + sw + dp(4f) + nameW + dp(4f), y, smallPaint)
 			y += legendLineH
-			if (y > chartBottom) return   // stop if we ever run out of space
+			if (y > chartBottom) return
 		}
 	}
 
@@ -403,7 +313,7 @@ class StarAltitudeChartView @JvmOverloads constructor(
 			}
 		}
 
-		if (config.showTwilightBands) {
+		if (showTwilightBands) {
 			fun rect(a: ZonedDateTime?, b: ZonedDateTime?, paint: Paint) {
 				if (a == null || b == null) return
 				val x1 = timeToX(a, m.startLocal, m.endLocal, left, right, false)
@@ -423,8 +333,6 @@ class StarAltitudeChartView @JvmOverloads constructor(
 		}
 	}
 
-	// ---------- Mapping / metrics ----------
-
 	private fun timeToX(t: ZonedDateTime, start: ZonedDateTime, end: ZonedDateTime, left: Float, right: Float, coerce: Boolean = true): Float {
 		val total = Duration.between(start, end).toMillis().toDouble()
 		val pos = Duration.between(start, t).toMillis().toDouble()
@@ -441,11 +349,6 @@ class StarAltitudeChartView @JvmOverloads constructor(
 	private fun measureText(s: String) = labelPaint.measureText(s)
 
 	private fun measureHeight(): Int {
-		// single plot; leave a bit of height for the legend column
-		//return (headerH + topAxisH + dp(180f) + bottomPad).toInt()
 		return dp(300f).toInt()
 	}
-
-	private fun dp(v: Float) = AndroidUtils.dpToPxF(context, v)
-	private fun sp(v: Float) = AndroidUtils.spToPxF(context, v)
 }

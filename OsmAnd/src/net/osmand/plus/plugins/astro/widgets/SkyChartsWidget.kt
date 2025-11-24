@@ -15,6 +15,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings
 import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget
+import java.time.LocalDate
 
 class SkyChartsWidget(mapActivity: MapActivity, val starChartWidgetState: StarChartWidgetState, customId: String?, panel: WidgetsPanel?) :
 	MapWidget(mapActivity, WidgetType.STAR_CHART_WIDGET, customId, panel) {
@@ -32,7 +33,7 @@ class SkyChartsWidget(mapActivity: MapActivity, val starChartWidgetState: StarCh
 		}
 		view.findViewById<AppCompatButton>(R.id.switch_chart_button).apply {
 			setOnClickListener {
-				widgetState.changeToNextState();
+				widgetState.changeToNextState()
 				updateInfo(null)
 			}
 		}
@@ -53,14 +54,30 @@ class SkyChartsWidget(mapActivity: MapActivity, val starChartWidgetState: StarCh
 
 	override fun updateInfo(drawSettings: DrawSettings?) {
 		val chartType = widgetState.getStarChartType()
-		starVisiblityView.visibility = if (chartType == StarChartType.STAR_VISIBLITY) View.VISIBLE else View.GONE
-		starAltitudeView.visibility = if (chartType == StarChartType.STAR_ALTITUDE) View.VISIBLE else View.GONE
-		celestialPathView.visibility = if (chartType == StarChartType.CELESTIAL_PATH) View.VISIBLE else View.GONE
 
+		// Get current map center
+		val mapLocation = mapActivity.mapView.currentRotatedTileBox.centerLatLon
+
+		// Update visibility and push data to the active view
 		when (chartType) {
-			StarChartType.STAR_VISIBLITY -> starVisiblityView.invalidate()
-			StarChartType.STAR_ALTITUDE -> starAltitudeView.invalidate()
-			else -> celestialPathView.invalidate()
+			StarChartType.STAR_VISIBLITY -> {
+				starVisiblityView.visibility = View.VISIBLE
+				starAltitudeView.visibility = View.GONE
+				celestialPathView.visibility = View.GONE
+				starVisiblityView.updateData(mapLocation.latitude, mapLocation.longitude, LocalDate.now())
+			}
+			StarChartType.STAR_ALTITUDE -> {
+				starVisiblityView.visibility = View.GONE
+				starAltitudeView.visibility = View.VISIBLE
+				celestialPathView.visibility = View.GONE
+				starAltitudeView.updateData(mapLocation.latitude, mapLocation.longitude, LocalDate.now())
+			}
+			StarChartType.CELESTIAL_PATH -> {
+				starVisiblityView.visibility = View.GONE
+				starAltitudeView.visibility = View.GONE
+				celestialPathView.visibility = View.VISIBLE
+				celestialPathView.updateData(mapLocation.latitude, mapLocation.longitude, LocalDate.now())
+			}
 		}
 	}
 }

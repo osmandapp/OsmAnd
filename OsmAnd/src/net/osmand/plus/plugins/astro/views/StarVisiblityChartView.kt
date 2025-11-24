@@ -19,15 +19,11 @@ import io.github.cosinekitty.astronomy.Refraction
 import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
-import io.github.cosinekitty.astronomy.searchAltitude
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.AstroUtils
-import net.osmand.plus.utils.AndroidUtils
 import java.time.Duration
 import java.time.Instant
-import java.time.LocalDate
-import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.max
@@ -42,48 +38,19 @@ class StarVisiblityChartView @JvmOverloads constructor(
 
 	private data class Model(
 		val title: String,
-		override val startLocal: ZonedDateTime,     // 12:00 local
-		override val endLocal: ZonedDateTime,       // +24h
+		override val startLocal: ZonedDateTime,
+		override val endLocal: ZonedDateTime,
 		val rows: List<Row>,
-		val twilight: Twilight
+		val twilight: AstroUtils.Twilight
 	) : BaseModel(startLocal, endLocal)
 
 	private var cachedModel: Model? = null
-	private var config = Config()
 
-	private var bodies =
-		listOf(Body.Sun, Body.Moon, Body.Mercury, Body.Venus, Body.Mars, Body.Jupiter, Body.Saturn)
-
-	data class Config(
-		override val date: LocalDate = LocalDate.now(),         // the civil date to center the night around
-		override val zoneId: ZoneId = ZoneId.systemDefault(),   // local timezone for labels and 24h window
-		override val latitude: Double = 0.0,
-		override val longitude: Double = 0.0,
-		override val elevation: Double = 0.0,
-		val showTwilightBands: Boolean = true,
-		val sampleMinutes: Int = 5        // altitude sampling granularity for visibility bars
-	) : BaseConfig(date, zoneId, latitude, longitude, elevation) {
-		fun equalsTo(other: Config): Boolean {
-			if (super.equalsTo(other)) return false
-
-			if (showTwilightBands != other.showTwilightBands) return false
-			return (sampleMinutes != other.sampleMinutes)
-		}
-	}
-
-	private fun updateConfig() {
-		val loc = mapTileView.currentRotatedTileBox.centerLatLon
-		val config = Config(
-			date = LocalDate.now(),
-			zoneId = ZoneId.systemDefault(),
-			latitude = loc.latitude,
-			longitude = loc.longitude,
-			elevation = 0.0,
-			showTwilightBands = config.showTwilightBands,
-			sampleMinutes = config.sampleMinutes
-		)
-		if (!config.equalsTo(this.config)) { this.config = config; cachedModel = null }
-	}
+	// Specific config for this chart type
+	var showTwilightBands: Boolean = true
+		set(value) { field = value; rebuildModel(); invalidate() }
+	var sampleMinutes: Int = 5
+		set(value) { field = value; rebuildModel(); invalidate() }
 
 	// ---------- Layout metrics ----------
 	private val leftLabelW get() = measureText("Mercury") + dp(16f)
@@ -100,7 +67,7 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		color = "#80868B".toColorInt(); strokeWidth = dp(1f)
 	}
 	private val nightPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#60000000".toColorInt() }
-	private val dayPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#57C7F3".toColorInt() } // sky blue
+	private val dayPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#57C7F3".toColorInt() }
 	private val twiAstro = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#CC2B4C7E".toColorInt() }
 	private val twiNaut = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#CC3C7AA6".toColorInt() }
 	private val twiCivil = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#CC5BBBF0".toColorInt() }
@@ -122,12 +89,32 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		color = Color.LTGRAY; textSize = sp(14f)
 	}
 
+	private val timeFmt = DateTimeFormatter.ofPattern("HH:mm")
+
+	override fun rebuildModel() {
+		val zone = config.zoneId
+		val startLocal = config.date.atTime(12, 0).atZone(zone)
+		val endLocal = startLocal.plusDays(1)
+		val obs = Observer(config.latitude, config.longitude, config.elevation)
+
+		val rows = AstroUtils.visibleBodies.map { body ->
+			val spans = computeVisibleSpans(body, startLocal, endLocal, obs)
+			val (rise, set) = computeRiseSet(body, startLocal, endLocal, obs)
+			Row(body, AstroUtils.bodyName(body), rise, set, spans)
+		}
+
+		val tw = AstroUtils.computeTwilight(startLocal, endLocal, obs, zone)
+
+		val title = context.getString(R.string.ltr_or_rtl_combine_via_dash, context.getString(R.string.star_visibility_name), startLocal.toLocalDate())
+		cachedModel = Model(title, startLocal, endLocal, rows, tw)
+	}
+
 	@SuppressLint("DrawAllocation")
 	override fun onDraw(canvas: Canvas) {
 		super.onDraw(canvas)
 
-		updateConfig()
-		val m = cachedModel ?: buildModel().also { cachedModel = it }
+		if (cachedModel == null) rebuildModel()
+		val m = cachedModel!!
 
 		val height = measureHeight()
 
@@ -150,7 +137,7 @@ class StarVisiblityChartView @JvmOverloads constructor(
 
 		// Rows
 		var y = chartTop + rowH
-		val timeFmt = DateTimeFormatter.ofPattern("HH:mm")
+
 		m.rows.forEach { row ->
 			// labels: body name + rise/set
 			val baseY = y - rowH/2 + dp(6f)
@@ -166,7 +153,6 @@ class StarVisiblityChartView @JvmOverloads constructor(
 				val x1 = timeToX(span.start, m.startLocal, m.endLocal, chartLeft, chartRight)
 				val x2 = timeToX(span.end  , m.startLocal, m.endLocal, chartLeft, chartRight)
 				val rect = RectF(x1, y - rowH + dp(6f), x2, y - dp(5f))
-				//canvas.drawRoundRect(rect, dp(6f), dp(6f), barPaint)
 				canvas.drawRect(rect, barPaint)
 			}
 
@@ -194,11 +180,7 @@ class StarVisiblityChartView @JvmOverloads constructor(
 
 	private fun measureText(s: String) = labelPaint.measureText(s)
 
-	// ---------- Measuring / drawing ----------
-
 	private fun measureHeight(): Int {
-		//val rows = cachedModel?.rows?.size ?: bodies.size
-		//return (headerH + topAxisH + (rows * rowH) + bottomPad).toInt()
 		return dp(300f).toInt()
 	}
 
@@ -206,14 +188,13 @@ class StarVisiblityChartView @JvmOverloads constructor(
 
 	private fun drawTimeAxis(canvas: Canvas, height: Int, start: ZonedDateTime, end: ZonedDateTime, left: Float, right: Float) {
 		val hours = listOf(12, 18, 0, 6, 12)
-		val fmt = DateTimeFormatter.ofPattern("HH:mm")
 		val startNoon = start
 		var t = startNoon
 		hours.forEachIndexed { idx, h ->
 			t = (if (idx == 0) t else t.plusHours(6))
 			val x = timeToX(t, start, end, left, right)
 			canvas.drawLine(x, headerH, x, height - bottomPad, gridPaint)
-			val label = t.toLocalTime().format(fmt)
+			val label = t.toLocalTime().format(timeFmt)
 			val tw = timePaint.measureText(label)
 			canvas.drawText(label, x - tw/2, headerH + timePaint.textSize + dp(4f), timePaint)
 		}
@@ -235,7 +216,6 @@ class StarVisiblityChartView @JvmOverloads constructor(
 			t.coerceIn(m.startLocal, m.endLocal)
 		)
 
-		// --- 1) Draw daylight correctly for any ordering or missing events.
 		val sunrise = tw.sunrise
 		val sunset  = tw.sunset
 
@@ -246,19 +226,13 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		when {
 			sunrise != null && sunset != null -> {
 				if (sunrise.isAfter(sunset)) {
-					// Normal “night in the middle” case:  ... day | sunset | NIGHT | sunrise | day ...
 					fillDay(left, clampX(sunset))
 					fillDay(clampX(sunrise), right)
 				} else {
-					// “Day in the middle” case (e.g., high-latitude / season edge):
-					// ... NIGHT | sunrise | DAY | sunset | NIGHT ...
 					fillDay(clampX(sunrise), clampX(sunset))
 				}
 			}
-
 			sunrise != null -> {
-				// Only a sunrise in the window.
-				// If we start in day, everything is day; otherwise day begins at sunrise.
 				val obs = Observer(config.latitude, config.longitude, config.elevation)
 				val startAlt = altitude(Body.Sun, m.startLocal, obs)
 				if (startAlt > -0.833) {
@@ -267,30 +241,21 @@ class StarVisiblityChartView @JvmOverloads constructor(
 					fillDay(clampX(sunrise), right)
 				}
 			}
-
 			sunset != null -> {
-				// Only a sunset in the window.
 				val obs = Observer(config.latitude, config.longitude, config.elevation)
 				val startAlt = altitude(Body.Sun, m.startLocal, obs)
 				if (startAlt > -0.833) {
-					// We start in day and turn to night at sunset.
 					fillDay(left, clampX(sunset))
-				} else {
-					// We start in night and never reach sunrise in-window: no daylight block.
 				}
 			}
-
 			else -> {
-				// No sunrise/sunset inside the window -> either all-day or all-night.
 				val obs = Observer(config.latitude, config.longitude, config.elevation)
 				val startAlt = altitude(Body.Sun, m.startLocal, obs)
-				if (startAlt > -0.833) fillDay(left, right) // continuous day
-				// else continuous night (already drawn as background)
+				if (startAlt > -0.833) fillDay(left, right)
 			}
 		}
 
-		// --- 2) Twilight bands (overlay on top of the night area).
-		if (config.showTwilightBands) {
+		if (showTwilightBands) {
 			fun rect(a: ZonedDateTime?, b: ZonedDateTime?, paint: Paint) {
 				if (a == null || b == null) return
 
@@ -311,12 +276,9 @@ class StarVisiblityChartView @JvmOverloads constructor(
 				}
 			}
 
-			// Evening side
 			rect(tw.nauticalDusk, tw.astroDusk, twiAstro)
 			rect(tw.civilDusk,    tw.nauticalDusk, twiNaut)
 			rect(tw.sunset,       tw.civilDusk,    twiCivil)
-
-			// Morning side
 			rect(tw.astroDawn,    tw.nauticalDawn, twiAstro)
 			rect(tw.nauticalDawn, tw.civilDawn,    twiNaut)
 			rect(tw.civilDawn,    tw.sunrise,      twiCivil)
@@ -338,43 +300,20 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		}
 	}
 
-	// ---------- Model builder ----------
-
-	private fun buildModel(): Model {
-		val zone = config.zoneId
-		val startLocal = config.date.atTime(12, 0).atZone(zone)            // 12:00 local
-		val endLocal = startLocal.plusDays(1)
-
-		val rows = bodies.map { body ->
-			val spans = computeVisibleSpans(body, startLocal, endLocal)
-			val (rise, set) = computeRiseSet(body, startLocal, endLocal)
-			Row(body, AstroUtils.bodyName(body), rise, set, spans)
-		}
-
-		val tw = computeTwilight(startLocal, endLocal)
-
-		val title = context.getString(R.string.ltr_or_rtl_combine_via_dash, context.getString(R.string.star_visibility_name), startLocal.toLocalDate())
-		return Model(title, startLocal, endLocal, rows, tw)
-	}
-
 	private fun computeVisibleSpans(
 		body: Body,
 		startLocal: ZonedDateTime,
-		endLocal: ZonedDateTime
+		endLocal: ZonedDateTime,
+		obs: Observer
 	): List<Span> {
-		val obs = Observer(config.latitude, config.longitude, config.elevation)
-
 		fun Time.toZdt() =
 			Instant.ofEpochMilli(this.toMillisecondsSince1970()).atZone(config.zoneId)
 
-		// Helper to get the NEXT event of a direction after a given local time.
 		fun nextEvent(dir: Direction, from: ZonedDateTime): ZonedDateTime? {
 			val t0 = Time.fromMillisecondsSince1970(from.toInstant().toEpochMilli())
-			// search up to 2 days forward; rise/set will be found long before that.
 			return searchRiseSet(body, obs, dir, t0, +2.0)?.toZdt()
 		}
 
-		// Are we already above horizon at start?
 		val startAlt = altitude(body, startLocal, obs)
 		var up = startAlt > 0.0
 
@@ -386,19 +325,15 @@ class StarVisiblityChartView @JvmOverloads constructor(
 			val dir = if (up) Direction.Set else Direction.Rise
 			val evt = nextEvent(dir, cursor) ?: break
 			if (evt.isAfter(endLocal)) {
-				// No more events inside window.
 				break
 			}
 			if (up) {
-				// close the open span at this Set
 				spans += Span(openStart ?: startLocal, evt)
 				openStart = null
 			} else {
-				// open a span at this Rise
 				openStart = evt
 			}
 			up = !up
-			// Nudge cursor a minute past the event to avoid finding the same crossing again.
 			cursor = evt.plusMinutes(1)
 		}
 		if (up) {
@@ -417,50 +352,20 @@ class StarVisiblityChartView @JvmOverloads constructor(
 	private fun computeRiseSet(
 		body: Body,
 		startLocal: ZonedDateTime,
-		endLocal: ZonedDateTime
+		endLocal: ZonedDateTime,
+		obs: Observer
 	): Pair<ZonedDateTime?, ZonedDateTime?> {
-		val obs = Observer(config.latitude, config.longitude, config.elevation)
-		// search within the window, using a start near its middle to reliably get next events
 		val searchStartUtc = Time.fromMillisecondsSince1970(startLocal.toInstant().toEpochMilli())
-		val limitDays = 2.0  // generous to catch events straddling edges
+		val limitDays = 2.0
 
 		val nextRise = searchRiseSet(body, obs, Direction.Rise, searchStartUtc, +limitDays)
 		val nextSet  = searchRiseSet(body, obs, Direction.Set , searchStartUtc, +limitDays)
 
 		fun Time?.toZoned(): ZonedDateTime? =
 			this?.let { Instant.ofEpochMilli(it.toMillisecondsSince1970()).atZone(config.zoneId) }
-		// Filter to window
+
 		val riseZ = nextRise.toZoned()?.takeIf { !it.isBefore(startLocal) && !it.isAfter(endLocal) }
 		val setZ  = nextSet .toZoned()?.takeIf { !it.isBefore(startLocal) && !it.isAfter(endLocal) }
 		return riseZ to setZ
 	}
-
-	private fun computeTwilight(startLocal: ZonedDateTime, endLocal: ZonedDateTime): Twilight {
-		val obs = Observer(config.latitude, config.longitude, config.elevation)
-		fun findAlt(direction: Direction, deg: Double): ZonedDateTime? {
-			val t0 = Time.fromMillisecondsSince1970(startLocal.toInstant().toEpochMilli())
-			val t = searchAltitude(Body.Sun, obs, direction, t0, 2.0, deg)
-			return t?.let { Instant.ofEpochMilli(it.toMillisecondsSince1970()).atZone(config.zoneId) }
-		}
-		val sunrise = findAlt(Direction.Rise, -0.833)   // handled by searchRiseSet below; keep for safety
-		val sunset  = findAlt(Direction.Set , -0.833)
-
-		// Prefer precise sunrise/sunset calculation:
-		val sr = searchRiseSet(Body.Sun, obs, Direction.Rise, Time.fromMillisecondsSince1970(startLocal.toInstant().toEpochMilli()), 2.0)
-		val ss = searchRiseSet(Body.Sun, obs, Direction.Set , Time.fromMillisecondsSince1970(startLocal.toInstant().toEpochMilli()), 2.0)
-		val srZ = sr?.let { Instant.ofEpochMilli(it.toMillisecondsSince1970()).atZone(config.zoneId) } ?: sunrise
-		val ssZ = ss?.let { Instant.ofEpochMilli(it.toMillisecondsSince1970()).atZone(config.zoneId) } ?: sunset
-
-		val civilDawn    = findAlt(Direction.Rise, -6.0)
-		val civilDusk    = findAlt(Direction.Set , -6.0)
-		val nauticalDawn = findAlt(Direction.Rise, -12.0)
-		val nauticalDusk = findAlt(Direction.Set , -12.0)
-		val astroDawn    = findAlt(Direction.Rise, -18.0)
-		val astroDusk    = findAlt(Direction.Set , -18.0)
-
-		return Twilight(srZ, ssZ, civilDawn, civilDusk, nauticalDawn, nauticalDusk, astroDawn, astroDusk)
-	}
-
-	private fun dp(v: Float) = AndroidUtils.dpToPxF(context, v)
-	private fun sp(v: Float) = AndroidUtils.spToPxF(context, v)
 }
