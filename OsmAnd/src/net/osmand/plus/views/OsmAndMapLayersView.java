@@ -32,7 +32,9 @@ public class OsmAndMapLayersView extends View {
 	private float lastX = 0f;
 	private float lastY = 0f;
 	private long currentLatency = 0L;
+	private long currentDuration = 0L;
 	private long maxLatency = 0L;
+	private long maxDuration = 0L;
 	private int eventCount = 0;
 	private String actionLabel = "NONE";
 	private int historySize = 0;
@@ -126,6 +128,18 @@ public class OsmAndMapLayersView extends View {
 		}
 
 		eventCount++;
+
+		if (mapView == null) {
+			return super.onTouchEvent(event);
+		}
+		boolean onTouchResult = mapView.onTouchEvent(event);
+
+		currentDuration = SystemClock.uptimeMillis() - currentTime;
+		if (currentDuration > maxDuration) {
+			maxDuration = currentDuration;
+		}
+
+
 		historySize = event.getHistorySize();
 		pressure = event.getPressure();
 		lastX = event.getX();
@@ -160,10 +174,10 @@ public class OsmAndMapLayersView extends View {
 		invalidate();
 		// --- Latency Analysis Logic End ---
 
-		if (mapView == null) {
-			return super.onTouchEvent(event);
-		}
-		return mapView.onTouchEvent(event);
+
+
+
+		return onTouchResult;
 	}
 
 	@Override
@@ -193,6 +207,9 @@ public class OsmAndMapLayersView extends View {
 		String t4 = "Dispatch Latency: " + currentLatency + "ms";
 		String t5 = "Max Latency (Session): " + maxLatency + "ms";
 		String t6 = "Batched Events (History): " + historySize;
+		String t7 = "Touch duration: " + currentDuration + "ms";
+		String t8 = "Max duration (Session): " + maxDuration + "ms";
+
 
 		float maxWidth = 0f;
 		maxWidth = Math.max(maxWidth, textPaint.measureText(t1));
@@ -201,10 +218,12 @@ public class OsmAndMapLayersView extends View {
 		maxWidth = Math.max(maxWidth, textPaint.measureText(t4));
 		maxWidth = Math.max(maxWidth, textPaint.measureText(t5));
 		maxWidth = Math.max(maxWidth, textPaint.measureText(t6));
+		maxWidth = Math.max(maxWidth, textPaint.measureText(t7));
+		maxWidth = Math.max(maxWidth, textPaint.measureText(t8));
 
 		float padding = 20f;
 		float bgTop = TEXT_START_Y + textPaint.ascent() - padding;
-		float bgBottom = TEXT_START_Y + (5 * lineHeight) + textPaint.descent() + padding;
+		float bgBottom = TEXT_START_Y + (7 * lineHeight) + textPaint.descent() + padding;
 		float bgLeft = TEXT_START_X - padding;
 		float bgRight = TEXT_START_X + maxWidth + padding;
 
@@ -231,5 +250,9 @@ public class OsmAndMapLayersView extends View {
 		canvas.drawText(t5, TEXT_START_X, currentY, textPaint);
 		currentY += lineHeight;
 		canvas.drawText(t6, TEXT_START_X, currentY, textPaint);
+		currentY += lineHeight;
+		canvas.drawText(t7, TEXT_START_X, currentY, textPaint);
+		currentY += lineHeight;
+		canvas.drawText(t8, TEXT_START_X, currentY, textPaint);
 	}
 }
