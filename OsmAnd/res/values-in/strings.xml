@@ -5459,7 +5459,7 @@
     <string name="key_event_category_actions">Tindakan</string>
     <string name="key_event_category_map_interactions">Interaksi peta</string>
     <string name="shared_string_limit">Batas</string>
-    <string name="shared_string_speedometer">Speedometer</string>
+    <string name="shared_string_speedometer">Spidometer</string>
     <string name="add_button">Tambahkan tombol</string>
     <string name="default_buttons">Tombol bawaan</string>
     <string name="when_exceeded">Ketika melebihi</string>
@@ -5522,7 +5522,7 @@
     <string name="shared_string_button">Tombol</string>
     <string name="key_assignments">Penetapan kunci</string>
     <string name="speed_limit_warning">Peringatan batas kecepatan</string>
-    <string name="speedometer_description">Menampilkan kecepatan Anda saat ini sesuai yang dilaporkan oleh GPS</string>
+    <string name="speedometer_description">Menampilkan kecepatan Anda saat ini sesuai yang dilaporkan GPS</string>
     <string name="custom_map_button_name_present">Tombol yang sama sudah ada</string>
     <string name="battery_optimization_banner_content">Optimisasi baterai Android dapat menyebabkan celah dan ketidakakuratan dalam trek yang direkam.</string>
     <string name="dont_ask_anymore">Jangan tanyakan lagi</string>
@@ -5586,19 +5586,19 @@
     <string name="remove_widget_first">Silakan hapus widget terlebih dahulu</string>
     <string name="clear_key_assignment">Hapus penetapan kunci</string>
     <string name="special_routing_cpp">Jenis perutean khusus</string>
-    <string name="rendering_attr_padusDisplayMode_name">Mode penampilan lahan umum</string>
+    <string name="rendering_attr_padusDisplayMode_name">Mode penampilan lahan pemerintah</string>
     <string name="rendering_attr_padusDisplayMode_description">Berdasarkan jenis akses atau nama pengelola</string>
     <string name="rendering_value_access_name">Berdasarkan jenis akses</string>
     <string name="rendering_value_managerName_name">Berdasarkan nama pengelola</string>
-    <string name="rendering_attr_padusHideBoundaries_name">Sembunyikan batasan lahan umum</string>
-    <string name="rendering_attr_padusHideBoundaries_description">Sembunyikan batasan lahan umum tetapi tetapkan area</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Sembunyikan batas-batas lahan pemerintah</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Sembunyikan batas-batas lahan pemerintah tetapi biarkan area</string>
     <string name="gpx_approximation">Perkiraan GPX</string>
     <string name="routing_type">Jenis perutean</string>
-    <string name="java_safe">Java (aman)</string>
+    <string name="java_safe">Java (Aman)</string>
     <string name="routing_type_a_star_2_phase">A* 2 fase</string>
-    <string name="auto_zoom_smooth">Lembut</string>
+    <string name="auto_zoom_smooth">Halus</string>
     <string name="routing_type_a_star_classic">A* klasik</string>
-    <string name="auto_zoom_discrete">Langsung</string>
+    <string name="auto_zoom_discrete">Diskret</string>
     <string name="auto_zoom">Perbesaran otomatis</string>
     <string name="shared_string_all_colors">Semua warna</string>
     <string name="lang_ta_in">Tamil (India)</string>
@@ -6176,4 +6176,10 @@
     <string name="obd_alt_battery_voltage">Voltase baterai (adaptor)</string>
     <string name="access_pinch_zoom_magnification">Aktifkan perbesaran cubit</string>
     <string name="access_pinch_zoom_magnification_descr">Gunakan skala layar dan bukan tingkat perbesaran diskret untuk gerakan mencubit.</string>
+    <string name="slots">Slot</string>
+    <string name="routing_attr_weightrating_name">Berat maks saat muatan penuh</string>
+    <string name="routing_attr_maxaxleload_name">Muatan gandar maks</string>
+    <string name="deleted_maps_warning">Anda akan menghapus %d item\nLanjut?</string>
+    <string name="deleted_maps_prompt">Peta-peta ini tidak didukung lagi dan telah diganti dengan wilayah yang lebih kecil. Silakan menghapus peta-peta tersebut dan unduh versi-versi yang baru.</string>
+    <string name="unsupported_maps">Peta-peta yang tidak didukung</string>
 </resources>
