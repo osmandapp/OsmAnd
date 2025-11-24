@@ -16,7 +16,7 @@ public class TransportRoutingConfiguration {
 	
 	public int walkChangeRadius = 300; 
 	
-	public int maxNumberOfChanges = 3;  
+	public int maxNumberOfChanges = 2; // replaced with max_num_changes
 	
 	public int finishTimeSeconds = 1200; // deprecated // TODO remove after JNI fix
 	
