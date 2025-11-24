@@ -120,6 +120,12 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 				bottomSheet.visibility = View.GONE
 			}
 		}
+
+		starView.onAnimationFinished = {
+			if (selectedObject != null) {
+				showObjectInfo(selectedObject!!)
+			}
+		}
 	}
 
 	private fun initData() {

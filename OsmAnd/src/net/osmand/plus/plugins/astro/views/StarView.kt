@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.astro.views
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
@@ -104,6 +106,9 @@ class StarView @JvmOverloads constructor(
 	private val scaleGestureDetector = ScaleGestureDetector(context, ScaleListener())
 	private var onObjectClickListener: ((SkyObject?) -> Unit)? = null
 
+	// Callback for when time animation finishes
+	var onAnimationFinished: (() -> Unit)? = null
+
 	// --- Astronomy Data ---
 	private val skyObjects = mutableListOf<SkyObject>()
 
@@ -175,6 +180,11 @@ class StarView @JvmOverloads constructor(
 					if (selectedObject != null) calculateCelestialPath(selectedObject!!)
 					invalidate()
 				}
+				addListener(object : AnimatorListenerAdapter() {
+					override fun onAnimationEnd(animation: Animator) {
+						onAnimationFinished?.invoke()
+					}
+				})
 				start()
 			}
 		} else {
@@ -186,6 +196,7 @@ class StarView @JvmOverloads constructor(
 			}
 			if (selectedObject != null) calculateCelestialPath(selectedObject!!)
 			invalidate()
+			onAnimationFinished?.invoke()
 		}
 	}
 
