@@ -132,8 +132,11 @@ class CelestialPathView @JvmOverloads constructor(
 				val prev = scale
 				scale = (scale * det.scaleFactor).coerceIn(0.6f, 4f)
 				val f = scale / prev
-				translateX = det.focusX + (translateX - det.focusX) * f
-				translateY = det.focusY + (translateY - det.focusY) * f
+				val cx = width / 2f
+				val cy = height / 2f
+				translateX = translateX * f + (det.focusX - cx) * (1 - f)
+				translateY = translateY * f + (det.focusY - cy) * (1 - f)
+
 				updateMatrix(); invalidate(); return true
 			}
 		})
@@ -204,8 +207,8 @@ class CelestialPathView @JvmOverloads constructor(
 
 	private fun updateMatrix() {
 		viewMatrix.reset()
-		viewMatrix.postTranslate(translateX, translateY)
 		viewMatrix.postScale(scale, scale, width/2f, height/2f)
+		viewMatrix.postTranslate(translateX, translateY)
 		viewMatrix.invert(inverseMatrix)
 	}
 
