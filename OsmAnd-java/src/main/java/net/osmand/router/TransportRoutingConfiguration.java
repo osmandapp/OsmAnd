@@ -17,8 +17,8 @@ public class TransportRoutingConfiguration {
 	public int walkChangeRadius = 300; 
 	
 	public int maxNumberOfChanges = 2; // replaced with max_num_changes
-	
-	public int finishTimeSeconds = 1200; // deprecated // TODO remove after JNI fix
+
+//	public int finishTimeSeconds = 1200; // deprecated
 	
 	public double increaseForAlternativesRoutes = 2.0;
 	public double increaseForAltRoutesWalking = 3.0;
@@ -150,6 +150,7 @@ public class TransportRoutingConfiguration {
 			maxRouteTime =  router.getIntAttribute("maxRouteTime", maxRouteTime);
 			maxRouteIncreaseSpeed =  router.getIntAttribute("maxRouteIncreaseSpeed", maxRouteIncreaseSpeed);
 			maxRouteDistance =  router.getIntAttribute("maxRouteDistance", maxRouteDistance);
+
 			increaseForAlternativesRoutes = 
 					router.getFloatAttribute("increaseForAlternativesRoutes", (float) increaseForAlternativesRoutes);
 			increaseForAltRoutesWalking = 
@@ -158,7 +159,7 @@ public class TransportRoutingConfiguration {
 			combineAltRoutesDiffStops = router.getIntAttribute("combineAltRoutesDiffStops", combineAltRoutesDiffStops);
 			combineAltRoutesSumDiffStops = router.getIntAttribute("combineAltRoutesSumDiffStops", combineAltRoutesSumDiffStops);
 			
-			String mn = params.get("max_num_changes");
+			String mn = params.get("max_num_changes"); // int as float-string
 			maxNumberOfChanges = (int) RoutingConfiguration.parseSilentFloat(mn, maxNumberOfChanges);
 			
 			walkSpeed = router.getFloatAttribute("minDefaultSpeed", this.walkSpeed * 3.6f) / 3.6f;
@@ -166,8 +167,6 @@ public class TransportRoutingConfiguration {
 			
 			RouteAttributeContext spds = router.getObjContext(RouteDataObjectAttribute.ROAD_SPEED);
 			walkSpeed = spds.evaluateFloat(getRawBitset("route", "walk"), walkSpeed);
-			
-			
 		}
 	}
 	
