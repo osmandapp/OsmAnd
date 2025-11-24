@@ -33,6 +33,7 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sin
 import kotlin.math.sqrt
+import kotlin.math.tan
 import androidx.core.graphics.toColorInt
 import androidx.core.graphics.withTranslation
 
@@ -85,8 +86,12 @@ class StarView @JvmOverloads constructor(
 
 	// --- Astronomy Data ---
 	private val skyObjects = mutableListOf<SkyObject>()
-	private var observer = Observer(56.9496, 24.1052, 0.0) // Default
-	private var currentTime = Time(System.currentTimeMillis() / 1000.0 / 86400.0 + 2440587.5)
+
+	// Made public so Fragment can access location for Rise/Set calculations
+	var observer = Observer(56.9496, 24.1052, 0.0)
+
+	// Made public so Fragment can access current simulation time
+	var currentTime = Time(System.currentTimeMillis() / 1000.0 / 86400.0 + 2440587.5)
 
 	// --- Selection & Trails ---
 	private var selectedObject: SkyObject? = null
@@ -385,9 +390,12 @@ class StarView @JvmOverloads constructor(
 				if (!started) { path.moveTo(p.x, p.y); started = true }
 				else path.lineTo(p.x, p.y)
 			} else {
+				// Gap in horizon (behind view)
 				started = false
 			}
 		}
+		// Do NOT close path here for stereographic projection clipping.
+		// Closing it creates a chord line across the screen if the horizon is clipped.
 
 		paint.color = Color.GREEN
 		paint.strokeWidth = 2f
@@ -409,6 +417,7 @@ class StarView @JvmOverloads constructor(
 		paint.strokeWidth = 2f
 		paint.style = Paint.Style.STROKE
 
+		// Draw Parallels (Latitude lines)
 		for (alt in -80..80 step 20) {
 			val path = Path()
 			var first = true
@@ -416,12 +425,7 @@ class StarView @JvmOverloads constructor(
 				val p = skyToScreen(az.toDouble(), alt.toDouble())
 				if (p != null) {
 					if (first) { path.moveTo(p.x, p.y); first = false }
-					else {
-						if (hypot(p.x - (skyToScreen((az-5).toDouble(), alt.toDouble())?.x ?: 0f), 0f) < width/2)
-							path.lineTo(p.x, p.y)
-						else
-							path.moveTo(p.x, p.y)
-					}
+					else path.lineTo(p.x, p.y)
 				} else {
 					first = true
 				}
@@ -429,6 +433,7 @@ class StarView @JvmOverloads constructor(
 			canvas.drawPath(path, paint)
 		}
 
+		// Draw Meridians (Longitude lines)
 		for (az in 0 until 360 step 45) {
 			val path = Path()
 			var first = true
@@ -437,6 +442,10 @@ class StarView @JvmOverloads constructor(
 				if (p != null) {
 					if (first) { path.moveTo(p.x, p.y); first = false }
 					else path.lineTo(p.x, p.y)
+				} else {
+					// Important: If points are clipped (behind view), break the path.
+					// Otherwise it draws a straight line across the clipped region.
+					first = true
 				}
 			}
 			canvas.drawPath(path, paint)
@@ -466,15 +475,32 @@ class StarView @JvmOverloads constructor(
 		val altRad = Math.toRadians(altitude)
 		val alt0Rad = Math.toRadians(altitudeCenter)
 
-		val cosC = sin(alt0Rad) * sin(altRad) + cos(alt0Rad) * cos(altRad) * cos(azRad)
+		val sinAlt = sin(altRad)
+		val cosAlt = cos(altRad)
+		val sinAlt0 = sin(alt0Rad)
+		val cosAlt0 = cos(alt0Rad)
+		val cosAz = cos(azRad)
+		val sinAz = sin(azRad)
 
-		if (cosC <= 0.01) return null
+		// Cosine of angular distance from center
+		val cosC = sinAlt0 * sinAlt + cosAlt0 * cosAlt * cosAz
 
-		val k = 1.0 / cosC
-		val x = k * cos(altRad) * sin(azRad)
-		val y = k * (cos(alt0Rad) * sin(altRad) - sin(alt0Rad) * cos(altRad) * cos(azRad))
+		// Clipping for Stereographic projection
+		// Allow seeing up to ~105 degrees from center (cosC > -0.3)
+		// This prevents wrapping artifacts at infinity (antipode) while allowing wide FOV
+		if (cosC <= -0.3) return null
 
-		val scale = width / Math.toRadians(viewAngle)
+		// Stereographic Projection Factor: k = 2 / (1 + cosC)
+		val k = 2.0 / (1.0 + cosC)
+
+		val x = k * cosAlt * sinAz
+		val y = k * (cosAlt0 * sinAlt - sinAlt0 * cosAlt * cosAz)
+
+		// Calculate Scale to fit viewAngle
+		// R_edge = 2 * tan(FOV_rad / 4)
+		// Scale * R_edge = Width / 2
+		val viewAngleRad = Math.toRadians(viewAngle)
+		val scale = width / (4.0 * tan(viewAngleRad / 4.0))
 
 		return PointF(
 			(width / 2 + scale * x).toFloat(),

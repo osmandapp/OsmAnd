@@ -16,6 +16,9 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Time
+import io.github.cosinekitty.astronomy.Direction
+import io.github.cosinekitty.astronomy.searchRiseSet
+import io.github.cosinekitty.astronomy.defineStar
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenDialogFragment
@@ -27,6 +30,8 @@ import net.osmand.plus.utils.ColorUtilities
 import java.util.Calendar
 import java.util.TimeZone
 import androidx.core.graphics.toColorInt
+import net.osmand.plus.OsmandApplication
+import net.osmand.plus.views.OsmandMapTileView
 import java.util.Locale
 
 class StarMapFragment : BaseFullScreenDialogFragment() {
@@ -92,6 +97,9 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 			updateTime(now, animate = true)
 			resetTimeButton.visibility = View.GONE
 		}
+
+		val loc = app.osmandMap.mapView.currentRotatedTileBox.centerLatLon
+		starView.setObserverLocation(loc.latitude, loc.longitude, 0.0)
 
 		return view
 	}
@@ -200,8 +208,44 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 		if (obj.type != SkyObject.Type.STAR) {
 			details += "\nDistance: %.3f AU".format(obj.distAu)
 		}
+
+		// --- Rise / Set Calculation ---
+		val observer = starView.observer
+		val currentTime = starView.currentTime
+
+		// Determine which astronomy Body to use.
+		// For manually added Stars, we use a custom star slot (Star1) as a temporary calculation helper.
+		val bodyToCheck: Body? = if (obj.type == SkyObject.Type.STAR) {
+			// Define the star properties in astronomy engine so we can run searchRiseSet on it
+			defineStar(Body.Star1, obj.ra, obj.dec, 1000.0) // Distance doesn't impact rise/set significantly
+			Body.Star1
+		} else {
+			obj.body
+		}
+
+		if (bodyToCheck != null) {
+			// Search for next rise and next set events starting from current simulation time
+			val riseTime = searchRiseSet(bodyToCheck, observer, Direction.Rise, currentTime, 1.0)
+			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, currentTime, 1.0)
+
+			if (riseTime != null) {
+				details += "\nRise: ↑${formatLocalTime(riseTime)}"
+			}
+			if (setTime != null) {
+				details += "\nSet: ↓${formatLocalTime(setTime)}"
+			}
+		}
+
 		sheetDetails.text = details
 		bottomSheet.visibility = View.VISIBLE
+	}
+
+	private fun formatLocalTime(astronomyTime: Time): String {
+		val calendar = Calendar.getInstance(TimeZone.getDefault())
+		calendar.timeInMillis = astronomyTime.toMillisecondsSince1970()
+		return String.format(Locale.getDefault(), "%02d:%02d",
+			calendar.get(Calendar.HOUR_OF_DAY),
+			calendar.get(Calendar.MINUTE))
 	}
 
 	private fun updateTime(calendar: Calendar, animate: Boolean) {
