@@ -30,8 +30,6 @@ import net.osmand.plus.utils.ColorUtilities
 import java.util.Calendar
 import java.util.TimeZone
 import androidx.core.graphics.toColorInt
-import net.osmand.plus.OsmandApplication
-import net.osmand.plus.views.OsmandMapTileView
 import java.util.Locale
 
 class StarMapFragment : BaseFullScreenDialogFragment() {
@@ -273,19 +271,40 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 	}
 
 	private fun showFilterDialog() {
-		val names = skyObjects.map { it.name }.toTypedArray()
-		val checkedItems = skyObjects.map { it.isVisible }.toBooleanArray()
+		// Combine lists: Toggles first, then Objects
+		val toggleItems = arrayOf("Azimuthal Grid", "Equatorial Grid", "Ecliptic Line")
+		val toggleChecked = booleanArrayOf(starView.showAzimuthalGrid, starView.showEquatorialGrid, starView.showEclipticLine)
+
+		val objectNames = skyObjects.map { it.name }.toTypedArray()
+		val objectChecked = skyObjects.map { it.isVisible }.toBooleanArray()
+
+		val allItems = toggleItems + objectNames
+		val allChecked = toggleChecked + objectChecked
 
 		AlertDialog.Builder(requireContext())
-			.setTitle("Visible Objects")
-			.setMultiChoiceItems(names, checkedItems) { _, which, isChecked ->
-				skyObjects[which].isVisible = isChecked
+			.setTitle("Visible Layers & Objects")
+			.setMultiChoiceItems(allItems, allChecked) { _, which, isChecked ->
+				if (which < toggleItems.size) {
+					// It's a toggle setting
+					when (which) {
+						0 -> starView.showAzimuthalGrid = isChecked
+						1 -> starView.showEquatorialGrid = isChecked
+						2 -> starView.showEclipticLine = isChecked
+					}
+				} else {
+					// It's an object
+					val objIndex = which - toggleItems.size
+					skyObjects[objIndex].isVisible = isChecked
+				}
 			}
 			.setPositiveButton("Apply") { _, _ ->
 				starView.updateVisibility()
 			}
 			.setNegativeButton("Cancel", null)
 			.setNeutralButton("All On") { _, _ ->
+				starView.showAzimuthalGrid = true
+				starView.showEquatorialGrid = true
+				starView.showEclipticLine = true
 				skyObjects.forEach { it.isVisible = true }
 				starView.updateVisibility()
 			}

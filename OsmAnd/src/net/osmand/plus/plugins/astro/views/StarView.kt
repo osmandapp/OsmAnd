@@ -22,12 +22,12 @@ import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.Topocentric
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
+import io.github.cosinekitty.astronomy.Spherical
 import java.util.Calendar
 import java.util.TimeZone
 import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.math.cos
-import kotlin.math.floor
 import kotlin.math.hypot
 import kotlin.math.max
 import kotlin.math.min
@@ -49,6 +49,21 @@ class StarView @JvmOverloads constructor(
 	private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = Color.WHITE
 		textSize = 30f
+	}
+	private val gridTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = "#888888".toColorInt()
+		textSize = 24f
+	}
+	private val equGridPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = "#006666".toColorInt()
+		style = Paint.Style.STROKE
+		strokeWidth = 2f
+	}
+	private val eclipticPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = "#FFFF00".toColorInt()
+		style = Paint.Style.STROKE
+		strokeWidth = 4f
+		pathEffect = DashPathEffect(floatArrayOf(20f, 20f), 0f)
 	}
 	private val pathPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = "#00FFFF".toColorInt()
@@ -76,6 +91,11 @@ class StarView @JvmOverloads constructor(
 	private var azimuthCenter = 180.0
 	private var altitudeCenter = 45.0
 	private var viewAngle = 60.0 // Field of view in degrees
+
+	// --- Visibility Flags ---
+	var showAzimuthalGrid = true
+	var showEquatorialGrid = false
+	var showEclipticLine = false
 
 	// --- Interaction ---
 	private var lastTouchX = 0f
@@ -275,7 +295,10 @@ class StarView @JvmOverloads constructor(
 		super.onDraw(canvas)
 		canvas.drawColor(Color.BLACK)
 
-		drawGrid(canvas)
+		if (showEquatorialGrid) drawEquatorialGrid(canvas)
+		if (showAzimuthalGrid) drawAzimuthalGrid(canvas)
+		if (showEclipticLine) drawEclipticLine(canvas)
+
 		drawHorizon(canvas)
 
 		if (selectedObject != null && celestialPathPoints.size > 1) {
@@ -412,8 +435,8 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
-	private fun drawGrid(canvas: Canvas) {
-		paint.color = "#333333".toColorInt()
+	private fun drawAzimuthalGrid(canvas: Canvas) {
+		paint.color = "#444444".toColorInt()
 		paint.strokeWidth = 2f
 		paint.style = Paint.Style.STROKE
 
@@ -431,6 +454,16 @@ class StarView @JvmOverloads constructor(
 				}
 			}
 			canvas.drawPath(path, paint)
+
+			// Label Parallels (along central meridian)
+			if (alt != 0) {
+				val pLabel = skyToScreen(azimuthCenter, alt.toDouble())
+				if (pLabel != null) {
+					gridTextPaint.textAlign = Paint.Align.LEFT
+					gridTextPaint.color = "#888888".toColorInt()
+					canvas.drawText("${alt}°", pLabel.x + 5f, pLabel.y - 5f, gridTextPaint)
+				}
+			}
 		}
 
 		// Draw Meridians (Longitude lines)
@@ -449,7 +482,111 @@ class StarView @JvmOverloads constructor(
 				}
 			}
 			canvas.drawPath(path, paint)
+
+			// Label Meridians (at horizon)
+			// Skip cardinals (0, 90, 180, 270) as they are drawn by drawHorizon
+			if (az % 90 != 0) {
+				val pLabel = skyToScreen(az.toDouble(), 0.0)
+				if (pLabel != null) {
+					gridTextPaint.textAlign = Paint.Align.CENTER
+					gridTextPaint.color = "#888888".toColorInt()
+					canvas.drawText("${az}°", pLabel.x, pLabel.y - 10f, gridTextPaint)
+				}
+			}
 		}
+	}
+
+	private fun drawEquatorialGrid(canvas: Canvas) {
+		// Right Ascension lines (Meridians)
+		for (ra in 0 until 24 step 2) {
+			val path = Path()
+			var first = true
+			// Step through declination from -90 to +90
+			for (dec in -90..90 step 5) {
+				val hor = horizon(currentTime, observer, ra.toDouble(), dec.toDouble(), Refraction.None)
+				val p = skyToScreen(hor.azimuth, hor.altitude)
+				if (p != null) {
+					if (first) { path.moveTo(p.x, p.y); first = false }
+					else path.lineTo(p.x, p.y)
+				} else {
+					first = true
+				}
+			}
+			canvas.drawPath(path, equGridPaint)
+		}
+
+		// Declination lines (Parallels)
+		for (dec in -80..80 step 20) {
+			val path = Path()
+			var first = true
+			// Step through RA from 0 to 24
+			for (raStep in 0..360 step 5) {
+				val ra = raStep / 15.0
+				val hor = horizon(currentTime, observer, ra, dec.toDouble(), Refraction.None)
+				val p = skyToScreen(hor.azimuth, hor.altitude)
+				if (p != null) {
+					if (first) { path.moveTo(p.x, p.y); first = false }
+					else path.lineTo(p.x, p.y)
+				} else {
+					first = true
+				}
+			}
+			canvas.drawPath(path, equGridPaint)
+		}
+	}
+
+	private fun drawEclipticLine(canvas: Canvas) {
+		val path = Path()
+		var first = true
+
+		// Ecliptic longitude from 0 to 360
+		for (lon in 0..360 step 10) {
+			// Convert Ecliptic Longitude (with lat=0) to Equatorial (RA/Dec)
+			// Since we don't have direct conversion in simple exposed API, we use a trick or assume we have access.
+			// The Astronomy engine has `eclipticToEquatorial`. However, it takes a Vector.
+			// Let's synthesize a vector for Ecliptic coordinates (dist=1, lat=0, lon=lon)
+			// Or approximate:
+			// This is simplified. Ideally use the Astronomy lib.
+			// Let's assume we use a helper or simple math if lib access is tricky in draw loop.
+			// BUT, since `astronomy.kt` is available, let's use it properly.
+			// We need to create an Ecliptic vector.
+
+			val eclipticSph = Spherical(0.0, lon.toDouble(), 1.0)
+			val eclipticVec = eclipticSph.toVector(currentTime)
+
+			// Convert Ecliptic Vector -> Equatorial Vector -> Equatorial Coords -> Horizon Coords
+			// Wait, `eclipticToEquatorial` converts EQJ to ECT. We need ECT to EQJ?
+			// Actually, `horizon` takes RA/Dec of Date.
+			// The Ecliptic is defined by the Earth's orbit.
+			// Let's use a simpler geometric approach for visualization if strict accuracy isn't 100% critical,
+			// OR use the provided `rotationEclHor` if available? No.
+
+			// Best approach with existing lib:
+			// Create vector in Ecliptic system. Rotate to Equatorial.
+			// We have `rotationEclEqd(time)`.
+			// 1. Create vector for (lat=0, lon=i)
+			val radLon = Math.toRadians(lon.toDouble())
+			val vecEcl = io.github.cosinekitty.astronomy.Vector(cos(radLon), sin(radLon), 0.0, currentTime)
+
+			// 2. Rotate to Equator of Date
+			val rotMat = io.github.cosinekitty.astronomy.rotationEclEqd(currentTime)
+			val vecEqd = rotMat.rotate(vecEcl)
+
+			// 3. Get RA/Dec
+			val equ = vecEqd.toEquatorial()
+
+			// 4. Get Horizon
+			val hor = horizon(currentTime, observer, equ.ra, equ.dec, Refraction.None)
+
+			val p = skyToScreen(hor.azimuth, hor.altitude)
+			if (p != null) {
+				if (first) { path.moveTo(p.x, p.y); first = false }
+				else path.lineTo(p.x, p.y)
+			} else {
+				first = true
+			}
+		}
+		canvas.drawPath(path, eclipticPaint)
 	}
 
 	private fun drawCelestialObject(canvas: Canvas, obj: SkyObject) {
