@@ -144,7 +144,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private boolean showMenu;
 	private int showMenuState = DEFAULT_MENU_STATE;
-	private boolean movedToHalfOnCalculationStart = false;
+	private boolean menuAutoMovedAfterCalculationStarted = false;
 
 	@Nullable
 	private MapActivity mapActivity;
@@ -388,9 +388,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void openMenuOnCalculationStarted(@NonNull MapRouteInfoMenuFragment fragment) {
-		if (!movedToHalfOnCalculationStart && fragment.isVisible()) {
+		if (!menuAutoMovedAfterCalculationStarted && fragment.isVisible()) {
 			fragment.openMenuHalfScreen();
-			movedToHalfOnCalculationStart = true;
+			menuAutoMovedAfterCalculationStarted = true;
 		}
 	}
 
@@ -399,7 +399,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (app.getRoutingHelper().getRoute().hasMissingMaps()) {
 			fragment.openMenuHalfScreen();
 		}
-		movedToHalfOnCalculationStart = false;
+		menuAutoMovedAfterCalculationStarted = false;
 	}
 
 	public void openMenuFullScreen() {
@@ -1456,6 +1456,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void resetRouteCalculation() {
+		menuAutoMovedAfterCalculationStarted = false;
 		setRouteCalculationInProgress(false);
 		restoreCollapsedButtons();
 	}
