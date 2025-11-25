@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="routing_attr_pt_limit_name">Display N best routes</string>
+    <string name="routing_attr_pt_limit_description">Specify the number of best routes to display</string>
+    <string name="routing_attr_pt_exclude_name">Exclude longer routes</string>
+    <string name="routing_attr_pt_exclude_description">Exclude routes longer than the best (in %)</string>
     <string name="is_parking_time_limited">Is parking time limited?</string>
     <string name="efficient_grid">Efficient grid</string>
     <string name="slots">Slots</string>
