@@ -5924,4 +5924,7 @@
     <string name="enable_3d_objects">3D-Gebäude aktivieren</string>
     <string name="unsupported_maps">Nicht mehr verfügbare Karten</string>
     <string name="deleted_maps_prompt">Diese Karten werden nicht mehr unterstützt und wurden durch regionale Aufteilung ersetzt. Bitte entfernen und die neuen Karten herunterladen.</string>
+    <string name="is_parking_time_limited">Ist die Parkdauer begrenzt?</string>
+    <string name="routing_attr_weightrating_name">Maximales Gewicht bei voller Beladung</string>
+    <string name="routing_attr_maxaxleload_name">Maximale Achslast</string>
 </resources>

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
 
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -21,9 +22,18 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
-import java.util.*;
+import org.apache.commons.logging.Log;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.TreeMap;
 
 public class LocaleHelper {
+
+	private final static Log log = PlatformUtil.getLog(LocaleHelper.class);
 
 	private final OsmandApplication app;
 
@@ -40,13 +50,20 @@ public class LocaleHelper {
 		localeListener = change -> onPreferredLocaleChanged();
 	}
 
+	public void onCreateApplication() {
+		app.getSettings().PREFERRED_LOCALE.addListener(localeListener);
+		checkPreferredLocale();
+	}
+
 	private void onPreferredLocaleChanged() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 			String preferredLocale = app.getSettings().PREFERRED_LOCALE.get();
 			if (!Algorithms.isEmpty(preferredLocale)) {
-				Locale locale = new Locale(preferredLocale);
-				Locale.setDefault(locale);
-				app.runInUIThread(() -> AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale)));
+				Locale locale = parseLanguageTag(preferredLocale);
+				if (locale != null) {
+					Locale.setDefault(locale);
+					app.runInUIThread(() -> AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale)));
+				}
 			}
 		}
 	}
@@ -62,15 +79,12 @@ public class LocaleHelper {
 				settings.PREFERRED_LOCALE.set(locale);
 			}
 		}
-		settings.PREFERRED_LOCALE.addListener(localeListener);
 
 		boolean useSystemDefault = Algorithms.isEmpty(locale);
 		if (!useSystemDefault) {
-			Locale modernLocale = Locale.forLanguageTag(locale);
-			if (!Algorithms.isEmpty(modernLocale.toString())) {
-				preferredLocale = modernLocale;
-			} else {
-				preferredLocale = parseLegacyLanguageTag(locale, preferredLocale);
+			Locale parsed = parseLanguageTag(locale);
+			if (parsed != null) {
+				preferredLocale = parsed;
 			}
 		}
 
@@ -101,7 +115,13 @@ public class LocaleHelper {
 	}
 
 	@Nullable
-	private Locale parseLegacyLanguageTag(@NonNull String locale, @Nullable Locale defaultLocale) {
+	private Locale parseLanguageTag(@NonNull String languageTag) {
+		Locale locale = Locale.forLanguageTag(languageTag);
+		return Algorithms.isEmpty(locale.toString()) ? parseLegacyLanguageTag(languageTag) : locale;
+	}
+
+	@Nullable
+	private Locale parseLegacyLanguageTag(@NonNull String locale) {
 		// Split locale into language, region, and script
 		String[] scriptSplit = locale.split("\\+");
 		String baseLocale = scriptSplit[0];
@@ -129,7 +149,7 @@ public class LocaleHelper {
 			}
 			return builder.build();
 		}
-		return defaultLocale;
+		return null;
 	}
 
 	private String backwardCompatibleNonIsoCodes(String lang) {

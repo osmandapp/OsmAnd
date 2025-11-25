@@ -4754,4 +4754,5 @@
     <string name="amount_of_total_used">Използвани %1$s от %2$s</string>
     <string name="delete_data">Изтриване на данни</string>
     <string name="rendering_attr_highway_class_service_name">Служебна</string>
+    <string name="shared_string_osm_link">Препратка от OSM</string>
 </resources>

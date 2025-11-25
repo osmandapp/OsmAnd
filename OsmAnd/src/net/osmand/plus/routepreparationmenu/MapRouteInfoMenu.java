@@ -144,6 +144,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private boolean showMenu;
 	private int showMenuState = DEFAULT_MENU_STATE;
+	private boolean menuAutoMovedAfterCalculationStarted = false;
 
 	@Nullable
 	private MapActivity mapActivity;
@@ -341,6 +342,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		if (fragmentRef != null && fragment.isVisible()) {
+			openMenuOnCalculationStarted(fragment);
 			fragment.updateRouteCalculationProgress(0);
 			fragment.updateInfo();
 		}
@@ -350,6 +352,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		if (fragmentRef != null && fragment.isVisible()) {
+			openMenuOnCalculationStarted(fragment);
 			if (setRouteCalculationInProgress(true)) {
 				fragment.updateInfo();
 			}
@@ -369,14 +372,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			boolean calculationStatusChanged = setRouteCalculationInProgress(routeCalculating);
 			if (fragmentRef != null && fragment.isVisible()) {
 				if (routeCalculating && route.isCalculated() && route.isInitialCalculation()) {
-					openMenuAfterCalculation(fragment, app);
+					openMenuOnCalculationFinished(fragment, app);
 				}
 				if (calculationStatusChanged) {
 					fragment.updateInfo();
 					if (!routeCalculationInProgress) {
 						fragment.hideRouteCalculationProgressBar();
 						if (!app.getOsmandMap().getMapView().isCarView()) {
-							openMenuAfterCalculation(fragment, app);
+							openMenuOnCalculationFinished(fragment, app);
 						}
 					}
 				}
@@ -384,13 +387,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	private void openMenuAfterCalculation(MapRouteInfoMenuFragment fragment, OsmandApplication app) {
-		if (!app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.getModeValue(app.getRoutingHelper().getAppMode())
-				|| app.getRoutingHelper().getRoute().hasMissingMaps()) {
+	private void openMenuOnCalculationStarted(@NonNull MapRouteInfoMenuFragment fragment) {
+		if (!menuAutoMovedAfterCalculationStarted && fragment.isVisible()) {
 			fragment.openMenuHalfScreen();
-		} else {
-			fragment.openMenuHeaderOnly();
+			menuAutoMovedAfterCalculationStarted = true;
 		}
+	}
+
+	private void openMenuOnCalculationFinished(@NonNull MapRouteInfoMenuFragment fragment,
+	                                           @NonNull OsmandApplication app) {
+		if (app.getRoutingHelper().getRoute().hasMissingMaps()) {
+			fragment.openMenuHalfScreen();
+		}
+		menuAutoMovedAfterCalculationStarted = false;
 	}
 
 	public void openMenuFullScreen() {
@@ -1447,6 +1456,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void resetRouteCalculation() {
+		menuAutoMovedAfterCalculationStarted = false;
 		setRouteCalculationInProgress(false);
 		restoreCollapsedButtons();
 	}
