@@ -5877,7 +5877,7 @@
     <string name="delete_data">Slet data</string>
     <string name="manage_storage_delete_data_dialog_summary">Er du sikker på, at du vil slette %1$s fra OsmAnd Cloud?\n\nDu kan gendanne dem fra papirkurven inden for 30 dage.</string>
     <string name="manage_storage">Administrer lagerplads</string>
-    <string name="copy_as_new_folder">Kopier som ny mappe</string>
+    <string name="copy_as_new_folder">Kopiér som ny mappe</string>
     <string name="add_to_a_folder">Tilføj til en mappe</string>
     <string name="add_to_favorites">Tilføj til favoritter</string>
     <string name="max_weight_at_full_load_description">Angiv dit køretøjs maksimale vægt ved fuld last for at undgå veje og broer med vægtbegrænsninger.</string>
