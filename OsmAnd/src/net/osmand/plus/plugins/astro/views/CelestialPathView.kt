@@ -255,7 +255,7 @@ class CelestialPathView @JvmOverloads constructor(
 	private val CANONICAL_RADIUS = 1000f
 
 	override suspend fun computeModel(config: Config, width: Int, height: Int): Any {
-		val startLocal = config.date.atStartOfDay(config.zoneId)
+		val startLocal = config.date.atTime(12, 0).atZone(config.zoneId)
 		val endLocal = startLocal.plusDays(1)
 		val obs = Observer(config.latitude, config.longitude, config.elevation)
 
