@@ -830,8 +830,6 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 		int newMenuState = getCurrentMenuState();
 		boolean needMapAdjust = currentMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
 
-		updateMenuState(currentMenuState, newMenuState);
-
 		applyPosY(currentY, needCloseMenu, needMapAdjust, currentMenuState, newMenuState, 0, animated);
 
 		ContextMenuFragmentListener listener = this.listener;
@@ -839,10 +837,6 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 			listener.onContextMenuStateChanged(this, newMenuState, currentMenuState);
 		}
 	}
-
-	protected void updateMenuState(int currentMenuState, int newMenuState) {
-	}
-
 
 	private int getPosY(int currentY, boolean needCloseMenu, int previousState) {
 		if (needCloseMenu && isHideable()) {
