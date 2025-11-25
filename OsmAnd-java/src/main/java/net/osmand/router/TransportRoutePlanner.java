@@ -10,7 +10,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -711,8 +710,29 @@ public class TransportRoutePlanner {
 			trr.setFinishWalkDist(ntrr.finishWalkDist);
 			trr.setRouteTime(ntrr.routeTime);
 
-			for (NativeTransportRouteResultSegment ntrs : ntrr.segments) {
+			trr.getSegments().addAll(
+					convertToTransportRouteResultSegment(ntrr.segments, convertedRoutesCache, convertedStopsCache));
+
+			// alternativeRoutes (1-level recursion)
+			if (ntrr.alternativeRoutes != null && ntrr.alternativeRoutes.length > 0) {
+				trr.alternativeRoutes = convertToTransportRoutingResult(ntrr.alternativeRoutes, cfg);
+			}
+
+			convertedRes.add(trr);
+		}
+		convertedStopsCache.clear();
+		convertedRoutesCache.clear();
+		return convertedRes;
+	}
+
+	private static List<TransportRouteResultSegment> convertToTransportRouteResultSegment(
+			NativeTransportRouteResultSegment[] nativeSegments, TLongObjectHashMap<TransportRoute> convertedRoutesCache,
+			TLongObjectHashMap<TransportStop> convertedStopsCache) {
+		List<TransportRouteResultSegment> results = new ArrayList<>();
+		if (nativeSegments != null) {
+			for (NativeTransportRouteResultSegment ntrs : nativeSegments) {
 				TransportRouteResultSegment trs = new TransportRouteResultSegment();
+
 				trs.route = convertTransportRoute(ntrs.route, convertedRoutesCache, convertedStopsCache);
 				trs.walkTime = ntrs.walkTime;
 				trs.travelDistApproximate = ntrs.travelDistApproximate;
@@ -722,13 +742,16 @@ public class TransportRoutePlanner {
 				trs.walkDist = ntrs.walkDist;
 				trs.depTime = ntrs.depTime;
 
-				trr.addSegment(trs);
+				// alternatives (1-level recursion)
+				if (ntrs.alternatives != null && ntrs.alternatives.length > 0) {
+					trs.alternatives = convertToTransportRouteResultSegment(ntrs.alternatives,
+							convertedRoutesCache, convertedStopsCache);
+				}
+
+				results.add(trs);
 			}
-			convertedRes.add(trr);
 		}
-		convertedStopsCache.clear();
-		convertedRoutesCache.clear();
-		return convertedRes;
+		return results;
 	}
 
 	private static TransportRoute convertTransportRoute(NativeTransportRoute nr,
