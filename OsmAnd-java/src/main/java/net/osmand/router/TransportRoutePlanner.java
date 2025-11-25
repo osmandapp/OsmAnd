@@ -104,12 +104,10 @@ public class TransportRoutePlanner {
 			TransportRouteSegment finish = null;
 			double minDist = 0;
 			double travelDist = 0;
-			int onboardTime = ctx.cfg.getBoardingTime(segment.road.getType());
-			int intervalTime = Algorithms.parseIntSilently(segment.road.getInterval(), 0);
-			if (intervalTime > 0) {
-				onboardTime = intervalTime * 60 / 2;
-			}
-			double travelTime = onboardTime;
+
+			int seconds = segment.road.calcIntervalInSeconds();
+			double travelTime = seconds > 0 ? (double) seconds / 2 : ctx.cfg.getBoardingTime(segment.road.getType());
+
 			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
 			if (routeTravelSpeed == 0) {
 				continue;
