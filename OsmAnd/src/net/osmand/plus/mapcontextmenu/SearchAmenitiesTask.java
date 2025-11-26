@@ -10,6 +10,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.views.AmenityObjectsCombiner;
 import net.osmand.util.MapUtils;
 
 import java.util.Collections;
@@ -25,12 +26,15 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 	private final LatLon latLon;
 	private final PoiUIFilter filter;
 	private final Amenity amenity;
+	private final AmenityObjectsCombiner amenityObjectsCombiner;
 	private SearchAmenitiesListener listener;
 
-	protected SearchAmenitiesTask(@NonNull PoiUIFilter filter, @NonNull LatLon latLon, @Nullable Amenity amenity) {
+	protected SearchAmenitiesTask(@NonNull PoiUIFilter filter, @NonNull LatLon latLon,
+	                              @NonNull String lang, @Nullable Amenity amenity) {
 		this.filter = filter;
 		this.latLon = latLon;
 		this.amenity = amenity;
+		this.amenityObjectsCombiner = new AmenityObjectsCombiner(lang);
 	}
 
 	public void setListener(@Nullable SearchAmenitiesListener listener) {
@@ -46,9 +50,13 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 				break;
 			}
 			QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
-			amenities = getAmenities(rect);
-			amenities.remove(amenity);
 			radius *= NEARBY_POI_SEARCH_FACTOR;
+
+			amenities = getAmenities(rect);
+			if (amenities.size() >= NEARBY_MAX_POI_COUNT || radius > NEARBY_POI_MAX_RADIUS) {
+				amenities = amenityObjectsCombiner.combine(amenities);
+				amenities.remove(amenity);
+			}
 		}
 		MapUtils.sortListOfMapObject(amenities, latLon.getLatitude(), latLon.getLongitude());
 		return amenities.subList(0, Math.min(NEARBY_MAX_POI_COUNT, amenities.size()));
