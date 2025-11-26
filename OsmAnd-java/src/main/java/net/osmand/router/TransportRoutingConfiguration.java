@@ -18,8 +18,9 @@ public class TransportRoutingConfiguration {
 	
 	public int maxNumberOfChanges = 2; // replaced with max_num_changes
 
-//	public int finishTimeSeconds = 1200; // deprecated
-	
+	public int ptLimitResultsByNumber = 0; // pt_limit - limit number of best routes (0 = unlimited)
+	public int ptLimitResultsByPercent = 0; // pt_exclude - limit by time-to-the-best+% (0 = unlimited)
+
 	public double increaseForAlternativesRoutes = 2.0;
 	public double increaseForAltRoutesWalking = 3.0;
 	
@@ -159,9 +160,13 @@ public class TransportRoutingConfiguration {
 			combineAltRoutesDiffStops = router.getIntAttribute("combineAltRoutesDiffStops", combineAltRoutesDiffStops);
 			combineAltRoutesSumDiffStops = router.getIntAttribute("combineAltRoutesSumDiffStops", combineAltRoutesSumDiffStops);
 			
-			String mn = params.get("max_num_changes"); // int as float-string
-			maxNumberOfChanges = (int) RoutingConfiguration.parseSilentFloat(mn, maxNumberOfChanges);
-			
+			maxNumberOfChanges =
+					(int) RoutingConfiguration.parseSilentFloat(params.get("max_num_changes"), maxNumberOfChanges);
+			ptLimitResultsByNumber =
+					(int) RoutingConfiguration.parseSilentFloat(params.get("pt_limit"), ptLimitResultsByNumber);
+			ptLimitResultsByPercent =
+					(int) RoutingConfiguration.parseSilentFloat(params.get("pt_exclude"), ptLimitResultsByPercent);
+
 			walkSpeed = router.getFloatAttribute("minDefaultSpeed", this.walkSpeed * 3.6f) / 3.6f;
 			defaultTravelSpeed = router.getFloatAttribute("maxDefaultSpeed", this.defaultTravelSpeed * 3.6f) / 3.6f;
 			
