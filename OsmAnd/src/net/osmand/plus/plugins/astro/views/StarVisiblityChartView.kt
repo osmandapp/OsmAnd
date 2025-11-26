@@ -9,23 +9,17 @@ import android.graphics.Typeface
 import android.text.TextPaint
 import android.util.AttributeSet
 import androidx.core.graphics.toColorInt
-import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Direction
-import io.github.cosinekitty.astronomy.EquatorEpoch
 import io.github.cosinekitty.astronomy.Observer
-import io.github.cosinekitty.astronomy.Refraction
-import io.github.cosinekitty.astronomy.Time
-import io.github.cosinekitty.astronomy.equator
-import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.searchRiseSet
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.AstroUtils
 import net.osmand.plus.plugins.astro.AstroUtils.Twilight
-import java.time.Duration
-import java.time.Instant
+import net.osmand.plus.plugins.astro.AstroUtils.toAstroTime
+import net.osmand.plus.plugins.astro.AstroUtils.toZoned
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
@@ -46,7 +40,6 @@ class StarVisiblityChartView @JvmOverloads constructor(
 
 	private var cachedModel: Model? = null
 
-	// Configuration
 	var showTwilightBands: Boolean = true
 		set(value) { field = value; triggerAsyncRebuild() }
 
@@ -60,32 +53,12 @@ class StarVisiblityChartView @JvmOverloads constructor(
 	private val bottomPad = dp(16f)
 
 	// ---------- Paints ----------
-	private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#E4424242".toColorInt() }
-	private val gridPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = "#80868B".toColorInt(); strokeWidth = dp(1f)
-	}
-	private val nightPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#60000000".toColorInt() }
-	private val dayPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#57C7F3".toColorInt() }
-	private val twiAstro = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#CC2B4C7E".toColorInt() }
-	private val twiNaut = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#CC3C7AA6".toColorInt() }
-	private val twiCivil = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#CC5BBBF0".toColorInt() }
-
-	private val barPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = "#D9D857".toColorInt(); style = Paint.Style.FILL
-	}
-
-	private val labelPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = Color.WHITE; textSize = sp(18f); typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD); textAlign = Paint.Align.CENTER
-	}
-	private val bodyPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = Color.WHITE; textSize = sp(18f); typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD);
-	}
-	private val smallPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = Color.LTGRAY; textSize = sp(14f)
-	}
-	private val timePaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = Color.LTGRAY; textSize = sp(14f)
-	}
+	private val gridPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#80868B".toColorInt(); strokeWidth = dp(1f) }
+	private val barPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#D9D857".toColorInt(); style = Paint.Style.FILL }
+	private val labelPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; textSize = sp(18f); typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD); textAlign = Paint.Align.CENTER }
+	private val bodyPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; textSize = sp(18f); typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD) }
+	private val smallPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.LTGRAY; textSize = sp(14f) }
+	private val timePaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.LTGRAY; textSize = sp(14f) }
 
 	private val timeFmt = DateTimeFormatter.ofPattern("HH:mm")
 
@@ -95,12 +68,10 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		val endLocal = startLocal.plusDays(1)
 		val obs = Observer(config.latitude, config.longitude, config.elevation)
 
-		// Optimization: Use analytical searchRiseSet (Bisection) instead of iterating minutes.
-		// This changes complexity from O(1440) to O(constant) per body.
 		val rows = visibleBodies.map { body ->
-			currentCoroutineContext().ensureActive() // Check cancellation before processing next body
+			currentCoroutineContext().ensureActive()
 			val spans = computeVisibleSpans(body, startLocal, endLocal, obs)
-			val (rise, set) = computeRiseSet(body, startLocal, endLocal, obs)
+			val (rise, set) = AstroUtils.nextRiseSet(body, startLocal, obs, startLocal, endLocal)
 			Row(body, AstroUtils.bodyName(body), rise, set, spans)
 		}
 
@@ -118,10 +89,8 @@ class StarVisiblityChartView @JvmOverloads constructor(
 	override fun onDraw(canvas: Canvas) {
 		super.onDraw(canvas)
 		val m = cachedModel ?: return
-
 		val height = measureHeight()
 
-		// Background
 		canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), bgPaint)
 
 		val chartLeft = leftLabelW + timesW
@@ -131,7 +100,8 @@ class StarVisiblityChartView @JvmOverloads constructor(
 
 		canvas.drawText(m.title, width / 2f, dp(25f), labelPaint)
 		drawTimeAxis(canvas, height, m.startLocal, m.endLocal, chartLeft, chartRight)
-		drawDayNight(canvas, m, chartLeft, chartTop, chartRight, chartBottom)
+
+		drawDayNightBands(canvas, m.twilight, m.startLocal, m.endLocal, chartLeft, chartTop, chartRight, chartBottom, showTwilightBands)
 
 		var y = chartTop + rowH
 
@@ -144,11 +114,9 @@ class StarVisiblityChartView @JvmOverloads constructor(
 			canvas.drawText("↑$riseText", leftLabelW, baseY, smallPaint)
 			canvas.drawText("↓$setText", leftLabelW + measureText(riseText) + dp(12f), baseY, smallPaint)
 
-			// Optimization: Draw Rects directly from calculated spans
 			row.visibleSpans.forEach { span ->
 				val x1 = timeToX(span.start, m.startLocal, m.endLocal, chartLeft, chartRight)
 				val x2 = timeToX(span.end  , m.startLocal, m.endLocal, chartLeft, chartRight)
-				// Avoid allocations for temp RectF in onDraw
 				canvas.drawRect(x1, y - rowH + dp(6f), x2, y - dp(5f), barPaint)
 			}
 			y += rowH
@@ -173,9 +141,6 @@ class StarVisiblityChartView @JvmOverloads constructor(
 
 	private data class Span(val start: ZonedDateTime, val end: ZonedDateTime)
 
-	// Enum for the bands
-	private enum class Band { DAY, CIVIL, NAUT, ASTRO, NIGHT }
-
 	private fun measureText(s: String) = labelPaint.measureText(s)
 	private fun measureHeight() = dp(300f).toInt()
 
@@ -184,7 +149,7 @@ class StarVisiblityChartView @JvmOverloads constructor(
 	private fun drawTimeAxis(canvas: Canvas, height: Int, start: ZonedDateTime, end: ZonedDateTime, left: Float, right: Float) {
 		val hours = listOf(12, 18, 0, 6, 12)
 		var t = start
-		hours.forEachIndexed { idx, h ->
+		hours.forEachIndexed { idx, _ ->
 			t = (if (idx == 0) t else t.plusHours(6))
 			val x = timeToX(t, start, end, left, right)
 			canvas.drawLine(x, headerH, x, height - bottomPad, gridPaint)
@@ -194,190 +159,42 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		}
 	}
 
-	private fun drawDayNight(
-		canvas: Canvas, m: Model,
-		left: Float, top: Float, right: Float, bottom: Float
-	) {
-		// Draw deep night background first (covers everything)
-		canvas.drawRect(left, top, right, bottom, nightPaint)
-
-		// 1. Build list of all transitions in the window
-		val transitions = ArrayList<Pair<ZonedDateTime, Band>>()
-		val tw = m.twilight
-
-		fun add(t: ZonedDateTime?, nextBand: Band) {
-			if (t != null && !t.isBefore(m.startLocal) && !t.isAfter(m.endLocal)) {
-				transitions.add(t to nextBand)
-			}
-		}
-
-		// Evening transitions (Sun going down)
-		add(tw.sunset,       Band.CIVIL) // After Sunset -> Civil
-		add(tw.civilDusk,    Band.NAUT)  // After Civil Dusk -> Nautical
-		add(tw.nauticalDusk, Band.ASTRO) // After Nautical Dusk -> Astro
-		add(tw.astroDusk,    Band.NIGHT) // After Astro Dusk -> Night
-
-		// Morning transitions (Sun coming up)
-		add(tw.astroDawn,    Band.ASTRO) // Rising across -18 -> Astro
-		add(tw.nauticalDawn, Band.NAUT)  // Rising across -12 -> Nautical
-		add(tw.civilDawn,    Band.CIVIL) // Rising across -6 -> Civil
-		add(tw.sunrise,      Band.DAY)   // Rising across Horizon -> Day
-
-		transitions.sortBy { it.first }
-
-		// 2. Determine Initial State (at chart start)
-		// Instead of calculating altitude (which causes blinks due to refraction mismatches),
-		// we infer the current state from the *next* upcoming event.
-		val startBand: Band
-		if (transitions.isNotEmpty()) {
-			// If the next event is X, what state are we in NOW?
-			val firstEvent = transitions[0]
-			startBand = when(firstEvent.second) {
-				Band.CIVIL -> if (isMorningEvent(firstEvent.first, tw)) Band.NAUT else Band.DAY // Approaching CivilDawn(NAUT->CIVIL) or Sunset(DAY->CIVIL)?
-				Band.NAUT  -> if (isMorningEvent(firstEvent.first, tw)) Band.ASTRO else Band.CIVIL
-				Band.ASTRO -> if (isMorningEvent(firstEvent.first, tw)) Band.NIGHT else Band.NAUT
-				Band.NIGHT -> Band.ASTRO // Approaching AstroDusk
-				Band.DAY   -> Band.CIVIL // Approaching Sunrise
-			}
-		} else {
-			// No events in the next 24h (Polar Day/Night). Fallback to altitude check.
-			val obs = Observer(config.latitude, config.longitude, config.elevation)
-			val startAlt = altitude(Body.Sun, m.startLocal, obs) // Refraction.Normal
-			startBand = when {
-				startAlt > -0.833 -> Band.DAY
-				startAlt > -6.0 -> Band.CIVIL
-				startAlt > -12.0 -> Band.NAUT
-				startAlt > -18.0 -> Band.ASTRO
-				else -> Band.NIGHT
-			}
-		}
-
-		// Add the start point
-		// We insert it at the beginning. transitions map is [Time -> NEXT Band]
-		// So we actually process the intervals.
-
-		var currentBand = startBand
-		var currentX = left
-
-		for (trans in transitions) {
-			val nextX = timeToX(trans.first, m.startLocal, m.endLocal, left, right)
-			drawBand(canvas, currentBand, currentX, nextX, top, bottom)
-			currentBand = trans.second
-			currentX = nextX
-		}
-		// Draw remaining band to the right edge
-		drawBand(canvas, currentBand, currentX, right, top, bottom)
-	}
-
-	private fun isMorningEvent(t: ZonedDateTime, tw: Twilight): Boolean {
-		// Helper to distinguish between Dawn (Morning) and Dusk (Evening) events
-		// so we know which side of the transition we are on.
-		return t == tw.sunrise || t == tw.civilDawn || t == tw.nauticalDawn || t == tw.astroDawn
-	}
-
-	private fun drawBand(c: Canvas, band: Band, x1: Float, x2: Float, top: Float, bottom: Float) {
-		if (x2 <= x1) return
-		val paint = when(band) {
-			Band.DAY   -> dayPaint
-			Band.CIVIL -> if (showTwilightBands) twiCivil else null
-			Band.NAUT  -> if (showTwilightBands) twiNaut else null
-			Band.ASTRO -> if (showTwilightBands) twiAstro else null
-			Band.NIGHT -> null
-		}
-		paint?.let { c.drawRect(x1, top, x2, bottom, it) }
-	}
-
-	private fun timeToX(
-		t: ZonedDateTime,
-		start: ZonedDateTime, end: ZonedDateTime,
-		left: Float, right: Float,
-		coerce: Boolean = true
-	): Float {
-		val total = Duration.between(start, end).toMillis().toDouble()
-		val pos = Duration.between(start, t).toMillis().toDouble()
-		return if (coerce) {
-			(left + (right - left) * (pos.coerceIn(0.0, total) / total)).toFloat()
-		} else {
-			(left + (right - left) * (pos / total)).toFloat()
-		}
-	}
-
 	private suspend fun computeVisibleSpans(
 		body: Body,
 		startLocal: ZonedDateTime,
 		endLocal: ZonedDateTime,
 		obs: Observer
 	): List<Span> {
-		// Replaced iterative search with event-based search
-		fun Time.toZdt() =
-			Instant.ofEpochMilli(this.toMillisecondsSince1970()).atZone(config.zoneId)
-
 		fun nextEvent(dir: Direction, from: ZonedDateTime): ZonedDateTime? {
-			val t0 = Time.fromMillisecondsSince1970(from.toInstant().toEpochMilli())
-			return searchRiseSet(body, obs, dir, t0, +2.0)?.toZdt()
+			val t0 = from.toAstroTime()
+			return searchRiseSet(body, obs, dir, t0, +2.0)?.toZoned(config.zoneId)
 		}
 
-		val startAlt = altitude(body, startLocal, obs)
-		var up = startAlt > 0.0 // Standard visible horizon
+		val startAlt = AstroUtils.altitude(body, startLocal, obs)
+		var up = startAlt > 0.0
 
 		var cursor = startLocal
 		val spans = mutableListOf<Span>()
 		var openStart: ZonedDateTime? = if (up) startLocal else null
 
-		// Safety break to prevent infinite loops in odd edge cases
 		var safety = 0
 		while (cursor.isBefore(endLocal) && safety++ < 5) {
-			currentCoroutineContext().ensureActive() // Cooperative cancellation check
+			currentCoroutineContext().ensureActive()
 			val dir = if (up) Direction.Set else Direction.Rise
 			val evt = nextEvent(dir, cursor) ?: break
 
-			if (evt.isAfter(endLocal)) {
-				break
-			}
+			if (evt.isAfter(endLocal)) break
 			if (up) {
-				// Was up, found set. Close span.
 				spans += Span(openStart ?: startLocal, evt)
 				openStart = null
 			} else {
-				// Was down, found rise. Open span.
 				openStart = evt
 			}
 			up = !up
-			// Add minute to ensure we search *after* the event
 			cursor = evt.plusMinutes(1)
 		}
 
-		// Close pending span at end of graph
-		if (up) {
-			spans += Span(openStart ?: startLocal, endLocal)
-		}
+		if (up) spans += Span(openStart ?: startLocal, endLocal)
 		return spans
-	}
-
-	private fun altitude(body: Body, tLocal: ZonedDateTime, obs: Observer): Double {
-		val tUtc = Time.fromMillisecondsSince1970(tLocal.toInstant().toEpochMilli())
-		val eq = equator(body, tUtc, obs, EquatorEpoch.OfDate, Aberration.Corrected)
-		val hor = horizon(tUtc, obs, eq.ra, eq.dec, Refraction.Normal)
-		return hor.altitude
-	}
-
-	private fun computeRiseSet(
-		body: Body,
-		startLocal: ZonedDateTime,
-		endLocal: ZonedDateTime,
-		obs: Observer
-	): Pair<ZonedDateTime?, ZonedDateTime?> {
-		val searchStartUtc = Time.fromMillisecondsSince1970(startLocal.toInstant().toEpochMilli())
-		val limitDays = 2.0
-
-		val nextRise = searchRiseSet(body, obs, Direction.Rise, searchStartUtc, +limitDays)
-		val nextSet  = searchRiseSet(body, obs, Direction.Set , searchStartUtc, +limitDays)
-
-		fun Time?.toZoned(): ZonedDateTime? =
-			this?.let { Instant.ofEpochMilli(it.toMillisecondsSince1970()).atZone(config.zoneId) }
-
-		val riseZ = nextRise.toZoned()?.takeIf { !it.isBefore(startLocal) && !it.isAfter(endLocal) }
-		val setZ  = nextSet .toZoned()?.takeIf { !it.isBefore(startLocal) && !it.isAfter(endLocal) }
-		return riseZ to setZ
 	}
 }

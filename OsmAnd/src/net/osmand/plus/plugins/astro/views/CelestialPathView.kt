@@ -21,21 +21,18 @@ import androidx.core.graphics.withMatrix
 import androidx.core.graphics.withSave
 import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.Body
-import io.github.cosinekitty.astronomy.Direction
 import io.github.cosinekitty.astronomy.EquatorEpoch
 import io.github.cosinekitty.astronomy.Observer
 import io.github.cosinekitty.astronomy.Refraction
-import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.Topocentric
 import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
-import io.github.cosinekitty.astronomy.searchRiseSet
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.AstroUtils
-import java.time.Instant
+import net.osmand.plus.plugins.astro.AstroUtils.toAstroTime
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.cos
@@ -54,11 +51,10 @@ class CelestialPathView @JvmOverloads constructor(
 	private var extras: List<CelestialEntry> = emptyList()
 	private var moment: ZonedDateTime? = null
 
-	// Pre-calculated path data
 	private data class CachedPath(
 		val entry: CelestialEntry,
 		val segments: List<PathSegment>,
-		val bounds: RectF // Optimization: Bounding box for fast hit-testing rejection
+		val bounds: RectF
 	)
 
 	private data class PathSegment(
@@ -73,7 +69,7 @@ class CelestialPathView @JvmOverloads constructor(
 		val observer: Observer,
 		val paths: List<CachedPath>,
 		val canonicalRadius: Float,
-		val pathScale: Float, // Ratio between canonical and screen size
+		val pathScale: Float,
 		val actualRadius: Float,
 		val cx: Float,
 		val cy: Float
@@ -120,7 +116,7 @@ class CelestialPathView @JvmOverloads constructor(
 
 	fun setMoment(dateTime: ZonedDateTime?) {
 		moment = dateTime
-		invalidate() // Instant locations are cheap, no full rebuild needed
+		invalidate()
 	}
 
 	// ---------- Interaction (pan/zoom/tap) ----------
@@ -150,27 +146,19 @@ class CelestialPathView @JvmOverloads constructor(
 			override fun onScroll(e1: MotionEvent?, e2: MotionEvent, dx: Float, dy: Float): Boolean {
 				translateX -= dx; translateY -= dy; updateMatrix(); invalidate(); return true
 			}
-
 			override fun onDoubleTap(e: MotionEvent): Boolean { resetTransform(); invalidate(); return true }
-
 			override fun onSingleTapUp(e: MotionEvent): Boolean {
 				val m = cachedModel ?: return false
 				val pts = floatArrayOf(e.x, e.y)
 				inverseMatrix.mapPoints(pts)
 
-				// Convert to Canonical Space
 				val x = (pts[0] - m.cx) / m.pathScale
 				val y = (pts[1] - m.cy) / m.pathScale
-
 				val thresh = (dp(20f) / scale) / m.pathScale
 				var best: Pair<CelestialEntry, Float>? = null
 
 				for (cp in m.paths) {
-					// Optimization: Check intersection with bounding box.
-					// Use intersects() because contains() fails if the tap area (rect)
-					// is larger than the path bounds (e.g. a star point).
 					if (!cp.bounds.intersects(x - thresh, y - thresh, x + thresh, y + thresh)) continue
-
 					for (seg in cp.segments) {
 						val d = distanceToPolyline(x, y, seg.hitPoints)
 						if (d < thresh && (best == null || d < best.second)) {
@@ -220,19 +208,13 @@ class CelestialPathView @JvmOverloads constructor(
 	}
 
 	// ---------- Paints ----------
-	private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#E4424242".toColorInt() }
-	private val ringPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-		style = Paint.Style.STROKE; color = 0x33FFFFFF; strokeWidth = dp(1f)
-		pathEffect = DashPathEffect(floatArrayOf(dp(2f), dp(4f)), 0f)
-	}
+	private val ringPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; color = 0x33FFFFFF; strokeWidth = dp(1f); pathEffect = DashPathEffect(floatArrayOf(dp(2f), dp(4f)), 0f) }
 	private val spokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; strokeWidth = dp(1f) }
 	private val labelPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; textSize = sp(12f); textAlign = Paint.Align.CENTER }
 	private val smallPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.LTGRAY; textSize = sp(10f); textAlign = Paint.Align.CENTER }
 	private val pathPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; strokeWidth = dp(2f) }
 	private val markerPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
-	private val titlePaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = Color.WHITE; textSize = sp(18f); typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD); textAlign = Paint.Align.CENTER
-	}
+	private val titlePaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; textSize = sp(18f); typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD); textAlign = Paint.Align.CENTER }
 	private val panelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x8C101114.toInt() }
 	private val panelStroke = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; color = 0x55FFFFFF; strokeWidth = dp(1f) }
 	private val hourPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; textSize = sp(11f); textAlign = Paint.Align.LEFT }
@@ -240,13 +222,13 @@ class CelestialPathView @JvmOverloads constructor(
 
 	// Helpers
 	private fun topocentric(body: Body, t: ZonedDateTime, obs: Observer): Topocentric {
-		val utc = Time.fromMillisecondsSince1970(t.toInstant().toEpochMilli())
+		val utc = t.toAstroTime()
 		val eq = equator(body, utc, obs, EquatorEpoch.OfDate, Aberration.Corrected)
 		return horizon(utc, obs, eq.ra, eq.dec, Refraction.Normal)
 	}
 
 	private fun topocentricFromRaDec(raHours: Double, decDeg: Double, t: ZonedDateTime, obs: Observer): Topocentric {
-		val utc = Time.fromMillisecondsSince1970(t.toInstant().toEpochMilli())
+		val utc = t.toAstroTime()
 		defineStar(Body.Star1, raHours, decDeg, 1000.0)
 		val eq = equator(Body.Star1, utc, obs, EquatorEpoch.OfDate, Aberration.None)
 		return horizon(utc, obs, eq.ra, eq.dec, Refraction.Normal)
@@ -267,7 +249,7 @@ class CelestialPathView @JvmOverloads constructor(
 		val entries = defaultPlanets + extras
 		val calculatedPaths = if (viewConfig.showPaths) {
 			entries.filter { it.drawPath }.map { entry ->
-				currentCoroutineContext().ensureActive() // Check before processing next entry
+				currentCoroutineContext().ensureActive()
 				computePathForEntry(entry, startLocal, endLocal, obs)
 			}
 		} else emptyList()
@@ -288,7 +270,6 @@ class CelestialPathView @JvmOverloads constructor(
 		var currentPoints = ArrayList<Float>()
 		var currentColor = -1
 		var firstInSegment = true
-		// Initialize to Inverse Max/Min to ensure correct bounds expansion
 		var minX = Float.MAX_VALUE; var maxX = -Float.MAX_VALUE
 		var minY = Float.MAX_VALUE; var maxY = -Float.MAX_VALUE
 
@@ -302,7 +283,7 @@ class CelestialPathView @JvmOverloads constructor(
 		}
 
 		while (!t.isAfter(end)) {
-			currentCoroutineContext().ensureActive() // Check cancellation inside the loop
+			currentCoroutineContext().ensureActive()
 			val topo = when (entry) {
 				is CelestialEntry.Planet -> topocentric(entry.body, t, obs)
 				is CelestialEntry.Fixed -> topocentricFromRaDec(entry.raHours, entry.decDeg, t, obs)
@@ -347,7 +328,6 @@ class CelestialPathView @JvmOverloads constructor(
 				translate(m.cx, m.cy)
 				drawGrid(this, m.actualRadius)
 
-				// Draw pre-calculated paths
 				if (viewConfig.showPaths) {
 					scale(m.pathScale, m.pathScale)
 					for (cp in m.paths) {
@@ -390,7 +370,6 @@ class CelestialPathView @JvmOverloads constructor(
 		setMeasuredDimension(w, resolveSize(h, heightMeasureSpec))
 	}
 
-	// ---------- Grid & projection ----------
 	private fun drawGrid(canvas: Canvas, radius: Float) {
 		for (alt in 0..80 step 10) {
 			val r = altToRadius(alt.toFloat(), radius)
@@ -481,21 +460,11 @@ class CelestialPathView @JvmOverloads constructor(
 	}
 
 	private fun nextRiseSet(entry: CelestialEntry, m: Model): Pair<ZonedDateTime?, ZonedDateTime?> {
-		val startTime = Time.fromMillisecondsSince1970(m.startLocal.toInstant().toEpochMilli())
-		fun toZdt(t: Time?): ZonedDateTime? =
-			t?.let { Instant.ofEpochMilli(it.toMillisecondsSince1970()).atZone(config.zoneId) }
-
 		return when (entry) {
-			is CelestialEntry.Planet -> {
-				val r = searchRiseSet(entry.body, m.observer, Direction.Rise, startTime, +2.0)
-				val s = searchRiseSet(entry.body, m.observer, Direction.Set , startTime, +2.0)
-				toZdt(r) to toZdt(s)
-			}
+			is CelestialEntry.Planet -> AstroUtils.nextRiseSet(entry.body, m.startLocal, m.observer)
 			is CelestialEntry.Fixed -> {
 				defineStar(Body.Star1, entry.raHours, entry.decDeg, 1000.0)
-				val r = searchRiseSet(Body.Star1, m.observer, Direction.Rise, startTime, +2.0)
-				val s = searchRiseSet(Body.Star1, m.observer, Direction.Set , startTime, +2.0)
-				toZdt(r) to toZdt(s)
+				AstroUtils.nextRiseSet(Body.Star1, m.startLocal, m.observer)
 			}
 		}
 	}
