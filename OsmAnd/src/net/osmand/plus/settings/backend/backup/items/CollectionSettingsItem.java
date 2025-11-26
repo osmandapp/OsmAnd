@@ -69,7 +69,6 @@ public abstract class CollectionSettingsItem<T> extends SettingsItem {
 
 	@Override
 	public void delete() {
-		super.delete();
 		if (!Algorithms.isEmpty(items)) {
 			for (T item : items) {
 				deleteItem(item);

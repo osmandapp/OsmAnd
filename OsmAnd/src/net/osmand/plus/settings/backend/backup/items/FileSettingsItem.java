@@ -387,7 +387,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 
 	@Override
 	public void delete() {
-		super.delete();
 		Algorithms.removeAllFiles(file);
 	}
 
