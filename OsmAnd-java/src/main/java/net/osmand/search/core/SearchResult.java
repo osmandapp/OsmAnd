@@ -90,6 +90,8 @@ public class SearchResult {
 		return unknownPhraseMatchWeight;
 	}
 
+	public CheckWordsMatchCount completeMatchRes = new CheckWordsMatchCount();
+
 	private double getSumPhraseMatchWeight(SearchResult exactResult) {
 		double res = getTypeWeight(exactResult, objectType);
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
@@ -97,18 +99,17 @@ public class SearchResult {
 		} else if (objectType == ObjectType.POI_TYPE) {
 			// don't overload with poi types
 		} else {
-			CheckWordsMatchCount completeMatchRes = new CheckWordsMatchCount();
-			boolean matched = localeName != null && allWordsMatched(localeName, exactResult, completeMatchRes);
+			boolean matched = localeName != null && allWordsMatched(localeName, exactResult);
 			// incorrect fix
 //			if (!matched && object instanceof Street s) { // parentSearchResult == null &&
 //				matched = allWordsMatched(localeName + " " + s.getCity().getName(requiredSearchPhrase.getSettings().getLang()), exactResult, completeMatchRes);
 //			}
 			if (!matched && alternateName != null && !Algorithms.objectEquals(cityName, alternateName)) {
-				matched = allWordsMatched(alternateName, exactResult, completeMatchRes);
+				matched = allWordsMatched(alternateName, exactResult);
 			}
 			if (!matched && otherNames != null) {
 				for (String otherName : otherNames) {
-					if (allWordsMatched(otherName, exactResult, completeMatchRes)) {
+					if (allWordsMatched(otherName, exactResult)) {
 						matched = true;
 						break;
 					}
@@ -194,7 +195,7 @@ public class SearchResult {
 		return inc;
 	}
 
-	private boolean allWordsMatched(String name, SearchResult exactResult, CheckWordsMatchCount cnt) {
+	private boolean allWordsMatched(String name, SearchResult exactResult) {
 		List<String> searchPhraseNames = getSearchPhraseNames();
 		name = CollatorStringMatcher.alignChars(name);
 		List<String> localResultNames;
@@ -239,15 +240,15 @@ public class SearchResult {
 			}
 		}
 		if (searchPhraseNames.size() == localResultNames.size()) {
-			cnt.allWordsEqual = true;
+			completeMatchRes.allWordsEqual = true;
 		}
-		cnt.allWordsInPhraseAreInResult = true;
+		completeMatchRes.allWordsInPhraseAreInResult = true;
 		return true;
 	}
 	
-	static class CheckWordsMatchCount {
-		boolean allWordsEqual;
-		boolean allWordsInPhraseAreInResult;
+	public static class CheckWordsMatchCount {
+		public boolean allWordsEqual;
+		public boolean allWordsInPhraseAreInResult;
 	}
 
 	private List<String> getSearchPhraseNames() {
