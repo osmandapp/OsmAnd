@@ -25,7 +25,6 @@ import io.github.cosinekitty.astronomy.EquatorEpoch
 import io.github.cosinekitty.astronomy.Observer
 import io.github.cosinekitty.astronomy.Refraction
 import io.github.cosinekitty.astronomy.Topocentric
-import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import kotlinx.coroutines.currentCoroutineContext
@@ -48,11 +47,10 @@ class CelestialPathView @JvmOverloads constructor(
 	defStyleRes: Int = 0
 ) : BaseChartView(context, attrs, defStyleAttr, defStyleRes) {
 
-	private var extras: List<CelestialEntry> = emptyList()
 	private var moment: ZonedDateTime? = null
 
 	private data class CachedPath(
-		val entry: CelestialEntry,
+		val obj: SkyObject,
 		val segments: List<PathSegment>,
 		val bounds: RectF
 	)
@@ -92,28 +90,6 @@ class CelestialPathView @JvmOverloads constructor(
 		val minuteSample: Int = 20
 	)
 
-	private val defaultPlanets = visibleBodies.map {
-		CelestialEntry.Planet(context, it, AstroUtils.bodyColor(it))
-	}
-
-	sealed class CelestialEntry(val name: String, val color: Int, val drawPath: Boolean = true) {
-		class Planet(val ctx: Context, val body: Body, color: Int, drawPath: Boolean = true)
-			: CelestialEntry(AstroUtils.bodyName(ctx, body), color, drawPath)
-		class Fixed(
-			name: String,
-			val raHours: Double,
-			val decDeg: Double,
-			val distanceLy: Double = 1000.0,
-			color: Int,
-			drawPath: Boolean = true
-		) : CelestialEntry(name, color, drawPath)
-	}
-
-	fun setCelestialDatabase(entries: List<CelestialEntry>) {
-		extras = entries
-		triggerAsyncRebuild()
-	}
-
 	fun setMoment(dateTime: ZonedDateTime?) {
 		moment = dateTime
 		invalidate()
@@ -125,7 +101,7 @@ class CelestialPathView @JvmOverloads constructor(
 	private var scale = 1f
 	private var translateX = 0f
 	private var translateY = 0f
-	private var selected: CelestialEntry? = null
+	private var selected: SkyObject? = null
 
 	private val scaleDetector = ScaleGestureDetector(context,
 		object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
@@ -155,14 +131,14 @@ class CelestialPathView @JvmOverloads constructor(
 				val x = (pts[0] - m.cx) / m.pathScale
 				val y = (pts[1] - m.cy) / m.pathScale
 				val thresh = (dp(20f) / scale) / m.pathScale
-				var best: Pair<CelestialEntry, Float>? = null
+				var best: Pair<SkyObject, Float>? = null
 
 				for (cp in m.paths) {
 					if (!cp.bounds.intersects(x - thresh, y - thresh, x + thresh, y + thresh)) continue
 					for (seg in cp.segments) {
 						val d = distanceToPolyline(x, y, seg.hitPoints)
 						if (d < thresh && (best == null || d < best.second)) {
-							best = cp.entry to d
+							best = cp.obj to d
 						}
 					}
 				}
@@ -229,9 +205,10 @@ class CelestialPathView @JvmOverloads constructor(
 
 	private fun topocentricFromRaDec(raHours: Double, decDeg: Double, t: ZonedDateTime, obs: Observer): Topocentric {
 		val utc = t.toAstroTime()
-		defineStar(Body.Star1, raHours, decDeg, 1000.0)
-		val eq = equator(Body.Star1, utc, obs, EquatorEpoch.OfDate, Aberration.None)
-		return horizon(utc, obs, eq.ra, eq.dec, Refraction.Normal)
+		return AstroUtils.withCustomStar(raHours, decDeg) { star ->
+			val eq = equator(star, utc, obs, EquatorEpoch.OfDate, Aberration.None)
+			horizon(utc, obs, eq.ra, eq.dec, Refraction.Normal)
+		}
 	}
 
 	private val CANONICAL_RADIUS = 1000f
@@ -246,11 +223,12 @@ class CelestialPathView @JvmOverloads constructor(
 		val actualRadius = 0.9f * min(cx, cy)
 		val pathScale = actualRadius / CANONICAL_RADIUS
 
-		val entries = defaultPlanets + extras
+		val entries = skyObjects.filter { it.isVisible }
+
 		val calculatedPaths = if (viewConfig.showPaths) {
-			entries.filter { it.drawPath }.map { entry ->
+			entries.map { obj ->
 				currentCoroutineContext().ensureActive()
-				computePathForEntry(entry, startLocal, endLocal, obs)
+				computePathForObject(obj, startLocal, endLocal, obs)
 			}
 		} else emptyList()
 
@@ -261,7 +239,7 @@ class CelestialPathView @JvmOverloads constructor(
 		cachedModel = model as? Model
 	}
 
-	private suspend fun computePathForEntry(entry: CelestialEntry, start: ZonedDateTime, end: ZonedDateTime, obs: Observer): CachedPath {
+	private suspend fun computePathForObject(obj: SkyObject, start: ZonedDateTime, end: ZonedDateTime, obs: Observer): CachedPath {
 		val stepMin = viewConfig.minuteSample.toLong().coerceAtLeast(1)
 		var t = start
 
@@ -284,9 +262,11 @@ class CelestialPathView @JvmOverloads constructor(
 
 		while (!t.isAfter(end)) {
 			currentCoroutineContext().ensureActive()
-			val topo = when (entry) {
-				is CelestialEntry.Planet -> topocentric(entry.body, t, obs)
-				is CelestialEntry.Fixed -> topocentricFromRaDec(entry.raHours, entry.decDeg, t, obs)
+
+			val topo = if (obj.body != null) {
+				topocentric(obj.body, t, obs)
+			} else {
+				topocentricFromRaDec(obj.ra, obj.dec, t, obs)
 			}
 
 			val color = colorForHour(t.hour)
@@ -310,7 +290,7 @@ class CelestialPathView @JvmOverloads constructor(
 			t = t.plusMinutes(stepMin)
 		}
 		flush()
-		return CachedPath(entry, segments, RectF(minX, minY, maxX, maxY))
+		return CachedPath(obj, segments, RectF(minX, minY, maxX, maxY))
 	}
 
 	@SuppressLint("DrawAllocation")
@@ -331,7 +311,7 @@ class CelestialPathView @JvmOverloads constructor(
 				if (viewConfig.showPaths) {
 					scale(m.pathScale, m.pathScale)
 					for (cp in m.paths) {
-						val isSelected = (cp.entry == selected)
+						val isSelected = (cp.obj == selected)
 						for (seg in cp.segments) {
 							pathPaint.color = seg.color
 							pathPaint.strokeWidth = (if (isSelected) dp(3.2f) else dp(2f)) / m.pathScale
@@ -342,13 +322,16 @@ class CelestialPathView @JvmOverloads constructor(
 				}
 
 				if (viewConfig.showInstantLocations) {
-					val entries = defaultPlanets + extras
 					val t = (moment ?: ZonedDateTime.now(config.zoneId)).withSecond(0).withNano(0)
+					val entries = skyObjects.filter { it.isVisible }
+
 					for (entry in entries) {
-						val topo = when (entry) {
-							is CelestialEntry.Planet -> topocentric(entry.body, t, m.observer)
-							is CelestialEntry.Fixed -> topocentricFromRaDec(entry.raHours, entry.decDeg, t, m.observer)
+						val topo = if (entry.body != null) {
+							topocentric(entry.body, t, m.observer)
+						} else {
+							topocentricFromRaDec(entry.ra, entry.dec, t, m.observer)
 						}
+
 						if (topo.altitude > 0) {
 							val p = azAltToPoint(topo.azimuth, topo.altitude, m.actualRadius)
 							markerPaint.color = entry.color
@@ -439,7 +422,7 @@ class CelestialPathView @JvmOverloads constructor(
 		}
 	}
 
-	private fun drawInfoPanel(canvas: Canvas, entry: CelestialEntry, m: Model) {
+	private fun drawInfoPanel(canvas: Canvas, entry: SkyObject, m: Model) {
 		val panelH = dp(76f)
 		val r = RectF(dp(12f), height - panelH - dp(12f), width - dp(12f), height - dp(12f))
 		canvas.drawRoundRect(r, dp(12f), dp(12f), panelPaint)
@@ -450,23 +433,13 @@ class CelestialPathView @JvmOverloads constructor(
 		canvas.drawText(title, r.left + dp(12f), r.top + dp(22f), titlePaint)
 
 		val fmt = DateTimeFormatter.ofPattern("EEE, HH:mm")
-		val (rise, set) = nextRiseSet(entry, m)
+		val (rise, set) = AstroUtils.nextRiseSet(entry, m.startLocal, m.observer)
 		val linePaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xFFE0E0E0.toInt(); textSize = sp(12f) }
 
 		val lineY1 = r.top + dp(44f)
 		val lineY2 = r.top + dp(64f)
 		canvas.drawText("Next Rise: ${rise?.format(fmt) ?: "—"}", r.left + dp(12f), lineY1, linePaint)
 		canvas.drawText("Next Set : ${set ?.format(fmt) ?: "—"}", r.left + dp(12f), lineY2, linePaint)
-	}
-
-	private fun nextRiseSet(entry: CelestialEntry, m: Model): Pair<ZonedDateTime?, ZonedDateTime?> {
-		return when (entry) {
-			is CelestialEntry.Planet -> AstroUtils.nextRiseSet(entry.body, m.startLocal, m.observer)
-			is CelestialEntry.Fixed -> {
-				defineStar(Body.Star1, entry.raHours, entry.decDeg, 1000.0)
-				AstroUtils.nextRiseSet(Body.Star1, m.startLocal, m.observer)
-			}
-		}
 	}
 
 	private fun drawText(canvas: Canvas, text: String, x: Float, y: Float, tp: TextPaint) { canvas.drawText(text, x, y, tp) }

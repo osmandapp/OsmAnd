@@ -40,11 +40,12 @@ class StarAltitudeChartView @JvmOverloads constructor(
 	) : BaseModel(startLocal, endLocal)
 
 	private data class SeriesPath(
-		val body: Body,
+		val obj: SkyObject,
 		val path: Path,
 		val name: String,
 		val rise: String,
-		val set: String
+		val set: String,
+		val color: Int
 	)
 
 	private var cachedModel: Model? = null
@@ -75,12 +76,7 @@ class StarAltitudeChartView @JvmOverloads constructor(
 	private val smallPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.LTGRAY; textSize = sp(14f) }
 	private val timePaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.LTGRAY; textSize = sp(14f) }
 	private val axisPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.LTGRAY; textSize = sp(14f) }
-
-	private val seriesPaints: Map<Body, Paint> = visibleBodies.associateWith {
-		Paint(Paint.ANTI_ALIAS_FLAG).apply {
-			color = AstroUtils.bodyColor(it); strokeWidth = dp(2f); style = Paint.Style.STROKE
-		}
-	}
+	// Paint for drawing paths is configured dynamically per object
 
 	override suspend fun computeModel(config: Config, width: Int, height: Int): Any {
 		val zone = config.zoneId
@@ -111,7 +107,8 @@ class StarAltitudeChartView @JvmOverloads constructor(
 
 		val timeFmt = DateTimeFormatter.ofPattern("HH:mm")
 
-		val paths = visibleBodies.map { body ->
+		// Filter invisible objects and map to paths
+		val paths = skyObjects.filter { it.isVisible }.map { obj ->
 			currentCoroutineContext().ensureActive()
 			val path = Path()
 			var t = startLocal
@@ -127,7 +124,7 @@ class StarAltitudeChartView @JvmOverloads constructor(
 			while (!t.isAfter(endLocal)) {
 				currentCoroutineContext().ensureActive()
 
-				val alt = AstroUtils.altitude(body, t, obs)
+				val alt = AstroUtils.altitude(obj, t, obs)
 				val x = getX(t)
 				val y = getY(alt)
 
@@ -171,13 +168,14 @@ class StarAltitudeChartView @JvmOverloads constructor(
 				t = t.plusMinutes(stepMinutes)
 			}
 
-			val (rise, set) = AstroUtils.nextRiseSet(body, startLocal, obs, startLocal, endLocal)
+			val (rise, set) = AstroUtils.nextRiseSet(obj, startLocal, obs, startLocal, endLocal)
 			SeriesPath(
-				body,
+				obj,
 				path,
-				AstroUtils.bodyName(context, body),
+				obj.name,
 				rise?.toLocalTime()?.format(timeFmt) ?: "—",
-				set?.toLocalTime()?.format(timeFmt) ?: "—"
+				set?.toLocalTime()?.format(timeFmt) ?: "—",
+				obj.color
 			)
 		}
 
@@ -213,9 +211,10 @@ class StarAltitudeChartView @JvmOverloads constructor(
 		drawYGrid(canvas, chartLeft, chartTop, chartRight, chartBottom, m.yMin, m.yMax)
 		drawZeroLine(canvas, chartLeft, chartRight, chartTop, chartBottom, m.yMin, m.yMax)
 
+		val pathPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { strokeWidth = dp(2f); style = Paint.Style.STROKE }
 		m.seriesPaths.forEach { s ->
-			val paint = seriesPaints[s.body]!!
-			canvas.drawPath(s.path, paint)
+			pathPaint.color = s.color
+			canvas.drawPath(s.path, pathPaint)
 		}
 
 		drawLegendLeft(canvas, m, chartTop, chartBottom)
@@ -232,10 +231,13 @@ class StarAltitudeChartView @JvmOverloads constructor(
 	private fun drawLegendLeft(canvas: Canvas, m: Model, chartTop: Float, chartBottom: Float) {
 		val x0 = leftPad - dp(8f)
 		var y = chartTop + smallPaint.textSize
+		val linePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { strokeWidth = dp(2f); style = Paint.Style.STROKE }
+
 		m.seriesPaths.forEach { s ->
 			val sw = dp(16f)
 			val mid = y - smallPaint.textSize/3
-			canvas.drawLine(x0, mid, x0 + sw, mid, seriesPaints[s.body]!!)
+			linePaint.color = s.color
+			canvas.drawLine(x0, mid, x0 + sw, mid, linePaint)
 
 			canvas.drawText(s.name, x0 + sw + dp(4f), y, smallPaint)
 			val riseSet = "↑${s.rise}  ↓${s.set}"

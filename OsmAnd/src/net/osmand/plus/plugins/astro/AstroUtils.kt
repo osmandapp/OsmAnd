@@ -10,11 +10,13 @@ import io.github.cosinekitty.astronomy.EquatorEpoch
 import io.github.cosinekitty.astronomy.Observer
 import io.github.cosinekitty.astronomy.Refraction
 import io.github.cosinekitty.astronomy.Time
+import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.searchAltitude
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.plus.R
+import net.osmand.plus.plugins.astro.views.SkyObject
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -65,6 +67,18 @@ object AstroUtils {
 	// ---------- Physics / Math Helpers ----------
 
 	/**
+	 * Executes a block of code with a temporarily defined custom star (Body.Star1).
+	 * This method is synchronized to prevent race conditions when multiple threads
+	 * try to define and use Body.Star1 simultaneously.
+	 */
+	fun <T> withCustomStar(ra: Double, dec: Double, block: (Body) -> T): T {
+		synchronized(this) {
+			defineStar(Body.Star1, ra, dec, 1000.0)
+			return block(Body.Star1)
+		}
+	}
+
+	/**
 	 * Calculates the apparent altitude of a body at a specific time.
 	 */
 	fun altitude(body: Body, tLocal: ZonedDateTime, obs: Observer): Double {
@@ -72,6 +86,19 @@ object AstroUtils {
 		val eq = equator(body, tUtc, obs, EquatorEpoch.OfDate, Aberration.Corrected)
 		val hor = horizon(tUtc, obs, eq.ra, eq.dec, Refraction.Normal)
 		return hor.altitude
+	}
+
+	/**
+	 * Calculates altitude for a SkyObject. Handles custom stars safely.
+	 */
+	fun altitude(obj: SkyObject, tLocal: ZonedDateTime, obs: Observer): Double {
+		return if (obj.body != null) {
+			altitude(obj.body, tLocal, obs)
+		} else {
+			withCustomStar(obj.ra, obj.dec) { star ->
+				altitude(star, tLocal, obs)
+			}
+		}
 	}
 
 	/**
@@ -106,6 +133,25 @@ object AstroUtils {
 		} else s
 
 		return rFiltered to sFiltered
+	}
+
+	/**
+	 * Searches for next Rise and Set for a SkyObject. Handles custom stars safely.
+	 */
+	fun nextRiseSet(
+		obj: SkyObject,
+		startSearch: ZonedDateTime,
+		obs: Observer,
+		windowStart: ZonedDateTime? = null,
+		windowEnd: ZonedDateTime? = null
+	): Pair<ZonedDateTime?, ZonedDateTime?> {
+		return if (obj.body != null) {
+			nextRiseSet(obj.body, startSearch, obs, windowStart, windowEnd)
+		} else {
+			withCustomStar(obj.ra, obj.dec) { star ->
+				nextRiseSet(star, startSearch, obs, windowStart, windowEnd)
+			}
+		}
 	}
 
 	/**

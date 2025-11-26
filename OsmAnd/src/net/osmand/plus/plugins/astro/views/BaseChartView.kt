@@ -16,6 +16,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.osmand.plus.plugins.astro.AstroDataProvider
 import net.osmand.plus.plugins.astro.AstroUtils
 import net.osmand.plus.utils.AndroidUtils
 import java.time.Duration
@@ -31,10 +32,9 @@ abstract class BaseChartView @JvmOverloads constructor(
 	defStyleRes: Int = 0
 ) : View(context, attrs, defStyleAttr, defStyleRes) {
 
-	protected val visibleBodies = listOf(
-		Body.Sun, Body.Moon, Body.Mercury, Body.Venus,
-		Body.Mars, Body.Jupiter, Body.Saturn
-	)
+	protected val skyObjects: List<SkyObject> by lazy {
+		AstroDataProvider.getInitialSkyObjects(context)
+	}
 
 	// Coroutine scope for background calculations
 	protected val viewScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)

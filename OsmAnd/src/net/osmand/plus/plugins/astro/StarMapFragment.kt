@@ -167,8 +167,8 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 		val currentTime = starView.currentTime
 
 		val bodyToCheck: Body? = if (obj.type == SkyObject.Type.STAR) {
-			defineStar(Body.Star1, obj.ra, obj.dec, 1000.0)
-			Body.Star1
+			defineStar(Body.Star2, obj.ra, obj.dec, 1000.0)
+			Body.Star2
 		} else {
 			obj.body
 		}

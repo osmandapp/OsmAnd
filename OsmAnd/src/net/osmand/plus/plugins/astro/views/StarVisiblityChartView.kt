@@ -9,7 +9,6 @@ import android.graphics.Typeface
 import android.text.TextPaint
 import android.util.AttributeSet
 import androidx.core.graphics.toColorInt
-import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Direction
 import io.github.cosinekitty.astronomy.Observer
 import io.github.cosinekitty.astronomy.searchRiseSet
@@ -68,11 +67,11 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		val endLocal = startLocal.plusDays(1)
 		val obs = Observer(config.latitude, config.longitude, config.elevation)
 
-		val rows = visibleBodies.map { body ->
+		val rows = skyObjects.filter { it.isVisible }.map { obj ->
 			currentCoroutineContext().ensureActive()
-			val spans = computeVisibleSpans(body, startLocal, endLocal, obs)
-			val (rise, set) = AstroUtils.nextRiseSet(body, startLocal, obs, startLocal, endLocal)
-			Row(body, AstroUtils.bodyName(context, body), rise, set, spans)
+			val spans = computeVisibleSpans(obj, startLocal, endLocal, obs)
+			val (rise, set) = AstroUtils.nextRiseSet(obj, startLocal, obs, startLocal, endLocal)
+			Row(obj, obj.name, rise, set, spans)
 		}
 
 		val tw = AstroUtils.computeTwilight(startLocal, endLocal, obs, zone)
@@ -132,7 +131,7 @@ class StarVisiblityChartView @JvmOverloads constructor(
 	// ---------- Internal model ----------
 
 	private data class Row(
-		val body: Body,
+		val obj: SkyObject,
 		val name: String,
 		val rise: ZonedDateTime?,
 		val set: ZonedDateTime?,
@@ -160,17 +159,23 @@ class StarVisiblityChartView @JvmOverloads constructor(
 	}
 
 	private suspend fun computeVisibleSpans(
-		body: Body,
+		obj: SkyObject,
 		startLocal: ZonedDateTime,
 		endLocal: ZonedDateTime,
 		obs: Observer
 	): List<Span> {
 		fun nextEvent(dir: Direction, from: ZonedDateTime): ZonedDateTime? {
 			val t0 = from.toAstroTime()
-			return searchRiseSet(body, obs, dir, t0, +2.0)?.toZoned(config.zoneId)
+			return if (obj.body != null) {
+				searchRiseSet(obj.body, obs, dir, t0, +2.0)?.toZoned(config.zoneId)
+			} else {
+				AstroUtils.withCustomStar(obj.ra, obj.dec) { star ->
+					searchRiseSet(star, obs, dir, t0, +2.0)?.toZoned(config.zoneId)
+				}
+			}
 		}
 
-		val startAlt = AstroUtils.altitude(body, startLocal, obs)
+		val startAlt = AstroUtils.altitude(obj, startLocal, obs)
 		var up = startAlt > 0.0
 
 		var cursor = startLocal
