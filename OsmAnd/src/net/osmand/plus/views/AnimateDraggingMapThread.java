@@ -408,7 +408,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 			}
 
 			if (animateZoom) {
-				android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startMoving: animateZoom " + (zoom + (float) zoomFP));
+				android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startMoving: animateZoom1 " + (zoom + (float) zoomFP));
 				animator.animateZoomTo(zoom + (float) zoomFP, zoomParams.second / 1000f,
 						TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
 			}
@@ -560,14 +560,14 @@ public class AnimateDraggingMapThread implements TouchListener {
 					animator.cancelAnimation(targetAnimation);
 					duration = targetAnimation.getDuration() - targetAnimation.getTimePassed();
 				}
-				android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startMoving: animateZoom " + animateZoom + ";  " + (endZoom + endZoomFloatPart));
+				android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startMoving: animateZoom2 " + animateZoom + ";  " + (endZoom + endZoomFloatPart));
 				if (animateZoom) {
 					animator.animateZoomToAndPan(endZoom + endZoomFloatPart, finish31, duration, TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
 				} else {
 					animator.animateTargetTo(finish31, duration, TimingFunction.Linear, locationServicesAnimationKey);
 				}
 			} else if (animateZoom) {
-				android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startMoving: animateZoom " + (endZoom + endZoomFloatPart));
+				android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startMoving: animateZoom3 " + (endZoom + endZoomFloatPart));
 				animator.animateZoomTo(endZoom + endZoomFloatPart, ZOOM_MOVE_ANIMATION_TIME / 1000f,
 						TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
 			}
@@ -902,7 +902,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 			}
 
 			if (duration > 0) {
-				android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startMoving: animateZoom " + (zoomEnd + (float) zoomPart));
+				android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startMoving: animateZoom4 " + (zoomEnd + (float) zoomPart));
 				animator.animateZoomTo(zoomEnd + (float) zoomPart,
 						duration,
 						TimingFunction.Linear,
