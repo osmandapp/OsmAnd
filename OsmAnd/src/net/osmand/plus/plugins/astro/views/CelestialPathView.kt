@@ -19,8 +19,6 @@ import android.view.ScaleGestureDetector
 import androidx.core.graphics.toColorInt
 import androidx.core.graphics.withMatrix
 import androidx.core.graphics.withSave
-import kotlinx.coroutines.currentCoroutineContext
-import kotlinx.coroutines.ensureActive
 import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Direction
@@ -33,6 +31,8 @@ import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.searchRiseSet
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.AstroUtils
 import java.time.Instant

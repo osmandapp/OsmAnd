@@ -5,13 +5,10 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.RectF
 import android.graphics.Typeface
 import android.text.TextPaint
 import android.util.AttributeSet
 import androidx.core.graphics.toColorInt
-import kotlinx.coroutines.currentCoroutineContext
-import kotlinx.coroutines.ensureActive
 import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Direction
@@ -22,14 +19,15 @@ import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.searchRiseSet
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.AstroUtils
+import net.osmand.plus.plugins.astro.AstroUtils.Twilight
 import java.time.Duration
 import java.time.Instant
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import kotlin.math.max
-import kotlin.math.min
 
 class StarVisiblityChartView @JvmOverloads constructor(
 	context: Context,
@@ -43,7 +41,7 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		override val startLocal: ZonedDateTime,
 		override val endLocal: ZonedDateTime,
 		val rows: List<Row>,
-		val twilight: AstroUtils.Twilight
+		val twilight: Twilight
 	) : BaseModel(startLocal, endLocal)
 
 	private var cachedModel: Model? = null
@@ -175,6 +173,9 @@ class StarVisiblityChartView @JvmOverloads constructor(
 
 	private data class Span(val start: ZonedDateTime, val end: ZonedDateTime)
 
+	// Enum for the bands
+	private enum class Band { DAY, CIVIL, NAUT, ASTRO, NIGHT }
+
 	private fun measureText(s: String) = labelPaint.measureText(s)
 	private fun measureHeight() = dp(300f).toInt()
 
@@ -197,65 +198,93 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		canvas: Canvas, m: Model,
 		left: Float, top: Float, right: Float, bottom: Float
 	) {
+		// Draw deep night background first (covers everything)
 		canvas.drawRect(left, top, right, bottom, nightPaint)
+
+		// 1. Build list of all transitions in the window
+		val transitions = ArrayList<Pair<ZonedDateTime, Band>>()
 		val tw = m.twilight
 
-		fun xOf(t: ZonedDateTime) = timeToX(t, m.startLocal, m.endLocal, left, right)
-		fun clampX(t: ZonedDateTime) = xOf(t.coerceIn(m.startLocal, m.endLocal))
-
-		val sunrise = tw.sunrise
-		val sunset  = tw.sunset
-
-		fun fillDay(x1: Float, x2: Float) {
-			if (x2 > x1) canvas.drawRect(x1, top, x2, bottom, dayPaint)
-		}
-
-		when {
-			sunrise != null && sunset != null -> {
-				if (sunrise.isAfter(sunset)) {
-					fillDay(left, clampX(sunset))
-					fillDay(clampX(sunrise), right)
-				} else {
-					fillDay(clampX(sunrise), clampX(sunset))
-				}
-			}
-			sunrise != null -> {
-				// Polar conditions or invalid search
-				val obs = Observer(config.latitude, config.longitude, config.elevation)
-				val startAlt = altitude(Body.Sun, m.startLocal, obs)
-				if (startAlt > -0.833) fillDay(left, right) else fillDay(clampX(sunrise), right)
-			}
-			sunset != null -> {
-				val obs = Observer(config.latitude, config.longitude, config.elevation)
-				val startAlt = altitude(Body.Sun, m.startLocal, obs)
-				if (startAlt > -0.833) fillDay(left, clampX(sunset))
-			}
-			else -> {
-				// Polar day or night
-				val obs = Observer(config.latitude, config.longitude, config.elevation)
-				val startAlt = altitude(Body.Sun, m.startLocal, obs)
-				if (startAlt > -0.833) fillDay(left, right)
+		fun add(t: ZonedDateTime?, nextBand: Band) {
+			if (t != null && !t.isBefore(m.startLocal) && !t.isAfter(m.endLocal)) {
+				transitions.add(t to nextBand)
 			}
 		}
 
-		if (showTwilightBands) {
-			fun rect(a: ZonedDateTime?, b: ZonedDateTime?, paint: Paint) {
-				if (a == null || b == null) return
-				val x1 = timeToX(a, m.startLocal, m.endLocal, left, right, false)
-				val x2 = timeToX(b, m.startLocal, m.endLocal, left, right, false)
-				fun drawSeg(s: Float, e: Float) {
-					val lo = max(left, s); val hi = min(right, e)
-					if (hi > lo) canvas.drawRect(lo, top, hi, bottom, paint)
-				}
-				if (x2 >= x1) drawSeg(x1, x2) else { drawSeg(x1, right); drawSeg(left, x2) }
+		// Evening transitions (Sun going down)
+		add(tw.sunset,       Band.CIVIL) // After Sunset -> Civil
+		add(tw.civilDusk,    Band.NAUT)  // After Civil Dusk -> Nautical
+		add(tw.nauticalDusk, Band.ASTRO) // After Nautical Dusk -> Astro
+		add(tw.astroDusk,    Band.NIGHT) // After Astro Dusk -> Night
+
+		// Morning transitions (Sun coming up)
+		add(tw.astroDawn,    Band.ASTRO) // Rising across -18 -> Astro
+		add(tw.nauticalDawn, Band.NAUT)  // Rising across -12 -> Nautical
+		add(tw.civilDawn,    Band.CIVIL) // Rising across -6 -> Civil
+		add(tw.sunrise,      Band.DAY)   // Rising across Horizon -> Day
+
+		transitions.sortBy { it.first }
+
+		// 2. Determine Initial State (at chart start)
+		// Instead of calculating altitude (which causes blinks due to refraction mismatches),
+		// we infer the current state from the *next* upcoming event.
+		val startBand: Band
+		if (transitions.isNotEmpty()) {
+			// If the next event is X, what state are we in NOW?
+			val firstEvent = transitions[0]
+			startBand = when(firstEvent.second) {
+				Band.CIVIL -> if (isMorningEvent(firstEvent.first, tw)) Band.NAUT else Band.DAY // Approaching CivilDawn(NAUT->CIVIL) or Sunset(DAY->CIVIL)?
+				Band.NAUT  -> if (isMorningEvent(firstEvent.first, tw)) Band.ASTRO else Band.CIVIL
+				Band.ASTRO -> if (isMorningEvent(firstEvent.first, tw)) Band.NIGHT else Band.NAUT
+				Band.NIGHT -> Band.ASTRO // Approaching AstroDusk
+				Band.DAY   -> Band.CIVIL // Approaching Sunrise
 			}
-			rect(tw.nauticalDusk, tw.astroDusk, twiAstro)
-			rect(tw.civilDusk,    tw.nauticalDusk, twiNaut)
-			rect(tw.sunset,       tw.civilDusk,    twiCivil)
-			rect(tw.astroDawn,    tw.nauticalDawn, twiAstro)
-			rect(tw.nauticalDawn, tw.civilDawn,    twiNaut)
-			rect(tw.civilDawn,    tw.sunrise,      twiCivil)
+		} else {
+			// No events in the next 24h (Polar Day/Night). Fallback to altitude check.
+			val obs = Observer(config.latitude, config.longitude, config.elevation)
+			val startAlt = altitude(Body.Sun, m.startLocal, obs) // Refraction.Normal
+			startBand = when {
+				startAlt > -0.833 -> Band.DAY
+				startAlt > -6.0 -> Band.CIVIL
+				startAlt > -12.0 -> Band.NAUT
+				startAlt > -18.0 -> Band.ASTRO
+				else -> Band.NIGHT
+			}
 		}
+
+		// Add the start point
+		// We insert it at the beginning. transitions map is [Time -> NEXT Band]
+		// So we actually process the intervals.
+
+		var currentBand = startBand
+		var currentX = left
+
+		for (trans in transitions) {
+			val nextX = timeToX(trans.first, m.startLocal, m.endLocal, left, right)
+			drawBand(canvas, currentBand, currentX, nextX, top, bottom)
+			currentBand = trans.second
+			currentX = nextX
+		}
+		// Draw remaining band to the right edge
+		drawBand(canvas, currentBand, currentX, right, top, bottom)
+	}
+
+	private fun isMorningEvent(t: ZonedDateTime, tw: Twilight): Boolean {
+		// Helper to distinguish between Dawn (Morning) and Dusk (Evening) events
+		// so we know which side of the transition we are on.
+		return t == tw.sunrise || t == tw.civilDawn || t == tw.nauticalDawn || t == tw.astroDawn
+	}
+
+	private fun drawBand(c: Canvas, band: Band, x1: Float, x2: Float, top: Float, bottom: Float) {
+		if (x2 <= x1) return
+		val paint = when(band) {
+			Band.DAY   -> dayPaint
+			Band.CIVIL -> if (showTwilightBands) twiCivil else null
+			Band.NAUT  -> if (showTwilightBands) twiNaut else null
+			Band.ASTRO -> if (showTwilightBands) twiAstro else null
+			Band.NIGHT -> null
+		}
+		paint?.let { c.drawRect(x1, top, x2, bottom, it) }
 	}
 
 	private fun timeToX(

@@ -1,8 +1,8 @@
 package net.osmand.plus.plugins.astro
 
 import android.graphics.Color
-import androidx.core.graphics.toColorInt
 import io.github.cosinekitty.astronomy.Body
+import net.osmand.plus.plugins.astro.AstroUtils.bodyColor
 import net.osmand.plus.plugins.astro.AstroUtils.bodyName
 import net.osmand.plus.plugins.astro.views.SkyObject
 
@@ -16,15 +16,15 @@ object AstroDataProvider {
 
 		// Planets
 		val planets = listOf(
-			Pair(Body.Sun, Color.YELLOW),
-			Pair(Body.Moon, Color.LTGRAY),
-			Pair(Body.Mercury, Color.GRAY),
-			Pair(Body.Venus, "#FFD700".toColorInt()),
-			Pair(Body.Mars, Color.RED),
-			Pair(Body.Jupiter, "#D2B48C".toColorInt()),
-			Pair(Body.Saturn, "#F4A460".toColorInt()),
-			Pair(Body.Uranus, Color.CYAN),
-			Pair(Body.Neptune, Color.BLUE)
+			Pair(Body.Sun, bodyColor(Body.Sun)),
+			Pair(Body.Moon, bodyColor(Body.Moon)),
+			Pair(Body.Mercury, bodyColor(Body.Mercury)),
+			Pair(Body.Venus, bodyColor(Body.Venus)),
+			Pair(Body.Mars, bodyColor(Body.Mars)),
+			Pair(Body.Jupiter, bodyColor(Body.Jupiter)),
+			Pair(Body.Saturn, bodyColor(Body.Saturn)),
+			Pair(Body.Uranus, bodyColor(Body.Uranus)),
+			Pair(Body.Neptune, bodyColor(Body.Neptune))
 		)
 
 		planets.forEach { (body, color) ->
