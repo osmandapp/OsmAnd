@@ -209,7 +209,7 @@ public class SearchResult {
 			localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
 		}
 		if (object instanceof Street)
-			localResultNames = localResultNames.stream().filter(x -> 	CommonWords.getCommon(x.toLowerCase()) < 0).toList();
+			localResultNames = localResultNames.stream().filter(x -> CommonWords.getCommon(x.toLowerCase()) < 0).toList();
 
 		boolean wordMatched;
 		if (searchPhraseNames.isEmpty()) {
