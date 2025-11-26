@@ -1,5 +1,8 @@
 package net.osmand.plus.plugins.astro
 
+import android.app.Application
+import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +14,7 @@ import net.osmand.plus.plugins.astro.views.SkyObject
 import java.util.Calendar
 import java.util.TimeZone
 
-class StarMapViewModel : ViewModel() {
+class StarMapViewModel(private val app: Application) : AndroidViewModel(app) {
 
 	private val _skyObjects = MutableLiveData<List<SkyObject>>()
 	val skyObjects: LiveData<List<SkyObject>> = _skyObjects
@@ -30,7 +33,7 @@ class StarMapViewModel : ViewModel() {
 
 	private fun loadData() {
 		viewModelScope.launch(Dispatchers.Default) {
-			val objects = AstroDataProvider.getInitialSkyObjects()
+			val objects = AstroDataProvider.getInitialSkyObjects(app)
 			_skyObjects.postValue(objects)
 		}
 	}

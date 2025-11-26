@@ -6,6 +6,7 @@ import io.github.cosinekitty.astronomy.Body
  * Unified data class for any object rendered on the sky.
  */
 data class SkyObject(
+	val id: String,
 	val type: Type,
 	val body: Body?, // Null for custom stars not in Body enum
 	val name: String,

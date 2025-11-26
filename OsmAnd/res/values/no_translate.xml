@@ -71,6 +71,7 @@
     <string name="osm_oauth2_dev_secret" translatable="false">Zujj3e_vQEUPGCbbbCGX-xUqbx1h0MQspUkIkT0sA8g</string>
     <string name="osm_oauth2_client_id" translatable="false">P-byvAHx1s3qB7cc8VsYikaVBUnMhimeE1VQ0rYot0k</string>
     <string name="osm_oauth2_client_secret" translatable="false">xegLrDp73nwh2IumrfhWnrRw0P615T-ZSmIhbsJD1sg</string>
+
     <string name="star_watcher_plugin_name">Star watcher</string>
     <string name="star_watcher_plugin_description">Star charts, 3D star map</string>
     <string name="show_star_map">Show star map</string>
@@ -82,5 +83,14 @@
     <string name="star_visibility_name">Star visibility</string>
     <string name="star_altitude_name">Star altitude</string>
     <string name="celestial_paths_name">Celestial paths</string>
-
+	<string name="astro_name_sun">Sun</string>
+	<string name="astro_name_moon">Moon</string>
+	<string name="astro_name_mercury">Mercury</string>
+	<string name="astro_name_venus">Venus</string>
+	<string name="astro_name_mars">Mars</string>
+	<string name="astro_name_jupiter">Jupiter</string>
+	<string name="astro_name_saturn">Saturn</string>
+	<string name="astro_name_uranus">Uranus</string>
+	<string name="astro_name_neptune">Neptune</string>
+	<string name="astro_name_pluto">Pluto</string>
 </resources>

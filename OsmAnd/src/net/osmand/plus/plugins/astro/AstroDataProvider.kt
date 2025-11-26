@@ -1,17 +1,16 @@
 package net.osmand.plus.plugins.astro
 
+import android.content.Context
 import android.graphics.Color
 import io.github.cosinekitty.astronomy.Body
 import net.osmand.plus.plugins.astro.AstroUtils.bodyColor
 import net.osmand.plus.plugins.astro.AstroUtils.bodyName
 import net.osmand.plus.plugins.astro.views.SkyObject
+import net.osmand.plus.plugins.astro.views.SkyObject.Type
 
-/**
- * Responsible for providing the static catalog of celestial objects.
- */
 object AstroDataProvider {
 
-	fun getInitialSkyObjects(): List<SkyObject> {
+	fun getInitialSkyObjects(ctx: Context): List<SkyObject> {
 		val objects = mutableListOf<SkyObject>()
 
 		// Planets
@@ -29,9 +28,14 @@ object AstroDataProvider {
 
 		planets.forEach { (body, color) ->
 			objects.add(SkyObject(
-				type = if (body == Body.Sun) SkyObject.Type.SUN else SkyObject.Type.PLANET,
+				id = body.name.lowercase(),
+				type = when (body) {
+					Body.Sun -> Type.SUN
+					Body.Moon -> Type.MOON
+					else -> Type.PLANET
+				},
 				body = body,
-				name = bodyName(body),
+				name = bodyName(ctx, body),
 				ra = 0.0, dec = 0.0,
 				magnitude = -2f,
 				color = color
@@ -65,7 +69,8 @@ object AstroDataProvider {
 
 		brightStars.forEach { (name, coords) ->
 			objects.add(SkyObject(
-				type = SkyObject.Type.STAR,
+				id = name.lowercase().replace(' ', '_'),
+				type = Type.STAR,
 				body = null,
 				name = name,
 				ra = coords.first,

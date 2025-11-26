@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.astro
 
+import android.content.Context
 import androidx.annotation.ColorInt
 import androidx.core.graphics.toColorInt
 import io.github.cosinekitty.astronomy.Aberration
@@ -13,23 +14,24 @@ import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.searchAltitude
 import io.github.cosinekitty.astronomy.searchRiseSet
+import net.osmand.plus.R
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
 object AstroUtils {
 
-	fun bodyName(b: Body) = when (b) {
-		Body.Sun -> "Sun"
-		Body.Moon -> "Moon"
-		Body.Mercury -> "Mercury"
-		Body.Venus -> "Venus"
-		Body.Mars -> "Mars"
-		Body.Jupiter -> "Jupiter"
-		Body.Saturn -> "Saturn"
-		Body.Uranus -> "Uranus"
-		Body.Neptune -> "Neptune"
-		Body.Pluto -> "Pluto"
+	fun bodyName(ctx: Context, b: Body) = when (b) {
+		Body.Sun -> ctx.getString(R.string.astro_name_sun)
+		Body.Moon -> ctx.getString(R.string.astro_name_moon)
+		Body.Mercury -> ctx.getString(R.string.astro_name_mercury)
+		Body.Venus -> ctx.getString(R.string.astro_name_venus)
+		Body.Mars -> ctx.getString(R.string.astro_name_mars)
+		Body.Jupiter -> ctx.getString(R.string.astro_name_jupiter)
+		Body.Saturn -> ctx.getString(R.string.astro_name_saturn)
+		Body.Uranus -> ctx.getString(R.string.astro_name_uranus)
+		Body.Neptune -> ctx.getString(R.string.astro_name_neptune)
+		Body.Pluto -> ctx.getString(R.string.astro_name_pluto)
 		else -> b.toString()
 	}
 

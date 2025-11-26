@@ -50,7 +50,7 @@ class StarAltitudeChartView @JvmOverloads constructor(
 	private var cachedModel: Model? = null
 
 	var showTwilightBands: Boolean = true
-		set(value) { field = value; triggerAsyncRebuild() }
+		set(value) { field = value; invalidate() }
 	var sampleMinutes: Int = 20
 		set(value) { field = value; triggerAsyncRebuild() }
 	var yMin: Double = -30.0
@@ -175,7 +175,7 @@ class StarAltitudeChartView @JvmOverloads constructor(
 			SeriesPath(
 				body,
 				path,
-				AstroUtils.bodyName(body),
+				AstroUtils.bodyName(context, body),
 				rise?.toLocalTime()?.format(timeFmt) ?: "—",
 				set?.toLocalTime()?.format(timeFmt) ?: "—"
 			)

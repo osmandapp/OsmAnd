@@ -93,12 +93,12 @@ class CelestialPathView @JvmOverloads constructor(
 	)
 
 	private val defaultPlanets = visibleBodies.map {
-		CelestialEntry.Planet(it, AstroUtils.bodyColor(it))
+		CelestialEntry.Planet(context, it, AstroUtils.bodyColor(it))
 	}
 
 	sealed class CelestialEntry(val name: String, val color: Int, val drawPath: Boolean = true) {
-		class Planet(val body: Body, color: Int, drawPath: Boolean = true)
-			: CelestialEntry(AstroUtils.bodyName(body), color, drawPath)
+		class Planet(val ctx: Context, val body: Body, color: Int, drawPath: Boolean = true)
+			: CelestialEntry(AstroUtils.bodyName(ctx, body), color, drawPath)
 		class Fixed(
 			name: String,
 			val raHours: Double,
