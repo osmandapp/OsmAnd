@@ -689,7 +689,7 @@ public class SearchCoreFactory {
 										cityResult.localeName = boundary.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 										cityResult.otherNames = boundary.getOtherNames(true);
 										// for another city require exact matching
-										if (matchAddressName(phrase, res, cityResult,  true)) {
+										if (matchAddressName(phrase, cityResult, res, true)) {
 											cityResult.object = boundary; 
 											cityResult.location = boundary.getLocation();
 											newParentSearchResult = cityResult;
