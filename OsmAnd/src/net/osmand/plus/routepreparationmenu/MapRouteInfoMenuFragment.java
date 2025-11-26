@@ -203,18 +203,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	}
 
 	@Override
-	protected void updateMenuState(int currentMenuState, int newMenuState) {
-		if (app.getRoutingHelper().isRouteCalculated()) {
-			ApplicationMode mV = app.getRoutingHelper().getAppMode();
-			if (newMenuState == MenuState.HEADER_ONLY && currentMenuState == MenuState.HALF_SCREEN) {
-				app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.setModeValue(mV, true);
-			} else if (currentMenuState == MenuState.HEADER_ONLY && newMenuState == MenuState.HALF_SCREEN) {
-				app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.resetModeToDefault(mV);
-			}
-		}
-	}
-
-	@Override
 	protected void setViewY(int y, boolean animated, boolean adjustMapPos) {
 		super.setViewY(y, animated, adjustMapPos);
 		updateToolbar();
