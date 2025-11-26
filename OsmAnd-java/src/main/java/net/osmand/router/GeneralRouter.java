@@ -812,6 +812,9 @@ public class GeneralRouter implements VehicleRouter {
 		public boolean getDefaultBoolean() {
 			return defaultBoolean;
 		}
+		public double getDefaultNumeric() {
+			return defaultNumeric;
+		}
 		public String getDefaultString() {
 			return type == RoutingParameterType.NUMERIC ? String.format(Locale.US, "%.2f", defaultNumeric) : "-";
 		}
