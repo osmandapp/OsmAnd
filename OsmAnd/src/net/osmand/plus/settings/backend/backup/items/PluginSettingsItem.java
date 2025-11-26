@@ -110,7 +110,6 @@ public class PluginSettingsItem extends SettingsItem {
 
 	@Override
 	public void delete() {
-		super.delete();
 		PluginsHelper.removeCustomPlugin(app, plugin);
 		for (SettingsItem item : pluginDependentItems) {
 			item.delete();

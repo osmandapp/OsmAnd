@@ -118,6 +118,14 @@ public class QuickActionsSettingsItem extends SettingsItem {
 		mapButtonsHelper.addQuickActionButtonState(buttonState);
 	}
 
+	@Override
+	public void delete() {
+		QuickActionButtonState state = mapButtonsHelper.getActionButtonStateById(stateBean.id);
+		if (state != null) {
+			mapButtonsHelper.removeQuickActionButtonState(state);
+		}
+	}
+
 	private void renameButton() {
 		stateBean.id = mapButtonsHelper.createNewButtonStateId();
 		stateBean.name = mapButtonsHelper.generateUniqueButtonName(stateBean.name);

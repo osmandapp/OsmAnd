@@ -194,7 +194,6 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 
 	@Override
 	public void delete() {
-		super.delete();
 		ApplicationMode.deleteCustomModes(Collections.singletonList(appMode), app);
 	}
 
