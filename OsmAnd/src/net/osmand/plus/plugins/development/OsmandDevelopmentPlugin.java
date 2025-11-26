@@ -95,6 +95,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private final StateChangedListener<Boolean> debugRenderingInfoListener;
 	private final StateChangedListener<Boolean> msaaListener;
 	private final StateChangedListener<Boolean> sphericalListener;
+	public static final String ZOOM_TILT_ANIMATION_LOG_TAG = "zoom_tilt_animation_log_tag";
 
 	private static final Log LOG_termal = PlatformUtil.getLog("ThermalState");
 
