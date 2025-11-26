@@ -668,7 +668,7 @@ public class SearchCoreFactory {
 								cityResult.file = res.file;
 								// include parent search result even if it is empty
 								// for street-city don't require exact matching
-								boolean match = matchAddressName(phrase, res, cityResult,  true);
+								boolean match = matchAddressName(phrase, cityResult, res, true);
 								
 								if (match) {
 									newParentSearchResult = cityResult;
