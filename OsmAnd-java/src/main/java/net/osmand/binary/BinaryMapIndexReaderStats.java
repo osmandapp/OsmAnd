@@ -37,6 +37,7 @@ public class BinaryMapIndexReaderStats {
 		public long totalTime = 0;
 		public long totalBytes = 0;
 		public Map<String, Map<String, Map<String, Integer>>> wordsByApis = new HashMap<>();
+		private int prevResultsSize = 0;
 		Map<BinaryMapIndexReaderApiName, StatByAPI> byApis = new HashMap<>();
 
 		public long beginSearchStats(BinaryMapIndexReaderApiName api, BinaryIndexPart part, CodedInputStream codedIS, String extraInfo) {
@@ -46,12 +47,17 @@ public class BinaryMapIndexReaderStats {
 		}
 
 		public void addWordStats(String api, String word, List<SearchResult> requestResults) {
+			if (requestResults.isEmpty())
+				return;
+
             Map<String, Map<String, Integer>> wordsCounts = wordsByApis.computeIfAbsent(api, k -> new HashMap<>());
             Map<String, Integer> mapByType = wordsCounts.computeIfAbsent(word, k -> new HashMap<>());
-            for (SearchResult r : requestResults) {
-                String typeName = (r != null && r.objectType != null) ? r.objectType.name() : "Unknown";
-	            mapByType.compute(typeName, (k, cnt) -> cnt == null ? 1 : cnt + 1);
-            }
+			if (prevResultsSize < requestResults.size())
+	            for (SearchResult r : requestResults.subList(prevResultsSize, requestResults.size())) {
+	                String typeName = (r != null && r.objectType != null) ? r.objectType.name() : "Unknown";
+		            mapByType.compute(typeName, (k, cnt) -> cnt == null ? 1 : cnt + 1);
+	            }
+			prevResultsSize = requestResults.size();
         }
 
 		public void endSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryIndexPart part,
