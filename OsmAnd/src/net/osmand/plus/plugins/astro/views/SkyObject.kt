@@ -21,7 +21,7 @@ data class SkyObject(
 	var distAu: Double = 0.0,
 
 	// Visibility flag
-	var isVisible: Boolean = true,
+	var isVisible: Boolean = false,
 
 	// Animation state helpers
 	var startAzimuth: Double = 0.0,

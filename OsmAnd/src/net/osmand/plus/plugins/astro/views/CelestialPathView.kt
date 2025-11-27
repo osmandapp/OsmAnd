@@ -45,7 +45,7 @@ class CelestialPathView @JvmOverloads constructor(
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
 	defStyleRes: Int = 0
-) : BaseChartView(context, attrs, defStyleAttr, defStyleRes) {
+) : StarChartView(context, attrs, defStyleAttr, defStyleRes) {
 
 	private var moment: ZonedDateTime? = null
 
@@ -335,7 +335,7 @@ class CelestialPathView @JvmOverloads constructor(
 						if (topo.altitude > 0) {
 							val p = azAltToPoint(topo.azimuth, topo.altitude, m.actualRadius)
 							markerPaint.color = entry.color
-							drawCircle(p.x, p.y, dp(3.5f) / scale, markerPaint)
+							drawCircle(p.x, p.y, dp(4.5f) / scale, markerPaint)
 							drawText(entry.name, p.x, p.y - dp(10f) / scale, smallPaint)
 						}
 					}

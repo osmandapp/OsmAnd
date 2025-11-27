@@ -166,6 +166,7 @@ class StarView @JvmOverloads constructor(
 	}
 
 	fun updateVisibility() {
+		recalculatePositions(currentTime, updateTargets = false)
 		invalidate()
 	}
 

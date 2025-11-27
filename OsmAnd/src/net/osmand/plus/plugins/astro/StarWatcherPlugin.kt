@@ -12,6 +12,7 @@ import net.osmand.plus.plugins.astro.widgets.StarChartWidgetState
 import net.osmand.plus.plugins.astro.widgets.SkyChartsWidget
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper
+import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator
 import net.osmand.plus.views.mapwidgets.WidgetType
@@ -22,6 +23,13 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
 
 class StarWatcherPlugin(app: OsmandApplication) : OsmandPlugin(app) {
+
+	companion object {
+		private const val SETTINGS_PREFERENCE_ID = "star_watcher_plugin_settings"
+	}
+
+	private val _swSettings by lazy { StarWatcherSettings(getSettingsPref()) }
+	val swSettings: StarWatcherSettings get() = _swSettings
 
 	init {
 		val noAppMode = arrayOf<ApplicationMode?>()
@@ -75,20 +83,10 @@ class StarWatcherPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 		}
 	}
 
-	override fun registerOptionsMenuItems(mapActivity: MapActivity, helper: ContextMenuAdapter) {
-		if (isActive) {
-			helper.addItem(
-				ContextMenuItem(OsmAndCustomizationConstants.DRAWER_STAR_MAP_ID)
-					.setTitleId(R.string.show_star_map, mapActivity)
-					.setIcon(R.drawable.ic_action_favorite)
-					.setOrder(18)
-					.setListener { uiAdapter: OnDataChangeUiAdapter?, view: View?, item: ContextMenuItem?, isChecked: Boolean ->
-						app.logEvent("skymapOpen")
-						showSkymap(mapActivity)
-						true
-					}
-			)
-		}
+	private fun getSettingsPref(): CommonPreference<String> {
+		val pref = registerStringPreference(SETTINGS_PREFERENCE_ID, "")
+		pref.makeProfile().makeShared()
+		return pref
 	}
 
 	fun showSkymap(mapActivity: MapActivity) {

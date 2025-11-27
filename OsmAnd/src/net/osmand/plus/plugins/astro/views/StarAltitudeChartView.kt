@@ -11,7 +11,6 @@ import android.graphics.Typeface
 import android.text.TextPaint
 import android.util.AttributeSet
 import androidx.core.graphics.toColorInt
-import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Observer
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
@@ -27,7 +26,7 @@ class StarAltitudeChartView @JvmOverloads constructor(
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
 	defStyleRes: Int = 0
-) : BaseChartView(context, attrs, defStyleAttr, defStyleRes) {
+) : StarChartView(context, attrs, defStyleAttr, defStyleRes) {
 
 	private data class Model(
 		val title: String,

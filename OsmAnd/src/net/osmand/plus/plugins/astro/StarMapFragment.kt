@@ -16,9 +16,12 @@ import io.github.cosinekitty.astronomy.Direction
 import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.searchRiseSet
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenDialogFragment
+import net.osmand.plus.plugins.PluginsHelper
+import net.osmand.plus.plugins.astro.StarWatcherSettings.SkyObjectConfig
 import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
 import net.osmand.plus.plugins.astro.views.SkyObject
 import net.osmand.plus.plugins.astro.views.StarView
@@ -40,6 +43,9 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 
 	private lateinit var viewModel: StarMapViewModel
 	private var selectedObject: SkyObject? = null
+	private val swSettings: StarWatcherSettings by lazy {
+		PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
+	}
 
 	companion object {
 		val TAG: String = StarMapFragment::class.java.simpleName
@@ -69,7 +75,8 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 		val view = themedInflater.inflate(R.layout.fragment_star_map, container, false)
 
-		viewModel = ViewModelProvider(this)[StarMapViewModel::class.java]
+		val app = requireActivity().application as OsmandApplication
+		viewModel = ViewModelProvider(this, StarMapViewModel.Factory(app, swSettings))[StarMapViewModel::class.java]
 
 		starView = view.findViewById(R.id.star_view)
 		timeSelectionView = view.findViewById(R.id.time_selection_view)
@@ -93,6 +100,13 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 		// Set initial location
 		val loc = app.osmandMap.mapView.currentRotatedTileBox.centerLatLon
 		starView.setObserverLocation(loc.latitude, loc.longitude, 0.0)
+
+		// Apply initial settings to View (Grids only, objects handled by VM)
+		swSettings.getStarMapConfig()?.let { config ->
+			starView.showAzimuthalGrid = config.showAzimuthalGrid
+			starView.showEquatorialGrid = config.showEquatorialGrid
+			starView.showEclipticLine = config.showEclipticLine
+		}
 
 		return view
 	}
@@ -160,7 +174,7 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 			details += "\n${getString(R.string.distance)}: %.3f AU".format(obj.distAu)
 		}
 
-		// Rise / Set calculation (Performed in Fragment or could be moved to VM)
+		// Rise / Set calculation
 		val observer = starView.observer
 		val currentTime = starView.currentTime
 
@@ -196,10 +210,13 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 	}
 
 	private fun showFilterDialog() {
-		// This logic relies on the View's internal state, which is acceptable for view-specific toggles
-		// ideally, this state would also be in the ViewModel
 		val toggleItems = arrayOf(getString(R.string.azimuthal_grid), getString(R.string.equatorial_grid), getString(R.string.ecliptic_line))
-		val toggleChecked = booleanArrayOf(starView.showAzimuthalGrid, starView.showEquatorialGrid, starView.showEclipticLine)
+
+		var tempAzimuthal = starView.showAzimuthalGrid
+		var tempEquatorial = starView.showEquatorialGrid
+		var tempEcliptic = starView.showEclipticLine
+
+		val toggleChecked = booleanArrayOf(tempAzimuthal, tempEquatorial, tempEcliptic)
 
 		val currentObjects = viewModel.skyObjects.value ?: emptyList()
 		val objectNames = currentObjects.map { it.name }.toTypedArray()
@@ -213,19 +230,35 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 			.setMultiChoiceItems(allItems, allChecked) { _, which, isChecked ->
 				if (which < toggleItems.size) {
 					when (which) {
-						0 -> starView.showAzimuthalGrid = isChecked
-						1 -> starView.showEquatorialGrid = isChecked
-						2 -> starView.showEclipticLine = isChecked
+						0 -> tempAzimuthal = isChecked
+						1 -> tempEquatorial = isChecked
+						2 -> tempEcliptic = isChecked
 					}
 				} else {
 					val objIndex = which - toggleItems.size
-					if (objIndex in currentObjects.indices) {
-						currentObjects[objIndex].isVisible = isChecked
+					if (objIndex in objectChecked.indices) {
+						objectChecked[objIndex] = isChecked
 					}
 				}
 			}
 			.setPositiveButton(R.string.shared_string_apply) { _, _ ->
+				starView.showAzimuthalGrid = tempAzimuthal
+				starView.showEquatorialGrid = tempEquatorial
+				starView.showEclipticLine = tempEcliptic
+
+				currentObjects.forEachIndexed { index, skyObject ->
+					skyObject.isVisible = objectChecked[index]
+				}
 				starView.updateVisibility()
+
+				val itemsConfig = currentObjects.map { SkyObjectConfig(it.id, it.isVisible) }
+				val config = StarWatcherSettings.StarMapConfig(
+					showAzimuthalGrid = tempAzimuthal,
+					showEquatorialGrid = tempEquatorial,
+					showEclipticLine = tempEcliptic,
+					items = itemsConfig
+				)
+				swSettings.setStarMapConfig(config)
 			}
 			.setNegativeButton(R.string.shared_string_cancel, null)
 			.show()

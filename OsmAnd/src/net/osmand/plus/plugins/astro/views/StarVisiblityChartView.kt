@@ -27,7 +27,7 @@ class StarVisiblityChartView @JvmOverloads constructor(
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
 	defStyleRes: Int = 0
-) : BaseChartView(context, attrs, defStyleAttr, defStyleRes) {
+) : StarChartView(context, attrs, defStyleAttr, defStyleRes) {
 
 	private data class Model(
 		val title: String,

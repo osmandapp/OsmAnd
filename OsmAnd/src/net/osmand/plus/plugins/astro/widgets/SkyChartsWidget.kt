@@ -1,11 +1,13 @@
 package net.osmand.plus.plugins.astro.widgets
 
 import android.view.View
-import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.view.isVisible
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astro.StarWatcherPlugin
+import net.osmand.plus.plugins.astro.views.StarChartView
 import net.osmand.plus.plugins.astro.views.CelestialPathView
 import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 import net.osmand.plus.plugins.astro.views.StarVisiblityChartView
@@ -25,13 +27,19 @@ class SkyChartsWidget(mapActivity: MapActivity, val starChartWidgetState: StarCh
 	private var celestialPathView: CelestialPathView = view.findViewById(R.id.celestial_path_view)
 
 	init {
-		view.findViewById<AppCompatButton>(R.id.enter_3d_button).apply {
+		view.findViewById<AppCompatImageView>(R.id.enter_3d_button).apply {
 			setOnClickListener {
 				val plugin = PluginsHelper.getActivePlugin(StarWatcherPlugin::class.java)
 				plugin?.showSkymap(super.mapActivity)
 			}
 		}
-		view.findViewById<AppCompatButton>(R.id.switch_chart_button).apply {
+		view.findViewById<AppCompatImageView>(R.id.settings_button).apply {
+			setOnClickListener {
+				getVisibleView()?.showFilterDialog(context)
+				updateInfo(null)
+			}
+		}
+		view.findViewById<AppCompatImageView>(R.id.switch_chart_button).apply {
 			setOnClickListener {
 				widgetState.changeToNextState()
 				updateInfo(null)
@@ -50,6 +58,13 @@ class SkyChartsWidget(mapActivity: MapActivity, val starChartWidgetState: StarCh
 	) {
 		super.copySettingsFromMode(sourceAppMode, appMode, customId)
 		widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId)
+	}
+
+	private fun getVisibleView(): StarChartView? {
+		if (starVisiblityView.isVisible) return starVisiblityView
+		if (starAltitudeView.isVisible) return starAltitudeView
+		if (celestialPathView.isVisible) return celestialPathView
+		return null
 	}
 
 	override fun updateInfo(drawSettings: DrawSettings?) {

@@ -14,26 +14,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
-		<androidx.appcompat.widget.AppCompatButton
-			android:id="@+id/enter_3d_button"
-			style="@style/DashboardGeneralButton"
-			android:layout_gravity="start|top"
-			android:gravity="center"
-			android:layout_marginStart="0dp"
-			android:text="3D"
-			android:textAllCaps="true"
-			app:typefaceWeight="medium" />
-
-		<androidx.appcompat.widget.AppCompatButton
-			android:id="@+id/switch_chart_button"
-			style="@style/DashboardGeneralButton"
-			android:layout_gravity="end|top"
-			android:gravity="center"
-			android:layout_marginEnd="0dp"
-			android:text="@string/shared_string_switch"
-			android:textAllCaps="true"
-			app:typefaceWeight="medium" />
-
 		<net.osmand.plus.plugins.astro.views.CelestialPathView
 			android:id="@+id/celestial_path_view"
 			android:layout_width="match_parent"
@@ -51,6 +31,37 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:visibility="gone"/>
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/enter_3d_button"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="start|top"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:layout_marginVertical="@dimen/content_padding_small"
+			android:scaleType="center"
+			android:tint="?attr/icon_color_active"
+			app:srcCompat="@drawable/ic_action_world_globe" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/settings_button"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="end|top"
+			android:layout_marginHorizontal="56dp"
+			android:layout_marginVertical="@dimen/content_padding_small"
+			android:tint="?attr/icon_color_active"
+			app:srcCompat="@drawable/ic_action_settings" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/switch_chart_button"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="end|top"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:layout_marginVertical="@dimen/content_padding_small"
+			android:tint="?attr/icon_color_active"
+			app:srcCompat="@drawable/ic_action_layers" />
 
 	</FrameLayout>
 

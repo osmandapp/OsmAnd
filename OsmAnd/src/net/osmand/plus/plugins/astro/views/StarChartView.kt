@@ -2,10 +2,20 @@ package net.osmand.plus.plugins.astro.views
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.toColorInt
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Observer
 import kotlinx.coroutines.CoroutineScope
@@ -16,25 +26,37 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.osmand.plus.R
+import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astro.AstroDataProvider
 import net.osmand.plus.plugins.astro.AstroUtils
+import net.osmand.plus.plugins.astro.StarWatcherPlugin
+import net.osmand.plus.plugins.astro.StarWatcherSettings
 import net.osmand.plus.utils.AndroidUtils
 import java.time.Duration
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.ZonedDateTime
+import java.util.Collections
 import kotlin.math.abs
+import androidx.core.content.withStyledAttributes
 
-abstract class BaseChartView @JvmOverloads constructor(
+private const val CHECKBOX_ID = 101
+private const val TEXT_VIEW_ID = 102
+
+abstract class StarChartView @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
 	defStyleRes: Int = 0
 ) : View(context, attrs, defStyleAttr, defStyleRes) {
 
-	protected val skyObjects: List<SkyObject> by lazy {
-		AstroDataProvider.getInitialSkyObjects(context)
+	protected val skyObjects: MutableList<SkyObject> by lazy {
+		AstroDataProvider.getInitialSkyObjects(context).toMutableList()
 	}
+
+	private val swSettings: StarWatcherSettings?
+		get() = PluginsHelper.getActivePlugin(StarWatcherPlugin::class.java)?.swSettings
 
 	// Coroutine scope for background calculations
 	protected val viewScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
@@ -52,8 +74,165 @@ abstract class BaseChartView @JvmOverloads constructor(
 	protected val twiNaut by lazy { Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#CC3C7AA6".toColorInt() } }
 	protected val twiCivil by lazy { Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#CC5BBBF0".toColorInt() } }
 
-	// Helper enum for Twilight Bands
 	protected enum class Band { DAY, CIVIL, NAUT, ASTRO, NIGHT }
+
+	init {
+		applySettings()
+	}
+
+	private fun applySettings() {
+		val config = swSettings?.getStarChartConfig() ?: return
+		val items = config.items
+
+		val itemMap = items.associateBy { it.id }
+		val indexMap = items.withIndex().associate { it.value.id to it.index }
+
+		var changed = false
+
+		// 1. Apply Visibility
+		skyObjects.forEach { obj ->
+			val itemConfig = itemMap[obj.id]
+			val visible = itemConfig?.isVisible ?: false
+			if (obj.isVisible != visible) {
+				obj.isVisible = visible
+				changed = true
+			}
+		}
+
+		// 2. Apply Order
+		val oldOrder = skyObjects.map { it.id }
+		skyObjects.sortBy { indexMap[it.id] ?: Int.MAX_VALUE }
+		val newOrder = skyObjects.map { it.id }
+
+		if (oldOrder != newOrder) changed = true
+		if (changed) triggerAsyncRebuild()
+	}
+
+	fun showFilterDialog(context: Context) {
+		// Create a mutable copy for the dialog
+		val dialogObjects = ArrayList(skyObjects)
+
+		val recyclerView = RecyclerView(context)
+		recyclerView.layoutManager = LinearLayoutManager(context)
+
+		val adapter = FilterAdapter(dialogObjects)
+		recyclerView.adapter = adapter
+
+		// Setup Drag and Drop
+		val callback = object : ItemTouchHelper.SimpleCallback(
+			ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0
+		) {
+			override fun onMove(
+				recyclerView: RecyclerView,
+				viewHolder: RecyclerView.ViewHolder,
+				target: RecyclerView.ViewHolder
+			): Boolean {
+				val fromPos = viewHolder.adapterPosition
+				val toPos = target.adapterPosition
+				Collections.swap(dialogObjects, fromPos, toPos)
+				adapter.notifyItemMoved(fromPos, toPos)
+				return true
+			}
+
+			override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+				// No swipe actions
+			}
+		}
+		val itemTouchHelper = ItemTouchHelper(callback)
+		itemTouchHelper.attachToRecyclerView(recyclerView)
+
+		AlertDialog.Builder(context)
+			.setTitle(R.string.visible_layers_and_objects)
+			.setView(recyclerView)
+			.setPositiveButton(R.string.shared_string_apply) { _, _ ->
+				// 1. Update main list order and visibility
+				skyObjects.clear()
+				skyObjects.addAll(dialogObjects)
+
+				// 2. Trigger rebuild
+				triggerAsyncRebuild()
+
+				// 3. Save to Settings
+				// Create list of SkyObjectConfig based on current order and visibility
+				val itemsConfig = skyObjects.map {
+					StarWatcherSettings.SkyObjectConfig(it.id, it.isVisible)
+				}
+
+				val config = StarWatcherSettings.BaseChartConfig(
+					items = itemsConfig
+				)
+				swSettings?.setStarChartConfig(config)
+			}
+			.setNegativeButton(R.string.shared_string_cancel, null)
+			.show()
+	}
+
+	// Internal Adapter for the Filter/Sort Dialog
+	private class FilterAdapter(private val items: List<SkyObject>) :
+		RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
+
+		class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+			val checkBox: CheckBox = view.findViewById(CHECKBOX_ID)
+			val textView: TextView = view.findViewById(TEXT_VIEW_ID)
+		}
+
+		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+			// Programmatically creating the item view to avoid XML dependency
+			val context = parent.context
+			val layout = LinearLayout(context).apply {
+				orientation = LinearLayout.HORIZONTAL
+				layoutParams = ViewGroup.LayoutParams(
+					ViewGroup.LayoutParams.MATCH_PARENT,
+					ViewGroup.LayoutParams.WRAP_CONTENT
+				)
+				gravity = Gravity.CENTER_VERTICAL
+
+				// Add padding
+				val p = AndroidUtils.dpToPx(context, 16f)
+				setPadding(p, p / 2, p, p / 2)
+
+				// Add ripple effect for feedback
+				val attrs = intArrayOf(android.R.attr.selectableItemBackground)
+				context.withStyledAttributes(null, attrs) { background = getDrawable(0) }
+			}
+
+			val checkBox = CheckBox(context).apply { id = CHECKBOX_ID }
+			layout.addView(checkBox)
+
+			val textView = TextView(context).apply {
+				id = TEXT_VIEW_ID
+				textSize = 16f
+				setTextColor(Color.BLACK) // Or use theme color
+				val params = LinearLayout.LayoutParams(
+					0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f
+				)
+				params.marginStart = AndroidUtils.dpToPx(context, 16f)
+				layoutParams = params
+			}
+			layout.addView(textView)
+
+			return ViewHolder(layout)
+		}
+
+		override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+			val item = items[position]
+			holder.textView.text = item.name
+			// Remove listener before setting state to avoid loop
+			holder.checkBox.setOnCheckedChangeListener(null)
+			holder.checkBox.isChecked = item.isVisible
+
+			holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
+				item.isVisible = isChecked
+			}
+
+			// Clicking the text should also toggle checkbox
+			holder.itemView.setOnClickListener {
+				holder.checkBox.toggle()
+			}
+		}
+
+		override fun getItemCount() = items.size
+	}
 
 	/**
 	 * Implementation must compute the model on a background thread.
