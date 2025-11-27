@@ -21,6 +21,7 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.plugins.PluginsHelper
+import net.osmand.plus.plugins.astro.StarObjectsViewModel.StarObjectsViewType
 import net.osmand.plus.plugins.astro.StarWatcherSettings.SkyObjectConfig
 import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
 import net.osmand.plus.plugins.astro.views.SkyObject
@@ -41,7 +42,7 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 	private lateinit var sheetDetails: TextView
 	private lateinit var resetTimeButton: Button
 
-	private lateinit var viewModel: StarMapViewModel
+	private lateinit var viewModel: StarObjectsViewModel
 	private var selectedObject: SkyObject? = null
 	private val swSettings: StarWatcherSettings by lazy {
 		PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
@@ -76,7 +77,8 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 		val view = themedInflater.inflate(R.layout.fragment_star_map, container, false)
 
 		val app = requireActivity().application as OsmandApplication
-		viewModel = ViewModelProvider(this, StarMapViewModel.Factory(app, swSettings))[StarMapViewModel::class.java]
+		viewModel = ViewModelProvider(
+			this, StarObjectsViewModel.Factory(app, swSettings, StarObjectsViewType.MAP))[StarObjectsViewModel::class.java]
 
 		starView = view.findViewById(R.id.star_view)
 		timeSelectionView = view.findViewById(R.id.time_selection_view)

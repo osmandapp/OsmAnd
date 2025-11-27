@@ -14,10 +14,13 @@ import net.osmand.plus.plugins.astro.views.SkyObject
 import java.util.Calendar
 import java.util.TimeZone
 
-class StarMapViewModel(
+class StarObjectsViewModel(
 	private val app: Application,
-	private val settings: StarWatcherSettings
+	private val settings: StarWatcherSettings,
+	val viewType: StarObjectsViewType
 ) : AndroidViewModel(app) {
+
+	enum class StarObjectsViewType { MAP, CHART }
 
 	private val _skyObjects = MutableLiveData<List<SkyObject>>()
 	val skyObjects: LiveData<List<SkyObject>> = _skyObjects
@@ -34,11 +37,11 @@ class StarMapViewModel(
 		resetTime()
 	}
 
-	private fun loadData() {
+	fun loadData() {
 		viewModelScope.launch(Dispatchers.Default) {
 			val objects = AstroDataProvider.getInitialSkyObjects(app).toMutableList()
-			val config = settings.getStarMapConfig()
-			val items = config.items
+			val items = if (viewType == StarObjectsViewType.MAP)
+				settings.getStarMapConfig().items else settings.getStarChartConfig().items
 			// Create lookup map for config items
 			val itemMap = items.associateBy { it.id }
 			val indexMap = items.withIndex().associate { it.value.id to it.index }
@@ -78,11 +81,12 @@ class StarMapViewModel(
 
 	class Factory(
 		private val application: Application,
-		private val settings: StarWatcherSettings
+		private val settings: StarWatcherSettings,
+		private val viewType: StarObjectsViewType
 	) : ViewModelProvider.Factory {
 		@Suppress("UNCHECKED_CAST")
 		override fun <T : ViewModel> create(modelClass: Class<T>): T {
-			return StarMapViewModel(application, settings) as T
+			return StarObjectsViewModel(application, settings, viewType) as T
 		}
 	}
 }

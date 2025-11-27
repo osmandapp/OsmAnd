@@ -201,7 +201,7 @@ class StarAltitudeChartView @JvmOverloads constructor(
 		val chartRight = width - rightPad
 		val chartBottom = height - bottomPad
 
-		canvas.drawText(m.title, width / 2f, dp(25f), labelPaint)
+		canvas.drawText(m.title, width / 2f, dp(31f), labelPaint)
 
 		drawTimeAxis(canvas, height, m.startLocal, m.endLocal, chartLeft, chartRight)
 

@@ -301,7 +301,8 @@ class CelestialPathView @JvmOverloads constructor(
 		canvas.drawColor(bgPaint.color)
 		updateMatrix()
 
-		canvas.drawText(context.getString(R.string.ltr_or_rtl_combine_via_dash, context.getString(R.string.celestial_paths_name), config.date), m.cx, dp(25f), titlePaint)
+		canvas.drawText(context.getString(R.string.ltr_or_rtl_combine_via_dash,
+			context.getString(R.string.celestial_paths_name), config.date), m.cx, dp(31f), titlePaint)
 
 		canvas.withMatrix(viewMatrix) {
 			withSave {

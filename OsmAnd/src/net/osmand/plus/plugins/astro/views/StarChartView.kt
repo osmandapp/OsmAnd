@@ -12,6 +12,7 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,8 +29,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.osmand.plus.R
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.astro.AstroDataProvider
 import net.osmand.plus.plugins.astro.AstroUtils
+import net.osmand.plus.plugins.astro.StarObjectsViewModel
 import net.osmand.plus.plugins.astro.StarWatcherPlugin
 import net.osmand.plus.plugins.astro.StarWatcherSettings
 import net.osmand.plus.utils.AndroidUtils
@@ -39,7 +40,6 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.util.Collections
 import kotlin.math.abs
-import androidx.core.content.withStyledAttributes
 
 private const val CHECKBOX_ID = 101
 private const val TEXT_VIEW_ID = 102
@@ -51,12 +51,7 @@ abstract class StarChartView @JvmOverloads constructor(
 	defStyleRes: Int = 0
 ) : View(context, attrs, defStyleAttr, defStyleRes) {
 
-	protected val skyObjects: MutableList<SkyObject> by lazy {
-		AstroDataProvider.getInitialSkyObjects(context).toMutableList()
-	}
-
-	private val swSettings: StarWatcherSettings?
-		get() = PluginsHelper.getActivePlugin(StarWatcherPlugin::class.java)?.swSettings
+	protected var skyObjects: List<SkyObject> = emptyList()
 
 	// Coroutine scope for background calculations
 	protected val viewScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
@@ -76,95 +71,63 @@ abstract class StarChartView @JvmOverloads constructor(
 
 	protected enum class Band { DAY, CIVIL, NAUT, ASTRO, NIGHT }
 
-	init {
-		applySettings()
-	}
+	companion object {
+		fun showFilterDialog(context: Context, viewModel: StarObjectsViewModel, onSettingsChanged: () -> Unit) {
+			val skyObjects = viewModel.skyObjects.value ?: return
+			val dialogObjects = ArrayList(skyObjects)
 
-	private fun applySettings() {
-		val config = swSettings?.getStarChartConfig() ?: return
-		val items = config.items
+			val recyclerView = RecyclerView(context)
+			recyclerView.layoutManager = LinearLayoutManager(context)
 
-		val itemMap = items.associateBy { it.id }
-		val indexMap = items.withIndex().associate { it.value.id to it.index }
+			val adapter = FilterAdapter(dialogObjects)
+			recyclerView.adapter = adapter
 
-		var changed = false
-
-		// 1. Apply Visibility
-		skyObjects.forEach { obj ->
-			val itemConfig = itemMap[obj.id]
-			val visible = itemConfig?.isVisible ?: false
-			if (obj.isVisible != visible) {
-				obj.isVisible = visible
-				changed = true
-			}
-		}
-
-		// 2. Apply Order
-		val oldOrder = skyObjects.map { it.id }
-		skyObjects.sortBy { indexMap[it.id] ?: Int.MAX_VALUE }
-		val newOrder = skyObjects.map { it.id }
-
-		if (oldOrder != newOrder) changed = true
-		if (changed) triggerAsyncRebuild()
-	}
-
-	fun showFilterDialog(context: Context) {
-		// Create a mutable copy for the dialog
-		val dialogObjects = ArrayList(skyObjects)
-
-		val recyclerView = RecyclerView(context)
-		recyclerView.layoutManager = LinearLayoutManager(context)
-
-		val adapter = FilterAdapter(dialogObjects)
-		recyclerView.adapter = adapter
-
-		// Setup Drag and Drop
-		val callback = object : ItemTouchHelper.SimpleCallback(
-			ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0
-		) {
-			override fun onMove(
-				recyclerView: RecyclerView,
-				viewHolder: RecyclerView.ViewHolder,
-				target: RecyclerView.ViewHolder
-			): Boolean {
-				val fromPos = viewHolder.adapterPosition
-				val toPos = target.adapterPosition
-				Collections.swap(dialogObjects, fromPos, toPos)
-				adapter.notifyItemMoved(fromPos, toPos)
-				return true
-			}
-
-			override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-				// No swipe actions
-			}
-		}
-		val itemTouchHelper = ItemTouchHelper(callback)
-		itemTouchHelper.attachToRecyclerView(recyclerView)
-
-		AlertDialog.Builder(context)
-			.setTitle(R.string.visible_layers_and_objects)
-			.setView(recyclerView)
-			.setPositiveButton(R.string.shared_string_apply) { _, _ ->
-				// 1. Update main list order and visibility
-				skyObjects.clear()
-				skyObjects.addAll(dialogObjects)
-
-				// 2. Trigger rebuild
-				triggerAsyncRebuild()
-
-				// 3. Save to Settings
-				// Create list of SkyObjectConfig based on current order and visibility
-				val itemsConfig = skyObjects.map {
-					StarWatcherSettings.SkyObjectConfig(it.id, it.isVisible)
+			// Setup Drag and Drop
+			val callback = object : ItemTouchHelper.SimpleCallback(
+				ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0
+			) {
+				override fun onMove(
+					recyclerView: RecyclerView,
+					viewHolder: RecyclerView.ViewHolder,
+					target: RecyclerView.ViewHolder
+				): Boolean {
+					val fromPos = viewHolder.adapterPosition
+					val toPos = target.adapterPosition
+					Collections.swap(dialogObjects, fromPos, toPos)
+					adapter.notifyItemMoved(fromPos, toPos)
+					return true
 				}
 
-				val config = StarWatcherSettings.BaseChartConfig(
-					items = itemsConfig
-				)
-				swSettings?.setStarChartConfig(config)
+				override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+					// No swipe actions
+				}
 			}
-			.setNegativeButton(R.string.shared_string_cancel, null)
-			.show()
+			val itemTouchHelper = ItemTouchHelper(callback)
+			itemTouchHelper.attachToRecyclerView(recyclerView)
+
+			AlertDialog.Builder(context)
+				.setTitle(R.string.visible_layers_and_objects)
+				.setView(recyclerView)
+				.setPositiveButton(R.string.shared_string_apply) { _, _ ->
+					val itemsConfig = dialogObjects.map {
+						StarWatcherSettings.SkyObjectConfig(it.id, it.isVisible)
+					}
+
+					val swSettings = PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
+					val currentConfig = swSettings.getStarChartConfig()
+					val newConfig = currentConfig.copy(items = itemsConfig)
+					swSettings.setStarChartConfig(newConfig)
+
+					onSettingsChanged()
+				}
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.show()
+		}
+	}
+
+	fun setChartObjects(objects: List<SkyObject>) {
+		this.skyObjects = objects
+		triggerAsyncRebuild()
 	}
 
 	// Internal Adapter for the Filter/Sort Dialog
