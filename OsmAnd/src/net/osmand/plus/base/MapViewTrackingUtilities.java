@@ -344,8 +344,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			if (PluginsHelper.isDevelopment()) {
 				if (autoZoom != null) {
 					android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "calculateZoomBySpeedToAnimate b=" + autoZoom.base + "; f=" + autoZoom.floatPart + ", angle " + settings.AUTO_ZOOM_3D_ANGLE.get() + "; lat " + location.getLatitude() + "; lon " + location.getLongitude());
-				} else {
-					android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "calculateZoomBySpeedToAnimate null");
 				}
 			}
 		}
@@ -374,9 +372,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		double latitude = predictedLocation != null ? predictedLocation.getLatitude() : location.getLatitude();
 		double longitude = predictedLocation != null ? predictedLocation.getLongitude() : location.getLongitude();
 		if (PluginsHelper.isDevelopment()) {
-			if (zoomParams == null) {
-				android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "setMyLocationV2 zoomParams = null, angle " + elevationAngle);
-			} else {
+			if (zoomParams != null) {
 				android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "setMyLocationV2 b=" + zoomParams.first.base + "; f=" + zoomParams.first.floatPart + ", angle " + elevationAngle);
 			}
 		}
