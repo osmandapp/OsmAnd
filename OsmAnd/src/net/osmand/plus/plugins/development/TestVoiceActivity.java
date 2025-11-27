@@ -21,6 +21,8 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.routing.data.StreetName;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
@@ -50,6 +52,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
 		LinearLayout gl = new LinearLayout(this);
+		gl.setId(R.id.root);
 		gl.setOrientation(LinearLayout.VERTICAL);
 		gl.setPadding(3, 3, 3, 3);
 
@@ -58,9 +61,11 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		tv.setPadding(0, 5, 0, 7);
 		
 		ScrollView sv = new ScrollView(this);
+		sv.setId(R.id.scroll_view);
 		gl.addView(sv, new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.MATCH_PARENT));
 		LinearLayout ll = new LinearLayout(this);
+		ll.setId(R.id.container);
 		ll.setOrientation(LinearLayout.VERTICAL);
 		sv.addView(ll, new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.MATCH_PARENT));
@@ -68,8 +73,17 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		// add buttons
 		setContentView(gl);
 		getSupportActionBar().setTitle(R.string.test_voice_prompts);
-		
+		getSupportActionBar().setElevation(0);
+
 		selectVoice(ll);
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = new InsetTargetsCollection();
+		collection.replace(InsetTarget.createScrollable(R.id.scroll_view));
+		collection.add(InsetTarget.createRootInset().build());
+		return collection;
 	}
 
 	private void selectVoice(LinearLayout ll) {
