@@ -72,7 +72,7 @@
     <string name="osm_oauth2_client_id" translatable="false">P-byvAHx1s3qB7cc8VsYikaVBUnMhimeE1VQ0rYot0k</string>
     <string name="osm_oauth2_client_secret" translatable="false">xegLrDp73nwh2IumrfhWnrRw0P615T-ZSmIhbsJD1sg</string>
 
-    <string name="star_watcher_plugin_name">Star watcher</string>
+    <string name="star_watcher_plugin_name">Star watcher (Beta)</string>
     <string name="star_watcher_plugin_description">Star charts, 3D star map</string>
     <string name="show_star_map">Show star map</string>
     <string name="star_map_3d">3D star map</string>
