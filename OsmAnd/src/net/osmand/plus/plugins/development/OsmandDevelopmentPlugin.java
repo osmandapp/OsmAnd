@@ -196,7 +196,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
+	public void registerOptionsMenuItems(@NonNull MapActivity mapActivity, @NonNull ContextMenuAdapter helper) {
 		if (Version.isDeveloperVersion(mapActivity.getApp())) {
 			Class<?> contributionVersionActivityClass = null;
 			try {

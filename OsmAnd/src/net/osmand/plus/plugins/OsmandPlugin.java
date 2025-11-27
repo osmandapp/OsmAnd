@@ -385,10 +385,10 @@ public abstract class OsmandPlugin {
 	}
 
 	protected void registerMapContextMenuActions(@NonNull MapActivity mapActivity, double latitude, double longitude,
-	                                             ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	                                             @NonNull ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 	}
 
-	protected void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
+	protected void registerOptionsMenuItems(@NonNull MapActivity mapActivity, @NonNull ContextMenuAdapter helper) {
 	}
 
 	public DashFragmentData getCardFragment() {

@@ -54,6 +54,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.skimaps.SkiMapsPlugin;
+import net.osmand.plus.plugins.astro.StarWatcherPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -120,6 +121,7 @@ public class PluginsHelper {
 		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new ExternalSensorsPlugin(app));
 		allPlugins.add(new VehicleMetricsPlugin(app));
+		allPlugins.add(new StarWatcherPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
@@ -651,7 +653,7 @@ public class PluginsHelper {
 	}
 
 	public static void registerMapContextMenu(@NonNull MapActivity mapActivity, double latitude, double longitude,
-	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	                                          @NonNull ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.registerMapContextMenuActions(mapActivity, latitude, longitude, adapter, selectedObj, configureMenu);
 		}
@@ -693,7 +695,7 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void registerOptionsMenu(MapActivity map, ContextMenuAdapter helper) {
+	public static void registerOptionsMenu(@NonNull MapActivity map, @NonNull ContextMenuAdapter helper) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.registerOptionsMenuItems(map, helper);
 		}
