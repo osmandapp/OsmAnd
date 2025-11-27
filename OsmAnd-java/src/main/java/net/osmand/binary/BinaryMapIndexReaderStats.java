@@ -1,10 +1,12 @@
 package net.osmand.binary;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.CodedOutputStream;
+import net.osmand.search.core.SearchResult;
 
 public class BinaryMapIndexReaderStats { 
 	
@@ -34,6 +36,7 @@ public class BinaryMapIndexReaderStats {
 		long lastReq = 0;
 		public long totalTime = 0;
 		public long totalBytes = 0;
+		public Map<String, Map<String, Map<String, Integer>>> wordsByApis = new HashMap<>();
 		Map<BinaryMapIndexReaderApiName, StatByAPI> byApis = new HashMap<>();
 
 		public long beginSearchStats(BinaryMapIndexReaderApiName api, BinaryIndexPart part, CodedInputStream codedIS, String extraInfo) {
@@ -41,6 +44,15 @@ public class BinaryMapIndexReaderStats {
 			codedIS.resetBytesCounter();
 			return lastReq;
 		}
+
+		public void addWordStats(String api, String word, List<SearchResult> requestResults) {
+            Map<String, Map<String, Integer>> wordsCounts = wordsByApis.computeIfAbsent(api, k -> new HashMap<>());
+            Map<String, Integer> mapByType = wordsCounts.computeIfAbsent(word, k -> new HashMap<>());
+            for (SearchResult r : requestResults) {
+                String typeName = (r != null && r.objectType != null) ? r.objectType.name() : "Unknown";
+	            mapByType.compute(typeName, (k, cnt) -> cnt == null ? 1 : cnt + 1);
+            }
+        }
 
 		public void endSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryIndexPart part,
 				CodedInputStream codedIS, String extraInfo) {
