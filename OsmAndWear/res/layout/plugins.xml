@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:background="?attr/bg_color"
+	android:orientation="vertical"
+	android:clickable="true"
+	android:focusable="true">
+
+	<include layout="@layout/simple_toolbar" />
+
+	<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+		android:id="@+id/progress_bar"
+		style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="4dp"
+		android:indeterminate="true"
+		android:visibility="invisible"
+		app:mpb_progressStyle="horizontal"
+		app:mpb_setBothDrawables="true"
+		app:mpb_useIntrinsicPadding="false"
+		tools:visibility="visible" />
+
+	<ListView
+		android:id="@+id/plugins_list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:dividerHeight="1dp"
+		android:drawSelectorOnTop="true" />
+
+</LinearLayout>
