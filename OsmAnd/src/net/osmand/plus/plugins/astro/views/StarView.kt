@@ -15,7 +15,6 @@ import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import androidx.core.graphics.toColorInt
 import androidx.core.graphics.withTranslation
 import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.EquatorEpoch
@@ -23,9 +22,10 @@ import io.github.cosinekitty.astronomy.Observer
 import io.github.cosinekitty.astronomy.Refraction
 import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.Topocentric
+import io.github.cosinekitty.astronomy.Vector
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
-import io.github.cosinekitty.astronomy.Spherical
+import io.github.cosinekitty.astronomy.rotationEclEqd
 import java.util.Calendar
 import java.util.TimeZone
 import kotlin.math.PI
@@ -113,15 +113,27 @@ class StarView @JvmOverloads constructor(
 	var observer = Observer(56.9496, 24.1052, 0.0)
 	var currentTime = Time(System.currentTimeMillis() / 1000.0 / 86400.0 + 2440587.5)
 
-	// --- Selection & Trails ---
-	private var selectedObject: SkyObject? = null
+	private val eclipticStep = 10
+	private val eclipticPointsCount = (360 / eclipticStep) + 1
+	private val eclipticAzimuths = DoubleArray(eclipticPointsCount)
+	private val eclipticAltitudes = DoubleArray(eclipticPointsCount)
+	private var lastEclipticTimeT: Double = -1.0
+	private var lastEclipticLat: Double = -999.0
+	private var lastEclipticLon: Double = -999.0
 
-	// Optimization: Pool for PathPoints to avoid allocation in loops
+	private var selectedObject: SkyObject? = null
+	private var lastPathTime: Double = -1.0
+	private var lastPathLat: Double = -999.0
+	private var lastPathLon: Double = -999.0
+	private var lastPathObject: SkyObject? = null
+
 	private class PathPoint {
 		val point = PointF()
 		var hourLabel: String? = null
 		var timeOffsetHours: Double = 0.0
 		var isValid: Boolean = false
+		var azimuth: Double = 0.0
+		var altitude: Double = 0.0
 
 		fun reset() {
 			hourLabel = null
@@ -181,7 +193,6 @@ class StarView @JvmOverloads constructor(
 						obj.azimuth = interpolateAngle(obj.startAzimuth, obj.targetAzimuth, fraction)
 						obj.altitude = obj.startAltitude + (obj.targetAltitude - obj.startAltitude) * fraction
 					}
-					selectedObject?.let { calculateCelestialPath(it) }
 					invalidate()
 				}
 				addListener(object : AnimatorListenerAdapter() {
@@ -198,7 +209,6 @@ class StarView @JvmOverloads constructor(
 				it.azimuth = it.targetAzimuth
 				it.altitude = it.targetAltitude
 			}
-			selectedObject?.let { calculateCelestialPath(it) }
 			invalidate()
 			onAnimationFinished?.invoke()
 		}
@@ -241,7 +251,13 @@ class StarView @JvmOverloads constructor(
 		return result
 	}
 
-	private fun calculateCelestialPath(obj: SkyObject) {
+	private fun updatePathAstronomyCache(obj: SkyObject) {
+		val timeUnchanged = kotlin.math.abs(currentTime.tt - lastPathTime) < 0.0000001
+		val locUnchanged = observer.latitude == lastPathLat && observer.longitude == lastPathLon
+		val objUnchanged = obj == lastPathObject
+
+		if (timeUnchanged && locUnchanged && objUnchanged) return
+
 		activePathPointsCount = 0
 
 		val startHours = -12
@@ -253,11 +269,10 @@ class StarView @JvmOverloads constructor(
 
 		val tz = TimeZone.getDefault()
 		val currentMillis = currentTime.toMillisecondsSince1970()
-
 		for (i in 0..steps) {
 			if (activePathPointsCount >= pathPointPool.size) break
 
-			// Calculate start time aligned to hour
+			// Calculate time for this step
 			reusableCal.timeZone = tz
 			reusableCal.timeInMillis = currentMillis
 			reusableCal.add(Calendar.HOUR_OF_DAY, startHours)
@@ -267,7 +282,7 @@ class StarView @JvmOverloads constructor(
 
 			val stepTimeMillis = reusableCal.timeInMillis + (i * stepMinutes * 60000L)
 
-			// Limit to +12h from now roughly (24h span total)
+			// Limit to +12h from now
 			val maxTime = currentMillis + (endHours * 3600000L)
 			if (stepTimeMillis > maxTime + 3600000L) break
 
@@ -276,30 +291,32 @@ class StarView @JvmOverloads constructor(
 			reusableCal.timeInMillis = stepTimeMillis
 			val stepMinute = reusableCal.get(Calendar.MINUTE)
 			val stepHour = reusableCal.get(Calendar.HOUR_OF_DAY)
-
 			val isHourMark = (stepMinute == 0)
 
 			val poolItem = pathPointPool[activePathPointsCount]
 			poolItem.reset()
-
 			poolItem.hourLabel = if (isHourMark) "%02d".format(stepHour) else null
+			poolItem.timeOffsetHours = (stepTimeMillis - currentMillis) / 3600000.0
 
-			// Calculate position
 			val altAz: Topocentric = if (obj.type == SkyObject.Type.STAR) {
 				horizon(tStep, observer, obj.ra, obj.dec, Refraction.Normal)
 			} else {
 				val body = obj.body!!
-				val eq = io.github.cosinekitty.astronomy.equator(body, tStep, observer, EquatorEpoch.OfDate, Aberration.Corrected)
+				val eq = equator(body, tStep, observer, EquatorEpoch.OfDate, Aberration.Corrected)
 				horizon(tStep, observer, eq.ra, eq.dec, Refraction.Normal)
 			}
 
-			val isVisible = skyToScreen(altAz.azimuth, altAz.altitude, poolItem.point)
-
-			poolItem.timeOffsetHours = (stepTimeMillis - currentMillis) / 3600000.0
-			poolItem.isValid = isVisible
+			// Store Sky Coordinates ONLY
+			poolItem.azimuth = altAz.azimuth
+			poolItem.altitude = altAz.altitude
 
 			activePathPointsCount++
 		}
+
+		lastPathTime = currentTime.tt
+		lastPathLat = observer.latitude
+		lastPathLon = observer.longitude
+		lastPathObject = obj
 	}
 
 	override fun onDraw(canvas: Canvas) {
@@ -312,58 +329,58 @@ class StarView @JvmOverloads constructor(
 
 		drawHorizon(canvas)
 
-		if (selectedObject != null && activePathPointsCount > 1) {
-			celestialPath.reset()
-			var isPenDown = false
+		if (selectedObject != null) {
+			updatePathAstronomyCache(selectedObject!!)
 
-			// 1. Draw Path
 			for (i in 0 until activePathPointsCount) {
-				val curr = pathPointPool[i]
+				val item = pathPointPool[i]
+				item.isValid = skyToScreen(item.azimuth, item.altitude, item.point)
+			}
 
-				if (!curr.isValid) {
-					isPenDown = false
-					continue
-				}
+			if (activePathPointsCount > 1) {
+				celestialPath.reset()
+				var isPenDown = false
 
-				// Check jump (screen wrapping)
-				if (isPenDown && i > 0) {
-					val prev = pathPointPool[i-1]
-					if (prev.isValid) {
-						val dist = hypot(curr.point.x - prev.point.x, curr.point.y - prev.point.y)
-						if (dist > width * 0.8) {
-							isPenDown = false
+				for (i in 0 until activePathPointsCount) {
+					val curr = pathPointPool[i]
+
+					if (!curr.isValid) {
+						isPenDown = false
+						continue
+					}
+
+					if (isPenDown && i > 0) {
+						val prev = pathPointPool[i-1]
+						if (prev.isValid) {
+							val dist = hypot(curr.point.x - prev.point.x, curr.point.y - prev.point.y)
+							if (dist > width * 0.8) isPenDown = false
 						}
 					}
+
+					if (!isPenDown) {
+						celestialPath.moveTo(curr.point.x, curr.point.y)
+						isPenDown = true
+					} else {
+						celestialPath.lineTo(curr.point.x, curr.point.y)
+					}
 				}
+				canvas.drawPath(celestialPath, pathPaint)
 
-				if (!isPenDown) {
-					celestialPath.moveTo(curr.point.x, curr.point.y)
-					isPenDown = true
-				} else {
-					celestialPath.lineTo(curr.point.x, curr.point.y)
-				}
-			}
-			canvas.drawPath(celestialPath, pathPaint)
+				for (i in 1 until activePathPointsCount - 1) {
+					val curr = pathPointPool[i]
+					if (!curr.isValid || curr.hourLabel == null) continue
 
-			// 2. Draw Notches, Labels, Arrows
-			for (i in 1 until activePathPointsCount - 1) {
-				val curr = pathPointPool[i]
-				if (!curr.isValid) continue
+					val prev = pathPointPool[i-1]
+					val next = pathPointPool[i+1]
+					if (!prev.isValid || !next.isValid) continue
 
-				val prev = pathPointPool[i-1]
-				val next = pathPointPool[i+1]
+					if (hypot(curr.point.x - prev.point.x, curr.point.y - prev.point.y) > 200) continue
+					if (hypot(next.point.x - curr.point.x, next.point.y - curr.point.y) > 200) continue
 
-				if (!prev.isValid || !next.isValid) continue
+					val dx = next.point.x - prev.point.x
+					val dy = next.point.y - prev.point.y
+					val angle = atan2(dy, dx)
 
-				// Check continuity
-				if (hypot(curr.point.x - prev.point.x, curr.point.y - prev.point.y) > 200) continue
-				if (hypot(next.point.x - curr.point.x, next.point.y - curr.point.y) > 200) continue
-
-				val dx = next.point.x - prev.point.x
-				val dy = next.point.y - prev.point.y
-				val angle = atan2(dy, dx)
-
-				if (curr.hourLabel != null) {
 					val textDist = 30f
 					val px = curr.point.x + textDist * cos(angle - PI/2).toFloat()
 					val py = curr.point.y + textDist * sin(angle - PI/2).toFloat() + 8f
@@ -519,21 +536,49 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
-	private fun drawEclipticLine(canvas: Canvas) {
-		val path = Path()
-		var first = true
+	private fun updateEclipticCache() {
+		val timeUnchanged = kotlin.math.abs(currentTime.tt - lastEclipticTimeT) < 0.0000001
+		val locUnchanged = observer.latitude == lastEclipticLat && observer.longitude == lastEclipticLon
+		if (timeUnchanged && locUnchanged) {
+			return
+		}
 
-		for (lon in 0..360 step 10) {
+		val rotMat = rotationEclEqd(currentTime)
+		var index = 0
+		for (lon in 0..360 step eclipticStep) {
+			if (index >= eclipticPointsCount) break
+
 			val radLon = Math.toRadians(lon.toDouble())
-			val vecEcl = io.github.cosinekitty.astronomy.Vector(cos(radLon), sin(radLon), 0.0, currentTime)
-			val rotMat = io.github.cosinekitty.astronomy.rotationEclEqd(currentTime)
+			val vecEcl = Vector(cos(radLon), sin(radLon), 0.0, currentTime)
 			val vecEqd = rotMat.rotate(vecEcl)
 			val equ = vecEqd.toEquatorial()
-			val hor = horizon(currentTime, observer, equ.ra, equ.dec, Refraction.None)
+			val hor = horizon(currentTime, observer, equ.ra, equ.dec, Refraction.Normal)
 
-			if (skyToScreen(hor.azimuth, hor.altitude, tempPoint)) {
-				if (first) { path.moveTo(tempPoint.x, tempPoint.y); first = false }
-				else path.lineTo(tempPoint.x, tempPoint.y)
+			eclipticAzimuths[index] = hor.azimuth
+			eclipticAltitudes[index] = hor.altitude
+			index++
+		}
+
+		lastEclipticTimeT = currentTime.tt
+		lastEclipticLat = observer.latitude
+		lastEclipticLon = observer.longitude
+	}
+
+	private fun drawEclipticLine(canvas: Canvas) {
+		updateEclipticCache()
+
+		val path = Path()
+		var first = true
+		for (i in 0 until eclipticPointsCount) {
+			val az = eclipticAzimuths[i]
+			val alt = eclipticAltitudes[i]
+			if (skyToScreen(az, alt, tempPoint)) {
+				if (first) {
+					path.moveTo(tempPoint.x, tempPoint.y)
+					first = false
+				} else {
+					path.lineTo(tempPoint.x, tempPoint.y)
+				}
 			} else {
 				first = true
 			}
@@ -627,7 +672,6 @@ class StarView @JvmOverloads constructor(
 					lastTouchX = event.x
 					lastTouchY = event.y
 
-					selectedObject?.let { calculateCelestialPath(it) }
 					invalidate()
 				}
 			}
@@ -664,9 +708,6 @@ class StarView @JvmOverloads constructor(
 		}
 
 		selectedObject = bestObj
-		if (selectedObject != null) {
-			calculateCelestialPath(selectedObject!!)
-		}
 		invalidate()
 		onObjectClickListener?.invoke(bestObj)
 	}
@@ -675,7 +716,6 @@ class StarView @JvmOverloads constructor(
 		override fun onScale(detector: ScaleGestureDetector): Boolean {
 			viewAngle /= detector.scaleFactor
 			viewAngle = max(10.0, min(150.0, viewAngle))
-			selectedObject?.let { calculateCelestialPath(it) }
 			invalidate()
 			return true
 		}

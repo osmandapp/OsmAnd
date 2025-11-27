@@ -62,9 +62,7 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 
 	override fun createDialog(savedInstanceState: Bundle?): Dialog {
 		return object : Dialog(requireContext(), themeId) {
-			override fun onBackPressed() {
-				dismiss()
-			}
+			override fun onBackPressed() = dismiss()
 		}
 	}
 
@@ -155,11 +153,11 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 		sheetTitle.text = obj.name
 		val az = String.format(Locale.getDefault(), "%.1f°", obj.azimuth)
 		val alt = String.format(Locale.getDefault(), "%.1f°", obj.altitude)
-		sheetCoords.text = "Azimuth: $az  |  Altitude: $alt"
+		sheetCoords.text = "${getString(R.string.shared_string_azimuth)}: $az  |  ${getString(R.string.altitude)}: $alt"
 
-		var details = "Magnitude: ${obj.magnitude}"
+		var details = "${getString(R.string.shared_string_magnitude)}: ${obj.magnitude}"
 		if (obj.type != SkyObject.Type.STAR) {
-			details += "\nDistance: %.3f AU".format(obj.distAu)
+			details += "\n${getString(R.string.distance)}: %.3f AU".format(obj.distAu)
 		}
 
 		// Rise / Set calculation (Performed in Fragment or could be moved to VM)
@@ -178,10 +176,10 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, currentTime, 1.0)
 
 			if (riseTime != null) {
-				details += "\nRise: ↑${formatLocalTime(riseTime)}"
+				details += "\n${getString(R.string.astro_rise)}: ↑${formatLocalTime(riseTime)}"
 			}
 			if (setTime != null) {
-				details += "\nSet: ↓${formatLocalTime(setTime)}"
+				details += "\n${getString(R.string.astro_set)}: ↓${formatLocalTime(setTime)}"
 			}
 		}
 
@@ -200,7 +198,7 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 	private fun showFilterDialog() {
 		// This logic relies on the View's internal state, which is acceptable for view-specific toggles
 		// ideally, this state would also be in the ViewModel
-		val toggleItems = arrayOf("Azimuthal Grid", "Equatorial Grid", "Ecliptic Line")
+		val toggleItems = arrayOf(getString(R.string.azimuthal_grid), getString(R.string.equatorial_grid), getString(R.string.ecliptic_line))
 		val toggleChecked = booleanArrayOf(starView.showAzimuthalGrid, starView.showEquatorialGrid, starView.showEclipticLine)
 
 		val currentObjects = viewModel.skyObjects.value ?: emptyList()
@@ -211,7 +209,7 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 		val allChecked = toggleChecked + objectChecked
 
 		AlertDialog.Builder(requireContext())
-			.setTitle("Visible Layers & Objects")
+			.setTitle(R.string.visible_layers_and_objects)
 			.setMultiChoiceItems(allItems, allChecked) { _, which, isChecked ->
 				if (which < toggleItems.size) {
 					when (which) {
@@ -226,17 +224,10 @@ class StarMapFragment : BaseFullScreenDialogFragment() {
 					}
 				}
 			}
-			.setPositiveButton("Apply") { _, _ ->
+			.setPositiveButton(R.string.shared_string_apply) { _, _ ->
 				starView.updateVisibility()
 			}
-			.setNegativeButton("Cancel", null)
-			.setNeutralButton("All On") { _, _ ->
-				starView.showAzimuthalGrid = true
-				starView.showEquatorialGrid = true
-				starView.showEclipticLine = true
-				currentObjects.forEach { it.isVisible = true }
-				starView.updateVisibility()
-			}
+			.setNegativeButton(R.string.shared_string_cancel, null)
 			.show()
 	}
 }
