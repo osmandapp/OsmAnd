@@ -426,8 +426,61 @@ public class MapUtils {
 	}
 
 	public static String buildGeoUrl(String latitude, String longitude, int zoom) {
-		return "geo:" + latitude + "," + longitude + "?z=" + zoom;
+		return buildGeoUrl(latitude, longitude, zoom, null);
 	}
+
+	public static String buildGeoUrl(String latitude, String longitude, int zoom, String label) {
+		String url = "geo:" + latitude + "," + longitude + "?z=" + zoom;
+		if (label != null && !label.isEmpty()) {
+			String encodedLabel = encodeLabel(label);
+			return url + "&q=" + latitude + "," + longitude + "(" + encodedLabel + ")";
+		}
+		return url;
+	}
+
+	public static String encodeLabel(String label) {
+		if (label == null || label.isEmpty()) {
+			return "";
+		}
+
+		// 1. Normalize all whitespace (tabs, newlines, NBSP, etc.) → regular space
+		label = label.replaceAll("\\s+", " ").trim();
+
+		// 2. Replace regular space with "+" (Google Maps label convention)
+		label = label.replace(" ", "+");
+
+		// 3. Encode unsafe characters using %XX
+		StringBuilder sb = new StringBuilder();
+		for (char c : label.toCharArray()) {
+			if (isSafeForGeoLabel(c)) {
+				sb.append(c);
+			} else {
+				sb.append(String.format("%%%02X", (int) c));
+			}
+		}
+
+		return sb.toString();
+	}
+
+	private static boolean isSafeForGeoLabel(char c) {
+		// Letters and digits are always safe
+		if (Character.isLetterOrDigit(c)) {
+			return true;
+		}
+
+		// Allowed punctuation that does not break geo URI syntax
+		switch (c) {
+			case '+': // already used for space
+			case '-':
+			case '_':
+			case '.':
+				return true;
+		}
+
+		// Everything else must be percent-encoded
+		return false;
+	}
+
 
 	// Examples
 //	System.out.println(buildShortOsmUrl(51.51829d, 0.07347d, 16)); // https://osm.org/go/0EEQsyfu
