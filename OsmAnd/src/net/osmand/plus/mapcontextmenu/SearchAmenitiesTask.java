@@ -50,9 +50,11 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 				break;
 			}
 			QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
-			radius *= NEARBY_POI_SEARCH_FACTOR;
 
 			amenities = collectAmenities(rect);
+			radius *= NEARBY_POI_SEARCH_FACTOR;
+
+			// If enough POIs collected OR search radius limit reached — merge duplicates.
 			if (amenities.size() >= NEARBY_MAX_POI_COUNT || radius > NEARBY_POI_MAX_RADIUS) {
 				amenities = amenityObjectsMerger.merge(amenities);
 				amenities.remove(amenity);
