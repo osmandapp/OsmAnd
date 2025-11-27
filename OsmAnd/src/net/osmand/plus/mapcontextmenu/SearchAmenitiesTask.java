@@ -10,7 +10,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.views.AmenityObjectsCombiner;
+import net.osmand.plus.views.AmenityObjectsMerger;
 import net.osmand.util.MapUtils;
 
 import java.util.Collections;
@@ -26,7 +26,7 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 	private final LatLon latLon;
 	private final PoiUIFilter filter;
 	private final Amenity amenity;
-	private final AmenityObjectsCombiner amenityObjectsCombiner;
+	private final AmenityObjectsMerger amenityObjectsCombiner;
 	private SearchAmenitiesListener listener;
 
 	protected SearchAmenitiesTask(@NonNull PoiUIFilter filter, @NonNull LatLon latLon,
@@ -34,7 +34,7 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 		this.filter = filter;
 		this.latLon = latLon;
 		this.amenity = amenity;
-		this.amenityObjectsCombiner = new AmenityObjectsCombiner(lang);
+		this.amenityObjectsCombiner = new AmenityObjectsMerger(lang);
 	}
 
 	public void setListener(@Nullable SearchAmenitiesListener listener) {
@@ -52,9 +52,9 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 			QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
 			radius *= NEARBY_POI_SEARCH_FACTOR;
 
-			amenities = getAmenities(rect);
+			amenities = collectAmenities(rect);
 			if (amenities.size() >= NEARBY_MAX_POI_COUNT || radius > NEARBY_POI_MAX_RADIUS) {
-				amenities = amenityObjectsCombiner.combine(amenities);
+				amenities = amenityObjectsCombiner.merge(amenities);
 				amenities.remove(amenity);
 			}
 		}
@@ -63,7 +63,7 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 	}
 
 	@NonNull
-	private List<Amenity> getAmenities(@NonNull QuadRect rect) {
+	private List<Amenity> collectAmenities(@NonNull QuadRect rect) {
 		return filter.searchAmenities(rect.top, rect.left, rect.bottom, rect.right, -1, new ResultMatcher<>() {
 			@Override
 			public boolean publish(Amenity amenity) {

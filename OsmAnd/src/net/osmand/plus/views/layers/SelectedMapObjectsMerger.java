@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class SelectedMapObjectsCombiner extends MapObjectsCombiner<SelectedMapObject> {
+public class SelectedMapObjectsMerger extends MapObjectsMerger<SelectedMapObject> {
 
 	private final AmenitySearcher searcher;
 	private final AmenitySearcher.Settings searchSettings;
@@ -28,11 +28,11 @@ public class SelectedMapObjectsCombiner extends MapObjectsCombiner<SelectedMapOb
 
 	private List<Amenity> amenities = null;
 
-	public SelectedMapObjectsCombiner(@NonNull AmenitySearcher searcher,
-	                                  @NonNull AmenitySearcher.Settings searchSettings,
-	                                  @NonNull IContextMenuProvider poiProvider,
-	                                  @NonNull String lang,
-	                                  @NonNull LatLon pointLatLon) {
+	public SelectedMapObjectsMerger(@NonNull AmenitySearcher searcher,
+	                                @NonNull AmenitySearcher.Settings searchSettings,
+	                                @NonNull IContextMenuProvider poiProvider,
+	                                @NonNull String lang,
+	                                @NonNull LatLon pointLatLon) {
 		super(lang);
 		this.searcher = searcher;
 		this.searchSettings = searchSettings;
@@ -42,48 +42,43 @@ public class SelectedMapObjectsCombiner extends MapObjectsCombiner<SelectedMapOb
 
 	@NonNull
 	@Override
-	public List<SelectedMapObject> combine(@NonNull List<SelectedMapObject> allObjects) {
-		List<SelectedMapObject> processedObjects = new ArrayList<>();
-
-		if (allObjects.size() == 1) {
-			processedObjects.addAll(allObjects);
-			return processedObjects;
+	public List<SelectedMapObject> merge(@NonNull List<SelectedMapObject> original) {
+		if (original.size() == 1) {
+			return new ArrayList<>(original);
 		}
 
-		List<SelectedMapObject> mapObjects = new ArrayList<>(allObjects);
-		List<SelectedMapObject> other = new ArrayList<>();
+		List<SelectedMapObject> result = new ArrayList<>();
+		List<SelectedMapObject> allItems = new ArrayList<>(original);
+		List<SelectedMapObject> unmergedItems = new ArrayList<>();
 
-		List<BaseDetailsObject> detailsObjects = processPointsWithMapObjects(mapObjects, other);
+		List<BaseDetailsObject> groupedDetails = processPoints(allItems);
 
-		detailsObjects.addAll(processObjects(mapObjects, new ProcessObjectsListener<>() {
+		groupedDetails.addAll(processObjects(allItems, new MergeStrategy<>() {
 			@Override
-			public Object getObjectToCombine(@NonNull SelectedMapObject item) {
+			public Object unwrap(@NonNull SelectedMapObject item) {
 				return item.object();
 			}
 
 			@Override
-			public void onObjectNotCombined(@NonNull SelectedMapObject item) {
-				other.add(item);
+			public void onMergeFailed(@NonNull SelectedMapObject item) {
+				unmergedItems.add(item);
 			}
 		}));
 
-		for (BaseDetailsObject object : detailsObjects) {
+		for (BaseDetailsObject object : groupedDetails) {
 			if (object.getObjects().size() > 1) {
-				processedObjects.add(new SelectedMapObject(object, poiProvider));
+				result.add(new SelectedMapObject(object, poiProvider));
 			} else {
-				processedObjects.add(new SelectedMapObject(object.getObjects().get(0), poiProvider));
+				result.add(new SelectedMapObject(object.getObjects().get(0), poiProvider));
 			}
 		}
 
-		processedObjects.addAll(other);
-		return processedObjects;
+		result.addAll(unmergedItems);
+		return result;
 	}
 
 	@NonNull
-	private List<BaseDetailsObject> processPointsWithMapObjects(
-			@NonNull List<SelectedMapObject> mapObjects,
-			@NonNull List<SelectedMapObject> other) {
-
+	private List<BaseDetailsObject> processPoints(@NonNull List<SelectedMapObject> mapObjects) {
 		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
 
 		for (Iterator<SelectedMapObject> iterator = mapObjects.iterator(); iterator.hasNext(); ) {
@@ -176,18 +171,5 @@ public class SelectedMapObjectsCombiner extends MapObjectsCombiner<SelectedMapOb
 		}
 
 		return null;
-	}
-
-	@NonNull
-	private List<BaseDetailsObject> collectOverlappedObjects(
-			@NonNull Object object,
-			@NonNull List<BaseDetailsObject> detailsObjects) {
-		List<BaseDetailsObject> overlapped = new ArrayList<>();
-		for (BaseDetailsObject detailsObject : detailsObjects) {
-			if (detailsObject.overlapsWith(object)) {
-				overlapped.add(detailsObject);
-			}
-		}
-		return overlapped;
 	}
 }
