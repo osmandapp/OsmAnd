@@ -26,7 +26,7 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 	private final LatLon latLon;
 	private final PoiUIFilter filter;
 	private final Amenity amenity;
-	private final AmenityObjectsMerger amenityObjectsCombiner;
+	private final AmenityObjectsMerger amenityObjectsMerger;
 	private SearchAmenitiesListener listener;
 
 	protected SearchAmenitiesTask(@NonNull PoiUIFilter filter, @NonNull LatLon latLon,
@@ -34,7 +34,7 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 		this.filter = filter;
 		this.latLon = latLon;
 		this.amenity = amenity;
-		this.amenityObjectsCombiner = new AmenityObjectsMerger(lang);
+		this.amenityObjectsMerger = new AmenityObjectsMerger(lang);
 	}
 
 	public void setListener(@Nullable SearchAmenitiesListener listener) {
@@ -54,7 +54,7 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 
 			amenities = collectAmenities(rect);
 			if (amenities.size() >= NEARBY_MAX_POI_COUNT || radius > NEARBY_POI_MAX_RADIUS) {
-				amenities = amenityObjectsCombiner.merge(amenities);
+				amenities = amenityObjectsMerger.merge(amenities);
 				amenities.remove(amenity);
 			}
 		}

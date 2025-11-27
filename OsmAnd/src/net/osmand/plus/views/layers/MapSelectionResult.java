@@ -81,9 +81,9 @@ public class MapSelectionResult {
 	}
 
 	public void groupByOsmIdAndWikidataId() {
-		SelectedMapObjectsMerger combiner = new SelectedMapObjectsMerger(
+		SelectedMapObjectsMerger merger = new SelectedMapObjectsMerger(
 				searcher, searchSettings, poiProvider, lang, pointLatLon);
-		processedObjects.addAll(combiner.merge(allObjects));
+		processedObjects.addAll(merger.merge(allObjects));
 	}
 
 	public boolean isEmpty() {
