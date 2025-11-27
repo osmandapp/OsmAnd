@@ -1001,6 +1001,9 @@ public class MapPoiTypes {
 		if (pt.getNameTag() != null) {
 			nameValue = otherTags.get(pt.getNameTag());
 		}
+		if (!Algorithms.isEmpty(nameValue)) {
+			nameValue = Algorithms.normalizeSearchText(nameValue);
+		}
 		boolean hasName = !Algorithms.isEmpty(nameValue);
 		if (!hasName && pt.isNameOnly()) {
 			return null;
