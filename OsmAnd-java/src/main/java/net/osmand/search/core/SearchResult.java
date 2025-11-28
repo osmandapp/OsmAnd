@@ -209,8 +209,6 @@ public class SearchResult {
 		} else {
 			localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
 		}
-		if (object instanceof Street)
-			localResultNames = localResultNames.stream().filter(x -> !CommonWords.isStaticCommon(x.toLowerCase())).toList();
 
 		boolean wordMatched;
 		if (searchPhraseNames.isEmpty()) {

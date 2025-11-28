@@ -9,7 +9,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class CommonWords {
-	private static Set<String> staticCommonWords = new HashSet<>();
 	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>();
 	private static Map<String, Integer> frequentlyUsedWordsDictionary = new LinkedHashMap<>();
 	
@@ -21,10 +20,6 @@ public class CommonWords {
 	}
 	private static void addFrequentlyUsed(String string) {
 		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
-	}
-
-	public static boolean isStaticCommon(String name) {
-		return staticCommonWords.contains(name);
 	}
 
 	public static int getCommon(String name) {
@@ -93,8 +88,6 @@ public class CommonWords {
 	}
 	
 	private static void addRegionNames() {
-		staticCommonWords.addAll(commonWordsDictionary.keySet());
-
 		OsmandRegions osmandRegions = null;
 		try {
 			osmandRegions = PlatformUtil.getOsmandRegions();
@@ -1367,16 +1360,6 @@ public class CommonWords {
 		addCommon("throughway");
 		addCommon("trafficway");
 		addCommon("plaine");
-
-		// Polish street terms and abbreviations
-		addFrequentlyUsed("ul.");
-		addFrequentlyUsed("al.");
-		addFrequentlyUsed("skwer");
-		addFrequentlyUsed("skw.");
-		addFrequentlyUsed("bulwar");
-		addFrequentlyUsed("bulw.");
-		addFrequentlyUsed("wybrzeże");
-		addFrequentlyUsed("wyb.");
 
 		addAbbrevations();
 		addRegionNames(); // add regions names and region abbreviations
