@@ -137,9 +137,9 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 				})
 				.create();
 		items.add(preferenceBtn[0]);
-		items.add(new DividerSpaceItem(app, contentPaddingSmall));
+		items.add(new DividerSpaceItem(requireContext(), contentPaddingSmall));
 		items.add(new LongDescriptionItem(getDescription()));
-		items.add(new DividerSpaceItem(app, contentPadding));
+		items.add(new DividerSpaceItem(requireContext(), contentPadding));
 
 		slider.addOnChangeListener(new Slider.OnChangeListener() {
 			@Override
@@ -156,7 +156,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 				.setCustomView(sliderView)
 				.create());
 		items.add(new SubtitmeListDividerItem(getContext()));
-		items.add(new DividerSpaceItem(app, contentPaddingSmall));
+		items.add(new DividerSpaceItem(requireContext(), contentPaddingSmall));
 		items.add(new LongDescriptionItem(getLongDescription()));
 	}
 

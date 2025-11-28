@@ -168,11 +168,11 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	protected void addDivider() {
-		items.add(new DividerItem(app));
+		items.add(new DividerItem(requireContext()));
 	}
 
 	protected void addSpaceItem(int space) {
-		View view = new View(app);
+		View view = new View(requireContext());
 		view.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, space));
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(view)

@@ -294,7 +294,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 		UiUtilities iconsCache = app.getUIUtilities();
 		List<PopUpMenuItem> items = new ArrayList<>();
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(requireContext())
 				.setTitleId(R.string.shared_string_delete)
 				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_outlined))
 				.setOnClickListener(getOptionDeleteClickListener(group))
@@ -431,7 +431,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 	@Override
 	protected int getIconColor(ProfileDataObject profile) {
 		int iconColorResId = isSelected(profile) ? getActiveColorId() : getDefaultIconColorId();
-		return ContextCompat.getColor(app, iconColorResId);
+		return ContextCompat.getColor(requireContext(), iconColorResId);
 	}
 
 	@Override

@@ -65,7 +65,7 @@ public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet im
 			}
 		});
 
-		items.add(new SimpleDividerItem(app));
+		items.add(new SimpleDividerItem(requireContext()));
 		for (int i = 0; i < profiles.size(); i++) {
 			addProfileItem(profiles.get(i));
 		}

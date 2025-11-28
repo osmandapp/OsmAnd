@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.rastermaps;
 
+import static net.osmand.map.TileSourceManager.TileSourceTemplate;
 import static net.osmand.plus.widgets.alert.AlertDialogData.INVALID_ID;
 
 import android.content.DialogInterface;
@@ -8,23 +9,29 @@ import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.ResultMatcher;
-
-import static net.osmand.map.TileSourceManager.TileSourceTemplate;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
+import net.osmand.plus.settings.fragments.search.SearchDatabaseRebuilder;
+import net.osmand.plus.settings.fragments.search.SearchDatabaseRootedAtPrefsFragmentFirstAdapter;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.widgets.alert.*;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.InstallMapLayersDialogFragment;
+import net.osmand.plus.widgets.alert.SelectionDialogFragmentData;
+import net.osmand.plus.widgets.alert.SelectionDialogFragmentFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProviderFactory;
+import de.KnollFrank.lib.settingssearch.common.Locales;
+import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProvider;
 import de.KnollFrank.lib.settingssearch.db.preference.db.DatabaseResetter;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
 
 class InstallMapLayersDialogFragmentFactory {
 
@@ -112,12 +119,44 @@ class InstallMapLayersDialogFragmentFactory {
 							}
 
 							private void resetSearchDatabase() {
-								// FK-TODO: nur den Teil der Suchdatenbank neu berechnen, der sich geändert hat.
-								DatabaseResetter.resetDatabase(
-										OsmandApplication
-												.getInstanceFromContext(activity)
-												.daoProviderManager
-												.getDAOProvider());
+								DatabaseResetter.resetDatabase(getPreferencesDatabase());
+								new SearchDatabaseRebuilder().rebuildSearchDatabase(
+										getPreferencesDatabase(),
+										getLocale(),
+										new ActualConfigurationProvider().getActualConfiguration(),
+										activity,
+										getTileSourceTemplatesProvider());
+								new SearchDatabaseRootedAtPrefsFragmentFirstAdapter().adaptSearchDatabaseRootedAtPrefsFragmentFirst(
+										getPreferencesDatabase(),
+										getPojoGraph(getLocale()),
+										new ActualConfigurationProvider().getActualConfiguration(),
+										activity,
+										getTileSourceTemplatesProvider());
+							}
+
+							private Locale getLocale() {
+								return Locales.getCurrentLanguageLocale(activity.getResources());
+							}
+
+							private DAOProvider getPreferencesDatabase() {
+								return OsmandApplication
+										.getInstanceFromContext(activity)
+										.daoProviderManager
+										.getDAOProvider();
+							}
+
+							private TileSourceTemplatesProvider getTileSourceTemplatesProvider() {
+								return OsmandApplication
+										.getInstanceFromContext(activity)
+										.getTileSourceTemplatesProvider();
+							}
+
+							private SearchablePreferenceScreenGraph getPojoGraph(final Locale locale) {
+								return this
+										.getPreferencesDatabase()
+										.searchablePreferenceScreenGraphDAO()
+										.findGraphById(locale)
+										.orElseThrow();
 							}
 						});
 	}

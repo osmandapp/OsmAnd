@@ -42,7 +42,10 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
@@ -126,23 +129,23 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 	public void createMenuItems(Bundle savedInstanceState) {
 		int selectedProfileColor = app.getSettings().APPLICATION_MODE.get().getProfileColor(nightMode);
 		float spacing = getResources().getDimension(R.dimen.line_spacing_extra_description);
-		LinearLayout linearLayout = new LinearLayout(app);
+		LinearLayout linearLayout = new LinearLayout(requireActivity());
 		linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-		TextView title = new TextView(app);
+		TextView title = new TextView(requireActivity());
 		title.setPadding(padding, paddingHalf, padding, 0);
 		title.setTypeface(FontCache.getMediumFont());
 		title.setText(R.string.rendering_category_details);
 		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
-		title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
+		title.setTextColor(ColorUtilities.getPrimaryTextColor(requireActivity(), nightMode));
 
-		TextView description = new TextView(app);
+		TextView description = new TextView(requireActivity());
 		description.setLineSpacing(spacing, 1.0f);
 		description.setPadding(padding, 0, padding, paddingSmall);
 		description.setText(R.string.details_dialog_decr);
 		description.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_desc_text_size));
-		description.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
+		description.setTextColor(ColorUtilities.getSecondaryTextColor(requireActivity(), nightMode));
 		linearLayout.addView(title);
 		linearLayout.addView(description);
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(linearLayout).create());
@@ -152,7 +155,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 			for (int i = 0; i < properties.size(); i++) {
 				RenderingRuleProperty property = properties.get(i);
 				CommonPreference<Boolean> pref = preferences.get(i);
-				String propertyName = getRenderingStringPropertyName(property, app);
+				String propertyName = getRenderingStringPropertyName(property, requireActivity());
 				if (STREET_LIGHTING.equals(property.getAttrName()) && streetLightNightProp != null) {
 					CommonPreference<Boolean> streetLightsNightPref = preferences.get(properties.indexOf(streetLightNightProp));
 					BottomSheetItemTwoChoicesButton[] item = new BottomSheetItemTwoChoicesButton[1];
@@ -199,7 +202,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 				String attrName = property.getAttrName();
 				if (MORE_DETAILED.equals(attrName) || SHOW_SURFACE_GRADE.equals(attrName)
 						|| COLORED_BUILDINGS.equals(attrName) || STREET_LIGHTING.equals(attrName)) {
-					DividerItem divider = new DividerItem(app);
+					DividerItem divider = new DividerItem(requireActivity());
 					divider.setMargins(padding, 0, 0, 0);
 					items.add(divider);
 				}

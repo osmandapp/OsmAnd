@@ -11,7 +11,6 @@ import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TEMPORARY_SELECTED;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
-
 import static de.KnollFrank.lib.settingssearch.fragment.navigation.ContinueWithPreferencePathNavigation.continueWithPreferencePathNavigation;
 
 import android.content.ClipData;
@@ -28,11 +27,6 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.settings.fragments.MainSettingsFragment;
-import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
-import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
-import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
@@ -50,6 +44,7 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.configmap.tracks.PreselectedTabParams;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksTabsFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapcontextmenu.editors.FavouriteGroupEditorFragment;
@@ -70,12 +65,16 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.ExportSettingsFragment;
+import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
+import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.GeoPointParserUtil;
@@ -83,9 +82,16 @@ import net.osmand.util.GeoPointParserUtil;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import de.KnollFrank.lib.settingssearch.common.Locales;
 
 public class IntentHelper {
 
@@ -164,9 +170,10 @@ public class IntentHelper {
 
 	private Locale getLocale() {
 		final LocaleHelper localeHelper = app.getLocaleHelper();
-		return Optional
-				.ofNullable(localeHelper.getPreferredLocale())
-				.orElseGet(localeHelper::getDefaultLocale);
+		return Locales.getLanguageLocale(
+				Optional
+						.ofNullable(localeHelper.getPreferredLocale())
+						.orElseGet(localeHelper::getDefaultLocale));
 	}
 
 	private boolean parseNavigationIntent() {
