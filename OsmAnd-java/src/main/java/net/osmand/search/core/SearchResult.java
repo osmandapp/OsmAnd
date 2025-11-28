@@ -6,7 +6,6 @@ import java.util.List;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.CommonWords;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;

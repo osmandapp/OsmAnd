@@ -21,7 +21,6 @@ public class CommonWords {
 	private static void addFrequentlyUsed(String string) {
 		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
 	}
-
 	public static int getCommon(String name) {
 		if (Character.isDigit(name.charAt(0)) && letters(name) < 2) {
 			name = NUMBER_WITH_LESS_THAN_2_LETTERS;
