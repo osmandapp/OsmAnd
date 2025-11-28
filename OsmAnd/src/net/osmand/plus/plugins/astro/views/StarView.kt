@@ -113,6 +113,7 @@ class StarView @JvmOverloads constructor(
 	var observer = Observer(56.9496, 24.1052, 0.0)
 	var currentTime = Time(System.currentTimeMillis() / 1000.0 / 86400.0 + 2440587.5)
 
+	// Ecliptic Cache
 	private val eclipticStep = 10
 	private val eclipticPointsCount = (360 / eclipticStep) + 1
 	private val eclipticAzimuths = DoubleArray(eclipticPointsCount)
@@ -120,6 +121,27 @@ class StarView @JvmOverloads constructor(
 	private var lastEclipticTimeT: Double = -1.0
 	private var lastEclipticLat: Double = -999.0
 	private var lastEclipticLon: Double = -999.0
+
+	// Equatorial Grid Cache
+	private var lastEquGridTimeT: Double = -1.0
+	private var lastEquGridLat: Double = -999.0
+	private var lastEquGridLon: Double = -999.0
+
+	// RA Lines (Meridians)
+	private val equRaStep = 2 // Hour step for meridians (0, 2, 4...)
+	private val equRaDecStep = 5 // Degree step for points along the meridian
+	private val equRaLinesCount = 24 / equRaStep
+	private val equRaPointsCount = (180 / equRaDecStep) + 1 // -90 to 90
+	private val equRaAzimuths = Array(equRaLinesCount) { DoubleArray(equRaPointsCount) }
+	private val equRaAltitudes = Array(equRaLinesCount) { DoubleArray(equRaPointsCount) }
+
+	// Dec Lines (Parallels)
+	private val equDecStep = 20 // Degree step for parallels (-80, -60... 80)
+	private val equDecRaStep = 5 // Degree step for points along the parallel (0..360)
+	private val equDecLinesCount = (160 / equDecStep) + 1 // -80 to 80 range is 160
+	private val equDecPointsCount = (360 / equDecRaStep) + 1 // 0 to 360
+	private val equDecAzimuths = Array(equDecLinesCount) { DoubleArray(equDecPointsCount) }
+	private val equDecAltitudes = Array(equDecLinesCount) { DoubleArray(equDecPointsCount) }
 
 	private var selectedObject: SkyObject? = null
 	private var lastPathTime: Double = -1.0
@@ -504,13 +526,59 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
+	private fun updateEquatorialGridCache() {
+		val timeUnchanged = kotlin.math.abs(currentTime.tt - lastEquGridTimeT) < 0.0000001
+		val locUnchanged = observer.latitude == lastEquGridLat && observer.longitude == lastEquGridLon
+		if (timeUnchanged && locUnchanged) return
+
+		// Cache RA Lines (Meridians)
+		var lineIdx = 0
+		for (ra in 0 until 24 step equRaStep) {
+			var pointIdx = 0
+			for (dec in -90..90 step equRaDecStep) {
+				// Safety check to prevent index out of bounds if loops change
+				if (lineIdx < equRaLinesCount && pointIdx < equRaPointsCount) {
+					val hor = horizon(currentTime, observer, ra.toDouble(), dec.toDouble(), Refraction.Normal)
+					equRaAzimuths[lineIdx][pointIdx] = hor.azimuth
+					equRaAltitudes[lineIdx][pointIdx] = hor.altitude
+				}
+				pointIdx++
+			}
+			lineIdx++
+		}
+
+		// Cache Dec Lines (Parallels)
+		lineIdx = 0
+		for (dec in -80..80 step equDecStep) {
+			var pointIdx = 0
+			for (raStep in 0..360 step equDecRaStep) {
+				if (lineIdx < equDecLinesCount && pointIdx < equDecPointsCount) {
+					val ra = raStep / 15.0
+					val hor = horizon(currentTime, observer, ra, dec.toDouble(), Refraction.Normal)
+					equDecAzimuths[lineIdx][pointIdx] = hor.azimuth
+					equDecAltitudes[lineIdx][pointIdx] = hor.altitude
+				}
+				pointIdx++
+			}
+			lineIdx++
+		}
+
+		lastEquGridTimeT = currentTime.tt
+		lastEquGridLat = observer.latitude
+		lastEquGridLon = observer.longitude
+	}
+
 	private fun drawEquatorialGrid(canvas: Canvas) {
-		for (ra in 0 until 24 step 2) {
+		updateEquatorialGridCache()
+
+		// Draw RA Lines
+		for (i in 0 until equRaLinesCount) {
 			val path = Path()
 			var first = true
-			for (dec in -90..90 step 5) {
-				val hor = horizon(currentTime, observer, ra.toDouble(), dec.toDouble(), Refraction.None)
-				if (skyToScreen(hor.azimuth, hor.altitude, tempPoint)) {
+			for (j in 0 until equRaPointsCount) {
+				val az = equRaAzimuths[i][j]
+				val alt = equRaAltitudes[i][j]
+				if (skyToScreen(az, alt, tempPoint)) {
 					if (first) { path.moveTo(tempPoint.x, tempPoint.y); first = false }
 					else path.lineTo(tempPoint.x, tempPoint.y)
 				} else {
@@ -520,13 +588,14 @@ class StarView @JvmOverloads constructor(
 			canvas.drawPath(path, equGridPaint)
 		}
 
-		for (dec in -80..80 step 20) {
+		// Draw Dec Lines
+		for (i in 0 until equDecLinesCount) {
 			val path = Path()
 			var first = true
-			for (raStep in 0..360 step 5) {
-				val ra = raStep / 15.0
-				val hor = horizon(currentTime, observer, ra, dec.toDouble(), Refraction.None)
-				if (skyToScreen(hor.azimuth, hor.altitude, tempPoint)) {
+			for (j in 0 until equDecPointsCount) {
+				val az = equDecAzimuths[i][j]
+				val alt = equDecAltitudes[i][j]
+				if (skyToScreen(az, alt, tempPoint)) {
 					if (first) { path.moveTo(tempPoint.x, tempPoint.y); first = false }
 					else path.lineTo(tempPoint.x, tempPoint.y)
 				} else {
