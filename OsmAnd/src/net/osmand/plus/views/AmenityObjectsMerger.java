@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
@@ -18,7 +19,12 @@ public class AmenityObjectsMerger extends MapObjectsMerger<Amenity> {
 	@NonNull
 	@Override
 	public List<Amenity> merge(@NonNull List<Amenity> original) {
-		if (original.size() == 1) {
+		return merge(original, null);
+	}
+
+	@NonNull
+	public List<Amenity> merge(@NonNull List<Amenity> original, @Nullable Amenity amenityToExclude) {
+		if (original.size() == 1 && amenityToExclude == null) {
 			return new ArrayList<>(original);
 		}
 
@@ -38,15 +44,19 @@ public class AmenityObjectsMerger extends MapObjectsMerger<Amenity> {
 		});
 
 		for (BaseDetailsObject object : groupedDetails) {
-			if (object.getAmenities().size() > 1) {
-				result.add(object.getSyntheticAmenity());
+			List<Amenity> amenities = object.getAmenities();
+			if (amenities.size() > 1) {
+				if (amenityToExclude == null || !amenities.contains(amenityToExclude)) {
+					result.add(object.getSyntheticAmenity());
+				}
 			} else {
-				Amenity amenity = object.getAmenities().get(0);
+				Amenity amenity = amenities.get(0);
 				result.add(amenity);
 			}
 		}
 
 		result.addAll(unmergedItems);
+		result.remove(amenityToExclude);
 		return result;
 	}
 }

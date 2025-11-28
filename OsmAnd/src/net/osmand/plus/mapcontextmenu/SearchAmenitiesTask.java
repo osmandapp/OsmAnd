@@ -25,7 +25,7 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 
 	private final LatLon latLon;
 	private final PoiUIFilter filter;
-	private final Amenity amenity;
+	private final Amenity currentAmenity;
 	private final AmenityObjectsMerger amenityObjectsMerger;
 	private SearchAmenitiesListener listener;
 
@@ -33,7 +33,7 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 	                              @NonNull String lang, @Nullable Amenity amenity) {
 		this.filter = filter;
 		this.latLon = latLon;
-		this.amenity = amenity;
+		this.currentAmenity = amenity;
 		this.amenityObjectsMerger = new AmenityObjectsMerger(lang);
 	}
 
@@ -56,8 +56,10 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 
 			// If enough POIs collected OR search radius limit reached — merge duplicates.
 			if (amenities.size() >= NEARBY_MAX_POI_COUNT || radius > NEARBY_POI_MAX_RADIUS) {
-				amenities = amenityObjectsMerger.merge(amenities);
-				amenities.remove(amenity);
+				if (currentAmenity != null) {
+					amenities.add(currentAmenity);
+				}
+				amenities = amenityObjectsMerger.merge(amenities, currentAmenity);
 			}
 		}
 		MapUtils.sortListOfMapObject(amenities, latLon.getLatitude(), latLon.getLongitude());
