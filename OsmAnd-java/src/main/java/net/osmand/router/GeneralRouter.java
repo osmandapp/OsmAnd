@@ -816,7 +816,7 @@ public class GeneralRouter implements VehicleRouter {
 			return defaultNumeric;
 		}
 		public String getDefaultString() {
-			return type == RoutingParameterType.NUMERIC ? String.format(Locale.US, "%.2f", defaultNumeric) : "-";
+			return type == RoutingParameterType.NUMERIC ? String.format(Locale.US, "%.1f", defaultNumeric) : "-";
 		}
 		public String[] getProfiles() {
 			return profiles;
