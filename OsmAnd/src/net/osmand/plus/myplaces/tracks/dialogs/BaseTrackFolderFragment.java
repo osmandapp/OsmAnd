@@ -317,11 +317,9 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	@Override
 	public void onTracksGroupOptionsSelected(@NonNull View view, @NonNull TracksGroup group) {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
-		if (foldersHelper != null && group instanceof TrackFolder) {
-			TrackFolder folder = (TrackFolder) group;
+		if (foldersHelper != null && group instanceof TrackFolder folder) {
 			TrackFolderOptionsController.showDialog(foldersHelper, folder, this);
-		} else if (group instanceof SmartFolder) {
-			SmartFolder folder = (SmartFolder) group;
+		} else if (group instanceof SmartFolder folder) {
 			SmartFolderOptionsController.Companion.showDialog(app, getChildFragmentManager(), folder, this);
 		}
 	}

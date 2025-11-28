@@ -23,6 +23,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,6 +55,13 @@ public class ConfigureMenuRootFragment extends BaseFullScreenFragment {
 		setupRecyclerView(view);
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createScrollable(R.id.list).build());
+		return collection;
 	}
 
 	private void setupToolbar(@NonNull View view) {

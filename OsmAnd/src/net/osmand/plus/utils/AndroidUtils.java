@@ -702,11 +702,12 @@ public class AndroidUtils {
 
 	public static int spToPx(@NonNull Context ctx, float sp) {
 		Resources r = ctx.getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_SP,
-				sp,
-				r.getDisplayMetrics()
-		);
+		return (int) TypedValue.applyDimension(COMPLEX_UNIT_SP, sp, r.getDisplayMetrics());
+	}
+
+	public static float spToPxF(@NonNull Context ctx, float sp) {
+		Resources r = ctx.getResources();
+		return TypedValue.applyDimension(COMPLEX_UNIT_SP, sp, r.getDisplayMetrics());
 	}
 
 	@ColorInt

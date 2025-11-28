@@ -302,10 +302,10 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerMapContextMenuActions(@NonNull MapActivity mapActivity,
-	                                          double latitude,
-	                                          double longitude,
-	                                          ContextMenuAdapter adapter,
-	                                          Object selectedObj, boolean configureMenu) {
+											  double latitude,
+											  double longitude,
+											  @NonNull ContextMenuAdapter adapter,
+											  Object selectedObj, boolean configureMenu) {
 		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			int resId = item.getTitleId();
 			if (resId == R.string.context_menu_item_create_poi) {

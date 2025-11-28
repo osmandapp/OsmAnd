@@ -648,10 +648,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		});
 		backButtonContainer.setOnClickListener(v -> {
 			hideSelectedGpx();
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				mapActivity.launchPrevActivityIntent();
-			}
+			callMapActivity(MapActivity::launchPrevActivityIntent);
 			dismiss();
 		});
 		TextView backButtonText = backButtonContainer.findViewById(R.id.back_button_text);

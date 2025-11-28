@@ -206,8 +206,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerMapContextMenuActions(@NonNull MapActivity mapActivity,
-	                                          double latitude, double longitude,
-	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+											  double latitude, double longitude,
+											  @NonNull ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 
 		ItemClickListener addListener = (uiAdapter, view, item, isChecked) -> {
 			showAddParkingDialog(mapActivity, latitude, longitude);

@@ -41,6 +41,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
+
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
@@ -345,6 +347,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				.portraitSides(InsetSide.TOP, InsetSide.BOTTOM).landscapeSides(InsetSide.TOP)
 				.applyPadding(true).build());
 		collection.add(InsetTarget.createLeftSideContainer(true, true, R.id.menuItems));
+
+		View dashboardView = findViewById(R.id.dashboard);
+		ObservableScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
+		collection.add(InsetTarget.createLeftSideContainer(false, true, dashboardView));
+		collection.add(InsetTarget.createLeftSideContainer(true, true, scrollView));
+		collection.add(InsetTarget.createLeftSideContainer(true, false, R.id.dashboard_content_container));
+		collection.add(InsetTarget.createScrollable(scrollView).landscapeSides().build());
 
 		return collection;
 	}

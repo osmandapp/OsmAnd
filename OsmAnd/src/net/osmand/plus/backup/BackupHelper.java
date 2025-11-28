@@ -446,9 +446,9 @@ public class BackupHelper {
 	}
 
 	@Nullable
-	String uploadFile(@NonNull String fileName, @NonNull String type, long lastModifiedTime,
-			@NonNull StreamWriter streamWriter,
-			@Nullable OnUploadFileListener listener, boolean autoSync) throws UserNotRegisteredException {
+	String uploadFile(@NonNull String fileName, @NonNull String type, long clienttime,
+			@NonNull StreamWriter streamWriter, @Nullable OnUploadFileListener listener,
+			boolean autoSync) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -456,7 +456,7 @@ public class BackupHelper {
 		params.put("accessToken", getAccessToken());
 		params.put("name", fileName);
 		params.put("type", type);
-		params.put("clienttime", String.valueOf(lastModifiedTime));
+		params.put("clienttime", String.valueOf(clienttime));
 		params.put("autoSync", String.valueOf(autoSync));
 
 		Map<String, String> headers = new HashMap<>();

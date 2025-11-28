@@ -288,6 +288,9 @@ public class BaseDetailsObject {
 			if (syntheticAmenity.getLocation() == null) {
 				syntheticAmenity.setLocation(renderedObject.getLocation());
 			}
+			if (syntheticAmenity.getLocation() == null) {
+				syntheticAmenity.setLocation(renderedObject.getLabelLatLon());
+			}
 			processPolygonCoordinates(renderedObject.getX(), renderedObject.getY());
 		}
 	}

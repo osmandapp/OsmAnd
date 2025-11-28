@@ -31,6 +31,8 @@ import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.resources.DetectRegionTask;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.NextDirectionInfo;
@@ -339,6 +341,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				mapView.getAnimatedDraggingThread().stopAnimatingSync();
 			}
 			autoZoom = autoZoomBySpeedHelper.calculateZoomBySpeedToAnimate(mapRenderer, location, rotation, getNextTurn());
+			if (PluginsHelper.isDevelopment()) {
+				if (autoZoom != null) {
+					android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "calculateZoomBySpeedToAnimate b=" + autoZoom.base + "; f=" + autoZoom.floatPart + ", angle " + settings.AUTO_ZOOM_3D_ANGLE.get() + "; lat " + location.getLatitude() + "; lon " + location.getLongitude());
+				}
+			}
 		}
 
 		long movingTime;
@@ -364,6 +371,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 		double latitude = predictedLocation != null ? predictedLocation.getLatitude() : location.getLatitude();
 		double longitude = predictedLocation != null ? predictedLocation.getLongitude() : location.getLongitude();
+		if (PluginsHelper.isDevelopment()) {
+			if (zoomParams != null) {
+				android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "setMyLocationV2 b=" + zoomParams.first.base + "; f=" + zoomParams.first.floatPart + ", angle " + elevationAngle);
+			}
+		}
 		mapView.getAnimatedDraggingThread().startMoving(
 				latitude, longitude, zoomParams,
 				false, rotation, elevationAngle, movingTime, false,
@@ -384,6 +396,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			Pair<ComplexZoom, Float> zoomParams = autoZoom != null
 					? new Pair<>(autoZoom, AnimateDraggingMapThread.NAV_ANIMATION_TIME)
 					: null;
+			if (PluginsHelper.isDevelopment()) {
+				android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "setMyLocationV1 " + zoomParams);
+			}
 			mapView.getAnimatedDraggingThread().startMoving(
 					location.getLatitude(), location.getLongitude(), zoomParams,
 					pendingRotation, rotation, 0, movingTime, false,
