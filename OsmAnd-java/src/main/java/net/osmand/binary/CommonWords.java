@@ -1368,16 +1368,6 @@ public class CommonWords {
 		addCommon("trafficway");
 		addCommon("plaine");
 
-		// Polish street terms and abbreviations
-		addFrequentlyUsed("ul.");
-		addFrequentlyUsed("al.");
-		addFrequentlyUsed("skwer");
-		addFrequentlyUsed("skw.");
-		addFrequentlyUsed("bulwar");
-		addFrequentlyUsed("bulw.");
-		addFrequentlyUsed("wybrzeże");
-		addFrequentlyUsed("wyb.");
-
 		addAbbrevations();
 		addRegionNames(); // add regions names and region abbreviations
 
