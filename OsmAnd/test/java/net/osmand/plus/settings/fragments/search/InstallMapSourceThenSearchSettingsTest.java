@@ -26,6 +26,7 @@ import static org.hamcrest.Matchers.is;
 
 import android.view.View;
 
+import androidx.test.espresso.IdlingPolicies;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -37,9 +38,13 @@ import net.osmand.test.common.AndroidTest;
 
 import org.hamcrest.Matcher;
 import org.hamcrest.core.IsInstanceOf;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.concurrent.TimeUnit;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -50,7 +55,21 @@ public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
 
 	private static final String MICROSOFT_MAPS = "Microsoft Maps";
 
-	// Fk-TODO: integrate this test method into SettingsSearchTest as a new test case
+	private long originalTimeout;
+	private TimeUnit originalTimeUnit;
+
+	@Before
+	public void increaseTimeout() {
+		originalTimeout = IdlingPolicies.getMasterIdlingPolicy().getIdleTimeout();
+		originalTimeUnit = IdlingPolicies.getMasterIdlingPolicy().getIdleTimeoutUnit();
+		IdlingPolicies.setMasterPolicyTimeout(2, TimeUnit.MINUTES);
+	}
+
+	@After
+	public void resetTimeout() {
+		IdlingPolicies.setMasterPolicyTimeout(originalTimeout, originalTimeUnit);
+	}
+
 	@Test
 	public void shouldInstallMapSourceThenSearchSettings() {
 		skipAppStartDialogs(app);
