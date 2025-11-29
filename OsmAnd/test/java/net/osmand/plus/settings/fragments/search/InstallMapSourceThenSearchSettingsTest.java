@@ -32,6 +32,8 @@ import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
+import com.google.common.collect.Sets;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -46,6 +48,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @LargeTest
@@ -54,8 +58,6 @@ public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
 
 	@Rule
 	public NonClosingActivityScenarioRule<MapActivity> nonClosingActivityScenarioRule = new NonClosingActivityScenarioRule<>(MapActivity.class);
-
-	private static final String MICROSOFT_MAPS = "Microsoft Maps";
 
 	private long originalTimeout;
 	private TimeUnit originalTimeUnit;
@@ -75,18 +77,19 @@ public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
 	@Test
 	public void test_installMapSource_searchSettings_configureMapSearchResultFoundForEachApplicationMode() {
 		// Given
+		final String mapSourceName = "Microsoft Maps";
 		skipAppStartDialogs(app);
 
 		// When
-		addMicrosoftMapsSource();
+		addMapSource(mapSourceName);
 
 		// And
 		onView(searchButton()).perform(click());
 		onView(searchInsideDisabledProfilesCheckBox()).perform(click());
-		onView(searchView()).perform(replaceText(MICROSOFT_MAPS), closeSoftKeyboard());
+		onView(searchView()).perform(replaceText(mapSourceName), closeSoftKeyboard());
 
 		// Then
-		hasConfigureMapSearchResults();
+		hasConfigureMapSearchResults(mapSourceName);
 	}
 
 	private static Matcher<View> navigateUpButton() {
@@ -113,7 +116,7 @@ public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
 				isDisplayed());
 	}
 
-	private void addMicrosoftMapsSource() {
+	private void addMapSource(final String mapSourceName) {
 		PluginsHelper.enablePlugin(OsmandRasterMapsPlugin.class, app);
 		onView(mapMenuButton()).perform(click());
 		onView(settingsButton()).perform(click());
@@ -121,7 +124,7 @@ public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
 		clickConfigureMap();
 		onView(mapSourceButton()).perform(click());
 		onView(addMoreButton()).perform(click());
-		onView(microsoftMapsButton()).perform(click());
+		onView(mapSourceButton(mapSourceName)).perform(click());
 		onView(applyButton()).perform(scrollTo(), click());
 		onView(backToMapButton()).perform(click());
 		onView(navigateUpButton()).perform(click());
@@ -138,10 +141,10 @@ public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
 						3));
 	}
 
-	private static Matcher<View> microsoftMapsButton() {
+	private static Matcher<View> mapSourceButton(final String mapSourceName) {
 		return allOf(
 				withId(R.id.text),
-				withText(MICROSOFT_MAPS),
+				withText(mapSourceName),
 				withParent(
 						allOf(
 								withId(R.id.button),
@@ -190,20 +193,26 @@ public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
 								0)));
 	}
 
-	private static void hasConfigureMapSearchResults() {
-		for (final ApplicationMode applicationMode : ApplicationMode.allPossibleValues()) {
-			hasConfigureMapSearchResult(applicationMode);
+	private static void hasConfigureMapSearchResults(final String mapSourceName) {
+		for (final ApplicationMode applicationMode : getApplicationModesWithoutDefault()) {
+			hasConfigureMapSearchResult(applicationMode, mapSourceName);
 		}
 	}
 
-	private static void hasConfigureMapSearchResult(final ApplicationMode applicationMode) {
-		onView(searchResultsView()).check(matches(hasSearchResultWithText(getConfigureMapSearchResult(applicationMode))));
+	private static Set<ApplicationMode> getApplicationModesWithoutDefault() {
+		return Sets.difference(
+				new HashSet<>(ApplicationMode.allPossibleValues()),
+				Set.of(ApplicationMode.DEFAULT));
 	}
 
-	private static String getConfigureMapSearchResult(final ApplicationMode applicationMode) {
+	private static void hasConfigureMapSearchResult(final ApplicationMode applicationMode, final String mapSourceName) {
+		onView(searchResultsView()).check(matches(hasSearchResultWithText(getConfigureMapSearchResult(applicationMode, mapSourceName))));
+	}
+
+	private static String getConfigureMapSearchResult(final ApplicationMode applicationMode, final String mapSourceName) {
 		return String.format(
 				"Path: %s > Configure map > Map source… > %s",
 				applicationMode.toHumanString(),
-				MICROSOFT_MAPS);
+				mapSourceName);
 	}
 }
