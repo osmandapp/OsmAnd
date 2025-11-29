@@ -74,23 +74,19 @@ public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
 
 	@Test
 	public void test_installMapSource_searchSettings_configureMapSearchResultFoundForEachApplicationMode() {
+		// Given
 		skipAppStartDialogs(app);
+
+		// When
 		addMicrosoftMapsSource();
 
+		// And
 		onView(searchButton()).perform(click());
 		onView(searchInsideDisabledProfilesCheckBox()).perform(click());
 		onView(searchView()).perform(replaceText(MICROSOFT_MAPS), closeSoftKeyboard());
 
 		// Then
-		for (final ApplicationMode applicationMode : ApplicationMode.allPossibleValues()) {
-			onView(searchResultsView()).check(
-					matches(
-							hasSearchResultWithText(
-									String.format(
-											"Path: %s > Configure map > Map source… > %s",
-											applicationMode.toHumanString(),
-											MICROSOFT_MAPS))));
-		}
+		hasConfigureMapSearchResults();
 	}
 
 	private static Matcher<View> navigateUpButton() {
@@ -192,5 +188,22 @@ public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
 						childAtPosition(
 								withId(android.R.id.list_container),
 								0)));
+	}
+
+	private static void hasConfigureMapSearchResults() {
+		for (final ApplicationMode applicationMode : ApplicationMode.allPossibleValues()) {
+			hasConfigureMapSearchResult(applicationMode);
+		}
+	}
+
+	private static void hasConfigureMapSearchResult(final ApplicationMode applicationMode) {
+		onView(searchResultsView()).check(matches(hasSearchResultWithText(getConfigureMapSearchResult(applicationMode))));
+	}
+
+	private static String getConfigureMapSearchResult(final ApplicationMode applicationMode) {
+		return String.format(
+				"Path: %s > Configure map > Map source… > %s",
+				applicationMode.toHumanString(),
+				MICROSOFT_MAPS);
 	}
 }
