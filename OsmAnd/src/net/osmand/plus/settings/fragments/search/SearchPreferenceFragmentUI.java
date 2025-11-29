@@ -54,12 +54,12 @@ class SearchPreferenceFragmentUI implements de.KnollFrank.lib.settingssearch.sea
 
 	@Override
 	public void onSearchReady(final View rootView, final SearchForQueryAndDisplayResultsCommand searchForQueryAndDisplayResultsCommand) {
-		configureCheckbox(
+		configureCheckBox(
 				rootView.findViewById(R.id.search_inside_disabled_profiles),
 				searchForQueryAndDisplayResultsCommand);
 	}
 
-	private void configureCheckbox(final CheckBox searchInsideDisabledProfiles, final SearchForQueryAndDisplayResultsCommand searchForQueryAndDisplayResultsCommand) {
+	private void configureCheckBox(final CheckBox searchInsideDisabledProfiles, final SearchForQueryAndDisplayResultsCommand searchForQueryAndDisplayResultsCommand) {
 		searchInsideDisabledProfiles.setChecked(!searchResultsFilter.shallRemoveSearchResultsConnectedToDisabledProfiles());
 		searchInsideDisabledProfiles.setOnCheckedChangeListener(
 				(_checkBox, _searchInsideDisabledProfiles) -> {
