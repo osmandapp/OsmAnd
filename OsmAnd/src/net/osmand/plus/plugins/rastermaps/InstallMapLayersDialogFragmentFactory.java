@@ -15,7 +15,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
 import net.osmand.plus.settings.fragments.search.SearchDatabaseRebuilder;
-import net.osmand.plus.settings.fragments.search.SearchDatabaseRootedAtPrefsFragmentFirstAdapter;
+import net.osmand.plus.settings.fragments.search.SearchDatabaseRootedAtConfigureMapFragmentAdapter;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.InstallMapLayersDialogFragment;
@@ -126,7 +126,7 @@ class InstallMapLayersDialogFragmentFactory {
 										new ActualConfigurationProvider().getActualConfiguration(),
 										activity,
 										getTileSourceTemplatesProvider());
-								new SearchDatabaseRootedAtPrefsFragmentFirstAdapter().adaptSearchDatabaseRootedAtPrefsFragmentFirst(
+								new SearchDatabaseRootedAtConfigureMapFragmentAdapter().adaptSearchDatabaseRootedAtConfigureMapFragment(
 										getPreferencesDatabase(),
 										getPojoGraph(getLocale()),
 										new ActualConfigurationProvider().getActualConfiguration(),

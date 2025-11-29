@@ -28,12 +28,11 @@ import de.KnollFrank.lib.settingssearch.graph.GraphPathFactory;
 import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenGraphProviderFactory;
 import de.KnollFrank.lib.settingssearch.results.recyclerview.FragmentContainerViewAdder;
 
-// FK-TODO: rename
-public class SearchDatabaseRootedAtPrefsFragmentFirstAdapter {
+public class SearchDatabaseRootedAtConfigureMapFragmentAdapter {
 
 	private final @IdRes int FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
 
-	public void adaptSearchDatabaseRootedAtPrefsFragmentFirst(
+	public void adaptSearchDatabaseRootedAtConfigureMapFragment(
 			final DAOProvider preferencesDatabase,
 			final SearchablePreferenceScreenGraph graph,
 			final Configuration newConfiguration,
