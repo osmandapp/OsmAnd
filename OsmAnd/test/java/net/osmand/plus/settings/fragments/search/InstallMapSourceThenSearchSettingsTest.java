@@ -15,6 +15,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.plus.settings.fragments.search.SearchButtonClick.mapMenuButton;
 import static net.osmand.plus.settings.fragments.search.SearchButtonClick.searchButton;
+import static net.osmand.plus.settings.fragments.search.SearchButtonClick.searchInsideDisabledProfilesCheckBox;
 import static net.osmand.plus.settings.fragments.search.SearchButtonClick.settingsButton;
 import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.hasSearchResultWithText;
 import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.searchResultsView;
@@ -34,6 +35,7 @@ import androidx.test.filters.LargeTest;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.test.common.AndroidTest;
 
 import org.hamcrest.Matcher;
@@ -71,15 +73,24 @@ public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
 	}
 
 	@Test
-	public void shouldInstallMapSourceThenSearchSettings() {
+	public void test_installMapSource_searchSettings_configureMapSearchResultFoundForEachApplicationMode() {
 		skipAppStartDialogs(app);
 		addMicrosoftMapsSource();
 
 		onView(searchButton()).perform(click());
+		onView(searchInsideDisabledProfilesCheckBox()).perform(click());
 		onView(searchView()).perform(replaceText(MICROSOFT_MAPS), closeSoftKeyboard());
 
 		// Then
-		onView(searchResultsView()).check(matches(hasSearchResultWithText(String.format("Path: Driving > Configure map > Map source… > %s", MICROSOFT_MAPS))));
+		for (final ApplicationMode applicationMode : ApplicationMode.allPossibleValues()) {
+			onView(searchResultsView()).check(
+					matches(
+							hasSearchResultWithText(
+									String.format(
+											"Path: %s > Configure map > Map source… > %s",
+											applicationMode.toHumanString(),
+											MICROSOFT_MAPS))));
+		}
 	}
 
 	private static Matcher<View> navigateUpButton() {

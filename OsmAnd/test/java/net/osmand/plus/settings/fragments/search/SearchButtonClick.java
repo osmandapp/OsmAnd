@@ -60,4 +60,15 @@ class SearchButtonClick {
 						0),
 				isDisplayed());
 	}
+
+	public static Matcher<View> searchInsideDisabledProfilesCheckBox() {
+		return allOf(
+				withId(R.id.search_inside_disabled_profiles),
+				childAtPosition(
+						childAtPosition(
+								withId(R.id.fragmentContainer),
+								0),
+						1),
+				isDisplayed());
+	}
 }
