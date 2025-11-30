@@ -86,7 +86,7 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter {
 				activityContext.findViewById(android.R.id.content),
 				FRAGMENT_CONTAINER_VIEW_ID);
 		final SearchablePreferenceScreen configureMapFragmentPreferenceScreen =
-				findConfigureMapFragmentPreferenceScreen(
+				getConfigureMapFragmentPreferenceScreen(
 						graph,
 						applicationMode);
 		final SearchDatabaseConfig searchDatabaseConfig =
@@ -127,7 +127,7 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter {
 				.getSearchablePreferenceScreenGraph(root);
 	}
 
-	private SearchablePreferenceScreen findConfigureMapFragmentPreferenceScreen(
+	private SearchablePreferenceScreen getConfigureMapFragmentPreferenceScreen(
 			final SearchablePreferenceScreenGraph graphToSearchIn,
 			final ApplicationMode applicationMode) {
 		return SearchablePreferenceScreens
