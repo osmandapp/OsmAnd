@@ -133,7 +133,9 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter {
 		return SearchablePreferenceScreens
 				.findSearchablePreferenceScreenById(
 						graphToSearchIn.graph().vertexSet(),
-						String.format("en-net.osmand.plus.configmap.ConfigureMapFragment$ConfigureMapFragmentProxy Bundle[{app_mode_key=%s, configureSettingsSearch=true}]", applicationMode.getStringKey()))
+						String.format(
+								"en-net.osmand.plus.configmap.ConfigureMapFragment$ConfigureMapFragmentProxy Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
+								applicationMode.getStringKey()))
 				.orElseThrow();
 	}
 
