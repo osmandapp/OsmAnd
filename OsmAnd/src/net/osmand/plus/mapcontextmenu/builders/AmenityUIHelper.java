@@ -368,7 +368,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	private boolean isKeyToSkip(@NonNull String key) {
 		return startsWithAny(key, COLLAPSABLE_PREFIX, ALT_NAME_WITH_LANG_PREFIX, LANG_YES)
-				|| equalsToAny(key, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", "mapillary", "subway_region")
+				|| equalsToAny(key, REVIEWS, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", "mapillary", "subway_region")
 				|| (key.equals("note") && !osmEditingEnabled)
 				|| MapObject.isNameLangTag(key)
 				|| key.contains(ROUTE);
