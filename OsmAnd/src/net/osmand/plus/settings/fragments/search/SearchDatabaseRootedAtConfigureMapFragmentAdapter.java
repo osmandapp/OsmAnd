@@ -46,7 +46,7 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter {
 		preferencesDatabase
 				.searchablePreferenceScreenGraphDAO()
 				.persist(
-						getAdaptedGraph(
+						adaptGraphAtConfigureMapFragment(
 								graph,
 								getApplicationModesWithoutDefault(),
 								newConfiguration,
@@ -54,17 +54,18 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter {
 								tileSourceTemplatesProvider));
 	}
 
-	private SearchablePreferenceScreenGraph getAdaptedGraph(final SearchablePreferenceScreenGraph graph,
-															final Set<ApplicationMode> applicationModes,
-															final Configuration newConfiguration,
-															final FragmentActivity activityContext,
-															final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
+	private SearchablePreferenceScreenGraph adaptGraphAtConfigureMapFragment(
+			final SearchablePreferenceScreenGraph graph,
+			final Set<ApplicationMode> applicationModes,
+			final Configuration newConfiguration,
+			final FragmentActivity activityContext,
+			final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
 		return applicationModes
 				.stream()
 				.reduce(
 						graph,
 						(currentGraph, applicationMode) ->
-								getAdaptedGraph(
+								adaptGraphAtConfigureMapFragment(
 										currentGraph,
 										applicationMode,
 										newConfiguration,
@@ -75,15 +76,19 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter {
 						});
 	}
 
-	private SearchablePreferenceScreenGraph getAdaptedGraph(final SearchablePreferenceScreenGraph graph,
-															final ApplicationMode applicationMode,
-															final Configuration newConfiguration,
-															final FragmentActivity activityContext,
-															final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
+	private SearchablePreferenceScreenGraph adaptGraphAtConfigureMapFragment(
+			final SearchablePreferenceScreenGraph graph,
+			final ApplicationMode applicationMode,
+			final Configuration newConfiguration,
+			final FragmentActivity activityContext,
+			final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
 		FragmentContainerViewAdder.addInvisibleFragmentContainerViewWithIdToParent(
 				activityContext.findViewById(android.R.id.content),
 				FRAGMENT_CONTAINER_VIEW_ID);
-		final SearchablePreferenceScreen searchablePreferenceScreen = findSearchablePreferenceScreen(graph, applicationMode);
+		final SearchablePreferenceScreen configureMapFragmentPreferenceScreen =
+				findConfigureMapFragmentPreferenceScreen(
+						graph,
+						applicationMode);
 		final SearchDatabaseConfig searchDatabaseConfig =
 				SearchDatabaseConfigFactory.createSearchDatabaseConfig(
 						MainSettingsFragment.class,
@@ -92,10 +97,10 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter {
 		return new SearchablePreferenceScreenGraph(
 				SearchablePreferenceScreenSubtreeReplacer.replaceSubtreeWithTree(
 						graph.graph(),
-						searchablePreferenceScreen,
+						configureMapFragmentPreferenceScreen,
 						getPojoGraphRootedAt(
 								instantiateSearchablePreferenceScreen(
-										searchablePreferenceScreen,
+										configureMapFragmentPreferenceScreen,
 										graph.graph(),
 										createGraphPathFactory(searchDatabaseConfig, activityContext)),
 								graph.locale(),
@@ -122,7 +127,9 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter {
 				.getSearchablePreferenceScreenGraph(root);
 	}
 
-	private SearchablePreferenceScreen findSearchablePreferenceScreen(final SearchablePreferenceScreenGraph graphToSearchIn, final ApplicationMode applicationMode) {
+	private SearchablePreferenceScreen findConfigureMapFragmentPreferenceScreen(
+			final SearchablePreferenceScreenGraph graphToSearchIn,
+			final ApplicationMode applicationMode) {
 		return SearchablePreferenceScreens
 				.findSearchablePreferenceScreenById(
 						graphToSearchIn.graph().vertexSet(),
