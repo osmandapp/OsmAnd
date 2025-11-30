@@ -388,9 +388,9 @@ enum class Body(
 
 
 private class StarDef {
-    public var ra: Double = 0.0       // heliocentric right ascension in EQJ
-    public var dec: Double = 0.0      // heliocentric declination in EQJ
-    public var dist: Double = 0.0     // heliocentric distance in AU
+    var ra: Double = 0.0       // heliocentric right ascension in EQJ
+    var dec: Double = 0.0      // heliocentric declination in EQJ
+    var dist: Double = 0.0     // heliocentric distance in AU
 }
 
 private val starTable = arrayOf(
@@ -455,14 +455,14 @@ private fun userDefinedStar(body: Body): StarDef? {
  * If you don't know the distance to the star, using a large value like 1000 will generally work well.
  * The minimum allowed distance is 1 light-year, which is required to provide certain internal optimizations.
  */
-public fun defineStar(body: Body, ra: Double, dec: Double, distanceLightYears: Double) {
+fun defineStar(body: Body, ra: Double, dec: Double, distanceLightYears: Double) {
     val star = getStar(body) ?: throw InvalidBodyException(body)
     if (!ra.isFinite() || ra < 0.0 || ra >= 24.0) throw IllegalArgumentException("Invalid right ascension: $ra")
     if (!dec.isFinite() || dec < -90.0 || dec > +90.0) throw IllegalArgumentException("Invalid declination: $dec")
     if (!distanceLightYears.isFinite() || distanceLightYears < 1.0) throw IllegalArgumentException("Invalid distance: $distanceLightYears")
     star.ra = ra
     star.dec = dec
-    star.dist = distanceLightYears * AU_PER_LY;
+    star.dist = distanceLightYears * AU_PER_LY
 }
 
 
@@ -6037,9 +6037,9 @@ fun equatorialToEcliptic(eqj: Vector): Ecliptic {
     val et = earthTilt(eqj.t)
 
     // Convert J2000 mean equator (EQJ) to true equator of date (EQD).
-    val eqd = gyration(eqj, PrecessDirection.From2000);
+    val eqd = gyration(eqj, PrecessDirection.From2000)
 
-    // Rotate from EQD to true ecliptic of date (ECT).
+	// Rotate from EQD to true ecliptic of date (ECT).
     return rotateEquatorialToEcliptic(eqd, et.tobl.degreesToRadians())
 }
 
@@ -6531,10 +6531,10 @@ private fun horizonDipAngle(observer: Observer, metersAboveGround: Double): Doub
 
 
 private class AscentInfo(
-    public val tx: Time,
-    public val ty: Time,
-    public val ax: Double,
-    public val ay: Double
+    val tx: Time,
+    val ty: Time,
+    val ax: Double,
+    val ay: Double
 )
 
 
@@ -6682,7 +6682,7 @@ private class SearchContext_Altitude(
     private val bodyRadiusAu: Double,
     private val targetAltitude: Double
 ) : SearchContext {
-    public override fun eval(time: Time): Double {
+    override fun eval(time: Time): Double {
         val ofdate: Equatorial = equator(body, time, observer, EquatorEpoch.OfDate, Aberration.Corrected)
         val hor: Topocentric = horizon(time, observer, ofdate.ra, ofdate.dec, Refraction.None)
         val altitude = hor.altitude + asin(bodyRadiusAu / ofdate.dist).radiansToDegrees()
@@ -8735,10 +8735,10 @@ class GravitySimulator {
      */
     val originBody: Body
 
-    private var prev: GravSimEndpoint;
-    private var curr: GravSimEndpoint;
+    private var prev: GravSimEndpoint
+	private var curr: GravSimEndpoint
 
-    /**
+	/**
      * Creates a gravity simulation object.
      *
      * @param originBody
@@ -9123,7 +9123,7 @@ private val iauRow: Array<IauRow> = arrayOf(
 //---------------------------------------------------------------------------------------
 // VSOP87 coefficients, for calculating major planet state vectors.
 
-private val vsopLonMercury0 = VsopSeries(arrayOf(
+private val vsopLonMercury0 by lazy { VsopSeries(arrayOf(
     VsopTerm(4.40250710144, 0.00000000000, 0.00000000000),
     VsopTerm(0.40989414977, 1.48302034195, 26087.90314157420),
     VsopTerm(0.05046294200, 4.47785489551, 52175.80628314840),
@@ -9131,22 +9131,22 @@ private val vsopLonMercury0 = VsopSeries(arrayOf(
     VsopTerm(0.00165590362, 4.11969163423, 104351.61256629678),
     VsopTerm(0.00034561897, 0.77930768443, 130439.51570787099),
     VsopTerm(0.00007583476, 3.71348404924, 156527.41884944518)
-))
+)) }
 
-private val vsopLonMercury1 = VsopSeries(arrayOf(
+private val vsopLonMercury1 by lazy { VsopSeries(arrayOf(
     VsopTerm(26087.90313685529, 0.00000000000, 0.00000000000),
     VsopTerm(0.01131199811, 6.21874197797, 26087.90314157420),
     VsopTerm(0.00292242298, 3.04449355541, 52175.80628314840),
     VsopTerm(0.00075775081, 6.08568821653, 78263.70942472259),
     VsopTerm(0.00019676525, 2.80965111777, 104351.61256629678)
-))
+)) }
 
-private val vsopLonMercury = VsopFormula(arrayOf(
+private val vsopLonMercury by lazy { VsopFormula(arrayOf(
     vsopLonMercury0,
     vsopLonMercury1
-))
+)) }
 
-private val vsopLatMercury0 = VsopSeries(arrayOf(
+private val vsopLatMercury0 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.11737528961, 1.98357498767, 26087.90314157420),
     VsopTerm(0.02388076996, 5.03738959686, 52175.80628314840),
     VsopTerm(0.01222839532, 3.14159265359, 0.00000000000),
@@ -9154,39 +9154,39 @@ private val vsopLatMercury0 = VsopSeries(arrayOf(
     VsopTerm(0.00129778770, 4.83232503958, 104351.61256629678),
     VsopTerm(0.00031866927, 1.58088495658, 130439.51570787099),
     VsopTerm(0.00007963301, 4.60972126127, 156527.41884944518)
-))
+)) }
 
-private val vsopLatMercury1 = VsopSeries(arrayOf(
+private val vsopLatMercury1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00274646065, 3.95008450011, 26087.90314157420),
     VsopTerm(0.00099737713, 3.14159265359, 0.00000000000)
-))
+)) }
 
-private val vsopLatMercury = VsopFormula(arrayOf(
+private val vsopLatMercury by lazy { VsopFormula(arrayOf(
     vsopLatMercury0,
     vsopLatMercury1
-))
+)) }
 
-private val vsopRadMercury0 = VsopSeries(arrayOf(
+private val vsopRadMercury0 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.39528271651, 0.00000000000, 0.00000000000),
     VsopTerm(0.07834131818, 6.19233722598, 26087.90314157420),
     VsopTerm(0.00795525558, 2.95989690104, 52175.80628314840),
     VsopTerm(0.00121281764, 6.01064153797, 78263.70942472259),
     VsopTerm(0.00021921969, 2.77820093972, 104351.61256629678),
     VsopTerm(0.00004354065, 5.82894543774, 130439.51570787099)
-))
+)) }
 
-private val vsopRadMercury1 = VsopSeries(arrayOf(
+private val vsopRadMercury1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00217347740, 4.65617158665, 26087.90314157420),
     VsopTerm(0.00044141826, 1.42385544001, 52175.80628314840)
-))
+)) }
 
-private val vsopRadMercury = VsopFormula(arrayOf(
+private val vsopRadMercury by lazy { VsopFormula(arrayOf(
     vsopRadMercury0,
     vsopRadMercury1
-))
+)) }
 
 
-private val vsopLonVenus0 = VsopSeries(arrayOf(
+private val vsopLonVenus0 by lazy { VsopSeries(arrayOf(
     VsopTerm(3.17614666774, 0.00000000000, 0.00000000000),
     VsopTerm(0.01353968419, 5.59313319619, 10213.28554621100),
     VsopTerm(0.00089891645, 5.30650047764, 20426.57109242200),
@@ -9197,35 +9197,35 @@ private val vsopLonVenus0 = VsopSeries(arrayOf(
     VsopTerm(0.00001664146, 4.25018630147, 1577.34354244780),
     VsopTerm(0.00001438387, 4.15745084182, 9683.59458111640),
     VsopTerm(0.00001200521, 6.15357116043, 30639.85663863300)
-))
+)) }
 
-private val vsopLonVenus1 = VsopSeries(arrayOf(
+private val vsopLonVenus1 by lazy { VsopSeries(arrayOf(
     VsopTerm(10213.28554621638, 0.00000000000, 0.00000000000),
     VsopTerm(0.00095617813, 2.46406511110, 10213.28554621100),
     VsopTerm(0.00007787201, 0.62478482220, 20426.57109242200)
-))
+)) }
 
-private val vsopLonVenus = VsopFormula(arrayOf(
+private val vsopLonVenus by lazy { VsopFormula(arrayOf(
     vsopLonVenus0,
     vsopLonVenus1
-))
+)) }
 
-private val vsopLatVenus0 = VsopSeries(arrayOf(
+private val vsopLatVenus0 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.05923638472, 0.26702775812, 10213.28554621100),
     VsopTerm(0.00040107978, 1.14737178112, 20426.57109242200),
     VsopTerm(0.00032814918, 3.14159265359, 0.00000000000)
-))
+)) }
 
-private val vsopLatVenus1 = VsopSeries(arrayOf(
+private val vsopLatVenus1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00287821243, 1.88964962838, 10213.28554621100)
-))
+)) }
 
-private val vsopLatVenus = VsopFormula(arrayOf(
+private val vsopLatVenus by lazy { VsopFormula(arrayOf(
     vsopLatVenus0,
     vsopLatVenus1
-))
+)) }
 
-private val vsopRadVenus0 = VsopSeries(arrayOf(
+private val vsopRadVenus0 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.72334820891, 0.00000000000, 0.00000000000),
     VsopTerm(0.00489824182, 4.02151831717, 10213.28554621100),
     VsopTerm(0.00001658058, 4.90206728031, 20426.57109242200),
@@ -9234,19 +9234,19 @@ private val vsopRadVenus0 = VsopSeries(arrayOf(
     VsopTerm(0.00000498395, 2.58682193892, 9683.59458111640),
     VsopTerm(0.00000221985, 2.01346696541, 19367.18916223280),
     VsopTerm(0.00000237454, 2.55136053886, 15720.83878487840)
-))
+)) }
 
-private val vsopRadVenus1 = VsopSeries(arrayOf(
+private val vsopRadVenus1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00034551041, 0.89198706276, 10213.28554621100)
-))
+)) }
 
-private val vsopRadVenus = VsopFormula(arrayOf(
+private val vsopRadVenus by lazy { VsopFormula(arrayOf(
     vsopRadVenus0,
     vsopRadVenus1
-))
+)) }
 
 
-private val vsopLonEarth0 = VsopSeries(arrayOf(
+private val vsopLonEarth0 by lazy { VsopSeries(arrayOf(
     VsopTerm(1.75347045673, 0.00000000000, 0.00000000000),
     VsopTerm(0.03341656453, 4.66925680415, 6283.07584999140),
     VsopTerm(0.00034894275, 4.62610242189, 12566.15169998280),
@@ -9275,38 +9275,38 @@ private val vsopLonEarth0 = VsopSeries(arrayOf(
     VsopTerm(0.00000202318, 2.45767790232, 6069.77675455340),
     VsopTerm(0.00000126225, 1.08295459501, 20.77539549240),
     VsopTerm(0.00000155516, 0.83306084617, 213.29909543800)
-))
+)) }
 
-private val vsopLonEarth1 = VsopSeries(arrayOf(
+private val vsopLonEarth1 by lazy { VsopSeries(arrayOf(
     VsopTerm(6283.07584999140, 0.00000000000, 0.00000000000),
     VsopTerm(0.00206058863, 2.67823455808, 6283.07584999140),
     VsopTerm(0.00004303419, 2.63512233481, 12566.15169998280)
-))
+)) }
 
-private val vsopLonEarth2 = VsopSeries(arrayOf(
+private val vsopLonEarth2 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00008721859, 1.07253635559, 6283.07584999140)
-))
+)) }
 
-private val vsopLonEarth = VsopFormula(arrayOf(
+private val vsopLonEarth by lazy { VsopFormula(arrayOf(
     vsopLonEarth0,
     vsopLonEarth1,
     vsopLonEarth2
-))
+)) }
 
-private val vsopLatEarth0 = VsopSeries(arrayOf(
-))
+private val vsopLatEarth0 by lazy { VsopSeries(arrayOf(
+)) }
 
-private val vsopLatEarth1 = VsopSeries(arrayOf(
+private val vsopLatEarth1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00227777722, 3.41376620530, 6283.07584999140),
     VsopTerm(0.00003805678, 3.37063423795, 12566.15169998280)
-))
+)) }
 
-private val vsopLatEarth = VsopFormula(arrayOf(
+private val vsopLatEarth by lazy { VsopFormula(arrayOf(
     vsopLatEarth0,
     vsopLatEarth1
-))
+)) }
 
-private val vsopRadEarth0 = VsopSeries(arrayOf(
+private val vsopRadEarth0 by lazy { VsopSeries(arrayOf(
     VsopTerm(1.00013988784, 0.00000000000, 0.00000000000),
     VsopTerm(0.01670699632, 3.09846350258, 6283.07584999140),
     VsopTerm(0.00013956024, 3.05524609456, 12566.15169998280),
@@ -9321,25 +9321,25 @@ private val vsopRadEarth0 = VsopSeries(arrayOf(
     VsopTerm(0.00000055736, 5.24159799170, 71430.69561812909),
     VsopTerm(0.00000174844, 3.01193636733, 18849.22754997420),
     VsopTerm(0.00000243181, 4.27349530790, 11790.62908865880)
-))
+)) }
 
-private val vsopRadEarth1 = VsopSeries(arrayOf(
+private val vsopRadEarth1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00103018607, 1.10748968172, 6283.07584999140),
     VsopTerm(0.00001721238, 1.06442300386, 12566.15169998280)
-))
+)) }
 
-private val vsopRadEarth2 = VsopSeries(arrayOf(
+private val vsopRadEarth2 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00004359385, 5.78455133808, 6283.07584999140)
-))
+)) }
 
-private val vsopRadEarth = VsopFormula(arrayOf(
+private val vsopRadEarth by lazy { VsopFormula(arrayOf(
     vsopRadEarth0,
     vsopRadEarth1,
     vsopRadEarth2
-))
+)) }
 
 
-private val vsopLonMars0 = VsopSeries(arrayOf(
+private val vsopLonMars0 by lazy { VsopSeries(arrayOf(
     VsopTerm(6.20347711581, 0.00000000000, 0.00000000000),
     VsopTerm(0.18656368093, 5.05037100270, 3340.61242669980),
     VsopTerm(0.01108216816, 5.40099836344, 6681.22485339960),
@@ -9389,9 +9389,9 @@ private val vsopLonMars0 = VsopSeries(arrayOf(
     VsopTerm(0.00000236117, 5.75503217933, 3333.49887969900),
     VsopTerm(0.00000274033, 0.13372524985, 3340.67973700260),
     VsopTerm(0.00000299395, 2.78323740866, 6254.62666252360)
-))
+)) }
 
-private val vsopLonMars1 = VsopSeries(arrayOf(
+private val vsopLonMars1 by lazy { VsopSeries(arrayOf(
     VsopTerm(3340.61242700512, 0.00000000000, 0.00000000000),
     VsopTerm(0.01457554523, 3.60433733236, 3340.61242669980),
     VsopTerm(0.00168414711, 3.92318567804, 6681.22485339960),
@@ -9399,39 +9399,39 @@ private val vsopLonMars1 = VsopSeries(arrayOf(
     VsopTerm(0.00003452392, 4.73210393190, 3.52311834900),
     VsopTerm(0.00002586332, 4.60670058555, 13362.44970679920),
     VsopTerm(0.00000841535, 4.45864030426, 2281.23049651060)
-))
+)) }
 
-private val vsopLonMars2 = VsopSeries(arrayOf(
+private val vsopLonMars2 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00058152577, 2.04961712429, 3340.61242669980),
     VsopTerm(0.00013459579, 2.45738706163, 6681.22485339960)
-))
+)) }
 
-private val vsopLonMars = VsopFormula(arrayOf(
+private val vsopLonMars by lazy { VsopFormula(arrayOf(
     vsopLonMars0,
     vsopLonMars1,
     vsopLonMars2
-))
+)) }
 
-private val vsopLatMars0 = VsopSeries(arrayOf(
+private val vsopLatMars0 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.03197134986, 3.76832042431, 3340.61242669980),
     VsopTerm(0.00298033234, 4.10616996305, 6681.22485339960),
     VsopTerm(0.00289104742, 0.00000000000, 0.00000000000),
     VsopTerm(0.00031365539, 4.44651053090, 10021.83728009940),
     VsopTerm(0.00003484100, 4.78812549260, 13362.44970679920)
-))
+)) }
 
-private val vsopLatMars1 = VsopSeries(arrayOf(
+private val vsopLatMars1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00217310991, 6.04472194776, 3340.61242669980),
     VsopTerm(0.00020976948, 3.14159265359, 0.00000000000),
     VsopTerm(0.00012834709, 1.60810667915, 6681.22485339960)
-))
+)) }
 
-private val vsopLatMars = VsopFormula(arrayOf(
+private val vsopLatMars by lazy { VsopFormula(arrayOf(
     vsopLatMars0,
     vsopLatMars1
-))
+)) }
 
-private val vsopRadMars0 = VsopSeries(arrayOf(
+private val vsopRadMars0 by lazy { VsopSeries(arrayOf(
     VsopTerm(1.53033488271, 0.00000000000, 0.00000000000),
     VsopTerm(0.14184953160, 3.47971283528, 3340.61242669980),
     VsopTerm(0.00660776362, 3.81783443019, 6681.22485339960),
@@ -9451,28 +9451,28 @@ private val vsopRadMars0 = VsopSeries(arrayOf(
     VsopTerm(0.00000807354, 2.10217065501, 1059.38193018920),
     VsopTerm(0.00000797915, 3.44839203899, 796.29800681640),
     VsopTerm(0.00000740975, 1.49906336885, 2146.16541647520)
-))
+)) }
 
-private val vsopRadMars1 = VsopSeries(arrayOf(
+private val vsopRadMars1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.01107433345, 2.03250524857, 3340.61242669980),
     VsopTerm(0.00103175887, 2.37071847807, 6681.22485339960),
     VsopTerm(0.00012877200, 0.00000000000, 0.00000000000),
     VsopTerm(0.00010815880, 2.70888095665, 10021.83728009940)
-))
+)) }
 
-private val vsopRadMars2 = VsopSeries(arrayOf(
+private val vsopRadMars2 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00044242249, 0.47930604954, 3340.61242669980),
     VsopTerm(0.00008138042, 0.86998389204, 6681.22485339960)
-))
+)) }
 
-private val vsopRadMars = VsopFormula(arrayOf(
+private val vsopRadMars by lazy { VsopFormula(arrayOf(
     vsopRadMars0,
     vsopRadMars1,
     vsopRadMars2
-))
+)) }
 
 
-private val vsopLonJupiter0 = VsopSeries(arrayOf(
+private val vsopLonJupiter0 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.59954691494, 0.00000000000, 0.00000000000),
     VsopTerm(0.09695898719, 5.06191793158, 529.69096509460),
     VsopTerm(0.00573610142, 1.44406205629, 7.11354700080),
@@ -9502,9 +9502,9 @@ private val vsopLonJupiter0 = VsopSeries(arrayOf(
     VsopTerm(0.00001633223, 3.58201833555, 515.46387109300),
     VsopTerm(0.00001431999, 4.29685556046, 625.67019231240),
     VsopTerm(0.00000973272, 4.09764549134, 95.97922721780)
-))
+)) }
 
-private val vsopLonJupiter1 = VsopSeries(arrayOf(
+private val vsopLonJupiter1 by lazy { VsopSeries(arrayOf(
     VsopTerm(529.69096508814, 0.00000000000, 0.00000000000),
     VsopTerm(0.00489503243, 4.22082939470, 529.69096509460),
     VsopTerm(0.00228917222, 6.02646855621, 7.11354700080),
@@ -9514,39 +9514,39 @@ private val vsopLonJupiter1 = VsopSeries(arrayOf(
     VsopTerm(0.00006067987, 4.42422292017, 103.09277421860),
     VsopTerm(0.00005433968, 3.98480737746, 419.48464387520),
     VsopTerm(0.00004237744, 5.89008707199, 14.22709400160)
-))
+)) }
 
-private val vsopLonJupiter2 = VsopSeries(arrayOf(
+private val vsopLonJupiter2 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00047233601, 4.32148536482, 7.11354700080),
     VsopTerm(0.00030649436, 2.92977788700, 529.69096509460),
     VsopTerm(0.00014837605, 3.14159265359, 0.00000000000)
-))
+)) }
 
-private val vsopLonJupiter = VsopFormula(arrayOf(
+private val vsopLonJupiter by lazy { VsopFormula(arrayOf(
     vsopLonJupiter0,
     vsopLonJupiter1,
     vsopLonJupiter2
-))
+)) }
 
-private val vsopLatJupiter0 = VsopSeries(arrayOf(
+private val vsopLatJupiter0 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.02268615702, 3.55852606721, 529.69096509460),
     VsopTerm(0.00109971634, 3.90809347197, 1059.38193018920),
     VsopTerm(0.00110090358, 0.00000000000, 0.00000000000),
     VsopTerm(0.00008101428, 3.60509572885, 522.57741809380),
     VsopTerm(0.00006043996, 4.25883108339, 1589.07289528380),
     VsopTerm(0.00006437782, 0.30627119215, 536.80451209540)
-))
+)) }
 
-private val vsopLatJupiter1 = VsopSeries(arrayOf(
+private val vsopLatJupiter1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00078203446, 1.52377859742, 529.69096509460)
-))
+)) }
 
-private val vsopLatJupiter = VsopFormula(arrayOf(
+private val vsopLatJupiter by lazy { VsopFormula(arrayOf(
     vsopLatJupiter0,
     vsopLatJupiter1
-))
+)) }
 
-private val vsopRadJupiter0 = VsopSeries(arrayOf(
+private val vsopRadJupiter0 by lazy { VsopSeries(arrayOf(
     VsopTerm(5.20887429326, 0.00000000000, 0.00000000000),
     VsopTerm(0.25209327119, 3.49108639871, 529.69096509460),
     VsopTerm(0.00610599976, 3.84115365948, 1059.38193018920),
@@ -9566,23 +9566,23 @@ private val vsopRadJupiter0 = VsopSeries(arrayOf(
     VsopTerm(0.00007057931, 2.18184839926, 1265.56747862640),
     VsopTerm(0.00006137703, 6.26418240033, 846.08283475120),
     VsopTerm(0.00002616976, 2.00994012876, 1581.95934828300)
-))
+)) }
 
-private val vsopRadJupiter1 = VsopSeries(arrayOf(
+private val vsopRadJupiter1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.01271801520, 2.64937512894, 529.69096509460),
     VsopTerm(0.00061661816, 3.00076460387, 1059.38193018920),
     VsopTerm(0.00053443713, 3.89717383175, 522.57741809380),
     VsopTerm(0.00031185171, 4.88276958012, 536.80451209540),
     VsopTerm(0.00041390269, 0.00000000000, 0.00000000000)
-))
+)) }
 
-private val vsopRadJupiter = VsopFormula(arrayOf(
+private val vsopRadJupiter by lazy { VsopFormula(arrayOf(
     vsopRadJupiter0,
     vsopRadJupiter1
-))
+)) }
 
 
-private val vsopLonSaturn0 = VsopSeries(arrayOf(
+private val vsopLonSaturn0 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.87401354025, 0.00000000000, 0.00000000000),
     VsopTerm(0.11107659762, 3.96205090159, 213.29909543800),
     VsopTerm(0.01414150957, 4.58581516874, 7.11354700080),
@@ -9616,9 +9616,9 @@ private val vsopLonSaturn0 = VsopSeries(arrayOf(
     VsopTerm(0.00001123498, 2.83726798446, 415.55249061210),
     VsopTerm(0.00001017275, 3.71700135395, 227.52618943960),
     VsopTerm(0.00000848642, 3.19150170830, 209.36694217490)
-))
+)) }
 
-private val vsopLonSaturn1 = VsopSeries(arrayOf(
+private val vsopLonSaturn1 by lazy { VsopSeries(arrayOf(
     VsopTerm(213.29909521690, 0.00000000000, 0.00000000000),
     VsopTerm(0.01297370862, 1.82834923978, 213.29909543800),
     VsopTerm(0.00564345393, 2.88499717272, 7.11354700080),
@@ -9631,22 +9631,22 @@ private val vsopLonSaturn1 = VsopSeries(arrayOf(
     VsopTerm(0.00004848994, 2.43037610229, 419.48464387520),
     VsopTerm(0.00004056892, 2.92133209468, 110.20632121940),
     VsopTerm(0.00003768635, 3.64965330780, 3.93215326310)
-))
+)) }
 
-private val vsopLonSaturn2 = VsopSeries(arrayOf(
+private val vsopLonSaturn2 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00116441330, 1.17988132879, 7.11354700080),
     VsopTerm(0.00091841837, 0.07325195840, 213.29909543800),
     VsopTerm(0.00036661728, 0.00000000000, 0.00000000000),
     VsopTerm(0.00015274496, 4.06493179167, 206.18554843720)
-))
+)) }
 
-private val vsopLonSaturn = VsopFormula(arrayOf(
+private val vsopLonSaturn by lazy { VsopFormula(arrayOf(
     vsopLonSaturn0,
     vsopLonSaturn1,
     vsopLonSaturn2
-))
+)) }
 
-private val vsopLatSaturn0 = VsopSeries(arrayOf(
+private val vsopLatSaturn0 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.04330678039, 3.60284428399, 213.29909543800),
     VsopTerm(0.00240348302, 2.85238489373, 426.59819087600),
     VsopTerm(0.00084745939, 0.00000000000, 0.00000000000),
@@ -9656,20 +9656,20 @@ private val vsopLatSaturn0 = VsopSeries(arrayOf(
     VsopTerm(0.00009916667, 5.79003188904, 419.48464387520),
     VsopTerm(0.00006993564, 4.73604689720, 7.11354700080),
     VsopTerm(0.00004807588, 5.43305312061, 316.39186965660)
-))
+)) }
 
-private val vsopLatSaturn1 = VsopSeries(arrayOf(
+private val vsopLatSaturn1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00198927992, 4.93901017903, 213.29909543800),
     VsopTerm(0.00036947916, 3.14159265359, 0.00000000000),
     VsopTerm(0.00017966989, 0.51979431110, 426.59819087600)
-))
+)) }
 
-private val vsopLatSaturn = VsopFormula(arrayOf(
+private val vsopLatSaturn by lazy { VsopFormula(arrayOf(
     vsopLatSaturn0,
     vsopLatSaturn1
-))
+)) }
 
-private val vsopRadSaturn0 = VsopSeries(arrayOf(
+private val vsopRadSaturn0 by lazy { VsopSeries(arrayOf(
     VsopTerm(9.55758135486, 0.00000000000, 0.00000000000),
     VsopTerm(0.52921382865, 2.39226219573, 213.29909543800),
     VsopTerm(0.01873679867, 5.23549604660, 206.18554843720),
@@ -9693,29 +9693,29 @@ private val vsopRadSaturn0 = VsopSeries(arrayOf(
     VsopTerm(0.00006465823, 0.17732249942, 1052.26838318840),
     VsopTerm(0.00011380257, 1.73105427040, 522.57741809380),
     VsopTerm(0.00003419618, 4.94550542171, 1581.95934828300)
-))
+)) }
 
-private val vsopRadSaturn1 = VsopSeries(arrayOf(
+private val vsopRadSaturn1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.06182981340, 0.25843511480, 213.29909543800),
     VsopTerm(0.00506577242, 0.71114625261, 206.18554843720),
     VsopTerm(0.00341394029, 5.79635741658, 426.59819087600),
     VsopTerm(0.00188491195, 0.47215589652, 220.41264243880),
     VsopTerm(0.00186261486, 3.14159265359, 0.00000000000),
     VsopTerm(0.00143891146, 1.40744822888, 7.11354700080)
-))
+)) }
 
-private val vsopRadSaturn2 = VsopSeries(arrayOf(
+private val vsopRadSaturn2 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00436902572, 4.78671677509, 213.29909543800)
-))
+)) }
 
-private val vsopRadSaturn = VsopFormula(arrayOf(
+private val vsopRadSaturn by lazy { VsopFormula(arrayOf(
     vsopRadSaturn0,
     vsopRadSaturn1,
     vsopRadSaturn2
-))
+)) }
 
 
-private val vsopLonUranus0 = VsopSeries(arrayOf(
+private val vsopLonUranus0 by lazy { VsopSeries(arrayOf(
     VsopTerm(5.48129294297, 0.00000000000, 0.00000000000),
     VsopTerm(0.09260408234, 0.89106421507, 74.78159856730),
     VsopTerm(0.01504247898, 3.62719260920, 1.48447270830),
@@ -9755,40 +9755,40 @@ private val vsopLonUranus0 = VsopSeries(arrayOf(
     VsopTerm(0.00001221029, 0.19900650030, 108.46121608020),
     VsopTerm(0.00000946181, 1.19253165736, 127.47179660680),
     VsopTerm(0.00001150989, 4.17898916639, 33.67961751290)
-))
+)) }
 
-private val vsopLonUranus1 = VsopSeries(arrayOf(
+private val vsopLonUranus1 by lazy { VsopSeries(arrayOf(
     VsopTerm(74.78159860910, 0.00000000000, 0.00000000000),
     VsopTerm(0.00154332863, 5.24158770553, 74.78159856730),
     VsopTerm(0.00024456474, 1.71260334156, 1.48447270830),
     VsopTerm(0.00009258442, 0.42829732350, 11.04570026390),
     VsopTerm(0.00008265977, 1.50218091379, 63.73589830340),
     VsopTerm(0.00009150160, 1.41213765216, 149.56319713460)
-))
+)) }
 
-private val vsopLonUranus = VsopFormula(arrayOf(
+private val vsopLonUranus by lazy { VsopFormula(arrayOf(
     vsopLonUranus0,
     vsopLonUranus1
-))
+)) }
 
-private val vsopLatUranus0 = VsopSeries(arrayOf(
+private val vsopLatUranus0 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.01346277648, 2.61877810547, 74.78159856730),
     VsopTerm(0.00062341400, 5.08111189648, 149.56319713460),
     VsopTerm(0.00061601196, 3.14159265359, 0.00000000000),
     VsopTerm(0.00009963722, 1.61603805646, 76.26607127560),
     VsopTerm(0.00009926160, 0.57630380333, 73.29712585900)
-))
+)) }
 
-private val vsopLatUranus1 = VsopSeries(arrayOf(
+private val vsopLatUranus1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.00034101978, 0.01321929936, 74.78159856730)
-))
+)) }
 
-private val vsopLatUranus = VsopFormula(arrayOf(
+private val vsopLatUranus by lazy { VsopFormula(arrayOf(
     vsopLatUranus0,
     vsopLatUranus1
-))
+)) }
 
-private val vsopRadUranus0 = VsopSeries(arrayOf(
+private val vsopRadUranus0 by lazy { VsopSeries(arrayOf(
     VsopTerm(19.21264847206, 0.00000000000, 0.00000000000),
     VsopTerm(0.88784984413, 5.60377527014, 74.78159856730),
     VsopTerm(0.03440836062, 0.32836099706, 73.29712585900),
@@ -9813,19 +9813,19 @@ private val vsopRadUranus0 = VsopSeries(arrayOf(
     VsopTerm(0.00022637073, 0.72518687029, 529.69096509460),
     VsopTerm(0.00011959076, 1.75043392140, 984.60033162190),
     VsopTerm(0.00025620756, 5.25656086672, 380.12776796000)
-))
+)) }
 
-private val vsopRadUranus1 = VsopSeries(arrayOf(
+private val vsopRadUranus1 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.01479896629, 3.67205697578, 74.78159856730)
-))
+)) }
 
-private val vsopRadUranus = VsopFormula(arrayOf(
+private val vsopRadUranus by lazy { VsopFormula(arrayOf(
     vsopRadUranus0,
     vsopRadUranus1
-))
+)) }
 
 
-private val vsopLonNeptune0 = VsopSeries(arrayOf(
+private val vsopLonNeptune0 by lazy { VsopSeries(arrayOf(
     VsopTerm(5.31188633046, 0.00000000000, 0.00000000000),
     VsopTerm(0.01798475530, 2.90101273890, 38.13303563780),
     VsopTerm(0.01019727652, 0.48580922867, 1.48447270830),
@@ -9836,32 +9836,32 @@ private val vsopLonNeptune0 = VsopSeries(arrayOf(
     VsopTerm(0.00016482741, 0.00007727998, 491.55792945680),
     VsopTerm(0.00009198584, 4.93747051954, 39.61750834610),
     VsopTerm(0.00008994250, 0.27462171806, 175.16605980020)
-))
+)) }
 
-private val vsopLonNeptune1 = VsopSeries(arrayOf(
+private val vsopLonNeptune1 by lazy { VsopSeries(arrayOf(
     VsopTerm(38.13303563957, 0.00000000000, 0.00000000000),
     VsopTerm(0.00016604172, 4.86323329249, 1.48447270830),
     VsopTerm(0.00015744045, 2.27887427527, 38.13303563780)
-))
+)) }
 
-private val vsopLonNeptune = VsopFormula(arrayOf(
+private val vsopLonNeptune by lazy { VsopFormula(arrayOf(
     vsopLonNeptune0,
     vsopLonNeptune1
-))
+)) }
 
-private val vsopLatNeptune0 = VsopSeries(arrayOf(
+private val vsopLatNeptune0 by lazy { VsopSeries(arrayOf(
     VsopTerm(0.03088622933, 1.44104372644, 38.13303563780),
     VsopTerm(0.00027780087, 5.91271884599, 76.26607127560),
     VsopTerm(0.00027623609, 0.00000000000, 0.00000000000),
     VsopTerm(0.00015355489, 2.52123799551, 36.64856292950),
     VsopTerm(0.00015448133, 3.50877079215, 39.61750834610)
-))
+)) }
 
-private val vsopLatNeptune = VsopFormula(arrayOf(
+private val vsopLatNeptune by lazy { VsopFormula(arrayOf(
     vsopLatNeptune0
-))
+)) }
 
-private val vsopRadNeptune0 = VsopSeries(arrayOf(
+private val vsopRadNeptune0 by lazy { VsopSeries(arrayOf(
     VsopTerm(30.07013205828, 0.00000000000, 0.00000000000),
     VsopTerm(0.27062259632, 1.32999459377, 38.13303563780),
     VsopTerm(0.01691764014, 3.25186135653, 36.64856292950),
@@ -9874,11 +9874,11 @@ private val vsopRadNeptune0 = VsopSeries(arrayOf(
     VsopTerm(0.00100896068, 0.37702724930, 73.29712585900),
     VsopTerm(0.00135134092, 3.37220609835, 39.61750834610),
     VsopTerm(0.00007571796, 1.07149207335, 388.46515523820)
-))
+)) }
 
-private val vsopRadNeptune = VsopFormula(arrayOf(
+private val vsopRadNeptune by lazy { VsopFormula(arrayOf(
     vsopRadNeptune0
-))
+)) }
 
 
 
@@ -10000,7 +10000,7 @@ private const val PLUTO_TIME_STEP  = 29200
 private const val PLUTO_DT         = 146
 private const val PLUTO_NSTEPS     = 201
 
-private val plutoStateTable: Array<BodyState> = arrayOf(
+private val plutoStateTable: Array<BodyState> by lazy { arrayOf(
     BodyState( -730000.0, TerseVector(-26.118207232108, -14.376168177825,   3.384402515299), TerseVector( 1.6339372163656e-03, -2.7861699588508e-03, -1.3585880229445e-03))
 ,   BodyState( -700800.0, TerseVector( 41.974905202127,  -0.448502952929, -12.770351505989), TerseVector( 7.3458569351457e-04,  2.2785014891658e-03,  4.8619778602049e-04))
 ,   BodyState( -671600.0, TerseVector( 14.706930780744,  44.269110540027,   9.353698474772), TerseVector(-2.1000147999800e-03,  2.2295915939915e-04,  7.0143443551414e-04))
@@ -10052,7 +10052,7 @@ private val plutoStateTable: Array<BodyState> = arrayOf(
 ,   BodyState(  671600.0, TerseVector( 39.526942044143,  28.939897360110,  -2.872799527539), TerseVector(-1.0068481658095e-03,  1.7021132888090e-03,  8.3578230511981e-04))
 ,   BodyState(  700800.0, TerseVector(-15.576200701394,  34.399412961275,  15.466033737854), TerseVector(-2.0098814612884e-03, -1.7191109825989e-03,  7.0414782780416e-05))
 ,   BodyState(  730000.0, TerseVector(  4.243252837090, -30.118201690825, -10.707441231349), TerseVector( 3.1725847067411e-03,  1.6098461202270e-04, -9.0672150593868e-04))
-)
+) }
 private val plutoCache = hashMapOf<Int, List<BodyGravCalc>>()
 private val plutoCacheLock = KLock()
 
@@ -10065,7 +10065,7 @@ private val rotationJupEqj = RotationMatrix(
     -1.44994559663353e-02, -4.30299169409101e-01,  9.02569881273754e-01
 )
 
-private val jupiterMoonModel: Array<JupiterMoon> = arrayOf(
+private val jupiterMoonModel: Array<JupiterMoon> by lazy { arrayOf(
     // [0] Io
     JupiterMoon(
          2.8248942843381399e-07,
@@ -10200,12 +10200,12 @@ private val jupiterMoonModel: Array<JupiterMoon> = arrayOf(
             VsopTerm( 0.0000332112143230,  5.5604137742336999e+00,  2.9003768850700000e-03)
         )
     )
-)
+) }
 
 //---------------------------------------------------------------------------------------
 // Constellation lookup table.
 
-internal val constelNames: Array<ConstellationText> = arrayOf(
+internal val constelNames: Array<ConstellationText> by lazy { arrayOf(
     ConstellationText("And", "Andromeda"           )    //  0
 ,   ConstellationText("Ant", "Antila"              )    //  1
 ,   ConstellationText("Aps", "Apus"                )    //  2
@@ -10294,9 +10294,9 @@ internal val constelNames: Array<ConstellationText> = arrayOf(
 ,   ConstellationText("Vir", "Virgo"               )    // 85
 ,   ConstellationText("Vol", "Volans"              )    // 86
 ,   ConstellationText("Vul", "Vulpecula"           )    // 87
-)
+) }
 
-internal val constelBounds: Array<ConstellationBoundary> = arrayOf(
+internal val constelBounds: Array<ConstellationBoundary> by lazy { arrayOf(
     ConstellationBoundary(83,    0.0, 8640.0,  2112.0)    // UMi
 ,   ConstellationBoundary(83, 2880.0, 5220.0,  2076.0)    // UMi
 ,   ConstellationBoundary(83, 7560.0, 8280.0,  2068.0)    // UMi
@@ -10654,18 +10654,18 @@ internal val constelBounds: Array<ConstellationBoundary> = arrayOf(
 ,   ConstellationBoundary( 2, 4920.0, 6480.0, -1980.0)    // Aps
 ,   ConstellationBoundary(52, 1260.0, 2760.0, -2040.0)    // Men
 ,   ConstellationBoundary(57,    0.0, 8640.0, -2160.0)    // Oct
-)
+) }
 
 //---------------------------------------------------------------------------------------
 
-internal val vsopModelMercury = VsopModel(vsopLonMercury, vsopLatMercury, vsopRadMercury)
-internal val vsopModelVenus = VsopModel(vsopLonVenus, vsopLatVenus, vsopRadVenus)
-internal val vsopModelEarth = VsopModel(vsopLonEarth, vsopLatEarth, vsopRadEarth)
-internal val vsopModelMars = VsopModel(vsopLonMars, vsopLatMars, vsopRadMars)
-internal val vsopModelJupiter = VsopModel(vsopLonJupiter, vsopLatJupiter, vsopRadJupiter)
-internal val vsopModelSaturn = VsopModel(vsopLonSaturn, vsopLatSaturn, vsopRadSaturn)
-internal val vsopModelUranus = VsopModel(vsopLonUranus, vsopLatUranus, vsopRadUranus)
-internal val vsopModelNeptune = VsopModel(vsopLonNeptune, vsopLatNeptune, vsopRadNeptune)
+internal val vsopModelMercury by lazy { VsopModel(vsopLonMercury, vsopLatMercury, vsopRadMercury) }
+internal val vsopModelVenus by lazy { VsopModel(vsopLonVenus, vsopLatVenus, vsopRadVenus) }
+internal val vsopModelEarth by lazy { VsopModel(vsopLonEarth, vsopLatEarth, vsopRadEarth) }
+internal val vsopModelMars by lazy { VsopModel(vsopLonMars, vsopLatMars, vsopRadMars) }
+internal val vsopModelJupiter by lazy { VsopModel(vsopLonJupiter, vsopLatJupiter, vsopRadJupiter) }
+internal val vsopModelSaturn by lazy { VsopModel(vsopLonSaturn, vsopLatSaturn, vsopRadSaturn) }
+internal val vsopModelUranus by lazy { VsopModel(vsopLonUranus, vsopLatUranus, vsopRadUranus) }
+internal val vsopModelNeptune by lazy { VsopModel(vsopLonNeptune, vsopLatNeptune, vsopRadNeptune) }
 
 // Create a rotation matrix for converting J2000 to B1875.
 // Need to calculate the B1875 epoch. Based on this:

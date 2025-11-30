@@ -338,7 +338,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
+	public void registerOptionsMenuItems(@NonNull MapActivity mapActivity, @NonNull ContextMenuAdapter helper) {
 		if (isActive()) {
 			helper.addItem(new ContextMenuItem(DRAWER_ANT_PLUS_ID)
 					.setTitleId(R.string.external_sensors_plugin_name, mapActivity)
