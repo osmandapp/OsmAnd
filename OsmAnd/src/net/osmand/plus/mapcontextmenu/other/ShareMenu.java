@@ -167,7 +167,7 @@ public class ShareMenu extends BaseMenuController {
 			lat = lat.substring(0, lat.length() - 1);
 			lon = lon.substring(0, lon.length() - 1);
 			int zoom = activity.getMapView().getZoom();
-			geoUrl = MapUtils.buildGeoUrl(lat, lon, zoom);
+			geoUrl = MapUtils.buildGeoUrl(lat, lon, zoom, title);
 			httpUrl = "https://osmand.net/map?pin=" + lat + "," + lon + "#" + zoom + "/" + lat + "/" + lon;
 		} catch (RuntimeException e) {
 			log.error("Failed to convert coordinates", e);
