@@ -1005,8 +1005,12 @@ public class MapPoiTypes {
 
 	public Amenity parseAmenity(String tag, String val, boolean relation, Map<String, String> otherTags) {
 		PoiType pt = getPoiTypeByTagValue(tag, val);
+		boolean isDefaultForCategory = false;
 		if (pt == null) {
 			pt = getDefaultPoiTypeByTag(tag);
+			if (pt != null) {
+				isDefaultForCategory = true;
+			}
 		}
 		if (pt == null || pt.isAdditional()) {
 			return null;
@@ -1061,6 +1065,9 @@ public class MapPoiTypes {
 					a.setAdditionalInfo(pat.getKeyName(), e.getValue());
 				}
 			}
+		}
+		if (isDefaultForCategory) {
+			a.setAdditionalInfo(tag, val);
 		}
 
 		return a;
