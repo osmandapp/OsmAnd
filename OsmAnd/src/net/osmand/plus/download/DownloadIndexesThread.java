@@ -62,7 +62,8 @@ public class DownloadIndexesThread {
 	private IndexItem currentDownloadingItem;
 	private float currentDownloadProgress;
 	private DownloadResources indexes;
-	private static final int THREAD_ID = 10103;
+	private static final int RELOAD_INDEXES_THREAD_ID = 10103;
+	private static final int DOWNLOAD_INDEXES_THREAD_ID = 10107;
 
 	public interface DownloadEvents {
 
@@ -381,7 +382,7 @@ public class DownloadIndexesThread {
 
 		@Override
 		protected DownloadResources doInBackground(Void... params) {
-			TrafficStats.setThreadStatsTag(THREAD_ID);
+			TrafficStats.setThreadStatsTag(RELOAD_INDEXES_THREAD_ID);
 			DownloadResources result = null;
 			DownloadOsmandIndexesHelper.IndexFileList indexFileList = DownloadOsmandIndexesHelper.getIndexesList(ctx);
 			try {
@@ -509,6 +510,7 @@ public class DownloadIndexesThread {
 
 		@Override
 		protected String doInBackground(IndexItem... filesToDownload) {
+			TrafficStats.setThreadStatsTag(DOWNLOAD_INDEXES_THREAD_ID);
 			try {
 				List<File> filesToReindex = new ArrayList<>();
 				boolean forceWifi = downloadFileHelper.isWifiConnected();
