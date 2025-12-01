@@ -113,7 +113,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
-			gestureDetector = new GestureDetector(app, new GestureDetector.SimpleOnGestureListener() {
+			gestureDetector = new GestureDetector(mapActivity, new GestureDetector.SimpleOnGestureListener() {
 				@Override
 				public boolean onSingleTapConfirmed(@NonNull MotionEvent event) {
 					isShowTwoFingersDistance = false;
