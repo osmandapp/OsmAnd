@@ -17,7 +17,8 @@ public enum ShareItem {
 	NAME(R.drawable.ic_action_copy, R.string.copy_poi_name),
 	COORDINATES(R.drawable.ic_action_coordinates_location, R.string.copy_coordinates),
 	GEO(R.drawable.ic_world_globe_dark, R.string.share_geo),
-	SAVE_AS_FILE(R.drawable.ic_action_save_to_file_outlined, R.string.save_to_device);
+	SAVE_AS_FILE(R.drawable.ic_action_save_to_file_outlined, R.string.save_to_device),
+	COPY_LINK(R.drawable.ic_action_link, R.string.copy_link);
 
 	@DrawableRes
 	private final int iconId;
@@ -41,6 +42,6 @@ public enum ShareItem {
 
 	@NonNull
 	public static List<ShareItem> getNativeShareItems() {
-		return Arrays.asList(ADDRESS, NAME, COORDINATES, GEO);
+		return Arrays.asList(COPY_LINK, ADDRESS, NAME, COORDINATES, GEO);
 	}
 }
