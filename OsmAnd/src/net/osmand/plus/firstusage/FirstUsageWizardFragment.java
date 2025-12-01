@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
+import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -319,9 +320,11 @@ public class FirstUsageWizardFragment extends BaseFullScreenFragment implements 
 						pms.put("aid", app.getUserAndroidId());
 					}
 					OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, String>() {
+						private static final int THREAD_ID = 10105;
 
 						@Override
 						protected String doInBackground(Void... params) {
+							TrafficStats.setThreadStatsTag(THREAD_ID);
 							try {
 								return AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/geo-ip", pms,
 										"Requesting location by IP...", false, false);
