@@ -7,6 +7,7 @@ import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_
 import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_GEOURL;
 import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_SMS;
 import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_TITLE;
+import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_LINK;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -63,7 +64,9 @@ public class ShareMenu extends BaseMenuController {
 	private String address;
 	private String coordinates;
 	private String geoUrl;
+	private String typeStr;
 	private String sms;
+	private Uri link;
 
 	private ShareMenu(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
@@ -89,11 +92,12 @@ public class ShareMenu extends BaseMenuController {
 		return title;
 	}
 
-	public static void show(LatLon latLon, String title, String address, @NonNull MapActivity activity) {
+	public static void show(LatLon latLon, String title, String address, String typeStr, @NonNull MapActivity activity) {
 		ShareMenu menu = new ShareMenu(activity);
 		menu.latLon = latLon;
 		menu.title = title;
 		menu.address = address;
+		menu.typeStr = typeStr;
 
 		if (Build.VERSION.SDK_INT >= 34) {
 			showNativeShareDialog(menu, activity);
@@ -106,7 +110,8 @@ public class ShareMenu extends BaseMenuController {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			setupSharingFields(activity);
-			startAction(activity, item, sms, address, title, coordinates, geoUrl);
+			String urlLink = link != null ? link.toString() : "";
+			startAction(activity, item, sms, address, title, coordinates, geoUrl, urlLink);
 		}
 	}
 
@@ -124,6 +129,9 @@ public class ShareMenu extends BaseMenuController {
 		intent.putExtra(KEY_SHARE_TITLE, menu.title);
 		intent.putExtra(KEY_SHARE_COORDINATES, menu.coordinates);
 		intent.putExtra(KEY_SHARE_GEOURL, menu.geoUrl);
+		if (menu.link != null) {
+			intent.putExtra(KEY_SHARE_LINK, menu.link.toString());
+		}
 
 		for (int i = 0; i < items.size(); i++) {
 			ShareItem item = items.get(i);
@@ -160,7 +168,6 @@ public class ShareMenu extends BaseMenuController {
 		}
 
 		geoUrl = "";
-		String httpUrl = "";
 		try {
 			String lat = LocationConvert.convertLatitude(latLon.getLatitude(), LocationConvert.FORMAT_DEGREES, false);
 			String lon = LocationConvert.convertLongitude(latLon.getLongitude(), LocationConvert.FORMAT_DEGREES, false);
@@ -168,12 +175,15 @@ public class ShareMenu extends BaseMenuController {
 			lon = lon.substring(0, lon.length() - 1);
 			int zoom = activity.getMapView().getZoom();
 			geoUrl = MapUtils.buildGeoUrl(lat, lon, zoom);
-			httpUrl = "https://osmand.net/map?pin=" + lat + "," + lon + "#" + zoom + "/" + lat + "/" + lon;
+			link = buildOsmandPoiUri(title, typeStr,
+					lat, lon,
+					zoom, lat, lon);
 		} catch (RuntimeException e) {
 			log.error("Failed to convert coordinates", e);
 		}
-		if (!Algorithms.isEmpty(geoUrl) && !Algorithms.isEmpty(httpUrl)) {
-			builder.append(geoUrl).append("\n").append(httpUrl);
+
+		if (!Algorithms.isEmpty(geoUrl) && link != null) {
+			builder.append(geoUrl).append("\n").append(link);
 		}
 		sms = builder.toString();
 
@@ -184,7 +194,7 @@ public class ShareMenu extends BaseMenuController {
 
 	public static void startAction(@NonNull Context context, @NonNull ShareItem item,
 	                               @NonNull String sms, @NonNull String address, @NonNull String title,
-	                               @NonNull String coordinates, @NonNull String geoUrl) {
+	                               @NonNull String coordinates, @NonNull String geoUrl, @Nullable String link) {
 		switch (item) {
 			case MESSAGE:
 				sendMessage(context, sms);
@@ -215,7 +225,28 @@ public class ShareMenu extends BaseMenuController {
 					AndroidUtils.startActivityIfSafe(context, mapIntent);
 				}
 				break;
+			case COPY_LINK:
+				if (link != null) {
+					copyToClipboardWithToast(context, link, true);
+				}
+				break;
 		}
+	}
+
+	public static Uri buildOsmandPoiUri(String name, String type,
+	                                    String pinLat, String pinLon,
+	                                    int zoom, String fragLat, String fragLon) {
+		String pin = pinLat + "," + pinLon;
+		String frag = zoom + "/" + fragLat + "/" + fragLon;
+		return new Uri.Builder()
+				.scheme("https")
+				.authority("osmand.net")
+				.path("map/poi/")
+				.appendQueryParameter("name", name)
+				.appendQueryParameter("type", type)
+				.appendQueryParameter("pin", pin)
+				.encodedFragment(frag)
+				.build();
 	}
 
 	public void saveMenu(@NonNull Bundle bundle) {

@@ -708,10 +708,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return getSubTransportStopRoutes(true);
 	}
 
-	public void share(LatLon latLon, String title, String address) {
+	public void share(LatLon latLon, String title, String address, String typeStr) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			ShareMenu.show(latLon, title, address, mapActivity);
+			ShareMenu.show(latLon, title, address, typeStr, mapActivity);
 		}
 	}
 
