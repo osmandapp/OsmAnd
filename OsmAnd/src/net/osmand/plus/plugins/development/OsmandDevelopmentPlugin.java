@@ -97,6 +97,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private final StateChangedListener<Boolean> msaaListener;
 	private final StateChangedListener<Boolean> sphericalListener;
 	private final StateChangedListener<Boolean> map3DObjectsListener;
+	public static final String ZOOM_TILT_ANIMATION_LOG_TAG = "zoom_tilt_animation_log_tag";
 
 	private static final Log LOG_termal = PlatformUtil.getLog("ThermalState");
 
@@ -195,7 +196,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
+	public void registerOptionsMenuItems(@NonNull MapActivity mapActivity, @NonNull ContextMenuAdapter helper) {
 		if (Version.isDeveloperVersion(mapActivity.getApp())) {
 			Class<?> contributionVersionActivityClass = null;
 			try {

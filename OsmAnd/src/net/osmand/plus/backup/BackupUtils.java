@@ -34,12 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BackupUtils {
 
@@ -96,7 +91,7 @@ public class BackupUtils {
 	@NonNull
 	public static Map<RemoteFile, SettingsItem> getRemoteFilesSettingsItems(@NonNull List<SettingsItem> items,
 			@NonNull List<RemoteFile> remoteFiles, boolean infoFiles) {
-		Map<RemoteFile, SettingsItem> res = new HashMap<>();
+		Map<RemoteFile, SettingsItem> res = new LinkedHashMap<>();
 		Map<String, SettingsItem> settingsItemMap = new HashMap<>();
 		List<FileSettingsItem> subtypeFolders = new ArrayList<>();
 		String DELIMETER = "___";
