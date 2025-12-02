@@ -27,7 +27,6 @@ import static org.hamcrest.Matchers.is;
 
 import android.view.View;
 
-import androidx.test.espresso.IdlingPolicies;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -42,15 +41,12 @@ import net.osmand.test.common.AndroidTest;
 
 import org.hamcrest.Matcher;
 import org.hamcrest.core.IsInstanceOf;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -58,22 +54,6 @@ public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
 
 	@Rule
 	public NonClosingActivityScenarioRule<MapActivity> nonClosingActivityScenarioRule = new NonClosingActivityScenarioRule<>(MapActivity.class);
-
-	private long originalTimeout;
-	private TimeUnit originalTimeUnit;
-
-	// FK-TODO: remove increaseTimeout() and resetTimeout()
-	@Before
-	public void increaseTimeout() {
-		originalTimeout = IdlingPolicies.getMasterIdlingPolicy().getIdleTimeout();
-		originalTimeUnit = IdlingPolicies.getMasterIdlingPolicy().getIdleTimeoutUnit();
-		IdlingPolicies.setMasterPolicyTimeout(2, TimeUnit.MINUTES);
-	}
-
-	@After
-	public void resetTimeout() {
-		IdlingPolicies.setMasterPolicyTimeout(originalTimeout, originalTimeUnit);
-	}
 
 	@Test
 	public void test_installMapSource_searchSettings_configureMapSearchResultFoundForEachApplicationMode() {
