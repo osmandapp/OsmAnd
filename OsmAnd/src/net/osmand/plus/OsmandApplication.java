@@ -109,6 +109,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
+import net.osmand.plus.settings.fragments.search.SearchDatabaseRebuilder;
 import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
@@ -149,7 +150,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProviderManager;
-import de.KnollFrank.lib.settingssearch.db.preference.db.DatabaseResetter;
 
 public class OsmandApplication extends MultiDexApplication {
 
@@ -240,7 +240,12 @@ public class OsmandApplication extends MultiDexApplication {
 	private TileSourceTemplatesProvider tileSourceTemplatesProvider;
 
 	public final DAOProviderManager<net.osmand.plus.settings.fragments.search.Configuration> daoProviderManager = new DAOProviderManager<>();
-	private final StateChangedListener<String> pluginsListenerResettingSearchDatabase = plugins -> DatabaseResetter.resetDatabase(daoProviderManager.getDAOProvider());
+	private final StateChangedListener<String> pluginsListenerResettingSearchDatabase =
+			plugins ->
+					daoProviderManager
+							.getDAOProvider()
+							.searchablePreferenceScreenGraphRepository()
+							.addGraphTransformer(new SearchDatabaseRebuilder(getTileSourceTemplatesProvider()));
 
 	public static OsmandApplication getInstanceFromContext(final Context context) {
 		return (OsmandApplication) context.getApplicationContext();

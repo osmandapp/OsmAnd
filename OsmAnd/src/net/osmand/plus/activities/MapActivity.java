@@ -13,7 +13,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -72,8 +71,20 @@ import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RenderInitErrorBottomSheet;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
-import net.osmand.plus.helpers.*;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.helpers.DiscountHelper;
+import net.osmand.plus.helpers.IntentHelper;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
+import net.osmand.plus.helpers.MapAppInitializeListener;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapFragmentsHelper;
+import net.osmand.plus.helpers.MapPermissionsResultCallback;
+import net.osmand.plus.helpers.MapRouteCalculationProgressListener;
+import net.osmand.plus.helpers.MapScrollHelper;
+import net.osmand.plus.helpers.RestoreNavigationHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
@@ -108,8 +119,9 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
-import net.osmand.plus.settings.fragments.search.ConfigurationBundleConverter;
 import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
+import net.osmand.plus.settings.fragments.search.Configuration;
+import net.osmand.plus.settings.fragments.search.ConfigurationBundleConverter;
 import net.osmand.plus.settings.fragments.search.PreferencesDatabaseFactory;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
@@ -170,7 +182,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static Intent prevActivityIntent = null;
 
 	public static final @IdRes int FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
-	private Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider>> createSearchDatabaseTask = Optional.empty();
+	private Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider<Configuration>>> createSearchDatabaseTask = Optional.empty();
 
 	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
 
@@ -349,7 +361,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	public Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider>> getCreateSearchDatabaseTask() {
+	public Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider<Configuration>>> getCreateSearchDatabaseTask() {
 		return createSearchDatabaseTask;
 	}
 
@@ -1692,7 +1704,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@Override
-	public void onConfigurationChanged(@NonNull Configuration newConfig) {
+	public void onConfigurationChanged(@NonNull android.content.res.Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 
 		app.getLocaleHelper().setLanguage(this);

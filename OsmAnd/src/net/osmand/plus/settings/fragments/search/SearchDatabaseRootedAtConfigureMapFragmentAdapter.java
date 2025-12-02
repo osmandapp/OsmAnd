@@ -22,7 +22,8 @@ import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.common.graph.Graphs;
 import de.KnollFrank.lib.settingssearch.common.graph.SearchablePreferenceScreenSubtreeReplacer;
-import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProvider;
+import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
+import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphTransformer;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceEdge;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreen;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
@@ -33,34 +34,32 @@ import de.KnollFrank.lib.settingssearch.graph.GraphPathFactory;
 import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenGraphProviderFactory;
 import de.KnollFrank.lib.settingssearch.results.recyclerview.FragmentContainerViewAdder;
 
-public class SearchDatabaseRootedAtConfigureMapFragmentAdapter {
+public class SearchDatabaseRootedAtConfigureMapFragmentAdapter implements SearchablePreferenceScreenGraphTransformer<Configuration> {
 
 	private final @IdRes int FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
 
-	public void adaptSearchDatabaseRootedAtConfigureMapFragment(
-			final DAOProvider preferencesDatabase,
-			final SearchablePreferenceScreenGraph graph,
-			final Configuration newConfiguration,
-			final FragmentActivity activityContext,
-			final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
-		preferencesDatabase
-				.searchablePreferenceScreenGraphDAO()
-				.persist(
-						adaptGraphAtConfigureMapFragment(
-								graph,
-								getApplicationModesWithoutDefault(),
-								newConfiguration,
-								activityContext,
-								tileSourceTemplatesProvider));
+	private final TileSourceTemplatesProvider tileSourceTemplatesProvider;
+
+	public SearchDatabaseRootedAtConfigureMapFragmentAdapter(final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
+		this.tileSourceTemplatesProvider = tileSourceTemplatesProvider;
+	}
+
+	@Override
+	public SearchablePreferenceScreenGraph transformGraph(final SearchablePreferenceScreenGraph graph,
+														  final Configuration actualConfiguration,
+														  final FragmentActivity activityContext) {
+		return adaptGraphAtConfigureMapFragment(
+				graph,
+				actualConfiguration,
+				activityContext);
 	}
 
 	private SearchablePreferenceScreenGraph adaptGraphAtConfigureMapFragment(
 			final SearchablePreferenceScreenGraph graph,
-			final Set<ApplicationMode> applicationModes,
 			final Configuration newConfiguration,
-			final FragmentActivity activityContext,
-			final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
-		return applicationModes
+			final FragmentActivity activityContext) {
+		return SearchDatabaseRootedAtConfigureMapFragmentAdapter
+				.getApplicationModesWithoutDefault()
 				.stream()
 				.reduce(
 						graph,
@@ -69,8 +68,7 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter {
 										currentGraph,
 										applicationMode,
 										newConfiguration,
-										activityContext,
-										tileSourceTemplatesProvider),
+										activityContext),
 						(graph1, graph2) -> {
 							throw new UnsupportedOperationException("Parallel stream not supported");
 						});
@@ -80,11 +78,15 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter {
 			final SearchablePreferenceScreenGraph graph,
 			final ApplicationMode applicationMode,
 			final Configuration newConfiguration,
-			final FragmentActivity activityContext,
-			final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
-		FragmentContainerViewAdder.addInvisibleFragmentContainerViewWithIdToParent(
-				activityContext.findViewById(android.R.id.content),
-				FRAGMENT_CONTAINER_VIEW_ID);
+			final FragmentActivity activityContext) {
+		OnUiThreadRunnerFactory
+				.fromActivity(activityContext)
+				.runBlockingOnUiThread(() -> {
+					FragmentContainerViewAdder.addInvisibleFragmentContainerViewWithIdToParent(
+							activityContext.findViewById(android.R.id.content),
+							FRAGMENT_CONTAINER_VIEW_ID);
+					return null;
+				});
 		final SearchablePreferenceScreen configureMapFragmentPreferenceScreen =
 				getConfigureMapFragmentPreferenceScreen(
 						graph,

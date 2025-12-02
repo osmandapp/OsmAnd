@@ -13,8 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
-import net.osmand.plus.settings.fragments.search.SearchDatabaseRebuilder;
+import net.osmand.plus.settings.fragments.search.Configuration;
 import net.osmand.plus.settings.fragments.search.SearchDatabaseRootedAtConfigureMapFragmentAdapter;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -24,14 +23,10 @@ import net.osmand.plus.widgets.alert.SelectionDialogFragmentFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import de.KnollFrank.lib.settingssearch.common.Locales;
-import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProvider;
-import de.KnollFrank.lib.settingssearch.db.preference.db.DatabaseResetter;
-import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
+import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphRepository;
 
 class InstallMapLayersDialogFragmentFactory {
 
@@ -99,7 +94,7 @@ class InstallMapLayersDialogFragmentFactory {
 										}
 									}
 									if (someTileSourceWasInstalled) {
-										resetSearchDatabase();
+										updateSearchDatabase();
 									}
 									// at the end publish null to show end of process
 									if (!toInstall.isEmpty() && result != null) {
@@ -118,45 +113,22 @@ class InstallMapLayersDialogFragmentFactory {
 								return selectedTileSourceTemplates;
 							}
 
-							private void resetSearchDatabase() {
-								DatabaseResetter.resetDatabase(getPreferencesDatabase());
-								new SearchDatabaseRebuilder().rebuildSearchDatabase(
-										getPreferencesDatabase(),
-										getLocale(),
-										new ActualConfigurationProvider().getActualConfiguration(),
-										activity,
-										getTileSourceTemplatesProvider());
-								new SearchDatabaseRootedAtConfigureMapFragmentAdapter().adaptSearchDatabaseRootedAtConfigureMapFragment(
-										getPreferencesDatabase(),
-										getPojoGraph(getLocale()),
-										new ActualConfigurationProvider().getActualConfiguration(),
-										activity,
-										getTileSourceTemplatesProvider());
+							private void updateSearchDatabase() {
+								getGraphRepository().addGraphTransformer(new SearchDatabaseRootedAtConfigureMapFragmentAdapter(getTileSourceTemplatesProvider()));
 							}
 
-							private Locale getLocale() {
-								return Locales.getCurrentLanguageLocale(activity.getResources());
-							}
-
-							private DAOProvider getPreferencesDatabase() {
+							private SearchablePreferenceScreenGraphRepository<Configuration> getGraphRepository() {
 								return OsmandApplication
 										.getInstanceFromContext(activity)
 										.daoProviderManager
-										.getDAOProvider();
+										.getDAOProvider()
+										.searchablePreferenceScreenGraphRepository();
 							}
 
 							private TileSourceTemplatesProvider getTileSourceTemplatesProvider() {
 								return OsmandApplication
 										.getInstanceFromContext(activity)
 										.getTileSourceTemplatesProvider();
-							}
-
-							private SearchablePreferenceScreenGraph getPojoGraph(final Locale locale) {
-								return this
-										.getPreferencesDatabase()
-										.searchablePreferenceScreenGraphDAO()
-										.findGraphById(locale)
-										.orElseThrow();
 							}
 						});
 	}

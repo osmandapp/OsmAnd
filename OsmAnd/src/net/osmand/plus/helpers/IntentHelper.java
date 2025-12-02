@@ -68,6 +68,7 @@ import net.osmand.plus.settings.fragments.ExportSettingsFragment;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
+import net.osmand.plus.settings.fragments.search.Configuration;
 import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -88,9 +89,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import de.KnollFrank.lib.settingssearch.MergedPreferenceScreen;
 import de.KnollFrank.lib.settingssearch.common.Locales;
 
 public class IntentHelper {
@@ -154,7 +157,7 @@ public class IntentHelper {
 				mapActivity,
 				mapActivity.findViewById(R.id.content),
 				MapActivity.FRAGMENT_CONTAINER_VIEW_ID,
-				onMergedPreferenceScreenAvailable ->
+				(final Consumer<MergedPreferenceScreen<Configuration>> onMergedPreferenceScreenAvailable) ->
 						SettingsSearchButtonHelper.createSearchPreferenceFragments(
 								mapActivity::getCreateSearchDatabaseTask,
 								onMergedPreferenceScreenAvailable,

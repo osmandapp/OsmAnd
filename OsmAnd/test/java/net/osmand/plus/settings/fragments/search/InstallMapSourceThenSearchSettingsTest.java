@@ -62,6 +62,7 @@ public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
 	private long originalTimeout;
 	private TimeUnit originalTimeUnit;
 
+	// FK-TODO: remove increaseTimeout() and resetTimeout()
 	@Before
 	public void increaseTimeout() {
 		originalTimeout = IdlingPolicies.getMasterIdlingPolicy().getIdleTimeout();

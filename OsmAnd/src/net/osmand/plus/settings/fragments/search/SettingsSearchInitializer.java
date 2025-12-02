@@ -6,8 +6,6 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 
 import java.util.List;
 
-import de.KnollFrank.lib.settingssearch.db.preference.db.DatabaseResetter;
-
 public class SettingsSearchInitializer {
 
 	private final OsmandApplication app;
@@ -30,6 +28,10 @@ public class SettingsSearchInitializer {
 	}
 
 	private void rebuildSearchDatabase() {
-		DatabaseResetter.resetDatabase(app.daoProviderManager.getDAOProvider());
+		app
+				.daoProviderManager
+				.getDAOProvider()
+				.searchablePreferenceScreenGraphRepository()
+				.addGraphTransformer(new SearchDatabaseRebuilder(app.getTileSourceTemplatesProvider()));
 	}
 }

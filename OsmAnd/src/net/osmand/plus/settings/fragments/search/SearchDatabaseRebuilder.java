@@ -16,7 +16,8 @@ import java.util.Optional;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
-import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProvider;
+import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
+import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphTransformer;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceEdge;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreen;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
@@ -27,28 +28,37 @@ import de.KnollFrank.lib.settingssearch.fragment.factory.FragmentFactoryAndIniti
 import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenGraphProviderFactory;
 import de.KnollFrank.lib.settingssearch.results.recyclerview.FragmentContainerViewAdder;
 
-public class SearchDatabaseRebuilder {
+public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphTransformer<Configuration> {
 
 	private final @IdRes int FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
 
-	public void rebuildSearchDatabase(
-			final DAOProvider preferencesDatabase,
-			final Locale locale,
-			final Configuration newConfiguration,
-			final FragmentActivity activityContext,
-			final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
-		preferencesDatabase
-				.searchablePreferenceScreenGraphDAO()
-				.persist(computeGraph(locale, newConfiguration, activityContext, tileSourceTemplatesProvider));
+	private final TileSourceTemplatesProvider tileSourceTemplatesProvider;
+
+	public SearchDatabaseRebuilder(final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
+		this.tileSourceTemplatesProvider = tileSourceTemplatesProvider;
+	}
+
+	@Override
+	public SearchablePreferenceScreenGraph transformGraph(final SearchablePreferenceScreenGraph graph,
+														  final Configuration actualConfiguration,
+														  final FragmentActivity activityContext) {
+		return computeGraph(
+				graph.locale(),
+				actualConfiguration,
+				activityContext);
 	}
 
 	private SearchablePreferenceScreenGraph computeGraph(final Locale locale,
 														 final Configuration newConfiguration,
-														 final FragmentActivity activityContext,
-														 final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
-		FragmentContainerViewAdder.addInvisibleFragmentContainerViewWithIdToParent(
-				activityContext.findViewById(android.R.id.content),
-				FRAGMENT_CONTAINER_VIEW_ID);
+														 final FragmentActivity activityContext) {
+		OnUiThreadRunnerFactory
+				.fromActivity(activityContext)
+				.runBlockingOnUiThread(() -> {
+					FragmentContainerViewAdder.addInvisibleFragmentContainerViewWithIdToParent(
+							activityContext.findViewById(android.R.id.content),
+							FRAGMENT_CONTAINER_VIEW_ID);
+					return null;
+				});
 		final SearchDatabaseConfig searchDatabaseConfig =
 				SearchDatabaseConfigFactory.createSearchDatabaseConfig(
 						MainSettingsFragment.class,
