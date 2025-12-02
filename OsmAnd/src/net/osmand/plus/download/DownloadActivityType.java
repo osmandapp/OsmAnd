@@ -368,7 +368,7 @@ public class DownloadActivityType {
 		IndexItem item = new IndexItem(name, description, timestamp, size, contentSize, containerSize, this, free, freeMessage, isHidden);
 		item.extra = FileNameTranslationHelper.getStandardMapName(app, item.getBasename().toLowerCase()) != null;
 		if (this == DEPRECATED_MAP) {
-			item.isDeleted = true;
+			item.isDeprecated = true;
 		}
 		return item;
 	}
