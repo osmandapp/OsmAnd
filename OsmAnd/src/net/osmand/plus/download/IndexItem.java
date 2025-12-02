@@ -353,7 +353,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		}
 	}
 
-	public boolean isDeleted() {
-		return isDeleted;
+	public boolean isDeprecated() {
+		return isDeprecated;
 	}
 }
