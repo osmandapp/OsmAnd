@@ -185,7 +185,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			newLocalIndexItems.add(LocalIndexItem.createDeletedMapsItem(deprecatedMapsCount));
 		}
 		for (DownloadItem item : downloadItems) {
-			if (!(item instanceof IndexItem) || !((IndexItem) item).isDeleted()) {
+			if (!(item instanceof IndexItem) || !((IndexItem) item).isDeprecated()) {
 				newLocalIndexItems.add(LocalIndexItem.createDownloadItem(item));
 			}
 		}
