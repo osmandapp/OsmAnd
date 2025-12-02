@@ -245,7 +245,7 @@ public class OsmandApplication extends MultiDexApplication {
 					daoProviderManager
 							.getDAOProvider()
 							.searchablePreferenceScreenGraphRepository()
-							.addGraphTransformer(new SearchDatabaseRebuilder(getTileSourceTemplatesProvider()));
+							.addGraphCreator(new SearchDatabaseRebuilder(getTileSourceTemplatesProvider()));
 
 	public static OsmandApplication getInstanceFromContext(final Context context) {
 		return (OsmandApplication) context.getApplicationContext();

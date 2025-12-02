@@ -32,6 +32,6 @@ public class SettingsSearchInitializer {
 				.daoProviderManager
 				.getDAOProvider()
 				.searchablePreferenceScreenGraphRepository()
-				.addGraphTransformer(new SearchDatabaseRebuilder(app.getTileSourceTemplatesProvider()));
+				.addGraphCreator(new SearchDatabaseRebuilder(app.getTileSourceTemplatesProvider()));
 	}
 }

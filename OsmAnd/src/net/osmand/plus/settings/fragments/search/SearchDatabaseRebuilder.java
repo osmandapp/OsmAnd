@@ -17,7 +17,7 @@ import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
-import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphTransformer;
+import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphCreator;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceEdge;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreen;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
@@ -28,7 +28,7 @@ import de.KnollFrank.lib.settingssearch.fragment.factory.FragmentFactoryAndIniti
 import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenGraphProviderFactory;
 import de.KnollFrank.lib.settingssearch.results.recyclerview.FragmentContainerViewAdder;
 
-public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphTransformer<Configuration> {
+public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphCreator<Configuration> {
 
 	private final @IdRes int FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
 
@@ -39,18 +39,9 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphT
 	}
 
 	@Override
-	public SearchablePreferenceScreenGraph transformGraph(final SearchablePreferenceScreenGraph graph,
-														  final Configuration actualConfiguration,
-														  final FragmentActivity activityContext) {
-		return computeGraph(
-				graph.locale(),
-				actualConfiguration,
-				activityContext);
-	}
-
-	private SearchablePreferenceScreenGraph computeGraph(final Locale locale,
-														 final Configuration newConfiguration,
-														 final FragmentActivity activityContext) {
+	public SearchablePreferenceScreenGraph createGraph(final Locale locale,
+													   final Configuration actualConfiguration,
+													   final FragmentActivity activityContext) {
 		OnUiThreadRunnerFactory
 				.fromActivity(activityContext)
 				.runBlockingOnUiThread(() -> {
@@ -73,7 +64,7 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphT
 						activityContext,
 						searchDatabaseConfig),
 				locale,
-				new ConfigurationBundleConverter().doForward(newConfiguration));
+				new ConfigurationBundleConverter().doForward(actualConfiguration));
 	}
 
 	private Graph<SearchablePreferenceScreen, SearchablePreferenceEdge> getPojoGraphRootedAt(
