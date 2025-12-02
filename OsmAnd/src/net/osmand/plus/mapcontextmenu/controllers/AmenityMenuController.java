@@ -295,6 +295,12 @@ public class AmenityMenuController extends MenuController {
 		return pc.getTranslation();
 	}
 
+	@NonNull
+	public String getCategoryTypeStr() {
+		PoiCategory pc = amenity.getType();
+		return pc.getKeyName();
+	}
+
 	@Override
 	public List<TransportStopRoute> getTransportStopRoutes() {
 		if (transportStopController != null) {

@@ -8,6 +8,7 @@ import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
 import static net.osmand.plus.importfiles.ImportHelper.getGpxDestinationDir;
 import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.mapcontextmenu.other.ShareMenu.KEY_SAVE_FILE_NAME;
+import static net.osmand.plus.search.listitems.QuickSearchListItem.getAmenityIconName;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
@@ -27,9 +28,12 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.TileSourceManager;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
@@ -70,6 +74,7 @@ import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.GeoPointParserUtil;
@@ -78,6 +83,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -279,7 +285,10 @@ public class IntentHelper {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
-			if (isOsmAndMapUrl(data) && data.getQueryParameterNames().contains("pin")) {
+
+			if (parseAmenity(data, intent)) {
+				return true;
+			} else if (isOsmAndMapUrl(data) && data.getQueryParameterNames().contains("pin")) {
 				String latLonParam = data.getQueryParameter("pin");
 				LatLon latLon = Algorithms.isEmpty(latLonParam) ? null : Algorithms.parseLatLon(latLonParam);
 				if (latLon != null) {
@@ -294,6 +303,89 @@ public class IntentHelper {
 			}
 		}
 		return false;
+	}
+
+	private boolean parseAmenity(Uri data, Intent intent) {
+		if (data == null) {
+			return false;
+		}
+
+		if (isOsmAndMapUrl(data)
+				&& data.getQueryParameterNames().contains("name")
+				|| data.getQueryParameterNames().contains("wikidataId")) {
+			String name;
+			String type;
+			String wikiDataId;
+			double pinLat;
+			double pinLon;
+			int zoom;
+
+			name = data.getQueryParameter("name");
+			type = data.getQueryParameter("type");
+			wikiDataId = data.getQueryParameter("wikidataId");
+			String latLonParam = data.getQueryParameter("pin");
+			LatLon latLon = Algorithms.isEmpty(latLonParam) ? null : Algorithms.parseLatLon(latLonParam);
+
+			if (latLon != null) {
+				pinLat = latLon.getLatitude();
+				pinLon = latLon.getLongitude();
+				zoom = settings.getLastKnownMapZoom();
+				Amenity amenity = searchAmenity(pinLat, pinLon, name, type, wikiDataId);
+				if (amenity == null) {
+					return false;
+				}
+
+				String lang;
+				boolean transliterate;
+				lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+				transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+
+				String poiSimpleFormat;
+				if (amenity.getType() != null && amenity.getType().isWiki()) {
+					poiSimpleFormat = amenity.getName(lang, transliterate);
+				} else {
+					poiSimpleFormat = Amenity.getPoiStringWithoutType(amenity, lang, transliterate);
+				}
+
+				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
+				pointDescription.setIconName(getAmenityIconName(app, amenity));
+				settings.setMapLocationToShow(pinLat, pinLon, zoom, pointDescription, true, amenity);
+			}
+
+			clearIntent(intent);
+			return true;
+		}
+		return false;
+	}
+
+	@Nullable
+	private Amenity searchAmenity(Double pinLat, Double pinLon, String name, String type, String wikiDataId) {
+		AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
+		AmenitySearcher.Settings searchSettings = app.getResourceManager().getDefaultAmenitySearchSettings();
+
+		List<Amenity> amenities = amenitySearcher.searchAmenities(new LatLon(pinLat, pinLon), searchSettings);
+
+		Amenity requestAmenity = new Amenity();
+		List<String> names = Collections.singletonList(name);
+		requestAmenity.setLocation(new LatLon(pinLat, pinLon));
+		PoiCategory category = Algorithms.isEmpty(type) ? null : app.getPoiTypes().getPoiCategoryByName(type);
+		if (!MapPoiTypes.getDefault().isOtherCategory(category)) {
+			requestAmenity.setType(category);
+		}
+
+		if (wikiDataId != null) {
+			if (!wikiDataId.startsWith("Q")) {
+				wikiDataId = "Q" + wikiDataId;
+			}
+			requestAmenity.setAdditionalInfo(Amenity.WIKIDATA, wikiDataId);
+		}
+
+		AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names, true);
+		List<Amenity> filtered = amenitySearcher.filterAmenities(amenities, request, searchSettings);
+		if (!Algorithms.isEmpty(filtered)) {
+			return filtered.get(0);
+		}
+		return null;
 	}
 
 	@Nullable

@@ -679,6 +679,11 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	@NonNull
+	public String getCategoryTypeStr() {
+		return getCommonTypeStr();
+	}
+
+	@NonNull
 	public String getNameStr() {
 		return pointDescription.getName();
 	}
@@ -708,10 +713,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return getSubTransportStopRoutes(true);
 	}
 
-	public void share(LatLon latLon, String title, String address, String typeStr) {
+	public void share(LatLon latLon, String title, String address, String typeStr, @Nullable String wikidataId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			ShareMenu.show(latLon, title, address, typeStr, mapActivity);
+			ShareMenu.show(latLon, title, address, typeStr, wikidataId, mapActivity);
 		}
 	}
 

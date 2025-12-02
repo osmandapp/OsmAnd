@@ -66,6 +66,7 @@ public class ShareMenu extends BaseMenuController {
 	private String geoUrl;
 	private String typeStr;
 	private String sms;
+	private String wikidataId;
 	private Uri link;
 
 	private ShareMenu(@NonNull MapActivity mapActivity) {
@@ -92,12 +93,13 @@ public class ShareMenu extends BaseMenuController {
 		return title;
 	}
 
-	public static void show(LatLon latLon, String title, String address, String typeStr, @NonNull MapActivity activity) {
+	public static void show(LatLon latLon, String title, String address, String typeStr, String wikidataId, @NonNull MapActivity activity) {
 		ShareMenu menu = new ShareMenu(activity);
 		menu.latLon = latLon;
 		menu.title = title;
 		menu.address = address;
 		menu.typeStr = typeStr;
+		menu.wikidataId = wikidataId;
 
 		if (Build.VERSION.SDK_INT >= 34) {
 			showNativeShareDialog(menu, activity);
@@ -175,7 +177,7 @@ public class ShareMenu extends BaseMenuController {
 			lon = lon.substring(0, lon.length() - 1);
 			int zoom = activity.getMapView().getZoom();
 			geoUrl = MapUtils.buildGeoUrl(lat, lon, zoom);
-			link = buildOsmandPoiUri(title, typeStr,
+			link = buildOsmandPoiUri(title, typeStr, wikidataId,
 					lat, lon,
 					zoom, lat, lon);
 		} catch (RuntimeException e) {
@@ -233,20 +235,26 @@ public class ShareMenu extends BaseMenuController {
 		}
 	}
 
-	public static Uri buildOsmandPoiUri(String name, String type,
+	public static Uri buildOsmandPoiUri(String name, String type, String wikidataId,
 	                                    String pinLat, String pinLon,
 	                                    int zoom, String fragLat, String fragLon) {
 		String pin = pinLat + "," + pinLon;
 		String frag = zoom + "/" + fragLat + "/" + fragLon;
-		return new Uri.Builder()
+		Uri.Builder builder = new Uri.Builder()
 				.scheme("https")
 				.authority("osmand.net")
-				.path("map/poi/")
-				.appendQueryParameter("name", name)
-				.appendQueryParameter("type", type)
+				.path("map/poi/");
+
+		if (!Algorithms.isEmpty(name)) {
+			builder.appendQueryParameter("name", name);
+		} else if (!Algorithms.isEmpty(wikidataId)) {
+			builder.appendQueryParameter("wikidataId", wikidataId);
+		}
+
+		builder.appendQueryParameter("type", type)
 				.appendQueryParameter("pin", pin)
-				.encodedFragment(frag)
-				.build();
+				.encodedFragment(frag);
+		return builder.build();
 	}
 
 	public void saveMenu(@NonNull Bundle bundle) {

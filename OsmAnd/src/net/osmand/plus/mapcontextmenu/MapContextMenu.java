@@ -1030,11 +1030,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		String address = getAddressToShare();
 		LatLon latLon = getLatLon();
 		if (menuController != null) {
-			menuController.share(latLon, nameStr, address, menuController.getCommonTypeStr());
+			String wikidata = null;
+			if (object instanceof Amenity amenity) {
+				wikidata = amenity.getWikidata();
+			}
+			menuController.share(latLon, nameStr, address, menuController.getCategoryTypeStr(), wikidata);
 		} else {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				ShareMenu.show(latLon, nameStr, address, typeStr, mapActivity);
+				ShareMenu.show(latLon, nameStr, address, typeStr, null, mapActivity);
 			}
 		}
 	}
