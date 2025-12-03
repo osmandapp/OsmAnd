@@ -40,6 +40,13 @@ public class PlatformUtil {
 		return osmandRegions;
 	}
 
+	public static void initDisposableOsmandRegions() throws IOException {
+		if (osmandRegions == null) {
+			osmandRegions = new OsmandRegions();
+			osmandRegions.initDisposableRegionsFromResources();
+		}
+	}
+
 	public static XmlPullParser newXMLPullParser() throws XmlPullParserException{
 		org.kxml2.io.KXmlParser xmlParser = new org.kxml2.io.KXmlParser();
 		xmlParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, true);

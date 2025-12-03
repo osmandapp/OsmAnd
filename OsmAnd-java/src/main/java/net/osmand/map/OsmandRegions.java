@@ -39,6 +39,7 @@ import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
 
 public class OsmandRegions {
+	public static final String REGIONS_OCBF = "regions.ocbf";
 
 	public static final String MAP_TYPE = "region_map";
 	public static final String ROADS_TYPE = "region_roads";
@@ -104,17 +105,31 @@ public class OsmandRegions {
 	}
 
 	public BinaryMapIndexReader prepareFile() throws IOException {
-		File regions = new File("regions.ocbf");
+		File regions = new File(REGIONS_OCBF);
 		// internal version could be updated
 //		if (!regions.exists()) {
-			InputStream is = OsmandRegions.class.getResourceAsStream("regions.ocbf");
+			InputStream is = OsmandRegions.class.getResourceAsStream(REGIONS_OCBF);
 			FileOutputStream fous = new FileOutputStream(regions);
 			Algorithms.streamCopy(is, fous);
 			fous.close();
 //		}
 		return prepareFile(regions.getAbsolutePath());
 	}
-	
+
+	public void initDisposableRegionsFromResources() throws IOException {
+		InputStream is = OsmandRegions.class.getResourceAsStream(REGIONS_OCBF);
+		if (is != null) {
+			File regions = File.createTempFile(REGIONS_OCBF, ".tmp");
+			FileOutputStream fous = new FileOutputStream(regions);
+			Algorithms.streamCopy(is, fous);
+			fous.close();
+			prepareFile(regions.getAbsolutePath());
+			if (!regions.delete()) {
+				regions.deleteOnExit();
+			}
+		}
+	}
+
 	public BinaryMapIndexReader prepareFile(String fileName) throws IOException {
 		reader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"), new File(fileName));
 //		final Collator clt = OsmAndCollator.primaryCollator();
