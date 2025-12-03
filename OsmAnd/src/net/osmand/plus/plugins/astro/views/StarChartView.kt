@@ -118,6 +118,7 @@ abstract class StarChartView @JvmOverloads constructor(
 					val newConfig = currentConfig.copy(items = itemsConfig)
 					swSettings.setStarChartConfig(newConfig)
 
+					viewModel.loadData()
 					onSettingsChanged()
 				}
 				.setNegativeButton(R.string.shared_string_cancel, null)
