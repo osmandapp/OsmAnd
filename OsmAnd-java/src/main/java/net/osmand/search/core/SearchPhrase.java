@@ -783,20 +783,20 @@ public class SearchPhrase {
 		
 	}
 	
-	public int countUnknownWordsMatchMainResult(SearchResult sr) {
-		return countUnknownWordsMatchInternal(sr, null, 0);
+	public int countUnknownWordsMatchMainResult(SearchResult sr, SearchResult parent) {
+		return countUnknownWordsMatchInternal(sr, null, 0, parent == null ? null : parent.localeName);
 	}
 	
 	public int countUnknownWordsMatchMainResult(SearchResult sr, int amountMatchingWords) {
-		return countUnknownWordsMatchInternal(sr, null, amountMatchingWords);
+		return countUnknownWordsMatchInternal(sr, null, amountMatchingWords, null);
 	}
 	
 	public int countUnknownWordsMatchMainResult(SearchResult sr, String name, int amountMatchingWords) {
-		return countUnknownWordsMatchInternal(sr, name, amountMatchingWords);
+		return countUnknownWordsMatchInternal(sr, name, amountMatchingWords, null);
 	}
 	
 	
-	private int countUnknownWordsMatchInternal(SearchResult sr, String extraName, int amountMatchingWords) {
+	private int countUnknownWordsMatchInternal(SearchResult sr, String extraName, int amountMatchingWords, String knownParentWord) {
 		int r = 0;
 		if (otherUnknownWords.size() > 0) {
 			for (int i = 0; i < otherUnknownWords.size(); i++) {
@@ -814,7 +814,11 @@ public class SearchPhrase {
 					if (sr.otherWordsMatch == null) {
 						sr.otherWordsMatch = new TreeSet<>(getCollator());
 					}
-					sr.otherWordsMatch.add(otherUnknownWords.get(i));
+					String unknownWord = otherUnknownWords.get(i);
+					if (unknownWord.equalsIgnoreCase(knownParentWord))
+						continue;
+
+					sr.otherWordsMatch.add(unknownWord);
 					r++;
 				}
 			}
