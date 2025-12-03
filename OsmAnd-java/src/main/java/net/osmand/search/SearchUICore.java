@@ -973,6 +973,8 @@ public class SearchUICore {
 				sr.parentSearchResult = parentSearchResult;
 				matcher.publish(sr);
 			}
+			if (phrase.getSettings().getStat() != null)
+				phrase.getSettings().getStat().addWordStats(api.toString(), phrase.mainUnknownWordToSearch, requestResults);
 		}
 
 		public void apiSearchRegionFinished(SearchCoreAPI api, BinaryMapIndexReader region, SearchPhrase phrase) {
@@ -987,6 +989,8 @@ public class SearchUICore {
 					LOG.info("API region search done <" + phrase + "> API=<" + api + "> Region=<" + region.getFile().getName() + ">");
 				}
 			}
+			if (phrase.getSettings().getStat() != null)
+				phrase.getSettings().getStat().addWordStats(api.toString(), phrase.mainUnknownWordToSearch, requestResults);
 		}
 
 		@Override

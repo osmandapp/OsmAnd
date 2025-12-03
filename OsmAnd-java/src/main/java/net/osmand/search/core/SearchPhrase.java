@@ -49,7 +49,7 @@ public class SearchPhrase {
 	private boolean lastUnknownSearchWordComplete;
 	
 	// Main unknown word used for search
-	private String mainUnknownWordToSearch = null;
+	public String mainUnknownWordToSearch = null;
 	private boolean mainUnknownSearchWordComplete;
 
 	// Name Searchers
