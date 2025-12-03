@@ -38,7 +38,7 @@ import de.KnollFrank.lib.settingssearch.graph.ComputePreferencesListener;
 import de.KnollFrank.lib.settingssearch.provider.ActivityInitializer;
 import de.KnollFrank.lib.settingssearch.provider.PreferenceScreenGraphAvailableListener;
 
-class SearchDatabaseConfigFactory {
+public class SearchDatabaseConfigFactory {
 
 	public static SearchDatabaseConfig createSearchDatabaseConfig(
 			final Class<? extends BaseSettingsFragment> rootPreferenceFragment,

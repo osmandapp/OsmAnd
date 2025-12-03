@@ -19,47 +19,46 @@ import java.util.function.Supplier;
 import de.KnollFrank.lib.settingssearch.MergedPreferenceScreen;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
-import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProvider;
+import de.KnollFrank.lib.settingssearch.db.preference.db.PreferencesDatabase;
 
 public class SettingsSearchButtonHelper {
 
 	private final BaseSettingsFragment rootSearchPreferenceFragment;
 	private final @IdRes int fragmentContainerViewId;
-	private final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider<Configuration>>>> createSearchDatabaseTaskSupplier;
+	private final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, PreferencesDatabase<Configuration>>>> createSearchDatabaseTaskSupplier;
 	private final OsmandPreference<String> availableAppModes;
 	private final TileSourceTemplatesProvider tileSourceTemplatesProvider;
-	private final DAOProvider<Configuration> daoProvider;
+	private final PreferencesDatabase<Configuration> preferencesDatabase;
 	private final Configuration configuration;
 
 	public static SettingsSearchButtonHelper of(final BaseSettingsFragment rootSearchPreferenceFragment,
 												final @IdRes int fragmentContainerViewId,
-												final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider<Configuration>>>> createSearchDatabaseTaskSupplier,
+												final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, PreferencesDatabase<Configuration>>>> createSearchDatabaseTaskSupplier,
 												final OsmandApplication app,
 												final Configuration configuration) {
-		final DAOProvider<Configuration> daoProvider = app.daoProviderManager.getDAOProvider();
 		return new SettingsSearchButtonHelper(
 				rootSearchPreferenceFragment,
 				fragmentContainerViewId,
 				createSearchDatabaseTaskSupplier,
 				app.getSettings().AVAILABLE_APP_MODES,
 				app.getTileSourceTemplatesProvider(),
-				daoProvider,
+				app.preferencesDatabaseManager.getPreferencesDatabase(),
 				configuration);
 	}
 
 	private SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
 									   final int fragmentContainerViewId,
-									   final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider<Configuration>>>> createSearchDatabaseTaskSupplier,
+									   final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, PreferencesDatabase<Configuration>>>> createSearchDatabaseTaskSupplier,
 									   final OsmandPreference<String> availableAppModes,
 									   final TileSourceTemplatesProvider tileSourceTemplatesProvider,
-									   final DAOProvider<Configuration> daoProvider,
+									   final PreferencesDatabase<Configuration> preferencesDatabase,
 									   final Configuration configuration) {
 		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
 		this.fragmentContainerViewId = fragmentContainerViewId;
 		this.createSearchDatabaseTaskSupplier = createSearchDatabaseTaskSupplier;
 		this.availableAppModes = availableAppModes;
 		this.tileSourceTemplatesProvider = tileSourceTemplatesProvider;
-		this.daoProvider = daoProvider;
+		this.preferencesDatabase = preferencesDatabase;
 		this.configuration = configuration;
 	}
 
@@ -70,14 +69,14 @@ public class SettingsSearchButtonHelper {
 	}
 
 	public static SearchPreferenceFragments<Configuration> createSearchPreferenceFragments(
-			final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider<Configuration>>>> createSearchDatabaseTaskSupplier,
+			final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, PreferencesDatabase<Configuration>>>> createSearchDatabaseTaskSupplier,
 			final Consumer<MergedPreferenceScreen<Configuration>> onMergedPreferenceScreenAvailable,
 			final FragmentActivity fragmentActivity,
 			final @IdRes int fragmentContainerViewId,
 			final Class<? extends BaseSettingsFragment> rootPreferenceFragment,
 			final OsmandPreference<String> availableAppModes,
 			final TileSourceTemplatesProvider tileSourceTemplatesProvider,
-			final DAOProvider<Configuration> daoProvider,
+			final PreferencesDatabase<Configuration> preferencesDatabase,
 			final Configuration configuration) {
 		return SearchPreferenceFragments
 				.builder(
@@ -90,8 +89,8 @@ public class SettingsSearchButtonHelper {
 								fragmentContainerViewId,
 								availableAppModes),
 						fragmentActivity,
-						daoProvider,
-						new ConfigurationBundleConverter().doForward(configuration),
+						preferencesDatabase,
+						new ConfigurationBundleConverter().convertForward(configuration),
 						new ConfigurationBundleConverter())
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
 				.withOnMergedPreferenceScreenAvailable(onMergedPreferenceScreenAvailable)
@@ -109,7 +108,7 @@ public class SettingsSearchButtonHelper {
 						rootSearchPreferenceFragment.getClass(),
 						availableAppModes,
 						tileSourceTemplatesProvider,
-						daoProvider,
+						preferencesDatabase,
 						configuration);
 		searchPreferenceButton.setOnClickListener(v -> showSearchPreferenceFragment(searchPreferenceFragments));
 	}

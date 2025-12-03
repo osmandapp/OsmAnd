@@ -495,7 +495,7 @@ dependencies {
 	implementation "androidx.car.app:app-projected:1.4.0"
 
 	implementation 'com.google.android.gms:play-services-location:21.3.0'
-	implementation 'com.github.KnollFrank:SettingsSearch:8130a14a44'
+	implementation 'com.github.KnollFrank:SettingsSearch:e71b2f5908'
 	// https://mvnrepository.com/artifact/com.google.guava/guava
 	implementation 'com.google.guava:guava:33.5.0-android'
 	// FK-TODO: remove jgrapht dependency

@@ -166,7 +166,7 @@ public class IntentHelper {
 								MainSettingsFragment.class,
 								app.getSettings().AVAILABLE_APP_MODES,
 								app.getTileSourceTemplatesProvider(),
-								app.daoProviderManager.getDAOProvider(),
+								app.preferencesDatabaseManager.getPreferencesDatabase(),
 								new ActualConfigurationProvider().getActualConfiguration()),
 				getLocale());
 	}

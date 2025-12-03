@@ -10,7 +10,7 @@ import de.KnollFrank.lib.settingssearch.db.preference.db.PrepackagedPreferencesD
 import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphTransformer;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
 
-public class PreferencesDatabaseFactory {
+public class PreferencesDatabaseConfigFactory {
 
 	public static final String SEARCHABLE_PREFERENCES_DB = "searchable_preferences.db";
 

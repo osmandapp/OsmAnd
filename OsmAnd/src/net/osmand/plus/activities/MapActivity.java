@@ -118,11 +118,13 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
 import net.osmand.plus.settings.fragments.search.Configuration;
 import net.osmand.plus.settings.fragments.search.ConfigurationBundleConverter;
-import net.osmand.plus.settings.fragments.search.PreferencesDatabaseFactory;
+import net.osmand.plus.settings.fragments.search.PreferencesDatabaseConfigFactory;
+import net.osmand.plus.settings.fragments.search.SearchDatabaseConfigFactory;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulatedLocation;
@@ -159,7 +161,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
-import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProvider;
+import de.KnollFrank.lib.settingssearch.db.preference.db.PreferencesDatabase;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		IRouteInformationListener, AMapPointUpdateListener, MapMarkerChangedListener,
@@ -182,7 +184,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static Intent prevActivityIntent = null;
 
 	public static final @IdRes int FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
-	private Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider<Configuration>>> createSearchDatabaseTask = Optional.empty();
+	private Optional<AsyncTaskWithProgressUpdateListeners<Void, PreferencesDatabase<Configuration>>> createSearchDatabaseTask = Optional.empty();
 
 	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
 
@@ -361,7 +363,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	public Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider<Configuration>>> getCreateSearchDatabaseTask() {
+	public Optional<AsyncTaskWithProgressUpdateListeners<Void, PreferencesDatabase<Configuration>>> getCreateSearchDatabaseTask() {
 		return createSearchDatabaseTask;
 	}
 
@@ -956,13 +958,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		getMyApplication().getNotificationHelper().showNotifications();
 		extendedMapActivity.onStart(this);
 		app
-				.daoProviderManager
-				.initDAOProvider(
+				.preferencesDatabaseManager
+				.initPreferencesDatabase(
 						BuildConfig.GENERATE_PREFERENCES_DATABASE_FOR_ASSET ?
-								PreferencesDatabaseFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile() :
-								PreferencesDatabaseFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(),
+								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile() :
+								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(),
 						new ActualConfigurationProvider().getActualConfiguration(),
 						new ConfigurationBundleConverter(),
+						SearchDatabaseConfigFactory
+								.createSearchDatabaseConfig(
+										MainSettingsFragment.class,
+										app.getTileSourceTemplatesProvider(),
+										getSupportFragmentManager())
+								.computePreferencesListener,
 						this);
 
 		// FK-FIXME: the following code block makes the magnifying glass freeze when the user clicks on it on installed OsmAnd-nightlyFree-legacy-fat-debug.apk

@@ -120,8 +120,8 @@ class InstallMapLayersDialogFragmentFactory {
 							private SearchablePreferenceScreenGraphRepository<Configuration> getGraphRepository() {
 								return OsmandApplication
 										.getInstanceFromContext(activity)
-										.daoProviderManager
-										.getDAOProvider()
+										.preferencesDatabaseManager
+										.getPreferencesDatabase()
 										.searchablePreferenceScreenGraphRepository();
 							}
 

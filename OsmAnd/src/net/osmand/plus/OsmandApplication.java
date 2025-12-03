@@ -149,7 +149,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
-import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProviderManager;
+import de.KnollFrank.lib.settingssearch.db.preference.db.PreferencesDatabaseManager;
 
 public class OsmandApplication extends MultiDexApplication {
 
@@ -239,11 +239,11 @@ public class OsmandApplication extends MultiDexApplication {
 
 	private TileSourceTemplatesProvider tileSourceTemplatesProvider;
 
-	public final DAOProviderManager<net.osmand.plus.settings.fragments.search.Configuration> daoProviderManager = new DAOProviderManager<>();
+	public final PreferencesDatabaseManager<net.osmand.plus.settings.fragments.search.Configuration> preferencesDatabaseManager = new PreferencesDatabaseManager<>();
 	private final StateChangedListener<String> pluginsListenerResettingSearchDatabase =
 			plugins ->
-					daoProviderManager
-							.getDAOProvider()
+					preferencesDatabaseManager
+							.getPreferencesDatabase()
 							.searchablePreferenceScreenGraphRepository()
 							.addGraphCreator(new SearchDatabaseRebuilder(getTileSourceTemplatesProvider()));
 

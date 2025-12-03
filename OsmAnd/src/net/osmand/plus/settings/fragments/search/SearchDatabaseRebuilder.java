@@ -64,7 +64,7 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphC
 						activityContext,
 						searchDatabaseConfig),
 				locale,
-				new ConfigurationBundleConverter().doForward(actualConfiguration));
+				new ConfigurationBundleConverter().convertForward(actualConfiguration));
 	}
 
 	private Graph<SearchablePreferenceScreen, SearchablePreferenceEdge> getPojoGraphRootedAt(

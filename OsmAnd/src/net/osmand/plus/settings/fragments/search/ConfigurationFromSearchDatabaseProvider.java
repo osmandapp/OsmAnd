@@ -25,6 +25,6 @@ class ConfigurationFromSearchDatabaseProvider {
 		return searchablePreferenceScreenGraphDAO
 				.findGraphById(locale)
 				.map(SearchablePreferenceScreenGraph::configuration)
-				.map(configurationBundleConverter::doBackward);
+				.map(configurationBundleConverter::convertBackward);
 	}
 }

@@ -11,14 +11,14 @@ public class ConfigurationBundleConverter implements de.KnollFrank.lib.settingss
 	private static final String ENABLED_PLUGINS = "enabledPlugins";
 
 	@Override
-	public PersistableBundle doForward(final Configuration configuration) {
+	public PersistableBundle convertForward(final Configuration configuration) {
 		final PersistableBundle bundle = new PersistableBundle();
 		putStringSet(bundle, ENABLED_PLUGINS, configuration.enabledPlugins());
 		return bundle;
 	}
 
 	@Override
-	public Configuration doBackward(final PersistableBundle bundle) {
+	public Configuration convertBackward(final PersistableBundle bundle) {
 		return new Configuration(getStringSet(bundle, ENABLED_PLUGINS));
 	}
 

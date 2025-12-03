@@ -109,7 +109,7 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter implements Search
 								activityContext,
 								searchDatabaseConfig)),
 				graph.locale(),
-				new ConfigurationBundleConverter().doForward(newConfiguration));
+				new ConfigurationBundleConverter().convertForward(newConfiguration));
 	}
 
 	private Graph<SearchablePreferenceScreen, SearchablePreferenceEdge> getPojoGraphRootedAt(

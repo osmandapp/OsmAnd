@@ -29,8 +29,8 @@ public class SettingsSearchInitializer {
 
 	private void rebuildSearchDatabase() {
 		app
-				.daoProviderManager
-				.getDAOProvider()
+				.preferencesDatabaseManager
+				.getPreferencesDatabase()
 				.searchablePreferenceScreenGraphRepository()
 				.addGraphCreator(new SearchDatabaseRebuilder(app.getTileSourceTemplatesProvider()));
 	}
