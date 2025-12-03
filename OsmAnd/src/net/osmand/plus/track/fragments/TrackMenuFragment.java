@@ -723,6 +723,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			mapActivity.refreshMap();
 			updateDisplayGroupsWidget();
 			updatePointGroupsCard();
+
+			if (pointsCard != null) {
+				pointsCard.updateContent();
+			}
 		}
 	}
 
