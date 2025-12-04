@@ -192,8 +192,9 @@ public class GeneralRouter implements VehicleRouter {
 		if (shortestRoute) {
 			if (profile == GeneralRouterProfile.BICYCLE) {
 				maxSpeed = Math.min(BICYCLE_SHORTEST_DEFAULT_SPEED, maxSpeed);
-			} else {
+			} else if (profile == GeneralRouterProfile.CAR) {
 				maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
+				heightObstacles = true;
 			}
 		}
 		initCaches();
