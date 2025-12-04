@@ -146,15 +146,15 @@ public class DeletedMapsFragment extends BaseFullScreenDialogFragment implements
 
 	private void reloadData() {
 		DownloadResources indexes = downloadThread.getIndexes();
-		List<IndexItem> deletedMaps = indexes.getDeletedItems();
+		List<IndexItem> deprecatedMaps = indexes.getOutdatedItems().deprecated();
 		List<Object> localItemsToDelete = new ArrayList<>();
 
-		for (IndexItem indexItem : deletedMaps) {
+		for (IndexItem indexItem : deprecatedMaps) {
 			File fileToDelete = indexItem.getTargetFile(app);
 			LocalItemType type = LocalItemUtils.getItemType(app, fileToDelete);
 			if (type != null) {
 				LocalItem localItem = new LocalItem(fileToDelete, type);
-				localItem.setDeleted(true);
+				localItem.setDeprecated(true);
 				localItemsToDelete.add(localItem);
 			}
 		}

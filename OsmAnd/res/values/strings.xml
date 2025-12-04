@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimeters</string>
+    <string name="bicycle_width_limit_description">Provide your bicycle width to avoid narrow cycle paths.</string>
     <string name="copy_link">Copy link</string>
     <string name="is_parking_time_limited">Is parking time limited?</string>
     <string name="efficient_grid">Efficient grid</string>
