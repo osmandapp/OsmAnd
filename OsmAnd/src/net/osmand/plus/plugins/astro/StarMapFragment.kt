@@ -39,6 +39,7 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.controls.maphudbuttons.MapButton
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
+import net.osmand.util.MapUtils
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Calendar
@@ -278,8 +279,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 	}
 
 	private fun updateStarMap() {
-		val location = app.osmandMap.mapView.currentRotatedTileBox.centerLatLon
+		val tileBox = app.osmandMap.mapView.rotatedTileBox
+		val location = tileBox.centerLatLon
 		starView.setObserverLocation(location.latitude, location.longitude, 0.0)
+		starView.setAzimuth(-tileBox.rotate.toDouble())
 	}
 
 	private fun updateStarChart() {
