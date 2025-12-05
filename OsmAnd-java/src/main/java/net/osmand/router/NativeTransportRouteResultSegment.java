@@ -1,6 +1,7 @@
 package net.osmand.router;
 
 public class NativeTransportRouteResultSegment {
+	public NativeTransportRouteResultSegment[] alternatives;
 	public NativeTransportRoute route;
 	public double walkTime;
 	public double travelDistApproximate;

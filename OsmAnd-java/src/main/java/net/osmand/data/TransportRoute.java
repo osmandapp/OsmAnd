@@ -24,6 +24,7 @@ public class TransportRoute extends MapObject {
 	private Map<String, String> tags = new HashMap<>();
 	public static final double SAME_STOP = 40;
 	public static final String INTERVAL_KEY = "interval";
+	private int intervalInSeconds = -1;
 
 	public TransportRoute() {
 	}
@@ -56,6 +57,31 @@ public class TransportRoute extends MapObject {
 
 	public String getInterval() {
 		return getTags().get(INTERVAL_KEY);
+	}
+
+	public int calcIntervalInSeconds() {
+		if (intervalInSeconds < 0) {
+			intervalInSeconds = parseIntervalTagToSeconds(getInterval());
+		}
+		return intervalInSeconds;
+	}
+
+	public static int parseIntervalTagToSeconds(String interval) {
+		int hh = 0, mm = 0, ss = 0;
+		if (interval != null) {
+			String[] hms = interval.split(":");
+			if (hms.length == 1) {
+				mm = Algorithms.parseIntSilently(hms[0], 0);
+			} else if (hms.length == 2) {
+				hh = Algorithms.parseIntSilently(hms[0], 0);
+				mm = Algorithms.parseIntSilently(hms[1], 0);
+			} else if (hms.length == 3) {
+				hh = Algorithms.parseIntSilently(hms[0], 0);
+				mm = Algorithms.parseIntSilently(hms[1], 0);
+				ss = Algorithms.parseIntSilently(hms[2], 0);
+			}
+		}
+		return Math.max(0, hh * 3600 + mm * 60 + ss);
 	}
 
 	public void addTag(String k, String v) {

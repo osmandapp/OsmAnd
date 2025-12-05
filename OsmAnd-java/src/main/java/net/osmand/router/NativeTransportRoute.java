@@ -29,5 +29,4 @@ public class NativeTransportRoute {
 	public long[][] waysNodesIds;
 	public double[][] waysNodesLats;
 	public double[][] waysNodesLons;
-
 }
