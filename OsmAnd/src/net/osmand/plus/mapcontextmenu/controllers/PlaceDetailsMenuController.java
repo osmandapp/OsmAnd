@@ -6,10 +6,13 @@ import androidx.annotation.Nullable;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.PlaceDetailsMenuBuilder;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.mapcontextmenu.other.SharePoiParams;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -51,6 +54,36 @@ public class PlaceDetailsMenuController extends AmenityMenuController {
 			iconId = renderedObjectController != null ? renderedObjectController.getRightIconId() : 0;
 		}
 		return iconId;
+	}
+
+	public void share(LatLon latLon, String title, String address) {
+		SharePoiParams params = new SharePoiParams(latLon);
+		String name = null;
+		if (renderedObjectController != null && renderedObjectController.getObject() instanceof RenderedObject renderedObject) {
+			name = renderedObject.getName();
+		}
+		if (Algorithms.isEmpty(name)) {
+			name = amenity.getName();
+		}
+
+		if (isWikiType()) {
+			if (Algorithms.isEmpty(name)) {
+				params.addWikidataId(amenity.getWikidata());
+			}
+		} else {
+			if (Algorithms.isEmpty(name)) {
+				params.addOsmId(amenity.getOsmId());
+			}
+		}
+
+		String type = getShareType();
+		params.addType(type);
+		params.addName(name);
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			ShareMenu.show(latLon, title, address, ShareMenu.buildOsmandPoiUri(params), mapActivity);
+		}
 	}
 
 	@Override

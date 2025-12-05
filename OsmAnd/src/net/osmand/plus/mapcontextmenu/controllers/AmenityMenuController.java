@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
@@ -27,6 +28,8 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.mapcontextmenu.other.SharePoiParams;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RenderingIcons;
@@ -295,10 +298,46 @@ public class AmenityMenuController extends MenuController {
 		return pc.getTranslation();
 	}
 
+	public void share(LatLon latLon, String title, String address) {
+		SharePoiParams params = new SharePoiParams(latLon);
+
+		if (isWikiType()) {
+			params.addWikidataId(amenity.getWikidata());
+		} else {
+			params.addOsmId(amenity.getOsmId());
+		}
+
+		String type = getShareType();
+		params.addType(type);
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			ShareMenu.show(latLon, title, address, ShareMenu.buildOsmandPoiUri(params), mapActivity);
+		}
+	}
+
+	protected boolean isWikiType(){
+		return amenity.getType() != null && amenity.getType().isWiki();
+	}
+
 	@NonNull
-	public String getCategoryTypeStr() {
-		PoiCategory pc = amenity.getType();
-		return pc.getKeyName();
+	protected String getShareType() {
+		boolean isWiki = amenity.getType().isWiki();
+
+		String shareType;
+		String subType = getFirstSubString(amenity.getSubType());
+		String type = amenity.getType().getKeyName();
+		if (isWiki) {
+			shareType = !Algorithms.isEmpty(type) ? type : subType;
+		} else {
+			shareType = !Algorithms.isEmpty(subType) ? subType : type;
+		}
+		return !Algorithms.isEmpty(shareType) ? shareType : OSM_WIKI_CATEGORY;
+	}
+
+	private String getFirstSubString(String string){
+		String[] subtypes = string.split(";");
+		return subtypes.length > 0 ? subtypes[0] : string;
 	}
 
 	@Override

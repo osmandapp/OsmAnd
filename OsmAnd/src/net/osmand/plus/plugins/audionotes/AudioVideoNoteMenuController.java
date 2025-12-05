@@ -187,7 +187,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 	}
 
 	@Override
-	public void share(LatLon latLon, String title, String address, String typeStr, @Nullable String wikidataId) {
+	public void share(LatLon latLon, String title, String address) {
 		MapActivity mapActivity = getMapActivity();
 		if (mIsFileAvailable && mapActivity != null) {
 			String type = null;
@@ -210,7 +210,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 					.setNewDocument(true)
 					.build(app);
 		} else {
-			super.share(latLon, title, "", typeStr, null);
+			super.share(latLon, title, "");
 		}
 	}
 }

@@ -64,10 +64,8 @@ public class ShareMenu extends BaseMenuController {
 	private String address;
 	private String coordinates;
 	private String geoUrl;
-	private String typeStr;
 	private String sms;
-	private String wikidataId;
-	private Uri link;
+	private String urlLink;
 
 	private ShareMenu(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
@@ -93,13 +91,12 @@ public class ShareMenu extends BaseMenuController {
 		return title;
 	}
 
-	public static void show(LatLon latLon, String title, String address, String typeStr, String wikidataId, @NonNull MapActivity activity) {
+	public static void show(LatLon latLon, String title, String address, String urlLink, @NonNull MapActivity activity) {
 		ShareMenu menu = new ShareMenu(activity);
 		menu.latLon = latLon;
 		menu.title = title;
 		menu.address = address;
-		menu.typeStr = typeStr;
-		menu.wikidataId = wikidataId;
+		menu.urlLink = urlLink;
 
 		if (Build.VERSION.SDK_INT >= 34) {
 			showNativeShareDialog(menu, activity);
@@ -112,7 +109,6 @@ public class ShareMenu extends BaseMenuController {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			setupSharingFields(activity);
-			String urlLink = link != null ? link.toString() : "";
 			startAction(activity, item, sms, address, title, coordinates, geoUrl, urlLink);
 		}
 	}
@@ -131,8 +127,8 @@ public class ShareMenu extends BaseMenuController {
 		intent.putExtra(KEY_SHARE_TITLE, menu.title);
 		intent.putExtra(KEY_SHARE_COORDINATES, menu.coordinates);
 		intent.putExtra(KEY_SHARE_GEOURL, menu.geoUrl);
-		if (menu.link != null) {
-			intent.putExtra(KEY_SHARE_LINK, menu.link.toString());
+		if (menu.urlLink != null) {
+			intent.putExtra(KEY_SHARE_LINK, menu.urlLink);
 		}
 
 		for (int i = 0; i < items.size(); i++) {
@@ -177,15 +173,16 @@ public class ShareMenu extends BaseMenuController {
 			lon = lon.substring(0, lon.length() - 1);
 			int zoom = activity.getMapView().getZoom();
 			geoUrl = MapUtils.buildGeoUrl(lat, lon, zoom);
-			link = buildOsmandPoiUri(title, typeStr, wikidataId,
-					lat, lon,
-					zoom, lat, lon);
+
+			if (Algorithms.isEmpty(urlLink)) {
+				urlLink = "https://osmand.net/map?pin=" + lat + "," + lon + "#" + zoom + "/" + lat + "/" + lon;
+			}
 		} catch (RuntimeException e) {
 			log.error("Failed to convert coordinates", e);
 		}
 
-		if (!Algorithms.isEmpty(geoUrl) && link != null) {
-			builder.append(geoUrl).append("\n").append(link);
+		if (!Algorithms.isEmpty(geoUrl) && urlLink != null) {
+			builder.append(geoUrl).append("\n").append(urlLink);
 		}
 		sms = builder.toString();
 
@@ -235,26 +232,24 @@ public class ShareMenu extends BaseMenuController {
 		}
 	}
 
-	public static Uri buildOsmandPoiUri(String name, String type, String wikidataId,
-	                                    String pinLat, String pinLon,
-	                                    int zoom, String fragLat, String fragLon) {
-		String pin = pinLat + "," + pinLon;
-		String frag = zoom + "/" + fragLat + "/" + fragLon;
+	public static String buildOsmandPoiUri(@NonNull SharePoiParams params) {
 		Uri.Builder builder = new Uri.Builder()
 				.scheme("https")
 				.authority("osmand.net")
 				.path("map/poi/");
 
-		if (!Algorithms.isEmpty(name)) {
-			builder.appendQueryParameter("name", name);
-		} else if (!Algorithms.isEmpty(wikidataId)) {
-			builder.appendQueryParameter("wikidataId", wikidataId);
+		for (String key : params.getParams().keySet()) {
+			String value = params.getParams().get(key);
+			if (!Algorithms.isEmpty(value)) {
+				builder.appendQueryParameter(key, value);
+			}
 		}
 
-		builder.appendQueryParameter("type", type)
-				.appendQueryParameter("pin", pin)
-				.encodedFragment(frag);
-		return builder.build();
+		if (!Algorithms.isEmpty(params.frag)) {
+			builder.encodedFragment(params.frag);
+		}
+
+		return builder.build().toString();
 	}
 
 	public void saveMenu(@NonNull Bundle bundle) {
