@@ -11,7 +11,7 @@ public class BicycleSizes extends VehicleSizes {
 	protected void collectSizesData() {
 		ThemedIconId icon = new ThemedIconId(R.drawable.img_help_cycleway_width_day, R.drawable.img_help_cycleway_width_night);
 		Assets assets = new Assets(icon, R.string.bicycle_width_limit_description);
-		Limits<Float> limits = new Limits<>(0.3f, 1.0f);
+		Limits<Float> limits = new Limits<>(0.3f, 1.15f);
 		add(SizeType.WIDTH, assets, limits);
 	}
 
