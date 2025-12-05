@@ -162,7 +162,8 @@ public abstract class VehicleSizes {
 		} else {
 			limits = VehicleAlgorithms.convertLengthLimitsByMetricSystem(
 					limits, metric.getLengthMetric(), useInchesInsteadOfFeet(),
-					useInchesInsteadOfYards(), useCentimetersInsteadOfMeters());
+					useInchesInsteadOfYards(), useCentimetersInsteadOfMeters(),
+					useRoundedProposedLimits());
 		}
 		return VehicleAlgorithms.collectProposedValues(limits, 1, getMinProposedValuesCount());
 	}
@@ -184,6 +185,10 @@ public abstract class VehicleSizes {
 	}
 
 	protected boolean useInchesInsteadOfYards() {
+		return true;
+	}
+
+	protected boolean useRoundedProposedLimits() {
 		return true;
 	}
 

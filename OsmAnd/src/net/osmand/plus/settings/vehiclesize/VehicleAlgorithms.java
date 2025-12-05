@@ -38,7 +38,8 @@ public class VehicleAlgorithms {
 	                                                              @NonNull MetricsConstants lengthMetricSystem,
 	                                                              boolean useInchesInsteadOfFeet,
 	                                                              boolean useInchesInsteadOfYards,
-	                                                              boolean useCentimetersInsteadOfMeters) {
+	                                                              boolean useCentimetersInsteadOfMeters,
+	                                                              boolean useRoundedLimits) {
 		boolean kilometersAndMeters = lengthMetricSystem == MetricsConstants.KILOMETERS_AND_METERS;
 		if (!kilometersAndMeters || useCentimetersInsteadOfMeters) {
 			float min = limits.min();
@@ -51,7 +52,7 @@ public class VehicleAlgorithms {
 					useInchesInsteadOfFeet, useInchesInsteadOfYards, useCentimetersInsteadOfMeters);
 
 			// Round min / max
-			if (!kilometersAndMeters) {
+			if (useRoundedLimits) {
 				min = roundToSecondSignificantDigit(min, true);
 				max = roundToSecondSignificantDigit(max, false);
 			}

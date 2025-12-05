@@ -19,4 +19,9 @@ public class BicycleSizes extends VehicleSizes {
 	protected boolean useCentimetersInsteadOfMeters() {
 		return true;
 	}
+
+	@Override
+	protected boolean useRoundedProposedLimits() {
+		return false;
+	}
 }
