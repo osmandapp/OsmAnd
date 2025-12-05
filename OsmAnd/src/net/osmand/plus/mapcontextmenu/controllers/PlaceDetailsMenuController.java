@@ -58,19 +58,15 @@ public class PlaceDetailsMenuController extends AmenityMenuController {
 
 	public void share(LatLon latLon, String title, String address) {
 		SharePoiParams params = new SharePoiParams(latLon);
-		String name = null;
-		if (renderedObjectController != null && renderedObjectController.getObject() instanceof RenderedObject renderedObject) {
-			name = renderedObject.getName();
-		}
-		if (Algorithms.isEmpty(name)) {
-			name = amenity.getName();
-		}
+		String name;
 
 		if (isWikiType()) {
+			name = getWikiName();
 			if (Algorithms.isEmpty(name)) {
 				params.addWikidataId(amenity.getWikidata());
 			}
 		} else {
+			name = getPoiName();
 			if (Algorithms.isEmpty(name)) {
 				params.addOsmId(amenity.getOsmId());
 			}
@@ -84,6 +80,31 @@ public class PlaceDetailsMenuController extends AmenityMenuController {
 		if (mapActivity != null) {
 			ShareMenu.show(latLon, title, address, ShareMenu.buildOsmandPoiUri(params), mapActivity);
 		}
+	}
+
+	private String getWikiName() {
+		String name = null;
+		for (Amenity am : detailsObject.getAmenities()) {
+			if (am.getType() != null
+					&& !am.getType().isWiki()
+					&& !am.isRoutePoint()
+					&& !Algorithms.isEmpty(am.getName())) {
+				name = am.getName();
+				break;
+			}
+		}
+		return name;
+	}
+
+	private String getPoiName(){
+		String name = null;
+		if (renderedObjectController != null && renderedObjectController.getObject() instanceof RenderedObject renderedObject) {
+			name = renderedObject.getName();
+		}
+		if (Algorithms.isEmpty(name)) {
+			name = amenity.getName();
+		}
+		return name;
 	}
 
 	@Override

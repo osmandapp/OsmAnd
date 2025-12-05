@@ -305,6 +305,7 @@ public class AmenityMenuController extends MenuController {
 			params.addWikidataId(amenity.getWikidata());
 		} else {
 			params.addOsmId(amenity.getOsmId());
+			params.addName(amenity.getName());
 		}
 
 		String type = getShareType();
@@ -328,11 +329,21 @@ public class AmenityMenuController extends MenuController {
 		String subType = getFirstSubString(amenity.getSubType());
 		String type = amenity.getType().getKeyName();
 		if (isWiki) {
-			shareType = !Algorithms.isEmpty(type) ? type : subType;
+			shareType = prepareType(!Algorithms.isEmpty(type) ? type : subType);
 		} else {
-			shareType = !Algorithms.isEmpty(subType) ? subType : type;
+			shareType = prepareType(!Algorithms.isEmpty(subType) ? subType : type);
 		}
 		return !Algorithms.isEmpty(shareType) ? shareType : OSM_WIKI_CATEGORY;
+	}
+
+	private String prepareType(String s) {
+		if (Algorithms.isEmpty(s)) {
+			return s;
+		}
+		s = s.replace('_', ' ');
+
+		s = Algorithms.capitalizeFirstLetter(s);
+		return s;
 	}
 
 	private String getFirstSubString(String string){
