@@ -367,7 +367,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		mapView.getAnimatedDraggingThread().startMoving(
 				latitude, longitude, zoomParams,
 				false, rotation, elevationAngle, movingTime, false,
-				() -> movingToMyLocation = false);
+				() -> movingToMyLocation = false, zoomParams == null);
 	}
 
 	private void setMyLocationV1(@NonNull OsmandMapTileView mapView,

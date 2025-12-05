@@ -1591,7 +1591,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				// Shift map
 				mapRenderer.setTarget(new PointI(targetX, targetY));
 			}
-		}
+ 		}
 		currentViewport.setZoomAndAnimation(zoom, zoomAnimation, zoomFloatPart);
 		setElevationAngle(normalizeElevationAngle(this.elevationAngle));
 	}
@@ -2497,6 +2497,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 		}
 	}
+
+    public void keepElevationAngle(float angle) {
+        angle = normalizeElevationAngle(angle);
+        this.elevationAngle = angle;
+    }
 
 	public void setElevationAngle(float angle) {
 		angle = normalizeElevationAngle(angle);

@@ -287,9 +287,15 @@ public class AnimateDraggingMapThread implements TouchListener {
 
 	}
 
+    public void startMoving(double finalLat, double finalLon, @Nullable Pair<ComplexZoom, Float> zoomParams,
+                            boolean pendingRotation, Float finalRotation, float elevationAngle, long movingTime,
+                            boolean notifyListener, @Nullable Runnable finishAnimationCallback) {
+        startMoving(finalLat, finalLon, zoomParams, pendingRotation, finalRotation, elevationAngle, movingTime,
+            notifyListener, finishAnimationCallback, false);
+    }
 	public void startMoving(double finalLat, double finalLon, @Nullable Pair<ComplexZoom, Float> zoomParams,
 							boolean pendingRotation, Float finalRotation, float elevationAngle, long movingTime,
-							boolean notifyListener, @Nullable Runnable finishAnimationCallback) {
+							boolean notifyListener, @Nullable Runnable finishAnimationCallback, boolean noZoom) {
 		if (animationsDisabled)
 			return;
 
@@ -408,7 +414,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 				animator.animateZoomTo(zoom + (float) zoomFP, zoomParams.second / 1000f,
 						TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
 			}
-			if (!animateZoom) {
+			if (!animateZoom && !noZoom) {
 				tileView.setFractionalZoom(zoom, zoomFP, notifyListener);
 			}
 			if (animateElevation) {
@@ -713,7 +719,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 				tb.setRotate(-azimuth);
 			}
 			if (!stopped && animateElevationAngle) {
-				tileView.setElevationAngle(elevationAngle);
+				tileView.keepElevationAngle(elevationAngle);
 			}
 
 			if (mapRenderer.isMapAnimationFinished()) {
