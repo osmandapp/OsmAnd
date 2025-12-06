@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="@color/color_transparent">
@@ -103,12 +104,29 @@
 			</FrameLayout>
 
 			<FrameLayout
-				android:id="@+id/map_controls_container"
+				android:id="@+id/star_map_controls_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_gravity="bottom"
 				android:layout_marginHorizontal="@dimen/content_padding_half"
 				android:layout_marginBottom="@dimen/content_padding_small_half">
+
+				<include
+					layout="@layout/map_hud_controls"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|bottom" />
+
+			</FrameLayout>
+
+			<FrameLayout
+				android:id="@+id/map_controls_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom"
+				android:layout_marginHorizontal="@dimen/content_padding_half"
+				android:layout_marginBottom="@dimen/content_padding_small_half"
+				android:visibility="gone">
 
 				<include
 					layout="@layout/map_hud_controls"
@@ -126,7 +144,8 @@
 					<LinearLayout
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:orientation="horizontal">
+						android:orientation="horizontal"
+						tools:ignore="UselessParent">
 
 						<include
 							layout="@layout/map_ruler"

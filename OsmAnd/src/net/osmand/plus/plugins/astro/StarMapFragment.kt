@@ -21,7 +21,10 @@ import io.github.cosinekitty.astronomy.Direction
 import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.searchRiseSet
+import net.osmand.Location
 import net.osmand.map.IMapLocationListener
+import net.osmand.plus.OsmAndLocationProvider
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
@@ -48,7 +51,7 @@ import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
 
-class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
+class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener {
 
 	private lateinit var starView: StarView
 	private lateinit var timeSelectionView: DateTimeSelectionView
@@ -111,12 +114,20 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 			v.updatePadding(bottom = v.paddingTop + insets.bottom)
 			windowInsets
 		}
+
+		val starMapControlsContainer = view.findViewById<View>(R.id.star_map_controls_container)
 		val mapControlsContainer = view.findViewById<View>(R.id.map_controls_container)
-		ViewCompat.setOnApplyWindowInsetsListener(mapControlsContainer) { v, windowInsets ->
+
+		val insetsListener = androidx.core.view.OnApplyWindowInsetsListener { v, windowInsets ->
 			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
 			systemBottomInset = insets.bottom
 			updateMapControlsPadding()
 			windowInsets
+		}
+
+		ViewCompat.setOnApplyWindowInsetsListener(starMapControlsContainer, insetsListener)
+		if (mapControlsContainer != null) {
+			ViewCompat.setOnApplyWindowInsetsListener(mapControlsContainer, insetsListener)
 		}
 
 		starChartsView = view.findViewById(R.id.star_charts_view)
@@ -192,6 +203,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 
 	override fun onResume() {
 		super.onResume()
+		app.locationProvider.addLocationListener(this)
 		app.osmandMap.mapView.addMapLocationListener(this)
 		val mapActivity = requireMapActivity()
 		mapActivity.disableDrawer()
@@ -201,6 +213,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 
 	override fun onPause() {
 		super.onPause()
+		app.locationProvider.removeLocationListener(this)
 		app.osmandMap.mapView.removeMapLocationListener(this)
 		val mapActivity = requireMapActivity()
 		mapActivity.enableDrawer()
@@ -208,12 +221,25 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 		mapActivity.refreshMap()
 	}
 
+	override fun updateLocation(location: Location?) {
+		if (app.mapViewTrackingUtilities.isMapLinkedToLocation) {
+			app.runInUIThread { updateStarMap(); updateStarChart() }
+		}
+	}
+
 	override fun locationChanged(p0: Double, p1: Double, p2: Any?) {
-		app.runInUIThread { updateStarMap(); updateStarChart() }
+		if (!app.mapViewTrackingUtilities.isMapLinkedToLocation) {
+			app.runInUIThread { updateStarMap(); updateStarChart() }
+		}
 	}
 
 	private fun updateStarMapVisibility(visible: Boolean) {
 		starView.visibility = if (visible) View.VISIBLE else View.GONE
+		val starMapControls = view?.findViewById<View>(R.id.star_map_controls_container)
+		val mapControls = view?.findViewById<View>(R.id.map_controls_container)
+
+		starMapControls?.visibility = if (visible) View.VISIBLE else View.GONE
+		mapControls?.visibility = if (!visible) View.VISIBLE else View.GONE
 	}
 
 	private fun updateStarChartVisibility(visible: Boolean) {
@@ -223,12 +249,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 	}
 
 	private fun updateMapControlsPadding() {
-		val mapControls = view?.findViewById<View>(R.id.map_controls_container) ?: return
-		if (starChartsView.isVisible) {
-			mapControls.updatePadding(bottom = 0)
-		} else {
-			mapControls.updatePadding(bottom = systemBottomInset)
-		}
+		val starMapControls = view?.findViewById<View>(R.id.star_map_controls_container)
+		val mapControls = view?.findViewById<View>(R.id.map_controls_container)
+
+		val bottomPadding = if (starChartsView.isVisible) 0 else systemBottomInset
+
+		starMapControls?.updatePadding(bottom = bottomPadding)
+		mapControls?.updatePadding(bottom = bottomPadding)
 	}
 
 	private fun saveCommonSettings() {
@@ -361,27 +388,44 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 		val mapLayers = activity.mapLayers
 		val layer = mapLayers.mapControlsLayer
 
-		view.findViewById<MapButton?>(R.id.map_zoom_in_button)?.let {
-			mapButtons.add(it)
+		fun addButtons(container: View, starMap: Boolean): Boolean? {
+			container.findViewById<MapButton?>(R.id.map_zoom_in_button)?.let {
+				mapButtons.add(it)
+				if (starMap) {
+					it.setOnClickListener { starView.zoomIn() }
+					it.setOnLongClickListener(null)
+				}
+			}
+			container.findViewById<MapButton?>(R.id.map_zoom_out_button)?.let {
+				mapButtons.add(it)
+				if (starMap) {
+					it.setOnClickListener { starView.zoomOut() }
+					it.setOnLongClickListener(null)
+				}
+			}
+			container.findViewById<MapButton?>(R.id.map_my_location_button)?.let {
+				mapButtons.add(it)
+			}
+			return container.findViewById<View?>(R.id.map_hud_controls)?.let {
+				AndroidUiHelper.updateVisibility(it, true)
+			}
 		}
-		view.findViewById<MapButton?>(R.id.map_zoom_out_button)?.let {
-			mapButtons.add(it)
-		}
-		view.findViewById<MapButton?>(R.id.map_my_location_button)?.let {
-			mapButtons.add(it)
-		}
-		layer.addCustomizedDefaultMapButtons(mapButtons)
-		view.findViewById<View?>(R.id.map_hud_controls)?.let {
-			AndroidUiHelper.updateVisibility(it, true)
-		}
-
-		val mapInfoLayer = mapLayers.mapInfoLayer
-		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout))
 
 		view.findViewById<MapButton?>(R.id.map_compass_button)?.let {
 			layer.addCustomMapButton(it)
 			mapButtons.add(it)
 		}
+		view.findViewById<View>(R.id.star_map_controls_container)?.let { container ->
+			addButtons(container, true)
+		}
+		view.findViewById<View>(R.id.map_controls_container)?.let { container ->
+			addButtons(container, false)
+		}
+
+		layer.addCustomizedDefaultMapButtons(mapButtons)
+
+		val mapInfoLayer = mapLayers.mapInfoLayer
+		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout))
 	}
 
 	private fun showObjectInfo(obj: SkyObject) {

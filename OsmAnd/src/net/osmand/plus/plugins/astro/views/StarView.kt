@@ -255,6 +255,18 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
+	fun zoomIn() {
+		viewAngle /= 1.5
+		viewAngle = max(10.0, min(150.0, viewAngle))
+		invalidate()
+	}
+
+	fun zoomOut() {
+		viewAngle *= 1.5
+		viewAngle = max(10.0, min(150.0, viewAngle))
+		invalidate()
+	}
+
 	private fun recalculatePositions(time: Time, updateTargets: Boolean) {
 		skyObjects.forEach { obj ->
 			if (!obj.isVisible && obj != selectedObject) return@forEach
