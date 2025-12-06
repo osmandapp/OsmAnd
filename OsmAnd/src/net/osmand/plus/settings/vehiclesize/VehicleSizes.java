@@ -160,10 +160,11 @@ public abstract class VehicleSizes {
 			limits = VehicleAlgorithms.convertWeightLimitsByMetricSystem(
 					limits, metric.getWeightMetric(), useKilogramsInsteadOfTons());
 		} else {
+			MetricsConstants lengthMetricSystem = metric.getLengthMetric();
 			limits = VehicleAlgorithms.convertLengthLimitsByMetricSystem(
-					limits, metric.getLengthMetric(), useInchesInsteadOfFeet(),
+					limits, lengthMetricSystem, useInchesInsteadOfFeet(),
 					useInchesInsteadOfYards(), useCentimetersInsteadOfMeters(),
-					useRoundedProposedLimits());
+					useRoundedProposedLimits(type, lengthMetricSystem));
 		}
 		return VehicleAlgorithms.collectProposedValues(limits, 1, getMinProposedValuesCount());
 	}
@@ -188,7 +189,8 @@ public abstract class VehicleSizes {
 		return true;
 	}
 
-	protected boolean useRoundedProposedLimits() {
+	protected boolean useRoundedProposedLimits(@NonNull SizeType sizeType,
+	                                           @NonNull MetricsConstants metricSystem) {
 		return true;
 	}
 
