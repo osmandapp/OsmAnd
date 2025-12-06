@@ -148,6 +148,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom"
 			android:orientation="vertical"
+			android:background="#424242"
 			android:visibility="gone">
 
 			<include layout="@layout/star_charts_content" />
