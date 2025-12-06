@@ -10,7 +10,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import io.github.cosinekitty.astronomy.Body
@@ -63,6 +66,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 
 	private val mapButtons = mutableListOf<MapButton>()
 	private var rulerWidget: RulerWidget? = null
+	private var systemBottomInset: Int = 0
 
 	private lateinit var starMapViewModel: StarObjectsViewModel
 	private lateinit var starChartViewModel: StarObjectsViewModel
@@ -102,8 +106,25 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 		sheetTitle = view.findViewById(R.id.sheet_title)
 		sheetCoords = view.findViewById(R.id.sheet_coords)
 		sheetDetails = view.findViewById(R.id.sheet_details)
+		ViewCompat.setOnApplyWindowInsetsListener(bottomSheet) { v, windowInsets ->
+			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+			v.updatePadding(bottom = v.paddingTop + insets.bottom)
+			windowInsets
+		}
+		val mapControlsContainer = view.findViewById<View>(R.id.map_controls_container)
+		ViewCompat.setOnApplyWindowInsetsListener(mapControlsContainer) { v, windowInsets ->
+			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+			systemBottomInset = insets.bottom
+			updateMapControlsPadding()
+			windowInsets
+		}
 
 		starChartsView = view.findViewById(R.id.star_charts_view)
+		ViewCompat.setOnApplyWindowInsetsListener(starChartsView) { v, windowInsets ->
+			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+			v.updatePadding(bottom = insets.bottom)
+			windowInsets
+		}
 		starVisiblityView = view.findViewById(R.id.star_visiblity_view)
 		starAltitudeView = view.findViewById(R.id.star_altitude_view)
 		celestialPathView = view.findViewById(R.id.celestial_path_view)
@@ -198,6 +219,16 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 	private fun updateStarChartVisibility(visible: Boolean) {
 		starChartsView.visibility = if (visible) View.VISIBLE else View.GONE
 		rulerWidget?.visibility = if (visible) View.VISIBLE else View.GONE
+		updateMapControlsPadding()
+	}
+
+	private fun updateMapControlsPadding() {
+		val mapControls = view?.findViewById<View>(R.id.map_controls_container) ?: return
+		if (starChartsView.isVisible) {
+			mapControls.updatePadding(bottom = 0)
+		} else {
+			mapControls.updatePadding(bottom = systemBottomInset)
+		}
 	}
 
 	private fun saveCommonSettings() {
@@ -278,8 +309,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 	}
 
 	private fun updateStarMap() {
-		val location = app.osmandMap.mapView.currentRotatedTileBox.centerLatLon
+		val tileBox = app.osmandMap.mapView.rotatedTileBox
+		val location = tileBox.centerLatLon
 		starView.setObserverLocation(location.latitude, location.longitude, 0.0)
+		starView.setAzimuth(-tileBox.rotate.toDouble())
 	}
 
 	private fun updateStarChart() {
