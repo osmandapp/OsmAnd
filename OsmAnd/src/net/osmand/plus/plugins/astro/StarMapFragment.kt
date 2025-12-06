@@ -23,7 +23,7 @@ import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.Location
 import net.osmand.map.IMapLocationListener
-import net.osmand.plus.OsmAndLocationProvider
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
@@ -41,6 +41,7 @@ import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 import net.osmand.plus.plugins.astro.views.StarChartView
 import net.osmand.plus.plugins.astro.views.StarView
 import net.osmand.plus.plugins.astro.views.StarVisiblityChartView
+import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.controls.maphudbuttons.MapButton
@@ -50,8 +51,10 @@ import java.time.ZoneId
 import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
+import kotlin.io.path.Path
 
-class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener {
+class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
+	OsmAndCompassListener {
 
 	private lateinit var starView: StarView
 	private lateinit var timeSelectionView: DateTimeSelectionView
@@ -70,6 +73,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private val mapButtons = mutableListOf<MapButton>()
 	private var rulerWidget: RulerWidget? = null
 	private var systemBottomInset: Int = 0
+	private var manualAzimuth: Boolean = false
 
 	private lateinit var starMapViewModel: StarObjectsViewModel
 	private lateinit var starChartViewModel: StarObjectsViewModel
@@ -187,7 +191,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showEclipticLine = config.showEclipticLine
 		}
 
-		updateStarMap()
+		updateStarMap(true)
 		setupToolBar(view)
 		buildZoomButtons(view)
 
@@ -203,7 +207,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	override fun onResume() {
 		super.onResume()
+		updateStarMap(true)
 		app.locationProvider.addLocationListener(this)
+		app.locationProvider.addCompassListener(this)
 		app.osmandMap.mapView.addMapLocationListener(this)
 		val mapActivity = requireMapActivity()
 		mapActivity.disableDrawer()
@@ -214,6 +220,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	override fun onPause() {
 		super.onPause()
 		app.locationProvider.removeLocationListener(this)
+		app.locationProvider.removeCompassListener(this)
 		app.osmandMap.mapView.removeMapLocationListener(this)
 		val mapActivity = requireMapActivity()
 		mapActivity.enableDrawer()
@@ -221,9 +228,40 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		mapActivity.refreshMap()
 	}
 
+	override fun updateCompassValue(value: Float) {
+		if (manualAzimuth) return
+
+		val rotateMode = settings.ROTATE_MAP.get()
+		if (rotateMode == OsmandSettings.ROTATE_MAP_COMPASS) {
+			starView.setAzimuth(value.toDouble())
+		} else if (rotateMode != OsmandSettings.ROTATE_MAP_BEARING) {
+			starView.setAzimuth(-app.osmandMap.mapView.rotate.toDouble())
+		}
+	}
+
 	override fun updateLocation(location: Location?) {
+		if (location == null) return
+
 		if (app.mapViewTrackingUtilities.isMapLinkedToLocation) {
-			app.runInUIThread { updateStarMap(); updateStarChart() }
+			app.runInUIThread {
+				if (!manualAzimuth) {
+					if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
+						if (location.hasBearing() && location.bearing != 0f) {
+							starView.setAzimuth(location.bearing.toDouble())
+						}
+					}
+				}
+				updateStarMap();
+				updateStarChart()
+			}
+		} else if (!manualAzimuth) {
+			app.runInUIThread {
+				if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
+					if (location.hasBearing() && location.bearing != 0f) {
+						starView.setAzimuth(location.bearing.toDouble())
+					}
+				}
+			}
 		}
 	}
 
@@ -333,13 +371,18 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				showObjectInfo(selectedObject!!)
 			}
 		}
+
+		starView.onAzimuthManualChangeListener = { azimuth ->
+			manualAzimuth = true
+			app.osmandMap.mapView.rotateToAnimate(-azimuth.toFloat())
+		}
 	}
 
-	private fun updateStarMap() {
+	private fun updateStarMap(updateAzimuth: Boolean = false) {
 		val tileBox = app.osmandMap.mapView.rotatedTileBox
 		val location = tileBox.centerLatLon
 		starView.setObserverLocation(location.latitude, location.longitude, 0.0)
-		starView.setAzimuth(-tileBox.rotate.toDouble())
+		if (updateAzimuth) starView.setAzimuth(-tileBox.rotate.toDouble())
 	}
 
 	private fun updateStarChart() {

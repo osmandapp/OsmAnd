@@ -29,6 +29,7 @@ import io.github.cosinekitty.astronomy.rotationEclEqd
 import java.util.Calendar
 import java.util.TimeZone
 import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.hypot
@@ -117,8 +118,9 @@ class StarView @JvmOverloads constructor(
 	private val scaleGestureDetector = ScaleGestureDetector(context, ScaleListener())
 	private var onObjectClickListener: ((SkyObject?) -> Unit)? = null
 
-	// Callback for when time animation finishes
 	var onAnimationFinished: (() -> Unit)? = null
+
+	var onAzimuthManualChangeListener: ((Double) -> Unit)? = null
 
 	// --- Astronomy Data ---
 	private val skyObjects = mutableListOf<SkyObject>()
@@ -190,8 +192,10 @@ class StarView @JvmOverloads constructor(
 	}
 
 	fun setAzimuth(azimuth: Double) {
-		azimuthCenter = azimuth
-		invalidate()
+		if (abs(azimuthCenter - azimuth) > 0.5) {
+			azimuthCenter = azimuth
+			invalidate()
+		}
 	}
 
 	fun setSkyObjects(objects: List<SkyObject>) {
@@ -788,6 +792,9 @@ class StarView @JvmOverloads constructor(
 
 					if (azimuthCenter < 0) azimuthCenter += 360
 					if (azimuthCenter >= 360) azimuthCenter -= 360
+
+					// Notify listener of manual change
+					onAzimuthManualChangeListener?.invoke(azimuthCenter)
 
 					lastTouchX = event.x
 					lastTouchY = event.y
