@@ -281,6 +281,12 @@ public class LocalItemUtils {
 	}
 
 	@NonNull
+	public static CharSequence getItemName(@NonNull Context context, @NonNull MultipleLocalItem item) {
+		String itemsSize = String.valueOf(item.getItems().size());
+		return context.getString(R.string.ltr_or_rtl_combine_via_dash, item.getName(), itemsSize);
+	}
+
+	@NonNull
 	public static String getItemDescription(@NonNull Context context, @NonNull LocalItem item) {
 		String formattedSize = item.getSizeDescription(context);
 		if (item.getType() == CACHE) {
@@ -291,6 +297,15 @@ public class LocalItemUtils {
 			String formattedDate = getFormattedDate(context, new Date(item.getLastModified()));
 			return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDate);
 		}
+	}
+
+	@NonNull
+	public static String getItemDescription(@NonNull Context context, @NonNull MultipleLocalItem item) {
+		String formattedSize = item.getSizeDescription(context);
+		String formattedMinDate = getFormattedDate(context, new Date(item.getMinTimestamp()));
+		String formattedMaxDate = getFormattedDate(context, new Date(item.getMaxTimestamp()));
+		String formattedDateRange = context.getString(R.string.ltr_or_rtl_combine_via_dash, formattedMinDate, formattedMaxDate);
+		return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDateRange);
 	}
 
 	@NonNull
