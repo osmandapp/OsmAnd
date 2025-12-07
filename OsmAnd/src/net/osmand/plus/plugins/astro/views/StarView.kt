@@ -191,8 +191,31 @@ class StarView @JvmOverloads constructor(
 		invalidate()
 	}
 
-	fun setAzimuth(azimuth: Double) {
-		if (abs(azimuthCenter - azimuth) > 0.5) {
+	fun setAzimuth(azimuth: Double, animate: Boolean = false, fps: Int? = 30) {
+		if (abs(azimuthCenter - azimuth) < 0.5) return
+
+		visualAnimator?.cancel()
+		if (animate) {
+			val startAz = azimuthCenter
+			var lastFrameTime = 0L
+			val frameInterval = if (fps != null && fps > 0) 1000L / fps else 0L
+
+			visualAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
+				duration = 400
+				interpolator = DecelerateInterpolator()
+				addUpdateListener { animator ->
+					val currentTime = System.currentTimeMillis()
+					val fraction = animator.animatedValue as Float
+
+					if (frameInterval == 0L || currentTime - lastFrameTime >= frameInterval || fraction == 1f) {
+						azimuthCenter = interpolateAngle(startAz, azimuth, fraction)
+						invalidate()
+						lastFrameTime = currentTime
+					}
+				}
+				start()
+			}
+		} else {
 			azimuthCenter = azimuth
 			invalidate()
 		}

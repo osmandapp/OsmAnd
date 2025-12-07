@@ -253,7 +253,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				if (!manualAzimuth) {
 					if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 						if (location.hasBearing() && location.bearing != 0f) {
-							starView.setAzimuth(location.bearing.toDouble())
+							starView.setAzimuth(location.bearing.toDouble(), true)
 						}
 					}
 				}
@@ -264,7 +264,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			app.runInUIThread {
 				if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 					if (location.hasBearing() && location.bearing != 0f) {
-						starView.setAzimuth(location.bearing.toDouble())
+						starView.setAzimuth(location.bearing.toDouble(), true)
 					}
 				}
 			}
