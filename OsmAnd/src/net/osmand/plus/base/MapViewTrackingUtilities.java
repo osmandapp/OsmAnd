@@ -159,6 +159,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		return locationProvider;
 	}
 
+	public long getLastResetRotationToNorth() {
+		return lastResetRotationToNorth;
+	}
+
 	public void setLastResetRotationToNorth(long lastResetRotationToNorth) {
 		this.lastResetRotationToNorth = lastResetRotationToNorth;
 	}

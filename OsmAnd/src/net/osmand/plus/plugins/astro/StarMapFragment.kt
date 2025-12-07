@@ -74,6 +74,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var rulerWidget: RulerWidget? = null
 	private var systemBottomInset: Int = 0
 	private var manualAzimuth: Boolean = false
+	private var lastResetRotationToNorth = 0L
 
 	private lateinit var starMapViewModel: StarObjectsViewModel
 	private lateinit var starChartViewModel: StarObjectsViewModel
@@ -229,6 +230,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	override fun updateCompassValue(value: Float) {
+		val lastResetRotationToNorth = app.mapViewTrackingUtilities.lastResetRotationToNorth
+		if (this.lastResetRotationToNorth < lastResetRotationToNorth) {
+			this.lastResetRotationToNorth = lastResetRotationToNorth
+			manualAzimuth = false
+		}
 		if (manualAzimuth) return
 
 		val rotateMode = settings.ROTATE_MAP.get()
