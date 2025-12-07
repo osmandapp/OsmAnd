@@ -407,7 +407,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 				selectedItemPath = null;
 			} else if (!Algorithms.isEmpty(preSelectedFolder)
 					&& !preSelectedFolder.equals(rootFolder.getDirFile().absolutePath())) {
-				openSubfolder(rootFolder, new File(preSelectedFolder));
+				openSubfolder(rootFolder, new KFile(preSelectedFolder));
 				preSelectedFolder = null;
 			}
 		}
@@ -417,9 +417,10 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		if (smartFolder != null) {
 			openSmartFolder(smartFolder);
 		} else {
-			KFile trackItemFile = trackItem.getFile();
-			if(trackItemFile != null) {
-				File dirFile = SharedUtil.jFile(trackItemFile);
+			KFile file = trackItem.getFile();
+			if(file != null) {
+				KFile parentFile = file.getParentFile();
+				KFile dirFile = file.isDirectory() || parentFile == null ? file : parentFile;
 				if (selectedFolder != null && Algorithms.objectEquals(selectedFolder.getDirFile(), dirFile)) {
 					int index = adapter.getItemPosition(trackItem);
 					if (index != -1) {
@@ -436,7 +437,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		}
 	}
 
-	private void openSubfolder(@NonNull TrackFolder folder, @NonNull File file) {
+	private void openSubfolder(@NonNull TrackFolder folder, @NonNull KFile file) {
 		TrackFolder subfolder = getSubfolder(folder, file);
 		if (subfolder != null) {
 			openTrackFolder(subfolder);
@@ -444,9 +445,9 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	}
 
 	@Nullable
-	private TrackFolder getSubfolder(@NonNull TrackFolder folder, @NonNull File file) {
+	private TrackFolder getSubfolder(@NonNull TrackFolder folder, @NonNull KFile dirFile) {
 		for (TrackFolder subfolder : folder.getFlattenedSubFolders()) {
-			if (Algorithms.objectEquals(subfolder.getDirFile(), file)) {
+			if (Algorithms.objectEquals(subfolder.getDirFile(), dirFile)) {
 				return subfolder;
 			}
 		}

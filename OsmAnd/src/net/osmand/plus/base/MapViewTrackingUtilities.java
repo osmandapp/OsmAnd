@@ -159,6 +159,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		return locationProvider;
 	}
 
+	public long getLastResetRotationToNorth() {
+		return lastResetRotationToNorth;
+	}
+
 	public void setLastResetRotationToNorth(long lastResetRotationToNorth) {
 		this.lastResetRotationToNorth = lastResetRotationToNorth;
 	}
@@ -379,7 +383,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		mapView.getAnimatedDraggingThread().startMoving(
 				latitude, longitude, zoomParams,
 				false, rotation, elevationAngle, movingTime, false,
-				() -> movingToMyLocation = false);
+				() -> movingToMyLocation = false, zoomParams == null);
 	}
 
 	private void setMyLocationV1(@NonNull OsmandMapTileView mapView,

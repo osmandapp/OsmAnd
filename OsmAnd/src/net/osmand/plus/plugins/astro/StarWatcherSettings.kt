@@ -8,6 +8,10 @@ import java.lang.Exception
 class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 
 	companion object {
+		private const val KEY_COMMON = "common"
+		private const val KEY_SHOW_STAR_MAP = "showStarMap"
+		private const val KEY_SHOW_STAR_CHART = "showStarChart"
+
 		private const val KEY_STAR_MAP = "star_map"
 		private const val KEY_STAR_CHART = "star_chart"
 
@@ -28,6 +32,11 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 	data class SkyObjectConfig(
 		val id: String,
 		val isVisible: Boolean
+	)
+
+	data class CommonConfig(
+		val showStarMap: Boolean,
+		val showStarChart: Boolean,
 	)
 
 	data class StarMapConfig(
@@ -86,6 +95,27 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 			array.put(obj)
 		}
 		return array
+	}
+
+	fun getCommonConfig(): CommonConfig {
+		val root = getSettingsJson()
+		val settings = root.optJSONObject(KEY_COMMON)
+
+		val showStarMap = settings?.optBoolean(KEY_SHOW_STAR_MAP, true) ?: true
+		val showStarChart = settings?.optBoolean(KEY_SHOW_STAR_CHART, false) ?: false
+
+		return CommonConfig(showStarMap, showStarChart)
+	}
+
+	fun setCommonConfig(config: CommonConfig) {
+		val root = getSettingsJson()
+		val settings = root.optJSONObject(KEY_COMMON) ?: JSONObject()
+
+		settings.put(KEY_SHOW_STAR_MAP, config.showStarMap)
+		settings.put(KEY_SHOW_STAR_CHART, config.showStarChart)
+
+		root.put(KEY_COMMON, settings)
+		setSettingsJson(root)
 	}
 
 	fun getStarMapConfig(): StarMapConfig {

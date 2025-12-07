@@ -29,6 +29,7 @@ import io.github.cosinekitty.astronomy.rotationEclEqd
 import java.util.Calendar
 import java.util.TimeZone
 import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.hypot
@@ -49,6 +50,10 @@ class StarView @JvmOverloads constructor(
 	private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = Color.WHITE
 		textSize = 30f
+	}
+	private val cardinalTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = Color.GREEN
+		textSize = 40f
 	}
 	private val gridTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = 0xFF888888.toInt()
@@ -83,6 +88,7 @@ class StarView @JvmOverloads constructor(
 
 	// Reusable objects for drawing to prevent GC churn
 	private val celestialPath = Path()
+	private val gridPath = Path()
 	private val tempPoint = PointF()
 	private val reusableCal = Calendar.getInstance() // Reusable calendar
 	private val arrowPath = Path()
@@ -91,6 +97,14 @@ class StarView @JvmOverloads constructor(
 	private var azimuthCenter = 180.0
 	private var altitudeCenter = 45.0
 	private var viewAngle = 60.0 // Field of view in degrees
+
+	// Cached values calculated once per frame/state change to avoid
+	// repeated trig and division operations in skyToScreen()
+	private var projSinAltCenter = 0.0
+	private var projCosAltCenter = 1.0
+	private var projScale = 1.0
+	private var projHalfWidth = 0.0
+	private var projHalfHeight = 0.0
 
 	// --- Visibility Flags ---
 	var showAzimuthalGrid = true
@@ -104,8 +118,9 @@ class StarView @JvmOverloads constructor(
 	private val scaleGestureDetector = ScaleGestureDetector(context, ScaleListener())
 	private var onObjectClickListener: ((SkyObject?) -> Unit)? = null
 
-	// Callback for when time animation finishes
 	var onAnimationFinished: (() -> Unit)? = null
+
+	var onAzimuthManualChangeListener: ((Double) -> Unit)? = null
 
 	// --- Astronomy Data ---
 	private val skyObjects = mutableListOf<SkyObject>()
@@ -113,6 +128,7 @@ class StarView @JvmOverloads constructor(
 	var observer = Observer(56.9496, 24.1052, 0.0)
 	var currentTime = Time(System.currentTimeMillis() / 1000.0 / 86400.0 + 2440587.5)
 
+	// Ecliptic Cache
 	private val eclipticStep = 10
 	private val eclipticPointsCount = (360 / eclipticStep) + 1
 	private val eclipticAzimuths = DoubleArray(eclipticPointsCount)
@@ -120,6 +136,27 @@ class StarView @JvmOverloads constructor(
 	private var lastEclipticTimeT: Double = -1.0
 	private var lastEclipticLat: Double = -999.0
 	private var lastEclipticLon: Double = -999.0
+
+	// Equatorial Grid Cache
+	private var lastEquGridTimeT: Double = -1.0
+	private var lastEquGridLat: Double = -999.0
+	private var lastEquGridLon: Double = -999.0
+
+	// RA Lines (Meridians)
+	private val equRaStep = 2 // Hour step for meridians (0, 2, 4...)
+	private val equRaDecStep = 5 // Degree step for points along the meridian
+	private val equRaLinesCount = 24 / equRaStep
+	private val equRaPointsCount = (180 / equRaDecStep) + 1 // -90 to 90
+	private val equRaAzimuths = Array(equRaLinesCount) { DoubleArray(equRaPointsCount) }
+	private val equRaAltitudes = Array(equRaLinesCount) { DoubleArray(equRaPointsCount) }
+
+	// Dec Lines (Parallels)
+	private val equDecStep = 20 // Degree step for parallels (-80, -60... 80)
+	private val equDecRaStep = 5 // Degree step for points along the parallel (0..360)
+	private val equDecLinesCount = (160 / equDecStep) + 1 // -80 to 80 range is 160
+	private val equDecPointsCount = (360 / equDecRaStep) + 1 // 0 to 360
+	private val equDecAzimuths = Array(equDecLinesCount) { DoubleArray(equDecPointsCount) }
+	private val equDecAltitudes = Array(equDecLinesCount) { DoubleArray(equDecPointsCount) }
 
 	private var selectedObject: SkyObject? = null
 	private var lastPathTime: Double = -1.0
@@ -152,6 +189,36 @@ class StarView @JvmOverloads constructor(
 		observer = Observer(lat, lon, alt)
 		recalculatePositions(currentTime, updateTargets = false)
 		invalidate()
+	}
+
+	fun setAzimuth(azimuth: Double, animate: Boolean = false, fps: Int? = 30) {
+		if (abs(azimuthCenter - azimuth) < 0.5) return
+
+		visualAnimator?.cancel()
+		if (animate) {
+			val startAz = azimuthCenter
+			var lastFrameTime = 0L
+			val frameInterval = if (fps != null && fps > 0) 1000L / fps else 0L
+
+			visualAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
+				duration = 400
+				interpolator = DecelerateInterpolator()
+				addUpdateListener { animator ->
+					val currentTime = System.currentTimeMillis()
+					val fraction = animator.animatedValue as Float
+
+					if (frameInterval == 0L || currentTime - lastFrameTime >= frameInterval || fraction == 1f) {
+						azimuthCenter = interpolateAngle(startAz, azimuth, fraction)
+						invalidate()
+						lastFrameTime = currentTime
+					}
+				}
+				start()
+			}
+		} else {
+			azimuthCenter = azimuth
+			invalidate()
+		}
 	}
 
 	fun setSkyObjects(objects: List<SkyObject>) {
@@ -213,6 +280,18 @@ class StarView @JvmOverloads constructor(
 			invalidate()
 			onAnimationFinished?.invoke()
 		}
+	}
+
+	fun zoomIn() {
+		viewAngle /= 1.5
+		viewAngle = max(10.0, min(150.0, viewAngle))
+		invalidate()
+	}
+
+	fun zoomOut() {
+		viewAngle *= 1.5
+		viewAngle = max(10.0, min(150.0, viewAngle))
+		invalidate()
 	}
 
 	private fun recalculatePositions(time: Time, updateTargets: Boolean) {
@@ -322,6 +401,10 @@ class StarView @JvmOverloads constructor(
 
 	override fun onDraw(canvas: Canvas) {
 		super.onDraw(canvas)
+
+		// Do this once per frame before any calls to skyToScreen
+		updateProjectionCache()
+
 		canvas.drawColor(Color.BLACK)
 
 		if (showEquatorialGrid) drawEquatorialGrid(canvas)
@@ -427,12 +510,12 @@ class StarView @JvmOverloads constructor(
 		paint.color = 0xFF003300.toInt()
 		paint.style = Paint.Style.FILL
 
-		val path = Path()
+		gridPath.reset()
 		var started = false
 		for (az in 0..360 step 2) {
 			if (skyToScreen(az.toDouble(), 0.0, tempPoint)) {
-				if (!started) { path.moveTo(tempPoint.x, tempPoint.y); started = true }
-				else path.lineTo(tempPoint.x, tempPoint.y)
+				if (!started) { gridPath.moveTo(tempPoint.x, tempPoint.y); started = true }
+				else gridPath.lineTo(tempPoint.x, tempPoint.y)
 			} else {
 				started = false
 			}
@@ -441,13 +524,13 @@ class StarView @JvmOverloads constructor(
 		paint.color = Color.GREEN
 		paint.strokeWidth = 2f
 		paint.style = Paint.Style.STROKE
-		canvas.drawPath(path, paint)
+		canvas.drawPath(gridPath, paint)
 
-		val textPaintCards = Paint(textPaint).apply { textSize = 40f; color = Color.GREEN }
+		// Optimization: Use cached Paint object
 		val cardinals = listOf("N" to 0.0, "E" to 90.0, "S" to 180.0, "W" to 270.0)
 		cardinals.forEach { (label, az) ->
 			if (skyToScreen(az, 0.0, tempPoint)) {
-				canvas.drawText(label, tempPoint.x, tempPoint.y - 10, textPaintCards)
+				canvas.drawText(label, tempPoint.x, tempPoint.y - 10, cardinalTextPaint)
 			}
 		}
 	}
@@ -457,20 +540,22 @@ class StarView @JvmOverloads constructor(
 		paint.strokeWidth = 2f
 		paint.style = Paint.Style.STROKE
 
+		gridPath.reset()
+
 		// Draw Parallels
 		for (alt in -80..80 step 20) {
-			val path = Path()
+			// No new Path() allocation here
 			var first = true
 			for (az in 0..360 step 5) {
 				if (skyToScreen(az.toDouble(), alt.toDouble(), tempPoint)) {
-					if (first) { path.moveTo(tempPoint.x, tempPoint.y); first = false }
-					else path.lineTo(tempPoint.x, tempPoint.y)
+					if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
+					else gridPath.lineTo(tempPoint.x, tempPoint.y)
 				} else {
 					first = true
 				}
 			}
-			canvas.drawPath(path, paint)
 
+			// Text must still be drawn individually, but we check if we should first
 			if (alt != 0) {
 				if (skyToScreen(azimuthCenter, alt.toDouble(), tempPoint)) {
 					gridTextPaint.textAlign = Paint.Align.LEFT
@@ -482,17 +567,15 @@ class StarView @JvmOverloads constructor(
 
 		// Draw Meridians
 		for (az in 0 until 360 step 45) {
-			val path = Path()
 			var first = true
 			for (alt in -90..90 step 5) {
 				if (skyToScreen(az.toDouble(), alt.toDouble(), tempPoint)) {
-					if (first) { path.moveTo(tempPoint.x, tempPoint.y); first = false }
-					else path.lineTo(tempPoint.x, tempPoint.y)
+					if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
+					else gridPath.lineTo(tempPoint.x, tempPoint.y)
 				} else {
 					first = true
 				}
 			}
-			canvas.drawPath(path, paint)
 
 			if (az % 90 != 0) {
 				if (skyToScreen(az.toDouble(), 0.0, tempPoint)) {
@@ -502,39 +585,88 @@ class StarView @JvmOverloads constructor(
 				}
 			}
 		}
+
+		canvas.drawPath(gridPath, paint)
+	}
+
+	private fun updateEquatorialGridCache() {
+		val timeUnchanged = kotlin.math.abs(currentTime.tt - lastEquGridTimeT) < 0.0000001
+		val locUnchanged = observer.latitude == lastEquGridLat && observer.longitude == lastEquGridLon
+		if (timeUnchanged && locUnchanged) return
+
+		// Cache RA Lines (Meridians)
+		var lineIdx = 0
+		for (ra in 0 until 24 step equRaStep) {
+			var pointIdx = 0
+			for (dec in -90..90 step equRaDecStep) {
+				// Safety check to prevent index out of bounds if loops change
+				if (lineIdx < equRaLinesCount && pointIdx < equRaPointsCount) {
+					val hor = horizon(currentTime, observer, ra.toDouble(), dec.toDouble(), Refraction.Normal)
+					equRaAzimuths[lineIdx][pointIdx] = hor.azimuth
+					equRaAltitudes[lineIdx][pointIdx] = hor.altitude
+				}
+				pointIdx++
+			}
+			lineIdx++
+		}
+
+		// Cache Dec Lines (Parallels)
+		lineIdx = 0
+		for (dec in -80..80 step equDecStep) {
+			var pointIdx = 0
+			for (raStep in 0..360 step equDecRaStep) {
+				if (lineIdx < equDecLinesCount && pointIdx < equDecPointsCount) {
+					val ra = raStep / 15.0
+					val hor = horizon(currentTime, observer, ra, dec.toDouble(), Refraction.Normal)
+					equDecAzimuths[lineIdx][pointIdx] = hor.azimuth
+					equDecAltitudes[lineIdx][pointIdx] = hor.altitude
+				}
+				pointIdx++
+			}
+			lineIdx++
+		}
+
+		lastEquGridTimeT = currentTime.tt
+		lastEquGridLat = observer.latitude
+		lastEquGridLon = observer.longitude
 	}
 
 	private fun drawEquatorialGrid(canvas: Canvas) {
-		for (ra in 0 until 24 step 2) {
-			val path = Path()
+		updateEquatorialGridCache()
+
+		gridPath.reset()
+
+		// Draw RA Lines
+		for (i in 0 until equRaLinesCount) {
 			var first = true
-			for (dec in -90..90 step 5) {
-				val hor = horizon(currentTime, observer, ra.toDouble(), dec.toDouble(), Refraction.None)
-				if (skyToScreen(hor.azimuth, hor.altitude, tempPoint)) {
-					if (first) { path.moveTo(tempPoint.x, tempPoint.y); first = false }
-					else path.lineTo(tempPoint.x, tempPoint.y)
+			for (j in 0 until equRaPointsCount) {
+				val az = equRaAzimuths[i][j]
+				val alt = equRaAltitudes[i][j]
+				if (skyToScreen(az, alt, tempPoint)) {
+					if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
+					else gridPath.lineTo(tempPoint.x, tempPoint.y)
 				} else {
 					first = true
 				}
 			}
-			canvas.drawPath(path, equGridPaint)
 		}
 
-		for (dec in -80..80 step 20) {
-			val path = Path()
+		// Draw Dec Lines
+		for (i in 0 until equDecLinesCount) {
 			var first = true
-			for (raStep in 0..360 step 5) {
-				val ra = raStep / 15.0
-				val hor = horizon(currentTime, observer, ra, dec.toDouble(), Refraction.None)
-				if (skyToScreen(hor.azimuth, hor.altitude, tempPoint)) {
-					if (first) { path.moveTo(tempPoint.x, tempPoint.y); first = false }
-					else path.lineTo(tempPoint.x, tempPoint.y)
+			for (j in 0 until equDecPointsCount) {
+				val az = equDecAzimuths[i][j]
+				val alt = equDecAltitudes[i][j]
+				if (skyToScreen(az, alt, tempPoint)) {
+					if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
+					else gridPath.lineTo(tempPoint.x, tempPoint.y)
 				} else {
 					first = true
 				}
 			}
-			canvas.drawPath(path, equGridPaint)
 		}
+
+		canvas.drawPath(gridPath, equGridPaint)
 	}
 
 	private fun updateEclipticCache() {
@@ -568,23 +700,23 @@ class StarView @JvmOverloads constructor(
 	private fun drawEclipticLine(canvas: Canvas) {
 		updateEclipticCache()
 
-		val path = Path()
+		gridPath.reset()
 		var first = true
 		for (i in 0 until eclipticPointsCount) {
 			val az = eclipticAzimuths[i]
 			val alt = eclipticAltitudes[i]
 			if (skyToScreen(az, alt, tempPoint)) {
 				if (first) {
-					path.moveTo(tempPoint.x, tempPoint.y)
+					gridPath.moveTo(tempPoint.x, tempPoint.y)
 					first = false
 				} else {
-					path.lineTo(tempPoint.x, tempPoint.y)
+					gridPath.lineTo(tempPoint.x, tempPoint.y)
 				}
 			} else {
 				first = true
 			}
 		}
-		canvas.drawPath(path, eclipticPaint)
+		canvas.drawPath(gridPath, eclipticPaint)
 	}
 
 	private fun drawCelestialObject(canvas: Canvas, obj: SkyObject) {
@@ -610,35 +742,49 @@ class StarView @JvmOverloads constructor(
 	 * Returns true if the point is visible (in front of camera/not clipped), false otherwise.
 	 * Writes result into [outPoint] to avoid allocation.
 	 */
+	private fun updateProjectionCache() {
+		// Calculate Frame Invariants
+		val alt0Rad = Math.toRadians(altitudeCenter)
+		projSinAltCenter = sin(alt0Rad)
+		projCosAltCenter = cos(alt0Rad)
+
+		val viewAngleRad = Math.toRadians(viewAngle)
+		// Stereographic projection scale factor based on field of view
+		// This replaces the repeated: width / (4.0 * tan(viewAngleRad / 4.0))
+		projScale = width / (4.0 * tan(viewAngleRad / 4.0))
+
+		projHalfWidth = width / 2.0
+		projHalfHeight = height / 2.0
+	}
+
 	private fun skyToScreen(azimuth: Double, altitude: Double, outPoint: PointF): Boolean {
+		// Convert to radians (required for trig)
 		val azRad = Math.toRadians(azimuth - azimuthCenter)
 		val altRad = Math.toRadians(altitude)
-		val alt0Rad = Math.toRadians(altitudeCenter)
 
+		// Compute trig values for the point
 		val sinAlt = sin(altRad)
 		val cosAlt = cos(altRad)
-		val sinAlt0 = sin(alt0Rad)
-		val cosAlt0 = cos(alt0Rad)
-		val cosAz = cos(azRad)
 		val sinAz = sin(azRad)
+		val cosAz = cos(azRad)
 
-		// Cosine of angular distance from center
-		val cosC = sinAlt0 * sinAlt + cosAlt0 * cosAlt * cosAz
+		// Cosine of angular distance from center (using cached center trigs)
+		val cosC = projSinAltCenter * sinAlt + projCosAltCenter * cosAlt * cosAz
 
 		// Clipping for Stereographic projection (~105 degrees from center)
 		if (cosC <= -0.3) return false
 
 		// Stereographic Projection Factor
 		val k = 2.0 / (1.0 + cosC)
+		val combinedScale = k * projScale
 
-		val x = k * cosAlt * sinAz
-		val y = k * (cosAlt0 * sinAlt - sinAlt0 * cosAlt * cosAz)
+		// Raw projected coordinates (unscaled)
+		val xRaw = cosAlt * sinAz
+		val yRaw = projCosAltCenter * sinAlt - projSinAltCenter * cosAlt * cosAz
 
-		val viewAngleRad = Math.toRadians(viewAngle)
-		val scale = width / (4.0 * tan(viewAngleRad / 4.0))
-
-		outPoint.x = (width / 2 + scale * x).toFloat()
-		outPoint.y = (height / 2 - scale * y).toFloat()
+		// Apply scale and translate to screen center (using cached dimensions)
+		outPoint.x = (projHalfWidth + combinedScale * xRaw).toFloat()
+		outPoint.y = (projHalfHeight - combinedScale * yRaw).toFloat()
 		return true
 	}
 
@@ -669,6 +815,9 @@ class StarView @JvmOverloads constructor(
 
 					if (azimuthCenter < 0) azimuthCenter += 360
 					if (azimuthCenter >= 360) azimuthCenter -= 360
+
+					// Notify listener of manual change
+					onAzimuthManualChangeListener?.invoke(azimuthCenter)
 
 					lastTouchX = event.x
 					lastTouchY = event.y
