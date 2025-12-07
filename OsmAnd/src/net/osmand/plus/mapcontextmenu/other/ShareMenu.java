@@ -39,7 +39,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
+import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.TextDirectionUtil;
 
 import org.apache.commons.logging.Log;
@@ -162,13 +162,16 @@ public class ShareMenu extends BaseMenuController {
 		geoUrl = "";
 		String httpUrl = "";
 		try {
-			String lat = LocationConvert.convertLatitude(latLon.getLatitude(), LocationConvert.FORMAT_DEGREES, false);
-			String lon = LocationConvert.convertLongitude(latLon.getLongitude(), LocationConvert.FORMAT_DEGREES, false);
-			lat = lat.substring(0, lat.length() - 1);
-			lon = lon.substring(0, lon.length() - 1);
+			double latVal = latLon.getLatitude();
+			double lonVal = latLon.getLongitude();
 			int zoom = activity.getMapView().getZoom();
-			geoUrl = MapUtils.buildGeoUrl(lat, lon, zoom, title);
-			httpUrl = "https://osmand.net/map?pin=" + lat + "," + lon + "#" + zoom + "/" + lat + "/" + lon;
+
+			GeoParsedPoint parsedPoint = new GeoParsedPoint(latVal, lonVal, zoom, title);
+			geoUrl = parsedPoint.getGeoUriString();
+
+			String latStr = String.format(Locale.US, "%.6f", latVal);
+			String lonStr = String.format(Locale.US, "%.6f", lonVal);
+			httpUrl = "https://osmand.net/map?pin=" + latStr + "," + lonStr + "#" + zoom + "/" + latStr + "/" + lonStr;
 		} catch (RuntimeException e) {
 			log.error("Failed to convert coordinates", e);
 		}
