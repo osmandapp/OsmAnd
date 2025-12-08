@@ -10,6 +10,7 @@ import android.graphics.DashPathEffect
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.PointF
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
@@ -26,6 +27,7 @@ import io.github.cosinekitty.astronomy.Vector
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.rotationEclEqd
+import net.osmand.plus.plugins.astro.AstroDataProvider
 import java.util.Calendar
 import java.util.TimeZone
 import kotlin.math.PI
@@ -70,6 +72,19 @@ class StarView @JvmOverloads constructor(
 		strokeWidth = 4f
 		pathEffect = DashPathEffect(floatArrayOf(20f, 20f), 0f)
 	}
+	private val constellationPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFF5599FF.toInt()
+		style = Paint.Style.STROKE
+		strokeWidth = 2f
+		alpha = 150
+	}
+	private val constellationTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFF5599FF.toInt()
+		textSize = 32f
+		textAlign = Paint.Align.CENTER
+		typeface = Typeface.create(Typeface.DEFAULT, Typeface.ITALIC)
+		alpha = 200
+	}
 	private val pathPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = 0xFF00FFFF.toInt()
 		style = Paint.Style.STROKE
@@ -90,6 +105,7 @@ class StarView @JvmOverloads constructor(
 	private val celestialPath = Path()
 	private val gridPath = Path()
 	private val tempPoint = PointF()
+	private val tempPoint2 = PointF()
 	private val reusableCal = Calendar.getInstance() // Reusable calendar
 	private val arrowPath = Path()
 
@@ -110,6 +126,7 @@ class StarView @JvmOverloads constructor(
 	var showAzimuthalGrid = true
 	var showEquatorialGrid = false
 	var showEclipticLine = false
+	var showConstellations = true
 
 	// --- Interaction ---
 	private var lastTouchX = 0f
@@ -124,6 +141,10 @@ class StarView @JvmOverloads constructor(
 
 	// --- Astronomy Data ---
 	private val skyObjects = mutableListOf<SkyObject>()
+	private var constellations = listOf<AstroDataProvider.Constellation>()
+
+	// Fast lookup map for constellation drawing
+	private val skyObjectMap = mutableMapOf<String, SkyObject>()
 
 	var observer = Observer(56.9496, 24.1052, 0.0)
 	var currentTime = Time(System.currentTimeMillis() / 1000.0 / 86400.0 + 2440587.5)
@@ -224,11 +245,19 @@ class StarView @JvmOverloads constructor(
 	fun setSkyObjects(objects: List<SkyObject>) {
 		skyObjects.clear()
 		skyObjects.addAll(objects)
+		skyObjectMap.clear()
+		objects.forEach { skyObjectMap[it.id] = it }
+
 		recalculatePositions(currentTime, updateTargets = false)
 		skyObjects.forEach {
 			it.azimuth = it.targetAzimuth
 			it.altitude = it.targetAltitude
 		}
+		invalidate()
+	}
+
+	fun setConstellations(list: List<AstroDataProvider.Constellation>) {
+		constellations = list
 		invalidate()
 	}
 
@@ -296,7 +325,7 @@ class StarView @JvmOverloads constructor(
 
 	private fun recalculatePositions(time: Time, updateTargets: Boolean) {
 		skyObjects.forEach { obj ->
-			if (!obj.isVisible && obj != selectedObject) return@forEach
+			if (!obj.isVisible && obj != selectedObject && !isShowInConstellation(obj)) return@forEach
 
 			val hor: Topocentric
 
@@ -319,6 +348,13 @@ class StarView @JvmOverloads constructor(
 				obj.targetAltitude = hor.altitude
 			}
 		}
+	}
+
+	private fun isShowInConstellation(obj: SkyObject) : Boolean {
+		// If constellations are shown, we must calculate positions for stars that are part of them,
+		// even if the star itself is "hidden" in settings.
+		// However, for optimization, we currently assume stars in constellations are generally visible.
+		return showConstellations
 	}
 
 	private fun interpolateAngle(start: Double, end: Double, fraction: Float): Double {
@@ -410,6 +446,7 @@ class StarView @JvmOverloads constructor(
 		if (showEquatorialGrid) drawEquatorialGrid(canvas)
 		if (showAzimuthalGrid) drawAzimuthalGrid(canvas)
 		if (showEclipticLine) drawEclipticLine(canvas)
+		if (showConstellations) drawConstellations(canvas)
 
 		drawHorizon(canvas)
 
@@ -717,6 +754,62 @@ class StarView @JvmOverloads constructor(
 			}
 		}
 		canvas.drawPath(gridPath, eclipticPaint)
+	}
+
+	private fun drawConstellations(canvas: Canvas) {
+		gridPath.reset()
+
+		constellations.forEach { constellation ->
+			val uniqueStars = mutableSetOf<String>()
+
+			constellation.lines.forEach { (id1, id2) ->
+				uniqueStars.add(id1)
+				uniqueStars.add(id2)
+
+				val star1 = skyObjectMap[id1]
+				val star2 = skyObjectMap[id2]
+
+				if (star1 != null && star2 != null) {
+					val p1Visible = skyToScreen(star1.azimuth, star1.altitude, tempPoint)
+					val p2Visible = skyToScreen(star2.azimuth, star2.altitude, tempPoint2)
+
+					if (p1Visible && p2Visible) {
+						// Simple line if both visible
+						// (Clipping logic for partially visible lines could be added here,
+						// but simple check is usually sufficient for short constellation lines)
+						val dist = hypot(tempPoint.x - tempPoint2.x, tempPoint.y - tempPoint2.y)
+						// Don't draw if lines wrap around screen weirdly (simple heuristic)
+						if (dist < width * 0.8) {
+							gridPath.moveTo(tempPoint.x, tempPoint.y)
+							gridPath.lineTo(tempPoint2.x, tempPoint2.y)
+						}
+					}
+				}
+			}
+			// Draw Title
+			var avgX = 0f
+			var avgY = 0f
+			var count = 0
+			uniqueStars.forEach { id ->
+				val star = skyObjectMap[id]
+				if (star != null && skyToScreen(star.azimuth, star.altitude, tempPoint)) {
+					avgX += tempPoint.x
+					avgY += tempPoint.y
+					count++
+				}
+			}
+
+			if (count > 0) {
+				// Only draw if a significant portion of the constellation is visible?
+				// Or just if any part is visible.
+				// If count > 0, at least one star is on screen.
+				// Calculate centroid
+				val cx = avgX / count
+				val cy = avgY / count
+				canvas.drawText(constellation.name, cx, cy, constellationTextPaint)
+			}
+		}
+		canvas.drawPath(gridPath, constellationPaint)
 	}
 
 	private fun drawCelestialObject(canvas: Canvas, obj: SkyObject) {

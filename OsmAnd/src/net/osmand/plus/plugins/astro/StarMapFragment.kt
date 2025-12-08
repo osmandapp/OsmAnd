@@ -190,7 +190,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showAzimuthalGrid = config.showAzimuthalGrid
 			starView.showEquatorialGrid = config.showEquatorialGrid
 			starView.showEclipticLine = config.showEclipticLine
+			starView.showConstellations = config.showConstellations
 		}
+		starView.setConstellations(AstroDataProvider.getConstellations())
 
 		updateStarMap(true)
 		setupToolBar(view)
@@ -524,15 +526,16 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun showFilterDialog() {
-		val toggleItems = arrayOf(getString(R.string.azimuthal_grid), getString(R.string.equatorial_grid), getString(R.string.ecliptic_line))
+		val toggleItems = arrayOf(getString(R.string.azimuthal_grid), getString(R.string.equatorial_grid), getString(R.string.ecliptic_line), "Constellations")
 
 		var tempAzimuthal = starView.showAzimuthalGrid
 		var tempEquatorial = starView.showEquatorialGrid
 		var tempEcliptic = starView.showEclipticLine
+		var tempConstellations = starView.showConstellations
 
-		val toggleChecked = booleanArrayOf(tempAzimuthal, tempEquatorial, tempEcliptic)
+		val toggleChecked = booleanArrayOf(tempAzimuthal, tempEquatorial, tempEcliptic, tempConstellations)
 
-		val currentObjects = starMapViewModel.skyObjects.value ?: emptyList()
+		val currentObjects = (starMapViewModel.skyObjects.value ?: emptyList()).take(30)
 		val objectNames = currentObjects.map { it.name }.toTypedArray()
 		val objectChecked = currentObjects.map { it.isVisible }.toBooleanArray()
 
@@ -547,6 +550,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 						0 -> tempAzimuthal = isChecked
 						1 -> tempEquatorial = isChecked
 						2 -> tempEcliptic = isChecked
+						3 -> tempConstellations = isChecked
 					}
 				} else {
 					val objIndex = which - toggleItems.size
@@ -559,6 +563,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				starView.showAzimuthalGrid = tempAzimuthal
 				starView.showEquatorialGrid = tempEquatorial
 				starView.showEclipticLine = tempEcliptic
+				starView.showConstellations = tempConstellations
 
 				currentObjects.forEachIndexed { index, skyObject ->
 					skyObject.isVisible = objectChecked[index]
@@ -570,6 +575,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 					showAzimuthalGrid = tempAzimuthal,
 					showEquatorialGrid = tempEquatorial,
 					showEclipticLine = tempEcliptic,
+					showConstellations = tempConstellations,
 					items = itemsConfig
 				)
 				swSettings.setStarMapConfig(config)
