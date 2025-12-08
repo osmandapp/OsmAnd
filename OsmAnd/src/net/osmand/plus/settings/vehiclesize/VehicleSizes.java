@@ -65,7 +65,7 @@ public abstract class VehicleSizes {
 			if (lm == MetricsConstants.MILES_AND_YARDS) {
 				return useInchesInsteadOfYards() ? R.string.shared_string_inches : R.string.shared_string_yards;
 			}
-			return R.string.shared_string_meters;
+			return useCentimetersInsteadOfMeters() ? R.string.shared_string_centimeters : R.string.shared_string_meters;
 		}
 	}
 
@@ -84,7 +84,7 @@ public abstract class VehicleSizes {
 			if (lm == MetricsConstants.MILES_AND_YARDS) {
 				return useInchesInsteadOfYards() ? R.string.inch : R.string.yard;
 			}
-			return R.string.m;
+			return useCentimetersInsteadOfMeters() ? R.string.centimeter : R.string.m;
 		}
 	}
 
@@ -100,7 +100,8 @@ public abstract class VehicleSizes {
 			} else {
 				// Convert length from meters to selected length metric system
 				value = VehicleAlgorithms.convertLengthFromMeters(
-						metric.getLengthMetric(), value, useInchesInsteadOfFeet(), useInchesInsteadOfYards());
+						metric.getLengthMetric(), value, useInchesInsteadOfFeet(),
+						useInchesInsteadOfYards(), useCentimetersInsteadOfMeters());
 			}
 		}
 		return value;
@@ -116,7 +117,8 @@ public abstract class VehicleSizes {
 			} else {
 				// Convert length to meters before save
 				value = VehicleAlgorithms.convertLengthToMeters(
-						metric.getLengthMetric(), value, useInchesInsteadOfFeet(), useInchesInsteadOfYards());
+						metric.getLengthMetric(), value, useInchesInsteadOfFeet(),
+						useInchesInsteadOfYards(), useCentimetersInsteadOfMeters());
 			}
 			value -= 0.0001f;
 		}
@@ -158,8 +160,11 @@ public abstract class VehicleSizes {
 			limits = VehicleAlgorithms.convertWeightLimitsByMetricSystem(
 					limits, metric.getWeightMetric(), useKilogramsInsteadOfTons());
 		} else {
+			MetricsConstants lengthMetricSystem = metric.getLengthMetric();
 			limits = VehicleAlgorithms.convertLengthLimitsByMetricSystem(
-					limits, metric.getLengthMetric(), useInchesInsteadOfFeet(), useInchesInsteadOfYards());
+					limits, lengthMetricSystem, useInchesInsteadOfFeet(),
+					useInchesInsteadOfYards(), useCentimetersInsteadOfMeters(),
+					useRoundedProposedLimits(type, lengthMetricSystem));
 		}
 		return VehicleAlgorithms.collectProposedValues(limits, 1, getMinProposedValuesCount());
 	}
@@ -168,7 +173,7 @@ public abstract class VehicleSizes {
 		return DEFAULT_PROPOSED_VALUES_COUNT;
 	}
 
-	public boolean useKilogramsInsteadOfTons() {
+	protected boolean useKilogramsInsteadOfTons() {
 		return false;
 	}
 
@@ -176,10 +181,20 @@ public abstract class VehicleSizes {
 		return true;
 	}
 
+	protected boolean useCentimetersInsteadOfMeters() {
+		return false;
+	}
+
 	protected boolean useInchesInsteadOfYards() {
 		return true;
 	}
 
+	protected boolean useRoundedProposedLimits(@NonNull SizeType sizeType,
+	                                           @NonNull MetricsConstants metricSystem) {
+		return true;
+	}
+
+	@NonNull
 	protected String formatValue(float value) {
 		DecimalFormat formatter = new DecimalFormat("#.#");
 		return formatter.format(value);
@@ -190,6 +205,8 @@ public abstract class VehicleSizes {
 	                                       @Nullable String derivedProfile) {
 		if (routerProfile == GeneralRouterProfile.BOAT) {
 			return new BoatSizes();
+		} else if (routerProfile == GeneralRouterProfile.BICYCLE) {
+			return new BicycleSizes();
 		} else if (routerProfile == GeneralRouterProfile.CAR) {
 			if (DERIVED_PROFILE_TRUCK.equalsIgnoreCase(derivedProfile)) {
 				return new TruckSizes();

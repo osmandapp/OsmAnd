@@ -44,7 +44,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	boolean free;
 	String freeMessage;
 
-	boolean isDeleted;
+	boolean isDeprecated;
 
 	public IndexItem(String fileName,
 	                 String description,
@@ -353,7 +353,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		}
 	}
 
-	public boolean isDeleted() {
-		return isDeleted;
+	public boolean isDeprecated() {
+		return isDeprecated;
 	}
 }

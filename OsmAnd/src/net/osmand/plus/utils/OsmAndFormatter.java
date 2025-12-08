@@ -69,6 +69,7 @@ public class OsmAndFormatter {
 	public static final float YARDS_IN_ONE_METER = 1.0936f;
 	public static final float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
 	public static final float INCHES_IN_ONE_METER = FEET_IN_ONE_METER * 12;
+	public static final float CENTIMETERS_IN_ONE_METER = 100;
 
 	public static final float IMPERIAL_GALLONS_IN_LITER = 4.54609f;
 	public static final float US_GALLONS_IN_LITER = 3.78541f;
