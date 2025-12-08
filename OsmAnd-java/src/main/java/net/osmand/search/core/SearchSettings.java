@@ -78,6 +78,11 @@ public class SearchSettings {
 	}
 
 	public void setExportedObjects(List<MapObject> exportedObjects) {
+		if (exportedObjects == null) {
+			this.exportedObjects = null;
+			return;
+		}
+
 		if (this.exportedObjects == null)
 			this.exportedObjects = exportedObjects;
 		else
@@ -89,6 +94,11 @@ public class SearchSettings {
 	}
 
 	public void setExportedCities(List<City> exportedCities) {
+		if (exportedCities == null) {
+			this.exportedCities = null;
+			return;
+		}
+
 		if (this.exportedCities == null)
 			this.exportedCities = exportedCities;
 		else
