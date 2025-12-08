@@ -1127,8 +1127,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
-			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {//
-		long time = System.currentTimeMillis();
+			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 		SelectedGpxFile currentTrack = null;
 		int baseOrder = getBaseOrder();
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
@@ -1138,9 +1137,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (selectedGpxFile.isShowCurrentTrack()) {
 				currentTrack = selectedGpxFile;
 			} else {
-				long time1 = System.currentTimeMillis();
 				drawSelectedFileSegments(selectedGpxFile, false, canvas, tileBox, settings, baseOrder);
-				log.debug("drawSelectedFileSegments time " + (System.currentTimeMillis() - time1));
 			}
 			if (!renderedSegmentsCache.containsKey(gpxFile.getPath())) {
 				renderedSegmentsCache.remove(gpxFile.getPath());
@@ -1150,7 +1147,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (currentTrack != null) {
 			drawSelectedFileSegments(currentTrack, true, canvas, tileBox, settings, baseOrder);
 		}
-		log.debug("drawSelectedFilesSegments time " + (System.currentTimeMillis() - time));
 	}
 
 	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack,
