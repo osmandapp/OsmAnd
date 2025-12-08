@@ -1,5 +1,6 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.CALLING_FRAGMENT_TAG;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_ID;
@@ -28,9 +29,11 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.map.TileSourceManager;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -52,6 +55,7 @@ import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
@@ -78,6 +82,7 @@ import net.osmand.search.AmenitySearcher;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.GeoPointParserUtil;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -88,6 +93,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -310,19 +316,15 @@ public class IntentHelper {
 			return false;
 		}
 
-		if (isOsmAndMapUrl(data)
-				&& data.getQueryParameterNames().contains("name")
-				|| data.getQueryParameterNames().contains("wikidataId")) {
-			String name;
-			String type;
-			String wikiDataId;
-			double pinLat;
-			double pinLon;
+		if (isOsmAndSite(data) && isPathPrefix(data, "/map/poi")) {
+			String name, type, wikiDataId, osmId;
+			double pinLat, pinLon;
 			int zoom;
 
 			name = data.getQueryParameter("name");
 			type = data.getQueryParameter("type");
 			wikiDataId = data.getQueryParameter("wikidataId");
+			osmId = data.getQueryParameter("osmId");
 			String latLonParam = data.getQueryParameter("pin");
 			LatLon latLon = Algorithms.isEmpty(latLonParam) ? null : Algorithms.parseLatLon(latLonParam);
 
@@ -330,16 +332,13 @@ public class IntentHelper {
 				pinLat = latLon.getLatitude();
 				pinLon = latLon.getLongitude();
 				zoom = settings.getLastKnownMapZoom();
-				Amenity amenity = searchAmenity(pinLat, pinLon, name, type, wikiDataId);
+				Amenity amenity = searchAmenity(pinLat, pinLon, name, type, wikiDataId, osmId);
 				if (amenity == null) {
 					return false;
 				}
 
-				String lang;
-				boolean transliterate;
-				lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-				transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-
+				String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+				boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 				String poiSimpleFormat;
 				if (amenity.getType() != null && amenity.getType().isWiki()) {
 					poiSimpleFormat = amenity.getName(lang, transliterate);
@@ -359,16 +358,36 @@ public class IntentHelper {
 	}
 
 	@Nullable
-	private Amenity searchAmenity(Double pinLat, Double pinLon, String name, String type, String wikiDataId) {
+	private Amenity searchAmenity(Double pinLat, Double pinLon,
+	                              String name, String poiType,
+	                              String wikiDataId, String osmId) {
 		AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
 		AmenitySearcher.Settings searchSettings = app.getResourceManager().getDefaultAmenitySearchSettings();
 
-		List<Amenity> amenities = amenitySearcher.searchAmenities(new LatLon(pinLat, pinLon), searchSettings);
+		QuadRect rect = MapUtils.calculateLatLonBbox(pinLat, pinLon, 50);
+		String preparedPoiType = AmenityMenuController.prepareType(poiType);
+		SearchPoiTypeFilter filter = getPoiTypeFilter(preparedPoiType);
 
-		Amenity requestAmenity = new Amenity();
+		List<Amenity> amenities = amenitySearcher.searchAmenities(filter, null, rect.top, rect.left, rect.bottom, rect.right,
+				-1, true, searchSettings.fileVisibility(), null);
+
+		Amenity requestAmenity = getRequestAmenity(pinLat, pinLon, poiType, wikiDataId, osmId);
 		List<String> names = Collections.singletonList(name);
+		AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names, true);
+
+		List<Amenity> filtered = amenitySearcher.filterAmenities(amenities, request, searchSettings);
+		if (!Algorithms.isEmpty(filtered)) {
+			return filtered.get(0);
+		}
+		return null;
+	}
+
+	private Amenity getRequestAmenity(Double pinLat, Double pinLon,
+	                                  String poiType,
+	                                  String wikiDataId, String osmId) {
+		Amenity requestAmenity = new Amenity();
 		requestAmenity.setLocation(new LatLon(pinLat, pinLon));
-		PoiCategory category = Algorithms.isEmpty(type) ? null : app.getPoiTypes().getPoiCategoryByName(type);
+		PoiCategory category = Algorithms.isEmpty(poiType) ? null : app.getPoiTypes().getPoiCategoryByName(poiType);
 		if (!MapPoiTypes.getDefault().isOtherCategory(category)) {
 			requestAmenity.setType(category);
 		}
@@ -380,12 +399,37 @@ public class IntentHelper {
 			requestAmenity.setAdditionalInfo(Amenity.WIKIDATA, wikiDataId);
 		}
 
-		AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names, true);
-		List<Amenity> filtered = amenitySearcher.filterAmenities(amenities, request, searchSettings);
-		if (!Algorithms.isEmpty(filtered)) {
-			return filtered.get(0);
+		if (osmId != null) {
+			try {
+				requestAmenity.setId(Long.parseLong(osmId));
+			} catch (NumberFormatException e) {
+				LOG.error("Incorrect OsmId");
+			}
 		}
-		return null;
+		return requestAmenity;
+	}
+
+	private SearchPoiTypeFilter getPoiTypeFilter(String preparedPoiType) {
+		return new SearchPoiTypeFilter() {
+			public boolean isEmpty() {
+				return false;
+			}
+
+			public boolean accept(PoiCategory type, String subcategory) {
+				if (type != null) {
+					String preparedType = AmenityMenuController.prepareType(type.getKeyName());
+					if (preparedType.equals(preparedPoiType)) {
+						return true;
+					}
+				}
+
+				if (!Algorithms.isEmpty(subcategory)) {
+					String preparedSubType = AmenityMenuController.prepareType(AmenityMenuController.getFirstSubString(subcategory));
+					return preparedSubType.equals(preparedPoiType);
+				}
+				return false;
+			}
+		};
 	}
 
 	@Nullable

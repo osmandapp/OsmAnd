@@ -108,7 +108,7 @@ public class AmenitySearcher {
     private ThreadPoolExecutor singleThreadedExecutor;
     private LinkedBlockingQueue<Runnable> taskQueue;
 
-    private static final int AMENITY_SEARCH_RADIUS = 50;
+    public static final int AMENITY_SEARCH_RADIUS = 50;
     private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
     private final MapPoiTypes mapPoiTypes; // nullable
 
@@ -274,9 +274,6 @@ public class AmenitySearcher {
                 if (amenity != null) {
                     filtered = filterByOsmIdOrWikidata(
                             amenities, amenity.getOsmId(), amenity.getLocation(), amenity.getWikidata());
-                    if (!Algorithms.isEmpty(request.amenityCategoryKeyName)) {
-                        filtered = filterByCategoryType(filtered, latLon, request.amenityCategoryKeyName);
-                    }
                 }
             }
             if (Algorithms.isEmpty(filtered) && !Algorithms.isEmpty(request.tags)) {
@@ -321,20 +318,6 @@ public class AmenitySearcher {
                     }
                 }
                 break;
-            }
-        }
-        return result;
-    }
-
-    private List<Amenity> filterByCategoryType(Collection<Amenity> amenities, LatLon point, String categoryType) {
-        List<Amenity> result = new ArrayList<>();
-        for (Amenity amenity : amenities) {
-            if (amenity.getLocation().equals(point)) {
-                String type = amenity.getType().getKeyName();
-                    if (type.equals(categoryType)) {
-                        result.add(amenity);
-                        break;
-                }
             }
         }
         return result;
