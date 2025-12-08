@@ -208,8 +208,15 @@ public class SearchResult {
 		} else {
 			localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
 		}
-		if (object instanceof Street)
-			localResultNames = localResultNames.stream().filter(x -> !CommonWords.isStaticCommon(x.toLowerCase())).toList();
+		if (object instanceof Street) {
+			List<String> filteredNames = new ArrayList<>();
+			for (String localResultName : localResultNames) {
+				if (!CommonWords.isStaticCommon(localResultName.toLowerCase())) {
+					filteredNames.add(localResultName);
+				}
+			}
+			localResultNames = filteredNames;
+		}
 
 		boolean wordMatched;
 		if (searchPhraseNames.isEmpty()) {
