@@ -6,7 +6,6 @@
 	android:layout_height="wrap_content"
 	android:layout_gravity="center_horizontal|top"
 	android:layout_marginTop="@dimen/map_button_margin"
-	android:background="@color/white_50_transparent"
 	android:orientation="vertical"
 	android:visibility="visible">
 

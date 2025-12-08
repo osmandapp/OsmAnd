@@ -88,9 +88,9 @@ class StarVisiblityChartView @JvmOverloads constructor(
 	override fun onDraw(canvas: Canvas) {
 		super.onDraw(canvas)
 		val m = cachedModel ?: return
-		val height = measureHeight()
 
-		canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), bgPaint)
+		val height = measureHeight()
+		//canvas.drawColor(bgPaint.color)
 
 		val chartLeft = leftLabelW + timesW
 		val chartTop = headerH + topAxisH

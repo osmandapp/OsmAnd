@@ -10,7 +10,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import io.github.cosinekitty.astronomy.Body
@@ -18,7 +21,10 @@ import io.github.cosinekitty.astronomy.Direction
 import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.searchRiseSet
+import net.osmand.Location
 import net.osmand.map.IMapLocationListener
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
@@ -35,6 +41,7 @@ import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 import net.osmand.plus.plugins.astro.views.StarChartView
 import net.osmand.plus.plugins.astro.views.StarView
 import net.osmand.plus.plugins.astro.views.StarVisiblityChartView
+import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.controls.maphudbuttons.MapButton
@@ -44,8 +51,10 @@ import java.time.ZoneId
 import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
+import kotlin.io.path.Path
 
-class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
+class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
+	OsmAndCompassListener {
 
 	private lateinit var starView: StarView
 	private lateinit var timeSelectionView: DateTimeSelectionView
@@ -63,6 +72,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 
 	private val mapButtons = mutableListOf<MapButton>()
 	private var rulerWidget: RulerWidget? = null
+	private var systemBottomInset: Int = 0
+	private var manualAzimuth: Boolean = false
+	private var lastResetRotationToNorth = 0L
 
 	private lateinit var starMapViewModel: StarObjectsViewModel
 	private lateinit var starChartViewModel: StarObjectsViewModel
@@ -102,8 +114,33 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 		sheetTitle = view.findViewById(R.id.sheet_title)
 		sheetCoords = view.findViewById(R.id.sheet_coords)
 		sheetDetails = view.findViewById(R.id.sheet_details)
+		ViewCompat.setOnApplyWindowInsetsListener(bottomSheet) { v, windowInsets ->
+			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+			v.updatePadding(bottom = v.paddingTop + insets.bottom)
+			windowInsets
+		}
+
+		val starMapControlsContainer = view.findViewById<View>(R.id.star_map_controls_container)
+		val mapControlsContainer = view.findViewById<View>(R.id.map_controls_container)
+
+		val insetsListener = androidx.core.view.OnApplyWindowInsetsListener { v, windowInsets ->
+			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+			systemBottomInset = insets.bottom
+			updateMapControlsPadding()
+			windowInsets
+		}
+
+		ViewCompat.setOnApplyWindowInsetsListener(starMapControlsContainer, insetsListener)
+		if (mapControlsContainer != null) {
+			ViewCompat.setOnApplyWindowInsetsListener(mapControlsContainer, insetsListener)
+		}
 
 		starChartsView = view.findViewById(R.id.star_charts_view)
+		ViewCompat.setOnApplyWindowInsetsListener(starChartsView) { v, windowInsets ->
+			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+			v.updatePadding(bottom = insets.bottom)
+			windowInsets
+		}
 		starVisiblityView = view.findViewById(R.id.star_visiblity_view)
 		starAltitudeView = view.findViewById(R.id.star_altitude_view)
 		celestialPathView = view.findViewById(R.id.celestial_path_view)
@@ -153,9 +190,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 			starView.showAzimuthalGrid = config.showAzimuthalGrid
 			starView.showEquatorialGrid = config.showEquatorialGrid
 			starView.showEclipticLine = config.showEclipticLine
+			starView.showConstellations = config.showConstellations
 		}
+		starView.setConstellations(AstroDataProvider.getConstellations())
 
-		updateStarMap()
+		updateStarMap(true)
 		setupToolBar(view)
 		buildZoomButtons(view)
 
@@ -171,6 +210,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 
 	override fun onResume() {
 		super.onResume()
+		updateStarMap(true)
+		app.locationProvider.addLocationListener(this)
+		app.locationProvider.addCompassListener(this)
 		app.osmandMap.mapView.addMapLocationListener(this)
 		val mapActivity = requireMapActivity()
 		mapActivity.disableDrawer()
@@ -180,6 +222,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 
 	override fun onPause() {
 		super.onPause()
+		app.locationProvider.removeLocationListener(this)
+		app.locationProvider.removeCompassListener(this)
 		app.osmandMap.mapView.removeMapLocationListener(this)
 		val mapActivity = requireMapActivity()
 		mapActivity.enableDrawer()
@@ -187,17 +231,77 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 		mapActivity.refreshMap()
 	}
 
+	override fun updateCompassValue(value: Float) {
+		val lastResetRotationToNorth = app.mapViewTrackingUtilities.lastResetRotationToNorth
+		if (this.lastResetRotationToNorth < lastResetRotationToNorth) {
+			this.lastResetRotationToNorth = lastResetRotationToNorth
+			manualAzimuth = false
+		}
+		if (manualAzimuth) return
+
+		val rotateMode = settings.ROTATE_MAP.get()
+		if (rotateMode == OsmandSettings.ROTATE_MAP_COMPASS) {
+			starView.setAzimuth(value.toDouble())
+		} else if (rotateMode != OsmandSettings.ROTATE_MAP_BEARING) {
+			starView.setAzimuth(-app.osmandMap.mapView.rotate.toDouble())
+		}
+	}
+
+	override fun updateLocation(location: Location?) {
+		if (location == null) return
+
+		if (app.mapViewTrackingUtilities.isMapLinkedToLocation) {
+			app.runInUIThread {
+				if (!manualAzimuth) {
+					if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
+						if (location.hasBearing() && location.bearing != 0f) {
+							starView.setAzimuth(location.bearing.toDouble(), true)
+						}
+					}
+				}
+				updateStarMap();
+				updateStarChart()
+			}
+		} else if (!manualAzimuth) {
+			app.runInUIThread {
+				if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
+					if (location.hasBearing() && location.bearing != 0f) {
+						starView.setAzimuth(location.bearing.toDouble(), true)
+					}
+				}
+			}
+		}
+	}
+
 	override fun locationChanged(p0: Double, p1: Double, p2: Any?) {
-		app.runInUIThread { updateStarMap(); updateStarChart() }
+		if (!app.mapViewTrackingUtilities.isMapLinkedToLocation) {
+			app.runInUIThread { updateStarMap(); updateStarChart() }
+		}
 	}
 
 	private fun updateStarMapVisibility(visible: Boolean) {
 		starView.visibility = if (visible) View.VISIBLE else View.GONE
+		val starMapControls = view?.findViewById<View>(R.id.star_map_controls_container)
+		val mapControls = view?.findViewById<View>(R.id.map_controls_container)
+
+		starMapControls?.visibility = if (visible) View.VISIBLE else View.GONE
+		mapControls?.visibility = if (!visible) View.VISIBLE else View.GONE
 	}
 
 	private fun updateStarChartVisibility(visible: Boolean) {
 		starChartsView.visibility = if (visible) View.VISIBLE else View.GONE
 		rulerWidget?.visibility = if (visible) View.VISIBLE else View.GONE
+		updateMapControlsPadding()
+	}
+
+	private fun updateMapControlsPadding() {
+		val starMapControls = view?.findViewById<View>(R.id.star_map_controls_container)
+		val mapControls = view?.findViewById<View>(R.id.map_controls_container)
+
+		val bottomPadding = if (starChartsView.isVisible) 0 else systemBottomInset
+
+		starMapControls?.updatePadding(bottom = bottomPadding)
+		mapControls?.updatePadding(bottom = bottomPadding)
 	}
 
 	private fun saveCommonSettings() {
@@ -275,11 +379,18 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 				showObjectInfo(selectedObject!!)
 			}
 		}
+
+		starView.onAzimuthManualChangeListener = { azimuth ->
+			manualAzimuth = true
+			app.osmandMap.mapView.rotateToAnimate(-azimuth.toFloat())
+		}
 	}
 
-	private fun updateStarMap() {
-		val location = app.osmandMap.mapView.currentRotatedTileBox.centerLatLon
+	private fun updateStarMap(updateAzimuth: Boolean = false) {
+		val tileBox = app.osmandMap.mapView.rotatedTileBox
+		val location = tileBox.centerLatLon
 		starView.setObserverLocation(location.latitude, location.longitude, 0.0)
+		if (updateAzimuth) starView.setAzimuth(-tileBox.rotate.toDouble())
 	}
 
 	private fun updateStarChart() {
@@ -328,27 +439,44 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 		val mapLayers = activity.mapLayers
 		val layer = mapLayers.mapControlsLayer
 
-		view.findViewById<MapButton?>(R.id.map_zoom_in_button)?.let {
-			mapButtons.add(it)
+		fun addButtons(container: View, starMap: Boolean): Boolean? {
+			container.findViewById<MapButton?>(R.id.map_zoom_in_button)?.let {
+				mapButtons.add(it)
+				if (starMap) {
+					it.setOnClickListener { starView.zoomIn() }
+					it.setOnLongClickListener(null)
+				}
+			}
+			container.findViewById<MapButton?>(R.id.map_zoom_out_button)?.let {
+				mapButtons.add(it)
+				if (starMap) {
+					it.setOnClickListener { starView.zoomOut() }
+					it.setOnLongClickListener(null)
+				}
+			}
+			container.findViewById<MapButton?>(R.id.map_my_location_button)?.let {
+				mapButtons.add(it)
+			}
+			return container.findViewById<View?>(R.id.map_hud_controls)?.let {
+				AndroidUiHelper.updateVisibility(it, true)
+			}
 		}
-		view.findViewById<MapButton?>(R.id.map_zoom_out_button)?.let {
-			mapButtons.add(it)
-		}
-		view.findViewById<MapButton?>(R.id.map_my_location_button)?.let {
-			mapButtons.add(it)
-		}
-		layer.addCustomizedDefaultMapButtons(mapButtons)
-		view.findViewById<View?>(R.id.map_hud_controls)?.let {
-			AndroidUiHelper.updateVisibility(it, true)
-		}
-
-		val mapInfoLayer = mapLayers.mapInfoLayer
-		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout))
 
 		view.findViewById<MapButton?>(R.id.map_compass_button)?.let {
 			layer.addCustomMapButton(it)
 			mapButtons.add(it)
 		}
+		view.findViewById<View>(R.id.star_map_controls_container)?.let { container ->
+			addButtons(container, true)
+		}
+		view.findViewById<View>(R.id.map_controls_container)?.let { container ->
+			addButtons(container, false)
+		}
+
+		layer.addCustomizedDefaultMapButtons(mapButtons)
+
+		val mapInfoLayer = mapLayers.mapInfoLayer
+		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout))
 	}
 
 	private fun showObjectInfo(obj: SkyObject) {
@@ -398,15 +526,16 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 	}
 
 	private fun showFilterDialog() {
-		val toggleItems = arrayOf(getString(R.string.azimuthal_grid), getString(R.string.equatorial_grid), getString(R.string.ecliptic_line))
+		val toggleItems = arrayOf(getString(R.string.azimuthal_grid), getString(R.string.equatorial_grid), getString(R.string.ecliptic_line), "Constellations")
 
 		var tempAzimuthal = starView.showAzimuthalGrid
 		var tempEquatorial = starView.showEquatorialGrid
 		var tempEcliptic = starView.showEclipticLine
+		var tempConstellations = starView.showConstellations
 
-		val toggleChecked = booleanArrayOf(tempAzimuthal, tempEquatorial, tempEcliptic)
+		val toggleChecked = booleanArrayOf(tempAzimuthal, tempEquatorial, tempEcliptic, tempConstellations)
 
-		val currentObjects = starMapViewModel.skyObjects.value ?: emptyList()
+		val currentObjects = (starMapViewModel.skyObjects.value ?: emptyList()).take(30)
 		val objectNames = currentObjects.map { it.name }.toTypedArray()
 		val objectChecked = currentObjects.map { it.isVisible }.toBooleanArray()
 
@@ -421,6 +550,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 						0 -> tempAzimuthal = isChecked
 						1 -> tempEquatorial = isChecked
 						2 -> tempEcliptic = isChecked
+						3 -> tempConstellations = isChecked
 					}
 				} else {
 					val objIndex = which - toggleItems.size
@@ -433,6 +563,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 				starView.showAzimuthalGrid = tempAzimuthal
 				starView.showEquatorialGrid = tempEquatorial
 				starView.showEclipticLine = tempEcliptic
+				starView.showConstellations = tempConstellations
 
 				currentObjects.forEachIndexed { index, skyObject ->
 					skyObject.isVisible = objectChecked[index]
@@ -444,6 +575,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener {
 					showAzimuthalGrid = tempAzimuthal,
 					showEquatorialGrid = tempEquatorial,
 					showEclipticLine = tempEcliptic,
+					showConstellations = tempConstellations,
 					items = itemsConfig
 				)
 				swSettings.setStarMapConfig(config)
