@@ -1,13 +1,8 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import static net.osmand.LocationConvert.FORMAT_DEGREES;
 import static net.osmand.plus.mapcontextmenu.other.ShareItem.SAVE_AS_FILE;
-import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_ACTION_ID;
-import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_ADDRESS;
-import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_COORDINATES;
-import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_GEOURL;
-import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_SMS;
-import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_TITLE;
-import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_LINK;
+import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.*;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -169,15 +164,18 @@ public class ShareMenu extends BaseMenuController {
 
 		geoUrl = "";
 		try {
-			double latVal = latLon.getLatitude();
-			double lonVal = latLon.getLongitude();
+			double latitude = latLon.getLatitude();
+			double longitude = latLon.getLongitude();
 			int zoom = activity.getMapView().getZoom();
 
-			GeoParsedPoint parsedPoint = new GeoParsedPoint(latVal, lonVal, zoom, title);
+			GeoParsedPoint parsedPoint = new GeoParsedPoint(latitude, longitude, zoom, title);
 			geoUrl = parsedPoint.getGeoUriString();
 
-			String latStr = String.format(Locale.US, "%.6f", latVal);
-			String lonStr = String.format(Locale.US, "%.6f", lonVal);
+			String latStr = LocationConvert.convertLatitude(latitude, FORMAT_DEGREES, false);
+			String lonStr = LocationConvert.convertLongitude(longitude, FORMAT_DEGREES, false);
+			latStr = latStr.substring(0, latStr.length() - 1);
+			lonStr = lonStr.substring(0, lonStr.length() - 1);
+
 			link = buildOsmandPoiUri(title, typeStr, latStr, lonStr, zoom, latStr, lonStr);
 		} catch (RuntimeException e) {
 			log.error("Failed to convert coordinates", e);
