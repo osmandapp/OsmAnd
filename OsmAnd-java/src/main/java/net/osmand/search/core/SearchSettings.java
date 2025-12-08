@@ -4,7 +4,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReaderStats.SearchStat;
+import net.osmand.data.City;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
@@ -43,6 +45,8 @@ public class SearchSettings {
 	private boolean addressSearch;
 	private SearchStat stat;
 	private SearchExportSettings exportSettings; // = new SearchExportSettings(true, true, -1);
+	private List<MapObject> exportedObjects;
+	private List<City> exportedCities;
 
 	public SearchSettings(SearchSettings s) {
 		if (s != null) {
@@ -67,6 +71,28 @@ public class SearchSettings {
 	
 	public SearchSettings(List<? extends BinaryMapIndexReader> offlineIndexes) {
 		this.offlineIndexes = Collections.unmodifiableList(offlineIndexes);
+	}
+
+	public List<MapObject> getExportedObjects() {
+		return exportedObjects;
+	}
+
+	public void setExportedObjects(List<MapObject> exportedObjects) {
+		if (this.exportedObjects == null)
+			this.exportedObjects = exportedObjects;
+		else
+			this.exportedObjects.addAll(exportedObjects);
+	}
+
+	public List<City> getExportedCities() {
+		return exportedCities;
+	}
+
+	public void setExportedCities(List<City> exportedCities) {
+		if (this.exportedCities == null)
+			this.exportedCities = exportedCities;
+		else
+			this.exportedCities.addAll(exportedCities);
 	}
 
 	public List<BinaryMapIndexReader> getOfflineIndexes() {

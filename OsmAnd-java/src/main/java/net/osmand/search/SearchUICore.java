@@ -107,7 +107,7 @@ public class SearchUICore {
 
 	public static class SearchResultCollection {
 		private final List<SearchResult> searchResults = new ArrayList<>();
-		private SearchPhrase phrase;
+		private final SearchPhrase phrase;
 		private boolean useLimit;
 		private static final int DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;
 		private static final Integer DOMINATED_CITY_CRITERIA = 5;
@@ -669,6 +669,10 @@ public class SearchUICore {
 			resultCollection.setUseLimit(true);
 		}
 		resultCollection.addSearchResults(rm.getRequestResults(), true, true);
+		if (phrase.getSettings().isExportObjects()) {
+			phrase.getSettings().setExportedCities(rm.getExportedCities());
+			phrase.getSettings().setExportedObjects(rm.getExportedObjects());
+		}
 		return resultCollection;
 	}
 
@@ -1083,87 +1087,94 @@ public class SearchUICore {
 		}
 
 		public JSONObject createTestJSON(SearchResultCollection searchResult) {
-			JSONObject json = new JSONObject();
-
-			Set<Amenity> amenities = new HashSet<>();
-			Set<City> cities;
-			Set<City> matchedCities = new HashSet<>();
-			Set<City> streetCities = new HashSet<>();
-			if (exportedCities != null) {
-				cities = new HashSet<>(exportedCities);
-			} else {
-				cities = new HashSet<>();
-			}
-			Set<Street> streets = new HashSet<>();
-			if (exportedObjects != null) {
-				for (MapObject obj : exportedObjects) {
-					if (obj instanceof Amenity) {
-						amenities.add((Amenity) obj);
-					} else if (obj instanceof Street) {
-						Street street = (Street) obj;
-						streets.add(street);
-						if (street.getCity() != null) {
-							final City city = street.getCity();
-							cities.add(city);
-							streetCities.add(city);
-						}
-					} else if (obj instanceof City) {
-						City city = (City) obj;
-						cities.add(city);
-						matchedCities.add(city);
-					}
-				}
-			}
-			for (City city : cities) {
-				List<Street> cityStreets = city.getStreets();
-				for (Street street : streets) {
-					if (city.equals(street.getCity()) && !cityStreets.contains(street)) {
-						cityStreets.add(street);
-					}
-				}
-			}
-
-			SearchExportSettings exportSettings = phrase.getSettings().getExportSettings();
-			json.put("settings", phrase.getSettings().toJSON());
-			json.put("phrase", phrase.getFullSearchPhrase());
-			if (searchResult.hasSearchResults()) {
-				JSONArray resultsArr = new JSONArray();
-				for (SearchResult r : searchResult.searchResults) {
-					resultsArr.put(r.toString());
-				}
-				json.put("results", resultsArr);
-			}
-			if (amenities.size() > 0) {
-				JSONArray amenitiesArr = new JSONArray();
-				for (Amenity amenity : amenities) {
-					amenitiesArr.put(amenity.toJSON());
-				}
-				json.put("amenities", amenitiesArr);
-			}
-			if (cities.size() > 0) {
-				JSONArray citiesArr = new JSONArray();
-				for (City city : cities) {
-					final JSONObject cityObj = city.toJSON(exportSettings.isExportBuildings());
-					if (exportedCities != null && exportedCities.contains(city)) {
-						if (!exportSettings.isExportEmptyCities()) {
-							continue;
-						}
-						cityObj.put("init", 1);
-					}
-					if (matchedCities.contains(city)) {
-						cityObj.put("matchCity", 1);
-					}
-					if (streetCities.contains(city)) {
-						cityObj.put("matchStreet", 1);
-					}
-					citiesArr.put(cityObj);
-				}
-				json.put("cities", citiesArr);
-			}
-			return json;
+			return SearchUICore.createTestJSON(searchResult, exportedObjects, exportedCities);
 		}
 	}
-	
+
+	public static JSONObject createTestJSON(SearchResultCollection searchResult, List<MapObject> exportedObjects, List<City> exportedCities) {
+		if (searchResult == null)
+			return null;
+		SearchPhrase phrase = searchResult.getPhrase();
+		JSONObject json = new JSONObject();
+
+		Set<Amenity> amenities = new HashSet<>();
+		Set<City> cities;
+		Set<City> matchedCities = new HashSet<>();
+		Set<City> streetCities = new HashSet<>();
+		if (exportedCities != null) {
+			cities = new HashSet<>(exportedCities);
+		} else {
+			cities = new HashSet<>();
+		}
+		Set<Street> streets = new HashSet<>();
+		if (exportedObjects != null) {
+			for (MapObject obj : exportedObjects) {
+				if (obj instanceof Amenity) {
+					amenities.add((Amenity) obj);
+				} else if (obj instanceof Street) {
+					Street street = (Street) obj;
+					streets.add(street);
+					if (street.getCity() != null) {
+						final City city = street.getCity();
+						cities.add(city);
+						streetCities.add(city);
+					}
+				} else if (obj instanceof City) {
+					City city = (City) obj;
+					cities.add(city);
+					matchedCities.add(city);
+				}
+			}
+		}
+		for (City city : cities) {
+			List<Street> cityStreets = city.getStreets();
+			for (Street street : streets) {
+				if (city.equals(street.getCity()) && !cityStreets.contains(street)) {
+					cityStreets.add(street);
+				}
+			}
+		}
+
+		SearchExportSettings exportSettings = phrase.getSettings().getExportSettings();
+		json.put("settings", phrase.getSettings().toJSON());
+		json.put("phrase", phrase.getFullSearchPhrase());
+		if (searchResult.hasSearchResults()) {
+			JSONArray resultsArr = new JSONArray();
+			for (SearchResult r : searchResult.searchResults) {
+				resultsArr.put(r.toString());
+			}
+			json.put("results", resultsArr);
+		}
+		if (amenities.size() > 0) {
+			JSONArray amenitiesArr = new JSONArray();
+			for (Amenity amenity : amenities) {
+				amenitiesArr.put(amenity.toJSON());
+			}
+			json.put("amenities", amenitiesArr);
+		}
+		if (cities.size() > 0) {
+			JSONArray citiesArr = new JSONArray();
+			for (City city : cities) {
+				final JSONObject cityObj = city.toJSON(exportSettings.isExportBuildings());
+				if (exportedCities != null && exportedCities.contains(city)) {
+					if (!exportSettings.isExportEmptyCities()) {
+						continue;
+					}
+					cityObj.put("init", 1);
+				}
+				if (matchedCities.contains(city)) {
+					cityObj.put("matchCity", 1);
+				}
+				if (streetCities.contains(city)) {
+					cityObj.put("matchStreet", 1);
+				}
+				citiesArr.put(cityObj);
+			}
+			json.put("cities", citiesArr);
+		}
+		return json;
+	}
+
 	private enum ResultCompareStep {
 		TOP_VISIBLE,
 		FOUND_WORD_COUNT, // more is better (top)
