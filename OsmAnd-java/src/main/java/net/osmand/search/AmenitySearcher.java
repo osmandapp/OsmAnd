@@ -52,14 +52,12 @@ public class AmenitySearcher {
         private boolean checkOriginName;
         private Map<String, String> tags;
         private String mainAmenityType;
-        private String amenityCategoryKeyName;
 
         public Request(MapObject mapObject) {
             osmId = ObfConstants.getOsmObjectId(mapObject);
             type = ObfConstants.getOsmEntityType(mapObject);
             tags = null;
             mainAmenityType = null;
-            amenityCategoryKeyName = null;
 
             if (mapObject instanceof Amenity amenity) {
                 latLon = mapObject.getLocation();
@@ -67,9 +65,6 @@ public class AmenitySearcher {
                 names = amenity.getOtherNames();
                 names.add(amenity.getName());
                 mainAmenityType = amenity.getSubType();
-                if (amenity.getType() != null) {
-                    amenityCategoryKeyName = amenity.getType().getKeyName();
-                }
             } else if (mapObject instanceof RenderedObject renderedObject) {
                 latLon = renderedObject.getLatLon();
                 names = renderedObject.getOriginalNames();
