@@ -12,10 +12,13 @@ import androidx.car.app.model.ActionStrip;
 import androidx.car.app.model.Distance;
 import androidx.car.app.model.DistanceSpan;
 import androidx.car.app.model.DurationSpan;
-import androidx.car.app.model.ItemList;
+import androidx.car.app.model.Header;
+import androidx.car.app.model.ListTemplate;
+import androidx.car.app.model.Pane;
+import androidx.car.app.model.PaneTemplate;
 import androidx.car.app.model.Row;
 import androidx.car.app.model.Template;
-import androidx.car.app.navigation.model.RoutePreviewNavigationTemplate;
+import androidx.car.app.navigation.model.MapWithContentTemplate;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -193,36 +196,45 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		}
 	}
 
+	private Template createTemplateWithRoute(@NonNull Header header) {
+		Pane.Builder paneBuilder = new Pane.Builder();
+		for (Row row : routeRows) {
+			paneBuilder.addRow(row);
+		}
+		paneBuilder.addAction(new Action.Builder()
+				.setTitle(getApp().getString(R.string.shared_string_control_start))
+				.setOnClickListener(this::onNavigate)
+				.build());
+		PaneTemplate.Builder paneTemplateBuilder = new PaneTemplate.Builder(paneBuilder.build());
+		paneTemplateBuilder.setHeader(header);
+		return paneTemplateBuilder.build();
+	}
+
+	private Template createLoadingStateTemplate(@NonNull Header header) {
+		ListTemplate.Builder builder = new ListTemplate.Builder();
+		builder.setLoading(true).setHeader(header);
+		return builder.build();
+	}
+
 	@NonNull
 	@Override
 	public Template getTemplate() {
-		ItemList.Builder listBuilder = new ItemList.Builder();
-		listBuilder
-				.setOnSelectedListener(this::onRouteSelected)
-				.setOnItemsVisibilityChangedListener(this::onRoutesVisible);
-		for (Row row : routeRows) {
-			listBuilder.addItem(row);
-		}
-		RoutePreviewNavigationTemplate.Builder builder = new RoutePreviewNavigationTemplate.Builder();
-		if (calculating) {
-			builder.setLoading(true);
-		} else {
-			if (!Algorithms.isEmpty(routeRows)) {
-				builder.setLoading(false);
-				builder.setItemList(listBuilder.build());
-			} else {
-				builder.setLoading(true);
+		MapWithContentTemplate.Builder builder = new MapWithContentTemplate.Builder()
+				.setActionStrip(new ActionStrip.Builder().addAction(settingsAction).build());
+		Header header = new Header.Builder()
+				.setTitle(getCarContext().getString(R.string.current_route))
+				.setStartHeaderAction(Action.BACK)
+				.build();
+		Template contentTemplate;
+		if (calculating || Algorithms.isEmpty(routeRows)) {
+			contentTemplate = createLoadingStateTemplate(header);
+			if (!calculating) {
 				finish();
 			}
+		} else {
+			contentTemplate = createTemplateWithRoute(header);
 		}
-		builder.setTitle(getCarContext().getString(R.string.current_route))
-				.setActionStrip(new ActionStrip.Builder().addAction(settingsAction).build())
-				.setHeaderAction(Action.BACK)
-				.setNavigateAction(
-						new Action.Builder()
-								.setTitle(getApp().getString(R.string.shared_string_control_start))
-								.setOnClickListener(this::onNavigate)
-								.build());
+		builder.setContentTemplate(contentTemplate);
 		return builder.build();
 	}
 
