@@ -1,12 +1,12 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import android.graphics.Paint;
 import android.util.Pair;
 
 import androidx.annotation.Nullable;
 
 import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
+import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
 
@@ -30,13 +30,13 @@ public class SharePoiParams {
 	}
 
 	public void addType(@Nullable String type) {
-		if (type != null) {
+		if (!Algorithms.isEmpty(type)) {
 			params.put("type", type);
 		}
 	}
 
 	public void addWikidataId(@Nullable String wikidataId) {
-		if (wikidataId != null) {
+		if (!Algorithms.isEmpty(wikidataId)) {
 			params.put("wikidataId", wikidataId.startsWith("Q") ? wikidataId.substring(1) : wikidataId);
 		}
 	}
