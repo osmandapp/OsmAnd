@@ -94,7 +94,7 @@ public class AmenitySearcher {
 
         public Request(List<String> names, LatLon latLon,
                        String wikiDataId, Long osmId, String subType) {
-            this.type = ObfConstants.getOsmEntityType(new Amenity());
+            this.type = EntityType.NODE;
             this.names = names;
             this.latLon = latLon;
             this.wikidata = wikiDataId;
