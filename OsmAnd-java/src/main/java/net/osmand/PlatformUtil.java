@@ -40,10 +40,10 @@ public class PlatformUtil {
 		return osmandRegions;
 	}
 
-	public static void initDisposableOsmandRegions() throws IOException {
+	public static void initOsmandRegionsAsTempFile() throws IOException {
 		if (osmandRegions == null) {
 			osmandRegions = new OsmandRegions();
-			osmandRegions.initDisposableRegionsFromResources();
+			osmandRegions.prepareRegionsFromResourcesAsTempFile();
 		}
 	}
 

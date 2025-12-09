@@ -116,7 +116,7 @@ public class OsmandRegions {
 		return prepareFile(regions.getAbsolutePath());
 	}
 
-	public void initDisposableRegionsFromResources() throws IOException {
+	public void prepareRegionsFromResourcesAsTempFile() throws IOException {
 		InputStream is = OsmandRegions.class.getResourceAsStream(REGIONS_OCBF);
 		if (is != null) {
 			File regions = File.createTempFile(REGIONS_OCBF, ".tmp");
