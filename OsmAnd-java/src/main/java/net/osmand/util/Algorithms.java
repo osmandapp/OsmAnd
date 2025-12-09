@@ -56,7 +56,8 @@ import java.util.zip.GZIPOutputStream;
 public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
-	
+
+	private static final List<Character> APOSTROPHES = List.of('\'', '’', 'ʼ', '´', '`');
 	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’', 'ʼ', '(', ')', '´', '`'}; // remove () subcities
 	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\'', '\'', ' ', ' ', '\'', '\''};
 
@@ -88,6 +89,16 @@ public class Algorithms {
 		}
 		for (int k = 0; k < CHARS_TO_NORMALIZE_KEY.length; k++) {
 			s = s.replace(CHARS_TO_NORMALIZE_KEY[k], CHARS_TO_NORMALIZE_VALUE[k]);
+		}
+		return s;
+	}
+
+	public static String removeApostrophes(String s) {
+		for (char charToRemove : APOSTROPHES) {
+			int i;
+			while ((i = s.indexOf(charToRemove)) != -1) {
+				s = s.substring(0, i) + s.substring(i + 1);
+			}
 		}
 		return s;
 	}
