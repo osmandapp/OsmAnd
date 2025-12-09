@@ -94,13 +94,14 @@ public class Algorithms {
 	}
 
 	public static String removeApostrophes(String s) {
-		for (char charToRemove : APOSTROPHES) {
-			int i;
-			while ((i = s.indexOf(charToRemove)) != -1) {
-				s = s.substring(0, i) + s.substring(i + 1);
+		StringBuilder sb = new StringBuilder(s.length());
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (!APOSTROPHES.contains(c)) {
+				sb.append(c);
 			}
 		}
-		return s;
+		return sb.toString();
 	}
 
 	/**
