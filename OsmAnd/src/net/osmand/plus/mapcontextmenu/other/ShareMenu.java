@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import static net.osmand.LocationConvert.FORMAT_DEGREES;
 import static net.osmand.plus.mapcontextmenu.other.ShareItem.SAVE_AS_FILE;
+import static net.osmand.plus.mapcontextmenu.other.SharePoiParams.getFormattedShareLatLon;
 import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.*;
 
 import android.app.Activity;
@@ -17,6 +18,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.service.chooser.ChooserAction;
 import android.text.Html;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -170,7 +172,8 @@ public class ShareMenu extends BaseMenuController {
 			geoUrl = parsedPoint.getGeoUriString();
 
 			if (Algorithms.isEmpty(urlLink)) {
-				urlLink = "https://osmand.net/map?pin=" + latitude + "," + longitude + "#" + zoom + "/" + latitude + "/" + longitude;
+				Pair<String, String> formattedLatLon = getFormattedShareLatLon(latLon);
+				urlLink = "https://osmand.net/map?pin=" + formattedLatLon.first + "," + formattedLatLon.second + "#" + zoom + "/" + formattedLatLon.first + "/" + formattedLatLon.second;
 			}
 		} catch (RuntimeException e) {
 			log.error("Failed to convert coordinates", e);

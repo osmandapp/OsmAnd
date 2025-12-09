@@ -1,7 +1,11 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.graphics.Paint;
+import android.util.Pair;
+
 import androidx.annotation.Nullable;
 
+import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
 
 import java.util.HashMap;
@@ -12,7 +16,8 @@ public class SharePoiParams {
 
 	public SharePoiParams(LatLon latLon) {
 		addPin(latLon);
-		frag = 15 + "/" + latLon.getLatitude() + "/" + latLon.getLongitude();
+		Pair<String, String> formattedLatLon = getFormattedShareLatLon(latLon);
+		frag = 15 + "/" + formattedLatLon.first + "/" + formattedLatLon.second;
 	}
 
 	public void addName(@Nullable String name) {
@@ -44,9 +49,19 @@ public class SharePoiParams {
 
 	public void addPin(@Nullable LatLon latLon) {
 		if (latLon != null) {
-			String pin = latLon.getLatitude() + "," + latLon.getLongitude();
+			Pair<String, String> formattedLatLon = getFormattedShareLatLon(latLon);
+			String pin = formattedLatLon.first + "," + formattedLatLon.second;
 			params.put("pin", pin);
 		}
+	}
+
+	public static Pair<String, String> getFormattedShareLatLon(LatLon latLon){
+		String formattedLat = LocationConvert.convertLatitude(latLon.getLatitude(), LocationConvert.FORMAT_DEGREES, false);
+		String formattedlon = LocationConvert.convertLongitude(latLon.getLongitude(), LocationConvert.FORMAT_DEGREES, false);
+		formattedLat = formattedLat.substring(0, formattedLat.length() - 1);
+		formattedlon = formattedlon.substring(0, formattedlon.length() - 1);
+
+		return new Pair<>(formattedLat, formattedlon);
 	}
 
 	public HashMap<String, String> getParams() {
