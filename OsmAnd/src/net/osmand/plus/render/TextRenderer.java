@@ -275,7 +275,7 @@ public class TextRenderer {
 	public void drawAutoDownScaleText(Canvas cv, TextDrawInfo text) {
 		Paint tmpPaint = new Paint(paintText);
 		float density = app.getOsmandMap().getMapView().getDensity();
-		while (tmpPaint.measureText(text.text) > cv.getWidth() - 6 * density) {
+		while (tmpPaint.measureText(text.text) > cv.getWidth() - 6 * density && tmpPaint.getTextSize() > 1) {
 			tmpPaint.setTextSize(tmpPaint.getTextSize() - 1);
 		}
 		Rect textBounds = new Rect();
