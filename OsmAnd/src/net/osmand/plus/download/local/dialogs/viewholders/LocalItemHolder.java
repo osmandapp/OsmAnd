@@ -64,9 +64,10 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 		AndroidUtils.setBackground(itemView.findViewById(R.id.selectable_list_item), drawable);
 	}
 
-	public void bindView(@NonNull BaseLocalItem item, boolean selectionMode, boolean lastItem, boolean hideDivider) {
+	public void bindView(@NonNull BaseLocalItem item, boolean selectionMode,
+	                     boolean observeCountryMode, boolean lastItem, boolean hideDivider) {
 		Context context = itemView.getContext();
-		title.setText(item.getName(context));
+		title.setText(item.getName(context, !observeCountryMode));
 		description.setText(item.getDescription(context));
 		icon.setImageDrawable(getIcon(item));
 

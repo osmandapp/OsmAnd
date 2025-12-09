@@ -31,6 +31,7 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private final LocalItemListener listener;
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
+	private boolean observeCountryMode;
 	private boolean selectionMode;
 
 	public LocalItemsAdapter(@NonNull Context context, @NonNull LocalItemListener listener, boolean nightMode) {
@@ -48,6 +49,10 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public void setSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
+	}
+
+	public void setObserveCountryMode(boolean observeCountryMode) {
+		this.observeCountryMode = observeCountryMode;
 	}
 
 	@NonNull
@@ -83,7 +88,7 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			BaseLocalItem item = (BaseLocalItem) items.get(position);
 			boolean lastItem = position == getItemCount() - 1;
 			boolean hideDivider = !lastItem && items.get(position + 1) instanceof HeaderGroup;
-			viewHolder.bindView(item, selectionMode, lastItem, hideDivider);
+			viewHolder.bindView(item, selectionMode, observeCountryMode, lastItem, hideDivider);
 
 		} else if (holder instanceof HeaderViewHolder viewHolder) {
 			HeaderGroup headerGroup = (HeaderGroup) items.get(position);

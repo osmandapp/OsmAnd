@@ -222,7 +222,8 @@ public class LocalItemUtils {
 	}
 
 	@NonNull
-	public static CharSequence getItemName(@NonNull Context context, @NonNull LocalItem item) {
+	public static CharSequence getItemName(@NonNull Context context, @NonNull LocalItem item,
+	                                       boolean includingParent) {
 		LocalItemType type = item.getType();
 		String fileName = item.getFileName();
 		Object attachedObject = item.getAttachedObject();
@@ -268,7 +269,7 @@ public class LocalItemUtils {
 		boolean reversed = !getSortModePref(app, type).get().isCountryMode();
 
 		String divider = ", ";
-		String name = FileNameTranslationHelper.getFileName(context, regions, fileName, divider, true, reversed);
+		String name = FileNameTranslationHelper.getFileName(context, regions, fileName, divider, includingParent, reversed);
 		if (!Algorithms.isEmpty(name)) {
 			int index = name.indexOf(divider);
 			if (index != -1) {

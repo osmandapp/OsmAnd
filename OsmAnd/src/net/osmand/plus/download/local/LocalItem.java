@@ -101,8 +101,15 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	}
 
 	@NonNull
+	@Override
 	public CharSequence getName(@NonNull Context context) {
-		return LocalItemUtils.getItemName(context, this);
+		return getName(context, true);
+	}
+
+	@NonNull
+	@Override
+	public CharSequence getName(@NonNull Context context, boolean includeParent) {
+		return LocalItemUtils.getItemName(context, this, includeParent);
 	}
 
 	@NonNull

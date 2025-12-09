@@ -188,6 +188,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 			addMemoryInfo(items);
 		}
 		adapter.setSelectionMode(selectionMode);
+		adapter.setObserveCountryMode(selectedCountry != null);
 		adapter.setItems(items);
 	}
 
