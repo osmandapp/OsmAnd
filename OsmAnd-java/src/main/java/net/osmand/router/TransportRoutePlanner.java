@@ -316,14 +316,6 @@ public class TransportRoutePlanner {
 					System.out.printf("ptLimitResultsByNumber (%d) reached\n", limitByNumber);
 					break;
 				}
-				int limitByPercent = ctx.cfg.ptLimitResultsByPercent;
-				if (!lst.isEmpty() && limitByPercent > 0) {
-					double timeLimit = lst.get(0).getRouteTime() * (1.0 + (double) limitByPercent / 100.0);
-					if (route.getRouteTime() > timeLimit) {
-						System.out.printf("ptLimitResultsByPercent (%d%%) reached\n", limitByPercent);
-						break;
-					}
-				}
 				System.out.println(route);
 				lst.add(route);
 			}
