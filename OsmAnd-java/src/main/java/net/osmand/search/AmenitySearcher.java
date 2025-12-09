@@ -92,6 +92,16 @@ public class AmenitySearcher {
             this.checkOriginName = checkOriginName;
         }
 
+        public Request(List<String> names, LatLon latLon,
+                       String wikiDataId, Long osmId, String subType) {
+            this.type = ObfConstants.getOsmEntityType(new Amenity());
+            this.names = names;
+            this.latLon = latLon;
+            this.wikidata = wikiDataId;
+            this.osmId = osmId;
+            this.mainAmenityType = subType;
+        }
+
         public String getMainAmenityType() {
             return mainAmenityType;
         }
