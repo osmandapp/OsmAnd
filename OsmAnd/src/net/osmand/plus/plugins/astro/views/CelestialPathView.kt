@@ -298,7 +298,7 @@ class CelestialPathView @JvmOverloads constructor(
 		super.onDraw(canvas)
 		val m = cachedModel ?: return
 
-		canvas.drawColor(bgPaint.color)
+		//canvas.drawColor(bgPaint.color)
 		updateMatrix()
 
 		canvas.drawText(context.getString(R.string.ltr_or_rtl_combine_via_dash,

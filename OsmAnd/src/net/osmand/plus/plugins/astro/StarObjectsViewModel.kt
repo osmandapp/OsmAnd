@@ -14,7 +14,7 @@ import net.osmand.plus.plugins.astro.views.SkyObject
 import java.util.Calendar
 import java.util.TimeZone
 
-class StarObjectsViewModel(
+open class StarObjectsViewModel(
 	private val app: Application,
 	private val settings: StarWatcherSettings,
 	val viewType: StarObjectsViewType
@@ -78,15 +78,32 @@ class StarObjectsViewModel(
 		val now = Calendar.getInstance(TimeZone.getDefault())
 		updateTime(now)
 	}
+}
+
+class StarMapObjectsViewModel(app: Application, settings: StarWatcherSettings)
+	: StarObjectsViewModel(app, settings, StarObjectsViewType.MAP) {
 
 	class Factory(
 		private val application: Application,
 		private val settings: StarWatcherSettings,
-		private val viewType: StarObjectsViewType
 	) : ViewModelProvider.Factory {
 		@Suppress("UNCHECKED_CAST")
 		override fun <T : ViewModel> create(modelClass: Class<T>): T {
-			return StarObjectsViewModel(application, settings, viewType) as T
+			return StarObjectsViewModel(application, settings, StarObjectsViewType.MAP) as T
+		}
+	}
+}
+
+class StarChartObjectsViewModel(app: Application, settings: StarWatcherSettings)
+	: StarObjectsViewModel(app, settings, StarObjectsViewType.CHART) {
+
+	class Factory(
+		private val application: Application,
+		private val settings: StarWatcherSettings,
+	) : ViewModelProvider.Factory {
+		@Suppress("UNCHECKED_CAST")
+		override fun <T : ViewModel> create(modelClass: Class<T>): T {
+			return StarObjectsViewModel(application, settings, StarObjectsViewType.CHART) as T
 		}
 	}
 }
