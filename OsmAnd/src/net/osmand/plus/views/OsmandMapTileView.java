@@ -313,16 +313,40 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void updateDisplayMetrics(DisplayMetrics dm, int width, int height) {
 		this.dm = dm;
-		LatLon ll = settings.getLastKnownMapLocation();
-		currentViewport = new RotatedTileBoxBuilder()
-				.setLocation(ll.getLatitude(), ll.getLongitude())
-				.setZoom(settings.getLastKnownMapZoom())
-				.setZoomFloatPart(settings.getLastKnownMapZoomFloatPart())
-				.setRotate(settings.getLastKnownMapRotation())
-				.setPixelDimensions(width, height)
-				.build();
-		currentViewport.setDensity(dm.density);
+		currentViewport = buildViewportForCurrentState(width, height, dm.density);
 		setMapDensityImpl(getSettingsMapDensity());
+	}
+
+	@NonNull
+	private RotatedTileBox buildViewportForCurrentState(int width, int height, float density) {
+		double lat, lon;
+		int zoom;
+		double zoomFloatPart;
+		float rotate;
+
+		if (currentViewport == null) {
+			LatLon location = settings.getLastKnownMapLocation();
+			lat = location.getLatitude();
+			lon = location.getLongitude();
+			zoom = settings.getLastKnownMapZoom();
+			zoomFloatPart = settings.getLastKnownMapZoomFloatPart();
+			rotate = settings.getLastKnownMapRotation();
+		} else {
+			lat = currentViewport.getLatitude();
+			lon = currentViewport.getLongitude();
+			zoom = currentViewport.getZoom();
+			zoomFloatPart = currentViewport.getZoomFloatPart();
+			rotate = currentViewport.getRotate();
+		}
+
+		return new RotatedTileBoxBuilder()
+				.setLocation(lat, lon)
+				.setZoom(zoom)
+				.setZoomFloatPart(zoomFloatPart)
+				.setRotate(rotate)
+				.setPixelDimensions(width, height)
+				.density(density)
+				.build();
 	}
 
 	private float getCurrentDensity() {
@@ -1591,7 +1615,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				// Shift map
 				mapRenderer.setTarget(new PointI(targetX, targetY));
 			}
-		}
+ 		}
 		currentViewport.setZoomAndAnimation(zoom, zoomAnimation, zoomFloatPart);
 		setElevationAngle(normalizeElevationAngle(this.elevationAngle));
 	}
@@ -2498,6 +2522,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
+    public void keepElevationAngle(float angle) {
+        angle = normalizeElevationAngle(angle);
+        this.elevationAngle = angle;
+    }
+
 	public void setElevationAngle(float angle) {
 		angle = normalizeElevationAngle(angle);
 		this.elevationAngle = angle;
@@ -2608,8 +2637,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					scrollDistanceY = distanceY;
 					PointI touchPoint = new PointI((int) (e2.getX() + scrollDistanceX), (int) (e2.getY() + scrollDistanceY));
 					mapRenderer.setMapTarget(touchPoint, new PointI(firstTouchLocationX, firstTouchLocationY));
-					PointI target31 = mapRenderer.getState().getTarget31();
-					currentViewport.setLatLonCenter(MapUtils.get31LatitudeY(target31.getY()), MapUtils.get31LongitudeX(target31.getX()));
+					LatLon latLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, currentViewport, targetPixelX, targetPixelY);
+					currentViewport.setLatLonCenter(latLon.getLatitude(), latLon.getLongitude());
 					refreshMap();
 					notifyLocationListeners(getLatitude(), getLongitude());
 				} else

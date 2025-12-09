@@ -111,7 +111,6 @@ public class GpxDirSettingsItem extends SettingsItem {
 
 	@Override
 	public void delete() {
-		super.delete();
 		gpxDbHelper.remove(dirItem);
 	}
 

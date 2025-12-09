@@ -47,7 +47,7 @@
 			android:textColor="?attr/active_color_basic"
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:layout_gravity="center_vertical"
-			android:text="@string/shared_sting_all_colors"/>
+			android:text="@string/shared_string_all_colors"/>
 
 	</FrameLayout>
 

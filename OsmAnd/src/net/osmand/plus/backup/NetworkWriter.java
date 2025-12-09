@@ -93,7 +93,8 @@ public class NetworkWriter extends AbstractWriter {
 					Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
 					outputStream.flush();
 				};
-				return backupHelper.uploadFile(fileName, item.getType().name(), item.getLastModifiedTime(),
+				long clienttime = Math.max(item.getLastModifiedTime(), item.getInfoModifiedTime());
+				return backupHelper.uploadFile(fileName, item.getType().name(), clienttime,
 						streamWriter, getUploadFileListener(item), autoSync);
 			} else {
 				return null;

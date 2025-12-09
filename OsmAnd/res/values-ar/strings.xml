@@ -5271,7 +5271,7 @@
     <string name="battery_optimization_desc">يمكن أن يؤدي تحسين البطارية في أندرويد إلى حدوث فجوات وعدم دقة في المسارات المسجلة.
 \n
 \nإذا واجهت أيا من هذه المشكلات، فيمكنك محاولة تغيير استخدام البطارية إلى \'غير مقيد.\'</string>
-    <string name="shared_sting_all_colors">كل الألوان</string>
+    <string name="shared_string_all_colors">كل الألوان</string>
     <string name="auto_zoom_smooth">سلس</string>
     <string name="auto_zoom_discrete">منفصلة</string>
     <string name="routing_type">نوع التوجيه</string>

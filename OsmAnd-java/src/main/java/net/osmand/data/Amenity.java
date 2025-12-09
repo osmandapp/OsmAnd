@@ -732,7 +732,8 @@ public class Amenity extends MapObject {
 		if (subType == null) {
 			return false;
 		} else {
-			boolean hasRouteTrackSubtype = subType.startsWith(ROUTES_PREFIX) || subType.equals(ROUTE_TRACK);
+			boolean hasRouteTrackSubtype = subType.startsWith(ROUTES_PREFIX) || subType.contains(";" + ROUTES_PREFIX)
+					|| subType.equals(ROUTE_TRACK);
 			boolean hasGeometry = additionalInfo != null && additionalInfo.containsKey(ROUTE_BBOX_RADIUS);
 			return hasRouteTrackSubtype && hasGeometry && !Algorithms.isEmpty(getRouteId());
 		}

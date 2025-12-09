@@ -43,6 +43,7 @@ public class TransportRoutePlanner {
 	private final static Log LOG = PlatformUtil.getLog(TransportRoutePlanner.class);
 
 	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException, InterruptedException {
+		long nonce = 0;
 		ctx.startCalcTime = System.currentTimeMillis();
 		double totalDistance = MapUtils.getDistance(start, end);
 		List<TransportRouteSegment> startStops = ctx.getTransportStops(start);
@@ -68,6 +69,7 @@ public class TransportRoutePlanner {
 					System.out.println(r.distFromStart + " " + id + " " + r);
 				}
 			}
+			r.nonce = nonce++;
 			queue.add(r);
 		}
 
@@ -166,6 +168,7 @@ public class TransportRoutePlanner {
 						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed + 
 								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType());
 						nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
+						nextSegment.nonce = nonce++;
 						if (ctx.cfg.useSchedule) {
 							int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
 							if (tm >= nextSegment.distFromStart) {
@@ -411,7 +414,8 @@ public class TransportRoutePlanner {
 
 		@Override
 		public int compare(TransportRouteSegment o1, TransportRouteSegment o2) {
-			return Double.compare(o1.distFromStart, o2.distFromStart);
+			int cmpDist = Double.compare(o1.distFromStart, o2.distFromStart);
+			return cmpDist == 0 ? Long.compare(o1.getId() + o1.nonce, o2.getId() + o2.nonce) : cmpDist;
 		}
 	}
 	
@@ -598,7 +602,8 @@ public class TransportRoutePlanner {
 	}
 	
 	public static class TransportRouteSegment {
-		
+
+		long nonce;
 		final int segStart;
 		final TransportRoute road;
 		final int departureTime;

@@ -88,9 +88,8 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	private Drawable getIcon(@NonNull BaseLocalItem item) {
 		int iconId = getIconId(item);
 		LocalItemType type = item.getType();
-		if (item instanceof LocalItem) {
-			LocalItem localItem = (LocalItem) item;
-			if (localItem.isDeleted()) {
+		if (item instanceof LocalItem localItem) {
+			if (localItem.isDeprecated()) {
 				return uiUtilities.getThemedIcon(iconId);
 			} else if (type.isDownloadType() && !localItem.isBackuped(app)) {
 				boolean shouldUpdate = listener.itemUpdateAvailable(localItem);
@@ -103,8 +102,7 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	@DrawableRes
 	private int getIconId(@NonNull BaseLocalItem item) {
 		LocalItemType type = item.getType();
-		if (item instanceof LocalItem) {
-			LocalItem localItem = (LocalItem) item;
+		if (item instanceof LocalItem localItem) {
 			if (type == TERRAIN_DATA && SrtmDownloadItem.isSrtmFile(localItem.getFileName())) {
 				return R.drawable.ic_plugin_srtm;
 			}

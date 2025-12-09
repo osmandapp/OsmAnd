@@ -99,12 +99,14 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 	}
 
 	public void saveChanges(@NonNull FragmentActivity activity, boolean updateExisting) {
-		colorCardController.getColorsPaletteController().refreshLastUsedTime();
-
+		boolean colorChanged = !Algorithms.objectEquals(dirItem.getParameter(COLOR), data.getParameter(COLOR));
 		boolean typeChanged = !Algorithms.objectEquals(dirItem.getParameter(SPLIT_TYPE), data.getParameter(SPLIT_TYPE));
 		boolean intervalChanged = !Algorithms.objectEquals(dirItem.getParameter(SPLIT_INTERVAL), data.getParameter(SPLIT_INTERVAL));
 		boolean splitChanged = typeChanged || intervalChanged;
 
+		if (colorChanged) {
+			colorCardController.getColorsPaletteController().refreshLastUsedTime();
+		}
 		for (GpxParameter parameter : GpxParameter.Companion.getAppearanceParameters()) {
 			dirItem.setParameter(parameter, data.getParameter(parameter));
 		}

@@ -275,7 +275,7 @@ public class OsmandApplication extends MultiDexApplication {
 		// Initialize shared library
 		net.osmand.shared.util.PlatformUtil.INSTANCE.initialize(this, new OsmAndContextImpl(this));
 
-		localeHelper.checkPreferredLocale();
+		localeHelper.onCreateApplication();
 		appInitializer.onCreateApplication();
 		osmandMap.getMapLayers().createLayers(osmandMap.getMapView());
 		startApplication();
@@ -546,8 +546,9 @@ public class OsmandApplication extends MultiDexApplication {
 
 			OsmandMap osmandMap = getOsmandMap();
 			if (osmandMap != null) {
-				osmandMap.getMapView().updateDisplayMetrics(displayMetrics, displayMetrics.widthPixels,
-						displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this));
+				int width = displayMetrics.widthPixels;
+				int height = displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this);
+				osmandMap.getMapView().updateDisplayMetrics(displayMetrics, width, height);
 			}
 		}
 

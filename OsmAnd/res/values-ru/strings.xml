@@ -742,7 +742,7 @@
     <string name="search_nearby">Поиск рядом</string>
     <string name="map_orientation_default">По умолчанию</string>
     <string name="map_orientation_portrait">Портрет</string>
-    <string name="map_orientation_landscape">Ландшафт</string>
+    <string name="map_orientation_landscape">Пейзаж</string>
     <string name="map_screen_orientation">Ориентация экрана</string>
     <string name="map_screen_orientation_descr">Выберите ориентацию экрана.</string>
     <string name="opening_hours_not_supported">Невозможно изменить формат часов работы.</string>
@@ -5213,7 +5213,7 @@
     <string name="java_safe">Java (безопасно)</string>
     <string name="gpx_approximation">Аппроксимация gpx</string>
     <string name="routing_type">Тип маршрутизации</string>
-    <string name="shared_sting_all_colors">Все цвета</string>
+    <string name="shared_string_all_colors">Все цвета</string>
     <string name="routing_type_a_star_2_phase">A* 2-фазный</string>
     <string name="rendering_attr_padusDisplayMode_name">Режим отображения общественных земель</string>
     <string name="rendering_attr_padusDisplayMode_description">По типу доступа или имени менеджера</string>
@@ -5813,4 +5813,26 @@
     <string name="average_elevation">Средняя высота</string>
     <string name="ascent">Подъём</string>
     <string name="descent">Спуск</string>
+    <string name="is_parking_time_limited">Ограничено ли время парковки?</string>
+    <string name="routing_attr_weightrating_name">Максимальный вес при полной загрузке</string>
+    <string name="routing_attr_maxaxleload_name">Максимальная нагрузка на ось</string>
+    <string name="deleted_maps_warning">Вы собираетесь удалить %d элементов.\nПродолжить?</string>
+    <string name="deleted_maps_prompt">Данные карты больше не поддерживаются и заменены более мелкими регионами. Пожалуйста, удалите их и скачайте новые версии.</string>
+    <string name="unsupported_maps">Неподдерживаемые карты</string>
+    <string name="shared_string_price">Стоимость</string>
+    <string name="obd_alt_battery_voltage">Напряжение адаптера</string>
+    <string name="map_orientations_choose_description">Оставьте поле пустым, чтобы переключаться между всеми доступными режимами, или добавьте только предпочитаемые вами режимы.</string>
+    <string name="map_orientations">Ориентации карты</string>
+    <string name="write_location_provider_description">Сохраненять поставщика местоположения для каждой точки трека во время записи</string>
+    <string name="write_location_provider">Запись поставщика местоположения</string>
+    <string name="map_orientation_portrait_inverted">Портрет (перевернутый)</string>
+    <string name="map_orientation_landscape_inverted">Пейзаж (перевернутый)</string>
+    <string name="reverse_mode_calculate_route">Рассчитать маршрут</string>
+    <string name="reverse_mode_calculate_route_desc">Рассчитать новый, оптимизированный маршрут до стартовой точки.</string>
+    <string name="reverse_mode_original_track">Оригинальный трек</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="deleting_history">Удаление истории…</string>
+    <string name="next_turn_information">Информация о следующем повороте</string>
+    <string name="failed_to_connect">Не удалось подключиться к %1s</string>
 </resources>

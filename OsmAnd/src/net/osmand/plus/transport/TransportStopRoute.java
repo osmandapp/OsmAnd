@@ -98,11 +98,12 @@ public class TransportStopRoute {
 	}
 
 	public int getRouteColor(OsmandApplication ctx, boolean nightMode) {
-		Integer cachedColor = null;
-		if (route != null) {
+		cachedColor = getColor(ctx, nightMode);
+		int defaultLineColor = ctx.getColor(R.color.transport_route_line);
+		if (route != null && cachedColor == defaultLineColor) {
 			Pair<String, Boolean> key = new Pair<>(route.getType(), nightMode);
-			cachedColor = cachedRouteColors.get(key);
-			if (cachedColor == null) {
+			Integer cachedRouteColor = cachedRouteColors.get(key);
+			if (cachedRouteColor == null) {
 				RenderingRulesStorage rrs = ctx.getRendererRegistry().getCurrentSelectedRenderer();
 				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
@@ -110,12 +111,11 @@ public class TransportStopRoute {
 				req.setStringFilter(rrs.PROPS.R_VALUE, route.getType());
 				if (req.searchRenderingAttribute("publicTransportLine")) {
 					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
+					cachedRouteColors.put(key, cachedColor);
 				}
-				cachedRouteColors.put(key, cachedColor);
+			} else {
+				cachedColor = cachedRouteColor;
 			}
-		}
-		if (cachedColor == null || cachedColor == 0) {
-			cachedColor = getColor(ctx, nightMode);
 		}
 		return cachedColor;
 	}
