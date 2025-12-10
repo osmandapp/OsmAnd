@@ -105,7 +105,7 @@ public class Algorithms {
 			char c = s.charAt(i);
 			boolean apostroph = false;
 			for (char d : APOSTROPHES) {
-				if (d != c) {
+				if (d == c) {
 					apostroph = true;
 					break;
 				}
