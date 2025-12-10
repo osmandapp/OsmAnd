@@ -12,7 +12,6 @@ import static net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapsDbHelper.OPE
 import static net.osmand.plus.plugins.osmedit.helpers.OsmBugsDbHelper.OSMBUGS_DB_NAME;
 import static net.osmand.plus.settings.backend.OsmandSettings.CUSTOM_SHARED_PREFERENCES_PREFIX;
 import static net.osmand.plus.settings.backend.OsmandSettings.SHARED_PREFERENCES_NAME;
-import static java.text.DateFormat.SHORT;
 
 import android.content.Context;
 
@@ -50,7 +49,6 @@ import net.osmand.util.CollectionUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -263,7 +261,7 @@ public class LocalItemUtils {
 				return RendererRegistry.getRendererName(context, (String) attachedObject);
 			}
 		} else if (type == COLOR_DATA) {
-			return ColorsPaletteUtils.getPaletteName(item.getFile());
+			return ColorsPaletteUtils.getPaletteName(context, item.getFile());
 		}
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		OsmandRegions regions = app.getResourceManager().getOsmandRegions();

@@ -12,7 +12,6 @@ import androidx.car.app.model.Row
 import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.MapWithContentTemplate
 import androidx.core.graphics.drawable.IconCompat
-import net.osmand.data.LatLon
 import net.osmand.plus.R
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin
@@ -22,6 +21,7 @@ import net.osmand.search.SearchUICore
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchCoreFactory
 import net.osmand.search.core.SearchResult
+import java.util.Calendar
 
 class DestinationReachedScreen(carContext: CarContext) : BaseAndroidAutoScreen(carContext) {
 
@@ -70,33 +70,15 @@ class DestinationReachedScreen(carContext: CarContext) : BaseAndroidAutoScreen(c
 					.setOnClickListener {
 						val location = app.locationProvider.lastKnownLocation
 						location?.let {
-							screenManager.push(
-								ConfirmScreen(
-									carContext,
-									app.getString(R.string.quick_action_parking_place),
-									app.getString(R.string.is_parking_time_limited),
-									onConfirm = {
-										plugin.setParkingPosition(it.latitude, it.longitude)
-										plugin.setParkingType(true)
-										app.osmandMap.mapView.refreshMap()
-										app.favoritesHelper.setParkingPoint(
-											plugin.parkingPosition,
-											null,
-											plugin.parkingTime,
-											plugin.isParkingEventAdded);
-									},
-									onCancel = {
-										plugin.setParkingPosition(it.latitude, it.longitude)
-										plugin.setParkingType(false)
-										app.osmandMap.mapView.refreshMap()
-										app.favoritesHelper.setParkingPoint(
-											plugin.parkingPosition,
-											null,
-											plugin.parkingTime,
-											plugin.isParkingEventAdded);
-									}
-								)
-							)
+							plugin.setParkingPosition(it.latitude, it.longitude)
+							plugin.setParkingType(false)
+							plugin.setParkingPickupDate(Calendar.getInstance().getTimeInMillis())
+							app.osmandMap.mapView.refreshMap()
+							app.favoritesHelper.setParkingPoint(
+								plugin.parkingPosition,
+								null,
+								plugin.parkingTime,
+								false)
 						}
 						finish()
 					}
@@ -118,7 +100,7 @@ class DestinationReachedScreen(carContext: CarContext) : BaseAndroidAutoScreen(c
 					app.carNavigationSession?.let { session ->
 						val helper: PoiFiltersHelper = app.poiFilters
 						val parkingFilter = helper.getFilterById(PoiUIFilter.STD_PREFIX + "parking")
-						val objectLocalizedName = parkingFilter.getName()
+						val objectLocalizedName = parkingFilter.name
 						val searchUICore: SearchUICore = app.searchUICore.core
 						val phrase = searchUICore.resetPhrase()
 						val sr = SearchResult(phrase)

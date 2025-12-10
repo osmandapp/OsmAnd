@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimeters</string>
+    <string name="bicycle_width_limit_description">Provide your bicycle width to avoid narrow cycle paths.</string>
+    <string name="copy_link">Copy link</string>
     <string name="is_parking_time_limited">Is parking time limited?</string>
     <string name="efficient_grid">Efficient grid</string>
     <string name="slots">Slots</string>
@@ -100,7 +104,7 @@
 	<string name="description_subscription_fastspring">You can manage or cancel your subscription through the FastSpring account management portal.</string>
 	<string name="manage_purchases">Manage purchases</string>
     <string name="failed_to_connect">Failed to connect to %1s</string>
-    <string name="shared_sting_osm_link">OSM link</string>
+    <string name="shared_string_osm_link">OSM link</string>
 	<string name="deleting">Deleting…</string>
     <string name="release_5_1">
         • Added support for web and cross-platform purchases\n\n
@@ -765,7 +769,7 @@ You will be able to pair this scanner again at any time.</string>
         • Unified UI for track selection\n\n
         • OpenStreetMap login switched to OAuth 2.0\n\n
     </string>
-    <string name="shared_sting_all_colors">All colors</string>
+    <string name="shared_string_all_colors">All colors</string>
     <string name="routing_type_a_star_2_phase">A* 2-phase</string>
     <string name="routing_type_a_star_classic">A* classic</string>
     <string name="auto_zoom_smooth">Smooth</string>

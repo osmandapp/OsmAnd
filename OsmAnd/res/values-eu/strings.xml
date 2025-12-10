@@ -5523,7 +5523,7 @@
     <string name="speedometer_description">Zure uneko abiadura erakusten du GPS bidez jakinarazi bezala</string>
     <string name="shared_string_speedometer">Abiadura-neurgailua</string>
     <string name="help_article_setup_a_route_name">Zehaztu ibilbide bat</string>
-    <string name="shared_sting_all_colors">Kolore guztiak</string>
+    <string name="shared_string_all_colors">Kolore guztiak</string>
     <string name="routing_type_a_star_2_phase">A* 2 fasea</string>
     <string name="routing_type_a_star_classic">A* klasikoa</string>
     <string name="java_safe">Java (segurua)</string>
@@ -5981,7 +5981,7 @@
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="n_a">N/A</string>
     <string name="description_subscription_fastspring">Zure harpidetza kudeatu edo utzi ahal duzu Fastprig kontuen kudeaketarako atariaren bidez.</string>
-    <string name="shared_sting_osm_link">OSM esteka</string>
+    <string name="shared_string_osm_link">OSM esteka</string>
     <string name="threads_allocated_for_rendering">Errendatzeko esleitutako hariak</string>
     <string name="threads_allocated_for_rendering_desc">Harien esleipen txikiagoak mapa errendatzea bizkortu dezake kasu batzuetan.</string>
     <string name="hmd_promo">HMD eskaintza %1$s hilabetez</string>

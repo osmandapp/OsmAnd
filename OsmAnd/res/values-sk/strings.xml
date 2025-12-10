@@ -5210,7 +5210,7 @@
     <string name="rendering_attr_padusDisplayMode_name">Režim zobrazovania verejných pozemkov</string>
     <string name="download_cloud_versions">Stiahnuť verzie z cloudu</string>
     <string name="distance_during_navigation">Vzdialenosť počas navigácie</string>
-    <string name="shared_sting_all_colors">Všetky farby</string>
+    <string name="shared_string_all_colors">Všetky farby</string>
     <string name="routing_type_a_star_2_phase">A* 2-fázový</string>
     <string name="routing_type_a_star_classic">A* klasický</string>
     <string name="auto_zoom_smooth">Plynulé</string>
@@ -5856,7 +5856,7 @@
     <string name="add_to_favorites">Pridať k obľúbeným</string>
     <string name="max_weight_at_full_load_description">Zadajte maximálnu hmotnosť vášho vozidla pri plnom zaťažení, aby ste sa mohli vyhnúť cestám a mostom s obmedzenou nosnosťou.</string>
     <string name="max_axle_load_description">Zadajte maximálne zaťaženie na nápravu vášho vozidla, aby ste sa mohli vyhnúť cestám a mostom s obmedzenou nosnosťou.</string>
-    <string name="shared_sting_osm_link">Odkaz OSM</string>
+    <string name="shared_string_osm_link">Odkaz OSM</string>
     <string name="show_local_names">Zobraziť lokálne názvy</string>
     <string name="lang_en_barebones">Anglicky (jednoduchý)</string>
     <string name="liter_single">Liter</string>
@@ -5906,4 +5906,5 @@
     <string name="unsupported_maps">Nepodporované mapy</string>
     <string name="routing_attr_weightrating_name">Maximálna hmotnosť pri plnom zaťažení</string>
     <string name="routing_attr_maxaxleload_name">Maximálne zaťaženie na nápravu</string>
+    <string name="is_parking_time_limited">Je parkovanie časovo obmedzené?</string>
 </resources>

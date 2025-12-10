@@ -4916,7 +4916,7 @@
     <string name="gpx_approximation">שערוך GPX</string>
     <string name="rendering_attr_padusDisplayMode_description">לפי סוג גישה או שם מנהל</string>
     <string name="lang_ta_in">טמילית (הודו)</string>
-    <string name="shared_sting_all_colors">כל הצבעים</string>
+    <string name="shared_string_all_colors">כל הצבעים</string>
     <string name="auto_zoom_smooth">חלק</string>
     <string name="auto_zoom">תקריב אוטומטי</string>
     <string name="precise">מדויק</string>
@@ -5000,4 +5000,7 @@
     <string name="deleting_history">ההיסטוריה נמחקת…</string>
     <string name="rendering_attr_pisteRoutes_name">מדרוני ומסלולי סקי</string>
     <string name="help_article_navigation_routing_ski_routing_name">מדרוני ומסלולי סקי</string>
+    <string name="enable_3d_objects_description">הצגת עצמי מבנים בתלת־ממד במפה</string>
+    <string name="show_debug_tile">הצגת פרטי אריח</string>
+    <string name="show_rasterization_debug_tile">הצגת פרטי עיבוד תצוגה של אריח</string>
 </resources>

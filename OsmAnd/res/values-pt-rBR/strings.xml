@@ -5518,7 +5518,7 @@
     <string name="custom_buttons">Botões personalizados</string>
     <string name="shared_string_additional">Adicional</string>
     <string name="default_buttons">Botões padrões</string>
-    <string name="shared_sting_all_colors">Todas as cores</string>
+    <string name="shared_string_all_colors">Todas as cores</string>
     <string name="shared_string_activity">Atividade</string>
     <string name="shared_string_keywords">Palavras-chave</string>
     <string name="battery_optimization_banner_content">A otimização da bateria do Android pode causar lacunas e imprecisões nas trilhas gravadas.</string>
@@ -6202,7 +6202,7 @@
     <string name="max_weight_at_full_load_description">Informe o peso máximo do seu veículo com carga total para evitar estradas e pontes com limites de peso.</string>
     <string name="max_axle_load_description">Forneça a carga máxima por eixo do seu veículo para evitar estradas e pontes com limites de peso.</string>
     <string name="view_on_phone">Ver no celular</string>
-    <string name="shared_sting_osm_link">Link do OSM</string>
+    <string name="shared_string_osm_link">Link do OSM</string>
     <string name="marine_renderer">Marinha</string>
     <string name="marine_render_descr">Estilo de navegação marítima altamente personalizável. Baseado no estilo náutico. Funciona melhor com o mapa Nautical World Seamarks e mapas de profundidade opcionais.</string>
     <string name="rendering_attr_hideAreas_name">Áreas de profundidade</string>

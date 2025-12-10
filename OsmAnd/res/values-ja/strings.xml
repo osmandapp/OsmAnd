@@ -5557,7 +5557,7 @@ POIの更新は利用できません</string>
     <string name="change_default_tracks_appearance_confirmation">フォルダ内の既存の経路に変更を適用しますか、それとも新しい経路のみに適用しますか？</string>
     <string name="apply_only_to_new">新規のみ適用</string>
     <string name="map_widget_map_scale">マップ縮尺</string>
-    <string name="shared_sting_all_colors">全ての色</string>
+    <string name="shared_string_all_colors">全ての色</string>
     <string name="route_line_use_coloring_speed">ルートラインは移動速度に応じて色分けされます。</string>
     <string name="delete_actions_button_confirmation">\"%1$s\"と追加されたすべてのアクションを本当に削除しますか？</string>
     <string name="shared_string_scale">スケール</string>

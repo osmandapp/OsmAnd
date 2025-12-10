@@ -3025,7 +3025,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="key_event_action_move_right">Į dešinę</string>
     <string name="key_event_action_move_down">Į apačią</string>
     <string name="key_event_action_move_left">Į kairę</string>
-    <string name="shared_sting_all_colors">Visos spalvos</string>
+    <string name="shared_string_all_colors">Visos spalvos</string>
     <string name="add_new_button">Pridėti naują mygtuką</string>
     <string name="button_already_assigned_to_this_action">Šiam veiksmui jau priskirtas mygtukas.</string>
     <string name="zoom_non_animated">Neanimuotas priartinimas</string>

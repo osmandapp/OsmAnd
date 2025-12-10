@@ -4951,7 +4951,7 @@
     <string name="terrain_maps">Cartes de terrain</string>
     <string name="sort_country_name_descending">Nom de pays : Z – A</string>
     <string name="delete_map_description">Effacer la carte %1$s ?</string>
-    <string name="maps_and_resources">Cartes et Ressources</string>
+    <string name="maps_and_resources">Cartes et ressources</string>
     <string name="shared_string_show_icon">Afficher l\'icône</string>
     <string name="smart_folder_name_present">Ce dossier intelligent est déjà présent</string>
     <string name="smart_folder_saved">Dossier intelligent enregistré</string>
@@ -5099,7 +5099,7 @@
     <string name="sorted_sufolders_toast">Les sous-dossiers dans « %1$s » sont triés par : « %2$s »</string>
     <string name="round_up">Arrondi</string>
     <string name="precise">Exact</string>
-    <string name="shared_sting_all_colors">Toutes les couleurs</string>
+    <string name="shared_string_all_colors">Toutes les couleurs</string>
     <string name="auto_zoom">Zoom automatique</string>
     <string name="java_safe">Java (Sécurisé)</string>
     <string name="auto_zoom_smooth">Progressif</string>
@@ -5758,12 +5758,12 @@
     <string name="delete_data">Supprimer les données</string>
     <string name="manage_storage_delete_data_dialog_summary">Êtes-vous certain de vouloir supprimer %1$s de OsmAnd Cloud?\n\nUne restauration sera possible depuis la corbeille durant les 30 prochains jours.</string>
     <string name="manage_storage">Gérer le stockage</string>
-    <string name="copy_as_new_folder">Copier comme nouveau dossier</string>
+    <string name="copy_as_new_folder">Copier dans un nouveau dossier</string>
     <string name="add_to_a_folder">Ajouter à un dossier</string>
     <string name="lang_en_barebones">Anglais (barebones)</string>
     <string name="max_weight_at_full_load_description">Indiquez le poids maximal de votre véhicule à pleine charge afin d\'éviter les routes et les ponts soumis à des limitations de poids.</string>
     <string name="max_axle_load_description">Indiquez la charge maximale par essieu de votre véhicule afin d\'éviter les routes et les ponts soumis à des limites de poids.</string>
-    <string name="shared_sting_osm_link">Lien OSM</string>
+    <string name="shared_string_osm_link">Lien OSM</string>
     <string name="show_local_names">Afficher les noms locaux</string>
     <string name="obd_alt_battery_voltage">Tension de l\'adaptateur</string>
     <string name="liter_single">Litre</string>

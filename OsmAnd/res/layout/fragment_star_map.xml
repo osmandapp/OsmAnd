@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/color_transparent">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<!-- Toolbar -->
+		<com.google.android.material.appbar.AppBarLayout
+			android:id="@+id/app_bar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/appbar_and_list_background_color"
+			android:elevation="5dp">
+
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/toolbar_height"
+				android:fitsSystemWindows="false"
+				android:gravity="center_vertical"
+				app:title="@string/star_map" >
+
+				<ImageButton
+					android:id="@+id/settings_button"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:layout_gravity="end"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/visible_layers_and_objects"
+					app:srcCompat="@drawable/ic_action_settings"
+					app:tint="@color/icon_color_default_light" />
+
+				<ImageButton
+					android:id="@+id/star_chart_button"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:layout_gravity="end"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/star_charts_name"
+					app:srcCompat="@drawable/ic_action_layers"
+					app:tint="@color/icon_color_default_light" />
+
+				<ImageButton
+					android:id="@+id/star_map_button"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:layout_gravity="end"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/star_map"
+					app:srcCompat="@drawable/ic_action_world_globe"
+					app:tint="@color/icon_color_default_light" />
+
+			</androidx.appcompat.widget.Toolbar>
+		</com.google.android.material.appbar.AppBarLayout>
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1">
+
+			<net.osmand.plus.plugins.astro.views.StarView
+				android:id="@+id/star_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" />
+
+			<!-- New Time Control Custom View -->
+			<net.osmand.plus.plugins.astro.views.DateTimeSelectionView
+				android:id="@+id/time_selection_view"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top|center_horizontal"
+				android:layout_marginTop="8dp" />
+
+			<!-- Reset Time Button -->
+			<Button
+				android:id="@+id/reset_time_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Now"
+				android:textSize="12sp"
+				android:minHeight="36dp"
+				android:layout_gravity="top|center_horizontal"
+				android:layout_marginTop="140dp"
+				android:visibility="gone"/>
+
+			<FrameLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+
+				<include
+					layout="@layout/map_compass_button"
+					android:layout_width="@dimen/map_small_button_size"
+					android:layout_height="@dimen/map_small_button_size"
+					android:layout_marginStart="@dimen/map_button_margin"
+					android:layout_marginTop="@dimen/map_small_button_margin" />
+
+			</FrameLayout>
+
+			<FrameLayout
+				android:id="@+id/star_map_controls_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom"
+				android:layout_marginHorizontal="@dimen/content_padding_half"
+				android:layout_marginBottom="@dimen/content_padding_small_half">
+
+				<include
+					layout="@layout/map_hud_controls"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|bottom" />
+
+			</FrameLayout>
+
+			<FrameLayout
+				android:id="@+id/map_controls_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom"
+				android:layout_marginHorizontal="@dimen/content_padding_half"
+				android:layout_marginBottom="@dimen/content_padding_small_half"
+				android:visibility="gone">
+
+				<include
+					layout="@layout/map_hud_controls"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|bottom" />
+
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom|start"
+					android:layout_marginStart="@dimen/map_button_spacing"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						tools:ignore="UselessParent">
+
+						<include
+							layout="@layout/map_ruler"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="start|bottom" />
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</FrameLayout>
+
+		</FrameLayout>
+
+		<LinearLayout
+			android:id="@+id/star_charts_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:orientation="vertical"
+			android:background="#424242"
+			android:visibility="gone">
+
+			<include layout="@layout/star_charts_content" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/bottom_sheet"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:layout_gravity="bottom"
+		android:background="?attr/activity_background_color"
+		android:padding="16dp"
+		android:visibility="gone">
+
+		<TextView
+			android:id="@+id/sheet_title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="Object Name"
+			android:textSize="24sp"
+			android:textStyle="bold"
+			android:textColor="?android:textColorPrimary" />
+
+		<TextView
+			android:id="@+id/sheet_coords"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:text="Az: 000 Alt: 00"
+			android:textSize="16sp"
+			android:textColor="?android:textColorSecondary" />
+
+		<TextView
+			android:id="@+id/sheet_details"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="4dp"
+			android:text="Distance: 0.0 AU"
+			android:textSize="16sp"
+			android:textColor="?android:textColorSecondary" />
+
+	</LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

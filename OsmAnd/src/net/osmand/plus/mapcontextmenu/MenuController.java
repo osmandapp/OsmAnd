@@ -711,7 +711,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	public void share(LatLon latLon, String title, String address) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			ShareMenu.show(latLon, title, address, mapActivity);
+			ShareMenu.show(latLon, title, address, null, mapActivity);
 		}
 	}
 

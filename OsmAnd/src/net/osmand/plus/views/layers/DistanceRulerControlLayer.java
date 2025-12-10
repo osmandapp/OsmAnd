@@ -99,6 +99,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	private VectorLine rulerLine;
 	private MapMarker distanceMarker;
 	private boolean isShowTwoFingersDistance;
+	private boolean isShowOneFingersDistance;
 	@Nullable
 	private GestureDetector gestureDetector;
 
@@ -112,12 +113,16 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
-			gestureDetector = new GestureDetector(app, new GestureDetector.SimpleOnGestureListener() {
+			gestureDetector = new GestureDetector(mapActivity, new GestureDetector.SimpleOnGestureListener() {
 				@Override
-				public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
+				public boolean onSingleTapConfirmed(@NonNull MotionEvent event) {
 					isShowTwoFingersDistance = false;
+					isShowOneFingersDistance = true;
+					touchPointLatLon = NativeUtilities.getLatLonFromElevatedPixel(getMapRenderer(), view.getRotatedTileBox(),
+							event.getX(), event.getY());
+
 					app.runInUIThread(() -> view.refreshMap());
-					return super.onSingleTapConfirmed(e);
+					return super.onSingleTapConfirmed(event);
 				}
 			});
 		} else {
@@ -190,8 +195,6 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 				touched = true;
 				touchOutside = false;
 				touchPoint.set(event.getX(), event.getY());
-				touchPointLatLon = NativeUtilities.getLatLonFromElevatedPixel(getMapRenderer(), tileBox,
-						event.getX(), event.getY());
 				singleTouchPointChanged = true;
 				touchStartTime = System.currentTimeMillis();
 				wasPinchZoomOrRotation = false;
@@ -204,6 +207,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 				}
 			} else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
 				touched = false;
+				isShowOneFingersDistance = false;
 				touchEndTime = System.currentTimeMillis();
 				wasDoubleTapZoom = view.isAfterDoubleTap();
 				refreshMapDelayed();
@@ -253,11 +257,12 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 					(touched || currentTime - touchEndTime < DRAW_TIME);
 
 			Location currentLoc = app.getLocationProvider().getLastKnownLocation();
+			isShowOneFingersDistance = isShowOneFingersDistance && showDistBetweenFingerAndLocation;
 
 			if (hasMapRenderer) {
-				drawDistanceRulerOpenGl(mapRenderer, canvas, tb, nightMode, paintUpdated, isShowTwoFingersDistance, showDistBetweenFingerAndLocation);
+				drawDistanceRulerOpenGl(mapRenderer, canvas, tb, nightMode, paintUpdated, isShowTwoFingersDistance, isShowOneFingersDistance);
 			} else {
-				if (showDistBetweenFingerAndLocation && currentLoc != null) {
+				if (isShowOneFingersDistance && currentLoc != null) {
 					drawDistBetweenFingerAndLocation(canvas, tb, currentLoc, nightMode);
 				} else if (isShowTwoFingersDistance) {
 					drawTwoFingersDistance(canvas, tb, view.getFirstTouchPointLatLon(),

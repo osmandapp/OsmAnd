@@ -209,8 +209,12 @@ public class TravelGpx extends TravelArticle {
 
 	@Nullable
 	public String getRouteType() {
-		if (amenitySubType != null && amenitySubType.startsWith(ROUTES_PREFIX)) {
-			return amenitySubType.replace(ROUTES_PREFIX, "").split(";")[0];
+		if (amenitySubType != null) {
+			for (String subType : amenitySubType.split(";")) {
+				if (subType.startsWith(ROUTES_PREFIX)) {
+					return subType.replace(ROUTES_PREFIX, "");
+				}
+			}
 		}
 		return null;
 	}
