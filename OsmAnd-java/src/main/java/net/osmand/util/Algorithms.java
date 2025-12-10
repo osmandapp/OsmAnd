@@ -56,9 +56,10 @@ import java.util.zip.GZIPOutputStream;
 public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
-	
-	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’', 'ʼ', '(', ')'}; // remove () subcities
-	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\'', '\'', ' ', ' '};
+
+	private static final char[] APOSTROPHES = {'\'', '’', 'ʼ', '´', '`'};
+	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’', 'ʼ', '(', ')', '´', '`'}; // remove () subcities
+	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\'', '\'', ' ', ' ', '\'', '\''};
 
 	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
@@ -71,18 +72,21 @@ public class Algorithms {
 	public static final int BZIP_FILE_SIGNATURE = 0x425a;
 	public static final int GZIP_FILE_SIGNATURE = 0x1f8b;
 
-
-	public static String normalizeSearchText(String s) {
-		boolean norm = false;
-		for (int i = 0; i < s.length() && !norm; i++) {
+	
+	public static boolean containsChar(String s, char[] chars) {
+		for (int i = 0; i < s.length(); i++) {
 			char ch = s.charAt(i);
-			for (int j = 0; j < CHARS_TO_NORMALIZE_KEY.length; j++) {
-				if (ch == CHARS_TO_NORMALIZE_KEY[j]) {
-					norm = true;
-					break;
+			for (int j = 0; j < chars.length; j++) {
+				if (ch == chars[j]) {
+					return true;
 				}
 			}
 		}
+		return false;
+	}
+
+	public static String normalizeSearchText(String s) {
+		boolean norm = containsChar(s, CHARS_TO_NORMALIZE_KEY);
 		if (!norm) {
 			return s;
 		}
@@ -90,6 +94,27 @@ public class Algorithms {
 			s = s.replace(CHARS_TO_NORMALIZE_KEY[k], CHARS_TO_NORMALIZE_VALUE[k]);
 		}
 		return s;
+	}
+
+	public static String removeApostrophes(String s) {
+		if (!containsChar(s, APOSTROPHES)) {
+			return s;
+		}
+		StringBuilder sb = new StringBuilder(s.length());
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			boolean apostroph = false;
+			for (char d : APOSTROPHES) {
+				if (d != c) {
+					apostroph = true;
+					break;
+				}
+			}
+			if (!apostroph) {
+				sb.append(c);
+			}
+		}
+		return sb.toString();
 	}
 
 	/**
