@@ -5758,7 +5758,7 @@
     <string name="delete_data">Supprimer les données</string>
     <string name="manage_storage_delete_data_dialog_summary">Êtes-vous certain de vouloir supprimer %1$s de OsmAnd Cloud?\n\nUne restauration sera possible depuis la corbeille durant les 30 prochains jours.</string>
     <string name="manage_storage">Gérer le stockage</string>
-    <string name="copy_as_new_folder">Copier comme nouveau dossier</string>
+    <string name="copy_as_new_folder">Copier dans un nouveau dossier</string>
     <string name="add_to_a_folder">Ajouter à un dossier</string>
     <string name="lang_en_barebones">Anglais (barebones)</string>
     <string name="max_weight_at_full_load_description">Indiquez le poids maximal de votre véhicule à pleine charge afin d\'éviter les routes et les ponts soumis à des limitations de poids.</string>

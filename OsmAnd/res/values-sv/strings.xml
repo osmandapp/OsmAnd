@@ -5019,7 +5019,7 @@
 \n</string>
     <string name="ble_search_again">Sök igen</string>
     <string name="time_to_navigation_point_widget_settings_desc">Tryck på widgeten för att växla läge.</string>
-    <string name="map_3d_mode_description">Tryck i kartan med två fingrar, håll in och dra upp eller ned för att justera kartans lutning.</string>
+    <string name="map_3d_mode_description">Rör vid kartan med två fingrar och justera kartans lutning genom att flytta dem uppåt och nedåt.</string>
     <string name="action_cannot_be_undone">Denna åtgärd kan inte ångras.</string>
     <string name="free_ride">Friåkning</string>
     <string name="shared_storage_second_step">Tryck \"Använd den här mappen\".</string>
@@ -5225,7 +5225,7 @@
     <string name="backup_delete_types_descr">Radera alla data för föråldrade datatyper från OsmAnd Cloud\?</string>
     <string name="shared_string_hide_slope">Dölj lutningsgrad</string>
     <string name="provided_by">Tillhandahålls av %1$s</string>
-    <string name="topography_maps">Topografikartor</string>
+    <string name="topography_maps">Topografiska kartor</string>
     <string name="key_assignments">Knapp-kopplingar</string>
     <string name="favorite_confirm_delete_group">Radera gruppen \'%1$s\' och alla dess inkluderade punkter (%2$d)?</string>
     <string name="waypoint_appearance">Ruttpunktens utseende</string>
@@ -5294,7 +5294,7 @@
     <string name="trash_is_empty_banner_desc">Filer borttagna från OsmAnd Cloud kommer finnas tillgängliga här i %1$s dagar.</string>
     <string name="tracks_empty_folder">Tom mapp</string>
     <string name="add_new_type">Lägg till ny typ</string>
-    <string name="wikipedia_and_travel_maps">Wikipedia- och resande-kartor</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia och resekartor</string>
     <string name="key_event_action_move_up">Flytta uppåt</string>
     <string name="help_article_map_map_context_menu_name">Kontextmeny för karta</string>
     <string name="add_smart_folder">Lägg till smart mapp</string>
@@ -6131,4 +6131,22 @@
     <string name="write_location_provider_description">Spara platsleverantör till varje spårpunkt under inspelning</string>
     <string name="n_a">Inte tillämpbar</string>
     <string name="help_article_navigation_routing_ski_routing_name">Skidbackar och rutter</string>
+    <string name="rendering_attr_hideFairways_description">Dölj fairways</string>
+    <string name="rendering_attr_hideMinorContours_name">Mindre djupkonturer</string>
+    <string name="rendering_attr_hideMinorContours_description">Dölj mindre djupkonturer</string>
+    <string name="rendering_attr_hideSpots_name">Punktloddningar</string>
+    <string name="rendering_attr_hideSpots_description">Dölj punktloddningar</string>
+    <string name="rendering_attr_hideTidalFlats_name">Lågvattenstrand</string>
+    <string name="rendering_attr_hideTidalFlats_description">Dölj lågvattenstränder</string>
+    <string name="rendering_attr_depthColorScheme_name">Djupfärgschema</string>
+    <string name="rendering_attr_depthColorScheme_description">Djupfärgschema</string>
+    <string name="rendering_attr_depthContoursDashed_name">Streckade djupkonturer</string>
+    <string name="rendering_attr_depthContoursDashed_description">Streckade djupkonturer</string>
+    <string name="rendering_attr_fairwayStyle_name">Fairwayfärg</string>
+    <string name="rendering_attr_fairwayStyle_description">Färg på fairways</string>
+    <string name="rendering_attr_safetyContour_name">Säkerhetsdjupkontur</string>
+    <string name="rendering_attr_safetyContour_description">Säkerhetsdjupkontur</string>
+    <string name="rendering_attr_shellsStyle_description">Stil för snäckor på havsbotten</string>
+    <string name="rendering_attr_showLNAMmarker_name">ENC-markörer</string>
+    <string name="rendering_attr_showLNAMmarker_description">Visa ENC-markörer</string>
 </resources>
