@@ -63,6 +63,7 @@ public class SearchResult {
 	public double distRelatedObjectName;
 
 	private double unknownPhraseMatchWeight = 0;
+	private CheckWordsMatchCount completeMatchRes = null;
 
 	public enum SearchResultResource {
 		DETAILED,
@@ -89,15 +90,24 @@ public class SearchResult {
 		unknownPhraseMatchWeight = getSumPhraseMatchWeight(null);
 		return unknownPhraseMatchWeight;
 	}
+	
+	public CheckWordsMatchCount getCompleteMatchRes() {
+		if (completeMatchRes != null) {
+			return completeMatchRes;
+		}
+		getSumPhraseMatchWeight(null);
+		return completeMatchRes;
+	}
+
 
 	private double getSumPhraseMatchWeight(SearchResult exactResult) {
 		double res = getTypeWeight(exactResult, objectType);
+		completeMatchRes = new CheckWordsMatchCount();
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
 		} else if (objectType == ObjectType.POI_TYPE) {
 			// don't overload with poi types
 		} else {
-			CheckWordsMatchCount completeMatchRes = new CheckWordsMatchCount();
 			boolean matched = localeName != null && allWordsMatched(localeName, exactResult, completeMatchRes);
 			// incorrect fix
 //			if (!matched && object instanceof Street s) { // parentSearchResult == null &&
@@ -207,7 +217,7 @@ public class SearchResult {
 		} else {
 			localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
 		}
-		
+
 		boolean wordMatched;
 		if (searchPhraseNames.isEmpty()) {
 			return false;
@@ -245,9 +255,9 @@ public class SearchResult {
 		return true;
 	}
 	
-	static class CheckWordsMatchCount {
-		boolean allWordsEqual;
-		boolean allWordsInPhraseAreInResult;
+	public static class CheckWordsMatchCount {
+		public boolean allWordsEqual;
+		public boolean allWordsInPhraseAreInResult;
 	}
 
 	private List<String> getSearchPhraseNames() {

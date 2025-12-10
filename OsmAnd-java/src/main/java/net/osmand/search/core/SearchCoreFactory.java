@@ -668,7 +668,7 @@ public class SearchCoreFactory {
 								cityResult.file = res.file;
 								// include parent search result even if it is empty
 								// for street-city don't require exact matching
-								boolean match = matchAddressName(phrase, res, cityResult,  true);
+								boolean match = matchAddressName(phrase, res, cityResult, true);
 								
 								if (match) {
 									newParentSearchResult = cityResult;
@@ -689,7 +689,7 @@ public class SearchCoreFactory {
 										cityResult.localeName = boundary.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 										cityResult.otherNames = boundary.getOtherNames(true);
 										// for another city require exact matching
-										if (matchAddressName(phrase, res, cityResult,  true)) {
+										if (matchAddressName(phrase, res, cityResult, true)) {
 											cityResult.object = boundary; 
 											cityResult.location = boundary.getLocation();
 											newParentSearchResult = cityResult;
