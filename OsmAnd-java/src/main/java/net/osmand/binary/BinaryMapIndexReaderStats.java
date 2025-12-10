@@ -6,7 +6,10 @@ import java.util.Map;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.CodedOutputStream;
+
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.search.core.SearchResult;
+import net.osmand.util.Algorithms;
 
 public class BinaryMapIndexReaderStats { 
 	
@@ -36,35 +39,40 @@ public class BinaryMapIndexReaderStats {
 		long lastReq = 0;
 		public long totalTime = 0;
 		public long totalBytes = 0;
-		public Map<String, Map<String, Map<String, Integer>>> wordsByApis = new HashMap<>();
-		private int prevResultsSize = 0;
+		public int prevResultsSize = 0;
+		public String requestWord = "";
 		Map<BinaryMapIndexReaderApiName, StatByAPI> byApis = new HashMap<>();
+		Map<String, Map<String, Integer>> wordByTypeCounts = new HashMap<String, Map<String, Integer>>();
 
-		public long beginSearchStats(BinaryMapIndexReaderApiName api, BinaryIndexPart part, CodedInputStream codedIS, String extraInfo) {
+		public long beginSearchStats(BinaryMapIndexReaderApiName api, SearchRequest<?> req, BinaryIndexPart part, CodedInputStream codedIS, String extraInfo) {
 			lastReq = System.nanoTime();
 			codedIS.resetBytesCounter();
+			if (req != null && req.getSearchResults() != null) {
+				prevResultsSize = req.getSearchResults().size();
+			} else {
+				prevResultsSize = 0;
+			}
+			if (req != null && !Algorithms.isEmpty(req.nameQuery)) {
+				requestWord = req.nameQuery; 
+			} else {
+				requestWord = "";
+			}
 			return lastReq;
 		}
 
-		public void addWordStats(String api, String word, List<SearchResult> requestResults) {
-			if (requestResults.isEmpty())
-				return;
-
-            Map<String, Map<String, Integer>> wordsCounts = wordsByApis.computeIfAbsent(api, k -> new HashMap<>());
-            Map<String, Integer> mapByType = wordsCounts.computeIfAbsent(word, k -> new HashMap<>());
-			if (prevResultsSize < requestResults.size())
-	            for (SearchResult r : requestResults.subList(prevResultsSize, requestResults.size())) {
-	                String typeName = (r != null && r.objectType != null) ? r.objectType.name() : "Unknown";
-		            mapByType.compute(typeName, (k, cnt) -> cnt == null ? 1 : cnt + 1);
-	            }
-			prevResultsSize = requestResults.size();
-        }
-
-		public void endSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryIndexPart part,
+		public void endSearchStats(long statReq, BinaryMapIndexReaderApiName api, List<?> objects, BinaryIndexPart part,
 				CodedInputStream codedIS, String extraInfo) {
 			if (statReq != lastReq) {
 				System.err.println("ERROR: in stats counting to fix ! " + statReq + " != " + lastReq);
 			}
+			
+			if(!Algorithms.isEmpty(requestWord)) {
+				Map<String, Integer> mapByType = wordByTypeCounts.computeIfAbsent(requestWord, k -> new HashMap<>());
+				for(Object o : objects) {
+		            mapByType.compute(o.getClass().getSimpleName(), (k, cnt) -> cnt == null ? 1 : cnt + 1);
+				}
+			}
+
 			long timeCall = (System.nanoTime() - statReq);
 			long bytes = codedIS.getBytesCounter();
 			totalTime += timeCall;

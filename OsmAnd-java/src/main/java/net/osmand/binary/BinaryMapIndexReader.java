@@ -712,15 +712,17 @@ public class BinaryMapIndexReader {
 			for (CitiesBlock block : r.cities) {
 				if (type != null && block.type == type.index) {
 					long statReq = 0; 
+					int citiesSize = cities.size();
 					if (searchStat != null) {
-						statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_CITIES, r, codedIS, null);
+						statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_CITIES, resultMatcher, r, codedIS, null);
 					}
 					codedIS.seek(block.filePointer);
 					long old = codedIS.pushLimitLong((long) block.length);
 					addressAdapter.readCities(cities, resultMatcher, matcher, r.attributeTagsTable);
 					codedIS.popLimit(old);
 					if (statReq > 0) {
-						searchStat.endSearchStats(statReq, BinaryMapIndexReaderApiName.LOAD_CITIES, r, codedIS, null);
+						searchStat.endSearchStats(statReq, BinaryMapIndexReaderApiName.LOAD_CITIES, 
+								cities.subList(citiesSize, cities.size()), r, codedIS, null);
 					}
 				}
 			}
@@ -741,7 +743,7 @@ public class BinaryMapIndexReader {
 		}
 		long statReq = 0; 
 		if (searchStat != null) {
-			statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_STREETS, reg, codedIS, null);
+			statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_STREETS, resultMatcher, reg, codedIS, null);
 		}
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
@@ -749,7 +751,7 @@ public class BinaryMapIndexReader {
 		addressAdapter.readCityStreets(resultMatcher, c, loadBuildings, reg.attributeTagsTable);
 		codedIS.popLimit(old);
 		if (statReq > 0) {
-			searchStat.endSearchStats(statReq, BinaryMapIndexReaderApiName.LOAD_STREETS, reg, codedIS, null);
+			searchStat.endSearchStats(statReq, BinaryMapIndexReaderApiName.LOAD_STREETS, c.getStreets(), reg, codedIS, null);
 		}
 		return size;
 	}
@@ -768,7 +770,7 @@ public class BinaryMapIndexReader {
 		AddressRegion reg = checkAddressIndex(s.getFileOffset());
 		long statReq = 0; 
 		if (searchStat != null) {
-			statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_BUILDINGS, reg, codedIS, null);
+			statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_BUILDINGS, resultMatcher, reg, codedIS, null);
 		}
 		codedIS.seek(s.getFileOffset());
 		long size = codedIS.readRawVarint32();
@@ -778,7 +780,7 @@ public class BinaryMapIndexReader {
 				reg.attributeTagsTable);
 		codedIS.popLimit(old);
 		if (statReq > 0) {
-			searchStat.endSearchStats(statReq, BinaryMapIndexReaderApiName.LOAD_BUILDINGS, reg, codedIS, null);
+			searchStat.endSearchStats(statReq, BinaryMapIndexReaderApiName.LOAD_BUILDINGS, s.getBuildings(), reg, codedIS, null);
 		}
 	}
 
@@ -1402,13 +1404,13 @@ public class BinaryMapIndexReader {
 	public List<MapObject> searchAddressDataByName(SearchRequest<MapObject> req, List<CityBlocks> typeFilter) throws IOException {
 		for (AddressRegion reg : addressIndexes) {
 			if (reg.indexNameOffset != -1) {
-				long statReq = req.beginSearchStats(BinaryMapIndexReaderApiName.ADDRESS_BY_NAME, reg, codedIS);
+				long statReq = req.beginSearchStats(BinaryMapIndexReaderApiName.ADDRESS_BY_NAME, req, reg, codedIS);
 				codedIS.seek(reg.indexNameOffset);
 				long len = readInt();
 				long old = codedIS.pushLimitLong((long) len);
 				addressAdapter.searchAddressDataByName(reg, req, typeFilter);
 				codedIS.popLimit(old);
-				req.endSearchStats(statReq, BinaryMapIndexReaderApiName.ADDRESS_BY_NAME, reg, codedIS);
+				req.endSearchStats(statReq, BinaryMapIndexReaderApiName.ADDRESS_BY_NAME, req, reg, codedIS);
 			}
 		}
 		return req.getSearchResults();
@@ -1433,13 +1435,13 @@ public class BinaryMapIndexReader {
 			throw new IllegalArgumentException();
 		}
 		for (PoiRegion poiIndex : poiIndexes) {
-			long statReq = req.beginSearchStats(BinaryMapIndexReaderApiName.POI_BY_NAME, poiIndex, codedIS);
+			long statReq = req.beginSearchStats(BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
 			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
 			long old = codedIS.pushLimitLong((long) poiIndex.length);
 			poiAdapter.searchPoiByName(poiIndex, req);
 			codedIS.popLimit(old);
-			req.endSearchStats(statReq, BinaryMapIndexReaderApiName.POI_BY_NAME, poiIndex, codedIS);
+			req.endSearchStats(statReq, BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
 		}
 		return req.getSearchResults();
 	}
@@ -1512,13 +1514,13 @@ public class BinaryMapIndexReader {
 		req.numberOfReadSubtrees = 0;
 		List<PoiRegion> lst = onlyIndex == null ? poiIndexes : Collections.singletonList(onlyIndex);
 		for (PoiRegion poiIndex : lst) {
-			long statReq = req.beginSearchStats(BinaryMapIndexReaderApiName.POI_BY_NAME, poiIndex, codedIS);
+			long statReq = req.beginSearchStats(BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
 			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
 			long old = codedIS.pushLimitLong((long) poiIndex.length);
 			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 			codedIS.popLimit(old);
-			req.endSearchStats(statReq, BinaryMapIndexReaderApiName.POI_BY_NAME, poiIndex, codedIS);
+			req.endSearchStats(statReq, BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
 		}
 		return req.getSearchResults();
 	}
@@ -1829,16 +1831,18 @@ public class BinaryMapIndexReader {
 		protected SearchRequest() {
 		}
 		
-		public long beginSearchStats(BinaryMapIndexReaderApiName api, BinaryIndexPart part, CodedInputStream codedIS) {
+		public long beginSearchStats(BinaryMapIndexReaderApiName api, SearchRequest<?> req, BinaryIndexPart part, CodedInputStream codedIS) {
 			if (searchStat != null) {
-				return searchStat.beginSearchStats(api, part, codedIS, nameQuery);
+				return searchStat.beginSearchStats(api, req, part, codedIS, nameQuery);
 			}
 			return 0;
 		}
 		
-		public void endSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryIndexPart part, CodedInputStream codedIS) {
+		public void endSearchStats(long statReq, BinaryMapIndexReaderApiName api, SearchRequest<?> req, BinaryIndexPart part, CodedInputStream codedIS) {
 			if(statReq > 0 && searchStat != null) {
-				searchStat.endSearchStats(statReq, api, part, codedIS, nameQuery);
+				List<?> res = req.getSearchResults();
+				List<?> sublist = res.subList(searchStat.prevResultsSize, res.size());
+				searchStat.endSearchStats(statReq, api, sublist, part, codedIS, nameQuery);
 			}
 		}
 
