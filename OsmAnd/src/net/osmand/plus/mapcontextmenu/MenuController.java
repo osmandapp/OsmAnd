@@ -510,6 +510,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	public boolean needStreetName() {
 		return !displayDistanceDirection();
 	}
+	public boolean needAsyncAmenityName() {
+		return false;
+	}
 
 	public boolean needTypeStr() {
 		return true;
