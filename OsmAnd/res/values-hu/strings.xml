@@ -5480,7 +5480,7 @@
     <string name="dynamic_icon_type_summary">Az ikon a műveleti állapot alapján változik.</string>
     <string name="shared_string_dynamic">Dinamikus</string>
     <string name="obd_connected_to_device">Kapcsolódva ehhez: %s</string>
-    <string name="obd_connecting_to_device">Kapcsolódás ehhez: %s</string>
+    <string name="obd_connecting_to_device">Kapcsolódás a következőhöz: %s</string>
     <string name="fuel_tank_capacity">Üzemanyagtartály kapacitása</string>
     <string name="shared_strings_dimensions">Méretek</string>
     <string name="us_gallons">Amerikai gallon</string>
@@ -5680,7 +5680,7 @@
     <string name="threads_allocated_for_rendering">Rendereléshez lefoglalt szálak</string>
     <string name="threads_allocated_for_rendering_desc">Az alacsonyabb szálfoglalás bizonyos esetekben felgyorsíthatja a térkép renderelését.</string>
     <string name="turn_by_turn_directions">Részletes navigáció</string>
-    <string name="failed_to_connect">Sikertelen csatlakozás ehhez: %1s</string>
+    <string name="failed_to_connect">Nem sikerült kapcsolódni a következőhöz: %1s</string>
     <string name="enable_msaa">MSAA engedélyezése</string>
     <string name="next_turn_information">Következő kanyarodás információ</string>
     <string name="next_turn_information_desc">Megjeleníti a következő kanyarodás irányát és az utca nevét.</string>
@@ -5779,7 +5779,7 @@
     <string name="rendering_attr_showSkiSlopes_description">Egyszerűsített sípályák megjelenítése</string>
     <string name="track_folder_appearance">Nyomvonalakat tartalmazó mappa megjelenése</string>
     <string name="update_maps">Térképek frissítése</string>
-    <string name="reconnect">Újbóli csatlakozás</string>
+    <string name="reconnect">Újrakapcsolódás</string>
     <string name="trip_recording_downhill_widget_desc">Megjeleníti az összes lejtő hosszát vagy a jelenleg rögzített út utolsó lejtőjének hosszát.</string>
     <string name="trip_recording_uphill_widget_desc">Megjeleníti az összes emelkedő hosszát vagy a jelenleg rögzített út utolsó emelkedő hosszát.</string>
     <string name="trip_recording_distance_widget_desc">Megjeleníti a jelenleg rögzített utazás teljes hosszát, valamint az utolsó emelkedés és lejtés hosszát.</string>
