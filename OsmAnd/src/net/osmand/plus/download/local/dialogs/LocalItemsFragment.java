@@ -154,7 +154,6 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		});
 	}
 
-
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
@@ -188,18 +187,14 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 			addMemoryInfo(items);
 		}
 		adapter.setSelectionMode(selectionMode);
-		adapter.setObserveCountryMode(selectedCountry != null);
+		adapter.setCountryMode(selectedCountry != null);
 		adapter.setItems(items);
 	}
 
 	@NonNull
 	private List<Object> getItemsToDisplay() {
-		if (selectedCountry != null) {
-			List<BaseLocalItem> localItems = selectedCountry.getItems();
-			sortItems(localItems);
-			return new ArrayList<>(localItems);
-		}
-		return getSortedItems();
+		List<BaseLocalItem> countryItems = getSortedCountryItems();
+		return countryItems != null ? new ArrayList<>(countryItems) : getSortedItems();
 	}
 
 	@NonNull
@@ -231,6 +226,15 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 			items.addAll(backupedItems);
 		}
 		return items;
+	}
+
+	@Nullable
+	public List<BaseLocalItem> getSortedCountryItems() {
+		List<BaseLocalItem> countryItems = selectedCountry != null ? selectedCountry.getItems() : null;
+		if (countryItems != null) {
+			sortItems(countryItems);
+		}
+		return countryItems;
 	}
 
 	@NonNull
