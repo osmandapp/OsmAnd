@@ -8,7 +8,6 @@ import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.CodedOutputStream;
 
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
 public class BinaryMapIndexReaderStats { 

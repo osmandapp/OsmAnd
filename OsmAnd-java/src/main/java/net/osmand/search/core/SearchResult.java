@@ -63,6 +63,7 @@ public class SearchResult {
 	public double distRelatedObjectName;
 
 	private double unknownPhraseMatchWeight = 0;
+	private CheckWordsMatchCount completeMatchRes = null;
 
 	public enum SearchResultResource {
 		DETAILED,
@@ -89,27 +90,35 @@ public class SearchResult {
 		unknownPhraseMatchWeight = getSumPhraseMatchWeight(null);
 		return unknownPhraseMatchWeight;
 	}
+	
+	public CheckWordsMatchCount getCompleteMatchRes() {
+		if (completeMatchRes != null) {
+			return completeMatchRes;
+		}
+		getSumPhraseMatchWeight(null);
+		return completeMatchRes;
+	}
 
-	public CheckWordsMatchCount completeMatchRes = new CheckWordsMatchCount();
 
 	private double getSumPhraseMatchWeight(SearchResult exactResult) {
 		double res = getTypeWeight(exactResult, objectType);
+		completeMatchRes = new CheckWordsMatchCount();
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
 		} else if (objectType == ObjectType.POI_TYPE) {
 			// don't overload with poi types
 		} else {
-			boolean matched = localeName != null && allWordsMatched(localeName, exactResult);
+			boolean matched = localeName != null && allWordsMatched(localeName, exactResult, completeMatchRes);
 			// incorrect fix
 //			if (!matched && object instanceof Street s) { // parentSearchResult == null &&
 //				matched = allWordsMatched(localeName + " " + s.getCity().getName(requiredSearchPhrase.getSettings().getLang()), exactResult, completeMatchRes);
 //			}
 			if (!matched && alternateName != null && !Algorithms.objectEquals(cityName, alternateName)) {
-				matched = allWordsMatched(alternateName, exactResult);
+				matched = allWordsMatched(alternateName, exactResult, completeMatchRes);
 			}
 			if (!matched && otherNames != null) {
 				for (String otherName : otherNames) {
-					if (allWordsMatched(otherName, exactResult)) {
+					if (allWordsMatched(otherName, exactResult, completeMatchRes)) {
 						matched = true;
 						break;
 					}
@@ -195,7 +204,7 @@ public class SearchResult {
 		return inc;
 	}
 
-	private boolean allWordsMatched(String name, SearchResult exactResult) {
+	private boolean allWordsMatched(String name, SearchResult exactResult, CheckWordsMatchCount cnt) {
 		List<String> searchPhraseNames = getSearchPhraseNames();
 		name = CollatorStringMatcher.alignChars(name);
 		List<String> localResultNames;
@@ -240,9 +249,9 @@ public class SearchResult {
 			}
 		}
 		if (searchPhraseNames.size() == localResultNames.size()) {
-			completeMatchRes.allWordsEqual = true;
+			cnt.allWordsEqual = true;
 		}
-		completeMatchRes.allWordsInPhraseAreInResult = true;
+		cnt.allWordsInPhraseAreInResult = true;
 		return true;
 	}
 	
