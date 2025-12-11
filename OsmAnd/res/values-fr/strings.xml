@@ -2704,7 +2704,7 @@
     <string name="avoid_pt_types_descr">Sélectionner les types de transports en commun à éviter pour le guidage :</string>
     <string name="avoid_pt_types">Éviter des types de transports…</string>
     <string name="quick_action_day_night_mode">Mode %s</string>
-    <string name="shared_string_degrees">Diplômes</string>
+    <string name="shared_string_degrees">Degrés</string>
     <string name="shared_string_milliradians">Milliradians</string>
     <string name="angular_measeurement">Unité d\'angle</string>
     <string name="angular_measeurement_descr">Modifier l\'unité de mesure de l\'azimut.</string>
@@ -2789,7 +2789,7 @@
     <string name="process_downloading_service">Service de téléchargement OsmAnd</string>
     <string name="press_again_to_change_the_map_orientation">Appuyez à nouveau pour modifier l\'orientation de la carte</string>
     <string name="shared_string_min_speed">Vitesse minimale</string>
-    <string name="shared_string_max_speed">Vitesse max.</string>
+    <string name="shared_string_max_speed">Vitesse Max.</string>
     <string name="default_speed_setting_title">Vitesse par défaut</string>
     <string name="minmax_speed_dialog_title">Définir la vitesse min/max</string>
     <string name="new_profile">Nouveau profil</string>
@@ -3608,7 +3608,7 @@
     <string name="announcement_time_prepare_long">Préparation longue</string>
     <string name="announcement_time_arrive">Arrivé à destination</string>
     <string name="shared_string_turn">Bifurcation</string>
-    <string name="show_track_on_map">Afficher la trace sur la carte</string>
+    <string name="show_track_on_map">Afficher le tracé sur la carte</string>
     <string name="routing_engine_vehicle_type_scooter">Trottinette</string>
     <string name="routing_engine_vehicle_type_small_truck">Camionnette</string>
     <string name="upload_to_openstreetmap">Envoyer sur OpenStreetMap</string>
@@ -4901,7 +4901,7 @@
     <string name="help_article_plan_route_coordinate_input_name">Saisir des coordonnées</string>
     <string name="help_article_plan_route_web_name">Planificateur d\'itinéraire en ligne</string>
     <string name="help_article_purchases_ios_name">Achats iOS</string>
-    <string name="help_article_troubleshooting_maps_data_name">Cartes &amp; données</string>
+    <string name="help_article_troubleshooting_maps_data_name">Cartes &amp; Données</string>
     <string name="help_article_widgets_markers_name">Widgets de marqueur</string>
     <string name="help_article_widgets_nav_widgets_name">Widgets de guidage</string>
     <string name="telegram_chats_descr">Rejoignez nous sur Telegram.</string>
@@ -5533,7 +5533,7 @@
     <string name="obd_fuel_consumption_rate_sensor_type">Utiliser les unités sélectionnées dans le nom.</string>
     <string name="display_distance_to_first_intermediate_summary">Affiche le temps et la distance jusqu\'au prochain arrêt. Désactivez cette option pour afficher uniquement les détails de la destination finale.</string>
     <string name="display_distance_to_first_intermediate">Affiche les détails de l\'itinéraire jusqu\'à la prochaine étape</string>
-    <string name="popular_places_nearby">Lieux populaires proches</string>
+    <string name="popular_places_nearby">Lieux populaires à proximité</string>
     <string name="recently_visited">Dernières visites</string>
     <string name="shared_string_avg_altitude">Altitude moyenne</string>
     <string name="shared_string_avg_speed">Vitesse min.</string>
@@ -5786,8 +5786,8 @@
     <string name="trip_recording_downhill_widget_desc">Affiche la somme de toutes les descentes ou la dernière descente du trajet actuellement enregistré.</string>
     <string name="trip_recording_uphill_widget_desc">Affiche la somme de toutes les ascensions ou la dernière ascension du trajet actuellement enregistré.</string>
     <string name="trip_recording_distance_widget_desc">Affiche la distance totale de votre trajet actuellement enregistré, avec des modes pour afficher la distance de la dernière ascension et descente.</string>
-    <string name="trip_recording_max_speed_widget_description">Affiche la vitesse maximale du trajet en cours d\'enregistrement. Appuyez pour basculer entre la vitesse maximale globale et la vitesse maximale de la dernière montée ou descente.</string>
-    <string name="trip_recording_average_slope_widget_description">Affiche la pente moyenne de la dernière section de descente ou de montée pour trajet en cours d\'enregistrement.</string>
+    <string name="trip_recording_max_speed_widget_description">Affiche la vitesse maximale enregistrée pour le trajet en cours. Appuyez pour afficher respectivement la vitesse maximale globale et la vitesse maximale de la dernière montée ou descente.</string>
+    <string name="trip_recording_average_slope_widget_description">Indique la pente moyenne de la dernière section en descente ou en montée du trajet actuellement enregistré.</string>
     <string name="average_slope">Pente moyenne</string>
     <string name="shared_string_last_uphill">Dernière montée</string>
     <string name="shared_string_last_downhill">Dernière descente</string>
@@ -5814,4 +5814,8 @@
     <string name="routing_attr_weightrating_name">Poids maximal à pleine charge</string>
     <string name="routing_attr_maxaxleload_name">Charge maximale par essieu</string>
     <string name="is_parking_time_limited">La durée de stationnement est-elle limitée ?</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimètres</string>
+    <string name="bicycle_width_limit_description">Indiquez la largeur de votre vélo pour éviter les pistes cyclables étroites.</string>
+    <string name="copy_link">Copier le lien</string>
 </resources>

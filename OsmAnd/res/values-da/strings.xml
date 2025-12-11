@@ -5949,4 +5949,8 @@
     <string name="routing_attr_weightrating_name">Maksimal vægt ved fuld last</string>
     <string name="routing_attr_maxaxleload_name">Maksimal akselbelastning</string>
     <string name="is_parking_time_limited">Er parkering tidsbegrænset?</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimeter</string>
+    <string name="bicycle_width_limit_description">Angiv din cykels bredde for at undgå smalle cykelstier.</string>
+    <string name="copy_link">Kopiér link</string>
 </resources>

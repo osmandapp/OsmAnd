@@ -5811,4 +5811,8 @@
     <string name="routing_attr_weightrating_name">Megengedett össztömeg</string>
     <string name="routing_attr_maxaxleload_name">Megengedett legnagyobb tengelyterhelés</string>
     <string name="is_parking_time_limited">A parkolási idő korlátozott?</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centiméter</string>
+    <string name="bicycle_width_limit_description">Adja meg a kerékpár szélességét a keskeny kerékpárutak elkerülése érdekében.</string>
+    <string name="copy_link">Hivatkozás másolása</string>
 </resources>

@@ -5924,4 +5924,8 @@
     <string name="routing_attr_weightrating_name">Максимальна вага при повному завантаженні</string>
     <string name="routing_attr_maxaxleload_name">Максимальне навантаження на вісь</string>
     <string name="is_parking_time_limited">Чи обмежений час паркування?</string>
+    <string name="centimeter">см</string>
+    <string name="shared_string_centimeters">сантиметри</string>
+    <string name="bicycle_width_limit_description">Враховуйте ширину вашого велосипеда, щоб уникнути вузьких велосипедних доріжок.</string>
+    <string name="copy_link">Копіювати посилання</string>
 </resources>
