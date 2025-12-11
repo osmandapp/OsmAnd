@@ -4,6 +4,7 @@ import android.view.View;
 
 import androidx.annotation.IdRes;
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.google.common.collect.Sets;
 
@@ -34,13 +35,16 @@ import de.KnollFrank.lib.settingssearch.graph.GraphPathFactory;
 import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenGraphProviderFactory;
 import de.KnollFrank.lib.settingssearch.results.recyclerview.FragmentContainerViewAdder;
 
-public class SearchDatabaseRootedAtConfigureMapFragmentAdapter implements SearchablePreferenceScreenGraphTransformer<Configuration> {
+public class SearchDatabaseRootedAtPreferenceFragmentAdapter implements SearchablePreferenceScreenGraphTransformer<Configuration> {
 
 	private final @IdRes int FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
 
+	private final Class<? extends PreferenceFragmentCompat> preferenceFragment;
 	private final TileSourceTemplatesProvider tileSourceTemplatesProvider;
 
-	public SearchDatabaseRootedAtConfigureMapFragmentAdapter(final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
+	public SearchDatabaseRootedAtPreferenceFragmentAdapter(final Class<? extends PreferenceFragmentCompat> preferenceFragment,
+														   final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
+		this.preferenceFragment = preferenceFragment;
 		this.tileSourceTemplatesProvider = tileSourceTemplatesProvider;
 	}
 
@@ -48,23 +52,23 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter implements Search
 	public SearchablePreferenceScreenGraph transformGraph(final SearchablePreferenceScreenGraph graph,
 														  final Configuration actualConfiguration,
 														  final FragmentActivity activityContext) {
-		return adaptGraphAtConfigureMapFragment(
+		return adaptGraphAtConfigureProfileFragment(
 				graph,
 				actualConfiguration,
 				activityContext);
 	}
 
-	private SearchablePreferenceScreenGraph adaptGraphAtConfigureMapFragment(
+	private SearchablePreferenceScreenGraph adaptGraphAtConfigureProfileFragment(
 			final SearchablePreferenceScreenGraph graph,
 			final Configuration newConfiguration,
 			final FragmentActivity activityContext) {
-		return SearchDatabaseRootedAtConfigureMapFragmentAdapter
+		return SearchDatabaseRootedAtPreferenceFragmentAdapter
 				.getApplicationModesWithoutDefault()
 				.stream()
 				.reduce(
 						graph,
 						(currentGraph, applicationMode) ->
-								adaptGraphAtConfigureMapFragment(
+								adaptGraphAtConfigureProfileFragment(
 										currentGraph,
 										applicationMode,
 										newConfiguration,
@@ -74,7 +78,7 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter implements Search
 						});
 	}
 
-	private SearchablePreferenceScreenGraph adaptGraphAtConfigureMapFragment(
+	private SearchablePreferenceScreenGraph adaptGraphAtConfigureProfileFragment(
 			final SearchablePreferenceScreenGraph graph,
 			final ApplicationMode applicationMode,
 			final Configuration newConfiguration,
@@ -87,8 +91,8 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter implements Search
 							FRAGMENT_CONTAINER_VIEW_ID);
 					return null;
 				});
-		final SearchablePreferenceScreen configureMapFragmentPreferenceScreen =
-				getConfigureMapFragmentPreferenceScreen(
+		final SearchablePreferenceScreen configureProfileFragmentPreferenceScreen =
+				getConfigureProfileFragmentPreferenceScreen(
 						graph,
 						applicationMode);
 		final SearchDatabaseConfig searchDatabaseConfig =
@@ -99,10 +103,10 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter implements Search
 		return new SearchablePreferenceScreenGraph(
 				SearchablePreferenceScreenSubtreeReplacer.replaceSubtreeWithTree(
 						graph.graph(),
-						configureMapFragmentPreferenceScreen,
+						configureProfileFragmentPreferenceScreen,
 						getPojoGraphRootedAt(
 								instantiateSearchablePreferenceScreen(
-										configureMapFragmentPreferenceScreen,
+										configureProfileFragmentPreferenceScreen,
 										graph.graph(),
 										createGraphPathFactory(searchDatabaseConfig, activityContext)),
 								graph.locale(),
@@ -129,14 +133,15 @@ public class SearchDatabaseRootedAtConfigureMapFragmentAdapter implements Search
 				.getSearchablePreferenceScreenGraph(root);
 	}
 
-	private SearchablePreferenceScreen getConfigureMapFragmentPreferenceScreen(
+	private SearchablePreferenceScreen getConfigureProfileFragmentPreferenceScreen(
 			final SearchablePreferenceScreenGraph graphToSearchIn,
 			final ApplicationMode applicationMode) {
 		return SearchablePreferenceScreens
 				.findSearchablePreferenceScreenById(
 						graphToSearchIn.graph().vertexSet(),
 						String.format(
-								"en-net.osmand.plus.configmap.ConfigureMapFragment$ConfigureMapFragmentProxy Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
+								"en-%s Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
+								preferenceFragment.getName(),
 								applicationMode.getStringKey()))
 				.orElseThrow();
 	}

@@ -11,10 +11,11 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.ResultMatcher;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.search.Configuration;
-import net.osmand.plus.settings.fragments.search.SearchDatabaseRootedAtConfigureMapFragmentAdapter;
+import net.osmand.plus.settings.fragments.search.SearchDatabaseRootedAtPreferenceFragmentAdapter;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.InstallMapLayersDialogFragment;
@@ -114,7 +115,10 @@ class InstallMapLayersDialogFragmentFactory {
 							}
 
 							private void updateSearchDatabase() {
-								getGraphRepository().addGraphTransformer(new SearchDatabaseRootedAtConfigureMapFragmentAdapter(getTileSourceTemplatesProvider()));
+								getGraphRepository().addGraphTransformer(
+										new SearchDatabaseRootedAtPreferenceFragmentAdapter(
+												ConfigureMapFragment.ConfigureMapFragmentProxy.class,
+												getTileSourceTemplatesProvider()));
 							}
 
 							private SearchablePreferenceScreenGraphRepository<Configuration> getGraphRepository() {
