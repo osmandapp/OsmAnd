@@ -2798,7 +2798,7 @@
     <string name="precision_hdop_and_vdop">Précision horizontale : %1$s, Précision verticale : %2$s</string>
     <string name="precision_hdop">Précision horizontale : %s</string>
     <string name="app_mode_offroad">Tout terrain</string>
-    <string name="routing_attr_max_num_changes_name">Nombre de correspondances</string>
+    <string name="routing_attr_max_num_changes_name">Nombre maximum de correspondances</string>
     <string name="turn_screen_on_sensor">Utiliser le capteur de proximité</string>
     <string name="sett_no_ext_input">Aucun</string>
     <string name="routing_attr_freeride_policy_description">Le hors-piste (ou « freeride ») emprunte des itinéraires non-officiels. Ces itinéraires ne sont généralement ni balisés ni damés et ne font l’objet d\'aucune surveillance. Vous pratiquez cette activité à vos risques et périls.</string>
@@ -2810,7 +2810,7 @@
     <string name="edit_profile_setup_map_subtitle">Sélectionner les options de la carte pour ce profil</string>
     <string name="edit_profile_screen_options_subtitle">Sélectionner les options d’affichage écran pour ce profil</string>
     <string name="edit_profile_nav_settings_subtitle">Sélectionner les paramètres de guidage pour ce profil</string>
-    <string name="routing_attr_max_num_changes_description">Indiquer le nombre maximum de correspondances</string>
+    <string name="routing_attr_max_num_changes_description">Indique le nombre maximum de correspondances</string>
     <string name="turn_screen_on_router">Allumer lors des changements de direction</string>
     <string name="turn_screen_on_time_descr">Définir la durée pendant laquelle l\'écran restera allumé.</string>
     <string name="turn_screen_on_sensor_descr">Balayer l\'écran de la main allumera l\'écran.</string>
@@ -5818,4 +5818,6 @@
     <string name="shared_string_centimeters">centimètres</string>
     <string name="bicycle_width_limit_description">Indiquez la largeur de votre vélo pour éviter les pistes cyclables étroites.</string>
     <string name="copy_link">Copier le lien</string>
+    <string name="routing_attr_pt_limit_name">Afficher les N meilleures routes</string>
+    <string name="routing_attr_pt_limit_description">Indique le nombre de meilleures routes à proposer</string>
 </resources>
