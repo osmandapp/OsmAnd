@@ -1177,14 +1177,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			} else {
 				drawSelectedFileSegments(selectedGpxFile, false, canvas, tileBox, settings, baseOrder);
 			}
-			if (!renderedSegmentsCache.containsKey(gpxFile.getPath())) {
-				renderedSegmentsCache.remove(gpxFile.getPath());
-			}
 			baseOrder -= GpxGeometryWay.VECTOR_LINES_RESERVED;
 		}
 		if (currentTrack != null) {
 			drawSelectedFileSegments(currentTrack, true, canvas, tileBox, settings, baseOrder);
 		}
+		cleanupOldRenderedSegments(selectedGPXFiles);
 	}
 
 	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack,
@@ -1743,6 +1741,22 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		clearXAxisPoints();
 		clearPoints();
 		clearSelectedFilesSplits();
+	}
+
+	private void cleanupOldRenderedSegments(@NonNull List<SelectedGpxFile> selectedGPXFiles) {
+		Set<String> selectedPaths = new HashSet<>();
+		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
+			selectedPaths.add(selectedGpxFile.getGpxFile().getPath());
+		}
+		List<String> pathsToRemove = new ArrayList<>();
+		for (String path : renderedSegmentsCache.keySet()) {
+			if (!selectedPaths.contains(path)) {
+				pathsToRemove.add(path);
+			}
+		}
+		for (String path : pathsToRemove) {
+			removeSelectedFilesSegments(path);
+		}
 	}
 
 	private void removeSelectedFilesSegments(@NonNull String path) {
