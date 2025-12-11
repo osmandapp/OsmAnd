@@ -2781,7 +2781,7 @@
     <string name="new_profile">Új profil</string>
     <string name="shared_string_crash">Összeomlás</string>
     <string name="last_launch_crashed">Az OsmAnd a legutóbbi futtatáskor összeomlott. A hibaüzenet megosztásával segítsen az OsmAnd javításában.</string>
-    <string name="app_mode_ufo">Azonosítatlan repülő tárgy</string>
+    <string name="app_mode_ufo">UFO (azonosítatlan repülő tárgy)</string>
     <string name="app_mode_personal_transporter">Egyéni személyszállító (pl. Segway)</string>
     <string name="app_mode_monowheel">Egykerekű</string>
     <string name="app_mode_scooter">Roller</string>
@@ -2793,7 +2793,7 @@
     <string name="edit_profile_screen_options_subtitle">A profil képernyő-beállításainak kijelölése</string>
     <string name="edit_profile_nav_settings_subtitle">A profil navigációs beállításainak kijelölése</string>
     <string name="routing_attr_max_num_changes_description">Az átszállások legnagyobb számának megadása</string>
-    <string name="routing_attr_max_num_changes_name">Átszállások száma</string>
+    <string name="routing_attr_max_num_changes_name">Átszállások száma (legfeljebb)</string>
     <string name="turn_screen_on_router">Bekapcsolás irányváltáskor</string>
     <string name="turn_screen_on_time_descr">A képernyő kikapcsolásáig hátralévő idő beállítása.</string>
     <string name="turn_screen_on_sensor">Közelségérzékelő használata</string>
