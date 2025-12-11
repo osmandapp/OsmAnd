@@ -107,8 +107,12 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		if (!menu.isLandscapeLayout()) {
 			FrameLayout paddingView = new FrameLayout(context);
 			int screenHeight = AndroidUtils.getScreenHeight(mapActivity);
+			int listItemHeight = getDimensionPixelSize(R.dimen.list_item_height);
+			int headerHeight = getDimensionPixelSize(R.dimen.multi_selection_header_height);
 			int cancelButtonHeight = getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
-			int padding = screenHeight - cancelButtonHeight;
+
+			int padding = Math.max(0, screenHeight - headerHeight - listItemHeight - cancelButtonHeight);
+
 			paddingView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, padding));
 			paddingView.setClickable(true);
 			paddingView.setOnClickListener(v -> menu.hide());
