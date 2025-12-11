@@ -52,13 +52,13 @@ public class SearchDatabaseRootedAtPreferenceFragmentAdapter implements Searchab
 	public SearchablePreferenceScreenGraph transformGraph(final SearchablePreferenceScreenGraph graph,
 														  final Configuration actualConfiguration,
 														  final FragmentActivity activityContext) {
-		return adaptGraphAtConfigureProfileFragment(
+		return adaptGraphAtPreferenceFragment(
 				graph,
 				actualConfiguration,
 				activityContext);
 	}
 
-	private SearchablePreferenceScreenGraph adaptGraphAtConfigureProfileFragment(
+	private SearchablePreferenceScreenGraph adaptGraphAtPreferenceFragment(
 			final SearchablePreferenceScreenGraph graph,
 			final Configuration newConfiguration,
 			final FragmentActivity activityContext) {
@@ -68,7 +68,7 @@ public class SearchDatabaseRootedAtPreferenceFragmentAdapter implements Searchab
 				.reduce(
 						graph,
 						(currentGraph, applicationMode) ->
-								adaptGraphAtConfigureProfileFragment(
+								adaptGraphAtPreferenceFragment(
 										currentGraph,
 										applicationMode,
 										newConfiguration,
@@ -78,7 +78,7 @@ public class SearchDatabaseRootedAtPreferenceFragmentAdapter implements Searchab
 						});
 	}
 
-	private SearchablePreferenceScreenGraph adaptGraphAtConfigureProfileFragment(
+	private SearchablePreferenceScreenGraph adaptGraphAtPreferenceFragment(
 			final SearchablePreferenceScreenGraph graph,
 			final ApplicationMode applicationMode,
 			final Configuration newConfiguration,
@@ -91,8 +91,8 @@ public class SearchDatabaseRootedAtPreferenceFragmentAdapter implements Searchab
 							FRAGMENT_CONTAINER_VIEW_ID);
 					return null;
 				});
-		final SearchablePreferenceScreen configureProfileFragmentPreferenceScreen =
-				getConfigureProfileFragmentPreferenceScreen(
+		final SearchablePreferenceScreen preferenceScreen =
+				getPreferenceScreenOfPreferenceFragment(
 						graph,
 						applicationMode);
 		final SearchDatabaseConfig searchDatabaseConfig =
@@ -103,10 +103,10 @@ public class SearchDatabaseRootedAtPreferenceFragmentAdapter implements Searchab
 		return new SearchablePreferenceScreenGraph(
 				SearchablePreferenceScreenSubtreeReplacer.replaceSubtreeWithTree(
 						graph.graph(),
-						configureProfileFragmentPreferenceScreen,
+						preferenceScreen,
 						getPojoGraphRootedAt(
 								instantiateSearchablePreferenceScreen(
-										configureProfileFragmentPreferenceScreen,
+										preferenceScreen,
 										graph.graph(),
 										createGraphPathFactory(searchDatabaseConfig, activityContext)),
 								graph.locale(),
@@ -133,7 +133,7 @@ public class SearchDatabaseRootedAtPreferenceFragmentAdapter implements Searchab
 				.getSearchablePreferenceScreenGraph(root);
 	}
 
-	private SearchablePreferenceScreen getConfigureProfileFragmentPreferenceScreen(
+	private SearchablePreferenceScreen getPreferenceScreenOfPreferenceFragment(
 			final SearchablePreferenceScreenGraph graphToSearchIn,
 			final ApplicationMode applicationMode) {
 		return SearchablePreferenceScreens
