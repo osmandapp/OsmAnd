@@ -57,6 +57,7 @@ object GpxUtilities {
 	const val PROFILE_TYPE_EXTENSION = "profile"
 	const val ADDRESS_EXTENSION = "address"
 	const val HIDDEN_EXTENSION = "hidden"
+	const val PINNED_EXTENSION = "pinned"
 	const val POINT_TYPE_EXTENSION = "point_type"
 
 	const val GPXTPX_PREFIX = "gpxtpx:"
@@ -276,6 +277,7 @@ object GpxUtilities {
 		var points = mutableListOf<WptPt>()
 		var color: Int = 0
 		var hidden = false
+		var pinned = false
 
 		constructor(name: String, iconName: String?, backgroundType: String?, color: Int) : this(
 			name
@@ -305,8 +307,12 @@ object GpxUtilities {
 			return hidden
 		}
 
+		fun isPinned(): Boolean {
+			return pinned
+		}
+
 		override fun hashCode(): Int {
-			return hash(name, iconName, backgroundType, color, points, hidden)
+			return hash(name, iconName, backgroundType, color, points, hidden, pinned)
 		}
 
 		override fun equals(other: Any?): Boolean {
@@ -314,6 +320,7 @@ object GpxUtilities {
 			if (other == null || other !is PointsGroup) return false
 			return color == other.color &&
 					hidden == other.hidden &&
+					pinned == other.pinned &&
 					name == other.name &&
 					iconName == other.iconName &&
 					backgroundType == other.backgroundType &&
@@ -335,6 +342,9 @@ object GpxUtilities {
 			if (isHidden()) {
 				bundle.putBoolean(HIDDEN_EXTENSION, true)
 			}
+			if (isPinned()) {
+				bundle.putBoolean(PINNED_EXTENSION, true)
+			}
 			return bundle
 		}
 
@@ -355,6 +365,7 @@ object GpxUtilities {
 				category.iconName = parser.getAttributeValue("", ICON_NAME_EXTENSION)
 				category.backgroundType = parser.getAttributeValue("", BACKGROUND_TYPE_EXTENSION)
 				category.hidden = parser.getAttributeValue("", HIDDEN_EXTENSION).toBoolean()
+				category.pinned = parser.getAttributeValue("", PINNED_EXTENSION).toBoolean()
 				return category
 			}
 		}
