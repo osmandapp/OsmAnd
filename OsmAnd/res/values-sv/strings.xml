@@ -1241,7 +1241,7 @@
 \nLäs mer på %1$s.</string>
     <string name="record_plugin_name">Inspelning av resa</string>
     <string name="int_hour">h</string>
-    <string name="duration">Längd</string>
+    <string name="duration">Varaktighet</string>
     <string name="distance">Sträcka</string>
     <string name="rendering_attr_publicTransportMode_name">Buss-, trådbuss-, matarbusslinjer</string>
     <string name="save_track_to_gpx_globally_descr">Allmän loggning av position till en GPX-fil kan slås på/av via GPX-loggningswidgeten på kartan.</string>
@@ -1440,7 +1440,7 @@
     <string name="shared_string_audio">Ljud</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Foto</string>
-    <string name="shared_string_release">Utgiven</string>
+    <string name="shared_string_release">Släppt</string>
     <string name="simulate_your_location">Simulera din plats</string>
     <string name="drawer">Platt lista</string>
     <string name="short_location_on_map">Lat %1$s
@@ -1640,7 +1640,7 @@
     <string name="favorite_category_select">Välj kategori</string>
     <string name="count_of_lines">Antal rader</string>
     <string name="nm">di</string>
-    <string name="nm_h">knop</string>
+    <string name="nm_h">kn</string>
     <string name="min_mile">min/mi</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -2067,7 +2067,7 @@
     <string name="altitude_ascent">Uppför</string>
     <string name="average_altitude">Genomsnittlig höjd</string>
     <string name="shared_string_time">Tid</string>
-    <string name="total_distance">Total sträcka</string>
+    <string name="total_distance">Totalt avstånd</string>
     <string name="shared_string_time_span">Tidsspann</string>
     <string name="shared_string_max">Max</string>
     <string name="shared_string_start_time">Starttid</string>
@@ -3481,7 +3481,7 @@
     <string name="minmax_speed_dialog_title">Ställ in mini-/maximal hastighet</string>
     <string name="default_speed_setting_descr">Ändra standardhastighetsinställningar</string>
     <string name="default_speed_setting_title">Standardhastighet</string>
-    <string name="shared_string_max_speed">Max. hastighet</string>
+    <string name="shared_string_max_speed">Maxhastighet</string>
     <string name="shared_string_min_speed">Min. hastighet</string>
     <string name="apply_preference_to_all_profiles">Tillämpa denna förändring på alla eller valda profiler.</string>
     <string name="layer_osm_edits">OSM-redigeringar</string>
@@ -4051,7 +4051,7 @@
     <string name="backup_error_failed_to_fetch_remote_items">Misslyckades att hämta listan över filer från servern.</string>
     <string name="export_to_file">Exportera till fil</string>
     <string name="shared_string_purchased_on">Köpt</string>
-    <string name="open_weather_action_description">Ger dig möjlighet att öppna en vy med detaljerad väderinformation.</string>
+    <string name="open_weather_action_description">Låter dig öppna en skärm med detaljerad väderinformation.</string>
     <string name="open_weather_action">Öppna väder</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Konturlinjer för nederbörd</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Konturlinjer för vindhastighet</string>
@@ -4340,7 +4340,7 @@
     <string name="sort_date_descending">Äldsta först</string>
     <string name="approximate_bearing">Ungefärlig bäring</string>
     <string name="approximate_bearing_descr">Härled bäringen från den rutt som följs.</string>
-    <string name="inch">in</string>
+    <string name="inch">tum</string>
     <string name="shared_string_apply_changes">Tillämpa ändringar</string>
     <string name="no_visible_tracks_description">Välj spår att visa på kartan.</string>
     <string name="recently_visible">Senast synliga %1$s</string>
@@ -4417,7 +4417,7 @@
     <string name="switch_widget_mode_desc">Genom att trycka på widgeten kan du byta läge.</string>
     <string name="free_maps_updates">Gratis uppdateringar (nödsituationer)</string>
     <string name="clear_online_cache">Rensa online-cache</string>
-    <string name="metric_lbs">lbs</string>
+    <string name="metric_lbs">pund</string>
     <string name="token_is_not_valid">Token är inte giltig</string>
     <string name="shared_string_alt_name">Alternativt namn</string>
     <string name="enable_3d_maps">Aktivera 3D-kartor</string>
@@ -5062,7 +5062,7 @@
     <string name="osmand_cloud_deleting_account_descr">Om några ögonblick kommer all din data och ditt konto raderas från OsmAnd Cloud.
 \n
 \nData på din enhet berörs inte av detta.</string>
-    <string name="quick_action_add_route_descr">En knapp för att påbörja en rutt från skärmens mitt.</string>
+    <string name="quick_action_add_route_descr">En knapp för att starta en rutt från mitten av skärmen.</string>
     <string name="time_to_destination_widget_desc">Visar \"Ankomsttid\" eller \"Återstående restid\" till sista målpunkten. Tiden uppdateras kontinuerligt under navigeringen, och är samma som rutt-tiden från nuvarande position.</string>
     <string name="dangerous_goods">Farligt gods</string>
     <string name="shared_storage_third_step">Ge åtkomst för att få tillgång till mappen. Utan det kan OsmAnd inte kopiera filer.</string>
@@ -5262,12 +5262,12 @@
     <string name="help_article_navigation_routing_straight_line_routing_name">Rak linje-vägvisning (flyg)</string>
     <string name="help_article_navigation_routing_train_routing_name">Tågvägvisning</string>
     <string name="root_folder">Rot-mappen</string>
-    <string name="key_event_action_previous_app_profile">Föregående app-profil</string>
+    <string name="key_event_action_previous_app_profile">Föregående appprofil</string>
     <string name="show_toast_about_key_pressed">Visa toast-meddelande om nedtryckt knapp</string>
     <string name="rendering_value_caiScale_description">Italienska alpinistföreningen (Club Alpino Italiano)</string>
     <string name="empty_smart_folder_description">Matchande spår visas automatiskt här</string>
     <string name="delete_folder">Radera mapp</string>
-    <string name="key_event_action_move_left">Flytta vänster</string>
+    <string name="key_event_action_move_left">Flytta åt vänster</string>
     <string name="help_article_plan_route_coordinate_input_name">Koordinat-inmatning</string>
     <string name="tripltek_promo">Tripltek kampanj för %1$s månader</string>
     <string name="restore_from_trash">Återställ från papperskorgen</string>
@@ -5277,7 +5277,7 @@
     <string name="tripltek_promo_description">Gratis tillgång till obegränsade kartnedladdningar, 3D-reliefer etc. för %1$s månad(er)</string>
     <string name="deletion_error">Fel vid radering</string>
     <string name="smart_folder_saved">Smart mapp sparad</string>
-    <string name="key_event_action_move_right">Flytta höger</string>
+    <string name="key_event_action_move_right">Flytta åt höger</string>
     <string name="help_article_purchases_giveaway_name">Gåva</string>
     <string name="ant_missing_dependency_descr">Kunde inte hitta den nödvändiga tjänsten \"%1$s\".
 \nDu behöver installera eller uppdatera tilläggstjänsten ANT+.
@@ -5295,7 +5295,7 @@
     <string name="tracks_empty_folder">Tom mapp</string>
     <string name="add_new_type">Lägg till ny typ</string>
     <string name="wikipedia_and_travel_maps">Wikipedia och resekartor</string>
-    <string name="key_event_action_move_up">Flytta uppåt</string>
+    <string name="key_event_action_move_up">Flytta upp</string>
     <string name="help_article_map_map_context_menu_name">Kontextmeny för karta</string>
     <string name="add_smart_folder">Lägg till smart mapp</string>
     <string name="empty_name">Tomt namn</string>
@@ -5328,12 +5328,12 @@
     <string name="discard_filter_changes_prompt">Återställa alla filter?</string>
     <string name="no_config_smart_folder_description">Smart mappar möjliggör att gruppera spår med tillämpade filter</string>
     <string name="trash_is_empty">Papperskorgen är tom</string>
-    <string name="key_event_action_move_to_my_location">Flytta till min position</string>
+    <string name="key_event_action_move_to_my_location">Flytta till Min plats</string>
     <string name="not_specified">Ej angiven</string>
     <string name="download_to_device">Ladda ned till enhet</string>
     <string name="help_article_plan_route_web_name">Ruttplanering via internet</string>
     <string name="key_event_category_map_interactions">Kartinteraktioner</string>
-    <string name="key_event_action_move_down">Flytta nedåt</string>
+    <string name="key_event_action_move_down">Flytta ner</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Öppna WunderLINQ Datagrid</string>
     <string name="see_all_plans">Se alla prenumerationer</string>
     <string name="shared_string_trash">Papperskorg</string>
@@ -5391,7 +5391,7 @@
     <string name="duration_moment_ago">alldeles nyss</string>
     <string name="use_routing_fallback_description">Använd en ruttberäkning offline vid tillfällen då online-alternativet inte är tillgängligt.</string>
     <string name="map_widget_sun_position_desc">Visar tid kvar till solens upp- eller nedgång.</string>
-    <string name="no_activity_for_intent">Installera en app som kan utföra denna åtgärd.</string>
+    <string name="no_activity_for_intent">Installera en app som kan utföra den här åtgärden.</string>
     <string name="battery_optimization_banner_content">Androids batterioptimering kan orsaka luckor och andra små fel i spårinspelningar.</string>
     <string name="battery_optimization">Batterioptimering</string>
     <string name="dont_ask_anymore">Fråga inte igen</string>
@@ -5408,7 +5408,7 @@
     <string name="shared_string_author">Författare</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="lang_zh_hans">Förenklad kinesiska</string>
-    <string name="lang_zh_hant">Traditionell kinesiska</string>
+    <string name="lang_zh_hant">Traditionell kinesisk</string>
     <string name="battery_optimization_settings">Inställningar för batterioptimering</string>
     <string name="shared_string_all_tracks">Alla spår</string>
     <string name="max_sensor_bycicle_power">Cykeleffekt, max</string>
@@ -5578,9 +5578,9 @@
     <string name="location_radius">Platsradie</string>
     <string name="quick_action_verb_show_hide">Visa / Dölj</string>
     <string name="quick_action_new_route">Ny rutt</string>
-    <string name="quick_action_move_map_right">Kartan åt höger</string>
-    <string name="quick_action_move_map_down">Kartan neråt</string>
-    <string name="quick_action_move_map_up">Kartan uppåt</string>
+    <string name="quick_action_move_map_right">Karta till höger</string>
+    <string name="quick_action_move_map_down">Flytta ner</string>
+    <string name="quick_action_move_map_up">Karta åvan</string>
     <string name="choose_map_orientation">Välj kartans orientering</string>
     <string name="auto_25_chars_route_tr">Sväng höger</string>
     <string name="auto_25_chars_route_tl">Sväng vänster</string>
@@ -5594,8 +5594,8 @@
     <string name="driving_region_uk">Storbritannien och liknande</string>
     <string name="driving_region_india">Indien</string>
     <string name="quick_action_remove_next_destination">Nästa destinationspunkt</string>
-    <string name="quick_action_to_my_location">Till min position</string>
-    <string name="quick_action_move_map_left">Kartan åt vänster</string>
+    <string name="quick_action_to_my_location">Till min plats</string>
+    <string name="quick_action_move_map_left">Karta till vänster</string>
     <string name="quick_action_first_intermediate">Första mellanliggande</string>
     <string name="quick_action_parking_place">Parkeringsplats</string>
     <string name="navigation_position_icon">Symbol för navigeringsposition</string>
@@ -5644,7 +5644,7 @@
     <string name="quick_action_next_app_profile">App profil till nästa</string>
     <string name="data_source">Datakälla</string>
     <string name="map_settings_weather_wind_animation">Vindanimering</string>
-    <string name="quick_action_previous_app_profile">App-profil, föregående</string>
+    <string name="quick_action_previous_app_profile">Appprofil till föregående</string>
     <string name="maps_that_also_be_used">Kartor som också kommer användas: %1$s</string>
     <string name="battery_saving_mode">Batterisparläge</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
@@ -5707,7 +5707,7 @@
     <string name="new_trip_segment">Nytt segment av resa</string>
     <string name="obd_ambient_air_temp_desc">Visar temperaturen utanför fordonet.</string>
     <string name="energy_avg_info">Energistatistik (medel 1/ 5 / 15 minuter)</string>
-    <string name="quick_action_navigation_view_title">Navigationsvy</string>
+    <string name="quick_action_navigation_view_title">Navigeringsvy</string>
     <string name="connect_new_scanner">Anslut ny skanner</string>
     <string name="shared_string_engine">Motor</string>
     <string name="vehicle_metrics_recording_description">Välj vilka parametrar som ska lagras i GPX-filen.</string>
@@ -5883,7 +5883,7 @@
     <string name="us_gallons_unit">gal</string>
     <string name="route_guidance_desc">Ger ruttvägledning i realtid, inklusive avstånd till nästa sväng, vägnamn, aktuellt gatunamn och körfältsinformation. Widgetar är aktiva under navigering.</string>
     <string name="background_opacity">Bakgrundens genomskinlighet</string>
-    <string name="quick_action_previous_screen_title">Föregående skärmbild</string>
+    <string name="quick_action_previous_screen_title">Föregående skärm</string>
     <string name="quick_action_switch_compass_desc">En knapp för att ändra kartorientering.</string>
     <string name="y_axis_description">Välj upp till två valmöjligheter för Y-axeln.</string>
     <string name="delete_widget_description">Denna wiget kommer att tas bort. Du kan återställa den senare i Konfigurera skärmen.</string>
@@ -6041,7 +6041,7 @@
     <string name="next_turn_information_desc">Visar nästkommande svängriktning och gatunamn.</string>
     <string name="manage_purchases">Hantera köp</string>
     <string name="shared_string_price">Pris</string>
-    <string name="obd_alt_battery_voltage">Adapter spänning</string>
+    <string name="obd_alt_battery_voltage">Adapterspänning</string>
     <string name="liter_single">Liter</string>
     <string name="imperial_gallon">Imperial gallon</string>
     <string name="us_gallon">US gallon</string>
@@ -6056,7 +6056,7 @@
     <string name="copy_as_new_folder">Kopiera som ny mapp</string>
     <string name="shared_string_last_downhill">Sista nedförsbacken</string>
     <string name="shared_string_last_uphill">Sista uppförsbacken</string>
-    <string name="add_to_a_folder">Lägg till en mapp</string>
+    <string name="add_to_a_folder">Lägg till i en mapp</string>
     <string name="add_to_favorites">Lägg till i favoriter</string>
     <string name="max_weight_at_full_load_description">Ge ditt fordons maxvikt vid full belastning för att undvika vägar och broar med viktgränser.</string>
     <string name="max_axle_load_description">Ange ditt fordons maximala axellast för att undvika vägar och broar med viktbegränsningar.</string>
@@ -6092,12 +6092,12 @@
     <string name="rendering_attr_hideFairways_name">Fairways</string>
     <string name="rendering_attr_hideFerries_name">Färjerutter</string>
     <string name="rendering_attr_hideFerries_description">Dölj färjerutter</string>
-    <string name="rendering_attr_hideLightSectors_name">Ljusa sektorer</string>
-    <string name="rendering_attr_hideLightSectors_description">Dölja ljussektorer</string>
-    <string name="rendering_attr_hideLightSectorSources_name">Ljusa sektorer källor</string>
-    <string name="rendering_attr_hideLightSectorSources_description">Dölja ljussektorer källor</string>
-    <string name="rendering_attr_hideNoLNAM_name">OSM sjömärken (vissa)</string>
-    <string name="rendering_attr_hideNoLNAM_description">Dölj OSM sjömärken (vissa)</string>
+    <string name="rendering_attr_hideLightSectors_name">Ljussektorer</string>
+    <string name="rendering_attr_hideLightSectors_description">Dölj ljussektorer</string>
+    <string name="rendering_attr_hideLightSectorSources_name">Ljussektorkällor</string>
+    <string name="rendering_attr_hideLightSectorSources_description">Dölj ljussektorkällor</string>
+    <string name="rendering_attr_hideNoLNAM_name">OSM-sjömärken (vissa)</string>
+    <string name="rendering_attr_hideNoLNAM_description">Dölj OSM-sjömärken (vissa)</string>
     <string name="show_local_names">Visa lokala namn</string>
     <string name="efficient_grid">Effektivt rutnät</string>
     <string name="slots">rutor</string>
@@ -6149,4 +6149,27 @@
     <string name="rendering_attr_shellsStyle_description">Stil för snäckor på havsbotten</string>
     <string name="rendering_attr_showLNAMmarker_name">ENC-markörer</string>
     <string name="rendering_attr_showLNAMmarker_description">Visa ENC-markörer</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimeter</string>
+    <string name="bicycle_width_limit_description">Ange din cykelbredd för att undvika smala cykelvägar.</string>
+    <string name="copy_link">Kopiera länk</string>
+    <string name="rendering_attr_shellsStyle_name">Skalstil</string>
+    <string name="rendering_attr_spotDistance_name">Intervall mellan djuplodningar</string>
+    <string name="rendering_attr_spotDistance_description">Intervall mellan djuplodningar</string>
+    <string name="rendering_attr_spotSize_name">Djuplodningsstorlek</string>
+    <string name="rendering_attr_spotSize_description">Djuplodningsstorlek</string>
+    <string name="rendering_attr_tidalFlatStyle_name">Tidvattenvåtmarkens karaktär</string>
+    <string name="rendering_attr_tidalFlatStyle_description">Tidvattenvåtmarkens karaktär</string>
+    <string name="rendering_attr_watercolor_name">Akvarell</string>
+    <string name="show_spherical_map_description">Visa sfäroidmodell av jorden</string>
+    <string name="enable_3d_objects">Aktivera 3D-byggnader</string>
+    <string name="enable_3d_objects_description">Visa 3D-byggnadsobjekt på kartan</string>
+    <string name="show_debug_tile">Visa information om ruta</string>
+    <string name="enable_msaa">Aktivera MSAA</string>
+    <string name="lang_crh">Krimtatariska (latin)</string>
+    <string name="lang_en_barebones">Engelska (barebones)</string>
+    <string name="accessibility_independent_features">Oberoende funktioner</string>
+    <string name="access_pinch_zoom_magnification">Nypzoomförstoring</string>
+    <string name="access_pinch_zoom_magnification_descr">Använd visningsport-skalning istället för diskreta zoomnivåer under inzoomningsgester.</string>
+    <string name="download_wikipedia_label">Ladda ner Wikipedia</string>
 </resources>
