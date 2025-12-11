@@ -2704,7 +2704,7 @@
     <string name="avoid_pt_types_descr">Sélectionner les types de transports en commun à éviter pour le guidage :</string>
     <string name="avoid_pt_types">Éviter des types de transports…</string>
     <string name="quick_action_day_night_mode">Mode %s</string>
-    <string name="shared_string_degrees">Diplômes</string>
+    <string name="shared_string_degrees">Degrés</string>
     <string name="shared_string_milliradians">Milliradians</string>
     <string name="angular_measeurement">Unité d\'angle</string>
     <string name="angular_measeurement_descr">Modifier l\'unité de mesure de l\'azimut.</string>
