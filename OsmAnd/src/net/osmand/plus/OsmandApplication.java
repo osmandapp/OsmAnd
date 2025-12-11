@@ -109,7 +109,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
-import net.osmand.plus.settings.fragments.search.SearchDatabaseRebuilder;
+import net.osmand.plus.settings.fragments.search.SearchDatabaseRootedAtConfigureProfileFragmentAdapter;
 import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
@@ -245,7 +245,7 @@ public class OsmandApplication extends MultiDexApplication {
 					preferencesDatabaseManager
 							.getPreferencesDatabase()
 							.searchablePreferenceScreenGraphRepository()
-							.addGraphCreator(new SearchDatabaseRebuilder(getTileSourceTemplatesProvider()));
+							.addGraphTransformer(new SearchDatabaseRootedAtConfigureProfileFragmentAdapter(getTileSourceTemplatesProvider()));
 
 	public static OsmandApplication getInstanceFromContext(final Context context) {
 		return (OsmandApplication) context.getApplicationContext();
