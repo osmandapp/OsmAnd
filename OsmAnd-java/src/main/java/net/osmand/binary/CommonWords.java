@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 public class CommonWords {
 	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>();
 	private static Map<String, Integer> frequentlyUsedWordsDictionary = new LinkedHashMap<>();
+	private static Set<String> regionNames = new HashSet<>();
 	
 	// for ex: 100 bridge, ленина 30, but not potenitally name of street (31st road)
 	private static String NUMBER_WITH_LESS_THAN_2_LETTERS = "NUMBER_WITH_LESS_THAN_2_LETTERS";
@@ -21,13 +22,29 @@ public class CommonWords {
 	private static void addFrequentlyUsed(String string) {
 		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
 	}
+
+	private static boolean isNumber2Letters(String name) {
+		return Character.isDigit(name.charAt(0)) && letters(name) < 2;
+	}
+
+	public static boolean isCommon(String name) {
+		return commonWordsDictionary.containsKey(name) || isNumber2Letters(name); 
+	}
+	
 	public static int getCommon(String name) {
-		if (Character.isDigit(name.charAt(0)) && letters(name) < 2) {
+		if (isNumber2Letters(name)) {
 			name = NUMBER_WITH_LESS_THAN_2_LETTERS;
 		}
 		Integer i = commonWordsDictionary.get(name);
-		return i == null ? -1 : i.intValue();
+		if (i != null) {
+			return i.intValue();
+		}
+		if (regionNames.contains(name)) {
+			return commonWordsDictionary.size();
+		}
+		return -1;
 	}
+	
 
 	public static int getFrequentlyUsed(String name) {
 		Integer i = frequentlyUsedWordsDictionary.get(name);
@@ -49,19 +66,28 @@ public class CommonWords {
 		}
 		Integer i = commonWordsDictionary.get(name);
 		// higher means better for search
-		if (i == null) {
-			int fq = getFrequentlyUsed(name);
-			if (fq != -1) {
-				return commonWordsDictionary.size() + fq;
-			}
-			return -1;
+		if (i != null) {
+			return i.intValue();
 		}
-		return i.intValue();
+		if (regionNames.contains(name)) {
+			return commonWordsDictionary.size();
+		}
+		int fq = getFrequentlyUsed(name);
+		if (fq != -1) {
+			return commonWordsDictionary.size() + fq + 1;
+		}
+		return -1;
 	}
 
 	public static int getCommonGeocoding(String name) {
 		Integer i = commonWordsDictionary.get(name);
-		return i == null ? -1 : i.intValue();
+		if (i != null) {
+			return i.intValue();
+		}
+		if (regionNames.contains(name)) {
+			return commonWordsDictionary.size();
+		}
+		return -1;
 	}
 	
 	private static int letters(String s) {
@@ -97,9 +123,9 @@ public class CommonWords {
 			Set<String> names = new HashSet<>();
 			parseRegionNames(osmandRegions.getWorldRegion(), names);
 			for (String name : names) {
-				CommonWords.addCommon(name);
+				regionNames.add(name);
 				if (name.contains(".")) {
-					CommonWords.addCommon(name.replace(".", ""));
+					regionNames.add(name.replace(".", ""));
 				}
 			}
 		}

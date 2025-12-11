@@ -1,5 +1,7 @@
 package net.osmand.search.core;
 
+import static net.osmand.search.core.SearchCoreFactory.PREFERRED_DEFAULT_ZOOM;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -17,7 +19,6 @@ import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import static net.osmand.search.core.SearchCoreFactory.PREFERRED_DEFAULT_ZOOM;
 
 
 public class SearchResult {
@@ -235,6 +236,7 @@ public class SearchResult {
 			exactResult = exactResult.parentSearchResult;
 		}
 		
+		
 		int idxMatchedWord = -1;
 		for (String searchPhraseName : searchPhraseNames) {
 			wordMatched = false;
@@ -247,6 +249,7 @@ public class SearchResult {
 				}
 			}
 			if (!wordMatched) {
+//				cnt.allWordsInPhraseAreInResult = false;
 				return false;
 			}
 		}
