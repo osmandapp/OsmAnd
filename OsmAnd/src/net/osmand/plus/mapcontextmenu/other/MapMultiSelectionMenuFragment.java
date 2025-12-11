@@ -46,6 +46,7 @@ import net.osmand.plus.utils.InsetTargetsCollection;
 public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		implements OnClickListener, OnGlobalLayoutListener, ObservableScrollViewCallbacks {
 
+	public static final int SHOW_ELEMENTS = 3;
 	public static final String TAG = "MapMultiSelectionMenuFragment";
 
 	private View view;
@@ -54,8 +55,9 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	private MapMultiSelectionMenu menu;
 	private OnBackPressedCallback backPressedCallback;
 
-	private int minHeight;
-	private boolean initialScroll = true;
+	private int scrollControlLastY;
+	private int minHeightToCloseOnScroll;
+
 	private boolean dismissing;
 	private boolean wasDrawerDisabled;
 
@@ -207,7 +209,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	public void onGlobalLayout() {
 		float titleHeight = getResources().getDimension(R.dimen.multi_selection_header_height);
 		int maxHeight = (int) (titleHeight);
-		for (int i = 0; i < 3 && i < listAdapter.getCount(); i++) {
+		for (int i = 0; i < SHOW_ELEMENTS && i < listAdapter.getCount(); i++) {
 			View childView = listAdapter.getView(0, null, view.findViewById(R.id.list));
 			childView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
 					View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
@@ -222,21 +224,18 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 
 	@Override
 	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-		if (minHeight == 0) {
+		if (minHeightToCloseOnScroll == 0) {
 			int headerHeight = getDimensionPixelSize(R.dimen.multi_selection_header_height);
 			int listItemHeight = getDimensionPixelSize(R.dimen.list_item_height);
-			minHeight = headerHeight + listItemHeight - navBarHeight;
+			minHeightToCloseOnScroll = headerHeight + listItemHeight - navBarHeight;
 		}
-		if (scrollY <= minHeight && !initialScroll) {
+		boolean isScrollingDown = scrollControlLastY > 0 && scrollY <= scrollControlLastY;
+		if (isScrollingDown && scrollY <= minHeightToCloseOnScroll) {
 			if (menu != null) {
 				menu.hide();
 			}
 		}
-	}
-
-	@Override
-	public void onDownMotionEvent() {
-		initialScroll = false;
+		scrollControlLastY = scrollY;
 	}
 
 	@Override
