@@ -57,6 +57,7 @@ public class SearchResult {
 	public String addressName;
 	public String cityName;
 	public Collection<String> otherNames;
+	
 
 	public String localeRelatedObjectName;
 	public Object relatedObject;
@@ -405,6 +406,7 @@ public class SearchResult {
 	public boolean isFullPhraseEqualLocaleName() {
 		return requiredSearchPhrase.getFullSearchPhrase().equalsIgnoreCase(localeName);
 	}
+	
 
 	public List<String> filterUnknownSearchWord(List<String> leftUnknownSearchWords) {
 		if (leftUnknownSearchWords == null) {

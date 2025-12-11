@@ -192,12 +192,17 @@ public class SearchCoreFactory {
 			return null;
 		}
 		
-		boolean matchAddressName(SearchPhrase phrase, SearchResult parent, SearchResult res, boolean fullMatch) {
+		boolean matchAddressName(SearchPhrase phrase, SearchResult prevRes, SearchResult res, boolean fullMatch) {
 			boolean match = false;
-			if (parent != null) {
-				phrase.countUnknownWordsMatchMainResult(parent);
-				List<String> leftUnknownSearchWords = parent.filterUnknownSearchWord(null);
-				SearchPhrase nphrase = phrase.selectWord(parent, leftUnknownSearchWords,
+			if (prevRes != null) {
+				// remove braces to not count them 
+				// IMPORTANT: the names with braces restored in publish method !
+				prevRes.localeName = SearchPhrase.stripBraces(prevRes.localeName);
+				prevRes.alternateName = SearchPhrase.stripBraces(prevRes.alternateName);
+				prevRes.otherNames = SearchPhrase.stripBraces(prevRes.otherNames);
+				phrase.countUnknownWordsMatchMainResult(prevRes);
+				List<String> leftUnknownSearchWords = prevRes.filterUnknownSearchWord(null);
+				SearchPhrase nphrase = phrase.selectWord(prevRes, leftUnknownSearchWords,
 						phrase.isLastUnknownSearchWordComplete()
 								|| !leftUnknownSearchWords.contains(phrase.getLastUnknownSearchWord()));
 //				NameStringMatcher unknownNameStringMatcher = nphrase.getMainUnknownNameStringMatcher();
@@ -223,7 +228,7 @@ public class SearchCoreFactory {
 				return true;
 			}
 			List<String> localeNames = SearchPhrase.splitWords(localeName, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
-			if (parent == null || !parent.firstUnknownWordMatches) {
+			if (prevRes == null || !prevRes.firstUnknownWordMatches) {
 				Iterator<String> it = localeNames.iterator();
 				while (it.hasNext()) {
 					String lName = it.next();
@@ -232,7 +237,7 @@ public class SearchCoreFactory {
 					}
 				}
 			}
-			List<String> leftUnknownSearchWords = parent == null ? phrase.getUnknownSearchWords() : parent.filterUnknownSearchWord(null);
+			List<String> leftUnknownSearchWords = prevRes == null ? phrase.getUnknownSearchWords() : prevRes.filterUnknownSearchWord(null);
 			List<String> unknownSearchWords = phrase.getUnknownSearchWords();
 			for (int i = 0; i < unknownSearchWords.size() && !match; i++) {
 				String leftUnknownSearchWord = unknownSearchWords.get(i);
@@ -487,7 +492,7 @@ public class SearchCoreFactory {
 //				final QuadRect streetBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
 				final QuadRect postcodeBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
 				final QuadRect villagesBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 3);
-				final QuadRect cityBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5); // covered by separate sbefore
+				final QuadRect cityBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5); // covered by separate radius before
 				final int priority = phrase.isNoSelectedType() ?
 						SEARCH_ADDRESS_BY_NAME_PRIORITY : SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2;
 				final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
@@ -502,6 +507,7 @@ public class SearchCoreFactory {
 						SearchResult sr = new SearchResult(phrase);
 						sr.object = object;
 						sr.file = currentFile[0];
+						// IMPORTANT: the names with braces restored here (check matchAddressName)
 						sr.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 						sr.otherNames = object.getOtherNames(true);
 						sr.localeRelatedObjectName = sr.file.getRegionName();
@@ -669,7 +675,6 @@ public class SearchCoreFactory {
 								// include parent search result even if it is empty
 								// for street-city don't require exact matching
 								boolean match = matchAddressName(phrase, res, cityResult, true);
-								
 								if (match) {
 									newParentSearchResult = cityResult;
 								} else {
