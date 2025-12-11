@@ -5815,4 +5815,6 @@
     <string name="shared_string_centimeters">centiméter</string>
     <string name="bicycle_width_limit_description">Adja meg a kerékpár szélességét a keskeny kerékpárutak elkerülése érdekében.</string>
     <string name="copy_link">Hivatkozás másolása</string>
+    <string name="routing_attr_pt_limit_name">N legjobb útvonal megjelenítése</string>
+    <string name="routing_attr_pt_limit_description">Adja meg a megjelenítendő legjobb útvonalak darabszámát</string>
 </resources>
