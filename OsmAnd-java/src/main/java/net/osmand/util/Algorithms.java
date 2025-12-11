@@ -74,6 +74,9 @@ public class Algorithms {
 
 	
 	public static boolean containsChar(String s, char[] chars) {
+		if (s == null) {
+			return false;
+		}
 		for (int i = 0; i < s.length(); i++) {
 			char ch = s.charAt(i);
 			for (int j = 0; j < chars.length; j++) {

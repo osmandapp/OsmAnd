@@ -2,6 +2,7 @@ package net.osmand.search.core;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.CollatorStringMatcher;
@@ -407,7 +408,7 @@ public class SearchResult {
 		return requiredSearchPhrase.getFullSearchPhrase().equalsIgnoreCase(localeName);
 	}
 	
-
+	
 	public List<String> filterUnknownSearchWord(List<String> leftUnknownSearchWords) {
 		if (leftUnknownSearchWords == null) {
 			leftUnknownSearchWords = new ArrayList<String>(requiredSearchPhrase.getUnknownSearchWords());
@@ -428,5 +429,60 @@ public class SearchResult {
 		}
 		
 		return leftUnknownSearchWords;
+	}
+	
+	
+	public void restoreBraceNames(String[] backup) {
+		if (backup != null) {
+			if (backup[0] != null) {
+				localeName = backup[0];
+			}
+			if (backup[1] != null) {
+				localeName = backup[1];
+			}
+			if (backup.length > 2) {
+				List<String> oth = new ArrayList<String>();
+				for (int i = 2; i < backup.length; i++) {
+					oth.add(backup[i]);
+				}
+				otherNames = oth;
+			}
+		}
+	}
+	
+	public String[] stripBracesNames() {
+		char[] brace = new char[] { '(' };
+		boolean noBrace = true;
+		noBrace &= !Algorithms.containsChar(localeName, brace);
+		noBrace &= !Algorithms.containsChar(alternateName, brace);
+		if (otherNames != null) {
+			for (String o : otherNames) {
+				noBrace &= !Algorithms.containsChar(o, brace);
+				if (!noBrace) {
+					break;
+				}
+			}
+		}
+		
+		String[] backup = new String[2 + (otherNames == null ? 0 : otherNames.size())];
+		if (localeName != null) {
+			backup[0] = localeName;
+			localeName = SearchPhrase.stripBraces(localeName);
+		}
+		if (alternateName != null) {
+			backup[1] = alternateName;
+			alternateName = SearchPhrase.stripBraces(alternateName);
+		}
+		if (otherNames != null) {
+			Iterator<String> it = otherNames.iterator();
+			List<String> oth = new ArrayList<String>();
+			for (int i = 0; i < otherNames.size(); i++) {
+				String o = it.next();
+				backup[2 + i] = SearchPhrase.stripBraces(o);
+				oth.add(o);
+			}
+			otherNames = oth;
+		}
+		return backup;
 	}
 }

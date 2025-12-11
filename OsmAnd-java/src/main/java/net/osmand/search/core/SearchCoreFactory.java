@@ -196,11 +196,9 @@ public class SearchCoreFactory {
 			boolean match = false;
 			if (prevRes != null) {
 				// remove braces to not count them 
-				// IMPORTANT: the names with braces restored in publish method !
-				prevRes.localeName = SearchPhrase.stripBraces(prevRes.localeName);
-				prevRes.alternateName = SearchPhrase.stripBraces(prevRes.alternateName);
-				prevRes.otherNames = SearchPhrase.stripBraces(prevRes.otherNames);
+				String[] backup = prevRes.stripBracesNames();
 				phrase.countUnknownWordsMatchMainResult(prevRes);
+				prevRes.restoreBraceNames(backup);
 				List<String> leftUnknownSearchWords = prevRes.filterUnknownSearchWord(null);
 				SearchPhrase nphrase = phrase.selectWord(prevRes, leftUnknownSearchWords,
 						phrase.isLastUnknownSearchWordComplete()
@@ -507,7 +505,6 @@ public class SearchCoreFactory {
 						SearchResult sr = new SearchResult(phrase);
 						sr.object = object;
 						sr.file = currentFile[0];
-						// IMPORTANT: the names with braces restored here (check matchAddressName)
 						sr.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 						sr.otherNames = object.getOtherNames(true);
 						sr.localeRelatedObjectName = sr.file.getRegionName();
