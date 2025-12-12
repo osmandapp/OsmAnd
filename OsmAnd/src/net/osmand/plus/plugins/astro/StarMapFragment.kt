@@ -1,25 +1,38 @@
 package net.osmand.plus.plugins.astro
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.SurfaceTexture
 import android.hardware.GeomagneticField
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.hardware.camera2.CameraCharacteristics
+import android.hardware.camera2.CameraDevice
+import android.hardware.camera2.CameraManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Surface
+import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageButton
+import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColorInt
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
@@ -56,12 +69,14 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.controls.maphudbuttons.MapButton
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
+import net.osmand.shared.util.LoggerFactory
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
 import kotlin.math.asin
+import kotlin.math.atan
 import kotlin.math.atan2
 
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
@@ -75,6 +90,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var sheetDetails: TextView
 	private lateinit var resetTimeButton: Button
 	private lateinit var arModeButton: ImageButton
+	private lateinit var cameraButton: ImageButton
+	private lateinit var cameraTextureView: TextureView
+	private lateinit var sliderContainer: FrameLayout
+	private lateinit var transparencySlider: SeekBar
+	private lateinit var resetFovButton: ImageButton
 
 	private lateinit var starChartsView: View
 	private lateinit var starVisiblityView: StarVisiblityChartView
@@ -116,8 +136,17 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var smoothedAltitude = 45.0
 	private val filterAlpha = 0.1 // Smoothing factor
 
+	// --- Camera Overlay ---
+	private var isCameraOverlayEnabled = false
+	private var cameraDevice: android.hardware.camera2.CameraDevice? = null
+	private var captureSession: android.hardware.camera2.CameraCaptureSession? = null
+	private var calculatedFov = 60.0 // Default fallback
+
 	companion object {
+		private val log = LoggerFactory.getLogger("StarMapFragment")
 		val TAG: String = StarMapFragment::class.java.simpleName
+
+		private const val PERMISSION_REQUEST_CAMERA = 1001
 
 		fun showInstance(manager: FragmentManager) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
@@ -149,13 +178,19 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 
 		starView = view.findViewById(R.id.star_view)
+		cameraTextureView = view.findViewById(R.id.camera_view)
 		timeSelectionView = view.findViewById(R.id.time_selection_view)
 		resetTimeButton = view.findViewById(R.id.reset_time_button)
 		bottomSheet = view.findViewById(R.id.bottom_sheet)
 		sheetTitle = view.findViewById(R.id.sheet_title)
 		sheetCoords = view.findViewById(R.id.sheet_coords)
 		sheetDetails = view.findViewById(R.id.sheet_details)
+
 		arModeButton = view.findViewById(R.id.ar_mode_button)
+		cameraButton = view.findViewById(R.id.camera_button)
+		sliderContainer = view.findViewById(R.id.slider_container)
+		transparencySlider = view.findViewById(R.id.transparency_slider)
+		resetFovButton = view.findViewById(R.id.reset_fov_button)
 
 		ViewCompat.setOnApplyWindowInsetsListener(bottomSheet) { v, windowInsets ->
 			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -223,6 +258,26 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			toggleArMode()
 		}
 
+		// Camera Overlay Toggle
+		cameraButton.setOnClickListener {
+			toggleCameraOverlay()
+		}
+
+		// Transparency Slider
+		transparencySlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+			override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+				cameraTextureView.alpha = progress / 100f
+			}
+			override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+			override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+		})
+
+		// Reset FOV Button
+		resetFovButton.setOnClickListener {
+			starView.setViewAngle(calculatedFov)
+			Toast.makeText(context, "FOV reset to ${String.format("%.1f", calculatedFov)}°", Toast.LENGTH_SHORT).show()
+		}
+
 		resetTimeButton.setOnClickListener {
 			starMapViewModel.resetTime()
 			starChartViewModel.resetTime()
@@ -246,6 +301,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		setupToolBar(view)
 		buildZoomButtons(view)
 		updateArButtonState()
+		updateCameraButtonState()
+
+		// Calculate FOV initially if camera permission is already granted (best effort)
+		if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+			calculatedFov = calculateCameraFov()
+		}
 
 		return view
 	}
@@ -267,6 +328,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (isArModeEnabled) {
 			registerSensors()
 		}
+		if (isCameraOverlayEnabled) {
+			openCamera()
+		}
 
 		val mapActivity = requireMapActivity()
 		mapActivity.disableDrawer()
@@ -280,6 +344,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		app.locationProvider.removeCompassListener(this)
 		app.osmandMap.mapView.removeMapLocationListener(this)
 		unregisterSensors()
+		closeCamera()
 
 		val mapActivity = requireMapActivity()
 		mapActivity.enableDrawer()
@@ -287,6 +352,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		mapActivity.refreshMap()
 	}
 
+	// ... [Existing Compass/Location methods are unchanged] ...
 	override fun updateCompassValue(value: Float) {
 		// If AR mode is ON, ignore standard compass updates
 		if (isArModeEnabled) return
@@ -365,7 +431,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (isArModeEnabled) {
 			arModeButton.setColorFilter(Color.BLUE)
 		} else {
-			arModeButton.setColorFilter(Color.parseColor("#5f6e7c")) // Dark grey for visibility on white background
+			arModeButton.setColorFilter("#5f6e7c".toColorInt())
 		}
 	}
 
@@ -434,70 +500,192 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 			SensorManager.remapCoordinateSystem(rotationMatrix, axisX, axisY, remappedRotationMatrix)
 
-			// We need the direction the "back camera" is pointing.
-			// In the remapped coordinate system (aligned with screen):
-			// X is Right, Y is Up, Z is Out of Screen.
-			// The back camera points in the -Z direction: Vector(0, 0, -1).
-			// We transform this vector to World coordinates using the rotation matrix R.
-			// V_world = R * V_device
-			// V_world = R * [0, 0, -1]^T
-			//
-			// R indices:
-			// 0 1 2
-			// 3 4 5
-			// 6 7 8
-			//
-			// Vx = R0*0 + R1*0 + R2*-1 = -R2
-			// Vy = R3*0 + R4*0 + R5*-1 = -R5
-			// Vz = R6*0 + R7*0 + R8*-1 = -R8
-
 			val vX = -remappedRotationMatrix[2]
 			val vY = -remappedRotationMatrix[5]
 			val vZ = -remappedRotationMatrix[8]
 
-			// Calculate Azimuth (Angle around Z axis, from Y towards X)
-			// atan2(x, y) returns angle from Y axis towards X axis (which matches Azimuth definition: 0=N, 90=E)
 			val azimuthRad = atan2(vX.toDouble(), vY.toDouble())
-
-			// Calculate Altitude (Angle above Horizon)
-			// asin(z) gives angle from -pi/2 (Nadir) to +pi/2 (Zenith)
 			val altitudeRad = asin(vZ.toDouble())
 
 			var azimuthDeg = Math.toDegrees(azimuthRad)
 			val altitudeDeg = Math.toDegrees(altitudeRad)
 
-			// Normalize Azimuth 0..360
 			if (azimuthDeg < 0) azimuthDeg += 360
 
-			// Apply magnetic declination if available
 			if (geomagneticField != null) {
 				azimuthDeg += geomagneticField!!.declination
 			}
-			// Normalize again
 			if (azimuthDeg >= 360) azimuthDeg -= 360
 			if (azimuthDeg < 0) azimuthDeg += 360
 
-			// Smoothing (Low Pass Filter)
-			// Handle 360 wrap-around for azimuth
 			val azDiff = azimuthDeg - smoothedAzimuth
 			var azDelta = azDiff
 			if (azDiff > 180) azDelta = azDiff - 360
 			else if (azDiff < -180) azDelta = azDiff + 360
 
 			smoothedAzimuth += azDelta * filterAlpha
-			// Normalize smoothed azimuth
 			if (smoothedAzimuth >= 360) smoothedAzimuth -= 360
 			if (smoothedAzimuth < 0) smoothedAzimuth += 360
 
 			smoothedAltitude += (altitudeDeg - smoothedAltitude) * filterAlpha
 
-			// Update StarView
 			starView.setCenter(smoothedAzimuth, smoothedAltitude)
 		}
 	}
 
-	override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-		// No-op
+	override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+
+	// --- Camera Overlay Logic ---
+
+	private fun toggleCameraOverlay() {
+		if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+			ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), PERMISSION_REQUEST_CAMERA)
+			return
+		}
+
+		isCameraOverlayEnabled = !isCameraOverlayEnabled
+		if (isCameraOverlayEnabled) {
+			calculatedFov = calculateCameraFov()
+			openCamera()
+			cameraTextureView.visibility = View.VISIBLE
+			sliderContainer.visibility = View.VISIBLE
+			resetFovButton.visibility = View.VISIBLE
+		} else {
+			closeCamera()
+			cameraTextureView.visibility = View.GONE
+			sliderContainer.visibility = View.GONE
+			resetFovButton.visibility = View.GONE
+		}
+		updateCameraButtonState()
+	}
+
+	private fun updateCameraButtonState() {
+		if (isCameraOverlayEnabled) {
+			cameraButton.setColorFilter(Color.BLUE)
+		} else {
+			cameraButton.setColorFilter("#5f6e7c".toColorInt())
+		}
+	}
+
+	private fun openCamera() {
+		if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+			return
+		}
+
+		if (cameraTextureView.isAvailable) {
+			startCameraSession()
+		} else {
+			cameraTextureView.surfaceTextureListener = object : TextureView.SurfaceTextureListener {
+				@RequiresPermission(Manifest.permission.CAMERA)
+				override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
+					startCameraSession()
+				}
+				override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {}
+				override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean = true
+				override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {}
+			}
+		}
+	}
+
+	@RequiresPermission(Manifest.permission.CAMERA)
+	private fun startCameraSession() {
+		val manager = requireContext().getSystemService(Context.CAMERA_SERVICE) as CameraManager
+		try {
+			// Find back camera
+			var cameraId: String? = null
+			for (id in manager.cameraIdList) {
+				val characteristics = manager.getCameraCharacteristics(id)
+				if (characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_BACK) {
+					cameraId = id
+					break
+				}
+			}
+
+			if (cameraId == null) return
+
+			manager.openCamera(cameraId, object : CameraDevice.StateCallback() {
+				override fun onOpened(camera: CameraDevice) {
+					cameraDevice = camera
+					createCaptureSession()
+				}
+				override fun onDisconnected(camera: CameraDevice) {
+					camera.close()
+					cameraDevice = null
+				}
+				override fun onError(camera: CameraDevice, error: Int) {
+					camera.close()
+					cameraDevice = null
+				}
+			}, null)
+		} catch (e: Exception) {
+			log.error("Failed to open camera", e)
+		}
+	}
+
+	private fun createCaptureSession() {
+		try {
+			val texture = cameraTextureView.surfaceTexture!!
+			texture.setDefaultBufferSize(cameraTextureView.width, cameraTextureView.height)
+			val surface = Surface(texture)
+
+			val builder = cameraDevice?.createCaptureRequest(android.hardware.camera2.CameraDevice.TEMPLATE_PREVIEW)
+			builder?.addTarget(surface)
+
+			cameraDevice?.createCaptureSession(listOf(surface), object : android.hardware.camera2.CameraCaptureSession.StateCallback() {
+				override fun onConfigured(session: android.hardware.camera2.CameraCaptureSession) {
+					captureSession = session
+					builder?.build()?.let {
+						session.setRepeatingRequest(it, null, null)
+					}
+				}
+				override fun onConfigureFailed(session: android.hardware.camera2.CameraCaptureSession) {}
+			}, null)
+		} catch (e: Exception) {
+			log.error("Failed to create capture session", e)
+		}
+	}
+
+	private fun closeCamera() {
+		captureSession?.close()
+		captureSession = null
+		cameraDevice?.close()
+		cameraDevice = null
+	}
+
+	private fun calculateCameraFov(): Double {
+		val manager = requireContext().getSystemService(Context.CAMERA_SERVICE) as CameraManager
+		try {
+			for (id in manager.cameraIdList) {
+				val characteristics = manager.getCameraCharacteristics(id)
+				if (characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_BACK) {
+					val sensorSize = characteristics.get(CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE)
+					val focalLengths = characteristics.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)
+
+					if (sensorSize != null && focalLengths != null && focalLengths.isNotEmpty()) {
+						val w = sensorSize.width
+						val f = focalLengths[0]
+						// Horizontal FOV = 2 * atan(width / (2 * f))
+						val fovRad = 2 * atan(w / (2 * f))
+						val fovDeg = Math.toDegrees(fovRad.toDouble())
+						return fovDeg
+					}
+				}
+			}
+		} catch (e: Exception) {
+			log.error("Failed to calculate camera FOV", e)
+		}
+		return 60.0 // Default fallback
+	}
+
+	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+		if (requestCode == PERMISSION_REQUEST_CAMERA) {
+			if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				toggleCameraOverlay() // Retry enabling
+			} else {
+				Toast.makeText(context, "Camera permission required for overlay", Toast.LENGTH_SHORT).show()
+			}
+		}
 	}
 
 	private fun updateStarMapVisibility(visible: Boolean) {
@@ -602,8 +790,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 
 		starView.onAzimuthManualChangeListener = { azimuth ->
-			// If user pans manually, we might want to disable AR or just let it happen.
-			// Currently, we just stop auto-map-rotation logic.
 			manualAzimuth = true
 			app.osmandMap.mapView.rotateToAnimate(-azimuth.toFloat())
 		}

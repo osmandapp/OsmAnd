@@ -223,6 +223,11 @@ class StarView @JvmOverloads constructor(
 		invalidate()
 	}
 
+	fun setViewAngle(angle: Double) {
+		this.viewAngle = max(10.0, min(150.0, angle))
+		invalidate()
+	}
+
 	fun setAzimuth(azimuth: Double, animate: Boolean = false, fps: Int? = 30) {
 		if (abs(azimuthCenter - azimuth) < 0.5) return
 
