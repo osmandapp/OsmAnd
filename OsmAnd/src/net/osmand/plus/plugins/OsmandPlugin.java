@@ -77,6 +77,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public abstract class OsmandPlugin {
@@ -546,7 +547,7 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull Map<Integer, List<GPXDataSetType[]>> availableTypes) {
 
 	}
 

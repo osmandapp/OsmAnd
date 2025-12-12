@@ -65,7 +65,9 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TrackDetailsMenu {
 
@@ -820,7 +822,12 @@ public class TrackDetailsMenu {
 		if (hasElevationData && hasSpeedData) {
 			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE, GPXDataSetType.SPEED});
 		}
-		PluginsHelper.getAvailableGPXDataSetTypes(analysis, availableTypes);
+		Map<Integer, List<GPXDataSetType[]>> pluginTypes = new LinkedHashMap<>();
+		PluginsHelper.getAvailableGPXDataSetTypes(analysis, pluginTypes);
+
+		for (List<GPXDataSetType[]> list : pluginTypes.values()) {
+			availableTypes.addAll(list);
+		}
 
 		return availableTypes;
 	}

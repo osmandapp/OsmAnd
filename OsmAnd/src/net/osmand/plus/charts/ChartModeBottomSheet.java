@@ -26,7 +26,9 @@ import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -160,13 +162,34 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 		for (GPXDataSetType[] types : defaultTypes) {
 			createYAxisItem(types);
 		}
-		List<GPXDataSetType[]> sensorTypes = getAvailableSensorYTypes(analysis);
-		if (!Algorithms.isEmpty(sensorTypes)) {
+
+		Map<Integer, List<GPXDataSetType[]>> sensorGrouped = getAvailableSensorYTypes(analysis);
+		for (Map.Entry<Integer, List<GPXDataSetType[]>> entry : sensorGrouped.entrySet()) {
+			int groupKey = entry.getKey();
+			List<GPXDataSetType[]> typesList = entry.getValue();
+
+			if (Algorithms.isEmpty(typesList)) {
+				continue;
+			}
+
 			container.addView(createDivider());
+			if (groupKey != 0) {
+				String dividerText = app.getString(groupKey);
+				container.addView(createCategory(dividerText));
+			}
+
+			for (GPXDataSetType[] types : typesList) {
+				createYAxisItem(types);
+			}
 		}
-		for (GPXDataSetType[] types : sensorTypes) {
-			createYAxisItem(types);
-		}
+	}
+
+	private View createCategory(String name){
+		View categoryView = inflate(R.layout.axis_category_title);
+		TextView title = categoryView.findViewById(android.R.id.title);
+		title.setText(name);
+
+		return categoryView;
 	}
 
 	private View createDivider(){
@@ -268,10 +291,11 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@NonNull
-	public static List<GPXDataSetType[]> getAvailableSensorYTypes(@NonNull GpxTrackAnalysis analysis) {
-		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
-		PluginsHelper.getAvailableGPXDataSetTypes(analysis, availableTypes);
-		return availableTypes;
+	public static Map<Integer, List<GPXDataSetType[]>> getAvailableSensorYTypes(@NonNull GpxTrackAnalysis analysis) {
+		Map<Integer, List<GPXDataSetType[]>> groupedTypes = new LinkedHashMap<>();
+
+		PluginsHelper.getAvailableGPXDataSetTypes(analysis, groupedTypes);
+		return groupedTypes;
 	}
 
 	@Override

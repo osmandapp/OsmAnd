@@ -62,6 +62,7 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -378,7 +379,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull Map<Integer, List<GPXDataSetType[]>> availableTypes) {
 		// Disable AutoZoom dev chart
 		//AutoZoomBySpeedHelper.addAvailableGPXDataSetTypes(app, analysis, availableTypes);
 	}
