@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -44,7 +43,7 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 
 public class MapMultiSelectionMenuFragment extends BaseNestedFragment
-		implements OnClickListener, OnGlobalLayoutListener, ObservableScrollViewCallbacks {
+		implements OnClickListener, ObservableScrollViewCallbacks {
 
 	public static final int SHOW_ELEMENTS = 3;
 	public static final String TAG = "MapMultiSelectionMenuFragment";
@@ -133,7 +132,6 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 			paddingView.addView(shadowContainer);
 			listView.addHeaderView(paddingView);
 
-			view.getViewTreeObserver().addOnGlobalLayoutListener(this);
 			((ObservableListView) listView).setScrollViewCallbacks(this);
 		}
 
@@ -144,6 +142,8 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		headerView.setOnClickListener(null);
 		listView.addHeaderView(headerView);
 		listView.setAdapter(listAdapter);
+
+		listView.post(this::applyActualListViewPosition);
 
 		View divider = view.findViewById(R.id.divider);
 		divider.setBackgroundColor(getDividerColor(context, nightMode));
@@ -206,24 +206,19 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		if (sysBars.bottom != 0) {
 			navBarHeight = sysBars.bottom;
 		}
-		view.getViewTreeObserver().addOnGlobalLayoutListener(this);
+		listView.post(this::applyActualListViewPosition);
 	}
 
-	@Override
-	public void onGlobalLayout() {
+	public void applyActualListViewPosition() {
 		float titleHeight = getResources().getDimension(R.dimen.multi_selection_header_height);
 		int maxHeight = (int) (titleHeight);
 		for (int i = 0; i < SHOW_ELEMENTS && i < listAdapter.getCount(); i++) {
-			View childView = listAdapter.getView(0, null, view.findViewById(R.id.list));
+			View childView = listAdapter.getView(i, null, view.findViewById(R.id.list));
 			childView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
 					View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
 			maxHeight += childView.getMeasuredHeight();
 		}
-
 		listView.setSelectionFromTop(0, -maxHeight - statusBarHeight - navBarHeight);
-
-		ViewTreeObserver obs = view.getViewTreeObserver();
-		obs.removeOnGlobalLayoutListener(this);
 	}
 
 	@Override
@@ -253,6 +248,9 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	public void updateContent() {
 		if (listAdapter != null) {
 			listAdapter.notifyDataSetChanged();
+			if (listView != null) {
+				listView.post(this::applyActualListViewPosition);
+			}
 		}
 	}
 
