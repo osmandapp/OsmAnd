@@ -1754,33 +1754,42 @@ public class SearchCoreFactory {
 				String lw = phrase.getUnknownWordToSearchBuilding();
 				NameStringMatcher buildingMatch = phrase.getUnknownWordToSearchBuildingNameMatcher();
 				NameStringMatcher startMatch = new NameStringMatcher(lw, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
-				for (Building b : s.getBuildings()) {
-					SearchResult res = new SearchResult(phrase);
-					boolean interpolation = b.belongsToInterpolation(lw);
-					if ((!buildingMatch.matches(b.getName()) && !interpolation)
-							|| !phrase.isSearchTypeAllowed(ObjectType.HOUSE)) {
-						continue;
-					}
-					if(interpolation) {
-						res.localeName = lw;
-						res.location = b.getLocation(b.interpolation(lw));
-					} else {
-						res.localeName = b.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-						res.location = b.getLocation();
-					}
-					res.otherNames = b.getOtherNames(true);
-					res.object = b;
-					res.file = file;
-					res.priority = priority;
-					res.priorityDistance = 0;
-					res.firstUnknownWordMatches = startMatch.matches(res.localeName);
-					// phrase.countUnknownWordsMatchMainResult(res); // same as above
-					res.relatedObject = s;
-					res.localeRelatedObjectName = s.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-					res.objectType = ObjectType.HOUSE;
-					res.preferredZoom = PREFERRED_BUILDING_ZOOM;
+				int number = Algorithms.extractFirstIntegerNumber(lw);
+				if (phrase.isSearchTypeAllowed(ObjectType.HOUSE)) {
+					for (Building b : s.getBuildings()) {
+						SearchResult res = new SearchResult(phrase);
+						boolean interpolation = false;
+						if (b.belongsToInterpolation(lw)) {
+							interpolation = true;
+						} else if (number > 0 && number == Algorithms.extractFirstIntegerNumber(b.getName()) && 
+								lw.startsWith(b.getName().toLowerCase())) {
+							// match by partial name 
+						} else if(buildingMatch.matches(b.getName())) {
+							// match by name 
+						} else {
+							continue;
+						}
+						if (interpolation) {
+							res.localeName = lw;
+							res.location = b.getLocation(b.interpolation(lw));
+						} else {
+							res.localeName = b.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+							res.location = b.getLocation();
+						}
+						res.otherNames = b.getOtherNames(true);
+						res.object = b;
+						res.file = file;
+						res.priority = priority;
+						res.priorityDistance = 0;
+						res.firstUnknownWordMatches = startMatch.matches(res.localeName);
+						// phrase.countUnknownWordsMatchMainResult(res); // same as above
+						res.relatedObject = s;
+						res.localeRelatedObjectName = s.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+						res.objectType = ObjectType.HOUSE;
+						res.preferredZoom = PREFERRED_BUILDING_ZOOM;
 
-					resultMatcher.publish(res);
+						resultMatcher.publish(res);
+					}
 				}
 				String streetIntersection = phrase.getUnknownWordToSearch();
 				if (Algorithms.isEmpty(streetIntersection) ||
