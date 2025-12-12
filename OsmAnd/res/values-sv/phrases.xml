@@ -5135,4 +5135,7 @@
     <string name="poi_denomination_fsspx">Prästbrödraskapet Sankt Pius X</string>
     <string name="poi_denomination_philippine_independent">Oberoende filippinska kyrkan</string>
     <string name="poi_denomination_exclusive_brethren">Exclusive Brethren</string>
+    <string name="poi_church_of_christ">Church of God in Christ</string>
+    <string name="poi_uniting_church">Uniting church</string>
+    <string name="poi_united_church_of_christ">United Church of Christ</string>
 </resources>
