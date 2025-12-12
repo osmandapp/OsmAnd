@@ -5,9 +5,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.download.local.BaseLocalItem;
+import net.osmand.plus.download.local.MultipleLocalItem;
 
 public class DeleteConfirmationDialogController extends BaseDialogController {
 
@@ -33,8 +35,21 @@ public class DeleteConfirmationDialogController extends BaseDialogController {
 	}
 
 	@NonNull
-	public CharSequence getItemName() {
-		return localItem.getName(app);
+	public CharSequence getDialogTitle() {
+		if (localItem instanceof MultipleLocalItem multipleLocalItem) {
+			return getString(R.string.delete_folder);
+		} else {
+			return getString(R.string.delete_map);
+		}
+	}
+
+	@NonNull
+	public CharSequence getDialogSummary() {
+		if (localItem instanceof MultipleLocalItem multipleLocalItem) {
+			return getString(R.string.delete_folder_description, multipleLocalItem.getName());
+		} else {
+			return getString(R.string.delete_map_description, localItem.getName(app));
+		}
 	}
 
 	public void onDeleteConfirmed() {

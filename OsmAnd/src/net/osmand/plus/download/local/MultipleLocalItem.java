@@ -2,6 +2,10 @@ package net.osmand.plus.download.local;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
+
+import net.osmand.plus.OsmandApplication;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MultipleLocalItem extends BaseLocalItem {
@@ -35,6 +39,17 @@ public class MultipleLocalItem extends BaseLocalItem {
 				maxTimestamp = lastModified;
 			}
 		}
+	}
+
+	@NonNull
+	public List<LocalItem> getLocalItems() {
+		List<LocalItem> result = new ArrayList<>();
+		for (BaseLocalItem item : getItems()) {
+			if (item instanceof LocalItem localItem) {
+				result.add(localItem);
+			}
+		}
+		return result;
 	}
 
 	@NonNull
@@ -80,5 +95,14 @@ public class MultipleLocalItem extends BaseLocalItem {
 	@Override
 	public String toString() {
 		return name + " " + items.toString();
+	}
+
+	public boolean isBackuped(@NonNull OsmandApplication app) {
+		for (BaseLocalItem item : getItems()) {
+			if (item instanceof LocalItem localItem) {
+				return localItem.isBackuped(app);
+			}
+		}
+		return false;
 	}
 }

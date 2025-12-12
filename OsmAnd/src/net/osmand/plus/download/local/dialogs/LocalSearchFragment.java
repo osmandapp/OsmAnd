@@ -36,6 +36,7 @@ import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.LocalSizeCalculationListener;
 import net.osmand.plus.download.local.LocalSizeController;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
+import net.osmand.plus.download.local.dialogs.menu.ItemMenuProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.LocalSortMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -279,7 +280,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 		if (activity != null) {
 			ItemMenuProvider menuProvider = new ItemMenuProvider(activity, this);
 			menuProvider.setItem(item);
-			menuProvider.setColorId(ColorUtilities.getDefaultIconColorId(nightMode));
+			menuProvider.setIconColorId(ColorUtilities.getDefaultIconColorId(nightMode));
 			menuProvider.showMenu(view);
 		}
 	}

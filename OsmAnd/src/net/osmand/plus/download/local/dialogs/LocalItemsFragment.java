@@ -30,13 +30,15 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.local.*;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.download.local.dialogs.SortMapsBottomSheet.MapsSortModeListener;
+import net.osmand.plus.download.local.dialogs.menu.FolderMenuProvider;
+import net.osmand.plus.download.local.dialogs.menu.GroupMenuProvider;
+import net.osmand.plus.download.local.dialogs.menu.ItemMenuProvider;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
@@ -62,6 +64,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	private ImportHelper importHelper;
 	private ItemMenuProvider itemMenuProvider;
 	private GroupMenuProvider groupMenuProvider;
+	private FolderMenuProvider folderMenuProvider;
 	private final ItemsSelectionHelper<BaseLocalItem> selectionHelper = new ItemsSelectionHelper<>();
 
 	private LocalItemsAdapter adapter;
@@ -128,8 +131,12 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		DownloadActivity activity = requireDownloadActivity();
 		importHelper = app.getImportHelper();
 		groupMenuProvider = new GroupMenuProvider(activity, this);
+
+		int iconColorId = ColorUtilities.getDefaultIconColorId(nightMode);
 		itemMenuProvider = new ItemMenuProvider(activity, this);
-		itemMenuProvider.setColorId(ColorUtilities.getDefaultIconColorId(nightMode));
+		itemMenuProvider.setIconColorId(iconColorId);
+		folderMenuProvider = new FolderMenuProvider(activity, this);
+		folderMenuProvider.setIconColorId(iconColorId);
 
 		LocalGroup group = getGroup();
 		if (savedInstanceState == null && group != null) {
@@ -368,11 +375,6 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		}
 	}
 
-	public void performOperation(@NonNull OperationType type, @NonNull LocalItem... items) {
-		LocalOperationTask task = new LocalOperationTask(app, type, this);
-		OsmAndTaskManager.executeTask(task, items);
-	}
-
 	@Override
 	public boolean isItemSelected(@NonNull BaseLocalItem item) {
 		return selectionHelper.isItemSelected(item);
@@ -402,8 +404,13 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	@Override
 	public void onItemOptionsSelected(@NonNull BaseLocalItem item, @NonNull View view) {
-		itemMenuProvider.setItem(item);
-		itemMenuProvider.showMenu(view);
+		if (item instanceof MultipleLocalItem multipleLocalItem) {
+			folderMenuProvider.setItem(multipleLocalItem);
+			folderMenuProvider.showMenu(view);
+		} else {
+			itemMenuProvider.setItem(item);
+			itemMenuProvider.showMenu(view);
+		}
 	}
 
 	@Override

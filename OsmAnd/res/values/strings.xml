@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="delete_folder_description">Delete \"%1$s\" folder?</string>
     <string name="centimeter">cm</string>
     <string name="shared_string_centimeters">centimeters</string>
     <string name="bicycle_width_limit_description">Provide your bicycle width to avoid narrow cycle paths.</string>
