@@ -90,6 +90,7 @@
 				android:layout_marginTop="140dp"
 				android:visibility="gone"/>
 
+			<!-- Compass Button (Top Left) -->
 			<FrameLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content">
@@ -100,6 +101,28 @@
 					android:layout_height="@dimen/map_small_button_size"
 					android:layout_marginStart="@dimen/map_button_margin"
 					android:layout_marginTop="@dimen/map_small_button_margin" />
+
+			</FrameLayout>
+
+			<!-- AR Mode Button (Top Right) -->
+			<FrameLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top|end"
+				android:layout_marginTop="@dimen/map_small_button_margin"
+				android:layout_marginEnd="@dimen/map_button_margin">
+
+				<ImageButton
+					android:id="@+id/ar_mode_button"
+					android:layout_width="@dimen/map_small_button_size"
+					android:layout_height="@dimen/map_small_button_size"
+					android:background="@drawable/btn_circle"
+					android:contentDescription="AR Mode"
+					android:padding="12dp"
+					android:scaleType="fitCenter"
+					android:elevation="4dp"
+					app:srcCompat="@drawable/ic_action_map_pan"
+					app:tint="#5f6e7c" />
 
 			</FrameLayout>
 

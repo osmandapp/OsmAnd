@@ -212,6 +212,17 @@ class StarView @JvmOverloads constructor(
 		invalidate()
 	}
 
+	/**
+	 * Sets the center of the view. Useful for AR mode or immediate updates.
+	 * Azimuth: 0 = North, 90 = East, etc.
+	 * Altitude: 90 = Zenith, 0 = Horizon.
+	 */
+	fun setCenter(azimuth: Double, altitude: Double) {
+		this.azimuthCenter = azimuth
+		this.altitudeCenter = max(-90.0, min(90.0, altitude))
+		invalidate()
+	}
+
 	fun setAzimuth(azimuth: Double, animate: Boolean = false, fps: Int? = 30) {
 		if (abs(azimuthCenter - azimuth) < 0.5) return
 
