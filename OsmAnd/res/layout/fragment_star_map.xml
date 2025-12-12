@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="@color/color_transparent">
@@ -69,6 +70,14 @@
 				android:layout_width="match_parent"
 				android:layout_height="match_parent" />
 
+			<!-- Camera Overlay (On top of StarView) -->
+			<TextureView
+				android:id="@+id/camera_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:alpha="0.5"
+				android:visibility="gone"/>
+
 			<!-- New Time Control Custom View -->
 			<net.osmand.plus.plugins.astro.views.DateTimeSelectionView
 				android:id="@+id/time_selection_view"
@@ -89,6 +98,7 @@
 				android:layout_marginTop="140dp"
 				android:visibility="gone"/>
 
+			<!-- Compass Button (Top Left) -->
 			<FrameLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content">
@@ -102,13 +112,103 @@
 
 			</FrameLayout>
 
+			<!-- Right Side Controls (AR, Camera, Slider, FOV) -->
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top|end"
+				android:layout_marginTop="@dimen/map_small_button_margin"
+				android:layout_marginEnd="@dimen/map_button_margin"
+				android:orientation="vertical"
+				android:gravity="center_horizontal">
+
+				<!-- AR Mode Button -->
+				<ImageButton
+					android:id="@+id/ar_mode_button"
+					android:layout_width="@dimen/map_small_button_size"
+					android:layout_height="@dimen/map_small_button_size"
+					android:background="@drawable/btn_circle"
+					android:contentDescription="AR Mode"
+					android:padding="12dp"
+					android:scaleType="fitCenter"
+					android:elevation="4dp"
+					app:srcCompat="@drawable/ic_action_map_pan"
+					app:tint="#5f6e7c" />
+
+				<!-- Camera Overlay Button -->
+				<ImageButton
+					android:id="@+id/camera_button"
+					android:layout_width="@dimen/map_small_button_size"
+					android:layout_height="@dimen/map_small_button_size"
+					android:layout_marginTop="12dp"
+					android:background="@drawable/btn_circle"
+					android:contentDescription="Camera Overlay"
+					android:padding="12dp"
+					android:scaleType="fitCenter"
+					android:elevation="4dp"
+					app:srcCompat="@drawable/ic_action_device_camera"
+					app:tint="#5f6e7c" />
+
+				<!-- Vertical Slider Container -->
+				<FrameLayout
+					android:id="@+id/slider_container"
+					android:layout_width="40dp"
+					android:layout_height="150dp"
+					android:layout_marginTop="8dp"
+					android:visibility="gone">
+
+					<!-- Rotated SeekBar to make it vertical -->
+					<SeekBar
+						android:id="@+id/transparency_slider"
+						android:layout_width="150dp"
+						android:layout_height="40dp"
+						android:layout_gravity="center"
+						android:rotation="270"
+						android:progress="50"
+						android:max="100" />
+				</FrameLayout>
+
+				<!-- Reset FOV Button -->
+				<ImageButton
+					android:id="@+id/reset_fov_button"
+					android:layout_width="@dimen/map_small_button_size"
+					android:layout_height="@dimen/map_small_button_size"
+					android:layout_marginTop="8dp"
+					android:background="@drawable/btn_circle"
+					android:contentDescription="Reset FOV"
+					android:padding="12dp"
+					android:scaleType="fitCenter"
+					android:elevation="4dp"
+					android:visibility="gone"
+					app:srcCompat="@drawable/ic_action_reset_to_default_dark"
+					app:tint="#5f6e7c" />
+
+			</LinearLayout>
+
+			<FrameLayout
+				android:id="@+id/star_map_controls_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom"
+				android:layout_marginHorizontal="@dimen/content_padding_half"
+				android:layout_marginBottom="@dimen/content_padding_small_half">
+
+				<include
+					layout="@layout/map_hud_controls"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|bottom" />
+
+			</FrameLayout>
+
 			<FrameLayout
 				android:id="@+id/map_controls_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_gravity="bottom"
 				android:layout_marginHorizontal="@dimen/content_padding_half"
-				android:layout_marginBottom="@dimen/content_padding_small_half">
+				android:layout_marginBottom="@dimen/content_padding_small_half"
+				android:visibility="gone">
 
 				<include
 					layout="@layout/map_hud_controls"
@@ -126,7 +226,8 @@
 					<LinearLayout
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:orientation="horizontal">
+						android:orientation="horizontal"
+						tools:ignore="UselessParent">
 
 						<include
 							layout="@layout/map_ruler"

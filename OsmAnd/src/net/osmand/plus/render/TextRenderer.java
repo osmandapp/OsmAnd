@@ -23,6 +23,7 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -43,6 +44,7 @@ public class TextRenderer {
 	public static final String DROID_SERIF = "Droid Serif";
 
 	private final Context context;
+	private final OsmandApplication app;
 
 	private final Paint paintText = new Paint();
 	private final Paint paintIcon = new Paint();
@@ -54,6 +56,7 @@ public class TextRenderer {
 
 	public TextRenderer(@NonNull Context context) {
 		this.context = context;
+		this.app = (OsmandApplication)context.getApplicationContext();
 
 		defaultTypeface = Typeface.create(DROID_SERIF, Typeface.NORMAL);
 		boldItalicTypeface = Typeface.create(DROID_SERIF, Typeface.BOLD_ITALIC);
@@ -267,6 +270,18 @@ public class TextRenderer {
 				cv.restore();
 			}
 		}
+	}
+
+	public void drawAutoDownScaleText(Canvas cv, TextDrawInfo text) {
+		Paint tmpPaint = new Paint(paintText);
+		float density = app.getOsmandMap().getMapView().getDensity();
+		while (tmpPaint.measureText(text.text) > cv.getWidth() - 6 * density && tmpPaint.getTextSize() > 1) {
+			tmpPaint.setTextSize(tmpPaint.getTextSize() - 1);
+		}
+		Rect textBounds = new Rect();
+		tmpPaint.getTextBounds(text.text, 0, text.text.length(), textBounds);
+		float centerY = cv.getHeight() - (cv.getHeight() - textBounds.height() - 6 * density) / 2f;
+		drawTextOnCanvas(cv, text.text, text.centerX, centerY, tmpPaint, text.textShadowColor, text.textShadow);
 	}
 
 	public void drawWrappedText(Canvas cv, TextDrawInfo text, float textSize) {

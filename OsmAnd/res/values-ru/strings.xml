@@ -5835,4 +5835,18 @@
     <string name="deleting_history">Удаление истории…</string>
     <string name="next_turn_information">Информация о следующем повороте</string>
     <string name="failed_to_connect">Не удалось подключиться к %1s</string>
+    <string name="altitude_metrics_description">Устанавливает единицы измерения высоты в виджетах и статистике.</string>
+    <string name="next_turn_information_desc">Показывает направление предстоящего поворота и название улицы.</string>
+    <string name="description_purchases_fastspring">Вы можете управлять своими покупками через портал управления учетными записями FastSpring.</string>
+    <string name="description_subscription_fastspring">Вы можете управлять своей подпиской или отменить ее через портал управления учетными записями FastSpring.</string>
+    <string name="shared_string_osm_link">Ссылка на OSM</string>
+    <string name="marine_render_descr">Стиль «Морской» (Marine) предлагает широкие возможности настройки судоходной навигации. Он развивает идеи классического стиля (Nautical) и раскрывает весь свой потенциал с картой «Мировые морские объекты», отображающей навигационные знаки, а также с картами глубин.</string>
+    <string name="rendering_attr_hideTidalFlats_name">Приливные отмели (ватты)</string>
+    <string name="rendering_attr_hideTidalFlats_description">Скрыть приливные отмели (ватты)</string>
+    <string name="rendering_attr_depthColorScheme_name">Цветовая схема глубин</string>
+    <string name="rendering_attr_depthColorScheme_description">Цветовая схема глубин</string>
+    <string name="rendering_attr_fairwayStyle_name">Цвет фарватера</string>
+    <string name="rendering_attr_fairwayStyle_description">Цвет фарватеров</string>
+    <string name="accessibility_independent_features">Независимые функции</string>
+    <string name="rendering_attr_pisteRoutes_name">Горнолыжные склоны и маршруты</string>
 </resources>
