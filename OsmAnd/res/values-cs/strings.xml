@@ -2897,7 +2897,7 @@
     <string name="edit_profile_screen_options_subtitle">Zvolte nastavení obrazovky pro profil</string>
     <string name="edit_profile_nav_settings_subtitle">Zvolte nastavení navigace pro profil</string>
     <string name="routing_attr_max_num_changes_description">Určete maximální počet přestupů</string>
-    <string name="routing_attr_max_num_changes_name">Počet přestupů</string>
+    <string name="routing_attr_max_num_changes_name">Maximální počet přestupů</string>
     <string name="turn_screen_on_router">Probudit na odbočce</string>
     <string name="turn_screen_on_time_descr">Nastavte, jak dlouho bude obrazovka zapnutá.</string>
     <string name="turn_screen_on_sensor">Použít senzor přiblížení</string>
@@ -5914,9 +5914,15 @@
     <string name="enable_3d_objects">Povolit 3D stavby</string>
     <string name="enable_3d_objects_description">Zobrazit 3D stavby na mapě</string>
     <string name="deleted_maps_warning">Chystáte se odstranit %d položek\nChcete pokračovat?</string>
-    <string name="deleted_maps_prompt">Tyto mapy již nejsou podporovány a byly nahrazeny menšími regiony. Odstraňte je prosím a stáhněte si nové verze.</string>
+    <string name="deleted_maps_prompt">Tyto mapy již nejsou podporovány a byly nahrazeny menšími oblastmi. Odstraňte je prosím a stáhněte si nové verze.</string>
     <string name="unsupported_maps">Nepodporované mapy</string>
     <string name="routing_attr_weightrating_name">Maximální hmotnost při plném zatížení</string>
     <string name="routing_attr_maxaxleload_name">Maximální zatížení nápravy</string>
     <string name="is_parking_time_limited">Je omezený čas parkování?</string>
+    <string name="routing_attr_pt_limit_name">Zobrazit N nejlepších tras</string>
+    <string name="routing_attr_pt_limit_description">Zadejte počet nejlepších tras k zobrazení</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimetry</string>
+    <string name="bicycle_width_limit_description">Zadejte šířku vašeho jízdního kola pro vyhnutí se úzkým cyklostezkám.</string>
+    <string name="copy_link">Kopírovat odkaz</string>
 </resources>

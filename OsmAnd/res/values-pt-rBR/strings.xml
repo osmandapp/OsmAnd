@@ -3009,8 +3009,8 @@
     <string name="edit_profile_setup_map_subtitle">Selecione as opções de mapa para o perfil</string>
     <string name="edit_profile_screen_options_subtitle">Selecione as opções de tela para o perfil</string>
     <string name="edit_profile_nav_settings_subtitle">Selecione as configurações de navegação para o perfil</string>
-    <string name="routing_attr_max_num_changes_description">Especificar o limite superior de alterações</string>
-    <string name="routing_attr_max_num_changes_name">Número de transferências</string>
+    <string name="routing_attr_max_num_changes_description">Especifique o limite superior para alterações no transporte</string>
+    <string name="routing_attr_max_num_changes_name">Número máximo de mudanças de transporte</string>
     <string name="edit_profile_setup_subtitle">O perfil mantém suas próprias configurações</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Grau 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Grau 2</string>
@@ -6274,4 +6274,10 @@
     <string name="routing_attr_weightrating_name">Peso máximo com carga total</string>
     <string name="routing_attr_maxaxleload_name">Carga máxima por eixo</string>
     <string name="deleted_maps_prompt">Esses mapas não são mais compatíveis e foram substituídos por regiões menores. Remova-os e baixe as novas versões.</string>
+    <string name="routing_attr_pt_limit_description">Especifique o número de melhores rotas a serem exibidas</string>
+    <string name="centimeter">cm</string>
+    <string name="unsupported_maps">Mapas não suportados</string>
+    <string name="shared_string_centimeters">centímetros</string>
+    <string name="bicycle_width_limit_description">Indique a largura da sua bicicleta para evitar ciclovias estreitas.</string>
+    <string name="copy_link">Copiar link</string>
 </resources>

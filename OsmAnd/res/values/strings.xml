@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="routing_attr_pt_limit_name">Display N best routes</string>
+    <string name="routing_attr_pt_limit_description">Specify the number of best routes to display</string>
     <string name="centimeter">cm</string>
     <string name="shared_string_centimeters">centimeters</string>
     <string name="bicycle_width_limit_description">Provide your bicycle width to avoid narrow cycle paths.</string>
@@ -3243,8 +3245,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="edit_profile_setup_map_subtitle">Select map options for the profile</string>
     <string name="edit_profile_screen_options_subtitle">Select screen options for the profile</string>
     <string name="edit_profile_nav_settings_subtitle">Select navigation settings for the profile</string>
-    <string name="routing_attr_max_num_changes_description">Specify upper limit of changes</string>
-    <string name="routing_attr_max_num_changes_name">Number of changes</string>
+    <string name="routing_attr_max_num_changes_description">Specify the upper limit for transport changes</string>
+    <string name="routing_attr_max_num_changes_name">Max number of transport changes</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">
     • App profiles: Create a custom profile for your own needs, with a custom icon and color\n\n

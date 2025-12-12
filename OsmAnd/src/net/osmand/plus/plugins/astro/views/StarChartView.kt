@@ -74,7 +74,7 @@ abstract class StarChartView @JvmOverloads constructor(
 	companion object {
 		fun showFilterDialog(context: Context, viewModel: StarObjectsViewModel, onSettingsChanged: () -> Unit) {
 			val skyObjects = viewModel.skyObjects.value ?: return
-			val dialogObjects = ArrayList(skyObjects)
+			val dialogObjects = ArrayList(skyObjects.take(30))
 
 			val recyclerView = RecyclerView(context)
 			recyclerView.layoutManager = LinearLayoutManager(context)
@@ -118,6 +118,7 @@ abstract class StarChartView @JvmOverloads constructor(
 					val newConfig = currentConfig.copy(items = itemsConfig)
 					swSettings.setStarChartConfig(newConfig)
 
+					viewModel.loadData()
 					onSettingsChanged()
 				}
 				.setNegativeButton(R.string.shared_string_cancel, null)

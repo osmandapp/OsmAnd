@@ -126,4 +126,15 @@
     <string name="device_name">ឈ្មោះឧបករណ៍</string>
     <string name="shared_string_hide">លាក់</string>
     <string name="share_location_as_description_second_line">អ្នកអាចបង្កើត និងមើល ID ឧបករណ៍នៅក្នុងអតិថូបករណ៍តេឡេក្រាមដោយប្រើឆាតបូត %1$s។ %2$s</string>
+    <string name="time_on_the_move">រយៈពេលកម្រើក</string>
+    <string name="stale_location">មិនកម្រើកសោះ</string>
+    <string name="sending_location_messages">កំពុងផ្ញើទីតាំង</string>
+    <string name="initializing">កំពុងចាប់ផ្ដើម</string>
+    <string name="waiting_for_response_from_telegram">កំពុងរង់ចាំការឆ្លើយតបមកពីតេឡេក្រាម</string>
+    <string name="last_updated_location">ទីតាំងបានអាប់ដេតចុងក្រោយ៖</string>
+    <string name="successfully_sent_and_updated">ផ្ញើបានជោគជ័យ និងបានអាប់ដេត</string>
+    <string name="sharing_in_background">កំពុងចែករំលែកឯផ្ទៃក្រោយ</string>
+    <string name="go_to_settings">ចូលទៅកាន់ការកំណត់</string>
+    <string name="shared_string_later">ពេលក្រោយ</string>
+    <string name="not_sent_yet">មិនទាន់ផ្ញើឡើយ</string>
 </resources>

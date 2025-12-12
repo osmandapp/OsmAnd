@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.audionotes;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.data.LatLon;
@@ -186,7 +187,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 	}
 
 	@Override
-	public void share(LatLon latLon, String title, String address, String typeStr) {
+	public void share(LatLon latLon, String title, String address) {
 		MapActivity mapActivity = getMapActivity();
 		if (mIsFileAvailable && mapActivity != null) {
 			String type = null;
@@ -209,7 +210,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 					.setNewDocument(true)
 					.build(app);
 		} else {
-			super.share(latLon, title, "", typeStr);
+			super.share(latLon, title, "");
 		}
 	}
 }

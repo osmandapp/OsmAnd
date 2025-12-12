@@ -1,7 +1,10 @@
 package net.osmand.search.core;
 
+import static net.osmand.search.core.SearchCoreFactory.PREFERRED_DEFAULT_ZOOM;
+
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.CollatorStringMatcher;
@@ -16,7 +19,6 @@ import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import static net.osmand.search.core.SearchCoreFactory.PREFERRED_DEFAULT_ZOOM;
 
 
 public class SearchResult {
@@ -57,12 +59,14 @@ public class SearchResult {
 	public String addressName;
 	public String cityName;
 	public Collection<String> otherNames;
+	
 
 	public String localeRelatedObjectName;
 	public Object relatedObject;
 	public double distRelatedObjectName;
 
 	private double unknownPhraseMatchWeight = 0;
+	private CheckWordsMatchCount completeMatchRes = null;
 
 	public enum SearchResultResource {
 		DETAILED,
@@ -89,15 +93,24 @@ public class SearchResult {
 		unknownPhraseMatchWeight = getSumPhraseMatchWeight(null);
 		return unknownPhraseMatchWeight;
 	}
+	
+	public CheckWordsMatchCount getCompleteMatchRes() {
+		if (completeMatchRes != null) {
+			return completeMatchRes;
+		}
+		getSumPhraseMatchWeight(null);
+		return completeMatchRes;
+	}
+
 
 	private double getSumPhraseMatchWeight(SearchResult exactResult) {
 		double res = getTypeWeight(exactResult, objectType);
+		completeMatchRes = new CheckWordsMatchCount();
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
 		} else if (objectType == ObjectType.POI_TYPE) {
 			// don't overload with poi types
 		} else {
-			CheckWordsMatchCount completeMatchRes = new CheckWordsMatchCount();
 			boolean matched = localeName != null && allWordsMatched(localeName, exactResult, completeMatchRes);
 			// incorrect fix
 //			if (!matched && object instanceof Street s) { // parentSearchResult == null &&
@@ -207,7 +220,7 @@ public class SearchResult {
 		} else {
 			localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
 		}
-		
+
 		boolean wordMatched;
 		if (searchPhraseNames.isEmpty()) {
 			return false;
@@ -223,6 +236,7 @@ public class SearchResult {
 			exactResult = exactResult.parentSearchResult;
 		}
 		
+		
 		int idxMatchedWord = -1;
 		for (String searchPhraseName : searchPhraseNames) {
 			wordMatched = false;
@@ -235,6 +249,7 @@ public class SearchResult {
 				}
 			}
 			if (!wordMatched) {
+//				cnt.allWordsInPhraseAreInResult = false;
 				return false;
 			}
 		}
@@ -245,9 +260,9 @@ public class SearchResult {
 		return true;
 	}
 	
-	static class CheckWordsMatchCount {
-		boolean allWordsEqual;
-		boolean allWordsInPhraseAreInResult;
+	public static class CheckWordsMatchCount {
+		public boolean allWordsEqual;
+		public boolean allWordsInPhraseAreInResult;
 	}
 
 	private List<String> getSearchPhraseNames() {
@@ -395,7 +410,8 @@ public class SearchResult {
 	public boolean isFullPhraseEqualLocaleName() {
 		return requiredSearchPhrase.getFullSearchPhrase().equalsIgnoreCase(localeName);
 	}
-
+	
+	
 	public List<String> filterUnknownSearchWord(List<String> leftUnknownSearchWords) {
 		if (leftUnknownSearchWords == null) {
 			leftUnknownSearchWords = new ArrayList<String>(requiredSearchPhrase.getUnknownSearchWords());
@@ -416,5 +432,60 @@ public class SearchResult {
 		}
 		
 		return leftUnknownSearchWords;
+	}
+	
+	
+	public void restoreBraceNames(String[] backup) {
+		if (backup != null) {
+			if (backup[0] != null) {
+				localeName = backup[0];
+			}
+			if (backup[1] != null) {
+				localeName = backup[1];
+			}
+			if (backup.length > 2) {
+				List<String> oth = new ArrayList<String>();
+				for (int i = 2; i < backup.length; i++) {
+					oth.add(backup[i]);
+				}
+				otherNames = oth;
+			}
+		}
+	}
+	
+	public String[] stripBracesNames() {
+		char[] brace = new char[] { '(' };
+		boolean noBrace = true;
+		noBrace &= !Algorithms.containsChar(localeName, brace);
+		noBrace &= !Algorithms.containsChar(alternateName, brace);
+		if (otherNames != null) {
+			for (String o : otherNames) {
+				noBrace &= !Algorithms.containsChar(o, brace);
+				if (!noBrace) {
+					break;
+				}
+			}
+		}
+		
+		String[] backup = new String[2 + (otherNames == null ? 0 : otherNames.size())];
+		if (localeName != null) {
+			backup[0] = localeName;
+			localeName = SearchPhrase.stripBraces(localeName);
+		}
+		if (alternateName != null) {
+			backup[1] = alternateName;
+			alternateName = SearchPhrase.stripBraces(alternateName);
+		}
+		if (otherNames != null) {
+			Iterator<String> it = otherNames.iterator();
+			List<String> oth = new ArrayList<String>();
+			for (int i = 0; i < otherNames.size(); i++) {
+				String o = it.next();
+				backup[2 + i] = SearchPhrase.stripBraces(o);
+				oth.add(o);
+			}
+			otherNames = oth;
+		}
+		return backup;
 	}
 }

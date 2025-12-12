@@ -342,7 +342,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		if (fragmentRef != null && fragment.isVisible()) {
-			openMenuOnCalculationStarted(fragment);
+			askMoveMenuToHalfScreen(fragment);
 			fragment.updateRouteCalculationProgress(0);
 			fragment.updateInfo();
 		}
@@ -352,7 +352,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		if (fragmentRef != null && fragment.isVisible()) {
-			openMenuOnCalculationStarted(fragment);
+			askMoveMenuToHalfScreen(fragment);
 			if (setRouteCalculationInProgress(true)) {
 				fragment.updateInfo();
 			}
@@ -387,7 +387,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	private void openMenuOnCalculationStarted(@NonNull MapRouteInfoMenuFragment fragment) {
+	private void askMoveMenuToHalfScreen(@NonNull MapRouteInfoMenuFragment fragment) {
 		if (!menuAutoMovedAfterCalculationStarted && fragment.isVisible()) {
 			fragment.openMenuHalfScreen();
 			menuAutoMovedAfterCalculationStarted = true;
@@ -398,6 +398,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	                                           @NonNull OsmandApplication app) {
 		if (app.getRoutingHelper().getRoute().hasMissingMaps()) {
 			fragment.openMenuHalfScreen();
+		} else {
+			askMoveMenuToHalfScreen(fragment);
 		}
 		menuAutoMovedAfterCalculationStarted = false;
 	}
