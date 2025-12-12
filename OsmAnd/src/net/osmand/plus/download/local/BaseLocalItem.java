@@ -23,6 +23,11 @@ public abstract class BaseLocalItem {
 	public abstract CharSequence getName(@NonNull Context context);
 
 	@NonNull
+	public CharSequence getName(@NonNull Context context, boolean includeParent) {
+		return getName(context);
+	}
+
+	@NonNull
 	public abstract String getDescription(@NonNull Context context);
 
 	@NonNull

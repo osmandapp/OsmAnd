@@ -28,6 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
+import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
@@ -35,6 +37,7 @@ import net.osmand.plus.download.local.*;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.download.local.dialogs.SortMapsBottomSheet.MapsSortModeListener;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.settings.enums.LocalSortMode;
@@ -44,6 +47,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,6 +66,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	private LocalItemsAdapter adapter;
 	private boolean selectionMode;
+	private MultipleLocalItem selectedCountry;
 	private MemoryInfo memoryInfo;
 
 	@Override
@@ -136,6 +141,9 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 				if (selectionMode) {
 					selectionMode = false;
 					updateContent();
+				} else if (selectedCountry != null) {
+					selectedCountry = null;
+					updateContent();
 				} else {
 					FragmentManager manager = activity.getSupportFragmentManager();
 					if (!manager.isStateSaved()) {
@@ -145,7 +153,6 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 			}
 		});
 	}
-
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -175,12 +182,19 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	private void updateAdapter() {
-		List<Object> items = new ArrayList<>(getSortedItems());
-		if (!selectionMode) {
+		List<Object> items = new ArrayList<>(getItemsToDisplay());
+		if (!selectionMode && selectedCountry == null) {
 			addMemoryInfo(items);
 		}
 		adapter.setSelectionMode(selectionMode);
+		adapter.setCountryMode(selectedCountry != null);
 		adapter.setItems(items);
+	}
+
+	@NonNull
+	private List<Object> getItemsToDisplay() {
+		List<BaseLocalItem> countryItems = getSortedCountryItems();
+		return countryItems != null ? new ArrayList<>(countryItems) : getSortedItems();
 	}
 
 	@NonNull
@@ -197,6 +211,11 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 					activeItems.add(item);
 				}
 			}
+			LocalItemType type = group.getType();
+			if (type.isGroupingByCountrySupported()) {
+				activeItems = groupItemsByCountry(type, activeItems);
+				backupedItems = groupItemsByCountry(type, backupedItems);
+			}
 			sortItems(activeItems);
 			sortItems(backupedItems);
 		}
@@ -207,6 +226,52 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 			items.addAll(backupedItems);
 		}
 		return items;
+	}
+
+	@Nullable
+	public List<BaseLocalItem> getSortedCountryItems() {
+		List<BaseLocalItem> countryItems = selectedCountry != null ? selectedCountry.getItems() : null;
+		if (countryItems != null) {
+			sortItems(countryItems);
+		}
+		return countryItems;
+	}
+
+	@NonNull
+	private List<BaseLocalItem> groupItemsByCountry(@NonNull LocalItemType type,
+	                                                @NonNull List<BaseLocalItem> flatItems) {
+		Map<String, List<BaseLocalItem>> groups = new HashMap<>();
+		List<BaseLocalItem> ungroupedItems = new ArrayList<>();
+		OsmandRegions regions = app.getRegions();
+
+		for (BaseLocalItem item : flatItems) {
+			if (item instanceof LocalItem localItem) {
+				String baseName = FileNameTranslationHelper.getBasename(app, localItem.getFileName());
+				WorldRegion country = regions.getCountryRegionDataByDownloadName(baseName);
+				if (country != null) {
+					String groupName = country.getLocaleName();
+					groups.computeIfAbsent(groupName, k -> new ArrayList<>()).add(localItem);
+				} else {
+					ungroupedItems.add(localItem);
+				}
+			} else {
+				ungroupedItems.add(item);
+			}
+		}
+
+		List<MultipleLocalItem> folders = new ArrayList<>();
+		for (Map.Entry<String, List<BaseLocalItem>> entry : groups.entrySet()) {
+			List<BaseLocalItem> folderItems = entry.getValue();
+			if (folderItems.size() > 1) {
+				folders.add(new MultipleLocalItem(entry.getKey(), type, folderItems));
+			} else if (!folderItems.isEmpty()) {
+				ungroupedItems.add(folderItems.get(0));
+			}
+		}
+
+		List<BaseLocalItem> result = new ArrayList<>(folders);
+		result.addAll(ungroupedItems);
+		return result;
 	}
 
 	private void sortItems(@NonNull List<BaseLocalItem> items) {
@@ -286,7 +351,13 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 			actionBar.setElevation(5.0f);
 			LocalGroup group = getGroup();
 			if (group != null) {
-				actionBar.setTitle(selectionMode ? getString(R.string.shared_string_select) : group.getName(app));
+				if (selectionMode) {
+					actionBar.setTitle(getString(R.string.shared_string_select));
+				} else if (selectedCountry != null) {
+					actionBar.setTitle(selectedCountry.getName());
+				} else {
+					actionBar.setTitle(group.getName(app));
+				}
 			}
 
 			int colorId = selectionMode ? ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode) : 0;
@@ -318,6 +389,9 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 			boolean selected = !isItemSelected(item);
 			selectionHelper.onItemsSelected(Collections.singleton(item), selected);
 			adapter.updateItem(item);
+		} else if (item instanceof MultipleLocalItem multipleLocalItem) {
+			selectedCountry = multipleLocalItem;
+			updateContent();
 		} else {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {

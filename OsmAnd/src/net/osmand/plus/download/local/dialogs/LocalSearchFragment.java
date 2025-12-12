@@ -168,7 +168,9 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	}
 
 	private void updateAdapter() {
-		adapter.setItems(getSortedItems());
+		List<BaseLocalItem> countryItems = getSortedCountryItems();
+		adapter.setItems(countryItems != null ? countryItems : getSortedItems());
+		adapter.setCountryMode(countryItems != null);
 	}
 
 	@NonNull
@@ -203,6 +205,14 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 			Collator collator = OsmAndCollator.primaryCollator();
 			Collections.sort(items, (o1, o2) -> collator.compare(o1.getName(app).toString(), o2.getName(app).toString()));
 		}
+	}
+
+	@Nullable
+	private List<BaseLocalItem> getSortedCountryItems() {
+		if (getTargetFragment() instanceof LocalItemsFragment fragment) {
+			return fragment.getSortedCountryItems();
+		}
+		return null;
 	}
 
 	public void showProgressBar() {
