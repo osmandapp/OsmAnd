@@ -162,10 +162,10 @@ public class SearchCoreFactory {
 
 		protected SearchPhrase subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api,
 									SearchResult setParentSearchResult, boolean publish) throws IOException {
-			phrase.countUnknownWordsMatchMainResult(res);
+			phrase.countUnknownWordsMatchMainResult(res, setParentSearchResult);
 			List<String> leftUnknownSearchWords = res.filterUnknownSearchWord(null);
 			if (setParentSearchResult != null) {
-				phrase.countUnknownWordsMatchMainResult(setParentSearchResult);
+				phrase.countUnknownWordsMatchMainResult(setParentSearchResult, null);
 				leftUnknownSearchWords = setParentSearchResult.filterUnknownSearchWord(leftUnknownSearchWords);
 			}
 			// publish result to set parentSearchResult before search
@@ -197,7 +197,7 @@ public class SearchCoreFactory {
 			if (prevRes != null) {
 				// remove braces to not count them 
 				String[] backup = prevRes.stripBracesNames();
-				phrase.countUnknownWordsMatchMainResult(prevRes);
+				phrase.countUnknownWordsMatchMainResult(prevRes, res);
 				prevRes.restoreBraceNames(backup);
 				List<String> leftUnknownSearchWords = prevRes.filterUnknownSearchWord(null);
 				SearchPhrase nphrase = phrase.selectWord(prevRes, leftUnknownSearchWords,
@@ -554,7 +554,7 @@ public class SearchCoreFactory {
 								}
 								sr.objectType = ObjectType.BOUNDARY;
 								sr.priorityDistance = 0;
-								phrase.countUnknownWordsMatchMainResult(sr);
+								phrase.countUnknownWordsMatchMainResult(sr, null);
 							} else if (type == CityType.HAMLET || type == CityType.SUBURB || 
 									type == CityType.VILLAGE) {
 								if ((locSpecified && !villagesBbox.contains(x, y, x, y))
@@ -821,7 +821,7 @@ public class SearchCoreFactory {
 						sr.priorityDistance = 1;
 					}
 					sr.priority = SEARCH_AMENITY_BY_NAME_PRIORITY;
-					phrase.countUnknownWordsMatchMainResult(sr);
+					phrase.countUnknownWordsMatchMainResult(sr, null);
 					sr.cityName = object.getCityFromTagGroups(phrase.getSettings().getLang());
 					sr.objectType = ObjectType.POI;
 					resultMatcher.publish(sr);
@@ -1190,7 +1190,7 @@ public class SearchCoreFactory {
 					resultMatcher.publish(res);
 				}
 			} else {
-				phrase.countUnknownWordsMatchMainResult(res);
+				phrase.countUnknownWordsMatchMainResult(res, null);
 				res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
 				resultMatcher.publish(res);
 			}
@@ -1803,7 +1803,7 @@ public class SearchCoreFactory {
 						res.objectType = ObjectType.STREET_INTERSECTION;
 						res.location = street.getLocation();
 						res.preferredZoom = PREFERRED_STREET_INTERSECTION_ZOOM;
-						phrase.countUnknownWordsMatchMainResult(res);
+						phrase.countUnknownWordsMatchMainResult(res, null);
 						resultMatcher.publish(res);
 					}
 				}
