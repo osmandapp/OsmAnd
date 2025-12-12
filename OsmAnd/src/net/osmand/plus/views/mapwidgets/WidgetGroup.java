@@ -10,11 +10,10 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.plugins.astro.StarWatcherPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 
 import java.util.ArrayList;
@@ -36,8 +35,7 @@ public enum WidgetGroup {
 	WEATHER(R.string.shared_string_weather, R.string.weather_widget_group_desc, R.drawable.widget_weather_umbrella_day, R.drawable.widget_weather_umbrella_night, 0),
 	SUNRISE_SUNSET(R.string.map_widget_sun_position, R.string.map_widget_group_sunrise_sunset_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0),
 	GLIDE(R.string.map_widget_group_glide_ratio, R.string.map_widget_group_glide_desc, R.drawable.widget_glide_ratio_to_target_day, R.drawable.widget_glide_ratio_to_target_night, 0),
-	ROUTE_GUIDANCE(R.string.route_guidance, R.string.route_guidance_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers),
-	STAR_CHARTS(R.string.star_charts_name, R.string.star_charts_widget_group_desc, R.drawable.ic_action_world_globe, R.drawable.ic_action_world_globe, 0);
+	ROUTE_GUIDANCE(R.string.route_guidance, R.string.route_guidance_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers);
 
 	@StringRes
 	public final int titleId;
@@ -132,8 +130,6 @@ public enum WidgetGroup {
 			return getPartOfPluginDesc(context, ExternalSensorsPlugin.class);
 		} else if (this == WEATHER) {
 			return getPartOfPluginDesc(context, WeatherPlugin.class);
-		} else if (this == STAR_CHARTS) {
-			return getPartOfPluginDesc(context, StarWatcherPlugin.class);
 		}
 		return null;
 	}
@@ -143,7 +139,7 @@ public enum WidgetGroup {
 		if (this == BEARING || this == COORDINATES_WIDGET) {
 			return R.drawable.ic_action_help;
 		} else if (this == TRIP_RECORDING || this == AUDIO_VIDEO_NOTES || this == DEVELOPER_OPTIONS
-				|| this == WEATHER || this == ANT_PLUS || this == STAR_CHARTS) {
+				|| this == WEATHER || this == ANT_PLUS) {
 			return R.drawable.ic_extension_dark;
 		}
 		return 0;

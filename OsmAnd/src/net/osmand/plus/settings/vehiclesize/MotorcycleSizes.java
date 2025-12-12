@@ -36,7 +36,7 @@ public class MotorcycleSizes extends VehicleSizes {
 	}
 
 	@Override
-	public boolean useKilogramsInsteadOfTons() {
+	protected boolean useKilogramsInsteadOfTons() {
 		return true;
 	}
 }

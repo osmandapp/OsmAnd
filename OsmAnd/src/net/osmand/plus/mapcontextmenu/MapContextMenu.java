@@ -1034,7 +1034,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		} else {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				ShareMenu.show(latLon, nameStr, address, mapActivity);
+				ShareMenu.show(latLon, nameStr, address, null, mapActivity);
 			}
 		}
 	}

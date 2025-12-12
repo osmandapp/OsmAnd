@@ -37,6 +37,7 @@ import net.osmand.plus.measurementtool.GpxApproximationFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
+import net.osmand.plus.plugins.astro.StarMapFragment;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesFragment;
 import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -226,6 +227,11 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	@Nullable
 	public WeatherForecastFragment getWeatherForecastFragment() {
 		return getFragment(WeatherForecastFragment.TAG);
+	}
+
+	@Nullable
+	public StarMapFragment getStarMapFragment() {
+		return getFragment(StarMapFragment.Companion.getTAG());
 	}
 
 	public void dismissFragment(@Nullable String name) {

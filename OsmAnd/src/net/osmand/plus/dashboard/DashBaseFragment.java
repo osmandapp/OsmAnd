@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseNestedFragment;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.InterceptorFrameLayout;
 import net.osmand.plus.widgets.tools.SwipeDismissTouchListener;
 
@@ -71,6 +72,11 @@ public abstract class DashBaseFragment extends BaseNestedFragment {
 		frameLayout.setListener(listener);
 
 		return frameLayout;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		return new InsetTargetsCollection();
 	}
 
 	public abstract View initView(@Nullable ViewGroup container, @Nullable Bundle savedState);

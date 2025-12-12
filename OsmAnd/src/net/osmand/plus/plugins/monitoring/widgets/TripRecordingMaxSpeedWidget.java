@@ -79,7 +79,7 @@ public class TripRecordingMaxSpeedWidget extends BaseRecordingWidget {
 	}
 
 	private float getLastSlopeMaxSpeed(@NonNull MaxSpeedMode mode) {
-		SlopeInfo lastSlope = getLastSlope(mode == MaxSpeedMode.LAST_DOWNHILL);
+		SlopeInfo lastSlope = getLastSlope(mode == MaxSpeedMode.LAST_UPHILL);
 		if (lastSlope != null) {
 			return (float) lastSlope.getMaxSpeed();
 		} else {

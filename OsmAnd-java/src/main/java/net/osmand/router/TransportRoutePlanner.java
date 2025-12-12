@@ -10,7 +10,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -58,8 +57,7 @@ public class TransportRoutePlanner {
 			LOG.info("Public transport. Start stop is empty");
 			return Collections.emptyList();
 		}
-		PriorityQueue<TransportRouteSegment> queue = new PriorityQueue<TransportRouteSegment>(startStops.size(),
-				new SegmentsComparator(ctx));
+		PriorityQueue<TransportRouteSegment> queue = new PriorityQueue<>(startStops.size(), new SegmentsComparator());
 		for (TransportRouteSegment r : startStops) {
 			r.walkDist = (float) MapUtils.getDistance(r.getLocation(), start);
 			r.distFromStart = r.walkDist / ctx.cfg.walkSpeed;
@@ -106,12 +104,10 @@ public class TransportRoutePlanner {
 			TransportRouteSegment finish = null;
 			double minDist = 0;
 			double travelDist = 0;
-			int onboardTime = ctx.cfg.getBoardingTime(segment.road.getType());
-			int intervalTime = Algorithms.parseIntSilently(segment.road.getInterval(), 0);
-			if (intervalTime > 0) {
-				onboardTime = intervalTime * 60 / 2;
-			}
-			double travelTime = onboardTime;
+
+			int seconds = segment.road.calcIntervalInSeconds();
+			double travelTime = seconds > 0 ? (double) seconds / 2 : ctx.cfg.getBoardingTime(segment.road.getType());
+
 			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
 			if (routeTravelSpeed == 0) {
 				continue;
@@ -199,7 +195,7 @@ public class TransportRoutePlanner {
 						finish.parentTravelDist = travelDist;
 						double walkTime = distToEnd / ctx.cfg.walkSpeed;
 						finish.distFromStart = segment.distFromStart + travelTime + walkTime;
-
+						finish.nonce = nonce++;
 					}
 				}
 				prevStop = stop;
@@ -257,7 +253,8 @@ public class TransportRoutePlanner {
 	}
 
 	private List<TransportRouteResult> prepareResults(TransportRoutingContext ctx, List<TransportRouteSegment> results) {
-		Collections.sort(results, new SegmentsComparator(ctx));
+		Collections.sort(results, new SegmentsComparator());
+
 		List<TransportRouteResult> lst = new ArrayList<TransportRouteResult>();
 		System.out.println(String.format(Locale.US, "Calculated %.1f seconds, found %d results, visited %d routes / %d stops, loaded %d tiles (%d ms read, %d ms total), loaded ways %d (%d wrong)",
 				(System.currentTimeMillis() - ctx.startCalcTime) / 1000.0, results.size(), 
@@ -314,28 +311,31 @@ public class TransportRoutePlanner {
 				}
 			}
 			if (!exclude) {
+				int limitByNumber = ctx.cfg.ptLimitResultsByNumber;
+				if (limitByNumber > 0 && lst.size() >= limitByNumber) {
+					System.out.printf("ptLimitResultsByNumber (%d) reached\n", limitByNumber);
+					break;
+				}
+				System.out.println(route);
 				lst.add(route);
-				System.out.println(route.toString());
-			} else {
-//				System.err.println(route.toString());
 			}
 		}
+
 		for (TransportRouteResult r : lst) {
 			for (int i = 0; i < r.getSegments().size(); i++) {
-				TransportRouteResultSegment mainSegment = r.getSegments().get(i);
+				String mainRef = r.getSegments().get(i).route.getRef();
 				Map<String, TransportRouteResultSegment> alts = new LinkedHashMap<>();
 				for (TransportRouteResult alt : r.alternativeRoutes) {
 					TransportRouteResultSegment rs = alt.getSegments().get(i);
-					if (rs.route.getRef() != null
-							&& !Algorithms.stringsEqual(mainSegment.route.getRef(), rs.route.getRef())) {
-						alts.put(rs.route.getRef(), rs);
+					String altRef = rs.route.getRef();
+					if (!Algorithms.isEmpty(altRef) && !altRef.equals(mainRef)) {
+						alts.putIfAbsent(altRef, rs);
 					}
 				}
 				r.getSegments().get(i).alternatives.addAll(alts.values());
 			}
 		}
-		
-		
+
 		return lst;
 	}
 
@@ -409,7 +409,7 @@ public class TransportRoutePlanner {
 
 	private static class SegmentsComparator implements Comparator<TransportRouteSegment> {
 
-		public SegmentsComparator(TransportRoutingContext ctx) {
+		public SegmentsComparator() {
 		}
 
 		@Override
@@ -711,8 +711,29 @@ public class TransportRoutePlanner {
 			trr.setFinishWalkDist(ntrr.finishWalkDist);
 			trr.setRouteTime(ntrr.routeTime);
 
-			for (NativeTransportRouteResultSegment ntrs : ntrr.segments) {
+			trr.getSegments().addAll(
+					convertToTransportRouteResultSegment(ntrr.segments, convertedRoutesCache, convertedStopsCache));
+
+			// alternativeRoutes (1-level recursion)
+			if (ntrr.alternativeRoutes != null && ntrr.alternativeRoutes.length > 0) {
+				trr.alternativeRoutes = convertToTransportRoutingResult(ntrr.alternativeRoutes, cfg);
+			}
+
+			convertedRes.add(trr);
+		}
+		convertedStopsCache.clear();
+		convertedRoutesCache.clear();
+		return convertedRes;
+	}
+
+	private static List<TransportRouteResultSegment> convertToTransportRouteResultSegment(
+			NativeTransportRouteResultSegment[] nativeSegments, TLongObjectHashMap<TransportRoute> convertedRoutesCache,
+			TLongObjectHashMap<TransportStop> convertedStopsCache) {
+		List<TransportRouteResultSegment> results = new ArrayList<>();
+		if (nativeSegments != null) {
+			for (NativeTransportRouteResultSegment ntrs : nativeSegments) {
 				TransportRouteResultSegment trs = new TransportRouteResultSegment();
+
 				trs.route = convertTransportRoute(ntrs.route, convertedRoutesCache, convertedStopsCache);
 				trs.walkTime = ntrs.walkTime;
 				trs.travelDistApproximate = ntrs.travelDistApproximate;
@@ -722,13 +743,16 @@ public class TransportRoutePlanner {
 				trs.walkDist = ntrs.walkDist;
 				trs.depTime = ntrs.depTime;
 
-				trr.addSegment(trs);
+				// alternatives (1-level recursion)
+				if (ntrs.alternatives != null && ntrs.alternatives.length > 0) {
+					trs.alternatives = convertToTransportRouteResultSegment(ntrs.alternatives,
+							convertedRoutesCache, convertedStopsCache);
+				}
+
+				results.add(trs);
 			}
-			convertedRes.add(trr);
 		}
-		convertedStopsCache.clear();
-		convertedRoutesCache.clear();
-		return convertedRes;
+		return results;
 	}
 
 	private static TransportRoute convertTransportRoute(NativeTransportRoute nr,

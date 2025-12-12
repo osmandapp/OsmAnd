@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.vehiclesize;
 
+import static net.osmand.plus.utils.OsmAndFormatter.CENTIMETERS_IN_ONE_METER;
 import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
 import static net.osmand.plus.utils.OsmAndFormatter.INCHES_IN_ONE_METER;
 import static net.osmand.plus.utils.OsmAndFormatter.KILOGRAMS_IN_ONE_TON;
@@ -35,16 +36,26 @@ public class VehicleAlgorithms {
 
 	public static Limits<Float> convertLengthLimitsByMetricSystem(@NonNull Limits<Float> limits,
 	                                                              @NonNull MetricsConstants lengthMetricSystem,
-	                                                              boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
-		if (lengthMetricSystem != MetricsConstants.KILOMETERS_AND_METERS) {
+	                                                              boolean useInchesInsteadOfFeet,
+	                                                              boolean useInchesInsteadOfYards,
+	                                                              boolean useCentimetersInsteadOfMeters,
+	                                                              boolean useRoundedLimits) {
+		boolean kilometersAndMeters = lengthMetricSystem == MetricsConstants.KILOMETERS_AND_METERS;
+		if (!kilometersAndMeters || useCentimetersInsteadOfMeters) {
 			float min = limits.min();
 			float max = limits.max();
+
 			// Convert to appropriate length metric system
-			min = convertLengthFromMeters(lengthMetricSystem, min, useInchesInsteadOfFeet, useInchesInsteadOfYards);
-			max = convertLengthFromMeters(lengthMetricSystem, max, useInchesInsteadOfFeet, useInchesInsteadOfYards);
+			min = convertLengthFromMeters(lengthMetricSystem, min,
+					useInchesInsteadOfFeet, useInchesInsteadOfYards, useCentimetersInsteadOfMeters);
+			max = convertLengthFromMeters(lengthMetricSystem, max,
+					useInchesInsteadOfFeet, useInchesInsteadOfYards, useCentimetersInsteadOfMeters);
+
 			// Round min / max
-			min = roundToSecondSignificantDigit(min, true);
-			max = roundToSecondSignificantDigit(max, false);
+			if (useRoundedLimits) {
+				min = roundToSecondSignificantDigit(min, true);
+				max = roundToSecondSignificantDigit(max, false);
+			}
 			limits = new Limits<>(min, max);
 		}
 		return limits;
@@ -132,21 +143,27 @@ public class VehicleAlgorithms {
 	}
 
 	public static float convertLengthToMeters(@NonNull MetricsConstants mc, float value,
-	                                          boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
+	                                          boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards,
+	                                          boolean useCentimetersInsteadOfMeters) {
 		if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 			return value / (useInchesInsteadOfFeet ? INCHES_IN_ONE_METER : FEET_IN_ONE_METER);
 		} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 			return value / (useInchesInsteadOfYards ? INCHES_IN_ONE_METER : YARDS_IN_ONE_METER);
+		} else if (useCentimetersInsteadOfMeters) {
+			return value / CENTIMETERS_IN_ONE_METER;
 		}
 		return value;
 	}
 
 	public static float convertLengthFromMeters(@NonNull MetricsConstants mc, float valueInMeters,
-	                                            boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
+	                                            boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards,
+	                                            boolean useCentimetersInsteadOfMeters) {
 		if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 			return valueInMeters * (useInchesInsteadOfFeet ? INCHES_IN_ONE_METER : FEET_IN_ONE_METER);
 		} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 			return valueInMeters * (useInchesInsteadOfYards ? INCHES_IN_ONE_METER : YARDS_IN_ONE_METER);
+		} else if (useCentimetersInsteadOfMeters) {
+			return valueInMeters * CENTIMETERS_IN_ONE_METER;
 		}
 		return valueInMeters;
 	}

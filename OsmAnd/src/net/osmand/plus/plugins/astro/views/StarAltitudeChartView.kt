@@ -194,7 +194,7 @@ class StarAltitudeChartView @JvmOverloads constructor(
 		val m = cachedModel ?: return
 
 		val height = measureHeight()
-		canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), bgPaint)
+		//canvas.drawColor(bgPaint.color)
 
 		val chartLeft = leftPad + legendW + dp(12f)
 		val chartTop = headerH + topAxisH

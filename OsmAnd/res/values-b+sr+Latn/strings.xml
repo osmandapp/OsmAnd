@@ -5828,8 +5828,8 @@
     <string name="rendering_attr_watercolor_description">Boja vode</string>
     <string name="view_on_phone">Pogledaj na telefonu</string>
     <string name="copy_as_new_folder">Kopiraj kao novi folder</string>
-    <string name="add_to_a_folder">Dodajte u folder</string>
-    <string name="add_to_favorites">Dodaj u favorite</string>
+    <string name="add_to_a_folder">Dodaj u folder</string>
+    <string name="add_to_favorites">Dodaj u omiljene</string>
     <string name="max_weight_at_full_load_description">Navedite maksimalnu težinu vašeg vozila pri punom opterećenju kako biste izbegli puteve i mostove sa ograničenjima težine.</string>
     <string name="max_axle_load_description">Navedite maksimalno osovinsko opterećenje vašeg vozila kako biste izbegli puteve i mostove sa ograničenjima težine.</string>
     <string name="backup_delete_data_warning_extended">Ova akcija će trajno ukloniti sve izabrane podatke iz oblaka. Kasnije ga neće biti moguće obnoviti.</string>
@@ -5889,4 +5889,8 @@
     <string name="routing_attr_weightrating_name">Maksimalna težina pri punom opterećenju</string>
     <string name="routing_attr_maxaxleload_name">Maksimalno osovinsko opterećenje</string>
     <string name="is_parking_time_limited">Da li je vreme parkiranja ograničeno?</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimetara</string>
+    <string name="bicycle_width_limit_description">Obezbedite širinu bicikla kako biste izbegli uske biciklističke staze.</string>
+    <string name="copy_link">Kopiraj link</string>
 </resources>

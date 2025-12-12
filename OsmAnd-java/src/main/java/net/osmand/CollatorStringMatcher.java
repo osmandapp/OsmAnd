@@ -1,5 +1,6 @@
 package net.osmand;
 
+import net.osmand.util.Algorithms;
 import net.osmand.util.ArabicNormalizer;
 
 import java.util.Locale;
@@ -203,10 +204,7 @@ public class CollatorStringMatcher implements StringMatcher {
 			fullText = normalized == null ? fullText : normalized;
 		}
 		int i;
-		// more efficient way to do than replace("'", "")
-		while ((i = fullText.indexOf('\'')) != -1) {
-			fullText = fullText.substring(0, i) + fullText.substring(i + 1);
-		}
+		fullText = Algorithms.removeApostrophes(fullText);
 		while ((i = fullText.indexOf('ß')) != -1) {
 			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i + 1);
 		}

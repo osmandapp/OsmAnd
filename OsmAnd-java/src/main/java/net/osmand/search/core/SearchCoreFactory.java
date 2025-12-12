@@ -162,10 +162,10 @@ public class SearchCoreFactory {
 
 		protected SearchPhrase subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api,
 									SearchResult setParentSearchResult, boolean publish) throws IOException {
-			phrase.countUnknownWordsMatchMainResult(res, setParentSearchResult);
+			phrase.countUnknownWordsMatchMainResult(res);
 			List<String> leftUnknownSearchWords = res.filterUnknownSearchWord(null);
 			if (setParentSearchResult != null) {
-				phrase.countUnknownWordsMatchMainResult(setParentSearchResult, null);
+				phrase.countUnknownWordsMatchMainResult(setParentSearchResult);
 				leftUnknownSearchWords = setParentSearchResult.filterUnknownSearchWord(leftUnknownSearchWords);
 			}
 			// publish result to set parentSearchResult before search
@@ -192,12 +192,15 @@ public class SearchCoreFactory {
 			return null;
 		}
 		
-		boolean matchAddressName(SearchPhrase phrase, SearchResult parent, SearchResult res, boolean fullMatch) {
+		boolean matchAddressName(SearchPhrase phrase, SearchResult prevRes, SearchResult res, boolean fullMatch) {
 			boolean match = false;
-			if (parent != null) {
-				phrase.countUnknownWordsMatchMainResult(parent, res);
-				List<String> leftUnknownSearchWords = parent.filterUnknownSearchWord(null);
-				SearchPhrase nphrase = phrase.selectWord(parent, leftUnknownSearchWords,
+			if (prevRes != null) {
+				// remove braces to not count them 
+				String[] backup = prevRes.stripBracesNames();
+				phrase.countUnknownWordsMatchMainResult(prevRes);
+				prevRes.restoreBraceNames(backup);
+				List<String> leftUnknownSearchWords = prevRes.filterUnknownSearchWord(null);
+				SearchPhrase nphrase = phrase.selectWord(prevRes, leftUnknownSearchWords,
 						phrase.isLastUnknownSearchWordComplete()
 								|| !leftUnknownSearchWords.contains(phrase.getLastUnknownSearchWord()));
 //				NameStringMatcher unknownNameStringMatcher = nphrase.getMainUnknownNameStringMatcher();
@@ -223,7 +226,7 @@ public class SearchCoreFactory {
 				return true;
 			}
 			List<String> localeNames = SearchPhrase.splitWords(localeName, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
-			if (parent == null || !parent.firstUnknownWordMatches) {
+			if (prevRes == null || !prevRes.firstUnknownWordMatches) {
 				Iterator<String> it = localeNames.iterator();
 				while (it.hasNext()) {
 					String lName = it.next();
@@ -232,7 +235,7 @@ public class SearchCoreFactory {
 					}
 				}
 			}
-			List<String> leftUnknownSearchWords = parent == null ? phrase.getUnknownSearchWords() : parent.filterUnknownSearchWord(null);
+			List<String> leftUnknownSearchWords = prevRes == null ? phrase.getUnknownSearchWords() : prevRes.filterUnknownSearchWord(null);
 			List<String> unknownSearchWords = phrase.getUnknownSearchWords();
 			for (int i = 0; i < unknownSearchWords.size() && !match; i++) {
 				String leftUnknownSearchWord = unknownSearchWords.get(i);
@@ -487,7 +490,7 @@ public class SearchCoreFactory {
 //				final QuadRect streetBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
 				final QuadRect postcodeBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
 				final QuadRect villagesBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 3);
-				final QuadRect cityBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5); // covered by separate sbefore
+				final QuadRect cityBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5); // covered by separate radius before
 				final int priority = phrase.isNoSelectedType() ?
 						SEARCH_ADDRESS_BY_NAME_PRIORITY : SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2;
 				final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
@@ -551,7 +554,7 @@ public class SearchCoreFactory {
 								}
 								sr.objectType = ObjectType.BOUNDARY;
 								sr.priorityDistance = 0;
-								phrase.countUnknownWordsMatchMainResult(sr, null);
+								phrase.countUnknownWordsMatchMainResult(sr);
 							} else if (type == CityType.HAMLET || type == CityType.SUBURB || 
 									type == CityType.VILLAGE) {
 								if ((locSpecified && !villagesBbox.contains(x, y, x, y))
@@ -668,8 +671,7 @@ public class SearchCoreFactory {
 								cityResult.file = res.file;
 								// include parent search result even if it is empty
 								// for street-city don't require exact matching
-								boolean match = matchAddressName(phrase, res, cityResult,  true);
-								
+								boolean match = matchAddressName(phrase, res, cityResult, true);
 								if (match) {
 									newParentSearchResult = cityResult;
 								} else {
@@ -689,7 +691,7 @@ public class SearchCoreFactory {
 										cityResult.localeName = boundary.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 										cityResult.otherNames = boundary.getOtherNames(true);
 										// for another city require exact matching
-										if (matchAddressName(phrase, res, cityResult,  true)) {
+										if (matchAddressName(phrase, res, cityResult, true)) {
 											cityResult.object = boundary; 
 											cityResult.location = boundary.getLocation();
 											newParentSearchResult = cityResult;
@@ -819,7 +821,7 @@ public class SearchCoreFactory {
 						sr.priorityDistance = 1;
 					}
 					sr.priority = SEARCH_AMENITY_BY_NAME_PRIORITY;
-					phrase.countUnknownWordsMatchMainResult(sr, null);
+					phrase.countUnknownWordsMatchMainResult(sr);
 					sr.cityName = object.getCityFromTagGroups(phrase.getSettings().getLang());
 					sr.objectType = ObjectType.POI;
 					resultMatcher.publish(sr);
@@ -1188,7 +1190,7 @@ public class SearchCoreFactory {
 					resultMatcher.publish(res);
 				}
 			} else {
-				phrase.countUnknownWordsMatchMainResult(res, null);
+				phrase.countUnknownWordsMatchMainResult(res);
 				res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
 				resultMatcher.publish(res);
 			}
@@ -1801,7 +1803,7 @@ public class SearchCoreFactory {
 						res.objectType = ObjectType.STREET_INTERSECTION;
 						res.location = street.getLocation();
 						res.preferredZoom = PREFERRED_STREET_INTERSECTION_ZOOM;
-						phrase.countUnknownWordsMatchMainResult(res, null);
+						phrase.countUnknownWordsMatchMainResult(res);
 						resultMatcher.publish(res);
 					}
 				}

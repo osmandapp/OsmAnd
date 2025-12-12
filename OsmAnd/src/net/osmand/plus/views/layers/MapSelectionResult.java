@@ -5,6 +5,7 @@ import android.graphics.PointF;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
@@ -20,12 +21,16 @@ import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 public class MapSelectionResult {
+
+	private static final Log LOG = PlatformUtil.getLog(MapSelectionResult.class);
 
 	private final OsmandApplication app;
 	private final AmenitySearcher searcher;
@@ -104,6 +109,10 @@ public class MapSelectionResult {
 		detailsObjects.addAll(processObjects(mapObjects, other));
 
 		for (BaseDetailsObject object : detailsObjects) {
+			if (object.getLocation() == null) {
+				object.getSyntheticAmenity().setLocation(pointLatLon);
+				LOG.debug("BaseDetailsObject without location " + object);
+			}
 			if (object.getObjects().size() > 1) {
 				processedObjects.add(new SelectedMapObject(object, poiProvider));
 			} else {

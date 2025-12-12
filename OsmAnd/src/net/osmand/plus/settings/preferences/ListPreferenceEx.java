@@ -79,13 +79,16 @@ public class ListPreferenceEx extends DialogPreference {
 
 	public int findIndexOfValue(Object value) {
 		if (value != null && entryValues != null) {
+			double valueDouble = Double.NaN;
+			if (value instanceof String that) {
+				valueDouble = Algorithms.parseDoubleSilently(that, Double.NaN);
+			}
 			for (int i = 0; i < entryValues.length; i++) {
 				if (entryValues[i].equals(value)) {
 					return i;
-				} else if (entryValues[i] instanceof String entryString && value instanceof String valueString) {
-					double a = Algorithms.parseDoubleSilently(entryString, Double.NaN);
-					double b = Algorithms.parseDoubleSilently(valueString, Double.NaN);
-					if (!Double.isNaN(a) && !Double.isNaN(b) && Double.compare(a, b) == 0) {
+				} else if (!Double.isNaN(valueDouble) && entryValues[i] instanceof String entryString) {
+					double entryDouble = Algorithms.parseDoubleSilently(entryString, Double.NaN);
+					if (!Double.isNaN(entryDouble) && Double.compare(entryDouble, valueDouble) == 0) {
 						return i;
 					}
 				}

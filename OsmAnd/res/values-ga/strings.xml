@@ -5720,4 +5720,8 @@
     <string name="is_parking_time_limited">An bhfuil teorainn ama páirceála?</string>
     <string name="routing_attr_weightrating_name">Uasmheáchan ag ualach iomlán</string>
     <string name="routing_attr_maxaxleload_name">Ualach uasta acastóra</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">ceintiméadair</string>
+    <string name="bicycle_width_limit_description">Cuir leithead do rothair ar fáil chun cosáin rothaíochta cúnga a sheachaint.</string>
+    <string name="copy_link">Cóipeáil nasc</string>
 </resources>

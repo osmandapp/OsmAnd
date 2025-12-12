@@ -2876,7 +2876,7 @@
     <string name="coordinates_format_info">De geselecteerde indeling wordt in de hele app toegepast.</string>
     <string name="pref_selected_by_default_for_profiles">Deze instelling is standaard geselecteerd voor alle profielen: %s</string>
     <string name="change_default_settings">Instelling aanpassen</string>
-    <string name="discard_changes">Annuleren</string>
+    <string name="discard_changes">Wijzigingen annuleren</string>
     <string name="apply_to_current_profile">Pas alleen toe op \"%1$s\"</string>
     <string name="apply_to_all_profiles">Toepassen op alle profielen</string>
     <string name="start_up_message_pref">Welkomstbericht</string>

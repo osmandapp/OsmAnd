@@ -745,8 +745,8 @@
     <string name="poi_cuisine_burger">המבורגר</string>
     <string name="poi_cuisine_coffee_shop">קפה</string>
     <string name="poi_cuisine_sandwich">כריך</string>
-    <string name="poi_cuisine_kebab">קבב</string>
-    <string name="poi_cuisine_doner">דונר (שווארמה)</string>
+    <string name="poi_cuisine_kebab">קבב;מנה</string>
+    <string name="poi_cuisine_doner">דונר (שווארמה);מנה</string>
     <string name="poi_cuisine_chicken">עוף</string>
     <string name="poi_cuisine_ice_cream">גלידה</string>
     <string name="poi_cuisine_sushi">סושי</string>
@@ -2493,4 +2493,5 @@
     <string name="poi_toilets_hands_drying_no">ייבוש ידיים: אין</string>
     <string name="poi_handwashing_creme_yes">קרם: יש</string>
     <string name="poi_post_office_collection_times">זמני איסוף סניף דואר</string>
+    <string name="poi_cuisine_fish">דגים</string>
 </resources>

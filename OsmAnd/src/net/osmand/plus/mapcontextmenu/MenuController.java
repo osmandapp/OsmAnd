@@ -510,6 +510,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	public boolean needStreetName() {
 		return !displayDistanceDirection();
 	}
+	public boolean needAsyncAmenityName() {
+		return false;
+	}
 
 	public boolean needTypeStr() {
 		return true;
@@ -711,7 +714,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	public void share(LatLon latLon, String title, String address) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			ShareMenu.show(latLon, title, address, mapActivity);
+			ShareMenu.show(latLon, title, address, null, mapActivity);
 		}
 	}
 

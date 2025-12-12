@@ -1073,7 +1073,7 @@
     <string name="share_route_as_gpx">以 GPX 檔案分享路徑</string>
     <string name="share_route_subject">藉由 OsmAnd 分享路徑</string>
     <string name="navigation_intent_invalid">無效的格式：%s</string>
-    <string name="keep_informing_never">手動（輕觸箭咀）</string>
+    <string name="keep_informing_never">僅限手動（輕點箭頭）</string>
     <string name="keep_informing_descr">按照時間再次播放導航指示。</string>
     <string name="keep_informing">重播導航指示</string>
     <string name="arrival_distance">到達提醒距離</string>
@@ -5727,4 +5727,8 @@
     <string name="routing_attr_weightrating_name">滿載時的最大重量</string>
     <string name="routing_attr_maxaxleload_name">最大軸重</string>
     <string name="is_parking_time_limited">可停車的時間有限制嗎？</string>
+    <string name="centimeter">公分</string>
+    <string name="shared_string_centimeters">公分</string>
+    <string name="bicycle_width_limit_description">請提供您的腳踏車寬度，以避免使用太窄的腳踏車道。</string>
+    <string name="copy_link">複製連結</string>
 </resources>

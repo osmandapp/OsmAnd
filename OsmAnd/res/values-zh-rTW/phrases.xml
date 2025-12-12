@@ -813,7 +813,7 @@
     <string name="poi_leather">皮革製品店</string>
     <string name="poi_music">唱片行</string>
     <string name="poi_scuba_diving_shop">水肺潛水用品店</string>
-    <string name="poi_tyres">輪胎店</string>
+    <string name="poi_tyres">輪胎店;輪胎</string>
     <string name="poi_energy">爐具店</string>
     <string name="poi_watches">鐘錶店</string>
     <string name="poi_swimming_pool_shop">游泳用品店</string>

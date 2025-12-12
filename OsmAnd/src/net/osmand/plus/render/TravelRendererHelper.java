@@ -382,7 +382,7 @@ public class TravelRendererHelper implements RendererEventListener {
 	}
 
 	@Override
-	public void onRendererLoaded(String name, RenderingRulesStorage rules, InputStream source) {
+	public void onRendererLoaded(String name, RenderingRulesStorage rules) {
 		for (Map.Entry<String, CommonPreference<Boolean>> entry : routeTypesProps.entrySet()) {
 			boolean selected = entry.getValue().get();
 			String attrName = entry.getKey().replace(ROUTE_ACTIVITY_TYPE + "_", "");

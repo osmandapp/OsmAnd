@@ -8,12 +8,17 @@ import java.lang.Exception
 class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 
 	companion object {
+		private const val KEY_COMMON = "common"
+		private const val KEY_SHOW_STAR_MAP = "showStarMap"
+		private const val KEY_SHOW_STAR_CHART = "showStarChart"
+
 		private const val KEY_STAR_MAP = "star_map"
 		private const val KEY_STAR_CHART = "star_chart"
 
 		private const val KEY_SHOW_AZIMUTHAL = "showAzimuthalGrid"
 		private const val KEY_SHOW_EQUATORIAL = "showEquatorialGrid"
 		private const val KEY_SHOW_ECLIPTIC = "showEclipticLine"
+		private const val KEY_SHOW_CONSTELLATIONS = "showConstellations"
 
 		private const val KEY_ITEMS = "items"
 		private const val KEY_ID = "id"
@@ -30,10 +35,16 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val isVisible: Boolean
 	)
 
+	data class CommonConfig(
+		val showStarMap: Boolean,
+		val showStarChart: Boolean,
+	)
+
 	data class StarMapConfig(
 		val showAzimuthalGrid: Boolean,
 		val showEquatorialGrid: Boolean,
 		val showEclipticLine: Boolean,
+		val showConstellations: Boolean,
 		val items: List<SkyObjectConfig>
 	)
 
@@ -88,6 +99,27 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		return array
 	}
 
+	fun getCommonConfig(): CommonConfig {
+		val root = getSettingsJson()
+		val settings = root.optJSONObject(KEY_COMMON)
+
+		val showStarMap = settings?.optBoolean(KEY_SHOW_STAR_MAP, true) ?: true
+		val showStarChart = settings?.optBoolean(KEY_SHOW_STAR_CHART, false) ?: false
+
+		return CommonConfig(showStarMap, showStarChart)
+	}
+
+	fun setCommonConfig(config: CommonConfig) {
+		val root = getSettingsJson()
+		val settings = root.optJSONObject(KEY_COMMON) ?: JSONObject()
+
+		settings.put(KEY_SHOW_STAR_MAP, config.showStarMap)
+		settings.put(KEY_SHOW_STAR_CHART, config.showStarChart)
+
+		root.put(KEY_COMMON, settings)
+		setSettingsJson(root)
+	}
+
 	fun getStarMapConfig(): StarMapConfig {
 		val root = getSettingsJson()
 		val mapSettings = root.optJSONObject(KEY_STAR_MAP)
@@ -95,10 +127,11 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showAzimuthal = mapSettings?.optBoolean(KEY_SHOW_AZIMUTHAL, true) ?: true
 		val showEquatorial = mapSettings?.optBoolean(KEY_SHOW_EQUATORIAL, false) ?: false
 		val showEcliptic = mapSettings?.optBoolean(KEY_SHOW_ECLIPTIC, false) ?: false
+		val showConstellations = mapSettings?.optBoolean(KEY_SHOW_CONSTELLATIONS, false) ?: false
 
 		val items = parseItems(mapSettings)
 
-		return StarMapConfig(showAzimuthal, showEquatorial, showEcliptic, items)
+		return StarMapConfig(showAzimuthal, showEquatorial, showEcliptic, showConstellations, items)
 	}
 
 	fun setStarMapConfig(config: StarMapConfig) {
@@ -108,6 +141,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		mapSettings.put(KEY_SHOW_AZIMUTHAL, config.showAzimuthalGrid)
 		mapSettings.put(KEY_SHOW_EQUATORIAL, config.showEquatorialGrid)
 		mapSettings.put(KEY_SHOW_ECLIPTIC, config.showEclipticLine)
+		mapSettings.put(KEY_SHOW_CONSTELLATIONS, config.showConstellations)
 
 		mapSettings.put(KEY_ITEMS, serializeItems(config.items))
 

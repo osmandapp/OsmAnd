@@ -347,6 +347,10 @@ public class WidgetsVisibilityHelper {
 		return fragmentsHelper.getWeatherForecastFragment() != null;
 	}
 
+	private boolean isInStarMapMode() {
+		return fragmentsHelper.getStarMapFragment() != null;
+	}
+
 	private boolean isSelectingTilesZone() {
 		return fragmentsHelper.getDownloadTilesFragment() != null;
 	}
@@ -428,6 +432,7 @@ public class WidgetsVisibilityHelper {
 	public enum VisibilityScreens {
 		EXPLORE_PLACES(),
 		WEATHER_FORECAST(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON),
+		STAR_MAP(),
 		MEASUREMENT_MODE(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON, SUGGEST_MAP_BANNER, TOP_BUTTONS, COMPASS),
 		PLAN_ROUTE_MODE(TOP_COORDINATES_WIDGET, SUGGEST_MAP_BANNER),
 		TRACK_APPEARANCE_MODE(SUGGEST_MAP_BANNER),
@@ -444,6 +449,7 @@ public class WidgetsVisibilityHelper {
 		boolean isVisibleInMode(@NonNull WidgetsVisibilityHelper helper) {
 			return switch (this) {
 				case WEATHER_FORECAST -> helper.isInWeatherForecastMode();
+				case STAR_MAP -> helper.isInStarMapMode();
 				case MEASUREMENT_MODE -> helper.isInMeasurementToolMode();
 				case PLAN_ROUTE_MODE -> helper.isInPlanRouteMode();
 				case TRACK_APPEARANCE_MODE -> helper.isInTrackAppearanceMode();

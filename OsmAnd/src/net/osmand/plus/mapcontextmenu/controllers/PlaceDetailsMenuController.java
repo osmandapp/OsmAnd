@@ -6,10 +6,13 @@ import androidx.annotation.Nullable;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.PlaceDetailsMenuBuilder;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.mapcontextmenu.other.SharePoiParams;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -51,6 +54,57 @@ public class PlaceDetailsMenuController extends AmenityMenuController {
 			iconId = renderedObjectController != null ? renderedObjectController.getRightIconId() : 0;
 		}
 		return iconId;
+	}
+
+	public void share(LatLon latLon, String title, String address) {
+		SharePoiParams params = new SharePoiParams(latLon);
+		String name;
+
+		if (isWikiType()) {
+			name = getWikiName();
+			if (Algorithms.isEmpty(name)) {
+				params.addWikidataId(amenity.getWikidata());
+			}
+		} else {
+			name = getPoiName();
+			if (Algorithms.isEmpty(name)) {
+				params.addOsmId(amenity.getOsmId());
+			}
+		}
+
+		String type = getShareType();
+		params.addType(type);
+		params.addName(name);
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			ShareMenu.show(latLon, title, address, ShareMenu.buildOsmandPoiUri(params), mapActivity);
+		}
+	}
+
+	private String getWikiName() {
+		String name = null;
+		for (Amenity am : detailsObject.getAmenities()) {
+			if (am.getType() != null
+					&& !am.getType().isWiki()
+					&& !am.isRoutePoint()
+					&& !Algorithms.isEmpty(am.getName())) {
+				name = am.getName();
+				break;
+			}
+		}
+		return name;
+	}
+
+	private String getPoiName(){
+		String name = null;
+		if (renderedObjectController != null && renderedObjectController.getObject() instanceof RenderedObject renderedObject) {
+			name = renderedObject.getName();
+		}
+		if (Algorithms.isEmpty(name)) {
+			name = amenity.getName();
+		}
+		return name;
 	}
 
 	@Override

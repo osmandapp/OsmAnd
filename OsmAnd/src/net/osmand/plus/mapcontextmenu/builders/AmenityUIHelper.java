@@ -357,6 +357,11 @@ public class AmenityUIHelper extends MenuBuilder {
 				return null; // the "Others" value is already displayed as a title
 			}
 			collectedPoiTypes.computeIfAbsent(category, s -> new ArrayList<>()).add(poiType);
+		} else if (showDefaultTags) {
+			pType = new PoiType(poiTypes, poiCategory, null, key, poiCategory.getIconKeyName());
+			pType.setText(true);
+			PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
+			poiAdditionalUiRule.fillRow(app, context, rowBuilder, this, pType, key, poiTypes.getPoiTranslation(vl), subtype);
 		} else {
 			return null; // skip non-translatable NON-poiType tags
 		}
@@ -804,5 +809,9 @@ public class AmenityUIHelper extends MenuBuilder {
 			return Pair.create(description, null);
 		}
 		return null;
+	}
+
+	public void setShowDefault(boolean showDefault) {
+		this.showDefaultTags = showDefault;
 	}
 }
