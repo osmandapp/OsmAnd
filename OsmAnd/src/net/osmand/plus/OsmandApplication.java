@@ -241,7 +241,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private TileSourceTemplatesProvider tileSourceTemplatesProvider;
 
 	public final PreferencesDatabaseManager<net.osmand.plus.settings.fragments.search.Configuration> preferencesDatabaseManager = new PreferencesDatabaseManager<>();
-	private final StateChangedListener<String> pluginsListenerResettingSearchDatabase =
+	private final StateChangedListener<String> pluginsListenerAdaptingSearchDatabase =
 			plugins ->
 					preferencesDatabaseManager
 							.getPreferencesDatabase()
@@ -323,7 +323,7 @@ public class OsmandApplication extends MultiDexApplication {
 						new TileSourceTemplatesDownloader(
 								Version.getVersionAsURLParam(this)),
 						false);
-		settings.PLUGINS.addListener(pluginsListenerResettingSearchDatabase);
+		settings.PLUGINS.addListener(pluginsListenerAdaptingSearchDatabase);
 	}
 
 	public TileSourceTemplatesProvider getTileSourceTemplatesProvider() {
