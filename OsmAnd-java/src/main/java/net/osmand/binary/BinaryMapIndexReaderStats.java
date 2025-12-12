@@ -41,7 +41,7 @@ public class BinaryMapIndexReaderStats {
 		public int prevResultsSize = 0;
 		public String requestWord = "";
 		Map<BinaryMapIndexReaderApiName, StatByAPI> byApis = new HashMap<>();
-		Map<String, Map<String, Integer>> wordByTypeCounts = new HashMap<String, Map<String, Integer>>();
+		public Map<String, Map<String, Integer>> wordByTypeCounts = new HashMap<String, Map<String, Integer>>();
 
 		public long beginSearchStats(BinaryMapIndexReaderApiName api, SearchRequest<?> req, BinaryIndexPart part, CodedInputStream codedIS, String extraInfo) {
 			lastReq = System.nanoTime();
