@@ -3,6 +3,7 @@ package net.osmand.plus.inapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -24,8 +25,8 @@ import com.huawei.hms.iap.entity.StartIapActivityResult;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
@@ -218,7 +219,14 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
-	public void manageSubscription(@NonNull Context ctx, @Nullable String sku) {
+	public void manageSubscription(@NonNull Context ctx, @Nullable String sku, @Nullable PurchaseOrigin origin) {
+		if (PurchaseOrigin.FASTSPRING == origin) {
+			String url = "https://osmand.onfastspring.com/account";
+			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+			AndroidUtils.startActivityIfSafe(ctx, intent);
+			return;
+		}
+
 		if (uiActivity != null) {
 			StartIapActivityReq req = new StartIapActivityReq();
 			if (!Algorithms.isEmpty(sku)) {
@@ -676,10 +684,6 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		return false;
 	}
 
-	@Override
-	protected boolean isBillingUnavailable() {
-		return !purchaseSupported;
-	}
 	@Override
 	protected void destroyBillingManager() {
 		// non implemented
