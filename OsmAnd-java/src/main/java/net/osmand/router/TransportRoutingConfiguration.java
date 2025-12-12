@@ -16,10 +16,10 @@ public class TransportRoutingConfiguration {
 	
 	public int walkChangeRadius = 300; 
 	
-	public int maxNumberOfChanges = 3;  
-	
-	public int finishTimeSeconds = 1200; // deprecated
-	
+	public int maxNumberOfChanges = 2; // replaced with max_num_changes
+
+	public int ptLimitResultsByNumber = 50; // pt_limit - limit number of best routes (0 = unlimited)
+
 	public double increaseForAlternativesRoutes = 2.0;
 	public double increaseForAltRoutesWalking = 3.0;
 	
@@ -29,7 +29,6 @@ public class TransportRoutingConfiguration {
 	public int maxRouteTime = 60 * 60 * 10; // 10 hours
 	public int maxRouteDistance = 0; // distance for maxRouteTime
 	public int maxRouteIncreaseSpeed = 30; // speed to increase route time
-
 
 
 	public GeneralRouter router;
@@ -151,6 +150,7 @@ public class TransportRoutingConfiguration {
 			maxRouteTime =  router.getIntAttribute("maxRouteTime", maxRouteTime);
 			maxRouteIncreaseSpeed =  router.getIntAttribute("maxRouteIncreaseSpeed", maxRouteIncreaseSpeed);
 			maxRouteDistance =  router.getIntAttribute("maxRouteDistance", maxRouteDistance);
+
 			increaseForAlternativesRoutes = 
 					router.getFloatAttribute("increaseForAlternativesRoutes", (float) increaseForAlternativesRoutes);
 			increaseForAltRoutesWalking = 
@@ -159,16 +159,16 @@ public class TransportRoutingConfiguration {
 			combineAltRoutesDiffStops = router.getIntAttribute("combineAltRoutesDiffStops", combineAltRoutesDiffStops);
 			combineAltRoutesSumDiffStops = router.getIntAttribute("combineAltRoutesSumDiffStops", combineAltRoutesSumDiffStops);
 			
-			String mn = params.get("max_num_changes");
-			maxNumberOfChanges = (int) RoutingConfiguration.parseSilentFloat(mn, maxNumberOfChanges);
-			
+			maxNumberOfChanges =
+					(int) RoutingConfiguration.parseSilentFloat(params.get("max_num_changes"), maxNumberOfChanges);
+			ptLimitResultsByNumber =
+					(int) RoutingConfiguration.parseSilentFloat(params.get("pt_limit"), ptLimitResultsByNumber);
+
 			walkSpeed = router.getFloatAttribute("minDefaultSpeed", this.walkSpeed * 3.6f) / 3.6f;
 			defaultTravelSpeed = router.getFloatAttribute("maxDefaultSpeed", this.defaultTravelSpeed * 3.6f) / 3.6f;
 			
 			RouteAttributeContext spds = router.getObjContext(RouteDataObjectAttribute.ROAD_SPEED);
 			walkSpeed = spds.evaluateFloat(getRawBitset("route", "walk"), walkSpeed);
-			
-			
 		}
 	}
 	

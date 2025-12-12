@@ -6237,4 +6237,9 @@
     <string name="deleted_maps_warning">Je staat op het punt om %d item(s) te verwijderen\nDoorgaan?</string>
     <string name="slots">Plaatsen</string>
     <string name="is_parking_time_limited">Is de parkeertijd gelimiteerd?</string>
+    <string name="routing_attr_pt_limit_name">Toon de N beste routes</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">Centimeter</string>
+    <string name="bicycle_width_limit_description">Geef je fietsbreedte op om smalle fietspaden te vermijden.</string>
+    <string name="copy_link">Kopieer link</string>
 </resources>

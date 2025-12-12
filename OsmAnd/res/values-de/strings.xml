@@ -5927,4 +5927,9 @@
     <string name="is_parking_time_limited">Ist die Parkdauer begrenzt?</string>
     <string name="routing_attr_weightrating_name">Maximales Gewicht bei voller Beladung</string>
     <string name="routing_attr_maxaxleload_name">Maximale Achslast</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">Zentimeter</string>
+    <string name="bicycle_width_limit_description">Fahrradbreite angeben, um schmale Radwege zu vermeiden.</string>
+    <string name="copy_link">Link kopieren</string>
+    <string name="button_frames">Schaltflächenrahmen</string>
 </resources>

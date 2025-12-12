@@ -2913,8 +2913,8 @@
     <string name="edit_profile_setup_map_subtitle">Vælg kortindstillinger for profilen</string>
     <string name="edit_profile_screen_options_subtitle">Vælg skærmindstillinger for profilen</string>
     <string name="edit_profile_nav_settings_subtitle">Vælg navigationsindstillinger for profilen</string>
-    <string name="routing_attr_max_num_changes_description">Angiv øvre grænse for omstigninger</string>
-    <string name="routing_attr_max_num_changes_name">Antal skift</string>
+    <string name="routing_attr_max_num_changes_description">Angiv den øvre grænse for omstigninger</string>
+    <string name="routing_attr_max_num_changes_name">Maksimalt antal omstigninger</string>
     <string name="turn_screen_on_router">Vågn op ved retningsændring</string>
     <string name="turn_screen_on_time_descr">Indstil hvor længe skærmen skal være tændt.</string>
     <string name="turn_screen_on_sensor">Brug nærhedssensor</string>
@@ -5949,4 +5949,10 @@
     <string name="routing_attr_weightrating_name">Maksimal vægt ved fuld last</string>
     <string name="routing_attr_maxaxleload_name">Maksimal akselbelastning</string>
     <string name="is_parking_time_limited">Er parkering tidsbegrænset?</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimeter</string>
+    <string name="bicycle_width_limit_description">Angiv din cykels bredde for at undgå smalle cykelstier.</string>
+    <string name="copy_link">Kopiér link</string>
+    <string name="routing_attr_pt_limit_name">Vis N bedste ruter</string>
+    <string name="routing_attr_pt_limit_description">Angiv antallet af bedste ruter, der skal vises</string>
 </resources>

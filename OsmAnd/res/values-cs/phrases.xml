@@ -784,7 +784,7 @@
     <string name="poi_candles">Obchod se svíčkami</string>
     <string name="poi_music">Hudebniny</string>
     <string name="poi_scuba_diving_shop">Potápěčské potřeby</string>
-    <string name="poi_tyres">Obchod s pneumatikami</string>
+    <string name="poi_tyres">Pneumatiky;Pneumatika;Pneu;Obchod s pneumatikami;Pneu obchod</string>
     <string name="poi_energy">Obchod s energiemi</string>
     <string name="poi_swimming_pool_shop">Bazénové potřeby</string>
     <string name="poi_games">Hry</string>
@@ -2959,7 +2959,7 @@
     <string name="poi_health_person_type_podologist">Úloha zdravotníka: podolog</string>
     <string name="poi_office_podologist">Kancelář podologa</string>
     <string name="poi_cuisine_burger">Burgr</string>
-    <string name="poi_cuisine_kebab">Kebab</string>
+    <string name="poi_cuisine_kebab">Kebab;Jídlo</string>
     <string name="poi_observatory_designation">Označení</string>
     <string name="poi_emergency_infrastructure">Infrastruktura záchranného systému</string>
     <string name="poi_healthcare_speciality_reiki">Reiki</string>
@@ -3151,7 +3151,7 @@
     <string name="poi_seamark_clearance_height_open">Podjezdná výška (otevřeno)</string>
     <string name="poi_seamark_clearance_width">Šířka plavební dráhy</string>
     <string name="poi_route_subway_ref">Metro</string>
-    <string name="poi_cuisine_doner">Šavarma</string>
+    <string name="poi_cuisine_doner">Doner kebab (šavarma);Jídlo</string>
     <string name="poi_cuisine_beef_bowl">Gyudon</string>
     <string name="poi_cuisine_tapas">Tapas</string>
     <string name="poi_cuisine_heuriger">Heuriger</string>
@@ -3261,7 +3261,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">Opravy převodovky</string>
     <string name="poi_service_vehicle_motor_yes">Opravy motoru</string>
     <string name="poi_service_vehicle_insurance_yes">Sjednání pojištění</string>
-    <string name="poi_service_vehicle_tyres_yes">Pneuservis</string>
+    <string name="poi_service_vehicle_tyres_yes">Pneumatiky;Pneumatika;Pneu;Pneuservis</string>
     <string name="poi_via_ferrata_scale">Obtížnost</string>
     <string name="poi_glacier_type_valley">Údolní ledovec</string>
     <string name="poi_glacier_type_ice_tongue">Ledový jazyk</string>

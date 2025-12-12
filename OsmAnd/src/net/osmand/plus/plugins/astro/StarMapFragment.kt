@@ -1,15 +1,38 @@
 package net.osmand.plus.plugins.astro
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.SurfaceTexture
+import android.hardware.GeomagneticField
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import android.hardware.camera2.CameraCharacteristics
+import android.hardware.camera2.CameraDevice
+import android.hardware.camera2.CameraManager
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Surface
+import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageButton
+import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColorInt
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
@@ -46,15 +69,18 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.controls.maphudbuttons.MapButton
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
+import net.osmand.shared.util.LoggerFactory
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
-import kotlin.io.path.Path
+import kotlin.math.asin
+import kotlin.math.atan
+import kotlin.math.atan2
 
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
-	OsmAndCompassListener {
+	OsmAndCompassListener, SensorEventListener {
 
 	private lateinit var starView: StarView
 	private lateinit var timeSelectionView: DateTimeSelectionView
@@ -63,6 +89,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var sheetCoords: TextView
 	private lateinit var sheetDetails: TextView
 	private lateinit var resetTimeButton: Button
+	private lateinit var arModeButton: ImageButton
+	private lateinit var cameraButton: ImageButton
+	private lateinit var cameraTextureView: TextureView
+	private lateinit var sliderContainer: FrameLayout
+	private lateinit var transparencySlider: SeekBar
+	private lateinit var resetFovButton: ImageButton
 
 	private lateinit var starChartsView: View
 	private lateinit var starVisiblityView: StarVisiblityChartView
@@ -83,8 +115,38 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
 	}
 
+	// --- AR Mode / Sensors ---
+	private var isArModeEnabled = false
+	private lateinit var sensorManager: SensorManager
+	private var sensorRotation: Sensor? = null
+	private var sensorAccelerometer: Sensor? = null
+	private var sensorMagnetic: Sensor? = null
+
+	private val rotationMatrix = FloatArray(9)
+	private val remappedRotationMatrix = FloatArray(9)
+	private val accelerometerReading = FloatArray(3)
+	private val magnetometerReading = FloatArray(3)
+
+	private var hasAccelerometer = false
+	private var hasMagnetometer = false
+	private var geomagneticField: GeomagneticField? = null
+
+	// Low pass filter for smoothing
+	private var smoothedAzimuth = 0.0
+	private var smoothedAltitude = 45.0
+	private val filterAlpha = 0.1 // Smoothing factor
+
+	// --- Camera Overlay ---
+	private var isCameraOverlayEnabled = false
+	private var cameraDevice: android.hardware.camera2.CameraDevice? = null
+	private var captureSession: android.hardware.camera2.CameraCaptureSession? = null
+	private var calculatedFov = 60.0 // Default fallback
+
 	companion object {
+		private val log = LoggerFactory.getLogger("StarMapFragment")
 		val TAG: String = StarMapFragment::class.java.simpleName
+
+		private const val PERMISSION_REQUEST_CAMERA = 1001
 
 		fun showInstance(manager: FragmentManager) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
@@ -107,13 +169,29 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starChartViewModel = ViewModelProvider(
 			this, StarChartObjectsViewModel.Factory(app, swSettings))[StarChartObjectsViewModel::class.java]
 
+		// Initialize Sensor Manager
+		sensorManager = requireContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager
+		sensorRotation = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
+		if (sensorRotation == null) {
+			sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+			sensorMagnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
+		}
+
 		starView = view.findViewById(R.id.star_view)
+		cameraTextureView = view.findViewById(R.id.camera_view)
 		timeSelectionView = view.findViewById(R.id.time_selection_view)
 		resetTimeButton = view.findViewById(R.id.reset_time_button)
 		bottomSheet = view.findViewById(R.id.bottom_sheet)
 		sheetTitle = view.findViewById(R.id.sheet_title)
 		sheetCoords = view.findViewById(R.id.sheet_coords)
 		sheetDetails = view.findViewById(R.id.sheet_details)
+
+		arModeButton = view.findViewById(R.id.ar_mode_button)
+		cameraButton = view.findViewById(R.id.camera_button)
+		sliderContainer = view.findViewById(R.id.slider_container)
+		transparencySlider = view.findViewById(R.id.transparency_slider)
+		resetFovButton = view.findViewById(R.id.reset_fov_button)
+
 		ViewCompat.setOnApplyWindowInsetsListener(bottomSheet) { v, windowInsets ->
 			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
 			v.updatePadding(bottom = v.paddingTop + insets.bottom)
@@ -175,6 +253,31 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			setOnClickListener { showFilterDialog() }
 		}
 
+		// AR Mode Toggle
+		arModeButton.setOnClickListener {
+			toggleArMode()
+		}
+
+		// Camera Overlay Toggle
+		cameraButton.setOnClickListener {
+			toggleCameraOverlay()
+		}
+
+		// Transparency Slider
+		transparencySlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+			override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+				cameraTextureView.alpha = progress / 100f
+			}
+			override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+			override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+		})
+
+		// Reset FOV Button
+		resetFovButton.setOnClickListener {
+			starView.setViewAngle(calculatedFov)
+			Toast.makeText(context, "FOV reset to ${String.format("%.1f", calculatedFov)}°", Toast.LENGTH_SHORT).show()
+		}
+
 		resetTimeButton.setOnClickListener {
 			starMapViewModel.resetTime()
 			starChartViewModel.resetTime()
@@ -197,6 +300,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		updateStarMap(true)
 		setupToolBar(view)
 		buildZoomButtons(view)
+		updateArButtonState()
+		updateCameraButtonState()
+
+		// Calculate FOV initially if camera permission is already granted (best effort)
+		if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+			calculatedFov = calculateCameraFov()
+		}
 
 		return view
 	}
@@ -214,6 +324,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
 		app.osmandMap.mapView.addMapLocationListener(this)
+
+		if (isArModeEnabled) {
+			registerSensors()
+		}
+		if (isCameraOverlayEnabled) {
+			openCamera()
+		}
+
 		val mapActivity = requireMapActivity()
 		mapActivity.disableDrawer()
 		updateWidgetsVisibility(mapActivity, View.GONE)
@@ -225,13 +343,20 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
 		app.osmandMap.mapView.removeMapLocationListener(this)
+		unregisterSensors()
+		closeCamera()
+
 		val mapActivity = requireMapActivity()
 		mapActivity.enableDrawer()
 		updateWidgetsVisibility(mapActivity, View.VISIBLE)
 		mapActivity.refreshMap()
 	}
 
+	// ... [Existing Compass/Location methods are unchanged] ...
 	override fun updateCompassValue(value: Float) {
+		// If AR mode is ON, ignore standard compass updates
+		if (isArModeEnabled) return
+
 		val lastResetRotationToNorth = app.mapViewTrackingUtilities.lastResetRotationToNorth
 		if (this.lastResetRotationToNorth < lastResetRotationToNorth) {
 			this.lastResetRotationToNorth = lastResetRotationToNorth
@@ -250,9 +375,17 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	override fun updateLocation(location: Location?) {
 		if (location == null) return
 
+		// Update Geomagnetic Field for Declination
+		geomagneticField = GeomagneticField(
+			location.latitude.toFloat(),
+			location.longitude.toFloat(),
+			location.altitude.toFloat(),
+			System.currentTimeMillis()
+		)
+
 		if (app.mapViewTrackingUtilities.isMapLinkedToLocation) {
 			app.runInUIThread {
-				if (!manualAzimuth) {
+				if (!manualAzimuth && !isArModeEnabled) {
 					if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 						if (location.hasBearing() && location.bearing != 0f) {
 							starView.setAzimuth(location.bearing.toDouble(), true)
@@ -262,7 +395,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				updateStarMap();
 				updateStarChart()
 			}
-		} else if (!manualAzimuth) {
+		} else if (!manualAzimuth && !isArModeEnabled) {
 			app.runInUIThread {
 				if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 					if (location.hasBearing() && location.bearing != 0f) {
@@ -276,6 +409,282 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	override fun locationChanged(p0: Double, p1: Double, p2: Any?) {
 		if (!app.mapViewTrackingUtilities.isMapLinkedToLocation) {
 			app.runInUIThread { updateStarMap(); updateStarChart() }
+		}
+	}
+
+	// --- AR Mode Logic ---
+
+	private fun toggleArMode() {
+		isArModeEnabled = !isArModeEnabled
+		if (isArModeEnabled) {
+			registerSensors()
+			Toast.makeText(context, "AR Mode Enabled", Toast.LENGTH_SHORT).show()
+		} else {
+			unregisterSensors()
+			manualAzimuth = true // Stop auto-rotating back immediately
+			Toast.makeText(context, "AR Mode Disabled", Toast.LENGTH_SHORT).show()
+		}
+		updateArButtonState()
+	}
+
+	private fun updateArButtonState() {
+		if (isArModeEnabled) {
+			arModeButton.setColorFilter(Color.BLUE)
+		} else {
+			arModeButton.setColorFilter("#5f6e7c".toColorInt())
+		}
+	}
+
+	private fun registerSensors() {
+		if (sensorRotation != null) {
+			sensorManager.registerListener(this, sensorRotation, SensorManager.SENSOR_DELAY_GAME)
+		} else if (sensorAccelerometer != null && sensorMagnetic != null) {
+			sensorManager.registerListener(this, sensorAccelerometer, SensorManager.SENSOR_DELAY_GAME)
+			sensorManager.registerListener(this, sensorMagnetic, SensorManager.SENSOR_DELAY_GAME)
+		} else {
+			Toast.makeText(context, "Sensors not available for AR", Toast.LENGTH_SHORT).show()
+			isArModeEnabled = false
+			updateArButtonState()
+		}
+	}
+
+	private fun unregisterSensors() {
+		sensorManager.unregisterListener(this)
+	}
+
+	override fun onSensorChanged(event: SensorEvent) {
+		if (!isArModeEnabled) return
+
+		var success = false
+
+		if (event.sensor.type == Sensor.TYPE_ROTATION_VECTOR) {
+			SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values)
+			success = true
+		} else if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+			System.arraycopy(event.values, 0, accelerometerReading, 0, accelerometerReading.size)
+			hasAccelerometer = true
+		} else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
+			System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
+			hasMagnetometer = true
+		}
+
+		if (hasAccelerometer && hasMagnetometer && event.sensor.type != Sensor.TYPE_ROTATION_VECTOR) {
+			success = SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)
+		}
+
+		if (success) {
+			val windowManager = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
+			val rotation = windowManager.defaultDisplay.rotation
+
+			var axisX = SensorManager.AXIS_X
+			var axisY = SensorManager.AXIS_Y
+
+			when (rotation) {
+				Surface.ROTATION_0 -> {
+					axisX = SensorManager.AXIS_X
+					axisY = SensorManager.AXIS_Y
+				}
+				Surface.ROTATION_90 -> {
+					axisX = SensorManager.AXIS_Y
+					axisY = SensorManager.AXIS_MINUS_X
+				}
+				Surface.ROTATION_180 -> {
+					axisX = SensorManager.AXIS_MINUS_X
+					axisY = SensorManager.AXIS_MINUS_Y
+				}
+				Surface.ROTATION_270 -> {
+					axisX = SensorManager.AXIS_MINUS_Y
+					axisY = SensorManager.AXIS_X
+				}
+			}
+
+			SensorManager.remapCoordinateSystem(rotationMatrix, axisX, axisY, remappedRotationMatrix)
+
+			val vX = -remappedRotationMatrix[2]
+			val vY = -remappedRotationMatrix[5]
+			val vZ = -remappedRotationMatrix[8]
+
+			val azimuthRad = atan2(vX.toDouble(), vY.toDouble())
+			val altitudeRad = asin(vZ.toDouble())
+
+			var azimuthDeg = Math.toDegrees(azimuthRad)
+			val altitudeDeg = Math.toDegrees(altitudeRad)
+
+			if (azimuthDeg < 0) azimuthDeg += 360
+
+			if (geomagneticField != null) {
+				azimuthDeg += geomagneticField!!.declination
+			}
+			if (azimuthDeg >= 360) azimuthDeg -= 360
+			if (azimuthDeg < 0) azimuthDeg += 360
+
+			val azDiff = azimuthDeg - smoothedAzimuth
+			var azDelta = azDiff
+			if (azDiff > 180) azDelta = azDiff - 360
+			else if (azDiff < -180) azDelta = azDiff + 360
+
+			smoothedAzimuth += azDelta * filterAlpha
+			if (smoothedAzimuth >= 360) smoothedAzimuth -= 360
+			if (smoothedAzimuth < 0) smoothedAzimuth += 360
+
+			smoothedAltitude += (altitudeDeg - smoothedAltitude) * filterAlpha
+
+			starView.setCenter(smoothedAzimuth, smoothedAltitude)
+		}
+	}
+
+	override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+
+	// --- Camera Overlay Logic ---
+
+	private fun toggleCameraOverlay() {
+		if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+			ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), PERMISSION_REQUEST_CAMERA)
+			return
+		}
+
+		isCameraOverlayEnabled = !isCameraOverlayEnabled
+		if (isCameraOverlayEnabled) {
+			calculatedFov = calculateCameraFov()
+			openCamera()
+			cameraTextureView.visibility = View.VISIBLE
+			sliderContainer.visibility = View.VISIBLE
+			resetFovButton.visibility = View.VISIBLE
+		} else {
+			closeCamera()
+			cameraTextureView.visibility = View.GONE
+			sliderContainer.visibility = View.GONE
+			resetFovButton.visibility = View.GONE
+		}
+		updateCameraButtonState()
+	}
+
+	private fun updateCameraButtonState() {
+		if (isCameraOverlayEnabled) {
+			cameraButton.setColorFilter(Color.BLUE)
+		} else {
+			cameraButton.setColorFilter("#5f6e7c".toColorInt())
+		}
+	}
+
+	private fun openCamera() {
+		if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+			return
+		}
+
+		if (cameraTextureView.isAvailable) {
+			startCameraSession()
+		} else {
+			cameraTextureView.surfaceTextureListener = object : TextureView.SurfaceTextureListener {
+				@RequiresPermission(Manifest.permission.CAMERA)
+				override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
+					startCameraSession()
+				}
+				override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {}
+				override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean = true
+				override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {}
+			}
+		}
+	}
+
+	@RequiresPermission(Manifest.permission.CAMERA)
+	private fun startCameraSession() {
+		val manager = requireContext().getSystemService(Context.CAMERA_SERVICE) as CameraManager
+		try {
+			// Find back camera
+			var cameraId: String? = null
+			for (id in manager.cameraIdList) {
+				val characteristics = manager.getCameraCharacteristics(id)
+				if (characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_BACK) {
+					cameraId = id
+					break
+				}
+			}
+
+			if (cameraId == null) return
+
+			manager.openCamera(cameraId, object : CameraDevice.StateCallback() {
+				override fun onOpened(camera: CameraDevice) {
+					cameraDevice = camera
+					createCaptureSession()
+				}
+				override fun onDisconnected(camera: CameraDevice) {
+					camera.close()
+					cameraDevice = null
+				}
+				override fun onError(camera: CameraDevice, error: Int) {
+					camera.close()
+					cameraDevice = null
+				}
+			}, null)
+		} catch (e: Exception) {
+			log.error("Failed to open camera", e)
+		}
+	}
+
+	private fun createCaptureSession() {
+		try {
+			val texture = cameraTextureView.surfaceTexture!!
+			texture.setDefaultBufferSize(cameraTextureView.width, cameraTextureView.height)
+			val surface = Surface(texture)
+
+			val builder = cameraDevice?.createCaptureRequest(android.hardware.camera2.CameraDevice.TEMPLATE_PREVIEW)
+			builder?.addTarget(surface)
+
+			cameraDevice?.createCaptureSession(listOf(surface), object : android.hardware.camera2.CameraCaptureSession.StateCallback() {
+				override fun onConfigured(session: android.hardware.camera2.CameraCaptureSession) {
+					captureSession = session
+					builder?.build()?.let {
+						session.setRepeatingRequest(it, null, null)
+					}
+				}
+				override fun onConfigureFailed(session: android.hardware.camera2.CameraCaptureSession) {}
+			}, null)
+		} catch (e: Exception) {
+			log.error("Failed to create capture session", e)
+		}
+	}
+
+	private fun closeCamera() {
+		captureSession?.close()
+		captureSession = null
+		cameraDevice?.close()
+		cameraDevice = null
+	}
+
+	private fun calculateCameraFov(): Double {
+		val manager = requireContext().getSystemService(Context.CAMERA_SERVICE) as CameraManager
+		try {
+			for (id in manager.cameraIdList) {
+				val characteristics = manager.getCameraCharacteristics(id)
+				if (characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_BACK) {
+					val sensorSize = characteristics.get(CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE)
+					val focalLengths = characteristics.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)
+
+					if (sensorSize != null && focalLengths != null && focalLengths.isNotEmpty()) {
+						val w = sensorSize.width
+						val f = focalLengths[0]
+						// Horizontal FOV = 2 * atan(width / (2 * f))
+						val fovRad = 2 * atan(w / (2 * f))
+						val fovDeg = Math.toDegrees(fovRad.toDouble())
+						return fovDeg
+					}
+				}
+			}
+		} catch (e: Exception) {
+			log.error("Failed to calculate camera FOV", e)
+		}
+		return 60.0 // Default fallback
+	}
+
+	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+		if (requestCode == PERMISSION_REQUEST_CAMERA) {
+			if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				toggleCameraOverlay() // Retry enabling
+			} else {
+				Toast.makeText(context, "Camera permission required for overlay", Toast.LENGTH_SHORT).show()
+			}
 		}
 	}
 
@@ -390,7 +799,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val tileBox = app.osmandMap.mapView.rotatedTileBox
 		val location = tileBox.centerLatLon
 		starView.setObserverLocation(location.latitude, location.longitude, 0.0)
-		if (updateAzimuth) starView.setAzimuth(-tileBox.rotate.toDouble())
+		if (updateAzimuth && !isArModeEnabled) starView.setAzimuth(-tileBox.rotate.toDouble())
 	}
 
 	private fun updateStarChart() {

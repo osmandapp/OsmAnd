@@ -5813,4 +5813,8 @@
     <string name="unsupported_maps">Ikke-støttede kart</string>
     <string name="enable_3d_objects">Aktiver 3D-bygninger</string>
     <string name="enable_3d_objects_description">Vis 3D-bygningsobjekter på kartet</string>
+    <string name="copy_link">Kopier lenke</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimeter</string>
+    <string name="bicycle_width_limit_description">Angi bredden på sykkelen din for å unngå smale sykkelveier.</string>
 </resources>
