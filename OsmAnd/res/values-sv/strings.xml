@@ -5226,7 +5226,7 @@
     <string name="shared_string_hide_slope">Dölj lutningsgrad</string>
     <string name="provided_by">Tillhandahålls av %1$s</string>
     <string name="topography_maps">Topografiska kartor</string>
-    <string name="key_assignments">Knapp-kopplingar</string>
+    <string name="key_assignments">Tangenttilldelningar</string>
     <string name="favorite_confirm_delete_group">Radera gruppen \'%1$s\' och alla dess inkluderade punkter (%2$d)?</string>
     <string name="waypoint_appearance">Ruttpunktens utseende</string>
     <string name="reset_key_assignments_desc">Alla knapp-kopplingar för den valda typen kommer tas bort.</string>
@@ -5991,15 +5991,15 @@
     <string name="remove_key_assignment">Ta bort tangenttilldelning</string>
     <string name="change_terrain_color_scheme">Ändra terrängens färgschema</string>
     <string name="clear_key_assignment_summary">Tangenttilldelningen för den valda åtgärden kommer att tas bort.</string>
-    <string name="clear_all_key_shortcuts_summary">Alla knapp-kopplingar för den valda typen kommer tas bort.</string>
+    <string name="clear_all_key_shortcuts_summary">Alla tangenttilldelningar för den valda typen kommer att tas bort.</string>
     <string name="clear_all_key_shortcuts">Rensa alla kortkommandon</string>
-    <string name="no_assigned_keys_desc">Välj en åtgärd och tilldela en nyckel genom att trycka på knappen \"Lägg till\".</string>
-    <string name="no_assigned_keys">Inga tilldelade nycklar</string>
-    <string name="new_key_assignment">Ny nyckel tilldelning</string>
+    <string name="no_assigned_keys_desc">Välj en åtgärd och tilldela en tangent genom att trycka på knappen \"Lägg till\".</string>
+    <string name="no_assigned_keys">Inga tangenttilldelninger</string>
+    <string name="new_key_assignment">Ny tangenttilldelning</string>
     <string name="key_name_pattern">Nyckeln \"%1$s\"</string>
-    <string name="key_assignment_add_key">Lägg till nyckel</string>
+    <string name="key_assignment_add_key">Lägg till tangent</string>
     <string name="key_assignment_add_action">Lägg till åtgärd</string>
-    <string name="assigned_keys">Tilldelade nycklar</string>
+    <string name="assigned_keys">Tilldelade tangenter</string>
     <string name="show_rasterization_debug_tile">Visa information om rasterisering av rutnät</string>
     <string name="show_utm_grids_description">Visa rutnät i UTM meter istället för WGS84</string>
     <string name="show_mercator_grids_description">Visa rutnät i Mercator km istället för WGS84 eller UTM</string>
@@ -6038,15 +6038,15 @@
     <string name="turn_by_turn_directions">Vägbeskrivning sväng för sväng</string>
     <string name="failed_to_connect">Kunde inte ansluta till %1s</string>
     <string name="next_turn_information">Information om nästa sväng</string>
-    <string name="next_turn_information_desc">Visar nästkommande svängriktning och gatunamn.</string>
+    <string name="next_turn_information_desc">Visar kommande svängriktning och gatunamn.</string>
     <string name="manage_purchases">Hantera köp</string>
     <string name="shared_string_price">Pris</string>
     <string name="obd_alt_battery_voltage">Adapterspänning</string>
     <string name="liter_single">Liter</string>
     <string name="imperial_gallon">Imperial gallon</string>
-    <string name="us_gallon">US gallon</string>
+    <string name="us_gallon">Amerikansk gallon</string>
     <string name="kilometers">Kilometer</string>
-    <string name="miles">Miles (engelsk mil)</string>
+    <string name="miles">Miles</string>
     <string name="mpg">MPG</string>
     <string name="backup_delete_data_warning_extended">Denna åtgärd kommer permanent att ta bort alla valda data från molnet. Det är inte möjligt att återställa det senare.</string>
     <string name="amount_of_total_used">%1$s av %2$s använt</string>
@@ -6058,7 +6058,7 @@
     <string name="shared_string_last_uphill">Sista uppförsbacken</string>
     <string name="add_to_a_folder">Lägg till i en mapp</string>
     <string name="add_to_favorites">Lägg till i favoriter</string>
-    <string name="max_weight_at_full_load_description">Ge ditt fordons maxvikt vid full belastning för att undvika vägar och broar med viktgränser.</string>
+    <string name="max_weight_at_full_load_description">Ange ditt fordons maxvikt vid full last för att undvika vägar och broar med viktbegränsningar.</string>
     <string name="max_axle_load_description">Ange ditt fordons maximala axellast för att undvika vägar och broar med viktbegränsningar.</string>
     <string name="private_access_routing_req_short">Tillåt att använda en privat väg för att nå din destination?</string>
     <string name="view_on_phone">Visa på telefon</string>
@@ -6172,4 +6172,6 @@
     <string name="access_pinch_zoom_magnification">Nypzoomförstoring</string>
     <string name="access_pinch_zoom_magnification_descr">Använd visningsport-skalning istället för diskreta zoomnivåer under inzoomningsgester.</string>
     <string name="download_wikipedia_label">Ladda ner Wikipedia</string>
+    <string name="routing_attr_pt_limit_name">Visa N bästa rutter</string>
+    <string name="routing_attr_pt_limit_description">Ange antalet bästa rutter som ska visas</string>
 </resources>

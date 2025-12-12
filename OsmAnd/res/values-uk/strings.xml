@@ -2895,8 +2895,8 @@
     <string name="edit_profile_setup_map_subtitle">Оберіть налаштування мапи для профілю</string>
     <string name="edit_profile_screen_options_subtitle">Виберіть налаштування екрана для профілю</string>
     <string name="edit_profile_nav_settings_subtitle">Оберіть налаштування навігації для профілю</string>
-    <string name="routing_attr_max_num_changes_description">Зазначте максимальну кількість пересадок</string>
-    <string name="routing_attr_max_num_changes_name">Кількість пересадок</string>
+    <string name="routing_attr_max_num_changes_description">Вкажіть верхню межу для змін у транспорті</string>
+    <string name="routing_attr_max_num_changes_name">Максимальна кількість пересадок на транспорт</string>
     <string name="routing_attr_piste_type_nordic_name">Бігові лижі та скандинавські лижі</string>
     <string name="routing_attr_piste_type_nordic_description">Траси для скандинавської ходьби або бігу на лижах.</string>
     <string name="routing_attr_piste_type_skitour_name">Лижні тури</string>
@@ -5928,4 +5928,6 @@
     <string name="shared_string_centimeters">сантиметри</string>
     <string name="bicycle_width_limit_description">Враховуйте ширину вашого велосипеда, щоб уникнути вузьких велосипедних доріжок.</string>
     <string name="copy_link">Копіювати посилання</string>
+    <string name="routing_attr_pt_limit_name">Відобразити N найкращих маршрутів</string>
+    <string name="routing_attr_pt_limit_description">Вкажіть кількість найкращих маршрутів для відображення</string>
 </resources>

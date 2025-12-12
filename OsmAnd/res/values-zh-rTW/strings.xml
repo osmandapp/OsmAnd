@@ -2796,8 +2796,8 @@
     <string name="edit_profile_setup_map_subtitle">選取設定檔的地圖選項</string>
     <string name="edit_profile_screen_options_subtitle">選取設定檔的螢幕選項</string>
     <string name="edit_profile_nav_settings_subtitle">選取設定檔的導航設定</string>
-    <string name="routing_attr_max_num_changes_description">指定變更上限</string>
-    <string name="routing_attr_max_num_changes_name">變更數量</string>
+    <string name="routing_attr_max_num_changes_description">指定轉乘次數上限</string>
+    <string name="routing_attr_max_num_changes_name">最大轉乘次數</string>
     <string name="turn_screen_on_router">輪流喚醒</string>
     <string name="turn_screen_on_time_descr">調整螢幕應開啟多久。</string>
     <string name="turn_screen_on_sensor">使用距離感測器</string>
@@ -5731,4 +5731,6 @@
     <string name="shared_string_centimeters">公分</string>
     <string name="bicycle_width_limit_description">請提供您的腳踏車寬度，以避免使用太窄的腳踏車道。</string>
     <string name="copy_link">複製連結</string>
+    <string name="routing_attr_pt_limit_name">顯示 N 條最佳路線</string>
+    <string name="routing_attr_pt_limit_description">指定要顯示的最佳路線數量</string>
 </resources>

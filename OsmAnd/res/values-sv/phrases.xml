@@ -5092,7 +5092,7 @@
     <string name="poi_us_maps_recreation_area_facility_boat_launch">Båtsjösättning</string>
     <string name="poi_us_maps_recreation_area_facility_airplane_landing_strip">Flygplanslandningsbana</string>
     <string name="poi_us_maps_recreation_area_forest_name">Skogens namn</string>
-    <string name="poi_us_maps_recreation_area_operational_hours"></string>
+    <string name="poi_us_maps_recreation_area_operational_hours"/>
     <string name="poi_us_maps_recreation_area_open_status_unreachable_2">Status för åtkomst till rekreationsområde (2): oåtkomligt</string>
     <string name="poi_us_maps_recreation_area_open_status_temporarily_closed_2">Status för tillträde till rekreationsområde (2): tillfälligt stängt</string>
     <string name="poi_us_maps_recreation_area_open_status_closed_2">Status för åtkomst till rekreationsområde (2): stängt</string>
@@ -5117,4 +5117,22 @@
     <string name="poi_barrier_log">Stockbarriär</string>
     <string name="x">X (tidigare Twitter)</string>
     <string name="poi_denomination_welsh_independent">Walesisk oberoende</string>
+    <string name="poi_denomination_soto">Sōtō</string>
+    <string name="poi_denomination_free_evangelical">Fria Evangeliska</string>
+    <string name="poi_denomination_alevi">Alevism</string>
+    <string name="poi_denomination_bektashi">Bektashi</string>
+    <string name="poi_denomination_ibadi">Ibadi</string>
+    <string name="poi_denomination_ismaili">Ismailiter</string>
+    <string name="poi_denomination_rinzai">Rinzaiskolan</string>
+    <string name="poi_denomination_zen">Zen</string>
+    <string name="poi_denomination_vaishnavism">Vaishnavism</string>
+    <string name="poi_denomination_hare_krishna">Hare Krishna</string>
+    <string name="poi_denomination_foursquare">The Foursquare Church</string>
+    <string name="poi_denomination_lubavitch">Chabad-Lubavitch</string>
+    <string name="poi_denomination_theravada">Theravada</string>
+    <string name="poi_denomination_tiantai">Tiantai</string>
+    <string name="poi_denomination_moravian">Herrnhutismen</string>
+    <string name="poi_denomination_fsspx">Prästbrödraskapet Sankt Pius X</string>
+    <string name="poi_denomination_philippine_independent">Oberoende filippinska kyrkan</string>
+    <string name="poi_denomination_exclusive_brethren">Exclusive Brethren</string>
 </resources>
