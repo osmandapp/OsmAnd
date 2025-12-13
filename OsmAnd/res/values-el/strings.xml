@@ -2787,8 +2787,8 @@
     <string name="edit_profile_setup_map_subtitle">Επιλογές χάρτη για το προφίλ</string>
     <string name="edit_profile_screen_options_subtitle">Επιλογές οθόνης για το προφίλ</string>
     <string name="edit_profile_nav_settings_subtitle">Επιλογές πλοήγησης για το προφίλ</string>
-    <string name="routing_attr_max_num_changes_description">Καθορίστε το μέγιστο όριο αλλαγών</string>
-    <string name="routing_attr_max_num_changes_name">Αριθμός αλλαγών μετεπιβίβασης</string>
+    <string name="routing_attr_max_num_changes_description">Καθορίστε το ανώτερο όριο μετεπιβιβάσεων</string>
+    <string name="routing_attr_max_num_changes_name">Μέγιστος αριθμός μετεπιβιβάσεων</string>
     <string name="turn_screen_on_router">Ενεργοποίηση στη στροφή</string>
     <string name="turn_screen_on_time_descr">Ορίστε για πόσο χρόνο θα είναι ενεργοποιημένη η οθόνη.</string>
     <string name="turn_screen_on_sensor">Χρήση του αισθητήρα προσέγγισης</string>
@@ -3357,7 +3357,7 @@
     <string name="shared_string_add_profile">Προσθήκη προφίλ</string>
     <string name="change_application_profile">Αλλαγή προφίλ εφαρμογής</string>
     <string name="profiles_for_action_not_found">Αδυναμία εύρεσης τέτοιων προφίλ.</string>
-    <string name="index_item_world_basemap_detailed">Προεπισκόπηση παγκόσμιου χάρτη (λεπτομερής)</string>
+    <string name="index_item_world_basemap_detailed">Επισκόπηση παγκόσμιου χάρτη (λεπτομερής)</string>
     <string name="unsupported_type_error">Μη υποστηριζόμενος τύπος</string>
     <string name="width_limit_description">Δώστε το πλάτος του οχήματός σας, κάποιοι περιορισμοί μπορεί να εφαρμόζονται για πλατιά οχήματα.</string>
     <string name="height_limit_description">Δώστε το ύψος του οχήματός σας, κάποιοι περιορισμοί διαδρομής μπορεί να εφαρμόζονται για υψηλά οχήματα.</string>
@@ -5520,4 +5520,8 @@
     <string name="trip_recording_distance_widget_desc">Δείχνει την απόσταση της τρέχουσας καταγεγραμμένης διαδρομής, με λειτουργίες για προβολή της απόστασης της τελευταίας ανάβασης και κατάβασης.</string>
     <string name="help_article_navigation_routing_ski_routing_name">Πίστες και διαδρομές σκι</string>
     <string name="rendering_attr_pisteRoutes_name">Πίστες και διαδρομές σκι</string>
+    <string name="download_wikipedia_label">Λήψη Βικιπαίδειας</string>
+    <string name="accessibility_independent_features">Ανεξάρτητα στοιχεία</string>
+    <string name="lang_en_barebones">Αγγλικά (θεμελιώδη)</string>
+    <string name="lang_crh">Κριμαϊκά Ταταρικά (λατινικά)</string>
 </resources>
