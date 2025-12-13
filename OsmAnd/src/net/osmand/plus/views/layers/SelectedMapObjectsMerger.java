@@ -3,6 +3,7 @@ package net.osmand.plus.views.layers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
@@ -14,12 +15,16 @@ import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 public class SelectedMapObjectsMerger extends MapObjectsMerger<SelectedMapObject> {
+
+	private static final Log LOG = PlatformUtil.getLog(SelectedMapObjectsMerger.class);
 
 	private final AmenitySearcher searcher;
 	private final AmenitySearcher.Settings searchSettings;
@@ -66,6 +71,10 @@ public class SelectedMapObjectsMerger extends MapObjectsMerger<SelectedMapObject
 		}));
 
 		for (BaseDetailsObject object : groupedDetails) {
+			if (object.getLocation() == null) {
+				object.getSyntheticAmenity().setLocation(pointLatLon);
+				LOG.debug("BaseDetailsObject without location " + object);
+			}
 			if (object.getObjects().size() > 1) {
 				result.add(new SelectedMapObject(object, poiProvider));
 			} else {
