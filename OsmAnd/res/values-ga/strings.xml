@@ -3219,7 +3219,7 @@
     <string name="empty_state_my_tracks">Cuir comhaid amhráin leis</string>
     <string name="download_slope_maps">Fána</string>
     <string name="data_storage_space_description">%1$s GB saor (as%2$s GB)</string>
-    <string name="routing_attr_max_num_changes_name">Líon na n-athruithe</string>
+    <string name="routing_attr_max_num_changes_name">Uasmhéid athruithe iompair</string>
     <string name="settings_privacy_and_security">Príobháideachas agus slándáil</string>
     <string name="save_poi_value_exceed_length_title">Fad luach \"%s\"</string>
     <string name="rendering_attr_surface_dirt_name">Salachar</string>
@@ -3773,7 +3773,7 @@
     <string name="edit_profile_setup_map_subtitle">Roghnaigh roghanna léarscáile don phróifíl</string>
     <string name="edit_profile_screen_options_subtitle">Roghnaigh roghanna scáileáin don phróifíl</string>
     <string name="edit_profile_nav_settings_subtitle">Roghnaigh socruithe nascleanúna don phróifíl</string>
-    <string name="routing_attr_max_num_changes_description">Sonraigh uasteorainn na n-athruithe</string>
+    <string name="routing_attr_max_num_changes_description">Sonraigh an teorainn uachtarach le haghaidh athruithe iompair</string>
     <string name="app_mode_personal_transporter">Iompróir pearsanta</string>
     <string name="default_speed_setting_descr">Athraigh socruithe réamhshocraithe luais</string>
     <string name="help_us_make_osmand_better">Cabhraigh linn OsmAgus níos fearr a dhéanamh</string>
@@ -5724,4 +5724,6 @@
     <string name="shared_string_centimeters">ceintiméadair</string>
     <string name="bicycle_width_limit_description">Cuir leithead do rothair ar fáil chun cosáin rothaíochta cúnga a sheachaint.</string>
     <string name="copy_link">Cóipeáil nasc</string>
+    <string name="routing_attr_pt_limit_name">Taispeáin N bealaí is fearr</string>
+    <string name="routing_attr_pt_limit_description">Sonraigh líon na mbealaí is fearr le taispeáint</string>
 </resources>
