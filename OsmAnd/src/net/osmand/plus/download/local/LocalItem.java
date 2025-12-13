@@ -147,4 +147,18 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	public String toString() {
 		return fileName;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!super.equals(o)) return false;
+		LocalItem localItem = (LocalItem) o;
+		return path.equals(localItem.path);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + path.hashCode();
+		return result;
+	}
 }

@@ -36,6 +36,7 @@ import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.LocalSizeCalculationListener;
 import net.osmand.plus.download.local.LocalSizeController;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
+import net.osmand.plus.download.local.dialogs.controllers.LocalItemsController;
 import net.osmand.plus.download.local.dialogs.menu.ItemMenuProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.LocalSortMode;
@@ -107,7 +108,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 		setupToolbar(view);
 		setupSearchView(view);
 		setupRecyclerView(view);
-		updateAdapter();
+		updateContent();
 
 		return view;
 	}
@@ -165,11 +166,20 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	}
 
 	public void updateContent() {
+		LocalItemsController controller = LocalItemsController.getExistedInstance(app);
+		if (controller != null && getTargetFragment() instanceof LocalItemsFragment target) {
+			boolean root = controller.isRootFolder();
+			controller.updateDisplayItems(target.getGroup());
+			if (root != controller.isRootFolder()) {
+				dismiss();
+				return;
+			}
+		}
 		updateAdapter();
 	}
 
 	private void updateAdapter() {
-		List<BaseLocalItem> countryItems = getSortedCountryItems();
+		List<BaseLocalItem> countryItems = getSortedCurrentFolderItems();
 		adapter.setItems(countryItems != null ? countryItems : getSortedItems());
 		adapter.setCountryMode(countryItems != null);
 	}
@@ -201,19 +211,28 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	private void sortItems(@NonNull List<BaseLocalItem> items) {
 		if (type == MAP_DATA) {
 			LocalSortMode sortMode = LocalItemUtils.getSortModePref(app, type).get();
-			Collections.sort(items, new LocalItemsComparator(app, sortMode));
+			items.sort(new LocalItemsComparator(app, sortMode));
 		} else {
 			Collator collator = OsmAndCollator.primaryCollator();
-			Collections.sort(items, (o1, o2) -> collator.compare(o1.getName(app).toString(), o2.getName(app).toString()));
+			items.sort((o1, o2) -> collator.compare(o1.getName(app).toString(), o2.getName(app).toString()));
 		}
 	}
 
 	@Nullable
-	private List<BaseLocalItem> getSortedCountryItems() {
+	private List<BaseLocalItem> getSortedCurrentFolderItems() {
 		if (getTargetFragment() instanceof LocalItemsFragment fragment) {
-			return fragment.getSortedCountryItems(true);
+			List<BaseLocalItem> folderItems = fragment.getCurrentFolderItems();
+			if (folderItems != null) {
+				sortItems(folderItems);
+			}
+			return folderItems;
 		}
 		return null;
+	}
+
+	private boolean isRootFolder() {
+		LocalItemsController controller = LocalItemsController.getExistedInstance(app);
+		return controller == null || controller.isRootFolder();
 	}
 
 	public void showProgressBar() {

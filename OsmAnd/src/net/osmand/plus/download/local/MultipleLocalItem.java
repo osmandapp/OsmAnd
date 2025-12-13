@@ -113,4 +113,18 @@ public class MultipleLocalItem extends BaseLocalItem {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (!super.equals(object)) return false;
+		MultipleLocalItem that = (MultipleLocalItem) object;
+		return id.equals(that.id);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + id.hashCode();
+		return result;
+	}
 }

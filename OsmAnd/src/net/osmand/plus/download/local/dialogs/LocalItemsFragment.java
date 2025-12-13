@@ -26,58 +26,48 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.Collator;
-import net.osmand.OsmAndCollator;
-import net.osmand.map.OsmandRegions;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.R;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
+import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.local.*;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
-import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.download.local.dialogs.SortMapsBottomSheet.MapsSortModeListener;
+import net.osmand.plus.download.local.dialogs.controllers.LocalItemsController;
 import net.osmand.plus.download.local.dialogs.menu.FolderMenuProvider;
 import net.osmand.plus.download.local.dialogs.menu.GroupMenuProvider;
 import net.osmand.plus.download.local.dialogs.menu.ItemMenuProvider;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.settings.enums.LocalSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class LocalItemsFragment extends LocalBaseFragment implements LocalItemListener,
-		MapsSortModeListener, LocalSizeCalculationListener {
+		MapsSortModeListener, LocalSizeCalculationListener, IAskRefreshDialogCompletely,
+		IDialogNightModeInfoProvider {
 
 	public static final String TAG = LocalItemsFragment.class.getSimpleName();
-
 	private static final String ITEM_TYPE_KEY = "item_type_key";
 
 	private LocalItemType type;
 	private ImportHelper importHelper;
+	private LocalItemsAdapter adapter;
+	private LocalItemsController controller;
+
+	// Menu Providers
 	private ItemMenuProvider itemMenuProvider;
 	private GroupMenuProvider groupMenuProvider;
 	private FolderMenuProvider folderMenuProvider;
-	private final ItemsSelectionHelper<BaseLocalItem> selectionHelper = new ItemsSelectionHelper<>();
-
-	private LocalItemsAdapter adapter;
-	private boolean selectionMode;
-	private List<Object> sortedRootItems;
-	private MultipleLocalItem selectedCountry;
-	private MemoryInfo memoryInfo;
 
 	@Override
 	@ColorRes
 	public int getStatusBarColorId() {
-		if (selectionMode) {
+		if (controller != null && controller.isSelectionMode()) {
 			return ColorUtilities.getStatusBarActiveColorId(nightMode);
 		} else {
 			return ColorUtilities.getStatusBarColorId(nightMode);
@@ -85,18 +75,18 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	public boolean isSelectionMode() {
-		return selectionMode;
+		return controller != null && controller.isSelectionMode();
 	}
 
 	public void setSelectionMode(boolean selectionMode) {
-		this.selectionMode = selectionMode;
-		selectionHelper.clearSelectedItems();
-		updateContent();
+		if (controller != null) {
+			controller.setSelectionMode(selectionMode);
+		}
 	}
 
 	@NonNull
 	public ItemsSelectionHelper<BaseLocalItem> getSelectionHelper() {
-		return selectionHelper;
+		return controller.getSelectionHelper();
 	}
 
 	@Nullable
@@ -130,34 +120,29 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 			type = AndroidUtils.getSerializable(args, ITEM_TYPE_KEY, LocalItemType.class);
 		}
 
+		controller = LocalItemsController.getExistedInstance(app);
+		if (controller != null) {
+			controller.registerDialog(this);
+		} else {
+			dismiss();
+			return;
+		}
+
 		DownloadActivity activity = requireDownloadActivity();
 		importHelper = app.getImportHelper();
-		groupMenuProvider = new GroupMenuProvider(activity, this);
 
 		int iconColorId = ColorUtilities.getDefaultIconColorId(nightMode);
+		groupMenuProvider = new GroupMenuProvider(activity, this);
 		itemMenuProvider = new ItemMenuProvider(activity, this);
 		itemMenuProvider.setIconColorId(iconColorId);
 		folderMenuProvider = new FolderMenuProvider(activity, this);
 		folderMenuProvider.setIconColorId(iconColorId);
 
-		LocalGroup group = getGroup();
-		if (savedInstanceState == null && group != null) {
-			selectionHelper.setAllItems(group.getItems());
-		}
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			@Override
 			public void handleOnBackPressed() {
-				if (selectionMode) {
-					selectionMode = false;
-					updateContent();
-				} else if (selectedCountry != null) {
-					selectedCountry = null;
-					updateContent();
-				} else {
-					FragmentManager manager = activity.getSupportFragmentManager();
-					if (!manager.isStateSaved()) {
-						manager.popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-					}
+				if (!controller.handleBackPress()) {
+					dismiss();
 				}
 			}
 		});
@@ -167,13 +152,9 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
 		View view = inflate(R.layout.recyclerview_fragment, container, false);
-
-		DownloadActivity activity = requireDownloadActivity();
-		activity.getAccessibilityAssistant().registerPage(view, LOCAL_TAB_NUMBER);
-
+		requireDownloadActivity().getAccessibilityAssistant().registerPage(view, LOCAL_TAB_NUMBER);
 		setupRecyclerView(view);
 		updateContent();
-
 		return view;
 	}
 
@@ -183,173 +164,6 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 		recyclerView.setAdapter(adapter);
-	}
-
-	public void updateContent() {
-		updateToolbar();
-		updateAdapter();
-	}
-
-	private void updateAdapter() {
-		List<Object> items = new ArrayList<>(getItemsToDisplay());
-		if (!selectionMode && selectedCountry == null) {
-			addMemoryInfo(items);
-		}
-		adapter.setSelectionMode(selectionMode);
-		adapter.setCountryMode(selectedCountry != null);
-		adapter.setItems(items);
-	}
-
-	@NonNull
-	private List<Object> getItemsToDisplay() {
-		updateDisplayItems();
-		List<BaseLocalItem> countryItems = getSortedCountryItems(false);
-		return countryItems != null ? new ArrayList<>(countryItems) : sortedRootItems;
-	}
-
-	@Nullable
-	public List<BaseLocalItem> getSortedCountryItems(boolean update) {
-		if (update) updateDisplayItems();
-		List<BaseLocalItem> countryItems = selectedCountry != null ? selectedCountry.getItems() : null;
-		if (countryItems != null) {
-			sortItems(countryItems);
-		}
-		return countryItems;
-	}
-
-	private void updateDisplayItems() {
-		sortedRootItems = getSortedRootItems();
-
-		if (selectedCountry != null) {
-			String countryId = selectedCountry.getId();
-			selectedCountry = null;
-			for (Object o : sortedRootItems) {
-				if (o instanceof MultipleLocalItem multipleLocalItem) {
-					if (Objects.equals(countryId, multipleLocalItem.getId())) {
-						selectedCountry = multipleLocalItem;
-					}
-				}
-			}
-		}
-	}
-
-	@NonNull
-	private List<Object> getSortedRootItems() {
-		List<BaseLocalItem> activeItems = new ArrayList<>();
-		List<BaseLocalItem> backupedItems = new ArrayList<>();
-
-		LocalGroup group = getGroup();
-		if (group != null) {
-			for (BaseLocalItem item : group.getItems()) {
-				if (item instanceof LocalItem && ((LocalItem) item).isBackuped(app)) {
-					backupedItems.add(item);
-				} else {
-					activeItems.add(item);
-				}
-			}
-			LocalItemType type = group.getType();
-			if (type.isGroupingByCountrySupported()) {
-				activeItems = groupItemsByCountry(type, activeItems, "activated");
-				backupedItems = groupItemsByCountry(type, backupedItems, "deactivated");
-			}
-			sortItems(activeItems);
-			sortItems(backupedItems);
-		}
-
-		List<Object> items = new ArrayList<>(activeItems);
-		if (!Algorithms.isEmpty(backupedItems)) {
-			items.add(new HeaderGroup(getString(R.string.local_indexes_cat_backup), backupedItems));
-			items.addAll(backupedItems);
-		}
-		return items;
-	}
-
-	@NonNull
-	private List<BaseLocalItem> groupItemsByCountry(@NonNull LocalItemType type,
-													@NonNull List<BaseLocalItem> flatItems,
-													@NonNull String header) {
-		Map<String, List<BaseLocalItem>> groups = new HashMap<>();
-		List<BaseLocalItem> ungroupedItems = new ArrayList<>();
-		OsmandRegions regions = app.getRegions();
-
-		for (BaseLocalItem item : flatItems) {
-			if (item instanceof LocalItem localItem) {
-				String baseName = FileNameTranslationHelper.getBasename(app, localItem.getFileName());
-				WorldRegion country = regions.getCountryRegionDataByDownloadName(baseName);
-				if (country != null) {
-					String groupName = country.getLocaleName();
-					groups.computeIfAbsent(groupName, k -> new ArrayList<>()).add(localItem);
-				} else {
-					ungroupedItems.add(localItem);
-				}
-			} else {
-				ungroupedItems.add(item);
-			}
-		}
-
-		List<MultipleLocalItem> folders = new ArrayList<>();
-		for (Map.Entry<String, List<BaseLocalItem>> entry : groups.entrySet()) {
-			List<BaseLocalItem> folderItems = entry.getValue();
-			if (folderItems.size() > 1) {
-				String name = entry.getKey();
-				String id = name.toLowerCase() + "_" + header.toLowerCase();
-				folders.add(new MultipleLocalItem(id, name, type, folderItems));
-			} else if (!folderItems.isEmpty()) {
-				ungroupedItems.add(folderItems.get(0));
-			}
-		}
-
-		List<BaseLocalItem> result = new ArrayList<>(folders);
-		result.addAll(ungroupedItems);
-		return result;
-	}
-
-	private void sortItems(@NonNull List<BaseLocalItem> items) {
-		if (type.isSortingSupported()) {
-			LocalSortMode sortMode = LocalItemUtils.getSortModePref(app, type).get();
-			Collections.sort(items, new LocalItemsComparator(app, sortMode));
-		} else {
-			Collator collator = OsmAndCollator.primaryCollator();
-			Collections.sort(items, (o1, o2) -> collator.compare(o1.getName(app).toString(), o2.getName(app).toString()));
-		}
-	}
-
-	private void addMemoryInfo(@NonNull List<Object> items) {
-		memoryInfo = new MemoryInfo();
-		List<MemoryItem> memoryItems = calculateMemoryItems();
-		if (memoryItems != null) {
-			memoryInfo.setItems(memoryItems);
-			items.add(0, memoryInfo);
-		}
-	}
-
-	@Nullable
-	private List<MemoryItem> calculateMemoryItems() {
-		LocalGroup group = getGroup();
-		LocalCategory category = getCategory();
-		if (group != null && category != null) {
-			List<MemoryItem> memoryItems = new ArrayList<>();
-
-			if (!Algorithms.isEmpty(group.getItems())) {
-				long size = group.getSize();
-				String title = group.getName(app);
-				String sizeDescription = group.getSizeDescription(app);
-				String text = getString(R.string.ltr_or_rtl_combine_via_dash, title, sizeDescription);
-				memoryItems.add(new MemoryItem(text, size, ColorUtilities.getActiveColor(app, nightMode)));
-			}
-
-			String title = category.getName(app);
-			int color = ColorUtilities.getColor(app, category.getType().getColorId());
-			String text = getString(R.string.ltr_or_rtl_combine_via_dash, title, AndroidUtils.formatSize(app, category.getSize()));
-			memoryItems.add(new MemoryItem(text, category.getSize() - group.getSize(), color));
-			return memoryItems;
-		}
-		return null;
-	}
-
-	@Override
-	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-		groupMenuProvider.onCreateMenu(menu, inflater);
 	}
 
 	@Override
@@ -371,6 +185,42 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		}
 	}
 
+	private void dismiss() {
+		callActivity(activity -> {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			if (!manager.isStateSaved()) {
+				manager.popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			}
+		});
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (controller != null) {
+			controller.finishProcessIfNeeded(getActivity());
+		}
+	}
+
+	@Override
+	public void onAskRefreshDialogCompletely(@NonNull String processId) {
+		updateContent();
+	}
+
+	public void updateContent() {
+		if (controller != null) {
+			updateAdapter();
+			updateToolbar();
+		}
+	}
+
+	private void updateAdapter() {
+		List<Object> items = new ArrayList<>(controller.getDisplayItems(getGroup(), getCategory()));
+		adapter.setSelectionMode(controller.isSelectionMode());
+		adapter.setCountryMode(!controller.isRootFolder());
+		adapter.setItems(items);
+	}
+
 	private void updateToolbar() {
 		DownloadActivity activity = getDownloadActivity();
 		ActionBar actionBar = activity != null ? activity.getSupportActionBar() : null;
@@ -381,15 +231,10 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 			actionBar.setElevation(5.0f);
 			LocalGroup group = getGroup();
 			if (group != null) {
-				if (selectionMode) {
-					actionBar.setTitle(getString(R.string.shared_string_select));
-				} else if (selectedCountry != null) {
-					actionBar.setTitle(selectedCountry.getName());
-				} else {
-					actionBar.setTitle(group.getName(app));
-				}
+				actionBar.setTitle(controller.getToolbarTitle(group));
 			}
 
+			boolean selectionMode = controller.isSelectionMode();
 			int colorId = selectionMode ? ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode) : 0;
 			actionBar.setHomeAsUpIndicator(getIcon(selectionMode ? R.drawable.ic_action_close : AndroidUtils.getNavigationIconResId(app), colorId));
 
@@ -398,9 +243,14 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		}
 	}
 
+	@Nullable
+	public List<BaseLocalItem> getCurrentFolderItems() {
+		return controller != null ? controller.getCurrentFolderItems() : null;
+	}
+
 	@Override
 	public boolean isItemSelected(@NonNull BaseLocalItem item) {
-		return selectionHelper.isItemSelected(item);
+		return controller.isItemSelected(item);
 	}
 
 	@Override
@@ -410,19 +260,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	@Override
 	public void onItemSelected(@NonNull BaseLocalItem item) {
-		if (selectionMode) {
-			boolean selected = !isItemSelected(item);
-			selectionHelper.onItemsSelected(Collections.singleton(item), selected);
-			adapter.updateItem(item);
-		} else if (item instanceof MultipleLocalItem multipleLocalItem) {
-			selectedCountry = multipleLocalItem;
-			updateContent();
-		} else {
-			FragmentManager manager = getFragmentManager();
-			if (manager != null) {
-				LocalItemFragment.showInstance(manager, item, this);
-			}
-		}
+		controller.onItemClick(item, requireActivity());
 	}
 
 	@Override
@@ -473,12 +311,12 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	@Override
 	public void onSizeCalculationEvent(@NonNull LocalItem localItem) {
-		List<MemoryItem> memoryItems = calculateMemoryItems();
-		if (memoryItems != null) {
-			memoryInfo.setItems(memoryItems);
-			adapter.updateItem(memoryInfo);
-		}
-		adapter.updateItem(localItem);
+		updateContent();
+	}
+
+	@Override
+	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+		groupMenuProvider.onCreateMenu(menu, inflater);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull LocalItemType type, @Nullable Fragment target) {
