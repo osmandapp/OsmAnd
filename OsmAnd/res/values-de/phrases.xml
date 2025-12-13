@@ -798,7 +798,7 @@
     <string name="poi_leather">Ledergeschäft</string>
     <string name="poi_music">Musikgeschäft</string>
     <string name="poi_scuba_diving_shop">Tauchgerätebedarf</string>
-    <string name="poi_tyres">Reifengeschäft</string>
+    <string name="poi_tyres">Reifen;Reifengeschäft</string>
     <string name="poi_watches">Uhrengeschäft</string>
     <string name="poi_swimming_pool_shop">Poolzubehörgeschäft</string>
     <string name="poi_games">Spiele</string>
@@ -4547,7 +4547,7 @@
     <string name="poi_ship_private">Schiffszugang: privat</string>
     <string name="poi_ship_designated">Schiffszugang: ausgewiesen</string>
     <string name="poi_ship_destination">Schiffszugang: Anlieger</string>
-    <string name="poi_ship_permissive">Schiffszugang: zulässig</string>
+    <string name="poi_ship_permissive">Schiffszugang: gestattet</string>
     <string name="poi_ship_delivery">Schiffszugang: Lieferverkehr frei</string>
     <string name="poi_ship_yes">Schiffszugang: ja</string>
     <string name="poi_ship_no">Schiffszugang: nein</string>
@@ -4561,7 +4561,7 @@
     <string name="poi_lock_name">Schleusenname</string>
     <string name="poi_draft">Fahrwasserstiefe</string>
     <string name="poi_boat_destination">Bootszugang: Anlieger</string>
-    <string name="poi_boat_permissive">Bootszugang: zulässig</string>
+    <string name="poi_boat_permissive">Bootszugang: gestattet</string>
     <string name="poi_lock_ref">Schleusen-Referenz</string>
     <string name="poi_lock_height">Schleusenhöhe</string>
     <string name="poi_boat_designated">Bootszugang: ausgewiesen</string>
