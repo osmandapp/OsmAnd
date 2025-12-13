@@ -2643,7 +2643,7 @@
     <string name="default_render_descr">Styl uniwersalny. Gęste miasta przedstawione w przejrzysty sposób. Zawiera trasy, jakość nawierzchni, ograniczenia dostępu, osłony drogowe, renderowanie ścieżek zgodnie ze skalą SAC/CAI, elementy sportów wodnych, cechy topograficzne, takie jak poziomice.</string>
     <string name="get_osmand_live">Zdobądź OsmAnd Live i odblokuj wszystkie funkcjonalności: dzienne uaktualnienia map z nieograniczoną liczbą pobrań, wszystkie płatne i nieodpłatne wtyczki, Wikipedię, przewodniki Wikipodróży i wiele innych.</string>
     <string name="purchase_dialog_travel_description">Kup jedną z poniższych opcji, aby otrzymać funkcję przewodnika offline:</string>
-	<string name="read_wikipedia_offline_description">Zasubskrybuj OsmAnd Live, by czytać artykuły Wikipedii i Wikipodróży w trybie offline.</string>
+    <string name="read_wikipedia_offline_description">Zasubskrybuj OsmAnd Live, by czytać artykuły Wikipedii i Wikipodróży w trybie offline.</string>
     <string name="read_wikipedia_offline">Czytaj Wikipedię w trybie offline</string>
     <string name="quick_action_edit_actions">Edycja działań</string>
     <string name="error_notification_desc">Wyślij zrzut ekranu z tego powiadomienia na adres support@osmand.net</string>
@@ -5431,7 +5431,7 @@
 \n - Logowanie OpenStreetMap przełączone na OAuth 2.0
 \n
 \n</string>
-    <string name="shared_sting_all_colors">Wszystkie kolory</string>
+    <string name="shared_string_all_colors">Wszystkie kolory</string>
     <string name="avg_sensor_heartrate">Tętno, średnie</string>
     <string name="unchanged_parameter_summary">Każda ścieżka zachowa swoje parametry.</string>
     <string name="map_widget_map_scale">Skala mapy</string>
@@ -6123,5 +6123,11 @@
     <string name="mpg">Mil na galon</string>
     <string name="ascent">Wzniesienie</string>
     <string name="descent">Spadek</string>
-    <string name="shared_sting_osm_link">Link OSM</string>
+    <string name="shared_string_osm_link">Link OSM</string>
+    <string name="quick_action_weather_layers">Przełącznik do pokazywania lub ukrywania warstw pogodowych na mapie.</string>
+    <string name="quick_action_wind_animation_layer">Przełącznik do pokazywania lub ukrywania warstwy animacji wiatru na mapie.</string>
+    <string name="wind_animation_layer">Warstwa animacji wiatru</string>
+    <string name="weather_layers">Warstwy pogodowe</string>
+    <string name="requires_internet_connection">Wymaga połączenia z Internetem</string>
+    <string name="save_and_access_articles_offline">Zapisuj dane i uzyskuj dostęp do artykułów w trybie offline z dowolnego miejsca</string>
 </resources>

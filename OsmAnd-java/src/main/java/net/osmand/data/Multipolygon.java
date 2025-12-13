@@ -194,6 +194,20 @@ public class Multipolygon {
 
 		return OsmMapUtils.getWeightCenterForNodes(points);
 	}
+	
+	public LatLon getPolyCenter() {
+		if (outerRings.size() >= 1) {
+			Ring ring = outerRings.get(0);
+			if (ring.isClosed()) {
+				List<List<Node>> innerWays = new ArrayList<>();
+				for (Ring r : getInnerRings()) {
+					innerWays.add(r.getBorder());
+				}
+				return OsmMapUtils.getComplexPolyCenter(ring.getBorder(), innerWays);
+			}
+		}
+		return getCenterPoint();
+	}
 
 	public void mergeWith(Multipolygon multipolygon) {
 		innerRings.addAll(multipolygon.innerRings);

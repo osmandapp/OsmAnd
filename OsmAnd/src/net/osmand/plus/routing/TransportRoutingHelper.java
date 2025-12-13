@@ -459,6 +459,7 @@ public class TransportRoutingHelper {
 
 	private static class RouteRecalculationTask implements Runnable {
 
+		private static final boolean DISABLE_NATIVE = false;
 		private final int MAX_WALKING_CNT = 4;
 		private final TransportRoutingHelper transportRoutingHelper;
 		private final RoutingHelper routingHelper;
@@ -529,7 +530,7 @@ public class TransportRoutingHelper {
 
 			TransportRoutingContext ctx = new TransportRoutingContext(cfg, library, files);
 			ctx.calculationProgress = params.calculationProgress;
-			if (ctx.library != null && !settings.PT_SAFE_MODE.get()) {
+			if (ctx.library != null && !settings.PT_SAFE_MODE.get() && !DISABLE_NATIVE) {
 				log.info("Public transport. Use native library");
 				NativeTransportRoutingResult[] nativeRes = library.runNativePTRouting(
 						MapUtils.get31TileNumberX(params.start.getLongitude()),

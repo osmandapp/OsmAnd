@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -307,7 +308,8 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 
-	public void registerBooleanParameter(String id, String group, String name, String description, String[] profiles, boolean defaultValue) {
+	public void registerBooleanParameter(String id, String group, String name, String description, String[] profiles,
+	                                     boolean defaultBoolean) {
 		RoutingParameter rp = new RoutingParameter();
 		rp.id = id;
 		rp.group = group;
@@ -315,12 +317,13 @@ public class GeneralRouter implements VehicleRouter {
 		rp.description = description;
 		rp.profiles = profiles;
 		rp.type = RoutingParameterType.BOOLEAN;
-		rp.defaultBoolean = defaultValue;
+		rp.defaultBoolean = defaultBoolean;
 		parameters.put(rp.id, rp);
 		
 	}
 
-	public void registerNumericParameter(String id, String name, String description, String[] profiles, Double[] vls, String[] vlsDescriptions) {
+	public void registerNumericParameter(String id, String name, String description, String[] profiles, Double[] vls,
+	                                     String[] vlsDescriptions, double defaultNumeric) {
 		RoutingParameter rp = new RoutingParameter();
 		rp.name = name;
 		rp.description = description;
@@ -329,6 +332,7 @@ public class GeneralRouter implements VehicleRouter {
 		rp.possibleValues = vls;
 		rp.possibleValueDescriptions = vlsDescriptions;
 		rp.type = RoutingParameterType.NUMERIC;
+		rp.defaultNumeric = defaultNumeric;
 		parameters.put(rp.id, rp);
 	}
 
@@ -781,7 +785,8 @@ public class GeneralRouter implements VehicleRouter {
 		private String[] possibleValueDescriptions;
 		private String[] profiles;
 		private boolean defaultBoolean;
-		
+		private double defaultNumeric;
+
 		public String getId() {
 			return id;
 		}
@@ -807,8 +812,11 @@ public class GeneralRouter implements VehicleRouter {
 		public boolean getDefaultBoolean() {
 			return defaultBoolean;
 		}
+		public double getDefaultNumeric() {
+			return defaultNumeric;
+		}
 		public String getDefaultString() {
-			return type == RoutingParameterType.NUMERIC ? "0.0" : "-";
+			return type == RoutingParameterType.NUMERIC ? String.format(Locale.US, "%.1f", defaultNumeric) : "-";
 		}
 		public String[] getProfiles() {
 			return profiles;

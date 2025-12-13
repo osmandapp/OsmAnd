@@ -90,11 +90,14 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SAVE_LOCATION_PROVIDER_TO_GPX;
 	public final OsmandPreference<Boolean> SHOW_PRIMITIVES_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
+	public final OsmandPreference<Boolean> ENABLE_3D_MAP_OBJECTS;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
 	private final StateChangedListener<Boolean> debugRenderingInfoListener;
 	private final StateChangedListener<Boolean> msaaListener;
 	private final StateChangedListener<Boolean> sphericalListener;
+	private final StateChangedListener<Boolean> map3DObjectsListener;
+	public static final String ZOOM_TILT_ANIMATION_LOG_TAG = "zoom_tilt_animation_log_tag";
 
 	private static final Log LOG_termal = PlatformUtil.getLog("ThermalState");
 
@@ -125,6 +128,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SAVE_LOCATION_PROVIDER_TO_GPX = registerBooleanPreference("save_location_provider_to_gpx", true).makeGlobal().makeShared().cache();
 		SHOW_PRIMITIVES_DEBUG_INFO = registerBooleanPreference("show_primitives_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
+		ENABLE_3D_MAP_OBJECTS = registerBooleanPreference("enable_3d_map_objects", false).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();
@@ -162,6 +166,18 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			}
 		};
 		settings.SPHERICAL_MAP.addListener(sphericalListener);
+
+		map3DObjectsListener = enabled -> {
+			MapRendererContext ctx = net.osmand.plus.views.corenative.NativeCoreContext.getMapRendererContext();
+			if (ctx != null) {
+				if (Boolean.TRUE.equals(enabled)) {
+					ctx.recreate3DObjectsProvider();
+				} else {
+					ctx.reset3DObjectsProvider();
+				}
+			}
+		};
+		ENABLE_3D_MAP_OBJECTS.addListener(map3DObjectsListener);
 	}
 
 	@Override
@@ -180,7 +196,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
+	public void registerOptionsMenuItems(@NonNull MapActivity mapActivity, @NonNull ContextMenuAdapter helper) {
 		if (Version.isDeveloperVersion(mapActivity.getApp())) {
 			Class<?> contributionVersionActivityClass = null;
 			try {
@@ -275,6 +291,15 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		avgStatsCollector();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 			startThermalStatusListening();
+		}
+
+		MapRendererContext ctx = net.osmand.plus.views.corenative.NativeCoreContext.getMapRendererContext();
+		if (ctx != null) {
+			if (Boolean.TRUE.equals(ENABLE_3D_MAP_OBJECTS.get())) {
+				ctx.recreate3DObjectsProvider();
+			} else {
+				ctx.reset3DObjectsProvider();
+			}
 		}
 		return true;
 	}

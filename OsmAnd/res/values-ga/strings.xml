@@ -3219,7 +3219,7 @@
     <string name="empty_state_my_tracks">Cuir comhaid amhráin leis</string>
     <string name="download_slope_maps">Fána</string>
     <string name="data_storage_space_description">%1$s GB saor (as%2$s GB)</string>
-    <string name="routing_attr_max_num_changes_name">Líon na n-athruithe</string>
+    <string name="routing_attr_max_num_changes_name">Uasmhéid athruithe iompair</string>
     <string name="settings_privacy_and_security">Príobháideachas agus slándáil</string>
     <string name="save_poi_value_exceed_length_title">Fad luach \"%s\"</string>
     <string name="rendering_attr_surface_dirt_name">Salachar</string>
@@ -3589,7 +3589,7 @@
     <string name="distance_during_navigation_description">Roghnaigh an chaoi a dtaispeántar faisnéis achair i ngiuirléidí nascleanúna (fad go pointe, an chéad chasadh eile, lánaí).\n\nRoghnaigh \" %1$s\" le haghaidh uimhreacha beachta, nó \"%2$s\" le haghaidh inléiteacht níos éasca.</string>
     <string name="distance_during_navigation">Fad le linn loingseoireachta</string>
     <string name="release_4_7">• Giuirléid nua \"Luasmhéadar\" comhoiriúnach le Android Auto\n\n• Cumraigh scáileán na léarscáile trí chnaipí iomadúla \"Quick Action\" a chur leis\n\n• Inléiteacht fheabhsaithe sonraí i ngraif\n\n• Scagairí curtha leis de réir sonraí braiteora le haghaidh rianta\n\n• Saincheaptha cuma feabhsaithe do ghrúpa rianta\n\n• Tacaíocht bhreise do chlibeanna breise GPX\n\n• Saincheap \"Fad le linn nascleanúna\": roghnaigh idir uimhreacha beachta nó cruinn\n\n• Chomhéadain Aontaithe le haghaidh roghnú rianta\n\n• OpenStreetMap logáil isteach aistrigh go OAuth 2.0</string>
-    <string name="shared_sting_all_colors">Gach dath</string>
+    <string name="shared_string_all_colors">Gach dath</string>
     <string name="routing_type_a_star_classic">A * clasaiceach</string>
     <string name="gpx_approximation">Comhfhogasú GPX</string>
     <string name="max_sensor_cadence">Cadence Rothar, max</string>
@@ -3773,7 +3773,7 @@
     <string name="edit_profile_setup_map_subtitle">Roghnaigh roghanna léarscáile don phróifíl</string>
     <string name="edit_profile_screen_options_subtitle">Roghnaigh roghanna scáileáin don phróifíl</string>
     <string name="edit_profile_nav_settings_subtitle">Roghnaigh socruithe nascleanúna don phróifíl</string>
-    <string name="routing_attr_max_num_changes_description">Sonraigh uasteorainn na n-athruithe</string>
+    <string name="routing_attr_max_num_changes_description">Sonraigh an teorainn uachtarach le haghaidh athruithe iompair</string>
     <string name="app_mode_personal_transporter">Iompróir pearsanta</string>
     <string name="default_speed_setting_descr">Athraigh socruithe réamhshocraithe luais</string>
     <string name="help_us_make_osmand_better">Cabhraigh linn OsmAgus níos fearr a dhéanamh</string>
@@ -4283,7 +4283,7 @@
     <string name="public_transport_ped_route_title">Tá an bealach de shiúl na gcos thart ar %1$s, agus d\'fhéadfadh sé a bheith níos tapúla ná iompar poiblí</string>
     <string name="public_transport_try_ped">Bain triail as nascleanúint de shiúl na gcos.</string>
     <string name="send_search_query">Seol ceist chuardaigh?</string>
-	<string name="read_wikipedia_offline">Léigh Vicipéid as líne</string>
+    <string name="read_wikipedia_offline">Léigh Vicipéid as líne</string>
     <string name="move_marker_bottom_sheet_title">Bog an léarscáil chun ionad an mharcóra a athrú</string>
     <string name="storage_directory_shared">Cuimhne chomhroinnte</string>
     <string name="hno">Uimhir an tí</string>
@@ -5584,7 +5584,7 @@
     <string name="deleting">Ag scriosadh…</string>
     <string name="deleting_history">Stair á scriosadh…</string>
     <string name="show_rasterization_debug_tile">Taispeáin faisnéis rastaireachta tíleanna</string>
-    <string name="release_5_2">• Obair ar siúl...</string>
+    <string name="release_5_2">• Sonraí sráide agus cathrach curtha leis na torthaí cuardaigh\n\n• Giuirléidí Taifeadta Turais Nua: Uasluas, Meánfhána, agus Feabhsuithe ar an gCnoc/An Cnoc Suas\n\n• Stíl léarscáile muirí nua le roghanna saincheaptha fairsinge\n\n• Luas rindreála léarscáile feabhsaithe\n\n• Nascacht fheabhsaithe le hoiriúnóirí OBDII BLE\n\n• Méadrachtaí ráta croí curtha leis an Anailís de réir Eatramh\n\n• Taispeántas fad curtha leis do rianta pleanáilte\n\n• Is féidir aonaid airde a shocrú anois ar leithligh ó aonaid achair\n\n• Treoshuíomh an léarscáil feabhsaithe Gníomh Tapa le modhanna compáis inroghnaithe\n\n• I gcás Android Auto, foláirimh réamh-loingseoireachta curtha leis le haghaidh léarscáileanna ar iarraidh agus bóithre príobháideacha\n\n• Fadhb réitithe le paraiméadair mhéide míchearta don ghiuirléid Rialóir Ga\n\n• Treoshuíomhanna scáileáin inbhéartaithe curtha leis\n\n• Comhéadan úsáideora feabhsaithe chun méadrachtaí trucaile a shonrú</string>
     <string name="shared_string_threads">Snáitheanna</string>
     <string name="threads_allocated_for_rendering">Snáitheanna leithdháilte le haghaidh rindreála</string>
     <string name="threads_allocated_for_rendering_desc">D’fhéadfadh leithdháileadh snáithe níos ísle luas a chur le rindreáil an léarscáil i gcásanna áirithe.</string>
@@ -5669,7 +5669,7 @@
     <string name="max_weight_at_full_load_description">Cuir uasmheáchan d’fheithicle ar fáil ag lánualach chun bóithre agus droichid a bhfuil teorainneacha meáchain orthu a sheachaint.</string>
     <string name="max_axle_load_description">Cuir ualach acastóra uasta do fheithicle ar fáil chun bóithre agus droichid a bhfuil teorainneacha meáchain orthu a sheachaint.</string>
     <string name="lang_en_barebones">Béarla (lom)</string>
-    <string name="shared_sting_osm_link">Nasc OSM</string>
+    <string name="shared_string_osm_link">Nasc OSM</string>
     <string name="show_local_names">Taispeáin ainmneacha áitiúla</string>
     <string name="obd_alt_battery_voltage">Voltas an oiriúnaitheora</string>
     <string name="liter_single">Lítear</string>
@@ -5699,4 +5699,31 @@
     <string name="shared_string_last_downhill">Deireanach síos an cnoc</string>
     <string name="help_article_navigation_routing_ski_routing_name">Fánaí sciála agus bealaí</string>
     <string name="rendering_attr_pisteRoutes_name">Fánaí sciála agus bealaí</string>
+    <string name="requires_internet_connection">Teastaíonn nasc idirlín</string>
+    <string name="save_and_access_articles_offline">Sábháil sonraí agus rochtain a fháil ar ailt as líne áit ar bith</string>
+    <string name="private_access_routing_req_short">Cead a thabhairt duit bóthar príobháideach a úsáid chun do cheann scríbe a bhaint amach?</string>
+    <string name="download_wikipedia_label">Íoslódáil Vicipéid</string>
+    <string name="quick_action_weather_layers">Toggle chun sraitheanna aimsire ar an léarscáil a thaispeáint nó a cheilt.</string>
+    <string name="quick_action_wind_animation_layer">Toggle chun an ciseal beochana gaoithe a thaispeáint nó a cheilt ar an léarscáil.</string>
+    <string name="wind_animation_layer">Sraith beochana gaoithe</string>
+    <string name="weather_layers">Sraitheanna aimsire</string>
+    <string name="lang_crh">Tatairis Chrimé (Laidin)</string>
+    <string name="efficient_grid">Eangach éifeachtach</string>
+    <string name="slots">Sliotáin</string>
+    <string name="button_frames">Frámaí cnaipe</string>
+    <string name="visualizing_button_grid">Eangach cnaipe léarscáile</string>
+    <string name="deleted_maps_warning">Tá tú ar tí %d mír(eanna) a scriosadh\nLean ar aghaidh?</string>
+    <string name="deleted_maps_prompt">Ní thacaítear leis na léarscáileanna seo a thuilleadh agus tá réigiúin níos lú ina n-áit. Bain iad agus íoslódáil na leaganacha nua le do thoil.</string>
+    <string name="unsupported_maps">Léarscáileanna gan tacaíocht</string>
+    <string name="enable_3d_objects">Cumasaigh foirgnimh 3T</string>
+    <string name="enable_3d_objects_description">Taispeáin réada foirgnimh 3T ar an léarscáil</string>
+    <string name="is_parking_time_limited">An bhfuil teorainn ama páirceála?</string>
+    <string name="routing_attr_weightrating_name">Uasmheáchan ag ualach iomlán</string>
+    <string name="routing_attr_maxaxleload_name">Ualach uasta acastóra</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">ceintiméadair</string>
+    <string name="bicycle_width_limit_description">Cuir leithead do rothair ar fáil chun cosáin rothaíochta cúnga a sheachaint.</string>
+    <string name="copy_link">Cóipeáil nasc</string>
+    <string name="routing_attr_pt_limit_name">Taispeáin N bealaí is fearr</string>
+    <string name="routing_attr_pt_limit_description">Sonraigh líon na mbealaí is fearr le taispeáint</string>
 </resources>

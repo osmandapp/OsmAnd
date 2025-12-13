@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.OsmAndTaskManager;
@@ -25,6 +26,7 @@ import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
@@ -45,6 +47,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String AISTRACKER_SIMULATION = "aistracker_simulation";
+	private static final String GRID_LAYOUT_DRAW_CELLS = "grid_layout_draw_cells";
+	private static final String GRID_LAYOUT_DRAW_SLOTS = "grid_layout_draw_slots";
+	private static final String GRID_LAYOUT_DRAW_BUTTON_FRAMES = "grid_layout_draw_button_frames";
 
 	private static final int OPEN_AIS_FILE_REQUEST = 1001;
 
@@ -94,6 +99,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		setupMapRenderingPrefs();
 		setupAisTrackerPrefs();
+		setupGridPrefs();
 
 		Preference info = findPreference("info");
 		info.setIconSpaceReserved(false);
@@ -227,6 +233,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx spherePref = findPreference(settings.SPHERICAL_MAP.getId());
 		spherePref.setIconSpaceReserved(false);
 		spherePref.setDescription(R.string.show_spherical_map_description);
+
+		SwitchPreferenceEx enable3DObjectsPref = findPreference(plugin.ENABLE_3D_MAP_OBJECTS.getId());
+		enable3DObjectsPref.setIconSpaceReserved(false);
+		enable3DObjectsPref.setDescription(R.string.enable_3d_objects_description);
 	}
 
 	private void setupMaxRenderingThreadsPref() {
@@ -259,6 +269,22 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		category.setIconSpaceReserved(false);
 		preference.setIconSpaceReserved(false);
+	}
+
+	private void setupGridPrefs() {
+		Preference category = findPreference("visualizing_button_grid");
+		SwitchPreferenceCompat efficientGridPref = findPreference(GRID_LAYOUT_DRAW_CELLS);
+		SwitchPreferenceCompat slotsPref = findPreference(GRID_LAYOUT_DRAW_SLOTS);
+		SwitchPreferenceCompat buttonFramesPref = findPreference(GRID_LAYOUT_DRAW_BUTTON_FRAMES);
+
+		efficientGridPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS);
+		slotsPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_DRAW_SLOTS);
+		buttonFramesPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES);
+
+		category.setIconSpaceReserved(false);
+		efficientGridPref.setIconSpaceReserved(false);
+		slotsPref.setIconSpaceReserved(false);
+		buttonFramesPref.setIconSpaceReserved(false);
 	}
 
 	private void setupGlobalAppAllocatedMemoryPref() {
@@ -448,6 +474,18 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			return true;
 		} else if (settings.TRANSPARENT_STATUS_BAR.getId().equals(prefId) && newValue instanceof Boolean) {
 			restartActivity();
+			return true;
+		} else if (GRID_LAYOUT_DRAW_CELLS.equals(prefId)) {
+			OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS = !OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS;
+			app.getOsmandMap().getMapView().refreshMap();
+			return true;
+		} else if (GRID_LAYOUT_DRAW_SLOTS.equals(prefId)) {
+			OsmandSettings.DEV_GRID_LAYOUT_DRAW_SLOTS = !OsmandSettings.DEV_GRID_LAYOUT_DRAW_SLOTS;
+			app.getOsmandMap().getMapView().refreshMap();
+			return true;
+		} else if (GRID_LAYOUT_DRAW_BUTTON_FRAMES.equals(prefId)) {
+			OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES = !OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES;
+			app.getOsmandMap().getMapView().refreshMap();
 			return true;
 		}
 		return super.onPreferenceChange(preference, newValue);

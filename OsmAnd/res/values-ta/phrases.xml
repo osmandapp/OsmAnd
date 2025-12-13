@@ -3319,7 +3319,7 @@
     <string name="poi_cuisine">உணவு</string>
     <string name="poi_cuisine_pizza">பீச்சா</string>
     <string name="poi_cuisine_burger">பர்கர்</string>
-    <string name="poi_cuisine_coffee">காபி</string>
+    <string name="poi_cuisine_coffee_shop">காபி</string>
     <string name="poi_cuisine_sandwich">சாண்ட்விச்</string>
     <string name="poi_cuisine_kebab">கபாப்</string>
     <string name="poi_cuisine_doner">கபாப் (சாவர்மா) நன்கொடை அளிக்கவும்</string>
@@ -4967,11 +4967,10 @@
     <string name="poi_baptist_church">பாப்டிச்ட் சர்ச்</string>
     <string name="poi_russian_orthodox_church">ரச்ய ஆர்த்தடாக்ச் சர்ச்</string>
     <string name="poi_pentecostal_church">பெந்தேகோச்தே சர்ச்</string>
-    <string name="poi_hazard_additional_landslide">ஆபத்து: நிலச்சரிவு</string>
+    <string name="poi_hazard_landslide">ஆபத்து: நிலச்சரிவு</string>
     <string name="poi_hazard_falling_rocks">வீழ்ச்சியடைந்த பாறைகள்</string>
     <string name="poi_hazard_contamination">மாசுபாடு</string>
     <string name="poi_hazard_yes">இடர்</string>
-    <string name="poi_hazard_additional_slippery_road">வழுக்கும் சாலை</string>
     <string name="poi_area_highway">இயக்கம் பகுதி</string>
     <string name="poi_area_highway_footway">நடக்கக்கூடிய பகுதி</string>
     <string name="poi_reformed_church">சீர்திருத்த தேவாலயம்</string>

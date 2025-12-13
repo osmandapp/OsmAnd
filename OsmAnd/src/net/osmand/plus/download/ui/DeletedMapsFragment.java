@@ -127,7 +127,14 @@ public class DeletedMapsFragment extends BaseFullScreenDialogFragment implements
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.add(InsetTarget.createHorizontalLandscape(R.id.prompt_container));
+		collection.removeType(Type.LANDSCAPE_SIDES);
+		Dialog dialog = getDialog();
+		boolean isInnerDialog = dialog != null && dialog.getWindow() != null;
+		if (!isInnerDialog) {
+			collection.removeType(Type.ROOT_INSET);
+		} else {
+			collection.add(InsetTarget.createHorizontalLandscape(R.id.sliding_tabs_container, R.id.freeVersionBanner, R.id.downloadProgressLayout, R.id.toolbar).build());
+		}
 		return collection;
 	}
 
@@ -139,15 +146,15 @@ public class DeletedMapsFragment extends BaseFullScreenDialogFragment implements
 
 	private void reloadData() {
 		DownloadResources indexes = downloadThread.getIndexes();
-		List<IndexItem> deletedMaps = indexes.getDeletedItems();
+		List<IndexItem> deprecatedMaps = indexes.getOutdatedItems().deprecated();
 		List<Object> localItemsToDelete = new ArrayList<>();
 
-		for (IndexItem indexItem : deletedMaps) {
+		for (IndexItem indexItem : deprecatedMaps) {
 			File fileToDelete = indexItem.getTargetFile(app);
 			LocalItemType type = LocalItemUtils.getItemType(app, fileToDelete);
 			if (type != null) {
 				LocalItem localItem = new LocalItem(fileToDelete, type);
-				localItem.setDeleted(true);
+				localItem.setDeprecated(true);
 				localItemsToDelete.add(localItem);
 			}
 		}

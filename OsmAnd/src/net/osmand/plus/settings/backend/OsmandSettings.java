@@ -2919,6 +2919,9 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference(this, "quick_action_tutorial", false).makeGlobal().makeShared();
 	public final ListStringPreference QUICK_ACTION_BUTTONS = (ListStringPreference) new ListStringPreference(this, "quick_action_buttons", DEFAULT_BUTTON_ID + ";", ";").makeGlobal();
 
+	public static boolean DEV_GRID_LAYOUT_DRAW_CELLS = false;
+	public static boolean DEV_GRID_LAYOUT_DRAW_SLOTS = false;
+	public static boolean DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES = false;
 
 	/**
 	 * the location of a parked car
@@ -3370,9 +3373,6 @@ public class OsmandSettings {
 					setModeValue(appMode, theme);
 				}
 			}.makeProfile().cache();
-
-	public final OsmandPreference<Boolean> OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED =
-			new BooleanPreference(this, "open_only_header_route_calculated", false).makeProfile();
 
 	public boolean isLightContent() {
 		return isLightContentForMode(APPLICATION_MODE.get());

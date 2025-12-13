@@ -92,6 +92,16 @@ public class AmenitySearcher {
             this.checkOriginName = checkOriginName;
         }
 
+        public Request(List<String> names, LatLon latLon,
+                       String wikiDataId, Long osmId, String subType) {
+            this.type = EntityType.NODE;
+            this.names = names;
+            this.latLon = latLon;
+            this.wikidata = wikiDataId;
+            this.osmId = osmId;
+            this.mainAmenityType = subType;
+        }
+
         public String getMainAmenityType() {
             return mainAmenityType;
         }
@@ -103,7 +113,7 @@ public class AmenitySearcher {
     private ThreadPoolExecutor singleThreadedExecutor;
     private LinkedBlockingQueue<Runnable> taskQueue;
 
-    private static final int AMENITY_SEARCH_RADIUS = 50;
+    public static final int AMENITY_SEARCH_RADIUS = 50;
     private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
     private final MapPoiTypes mapPoiTypes; // nullable
 
@@ -159,7 +169,6 @@ public class AmenitySearcher {
                                          Predicate<String> travelFileVisibility,
                                          ResultMatcher<Amenity> matcher) {
 
-        Set<Long> openAmenities = new HashSet<>();
         Set<Long> closedAmenities = new HashSet<>();
         List<Amenity> actualAmenities = new ArrayList<>();
 
@@ -200,13 +209,15 @@ public class AmenitySearcher {
     }
 
     public Amenity searchDetailedAmenity(Request request, Settings settings) {
-        BaseDetailsObject detailed = searchDetailedObject(request, settings);
+        BaseDetailsObject detailed = searchDetailedObject(request, settings, null);
         return detailed != null ? detailed.getSyntheticAmenity() : null;
     }
 
     public BaseDetailsObject searchDetailedObject(Object object, Settings settings) {
         Request request = null;
-        if (object instanceof MapObject mapObject) {
+        if (object instanceof Request that) {
+            return searchDetailedObject(that, settings, null);
+        } else if (object instanceof MapObject mapObject) {
             request = new Request(mapObject);
         } else if (object instanceof BaseDetailsObject detailsObject) {
             if (detailsObject.isObjectFull()) {
@@ -220,14 +231,10 @@ public class AmenitySearcher {
         }
         BaseDetailsObject detailsObject = null;
         if (request != null) {
-            detailsObject = searchDetailedObject(request, settings);
+            detailsObject = searchDetailedObject(request, settings, null);
         }
         completeGeometry(detailsObject, object);
         return detailsObject;
-    }
-
-    public BaseDetailsObject searchDetailedObject(Request request, Settings settings) {
-        return searchDetailedObject(request, settings, null);
     }
 
     public BaseDetailsObject searchDetailedObject(Request request, Settings settings, ResultMatcher<Amenity> matcher) {
@@ -578,6 +585,8 @@ public class AmenitySearcher {
         boolean checkId = osmId > 0;
         String wikidata = amenity.getWikidata();
         boolean checkWikidata = !Algorithms.isEmpty(wikidata);
+        String routeId = amenity.getRouteId();
+        boolean checkRouteId = !Algorithms.isEmpty(routeId);
 
         ResultMatcher<BinaryMapDataObject> matcher = new ResultMatcher<>() {
             @Override
@@ -588,6 +597,10 @@ public class AmenitySearcher {
                 if (checkWikidata) {
                     TIntObjectHashMap<String> names = object.getObjectNames();
                     return names != null && !names.isEmpty() && names.containsValue(wikidata);
+                }
+                if (checkRouteId) {
+                    TIntObjectHashMap<String> names = object.getObjectNames();
+                    return names != null && !names.isEmpty() && names.containsValue(routeId);
                 }
                 return false;
             }
@@ -607,8 +620,8 @@ public class AmenitySearcher {
         int y = MapUtils.get31TileNumberY(latLon.getLatitude());
         int x = MapUtils.get31TileNumberX(latLon.getLongitude());
 
-        BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> request = BinaryMapIndexReader.buildSearchRequest(x,
-                x + 1, y, y + 1, 15, null, new ResultMatcher<>() {
+        BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> request = BinaryMapIndexReader
+                .buildSearchRequest(x, x + 1, y, y + 1, 15, null, new ResultMatcher<>() {
                     @Override
                     public boolean publish(BinaryMapDataObject object) {
                         if (matcher == null || matcher.publish(object)) {

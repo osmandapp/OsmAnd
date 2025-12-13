@@ -288,6 +288,9 @@ public class BaseDetailsObject {
 			if (syntheticAmenity.getLocation() == null) {
 				syntheticAmenity.setLocation(renderedObject.getLocation());
 			}
+			if (syntheticAmenity.getLocation() == null) {
+				syntheticAmenity.setLocation(renderedObject.getLabelLatLon());
+			}
 			processPolygonCoordinates(renderedObject.getX(), renderedObject.getY());
 		}
 	}
@@ -295,6 +298,25 @@ public class BaseDetailsObject {
 	protected void processId(MapObject object) {
 		if (syntheticAmenity.getId() == null && ObfConstants.isOsmUrlAvailable(object)) {
 			syntheticAmenity.setId(object.getId());
+		}
+	}
+
+	private void updateAmenitySubTypes(Amenity amenity, String subTypesToAdd) {
+		if (amenity.getSubType() == null) {
+			amenity.setSubType(subTypesToAdd);
+		} else {
+			for (String subType : subTypesToAdd.split(";")) {
+				boolean isSubTypeUnique = true;
+				for (String s : amenity.getSubType().split(";")) {
+					if (s.equals(subType)) {
+						isSubTypeUnique = false;
+						break;
+					}
+				}
+				if (isSubTypeUnique) {
+					amenity.setSubType(amenity.getSubType() + ";" + subType);
+				}
+			}
 		}
 	}
 
@@ -310,8 +332,8 @@ public class BaseDetailsObject {
 			syntheticAmenity.setType(type);
 		}
 		String subType = amenity.getSubType();
-		if (syntheticAmenity.getSubType() == null && subType != null) {
-			syntheticAmenity.setSubType(subType);
+		if (subType != null) {
+			updateAmenitySubTypes(syntheticAmenity, subType);
 		}
 		String mapIconName = amenity.getMapIconName();
 		if (syntheticAmenity.getMapIconName() == null && mapIconName != null) {

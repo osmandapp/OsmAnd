@@ -35,9 +35,9 @@
     <string name="layer_map_appearance">Configura la pantalla</string>
     <string name="screen_is_locked">Premeu la icona de bloqueig per desblocar</string>
     <string name="map_widget_lock_screen">Bloca</string>
-    <string name="map_widget_next_turn">Proper gir</string>
-    <string name="map_widget_next_turn_small">Proper gir (petit)</string>
-    <string name="map_widget_next_next_turn">Segon gir proper</string>
+    <string name="map_widget_next_turn">Gir següent</string>
+    <string name="map_widget_next_turn_small">Gir següent (petit)</string>
+    <string name="map_widget_next_next_turn">Segon gir següent</string>
     <string name="bg_service_screen_lock">Bloca</string>
     <string name="bg_service_screen_unlock">Desbloca</string>
     <string name="bg_service_screen_lock_toast">La pantalla està bloquejada</string>
@@ -57,7 +57,7 @@
     <string name="context_menu_item_add_parking_point">Marca com a lloc d\'aparcament</string>
     <string name="context_menu_item_delete_parking_point">Suprimeix el marcador d\'aparcament</string>
     <string name="gpxup_identifiable">Identificable</string>
-    <string name="route_roundabout">Rotonda: Preneu la %1$d sortida i continueu</string>
+    <string name="route_roundabout">Rotonda: agafeu la sortida %1$d i continueu</string>
     <string name="rendering_attr_noPolygons_name">Polígons</string>
     <string name="rendering_attr_appMode_name">Mode de renderització</string>
     <string name="rendering_attr_contourLines_name">Mostra les corbes de nivell</string>
@@ -186,8 +186,8 @@
     <string name="show_lanes">Carrils</string>
     <string name="avoid_ferries">Sense ferris</string>
     <string name="osmand_parking_warning_text">S\'ha afegit una notificació a la vostra agenda perquè traieu el vostre cotxe que es pot editar o treure allà mateix.</string>
-    <string name="route_kl">Mantingueu-vos a l\'esquerra i continueu</string>
-    <string name="route_kr">Mantingueu-vos a la dreta i continueu</string>
+    <string name="route_kl">Manteniu-vos a l\'esquerra i continueu</string>
+    <string name="route_kr">Manteniu-vos a la dreta i continueu</string>
     <string name="test_voice_prompts">Prova dels indicadors de veu</string>
     <string name="support_new_features">Ajuda per a noves característiques</string>
     <string name="rendering_out_of_memory">No hi ha prou memòria de procés per mostrar l\'àrea seleccionada</string>
@@ -663,8 +663,8 @@
     <string name="old_map_index_is_not_supported">Format de mapa «{0}» obsolet, no s\'admet</string>
     <string name="select_max_zoom_preload_area">Màxim zoom en precàrrega</string>
     <string name="renderers_descr">Trieu l\'aparença de dibuixat</string>
-    <string name="transport_searching_transport">Resultats de transport (cap destí):</string>
-    <string name="transport_searching_route">Resultats de transport ({0} al destí):</string>
+    <string name="transport_searching_transport">Resultats de transport (no hi ha cap destinació):</string>
+    <string name="transport_searching_route">Resultats de transport ({0} fins a la destinació):</string>
     <string name="voice_data_unavailable">La llibreria seleccionada de missatges de veu no està disponible</string>
     <string name="search_poi_location">Esperant el senyal…</string>
     <string name="opening_hours_not_supported">No es pot canviar el format d\'horaris d\'obertura.</string>
@@ -709,12 +709,12 @@
     <string name="voice_provider_descr">Trieu el guiatge de veu en la navegació.</string>
     <string name="voice_provider">Guiatge per veu</string>
     <string name="route_tr">Gireu a la dreta i continueu</string>
-    <string name="route_tshr">Gireu fortament a la dreta i continueu</string>
+    <string name="route_tshr">Feu un gir tancat a la dreta i continueu</string>
     <string name="route_tslr">Gireu lleugerament a la dreta i continueu</string>
     <string name="route_tl">Gireu a l\'esquerra i continueu</string>
-    <string name="route_tshl">Gireu fortament a l\'esquerra i continueu</string>
+    <string name="route_tshl">Feu un gir tancat a l\'esquerra i continueu</string>
     <string name="route_tsll">Gireu lleugerament a l\'esquerra i continueu</string>
-    <string name="route_tu">Feu un gir en forma d\'U i continueu</string>
+    <string name="route_tu">Feu mitja volta i continueu</string>
     <string name="search_near_map">Cerca propera a la posició actual al mapa</string>
     <string name="transport_Stop">Parada</string>
     <string name="transport_search_after">Itinerari subsegüent</string>
@@ -834,7 +834,7 @@
     <string name="map_widget_max_speed">Límit de velocitat</string>
     <string name="incremental_search_city">Cerca progressiva de municipis</string>
     <string name="safe_mode_description">Executeu l\'aplicació en mode segur (més lent).</string>
-    <string name="delete_target_point">Elimina el destí</string>
+    <string name="delete_target_point">Elimina la destinació</string>
     <string name="download_srtm_maps">Dades de corbes de nivell</string>
     <string name="incomplete_locale">incomplet</string>
     <string name="use_high_res_maps_descr">No amplieu (ni difumineu) les tessel·les del mapa en pantalles d\'alta resolució.</string>
@@ -1078,7 +1078,7 @@
     <string name="off_router_service_no_gps_available">El servei de navegació en segon pla necessita tenir un sistema d\'ubicació activat.</string>
     <string name="background_service_provider_descr">Sistema d\'ubicació que utilitzarà el servei en segon pla:</string>
     <string name="select_gpx">Selecciona una traça GPX…</string>
-    <string name="route_descr_select_destination">Establiu un destí</string>
+    <string name="route_descr_select_destination">Establiu una destinació</string>
     <string name="shared_string_select_on_map">Selecciona al mapa</string>
     <string name="shared_string_favorite">Preferida</string>
     <string name="route_preferences">Preferències de ruta</string>
@@ -1152,7 +1152,7 @@
     <string name="keep_informing_descr">Repeteix les instruccions de navegació a intervals regulars.</string>
     <string name="keep_informing">Repeteix les instruccions de navegació</string>
     <string name="navigation_intent_invalid">Format no vàlid: %s</string>
-    <string name="route_descr_destination">Destí</string>
+    <string name="route_descr_destination">Destinació</string>
     <string name="shared_string_share">Comparteix</string>
     <string name="share_fav_subject">Preferits compartits via OsmAnd</string>
     <string name="use_points_as_intermediates">Calcula la ruta entre punts</string>
@@ -1178,7 +1178,7 @@
     <string name="map_widget_plain_time">Hora actual</string>
     <string name="shared_string_waypoint">Fita</string>
     <string name="selected_gpx_info_show">\n\nPremeu contínuament per veure al mapa</string>
-    <string name="delay_navigation_start">Inicia automàticament el guiatge turn-by-turn</string>
+    <string name="delay_navigation_start">Inicia les indicacions pas a pas automàticament</string>
     <string name="shared_string_selected_lowercase">seleccionat</string>
     <string name="gpx_split_interval">Divideix l\'interval</string>
     <string name="gpx_info_diff_altitude">Interval d\'altitud: %1$s</string>
@@ -1411,7 +1411,7 @@
     <string name="local_osm_changes_upload_all_confirm">Voleu carregar %1$d canvis a OSM?</string>
     <string name="confirmation_to_clear_history">Voleu esborrar l\'historial?</string>
     <string name="delay_to_start_navigation_descr">Indiqueu el temps màxim d\'espera en la pantalla de planificació de la ruta.</string>
-    <string name="delay_to_start_navigation">Inicia el guiatge gir a gir després de…</string>
+    <string name="delay_to_start_navigation">Inicia les indicacions pas a pas després de…</string>
     <string name="shared_string_go">Vés</string>
     <string name="osmand_parking_overdue">obsolet</string>
     <string name="action_create">Acció de crear</string>
@@ -1892,7 +1892,7 @@
     <string name="access_disable_wrong_direction_recalc">No revisarà la ruta per direcció oposada</string>
     <string name="access_disable_wrong_direction_recalc_descr">No es revisa la ruta nova mentre el moviment vagi en direcció oposada.</string>
     <string name="access_smart_autoannounce">Recordatoris intel·ligents</string>
-    <string name="access_smart_autoannounce_descr">Només es notificarà quan la direcció al punt de destí canviï.</string>
+    <string name="access_smart_autoannounce_descr">Només es notificarà quan la direcció al punt de destinació canviï.</string>
     <string name="access_autoannounce_period">Freqüència dels recordatoris</string>
     <string name="access_autoannounce_period_descr">Interval mínim de temps entre anuncis.</string>
     <string name="map_widget_bearing">Desviació relativa</string>
@@ -2014,7 +2014,7 @@
     <string name="rendering_value_fine_name">Bé</string>
     <string name="route_calculation">Càlcul de ruta</string>
     <string name="upload_poi">Puja PDI</string>
-    <string name="route_roundabout_short">Agafeu la %1$d sortida i continueu</string>
+    <string name="route_roundabout_short">Agafeu la sortida %1$d i continueu</string>
     <string name="search_map_hint">Ciutat o regió</string>
     <string name="routing_attr_allow_motorway_name">Utilitza les autopistes</string>
     <string name="routing_attr_allow_motorway_description">Admet autopistes.</string>
@@ -2483,7 +2483,7 @@
     <string name="osm_edits_export_desc">Exportació com notes d\'OSM, PDIs o les dues coses.</string>
     <string name="all_data">Totes les dades</string>
     <string name="osm_notes">Notes OSM</string>
-    <string name="tunnel_warning">Túnel encarat</string>
+    <string name="tunnel_warning">Túnel més endavant</string>
     <string name="show_tunnels">Túnels</string>
     <string name="shared_string_current">Actual</string>
     <string name="last_intermediate_dest_description">Afegeix una parada intermèdia</string>
@@ -2692,9 +2692,9 @@
     <string name="tracks_on_map">Traces visualitzades</string>
     <string name="time_of_day">Hora del dia</string>
     <string name="by_transport_type">Per %1$s</string>
-    <string name="step_by_step">Totes les cruïlles</string>
+    <string name="step_by_step">Pas a pas</string>
     <string name="routeInfo_road_types_name">Tipus de carretera</string>
-    <string name="exit_at">Sortida a</string>
+    <string name="exit_at">Sortiu a</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Un botó per mostrar o amagar les traces seleccionades al mapa.</string>
     <string name="sit_on_the_stop">Pugeu a la parada</string>
     <string name="use_osm_live_public_transport_description">Activa les modificacions del transport públic amb OsmAnd Live.</string>
@@ -3541,7 +3541,7 @@
     <string name="osm_login_descr">Vegeu utilitzant el mètode OAuth, o el vostre nom d\'usuari i contrasenya OSM.</string>
     <string name="shared_string_add_photo">Afegeix foto</string>
     <string name="register_opr_create_new_account">Crea un compte nou</string>
-    <string name="register_opr_have_account">ja tinc un compte</string>
+    <string name="register_opr_have_account">Ja tinc un compte</string>
     <string name="shared_string_search_history">Historial de cerques</string>
     <string name="app_mode_kayak">Caiac</string>
     <string name="app_mode_motorboat">Llanxa motora</string>
@@ -3729,8 +3729,8 @@
     <string name="av_notes_photo_widget_desc">Prement el giny us permet fer una foto.</string>
     <string name="av_notes_video_widget_desc">Prement el giny us permet enregistrar un vídeo.</string>
     <string name="av_notes_audio_widget_desc">Prement el giny us permet enregistrar una nota d\'àudio.</string>
-    <string name="auto_25_chars_route_tu_kl">Feu un gir en U i mantingueu-vos a l\'esquerra</string>
-    <string name="auto_25_chars_route_tu_kr">Feu un gir en U i manteniu-vos a la dreta</string>
+    <string name="auto_25_chars_route_tu_kl">Feu mitja volta i manteniu-vos a l\'esquerra</string>
+    <string name="auto_25_chars_route_tu_kr">Feu mitja volta i manteniu-vos a la dreta</string>
     <string name="auto_backup_title">Còpia de seguretat automàtica</string>
     <string name="shared_string_duplicate">Duplicat</string>
     <string name="duplacate_widget_added_snackbar">S\'està afegint un giny duplicat a la llista.</string>
@@ -4195,7 +4195,7 @@
     <string name="resend_verification_code">Reenviar</string>
     <string name="shared_string_progress">Progrés</string>
     <string name="filter_screen_title">Filtre</string>
-    <string name="shared_string_turn">Gira</string>
+    <string name="shared_string_turn">Gir</string>
     <string name="output">Sortida</string>
     <string name="start_point">Comença</string>
     <string name="shared_string_purchased">Comprat</string>
@@ -4269,7 +4269,7 @@
     <string name="ask_every_time">Demana-ho cada vegada</string>
     <string name="location_radius">Radi d\'ubicació</string>
     <string name="quick_action_new_route">Nova ruta</string>
-    <string name="quick_action_destination">Destí</string>
+    <string name="quick_action_destination">Destinació</string>
     <string name="quick_action_parking_place">Lloc d\'aparcament</string>
     <string name="quick_action_verb_show_hide">Mostra / Amaga</string>
     <string name="quick_action_verb_pause_resume">Pausa / Reprèn</string>
@@ -4446,9 +4446,9 @@
     <string name="add_widget_to_the_left">Afegeix el giny a l\'esquerra</string>
     <string name="obd_fuel_type_hybrid_electric">Híbrid elèctric</string>
     <string name="obd_fuel_left_liters">Combustible romanent (litres)</string>
-    <string name="auto_25_chars_route_tshl">Gireu fortament a l\'esquerra</string>
+    <string name="auto_25_chars_route_tshl">Feu un gir tancat a l\'esquerra</string>
     <string name="quick_action_move_map_left">Mapa a l\'esquerra</string>
-    <string name="auto_25_chars_route_tshr">Gireu fortament a la dreta</string>
+    <string name="auto_25_chars_route_tshr">Feu un gir tancat a la dreta</string>
     <string name="auto_25_chars_route_tslr">Gireu lleugerament a la dreta</string>
     <string name="auto_25_chars_route_tl">Gireu a l\'esquerra</string>
     <string name="choose_map_orientation">Seleccioneu l\'orientació del mapa</string>
@@ -4631,7 +4631,7 @@
     <string name="hmd_promo_years">Promo HMD per a %1$s anys</string>
     <string name="hmd_promo_description">Llibertat d\'accés a funcions que inclouen descàrregues il·limitades de mapes, relleu en 3D, etc. durant %1$s mesos</string>
     <string name="hmd_promo_description_years">Llibertat d\'accés a funcions que inclouen descàrregues il·limitades de mapes, relleu en 3D, etc. durant %1$s anys</string>
-    <string name="shared_string_road_exit">Surt</string>
+    <string name="shared_string_road_exit">Sortida</string>
     <string name="popular_places_nearby">Llocs populars a prop</string>
     <string name="recently_visited">Visitada recentment</string>
     <string name="ais_load_data">Carrega les dades AIS del fitxer</string>
@@ -4688,7 +4688,7 @@
     <string name="av_audio_sample_rate_descr">Seleccioneu la freqüència de mostreig d\'àudio.</string>
     <string name="connect_new_scanner">Connecta un escàner nou</string>
     <string name="release_5_0">• Descobreix els POI més ben classificats amb el nou mode Explora\n\n • Totes les rutes de l\'OSM, ara es poden cercar! Senderisme, ciclisme, BTT i molt més\n\n • El giny de navegació nou combina la fletxa de gir i les instruccions de navegació\n\n • Giny d\'informació de la ruta actual: mostra ETA, hora d\'arribada i distància\n\n • Selecciona pistes d\'esquí i rutes BTT al mapa per a informació detallada\n\n • Capacitat per a seleccionar la mida del giny per als plafons esquerre i dret\n\n • Quadrícula de coordenades afegides amb coordenades geogràfiques\n\n • S\'ha afegit la capacitat de personalitzar l\'aparença predeterminada dels grups favorits\n\n • Android Auto: veure ETA i distància al següent waypoint; els noms de les ciutats ara apareixen als resultats de cerca\n • Els pics prominents ara es poden descobrir a través del mapa i la cerca\n\n • Altures de cim de muntanya als peus\n\n • Afegit: Crags i zones d\'escalada al mapa\n\n • S\'ha millorat la cerca d\'adreces als EUA\n\n • TTS hebreu afegit per a la navegació</string>
-    <string name="preview_next_turn">Vista prèvia del torn següent</string>
+    <string name="preview_next_turn">Previsualitza el gir següent</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Tractar les dades del vehicle vital utilitzant el protocol OBD-II. Monitora les mètriques clau com la velocitat, RPM del motor, el consum de combustible, i més.</string>
     <string name="vehicle_metrics_obd_ii">Mètriques de Vehicles (OBD-II)</string>
     <string name="shared_string_hour">Hora</string>
@@ -4841,7 +4841,7 @@
     <string name="round_up">Arrodoni</string>
     <string name="release_4_7">• Nou giny \"Speedometer\" compatible amb Android Auto\n\n • Configura la pantalla del mapa afegint múltiples botons \"Acció ràpida\"\n\n • Millora de la llegibilitat de les dades en gràfics\n\n • S\'han afegit filtres per dades del sensor per a les pistes\n\n • Millora de la personalització de l\'aparença per al grup de pistes\n\n • S\'ha afegit la implementació per a etiquetes GPX addicionals\n\n • Personalitza \"Distància durant la navegació\": tria entre números precisos o arrodonits\n\n • IU unificada per a la selecció de pistes\n\n • S\'ha canviat l\'inici de sessió OpenStreetMap a OAuth 2.0</string>
     <string name="lang_ta_in">Tàmil (Índia)</string>
-    <string name="shared_sting_all_colors">Tots els colors</string>
+    <string name="shared_string_all_colors">Tots els colors</string>
     <string name="routing_type_a_star_2_phase">A* 2-fase</string>
     <string name="routing_type_a_star_classic">A* clàssic</string>
     <string name="auto_zoom_smooth">Suavitzat</string>
@@ -5065,7 +5065,7 @@
     <string name="routing_attr_hazmat_category_usa_8_name">Substàncies corrosives</string>
     <string name="dangerous_goods_description">En algunes carreteres i túnels està prohibit el transport de materials perillosos.</string>
     <string name="dangerous_goods">Productes perillosos</string>
-    <string name="free_ride">Passeig gratis</string>
+    <string name="free_ride">Navegació lliure</string>
     <string name="free_settings_backup">Còpia de seguretat de configuració lliure</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Usa ràster sqlitedb per a l\'ombra de turons / pendent</string>
     <string name="cache_size">Mida de la memòria cau</string>
@@ -5126,7 +5126,7 @@
     <string name="number_of_tracks">%1$s pistes</string>
     <string name="search_track_by_name">Cerca la pista per nom</string>
     <string name="no_search_results">Sense resultats</string>
-    <string name="poi_categories">Categories POI</string>
+    <string name="poi_categories">Categories de PDI</string>
     <string name="is_imported">%1$s s\'ha importat.</string>
     <string name="file_already_exists_description">\"%1$s\" (en anglès). Ja existeix un fitxer amb aquest nom. Reemplaça sobreescriurà tots els canvis fets amb la versió actual.</string>
     <string name="file_already_exists">El fitxer ja existeix</string>
@@ -5763,8 +5763,8 @@
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Resposta</string>
     <string name="n_a">N/A</string>
-    <string name="next_turn_information">Informació de torn següent</string>
-    <string name="next_turn_information_desc">Mostra la propera direcció de gir i el nom del carrer.</string>
+    <string name="next_turn_information">Informació del gir següent</string>
+    <string name="next_turn_information_desc">Mostra la direcció del gir següent i el nom del carrer.</string>
     <string name="description_purchases_fastspring">Pots gestionar les teves compres a través del portal de gestió de comptes FastSpring.</string>
     <string name="description_subscription_fastspring">Pots gestionar o cancel·lar la teva subscripció a través del portal de gestió de comptes FastSpring.</string>
     <string name="manage_purchases">Gestiona les compres</string>
@@ -5772,7 +5772,7 @@
     <string name="shared_string_threads">Fils</string>
     <string name="threads_allocated_for_rendering">Fils assignats per a la renderització</string>
     <string name="threads_allocated_for_rendering_desc">La menor assignació de fils pot accelerar la representació del mapa en alguns casos.</string>
-    <string name="turn_by_turn_directions">Direccions gira-per-gir</string>
+    <string name="turn_by_turn_directions">Indicacions pas a pas</string>
     <string name="marine_renderer">Marí</string>
     <string name="marine_render_descr">Estil de navegació marina molt personalitzable. Basat en l\'estil nàutic. Funciona millor amb el mapa de marques del món nàutic i mapes opcionals de profunditat.</string>
     <string name="rendering_attr_hideAreas_name">Àrees de profunditat</string>
@@ -5830,7 +5830,7 @@
     <string name="kilometers">Quilòmetres</string>
     <string name="miles">Milles</string>
     <string name="mpg">Milles per galó</string>
-    <string name="shared_sting_osm_link">Enllaç OSM</string>
+    <string name="shared_string_osm_link">Enllaç OSM</string>
     <string name="show_spherical_map">Mostra el mapa esfèric</string>
     <string name="show_spherical_map_description">Mostra el model esferoïdal de la Terra</string>
     <string name="show_local_names">Mostra les denominacions locals</string>

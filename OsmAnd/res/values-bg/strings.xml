@@ -4134,7 +4134,7 @@
     <string name="rendering_value_managerName_name">По име на отговорника</string>
     <string name="auto_zoom">Автоматично мащабиране</string>
     <string name="gpx_approximation">Приближение на GPX</string>
-    <string name="shared_sting_all_colors">Всички цветове</string>
+    <string name="shared_string_all_colors">Всички цветове</string>
     <string name="routing_type">Вид маршрутизиране</string>
     <string name="rendering_attr_padusDisplayMode_name">Режим на показване на обществени земи</string>
     <string name="rendering_attr_padusDisplayMode_description">По вид на достъпа или име на отговорника</string>
@@ -4753,4 +4753,6 @@
     <string name="download_depth_countours">Контури на морски дълбочини</string>
     <string name="amount_of_total_used">Използвани %1$s от %2$s</string>
     <string name="delete_data">Изтриване на данни</string>
+    <string name="rendering_attr_highway_class_service_name">Служебна</string>
+    <string name="shared_string_osm_link">Препратка от OSM</string>
 </resources>

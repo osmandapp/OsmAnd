@@ -69,6 +69,14 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 
 	fun getRootFolder(): TrackFolder = getParentFolder()?.getRootFolder() ?: this
 
+	fun getNextAfterRootFolder(): TrackFolder {
+		var current: TrackFolder = this
+		while (current.parentFolder != null && current.parentFolder!!.parentFolder != null) {
+			current = current.parentFolder!!
+		}
+		return current
+	}
+
 	fun getParentFolder(): TrackFolder? {
 		return parentFolder
 	}

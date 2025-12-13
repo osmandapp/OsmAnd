@@ -27,7 +27,6 @@ public class SearchPhrase {
 	public static final String ALLDELIMITERS_WITH_HYPHEN = "\\s|,|-";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private static Comparator<String> commonWordsComparator;
-	private static Set<String> conjunctions = new TreeSet<>();
 	
 	private final Collator clt;
 	private final SearchSettings settings;
@@ -38,6 +37,8 @@ public class SearchPhrase {
 	// Object consists of 2 part [known + unknown] 
 	private String fullTextSearchPhrase = "";
 	private String unknownSearchPhrase = "";
+	
+	private boolean likelyAddressSearch = false;
 
 	// words to be used for words span
 	private List<SearchWord> words = new ArrayList<>();
@@ -61,26 +62,6 @@ public class SearchPhrase {
 	private QuadRect cache1kmRect;
 	
 	static {
-		// the
-		conjunctions.add("the");
-		conjunctions.add("der");
-		conjunctions.add("den");
-		conjunctions.add("die");
-		conjunctions.add("das");
-		conjunctions.add("la");
-		conjunctions.add("le");
-		conjunctions.add("el");
-		conjunctions.add("il");
-		// and
-		conjunctions.add("and");
-		conjunctions.add("und");
-		conjunctions.add("en");
-		conjunctions.add("et");
-		conjunctions.add("y");
-		conjunctions.add("и");
-		
-		// Don't add short names !  issues for perfect matching "Drive A", ...
-//		conjunctions.add("f");
 
 		commonWordsComparator = new Comparator<String>() {
 
@@ -167,6 +148,7 @@ public class SearchPhrase {
 		sp.words = foundWords;
 		sp.fullTextSearchPhrase = fullText;
 		sp.unknownSearchPhrase = textToSearch;
+		
 		sp.lastUnknownSearchWordComplete = isTextComplete(fullText) ;
 		if (!reg.matcher(textToSearch).find()) {
 			sp.firstUnknownSearchWord = sp.unknownSearchPhrase.trim();
@@ -176,7 +158,7 @@ public class SearchPhrase {
 			boolean first = true;
 			for (int i = 0; i < ws.length ; i++) {
 				String wd = ws[i].trim();
-				boolean conjunction = conjunctions.contains(wd.toLowerCase());
+				boolean conjunction = Abbreviations.isConjunction(wd.toLowerCase());
 				boolean lastAndIncomplete = i == ws.length - 1 && !sp.lastUnknownSearchWordComplete;
 				boolean decryptAbbreviations = needDecryptAbbreviations();
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
@@ -189,7 +171,19 @@ public class SearchPhrase {
 				}
 			}
 		}
+		sp.likelyAddressSearch = likelyAddressSearch(fullText) || !sp.lastUnknownSearchWordComplete;
 		return sp;
+	}
+
+	private boolean likelyAddressSearch(String fullText) {
+		// for now only simple check - we just check if it contains digit
+		for (int i = 0; i < fullText.length(); i++) {
+			char c = fullText.charAt(i);
+			if (c >= '0' && c <= '9') {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean needDecryptAbbreviations() {
@@ -203,6 +197,10 @@ public class SearchPhrase {
 			}
 		}
 		return false;
+	}
+	
+	public boolean isLikelyAddressSearch() {
+		return likelyAddressSearch;
 	}
 
 	public static List<String> splitWords(String w, List<String> ws, String delimiters) {
@@ -253,6 +251,7 @@ public class SearchPhrase {
 				genUnknownSearchPhrase.append(unknownWords.get(i)).append(" ");
 			}
 			sp.fullTextSearchPhrase = fullTextSearchPhrase; 
+			sp.likelyAddressSearch = likelyAddressSearch;
 			sp.unknownSearchPhrase = genUnknownSearchPhrase.toString().trim();
 		}
 		return sp;
@@ -390,7 +389,7 @@ public class SearchPhrase {
 		if (l == null) {
 			return null;
 		}
-		cache1kmRect = calculateBbox(1000, l);
+		cache1kmRect= calculateBbox(1000, l);
 		return cache1kmRect;
 	}
 
@@ -925,7 +924,18 @@ public class SearchPhrase {
 		return lastUnknownSearchWordComplete;
 	}
 
+	public static Collection<String> stripBraces(Collection<String> names) {
+		List<String> lst = new ArrayList<String>();
+		for(String s : names) {
+			lst.add(stripBraces(s));
+		}
+		return lst;
+	}
+	
 	public static String stripBraces(String localeName) {
+		if (localeName == null) {
+			return null;
+		}
 		int i = localeName.indexOf('(');
 		String retName = localeName;
 		if (i > -1) {

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="poi_sample_collection">Взяття біоматеріалу</string>
     <string name="poi_palaeontological_site">Палеонтологічний об’єкт</string>
     <string name="poi_bakery">Пекарня</string>
     <string name="poi_alcohol">Спиртні напої</string>
@@ -157,7 +156,7 @@
     <string name="poi_leather">Крамниця шкіри, галантарея</string>
     <string name="poi_music">Музичний магазин</string>
     <string name="poi_scuba_diving_shop">Крамниця для плавання з масками</string>
-    <string name="poi_tyres">Крамниця автомобільних шин</string>
+    <string name="poi_tyres">Шини;Шина;Шина;Шинний магазин;Шини</string>
     <string name="poi_watches">Крамниця годинників</string>
     <string name="poi_swimming_pool_shop">Крамниця речей для басейну</string>
     <string name="poi_games">Ігри</string>
@@ -172,7 +171,7 @@
     <string name="poi_traffic_calming_choker">Звуження дороги</string>
     <string name="poi_traffic_signals">Світлофор</string>
     <string name="poi_car_repair">Ремонт машин (СТО)</string>
-    <string name="poi_service_tyres">Шини</string>
+    <string name="poi_service_tyres">Шини; Шина; Шини</string>
     <string name="poi_vehicle_inspection">Огляд автомобіля</string>
     <string name="poi_car_wash">Мийка автомобіля</string>
     <string name="poi_fuel">АЗС;Автомобільна заправка;Автозаправка;Бензоколонка;Бензозаправка</string>
@@ -2745,7 +2744,7 @@
     <string name="poi_nuclear_explosion_type_atmospheric_balloon">Вид вибуху: атмосферний, на повітряній кулі</string>
     <string name="poi_provided_for_toddler_yes">Послуги надаються немовлятам: так</string>
     <string name="poi_xmas_shop">Різдвяний магазин</string>
-    <string name="poi_cuisine_soup">Зупи</string>
+    <string name="poi_cuisine_soup">Суп</string>
     <string name="poi_cuisine_basque">Баскська</string>
     <string name="poi_outdoor_seating_yes">Місця на відкритому повітрі: є</string>
     <string name="poi_vending_ice_cream">Продаж морозива</string>
@@ -2920,7 +2919,7 @@
     <string name="poi_healthcare_speciality_depth">Глибинна психологія</string>
     <string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Мета вибуху: промислове застосування, сейсмічне зондування</string>
     <string name="poi_treat_inpatient_no">Обслуговування в стаціонарі: ні</string>
-    <string name="poi_cuisine_coffee">Кава</string>
+    <string name="poi_cuisine_coffee_shop">Кава</string>
     <string name="poi_cuisine_shawarma">Кебаб (шаурма)</string>
     <string name="poi_animal_keeping_type_open_stable">Стайня відкритого типу</string>
     <string name="poi_self_service_yes">Так;Самообслуговування</string>
@@ -2941,7 +2940,7 @@
     <string name="poi_healthcare_speciality_palliative_medicine">Паліативна допомога</string>
     <string name="poi_nuclear_explosion_purpose_industrial_application">Мета вибуху: промислове застосування</string>
     <string name="poi_counselling_yes">Психологічна консультація: є</string>
-    <string name="poi_cuisine_kebab">Кебаб</string>
+    <string name="poi_cuisine_kebab">Кебаб; Страва</string>
     <string name="poi_cuisine_italian">Італійська</string>
     <string name="poi_tower_construction_freestanding">Конструкція: масивна без відтяжок</string>
     <string name="poi_tower_construction_dish">Конструкція: параболічна тарілка</string>
@@ -2952,7 +2951,7 @@
     <string name="poi_building_type_pyramid">Вид будівлі: піраміда</string>
     <string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Мета вибуху: промислове застосування, зрушення земляних пластів</string>
     <string name="poi_counselling_no">Психологічна консультація: немає</string>
-    <string name="poi_cuisine_doner">Донер кебаб (шаурма)</string>
+    <string name="poi_cuisine_doner">Донер-кебаб (шаурма); Страва</string>
     <string name="poi_cuisine_chinese">Китайська</string>
     <string name="poi_tower_construction_dome">Конструкція: купол</string>
     <string name="poi_full_service_yes">Повний комплекс послуг</string>
@@ -3440,7 +3439,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">Ремонт трансмісії</string>
     <string name="poi_service_vehicle_motor_yes">Двигун</string>
     <string name="poi_service_vehicle_insurance_yes">Страхування</string>
-    <string name="poi_service_vehicle_tyres_yes">Шиномонтаж</string>
+    <string name="poi_service_vehicle_tyres_yes">Шини; Шина; Шини; Шина</string>
     <string name="poi_via_ferrata_scale">Складність</string>
     <string name="poi_cable_number">Кількість тросів</string>
     <string name="poi_glacier_type_mountain">Гірський</string>
@@ -4994,10 +4993,9 @@
     <string name="poi_aerodrome_type_airfield">Аеродром</string>
     <string name="poi_consulate">Консульство</string>
     <string name="poi_hazard_falling_rocks">Падаючі камені</string>
-    <string name="poi_hazard_additional_landslide">Небезпека: зсув</string>
+    <string name="poi_hazard_landslide">Зсув</string>
     <string name="poi_hazard_contamination">Забруднення</string>
     <string name="poi_hazard_additional_yes">Небезпека</string>
-    <string name="poi_hazard_additional_slippery_road">Слизька дорога</string>
     <string name="poi_hazard_yes">Небезпека</string>
     <string name="poi_footway">Доріжка</string>
     <string name="poi_area_highway">Пішохідна зона</string>
@@ -5140,23 +5138,29 @@
     <string name="poi_canoe_egress">Винос каное</string>
     <string name="poi_canoe_put_in_egress">Спуск і витяг каное</string>
     <string name="poi_whitewater_hazard">Небезпека бурхливої води</string>
-    <string name="poi_hazard_additional_hole">Отвір</string>
-    <string name="poi_hazard_additional_curve">Кривизна</string>
-    <string name="poi_hazard_additional_curves">Криві</string>
-    <string name="poi_hazard_additional_pedestrians">Пішоходи</string>
-    <string name="poi_hazard_additional_children">Діти</string>
-    <string name="poi_hazard_additional_animal_crossing">Перетин тварин</string>
-    <string name="poi_hazard_additional_dangerous_junction">Небезпечне перехрестя</string>
-    <string name="poi_hazard_additional_school_zone">Шкільна зона</string>
-    <string name="poi_hazard_additional_cyclists">Велосипедисти</string>
-    <string name="poi_hazard_additional_shooting_range">Стрілецький тир</string>
-    <string name="poi_hazard_additional_queues_likely">Ймовірні черги</string>
-    <string name="poi_hazard_additional_side_winds">Бічні вітри</string>
-    <string name="poi_hazard_additional_ice">Лід</string>
+    <string name="poi_hazard_hole">Отвір</string>
+    <string name="poi_hazard_curve">Кривизна</string>
+    <string name="poi_hazard_curves">Криві</string>
+    <string name="poi_hazard_pedestrians">Пішоходи</string>
+    <string name="poi_hazard_children">Діти</string>
+    <string name="poi_hazard_animal_crossing">Перетин тварин</string>
+    <string name="poi_hazard_dangerous_junction">Небезпечне перехрестя</string>
+    <string name="poi_hazard_school_zone">Шкільна зона</string>
+    <string name="poi_hazard_cyclists">Велосипедисти</string>
+    <string name="poi_hazard_shooting_range">Стрілецький тир</string>
+    <string name="poi_hazard_queues_likely">Ймовірні черги</string>
+    <string name="poi_hazard_side_winds">Бічні вітри</string>
+    <string name="poi_hazard_ice">Лід</string>
     <string name="poi_historic_spacecraft">Історичний космічний корабель</string>
     <string name="poi_barrier_chain">Ланцюговий бар\'єр</string>
     <string name="poi_barrier_log">Журнал</string>
     <string name="poi_barrier_sliding_gate">Розсувні ворота</string>
     <string name="poi_piste_downhill">Схили вниз по схилах; Гірськолижні схили; Гірськолижні схили</string>
     <string name="poi_route_activity_type_skiing">Лижні маршрути</string>
+    <string name="poi_sample_collection_filter">Збір зразків</string>
+    <string name="x">X (раніше Твіттер)</string>
+    <string name="poi_sample_collection">Взяття біоматеріалу</string>
+    <string name="poi_sample_collection_yes">Так</string>
+    <string name="poi_sample_collection_covid19">COVID19</string>
+    <string name="poi_sample_collection_blood">Кров</string>
 </resources>

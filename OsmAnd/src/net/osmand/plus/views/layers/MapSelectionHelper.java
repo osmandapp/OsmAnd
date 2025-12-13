@@ -330,7 +330,7 @@ public class MapSelectionHelper {
 
 					AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 					AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names);
-					detailsObject = amenitySearcher.searchDetailedObject(request, settings);
+					detailsObject = amenitySearcher.searchDetailedObject(request, settings, null);
 				} else {
 					ObfMapObject obfMapObject = getObfMapObject(mapSymbol);
 					if (obfMapObject != null) {
@@ -369,7 +369,7 @@ public class MapSelectionHelper {
 								} else {
 									AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 									AmenitySearcher.Request request = new AmenitySearcher.Request(renderedObject);
-									detailsObject = amenitySearcher.searchDetailedObject(request, settings);
+									detailsObject = amenitySearcher.searchDetailedObject(request, settings, null);
 									if (detailsObject != null) {
 										detailsObject.setMapIconName(getMapIconName(symbolInfo));
 										addGeometry(detailsObject, obfMapObject);
@@ -641,7 +641,7 @@ public class MapSelectionHelper {
 		AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
 		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 		AmenitySearcher.Request request = new AmenitySearcher.Request(object);
-		BaseDetailsObject detail = amenitySearcher.searchDetailedObject(request, settings);
+		BaseDetailsObject detail = amenitySearcher.searchDetailedObject(request, settings, null);
 		if (detail != null) {
 			if (object.getX() != null && object.getX().size() > 1 && object.getY() != null && object.getY().size() > 1) {
 				detail.setX(object.getX());

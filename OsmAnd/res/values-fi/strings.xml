@@ -4278,7 +4278,7 @@
     <string name="altitude_correction">Korkeudun korjaus</string>
     <string name="average_speed_skip_stops">Ota pysähdykset huomioon</string>
     <string name="precise">Tarkka</string>
-    <string name="shared_sting_all_colors">Kaikki värit</string>
+    <string name="shared_string_all_colors">Kaikki värit</string>
     <string name="battery_optimization_settings">Virran optimoinnin asetukset</string>
     <string name="shared_string_rows">Rivit</string>
     <string name="key_event_category_actions">Toiminnot</string>

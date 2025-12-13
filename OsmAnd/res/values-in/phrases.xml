@@ -2185,7 +2185,7 @@
     <string name="poi_diplomatic_permanent_mission">Misi tetap</string>
     <string name="poi_diplomatic_delegation">Delegasi</string>
     <string name="poi_public_bookcase_type_wooden_cabinet">Jenis: lemari kayu</string>
-    <string name="poi_cuisine_coffee">Kopi</string>
+    <string name="poi_cuisine_coffee_shop">Kopi</string>
     <string name="poi_cuisine_chicken">Ayam</string>
     <string name="poi_cuisine_breakfast">Sarapan</string>
     <string name="poi_cuisine_gastropub">Gastropub</string>
@@ -4857,12 +4857,11 @@
     <string name="poi_climbing_route_bottom">Bagian bawah rute panjat tebing</string>
     <string name="poi_presbyterian_church">Gereja Presbiterian</string>
     <string name="poi_aerodrome_type_airfield">Lapangan Terbang</string>
-    <string name="poi_hazard_additional_landslide">Bahaya: tanah longsor</string>
+    <string name="poi_hazard_landslide">Bahaya: tanah longsor</string>
     <string name="poi_hazard_additional_yes">Bahaya</string>
     <string name="poi_hazard_falling_rocks">Batu jatuh</string>
     <string name="poi_hazard_contamination">Kontaminasi</string>
     <string name="poi_hazard_yes">Bahaya</string>
-    <string name="poi_hazard_additional_slippery_road">Jalan licin</string>
     <string name="poi_steps">Anak tangga</string>
     <string name="poi_area_highway">Area Mobilitas</string>
     <string name="poi_area_highway_steps">Area tangga</string>

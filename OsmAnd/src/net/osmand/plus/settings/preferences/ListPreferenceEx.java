@@ -9,6 +9,7 @@ import androidx.preference.PreferenceDataStore;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndPreferencesDataStore;
+import net.osmand.util.Algorithms;
 
 public class ListPreferenceEx extends DialogPreference {
 
@@ -78,9 +79,18 @@ public class ListPreferenceEx extends DialogPreference {
 
 	public int findIndexOfValue(Object value) {
 		if (value != null && entryValues != null) {
+			double valueDouble = Double.NaN;
+			if (value instanceof String that) {
+				valueDouble = Algorithms.parseDoubleSilently(that, Double.NaN);
+			}
 			for (int i = 0; i < entryValues.length; i++) {
 				if (entryValues[i].equals(value)) {
 					return i;
+				} else if (!Double.isNaN(valueDouble) && entryValues[i] instanceof String entryString) {
+					double entryDouble = Algorithms.parseDoubleSilently(entryString, Double.NaN);
+					if (!Double.isNaN(entryDouble) && Double.compare(entryDouble, valueDouble) == 0) {
+						return i;
+					}
 				}
 			}
 		}

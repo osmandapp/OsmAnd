@@ -1028,7 +1028,7 @@
     <string name="mark_to_delete">Silmek için işaretle</string>
     <string name="confirmation_to_clear_history">Geçmişi temizle\?</string>
     <string name="no_updates_available">Kullanılabilir güncelleme yok</string>
-    <string name="download_live_updates">Canlı güncelleştirmeler</string>
+    <string name="download_live_updates">Canlı güncellemeler</string>
     <string name="rendering_value_default13_name">Varsayılan (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Varsayılan (yarı saydam camgöbeği)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX rengi</string>
@@ -5043,7 +5043,7 @@
     <string name="speed_limit_warning">Hız sınırı uyarısı</string>
     <string name="shared_string_speedometer">Hız göstergesi</string>
     <string name="when_exceeded">Aşıldığında</string>
-    <string name="shared_sting_all_colors">Tüm renkler</string>
+    <string name="shared_string_all_colors">Tüm renkler</string>
     <string name="shared_string_limit">Sınır</string>
     <string name="speedometer_description">GPS tarafından bildirilen anlık hızınızı gösterir</string>
     <string name="rendering_value_name_only_name">Yalnızca ad</string>
@@ -5785,7 +5785,7 @@
     <string name="description_subscription_fastspring">FastSpring hesap yönetimi portalı üzerinden aboneliğinizi yönetebilir veya iptal edebilirsiniz.</string>
     <string name="manage_purchases">Satın alımları yönet</string>
     <string name="failed_to_connect">%1s bağlantısı sağlanamadı</string>
-    <string name="shared_sting_osm_link">OSM bağlantısı</string>
+    <string name="shared_string_osm_link">OSM bağlantısı</string>
     <string name="deleting">Siliniyor…</string>
     <string name="turn_by_turn_directions">Adım adım yol tarifi</string>
     <string name="osm_live_payment_renews_3_years">Üç yılda bir yenilenir</string>
@@ -5869,4 +5869,7 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="accessibility_independent_features">Bağımsız özellikler</string>
     <string name="lang_en_barebones">İngilizce (temel)</string>
+    <string name="requires_internet_connection">İnternet bağlantısı gerektirir</string>
+    <string name="save_and_access_articles_offline">Verileri kaydedin ve makalelere çevrim dışı olarak her yerden erişin</string>
+    <string name="app_profile">Uygulama profili</string>
 </resources>

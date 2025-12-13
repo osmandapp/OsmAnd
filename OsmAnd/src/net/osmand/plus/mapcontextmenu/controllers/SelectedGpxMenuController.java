@@ -96,6 +96,9 @@ public class SelectedGpxMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
+		if (getPointDescription() != null && getPointDescription().getIconDrawable() != null) {
+			return getPointDescription().getIconDrawable();
+		}
 		int color = ColorUtilities.getActiveColorId(!isLight());
 		return getIcon(R.drawable.ic_action_polygom_dark, color);
 	}

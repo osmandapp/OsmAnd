@@ -4213,7 +4213,7 @@
     <string name="download_to_device">Laadi alla seadmesse</string>
     <string name="open_weather_action_description">Võid avada ekraanivaate detailse ilmaennustusega.</string>
     <string name="open_weather_action">Ava ilmateate vaade</string>
-    <string name="shared_sting_all_colors">Kõik värvid</string>
+    <string name="shared_string_all_colors">Kõik värvid</string>
     <string name="routing_type_a_star_2_phase">A* 2-faasiline</string>
     <string name="auto_zoom_smooth">Sujuv</string>
     <string name="auto_zoom_discrete">Mittepidev</string>
@@ -5338,7 +5338,7 @@
     <string name="backup_delete_data_warning_extended">Selle toiminguga eemaldad pilvest kõik valitud andmed ning neid ei saa hiljem taastada.</string>
     <string name="amount_of_total_used">Kasutusel %1$s/%2$s</string>
     <string name="delete_data">Kustuta andmed</string>
-    <string name="shared_sting_osm_link">OSM-i link</string>
+    <string name="shared_string_osm_link">OSM-i link</string>
     <string name="lang_en_barebones">inglise (lihtne)</string>
     <string name="max_axle_load_description">Sisesta oma sõiduki suurim lubatud teljekoormus ja saad vältida kaalupiirangutega teid ja sildu.</string>
     <string name="max_weight_at_full_load_description">Sisesta oma sõiduki suurim lubatud kaal ja saad vältida kaalupiirangutega teid ja sildu.</string>
