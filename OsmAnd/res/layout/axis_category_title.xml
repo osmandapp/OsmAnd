@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:gravity="center_vertical"
+	android:minHeight="@dimen/bottom_sheet_cancel_button_height_small"
+	android:orientation="horizontal"
+	android:paddingStart="@dimen/content_padding"
+	android:paddingLeft="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingRight="@dimen/content_padding">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+		tools:src="@drawable/ic_action_coordinates_latitude"/>
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@android:id/title"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:gravity="center_vertical"
+		android:letterSpacing="@dimen/description_letter_spacing"
+		android:singleLine="true"
+		android:textColor="@color/preference_category_title"
+		android:textSize="@dimen/default_desc_text_size"
+		app:typefaceWeight="medium"
+		tools:text="@string/plugin_settings" />
+
+</LinearLayout>

@@ -53,7 +53,6 @@ import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -83,6 +82,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment implements SegmentActionsListener {
 
@@ -135,9 +135,11 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 			graphsAdapter.updateGraph(graphTabPosition);
 			boolean showSegmentsTab = false;
 			if (graphsAdapter.isUseSingleMainTab()) {
-				List<GPXDataSetType[]> availableYAxis = new ArrayList<>();
-				availableYAxis.addAll(ChartModeBottomSheet.getAvailableDefaultYTypes(selectedGpxFile.getTrackAnalysis(app)));
-				availableYAxis.addAll(ChartModeBottomSheet.getAvailableSensorYTypes(selectedGpxFile.getTrackAnalysis(app)));
+				List<GPXDataSetType[]> availableYAxis = new ArrayList<>(ChartModeBottomSheet.getAvailableDefaultYTypes(selectedGpxFile.getTrackAnalysis(app)));
+				Map<Integer, List<GPXDataSetType[]>> sensorGrouped = ChartModeBottomSheet.getAvailableSensorYTypes(selectedGpxFile.getTrackAnalysis(app));
+				for (List<GPXDataSetType[]> list : sensorGrouped.values()) {
+					availableYAxis.addAll(list);
+				}
 				if (!Algorithms.isEmpty(availableYAxis)) {
 					showSegmentsTab = !Algorithms.isEmpty(availableYAxis) || graphsAdapter.isTabsVisible();
 				}

@@ -15,6 +15,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.annotation.MainThread
+import com.github.mikephil.charting.charts.LineChart
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import net.osmand.Location
@@ -25,11 +26,15 @@ import net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_VEHICLE_METRICS_ID
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.charts.GPXDataSetAxisType
+import net.osmand.plus.charts.GPXDataSetType
+import net.osmand.plus.charts.OrderedLineDataSet
 import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.plugins.OsmandPlugin
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin
 import net.osmand.plus.plugins.externalsensors.DevicesHelper
+import net.osmand.plus.plugins.externalsensors.SensorAttributesUtils
 import net.osmand.plus.plugins.externalsensors.VehicleMetricsBLEDeviceHelper
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.DeviceListener
@@ -60,7 +65,10 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
 import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.shared.data.KLatLon
+import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.gpx.GpxUtilities
+import net.osmand.shared.gpx.PointAttributes
+import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDConnector
 import net.osmand.shared.obd.OBDDataComputer
@@ -613,6 +621,98 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 
 	private fun isDisconnected(): Boolean {
 		return connectionState == OBDConnectionState.DISCONNECTED
+	}
+
+	override fun getTrackPointsAnalyser(): GpxTrackAnalysis.TrackPointsAnalyser {
+		return GpxTrackAnalysis.TrackPointsAnalyser { analysis: GpxTrackAnalysis, point: WptPt, attribute: PointAttributes ->
+			onAnalysePoint(
+				analysis,
+				point,
+				attribute
+			)
+		}
+	}
+
+	private fun onAnalysePoint(
+		analysis: GpxTrackAnalysis,
+		point: WptPt,
+		attribute: PointAttributes
+	) {
+		OBDCommand.entries
+			.mapNotNull { it.gpxTag }
+			.forEach { tag ->
+				val value = getPointAttribute(point, tag)
+				attribute.setAttributeValue(tag, value)
+
+				if (!analysis.hasData(tag) && attribute.hasValidValue(tag)) {
+					analysis.setHasData(tag, true)
+				}
+			}
+	}
+
+	private fun getPointAttribute(wptPt: WptPt, key: String): Float {
+		var value = wptPt.getDeferredExtensionsToRead()[key]
+		if (Algorithms.isEmpty(value)) {
+			value = wptPt.getExtensionsToRead()[key]
+		}
+		return Algorithms.parseFloatSilently(value, 0f)
+	}
+
+	override fun getAvailableGPXDataSetTypes(
+		analysis: GpxTrackAnalysis,
+		availableTypes: MutableMap<Int, MutableList<Array<GPXDataSetType?>>>
+	) {
+		val pluginKey = R.string.obd_widget_group
+		val pluginList = mutableListOf<Array<GPXDataSetType?>>()
+
+		for (item in OBDDataSet.entries) {
+			val tag = item.command.gpxTag
+			if (tag != null && analysis.hasData(tag)) {
+				pluginList.add(arrayOf(item.dataSetType))
+			}
+		}
+
+		if (pluginList.isNotEmpty()) {
+			availableTypes[pluginKey] = pluginList
+		}
+	}
+
+	override fun getOrderedLineDataSet(
+		chart: LineChart,
+		analysis: GpxTrackAnalysis,
+		graphType: GPXDataSetType,
+		axisType: GPXDataSetAxisType,
+		calcWithoutGaps: Boolean, useRightAxis: Boolean
+	): OrderedLineDataSet {
+		return SensorAttributesUtils.createSensorDataSet(
+			app,
+			chart,
+			analysis,
+			graphType,
+			axisType,
+			useRightAxis,
+			true,
+			calcWithoutGaps
+		)
+	}
+
+	enum class OBDDataSet(val dataSetType: GPXDataSetType, val command: OBDCommand) {
+		INTAKE_TEMPERATURE(GPXDataSetType.INTAKE_TEMPERATURE, OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND),
+		AMBIENT_TEMPERATURE(GPXDataSetType.AMBIENT_TEMPERATURE, OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND),
+		COOLANT_TEMPERATURE(GPXDataSetType.COOLANT_TEMPERATURE, OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND),
+		ENGINE_OIL_TEMPERATURE(GPXDataSetType.ENGINE_OIL_TEMPERATURE, OBDCommand.OBD_ENGINE_OIL_TEMPERATURE_COMMAND),
+
+		ENGINE_SPEED(GPXDataSetType.ENGINE_SPEED, OBDCommand.OBD_RPM_COMMAND),
+		ENGINE_RUNTIME(GPXDataSetType.ENGINE_RUNTIME, OBDCommand.OBD_ENGINE_RUNTIME_COMMAND),
+		ENGINE_LOAD(GPXDataSetType.ENGINE_LOAD, OBDCommand.OBD_CALCULATED_ENGINE_LOAD_COMMAND),
+
+		FUEL_PRESSURE(GPXDataSetType.FUEL_PRESSURE, OBDCommand.OBD_FUEL_PRESSURE_COMMAND),
+		FUEL_CONSUMPTION(GPXDataSetType.FUEL_CONSUMPTION, OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND),
+		REMAINING_FUEL(GPXDataSetType.REMAINING_FUEL, OBDCommand.OBD_FUEL_LEVEL_COMMAND),
+
+		BATTERY_LEVEL(GPXDataSetType.BATTERY_LEVEL, OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND),
+		VEHICLE_SPEED(GPXDataSetType.VEHICLE_SPEED, OBDCommand.OBD_SPEED_COMMAND),
+		THROTTLE_POSITION(GPXDataSetType.THROTTLE_POSITION, OBDCommand.OBD_THROTTLE_POSITION_COMMAND)
 	}
 
 	companion object {
