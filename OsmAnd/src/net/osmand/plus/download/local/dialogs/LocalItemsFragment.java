@@ -52,6 +52,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class LocalItemsFragment extends LocalBaseFragment implements LocalItemListener,
 		MapsSortModeListener, LocalSizeCalculationListener {
@@ -69,6 +70,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	private LocalItemsAdapter adapter;
 	private boolean selectionMode;
+	private List<Object> sortedRootItems;
 	private MultipleLocalItem selectedCountry;
 	private MemoryInfo memoryInfo;
 
@@ -200,12 +202,39 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	@NonNull
 	private List<Object> getItemsToDisplay() {
-		List<BaseLocalItem> countryItems = getSortedCountryItems();
-		return countryItems != null ? new ArrayList<>(countryItems) : getSortedItems();
+		updateDisplayItems();
+		List<BaseLocalItem> countryItems = getSortedCountryItems(false);
+		return countryItems != null ? new ArrayList<>(countryItems) : sortedRootItems;
+	}
+
+	@Nullable
+	public List<BaseLocalItem> getSortedCountryItems(boolean update) {
+		if (update) updateDisplayItems();
+		List<BaseLocalItem> countryItems = selectedCountry != null ? selectedCountry.getItems() : null;
+		if (countryItems != null) {
+			sortItems(countryItems);
+		}
+		return countryItems;
+	}
+
+	private void updateDisplayItems() {
+		sortedRootItems = getSortedRootItems();
+
+		if (selectedCountry != null) {
+			String countryId = selectedCountry.getId();
+			selectedCountry = null;
+			for (Object o : sortedRootItems) {
+				if (o instanceof MultipleLocalItem multipleLocalItem) {
+					if (Objects.equals(countryId, multipleLocalItem.getId())) {
+						selectedCountry = multipleLocalItem;
+					}
+				}
+			}
+		}
 	}
 
 	@NonNull
-	private List<Object> getSortedItems() {
+	private List<Object> getSortedRootItems() {
 		List<BaseLocalItem> activeItems = new ArrayList<>();
 		List<BaseLocalItem> backupedItems = new ArrayList<>();
 
@@ -220,8 +249,8 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 			}
 			LocalItemType type = group.getType();
 			if (type.isGroupingByCountrySupported()) {
-				activeItems = groupItemsByCountry(type, activeItems);
-				backupedItems = groupItemsByCountry(type, backupedItems);
+				activeItems = groupItemsByCountry(type, activeItems, "activated");
+				backupedItems = groupItemsByCountry(type, backupedItems, "deactivated");
 			}
 			sortItems(activeItems);
 			sortItems(backupedItems);
@@ -235,18 +264,10 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		return items;
 	}
 
-	@Nullable
-	public List<BaseLocalItem> getSortedCountryItems() {
-		List<BaseLocalItem> countryItems = selectedCountry != null ? selectedCountry.getItems() : null;
-		if (countryItems != null) {
-			sortItems(countryItems);
-		}
-		return countryItems;
-	}
-
 	@NonNull
 	private List<BaseLocalItem> groupItemsByCountry(@NonNull LocalItemType type,
-	                                                @NonNull List<BaseLocalItem> flatItems) {
+													@NonNull List<BaseLocalItem> flatItems,
+													@NonNull String header) {
 		Map<String, List<BaseLocalItem>> groups = new HashMap<>();
 		List<BaseLocalItem> ungroupedItems = new ArrayList<>();
 		OsmandRegions regions = app.getRegions();
@@ -270,7 +291,9 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		for (Map.Entry<String, List<BaseLocalItem>> entry : groups.entrySet()) {
 			List<BaseLocalItem> folderItems = entry.getValue();
 			if (folderItems.size() > 1) {
-				folders.add(new MultipleLocalItem(entry.getKey(), type, folderItems));
+				String name = entry.getKey();
+				String id = name.toLowerCase() + "_" + header.toLowerCase();
+				folders.add(new MultipleLocalItem(id, name, type, folderItems));
 			} else if (!folderItems.isEmpty()) {
 				ungroupedItems.add(folderItems.get(0));
 			}

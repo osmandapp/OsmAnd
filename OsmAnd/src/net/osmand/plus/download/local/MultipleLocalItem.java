@@ -10,16 +10,19 @@ import java.util.List;
 
 public class MultipleLocalItem extends BaseLocalItem {
 
+	private final String id;
 	private final String name;
 	private final List<BaseLocalItem> items;
 	private long totalSize;
 	private long minTimestamp = Long.MAX_VALUE;
 	private long maxTimestamp = Long.MIN_VALUE;
 
-	public MultipleLocalItem(@NonNull String name,
+	public MultipleLocalItem(@NonNull String id,
+	                         @NonNull String name,
 	                         @NonNull LocalItemType type,
 	                         @NonNull List<BaseLocalItem> items) {
 		super(type);
+		this.id = id;
 		this.name = name;
 		this.items = items;
 		calculateStats();
@@ -55,6 +58,11 @@ public class MultipleLocalItem extends BaseLocalItem {
 	@NonNull
 	public List<BaseLocalItem> getItems() {
 		return items;
+	}
+
+	@NonNull
+	public String getId() {
+		return id;
 	}
 
 	@NonNull

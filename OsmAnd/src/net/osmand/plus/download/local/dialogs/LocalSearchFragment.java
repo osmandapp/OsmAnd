@@ -211,7 +211,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	@Nullable
 	private List<BaseLocalItem> getSortedCountryItems() {
 		if (getTargetFragment() instanceof LocalItemsFragment fragment) {
-			return fragment.getSortedCountryItems();
+			return fragment.getSortedCountryItems(true);
 		}
 		return null;
 	}
@@ -235,10 +235,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	}
 
 	private void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			activity.onBackPressed();
-		}
+		callActivity(FragmentActivity::onBackPressed);
 	}
 
 	@Override
