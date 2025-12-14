@@ -153,6 +153,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var captureSession: android.hardware.camera2.CameraCaptureSession? = null
 	private var calculatedFov = 60.0 // Default fallback
 	private var previewSize: Size? = null
+	private var baseTransformMatrix: Matrix? = null
 
 	companion object {
 		private val log = LoggerFactory.getLogger("StarMapFragment")
@@ -770,6 +771,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			scaleX = (previewSize!!.height * scale) / viewWidth
 			scaleY = (previewSize!!.width * scale) / viewHeight
 		}
+		baseTransformMatrix = Matrix(matrix)
 		cameraTextureView.setTransform(matrix)
 
 		// Update FOV based on Aspect Ratio Crop
@@ -977,6 +979,28 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			manualAzimuth = true
 			app.osmandMap.mapView.rotateToAnimate(-azimuth.toFloat())
 		}
+
+		starView.onViewAngleChangeListener = { fov ->
+			updateCameraZoom(fov)
+		}
+	}
+
+	private fun updateCameraZoom(fov: Double) {
+		if (!isCameraOverlayEnabled || baseTransformMatrix == null || cameraTextureView.width == 0) return
+
+		// scale = tan(baseFov/2) / tan(targetFov/2)
+		// calculatedFov is our base effective FOV at 1x scale
+		val baseRad = Math.toRadians(calculatedFov / 2.0)
+		val targetRad = Math.toRadians(fov / 2.0)
+		
+		val scale = (tan(baseRad) / tan(targetRad)).toFloat()
+
+		val matrix = Matrix(baseTransformMatrix)
+		val centerX = cameraTextureView.width / 2f
+		val centerY = cameraTextureView.height / 2f
+
+		matrix.postScale(scale, scale, centerX, centerY)
+		cameraTextureView.setTransform(matrix)
 	}
 
 	private fun updateStarMap(updateAzimuth: Boolean = false) {

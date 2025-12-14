@@ -137,6 +137,7 @@ class StarView @JvmOverloads constructor(
 
 	var onAnimationFinished: (() -> Unit)? = null
 	var onAzimuthManualChangeListener: ((Double) -> Unit)? = null
+	var onViewAngleChangeListener: ((Double) -> Unit)? = null
 
 	// --- View State ---
 	var roll = 0.0 // Camera roll in degrees
@@ -232,8 +233,12 @@ class StarView @JvmOverloads constructor(
 	}
 
 	fun setViewAngle(angle: Double) {
-		this.viewAngle = max(10.0, min(150.0, angle))
-		invalidate()
+		val newAngle = max(10.0, min(150.0, angle))
+		if (abs(this.viewAngle - newAngle) > 0.001) {
+			this.viewAngle = newAngle
+			onViewAngleChangeListener?.invoke(newAngle)
+			invalidate()
+		}
 	}
 
 	fun setAzimuth(azimuth: Double, animate: Boolean = false, fps: Int? = 30) {
@@ -336,15 +341,21 @@ class StarView @JvmOverloads constructor(
 	}
 
 	fun zoomIn() {
-		viewAngle /= 1.5
-		viewAngle = max(10.0, min(150.0, viewAngle))
-		invalidate()
+		val newAngle = max(10.0, min(150.0, viewAngle / 1.5))
+		if (abs(viewAngle - newAngle) > 0.001) {
+			viewAngle = newAngle
+			onViewAngleChangeListener?.invoke(viewAngle)
+			invalidate()
+		}
 	}
 
 	fun zoomOut() {
-		viewAngle *= 1.5
-		viewAngle = max(10.0, min(150.0, viewAngle))
-		invalidate()
+		val newAngle = max(10.0, min(150.0, viewAngle * 1.5))
+		if (abs(viewAngle - newAngle) > 0.001) {
+			viewAngle = newAngle
+			onViewAngleChangeListener?.invoke(viewAngle)
+			invalidate()
+		}
 	}
 
 	private fun recalculatePositions(time: Time, updateTargets: Boolean) {
@@ -1000,9 +1011,12 @@ class StarView @JvmOverloads constructor(
 
 	private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
 		override fun onScale(detector: ScaleGestureDetector): Boolean {
-			viewAngle /= detector.scaleFactor
-			viewAngle = max(10.0, min(150.0, viewAngle))
-			invalidate()
+			val newAngle = max(10.0, min(150.0, viewAngle / detector.scaleFactor))
+			if (abs(viewAngle - newAngle) > 0.001) {
+				viewAngle = newAngle
+				onViewAngleChangeListener?.invoke(viewAngle)
+				invalidate()
+			}
 			return true
 		}
 	}
