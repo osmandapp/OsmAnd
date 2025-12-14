@@ -138,7 +138,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	// Low pass filter for smoothing
 	private var smoothedAzimuth = 0.0
 	private var smoothedAltitude = 45.0
-	private val filterAlpha = 0.1 // Smoothing factor
+	
+	// Adaptive Smoothing
+	private val minAlpha = 0.03
+	private val maxAlpha = 0.3
+	private val jitterThresh = 0.5
+	private val moveThresh = 2.0
+	
+	private var lastAccuracyWarningTime = 0L
 
 	// --- Camera Overlay ---
 	private var isCameraOverlayEnabled = false
@@ -529,29 +536,44 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			if (azDiff > 180) azDelta = azDiff - 360
 			else if (azDiff < -180) azDelta = azDiff + 360
 
-			smoothedAzimuth += azDelta * filterAlpha
+			// Adaptive Smoothing for Azimuth
+			val alphaAz = calculateAdaptiveAlpha(azDelta)
+			smoothedAzimuth += azDelta * alphaAz
 			if (smoothedAzimuth >= 360) smoothedAzimuth -= 360
 			if (smoothedAzimuth < 0) smoothedAzimuth += 360
 
-			smoothedAltitude += (altitudeDeg - smoothedAltitude) * filterAlpha
+			// Adaptive Smoothing for Altitude
+			val altDelta = altitudeDeg - smoothedAltitude
+			val alphaAlt = calculateAdaptiveAlpha(altDelta)
+			smoothedAltitude += altDelta * alphaAlt
 
 			// Calculate Roll (Projected Zenith angle on Screen)
-			// Zenith in Screen Coords is the 3rd row of remappedRotationMatrix
 			val zenithX = remappedRotationMatrix[6]
 			val zenithY = remappedRotationMatrix[7]
-			// atan2(y, x) -> atan2(zenithX, zenithY) because X is "Y" in the atan2 plane logic for roll?
-			// see reasoning in Implementation Plan:
-			// Zenith Vector Z_screen = (M[6], M[7]).
-			// We want angle from Screen Up (Y+).
-			// If Upright, Z_screen = (0, 1). Angle 0.
-			// atan2(M[6], M[7]) -> atan2(0, 1) = 0.
-			// If 90 CW, Z_screen = (-1, 0). Angle -90.
-			// atan2(-1, 0) = -90.
-			// This matches.
 			val rollDeg = Math.toDegrees(atan2(zenithX.toDouble(), zenithY.toDouble()))
 
 			starView.setCenter(smoothedAzimuth, smoothedAltitude)
 			starView.roll = rollDeg
+			
+			// Compass Calibration Check
+			if (event.sensor.type == Sensor.TYPE_ROTATION_VECTOR || event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
+				if (event.accuracy == SensorManager.SENSOR_STATUS_UNRELIABLE || event.accuracy == SensorManager.SENSOR_STATUS_ACCURACY_LOW) {
+					val currentTime = System.currentTimeMillis()
+					if (currentTime - lastAccuracyWarningTime > 10000) { // Warn every 10s max
+						Toast.makeText(context, "Compass calibration needed", Toast.LENGTH_SHORT).show()
+						lastAccuracyWarningTime = currentTime
+					}
+				}
+			}
+		}
+	}
+	
+	private fun calculateAdaptiveAlpha(delta: Double): Double {
+		val absDelta = kotlin.math.abs(delta)
+		return when {
+			absDelta < jitterThresh -> minAlpha // Very stable for jitter
+			absDelta > moveThresh -> maxAlpha   // Fast response
+			else -> minAlpha + (absDelta - jitterThresh) * (maxAlpha - minAlpha) / (moveThresh - jitterThresh)
 		}
 	}
 
