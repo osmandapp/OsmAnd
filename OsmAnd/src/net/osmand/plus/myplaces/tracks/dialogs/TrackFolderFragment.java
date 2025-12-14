@@ -258,13 +258,8 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		super.restoreState(bundle);
 
 		if (rootFolder != null && !Algorithms.isEmpty(selectedItemPath)) {
-			TrackItem trackItem = geTrackItem(rootFolder, selectedItemPath);
-			if (trackItem != null) {
-				int index = adapter.getItemPosition(trackItem);
-				if (index != -1) {
-					recyclerView.scrollToPosition(index);
-				}
-			}
+			TrackItem trackItem = getTrackItem(rootFolder, selectedItemPath);
+			scrollToItemPosition(trackItem);
 			selectedItemPath = null;
 		}
 	}
@@ -277,6 +272,15 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		selectionHelper.setSelectedItems(selectedFolder.getFlattenedTrackItems());
 		selectionHelper.setOriginalSelectedItems(selectedFolder.getFlattenedTrackItems());
 		return selectionHelper;
+	}
+
+	protected void scrollToItemPosition(@Nullable TrackItem trackItem) {
+		if (trackItem != null && adapter != null && recyclerView != null) {
+			int index = adapter.getItemPosition(trackItem);
+			if (index != -1) {
+				recyclerView.scrollToPosition(index);
+			}
+		}
 	}
 
 	@Override

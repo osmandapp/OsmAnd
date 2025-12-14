@@ -313,11 +313,11 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		}
 	}
 
-	private void openSmartFolder(@NonNull SmartFolder smartFolder) {
+	private void openSmartFolder(@NonNull SmartFolder smartFolder, @Nullable TrackItem trackItem) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FragmentManager manager = activity.getSupportFragmentManager();
-			SmartFolderFragment.Companion.showInstance(manager, smartFolder, this);
+			SmartFolderFragment.Companion.showInstance(manager, smartFolder, trackItem, this);
 		}
 	}
 
@@ -326,14 +326,14 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		if (group instanceof TrackFolder folder) {
 			openTrackFolder(folder, null);
 		} else if (group instanceof SmartFolder folder) {
-			openSmartFolder(folder);
+			openSmartFolder(folder, null);
 		} else if (group instanceof VisibleTracksGroup) {
 			showTracksVisibilityDialog(ON_MAP.name(), ON_MAP, false);
 		}
 	}
 
 	public void showSmartFolderDetails(@NonNull SmartFolder folder) {
-		openSmartFolder(folder);
+		openSmartFolder(folder, null);
 	}
 
 	@Override
@@ -400,7 +400,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 		if (rootFolder != null) {
 			if (!Algorithms.isEmpty(selectedItemPath)) {
-				TrackItem trackItem = geTrackItem(rootFolder, selectedItemPath);
+				TrackItem trackItem = getTrackItem(rootFolder, selectedItemPath);
 				if (trackItem != null) {
 					showTrackItem(rootFolder, trackItem);
 				}
@@ -415,7 +415,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	private void showTrackItem(@NonNull TrackFolder folder, @NonNull TrackItem trackItem) {
 		if (smartFolder != null) {
-			openSmartFolder(smartFolder);
+			openSmartFolder(smartFolder, trackItem);
 		} else {
 			KFile file = trackItem.getFile();
 			if(file != null) {
@@ -428,7 +428,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 					}
 				} else {
 					if (smartFolder != null) {
-						openSmartFolder(smartFolder);
+						openSmartFolder(smartFolder, trackItem);
 					} else {
 						openSubfolder(folder, dirFile, trackItem);
 					}
@@ -569,7 +569,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	@Override
 	public void onSmartFolderCreated(@NonNull SmartFolder smartFolder) {
 		updateContent();
-		openSmartFolder(smartFolder);
+		openSmartFolder(smartFolder, null);
 	}
 
 	@Override
