@@ -296,13 +296,13 @@
     <string name="amenity_type_entertainment">გართობა</string>
     <string name="amenity_type_finance">ფინანსები</string>
     <string name="amenity_type_geocache">გეოკეში</string>
-    <string name="amenity_type_healthcare">ჯანმრთელობა</string>
+    <string name="amenity_type_healthcare">მკურნალობა</string>
     <string name="amenity_type_historic">ისტორიული</string>
     <string name="amenity_type_landuse">მოხნული მიწები</string>
     <string name="amenity_type_leisure">თავისუფალი დრო</string>
     <string name="amenity_type_man_made">ქმნილება</string>
     <string name="amenity_type_military">სამხედრო</string>
-    <string name="amenity_type_natural">ბუნება</string>
+    <string name="amenity_type_natural">ბუნებრივი</string>
     <string name="amenity_type_office">ოფისი</string>
     <string name="amenity_type_other">სხვა</string>
     <string name="amenity_type_shop">მაღაზია</string>
@@ -942,7 +942,7 @@
     <string name="plugin_distance_point_time">დრო</string>
     <string name="plugin_distance_point_hdop">სიზუსტე</string>
     <string name="plugin_distance_point_speed">სიჩქარე</string>
-    <string name="plugin_distance_point_ele">სიმაღლე</string>
+    <string name="plugin_distance_point_ele">სიმაღლე ზღვის დონიდან</string>
     <string name="plugin_distance_point">წერტილი</string>
     <string name="gpx_file_name">GPX ფაილის სახელი</string>
     <string name="gpx_saved_sucessfully">GPX ფაილი შენახულია {0}</string>
@@ -1607,7 +1607,7 @@
     <string name="shared_string_never">არასდროს</string>
     <string name="shared_string_selected_lowercase">არჩეულია</string>
     <string name="shared_string_selected">არჩეული</string>
-    <string name="shared_string_disabled">გამორთული</string>
+    <string name="shared_string_disabled">გამორთულია</string>
     <string name="shared_string_enabled">ჩართულია</string>
     <string name="shared_string_disable">გამორთვა</string>
     <string name="shared_string_enable">ჩართვა</string>
@@ -1643,7 +1643,7 @@
     <string name="lang_fa">სპარსული</string>
     <string name="home">სამუშაო დაფა</string>
     <string name="forward">წინ</string>
-    <string name="lang_he">ებრაული</string>
+    <string name="lang_he">ივრითი</string>
     <string name="lang_sw">სუაჰილი</string>
     <string name="rendering_attr_hideText_name">ტექსტი</string>
     <string name="rendering_attr_hideBuildings_name">შენობები</string>
@@ -1670,7 +1670,7 @@
     <string name="lang_id">ინდონეზიური</string>
     <string name="lang_hu">უნგრული</string>
     <string name="lang_hi">ჰინდი</string>
-    <string name="lang_iw">ებრაული</string>
+    <string name="lang_iw">ივრითი</string>
     <string name="lang_el">ბერძნული</string>
     <string name="lang_de">გერმანული</string>
     <string name="lang_ka">ქართული</string>
@@ -2121,7 +2121,7 @@
     <string name="coords_search">კოორდინატების ძებნა</string>
     <string name="lang_hsb">სორბული (ზედა)</string>
     <string name="shared_string_is_open_24_7">ღიაა 24/7</string>
-    <string name="shared_string_is_open">ღიაა</string>
+    <string name="shared_string_is_open">ახლა ღიაა</string>
     <string name="storage_directory_card">მეხსიერების ბარათი</string>
     <string name="coords_format">კოორდინატების ფორმატი</string>
     <string name="lang_es_us">ესპანური (ამერიკული)</string>
@@ -2694,7 +2694,7 @@
     <string name="rendering_attr_highway_class_state_road_name">სახელმწიფო გზა</string>
     <string name="rendering_attr_smoothness_very_horrible_name">საშინელი</string>
     <string name="rendering_attr_smoothness_very_bad_name">ძალიან ცუდი</string>
-    <string name="rendering_attr_surface_fine_gravel_name">ქვიშა</string>
+    <string name="rendering_attr_surface_fine_gravel_name">წმინდა მსხვილი ქვიშა</string>
     <string name="rendering_attr_surface_paving_stones_name">ხრეში</string>
     <string name="rendering_attr_surface_grass_paver_name">ბალახიანი</string>
     <string name="items_added">დამატებულია</string>
@@ -2825,7 +2825,7 @@
     <string name="activity_type_snowmobile_name">თოვლმავალი</string>
     <string name="activity_type_winter_name">ზამთარი</string>
     <string name="routing_engine_vehicle_type_scooter">სკუტერი</string>
-    <string name="troubleshooting">დიაგნოსტიკა</string>
+    <string name="troubleshooting">პრობლემების აღმოფხვრა</string>
     <string name="purchases">შესყიდვები</string>
     <string name="activity_type_walking_name">სიარული</string>
     <string name="restart">რესტარტი</string>
@@ -2867,7 +2867,7 @@
     <string name="shared_string_open_street_map">OSM</string>
     <string name="shared_string_move_up">გადაადგილება ↑</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">სალაშქრო გზები</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">ქსელი</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">ქსელის წევრობა</string>
     <string name="save_track_to_gpx_descrp"/>
     <string name="av_def_action_choose">მოთხოვნისას</string>
     <string name="contact_us">დაგვიკავშირდით</string>
