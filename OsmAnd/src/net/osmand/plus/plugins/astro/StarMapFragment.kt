@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.Matrix
+import android.graphics.RectF
 import android.graphics.SurfaceTexture
 import android.hardware.GeomagneticField
 import android.hardware.Sensor
@@ -14,6 +16,7 @@ import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraDevice
 import android.hardware.camera2.CameraManager
 import android.os.Bundle
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.Surface
 import android.view.TextureView
@@ -141,6 +144,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var cameraDevice: android.hardware.camera2.CameraDevice? = null
 	private var captureSession: android.hardware.camera2.CameraCaptureSession? = null
 	private var calculatedFov = 60.0 // Default fallback
+	private var previewSize: Size? = null
 
 	companion object {
 		private val log = LoggerFactory.getLogger("StarMapFragment")
@@ -201,7 +205,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val starMapControlsContainer = view.findViewById<View>(R.id.star_map_controls_container)
 		val mapControlsContainer = view.findViewById<View>(R.id.map_controls_container)
 
-		val insetsListener = androidx.core.view.OnApplyWindowInsetsListener { v, windowInsets ->
+		val insetsListener = androidx.core.view.OnApplyWindowInsetsListener { _, windowInsets ->
 			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
 			systemBottomInset = insets.bottom
 			updateMapControlsPadding()
@@ -392,7 +396,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 						}
 					}
 				}
-				updateStarMap();
+				updateStarMap()
 				updateStarChart()
 			}
 		} else if (!manualAzimuth && !isArModeEnabled) {
@@ -580,7 +584,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
 					startCameraSession()
 				}
-				override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {}
+				override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {
+					configureTransform(width, height)
+				}
 				override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean = true
 				override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {}
 			}
@@ -597,6 +603,15 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				val characteristics = manager.getCameraCharacteristics(id)
 				if (characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_BACK) {
 					cameraId = id
+
+					// Calculate optimal preview size
+					val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
+					if (map != null) {
+						previewSize = chooseOptimalSize(map.getOutputSizes(SurfaceTexture::class.java),
+							cameraTextureView.width, cameraTextureView.height)
+						// Apply transform immediately based on selected size
+						configureTransform(cameraTextureView.width, cameraTextureView.height)
+					}
 					break
 				}
 			}
@@ -622,10 +637,70 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 	}
 
+	private fun chooseOptimalSize(choices: Array<Size>, viewWidth: Int, viewHeight: Int): Size {
+		// Prefer sizes that match the aspect ratio of the TextureView to minimize cropping
+		val targetRatio = if (viewWidth < viewHeight) {
+			viewHeight.toFloat() / viewWidth
+		} else {
+			viewWidth.toFloat() / viewHeight
+		}
+
+		val tolerance = 0.1f
+		val matchAspect = choices.filter {
+			val ratio = it.width.toFloat() / it.height
+			kotlin.math.abs(ratio - targetRatio) < tolerance
+		}
+
+		val candidates = if (matchAspect.isNotEmpty()) matchAspect else choices.toList()
+
+		// Pick largest available size within candidates to ensure quality
+		return candidates.maxByOrNull { it.width * it.height } ?: choices[0]
+	}
+
+	private fun configureTransform(viewWidth: Int, viewHeight: Int) {
+		val activity = activity ?: return
+		if (null == previewSize || null == cameraTextureView) {
+			return
+		}
+		val rotation = activity.windowManager.defaultDisplay.rotation
+		val matrix = Matrix()
+		val viewRect = RectF(0f, 0f, viewWidth.toFloat(), viewHeight.toFloat())
+		val bufferRect = RectF(0f, 0f, previewSize!!.height.toFloat(), previewSize!!.width.toFloat())
+		val centerX = viewRect.centerX()
+		val centerY = viewRect.centerY()
+
+		if (Surface.ROTATION_90 == rotation || Surface.ROTATION_270 == rotation) {
+			bufferRect.offset(centerX - bufferRect.centerX(), centerY - bufferRect.centerY())
+			matrix.setRectToRect(viewRect, bufferRect, Matrix.ScaleToFit.FILL)
+			val scale = kotlin.math.max(
+				viewHeight.toFloat() / previewSize!!.height,
+				viewWidth.toFloat() / previewSize!!.width
+			)
+			matrix.postScale(scale, scale, centerX, centerY)
+			matrix.postRotate(90f * (rotation - 2), centerX, centerY)
+		} else if (Surface.ROTATION_180 == rotation) {
+			matrix.postRotate(180f, centerX, centerY)
+		} else if (Surface.ROTATION_0 == rotation) {
+			// Portrait mode: Camera sensor is usually landscape, so we need to rotate 90 degrees
+			bufferRect.offset(centerX - bufferRect.centerX(), centerY - bufferRect.centerY())
+			matrix.setRectToRect(viewRect, bufferRect, Matrix.ScaleToFit.FILL)
+			val scale = kotlin.math.max(
+				viewHeight.toFloat() / previewSize!!.height,
+				viewWidth.toFloat() / previewSize!!.width
+			)
+			matrix.postScale(scale, scale, centerX, centerY)
+		}
+		cameraTextureView.setTransform(matrix)
+	}
+
 	private fun createCaptureSession() {
 		try {
 			val texture = cameraTextureView.surfaceTexture!!
-			texture.setDefaultBufferSize(cameraTextureView.width, cameraTextureView.height)
+			if (previewSize != null) {
+				texture.setDefaultBufferSize(previewSize!!.width, previewSize!!.height)
+			} else {
+				texture.setDefaultBufferSize(cameraTextureView.width, cameraTextureView.height)
+			}
 			val surface = Surface(texture)
 
 			val builder = cameraDevice?.createCaptureRequest(android.hardware.camera2.CameraDevice.TEMPLATE_PREVIEW)
