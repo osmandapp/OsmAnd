@@ -145,8 +145,12 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		this.selectedFolder = selectedFolder;
 	}
 
-	public void setSmartFolder(SmartFolder folder) {
+	public void setSmartFolder(@NonNull SmartFolder folder) {
 		smartFolder = folder;
+	}
+
+	public void setSelectedItemPath(@Nullable String selectedItemPath) {
+		this.selectedItemPath = selectedItemPath;
 	}
 
 	@Override
@@ -421,8 +425,8 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	@Override
 	public void restoreState(Bundle bundle) {
 		if (bundle != null && bundle.getInt(TAB_ID) == GPX_TAB) {
-			preSelectedFolder = bundle.getString(SELECTED_FOLDER_KEY);
-			selectedItemPath = bundle.getString(SELECTED_ITEM_PATH_KEY);
+			preSelectedFolder = bundle.getString(SELECTED_FOLDER_KEY, preSelectedFolder);
+			selectedItemPath = bundle.getString(SELECTED_ITEM_PATH_KEY, selectedItemPath);
 
 			String smartFolderName = bundle.getString(SELECTED_SMART_FOLDER_KEY);
 			if (smartFolderName != null) {

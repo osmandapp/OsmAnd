@@ -295,11 +295,13 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		updateContent();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder folder, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder folder,
+	                                @Nullable TrackItem trackItem, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TrackFolderFragment fragment = new TrackFolderFragment();
 			fragment.setRootFolder(folder.getNextAfterRootFolder());
 			fragment.setSelectedFolder(folder);
+			fragment.setSelectedItemPath(trackItem != null ? trackItem.getPath() : null);
 			fragment.setTargetFragment(target, 0);
 			fragment.setRetainInstance(true);
 
