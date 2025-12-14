@@ -81,6 +81,7 @@ import java.util.TimeZone
 import kotlin.math.asin
 import kotlin.math.atan
 import kotlin.math.atan2
+import kotlin.math.tan
 
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
 	OsmAndCompassListener, SensorEventListener {
@@ -426,6 +427,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		} else {
 			unregisterSensors()
 			manualAzimuth = true // Stop auto-rotating back immediately
+			starView.roll = 0.0
 			Toast.makeText(context, "AR Mode Disabled", Toast.LENGTH_SHORT).show()
 		}
 		updateArButtonState()
@@ -533,7 +535,23 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 			smoothedAltitude += (altitudeDeg - smoothedAltitude) * filterAlpha
 
+			// Calculate Roll (Projected Zenith angle on Screen)
+			// Zenith in Screen Coords is the 3rd row of remappedRotationMatrix
+			val zenithX = remappedRotationMatrix[6]
+			val zenithY = remappedRotationMatrix[7]
+			// atan2(y, x) -> atan2(zenithX, zenithY) because X is "Y" in the atan2 plane logic for roll?
+			// see reasoning in Implementation Plan:
+			// Zenith Vector Z_screen = (M[6], M[7]).
+			// We want angle from Screen Up (Y+).
+			// If Upright, Z_screen = (0, 1). Angle 0.
+			// atan2(M[6], M[7]) -> atan2(0, 1) = 0.
+			// If 90 CW, Z_screen = (-1, 0). Angle -90.
+			// atan2(-1, 0) = -90.
+			// This matches.
+			val rollDeg = Math.toDegrees(atan2(zenithX.toDouble(), zenithY.toDouble()))
+
 			starView.setCenter(smoothedAzimuth, smoothedAltitude)
+			starView.roll = rollDeg
 		}
 	}
 
@@ -549,7 +567,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		isCameraOverlayEnabled = !isCameraOverlayEnabled
 		if (isCameraOverlayEnabled) {
-			calculatedFov = calculateCameraFov()
+			// Initial best guess, will be refined in configureTransform
+			calculatedFov = calculateSensorFov()
 			openCamera()
 			cameraTextureView.visibility = View.VISIBLE
 			sliderContainer.visibility = View.VISIBLE
@@ -647,7 +666,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		val tolerance = 0.1f
 		val matchAspect = choices.filter {
-			val ratio = it.width.toFloat() / it.height
+			val ratio = if (it.height > 0) it.width.toFloat() / it.height else 0f
 			kotlin.math.abs(ratio - targetRatio) < tolerance
 		}
 
@@ -669,7 +688,21 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val centerX = viewRect.centerX()
 		val centerY = viewRect.centerY()
 
+		var scaleX = 1f
+		var scaleY = 1f
+
+		val sensorInfo = getSensorInfo()
+		val fovW = sensorInfo?.fovWidth ?: 60.0
+		val sensorRatio = sensorInfo?.aspectRatio ?: (4.0/3.0)
+		// FOV Height: tan(Ah/2) = tan(Aw/2) / ratio
+		val fovH = Math.toDegrees(2 * atan(tan(Math.toRadians(fovW/2.0)) / sensorRatio))
+
+		var baseFovForX = fovW
+
 		if (Surface.ROTATION_90 == rotation || Surface.ROTATION_270 == rotation) {
+			// Landscape: Screen X aligns with Sensor Width
+			baseFovForX = fovW
+			
 			bufferRect.offset(centerX - bufferRect.centerX(), centerY - bufferRect.centerY())
 			matrix.setRectToRect(viewRect, bufferRect, Matrix.ScaleToFit.FILL)
 			val scale = kotlin.math.max(
@@ -678,9 +711,28 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			)
 			matrix.postScale(scale, scale, centerX, centerY)
 			matrix.postRotate(90f * (rotation - 2), centerX, centerY)
+
+			scaleX = (previewSize!!.width * scale) / viewWidth
+			scaleY = (previewSize!!.height * scale) / viewHeight
 		} else if (Surface.ROTATION_180 == rotation) {
+			// Upside Down Portrait: Screen X aligns with Sensor Height
+			baseFovForX = fovH
+
+			bufferRect.offset(centerX - bufferRect.centerX(), centerY - bufferRect.centerY())
+			matrix.setRectToRect(viewRect, bufferRect, Matrix.ScaleToFit.FILL)
+			val scale = kotlin.math.max(
+				viewHeight.toFloat() / previewSize!!.height,
+				viewWidth.toFloat() / previewSize!!.width
+			)
+			matrix.postScale(scale, scale, centerX, centerY)
 			matrix.postRotate(180f, centerX, centerY)
+
+			scaleX = (previewSize!!.height * scale) / viewWidth
+			scaleY = (previewSize!!.width * scale) / viewHeight
 		} else if (Surface.ROTATION_0 == rotation) {
+			// Portrait: Screen X aligns with Sensor Height
+			baseFovForX = fovH
+			
 			// Portrait mode: Camera sensor is usually landscape, so we need to rotate 90 degrees
 			bufferRect.offset(centerX - bufferRect.centerX(), centerY - bufferRect.centerY())
 			matrix.setRectToRect(viewRect, bufferRect, Matrix.ScaleToFit.FILL)
@@ -689,8 +741,17 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				viewWidth.toFloat() / previewSize!!.width
 			)
 			matrix.postScale(scale, scale, centerX, centerY)
+
+			// Update scales for FOV Refinement
+			// effectively: how much did we zoom in relative to the full preview image fitting the screen?
+			// The preview image is rotated. Height becomes Width.
+			scaleX = (previewSize!!.height * scale) / viewWidth
+			scaleY = (previewSize!!.width * scale) / viewHeight
 		}
 		cameraTextureView.setTransform(matrix)
+
+		// Update FOV based on Aspect Ratio Crop
+		updateEffectiveFov(scaleX, baseFovForX)
 	}
 
 	private fun createCaptureSession() {
@@ -728,6 +789,28 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun calculateCameraFov(): Double {
+		return calculateSensorFov()
+	}
+
+	private fun updateEffectiveFov(scaleX: Float, baseFov: Double) {
+		// scaleX is the zoom factor along the screen X axis.
+		// baseFov is the FOV of the full sensor along the dimension corresponding to screen X.
+		
+		val halfFovRad = Math.toRadians(baseFov / 2.0)
+		val tanHalfFov = tan(halfFovRad)
+		val effectiveRad = 2 * atan(tanHalfFov / scaleX)
+		calculatedFov = Math.toDegrees(effectiveRad)
+		
+		app.runInUIThread {
+			if (isCameraOverlayEnabled) {
+				starView.setViewAngle(calculatedFov)
+			}
+		}
+	}
+
+	private data class SensorInfo(val fovWidth: Double, val aspectRatio: Double)
+
+	private fun getSensorInfo(): SensorInfo? {
 		val manager = requireContext().getSystemService(Context.CAMERA_SERVICE) as CameraManager
 		try {
 			for (id in manager.cameraIdList) {
@@ -738,18 +821,22 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 					if (sensorSize != null && focalLengths != null && focalLengths.isNotEmpty()) {
 						val w = sensorSize.width
+						val h = sensorSize.height
 						val f = focalLengths[0]
-						// Horizontal FOV = 2 * atan(width / (2 * f))
 						val fovRad = 2 * atan(w / (2 * f))
-						val fovDeg = Math.toDegrees(fovRad.toDouble())
-						return fovDeg
+						val fovW = Math.toDegrees(fovRad.toDouble())
+						return SensorInfo(fovW, w.toDouble() / h)
 					}
 				}
 			}
 		} catch (e: Exception) {
 			log.error("Failed to calculate camera FOV", e)
 		}
-		return 60.0 // Default fallback
+		return null
+	}
+	
+	private fun calculateSensorFov(): Double {
+		return getSensorInfo()?.fovWidth ?: 60.0
 	}
 
 	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
