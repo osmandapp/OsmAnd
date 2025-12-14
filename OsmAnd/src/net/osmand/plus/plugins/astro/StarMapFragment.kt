@@ -590,6 +590,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		isCameraOverlayEnabled = !isCameraOverlayEnabled
 		if (isCameraOverlayEnabled) {
+			// Auto-enable AR mode if it was off
+			if (!isArModeEnabled) {
+				toggleArMode()
+			}
+			
 			// Initial best guess, will be refined in configureTransform
 			calculatedFov = calculateSensorFov()
 			openCamera()
@@ -976,6 +981,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 
 		starView.onAzimuthManualChangeListener = { azimuth ->
+			if (isArModeEnabled) {
+				toggleArMode()
+			}
 			manualAzimuth = true
 			app.osmandMap.mapView.rotateToAnimate(-azimuth.toFloat())
 		}
