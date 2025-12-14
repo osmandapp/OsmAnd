@@ -1731,7 +1731,7 @@
     <string name="poi_vending_bicycle_tube">Σαμπρέλες ποδηλάτου</string>
     <string name="poi_vending_food">Τρόφιμα</string>
     <string name="poi_vending_drinks_food">Τρόφιμα και ποτά</string>
-    <string name="poi_vending_fuel">Πρατήριο καυσίμων</string>
+    <string name="poi_vending_fuel">Πώληση καυσίμων</string>
     <string name="poi_vending_parcel_pickup">Παραλαβή δεμάτων</string>
     <string name="poi_vending_parcel_mail_in">Αποστολή δεμάτων</string>
     <string name="poi_vending_milk">Γάλα</string>

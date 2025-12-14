@@ -3443,7 +3443,7 @@
     <string name="poi_glacier_type_icefield">冰原</string>
     <string name="poi_glacier_type_plateau">高原</string>
     <string name="poi_glacier_type_valley">山谷</string>
-    <string name="poi_glacier_type_outlet">商店</string>
+    <string name="poi_glacier_type_outlet">冰川出口</string>
     <string name="poi_glacier_type_tidewater">低窪地</string>
     <string name="poi_glacier_type_mountain">山脈</string>
     <string name="poi_glacier_type_hanging">懸冰</string>
@@ -4741,7 +4741,7 @@
     <string name="poi_us_maps_recreation_area_activity_ice_skating">溜冰</string>
     <string name="poi_us_maps_recreation_area_activity_interpretive_areas">解說區</string>
     <string name="poi_us_maps_recreation_area_activity_metal_detecting">金屬探測</string>
-    <string name="poi_us_maps_recreation_area_activity_mountain_biking">山區騎乘</string>
+    <string name="poi_us_maps_recreation_area_activity_mountain_biking">越野自行車</string>
     <string name="poi_us_maps_recreation_area_activity_mountain_climbing">爬山</string>
     <string name="poi_us_maps_recreation_area_activity_nature_viewing">觀賞大自然</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_camping">非公路車輛露營</string>
@@ -4751,7 +4751,7 @@
     <string name="poi_us_maps_recreation_area_activity_skiing_snowboarding">滑雪與單板滑雪</string>
     <string name="poi_us_maps_recreation_area_activity_snowmobiling">雪地摩托車</string>
     <string name="poi_us_maps_recreation_area_activity_target_shooting">目標射擊</string>
-    <string name="poi_us_maps_recreation_area_activity_tidepooling">潮汐池</string>
+    <string name="poi_us_maps_recreation_area_activity_tidepooling">潮間帶生態觀察</string>
     <string name="poi_us_maps_recreation_area_activity_trapping">誘捕</string>
     <string name="poi_us_maps_recreation_area_activity_viewing_plants">觀賞植物</string>
     <string name="poi_us_maps_recreation_area_activity_viewing_scenery">賞景</string>
@@ -4785,7 +4785,7 @@
     <string name="poi_us_maps_recreation_area_activity_group_camping">團體露營</string>
     <string name="poi_us_maps_recreation_area_activity_horse_camping">馬匹露營</string>
     <string name="poi_us_maps_recreation_area_activity_lake_and_pond_fishing">湖泊與池塘釣魚</string>
-    <string name="poi_us_maps_recreation_area_activity_mushing_skijoring">拉雪橇與滑雪</string>
+    <string name="poi_us_maps_recreation_area_activity_mushing_skijoring">狗拉雪橇與拖曳滑雪</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_riding_and_camping">非公路車輛騎乘與露營</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_road_riding">非公路車輛道路騎乘</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_trail_riding">非道路車輛越野騎乘</string>

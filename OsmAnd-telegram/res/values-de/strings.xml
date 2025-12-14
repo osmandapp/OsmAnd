@@ -124,7 +124,7 @@
     <string name="waiting_for_response_from_telegram">Warten auf Antwort von Telegram</string>
     <string name="sending_location_messages">Sende Standort</string>
     <string name="initializing">Startet</string>
-    <string name="searching_for_gps">Positionierung …</string>
+    <string name="searching_for_gps">Positionierung …</string>
     <string name="connecting_to_the_internet">Verbindung zum Internet</string>
     <string name="background_work_description">Akkuoptimierungseinstellungen, um die Standortfreigabe zu stabilisieren.</string>
     <string name="password_descr">Telegram-Passwort</string>

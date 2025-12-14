@@ -2911,8 +2911,8 @@
     <string name="edit_profile_setup_map_subtitle">Elekti agordojn pri mapo por la profilo</string>
     <string name="edit_profile_screen_options_subtitle">Elekti agordojn pri ekrano por la profilo</string>
     <string name="edit_profile_nav_settings_subtitle">Elekti agordojn pri navigado por la profilo</string>
-    <string name="routing_attr_max_num_changes_description">Difini maksimuman nombron de ŝanĝoj de transportiloj</string>
-    <string name="routing_attr_max_num_changes_name">Nombro de transveturiliĝoj</string>
+    <string name="routing_attr_max_num_changes_description">Difini la maksimuman nombron de ŝanĝoj de transportiloj</string>
+    <string name="routing_attr_max_num_changes_name">Maksimuma nombro de transveturiliĝoj</string>
     <string name="turn_screen_on_router">Teni ekranon ŝaltita</string>
     <string name="turn_screen_on_time_descr">Agordi por kiom longe la ekrano estos ŝaltita.</string>
     <string name="turn_screen_on_sensor">Uzi proksimec‑sentilon</string>
@@ -5900,4 +5900,10 @@
     <string name="routing_attr_weightrating_name">Maksimuma maso je plena ŝarĝo</string>
     <string name="routing_attr_maxaxleload_name">Maksimuma pezo sur akso</string>
     <string name="is_parking_time_limited">Ĉu parkuma tempo estas limigita?</string>
+    <string name="routing_attr_pt_limit_name">Montri N plej bonajn kursojn</string>
+    <string name="routing_attr_pt_limit_description">Difini nombron da plej bonaj kursoj por montri</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimetroj</string>
+    <string name="bicycle_width_limit_description">Enigu larĝon de via biciklo por eviti mallarĝajn biciklajn vojojn.</string>
+    <string name="copy_link">Kopii ligilon</string>
 </resources>
