@@ -46,7 +46,6 @@ import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -170,6 +169,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 		if (controller != null && getTargetFragment() instanceof LocalItemsFragment target) {
 			boolean root = controller.isRootFolder();
 			controller.updateDisplayItems(target.getGroup());
+			// Automatically exit from the search mode if current folder isn't longer exists
 			if (root != controller.isRootFolder()) {
 				dismiss();
 				return;
@@ -179,9 +179,9 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	}
 
 	private void updateAdapter() {
-		List<BaseLocalItem> countryItems = getSortedCurrentFolderItems();
-		adapter.setItems(countryItems != null ? countryItems : getSortedItems());
-		adapter.setCountryMode(countryItems != null);
+		List<BaseLocalItem> folderItems = getSortedCurrentFolderItems();
+		adapter.setItems(folderItems != null ? folderItems : getSortedItems());
+		adapter.setInsideFolder(folderItems != null);
 	}
 
 	@NonNull

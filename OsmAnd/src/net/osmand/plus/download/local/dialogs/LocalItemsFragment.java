@@ -67,7 +67,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	@Override
 	@ColorRes
 	public int getStatusBarColorId() {
-		if (controller != null && controller.isSelectionMode()) {
+		if (isSelectionMode()) {
 			return ColorUtilities.getStatusBarActiveColorId(nightMode);
 		} else {
 			return ColorUtilities.getStatusBarColorId(nightMode);
@@ -217,7 +217,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	private void updateAdapter() {
 		List<Object> items = new ArrayList<>(controller.getDisplayItems(getGroup(), getCategory()));
 		adapter.setSelectionMode(controller.isSelectionMode());
-		adapter.setCountryMode(!controller.isRootFolder());
+		adapter.setInsideFolder(!controller.isRootFolder());
 		adapter.setItems(items);
 	}
 

@@ -33,7 +33,7 @@ public class LocalSearchAdapter extends RecyclerView.Adapter<ViewHolder> impleme
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
 
-	private boolean countryMode;
+	private boolean isInsideFolder;
 
 	public LocalSearchAdapter(@NonNull Context context, @NonNull LocalItemListener listener, boolean nightMode) {
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
@@ -57,8 +57,8 @@ public class LocalSearchAdapter extends RecyclerView.Adapter<ViewHolder> impleme
 		notifyDataSetChanged();
 	}
 
-	public void setCountryMode(boolean countryMode) {
-		this.countryMode = countryMode;
+	public void setInsideFolder(boolean countryMode) {
+		this.isInsideFolder = countryMode;
 	}
 
 	@NonNull
@@ -76,7 +76,7 @@ public class LocalSearchAdapter extends RecyclerView.Adapter<ViewHolder> impleme
 		if (holder instanceof LocalItemHolder viewHolder) {
 			BaseLocalItem item = items.get(position);
 			boolean lastItem = position == getItemCount() - 1;
-			viewHolder.bindView(item, false, countryMode, lastItem, false);
+			viewHolder.bindView(item, false, isInsideFolder, lastItem, false);
 		}
 	}
 

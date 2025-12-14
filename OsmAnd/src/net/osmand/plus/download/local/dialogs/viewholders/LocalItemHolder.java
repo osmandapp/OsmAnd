@@ -65,9 +65,9 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindView(@NonNull BaseLocalItem item, boolean selectionMode,
-	                     boolean countryMode, boolean lastItem, boolean hideDivider) {
+	                     boolean isInsideFolder, boolean lastItem, boolean hideDivider) {
 		Context context = itemView.getContext();
-		title.setText(item.getName(context, !countryMode));
+		title.setText(item.getName(context, !isInsideFolder));
 		description.setText(item.getDescription(context));
 		icon.setImageDrawable(getIcon(item));
 

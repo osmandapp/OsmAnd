@@ -36,7 +36,7 @@ public class DeleteConfirmationDialogController extends BaseDialogController {
 
 	@NonNull
 	public CharSequence getDialogTitle() {
-		if (localItem instanceof MultipleLocalItem multipleLocalItem) {
+		if (localItem instanceof MultipleLocalItem) {
 			return getString(R.string.delete_folder);
 		} else {
 			return getString(R.string.delete_map);
@@ -45,8 +45,8 @@ public class DeleteConfirmationDialogController extends BaseDialogController {
 
 	@NonNull
 	public CharSequence getDialogSummary() {
-		if (localItem instanceof MultipleLocalItem multipleLocalItem) {
-			return getString(R.string.delete_folder_description, multipleLocalItem.getName());
+		if (localItem instanceof MultipleLocalItem folder) {
+			return getString(R.string.delete_folder_description, folder.getName());
 		} else {
 			return getString(R.string.delete_map_description, localItem.getName(app));
 		}
