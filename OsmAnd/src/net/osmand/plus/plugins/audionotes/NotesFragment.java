@@ -110,7 +110,7 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = new InsetTargetsCollection();
-
+		collection.add(InsetTarget.createScrollable(android.R.id.list).build());
 		return collection;
 	}
 
