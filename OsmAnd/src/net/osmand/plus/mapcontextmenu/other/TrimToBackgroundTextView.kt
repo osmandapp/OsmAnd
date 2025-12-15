@@ -165,6 +165,10 @@ class TrimToBackgroundTextView @JvmOverloads constructor(
 
 		// 6. Set the final measured dimensions
 		setMeasuredDimension(measuredW, measuredH)
+		super.onMeasure(
+			MeasureSpec.makeMeasureSpec(measuredW, MeasureSpec.EXACTLY),
+			MeasureSpec.makeMeasureSpec(measuredH, MeasureSpec.EXACTLY)
+		)
 	}
 
 	override fun onDraw(canvas: Canvas) {
