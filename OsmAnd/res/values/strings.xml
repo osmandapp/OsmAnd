@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="delete_folder_description">Delete \"%1$s\" folder?</string>
     <string name="routing_attr_pt_limit_name">Display N best routes</string>
     <string name="routing_attr_pt_limit_description">Specify the number of best routes to display</string>
     <string name="centimeter">cm</string>

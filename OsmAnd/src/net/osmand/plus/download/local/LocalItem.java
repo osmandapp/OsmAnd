@@ -101,8 +101,15 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	}
 
 	@NonNull
+	@Override
 	public CharSequence getName(@NonNull Context context) {
-		return LocalItemUtils.getItemName(context, this);
+		return getName(context, true);
+	}
+
+	@NonNull
+	@Override
+	public CharSequence getName(@NonNull Context context, boolean includeParent) {
+		return LocalItemUtils.getItemName(context, this, includeParent);
 	}
 
 	@NonNull
@@ -139,5 +146,19 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	@Override
 	public String toString() {
 		return fileName;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!super.equals(o)) return false;
+		LocalItem localItem = (LocalItem) o;
+		return path.equals(localItem.path);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + path.hashCode();
+		return result;
 	}
 }

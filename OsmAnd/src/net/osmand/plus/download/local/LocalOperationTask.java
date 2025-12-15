@@ -13,6 +13,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.dialogs.LiveGroupItem;
 
+import java.util.Collection;
+
 public class LocalOperationTask extends AsyncTask<BaseLocalItem, BaseLocalItem, String> {
 
 	private final OsmandApplication app;
@@ -81,15 +83,21 @@ public class LocalOperationTask extends AsyncTask<BaseLocalItem, BaseLocalItem, 
 		if (item instanceof LocalItem) {
 			return processItem((LocalItem) item);
 		} else if (item instanceof LiveGroupItem groupItem) {
-			boolean success = false;
-			for (LocalItem localItem : groupItem.getItems()) {
-				if (!isCancelled()) {
-					success |= processItem(localItem);
-				}
-			}
-			return success;
+			return processItems(groupItem.getItems());
+		} else if (item instanceof MultipleLocalItem multipleLocalItem) {
+			return processItems(multipleLocalItem.getLocalItems());
 		}
 		return false;
+	}
+
+	private boolean processItems(@NonNull Collection<LocalItem> items) {
+		boolean success = false;
+		for (LocalItem localItem : items) {
+			if (!isCancelled()) {
+				success |= processItem(localItem);
+			}
+		}
+		return success;
 	}
 
 	private boolean processItem(@NonNull LocalItem item) {

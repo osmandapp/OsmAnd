@@ -34,6 +34,7 @@ import net.osmand.plus.download.local.LocalSizeCalculationListener;
 import net.osmand.plus.download.local.LocalSizeController;
 import net.osmand.plus.download.local.dialogs.CategoriesAdapter.LocalTypeListener;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
+import net.osmand.plus.download.local.dialogs.controllers.LocalItemsController;
 import net.osmand.plus.importfiles.ImportTaskListener;
 import net.osmand.plus.utils.ColorUtilities;
 
@@ -230,10 +231,7 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 
 	@Override
 	public void onGroupSelected(@NonNull LocalGroup group) {
-		FragmentManager manager = getFragmentManager();
-		if (manager != null) {
-			LocalItemsFragment.showInstance(manager, group.getType(), this);
-		}
+		callActivity(activity -> LocalItemsController.showDialog(activity, group.getType(), this));
 	}
 
 	@Override
