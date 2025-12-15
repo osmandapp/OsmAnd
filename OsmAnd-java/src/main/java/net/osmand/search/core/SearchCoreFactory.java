@@ -588,7 +588,7 @@ public class SearchCoreFactory {
 						}
 						limit ++;
 						immediateResults.add(sr);
-						return false;
+						return phrase.getSettings().getStat() != null;
 					}
 
 					@Override
@@ -826,7 +826,7 @@ public class SearchCoreFactory {
 					sr.objectType = ObjectType.POI;
 					resultMatcher.publish(sr);
 					ids.add(poiID);
-					return false;
+					return phrase.getSettings().getStat() != null;
 				}
 
 				@Override

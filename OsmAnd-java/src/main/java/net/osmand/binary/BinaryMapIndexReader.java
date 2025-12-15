@@ -1839,7 +1839,7 @@ public class BinaryMapIndexReader {
 		}
 		
 		public void endSearchStats(long statReq, BinaryMapIndexReaderApiName api, SearchRequest<?> req, BinaryIndexPart part, CodedInputStream codedIS) {
-			if(statReq > 0 && searchStat != null) {
+			if (statReq > 0 && searchStat != null) {
 				List<?> res = req.getSearchResults();
 				List<?> sublist = res.subList(searchStat.prevResultsSize, res.size());
 				searchStat.endSearchStats(statReq, api, sublist, part, codedIS, nameQuery);
