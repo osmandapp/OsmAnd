@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.astro.utils
 
 import android.content.Context
-import android.graphics.Color
 import android.hardware.GeomagneticField
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -9,9 +8,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.view.Surface
 import android.view.WindowManager
-import android.widget.ImageButton
 import android.widget.Toast
-import androidx.core.graphics.toColorInt
 import net.osmand.Location
 import net.osmand.plus.plugins.astro.views.StarView
 import kotlin.math.abs
@@ -21,7 +18,6 @@ import kotlin.math.atan2
 class StarMapARModeHelper(
 	private val context: Context,
 	private val starView: StarView,
-	private val arModeButton: ImageButton,
 	private val onArModeChanged: (Boolean) -> Unit
 ) : SensorEventListener {
 
@@ -59,11 +55,6 @@ class StarMapARModeHelper(
 			sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 			sensorMagnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
 		}
-		updateArButtonState()
-
-		arModeButton.setOnClickListener {
-			toggleArMode()
-		}
 	}
 
 	fun onResume() {
@@ -99,16 +90,7 @@ class StarMapARModeHelper(
 			starView.roll = 0.0
 			Toast.makeText(context, "AR Mode Disabled", Toast.LENGTH_SHORT).show()
 		}
-		updateArButtonState()
 		onArModeChanged(isArModeEnabled)
-	}
-
-	private fun updateArButtonState() {
-		if (isArModeEnabled) {
-			arModeButton.setColorFilter(Color.BLUE)
-		} else {
-			arModeButton.setColorFilter("#5f6e7c".toColorInt())
-		}
 	}
 
 	private fun registerSensors() {
@@ -120,7 +102,6 @@ class StarMapARModeHelper(
 		} else {
 			Toast.makeText(context, "Sensors not available for AR", Toast.LENGTH_SHORT).show()
 			isArModeEnabled = false
-			updateArButtonState()
 			onArModeChanged(false)
 		}
 	}

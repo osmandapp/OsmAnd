@@ -1,14 +1,17 @@
 package net.osmand.plus.plugins.astro
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.graphics.toColorInt
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
@@ -62,6 +65,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var sheetCoords: TextView
 	private lateinit var sheetDetails: TextView
 	private lateinit var resetTimeButton: Button
+
+	private lateinit var arModeButton: ImageButton
+	private lateinit var cameraButton: ImageButton
+	private lateinit var transparencySlider: SeekBar
+	private lateinit var sliderContainer: View
+	private lateinit var resetFovButton: View
 
 	private lateinit var starChartsView: View
 	private lateinit var starVisiblityView: StarVisiblityChartView
@@ -119,9 +128,16 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		sheetCoords = view.findViewById(R.id.sheet_coords)
 		sheetDetails = view.findViewById(R.id.sheet_details)
 
+		// Init UI references
+		arModeButton = view.findViewById(R.id.ar_mode_button)
+		cameraButton = view.findViewById(R.id.camera_button)
+		transparencySlider = view.findViewById(R.id.transparency_slider)
+		sliderContainer = view.findViewById(R.id.slider_container)
+		resetFovButton = view.findViewById(R.id.reset_fov_button)
+
 		// Initialize Helpers
-		val arModeButton = view.findViewById<ImageButton>(R.id.ar_mode_button)
-		arModeHelper = StarMapARModeHelper(requireContext(), starView, arModeButton) { enabled ->
+		arModeHelper = StarMapARModeHelper(requireContext(), starView) { enabled ->
+			updateArModeUI(enabled)
 			if (!enabled) {
 				manualAzimuth = true // Stop auto-rotating back immediately
 			}
@@ -129,17 +145,40 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		cameraHelper = StarMapCameraHelper(
 			this,
-			view.findViewById(R.id.camera_view),
 			starView,
-			view.findViewById(R.id.camera_button),
-			view.findViewById(R.id.transparency_slider),
-			view.findViewById(R.id.slider_container),
-			view.findViewById(R.id.reset_fov_button)
+			view.findViewById(R.id.camera_view)
 		) { enabled ->
+			updateCameraUI(enabled)
 			if (enabled && !arModeHelper.isArModeEnabled) {
 				arModeHelper.toggleArMode(true)
 			}
 		}
+
+		// Set Click Listeners for Helper Actions
+		arModeButton.setOnClickListener {
+			arModeHelper.toggleArMode()
+		}
+
+		cameraButton.setOnClickListener {
+			cameraHelper.toggleCameraOverlay()
+		}
+
+		resetFovButton.setOnClickListener {
+			cameraHelper.resetFov()
+		}
+
+		transparencySlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+			override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+				cameraHelper.setTransparency(progress)
+			}
+			override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+			override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+		})
+
+		// Initial UI State
+		updateArModeUI(arModeHelper.isArModeEnabled)
+		updateCameraUI(cameraHelper.isCameraOverlayEnabled)
+
 
 		ViewCompat.setOnApplyWindowInsetsListener(bottomSheet) { v, windowInsets ->
 			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -226,6 +265,26 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		buildZoomButtons(view)
 
 		return view
+	}
+
+	private fun updateArModeUI(enabled: Boolean) {
+		if (enabled) {
+			arModeButton.setColorFilter(Color.BLUE)
+		} else {
+			arModeButton.setColorFilter("#5f6e7c".toColorInt())
+		}
+	}
+
+	private fun updateCameraUI(enabled: Boolean) {
+		if (enabled) {
+			cameraButton.setColorFilter(Color.BLUE)
+			sliderContainer.visibility = View.VISIBLE
+			resetFovButton.visibility = View.VISIBLE
+		} else {
+			cameraButton.setColorFilter("#5f6e7c".toColorInt())
+			sliderContainer.visibility = View.GONE
+			resetFovButton.visibility = View.GONE
+		}
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

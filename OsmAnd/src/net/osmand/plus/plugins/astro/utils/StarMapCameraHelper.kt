@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.astro.utils
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.RectF
 import android.graphics.SurfaceTexture
@@ -15,13 +14,10 @@ import android.util.Size
 import android.view.Surface
 import android.view.TextureView
 import android.view.View
-import android.widget.ImageButton
-import android.widget.SeekBar
 import android.widget.Toast
 import androidx.annotation.RequiresPermission
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.toColorInt
 import androidx.fragment.app.Fragment
 import net.osmand.plus.plugins.astro.views.StarView
 import net.osmand.shared.util.LoggerFactory
@@ -32,12 +28,8 @@ import kotlin.math.tan
 
 class StarMapCameraHelper(
 	private val fragment: Fragment,
-	private val cameraTextureView: TextureView,
 	private val starView: StarView,
-	private val cameraButton: ImageButton,
-	private val transparencySlider: SeekBar,
-	private val sliderContainer: View,
-	private val resetFovButton: View,
+	private val cameraTextureView: TextureView,
 	private val onCameraStateChanged: (Boolean) -> Unit
 ) {
 
@@ -58,25 +50,6 @@ class StarMapCameraHelper(
 	}
 
 	init {
-		updateCameraButtonState()
-
-		cameraButton.setOnClickListener {
-			toggleCameraOverlay()
-		}
-
-		transparencySlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-			override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-				cameraTextureView.alpha = progress / 100f
-			}
-			override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-			override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-		})
-
-		resetFovButton.setOnClickListener {
-			starView.setViewAngle(calculatedFov)
-			Toast.makeText(fragment.context, "FOV reset to ${String.format("%.1f", calculatedFov)}°", Toast.LENGTH_SHORT).show()
-		}
-
 		// Calculate FOV initially if camera permission is already granted (best effort)
 		val context = fragment.requireContext()
 		if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
@@ -104,6 +77,35 @@ class StarMapCameraHelper(
 		}
 	}
 
+	fun toggleCameraOverlay() {
+		val context = fragment.requireContext()
+		if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+			fragment.requestPermissions(arrayOf(Manifest.permission.CAMERA), PERMISSION_REQUEST_CAMERA)
+			return
+		}
+
+		isCameraOverlayEnabled = !isCameraOverlayEnabled
+		if (isCameraOverlayEnabled) {
+			// Initial best guess, will be refined in configureTransform
+			calculatedFov = calculateSensorFov()
+			openCamera()
+			cameraTextureView.visibility = View.VISIBLE
+		} else {
+			closeCamera()
+			cameraTextureView.visibility = View.GONE
+		}
+		onCameraStateChanged(isCameraOverlayEnabled)
+	}
+
+	fun setTransparency(progress: Int) {
+		cameraTextureView.alpha = progress / 100f
+	}
+
+	fun resetFov() {
+		starView.setViewAngle(calculatedFov)
+		Toast.makeText(fragment.context, "FOV reset to ${String.format("%.1f", calculatedFov)}°", Toast.LENGTH_SHORT).show()
+	}
+
 	fun updateCameraZoom(fov: Double) {
 		if (!isCameraOverlayEnabled || baseTransformMatrix == null || cameraTextureView.width == 0) return
 
@@ -120,39 +122,6 @@ class StarMapCameraHelper(
 
 		matrix.postScale(scale, scale, centerX, centerY)
 		cameraTextureView.setTransform(matrix)
-	}
-
-	private fun toggleCameraOverlay() {
-		val context = fragment.requireContext()
-		if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-			fragment.requestPermissions(arrayOf(Manifest.permission.CAMERA), PERMISSION_REQUEST_CAMERA)
-			return
-		}
-
-		isCameraOverlayEnabled = !isCameraOverlayEnabled
-		if (isCameraOverlayEnabled) {
-			// Initial best guess, will be refined in configureTransform
-			calculatedFov = calculateSensorFov()
-			openCamera()
-			cameraTextureView.visibility = View.VISIBLE
-			sliderContainer.visibility = View.VISIBLE
-			resetFovButton.visibility = View.VISIBLE
-		} else {
-			closeCamera()
-			cameraTextureView.visibility = View.GONE
-			sliderContainer.visibility = View.GONE
-			resetFovButton.visibility = View.GONE
-		}
-		updateCameraButtonState()
-		onCameraStateChanged(isCameraOverlayEnabled)
-	}
-
-	private fun updateCameraButtonState() {
-		if (isCameraOverlayEnabled) {
-			cameraButton.setColorFilter(Color.BLUE)
-		} else {
-			cameraButton.setColorFilter("#5f6e7c".toColorInt())
-		}
 	}
 
 	private fun openCamera() {
