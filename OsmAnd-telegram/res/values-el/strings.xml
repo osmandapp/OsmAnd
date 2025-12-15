@@ -263,4 +263,16 @@
     <string name="battery_optimization_description">Απενεργοποιήστε την βελτιστοποίηση μπαταρίας για το OsmAnd Tracker ώστε να μην σβήσει ξαφνικά όσο είναι στο παρασκήνιο.</string>
     <string name="logout_from_osmand_telegram_descr">Σίγουρα θέλετε να αποσυνδεθείτε από το OsmAnd Tracker ώστε να μην κοινοποιείτε την τοποθεσία ή να βλέπετε την τοποθεσία των άλλων;</string>
     <string name="logout_from_osmand_telegram">Αποσύνδεση από το OsmAnd Tracker;</string>
+    <string name="disconnect_from_telegram_desc">Για να ανακαλέσετε την πρόσβαση κοινοποίησης τοποθεσίας, ανοίξτε το Telegram, πηγαίνετε στις Ρυθμίσεις → Απόρρητο και Ασφάλεια → Συνεδρίες, και τερματίστε τη συνεδρία OsmAnd Tracker.</string>
+    <string name="disconnect_from_telegram">Πώς να κλείσετε το OsmAnd Tracker από το Telegram</string>
+    <string name="logout_help_desc">Πώς να κλείσετε το OsmAnd Tracker από το Telegram</string>
+    <string name="send_my_location_desc">Ορίστε το ελάχιστο διάστημα για κοινοποίηση τοποθεσίας.</string>
+    <string name="osmand_connect_desc">Επιλέξτε την έκδοση OsmAnd που χρησιμοποιεί το OsmAnd Tracker για την προβολή των τοποθεσιών.</string>
+    <string name="osmand_service_descr">Το OsmAnd Tracker εκτελείται στο παρασκήνιο με την οθόνη σβηστή.</string>
+    <string name="timeline">Χρονολόγιο</string>
+    <string name="live_now">Ζωντανά τώρα</string>
+    <string name="welcome_descr">Το <b>OsmAnd Tracker</b> σας επιτρέπει να κοινοποιείτε την τοποθεσία σας και να βλέπετε άλλων ατομών στο OsmAnd.<br/><br/>Η εφαρμογή χρησιμοποιεί το API του Telegram, οπότε χρειάζεστε ένα λογαριασμό Telegram.</string>
+    <string name="privacy_policy_telegram_client">Το OsmAnd Tracker είναι ένας από τους πελάτες που χρησιμοποιούν την ανοιχτή πλατφόρμα Telegram. Οι επαφές σας μπορούν να χρησιμοποιούν οποιονδήποτε πελάτη Telegram.</string>
+    <string name="shared_string_live">Ζωντανά</string>
+    <string name="app_name">OsmAnd Online GPS Tracker</string>
 </resources>

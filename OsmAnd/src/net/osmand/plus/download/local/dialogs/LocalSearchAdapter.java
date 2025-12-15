@@ -33,6 +33,8 @@ public class LocalSearchAdapter extends RecyclerView.Adapter<ViewHolder> impleme
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
 
+	private boolean isInsideFolder;
+
 	public LocalSearchAdapter(@NonNull Context context, @NonNull LocalItemListener listener, boolean nightMode) {
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		this.listener = listener;
@@ -55,26 +57,26 @@ public class LocalSearchAdapter extends RecyclerView.Adapter<ViewHolder> impleme
 		notifyDataSetChanged();
 	}
 
+	public void setInsideFolder(boolean countryMode) {
+		this.isInsideFolder = countryMode;
+	}
+
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		switch (viewType) {
-			case LIST_ITEM_TYPE:
-				View itemView = themedInflater.inflate(R.layout.local_list_item, parent, false);
-				return new LocalItemHolder(itemView, listener, nightMode);
-			default:
-				throw new IllegalArgumentException("Unsupported view type");
+		if (viewType == LIST_ITEM_TYPE) {
+			View itemView = themedInflater.inflate(R.layout.local_list_item, parent, false);
+			return new LocalItemHolder(itemView, listener, nightMode);
 		}
+		throw new IllegalArgumentException("Unsupported view type");
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		if (holder instanceof LocalItemHolder) {
+		if (holder instanceof LocalItemHolder viewHolder) {
 			BaseLocalItem item = items.get(position);
 			boolean lastItem = position == getItemCount() - 1;
-
-			LocalItemHolder viewHolder = (LocalItemHolder) holder;
-			viewHolder.bindView(item, false, lastItem, false);
+			viewHolder.bindView(item, false, isInsideFolder, lastItem, false);
 		}
 	}
 

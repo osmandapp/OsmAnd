@@ -1,4 +1,4 @@
-package net.osmand.plus.download.local.dialogs;
+package net.osmand.plus.download.local.dialogs.menu;
 
 import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
 import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
@@ -33,6 +33,9 @@ import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.OperationType;
+import net.osmand.plus.download.local.dialogs.LocalItemsFragment;
+import net.osmand.plus.download.local.dialogs.LocalSearchFragment;
+import net.osmand.plus.download.local.dialogs.SortMapsBottomSheet;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;

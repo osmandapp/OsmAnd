@@ -2040,7 +2040,7 @@
     <string name="poi_charity">Siopa carthanachta</string>
     <string name="poi_organic">Táirgí orgánacha</string>
     <string name="poi_outdoor">Siopa lasmuigh</string>
-    <string name="poi_tyres">Siopa boinn</string>
+    <string name="poi_tyres">Boinn; Bonn; Bonn; Siopa bonn; Boinn</string>
     <string name="poi_video_games">Cluichí físeáin</string>
     <string name="poi_pyrotechnics">Piriteicnic</string>
     <string name="poi_weapons">Siopa arm</string>
@@ -2349,7 +2349,7 @@
     <string name="poi_diplomatic_high_commission">Ard-choimisiún</string>
     <string name="poi_xmas_pyramid">Pirimid na Nollag</string>
     <string name="poi_cuisine_sandwich">Ceapaire</string>
-    <string name="poi_cuisine_kebab">KebabGenericName</string>
+    <string name="poi_cuisine_kebab">Ceibeab; Mias</string>
     <string name="poi_cuisine_chicken">Sicín</string>
     <string name="poi_cuisine_juice">Sú</string>
     <string name="poi_cuisine_smoothie">SmoothieName</string>
@@ -2643,7 +2643,7 @@
     <string name="poi_climbing_quality_solid">Solad</string>
     <string name="poi_water_utility">Oifig fóntais uisce</string>
     <string name="poi_service_vehicle_glass_yes">Gloine</string>
-    <string name="poi_service_vehicle_tyres_yes">Boinn</string>
+    <string name="poi_service_vehicle_tyres_yes">Boinn; Bonn; Bonn; Boinn</string>
     <string name="poi_blood_donation">Tabhartas fola</string>
     <string name="poi_rtsa_scale_1b_asterisk">1B*</string>
     <string name="poi_hazard_additional_minefield">Páirc Mianach</string>
@@ -4000,7 +4000,7 @@
     <string name="poi_xmas_url">Xmas: suíomh gréasáin</string>
     <string name="poi_public_bookcase_type_reading_box">Cineál: bosca léitheoireachta</string>
     <string name="poi_cuisine">An Chistin</string>
-    <string name="poi_cuisine_doner">Kebab deontóra (shawarma)</string>
+    <string name="poi_cuisine_doner">Ceabáb Doner (shawarma); Mias</string>
     <string name="poi_cuisine_ice_cream">Uachtar reoite</string>
     <string name="poi_cuisine_sushi">SushiName</string>
     <string name="poi_cuisine_fish">Éisc</string>

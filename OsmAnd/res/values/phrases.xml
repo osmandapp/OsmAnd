@@ -339,7 +339,6 @@
 	<string name="poi_tobacco">Tobacco store</string>
 	<string name="poi_toys">Toyshop</string>
 	<string name="poi_trade">Trading post</string>
-	<string name="poi_tyres">Tire store</string>
 	<string name="poi_vacuum_cleaner">Vacuum cleaner store</string>
 	<string name="poi_variety_store">Variety store</string>
 	<string name="poi_video">Video store</string>
@@ -399,7 +398,7 @@
 	<string name="poi_traffic_signals">Stop light</string>
 
 	<string name="poi_car_repair">Car repair</string>
-	<string name="poi_service_tyres">Tyres;Tire;Tires</string>
+    <string name="poi_tyres">Tyres;Tyre;Tire;Tire store;Tires</string>
 	<string name="poi_vehicle_inspection">Vehicle inspection</string>
 	<string name="poi_car_wash">Car wash</string>
 	<string name="poi_fuel">Gas station;Gasoline station;Filling station;Petrol station</string>
@@ -3330,8 +3329,8 @@
 	<string name="poi_cuisine_burger">Burger</string>
 	<string name="poi_cuisine_coffee_shop">Coffee shop</string>
 	<string name="poi_cuisine_sandwich">Sandwich</string>
-	<string name="poi_cuisine_kebab">Kebab</string>
-	<string name="poi_cuisine_doner">Doner kebab (shawarma)</string>
+	<string name="poi_cuisine_kebab">Kebab;Dish</string>
+	<string name="poi_cuisine_doner">Doner kebab (shawarma);Dish</string>
 	<string name="poi_cuisine_chicken">Chicken</string>
 	<string name="poi_cuisine_ice_cream">Ice cream</string>
 	<string name="poi_cuisine_sushi">Sushi</string>
@@ -4048,7 +4047,7 @@
 	<string name="poi_service_vehicle_transmission_repair_yes">Transmission repair</string>
 	<string name="poi_service_vehicle_motor_yes">Motor</string>
 	<string name="poi_service_vehicle_insurance_yes">Insurance</string>
-	<string name="poi_service_vehicle_tyres_yes">Tyres</string>
+    <string name="poi_service_vehicle_tyres_yes">Tyres;Tyre;Tire;Tires</string>
 
 	<string name="poi_aerialway_zip_line">Zip line</string>
 
@@ -5757,4 +5756,6 @@
 	<string name="poi_sample_collection_yes">Yes</string>
 	<string name="poi_sample_collection_covid19">COVID19</string>
 	<string name="poi_sample_collection_blood">Blood</string>
+
+	<string name="poi_hazard_yes">Hazard</string>
 </resources>

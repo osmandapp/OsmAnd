@@ -109,7 +109,13 @@ public class AlarmInfo implements LocationPoint {
 				alarmInfo = new AlarmInfo(BORDER_CONTROL, locInd);
 			}
 		} else if ("traffic_calming".equals(ruleType.getTag())) {
-			alarmInfo = new AlarmInfo(TRAFFIC_CALMING, locInd);
+			String value = ruleType.getValue();
+			boolean isIslandType = "island".equals(value)
+					|| "choked_island".equals(value)
+					|| "painted_island".equals(value);
+			if (!isIslandType) {
+				alarmInfo = new AlarmInfo(TRAFFIC_CALMING, locInd);
+			}
 		} else if ("hazard".equals(ruleType.getTag())) {
 			alarmInfo = new AlarmInfo(HAZARD, locInd);
 		} else if ("railway".equals(ruleType.getTag()) && "level_crossing".equals(ruleType.getValue())) {

@@ -208,7 +208,7 @@
     <string name="poi_tobacco">Tabak-vendejo</string>
     <string name="poi_toys">Ludil-vendejo</string>
     <string name="poi_trade">Staplejo</string>
-    <string name="poi_tyres">Pneŭa vendejo</string>
+    <string name="poi_tyres">Pneŭa vendejo;pneuoj;aerbendoj;radringoj</string>
     <string name="poi_vacuum_cleaner">Senpolvigil-vendejo</string>
     <string name="poi_variety_store">Ĉio-po-unu-spesmilo vendejo</string>
     <string name="poi_video">Filmovendejo</string>
@@ -2832,7 +2832,7 @@
     <string name="poi_cuisine_burger">burgeroj</string>
     <string name="poi_cuisine_coffee_shop">kaftrinkaĵoj</string>
     <string name="poi_cuisine_sandwich">sandviĉoj</string>
-    <string name="poi_cuisine_kebab">kebabo</string>
+    <string name="poi_cuisine_kebab">kebabo;kebap</string>
     <string name="poi_cuisine_chicken">kokaĵo</string>
     <string name="poi_cuisine_ice_cream">glaciaĵoj</string>
     <string name="poi_cuisine_sushi">suŝio</string>
@@ -2999,7 +2999,7 @@
     <string name="poi_social_facility_for">Alcela grupo</string>
     <string name="poi_compressed_air_filter">Gaskunpremilo</string>
     <string name="poi_vacuum_cleaner_filter">Polvosuĉilo</string>
-    <string name="poi_cuisine_doner">turnkebabo (ŝavarma)</string>
+    <string name="poi_cuisine_doner">turnkebabo (ŝavarma);kebabo</string>
     <string name="poi_cuisine_shawarma">turnkebabo (ŝavarma)</string>
     <string name="poi_cuisine_bistro">bistroo</string>
     <string name="poi_dish">Manĝaĵo</string>
@@ -3432,7 +3432,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">rapidumskatolo</string>
     <string name="poi_service_vehicle_motor_yes">motoro</string>
     <string name="poi_service_vehicle_insurance_yes">asekuroj</string>
-    <string name="poi_service_vehicle_tyres_yes">pneŭoj</string>
+    <string name="poi_service_vehicle_tyres_yes">pneŭoj;pneuoj;aerbendoj;radringoj</string>
     <string name="poi_aerialway_zip_line">Ŝnurega deglitejo</string>
     <string name="poi_climbing_adventure">Grimpada parko</string>
     <string name="poi_via_ferrata">Viaferatao (fera grimp-vojo)</string>

@@ -2401,7 +2401,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="osm_recipients_label">OSM gavėjai</string>
     <string name="total_donations">Iš viso paaukota</string>
     <string name="nautical_renderer">Jūrinis</string>
-	<string name="how_to_open_link">Kaip atverti nuorodą?</string>
+    <string name="how_to_open_link">Kaip atverti nuorodą?</string>
     <string name="download_all">Atsisiųsti viską</string>
     <string name="show_images">Rodyti paveikslėlius</string>
     <string name="purchase_cancelled_dialog_title">Jūs atsisakėte OsmAnd Live prenumeratos</string>

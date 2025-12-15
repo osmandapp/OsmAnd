@@ -4,7 +4,7 @@
     <string name="shared_string_bookmark">ఇష్టాంశం</string>
     <string name="hide_full_description">పూర్తి వివరణను దాచిపెట్టు</string>
     <string name="show_full_description">పూర్తి వివరణ చూపించు</string>
-	<string name="how_to_open_link">లంకెను ఎలా తెరవాలి?</string>
+    <string name="how_to_open_link">లంకెను ఎలా తెరవాలి?</string>
     <string name="download_all">అన్ని దింపుకోండి</string>
     <string name="shared_string_restart">అనువర్తనాన్ని పునఃప్రారంభించండి</string>
     <string name="show_images">చిత్రాలను చూపించు</string>

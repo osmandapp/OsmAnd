@@ -50,7 +50,8 @@ public class CachedTrack {
 	public CachedTrack(@NonNull OsmandApplication app, @NonNull SelectedGpxFile selectedGpxFile) {
 		this.app = app;
 		this.selectedGpxFile = selectedGpxFile;
-		this.params = new CachedTrackParams(-1, selectedGpxFile.getFilteredSelectedGpxFile() != null, false);
+		this.params = new CachedTrackParams(selectedGpxFile.getGpxFileToDisplay().getModifiedTime(),
+				selectedGpxFile.getFilteredSelectedGpxFile() != null, false);
 	}
 
 	@NonNull

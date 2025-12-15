@@ -100,7 +100,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			return convertView;
 		} else {
 			int margin = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
-			int sideMargin = app.getResources().getDisplayMetrics().widthPixels / 10;
+			int sideMargin = 0;
 
 			FrameLayout fl = new FrameLayout(themedCtx);
 			LinearLayout ll = new LinearLayout(themedCtx);

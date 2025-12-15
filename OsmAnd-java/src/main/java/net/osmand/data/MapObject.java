@@ -3,7 +3,6 @@ package net.osmand.data;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
-import net.osmand.binary.ObfConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.TransliterationHelper;
 

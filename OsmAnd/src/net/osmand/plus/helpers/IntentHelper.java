@@ -1,5 +1,6 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.data.PointDescription.POINT_TYPE_POI;
 import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.CALLING_FRAGMENT_TAG;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_ID;
@@ -8,6 +9,7 @@ import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
 import static net.osmand.plus.importfiles.ImportHelper.getGpxDestinationDir;
 import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.mapcontextmenu.other.ShareMenu.KEY_SAVE_FILE_NAME;
+import static net.osmand.plus.search.listitems.QuickSearchListItem.getAmenityIconName;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
@@ -18,6 +20,7 @@ import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
+import android.net.Uri.Builder;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,9 +30,15 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
@@ -51,6 +60,7 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.notifications.GpxNotification;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -59,6 +69,8 @@ import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationList
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.RequiredMapsFragment;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchTab;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
@@ -70,6 +82,9 @@ import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment;
+import net.osmand.search.AmenitySearcher;
+import net.osmand.search.AmenitySearcher.Request;
+import net.osmand.search.AmenitySearcher.Settings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.GeoPointParserUtil;
@@ -78,6 +93,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -279,7 +295,10 @@ public class IntentHelper {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
-			if (isOsmAndMapUrl(data) && data.getQueryParameterNames().contains("pin")) {
+
+			if (parseMapPoi(data, intent)) {
+				return true;
+			} else if (isOsmAndMapUrl(data) && data.getQueryParameterNames().contains("pin")) {
 				String latLonParam = data.getQueryParameter("pin");
 				LatLon latLon = Algorithms.isEmpty(latLonParam) ? null : Algorithms.parseLatLon(latLonParam);
 				if (latLon != null) {
@@ -294,6 +313,122 @@ public class IntentHelper {
 			}
 		}
 		return false;
+	}
+
+	private boolean parseAmenity(Uri data, Intent intent) {
+		String name = data.getQueryParameter("name");
+		String type = data.getQueryParameter("type");
+		String wikiDataId = data.getQueryParameter("wikidataId");
+		String osmId = data.getQueryParameter("osmId");
+		String latLonParam = data.getQueryParameter("pin");
+		LatLon latLon = Algorithms.isEmpty(latLonParam) ? null : Algorithms.parseLatLon(latLonParam);
+
+		if (latLon != null) {
+			double pinLat = latLon.getLatitude();
+			double pinLon = latLon.getLongitude();
+			int zoom = settings.getLastKnownMapZoom();
+
+			BaseDetailsObject amenity = searchBaseDetailsObject(pinLat, pinLon, name, type, wikiDataId, osmId);
+			if (amenity == null) {
+				return false;
+			}
+
+			String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+			boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+			String poiSimpleFormat = null;
+			PoiCategory category = amenity.getSyntheticAmenity().getType();
+			if (!MapPoiTypes.getDefault().isOtherCategory(category)) {
+				if (category != null && category.isWiki()) {
+					poiSimpleFormat = amenity.getSyntheticAmenity().getName(lang, transliterate);
+				} else {
+					poiSimpleFormat = Amenity.getPoiStringWithoutType(amenity.getSyntheticAmenity(), lang, transliterate);
+				}
+			}
+
+			PointDescription pointDescription = new PointDescription(POINT_TYPE_POI, poiSimpleFormat);
+			pointDescription.setIconName(getAmenityIconName(app, amenity.getSyntheticAmenity()));
+			settings.setMapLocationToShow(pinLat, pinLon, zoom, pointDescription, true, amenity);
+			return true;
+		}
+
+		clearIntent(intent);
+		return false;
+	}
+
+	private boolean parseFavourite(Uri data, Intent intent) {
+		FavouritesHelper favouritesHelper = app.getFavoritesHelper();
+		String name = data.getQueryParameter("name");
+		String latLonParam = data.getQueryParameter("pin");
+		LatLon latLon = Algorithms.isEmpty(latLonParam) ? null : Algorithms.parseLatLon(latLonParam);
+		int zoom = settings.getLastKnownMapZoom();
+
+		if (latLon != null && !Algorithms.isEmpty(name)) {
+			FavouritePoint point = favouritesHelper.getVisibleFavByLatLon(latLon);
+			PointDescription pointDescription;
+			if (point != null && name.equals(point.getName())) {
+				pointDescription = point.getPointDescription(app);
+				settings.setMapLocationToShow(latLon.getLatitude(), latLon.getLongitude(), zoom, pointDescription, true, point);
+            } else {
+				pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
+				pointDescription.setName(name);
+				settings.setMapLocationToShow(latLon.getLatitude(), latLon.getLongitude(), zoom, pointDescription);
+            }
+            return true;
+        }
+		clearIntent(intent);
+		return false;
+	}
+
+	private boolean parseMapPoi(Uri data, Intent intent) {
+		if (data == null) {
+			return false;
+		}
+
+		if (isOsmAndSite(data) && isPathPrefix(data, "/map/poi")) {
+			boolean hasType = !Algorithms.isEmpty(data.getQueryParameter("type"));
+			boolean hasName = !Algorithms.isEmpty(data.getQueryParameter("name"));
+
+			if (hasType) {
+				return parseAmenity(data, intent);
+			} else if (hasName) {
+				return parseFavourite(data, intent);
+			}
+		}
+
+		return false;
+	}
+
+	@Nullable
+	private BaseDetailsObject searchBaseDetailsObject(Double pinLat, Double pinLon,
+													  String name, String poiType,
+													  String wikiDataId, String osmId) {
+		AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
+		Settings searchSettings = app.getResourceManager().getDefaultAmenitySearchSettings();
+
+		List<String> names = Collections.singletonList(name);
+		long id = -1L;
+		if (osmId != null) {
+			try {
+				id = Long.parseLong(osmId);
+			} catch (NumberFormatException e) {
+				LOG.error("Incorrect OsmId");
+			}
+		}
+		String subType = null;
+		PoiCategory category = Algorithms.isEmpty(poiType) ? null : app.getPoiTypes().getPoiCategoryByName(poiType);
+		if (category == null || MapPoiTypes.getDefault().isOtherCategory(category)) {
+			subType = poiType;
+		}
+
+		if (wikiDataId != null) {
+			if (!wikiDataId.startsWith("Q")) {
+				wikiDataId = "Q" + wikiDataId;
+			}
+		}
+
+		Request request = new Request(names, new LatLon(pinLat, pinLon), wikiDataId, id, subType);
+
+		return amenitySearcher.searchDetailedObject(request, searchSettings);
 	}
 
 	@Nullable
@@ -413,7 +548,7 @@ public class IntentHelper {
 				}
 				if (!attrs.isEmpty()) {
 					try {
-						TileSourceManager.TileSourceTemplate r = TileSourceManager.createTileSourceTemplate(attrs);
+						TileSourceTemplate r = TileSourceManager.createTileSourceTemplate(attrs);
 						if (r != null) {
 							EditMapSourceDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), r);
 						}
@@ -592,7 +727,7 @@ public class IntentHelper {
 				TracksTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), params, callingFragmentTag);
 				clearIntent(intent);
 			}
-			if (intent.hasExtra(ExportSettingsFragment.SELECTED_TYPES)) {
+			if (intent.hasExtra(SELECTED_TYPES)) {
 				ApplicationMode mode = settings.getApplicationMode();
 				FragmentManager manager = mapActivity.getSupportFragmentManager();
 				HashMap<ExportType, List<?>> selectedTypes = (HashMap<ExportType, List<?>>) intent.getSerializableExtra(SELECTED_TYPES);
@@ -713,8 +848,8 @@ public class IntentHelper {
 					mapActivity,
 					sharedText,
 					null,
-					QuickSearchDialogFragment.QuickSearchType.REGULAR,
-					QuickSearchDialogFragment.QuickSearchTab.CATEGORIES,
+					QuickSearchType.REGULAR,
+					QuickSearchTab.CATEGORIES,
 					null
 			);
 		}
@@ -752,7 +887,7 @@ public class IntentHelper {
 		LatLon endPoint = settings.getPointToNavigate();
 		List<LatLon> intermediatePoints = settings.getIntermediatePoints();
 
-		Uri.Builder builder = new Uri.Builder();
+		Builder builder = new Builder();
 		builder.scheme(URL_SCHEME)
 				.authority(URL_AUTHORITY)
 				.appendPath(URL_PATH);

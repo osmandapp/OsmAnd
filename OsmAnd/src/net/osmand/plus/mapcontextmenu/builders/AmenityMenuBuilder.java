@@ -191,16 +191,19 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			} else {
 				Map<String, Object> map = (Map<String, Object>) value;
-				Map<String, String> localizedAdditionalInfo = (Map<String, String>) map.get("localizations");
-				if (Algorithms.isEmpty(localizedAdditionalInfo)) {
+				Map<String, String> localizations = (Map<String, String>) map.get("localizations");
+				if (Algorithms.isEmpty(localizations)) {
 					return null;
 				}
-				Collection<String> availableLocales = AmenityUIHelper.collectAvailableLocalesFromTags(localizedAdditionalInfo.keySet());
+				Collection<String> availableLocales = AmenityUIHelper.collectAvailableLocalesFromTags(localizations.keySet());
 				StringJoiner joiner = new StringJoiner(", ");
 				for (String key : availableLocales) {
 					String localizedKey = WIKIPEDIA + ":" + key;
-					String name = String.format(app.getString(R.string.wikipedia_names_pattern), localizedAdditionalInfo.get(localizedKey), key);
-					joiner.add(name);
+					String localizedValue = localizations.get(localizedKey);
+					if (!Algorithms.isEmpty(localizedValue)) {
+						String name = app.getString(R.string.wikipedia_names_pattern, localizedValue, key);
+						joiner.add(name);
+					}
 				}
 				return joiner.toString();
 			}
@@ -241,6 +244,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		amenityUIHelper.setLight(isLightContent());
 		amenityUIHelper.setLatLon(getLatLon());
 		amenityUIHelper.setCollapseExpandListener(getCollapseExpandListener());
+		amenityUIHelper.setShowDefault(this.showDefaultTags);
 		amenityUIHelper.buildInternal(view);
 	}
 

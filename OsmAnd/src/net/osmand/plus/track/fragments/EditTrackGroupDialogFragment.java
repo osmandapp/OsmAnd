@@ -19,6 +19,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -36,6 +37,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.tracks.tasks.UpdatePointsGroupsTask;
+import net.osmand.plus.myplaces.tracks.tasks.UpdatePointsGroupsTask.UpdateGpxListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.GpxSelectionParams;
@@ -51,6 +53,7 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -150,11 +153,26 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	private void updateGroupVisibility() {
 		callMapActivity(mapActivity -> {
 			if (pointsGroup != null && groupHidden != pointsGroup.isHidden()) {
+				UpdateGpxListener listener = getUpdateGpxListener(mapActivity);
 				Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.getName(), pointsGroup);
-				UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(mapActivity, gpxFile, groups, null);
+				UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(mapActivity, gpxFile, groups, listener);
 				OsmAndTaskManager.executeTask(task);
 			}
 		});
+	}
+
+	@NonNull
+	private UpdateGpxListener getUpdateGpxListener(@NonNull MapActivity mapActivity) {
+		WeakReference<MapActivity> activityRef = new WeakReference<>(mapActivity);
+		return exception -> {
+			MapActivity activity = activityRef.get();
+			if (exception == null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+				TrackMenuFragment fragment = activity.getFragmentsHelper().getTrackMenuFragment();
+				if (fragment != null) {
+					fragment.onPointGroupsVisibilityChanged();
+				}
+			}
+		};
 	}
 
 	@NonNull

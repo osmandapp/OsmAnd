@@ -230,7 +230,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 
 		@Override
 		public void onScale(float focusX, float focusY, float scaleFactor) {
-			handleScale(focusX, focusY, scaleFactor);
+//			handleScale(focusX, focusY, scaleFactor);
 		}
 	};
 

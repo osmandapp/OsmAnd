@@ -70,7 +70,7 @@
     <string name="record_plugin_name">Teekonna salvestamine</string>
     <string name="plugin_nautical_name">Merenduskaardi vaade</string>
     <string name="audionotes_plugin_name">Audio/video märkmed</string>
-    <string name="shared_string_accessibility">Juurdepääs</string>
+    <string name="shared_string_accessibility">Hõlpsus</string>
     <string name="debugging_and_development">OsmAndi arendus</string>
     <string name="back_to_map">Tagasi kaardile</string>
     <string name="share_note">Jaga märget</string>
@@ -772,8 +772,8 @@
     <string name="edit_profile_setup_map_subtitle">Vali profiili kaardiseadistused</string>
     <string name="edit_profile_screen_options_subtitle">Vali profiili ekraaniseadistused</string>
     <string name="edit_profile_nav_settings_subtitle">Vali profiili navigeerimisseadistused</string>
-    <string name="routing_attr_max_num_changes_description">Määra muudatuste ülemine piir</string>
-    <string name="routing_attr_max_num_changes_name">Ümberistumiste arv</string>
+    <string name="routing_attr_max_num_changes_description">Määra ümberistumiste arvu ülempiir</string>
+    <string name="routing_attr_max_num_changes_name">Ümberistumiste arvu ülempiir</string>
     <string name="turn_screen_on_router">Ärka pöördel</string>
     <string name="turn_screen_on_time_descr">Reguleeri kui kaua ekraan peaks olema sisse lülitatud.</string>
     <string name="turn_screen_on_sensor">Kasuta lähedusandurit</string>
@@ -4080,7 +4080,7 @@
 \n
 \nPalun muuda salvestusruum jagatud salvestusruumist saadaolevaks salvestusruumiks, vastasel juhul kaotab rakendus juurdepääsu sinu andmetele, sealhulgas võrguühenduseta kaartidele, GPX-radadele ja muule sarnasele.</string>
     <string name="release_4_1">• Lisatud Android Auto esialgne tugi \n \n • Kasutajaliidese värskendus UTM -i koordinaatide otsimiseks \n \n • GPS filter GPX radade jaoks \n \n • Kõrguste vidin (Pro-versioonis) \n \n • Lemmikud: lisatud võimalus vaadata hiljuti kasutatud ikoone \n \n • Marsruudi planeerimine: kasutab pärast käivitamist valitud profiili \n \n • Fikseeritud Mapillary kiht, pistikprogramm on nüüd vaikimisi keelatud \n \n • Lisatud ekraan rakenduse kogu ajaloo haldamiseks \n \n • Kaardi orientatsiooni ei lähtestata pärast rakenduse taaskäivitamist \n \n • Täiustatud SRTM kõrguse markerite renderdamine \n \n • Fikseeritud araabiakeelsete siltide kuvamine kaardil \n \n • Parandatud erinevad marsruutimisprobleemid</string>
-    <string name="rendering_attr_natureReserves_name">Looduskaitseala ja muud kaitsealused alad</string>
+    <string name="rendering_attr_natureReserves_name">Looduskaitseala ja muud kaitsealad</string>
     <string name="is_disabled">%1$s on välja lülitatud</string>
     <string name="history_is_disabled_descr">Selleks, et saaksid lihtsamini kasutada varasemaid tulemusi, võta kasutusele ajaloo salvestamine.</string>
     <string name="transparent_status_bar_descr">Näita olekuriba all kaarti</string>
@@ -4700,7 +4700,7 @@
     <string name="sound_beep_simple">Piiksatus: lihtne</string>
     <string name="special_routing_cpp">Spetsiaalse marsruutimise tüüp</string>
     <string name="auto_zoom_3d_angle">Autosuumi 3D nurk</string>
-    <string name="litres">Liitreid</string>
+    <string name="litres">Liitrid</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Näitab arvutuslikku kütusekulu (%/t)</string>
     <string name="shared_string_uphill">Ülesmäge</string>
     <string name="sound_beep_complex_loud">Piiksatus: keerukas ja vali</string>
@@ -5317,7 +5317,7 @@
     <string name="wheel_circumference">Ratta ümbermõõt</string>
     <string name="routing_attr_difficulty_preference_beginner_name">Algaja</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Täiendavad seadistused</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Näita ikoone väiksema suumitaseme puhul üldistatuna</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Ikoonide lihtsustatud visuaal väiksema suumitaseme nende huvipunktide jaoks, mida tavaliselt ei kuvata</string>
     <string name="layer_coordinates_grid">Koordinaatide võrgustik</string>
     <string name="routing_attr_avoid_4wd_only_description">Väldi teid, mis sobivad vaid neljarattaveoga sõidukitele</string>
     <string name="dangerous_goods">Ohtlikud kaubad</string>
@@ -5357,4 +5357,22 @@
     <string name="osm_live_payment_renews_3_years">Uueneb iga kolme aasta järel</string>
     <string name="rendering_attr_watercolor_description">Vee värv</string>
     <string name="rendering_attr_watercolor_name">Vee värv</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Suusanõlvad ja rajad</string>
+    <string name="trip_recording_downhill_widget_desc">Näitab salvestatud teekonna kõikide laskumiste summat või viimast laskumist.</string>
+    <string name="trip_recording_uphill_widget_desc">Näitab salvestatud teekonna kõikide tõusude summat või viimast tõusu.</string>
+    <string name="rendering_attr_pisteRoutes_name">Suusanõlvad ja rajad</string>
+    <string name="three_years_subscription">Tellimus kolmeks aastaks</string>
+    <string name="download_wikipedia_label">Laadi alla Vikipeedia andmed</string>
+    <string name="trip_recording_distance_widget_desc">Näitab hetkel salvestatud teekonna vahemaad ja võimaldab vajadusel vaadata viimase tõusu või laskumise vahemaad.</string>
+    <string name="private_access_routing_req_short">Kas lubad kasutada teekonna koostamiseks erakasutuses teid?</string>
+    <string name="routing_attr_pt_limit_name">Näita N parimat marsruuti</string>
+    <string name="routing_attr_pt_limit_description">Saad määratleda parimate teekonnavalikute arvu</string>
+    <string name="centimeter">sm</string>
+    <string name="shared_string_centimeters">sentimeetrit</string>
+    <string name="bicycle_width_limit_description">Kitsaste rattateede vältimiseks sisesta oma jalgratta laius.</string>
+    <string name="copy_link">Kopeeri link</string>
+    <string name="is_parking_time_limited">Kas parkimise aeg on piiratud?</string>
+    <string name="altitude_metrics_description">Seadistab kõrguse mõõtühiku vidinate ja statistika jaoks.</string>
+    <string name="quick_action_map_center_widget_descr">Nupp, mis võimaldab näidata või peita kaardi keskpunkti vidinat.</string>
+    <string name="key_event_category_map_interactions">Tegevused kaardiga</string>
 </resources>

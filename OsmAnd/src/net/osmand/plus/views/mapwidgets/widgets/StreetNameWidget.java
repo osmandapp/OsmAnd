@@ -319,7 +319,7 @@ public class StreetNameWidget extends MapWidget {
 		float centerY = viewHeightPx / 2f - paint.getFontMetrics().ascent / 2f;
 		text.fillProperties(rc, rreq, centerX, centerY);
 		textRenderer.drawShieldIcon(rc, canvas, text, text.getShieldResIcon());
-		textRenderer.drawWrappedText(canvas, text, 20f);
+		textRenderer.drawAutoDownScaleText(canvas, text);
 
 		ImageView imageView = new ImageView(mapActivity);
 		int viewSize = AndroidUtils.dpToPx(app, SHIELD_HEIGHT_DP);

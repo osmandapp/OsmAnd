@@ -244,10 +244,16 @@ object GpxDbHelper : GpxReaderAdapter {
 		return getItem(file, null, readIfNeeded)
 	}
 
+	fun getGpxDirItem(item: GpxDataItem) = item.file.getParentFile()?.let { getGpxDirItem(it) }
+
 	fun getGpxDirItem(file: KFile): GpxDirItem {
 		var item = dirItems[file]
 		if (item == null) {
 			item = database.getGpxDirItem(file)
+
+			if (item != null) {
+				putToCache(item)
+			}
 		}
 		if (item == null) {
 			item = GpxDirItem(file)

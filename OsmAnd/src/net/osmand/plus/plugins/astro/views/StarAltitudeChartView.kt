@@ -15,8 +15,8 @@ import io.github.cosinekitty.astronomy.Observer
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import net.osmand.plus.R
-import net.osmand.plus.plugins.astro.AstroUtils
-import net.osmand.plus.plugins.astro.AstroUtils.Twilight
+import net.osmand.plus.plugins.astro.utils.AstroUtils
+import net.osmand.plus.plugins.astro.utils.AstroUtils.Twilight
 import java.time.Duration
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -194,7 +194,7 @@ class StarAltitudeChartView @JvmOverloads constructor(
 		val m = cachedModel ?: return
 
 		val height = measureHeight()
-		canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), bgPaint)
+		//canvas.drawColor(bgPaint.color)
 
 		val chartLeft = leftPad + legendW + dp(12f)
 		val chartTop = headerH + topAxisH

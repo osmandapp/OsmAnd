@@ -69,7 +69,7 @@ public abstract class LocalBaseFragment extends BaseFullScreenFragment implement
 
 	protected void reloadItemsToUpdate() {
 		itemsToUpdate.clear();
-		for (IndexItem item : app.getDownloadThread().getIndexes().getIndividualItemsToUpdate()) {
+		for (IndexItem item : app.getDownloadThread().getIndexes().getOutdatedItems().all()) {
 			itemsToUpdate.put(item.getTargetFileName(), item);
 		}
 	}

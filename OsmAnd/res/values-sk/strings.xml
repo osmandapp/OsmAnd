@@ -5875,9 +5875,7 @@
     <string name="help_article_navigation_routing_ski_routing_name">Lyžiarske trasy a zjazdovky</string>
     <string name="rendering_attr_pisteRoutes_name">Lyžiarske trasy a zjazdovky</string>
     <string name="download_wikipedia_label">Stiahnuť Wikipédiu</string>
-    <string name="show_spherical_map">Zobraziť guľatú mapu</string>
     <string name="show_spherical_map_description">Zobraziť guľovitý model Zeme</string>
-    <string name="enable_3d_objects">Povoliť 3D budovy</string>
     <string name="enable_3d_objects_description">Zobrazí 3D objekty budov na mape</string>
     <string name="efficient_grid">Efektívna mriežka</string>
     <string name="slots">Pozície</string>

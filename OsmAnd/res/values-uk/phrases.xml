@@ -156,7 +156,7 @@
     <string name="poi_leather">Крамниця шкіри, галантарея</string>
     <string name="poi_music">Музичний магазин</string>
     <string name="poi_scuba_diving_shop">Крамниця для плавання з масками</string>
-    <string name="poi_tyres">Крамниця автомобільних шин</string>
+    <string name="poi_tyres">Шини;Шина;Шина;Шинний магазин;Шини</string>
     <string name="poi_watches">Крамниця годинників</string>
     <string name="poi_swimming_pool_shop">Крамниця речей для басейну</string>
     <string name="poi_games">Ігри</string>
@@ -2744,7 +2744,7 @@
     <string name="poi_nuclear_explosion_type_atmospheric_balloon">Вид вибуху: атмосферний, на повітряній кулі</string>
     <string name="poi_provided_for_toddler_yes">Послуги надаються немовлятам: так</string>
     <string name="poi_xmas_shop">Різдвяний магазин</string>
-    <string name="poi_cuisine_soup">Зупи</string>
+    <string name="poi_cuisine_soup">Суп</string>
     <string name="poi_cuisine_basque">Баскська</string>
     <string name="poi_outdoor_seating_yes">Місця на відкритому повітрі: є</string>
     <string name="poi_vending_ice_cream">Продаж морозива</string>
@@ -2940,7 +2940,7 @@
     <string name="poi_healthcare_speciality_palliative_medicine">Паліативна допомога</string>
     <string name="poi_nuclear_explosion_purpose_industrial_application">Мета вибуху: промислове застосування</string>
     <string name="poi_counselling_yes">Психологічна консультація: є</string>
-    <string name="poi_cuisine_kebab">Кебаб</string>
+    <string name="poi_cuisine_kebab">Кебаб; Страва</string>
     <string name="poi_cuisine_italian">Італійська</string>
     <string name="poi_tower_construction_freestanding">Конструкція: масивна без відтяжок</string>
     <string name="poi_tower_construction_dish">Конструкція: параболічна тарілка</string>
@@ -2951,7 +2951,7 @@
     <string name="poi_building_type_pyramid">Вид будівлі: піраміда</string>
     <string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Мета вибуху: промислове застосування, зрушення земляних пластів</string>
     <string name="poi_counselling_no">Психологічна консультація: немає</string>
-    <string name="poi_cuisine_doner">Донер кебаб (шаурма)</string>
+    <string name="poi_cuisine_doner">Донер-кебаб (шаурма); Страва</string>
     <string name="poi_cuisine_chinese">Китайська</string>
     <string name="poi_tower_construction_dome">Конструкція: купол</string>
     <string name="poi_full_service_yes">Повний комплекс послуг</string>
@@ -3439,7 +3439,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">Ремонт трансмісії</string>
     <string name="poi_service_vehicle_motor_yes">Двигун</string>
     <string name="poi_service_vehicle_insurance_yes">Страхування</string>
-    <string name="poi_service_vehicle_tyres_yes">Шиномонтаж</string>
+    <string name="poi_service_vehicle_tyres_yes">Шини; Шина; Шини; Шина</string>
     <string name="poi_via_ferrata_scale">Складність</string>
     <string name="poi_cable_number">Кількість тросів</string>
     <string name="poi_glacier_type_mountain">Гірський</string>

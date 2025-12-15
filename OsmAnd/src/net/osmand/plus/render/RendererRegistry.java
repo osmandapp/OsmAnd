@@ -75,8 +75,7 @@ public class RendererRegistry {
 
 		}
 
-		default void onRendererLoaded(String name, RenderingRulesStorage rules,
-				InputStream source) {
+		default void onRendererLoaded(String name, RenderingRulesStorage rules) {
 
 		}
 	}
@@ -216,7 +215,7 @@ public class RendererRegistry {
 
 			if (!addon) {
 				for (RendererEventListener listener : rendererLoadedListeners) {
-					listener.onRendererLoaded(name, main, getInputStream(name));
+					listener.onRendererLoaded(name, main);
 				}
 			}
 		}

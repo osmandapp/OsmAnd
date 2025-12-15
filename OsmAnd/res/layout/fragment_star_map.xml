@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="?attr/activity_background_color">
+	android:background="@color/color_transparent">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -22,42 +22,41 @@
 			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:minHeight="@dimen/toolbar_height"
-				app:layout_collapseMode="pin">
+				android:layout_height="@dimen/toolbar_height"
+				android:fitsSystemWindows="false"
+				android:gravity="center_vertical"
+				app:title="@string/star_map" >
 
-				<LinearLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:orientation="horizontal"
-					android:gravity="center_vertical">
+				<ImageButton
+					android:id="@+id/settings_button"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:layout_gravity="end"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/visible_layers_and_objects"
+					app:srcCompat="@drawable/ic_action_settings"
+					app:tint="@color/icon_color_default_light" />
 
-					<ImageButton
-						android:id="@+id/back_button"
-						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-						android:layout_width="48dp"
-						android:layout_height="48dp"
-						app:srcCompat="@drawable/ic_arrow_back"
-						app:tint="@color/icon_color_default_light" />
+				<ImageButton
+					android:id="@+id/star_chart_button"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:layout_gravity="end"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/star_charts_name"
+					app:srcCompat="@drawable/ic_action_layers"
+					app:tint="@color/icon_color_default_light" />
 
-					<TextView
-						android:id="@+id/toolbar_title"
-						android:layout_width="0dp"
-						android:layout_height="wrap_content"
-						android:layout_weight="1"
-						android:text="Star Map 3D"
-						android:textSize="20sp"
-						android:textColor="@color/text_color_primary_light"
-						android:textStyle="bold" />
+				<ImageButton
+					android:id="@+id/star_map_button"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:layout_gravity="end"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/star_map"
+					app:srcCompat="@drawable/ic_action_world_globe"
+					app:tint="@color/icon_color_default_light" />
 
-					<ImageButton
-						android:id="@+id/settings_button"
-						android:layout_width="48dp"
-						android:layout_height="48dp"
-						android:background="?attr/selectableItemBackgroundBorderless"
-						app:srcCompat="@drawable/ic_action_settings"
-						app:tint="@color/icon_color_default_light" />
-				</LinearLayout>
 			</androidx.appcompat.widget.Toolbar>
 		</com.google.android.material.appbar.AppBarLayout>
 
@@ -70,6 +69,14 @@
 				android:id="@+id/star_view"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent" />
+
+			<!-- Camera Overlay (On top of StarView) -->
+			<TextureView
+				android:id="@+id/camera_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:alpha="0.5"
+				android:visibility="gone"/>
 
 			<!-- New Time Control Custom View -->
 			<net.osmand.plus.plugins.astro.views.DateTimeSelectionView
@@ -91,7 +98,164 @@
 				android:layout_marginTop="140dp"
 				android:visibility="gone"/>
 
+			<!-- Compass Button (Top Left) -->
+			<FrameLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+
+				<include
+					layout="@layout/map_compass_button"
+					android:layout_width="@dimen/map_small_button_size"
+					android:layout_height="@dimen/map_small_button_size"
+					android:layout_marginStart="@dimen/map_button_margin"
+					android:layout_marginTop="@dimen/map_small_button_margin" />
+
+			</FrameLayout>
+
+			<!-- Right Side Controls (AR, Camera, Slider, FOV) -->
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top|end"
+				android:layout_marginTop="@dimen/map_small_button_margin"
+				android:layout_marginEnd="@dimen/map_button_margin"
+				android:orientation="vertical"
+				android:gravity="center_horizontal">
+
+				<!-- AR Mode Button -->
+				<ImageButton
+					android:id="@+id/ar_mode_button"
+					android:layout_width="@dimen/map_small_button_size"
+					android:layout_height="@dimen/map_small_button_size"
+					android:background="@drawable/btn_circle"
+					android:contentDescription="AR Mode"
+					android:padding="12dp"
+					android:scaleType="fitCenter"
+					android:elevation="4dp"
+					app:srcCompat="@drawable/ic_action_map_pan"
+					app:tint="#5f6e7c" />
+
+				<!-- Camera Overlay Button -->
+				<ImageButton
+					android:id="@+id/camera_button"
+					android:layout_width="@dimen/map_small_button_size"
+					android:layout_height="@dimen/map_small_button_size"
+					android:layout_marginTop="12dp"
+					android:background="@drawable/btn_circle"
+					android:contentDescription="Camera Overlay"
+					android:padding="12dp"
+					android:scaleType="fitCenter"
+					android:elevation="4dp"
+					app:srcCompat="@drawable/ic_action_device_camera"
+					app:tint="#5f6e7c" />
+
+				<!-- Vertical Slider Container -->
+				<FrameLayout
+					android:id="@+id/slider_container"
+					android:layout_width="40dp"
+					android:layout_height="150dp"
+					android:layout_marginTop="8dp"
+					android:visibility="gone">
+
+					<!-- Rotated SeekBar to make it vertical -->
+					<SeekBar
+						android:id="@+id/transparency_slider"
+						android:layout_width="150dp"
+						android:layout_height="40dp"
+						android:layout_gravity="center"
+						android:rotation="270"
+						android:progress="50"
+						android:max="100" />
+				</FrameLayout>
+
+				<!-- Reset FOV Button -->
+				<ImageButton
+					android:id="@+id/reset_fov_button"
+					android:layout_width="@dimen/map_small_button_size"
+					android:layout_height="@dimen/map_small_button_size"
+					android:layout_marginTop="8dp"
+					android:background="@drawable/btn_circle"
+					android:contentDescription="Reset FOV"
+					android:padding="12dp"
+					android:scaleType="fitCenter"
+					android:elevation="4dp"
+					android:visibility="gone"
+					app:srcCompat="@drawable/ic_action_reset_to_default_dark"
+					app:tint="#5f6e7c" />
+
+			</LinearLayout>
+
+			<FrameLayout
+				android:id="@+id/star_map_controls_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom"
+				android:layout_marginHorizontal="@dimen/content_padding_half"
+				android:layout_marginBottom="@dimen/content_padding_small_half">
+
+				<include
+					layout="@layout/map_hud_controls"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|bottom" />
+
+			</FrameLayout>
+
+			<FrameLayout
+				android:id="@+id/map_controls_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom"
+				android:layout_marginHorizontal="@dimen/content_padding_half"
+				android:layout_marginBottom="@dimen/content_padding_small_half"
+				android:visibility="gone">
+
+				<include
+					layout="@layout/map_hud_controls"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|bottom" />
+
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom|start"
+					android:layout_marginStart="@dimen/map_button_spacing"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						tools:ignore="UselessParent">
+
+						<include
+							layout="@layout/map_ruler"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="start|bottom" />
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</FrameLayout>
+
 		</FrameLayout>
+
+		<LinearLayout
+			android:id="@+id/star_charts_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:orientation="vertical"
+			android:background="#424242"
+			android:visibility="gone">
+
+			<include layout="@layout/star_charts_content" />
+
+		</LinearLayout>
+
 	</LinearLayout>
 
 	<LinearLayout

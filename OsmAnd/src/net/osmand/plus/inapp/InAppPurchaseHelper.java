@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
@@ -517,6 +518,8 @@ public abstract class InAppPurchaseHelper {
 	@SuppressLint("StaticFieldLeak")
 	private class RequestInventoryTask extends AsyncTask<Void, Void, String[]> {
 
+		private static final int THREAD_ID = 10106;
+
 		private final boolean userRequested;
 
 		RequestInventoryTask(boolean userRequested) {
@@ -525,6 +528,8 @@ public abstract class InAppPurchaseHelper {
 
 		@Override
 		protected String[] doInBackground(Void... params) {
+			TrafficStats.setThreadStatsTag(THREAD_ID);
+
 			String activeSubscriptionsIds = null;
 			String subscriptionsState = null;
 			String inappsState = null;

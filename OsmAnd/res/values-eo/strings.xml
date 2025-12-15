@@ -2911,8 +2911,8 @@
     <string name="edit_profile_setup_map_subtitle">Elekti agordojn pri mapo por la profilo</string>
     <string name="edit_profile_screen_options_subtitle">Elekti agordojn pri ekrano por la profilo</string>
     <string name="edit_profile_nav_settings_subtitle">Elekti agordojn pri navigado por la profilo</string>
-    <string name="routing_attr_max_num_changes_description">Difini maksimuman nombron de ŝanĝoj de transportiloj</string>
-    <string name="routing_attr_max_num_changes_name">Nombro de transveturiliĝoj</string>
+    <string name="routing_attr_max_num_changes_description">Difini la maksimuman nombron de ŝanĝoj de transportiloj</string>
+    <string name="routing_attr_max_num_changes_name">Maksimuma nombro de transveturiliĝoj</string>
     <string name="turn_screen_on_router">Teni ekranon ŝaltita</string>
     <string name="turn_screen_on_time_descr">Agordi por kiom longe la ekrano estos ŝaltita.</string>
     <string name="turn_screen_on_sensor">Uzi proksimec‑sentilon</string>
@@ -5861,7 +5861,6 @@
     <string name="access_pinch_zoom_magnification">Pinĉi por momente pligrandigi</string>
     <string name="access_pinch_zoom_magnification_descr">Uzi skaladon de vidujo anstataŭ diskretajn nivelojn de pligrandigo por gestoj de pligrandigo.</string>
     <string name="accessibility_independent_features">Sendependaj ebloj</string>
-    <string name="show_spherical_map">Vidigi sferan mapon</string>
     <string name="show_spherical_map_description">Vidigi sferoidan modelon de Tero</string>
     <string name="shared_string_price">Prezo</string>
     <string name="rendering_attr_showSkiSlopes_name">Skiaj descendejoj</string>
@@ -5892,7 +5891,6 @@
     <string name="button_frames">Kadroj ĉirkaŭ butonoj</string>
     <string name="slots">Truoj</string>
     <string name="efficient_grid">Efika krado</string>
-    <string name="enable_3d_objects">Aktivigi 3-dimensiajn konstruaĵojn</string>
     <string name="enable_3d_objects_description">Vidigi 3-dimensiajn konstruaĵojn sur la mapo</string>
     <string name="deleted_maps_warning">%d elemento(j) estos forigita(j).\nĈu vi certas?</string>
     <string name="deleted_maps_prompt">La jenaj mapoj ne estos plu subtenataj kaj estas anstataŭigitaj per mapoj de malpli grandaj regionoj. Forigu ilin kaj elŝutu la novajn versiojn.</string>
@@ -5900,4 +5898,10 @@
     <string name="routing_attr_weightrating_name">Maksimuma maso je plena ŝarĝo</string>
     <string name="routing_attr_maxaxleload_name">Maksimuma pezo sur akso</string>
     <string name="is_parking_time_limited">Ĉu parkuma tempo estas limigita?</string>
+    <string name="routing_attr_pt_limit_name">Montri N plej bonajn kursojn</string>
+    <string name="routing_attr_pt_limit_description">Difini nombron da plej bonaj kursoj por montri</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimetroj</string>
+    <string name="bicycle_width_limit_description">Enigu larĝon de via biciklo por eviti mallarĝajn biciklajn vojojn.</string>
+    <string name="copy_link">Kopii ligilon</string>
 </resources>

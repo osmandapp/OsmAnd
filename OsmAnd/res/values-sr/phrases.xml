@@ -170,7 +170,7 @@
     <string name="poi_ticket">Продаја карата</string>
     <string name="poi_tobacco">Продавница дувана</string>
     <string name="poi_toys">Продавница играчака</string>
-    <string name="poi_tyres">Продавница гума</string>
+    <string name="poi_tyres">Гуме; Гума; Гума; Продавница гума; Гуме</string>
     <string name="poi_vacuum_cleaner">Продавница усисивача</string>
     <string name="poi_video">Видео клуб</string>
     <string name="poi_electronics">Продавница електронике</string>
@@ -2348,8 +2348,8 @@
     <string name="poi_cuisine_burger">Пљескавице</string>
     <string name="poi_cuisine_coffee_shop">Кафа</string>
     <string name="poi_cuisine_sandwich">Сендвичи</string>
-    <string name="poi_cuisine_kebab">Кебаб</string>
-    <string name="poi_cuisine_doner">Донер кебаб (шавурма)</string>
+    <string name="poi_cuisine_kebab">Кебаб; Јело</string>
+    <string name="poi_cuisine_doner">Донер кебаб (шавурма); Јело</string>
     <string name="poi_cuisine_chicken">Пилетина</string>
     <string name="poi_cuisine_ice_cream">Сладолед</string>
     <string name="poi_cuisine_sushi">Суши</string>
@@ -3330,7 +3330,7 @@
     <string name="poi_via_ferrata">Заштићена рута</string>
     <string name="poi_climbing_adventure">Авантура пењања</string>
     <string name="poi_aerialway_zip_line">Зип лајн</string>
-    <string name="poi_service_vehicle_tyres_yes">Гуме</string>
+    <string name="poi_service_vehicle_tyres_yes">Гуме; Гума; Гума; Гуме</string>
     <string name="poi_service_vehicle_insurance_yes">Осигурање</string>
     <string name="poi_service_vehicle_motor_yes">Мотор</string>
     <string name="poi_service_vehicle_transmission_repair_yes">Поправка трансмисије</string>

@@ -12,7 +12,6 @@ import static net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapsDbHelper.OPE
 import static net.osmand.plus.plugins.osmedit.helpers.OsmBugsDbHelper.OSMBUGS_DB_NAME;
 import static net.osmand.plus.settings.backend.OsmandSettings.CUSTOM_SHARED_PREFERENCES_PREFIX;
 import static net.osmand.plus.settings.backend.OsmandSettings.SHARED_PREFERENCES_NAME;
-import static java.text.DateFormat.SHORT;
 
 import android.content.Context;
 
@@ -50,7 +49,6 @@ import net.osmand.util.CollectionUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -224,7 +222,8 @@ public class LocalItemUtils {
 	}
 
 	@NonNull
-	public static CharSequence getItemName(@NonNull Context context, @NonNull LocalItem item) {
+	public static CharSequence getItemName(@NonNull Context context, @NonNull LocalItem item,
+	                                       boolean includingParent) {
 		LocalItemType type = item.getType();
 		String fileName = item.getFileName();
 		Object attachedObject = item.getAttachedObject();
@@ -270,7 +269,7 @@ public class LocalItemUtils {
 		boolean reversed = !getSortModePref(app, type).get().isCountryMode();
 
 		String divider = ", ";
-		String name = FileNameTranslationHelper.getFileName(context, regions, fileName, divider, true, reversed);
+		String name = FileNameTranslationHelper.getFileName(context, regions, fileName, divider, includingParent, reversed);
 		if (!Algorithms.isEmpty(name)) {
 			int index = name.indexOf(divider);
 			if (index != -1) {
@@ -280,6 +279,12 @@ public class LocalItemUtils {
 			return name;
 		}
 		return Algorithms.getFileNameWithoutExtension(fileName).replace('_', ' ');
+	}
+
+	@NonNull
+	public static CharSequence getItemName(@NonNull Context context, @NonNull MultipleLocalItem item) {
+		String itemsSize = String.valueOf(item.getItems().size());
+		return context.getString(R.string.ltr_or_rtl_combine_via_dash, item.getName(), itemsSize);
 	}
 
 	@NonNull
@@ -293,6 +298,15 @@ public class LocalItemUtils {
 			String formattedDate = getFormattedDate(context, new Date(item.getLastModified()));
 			return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDate);
 		}
+	}
+
+	@NonNull
+	public static String getItemDescription(@NonNull Context context, @NonNull MultipleLocalItem item) {
+		String formattedSize = item.getSizeDescription(context);
+		String formattedMinDate = getFormattedDate(context, new Date(item.getMinTimestamp()));
+		String formattedMaxDate = getFormattedDate(context, new Date(item.getMaxTimestamp()));
+		String formattedDateRange = context.getString(R.string.ltr_or_rtl_combine_via_dash, formattedMinDate, formattedMaxDate);
+		return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDateRange);
 	}
 
 	@NonNull

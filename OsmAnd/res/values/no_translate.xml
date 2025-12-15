@@ -74,8 +74,7 @@
 
     <string name="star_watcher_plugin_name">Star watcher (Beta)</string>
     <string name="star_watcher_plugin_description">Star charts, 3D star map</string>
-    <string name="show_star_map">Show star map</string>
-    <string name="star_map_3d">3D star map</string>
+    <string name="star_map">Star map</string>
     <string name="star_charts_name">Star charts</string>
     <string name="star_charts_widget_group_desc">A set of views showing various astronomical information.</string>
     <string name="star_chart_name">Star chart</string>

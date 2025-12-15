@@ -30,8 +30,8 @@ import io.github.cosinekitty.astronomy.horizon
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import net.osmand.plus.R
-import net.osmand.plus.plugins.astro.AstroUtils
-import net.osmand.plus.plugins.astro.AstroUtils.toAstroTime
+import net.osmand.plus.plugins.astro.utils.AstroUtils
+import net.osmand.plus.plugins.astro.utils.AstroUtils.toAstroTime
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.cos
@@ -298,7 +298,7 @@ class CelestialPathView @JvmOverloads constructor(
 		super.onDraw(canvas)
 		val m = cachedModel ?: return
 
-		canvas.drawColor(bgPaint.color)
+		//canvas.drawColor(bgPaint.color)
 		updateMatrix()
 
 		canvas.drawText(context.getString(R.string.ltr_or_rtl_combine_via_dash,

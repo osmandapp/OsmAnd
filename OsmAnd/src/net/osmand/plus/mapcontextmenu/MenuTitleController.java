@@ -5,11 +5,15 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.search.AmenitySearcher;
+import net.osmand.search.AmenitySearcher.Request;
+import net.osmand.search.AmenitySearcher.Settings;
 import net.osmand.util.Algorithms;
 
 public abstract class MenuTitleController {
@@ -139,6 +143,9 @@ public abstract class MenuTitleController {
 			if (needStreetName()) {
 				acquireStreetName();
 			}
+			if (needAsyncAmenityName()) {
+				acquireAsyncAmenityName();
+			}
 		}
 	}
 
@@ -228,6 +235,33 @@ public abstract class MenuTitleController {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			app.getGeocodingLookupService().lookupAddress(addressLookupRequest);
+		}
+	}
+
+	private boolean needAsyncAmenityName() {
+		MenuController menuController = getMenuController();
+		return menuController != null && menuController.needAsyncAmenityName();
+	}
+
+	private void acquireAsyncAmenityName() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && getObject() instanceof MapObject that) {
+			Request request = new Request(that);
+			AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
+			Settings searchSettings = app.getResourceManager().getDefaultAmenitySearchSettings();
+			amenitySearcher.searchDetailedAmenityAsync(request, searchSettings, amenity -> {
+				app.runInUIThread(() -> {
+					if (amenity != null) {
+						String amenityName = amenity.getName();
+						if (!Algorithms.isEmpty(amenityName)) {
+							that.setName(amenityName);
+							setNameStr(amenityName);
+							onSearchAddressDone();
+						}
+					}
+				});
+				return true;
+			});
 		}
 	}
 

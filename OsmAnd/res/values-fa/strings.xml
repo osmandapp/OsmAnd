@@ -4817,7 +4817,6 @@
     <string name="steps_per_minute_unit">گام در دقیقه</string>
     <string name="allow_display_on_top">اجازه نمایش در بالا</string>
     <string name="allow_display_on_top_description">اجازه نمایش متون نقشه روی یکدیگر</string>
-    <string name="show_spherical_map">نمایش نقشه کروی</string>
     <string name="show_spherical_map_description">نمایش مدل کروی زمین</string>
     <string name="show_debug_tile">نمایش اطلاعات کاشی</string>
     <string name="show_rasterization_debug_tile">نمایش اطلاعات رندر کاشی</string>

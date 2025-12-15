@@ -2831,8 +2831,8 @@
     <string name="edit_profile_setup_map_subtitle">Elegí las opciones de mapa para el perfil</string>
     <string name="edit_profile_screen_options_subtitle">Elegí las opciones de pantalla para el perfil</string>
     <string name="edit_profile_nav_settings_subtitle">Elegí los ajustes de navegación para el perfil</string>
-    <string name="routing_attr_max_num_changes_description">Indicá el número máximo de transbordos</string>
-    <string name="routing_attr_max_num_changes_name">Número de transbordos</string>
+    <string name="routing_attr_max_num_changes_description">Indicá el límite máximo de transbordos</string>
+    <string name="routing_attr_max_num_changes_name">Número máximo de transbordos</string>
     <string name="turn_screen_on_router">Despertar al girar</string>
     <string name="turn_screen_on_time_descr">Definí durante cuánto tiempo debe encenderse la pantalla.</string>
     <string name="turn_screen_on_sensor">Usar sensor de proximidad</string>
@@ -5733,7 +5733,6 @@
     <string name="accessibility_independent_features">Características independientes</string>
     <string name="access_pinch_zoom_magnification">Zum mediante pellizcos</string>
     <string name="access_pinch_zoom_magnification_descr">Usá el escalado de la ventana gráfica en lugar de los niveles de zum discretos durante los gestos de acercamiento.</string>
-    <string name="show_spherical_map">Mostrar mapa esférico</string>
     <string name="show_spherical_map_description">Muestra un modelo esferoidal de la Tierra</string>
     <string name="shared_string_price">Precio</string>
     <string name="rendering_attr_showSkiSlopes_name">Mostrar pistas de esquí</string>
@@ -5764,12 +5763,17 @@
     <string name="slots">Espacios</string>
     <string name="button_frames">Marcos de botones</string>
     <string name="visualizing_button_grid">Cuadrícula de botones del mapa</string>
-    <string name="enable_3d_objects">Activar edificios en 3D</string>
     <string name="enable_3d_objects_description">Muestra edificios en 3D como objetos en el mapa</string>
     <string name="deleted_maps_warning">Borrarás %d elemento(s)\n¿Continuar?</string>
-    <string name="deleted_maps_prompt">Estos mapas ya no se admiten y fueron reemplazados por regiones más pequeñas. Es necesario quitarlos y descargar las nuevas versiones.</string>
+    <string name="deleted_maps_prompt">Estos mapas no se admiten más y debés reemplazarlos por sus regiones más pequeñas. Por favor, quitalos y descargá las versiones nuevas.</string>
     <string name="unsupported_maps">Mapas incompatibles</string>
     <string name="routing_attr_weightrating_name">Peso bruto máximo</string>
     <string name="routing_attr_maxaxleload_name">Carga máxima de eje</string>
     <string name="is_parking_time_limited">¿El estacionamiento tiene tiempo límite?</string>
+    <string name="routing_attr_pt_limit_name">Mostrar las N mejores rutas</string>
+    <string name="routing_attr_pt_limit_description">Definí el número de mejores rutas a mostrar</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centímetros</string>
+    <string name="bicycle_width_limit_description">Indicá el ancho de la bicicleta para evitar ciclovías/bicisendas angostas.</string>
+    <string name="copy_link">Copiar enlace</string>
 </resources>

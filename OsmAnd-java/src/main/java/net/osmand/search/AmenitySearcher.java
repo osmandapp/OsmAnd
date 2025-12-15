@@ -92,6 +92,16 @@ public class AmenitySearcher {
             this.checkOriginName = checkOriginName;
         }
 
+        public Request(List<String> names, LatLon latLon,
+                       String wikiDataId, Long osmId, String subType) {
+            this.type = EntityType.NODE;
+            this.names = names;
+            this.latLon = latLon;
+            this.wikidata = wikiDataId;
+            this.osmId = osmId;
+            this.mainAmenityType = subType;
+        }
+
         public String getMainAmenityType() {
             return mainAmenityType;
         }
@@ -103,7 +113,7 @@ public class AmenitySearcher {
     private ThreadPoolExecutor singleThreadedExecutor;
     private LinkedBlockingQueue<Runnable> taskQueue;
 
-    private static final int AMENITY_SEARCH_RADIUS = 50;
+    public static final int AMENITY_SEARCH_RADIUS = 50;
     private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
     private final MapPoiTypes mapPoiTypes; // nullable
 

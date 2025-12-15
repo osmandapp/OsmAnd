@@ -21,7 +21,7 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	private final String fileName;
 	private long size;
 	private long sizeCalculationLimit = -1;
-	private boolean isDeleted;
+	private boolean isDeprecated;
 
 	@Nullable
 	private Object attachedObject;
@@ -101,8 +101,15 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	}
 
 	@NonNull
+	@Override
 	public CharSequence getName(@NonNull Context context) {
-		return LocalItemUtils.getItemName(context, this);
+		return getName(context, true);
+	}
+
+	@NonNull
+	@Override
+	public CharSequence getName(@NonNull Context context, boolean includeParent) {
+		return LocalItemUtils.getItemName(context, this, includeParent);
 	}
 
 	@NonNull
@@ -127,17 +134,31 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 		return fileName.compareTo(item.fileName);
 	}
 
+	public boolean isDeprecated() {
+		return isDeprecated;
+	}
+
+	public void setDeprecated(boolean isDeleted) {
+		this.isDeprecated = isDeleted;
+	}
+
 	@NonNull
 	@Override
 	public String toString() {
 		return fileName;
 	}
 
-	public boolean isDeleted() {
-		return isDeleted;
+	@Override
+	public boolean equals(Object o) {
+		if (!super.equals(o)) return false;
+		LocalItem localItem = (LocalItem) o;
+		return path.equals(localItem.path);
 	}
 
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + path.hashCode();
+		return result;
 	}
 }
