@@ -19,6 +19,10 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
+
 import net.osmand.StringMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.osm.AbstractPoiType;
@@ -35,6 +39,7 @@ import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.search.SearchUICore;
@@ -189,14 +194,16 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		}
 
 		String description = null;
+		String photoUrl = null;
 		if (amenity != null) {
-			String preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-			if (Algorithms.isEmpty(preferredMapLang)) {
-				preferredMapLang = app.getLanguage();
-			}
-			String articleLang = PluginsHelper.onGetMapObjectsLocale(amenity, preferredMapLang);
-			String lang = amenity.getContentLanguage("content", articleLang, "en");
-			String text = amenity.getDescription(lang);
+			photoUrl = amenity.getWikiIconUrl();
+//			String preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+//			if (Algorithms.isEmpty(preferredMapLang)) {
+//				preferredMapLang = app.getLanguage();
+//			}
+//			String articleLang = PluginsHelper.onGetMapObjectsLocale(amenity, preferredMapLang);
+//			String lang = amenity.getContentLanguage("content", articleLang, "en");
+//			String text = amenity.getDescription(lang);
 //			boolean html = !Algorithms.isEmpty(text) && Algorithms.isHtmlText(text);
 //			description = html ? WikiArticleHelper.getPartialContent(text) : text;
 			if (amenity.isRouteTrack()) {
@@ -273,13 +280,53 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			imageView.setVisibility(View.VISIBLE);
 			shieldSign.setVisibility(View.GONE);
 			margin = AndroidUtils.dpToPx(app, 6);
-			params.width = AndroidUtils.dpToPx(app, 24);
-			params.height = AndroidUtils.dpToPx(app, 24);
 			params.gravity = Gravity.CENTER;
 			imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+			if (Algorithms.isEmpty(photoUrl)) {
+				imageView.setImageDrawable(imageDrawable);
+				imageView.setTag(null);
+				params.width = AndroidUtils.dpToPx(app, 24);
+				params.height = AndroidUtils.dpToPx(app, 24);
+			} else {
+				params.width = AndroidUtils.dpToPx(app, 36);
+				params.height = AndroidUtils.dpToPx(app, 36);
+				imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+				if (!Algorithms.objectEquals(imageView.getTag(), photoUrl)) {
+					imageView.setTag(photoUrl);
+					PicassoUtils picasso = PicassoUtils.getPicasso(app);
+					RequestCreator creator = Picasso.get().load(photoUrl);
+
+					if (imageDrawable != null) {
+						creator.error(imageDrawable);
+					}
+					final String loadPhotoKey = photoUrl;
+					creator.into(imageView, new Callback() {
+						@Override
+						public void onSuccess() {
+							AndroidUiHelper.updateVisibility(imageView, true);
+//								AndroidUiHelper.updateVisibility(errorImageView, false);
+							picasso.setResultLoaded(loadPhotoKey, true);
+						}
+
+						@Override
+						public void onError(Exception e) {
+							AndroidUiHelper.updateVisibility(imageView, false);
+//								AndroidUiHelper.updateVisibility(errorImageView, true);
+							picasso.setResultLoaded(loadPhotoKey, false);
+
+						}
+					});
+
+				}
+			}
+			imageView.setLayoutParams(params);
 		}
 		if (imageContainer != null) {
-			imageContainer.setPadding(margin, margin, margin, margin);
+			if (Algorithms.isEmpty(photoUrl)) {
+				imageContainer.setPadding(margin, margin, margin, margin);
+			} else {
+				imageContainer.setPadding(0, 0, 0, 0);
+			}
 			if (!hasRouteShield && resolved) {
 				if (typedValue.type >= TypedValue.TYPE_FIRST_COLOR_INT && typedValue.type <= TypedValue.TYPE_LAST_COLOR_INT) {
 					int color = typedValue.data;
@@ -295,18 +342,9 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 				imageContainer.setBackground(null);
 			}
 		}
-		imageView.setLayoutParams(params);
-//			imageContainer.invalidate();
-//		Bitmap bmp = Bitmap.createBitmap(item.getIcon().getIntrinsicWidth(), item.getIcon().getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-//		Canvas cnv = new Canvas(bmp);
-//		if(item.getIcon() instanceof NetworkRouteDrawable dr && dr.getBackgroundDrawable() != null) {
-//			dr.getBackgroundDrawable().draw(cnv);
-//		}
 		if (imageDrawable instanceof NetworkRouteDrawable networkRouteDrawable) {
-//			networkRouteDrawable.setUseExternalTextDrawer(true);
 			shieldSign.setDrawable(networkRouteDrawable);
 		}
-		imageView.setImageDrawable(imageDrawable);
 		if (descriptionTv != null) {
 			descriptionTv.setText(description);
 			if (!Algorithms.isEmpty(description)) {

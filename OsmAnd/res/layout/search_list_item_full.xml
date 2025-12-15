@@ -115,13 +115,12 @@
 				android:layout_gravity="center_vertical"
 				android:background="?attr/activity_background_color">
 
-				<net.osmand.plus.mapcontextmenu.other.TrimToDrawableImageView
+				<ImageView
 					android:id="@+id/imageView"
 					android:layout_width="@dimen/nearby_place_error_image_size"
 					android:layout_height="@dimen/nearby_place_error_image_size"
 					android:layout_gravity="center"
-					android:scaleType="fitCenter"
-					android:background="#400f"/>
+					android:scaleType="fitCenter"/>
 
 				<net.osmand.plus.mapcontextmenu.other.TrimToBackgroundTextView
 					android:id="@+id/shieldSign"
@@ -129,6 +128,8 @@
 					android:gravity="center"
 					android:padding="0dp"
 					android:layout_width="72dp"
+					android:maxLines="1"
+					android:textSize="16sp"
 					android:layout_height="36dp"/>
 			</FrameLayout>
 
