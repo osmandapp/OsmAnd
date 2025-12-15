@@ -1,7 +1,8 @@
-package net.osmand.plus.plugins.astro
+package net.osmand.plus.plugins.astro.utils
 
 import android.content.Context
 import androidx.annotation.ColorInt
+import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.toColorInt
 import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.Body
@@ -16,10 +17,16 @@ import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.searchAltitude
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.plus.R
+import net.osmand.plus.plugins.astro.StarObjectsViewModel
+import net.osmand.plus.plugins.astro.StarWatcherSettings
 import net.osmand.plus.plugins.astro.views.SkyObject
+import net.osmand.plus.plugins.astro.views.StarView
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
+import java.util.Calendar
+import java.util.Locale
+import java.util.TimeZone
 
 object AstroUtils {
 
@@ -56,13 +63,98 @@ object AstroUtils {
 		val astroDawn: ZonedDateTime?, val astroDusk: ZonedDateTime?
 	)
 
+	fun formatLocalTime(astronomyTime: Time): String {
+		val calendar = Calendar.getInstance(TimeZone.getDefault())
+		calendar.timeInMillis = astronomyTime.toMillisecondsSince1970()
+		return String.Companion.format(
+			Locale.getDefault(), "%02d:%02d",
+			calendar.get(Calendar.HOUR_OF_DAY),
+			calendar.get(Calendar.MINUTE))
+	}
+
+	fun showStarMapOptionsDialog(
+		context: Context,
+		starView: StarView,
+		starMapViewModel: StarObjectsViewModel,
+		swSettings: StarWatcherSettings,
+		onApply: (() -> Unit)? = null
+	) {
+		val toggleItems = arrayOf(
+			context.getString(R.string.azimuthal_grid),
+			context.getString(R.string.equatorial_grid),
+			context.getString(R.string.ecliptic_line),
+			"Constellations"
+		)
+
+		var tempAzimuthal = starView.showAzimuthalGrid
+		var tempEquatorial = starView.showEquatorialGrid
+		var tempEcliptic = starView.showEclipticLine
+		var tempConstellations = starView.showConstellations
+
+		val toggleChecked = booleanArrayOf(tempAzimuthal, tempEquatorial, tempEcliptic, tempConstellations)
+
+		val currentObjects = (starMapViewModel.skyObjects.value ?: emptyList()).take(30)
+		val objectNames = currentObjects.map { it.name }.toTypedArray()
+		val objectChecked = currentObjects.map { it.isVisible }.toBooleanArray()
+
+		val allItems = toggleItems + objectNames
+		val allChecked = toggleChecked + objectChecked
+
+		AlertDialog.Builder(context)
+			.setTitle(R.string.visible_layers_and_objects)
+			.setMultiChoiceItems(allItems, allChecked) { _, which, isChecked ->
+				if (which < toggleItems.size) {
+					when (which) {
+						0 -> tempAzimuthal = isChecked
+						1 -> tempEquatorial = isChecked
+						2 -> tempEcliptic = isChecked
+						3 -> tempConstellations = isChecked
+					}
+				} else {
+					val objIndex = which - toggleItems.size
+					if (objIndex in objectChecked.indices) {
+						objectChecked[objIndex] = isChecked
+					}
+				}
+			}
+			.setPositiveButton(R.string.shared_string_apply) { _, _ ->
+				starView.showAzimuthalGrid = tempAzimuthal
+				starView.showEquatorialGrid = tempEquatorial
+				starView.showEclipticLine = tempEcliptic
+				starView.showConstellations = tempConstellations
+
+				currentObjects.forEachIndexed { index, skyObject ->
+					skyObject.isVisible = objectChecked[index]
+				}
+				starView.updateVisibility()
+
+				val itemsConfig = currentObjects.map {
+					StarWatcherSettings.SkyObjectConfig(
+						it.id,
+						it.isVisible
+					)
+				}
+				val config = StarWatcherSettings.StarMapConfig(
+					showAzimuthalGrid = tempAzimuthal,
+					showEquatorialGrid = tempEquatorial,
+					showEclipticLine = tempEcliptic,
+					showConstellations = tempConstellations,
+					items = itemsConfig
+				)
+				swSettings.setStarMapConfig(config)
+				onApply?.invoke()
+			}
+			.setNegativeButton(R.string.shared_string_cancel, null)
+			.show()
+	}
+
 	// ---------- Extensions for Type Conversions ----------
 
 	fun Time.toZoned(zoneId: ZoneId): ZonedDateTime =
 		Instant.ofEpochMilli(this.toMillisecondsSince1970()).atZone(zoneId)
 
 	fun ZonedDateTime.toAstroTime(): Time =
-		Time.fromMillisecondsSince1970(this.toInstant().toEpochMilli())
+		Time.Companion.fromMillisecondsSince1970(this.toInstant().toEpochMilli())
 
 	// ---------- Physics / Math Helpers ----------
 
@@ -118,7 +210,7 @@ object AstroUtils {
 		val limitDays = 2.0
 
 		val nextRise = searchRiseSet(body, obs, Direction.Rise, searchStartUtc, limitDays)
-		val nextSet  = searchRiseSet(body, obs, Direction.Set , searchStartUtc, limitDays)
+		val nextSet  = searchRiseSet(body, obs, Direction.Set, searchStartUtc, limitDays)
 
 		val r = nextRise?.toZoned(zone)
 		val s = nextSet?.toZoned(zone)
