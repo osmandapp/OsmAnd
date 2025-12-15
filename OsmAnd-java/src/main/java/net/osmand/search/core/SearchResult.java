@@ -466,6 +466,9 @@ public class SearchResult {
 				}
 			}
 		}
+		if (noBrace) {
+			return null;
+		}
 		
 		String[] backup = new String[2 + (otherNames == null ? 0 : otherNames.size())];
 		if (localeName != null) {
@@ -480,8 +483,8 @@ public class SearchResult {
 			Iterator<String> it = otherNames.iterator();
 			List<String> oth = new ArrayList<String>();
 			for (int i = 0; i < otherNames.size(); i++) {
-				String o = it.next();
-				backup[2 + i] = SearchPhrase.stripBraces(o);
+				String o = SearchPhrase.stripBraces(it.next());
+				backup[2 + i] = o;
 				oth.add(o);
 			}
 			otherNames = oth;
