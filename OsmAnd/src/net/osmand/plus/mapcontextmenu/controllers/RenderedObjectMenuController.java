@@ -320,4 +320,10 @@ public class RenderedObjectMenuController extends MenuController {
 		}
 		return content;
 	}
+
+	@Override
+	public boolean needAsyncAmenityName() {
+		return Algorithms.isEmpty(getNameOnlyStr());
+	}
+
 }

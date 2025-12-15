@@ -64,6 +64,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListener;
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchByRouteIdListener;
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchType;
@@ -143,6 +144,7 @@ public class MenuBuilder {
 	protected boolean firstRow;
 	protected boolean matchWidthDivider;
 	protected Amenity amenity;
+	protected boolean showDefaultTags = false;
 	private LatLon latLon;
 	private boolean hidden;
 	private boolean showTitleIfTruncated = true;
@@ -318,6 +320,13 @@ public class MenuBuilder {
 
 	public void setAmenity(Amenity amenity) {
 		this.amenity = amenity;
+		if (amenity != null) {
+			PoiCategory pc = amenity.getType();
+			PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
+			if (pt != null && pt.isDefaultForCategory()) {
+				showDefaultTags = true;
+			}
+		}
 	}
 
 	public void addMenuPlugin(@NonNull OsmandPlugin plugin) {
@@ -1666,7 +1675,8 @@ public class MenuBuilder {
 
 	private void searchSortedAmenities(@NonNull PoiUIFilter filter, @NonNull LatLon latLon,
 			@Nullable SearchAmenitiesListener listener) {
-		SearchAmenitiesTask task = new SearchAmenitiesTask(filter, latLon, amenity);
+		String lang = LocaleHelper.getPreferredPlacesLanguage(app);
+		SearchAmenitiesTask task = new SearchAmenitiesTask(filter, latLon, lang, amenity);
 		task.setListener(amenities -> {
 			searchAmenitiesTasks.remove(task);
 			if (listener != null) {

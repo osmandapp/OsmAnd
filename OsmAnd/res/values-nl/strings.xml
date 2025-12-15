@@ -2876,7 +2876,7 @@
     <string name="coordinates_format_info">De geselecteerde indeling wordt in de hele app toegepast.</string>
     <string name="pref_selected_by_default_for_profiles">Deze instelling is standaard geselecteerd voor alle profielen: %s</string>
     <string name="change_default_settings">Instelling aanpassen</string>
-    <string name="discard_changes">Annuleren</string>
+    <string name="discard_changes">Wijzigingen annuleren</string>
     <string name="apply_to_current_profile">Pas alleen toe op \"%1$s\"</string>
     <string name="apply_to_all_profiles">Toepassen op alle profielen</string>
     <string name="start_up_message_pref">Welkomstbericht</string>
@@ -6237,4 +6237,9 @@
     <string name="deleted_maps_warning">Je staat op het punt om %d item(s) te verwijderen\nDoorgaan?</string>
     <string name="slots">Plaatsen</string>
     <string name="is_parking_time_limited">Is de parkeertijd gelimiteerd?</string>
+    <string name="routing_attr_pt_limit_name">Toon de N beste routes</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">Centimeter</string>
+    <string name="bicycle_width_limit_description">Geef je fietsbreedte op om smalle fietspaden te vermijden.</string>
+    <string name="copy_link">Kopieer link</string>
 </resources>

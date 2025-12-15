@@ -292,6 +292,15 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			targetsCollection.add(InsetTarget.createLeftSideContainer(true, true,
 					view.findViewById(R.id.dash_list_view)));
 
+			if (isCurrentType(DASHBOARD)) {
+				targetsCollection.add(InsetTarget.createScrollable(scrollView).landscapeSides().build());
+				targetsCollection.add(InsetTarget.createLeftSideContainer(true, true, scrollView));
+
+			} else {
+				targetsCollection.add(InsetTarget.createCustomBuilder(scrollView)
+						.portraitSides(InsetSide.RESET).landscapeSides(InsetSide.RESET).applyPadding(true));
+			}
+
 			InsetsUtils.processInsets(dashboardView.findViewById(R.id.dashboard), targetsCollection, insets);
 		}, false);
 	}

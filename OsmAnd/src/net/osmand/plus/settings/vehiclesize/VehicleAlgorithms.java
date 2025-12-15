@@ -38,18 +38,24 @@ public class VehicleAlgorithms {
 	                                                              @NonNull MetricsConstants lengthMetricSystem,
 	                                                              boolean useInchesInsteadOfFeet,
 	                                                              boolean useInchesInsteadOfYards,
-	                                                              boolean useCentimetersInsteadOfMeters) {
-		if (lengthMetricSystem != MetricsConstants.KILOMETERS_AND_METERS || useCentimetersInsteadOfMeters) {
+	                                                              boolean useCentimetersInsteadOfMeters,
+	                                                              boolean useRoundedLimits) {
+		boolean kilometersAndMeters = lengthMetricSystem == MetricsConstants.KILOMETERS_AND_METERS;
+		if (!kilometersAndMeters || useCentimetersInsteadOfMeters) {
 			float min = limits.min();
 			float max = limits.max();
+
 			// Convert to appropriate length metric system
 			min = convertLengthFromMeters(lengthMetricSystem, min,
 					useInchesInsteadOfFeet, useInchesInsteadOfYards, useCentimetersInsteadOfMeters);
 			max = convertLengthFromMeters(lengthMetricSystem, max,
 					useInchesInsteadOfFeet, useInchesInsteadOfYards, useCentimetersInsteadOfMeters);
+
 			// Round min / max
-			min = roundToSecondSignificantDigit(min, true);
-			max = roundToSecondSignificantDigit(max, false);
+			if (useRoundedLimits) {
+				min = roundToSecondSignificantDigit(min, true);
+				max = roundToSecondSignificantDigit(max, false);
+			}
 			limits = new Limits<>(min, max);
 		}
 		return limits;

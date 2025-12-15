@@ -848,5 +848,10 @@ public abstract class MapRenderingTypes {
 		return result;
 	}
 	
+	public boolean isMapRenderingType(String tag, String value) {
+		String ruleKey = constructRuleKey(tag, value);
+		return types.containsKey(ruleKey);
+	}
+	
 }
 
