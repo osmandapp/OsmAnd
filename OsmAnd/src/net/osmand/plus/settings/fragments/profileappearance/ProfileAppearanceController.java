@@ -383,7 +383,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@NonNull
 	public IconsPaletteController<Integer> getProfileIconCardController() {
 		if (profileIconCardController == null) {
-			profileIconCardController = new ProfileIconsController<>(app, ProfileIcons.getIcons(), changedProfile.iconRes) {
+			profileIconCardController = new ProfileIconsController<>(app, ProfileIcons.getIcons(app), changedProfile.iconRes) {
 				@Override
 				protected IconsPaletteElements<Integer> createPaletteElements(@NonNull Context context, boolean nightMode) {
 					return new CircleIconPaletteElements<>(context, nightMode) {
