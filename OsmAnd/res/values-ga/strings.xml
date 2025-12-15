@@ -5681,7 +5681,6 @@
     <string name="access_pinch_zoom_magnification">Formhéadú súmáil pinch</string>
     <string name="access_pinch_zoom_magnification_descr">Bain úsáid as scálú radhairc in ionad leibhéil súmála ar leith le linn gothaí súmála isteach.</string>
     <string name="accessibility_independent_features">Gnéithe neamhspleácha</string>
-    <string name="show_spherical_map">Taispeáin léarscáil sféarúil</string>
     <string name="show_spherical_map_description">Taispeáin samhail sféaróideach den Domhan</string>
     <string name="shared_string_price">Praghas</string>
     <string name="rendering_attr_showSkiSlopes_name">Taispeáin fánaí sciála</string>
@@ -5715,7 +5714,6 @@
     <string name="deleted_maps_warning">Tá tú ar tí %d mír(eanna) a scriosadh\nLean ar aghaidh?</string>
     <string name="deleted_maps_prompt">Ní thacaítear leis na léarscáileanna seo a thuilleadh agus tá réigiúin níos lú ina n-áit. Bain iad agus íoslódáil na leaganacha nua le do thoil.</string>
     <string name="unsupported_maps">Léarscáileanna gan tacaíocht</string>
-    <string name="enable_3d_objects">Cumasaigh foirgnimh 3T</string>
     <string name="enable_3d_objects_description">Taispeáin réada foirgnimh 3T ar an léarscáil</string>
     <string name="is_parking_time_limited">An bhfuil teorainn ama páirceála?</string>
     <string name="routing_attr_weightrating_name">Uasmheáchan ag ualach iomlán</string>

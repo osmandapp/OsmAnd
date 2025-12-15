@@ -5688,7 +5688,6 @@
     <string name="access_pinch_zoom_magnification">雙指縮放功能</string>
     <string name="access_pinch_zoom_magnification_descr">在縮放手勢期間，請使用檢視區域縮放取代獨立縮放等級。</string>
     <string name="accessibility_independent_features">獨立功能</string>
-    <string name="show_spherical_map">顯示球面地圖</string>
     <string name="show_spherical_map_description">顯示地球的球面模型</string>
     <string name="shared_string_price">價格</string>
     <string name="track_folder_appearance">軌跡資料夾外觀</string>
@@ -5719,7 +5718,6 @@
     <string name="slots">插槽</string>
     <string name="button_frames">按鈕框架</string>
     <string name="visualizing_button_grid">地圖按鈕網格</string>
-    <string name="enable_3d_objects">啟用 3D 建築物</string>
     <string name="enable_3d_objects_description">在地圖上顯示 3D 建築物物件</string>
     <string name="deleted_maps_warning">您將要刪除 %d 個項目\n要繼續嗎？</string>
     <string name="deleted_maps_prompt">這些地圖已不再受支援，並已被較小的區域取代。請移除它們並下載新版地圖。</string>

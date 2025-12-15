@@ -5775,7 +5775,6 @@
     <string name="access_pinch_zoom_magnification">Agrandissement par pincement</string>
     <string name="access_pinch_zoom_magnification_descr">Utilisez la mise à l\'échelle de la fenêtre d\'affichage au lieu de niveaux de zoom discrets pendant les gestes de zoom avant.</string>
     <string name="accessibility_independent_features">Fonctionnalités indépendantes</string>
-    <string name="show_spherical_map">Afficher la carte sphérique</string>
     <string name="show_spherical_map_description">Afficher le modèle sphéroïdal de la Terre</string>
     <string name="shared_string_price">Prix</string>
     <string name="rendering_attr_showSkiSlopes_name">Afficher les pistes de ski</string>
@@ -5806,7 +5805,6 @@
     <string name="slots">Machines à sous</string>
     <string name="button_frames">Disposition des boutons</string>
     <string name="visualizing_button_grid">Bouton grille de la carte</string>
-    <string name="enable_3d_objects">Activer les bâtiments 3D</string>
     <string name="enable_3d_objects_description">Afficher sur la carte les constructions en 3D</string>
     <string name="deleted_maps_warning">Vous allez supprimer %d élement(s)\nPoursuivre ?</string>
     <string name="deleted_maps_prompt">Ces cartes ne sont plus prises en charge et ont été remplacées par des régions plus petites. Veuillez les supprimer et télécharger les nouvelles versions.</string>

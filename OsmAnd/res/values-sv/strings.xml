@@ -6103,7 +6103,6 @@
     <string name="slots">rutor</string>
     <string name="is_parking_time_limited">Är parkeringen tidsbegränsad?</string>
     <string name="rendering_attr_pisteRoutes_name">Skidbackar och spår</string>
-    <string name="show_spherical_map">Visa sfärisk karta</string>
     <string name="rendering_attr_watercolor_description">Färg på vatten</string>
     <string name="button_frames">Knappramar</string>
     <string name="visualizing_button_grid">Rutnät för kartknappar</string>
@@ -6162,7 +6161,6 @@
     <string name="rendering_attr_tidalFlatStyle_description">Tidvattenvåtmarkens karaktär</string>
     <string name="rendering_attr_watercolor_name">Akvarell</string>
     <string name="show_spherical_map_description">Visa sfäroidmodell av jorden</string>
-    <string name="enable_3d_objects">Aktivera 3D-byggnader</string>
     <string name="enable_3d_objects_description">Visa 3D-byggnadsobjekt på kartan</string>
     <string name="show_debug_tile">Visa information om ruta</string>
     <string name="enable_msaa">Aktivera MSAA</string>

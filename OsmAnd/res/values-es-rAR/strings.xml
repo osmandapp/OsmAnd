@@ -5733,7 +5733,6 @@
     <string name="accessibility_independent_features">Características independientes</string>
     <string name="access_pinch_zoom_magnification">Zum mediante pellizcos</string>
     <string name="access_pinch_zoom_magnification_descr">Usá el escalado de la ventana gráfica en lugar de los niveles de zum discretos durante los gestos de acercamiento.</string>
-    <string name="show_spherical_map">Mostrar mapa esférico</string>
     <string name="show_spherical_map_description">Muestra un modelo esferoidal de la Tierra</string>
     <string name="shared_string_price">Precio</string>
     <string name="rendering_attr_showSkiSlopes_name">Mostrar pistas de esquí</string>
@@ -5764,7 +5763,6 @@
     <string name="slots">Espacios</string>
     <string name="button_frames">Marcos de botones</string>
     <string name="visualizing_button_grid">Cuadrícula de botones del mapa</string>
-    <string name="enable_3d_objects">Activar edificios en 3D</string>
     <string name="enable_3d_objects_description">Muestra edificios en 3D como objetos en el mapa</string>
     <string name="deleted_maps_warning">Borrarás %d elemento(s)\n¿Continuar?</string>
     <string name="deleted_maps_prompt">Estos mapas no se admiten más y debés reemplazarlos por sus regiones más pequeñas. Por favor, quitalos y descargá las versiones nuevas.</string>

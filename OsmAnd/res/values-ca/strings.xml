@@ -5831,7 +5831,6 @@
     <string name="miles">Milles</string>
     <string name="mpg">Milles per galó</string>
     <string name="shared_string_osm_link">Enllaç OSM</string>
-    <string name="show_spherical_map">Mostra el mapa esfèric</string>
     <string name="show_spherical_map_description">Mostra el model esferoïdal de la Terra</string>
     <string name="show_local_names">Mostra les denominacions locals</string>
     <string name="accessibility_independent_features">Característiques independents</string>

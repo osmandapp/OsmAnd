@@ -5852,7 +5852,6 @@
     <string name="access_pinch_zoom_magnification">Aðdráttur við að klípa saman</string>
     <string name="access_pinch_zoom_magnification_descr">Nota kvörðun á skoðunarglugga í stað aðgreindra aðdráttarstiga í bendingum.</string>
     <string name="marine_render_descr">Einstaklega sérsníðanlegur siglingastíll. Byggt á sjávartengda stílnum. Virkar betur með Nautical World Seamarks kortinu og valkvæðu dýptarkortunum.</string>
-    <string name="show_spherical_map">Sýna kúlulaga kort</string>
     <string name="show_spherical_map_description">Birta kúlulaga líkan af Jörðinni</string>
     <string name="release_5_1">• Bætt við stuðningi við innkaup á vefnum í mörgum stýrikerfum\n\n • Hitaeiningar færðar í Almennar stillingar til að þær finnist betur\n\n • Bætt við rafhleðslumerki fyrir BLE-skynjara\n\n • Nýtt og betra viðmót til að velja punkta í leiðsögn\n\n • Bættur sýnileiki viðmótshluta með nýjum útlínum\n\n • Bætt við greiningu á Hækkun/Lækkun\n\n • Ítarlegri samþætting Wikipedia og Wikivoyage á fleiri merkisstöðum.</string>
     <string name="shared_string_price">Verð</string>
@@ -5888,7 +5887,6 @@
     <string name="quick_action_wind_animation_layer">Víxlhnappur til að birta eða fela vindhreyfingalag á kortinu.</string>
     <string name="wind_animation_layer">Vindalag með hreyfingu</string>
     <string name="weather_layers">Veðurlög</string>
-    <string name="enable_3d_objects">Virkja þrívíddarbyggingar</string>
     <string name="enable_3d_objects_description">Birta þrívíddarbyggingar á kortinu</string>
     <string name="lang_crh">Tataríska frá Krím (latnesk)</string>
     <string name="deleted_maps_prompt">Ekki er lengur stuðningur við þessi kort og hefur þeim verið skipt út fyrir smærri svæði. Fjarlægðu þau og sæktu nýju útgáfurnar.</string>

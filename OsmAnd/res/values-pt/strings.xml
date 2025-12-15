@@ -5909,7 +5909,6 @@
     <string name="private_access_routing_req_short">Permitir o uso de uma estrada privada para chegar ao seu destino?</string>
     <string name="rendering_attr_hideNoLNAM_name">Marcas marítimas OSM (algumas)</string>
     <string name="rendering_attr_hideNoLNAM_description">Ocultar marcas marítimas OSM (algumas)</string>
-    <string name="show_spherical_map">Mostrar mapa esférico</string>
     <string name="show_spherical_map_description">Exibir modelo esferoidal da Terra</string>
     <string name="help_article_navigation_routing_ski_routing_name">Pistas e rotas de esqui</string>
     <string name="accessibility_independent_features">Recursos independentes</string>

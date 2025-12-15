@@ -6198,7 +6198,6 @@
     <string name="access_pinch_zoom_magnification_descr">Gebruik de schaal van het venster in plaats van zoomniveaus tijdens inzoombewegingen.</string>
     <string name="access_pinch_zoom_magnification">Knijp-zoom vergroting</string>
     <string name="accessibility_independent_features">Onafhankelijke functies</string>
-    <string name="show_spherical_map">Toon bolvormige kaart</string>
     <string name="show_spherical_map_description">Toon bolvormig model van de aarde</string>
     <string name="shared_string_price">Prijs</string>
     <string name="rendering_attr_showSkiSlopes_name">Toon skipistes</string>
@@ -6227,7 +6226,6 @@
     <string name="lang_crh">Krim-Tataars (Latijns)</string>
     <string name="deleted_maps_prompt">Deze kaarten worden niet meer ondersteund en zijn vervangen door kleinere regio\'s. Verwijder ze en download de nieuwe versies.</string>
     <string name="unsupported_maps">Niet-ondersteunde kaarten</string>
-    <string name="enable_3d_objects">Activeer 3D-gebouwen</string>
     <string name="enable_3d_objects_description">Toon 3D-gebouwobjecten op de kaart</string>
     <string name="efficient_grid">Efficiënt raster</string>
     <string name="visualizing_button_grid">Kaartknopraster</string>

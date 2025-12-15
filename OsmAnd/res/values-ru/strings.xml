@@ -5788,9 +5788,8 @@
     <string name="rendering_attr_hideNoLNAM_description">Скрыть навигационные знаки OSM (некоторые)</string>
     <string name="rendering_attr_watercolor_name">Цвет воды</string>
     <string name="rendering_attr_watercolor_description">Цвет воды</string>
-    <string name="show_spherical_map">Показать сферическую карту</string>
     <string name="show_spherical_map_description">Отображение сфероидальной модели Земли</string>
-    <string name="enable_3d_objects">Включить 3D-здания</string>
+    <string name="enable_3d_objects">3D-здания</string>
     <string name="enable_3d_objects_description">Отображение 3D-объектов зданий на карте</string>
     <string name="show_rasterization_debug_tile">Показать информацию о растеризации тайлов</string>
     <string name="enable_msaa">Включить MSAA</string>

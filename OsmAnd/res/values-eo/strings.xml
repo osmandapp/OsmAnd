@@ -5861,7 +5861,6 @@
     <string name="access_pinch_zoom_magnification">Pinĉi por momente pligrandigi</string>
     <string name="access_pinch_zoom_magnification_descr">Uzi skaladon de vidujo anstataŭ diskretajn nivelojn de pligrandigo por gestoj de pligrandigo.</string>
     <string name="accessibility_independent_features">Sendependaj ebloj</string>
-    <string name="show_spherical_map">Vidigi sferan mapon</string>
     <string name="show_spherical_map_description">Vidigi sferoidan modelon de Tero</string>
     <string name="shared_string_price">Prezo</string>
     <string name="rendering_attr_showSkiSlopes_name">Skiaj descendejoj</string>
@@ -5892,7 +5891,6 @@
     <string name="button_frames">Kadroj ĉirkaŭ butonoj</string>
     <string name="slots">Truoj</string>
     <string name="efficient_grid">Efika krado</string>
-    <string name="enable_3d_objects">Aktivigi 3-dimensiajn konstruaĵojn</string>
     <string name="enable_3d_objects_description">Vidigi 3-dimensiajn konstruaĵojn sur la mapo</string>
     <string name="deleted_maps_warning">%d elemento(j) estos forigita(j).\nĈu vi certas?</string>
     <string name="deleted_maps_prompt">La jenaj mapoj ne estos plu subtenataj kaj estas anstataŭigitaj per mapoj de malpli grandaj regionoj. Forigu ilin kaj elŝutu la novajn versiojn.</string>

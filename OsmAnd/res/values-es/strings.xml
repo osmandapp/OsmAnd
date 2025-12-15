@@ -5791,9 +5791,7 @@
     <string name="add_to_a_folder">Añadir a una carpeta</string>
     <string name="add_to_favorites">Añadir a favoritos</string>
     <string name="shared_string_osm_link">Enlace de OSM</string>
-    <string name="show_spherical_map">Mostrar mapa esféricos</string>
     <string name="show_spherical_map_description">Mostrar un modelo esferoidal de la Tierra</string>
-    <string name="enable_3d_objects">Activar edificios 3D</string>
     <string name="show_local_names">Mostrar nombres locales</string>
     <string name="download_wikipedia_label">Descargar Wikipedia</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas y rutas de esquí</string>

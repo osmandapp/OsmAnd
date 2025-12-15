@@ -5848,7 +5848,6 @@
     <string name="access_pinch_zoom_magnification">Увећање приближавања штипањем прстију</string>
     <string name="access_pinch_zoom_magnification_descr">Користите сразмерно увећање приказа уместо постепених увећања приликом знакова приближавања.</string>
     <string name="accessibility_independent_features">Независне карактеристике</string>
-    <string name="show_spherical_map">Прикажи сферичну мапу</string>
     <string name="show_spherical_map_description">Приказ сфероидног модела Земље</string>
     <string name="shared_string_price">Цена</string>
     <string name="rendering_attr_showSkiSlopes_name">Прикажи скијашке стазе</string>
@@ -5879,7 +5878,6 @@
     <string name="slots">Прорези</string>
     <string name="button_frames">Оквири дугмади</string>
     <string name="visualizing_button_grid">Мрежа дугмади карте</string>
-    <string name="enable_3d_objects">Омогући 3Д зграде</string>
     <string name="enable_3d_objects_description">Приказ 3Д објеката зграда на мапи</string>
     <string name="deleted_maps_warning">Управо ћете обрисати %d ставке(е)\nНаставити даље?</string>
     <string name="deleted_maps_prompt">Ове карте више нису подржане и замењене су мањим областима. Молим, уклоните их и преузмите нова издања.</string>
