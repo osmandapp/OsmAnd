@@ -83,7 +83,6 @@ import net.osmand.shared.util.KAlgorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
@@ -145,8 +144,12 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		this.selectedFolder = selectedFolder;
 	}
 
-	public void setSmartFolder(SmartFolder folder) {
+	public void setSmartFolder(@NonNull SmartFolder folder) {
 		smartFolder = folder;
+	}
+
+	public void setSelectedItemPath(@Nullable String selectedItemPath) {
+		this.selectedItemPath = selectedItemPath;
 	}
 
 	@Override
@@ -421,8 +424,8 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	@Override
 	public void restoreState(Bundle bundle) {
 		if (bundle != null && bundle.getInt(TAB_ID) == GPX_TAB) {
-			preSelectedFolder = bundle.getString(SELECTED_FOLDER_KEY);
-			selectedItemPath = bundle.getString(SELECTED_ITEM_PATH_KEY);
+			preSelectedFolder = bundle.getString(SELECTED_FOLDER_KEY, preSelectedFolder);
+			selectedItemPath = bundle.getString(SELECTED_ITEM_PATH_KEY, selectedItemPath);
 
 			String smartFolderName = bundle.getString(SELECTED_SMART_FOLDER_KEY);
 			if (smartFolderName != null) {
@@ -435,8 +438,18 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	}
 
 	@Nullable
-	protected TrackItem geTrackItem(@NonNull TrackFolder folder, @NonNull String path) {
-		for (TrackItem trackItem : folder.getFlattenedTrackItems()) {
+	protected TrackItem getTrackItem(@NonNull TrackFolder folder, @NonNull String path) {
+		return findTrackItem(folder.getFlattenedTrackItems(), path);
+	}
+
+	@Nullable
+	protected TrackItem getTrackItem(@NonNull SmartFolder folder, @NonNull String path) {
+		return findTrackItem(folder.getTrackItems(), path);
+	}
+
+	@Nullable
+	private TrackItem findTrackItem(@NonNull List<TrackItem> trackItems, @NonNull String path) {
+		for (TrackItem trackItem : trackItems) {
 			if (KAlgorithms.INSTANCE.stringsEqual(trackItem.getPath(), path)) {
 				return trackItem;
 			}

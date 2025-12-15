@@ -98,8 +98,8 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	public void setRootFolder(@NonNull TracksGroup rootFolder) {
-		if (rootFolder instanceof SmartFolder) {
-			setSmartFolder((SmartFolder) rootFolder);
+		if (rootFolder instanceof SmartFolder folder) {
+			setSmartFolder(folder);
 		} else {
 			super.setRootFolder(rootFolder);
 		}
