@@ -229,14 +229,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.DEBUG_RENDERING_INFO.getId());
 		debugRenderingInfo.setDescription(getString(R.string.trace_rendering_descr));
 		debugRenderingInfo.setIconSpaceReserved(false);
-
-		SwitchPreferenceEx spherePref = findPreference(settings.SPHERICAL_MAP.getId());
-		spherePref.setIconSpaceReserved(false);
-		spherePref.setDescription(R.string.show_spherical_map_description);
-
-		SwitchPreferenceEx enable3DObjectsPref = findPreference(plugin.ENABLE_3D_MAP_OBJECTS.getId());
-		enable3DObjectsPref.setIconSpaceReserved(false);
-		enable3DObjectsPref.setDescription(R.string.enable_3d_objects_description);
 	}
 
 	private void setupMaxRenderingThreadsPref() {
