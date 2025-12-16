@@ -58,7 +58,6 @@ class PointAttributes(
 	private var anyVehicleMetricsSet: Boolean = false
 
 	fun hasAnyValueSet(): Boolean = anyValueSet
-	fun hasAnyMetricSet(): Boolean = anyVehicleMetricsSet
 
 	fun getAttributeValue(tag: String): Float? =
 		when (tag) {
@@ -68,6 +67,7 @@ class PointAttributes(
 			SENSOR_TAG_SPEED -> sensorSpeed
 			SENSOR_TAG_CADENCE -> bikeCadence
 			SENSOR_TAG_BIKE_POWER -> bikePower
+			SENSOR_TAG_TEMPERATURE -> getTemperature()
 			SENSOR_TAG_TEMPERATURE_W -> waterTemperature
 			SENSOR_TAG_TEMPERATURE_A -> airTemperature
 			DEV_RAW_ZOOM -> rawZoom
@@ -105,70 +105,19 @@ class PointAttributes(
 			DEV_ANIMATED_ZOOM -> animatedZoom = value
 			DEV_INTERPOLATION_OFFSET_N -> interpolationOffsetN = value
 
-			OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND.gpxTag -> {
-				intakeTemp = value
-				anyVehicleMetricsSet = true
-			}
-
-			OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND.gpxTag -> {
-				ambientTemp = value
-				anyVehicleMetricsSet = true
-			}
-
-			OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND.gpxTag -> {
-				coolantTemp = value
-				anyVehicleMetricsSet = true
-			}
-
-			OBDCommand.OBD_ENGINE_OIL_TEMPERATURE_COMMAND.gpxTag -> {
-				engineOilTemp = value
-				anyVehicleMetricsSet = true
-			}
-
-			OBDCommand.OBD_RPM_COMMAND.gpxTag -> {
-				rpmSpeed = value
-				anyVehicleMetricsSet = true
-			}
-
-			OBDCommand.OBD_ENGINE_RUNTIME_COMMAND.gpxTag -> {
-				runtimeEngine = value
-				anyVehicleMetricsSet = true
-			}
-
-			OBDCommand.OBD_CALCULATED_ENGINE_LOAD_COMMAND.gpxTag -> {
-				engineLoad = value
-				anyVehicleMetricsSet = true
-			}
-
-			OBDCommand.OBD_FUEL_PRESSURE_COMMAND.gpxTag -> {
-				fuelPressure = value
-				anyVehicleMetricsSet = true
-			}
-
-			OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND.gpxTag -> {
-				fuelConsumption = value
-				anyVehicleMetricsSet = true
-			}
-
-			OBDCommand.OBD_FUEL_LEVEL_COMMAND.gpxTag -> {
-				fuelRemaining = value
-				anyVehicleMetricsSet = true
-			}
-
-			OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND.gpxTag -> {
-				batteryVoltage = value
-				anyVehicleMetricsSet = true
-			}
-
-			OBDCommand.OBD_SPEED_COMMAND.gpxTag -> {
-				vehicleSpeed = value
-				anyVehicleMetricsSet = true
-			}
-
-			OBDCommand.OBD_THROTTLE_POSITION_COMMAND.gpxTag -> {
-				throttlePosition = value
-				anyVehicleMetricsSet = true
-			}
+			OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND.gpxTag -> intakeTemp = value
+			OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND.gpxTag -> ambientTemp = value
+			OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND.gpxTag -> coolantTemp = value
+			OBDCommand.OBD_ENGINE_OIL_TEMPERATURE_COMMAND.gpxTag -> engineOilTemp = value
+			OBDCommand.OBD_RPM_COMMAND.gpxTag -> rpmSpeed = value
+			OBDCommand.OBD_ENGINE_RUNTIME_COMMAND.gpxTag -> runtimeEngine = value
+			OBDCommand.OBD_CALCULATED_ENGINE_LOAD_COMMAND.gpxTag -> engineLoad = value
+			OBDCommand.OBD_FUEL_PRESSURE_COMMAND.gpxTag -> fuelPressure = value
+			OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND.gpxTag -> fuelConsumption = value
+			OBDCommand.OBD_FUEL_LEVEL_COMMAND.gpxTag -> fuelRemaining = value
+			OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND.gpxTag -> batteryVoltage = value
+			OBDCommand.OBD_SPEED_COMMAND.gpxTag -> vehicleSpeed = value
+			OBDCommand.OBD_THROTTLE_POSITION_COMMAND.gpxTag -> throttlePosition = value
 		}
 
 		anyValueSet = true

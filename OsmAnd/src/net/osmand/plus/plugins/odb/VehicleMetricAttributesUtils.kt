@@ -22,10 +22,9 @@ import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.Companion.findByGpxTa
 import net.osmand.util.Algorithms
 import java.text.MessageFormat
 
-class VehicleMetricAttributesUtils {
+class VehicleMetricAttributesUtils: GpxTrackAnalysis.TrackPointsAnalyser {
 
     companion object {
-
         fun getAvailableGPXDataSetTypes(
             analysis: GpxTrackAnalysis,
             out: MutableList<Array<GPXDataSetType?>>
@@ -190,5 +189,13 @@ class VehicleMetricAttributesUtils {
             }
             return values
         }
+    }
+
+    override fun onAnalysePoint(
+        analysis: GpxTrackAnalysis,
+        point: WptPt,
+        attribute: PointAttributes
+    ) {
+        VehicleMetricAttributesUtils.onAnalysePoint(analysis, point, attribute)
     }
 }
