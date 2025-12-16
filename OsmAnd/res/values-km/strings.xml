@@ -30,4 +30,9 @@
     <string name="shared_string_map">ផែនទី</string>
     <string name="shared_string_add">បន្ថែម</string>
     <string name="shared_string_hide">លាក់</string>
+    <string name="unit_of_length_descr">ផ្លាស់ប្តូរចម្ងាយដែលអាចវាស់បាន។</string>
+    <string name="shared_string_name">ឈ្មោះ</string>
+    <string name="shared_string_sort">តម្រៀប</string>
+    <string name="shared_string_exit">ចាកចេញ</string>
+    <string name="shared_string_close">បិទ</string>
 </resources>
