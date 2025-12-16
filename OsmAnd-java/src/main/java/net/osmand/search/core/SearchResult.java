@@ -9,6 +9,7 @@ import java.util.List;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.CommonWords;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -255,6 +256,10 @@ public class SearchResult {
 		}
 		if (searchPhraseNames.size() == localResultNames.size()) {
 			cnt.allWordsEqual = true;
+		} else if (searchPhraseNames.size() == localResultNames.size() - localResultNames.stream().filter(s -> CommonWords.isStaticCommon(s.toLowerCase())).count()) {
+			double distance = requiredSearchPhrase.getLastTokenLocation() != null && this.location != null ?
+						MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(), this.location) : Double.MAX_VALUE;
+			cnt.allWordsEqual = objectType == ObjectType.STREET && distance <= 500;
 		}
 		cnt.allWordsInPhraseAreInResult = true;
 		return true;
