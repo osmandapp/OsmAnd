@@ -2209,7 +2209,7 @@
 \n
 \n • Auswahl zwischen vollständigen Daten zu einer Region bzw. einfachen Daten zum Straßennetz (Beispiel: Japan insgesamt benötigt 700 MB, das Straßennetz nur 200 MB davon)</string>
     <string name="osmand_plus_extended_description_part5">Sicherheitsfunktionen \n • Optionales automatisches Umschalten der Tag-/Nachtansicht \n • Optionale Tempolimit-Anzeige mit Warnung bei Überschreitung \n • Optionale geschwindigkeitsabhängige Vergrößerung \n • Positionsübermittlung, damit Freunde Sie finden können</string>
-    <string name="osmand_plus_extended_description_part8">Kartenabdeckung und ungefähre Kartenqualität: \n • Westeuropa: **** \n • Osteuropa: *** \n • Russland: *** \n • Nordamerika: *** \n • Südamerika: ** \n • Asien: ** \n • Japan und Korea: *** \n • Mittlerer Osten: ** \n • Afrika: ** \n • Antarktis: * \n Die meisten Länder rund um den Globus stehen zum Herunterladen bereit \n Von Afghanistan bis Simbabwe, von Australien bis in die USA. Argentinien, Brasilien, Kanada, Frankreich, Deutschland, Mexiko, Großbritannien, Spanien, …</string>
+    <string name="osmand_plus_extended_description_part8">Kartenabdeckung und ungefähre Kartenqualität: \n • Westeuropa: **** \n • Osteuropa: *** \n • Russland: *** \n • Nordamerika: *** \n • Südamerika: ** \n • Asien: ** \n • Japan und Korea: *** \n • Mittlerer Osten: ** \n • Afrika: ** \n • Antarktis: * \n Die meisten Länder rund um den Globus stehen zum Herunterladen bereit \n Von Afghanistan bis Simbabwe, von Australien bis in die USA. Argentinien, Brasilien, Kanada, Frankreich, Deutschland, Mexiko, Großbritannien, Spanien …</string>
     <string name="osmand_plus_extended_description_part6">Funktionen für Radler und Fußgänger
 \n • Darstellung von Fuß-, Wander- und Radwegen, großartig für Outdoor-Aktivitäten
 \n • Spezielle Routenberechnung und Anzeigearten für Radler und Fußgänger
@@ -2532,7 +2532,7 @@
     <string name="south_abbreviation">S</string>
     <string name="north_abbreviation">N</string>
     <string name="optional_point_name">Optionaler Punktname</string>
-    <string name="transport_nearby_routes_within">Nahegelegene Routen innerhalb von</string>
+    <string name="transport_nearby_routes_within">Nahe gelegene Routen innerhalb von</string>
     <string name="transport_nearby_routes">Innerhalb</string>
     <string name="group_deleted">Gruppe gelöscht</string>
     <string name="rendering_attr_whiteWaterSports_name">Wildwasser-Sportarten</string>
