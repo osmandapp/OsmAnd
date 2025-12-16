@@ -5765,7 +5765,6 @@
     <string name="obd_alt_battery_voltage">Adapterspenning</string>
     <string name="shared_string_no_animation">Ingen animasjon</string>
     <string name="position_animation">Posisjonsanimering</string>
-    <string name="show_spherical_map">Vis sfærisk kart</string>
     <string name="show_spherical_map_description">Vis sfæroidemodell av jorden</string>
     <string name="update_maps">Oppdater kart</string>
     <string name="quick_action_wind_animation_layer">En bryter for å vise eller skjule vindanimasjonslaget på kartet.</string>
@@ -5811,6 +5810,9 @@
     <string name="deleted_maps_warning">Du er i ferd med å slette %d element(er)\nFortsette?</string>
     <string name="deleted_maps_prompt">Disse kartene støttes ikke lengre og er erstattet av mindre regioner. Fjern dem og last ned de nye versjonene.</string>
     <string name="unsupported_maps">Ikke-støttede kart</string>
-    <string name="enable_3d_objects">Aktiver 3D-bygninger</string>
     <string name="enable_3d_objects_description">Vis 3D-bygningsobjekter på kartet</string>
+    <string name="copy_link">Kopier lenke</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimeter</string>
+    <string name="bicycle_width_limit_description">Angi bredden på sykkelen din for å unngå smale sykkelveier.</string>
 </resources>

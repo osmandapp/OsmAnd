@@ -3288,8 +3288,8 @@
     <string name="precision_hdop_and_vdop">Vodoravna preciznost: %1$s, uspravna: %2$s</string>
     <string name="release_3_4">• Primenljivi nalozi: stvaranje proizvoljnih profila za sopstvene potrebe, sa proizvoljnom sličicom i bojom \n \n • Postavi proizvoljne max/min brzine na podrazumevane profile \n \n • Dodata je widget za trenutne koordinate \n \n • Dodata mogućnost da se prikazuje kompas i lenjir za prečnik na mapi \n \n • Popravljeno je pozadinsko beleženje putanja \n \n • Unapređeno je pozadinsko preuzimanje mapa \n \n • Vraćena je mogućnost \'Uključivanje ekrana\' \n \n • Popravljen je izbor jezika na Vikipediji \n \n • Ispravljeno je ponašanje dugmeta za kompas prilikom navođenja \n \n • Ostale ispravke grešaka</string>
     <string name="app_mode_ufo">NLO</string>
-    <string name="routing_attr_max_num_changes_name">Broj izmena</string>
-    <string name="routing_attr_max_num_changes_description">Odaberi gornju granicu broja izmena</string>
+    <string name="routing_attr_max_num_changes_name">Maksimalan broj promena transporta</string>
+    <string name="routing_attr_max_num_changes_description">Navedite gornju granicu za promene transporta</string>
     <string name="edit_profile_nav_settings_subtitle">Odaberi podešavanja navođenja za profil</string>
     <string name="edit_profile_screen_options_subtitle">Odaberi mogućnosti ekrana za profil</string>
     <string name="edit_profile_setup_map_subtitle">Odaberi mogućnosti mape za profil</string>
@@ -5828,8 +5828,8 @@
     <string name="rendering_attr_watercolor_description">Boja vode</string>
     <string name="view_on_phone">Pogledaj na telefonu</string>
     <string name="copy_as_new_folder">Kopiraj kao novi folder</string>
-    <string name="add_to_a_folder">Dodajte u folder</string>
-    <string name="add_to_favorites">Dodaj u favorite</string>
+    <string name="add_to_a_folder">Dodaj u folder</string>
+    <string name="add_to_favorites">Dodaj u omiljene</string>
     <string name="max_weight_at_full_load_description">Navedite maksimalnu težinu vašeg vozila pri punom opterećenju kako biste izbegli puteve i mostove sa ograničenjima težine.</string>
     <string name="max_axle_load_description">Navedite maksimalno osovinsko opterećenje vašeg vozila kako biste izbegli puteve i mostove sa ograničenjima težine.</string>
     <string name="backup_delete_data_warning_extended">Ova akcija će trajno ukloniti sve izabrane podatke iz oblaka. Kasnije ga neće biti moguće obnoviti.</string>
@@ -5851,7 +5851,6 @@
     <string name="access_pinch_zoom_magnification_descr">Koristite zum prikaza umesto diskretnih nivoa zumiranja za gestove prstiju.</string>
     <string name="accessibility_independent_features">Nezavisne karakteristike</string>
     <string name="show_spherical_map_description">Prikaz sferoidnog modela Zemlje</string>
-    <string name="show_spherical_map">Prikaži sferičnu mapu</string>
     <string name="shared_string_price">Cena</string>
     <string name="rendering_attr_showSkiSlopes_name">Prikaži skijaške staze</string>
     <string name="rendering_attr_showSkiSlopes_description">Prikaži pojednostavljene skijaške staze</string>
@@ -5882,11 +5881,16 @@
     <string name="button_frames">Okviri dugmeta</string>
     <string name="visualizing_button_grid">Dugme za mrežu</string>
     <string name="enable_3d_objects_description">Prikaz 3D zgrada na mapi</string>
-    <string name="enable_3d_objects">Omogućite 3D zgrade</string>
     <string name="deleted_maps_prompt">Ove mape više nisu podržane i zamenjene su manjim regionima. Molimo Vas da ih uklonite i preuzmete nove verzije.</string>
     <string name="unsupported_maps">Nepodržane mape</string>
     <string name="deleted_maps_warning">Spremate se da izbrišete %d stavke(e)\nNastavljate?</string>
     <string name="routing_attr_weightrating_name">Maksimalna težina pri punom opterećenju</string>
     <string name="routing_attr_maxaxleload_name">Maksimalno osovinsko opterećenje</string>
     <string name="is_parking_time_limited">Da li je vreme parkiranja ograničeno?</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimetara</string>
+    <string name="bicycle_width_limit_description">Obezbedite širinu bicikla kako biste izbegli uske biciklističke staze.</string>
+    <string name="copy_link">Kopiraj link</string>
+    <string name="routing_attr_pt_limit_name">Prikaz N najboljih ruta</string>
+    <string name="routing_attr_pt_limit_description">Navedite broj najboljih ruta za prikaz</string>
 </resources>

@@ -136,8 +136,17 @@ class StarView @JvmOverloads constructor(
 	private var onObjectClickListener: ((SkyObject?) -> Unit)? = null
 
 	var onAnimationFinished: (() -> Unit)? = null
-
 	var onAzimuthManualChangeListener: ((Double) -> Unit)? = null
+	var onViewAngleChangeListener: ((Double) -> Unit)? = null
+
+	// --- View State ---
+	var roll = 0.0 // Camera roll in degrees
+		set(value) {
+			if (abs(field - value) > 0.1) {
+				field = value
+				invalidate()
+			}
+		}
 
 	// --- Astronomy Data ---
 	private val skyObjects = mutableListOf<SkyObject>()
@@ -210,6 +219,26 @@ class StarView @JvmOverloads constructor(
 		observer = Observer(lat, lon, alt)
 		recalculatePositions(currentTime, updateTargets = false)
 		invalidate()
+	}
+
+	/**
+	 * Sets the center of the view. Useful for AR mode or immediate updates.
+	 * Azimuth: 0 = North, 90 = East, etc.
+	 * Altitude: 90 = Zenith, 0 = Horizon.
+	 */
+	fun setCenter(azimuth: Double, altitude: Double) {
+		this.azimuthCenter = azimuth
+		this.altitudeCenter = max(-90.0, min(90.0, altitude))
+		invalidate()
+	}
+
+	fun setViewAngle(angle: Double) {
+		val newAngle = max(10.0, min(150.0, angle))
+		if (abs(this.viewAngle - newAngle) > 0.001) {
+			this.viewAngle = newAngle
+			onViewAngleChangeListener?.invoke(newAngle)
+			invalidate()
+		}
 	}
 
 	fun setAzimuth(azimuth: Double, animate: Boolean = false, fps: Int? = 30) {
@@ -312,15 +341,21 @@ class StarView @JvmOverloads constructor(
 	}
 
 	fun zoomIn() {
-		viewAngle /= 1.5
-		viewAngle = max(10.0, min(150.0, viewAngle))
-		invalidate()
+		val newAngle = max(10.0, min(150.0, viewAngle / 1.5))
+		if (abs(viewAngle - newAngle) > 0.001) {
+			viewAngle = newAngle
+			onViewAngleChangeListener?.invoke(viewAngle)
+			invalidate()
+		}
 	}
 
 	fun zoomOut() {
-		viewAngle *= 1.5
-		viewAngle = max(10.0, min(150.0, viewAngle))
-		invalidate()
+		val newAngle = max(10.0, min(150.0, viewAngle * 1.5))
+		if (abs(viewAngle - newAngle) > 0.001) {
+			viewAngle = newAngle
+			onViewAngleChangeListener?.invoke(viewAngle)
+			invalidate()
+		}
 	}
 
 	private fun recalculatePositions(time: Time, updateTargets: Boolean) {
@@ -875,9 +910,28 @@ class StarView @JvmOverloads constructor(
 		val xRaw = cosAlt * sinAz
 		val yRaw = projCosAltCenter * sinAlt - projSinAltCenter * cosAlt * cosAz
 
-		// Apply scale and translate to screen center (using cached dimensions)
-		outPoint.x = (projHalfWidth + combinedScale * xRaw).toFloat()
-		outPoint.y = (projHalfHeight - combinedScale * yRaw).toFloat()
+		// Apply scale (centered at 0,0 for now)
+		val xScaled = combinedScale * xRaw
+		val yScaled = -combinedScale * yRaw // Invert Y for screen coordinates (up is -, down is +)
+
+		// Apply Roll Rotation (2D rotation of the projected plane)
+		// roll is clockwise rotation of the camera.
+		// If phone rotates CW (roll > 0), the world appears to rotate CCW.
+		// So we want to rotate the projected points CCW?
+		// User says: "When I roll the phone right, line of horizon rolls to the right, but should roll to the left"
+		// This means the current logic moved the horizon WITH the phone (Right).
+		// We want it to move LEFT (Opposite to phone).
+		// Previous was -roll. So let's try +roll.
+		val rollRad = Math.toRadians(roll) 
+		val sinRoll = sin(rollRad)
+		val cosRoll = cos(rollRad)
+
+		val xRot = xScaled * cosRoll - yScaled * sinRoll
+		val yRot = xScaled * sinRoll + yScaled * cosRoll
+
+		// Translate to screen center
+		outPoint.x = (projHalfWidth + xRot).toFloat()
+		outPoint.y = (projHalfHeight + yRot).toFloat()
 		return true
 	}
 
@@ -957,9 +1011,12 @@ class StarView @JvmOverloads constructor(
 
 	private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
 		override fun onScale(detector: ScaleGestureDetector): Boolean {
-			viewAngle /= detector.scaleFactor
-			viewAngle = max(10.0, min(150.0, viewAngle))
-			invalidate()
+			val newAngle = max(10.0, min(150.0, viewAngle / detector.scaleFactor))
+			if (abs(viewAngle - newAngle) > 0.001) {
+				viewAngle = newAngle
+				onViewAngleChangeListener?.invoke(viewAngle)
+				invalidate()
+			}
 			return true
 		}
 	}

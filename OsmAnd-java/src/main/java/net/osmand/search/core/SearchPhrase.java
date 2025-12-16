@@ -924,7 +924,18 @@ public class SearchPhrase {
 		return lastUnknownSearchWordComplete;
 	}
 
+	public static Collection<String> stripBraces(Collection<String> names) {
+		List<String> lst = new ArrayList<String>();
+		for(String s : names) {
+			lst.add(stripBraces(s));
+		}
+		return lst;
+	}
+	
 	public static String stripBraces(String localeName) {
+		if (localeName == null) {
+			return null;
+		}
 		int i = localeName.indexOf('(');
 		String retName = localeName;
 		if (i > -1) {

@@ -15,6 +15,7 @@ import net.osmand.shared.gpx.SmartFolderUpdateListener
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.shared.gpx.data.TracksGroup
+import net.osmand.util.Algorithms
 
 class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 	EmptySmartFolderListener,
@@ -23,10 +24,12 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 	companion object {
 		private val TAG = SmartFolderFragment::class.java.simpleName
 
-		fun showInstance(manager: FragmentManager, folder: SmartFolder, target: Fragment) {
+		fun showInstance(manager: FragmentManager, folder: SmartFolder,
+						 track: TrackItem?, target: Fragment) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TrackFolderFragment.TAG)) {
 				val fragment = SmartFolderFragment()
 				fragment.setSmartFolder(folder)
+				fragment.setSelectedItemPath(track?.path)
 				fragment.setTargetFragment(target, 0)
 				fragment.retainInstance = true
 				manager.beginTransaction()
@@ -104,6 +107,15 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		super.onResume()
 		app.smartFolderHelper.addUpdateListener(this)
 		updateContent()
+		restoreScrollPosition()
+	}
+
+	private fun restoreScrollPosition() {
+		if (smartFolder != null && !Algorithms.isEmpty(selectedItemPath)) {
+			val trackItem = getTrackItem(smartFolder, selectedItemPath)
+			scrollToItemPosition(trackItem)
+			selectedItemPath = null
+		}
 	}
 
 

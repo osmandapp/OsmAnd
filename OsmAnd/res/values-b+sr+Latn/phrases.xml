@@ -170,7 +170,7 @@
     <string name="poi_ticket">Biletarnica</string>
     <string name="poi_tobacco">Duvan</string>
     <string name="poi_toys">Igračke</string>
-    <string name="poi_tyres">Auto gume</string>
+    <string name="poi_tyres">Gume; Guma; Guma; Prodavnica guma; Gume</string>
     <string name="poi_vacuum_cleaner">Usisivači</string>
     <string name="poi_video">Video klub</string>
     <string name="poi_electronics">Elektronika</string>
@@ -2348,8 +2348,8 @@
     <string name="poi_cuisine_burger">Pljeskavice</string>
     <string name="poi_cuisine_coffee_shop">Kafa</string>
     <string name="poi_cuisine_sandwich">Sendviči</string>
-    <string name="poi_cuisine_kebab">Kebab</string>
-    <string name="poi_cuisine_doner">Doner kebab (šavurma)</string>
+    <string name="poi_cuisine_kebab">Kebab; Jelo</string>
+    <string name="poi_cuisine_doner">Doner kebab (šavurma); Jelo</string>
     <string name="poi_cuisine_chicken">Piletina</string>
     <string name="poi_cuisine_ice_cream">Sladoled</string>
     <string name="poi_cuisine_sushi">Suši</string>
@@ -3330,7 +3330,7 @@
     <string name="poi_via_ferrata">Zaštićena ruta</string>
     <string name="poi_climbing_adventure">Park za penjanje</string>
     <string name="poi_aerialway_zip_line">Zip lajn</string>
-    <string name="poi_service_vehicle_tyres_yes">Gume</string>
+    <string name="poi_service_vehicle_tyres_yes">Gume; Guma; Guma; Gume</string>
     <string name="poi_service_vehicle_insurance_yes">Osiguranje</string>
     <string name="poi_service_vehicle_motor_yes">Motor</string>
     <string name="poi_service_vehicle_transmission_repair_yes">Popravka transmisije</string>

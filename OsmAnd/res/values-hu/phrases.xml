@@ -594,7 +594,7 @@
     <string name="poi_second_hand">Használtáru-bolt</string>
     <string name="poi_scuba_diving_shop">Búvárfelszerelés-bolt</string>
     <string name="poi_stationery">Papírbolt</string>
-    <string name="poi_tyres">Autógumibolt</string>
+    <string name="poi_tyres">Autógumi-üzlet; gumi; abroncs</string>
     <string name="poi_disaster_response">Katasztrófavédelmi állomás</string>
     <string name="poi_emergency_access_point">Vészhelyzeti elérési pont</string>
     <string name="poi_ford_stepping_stones">Lépőkövek</string>
@@ -1747,7 +1747,7 @@
     <string name="poi_cuisine_coffee_shop">Kávé</string>
     <string name="poi_cuisine_burger">Hamburger</string>
     <string name="poi_cuisine_ice_cream">Fagylalt</string>
-    <string name="poi_cuisine_kebab">Kebab</string>
+    <string name="poi_cuisine_kebab">Kebab; tálétel</string>
     <string name="poi_cuisine_sandwich">Szendvics</string>
     <string name="poi_cuisine_sushi">Szusi</string>
     <string name="poi_cuisine_swedish">Svéd</string>
@@ -3034,7 +3034,7 @@
     <string name="poi_bicycle_parking_streetpod">Keréktok</string>
     <string name="poi_payment_troika_yes">Trojka</string>
     <string name="poi_payment_troika_no">Trojka kártyát nem fogad el</string>
-    <string name="poi_cuisine_doner">Döner kebab (savarma)</string>
+    <string name="poi_cuisine_doner">Döner kebab (savarma); tálétel</string>
     <string name="poi_cuisine_ramen">Ramen (tészta)</string>
     <string name="poi_cuisine_beef_bowl">Gyūdon (japán marhahústál)</string>
     <string name="poi_cuisine_diner">Diner (USA)</string>
@@ -3431,7 +3431,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">Sebességváltó-szerelés</string>
     <string name="poi_service_vehicle_motor_yes">Motorszerelés</string>
     <string name="poi_service_vehicle_insurance_yes">Biztosítás</string>
-    <string name="poi_service_vehicle_tyres_yes">Gumiszerelés</string>
+    <string name="poi_service_vehicle_tyres_yes">Gumiszerelés; gumi; abroncs</string>
     <string name="poi_aerialway_zip_line">Csúszópálya</string>
     <string name="poi_climbing_adventure">Kalandpark</string>
     <string name="poi_via_ferrata">Via ferrata (vasalt út)</string>

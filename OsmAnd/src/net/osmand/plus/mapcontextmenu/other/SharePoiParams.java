@@ -1,12 +1,13 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import android.graphics.Paint;
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
+import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
 
@@ -30,13 +31,13 @@ public class SharePoiParams {
 	}
 
 	public void addType(@Nullable String type) {
-		if (type != null) {
+		if (!Algorithms.isEmpty(type)) {
 			params.put("type", type);
 		}
 	}
 
 	public void addWikidataId(@Nullable String wikidataId) {
-		if (wikidataId != null) {
+		if (!Algorithms.isEmpty(wikidataId)) {
 			params.put("wikidataId", wikidataId.startsWith("Q") ? wikidataId.substring(1) : wikidataId);
 		}
 	}
@@ -55,13 +56,14 @@ public class SharePoiParams {
 		}
 	}
 
-	public static Pair<String, String> getFormattedShareLatLon(LatLon latLon){
+	@NonNull
+	public static Pair<String, String> getFormattedShareLatLon(@NonNull LatLon latLon){
 		String formattedLat = LocationConvert.convertLatitude(latLon.getLatitude(), LocationConvert.FORMAT_DEGREES, false);
-		String formattedlon = LocationConvert.convertLongitude(latLon.getLongitude(), LocationConvert.FORMAT_DEGREES, false);
+		String formattedLon = LocationConvert.convertLongitude(latLon.getLongitude(), LocationConvert.FORMAT_DEGREES, false);
 		formattedLat = formattedLat.substring(0, formattedLat.length() - 1);
-		formattedlon = formattedlon.substring(0, formattedlon.length() - 1);
+		formattedLon = formattedLon.substring(0, formattedLon.length() - 1);
 
-		return new Pair<>(formattedLat, formattedlon);
+		return new Pair<>(formattedLat, formattedLon);
 	}
 
 	public HashMap<String, String> getParams() {

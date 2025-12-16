@@ -2781,7 +2781,7 @@
     <string name="new_profile">Új profil</string>
     <string name="shared_string_crash">Összeomlás</string>
     <string name="last_launch_crashed">Az OsmAnd a legutóbbi futtatáskor összeomlott. A hibaüzenet megosztásával segítsen az OsmAnd javításában.</string>
-    <string name="app_mode_ufo">Azonosítatlan repülő tárgy</string>
+    <string name="app_mode_ufo">UFO (azonosítatlan repülő tárgy)</string>
     <string name="app_mode_personal_transporter">Egyéni személyszállító (pl. Segway)</string>
     <string name="app_mode_monowheel">Egykerekű</string>
     <string name="app_mode_scooter">Roller</string>
@@ -2793,7 +2793,7 @@
     <string name="edit_profile_screen_options_subtitle">A profil képernyő-beállításainak kijelölése</string>
     <string name="edit_profile_nav_settings_subtitle">A profil navigációs beállításainak kijelölése</string>
     <string name="routing_attr_max_num_changes_description">Az átszállások legnagyobb számának megadása</string>
-    <string name="routing_attr_max_num_changes_name">Átszállások száma</string>
+    <string name="routing_attr_max_num_changes_name">Átszállások száma (legfeljebb)</string>
     <string name="turn_screen_on_router">Bekapcsolás irányváltáskor</string>
     <string name="turn_screen_on_time_descr">A képernyő kikapcsolásáig hátralévő idő beállítása.</string>
     <string name="turn_screen_on_sensor">Közelségérzékelő használata</string>
@@ -5480,7 +5480,7 @@
     <string name="dynamic_icon_type_summary">Az ikon a műveleti állapot alapján változik.</string>
     <string name="shared_string_dynamic">Dinamikus</string>
     <string name="obd_connected_to_device">Kapcsolódva ehhez: %s</string>
-    <string name="obd_connecting_to_device">Kapcsolódás ehhez: %s</string>
+    <string name="obd_connecting_to_device">Kapcsolódás a következőhöz: %s</string>
     <string name="fuel_tank_capacity">Üzemanyagtartály kapacitása</string>
     <string name="shared_strings_dimensions">Méretek</string>
     <string name="us_gallons">Amerikai gallon</string>
@@ -5680,7 +5680,7 @@
     <string name="threads_allocated_for_rendering">Rendereléshez lefoglalt szálak</string>
     <string name="threads_allocated_for_rendering_desc">Az alacsonyabb szálfoglalás bizonyos esetekben felgyorsíthatja a térkép renderelését.</string>
     <string name="turn_by_turn_directions">Részletes navigáció</string>
-    <string name="failed_to_connect">Sikertelen csatlakozás ehhez: %1s</string>
+    <string name="failed_to_connect">Nem sikerült kapcsolódni a következőhöz: %1s</string>
     <string name="enable_msaa">MSAA engedélyezése</string>
     <string name="next_turn_information">Következő kanyarodás információ</string>
     <string name="next_turn_information_desc">Megjeleníti a következő kanyarodás irányát és az utca nevét.</string>
@@ -5772,14 +5772,13 @@
     <string name="access_pinch_zoom_magnification">Csippentéses nagyítás</string>
     <string name="access_pinch_zoom_magnification_descr">Nagyítás közben a különálló nagyítási szintek helyett használja a nézetablak méretezését.</string>
     <string name="accessibility_independent_features">Független funkciók</string>
-    <string name="show_spherical_map">Szférikus térkép megjelenítése</string>
     <string name="show_spherical_map_description">A Föld gömbmodelljének megjelenítése</string>
     <string name="shared_string_price">Ár</string>
     <string name="rendering_attr_showSkiSlopes_name">Sípályák megjelenítése</string>
     <string name="rendering_attr_showSkiSlopes_description">Egyszerűsített sípályák megjelenítése</string>
     <string name="track_folder_appearance">Nyomvonalakat tartalmazó mappa megjelenése</string>
     <string name="update_maps">Térképek frissítése</string>
-    <string name="reconnect">Újbóli csatlakozás</string>
+    <string name="reconnect">Újrakapcsolódás</string>
     <string name="trip_recording_downhill_widget_desc">Megjeleníti az összes lejtő hosszát vagy a jelenleg rögzített út utolsó lejtőjének hosszát.</string>
     <string name="trip_recording_uphill_widget_desc">Megjeleníti az összes emelkedő hosszát vagy a jelenleg rögzített út utolsó emelkedő hosszát.</string>
     <string name="trip_recording_distance_widget_desc">Megjeleníti a jelenleg rögzített utazás teljes hosszát, valamint az utolsó emelkedés és lejtés hosszát.</string>
@@ -5803,7 +5802,6 @@
     <string name="button_frames">Gombkeretek</string>
     <string name="visualizing_button_grid">Gombrács megjelenítése a térképen</string>
     <string name="efficient_grid">Hatékony rács</string>
-    <string name="enable_3d_objects">3D épületek engedélyezése</string>
     <string name="enable_3d_objects_description">3D épületobjektumok megjelenítése a térképen</string>
     <string name="deleted_maps_warning">%d elem törlésére készül.\nFolytatja?</string>
     <string name="deleted_maps_prompt">Ezek a térképek már nem támogatottak, és kisebb régiók váltották fel őket. Távolítsa el őket, és töltse le az új verziókat.</string>
@@ -5811,4 +5809,10 @@
     <string name="routing_attr_weightrating_name">Megengedett össztömeg</string>
     <string name="routing_attr_maxaxleload_name">Megengedett legnagyobb tengelyterhelés</string>
     <string name="is_parking_time_limited">A parkolási idő korlátozott?</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centiméter</string>
+    <string name="bicycle_width_limit_description">Adja meg a kerékpár szélességét a keskeny kerékpárutak elkerülése érdekében.</string>
+    <string name="copy_link">Hivatkozás másolása</string>
+    <string name="routing_attr_pt_limit_name">N legjobb útvonal megjelenítése</string>
+    <string name="routing_attr_pt_limit_description">Adja meg a megjelenítendő legjobb útvonalak darabszámát</string>
 </resources>

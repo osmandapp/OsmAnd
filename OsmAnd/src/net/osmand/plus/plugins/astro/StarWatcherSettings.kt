@@ -48,7 +48,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val items: List<SkyObjectConfig>
 	)
 
-	data class BaseChartConfig(
+	data class StarChartConfig(
 		val items: List<SkyObjectConfig>
 	)
 
@@ -149,14 +149,14 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		setSettingsJson(root)
 	}
 
-	fun getStarChartConfig(): BaseChartConfig {
+	fun getStarChartConfig(): StarChartConfig {
 		val root = getSettingsJson()
 		val chartSettings = root.optJSONObject(KEY_STAR_CHART)
 		val items = parseItems(chartSettings)
-		return BaseChartConfig(items)
+		return StarChartConfig(items)
 	}
 
-	fun setStarChartConfig(config: BaseChartConfig) {
+	fun setStarChartConfig(config: StarChartConfig) {
 		val root = getSettingsJson()
 		val chartSettings = root.optJSONObject(KEY_STAR_CHART) ?: JSONObject()
 		chartSettings.put(KEY_ITEMS, serializeItems(config.items))

@@ -1073,7 +1073,7 @@
     <string name="share_route_as_gpx">以 GPX 檔案分享路徑</string>
     <string name="share_route_subject">藉由 OsmAnd 分享路徑</string>
     <string name="navigation_intent_invalid">無效的格式：%s</string>
-    <string name="keep_informing_never">手動（輕觸箭咀）</string>
+    <string name="keep_informing_never">僅限手動（輕點箭頭）</string>
     <string name="keep_informing_descr">按照時間再次播放導航指示。</string>
     <string name="keep_informing">重播導航指示</string>
     <string name="arrival_distance">到達提醒距離</string>
@@ -2796,8 +2796,8 @@
     <string name="edit_profile_setup_map_subtitle">選取設定檔的地圖選項</string>
     <string name="edit_profile_screen_options_subtitle">選取設定檔的螢幕選項</string>
     <string name="edit_profile_nav_settings_subtitle">選取設定檔的導航設定</string>
-    <string name="routing_attr_max_num_changes_description">指定變更上限</string>
-    <string name="routing_attr_max_num_changes_name">變更數量</string>
+    <string name="routing_attr_max_num_changes_description">指定轉乘次數上限</string>
+    <string name="routing_attr_max_num_changes_name">最大轉乘次數</string>
     <string name="turn_screen_on_router">輪流喚醒</string>
     <string name="turn_screen_on_time_descr">調整螢幕應開啟多久。</string>
     <string name="turn_screen_on_sensor">使用距離感測器</string>
@@ -5688,7 +5688,6 @@
     <string name="access_pinch_zoom_magnification">雙指縮放功能</string>
     <string name="access_pinch_zoom_magnification_descr">在縮放手勢期間，請使用檢視區域縮放取代獨立縮放等級。</string>
     <string name="accessibility_independent_features">獨立功能</string>
-    <string name="show_spherical_map">顯示球面地圖</string>
     <string name="show_spherical_map_description">顯示地球的球面模型</string>
     <string name="shared_string_price">價格</string>
     <string name="track_folder_appearance">軌跡資料夾外觀</string>
@@ -5719,7 +5718,6 @@
     <string name="slots">插槽</string>
     <string name="button_frames">按鈕框架</string>
     <string name="visualizing_button_grid">地圖按鈕網格</string>
-    <string name="enable_3d_objects">啟用 3D 建築物</string>
     <string name="enable_3d_objects_description">在地圖上顯示 3D 建築物物件</string>
     <string name="deleted_maps_warning">您將要刪除 %d 個項目\n要繼續嗎？</string>
     <string name="deleted_maps_prompt">這些地圖已不再受支援，並已被較小的區域取代。請移除它們並下載新版地圖。</string>
@@ -5727,4 +5725,10 @@
     <string name="routing_attr_weightrating_name">滿載時的最大重量</string>
     <string name="routing_attr_maxaxleload_name">最大軸重</string>
     <string name="is_parking_time_limited">可停車的時間有限制嗎？</string>
+    <string name="centimeter">公分</string>
+    <string name="shared_string_centimeters">公分</string>
+    <string name="bicycle_width_limit_description">請提供您的腳踏車寬度，以避免使用太窄的腳踏車道。</string>
+    <string name="copy_link">複製連結</string>
+    <string name="routing_attr_pt_limit_name">顯示 N 條最佳路線</string>
+    <string name="routing_attr_pt_limit_description">指定要顯示的最佳路線數量</string>
 </resources>

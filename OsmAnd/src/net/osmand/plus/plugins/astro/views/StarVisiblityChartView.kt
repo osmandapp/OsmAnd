@@ -15,10 +15,10 @@ import io.github.cosinekitty.astronomy.searchRiseSet
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import net.osmand.plus.R
-import net.osmand.plus.plugins.astro.AstroUtils
-import net.osmand.plus.plugins.astro.AstroUtils.Twilight
-import net.osmand.plus.plugins.astro.AstroUtils.toAstroTime
-import net.osmand.plus.plugins.astro.AstroUtils.toZoned
+import net.osmand.plus.plugins.astro.utils.AstroUtils
+import net.osmand.plus.plugins.astro.utils.AstroUtils.Twilight
+import net.osmand.plus.plugins.astro.utils.AstroUtils.toAstroTime
+import net.osmand.plus.plugins.astro.utils.AstroUtils.toZoned
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
