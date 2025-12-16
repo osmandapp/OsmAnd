@@ -27,12 +27,11 @@ import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
 import net.osmand.plus.download.local.OperationType;
+import net.osmand.plus.download.local.dialogs.menu.ItemMenuProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.InsetTarget;
-import net.osmand.plus.utils.InsetTargetsCollection;
 
 import java.io.File;
 import java.util.Map;
@@ -64,7 +63,7 @@ public class LocalItemFragment extends LocalBaseFragment
 		menuProvider = new ItemMenuProvider(requireDownloadActivity(), this);
 		menuProvider.setShowInfoItem(false);
 		menuProvider.setItem(localItem);
-		menuProvider.setColorId(ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode));
+		menuProvider.setIconColorId(ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode));
 	}
 
 	@Override

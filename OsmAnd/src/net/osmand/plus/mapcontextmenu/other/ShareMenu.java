@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import static net.osmand.LocationConvert.FORMAT_DEGREES;
 import static net.osmand.plus.mapcontextmenu.other.ShareItem.SAVE_AS_FILE;
 import static net.osmand.plus.mapcontextmenu.other.SharePoiParams.getFormattedShareLatLon;
 import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.*;
@@ -26,7 +25,6 @@ import androidx.annotation.RequiresApi;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
 
-import net.osmand.LocationConvert;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
@@ -164,16 +162,19 @@ public class ShareMenu extends BaseMenuController {
 
 		geoUrl = "";
 		try {
-			double latitude = latLon.getLatitude();
-			double longitude = latLon.getLongitude();
+			double latVal = latLon.getLatitude();
+			double lonVal = latLon.getLongitude();
 			int zoom = activity.getMapView().getZoom();
 
-			GeoParsedPoint parsedPoint = new GeoParsedPoint(latitude, longitude, zoom, title);
-			geoUrl = parsedPoint.getGeoUriString();
+			Pair<String, String> formattedLatLon = getFormattedShareLatLon(latLon);
+			String latStr = formattedLatLon.first;
+			String lonStr = formattedLatLon.second;
+
+			GeoParsedPoint parsedPoint = new GeoParsedPoint(latVal, lonVal, zoom, title);
+			geoUrl = parsedPoint.getGeoUriString(5);
 
 			if (Algorithms.isEmpty(urlLink)) {
-				Pair<String, String> formattedLatLon = getFormattedShareLatLon(latLon);
-				urlLink = "https://osmand.net/map?pin=" + formattedLatLon.first + "," + formattedLatLon.second + "#" + zoom + "/" + formattedLatLon.first + "/" + formattedLatLon.second;
+				urlLink = "https://osmand.net/map?pin=" + latStr + "," + lonStr + "#" + zoom + "/" + latStr + "/" + lonStr;
 			}
 		} catch (RuntimeException e) {
 			log.error("Failed to convert coordinates", e);

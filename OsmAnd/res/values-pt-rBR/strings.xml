@@ -3009,8 +3009,8 @@
     <string name="edit_profile_setup_map_subtitle">Selecione as opções de mapa para o perfil</string>
     <string name="edit_profile_screen_options_subtitle">Selecione as opções de tela para o perfil</string>
     <string name="edit_profile_nav_settings_subtitle">Selecione as configurações de navegação para o perfil</string>
-    <string name="routing_attr_max_num_changes_description">Especificar o limite superior de alterações</string>
-    <string name="routing_attr_max_num_changes_name">Número de transferências</string>
+    <string name="routing_attr_max_num_changes_description">Especifique o limite superior para alterações no transporte</string>
+    <string name="routing_attr_max_num_changes_name">Número máximo de mudanças de transporte</string>
     <string name="edit_profile_setup_subtitle">O perfil mantém suas próprias configurações</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Grau 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Grau 2</string>
@@ -6236,7 +6236,6 @@
     <string name="rendering_attr_hideLightSectorSources_description">Ocultar origem de setores de luz</string>
     <string name="rendering_attr_hideNoLNAM_name">Marcas marítimas OSM (algumas)</string>
     <string name="rendering_attr_hideNoLNAM_description">Ocultar marcas marítimas OSM (algumas)</string>
-    <string name="show_spherical_map">Mostrar mapa esférico</string>
     <string name="show_spherical_map_description">Exibir modelo esferoidal da Terra</string>
     <string name="accessibility_independent_features">Recursos independentes</string>
     <string name="lang_en_barebones">Português (básico)</string>
@@ -6263,7 +6262,6 @@
     <string name="quick_action_wind_animation_layer">Um botão para mostrar ou ocultar a camada de animação do vento no mapa.</string>
     <string name="wind_animation_layer">Camada de animação do vento</string>
     <string name="weather_layers">Camadas climáticas</string>
-    <string name="enable_3d_objects">Ativar edifícios 3D</string>
     <string name="enable_3d_objects_description">Exibir objetos de construção 3D no mapa</string>
     <string name="lang_crh">Tártaro da Crimeia (latim)</string>
     <string name="visualizing_button_grid">Grade de botões do mapa</string>
@@ -6274,4 +6272,10 @@
     <string name="routing_attr_weightrating_name">Peso máximo com carga total</string>
     <string name="routing_attr_maxaxleload_name">Carga máxima por eixo</string>
     <string name="deleted_maps_prompt">Esses mapas não são mais compatíveis e foram substituídos por regiões menores. Remova-os e baixe as novas versões.</string>
+    <string name="routing_attr_pt_limit_description">Especifique o número de melhores rotas a serem exibidas</string>
+    <string name="centimeter">cm</string>
+    <string name="unsupported_maps">Mapas não suportados</string>
+    <string name="shared_string_centimeters">centímetros</string>
+    <string name="bicycle_width_limit_description">Indique a largura da sua bicicleta para evitar ciclovias estreitas.</string>
+    <string name="copy_link">Copiar link</string>
 </resources>

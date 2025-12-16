@@ -325,19 +325,21 @@ public class AmenityMenuController extends MenuController {
 		return amenity.getType() != null && amenity.getType().isWiki();
 	}
 
-	@NonNull
+	@Nullable
 	protected String getShareType() {
-		boolean isWiki = amenity.getType().isWiki();
+		PoiCategory category = amenity.getType();
+		boolean isWiki = category != null && category.isWiki();
 
 		String shareType;
 		String subType = getFirstSubString(amenity.getSubType());
-		String type = amenity.getType().getKeyName();
+		String type = category != null ? category.getKeyName() : null;
 		if (isWiki) {
 			shareType = prepareType(!Algorithms.isEmpty(type) ? type : subType);
+			shareType = !Algorithms.isEmpty(shareType) ? shareType : OSM_WIKI_CATEGORY;
 		} else {
 			shareType = prepareType(!Algorithms.isEmpty(subType) ? subType : type);
 		}
-		return !Algorithms.isEmpty(shareType) ? shareType : OSM_WIKI_CATEGORY;
+		return shareType;
 	}
 
 	public static String prepareType(String s) {

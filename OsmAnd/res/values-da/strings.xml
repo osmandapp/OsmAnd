@@ -2913,8 +2913,8 @@
     <string name="edit_profile_setup_map_subtitle">Vælg kortindstillinger for profilen</string>
     <string name="edit_profile_screen_options_subtitle">Vælg skærmindstillinger for profilen</string>
     <string name="edit_profile_nav_settings_subtitle">Vælg navigationsindstillinger for profilen</string>
-    <string name="routing_attr_max_num_changes_description">Angiv øvre grænse for omstigninger</string>
-    <string name="routing_attr_max_num_changes_name">Antal skift</string>
+    <string name="routing_attr_max_num_changes_description">Angiv den øvre grænse for omstigninger</string>
+    <string name="routing_attr_max_num_changes_name">Maksimalt antal omstigninger</string>
     <string name="turn_screen_on_router">Vågn op ved retningsændring</string>
     <string name="turn_screen_on_time_descr">Indstil hvor længe skærmen skal være tændt.</string>
     <string name="turn_screen_on_sensor">Brug nærhedssensor</string>
@@ -5877,7 +5877,7 @@
     <string name="delete_data">Slet data</string>
     <string name="manage_storage_delete_data_dialog_summary">Er du sikker på, at du vil slette %1$s fra OsmAnd Cloud?\n\nDu kan gendanne dem fra papirkurven inden for 30 dage.</string>
     <string name="manage_storage">Administrer lagerplads</string>
-    <string name="copy_as_new_folder">Kopier som ny mappe</string>
+    <string name="copy_as_new_folder">Kopiér som ny mappe</string>
     <string name="add_to_a_folder">Tilføj til en mappe</string>
     <string name="add_to_favorites">Tilføj til favoritter</string>
     <string name="max_weight_at_full_load_description">Angiv dit køretøjs maksimale vægt ved fuld last for at undgå veje og broer med vægtbegrænsninger.</string>
@@ -5910,7 +5910,6 @@
     <string name="access_pinch_zoom_magnification">Forstørrelse med knibezoom</string>
     <string name="access_pinch_zoom_magnification_descr">Brug viewport-skalering i stedet for separate zoom-niveauer ved zoom-bevægelser.</string>
     <string name="accessibility_independent_features">Uafhængige funktioner</string>
-    <string name="show_spherical_map">Vis sfærisk kort</string>
     <string name="show_spherical_map_description">Vis sfærisk model af Jorden</string>
     <string name="shared_string_price">Pris</string>
     <string name="rendering_attr_showSkiSlopes_name">Vis skiløjper</string>
@@ -5942,11 +5941,16 @@
     <string name="button_frames">Knaprammer</string>
     <string name="visualizing_button_grid">Kortknap net</string>
     <string name="enable_3d_objects_description">Vis 3D-bygningsobjekter på kortet</string>
-    <string name="enable_3d_objects">Aktivér 3D-bygninger</string>
     <string name="deleted_maps_warning">Du er ved at slette %d element(er)\nFortsæt?</string>
     <string name="deleted_maps_prompt">Disse kort understøttes ikke længere og er blevet erstattet af mindre regioner. Fjern dem og download de nye versioner.</string>
     <string name="unsupported_maps">Ikke-understøttede kort</string>
     <string name="routing_attr_weightrating_name">Maksimal vægt ved fuld last</string>
     <string name="routing_attr_maxaxleload_name">Maksimal akselbelastning</string>
     <string name="is_parking_time_limited">Er parkering tidsbegrænset?</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimeter</string>
+    <string name="bicycle_width_limit_description">Angiv din cykels bredde for at undgå smalle cykelstier.</string>
+    <string name="copy_link">Kopiér link</string>
+    <string name="routing_attr_pt_limit_name">Vis N bedste ruter</string>
+    <string name="routing_attr_pt_limit_description">Angiv antallet af bedste ruter, der skal vises</string>
 </resources>

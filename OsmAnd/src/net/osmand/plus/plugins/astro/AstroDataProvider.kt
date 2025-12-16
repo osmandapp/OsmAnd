@@ -3,8 +3,8 @@ package net.osmand.plus.plugins.astro
 import android.content.Context
 import android.graphics.Color
 import io.github.cosinekitty.astronomy.Body
-import net.osmand.plus.plugins.astro.AstroUtils.bodyColor
-import net.osmand.plus.plugins.astro.AstroUtils.bodyName
+import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyColor
+import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyName
 import net.osmand.plus.plugins.astro.views.SkyObject
 import net.osmand.plus.plugins.astro.views.SkyObject.Type
 
