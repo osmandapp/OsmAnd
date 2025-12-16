@@ -72,6 +72,7 @@ import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDConnector
 import net.osmand.shared.obd.OBDDataComputer
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
 import net.osmand.shared.obd.OBDDispatcher
 import net.osmand.shared.obd.OBDDispatcher.OBDReadStatusListener
 import net.osmand.shared.obd.OBDSimulationSource
@@ -625,7 +626,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 
 	override fun getTrackPointsAnalyser(): GpxTrackAnalysis.TrackPointsAnalyser {
 		return GpxTrackAnalysis.TrackPointsAnalyser { analysis: GpxTrackAnalysis, point: WptPt, attribute: PointAttributes ->
-			onAnalysePoint(
+			VehicleMetricAttributesUtils.onAnalysePoint(
 				analysis,
 				point,
 				attribute
@@ -633,48 +634,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		}
 	}
 
-	private fun onAnalysePoint(
-		analysis: GpxTrackAnalysis,
-		point: WptPt,
-		attribute: PointAttributes
-	) {
-		OBDCommand.entries
-			.mapNotNull { it.gpxTag }
-			.forEach { tag ->
-				val value = getPointAttribute(point, tag)
-				attribute.setAttributeValue(tag, value)
-
-				if (!analysis.hasData(tag) && attribute.hasValidValue(tag)) {
-					analysis.setHasData(tag, true)
-				}
-			}
-	}
-
-	private fun getPointAttribute(wptPt: WptPt, key: String): Float {
-		var value = wptPt.getDeferredExtensionsToRead()[key]
-		if (Algorithms.isEmpty(value)) {
-			value = wptPt.getExtensionsToRead()[key]
-		}
-		return Algorithms.parseFloatSilently(value, 0f)
-	}
-
 	override fun getAvailableGPXDataSetTypes(
 		analysis: GpxTrackAnalysis,
-		availableTypes: MutableMap<Int, MutableList<Array<GPXDataSetType?>>>
+		out: MutableList<Array<GPXDataSetType?>>
 	) {
-		val pluginKey = R.string.obd_widget_group
-		val pluginList = mutableListOf<Array<GPXDataSetType?>>()
-
-		for (item in OBDDataSet.entries) {
-			val tag = item.command.gpxTag
-			if (tag != null && analysis.hasData(tag)) {
-				pluginList.add(arrayOf(item.dataSetType))
-			}
-		}
-
-		if (pluginList.isNotEmpty()) {
-			availableTypes[pluginKey] = pluginList
-		}
+		VehicleMetricAttributesUtils.getAvailableGPXDataSetTypes(analysis, out)
 	}
 
 	override fun getOrderedLineDataSet(
@@ -684,8 +648,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		axisType: GPXDataSetAxisType,
 		calcWithoutGaps: Boolean, useRightAxis: Boolean
 	): OrderedLineDataSet {
-		return SensorAttributesUtils.createSensorDataSet(
+		return VehicleMetricAttributesUtils.createVehicleMetricsDataSet(
 			app,
+			this,
 			chart,
 			analysis,
 			graphType,
@@ -694,25 +659,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			true,
 			calcWithoutGaps
 		)
-	}
-
-	enum class OBDDataSet(val dataSetType: GPXDataSetType, val command: OBDCommand) {
-		INTAKE_TEMPERATURE(GPXDataSetType.INTAKE_TEMPERATURE, OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND),
-		AMBIENT_TEMPERATURE(GPXDataSetType.AMBIENT_TEMPERATURE, OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND),
-		COOLANT_TEMPERATURE(GPXDataSetType.COOLANT_TEMPERATURE, OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND),
-		ENGINE_OIL_TEMPERATURE(GPXDataSetType.ENGINE_OIL_TEMPERATURE, OBDCommand.OBD_ENGINE_OIL_TEMPERATURE_COMMAND),
-
-		ENGINE_SPEED(GPXDataSetType.ENGINE_SPEED, OBDCommand.OBD_RPM_COMMAND),
-		ENGINE_RUNTIME(GPXDataSetType.ENGINE_RUNTIME, OBDCommand.OBD_ENGINE_RUNTIME_COMMAND),
-		ENGINE_LOAD(GPXDataSetType.ENGINE_LOAD, OBDCommand.OBD_CALCULATED_ENGINE_LOAD_COMMAND),
-
-		FUEL_PRESSURE(GPXDataSetType.FUEL_PRESSURE, OBDCommand.OBD_FUEL_PRESSURE_COMMAND),
-		FUEL_CONSUMPTION(GPXDataSetType.FUEL_CONSUMPTION, OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND),
-		REMAINING_FUEL(GPXDataSetType.REMAINING_FUEL, OBDCommand.OBD_FUEL_LEVEL_COMMAND),
-
-		BATTERY_LEVEL(GPXDataSetType.BATTERY_LEVEL, OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND),
-		VEHICLE_SPEED(GPXDataSetType.VEHICLE_SPEED, OBDCommand.OBD_SPEED_COMMAND),
-		THROTTLE_POSITION(GPXDataSetType.THROTTLE_POSITION, OBDCommand.OBD_THROTTLE_POSITION_COMMAND)
 	}
 
 	companion object {
@@ -1006,7 +952,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 				return "-"
 			}
 		}
-		val convertedData = when (computerWidget.type) {
+		val convertedData = getWidgetConvertedValue(computerWidget.type, data)
+
+		return computerWidget.type.formatter.format(convertedData)
+	}
+
+	fun getWidgetConvertedValue(
+		type: OBDTypeWidget, data: Any?): Any? {
+		return when (type) {
 			OBDDataComputer.OBDTypeWidget.SPEED -> getConvertedSpeed(data as Number)
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM -> getConvertedDistance(data as Double)
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
@@ -1022,7 +975,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM -> getFormatVolumePerDistance(
 				data as Number)
 
-			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime(data as Int)
+			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime((data as Number).toInt())
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR,
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE,
 			OBDDataComputer.OBDTypeWidget.ADAPTER_BATTERY_VOLTAGE,
@@ -1038,12 +991,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_M_PER_LITER -> getFormatDistancePerVolume(
 				data as Number)
 		}
-
-		return computerWidget.type.formatter.format(convertedData)
 	}
 
 	fun getWidgetUnit(computerWidget: OBDDataComputer.OBDComputerWidget): String? {
-		return when (computerWidget.type) {
+		return getWidgetUnit(computerWidget.type)
+	}
+
+	fun getWidgetUnit(type: OBDTypeWidget): String? {
+		return when (type) {
 			OBDDataComputer.OBDTypeWidget.SPEED -> getSpeedUnit()
 			OBDDataComputer.OBDTypeWidget.RPM -> app.getString(R.string.rpm_unit)
 			OBDDataComputer.OBDTypeWidget.FUEL_PRESSURE -> app.getString(R.string.kpa_unit)
