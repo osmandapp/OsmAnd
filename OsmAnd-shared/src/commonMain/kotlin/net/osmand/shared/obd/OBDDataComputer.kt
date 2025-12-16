@@ -236,6 +236,16 @@ object OBDDataComputer {
 		fun getTitle(): String {
 			return Localization.getString(nameId)
 		}
+
+		companion object {
+			fun Companion.findByGpxTag(key: String?): OBDTypeWidget? {
+				if (key == null) return null
+
+				return OBDTypeWidget.entries.firstOrNull { widget ->
+					widget.requiredCommand.gpxTag == key
+				}
+			}
+		}
 	}
 
 	private fun averageNumber(values: List<OBDDataField<Any>>): Double? =

@@ -12,7 +12,7 @@ enum class OBDCommand(
 	val isStale: Boolean = false,
 	val textCommand: String? = null,
 	val isHexAnswer: Boolean = true) {
-	OBD_CALCULATED_ENGINE_LOAD_COMMAND(0x01, 0x04, 1, OBDUtils::parsePercentResponse, "vm_runtime"),
+	OBD_CALCULATED_ENGINE_LOAD_COMMAND(0x01, 0x04, 1, OBDUtils::parsePercentResponse, "vm_eload"),
 	OBD_THROTTLE_POSITION_COMMAND(0x01, 0x11, 1, OBDUtils::parsePercentResponse, "vm_tpos"),
 	OBD_ENGINE_OIL_TEMPERATURE_COMMAND(0x01, 0x5C, 1, OBDUtils::parseTempResponse, "vm_eotemp"),
 	OBD_FUEL_PRESSURE_COMMAND(0x01, 0x0A, 1, OBDUtils::parseFuelPressureResponse, "vm_fpress"),

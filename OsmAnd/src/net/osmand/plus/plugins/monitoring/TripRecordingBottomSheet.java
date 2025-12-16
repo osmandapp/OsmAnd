@@ -53,7 +53,6 @@ import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -83,6 +82,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment implements SegmentActionsListener {
 
