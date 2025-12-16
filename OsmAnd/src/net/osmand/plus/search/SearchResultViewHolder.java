@@ -322,10 +322,11 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			imageView.setLayoutParams(params);
 		}
 		if (imageContainer != null) {
-			if (Algorithms.isEmpty(photoUrl)) {
+			if (Algorithms.isEmpty(photoUrl) || hasRouteShield) {
 				imageContainer.setPadding(margin, margin, margin, margin);
 			} else {
-				imageContainer.setPadding(0, 0, 0, 0);
+				int topPadding = title.getLineCount() == 1 ? 0 : AndroidUtils.dpToPx(app, 8);
+				imageContainer.setPadding(0, topPadding, 0, 0);
 			}
 			if (!hasRouteShield && resolved) {
 				if (typedValue.type >= TypedValue.TYPE_FIRST_COLOR_INT && typedValue.type <= TypedValue.TYPE_LAST_COLOR_INT) {
