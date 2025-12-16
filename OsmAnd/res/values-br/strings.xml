@@ -120,4 +120,23 @@
     <string name="weeks_5">Sizhunvezhioù</string>
     <string name="month">Miz</string>
     <string name="shared_string_close">Seriñ</string>
+    <string name="routing_attr_pt_limit_name">Lakañ war wel an N hent gwellañ</string>
+    <string name="routing_attr_pt_limit_description">Disklaeriañ niverenn an hentoù gwellañ da lakat war wel</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">kantimetrad</string>
+    <string name="bicycle_width_limit_description">Merkañ ledander ho marc\'h-houarn evit chom hep tremen hentoù treut.</string>
+    <string name="copy_link">Diskrivañ al liamm</string>
+    <string name="is_parking_time_limited">Termen parkañ zo ?</string>
+    <string name="routing_attr_weightrating_name">Pouezh uhelañ gant kargad leun</string>
+    <string name="routing_attr_maxaxleload_name">Nerzh uhelañ ouzh ahel</string>
+    <string name="deleted_maps_warning">O vont da ziverkañ %d tra emaoc\'h.\nKenderc\'hel ?</string>
+    <string name="deleted_maps_prompt">N’eo ket en o reizh ar c\'hartennoù-mañ ken ha lakaet eo bet rannvroioù bihanoc\'h e-lec\'h. Diskarit anezho ha pellgargit ar re nevez mar plij ganeoc\'h.</string>
+    <string name="unsupported_maps">Kartennoù diglot</string>
+    <string name="months_2_4">miz</string>
+    <string name="months_5">Miz</string>
+    <string name="year">bloaz</string>
+    <string name="years_2_4">Bloaz</string>
+    <string name="years_5">Bloaz</string>
+    <string name="requires_internet_connection">Rouedad internet zo ret</string>
+    <string name="unit_of_length">Unanenn hirder</string>
 </resources>

@@ -604,7 +604,7 @@
     <string name="app_mode_default">რუკის დათვალიერება</string>
     <string name="app_mode_car">მანქანით</string>
     <string name="app_mode_bicycle">ველოსიპედით</string>
-    <string name="app_mode_pedestrian">ფეხით</string>
+    <string name="app_mode_pedestrian">სიარული</string>
     <string name="position_on_map_center">ცენტრი</string>
     <string name="position_on_map_bottom">ქვედა</string>
     <string name="navigate_point_top_text">შეიყვანეთ განედი და გრძედი არჩეულ ფორმატში (D - გრადუსი, M - წუთ, S - წამი)</string>
@@ -3393,4 +3393,5 @@
     <string name="shared_string_volume">მოცულობა</string>
     <string name="shared_string_instant">მწყისიერი</string>
     <string name="shared_string_engine">ძრავა</string>
+    <string name="shared_string_interpolation">ინტერპოლაცია</string>
 </resources>

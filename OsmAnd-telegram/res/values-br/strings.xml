@@ -20,4 +20,12 @@
     <string name="shared_string_group">Strollad</string>
     <string name="shared_string_close">Seriñ</string>
     <string name="shared_string_account">Kont</string>
+    <string name="unit_of_speed_system">unanenn dizh</string>
+    <string name="saved_messages">Kemennadennoù enrollet</string>
+    <string name="shared_string_end">Echu</string>
+    <string name="unit_of_length">Unanenn hirder</string>
+    <string name="unit_of_speed_system_descr">Despizañ un unanenn dizh</string>
+    <string name="set_time_timeline_descr">Dibabit an amzer da ziskouez</string>
+    <string name="start_end_date">Deiziad kregiñ - echuiñ</string>
+    <string name="timeline_no_data_descr">N’eus dataenn ebet d\'an deiz dibabet</string>
 </resources>
