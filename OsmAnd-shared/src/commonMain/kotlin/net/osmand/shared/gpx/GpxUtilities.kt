@@ -277,7 +277,7 @@ object GpxUtilities {
 		var points = mutableListOf<WptPt>()
 		var color: Int = 0
 		var hidden = false
-		var pinned = false
+		var pinned: Boolean? = null
 
 		constructor(name: String, iconName: String?, backgroundType: String?, color: Int) : this(
 			name
@@ -307,7 +307,7 @@ object GpxUtilities {
 			return hidden
 		}
 
-		fun isPinned(): Boolean {
+		fun isPinned(): Boolean? {
 			return pinned
 		}
 
@@ -342,8 +342,8 @@ object GpxUtilities {
 			if (isHidden()) {
 				bundle.putBoolean(HIDDEN_EXTENSION, true)
 			}
-			if (isPinned()) {
-				bundle.putBoolean(PINNED_EXTENSION, true)
+			if (pinned != null) {
+				bundle.putBoolean(PINNED_EXTENSION, isPinned() == true)
 			}
 			return bundle
 		}
@@ -365,7 +365,7 @@ object GpxUtilities {
 				category.iconName = parser.getAttributeValue("", ICON_NAME_EXTENSION)
 				category.backgroundType = parser.getAttributeValue("", BACKGROUND_TYPE_EXTENSION)
 				category.hidden = parser.getAttributeValue("", HIDDEN_EXTENSION).toBoolean()
-				category.pinned = parser.getAttributeValue("", PINNED_EXTENSION).toBoolean()
+				category.pinned = parser.getAttributeValue("", PINNED_EXTENSION)?.toBoolean()
 				return category
 			}
 		}
