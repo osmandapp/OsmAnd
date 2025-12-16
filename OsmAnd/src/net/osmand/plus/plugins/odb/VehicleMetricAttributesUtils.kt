@@ -15,15 +15,12 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.gpx.PointAttributes
-import net.osmand.shared.gpx.primitives.WptPt
-import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.Companion.findByGpxTag
 import net.osmand.util.Algorithms
 import java.text.MessageFormat
 
-class VehicleMetricAttributesUtils: GpxTrackAnalysis.TrackPointsAnalyser {
-
+class VehicleMetricAttributesUtils {
     companion object {
         fun getAvailableGPXDataSetTypes(
             analysis: GpxTrackAnalysis,
@@ -38,31 +35,6 @@ class VehicleMetricAttributesUtils: GpxTrackAnalysis.TrackPointsAnalyser {
                     out.add(arrayOf(type))
                 }
             }
-        }
-
-        fun onAnalysePoint(
-            analysis: GpxTrackAnalysis,
-            point: WptPt,
-            attribute: PointAttributes
-        ) {
-            OBDCommand.entries
-                .mapNotNull { it.gpxTag }
-                .forEach { tag ->
-                    val value = getPointAttribute(point, tag)
-                    attribute.setAttributeValue(tag, value)
-
-                    if (!analysis.hasData(tag) && attribute.hasValidValue(tag)) {
-                        analysis.setHasData(tag, true)
-                    }
-                }
-        }
-
-        private fun getPointAttribute(wptPt: WptPt, key: String): Float {
-            var value = wptPt.getDeferredExtensionsToRead()[key]
-            if (Algorithms.isEmpty(value)) {
-                value = wptPt.getExtensionsToRead()[key]
-            }
-            return Algorithms.parseFloatSilently(value, 0f)
         }
 
         fun createVehicleMetricsDataSet(
@@ -189,13 +161,5 @@ class VehicleMetricAttributesUtils: GpxTrackAnalysis.TrackPointsAnalyser {
             }
             return values
         }
-    }
-
-    override fun onAnalysePoint(
-        analysis: GpxTrackAnalysis,
-        point: WptPt,
-        attribute: PointAttributes
-    ) {
-        VehicleMetricAttributesUtils.onAnalysePoint(analysis, point, attribute)
     }
 }

@@ -625,7 +625,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	}
 
 	override fun getTrackPointsAnalyser(): GpxTrackAnalysis.TrackPointsAnalyser {
-		return VehicleMetricAttributesUtils()
+		return VehicleTrackPointsAnalyser()
 	}
 
 	override fun getAvailableGPXDataSetTypes(
