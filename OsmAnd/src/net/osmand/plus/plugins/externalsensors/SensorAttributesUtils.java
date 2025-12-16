@@ -72,29 +72,21 @@ public class SensorAttributesUtils {
 		return Algorithms.parseFloatSilently(value, defaultValue);
 	}
 
-	public static void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull Map<Integer, List<GPXDataSetType[]>> availableTypes) {
-		Integer pluginKey = R.string.external_sensor_widgets;
-
-		List<GPXDataSetType[]> typesList = new ArrayList<>();
-
+	public static void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
 		if (hasSensorSpeedData(analysis)) {
-			typesList.add(new GPXDataSetType[]{GPXDataSetType.SENSOR_SPEED});
+			availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SENSOR_SPEED});
 		}
 		if (hasHeartRateData(analysis)) {
-			typesList.add(new GPXDataSetType[]{GPXDataSetType.SENSOR_HEART_RATE});
+			availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SENSOR_HEART_RATE});
 		}
 		if (hasBikePowerData(analysis)) {
-			typesList.add(new GPXDataSetType[]{GPXDataSetType.SENSOR_BIKE_POWER});
+			availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SENSOR_BIKE_POWER});
 		}
 		if (hasBikeCadenceData(analysis)) {
-			typesList.add(new GPXDataSetType[]{GPXDataSetType.SENSOR_BIKE_CADENCE});
+			availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SENSOR_BIKE_CADENCE});
 		}
 		if (hasTemperatureData(analysis)) {
-			typesList.add(new GPXDataSetType[]{GPXDataSetType.SENSOR_TEMPERATURE});
-		}
-
-		if (!typesList.isEmpty()) {
-			availableTypes.put(pluginKey, typesList);
+			availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SENSOR_TEMPERATURE});
 		}
 	}
 

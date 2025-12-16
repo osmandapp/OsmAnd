@@ -547,7 +547,7 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull Map<Integer, List<GPXDataSetType[]>> availableTypes) {
+	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
 
 	}
 

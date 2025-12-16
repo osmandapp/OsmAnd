@@ -155,27 +155,44 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 		if (listener == null) {
 			return;
 		}
+
 		container.removeAllViews();
 		itemViews.clear();
+
 		GpxTrackAnalysis analysis = listener.getAnalysis();
+
 		List<GPXDataSetType[]> defaultTypes = getAvailableDefaultYTypes(analysis);
 		for (GPXDataSetType[] types : defaultTypes) {
 			createYAxisItem(types);
 		}
 
-		Map<Integer, List<GPXDataSetType[]>> sensorGrouped = getAvailableSensorYTypes(analysis);
-		for (Map.Entry<Integer, List<GPXDataSetType[]>> entry : sensorGrouped.entrySet()) {
-			int groupKey = entry.getKey();
-			List<GPXDataSetType[]> typesList = entry.getValue();
+		List<GPXDataSetType[]> sensorTypes = getAvailableSensorYTypes(analysis);
 
+		Map<GpxDataSetTypeGroup, List<GPXDataSetType[]>> grouped =
+				new LinkedHashMap<>();
+
+		for (GPXDataSetType[] types : sensorTypes) {
+			if (types == null || types.length == 0 || types[0] == null) {
+				continue;
+			}
+
+			GpxDataSetTypeGroup group = types[0].typeGroup;
+			grouped.computeIfAbsent(group, k -> new ArrayList<>())
+					.add(types);
+		}
+
+		for (Map.Entry<GpxDataSetTypeGroup, List<GPXDataSetType[]>> entry : grouped.entrySet()) {
+			List<GPXDataSetType[]> typesList = entry.getValue();
 			if (Algorithms.isEmpty(typesList)) {
 				continue;
 			}
 
 			container.addView(createDivider());
-			if (groupKey != 0) {
-				String dividerText = app.getString(groupKey);
-				container.addView(createCategory(dividerText));
+
+			GpxDataSetTypeGroup group = entry.getKey();
+			String groupName = group.getName(app);
+			if (!Algorithms.isEmpty(groupName)) {
+				container.addView(createCategory(groupName));
 			}
 
 			for (GPXDataSetType[] types : typesList) {
@@ -291,11 +308,10 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@NonNull
-	public static Map<Integer, List<GPXDataSetType[]>> getAvailableSensorYTypes(@NonNull GpxTrackAnalysis analysis) {
-		Map<Integer, List<GPXDataSetType[]>> groupedTypes = new LinkedHashMap<>();
-
-		PluginsHelper.getAvailableGPXDataSetTypes(analysis, groupedTypes);
-		return groupedTypes;
+	public static List<GPXDataSetType[]> getAvailableSensorYTypes(@NonNull GpxTrackAnalysis analysis) {
+		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
+		PluginsHelper.getAvailableGPXDataSetTypes(analysis, availableTypes);
+		return availableTypes;
 	}
 
 	@Override

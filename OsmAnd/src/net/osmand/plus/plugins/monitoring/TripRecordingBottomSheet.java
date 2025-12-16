@@ -135,11 +135,9 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 			graphsAdapter.updateGraph(graphTabPosition);
 			boolean showSegmentsTab = false;
 			if (graphsAdapter.isUseSingleMainTab()) {
-				List<GPXDataSetType[]> availableYAxis = new ArrayList<>(ChartModeBottomSheet.getAvailableDefaultYTypes(selectedGpxFile.getTrackAnalysis(app)));
-				Map<Integer, List<GPXDataSetType[]>> sensorGrouped = ChartModeBottomSheet.getAvailableSensorYTypes(selectedGpxFile.getTrackAnalysis(app));
-				for (List<GPXDataSetType[]> list : sensorGrouped.values()) {
-					availableYAxis.addAll(list);
-				}
+				List<GPXDataSetType[]> availableYAxis = new ArrayList<>();
+				availableYAxis.addAll(ChartModeBottomSheet.getAvailableDefaultYTypes(selectedGpxFile.getTrackAnalysis(app)));
+				availableYAxis.addAll(ChartModeBottomSheet.getAvailableSensorYTypes(selectedGpxFile.getTrackAnalysis(app)));
 				if (!Algorithms.isEmpty(availableYAxis)) {
 					showSegmentsTab = !Algorithms.isEmpty(availableYAxis) || graphsAdapter.isTabsVisible();
 				}

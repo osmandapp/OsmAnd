@@ -528,11 +528,9 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		selectedMainSetTypes.clear();
 		List<String> setTypes = xAxisPreference.getStringsList();
 		if (!Algorithms.isEmpty(setTypes)) {
-			List<GPXDataSetType[]> availableSetType = new ArrayList<>(ChartModeBottomSheet.getAvailableDefaultYTypes(analysis));
-			Map<Integer, List<GPXDataSetType[]>> sensorGrouped = ChartModeBottomSheet.getAvailableSensorYTypes(analysis);
-			for (List<GPXDataSetType[]> list : sensorGrouped.values()) {
-				availableSetType.addAll(list);
-			}
+			List<GPXDataSetType[]> availableSetType = new ArrayList<>();
+			availableSetType.addAll(ChartModeBottomSheet.getAvailableDefaultYTypes(analysis));
+			availableSetType.addAll(ChartModeBottomSheet.getAvailableSensorYTypes(analysis));
 			for (String type : setTypes) {
 				for (GPXDataSetType[] dataSetTypes : availableSetType) {
 					if (type.equals(dataSetTypes[0].name())) {

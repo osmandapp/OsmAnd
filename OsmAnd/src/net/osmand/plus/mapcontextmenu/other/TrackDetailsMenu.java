@@ -822,12 +822,7 @@ public class TrackDetailsMenu {
 		if (hasElevationData && hasSpeedData) {
 			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE, GPXDataSetType.SPEED});
 		}
-		Map<Integer, List<GPXDataSetType[]>> pluginTypes = new LinkedHashMap<>();
-		PluginsHelper.getAvailableGPXDataSetTypes(analysis, pluginTypes);
-
-		for (List<GPXDataSetType[]> list : pluginTypes.values()) {
-			availableTypes.addAll(list);
-		}
+		PluginsHelper.getAvailableGPXDataSetTypes(analysis, availableTypes);
 
 		return availableTypes;
 	}
