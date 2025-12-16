@@ -5818,4 +5818,7 @@
     <string name="copy_link">Copier le lien</string>
     <string name="routing_attr_pt_limit_name">Afficher les N meilleures routes</string>
     <string name="routing_attr_pt_limit_description">Indique le nombre de meilleures routes à proposer</string>
+    <string name="delete_folder_description">Supprimer le dossier « %1$s » ?</string>
+    <string name="show_spherical_map">Vue du globe</string>
+    <string name="enable_3d_objects">Bâtiments 3D</string>
 </resources>
