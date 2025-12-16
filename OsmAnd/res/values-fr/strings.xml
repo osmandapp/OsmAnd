@@ -5819,6 +5819,7 @@
     <string name="routing_attr_pt_limit_name">Afficher les N meilleures routes</string>
     <string name="routing_attr_pt_limit_description">Indique le nombre de meilleures routes à proposer</string>
     <string name="delete_folder_description">Supprimer le dossier « %1$s » ?</string>
-    <string name="show_spherical_map">Vue du globe</string>
+    <string name="show_spherical_map">Vue Globe terrestre</string>
     <string name="enable_3d_objects">Bâtiments 3D</string>
+    <string name="vehicle_metrics_chart_category">Mesures du véhicule</string>
 </resources>
