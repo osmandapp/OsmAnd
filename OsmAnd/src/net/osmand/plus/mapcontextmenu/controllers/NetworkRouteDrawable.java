@@ -10,10 +10,6 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.View;
 
 import net.osmand.gpx.clickable.ClickableWayTags;
 import net.osmand.plus.OsmandApplication;
@@ -29,7 +25,6 @@ import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.util.Algorithms;
 import net.osmand.data.Amenity;
 
-import org.apache.commons.logging.LogFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,7 +40,6 @@ import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
 
 public class NetworkRouteDrawable extends Drawable {
 
-	private static final org.apache.commons.logging.Log log = LogFactory.getLog(NetworkRouteDrawable.class);
 	private final OsmandApplication app;
 	private final RouteKey routeKey;
 
@@ -57,8 +51,6 @@ public class NetworkRouteDrawable extends Drawable {
 	private final Drawable backgroundDrawable;
 
 	private final int defaultIconSize;
-	private boolean useExternalTextDrawer;
-//	private final View drawTextDelegate;
 
 	public NetworkRouteDrawable(@NonNull OsmandApplication app, @NonNull RouteKey routeKey, boolean nightMode) {
 		this.app = app;
@@ -138,15 +130,6 @@ public class NetworkRouteDrawable extends Drawable {
 		updatePaint(nightMode);
 	}
 
-	public void setTextSize(float sp, boolean nightMode) {
-		DisplayMetrics displayMetrics = app.getResources().getDisplayMetrics();
-		float ts = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, displayMetrics);
-		Log.d("Corwin", "setTextSize: ts " + ts );
-		paint.setTextSize(ts);
-//		paint.setTextSize(AndroidUtils.spToPxF(app, sp));
-//		updatePaint(nightMode);
-	}
-
 	private void updatePaint(boolean nightMode) {
 		if (!Algorithms.isEmpty(osmcText)) {
 			MapRenderRepositories renderer = app.getResourceManager().getRenderer();
@@ -193,48 +176,10 @@ public class NetworkRouteDrawable extends Drawable {
 
 	@Override
 	public void draw(@NonNull Canvas canvas) {
-		float scaleFactor = 1f;
-		float originalWidth = 0f;
-		float originalHeight = 0f;
-		float scaledWidth = 0f;
-		float scaledHeight = 0f;
 		if (backgroundDrawable != null) {
 			backgroundDrawable.draw(canvas);
-			originalWidth = backgroundDrawable.getIntrinsicWidth();
-			originalHeight = backgroundDrawable.getIntrinsicHeight();
-
-			Rect scaledBounds = backgroundDrawable.getBounds();
-			scaledWidth = scaledBounds.width();
-			scaledHeight = scaledBounds.height();
-
-			scaleFactor = Math.max(scaledWidth / originalWidth, scaledHeight / originalHeight);
 		}
 
-		if (!useExternalTextDrawer) {
-			drawText(canvas);
-//			float oldTExtSize = paint.getTextSize();
-//
-//			Log.d("Corwin", "draw: ..........");
-//			Log.d("Corwin", "draw: text " + osmcText);
-//			Log.d("Corwin", "draw: origWidth " + originalWidth);
-//			Log.d("Corwin", "draw: origHeight " + originalHeight);
-//			Log.d("Corwin", "draw: width " + scaledWidth);
-//			Log.d("Corwin", "draw: height " + scaledHeight);
-//			Log.d("Corwin", "draw: shrink " + (originalWidth > scaledWidth || originalHeight > scaledHeight));
-//			Log.d("Corwin", "draw: scaleFactor " + scaleFactor);
-//			Log.d("Corwin", "draw: oldTExtSize " + oldTExtSize);
-////			paint.setTextSize(oldTExtSize / scaleFactor);
-//			Rect rect = getBounds();
-//			float x = rect.width() / 2f;
-//			float y = rect.height() / 2f - ((paint.descent() + paint.ascent()) / 2);
-//			Log.d("Corwin", "draw: paint.textSize " + paint.getTextSize());
-//			canvas.drawText(osmcText, x, y, paint);
-//			paint.setTextSize(oldTExtSize);
-//
-		}
-	}
-
-	public void drawText(@NotNull Canvas canvas) {
 		if (!Algorithms.isEmpty(osmcText)) {
 			Rect rect = getBounds();
 			float x = rect.width() / 2f;
@@ -352,10 +297,6 @@ public class NetworkRouteDrawable extends Drawable {
 		}
 	}
 
-	public void setUseExternalTextDrawer(boolean useExternalTextDrawer) {
-		this.useExternalTextDrawer = useExternalTextDrawer;
-	}
-
 	public @Nullable Drawable getBackgroundDrawable() {
 		return backgroundDrawable;
 	}
@@ -365,7 +306,6 @@ public class NetworkRouteDrawable extends Drawable {
 	}
 
 	public @NotNull Paint getTextPaint() {
-		// Return a new Paint object with the same attributes as the internal paint
 		return new Paint(paint);
 	}
 }

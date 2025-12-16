@@ -2,14 +2,11 @@ package net.osmand.plus.search;
 
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,9 +29,7 @@ import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
-import net.osmand.plus.mapcontextmenu.other.DelegateDrawTextView;
 import net.osmand.plus.mapcontextmenu.other.TrimToBackgroundTextView;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.utils.AndroidUtils;
@@ -59,7 +54,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 	public final boolean nightMode;
 
 	public SearchResultViewHolder(@NonNull View view,
-	                              @NonNull UpdateLocationViewCache locationViewCache, boolean nightMode) {
+			@NonNull UpdateLocationViewCache locationViewCache, boolean nightMode) {
 		super(view);
 
 		this.app = AndroidUtils.getApp(view.getContext());
@@ -197,15 +192,6 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		String photoUrl = null;
 		if (amenity != null) {
 			photoUrl = amenity.getWikiIconUrl();
-//			String preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-//			if (Algorithms.isEmpty(preferredMapLang)) {
-//				preferredMapLang = app.getLanguage();
-//			}
-//			String articleLang = PluginsHelper.onGetMapObjectsLocale(amenity, preferredMapLang);
-//			String lang = amenity.getContentLanguage("content", articleLang, "en");
-//			String text = amenity.getDescription(lang);
-//			boolean html = !Algorithms.isEmpty(text) && Algorithms.isHtmlText(text);
-//			description = html ? WikiArticleHelper.getPartialContent(text) : text;
 			if (amenity.isRouteTrack()) {
 				typeName = amenity.getRouteActivityType();
 				hasRouteShield = QuickSearchListItem.getRouteShieldDrawable(app, amenity) != null;
@@ -232,7 +218,6 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		if (timeLayout != null) {
 			if (amenity != null && amenity.getOpeningHours() != null) {
 				OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
-
 				List<OpeningHours.Info> openHourInfo = OpeningHoursParser.getInfo(amenity.getOpeningHours());
 				if (openHourInfo != null) {
 					int colorOpen = R.color.text_color_positive;
@@ -242,7 +227,6 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 							ContextCompat.getColor(app, colorOpen),
 							ContextCompat.getColor(app, colorClosed));
 					int colorId = rs.isOpenedForTime(calendar) ? colorOpen : colorClosed;
-
 					if (Algorithms.isEmpty(openHours)) {
 						String openHoursStr = rs.toLocalString();
 						openHours = UiUtilities.createColorSpannable(openHoursStr, app.getColor(colorId), openHoursStr);
@@ -269,16 +253,20 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		boolean resolved = app.getTheme().resolveAttribute(R.attr.activity_background_color, typedValue, true);
 		int margin;
 		if (hasRouteShield) {
-			shieldSign.setVisibility(View.VISIBLE);
-			imageView.setVisibility(View.GONE);
+			AndroidUiHelper.updateVisibility(shieldSign, true);
+			AndroidUiHelper.updateVisibility(imageView, false);
 			params.width = AndroidUtils.dpToPx(app, 72);
 			params.height = AndroidUtils.dpToPx(app, 36);
 			params.gravity = Gravity.END | Gravity.CENTER_VERTICAL;
 			imageView.setScaleType(ImageView.ScaleType.FIT_END);
 			margin = 0;
+			if (imageDrawable instanceof NetworkRouteDrawable networkRouteDrawable) {
+				shieldSign.setDrawable(networkRouteDrawable);
+			}
 		} else {
-			imageView.setVisibility(View.VISIBLE);
-			shieldSign.setVisibility(View.GONE);
+			shieldSign.setDrawable(null);
+			AndroidUiHelper.updateVisibility(imageView, true);
+			AndroidUiHelper.updateVisibility(shieldSign, false);
 			margin = AndroidUtils.dpToPx(app, 6);
 			params.gravity = Gravity.CENTER;
 			imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
@@ -304,28 +292,26 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 						@Override
 						public void onSuccess() {
 							AndroidUiHelper.updateVisibility(imageView, true);
-//								AndroidUiHelper.updateVisibility(errorImageView, false);
 							picasso.setResultLoaded(loadPhotoKey, true);
 						}
 
 						@Override
 						public void onError(Exception e) {
 							AndroidUiHelper.updateVisibility(imageView, false);
-//								AndroidUiHelper.updateVisibility(errorImageView, true);
 							picasso.setResultLoaded(loadPhotoKey, false);
-
 						}
 					});
-
 				}
 			}
 			imageView.setLayoutParams(params);
 		}
 		if (imageContainer != null) {
 			if (Algorithms.isEmpty(photoUrl) || hasRouteShield) {
+				imageContainer.setBackground(null);
 				imageContainer.setPadding(margin, margin, margin, margin);
 			} else {
-				int topPadding = title.getLineCount() == 1 ? 0 : AndroidUtils.dpToPx(app, 8);
+				AndroidUtils.resolveAttribute(app, R.attr.activity_background_color);
+				int topPadding = title.getLineCount() > 1 ? AndroidUtils.dpToPx(app, 8) : 0;
 				imageContainer.setPadding(0, topPadding, 0, 0);
 			}
 			if (!hasRouteShield && resolved) {
@@ -342,9 +328,6 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			} else {
 				imageContainer.setBackground(null);
 			}
-		}
-		if (imageDrawable instanceof NetworkRouteDrawable networkRouteDrawable) {
-			shieldSign.setDrawable(networkRouteDrawable);
 		}
 		if (descriptionTv != null) {
 			descriptionTv.setText(description);
