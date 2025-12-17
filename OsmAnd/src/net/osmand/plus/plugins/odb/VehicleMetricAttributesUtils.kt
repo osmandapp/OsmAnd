@@ -24,7 +24,7 @@ class VehicleMetricAttributesUtils {
     companion object {
         fun getAvailableGPXDataSetTypes(
             analysis: GpxTrackAnalysis,
-            out: MutableList<Array<GPXDataSetType?>>
+            out: MutableList<GPXDataSetType?>
         ) {
             for (type in GPXDataSetType.entries) {
                 if (type.typeGroup != GpxDataSetTypeGroup.VEHICLE_METRICS) {
@@ -32,7 +32,7 @@ class VehicleMetricAttributesUtils {
                 }
 
                 if (analysis.hasData(type.dataKey)) {
-                    out.add(arrayOf(type))
+                    out.add(type)
                 }
             }
         }

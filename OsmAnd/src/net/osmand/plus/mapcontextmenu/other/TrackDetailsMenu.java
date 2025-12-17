@@ -2,6 +2,8 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import static android.text.format.DateUtils.HOUR_IN_MILLIS;
 
+import static net.osmand.plus.charts.ChartModeBottomSheet.getAvailableDefaultYTypes;
+
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.PointF;
@@ -32,6 +34,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.charts.ElevationChartAppearance;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -731,7 +734,7 @@ public class TrackDetailsMenu {
 		ImageView yAxisIcon = parentView.findViewById(R.id.y_axis_icon);
 		TextView yAxisTitle = parentView.findViewById(R.id.y_axis_title);
 		View yAxisArrow = parentView.findViewById(R.id.y_axis_arrow);
-		List<GPXDataSetType[]> availableTypes = getAvailableYTypes(analysis);
+		List<GPXDataSetType> availableTypes = getAvailableYTypes(analysis);
 
 		yAxisIcon.setImageDrawable(getImageDrawable(app, gpxItem.chartTypes));
 		yAxisTitle.setText(getGpxDataSetsName(app, gpxItem.chartTypes));
@@ -781,6 +784,10 @@ public class TrackDetailsMenu {
 				item.chartTypes = gpxDataSetTypes.toArray(new GPXDataSetType[0]);
 				update();
 				fitTrackOnMapForbidden = false;
+				if (mapActivity != null) {
+					OsmandSettings settings = mapActivity.getApp().getSettings();
+					ChartUtils.saveGeneralYAxis(settings, gpxDataSetTypes);
+				}
 			}
 
 			@Override
@@ -795,33 +802,20 @@ public class TrackDetailsMenu {
 
 			@Override
 			public List<GPXDataSetType> getSelectedDataSetTypes() {
-				return Arrays.asList(item.chartTypes);
+				if (mapActivity != null) {
+					OsmandSettings settings = mapActivity.getApp().getSettings();
+					return Arrays.asList(ChartUtils.getSavedGeneralYAxis(settings).toArray(new GPXDataSetType[0]));
+				} else {
+					return Arrays.asList(item.chartTypes);
+				}
 			}
 		};
 	}
 
 	@NonNull
-	public List<GPXDataSetType[]> getAvailableYTypes(@NonNull GpxTrackAnalysis analysis) {
-		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
+	public List<GPXDataSetType> getAvailableYTypes(@NonNull GpxTrackAnalysis analysis) {
+		List<GPXDataSetType> availableTypes = getAvailableDefaultYTypes(analysis);
 
-		boolean hasElevationData = analysis.hasElevationData();
-		boolean hasSpeedData = analysis.hasSpeedData();
-		if (hasElevationData) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE});
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE});
-		}
-		if (hasSpeedData) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SPEED});
-		}
-		if (hasElevationData) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE});
-		}
-		if (hasElevationData && hasSpeedData) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED});
-		}
-		if (hasElevationData && hasSpeedData) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE, GPXDataSetType.SPEED});
-		}
 		PluginsHelper.getAvailableGPXDataSetTypes(analysis, availableTypes);
 
 		return availableTypes;

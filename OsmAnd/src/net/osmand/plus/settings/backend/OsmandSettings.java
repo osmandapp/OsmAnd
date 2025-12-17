@@ -70,6 +70,7 @@ import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
+import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.configmap.routes.MtbClassification;
@@ -1807,9 +1808,11 @@ public class OsmandSettings {
 	//}
 	public final CommonPreference<Boolean> AUTO_SPLIT_RECORDING = new BooleanPreference(this, "auto_split_recording", true).makeProfile();
 
-	public final ListStringPreference TRIP_RECORDING_X_AXIS = (ListStringPreference) new ListStringPreference(this, "trip_recording_x_axis", GPXDataSetType.ALTITUDE.name(), ";").makeShared().makeGlobal();
+	public final ListStringPreference TRIP_RECORDING_Y_AXIS = (ListStringPreference) new ListStringPreference(this, "trip_recording_x_axis", GPXDataSetType.ALTITUDE.name(), ";").makeShared().makeGlobal();
 
-	public final CommonPreference<GPXDataSetAxisType> TRIP_RECORDING_Y_AXIS = new EnumStringPreference<>(this, "trip_recording_Y_axis", GPXDataSetAxisType.DISTANCE, GPXDataSetAxisType.values());
+	public final ListStringPreference TRACK_CHART_Y_AXIS = (ListStringPreference) new ListStringPreference(this, "trip_recording_y_axis", GPXDataSetType.ALTITUDE.name() + ";" + GPXDataSetType.SLOPE.name(), ";").makeShared().makeGlobal();
+
+	public final CommonPreference<GPXDataSetAxisType> TRIP_RECORDING_X_AXIS = new EnumStringPreference<>(this, "trip_recording_Y_axis", GPXDataSetAxisType.DISTANCE, GPXDataSetAxisType.values());
 
 	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference(this, "show_trip_recording_notification", false).makeProfile();
 
