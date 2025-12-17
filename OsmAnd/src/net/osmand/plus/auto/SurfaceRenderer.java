@@ -52,6 +52,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	private static final double VISIBLE_AREA_Y_MIN_DETECTION_SIZE = 1.025;
 	private static final int MAP_RENDER_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 7;
 	private static final int MAX_FRAME_RATE = 20;
+	public static final int PINCH_TO_ZOOM_ITERATION_DELAY = 200;
 
 	private final CarContext carContext;
 	private final CarSurfaceView surfaceView;
@@ -94,9 +95,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		void onElevationChanging(float angle);
 	}
 
-	private void setupSurfaceView(@NonNull SurfaceContainer surfaceContainer){
+	private void setupSurfaceView(@NonNull SurfaceContainer surfaceContainer) {
 		if (getApp().useOpenGlRenderer()) {
-			surfaceAdditionalWidth = (int)((float) surfaceContainer.getWidth() * surfaceWidthMultiply);
+			surfaceAdditionalWidth = (int) ((float) surfaceContainer.getWidth() * surfaceWidthMultiply);
 		}
 
 		surfaceView.setSurfaceParams(surfaceContainer.getWidth() + surfaceAdditionalWidth,
@@ -128,13 +129,11 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 				if (cachedRatioX < minRatio) {
 					cameraCenterShiftX = 0.5f - (minRatio - cachedRatioX) * dRatio;
 					cachedRatioX = minRatio;
-				}
-				else if (cachedRatioX > maxRatio) {
+				} else if (cachedRatioX > maxRatio) {
 					cameraCenterShiftX = 0.5f + (cachedRatioX - maxRatio) * dRatio;
 					cachedRatioX = maxRatio;
 				}
-			}
-			else {
+			} else {
 				cameraCenterShiftX = cachedRatioX;
 			}
 
@@ -228,9 +227,17 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			}
 		}
 
+		long lastScaleTime = 0;
+		Boolean lastZoomDirection;
+
 		@Override
 		public void onScale(float focusX, float focusY, float scaleFactor) {
-//			handleScale(focusX, focusY, scaleFactor);
+			boolean zoomDirection = scaleFactor > 1;
+			if (System.currentTimeMillis() - lastScaleTime > PINCH_TO_ZOOM_ITERATION_DELAY || lastZoomDirection != zoomDirection) {
+				handleScale(focusX, focusY, scaleFactor);
+				lastScaleTime = System.currentTimeMillis();
+				lastZoomDirection = zoomDirection;
+			}
 		}
 	};
 
