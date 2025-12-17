@@ -5848,4 +5848,12 @@
     <string name="rendering_attr_fairwayStyle_description">Цвет фарватеров</string>
     <string name="accessibility_independent_features">Независимые функции</string>
     <string name="rendering_attr_pisteRoutes_name">Горнолыжные склоны и маршруты</string>
+    <string name="delete_folder_description">Удалить папку \"%1$s\"?</string>
+    <string name="routing_attr_pt_limit_name">Показать N лучших маршрутов</string>
+    <string name="routing_attr_pt_limit_description">Укажите количество оптимальных маршрутов для отображения</string>
+    <string name="centimeter">см</string>
+    <string name="shared_string_centimeters">сантиметры</string>
+    <string name="copy_link">Копировать ссылку</string>
+    <string name="bicycle_width_limit_description">Укажите ширину вашего велосипеда, чтобы избегать узких велодорожек.</string>
+    <string name="show_spherical_map">Вид на земной шар</string>
 </resources>
