@@ -233,7 +233,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		@Override
 		public void onScale(float focusX, float focusY, float scaleFactor) {
 			boolean zoomDirection = scaleFactor > 1;
-			if (System.currentTimeMillis() - lastScaleTime > PINCH_TO_ZOOM_ITERATION_DELAY || lastZoomDirection != zoomDirection) {
+			if (System.currentTimeMillis() - lastScaleTime > PINCH_TO_ZOOM_ITERATION_DELAY || lastZoomDirection == null || lastZoomDirection != zoomDirection) {
 				handleScale(focusX, focusY, scaleFactor);
 				lastScaleTime = System.currentTimeMillis();
 				lastZoomDirection = zoomDirection;
