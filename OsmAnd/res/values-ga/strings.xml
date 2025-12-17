@@ -5724,4 +5724,8 @@
     <string name="copy_link">Cóipeáil nasc</string>
     <string name="routing_attr_pt_limit_name">Taispeáin N bealaí is fearr</string>
     <string name="routing_attr_pt_limit_description">Sonraigh líon na mbealaí is fearr le taispeáint</string>
+    <string name="vehicle_metrics_chart_category">Méadrachtaí feithicle</string>
+    <string name="delete_folder_description">Scrios an fillteán \"%1$s\"?</string>
+    <string name="show_spherical_map">Radharc na Cruinne</string>
+    <string name="enable_3d_objects">Foirgnimh 3T</string>
 </resources>

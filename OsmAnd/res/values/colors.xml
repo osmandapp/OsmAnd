@@ -344,6 +344,23 @@
 	<color name="gpx_chart_indigo">#5720C5</color>
 	<color name="gpx_chart_indigo_label">#5720C5</color>
 
+	<color name="gpx_chart_intake_temperature">#2EB873</color>
+	<color name="gpx_chart_ambient_temperature">#3DC24B</color>
+	<color name="gpx_chart_coolant_temperature">#2EB897</color>
+	<color name="gpx_chart_engine_oil_temperature">#37A3AF</color>
+
+	<color name="gpx_chart_engine_speed">#FF8800</color>
+	<color name="gpx_chart_engine_runtime">#FF5E00</color>
+	<color name="gpx_chart_engine_load">#E5A800</color>
+
+	<color name="gpx_chart_fuel_pressure">#CA9B35</color>
+	<color name="gpx_chart_fuel_consumption">#9D35CA</color>
+	<color name="gpx_chart_remaining_fuel">#3947C6</color>
+
+	<color name="gpx_chart_battery_level">#0D9EF2</color>
+	<color name="gpx_chart_vehicle_speed">#E94B16</color>
+	<color name="gpx_chart_throttle_position">#FF00D9</color>
+
 	<color name="gpx_split_segment_icon_color">#b3b3b3</color>
 	<color name="gpx_pale_green">#87CC70</color>
 

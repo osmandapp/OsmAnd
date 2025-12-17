@@ -5161,6 +5161,6 @@
     <string name="x">X (früher Twitter)</string>
     <string name="poi_sample_collection">Stichprobenerhebung</string>
     <string name="poi_sample_collection_yes">Ja</string>
-    <string name="poi_sample_collection_covid19">COVID19</string>
+    <string name="poi_sample_collection_covid19">COVID-19</string>
     <string name="poi_sample_collection_blood">Blut</string>
 </resources>

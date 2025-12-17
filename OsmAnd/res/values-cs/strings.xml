@@ -5923,4 +5923,8 @@
     <string name="shared_string_centimeters">centimetry</string>
     <string name="bicycle_width_limit_description">Zadejte šířku vašeho jízdního kola pro vyhnutí se úzkým cyklostezkám.</string>
     <string name="copy_link">Kopírovat odkaz</string>
+    <string name="vehicle_metrics_chart_category">Metriky vozidla</string>
+    <string name="delete_folder_description">Odstranit složku „%1$s“?</string>
+    <string name="show_spherical_map">Sférické zobrazení</string>
+    <string name="enable_3d_objects">3D stavby</string>
 </resources>

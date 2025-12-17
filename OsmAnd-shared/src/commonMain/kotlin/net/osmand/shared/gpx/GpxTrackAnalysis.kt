@@ -753,7 +753,7 @@ class GpxTrackAnalysis {
 		}
 	}
 
-	interface TrackPointsAnalyser {
+	fun interface TrackPointsAnalyser {
 		fun onAnalysePoint(analysis: GpxTrackAnalysis, point: WptPt, attribute: PointAttributes)
 	}
 }
