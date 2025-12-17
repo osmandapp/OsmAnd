@@ -4904,7 +4904,7 @@
     <string name="osmand_cloud_deletion_secondary_devices_warning">Zweitgeräte werden von OsmAnd Cloud abgemeldet und verlieren den Zugriff auf kostenpflichtige Funktionen.</string>
     <string name="osmand_cloud_deletion_account_warning">Ihr Konto und alle Kontodaten werden %1$s</string>
     <string name="osmand_cloud_deleting_account_descr">In wenigen Augenblicken werden alle Ihre Daten und Ihr Konto aus OsmAnd Cloud gelöscht. \n \nAlle Daten auf dem Gerät bleiben unangetastet.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">OsmAnd-Cloud-Konto löschen? \n \nDiese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">OsmAnd Cloud-Konto löschen? \n \nDiese Aktion kann nicht rückgängig gemacht werden.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Alle Daten von OsmAnd Cloud werden %1$s. Daten auf dem Gerät bleiben unangetastet.</string>
     <string name="verify_account_deletion_descr">Wir müssen Ihr Konto verifizieren, bevor wir es löschen können.
 \n
