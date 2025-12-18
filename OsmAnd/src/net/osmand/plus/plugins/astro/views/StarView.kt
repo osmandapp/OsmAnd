@@ -364,13 +364,13 @@ class StarView @JvmOverloads constructor(
 
 			val hor: Topocentric
 
-			if (obj.type == SkyObject.Type.STAR) {
-				hor = horizon(time, observer, obj.ra, obj.dec, Refraction.Normal)
-			} else {
+			if (obj.type.isSunSystem()) {
 				val body = obj.body ?: throw IllegalStateException("Planet without Body enum")
 				val equ = equator(body, time, observer, EquatorEpoch.OfDate, Aberration.Corrected)
 				hor = horizon(time, observer, equ.ra, equ.dec, Refraction.Normal)
 				obj.distAu = equ.dist
+			} else {
+				hor = horizon(time, observer, obj.ra, obj.dec, Refraction.Normal)
 			}
 
 			if (updateTargets) {
@@ -449,12 +449,12 @@ class StarView @JvmOverloads constructor(
 			poolItem.hourLabel = if (isHourMark) "%02d".format(stepHour) else null
 			poolItem.timeOffsetHours = (stepTimeMillis - currentMillis) / 3600000.0
 
-			val altAz: Topocentric = if (obj.type == SkyObject.Type.STAR) {
-				horizon(tStep, observer, obj.ra, obj.dec, Refraction.Normal)
-			} else {
+			val altAz: Topocentric = if (obj.type.isSunSystem()) {
 				val body = obj.body!!
 				val eq = equator(body, tStep, observer, EquatorEpoch.OfDate, Aberration.Corrected)
 				horizon(tStep, observer, eq.ra, eq.dec, Refraction.Normal)
+			} else {
+				horizon(tStep, observer, obj.ra, obj.dec, Refraction.Normal)
 			}
 
 			// Store Sky Coordinates ONLY

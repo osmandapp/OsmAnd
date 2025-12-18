@@ -598,7 +598,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		sheetCoords.text = "${getString(R.string.shared_string_azimuth)}: $az  |  ${getString(R.string.altitude)}: $alt"
 
 		var details = "${getString(R.string.shared_string_magnitude)}: ${obj.magnitude}"
-		if (obj.type != SkyObject.Type.STAR) {
+		if (obj.type.isSunSystem()) {
 			details += "\n${getString(R.string.distance)}: %.3f AU".format(obj.distAu)
 		}
 
@@ -606,7 +606,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val observer = starView.observer
 		val currentTime = starView.currentTime
 
-		val bodyToCheck: Body? = if (obj.type == SkyObject.Type.STAR) {
+		val bodyToCheck: Body? = if (!obj.type.isSunSystem()) {
 			defineStar(Body.Star2, obj.ra, obj.dec, 1000.0)
 			Body.Star2
 		} else {
