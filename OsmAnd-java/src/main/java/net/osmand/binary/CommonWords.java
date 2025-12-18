@@ -12,7 +12,6 @@ public class CommonWords {
 	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>();
 	private static Map<String, Integer> frequentlyUsedWordsDictionary = new LinkedHashMap<>();
 	private static Set<String> regionNames = new HashSet<>();
-
 	// for ex: 100 bridge, ленина 30, but not potenitally name of street (31st road)
 	private static String NUMBER_WITH_LESS_THAN_2_LETTERS = "NUMBER_WITH_LESS_THAN_2_LETTERS";
 	
@@ -30,7 +29,6 @@ public class CommonWords {
 	public static boolean isCommon(String name) {
 		return commonWordsDictionary.containsKey(name) || isNumber2Letters(name);
 	}
-
 	public static int getCommon(String name) {
 		if (isNumber2Letters(name)) {
 			name = NUMBER_WITH_LESS_THAN_2_LETTERS;
@@ -44,7 +42,6 @@ public class CommonWords {
 		}
 		return -1;
 	}
-
 	public static int getFrequentlyUsed(String name) {
 		Integer i = frequentlyUsedWordsDictionary.get(name);
 		return i == null ? -1 : i.intValue();
