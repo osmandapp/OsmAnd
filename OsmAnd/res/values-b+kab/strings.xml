@@ -899,7 +899,7 @@
     <string name="profile_type_custom_string">Amaɣnu Gaia udmawan…</string>
     <string name="shared_string_app_default_w_val">Amezwer (%S)</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s %2$s Asuddim i %3$s</string>
-    <string name="open_settings">Ldi iɣewwaṛen</string>
+    <string name="open_settings">Ldi iɣewwaren</string>
     <string name="sort_by_category">Smizzwer s taggayt</string>
     <string name="copy_coordinates">Tisidag</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s di %2$s</string>
@@ -1322,4 +1322,10 @@
     <string name="logcat_buffer">Takatut n weHraz Logcat</string>
     <string name="logcat_buffer_descr">Senqed daɣen bḍu iɣmisen lqayen n usnas</string>
     <string name="monitoring_control_start">SKLS</string>
+    <string name="map_settings_weather_temp">Tazɣelt</string>
+    <string name="map_settings_weather_wind">Aḍu</string>
+    <string name="map_settings_weather_cloud">Asigna</string>
+    <string name="routing_settings_2">Iɣewwaren n tunigin</string>
+    <string name="osmand_settings">Iɣewwaren n OsmAnd</string>
+    <string name="plugins_settings">Iɣewwaren n usiɣzaf</string>
 </resources>
