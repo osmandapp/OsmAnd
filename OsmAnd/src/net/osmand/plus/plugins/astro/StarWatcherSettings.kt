@@ -20,6 +20,10 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		private const val KEY_SHOW_ECLIPTIC = "showEclipticLine"
 		private const val KEY_SHOW_CONSTELLATIONS = "showConstellations"
 
+		private const val KEY_SHOW_STARS = "showStars"
+		private const val KEY_SHOW_GALAXIES = "showGalaxies"
+		private const val KEY_SHOW_BLACK_HOLES = "showBlackHoles"
+
 		private const val KEY_ITEMS = "items"
 		private const val KEY_ID = "id"
 		private const val KEY_VISIBLE = "visible"
@@ -45,6 +49,9 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showEquatorialGrid: Boolean,
 		val showEclipticLine: Boolean,
 		val showConstellations: Boolean,
+		val showStars: Boolean = true,
+		val showGalaxies: Boolean = true,
+		val showBlackHoles: Boolean = true,
 		val items: List<SkyObjectConfig>
 	)
 
@@ -129,9 +136,16 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showEcliptic = mapSettings?.optBoolean(KEY_SHOW_ECLIPTIC, false) ?: false
 		val showConstellations = mapSettings?.optBoolean(KEY_SHOW_CONSTELLATIONS, false) ?: false
 
+		val showStars = mapSettings?.optBoolean(KEY_SHOW_STARS, true) ?: true
+		val showGalaxies = mapSettings?.optBoolean(KEY_SHOW_GALAXIES, true) ?: true
+		val showBlackHoles = mapSettings?.optBoolean(KEY_SHOW_BLACK_HOLES, true) ?: true
+
 		val items = parseItems(mapSettings)
 
-		return StarMapConfig(showAzimuthal, showEquatorial, showEcliptic, showConstellations, items)
+		return StarMapConfig(
+			showAzimuthal, showEquatorial, showEcliptic, showConstellations,
+			showStars, showGalaxies, showBlackHoles, items
+		)
 	}
 
 	fun setStarMapConfig(config: StarMapConfig) {
@@ -142,6 +156,10 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		mapSettings.put(KEY_SHOW_EQUATORIAL, config.showEquatorialGrid)
 		mapSettings.put(KEY_SHOW_ECLIPTIC, config.showEclipticLine)
 		mapSettings.put(KEY_SHOW_CONSTELLATIONS, config.showConstellations)
+
+		mapSettings.put(KEY_SHOW_STARS, config.showStars)
+		mapSettings.put(KEY_SHOW_GALAXIES, config.showGalaxies)
+		mapSettings.put(KEY_SHOW_BLACK_HOLES, config.showBlackHoles)
 
 		mapSettings.put(KEY_ITEMS, serializeItems(config.items))
 

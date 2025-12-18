@@ -79,42 +79,42 @@ object AstroUtils {
 		swSettings: StarWatcherSettings,
 		onApply: (() -> Unit)? = null
 	) {
-		val toggleItems = arrayOf(
+		val config = swSettings.getStarMapConfig()
+
+		val items = arrayOf(
 			context.getString(R.string.azimuthal_grid),
 			context.getString(R.string.equatorial_grid),
 			context.getString(R.string.ecliptic_line),
-			"Constellations"
+			"Constellations",
+			"Stars",
+			"Galaxies",
+			"Black Holes"
 		)
 
-		var tempAzimuthal = starView.showAzimuthalGrid
-		var tempEquatorial = starView.showEquatorialGrid
-		var tempEcliptic = starView.showEclipticLine
-		var tempConstellations = starView.showConstellations
+		var tempAzimuthal = config.showAzimuthalGrid
+		var tempEquatorial = config.showEquatorialGrid
+		var tempEcliptic = config.showEclipticLine
+		var tempConstellations = config.showConstellations
+		var tempStars = config.showStars
+		var tempGalaxies = config.showGalaxies
+		var tempBlackHoles = config.showBlackHoles
 
-		val toggleChecked = booleanArrayOf(tempAzimuthal, tempEquatorial, tempEcliptic, tempConstellations)
-
-		val currentObjects = (starMapViewModel.skyObjects.value ?: emptyList()).take(30)
-		val objectNames = currentObjects.map { it.name }.toTypedArray()
-		val objectChecked = currentObjects.map { it.isVisible }.toBooleanArray()
-
-		val allItems = toggleItems + objectNames
-		val allChecked = toggleChecked + objectChecked
+		val checked = booleanArrayOf(
+			tempAzimuthal, tempEquatorial, tempEcliptic, tempConstellations,
+			tempStars, tempGalaxies, tempBlackHoles
+		)
 
 		AlertDialog.Builder(context)
 			.setTitle(R.string.visible_layers_and_objects)
-			.setMultiChoiceItems(allItems, allChecked) { _, which, isChecked ->
-				if (which < toggleItems.size) {
-					when (which) {
-						0 -> tempAzimuthal = isChecked
-						1 -> tempEquatorial = isChecked
-						2 -> tempEcliptic = isChecked
-						3 -> tempConstellations = isChecked
-					}
-				} else {
-					val objIndex = which - toggleItems.size
-					if (objIndex in objectChecked.indices) {
-						objectChecked[objIndex] = isChecked
-					}
+			.setMultiChoiceItems(items, checked) { _, which, isChecked ->
+				when (which) {
+					0 -> tempAzimuthal = isChecked
+					1 -> tempEquatorial = isChecked
+					2 -> tempEcliptic = isChecked
+					3 -> tempConstellations = isChecked
+					4 -> tempStars = isChecked
+					5 -> tempGalaxies = isChecked
+					6 -> tempBlackHoles = isChecked
 				}
 			}
 			.setPositiveButton(R.string.shared_string_apply) { _, _ ->
@@ -123,25 +123,23 @@ object AstroUtils {
 				starView.showEclipticLine = tempEcliptic
 				starView.showConstellations = tempConstellations
 
-				currentObjects.forEachIndexed { index, skyObject ->
-					skyObject.isVisible = objectChecked[index]
-				}
+				starView.showStars = tempStars
+				starView.showGalaxies = tempGalaxies
+				starView.showBlackHoles = tempBlackHoles
+
 				starView.updateVisibility()
 
-				val itemsConfig = currentObjects.map {
-					StarWatcherSettings.SkyObjectConfig(
-						it.id,
-						it.isVisible
-					)
-				}
-				val config = StarWatcherSettings.StarMapConfig(
+				val newConfig = StarWatcherSettings.StarMapConfig(
 					showAzimuthalGrid = tempAzimuthal,
 					showEquatorialGrid = tempEquatorial,
 					showEclipticLine = tempEcliptic,
 					showConstellations = tempConstellations,
-					items = itemsConfig
+					showStars = tempStars,
+					showGalaxies = tempGalaxies,
+					showBlackHoles = tempBlackHoles,
+					items = config.items
 				)
-				swSettings.setStarMapConfig(config)
+				swSettings.setStarMapConfig(newConfig)
 				onApply?.invoke()
 			}
 			.setNegativeButton(R.string.shared_string_cancel, null)
