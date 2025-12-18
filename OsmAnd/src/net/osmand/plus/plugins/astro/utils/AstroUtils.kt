@@ -85,23 +85,29 @@ object AstroUtils {
 			context.getString(R.string.azimuthal_grid),
 			context.getString(R.string.equatorial_grid),
 			context.getString(R.string.ecliptic_line),
-			"Constellations",
-			"Stars",
-			"Galaxies",
-			"Black Holes"
+			context.getString(R.string.astro_name_sun),
+			context.getString(R.string.astro_name_moon),
+			context.getString(R.string.astro_planets),
+			context.getString(R.string.astro_constellations),
+			context.getString(R.string.astro_stars),
+			context.getString(R.string.astro_galaxies),
+			context.getString(R.string.astro_black_holes)
 		)
 
 		var tempAzimuthal = config.showAzimuthalGrid
 		var tempEquatorial = config.showEquatorialGrid
 		var tempEcliptic = config.showEclipticLine
+		var tempSun = config.showSun
+		var tempMoon = config.showMoon
+		var tempPlanets = config.showPlanets
 		var tempConstellations = config.showConstellations
 		var tempStars = config.showStars
 		var tempGalaxies = config.showGalaxies
 		var tempBlackHoles = config.showBlackHoles
 
 		val checked = booleanArrayOf(
-			tempAzimuthal, tempEquatorial, tempEcliptic, tempConstellations,
-			tempStars, tempGalaxies, tempBlackHoles
+			tempAzimuthal, tempEquatorial, tempEcliptic, tempSun, tempMoon, tempPlanets,
+			tempConstellations, tempStars, tempGalaxies, tempBlackHoles
 		)
 
 		AlertDialog.Builder(context)
@@ -111,16 +117,24 @@ object AstroUtils {
 					0 -> tempAzimuthal = isChecked
 					1 -> tempEquatorial = isChecked
 					2 -> tempEcliptic = isChecked
-					3 -> tempConstellations = isChecked
-					4 -> tempStars = isChecked
-					5 -> tempGalaxies = isChecked
-					6 -> tempBlackHoles = isChecked
+					3 -> tempSun = isChecked
+					4 -> tempMoon = isChecked
+					5 -> tempPlanets = isChecked
+					6 -> tempConstellations = isChecked
+					7 -> tempStars = isChecked
+					8 -> tempGalaxies = isChecked
+					9 -> tempBlackHoles = isChecked
 				}
 			}
 			.setPositiveButton(R.string.shared_string_apply) { _, _ ->
 				starView.showAzimuthalGrid = tempAzimuthal
 				starView.showEquatorialGrid = tempEquatorial
 				starView.showEclipticLine = tempEcliptic
+
+				starView.showSun = tempSun
+				starView.showMoon = tempMoon
+				starView.showPlanets = tempPlanets
+
 				starView.showConstellations = tempConstellations
 
 				starView.showStars = tempStars
@@ -133,6 +147,9 @@ object AstroUtils {
 					showAzimuthalGrid = tempAzimuthal,
 					showEquatorialGrid = tempEquatorial,
 					showEclipticLine = tempEcliptic,
+					showSun = tempSun,
+					showMoon = tempMoon,
+					showPlanets = tempPlanets,
 					showConstellations = tempConstellations,
 					showStars = tempStars,
 					showGalaxies = tempGalaxies,
@@ -156,11 +173,6 @@ object AstroUtils {
 
 	// ---------- Physics / Math Helpers ----------
 
-	/**
-	 * Executes a block of code with a temporarily defined custom star (Body.Star1).
-	 * This method is synchronized to prevent race conditions when multiple threads
-	 * try to define and use Body.Star1 simultaneously.
-	 */
 	fun <T> withCustomStar(ra: Double, dec: Double, block: (Body) -> T): T {
 		synchronized(this) {
 			defineStar(Body.Star1, ra, dec, 1000.0)
@@ -168,9 +180,6 @@ object AstroUtils {
 		}
 	}
 
-	/**
-	 * Calculates the apparent altitude of a body at a specific time.
-	 */
 	fun altitude(body: Body, tLocal: ZonedDateTime, obs: Observer): Double {
 		val tUtc = tLocal.toAstroTime()
 		val eq = equator(body, tUtc, obs, EquatorEpoch.OfDate, Aberration.Corrected)
@@ -178,9 +187,6 @@ object AstroUtils {
 		return hor.altitude
 	}
 
-	/**
-	 * Calculates altitude for a SkyObject. Handles custom stars safely.
-	 */
 	fun altitude(obj: SkyObject, tLocal: ZonedDateTime, obs: Observer): Double {
 		return if (obj.body != null) {
 			altitude(obj.body, tLocal, obs)
@@ -191,11 +197,6 @@ object AstroUtils {
 		}
 	}
 
-	/**
-	 * Searches for the next Rise and Set times after the given start time.
-	 * Returns null if the event doesn't happen within the limit (default 2 days)
-	 * or if the result falls outside the optional filter window [windowStart, windowEnd].
-	 */
 	fun nextRiseSet(
 		body: Body,
 		startSearch: ZonedDateTime,
@@ -213,7 +214,6 @@ object AstroUtils {
 		val r = nextRise?.toZoned(zone)
 		val s = nextSet?.toZoned(zone)
 
-		// Filter if window is provided
 		val rFiltered = if (windowStart != null && windowEnd != null) {
 			r?.takeIf { !it.isBefore(windowStart) && !it.isAfter(windowEnd) }
 		} else r
@@ -225,9 +225,6 @@ object AstroUtils {
 		return rFiltered to sFiltered
 	}
 
-	/**
-	 * Searches for next Rise and Set for a SkyObject. Handles custom stars safely.
-	 */
 	fun nextRiseSet(
 		obj: SkyObject,
 		startSearch: ZonedDateTime,
@@ -244,21 +241,15 @@ object AstroUtils {
 		}
 	}
 
-	/**
-	 * Shared logic to compute twilight events for a specific day window.
-	 */
 	fun computeTwilight(startLocal: ZonedDateTime, endLocal: ZonedDateTime, obs: Observer, zoneId: ZoneId): Twilight {
 		fun findAlt(direction: Direction, deg: Double): ZonedDateTime? {
 			val t0 = startLocal.toAstroTime()
 			val t = searchAltitude(Body.Sun, obs, direction, t0, 2.0, deg)
 			return t?.toZoned(zoneId)
 		}
-
 		val searchStart = startLocal.toAstroTime()
-
 		val sr = searchRiseSet(Body.Sun, obs, Direction.Rise, searchStart, 2.0)
 		val ss = searchRiseSet(Body.Sun, obs, Direction.Set, searchStart, 2.0)
-
 		return Twilight(
 			sr?.toZoned(zoneId), ss?.toZoned(zoneId),
 			findAlt(Direction.Rise, -6.0), findAlt(Direction.Set, -6.0),

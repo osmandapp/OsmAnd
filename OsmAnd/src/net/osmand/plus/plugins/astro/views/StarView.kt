@@ -128,6 +128,9 @@ class StarView @JvmOverloads constructor(
 	var showStars = true
 	var showGalaxies = true
 	var showBlackHoles = true
+	var showSun = true
+	var showMoon = true
+	var showPlanets = true
 
 	// --- Interaction ---
 	private var lastTouchX = 0f
@@ -364,13 +367,8 @@ class StarView @JvmOverloads constructor(
 
 	private fun shouldRecalculate(obj: SkyObject): Boolean {
 		if (obj == selectedObject) return true
-		if (showConstellations) return true // Constellation stars need current pos
-		return when (obj.type) {
-			SkyObject.Type.STAR -> showStars
-			SkyObject.Type.GALAXY -> showGalaxies
-			SkyObject.Type.BLACK_HOLE -> showBlackHoles
-			else -> true
-		}
+		if (showConstellations) return true
+		return isObjectVisibleInSettings(obj)
 	}
 
 	private fun isObjectVisibleInSettings(obj: SkyObject): Boolean {
@@ -378,7 +376,9 @@ class StarView @JvmOverloads constructor(
 			SkyObject.Type.STAR -> showStars
 			SkyObject.Type.GALAXY -> showGalaxies
 			SkyObject.Type.BLACK_HOLE -> showBlackHoles
-			else -> obj.isVisible // Planets/Sun/Moon use individual flags usually
+			SkyObject.Type.SUN -> showSun
+			SkyObject.Type.MOON -> showMoon
+			SkyObject.Type.PLANET -> showPlanets
 		}
 	}
 
@@ -737,24 +737,15 @@ class StarView @JvmOverloads constructor(
 
 	private fun drawCelestialObject(canvas: Canvas, obj: SkyObject) {
 		if (!skyToScreen(obj.azimuth, obj.altitude, tempPoint)) return
-
 		paint.style = Paint.Style.FILL
 		paint.color = obj.color
-
 		val baseSize = 15f
 		val radius = max(3f, baseSize - (obj.magnitude * 2f))
-
 		canvas.drawCircle(tempPoint.x, tempPoint.y, radius, paint)
-
-		// Labeling Logic:
-		// 1. If it's a star: Show label only if it doesn't start with "HIP"
-		// 2. If it's a galaxy or black hole: Always show label
-		// 3. For planets/Sun/Moon: Always show label
 		var showLabel = true
 		if (obj.type == SkyObject.Type.STAR) {
 			showLabel = !obj.name.startsWith("HIP", ignoreCase = true)
 		}
-
 		if (showLabel || obj == selectedObject) {
 			textPaint.textSize = 25f
 			textPaint.color = if (obj == selectedObject) Color.YELLOW else Color.LTGRAY

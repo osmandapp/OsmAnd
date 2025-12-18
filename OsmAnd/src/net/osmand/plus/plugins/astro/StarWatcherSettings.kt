@@ -18,6 +18,10 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		private const val KEY_SHOW_AZIMUTHAL = "showAzimuthalGrid"
 		private const val KEY_SHOW_EQUATORIAL = "showEquatorialGrid"
 		private const val KEY_SHOW_ECLIPTIC = "showEclipticLine"
+		private const val KEY_SHOW_SUN = "showSun"
+		private const val KEY_SHOW_MOON = "showMoon"
+		private const val KEY_SHOW_PLANETS = "showPlanets"
+
 		private const val KEY_SHOW_CONSTELLATIONS = "showConstellations"
 
 		private const val KEY_SHOW_STARS = "showStars"
@@ -48,10 +52,13 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showAzimuthalGrid: Boolean,
 		val showEquatorialGrid: Boolean,
 		val showEclipticLine: Boolean,
+		val showSun: Boolean,
+		val showMoon: Boolean,
+		val showPlanets: Boolean,
 		val showConstellations: Boolean,
-		val showStars: Boolean = true,
-		val showGalaxies: Boolean = true,
-		val showBlackHoles: Boolean = true,
+		val showStars: Boolean,
+		val showGalaxies: Boolean,
+		val showBlackHoles: Boolean,
 		val items: List<SkyObjectConfig>
 	)
 
@@ -134,17 +141,22 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showAzimuthal = mapSettings?.optBoolean(KEY_SHOW_AZIMUTHAL, true) ?: true
 		val showEquatorial = mapSettings?.optBoolean(KEY_SHOW_EQUATORIAL, false) ?: false
 		val showEcliptic = mapSettings?.optBoolean(KEY_SHOW_ECLIPTIC, false) ?: false
+
+		val showSun = mapSettings?.optBoolean(KEY_SHOW_SUN, true) ?: true
+		val showMoon = mapSettings?.optBoolean(KEY_SHOW_MOON, true) ?: true
+		val showPlanets = mapSettings?.optBoolean(KEY_SHOW_PLANETS, true) ?: true
+
 		val showConstellations = mapSettings?.optBoolean(KEY_SHOW_CONSTELLATIONS, false) ?: false
 
-		val showStars = mapSettings?.optBoolean(KEY_SHOW_STARS, true) ?: true
-		val showGalaxies = mapSettings?.optBoolean(KEY_SHOW_GALAXIES, true) ?: true
-		val showBlackHoles = mapSettings?.optBoolean(KEY_SHOW_BLACK_HOLES, true) ?: true
+		val showStars = mapSettings?.optBoolean(KEY_SHOW_STARS, false) ?: false
+		val showGalaxies = mapSettings?.optBoolean(KEY_SHOW_GALAXIES, false) ?: false
+		val showBlackHoles = mapSettings?.optBoolean(KEY_SHOW_BLACK_HOLES, false) ?: false
 
 		val items = parseItems(mapSettings)
 
 		return StarMapConfig(
-			showAzimuthal, showEquatorial, showEcliptic, showConstellations,
-			showStars, showGalaxies, showBlackHoles, items
+			showAzimuthal, showEquatorial, showEcliptic, showSun, showMoon, showPlanets,
+			showConstellations, showStars, showGalaxies, showBlackHoles, items
 		)
 	}
 
@@ -155,6 +167,11 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		mapSettings.put(KEY_SHOW_AZIMUTHAL, config.showAzimuthalGrid)
 		mapSettings.put(KEY_SHOW_EQUATORIAL, config.showEquatorialGrid)
 		mapSettings.put(KEY_SHOW_ECLIPTIC, config.showEclipticLine)
+
+		mapSettings.put(KEY_SHOW_SUN, config.showSun)
+		mapSettings.put(KEY_SHOW_MOON, config.showMoon)
+		mapSettings.put(KEY_SHOW_PLANETS, config.showPlanets)
+
 		mapSettings.put(KEY_SHOW_CONSTELLATIONS, config.showConstellations)
 
 		mapSettings.put(KEY_SHOW_STARS, config.showStars)

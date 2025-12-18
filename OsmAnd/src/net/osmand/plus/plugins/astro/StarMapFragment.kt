@@ -227,6 +227,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showStars = config.showStars
 			starView.showGalaxies = config.showGalaxies
 			starView.showBlackHoles = config.showBlackHoles
+			starView.showSun = config.showSun
+			starView.showMoon = config.showMoon
+			starView.showPlanets = config.showPlanets
 		}
 		starView.setConstellations(AstroDataProvider.getConstellations())
 
