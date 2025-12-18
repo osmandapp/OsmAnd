@@ -9,7 +9,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class CommonWords {
-	private static Set<String> staticCommonWords = new HashSet<>();
 	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>();
 	private static Map<String, Integer> frequentlyUsedWordsDictionary = new LinkedHashMap<>();
 	private static Set<String> regionNames = new HashSet<>();
@@ -22,10 +21,6 @@ public class CommonWords {
 	}
 	private static void addFrequentlyUsed(String string) {
 		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
-	}
-
-	public static boolean isStaticCommon(String name) {
-		return staticCommonWords.contains(name);
 	}
 
 	private static boolean isNumber2Letters(String name) {
@@ -117,8 +112,6 @@ public class CommonWords {
 	}
 	
 	private static void addRegionNames() {
-		staticCommonWords.addAll(commonWordsDictionary.keySet());
-
 		OsmandRegions osmandRegions = null;
 		try {
 			osmandRegions = PlatformUtil.getOsmandRegions();

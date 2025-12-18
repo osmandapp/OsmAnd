@@ -256,7 +256,7 @@ public class SearchResult {
 		}
 		if (searchPhraseNames.size() == localResultNames.size()) {
 			cnt.allWordsEqual = true;
-		} else if (searchPhraseNames.size() == localResultNames.size() - localResultNames.stream().filter(s -> CommonWords.isStaticCommon(s.toLowerCase())).count()) {
+		} else if (searchPhraseNames.size() == localResultNames.size() - localResultNames.stream().filter(s -> CommonWords.isCommon(s.toLowerCase())).count()) {
 			double distance = requiredSearchPhrase.getLastTokenLocation() != null && this.location != null ?
 						MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(), this.location) : Double.MAX_VALUE;
 			cnt.allWordsEqual = objectType == ObjectType.STREET && distance <= 500;
