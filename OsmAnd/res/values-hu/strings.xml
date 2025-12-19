@@ -5815,4 +5815,8 @@
     <string name="copy_link">Hivatkozás másolása</string>
     <string name="routing_attr_pt_limit_name">N legjobb útvonal megjelenítése</string>
     <string name="routing_attr_pt_limit_description">Adja meg a megjelenítendő legjobb útvonalak darabszámát</string>
+    <string name="vehicle_metrics_chart_category">Járműmetrikák</string>
+    <string name="delete_folder_description">Biztosan törli a(z) „%1$s” mappát?</string>
+    <string name="show_spherical_map">Földgömbnézet</string>
+    <string name="enable_3d_objects">3D-s épületek</string>
 </resources>

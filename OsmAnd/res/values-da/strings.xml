@@ -4734,7 +4734,7 @@
     <string name="shared_string_yards">yards</string>
     <string name="approximate_bearing_descr">Udled pejlingen fra den navigationsrute, der følges.</string>
     <string name="shared_string_inches">tommer</string>
-    <string name="inch">in</string>
+    <string name="inch">tom</string>
     <string name="approximate_bearing">Omtrentlig pejling</string>
     <string name="cloud_version_confirm_delete">Slet \"%1$s\" fra OsmAnd Cloud\?</string>
     <string name="shared_string_delete_file">Slet fil</string>

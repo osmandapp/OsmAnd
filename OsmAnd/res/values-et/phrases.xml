@@ -2706,8 +2706,8 @@
     <string name="poi_fire_hydrant_count">Hüdrantide arv</string>
     <string name="poi_fire_hydrant_flow_capacity">Hüdrandi vooluhulk</string>
     <string name="poi_fire_hydrant_position_sidewalk">Kõnnitee</string>
-    <string name="poi_fire_hydrant_position_green">Roheline</string>
-    <string name="poi_fire_hydrant_position_lane">Rada</string>
+    <string name="poi_fire_hydrant_position_green">Roheala</string>
+    <string name="poi_fire_hydrant_position_lane">Rada/tee</string>
     <string name="poi_fire_hydrant_position_parking_lot">Parkla</string>
     <string name="poi_fire_hydrant_position_street">Tänav</string>
     <string name="poi_fire_hydrant_position_underground">Maa-alune</string>

@@ -29,5 +29,12 @@ data class SkyObject(
 	var targetAzimuth: Double = 0.0,
 	var targetAltitude: Double = 0.0
 ) {
-	enum class Type { STAR, PLANET, SUN, MOON }
+	enum class Type {
+		STAR, GALAXY, BLACK_HOLE, PLANET, SUN, MOON;
+
+		fun isSunSystem(): Boolean {
+			return this == SUN || this == MOON || this == PLANET
+		}
+
+	}
 }

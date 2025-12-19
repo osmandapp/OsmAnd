@@ -228,8 +228,8 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 			int listItemHeight = getDimensionPixelSize(R.dimen.list_item_height);
 			minHeightToCloseOnScroll = headerHeight + listItemHeight - navBarHeight;
 		}
-		boolean isScrollingDown = scrollControlLastY > 0 && scrollY <= scrollControlLastY;
-		if (isScrollingDown && scrollY <= minHeightToCloseOnScroll) {
+		boolean isScrollingDown = scrollControlLastY > 0 && scrollY < scrollControlLastY;
+		if (isScrollingDown && scrollY < minHeightToCloseOnScroll) {
 			if (menu != null) {
 				menu.hide();
 			}

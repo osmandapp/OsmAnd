@@ -3394,4 +3394,5 @@
     <string name="shared_string_instant">მწყისიერი</string>
     <string name="shared_string_engine">ძრავა</string>
     <string name="shared_string_interpolation">ინტერპოლაცია</string>
+    <string name="calculating_indication_message">გამოთვლა…</string>
 </resources>
