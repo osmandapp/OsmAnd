@@ -31,7 +31,7 @@ public interface VehicleRouter {
 	/**
 	 * return delay in seconds (0 no obstacles)
 	 */
-	public float defineObstacle(RouteDataObject road, int point, boolean dir);
+	public float defineObstacle(RouteDataObject road, int point, boolean isBackwardDir);
 	
 	/**
 	 * return delay in seconds for height obstacles
@@ -41,7 +41,7 @@ public interface VehicleRouter {
 	/**
 	 * return delay in seconds (0 no obstacles)
 	 */
-	public float defineRoutingObstacle(RouteDataObject road, int point, boolean dir);
+	public float defineRoutingObstacle(RouteDataObject road, int point, boolean isBackwardDir);
 
 	/**
 	 * return routing speed in m/s for vehicle for specified road

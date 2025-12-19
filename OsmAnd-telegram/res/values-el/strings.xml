@@ -275,4 +275,6 @@
     <string name="privacy_policy_telegram_client">Το OsmAnd Tracker είναι ένας από τους πελάτες που χρησιμοποιούν την ανοιχτή πλατφόρμα Telegram. Οι επαφές σας μπορούν να χρησιμοποιούν οποιονδήποτε πελάτη Telegram.</string>
     <string name="shared_string_live">Ζωντανά</string>
     <string name="app_name">OsmAnd Online GPS Tracker</string>
+    <string name="shared_string_bot">Bot</string>
+    <string name="share_location_as_description_second_line">Μπορείτε να δημιουργήσετε και να δείτε το ID Συσκευής στον πελάτη Telegram χρησιμοποιώντας το %1$s chat bot. %2$s</string>
 </resources>
