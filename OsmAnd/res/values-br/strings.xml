@@ -160,4 +160,6 @@
     <string name="map_downloaded_descr">Kartenn %1$s zo prest da vezañ implijet.</string>
     <string name="vehicle_metrics_chart_category">Ment ar gweturaj</string>
     <string name="delete_folder_description">Dilemel heforzhiad \"%1$s\" ?</string>
+    <string name="ascent">Pignat</string>
+    <string name="descent">Diskenn</string>
 </resources>
