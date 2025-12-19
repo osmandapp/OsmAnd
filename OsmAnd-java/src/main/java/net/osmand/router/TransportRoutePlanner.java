@@ -165,6 +165,9 @@ public class TransportRoutePlanner {
 								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType());
 						nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
 						nextSegment.nonce = nonce++;
+						if (nextSegment.distFromStart > finishTime * ctx.cfg.queueLimitByBestFinishTimeRatio) {
+							continue;
+						}
 						if (ctx.cfg.useSchedule) {
 							int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
 							if (tm >= nextSegment.distFromStart) {

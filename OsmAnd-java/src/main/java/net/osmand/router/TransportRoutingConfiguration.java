@@ -20,16 +20,16 @@ public class TransportRoutingConfiguration {
 
 	public int ptLimitResultsByNumber = 50; // pt_limit - limit number of best routes (0 = unlimited)
 
+	public double queueLimitByBestFinishTimeRatio = 1.2; // 1.1-1.3 ok
 	public double increaseForAlternativesRoutes = 2.0;
 	public double increaseForAltRoutesWalking = 3.0;
-	
+
 	public int combineAltRoutesDiffStops = 120;
 	public int combineAltRoutesSumDiffStops = 300;
 
 	public int maxRouteTime = 60 * 60 * 10; // 10 hours
 	public int maxRouteDistance = 0; // distance for maxRouteTime
 	public int maxRouteIncreaseSpeed = 30; // speed to increase route time
-
 
 	public GeneralRouter router;
 	// cache values from router for fast access
@@ -151,7 +151,9 @@ public class TransportRoutingConfiguration {
 			maxRouteIncreaseSpeed =  router.getIntAttribute("maxRouteIncreaseSpeed", maxRouteIncreaseSpeed);
 			maxRouteDistance =  router.getIntAttribute("maxRouteDistance", maxRouteDistance);
 
-			increaseForAlternativesRoutes = 
+			queueLimitByBestFinishTimeRatio =
+					router.getFloatAttribute("queueLimitByBestFinishTimeRatio", (float) queueLimitByBestFinishTimeRatio);
+			increaseForAlternativesRoutes =
 					router.getFloatAttribute("increaseForAlternativesRoutes", (float) increaseForAlternativesRoutes);
 			increaseForAltRoutesWalking = 
 					router.getFloatAttribute("increaseForAltRoutesWalking", (float) increaseForAltRoutesWalking);
