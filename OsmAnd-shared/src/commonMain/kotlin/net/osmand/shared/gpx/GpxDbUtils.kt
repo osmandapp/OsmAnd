@@ -158,6 +158,7 @@ object GpxDbUtils {
 			addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_HEART_RATE);
 			addIfMissingGpxTableColumn(columnNames, db, DATA_VERSION);
 			addIfMissingGpxTableColumn(columnNames, db, APPEARANCE_LAST_MODIFIED_TIME);
+			addIfMissingGpxTableColumn(columnNames, db, HAS_VEHICLE_METRICS);
 			// temporary code to test failure
 
 			GpxParameter.entries.forEach { parameter ->

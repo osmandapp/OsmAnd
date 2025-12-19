@@ -25,6 +25,9 @@ class OtherTrackFilter : BaseTrackFilter {
 	@Serializable
 	private var hasWaypoints: Boolean = false
 
+	@Serializable
+	private var hasVM: Boolean = false
+
 	init {
 		if (trackFilterType.additionalData is List<*>) {
 			for (nameResId in trackFilterType.additionalData) {
@@ -68,6 +71,10 @@ class OtherTrackFilter : BaseTrackFilter {
 				val wptPointsCount = trackItem.dataItem?.getAnalysis()?.wptPoints ?: 0
 				wptPointsCount != 0
 			}
+
+			OtherTrackParam.HAS_VEHICLE_METRICS -> {
+				trackItem.dataItem?.getAnalysis()?.hasVehicleMetrics ?: false
+			}
 		}
 	}
 
@@ -95,6 +102,9 @@ class OtherTrackFilter : BaseTrackFilter {
 				}
 				if (value.hasWaypoints == true) {
 					selectedParams.add(OtherTrackParam.WITH_WAYPOINTS)
+				}
+				if (value.hasVM == true) {
+					selectedParams.add(OtherTrackParam.HAS_VEHICLE_METRICS)
 				}
 			}
 			super.initWithValue(value)

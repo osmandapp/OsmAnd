@@ -5,6 +5,7 @@ import net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION
 import net.osmand.shared.gpx.GpxUtilities.POINT_SPEED
 import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.gpx.primitives.WptPt
+import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.routing.RouteColorize.ColorizationType
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KMapUtils
@@ -12,7 +13,7 @@ import net.osmand.shared.util.KMapUtils
 class GpxTrackAnalysis {
 
 	companion object {
-		const val ANALYSIS_VERSION = 1
+		const val ANALYSIS_VERSION = 2
 
 		fun prepareInformation(fileTimeStamp: Long,
 		                       joinSegments: Boolean,
@@ -195,6 +196,10 @@ class GpxTrackAnalysis {
 	var joinSegments: Boolean
 		get() = (getGpxParameter(GpxParameter.JOIN_SEGMENTS) as Boolean)
 		set(value) = (setGpxParameter(GpxParameter.JOIN_SEGMENTS, value))
+
+	var hasVehicleMetrics: Boolean
+		get() = (getGpxParameter(GpxParameter.HAS_VEHICLE_METRICS) as Boolean)
+		set(value) = (setGpxParameter(GpxParameter.HAS_VEHICLE_METRICS, value))
 
 	fun isTimeSpecified(): Boolean {
 		val startTime = startTime
@@ -562,7 +567,26 @@ class GpxTrackAnalysis {
 			point.attributes = attributes
 		}
 		pointsAnalyser?.onAnalysePoint(this, point, attributes)
+		checkForVm(point)
 		pointAttributes.add(attributes)
+	}
+
+	private fun checkForVm(point: WptPt) {
+		if (hasVehicleMetrics) {
+			return
+		}
+		OBDCommand.entries
+			.mapNotNull { it.gpxTag }
+			.forEach { tag ->
+				var metricValue = point.getDeferredExtensionsToRead()[tag]
+				if (KAlgorithms.isEmpty(metricValue)) {
+					metricValue = point.getExtensionsToRead()[tag]
+				}
+				if (!KAlgorithms.isEmpty(metricValue)) {
+					hasVehicleMetrics = true
+					return
+				}
+			}
 	}
 
 	private fun updateBounds(point: WptPt) {
