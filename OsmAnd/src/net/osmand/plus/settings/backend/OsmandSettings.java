@@ -1808,11 +1808,11 @@ public class OsmandSettings {
 	//}
 	public final CommonPreference<Boolean> AUTO_SPLIT_RECORDING = new BooleanPreference(this, "auto_split_recording", true).makeProfile();
 
+	// Please note that trip recording axis settings have inverted ids
 	public final ListStringPreference TRIP_RECORDING_Y_AXIS = (ListStringPreference) new ListStringPreference(this, "trip_recording_x_axis", GPXDataSetType.ALTITUDE.name(), ";").makeShared().makeGlobal();
-
-	public final ListStringPreference TRACK_CHART_Y_AXIS = (ListStringPreference) new ListStringPreference(this, "trip_recording_y_axis", GPXDataSetType.ALTITUDE.name() + ";" + GPXDataSetType.SLOPE.name(), ";").makeShared().makeGlobal();
-
 	public final CommonPreference<GPXDataSetAxisType> TRIP_RECORDING_X_AXIS = new EnumStringPreference<>(this, "trip_recording_Y_axis", GPXDataSetAxisType.DISTANCE, GPXDataSetAxisType.values());
+
+	public final ListStringPreference TRACK_CHART_Y_AXIS = (ListStringPreference) new ListStringPreference(this, "track_chart_y_axis", GPXDataSetType.ALTITUDE.name() + ";" + GPXDataSetType.SLOPE.name(), ";").makeShared().makeGlobal();
 
 	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference(this, "show_trip_recording_notification", false).makeProfile();
 
