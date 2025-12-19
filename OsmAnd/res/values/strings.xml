@@ -10,6 +10,17 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="group_general">General</string>
+    <string name="group_date_time">Date &amp; Time</string>
+    <string name="group_altitude_elevation">Altitude and elevation</string>
+    <string name="group_sensors">Sensors</string>
+    <string name="year_of_creation">Year of creation</string>
+    <string name="month_year_creation">Month and Year of creation</string>
+    <string name="nearest_city">Nearest city</string>
+    <string name="country">Country</string>
+    <string name="avg_speed">Avg. speed</string>
+    <string name="organize_by_max_altitude">Max. altitude</string>
     <string name="vehicle_metrics_chart_category">Vehicle metrics</string>
     <string name="delete_folder_description">Delete \"%1$s\" folder?</string>
     <string name="routing_attr_pt_limit_name">Display N best routes</string>
