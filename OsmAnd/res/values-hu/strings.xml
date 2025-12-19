@@ -5818,5 +5818,5 @@
     <string name="vehicle_metrics_chart_category">Járműmetrikák</string>
     <string name="delete_folder_description">Biztosan törli a(z) „%1$s” mappát?</string>
     <string name="show_spherical_map">Földgömbnézet</string>
-    <string name="enable_3d_objects">3D-s épületek</string>
+    <string name="enable_3d_objects">3D épületek</string>
 </resources>
