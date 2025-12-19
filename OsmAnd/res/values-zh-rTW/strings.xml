@@ -5731,4 +5731,8 @@
     <string name="copy_link">複製連結</string>
     <string name="routing_attr_pt_limit_name">顯示 N 條最佳路線</string>
     <string name="routing_attr_pt_limit_description">指定要顯示的最佳路線數量</string>
+    <string name="vehicle_metrics_chart_category">車輛指標</string>
+    <string name="delete_folder_description">刪除「%1$s」資料夾？</string>
+    <string name="show_spherical_map">環球檢視</string>
+    <string name="enable_3d_objects">3D 建築物</string>
 </resources>
