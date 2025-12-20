@@ -61,6 +61,8 @@ import net.osmand.plus.plugins.osmedit.helpers.OsmEditsUploadListenerHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.util.Algorithms;
 
 import java.lang.annotation.Retention;
@@ -173,6 +175,13 @@ public class OsmEditsFragment extends BaseNestedListFragment implements Progress
 
 		plugin.getPoiModificationLocalUtil().addNodeCommittedListener(this);
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = new InsetTargetsCollection();
+		collection.add(InsetTarget.createScrollable(android.R.id.list).build());
+		return collection;
 	}
 
 	@Override

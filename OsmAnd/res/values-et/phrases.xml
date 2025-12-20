@@ -175,7 +175,7 @@
     <string name="poi_atv">Maastikukulgurite pood</string>
     <string name="poi_cosmetics">Kosmeetika</string>
     <string name="poi_sewing">Kuivkaupade pood</string>
-    <string name="poi_tyres">Rehvipood</string>
+    <string name="poi_tyres">Rehvipood;Rehvid</string>
     <string name="poi_energy">Energialadu</string>
     <string name="poi_watches">Kellapood</string>
     <string name="poi_games">Mängud</string>
@@ -2706,8 +2706,8 @@
     <string name="poi_fire_hydrant_count">Hüdrantide arv</string>
     <string name="poi_fire_hydrant_flow_capacity">Hüdrandi vooluhulk</string>
     <string name="poi_fire_hydrant_position_sidewalk">Kõnnitee</string>
-    <string name="poi_fire_hydrant_position_green">Roheline</string>
-    <string name="poi_fire_hydrant_position_lane">Rada</string>
+    <string name="poi_fire_hydrant_position_green">Roheala</string>
+    <string name="poi_fire_hydrant_position_lane">Rada/tee</string>
     <string name="poi_fire_hydrant_position_parking_lot">Parkla</string>
     <string name="poi_fire_hydrant_position_street">Tänav</string>
     <string name="poi_fire_hydrant_position_underground">Maa-alune</string>
@@ -3455,7 +3455,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">Käigukasti remont</string>
     <string name="poi_service_vehicle_motor_yes">Mootor</string>
     <string name="poi_service_vehicle_insurance_yes">Kindlustus</string>
-    <string name="poi_service_vehicle_tyres_yes">Rehvid</string>
+    <string name="poi_service_vehicle_tyres_yes">Rehvid;Rehv</string>
     <string name="poi_aerialway_zip_line">Laskumistross</string>
     <string name="poi_climbing_adventure">Ronimisseiklus</string>
     <string name="poi_via_ferrata">Via ferrata</string>

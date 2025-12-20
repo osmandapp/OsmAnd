@@ -33,7 +33,7 @@
     <string name="poi_religion_type">Asɣan</string>
     <string name="poi_fee">Taṣerrift</string>
     <string name="poi_cafeteria">Taneɣlust</string>
-    <string name="poi_filling_station">Taγsert n yimeẓla</string>
+    <string name="poi_filling_station">Taɣsert n yimeẓla</string>
     <string name="poi_power">Taẓwert</string>
     <string name="poi_education">Asegmi</string>
     <string name="poi_bakery">Taneɣrumt</string>
@@ -207,7 +207,7 @@
     <string name="poi_cuisine_ukrainian">Tukranit</string>
     <string name="poi_cuisine_mongolian">Tamungulit</string>
     <string name="poi_cuisine_latin_american">Taspanit n temrikt talatinit</string>
-    <string name="poi_cuisine_cuban"></string>
+    <string name="poi_cuisine_cuban"/>
     <string name="poi_cuisine_czech">Taččikit</string>
     <string name="poi_cuisine_uzbek">Tuzbikt</string>
     <string name="poi_cuisine_european">Asulay VAT n Turuft</string>
@@ -286,7 +286,7 @@
     <string name="poi_fuel_91ul">91UL n userɣu</string>
     <string name="poi_elevator_yes">Asalay</string>
     <string name="poi_note">Tamawt</string>
-    <string name="poi_service_bicycle_pump_yes">Tamejγart</string>
+    <string name="poi_service_bicycle_pump_yes">Tamejɣart</string>
     <string name="poi_service_bicycle_repair_yes">Seggem azadur n isefka</string>
     <string name="poi_route_bus_ref">Azrug</string>
     <string name="poi_architect_name">Amasgad</string>

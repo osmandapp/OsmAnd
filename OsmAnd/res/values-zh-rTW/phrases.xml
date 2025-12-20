@@ -1078,7 +1078,7 @@
     <string name="poi_trade_agricultural_supplies">農藝供應商</string>
     <string name="poi_trade_tile">磚瓦供應商</string>
     <string name="poi_population">人口數</string>
-    <string name="poi_parking_underground">類型：地下</string>
+    <string name="poi_parking_underground">類型：地下停車場</string>
     <string name="poi_parking_multi_storey">類型：多層</string>
     <string name="poi_bicycle_parking_stands">立台</string>
     <string name="poi_bicycle_parking_wall_loops">壁掛架</string>
@@ -1248,7 +1248,7 @@
     <string name="poi_garden_style_french">花園風格：法式</string>
     <string name="poi_garden_style_english">花園風格：英式</string>
     <string name="poi_garden_style_japanese">花園風格：日式</string>
-    <string name="poi_capacity">容量</string>
+    <string name="poi_capacity">可容納</string>
     <string name="poi_capacity_disabled_yes">是;身障人士專用場所</string>
     <string name="poi_capacity_disabled_no">非身障人士專用場所</string>
     <string name="poi_capacity_disabled">身障人士專用場所</string>
@@ -1661,8 +1661,8 @@
     <string name="poi_internet_access_type_wlan">網際網路存取類型：WiFi</string>
     <string name="poi_internet_access_type_terminal">網際網路存取類型：終端機</string>
     <string name="poi_internet_access_type_wired">網際網路存取類型：有線網路</string>
-    <string name="poi_internet_access_type_public">網際網路存取型式：公共網路</string>
-    <string name="poi_internet_access_type_service">網際網路存取型式：服務</string>
+    <string name="poi_internet_access_type_public">網際網路存取類別：公共網路</string>
+    <string name="poi_internet_access_type_service">網際網路存取類別：服務</string>
     <string name="poi_internet_access_type_no">無網際網路存取</string>
     <string name="poi_maxwidth">最大寬度</string>
     <string name="poi_iata">IATA 編碼</string>
@@ -1948,8 +1948,8 @@
     <string name="poi_power_supply_cee_7_4">電源供應(插座)：CEE 7/4</string>
     <string name="poi_power_supply_cee_7_5">電源供應(插座)：CEE 7/5</string>
     <string name="poi_power_supply_nema_5_15">電源供應(插座)：NEMA 5-15</string>
-    <string name="poi_capacity_tents">最大帳篷</string>
-    <string name="poi_capacity_caravans">最大露營拖車</string>
+    <string name="poi_capacity_tents">最多可容納帳篷數</string>
+    <string name="poi_capacity_caravans">最多可容納露營車</string>
     <string name="poi_dog_yes">允許狗入內</string>
     <string name="poi_dog_no">不允許狗入內</string>
     <string name="poi_traffic_calming_island">安全島</string>
@@ -2199,7 +2199,7 @@
     <string name="poi_historic_period_urban">歷史時期：城市（新時代 III，西元 133 年 - 西元 374 年）</string>
     <string name="poi_fuel_type">燃料類型</string>
     <string name="poi_fuel_avia_type">燃料類型 (avia)</string>
-    <string name="poi_payment_type">支付型式</string>
+    <string name="poi_payment_type">付款方式</string>
     <string name="poi_payment_fuel_type">燃料卡</string>
     <string name="poi_additional_type">附加</string>
     <string name="poi_internet_access_type">網際網路存取類型</string>
@@ -2210,7 +2210,7 @@
     <string name="poi_fire_hydrant_type">類型</string>
     <string name="poi_fire_hydrant_position">位置</string>
     <string name="poi_water_source">水源</string>
-    <string name="poi_payment_toll_type">支付型式</string>
+    <string name="poi_payment_toll_type">付款方式</string>
     <string name="poi_traffic_signals_sound">聲音</string>
     <string name="poi_highway_crossing_type">類型</string>
     <string name="poi_tactile_paving">導盲磚</string>
@@ -2236,7 +2236,7 @@
     <string name="poi_recycling_type">類型</string>
     <string name="poi_shelter_type">類型</string>
     <string name="poi_massage_type">按摩類型</string>
-    <string name="poi_payment_transport_type">支付型式（運輸）</string>
+    <string name="poi_payment_transport_type">付款方式（運輸）</string>
     <string name="poi_social_facility_type">類型</string>
     <string name="poi_megalith_type_menhir">巨石類型︰巨柱</string>
     <string name="poi_megalith_type_dolmen">巨石類型︰桌形石</string>
@@ -2383,7 +2383,7 @@
     <string name="poi_drink_wine_yes">酒︰是的</string>
     <string name="poi_drink_wine_retail">酒︰零售</string>
     <string name="poi_building_type_pyramid">建築類型︰金字塔</string>
-    <string name="poi_parking_surface">類型︰外表</string>
+    <string name="poi_parking_surface">類型︰地面停車場</string>
     <string name="poi_nuclear_explosion_type_underground_shaft">爆炸類型︰地下，礦井</string>
     <string name="poi_nuclear_explosion_type_underground_tunnel">爆炸類型︰地下，隧道</string>
     <string name="poi_nuclear_explosion_type_atmospheric">爆炸類型︰大氣中</string>
@@ -2716,7 +2716,7 @@
     <string name="poi_provided_for_man_no">服務男人：無</string>
     <string name="poi_provided_for_boy_yes">服務男孩：有</string>
     <string name="poi_provided_for_boy_no">服務男孩：無</string>
-    <string name="poi_capacity_beds">容量 (床)</string>
+    <string name="poi_capacity_beds">床位</string>
     <string name="poi_treat_inpatient_yes">住院護理：有</string>
     <string name="poi_treat_inpatient_no">住院護理：無</string>
     <string name="poi_treat_inpatient_only">住院護理：只有</string>
@@ -3443,7 +3443,7 @@
     <string name="poi_glacier_type_icefield">冰原</string>
     <string name="poi_glacier_type_plateau">高原</string>
     <string name="poi_glacier_type_valley">山谷</string>
-    <string name="poi_glacier_type_outlet">商店</string>
+    <string name="poi_glacier_type_outlet">冰川出口</string>
     <string name="poi_glacier_type_tidewater">低窪地</string>
     <string name="poi_glacier_type_mountain">山脈</string>
     <string name="poi_glacier_type_hanging">懸冰</string>
@@ -3963,7 +3963,7 @@
     <string name="poi_contact_linkedin">LinkedIn</string>
     <string name="poi_outdoor_seating_poi">戶外座位</string>
     <string name="poi_internet_access_ssid">SSID</string>
-    <string name="poi_access_general">一般通過</string>
+    <string name="poi_access_general">一般通行權</string>
     <string name="poi_authentication_none_yes">是;不需要身份驗證</string>
     <string name="poi_authentication_none_no">不需要認證：否</string>
     <string name="poi_authentication_short_message_text">用於認證的簡訊文字</string>
@@ -4675,7 +4675,7 @@
     <string name="poi_healthcare_speciality_neonatology">新生兒科</string>
     <string name="poi_healthcare_speciality_psychology">心理</string>
     <string name="poi_state_inuse">狀態：使用中</string>
-    <string name="poi_roundtrip_yes">往返：是</string>
+    <string name="poi_roundtrip_yes">環狀線：是</string>
     <string name="poi_ascent">遞增</string>
     <string name="poi_state_alternate">狀態：備用</string>
     <string name="poi_state_recommended">狀態：推薦</string>
@@ -4683,7 +4683,7 @@
     <string name="poi_state_detour">狀態：改道</string>
     <string name="poi_state_under_construction">狀態：建設中</string>
     <string name="poi_state_disused">狀態：廢棄</string>
-    <string name="poi_roundtrip_no">往返：否</string>
+    <string name="poi_roundtrip_no">環狀線：否</string>
     <string name="poi_distance">距離</string>
     <string name="poi_cycle_network">腳踏車網路</string>
     <string name="poi_state_closed">狀態：已關閉</string>
@@ -4741,7 +4741,7 @@
     <string name="poi_us_maps_recreation_area_activity_ice_skating">溜冰</string>
     <string name="poi_us_maps_recreation_area_activity_interpretive_areas">解說區</string>
     <string name="poi_us_maps_recreation_area_activity_metal_detecting">金屬探測</string>
-    <string name="poi_us_maps_recreation_area_activity_mountain_biking">山區騎乘</string>
+    <string name="poi_us_maps_recreation_area_activity_mountain_biking">越野自行車</string>
     <string name="poi_us_maps_recreation_area_activity_mountain_climbing">爬山</string>
     <string name="poi_us_maps_recreation_area_activity_nature_viewing">觀賞大自然</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_camping">非公路車輛露營</string>
@@ -4751,7 +4751,7 @@
     <string name="poi_us_maps_recreation_area_activity_skiing_snowboarding">滑雪與單板滑雪</string>
     <string name="poi_us_maps_recreation_area_activity_snowmobiling">雪地摩托車</string>
     <string name="poi_us_maps_recreation_area_activity_target_shooting">目標射擊</string>
-    <string name="poi_us_maps_recreation_area_activity_tidepooling">潮汐池</string>
+    <string name="poi_us_maps_recreation_area_activity_tidepooling">潮間帶生態觀察</string>
     <string name="poi_us_maps_recreation_area_activity_trapping">誘捕</string>
     <string name="poi_us_maps_recreation_area_activity_viewing_plants">觀賞植物</string>
     <string name="poi_us_maps_recreation_area_activity_viewing_scenery">賞景</string>
@@ -4785,7 +4785,7 @@
     <string name="poi_us_maps_recreation_area_activity_group_camping">團體露營</string>
     <string name="poi_us_maps_recreation_area_activity_horse_camping">馬匹露營</string>
     <string name="poi_us_maps_recreation_area_activity_lake_and_pond_fishing">湖泊與池塘釣魚</string>
-    <string name="poi_us_maps_recreation_area_activity_mushing_skijoring">拉雪橇與滑雪</string>
+    <string name="poi_us_maps_recreation_area_activity_mushing_skijoring">狗拉雪橇與拖曳滑雪</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_riding_and_camping">非公路車輛騎乘與露營</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_road_riding">非公路車輛道路騎乘</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_trail_riding">非道路車輛越野騎乘</string>

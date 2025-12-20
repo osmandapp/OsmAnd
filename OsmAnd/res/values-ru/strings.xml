@@ -5788,9 +5788,8 @@
     <string name="rendering_attr_hideNoLNAM_description">Скрыть навигационные знаки OSM (некоторые)</string>
     <string name="rendering_attr_watercolor_name">Цвет воды</string>
     <string name="rendering_attr_watercolor_description">Цвет воды</string>
-    <string name="show_spherical_map">Показать сферическую карту</string>
     <string name="show_spherical_map_description">Отображение сфероидальной модели Земли</string>
-    <string name="enable_3d_objects">Включить 3D-здания</string>
+    <string name="enable_3d_objects">3D-здания</string>
     <string name="enable_3d_objects_description">Отображение 3D-объектов зданий на карте</string>
     <string name="show_rasterization_debug_tile">Показать информацию о растеризации тайлов</string>
     <string name="enable_msaa">Включить MSAA</string>
@@ -5849,4 +5848,12 @@
     <string name="rendering_attr_fairwayStyle_description">Цвет фарватеров</string>
     <string name="accessibility_independent_features">Независимые функции</string>
     <string name="rendering_attr_pisteRoutes_name">Горнолыжные склоны и маршруты</string>
+    <string name="delete_folder_description">Удалить папку \"%1$s\"?</string>
+    <string name="routing_attr_pt_limit_name">Показать N лучших маршрутов</string>
+    <string name="routing_attr_pt_limit_description">Укажите количество оптимальных маршрутов для отображения</string>
+    <string name="centimeter">см</string>
+    <string name="shared_string_centimeters">сантиметры</string>
+    <string name="copy_link">Копировать ссылку</string>
+    <string name="bicycle_width_limit_description">Укажите ширину вашего велосипеда, чтобы избегать узких велодорожек.</string>
+    <string name="show_spherical_map">Вид на земной шар</string>
 </resources>

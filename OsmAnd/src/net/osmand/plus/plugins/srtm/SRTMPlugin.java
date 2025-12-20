@@ -366,6 +366,10 @@ public class SRTMPlugin extends OsmandPlugin {
 			if (nauticalPlugin != null) {
 				nauticalPlugin.createAdapterItem(TERRAIN_DEPTH_CONTOURS, adapter, mapActivity, customRules);
 			}
+			OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+			if (developmentPlugin != null) {
+				createDeveloperItems(developmentPlugin, adapter, mapActivity);
+			}
 		}
 	}
 
@@ -511,6 +515,49 @@ public class SRTMPlugin extends OsmandPlugin {
 			item.setDescription(app.getString(enabled3DMode ? R.string.shared_string_on : R.string.shared_string_off));
 		}
 		adapter.addItem(item);
+	}
+
+	private void createDeveloperItems(@NonNull OsmandDevelopmentPlugin plugin,
+			@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
+		adapter.addItem(new ContextMenuItem(TERRAIN_SPHERICAL_MAP)
+				.setTitleId(R.string.show_spherical_map, activity)
+				.setIcon(R.drawable.ic_world_globe_dark)
+				.setDescription(app.getString(R.string.show_spherical_map_description))
+				.setSelected(settings.SPHERICAL_MAP.get())
+				.setColor(app, settings.SPHERICAL_MAP.get() ? R.color.osmand_orange : INVALID_ID)
+				.setListener(new OnRowItemClick() {
+					@Override
+					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+							@Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+						settings.SPHERICAL_MAP.set(isChecked);
+						item.setColor(app, settings.SPHERICAL_MAP.get() ? R.color.osmand_orange : INVALID_ID);
+						if (uiAdapter != null) {
+							uiAdapter.onDataSetChanged();
+						}
+						updateLayers(activity, activity);
+						return true;
+					}
+				}).setItemDeleteAction(settings.SPHERICAL_MAP));
+
+		adapter.addItem(new ContextMenuItem(TERRAIN_3D_MAP_OBJECTS)
+				.setTitleId(R.string.enable_3d_objects, activity)
+				.setIcon(R.drawable.ic_action_3d)
+				.setDescription(app.getString(R.string.enable_3d_objects_description))
+				.setSelected(plugin.ENABLE_3D_MAP_OBJECTS.get())
+				.setColor(app, plugin.ENABLE_3D_MAP_OBJECTS.get() ? R.color.osmand_orange : INVALID_ID)
+				.setListener(new OnRowItemClick() {
+					@Override
+					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+							@Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+						plugin.ENABLE_3D_MAP_OBJECTS.set(isChecked);
+						item.setColor(app, plugin.ENABLE_3D_MAP_OBJECTS.get() ? R.color.osmand_orange : INVALID_ID);
+						if (uiAdapter != null) {
+							uiAdapter.onDataSetChanged();
+						}
+						updateLayers(activity, activity);
+						return true;
+					}
+				}).setItemDeleteAction(plugin.ENABLE_3D_MAP_OBJECTS));
 	}
 
 	@Nullable

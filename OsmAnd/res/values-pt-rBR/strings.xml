@@ -6236,7 +6236,6 @@
     <string name="rendering_attr_hideLightSectorSources_description">Ocultar origem de setores de luz</string>
     <string name="rendering_attr_hideNoLNAM_name">Marcas marítimas OSM (algumas)</string>
     <string name="rendering_attr_hideNoLNAM_description">Ocultar marcas marítimas OSM (algumas)</string>
-    <string name="show_spherical_map">Mostrar mapa esférico</string>
     <string name="show_spherical_map_description">Exibir modelo esferoidal da Terra</string>
     <string name="accessibility_independent_features">Recursos independentes</string>
     <string name="lang_en_barebones">Português (básico)</string>
@@ -6263,7 +6262,6 @@
     <string name="quick_action_wind_animation_layer">Um botão para mostrar ou ocultar a camada de animação do vento no mapa.</string>
     <string name="wind_animation_layer">Camada de animação do vento</string>
     <string name="weather_layers">Camadas climáticas</string>
-    <string name="enable_3d_objects">Ativar edifícios 3D</string>
     <string name="enable_3d_objects_description">Exibir objetos de construção 3D no mapa</string>
     <string name="lang_crh">Tártaro da Crimeia (latim)</string>
     <string name="visualizing_button_grid">Grade de botões do mapa</string>
@@ -6280,4 +6278,7 @@
     <string name="shared_string_centimeters">centímetros</string>
     <string name="bicycle_width_limit_description">Indique a largura da sua bicicleta para evitar ciclovias estreitas.</string>
     <string name="copy_link">Copiar link</string>
+    <string name="vehicle_metrics_chart_category">Métricas do veículo</string>
+    <string name="routing_attr_pt_limit_name">Exibir N melhores rotas</string>
+    <string name="enable_3d_objects">Edifícios 3D</string>
 </resources>

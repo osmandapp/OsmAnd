@@ -5794,7 +5794,6 @@
     <string name="max_weight_at_full_load_description">Indica el peso bruto máximo del vehículo, para así evitar caminos y puentes con restricciones de peso.</string>
     <string name="max_axle_load_description">Indica la carga máxima por eje del vehículo, para así evitar caminos y puentes con restricciones de peso.</string>
     <string name="shared_string_osm_link">Enlace de OSM</string>
-    <string name="show_spherical_map">Mostrar mapa esférico</string>
     <string name="show_spherical_map_description">Muestra un modelo esferoidal de la Tierra</string>
     <string name="show_local_names">Mostrar nombres locales</string>
     <string name="accessibility_independent_features">Características independientes</string>
@@ -5830,6 +5829,5 @@
     <string name="slots">Espacios</string>
     <string name="button_frames">Marcos de botones</string>
     <string name="visualizing_button_grid">Cuadrícula de botones del mapa</string>
-    <string name="enable_3d_objects">Activar edificios en 3D</string>
     <string name="enable_3d_objects_description">Muestra edificios en 3D como objetos en el mapa</string>
 </resources>

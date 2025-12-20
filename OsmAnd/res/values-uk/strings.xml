@@ -5885,7 +5885,6 @@
     <string name="access_pinch_zoom_magnification">Збільшення масштабування щипками</string>
     <string name="access_pinch_zoom_magnification_descr">Використовуйте масштабування області перегляду замість дискретних рівнів масштабування під час жестів збільшення.</string>
     <string name="accessibility_independent_features">Незалежні функції</string>
-    <string name="show_spherical_map">Показати сферичну карту</string>
     <string name="show_spherical_map_description">Відображення сфероїдальної моделі Землі</string>
     <string name="shared_string_price">Ціна</string>
     <string name="rendering_attr_showSkiSlopes_name">Показати гірськолижні схили</string>
@@ -5916,7 +5915,7 @@
     <string name="slots">Слоти</string>
     <string name="button_frames">Рамки для ґудзиків</string>
     <string name="visualizing_button_grid">Сітка кнопок карти</string>
-    <string name="enable_3d_objects">Увімкнути 3D-будівлі</string>
+    <string name="enable_3d_objects">3D-будівлі</string>
     <string name="enable_3d_objects_description">Відображення 3D-об\'єктів будівель на карті</string>
     <string name="deleted_maps_warning">Ви збираєтеся видалити %d елементів(ів)\nПродовжити?</string>
     <string name="deleted_maps_prompt">Ці карти більше не підтримуються та були замінені меншими регіонами. Видаліть їх та завантажте нові версії.</string>
@@ -5930,4 +5929,7 @@
     <string name="copy_link">Копіювати посилання</string>
     <string name="routing_attr_pt_limit_name">Відобразити N найкращих маршрутів</string>
     <string name="routing_attr_pt_limit_description">Вкажіть кількість найкращих маршрутів для відображення</string>
+    <string name="vehicle_metrics_chart_category">Показники транспортного засобу</string>
+    <string name="delete_folder_description">Видалити папку \"%1$s\"?</string>
+    <string name="show_spherical_map">Глобус</string>
 </resources>

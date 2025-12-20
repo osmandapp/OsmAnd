@@ -2931,8 +2931,8 @@
     <string name="edit_profile_setup_map_subtitle">Selecteer kaartinstellingen voor het profiel</string>
     <string name="edit_profile_screen_options_subtitle">Selecteer scherminstellingen voor het profiel</string>
     <string name="edit_profile_nav_settings_subtitle">Selecteer navigatieinstellingen voor het profiel</string>
-    <string name="routing_attr_max_num_changes_description">Maximaal aantal keer overstappen</string>
-    <string name="routing_attr_max_num_changes_name">Aantal overstappen</string>
+    <string name="routing_attr_max_num_changes_description">Geef het maximum aantal overstappen op</string>
+    <string name="routing_attr_max_num_changes_name">Maximum aantal overstappen</string>
     <string name="turn_screen_on_router">Scherm aanzetten bij een afslag</string>
     <string name="turn_screen_on_sensor">Gebruik nabijheidssensor</string>
     <string name="turn_on_profile_desc">Schakel minste één applicatieprofiel in om deze instelling te kunnen gebruiken.</string>
@@ -5308,7 +5308,7 @@
     <string name="map_settings_weather_wind_animation">Wind-animatie</string>
     <string name="daynight_mode_app_theme_summary">De weergave van de map is aangepast aan het kleurenschema van de app - dagmodus voor een licht schema, en nachtmodus voor een donker schema</string>
     <string name="daynight_mode_sensor_summary">Gebruikt de lichtsensor van het apparaat om te schakelen tussen lichte en donkere kleurenschema\'s, op basis van de hoeveelheid omgevingslicht.</string>
-    <string name="daynight_mode_sunrise_sunset_summary">Schakelt automatisch tussen dacht- en nachtschema\'s op basis van de lokale zonsopgangs- en zonsondergangstijden.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Automatisch schakelen tussen dag- en nachtmodus op basis van de lokale zonsopgang- en zonsondergangtijden.</string>
     <string name="daynight_mode_night_summary">Toont de kaart altijd in een donker kleurenschema, geschikt voor \'s nachts of in lichtarme omstandigheden.</string>
     <string name="daynight_mode_day_summary">Toont de kaart altijd in een licht kleurenschema, ideaal voor zichtbaarheid in daglicht.</string>
     <string name="daynight_mode_app_theme">App-kleurenschema</string>
@@ -6198,7 +6198,6 @@
     <string name="access_pinch_zoom_magnification_descr">Gebruik de schaal van het venster in plaats van zoomniveaus tijdens inzoombewegingen.</string>
     <string name="access_pinch_zoom_magnification">Knijp-zoom vergroting</string>
     <string name="accessibility_independent_features">Onafhankelijke functies</string>
-    <string name="show_spherical_map">Toon bolvormige kaart</string>
     <string name="show_spherical_map_description">Toon bolvormig model van de aarde</string>
     <string name="shared_string_price">Prijs</string>
     <string name="rendering_attr_showSkiSlopes_name">Toon skipistes</string>
@@ -6227,7 +6226,6 @@
     <string name="lang_crh">Krim-Tataars (Latijns)</string>
     <string name="deleted_maps_prompt">Deze kaarten worden niet meer ondersteund en zijn vervangen door kleinere regio\'s. Verwijder ze en download de nieuwe versies.</string>
     <string name="unsupported_maps">Niet-ondersteunde kaarten</string>
-    <string name="enable_3d_objects">Activeer 3D-gebouwen</string>
     <string name="enable_3d_objects_description">Toon 3D-gebouwobjecten op de kaart</string>
     <string name="efficient_grid">Efficiënt raster</string>
     <string name="visualizing_button_grid">Kaartknopraster</string>
@@ -6242,4 +6240,9 @@
     <string name="shared_string_centimeters">Centimeter</string>
     <string name="bicycle_width_limit_description">Geef je fietsbreedte op om smalle fietspaden te vermijden.</string>
     <string name="copy_link">Kopieer link</string>
+    <string name="vehicle_metrics_chart_category">Voertuigstatistieken</string>
+    <string name="delete_folder_description">Map \"%1$s\" verwijderen?</string>
+    <string name="routing_attr_pt_limit_description">Geef het aantal beste routes op om weer te geven</string>
+    <string name="show_spherical_map">Globeweergave</string>
+    <string name="enable_3d_objects">3D-gebouwen</string>
 </resources>

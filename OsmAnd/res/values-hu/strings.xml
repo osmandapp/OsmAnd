@@ -5772,7 +5772,6 @@
     <string name="access_pinch_zoom_magnification">Csippentéses nagyítás</string>
     <string name="access_pinch_zoom_magnification_descr">Nagyítás közben a különálló nagyítási szintek helyett használja a nézetablak méretezését.</string>
     <string name="accessibility_independent_features">Független funkciók</string>
-    <string name="show_spherical_map">Szférikus térkép megjelenítése</string>
     <string name="show_spherical_map_description">A Föld gömbmodelljének megjelenítése</string>
     <string name="shared_string_price">Ár</string>
     <string name="rendering_attr_showSkiSlopes_name">Sípályák megjelenítése</string>
@@ -5803,7 +5802,6 @@
     <string name="button_frames">Gombkeretek</string>
     <string name="visualizing_button_grid">Gombrács megjelenítése a térképen</string>
     <string name="efficient_grid">Hatékony rács</string>
-    <string name="enable_3d_objects">3D épületek engedélyezése</string>
     <string name="enable_3d_objects_description">3D épületobjektumok megjelenítése a térképen</string>
     <string name="deleted_maps_warning">%d elem törlésére készül.\nFolytatja?</string>
     <string name="deleted_maps_prompt">Ezek a térképek már nem támogatottak, és kisebb régiók váltották fel őket. Távolítsa el őket, és töltse le az új verziókat.</string>
@@ -5817,4 +5815,8 @@
     <string name="copy_link">Hivatkozás másolása</string>
     <string name="routing_attr_pt_limit_name">N legjobb útvonal megjelenítése</string>
     <string name="routing_attr_pt_limit_description">Adja meg a megjelenítendő legjobb útvonalak darabszámát</string>
+    <string name="vehicle_metrics_chart_category">Járműmetrikák</string>
+    <string name="delete_folder_description">Biztosan törli a(z) „%1$s” mappát?</string>
+    <string name="show_spherical_map">Földgömbnézet</string>
+    <string name="enable_3d_objects">3D épületek</string>
 </resources>

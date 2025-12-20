@@ -369,7 +369,7 @@ public class RouteResultPreparation {
 			double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
 					road.getPoint31YTile(next));
 			distance += d;
-			double obstacle = ctx.getRouter().defineObstacle(road, j, plus);
+			double obstacle = ctx.getRouter().defineObstacle(road, j, !plus);
 			if (obstacle < 0) {
 				obstacle = 0;
 			}

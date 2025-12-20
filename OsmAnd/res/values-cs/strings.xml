@@ -5880,7 +5880,6 @@
     <string name="access_pinch_zoom_magnification">Zvětšení sevřením a roztažením prstů</string>
     <string name="access_pinch_zoom_magnification_descr">Při gestech přiblížení použít škálování viewportu namísto diskrétních úrovní přiblížení.</string>
     <string name="lang_en_barebones">Angličtina (základní)</string>
-    <string name="show_spherical_map">Zobrazit sférickou mapu</string>
     <string name="show_spherical_map_description">Zobrazit sférický model Země</string>
     <string name="shared_string_price">Cena</string>
     <string name="rendering_attr_showSkiSlopes_name">Zobrazit sjezdovky</string>
@@ -5911,7 +5910,6 @@
     <string name="slots">Místa</string>
     <string name="button_frames">Rámečky tlačítek</string>
     <string name="visualizing_button_grid">Mřížka tlačítek na mapě</string>
-    <string name="enable_3d_objects">Povolit 3D stavby</string>
     <string name="enable_3d_objects_description">Zobrazit 3D stavby na mapě</string>
     <string name="deleted_maps_warning">Chystáte se odstranit %d položek\nChcete pokračovat?</string>
     <string name="deleted_maps_prompt">Tyto mapy již nejsou podporovány a byly nahrazeny menšími oblastmi. Odstraňte je prosím a stáhněte si nové verze.</string>
@@ -5925,4 +5923,8 @@
     <string name="shared_string_centimeters">centimetry</string>
     <string name="bicycle_width_limit_description">Zadejte šířku vašeho jízdního kola pro vyhnutí se úzkým cyklostezkám.</string>
     <string name="copy_link">Kopírovat odkaz</string>
+    <string name="vehicle_metrics_chart_category">Metriky vozidla</string>
+    <string name="delete_folder_description">Odstranit složku „%1$s“?</string>
+    <string name="show_spherical_map">Sférické zobrazení</string>
+    <string name="enable_3d_objects">3D stavby</string>
 </resources>

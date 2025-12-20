@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="poi_fuel_type">ប្រភេទឥន្ធនៈ</string>
+    <string name="poi_fuel_avia_type">ប្រភេទឥន្ធនៈ (Avia)</string>
+    <string name="poi_payment_type">ប្រភេទទូទាត់សងប្រាក់</string>
+    <string name="poi_payment_fuel_type">កាតឥន្ធនៈ</string>
 </resources>

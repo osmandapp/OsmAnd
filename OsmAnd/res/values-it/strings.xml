@@ -5855,7 +5855,6 @@
     <string name="rendering_attr_hideFerries_description">Nascondi le rotte dei traghetti</string>
     <string name="rendering_attr_watercolor_name">Colore dell\'acqua</string>
     <string name="rendering_attr_watercolor_description">Colore dell\'acqua</string>
-    <string name="show_spherical_map">Mostra mappa sferica</string>
     <string name="show_spherical_map_description">Mostra il modello sferoidale della Terra</string>
     <string name="save_and_access_articles_offline">Salva i dati e accedi agli articoli offline ovunque</string>
     <string name="track_folder_appearance">Aspetto della cartella tracce</string>
@@ -5911,7 +5910,6 @@
     <string name="rendering_attr_showLNAMmarker_description">Mostra i marcatori ENC</string>
     <string name="rendering_attr_spotSize_name">Dimensioni punto profondità</string>
     <string name="rendering_attr_spotSize_description">Dimensioni punto profondità</string>
-    <string name="enable_3d_objects">Abilita 3D edifici</string>
     <string name="enable_3d_objects_description">Mostra gli edifici 3D nella mappa</string>
     <string name="help_article_navigation_routing_ski_routing_name">Discese e percorsi per sci</string>
     <string name="show_local_names">Mostra i nomi locali</string>

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -44,8 +43,9 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 
 public class MapMultiSelectionMenuFragment extends BaseNestedFragment
-		implements OnClickListener, OnGlobalLayoutListener, ObservableScrollViewCallbacks {
+		implements OnClickListener, ObservableScrollViewCallbacks {
 
+	public static final int SHOW_ELEMENTS = 3;
 	public static final String TAG = "MapMultiSelectionMenuFragment";
 
 	private View view;
@@ -54,8 +54,9 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	private MapMultiSelectionMenu menu;
 	private OnBackPressedCallback backPressedCallback;
 
-	private int minHeight;
-	private boolean initialScroll = true;
+	private int scrollControlLastY;
+	private int minHeightToCloseOnScroll;
+
 	private boolean dismissing;
 	private boolean wasDrawerDisabled;
 
@@ -105,8 +106,12 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		if (!menu.isLandscapeLayout()) {
 			FrameLayout paddingView = new FrameLayout(context);
 			int screenHeight = AndroidUtils.getScreenHeight(mapActivity);
+			int listItemHeight = getDimensionPixelSize(R.dimen.list_item_height);
+			int headerHeight = getDimensionPixelSize(R.dimen.multi_selection_header_height);
 			int cancelButtonHeight = getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
-			int padding = screenHeight - cancelButtonHeight;
+
+			int padding = Math.max(0, screenHeight - headerHeight - listItemHeight - cancelButtonHeight);
+
 			paddingView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, padding));
 			paddingView.setClickable(true);
 			paddingView.setOnClickListener(v -> menu.hide());
@@ -127,7 +132,6 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 			paddingView.addView(shadowContainer);
 			listView.addHeaderView(paddingView);
 
-			view.getViewTreeObserver().addOnGlobalLayoutListener(this);
 			((ObservableListView) listView).setScrollViewCallbacks(this);
 		}
 
@@ -138,6 +142,8 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		headerView.setOnClickListener(null);
 		listView.addHeaderView(headerView);
 		listView.setAdapter(listAdapter);
+
+		listView.post(this::applyActualListViewPosition);
 
 		View divider = view.findViewById(R.id.divider);
 		divider.setBackgroundColor(getDividerColor(context, nightMode));
@@ -200,43 +206,35 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		if (sysBars.bottom != 0) {
 			navBarHeight = sysBars.bottom;
 		}
-		view.getViewTreeObserver().addOnGlobalLayoutListener(this);
+		listView.post(this::applyActualListViewPosition);
 	}
 
-	@Override
-	public void onGlobalLayout() {
+	public void applyActualListViewPosition() {
 		float titleHeight = getResources().getDimension(R.dimen.multi_selection_header_height);
 		int maxHeight = (int) (titleHeight);
-		for (int i = 0; i < 3 && i < listAdapter.getCount(); i++) {
-			View childView = listAdapter.getView(0, null, view.findViewById(R.id.list));
+		for (int i = 0; i < SHOW_ELEMENTS && i < listAdapter.getCount(); i++) {
+			View childView = listAdapter.getView(i, null, view.findViewById(R.id.list));
 			childView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
 					View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
 			maxHeight += childView.getMeasuredHeight();
 		}
-
 		listView.setSelectionFromTop(0, -maxHeight - statusBarHeight - navBarHeight);
-
-		ViewTreeObserver obs = view.getViewTreeObserver();
-		obs.removeOnGlobalLayoutListener(this);
 	}
 
 	@Override
 	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-		if (minHeight == 0) {
+		if (minHeightToCloseOnScroll == 0) {
 			int headerHeight = getDimensionPixelSize(R.dimen.multi_selection_header_height);
 			int listItemHeight = getDimensionPixelSize(R.dimen.list_item_height);
-			minHeight = headerHeight + listItemHeight - navBarHeight;
+			minHeightToCloseOnScroll = headerHeight + listItemHeight - navBarHeight;
 		}
-		if (scrollY <= minHeight && !initialScroll) {
+		boolean isScrollingDown = scrollControlLastY > 0 && scrollY < scrollControlLastY;
+		if (isScrollingDown && scrollY < minHeightToCloseOnScroll) {
 			if (menu != null) {
 				menu.hide();
 			}
 		}
-	}
-
-	@Override
-	public void onDownMotionEvent() {
-		initialScroll = false;
+		scrollControlLastY = scrollY;
 	}
 
 	@Override
@@ -250,6 +248,9 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	public void updateContent() {
 		if (listAdapter != null) {
 			listAdapter.notifyDataSetChanged();
+			if (listView != null) {
+				listView.post(this::applyActualListViewPosition);
+			}
 		}
 	}
 

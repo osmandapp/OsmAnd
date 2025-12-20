@@ -122,6 +122,10 @@ public enum LocalItemType {
 		return CollectionUtils.equalsToAny(this, MAP_DATA, ROAD_DATA);
 	}
 
+	public boolean isGroupingByCountrySupported() {
+		return CollectionUtils.equalsToAny(this, MAP_DATA, ROAD_DATA, WIKI_AND_TRAVEL_MAPS, TERRAIN_DATA);
+	}
+
 	public boolean isDerivedFromAssets() {
 		return CollectionUtils.equalsToAny(this, TTS_VOICE_DATA, COLOR_DATA, FONT_DATA);
 	}

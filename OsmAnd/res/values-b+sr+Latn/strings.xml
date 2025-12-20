@@ -5851,7 +5851,6 @@
     <string name="access_pinch_zoom_magnification_descr">Koristite zum prikaza umesto diskretnih nivoa zumiranja za gestove prstiju.</string>
     <string name="accessibility_independent_features">Nezavisne karakteristike</string>
     <string name="show_spherical_map_description">Prikaz sferoidnog modela Zemlje</string>
-    <string name="show_spherical_map">Prikaži sferičnu mapu</string>
     <string name="shared_string_price">Cena</string>
     <string name="rendering_attr_showSkiSlopes_name">Prikaži skijaške staze</string>
     <string name="rendering_attr_showSkiSlopes_description">Prikaži pojednostavljene skijaške staze</string>
@@ -5882,7 +5881,6 @@
     <string name="button_frames">Okviri dugmeta</string>
     <string name="visualizing_button_grid">Dugme za mrežu</string>
     <string name="enable_3d_objects_description">Prikaz 3D zgrada na mapi</string>
-    <string name="enable_3d_objects">Omogućite 3D zgrade</string>
     <string name="deleted_maps_prompt">Ove mape više nisu podržane i zamenjene su manjim regionima. Molimo Vas da ih uklonite i preuzmete nove verzije.</string>
     <string name="unsupported_maps">Nepodržane mape</string>
     <string name="deleted_maps_warning">Spremate se da izbrišete %d stavke(e)\nNastavljate?</string>

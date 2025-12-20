@@ -18,7 +18,15 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		private const val KEY_SHOW_AZIMUTHAL = "showAzimuthalGrid"
 		private const val KEY_SHOW_EQUATORIAL = "showEquatorialGrid"
 		private const val KEY_SHOW_ECLIPTIC = "showEclipticLine"
+		private const val KEY_SHOW_SUN = "showSun"
+		private const val KEY_SHOW_MOON = "showMoon"
+		private const val KEY_SHOW_PLANETS = "showPlanets"
+
 		private const val KEY_SHOW_CONSTELLATIONS = "showConstellations"
+
+		private const val KEY_SHOW_STARS = "showStars"
+		private const val KEY_SHOW_GALAXIES = "showGalaxies"
+		private const val KEY_SHOW_BLACK_HOLES = "showBlackHoles"
 
 		private const val KEY_ITEMS = "items"
 		private const val KEY_ID = "id"
@@ -44,11 +52,17 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showAzimuthalGrid: Boolean,
 		val showEquatorialGrid: Boolean,
 		val showEclipticLine: Boolean,
+		val showSun: Boolean,
+		val showMoon: Boolean,
+		val showPlanets: Boolean,
 		val showConstellations: Boolean,
+		val showStars: Boolean,
+		val showGalaxies: Boolean,
+		val showBlackHoles: Boolean,
 		val items: List<SkyObjectConfig>
 	)
 
-	data class BaseChartConfig(
+	data class StarChartConfig(
 		val items: List<SkyObjectConfig>
 	)
 
@@ -127,11 +141,23 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showAzimuthal = mapSettings?.optBoolean(KEY_SHOW_AZIMUTHAL, true) ?: true
 		val showEquatorial = mapSettings?.optBoolean(KEY_SHOW_EQUATORIAL, false) ?: false
 		val showEcliptic = mapSettings?.optBoolean(KEY_SHOW_ECLIPTIC, false) ?: false
+
+		val showSun = mapSettings?.optBoolean(KEY_SHOW_SUN, true) ?: true
+		val showMoon = mapSettings?.optBoolean(KEY_SHOW_MOON, true) ?: true
+		val showPlanets = mapSettings?.optBoolean(KEY_SHOW_PLANETS, true) ?: true
+
 		val showConstellations = mapSettings?.optBoolean(KEY_SHOW_CONSTELLATIONS, false) ?: false
+
+		val showStars = mapSettings?.optBoolean(KEY_SHOW_STARS, false) ?: false
+		val showGalaxies = mapSettings?.optBoolean(KEY_SHOW_GALAXIES, false) ?: false
+		val showBlackHoles = mapSettings?.optBoolean(KEY_SHOW_BLACK_HOLES, false) ?: false
 
 		val items = parseItems(mapSettings)
 
-		return StarMapConfig(showAzimuthal, showEquatorial, showEcliptic, showConstellations, items)
+		return StarMapConfig(
+			showAzimuthal, showEquatorial, showEcliptic, showSun, showMoon, showPlanets,
+			showConstellations, showStars, showGalaxies, showBlackHoles, items
+		)
 	}
 
 	fun setStarMapConfig(config: StarMapConfig) {
@@ -141,7 +167,16 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		mapSettings.put(KEY_SHOW_AZIMUTHAL, config.showAzimuthalGrid)
 		mapSettings.put(KEY_SHOW_EQUATORIAL, config.showEquatorialGrid)
 		mapSettings.put(KEY_SHOW_ECLIPTIC, config.showEclipticLine)
+
+		mapSettings.put(KEY_SHOW_SUN, config.showSun)
+		mapSettings.put(KEY_SHOW_MOON, config.showMoon)
+		mapSettings.put(KEY_SHOW_PLANETS, config.showPlanets)
+
 		mapSettings.put(KEY_SHOW_CONSTELLATIONS, config.showConstellations)
+
+		mapSettings.put(KEY_SHOW_STARS, config.showStars)
+		mapSettings.put(KEY_SHOW_GALAXIES, config.showGalaxies)
+		mapSettings.put(KEY_SHOW_BLACK_HOLES, config.showBlackHoles)
 
 		mapSettings.put(KEY_ITEMS, serializeItems(config.items))
 
@@ -149,14 +184,14 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		setSettingsJson(root)
 	}
 
-	fun getStarChartConfig(): BaseChartConfig {
+	fun getStarChartConfig(): StarChartConfig {
 		val root = getSettingsJson()
 		val chartSettings = root.optJSONObject(KEY_STAR_CHART)
 		val items = parseItems(chartSettings)
-		return BaseChartConfig(items)
+		return StarChartConfig(items)
 	}
 
-	fun setStarChartConfig(config: BaseChartConfig) {
+	fun setStarChartConfig(config: StarChartConfig) {
 		val root = getSettingsJson()
 		val chartSettings = root.optJSONObject(KEY_STAR_CHART) ?: JSONObject()
 		chartSettings.put(KEY_ITEMS, serializeItems(config.items))

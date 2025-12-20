@@ -2,6 +2,7 @@ package net.osmand.shared.gpx
 
 import net.osmand.shared.gpx.GpxUtilities.GPXTPX_PREFIX
 import net.osmand.shared.gpx.GpxUtilities.OSMAND_EXTENSIONS_PREFIX
+import net.osmand.shared.obd.OBDCommand
 
 class PointAttributes(
 	var distance: Float, var timeDiff: Float, var firstPoint: Boolean, var lastPoint: Boolean
@@ -39,12 +40,27 @@ class PointAttributes(
 	var animatedZoom: Float = Float.NaN
 	var interpolationOffsetN: Float = Float.NaN
 
+	var intakeTemp: Float = Float.NaN
+	var ambientTemp: Float = Float.NaN
+	var coolantTemp: Float = Float.NaN
+	var engineOilTemp: Float = Float.NaN
+	var rpmSpeed: Float = Float.NaN
+	var runtimeEngine: Float = Float.NaN
+	var engineLoad: Float = Float.NaN
+	var fuelPressure = Float.NaN
+	var fuelConsumption = Float.NaN
+	var fuelRemaining = Float.NaN
+	var batteryVoltage = Float.NaN
+	var vehicleSpeed = Float.NaN
+	var throttlePosition = Float.NaN
+
 	private var anyValueSet: Boolean = false
+	private var anyVehicleMetricsSet: Boolean = false
 
 	fun hasAnyValueSet(): Boolean = anyValueSet
 
-	fun getAttributeValue(tag: String): Float? {
-		return when (tag) {
+	fun getAttributeValue(tag: String): Float? =
+		when (tag) {
 			POINT_SPEED -> speed
 			POINT_ELEVATION -> elevation
 			SENSOR_TAG_HEART_RATE -> heartRate
@@ -57,9 +73,23 @@ class PointAttributes(
 			DEV_RAW_ZOOM -> rawZoom
 			DEV_ANIMATED_ZOOM -> animatedZoom
 			DEV_INTERPOLATION_OFFSET_N -> interpolationOffsetN
+
+			OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND.gpxTag -> intakeTemp
+			OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND.gpxTag -> ambientTemp
+			OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND.gpxTag -> coolantTemp
+			OBDCommand.OBD_ENGINE_OIL_TEMPERATURE_COMMAND.gpxTag -> engineOilTemp
+			OBDCommand.OBD_RPM_COMMAND.gpxTag -> rpmSpeed
+			OBDCommand.OBD_ENGINE_RUNTIME_COMMAND.gpxTag -> runtimeEngine
+			OBDCommand.OBD_CALCULATED_ENGINE_LOAD_COMMAND.gpxTag -> engineLoad
+			OBDCommand.OBD_FUEL_PRESSURE_COMMAND.gpxTag -> fuelPressure
+			OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND.gpxTag -> fuelConsumption
+			OBDCommand.OBD_FUEL_LEVEL_COMMAND.gpxTag -> fuelRemaining
+			OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND.gpxTag -> batteryVoltage
+			OBDCommand.OBD_SPEED_COMMAND.gpxTag -> vehicleSpeed
+			OBDCommand.OBD_THROTTLE_POSITION_COMMAND.gpxTag -> throttlePosition
+
 			else -> null
 		}
-	}
 
 	fun setAttributeValue(tag: String, value: Float) {
 		when (tag) {
@@ -74,7 +104,22 @@ class PointAttributes(
 			DEV_RAW_ZOOM -> rawZoom = value
 			DEV_ANIMATED_ZOOM -> animatedZoom = value
 			DEV_INTERPOLATION_OFFSET_N -> interpolationOffsetN = value
+
+			OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND.gpxTag -> intakeTemp = value
+			OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND.gpxTag -> ambientTemp = value
+			OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND.gpxTag -> coolantTemp = value
+			OBDCommand.OBD_ENGINE_OIL_TEMPERATURE_COMMAND.gpxTag -> engineOilTemp = value
+			OBDCommand.OBD_RPM_COMMAND.gpxTag -> rpmSpeed = value
+			OBDCommand.OBD_ENGINE_RUNTIME_COMMAND.gpxTag -> runtimeEngine = value
+			OBDCommand.OBD_CALCULATED_ENGINE_LOAD_COMMAND.gpxTag -> engineLoad = value
+			OBDCommand.OBD_FUEL_PRESSURE_COMMAND.gpxTag -> fuelPressure = value
+			OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND.gpxTag -> fuelConsumption = value
+			OBDCommand.OBD_FUEL_LEVEL_COMMAND.gpxTag -> fuelRemaining = value
+			OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND.gpxTag -> batteryVoltage = value
+			OBDCommand.OBD_SPEED_COMMAND.gpxTag -> vehicleSpeed = value
+			OBDCommand.OBD_THROTTLE_POSITION_COMMAND.gpxTag -> throttlePosition = value
 		}
+
 		anyValueSet = true
 	}
 

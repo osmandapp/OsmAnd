@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="lang_mi">Maori</string>
+    <string name="vehicle_metrics_chart_category">Vehicle metrics</string>
+    <string name="delete_folder_description">Delete \"%1$s\" folder?</string>
     <string name="routing_attr_pt_limit_name">Display N best routes</string>
     <string name="routing_attr_pt_limit_description">Specify the number of best routes to display</string>
     <string name="centimeter">cm</string>
@@ -682,9 +685,9 @@ You will be able to pair this scanner again at any time.</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="allow_display_on_top">Allow display on top</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>
-    <string name="show_spherical_map">Show spherical map</string>
+    <string name="show_spherical_map">Globe View</string>
     <string name="show_spherical_map_description">Display spheroidal model of the Earth</string>
-    <string name="enable_3d_objects">Enable 3D buildings</string>
+    <string name="enable_3d_objects">3D buildings</string>
     <string name="enable_3d_objects_description">Display 3D building objects on the map</string>
     <string name="show_debug_tile">Show tile information</string>
     <string name="show_rasterization_debug_tile">Show tile rasterization information</string>

@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.osmand.plus.R
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.astro.AstroUtils
+import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.plugins.astro.StarObjectsViewModel
 import net.osmand.plus.plugins.astro.StarWatcherPlugin
 import net.osmand.plus.plugins.astro.StarWatcherSettings

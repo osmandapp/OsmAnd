@@ -274,14 +274,8 @@ public class AnimateDraggingMapThread implements TouchListener {
 				animatingMapMove = true;
 				animatingMapTilt = true;
 				animator.animateTargetTo(finish31, duration, TimingFunction.EaseInQuadratic, userInteractionAnimationKey);
-				if (PluginsHelper.isDevelopment()) {
-					android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "animateToPreview: animateZoom " + (zoom.getBaseZoom() + zoom.getZoomFloatPart()));
-				}
 				animator.animateZoomTo(zoom.getBaseZoom() + zoom.getZoomFloatPart(), duration,
 						TimingFunction.EaseOutQuadratic, userInteractionAnimationKey);
-				if (PluginsHelper.isDevelopment()) {
-					android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "animateToPreview: " + elevationAngle);
-				}
 				animator.animateElevationAngleTo(elevationAngle, duration,
 						TimingFunction.Linear, userInteractionAnimationKey);
 				setTargetValues(zoom.getBaseZoom(), zoom.getZoomFloatPart(), finalLat, finalLon);
@@ -419,9 +413,6 @@ public class AnimateDraggingMapThread implements TouchListener {
 			}
 
 			if (animateZoom) {
-				if (PluginsHelper.isDevelopment()) {
-					android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startMoving: animateZoom1 " + (zoom + (float) zoomFP));
-				}
 				animator.animateZoomTo(zoom + (float) zoomFP, zoomParams.second / 1000f,
 						TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
 			}
@@ -429,9 +420,6 @@ public class AnimateDraggingMapThread implements TouchListener {
 				tileView.setFractionalZoom(zoom, zoomFP, notifyListener);
 			}
 			if (animateElevation) {
-				if (PluginsHelper.isDevelopment()) {
-					android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startMoving: " + elevationAngle);
-				}
 				animator.animateElevationAngleTo(elevationAngle, TILT_ANIMATION_TIME / 1000f,
 						TimingFunction.Linear, locationServicesAnimationKey);
 			}
@@ -575,18 +563,12 @@ public class AnimateDraggingMapThread implements TouchListener {
 					animator.cancelAnimation(targetAnimation);
 					duration = targetAnimation.getDuration() - targetAnimation.getTimePassed();
 				}
-				if (PluginsHelper.isDevelopment()) {
-					android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startMoving: animateZoom2 " + animateZoom + ";  " + (endZoom + endZoomFloatPart));
-				}
 				if (animateZoom) {
 					animator.animateZoomToAndPan(endZoom + endZoomFloatPart, finish31, duration, TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
 				} else {
 					animator.animateTargetTo(finish31, duration, TimingFunction.Linear, locationServicesAnimationKey);
 				}
 			} else if (animateZoom) {
-				if (PluginsHelper.isDevelopment()) {
-					android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startMoving: animateZoom3 " + (endZoom + endZoomFloatPart));
-				}
 				animator.animateZoomTo(endZoom + endZoomFloatPart, ZOOM_MOVE_ANIMATION_TIME / 1000f,
 						TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
 			}
@@ -921,9 +903,6 @@ public class AnimateDraggingMapThread implements TouchListener {
 			}
 
 			if (duration > 0) {
-				if (PluginsHelper.isDevelopment()) {
-					android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startMoving: animateZoom4 " + (zoomEnd + (float) zoomPart));
-				}
 				animator.animateZoomTo(zoomEnd + (float) zoomPart,
 						duration,
 						TimingFunction.Linear,
@@ -1062,9 +1041,6 @@ public class AnimateDraggingMapThread implements TouchListener {
 			if (elevationAnimation != null) {
 				animator.cancelAnimation(elevationAnimation);
 				animator.cancelCurrentAnimation(userInteractionAnimationKey, AnimatedValue.ElevationAngle);
-			}
-			if (PluginsHelper.isDevelopment()) {
-				android.util.Log.d(OsmandDevelopmentPlugin.ZOOM_TILT_ANIMATION_LOG_TAG, "startTilting: " + elevationAngle);
 			}
 			animator.animateElevationAngleTo(elevationAngle,
 					duration,

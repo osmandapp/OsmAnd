@@ -105,7 +105,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
 			boolean lastCard = getCardsCount() == position + 1;
 			int margin = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
-			int sideMargin = app.getResources().getDisplayMetrics().widthPixels / 10;
+			int sideMargin = 0;
 
 			FrameLayout fl = new FrameLayout(themedCtx);
 			LinearLayout ll = new LinearLayout(themedCtx);

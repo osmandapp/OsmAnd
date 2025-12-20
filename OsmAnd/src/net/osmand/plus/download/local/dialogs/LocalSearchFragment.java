@@ -36,6 +36,8 @@ import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.LocalSizeCalculationListener;
 import net.osmand.plus.download.local.LocalSizeController;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
+import net.osmand.plus.download.local.dialogs.controllers.LocalItemsController;
+import net.osmand.plus.download.local.dialogs.menu.ItemMenuProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.LocalSortMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -44,7 +46,6 @@ import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -106,7 +107,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 		setupToolbar(view);
 		setupSearchView(view);
 		setupRecyclerView(view);
-		updateAdapter();
+		updateContent();
 
 		return view;
 	}
@@ -164,11 +165,23 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	}
 
 	public void updateContent() {
+		LocalItemsController controller = LocalItemsController.getExistedInstance(app);
+		if (controller != null && getTargetFragment() instanceof LocalItemsFragment target) {
+			boolean root = controller.isRootFolder();
+			controller.updateDisplayItems(target.getGroup());
+			// Automatically exit from the search mode if current folder isn't longer exists
+			if (root != controller.isRootFolder()) {
+				dismiss();
+				return;
+			}
+		}
 		updateAdapter();
 	}
 
 	private void updateAdapter() {
-		adapter.setItems(getSortedItems());
+		List<BaseLocalItem> folderItems = getSortedCurrentFolderItems();
+		adapter.setItems(folderItems != null ? folderItems : getSortedItems());
+		adapter.setInsideFolder(folderItems != null);
 	}
 
 	@NonNull
@@ -198,11 +211,28 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	private void sortItems(@NonNull List<BaseLocalItem> items) {
 		if (type == MAP_DATA) {
 			LocalSortMode sortMode = LocalItemUtils.getSortModePref(app, type).get();
-			Collections.sort(items, new LocalItemsComparator(app, sortMode));
+			items.sort(new LocalItemsComparator(app, sortMode));
 		} else {
 			Collator collator = OsmAndCollator.primaryCollator();
-			Collections.sort(items, (o1, o2) -> collator.compare(o1.getName(app).toString(), o2.getName(app).toString()));
+			items.sort((o1, o2) -> collator.compare(o1.getName(app).toString(), o2.getName(app).toString()));
 		}
+	}
+
+	@Nullable
+	private List<BaseLocalItem> getSortedCurrentFolderItems() {
+		if (getTargetFragment() instanceof LocalItemsFragment fragment) {
+			List<BaseLocalItem> folderItems = fragment.getCurrentFolderItems();
+			if (folderItems != null) {
+				sortItems(folderItems);
+			}
+			return folderItems;
+		}
+		return null;
+	}
+
+	private boolean isRootFolder() {
+		LocalItemsController controller = LocalItemsController.getExistedInstance(app);
+		return controller == null || controller.isRootFolder();
 	}
 
 	public void showProgressBar() {
@@ -224,10 +254,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	}
 
 	private void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			activity.onBackPressed();
-		}
+		callActivity(FragmentActivity::onBackPressed);
 	}
 
 	@Override
@@ -269,7 +296,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 		if (activity != null) {
 			ItemMenuProvider menuProvider = new ItemMenuProvider(activity, this);
 			menuProvider.setItem(item);
-			menuProvider.setColorId(ColorUtilities.getDefaultIconColorId(nightMode));
+			menuProvider.setIconColorId(ColorUtilities.getDefaultIconColorId(nightMode));
 			menuProvider.showMenu(view);
 		}
 	}

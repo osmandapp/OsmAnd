@@ -70,6 +70,10 @@ public class AisMessageListener {
                 Log.d("AisMessageListener", "timer task taskCheckNetworkConnection running");
                 if ((tcpSocket == null) || (!tcpSocket.isConnected())) {
                     try {
+                        if (sentenceReader != null) {
+                            sentenceReader.stop();
+                            sentenceReader = null;
+                        }
                         tcpSocket = new Socket();
                         tcpSocket.setTcpNoDelay(true);
                         tcpSocket.setReuseAddress(true);
@@ -103,11 +107,9 @@ public class AisMessageListener {
     private void initListeners() throws IOException {
         if (tcpStream != null) {
             sentenceReader = new SentenceReader(tcpStream);
-        }
-        if (fileStream != null) {
+        } else if (fileStream != null) {
             sentenceReader = new SentenceReader(fileStream);
-        }
-        if (udpSocket != null) {
+        } else if (udpSocket != null) {
             sentenceReader = new SentenceReader(udpSocket);
         }
         if (sentenceReader != null) {

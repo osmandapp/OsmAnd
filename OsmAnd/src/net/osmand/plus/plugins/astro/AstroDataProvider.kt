@@ -3,8 +3,8 @@ package net.osmand.plus.plugins.astro
 import android.content.Context
 import android.graphics.Color
 import io.github.cosinekitty.astronomy.Body
-import net.osmand.plus.plugins.astro.AstroUtils.bodyColor
-import net.osmand.plus.plugins.astro.AstroUtils.bodyName
+import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyColor
+import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyName
 import net.osmand.plus.plugins.astro.views.SkyObject
 import net.osmand.plus.plugins.astro.views.SkyObject.Type
 
@@ -775,6 +775,99 @@ object AstroDataProvider {
 					color = Color.WHITE
 				))
 			}
+		}
+
+		val galaxiesData = listOf(
+			"Large Magellanic Cloud" to Triple(5.391, -69.756, 0.9),
+			"Small Magellanic Cloud" to Triple(0.877, -72.834, 2.7),
+			"Andromeda Galaxy (M31)" to Triple(0.712, 41.269, 3.44),
+			"Triangulum Galaxy (M33)" to Triple(1.564, 30.660, 5.72),
+			"Centaurus A (NGC 5128)" to Triple(13.426, -43.019, 6.84),
+			"Bode's Galaxy (M81)" to Triple(9.926, 69.065, 6.94),
+			"Sculptor Galaxy (NGC 253)" to Triple(0.793, -25.288, 7.1),
+			"Southern Pinwheel (M83)" to Triple(13.617, -29.866, 7.54),
+			"Pinwheel Galaxy (M101)" to Triple(14.053, 54.349, 7.86),
+			"Whirlpool Galaxy (M51)" to Triple(13.498, 47.195, 8.4),
+			"Sombrero Galaxy (M104)" to Triple(12.666, -11.623, 8.0),
+			"Cigar Galaxy (M82)" to Triple(9.931, 69.680, 8.41),
+			"Black Eye Galaxy (M64)" to Triple(12.945, 21.683, 8.52),
+			"Messier 94" to Triple(12.848, 41.120, 8.2),
+			"Messier 110" to Triple(0.673, 41.685, 8.1),
+			"NGC 55" to Triple(0.248, -39.197, 8.1),
+			"NGC 300" to Triple(0.915, -37.685, 8.1),
+			"Messier 49" to Triple(12.496, 8.0, 8.4),
+			"Messier 87 (Virgo A)" to Triple(13.514, 12.391, 8.6),
+			"NGC 6744" to Triple(19.163, -63.854, 8.3),
+			"NGC 4945" to Triple(13.091, -49.467, 8.6),
+			"Messier 106" to Triple(12.316, 47.303, 8.41),
+			"Messier 66" to Triple(11.338, 12.992, 8.92),
+			"Messier 65" to Triple(11.315, 13.092, 9.3),
+			"Messier 105" to Triple(10.797, 12.583, 9.3),
+			"Messier 74" to Triple(1.611, 15.783, 9.4),
+			"Messier 77" to Triple(2.711, -0.013, 8.9),
+			"NGC 2903" to Triple(9.537, 21.500, 9.0),
+			"NGC 2403" to Triple(7.615, 65.603, 8.4),
+			"IC 342" to Triple(3.780, 68.097, 8.4)
+		)
+
+		galaxiesData.forEach { (name, props) ->
+			objects.add(SkyObject(
+				id = name.lowercase().replace(' ', '_').filter { it.isLetterOrDigit() || it == '_' },
+				type = Type.GALAXY,
+				body = null,
+				name = name,
+				ra = props.first,
+				dec = props.second,
+				magnitude = props.third.toFloat(),
+				color = Color.LTGRAY
+			))
+		}
+
+		val blackHolesData = listOf(
+			// Ultramassive & Record Holders
+			"Phoenix A*" to Triple(1.7533, -53.007, 12.6),      // ~100 billion M☉
+			"TON 618" to Triple(12.4733, 31.477, 15.9),         // 66 billion M☉ (Quasar)
+			"Cosmic Horseshoe BH" to Triple(11.8092, 19.501, 14.7), // 36 billion M☉ (2025 Discovery)
+			"Holmberg 15A" to Triple(0.6972, -9.303, 14.7),     // 40 billion M☉
+			"IC 1101" to Triple(15.1822, 5.7447, 14.7),         // ~40-100 billion M☉
+			"S5 0014+81" to Triple(0.2855, 81.585, 16.5),       // 40 billion M☉
+			"NGC 4889" to Triple(13.0022, 27.977, 11.4),        // 21 billion M☉
+			"NGC 1600" to Triple(4.5277, -5.086, 11.0),         // 17 billion M☉
+			"OJ 287" to Triple(8.9133, 20.108, 14.5),           // Binary system, 18 billion M☉
+			"NGC 1277" to Triple(3.33, 41.572, 14.7),           // 17 billion M☉
+
+			// Famous & Local Supermassive Black Holes
+			"M87*" to Triple(12.5137, 12.391, 8.6),             // First imaged BH
+			"Sagittarius A*" to Triple(17.7611, -29.008, 20.0), // Milky Way Center
+			"Andromeda BH (M31*)" to Triple(0.7123, 41.269, 3.4),
+			"Sombrero BH (M104)" to Triple(12.6664, -11.621, 8.0),
+			"Centaurus A BH" to Triple(13.4261, -43.019, 6.8),
+			"M60-UCD1" to Triple(12.7281, 11.551, 14.4),        // Smallest galaxy with huge BH
+			"Cygnus X-1" to Triple(19.9725, 35.201, 8.9),       // Famous stellar-mass BH
+
+			// High-Luminosity Quasars (SMBHs)
+			"3C 273" to Triple(12.4852, 2.052, 12.9),           // Brightest Quasar
+			"SMSS J2157-3602" to Triple(21.9578, -36.037, 17.5), // Fastest growing
+			"ULAS J1342+0928" to Triple(13.7052, 9.471, 20.3),  // Extremely distant
+			"AP Librae" to Triple(15.301, -24.37, 15.5),
+			"NGC 4472 (M49) BH" to Triple(12.496, 7.994, 8.4),
+			"NGC 4649 (M60) BH" to Triple(12.728, 11.552, 8.8),
+			"NGC 3842" to Triple(11.734, 19.95, 12.8),          // 9.7 billion M☉
+			"H1821+643" to Triple(18.355, 64.341, 14.2)         // 30 billion M☉
+		)
+
+		blackHolesData.forEach { (name, props) ->
+			val id = "bh_" + name.lowercase().replace('*', '_').replace(' ', '_').replace('-', '_').replace('(', '_').replace(')', '_')
+			objects.add(SkyObject(
+				id = id,
+				type = Type.BLACK_HOLE,
+				body = null,
+				name = name,
+				ra = props.first,
+				dec = props.second,
+				magnitude = props.third.toFloat(),
+				color = Color.MAGENTA
+			))
 		}
 
 		return objects
