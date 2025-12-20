@@ -2962,7 +2962,7 @@
     <string name="press_again_to_change_the_map_orientation">Trykk igjen for å endre kartorientering</string>
     <string name="app_mode_offroad">Terreng</string>
     <string name="edit_profile_setup_title">Sett opp profil</string>
-    <string name="routing_attr_max_num_changes_name">Antall overganger</string>
+    <string name="routing_attr_max_num_changes_name">Maksimum antall overganger</string>
     <string name="app_mode_shuttle_bus">Skyttelbuss</string>
     <string name="app_mode_subway">T-bane</string>
     <string name="select_base_profile_dialog_message">Baser din egendefinerte profil på en av de forvalgte programprofilene, dette definerer grunnleggende oppsett, som forvalg synliget for miniprogrammer, enheter for hastighet og distanse. Dette er de forvalgte programprofilene, sammen med eksempler på egentilpassede profiler de kan utvides til:</string>
@@ -5815,4 +5815,9 @@
     <string name="centimeter">cm</string>
     <string name="shared_string_centimeters">centimeter</string>
     <string name="bicycle_width_limit_description">Angi bredden på sykkelen din for å unngå smale sykkelveier.</string>
+    <string name="enable_3d_objects">3D-bygninger</string>
+    <string name="show_spherical_map">Globusvisning</string>
+    <string name="delete_folder_description">Slette mappen \"%1$s\"?</string>
+    <string name="routing_attr_pt_limit_description">Bestem antallet av beste ruter som skal vises</string>
+    <string name="routing_attr_pt_limit_name">Vis N beste ruter</string>
 </resources>
