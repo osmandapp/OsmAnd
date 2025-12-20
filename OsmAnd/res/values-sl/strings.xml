@@ -5142,4 +5142,6 @@
     <string name="routing_attr_avoid_cobblestone_name">Brez tlakovanih cest</string>
     <string name="routing_attr_avoid_cobblestone_description">Načrtovanje poti brez uporabe tlakovanih cest</string>
     <string name="weather_source_ecmwf_description">Evropski center za srednjeročne vremenske napovedi (ECMWF)</string>
+    <string name="lang_mi">Maorščina</string>
+    <string name="vehicle_metrics_chart_category">Mere vozila</string>
 </resources>
