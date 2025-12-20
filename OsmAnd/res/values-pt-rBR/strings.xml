@@ -6278,4 +6278,7 @@
     <string name="shared_string_centimeters">centímetros</string>
     <string name="bicycle_width_limit_description">Indique a largura da sua bicicleta para evitar ciclovias estreitas.</string>
     <string name="copy_link">Copiar link</string>
+    <string name="vehicle_metrics_chart_category">Métricas do veículo</string>
+    <string name="routing_attr_pt_limit_name">Exibir N melhores rotas</string>
+    <string name="enable_3d_objects">Edifícios 3D</string>
 </resources>
