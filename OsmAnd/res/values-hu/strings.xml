@@ -2467,7 +2467,7 @@
     <string name="travel_card_download_descr">Töltse le a Wikivoyage útikalauzokat, hogy internetkapcsolat nélkül olvashasson cikkeket a világ érdekes helyeiről.</string>
     <string name="start_editing_card_image_text">Az ingyenes, világméretű útikalauz, amit bárki szerkeszthet.</string>
     <string name="welcome_to_open_beta_description">Az útikalauz a Wikivoyage-on alapul. Tesztelje a lehetőségeit a nyílt béta teszten ingyenesen.</string>
-    <string name="start_editing_card_description">Szerkesztheti, sőt szerkessze a Wikivoyage szócikkeit. Ossza meg tudását, tapasztalatait, tehetségét és figyelmességét.</string>
+    <string name="start_editing_card_description">Szerkesztheti, sőt szerkessze a Wikivoyage szócikkeit. Ossza meg tudását, tapasztalatait, tehetségét és megfigyeléseit.</string>
     <string name="start_editing">Szerkesztés elkezdése</string>
     <string name="get_unlimited_access">Szerezz korlátlan hozzáférést</string>
     <string name="welcome_to_open_beta">Üdvözöljük a nyílt béta tesztben</string>
@@ -5819,4 +5819,5 @@
     <string name="delete_folder_description">Biztosan törli a(z) „%1$s” mappát?</string>
     <string name="show_spherical_map">Földgömbnézet</string>
     <string name="enable_3d_objects">3D épületek</string>
+    <string name="lang_mi">maori</string>
 </resources>
