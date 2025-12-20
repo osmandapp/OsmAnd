@@ -13,15 +13,16 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.vehiclesize.SizeData;
-import net.osmand.plus.settings.vehiclesize.SizeType;
-import net.osmand.plus.settings.vehiclesize.VehicleSizes;
+import net.osmand.plus.settings.enums.MeasurementUnits;
+import net.osmand.plus.settings.vehiclespecs.SpecificationData;
+import net.osmand.plus.settings.vehiclespecs.SpecificationType;
+import net.osmand.plus.settings.vehiclespecs.profiles.VehicleSpecs;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
-import net.osmand.plus.settings.preferences.SizePreference;
-import net.osmand.plus.settings.vehiclesize.containers.Metric;
+import net.osmand.plus.settings.preferences.VehicleSpecificationPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.chips.ChipItem;
@@ -32,6 +33,7 @@ import org.apache.commons.logging.Log;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,30 +41,29 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 	private static final Log LOG = PlatformUtil.getLog(VehicleParametersBottomSheet.class);
 	public static final String TAG = VehicleParametersBottomSheet.class.getSimpleName();
 
-	private SizePreference sizePreference;
+	private VehicleSpecificationPreference preference;
 
 	@NonNull
 	@SuppressLint("ClickableViewAccessibility")
 	protected BaseBottomSheetItem createBottomSheetItem(@NonNull OsmandApplication app, @NonNull View mainView) {
-		sizePreference = (SizePreference) getPreference();
-		VehicleSizes vehicleSizes = sizePreference.getVehicleSizes();
-		Metric metric = sizePreference.getMetric();
-		SizeType sizeType = sizePreference.getSizeType();
-		SizeData data = vehicleSizes.getSizeData(sizeType);
-		List<ChipItem> chips = vehicleSizes.collectChipItems(app, sizeType, metric);
+		preference = (VehicleSpecificationPreference) getPreference();
+		boolean useMetricSystem = preference.isUseMetricSystem();
+		VehicleSpecs vehicleSpecs = preference.getSpecifications();
+		SpecificationType type = preference.getSpecificationType();
+		List<ChipItem> chips = collectChipItems(vehicleSpecs, type, useMetricSystem);
 
-		title.setText(sizePreference.getTitle().toString());
+		title.setText(preference.getTitle().toString());
 
-		Drawable icon = getIcon(data.assets().getIconId(nightMode));
+		Drawable icon = getIcon(vehicleSpecs.getIconId(type, nightMode));
 		ivImage.setImageDrawable(icon);
 
-		String description = getString(data.assets().getDescriptionId());
+		String description = getString(vehicleSpecs.getDescriptionId(type));
 		tvDescription.setText(description);
 
-		int metricStringId = vehicleSizes.getMetricStringId(sizeType, metric);
-		tvMetric.setText(metricStringId);
+		MeasurementUnits units = vehicleSpecs.getMeasurementUnits(type, useMetricSystem);
+		tvMetric.setText(units.getNameResId());
 
-		currentValue = vehicleSizes.readSavedValue(sizePreference);
+		currentValue = vehicleSpecs.readSavedValue(preference);
 		etText.setText(formatInputValue(currentValue));
 		etText.clearFocus();
 		etText.setOnTouchListener((v, event) -> {
@@ -76,7 +77,7 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 			public void afterTextChanged(Editable s) {
 				currentValue = (float) Algorithms.parseDoubleSilently(s.toString(), 0.0f);
 				StringBuilder error = new StringBuilder();
-				if (currentValue == 0.0f || vehicleSizes.verifyValue(app, sizeType, metric, currentValue, error)) {
+				if (currentValue == 0.0f || vehicleSpecs.checkValue(app, type, useMetricSystem, currentValue, error)) {
 					onCorrectInput();
 					updateChips();
 				} else {
@@ -89,6 +90,35 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 		ChipItem selected = chipsView.findChipByTag(currentValue);
 		chipsView.setSelected(selected);
 		return new BaseBottomSheetItem.Builder().setCustomView(mainView).create();
+	}
+
+	@NonNull
+	public List<ChipItem> collectChipItems(@NonNull VehicleSpecs vehicleSpecs,
+	                                       @NonNull SpecificationType type,
+	                                       boolean useMetricSystem) {
+		// Add "None"
+		List<ChipItem> chips = new ArrayList<>();
+		String none = app.getString(R.string.shared_string_none);
+		ChipItem chip = new ChipItem(none);
+		chip.title = none;
+		chip.contentDescription = none;
+		chip.tag = 0.0f;
+		chips.add(chip);
+
+		// Add predefined values
+		MeasurementUnits units = vehicleSpecs.getMeasurementUnits(type, useMetricSystem);
+		String symbol = getString(units.getSymbolResId());
+		for (Float value : vehicleSpecs.getPredefinedValues(type, units.isMetric())) {
+			String pattern = getString(R.string.ltr_or_rtl_combine_via_space);
+			String valueStr = units.formatValue(value);
+			String title = String.format(pattern, valueStr, symbol);
+			chip = new ChipItem(title);
+			chip.title = title;
+			chip.contentDescription = title;
+			chip.tag = value;
+			chips.add(chip);
+		}
+		return chips;
 	}
 
 	private void onCorrectInput() {
@@ -112,8 +142,8 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 	protected void onRightBottomButtonClick() {
 		if (getTargetFragment() instanceof OnConfirmPreferenceChange callback) {
 			String preferenceId = getPreference().getKey();
-			VehicleSizes vehicleSizes = sizePreference.getVehicleSizes();
-			String value = String.valueOf(vehicleSizes.prepareValueToSave(sizePreference, currentValue));
+			VehicleSpecs vehicleSpecs = preference.getSpecifications();
+			String value = String.valueOf(vehicleSpecs.prepareValueToSave(preference, currentValue));
 			callback.onConfirmPreferenceChange(preferenceId, value, ApplyQueryType.SNACK_BAR);
 		}
 		dismiss();
