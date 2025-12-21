@@ -10,6 +10,8 @@ import static net.osmand.router.GeneralRouter.WEIGHT_RATING;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.util.CollectionUtils;
+
 public enum SpecificationType {
 
 	WIDTH(VEHICLE_WIDTH),
@@ -33,5 +35,9 @@ public enum SpecificationType {
 			}
 		}
 		return null;
+	}
+
+	public boolean isWeightRelated() {
+		return CollectionUtils.equalsToAny(this, WEIGHT, AXLE_LOAD, WEIGHT_FULL_LOAD);
 	}
 }

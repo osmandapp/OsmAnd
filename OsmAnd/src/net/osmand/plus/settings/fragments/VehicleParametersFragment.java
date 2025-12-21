@@ -174,7 +174,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		uiPreference.setSpecificationType(type);
 		uiPreference.setSpecifications(vehicle);
 		uiPreference.setDefaultValue(defValue);
-		uiPreference.setUseMetricSystem(shouldUseMetricSystem(appMode));
+		uiPreference.setUseMetricSystem(shouldUseMetricSystem(type, appMode));
 		uiPreference.setTitle(title);
 		uiPreference.setSummary(description);
 		uiPreference.setIcon(getPreferenceIcon(parameterId));
@@ -184,10 +184,13 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		screen.addPreference(uiPreference);
 	}
 
-	private boolean shouldUseMetricSystem(@NonNull ApplicationMode appMode) {
-		boolean imperial = settings.DRIVING_REGION.getModeValue(appMode) == DrivingRegion.US;
+	private boolean shouldUseMetricSystem(@NonNull SpecificationType specificationType,
+	                                      @NonNull ApplicationMode appMode) {
+		if (specificationType.isWeightRelated()) {
+			return settings.DRIVING_REGION.getModeValue(appMode) == DrivingRegion.US;
+		}
 		MetricsConstants lengthMetric = settings.METRIC_SYSTEM.getModeValue(appMode);
-		return !imperial && !lengthMetric.shouldUseFeet();
+		return !lengthMetric.shouldUseFeet();
 	}
 
 	private void setupDefaultSpeedPref() {

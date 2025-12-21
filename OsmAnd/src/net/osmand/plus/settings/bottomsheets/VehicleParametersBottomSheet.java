@@ -76,12 +76,12 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 			@Override
 			public void afterTextChanged(Editable s) {
 				currentValue = (float) Algorithms.parseDoubleSilently(s.toString(), 0.0f);
-				StringBuilder error = new StringBuilder();
-				if (currentValue == 0.0f || vehicleSpecs.checkValue(app, type, useMetricSystem, currentValue, error)) {
+				String error;
+				if (currentValue == 0.0f || (error = vehicleSpecs.checkValue(app, type, useMetricSystem, currentValue)).isEmpty()) {
 					onCorrectInput();
 					updateChips();
 				} else {
-					onWrongInput(error.toString());
+					onWrongInput(error);
 				}
 			}
 		});

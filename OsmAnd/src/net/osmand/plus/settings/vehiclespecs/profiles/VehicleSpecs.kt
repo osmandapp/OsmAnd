@@ -9,29 +9,35 @@ import net.osmand.plus.settings.vehiclespecs.SpecificationType
 import net.osmand.plus.settings.vehiclespecs.containers.Assets
 import net.osmand.util.Algorithms
 
-abstract class VehicleSpecs {
+abstract class VehicleSpecs(
+    private val specsMap: Map<SpecificationType, SpecificationData>
+) {
 
-    private val specsMap = mutableMapOf<SpecificationType, SpecificationData>()
+    companion object {
+        /**
+         * Offset added to or subtracted from vehicle parameter values during storage.
+         * This is necessary because routing.xml uses the ">=" operator for constraint checks
+         * (e.g., maxweight). If a vehicle's weight is exactly 3.5t and the road limit is 3.5t,
+         * the road will be blocked. Subtracting this offset makes the stored weight (e.g., 3.4999t),
+         * allowing it to pass the check.
+         * @see <a href="https://github.com/osmandapp/OsmAnd/issues/4736">Issue #4736</a>
+         */
+        private const val ROUTING_LIMIT_OFFSET = 0.0001f
 
-    init {
-        collectSpecs()
-    }
-
-    protected abstract fun collectSpecs()
-
-    protected fun add(
-        type: SpecificationType,
-        iconDayId: Int,
-        iconNightId: Int,
-        descriptionId: Int,
-        metricUnits: MeasurementUnits,
-        metricValues: List<Float>,
-        imperialUnits: MeasurementUnits,
-        imperialValues: List<Float>
-    ) {
-        val themedIconId = ThemedIconId(iconDayId, iconNightId)
-        val assets = Assets(themedIconId, descriptionId)
-        specsMap[type] = SpecificationData(assets, metricUnits, metricValues, imperialUnits, imperialValues)
+        @JvmStatic
+        protected fun createSpecification(
+            iconDayId: Int,
+            iconNightId: Int,
+            descriptionId: Int,
+            metricUnits: MeasurementUnits,
+            metricValues: List<Float>,
+            imperialUnits: MeasurementUnits,
+            imperialValues: List<Float>
+        ): SpecificationData {
+            val themedIconId = ThemedIconId(iconDayId, iconNightId)
+            val assets = Assets(themedIconId, descriptionId)
+            return SpecificationData(assets, metricUnits, metricValues, imperialUnits, imperialValues)
+        }
     }
 
     fun getIconId(type: SpecificationType, nightMode: Boolean): Int {
@@ -55,13 +61,12 @@ abstract class VehicleSpecs {
     }
 
     open fun checkValue(
-        ctx: Context,
+        context: Context,
         type: SpecificationType,
         useMetricSystem: Boolean,
-        value: Float,
-        error: StringBuilder
-    ): Boolean {
-        return true
+        value: Float
+    ): String {
+        return ""
     }
 
     fun readSavedValue(preference: VehicleSpecificationPreference): Float {
@@ -78,24 +83,12 @@ abstract class VehicleSpecs {
     fun prepareValueToSave(preference: VehicleSpecificationPreference, v: Float): Float {
         var value = v
         if (value != 0.0f) {
-            // Convert value to default units system
+            // Convert value to default units system (meters for length, tons for weight)
             val units = getMeasurementUnits(preference.specificationType, preference.isUseMetricSystem)
             value = units.toBase(value)
 
             value -= ROUTING_LIMIT_OFFSET
         }
         return value
-    }
-
-    companion object {
-        /**
-         * Offset added to or subtracted from vehicle parameter values during storage.
-         * This is necessary because routing.xml uses the ">=" operator for constraint checks
-         * (e.g., maxweight). If a vehicle's weight is exactly 3.5t and the road limit is 3.5t,
-         * the road will be blocked. Subtracting this offset makes the stored weight (e.g., 3.4999t),
-         * allowing it to pass the check.
-         * @see <a href="https://github.com/osmandapp/OsmAnd/issues/4736">Issue #4736</a>
-         */
-        private const val ROUTING_LIMIT_OFFSET = 0.0001f
     }
 }
