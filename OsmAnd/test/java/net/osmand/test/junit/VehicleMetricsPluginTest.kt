@@ -6,7 +6,7 @@ import net.osmand.shared.settings.enums.MetricsConstants
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class VehicleSpecsPluginUnitTest {
+class VehicleMetricsPluginUnitTest {
 
 	data class TestCase(
 		val metersPerLiter: Float,

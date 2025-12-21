@@ -23,10 +23,10 @@ public interface MeasurementUnits {
 
 	float getConversionCoefficient();
 
-	boolean isMetric();
+	boolean isMetricSystem();
 
-	default boolean isImperial() {
-		return !isMetric();
+	default boolean isImperialSystem() {
+		return !isMetricSystem();
 	}
 
 	@NonNull

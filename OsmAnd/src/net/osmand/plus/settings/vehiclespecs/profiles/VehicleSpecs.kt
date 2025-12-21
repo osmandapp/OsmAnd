@@ -83,7 +83,7 @@ abstract class VehicleSpecs(
     fun prepareValueToSave(preference: VehicleSpecificationPreference, v: Float): Float {
         var value = v
         if (value != 0.0f) {
-            // Convert value to default units system (meters for length, tons for weight)
+            // Convert value to default units system (meters for length, tones for weight)
             val units = getMeasurementUnits(preference.specificationType, preference.isUseMetricSystem)
             value = units.toBase(value)
 

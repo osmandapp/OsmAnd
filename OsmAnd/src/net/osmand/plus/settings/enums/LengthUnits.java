@@ -30,14 +30,14 @@ public enum LengthUnits implements MeasurementUnits {
 
 	@StringRes
 	@Override
-	public int getSymbolResId() {
-		return symbolResId;
+	public int getNameResId() {
+		return nameResId;
 	}
 
 	@StringRes
 	@Override
-	public int getNameResId() {
-		return nameResId;
+	public int getSymbolResId() {
+		return symbolResId;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public enum LengthUnits implements MeasurementUnits {
 	}
 
 	@Override
-	public boolean isMetric() {
+	public boolean isMetricSystem() {
 		return CollectionUtils.equalsToAny(this, METERS, CENTIMETERS);
 	}
 }

@@ -14,7 +14,7 @@ object VehicleSpecsFactory {
     private const val DERIVED_PROFILE_MOTORCYCLE = "Motorcycle"
 
     @JvmStatic
-    fun createSpecs(profile: GeneralRouterProfile?, derivedProfile: String?): VehicleSpecs? {
+    fun createSpecifications(profile: GeneralRouterProfile?, derivedProfile: String?): VehicleSpecs? {
         return when (profile) {
             GeneralRouterProfile.BOAT -> BoatSpecs()
             GeneralRouterProfile.BICYCLE -> BicycleSpecs()

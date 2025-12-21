@@ -157,7 +157,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		}
 
 		String parameterId = parameter.getId();
-		VehicleSpecs vehicle = VehicleSpecsFactory.createSpecs(profile, derivedProfile);
+		VehicleSpecs vehicle = VehicleSpecsFactory.createSpecifications(profile, derivedProfile);
 		SpecificationType type = SpecificationType.getByKey(parameterId);
 		if (vehicle == null || type == null) {
 			return;

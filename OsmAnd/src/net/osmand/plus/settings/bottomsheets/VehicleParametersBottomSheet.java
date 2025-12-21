@@ -17,7 +17,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.MeasurementUnits;
-import net.osmand.plus.settings.vehiclespecs.SpecificationData;
 import net.osmand.plus.settings.vehiclespecs.SpecificationType;
 import net.osmand.plus.settings.vehiclespecs.profiles.VehicleSpecs;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
@@ -108,7 +107,7 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 		// Add predefined values
 		MeasurementUnits units = vehicleSpecs.getMeasurementUnits(type, useMetricSystem);
 		String symbol = getString(units.getSymbolResId());
-		for (Float value : vehicleSpecs.getPredefinedValues(type, units.isMetric())) {
+		for (Float value : vehicleSpecs.getPredefinedValues(type, units.isMetricSystem())) {
 			String pattern = getString(R.string.ltr_or_rtl_combine_via_space);
 			String valueStr = units.formatValue(value);
 			String title = String.format(pattern, valueStr, symbol);

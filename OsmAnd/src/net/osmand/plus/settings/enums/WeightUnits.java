@@ -45,7 +45,7 @@ public enum WeightUnits implements MeasurementUnits {
 	}
 
 	@Override
-	public boolean isMetric() {
+	public boolean isMetricSystem() {
 		return CollectionUtils.equalsToAny(this, TONES, KILOGRAMS);
 	}
 
