@@ -5925,4 +5925,5 @@
     <string name="routing_attr_pt_limit_name">Die N besten Routen anzeigen</string>
     <string name="routing_attr_pt_limit_description">Die Anzahl der anzuzeigenden besten Routen angeben</string>
     <string name="deleted_maps_warning">Sie sind dabei, %d Element(e) zu löschen.\nFortfahren?</string>
+    <string name="enable_3d_objects">3D-Gebäude</string>
 </resources>
