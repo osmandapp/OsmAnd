@@ -5929,4 +5929,8 @@
     <string name="copy_link">Копіювати посилання</string>
     <string name="routing_attr_pt_limit_name">Відобразити N найкращих маршрутів</string>
     <string name="routing_attr_pt_limit_description">Вкажіть кількість найкращих маршрутів для відображення</string>
+    <string name="vehicle_metrics_chart_category">Показники транспортного засобу</string>
+    <string name="delete_folder_description">Видалити папку \"%1$s\"?</string>
+    <string name="show_spherical_map">Глобус</string>
+    <string name="lang_mi">Маорі</string>
 </resources>

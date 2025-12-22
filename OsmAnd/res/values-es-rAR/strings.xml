@@ -5776,4 +5776,8 @@
     <string name="shared_string_centimeters">centímetros</string>
     <string name="bicycle_width_limit_description">Indicá el ancho de la bicicleta para evitar ciclovías/bicisendas angostas.</string>
     <string name="copy_link">Copiar enlace</string>
+    <string name="vehicle_metrics_chart_category">Estadísticas del vehículo</string>
+    <string name="delete_folder_description">¿Borrar la carpeta «%1$s»?</string>
+    <string name="show_spherical_map">Vista esférica</string>
+    <string name="enable_3d_objects">Edificios en 3D</string>
 </resources>

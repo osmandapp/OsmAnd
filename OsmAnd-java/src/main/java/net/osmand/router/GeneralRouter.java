@@ -192,8 +192,9 @@ public class GeneralRouter implements VehicleRouter {
 		if (shortestRoute) {
 			if (profile == GeneralRouterProfile.BICYCLE) {
 				maxSpeed = Math.min(BICYCLE_SHORTEST_DEFAULT_SPEED, maxSpeed);
-			} else {
+			} else if (profile == GeneralRouterProfile.CAR) {
 				maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
+				heightObstacles = true;
 			}
 		}
 		initCaches();
@@ -435,14 +436,14 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	@Override
-	public float defineObstacle(RouteDataObject road, int point, boolean dir) {
+	public float defineObstacle(RouteDataObject road, int point, boolean isBackwardDir) {
 		int[] pointTypes = road.getPointTypes(point);
 		if(pointTypes != null) {
-			Float obst = getCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, dir);
+			Float obst = getCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, isBackwardDir);
 			if (obst == null) {
-				int[] filteredPointTypes = filterDirectionTags(road, pointTypes, dir);
+				int[] filteredPointTypes = filterDirectionTags(road, pointTypes, isBackwardDir);
 				obst = getObjContext(RouteDataObjectAttribute.OBSTACLES).evaluateFloat(road.region, filteredPointTypes, 0);
-				putCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, obst, dir);
+				putCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, obst, isBackwardDir);
 			}
 			return obst;
 		}
@@ -450,22 +451,22 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	@Override
-	public float defineRoutingObstacle(RouteDataObject road, int point, boolean dir) {
+	public float defineRoutingObstacle(RouteDataObject road, int point, boolean isBackwardDir) {
 		int[] pointTypes = road.getPointTypes(point);
 		if(pointTypes != null) {
-			Float obst = getCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, dir);
+			Float obst = getCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, isBackwardDir);
 			if (obst == null) {
-				int[] filteredPointTypes = filterDirectionTags(road, pointTypes, dir);
+				int[] filteredPointTypes = filterDirectionTags(road, pointTypes, isBackwardDir);
 				obst = getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES).evaluateFloat(road.region, filteredPointTypes, 0);
-				putCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, obst, dir);
+				putCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, obst, isBackwardDir);
 			}
 			return obst;
 		}
 		return 0;
 	}
 
-	private int[] filterDirectionTags(RouteDataObject road, int[] pointTypes, boolean forwardDir) {
-		int wayDirection = forwardDir ? 1 : -1;
+	private int[] filterDirectionTags(RouteDataObject road, int[] pointTypes, boolean isBackwardDir) {
+		int wayDirection = isBackwardDir ? 1 : -1;
 		int direction = 0;
 		int tdirection = 0;
 		int hdirection = 0;

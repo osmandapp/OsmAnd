@@ -440,7 +440,7 @@
     <string name="poi_recycling_computers">Υπολογιστές</string>
     <string name="poi_recycling_tyres">Ελαστικά οχημάτων</string>
     <string name="poi_recycling_tv_monitor">Τηλεοράσεις, οθόνες</string>
-    <string name="poi_recycling_tetrapak">Τετραπακ</string>
+    <string name="poi_recycling_tetrapak">Τετραπάκ</string>
     <string name="poi_recycling_rubble">Μπάζα</string>
     <string name="poi_recycling_cds">CDs</string>
     <string name="poi_recycling_waste_oil">Χρησιμοποιημένο λάδι</string>
@@ -448,7 +448,7 @@
     <string name="poi_recycling_cork">Πώμα</string>
     <string name="poi_recycling_printer_cartridges">Φυσίγγια εκτυπωτή</string>
     <string name="poi_recycling_sheet_metal">Φύλλο μετάλλου</string>
-    <string name="poi_recycling_foil">Φύλλο</string>
+    <string name="poi_recycling_foil">Αλουμινόχαρτο</string>
     <string name="poi_aerialway_t_bar">Αναβατήρες τύπου Τ</string>
     <string name="poi_aerialway_j_bar">Αναβατήρες τύπου J</string>
     <string name="poi_aerialway_platter">Αναβατήρες πιάτου</string>
@@ -460,10 +460,10 @@
     <string name="poi_boatyard">Ναυπηγείο</string>
     <string name="poi_lock_gate">Θύρα δεξαμενής</string>
     <string name="poi_recycling_paint">Χρώμα</string>
-    <string name="poi_recycling_styrofoam">Αφρός πολυστυρενίου</string>
+    <string name="poi_recycling_styrofoam">Φελιζόλ</string>
     <string name="poi_recycling_drugs">Φάρμακα</string>
     <string name="poi_recycling_compost">Κοπρόχωμα</string>
-    <string name="poi_recycling_hardcore">Χαλίκια</string>
+    <string name="poi_recycling_hardcore">Μπάζα οικοδομών</string>
     <string name="poi_recycling_christmas_trees">Χριστουγεννιάτικα δένδρα</string>
     <string name="poi_recycling_light_bulbs">Ηλεκτρικοί λαμπτήρες</string>
     <string name="poi_recycling_chipboard">Μοριοσανίδα</string>
@@ -1035,7 +1035,7 @@
     <string name="poi_mooring">Πρόσδεση</string>
     <string name="poi_lock_basin">Λεκάνη θυροφράγματος</string>
     <string name="poi_notice">Σήμανση προειδοποίησης</string>
-    <string name="poi_pile">Πάσαλος</string>
+    <string name="poi_pile">Σωρός</string>
     <string name="poi_seamark_dyke">Θαλάσσιο ανάχωμα</string>
     <string name="poi_radar_transponder">Αναμεταδότης ραντάρ, θαλάσσια σήμανση</string>
     <string name="poi_radio_station">Ραδιοσταθμός, θαλάσσια σήμανση</string>
@@ -3532,7 +3532,7 @@
     <string name="poi_access_hgv">Πρόσβαση σε όχημα μεταφοράς βαρέων φορτίων</string>
     <string name="poi_access_goods">Πρόσβαση σε οχήματα ελαφρών αγαθών</string>
     <string name="poi_access_disabled">Πρόσβαση σε ΑΜΕΑ</string>
-    <string name="poi_toll_gantry">Καμπίνα διοδίων</string>
+    <string name="poi_toll_gantry">Γερανογέφυρα διοδίων</string>
     <string name="poi_childcare">Φροντίδα παιδιών</string>
     <string name="poi_denotation_natural_monument">Φυσικό μνημείο</string>
     <string name="poi_denotation_landmark">Διακριτό σημείο</string>
@@ -3541,7 +3541,7 @@
     <string name="poi_park_ride_bus">Λεωφορείο</string>
     <string name="poi_park_ride_metro">Μετρό</string>
     <string name="poi_park_ride_tram">Τραμ</string>
-    <string name="poi_park_ride_ferry">Πλοίο</string>
+    <string name="poi_park_ride_ferry">Πορθμείο</string>
     <string name="poi_atm_yes">ATM: Ναι</string>
     <string name="poi_cash_withdrawal_bank_card">Ανάληψη μετρητών</string>
     <string name="poi_bath_type">Τύπος</string>
@@ -3658,13 +3658,13 @@
     <string name="poi_changing_table_no">Όχι;Αλλαξιέρα: όχι</string>
     <string name="poi_changing_table_yes">Ναι;Αλλαξιέρα: ναι</string>
     <string name="poi_defibrillator_location">Τοποθεσία</string>
-    <string name="poi_hazard_additional_contamination">Κίνδυνος: μόλυνση</string>
-    <string name="poi_hazard_additional_minefield">Κίνδυνος: ναρκοπέδιο</string>
-    <string name="poi_hazard_additional_avalanche">Κίνδυνος: χιονοστιβάδα</string>
-    <string name="poi_hazard_additional_flood">Κίνδυνος; πλημμύρα</string>
-    <string name="poi_hazard_additional_nuclear">Κίνδυνος: πυρηνικά</string>
-    <string name="poi_hazard_additional_falling_rocks">Κίνδυνος: πτώση βράχων</string>
-    <string name="poi_hazard_additional_erosion">Κίνδυνος: διάβρωση</string>
+    <string name="poi_hazard_additional_contamination">Μόλυνση</string>
+    <string name="poi_hazard_additional_minefield">Ναρκοπέδιο</string>
+    <string name="poi_hazard_additional_avalanche">Χιονοστιβάδα</string>
+    <string name="poi_hazard_additional_flood">Πλημμύρα</string>
+    <string name="poi_hazard_additional_nuclear">Πυρηνικά</string>
+    <string name="poi_hazard_additional_falling_rocks">Πτώση βράχων</string>
+    <string name="poi_hazard_additional_erosion">Διάβρωση</string>
     <string name="poi_rescue_box">Κουτί διάσωσης</string>
     <string name="poi_change_delete">Διαγραμμένο αντικείμενο</string>
     <string name="poi_park_ride_hov">Όχημα υψηλής πληρότητας</string>
@@ -4544,4 +4544,14 @@
     <string name="poi_recycling_textiles">Υφάσματα</string>
     <string name="poi_waste_dog_excrement">Περιττώματα σκύλου</string>
     <string name="poi_route_activity_type_skiing">Διαδρομές σκι</string>
+    <string name="poi_recycling_pet_drink_bottles">Φιάλες αναψυκτικών PET</string>
+    <string name="poi_recycling_pmd">PMD</string>
+    <string name="poi_recycling_polystyrene_foam">Αφρός πολυστυρενίου</string>
+    <string name="poi_atv_yes">Γουρούνα: ναι</string>
+    <string name="poi_atv_no">Γουρούνα: όχι</string>
+    <string name="poi_sled_yes">Έλκηθρο: ναι</string>
+    <string name="poi_sled_no">Έλκηθρο: όχι</string>
+    <string name="poi_dog_sled_yes">Έλκηθρο με σκύλους: ναι</string>
+    <string name="poi_dog_sled_no">Έλκηθρο με σκύλους: όχι</string>
+    <string name="poi_route_activity_type_golfing">Γκολφ</string>
 </resources>

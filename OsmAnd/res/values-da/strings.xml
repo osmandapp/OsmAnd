@@ -4734,7 +4734,7 @@
     <string name="shared_string_yards">yards</string>
     <string name="approximate_bearing_descr">Udled pejlingen fra den navigationsrute, der følges.</string>
     <string name="shared_string_inches">tommer</string>
-    <string name="inch">in</string>
+    <string name="inch">tom</string>
     <string name="approximate_bearing">Omtrentlig pejling</string>
     <string name="cloud_version_confirm_delete">Slet \"%1$s\" fra OsmAnd Cloud\?</string>
     <string name="shared_string_delete_file">Slet fil</string>
@@ -5957,4 +5957,5 @@
     <string name="delete_folder_description">Slet \"%1$s\" mappe?</string>
     <string name="show_spherical_map">Klodevisning</string>
     <string name="enable_3d_objects">3D-bygninger</string>
+    <string name="lang_mi">Maori</string>
 </resources>

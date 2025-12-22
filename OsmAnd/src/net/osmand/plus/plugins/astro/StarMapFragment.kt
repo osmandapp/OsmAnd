@@ -91,7 +91,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
 	}
 
-	// --- Helpers ---
 	private lateinit var arModeHelper: StarMapARModeHelper
 	private lateinit var cameraHelper: StarMapCameraHelper
 
@@ -128,44 +127,25 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		sheetCoords = view.findViewById(R.id.sheet_coords)
 		sheetDetails = view.findViewById(R.id.sheet_details)
 
-		// Init UI references
 		arModeButton = view.findViewById(R.id.ar_mode_button)
 		cameraButton = view.findViewById(R.id.camera_button)
 		transparencySlider = view.findViewById(R.id.transparency_slider)
 		sliderContainer = view.findViewById(R.id.slider_container)
 		resetFovButton = view.findViewById(R.id.reset_fov_button)
 
-		// Initialize Helpers
 		arModeHelper = StarMapARModeHelper(requireContext(), starView) { enabled ->
 			updateArModeUI(enabled)
-			if (!enabled) {
-				manualAzimuth = true // Stop auto-rotating back immediately
-			}
+			if (!enabled) manualAzimuth = true
 		}
 
-		cameraHelper = StarMapCameraHelper(
-			this,
-			starView,
-			view.findViewById(R.id.camera_view)
-		) { enabled ->
+		cameraHelper = StarMapCameraHelper(this, starView, view.findViewById(R.id.camera_view)) { enabled ->
 			updateCameraUI(enabled)
-			if (enabled && !arModeHelper.isArModeEnabled) {
-				arModeHelper.toggleArMode(true)
-			}
+			if (enabled && !arModeHelper.isArModeEnabled) arModeHelper.toggleArMode(true)
 		}
 
-		// Set Click Listeners for Helper Actions
-		arModeButton.setOnClickListener {
-			arModeHelper.toggleArMode()
-		}
-
-		cameraButton.setOnClickListener {
-			cameraHelper.toggleCameraOverlay()
-		}
-
-		resetFovButton.setOnClickListener {
-			cameraHelper.resetFov()
-		}
+		arModeButton.setOnClickListener { arModeHelper.toggleArMode() }
+		cameraButton.setOnClickListener { cameraHelper.toggleCameraOverlay() }
+		resetFovButton.setOnClickListener { cameraHelper.resetFov() }
 
 		transparencySlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 			override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -175,10 +155,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 		})
 
-		// Initial UI State
 		updateArModeUI(arModeHelper.isArModeEnabled)
 		updateCameraUI(cameraHelper.isCameraOverlayEnabled)
-
 
 		ViewCompat.setOnApplyWindowInsetsListener(bottomSheet) { v, windowInsets ->
 			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -213,27 +191,18 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starChartState = StarChartState(app)
 
 		view.findViewById<AppCompatImageView>(R.id.chart_settings_button).apply {
-			setOnClickListener {
-				StarChartView.showFilterDialog(context, starChartViewModel) { updateStarChart() }
-			}
+			setOnClickListener { StarChartView.showFilterDialog(context, starChartViewModel) { updateStarChart() } }
 		}
 		view.findViewById<AppCompatImageView>(R.id.switch_chart_button).apply {
 			setOnClickListener { starChartState.changeToNextState(); updateStarChart() }
 		}
 		view.findViewById<ImageButton>(R.id.star_map_button).apply {
-			setOnClickListener {
-				updateStarMapVisibility(!starView.isVisible)
-				saveCommonSettings()
-			}
+			setOnClickListener { updateStarMapVisibility(!starView.isVisible); saveCommonSettings() }
 		}
 		view.findViewById<ImageButton>(R.id.star_chart_button).apply {
 			setOnClickListener {
-				if (starChartsView.isVisible) {
-					updateStarChartVisibility(false)
-				} else {
-					updateStarChartVisibility(true)
-					updateStarChart()
-				}
+				if (starChartsView.isVisible) updateStarChartVisibility(false)
+				else { updateStarChartVisibility(true); updateStarChart() }
 				saveCommonSettings()
 			}
 		}
@@ -242,12 +211,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 
 		resetTimeButton.setOnClickListener {
-			starMapViewModel.resetTime()
-			starChartViewModel.resetTime()
+			starMapViewModel.resetTime(); starChartViewModel.resetTime()
 			resetTimeButton.visibility = View.GONE
 		}
 
-		// Apply initial settings to View
 		swSettings.getCommonConfig().let { config ->
 			updateStarMapVisibility(config.showStarMap)
 			updateStarChartVisibility(config.showStarChart)
@@ -257,6 +224,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showEquatorialGrid = config.showEquatorialGrid
 			starView.showEclipticLine = config.showEclipticLine
 			starView.showConstellations = config.showConstellations
+			starView.showStars = config.showStars
+			starView.showGalaxies = config.showGalaxies
+			starView.showBlackHoles = config.showBlackHoles
+			starView.showSun = config.showSun
+			starView.showMoon = config.showMoon
+			starView.showPlanets = config.showPlanets
 		}
 		starView.setConstellations(AstroDataProvider.getConstellations())
 
@@ -268,11 +241,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun updateArModeUI(enabled: Boolean) {
-		if (enabled) {
-			arModeButton.setColorFilter(Color.BLUE)
-		} else {
-			arModeButton.setColorFilter("#5f6e7c".toColorInt())
-		}
+		if (enabled) arModeButton.setColorFilter(Color.BLUE)
+		else arModeButton.setColorFilter("#5f6e7c".toColorInt())
 	}
 
 	private fun updateCameraUI(enabled: Boolean) {
@@ -299,10 +269,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
 		app.osmandMap.mapView.addMapLocationListener(this)
-
-		arModeHelper.onResume()
-		cameraHelper.onResume()
-
+		arModeHelper.onResume(); cameraHelper.onResume()
 		val mapActivity = requireMapActivity()
 		mapActivity.disableDrawer()
 		updateWidgetsVisibility(mapActivity, View.GONE)
@@ -314,28 +281,21 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
 		app.osmandMap.mapView.removeMapLocationListener(this)
-
-		arModeHelper.onPause()
-		cameraHelper.onPause()
-
+		arModeHelper.onPause(); cameraHelper.onPause()
 		val mapActivity = requireMapActivity()
 		mapActivity.enableDrawer()
 		updateWidgetsVisibility(mapActivity, View.VISIBLE)
 		mapActivity.refreshMap()
 	}
 
-	// ... [Existing Compass/Location methods are unchanged] ...
 	override fun updateCompassValue(value: Float) {
-		// If AR mode is ON, ignore standard compass updates
 		if (arModeHelper.isArModeEnabled) return
-
 		val lastResetRotationToNorth = app.mapViewTrackingUtilities.lastResetRotationToNorth
 		if (this.lastResetRotationToNorth < lastResetRotationToNorth) {
 			this.lastResetRotationToNorth = lastResetRotationToNorth
 			manualAzimuth = false
 		}
 		if (manualAzimuth) return
-
 		val rotateMode = settings.ROTATE_MAP.get()
 		if (rotateMode == OsmandSettings.ROTATE_MAP_COMPASS) {
 			starView.setAzimuth(value.toDouble())
@@ -346,10 +306,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	override fun updateLocation(location: Location?) {
 		if (location == null) return
-
-		// Update Geomagnetic Field for Declination in Helper
 		arModeHelper.updateGeomagneticField(location)
-
 		if (app.mapViewTrackingUtilities.isMapLinkedToLocation) {
 			app.runInUIThread {
 				if (!manualAzimuth && !arModeHelper.isArModeEnabled) {
@@ -359,8 +316,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 						}
 					}
 				}
-				updateStarMap()
-				updateStarChart()
+				updateStarMap(); updateStarChart()
 			}
 		} else if (!manualAzimuth && !arModeHelper.isArModeEnabled) {
 			app.runInUIThread {
@@ -388,7 +344,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starView.visibility = if (visible) View.VISIBLE else View.GONE
 		val starMapControls = view?.findViewById<View>(R.id.star_map_controls_container)
 		val mapControls = view?.findViewById<View>(R.id.map_controls_container)
-
 		starMapControls?.visibility = if (visible) View.VISIBLE else View.GONE
 		mapControls?.visibility = if (!visible) View.VISIBLE else View.GONE
 	}
@@ -402,9 +357,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private fun updateMapControlsPadding() {
 		val starMapControls = view?.findViewById<View>(R.id.star_map_controls_container)
 		val mapControls = view?.findViewById<View>(R.id.map_controls_container)
-
 		val bottomPadding = if (starChartsView.isVisible) 0 else systemBottomInset
-
 		starMapControls?.updatePadding(bottom = bottomPadding)
 		mapControls?.updatePadding(bottom = bottomPadding)
 	}
@@ -425,37 +378,22 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private fun setupToolBar(view: View) {
 		val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
 		toolbar.setTitleTextColor(app.getColor(ColorUtilities.getPrimaryTextColorId(nightMode)))
-		toolbar.setNavigationIcon(getIcon(R.drawable.ic_arrow_back,
-			ColorUtilities.getPrimaryIconColorId(nightMode)))
+		toolbar.setNavigationIcon(getIcon(R.drawable.ic_arrow_back, ColorUtilities.getPrimaryIconColorId(nightMode)))
 		toolbar.setNavigationContentDescription(R.string.shared_string_close)
-		toolbar.setNavigationOnClickListener { _: View? ->
-			requireActivity().onBackPressed()
-		}
+		toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
 		toolbar.setBackgroundColor(app.getColor(if (nightMode) R.color.activity_background_color_dark else R.color.list_background_color_light))
 	}
 
 	private fun setupObservers() {
-		// Observe Time changes
 		starMapViewModel.currentTime.observe(viewLifecycleOwner) { time ->
-			// Pass true for animate if it's a user interaction
 			starView.setDateTime(time, animate = true)
-			// Update Bottom Sheet if something is selected
-			if (selectedObject != null) {
-				showObjectInfo(selectedObject!!)
-			}
+			if (selectedObject != null) showObjectInfo(selectedObject!!)
 		}
-		// Observe Calendar changes to update UI controls
 		starMapViewModel.currentCalendar.observe(viewLifecycleOwner) { calendar ->
 			timeSelectionView.setDateTime(calendar)
 		}
-		starChartViewModel.currentTime.observe(viewLifecycleOwner) { _ ->
-			updateStarChart()
-		}
-
-		// Observe Sky Objects
-		starMapViewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
-			starView.setSkyObjects(objects)
-		}
+		starChartViewModel.currentTime.observe(viewLifecycleOwner) { updateStarChart() }
+		starMapViewModel.skyObjects.observe(viewLifecycleOwner) { objects -> starView.setSkyObjects(objects) }
 		starChartViewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
 			starVisiblityView.setChartObjects(objects)
 			starAltitudeView.setChartObjects(objects)
@@ -469,33 +407,17 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starChartViewModel.updateTime(calendar)
 			resetTimeButton.visibility = View.VISIBLE
 		}
-
 		starView.setOnObjectClickListener { obj ->
 			selectedObject = obj
-			if (obj != null) {
-				showObjectInfo(obj)
-			} else {
-				bottomSheet.visibility = View.GONE
-			}
+			if (obj != null) showObjectInfo(obj) else bottomSheet.visibility = View.GONE
 		}
-
-		starView.onAnimationFinished = {
-			if (selectedObject != null) {
-				showObjectInfo(selectedObject!!)
-			}
-		}
-
+		starView.onAnimationFinished = { if (selectedObject != null) showObjectInfo(selectedObject!!) }
 		starView.onAzimuthManualChangeListener = { azimuth ->
-			if (arModeHelper.isArModeEnabled) {
-				arModeHelper.toggleArMode()
-			}
+			if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode()
 			manualAzimuth = true
 			app.osmandMap.mapView.rotateToAnimate(-azimuth.toFloat())
 		}
-
-		starView.onViewAngleChangeListener = { fov ->
-			cameraHelper.updateCameraZoom(fov)
-		}
+		starView.onViewAngleChangeListener = { fov -> cameraHelper.updateCameraZoom(fov) }
 	}
 
 	private fun updateStarMap(updateAzimuth: Boolean = false) {
@@ -506,10 +428,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun updateStarChart() {
-		// Get current map center
 		val location = app.osmandMap.mapView.currentRotatedTileBox.centerLatLon
-
-		// Update visibility and push data to the active view
 		val chartType = starChartState.getStarChartType()
 		val calendar = starChartViewModel.currentCalendar.value
 		val zoneId: ZoneId
@@ -523,25 +442,17 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		when (chartType) {
 			StarChartType.STAR_VISIBLITY -> {
-				starVisiblityView.visibility = View.VISIBLE
-				starAltitudeView.visibility = View.GONE
-				celestialPathView.visibility = View.GONE
+				starVisiblityView.visibility = View.VISIBLE; starAltitudeView.visibility = View.GONE; celestialPathView.visibility = View.GONE
 				starVisiblityView.updateData(location.latitude, location.longitude, localDate)
 			}
 			StarChartType.STAR_ALTITUDE -> {
-				starVisiblityView.visibility = View.GONE
-				starAltitudeView.visibility = View.VISIBLE
-				celestialPathView.visibility = View.GONE
+				starVisiblityView.visibility = View.GONE; starAltitudeView.visibility = View.VISIBLE; celestialPathView.visibility = View.GONE
 				starAltitudeView.updateData(location.latitude, location.longitude, localDate)
 			}
 			StarChartType.CELESTIAL_PATH -> {
-				starVisiblityView.visibility = View.GONE
-				starAltitudeView.visibility = View.GONE
-				celestialPathView.visibility = View.VISIBLE
+				starVisiblityView.visibility = View.GONE; starAltitudeView.visibility = View.GONE; celestialPathView.visibility = View.VISIBLE
 				celestialPathView.updateData(location.latitude, location.longitude, localDate)
-				starChartViewModel.currentTime.value?.let {
-					celestialPathView.setMoment(it.toZoned(zoneId))
-				}
+				starChartViewModel.currentTime.value?.let { celestialPathView.setMoment(it.toZoned(zoneId)) }
 			}
 		}
 	}
@@ -550,43 +461,22 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val activity = requireMapActivity()
 		val mapLayers = activity.mapLayers
 		val layer = mapLayers.mapControlsLayer
-
 		fun addButtons(container: View, starMap: Boolean): Boolean? {
 			container.findViewById<MapButton?>(R.id.map_zoom_in_button)?.let {
 				mapButtons.add(it)
-				if (starMap) {
-					it.setOnClickListener { starView.zoomIn() }
-					it.setOnLongClickListener(null)
-				}
+				if (starMap) { it.setOnClickListener { starView.zoomIn() }; it.setOnLongClickListener(null) }
 			}
 			container.findViewById<MapButton?>(R.id.map_zoom_out_button)?.let {
 				mapButtons.add(it)
-				if (starMap) {
-					it.setOnClickListener { starView.zoomOut() }
-					it.setOnLongClickListener(null)
-				}
+				if (starMap) { it.setOnClickListener { starView.zoomOut() }; it.setOnLongClickListener(null) }
 			}
-			container.findViewById<MapButton?>(R.id.map_my_location_button)?.let {
-				mapButtons.add(it)
-			}
-			return container.findViewById<View?>(R.id.map_hud_controls)?.let {
-				AndroidUiHelper.updateVisibility(it, true)
-			}
+			container.findViewById<MapButton?>(R.id.map_my_location_button)?.let { mapButtons.add(it) }
+			return container.findViewById<View?>(R.id.map_hud_controls)?.let { AndroidUiHelper.updateVisibility(it, true) }
 		}
-
-		view.findViewById<MapButton?>(R.id.map_compass_button)?.let {
-			layer.addCustomMapButton(it)
-			mapButtons.add(it)
-		}
-		view.findViewById<View>(R.id.star_map_controls_container)?.let { container ->
-			addButtons(container, true)
-		}
-		view.findViewById<View>(R.id.map_controls_container)?.let { container ->
-			addButtons(container, false)
-		}
-
+		view.findViewById<MapButton?>(R.id.map_compass_button)?.let { layer.addCustomMapButton(it); mapButtons.add(it) }
+		view.findViewById<View>(R.id.star_map_controls_container)?.let { addButtons(it, true) }
+		view.findViewById<View>(R.id.map_controls_container)?.let { addButtons(it, false) }
 		layer.addCustomizedDefaultMapButtons(mapButtons)
-
 		val mapInfoLayer = mapLayers.mapInfoLayer
 		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout))
 	}
@@ -596,35 +486,19 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val az = String.format(Locale.getDefault(), "%.1f°", obj.azimuth)
 		val alt = String.format(Locale.getDefault(), "%.1f°", obj.altitude)
 		sheetCoords.text = "${getString(R.string.shared_string_azimuth)}: $az  |  ${getString(R.string.altitude)}: $alt"
-
 		var details = "${getString(R.string.shared_string_magnitude)}: ${obj.magnitude}"
-		if (obj.type != SkyObject.Type.STAR) {
-			details += "\n${getString(R.string.distance)}: %.3f AU".format(obj.distAu)
-		}
-
-		// Rise / Set calculation
+		if (obj.type.isSunSystem()) details += "\n${getString(R.string.distance)}: %.3f AU".format(obj.distAu)
 		val observer = starView.observer
 		val currentTime = starView.currentTime
-
-		val bodyToCheck: Body? = if (obj.type == SkyObject.Type.STAR) {
-			defineStar(Body.Star2, obj.ra, obj.dec, 1000.0)
-			Body.Star2
-		} else {
-			obj.body
-		}
-
+		val bodyToCheck: Body? = if (!obj.type.isSunSystem()) {
+			defineStar(Body.Star2, obj.ra, obj.dec, 1000.0); Body.Star2
+		} else obj.body
 		if (bodyToCheck != null) {
 			val riseTime = searchRiseSet(bodyToCheck, observer, Direction.Rise, currentTime, 1.0)
 			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, currentTime, 1.0)
-
-			if (riseTime != null) {
-				details += "\n${getString(R.string.astro_rise)}: ↑${AstroUtils.formatLocalTime(riseTime)}"
-			}
-			if (setTime != null) {
-				details += "\n${getString(R.string.astro_set)}: ↓${AstroUtils.formatLocalTime(setTime)}"
-			}
+			if (riseTime != null) details += "\n${getString(R.string.astro_rise)}: ↑${AstroUtils.formatLocalTime(riseTime)}"
+			if (setTime != null) details += "\n${getString(R.string.astro_set)}: ↓${AstroUtils.formatLocalTime(setTime)}"
 		}
-
 		sheetDetails.text = details
 		bottomSheet.visibility = View.VISIBLE
 	}
