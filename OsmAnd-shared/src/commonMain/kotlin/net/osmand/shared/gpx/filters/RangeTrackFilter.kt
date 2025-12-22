@@ -42,6 +42,8 @@ open class RangeTrackFilter<T : Comparable<T>>
 	var valueTo: T
 
 	private var organizedByGroups: MutableList<OrganizedTrackGroup>? = null
+	private var firstBoundaryInt: Int = 0
+	private var lastBoundaryInt: Int = 0
 
 	open fun setValueFrom(from: T, updateListeners: Boolean = true) {
 		valueFrom = maxOf(minValue, from)
@@ -69,15 +71,15 @@ open class RangeTrackFilter<T : Comparable<T>>
 
 	fun setValueTo(to: String, updateListeners: Boolean = true) {
 		val baseValue = getComparableValue(
-			trackFilterType.measureUnitType.getBaseValueFromFormatted(
-				to))
+			trackFilterType.measureUnitType.getBaseValueFromFormatted(to)
+		)
 		setValueTo(baseValue, updateListeners)
 	}
 
 	fun setValueFrom(from: String, updateListeners: Boolean = true) {
 		val baseValue = getComparableValue(
-			trackFilterType.measureUnitType.getBaseValueFromFormatted(
-				from)).toString()
+			trackFilterType.measureUnitType.getBaseValueFromFormatted(from)
+		).toString()
 		setValueFrom(getValueFromString(baseValue), updateListeners)
 	}
 
@@ -122,6 +124,10 @@ open class RangeTrackFilter<T : Comparable<T>>
 		} catch (err: ClassCastException) {
 			null
 		}
+	}
+
+	fun setMaxValue(value: String) {
+		setMaxValue(getComparableValue(value))
 	}
 
 	fun setMaxValue(value: T) {
@@ -214,25 +220,29 @@ open class RangeTrackFilter<T : Comparable<T>>
 	}
 
 	override fun initOrganizedByGroups(organizeByType: OrganizeByType) {
-		val stepRange = organizeByType.organizedByStepRange ?: return
+		val stepRange = organizeByRange ?: organizeByType.organizedByStepRange ?: return
 
 		val minVal = getInt(minValue)
 		val maxVal = max(getInt(maxValue), stepRange.second)
-		val s = (maxVal - minVal) / 2
+		val step = organizeByStep ?: ((maxVal - minVal) / 2)
+		if (step != organizeByStep) {
+			organizeByStep = step
+		}
 
 		val totalRange = maxVal - minVal
-		val remainder = totalRange % s
+		val remainder = totalRange % step
 		val smallPart = remainder / 2
 
-		val firstBoundaryInt = minVal + smallPart
-		val numFullIntervals = totalRange / s
-		val lastBoundaryInt = maxVal - (remainder - smallPart)
+		this.firstBoundaryInt = minVal + smallPart
+		this.lastBoundaryInt = maxVal - (remainder - smallPart)
+
+		val numFullIntervals = totalRange / step
 		val mutableGroups = mutableListOf<OrganizedTrackGroup>()
 		mutableGroups.add(OrganizedTrackGroup("< $firstBoundaryInt", organizeByType.iconResId))
 
 		for (i in 0 until numFullIntervals) {
-			val start = firstBoundaryInt + (i * s)
-			val end = start + s
+			val start = firstBoundaryInt + (i * step)
+			val end = start + step
 			mutableGroups.add(OrganizedTrackGroup("$start - $end", organizeByType.iconResId))
 		}
 		mutableGroups.add(OrganizedTrackGroup("> $lastBoundaryInt", organizeByType.iconResId))
@@ -240,7 +250,25 @@ open class RangeTrackFilter<T : Comparable<T>>
 	}
 
 	override fun getOrganizedByGroup(trackItem: TrackItem): OrganizedTrackGroup? {
-		return super.getOrganizedByGroup(trackItem)
+		var group: OrganizedTrackGroup? = null
+		val groups = organizedByGroups ?: return null
+		organizeByStep?.let { step ->
+			if (organizeByStep == 0) return null
+			val value: Comparable<Any> =
+				trackItem.dataItem?.getParameter(getProperty()) ?: return null
+			val valueInt = getInt(getComparableValue(value))
+
+			val index = when {
+				valueInt < firstBoundaryInt -> 0
+				valueInt >= lastBoundaryInt -> groups.lastIndex
+				else -> {
+					val middleIndex = ((valueInt - firstBoundaryInt) / step) + 1
+					middleIndex.coerceAtMost(groups.lastIndex - 1)
+				}
+			}
+			group = groups.getOrNull(index)
+		}
+		return group
 	}
 
 	private fun getInt(value: T): Int {

@@ -5,9 +5,11 @@ import kotlinx.serialization.Transient
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.enums.OrganizeByType
 import net.osmand.shared.gpx.filters.BaseTrackFilter
+import net.osmand.shared.gpx.filters.RangeTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterSerializer
 import net.osmand.shared.gpx.filters.TrackFiltersHelper
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
+import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KCollectionUtils
 
 @Serializable
@@ -35,19 +37,38 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	private var organizeByFilter: BaseTrackFilter? = null
 	private var organizeByType: OrganizeByType? = null
+	private var organizeByStep: Int? = null
+	private var organizeByRange: Pair<Int, Int>? = null
 
-	fun organizeByType(organizeByType: OrganizeByType) {
+	fun organizeByType(organizeByType: OrganizeByType, rangeFilterMaxValue: String?) {
 		this.organizeByType = organizeByType
 		organizeByFilter = TrackFiltersHelper.createFilter(organizeByType.filterType, null)
-		//todo check filter actual min max initialization
-		organizeByFilter?.initFilter()
-		organizeByFilter?.initOrganizedByGroups(organizeByType)
+		organizeByFilter?.let { filter ->
+			filter.initFilter()
+			rangeFilterMaxValue?.let { rangeMaxValue ->
+				if (filter is RangeTrackFilter<*> && !KAlgorithms.isEmpty(rangeMaxValue)) {
+					(filter).setMaxValue(rangeMaxValue)
+				}
+			}
 
+			organizeTracksInternal(filter, organizeByType)
+		}
+	}
+
+	private fun organizeTracksInternal(
+		filter: BaseTrackFilter,
+		organizeByType: OrganizeByType) {
+		filter.initOrganizedByGroups(organizeByType)
+		organizeByStep = filter.organizeByStep
+		organizeByRange = filter.organizeByRange
 		val organizedTrackItems = HashMap<OrganizedTrackGroup, MutableList<TrackItem>>()
 		trackItems?.let { items ->
 			for (trackItem in items) {
-				organizeByFilter?.let { filter ->
-					val group: OrganizedTrackGroup? = filter.getOrganizedByGroup(trackItem)
+				filter.let { filter ->
+					var group: OrganizedTrackGroup? = filter.getOrganizedByGroup(trackItem)
+					if (group == null) {
+						group = filter.getOrganizedByGroup(trackItem)
+					}
 					group?.let {
 						val groupLIst = organizedTrackItems[it]
 						if (groupLIst == null) {
@@ -59,6 +80,23 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 			}
 		}
 		this.organizedTrackItems = organizedTrackItems
+	}
+
+	fun setOrganizeByStep(step: Int) {
+		organizeByType?.let { type ->
+			organizeByFilter?.let { filter ->
+				var stepLocal = step
+				filter.organizeByRange?.let { range ->
+					if (stepLocal > range.second) {
+						stepLocal = range.second
+					} else if (stepLocal < range.first) {
+						stepLocal = range.first
+					}
+				}
+				filter.organizeByStep = stepLocal
+				organizeTracksInternal(filter, type)
+			}
+		}
 	}
 
 	override fun getId(): String {

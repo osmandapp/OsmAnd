@@ -14,6 +14,7 @@ sealed class BaseTrackFilter(
 	@Transient var filterChangedListener: FilterChangedListener? = null) {
 
 	var organizeByStep: Int? = null
+	var organizeByRange: Pair<Int, Int>? = null
 	abstract fun isEnabled(): Boolean
 
 	abstract fun isTrackAccepted(trackItem: TrackItem): Boolean
