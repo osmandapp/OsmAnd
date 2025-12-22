@@ -7,131 +7,163 @@ enum class OrganizeByType(
 	val iconResId: String,
 	val nameResId: String,
 	val filterType: TrackFilterType,
-	val group: OrganizeByGroupType
+	val group: OrganizeByGroupType,
+	val organizedByStepRange: Pair<Int, Int>?
 ) {
 	// General
 	ACTIVITY(
 		"ic_action_activity",
 		"shared_string_activity",
 		TrackFilterType.ACTIVITY,
-		OrganizeByGroupType.GENERAL),
+		OrganizeByGroupType.GENERAL,
+		null),
 	DURATION(
 		"ic_action_time_span_25",
 		"duration",
 		TrackFilterType.DURATION,
-		OrganizeByGroupType.GENERAL),
+		OrganizeByGroupType.GENERAL,
+		Pair(0, 180)),
 	TIME_IN_MOTION(
 		"ic_action_time_in_motion",
 		"moving_time",
 		TrackFilterType.TIME_IN_MOTION,
-		OrganizeByGroupType.GENERAL),
+		OrganizeByGroupType.GENERAL,
+		Pair(0, 180)),
 	LENGTH(
 		"ic_action_length",
 		"shared_string_length",
 		TrackFilterType.LENGTH,
-		OrganizeByGroupType.GENERAL),
+		OrganizeByGroupType.GENERAL,
+		Pair(0, 180)),
 
 	// Date & Time
 	YEAR_OF_CREATION(
 		"ic_action_calendar_month",
 		"year_of_creation",
 		TrackFilterType.DATE_CREATION,
-		OrganizeByGroupType.DATE_TIME),
+		OrganizeByGroupType.DATE_TIME,
+		null),
 	MONTH_AND_YEAR(
 		"ic_action_calendar_month",
 		"month_year_creation",
 		TrackFilterType.DATE_CREATION,
-		OrganizeByGroupType.DATE_TIME),
+		OrganizeByGroupType.DATE_TIME,
+		null),
 
 	// Location
 	NEAREST_CITY(
 		"ic_action_street_name",
 		"nearest_city",
 		TrackFilterType.CITY,
-		OrganizeByGroupType.LOCATION),
-	COUNTRY("ic_world_globe_dark", "country", TrackFilterType.CITY, OrganizeByGroupType.LOCATION),
+		OrganizeByGroupType.LOCATION,
+		null),
+
+	COUNTRY(
+		"ic_world_globe_dark",
+		"country",
+		TrackFilterType.CITY,
+		OrganizeByGroupType.LOCATION,
+		null),
 
 	// Speed
-	MAX_SPEED("ic_action_speed", "max_speed", TrackFilterType.MAX_SPEED, OrganizeByGroupType.SPEED),
+	MAX_SPEED(
+		"ic_action_speed", "max_speed", TrackFilterType.MAX_SPEED, OrganizeByGroupType.SPEED,
+		Pair(0, 180)),
+
 	AVG_SPEED(
 		"ic_action_speed",
 		"avg_speed",
 		TrackFilterType.AVERAGE_SPEED,
-		OrganizeByGroupType.SPEED),
+		OrganizeByGroupType.SPEED,
+		Pair(0, 180)),
 
 	// Altitude and elevation
 	MAX_ALTITUDE(
 		"ic_action_altitude_max",
 		"ic_action_altitude_average",
 		TrackFilterType.MAX_ALTITUDE,
-		OrganizeByGroupType.ALTITUDE_ELEVATION),
+		OrganizeByGroupType.ALTITUDE_ELEVATION,
+		Pair(0, 180)),
 	AVG_ALTITUDE(
 		"ic_action_altitude_average",
 		"shared_string_avg_altitude",
 		TrackFilterType.AVERAGE_ALTITUDE,
-		OrganizeByGroupType.ALTITUDE_ELEVATION),
+		OrganizeByGroupType.ALTITUDE_ELEVATION,
+		Pair(0, 180)),
 	UPHILL(
 		"ic_action_altitude_ascent",
 		"shared_string_uphill",
 		TrackFilterType.UPHILL,
-		OrganizeByGroupType.ALTITUDE_ELEVATION),
+		OrganizeByGroupType.ALTITUDE_ELEVATION,
+		Pair(0, 180)),
 	DOWNHILL(
 		"ic_action_altitude_descent",
 		"shared_string_downhill",
 		TrackFilterType.DOWNHILL,
-		OrganizeByGroupType.ALTITUDE_ELEVATION),
+		OrganizeByGroupType.ALTITUDE_ELEVATION,
+		Pair(0, 180)),
 
 	// Sensors
 	SENSOR_SPEED_MAX(
 		"ic_action_sensor_speed_outlined",
 		"max_sensor_speed",
 		TrackFilterType.MAX_SENSOR_SPEED,
-		OrganizeByGroupType.SENSORS),
+		OrganizeByGroupType.SENSORS,
+		Pair(0, 180)),
 	SENSOR_SPEED_AVG(
 		"ic_action_sensor_speed_outlined",
 		"avg_sensor_speed",
 		TrackFilterType.AVERAGE_SENSOR_SPEED,
-		OrganizeByGroupType.SENSORS),
+		OrganizeByGroupType.SENSORS,
+		Pair(0, 180)),
 	HEART_RATE_MAX(
 		"ic_action_sensor_heart_rate_outlined",
 		"max_sensor_heartrate",
 		TrackFilterType.MAX_SENSOR_HEART_RATE,
-		OrganizeByGroupType.SENSORS),
+		OrganizeByGroupType.SENSORS,
+		Pair(0, 180)),
 	HEART_RATE_AVG(
 		"ic_action_sensor_heart_rate_outlined",
 		"avg_sensor_heartrate",
 		TrackFilterType.AVERAGE_SENSOR_HEART_RATE,
-		OrganizeByGroupType.SENSORS),
+		OrganizeByGroupType.SENSORS,
+		Pair(0, 180)),
 	CADENCE_MAX(
 		"ic_action_sensor_cadence_outlined",
 		"max_sensor_cadence",
 		TrackFilterType.MAX_SENSOR_CADENCE,
-		OrganizeByGroupType.SENSORS),
+		OrganizeByGroupType.SENSORS,
+		Pair(0, 180)),
 	CADENCE_AVG(
 		"ic_action_sensor_cadence_outlined",
 		"avg_sensor_cadence",
 		TrackFilterType.AVERAGE_SENSOR_CADENCE,
-		OrganizeByGroupType.SENSORS),
+		OrganizeByGroupType.SENSORS,
+		Pair(0, 180)),
 	POWER_MAX(
 		"ic_action_sensor_bicycle_power_outlined",
 		"max_sensor_bycicle_power",
 		TrackFilterType.MAX_SENSOR_BICYCLE_POWER,
-		OrganizeByGroupType.SENSORS),
+		OrganizeByGroupType.SENSORS,
+		Pair(0, 180)),
 	POWER_AVG(
 		"ic_action_sensor_bicycle_power_outlined",
 		"avg_sensor_bycicle_power",
 		TrackFilterType.AVERAGE_SENSOR_BICYCLE_POWER,
-		OrganizeByGroupType.SENSORS),
+		OrganizeByGroupType.SENSORS,
+		Pair(0, 180)),
 	TEMP_MAX(
 		"ic_action_sensor_temperature_outlined",
 		"max_sensor_temperature",
 		TrackFilterType.MAX_SENSOR_TEMPERATURE,
-		OrganizeByGroupType.SENSORS),
+		OrganizeByGroupType.SENSORS,
+		Pair(0, 180)),
 	TEMP_AVG(
 		"ic_action_sensor_temperature_outlined",
 		"avg_sensor_temperature",
 		TrackFilterType.AVERAGE_SENSOR_TEMPERATURE,
-		OrganizeByGroupType.SENSORS);
+		OrganizeByGroupType.SENSORS,
+		Pair(0, 180));
 
 	fun getName(): String {
 		return Localization.getString(nameResId)

@@ -4,6 +4,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import net.osmand.shared.gpx.TrackItem
+import net.osmand.shared.gpx.data.OrganizedTrackGroup
+import net.osmand.shared.gpx.enums.OrganizeByType
 
 @Serializable
 sealed class BaseTrackFilter(
@@ -11,6 +13,7 @@ sealed class BaseTrackFilter(
 	@SerialName("filterType") val trackFilterType: TrackFilterType,
 	@Transient var filterChangedListener: FilterChangedListener? = null) {
 
+	var organizeByStep: Int? = null
 	abstract fun isEnabled(): Boolean
 
 	abstract fun isTrackAccepted(trackItem: TrackItem): Boolean
@@ -35,4 +38,9 @@ sealed class BaseTrackFilter(
 		return result
 	}
 
+	open fun initOrganizedByGroups(organizeByType: OrganizeByType) {}
+
+	open fun getOrganizedByGroup(trackItem: TrackItem): OrganizedTrackGroup? {
+		return null
+	}
 }

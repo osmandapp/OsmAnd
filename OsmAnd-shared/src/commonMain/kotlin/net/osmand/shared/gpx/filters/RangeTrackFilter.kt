@@ -3,8 +3,11 @@ package net.osmand.shared.gpx.filters
 import kotlinx.serialization.Serializable
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.TrackItem
+import net.osmand.shared.gpx.data.OrganizedTrackGroup
+import net.osmand.shared.gpx.enums.OrganizeByType
 import kotlin.math.ceil
 import kotlin.math.floor
+import kotlin.math.max
 
 @Serializable(with = RangeTrackFilterSerializer::class)
 open class RangeTrackFilter<T : Comparable<T>>
@@ -37,6 +40,8 @@ open class RangeTrackFilter<T : Comparable<T>>
 
 	@Serializable
 	var valueTo: T
+
+	private var organizedByGroups: MutableList<OrganizedTrackGroup>? = null
 
 	open fun setValueFrom(from: T, updateListeners: Boolean = true) {
 		valueFrom = maxOf(minValue, from)
@@ -206,5 +211,42 @@ open class RangeTrackFilter<T : Comparable<T>>
 
 	override fun isValid(): Boolean {
 		return maxValue > minValue
+	}
+
+	override fun initOrganizedByGroups(organizeByType: OrganizeByType) {
+		val stepRange = organizeByType.organizedByStepRange ?: return
+
+		val minVal = getInt(minValue)
+		val maxVal = max(getInt(maxValue), stepRange.second)
+		val s = (maxVal - minVal) / 2
+
+		val totalRange = maxVal - minVal
+		val remainder = totalRange % s
+		val smallPart = remainder / 2
+
+		val firstBoundaryInt = minVal + smallPart
+		val numFullIntervals = totalRange / s
+		val lastBoundaryInt = maxVal - (remainder - smallPart)
+		val mutableGroups = mutableListOf<OrganizedTrackGroup>()
+		mutableGroups.add(OrganizedTrackGroup("< $firstBoundaryInt", organizeByType.iconResId))
+
+		for (i in 0 until numFullIntervals) {
+			val start = firstBoundaryInt + (i * s)
+			val end = start + s
+			mutableGroups.add(OrganizedTrackGroup("$start - $end", organizeByType.iconResId))
+		}
+		mutableGroups.add(OrganizedTrackGroup("> $lastBoundaryInt", organizeByType.iconResId))
+		this.organizedByGroups = mutableGroups
+	}
+
+	override fun getOrganizedByGroup(trackItem: TrackItem): OrganizedTrackGroup? {
+		return super.getOrganizedByGroup(trackItem)
+	}
+
+	private fun getInt(value: T): Int {
+		return when (value) {
+			is Number -> value.toInt()
+			else -> value.toString().toDouble().toInt()
+		}
 	}
 }

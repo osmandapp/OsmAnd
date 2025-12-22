@@ -10,6 +10,7 @@ import net.osmand.shared.api.KStateChangedListener
 import net.osmand.shared.api.SettingsAPI
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.data.SmartFolder
+import net.osmand.shared.gpx.enums.OrganizeByType
 import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.filters.FolderTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterList
@@ -49,7 +50,9 @@ object SmartFolderHelper {
 
 	init {
 		osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "", true, true)
-		osmAndSettings.addStringPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
+		osmAndSettings.addStringPreferenceListener(
+			TRACK_FILTERS_SETTINGS_PREF,
+			settingsChangedListener)
 		readSettings()
 	}
 
@@ -268,6 +271,11 @@ object SmartFolderHelper {
 		smartFolder.resetItems()
 		addTracksToSmartFolders(ArrayList(allAvailableTrackItems), arrayListOf(smartFolder))
 		notifyFolderUpdatedListeners(smartFolder)
+		for (smartFolder in smartFolderCollection) {
+			if (smartFolder.folderName == "All") {
+				smartFolder.organizeByType(OrganizeByType.LENGTH)
+			}
+		}
 	}
 
 	fun getSmartFolder(name: String): SmartFolder? {
