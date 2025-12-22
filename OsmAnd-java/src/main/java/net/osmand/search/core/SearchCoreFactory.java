@@ -1560,7 +1560,7 @@ public class SearchCoreFactory {
 			};
 		}
 
-		private SearchPoiTypeFilter getPoiTypeFilter(AbstractPoiType pt, Set<String> poiAdditionals ) {
+		public SearchPoiTypeFilter getPoiTypeFilter(AbstractPoiType pt, Set<String> poiAdditionals ) {
 			final Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
 					LinkedHashSet<String>>();
 			pt.putTypes(acceptedTypes);
