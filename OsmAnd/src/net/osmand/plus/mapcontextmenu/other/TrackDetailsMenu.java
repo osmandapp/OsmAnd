@@ -803,11 +803,9 @@ public class TrackDetailsMenu {
 			@Override
 			public List<GPXDataSetType> getSelectedDataSetTypes() {
 				if (mapActivity != null) {
-					OsmandSettings settings = mapActivity.getApp().getSettings();
-					return Arrays.asList(ChartUtils.getSavedGeneralYAxis(settings).toArray(new GPXDataSetType[0]));
-				} else {
-					return Arrays.asList(item.chartTypes);
+					return ChartUtils.getSavedGeneralYAxis(mapActivity.getApp().getSettings());
 				}
+				return Arrays.asList(item.chartTypes);
 			}
 		};
 	}

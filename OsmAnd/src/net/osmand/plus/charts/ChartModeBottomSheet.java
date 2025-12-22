@@ -157,7 +157,9 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 
 		selectedYAxisMode.clear();
-		selectedYAxisMode.add(GPXDataSetType.ALTITUDE);
+		if (!Algorithms.isEmpty(generalTypes)) {
+			selectedYAxisMode.add(generalTypes.get(0));
+		}
 	}
 
 	private boolean isSelectedSupported(@NonNull List<GPXDataSetType> generalTypes, @NonNull List<GPXDataSetType> sensorTypes) {
@@ -170,19 +172,7 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private boolean isSupported(@NonNull GPXDataSetType selected, @NonNull List<GPXDataSetType> generalTypes, @NonNull List<GPXDataSetType> sensorTypes) {
-		for (GPXDataSetType type : generalTypes) {
-			if (type == selected) {
-				return true;
-			}
-		}
-
-		for (GPXDataSetType type : sensorTypes) {
-			if (type == selected) {
-				return true;
-			}
-		}
-
-		return false;
+		return generalTypes.contains(selected) || sensorTypes.contains(selected);
 	}
 
 	private void createYAxisItems() {
