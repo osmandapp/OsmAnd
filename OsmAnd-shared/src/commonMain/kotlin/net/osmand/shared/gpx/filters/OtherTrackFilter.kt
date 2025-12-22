@@ -73,7 +73,7 @@ class OtherTrackFilter : BaseTrackFilter {
 			}
 
 			OtherTrackParam.HAS_VEHICLE_METRICS -> {
-				trackItem.dataItem?.getAnalysis()?.hasVehicleMetrics ?: false
+				trackItem.dataItem?.getAnalysis()?.hasAnyObdMetric() ?: false
 			}
 		}
 	}

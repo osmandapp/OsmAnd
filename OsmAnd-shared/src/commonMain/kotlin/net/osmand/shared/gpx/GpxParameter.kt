@@ -73,7 +73,33 @@ enum class GpxParameter(
 	AVG_SENSOR_HEART_RATE("avgSensorHr", "double", Double::class, 0.0, true),
 	DATA_VERSION("dataVersion", "int", Int::class, 0, false),
 	APPEARANCE_LAST_MODIFIED_TIME("appearanceLastModifiedTime", "bigint", Long::class, 0L, false),
-	HAS_VEHICLE_METRICS("has_vehicle_metrics", "int", Boolean::class, false, true);
+
+	AVG_OBD_ENGINE_LOAD("avgVmEload", "double", Double::class, 0.0, true),
+	MAX_OBD_ENGINE_LOAD("maxVmEload", "double", Double::class, 0.0, true),
+	AVG_OBD_THROTTLE_POSITION("avgVmTpos", "double", Double::class, 0.0, true),
+	MAX_OBD_THROTTLE_POSITION("maxVmTpos", "double", Double::class, 0.0, true),
+	AVG_OBD_ENGINE_OIL_TEMPERATURE("avgVmEotemp", "double", Double::class, 0.0, true),
+	MAX_OBD_ENGINE_OIL_TEMPERATURE("maxVmEotemp", "double", Double::class, 0.0, true),
+	AVG_OBD_FUEL_PRESSURE("avgVmFpress", "double", Double::class, 0.0, true),
+	MAX_OBD_FUEL_PRESSURE("maxVmFpress", "double", Double::class, 0.0, true),
+	AVG_OBD_BATTERY_VOLTAGE("avgVmBvol", "double", Double::class, 0.0, true),
+	MAX_OBD_BATTERY_VOLTAGE("maxVmBvol", "double", Double::class, 0.0, true),
+	AVG_OBD_AMBIENT_AIR_TEMPERATURE("avgVmAtemp", "double", Double::class, 0.0, true),
+	MAX_OBD_AMBIENT_AIR_TEMPERATURE("maxVmAtemp", "double", Double::class, 0.0, true),
+	AVG_OBD_ENGINE_RPM("avgVmEspeed", "double", Double::class, 0.0, true),
+	MAX_OBD_ENGINE_RPM("maxVmEspeed", "double", Double::class, 0.0, true),
+	AVG_OBD_ENGINE_RUNTIME("avgVmRuntime", "bigint", Long::class, 0L, true),
+	MAX_OBD_ENGINE_RUNTIME("maxVmRuntime", "bigint", Long::class, 0L, true),
+	AVG_OBD_VEHICLE_SPEED("avgVmVspeed", "double", Double::class, 0.0, true),
+	MAX_OBD_VEHICLE_SPEED("maxVmVspeed", "double", Double::class, 0.0, true),
+	AVG_OBD_AIR_INTAKE_TEMPERATURE("avgVmItemp", "double", Double::class, 0.0, true),
+	MAX_OBD_AIR_INTAKE_TEMPERATURE("maxVmItemp", "double", Double::class, 0.0, true),
+	AVG_OBD_ENGINE_COOLANT_TEMPERATURE("avgVmCtemp", "double", Double::class, 0.0, true),
+	MAX_OBD_ENGINE_COOLANT_TEMPERATURE("maxVmCtemp", "double", Double::class, 0.0, true),
+	AVG_OBD_FUEL_CONSUMPTION_RATE("avgVmFcons", "double", Double::class, 0.0, true),
+	MAX_OBD_FUEL_CONSUMPTION_RATE("maxVmFcons", "double", Double::class, 0.0, true),
+	AVG_OBD_FUEL_LEVEL("avgVmFuel", "double", Double::class, 0.0, true),
+	MAX_OBD_FUEL_LEVEL("maxVmFuel", "double", Double::class, 0.0, true);
 
 	fun isNullSupported(): Boolean = defaultValue == null
 

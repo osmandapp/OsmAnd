@@ -158,7 +158,33 @@ object GpxDbUtils {
 			addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_HEART_RATE);
 			addIfMissingGpxTableColumn(columnNames, db, DATA_VERSION);
 			addIfMissingGpxTableColumn(columnNames, db, APPEARANCE_LAST_MODIFIED_TIME);
-			addIfMissingGpxTableColumn(columnNames, db, HAS_VEHICLE_METRICS);
+
+			addIfMissingGpxTableColumn(columnNames, db, AVG_OBD_ENGINE_LOAD);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_OBD_ENGINE_LOAD);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_OBD_THROTTLE_POSITION);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_OBD_THROTTLE_POSITION);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_OBD_ENGINE_OIL_TEMPERATURE);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_OBD_ENGINE_OIL_TEMPERATURE);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_OBD_FUEL_PRESSURE);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_OBD_FUEL_PRESSURE);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_OBD_BATTERY_VOLTAGE);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_OBD_BATTERY_VOLTAGE);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_OBD_AMBIENT_AIR_TEMPERATURE);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_OBD_AMBIENT_AIR_TEMPERATURE);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_OBD_ENGINE_RPM);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_OBD_ENGINE_RPM);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_OBD_ENGINE_RUNTIME);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_OBD_ENGINE_RUNTIME);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_OBD_VEHICLE_SPEED);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_OBD_VEHICLE_SPEED);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_OBD_AIR_INTAKE_TEMPERATURE);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_OBD_AIR_INTAKE_TEMPERATURE);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_OBD_ENGINE_COOLANT_TEMPERATURE);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_OBD_ENGINE_COOLANT_TEMPERATURE);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_OBD_FUEL_CONSUMPTION_RATE);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_OBD_FUEL_CONSUMPTION_RATE);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_OBD_FUEL_LEVEL);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_OBD_FUEL_LEVEL);
 			// temporary code to test failure
 
 			GpxParameter.entries.forEach { parameter ->
