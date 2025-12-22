@@ -1,6 +1,5 @@
 package net.osmand.router;
 
-import static net.osmand.util.RouterUtilTest.getExpectedIdSet;
 import static net.osmand.util.RouterUtilTest.getNativeLibPath;
 import static net.osmand.util.RouterUtilTest.getRoadId;
 import static net.osmand.util.RouterUtilTest.getRoadStartPoint;
@@ -132,6 +131,8 @@ public class RouteResultPreparationTest {
         Set<Long> reachedSegments = new TreeSet<>();
         Set<Long> checkedSegments = new TreeSet<>();
         Assert.assertNotNull(routeSegments);
+
+		new TurnLanesOneShotJsonBuilder(routeSegments, te.getTestName(), te.getStartPoint(), te.getEndPoint()).writeJson();
         int prevSegment = -1;
         for (int i = 0; i <= routeSegments.size(); i++) {
             if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {
