@@ -29,7 +29,7 @@ public class Version {
 	public static final String HUGEROCK_NAME = "Hugerock";
 	public static final String HMD_BRAND_NAME = "HMD";
 	public static final String HMD_MANUFACTURER_NAME = "HMD Global";
-	public static final String HMD_MODEL_NAME = "Cupra";
+	public static final String HMD_MODEL_NAME = "HMD Terra M";
 
 	public static final String FULL_VERSION_NAME = "net.osmand.plus";
 	private static final String FREE_VERSION_NAME = "net.osmand";
