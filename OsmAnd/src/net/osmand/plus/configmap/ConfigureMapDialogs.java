@@ -286,11 +286,14 @@ public class ConfigureMapDialogs {
 			}
 			activity.refreshMapComplete();
 			item.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, p));
-			String id = item.getId();
-			if (!Algorithms.isEmpty(id)) {
-				uiAdapter.onRefreshItem(id);
-			} else {
-				uiAdapter.onDataSetChanged();
+
+			if (uiAdapter != null) {
+				String id = item.getId();
+				if (!Algorithms.isEmpty(id)) {
+					uiAdapter.onRefreshItem(id);
+				} else {
+					uiAdapter.onDataSetChanged();
+				}
 			}
 		});
 	}

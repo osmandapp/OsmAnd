@@ -2,7 +2,7 @@
 <resources>
     <string name="poi_fuel_type">燃料類型</string>
     <string name="poi_fuel_avia_type">燃料類型 (avia)</string>
-    <string name="poi_payment_type">付款型式</string>
+    <string name="poi_payment_type">付款方式</string>
     <string name="poi_payment_fuel_type">燃料卡</string>
     <string name="poi_additional_type">附加</string>
     <string name="poi_internet_access_type">網際網路存取類型</string>
@@ -13,7 +13,7 @@
     <string name="poi_fire_hydrant_type">類型</string>
     <string name="poi_fire_hydrant_position">位置</string>
     <string name="poi_water_source">水源</string>
-    <string name="poi_payment_toll_type">付款型式</string>
+    <string name="poi_payment_toll_type">付款方式</string>
     <string name="poi_traffic_signals_sound">聲音</string>
     <string name="poi_highway_crossing_type">類型</string>
     <string name="poi_tactile_paving">導盲磚</string>
@@ -78,7 +78,7 @@
     <string name="poi_medical_system">醫療系統</string>
     <string name="poi_home_visit">出診</string>
     <string name="poi_dish">菜品</string>
-    <string name="poi_payment_transport_type">付款型式（運輸）</string>
+    <string name="poi_payment_transport_type">付款方式（運輸）</string>
     <string name="poi_social_facility_type">類型</string>
     <string name="poi_social_facility_for">目標群體</string>
     <string name="poi_compressed_air_filter">壓縮空氣</string>
@@ -103,7 +103,7 @@
     <string name="poi_substation_type">類型</string>
     <string name="poi_books_type">書</string>
     <string name="poi_denotation">名稱</string>
-    <string name="poi_park_ride">停車轉乘區</string>
+    <string name="poi_park_ride">泊車轉乘區</string>
     <string name="poi_rtsa_scale_filter">難度分類</string>
     <string name="poi_climbing_crag_filter">攀岩</string>
     <string name="poi_snowmobile_filter">雪地摩托車駛入</string>
@@ -136,7 +136,7 @@
     <string name="poi_diplomatic_services_immigrant_visas_filter">移民簽證</string>
     <string name="poi_diplomatic_services_citizen_services_filter">公民服務</string>
     <string name="poi_bay_filter">海灣類型</string>
-    <string name="poi_access_general">一般通過</string>
+    <string name="poi_access_general">一般出入權限</string>
     <string name="poi_access_motorcar">汽車通過</string>
     <string name="poi_access_bicycle">單車通過</string>
     <string name="poi_access_scooter">電單車通過</string>
@@ -481,7 +481,7 @@
     <string name="poi_motorway_junction">高速公路交流道</string>
     <string name="poi_junction">交叉路口</string>
     <string name="poi_rest_area">休息服務區</string>
-    <string name="poi_escape_lane">躲避道</string>
+    <string name="poi_escape_lane">緊急車道</string>
     <string name="poi_water_well">水井</string>
     <string name="poi_standpipe">豎管</string>
     <string name="poi_water_works">自來水廠</string>
@@ -678,7 +678,7 @@
     <string name="poi_paediatrics">小兒科</string>
     <string name="poi_company">公司</string>
     <string name="poi_insurance">保險</string>
-    <string name="poi_estate_agent">不動產經紀人</string>
+    <string name="poi_estate_agent">地產代理</string>
     <string name="poi_lawyer">律師</string>
     <string name="poi_office_telecommunication">電信局</string>
     <string name="poi_ngo">非政府組織</string>
@@ -1327,14 +1327,14 @@
     <string name="poi_abandoned">已遺棄的</string>
     <string name="poi_abandoned_poi">已遺棄的物件</string>
     <string name="poi_disused">廢棄的</string>
-    <string name="poi_operator">經營者</string>
+    <string name="poi_operator">營運商</string>
     <string name="poi_brand">品牌</string>
     <string name="poi_fee_yes">是;費用</string>
     <string name="poi_fee_no">不收費</string>
     <string name="poi_drinking_water_yes">是;飲用水</string>
     <string name="poi_drinking_water_no">飲用水：否</string>
     <string name="poi_supervised_yes">有監管</string>
-    <string name="poi_supervised_no">沒有監管</string>
+    <string name="poi_supervised_no">無監管</string>
     <string name="poi_seasonal_yes">是;季節性的</string>
     <string name="poi_seasonal_no">非季節性的</string>
     <string name="poi_seasonal_dry_season">乾燥季節</string>
@@ -1388,7 +1388,7 @@
     <string name="poi_trade_agricultural_supplies">農藝供應商</string>
     <string name="poi_trade_tile">磚瓦供應商</string>
     <string name="poi_population">人口數</string>
-    <string name="poi_parking_underground">類型：地下</string>
+    <string name="poi_parking_underground">類型：地下停車場</string>
     <string name="poi_parking_multi_storey">類型：多層</string>
     <string name="poi_bicycle_parking_anchors">錨泊點</string>
     <string name="poi_bicycle_parking_stands">立台</string>
@@ -1558,7 +1558,7 @@
     <string name="poi_garden_style_french">花園風格：法式</string>
     <string name="poi_garden_style_english">花園風格：英式</string>
     <string name="poi_garden_style_japanese">花園風格：日式</string>
-    <string name="poi_capacity">容量</string>
+    <string name="poi_capacity">可容納</string>
     <string name="poi_capacity_disabled_yes">是;殘疾人士專用場所</string>
     <string name="poi_capacity_disabled_no">非殘疾人士專用場所</string>
     <string name="poi_capacity_disabled">殘疾人士專用場所</string>
@@ -1569,7 +1569,7 @@
     <string name="poi_capacity_teachers">教師專用場所</string>
     <string name="poi_capacity_parent_yes">父母專用場所</string>
     <string name="poi_capacity_parent_no">無父母專用場所</string>
-    <string name="poi_capacity_parent">父母專用場所</string>
+    <string name="poi_capacity_parent">家長專用場所</string>
     <string name="poi_aerialway_occupancy">座艙/席位/載客量</string>
     <string name="poi_aerialway_capacity">每小時載客量</string>
     <string name="poi_aerialway_duration">平均行程時間，分鐘</string>
@@ -1975,8 +1975,8 @@
     <string name="poi_internet_access_type_wlan">網際網路存取類型：wlan</string>
     <string name="poi_internet_access_type_terminal">網際網路存取類型：終端機</string>
     <string name="poi_internet_access_type_wired">網際網路存取類型：有線網路</string>
-    <string name="poi_internet_access_type_public">網際網路存取型式：公共網路</string>
-    <string name="poi_internet_access_type_service">網際網路存取型式：服務</string>
+    <string name="poi_internet_access_type_public">網際網路存取方式：公共網路</string>
+    <string name="poi_internet_access_type_service">網際網路存取類別：服務</string>
     <string name="poi_internet_access_type_no">無網際網路存取</string>
     <string name="poi_internet_access_type_yes">有網際網路存取</string>
     <string name="poi_maxwidth">最大寬度</string>
@@ -2259,8 +2259,8 @@
     <string name="poi_power_supply_cee_7_4">電源供應(插座)：CEE 7/4</string>
     <string name="poi_power_supply_cee_7_5">電源供應(插座)：CEE 7/5</string>
     <string name="poi_power_supply_nema_5_15">電源供應(插座)：NEMA 5-15</string>
-    <string name="poi_capacity_tents">最大帳篷</string>
-    <string name="poi_capacity_caravans">最大露營車</string>
+    <string name="poi_capacity_tents">最多可容納帳篷數</string>
+    <string name="poi_capacity_caravans">最多可容納露營車</string>
     <string name="poi_dog_yes">允許狗入內</string>
     <string name="poi_dog_no">不允許狗入內</string>
     <string name="poi_refugee_yes">為難民的福利設施</string>
@@ -2565,7 +2565,7 @@
     <string name="poi_microwave_oven_no">微波爐︰沒有</string>
     <string name="poi_water_heater_yes">熱水器︰有</string>
     <string name="poi_water_heater_no">熱水器︰沒有</string>
-    <string name="poi_parking_surface">類型︰外表</string>
+    <string name="poi_parking_surface">類型︰地面停車場</string>
     <string name="poi_parking_garage_boxes">車庫</string>
     <string name="poi_parking_carports">車棚</string>
     <string name="poi_dojo">道場</string>
@@ -2793,7 +2793,7 @@
     <string name="poi_provided_for_man_no">服務男人：無</string>
     <string name="poi_provided_for_boy_yes">服務男孩：有</string>
     <string name="poi_provided_for_boy_no">服務男孩：無</string>
-    <string name="poi_capacity_beds">容量 (床)</string>
+    <string name="poi_capacity_beds">床位</string>
     <string name="poi_treat_inpatient_yes">住院護理：有</string>
     <string name="poi_treat_inpatient_no">住院護理：無</string>
     <string name="poi_treat_inpatient_only">住院護理：只有</string>
@@ -2821,7 +2821,7 @@
     <string name="poi_fire_hydrant_diameter">消防龍頭直徑</string>
     <string name="poi_fire_hydrant_pressure">消防龍頭壓力</string>
     <string name="poi_fire_hydrant_count">消防龍頭數量</string>
-    <string name="poi_fire_hydrant_flow_capacity">消防龍頭流量</string>
+    <string name="poi_fire_hydrant_flow_capacity">消防龍頭水流量</string>
     <string name="poi_fire_hydrant_position_sidewalk">行人道</string>
     <string name="poi_fire_hydrant_position_green">綠地</string>
     <string name="poi_fire_hydrant_position_lane">通道</string>
@@ -3716,7 +3716,7 @@
     <string name="poi_childcare">托兒</string>
     <string name="poi_denotation_natural_monument">自然遺產</string>
     <string name="poi_denotation_landmark">地標</string>
-    <string name="poi_park_ride_yes">是;停車轉乘</string>
+    <string name="poi_park_ride_yes">是;泊車轉乘</string>
     <string name="poi_park_ride_train">火車</string>
     <string name="poi_park_ride_bus">巴士</string>
     <string name="poi_park_ride_metro">地下鐵</string>
@@ -4717,8 +4717,8 @@
     <string name="poi_ascent">遞增</string>
     <string name="poi_descent">遞減</string>
     <string name="poi_direction">方向</string>
-    <string name="poi_roundtrip_yes">往返：是</string>
-    <string name="poi_roundtrip_no">往返：否</string>
+    <string name="poi_roundtrip_yes">循環線：是</string>
+    <string name="poi_roundtrip_no">循環線：否</string>
     <string name="poi_border_zone">邊境地區</string>
     <string name="poi_hang_gliding">滑翔翼</string>
     <string name="poi_live_music_yes">是</string>
@@ -4726,7 +4726,7 @@
     <string name="poi_padus_category_proclamation">分類：公告</string>
     <string name="poi_padus_category_fee">分類：收費</string>
     <string name="poi_padus_category_designation">分類：專用</string>
-    <string name="poi_padus_category_easement">分類：不動產役權</string>
+    <string name="poi_padus_category_easement">分類：地役權</string>
     <string name="poi_padus_local_designation">本地專用</string>
     <string name="poi_padus_local_manager">本地管理員</string>
     <string name="poi_padus_owner_fullname">擁有者</string>

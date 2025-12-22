@@ -2003,4 +2003,5 @@
     <string name="x">X (tidligere Twitter)</string>
     <string name="poi_water_supply_water_tank">Vanntank</string>
     <string name="poi_sample_collection_yes">Ja</string>
+    <string name="poi_hazard_yes">Fare</string>
 </resources>

@@ -4901,7 +4901,7 @@
     <string name="help_article_plan_route_coordinate_input_name">Saisir des coordonnées</string>
     <string name="help_article_plan_route_web_name">Planificateur d\'itinéraire en ligne</string>
     <string name="help_article_purchases_ios_name">Achats iOS</string>
-    <string name="help_article_troubleshooting_maps_data_name">Cartes &amp; Données</string>
+    <string name="help_article_troubleshooting_maps_data_name">Cartes &amp; données</string>
     <string name="help_article_widgets_markers_name">Widgets de marqueur</string>
     <string name="help_article_widgets_nav_widgets_name">Widgets de guidage</string>
     <string name="telegram_chats_descr">Rejoignez nous sur Telegram.</string>
@@ -5822,4 +5822,5 @@
     <string name="show_spherical_map">Vue Globe terrestre</string>
     <string name="enable_3d_objects">Bâtiments 3D</string>
     <string name="vehicle_metrics_chart_category">Mesures du véhicule</string>
+    <string name="lang_mi">Maori</string>
 </resources>

@@ -14,6 +14,7 @@ import static net.osmand.plus.dashboard.DashboardType.MAP_ROUTES;
 import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_COLOR_SCHEME;
 import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_WIDTH;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.BUILDINGS_3D;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
@@ -535,6 +536,7 @@ public class ConfigureMapMenu {
 				|| SHOW_MTB_SCALE.equals(attrName)
 				|| SHOW_MTB_SCALE_UPHILL.equals(attrName)
 				|| RENDERING_CATEGORY_OSM_ASSISTANT.equals(category)
+				|| BUILDINGS_3D.equals(category)
 				|| DEPTH_CONTOUR_WIDTH.equals(attrName)
 				|| DEPTH_CONTOUR_COLOR_SCHEME.equals(attrName)
 				|| ALPINE.getRenderingPropertyAttr().equals(attrName)
@@ -637,7 +639,9 @@ public class ConfigureMapMenu {
 					item.setSelected(pref.get());
 					item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
 					item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
-					uiAdapter.onDataSetChanged();
+					if (uiAdapter != null) {
+						uiAdapter.onDataSetChanged();
+					}
 					return false;
 				});
 	}
