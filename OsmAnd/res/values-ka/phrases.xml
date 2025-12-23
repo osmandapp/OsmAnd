@@ -2017,4 +2017,18 @@
     <string name="poi_computer">კომპიუტერული მაღაზია</string>
     <string name="poi_copyshop">ქსეროქსი</string>
     <string name="poi_curtain">ფარდების მაღაზია</string>
+    <string name="poi_fabric">ნაჭრების მაღაზია</string>
+    <string name="poi_dive">ყვინთვის აღჭურვილობა</string>
+    <string name="poi_erotic">ეროტიკული მაღაზია</string>
+    <string name="poi_fishing">სათევზაო აღჭურვილობა</string>
+    <string name="poi_florist">ყვავილების მაღაზია</string>
+    <string name="poi_furniture">ავეჯის მაღაზია</string>
+    <string name="poi_garden_centre">ბაღის მაღაზია</string>
+    <string name="poi_gift">საჩუქრების მაღაზია</string>
+    <string name="poi_hardware">აპარატურის მაღზია</string>
+    <string name="poi_hearing_aids">სმენის აპარატები</string>
+    <string name="poi_herbalist">ხალხური მედიცინა</string>
+    <string name="poi_hifi">HiFi აპარატურა</string>
+    <string name="poi_hunting">ნადირობის აღჭურვილობა</string>
+    <string name="poi_jewelry">ბიჟუტერიის მარღაზია</string>
 </resources>

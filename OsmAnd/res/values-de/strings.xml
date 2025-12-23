@@ -5926,4 +5926,8 @@
     <string name="routing_attr_pt_limit_description">Die Anzahl der anzuzeigenden besten Routen angeben</string>
     <string name="deleted_maps_warning">Sie sind dabei, %d Element(e) zu löschen.\nFortfahren?</string>
     <string name="enable_3d_objects">3D-Gebäude</string>
+    <string name="lang_mi">README: - Der bevorzugte Weg um beim Übersetzen zu helfen ist via https://hosted.weblate.org/engage/osmand/ - Wenn du eine strings.xml veränderst, stelle bitte sicher das: 1. Du keine Duplikate erzeugst (vergleiche anhand des Namens, ob ein String schon existiert) 2. Jedem Apostroph ein Backslash vorausgeht. 3. Wenn du die englische Strings Datei veränderst, die neuen Strings ganz oben in der Datei eingefügt sind. Dies erleichtert die routinemäßige Überprüfung vor einem Release. - Bitte beachte https://docs.osmand.net/docs/technical/contributions/translating-osmand hinsichtlich der verwendeten Wortwahl und Konsistenz. Vielen Dank - Hardy</string>
+    <string name="vehicle_metrics_chart_category">Fahrzeugeigenschaften</string>
+    <string name="delete_folder_description">\"%1$s\" Ordner löschen?</string>
+    <string name="slots">Slots</string>
 </resources>
