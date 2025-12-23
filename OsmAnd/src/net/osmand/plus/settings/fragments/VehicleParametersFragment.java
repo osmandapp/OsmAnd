@@ -187,7 +187,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 	private boolean shouldUseMetricSystem(@NonNull SpecificationType specificationType,
 	                                      @NonNull ApplicationMode appMode) {
 		if (specificationType.isWeightRelated()) {
-			return settings.DRIVING_REGION.getModeValue(appMode) == DrivingRegion.US;
+			return settings.DRIVING_REGION.getModeValue(appMode) != DrivingRegion.US;
 		}
 		MetricsConstants lengthMetric = settings.METRIC_SYSTEM.getModeValue(appMode);
 		return !lengthMetric.shouldUseFeet();
