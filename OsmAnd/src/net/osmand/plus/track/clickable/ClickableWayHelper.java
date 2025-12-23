@@ -183,7 +183,7 @@ public class ClickableWayHelper {
         return false;
     }
     private boolean openAsGpxFile(@Nullable ClickableWay clickableWay) {
-        return openAsGpxFile(clickableWay, true);
+        return openAsGpxFile(clickableWay, false);
     }
 
     private boolean openAsGpxFile(@Nullable ClickableWay clickableWay, boolean adjustMapPosition) {
