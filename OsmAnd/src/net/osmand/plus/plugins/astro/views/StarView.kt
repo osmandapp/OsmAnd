@@ -28,6 +28,7 @@ import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.rotationEclEqd
 import net.osmand.plus.plugins.astro.AstroDataProvider
+import net.osmand.plus.plugins.astro.SkyObject
 import java.util.Calendar
 import java.util.TimeZone
 import kotlin.math.PI
@@ -154,7 +155,7 @@ class StarView @JvmOverloads constructor(
 	// --- Astronomy Data ---
 	private val skyObjects = mutableListOf<SkyObject>()
 	private var constellations = listOf<AstroDataProvider.Constellation>()
-	private val skyObjectMap = mutableMapOf<String, SkyObject>()
+	private val skyObjectMap = mutableMapOf<Int, SkyObject>()
 
 	var observer = Observer(56.9496, 24.1052, 0.0)
 	var currentTime = Time(System.currentTimeMillis() / 1000.0 / 86400.0 + 2440587.5)
@@ -259,7 +260,7 @@ class StarView @JvmOverloads constructor(
 		skyObjects.clear()
 		skyObjects.addAll(objects)
 		skyObjectMap.clear()
-		objects.forEach { skyObjectMap[it.id] = it }
+		objects.forEach { skyObjectMap[it.hip] = it }
 		recalculatePositions(currentTime, updateTargets = false)
 		skyObjects.forEach {
 			it.azimuth = it.targetAzimuth
@@ -699,7 +700,7 @@ class StarView @JvmOverloads constructor(
 	private fun drawConstellations(canvas: Canvas) {
 		gridPath.reset()
 		constellations.forEach { constellation ->
-			val uniqueStars = mutableSetOf<String>()
+			val uniqueStars = mutableSetOf<Int>()
 			constellation.lines.forEach { (id1, id2) ->
 				uniqueStars.add(id1)
 				uniqueStars.add(id2)

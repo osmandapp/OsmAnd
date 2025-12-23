@@ -10,7 +10,7 @@ import androidx.lifecycle.viewModelScope
 import io.github.cosinekitty.astronomy.Time
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import net.osmand.plus.plugins.astro.views.SkyObject
+import net.osmand.plus.plugins.astro.SkyObject
 import java.util.Calendar
 import java.util.TimeZone
 

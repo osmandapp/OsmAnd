@@ -1,6 +1,8 @@
 package net.osmand.plus.plugins.astro
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +41,7 @@ import net.osmand.plus.plugins.astro.utils.StarMapARModeHelper
 import net.osmand.plus.plugins.astro.utils.StarMapCameraHelper
 import net.osmand.plus.plugins.astro.views.CelestialPathView
 import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
-import net.osmand.plus.plugins.astro.views.SkyObject
+import net.osmand.plus.plugins.astro.SkyObject
 import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 import net.osmand.plus.plugins.astro.views.StarChartView
 import net.osmand.plus.plugins.astro.views.StarView
@@ -63,8 +65,15 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var bottomSheet: View
 	private lateinit var sheetTitle: TextView
 	private lateinit var sheetCoords: TextView
-	private lateinit var sheetDetails: TextView
 	private lateinit var resetTimeButton: Button
+
+	// New Professional UI Components
+	// These are nullable to prevent crashes if XML is not updated immediately
+	private var sheetMagnitude: TextView? = null
+	private var sheetDistance: TextView? = null
+	private var sheetRiseTime: TextView? = null
+	private var sheetSetTime: TextView? = null
+	private var sheetWikiButton: View? = null
 
 	private lateinit var arModeButton: ImageButton
 	private lateinit var cameraButton: ImageButton
@@ -122,10 +131,17 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starView = view.findViewById(R.id.star_view)
 		timeSelectionView = view.findViewById(R.id.time_selection_view)
 		resetTimeButton = view.findViewById(R.id.reset_time_button)
+
 		bottomSheet = view.findViewById(R.id.bottom_sheet)
 		sheetTitle = view.findViewById(R.id.sheet_title)
 		sheetCoords = view.findViewById(R.id.sheet_coords)
-		sheetDetails = view.findViewById(R.id.sheet_details)
+
+		// Attempt to find new structured views
+		sheetMagnitude = view.findViewById(R.id.sheet_magnitude)
+		sheetDistance = view.findViewById(R.id.sheet_distance)
+		sheetRiseTime = view.findViewById(R.id.sheet_rise_time)
+		sheetSetTime = view.findViewById(R.id.sheet_set_time)
+		sheetWikiButton = view.findViewById(R.id.sheet_wiki_button)
 
 		arModeButton = view.findViewById(R.id.ar_mode_button)
 		cameraButton = view.findViewById(R.id.camera_button)
@@ -231,7 +247,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showMoon = config.showMoon
 			starView.showPlanets = config.showPlanets
 		}
-		starView.setConstellations(AstroDataProvider.getConstellations())
+		starView.setConstellations(AstroDataProvider.getConstellations(view.context))
 
 		updateStarMap(true)
 		setupToolBar(view)
@@ -485,21 +501,62 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		sheetTitle.text = obj.name
 		val az = String.format(Locale.getDefault(), "%.1f°", obj.azimuth)
 		val alt = String.format(Locale.getDefault(), "%.1f°", obj.altitude)
-		sheetCoords.text = "${getString(R.string.shared_string_azimuth)}: $az  |  ${getString(R.string.altitude)}: $alt"
-		var details = "${getString(R.string.shared_string_magnitude)}: ${obj.magnitude}"
-		if (obj.type.isSunSystem()) details += "\n${getString(R.string.distance)}: %.3f AU".format(obj.distAu)
+		val coordsText = "${getString(R.string.shared_string_azimuth)}: $az  •  ${getString(R.string.altitude)}: $alt"
+		sheetCoords.text = coordsText
+
+		sheetMagnitude?.text = "${getString(R.string.shared_string_magnitude)}: ${obj.magnitude}"
+
+		if (obj.type.isSunSystem()) {
+			sheetDistance?.isVisible = true
+			sheetDistance?.text =
+				"${getString(R.string.distance)}: %.3f AU".format(Locale.getDefault(), obj.distAu)
+		} else {
+			sheetDistance?.isVisible = false
+		}
+
 		val observer = starView.observer
 		val currentTime = starView.currentTime
 		val bodyToCheck: Body? = if (!obj.type.isSunSystem()) {
 			defineStar(Body.Star2, obj.ra, obj.dec, 1000.0); Body.Star2
 		} else obj.body
+
 		if (bodyToCheck != null) {
 			val riseTime = searchRiseSet(bodyToCheck, observer, Direction.Rise, currentTime, 1.0)
 			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, currentTime, 1.0)
-			if (riseTime != null) details += "\n${getString(R.string.astro_rise)}: ↑${AstroUtils.formatLocalTime(riseTime)}"
-			if (setTime != null) details += "\n${getString(R.string.astro_set)}: ↓${AstroUtils.formatLocalTime(setTime)}"
+
+			if (riseTime != null) {
+				sheetRiseTime?.text = "Rise: ↑${AstroUtils.formatLocalTime(riseTime)}"
+				sheetRiseTime?.isVisible = true
+			} else {
+				sheetRiseTime?.isVisible = false
+			}
+
+			if (setTime != null) {
+				sheetSetTime?.text = "Set: ↓${AstroUtils.formatLocalTime(setTime)}"
+				sheetSetTime?.isVisible = true
+			} else {
+				sheetSetTime?.isVisible = false
+			}
+		} else {
+			sheetRiseTime?.isVisible = false
+			sheetSetTime?.isVisible = false
 		}
-		sheetDetails.text = details
+
+		if (obj.wid.isNotEmpty()) {
+			sheetWikiButton?.isVisible = true
+			sheetWikiButton?.setOnClickListener {
+				val uri = Uri.parse("https://www.wikidata.org/wiki/${obj.wid}")
+				val intent = Intent(Intent.ACTION_VIEW, uri)
+				try {
+					startActivity(intent)
+				} catch (e: Exception) {
+					// Ignore
+				}
+			}
+		} else {
+			sheetWikiButton?.isVisible = false
+		}
+
 		bottomSheet.visibility = View.VISIBLE
 	}
 }

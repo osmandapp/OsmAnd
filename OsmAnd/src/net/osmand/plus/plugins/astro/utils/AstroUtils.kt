@@ -19,7 +19,7 @@ import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.StarObjectsViewModel
 import net.osmand.plus.plugins.astro.StarWatcherSettings
-import net.osmand.plus.plugins.astro.views.SkyObject
+import net.osmand.plus.plugins.astro.SkyObject
 import net.osmand.plus.plugins.astro.views.StarView
 import java.time.Instant
 import java.time.ZoneId
