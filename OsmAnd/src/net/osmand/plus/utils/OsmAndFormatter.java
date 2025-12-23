@@ -76,6 +76,7 @@ public class OsmAndFormatter {
 
 	public static final int KILOGRAMS_IN_ONE_TON = 1000;
 	public static final float POUNDS_IN_ONE_KILOGRAM = 2.2046f;
+	public static final float POUNDS_IN_ONE_TON = POUNDS_IN_ONE_KILOGRAM * KILOGRAMS_IN_ONE_TON;
 
 	private static final int SECONDS_IN_HOUR = 3600;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
