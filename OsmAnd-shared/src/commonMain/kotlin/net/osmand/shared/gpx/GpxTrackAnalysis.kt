@@ -13,7 +13,7 @@ import net.osmand.shared.util.KMapUtils
 class GpxTrackAnalysis {
 
 	companion object {
-		const val ANALYSIS_VERSION = 2
+		const val ANALYSIS_VERSION = 1
 
 		fun prepareInformation(fileTimeStamp: Long,
 		                       joinSegments: Boolean,
