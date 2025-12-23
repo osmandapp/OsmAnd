@@ -5734,4 +5734,5 @@
     <string name="delete_folder_description">刪除「%1$s」資料夾？</string>
     <string name="show_spherical_map">環球檢視</string>
     <string name="enable_3d_objects">3D 建築物</string>
+    <string name="lang_mi">毛利語</string>
 </resources>
