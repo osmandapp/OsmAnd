@@ -5003,4 +5003,5 @@
     <string name="enable_3d_objects_description">הצגת עצמי מבנים בתלת־ממד במפה</string>
     <string name="show_debug_tile">הצגת פרטי אריח</string>
     <string name="show_rasterization_debug_tile">הצגת פרטי עיבוד תצוגה של אריח</string>
+    <string name="copy_link">העתקת קישור</string>
 </resources>

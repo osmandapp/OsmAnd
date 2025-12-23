@@ -118,8 +118,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private boolean useSingleMainTab;
 	private int chartHMargin;
 
-	private ListStringPreference xAxisPreference;
-	private CommonPreference<GPXDataSetAxisType> yAxisPreference;
+	private ListStringPreference yAxisPreference;
+	private CommonPreference<GPXDataSetAxisType> xAxisPreference;
 	private GPXDataSetAxisType selectedMainAxisType = GPXDataSetAxisType.DISTANCE;
 	private List<GPXDataSetType> selectedMainSetTypes = new ArrayList<>(Collections.singleton(GPXDataSetType.ALTITUDE));
 
@@ -131,9 +131,9 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return useSingleMainTab;
 	}
 
-	public void setAxisPreferences(@NonNull ListStringPreference xAxisPreference, @NonNull CommonPreference<GPXDataSetAxisType> yAxisPreference){
-		this.xAxisPreference = xAxisPreference;
+	public void setAxisPreferences(@NonNull ListStringPreference yAxisPreference, @NonNull CommonPreference<GPXDataSetAxisType> xAxisPreference){
 		this.yAxisPreference = yAxisPreference;
+		this.xAxisPreference = xAxisPreference;
 	}
 
 	public void setChartHMargin(int chartHMargin) {
@@ -518,7 +518,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	public void setupSelectedAxisTypes() {
-		if (xAxisPreference != null && yAxisPreference != null) {
+		if (yAxisPreference != null && xAxisPreference != null) {
 			getSavedSetTypes();
 			getSavedSetAxisType();
 		}
@@ -526,26 +526,17 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private void getSavedSetTypes() {
 		selectedMainSetTypes.clear();
-		List<String> setTypes = xAxisPreference.getStringsList();
-		if (!Algorithms.isEmpty(setTypes)) {
-			List<GPXDataSetType[]> availableSetType = new ArrayList<>();
-			availableSetType.addAll(ChartModeBottomSheet.getAvailableDefaultYTypes(analysis));
-			availableSetType.addAll(ChartModeBottomSheet.getAvailableSensorYTypes(analysis));
-			for (String type : setTypes) {
-				for (GPXDataSetType[] dataSetTypes : availableSetType) {
-					if (type.equals(dataSetTypes[0].name())) {
-						selectedMainSetTypes.add(GPXDataSetType.valueOf(type));
-					}
-				}
-			}
-		}
-		if (Algorithms.isEmpty(selectedMainSetTypes)) {
+
+		List<GPXDataSetType> availableSetType = ChartUtils.getSavedChartTypes(yAxisPreference);
+		if (!Algorithms.isEmpty(availableSetType)) {
+			selectedMainSetTypes.addAll(availableSetType);
+		} else {
 			selectedMainSetTypes = new ArrayList<>(Collections.singleton(GPXDataSetType.ALTITUDE));
 		}
 	}
 
 	private void getSavedSetAxisType() {
-		GPXDataSetAxisType type = yAxisPreference.get();
+		GPXDataSetAxisType type = xAxisPreference.get();
 		List<GPXDataSetAxisType> availableAxisType = ChartModeBottomSheet.getAvailableXTypes(analysis);
 		for (GPXDataSetAxisType availableType : availableAxisType) {
 			if (type == availableType) {
@@ -569,15 +560,11 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			public void onGraphModeChanged(@NonNull GPXDataSetAxisType gpxDataSetAxisType, @NonNull List<GPXDataSetType> gpxDataSetTypes) {
 				selectedMainAxisType = gpxDataSetAxisType;
 				selectedMainSetTypes = gpxDataSetTypes;
-				if (xAxisPreference != null) {
-					List<String> names = new ArrayList<>();
-					for (GPXDataSetType type : gpxDataSetTypes) {
-						names.add(type.name());
-					}
-					xAxisPreference.setStringsList(names);
-				}
 				if (yAxisPreference != null) {
-					yAxisPreference.set(gpxDataSetAxisType);
+					ChartUtils.saveYAxis(yAxisPreference, gpxDataSetTypes);
+				}
+				if (xAxisPreference != null) {
+					xAxisPreference.set(gpxDataSetAxisType);
 				}
 				gpxItem.chartAxisType = gpxDataSetAxisType;
 				updateGraphModeDescription(view);

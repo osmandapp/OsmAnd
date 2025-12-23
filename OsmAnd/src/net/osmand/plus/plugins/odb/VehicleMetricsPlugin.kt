@@ -630,7 +630,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 
 	override fun getAvailableGPXDataSetTypes(
 		analysis: GpxTrackAnalysis,
-		out: MutableList<Array<GPXDataSetType?>>
+		out: MutableList<GPXDataSetType?>
 	) {
 		VehicleMetricAttributesUtils.getAvailableGPXDataSetTypes(analysis, out)
 	}

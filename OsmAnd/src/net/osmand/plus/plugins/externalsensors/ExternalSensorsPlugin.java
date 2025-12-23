@@ -484,7 +484,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType> availableTypes) {
 		SensorAttributesUtils.getAvailableGPXDataSetTypes(analysis, availableTypes);
 	}
 

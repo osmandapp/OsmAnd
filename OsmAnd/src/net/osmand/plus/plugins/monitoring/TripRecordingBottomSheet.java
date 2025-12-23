@@ -135,7 +135,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 			graphsAdapter.updateGraph(graphTabPosition);
 			boolean showSegmentsTab = false;
 			if (graphsAdapter.isUseSingleMainTab()) {
-				List<GPXDataSetType[]> availableYAxis = new ArrayList<>();
+				List<GPXDataSetType> availableYAxis = new ArrayList<>();
 				availableYAxis.addAll(ChartModeBottomSheet.getAvailableDefaultYTypes(selectedGpxFile.getTrackAnalysis(app)));
 				availableYAxis.addAll(ChartModeBottomSheet.getAvailableSensorYTypes(selectedGpxFile.getTrackAnalysis(app)));
 				if (!Algorithms.isEmpty(availableYAxis)) {
@@ -330,7 +330,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		graphsAdapter.setHideStatistics(true);
 		graphsAdapter.setHideJoinGapsBottomButtons(true);
 		graphsAdapter.setUseSingleMainTab(true);
-		graphsAdapter.setAxisPreferences(settings.TRIP_RECORDING_X_AXIS, settings.TRIP_RECORDING_Y_AXIS);
+		graphsAdapter.setAxisPreferences(settings.TRIP_RECORDING_Y_AXIS, settings.TRIP_RECORDING_X_AXIS);
 
 		pager.setAdapter(graphsAdapter);
 		tabLayout.setViewPager(pager);

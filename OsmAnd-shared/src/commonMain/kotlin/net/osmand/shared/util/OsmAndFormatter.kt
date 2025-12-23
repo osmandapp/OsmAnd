@@ -19,6 +19,7 @@ object OsmAndFormatter {
 
 	const val KILOGRAMS_IN_ONE_TON = 1000
 	const val POUNDS_IN_ONE_KILOGRAM = 2.2046f
+	const val POUNDS_IN_ONE_TON = POUNDS_IN_ONE_KILOGRAM * KILOGRAMS_IN_ONE_TON
 
 
 	fun convertSpeedToMetersPerSecond(
