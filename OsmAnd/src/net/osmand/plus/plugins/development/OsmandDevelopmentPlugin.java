@@ -55,6 +55,7 @@ import net.osmand.plus.quickaction.actions.LocationSimulationAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.simulation.DashSimulateFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -91,6 +92,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SHOW_PRIMITIVES_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
 	public final OsmandPreference<Boolean> ENABLE_3D_MAP_OBJECTS;
+	public final CommonPreference<Float> BUILDINGS_3D_ALPHA;
+	public final CommonPreference<Integer> BUILDINGS_3D_DETAIL_LEVEL;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
 	private final StateChangedListener<Boolean> debugRenderingInfoListener;
@@ -128,6 +131,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SHOW_PRIMITIVES_DEBUG_INFO = registerBooleanPreference("show_primitives_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
 		ENABLE_3D_MAP_OBJECTS = registerBooleanPreference("enable_3d_map_objects", false).makeProfile().cache();
+		BUILDINGS_3D_ALPHA = registerFloatPreference("3d_buildings_alpha", 0.8f).makeProfile().cache();
+		BUILDINGS_3D_DETAIL_LEVEL = registerIntPreference("3d_buildings_detail_level", 1).makeProfile().cache();
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();
@@ -377,7 +382,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType> availableTypes) {
 		// Disable AutoZoom dev chart
 		//AutoZoomBySpeedHelper.addAvailableGPXDataSetTypes(app, analysis, availableTypes);
 	}
