@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.vehiclesize.containers;
+package net.osmand.plus.settings.vehiclespecs.containers;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -8,8 +8,8 @@ import net.osmand.plus.base.containers.ThemedIconId;
 
 public class Assets {
 
-	private ThemedIconId themedIconId;
-	private int descriptionId;
+	private final ThemedIconId themedIconId;
+	private final int descriptionId;
 
 	public Assets(@NonNull ThemedIconId themedIconId, int descriptionId) {
 		this.themedIconId = themedIconId;

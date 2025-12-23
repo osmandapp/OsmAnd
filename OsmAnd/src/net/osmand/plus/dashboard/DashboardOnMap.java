@@ -66,6 +66,7 @@ import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment;
 import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.plugins.srtm.Buildings3DFragment;
 import net.osmand.plus.plugins.srtm.ContourLinesMenu;
 import net.osmand.plus.plugins.srtm.Relief3DFragment;
 import net.osmand.plus.plugins.srtm.TerrainFragment;
@@ -102,14 +103,7 @@ import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.render.RenderingClass;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInformationListener {
@@ -340,6 +334,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.shared_string_terrain);
 		} else if (isCurrentType(RELIEF_3D)) {
 			tv.setText(R.string.relief_3d);
+		} else if (isCurrentType(BUILDINGS_3D)) {
+			tv.setText(R.string.enable_3d_objects);
 		} else if (isCurrentType(WIKIPEDIA)) {
 			WikipediaPlugin plugin = PluginsHelper.requirePlugin(WikipediaPlugin.class);
 			tv.setText(plugin.getPopularPlacesTitle());
@@ -605,6 +601,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					TerrainFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(RELIEF_3D)) {
 					Relief3DFragment.showInstance(fragmentManager);
+				} else if (isCurrentType(BUILDINGS_3D)) {
+					Buildings3DFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(WEATHER)) {
 					WeatherMainFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(WEATHER_LAYER)) {
@@ -1035,7 +1033,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		return isCurrentType(
 				CONFIGURE_MAP, MAPILLARY, TERRAIN, RELIEF_3D, MAP_ROUTES, RENDERING_CLASS,
 				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS,
-				NAUTICAL_DEPTH, COORDINATE_GRID
+				NAUTICAL_DEPTH, COORDINATE_GRID, BUILDINGS_3D
 		);
 	}
 

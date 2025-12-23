@@ -1,5 +1,8 @@
 package net.osmand.plus.myplaces.tracks.tasks;
 
+import static net.osmand.plus.charts.ChartModeBottomSheet.getAvailableDefaultYTypes;
+import static net.osmand.plus.charts.ChartModeBottomSheet.getAvailableSensorYTypes;
+import static net.osmand.plus.charts.ChartUtils.MAX_CHART_TYPES;
 import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
 import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
 import static net.osmand.plus.charts.GPXDataSetType.SPEED;
@@ -11,7 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.charts.ChartUtils;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.activities.MapActivity;
@@ -22,6 +27,7 @@ import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.TrackDisplayGroup;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,18 +85,8 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 		hideProgress();
 
 		if (gpxItem != null && gpxItem.analysis != null) {
-			ArrayList<GPXDataSetType> list = new ArrayList<>();
-			if (gpxItem.analysis.hasElevationData()) {
-				list.add(ALTITUDE);
-			}
-			if (gpxItem.analysis.hasSpeedData()) {
-				list.add(SPEED);
-			} else if (gpxItem.analysis.hasElevationData()) {
-				list.add(SLOPE);
-			}
-			if (!list.isEmpty()) {
-				gpxItem.chartTypes = list.toArray(new GPXDataSetType[0]);
-			}
+			setItemChartType(gpxItem);
+
 			gpxItem.locationOnMap = selectedPoint;
 			settings.setMapLocationToShow(gpxItem.locationStart.getLat(), gpxItem.locationStart.getLon(),
 					settings.getLastKnownMapZoom(),
@@ -107,5 +103,75 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 			Context context = activity != null ? activity : app;
 			MapActivity.launchMapActivityMoveToTop(context);
 		}
+	}
+
+	private void setItemChartType(@NonNull GpxDisplayItem gpxItem) {
+		List<GPXDataSetType> result = getSavedSupportedTypes(gpxItem);
+
+		if (Algorithms.isEmpty(result)) {
+			result = getDefaultTypes(gpxItem.analysis);
+		}
+
+		if (!Algorithms.isEmpty(result)) {
+			gpxItem.chartTypes = limit(result).toArray(new GPXDataSetType[0]);
+		}
+	}
+
+	@NonNull
+	private List<GPXDataSetType> getSavedSupportedTypes(@NonNull GpxDisplayItem gpxItem) {
+		List<GPXDataSetType> result = new ArrayList<>();
+		List<GPXDataSetType> savedTypes = ChartUtils.getSavedGeneralYAxis(settings);
+
+		if (Algorithms.isEmpty(savedTypes)) {
+			return result;
+		}
+
+		List<GPXDataSetType> supported = getSupportedTypes(gpxItem.analysis);
+
+		for (GPXDataSetType type : savedTypes) {
+			if (supported.contains(type)) {
+				result.add(type);
+				if (result.size() >= MAX_CHART_TYPES) {
+					break;
+				}
+			}
+		}
+
+		return result;
+	}
+
+	@NonNull
+	private List<GPXDataSetType> getSupportedTypes(@NonNull GpxTrackAnalysis analysis) {
+		List<GPXDataSetType> result = new ArrayList<>();
+
+		result.addAll(getAvailableDefaultYTypes(analysis));
+		result.addAll(getAvailableSensorYTypes(analysis));
+
+		return result;
+	}
+
+
+	@NonNull
+	private List<GPXDataSetType> getDefaultTypes(@NonNull GpxTrackAnalysis analysis) {
+		List<GPXDataSetType> result = new ArrayList<>();
+
+		if (analysis.hasElevationData()) {
+			result.add(ALTITUDE);
+		}
+
+		if (analysis.hasSpeedData()) {
+			result.add(SPEED);
+		} else if (analysis.hasElevationData()) {
+			result.add(SLOPE);
+		}
+
+		return result;
+	}
+
+	private List<GPXDataSetType> limit(@NonNull List<GPXDataSetType> list) {
+		if (list.size() <= MAX_CHART_TYPES) {
+			return list;
+		}
+		return list.subList(0, MAX_CHART_TYPES);
 	}
 }
