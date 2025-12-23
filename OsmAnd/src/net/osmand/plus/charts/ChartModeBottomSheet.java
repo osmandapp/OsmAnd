@@ -151,13 +151,21 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 		textView.setTextColor(textColor);
 	}
 
-	private void checkSelectedYTypes(@NonNull List<GPXDataSetType> generalTypes, @NonNull List<GPXDataSetType> sensorTypes){
+	private void checkSelectedYTypes(@NonNull List<GPXDataSetType> generalTypes, @NonNull List<GPXDataSetType> sensorTypes) {
 		if (isSelectedSupported(generalTypes, sensorTypes)) {
 			return;
 		}
 
 		selectedYAxisMode.clear();
-		if (!Algorithms.isEmpty(generalTypes)) {
+
+		if (Algorithms.isEmpty(generalTypes)) {
+			return;
+		}
+
+		if (generalTypes.size() >= 2) {
+			selectedYAxisMode.add(generalTypes.get(0));
+			selectedYAxisMode.add(generalTypes.get(1));
+		} else {
 			selectedYAxisMode.add(generalTypes.get(0));
 		}
 	}
