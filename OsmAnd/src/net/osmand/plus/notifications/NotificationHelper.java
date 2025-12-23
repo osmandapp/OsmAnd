@@ -26,7 +26,8 @@ public class NotificationHelper {
 
 	public static final Log LOG = PlatformUtil.getLog(NotificationHelper.class);
 
-	public static final String NOTIFICATION_CHANEL_ID = "osmand_background_service";
+	// CHANGED: Added suffix "_v2" to force update on existing installs
+	public static final String NOTIFICATION_CHANEL_ID = "osmand_background_service_v2";
 	private final OsmandApplication app;
 
 	private NavigationNotification navigationNotification;
@@ -204,9 +205,14 @@ public class NotificationHelper {
 	@TargetApi(26)
 	public void createNotificationChannel() {
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+			// CHANGED: Use IMPORTANCE_DEFAULT to allow status bar icon
 			NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANEL_ID,
-					app.getString(R.string.osmand_service), NotificationManager.IMPORTANCE_LOW);
+					app.getString(R.string.osmand_service), NotificationManager.IMPORTANCE_DEFAULT);
+			
+			// CHANGED: Explicitly set sound to null to keep it silent
+			channel.setSound(null, null);
 			channel.enableVibration(false);
+			
 			channel.setDescription(app.getString(R.string.osmand_service_descr));
 			NotificationManagerCompat.from(app).createNotificationChannel(channel);
 		}
