@@ -126,6 +126,7 @@ public class ApproximationTest {
 		double distance = 0;
 		Set<Long> waysInResult = new HashSet<>();
 		Map<Long, String> turnsInResult = new HashMap<>();
+		Map<Long, Integer> turnsAngleInResult = new HashMap<>();
 		for (RouteSegmentResult segment : result) {
 			long osmId = segment.getObject().getId() / 64;
 			distance += calcSegmentDistance(segment);
@@ -137,6 +138,7 @@ public class ApproximationTest {
 				String turnLanesString = (skipToSpeak ? "[MUTE] " : "") + turn +
 						(!Algorithms.isEmpty(lanes) ? ":" + lanes : "");
 				turnsInResult.put(osmId, turnLanesString);
+				turnsAngleInResult.put(osmId, (int)segment.getTurnType().getTurnAngle());
 			}
 		}
 
@@ -148,6 +150,14 @@ public class ApproximationTest {
 			for (long osmId : entry.expectedWays.keySet()) {
 				String messageWays = tag + "expectedWays (" + entry.expectedWays.get(osmId) + ") failed for " + osmId;
 				Assert.assertTrue(messageWays, waysInResult.contains(osmId) == entry.expectedWays.get(osmId));
+			}
+		}
+
+		if (entry.expectedTurnsAngle != null) {
+			for (long osmId : entry.expectedTurnsAngle.keySet()) {
+				int expected = entry.expectedTurnsAngle.get(osmId);
+				String messageTurnsAngle = tag + "expectedTurnsAngle (" + expected + ") failed for " + osmId;
+				Assert.assertSame(messageTurnsAngle, turnsAngleInResult.get(osmId), expected);
 			}
 		}
 
@@ -196,5 +206,6 @@ public class ApproximationTest {
 		private double expectedDistMax;
 		private Map<Long, Boolean> expectedWays;
 		private Map<Long, String> expectedTurns;
+		private Map<Long, Integer> expectedTurnsAngle;
 	}
 }
