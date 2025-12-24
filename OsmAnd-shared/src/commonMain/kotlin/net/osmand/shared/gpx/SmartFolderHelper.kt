@@ -49,7 +49,9 @@ object SmartFolderHelper {
 
 	init {
 		osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "", true, true)
-		osmAndSettings.addStringPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
+		osmAndSettings.addStringPreferenceListener(
+			TRACK_FILTERS_SETTINGS_PREF,
+			settingsChangedListener)
 		readSettings()
 	}
 

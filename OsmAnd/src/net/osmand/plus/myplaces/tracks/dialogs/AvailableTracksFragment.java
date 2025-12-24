@@ -37,12 +37,14 @@ import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.shared.gpx.SmartFolderUpdateListener;
 import net.osmand.shared.gpx.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
+import net.osmand.shared.gpx.enums.OrganizeByType;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
@@ -460,6 +462,14 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		return new LoadTracksListener() {
 			@Override
 			public void tracksLoaded(@NonNull TrackFolder folder) {
+				//todo OrganizeBy test purposes
+				for (SmartFolder smartFolder : SmartFolderHelper.INSTANCE.getSmartFolders()) {
+					if (smartFolder.getFolderName().equals("All")) {
+						OrganizeByType type = OrganizeByType.LENGTH;
+						String maxValueInDb = app.getGpxDbHelper().getMaxParameterValue(type.getFilterType().getProperty());
+						smartFolder.organizeByType(type, maxValueInDb);
+					}
+				}
 			}
 
 			@Override
