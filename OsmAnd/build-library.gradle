@@ -54,6 +54,7 @@ android {
 			osmandTask.dependsOn(copyBundledAssets)
 			osmandTask.dependsOn(copy3DModels)
 			osmandTask.dependsOn(collectVoiceAssets)
+			osmandTask.dependsOn(collectAstroAssets)
 			osmandTask.dependsOn(downloadWorldMiniBasemap)
 		}
 		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
