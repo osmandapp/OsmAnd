@@ -5,7 +5,6 @@ import net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION
 import net.osmand.shared.gpx.GpxUtilities.POINT_SPEED
 import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.gpx.primitives.WptPt
-import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.routing.RouteColorize.ColorizationType
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KMapUtils
@@ -217,17 +216,17 @@ class GpxTrackAnalysis {
 		get() = (getGpxParameter(GpxParameter.AVG_OBD_ENGINE_OIL_TEMPERATURE) as Double).toFloat()
 		set(value) = setGpxParameter(GpxParameter.AVG_OBD_ENGINE_OIL_TEMPERATURE, value.toDouble())
 
-	var maxObdEngineOilTemperature: Float
-		get() = (getGpxParameter(GpxParameter.MAX_OBD_ENGINE_OIL_TEMPERATURE) as Double).toFloat()
-		set(value) = setGpxParameter(GpxParameter.MAX_OBD_ENGINE_OIL_TEMPERATURE, value.toDouble())
+	var maxObdEngineOilTemperature: Int
+		get() = getGpxParameter(GpxParameter.MAX_OBD_ENGINE_OIL_TEMPERATURE) as Int
+		set(value) = setGpxParameter(GpxParameter.MAX_OBD_ENGINE_OIL_TEMPERATURE, value)
 
 	var avgObdFuelPressure: Float
 		get() = (getGpxParameter(GpxParameter.AVG_OBD_FUEL_PRESSURE) as Double).toFloat()
 		set(value) = setGpxParameter(GpxParameter.AVG_OBD_FUEL_PRESSURE, value.toDouble())
 
-	var maxObdFuelPressure: Float
-		get() = (getGpxParameter(GpxParameter.MAX_OBD_FUEL_PRESSURE) as Double).toFloat()
-		set(value) = setGpxParameter(GpxParameter.MAX_OBD_FUEL_PRESSURE, value.toDouble())
+	var maxObdFuelPressure: Int
+		get() = getGpxParameter(GpxParameter.MAX_OBD_FUEL_PRESSURE) as Int
+		set(value) = setGpxParameter(GpxParameter.MAX_OBD_FUEL_PRESSURE, value)
 
 	var avgObdBatteryVoltage: Float
 		get() = (getGpxParameter(GpxParameter.AVG_OBD_BATTERY_VOLTAGE) as Double).toFloat()
@@ -241,17 +240,17 @@ class GpxTrackAnalysis {
 		get() = (getGpxParameter(GpxParameter.AVG_OBD_AMBIENT_AIR_TEMPERATURE) as Double).toFloat()
 		set(value) = setGpxParameter(GpxParameter.AVG_OBD_AMBIENT_AIR_TEMPERATURE, value.toDouble())
 
-	var maxObdAmbientAirTemperature: Float
-		get() = (getGpxParameter(GpxParameter.MAX_OBD_AMBIENT_AIR_TEMPERATURE) as Double).toFloat()
-		set(value) = setGpxParameter(GpxParameter.MAX_OBD_AMBIENT_AIR_TEMPERATURE, value.toDouble())
+	var maxObdAmbientAirTemperature: Int
+		get() = getGpxParameter(GpxParameter.MAX_OBD_AMBIENT_AIR_TEMPERATURE) as Int
+		set(value) = setGpxParameter(GpxParameter.MAX_OBD_AMBIENT_AIR_TEMPERATURE, value)
 
-	var avgObdEngineRpm: Float
-		get() = (getGpxParameter(GpxParameter.AVG_OBD_ENGINE_RPM) as Double).toFloat()
-		set(value) = setGpxParameter(GpxParameter.AVG_OBD_ENGINE_RPM, value.toDouble())
+	var avgObdEngineRpm: Int
+		get() = getGpxParameter(GpxParameter.AVG_OBD_ENGINE_RPM) as Int
+		set(value) = setGpxParameter(GpxParameter.AVG_OBD_ENGINE_RPM, value)
 
-	var maxObdEngineRpm: Float
-		get() = (getGpxParameter(GpxParameter.MAX_OBD_ENGINE_RPM) as Double).toFloat()
-		set(value) = setGpxParameter(GpxParameter.MAX_OBD_ENGINE_RPM, value.toDouble())
+	var maxObdEngineRpm: Int
+		get() = getGpxParameter(GpxParameter.MAX_OBD_ENGINE_RPM) as Int
+		set(value) = setGpxParameter(GpxParameter.MAX_OBD_ENGINE_RPM, value)
 
 	var avgObdEngineRuntime: Long
 		get() = getGpxParameter(GpxParameter.AVG_OBD_ENGINE_RUNTIME) as Long
@@ -265,25 +264,25 @@ class GpxTrackAnalysis {
 		get() = (getGpxParameter(GpxParameter.AVG_OBD_VEHICLE_SPEED) as Double).toFloat()
 		set(value) = setGpxParameter(GpxParameter.AVG_OBD_VEHICLE_SPEED, value.toDouble())
 
-	var maxObdVehicleSpeed: Float
-		get() = (getGpxParameter(GpxParameter.MAX_OBD_VEHICLE_SPEED) as Double).toFloat()
-		set(value) = setGpxParameter(GpxParameter.MAX_OBD_VEHICLE_SPEED, value.toDouble())
+	var maxObdVehicleSpeed: Int
+		get() = getGpxParameter(GpxParameter.MAX_OBD_VEHICLE_SPEED) as Int
+		set(value) = setGpxParameter(GpxParameter.MAX_OBD_VEHICLE_SPEED, value)
 
 	var avgObdAirIntakeTemperature: Float
 		get() = (getGpxParameter(GpxParameter.AVG_OBD_AIR_INTAKE_TEMPERATURE) as Double).toFloat()
 		set(value) = setGpxParameter(GpxParameter.AVG_OBD_AIR_INTAKE_TEMPERATURE, value.toDouble())
 
-	var maxObdAirIntakeTemperature: Float
-		get() = (getGpxParameter(GpxParameter.MAX_OBD_AIR_INTAKE_TEMPERATURE) as Double).toFloat()
-		set(value) = setGpxParameter(GpxParameter.MAX_OBD_AIR_INTAKE_TEMPERATURE, value.toDouble())
+	var maxObdAirIntakeTemperature: Int
+		get() = getGpxParameter(GpxParameter.MAX_OBD_AIR_INTAKE_TEMPERATURE) as Int
+		set(value) = setGpxParameter(GpxParameter.MAX_OBD_AIR_INTAKE_TEMPERATURE, value)
 
 	var avgObdEngineCoolantTemperature: Float
 		get() = (getGpxParameter(GpxParameter.AVG_OBD_ENGINE_COOLANT_TEMPERATURE) as Double).toFloat()
 		set(value) = setGpxParameter(GpxParameter.AVG_OBD_ENGINE_COOLANT_TEMPERATURE, value.toDouble())
 
-	var maxObdEngineCoolantTemperature: Float
-		get() = (getGpxParameter(GpxParameter.MAX_OBD_ENGINE_COOLANT_TEMPERATURE) as Double).toFloat()
-		set(value) = setGpxParameter(GpxParameter.MAX_OBD_ENGINE_COOLANT_TEMPERATURE, value.toDouble())
+	var maxObdEngineCoolantTemperature: Int
+		get() = getGpxParameter(GpxParameter.MAX_OBD_ENGINE_COOLANT_TEMPERATURE) as Int
+		set(value) = setGpxParameter(GpxParameter.MAX_OBD_ENGINE_COOLANT_TEMPERATURE, value)
 
 	var avgObdFuelConsumptionRate: Float
 		get() = (getGpxParameter(GpxParameter.AVG_OBD_FUEL_CONSUMPTION_RATE) as Double).toFloat()
@@ -654,8 +653,9 @@ class GpxTrackAnalysis {
 				}
 
 				attributes.rpmSpeed.takeIf { !it.isNaN() }?.let {
-					maxObdEngineRpm = maxOf(maxObdEngineRpm, it)
-					totalObdRpm += it
+					val rpm = it.toInt()
+					maxObdEngineRpm = maxOf(maxObdEngineRpm, rpm)
+					totalObdRpm += rpm
 					obdRpmCount++
 				}
 
@@ -667,8 +667,9 @@ class GpxTrackAnalysis {
 				}
 
 				attributes.fuelPressure.takeIf { !it.isNaN() }?.let {
-					maxObdFuelPressure = maxOf(maxObdFuelPressure, it)
-					totalObdFuelPressure += it
+					val fuelP = it.toInt()
+					maxObdFuelPressure = maxOf(maxObdFuelPressure, fuelP)
+					totalObdFuelPressure += fuelP
 					obdFuelPressureCount++
 				}
 
@@ -679,8 +680,9 @@ class GpxTrackAnalysis {
 				}
 
 				attributes.vehicleSpeed.takeIf { !it.isNaN() }?.let {
-					maxObdVehicleSpeed = maxOf(maxObdVehicleSpeed, it)
-					totalObdVehicleSpeed += it
+					val _speed = it.toInt()
+					maxObdVehicleSpeed = maxOf(maxObdVehicleSpeed, _speed)
+					totalObdVehicleSpeed += _speed
 					obdVehicleSpeedCount++
 				}
 
@@ -696,23 +698,30 @@ class GpxTrackAnalysis {
 					obdFuelLevelCount++
 				}
 				attributes.intakeTemp.takeIf { it.isFinite() }?.let {
-					maxObdAirIntakeTemperature = maxOf(maxObdAirIntakeTemperature, it)
-					totalObdTempIntake += it
+					val temp = it.toInt()
+					maxObdAirIntakeTemperature = maxOf(maxObdAirIntakeTemperature, temp)
+					totalObdTempIntake += temp
 					obdTempIntakeCount++
 				}
+
 				attributes.coolantTemp.takeIf { it.isFinite() }?.let {
-					maxObdEngineCoolantTemperature = maxOf(maxObdEngineCoolantTemperature, it)
-					totalObdTempCoolant += it
+					val temp = it.toInt()
+					maxObdEngineCoolantTemperature = maxOf(maxObdEngineCoolantTemperature, temp)
+					totalObdTempCoolant += temp
 					obdTempCoolantCount++
 				}
+
 				attributes.engineOilTemp.takeIf { it.isFinite() }?.let {
-					maxObdEngineOilTemperature = maxOf(maxObdEngineOilTemperature, it)
-					totalObdTempOil += it
+					val temp = it.toInt()
+					maxObdEngineOilTemperature = maxOf(maxObdEngineOilTemperature, temp)
+					totalObdTempOil += temp
 					obdTempOilCount++
 				}
+
 				attributes.ambientTemp.takeIf { it.isFinite() }?.let {
-					maxObdAmbientAirTemperature = maxOf(maxObdAmbientAirTemperature, it)
-					totalObdTempAmbient += it
+					val temp = it.toInt()
+					maxObdAmbientAirTemperature = maxOf(maxObdAmbientAirTemperature, temp)
+					totalObdTempAmbient += temp
 					obdTempAmbientCount++
 				}
 
@@ -756,7 +765,7 @@ class GpxTrackAnalysis {
 
 		avgObdEngineLoad = processAverageValue(totalObdEngineLoad, obdEngineLoadCount)
 		avgObdThrottlePosition = processAverageValue(totalObdThrottle, obdThrottleCount)
-		avgObdEngineRpm = processAverageValue(totalObdRpm, obdRpmCount)
+		avgObdEngineRpm = processAverageInt(totalObdRpm, obdRpmCount)
 		avgObdEngineRuntime = processAverageLong(totalObdRuntime, obdRuntimeCount)
 		avgObdFuelPressure = processAverageValue(totalObdFuelPressure, obdFuelPressureCount)
 		avgObdBatteryVoltage = processAverageValue(totalObdBatteryVoltage, obdBatteryVoltageCount)
@@ -871,6 +880,10 @@ class GpxTrackAnalysis {
 		return if (valuesCount > 0) (totalSum.toDouble() / valuesCount).toFloat() else -1f
 	}
 
+	private fun processAverageInt(totalSum: Number, valuesCount: Int): Int {
+		return if (valuesCount > 0) (totalSum.toDouble() / valuesCount).toInt() else 0
+	}
+
 	private fun processElevationDiff(segment: SplitSegment) {
 		val approximator = getElevationApproximator(segment)
 		approximator.approximate()
@@ -980,35 +993,10 @@ class GpxTrackAnalysis {
 		}
 	}
 
+
+
 	fun hasAnyObdMetric(): Boolean {
-		val obdParameters = listOf(
-			GpxParameter.MAX_OBD_ENGINE_LOAD,
-			GpxParameter.AVG_OBD_ENGINE_LOAD,
-			GpxParameter.MAX_OBD_THROTTLE_POSITION,
-			GpxParameter.AVG_OBD_THROTTLE_POSITION,
-			GpxParameter.MAX_OBD_ENGINE_OIL_TEMPERATURE,
-			GpxParameter.AVG_OBD_ENGINE_OIL_TEMPERATURE,
-			GpxParameter.MAX_OBD_FUEL_PRESSURE,
-			GpxParameter.AVG_OBD_FUEL_PRESSURE,
-			GpxParameter.MAX_OBD_BATTERY_VOLTAGE,
-			GpxParameter.AVG_OBD_BATTERY_VOLTAGE,
-			GpxParameter.MAX_OBD_AMBIENT_AIR_TEMPERATURE,
-			GpxParameter.AVG_OBD_AMBIENT_AIR_TEMPERATURE,
-			GpxParameter.MAX_OBD_ENGINE_RPM,
-			GpxParameter.AVG_OBD_ENGINE_RPM,
-			GpxParameter.MAX_OBD_ENGINE_RUNTIME,
-			GpxParameter.AVG_OBD_ENGINE_RUNTIME,
-			GpxParameter.MAX_OBD_VEHICLE_SPEED,
-			GpxParameter.AVG_OBD_VEHICLE_SPEED,
-			GpxParameter.MAX_OBD_AIR_INTAKE_TEMPERATURE,
-			GpxParameter.AVG_OBD_AIR_INTAKE_TEMPERATURE,
-			GpxParameter.MAX_OBD_ENGINE_COOLANT_TEMPERATURE,
-			GpxParameter.AVG_OBD_ENGINE_COOLANT_TEMPERATURE,
-			GpxParameter.MAX_OBD_FUEL_CONSUMPTION_RATE,
-			GpxParameter.AVG_OBD_FUEL_CONSUMPTION_RATE,
-			GpxParameter.MAX_OBD_FUEL_LEVEL,
-			GpxParameter.AVG_OBD_FUEL_LEVEL
-		)
+		val obdParameters = GpxParameter.getObdParameters()
 
 		return obdParameters.any { param ->
 			when (val value = getGpxParameter(param)) {
