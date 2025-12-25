@@ -1536,7 +1536,7 @@
     <string name="rate_this_app_long">Merci d\'évaluer OsmAnd sur Google Play</string>
     <string name="user_hates_app_get_feedback">Indiquez-nous pourquoi.</string>
     <string name="user_hates_app_get_feedback_long">N’hésitez pas à nous faire part de vos suggestions.</string>
-    <string name="download_live_updates">Mises à jour en direct</string>
+    <string name="download_live_updates">Mises à jour temps réel</string>
     <string name="failed_to_upload">Erreur lors de l’envoi</string>
     <string name="delete_change">Supprimer les modifications</string>
     <string name="successfully_uploaded_pattern">Envoyé {0}/{1}</string>
@@ -4514,7 +4514,7 @@
     <string name="quick_action_precipitation_layer">Un bouton permettant d\'afficher ou de masquer la couche des précipitations sur la carte.</string>
     <string name="quick_action_wind_layer">Un bouton permettant d\'afficher ou de masquer la couche de vent sur la carte.</string>
     <string name="quick_action_air_pressure_layer">Un bouton permettant d\'afficher ou de masquer la couche de pression atmosphérique sur la carte.</string>
-    <string name="quick_action_cloud_layer">Un bouton permettant d\'afficher ou de masquer la couche nuageuse sur la carte.</string>
+    <string name="quick_action_cloud_layer">Un bouton permettant d\'afficher ou de masquer la couche couverture nuageuse sur la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Couleur des courbes</string>
     <string name="rendering_attr_showMtbScale_description">Afficher la difficulté des itinéraires VTT selon l\'échelle MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Afficher la difficulté VTT</string>
