@@ -123,7 +123,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		Slider visibilitySlider = view.findViewById(R.id.transparency_slider);
 		TextView visibilityTv = view.findViewById(R.id.transparency_value_tv);
 		TextView title = view.findViewById(R.id.title);
-		title.setText(R.string.shared_string_transparency);
+		title.setText(R.string.gpx_visibility_txt);
 
 		float alpha = plugin.BUILDINGS_3D_ALPHA.get();
 		int progress = ProgressHelper.normalizeProgressPercent((int) (alpha * 100));
