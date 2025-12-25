@@ -3586,8 +3586,8 @@
     <string name="poi_atoll">Atol</string>
     <string name="poi_disabled_designated">Aangegeven</string>
     <string name="poi_goods_designated">Aangegeven</string>
-    <string name="poi_hgv_delivery">Bestemmingsverkeer</string>
-    <string name="poi_hgv_designated">Aangegeven</string>
+    <string name="poi_hgv_delivery">Levering;Toegang voor bevoorradingsvrachtwagens</string>
+    <string name="poi_hgv_designated">Aangewezen;Aangewezen voor vrachtwagens</string>
     <string name="poi_hgv_permissive">Toegestaan</string>
     <string name="poi_hgv_destination">Bestemmingsverkeer</string>
     <string name="poi_mofa_designated">Aangewezen;Aangewezen voor snorfietsen</string>
@@ -4300,4 +4300,5 @@
     <string name="poi_route_article">Reisartikelen</string>
     <string name="poi_us_maps_recreation_area_activity_tubing">Tubing</string>
     <string name="poi_traffic_signals_arrow_no">Pijl in looprichting: nee</string>
+    <string name="poi_route_activity_type_truck_hgv">Vrachtwagen</string>
 </resources>
