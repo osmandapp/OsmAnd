@@ -5909,4 +5909,5 @@
     <string name="delete_folder_description">Ĉu forigi la dosierujon “%1$s”?</string>
     <string name="show_spherical_map">Globa vido</string>
     <string name="enable_3d_objects">3-dimensiaj konstruaĵoj</string>
+    <string name="buildings_3d_detail_level">Detal-nivelo de 3-dimensiaj konstruaĵoj</string>
 </resources>
