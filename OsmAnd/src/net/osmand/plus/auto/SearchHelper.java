@@ -187,7 +187,7 @@ public class SearchHelper {
 					continue;
 				}
 				Drawable icon = QuickSearchListItem.getIcon(app, r);
-				String typeName = showDescription ? QuickSearchListItem.getExtendedTypeName(app, r) : "";
+				String typeName = showDescription ? addAddress(QuickSearchListItem.getExtendedTypeName(app, r), r) : r.addressName;
 				itemList.setNoItemsMessage(app.getString(R.string.search_nothing_found));
 				Row.Builder builder = buildSearchRow(searchSettings.getOriginalLocation(), r.location, name, icon, typeName);
 				if (builder != null) {
@@ -239,6 +239,14 @@ public class SearchHelper {
 			});
 		});
 		searchUICore.search(searchQuery, true, null, searchSettings);
+	}
+
+	public String addAddress(@NonNull String str, @NonNull SearchResult result) {
+		if(!Algorithms.isEmpty(result.addressName)) {
+			return String.format("%s • %s", str, result.addressName);
+		} else {
+			return str;
+		}
 	}
 
 	public void completeQueryWithObject(@NonNull SearchResult result) {

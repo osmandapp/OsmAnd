@@ -1213,6 +1213,7 @@ public class OpeningHoursParser {
 					}
 				}
 				if (off) {
+//					b.append(" ");
 					b.append(offStr);
 				}
 			} else {
@@ -1243,7 +1244,7 @@ public class OpeningHoursParser {
 					b.append(comment);
 				}
 			}
-			return b.toString();
+			return b.toString().trim();
 		}
 
 		private boolean appendYearString(StringBuilder b, int[] yearMonths, int month) {
