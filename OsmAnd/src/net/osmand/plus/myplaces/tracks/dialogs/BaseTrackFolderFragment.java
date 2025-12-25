@@ -475,6 +475,13 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		}
 	}
 
+	protected void showOrganizeByDialog() {
+		callActivity(activity -> {
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			OrganizeTracksByController.Companion.showDialog(app, fragmentManager, appMode);
+		});
+	}
+
 	@Nullable
 	public ScreenPositionData getFirstSuitableItemScreenPosition() {
 		LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();

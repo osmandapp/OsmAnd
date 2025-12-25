@@ -65,6 +65,15 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 			}.create())
 
 		items.add(PopUpMenuItem.Builder(app)
+			.setTitleId(R.string.organize_by)
+			.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_tracks_organize))
+			.setOnClickListener {
+				showOrganizeByDialog()
+			}
+			.showTopDivider(true)
+			.create())
+
+		items.add(PopUpMenuItem.Builder(app)
 			.setTitleId(R.string.shared_string_refresh)
 			.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_update))
 			.setOnClickListener {

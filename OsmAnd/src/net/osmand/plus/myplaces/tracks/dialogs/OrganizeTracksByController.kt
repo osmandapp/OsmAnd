@@ -1,0 +1,112 @@
+package net.osmand.plus.myplaces.tracks.dialogs
+
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import net.osmand.plus.OsmandApplication
+import net.osmand.plus.base.containers.ScreenItem
+import net.osmand.plus.base.dialog.BaseDialogController
+import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.DIALOG_SUMMARY
+import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.DIVIDER_FULL
+import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.DIVIDER_WITH_PADDING
+import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.GROUP_HEADER
+import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.SELECTABLE_ITEM
+import net.osmand.plus.settings.backend.ApplicationMode
+import net.osmand.shared.gpx.enums.OrganizeByGroupType
+import net.osmand.shared.gpx.enums.OrganizeByType
+import net.osmand.util.CollectionUtils
+
+class OrganizeTracksByController(
+    val app: OsmandApplication,
+    val appMode: ApplicationMode
+): BaseDialogController(app) {
+
+    var fragmentActivity: FragmentActivity? = null
+
+    // Current selection state (null represents "None")
+    var selectedType: OrganizeByType? = null
+        private set
+
+    // Initial state to check for changes
+    private var initialType: OrganizeByType? = null
+
+    init {
+        // TODO: Load real value from settings here
+        // val savedType = app.settings.getOrganizeTracksType(appMode)
+        // initialType = savedType
+        // selectedType = savedType
+
+        initialType = null
+        selectedType = initialType
+    }
+
+    companion object {
+        const val PROCESS_ID = "select_organize_tracks_by_type"
+
+        fun showDialog(
+            app: OsmandApplication,
+            fragmentManager: FragmentManager,
+            appMode: ApplicationMode
+        ) {
+            val controller = OrganizeTracksByController(app, appMode)
+            app.dialogManager.register(PROCESS_ID, controller)
+            if (!OrganizeTracksByFragment.showInstance(fragmentManager, appMode)) {
+                app.dialogManager.unregister(PROCESS_ID)
+            }
+        }
+
+        fun getExistedInstance(app: OsmandApplication): OrganizeTracksByController? {
+            return app.dialogManager.findController(PROCESS_ID) as? OrganizeTracksByController
+        }
+    }
+
+    override fun getProcessId(): String = PROCESS_ID
+
+    fun populateScreenItems(): List<ScreenItem> {
+        val items = mutableListOf<ScreenItem>()
+
+        items.add(ScreenItem(DIALOG_SUMMARY))
+        items.add(ScreenItem(SELECTABLE_ITEM, null))
+
+        // todo decide should we use direct order of elements or somehow predefine it
+        var group: OrganizeByGroupType? = null
+        for (type in OrganizeByType.entries) {
+            val currentGroup = type.group
+            if (group != currentGroup) {
+                group = currentGroup
+                items.add(ScreenItem(DIVIDER_FULL))
+                items.add(ScreenItem(GROUP_HEADER, group))
+            }
+            items.add(ScreenItem(SELECTABLE_ITEM, type))
+            if (shouldAddParagraphDivider(type)) {
+                items.add(ScreenItem(DIVIDER_WITH_PADDING))
+            }
+        }
+        items.add(ScreenItem(DIVIDER_FULL))
+        return items
+    }
+
+    private fun shouldAddParagraphDivider(type: OrganizeByType): Boolean {
+        return CollectionUtils.equalsToAny(
+            type,
+            OrganizeByType.AVG_ALTITUDE, OrganizeByType.SENSOR_SPEED_AVG,
+            OrganizeByType.HEART_RATE_AVG, OrganizeByType.CADENCE_AVG, OrganizeByType.POWER_AVG
+        )
+    }
+    fun selectType(type: OrganizeByType?) {
+        if (selectedType != type) {
+            selectedType = type
+            dialogManager.askRefreshDialogCompletely(PROCESS_ID)
+        }
+    }
+
+    fun hasChanges(): Boolean {
+        return selectedType != initialType
+    }
+
+    fun askSaveChanges() {
+        if (hasChanges()) {
+            // TODO: Save to settings
+            // app.settings.setOrganizeTracksType(appMode, selectedType)
+        }
+    }
+}

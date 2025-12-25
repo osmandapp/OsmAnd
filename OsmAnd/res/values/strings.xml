@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="organize_by_summary">Automatically organize your tracks into groups based on a selected parameter like activity, speed, or location.</string>
+    <string name="organize_by">Organize by</string>
     <string name="group_general">General</string>
     <string name="group_date_time">Date &amp; Time</string>
     <string name="group_altitude_elevation">Altitude and elevation</string>
