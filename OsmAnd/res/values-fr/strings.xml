@@ -5824,4 +5824,5 @@
     <string name="vehicle_metrics_chart_category">Mesures du véhicule</string>
     <string name="lang_mi">Maori</string>
     <string name="buildings_3d_detail_level">Détail des bâtiments 3D</string>
+    <string name="has_vehicle_metrics">Avec les données OBDII</string>
 </resources>
