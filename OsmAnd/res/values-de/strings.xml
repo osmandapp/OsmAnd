@@ -5931,6 +5931,11 @@
     <string name="copy_link">Link kopieren</string>
     <string name="button_frames">Schaltflächenrahmen</string>
     <string name="routing_attr_pt_limit_name">Die N besten Routen anzeigen</string>
-    <string name="routing_attr_pt_limit_description">Die Anzahl der anzuzeigenden besten Routen angeben</string>
+    <string name="routing_attr_pt_limit_description">Gibt die Anzahl der anzuzeigenden besten Routen an</string>
     <string name="deleted_maps_warning">Sie sind dabei, %d Element(e) zu löschen.\nFortfahren?</string>
+    <string name="enable_3d_objects">3D-Gebäude</string>
+    <string name="lang_mi">Maori</string>
+    <string name="vehicle_metrics_chart_category">Fahrzeugdaten</string>
+    <string name="delete_folder_description">Ordner „%1$s“ löschen?</string>
+    <string name="slots">Slots</string>
 </resources>

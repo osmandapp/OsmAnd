@@ -2467,7 +2467,7 @@
     <string name="travel_card_download_descr">Töltse le a Wikivoyage útikalauzokat, hogy internetkapcsolat nélkül olvashasson cikkeket a világ érdekes helyeiről.</string>
     <string name="start_editing_card_image_text">Az ingyenes, világméretű útikalauz, amit bárki szerkeszthet.</string>
     <string name="welcome_to_open_beta_description">Az útikalauz a Wikivoyage-on alapul. Tesztelje a lehetőségeit a nyílt béta teszten ingyenesen.</string>
-    <string name="start_editing_card_description">Szerkesztheti, sőt szerkessze a Wikivoyage szócikkeit. Ossza meg tudását, tapasztalatait, tehetségét és figyelmességét.</string>
+    <string name="start_editing_card_description">Szerkesztheti, sőt szerkessze a Wikivoyage szócikkeit. Ossza meg tudását, tapasztalatait, tehetségét és megfigyeléseit.</string>
     <string name="start_editing">Szerkesztés elkezdése</string>
     <string name="get_unlimited_access">Szerezz korlátlan hozzáférést</string>
     <string name="welcome_to_open_beta">Üdvözöljük a nyílt béta tesztben</string>
@@ -4528,16 +4528,16 @@
     <string name="rendering_attr_depthContourColorScheme_name">Vonal színsémája</string>
     <string name="rendering_attr_depthContourWidth_name">Vonal vastagsága</string>
     <string name="storage_migration_fragment_close_descr">Csak %1$s%% másolása van kész. Ha most leállítja, akkor lehet, hogy az alkalmazás nem fog megfelelően működni.</string>
-    <string name="quick_action_precipitation_layer">A csapadék réteget megjelenítő vagy elrejtő kapcsoló.</string>
-    <string name="quick_action_wind_layer">A szél réteget megjelenítő vagy elrejtő kapcsoló.</string>
-    <string name="quick_action_cloud_layer">A felhőzet réteget megjelenítő vagy elrejtő kapcsoló.</string>
-    <string name="quick_action_air_pressure_layer">A légnyomás réteget megjelenítő vagy elrejtő kapcsoló.</string>
+    <string name="quick_action_precipitation_layer">A csapadékréteg megjelenítésére vagy elrejtésére szolgáló kapcsoló a térképen.</string>
+    <string name="quick_action_wind_layer">A szélréteg megjelenítésére vagy elrejtésére szolgáló kapcsoló a térképen.</string>
+    <string name="quick_action_cloud_layer">A felhőzetréteg megjelenítésére vagy elrejtésére szolgáló kapcsoló a térképen.</string>
+    <string name="quick_action_air_pressure_layer">A nyomásréteg megjelenítésére vagy elrejtésére szolgáló kapcsoló a térképen.</string>
     <string name="temperature_layer">Hőmérséklet réteg</string>
     <string name="pressure_layer">Légnyomás réteg</string>
     <string name="wind_layer">Szél réteg</string>
     <string name="cloud_layer">Felhőzet réteg</string>
     <string name="precipitation_layer">Csapadék réteg</string>
-    <string name="quick_action_temperature_layer">A hőmérséklet réteget megjelenítő vagy elrejtő kapcsoló.</string>
+    <string name="quick_action_temperature_layer">A hőmérsékletréteg megjelenítésére vagy elrejtésére szolgáló kapcsoló a térképen.</string>
     <string name="rendering_attr_showMtbScale_name">MTB skála megjelenítése</string>
     <string name="rendering_attr_showMtbScale_description">Nyomvonalak megjelenítése MTB-nehézségi szintek szerint.</string>
     <string name="mtb_scale">MTB skála</string>
@@ -5793,8 +5793,8 @@
     <string name="save_and_access_articles_offline">Adatmentés és cikkek offline elérése bárhonnan</string>
     <string name="private_access_routing_req_short">Engedélyezi a magánutak használatát az úti cél eléréséhez?</string>
     <string name="download_wikipedia_label">Wikipédia letöltése</string>
-    <string name="quick_action_weather_layers">Kapcsoló az időjárási rétegek megjelenítéséhez vagy elrejtéséhez a térképen.</string>
-    <string name="quick_action_wind_animation_layer">Kapcsoló a szélanimáció rétegének megjelenítéséhez vagy elrejtéséhez a térképen.</string>
+    <string name="quick_action_weather_layers">Az időjárási réteg megjelenítésére vagy elrejtésére szolgáló kapcsoló a térképen.</string>
+    <string name="quick_action_wind_animation_layer">A szélanimációs réteg megjelenítésére vagy elrejtésére szolgáló kapcsoló a térképen.</string>
     <string name="wind_animation_layer">Szélanimációs réteg</string>
     <string name="weather_layers">Időjárási rétegek</string>
     <string name="lang_crh">Krími tatár (latin)</string>
@@ -5819,4 +5819,6 @@
     <string name="delete_folder_description">Biztosan törli a(z) „%1$s” mappát?</string>
     <string name="show_spherical_map">Földgömbnézet</string>
     <string name="enable_3d_objects">3D épületek</string>
+    <string name="lang_mi">maori</string>
+    <string name="buildings_3d_detail_level">3D épületek részletezése</string>
 </resources>

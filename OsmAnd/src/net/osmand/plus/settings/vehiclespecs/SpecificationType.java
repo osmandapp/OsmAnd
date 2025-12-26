@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.vehiclesize;
+package net.osmand.plus.settings.vehiclespecs;
 
 import static net.osmand.router.GeneralRouter.MAX_AXLE_LOAD;
 import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
@@ -10,7 +10,9 @@ import static net.osmand.router.GeneralRouter.WEIGHT_RATING;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public enum SizeType {
+import net.osmand.util.CollectionUtils;
+
+public enum SpecificationType {
 
 	WIDTH(VEHICLE_WIDTH),
 	HEIGHT(VEHICLE_HEIGHT),
@@ -19,15 +21,15 @@ public enum SizeType {
 	AXLE_LOAD(MAX_AXLE_LOAD),
 	WEIGHT_FULL_LOAD(WEIGHT_RATING);
 
-	private String key;
+	private final String key;
 
-	SizeType(String key) {
+	SpecificationType(@NonNull String key) {
 		this.key = key;
 	}
 
 	@Nullable
-	public static SizeType getByKey(@NonNull String key) {
-		for (SizeType type : values()) {
+	public static SpecificationType getByKey(@NonNull String key) {
+		for (SpecificationType type : values()) {
 			if (key.equals(type.key)) {
 				return type;
 			}
@@ -35,9 +37,7 @@ public enum SizeType {
 		return null;
 	}
 
-	public boolean isWeightType () {
-		return this == SizeType.WEIGHT
-				|| this == SizeType.AXLE_LOAD
-				|| this == SizeType.WEIGHT_FULL_LOAD;
+	public boolean isWeightRelated() {
+		return CollectionUtils.equalsToAny(this, WEIGHT, AXLE_LOAD, WEIGHT_FULL_LOAD);
 	}
 }

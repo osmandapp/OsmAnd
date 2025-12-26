@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro.views
+package net.osmand.plus.plugins.astro
 
 import io.github.cosinekitty.astronomy.Body
 
@@ -7,6 +7,8 @@ import io.github.cosinekitty.astronomy.Body
  */
 data class SkyObject(
 	val id: String,
+	val hip: Int, // Hipparcos catalog ID
+	val wid: String, // Wikipedia ID
 	val type: Type,
 	val body: Body?, // Null for custom stars not in Body enum
 	val name: String,

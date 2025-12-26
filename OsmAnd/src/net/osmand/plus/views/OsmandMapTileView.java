@@ -1584,16 +1584,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		zoom = normalizeZoomWithLimits(zoom);
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			int centerX31Before = 0;
-			int centerY31Before = 0;
-
-			// Get map center in 31
-			PointI center31 = new PointI();
-			if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
-				centerX31Before = center31.getX();
-				centerY31Before = center31.getY();
-			}
-
+            mapRenderer.resetMapTargetPixelCoordinates(new PointI(centerX, centerY));
 			// Zoom
 			float finalZoomFloatPart = (float) (zoomAnimation + zoomFloatPart);
 			float visualZoom = finalZoomFloatPart >= 0
@@ -1602,19 +1593,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			mapRenderer.setZoom(ZoomLevel.swigToEnum(zoom), visualZoom);
 			float zoomMagnifier = app.getOsmandMap().getMapDensity();
 			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
-
-			// Shift map to new center
-			center31 = new PointI();
-			// Get new map center in 31
-			if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
-				int centerX31After = center31.getX();
-				int centerY31After = center31.getY();
-				PointI target31 = mapRenderer.getTarget();
-				int targetX = target31.getX() - (centerX31After - centerX31Before);
-				int targetY = target31.getY() - (centerY31After - centerY31Before);
-				// Shift map
-				mapRenderer.setTarget(new PointI(targetX, targetY));
-			}
  		}
 		currentViewport.setZoomAndAnimation(zoom, zoomAnimation, zoomFloatPart);
 		setElevationAngle(normalizeElevationAngle(this.elevationAngle));
@@ -1968,16 +1946,21 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return targetZoom;
 	}
 
-	private void findFirstTouchMapLocation(float touchPointX, float touchPointY) {
-		MapRendererView mapRenderer = getMapRenderer();
+	private boolean findFirstTouchMapLocation(float touchPointX, float touchPointY) {
+        boolean found = false;
+        MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			PointI touchPosition = new PointI((int) touchPointX, (int) touchPointY);
-			PointI touchLocation31 = mapRenderer.getTarget();
-			float height = mapRenderer.getHeightAndLocationFromElevatedPoint(touchPosition, touchLocation31);
-			firstTouchLocationX = touchLocation31.getX();
-			firstTouchLocationY = touchLocation31.getY();
-			firstTouchLocationHeight = height > NativeUtilities.MIN_ALTITUDE_VALUE ? height : 0.0f;
+            PointI touchPosition = new PointI((int) touchPointX, (int) touchPointY);
+            PointI touchLocation31 = mapRenderer.getTarget();
+            float height = mapRenderer.getHeightAndLocationFromElevatedPoint(touchPosition, touchLocation31);
+            found = height > NativeUtilities.MIN_ALTITUDE_VALUE;
+            if (found) {
+                firstTouchLocationX = touchLocation31.getX();
+                firstTouchLocationY = touchLocation31.getY();
+                firstTouchLocationHeight = height;
+            }
 		}
+        return found;
 	}
 
 	private void findSecondTouchMapLocation(float touchPointX, float touchPointY) {
@@ -2042,24 +2025,26 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				boolean secondaryTouch = actionCode == MotionEvent.ACTION_POINTER_DOWN && actionIndex == 1;
 				boolean secondaryClear = actionCode == MotionEvent.ACTION_POINTER_UP && actionIndex == 1;
 				if (primaryTouch) {
-					// Keep map location of previous touch for map gestures
+                    // Keep map location of previous touch for map gestures
 					secondTouchLocationX = firstTouchLocationX;
 					secondTouchLocationY = firstTouchLocationY;
 					secondTouchLocationHeight = firstTouchLocationHeight;
-					findFirstTouchMapLocation(event.getX(), event.getY());
+                    if (!findFirstTouchMapLocation(event.getX(), event.getY()))
+                        return true;
 					rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 				} else if (secondaryTouch) {
 					// Find map location of second touch for map gestures
 					PointF touchPoint = multiTouchSupport.getSecondPoint();
 					findSecondTouchMapLocation(touchPoint.x, touchPoint.y);
 					if (!targetChanged) {
+                        touchPoint = multiTouchSupport.getFirstPoint();
+                        if (!findFirstTouchMapLocation(touchPoint.x, touchPoint.y))
+                            return true;
 						targetChanged = true;
 						// Remember last target position before it is changed with map gesture
 						PointI targetPixelPosition = mapRenderer.getTargetScreenPosition();
 						targetPixelX = targetPixelPosition.getX();
 						targetPixelY = targetPixelPosition.getY();
-						touchPoint = multiTouchSupport.getFirstPoint();
-						findFirstTouchMapLocation(touchPoint.x, touchPoint.y);
 					}
 					rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 				} else if (primaryClear) {
@@ -2073,7 +2058,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					firstTouchLocationHeight = secondTouchLocationHeight;
 				} else if (secondaryClear && wasInTiltMode && !multiTouchSupport.isInTiltMode()) {
 					PointF touchPoint = multiTouchSupport.getFirstPoint();
-					findFirstTouchMapLocation(touchPoint.x, touchPoint.y);
+					if (!findFirstTouchMapLocation(touchPoint.x, touchPoint.y))
+                        return true;
 				}
 			}
 		}
@@ -2625,12 +2611,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				MapRendererView mapRenderer = getMapRenderer();
 				if (mapRenderer != null && (layer == null || !layer.isInMeasurementMode())) {
 					if (!targetChanged) {
+                        if (!findFirstTouchMapLocation(e1.getX(), e1.getY()))
+                            return true;
 						targetChanged = true;
 						// Remember last target position before it is changed with map gesture
 						PointI targetPixelPosition = mapRenderer.getTargetScreenPosition();
 						targetPixelX = targetPixelPosition.getX();
 						targetPixelY = targetPixelPosition.getY();
-						findFirstTouchMapLocation(e1.getX(), e1.getY());
 						rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 					}
 					scrollDistanceX = distanceX;

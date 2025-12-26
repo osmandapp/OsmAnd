@@ -4510,11 +4510,11 @@
     <string name="restart_now">Redémarrer maintenant</string>
     <string name="mtb_scale">Échelle de difficulté VTT</string>
     <string name="mtb_segment_classification">Classification du segment</string>
-    <string name="quick_action_temperature_layer">Afficher ou masquer la couche de température sur la carte.</string>
-    <string name="quick_action_precipitation_layer">Afficher ou masquer la couche des précipitations sur la carte.</string>
-    <string name="quick_action_wind_layer">Afficher ou masquer la couche des vents sur la carte.</string>
-    <string name="quick_action_air_pressure_layer">Afficher ou masquer la couche barométrique sur la carte.</string>
-    <string name="quick_action_cloud_layer">Afficher ou masquer la couche de couverture nuageuse sur la carte.</string>
+    <string name="quick_action_temperature_layer">Un bouton permettant d\'afficher ou de masquer la couche de température sur la carte.</string>
+    <string name="quick_action_precipitation_layer">Un bouton permettant d\'afficher ou de masquer la couche des précipitations sur la carte.</string>
+    <string name="quick_action_wind_layer">Un bouton permettant d\'afficher ou de masquer la couche de vent sur la carte.</string>
+    <string name="quick_action_air_pressure_layer">Un bouton permettant d\'afficher ou de masquer la couche de pression atmosphérique sur la carte.</string>
+    <string name="quick_action_cloud_layer">Un bouton permettant d\'afficher ou de masquer la couche nuageuse sur la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Couleur des courbes</string>
     <string name="rendering_attr_showMtbScale_description">Afficher la difficulté des itinéraires VTT selon l\'échelle MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Afficher la difficulté VTT</string>
@@ -4901,7 +4901,7 @@
     <string name="help_article_plan_route_coordinate_input_name">Saisir des coordonnées</string>
     <string name="help_article_plan_route_web_name">Planificateur d\'itinéraire en ligne</string>
     <string name="help_article_purchases_ios_name">Achats iOS</string>
-    <string name="help_article_troubleshooting_maps_data_name">Cartes &amp; Données</string>
+    <string name="help_article_troubleshooting_maps_data_name">Cartes &amp; données</string>
     <string name="help_article_widgets_markers_name">Widgets de marqueur</string>
     <string name="help_article_widgets_nav_widgets_name">Widgets de guidage</string>
     <string name="telegram_chats_descr">Rejoignez nous sur Telegram.</string>
@@ -5797,9 +5797,9 @@
     <string name="private_access_routing_req_short">Autorisez-vous l’emprunt de portions privées pour rejoindre votre destination ?</string>
     <string name="download_wikipedia_label">Télécharger Wikipédia</string>
     <string name="wind_animation_layer">Couche d\'animation du vent</string>
-    <string name="weather_layers">Couches météo</string>
-    <string name="quick_action_weather_layers">Bouton permettant d\'afficher ou de masquer les calques météorologiques sur la carte.</string>
-    <string name="quick_action_wind_animation_layer">Un interrupteur pour afficher ou masquer la couche d\'animation du vent sur la carte.</string>
+    <string name="weather_layers">Couches météorologiques</string>
+    <string name="quick_action_weather_layers">Un bouton permettant d\'afficher ou de masquer les calques météorologiques sur la carte.</string>
+    <string name="quick_action_wind_animation_layer">Un bouton permettant d\'afficher ou de masquer la couche d\'animation du vent sur la carte.</string>
     <string name="lang_crh">Tatar de Crimée (latin)</string>
     <string name="efficient_grid">Grille d\'efficacité</string>
     <string name="slots">Machines à sous</string>
@@ -5822,4 +5822,6 @@
     <string name="show_spherical_map">Vue Globe terrestre</string>
     <string name="enable_3d_objects">Bâtiments 3D</string>
     <string name="vehicle_metrics_chart_category">Mesures du véhicule</string>
+    <string name="lang_mi">Maori</string>
+    <string name="buildings_3d_detail_level">Détail des bâtiments 3D</string>
 </resources>

@@ -6245,4 +6245,6 @@
     <string name="routing_attr_pt_limit_description">Geef het aantal beste routes op om weer te geven</string>
     <string name="show_spherical_map">Globeweergave</string>
     <string name="enable_3d_objects">3D-gebouwen</string>
+    <string name="lang_mi">Maori</string>
+    <string name="buildings_3d_detail_level">3D-gebouwendetaillering</string>
 </resources>

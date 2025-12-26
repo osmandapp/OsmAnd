@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="release_5_0">
-    • Upptäck topprankade POI:er med det nya Utforska-läget\n\n
-    • Alla OSM-rutter, nu sökbara! Vandring, cykling, MTB och mer\n\n
-    • Ny navigeringswidget kombinerar svängpil och navigeringsinstruktioner\n\n
-    • Widget för aktuell ruttinformation: visar ETA, ankomsttid och avstånd\n\n
-    • Välj skidbackar och MTB-leder på kartan för detaljerad information\n\n
-    • Möjlighet att välja widgetstorlek för vänster och höger paneler\n\n
-    • Lagt till "Koordinatnät" med geografiska koordinater\n\n
-    • Lagt till möjlighet att anpassa standardutseendet för favoritgrupper\n\n
-    • Android Auto: visa ETA och avstånd till nästa waypoint; stadsnamn visas nu i sökresultaten\n\n
-    • Framstående toppar är nu upptäckbara via karta och sökning\n\n
-    • Bergstopphöjder i fot\n\n
-    • Tillagt: Klippor och klättringsområden på kartan\n\n
-    • Adressökning i USA har förbättrats\n\n
-    • Lagt till hebreisk TTS för navigering\n\n
-</string>
+    <string name="release_5_0">• Upptäck topprankade POI:er med det nya Utforska-läget\n\n • Alla OSM-rutter, nu sökbara! Vandring, cykling, MTB och mer\n\n • Ny navigeringswidget kombinerar svängpil och navigeringsinstruktioner\n\n • Widget för aktuell ruttinformation: visar ETA, ankomsttid och avstånd\n\n • Välj skidbackar och MTB-leder på kartan för detaljerad information\n\n • Möjlighet att välja widgetstorlek för vänster och höger paneler\n\n • Lagt till Koordinatnät med geografiska koordinater\n\n • Lagt till möjlighet att anpassa standardutseendet för favoritgrupper\n\n • Android Auto: visa ETA och avstånd till nästa waypoint; stadsnamn visas nu i sökresultaten\n • Framstående toppar är nu upptäckbara via karta och sökning\n\n • Bergstopphöjder i fot\n\n • Tillagt: Klippor och klättringsområden på kartan\n\n • Adressökning i USA har förbättrats\n\n • Lagt till hebreisk TTS för navigering</string>
     <string name="screen_is_locked">Tryck på låsikonen för att låsa upp skärmen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad eller postnummer</string>
@@ -1139,9 +1124,7 @@
     <string name="loading_smth">Laddar %1$s …</string>
     <string name="map_widget_plain_time">Aktuell tid</string>
     <string name="shared_string_waypoint">Vägpunkt</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nTryck och håll för att visa på kartan"</string>
+    <string name="selected_gpx_info_show">\n\nTryck och håll för att visa på kartan</string>
     <string name="delay_navigation_start">Starta steg-för-steg-navigering automatiskt</string>
     <string name="gpx_split_interval">Split-intervall</string>
     <string name="gpx_info_subtracks">Underspår: %1$s </string>
@@ -2425,27 +2408,8 @@
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) är en kart- och navigeringsapp med tillgång till gratis, världsomspännande OpenStreetMap (OSM)-data av hög kvalitet.
 \n
 \nNjut av röst- och visuell navigering, att visa intressepunkter (\"POI\"), skapa och hantera GPX-spår, visa höjdkurvor och topografisk info (via plugin), visningslägen för bil, cykel och fotgängare, redigera OSM-data och mycket mer.</string>
-    <string name="osmand_extended_description_part2">GPS-navigering
-\n• Välj mellan offline- (inga roaming-avgifter när du är utomlands) eller online-läge a(snabbare)
-\n• Steg-för-steg röstguidning leder dig längs vägen (inspelade och genererade röster)
-\n• Färdvägen uppdateras närhellst du avviker från den.
-\n• Guidning vid val av filer, gatunamn och beräknad ankomsttid hjälper dig längs vägen
-\n• Dag-/natt-läge för appen växlas automatiskt för att göra din resa säkrare
-\n• Visa hastighetsbegränsningar och få påminnelser om du överskrider den
-\n• Kartzoomen anpassar sig till din hastighet
-\n• Sök destinationer genom adress, typ (t.ex.: parkering, restaurang, hotell, bensinstation, museum), eller geografiska koordinater
-\n• Stödjer användande av delmål på din resväg
-\n• Spela in dina egna, eller ladda upp en GPX-spår och följa dem
-\n</string>
-    <string name="osmand_extended_description_part3">Karta
-\n • Visar Poi (point of interests) runt omkring dig
-\n • Justera kartan baserat på riktning (eller kompass)
-\n • Visar var du är och vad du tittar på
-\n • Dela din plats så att dina vänner kan hitta dig
-\n • Sparar dina viktigaste platser i Favoriter
-\n • Låter dig välja hur du vill visa namn på kartan: på svenska, lokala, eller fonetisk stavning
-\n • Visar specialiserade online-rutor, satellitvy (från Bing), olika överlägg som tour/navigering GPX-spår och ytterligare lager med anpassningsbar transparens
-\n</string>
+    <string name="osmand_extended_description_part2">GPS-navigering \n• Välj mellan offline- (inga roaming-avgifter när du är utomlands) eller online-läge a(snabbare) \n• Steg-för-steg röstguidning leder dig längs vägen (inspelade och genererade röster) \n• Färdvägen uppdateras närhellst du avviker från den. \n• Guidning vid val av filer, gatunamn och beräknad ankomsttid hjälper dig längs vägen \n• Dag-/natt-läge för appen växlas automatiskt för att göra din resa säkrare \n• Visa hastighetsbegränsningar och få påminnelser om du överskrider den \n• Kartzoomen anpassar sig till din hastighet \n• Sök destinationer genom adress, typ (t.ex.: parkering, restaurang, hotell, bensinstation, museum), eller geografiska koordinater \n• Stödjer användande av delmål på din resväg \n• Spela in dina egna, eller ladda upp en GPX-spår och följa dem</string>
+    <string name="osmand_extended_description_part3">Karta \n • Visar Poi (point of interests) runt omkring dig \n • Justera kartan baserat på riktning (eller kompass) \n • Visar var du är och vad du tittar på \n • Dela din plats så att dina vänner kan hitta dig \n • Sparar dina viktigaste platser i Favoriter \n • Låter dig välja hur du vill visa namn på kartan: på svenska, lokala, eller fonetisk stavning \n • Visar specialiserade online-rutor, satellitvy (från Bing), olika överlägg som tour/navigering GPX-spår och ytterligare lager med anpassningsbar transparens</string>
     <string name="osmand_extended_description_part4">Skidåkning
 \nOsmAnd skidkartor plugin gör att du kan se skidspår svårighetsgrad och en del kompletterande information, som plats för liftar och andra faciliteter.</string>
     <string name="osmand_extended_description_part5">Cykling
@@ -2454,18 +2418,8 @@
 \n• Se din hastighet och höjd
 \n• Med GPX-inspelningsalternativ kan du spela in din resa, spara och dela den
 \n• Med en insticksmodul kan du aktivera höjdkurvor och terrängskuggning</string>
-    <string name="osmand_extended_description_part6">Promenader, vandring, stadsrundtur
-\n • Kartan visar promenad- och vandringsleder
-\n • Wikipedia på ditt föredragna språk kan berätta en hel del under en stadsrundtur
-\n • Hållplatser för kollektivtrafiken (buss, spårvagn, tåg), inklusive linjenamn, hjälper till att navigera i en ny stad
-\n • GPS-navigation i fotgängarläge bygger din rutt med hjälp av gångvägar
-\n • Du kan ladda upp och följa en GPX-rutt eller spela in och dela dina egna
-\n</string>
-    <string name="osmand_extended_description_part7">Bidra till OSM
-\n • Rapportera datafel
-\n • Ladda upp GPX-spår till OSM direkt från appen
-\n • Lägg till POI och ladda upp dem direkt till OSM (eller senare om du är frånkopplad)
-\n</string>
+    <string name="osmand_extended_description_part6">Promenader, vandring, stadsrundtur \n • Kartan visar promenad- och vandringsleder \n • Wikipedia på ditt föredragna språk kan berätta en hel del under en stadsrundtur \n • Hållplatser för kollektivtrafiken (buss, spårvagn, tåg), inklusive linjenamn, hjälper till att navigera i en ny stad \n • GPS-navigation i fotgängarläge bygger din rutt med hjälp av gångvägar \n • Du kan ladda upp och följa en GPX-rutt eller spela in och dela dina egna</string>
+    <string name="osmand_extended_description_part7">Bidra till OSM \n • Rapportera datafel \n • Ladda upp GPX-spår till OSM direkt från appen \n • Lägg till POI och ladda upp dem direkt till OSM (eller senare om du är frånkopplad)</string>
     <string name="clear_all_intermediates">Rensa alla mellanliggande destinationer</string>
     <string name="rendering_attr_whiteWaterSports_name">Strömsporter</string>
     <string name="osmand_extended_description_part8">OsmAnd är aktivt utvecklad programvara med öppen källkod. Alla kan bidra till appen genom att rapportera fel, förbättra översättningar eller koda nya funktioner. Dessutom bygger projektet på ekonomiska bidrag för att finansiera kodning och testning av nya funktioner.
@@ -2482,27 +2436,7 @@
 \n• Antarktis: *
 \nDe flesta länder runt om i världen är tillgängliga för nedladdning!
 \nFå en pålitlig navigatör i ditt land - vare sig det är Frankrike, Tyskland, Mexiko, Storbritannien, Spanien, Nederländerna, USA, Ryssland, Brasilien eller något annat.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd + (OSM Automated Navigation Directions)
-\n
-\nOsmAnd + är en programvara för programvara med öppen källkod för navigering med tillgång till ett stort antal globala OSM-data. Alla kartdata (vektor- eller brickor) kan lagras på telefonens minneskort för offline-användning. Offline- och online-dirigeringsfunktioner erbjuds också, inklusive röstvägledning för sväng.
-\n
-\nOsmAnd + är den betalda appversionen, genom att köpa den stöder du projektet, finansierar utvecklingen av nya funktioner och får de senaste uppdateringarna.
-\n
-\nNågra av kärnfunktionerna:
-\n- Komplett offline-funktionalitet (lagra nedladdad vektor eller kakelkartor i enhetens lagring)
-\n- Kompakta offlinevektorkartor för hela världen
-\n- Obegränsad nedladdning av land- eller regionkartor direkt från appen
-\n- Offline Wikipedia-funktion (ladda ner Wikipedia POI), perfekt för sightseeing
-\n- Överlagring av flera kartlager möjliga, som GPX eller navigationsspår, intressanta platser, favoriter, kollektivtrafikstopp, ytterligare kartor med anpassningsbar transparens, topografi som höjdkurvor/terrängskuggning/lutning
-\n
-\n- Offline sökning efter adresser och platser (POI)
-\n- Offline-dirigering för medelstora avstånd
-\n- Lägen för bil, cykel och fotgängare med tillval:
-\n- Automatisk växling mellan dag och natt
-\n- Hastighetsberoende kartzoomning
-\n- Kartinriktning enligt kompass eller rörelseriktning
-\n- Fältvägledning, hastighetsgränsvisning, inspelade och text-till-tal-röster
-\n</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd + (OSM Automated Navigation Directions) \n \nOsmAnd + är en programvara för programvara med öppen källkod för navigering med tillgång till ett stort antal globala OSM-data. Alla kartdata (vektor- eller brickor) kan lagras på telefonens minneskort för offline-användning. Offline- och online-dirigeringsfunktioner erbjuds också, inklusive röstvägledning för sväng. \n \nOsmAnd + är den betalda appversionen, genom att köpa den stöder du projektet, finansierar utvecklingen av nya funktioner och får de senaste uppdateringarna. \n \nNågra av kärnfunktionerna: \n- Komplett offline-funktionalitet (lagra nedladdad vektor eller kakelkartor i enhetens lagring) \n- Kompakta offlinevektorkartor för hela världen \n- Obegränsad nedladdning av land- eller regionkartor direkt från appen \n- Offline Wikipedia-funktion (ladda ner Wikipedia POI), perfekt för sightseeing \n- Överlagring av flera kartlager möjliga, som GPX eller navigationsspår, intressanta platser, favoriter, kollektivtrafikstopp, ytterligare kartor med anpassningsbar transparens, topografi som höjdkurvor/terrängskuggning/lutning \n \n- Offline sökning efter adresser och platser (POI) \n- Offline-dirigering för medelstora avstånd \n- Lägen för bil, cykel och fotgängare med tillval: \n- Automatisk växling mellan dag och natt \n- Hastighetsberoende kartzoomning \n- Kartinriktning enligt kompass eller rörelseriktning \n- Fältvägledning, hastighetsgränsvisning, inspelade och text-till-tal-röster</string>
     <string name="nothing_found_in_radius">Kunde inte hitta något inom:</string>
     <string name="select_waypoints_category_description">Lägg till alla spårens vägpunkter, eller välj separata kategorier.</string>
     <string name="shared_string_total">Totalt</string>
@@ -2512,22 +2446,8 @@
 \nOsmAnd+ är betalversionen av appen. Genom att köpa den stöttar du projektet, finansierar utveckling av nya funktioner och får de senaste uppdateringarna.
 \n
 \nNågra av de viktigaste funktionerna:</string>
-    <string name="osmand_plus_extended_description_part2">Navigering
-\n• Fungerar online (snabbt) eller offline (inga roamingavgifter när du är utomlands)
-\n• Röstvägledning för sväng (inspelade och syntetiserade röster)
-\n• Valfri körvägledning, visning av gatunamn och beräknad ankomsttid
-\n• Stöder mellanliggande poäng på din resplan
-\n• Automatisk omdirigering när du avviker från rutten
-\n• Sök efter platser efter adress, efter typ (t.ex. restaurang, hotell, bensinstation, museum) eller efter geografiska koordinater
-\n</string>
-    <string name="osmand_plus_extended_description_part3">Kartvisning
-\n • Visa din position och riktning
-\n • Orientera kartvyn i förhållande till kompass eller färdriktning
-\n • Spara dina viktiga platser som Favoriter
-\n • Visa intressepunkter (POI) i närheten
-\n • Visa specialiserade online-kartor, satellitbilder (från Bing), olika lager som GPX-spår för ruttnavigering och ytterligare kartlager med anpassningsbar transparens
-\n • Möjlighet att visa platsnamn på engelska, lokalt språk eller fonetisk translitterering
-\n</string>
+    <string name="osmand_plus_extended_description_part2">Navigering \n• Fungerar online (snabbt) eller offline (inga roamingavgifter när du är utomlands) \n• Röstvägledning för sväng (inspelade och syntetiserade röster) \n• Valfri körvägledning, visning av gatunamn och beräknad ankomsttid \n• Stöder mellanliggande poäng på din resplan \n• Automatisk omdirigering när du avviker från rutten \n• Sök efter platser efter adress, efter typ (t.ex. restaurang, hotell, bensinstation, museum) eller efter geografiska koordinater</string>
+    <string name="osmand_plus_extended_description_part3">Kartvisning \n • Visa din position och riktning \n • Orientera kartvyn i förhållande till kompass eller färdriktning \n • Spara dina viktiga platser som Favoriter \n • Visa intressepunkter (POI) i närheten \n • Visa specialiserade online-kartor, satellitbilder (från Bing), olika lager som GPX-spår för ruttnavigering och ytterligare kartlager med anpassningsbar transparens \n • Möjlighet att visa platsnamn på engelska, lokalt språk eller fonetisk translitterering</string>
     <string name="live_monitoring_max_interval_to_send">Tidsbuffert för online-spårning</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Ange en tidsbuffert för att behålla platser att skicka utan anslutning</string>
     <string name="show_free_version_banner">Visa gratisversion-banner</string>
@@ -2633,12 +2553,7 @@
 \n• Kompakta offline vektorkartor som uppdateras minst en gång i månaden
 \n
 \n• Val mellan komplett kartdata för regionen eller bara vägnätet (Exempel: Hela Japan är 700 MB, bara vägnätet är 200 MB)</string>
-    <string name="osmand_plus_extended_description_part5">Säkerhetsfunktioner
-\n• Valfri växling mellan dag-/nattläge
-\n• Valfri visning av hastighet, med en påminnelse om du överskrider den
-\n• Valfri hastighetsbaserad zoomning
-\n• Dela din position så att dina vänner kan hitta dig
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Säkerhetsfunktioner \n• Valfri växling mellan dag-/nattläge \n• Valfri visning av hastighet, med en påminnelse om du överskrider den \n• Valfri hastighetsbaserad zoomning \n• Dela din position så att dina vänner kan hitta dig</string>
     <string name="osmand_plus_extended_description_part6">Funktioner för cykel och gående
 \n• Se gång- och cykelvägar, stigar, samt cykel- och vandringsleder, utmärkt för utomhusaktiviteter
 \n• Särskilda navigerings- och visningslägen för cykel och gående
@@ -2923,15 +2838,7 @@
     <string name="shared_string_languages">Språk</string>
     <string name="shared_string_language">Språk</string>
     <string name="shared_string_all_languages">Alla språk</string>
-    <string name="release_3_9">• La till inställning för att exportera och importera all data, inklusive inställningar, resurser, mina platser
-\n
-\n • Planera rutt: Grafer för seggraphs for track segments with route, and added the ability to create and edit multiple track segments
-\n
-\n • Added OAuth authentication method for OpenStreetMap, improved UI of OSM dialogs
-\n
-\n • Support custom colors for favorites and track waypoints
-\n
-\n</string>
+    <string name="release_3_9">• La till inställning för att exportera och importera all data, inklusive inställningar, resurser, mina platser \n \n • Planera rutt: Grafer för seggraphs for track segments with route, and added the ability to create and edit multiple track segments \n \n • Added OAuth authentication method for OpenStreetMap, improved UI of OSM dialogs \n \n • Support custom colors for favorites and track waypoints</string>
     <string name="reverse_all_points">Vänd alla punkter</string>
     <string name="profile_by_default_description">Välj den profil som ska användas när appen startas.</string>
     <string name="shared_string_last_used">Senast använd</string>
@@ -3121,21 +3028,7 @@
     <string name="attach_to_the_roads">Fäst på vägarna</string>
     <string name="disable_recording_once_app_killed_descrp">Spårloggning pausar när appen dödas (via senaste appar). (OsmAnd-bakgrundsindikationen försvinner från Android-meddelandefältet.)</string>
     <string name="save_global_track_interval_descr">Ange loggningsintervallet för den allmänna spårinspelningen (aktiverad via widgeten \'Trip recording\' på kartan).</string>
-    <string name="release_3_8">• Uppdaterad Planera en ruttfunktion: gör det möjligt att använda olika navigeringstyper per segment och inkludera spår
-\n
-\n • Ny utseendemeny för spår: välj färg, tjocklek, visningspilar, start- och målikoner
-\n
-\n • Förbättrad synlighet för cykelnoder.
-\n
-\n • Spår kan nu tappas, har snabbmeny med grundläggande information.
-\n
-\n • Förbättrade sökalgoritmer
-\n
-\n • Förbättrade alternativ för följespår i Navigation
-\n
-\n • Fixade problem med import / export av profilinställningar
-\n
-\n</string>
+    <string name="release_3_8">• Uppdaterad Planera en ruttfunktion: gör det möjligt att använda olika navigeringstyper per segment och inkludera spår \n \n • Ny utseendemeny för spår: välj färg, tjocklek, visningspilar, start- och målikoner \n \n • Förbättrad synlighet för cykelnoder. \n \n • Spår kan nu tappas, har snabbmeny med grundläggande information. \n \n • Förbättrade sökalgoritmer \n \n • Förbättrade alternativ för följespår i Navigation \n \n • Fixade problem med import / export av profilinställningar</string>
     <string name="contour_lines_thanks">Tack för att du köpte \'Topografi\'</string>
     <string name="osm_live_payment_subscription_management_hw">Ditt AppGallery-konto debiteras vid köpbekräftelsen.
 \n
@@ -3315,19 +3208,7 @@
     <string name="customize_route_line">Anpassa ruttlinjen</string>
     <string name="shared_string_route_line">Ruttlinje</string>
     <string name="expired">Upphörd</string>
-    <string name="release_4_0_beta">• Möjlighet att ladda ner höjdkurvor i fot
-\n
-\n• Planera rutt-vyn: lagt till flikar för att växla mellan punkter och grafer
-\n
-\n• OsmAnd Live-uppdateringar flyttade till \"Hämta kartor &gt; Uppdateringar\"
-\n
-\n• Spår kan nu färgläggas efter höjd, hastighet eller lutning.
-\n
-\n• Lagt till alternativ för att ändra utseendet på navigeringslinjen
-\n
-\n• Uppdaterad \"Inspelning av resa\"-dialog
-\n
-\n</string>
+    <string name="release_4_0_beta">• Möjlighet att ladda ner höjdkurvor i fot \n \n• Planera rutt-vyn: lagt till flikar för att växla mellan punkter och grafer \n \n• OsmAnd Live-uppdateringar flyttade till \"Hämta kartor &gt; Uppdateringar\" \n \n• Spår kan nu färgläggas efter höjd, hastighet eller lutning. \n \n• Lagt till alternativ för att ändra utseendet på navigeringslinjen \n \n• Uppdaterad \"Inspelning av resa\"-dialog</string>
     <string name="update_all_maps_added">Uppdatera alla kartor som lagts till i %1$s\?</string>
     <string name="exit_number">Avfartsnummer</string>
     <string name="announce_when_exceeded">Meddela när den överskrids</string>
@@ -3759,27 +3640,7 @@
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="upload_gpx_description_hint">Lämna tomt, spårnamnen används som beskrivning. Inmatad beskrivning kommer appliceras på varje spår.</string>
     <string name="quick_action_contour_lines_descr">Knapp som visar eller döljer höjdkurvor i kartan.</string>
-    <string name="release_4_0">- Säkerhetskopiering i molnet
-\n
-\n - Nattläge för Topo-kartstilen har lagts till.
-\n
-\n - Höjdkurvor i fot möjliga att ladda ner.
-\n
-\n - Spår kan nu färgläggas efter höjd, hastighet eller lutning.
-\n
-\n - Uppdaterad dialogruta \"Inspelning av resa\".
-\n
-\n - Avståndsmätning genom tryck flyttas från Radielinjal till ett separat alternativ.
-\n
-\n - Planera rutt: Du kan nu ändra navigeringsalternativ, komma åt kartkonfigurationen och söka utan att lämna ruttplaneringen.
-\n
-\n - Ny skärmvy för köp med mer detaljerad information.
-\n
-\n - Möjlighet att ändra utseendet på navigeringslinjen.
-\n
-\n - OsmAnd Live-uppdateringar har flyttats till \"Hämta kartor &gt; Uppdateringar\".
-\n
-\n</string>
+    <string name="release_4_0">- Säkerhetskopiering i molnet \n \n - Nattläge för Topo-kartstilen har lagts till\n \n - Höjdkurvor i fot möjliga att ladda ner\n \n - Spår kan nu färgläggas efter höjd, hastighet eller lutning\n \n - Uppdaterad dialogruta \"Inspelning av resa\"\n \n - Avståndsmätning genom tryck flyttas från Radielinjal till ett separat alternativ\n \n - Planera rutt: Du kan nu ändra navigeringsalternativ, komma åt kartkonfigurationen och söka utan att lämna ruttplaneringen\n \n - Ny skärmvy för köp med mer detaljerad information\n \n - Möjlighet att ändra utseendet på navigeringslinjen\n \n - OsmAnd Live-uppdateringar har flyttats till \"Hämta kartor &gt; Uppdateringar\"</string>
     <string name="display_route_tracks">Visa spår</string>
     <string name="location_access_request_action">Bevilja åtkomst</string>
     <string name="location_access_request_result">Godkänd: %1$s Avvisad: %2$s</string>
@@ -4267,65 +4128,9 @@
     <string name="redeem_promo_code">Lös in kampanjkod</string>
     <string name="quick_action_hillshade_descr">En knapp för att visa eller dölja terrängskuggning på kartan.</string>
     <string name="hillshade_description">Terrängskuggning använder mörka skuggor på kartan för att visa och framhäva sluttningar, toppar och dalar.</string>
-    <string name="release_4_3">• Ny, snabbare kartrenderingsmotor version 2 (OpenGL) med 2,5D-vy
-\n
-\n • Mjukare animering av platsändringar under rörelse
-\n
-\n • Nya widgetar med koordinater för kartcentrum och höjd för aktuell position
-\n
-\n • Avståndsmätning har nytt alternativ för textstorlek
-\n
-\n • Widget \"Kartmarkör\": alternativ för att ändra klickbeteendet
-\n
-\n • Fixat \"Positionsplacering\" alternativ
-\n
-\n • GPX: stöd för taggar som \"link\", \"cmt\", \"desc\" och för egna tillägg har lagts till
-\n
-\n • Nautiska kartor/sjökort omorganiserade
-\n
-\n • Stöd för ANT+ sensorer
-\n
-\n • Möjlighet att inaktivera UUID för nedladdning
-\n
-\n • Justerbar standardhastighet för tripp-tider för höjdberoende gång-, vandrings- och löpturer
-\n
-\n • Fix för ljudutgång och volymreglagets beteende
-\n
-\n</string>
-    <string name="release_4_1">• Lagt till grundläggande stöd för Android Auto
-\n
-\n • Uppdaterat gränssnitt för UTM koordinat sök
-\n
-\n • GPS filter för GPX spår
-\n
-\n • Höjd Widget (Pro)
-\n
-\n • Favoriter: ny möjlighet att se senast använda ikoner
-\n
-\n • Ruttplanering: använder vald profil efter start
-\n
-\n • Fixat Mapillary lagret, insticksmodulen är nu inaktiverad som standard
-\n
-\n • Ny sida för att hantera hela appens historik
-\n
-\n • Kartans orientering återställs inte längre vid omstart av appen
-\n
-\n • Förbättrad SRTM höjdmarkör-rendering
-\n
-\n • Buggrättat Arabiska kartetiketter
-\n
-\n • Buggrättat navigeringsproblem
-\n
-\n</string>
-    <string name="release_4_2">• Omstrukturering av widgetar: nytt utseende, gruppera med sidor, ändra sortering och kombinera som du vill
-\n
-\n • Vandring / Cykling / Rese -leder: klicka på leden eller ledsymbolen för mer information
-\n
-\n • Favoritgrupper: ställ in standardutseende för nya platser i gruppen
-\n
-\n • Buggrättningar: automatisk uppdatering av online tile-kartor
-\n
-\n</string>
+    <string name="release_4_3">• Ny, snabbare kartrenderingsmotor version 2 (OpenGL) med 2,5D-vy \n \n • Mjukare animering av platsändringar under rörelse \n \n • Nya widgetar med koordinater för kartcentrum och höjd för aktuell position \n \n • Avståndsmätning har nytt alternativ för textstorlek \n \n • Widget \"Kartmarkör\": alternativ för att ändra klickbeteendet \n \n • Fixat \"Positionsplacering\" alternativ \n \n • GPX: stöd för taggar som \"link\", \"cmt\", \"desc\" och för egna tillägg har lagts till \n \n • Nautiska kartor/sjökort omorganiserade \n \n • Stöd för ANT+ sensorer \n \n • Möjlighet att inaktivera UUID för nedladdning \n \n • Justerbar standardhastighet för tripp-tider för höjdberoende gång-, vandrings- och löpturer \n \n • Fix för ljudutgång och volymreglagets beteende</string>
+    <string name="release_4_1">• Lagt till grundläggande stöd för Android Auto \n \n • Uppdaterat gränssnitt för UTM koordinat sök \n \n • GPS filter för GPX spår \n \n • Höjd Widget (Pro) \n \n • Favoriter: ny möjlighet att se senast använda ikoner \n \n • Ruttplanering: använder vald profil efter start \n \n • Fixat Mapillary lagret, insticksmodulen är nu inaktiverad som standard \n \n • Ny sida för att hantera hela appens historik \n \n • Kartans orientering återställs inte längre vid omstart av appen \n \n • Förbättrad SRTM höjdmarkör-rendering \n \n • Buggrättat Arabiska kartetiketter \n \n • Buggrättat navigeringsproblem</string>
+    <string name="release_4_2">• Omstrukturering av widgetar: nytt utseende, gruppera med sidor, ändra sortering och kombinera som du vill \n \n • Vandring / Cykling / Rese -leder: klicka på leden eller ledsymbolen för mer information \n \n • Favoritgrupper: ställ in standardutseende för nya platser i gruppen \n \n • Buggrättningar: automatisk uppdatering av online tile-kartor</string>
     <string name="average_speed_skip_stops_desc">Hastigheter under %1$s räknas in och kommer påverka medelhastigheten.</string>
     <string name="shared_string_kilograms">kilogram</string>
     <string name="shared_string_yards">yard</string>
@@ -4436,37 +4241,7 @@
     <string name="app_mode_climbing">Klättring</string>
     <string name="weather_download_error">Kunde inte ladda ned %1$s rutor.</string>
     <string name="select_layer">Välj lager</string>
-    <string name="release_4_4">• Förbättrad \"Spår\"-meny i \"Konfigurera karta\"
-\n
-\n• Kontextmenyn visar nu lokaliserade namn för POI
-\n
-\n• Lagt till alternativ för att dela rutt via länk
-\n
-\n• Lagt till \"Nautiska mil/fot\" som längdenhet
-\n
-\n• Lagt till nytt fast läge för kartorientering
-\n
-\n• Förenklad startskärm
-\n
-\n• Fast positionsvisning i delat skärmläge i Android Auto
-\n
-\n• Lagt till \"hastighet/lutning\"-graf för spåranalys
-\n
-\n• Android 13 flyttade appspråk till systeminställningar
-\n
-\n• Åtgärdade problem med att visa veganska platser
-\n
-\n• Möjlighet att ladda ner online-raster som används som överläggs- eller underläggskartor
-\n
-\n• Stöd för brittiska måttenheter för \"Fordonsparametrar\"
-\n
-\n• Ny profil för moped
-\n
-\n• Nytt alternativ \"Automatisk\" för positionsvisning
-\n
-\n• Åtgärdat kartgester för lutning, zoom och rotation
-\n
-\n</string>
+    <string name="release_4_4">• Förbättrad \"Spår\"-meny i \"Konfigurera karta\" \n \n• Kontextmenyn visar nu lokaliserade namn för POI \n \n• Lagt till alternativ för att dela rutt via länk \n \n• Lagt till \"Nautiska mil/fot\" som längdenhet \n \n• Lagt till nytt fast läge för kartorientering \n \n• Förenklad startskärm \n \n• Fast positionsvisning i delat skärmläge i Android Auto \n \n• Lagt till \"hastighet/lutning\"-graf för spåranalys \n \n• Android 13 flyttade appspråk till systeminställningar \n \n• Åtgärdade problem med att visa veganska platser \n \n• Möjlighet att ladda ner online-raster som används som överläggs- eller underläggskartor \n \n• Stöd för brittiska måttenheter för \"Fordonsparametrar\" \n \n• Ny profil för moped \n \n• Nytt alternativ \"Automatisk\" för positionsvisning \n \n• Åtgärdat kartgester för lutning, zoom och rotation</string>
     <string name="goods_delivery_desc_3">Gäller endast för varubilar som inte väger mer än 3,5 ton.</string>
     <string name="compass_on_circles">Kompass på cirklar</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Medelnivå</string>
@@ -4819,7 +4594,7 @@
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="average_glide_ratio">Genomsnittligt glidtal</string>
-    <string name="release_4_6">• Android Auto: nytt 3D läge \n \n• Möjligt att anpassa snabbknappar/tangentgenvägar för externa inmatningsenheter \n \n• Nya widgetar: Glidtal, Solens position, Tillgängligt minne \n \n• Spår: Filter och smarta mappar tillagda, förbättrad minneshantering för stora filer \n \n• Förbättrad färgläggning av spår i lutningsläget, med ny symmetrisk gradient \n \n• Förbättrade övre och nedre widgetpaneler med stöd för alla widgetar \n \n• OsmAnd Cloud: Tillgång till raderade filer \n \n• Stöd för ANT+ temperatur widget \n \n• Uppdaterad lokal resurshantering \n \n• Löst problem med genomskinligt statusfält \n \n</string>
+    <string name="release_4_6">• Android Auto: Lade till 3D-läge\n\n• Spår: Introducerade filter och smarta mappar, optimerat minne för större filer\n\n• Förbättrade widgetpaneler uppe och nedre för att hantera alla widgetar\n\n• Förbättrad lokal resurshantering\n\n• Anpassningsbar knappmappning för externa styrenheter\n\n• Nya widgetar: \"Glidförhållande\" och \"Solposition\"\n\n• OsmAnd Cloud: Nu åtkomst till raderade filer\n\n• Förbättrad spårfärgning i lutningsläge med ny symmetrisk gradient\n\n• Åtgärdade problem med transparent statusfält\n\n• Lade till stöd för ANT+ temperaturwidget\n\n• Introducerade widgeten \"Tillgängligt RAM\"</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Kartvy under navigering</string>
     <string name="filter_by_name">Filtrera efter namn</string>
     <string name="shared_string_reset_all">Återställ allt</string>
@@ -4974,49 +4749,7 @@
     <string name="shared_string_loading">Laddar</string>
     <string name="may_be_used_if_there_is_shortcut">Kan användas om det finns en genväg</string>
     <string name="goods_delivery_desc">Vissa vägar kan ha restriktioner för varubilar.</string>
-    <string name="release_4_5">• BLE/ANT+ sensorer: omarbetad anslutning och skrivning till GPX
-\n
-\n • Gratis säkerhetskopiering för favoriter och inställningar till \"OsmAnd Cloud\"
-\n
-\n • Nytt format för terrängkartor med stöd för 3D Relief
-\n
-\n • Spårhantering: uppdaterat UI, sortering, stöd för mappstrukturer
-\n
-\n • Android Auto: ny start meny för tillgång till favoriter, spår och intressepunktskategorier
-\n
-\n • En lista med widgetar för övre och nedre panelen
-\n
-\n • Ny \"Tåg\"-profil, möjliggör rutter via järnväg
-\n
-\n • Höjdkurvor fungerar nu oavsett kartkälla
-\n
-\n • Utökad lista med standardgenvägar för externa tangentbord
-\n
-\n • Anpassningsbara ruttberäkningsfiler, nya val för att radera eller skriva över
-\n
-\n • Ny funktion \"Meddela avvikelse från rutt\"
-\n
-\n • Startskärm: Möjlighet att återställa app-tillstånd från fil
-\n
-\n • Lagt till klassificering för \"Farligt gods\" för lastbil i Nordamerika
-\n
-\n • Stöd för \"Via ferrata\" vid rutter för fotgängare
-\n
-\n • Lagt till \"CAI\"-skala för klassificering av svårighetsgrad för leder
-\n
-\n • Fixat per-app språkval
-\n
-\n • Stöd för ikonteman
-\n
-\n • OsmAnd Cloud: nytt val att radera konto
-\n
-\n • Tillgänglighet: knappstorlek ändrad till 48 dp; löser problem med skärmläsare i kartvyn
-\n
-\n • Röstprompter för japanska omarbetad
-\n
-\n • Höjdskillnad och lutningsberäkning omarbetad
-\n
-\n</string>
+    <string name="release_4_5">• BLE/ANT+ sensorer: omarbetad anslutning och skrivning till GPX \n \n • Gratis säkerhetskopiering för favoriter och inställningar till \"OsmAnd Cloud\" \n \n • Nytt format för terrängkartor med stöd för 3D Relief \n \n • Spårhantering: uppdaterat UI, sortering, stöd för mappstrukturer \n \n • Android Auto: ny start meny för tillgång till favoriter, spår och intressepunktskategorier \n \n • En lista med widgetar för övre och nedre panelen \n \n • Ny \"Tåg\"-profil, möjliggör rutter via järnväg \n \n • Höjdkurvor fungerar nu oavsett kartkälla \n \n • Utökad lista med standardgenvägar för externa tangentbord \n \n • Anpassningsbara ruttberäkningsfiler, nya val för att radera eller skriva över \n \n • Ny funktion \"Meddela avvikelse från rutt\" \n \n • Startskärm: Möjlighet att återställa app-tillstånd från fil \n \n • Lagt till klassificering för \"Farligt gods\" för lastbil i Nordamerika \n \n • Stöd för \"Via ferrata\" vid rutter för fotgängare \n \n • Lagt till \"CAI\"-skala för klassificering av svårighetsgrad för leder \n \n • Fixat per-app språkval \n \n • Stöd för ikonteman \n \n • OsmAnd Cloud: nytt val att radera konto \n \n • Tillgänglighet: knappstorlek ändrad till 48 dp; löser problem med skärmläsare i kartvyn \n \n • Röstprompter för japanska omarbetad \n \n • Höjdskillnad och lutningsberäkning omarbetad</string>
     <string name="ble_search_again">Sök igen</string>
     <string name="time_to_navigation_point_widget_settings_desc">Tryck på widgeten för att växla läge.</string>
     <string name="map_3d_mode_description">Rör vid kartan med två fingrar och justera kartans lutning genom att flytta dem uppåt och nedåt.</string>
@@ -5465,7 +5198,7 @@
     <string name="change_default_tracks_appearance_confirmation">Tillämpa ändringar på existerande spår i mappen eller bara på nya?</string>
     <string name="use_3d_track_visualization">3D-visualisering</string>
     <string name="shared_string_all_colors">Alla färger</string>
-    <string name="release_4_8">• Vad som ska förberedas inför 4.8</string>
+    <string name="release_4_8">• Nytt alternativ för terrängfärgning \"Altitude\" (Höjd)\n\n• Anpassade färgpaletter för terräng, spår och rutter\n\n• 3D-variant för platspositionsikoner\n\n• Snabbåtgärder kan nu tilldelas externa tangentbord\n\n• Väder: UI-uppdatering, vindanimering tillagd\n\n• 3D-spårförbättringar: nya visualiserings- och färgalternativ\n\n• Utökat urval av turistrutter på kartan\n\n• Lade till apptemaalternativ för att följa kartläge\n\n• Åtgärdade spårstatistik, sortering och sökning\n\n• OSM-redigering: borttagen inloggnings-/lösenordsautentiseringsmetod\n\n• Byte till systemdelningsblad från och med Android 14</string>
     <string name="use_nearby_roads">Använd närliggande vägar</string>
     <string name="shared_string_unchanged">Oförändrad</string>
     <string name="map_widget_map_scale">Kartskala</string>
@@ -6172,4 +5905,9 @@
     <string name="download_wikipedia_label">Ladda ner Wikipedia</string>
     <string name="routing_attr_pt_limit_name">Visa N bästa rutter</string>
     <string name="routing_attr_pt_limit_description">Ange antalet bästa rutter som ska visas</string>
+    <string name="lang_mi">Maori</string>
+    <string name="vehicle_metrics_chart_category">Fordonsstatistik</string>
+    <string name="delete_folder_description">Ta bort mappen \"%1$s\"?</string>
+    <string name="show_spherical_map">Globvy</string>
+    <string name="enable_3d_objects">3D-byggnader</string>
 </resources>

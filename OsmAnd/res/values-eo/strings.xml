@@ -5904,4 +5904,10 @@
     <string name="shared_string_centimeters">centimetroj</string>
     <string name="bicycle_width_limit_description">Enigu larĝon de via biciklo por eviti mallarĝajn biciklajn vojojn.</string>
     <string name="copy_link">Kopii ligilon</string>
+    <string name="lang_mi">Maoria</string>
+    <string name="vehicle_metrics_chart_category">Statistikoj pri veturilo</string>
+    <string name="delete_folder_description">Ĉu forigi la dosierujon “%1$s”?</string>
+    <string name="show_spherical_map">Globa vido</string>
+    <string name="enable_3d_objects">3-dimensiaj konstruaĵoj</string>
+    <string name="buildings_3d_detail_level">Detal-nivelo de 3-dimensiaj konstruaĵoj</string>
 </resources>
