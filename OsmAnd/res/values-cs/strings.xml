@@ -4303,12 +4303,12 @@
     <string name="si_nm_mt">Námořní míle/metry</string>
     <string name="si_nm_ft">Námořní míle/stopy</string>
     <string name="open_weather_action">Open počasí</string>
-    <string name="quick_action_temperature_layer">Přepínač pro zobrazení nebo skrytí teplotní vrstvy na mapě.</string>
-    <string name="quick_action_cloud_layer">Přepínač pro zobrazení nebo skrytí vrstvy mraků na mapě.</string>
+    <string name="quick_action_temperature_layer">Přepínač pro zobrazení nebo skrytí vrstvy teploty na mapě.</string>
+    <string name="quick_action_cloud_layer">Přepínač pro zobrazení nebo skrytí vrstvy oblačnosti na mapě.</string>
     <string name="temperature_layer">Teplotní vrstva</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Izolinie rychlosti větru</string>
     <string name="quick_action_precipitation_layer">Přepínač pro zobrazení nebo skrytí vrstvy srážek na mapě.</string>
-    <string name="quick_action_air_pressure_layer">Přepínač pro zobrazení nebo skrytí vrstvy tlaku vzduchu na mapě.</string>
+    <string name="quick_action_air_pressure_layer">Přepínač pro zobrazení nebo skrytí vrstvy tlaku na mapě.</string>
     <string name="pressure_layer">Tlaková vrstva</string>
     <string name="wind_layer">Větrná vrstva</string>
     <string name="cloud_layer">Vrstva mraků</string>
@@ -5928,4 +5928,5 @@
     <string name="show_spherical_map">Sférické zobrazení</string>
     <string name="enable_3d_objects">3D stavby</string>
     <string name="lang_mi">Maori</string>
+    <string name="buildings_3d_detail_level">Detaily 3D staveb</string>
 </resources>

@@ -5933,4 +5933,5 @@
     <string name="delete_folder_description">Видалити папку \"%1$s\"?</string>
     <string name="show_spherical_map">Глобус</string>
     <string name="lang_mi">Маорі</string>
+    <string name="buildings_3d_detail_level">3D-деталізація будівель</string>
 </resources>

@@ -72,7 +72,34 @@ enum class GpxParameter(
 	MIN_SENSOR_HEART_RATE("minSensorHr", "int", Int::class, 0, true),
 	AVG_SENSOR_HEART_RATE("avgSensorHr", "double", Double::class, 0.0, true),
 	DATA_VERSION("dataVersion", "int", Int::class, 0, false),
-	APPEARANCE_LAST_MODIFIED_TIME("appearanceLastModifiedTime", "bigint", Long::class, 0L, false);
+	APPEARANCE_LAST_MODIFIED_TIME("appearanceLastModifiedTime", "bigint", Long::class, 0L, false),
+
+	AVG_OBD_ENGINE_LOAD("avgVmEload", "double", Double::class, 0.0, true),
+	MAX_OBD_ENGINE_LOAD("maxVmEload", "double", Double::class, 0.0, true),
+	AVG_OBD_THROTTLE_POSITION("avgVmTpos", "double", Double::class, 0.0, true),
+	MAX_OBD_THROTTLE_POSITION("maxVmTpos", "double", Double::class, 0.0, true),
+	AVG_OBD_ENGINE_OIL_TEMPERATURE("avgVmEotemp", "double", Double::class, 0.0, true),
+	MAX_OBD_ENGINE_OIL_TEMPERATURE("maxVmEotemp", "int", Int::class, 0, true),
+	AVG_OBD_FUEL_PRESSURE("avgVmFpress", "double", Double::class, 0.0, true),
+	MAX_OBD_FUEL_PRESSURE("maxVmFpress", "int", Int::class, 0, true),
+	AVG_OBD_BATTERY_VOLTAGE("avgVmBvol", "double", Double::class, 0.0, true),
+	MAX_OBD_BATTERY_VOLTAGE("maxVmBvol", "double", Double::class, 0.0, true),
+	AVG_OBD_AMBIENT_AIR_TEMPERATURE("avgVmAtemp", "double", Double::class, 0.0, true),
+	MAX_OBD_AMBIENT_AIR_TEMPERATURE("maxVmAtemp", "int", Int::class, 0, true),
+	AVG_OBD_ENGINE_RPM("avgVmEspeed", "int", Int::class, 0, true),
+	MAX_OBD_ENGINE_RPM("maxVmEspeed", "int", Int::class, 0, true),
+	AVG_OBD_ENGINE_RUNTIME("avgVmRuntime", "bigint", Long::class, 0L, true),
+	MAX_OBD_ENGINE_RUNTIME("maxVmRuntime", "bigint", Long::class, 0L, true),
+	AVG_OBD_VEHICLE_SPEED("avgVmVspeed", "double", Double::class, 0.0, true),
+	MAX_OBD_VEHICLE_SPEED("maxVmVspeed", "int", Int::class, 0, true),
+	AVG_OBD_AIR_INTAKE_TEMPERATURE("avgVmItemp", "double", Double::class, 0.0, true),
+	MAX_OBD_AIR_INTAKE_TEMPERATURE("maxVmItemp", "int", Int::class, 0, true),
+	AVG_OBD_ENGINE_COOLANT_TEMPERATURE("avgVmCtemp", "double", Double::class, 0.0, true),
+	MAX_OBD_ENGINE_COOLANT_TEMPERATURE("maxVmCtemp", "int", Int::class, 0, true),
+	AVG_OBD_FUEL_CONSUMPTION_RATE("avgVmFcons", "double", Double::class, 0.0, true),
+	MAX_OBD_FUEL_CONSUMPTION_RATE("maxVmFcons", "double", Double::class, 0.0, true),
+	AVG_OBD_FUEL_LEVEL("avgVmFuel", "double", Double::class, 0.0, true),
+	MAX_OBD_FUEL_LEVEL("maxVmFuel", "double", Double::class, 0.0, true);
 
 	fun isNullSupported(): Boolean = defaultValue == null
 
@@ -111,5 +138,36 @@ enum class GpxParameter(
 		fun getAppearanceParameters(): List<GpxParameter> = APPEARANCE_PARAMETERS
 
 		fun getGpxDirParameters(): List<GpxParameter> = GPX_DIR_PARAMETERS
+
+		fun getObdParameters(): List<GpxParameter> {
+			return listOf(
+				MAX_OBD_ENGINE_LOAD,
+				AVG_OBD_ENGINE_LOAD,
+				MAX_OBD_THROTTLE_POSITION,
+				AVG_OBD_THROTTLE_POSITION,
+				MAX_OBD_ENGINE_OIL_TEMPERATURE,
+				AVG_OBD_ENGINE_OIL_TEMPERATURE,
+				MAX_OBD_FUEL_PRESSURE,
+				AVG_OBD_FUEL_PRESSURE,
+				MAX_OBD_BATTERY_VOLTAGE,
+				AVG_OBD_BATTERY_VOLTAGE,
+				MAX_OBD_AMBIENT_AIR_TEMPERATURE,
+				AVG_OBD_AMBIENT_AIR_TEMPERATURE,
+				MAX_OBD_ENGINE_RPM,
+				AVG_OBD_ENGINE_RPM,
+				MAX_OBD_ENGINE_RUNTIME,
+				AVG_OBD_ENGINE_RUNTIME,
+				MAX_OBD_VEHICLE_SPEED,
+				AVG_OBD_VEHICLE_SPEED,
+				MAX_OBD_AIR_INTAKE_TEMPERATURE,
+				AVG_OBD_AIR_INTAKE_TEMPERATURE,
+				MAX_OBD_ENGINE_COOLANT_TEMPERATURE,
+				AVG_OBD_ENGINE_COOLANT_TEMPERATURE,
+				MAX_OBD_FUEL_CONSUMPTION_RATE,
+				AVG_OBD_FUEL_CONSUMPTION_RATE,
+				MAX_OBD_FUEL_LEVEL,
+				AVG_OBD_FUEL_LEVEL
+			)
+		}
 	}
 }

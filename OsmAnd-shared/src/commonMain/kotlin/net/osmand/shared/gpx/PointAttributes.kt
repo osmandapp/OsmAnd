@@ -55,7 +55,6 @@ class PointAttributes(
 	var throttlePosition = Float.NaN
 
 	private var anyValueSet: Boolean = false
-	private var anyVehicleMetricsSet: Boolean = false
 
 	fun hasAnyValueSet(): Boolean = anyValueSet
 

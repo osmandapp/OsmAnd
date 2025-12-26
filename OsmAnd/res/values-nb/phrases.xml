@@ -523,7 +523,7 @@
     <string name="poi_board_type_plants">Planter</string>
     <string name="poi_information_nature">Natur</string>
     <string name="poi_board_type_notice">Oppslagstavle</string>
-    <string name="poi_information_board">Tavle</string>
+    <string name="poi_information_board">Informasjonstavle</string>
     <string name="poi_power_supply">Strømforsyning</string>
     <string name="poi_tents">Telt</string>
     <string name="poi_tents_no">Telt ikke tillatt</string>
@@ -2004,4 +2004,5 @@
     <string name="poi_water_supply_water_tank">Vanntank</string>
     <string name="poi_sample_collection_yes">Ja</string>
     <string name="poi_hazard_yes">Fare</string>
+    <string name="poi_information_guidepost">Turskilt</string>
 </resources>

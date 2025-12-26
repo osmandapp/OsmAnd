@@ -114,7 +114,7 @@
     <string name="poi_traffic_calming_cushion">Rijbaankussen</string>
     <string name="poi_traffic_signals">Verkeerslicht</string>
     <string name="poi_fuel">Tankstation;Benzinestation;Benzinetankstation;Benzinepomp</string>
-    <string name="poi_parking">Parkeerplaats</string>
+    <string name="poi_parking">Parkeerterrein</string>
     <string name="poi_motorcycle_parking">Motorparkeerplaats</string>
     <string name="poi_parking_entrance">Parkeerplaats-toegang</string>
     <string name="poi_garages">Garages</string>
@@ -862,19 +862,19 @@
     <string name="poi_denomination_anglican">Anglicaans</string>
     <string name="poi_denomination_presbyterian">Presbyteriaans</string>
     <string name="poi_denomination_evangelical">Evangelisch</string>
-    <string name="poi_denomination_russian_orthodox">Russisch Orthodox</string>
+    <string name="poi_denomination_russian_orthodox">Russisch-Orthodox</string>
     <string name="poi_denomination_pentecostal">Pinksterkerk</string>
     <string name="poi_denomination_mormon">Mormoons</string>
-    <string name="poi_denomination_jehovahs_witness">Jehovahs Getuigen</string>
-    <string name="poi_denomination_greek_orthodox">Grieks Orthodox</string>
+    <string name="poi_denomination_jehovahs_witness">Jehovah\'s Getuigen</string>
+    <string name="poi_denomination_greek_orthodox">Grieks-Orthodox</string>
     <string name="poi_denomination_reformed">Reformatorisch</string>
-    <string name="poi_denomination_seventh_day_adventist">Zevende dag adventist</string>
-    <string name="poi_denomination_new_apostolic">Nieuw Apostolisch</string>
+    <string name="poi_denomination_seventh_day_adventist">Zevendedagsadventisten</string>
+    <string name="poi_denomination_new_apostolic">Nieuw-Apostolisch</string>
     <string name="poi_denomination_church_of_england">Kerk van Engeland</string>
     <string name="poi_denomination_episcopal">Episcopaal</string>
     <string name="poi_denomination_shia">Shia</string>
     <string name="poi_denomination_united">United Church</string>
-    <string name="poi_denomination_greek_catholic">Grieks Katholiek</string>
+    <string name="poi_denomination_greek_catholic">Grieks-Katholiek</string>
     <string name="poi_denomination_tibetan">Tibetaans</string>
     <string name="poi_denomination_united_reformed">United Reformed</string>
     <string name="poi_denomination_church_of_scotland">Church of Scotland</string>
@@ -1061,7 +1061,7 @@
     <string name="poi_access_private">Toegang: privé</string>
     <string name="poi_access_no">Geen toegang</string>
     <string name="poi_access_destination">Toegang: Bestemmingsverkeer</string>
-    <string name="poi_access_permissive">Toegang: toegelaten</string>
+    <string name="poi_access_permissive">Toegang toegestaan</string>
     <string name="poi_access_customers">Toegang: klanten</string>
     <string name="poi_access_delivery">Toegang: laden en lossen</string>
     <string name="poi_access_agricultural">Toegang: landbouwverkeer</string>
@@ -1085,7 +1085,7 @@
     <string name="poi_nudism_no">Niet toegestaan</string>
     <string name="poi_nudism_obligatory">Verplicht</string>
     <string name="poi_nudism_customary">Gebruikelijk</string>
-    <string name="poi_nudism_permissive">Toegelaten</string>
+    <string name="poi_nudism_permissive">Toegestaan</string>
     <string name="poi_trade_building_supplies">Bouwmaterialen</string>
     <string name="poi_trade_plumbing">Loodgietersmaterialen</string>
     <string name="poi_trade_wood">Houthandel</string>
@@ -1093,7 +1093,7 @@
     <string name="poi_trade_tile">Tegelhandel</string>
     <string name="poi_population">Inwoneraantal</string>
     <string name="poi_parking_underground">Ondergronds</string>
-    <string name="poi_parking_multi_storey">Meer verdiepingen</string>
+    <string name="poi_parking_multi_storey">Meerlaagse parkeergarage</string>
     <string name="poi_bicycle_parking_anchors">Ankers</string>
     <string name="poi_bicycle_parking_stands">Fietsenhekken</string>
     <string name="poi_bicycle_parking_wall_loops">Fietsenrekken</string>
@@ -1493,7 +1493,7 @@
     <string name="poi_payment_routex_yes">Routex</string>
     <string name="poi_payment_routex_no">Routex niet geaccepteerd</string>
     <string name="poi_payment_bancomat_yes">Bancomat</string>
-    <string name="poi_payment_bancomat_no">Bancomat niet geacepteerd</string>
+    <string name="poi_payment_bancomat_no">Bancomat niet geaccepteerd</string>
     <string name="poi_payment_jcb_yes">JCB</string>
     <string name="poi_payment_jcb_no">JCB-kaarten niet geaccepteerd</string>
     <string name="poi_payment_laser_yes">Laser</string>
@@ -1720,7 +1720,7 @@
     <string name="poi_shelter_type_wildlife_hide">Observatiepost wilde dieren</string>
     <string name="poi_internet_access_type_wlan">Wi-Fi</string>
     <string name="poi_internet_access_type_wired">Bedraad</string>
-    <string name="poi_artwork_type_sculpture">Kunstwerk: scupltuur</string>
+    <string name="poi_artwork_type_sculpture">Kunstwerk: sculptuur</string>
     <string name="poi_artwork_type_statue">Kunstwerk: standbeeld</string>
     <string name="poi_artwork_type_mural">Kustwerk: muurschildering</string>
     <string name="poi_artwork_type_architecture">Kunstwerk: architectuur</string>
@@ -1984,13 +1984,13 @@
     <string name="poi_step_condition_even">Toestand treden: goed</string>
     <string name="poi_step_condition_uneven">Toestand treden: ongelijk</string>
     <string name="poi_step_condition_rough">Toestand treden: slecht</string>
-    <string name="poi_defibrillator">Defibrillator</string>
+    <string name="poi_defibrillator">Defibrillator;AED</string>
     <string name="poi_defibrillator_yes">Defibrillator: ja</string>
     <string name="poi_tomb_war_grave">Type: oorlogsgraf</string>
     <string name="poi_tomb_mausoleum">Type: mausoleum</string>
-    <string name="poi_tomb_sarcophagus">Type : sarcofaag</string>
+    <string name="poi_tomb_sarcophagus">Type: sarcofaag</string>
     <string name="poi_tomb_crypt">Type : crypte</string>
-    <string name="poi_tomb_pyramid">Type: pyramide</string>
+    <string name="poi_tomb_pyramid">Type: piramide</string>
     <string name="poi_animal_shelter_purpose">Doel</string>
     <string name="poi_boat_rental_type">Huurboten</string>
     <string name="poi_water_supply_type">Watervoorziening-type</string>
@@ -2237,8 +2237,8 @@
     <string name="poi_health_facility_type_nursing_home">Type medische faciliteit: verpleeghuis</string>
     <string name="poi_health_facility_type_support_group_home">Type medische faciliteit: steungroep</string>
     <string name="poi_suction_point">Afzuigpunt</string>
-    <string name="poi_fire_hydrant_type_underground">Ondergrond</string>
-    <string name="poi_fire_hydrant_type_pillar">Pilaar</string>
+    <string name="poi_fire_hydrant_type_underground">Ondergronds</string>
+    <string name="poi_fire_hydrant_type_pillar">Bovengronds</string>
     <string name="poi_fire_hydrant_type_pond">Vijver</string>
     <string name="poi_fire_hydrant_type_wall">Muur</string>
     <string name="poi_health_amenity_type_first_aid_kit">EHBO doos</string>
@@ -2610,7 +2610,7 @@
     <string name="poi_substation_type">Type</string>
     <string name="poi_books_type">Boeken</string>
     <string name="poi_denotation">Aanduiding</string>
-    <string name="poi_park_ride">Parkeren en rijden</string>
+    <string name="poi_park_ride">Parkeer en reis</string>
     <string name="poi_rtsa_scale_filter">Moeilijkheids categorie</string>
     <string name="poi_car_pooling">Car pool plaats</string>
     <string name="poi_wiki_lang_oc">Occitaanse wiki</string>
@@ -2758,7 +2758,7 @@
     <string name="poi_fire_hydrant_position_parking_lot">Parkeerplaats</string>
     <string name="poi_fire_hydrant_position_street">Straat</string>
     <string name="poi_fire_hydrant_position_underground">Ondergronds</string>
-    <string name="poi_depth">DIepte</string>
+    <string name="poi_depth">Diepte</string>
     <string name="poi_salt_yes">Zout</string>
     <string name="poi_salt_no">Zout: nee</string>
     <string name="poi_summer_camp">Zomerkamp</string>
@@ -3340,7 +3340,7 @@
     <string name="poi_public_bookcase_type_wooden_cabinet">Type: houten kast</string>
     <string name="poi_xmas_day_date">Kerstmis: periode voor het evenement</string>
     <string name="poi_diplomatic_delegation">Delegatie</string>
-    <string name="poi_traffic_signals_arrow">Pijl</string>
+    <string name="poi_traffic_signals_arrow">Pijl in looprichting</string>
     <string name="poi_traffic_signals_vibration">Trillen</string>
     <string name="poi_socket_cee_blue">Stopcontact: CEE-blauw (campingstekker)</string>
     <string name="poi_water_place_access_family">Gezin</string>
@@ -3586,8 +3586,8 @@
     <string name="poi_atoll">Atol</string>
     <string name="poi_disabled_designated">Aangegeven</string>
     <string name="poi_goods_designated">Aangegeven</string>
-    <string name="poi_hgv_delivery">Bestemmingsverkeer</string>
-    <string name="poi_hgv_designated">Aangegeven</string>
+    <string name="poi_hgv_delivery">Levering;Toegang voor bevoorradingsvrachtwagens</string>
+    <string name="poi_hgv_designated">Aangewezen;Aangewezen voor vrachtwagens</string>
     <string name="poi_hgv_permissive">Toegestaan</string>
     <string name="poi_hgv_destination">Bestemmingsverkeer</string>
     <string name="poi_mofa_designated">Aangewezen;Aangewezen voor snorfietsen</string>
@@ -3873,7 +3873,7 @@
     <string name="poi_departures_board_yes">Ja;Vertrektijdenbord</string>
     <string name="poi_departures_board_no">Vertrekborden: nee</string>
     <string name="poi_elevator">Lift</string>
-    <string name="poi_traffic_signals_arrow_yes">Ja</string>
+    <string name="poi_traffic_signals_arrow_yes">Ja;Pijl in looprichting</string>
     <string name="poi_traffic_signals_vibration_yes">Ja</string>
     <string name="poi_traffic_signals_vibration_no">Trilling: nee</string>
     <string name="poi_fire_hydrant_pressure_pressurized">Onder druk</string>
@@ -3904,7 +3904,7 @@
     <string name="poi_coffee_filter">Koffie</string>
     <string name="poi_tobacco_filter">Tabak</string>
     <string name="poi_medical_supply_filter">Categorie medische benodigdheden</string>
-    <string name="poi_fridge_filter">Frigo</string>
+    <string name="poi_fridge_filter">Koelkast</string>
     <string name="poi_ice_cream_filter">IJs</string>
     <string name="poi_membership_filter">Lidmaatschap vereist</string>
     <string name="poi_furniture_filter">Meubels</string>
@@ -4299,4 +4299,6 @@
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tunnel verboden voor fietsers</string>
     <string name="poi_route_article">Reisartikelen</string>
     <string name="poi_us_maps_recreation_area_activity_tubing">Tubing</string>
+    <string name="poi_traffic_signals_arrow_no">Pijl in looprichting: nee</string>
+    <string name="poi_route_activity_type_truck_hgv">Vrachtwagen</string>
 </resources>
