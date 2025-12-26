@@ -24,7 +24,7 @@ import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceS
 import de.KnollFrank.lib.settingssearch.fragment.FragmentFactoryAndInitializer;
 import de.KnollFrank.lib.settingssearch.fragment.FragmentInitializerFactory;
 import de.KnollFrank.lib.settingssearch.fragment.Fragments;
-import de.KnollFrank.lib.settingssearch.fragment.factory.FragmentFactoryAndInitializerWithCache;
+import de.KnollFrank.lib.settingssearch.fragment.factory.FragmentFactoryAndInitializerRegistry;
 import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenGraphProviderFactory;
 import de.KnollFrank.lib.settingssearch.results.recyclerview.FragmentContainerViewAdder;
 
@@ -90,7 +90,7 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphC
 		final PreferenceScreenWithHostProvider preferenceScreenWithHostProvider =
 				new PreferenceScreenWithHostProvider(
 						new Fragments(
-								new FragmentFactoryAndInitializerWithCache(
+								new FragmentFactoryAndInitializerRegistry(
 										new FragmentFactoryAndInitializer(
 												searchDatabaseConfig.fragmentFactory,
 												FragmentInitializerFactory.createFragmentInitializer(
