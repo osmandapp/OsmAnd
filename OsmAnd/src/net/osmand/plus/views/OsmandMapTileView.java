@@ -1584,16 +1584,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		zoom = normalizeZoomWithLimits(zoom);
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			int centerX31Before = 0;
-			int centerY31Before = 0;
-
-			// Get map center in 31
-			PointI center31 = new PointI();
-			if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
-				centerX31Before = center31.getX();
-				centerY31Before = center31.getY();
-			}
-
+            mapRenderer.resetMapTargetPixelCoordinates(new PointI(centerX, centerY));
 			// Zoom
 			float finalZoomFloatPart = (float) (zoomAnimation + zoomFloatPart);
 			float visualZoom = finalZoomFloatPart >= 0
@@ -1602,19 +1593,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			mapRenderer.setZoom(ZoomLevel.swigToEnum(zoom), visualZoom);
 			float zoomMagnifier = app.getOsmandMap().getMapDensity();
 			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
-
-			// Shift map to new center
-			center31 = new PointI();
-			// Get new map center in 31
-			if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
-				int centerX31After = center31.getX();
-				int centerY31After = center31.getY();
-				PointI target31 = mapRenderer.getTarget();
-				int targetX = target31.getX() - (centerX31After - centerX31Before);
-				int targetY = target31.getY() - (centerY31After - centerY31Before);
-				// Shift map
-				mapRenderer.setTarget(new PointI(targetX, targetY));
-			}
  		}
 		currentViewport.setZoomAndAnimation(zoom, zoomAnimation, zoomFloatPart);
 		setElevationAngle(normalizeElevationAngle(this.elevationAngle));
