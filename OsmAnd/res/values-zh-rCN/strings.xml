@@ -1870,7 +1870,7 @@
     <string name="driving_region_australia">澳洲</string>
     <string name="route_descr_destination">目的地</string>
     <string name="intermediate_items_sort_return">优化了前往目的地的中间目的地的顺序。</string>
-    <string name="plugin_distance_point_hdop">精度</string>
+    <string name="plugin_distance_point_hdop">精确度</string>
     <string name="use_distance_measurement_help">*点击以标记一个点。
 \n *长按地图可删除上一个点。
 \n *长按一个点以查看并附加描述。
@@ -2349,7 +2349,7 @@
     <string name="empty_state_osm_edits_descr">创建或修改 OpenStreetMap 兴趣点，打开或评论 OSM 注记并贡献 GPX 轨迹文件。</string>
     <string name="shared_string_deleted">已删除</string>
     <string name="shared_string_edited">已编辑</string>
-    <string name="shared_string_added">添加于</string>
+    <string name="shared_string_added">新增</string>
     <string name="marker_activated">标记%s 已激活。</string>
     <string name="one_tap_active_descr">点击地图上的标记将其移动到活动标记的顶端, 而不打开上下文菜单。</string>
     <string name="one_tap_active">\'轻触\' 激活</string>
@@ -2648,7 +2648,7 @@
     <string name="points_of_interests">兴趣点（POI）</string>
     <string name="shared_string_capacity">容量</string>
     <string name="rendering_attr_surface_metal_name">金属</string>
-    <string name="rendering_attr_highway_class_path_name">步道</string>
+    <string name="rendering_attr_highway_class_path_name">路径</string>
     <string name="app_mode_helicopter">直升机</string>
     <string name="app_mode_skiing">滑雪</string>
     <string name="base_profile_descr_ski">滑雪</string>
@@ -3597,8 +3597,7 @@
 \n对短途线路的计算速度没有影响。</string>
     <string name="use_routing_fallback">离线后备路线规划</string>
     <string name="shared_string_statistics">统计数字</string>
-    <string name="gps_filter_hdop_desc">设置 HDOP 的最大接受值。
-\n值较高的点将被隐藏。</string>
+    <string name="gps_filter_hdop_desc">设置水平精度因子的最大接受值。 \n值较高的点将被隐藏。</string>
     <string name="created_on">创建于</string>
     <string name="fold_unfold">折叠/展开</string>
     <string name="app_profile_type">应用程序配置文件类型</string>
@@ -3665,7 +3664,7 @@
     <string name="history_is_disabled_descr">启用历史记录以更快地访问上次使用的结果。</string>
     <string name="clear_all_history_warning">清除所有的应用程序历史条目，包括搜索、导航和标记历史？</string>
     <string name="clear_all_history">清除所有历史记录</string>
-    <string name="history_actions_descr">你可以将历史记录导出到一个文件。</string>
+    <string name="history_actions_descr">您可以将历史记录导出为单个文件。</string>
     <string name="map_markers_history">地图标记历史记录</string>
     <string name="navigation_history">导航历史</string>
     <string name="shared_storage_last_step">你可以之后指定一个新的数据文件夹。</string>
@@ -4002,7 +4001,7 @@
     <string name="rendering_attr_showTrolleybusRoutes_name">无轨电车线路</string>
     <string name="bottom_widgets_panel">底部面板</string>
     <string name="shared_string_buttons">按钮</string>
-    <string name="rendering_attr_showFitnessTrails_description">显示健身步道</string>
+    <string name="rendering_attr_showFitnessTrails_description">显示健身路线</string>
     <string name="stop_and_exit">停止并退出</string>
     <string name="shared_string_complete">完成</string>
     <string name="zoom_levels_difference_description">缩放级别之间的巨大差异会增加下载数据的大小。</string>
@@ -4013,7 +4012,7 @@
     <string name="rendering_attr_showRunningRoutes_description">显示跑步路线</string>
     <string name="stop_download">停止下载</string>
     <string name="stop_download_desc">下载仍未完成。如果现在中断下载，则只有部分瓦片可供查看。</string>
-    <string name="rendering_attr_showFitnessTrails_name">健身步道</string>
+    <string name="rendering_attr_showFitnessTrails_name">健身路线</string>
     <string name="gpx_no_routes_title">这里没有路线</string>
     <string name="routing_attr_allow_advanced_name">允许进阶路线</string>
     <string name="routing_attr_allow_advanced_description">困难的路线，有危险的障碍物和陡峭的路段。</string>
@@ -5456,7 +5455,7 @@
     <string name="quick_action_finish_trip_recording_summary">保存 GPX 轨迹并完成行程记录的按钮。</string>
     <string name="start_trip_recording_first_m">请先开始行程记录。</string>
     <string name="new_segment_started_m">开始录制新的轨迹段。</string>
-    <string name="quick_action_save_recorded_trip_and_continue_summary">将当前记录的行程保存为 GPX 文件，同时不中断新轨迹记录的按钮。</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">将当前正在录制的行程保存为 GPX 文件，同时继续录制新轨迹而不中断的按钮。</string>
     <string name="search_action_descr">开启搜索。</string>
     <string name="no_photos_available_descr">该地点尚未添加任何用户照片</string>
     <string name="no_photos_available">无可用照片</string>
