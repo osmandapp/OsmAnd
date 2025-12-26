@@ -52,10 +52,7 @@ public class SearchDatabaseRootedAtPreferenceFragmentAdapter implements Searchab
 	public SearchablePreferenceScreenGraph transformGraph(final SearchablePreferenceScreenGraph graph,
 														  final Configuration actualConfiguration,
 														  final FragmentActivity activityContext) {
-		return adaptGraphAtPreferenceFragment(
-				graph,
-				actualConfiguration,
-				activityContext);
+		return adaptGraphAtPreferenceFragment(graph, actualConfiguration, activityContext);
 	}
 
 	private SearchablePreferenceScreenGraph adaptGraphAtPreferenceFragment(
