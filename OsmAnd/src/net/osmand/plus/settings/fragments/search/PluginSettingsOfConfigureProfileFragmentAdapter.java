@@ -4,7 +4,11 @@ import android.view.View;
 
 import androidx.annotation.IdRes;
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 
 import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
@@ -15,12 +19,16 @@ import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import org.jgrapht.Graph;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 
+import de.KnollFrank.lib.settingssearch.PreferenceEdge;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
+import de.KnollFrank.lib.settingssearch.common.Preferences;
 import de.KnollFrank.lib.settingssearch.common.graph.Graphs;
 import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
 import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphTransformer;
@@ -30,6 +38,7 @@ import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceS
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreens;
 import de.KnollFrank.lib.settingssearch.fragment.FragmentInitializerFactory;
 import de.KnollFrank.lib.settingssearch.fragment.InstantiateAndInitializeFragmentFactory;
+import de.KnollFrank.lib.settingssearch.graph.AddEdgeToGraphPredicate;
 import de.KnollFrank.lib.settingssearch.graph.GraphMerger;
 import de.KnollFrank.lib.settingssearch.graph.GraphPathFactory;
 import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenGraphProviderFactory;
@@ -95,20 +104,16 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 						MainSettingsFragment.class,
 						tileSourceTemplatesProvider,
 						activityContext.getSupportFragmentManager());
-		final PreferenceScreenWithHost configureProfilePreferenceScreenWithHost =
-				instantiateSearchablePreferenceScreen(
-						configureProfilePreferenceScreen,
-						graph.graph(),
-						createGraphPathFactory(searchDatabaseConfig, activityContext));
-		final Graph<SearchablePreferenceScreen, SearchablePreferenceEdge> pojoGraphRootedAtConfigureProfileFragment =
-				getPojoGraphRootedAt(
-						configureProfilePreferenceScreenWithHost,
-						graph.locale(),
-						activityContext,
-						searchDatabaseConfig);
 		return new SearchablePreferenceScreenGraph(
 				GraphMerger.mergeSrcGraphIntoDstGraphAtMergePoint(
-						pojoGraphRootedAtConfigureProfileFragment,
+						getPojoGraphRootedAt(
+								instantiateSearchablePreferenceScreen(
+										configureProfilePreferenceScreen,
+										graph.graph(),
+										createGraphPathFactory(searchDatabaseConfig, activityContext)),
+								graph.locale(),
+								activityContext,
+								searchDatabaseConfig),
 						new GraphMerger.GraphAtMergePoint(graph.graph(), configureProfilePreferenceScreen)),
 				graph.locale(),
 				new ConfigurationBundleConverter().convertForward(newConfiguration));
@@ -127,8 +132,40 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 						activityContext.getSupportFragmentManager(),
 						activityContext,
 						searchDatabaseConfig,
-						locale)
+						locale,
+						addPluginEdgesOfConfigureProfileFragmentToGraph())
 				.getSearchablePreferenceScreenGraph(root);
+	}
+
+	private static AddEdgeToGraphPredicate addPluginEdgesOfConfigureProfileFragmentToGraph() {
+		return new AddEdgeToGraphPredicate() {
+
+			@Override
+			public boolean shallAddEdgeToGraph(final PreferenceEdge edge,
+											   final PreferenceScreenWithHost sourceNodeOfEdge,
+											   final PreferenceScreenWithHost targetNodeOfEdge) {
+				if (sourceNodeOfEdge.host() instanceof ConfigureProfileFragment) {
+					return isPluginPreferenceOfPreferenceScreen(
+							edge.preference,
+							sourceNodeOfEdge.preferenceScreen());
+				}
+				return true;
+			}
+
+			private static boolean isPluginPreferenceOfPreferenceScreen(final Preference preference,
+																		final PreferenceScreen preferenceScreen) {
+				return getPluginPreferences(preferenceScreen).contains(preference);
+			}
+
+			private static List<Preference> getPluginPreferences(final PreferenceScreen preferenceScreen) {
+				final PreferenceGroup preferenceGroup = Objects.requireNonNull(preferenceScreen.findPreference(ConfigureProfileFragment.PLUGIN_SETTINGS));
+				return ImmutableList
+						.<Preference>builder()
+						.add(preferenceGroup)
+						.addAll(Preferences.getChildrenRecursively(preferenceGroup))
+						.build();
+			}
+		};
 	}
 
 	private SearchablePreferenceScreen getPreferenceScreenOfConfigureProfileFragment(
@@ -153,8 +190,9 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 				.getEndVertex();
 	}
 
-	private GraphPathFactory createGraphPathFactory(final SearchDatabaseConfig searchDatabaseConfig,
-													final FragmentActivity activityContext) {
+	private GraphPathFactory createGraphPathFactory(
+			final SearchDatabaseConfig searchDatabaseConfig,
+			final FragmentActivity activityContext) {
 		return new GraphPathFactory(
 				new PreferenceScreenWithHostProvider(
 						InstantiateAndInitializeFragmentFactory.createInstantiateAndInitializeFragment(

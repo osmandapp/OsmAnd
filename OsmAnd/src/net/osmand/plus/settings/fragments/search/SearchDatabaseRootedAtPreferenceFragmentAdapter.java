@@ -126,7 +126,8 @@ public class SearchDatabaseRootedAtPreferenceFragmentAdapter implements Searchab
 						activityContext.getSupportFragmentManager(),
 						activityContext,
 						searchDatabaseConfig,
-						locale)
+						locale,
+						(edge, sourceNodeOfEdge, targetNodeOfEdge) -> true)
 				.getSearchablePreferenceScreenGraph(root);
 	}
 

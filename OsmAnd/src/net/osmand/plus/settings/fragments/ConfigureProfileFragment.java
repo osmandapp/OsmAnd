@@ -75,7 +75,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 	private static final Log LOG = PlatformUtil.getLog(ConfigureProfileFragment.class);
 
-	private static final String PLUGIN_SETTINGS = "plugin_settings";
+	public static final String PLUGIN_SETTINGS = "plugin_settings";
 	private static final String SETTINGS_ACTIONS = "settings_actions";
 	private static final String CONFIGURE_MAP = "configure_map";
 	private static final String CONFIGURE_SCREEN = "configure_screen";

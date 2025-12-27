@@ -80,7 +80,8 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphC
 						activityContext.getSupportFragmentManager(),
 						activityContext,
 						searchDatabaseConfig,
-						locale)
+						locale,
+						(edge, sourceNodeOfEdge, targetNodeOfEdge) -> true)
 				.getSearchablePreferenceScreenGraph(root);
 	}
 
