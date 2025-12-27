@@ -183,19 +183,23 @@ class StarView @JvmOverloads constructor(
 	private var lastEquGridLat: Double = -999.0
 	private var lastEquGridLon: Double = -999.0
 
-	private val equRaStep = 2
-	private val equRaDecStep = 5
-	private val equRaLinesCount = 24 / equRaStep
-	private val equRaPointsCount = (180 / equRaDecStep) + 1
-	private val equRaAzimuths = Array(equRaLinesCount) { DoubleArray(equRaPointsCount) }
-	private val equRaAltitudes = Array(equRaLinesCount) { DoubleArray(equRaPointsCount) }
+	// Dynamic Grid Configuration
+	private var gridDensityLevel = -1 // 0=Wide, 1=Medium, 2=Dense
 
-	private val equDecStep = 20
-	private val equDecRaStep = 5
-	private val equDecLinesCount = (160 / equDecStep) + 1
-	private val equDecPointsCount = (360 / equDecRaStep) + 1
-	private val equDecAzimuths = Array(equDecLinesCount) { DoubleArray(equDecPointsCount) }
-	private val equDecAltitudes = Array(equDecLinesCount) { DoubleArray(equDecPointsCount) }
+	// Equatorial vars (re-calculated based on density)
+	private var equRaStepMin = 120 // 2 hours in minutes
+	private var equDecStep = 20
+	private var equLineResStep = 5
+
+	private var equRaLinesCount = 0
+	private var equRaPointsCount = 0
+	private var equRaAzimuths = Array(0) { DoubleArray(0) }
+	private var equRaAltitudes = Array(0) { DoubleArray(0) }
+
+	private var equDecLinesCount = 0
+	private var equDecPointsCount = 0
+	private var equDecAzimuths = Array(0) { DoubleArray(0) }
+	private var equDecAltitudes = Array(0) { DoubleArray(0) }
 
 	private var selectedObject: SkyObject? = null
 	private var selectedConstellation: Constellation? = null
@@ -578,9 +582,18 @@ class StarView @JvmOverloads constructor(
 		paint.strokeWidth = 2f
 		paint.style = Paint.Style.STROKE
 		gridPath.reset()
-		for (alt in -80..80 step 20) {
+
+		// Calculate dynamic density
+		val (azStep, altStep, lineRes) = when {
+			viewAngle < 20.0 -> Triple(10, 5, 1) // Dense
+			viewAngle < 50.0 -> Triple(15, 10, 2) // Medium
+			else -> Triple(45, 20, 5) // Wide
+		}
+
+		// Horizontal Lines (Altitudes)
+		for (alt in -80..80 step altStep) {
 			var first = true
-			for (az in 0..360 step 5) {
+			for (az in 0..360 step lineRes) {
 				if (skyToScreen(az.toDouble(), alt.toDouble(), tempPoint)) {
 					if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
 					else gridPath.lineTo(tempPoint.x, tempPoint.y)
@@ -594,9 +607,11 @@ class StarView @JvmOverloads constructor(
 				}
 			}
 		}
-		for (az in 0 until 360 step 45) {
+
+		// Vertical Lines (Azimuths)
+		for (az in 0 until 360 step azStep) {
 			var first = true
-			for (alt in -90..90 step 5) {
+			for (alt in -90..90 step lineRes) {
 				if (skyToScreen(az.toDouble(), alt.toDouble(), tempPoint)) {
 					if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
 					else gridPath.lineTo(tempPoint.x, tempPoint.y)
@@ -614,36 +629,76 @@ class StarView @JvmOverloads constructor(
 	}
 
 	private fun updateEquatorialGridCache() {
+		// Calculate desired density
+		val newLevel = when {
+			viewAngle < 20.0 -> 2 // Dense
+			viewAngle < 50.0 -> 1 // Medium
+			else -> 0 // Wide
+		}
+
+		// Re-initialize arrays if density level changed
+		if (newLevel != gridDensityLevel) {
+			gridDensityLevel = newLevel
+			lastEquGridTimeT = -1.0 // Force refresh
+
+			when (newLevel) {
+				2 -> { // Dense: RA 20m, Dec 5 deg
+					equRaStepMin = 20
+					equDecStep = 5
+					equLineResStep = 1
+				}
+				1 -> { // Medium: RA 1h, Dec 10 deg
+					equRaStepMin = 60
+					equDecStep = 10
+					equLineResStep = 2
+				}
+				else -> { // Wide: RA 2h, Dec 20 deg
+					equRaStepMin = 120
+					equDecStep = 20
+					equLineResStep = 5
+				}
+			}
+
+			// Reallocate RA Arrays
+			equRaLinesCount = (24 * 60) / equRaStepMin
+			equRaPointsCount = (180 / equLineResStep) + 1
+			equRaAzimuths = Array(equRaLinesCount) { DoubleArray(equRaPointsCount) }
+			equRaAltitudes = Array(equRaLinesCount) { DoubleArray(equRaPointsCount) }
+
+			// Reallocate Dec Arrays
+			equDecLinesCount = (160 / equDecStep) + 1
+			equDecPointsCount = (360 / equLineResStep) + 1
+			equDecAzimuths = Array(equDecLinesCount) { DoubleArray(equDecPointsCount) }
+			equDecAltitudes = Array(equDecLinesCount) { DoubleArray(equDecPointsCount) }
+		}
+
 		val timeUnchanged = abs(currentTime.tt - lastEquGridTimeT) < 0.0000001
 		val locUnchanged = observer.latitude == lastEquGridLat && observer.longitude == lastEquGridLon
-		if (timeUnchanged && locUnchanged) return
-		var lineIdx = 0
-		for (ra in 0 until 24 step equRaStep) {
-			var pointIdx = 0
-			for (dec in -90..90 step equRaDecStep) {
-				if (lineIdx < equRaLinesCount && pointIdx < equRaPointsCount) {
-					val hor = horizon(currentTime, observer, ra.toDouble(), dec.toDouble(), Refraction.Normal)
-					equRaAzimuths[lineIdx][pointIdx] = hor.azimuth
-					equRaAltitudes[lineIdx][pointIdx] = hor.altitude
-				}
-				pointIdx++
+		if (timeUnchanged && locUnchanged && lastEquGridTimeT != -1.0) return
+
+		// Populate RA lines
+		for (i in 0 until equRaLinesCount) {
+			val raVal = (i * equRaStepMin) / 60.0
+			for (j in 0 until equRaPointsCount) {
+				val decVal = -90.0 + (j * equLineResStep)
+				val hor = horizon(currentTime, observer, raVal, decVal, Refraction.Normal)
+				equRaAzimuths[i][j] = hor.azimuth
+				equRaAltitudes[i][j] = hor.altitude
 			}
-			lineIdx++
 		}
-		lineIdx = 0
-		for (dec in -80..80 step equDecStep) {
-			var pointIdx = 0
-			for (raStep in 0..360 step equDecRaStep) {
-				if (lineIdx < equDecLinesCount && pointIdx < equDecPointsCount) {
-					val ra = raStep / 15.0
-					val hor = horizon(currentTime, observer, ra, dec.toDouble(), Refraction.Normal)
-					equDecAzimuths[lineIdx][pointIdx] = hor.azimuth
-					equDecAltitudes[lineIdx][pointIdx] = hor.altitude
-				}
-				pointIdx++
+
+		// Populate Dec lines
+		for (i in 0 until equDecLinesCount) {
+			val decVal = -80.0 + (i * equDecStep)
+			for (j in 0 until equDecPointsCount) {
+				val raDeg = j * equLineResStep
+				val raVal = raDeg / 15.0
+				val hor = horizon(currentTime, observer, raVal, decVal, Refraction.Normal)
+				equDecAzimuths[i][j] = hor.azimuth
+				equDecAltitudes[i][j] = hor.altitude
 			}
-			lineIdx++
 		}
+
 		lastEquGridTimeT = currentTime.tt
 		lastEquGridLat = observer.latitude
 		lastEquGridLon = observer.longitude
@@ -652,17 +707,60 @@ class StarView @JvmOverloads constructor(
 	private fun drawEquatorialGrid(canvas: Canvas) {
 		updateEquatorialGridCache()
 		gridPath.reset()
+
+		// Set color for Equatorial labels
+		gridTextPaint.color = 0xFF00AAAA.toInt()
+
+		var bestRaIndex = -1
+		var minCenterDistSq = Float.MAX_VALUE
+		val centerX = width / 2f
+		val centerY = height / 2f
+
+		// Draw RA Lines and Labels
 		for (i in 0 until equRaLinesCount) {
 			var first = true
+			var currentLineMinDistSq = Float.MAX_VALUE
+
 			for (j in 0 until equRaPointsCount) {
 				val az = equRaAzimuths[i][j]
 				val alt = equRaAltitudes[i][j]
 				if (skyToScreen(az, alt, tempPoint)) {
 					if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
 					else gridPath.lineTo(tempPoint.x, tempPoint.y)
+
+					// Track distance to center for this line to find the "central" hour line
+					val dx = tempPoint.x - centerX
+					val dy = tempPoint.y - centerY
+					val distSq = dx * dx + dy * dy
+					if (distSq < currentLineMinDistSq) {
+						currentLineMinDistSq = distSq
+					}
 				} else { first = true }
 			}
+
+			// Update best RA line
+			if (currentLineMinDistSq < minCenterDistSq) {
+				minCenterDistSq = currentLineMinDistSq
+				bestRaIndex = i
+			}
+
+			// RA Label at Dec = 0
+			val zeroDecIndex = 90 / equLineResStep
+			if (zeroDecIndex >= 0 && zeroDecIndex < equRaPointsCount) {
+				val az = equRaAzimuths[i][zeroDecIndex]
+				val alt = equRaAltitudes[i][zeroDecIndex]
+				if (skyToScreen(az, alt, tempPoint)) {
+					val totalMinutes = i * equRaStepMin
+					val h = totalMinutes / 60
+					val m = totalMinutes % 60
+					val label = if (m == 0) "${h}h" else "${h}h${m}"
+					gridTextPaint.textAlign = Paint.Align.CENTER
+					canvas.drawText(label, tempPoint.x, tempPoint.y - 10f, gridTextPaint)
+				}
+			}
 		}
+
+		// Draw Dec Lines and Labels
 		for (i in 0 until equDecLinesCount) {
 			var first = true
 			for (j in 0 until equDecPointsCount) {
@@ -672,6 +770,24 @@ class StarView @JvmOverloads constructor(
 					if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
 					else gridPath.lineTo(tempPoint.x, tempPoint.y)
 				} else { first = true }
+			}
+
+			// Draw label aligned to the central RA line
+			if (bestRaIndex != -1) {
+				val decDeg = -80 + (i * equDecStep)
+				if (decDeg != 0) {
+					// Calculate intersection of best RA line and this Dec line
+					val raVal = (bestRaIndex * equRaStepMin) / 60.0
+					val hor = horizon(currentTime, observer, raVal, decDeg.toDouble(), Refraction.Normal)
+
+					if (skyToScreen(hor.azimuth, hor.altitude, tempPoint)) {
+						// Ensure label is strictly on screen
+						if (tempPoint.x >= 0 && tempPoint.x <= width && tempPoint.y >= 0 && tempPoint.y <= height) {
+							gridTextPaint.textAlign = Paint.Align.LEFT
+							canvas.drawText("${decDeg}°", tempPoint.x + 5f, tempPoint.y - 5f, gridTextPaint)
+						}
+					}
+				}
 			}
 		}
 		canvas.drawPath(gridPath, equGridPaint)
