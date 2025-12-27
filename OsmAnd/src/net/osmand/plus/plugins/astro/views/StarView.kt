@@ -28,7 +28,6 @@ import io.github.cosinekitty.astronomy.Vector
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.rotationEclEqd
-import net.osmand.plus.plugins.astro.AstroDataProvider
 import net.osmand.plus.plugins.astro.AstroDataProvider.Constellation
 import net.osmand.plus.plugins.astro.SkyObject
 import java.util.Calendar
@@ -108,6 +107,11 @@ class StarView @JvmOverloads constructor(
 	private val arrowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = 0xFF00FFFF.toInt()
 		style = Paint.Style.FILL
+	}
+	private val pinnedHighlightPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFFFFD700.toInt() // Gold for pinned items
+		style = Paint.Style.STROKE
+		strokeWidth = 4f
 	}
 
 	private val celestialPath = Path()
@@ -201,27 +205,27 @@ class StarView @JvmOverloads constructor(
 	private var equDecAzimuths = Array(0) { DoubleArray(0) }
 	private var equDecAltitudes = Array(0) { DoubleArray(0) }
 
+	// --- Selection & Multiselection ---
 	private var selectedObject: SkyObject? = null
 	private var selectedConstellation: Constellation? = null
+	private val pinnedObjects = mutableSetOf<SkyObject>()
+
 	var onConstellationClickListener: ((Constellation?) -> Unit)? = null
 
-	private var lastPathTime: Double = -1.0
-	private var lastPathLat: Double = -999.0
-	private var lastPathLon: Double = -999.0
-	private var lastPathObject: SkyObject? = null
+	// --- Path Caching for Multiselection ---
+	private data class CelestialPathData(
+		val azimuths: DoubleArray,
+		val altitudes: DoubleArray,
+		val labels: Array<String?>,
+		val count: Int,
+		var lastTime: Double,
+		var lastLat: Double,
+		var lastLon: Double
+	)
 
-	private class PathPoint {
-		val point = PointF()
-		var hourLabel: String? = null
-		var timeOffsetHours: Double = 0.0
-		var isValid: Boolean = false
-		var azimuth: Double = 0.0
-		var altitude: Double = 0.0
-		fun reset() { hourLabel = null; isValid = false }
-	}
+	private val pathCache = mutableMapOf<SkyObject, CelestialPathData>()
+	private val tempPathPoint = PointF() // Helper for projection inside onDraw
 
-	private val pathPointPool = Array(200) { PathPoint() }
-	private var activePathPointsCount = 0
 	private var visualAnimator: ValueAnimator? = null
 
 	fun setObserverLocation(lat: Double, lon: Double, alt: Double) {
@@ -284,6 +288,12 @@ class StarView @JvmOverloads constructor(
 			it.azimuth = it.targetAzimuth
 			it.altitude = it.targetAltitude
 		}
+
+		// Clean up pinned objects that might no longer exist
+		val toRemove = pinnedObjects.filter { !skyObjectMap.containsValue(it) }
+		pinnedObjects.removeAll(toRemove)
+		pathCache.keys.removeAll(toRemove)
+
 		invalidate()
 	}
 
@@ -302,6 +312,24 @@ class StarView @JvmOverloads constructor(
 	}
 
 	fun getSelectedConstellationItem(): Constellation? = selectedConstellation
+
+	// --- Pinning API ---
+
+	fun isObjectPinned(obj: SkyObject): Boolean {
+		return pinnedObjects.contains(obj)
+	}
+
+	fun setObjectPinned(obj: SkyObject, pinned: Boolean) {
+		if (pinned) {
+			pinnedObjects.add(obj)
+		} else {
+			pinnedObjects.remove(obj)
+			pathCache.remove(obj) // Free up cache if deselected
+		}
+		invalidate()
+	}
+
+	// -------------------
 
 	fun setDateTime(time: Time, animate: Boolean = true) {
 		visualAnimator?.cancel()
@@ -388,6 +416,7 @@ class StarView @JvmOverloads constructor(
 
 	private fun shouldRecalculate(obj: SkyObject): Boolean {
 		if (obj == selectedObject) return true
+		if (pinnedObjects.contains(obj)) return true
 		if (showConstellations) return true
 		return isObjectVisibleInSettings(obj)
 	}
@@ -413,39 +442,55 @@ class StarView @JvmOverloads constructor(
 		return result
 	}
 
-	private fun updatePathAstronomyCache(obj: SkyObject) {
-		val timeUnchanged = abs(currentTime.tt - lastPathTime) < 0.0000001
-		val locUnchanged = observer.latitude == lastPathLat && observer.longitude == lastPathLon
-		val objUnchanged = obj == lastPathObject
-		if (timeUnchanged && locUnchanged && objUnchanged) return
-		activePathPointsCount = 0
+	// Calculate and cache path data for an object
+	private fun getOrUpdatePathData(obj: SkyObject): CelestialPathData? {
+		val cached = pathCache[obj]
+		val timeUnchanged = cached != null && abs(currentTime.tt - cached.lastTime) < 0.0000001
+		val locUnchanged = cached != null && observer.latitude == cached.lastLat && observer.longitude == cached.lastLon
+
+		if (timeUnchanged && locUnchanged && cached != null) {
+			return cached
+		}
+
+		// Calculate new path data
 		val startHours = -12
 		val endHours = 12
 		val stepMinutes = 10
 		val totalMinutes = (endHours - startHours) * 60
-		val steps = totalMinutes / stepMinutes
+		val steps = totalMinutes / stepMinutes + 1
+
+		// Arrays to store path data
+		val azimuths = DoubleArray(steps)
+		val altitudes = DoubleArray(steps)
+		val labels = arrayOfNulls<String>(steps)
+
 		val tz = TimeZone.getDefault()
 		val currentMillis = currentTime.toMillisecondsSince1970()
-		for (i in 0..steps) {
-			if (activePathPointsCount >= pathPointPool.size) break
+		var validCount = 0
+
+		for (i in 0 until steps) {
 			reusableCal.timeZone = tz
 			reusableCal.timeInMillis = currentMillis
 			reusableCal.add(Calendar.HOUR_OF_DAY, startHours)
 			reusableCal.set(Calendar.MINUTE, 0)
 			reusableCal.set(Calendar.SECOND, 0)
 			reusableCal.set(Calendar.MILLISECOND, 0)
+
 			val stepTimeMillis = reusableCal.timeInMillis + (i * stepMinutes * 60000L)
 			val maxTime = currentMillis + (endHours * 3600000L)
+
 			if (stepTimeMillis > maxTime + 3600000L) break
+
 			val tStep = Time.fromMillisecondsSince1970(stepTimeMillis)
 			reusableCal.timeInMillis = stepTimeMillis
 			val stepMinute = reusableCal.get(Calendar.MINUTE)
 			val stepHour = reusableCal.get(Calendar.HOUR_OF_DAY)
 			val isHourMark = (stepMinute == 0)
-			val poolItem = pathPointPool[activePathPointsCount]
-			poolItem.reset()
-			poolItem.hourLabel = if (isHourMark) "%02d".format(stepHour) else null
-			poolItem.timeOffsetHours = (stepTimeMillis - currentMillis) / 3600000.0
+
+			if (isHourMark) {
+				labels[validCount] = "%02d".format(stepHour)
+			}
+
 			val altAz: Topocentric = if (obj.type.isSunSystem()) {
 				val body = obj.body!!
 				val eq = equator(body, tStep, observer, EquatorEpoch.OfDate, Aberration.Corrected)
@@ -453,14 +498,18 @@ class StarView @JvmOverloads constructor(
 			} else {
 				horizon(tStep, observer, obj.ra, obj.dec, Refraction.Normal)
 			}
-			poolItem.azimuth = altAz.azimuth
-			poolItem.altitude = altAz.altitude
-			activePathPointsCount++
+
+			azimuths[validCount] = altAz.azimuth
+			altitudes[validCount] = altAz.altitude
+			validCount++
 		}
-		lastPathTime = currentTime.tt
-		lastPathLat = observer.latitude
-		lastPathLon = observer.longitude
-		lastPathObject = obj
+
+		val newData = CelestialPathData(
+			azimuths, altitudes, labels, validCount,
+			currentTime.tt, observer.latitude, observer.longitude
+		)
+		pathCache[obj] = newData
+		return newData
 	}
 
 	override fun onDraw(canvas: Canvas) {
@@ -475,50 +524,14 @@ class StarView @JvmOverloads constructor(
 
 		drawHorizon(canvas)
 
-		if (selectedObject != null) {
-			updatePathAstronomyCache(selectedObject!!)
-			for (i in 0 until activePathPointsCount) {
-				val item = pathPointPool[i]
-				item.isValid = skyToScreen(item.azimuth, item.altitude, item.point)
-			}
-			if (activePathPointsCount > 1) {
-				celestialPath.reset()
-				var isPenDown = false
-				for (i in 0 until activePathPointsCount) {
-					val curr = pathPointPool[i]
-					if (!curr.isValid) { isPenDown = false; continue }
-					if (isPenDown && i > 0) {
-						val prev = pathPointPool[i-1]
-						if (prev.isValid) {
-							val dist = hypot(curr.point.x - prev.point.x, curr.point.y - prev.point.y)
-							if (dist > width * 0.8) isPenDown = false
-						}
-					}
-					if (!isPenDown) {
-						celestialPath.moveTo(curr.point.x, curr.point.y)
-						isPenDown = true
-					} else {
-						celestialPath.lineTo(curr.point.x, curr.point.y)
-					}
-				}
-				canvas.drawPath(celestialPath, pathPaint)
-				for (i in 1 until activePathPointsCount - 1) {
-					val curr = pathPointPool[i]
-					if (!curr.isValid || curr.hourLabel == null) continue
-					val prev = pathPointPool[i-1]
-					val next = pathPointPool[i+1]
-					if (!prev.isValid || !next.isValid) continue
-					if (hypot(curr.point.x - prev.point.x, curr.point.y - prev.point.y) > 200) continue
-					if (hypot(next.point.x - curr.point.x, next.point.y - curr.point.y) > 200) continue
-					val dx = next.point.x - prev.point.x
-					val dy = next.point.y - prev.point.y
-					val angle = atan2(dy.toDouble(), dx.toDouble())
-					val textDist = 30f
-					val px = curr.point.x + textDist * cos(angle - PI/2).toFloat()
-					val py = curr.point.y + textDist * sin(angle - PI/2).toFloat() + 8f
-					canvas.drawText(curr.hourLabel!!, px, py, labelPaint)
-					drawArrow(canvas, curr.point.x, curr.point.y, angle)
-				}
+		// Draw Celestial Paths for all Selected Objects (Current + Pinned)
+		val objectsToDrawPath = mutableSetOf<SkyObject>()
+		if (selectedObject != null) objectsToDrawPath.add(selectedObject!!)
+		objectsToDrawPath.addAll(pinnedObjects)
+
+		objectsToDrawPath.forEach { obj ->
+			if (isObjectVisibleInSettings(obj)) {
+				drawCelestialPath(canvas, obj)
 			}
 		}
 
@@ -529,6 +542,18 @@ class StarView @JvmOverloads constructor(
 			}
 		}
 
+		// Draw Highlights
+
+		// 1. Draw highlights for pinned objects (Gold)
+		pinnedObjects.forEach { obj ->
+			if (isObjectVisibleInSettings(obj)) {
+				if (skyToScreen(obj.azimuth, obj.altitude, tempPoint)) {
+					canvas.drawCircle(tempPoint.x, tempPoint.y, 25f, pinnedHighlightPaint)
+				}
+			}
+		}
+
+		// 2. Draw highlight for currently selected object (Red)
 		selectedObject?.let {
 			if (isObjectVisibleInSettings(it)) {
 				if (skyToScreen(it.azimuth, it.altitude, tempPoint)) {
@@ -537,6 +562,81 @@ class StarView @JvmOverloads constructor(
 					paint.strokeWidth = 3f
 					canvas.drawCircle(tempPoint.x, tempPoint.y, 25f, paint)
 				}
+			}
+		}
+	}
+
+	private fun drawCelestialPath(canvas: Canvas, obj: SkyObject) {
+		val pathData = getOrUpdatePathData(obj) ?: return
+
+		if (pathData.count > 1) {
+			celestialPath.reset()
+			var isPenDown = false
+			val tempPt = PointF()
+			val prevPt = PointF()
+
+			for (i in 0 until pathData.count) {
+				val az = pathData.azimuths[i]
+				val alt = pathData.altitudes[i]
+
+				val isVisible = skyToScreen(az, alt, tempPt)
+
+				if (!isVisible) {
+					isPenDown = false
+					continue
+				}
+
+				if (isPenDown && i > 0) {
+					// Check distance to prevent drawing lines across the screen when wrapping or distant
+					val dist = hypot(tempPt.x - prevPt.x, tempPt.y - prevPt.y)
+					if (dist > width * 0.8) {
+						isPenDown = false
+					}
+				}
+
+				if (!isPenDown) {
+					celestialPath.moveTo(tempPt.x, tempPt.y)
+					isPenDown = true
+				} else {
+					celestialPath.lineTo(tempPt.x, tempPt.y)
+				}
+				prevPt.set(tempPt)
+			}
+
+			canvas.drawPath(celestialPath, pathPaint)
+
+			// Draw Labels and Arrows
+			val tempNext = PointF()
+			val tempPrev = PointF()
+
+			for (i in 1 until pathData.count - 1) {
+				val label = pathData.labels[i] ?: continue
+
+				val az = pathData.azimuths[i]
+				val alt = pathData.altitudes[i]
+				if (!skyToScreen(az, alt, tempPt)) continue
+
+				// Need neighbors for angle
+				val azPrev = pathData.azimuths[i-1]
+				val altPrev = pathData.altitudes[i-1]
+				val azNext = pathData.azimuths[i+1]
+				val altNext = pathData.altitudes[i+1]
+
+				if (!skyToScreen(azPrev, altPrev, tempPrev) || !skyToScreen(azNext, altNext, tempNext)) continue
+
+				if (hypot(tempPt.x - tempPrev.x, tempPt.y - tempPrev.y) > 200) continue
+				if (hypot(tempNext.x - tempPt.x, tempNext.y - tempPt.y) > 200) continue
+
+				val dx = tempNext.x - tempPrev.x
+				val dy = tempNext.y - tempPrev.y
+				val angle = atan2(dy.toDouble(), dx.toDouble())
+
+				val textDist = 30f
+				val px = tempPt.x + textDist * cos(angle - PI/2).toFloat()
+				val py = tempPt.y + textDist * sin(angle - PI/2).toFloat() + 8f
+
+				canvas.drawText(label, px, py, labelPaint)
+				drawArrow(canvas, tempPt.x, tempPt.y, angle)
 			}
 		}
 	}
@@ -906,7 +1006,7 @@ class StarView @JvmOverloads constructor(
 			showLabel = !obj.name.startsWith("HIP", ignoreCase = true)
 		}
 
-		if (showLabel || obj == selectedObject) {
+		if (showLabel || obj == selectedObject || pinnedObjects.contains(obj)) {
 			val text = obj.name
 			val labelTextSize = 25f
 			textPaint.textSize = labelTextSize
@@ -930,8 +1030,8 @@ class StarView @JvmOverloads constructor(
 				}
 			}
 
-			if (!textOverlaps || obj == selectedObject) {
-				textPaint.color = if (obj == selectedObject) Color.YELLOW else Color.LTGRAY
+			if (!textOverlaps || obj == selectedObject || pinnedObjects.contains(obj)) {
+				textPaint.color = if (obj == selectedObject) Color.RED else if(pinnedObjects.contains(obj)) Color.YELLOW else Color.LTGRAY
 				canvas.drawText(text, xText, yText, textPaint)
 
 				occupiedRects.add(textRect)
@@ -1086,7 +1186,7 @@ class StarView @JvmOverloads constructor(
 			}
 		}
 
-		// 3. Nothing clicked
+		// 3. Nothing clicked (Deselect focused object, but keep pins)
 		selectedObject = null
 		selectedConstellation = null
 		invalidate()
