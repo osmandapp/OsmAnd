@@ -5891,4 +5891,10 @@
     <string name="shared_string_centimeters">центиметара</string>
     <string name="bicycle_width_limit_description">Обезбедите ширину свог бицикла како бисте избегли уске бициклистичке стазе.</string>
     <string name="copy_link">Умножи везу</string>
+    <string name="show_spherical_map">Приказ земаљске кугле</string>
+    <string name="enable_3d_objects">Просторни приказ зграда</string>
+    <string name="has_vehicle_metrics">Са подацима ОБДИИ</string>
+    <string name="vehicle_metrics_chart_category">Мерења са возила</string>
+    <string name="delete_folder_description">Да ли избрисати омот „%1$s“?</string>
+    <string name="buildings_3d_detail_level">Подробни просторни приказ зграда</string>
 </resources>

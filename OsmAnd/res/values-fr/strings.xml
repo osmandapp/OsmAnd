@@ -5822,7 +5822,7 @@
     <string name="show_spherical_map">Vue Globe terrestre</string>
     <string name="enable_3d_objects">Bâtiments 3D</string>
     <string name="vehicle_metrics_chart_category">Mesures du véhicule</string>
-    <string name="lang_mi">Maori</string>
+    <string name="lang_mi">Māori</string>
     <string name="buildings_3d_detail_level">Détail des bâtiments 3D</string>
     <string name="has_vehicle_metrics">Avec les données OBDII</string>
 </resources>
