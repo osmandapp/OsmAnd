@@ -104,7 +104,7 @@
 				android:layout_height="wrap_content">
 
 				<include
-					layout="@layout/map_compass_button"
+					layout="@layout/star_map_compass_button"
 					android:layout_width="@dimen/map_small_button_size"
 					android:layout_height="@dimen/map_small_button_size"
 					android:layout_marginStart="@dimen/map_button_margin"
