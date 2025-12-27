@@ -831,6 +831,7 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 				am.setRegionName(region.getName());
+				am.initOrder();
 				return am;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DX_FIELD_NUMBER:
 				x = (codedIS.readSInt32() + (px << (BASE_POI_ZOOM - zoom))) << BASE_POI_SHIFT;
