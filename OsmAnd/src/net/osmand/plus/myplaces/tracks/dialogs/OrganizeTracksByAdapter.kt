@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -33,6 +34,7 @@ class OrganizeTracksByAdapter(
         const val SELECTABLE_ITEM = 3
         const val DIVIDER_FULL = 4
         const val DIVIDER_WITH_PADDING = 5
+        const val SPACE = 6
     }
 
     private var parent: ViewGroup? = null
@@ -48,6 +50,7 @@ class OrganizeTracksByAdapter(
             SELECTABLE_ITEM -> SelectableItemViewHolder(inflate(R.layout.list_item_icon_and_radio_button))
             DIVIDER_FULL -> DividerViewHolder(inflate(R.layout.list_item_divider_basic))
             DIVIDER_WITH_PADDING -> DividerWithPaddingViewHolder(inflate(R.layout.list_item_divider_with_paragraph_padding))
+            SPACE -> SpaceViewHolder(View(context), app.resources.getDimensionPixelSize(R.dimen.dialog_button_ex_height))
             else -> throw IllegalArgumentException("Unsupported view type")
         }
     }
@@ -143,4 +146,10 @@ class OrganizeTracksByAdapter(
     private class DividerViewHolder(itemView: View) : ViewHolder(itemView)
 
     private class DividerWithPaddingViewHolder(itemView: View) : ViewHolder(itemView)
+
+    private class SpaceViewHolder(itemView: View, hSpace: Int) : ViewHolder(itemView) {
+        init {
+            itemView.layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, hSpace)
+        }
+    }
 }

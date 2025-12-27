@@ -10,6 +10,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion
 import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.DIVIDER_WITH_PADDING
 import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.GROUP_HEADER
 import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.SELECTABLE_ITEM
+import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.SPACE
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.shared.gpx.enums.OrganizeByGroupType
 import net.osmand.shared.gpx.enums.OrganizeByType
@@ -19,25 +20,6 @@ class OrganizeTracksByController(
     val app: OsmandApplication,
     val appMode: ApplicationMode
 ): BaseDialogController(app) {
-
-    var fragmentActivity: FragmentActivity? = null
-
-    // Current selection state (null represents "None")
-    var selectedType: OrganizeByType? = null
-        private set
-
-    // Initial state to check for changes
-    private var initialType: OrganizeByType? = null
-
-    init {
-        // TODO: Load real value from settings here
-        // val savedType = app.settings.getOrganizeTracksType(appMode)
-        // initialType = savedType
-        // selectedType = savedType
-
-        initialType = null
-        selectedType = initialType
-    }
 
     companion object {
         const val PROCESS_ID = "select_organize_tracks_by_type"
@@ -59,15 +41,30 @@ class OrganizeTracksByController(
         }
     }
 
+    var fragmentActivity: FragmentActivity? = null
+
+    // Current selection state (null represents "None")
+    var selectedType: OrganizeByType? = null
+        private set
+
+    // Initial state to check for changes
+    private var initialType: OrganizeByType? = null
+
+    init {
+        val savedType = app.settings.getOrganizeTracksByType(appMode)
+        initialType = savedType
+        selectedType = savedType
+    }
+
     override fun getProcessId(): String = PROCESS_ID
 
     fun populateScreenItems(): List<ScreenItem> {
         val items = mutableListOf<ScreenItem>()
 
         items.add(ScreenItem(DIALOG_SUMMARY))
+        //'None' option represented as a 'null' value
         items.add(ScreenItem(SELECTABLE_ITEM, null))
 
-        // todo decide should we use direct order of elements or somehow predefine it
         var group: OrganizeByGroupType? = null
         for (type in OrganizeByType.entries) {
             val currentGroup = type.group
@@ -82,6 +79,7 @@ class OrganizeTracksByController(
             }
         }
         items.add(ScreenItem(DIVIDER_FULL))
+        items.add(ScreenItem(SPACE))
         return items
     }
 
@@ -92,6 +90,7 @@ class OrganizeTracksByController(
             OrganizeByType.HEART_RATE_AVG, OrganizeByType.CADENCE_AVG, OrganizeByType.POWER_AVG
         )
     }
+
     fun selectType(type: OrganizeByType?) {
         if (selectedType != type) {
             selectedType = type
@@ -105,8 +104,7 @@ class OrganizeTracksByController(
 
     fun askSaveChanges() {
         if (hasChanges()) {
-            // TODO: Save to settings
-            // app.settings.setOrganizeTracksType(appMode, selectedType)
+            app.settings.setOrganizeTracksByType(appMode, selectedType)
         }
     }
 }

@@ -107,6 +107,7 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.GeneralRouter;
 import net.osmand.shared.gpx.ColoringPurpose;
+import net.osmand.shared.gpx.enums.OrganizeByType;
 import net.osmand.shared.obd.OBDDataComputer;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
@@ -3524,5 +3525,18 @@ public class OsmandSettings {
 				preference.setModeValue(mode, allow);
 			}
 		}
+	}
+
+	// TODO: for tests only, should be replaced with the appropriate mechanism
+	private final Map<ApplicationMode, OrganizeByType> organizeByTypeMap = new HashMap<>();
+
+	@Nullable
+	public OrganizeByType getOrganizeTracksByType(@NonNull ApplicationMode appMode) {
+		return organizeByTypeMap.get(appMode);
+	}
+
+	public void setOrganizeTracksByType(@NonNull ApplicationMode appMode,
+	                                    @Nullable OrganizeByType type) {
+		organizeByTypeMap.put(appMode, type);
 	}
 }

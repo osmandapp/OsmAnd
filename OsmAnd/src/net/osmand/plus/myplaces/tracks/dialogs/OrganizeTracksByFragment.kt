@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,20 +11,29 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.transition.Hold
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseFullScreenFragment
+import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely
+import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider
 import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByController.Companion.PROCESS_ID
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.utils.InsetTarget
+import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 
-class OrganizeTracksByFragment : BaseFullScreenFragment(), IAskRefreshDialogCompletely {
+class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDialogCompletely,
+    IDialogNightModeInfoProvider {
 
     private var adapter: OrganizeTracksByAdapter? = null
     private var controller: OrganizeTracksByController? = null
+
+    /**
+     * Stores the exact scroll position (state) of the LayoutManager
+     * to restore it after a configuration change (e.g., screen rotation).
+     */
+    private var recyclerState: android.os.Parcelable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +43,26 @@ class OrganizeTracksByFragment : BaseFullScreenFragment(), IAskRefreshDialogComp
         } else {
             dismiss()
         }
-        exitTransition = Hold()
+
+        if (savedInstanceState != null) {
+            recyclerState = savedInstanceState.getParcelable(RECYCLER_STATE_KEY)
+        }
+    }
+
+    override fun getThemeId(): Int {
+        return if (nightMode) R.style.OsmandDarkTheme else R.style.OsmandLightTheme_LightStatusBar
+    }
+
+    override fun getStatusBarColorId(): Int {
+        return ColorUtilities.getStatusBarSecondaryColorId(nightMode)
+    }
+
+    override fun createDialog(savedInstanceState: Bundle?): Dialog {
+        return object : Dialog(requireContext(), themeId) {
+            override fun onBackPressed() {
+                dismiss()
+            }
+        }
     }
 
     override fun onCreateView(
@@ -43,14 +72,24 @@ class OrganizeTracksByFragment : BaseFullScreenFragment(), IAskRefreshDialogComp
     ): View {
         updateNightMode()
         val view = inflate(R.layout.fragment_organize_tracks_by, container, false)
-        AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view)
+        view.setBackgroundColor(ColorUtilities.getActivityListBgColor(app, nightMode))
+        return view
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupToolbar(view)
         setupRecycler(view)
-        setupSaveButton(view)
-
+        setupApplyButton(view)
         updateScreen()
-        return view
+    }
+
+    override fun getInsetTargets(): InsetTargetsCollection {
+        val collection = super.getInsetTargets()
+        // Define targets for edge-to-edge display
+        collection.replace(InsetTarget.createBottomContainer(R.id.buttons_container))
+        collection.replace(InsetTarget.createScrollable(R.id.recycler_view))
+        return collection
     }
 
     private fun setupToolbar(view: View) {
@@ -65,7 +104,10 @@ class OrganizeTracksByFragment : BaseFullScreenFragment(), IAskRefreshDialogComp
         val title = toolbar.findViewById<TextView>(R.id.toolbar_title)
         title.setText(R.string.organize_by)
 
-        ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f)
+        val appbar = view.findViewById<View>(R.id.appbar)
+        if (appbar != null) {
+            ViewCompat.setElevation(appbar, 5.0f)
+        }
     }
 
     private fun setupRecycler(view: View) {
@@ -75,9 +117,10 @@ class OrganizeTracksByFragment : BaseFullScreenFragment(), IAskRefreshDialogComp
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = adapter
+        recyclerView.layoutManager?.isItemPrefetchEnabled = false
     }
 
-    private fun setupSaveButton(view: View) {
+    private fun setupApplyButton(view: View) {
         view.findViewById<DialogButton>(R.id.save_button).setOnClickListener {
             controller?.askSaveChanges()
             dismiss()
@@ -91,6 +134,13 @@ class OrganizeTracksByFragment : BaseFullScreenFragment(), IAskRefreshDialogComp
     private fun updateScreen() {
         val currentController = controller ?: return
         adapter?.setScreenItems(currentController.populateScreenItems())
+
+        // Restore exact scroll position if we have it (after rotation)
+        if (recyclerState != null) {
+            val recyclerView = view?.findViewById<RecyclerView>(R.id.recycler_view)
+            recyclerView?.layoutManager?.onRestoreInstanceState(recyclerState)
+            recyclerState = null
+        }
     }
 
     override fun onResume() {
@@ -114,19 +164,19 @@ class OrganizeTracksByFragment : BaseFullScreenFragment(), IAskRefreshDialogComp
         controller?.finishProcessIfNeeded(activity)
     }
 
-    private fun dismiss() {
-        activity?.onBackPressed()
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        // Save the current scroll position before destruction
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycler_view)
+        val state = recyclerView?.layoutManager?.onSaveInstanceState()
+        outState.putParcelable(RECYCLER_STATE_KEY, state)
     }
-
-    override fun getStatusBarColorId(): Int {
-        return ColorUtilities.getStatusBarSecondaryColorId(nightMode)
-    }
-
-    override fun getContentStatusBarNightMode() = nightMode
 
     companion object {
 
         const val TAG = "OrganizeTracksByFragment"
+
+        private const val RECYCLER_STATE_KEY = "recycler_state_key"
 
         fun showInstance(
             manager: androidx.fragment.app.FragmentManager,
@@ -137,10 +187,7 @@ class OrganizeTracksByFragment : BaseFullScreenFragment(), IAskRefreshDialogComp
                 val arguments = Bundle()
                 arguments.putString(APP_MODE_KEY, appMode.stringKey)
                 fragment.arguments = arguments
-                manager.beginTransaction()
-                    .replace(R.id.fragmentContainer, fragment, TAG)
-                    .addToBackStack(TAG)
-                    .commitAllowingStateLoss()
+                fragment.show(manager, TAG)
                 return true
             }
             return false
