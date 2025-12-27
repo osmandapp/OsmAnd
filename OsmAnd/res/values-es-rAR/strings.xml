@@ -5778,6 +5778,9 @@
     <string name="copy_link">Copiar enlace</string>
     <string name="vehicle_metrics_chart_category">Estadísticas del vehículo</string>
     <string name="delete_folder_description">¿Borrar la carpeta «%1$s»?</string>
-    <string name="show_spherical_map">Vista esférica</string>
+    <string name="show_spherical_map">Vista del globo terráqueo</string>
     <string name="enable_3d_objects">Edificios en 3D</string>
+    <string name="has_vehicle_metrics">Con datos de OBDII</string>
+    <string name="lang_mi">Maorí</string>
+    <string name="buildings_3d_detail_level">Detallado de edificios en 3D</string>
 </resources>

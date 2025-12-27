@@ -5930,4 +5930,8 @@
     <string name="vehicle_metrics_chart_category">Fahrzeugdaten</string>
     <string name="delete_folder_description">Ordner „%1$s“ löschen?</string>
     <string name="slots">Slots</string>
+    <string name="has_vehicle_metrics">Mit OBD-II-Daten</string>
+    <string name="buildings_3d_detail_level">Detaillierung von 3D-Gebäuden</string>
+    <string name="show_spherical_map">Globusansicht</string>
+    <string name="visualizing_button_grid">Raster der Karten-Schaltflächen</string>
 </resources>

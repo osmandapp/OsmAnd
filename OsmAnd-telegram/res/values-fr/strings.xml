@@ -165,7 +165,7 @@
     <string name="sharing_status">Partage de l\'état</string>
     <string name="osmand_service">Mode arrière-plan</string>
     <string name="timeline">Chronologie</string>
-    <string name="live_now">En direct maintenant</string>
+    <string name="live_now">En direct actuellement</string>
     <string name="shared_string_second_short">s</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_hour_short">h</string>

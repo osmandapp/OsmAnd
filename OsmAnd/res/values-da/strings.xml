@@ -4641,15 +4641,15 @@
     <string name="rendering_attr_depthContourWidth_name">Linjebredde</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linjefarvesætning</string>
     <string name="storage_migration_fragment_close_descr">Kopiering er kun %1$s%% fuldført. Hvis du stopper nu, fungerer appen muligvis ikke korrekt.</string>
-    <string name="quick_action_precipitation_layer">En omskifter til at vise eller skjule nedbørslaget på kortet.</string>
-    <string name="quick_action_wind_layer">En omskifter til at vise eller skjule vindlaget på kortet.</string>
-    <string name="quick_action_cloud_layer">En omskifter til at vise eller skjule skylaget på kortet.</string>
+    <string name="quick_action_precipitation_layer">En skifter til at vise eller skjule nedbørslaget på kortet.</string>
+    <string name="quick_action_wind_layer">En skifter til at vise eller skjule vindlaget på kortet.</string>
+    <string name="quick_action_cloud_layer">En skifter til at vise eller skjule skylaget på kortet.</string>
     <string name="temperature_layer">Temperaturlag</string>
     <string name="pressure_layer">Tryklag</string>
     <string name="wind_layer">Vindlag</string>
     <string name="precipitation_layer">Nedbørslag</string>
-    <string name="quick_action_temperature_layer">En omskifter til at vise eller skjule temperaturlaget på kortet.</string>
-    <string name="quick_action_air_pressure_layer">En omskifter til at vise eller skjule lufttrykslaget på kortet.</string>
+    <string name="quick_action_temperature_layer">En skifter til at vise eller skjule temperaturlaget på kortet.</string>
+    <string name="quick_action_air_pressure_layer">En skifter til at vise eller skjule lufttrykslaget på kortet.</string>
     <string name="cloud_layer">Skylag</string>
     <string name="rendering_attr_showMtbScale_name">Vis MTB-skala</string>
     <string name="rendering_attr_showMtbScale_description">Vis spor efter deres MTB-skala.</string>
@@ -5958,4 +5958,6 @@
     <string name="show_spherical_map">Klodevisning</string>
     <string name="enable_3d_objects">3D-bygninger</string>
     <string name="lang_mi">Maori</string>
+    <string name="has_vehicle_metrics">Med OBDII-data</string>
+    <string name="buildings_3d_detail_level">3D-bygningers detaljering</string>
 </resources>

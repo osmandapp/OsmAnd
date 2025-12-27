@@ -44,6 +44,7 @@ import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
 import net.osmand.plus.plugins.astro.SkyObject
 import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 import net.osmand.plus.plugins.astro.views.StarChartView
+import net.osmand.plus.plugins.astro.views.StarCompassButton
 import net.osmand.plus.plugins.astro.views.StarView
 import net.osmand.plus.plugins.astro.views.StarVisiblityChartView
 import net.osmand.plus.settings.backend.OsmandSettings
@@ -88,6 +89,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var starChartState: StarChartState
 
 	private val mapButtons = mutableListOf<MapButton>()
+	private var compassButton: StarCompassButton? = null
 	private var rulerWidget: RulerWidget? = null
 	private var systemBottomInset: Int = 0
 	private var manualAzimuth: Boolean = false
@@ -314,10 +316,15 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (manualAzimuth) return
 		val rotateMode = settings.ROTATE_MAP.get()
 		if (rotateMode == OsmandSettings.ROTATE_MAP_COMPASS) {
-			starView.setAzimuth(value.toDouble())
+			setAzimuth(value.toDouble())
 		} else if (rotateMode != OsmandSettings.ROTATE_MAP_BEARING) {
-			starView.setAzimuth(-app.osmandMap.mapView.rotate.toDouble())
+			setAzimuth(-app.osmandMap.mapView.rotate.toDouble())
 		}
+	}
+
+	private fun setAzimuth(azimuth: Double, animate: Boolean = false) {
+		starView.setAzimuth(azimuth, animate)
+		compassButton?.update(-azimuth.toFloat(), animate)
 	}
 
 	override fun updateLocation(location: Location?) {
@@ -328,7 +335,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				if (!manualAzimuth && !arModeHelper.isArModeEnabled) {
 					if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 						if (location.hasBearing() && location.bearing != 0f) {
-							starView.setAzimuth(location.bearing.toDouble(), true)
+							setAzimuth(location.bearing.toDouble(), true)
 						}
 					}
 				}
@@ -338,7 +345,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			app.runInUIThread {
 				if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 					if (location.hasBearing() && location.bearing != 0f) {
-						starView.setAzimuth(location.bearing.toDouble(), true)
+						setAzimuth(location.bearing.toDouble(), true)
 					}
 				}
 			}
@@ -431,7 +438,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starView.onAzimuthManualChangeListener = { azimuth ->
 			if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode()
 			manualAzimuth = true
-			app.osmandMap.mapView.rotateToAnimate(-azimuth.toFloat())
+			compassButton?.update(-azimuth.toFloat())
 		}
 		starView.onViewAngleChangeListener = { fov -> cameraHelper.updateCameraZoom(fov) }
 	}
@@ -440,7 +447,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val tileBox = app.osmandMap.mapView.rotatedTileBox
 		val location = tileBox.centerLatLon
 		starView.setObserverLocation(location.latitude, location.longitude, 0.0)
-		if (updateAzimuth && !arModeHelper.isArModeEnabled) starView.setAzimuth(-tileBox.rotate.toDouble())
+		if (updateAzimuth && !arModeHelper.isArModeEnabled) setAzimuth(-tileBox.rotate.toDouble())
 	}
 
 	private fun updateStarChart() {
@@ -489,7 +496,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			container.findViewById<MapButton?>(R.id.map_my_location_button)?.let { mapButtons.add(it) }
 			return container.findViewById<View?>(R.id.map_hud_controls)?.let { AndroidUiHelper.updateVisibility(it, true) }
 		}
-		view.findViewById<MapButton?>(R.id.map_compass_button)?.let { layer.addCustomMapButton(it); mapButtons.add(it) }
+		view.findViewById<StarCompassButton?>(R.id.star_map_compass_button)?.let {
+			it.onSingleTap = { setAzimuth(0.0, true)}
+			compassButton = it
+			layer.addCustomMapButton(it)
+			mapButtons.add(it)
+		}
 		view.findViewById<View>(R.id.star_map_controls_container)?.let { addButtons(it, true) }
 		view.findViewById<View>(R.id.map_controls_container)?.let { addButtons(it, false) }
 		layer.addCustomizedDefaultMapButtons(mapButtons)
