@@ -10,6 +10,7 @@ import android.graphics.DashPathEffect
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.PointF
+import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -28,6 +29,7 @@ import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.rotationEclEqd
 import net.osmand.plus.plugins.astro.AstroDataProvider
+import net.osmand.plus.plugins.astro.AstroDataProvider.Constellation
 import net.osmand.plus.plugins.astro.SkyObject
 import java.util.Calendar
 import java.util.TimeZone
@@ -79,6 +81,12 @@ class StarView @JvmOverloads constructor(
 		strokeWidth = 2f
 		alpha = 150
 	}
+	private val selectedConstellationPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFFFFD700.toInt() // Gold
+		style = Paint.Style.STROKE
+		strokeWidth = 4f
+		alpha = 255
+	}
 	private val constellationTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = 0xFF5599FF.toInt()
 		textSize = 32f
@@ -108,6 +116,7 @@ class StarView @JvmOverloads constructor(
 	private val tempPoint2 = PointF()
 	private val reusableCal = Calendar.getInstance()
 	private val arrowPath = Path()
+	private val occupiedRects = mutableListOf<RectF>()
 
 	// --- View State ---
 	private var azimuthCenter = 180.0
@@ -154,7 +163,7 @@ class StarView @JvmOverloads constructor(
 
 	// --- Astronomy Data ---
 	private val skyObjects = mutableListOf<SkyObject>()
-	private var constellations = listOf<AstroDataProvider.Constellation>()
+	private var constellations = listOf<Constellation>()
 	private val skyObjectMap = mutableMapOf<Int, SkyObject>()
 
 	var observer = Observer(56.9496, 24.1052, 0.0)
@@ -189,6 +198,9 @@ class StarView @JvmOverloads constructor(
 	private val equDecAltitudes = Array(equDecLinesCount) { DoubleArray(equDecPointsCount) }
 
 	private var selectedObject: SkyObject? = null
+	private var selectedConstellation: Constellation? = null
+	var onConstellationClickListener: ((Constellation?) -> Unit)? = null
+
 	private var lastPathTime: Double = -1.0
 	private var lastPathLat: Double = -999.0
 	private var lastPathLon: Double = -999.0
@@ -259,6 +271,8 @@ class StarView @JvmOverloads constructor(
 	fun setSkyObjects(objects: List<SkyObject>) {
 		skyObjects.clear()
 		skyObjects.addAll(objects)
+		// Sort by magnitude (ascending): brighter objects (lower mag) come first
+		skyObjects.sortBy { it.magnitude }
 		skyObjectMap.clear()
 		objects.forEach { skyObjectMap[it.hip] = it }
 		recalculatePositions(currentTime, updateTargets = false)
@@ -269,7 +283,7 @@ class StarView @JvmOverloads constructor(
 		invalidate()
 	}
 
-	fun setConstellations(list: List<AstroDataProvider.Constellation>) {
+	fun setConstellations(list: List<Constellation>) {
 		constellations = list
 		invalidate()
 	}
@@ -282,6 +296,8 @@ class StarView @JvmOverloads constructor(
 	fun setOnObjectClickListener(listener: (SkyObject?) -> Unit) {
 		this.onObjectClickListener = listener
 	}
+
+	fun getSelectedConstellationItem(): Constellation? = selectedConstellation
 
 	fun setDateTime(time: Time, animate: Boolean = true) {
 		visualAnimator?.cancel()
@@ -502,9 +518,10 @@ class StarView @JvmOverloads constructor(
 			}
 		}
 
+		occupiedRects.clear()
 		skyObjects.forEach { obj ->
 			if (isObjectVisibleInSettings(obj)) {
-				drawCelestialObject(canvas, obj)
+				drawSkyObject(canvas, obj)
 			}
 		}
 
@@ -698,12 +715,12 @@ class StarView @JvmOverloads constructor(
 	}
 
 	private fun drawConstellations(canvas: Canvas) {
-		gridPath.reset()
 		constellations.forEach { constellation ->
-			val uniqueStars = mutableSetOf<Int>()
+			gridPath.reset()
+			val isSelected = (constellation == selectedConstellation)
+			val linePaint = if (isSelected) selectedConstellationPaint else constellationPaint
+
 			constellation.lines.forEach { (id1, id2) ->
-				uniqueStars.add(id1)
-				uniqueStars.add(id2)
 				val star1 = skyObjectMap[id1]
 				val star2 = skyObjectMap[id2]
 				if (star1 != null && star2 != null) {
@@ -718,9 +735,15 @@ class StarView @JvmOverloads constructor(
 					}
 				}
 			}
+			canvas.drawPath(gridPath, linePaint)
+
 			var avgX = 0f
 			var avgY = 0f
 			var count = 0
+			// Calculate center again for label
+			val uniqueStars = mutableSetOf<Int>()
+			constellation.lines.forEach { (id1, id2) -> uniqueStars.add(id1); uniqueStars.add(id2) }
+
 			uniqueStars.forEach { id ->
 				val star = skyObjectMap[id]
 				if (star != null && skyToScreen(star.azimuth, star.altitude, tempPoint)) {
@@ -730,27 +753,74 @@ class StarView @JvmOverloads constructor(
 			if (count > 0) {
 				val cx = avgX / count
 				val cy = avgY / count
+
+				if (isSelected) {
+					constellationTextPaint.color = 0xFFFFD700.toInt()
+					constellationTextPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+					constellationTextPaint.alpha = 255
+				} else {
+					constellationTextPaint.color = 0xFF5599FF.toInt()
+					constellationTextPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.ITALIC)
+					constellationTextPaint.alpha = 200
+				}
 				canvas.drawText(constellation.name, cx, cy, constellationTextPaint)
 			}
 		}
-		canvas.drawPath(gridPath, constellationPaint)
 	}
 
-	private fun drawCelestialObject(canvas: Canvas, obj: SkyObject) {
+	private fun drawSkyObject(canvas: Canvas, obj: SkyObject) {
 		if (!skyToScreen(obj.azimuth, obj.altitude, tempPoint)) return
-		paint.style = Paint.Style.FILL
-		paint.color = obj.color
+
 		val baseSize = 15f
 		val radius = max(3f, baseSize - (obj.magnitude * 2f))
+
+		paint.style = Paint.Style.FILL
+		paint.color = obj.color
 		canvas.drawCircle(tempPoint.x, tempPoint.y, radius, paint)
+
+		val objRect = RectF(
+			tempPoint.x - radius,
+			tempPoint.y - radius,
+			tempPoint.x + radius,
+			tempPoint.y + radius
+		)
+
 		var showLabel = true
 		if (obj.type == SkyObject.Type.STAR) {
 			showLabel = !obj.name.startsWith("HIP", ignoreCase = true)
 		}
+
 		if (showLabel || obj == selectedObject) {
-			textPaint.textSize = 25f
-			textPaint.color = if (obj == selectedObject) Color.YELLOW else Color.LTGRAY
-			canvas.drawText(obj.name, tempPoint.x + radius + 5, tempPoint.y, textPaint)
+			val text = obj.name
+			val labelTextSize = 25f
+			textPaint.textSize = labelTextSize
+
+			val textWidth = textPaint.measureText(text)
+			val xText = tempPoint.x + radius + 5
+			val yText = tempPoint.y
+
+			val textRect = RectF(
+				xText,
+				yText - labelTextSize,
+				xText + textWidth,
+				yText + (labelTextSize * 0.3f) // Approximation for descent
+			)
+
+			var textOverlaps = false
+			for (rect in occupiedRects) {
+				if (RectF.intersects(textRect, rect)) {
+					textOverlaps = true
+					break
+				}
+			}
+
+			if (!textOverlaps || obj == selectedObject) {
+				textPaint.color = if (obj == selectedObject) Color.YELLOW else Color.LTGRAY
+				canvas.drawText(text, xText, yText, textPaint)
+
+				occupiedRects.add(textRect)
+				occupiedRects.add(objRect)
+			}
 		}
 	}
 
@@ -826,6 +896,8 @@ class StarView @JvmOverloads constructor(
 		val clickRadius = 60f
 		var bestObj: SkyObject? = null
 		var bestDist = Float.MAX_VALUE
+
+		// 1. Check Stars/Planets
 		for (obj in skyObjects) {
 			if (!isObjectVisibleInSettings(obj)) continue
 			if (skyToScreen(obj.azimuth, obj.altitude, tempPoint)) {
@@ -835,9 +907,104 @@ class StarView @JvmOverloads constructor(
 				}
 			}
 		}
-		selectedObject = bestObj
+
+		if (bestObj != null) {
+			selectedObject = bestObj
+			selectedConstellation = null
+			invalidate()
+			onObjectClickListener?.invoke(bestObj)
+			onConstellationClickListener?.invoke(null)
+			return
+		}
+
+		// 2. Check Constellations (if enabled)
+		if (showConstellations) {
+			var bestConst: Constellation? = null
+			var bestConstDist = Float.MAX_VALUE
+
+			constellations.forEach { constellation ->
+				// Check distance to lines
+				constellation.lines.forEach { (id1, id2) ->
+					val s1 = skyObjectMap[id1]
+					val s2 = skyObjectMap[id2]
+					if (s1 != null && s2 != null &&
+						skyToScreen(s1.azimuth, s1.altitude, tempPoint) &&
+						skyToScreen(s2.azimuth, s2.altitude, tempPoint2)) {
+
+						val dist = distanceFromPointToSegment(x, y, tempPoint.x, tempPoint.y, tempPoint2.x, tempPoint2.y)
+						if (dist < clickRadius && dist < bestConstDist) {
+							bestConstDist = dist
+							bestConst = constellation
+						}
+					}
+				}
+
+				// Check distance to label center
+				var avgX = 0f; var avgY = 0f; var count = 0
+				val uniqueStars = mutableSetOf<Int>()
+				constellation.lines.forEach { (id1, id2) -> uniqueStars.add(id1); uniqueStars.add(id2) }
+				uniqueStars.forEach { id ->
+					val s = skyObjectMap[id]
+					if (s != null && skyToScreen(s.azimuth, s.altitude, tempPoint)) {
+						avgX += tempPoint.x; avgY += tempPoint.y; count++
+					}
+				}
+				if (count > 0) {
+					val cx = avgX / count
+					val cy = avgY / count
+					val dist = hypot(x - cx, y - cy)
+					if (dist < clickRadius && dist < bestConstDist) {
+						bestConstDist = dist
+						bestConst = constellation
+					}
+				}
+			}
+
+			if (bestConst != null) {
+				selectedConstellation = bestConst
+				selectedObject = null
+				invalidate()
+				onObjectClickListener?.invoke(null)
+				onConstellationClickListener?.invoke(bestConst)
+				return
+			}
+		}
+
+		// 3. Nothing clicked
+		selectedObject = null
+		selectedConstellation = null
 		invalidate()
-		onObjectClickListener?.invoke(bestObj)
+		onObjectClickListener?.invoke(null)
+		onConstellationClickListener?.invoke(null)
+	}
+
+	private fun distanceFromPointToSegment(px: Float, py: Float, x1: Float, y1: Float, x2: Float, y2: Float): Float {
+		val A = px - x1
+		val B = py - y1
+		val C = x2 - x1
+		val D = y2 - y1
+
+		val dot = A * C + B * D
+		val len_sq = C * C + D * D
+		val param = if (len_sq != 0f) dot / len_sq else -1f
+
+		val xx: Float
+		val yy: Float
+
+		if (param < 0) {
+			xx = x1
+			yy = y1
+		} else if (param > 1) {
+			xx = x2
+			yy = y2
+		} else {
+			xx = x1 + param * C
+			yy = y1 + param * D
+		}
+
+		val dx = px - xx
+		val dy = py - yy
+		return hypot(dx, dy)
 	}
 
 	private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
