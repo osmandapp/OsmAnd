@@ -707,17 +707,60 @@ class StarView @JvmOverloads constructor(
 	private fun drawEquatorialGrid(canvas: Canvas) {
 		updateEquatorialGridCache()
 		gridPath.reset()
+
+		// Set color for Equatorial labels
+		gridTextPaint.color = 0xFF00AAAA.toInt()
+
+		var bestRaIndex = -1
+		var minCenterDistSq = Float.MAX_VALUE
+		val centerX = width / 2f
+		val centerY = height / 2f
+
+		// Draw RA Lines and Labels
 		for (i in 0 until equRaLinesCount) {
 			var first = true
+			var currentLineMinDistSq = Float.MAX_VALUE
+
 			for (j in 0 until equRaPointsCount) {
 				val az = equRaAzimuths[i][j]
 				val alt = equRaAltitudes[i][j]
 				if (skyToScreen(az, alt, tempPoint)) {
 					if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
 					else gridPath.lineTo(tempPoint.x, tempPoint.y)
+
+					// Track distance to center for this line to find the "central" hour line
+					val dx = tempPoint.x - centerX
+					val dy = tempPoint.y - centerY
+					val distSq = dx * dx + dy * dy
+					if (distSq < currentLineMinDistSq) {
+						currentLineMinDistSq = distSq
+					}
 				} else { first = true }
 			}
+
+			// Update best RA line
+			if (currentLineMinDistSq < minCenterDistSq) {
+				minCenterDistSq = currentLineMinDistSq
+				bestRaIndex = i
+			}
+
+			// RA Label at Dec = 0
+			val zeroDecIndex = 90 / equLineResStep
+			if (zeroDecIndex >= 0 && zeroDecIndex < equRaPointsCount) {
+				val az = equRaAzimuths[i][zeroDecIndex]
+				val alt = equRaAltitudes[i][zeroDecIndex]
+				if (skyToScreen(az, alt, tempPoint)) {
+					val totalMinutes = i * equRaStepMin
+					val h = totalMinutes / 60
+					val m = totalMinutes % 60
+					val label = if (m == 0) "${h}h" else "${h}h${m}"
+					gridTextPaint.textAlign = Paint.Align.CENTER
+					canvas.drawText(label, tempPoint.x, tempPoint.y - 10f, gridTextPaint)
+				}
+			}
 		}
+
+		// Draw Dec Lines and Labels
 		for (i in 0 until equDecLinesCount) {
 			var first = true
 			for (j in 0 until equDecPointsCount) {
@@ -727,6 +770,24 @@ class StarView @JvmOverloads constructor(
 					if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
 					else gridPath.lineTo(tempPoint.x, tempPoint.y)
 				} else { first = true }
+			}
+
+			// Draw label aligned to the central RA line
+			if (bestRaIndex != -1) {
+				val decDeg = -80 + (i * equDecStep)
+				if (decDeg != 0) {
+					// Calculate intersection of best RA line and this Dec line
+					val raVal = (bestRaIndex * equRaStepMin) / 60.0
+					val hor = horizon(currentTime, observer, raVal, decDeg.toDouble(), Refraction.Normal)
+
+					if (skyToScreen(hor.azimuth, hor.altitude, tempPoint)) {
+						// Ensure label is strictly on screen
+						if (tempPoint.x >= 0 && tempPoint.x <= width && tempPoint.y >= 0 && tempPoint.y <= height) {
+							gridTextPaint.textAlign = Paint.Align.LEFT
+							canvas.drawText("${decDeg}°", tempPoint.x + 5f, tempPoint.y - 5f, gridTextPaint)
+						}
+					}
+				}
 			}
 		}
 		canvas.drawPath(gridPath, equGridPaint)
