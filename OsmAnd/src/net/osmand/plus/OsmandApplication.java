@@ -953,9 +953,9 @@ public class OsmandApplication extends MultiDexApplication {
 	public synchronized IBRouterService reconnectToBRouter() {
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
-			// a delay is necessary as the service process needs time to start..
-			Thread.sleep(800);
 			if (bRouterServiceConnection != null) {
+                // a delay is necessary as the service process needs time to start..
+                Thread.sleep(800);
 				return bRouterServiceConnection.getBrouterService();
 			}
 		} catch (Exception e) {
