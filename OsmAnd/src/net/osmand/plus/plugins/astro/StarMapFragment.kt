@@ -41,7 +41,6 @@ import net.osmand.plus.plugins.astro.utils.StarMapARModeHelper
 import net.osmand.plus.plugins.astro.utils.StarMapCameraHelper
 import net.osmand.plus.plugins.astro.views.CelestialPathView
 import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
-import net.osmand.plus.plugins.astro.SkyObject
 import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 import net.osmand.plus.plugins.astro.views.StarChartView
 import net.osmand.plus.plugins.astro.views.StarCompassButton
@@ -53,6 +52,7 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.controls.maphudbuttons.MapButton
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
 import net.osmand.shared.util.LoggerFactory
+import net.osmand.plus.plugins.astro.AstroDataProvider.Constellation
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Locale
@@ -432,7 +432,18 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		starView.setOnObjectClickListener { obj ->
 			selectedObject = obj
-			if (obj != null) showObjectInfo(obj) else bottomSheet.visibility = View.GONE
+			if (obj != null) {
+				showObjectInfo(obj)
+			} else if (starView.getSelectedConstellationItem() == null) {
+				bottomSheet.visibility = View.GONE
+			}
+		}
+		starView.onConstellationClickListener = { constellation ->
+			if (constellation != null) {
+				showConstellationInfo(constellation)
+			} else if (selectedObject == null) {
+				bottomSheet.visibility = View.GONE
+			}
 		}
 		starView.onAnimationFinished = { if (selectedObject != null) showObjectInfo(selectedObject!!) }
 		starView.onAzimuthManualChangeListener = { azimuth ->
@@ -509,6 +520,32 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout))
 	}
 
+	private fun showConstellationInfo(c: Constellation) {
+		sheetTitle.text = c.name
+		sheetCoords.text = getString(R.string.astro_constellation)
+
+		sheetMagnitude?.isVisible = false
+		sheetDistance?.isVisible = false
+		sheetRiseTime?.isVisible = false
+		sheetSetTime?.isVisible = false
+
+		if (c.wid.isNotEmpty()) {
+			sheetWikiButton?.isVisible = true
+			sheetWikiButton?.setOnClickListener {
+				val uri = Uri.parse("https://www.wikidata.org/wiki/${c.wid}")
+				val intent = Intent(Intent.ACTION_VIEW, uri)
+				try {
+					startActivity(intent)
+				} catch (_: Exception) {
+				}
+			}
+		} else {
+			sheetWikiButton?.isVisible = false
+		}
+
+		bottomSheet.visibility = View.VISIBLE
+	}
+
 	private fun showObjectInfo(obj: SkyObject) {
 		sheetTitle.text = obj.name
 		val az = String.format(Locale.getDefault(), "%.1f°", obj.azimuth)
@@ -517,6 +554,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		sheetCoords.text = coordsText
 
 		sheetMagnitude?.text = "${getString(R.string.shared_string_magnitude)}: ${obj.magnitude}"
+		sheetMagnitude?.isVisible = true
 
 		if (obj.type.isSunSystem()) {
 			sheetDistance?.isVisible = true
@@ -561,8 +599,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				val intent = Intent(Intent.ACTION_VIEW, uri)
 				try {
 					startActivity(intent)
-				} catch (e: Exception) {
-					// Ignore
+				} catch (_: Exception) {
 				}
 			}
 		} else {

@@ -96,6 +96,7 @@
 	<string name="equatorial_grid">Equatorial Grid</string>
 	<string name="ecliptic_line">Ecliptic Line</string>
 	<string name="astro_planets">Planets</string>
+	<string name="astro_constellation">Constellation</string>
 	<string name="astro_constellations">Constellations</string>
 	<string name="astro_stars">Stars</string>
 	<string name="astro_galaxies">Galaxies</string>
