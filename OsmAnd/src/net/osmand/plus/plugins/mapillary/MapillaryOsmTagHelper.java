@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.shared.api.NetworkAPI.NetworkResponse;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -42,16 +43,16 @@ public class MapillaryOsmTagHelper {
 
 	@Nullable
 	private static JSONObject request(@NonNull String url) {
-		StringBuilder rawResponse = new StringBuilder();
-		String errorMessage = NetworkUtils.sendGetRequest(url, null, rawResponse);
-		if (errorMessage == null) {
+		NetworkResponse response = NetworkUtils.sendGetRequest(url, null);
+		if (response.getError() == null) {
 			try {
-				return new JSONObject(rawResponse.toString());
+				return new JSONObject(response.getResponse());
 			} catch (Exception e) {
-				errorMessage = e.getLocalizedMessage();
+				LOG.error(e.getLocalizedMessage());
 			}
+		} else {
+			LOG.error(response.getError());
 		}
-		LOG.error(errorMessage);
 		return null;
 	}
 
