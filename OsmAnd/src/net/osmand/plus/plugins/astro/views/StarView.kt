@@ -10,6 +10,7 @@ import android.graphics.DashPathEffect
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.PointF
+import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -108,6 +109,7 @@ class StarView @JvmOverloads constructor(
 	private val tempPoint2 = PointF()
 	private val reusableCal = Calendar.getInstance()
 	private val arrowPath = Path()
+	private val occupiedRects = mutableListOf<RectF>()
 
 	// --- View State ---
 	private var azimuthCenter = 180.0
@@ -259,6 +261,8 @@ class StarView @JvmOverloads constructor(
 	fun setSkyObjects(objects: List<SkyObject>) {
 		skyObjects.clear()
 		skyObjects.addAll(objects)
+		// Sort by magnitude (ascending): brighter objects (lower mag) come first
+		skyObjects.sortBy { it.magnitude }
 		skyObjectMap.clear()
 		objects.forEach { skyObjectMap[it.hip] = it }
 		recalculatePositions(currentTime, updateTargets = false)
@@ -502,9 +506,10 @@ class StarView @JvmOverloads constructor(
 			}
 		}
 
+		occupiedRects.clear()
 		skyObjects.forEach { obj ->
 			if (isObjectVisibleInSettings(obj)) {
-				drawCelestialObject(canvas, obj)
+				drawSkyObject(canvas, obj)
 			}
 		}
 
@@ -736,21 +741,59 @@ class StarView @JvmOverloads constructor(
 		canvas.drawPath(gridPath, constellationPaint)
 	}
 
-	private fun drawCelestialObject(canvas: Canvas, obj: SkyObject) {
+	private fun drawSkyObject(canvas: Canvas, obj: SkyObject) {
 		if (!skyToScreen(obj.azimuth, obj.altitude, tempPoint)) return
-		paint.style = Paint.Style.FILL
-		paint.color = obj.color
+
 		val baseSize = 15f
 		val radius = max(3f, baseSize - (obj.magnitude * 2f))
+
+		paint.style = Paint.Style.FILL
+		paint.color = obj.color
 		canvas.drawCircle(tempPoint.x, tempPoint.y, radius, paint)
+
+		val objRect = RectF(
+			tempPoint.x - radius,
+			tempPoint.y - radius,
+			tempPoint.x + radius,
+			tempPoint.y + radius
+		)
+
 		var showLabel = true
 		if (obj.type == SkyObject.Type.STAR) {
 			showLabel = !obj.name.startsWith("HIP", ignoreCase = true)
 		}
+
 		if (showLabel || obj == selectedObject) {
-			textPaint.textSize = 25f
-			textPaint.color = if (obj == selectedObject) Color.YELLOW else Color.LTGRAY
-			canvas.drawText(obj.name, tempPoint.x + radius + 5, tempPoint.y, textPaint)
+			val text = obj.name
+			val labelTextSize = 25f
+			textPaint.textSize = labelTextSize
+
+			val textWidth = textPaint.measureText(text)
+			val xText = tempPoint.x + radius + 5
+			val yText = tempPoint.y
+
+			val textRect = RectF(
+				xText,
+				yText - labelTextSize,
+				xText + textWidth,
+				yText + (labelTextSize * 0.3f) // Approximation for descent
+			)
+
+			var textOverlaps = false
+			for (rect in occupiedRects) {
+				if (RectF.intersects(textRect, rect)) {
+					textOverlaps = true
+					break
+				}
+			}
+
+			if (!textOverlaps || obj == selectedObject) {
+				textPaint.color = if (obj == selectedObject) Color.YELLOW else Color.LTGRAY
+				canvas.drawText(text, xText, yText, textPaint)
+
+				occupiedRects.add(textRect)
+				occupiedRects.add(objRect)
+			}
 		}
 	}
 
