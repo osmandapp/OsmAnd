@@ -991,6 +991,8 @@ public class GeneralRouter implements VehicleRouter {
 		public static final int EQUAL_EXPRESSION = 3;
 		public static final int MIN_EXPRESSION = 4;
 		public static final int MAX_EXPRESSION = 5;
+		public static final int GREAT_OR_EQUAL_EXPRESSION = 6;
+		public static final int LESS_OR_EQUAL_EXPRESSION = 7;
 
 		public RouteAttributeExpression(String[] vs, String valueType, int expressionId) {
 			this.expressionType = expressionId;
@@ -1022,10 +1024,14 @@ public class GeneralRouter implements VehicleRouter {
 			if (Double.isNaN(f1) || Double.isNaN(f2)) {
 				return false;
 			}
-			if (expressionType == LESS_EXPRESSION) {
-				return f1 <= f2;
-			} else if (expressionType == GREAT_EXPRESSION) {
+			if (expressionType == GREAT_EXPRESSION) {
+				return f1 > f2;
+			} else if (expressionType == GREAT_OR_EQUAL_EXPRESSION) {
 				return f1 >= f2;
+			} else if (expressionType == LESS_EXPRESSION) {
+				return f1 < f2;
+			} else if (expressionType == LESS_OR_EQUAL_EXPRESSION) {
+				return f1 <= f2;
 			} else if (expressionType == EQUAL_EXPRESSION) {
 				return f1 == f2;
 			}
@@ -1199,6 +1205,16 @@ public class GeneralRouter implements VehicleRouter {
 		public void registerGreatCondition(String value1, String value2, String valueType) {
 			conditionExpressions.add(new RouteAttributeExpression(new String[]{value1, value2}, valueType,
 					RouteAttributeExpression.GREAT_EXPRESSION));
+		}
+
+		public void registerGreatOrEqualCondition(String value1, String value2, String valueType) {
+			conditionExpressions.add(new RouteAttributeExpression(new String[]{value1, value2}, valueType,
+					RouteAttributeExpression.GREAT_OR_EQUAL_EXPRESSION));
+		}
+
+		public void registerLessOrEqualCondition(String value1, String value2, String valueType) {
+			conditionExpressions.add(new RouteAttributeExpression(new String[]{value1, value2}, valueType,
+					RouteAttributeExpression.LESS_OR_EQUAL_EXPRESSION));
 		}
 
 		public void registerEqualCondition(String value1, String value2, String valueType) {
