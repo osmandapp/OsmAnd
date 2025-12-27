@@ -79,7 +79,9 @@ class OrganizeTracksByAdapter(
                 val iconId: Int
                 if (organizeByType != null) {
                     title = organizeByType.getName()
-                    iconId = AndroidUtils.getDrawableId(app, organizeByType.iconResId)
+                    iconId = AndroidUtils.getDrawableId(
+                        app,
+                        organizeByType.iconResId, R.drawable.ic_action_info_outlined)
                 } else {
                     title = app.getString(R.string.shared_string_none)
                     iconId = R.drawable.ic_action_list_flat

@@ -22,6 +22,7 @@
     <string name="nearest_city">Nearest city</string>
     <string name="country">Country</string>
     <string name="avg_speed">Avg. speed</string>
+    <string name="organize_by_max_speed">Max. speed</string>
     <string name="organize_by_max_altitude">Max. altitude</string>
     <string name="lang_mi">Maori</string>
     <string name="vehicle_metrics_chart_category">Vehicle metrics</string>

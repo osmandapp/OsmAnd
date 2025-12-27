@@ -18,7 +18,7 @@ enum class OrganizeByType(
 		OrganizeByGroupType.GENERAL,
 		null),
 	DURATION(
-		"ic_action_time_span_25",
+		"ic_action_time_span_75",
 		"duration",
 		TrackFilterType.DURATION,
 		OrganizeByGroupType.GENERAL,
@@ -67,11 +67,14 @@ enum class OrganizeByType(
 
 	// Speed
 	MAX_SPEED(
-		"ic_action_speed", "max_speed", TrackFilterType.MAX_SPEED, OrganizeByGroupType.SPEED,
+		"ic_action_speed_max",
+		"organize_by_max_speed",
+		TrackFilterType.MAX_SPEED,
+		OrganizeByGroupType.SPEED,
 		Pair(0, 180)),
 
 	AVG_SPEED(
-		"ic_action_speed",
+		"ic_action_speed_average",
 		"avg_speed",
 		TrackFilterType.AVERAGE_SPEED,
 		OrganizeByGroupType.SPEED,
@@ -80,7 +83,7 @@ enum class OrganizeByType(
 	// Altitude and elevation
 	MAX_ALTITUDE(
 		"ic_action_altitude_max",
-		"ic_action_altitude_average",
+		"organize_by_max_altitude",
 		TrackFilterType.MAX_ALTITUDE,
 		OrganizeByGroupType.ALTITUDE_ELEVATION,
 		Pair(0, 180)),
