@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
@@ -68,8 +69,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var sheetCoords: TextView
 	private lateinit var resetTimeButton: Button
 
-	// New Professional UI Components
-	// These are nullable to prevent crashes if XML is not updated immediately
+	private lateinit var sheetPinButton: CheckBox
+
 	private var sheetMagnitude: TextView? = null
 	private var sheetDistance: TextView? = null
 	private var sheetRiseTime: TextView? = null
@@ -137,6 +138,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		bottomSheet = view.findViewById(R.id.bottom_sheet)
 		sheetTitle = view.findViewById(R.id.sheet_title)
 		sheetCoords = view.findViewById(R.id.sheet_coords)
+
+		sheetPinButton = view.findViewById(R.id.sheet_pin_button)
 
 		// Attempt to find new structured views
 		sheetMagnitude = view.findViewById(R.id.sheet_magnitude)
@@ -524,6 +527,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		sheetTitle.text = c.name
 		sheetCoords.text = getString(R.string.astro_constellation)
 
+		sheetPinButton.visibility = View.GONE
+
 		sheetMagnitude?.isVisible = false
 		sheetDistance?.isVisible = false
 		sheetRiseTime?.isVisible = false
@@ -552,6 +557,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val alt = String.format(Locale.getDefault(), "%.1f°", obj.altitude)
 		val coordsText = "${getString(R.string.shared_string_azimuth)}: $az  •  ${getString(R.string.altitude)}: $alt"
 		sheetCoords.text = coordsText
+
+		// Show and configure Pin button
+		sheetPinButton.visibility = View.VISIBLE
+		sheetPinButton.setOnCheckedChangeListener(null) // Prevent recursive trigger
+		sheetPinButton.isChecked = starView.isObjectPinned(obj)
+		sheetPinButton.setOnCheckedChangeListener { _, isChecked ->
+			starView.setObjectPinned(obj, isChecked)
+		}
 
 		sheetMagnitude?.text = "${getString(R.string.shared_string_magnitude)}: ${obj.magnitude}"
 		sheetMagnitude?.isVisible = true
