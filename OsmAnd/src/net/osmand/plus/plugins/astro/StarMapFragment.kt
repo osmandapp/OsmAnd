@@ -225,7 +225,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			}
 		}
 		view.findViewById<ImageButton>(R.id.settings_button).apply {
-			setOnClickListener { AstroUtils.showStarMapOptionsDialog(context, starView, starMapViewModel, swSettings) }
+			setOnClickListener { AstroUtils.showStarMapOptionsDialog(context, starView, swSettings) }
 		}
 
 		resetTimeButton.setOnClickListener {
