@@ -276,12 +276,10 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	protected synchronized SQLiteConnection getDatabase() {
-		if ((db == null || db.isClosed()) && file.exists()) {
-			LOG.debug("Open " + file.getAbsolutePath());
-			db = openDatabase(false);
-			if (db == null) {
-				db = openDatabase(true);
-			}
+		// Default: open READ-ONLY for all read paths
+		if ((db == null || db.isClosed()) && file != null && file.exists()) {
+			LOG.debug("Open RO " + file.getAbsolutePath());
+			db = openDatabase(true); // RO by default
 			try {
 				SQLiteCursor cursor = db.rawQuery("SELECT * FROM info", null);
 				if (cursor.moveToFirst()) {
@@ -315,6 +313,7 @@ public class SQLiteTileSource implements ITileSource {
 						inversiveZoom = BIG_PLANET_TILE_NUMBERING.equalsIgnoreCase(cursor.getString(tnumbering));
 					} else {
 						inversiveZoom = true;
+						// In RO mode addInfoColumn becomes a no-op; will be persisted when RW is requested
 						addInfoColumn(db, TILENUMBERING, BIG_PLANET_TILE_NUMBERING);
 					}
 					int timecolumn = list.indexOf(TIME_COLUMN);
@@ -384,7 +383,6 @@ public class SQLiteTileSource implements ITileSource {
 
 	private SQLiteConnection openDatabase(boolean readOnly) {
 		try {
-			onlyReadonlyAvailable = readOnly;
 			return app.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), readOnly);
 		} catch (RuntimeException e) {
 			LOG.error(e);
@@ -392,11 +390,64 @@ public class SQLiteTileSource implements ITileSource {
 		return null;
 	}
 
+	// Ensure we have a RW connection when a write is needed.
+	// If RW open fails, set onlyReadonlyAvailable = true and reopen RO.
+	protected synchronized SQLiteConnection getWritableDatabase() {
+		SQLiteConnection current = getDatabase();
+		if (current == null) {
+			return null;
+		}
+		if (!current.isReadOnly()) {
+			return current; // already RW
+		}
+		LOG.debug("Reopen RW " + (file != null ? file.getAbsolutePath() : "<null>"));
+		try {
+			current.close();
+		} catch (RuntimeException e) {
+			LOG.warn("Error closing RO connection before RW reopen", e);
+		}
+		SQLiteConnection wdb = openDatabase(false);
+		if (wdb == null) {
+			// RW not available: mark and reopen RO for continued read operations
+			onlyReadonlyAvailable = true;
+			db = openDatabase(true);
+			return db;
+		}
+		onlyReadonlyAvailable = false;
+		db = wdb;
+		// Now that we are RW, we may persist missing info columns encountered earlier
+		try {
+			SQLiteCursor cursor = db.rawQuery("SELECT * FROM info", null);
+			if (cursor.moveToFirst()) {
+				// Re-run the same metadata normalization path; writes now succeed
+				String[] columnNames = cursor.getColumnNames();
+				List<String> list = Arrays.asList(columnNames);
+				if (!list.contains(TILENUMBERING)) {
+					addInfoColumn(db, TILENUMBERING, BIG_PLANET_TILE_NUMBERING);
+				}
+				if (!list.contains(TIME_COLUMN)) {
+					timeSupported = hasTimeColumn(db);
+					addInfoColumn(db, TIME_COLUMN, timeSupported ? "yes" : "no");
+				}
+				if (!list.contains(EXPIRE_MINUTES)) {
+					addInfoColumn(db, EXPIRE_MINUTES, "0");
+				}
+				if (!list.contains(TILESIZE) && tileSizeSpecified) {
+					addInfoColumn(db, TILESIZE, String.valueOf(tileSize));
+				}
+			}
+			cursor.close();
+		} catch (RuntimeException e) {
+			LOG.error(e);
+		}
+		return db;
+	}
+
 	public void updateFromTileSourceTemplate(TileSourceTemplate r) {
 		boolean openedBefore = isDbOpened();
-		SQLiteConnection db = getDatabase();
+		SQLiteConnection db = getWritableDatabase();
 		boolean changed = false;
-		if (!onlyReadonlyAvailable && db != null) {
+		if (db != null && !db.isReadOnly()) {
 			int maxZoom = r.getMaximumZoomSupported();
 			int minZoom = r.getMinimumZoomSupported();
 			if (inversiveZoom) {
@@ -442,7 +493,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	private void addInfoColumn(SQLiteConnection db, String columnName, String value) {
-		if(!onlyReadonlyAvailable) {
+		if (db != null && !db.isReadOnly()) {
 			try {
 				db.execSQL("alter table info add column " + columnName + " TEXT");
 			} catch (SQLException e) {
@@ -552,14 +603,18 @@ public class SQLiteTileSource implements ITileSource {
 	public synchronized Bitmap getImage(@NonNull byte[] blob, @NonNull String[] params) {
 		Bitmap bmp = BitmapFactory.decodeByteArray(blob, 0, blob.length);
 		if (bmp == null) {
-			SQLiteConnection db = getDatabase();
+			SQLiteConnection db = getWritableDatabase();
 			if (db != null) {
 				// Delete broken image
-				db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", params);
+				if (!db.isReadOnly()) {
+					db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", params);
+				}
 			}
 		} else if (!tileSizeSpecified && tileSize != bmp.getWidth() && bmp.getWidth() > 0) {
 			tileSize = bmp.getWidth();
-			addInfoColumn(db, "tilesize", String.valueOf(tileSize));
+			// Persist tilesize only when RW is possible
+			SQLiteConnection db = getWritableDatabase();
+			addInfoColumn(db, TILESIZE, String.valueOf(tileSize));
 			tileSizeSpecified = true;
 		}
 		return bmp;
@@ -603,7 +658,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void deleteImage(int x, int y, int zoom) {
-		SQLiteConnection db = getDatabase();
+		SQLiteConnection db = getWritableDatabase();
 		if(db == null || db.isReadOnly()){
 			return;
 		}
@@ -627,8 +682,8 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public void deleteTiles(String path) {
-		SQLiteConnection db = getDatabase();
-		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
+		SQLiteConnection db = getWritableDatabase();
+		if (db == null || db.isReadOnly()) {
 			return;
 		}
 		db.execSQL("DELETE FROM tiles");
@@ -670,8 +725,8 @@ public class SQLiteTileSource implements ITileSource {
 	 * let all writing attempts to wait outside of this method   
 	 */
 	public /*synchronized*/ void insertImage(int x, int y, int zoom, byte[] dataToSave) throws IOException {
-		SQLiteConnection db = getDatabase();
-		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
+		SQLiteConnection db = getWritableDatabase();
+		if (db == null || db.isReadOnly()) {
 			return;
 		}
 		/*There is no sense to download and do not save. If needed, check should perform before download 
@@ -712,7 +767,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void clearOld() {
-		SQLiteConnection db = getDatabase();
+		SQLiteConnection db = getWritableDatabase();
 		long expiration = getExpirationTimeMillis();
 		if(db == null || db.isReadOnly() || expiration <= 0){
 			return;
