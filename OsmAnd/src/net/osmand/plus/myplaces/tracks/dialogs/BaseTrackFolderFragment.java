@@ -70,9 +70,9 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.OrganizedTracks;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
@@ -101,6 +101,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 
 	protected TrackFolder rootFolder;
 	protected TrackFolder selectedFolder;
+	protected OrganizedTracks organizedGroup;
 	protected SmartFolder smartFolder;
 
 	protected TrackFoldersAdapter adapter;
@@ -152,6 +153,10 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		this.selectedItemPath = selectedItemPath;
 	}
 
+	public void setOrganizedGroup(@NonNull OrganizedTracks organizedTracks) {
+		this.organizedGroup = organizedTracks;
+	}
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -162,12 +167,9 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		FragmentActivity activity = requireActivity();
-		LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
-		View view = themedInflater.inflate(getLayoutId(), container, false);
-
+		updateNightMode();
+		View view = inflate(getLayoutId(), container, false);
 		setupAdapter(view);
-
 		return view;
 	}
 
@@ -241,8 +243,12 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 
 		List<TrackFolder> folders = null;
 		List<TrackItem> trackItems = null;
+		List<OrganizedTracks> organizedTracks = null;
 		if (selectedFolder == null) {
-			if (smartFolder != null) {
+			if (organizedGroup != null) {
+				trackItems = organizedGroup.getTrackItems();
+			} else if (smartFolder != null) {
+				organizedTracks = smartFolder.getOrganizedTracks();
 				trackItems = smartFolder.getTrackItems();
 			}
 		} else {
@@ -255,10 +261,17 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 			if (!KAlgorithms.INSTANCE.isEmpty(folders)) {
 				items.addAll(folders);
 			}
-			items.addAll(trackItems);
+			if (!KAlgorithms.INSTANCE.isEmpty(organizedTracks)) {
+				items.addAll(organizedTracks);
+			} else {
+				items.addAll(trackItems);
+			}
 
 			if (shouldShowFolderStats()) {
 				TracksGroup tracksGroup = selectedFolder;
+				if (tracksGroup == null) {
+					tracksGroup = organizedGroup;
+				}
 				if (tracksGroup == null) {
 					tracksGroup = smartFolder;
 				}
@@ -308,13 +321,12 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	}
 
 	public void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		callActivity(activity -> {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			if (!fragmentManager.isStateSaved()) {
 				fragmentManager.popBackStack(getFragmentTag(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			}
-		}
+		});
 	}
 
 	@Override
@@ -324,6 +336,8 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 			TrackFolderOptionsController.showDialog(foldersHelper, folder, this);
 		} else if (group instanceof SmartFolder folder) {
 			SmartFolderOptionsController.Companion.showDialog(app, getChildFragmentManager(), folder, this);
+		} else if (group instanceof OrganizedTracks organizedTracks) {
+			// TODO: implement
 		}
 	}
 
@@ -523,44 +537,37 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	}
 
 	protected void showTracksVisibilityDialog(@NonNull String id, @NonNull TrackTabType type, boolean selectAll) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		callActivity(activity -> {
 			Bundle bundle = new Bundle();
 			bundle.putString(PRESELECTED_TRACKS_TAB_ID, id);
 			bundle.putBoolean(SELECT_ALL_ITEMS_ON_TAB, selectAll);
 			bundle.putString(CALLING_FRAGMENT_TAG, TAG);
 			MapActivity.launchMapActivityMoveToTop(activity, storeState(), null, bundle);
-		}
+		});
 	}
 
 	@Override
 	public void showExportDialog(@NonNull TrackFolder folder) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
-			if (foldersHelper != null) {
-				foldersHelper.showExportDialog(folder.getFlattenedTrackItems(), this);
-			}
-		}
+		showExportDialog(folder.getFlattenedTrackItems());
 	}
 
 	@Override
 	public void showExportDialog(@NonNull SmartFolder folder) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		showExportDialog(folder.getTrackItems());
+	}
+
+	private void showExportDialog(@NonNull List<TrackItem> trackItems) {
+		callActivity(activity -> {
 			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 			if (foldersHelper != null) {
-				foldersHelper.showExportDialog(folder.getTrackItems(), this);
+				foldersHelper.showExportDialog(trackItems, this);
 			}
-		}
+		});
 	}
 
 	@Override
 	public void showChangeAppearanceDialog(@NonNull TrackFolder folder) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			DefaultAppearanceController.showDialog(activity, folder);
-		}
+		callActivity(activity -> DefaultAppearanceController.showDialog(activity, folder));
 	}
 
 	@Override

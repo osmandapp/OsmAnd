@@ -390,8 +390,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	public Set<TrackItem> getSelectedTrackItems(@NonNull Set<TrackItem> trackItems, @NonNull Set<TracksGroup> tracksGroups) {
 		Set<TrackItem> items = new HashSet<>(trackItems);
 		for (TracksGroup tracksGroup : tracksGroups) {
-			if (tracksGroup instanceof TrackFolder) {
-				TrackFolder trackFolder = (TrackFolder) tracksGroup;
+			if (tracksGroup instanceof TrackFolder trackFolder) {
 				items.addAll(trackFolder.getFlattenedTrackItems());
 			} else if (tracksGroup instanceof VisibleTracksGroup) {
 				items.addAll(tracksGroup.getTrackItems());

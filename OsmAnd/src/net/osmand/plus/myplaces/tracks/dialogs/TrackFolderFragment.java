@@ -30,6 +30,7 @@ import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.OrganizedTracks;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.util.Algorithms;
@@ -240,15 +241,19 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 				foldersHelper.showTracksSelection(selectedFolder, this, trackItems, tracksGroups, screenPositionData);
 			} else if (smartFolder != null) {
 				Set<TrackItem> trackItems = trackItem != null ? Collections.singleton(trackItem) : null;
-				foldersHelper.showTracksSelection(smartFolder, this, trackItems, null, screenPositionData);
+				Set<TracksGroup> tracksGroups = tracksGroup != null ? Collections.singleton(tracksGroup) : null;
+				TracksGroup group = organizedGroup != null ? organizedGroup : smartFolder;
+				foldersHelper.showTracksSelection(group, this, trackItems, tracksGroups, screenPositionData);
 			}
 		}
 	}
 
 	@Override
 	public void onTracksGroupSelected(@NonNull TracksGroup group, boolean selected) {
-		if (group instanceof TrackFolder) {
-			setSelectedFolder((TrackFolder) group);
+		if (group instanceof TrackFolder trackFolder) {
+			setSelectedFolder(trackFolder);
+		} else if (group instanceof OrganizedTracks organizedTracks) {
+			setOrganizedGroup(organizedTracks);
 		}
 		updateContent();
 	}

@@ -26,6 +26,28 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton
 class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDialogCompletely,
     IDialogNightModeInfoProvider {
 
+    companion object {
+
+        private val TAG = OrganizeTracksByFragment::class.java.simpleName
+
+        private const val RECYCLER_STATE_KEY = "recycler_state_key"
+
+        fun showInstance(
+            manager: androidx.fragment.app.FragmentManager,
+            appMode: ApplicationMode
+        ): Boolean {
+            if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+                val fragment = OrganizeTracksByFragment()
+                val arguments = Bundle()
+                arguments.putString(APP_MODE_KEY, appMode.stringKey)
+                fragment.arguments = arguments
+                fragment.show(manager, TAG)
+                return true
+            }
+            return false
+        }
+    }
+
     private var adapter: OrganizeTracksByAdapter? = null
     private var controller: OrganizeTracksByController? = null
 
@@ -170,27 +192,5 @@ class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDial
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recycler_view)
         val state = recyclerView?.layoutManager?.onSaveInstanceState()
         outState.putParcelable(RECYCLER_STATE_KEY, state)
-    }
-
-    companion object {
-
-        const val TAG = "OrganizeTracksByFragment"
-
-        private const val RECYCLER_STATE_KEY = "recycler_state_key"
-
-        fun showInstance(
-            manager: androidx.fragment.app.FragmentManager,
-            appMode: ApplicationMode
-        ): Boolean {
-            if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-                val fragment = OrganizeTracksByFragment()
-                val arguments = Bundle()
-                arguments.putString(APP_MODE_KEY, appMode.stringKey)
-                fragment.arguments = arguments
-                fragment.show(manager, TAG)
-                return true
-            }
-            return false
-        }
     }
 }

@@ -57,7 +57,8 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	private fun organizeTracksInternal(
 		filter: BaseTrackFilter,
-		organizeByType: OrganizeByType) {
+		organizeByType: OrganizeByType
+	) {
 		filter.initOrganizedByGroups(organizeByType)
 		organizeByStep = filter.organizeByStep
 		organizeByRange = filter.organizeByRange
@@ -119,6 +120,19 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 			trackItems = KCollectionUtils.addToList(getTrackItems(), trackItem)
 			folderAnalysis = null
 		}
+	}
+
+	fun getOrganizedTracks(): List<OrganizedTracks>? {
+		val result = mutableListOf<OrganizedTracks>()
+		if (organizedTrackItems != null) {
+			for (entry in organizedTrackItems?.entries!!) {
+				val key = entry.key
+				val value = entry.value
+				result.add(OrganizedTracks(key.title, key.title, key.iconName, value, this))
+			}
+			return result
+		}
+		return null
 	}
 
 	override fun getFolderAnalysis(): TrackFolderAnalysis {

@@ -45,7 +45,12 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 	}
 
 	override fun onBackPressed() {
-		dismiss()
+		if (organizedGroup != null) {
+			organizedGroup = null
+			updateContent()
+		} else {
+			dismiss()
+		}
 	}
 
 	override fun showFolderOptionMenu(): Boolean {
@@ -56,7 +61,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 			.setOnClickListener {
 				smartFolder?.let {
 					showTracksSelection(
-						folder = it,
+						folder = currentTrackGroup!!,
 						fragment = this,
 						trackItems = null,
 						tracksGroups = null,
@@ -64,14 +69,17 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 				}
 			}.create())
 
-		items.add(PopUpMenuItem.Builder(app)
-			.setTitleId(R.string.organize_by)
-			.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_tracks_organize))
-			.setOnClickListener {
-				showOrganizeByDialog()
-			}
-			.showTopDivider(true)
-			.create())
+		val generalViewMode = organizedGroup == null
+		if (generalViewMode) {
+			items.add(PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.organize_by)
+				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_tracks_organize))
+				.setOnClickListener {
+					showOrganizeByDialog()
+				}
+				.showTopDivider(true)
+				.create())
+		}
 
 		items.add(PopUpMenuItem.Builder(app)
 			.setTitleId(R.string.shared_string_refresh)
@@ -79,17 +87,18 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 			.setOnClickListener {
 				reloadTracks(true)
 			}
-			.showTopDivider(true)
+			.showTopDivider(generalViewMode)
 			.create())
 
-		items.add(PopUpMenuItem.Builder(app)
-			.setTitleId(R.string.edit_filter)
-			.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_filter_dark))
-			.setOnClickListener {
-				editFilters()
-			}
-			.showTopDivider(true)
-			.create())
+		if (organizedGroup == null) {
+			items.add(PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.edit_filter)
+				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_filter_dark))
+				.setOnClickListener {
+					editFilters()
+				}
+				.create())
+		}
 
 		val view = requireActivity().findViewById<View>(R.id.action_folder_menu)
 		val displayData = PopUpMenuDisplayData()
@@ -134,7 +143,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 	}
 
 	override fun getCurrentTrackGroup(): TracksGroup? {
-		return smartFolder
+		return if (organizedGroup != null) organizedGroup else smartFolder
 	}
 
 	@androidx.annotation.WorkerThread

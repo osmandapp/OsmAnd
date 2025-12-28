@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.myplaces.tracks.dialogs.viewholders.OrganizedTracksViewHolder;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyFolderLoadingTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.EmptySmartFolderLoadingTracksViewHolder;
@@ -33,6 +34,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TrackFolderViewHolder
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.VisibleTracksViewHolder;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.shared.gpx.data.OrganizedTracks;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
@@ -61,6 +63,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final int TYPE_EMPTY_SMART_FOLDER = 9;
 	public static final int TYPE_EMPTY_SMART_FOLDER_LOADING = 10;
 	public static final int TYPE_EMPTY_FOLDER_LOADING = 11;
+	public static final int TYPE_ORGANIZED_TRACKS = 12;
 
 	private final OsmandApplication app;
 	private final UpdateLocationViewCache locationViewCache;
@@ -79,11 +82,11 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	@Nullable
 	private EmptySmartFolderListener emptySmartFolderListener;
 
+	private final boolean nightMode;
+	private final TrackFolder selectedFolder;
 	private TracksSortMode sortMode;
-	private boolean nightMode;
 	private boolean selectionMode;
 	private boolean shouldShowFolder;
-	private TrackFolder selectedFolder;
 
 	public TrackFoldersAdapter(@NonNull Context context, boolean nightMode, @Nullable TrackFolder selectedFolder) {
 		this.app = (OsmandApplication) context.getApplicationContext();
@@ -151,6 +154,9 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case TYPE_SMART_FOLDER:
 				view = inflater.inflate(R.layout.track_list_item, parent, false);
 				return new SmartFolderViewHolder(view, trackGroupsListener, nightMode, selectionMode);
+			case TYPE_ORGANIZED_TRACKS:
+				view = inflater.inflate(R.layout.track_list_item, parent, false);
+				return new OrganizedTracksViewHolder(view, trackGroupsListener, nightMode, selectionMode);
 			case TYPE_VISIBLE_TRACKS:
 				view = inflater.inflate(R.layout.track_list_item, parent, false);
 				return new VisibleTracksViewHolder(view, trackGroupsListener, nightMode, selectionMode);
@@ -194,6 +200,8 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			return TYPE_SMART_FOLDER;
 		} else if (object instanceof VisibleTracksGroup) {
 			return TYPE_VISIBLE_TRACKS;
+		} else if (object instanceof OrganizedTracks) {
+			return TYPE_ORGANIZED_TRACKS;
 		} else if (object instanceof TrackFolderAnalysis) {
 			return TYPE_FOLDER_STATS;
 		} else if (object instanceof Integer) {
@@ -226,50 +234,44 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		boolean lastItem = isLastItem(position);
 
-		if (holder instanceof SortTracksViewHolder) {
-			SortTracksViewHolder viewHolder = (SortTracksViewHolder) holder;
+		if (holder instanceof SortTracksViewHolder viewHolder) {
 			viewHolder.bindView(hasTrackItems(), null, selectedFolder == null ? null : selectedFolder.getId());
-		} else if (holder instanceof TrackViewHolder) {
-			TrackItem trackItem = (TrackItem) items.get(position);
 
-			TrackViewHolder viewHolder = (TrackViewHolder) holder;
+		} else if (holder instanceof TrackViewHolder viewHolder) {
+			TrackItem trackItem = (TrackItem) items.get(position);
 			viewHolder.bindView(sortMode, trackItem, lastItem, shouldShowFolder, selectionMode);
-		} else if (holder instanceof TrackFolderViewHolder) {
+
+		} else if (holder instanceof TrackFolderViewHolder viewHolder) {
 			TrackFolder trackFolder = (TrackFolder) items.get(position);
-
-			TrackFolderViewHolder viewHolder = (TrackFolderViewHolder) holder;
 			viewHolder.bindView(trackFolder, lastItem);
-		} else if (holder instanceof VisibleTracksViewHolder) {
+
+		} else if (holder instanceof VisibleTracksViewHolder viewHolder) {
 			VisibleTracksGroup tracksGroup = (VisibleTracksGroup) items.get(position);
-
-			VisibleTracksViewHolder viewHolder = (VisibleTracksViewHolder) holder;
 			viewHolder.bindView(tracksGroup, lastItem);
-		} else if (holder instanceof RecordingTrackViewHolder) {
-			TrackItem trackItem = (TrackItem) items.get(position);
 
-			RecordingTrackViewHolder viewHolder = (RecordingTrackViewHolder) holder;
+		} else if (holder instanceof RecordingTrackViewHolder viewHolder) {
+			TrackItem trackItem = (TrackItem) items.get(position);
 			viewHolder.bindView(trackItem);
-		} else if (holder instanceof EmptyFolderViewHolder) {
-			EmptyFolderViewHolder viewHolder = (EmptyFolderViewHolder) holder;
-			viewHolder.bindView();
-		} else if (holder instanceof EmptySmartFolderViewHolder) {
-			EmptySmartFolderViewHolder viewHolder = (EmptySmartFolderViewHolder) holder;
-			viewHolder.bindView();
-		} else if (holder instanceof FolderStatsViewHolder) {
+
+		} else if (holder instanceof OrganizedTracksViewHolder viewHolder) {
+			OrganizedTracks organizedTracks = (OrganizedTracks) items.get(position);
+			viewHolder.bindView(organizedTracks, lastItem);
+
+		} else if (holder instanceof FolderStatsViewHolder viewHolder) {
 			TrackFolderAnalysis folderAnalysis = (TrackFolderAnalysis) items.get(position);
-			FolderStatsViewHolder viewHolder = (FolderStatsViewHolder) holder;
 			viewHolder.bindView(folderAnalysis);
-		} else if (holder instanceof EmptyTracksViewHolder) {
-			EmptyTracksViewHolder viewHolder = (EmptyTracksViewHolder) holder;
+
+		} else if (holder instanceof EmptyFolderViewHolder viewHolder) {
 			viewHolder.bindView();
-		} else if (holder instanceof EmptySmartFolderLoadingTracksViewHolder) {
-			EmptySmartFolderLoadingTracksViewHolder viewHolder = (EmptySmartFolderLoadingTracksViewHolder) holder;
+		} else if (holder instanceof EmptySmartFolderViewHolder viewHolder) {
 			viewHolder.bindView();
-		} else if (holder instanceof EmptyFolderLoadingTracksViewHolder) {
-			EmptyFolderLoadingTracksViewHolder viewHolder = (EmptyFolderLoadingTracksViewHolder) holder;
+		} else if (holder instanceof EmptyTracksViewHolder viewHolder) {
 			viewHolder.bindView();
-		} else if (holder instanceof SmartFolderViewHolder) {
-			SmartFolderViewHolder viewHolder = (SmartFolderViewHolder) holder;
+		} else if (holder instanceof EmptySmartFolderLoadingTracksViewHolder viewHolder) {
+			viewHolder.bindView();
+		} else if (holder instanceof EmptyFolderLoadingTracksViewHolder viewHolder) {
+			viewHolder.bindView();
+		} else if (holder instanceof SmartFolderViewHolder viewHolder) {
 			viewHolder.bindView((SmartFolder) items.get(position), lastItem);
 		}
 	}
