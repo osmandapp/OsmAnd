@@ -5851,4 +5851,46 @@
          • تحسين واجهة المستخدم لتحديد مقاييس الشاحنة\n\n
     </string>
     <string name="map_orientation_portrait_inverted">عمودي (مقلوب)</string>
+    <string name="has_vehicle_metrics">مع بيانات OBDII</string>
+    <string name="lang_mi">ماوري</string>
+    <string name="vehicle_metrics_chart_category">مقاييس المركبات</string>
+    <string name="delete_folder_description">حذف مجلد \"%1$s\" ؟</string>
+    <string name="routing_attr_pt_limit_name">عرض المسار الأفضل</string>
+    <string name="routing_attr_pt_limit_description">حدد عدد أفضل المسارات التي تريد عرضها</string>
+    <string name="centimeter">سم</string>
+    <string name="shared_string_centimeters">سنتيمترات</string>
+    <string name="bicycle_width_limit_description">اخترعرضاً مناسباً لدراجتك لتجنب مسارات الدراجات الضيقة.</string>
+    <string name="copy_link">نسخ الرابط</string>
+    <string name="is_parking_time_limited">هل وقت الوقوف محدود؟</string>
+    <string name="efficient_grid">شبكة فعالة</string>
+    <string name="slots">فتحات</string>
+    <string name="button_frames">إطارات الأزرار</string>
+    <string name="visualizing_button_grid">شبكة أزرار الخريطة</string>
+    <string name="routing_attr_weightrating_name">أقصى وزن عند التحميل الكامل</string>
+    <string name="routing_attr_maxaxleload_name">أقصى حمولة للمحور</string>
+    <string name="deleted_maps_warning">أنت على وشك حذف %d عنصر هل تريد المتابعة؟</string>
+    <string name="deleted_maps_prompt">هذه الخرائط غيرمدعومة، وقد تم استبدالها بخرائط لمناطق أصغر. يرجى إزالتها وتنزيل الإصدارات الجديدة.</string>
+    <string name="unsupported_maps">خرائط غير مدعومة</string>
+    <string name="quick_action_weather_layers">مفتاح تبديل لإظهار أو إخفاء طبقات الطقس على الخريطة.</string>
+    <string name="quick_action_wind_animation_layer">مفتاح تبديل لإظهار أو إخفاء طبقة الرسوم المتحركة للرياح على الخريطة.</string>
+    <string name="wind_animation_layer">طبقة تحرك الرياح</string>
+    <string name="weather_layers">طبقات الطقس</string>
+    <string name="requires_internet_connection">يتطلب اتصالاً بالإنترنت</string>
+    <string name="save_and_access_articles_offline">احفظ البيانات للوصول إلى المقالات دون اتصال بالإنترنت في أي مكان</string>
+    <string name="track_folder_appearance">مظهر مجلد المسار</string>
+    <string name="update_maps">تحديث الخرائط</string>
+    <string name="reconnect">إعادة الاتصال</string>
+    <string name="rendering_attr_showSkiSlopes_name">عرض منحدرات التزلج</string>
+    <string name="rendering_attr_showSkiSlopes_description">عرض منحدرات التزلج اليسيرة</string>
+    <string name="trip_recording_downhill_widget_desc">عرض جميع عمليات الانحدارأو آخر عملية انحدار في الرحلة المسجلة حاليًا.</string>
+    <string name="trip_recording_uphill_widget_desc">يعرض مجموع جميع عمليات الارتفاع أو آخر عملية ارتفاع في الرحلة المسجلة حاليًا.</string>
+    <string name="trip_recording_distance_widget_desc">يعرض إجمالي المسافة لرحلتك المسجلة حاليًا، مع أوضاع لعرض مسافة آخر ارتفاع وانحدار.</string>
+    <string name="trip_recording_max_speed_widget_description">عرض أقصى سرعة مسجلة في الرحلة الحالية. انقر للتبديل بين السرعة القصوى الإجمالية والسرعة القصوى من آخر ارتفاع أو انحدار.</string>
+    <string name="trip_recording_average_slope_widget_description">عرض متوسط الانحدار للجزء الأخير من الرحلة المسجلة حاليًا، سواء كان انحدارا أو ارتفاعا.</string>
+    <string name="average_slope">متوسط الميلان</string>
+    <string name="shared_string_last_uphill">آخر ارتفاع</string>
+    <string name="shared_string_last_downhill">آخر انحدار</string>
+    <string name="shared_string_price">السعر</string>
+    <string name="obd_alt_battery_voltage">جهد المحول</string>
+    <string name="liter_single">لتر</string>
 </resources>
