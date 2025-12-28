@@ -1,20 +1,13 @@
 package net.osmand.plus.settings.fragments.search;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 
 import net.osmand.map.TileSourceManager;
-
-import static net.osmand.map.TileSourceManager.TileSourceTemplate;
-import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.createDownloadTileSourceTemplatesTask;
-import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.waitFor;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -34,8 +27,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 @LargeTest
