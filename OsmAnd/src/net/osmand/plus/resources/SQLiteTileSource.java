@@ -444,7 +444,6 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void updateFromTileSourceTemplate(TileSourceTemplate r) {
-		boolean openedBefore = isDbOpened();
 		SQLiteConnection db = getWritableDatabase();
 		boolean changed = false;
 		if (db != null && !db.isReadOnly()) {
@@ -480,8 +479,9 @@ public class SQLiteTileSource implements ITileSource {
 				changed = true;
 			}
 		}
-		if (db != null && !openedBefore) {
-			db.close();
+		if (db != null && !db.isReadOnly()) {
+			db.close(); // Close after rare write
+			db = null;
 		}
 		if (changed) {
 			file.setLastModified(System.currentTimeMillis());
@@ -610,11 +610,19 @@ public class SQLiteTileSource implements ITileSource {
 					db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", params);
 				}
 			}
+			if (db != null && !db.isReadOnly()) {
+				db.close(); // Close after delete broken image occasional write
+				db = null;
+			}
 		} else if (!tileSizeSpecified && tileSize != bmp.getWidth() && bmp.getWidth() > 0) {
 			tileSize = bmp.getWidth();
 			// Persist tilesize only when RW is possible
 			SQLiteConnection db = getWritableDatabase();
 			addInfoColumn(db, TILESIZE, String.valueOf(tileSize));
+			if (db != null && !db.isReadOnly()) {
+				db.close(); // Close after one-off write
+				db = null;
+			}
 			tileSizeSpecified = true;
 		}
 		return bmp;
@@ -663,6 +671,8 @@ public class SQLiteTileSource implements ITileSource {
 			return;
 		}
 		db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"", getFileZoom(zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		db.close(); // Close after occasional write
+		db = null;
 	}
 
 	private static final int BUF_SIZE = 1024;
@@ -688,6 +698,9 @@ public class SQLiteTileSource implements ITileSource {
 		}
 		db.execSQL("DELETE FROM tiles");
 		db.execSQL("VACUUM");
+		db.close(); // Close after rare write
+		db = null;
+
 	}
 
 	@Override
@@ -777,6 +790,9 @@ public class SQLiteTileSource implements ITileSource {
 		LOG.debug(sql);
 		db.execSQL(sql);
 		db.execSQL("VACUUM");
+		db.close(); // Close after periodic write
+		db = null;
+
 	}
 
 	@Override
