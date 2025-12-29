@@ -5927,6 +5927,7 @@
     <string name="delete_folder_description">Odstranit složku „%1$s“?</string>
     <string name="show_spherical_map">Sférické zobrazení</string>
     <string name="enable_3d_objects">3D stavby</string>
-    <string name="lang_mi">Maori</string>
+    <string name="lang_mi">Māori</string>
     <string name="buildings_3d_detail_level">Detaily 3D staveb</string>
+    <string name="has_vehicle_metrics">S daty OBDII</string>
 </resources>

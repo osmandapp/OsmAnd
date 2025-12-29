@@ -5793,7 +5793,7 @@
     <string name="save_and_access_articles_offline">Adatmentés és cikkek offline elérése bárhonnan</string>
     <string name="private_access_routing_req_short">Engedélyezi a magánutak használatát az úti cél eléréséhez?</string>
     <string name="download_wikipedia_label">Wikipédia letöltése</string>
-    <string name="quick_action_weather_layers">Az időjárási réteg megjelenítésére vagy elrejtésére szolgáló kapcsoló a térképen.</string>
+    <string name="quick_action_weather_layers">Az időjárási rétegek megjelenítésére vagy elrejtésére szolgáló kapcsoló a térképen.</string>
     <string name="quick_action_wind_animation_layer">A szélanimációs réteg megjelenítésére vagy elrejtésére szolgáló kapcsoló a térképen.</string>
     <string name="wind_animation_layer">Szélanimációs réteg</string>
     <string name="weather_layers">Időjárási rétegek</string>
@@ -5821,4 +5821,5 @@
     <string name="enable_3d_objects">3D épületek</string>
     <string name="lang_mi">maori</string>
     <string name="buildings_3d_detail_level">3D épületek részletezése</string>
+    <string name="has_vehicle_metrics">OBDII-adatokkal</string>
 </resources>

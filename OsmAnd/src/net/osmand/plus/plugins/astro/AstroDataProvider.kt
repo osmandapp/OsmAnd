@@ -21,6 +21,7 @@ object AstroDataProvider {
 
 	data class Constellation(
 		val name: String,
+		val wid: String, // Wikipedia ID
 		val lines: List<Pair<Int, Int>> // Pairs of SkyObject HIP IDs
 	)
 
@@ -141,6 +142,7 @@ object AstroDataProvider {
 			for (i in 0 until jsonArray.length()) {
 				val obj = jsonArray.getJSONObject(i)
 				val name = obj.getString("name")
+				val wid = obj.optString("wid", "")
 				val linesArray = obj.getJSONArray("lines")
 
 				val lines = mutableListOf<Pair<Int, Int>>()
@@ -153,7 +155,7 @@ object AstroDataProvider {
 					}
 				}
 
-				constellations.add(Constellation(name, lines))
+				constellations.add(Constellation(name, wid, lines))
 			}
 		} catch (e: Exception) {
 			log.error("Error loading constellations from JSON", e)

@@ -104,7 +104,7 @@
 				android:layout_height="wrap_content">
 
 				<include
-					layout="@layout/map_compass_button"
+					layout="@layout/star_map_compass_button"
 					android:layout_width="@dimen/map_small_button_size"
 					android:layout_height="@dimen/map_small_button_size"
 					android:layout_marginStart="@dimen/map_button_margin"
@@ -268,13 +268,28 @@
 		android:background="?attr/card_and_list_background_basic"
 		android:visibility="gone">
 
-		<TextView
-			android:id="@+id/sheet_title"
+		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:textSize="22sp"
-			android:textStyle="bold"
-			android:textColor="?android:textColorPrimary" />
+			android:orientation="horizontal"
+			android:gravity="center_vertical">
+
+			<TextView
+				android:id="@+id/sheet_title"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:textSize="22sp"
+				android:textStyle="bold"
+				android:textColor="?android:textColorPrimary" />
+
+			<CheckBox
+				android:id="@+id/sheet_pin_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Pin"
+				android:layout_marginStart="8dp" />
+		</LinearLayout>
 
 		<TextView
 			android:id="@+id/sheet_coords"
