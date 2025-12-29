@@ -5735,4 +5735,6 @@
     <string name="show_spherical_map">環球檢視</string>
     <string name="enable_3d_objects">3D 建築物</string>
     <string name="lang_mi">毛利語</string>
+    <string name="has_vehicle_metrics">使用 OBDII 資料</string>
+    <string name="buildings_3d_detail_level">3D 建築物細節化處理</string>
 </resources>
