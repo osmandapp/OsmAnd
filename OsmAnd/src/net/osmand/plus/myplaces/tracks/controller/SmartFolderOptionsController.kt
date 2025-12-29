@@ -33,11 +33,11 @@ class SmartFolderOptionsController(
 		return PROCESS_ID
 	}
 
-	override fun getDisplayData(processId: String): DisplayData? {
+	override fun getDisplayData(processId: String): DisplayData {
 		val iconsCache = app.uiUtilities
 		val displayData = DisplayData()
-		val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.MAP)
-		iconsCache.getActiveIcon(R.drawable.ic_action_folder_smart, nightMode)
+		val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.APP)
+
 		displayData.addDisplayItem(
 			DisplayItem()
 				.setTitle(smartFolder.getName())

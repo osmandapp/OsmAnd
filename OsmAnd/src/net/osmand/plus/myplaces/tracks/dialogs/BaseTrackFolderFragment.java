@@ -52,6 +52,8 @@ import net.osmand.plus.myplaces.tracks.DialogClosedListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter;
+import net.osmand.plus.myplaces.tracks.controller.OrganizedTracksOptionsController;
+import net.osmand.plus.myplaces.tracks.controller.OrganizedTracksOptionsListener;
 import net.osmand.plus.myplaces.tracks.controller.SmartFolderOptionsController;
 import net.osmand.plus.myplaces.tracks.controller.SmartFolderOptionsListener;
 import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsController;
@@ -89,7 +91,8 @@ import java.util.Set;
 public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment implements FragmentStateHolder,
 		SortTracksListener, TrackSelectionListener, TrackGroupsListener, EmptyTracksListener, OsmAuthorizationListener,
 		SelectGpxTaskListener, OnTrackFolderAddListener, GpxImportListener, TrackFolderOptionsListener,
-		OnTrackFileMoveListener, RenameCallback, SelectionHelperProvider<TrackItem>, SmartFolderOptionsListener {
+		OnTrackFileMoveListener, RenameCallback, SelectionHelperProvider<TrackItem>, SmartFolderOptionsListener,
+		OrganizedTracksOptionsListener {
 
 	private static final String TAG = BaseTrackFolderFragment.class.getSimpleName();
 
@@ -337,7 +340,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		} else if (group instanceof SmartFolder folder) {
 			SmartFolderOptionsController.Companion.showDialog(app, getChildFragmentManager(), folder, this);
 		} else if (group instanceof OrganizedTracks organizedTracks) {
-			// TODO: implement
+			OrganizedTracksOptionsController.Companion.showDialog(app, getChildFragmentManager(), organizedTracks, this);
 		}
 	}
 
@@ -536,6 +539,12 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		showTracksVisibilityDialog(smartFolder.getId(), SMART_FOLDER, true);
 	}
 
+	//TODO: implement approach to display tracks of current group
+	@Override
+	public void showOrganizedTracksOnMap(@NonNull OrganizedTracks organizedTracks) {
+		showSmartFolderTracksOnMap(organizedTracks.getRelatedSmartFolder());
+	}
+
 	protected void showTracksVisibilityDialog(@NonNull String id, @NonNull TrackTabType type, boolean selectAll) {
 		callActivity(activity -> {
 			Bundle bundle = new Bundle();
@@ -554,6 +563,17 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	@Override
 	public void showExportDialog(@NonNull SmartFolder folder) {
 		showExportDialog(folder.getTrackItems());
+	}
+
+	@Override
+	public void showExportDialog(@NonNull OrganizedTracks organizedTracks) {
+		showExportDialog(organizedTracks.getTrackItems());
+	}
+
+	@Override
+	public void showOrganizedTracksDetails(@NonNull OrganizedTracks organizedTracks) {
+		setOrganizedGroup(organizedTracks);
+		updateContent();
 	}
 
 	private void showExportDialog(@NonNull List<TrackItem> trackItems) {
