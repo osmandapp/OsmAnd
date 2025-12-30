@@ -5893,4 +5893,17 @@
     <string name="shared_string_price">السعر</string>
     <string name="obd_alt_battery_voltage">جهد المحول</string>
     <string name="liter_single">لتر</string>
+    <string name="kilometers">كيلومتر</string>
+    <string name="miles">ميل</string>
+    <string name="mpg">MPG</string>
+    <string name="backup_delete_data_warning_extended">سيؤدي هذا الإجراء إلى إزالة جميع البيانات المحددة من السحابة بشكل دائم. ولا يمكن استعادتها لاحقاً.</string>
+    <string name="amount_of_total_used">%1$s من%2$s المتسخدم</string>
+    <string name="delete_data">حذف البيانات</string>
+    <string name="manage_storage_delete_data_dialog_summary">"هل أنت متأكد  في حذف؟ %1$s من أوسماند كلاود؟\n\nيمكنك استعادتها من سلة المهملات خلال 30 يومًا."</string>
+    <string name="manage_storage">إدارة التخزين</string>
+    <string name="copy_as_new_folder">نسخ كمجلد جديد</string>
+    <string name="add_to_a_folder">إضافة إلى مجلد</string>
+    <string name="add_to_favorites">إضافة إلى المفضلة</string>
+    <string name="max_weight_at_full_load_description">قم بتحديد أقصى وزن مسموح به لسيارتك عند التحميل الكامل لتجنب الطرق والجسور التي تفرض قيودًا على الوزن.</string>
+    <string name="max_axle_load_description">قم بتوفير أقصى حمولة لمحور سيارتك لتجنب الطرق والجسور ذات حدود الوزن.</string>
 </resources>
