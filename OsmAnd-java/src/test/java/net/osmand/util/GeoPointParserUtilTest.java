@@ -41,6 +41,12 @@ public class GeoPointParserUtilTest {
 		actual = GeoPointParserUtil.parse(
 				"https://www.google.co.in/maps/place/data=!3m2!1e3!4b1!4m6!3m5!1s0x0:0x0!7e2!8m2!3d10.1213237!4d76.348392?shorturl=1");
 		assertGeoPoint(actual, new GeoParsedPoint(10.1213237, 76.348392));
+		actual = GeoPointParserUtil.parse(
+				"https://www.google.com/maps/place/Kamzik/@48.1821032,17.0941412,17z/data=!4m6!3m5!1s0x476c8c15dee00531:0x9fe526fd2f5bdb5b!8m2!3d48.1826322!4d17.0949707!16zL20vMDVqZGI0");
+		assertGeoPoint(actual, new GeoParsedPoint(48.1826322, 17.0949707)); // @imprecise + 3d,4d precise = precise
+		actual = GeoPointParserUtil.parse(
+				"https://www.google.com/maps/place/F79P%2BJ43+Madi+Cottage+And+Party+Palace,+Baruwa,+Madi+Road,+Madi+44200/@27.4695437,84.2860334,17z/data=!4m6!3m5!1s0x3994f56ccd448a8b:0xd6641aa08823442a!8m2!16s%2Fg%2F11fz9wkqn2");
+		assertGeoPoint(actual, new GeoParsedPoint(27.4695437,84.2860334, 17)); // @imprecise + ftid(!1s) = imprecise
 	}
 	
 	@Test
