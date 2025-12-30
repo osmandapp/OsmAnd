@@ -169,6 +169,7 @@ public class GeoPointParserUtil {
 		Set<String> simpleDomains = new HashSet<String>();
 		simpleDomains.add("osmand.net");
 		simpleDomains.add("www.osmand.net");
+		simpleDomains.add("test.osmand.net");
 		simpleDomains.add("download.osmand.net");
 		simpleDomains.add("openstreetmap.de");
 		simpleDomains.add("www.openstreetmap.de");
