@@ -47,6 +47,15 @@ public class GeoPointParserUtilTest {
 		actual = GeoPointParserUtil.parse(
 				"https://www.google.com/maps/place/F79P%2BJ43+Madi+Cottage+And+Party+Palace,+Baruwa,+Madi+Road,+Madi+44200/@27.4695437,84.2860334,17z/data=!4m6!3m5!1s0x3994f56ccd448a8b:0xd6641aa08823442a!8m2!16s%2Fg%2F11fz9wkqn2");
 		assertGeoPoint(actual, new GeoParsedPoint(27.4695437,84.2860334, 17)); // @imprecise + ftid(!1s) = imprecise
+		actual = GeoPointParserUtil.parse(
+				"https://www.google.com/maps/place/Madi/data=!4m2!3m1!1s0x3994f56ccd448a8b:0xd6641aa08823442a?utm_source=mstt_1&entry=gps&lucs=47062702");
+		assertGeoPoint(actual, new GeoParsedPoint(12.345, 56.789)); // ftid (1s)
+		actual = GeoPointParserUtil.parse(
+				"https://maps.google.com/maps?hl=en-US&gl=de&um=1&ie=UTF-8&fb=1&sa=X&ftid=0x479e7415349b0571:0xb7e03dcf1f6347f6");
+		assertGeoPoint(actual, new GeoParsedPoint(12.345, 56.789)); // ftid (query string)
+		actual = GeoPointParserUtil.parse(
+				"http://maps.google.com/?q=query&ftid=0x3f8dfd04d309f925:0x2867166b05b0bfe6&hl=en&gl=us&shorturl=1");
+		assertGeoPoint(actual, new GeoParsedPoint(12.345, 56.789)); // ftid (old-style with http)
 	}
 	
 	@Test
@@ -877,9 +886,5 @@ public class GeoPointParserUtilTest {
 		if (actual == null || !actual.equals(expected))
 			throw new RuntimeException("URLs not equal; actual=" + actual + ", expected=" + expected);
 	}
-
-
-
-
 
 }

@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
 
 public class GeoPointParserUtil {
 
-
 	private static String getQueryParameter(final String param, URI uri) {
 		final String query = uri.getQuery();
 		String value = null;
@@ -378,6 +377,7 @@ public class GeoPointParserUtil {
 	                                                   String fragment, Pattern commaSeparatedPairPattern) {
 		String latString = null;
 		String lonString = null;
+		String ftid1sFinally = null;
 		String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
 
 		if (params.containsKey("q")) {
@@ -403,6 +403,8 @@ public class GeoPointParserUtil {
 			return parseGoogleMapsPath(params.get("daddr"), params);
 		} else if (params.containsKey("saddr")) {
 			return parseGoogleMapsPath(params.get("saddr"), params);
+		} else if (params.containsKey("ftid")) {
+			ftid1sFinally = params.get("ftid");
 		} else if (params.containsKey("q")) {
 			String opath = params.get("q");
 			final String pref = "loc:";
@@ -458,12 +460,21 @@ public class GeoPointParserUtil {
 							lat = v.substring(2);
 						} else if (v.startsWith("4d")) {
 							lon = v.substring(2);
+						} else if (v.startsWith("1s")) {
+							ftid1sFinally = v.substring(2);
 						}
 					}
 					if (lat != null && lon != null) {
 						return Collections.singletonList(new GeoParsedPoint(Double.parseDouble(lat), Double.parseDouble(lon)));
 					}
 				} else {
+					if ("/".equals(pref) && ftid1sFinally != null) {
+						// ftid (1s) processed after 3d/4d and /@
+						LatLon ll = parseS2ftid(ftid1sFinally);
+						if (ll != null) {
+							return Collections.singletonList(new GeoParsedPoint(ll.getLatitude(), ll.getLongitude()));
+						}
+					}
 					return parseGoogleMapsPath(path, params);
 				}
 			}
@@ -810,4 +821,9 @@ public class GeoPointParserUtil {
 		}
 		return 0;
 	}
+
+	private static LatLon parseS2ftid(String ftid) {
+		return new LatLon(12.345, 56.789); // TODO
+	}
+
 }
