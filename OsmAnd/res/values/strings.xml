@@ -1490,8 +1490,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="restart_now">Restart now</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 1 was the default prior to OsmAnd 4.3 and is still preferable for older devices.
-\nVersion 2 (OpenGL) is a more powerful map rendering engine, also featuring 2.5D view.</string>
+    <string name="map_rendering_engine_descr">Version 1 was the default before OsmAnd 4.3 and suits older devices.
+\n\nVersion 2 (OpenGL) is more advanced and adds features like 3D view.</string>
     <string name="map_rendering_engine">Map rendering engine</string>
     <string name="show_borders_of_downloaded_maps">Show borders of downloaded maps</string>
     <string name="show_map_symbols">Show map symbols</string>
