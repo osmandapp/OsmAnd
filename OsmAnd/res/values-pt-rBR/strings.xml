@@ -6281,4 +6281,9 @@
     <string name="vehicle_metrics_chart_category">Métricas do veículo</string>
     <string name="routing_attr_pt_limit_name">Exibir N melhores rotas</string>
     <string name="enable_3d_objects">Edifícios 3D</string>
+    <string name="has_vehicle_metrics">Com dados OBDII</string>
+    <string name="lang_mi">Maori</string>
+    <string name="delete_folder_description">Excluir a pasta “%1$s”?</string>
+    <string name="show_spherical_map">Visão global</string>
+    <string name="buildings_3d_detail_level">Detalhamento de edifícios em 3D</string>
 </resources>

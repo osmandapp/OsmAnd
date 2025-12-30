@@ -5894,4 +5894,5 @@
     <string name="routing_attr_pt_limit_name">Prikaz N najboljih ruta</string>
     <string name="routing_attr_pt_limit_description">Navedite broj najboljih ruta za prikaz</string>
     <string name="buildings_3d_detail_level">Detaljne 3D zgrade</string>
+    <string name="lang_mi">Maorski</string>
 </resources>

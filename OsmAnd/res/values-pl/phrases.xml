@@ -787,7 +787,7 @@
     <string name="poi_candles">Sklep ze świecami</string>
     <string name="poi_garden_furniture">Sklep z meblami ogrodowymi</string>
     <string name="poi_music">Sklep muzyczny</string>
-    <string name="poi_tyres">Sklep z oponami</string>
+    <string name="poi_tyres">Opony;Opona;Sklep z oponami</string>
     <string name="poi_watches">Sklep z zegarkami</string>
     <string name="poi_model">Sklep modelarski</string>
     <string name="poi_weapons">Sklep z bronią</string>
@@ -2834,7 +2834,7 @@
     <string name="poi_cuisine_burger">Hamburger</string>
     <string name="poi_cuisine_coffee_shop">Kawa</string>
     <string name="poi_cuisine_sandwich">Kanapki</string>
-    <string name="poi_cuisine_kebab">Kebab</string>
+    <string name="poi_cuisine_kebab">Kebab;danie</string>
     <string name="poi_cuisine_chicken">Kurczak</string>
     <string name="poi_cuisine_ice_cream">Lody</string>
     <string name="poi_cuisine_sushi">Sushi</string>
@@ -3000,7 +3000,7 @@
     <string name="poi_social_facility_for">Grupa docelowa</string>
     <string name="poi_compressed_air_filter">Kompresor</string>
     <string name="poi_vacuum_cleaner_filter">Odkurzacz</string>
-    <string name="poi_cuisine_doner">Kebab (szawarma)</string>
+    <string name="poi_cuisine_doner">Doner kebab (szawarma);danie</string>
     <string name="poi_cuisine_shawarma">Kebab (szawarma)</string>
     <string name="poi_cuisine_bistro">Bistro</string>
     <string name="poi_dish">Potrawa</string>
@@ -3389,7 +3389,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">Naprawa skrzyni biegów</string>
     <string name="poi_service_vehicle_motor_yes">Silnik</string>
     <string name="poi_service_vehicle_insurance_yes">Ubezpieczenia</string>
-    <string name="poi_service_vehicle_tyres_yes">Opony</string>
+    <string name="poi_service_vehicle_tyres_yes">Opony;Opona</string>
     <string name="poi_aerialway_zip_line">Tyrolka</string>
     <string name="poi_via_ferrata">Żelazna perć (via ferrata)</string>
     <string name="poi_cable_number">Numer przewodu</string>
@@ -3547,13 +3547,13 @@
     <string name="poi_climbing_crag">Urwisko wspinaczkowe</string>
     <string name="poi_rescue_box">Skrzynka ratunkowa</string>
     <string name="reddit">Reddit</string>
-    <string name="poi_hazard_additional_erosion">Zagrożenie: erozja</string>
-    <string name="poi_hazard_additional_falling_rocks">Zagrożenie: spadające skały</string>
-    <string name="poi_hazard_additional_nuclear">Zagrożenie: jądrowe</string>
-    <string name="poi_hazard_additional_flood">Zagrożenie: powódź</string>
-    <string name="poi_hazard_additional_avalanche">Zagrożenie: lawina</string>
-    <string name="poi_hazard_additional_minefield">Zagrożenie: pole minowe</string>
-    <string name="poi_hazard_additional_contamination">Zagrożenie: zanieczyszczenie</string>
+    <string name="poi_hazard_additional_erosion">Erozja</string>
+    <string name="poi_hazard_additional_falling_rocks">Spadające skały</string>
+    <string name="poi_hazard_additional_nuclear">Jądrowe</string>
+    <string name="poi_hazard_additional_flood">Powódź</string>
+    <string name="poi_hazard_additional_avalanche">Lawina</string>
+    <string name="poi_hazard_additional_minefield">Pole minowe</string>
+    <string name="poi_hazard_additional_contamination">Zanieczyszczenie</string>
     <string name="poi_defibrillator_location">Lokalizacja</string>
     <string name="poi_changing_table_yes">Tak;Przewijak: tak</string>
     <string name="poi_changing_table_no">Nie;Przewijak: nie</string>
@@ -4785,4 +4785,13 @@
     <string name="poi_us_maps_recreation_area_activity_bicycling">Jazda na rowerze</string>
     <string name="poi_roundtrip_yes">Lot w obie strony: tak</string>
     <string name="poi_roundtrip_no">Lot w obie strony: nie</string>
+    <string name="poi_sample_collection_filter">Kolekcja próbek</string>
+    <string name="poi_consulate">Konsulat</string>
+    <string name="poi_historic_spacecraft">Historyczny statek kosmiczny</string>
+    <string name="poi_denomination_ukrainian_greek_catholic">Ukraiński grekokatolicyzm</string>
+    <string name="poi_denomination_ukrainian_orthodox">Ukraińskie prawosławie</string>
+    <string name="poi_denomination_neo_pentecostal">Zielonoświątkowy</string>
+    <string name="poi_denomination_evangelical_lutheran">Ewangeliczny luteranizm</string>
+    <string name="poi_denomination_anabaptist">Anabaptyzm</string>
+    <string name="poi_piste_downhill">Zjazd;Stoki narciarskie;Stok narciarski</string>
 </resources>
