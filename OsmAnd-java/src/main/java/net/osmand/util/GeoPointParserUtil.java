@@ -823,7 +823,18 @@ public class GeoPointParserUtil {
 	}
 
 	private static LatLon parseS2ftid(String ftid) {
-		return new LatLon(12.345, 56.789); // TODO
+		if (!Algorithms.isEmpty(ftid)) {
+			try {
+				GeoPointParserSimpleS2.CellId id = GeoPointParserSimpleS2.CellId.fromFtid(ftid);
+				if (id.isValid()) {
+					double[] ll = id.toLatLon();
+					return new LatLon(ll[0], ll[1]);
+				}
+			} catch(Exception e) {
+				return null;
+			}
+		}
+		return null;
 	}
 
 }
