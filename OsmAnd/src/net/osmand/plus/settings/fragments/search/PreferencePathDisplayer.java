@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 
 import de.KnollFrank.lib.settingssearch.PreferencePath;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceOfHostWithinGraph;
 
 class PreferencePathDisplayer implements de.KnollFrank.lib.settingssearch.results.recyclerview.PreferencePathDisplayer {
 
@@ -42,6 +43,7 @@ class PreferencePathDisplayer implements de.KnollFrank.lib.settingssearch.result
 		return preferencePath
 				.preferences()
 				.stream()
+				.map(SearchablePreferenceOfHostWithinGraph::searchablePreference)
 				.map(SearchablePreference::getTitle)
 				.map(title -> title.orElse("?"))
 				.map(SpannableString::new)
@@ -58,8 +60,8 @@ class PreferencePathDisplayer implements de.KnollFrank.lib.settingssearch.result
 		return preferencePath.preferences().size() >= 2;
 	}
 
-	private boolean isApplicationMode(final SearchablePreference preference) {
-		return applicationModeKeys.contains(preference.getKey());
+	private boolean isApplicationMode(final SearchablePreferenceOfHostWithinGraph preference) {
+		return applicationModeKeys.contains(preference.searchablePreference().getKey());
 	}
 
 	private void highlight(final Spannable spannable) {

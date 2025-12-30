@@ -3,7 +3,7 @@ package net.osmand.plus.settings.fragments.search;
 import java.util.function.Predicate;
 
 import de.KnollFrank.lib.settingssearch.PreferencePath;
-import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceOfHostWithinGraph;
 
 class SearchResultsFilter implements de.KnollFrank.lib.settingssearch.results.SearchResultsFilter {
 
@@ -15,7 +15,7 @@ class SearchResultsFilter implements de.KnollFrank.lib.settingssearch.results.Se
 	}
 
 	@Override
-	public boolean includePreferenceInSearchResults(final SearchablePreference preference) {
+	public boolean includePreferenceInSearchResults(final SearchablePreferenceOfHostWithinGraph preference) {
 		return new IncludePreferenceInSearchResultsPredicate().includePreferenceInSearchResults(preference) &&
 				(removeSearchResultsConnectedToDisabledProfiles ?
 						!isConnectedToDisabledProfile(preference) :
@@ -30,12 +30,12 @@ class SearchResultsFilter implements de.KnollFrank.lib.settingssearch.results.Se
 		this.removeSearchResultsConnectedToDisabledProfiles = removeSearchResultsConnectedToDisabledProfiles;
 	}
 
-	private boolean isConnectedToDisabledProfile(final SearchablePreference searchablePreference) {
+	private boolean isConnectedToDisabledProfile(final SearchablePreferenceOfHostWithinGraph searchablePreference) {
 		return startsWithDisabledProfile(searchablePreference.getPreferencePath());
 	}
 
 	private boolean startsWithDisabledProfile(final PreferencePath preferencePath) {
-		final var startOfPreferencePath = preferencePath.preferences().get(0);
-		return isDisabledProfile.test(startOfPreferencePath.getKey());
+		final SearchablePreferenceOfHostWithinGraph startOfPreferencePath = preferencePath.preferences().get(0);
+		return isDisabledProfile.test(startOfPreferencePath.searchablePreference().getKey());
 	}
 }

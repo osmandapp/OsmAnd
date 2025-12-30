@@ -4,7 +4,7 @@ import androidx.preference.Preference;
 
 import net.osmand.plus.plugins.OsmandPlugin;
 
-import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceOfHostWithinGraph;
 
 public class PreferenceMarker {
 
@@ -14,7 +14,7 @@ public class PreferenceMarker {
 		preference.getExtras().putString(KEY, plugin.getName());
 	}
 
-	public static boolean isPreferenceConnectedToPlugin(final SearchablePreference preference, final Class<? extends OsmandPlugin> plugin) {
-		return plugin.getName().equals(preference.getExtras().getString(KEY));
+	public static boolean isPreferenceConnectedToPlugin(final SearchablePreferenceOfHostWithinGraph preference, final Class<? extends OsmandPlugin> plugin) {
+		return plugin.getName().equals(preference.searchablePreference().getExtras().getString(KEY));
 	}
 }

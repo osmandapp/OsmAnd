@@ -24,7 +24,9 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
-import de.KnollFrank.lib.settingssearch.results.*;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceOfHostWithinGraph;
+import de.KnollFrank.lib.settingssearch.results.DefaultShowSettingsFragmentAndHighlightSetting;
+import de.KnollFrank.lib.settingssearch.results.Setting;
 
 class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.settingssearch.results.ShowSettingsFragmentAndHighlightSetting {
 
@@ -37,13 +39,13 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 	@Override
 	public void showSettingsFragmentAndHighlightSetting(final FragmentActivity activity,
 														final Fragment settingsFragment,
-														final SearchablePreference setting2Highlight) {
+														final SearchablePreferenceOfHostWithinGraph setting2Highlight) {
 		if (activity instanceof final MapActivity mapActivity) {
 			final boolean handled =
 					showSettingsFragmentOfMapActivityAndHighlightSetting(
 							mapActivity,
 							settingsFragment,
-							asSetting(setting2Highlight));
+							asSetting(setting2Highlight.searchablePreference()));
 			if (handled) {
 				return;
 			}

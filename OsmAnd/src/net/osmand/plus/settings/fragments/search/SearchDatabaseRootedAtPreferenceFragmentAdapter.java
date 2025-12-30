@@ -22,7 +22,7 @@ import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.common.graph.Graphs;
-import de.KnollFrank.lib.settingssearch.common.graph.SearchablePreferenceScreenSubtreeReplacer;
+import de.KnollFrank.lib.settingssearch.common.graph.SearchablePreferenceScreenSubtreeReplacerFactory;
 import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
 import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphTransformer;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceEdge;
@@ -98,17 +98,19 @@ public class SearchDatabaseRootedAtPreferenceFragmentAdapter implements Searchab
 						tileSourceTemplatesProvider,
 						activityContext.getSupportFragmentManager());
 		return new SearchablePreferenceScreenGraph(
-				SearchablePreferenceScreenSubtreeReplacer.replaceSubtreeWithTree(
-						graph.graph(),
-						preferenceScreen,
-						getPojoGraphRootedAt(
-								instantiateSearchablePreferenceScreen(
-										preferenceScreen,
-										graph.graph(),
-										createGraphPathFactory(searchDatabaseConfig, activityContext)),
-								graph.locale(),
-								activityContext,
-								searchDatabaseConfig)),
+				SearchablePreferenceScreenSubtreeReplacerFactory
+						.createSubtreeReplacer()
+						.replaceSubtreeWithTree(
+								graph.graph(),
+								preferenceScreen,
+								getPojoGraphRootedAt(
+										instantiateSearchablePreferenceScreen(
+												preferenceScreen,
+												graph.graph(),
+												createGraphPathFactory(searchDatabaseConfig, activityContext)),
+										graph.locale(),
+										activityContext,
+										searchDatabaseConfig)),
 				graph.locale(),
 				new ConfigurationBundleConverter().convertForward(newConfiguration));
 	}
