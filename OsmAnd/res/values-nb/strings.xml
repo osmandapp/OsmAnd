@@ -5820,4 +5820,5 @@
     <string name="delete_folder_description">Slette mappen \"%1$s\"?</string>
     <string name="routing_attr_pt_limit_description">Bestem antallet av beste ruter som skal vises</string>
     <string name="routing_attr_pt_limit_name">Vis N beste ruter</string>
+    <string name="buildings_3d_detail_level">Detaljer for 3D-bygninger</string>
 </resources>
