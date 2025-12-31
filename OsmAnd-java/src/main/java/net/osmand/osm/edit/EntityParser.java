@@ -44,7 +44,10 @@ public class EntityParser {
 		for (Map.Entry<String, String> entry : tags.entrySet()) {
 			String ts = entry.getKey();
 			if (ts.startsWith("name:") && !ts.equals(OSMTagKey.NAME_EN.getValue())) {
-				mo.setName(ts.substring(("name:").length()), entry.getValue());
+				String lang = ts.substring(("name:").length());
+				if (MapRenderingTypes.langsSet.contains(lang)) {
+					mo.setName(lang, entry.getValue());
+				}
 			}
 		}
 		if (mo.getName().length() == 0) {
