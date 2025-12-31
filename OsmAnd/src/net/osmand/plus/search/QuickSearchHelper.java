@@ -52,9 +52,11 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
+import net.osmand.util.GeoPointParserUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -87,7 +89,17 @@ public class QuickSearchHelper implements ResourceListener {
 		OsmandSettings settings = app.getSettings();
 		core = new SearchUICore(app.getPoiTypes(), settings.MAP_PREFERRED_LOCALE.get(),
 				settings.MAP_TRANSLITERATE_NAMES.get());
+		core.setHttpRedirectRequester(this::test);
 		app.getResourceManager().addResourceListener(this);
+	}
+
+	private String test(String url) {
+		URI uri = GeoPointParserUtil.createUri(url);
+		if (uri != null) {
+			System.err.printf("XXX %s\n", url);
+			return "http://maps.google.com/?q=query&ftid=0x3f8dfd04d309f925:0x2867166b05b0bfe6&hl=en&gl=us&shorturl=1";
+		}
+		return url;
 	}
 
 	public SearchUICore getCore() {

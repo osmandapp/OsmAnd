@@ -46,6 +46,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 
 public class SearchCoreFactory {
 
@@ -1890,9 +1891,16 @@ public class SearchCoreFactory {
 		private final DecimalFormat latLonFormatter = new DecimalFormat("#.0####", new DecimalFormatSymbols(Locale.US));
 		
 		private SearchAmenityByNameAPI amenitiesApi;
+		private Function<String, String> httpRedirectRequester = null;
 
 		public SearchLocationAndUrlAPI(SearchAmenityByNameAPI amenitiesApi) {
 			super(ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION);
+			this.amenitiesApi = amenitiesApi;
+		}
+
+		public SearchLocationAndUrlAPI(SearchAmenityByNameAPI amenitiesApi, Function<String, String> requester) {
+			super(ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION);
+			this.httpRedirectRequester = requester;
 			this.amenitiesApi = amenitiesApi;
 		}
 
@@ -2082,6 +2090,12 @@ public class SearchCoreFactory {
 		private boolean parseUrl(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
 			String text = phrase.getUnknownSearchPhrase();
 			GeoParsedPoint pnt = GeoPointParserUtil.parse(text);
+			if (pnt == null && httpRedirectRequester != null && GeoPointParserUtil.isGooGlUrl(text)) {
+				text = httpRedirectRequester.apply(text);
+				if (text != null) {
+					pnt = GeoPointParserUtil.parse(text);
+				}
+			}
 			if (pnt != null && pnt.isGeoPoint() && phrase.isSearchTypeAllowed(ObjectType.LOCATION)) {
 				SearchResult sp = new SearchResult(phrase);
 				sp.priority = 0;

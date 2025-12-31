@@ -128,7 +128,7 @@ public class GeoPointParserUtil {
 		return null;
 	}
 
-	private static URI createUri(final String uriString) {
+	public static URI createUri(final String uriString) {
 		try {
 			// amap.com uses | in their URLs, which is an illegal character for a URL
 			return URI.create(uriString.trim().replaceAll("\\s+", "+")
@@ -837,4 +837,7 @@ public class GeoPointParserUtil {
 		return null;
 	}
 
+	public static boolean isGooGlUrl(String url) {
+		return url != null && url.startsWith("http") && url.contains("goo.gl/");
+	}
 }
