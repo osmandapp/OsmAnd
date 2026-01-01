@@ -106,6 +106,7 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 						activityContext.getSupportFragmentManager());
 		return new SearchablePreferenceScreenGraph(
 				GraphMerger.mergeSrcGraphIntoDstGraphAtMergePoint(
+						// FK-TODO: dieser Aufruf von getPojoGraphRootedAt() darf aus Performancegründen ausschließlich den Pluginpreferences folgen.
 						getPojoGraphRootedAt(
 								instantiateSearchablePreferenceScreen(
 										configureProfilePreferenceScreen,
