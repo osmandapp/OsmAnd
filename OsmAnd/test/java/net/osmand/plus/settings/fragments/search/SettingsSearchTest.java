@@ -795,7 +795,7 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-						{
+						{ // FK-FIXME: rot, Einzeltest: rot
 								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_WeatherPlugin",
 								new SettingsSearchTestTemplate() {
 
@@ -843,7 +843,7 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-						{
+						{ // FK-FIXME: rot, Einzeltest: grün
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AccessibilityPlugin",
 								new SettingsSearchTestTemplate() {
 
@@ -895,7 +895,7 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-						{
+						{ // FK-FIXME: rot, Einzeltest: rot
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_WeatherPlugin",
 								new SettingsSearchTestTemplate() {
 
@@ -1014,7 +1014,7 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-						{
+						{ // FK-FIXME: rot, Einzeltest: grün
 								"shouldSearchAndFindSpeedCameraSettings4EachApplicationMode",
 								new SettingsSearchTestTemplate() {
 
@@ -1194,7 +1194,7 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-						{
+						{ // FK-FIXME: rot, Einzeltest: rot
 								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapSource_onlineTiles_onlineMapsPluginActive",
 								new SettingsSearchTestTemplate() {
 
@@ -1246,7 +1246,7 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-						{
+						{ // FK-FIXME: rot, Einzeltest: rot
 								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapSource_nonInstalledTileSource",
 								new SettingsSearchTestTemplate() {
 
