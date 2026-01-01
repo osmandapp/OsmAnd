@@ -1,8 +1,13 @@
 package net.osmand.shared.gpx
 
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.sync.Semaphore
 import net.osmand.shared.api.SQLiteAPI.*
 import net.osmand.shared.data.StringIntPair
 import net.osmand.shared.extensions.currentTimeMillis
@@ -188,7 +193,7 @@ class GpxDatabase {
 		val file = readItemFile(query)
 		val item = GpxDataItem(file)
 		val analysis = GpxTrackAnalysis()
-		processItemParameters(item, query, GpxParameter.entries, analysis)
+		processItemParameters(item, query, GpxParameter.values().toList(), analysis)
 		item.setAnalysis(analysis)
 		return item
 	}
@@ -368,29 +373,61 @@ class GpxDatabase {
 
 	fun getGpxDataItemsBlocking(): List<GpxDataItem> = runBlocking { getGpxDataItems() }
 
-	suspend fun getGpxDataItems(): List<GpxDataItem> = withContext(Dispatchers.IO) {
-		val db = openConnection(true) ?: return@withContext emptyList()
-		try {
-			val items = mutableListOf<GpxDataItem>()
-			val count = getGpxDirItemsCount(db)
-
-			var offset = 0
-			while (offset < count) {
-				items += fetchBatchData(db, offset, BATCH_SIZE)
-				offset += BATCH_SIZE
+	suspend fun getGpxDataItems(): List<GpxDataItem> = coroutineScope {
+		// Compute the total rows using the exact same SELECT as the data query (prevents mismatch)
+		val total = withContext(Dispatchers.IO) {
+			var db: SQLiteConnection? = null
+			try {
+				db = openConnection(true)
+				if (db == null) 0 else getGpxDirItemsCount(db)
+			} finally {
+				db?.close()
 			}
-
-			items
-		} finally {
-			db.close()
 		}
+		if (total == 0) return@coroutineScope emptyList<GpxDataItem>()
+
+		val items = mutableListOf<GpxDataItem>()
+		val deferredResults = mutableListOf<Deferred<List<GpxDataItem>>>()
+
+		// Bound concurrency to avoid FD exhaustion / IO contention
+		val parallelism = 4
+		val semaphore = Semaphore(parallelism)
+
+		var offset = 0
+		val itemsCount = total
+		while (offset < itemsCount) {
+			val currentOffset = offset
+			val deferredBatch = async(Dispatchers.IO) {
+				semaphore.acquire()
+				try {
+					val db = openConnection(true)
+					try {
+						if (db != null) {
+							fetchBatchData(db, currentOffset, BATCH_SIZE)
+						} else {
+							emptyList<GpxDataItem>()
+						}
+					} finally {
+						db?.close()
+					}
+				} finally {
+					semaphore.release()
+				}
+			}
+			deferredResults.add(deferredBatch)
+			offset += BATCH_SIZE
+		}
+
+		deferredResults.awaitAll().forEach { batchItems ->
+			items.addAll(batchItems)
+		}
+		return@coroutineScope items.toList()
 	}
 
 	private fun getGpxDirItemsCount(db: SQLiteConnection): Int {
 		var res = 0
 		var query: SQLiteCursor? = null
 		try {
-			// Count the exact same rows that the select would return
 			val countSql = "SELECT COUNT(*) FROM (" + GpxDbUtils.getSelectGpxQuery() + ")"
 			query = db.rawQuery(countSql, null)
 			if (query != null && query.moveToFirst()) {
