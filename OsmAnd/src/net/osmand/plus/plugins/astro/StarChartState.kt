@@ -10,8 +10,7 @@ class StarChartState(private val app: OsmandApplication) {
 
 	enum class StarChartType(@field:StringRes @param:StringRes val titleId: Int) {
 		STAR_VISIBLITY(R.string.star_visibility_name),
-		STAR_ALTITUDE(R.string.star_altitude_name),
-		CELESTIAL_PATH(R.string.celestial_paths_name);
+		STAR_ALTITUDE(R.string.star_altitude_name);
 
 		fun next(): StarChartType {
 			val nextItemIndex: Int = (ordinal + 1) % entries.size

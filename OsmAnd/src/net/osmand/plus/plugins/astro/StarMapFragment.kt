@@ -35,12 +35,11 @@ import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.astro.utils.AstroUtils.toZoned
+import net.osmand.plus.plugins.astro.AstroDataProvider.Constellation
 import net.osmand.plus.plugins.astro.StarChartState.StarChartType
 import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.plugins.astro.utils.StarMapARModeHelper
 import net.osmand.plus.plugins.astro.utils.StarMapCameraHelper
-import net.osmand.plus.plugins.astro.views.CelestialPathView
 import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
 import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 import net.osmand.plus.plugins.astro.views.StarChartView
@@ -53,7 +52,6 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.controls.maphudbuttons.MapButton
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
 import net.osmand.shared.util.LoggerFactory
-import net.osmand.plus.plugins.astro.AstroDataProvider.Constellation
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Locale
@@ -86,7 +84,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var starChartsView: View
 	private lateinit var starVisiblityView: StarVisiblityChartView
 	private lateinit var starAltitudeView: StarAltitudeChartView
-	private lateinit var celestialPathView: CelestialPathView
 	private lateinit var starChartState: StarChartState
 
 	private val mapButtons = mutableListOf<MapButton>()
@@ -208,7 +205,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		starVisiblityView = view.findViewById(R.id.star_visiblity_view)
 		starAltitudeView = view.findViewById(R.id.star_altitude_view)
-		celestialPathView = view.findViewById(R.id.celestial_path_view)
 		starChartState = StarChartState(app)
 
 		view.findViewById<AppCompatImageView>(R.id.chart_settings_button).apply {
@@ -423,7 +419,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starChartViewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
 			starVisiblityView.setChartObjects(objects)
 			starAltitudeView.setChartObjects(objects)
-			celestialPathView.setChartObjects(objects)
 		}
 	}
 
@@ -479,17 +474,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		when (chartType) {
 			StarChartType.STAR_VISIBLITY -> {
-				starVisiblityView.visibility = View.VISIBLE; starAltitudeView.visibility = View.GONE; celestialPathView.visibility = View.GONE
+				starVisiblityView.visibility = View.VISIBLE; starAltitudeView.visibility = View.GONE
 				starVisiblityView.updateData(location.latitude, location.longitude, localDate)
 			}
 			StarChartType.STAR_ALTITUDE -> {
-				starVisiblityView.visibility = View.GONE; starAltitudeView.visibility = View.VISIBLE; celestialPathView.visibility = View.GONE
+				starVisiblityView.visibility = View.GONE; starAltitudeView.visibility = View.VISIBLE
 				starAltitudeView.updateData(location.latitude, location.longitude, localDate)
-			}
-			StarChartType.CELESTIAL_PATH -> {
-				starVisiblityView.visibility = View.GONE; starAltitudeView.visibility = View.GONE; celestialPathView.visibility = View.VISIBLE
-				celestialPathView.updateData(location.latitude, location.longitude, localDate)
-				starChartViewModel.currentTime.value?.let { celestialPathView.setMoment(it.toZoned(zoneId)) }
 			}
 		}
 	}
