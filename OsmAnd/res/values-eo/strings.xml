@@ -4634,7 +4634,7 @@
     <string name="show_borders_of_downloaded_maps">Montri randojn de elŝutitaj mapoj</string>
     <string name="show_map_symbols">Montri simbolojn</string>
     <string name="show_map_symbols_desc">Tekstoj, trafiksignoj kaj aliaj.</string>
-    <string name="map_rendering_engine_descr">Versio 1 estis implicita antaŭ ol OsmAnd 4.3 kaj plue estas konsilinda por pli malnovaj aparatoj.\nVersio 2 (OpenGL) estas pli potenca map-bildigilo kaj subtenas 2,5-dimensian vidon.</string>
+    <string name="map_rendering_engine_descr">Versio 1 estis implicita antaŭ ol OsmAnd 4.3 kaj taŭgas por pli malnovaj aparatoj.\n\nVersio 2 (OpenGL) estas pli potenca kaj aldonas ekzemple 3-dimensionan vidon.</string>
     <string name="si_nm_mt">Marmejloj/metroj</string>
     <string name="si_nm_ft">Marmejloj/futoj</string>
     <string name="av_audio_format_bottom_sheet_descr">Elekti sonformon. La ujaformo por sono estas 3GP.</string>
@@ -5910,4 +5910,5 @@
     <string name="show_spherical_map">Globa vido</string>
     <string name="enable_3d_objects">3-dimensiaj konstruaĵoj</string>
     <string name="buildings_3d_detail_level">Detal-nivelo de 3-dimensiaj konstruaĵoj</string>
+    <string name="has_vehicle_metrics">Kun OBDII-datumoj</string>
 </resources>

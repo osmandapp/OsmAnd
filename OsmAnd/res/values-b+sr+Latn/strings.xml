@@ -5029,7 +5029,7 @@
     <string name="rendering_engine_failed_descr">Osmand se je vratio na prikaz mape „Verzija 1“. Možeš pokušati da povratiš novi način za prikaz „Verzija 2 (OpenGL)“ u podešavanjima.
 \n
 \nMolimo, podržite poboljšanja dostavljanjem dnevnika grešaka.</string>
-    <string name="map_rendering_engine_descr">Verzija 1 je podrazumevana pre OsmAnd 4.3 i još uvek je poželjna za starije uređaje. \nVerzija 2 (OpenGL) je moćniji mehanizam za prikazivanje mapa, koji takođe sadrži 2.5D prikaz.</string>
+    <string name="map_rendering_engine_descr">Verzija 1 je bila podrazumevana pre OsmAnd 4.3 i odgovara starijim uređajima.\n\nVerzija 2 (OpenGL) je naprednija i dodaje funkcije poput 3D prikaza.</string>
     <string name="map_rendering_engine">Motor za renderovanje mape</string>
     <string name="show_borders_of_downloaded_maps">Prikazati granice preuzetih mapa</string>
     <string name="dismiss_changes">Odbaciti promene?</string>
@@ -5894,4 +5894,10 @@
     <string name="routing_attr_pt_limit_name">Prikaz N najboljih ruta</string>
     <string name="routing_attr_pt_limit_description">Navedite broj najboljih ruta za prikaz</string>
     <string name="buildings_3d_detail_level">Detaljne 3D zgrade</string>
+    <string name="lang_mi">Maorski</string>
+    <string name="has_vehicle_metrics">Sa OBDII podacima</string>
+    <string name="vehicle_metrics_chart_category">Metrika vozila</string>
+    <string name="delete_folder_description">Obrisati „%1$s“ folder?</string>
+    <string name="show_spherical_map">Globusni prikaz</string>
+    <string name="enable_3d_objects">3D zgrada</string>
 </resources>

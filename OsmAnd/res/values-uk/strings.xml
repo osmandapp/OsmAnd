@@ -4546,7 +4546,7 @@
     <string name="dismiss_changes_descr">Усі зміни буде відхилено.</string>
     <string name="dismiss_changes">Відхилити зміни\?</string>
     <string name="restart_now">Перезапустити зараз</string>
-    <string name="map_rendering_engine_descr">Версія 1 була стандартною до OsmAnd 4.3 і все ще краща для старіших пристроїв.\nВерсія 2 (OpenGL) — це потужніший механізм візуалізації карт, який також підтримує 2.5D-вигляд.</string>
+    <string name="map_rendering_engine_descr">Версія 1 була стандартною до OsmAnd 4.3 і підходить для старіших пристроїв.\n\nВерсія 2 (OpenGL) є більш просунутою та додає такі функції, як 3D-перегляд.</string>
     <string name="rendering_engine_failed">Стався збій рендерингу мап OsmAnd.</string>
     <string name="share_crash_log">Поділитися журналом збоїв</string>
     <string name="map_rendering_engine_v1">Версія 1</string>
@@ -5934,4 +5934,5 @@
     <string name="show_spherical_map">Глобус</string>
     <string name="lang_mi">Маорі</string>
     <string name="buildings_3d_detail_level">3D-деталізація будівель</string>
+    <string name="has_vehicle_metrics">З даними OBDII</string>
 </resources>

@@ -301,7 +301,7 @@
     <string name="routing_settings">Navigering</string>
     <string name="routing_settings_descr">Ange navigeringsalternativ.</string>
     <string name="global_settings">Globala inställningar</string>
-    <string name="general_settings">Allmänna inställningar</string>
+    <string name="general_settings">Allmänt</string>
     <string name="general_settings_descr">Ställ in visnings- och allmänna inställningar för appen.</string>
     <string name="global_app_settings">Globala app-inställningar</string>
     <string name="user_name">Ditt OSM-användarnamn</string>
@@ -2201,7 +2201,7 @@
     <string name="all_markers_moved_to_history">Alla kartmarkörer har flyttats till historiken</string>
     <string name="marker_moved_to_history">Kartmarkören har flyttats till historiken</string>
     <string name="do_not_use_animations">Inga animeringar</string>
-    <string name="do_not_use_animations_descr">Stänger av kartanimationer.</string>
+    <string name="do_not_use_animations_descr">Stänger av kart- och UI-animationer.</string>
     <string name="line">Linje</string>
     <string name="save_as_route_point">Spara som ruttpunkter</string>
     <string name="save_as_line">Spara som linje</string>
@@ -2751,8 +2751,8 @@
     <string name="edit_profile_setup_map_subtitle">Välj kartalternativ för profilen</string>
     <string name="edit_profile_screen_options_subtitle">Välj skärmalternativ för profilen</string>
     <string name="edit_profile_nav_settings_subtitle">Välj navigeringsinställningar för profilen</string>
-    <string name="routing_attr_max_num_changes_description">Ange max gräns för antal byten</string>
-    <string name="routing_attr_max_num_changes_name">Antal byten</string>
+    <string name="routing_attr_max_num_changes_description">Ange övre gränsen för antal byten</string>
+    <string name="routing_attr_max_num_changes_name">Maximalt antal transportbyten</string>
     <string name="turn_screen_on_router">Vakna vid kurva</string>
     <string name="turn_screen_on_time_descr">Justera hur länge skärmen ska vara på.</string>
     <string name="turn_screen_on_sensor">Använd närhetssensor</string>
@@ -3115,7 +3115,7 @@
     <string name="activity_type_winter_name">Vinter</string>
     <string name="activity_type_snowmobile_name">Snöskoter</string>
     <string name="activity_type_riding_name">Ridning</string>
-    <string name="activity_type_racing_name">Tävling</string>
+    <string name="activity_type_racing_name">Racing</string>
     <string name="activity_type_mountainbike_name">Mountainbike</string>
     <string name="activity_type_cycling_name">Cykling</string>
     <string name="activity_type_hiking_name">Vandring</string>
@@ -3456,7 +3456,7 @@
     <string name="offline_wikipeadia">Wikipedia i nedkopplat läge</string>
     <string name="offline_wikivoyage">Wikivoyage offline</string>
     <string name="pro_features">Pro-finesser</string>
-    <string name="select_wikipedia_article_langs">Välj språk för Wikipedia-artiklar på kartan. Byt till vilket annat tillgängligt språk som helst vid läsning av artikeln.</string>
+    <string name="select_wikipedia_article_langs">Välj språk för Wikipedia-artiklar på kartan. Byt till vilket annat tillgängligt språk som medans du läser artikeln.</string>
     <string name="measure_distance_item">Mät avstånd</string>
     <string name="travel_item">Resa (Wikivoyage och Wikipedia)</string>
     <string name="map_markers_item">Kartmarkörer</string>
@@ -3590,7 +3590,7 @@
     <string name="history_is_disabled_descr">Aktivera historik för snabbare tillgång till de senast använda resultaten.</string>
     <string name="shared_string_details">Detaljer</string>
     <string name="is_disabled">%1$s är inaktiverad</string>
-    <string name="srtm_download_list_help_message">OsmAnd kan visa höjdkurvor i meter eller i fot. Du behöver ladda ner filen på nytt för att ändra måttenhet.</string>
+    <string name="srtm_download_list_help_message">OsmAnd tillhandahåller konturlinjedata i meter och fot. Du kommer behöva ladda ner filen igen för att ändra formatet.</string>
     <string name="rendering_attr_surface_unpaved_name">Obelagd</string>
     <string name="step_by_step">Steg-för-steg</string>
     <string name="rendering_attr_surface_salt_name">Salt</string>
@@ -3620,7 +3620,7 @@
     <string name="routeInfo_winter_ice_road_description">Färglägg rutten eller spårlinjen efter dess klassificering av vintervägar.</string>
     <string name="recorded_description">Inspelad röst låter bättre, men kan bara uttala förinspelade fraser som sväng-instruktioner. Kan inte uttala gatunamn eller POI-namn.</string>
     <string name="srtm_unit_format">Måttenhet för höjdkurvor</string>
-    <string name="rendering_attr_natureReserves_name">Naturreservat</string>
+    <string name="rendering_attr_natureReserves_name">Naturreservat och skyddade områden</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Lift</string>
     <string name="rendering_attr_piste_type_sleigh_name">Släde</string>
     <string name="rendering_attr_piste_type_sled_name">Kälke</string>
@@ -3985,7 +3985,7 @@
     <string name="wind_layer">Vindlager</string>
     <string name="cloud_layer">Molnlager</string>
     <string name="storage_migration_fragment_close_descr">Kopiering pågår och är bara %1$s%% färdigt. Om du avslutar nu kanske appen inte kommer fungera korrekt.</string>
-    <string name="map_widget_sunset_desc">Visar klockslag för eller återstående tid till kommande solnedgång.</string>
+    <string name="map_widget_sunset_desc">Visar klockslag för eller återstående tid till solnedgången.</string>
     <string name="shared_string_next_sunrise">Kommande soluppgång</string>
     <string name="shared_string_time_left">Tid kvar</string>
     <string name="shared_string_sunset">Solnedgång</string>
@@ -4066,7 +4066,7 @@
     <string name="air_pressure_widget_desc">Visar lufttrycket för aktuellt centrum i kartan.</string>
     <string name="temperature_widget_desc">Visar temperatur för aktuellt centrum i kartan.</string>
     <string name="rendering_engine_failed">OsmAnds kartrendering har nyligen kraschat.</string>
-    <string name="map_rendering_engine_descr">Rendering i version 1 var standard före OsmAnd 4.3 och är fortfarande att föredra för äldre enheter.\nVersion 2 (OpenGL) är en snabbare motor för kartrendering och har även 2,5D-visning.</string>
+    <string name="map_rendering_engine_descr">Version 1 var standard före OsmAnd 4.3 och är lämpligt för äldre enheter.\n\nVersion 2 (OpenGL) är mer avancerad och har även ytterligare funktioner, såsom 3D-visning.</string>
     <string name="favorites_backup">Säkerhetskopiering av favoriter</string>
     <string name="ant_go_to_store">Gå till butik</string>
     <string name="map_widget_ant_bicycle_dist_desc">Visar längden på tillryggalagd sträcka</string>
@@ -4222,7 +4222,7 @@
     <string name="switch_widget_mode_desc">Genom att trycka på widgeten kan du byta läge.</string>
     <string name="free_maps_updates">Gratis uppdateringar (nödsituationer)</string>
     <string name="clear_online_cache">Rensa online-cache</string>
-    <string name="metric_lbs">pund</string>
+    <string name="metric_lbs">pund (lbs)</string>
     <string name="token_is_not_valid">Token är inte giltig</string>
     <string name="shared_string_alt_name">Alternativt namn</string>
     <string name="enable_3d_maps">Aktivera 3D-kartor</string>
@@ -4638,7 +4638,7 @@
     <string name="shared_string_copy_to">Kopiera till</string>
     <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="rendering_attr_lightDetail_description">Standard: Namn (ljustyp.grupp.period). Ändra till info om sektorerna, karaktär för en specifik sektor, eller mindre info</string>
-    <string name="poi_categories">Intressepunkt-kategorier</string>
+    <string name="poi_categories">Intressepunkt (POI) kategorier</string>
     <string name="bluetooth_found_title">Hittade: %d</string>
     <string name="rendering_value_sector4_name">Sektor 4</string>
     <string name="public_transport_try_change_settings">Prova att ändra inställningarna.</string>
@@ -4723,7 +4723,7 @@
     <string name="auto_25_chars_route_roundabout_kr">Ta %1$d avfarten och håll till höger</string>
     <string name="shared_storage_migration">Migrering av delad lagring</string>
     <string name="live_update_frequency_hour_variant">Kartuppdateringar kollas varje timme.</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematisk visning av ikoner vid låga zoomnivåer</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">En schematisk representation av ikoner vid låga zoomnivåer för de intressepunkter som vanligtvis inte visas</string>
     <string name="next_turn_widget_desc">Visar information om nästa sväng med en illustration av manövern och avståndet kvar dit.</string>
     <string name="compass_click_desc">Dubbeltryck på kompassen för att växla kartorientering.</string>
     <string name="default_appearance_desc">Förinställd färg, ikon och form appliceras på nya favoriter i gruppen.</string>
@@ -5313,7 +5313,7 @@
     <string name="quick_action_new_route">Ny rutt</string>
     <string name="quick_action_move_map_right">Karta till höger</string>
     <string name="quick_action_move_map_down">Flytta ner</string>
-    <string name="quick_action_move_map_up">Karta åvan</string>
+    <string name="quick_action_move_map_up">Karta upp</string>
     <string name="choose_map_orientation">Välj kartans orientering</string>
     <string name="auto_25_chars_route_tr">Sväng höger</string>
     <string name="auto_25_chars_route_tl">Sväng vänster</string>
@@ -5701,7 +5701,7 @@
     <string name="obd_fuel_type_hybrid_electric_combustion">Hybrid el- och förbränningsmotor</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
     <string name="obd_vin">Chassinummer</string>
-    <string name="obd_fuel_type_cng">CNG</string>
+    <string name="obd_fuel_type_cng">CNG, komprimerad naturgas</string>
     <string name="obd_fuel_type_hybrid_regenerative">Hybrid regenerativ</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Bi-fuel som körs på vätgas</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hybrid vätgas</string>
@@ -5742,7 +5742,7 @@
     <string name="rendering_attr_padusDisplayMode_name">Visningsläge för allmän mark</string>
     <string name="rendering_attr_padusDisplayMode_description">Efter åtkomsttyp eller administratörsnamn</string>
     <string name="rendering_value_access_name">Efter åtkomsttyp</string>
-    <string name="rendering_value_managerName_name">Efter chefens namn</string>
+    <string name="rendering_value_managerName_name">Efter administratörsnamn</string>
     <string name="rendering_attr_padusHideBoundaries_name">Dölj gränser för offentlig mark</string>
     <string name="rendering_attr_padusHideBoundaries_description">Dölj gränser för offentlig mark men lämna områden</string>
     <string name="any_connected">Alla anslutna</string>
@@ -5771,7 +5771,7 @@
     <string name="turn_by_turn_directions">Vägbeskrivning sväng för sväng</string>
     <string name="failed_to_connect">Kunde inte ansluta till %1s</string>
     <string name="next_turn_information">Information om nästa sväng</string>
-    <string name="next_turn_information_desc">Visar kommande svängriktning och gatunamn.</string>
+    <string name="next_turn_information_desc">Visar nästkommande svängriktning och gatunamn.</string>
     <string name="manage_purchases">Hantera köp</string>
     <string name="shared_string_price">Pris</string>
     <string name="obd_alt_battery_voltage">Adapterspänning</string>
@@ -5802,8 +5802,8 @@
     <string name="map_orientations">Kartor orienteringar</string>
     <string name="average_slope">Genomsnittlig lutning</string>
     <string name="write_location_provider">Skriv platsleverantör</string>
-    <string name="map_orientation_portrait_inverted">Porträtt (inverterat)</string>
-    <string name="map_orientation_landscape_inverted">Landskap (inverterat)</string>
+    <string name="map_orientation_portrait_inverted">Stående (inverterat)</string>
+    <string name="map_orientation_landscape_inverted">Liggande (inverterat)</string>
     <string name="reverse_mode_calculate_route">Beräkna rutten</string>
     <string name="reverse_mode_calculate_route_desc">Beräkna en ny optimerad rutt till början.</string>
     <string name="reverse_mode_original_track">Original spår</string>
@@ -5825,10 +5825,10 @@
     <string name="rendering_attr_hideFairways_name">Fairways</string>
     <string name="rendering_attr_hideFerries_name">Färjerutter</string>
     <string name="rendering_attr_hideFerries_description">Dölj färjerutter</string>
-    <string name="rendering_attr_hideLightSectors_name">Ljussektorer</string>
-    <string name="rendering_attr_hideLightSectors_description">Dölj ljussektorer</string>
-    <string name="rendering_attr_hideLightSectorSources_name">Ljussektorkällor</string>
-    <string name="rendering_attr_hideLightSectorSources_description">Dölj ljussektorkällor</string>
+    <string name="rendering_attr_hideLightSectors_name">Ljusa sektorer</string>
+    <string name="rendering_attr_hideLightSectors_description">Dölj ljusa sektorer</string>
+    <string name="rendering_attr_hideLightSectorSources_name">Källor till ljusa sektorer</string>
+    <string name="rendering_attr_hideLightSectorSources_description">Dölj källor till ljusa sektorer</string>
     <string name="rendering_attr_hideNoLNAM_name">OSM-sjömärken (vissa)</string>
     <string name="rendering_attr_hideNoLNAM_description">Dölj OSM-sjömärken (vissa)</string>
     <string name="show_local_names">Visa lokala namn</string>
@@ -5845,7 +5845,7 @@
     <string name="deleted_maps_prompt">Dessa kartor stöds inte längre och har ersatts av mindre regioner. Ta bort dem och ladda ner de nya versionerna.</string>
     <string name="unsupported_maps">Kartor som inte stöds</string>
     <string name="quick_action_weather_layers">En växlingsknapp för att visa eller dölja väderlager på kartan.</string>
-    <string name="quick_action_wind_animation_layer">En växlingsknapp för att visa eller dölja vindens animationslager på kartan.</string>
+    <string name="quick_action_wind_animation_layer">Ett växlingsknapp för att visa eller dölja vindanimationsskiktet på kartan.</string>
     <string name="wind_animation_layer">Vindanimeringslager</string>
     <string name="weather_layers">Väderlager</string>
     <string name="requires_internet_connection">Kräver en internetanslutning</string>
@@ -5910,4 +5910,6 @@
     <string name="delete_folder_description">Ta bort mappen \"%1$s\"?</string>
     <string name="show_spherical_map">Globvy</string>
     <string name="enable_3d_objects">3D-byggnader</string>
+    <string name="has_vehicle_metrics">Med OBDII data</string>
+    <string name="buildings_3d_detail_level">3D-byggnader detalisering</string>
 </resources>
