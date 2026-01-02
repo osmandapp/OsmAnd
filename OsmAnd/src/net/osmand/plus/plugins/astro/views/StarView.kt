@@ -559,8 +559,9 @@ class StarView @JvmOverloads constructor(
 		}
 
 		// Calculate new path data
+		val isMoon = obj.type == SkyObject.Type.MOON
 		val startHours = -12
-		val endHours = 12
+		val endHours = if (isMoon) 13 else 12
 		val stepMinutes = 10
 		val totalMinutes = (endHours - startHours) * 60
 		val steps = totalMinutes / stepMinutes + 1

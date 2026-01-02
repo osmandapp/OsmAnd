@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Direction
+import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.Location
@@ -54,6 +55,7 @@ import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
 import net.osmand.shared.util.LoggerFactory
 import java.time.LocalDate
 import java.time.ZoneId
+import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
 
@@ -613,8 +615,15 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		} else obj.body
 
 		if (bodyToCheck != null) {
-			val riseTime = searchRiseSet(bodyToCheck, observer, Direction.Rise, currentTime, 1.0)
-			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, currentTime, 1.0)
+			val calendar = (starMapViewModel.currentCalendar.value ?: Calendar.getInstance()).clone() as Calendar
+			calendar.set(Calendar.HOUR_OF_DAY, 0)
+			calendar.set(Calendar.MINUTE, 0)
+			calendar.set(Calendar.SECOND, 0)
+			calendar.set(Calendar.MILLISECOND, 0)
+			val searchStart = Time.fromMillisecondsSince1970(calendar.timeInMillis)
+
+			val riseTime = searchRiseSet(bodyToCheck, observer, Direction.Rise, searchStart, 1.2)
+			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, searchStart, 1.2)
 
 			if (riseTime != null) {
 				sheetRiseTime?.text = "Rise: ↑${AstroUtils.formatLocalTime(riseTime)}"
