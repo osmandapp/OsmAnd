@@ -255,14 +255,29 @@ class StarView @JvmOverloads constructor(
 
 	fun getViewAngle() = viewAngle
 
-	fun setViewAngle(angle: Double) {
+	private fun updateViewAngle(newAngle: Double, focusX: Float = width / 2f, focusY: Float = height / 2f) {
 		val maxAngle = if (is2DMode) 220.0 else 150.0
-		val newAngle = max(10.0, min(maxAngle, angle))
-		if (abs(this.viewAngle - newAngle) > 0.001) {
-			this.viewAngle = newAngle
-			onViewAngleChangeListener?.invoke(newAngle)
+		val finalAngle = max(10.0, min(maxAngle, newAngle))
+		if (abs(this.viewAngle - finalAngle) > 0.001) {
+			if (is2DMode && width > 0 && height > 0) {
+				val oldTan = tan(Math.toRadians(viewAngle) / 4.0)
+				val newTan = tan(Math.toRadians(finalAngle) / 4.0)
+				if (oldTan > 0 && newTan > 0) {
+					val ratio = oldTan / newTan
+					val halfWidth = width / 2f
+					val halfHeight = height / 2f
+					panX = (focusX - halfWidth - (focusX - halfWidth - panX) * ratio).toFloat()
+					panY = (focusY - halfHeight - (focusY - halfHeight - panY) * ratio).toFloat()
+				}
+			}
+			this.viewAngle = finalAngle
+			onViewAngleChangeListener?.invoke(finalAngle)
 			invalidate()
 		}
+	}
+
+	fun setViewAngle(angle: Double) {
+		updateViewAngle(angle)
 	}
 
 	fun setAzimuth(azimuth: Double, animate: Boolean = false, fps: Int? = 30) {
@@ -457,21 +472,11 @@ class StarView @JvmOverloads constructor(
 	fun getMaxZoom() = 150.0
 
 	fun zoomIn() {
-		val newAngle = max(10.0, min(getMaxZoom(), viewAngle / 1.5))
-		if (abs(viewAngle - newAngle) > 0.001) {
-			viewAngle = newAngle
-			onViewAngleChangeListener?.invoke(viewAngle)
-			invalidate()
-		}
+		updateViewAngle(viewAngle / 1.5)
 	}
 
 	fun zoomOut() {
-		val newAngle = max(10.0, min(getMinZoom(), viewAngle * 1.5))
-		if (abs(viewAngle - newAngle) > 0.001) {
-			viewAngle = newAngle
-			onViewAngleChangeListener?.invoke(viewAngle)
-			invalidate()
-		}
+		updateViewAngle(viewAngle * 1.5)
 	}
 
 	private fun recalculatePositions(time: Time, updateTargets: Boolean) {
@@ -1346,13 +1351,7 @@ class StarView @JvmOverloads constructor(
 
 	private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
 		override fun onScale(detector: ScaleGestureDetector): Boolean {
-			val maxAngle = if (is2DMode) 220.0 else 150.0
-			val newAngle = max(10.0, min(maxAngle, viewAngle / detector.scaleFactor))
-			if (abs(viewAngle - newAngle) > 0.001) {
-				viewAngle = newAngle
-				onViewAngleChangeListener?.invoke(viewAngle)
-				invalidate()
-			}
+			updateViewAngle(viewAngle / detector.scaleFactor, detector.focusX, detector.focusY)
 			return true
 		}
 	}

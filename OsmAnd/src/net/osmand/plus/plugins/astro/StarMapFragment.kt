@@ -106,6 +106,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private var previousAltitude: Double = 45.0
 	private var previousAzimuth: Double = 0.0
+	private var previousViewAngle: Double = 150.0
 
 	companion object {
 		private val log = LoggerFactory.getLogger("StarMapFragment")
@@ -423,6 +424,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (is2D) {
 			previousAltitude = starView.getAltitude()
 			previousAzimuth = starView.getAzimuth()
+			previousViewAngle = starView.getViewAngle()
 			starView.is2DMode = true
 			starView.setCenter(180.0, 90.0)
 			if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode(false)
@@ -430,7 +432,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		} else {
 			starView.is2DMode = false
 			starView.setCenter(previousAzimuth, previousAltitude)
-			starView.setViewAngle(starView.getViewAngle())
+			starView.setViewAngle(previousViewAngle)
 		}
 		update2DModeIcon()
 		saveCommonSettings()
