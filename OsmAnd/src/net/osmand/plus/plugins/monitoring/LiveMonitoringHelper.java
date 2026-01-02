@@ -290,7 +290,7 @@ public class LiveMonitoringHelper {
 					break;
 				case 11:
 					// deviceid
-					prm.add(app.getSettings().BACKUP_NATIVE_DEVICE_ID.get());
+					prm.add(app.getSettings().BACKUP_DEVICE_ID.get());
 					break;
 				case 12:
 					// accesToken
