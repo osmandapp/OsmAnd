@@ -193,7 +193,7 @@ class GpxDatabase {
 		val file = readItemFile(query)
 		val item = GpxDataItem(file)
 		val analysis = GpxTrackAnalysis()
-		processItemParameters(item, query, GpxParameter.values().toList(), analysis)
+		processItemParameters(item, query, entries, analysis)
 		item.setAnalysis(analysis)
 		return item
 	}
