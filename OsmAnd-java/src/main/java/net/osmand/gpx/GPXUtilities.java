@@ -1650,15 +1650,14 @@ public class GPXUtilities {
 											String supportedTag = getExtensionsSupportedTag(t);
 											String value = entry.getValue();
 											parse.getExtensionsToWrite().put(supportedTag, value);
-											if (parse instanceof WptPt) {
-												WptPt wptPt = (WptPt) parse;
-												if (POINT_SPEED.equals(tag)) {
+											if (parse instanceof WptPt wptPt) {
+												if (POINT_SPEED.equals(t)) {
 													try {
 														wptPt.speed = Float.parseFloat(value);
 													} catch (NumberFormatException e) {
 														log.debug(e.getMessage(), e);
 													}
-												} else if (POINT_BEARING.equals(tag)) {
+												} else if (POINT_BEARING.equals(t)) {
 													try {
 														wptPt.bearing = Float.parseFloat(value);
 													} catch (NumberFormatException ignored) {

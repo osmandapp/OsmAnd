@@ -3323,4 +3323,5 @@
     <string name="poi_free_flying_hanggliding_yes">滑翔翼/悬挂式滑翔</string>
     <string name="poi_free_flying_hanggliding_no">滑翔翼/悬挂式滑翔：否</string>
     <string name="poi_route_activity_type_hang_gliding">滑翔翼/悬挂式滑翔</string>
+    <string name="poi_turnstile">旋转门</string>
 </resources>

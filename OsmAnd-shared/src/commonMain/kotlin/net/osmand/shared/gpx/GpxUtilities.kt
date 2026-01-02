@@ -1113,7 +1113,7 @@ object GpxUtilities {
 												getExtensionsSupportedTag(t.lowercase())
 											parse.getExtensionsToWrite()[supportedTag] = value
 											if (parse is WptPt) {
-												when (tag) {
+												when (t) {
 													POINT_SPEED -> {
 														try {
 															parse.speed = value.toDouble()

@@ -2865,8 +2865,8 @@
     <string name="edit_profile_setup_map_subtitle">Elige las opciones de mapa para el perfil</string>
     <string name="edit_profile_screen_options_subtitle">Elige las opciones de pantalla para el perfil</string>
     <string name="edit_profile_nav_settings_subtitle">Elige los ajustes de navegación para el perfil</string>
-    <string name="routing_attr_max_num_changes_description">Indica el número máximo de transbordos</string>
-    <string name="routing_attr_max_num_changes_name">Número de transbordos</string>
+    <string name="routing_attr_max_num_changes_description">Indica el límite máximo de transbordos</string>
+    <string name="routing_attr_max_num_changes_name">Número máximo de transbordos</string>
     <string name="turn_screen_on_router">Despertar al girar</string>
     <string name="turn_screen_on_time_descr">Define durante cuánto tiempo debe encenderse la pantalla.</string>
     <string name="turn_screen_on_sensor">Usar sensor de proximidad</string>
@@ -4478,7 +4478,7 @@
     <string name="restart_now">Reiniciar ahora</string>
     <string name="map_rendering_engine_v1">Versión 1</string>
     <string name="map_rendering_engine_v2">Versión 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">La versión 1, era la predefinida antes de OsmAnd 4.3 y sigue siendo preferible para dispositivos más antiguos. \nLa versión 2 (OpenGL) es un motor de renderizado de mapas más potente, que también ofrece una vista 2.5D.</string>
+    <string name="map_rendering_engine_descr">La versión 1, fue la predefinida antes de OsmAnd 4.3 y se adapta a dispositivos antiguos.\n\nLa versión 2 (OpenGL) es más avanzada y agrega características como la vista 3D.</string>
     <string name="map_rendering_engine">Motor de renderizado del mapa</string>
     <string name="show_borders_of_downloaded_maps">Colorear mapas descargados</string>
     <string name="show_map_symbols">Mostrar símbolos del mapa</string>
@@ -5818,7 +5818,7 @@
     <string name="track_folder_appearance">Aspecto de la carpeta de trazas</string>
     <string name="update_maps">Actualizar mapas</string>
     <string name="reconnect">Reconectar</string>
-    <string name="trip_recording_max_speed_widget_description">Muestra la velocidad máxima del viaje actual registrado. Pulsá para cambiar entre la velocidad máxima general y la velocidad máxima del último ascenso o descenso.</string>
+    <string name="trip_recording_max_speed_widget_description">Muestra la velocidad máxima del viaje actual registrado. Pulsa para cambiar entre la velocidad máxima general y la velocidad máxima del último ascenso o descenso.</string>
     <string name="trip_recording_average_slope_widget_description">Muestra la pendiente media del último ascenso o descenso del viaje actual registrado.</string>
     <string name="average_slope">Pendiente media</string>
     <string name="shared_string_last_uphill">Último ascenso</string>
@@ -5830,4 +5830,23 @@
     <string name="button_frames">Marcos de botones</string>
     <string name="visualizing_button_grid">Cuadrícula de botones del mapa</string>
     <string name="enable_3d_objects_description">Muestra edificios en 3D como objetos en el mapa</string>
+    <string name="has_vehicle_metrics">Con datos de OBDII</string>
+    <string name="lang_mi">Maorí</string>
+    <string name="vehicle_metrics_chart_category">Estadísticas del vehículo</string>
+    <string name="delete_folder_description">¿Borrar la carpeta «%1$s»?</string>
+    <string name="routing_attr_pt_limit_name">Mostrar las N mejores rutas</string>
+    <string name="routing_attr_pt_limit_description">Define el número de mejores rutas a mostrar</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centímetros</string>
+    <string name="bicycle_width_limit_description">Indica el ancho de la bicicleta para evitar ciclovías/bicisendas angostas.</string>
+    <string name="copy_link">Copiar enlace</string>
+    <string name="is_parking_time_limited">¿El estacionamiento tiene tiempo límite?</string>
+    <string name="routing_attr_weightrating_name">Peso bruto máximo</string>
+    <string name="routing_attr_maxaxleload_name">Carga máxima por eje</string>
+    <string name="deleted_maps_warning">Borrarás %d elemento(s)\n¿Continuar?</string>
+    <string name="deleted_maps_prompt">Estos mapas ya no se admiten y se han reemplazado por regiones más pequeñas. Quítalos y descarga las versiones nuevas.</string>
+    <string name="unsupported_maps">Mapas incompatibles</string>
+    <string name="show_spherical_map">Mapa esférico</string>
+    <string name="enable_3d_objects">Edificios en 3D</string>
+    <string name="buildings_3d_detail_level">Detallado de edificios en 3D</string>
 </resources>

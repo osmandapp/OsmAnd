@@ -1264,7 +1264,7 @@
     <string name="rendering_category_details">详细资料</string>
     <string name="show_pedestrian_warnings">人行横道</string>
     <string name="rendering_attr_busRoutes_name">公交路线</string>
-    <string name="traffic_warning_railways">铁道交口</string>
+    <string name="traffic_warning_railways">铁路道口</string>
     <string name="routing_attr_driving_style_name">骑行风格</string>
     <string name="enable_proxy_title">启用 HTTP 代理</string>
     <string name="enable_proxy_descr">为所有网络请求配置 HTTP 代理。</string>
