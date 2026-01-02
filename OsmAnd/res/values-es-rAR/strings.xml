@@ -5765,7 +5765,7 @@
     <string name="visualizing_button_grid">Cuadrícula de botones del mapa</string>
     <string name="enable_3d_objects_description">Muestra edificios en 3D como objetos en el mapa</string>
     <string name="deleted_maps_warning">Borrarás %d elemento(s)\n¿Continuar?</string>
-    <string name="deleted_maps_prompt">Estos mapas no se admiten más y debés reemplazarlos por sus regiones más pequeñas. Por favor, quitalos y descargá las versiones nuevas.</string>
+    <string name="deleted_maps_prompt">Estos mapas ya no se admiten y se han reemplazado por regiones más pequeñas. Quitalos y descargá las versiones nuevas.</string>
     <string name="unsupported_maps">Mapas incompatibles</string>
     <string name="routing_attr_weightrating_name">Peso bruto máximo</string>
     <string name="routing_attr_maxaxleload_name">Carga máxima de eje</string>
