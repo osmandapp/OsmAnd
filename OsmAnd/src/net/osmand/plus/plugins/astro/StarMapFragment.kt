@@ -104,6 +104,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var arModeHelper: StarMapARModeHelper
 	private lateinit var cameraHelper: StarMapCameraHelper
 
+	private var previousAltitude: Double = 45.0
+	private var previousAzimuth: Double = 0.0
+
 	companion object {
 		private val log = LoggerFactory.getLogger("StarMapFragment")
 		val TAG: String = StarMapFragment::class.java.simpleName
@@ -229,7 +232,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			setOnClickListener { AstroUtils.showStarMapOptionsDialog(context, starView, swSettings) }
 		}
 		mode2dButton.setOnClickListener { toggle2DMode() }
-		update2DModeIcon()
 
 		resetTimeButton.setOnClickListener {
 			starMapViewModel.resetTime(); starChartViewModel.resetTime()
@@ -258,6 +260,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		updateStarMap(true)
 		setupToolBar(view)
 		buildZoomButtons(view)
+		update2DModeIcon()
 
 		return view
 	}
@@ -417,11 +420,17 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private fun toggle2DMode() {
 		val is2D = !starView.is2DMode
-		starView.is2DMode = is2D
 		if (is2D) {
+			previousAltitude = starView.getAltitude()
+			previousAzimuth = starView.getAzimuth()
+			starView.is2DMode = true
 			starView.setCenter(180.0, 90.0)
 			if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode(false)
 			manualAzimuth = true
+		} else {
+			starView.is2DMode = false
+			starView.setCenter(previousAzimuth, previousAltitude)
+			starView.setViewAngle(starView.getViewAngle())
 		}
 		update2DModeIcon()
 		saveCommonSettings()

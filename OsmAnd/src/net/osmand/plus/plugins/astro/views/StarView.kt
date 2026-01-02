@@ -249,8 +249,15 @@ class StarView @JvmOverloads constructor(
 		invalidate()
 	}
 
+	fun getAltitude() = altitudeCenter
+
+	fun getAzimuth() = azimuthCenter
+
+	fun getViewAngle() = viewAngle
+
 	fun setViewAngle(angle: Double) {
-		val newAngle = max(10.0, min(150.0, angle))
+		val maxAngle = if (is2DMode) 220.0 else 150.0
+		val newAngle = max(10.0, min(maxAngle, angle))
 		if (abs(this.viewAngle - newAngle) > 0.001) {
 			this.viewAngle = newAngle
 			onViewAngleChangeListener?.invoke(newAngle)
@@ -445,8 +452,12 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
+	fun getMinZoom() = if (is2DMode) 200.0 else 150.0
+
+	fun getMaxZoom() = 150.0
+
 	fun zoomIn() {
-		val newAngle = max(10.0, min(150.0, viewAngle / 1.5))
+		val newAngle = max(10.0, min(getMaxZoom(), viewAngle / 1.5))
 		if (abs(viewAngle - newAngle) > 0.001) {
 			viewAngle = newAngle
 			onViewAngleChangeListener?.invoke(viewAngle)
@@ -455,7 +466,7 @@ class StarView @JvmOverloads constructor(
 	}
 
 	fun zoomOut() {
-		val newAngle = max(10.0, min(150.0, viewAngle * 1.5))
+		val newAngle = max(10.0, min(getMinZoom(), viewAngle * 1.5))
 		if (abs(viewAngle - newAngle) > 0.001) {
 			viewAngle = newAngle
 			onViewAngleChangeListener?.invoke(viewAngle)
@@ -1335,7 +1346,7 @@ class StarView @JvmOverloads constructor(
 
 	private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
 		override fun onScale(detector: ScaleGestureDetector): Boolean {
-			val maxAngle = if (is2DMode) 190.0 else 150.0
+			val maxAngle = if (is2DMode) 220.0 else 150.0
 			val newAngle = max(10.0, min(maxAngle, viewAngle / detector.scaleFactor))
 			if (abs(viewAngle - newAngle) > 0.001) {
 				viewAngle = newAngle
