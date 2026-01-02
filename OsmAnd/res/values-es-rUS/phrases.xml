@@ -808,7 +808,7 @@
     <string name="poi_pastry">Pastelería</string>
     <string name="poi_garden_furniture">Muebles de jardín</string>
     <string name="poi_leather">Marroquinería;Tienda de cueros</string>
-    <string name="poi_tyres">Tienda de neumáticos</string>
+    <string name="poi_tyres">Tienda de neumáticos;Gomería;Vulcanizadora</string>
     <string name="poi_watches">Relojes de pulsera</string>
     <string name="poi_games">Juegos</string>
     <string name="poi_model">Modelos a escala</string>
@@ -2836,7 +2836,7 @@
     <string name="poi_cuisine_burger">Hamburguesas</string>
     <string name="poi_cuisine_coffee_shop">Café</string>
     <string name="poi_cuisine_sandwich">Sándwich;Emparedados</string>
-    <string name="poi_cuisine_kebab">Kebab;Brochetas</string>
+    <string name="poi_cuisine_kebab">Kebab;Brochetas al plato</string>
     <string name="poi_cuisine_chicken">Pollo</string>
     <string name="poi_cuisine_ice_cream">Helado</string>
     <string name="poi_cuisine_sushi">Sushi</string>
@@ -3005,7 +3005,7 @@
     <string name="poi_social_facility_for">Grupo objetivo</string>
     <string name="poi_compressed_air_filter">Aire comprimido</string>
     <string name="poi_vacuum_cleaner_filter">Aspiradora</string>
-    <string name="poi_cuisine_doner">Döner kebab (shawarma)</string>
+    <string name="poi_cuisine_doner">Döner kebab (shawarma); Al plato</string>
     <string name="poi_cuisine_shawarma">Shawarma;Carne a las brasas en asador horizontal</string>
     <string name="poi_waterway_fuel">Gasolinera náutica;Estación de combustible náutica</string>
     <string name="poi_feeding_place">Cebadero para animales</string>
@@ -3432,7 +3432,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">Reparación de la transmisión</string>
     <string name="poi_service_vehicle_motor_yes">Motores</string>
     <string name="poi_service_vehicle_insurance_yes">Aseguradora</string>
-    <string name="poi_service_vehicle_tyres_yes">Neumáticos</string>
+    <string name="poi_service_vehicle_tyres_yes">Neumáticos;Gomería;Vulcanizadora</string>
     <string name="poi_aerialway_zip_line">Tirolesa</string>
     <string name="poi_climbing_adventure">Aventura de escalada</string>
     <string name="poi_via_ferrata">Vía ferrata</string>
