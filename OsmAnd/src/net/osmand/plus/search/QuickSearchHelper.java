@@ -14,6 +14,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.map.WorldRegion;
@@ -62,6 +63,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+
 public class QuickSearchHelper implements ResourceListener {
 
 	public static final int SEARCH_FAVORITE_API_PRIORITY = 150;
@@ -89,17 +91,8 @@ public class QuickSearchHelper implements ResourceListener {
 		OsmandSettings settings = app.getSettings();
 		core = new SearchUICore(app.getPoiTypes(), settings.MAP_PREFERRED_LOCALE.get(),
 				settings.MAP_TRANSLITERATE_NAMES.get());
-		core.setHttpRedirectRequester(this::test);
+		core.setHttpRedirectRequester(this::httpRedirectRequester);
 		app.getResourceManager().addResourceListener(this);
-	}
-
-	private String test(String url) {
-		URI uri = GeoPointParserUtil.createUri(url);
-		if (uri != null) {
-			System.err.printf("XXX %s\n", url);
-			return "http://maps.google.com/?q=query&ftid=0x3f8dfd04d309f925:0x2867166b05b0bfe6&hl=en&gl=us&shorturl=1";
-		}
-		return url;
 	}
 
 	public SearchUICore getCore() {
@@ -694,9 +687,18 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	private static class PoiFilterBarController extends TopToolbarController {
-
 		PoiFilterBarController() {
 			super(TopToolbarControllerType.POI_FILTER);
 		}
 	}
+
+	@Nullable
+	private String httpRedirectRequester(@NonNull String url) {
+		URI uri = GeoPointParserUtil.createUri(url);
+		if (uri != null && app.getSettings().isInternetConnectionAvailable()) {
+			return AndroidNetworkUtils.okHttpRedirectRequester(uri.toString());
+		}
+		return null;
+	}
+
 }
