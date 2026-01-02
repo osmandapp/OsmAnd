@@ -12,8 +12,8 @@ import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion
 import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.SELECTABLE_ITEM
 import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.SPACE
 import net.osmand.plus.settings.backend.ApplicationMode
-import net.osmand.shared.gpx.enums.OrganizeByGroupType
-import net.osmand.shared.gpx.enums.OrganizeByType
+import net.osmand.shared.gpx.organization.enums.OrganizeByCategory
+import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import net.osmand.util.CollectionUtils
 
 class OrganizeTracksByController(
@@ -65,9 +65,9 @@ class OrganizeTracksByController(
         //'None' option represented as a 'null' value
         items.add(ScreenItem(SELECTABLE_ITEM, null))
 
-        var group: OrganizeByGroupType? = null
+        var group: OrganizeByCategory? = null
         for (type in OrganizeByType.entries) {
-            val currentGroup = type.group
+            val currentGroup = type.category
             if (group != currentGroup) {
                 group = currentGroup
                 items.add(ScreenItem(DIVIDER_FULL))

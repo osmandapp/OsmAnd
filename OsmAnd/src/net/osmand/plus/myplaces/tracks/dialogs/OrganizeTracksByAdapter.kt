@@ -19,8 +19,8 @@ import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
-import net.osmand.shared.gpx.enums.OrganizeByGroupType
-import net.osmand.shared.gpx.enums.OrganizeByType
+import net.osmand.shared.gpx.organization.enums.OrganizeByCategory
+import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 class OrganizeTracksByAdapter(
     val app: OsmandApplication,
@@ -63,7 +63,7 @@ class OrganizeTracksByAdapter(
             }
 
             is HeaderViewHolder -> {
-                val organizeByGroup = screenItem.value as OrganizeByGroupType
+                val organizeByGroup = screenItem.value as OrganizeByCategory
                 holder.tvTitle!!.text = organizeByGroup.getName()
             }
 

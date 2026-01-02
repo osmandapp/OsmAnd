@@ -10,11 +10,11 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet
 import net.osmand.plus.settings.enums.ThemeUsageContext
-import net.osmand.shared.gpx.data.OrganizedTracks
+import net.osmand.shared.gpx.data.OrganizedTracksGroup
 
 class OrganizedTracksOptionsController(
 	private val app: OsmandApplication,
-	private val organizedTracks: OrganizedTracks
+	private val organizedTracksGroup: OrganizedTracksGroup
 ) : BaseDialogController(app), IDisplayDataProvider, IDialogItemClicked {
 
 	companion object {
@@ -24,10 +24,10 @@ class OrganizedTracksOptionsController(
 		fun showDialog(
 			app: OsmandApplication,
 			fragmentManager: FragmentManager,
-			organizedTracks: OrganizedTracks,
+			organizedTracksGroup: OrganizedTracksGroup,
 			listener: OrganizedTracksOptionsListener?
 		) {
-			val controller = OrganizedTracksOptionsController(app, organizedTracks)
+			val controller = OrganizedTracksOptionsController(app, organizedTracksGroup)
 			controller.setOrganizedTracksOptionsListener(listener)
 			val dialogManager = app.dialogManager
 			dialogManager.register(PROCESS_ID, controller)
@@ -50,8 +50,8 @@ class OrganizedTracksOptionsController(
 
 		displayData.addDisplayItem(
 			DisplayItem()
-				.setTitle(organizedTracks.getName())
-				.setDescription("${organizedTracks.getTrackItems().size} ${app.getString(R.string.shared_string_tracks)}")
+				.setTitle(organizedTracksGroup.getName())
+				.setDescription("${organizedTracksGroup.getTrackItems().size} ${app.getString(R.string.shared_string_tracks)}")
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_72dp)
 				.setIcon(iconsCache.getActiveIcon(R.drawable.ic_action_folder_smart, nightMode))
 				.setShowBottomDivider(true, 0)
@@ -77,30 +77,30 @@ class OrganizedTracksOptionsController(
 		val option = item.tag as OrganizedTracksOption
 		when (option) {
 			OrganizedTracksOption.DETAILS -> {
-				showDetails(organizedTracks)
+				showDetails(organizedTracksGroup)
 			}
 
 			OrganizedTracksOption.SHOW_ALL_TRACKS -> {
-				showTracksOnMap(organizedTracks)
+				showTracksOnMap(organizedTracksGroup)
 			}
 
 			OrganizedTracksOption.EXPORT -> {
-				showExportDialog(organizedTracks)
+				showExportDialog(organizedTracksGroup)
 			}
 		}
 	}
 
-	private fun showDetails(folder: OrganizedTracks) {
+	private fun showDetails(folder: OrganizedTracksGroup) {
 		dialogManager.askDismissDialog(PROCESS_ID)
 		optionsListener?.showOrganizedTracksDetails(folder)
 	}
 
-	private fun showTracksOnMap(folder: OrganizedTracks) {
+	private fun showTracksOnMap(folder: OrganizedTracksGroup) {
 		dialogManager.askDismissDialog(PROCESS_ID)
 		optionsListener?.showOrganizedTracksOnMap(folder)
 	}
 
-	private fun showExportDialog(folder: OrganizedTracks) {
+	private fun showExportDialog(folder: OrganizedTracksGroup) {
 		dialogManager.askDismissDialog(PROCESS_ID)
 		optionsListener?.showExportDialog(folder)
 	}

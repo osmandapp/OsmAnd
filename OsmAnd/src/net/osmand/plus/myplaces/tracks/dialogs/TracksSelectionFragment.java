@@ -31,7 +31,7 @@ import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
-import net.osmand.shared.gpx.data.OrganizedTracks;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
@@ -95,7 +95,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	public void setRootFolder(@NonNull TracksGroup rootGroup) {
-		if (rootGroup instanceof OrganizedTracks organizedTracks) {
+		if (rootGroup instanceof OrganizedTracksGroup organizedTracks) {
 			setSmartFolder(organizedTracks.getRelatedSmartFolder());
 		} else if (rootGroup instanceof SmartFolder folder) {
 			setSmartFolder(folder);
@@ -110,7 +110,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		}
 		boolean addIndividualItems = true;
 		if (rootGroup instanceof SmartFolder folder) {
-			List<OrganizedTracks> organizedTracks = folder.getOrganizedTracks();
+			List<OrganizedTracksGroup> organizedTracks = folder.getOrganizedTrackItems();
 			if (!Algorithms.isEmpty(organizedTracks)) {
 				groupsSelectionHelper.setAllItems(organizedTracks);
 				addIndividualItems = false;

@@ -3,13 +3,12 @@ package net.osmand.shared.gpx.data
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import net.osmand.shared.gpx.TrackItem
-import net.osmand.shared.gpx.enums.OrganizeByType
+import net.osmand.shared.gpx.organization.TracksOrganizer
+import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import net.osmand.shared.gpx.filters.BaseTrackFilter
-import net.osmand.shared.gpx.filters.RangeTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterSerializer
-import net.osmand.shared.gpx.filters.TrackFiltersHelper
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
-import net.osmand.shared.util.KAlgorithms
+import net.osmand.shared.gpx.organization.OrganizeByRules
 import net.osmand.shared.util.KCollectionUtils
 
 @Serializable
@@ -22,7 +21,9 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 	private var trackItems: List<TrackItem>? = null
 
 	@Transient
-	private var organizedTrackItems: Map<OrganizedTrackGroup, MutableList<TrackItem>>? = null
+	private var organizedTrackItems: List<OrganizedTracksGroup>? = null
+	@Transient
+	private var organizeByRules: OrganizeByRules? = null
 
 	constructor() : this("")
 
@@ -34,71 +35,6 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	@Transient
 	private var folderAnalysis: TrackFolderAnalysis? = null
-
-	private var organizeByFilter: BaseTrackFilter? = null
-	private var organizeByType: OrganizeByType? = null
-	private var organizeByStep: Int? = null
-	private var organizeByRange: Pair<Int, Int>? = null
-
-	fun organizeByType(organizeByType: OrganizeByType, rangeFilterMaxValue: String?) {
-		this.organizeByType = organizeByType
-		organizeByFilter = TrackFiltersHelper.createFilter(organizeByType.filterType, null)
-		organizeByFilter?.let { filter ->
-			filter.initFilter()
-			rangeFilterMaxValue?.let { rangeMaxValue ->
-				if (filter is RangeTrackFilter<*> && !KAlgorithms.isEmpty(rangeMaxValue)) {
-					(filter).setMaxValue(rangeMaxValue)
-				}
-			}
-
-			organizeTracksInternal(filter, organizeByType)
-		}
-	}
-
-	private fun organizeTracksInternal(
-		filter: BaseTrackFilter,
-		organizeByType: OrganizeByType
-	) {
-		filter.initOrganizedByGroups(organizeByType)
-		organizeByStep = filter.organizeByStep
-		organizeByRange = filter.organizeByRange
-		val organizedTrackItems = HashMap<OrganizedTrackGroup, MutableList<TrackItem>>()
-		trackItems?.let { items ->
-			for (trackItem in items) {
-				filter.let { filter ->
-					var group: OrganizedTrackGroup? = filter.getOrganizedByGroup(trackItem)
-					if (group == null) {
-						group = filter.getOrganizedByGroup(trackItem)
-					}
-					group?.let {
-						val groupLIst = organizedTrackItems[it]
-						if (groupLIst == null) {
-							organizedTrackItems[it] = ArrayList()
-						}
-						groupLIst?.add(trackItem)
-					}
-				}
-			}
-		}
-		this.organizedTrackItems = organizedTrackItems
-	}
-
-	fun setOrganizeByStep(step: Int) {
-		organizeByType?.let { type ->
-			organizeByFilter?.let { filter ->
-				var stepLocal = step
-				filter.organizeByRange?.let { range ->
-					if (stepLocal > range.second) {
-						stepLocal = range.second
-					} else if (stepLocal < range.first) {
-						stepLocal = range.first
-					}
-				}
-				filter.organizeByStep = stepLocal
-				organizeTracksInternal(filter, type)
-			}
-		}
-	}
 
 	override fun getId(): String {
 		return ID_PREFIX + folderName
@@ -122,18 +58,12 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		}
 	}
 
-	fun getOrganizedTracks(): List<OrganizedTracks>? {
-		val result = mutableListOf<OrganizedTracks>()
-		if (organizedTrackItems != null) {
-			for (entry in organizedTrackItems?.entries!!) {
-				val key = entry.key
-				val value = entry.value
-				result.add(OrganizedTracks(key.title, key.title, key.iconName, value, this))
-			}
-			return result
-		}
-		return null
+	// TODO: don't use
+	fun organizeBy(type: OrganizeByType) {
+		organizedTrackItems = TracksOrganizer().execute(this, OrganizeByRules(type, 10_000))
 	}
+
+	fun getOrganizedTrackItems() = organizedTrackItems
 
 	override fun getFolderAnalysis(): TrackFolderAnalysis {
 		var analysis = folderAnalysis

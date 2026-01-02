@@ -1,9 +1,8 @@
 package net.osmand.test.ui
 
-import android.util.Log
 import androidx.test.platform.app.InstrumentationRegistry
-import net.osmand.shared.gpx.enums.OrganizeByGroupType
-import net.osmand.shared.gpx.enums.OrganizeByType
+import net.osmand.shared.gpx.organization.enums.OrganizeByCategory
+import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import org.junit.Assert
 import org.junit.Test
 
@@ -12,7 +11,7 @@ class OrganizeByTypeTest {
 
 	@Test
 	fun testOrganizeByGroupTypeResources() {
-		OrganizeByGroupType.entries.forEach { group ->
+		OrganizeByCategory.entries.forEach { group ->
 			val nameResId = getStringIdByName(group.nameResId)
 			val name = context.getString(nameResId)
 			Assert.assertNotNull(name)

@@ -74,7 +74,7 @@ import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.shared.gpx.TrackItem;
-import net.osmand.shared.gpx.data.OrganizedTracks;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
@@ -104,7 +104,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 
 	protected TrackFolder rootFolder;
 	protected TrackFolder selectedFolder;
-	protected OrganizedTracks organizedGroup;
+	protected OrganizedTracksGroup organizedGroup;
 	protected SmartFolder smartFolder;
 
 	protected TrackFoldersAdapter adapter;
@@ -156,7 +156,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		this.selectedItemPath = selectedItemPath;
 	}
 
-	public void setOrganizedGroup(@NonNull OrganizedTracks organizedTracks) {
+	public void setOrganizedGroup(@NonNull OrganizedTracksGroup organizedTracks) {
 		this.organizedGroup = organizedTracks;
 	}
 
@@ -246,12 +246,12 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 
 		List<TrackFolder> folders = null;
 		List<TrackItem> trackItems = null;
-		List<OrganizedTracks> organizedTracks = null;
+		List<OrganizedTracksGroup> organizedTracks = null;
 		if (selectedFolder == null) {
 			if (organizedGroup != null) {
 				trackItems = organizedGroup.getTrackItems();
 			} else if (smartFolder != null) {
-				organizedTracks = smartFolder.getOrganizedTracks();
+				organizedTracks = smartFolder.getOrganizedTrackItems();
 				trackItems = smartFolder.getTrackItems();
 			}
 		} else {
@@ -339,7 +339,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 			TrackFolderOptionsController.showDialog(foldersHelper, folder, this);
 		} else if (group instanceof SmartFolder folder) {
 			SmartFolderOptionsController.Companion.showDialog(app, getChildFragmentManager(), folder, this);
-		} else if (group instanceof OrganizedTracks organizedTracks) {
+		} else if (group instanceof OrganizedTracksGroup organizedTracks) {
 			OrganizedTracksOptionsController.Companion.showDialog(app, getChildFragmentManager(), organizedTracks, this);
 		}
 	}
@@ -541,7 +541,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 
 	//TODO: implement approach to display tracks of current group
 	@Override
-	public void showOrganizedTracksOnMap(@NonNull OrganizedTracks organizedTracks) {
+	public void showOrganizedTracksOnMap(@NonNull OrganizedTracksGroup organizedTracks) {
 		showSmartFolderTracksOnMap(organizedTracks.getRelatedSmartFolder());
 	}
 
@@ -566,12 +566,12 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	}
 
 	@Override
-	public void showExportDialog(@NonNull OrganizedTracks organizedTracks) {
+	public void showExportDialog(@NonNull OrganizedTracksGroup organizedTracks) {
 		showExportDialog(organizedTracks.getTrackItems());
 	}
 
 	@Override
-	public void showOrganizedTracksDetails(@NonNull OrganizedTracks organizedTracks) {
+	public void showOrganizedTracksDetails(@NonNull OrganizedTracksGroup organizedTracks) {
 		setOrganizedGroup(organizedTracks);
 		updateContent();
 	}

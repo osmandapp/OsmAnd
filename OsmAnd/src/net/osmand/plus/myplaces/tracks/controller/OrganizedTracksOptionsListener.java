@@ -2,17 +2,17 @@ package net.osmand.plus.myplaces.tracks.controller;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.shared.gpx.data.OrganizedTracks;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 
 public interface OrganizedTracksOptionsListener {
 
-	default void showOrganizedTracksDetails(@NonNull OrganizedTracks organizedTracks) {
+	default void showOrganizedTracksDetails(@NonNull OrganizedTracksGroup organizedTracks) {
 	}
 
-	default void showOrganizedTracksOnMap(@NonNull OrganizedTracks organizedTracks) {
+	default void showOrganizedTracksOnMap(@NonNull OrganizedTracksGroup organizedTracks) {
 	}
 
-	default void showExportDialog(@NonNull OrganizedTracks organizedTracks) {
+	default void showExportDialog(@NonNull OrganizedTracksGroup organizedTracks) {
 	}
 
 }

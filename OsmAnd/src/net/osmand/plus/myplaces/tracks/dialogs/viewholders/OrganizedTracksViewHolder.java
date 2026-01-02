@@ -6,8 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.shared.gpx.data.OrganizedTracks;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.TracksGroup;
 
 public class OrganizedTracksViewHolder extends TracksGroupViewHolder {
@@ -21,8 +22,8 @@ public class OrganizedTracksViewHolder extends TracksGroupViewHolder {
 	public void bindView(@NonNull TracksGroup tracksGroup, boolean showDivider) {
 		super.bindView(tracksGroup, showDivider);
 
-		OrganizedTracks organizedTracks = (OrganizedTracks) tracksGroup;
-		title.setText(organizedTracks.getName());
+		OrganizedTracksGroup organizedTracks = (OrganizedTracksGroup) tracksGroup;
+		title.setText(GpxUiHelper.getOrganizedTracksGroupTitle(app, organizedTracks));
 		int itemsCount = tracksGroup.getTrackItems().size();
 		description.setText(app.getString(R.string.number_of_tracks, String.valueOf(itemsCount)));
 

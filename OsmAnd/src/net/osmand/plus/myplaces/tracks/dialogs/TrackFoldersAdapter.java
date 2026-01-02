@@ -34,7 +34,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TrackFolderViewHolder
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.VisibleTracksViewHolder;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.shared.gpx.data.OrganizedTracks;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
@@ -200,7 +200,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			return TYPE_SMART_FOLDER;
 		} else if (object instanceof VisibleTracksGroup) {
 			return TYPE_VISIBLE_TRACKS;
-		} else if (object instanceof OrganizedTracks) {
+		} else if (object instanceof OrganizedTracksGroup) {
 			return TYPE_ORGANIZED_TRACKS;
 		} else if (object instanceof TrackFolderAnalysis) {
 			return TYPE_FOLDER_STATS;
@@ -254,7 +254,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			viewHolder.bindView(trackItem);
 
 		} else if (holder instanceof OrganizedTracksViewHolder viewHolder) {
-			OrganizedTracks organizedTracks = (OrganizedTracks) items.get(position);
+			OrganizedTracksGroup organizedTracks = (OrganizedTracksGroup) items.get(position);
 			viewHolder.bindView(organizedTracks, lastItem);
 
 		} else if (holder instanceof FolderStatsViewHolder viewHolder) {

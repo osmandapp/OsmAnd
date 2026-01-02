@@ -44,7 +44,7 @@ import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
-import net.osmand.shared.gpx.enums.OrganizeByType;
+import net.osmand.shared.gpx.organization.enums.OrganizeByType;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
@@ -467,7 +467,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 					if (smartFolder.getFolderName().equals("All")) {
 						OrganizeByType type = OrganizeByType.LENGTH;
 						String maxValueInDb = app.getGpxDbHelper().getMaxParameterValue(type.getFilterType().getProperty());
-						smartFolder.organizeByType(type, maxValueInDb);
+						smartFolder.organizeBy(type/*, maxValueInDb*/);
 					}
 				}
 			}

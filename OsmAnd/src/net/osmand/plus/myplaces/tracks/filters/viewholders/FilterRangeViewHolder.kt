@@ -30,8 +30,8 @@ import kotlin.math.floor
 
 open class FilterRangeViewHolder(
 	itemView: View,
-	nightMode: Boolean) :
-	RecyclerView.ViewHolder(itemView) {
+	nightMode: Boolean
+) : RecyclerView.ViewHolder(itemView) {
 	protected val app: OsmandApplication
 	private val nightMode: Boolean
 	private var expanded = false
@@ -243,7 +243,8 @@ open class FilterRangeViewHolder(
 
 	fun getFormattedValue(
 		measureUnitType: MeasureUnitType,
-		value: String): FormattedValue {
+		value: String
+	): FormattedValue {
 		val altitudeMetrics: AltitudeMetrics = app.settings.ALTITUDE_METRIC.get()
 		val params = OsmAndFormatterParams()
 		params.setExtraDecimalPrecision(3)
