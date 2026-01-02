@@ -58,6 +58,7 @@ class StarView @JvmOverloads constructor(
 	private val cardinalTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = Color.GREEN
 		textSize = 40f
+		textAlign = Paint.Align.CENTER
 	}
 	private val gridTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = 0xFF888888.toInt()
@@ -761,6 +762,28 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
+	private fun drawOutsideLabel(canvas: Canvas, label: String, az: Double, alt: Double, textPaint: Paint, offset: Float = 25f) {
+		if (!skyToScreen(az, alt, tempPoint)) return
+
+		if (is2DMode) {
+			val centerX = (projHalfWidth + panX).toFloat()
+			val centerY = (projHalfHeight + panY).toFloat()
+			val dx = tempPoint.x - centerX
+			val dy = tempPoint.y - centerY
+			val dist = hypot(dx, dy)
+			if (dist > 0.1) {
+				val px = centerX + dx * (dist + offset) / dist
+				val py = centerY + dy * (dist + offset) / dist
+				val fm = textPaint.fontMetrics
+				canvas.drawText(label, px, py - (fm.ascent + fm.descent) / 2, textPaint)
+			} else {
+				canvas.drawText(label, tempPoint.x, tempPoint.y - offset, textPaint)
+			}
+		} else {
+			canvas.drawText(label, tempPoint.x, tempPoint.y - offset, textPaint)
+		}
+	}
+
 	private fun drawHorizon(canvas: Canvas) {
 		paint.color = 0xFF003300.toInt()
 		paint.style = Paint.Style.FILL
@@ -778,9 +801,7 @@ class StarView @JvmOverloads constructor(
 		canvas.drawPath(gridPath, paint)
 		val cardinals = listOf("N" to 0.0, "E" to 90.0, "S" to 180.0, "W" to 270.0)
 		cardinals.forEach { (label, az) ->
-			if (skyToScreen(az, 0.0, tempPoint)) {
-				canvas.drawText(label, tempPoint.x, tempPoint.y - 10, cardinalTextPaint)
-			}
+			drawOutsideLabel(canvas, label, az, 0.0, cardinalTextPaint, 30f)
 		}
 	}
 
@@ -807,9 +828,12 @@ class StarView @JvmOverloads constructor(
 				} else { first = true }
 			}
 			if (alt != 0) {
+				gridTextPaint.textAlign = Paint.Align.LEFT
+				gridTextPaint.color = 0xFF888888.toInt()
 				if (skyToScreen(azimuthCenter, alt.toDouble(), tempPoint)) {
-					gridTextPaint.textAlign = Paint.Align.LEFT
-					gridTextPaint.color = 0xFF888888.toInt()
+					canvas.drawText("${alt}°", tempPoint.x + 5f, tempPoint.y - 5f, gridTextPaint)
+				}
+				if (skyToScreen(azimuthCenter + 180.0, alt.toDouble(), tempPoint)) {
 					canvas.drawText("${alt}°", tempPoint.x + 5f, tempPoint.y - 5f, gridTextPaint)
 				}
 			}
@@ -825,11 +849,9 @@ class StarView @JvmOverloads constructor(
 				} else { first = true }
 			}
 			if (az % 90 != 0) {
-				if (skyToScreen(az.toDouble(), 0.0, tempPoint)) {
-					gridTextPaint.textAlign = Paint.Align.CENTER
-					gridTextPaint.color = 0xFF888888.toInt()
-					canvas.drawText("${az}°", tempPoint.x, tempPoint.y - 10f, gridTextPaint)
-				}
+				gridTextPaint.textAlign = Paint.Align.CENTER
+				gridTextPaint.color = 0xFF888888.toInt()
+				drawOutsideLabel(canvas, "${az}°", az.toDouble(), 0.0, gridTextPaint, 25f)
 			}
 		}
 		canvas.drawPath(gridPath, paint)
