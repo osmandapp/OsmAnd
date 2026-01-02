@@ -1134,6 +1134,8 @@ class StarView @JvmOverloads constructor(
 			field = value
 			if (!value) {
 				panX = 0f; panY = 0f
+			} else {
+				roll = 0.0
 			}
 			invalidate()
 		}
@@ -1165,11 +1167,14 @@ class StarView @JvmOverloads constructor(
 		val yRaw = projCosAltCenter * sinAlt - projSinAltCenter * cosAlt * cosAz
 		val xScaled = combinedScale * xRaw
 		val yScaled = -combinedScale * yRaw
+
+		// Flip East/West for 2D mode to match geographic map (East on Right) and fix celestial path
+		val xFinal = if (is2DMode) -xScaled else xScaled
 		val rollRad = Math.toRadians(roll)
 		val sinRoll = sin(rollRad)
 		val cosRoll = cos(rollRad)
-		val xRot = xScaled * cosRoll - yScaled * sinRoll
-		val yRot = xScaled * sinRoll + yScaled * cosRoll
+		val xRot = xFinal * cosRoll - yScaled * sinRoll
+		val yRot = xFinal * sinRoll + yScaled * cosRoll
 		outPoint.x = (projHalfWidth + xRot + panX).toFloat()
 		outPoint.y = (projHalfHeight + yRot + panY).toFloat()
 		return true

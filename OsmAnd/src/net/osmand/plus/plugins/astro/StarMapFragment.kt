@@ -311,7 +311,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	override fun updateCompassValue(value: Float) {
-		if (arModeHelper.isArModeEnabled) return
+		if (arModeHelper.isArModeEnabled || starView.is2DMode) return
 		val lastResetRotationToNorth = app.mapViewTrackingUtilities.lastResetRotationToNorth
 		if (this.lastResetRotationToNorth < lastResetRotationToNorth) {
 			this.lastResetRotationToNorth = lastResetRotationToNorth
@@ -344,8 +344,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 					}
 				}
 				if (starView.is2DMode) {
-					val azimuth = if (location.latitude >= 0) 0.0 else 180.0
-					starView.setCenter(azimuth, 90.0)
+					starView.setCenter(180.0, 90.0)
 				}
 				updateStarMap(); updateStarChart()
 			}
@@ -420,9 +419,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val is2D = !starView.is2DMode
 		starView.is2DMode = is2D
 		if (is2D) {
-			val loc = app.osmandMap.mapView.rotatedTileBox.centerLatLon
-			val azimuth = if (loc.latitude >= 0) 0.0 else 180.0
-			starView.setCenter(azimuth, 90.0)
+			starView.setCenter(180.0, 90.0)
 			if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode(false)
 			manualAzimuth = true
 		}
@@ -485,7 +482,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val tileBox = app.osmandMap.mapView.rotatedTileBox
 		val location = tileBox.centerLatLon
 		starView.setObserverLocation(location.latitude, location.longitude, 0.0)
-		if (updateAzimuth && !arModeHelper.isArModeEnabled) setAzimuth(-tileBox.rotate.toDouble())
+		if (updateAzimuth && !arModeHelper.isArModeEnabled && !starView.is2DMode) {
+			setAzimuth(-tileBox.rotate.toDouble())
+		}
 	}
 
 	private fun updateStarChart() {
