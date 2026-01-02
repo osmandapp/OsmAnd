@@ -309,7 +309,7 @@
     <string name="add_new_rule">Tạo thêm quy tắc mới</string>
     <string name="transport_Routes">Tuyến đường</string>
     <string name="transport_Stop">Dừng</string>
-    <string name="transport_stops">dừng lại</string>
+    <string name="transport_stops">điểm dừng</string>
     <string name="transport_finish_search">Kết thúc tìm kiếm</string>
     <string name="transport_stop_to_go_out">Chọn điểm dừng để xuống</string>
     <string name="transport_to_go_after">khoảng cách trước</string>
@@ -4084,7 +4084,7 @@
     <string name="battery_level">Mức pin</string>
     <string name="set_work">Đặt nơi làm việc</string>
     <string name="set_parking_position">Đặt vị trí đỗ xe</string>
-    <string name="exit_at">Thoát ở</string>
+    <string name="exit_at">Xuống xe ở</string>
     <string name="route_add_start_point">Thêm điểm xuất phát</string>
     <string name="shared_string_split_by">Phân chia theo</string>
     <string name="choose_track_file_to_follow">Chọn cung đường để đi theo</string>
@@ -4119,7 +4119,7 @@
     <string name="route_descr_select_start_point">Chọn điểm xuất phát</string>
     <string name="rendering_attr_highway_class_cycleway_name">Đường xe đạp</string>
     <string name="rendering_attr_highway_class_track_grade5_name">Cấp 5</string>
-    <string name="by_transport_type">Bởi %1$s</string>
+    <string name="by_transport_type">Đi %1$s</string>
     <string name="shared_string_height">Chiều cao</string>
     <string name="osm_live_subscriptions">Gói đăng ký</string>
     <string name="release_5_1">Hỗ trợ mua hàng qua web và đa nền tảng: Đã thêm hỗ trợ mua hàng trên web và giữa các nền tảng khác nhau.\n\nCải tiến cài đặt: Đã chuyển đơn vị nhiệt độ vào phần Cài đặt chung để dễ truy cập hơn.\n\nCập nhật cảm biến BLE: Thêm hiển thị mức pin cho các cảm biến Bluetooth Low Energy (BLE).\n\nCải tiến Điều hướng: Giao diện chọn điểm trong tính năng Điều hướng mới, trực quan hơn.\n\nHiển thị Widget: Tăng khả năng hiển thị cho các widget với viền ngoài rõ nét hơn.\n\nPhân tích độ cao: Bổ sung công cụ phân tích Lên dốc/Xuống dốc.\n\nMở rộng dữ liệu POI: Tăng cường tích hợp Wikipedia &amp; Wikivoyage để cung cấp thêm các điểm quan tâm (POIs).</string>
@@ -4661,4 +4661,6 @@
     <string name="quick_action_show_navigation_finish_dialog">Hiện hộp thoại \'Điều hướng đã hoàn thành\'</string>
     <string name="quick_action_start_stop_navigation">Bắt đầu/dừng điều hướng</string>
     <string name="quick_action_start_stop_navigation_descr">Nút để bắt đầu hoặc kết thúc điều hướng.</string>
+    <string name="app_mode_bus">Xe buýt</string>
+    <string name="stop_routing_confirm">Dừng điều hướng?</string>
 </resources>
