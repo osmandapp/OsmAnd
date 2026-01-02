@@ -87,11 +87,11 @@ class StarView @JvmOverloads constructor(
 		alpha = 255
 	}
 	private val constellationTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = 0xFF5599FF.toInt()
+		color = 0xFFAABBFF.toInt()
 		textSize = 32f
 		textAlign = Paint.Align.CENTER
-		typeface = Typeface.create(Typeface.DEFAULT, Typeface.ITALIC)
-		alpha = 200
+		typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD_ITALIC)
+		setShadowLayer(8f, 0f, 0f, Color.BLACK)
 	}
 	private val pathPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = 0xFF00FFFF.toInt()
@@ -224,6 +224,15 @@ class StarView @JvmOverloads constructor(
 	)
 
 	private val pathCache = mutableMapOf<SkyObject, CelestialPathData>()
+
+	// Constellation Centroids Cache
+	private data class ConstellationCentroid(
+		val ra: Double, val dec: Double,
+		var azimuth: Double = 0.0, var altitude: Double = 0.0,
+		var startAzimuth: Double = 0.0, var startAltitude: Double = 0.0,
+		var targetAzimuth: Double = 0.0, var targetAltitude: Double = 0.0
+	)
+	private val constellationCenters = mutableMapOf<Constellation, ConstellationCentroid?>()
 	private val tempPathPoint = PointF() // Helper for projection inside onDraw
 
 	private var visualAnimator: ValueAnimator? = null
@@ -294,12 +303,66 @@ class StarView @JvmOverloads constructor(
 		pinnedObjects.removeAll(toRemove)
 		pathCache.keys.removeAll(toRemove)
 
+		updateConstellationCenters()
 		invalidate()
 	}
 
 	fun setConstellations(list: List<Constellation>) {
 		constellations = list
+		updateConstellationCenters()
 		invalidate()
+	}
+
+	private fun updateConstellationCenters() {
+		constellationCenters.clear()
+		constellations.forEach { constellation ->
+			var sumX = 0.0
+			var sumY = 0.0
+			var sumZ = 0.0
+			var count = 0
+
+			val uniqueStars = mutableSetOf<Int>()
+			constellation.lines.forEach { (id1, id2) -> uniqueStars.add(id1); uniqueStars.add(id2) }
+
+			uniqueStars.forEach { id ->
+				val star = skyObjectMap[id]
+				if (star != null) {
+					// Convert RA/Dec to Cartesian
+					val raRad = Math.toRadians(star.ra * 15.0) // RA is in hours, multiply by 15 to get degrees
+					val decRad = Math.toRadians(star.dec)
+					val x = cos(decRad) * cos(raRad)
+					val y = cos(decRad) * sin(raRad)
+					val z = sin(decRad)
+
+					sumX += x
+					sumY += y
+					sumZ += z
+					count++
+				}
+			}
+
+			if (count > 0) {
+				val avgX = sumX / count
+				val avgY = sumY / count
+				val avgZ = sumZ / count
+
+				// Convert back to RA/Dec
+				val hyp = sqrt(avgX * avgX + avgY * avgY)
+				val decRad = atan2(avgZ, hyp)
+				var raRad = atan2(avgY, avgX)
+				if (raRad < 0) raRad += 2 * PI
+
+				val ra = Math.toDegrees(raRad) / 15.0
+				val dec = Math.toDegrees(decRad)
+				val center = ConstellationCentroid(ra, dec)
+				val hor = horizon(currentTime, observer, ra, dec, Refraction.Normal)
+				center.azimuth = hor.azimuth
+				center.altitude = hor.altitude
+				constellationCenters[constellation] = center
+			} else {
+				constellationCenters[constellation] = null
+			}
+		}
 	}
 
 	fun updateVisibility() {
@@ -338,6 +401,10 @@ class StarView @JvmOverloads constructor(
 				it.startAzimuth = it.azimuth
 				it.startAltitude = it.altitude
 			}
+			constellationCenters.values.filterNotNull().forEach {
+				it.startAzimuth = it.azimuth
+				it.startAltitude = it.altitude
+			}
 			recalculatePositions(time, updateTargets = true)
 			currentTime = time
 			visualAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
@@ -348,6 +415,10 @@ class StarView @JvmOverloads constructor(
 					skyObjects.forEach { obj ->
 						obj.azimuth = interpolateAngle(obj.startAzimuth, obj.targetAzimuth, fraction)
 						obj.altitude = obj.startAltitude + (obj.targetAltitude - obj.startAltitude) * fraction
+					}
+					constellationCenters.values.filterNotNull().forEach { center ->
+						center.azimuth = interpolateAngle(center.startAzimuth, center.targetAzimuth, fraction)
+						center.altitude = center.startAltitude + (center.targetAltitude - center.startAltitude) * fraction
 					}
 					invalidate()
 				}
@@ -364,6 +435,10 @@ class StarView @JvmOverloads constructor(
 			skyObjects.forEach {
 				it.azimuth = it.targetAzimuth
 				it.altitude = it.targetAltitude
+			}
+			constellationCenters.values.filterNotNull().forEach { center ->
+				center.azimuth = center.targetAzimuth
+				center.altitude = center.targetAltitude
 			}
 			invalidate()
 			onAnimationFinished?.invoke()
@@ -410,6 +485,20 @@ class StarView @JvmOverloads constructor(
 				obj.altitude = hor.altitude
 				obj.targetAzimuth = hor.azimuth
 				obj.targetAltitude = hor.altitude
+			}
+		}
+
+		// Update Constellation Centroids positions
+		constellationCenters.values.filterNotNull().forEach { center ->
+			val hor = horizon(time, observer, center.ra, center.dec, Refraction.Normal)
+			if (updateTargets) {
+				center.targetAzimuth = hor.azimuth
+				center.targetAltitude = hor.altitude
+			} else {
+				center.azimuth = hor.azimuth
+				center.altitude = hor.altitude
+				center.targetAzimuth = hor.azimuth
+				center.targetAltitude = hor.altitude
 			}
 		}
 	}
@@ -516,11 +605,12 @@ class StarView @JvmOverloads constructor(
 		super.onDraw(canvas)
 		updateProjectionCache()
 		canvas.drawColor(Color.BLACK)
+		occupiedRects.clear()
 
 		if (showEquatorialGrid) drawEquatorialGrid(canvas)
 		if (showAzimuthalGrid) drawAzimuthalGrid(canvas)
 		if (showEclipticLine) drawEclipticLine(canvas)
-		if (showConstellations) drawConstellations(canvas)
+		if (showConstellations) drawConstellationLines(canvas)
 
 		drawHorizon(canvas)
 
@@ -535,12 +625,13 @@ class StarView @JvmOverloads constructor(
 			}
 		}
 
-		occupiedRects.clear()
 		skyObjects.forEach { obj ->
 			if (isObjectVisibleInSettings(obj)) {
 				drawSkyObject(canvas, obj)
 			}
 		}
+
+		if (showConstellations) drawConstellationLabels(canvas)
 
 		// Draw Highlights
 
@@ -930,7 +1021,7 @@ class StarView @JvmOverloads constructor(
 		canvas.drawPath(gridPath, eclipticPaint)
 	}
 
-	private fun drawConstellations(canvas: Canvas) {
+	private fun drawConstellationLines(canvas: Canvas) {
 		constellations.forEach { constellation ->
 			gridPath.reset()
 			val isSelected = (constellation == selectedConstellation)
@@ -952,34 +1043,31 @@ class StarView @JvmOverloads constructor(
 				}
 			}
 			canvas.drawPath(gridPath, linePaint)
+		}
+	}
 
-			var avgX = 0f
-			var avgY = 0f
-			var count = 0
-			// Calculate center again for label
-			val uniqueStars = mutableSetOf<Int>()
-			constellation.lines.forEach { (id1, id2) -> uniqueStars.add(id1); uniqueStars.add(id2) }
+	private fun drawConstellationLabels(canvas: Canvas) {
+		constellations.forEach { constellation ->
+			val center = constellationCenters[constellation] ?: return@forEach
+			
+			if (skyToScreen(center.azimuth, center.altitude, tempPoint)) {
+				val cx = tempPoint.x
+				val cy = tempPoint.y
 
-			uniqueStars.forEach { id ->
-				val star = skyObjectMap[id]
-				if (star != null && skyToScreen(star.azimuth, star.altitude, tempPoint)) {
-					avgX += tempPoint.x; avgY += tempPoint.y; count++
-				}
-			}
-			if (count > 0) {
-				val cx = avgX / count
-				val cy = avgY / count
-
+				val isSelected = (constellation == selectedConstellation)
 				if (isSelected) {
 					constellationTextPaint.color = 0xFFFFD700.toInt()
 					constellationTextPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-					constellationTextPaint.alpha = 255
 				} else {
-					constellationTextPaint.color = 0xFF5599FF.toInt()
-					constellationTextPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.ITALIC)
-					constellationTextPaint.alpha = 200
+					constellationTextPaint.color = 0xFFAABBFF.toInt()
+					constellationTextPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD_ITALIC)
 				}
-				canvas.drawText(constellation.name, cx, cy, constellationTextPaint)
+				
+				val text = constellation.name
+				val textSize = constellationTextPaint.textSize
+				
+				// Draw stable label
+				canvas.drawText(text, cx, cy + textSize, constellationTextPaint)
 			}
 		}
 	}
@@ -1015,11 +1103,12 @@ class StarView @JvmOverloads constructor(
 			val xText = tempPoint.x + radius + 5
 			val yText = tempPoint.y
 
+			val threshold = 5f
 			val textRect = RectF(
-				xText,
-				yText - labelTextSize,
-				xText + textWidth,
-				yText + (labelTextSize * 0.3f) // Approximation for descent
+				xText - threshold,
+				yText - labelTextSize - threshold,
+				xText + textWidth + threshold,
+				yText + (labelTextSize * 0.3f) + threshold
 			)
 
 			var textOverlaps = false
