@@ -559,9 +559,8 @@ class StarView @JvmOverloads constructor(
 		}
 
 		// Calculate new path data
-		val isMoon = obj.type == SkyObject.Type.MOON
 		val startHours = -12
-		val endHours = if (isMoon) 13 else 12
+		val endHours = 13
 		val stepMinutes = 10
 		val totalMinutes = (endHours - startHours) * 60
 		val steps = totalMinutes / stepMinutes + 1
@@ -679,12 +678,15 @@ class StarView @JvmOverloads constructor(
 		val pathData = getOrUpdatePathData(obj) ?: return
 
 		if (pathData.count > 1) {
+			val isMoon = obj.type == SkyObject.Type.MOON
+			val drawCount = if (isMoon) pathData.count else min(pathData.count, 145)
+
 			celestialPath.reset()
 			var isPenDown = false
 			val tempPt = PointF()
 			val prevPt = PointF()
 
-			for (i in 0 until pathData.count) {
+			for (i in 0 until drawCount) {
 				val az = pathData.azimuths[i]
 				val alt = pathData.altitudes[i]
 
@@ -717,24 +719,32 @@ class StarView @JvmOverloads constructor(
 			// Draw Labels and Arrows
 			val tempNext = PointF()
 			val tempPrev = PointF()
+			val drawnLabels = mutableSetOf<String>()
 
-			for (i in 1 until pathData.count - 1) {
+			for (i in 0 until drawCount) {
 				val label = pathData.labels[i] ?: continue
+				if (!drawnLabels.add(label)) continue
 
 				val az = pathData.azimuths[i]
 				val alt = pathData.altitudes[i]
 				if (!skyToScreen(az, alt, tempPt)) continue
 
 				// Need neighbors for angle
-				val azPrev = pathData.azimuths[i-1]
-				val altPrev = pathData.altitudes[i-1]
-				val azNext = pathData.azimuths[i+1]
-				val altNext = pathData.altitudes[i+1]
+				val iPrev = if (i > 0) i - 1 else i
+				val iNext = if (i < drawCount - 1) i + 1 else i
+				if (iPrev == iNext) continue
+
+				val azPrev = pathData.azimuths[iPrev]
+				val altPrev = pathData.altitudes[iPrev]
+				val azNext = pathData.azimuths[iNext]
+				val altNext = pathData.altitudes[iNext]
 
 				if (!skyToScreen(azPrev, altPrev, tempPrev) || !skyToScreen(azNext, altNext, tempNext)) continue
 
-				if (hypot(tempPt.x - tempPrev.x, tempPt.y - tempPrev.y) > 200) continue
-				if (hypot(tempNext.x - tempPt.x, tempNext.y - tempPt.y) > 200) continue
+				val distP = hypot(tempPt.x - tempPrev.x, tempPt.y - tempPrev.y)
+				val distN = hypot(tempNext.x - tempPt.x, tempNext.y - tempPt.y)
+				if (i > 0 && distP > 200) continue
+				if (i < drawCount - 1 && distN > 200) continue
 
 				val dx = tempNext.x - tempPrev.x
 				val dy = tempNext.y - tempPrev.y
