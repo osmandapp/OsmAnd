@@ -2088,19 +2088,27 @@ public class SearchCoreFactory {
 		}
 
 		private boolean parseUrl(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
-			String text = phrase.getUnknownSearchPhrase();
-			GeoParsedPoint pnt = GeoPointParserUtil.parse(text);
-			if (pnt == null && httpRedirectRequester != null && GeoPointParserUtil.isGooGlUrl(text)) {
-				text = httpRedirectRequester.apply(text);
-				if (text != null) {
-					pnt = GeoPointParserUtil.parse(text);
+			String lines = phrase.getUnknownSearchPhrase().replace("\r\n", "\n");
+
+			GeoParsedPoint pnt = null;
+			for (String text : lines.split("\n")) {
+				pnt = GeoPointParserUtil.parse(text);
+				if (pnt == null && httpRedirectRequester != null && GeoPointParserUtil.isGooGlUrl(text)) {
+					text = httpRedirectRequester.apply(text);
+					if (text != null) {
+						pnt = GeoPointParserUtil.parse(text);
+					}
+				}
+				if (pnt != null) {
+					break;
 				}
 			}
+
 			if (pnt != null && pnt.isGeoPoint() && phrase.isSearchTypeAllowed(ObjectType.LOCATION)) {
 				SearchResult sp = new SearchResult(phrase);
 				sp.priority = 0;
 				sp.object = pnt;
-				sp.wordsSpan = text;
+				sp.wordsSpan = lines;
 				sp.location = new LatLon(pnt.getLatitude(), pnt.getLongitude());
 				sp.localeName = formatLatLon(pnt.getLatitude()) +", " + formatLatLon(pnt.getLongitude());
 				if (pnt.getZoom() > 0) {
