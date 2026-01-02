@@ -4415,7 +4415,7 @@
     <string name="restart_now">Reiniciar ahora</string>
     <string name="map_rendering_engine_v1">Versión 1</string>
     <string name="map_rendering_engine_v2">Versión 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">La versión 1, era la predefinida antes de OsmAnd 4.3 y sigue siendo preferible para dispositivos más antiguos. \nLa versión 2 (OpenGL) es un motor de renderizado de mapas más potente, que también ofrece una vista 2.5D.</string>
+    <string name="map_rendering_engine_descr">La versión 1, fue la predefinida antes de OsmAnd 4.3 y se adapta a dispositivos antiguos.\n\nLa versión 2 (OpenGL) es más avanzada y agrega características como la vista 3D.</string>
     <string name="map_rendering_engine">Motor de renderizado del mapa</string>
     <string name="show_borders_of_downloaded_maps">Colorear mapas descargados</string>
     <string name="show_map_symbols">Mostrar símbolos del mapa</string>

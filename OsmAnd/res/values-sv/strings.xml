@@ -2751,7 +2751,7 @@
     <string name="edit_profile_setup_map_subtitle">Välj kartalternativ för profilen</string>
     <string name="edit_profile_screen_options_subtitle">Välj skärmalternativ för profilen</string>
     <string name="edit_profile_nav_settings_subtitle">Välj navigeringsinställningar för profilen</string>
-    <string name="routing_attr_max_num_changes_description">Ange max gräns för antal byten</string>
+    <string name="routing_attr_max_num_changes_description">Ange övre gränsen för antal byten</string>
     <string name="routing_attr_max_num_changes_name">Maximalt antal transportbyten</string>
     <string name="turn_screen_on_router">Vakna vid kurva</string>
     <string name="turn_screen_on_time_descr">Justera hur länge skärmen ska vara på.</string>
@@ -4066,7 +4066,7 @@
     <string name="air_pressure_widget_desc">Visar lufttrycket för aktuellt centrum i kartan.</string>
     <string name="temperature_widget_desc">Visar temperatur för aktuellt centrum i kartan.</string>
     <string name="rendering_engine_failed">OsmAnds kartrendering har nyligen kraschat.</string>
-    <string name="map_rendering_engine_descr">Rendering i version 1 var standard före OsmAnd 4.3 och är fortfarande att föredra för äldre enheter.\nVersion 2 (OpenGL) är en snabbare motor för kartrendering och har även 2,5D-visning.</string>
+    <string name="map_rendering_engine_descr">Version 1 var standard före OsmAnd 4.3 och är lämpligt för äldre enheter.\n\nVersion 2 (OpenGL) är mer avancerad och har även ytterligare funktioner, såsom 3D-visning.</string>
     <string name="favorites_backup">Säkerhetskopiering av favoriter</string>
     <string name="ant_go_to_store">Gå till butik</string>
     <string name="map_widget_ant_bicycle_dist_desc">Visar längden på tillryggalagd sträcka</string>
@@ -5802,8 +5802,8 @@
     <string name="map_orientations">Kartor orienteringar</string>
     <string name="average_slope">Genomsnittlig lutning</string>
     <string name="write_location_provider">Skriv platsleverantör</string>
-    <string name="map_orientation_portrait_inverted">Porträtt (inverterat)</string>
-    <string name="map_orientation_landscape_inverted">Landskap (inverterat)</string>
+    <string name="map_orientation_portrait_inverted">Stående (inverterat)</string>
+    <string name="map_orientation_landscape_inverted">Liggande (inverterat)</string>
     <string name="reverse_mode_calculate_route">Beräkna rutten</string>
     <string name="reverse_mode_calculate_route_desc">Beräkna en ny optimerad rutt till början.</string>
     <string name="reverse_mode_original_track">Original spår</string>
