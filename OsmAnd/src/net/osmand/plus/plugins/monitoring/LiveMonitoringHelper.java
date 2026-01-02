@@ -73,7 +73,7 @@ public class LiveMonitoringHelper {
 	private boolean shouldRecordLocation(@Nullable Location location, long locationTime) {
 		boolean record = false;
 		if (location != null && isLiveMonitoringEnabled()
-				&& SimulationProvider.isNotSimulatedLocation(location)
+				&& SimulationProvider.isLocationForRecording(location)
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			OsmandSettings settings = app.getSettings();
 			if (locationTime - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {
@@ -128,7 +128,7 @@ public class LiveMonitoringHelper {
 
 
 	private static class LiveMonitoringData {
-		public static final int NUMBER_OF_LIVE_DATA_FIELDS = 14;    //change the value after each addition\deletion of data field
+		public static final int NUMBER_OF_LIVE_DATA_FIELDS = 13;    //change the value after each addition\deletion of data field
 
 		private final double lat;
 		private final double lon;
@@ -295,9 +295,6 @@ public class LiveMonitoringHelper {
 				case 12:
 					// accesToken
 					prm.add(app.getSettings().BACKUP_ACCESS_TOKEN.get());
-					break;
-				case 13:
-					prm.add("test-system"); // fix hardcoded
 					break;
 				default:
 					break;
