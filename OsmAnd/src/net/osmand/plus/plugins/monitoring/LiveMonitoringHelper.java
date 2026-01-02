@@ -200,7 +200,7 @@ public class LiveMonitoringHelper {
 				baseUrl = "https://test.osmand.net/userdata/translation/msg?" +
 						"lat={0}&lon={1}&lat={0}&timestamp={2}&"+
 						"hdop={3}&altitude={4}&speed={5}&"+
-						"deviceid={11}&accessToken={12}&translationId={13}";
+						"deviceid={11}&accessToken={12}";
 			}
 			urlStr = getLiveUrl(baseUrl, data);
 		} catch (IllegalArgumentException e) {
