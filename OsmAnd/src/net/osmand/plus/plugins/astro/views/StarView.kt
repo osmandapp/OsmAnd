@@ -1129,6 +1129,17 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
+	var is2DMode: Boolean = false
+		set(value) {
+			field = value
+			if (!value) {
+				panX = 0f; panY = 0f
+			}
+			invalidate()
+		}
+	private var panX: Float = 0f
+	private var panY: Float = 0f
+
 	private fun updateProjectionCache() {
 		val alt0Rad = Math.toRadians(altitudeCenter)
 		projSinAltCenter = sin(alt0Rad)
@@ -1159,8 +1170,8 @@ class StarView @JvmOverloads constructor(
 		val cosRoll = cos(rollRad)
 		val xRot = xScaled * cosRoll - yScaled * sinRoll
 		val yRot = xScaled * sinRoll + yScaled * cosRoll
-		outPoint.x = (projHalfWidth + xRot).toFloat()
-		outPoint.y = (projHalfHeight + yRot).toFloat()
+		outPoint.x = (projHalfWidth + xRot + panX).toFloat()
+		outPoint.y = (projHalfHeight + yRot + panY).toFloat()
 		return true
 	}
 
@@ -1176,13 +1187,18 @@ class StarView @JvmOverloads constructor(
 				val dy = event.y - lastTouchY
 				if (sqrt(dx * dx + dy * dy) > 10f) {
 					isPanning = true
-					val scale = viewAngle / width
-					azimuthCenter -= dx * scale
-					altitudeCenter += dy * scale
-					altitudeCenter = max(-90.0, min(90.0, altitudeCenter))
-					if (azimuthCenter < 0) azimuthCenter += 360
-					if (azimuthCenter >= 360) azimuthCenter -= 360
-					onAzimuthManualChangeListener?.invoke(azimuthCenter)
+					if (is2DMode) {
+						panX += dx
+						panY += dy
+					} else {
+						val scale = viewAngle / width
+						azimuthCenter -= dx * scale
+						altitudeCenter += dy * scale
+						altitudeCenter = max(-90.0, min(90.0, altitudeCenter))
+						if (azimuthCenter < 0) azimuthCenter += 360
+						if (azimuthCenter >= 360) azimuthCenter -= 360
+						onAzimuthManualChangeListener?.invoke(azimuthCenter)
+					}
 					lastTouchX = event.x; lastTouchY = event.y
 					invalidate()
 				}
@@ -1314,7 +1330,8 @@ class StarView @JvmOverloads constructor(
 
 	private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
 		override fun onScale(detector: ScaleGestureDetector): Boolean {
-			val newAngle = max(10.0, min(150.0, viewAngle / detector.scaleFactor))
+			val maxAngle = if (is2DMode) 190.0 else 150.0
+			val newAngle = max(10.0, min(maxAngle, viewAngle / detector.scaleFactor))
 			if (abs(viewAngle - newAngle) > 0.001) {
 				viewAngle = newAngle
 				onViewAngleChangeListener?.invoke(viewAngle)

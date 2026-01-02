@@ -80,6 +80,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var transparencySlider: SeekBar
 	private lateinit var sliderContainer: View
 	private lateinit var resetFovButton: View
+	private lateinit var mode2dButton: ImageButton
 
 	private lateinit var starChartsView: View
 	private lateinit var starVisiblityView: StarVisiblityChartView
@@ -150,6 +151,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		transparencySlider = view.findViewById(R.id.transparency_slider)
 		sliderContainer = view.findViewById(R.id.slider_container)
 		resetFovButton = view.findViewById(R.id.reset_fov_button)
+		mode2dButton = view.findViewById(R.id.mode2d_button)
 
 		arModeHelper = StarMapARModeHelper(requireContext(), starView) { enabled ->
 			updateArModeUI(enabled)
@@ -226,6 +228,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		view.findViewById<ImageButton>(R.id.settings_button).apply {
 			setOnClickListener { AstroUtils.showStarMapOptionsDialog(context, starView, swSettings) }
 		}
+		mode2dButton.setOnClickListener { toggle2DMode() }
+		update2DModeIcon()
 
 		resetTimeButton.setOnClickListener {
 			starMapViewModel.resetTime(); starChartViewModel.resetTime()
@@ -248,6 +252,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showMoon = config.showMoon
 			starView.showPlanets = config.showPlanets
 		}
+		starView.is2DMode = swSettings.getCommonConfig().is2DMode
 		starView.setConstellations(AstroDataProvider.getConstellations(view.context))
 
 		updateStarMap(true)
@@ -338,6 +343,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 						}
 					}
 				}
+				if (starView.is2DMode) {
+					val azimuth = if (location.latitude >= 0) 0.0 else 180.0
+					starView.setCenter(azimuth, 90.0)
+				}
 				updateStarMap(); updateStarChart()
 			}
 		} else if (!manualAzimuth && !arModeHelper.isArModeEnabled) {
@@ -388,6 +397,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val config = StarWatcherSettings.CommonConfig(
 			showStarMap = starView.isVisible,
 			showStarChart = starChartsView.isVisible,
+			is2DMode = starView.is2DMode,
 		)
 		swSettings.setCommonConfig(config)
 	}
@@ -404,6 +414,25 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		toolbar.setNavigationContentDescription(R.string.shared_string_close)
 		toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
 		toolbar.setBackgroundColor(app.getColor(if (nightMode) R.color.activity_background_color_dark else R.color.list_background_color_light))
+	}
+
+	private fun toggle2DMode() {
+		val is2D = !starView.is2DMode
+		starView.is2DMode = is2D
+		if (is2D) {
+			val loc = app.osmandMap.mapView.rotatedTileBox.centerLatLon
+			val azimuth = if (loc.latitude >= 0) 0.0 else 180.0
+			starView.setCenter(azimuth, 90.0)
+			if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode(false)
+			manualAzimuth = true
+		}
+		update2DModeIcon()
+		saveCommonSettings()
+	}
+
+	private fun update2DModeIcon() {
+		val iconId = if (starView.is2DMode) R.drawable.ic_action_3d else R.drawable.ic_action_2d
+		mode2dButton.setImageDrawable(getIcon(iconId, ColorUtilities.getPrimaryIconColorId(nightMode)))
 	}
 
 	private fun setupObservers() {

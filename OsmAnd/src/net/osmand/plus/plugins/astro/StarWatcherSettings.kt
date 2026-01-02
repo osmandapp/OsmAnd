@@ -11,6 +11,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		private const val KEY_COMMON = "common"
 		private const val KEY_SHOW_STAR_MAP = "showStarMap"
 		private const val KEY_SHOW_STAR_CHART = "showStarChart"
+		private const val KEY_IS_2D_MODE = "is2DMode"
 
 		private const val KEY_STAR_MAP = "star_map"
 		private const val KEY_STAR_CHART = "star_chart"
@@ -46,6 +47,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 	data class CommonConfig(
 		val showStarMap: Boolean,
 		val showStarChart: Boolean,
+		val is2DMode: Boolean,
 	)
 
 	data class StarMapConfig(
@@ -119,8 +121,9 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 
 		val showStarMap = settings?.optBoolean(KEY_SHOW_STAR_MAP, true) ?: true
 		val showStarChart = settings?.optBoolean(KEY_SHOW_STAR_CHART, false) ?: false
+		val is2DMode = settings?.optBoolean(KEY_IS_2D_MODE, false) ?: false
 
-		return CommonConfig(showStarMap, showStarChart)
+		return CommonConfig(showStarMap, showStarChart, is2DMode)
 	}
 
 	fun setCommonConfig(config: CommonConfig) {
@@ -129,6 +132,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 
 		settings.put(KEY_SHOW_STAR_MAP, config.showStarMap)
 		settings.put(KEY_SHOW_STAR_CHART, config.showStarChart)
+		settings.put(KEY_IS_2D_MODE, config.is2DMode)
 
 		root.put(KEY_COMMON, settings)
 		setSettingsJson(root)

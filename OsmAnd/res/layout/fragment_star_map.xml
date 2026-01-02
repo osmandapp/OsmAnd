@@ -32,7 +32,7 @@
 					android:layout_width="48dp"
 					android:layout_height="48dp"
 					android:layout_gravity="end"
-					android:background="?attr/selectableItemBackgroundBorderless"
+					android:background="?android:attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/visible_layers_and_objects"
 					app:srcCompat="@drawable/ic_action_settings"
 					app:tint="@color/icon_color_default_light" />
@@ -42,9 +42,19 @@
 					android:layout_width="48dp"
 					android:layout_height="48dp"
 					android:layout_gravity="end"
-					android:background="?attr/selectableItemBackgroundBorderless"
+					android:background="?android:attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/star_charts_name"
 					app:srcCompat="@drawable/ic_action_layers"
+					app:tint="@color/icon_color_default_light" />
+
+				<ImageButton
+					android:id="@+id/mode2d_button"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:layout_gravity="end"
+					android:background="?android:attr/selectableItemBackgroundBorderless"
+					android:contentDescription="2D Mode"
+					app:srcCompat="@drawable/ic_action_2d"
 					app:tint="@color/icon_color_default_light" />
 
 				<ImageButton
@@ -52,7 +62,7 @@
 					android:layout_width="48dp"
 					android:layout_height="48dp"
 					android:layout_gravity="end"
-					android:background="?attr/selectableItemBackgroundBorderless"
+					android:background="?android:attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/star_map"
 					app:srcCompat="@drawable/ic_action_world_globe"
 					app:tint="@color/icon_color_default_light" />
