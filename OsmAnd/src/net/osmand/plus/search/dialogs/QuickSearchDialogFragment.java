@@ -1710,8 +1710,18 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				if (isDebugMode) {
 					LOG.info("UI >> API results shown <" + phrase + "> API=<" + searchApi + "> Results=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 				}
+				displayToastIfAnyImpreciseResults(apiResults);
 			}
 		});
+	}
+
+	private void displayToastIfAnyImpreciseResults(List<SearchResult> apiResults) {
+		for (SearchResult apiResult : apiResults) {
+			if (apiResult.hasImpreciseCoordinates()) {
+				app.showToastMessage(R.string.imprecise_coordinates);
+				break;
+			}
+		}
 	}
 
 	private void showRegionResults(BinaryMapIndexReader region,
