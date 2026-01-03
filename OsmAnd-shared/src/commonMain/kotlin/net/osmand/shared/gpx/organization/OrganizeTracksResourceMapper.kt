@@ -2,7 +2,7 @@ package net.osmand.shared.gpx.organization
 
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
-abstract class OrganizeByResourceMapper {
+abstract class OrganizeTracksResourceMapper {
 
 	private val nameCache = mutableMapOf<String, String>()
 	private val iconNameCache = mutableMapOf<String, String>()

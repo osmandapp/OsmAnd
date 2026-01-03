@@ -1,7 +1,7 @@
 package net.osmand.shared.gpx.data
 
 import net.osmand.shared.gpx.TrackItem
-import net.osmand.shared.gpx.organization.OrganizeByResourceMapper
+import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 class OrganizedTracksGroup(
@@ -10,7 +10,7 @@ class OrganizedTracksGroup(
     private val representedValue: Any,
     private val trackItems: List<TrackItem>,
     private val relatedSmartFolder: SmartFolder,
-    private val resourcesMapper: OrganizeByResourceMapper
+    private val resourcesMapper: OrganizeTracksResourceMapper
 ) : TracksGroup {
 
     override fun getId() = id

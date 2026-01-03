@@ -2,6 +2,7 @@ package net.osmand.shared.gpx.organization.enums
 
 import net.osmand.shared.data.Limits
 import net.osmand.shared.gpx.filters.TrackFilterType
+import net.osmand.shared.gpx.organization.strategy.OrganizeByActivityStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByRangeStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByStrategy
 import net.osmand.shared.util.Localization
@@ -19,7 +20,9 @@ enum class OrganizeByType(
 		iconResId = "ic_action_activity",
 		nameResId = "shared_string_activity",
 		filterType = TrackFilterType.ACTIVITY,
-		category = OrganizeByCategory.GENERAL),
+		category = OrganizeByCategory.GENERAL,
+		strategy = OrganizeByActivityStrategy
+	),
 	DURATION(
 		iconResId = "ic_action_time_span_75",
 		nameResId = "duration",
@@ -34,38 +37,44 @@ enum class OrganizeByType(
 		filterType = TrackFilterType.TIME_IN_MOTION,
 		category = OrganizeByCategory.GENERAL,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	LENGTH(
 		iconResId = "ic_action_length",
 		nameResId = "shared_string_length",
 		filterType = TrackFilterType.LENGTH,
 		category = OrganizeByCategory.GENERAL,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 
 	// Date & Time
 	YEAR_OF_CREATION(
 		iconResId = "ic_action_calendar_month",
 		nameResId = "year_of_creation",
 		filterType = TrackFilterType.DATE_CREATION,
-		category = OrganizeByCategory.DATE_TIME),
+		category = OrganizeByCategory.DATE_TIME
+	),
 	MONTH_AND_YEAR(
 		iconResId = "ic_action_calendar_month",
 		nameResId = "month_year_creation",
 		filterType = TrackFilterType.DATE_CREATION,
-		category = OrganizeByCategory.DATE_TIME),
+		category = OrganizeByCategory.DATE_TIME
+	),
 
 	// Location
 	NEAREST_CITY(
 		iconResId = "ic_action_street_name",
 		nameResId = "nearest_city",
 		filterType = TrackFilterType.CITY,
-		category = OrganizeByCategory.LOCATION),
+		category = OrganizeByCategory.LOCATION
+	),
 	COUNTRY(
 		iconResId = "ic_world_globe_dark",
 		nameResId = "country",
 		filterType = TrackFilterType.CITY,
-		category = OrganizeByCategory.LOCATION),
+		category = OrganizeByCategory.LOCATION
+	),
 
 	// Speed
 	MAX_SPEED(
@@ -74,14 +83,16 @@ enum class OrganizeByType(
 		filterType = TrackFilterType.MAX_SPEED,
 		category = OrganizeByCategory.SPEED,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	AVG_SPEED(
 		iconResId = "ic_action_speed_average",
 		nameResId = "avg_speed",
 		filterType = TrackFilterType.AVERAGE_SPEED,
 		category = OrganizeByCategory.SPEED,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 
 	// Altitude and elevation
 	MAX_ALTITUDE(
@@ -90,28 +101,32 @@ enum class OrganizeByType(
 		filterType = TrackFilterType.MAX_ALTITUDE,
 		category = OrganizeByCategory.ALTITUDE_ELEVATION,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	AVG_ALTITUDE(
 		iconResId = "ic_action_altitude_average",
 		nameResId = "shared_string_avg_altitude",
 		filterType = TrackFilterType.AVERAGE_ALTITUDE,
 		category = OrganizeByCategory.ALTITUDE_ELEVATION,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	UPHILL(
 		iconResId = "ic_action_altitude_ascent",
 		nameResId = "shared_string_uphill",
 		filterType = TrackFilterType.UPHILL,
 		category = OrganizeByCategory.ALTITUDE_ELEVATION,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	DOWNHILL(
 		iconResId = "ic_action_altitude_descent",
 		nameResId = "shared_string_downhill",
 		filterType = TrackFilterType.DOWNHILL,
 		category = OrganizeByCategory.ALTITUDE_ELEVATION,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 
 	// Sensors
 	SENSOR_SPEED_MAX(
@@ -120,74 +135,82 @@ enum class OrganizeByType(
 		filterType = TrackFilterType.MAX_SENSOR_SPEED,
 		category = OrganizeByCategory.SENSORS,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	SENSOR_SPEED_AVG(
 		iconResId = "ic_action_sensor_speed_outlined",
 		nameResId = "avg_sensor_speed",
 		filterType = TrackFilterType.AVERAGE_SENSOR_SPEED,
 		category = OrganizeByCategory.SENSORS,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	HEART_RATE_MAX(
 		iconResId = "ic_action_sensor_heart_rate_outlined",
 		nameResId = "max_sensor_heartrate",
 		filterType = TrackFilterType.MAX_SENSOR_HEART_RATE,
 		category = OrganizeByCategory.SENSORS,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	HEART_RATE_AVG(
 		iconResId = "ic_action_sensor_heart_rate_outlined",
 		nameResId = "avg_sensor_heartrate",
 		filterType = TrackFilterType.AVERAGE_SENSOR_HEART_RATE,
 		category = OrganizeByCategory.SENSORS,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	CADENCE_MAX(
 		iconResId = "ic_action_sensor_cadence_outlined",
 		nameResId = "max_sensor_cadence",
 		filterType = TrackFilterType.MAX_SENSOR_CADENCE,
 		category = OrganizeByCategory.SENSORS,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	CADENCE_AVG(
 		iconResId = "ic_action_sensor_cadence_outlined",
 		nameResId = "avg_sensor_cadence",
 		filterType = TrackFilterType.AVERAGE_SENSOR_CADENCE,
 		category = OrganizeByCategory.SENSORS,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	POWER_MAX(
 		iconResId = "ic_action_sensor_bicycle_power_outlined",
 		nameResId = "max_sensor_bycicle_power",
 		filterType = TrackFilterType.MAX_SENSOR_BICYCLE_POWER,
 		category = OrganizeByCategory.SENSORS,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	POWER_AVG(
 		iconResId = "ic_action_sensor_bicycle_power_outlined",
 		nameResId = "avg_sensor_bycicle_power",
 		filterType = TrackFilterType.AVERAGE_SENSOR_BICYCLE_POWER,
 		category = OrganizeByCategory.SENSORS,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	TEMP_MAX(
 		iconResId = "ic_action_sensor_temperature_outlined",
 		nameResId = "max_sensor_temperature",
 		filterType = TrackFilterType.MAX_SENSOR_TEMPERATURE,
 		category = OrganizeByCategory.SENSORS,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy),
+		strategy = OrganizeByRangeStrategy
+	),
 	TEMP_AVG(
 		iconResId = "ic_action_sensor_temperature_outlined",
 		nameResId = "avg_sensor_temperature",
 		filterType = TrackFilterType.AVERAGE_SENSOR_TEMPERATURE,
 		category = OrganizeByCategory.SENSORS,
 		stepRange = Limits(0, 180),
-		strategy = OrganizeByRangeStrategy);
+		strategy = OrganizeByRangeStrategy
+	);
 
 	fun getName() = Localization.getString(nameResId)
 
 	fun getIconName() = iconResId
-
-	fun isRangeRelated(): Boolean = stepRange != null
 }

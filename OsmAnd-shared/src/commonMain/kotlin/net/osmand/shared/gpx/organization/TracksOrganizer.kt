@@ -12,7 +12,7 @@ class TracksOrganizer(val parent: SmartFolder) {
 
 	fun getOrganizedTrackItems(
 		rules: OrganizeByRules,
-		resourceMapper: OrganizeByResourceMapper
+		resourceMapper: OrganizeTracksResourceMapper
 	): List<OrganizedTracksGroup>? {
 		var strategyChanged = false
 

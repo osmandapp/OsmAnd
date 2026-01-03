@@ -1,7 +1,7 @@
 package net.osmand.plus.track.helpers
 
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.track.AndroidOrganizeByResourceMapper
+import net.osmand.plus.track.AndroidOrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.OrganizeByRules
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
@@ -9,8 +9,8 @@ import net.osmand.shared.gpx.organization.enums.OrganizeByType
 class OrganizeTracksHelper(val app: OsmandApplication) {
 
 	init {
-		// TODO: use better approach
-		AndroidOrganizeByResourceMapper.app = app
+		// TODO: use better approach to initialize mapper
+		AndroidOrganizeTracksResourceMapper.app = app
 	}
 
 	private val typeCache = mutableMapOf<String, OrganizeByType>()

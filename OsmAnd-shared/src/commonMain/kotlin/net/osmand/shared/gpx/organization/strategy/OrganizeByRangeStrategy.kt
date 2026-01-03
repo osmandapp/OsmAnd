@@ -4,7 +4,7 @@ import net.osmand.shared.data.Limits
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.SmartFolder
-import net.osmand.shared.gpx.organization.OrganizeByResourceMapper
+import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.OrganizeByRules
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import kotlin.math.floor
@@ -14,7 +14,7 @@ object OrganizeByRangeStrategy: OrganizeByStrategy<Limits> {
 	override fun apply(
 		originalGroup: SmartFolder,
 		rules: OrganizeByRules,
-		resourcesMapper: OrganizeByResourceMapper
+		resourcesMapper: OrganizeTracksResourceMapper
 	): List<OrganizedTracksGroup>? {
 		val type = rules.type
 		val step = rules.stepSize ?: return null // TODO: maybe throw an exception
