@@ -195,11 +195,12 @@ public class LiveMonitoringHelper {
 		boolean retry = false;
 		String urlStr;
 		try {
-			if (baseUrl.equals("test.osmand.net")) {
+			if (baseUrl.equals("test.osmand.net") || baseUrl.equals("osmand.net")) {
 				// "https://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeProfile();
-				baseUrl = "https://test.osmand.net/userdata/translation/msg?" +
+				baseUrl = "https://" + baseUrl + "/userdata/translation/msg?" +
 						"lat={0}&lon={1}&lat={0}&timestamp={2}&"+
 						"hdop={3}&altitude={4}&speed={5}&"+
+						"bearing={6}&tta={7}&ttf={8}&dta={9}&dtf={10}&&"+
 						"deviceid={11}&accessToken={12}";
 			}
 			urlStr = getLiveUrl(baseUrl, data);
