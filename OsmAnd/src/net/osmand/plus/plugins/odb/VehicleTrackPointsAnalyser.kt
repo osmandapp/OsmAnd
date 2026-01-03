@@ -13,6 +13,11 @@ class VehicleTrackPointsAnalyser : GpxTrackAnalysis.TrackPointsAnalyser {
         point: WptPt,
         attribute: PointAttributes
     ) {
+        // Skip analyser entirely if the point has no OBD extensions
+        if (point.getDeferredExtensionsToRead().isEmpty() &&
+            point.getExtensionsToRead().isEmpty()) {
+            return
+        }
         OBDCommand.entries
             .mapNotNull { it.gpxTag }
             .forEach { tag ->
