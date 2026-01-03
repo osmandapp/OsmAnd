@@ -29,6 +29,7 @@ import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.common.Preferences;
+import de.KnollFrank.lib.settingssearch.common.graph.GraphAtNode;
 import de.KnollFrank.lib.settingssearch.common.graph.Graphs;
 import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
 import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphTransformer;
@@ -115,7 +116,9 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 								graph.locale(),
 								activityContext,
 								searchDatabaseConfig),
-						new GraphMerger.GraphAtMergePoint(graph.graph(), configureProfilePreferenceScreen)),
+						new GraphAtNode<>(
+								graph.graph(),
+								configureProfilePreferenceScreen)),
 				graph.locale(),
 				new ConfigurationBundleConverter().convertForward(newConfiguration));
 	}
