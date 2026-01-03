@@ -1,29 +1,27 @@
 package net.osmand.shared.gpx.data
 
 import net.osmand.shared.gpx.TrackItem
+import net.osmand.shared.gpx.organization.OrganizeByResourcesMapper
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 class OrganizedTracksGroup(
     private val id: String,
-    private val title: String,
-    private val iconName: String,
     private val type: OrganizeByType,
     private val representedValue: Any,
     private val trackItems: List<TrackItem>,
-    private val relatedSmartFolder: SmartFolder
+    private val relatedSmartFolder: SmartFolder,
+    private val resourcesMapper: OrganizeByResourcesMapper
 ) : TracksGroup {
 
     override fun getId() = id
 
-    override fun getName() = title
+    override fun getName() = resourcesMapper.getName(type, representedValue)
 
     override fun getTrackItems() = trackItems
 
-    fun getIconName() = iconName
+    fun getIconName() = resourcesMapper.getIconName(type, representedValue)
 
     fun getType() = type
-
-    fun getRepresentedValue() = representedValue
 
     fun getRelatedSmartFolder() = relatedSmartFolder
 

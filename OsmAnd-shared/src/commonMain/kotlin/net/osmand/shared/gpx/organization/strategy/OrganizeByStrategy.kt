@@ -2,7 +2,7 @@ package net.osmand.shared.gpx.organization.strategy
 
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.SmartFolder
-import net.osmand.shared.gpx.organization.OrganizeByResourcesResolver
+import net.osmand.shared.gpx.organization.OrganizeByResourcesMapper
 import net.osmand.shared.gpx.organization.OrganizeByRules
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
@@ -11,7 +11,7 @@ interface OrganizeByStrategy<T> {
 	fun apply(
 		originalGroup: SmartFolder,
 		rules: OrganizeByRules,
-		resourcesResolver: OrganizeByResourcesResolver
+		resourcesResolver: OrganizeByResourcesMapper
 	): List<OrganizedTracksGroup>?
 
 	fun createId(value: T, originalGroup: SmartFolder, type: OrganizeByType): String {

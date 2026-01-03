@@ -5,14 +5,14 @@ import net.osmand.plus.R
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.OsmAndFormatterParams
 import net.osmand.shared.data.Limits
-import net.osmand.shared.gpx.organization.OrganizeByResourcesResolver
+import net.osmand.shared.gpx.organization.OrganizeByResourcesMapper
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
-object AndroidOrganizeByResourcesResolver: OrganizeByResourcesResolver {
+object AndroidOrganizeByResourcesMapper: OrganizeByResourcesMapper() {
 
 	lateinit var app: OsmandApplication
 
-	override fun resolveName(value: Any, type: OrganizeByType): String {
+	override fun resolveName(type: OrganizeByType, value: Any): String {
 		if (value is Limits) {
 			val params = OsmAndFormatterParams()
 			params.setExtraDecimalPrecision(0)
@@ -34,7 +34,7 @@ object AndroidOrganizeByResourcesResolver: OrganizeByResourcesResolver {
 		return value.toString()
 	}
 
-	override fun resolveIconName(value: Any, type: OrganizeByType): String {
-		return super.resolveIconName(value, type)
+	override fun resolveIconName(type: OrganizeByType, value: Any): String {
+		return super.resolveIconName(type, value)
 	}
 }
