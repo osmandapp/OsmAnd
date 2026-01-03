@@ -4,7 +4,6 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.organization.TracksOrganizer
-import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterSerializer
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
@@ -22,7 +21,7 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 	private var trackItems: List<TrackItem>? = null
 
 	@Transient
-	private var organizedTrackItems: List<OrganizedTracksGroup>? = null
+	private val tracksOrganizer = TracksOrganizer(this)
 	@Transient
 	private var organizeByRules: OrganizeByRules? = null
 
@@ -59,12 +58,13 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		}
 	}
 
-	// TODO: don't use
-	fun organizeBy(type: OrganizeByType, resourcesMapper: OrganizeByResourceMapper) {
-		organizedTrackItems = TracksOrganizer().execute(this, OrganizeByRules(type, 10_000), resourcesMapper)
+	fun getOrganizedTrackItems(resourcesMapper: OrganizeByResourceMapper): List<OrganizedTracksGroup>? {
+		return tracksOrganizer.getOrganizedTrackItems(organizeByRules ?: return null, resourcesMapper)
 	}
 
-	fun getOrganizedTrackItems() = organizedTrackItems
+	fun setOrganizeByRules(organizeByRules: OrganizeByRules?) {
+		this.organizeByRules = organizeByRules
+	}
 
 	override fun getFolderAnalysis(): TrackFolderAnalysis {
 		var analysis = folderAnalysis

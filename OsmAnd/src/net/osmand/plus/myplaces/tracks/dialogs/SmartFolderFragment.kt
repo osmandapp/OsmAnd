@@ -75,7 +75,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 				.setTitleId(R.string.organize_by)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_tracks_organize))
 				.setOnClickListener {
-					showOrganizeByDialog()
+					showOrganizeByDialog(smartFolder.getId())
 				}
 				.showTopDivider(true)
 				.create())

@@ -18,7 +18,7 @@ import net.osmand.util.CollectionUtils
 
 class OrganizeTracksByController(
     val app: OsmandApplication,
-    val appMode: ApplicationMode
+    private val folderId: String
 ): BaseDialogController(app) {
 
     companion object {
@@ -27,9 +27,10 @@ class OrganizeTracksByController(
         fun showDialog(
             app: OsmandApplication,
             fragmentManager: FragmentManager,
+            folderId: String,
             appMode: ApplicationMode
         ) {
-            val controller = OrganizeTracksByController(app, appMode)
+            val controller = OrganizeTracksByController(app, folderId)
             app.dialogManager.register(PROCESS_ID, controller)
             if (!OrganizeTracksByFragment.showInstance(fragmentManager, appMode)) {
                 app.dialogManager.unregister(PROCESS_ID)
@@ -47,12 +48,8 @@ class OrganizeTracksByController(
     var selectedType: OrganizeByType? = null
         private set
 
-    // Initial state to check for changes
-    private var initialType: OrganizeByType? = null
-
     init {
-        val savedType = app.settings.getOrganizeTracksByType(appMode)
-        initialType = savedType
+        val savedType = app.organizeTracksHelper.getOrganizeByType(folderId)
         selectedType = savedType
     }
 
@@ -98,13 +95,7 @@ class OrganizeTracksByController(
         }
     }
 
-    fun hasChanges(): Boolean {
-        return selectedType != initialType
-    }
-
     fun askSaveChanges() {
-        if (hasChanges()) {
-            app.settings.setOrganizeTracksByType(appMode, selectedType)
-        }
+        app.organizeTracksHelper.setOrganizeByType(folderId, selectedType)
     }
 }

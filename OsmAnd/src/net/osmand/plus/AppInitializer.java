@@ -77,11 +77,11 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.track.AndroidOrganizeByResourceMapper;
 import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.OrganizeTracksHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -357,9 +357,9 @@ public class AppInitializer implements IProgress {
 		app.explorePlacesProvider = startupInit(new ExplorePlacesOnlineProvider(app), ExplorePlacesOnlineProvider.class);
 		app.helpArticlesHelper = startupInit(new HelpArticlesHelper(app), HelpArticlesHelper.class);
 		app.clickableWayHelper = startupInit(new ClickableWayHelper(app), ClickableWayHelper.class);
+		app.organizeTracksHelper = startupInit(new OrganizeTracksHelper(app), OrganizeTracksHelper.class);
 		app.autoBackupHelper = startupInit(new AutoBackupHelper(app), AutoBackupHelper.class);
 		initOpeningHoursParser();
-		initExternalComponents();
 	}
 
 	private void initOpeningHoursParser() {
@@ -372,10 +372,6 @@ public class AppInitializer implements IProgress {
 		OpeningHoursParser.setAdditionalString("open_till", app.getString(R.string.open_till));
 		OpeningHoursParser.setAdditionalString("will_open_tomorrow_at", app.getString(R.string.will_open_tomorrow_at));
 		OpeningHoursParser.setAdditionalString("will_open_on", app.getString(R.string.will_open_on));
-	}
-
-	private void initExternalComponents() {
-		AndroidOrganizeByResourceMapper.INSTANCE.setApp(app);
 	}
 
 	private void updateRegionVars() {

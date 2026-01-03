@@ -463,13 +463,6 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		return new LoadTracksListener() {
 			@Override
 			public void tracksLoaded(@NonNull TrackFolder folder) {
-				//todo OrganizeBy test purposes
-				for (SmartFolder smartFolder : SmartFolderHelper.INSTANCE.getSmartFolders()) {
-					if (smartFolder.getFolderName().equals("All")) {
-						OrganizeByType type = OrganizeByType.LENGTH;
-						smartFolder.organizeBy(type, AndroidOrganizeByResourceMapper.INSTANCE);
-					}
-				}
 			}
 
 			@Override

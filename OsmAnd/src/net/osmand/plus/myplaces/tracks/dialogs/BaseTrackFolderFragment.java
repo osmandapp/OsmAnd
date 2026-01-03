@@ -64,6 +64,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.shared.SharedUtil;
+import net.osmand.plus.track.AndroidOrganizeByResourceMapper;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
@@ -251,7 +252,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 			if (organizedGroup != null) {
 				trackItems = organizedGroup.getTrackItems();
 			} else if (smartFolder != null) {
-				organizedTracks = smartFolder.getOrganizedTrackItems();
+				organizedTracks = smartFolder.getOrganizedTrackItems(AndroidOrganizeByResourceMapper.INSTANCE);
 				trackItems = smartFolder.getTrackItems();
 			}
 		} else {
@@ -492,10 +493,10 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		}
 	}
 
-	protected void showOrganizeByDialog() {
+	protected void showOrganizeByDialog(@NonNull String folderId) {
 		callActivity(activity -> {
-			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			OrganizeTracksByController.Companion.showDialog(app, fragmentManager, appMode);
+			FragmentManager manager = activity.getSupportFragmentManager();
+			OrganizeTracksByController.Companion.showDialog(app, manager, folderId, appMode);
 		});
 	}
 
