@@ -77,7 +77,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.track.AndroidOrganizeByResourcesMapper;
+import net.osmand.plus.track.AndroidOrganizeByResourceMapper;
 import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
@@ -375,7 +375,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void initExternalComponents() {
-		AndroidOrganizeByResourcesMapper.INSTANCE.setApp(app);
+		AndroidOrganizeByResourceMapper.INSTANCE.setApp(app);
 	}
 
 	private void updateRegionVars() {

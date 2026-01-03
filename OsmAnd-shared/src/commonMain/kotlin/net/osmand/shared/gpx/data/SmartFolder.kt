@@ -8,7 +8,7 @@ import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterSerializer
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
-import net.osmand.shared.gpx.organization.OrganizeByResourcesMapper
+import net.osmand.shared.gpx.organization.OrganizeByResourceMapper
 import net.osmand.shared.gpx.organization.OrganizeByRules
 import net.osmand.shared.util.KCollectionUtils
 
@@ -60,7 +60,7 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 	}
 
 	// TODO: don't use
-	fun organizeBy(type: OrganizeByType, resourcesMapper: OrganizeByResourcesMapper) {
+	fun organizeBy(type: OrganizeByType, resourcesMapper: OrganizeByResourceMapper) {
 		organizedTrackItems = TracksOrganizer().execute(this, OrganizeByRules(type, 10_000), resourcesMapper)
 	}
 

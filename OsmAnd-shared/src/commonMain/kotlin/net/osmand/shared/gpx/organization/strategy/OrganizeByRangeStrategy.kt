@@ -4,17 +4,17 @@ import net.osmand.shared.data.Limits
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.SmartFolder
-import net.osmand.shared.gpx.organization.OrganizeByResourcesMapper
+import net.osmand.shared.gpx.organization.OrganizeByResourceMapper
 import net.osmand.shared.gpx.organization.OrganizeByRules
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import kotlin.math.floor
 
-class OrganizeByRangeStrategy<T : Comparable<T>>: OrganizeByStrategy<Limits> {
+object OrganizeByRangeStrategy: OrganizeByStrategy<Limits> {
 
 	override fun apply(
 		originalGroup: SmartFolder,
 		rules: OrganizeByRules,
-		resourcesMapper: OrganizeByResourcesMapper
+		resourcesMapper: OrganizeByResourceMapper
 	): List<OrganizedTracksGroup>? {
 		val type = rules.type
 		val step = rules.stepSize ?: return null // TODO: maybe throw an exception
@@ -49,7 +49,7 @@ class OrganizeByRangeStrategy<T : Comparable<T>>: OrganizeByStrategy<Limits> {
 		val property = type.filterType.property ?: return null
 
 		val value: Comparable<Any> = trackItem.dataItem?.getParameter(property) ?: return null
-		val valueInt = getInt(property.getComparableValue<T>(value))
+		val valueInt = getInt(property.getComparableValue<Double>(value))
 		return floor((valueInt/step).toDouble()).toInt()
 	}
 

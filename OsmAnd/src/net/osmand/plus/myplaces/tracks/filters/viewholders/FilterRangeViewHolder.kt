@@ -10,16 +10,15 @@ import com.google.android.material.slider.RangeSlider.OnSliderTouchListener
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.myplaces.tracks.MeasureUnitsFormatter
 import net.osmand.plus.utils.FormattedValue
 import net.osmand.plus.utils.OsmAndFormatter
-import net.osmand.plus.utils.OsmAndFormatterParams
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
 import net.osmand.plus.widgets.TextViewEx
 import net.osmand.plus.widgets.tools.SimpleTextWatcher
 import net.osmand.shared.gpx.filters.MeasureUnitType
 import net.osmand.shared.gpx.filters.RangeTrackFilter
-import net.osmand.shared.settings.enums.AltitudeMetrics
 import net.osmand.util.Algorithms
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 import java.text.DecimalFormat
@@ -151,17 +150,11 @@ open class FilterRangeViewHolder(
 		title.text = filter.trackFilterType.getName()
 		valueFromInputContainer.labelText =
 			"${app.getString(R.string.shared_string_from)}, ${
-				getMeasureUnitType().getFilterUnitText(
-					app.settings.METRIC_SYSTEM.get(),
-					app.settings.ALTITUDE_METRIC.get()
-				)
+				MeasureUnitsFormatter.getUnitsLabel(app, getMeasureUnitType())
 			}"
 		valueToInputContainer.labelText =
 			"${app.getString(R.string.shared_string_to)}, ${
-				getMeasureUnitType().getFilterUnitText(
-					app.settings.METRIC_SYSTEM.get(),
-					app.settings.ALTITUDE_METRIC.get()
-				)
+				MeasureUnitsFormatter.getUnitsLabel(app, getMeasureUnitType())
 			}"
 		updateExpandState()
 		updateValues()
@@ -199,17 +192,11 @@ open class FilterRangeViewHolder(
 		valueToInput.setSelection(valueToInput.length())
 		val minValuePrompt =
 			"${decimalFormat.format(minValue.toFloat())} ${
-				getMeasureUnitType().getFilterUnitText(
-					app.settings.METRIC_SYSTEM.get(),
-					app.settings.ALTITUDE_METRIC.get()
-				)
+				MeasureUnitsFormatter.getUnitsLabel(app, getMeasureUnitType())
 			}"
 		val maxValuePrompt =
 			"${decimalFormat.format(maxValue.toFloat())} ${
-				getMeasureUnitType().getFilterUnitText(
-					app.settings.METRIC_SYSTEM.get(),
-					app.settings.ALTITUDE_METRIC.get()
-				)
+				MeasureUnitsFormatter.getUnitsLabel(app, getMeasureUnitType())
 			}"
 		minFilterValue.text = minValuePrompt
 		maxFilterValue.text = maxValuePrompt
@@ -241,36 +228,9 @@ open class FilterRangeViewHolder(
 		return formattedValue.valueSrc.toInt()
 	}
 
-	fun getFormattedValue(
-		measureUnitType: MeasureUnitType,
-		value: String
-	): FormattedValue {
-		val altitudeMetrics: AltitudeMetrics = app.settings.ALTITUDE_METRIC.get()
-		val params = OsmAndFormatterParams()
-		params.setExtraDecimalPrecision(3)
-		params.setForcePreciseValue(true)
-		return when (measureUnitType) {
-			MeasureUnitType.SPEED -> OsmAndFormatter.getFormattedSpeedValue(value.toFloat(), app)
-			MeasureUnitType.ALTITUDE -> OsmAndFormatter.getFormattedAltitudeValue(
-				value.toDouble(),
-				app,
-				altitudeMetrics)
-
-			MeasureUnitType.DISTANCE -> OsmAndFormatter.getFormattedDistanceValue(
-				value.toFloat(),
-				app,
-				params)
-
-			MeasureUnitType.TIME_DURATION -> FormattedValue(
-				value.toFloat() / 1000 / 60,
-				value,
-				""
-			)
-
-			else -> FormattedValue(value.toFloat(), value, "")
-		}
+	fun getFormattedValue(measureUnitType: MeasureUnitType, value: String): FormattedValue {
+		return MeasureUnitsFormatter.getFormattedValue(app, measureUnitType, value)
 	}
-
 
 	open fun updateSelectedValue(valueFrom: String, valueTo: String) {
 		if (filter.trackFilterType.measureUnitType == MeasureUnitType.TIME_DURATION) {
@@ -288,11 +248,10 @@ open class FilterRangeViewHolder(
 				app.getString(R.string.track_filter_range_selected_format),
 				fromTxt,
 				toTxt,
-				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get(), app.settings.ALTITUDE_METRIC.get()))
+				MeasureUnitsFormatter.getUnitsLabel(app, getMeasureUnitType())
+			)
 		}
 	}
 
-	private fun getMeasureUnitType(): MeasureUnitType {
-		return filter.trackFilterType.measureUnitType
-	}
+	private fun getMeasureUnitType() = filter.trackFilterType.measureUnitType
 }
