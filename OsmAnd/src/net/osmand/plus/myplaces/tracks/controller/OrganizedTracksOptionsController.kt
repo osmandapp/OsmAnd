@@ -10,6 +10,7 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet
 import net.osmand.plus.settings.enums.ThemeUsageContext
+import net.osmand.plus.utils.AndroidUtils
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 
 class OrganizedTracksOptionsController(
@@ -48,12 +49,13 @@ class OrganizedTracksOptionsController(
 		val displayData = DisplayData()
 		val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.APP)
 
+		val groupIconId = AndroidUtils.getDrawableId(app, organizedTracksGroup.getIconName(), R.drawable.ic_action_folder_smart)
 		displayData.addDisplayItem(
 			DisplayItem()
 				.setTitle(organizedTracksGroup.getName())
 				.setDescription("${organizedTracksGroup.getTrackItems().size} ${app.getString(R.string.shared_string_tracks)}")
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_72dp)
-				.setIcon(iconsCache.getActiveIcon(R.drawable.ic_action_folder_smart, nightMode))
+				.setIcon(iconsCache.getActiveIcon(groupIconId, nightMode))
 				.setShowBottomDivider(true, 0)
 		)
 		val dividerPadding = calculateSubtitleDividerPadding()
