@@ -503,39 +503,46 @@ class GpxDatabase {
 	}
 
 	fun getDataItem(file: KFile, db: SQLiteConnection): DataItem? {
+		// For non‑GPX, non‑directory files (e.g. PDFs) skip DB access entirely
+		val isGpx = GpxDbUtils.isGpxFile(file)
+		val isDir = file.isDirectory()
+		if (!isGpx && !isDir) return null
+
 		val name = file.name()
 		val dir = GpxDbUtils.getGpxFileDir(file)
-		val gpxFile = GpxDbUtils.isGpxFile(file)
 		val selectQuery =
-			if (gpxFile) GpxDbUtils.getSelectGpxQuery() else GpxDbUtils.getSelectGpxDirQuery()
-		var query: SQLiteCursor? = null
+			if (isGpx) GpxDbUtils.getSelectGpxQuery() else GpxDbUtils.getSelectGpxDirQuery()
+
+		var cursor: SQLiteCursor? = null
 		try {
-			query = db.rawQuery("$selectQuery $GPX_FIND_BY_NAME_AND_DIR", arrayOf(name, dir))
-			if (query != null && query.moveToFirst()) {
-				return if (gpxFile) readGpxDataItem(query) else readGpxDirItem(query)
+			cursor = db.rawQuery("$selectQuery $GPX_FIND_BY_NAME_AND_DIR", arrayOf(name, dir))
+			if (cursor != null && cursor.moveToFirst()) {
+				return if (isGpx) readGpxDataItem(cursor) else readGpxDirItem(cursor)
 			}
 		} finally {
-			query?.close()
+			cursor?.close()
 		}
 		return null
 	}
 
 	fun isDataItemExists(file: KFile, db: SQLiteConnection): Boolean {
+		// For non‑GPX, non‑directory files (e.g. PDFs) skip DB access entirely
+		val isGpx = GpxDbUtils.isGpxFile(file)
+		val isDir = file.isDirectory()
+		if (!isGpx && !isDir) return false
+
 		val name = file.name()
-		val dir = GpxDbUtils.getGpxFileDir(file)
-		val gpxFile = GpxDbUtils.isGpxFile(file)
+		val dir  = GpxDbUtils.getGpxFileDir(file)
 		val selectQuery =
-			if (gpxFile) GpxDbUtils.getSelectGpxQuery(FILE_NAME) else GpxDbUtils.getSelectGpxDirQuery(FILE_NAME)
-		var query: SQLiteCursor? = null
+			if (isGpx) GpxDbUtils.getSelectGpxQuery(FILE_NAME) else GpxDbUtils.getSelectGpxDirQuery(FILE_NAME)
+
+		var cursor: SQLiteCursor? = null
 		try {
-			query = db.rawQuery("$selectQuery $GPX_FIND_BY_NAME_AND_DIR", arrayOf(name, dir))
-			if (query != null && query.moveToFirst()) {
-				return true
-			}
+			cursor = db.rawQuery("$selectQuery $GPX_FIND_BY_NAME_AND_DIR", arrayOf(name, dir))
+			return cursor != null && cursor.moveToFirst()
 		} finally {
-			query?.close()
+			cursor?.close()
 		}
-		return false
 	}
 
 	private fun updateAppearanceTimestamp(item: DataItem) {
