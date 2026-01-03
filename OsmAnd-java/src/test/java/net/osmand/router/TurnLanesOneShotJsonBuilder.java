@@ -13,39 +13,49 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class TurnLanesOneShotJsonBuilder {
     private static final Path GENERATED_JSON_DIR = Paths.get("D:\\Projects\\git\\Osmand\\resources\\test-resources\\turn-lanes");
-
-    private static final int POLYLINE_POINT_LIMIT = 25;
     private static final int ATTACHED_ROUTES_LIMIT = 20;
-    private final String testId;
+	private static final Pattern TEST_ID_PATTERN = Pattern.compile("^(\\d+(?:[\\.,]\\d+)*)");
+
+	private static final Map<String, String> SEGMENTS = new HashMap<>();
+	private final String testId;
     private final LatLon startPoint, endPoint;
     private final List<RouteSegmentResult> routeSegments;
 
-	private static String extractTestId(String testName) {
+	private String extractTestId(String testName) {
 		String normalizedTestName = testName == null ? "" : testName.trim();
-		int end = 0;
-		while (end < normalizedTestName.length() && Character.isDigit(normalizedTestName.charAt(end))) {
-			end++;
-		}
-		return end > 0 ? normalizedTestName.substring(0, end) : "";
+		Matcher matcher = TEST_ID_PATTERN.matcher(normalizedTestName);
+		String id = matcher.find() ? matcher.group(1) : "";
+
+		String prevId = SEGMENTS.get(startPoint + " -> " + endPoint);
+		if (prevId != null)
+			return null;
+
+		SEGMENTS.put(startPoint + " -> " + endPoint, testId);
+		return id;
 	}
 
 	public TurnLanesOneShotJsonBuilder(List<RouteSegmentResult> routeSegments,
 	                                   String testName, LatLon startPoint, LatLon endPoint) {
-		this.testId = extractTestId(testName);
 		this.startPoint = startPoint;
 		this.endPoint = endPoint;
+		this.testId = extractTestId(testName);
 		this.routeSegments = routeSegments;
 	}
 
 	public TurnLanesOneShotJsonBuilder(net.osmand.binary.BinaryMapIndexReader[] readers,
 	                                    String testName, LatLon startPoint, LatLon endPoint) throws Exception {
-		this.testId = extractTestId(testName);
 		this.startPoint = startPoint;
 		this.endPoint = endPoint;
-
+		this.testId = extractTestId(testName);
+		if (this.testId == null) {
+			routeSegments = null;
+			return;
+		}
 		Map<String, String> params = new HashMap<>();
 		params.put("car", "true");
 		RoutingConfiguration.RoutingMemoryLimits memoryLimit = new RoutingConfiguration.RoutingMemoryLimits(
@@ -62,11 +72,15 @@ public final class TurnLanesOneShotJsonBuilder {
 	}
 
 	public void writeJson() throws IOException {
+		if (testId == null) {
+			return;
+		}
+
 		Files.createDirectories(GENERATED_JSON_DIR);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 		Map<String, Object> testJson = buildTestJson();
-		String safeTestId = Algorithms.convertToPermittedFileName(testId == null ? "" : testId).trim();
+		String safeTestId = Algorithms.convertToPermittedFileName(testId).trim();
 		if (safeTestId.isEmpty()) {
 			safeTestId = "unknown";
 		}
@@ -89,59 +103,83 @@ public final class TurnLanesOneShotJsonBuilder {
 		}
 
 		int prevSegment = -1;
+		double dist = 0;
+		int segmentIndex = 1;
 		for (int i = 0; i <= routeSegments.size(); i++) {
 			if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {
 				if (prevSegment >= 0) {
 					RouteSegmentResult segment = routeSegments.get(prevSegment);
-					appendJunctionShotJson(segmentsJson, segment, (prevSegment + 1) < routeSegments.size() ? routeSegments.get(prevSegment + 1) : null);
+					List<RouteSegmentResult> outgoingSegments = new ArrayList<>();
+					for (int k = prevSegment; k < i && k < routeSegments.size(); k++) {
+						outgoingSegments.add(routeSegments.get(k));
+					}
+					if (prevSegment == 0)
+						segmentIndex = 0;
+					if (i != routeSegments.size() || dist >= 10.0)
+						appendJunctionShotJson(segmentIndex++, segmentsJson, segment, outgoingSegments, dist);
 				}
 				prevSegment = i;
+				dist = 0;
+			}
+			if (i < routeSegments.size()) {
+				dist += routeSegments.get(i).getDistance();
 			}
 		}
 
 		return testJson;
 	}
 
-	private static void appendJunctionShotJson(List<Map<String, Object>> segmentsJson, RouteSegmentResult segment, RouteSegmentResult outgoingSegment) {
+	private static void appendJunctionShotJson(int segmentIndex,
+			List<Map<String, Object>> segmentsJson,
+			RouteSegmentResult segment,
+			List<RouteSegmentResult> outgoingSegments,
+			double distToNextManeuver
+	) {
 		TurnType turnType = segment.getTurnType();
 		if (turnType == null) {
 			return;
 		}
-		long segmentId = ObfConstants.getOsmObjectId(segment.getObject());
 		String lanesString = lanesToString(turnType);
 		String turn = turnType.toXmlString();
 
 		Map<String, Object> segmentJson = new LinkedHashMap<>();
-		segmentJson.put("segment_id", segmentId);
-		segmentJson.put("lanes_string", lanesString);
+		segmentJson.put("segment_id", segmentIndex);
+		//segmentJson.put("lanes_string", lanesString);
 		segmentJson.put("lanes", buildLaneGuidanceJson(turnType));
 		segmentJson.put("turn_type", turn);
 
 		Map<String, Object> maneuverJson = new LinkedHashMap<>();
 		maneuverJson.put("turn_angle", turnType.getTurnAngle() != 0 ? round2(turnType.getTurnAngle()) : "");
 		maneuverJson.put("roundabout_exit", turnType.isRoundAbout() ? turnType.getExitOut() : "");
-		segmentJson.put("maneuver", maneuverJson);
+		//segmentJson.put("maneuver", maneuverJson);
+		segmentJson.put("distance_to_next_point_m", round2(distToNextManeuver));
 
 		segmentJson.put("junction", latLonToJson(segment.getEndPoint()));
 
-		if (outgoingSegment != null) {
-			segmentJson.put("turn_deviation_deg", safeDegreesDiff(segment.getBearingEnd(), outgoingSegment.getBearingBegin()));
-		} else {
-			segmentJson.put("turn_deviation_deg", "");
-		}
+		RouteSegmentResult firstOutgoingAfterJunction = outgoingSegments != null && outgoingSegments.size() > 1
+				? outgoingSegments.get(1) : null;
+		//segmentJson.put("turn_deviation_deg", safeDegreesDiff(segment.getBearingEnd(), segment.getBearingBegin()));
 
-		Map<String, Object> approachSegmentJson = buildRouteSegmentJson(segment, true);
+		//Map<String, Object> approachSegmentJson = buildRouteSegmentJson(segment, true);
 		String approachTurnLanesTag = RouteResultPreparation.getTurnLanesString(segment);
-		approachSegmentJson.put("turn_lanes_tag_count", segment.getObject().getLanes());
-		approachSegmentJson.put("turn_lanes_tag", approachTurnLanesTag == null ? "" : approachTurnLanesTag);
-		segmentJson.put("approach_segment", approachSegmentJson);
-		segmentJson.put("outgoing_segment", buildRouteSegmentJson(outgoingSegment, false));
-		segmentJson.put("intersection", buildRoadSplitStructureJson(turnType.getRoadSplitStructure()));
+		//segmentJson.put("turn_lanes_tag_count", segment.getObject().getLanes());
+		segmentJson.put("turn_lanes_tag", approachTurnLanesTag == null ? "" : approachTurnLanesTag);
+		//segmentJson.put("approach_segment", approachSegmentJson);
+//		List<Map<String, Object>> outgoingSegmentsJson = new ArrayList<>();
+//		if (outgoingSegments != null) {
+//			for (RouteSegmentResult outgoingSegment : outgoingSegments) {
+//				outgoingSegmentsJson.add(buildRouteSegmentJson(outgoingSegment, false));
+//			}
+//		}
+		//segmentJson.put("outgoing_segments", outgoingSegmentsJson);
+		//segmentJson.put("intersection", buildRoadSplitStructureJson(turnType.getRoadSplitStructure()));
 
-		Map<String, Object> alternativesGeometryJson = new LinkedHashMap<>();
-		List<RouteSegmentResult> attachedRoutesAtJunction = outgoingSegment != null ? outgoingSegment.getAttachedRoutes(outgoingSegment.getStartPointIndex()) : Collections.emptyList();
-		alternativesGeometryJson.put("attached_routes", buildAttachedRoutesJson(attachedRoutesAtJunction, segment, outgoingSegment));
-		segmentJson.put("alternatives_geometry", alternativesGeometryJson);
+		//Map<String, Object> alternativesGeometryJson = new LinkedHashMap<>();
+		//List<RouteSegmentResult> attachedRoutesAtJunction = immediateOutgoingSegment != null
+		//		? immediateOutgoingSegment.getAttachedRoutes(immediateOutgoingSegment.getStartPointIndex())
+		//		: Collections.emptyList();
+		//alternativesGeometryJson.put("attached_routes", buildAttachedRoutesJson(attachedRoutesAtJunction, segment, immediateOutgoingSegment));
+		//segmentJson.put("alternatives_geometry", alternativesGeometryJson);
 
 		segmentsJson.add(segmentJson);
 	}
@@ -180,38 +218,20 @@ public final class TurnLanesOneShotJsonBuilder {
 		return Math.round(value * 100000.0) / 100000.0;
 	}
 
-	private static List<Map<String, Object>> buildPolylineJson(RouteSegmentResult segment, int maxPoints, boolean fromEnd) {
-		List<Map<String, Object>> polyline = new ArrayList<>();
-		if (segment == null || maxPoints <= 0) {
-			return polyline;
-		}
-		int start = segment.getStartPointIndex();
-		int end = segment.getEndPointIndex();
-		int step = start <= end ? 1 : -1;
-		int length = Math.abs(end - start) + 1;
-		int startPos = fromEnd ? Math.max(0, length - maxPoints) : 0;
-		int endPos = fromEnd ? (length - 1) : Math.min(length - 1, maxPoints - 1);
-		for (int pos = startPos; pos <= endPos; pos++) {
-			int idx = start + step * pos;
-			polyline.add(latLonToJson(segment.getPoint(idx)));
-		}
-		return polyline;
-	}
-
 	private static Map<String, Object> buildRouteSegmentJson(RouteSegmentResult segment, boolean polylineFromEnd) {
 		Map<String, Object> json = new LinkedHashMap<>();
 		if (segment == null) {
 			return json;
 		}
-		json.put("is_forward", segment.isForwardDirection());
+		//json.put("is_forward", segment.isForwardDirection());
 		json.put("distance_m", round2(segment.getDistance()));
-		json.put("speed_mps", round2(segment.getSegmentSpeed()));
-		json.put("time_s", round2(segment.getSegmentTime()));
+		//json.put("speed_mps", round2(segment.getSegmentSpeed()));
+		//json.put("time_s", round2(segment.getSegmentTime()));
 		json.put("bearing_begin_deg", round2(segment.getBearingBegin()));
 		json.put("bearing_end_deg", round2(segment.getBearingEnd()));
 		json.put("highway", segment.getObject().getHighway());
 		json.put("oneway", segment.getObject().getOneway());
-		json.put("polyline", buildPolylineJson(segment, POLYLINE_POINT_LIMIT, polylineFromEnd));
+		json.put("name", segment.getObject().getName());
 		return json;
 	}
 
@@ -221,6 +241,7 @@ public final class TurnLanesOneShotJsonBuilder {
 		if (lanes != null) {
 			for (int laneValue : lanes) {
 				Map<String, Object> laneJson = new LinkedHashMap<>();
+				laneJson.put("active", laneValue % 2 == 1);
 				int primary = TurnType.getPrimaryTurn(laneValue);
 				if (primary == 0) {
 					primary = TurnType.C;
