@@ -512,7 +512,6 @@ class GpxDatabase {
 		val dir = GpxDbUtils.getGpxFileDir(file)
 		val selectQuery =
 			if (isGpx) GpxDbUtils.getSelectGpxQuery() else GpxDbUtils.getSelectGpxDirQuery()
-
 		var cursor: SQLiteCursor? = null
 		try {
 			cursor = db.rawQuery("$selectQuery $GPX_FIND_BY_NAME_AND_DIR", arrayOf(name, dir))
@@ -532,10 +531,9 @@ class GpxDatabase {
 		if (!isGpx && !isDir) return false
 
 		val name = file.name()
-		val dir  = GpxDbUtils.getGpxFileDir(file)
+		val dir = GpxDbUtils.getGpxFileDir(file)
 		val selectQuery =
 			if (isGpx) GpxDbUtils.getSelectGpxQuery(FILE_NAME) else GpxDbUtils.getSelectGpxDirQuery(FILE_NAME)
-
 		var cursor: SQLiteCursor? = null
 		try {
 			cursor = db.rawQuery("$selectQuery $GPX_FIND_BY_NAME_AND_DIR", arrayOf(name, dir))
