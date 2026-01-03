@@ -5,6 +5,7 @@ import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 class OrganizedTracksGroup(
     private val id: String,
+    private val title: String,
     private val iconName: String,
     private val type: OrganizeByType,
     private val representedValue: Any,
@@ -14,7 +15,7 @@ class OrganizedTracksGroup(
 
     override fun getId() = id
 
-    override fun getName() = representedValue.toString()
+    override fun getName() = title
 
     override fun getTrackItems() = trackItems
 

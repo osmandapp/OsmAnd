@@ -16,7 +16,8 @@ class TracksOrganizer {
 
 	fun execute(
 		originalGroup: SmartFolder,
-		rules: OrganizeByRules
+		rules: OrganizeByRules,
+		resourcesResolver: OrganizeByResourcesResolver
 	): List<OrganizedTracksGroup>? {
 		val oldRules = cachedRules
 		if (strategy == null || oldRules == null || oldRules.type != rules.type) {
@@ -24,7 +25,7 @@ class TracksOrganizer {
 			strategy = createStrategy(rules)
 			cachedRules = rules
 		}
-		return strategy?.apply(originalGroup, rules)
+		return strategy?.apply(originalGroup, rules, resourcesResolver)
 	}
 
 	private fun createStrategy(rules: OrganizeByRules): OrganizeByStrategy<*>? {

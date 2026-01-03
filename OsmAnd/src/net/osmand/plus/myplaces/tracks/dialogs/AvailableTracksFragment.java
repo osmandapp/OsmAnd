@@ -34,6 +34,7 @@ import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.track.AndroidOrganizeByResourcesResolver;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.gpx.GpxDbHelper;
@@ -466,8 +467,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 				for (SmartFolder smartFolder : SmartFolderHelper.INSTANCE.getSmartFolders()) {
 					if (smartFolder.getFolderName().equals("All")) {
 						OrganizeByType type = OrganizeByType.LENGTH;
-						String maxValueInDb = app.getGpxDbHelper().getMaxParameterValue(type.getFilterType().getProperty());
-						smartFolder.organizeBy(type/*, maxValueInDb*/);
+						smartFolder.organizeBy(type, AndroidOrganizeByResourcesResolver.INSTANCE);
 					}
 				}
 			}

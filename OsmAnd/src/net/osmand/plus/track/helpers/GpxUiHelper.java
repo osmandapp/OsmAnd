@@ -38,7 +38,6 @@ import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.Sele
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
@@ -49,9 +48,7 @@ import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxFile;
@@ -59,19 +56,12 @@ import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.TrackItem;
-import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.TrackFolder;
-import net.osmand.shared.gpx.filters.MeasureUnitType;
-import net.osmand.shared.gpx.filters.TrackFilterType;
-import net.osmand.shared.gpx.organization.enums.OrganizeByType;
 import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
-import net.osmand.shared.settings.enums.AltitudeMetrics;
-import net.osmand.shared.settings.enums.MetricsConstants;
-import net.osmand.shared.data.Limits;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -245,33 +235,6 @@ public class GpxUiHelper {
 			return "";
 		}
 		return Algorithms.capitalizeFirstLetter(Algorithms.getFileNameWithoutExtension(name));
-	}
-
-	@NonNull
-	public static String getOrganizedTracksGroupTitle(@NonNull OsmandApplication app,
-	                                                  @NonNull OrganizedTracksGroup group) {
-		OrganizeByType type = group.getType();
-		Object representedValue = group.getRepresentedValue();
-		if (representedValue instanceof Limits limits) {
-			// TODO: use appropriate formatter
-			OsmAndFormatterParams params = new OsmAndFormatterParams();
-			params.setExtraDecimalPrecision(0);
-			params.setForcePreciseValue(true);
-
-			FormattedValue from = OsmAndFormatter.getFormattedDistanceValue(limits.getMin().floatValue(), app, params);
-			FormattedValue to = OsmAndFormatter.getFormattedDistanceValue(limits.getMax().floatValue(), app, params);
-			String formattedRange = app.getString(R.string.ltr_or_rtl_combine_via_dash, from.value, to.value);
-
-			TrackFilterType filterType = type.getFilterType();
-			MeasureUnitType unitType = filterType.getMeasureUnitType();
-
-			OsmandSettings settings = app.getSettings();
-			MetricsConstants metricsConstants = settings.METRIC_SYSTEM.get();
-			AltitudeMetrics altitudeMetrics = settings.ALTITUDE_METRIC.get();
-			String unitsLabel = unitType.getFilterUnitText(metricsConstants, altitudeMetrics);
-			return app.getString(R.string.ltr_or_rtl_combine_via_space, formattedRange, unitsLabel);
-		}
-		return group.getName();
 	}
 
 	public static void updateGpxInfoView(@NonNull OsmandApplication app,

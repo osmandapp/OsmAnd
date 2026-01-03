@@ -23,7 +23,7 @@ public class OrganizedTracksViewHolder extends TracksGroupViewHolder {
 		super.bindView(tracksGroup, showDivider);
 
 		OrganizedTracksGroup organizedTracks = (OrganizedTracksGroup) tracksGroup;
-		title.setText(GpxUiHelper.getOrganizedTracksGroupTitle(app, organizedTracks));
+		title.setText(organizedTracks.getName());
 		int itemsCount = tracksGroup.getTrackItems().size();
 		description.setText(app.getString(R.string.number_of_tracks, String.valueOf(itemsCount)));
 
