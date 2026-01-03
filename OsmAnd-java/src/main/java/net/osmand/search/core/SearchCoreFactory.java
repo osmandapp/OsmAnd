@@ -2109,6 +2109,7 @@ public class SearchCoreFactory {
 				sp.priority = 0;
 				sp.object = pnt;
 				sp.wordsSpan = lines;
+				sp.setImpreciseCoordinates(pnt.hasImpreciseCoordinates());
 				sp.location = new LatLon(pnt.getLatitude(), pnt.getLongitude());
 				sp.localeName = formatLatLon(pnt.getLatitude()) +", " + formatLatLon(pnt.getLongitude());
 				if (pnt.getZoom() > 0) {

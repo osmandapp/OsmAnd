@@ -472,7 +472,8 @@ public class GeoPointParserUtil {
 						// ftid (1s) processed after 3d/4d and /@
 						LatLon ll = parseS2ftid(ftid1sFinally);
 						if (ll != null) {
-							return Collections.singletonList(new GeoParsedPoint(ll.getLatitude(), ll.getLongitude()));
+							return Collections.singletonList(
+									new GeoParsedPoint(ll.getLatitude(), ll.getLongitude(), true));
 						}
 					}
 					return parseGoogleMapsPath(path, params);
