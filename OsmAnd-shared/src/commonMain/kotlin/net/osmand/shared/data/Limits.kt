@@ -2,7 +2,7 @@ package net.osmand.shared.data
 
 class Limits(val min: Number, val max: Number) {
 
-	override fun toString() = "(${min};${max})"
+	override fun toString() = "Limits=[${min};${max}]"
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
