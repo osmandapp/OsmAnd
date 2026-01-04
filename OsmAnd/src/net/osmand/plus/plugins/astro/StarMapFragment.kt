@@ -1,11 +1,14 @@
 package net.osmand.plus.plugins.astro
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
@@ -20,6 +23,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Direction
+import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.Location
@@ -32,16 +36,15 @@ import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.astro.utils.AstroUtils.toZoned
+import net.osmand.plus.plugins.astro.AstroDataProvider.Constellation
 import net.osmand.plus.plugins.astro.StarChartState.StarChartType
 import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.plugins.astro.utils.StarMapARModeHelper
 import net.osmand.plus.plugins.astro.utils.StarMapCameraHelper
-import net.osmand.plus.plugins.astro.views.CelestialPathView
 import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
-import net.osmand.plus.plugins.astro.views.SkyObject
 import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 import net.osmand.plus.plugins.astro.views.StarChartView
+import net.osmand.plus.plugins.astro.views.StarCompassButton
 import net.osmand.plus.plugins.astro.views.StarView
 import net.osmand.plus.plugins.astro.views.StarVisiblityChartView
 import net.osmand.plus.settings.backend.OsmandSettings
@@ -52,6 +55,7 @@ import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
 import net.osmand.shared.util.LoggerFactory
 import java.time.LocalDate
 import java.time.ZoneId
+import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
 
@@ -63,22 +67,30 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var bottomSheet: View
 	private lateinit var sheetTitle: TextView
 	private lateinit var sheetCoords: TextView
-	private lateinit var sheetDetails: TextView
 	private lateinit var resetTimeButton: Button
+
+	private lateinit var sheetPinButton: CheckBox
+
+	private var sheetMagnitude: TextView? = null
+	private var sheetDistance: TextView? = null
+	private var sheetRiseTime: TextView? = null
+	private var sheetSetTime: TextView? = null
+	private var sheetWikiButton: View? = null
 
 	private lateinit var arModeButton: ImageButton
 	private lateinit var cameraButton: ImageButton
 	private lateinit var transparencySlider: SeekBar
 	private lateinit var sliderContainer: View
 	private lateinit var resetFovButton: View
+	private lateinit var mode2dButton: ImageButton
 
 	private lateinit var starChartsView: View
 	private lateinit var starVisiblityView: StarVisiblityChartView
 	private lateinit var starAltitudeView: StarAltitudeChartView
-	private lateinit var celestialPathView: CelestialPathView
 	private lateinit var starChartState: StarChartState
 
 	private val mapButtons = mutableListOf<MapButton>()
+	private var compassButton: StarCompassButton? = null
 	private var rulerWidget: RulerWidget? = null
 	private var systemBottomInset: Int = 0
 	private var manualAzimuth: Boolean = false
@@ -93,6 +105,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private lateinit var arModeHelper: StarMapARModeHelper
 	private lateinit var cameraHelper: StarMapCameraHelper
+
+	private var previousAltitude: Double = 45.0
+	private var previousAzimuth: Double = 0.0
+	private var previousViewAngle: Double = 150.0
 
 	companion object {
 		private val log = LoggerFactory.getLogger("StarMapFragment")
@@ -122,16 +138,26 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starView = view.findViewById(R.id.star_view)
 		timeSelectionView = view.findViewById(R.id.time_selection_view)
 		resetTimeButton = view.findViewById(R.id.reset_time_button)
+
 		bottomSheet = view.findViewById(R.id.bottom_sheet)
 		sheetTitle = view.findViewById(R.id.sheet_title)
 		sheetCoords = view.findViewById(R.id.sheet_coords)
-		sheetDetails = view.findViewById(R.id.sheet_details)
+
+		sheetPinButton = view.findViewById(R.id.sheet_pin_button)
+
+		// Attempt to find new structured views
+		sheetMagnitude = view.findViewById(R.id.sheet_magnitude)
+		sheetDistance = view.findViewById(R.id.sheet_distance)
+		sheetRiseTime = view.findViewById(R.id.sheet_rise_time)
+		sheetSetTime = view.findViewById(R.id.sheet_set_time)
+		sheetWikiButton = view.findViewById(R.id.sheet_wiki_button)
 
 		arModeButton = view.findViewById(R.id.ar_mode_button)
 		cameraButton = view.findViewById(R.id.camera_button)
 		transparencySlider = view.findViewById(R.id.transparency_slider)
 		sliderContainer = view.findViewById(R.id.slider_container)
 		resetFovButton = view.findViewById(R.id.reset_fov_button)
+		mode2dButton = view.findViewById(R.id.mode2d_button)
 
 		arModeHelper = StarMapARModeHelper(requireContext(), starView) { enabled ->
 			updateArModeUI(enabled)
@@ -187,7 +213,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		starVisiblityView = view.findViewById(R.id.star_visiblity_view)
 		starAltitudeView = view.findViewById(R.id.star_altitude_view)
-		celestialPathView = view.findViewById(R.id.celestial_path_view)
 		starChartState = StarChartState(app)
 
 		view.findViewById<AppCompatImageView>(R.id.chart_settings_button).apply {
@@ -207,8 +232,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			}
 		}
 		view.findViewById<ImageButton>(R.id.settings_button).apply {
-			setOnClickListener { AstroUtils.showStarMapOptionsDialog(context, starView, starMapViewModel, swSettings) }
+			setOnClickListener { AstroUtils.showStarMapOptionsDialog(context, starView, swSettings) }
 		}
+		mode2dButton.setOnClickListener { toggle2DMode() }
 
 		resetTimeButton.setOnClickListener {
 			starMapViewModel.resetTime(); starChartViewModel.resetTime()
@@ -231,11 +257,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showMoon = config.showMoon
 			starView.showPlanets = config.showPlanets
 		}
-		starView.setConstellations(AstroDataProvider.getConstellations())
+		starView.is2DMode = swSettings.getCommonConfig().is2DMode
+		starView.setConstellations(AstroDataProvider.getConstellations(view.context))
 
 		updateStarMap(true)
 		setupToolBar(view)
 		buildZoomButtons(view)
+		update2DModeIcon()
 
 		return view
 	}
@@ -289,7 +317,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	override fun updateCompassValue(value: Float) {
-		if (arModeHelper.isArModeEnabled) return
+		if (arModeHelper.isArModeEnabled || starView.is2DMode) return
 		val lastResetRotationToNorth = app.mapViewTrackingUtilities.lastResetRotationToNorth
 		if (this.lastResetRotationToNorth < lastResetRotationToNorth) {
 			this.lastResetRotationToNorth = lastResetRotationToNorth
@@ -298,10 +326,15 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (manualAzimuth) return
 		val rotateMode = settings.ROTATE_MAP.get()
 		if (rotateMode == OsmandSettings.ROTATE_MAP_COMPASS) {
-			starView.setAzimuth(value.toDouble())
+			setAzimuth(value.toDouble())
 		} else if (rotateMode != OsmandSettings.ROTATE_MAP_BEARING) {
-			starView.setAzimuth(-app.osmandMap.mapView.rotate.toDouble())
+			setAzimuth(-app.osmandMap.mapView.rotate.toDouble())
 		}
+	}
+
+	private fun setAzimuth(azimuth: Double, animate: Boolean = false) {
+		starView.setAzimuth(azimuth, animate)
+		compassButton?.update(-azimuth.toFloat(), animate)
 	}
 
 	override fun updateLocation(location: Location?) {
@@ -312,9 +345,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				if (!manualAzimuth && !arModeHelper.isArModeEnabled) {
 					if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 						if (location.hasBearing() && location.bearing != 0f) {
-							starView.setAzimuth(location.bearing.toDouble(), true)
+							setAzimuth(location.bearing.toDouble(), true)
 						}
 					}
+				}
+				if (starView.is2DMode) {
+					starView.setCenter(180.0, 90.0)
 				}
 				updateStarMap(); updateStarChart()
 			}
@@ -322,7 +358,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			app.runInUIThread {
 				if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 					if (location.hasBearing() && location.bearing != 0f) {
-						starView.setAzimuth(location.bearing.toDouble(), true)
+						setAzimuth(location.bearing.toDouble(), true)
 					}
 				}
 			}
@@ -366,6 +402,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val config = StarWatcherSettings.CommonConfig(
 			showStarMap = starView.isVisible,
 			showStarChart = starChartsView.isVisible,
+			is2DMode = starView.is2DMode,
 		)
 		swSettings.setCommonConfig(config)
 	}
@@ -384,6 +421,30 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		toolbar.setBackgroundColor(app.getColor(if (nightMode) R.color.activity_background_color_dark else R.color.list_background_color_light))
 	}
 
+	private fun toggle2DMode() {
+		val is2D = !starView.is2DMode
+		if (is2D) {
+			previousAltitude = starView.getAltitude()
+			previousAzimuth = starView.getAzimuth()
+			previousViewAngle = starView.getViewAngle()
+			starView.is2DMode = true
+			starView.setCenter(180.0, 90.0)
+			if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode(false)
+			manualAzimuth = true
+		} else {
+			starView.is2DMode = false
+			starView.setCenter(previousAzimuth, previousAltitude)
+			starView.setViewAngle(previousViewAngle)
+		}
+		update2DModeIcon()
+		saveCommonSettings()
+	}
+
+	private fun update2DModeIcon() {
+		val iconId = if (starView.is2DMode) R.drawable.ic_action_3d else R.drawable.ic_action_2d
+		mode2dButton.setImageDrawable(getIcon(iconId, ColorUtilities.getPrimaryIconColorId(nightMode)))
+	}
+
 	private fun setupObservers() {
 		starMapViewModel.currentTime.observe(viewLifecycleOwner) { time ->
 			starView.setDateTime(time, animate = true)
@@ -397,7 +458,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starChartViewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
 			starVisiblityView.setChartObjects(objects)
 			starAltitudeView.setChartObjects(objects)
-			celestialPathView.setChartObjects(objects)
 		}
 	}
 
@@ -409,13 +469,24 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		starView.setOnObjectClickListener { obj ->
 			selectedObject = obj
-			if (obj != null) showObjectInfo(obj) else bottomSheet.visibility = View.GONE
+			if (obj != null) {
+				showObjectInfo(obj)
+			} else if (starView.getSelectedConstellationItem() == null) {
+				bottomSheet.visibility = View.GONE
+			}
+		}
+		starView.onConstellationClickListener = { constellation ->
+			if (constellation != null) {
+				showConstellationInfo(constellation)
+			} else if (selectedObject == null) {
+				bottomSheet.visibility = View.GONE
+			}
 		}
 		starView.onAnimationFinished = { if (selectedObject != null) showObjectInfo(selectedObject!!) }
 		starView.onAzimuthManualChangeListener = { azimuth ->
 			if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode()
 			manualAzimuth = true
-			app.osmandMap.mapView.rotateToAnimate(-azimuth.toFloat())
+			compassButton?.update(-azimuth.toFloat())
 		}
 		starView.onViewAngleChangeListener = { fov -> cameraHelper.updateCameraZoom(fov) }
 	}
@@ -424,7 +495,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val tileBox = app.osmandMap.mapView.rotatedTileBox
 		val location = tileBox.centerLatLon
 		starView.setObserverLocation(location.latitude, location.longitude, 0.0)
-		if (updateAzimuth && !arModeHelper.isArModeEnabled) starView.setAzimuth(-tileBox.rotate.toDouble())
+		if (updateAzimuth && !arModeHelper.isArModeEnabled && !starView.is2DMode) {
+			setAzimuth(-tileBox.rotate.toDouble())
+		}
 	}
 
 	private fun updateStarChart() {
@@ -442,17 +515,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		when (chartType) {
 			StarChartType.STAR_VISIBLITY -> {
-				starVisiblityView.visibility = View.VISIBLE; starAltitudeView.visibility = View.GONE; celestialPathView.visibility = View.GONE
+				starVisiblityView.visibility = View.VISIBLE; starAltitudeView.visibility = View.GONE
 				starVisiblityView.updateData(location.latitude, location.longitude, localDate)
 			}
 			StarChartType.STAR_ALTITUDE -> {
-				starVisiblityView.visibility = View.GONE; starAltitudeView.visibility = View.VISIBLE; celestialPathView.visibility = View.GONE
+				starVisiblityView.visibility = View.GONE; starAltitudeView.visibility = View.VISIBLE
 				starAltitudeView.updateData(location.latitude, location.longitude, localDate)
-			}
-			StarChartType.CELESTIAL_PATH -> {
-				starVisiblityView.visibility = View.GONE; starAltitudeView.visibility = View.GONE; celestialPathView.visibility = View.VISIBLE
-				celestialPathView.updateData(location.latitude, location.longitude, localDate)
-				starChartViewModel.currentTime.value?.let { celestialPathView.setMoment(it.toZoned(zoneId)) }
 			}
 		}
 	}
@@ -473,7 +541,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			container.findViewById<MapButton?>(R.id.map_my_location_button)?.let { mapButtons.add(it) }
 			return container.findViewById<View?>(R.id.map_hud_controls)?.let { AndroidUiHelper.updateVisibility(it, true) }
 		}
-		view.findViewById<MapButton?>(R.id.map_compass_button)?.let { layer.addCustomMapButton(it); mapButtons.add(it) }
+		view.findViewById<StarCompassButton?>(R.id.star_map_compass_button)?.let {
+			it.onSingleTap = { setAzimuth(0.0, true)}
+			compassButton = it
+			layer.addCustomMapButton(it)
+			mapButtons.add(it)
+		}
 		view.findViewById<View>(R.id.star_map_controls_container)?.let { addButtons(it, true) }
 		view.findViewById<View>(R.id.map_controls_container)?.let { addButtons(it, false) }
 		layer.addCustomizedDefaultMapButtons(mapButtons)
@@ -481,25 +554,109 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout))
 	}
 
+	private fun showConstellationInfo(c: Constellation) {
+		sheetTitle.text = c.name
+		sheetCoords.text = getString(R.string.astro_constellation)
+
+		sheetPinButton.visibility = View.GONE
+
+		sheetMagnitude?.isVisible = false
+		sheetDistance?.isVisible = false
+		sheetRiseTime?.isVisible = false
+		sheetSetTime?.isVisible = false
+
+		if (c.wid.isNotEmpty()) {
+			sheetWikiButton?.isVisible = true
+			sheetWikiButton?.setOnClickListener {
+				val uri = Uri.parse("https://www.wikidata.org/wiki/${c.wid}")
+				val intent = Intent(Intent.ACTION_VIEW, uri)
+				try {
+					startActivity(intent)
+				} catch (_: Exception) {
+				}
+			}
+		} else {
+			sheetWikiButton?.isVisible = false
+		}
+
+		bottomSheet.visibility = View.VISIBLE
+	}
+
 	private fun showObjectInfo(obj: SkyObject) {
 		sheetTitle.text = obj.name
 		val az = String.format(Locale.getDefault(), "%.1f°", obj.azimuth)
 		val alt = String.format(Locale.getDefault(), "%.1f°", obj.altitude)
-		sheetCoords.text = "${getString(R.string.shared_string_azimuth)}: $az  |  ${getString(R.string.altitude)}: $alt"
-		var details = "${getString(R.string.shared_string_magnitude)}: ${obj.magnitude}"
-		if (obj.type.isSunSystem()) details += "\n${getString(R.string.distance)}: %.3f AU".format(obj.distAu)
+		val coordsText = "${getString(R.string.shared_string_azimuth)}: $az  •  ${getString(R.string.altitude)}: $alt"
+		sheetCoords.text = coordsText
+
+		// Show and configure Pin button
+		sheetPinButton.visibility = View.VISIBLE
+		sheetPinButton.setOnCheckedChangeListener(null) // Prevent recursive trigger
+		sheetPinButton.isChecked = starView.isObjectPinned(obj)
+		sheetPinButton.setOnCheckedChangeListener { _, isChecked ->
+			starView.setObjectPinned(obj, isChecked)
+		}
+
+		sheetMagnitude?.text = "${getString(R.string.shared_string_magnitude)}: ${obj.magnitude}"
+		sheetMagnitude?.isVisible = true
+
+		if (obj.type.isSunSystem()) {
+			sheetDistance?.isVisible = true
+			sheetDistance?.text =
+				"${getString(R.string.distance)}: %.3f AU".format(Locale.getDefault(), obj.distAu)
+		} else {
+			sheetDistance?.isVisible = false
+		}
+
 		val observer = starView.observer
 		val currentTime = starView.currentTime
 		val bodyToCheck: Body? = if (!obj.type.isSunSystem()) {
 			defineStar(Body.Star2, obj.ra, obj.dec, 1000.0); Body.Star2
 		} else obj.body
+
 		if (bodyToCheck != null) {
-			val riseTime = searchRiseSet(bodyToCheck, observer, Direction.Rise, currentTime, 1.0)
-			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, currentTime, 1.0)
-			if (riseTime != null) details += "\n${getString(R.string.astro_rise)}: ↑${AstroUtils.formatLocalTime(riseTime)}"
-			if (setTime != null) details += "\n${getString(R.string.astro_set)}: ↓${AstroUtils.formatLocalTime(setTime)}"
+			val calendar = (starMapViewModel.currentCalendar.value ?: Calendar.getInstance()).clone() as Calendar
+			calendar.set(Calendar.HOUR_OF_DAY, 0)
+			calendar.set(Calendar.MINUTE, 0)
+			calendar.set(Calendar.SECOND, 0)
+			calendar.set(Calendar.MILLISECOND, 0)
+			val searchStart = Time.fromMillisecondsSince1970(calendar.timeInMillis)
+
+			val riseTime = searchRiseSet(bodyToCheck, observer, Direction.Rise, searchStart, 1.2)
+			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, searchStart, 1.2)
+
+			if (riseTime != null) {
+				sheetRiseTime?.text = "Rise: ↑${AstroUtils.formatLocalTime(riseTime)}"
+				sheetRiseTime?.isVisible = true
+			} else {
+				sheetRiseTime?.isVisible = false
+			}
+
+			if (setTime != null) {
+				sheetSetTime?.text = "Set: ↓${AstroUtils.formatLocalTime(setTime)}"
+				sheetSetTime?.isVisible = true
+			} else {
+				sheetSetTime?.isVisible = false
+			}
+		} else {
+			sheetRiseTime?.isVisible = false
+			sheetSetTime?.isVisible = false
 		}
-		sheetDetails.text = details
+
+		if (obj.wid.isNotEmpty()) {
+			sheetWikiButton?.isVisible = true
+			sheetWikiButton?.setOnClickListener {
+				val uri = Uri.parse("https://www.wikidata.org/wiki/${obj.wid}")
+				val intent = Intent(Intent.ACTION_VIEW, uri)
+				try {
+					startActivity(intent)
+				} catch (_: Exception) {
+				}
+			}
+		} else {
+			sheetWikiButton?.isVisible = false
+		}
+
 		bottomSheet.visibility = View.VISIBLE
 	}
 }

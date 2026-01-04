@@ -2775,7 +2775,7 @@
     <string name="collected_data">已蒐集的資料</string>
     <string name="press_again_to_change_the_map_orientation">再次點選以更改地圖方向</string>
     <string name="shared_string_min_speed">最低速度</string>
-    <string name="shared_string_max_speed">最高速度</string>
+    <string name="shared_string_max_speed">最大速度</string>
     <string name="default_speed_setting_title">預設速度</string>
     <string name="default_speed_setting_descr">變更預設速度設定</string>
     <string name="minmax_speed_dialog_title">設定最小／最大速度</string>
@@ -5698,7 +5698,7 @@
     <string name="trip_recording_uphill_widget_desc">顯示目前記錄旅程的所有上坡總和。</string>
     <string name="trip_recording_distance_widget_desc">顯示目前記錄旅程的距離，還有最後一次上坡與下坡的距離。</string>
     <string name="trip_recording_max_speed_widget_description">顯示目前記錄旅程的最快速度，按一下來切換總體最快速度以及上次上坡或下坡的最快速度。</string>
-    <string name="trip_recording_average_slope_widget_description">顯示目前記錄旅程當中上次下坡或是上坡片段的平均坡度。</string>
+    <string name="trip_recording_average_slope_widget_description">為目前記錄的旅程最後的下坡或是上坡片段顯示平均坡度。</string>
     <string name="average_slope">平均坡度</string>
     <string name="shared_string_last_uphill">上次上坡</string>
     <string name="shared_string_last_downhill">上次下坡</string>
@@ -5734,4 +5734,7 @@
     <string name="delete_folder_description">刪除「%1$s」資料夾？</string>
     <string name="show_spherical_map">環球檢視</string>
     <string name="enable_3d_objects">3D 建築物</string>
+    <string name="lang_mi">毛利語</string>
+    <string name="has_vehicle_metrics">使用 OBDII 資料</string>
+    <string name="buildings_3d_detail_level">3D 建築物細節化處理</string>
 </resources>

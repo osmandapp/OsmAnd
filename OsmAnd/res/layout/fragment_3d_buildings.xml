@@ -31,7 +31,37 @@
 				android:id="@+id/content_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:orientation="vertical" />
+				android:orientation="vertical">
+
+				<include layout="@layout/list_item_divider" />
+
+				<LinearLayout
+					android:id="@+id/preferences_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/list_background_color"
+					android:orientation="vertical"
+					android:paddingVertical="@dimen/content_padding">
+
+					<include
+						android:id="@+id/transparency_container"
+						layout="@layout/terrain_visibility_fragment" />
+
+					<include layout="@layout/simple_divider_item" />
+
+					<include
+						android:id="@+id/detalization_container"
+						layout="@layout/cycle_route_types_card" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/rendering_rules_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical" />
+
+			</LinearLayout>
 
 			<View
 				android:id="@+id/bottom_empty_space"

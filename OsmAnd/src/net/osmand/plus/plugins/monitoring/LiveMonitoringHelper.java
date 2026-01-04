@@ -73,7 +73,7 @@ public class LiveMonitoringHelper {
 	private boolean shouldRecordLocation(@Nullable Location location, long locationTime) {
 		boolean record = false;
 		if (location != null && isLiveMonitoringEnabled()
-				&& SimulationProvider.isNotSimulatedLocation(location)
+				&& SimulationProvider.isLocationForRecording(location)
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			OsmandSettings settings = app.getSettings();
 			if (locationTime - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {
@@ -128,7 +128,7 @@ public class LiveMonitoringHelper {
 
 
 	private static class LiveMonitoringData {
-		public static final int NUMBER_OF_LIVE_DATA_FIELDS = 11;    //change the value after each addition\deletion of data field
+		public static final int NUMBER_OF_LIVE_DATA_FIELDS = 13;    //change the value after each addition\deletion of data field
 
 		private final double lat;
 		private final double lon;
@@ -195,6 +195,14 @@ public class LiveMonitoringHelper {
 		boolean retry = false;
 		String urlStr;
 		try {
+			if (baseUrl.equals("test.osmand.net") || baseUrl.equals("osmand.net")) {
+				// "https://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeProfile();
+				baseUrl = "https://" + baseUrl + "/userdata/translation/msg?" +
+						"lat={0}&lon={1}&lat={0}&timestamp={2}&"+
+						"hdop={3}&altitude={4}&speed={5}&"+
+						"bearing={6}&tta={7}&ttf={8}&dta={9}&dtf={10}&&"+
+						"deviceid={11}&accessToken={12}";
+			}
 			urlStr = getLiveUrl(baseUrl, data);
 		} catch (IllegalArgumentException e) {
 			log.error("Could not construct live url from base url: " + baseUrl, e);
@@ -280,6 +288,14 @@ public class LiveMonitoringHelper {
 					break;
 				case 10:
 					prm.add(data.distanceToIntermediateOrFinish + "");
+					break;
+				case 11:
+					// deviceid
+					prm.add(app.getSettings().BACKUP_DEVICE_ID.get());
+					break;
+				case 12:
+					// accesToken
+					prm.add(app.getSettings().BACKUP_ACCESS_TOKEN.get());
 					break;
 				default:
 					break;

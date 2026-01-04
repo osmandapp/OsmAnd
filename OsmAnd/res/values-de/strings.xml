@@ -4565,8 +4565,7 @@
     <string name="restart_now">Jetzt neu starten</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 1 war die Standardeinstellung vor OsmAnd 4.3 und ist für ältere Geräte weiterhin vorzuziehen.
-\nVersion 2 (OpenGL) ist eine leistungsstärkere Karten-Rendering-Engine, die auch eine 2,5D-Ansicht bietet.</string>
+    <string name="map_rendering_engine_descr">Version 1 war Standard vor OsmAnd 4.3 und eignet sich für ältere Geräte.\n\nVersion 2 (OpenGL) ist leistungsfähiger und bietet zusätzliche Funktionen wie die 3D‑Ansicht.</string>
     <string name="map_rendering_engine">Karten-Rendering-Engine</string>
     <string name="weather_offline_forecast">Offline-Vorhersage</string>
     <string name="weather_online_cache">Online-Zwischenspeicher</string>
@@ -5923,7 +5922,15 @@
     <string name="copy_link">Link kopieren</string>
     <string name="button_frames">Schaltflächenrahmen</string>
     <string name="routing_attr_pt_limit_name">Die N besten Routen anzeigen</string>
-    <string name="routing_attr_pt_limit_description">Die Anzahl der anzuzeigenden besten Routen angeben</string>
+    <string name="routing_attr_pt_limit_description">Gibt die Anzahl der anzuzeigenden besten Routen an</string>
     <string name="deleted_maps_warning">Sie sind dabei, %d Element(e) zu löschen.\nFortfahren?</string>
     <string name="enable_3d_objects">3D-Gebäude</string>
+    <string name="lang_mi">Maori</string>
+    <string name="vehicle_metrics_chart_category">Fahrzeugdaten</string>
+    <string name="delete_folder_description">Ordner „%1$s“ löschen?</string>
+    <string name="slots">Slots</string>
+    <string name="has_vehicle_metrics">Mit OBD-II-Daten</string>
+    <string name="buildings_3d_detail_level">Detaillierung von 3D-Gebäuden</string>
+    <string name="show_spherical_map">Globusansicht</string>
+    <string name="visualizing_button_grid">Raster der Karten-Schaltflächen</string>
 </resources>

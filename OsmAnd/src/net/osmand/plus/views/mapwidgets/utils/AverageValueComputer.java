@@ -46,7 +46,7 @@ public abstract class AverageValueComputer {
 	public void updateLocation(@Nullable Location location) {
 		if (location != null) {
 			long time = System.currentTimeMillis();
-			boolean save = isEnabled() && SimulationProvider.isNotSimulatedLocation(location);
+			boolean save = isEnabled() && SimulationProvider.isLocationForRecording(location);
 			if (save) {
 				saveLocation(location, time);
 			}

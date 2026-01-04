@@ -1536,7 +1536,7 @@
     <string name="rate_this_app_long">Merci d\'évaluer OsmAnd sur Google Play</string>
     <string name="user_hates_app_get_feedback">Indiquez-nous pourquoi.</string>
     <string name="user_hates_app_get_feedback_long">N’hésitez pas à nous faire part de vos suggestions.</string>
-    <string name="download_live_updates">Mises à jour en direct</string>
+    <string name="download_live_updates">Mises à jour temps réel</string>
     <string name="failed_to_upload">Erreur lors de l’envoi</string>
     <string name="delete_change">Supprimer les modifications</string>
     <string name="successfully_uploaded_pattern">Envoyé {0}/{1}</string>
@@ -4510,11 +4510,11 @@
     <string name="restart_now">Redémarrer maintenant</string>
     <string name="mtb_scale">Échelle de difficulté VTT</string>
     <string name="mtb_segment_classification">Classification du segment</string>
-    <string name="quick_action_temperature_layer">Afficher ou masquer la couche de température sur la carte.</string>
-    <string name="quick_action_precipitation_layer">Afficher ou masquer la couche des précipitations sur la carte.</string>
-    <string name="quick_action_wind_layer">Afficher ou masquer la couche des vents sur la carte.</string>
-    <string name="quick_action_air_pressure_layer">Afficher ou masquer la couche barométrique sur la carte.</string>
-    <string name="quick_action_cloud_layer">Afficher ou masquer la couche de couverture nuageuse sur la carte.</string>
+    <string name="quick_action_temperature_layer">Un bouton permettant d\'afficher ou de masquer la couche de température sur la carte.</string>
+    <string name="quick_action_precipitation_layer">Un bouton permettant d\'afficher ou de masquer la couche des précipitations sur la carte.</string>
+    <string name="quick_action_wind_layer">Un bouton permettant d\'afficher ou de masquer la couche de vent sur la carte.</string>
+    <string name="quick_action_air_pressure_layer">Un bouton permettant d\'afficher ou de masquer la couche de pression atmosphérique sur la carte.</string>
+    <string name="quick_action_cloud_layer">Un bouton permettant d\'afficher ou de masquer la couche couverture nuageuse sur la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Couleur des courbes</string>
     <string name="rendering_attr_showMtbScale_description">Afficher la difficulté des itinéraires VTT selon l\'échelle MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Afficher la difficulté VTT</string>
@@ -4526,7 +4526,7 @@
     <string name="rendering_attr_weatherPrecipitationContours_name">Contour des précipitations</string>
     <string name="rendering_attr_weatherCloudContours_name">Contour des nuages</string>
     <string name="action_not_supported_with_map_style">Cette action n\'est pas compatible avec le style de carte sélectionné.</string>
-    <string name="map_rendering_engine_descr">La version 1 était la version par défaut jusqu\'à OsmAnd 4.3 et reste préférable pour les anciens appareils.\nLa version 2 (OpenGL) est un moteur de rendu cartographique plus puissant offrant également une vue 2,5D.</string>
+    <string name="map_rendering_engine_descr">La version 1 était la version par défaut avant OsmAnd 4.3 et convient aux appareils plus anciens.\n\nLa version 2 (OpenGL) est plus avancée et propose des fonctionnalités supplémentaires comme la vue 3D.</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolignes de vitesse de vent</string>
     <string name="rendering_engine_failed_descr">OsmAnd est repassé au mode de rendu de carte « Version 1 ». Vous pouvez tenter de réactiver le nouveau moteur « Version 2 (OpenGL) » dans les paramètres.\n\nMerci de contribuer aux améliorations en transmettant votre journal d’erreurs.</string>
     <string name="mtb_imba">IMBA</string>
@@ -5797,9 +5797,9 @@
     <string name="private_access_routing_req_short">Autorisez-vous l’emprunt de portions privées pour rejoindre votre destination ?</string>
     <string name="download_wikipedia_label">Télécharger Wikipédia</string>
     <string name="wind_animation_layer">Couche d\'animation du vent</string>
-    <string name="weather_layers">Couches météo</string>
-    <string name="quick_action_weather_layers">Bouton permettant d\'afficher ou de masquer les calques météorologiques sur la carte.</string>
-    <string name="quick_action_wind_animation_layer">Un interrupteur pour afficher ou masquer la couche d\'animation du vent sur la carte.</string>
+    <string name="weather_layers">Couches météorologiques</string>
+    <string name="quick_action_weather_layers">Un bouton permettant d\'afficher ou de masquer les calques météorologiques sur la carte.</string>
+    <string name="quick_action_wind_animation_layer">Un bouton permettant d\'afficher ou de masquer la couche d\'animation du vent sur la carte.</string>
     <string name="lang_crh">Tatar de Crimée (latin)</string>
     <string name="efficient_grid">Grille d\'efficacité</string>
     <string name="slots">Machines à sous</string>
@@ -5822,5 +5822,7 @@
     <string name="show_spherical_map">Vue Globe terrestre</string>
     <string name="enable_3d_objects">Bâtiments 3D</string>
     <string name="vehicle_metrics_chart_category">Mesures du véhicule</string>
-    <string name="lang_mi">Maori</string>
+    <string name="lang_mi">Māori</string>
+    <string name="buildings_3d_detail_level">Détail des bâtiments 3D</string>
+    <string name="has_vehicle_metrics">Avec les données OBDII</string>
 </resources>

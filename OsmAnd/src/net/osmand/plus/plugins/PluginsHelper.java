@@ -883,6 +883,12 @@ public class PluginsHelper {
 				trackPointsAnalysers.add(plugin.getTrackPointsAnalyser());
 			}
 		}
+		if (!isActive(VehicleMetricsPlugin.class)) {
+			OsmandPlugin plugin = getPlugin(VehicleMetricsPlugin.class);
+			if (plugin != null) {
+				trackPointsAnalysers.add(plugin.getTrackPointsAnalyser());
+			}
+		}
 		return (gpxTrackAnalysis, wptPt, pointAttributes) -> {
 			for (TrackPointsAnalyser analyser : trackPointsAnalysers) {
 				analyser.onAnalysePoint(gpxTrackAnalysis, wptPt, pointAttributes);
@@ -905,7 +911,7 @@ public class PluginsHelper {
 		return null;
 	}
 
-	public static void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public static void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType> availableTypes) {
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			plugin.getAvailableGPXDataSetTypes(analysis, availableTypes);
 		}

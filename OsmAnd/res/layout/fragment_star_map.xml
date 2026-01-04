@@ -32,7 +32,7 @@
 					android:layout_width="48dp"
 					android:layout_height="48dp"
 					android:layout_gravity="end"
-					android:background="?attr/selectableItemBackgroundBorderless"
+					android:background="?android:attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/visible_layers_and_objects"
 					app:srcCompat="@drawable/ic_action_settings"
 					app:tint="@color/icon_color_default_light" />
@@ -42,9 +42,19 @@
 					android:layout_width="48dp"
 					android:layout_height="48dp"
 					android:layout_gravity="end"
-					android:background="?attr/selectableItemBackgroundBorderless"
+					android:background="?android:attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/star_charts_name"
 					app:srcCompat="@drawable/ic_action_layers"
+					app:tint="@color/icon_color_default_light" />
+
+				<ImageButton
+					android:id="@+id/mode2d_button"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:layout_gravity="end"
+					android:background="?android:attr/selectableItemBackgroundBorderless"
+					android:contentDescription="2D Mode"
+					app:srcCompat="@drawable/ic_action_2d"
 					app:tint="@color/icon_color_default_light" />
 
 				<ImageButton
@@ -52,7 +62,7 @@
 					android:layout_width="48dp"
 					android:layout_height="48dp"
 					android:layout_gravity="end"
-					android:background="?attr/selectableItemBackgroundBorderless"
+					android:background="?android:attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/star_map"
 					app:srcCompat="@drawable/ic_action_world_globe"
 					app:tint="@color/icon_color_default_light" />
@@ -104,7 +114,7 @@
 				android:layout_height="wrap_content">
 
 				<include
-					layout="@layout/map_compass_button"
+					layout="@layout/star_map_compass_button"
 					android:layout_width="@dimen/map_small_button_size"
 					android:layout_height="@dimen/map_small_button_size"
 					android:layout_marginStart="@dimen/map_button_margin"
@@ -262,38 +272,101 @@
 		android:id="@+id/bottom_sheet"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical"
 		android:layout_gravity="bottom"
-		android:background="?attr/activity_background_color"
+		android:orientation="vertical"
 		android:padding="16dp"
+		android:background="?attr/card_and_list_background_basic"
 		android:visibility="gone">
 
-		<TextView
-			android:id="@+id/sheet_title"
+		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:text="Object Name"
-			android:textSize="24sp"
-			android:textStyle="bold"
-			android:textColor="?android:textColorPrimary" />
+			android:orientation="horizontal"
+			android:gravity="center_vertical">
+
+			<TextView
+				android:id="@+id/sheet_title"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:textSize="22sp"
+				android:textStyle="bold"
+				android:textColor="?android:textColorPrimary" />
+
+			<CheckBox
+				android:id="@+id/sheet_pin_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Pin"
+				android:layout_marginStart="8dp" />
+		</LinearLayout>
 
 		<TextView
 			android:id="@+id/sheet_coords"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="8dp"
-			android:text="Az: 000 Alt: 00"
-			android:textSize="16sp"
+			android:layout_marginTop="4dp"
+			android:textSize="14sp"
 			android:textColor="?android:textColorSecondary" />
 
-		<TextView
-			android:id="@+id/sheet_details"
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginTop="12dp"
+			android:layout_marginBottom="12dp"
+			android:background="?android:listDivider" />
+
+		<GridLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="4dp"
-			android:text="Distance: 0.0 AU"
-			android:textSize="16sp"
-			android:textColor="?android:textColorSecondary" />
+			android:columnCount="2"
+			android:rowCount="2">
+
+			<TextView
+				android:id="@+id/sheet_magnitude"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_columnWeight="1"
+				android:layout_marginBottom="8dp"
+				android:drawablePadding="8dp"
+				android:gravity="center_vertical"
+				android:text="Mag: 2.89"
+				app:drawableStartCompat="@drawable/ic_action_favorite"
+				app:drawableTint="@color/osmand_orange" />
+			<TextView
+				android:id="@+id/sheet_distance"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_columnWeight="1"
+				android:layout_marginBottom="8dp"
+				android:drawablePadding="8dp"
+				android:gravity="center_vertical"
+				android:text="4.2 AU" />
+
+			<TextView
+				android:id="@+id/sheet_rise_time"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_columnWeight="1"
+				android:textColor="?android:textColorSecondary"
+				android:text="Rise: 22:40" />
+
+			<TextView
+				android:id="@+id/sheet_set_time"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_columnWeight="1"
+				android:textColor="?android:textColorSecondary"
+				android:text="Set: 06:00" />
+		</GridLayout>
+
+		<Button
+			android:id="@+id/sheet_wiki_button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:text="View on Wikidata"
+			style="@style/Widget.AppCompat.Button.Colored" />
 
 	</LinearLayout>
 

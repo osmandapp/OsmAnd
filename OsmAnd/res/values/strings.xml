@@ -27,6 +27,8 @@
     <string name="avg_speed">Avg. speed</string>
     <string name="organize_by_max_speed">Max. speed</string>
     <string name="organize_by_max_altitude">Max. altitude</string>
+    <string name="has_vehicle_metrics">With OBDII data</string>
+    <string name="lang_mi">Māori</string>
     <string name="lang_mi">Maori</string>
     <string name="vehicle_metrics_chart_category">Vehicle metrics</string>
     <string name="delete_folder_description">Delete \"%1$s\" folder?</string>
@@ -1506,8 +1508,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="restart_now">Restart now</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 1 was the default prior to OsmAnd 4.3 and is still preferable for older devices.
-\nVersion 2 (OpenGL) is a more powerful map rendering engine, also featuring 2.5D view.</string>
+    <string name="map_rendering_engine_descr">Version 1 was the default before OsmAnd 4.3 and suits older devices.
+\n\nVersion 2 (OpenGL) is more advanced and adds features like 3D view.</string>
     <string name="map_rendering_engine">Map rendering engine</string>
     <string name="show_borders_of_downloaded_maps">Show borders of downloaded maps</string>
     <string name="show_map_symbols">Show map symbols</string>
@@ -2916,6 +2918,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_legend">Legend</string>
     <string name="shared_string_zoom_levels">Zoom levels</string>
     <string name="shared_string_transparency">Transparency</string>
+    <string name="buildings_3d_detail_level">3D buildings detalization</string>
     <string name="slope_read_more">Read more about slope in %1$s.</string>
     <string name="slope_download_description">Additional maps are needed to view slope on the map.</string>
     <string name="hillshade_download_description">Additional maps are needed to view hillshade on the map.</string>

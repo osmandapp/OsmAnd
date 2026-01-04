@@ -4491,7 +4491,7 @@
     <string name="external_device_details_disconnect">Prekid veze</string>
     <string name="generate_hillshade_from_3d_maps">Kreiranje rasterskog osenčavanja reljefa iz 3D mapa</string>
     <string name="no_visible_tracks_description">Izaberi rutu za prikaz na mapi.</string>
-    <string name="quick_action_precipitation_layer">Prekidač za prikaz ili skrivanje slojeva padavina na mapi.</string>
+    <string name="quick_action_precipitation_layer">Prekidač za prikaz ili skrivanje sloja padavina na mapi.</string>
     <string name="shared_string_next_sunset">Sledeći zalazak Sunca</string>
     <string name="map_widget_sunrise_desc">Prikazuje vreme do sledećeg izlaska sunca ili preostalo vreme do sledećeg izlaska sunca.</string>
     <string name="shared_string_next_sunrise">Sledeći izlazak Sunca</string>
@@ -4993,11 +4993,11 @@
     <string name="open_weather_action_description">Omogućava vam da otvorite ekran sa detaljnim vremenskim informacijama.</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Izolinije padavina</string>
     <string name="rendering_attr_showMtbScale_name">Prikazuj skalu MTB-a</string>
-    <string name="quick_action_wind_layer">Prekidač za prikaz ili skrivanje slojeva vetrova na mapi.</string>
-    <string name="quick_action_cloud_layer">Prekidač za prikaz ili skrivanje Cloud slojeva na mapi.</string>
-    <string name="quick_action_air_pressure_layer">Prekidač za prikaz ili skrivanje sloja vazdušnog pritiska na mapi.</string>
+    <string name="quick_action_wind_layer">Prekidač za prikaz ili skrivanje sloja vetra na mapi.</string>
+    <string name="quick_action_cloud_layer">Prekidač za prikazivanje ili skrivanje sloja oblaka na mapi.</string>
+    <string name="quick_action_air_pressure_layer">Prekidač za prikazivanje ili skrivanje sloja pritiska vazduha na mapi.</string>
     <string name="temperature_layer">Nivo toplote</string>
-    <string name="quick_action_temperature_layer">Prekidač za prikaz ili skrivanje toplotnih slojeva na mapi.</string>
+    <string name="quick_action_temperature_layer">Prekidač za prikaz ili skrivanje temperaturnog sloja na mapi.</string>
     <string name="storage_migration_fragment_close_descr">Kopiranje je gotovo za %1$s%%. Ako ga zaustaviš sada, možda program neće ispravno raditi.</string>
     <string name="switch_mode_by_tapping_on_widget">Promeni način rada tapom po vidžetu.</string>
     <string name="map_widget_sunset_desc">Prikazuje vreme sledećeg zalaska sunca ili preostalo vreme do zalaska sunca.</string>
@@ -5029,7 +5029,7 @@
     <string name="rendering_engine_failed_descr">Osmand se je vratio na prikaz mape „Verzija 1“. Možeš pokušati da povratiš novi način za prikaz „Verzija 2 (OpenGL)“ u podešavanjima.
 \n
 \nMolimo, podržite poboljšanja dostavljanjem dnevnika grešaka.</string>
-    <string name="map_rendering_engine_descr">Verzija 1 je podrazumevana pre OsmAnd 4.3 i još uvek je poželjna za starije uređaje. \nVerzija 2 (OpenGL) je moćniji mehanizam za prikazivanje mapa, koji takođe sadrži 2.5D prikaz.</string>
+    <string name="map_rendering_engine_descr">Verzija 1 je bila podrazumevana pre OsmAnd 4.3 i odgovara starijim uređajima.\n\nVerzija 2 (OpenGL) je naprednija i dodaje funkcije poput 3D prikaza.</string>
     <string name="map_rendering_engine">Motor za renderovanje mape</string>
     <string name="show_borders_of_downloaded_maps">Prikazati granice preuzetih mapa</string>
     <string name="dismiss_changes">Odbaciti promene?</string>
@@ -5873,7 +5873,7 @@
     <string name="download_wikipedia_label">Preuzmi Vikipediju</string>
     <string name="quick_action_weather_layers">Prekidač za prikazivanje ili skrivanje vremenskih slojeva na mapi.</string>
     <string name="quick_action_wind_animation_layer">Prekidač za prikaz ili skrivanje sloja animacije vetra na mapi.</string>
-    <string name="wind_animation_layer">Sloj animacije vetra</string>
+    <string name="wind_animation_layer">Animacija sloja vetra</string>
     <string name="weather_layers">Vremenski slojevi</string>
     <string name="lang_crh">Krimski tatarski (latinica)</string>
     <string name="efficient_grid">Efikasna mreža</string>
@@ -5893,4 +5893,11 @@
     <string name="copy_link">Kopiraj link</string>
     <string name="routing_attr_pt_limit_name">Prikaz N najboljih ruta</string>
     <string name="routing_attr_pt_limit_description">Navedite broj najboljih ruta za prikaz</string>
+    <string name="buildings_3d_detail_level">Detaljne 3D zgrade</string>
+    <string name="lang_mi">Maorski</string>
+    <string name="has_vehicle_metrics">Sa OBDII podacima</string>
+    <string name="vehicle_metrics_chart_category">Metrika vozila</string>
+    <string name="delete_folder_description">Obrisati „%1$s“ folder?</string>
+    <string name="show_spherical_map">Globusni prikaz</string>
+    <string name="enable_3d_objects">3D zgrada</string>
 </resources>

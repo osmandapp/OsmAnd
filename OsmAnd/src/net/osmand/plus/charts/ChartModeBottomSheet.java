@@ -131,7 +131,7 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 		boolean checked = selectedYAxisMode.contains(type);
 		int iconColor;
 		int textColor;
-		if (selectedYAxisMode.size() >= 2 && !checked) {
+		if (selectedYAxisMode.size() >= ChartUtils.MAX_CHART_TYPES && !checked) {
 			view.setEnabled(false);
 			iconColor = ColorUtilities.getSecondaryIconColor(app, nightMode);
 			textColor = ColorUtilities.getDisabledTextColor(app, nightMode);
@@ -151,54 +151,99 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 		textView.setTextColor(textColor);
 	}
 
+	private void checkSelectedYTypes(@NonNull List<GPXDataSetType> generalTypes, @NonNull List<GPXDataSetType> sensorTypes) {
+		if (isSelectedSupported(generalTypes, sensorTypes)) {
+			return;
+		}
+
+		selectedYAxisMode.clear();
+
+		if (Algorithms.isEmpty(generalTypes)) {
+			return;
+		}
+
+		if (generalTypes.size() >= 2) {
+			selectedYAxisMode.add(generalTypes.get(0));
+			selectedYAxisMode.add(generalTypes.get(1));
+		} else {
+			selectedYAxisMode.add(generalTypes.get(0));
+		}
+	}
+
+	private boolean isSelectedSupported(@NonNull List<GPXDataSetType> generalTypes, @NonNull List<GPXDataSetType> sensorTypes) {
+		for (GPXDataSetType selected : selectedYAxisMode) {
+			if (!isSupported(selected, generalTypes, sensorTypes)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean isSupported(@NonNull GPXDataSetType selected, @NonNull List<GPXDataSetType> generalTypes, @NonNull List<GPXDataSetType> sensorTypes) {
+		return generalTypes.contains(selected) || sensorTypes.contains(selected);
+	}
+
 	private void createYAxisItems() {
 		if (listener == null) {
 			return;
 		}
 
-		container.removeAllViews();
-		itemViews.clear();
+		resetContainer();
 
 		GpxTrackAnalysis analysis = listener.getAnalysis();
+		List<GPXDataSetType> generalTypes = getAvailableDefaultYTypes(analysis);
+		List<GPXDataSetType> sensorTypes = getAvailableSensorYTypes(analysis);
 
-		List<GPXDataSetType[]> defaultTypes = getAvailableDefaultYTypes(analysis);
-		for (GPXDataSetType[] types : defaultTypes) {
+		checkSelectedYTypes(generalTypes, sensorTypes);
+
+		addItems(generalTypes);
+		addGroupedSensorItems(sensorTypes);
+	}
+
+	private void resetContainer() {
+		container.removeAllViews();
+		itemViews.clear();
+	}
+
+	private void addItems(List<GPXDataSetType> typesList) {
+		for (GPXDataSetType types : typesList) {
 			createYAxisItem(types);
 		}
+	}
 
-		List<GPXDataSetType[]> sensorTypes = getAvailableSensorYTypes(analysis);
+	private void addGroupedSensorItems(List<GPXDataSetType> sensorTypes) {
+		Map<GpxDataSetTypeGroup, List<GPXDataSetType>> grouped =
+				groupByGroup(sensorTypes);
 
-		Map<GpxDataSetTypeGroup, List<GPXDataSetType[]>> grouped =
-				new LinkedHashMap<>();
+		for (Map.Entry<GpxDataSetTypeGroup, List<GPXDataSetType>> entry : grouped.entrySet()) {
+			addGroup(entry.getKey(), entry.getValue());
+		}
+	}
 
-		for (GPXDataSetType[] types : sensorTypes) {
-			if (types == null || types.length == 0 || types[0] == null) {
-				continue;
-			}
+	private Map<GpxDataSetTypeGroup, List<GPXDataSetType>> groupByGroup(List<GPXDataSetType> sensorTypes) {
+		Map<GpxDataSetTypeGroup, List<GPXDataSetType>> grouped = new LinkedHashMap<>();
 
-			GpxDataSetTypeGroup group = types[0].typeGroup;
-			grouped.computeIfAbsent(group, k -> new ArrayList<>())
+		for (GPXDataSetType types : sensorTypes) {
+			grouped.computeIfAbsent(types.typeGroup, k -> new ArrayList<>())
 					.add(types);
 		}
 
-		for (Map.Entry<GpxDataSetTypeGroup, List<GPXDataSetType[]>> entry : grouped.entrySet()) {
-			List<GPXDataSetType[]> typesList = entry.getValue();
-			if (Algorithms.isEmpty(typesList)) {
-				continue;
-			}
+		return grouped;
+	}
 
-			container.addView(createDivider());
-
-			GpxDataSetTypeGroup group = entry.getKey();
-			String groupName = group.getName(app);
-			if (!Algorithms.isEmpty(groupName)) {
-				container.addView(createCategory(groupName));
-			}
-
-			for (GPXDataSetType[] types : typesList) {
-				createYAxisItem(types);
-			}
+	private void addGroup(GpxDataSetTypeGroup group, List<GPXDataSetType> typesList) {
+		if (Algorithms.isEmpty(typesList)) {
+			return;
 		}
+
+		container.addView(createDivider());
+
+		String groupName = group.getName(app);
+		if (!Algorithms.isEmpty(groupName)) {
+			container.addView(createCategory(groupName));
+		}
+
+		addItems(typesList);
 	}
 
 	private View createCategory(String name){
@@ -217,23 +262,19 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 		return divider;
 	}
 
-	private void createYAxisItem(GPXDataSetType[] types) {
-		if (types.length > 1) {
-			return;
-		}
-		GPXDataSetType singleSetType = types[0];
+	private void createYAxisItem(GPXDataSetType type) {
 		View itemView = inflate(R.layout.bottom_sheet_item_title_icon_with_checkbox);
 
-		itemView.setTag(singleSetType);
+		itemView.setTag(type);
 		itemView.setOnClickListener(v -> {
-			if (selectedYAxisMode.contains(singleSetType)) {
-				selectedYAxisMode.remove(singleSetType);
+			if (selectedYAxisMode.contains(type)) {
+				selectedYAxisMode.remove(type);
 				updateItems();
 				updateApplyButton();
 				return;
 			}
-			if (selectedYAxisMode.size() < 2) {
-				selectedYAxisMode.add(singleSetType);
+			if (selectedYAxisMode.size() < ChartUtils.MAX_CHART_TYPES) {
+				selectedYAxisMode.add(type);
 				updateItems();
 				updateApplyButton();
 			}
@@ -243,7 +284,7 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), checkBox);
 
 		TextView textView = itemView.findViewById(R.id.title);
-		textView.setText(singleSetType.getTitleId());
+		textView.setText(type.getTitleId());
 
 		container.addView(itemView);
 		itemViews.add(itemView);
@@ -293,23 +334,23 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@NonNull
-	public static List<GPXDataSetType[]> getAvailableDefaultYTypes(@NonNull GpxTrackAnalysis analysis) {
-		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
+	public static List<GPXDataSetType> getAvailableDefaultYTypes(@NonNull GpxTrackAnalysis analysis) {
+		List<GPXDataSetType> availableTypes = new ArrayList<>();
 		boolean hasElevationData = analysis.hasElevationData();
 		boolean hasSpeedData = analysis.hasSpeedData();
 		if (hasElevationData) {
-			availableTypes.add(new GPXDataSetType[]{GPXDataSetType.ALTITUDE});
-			availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SLOPE});
+			availableTypes.add(GPXDataSetType.ALTITUDE);
+			availableTypes.add(GPXDataSetType.SLOPE);
 		}
 		if (hasSpeedData) {
-			availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SPEED});
+			availableTypes.add(GPXDataSetType.SPEED);
 		}
 		return availableTypes;
 	}
 
 	@NonNull
-	public static List<GPXDataSetType[]> getAvailableSensorYTypes(@NonNull GpxTrackAnalysis analysis) {
-		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
+	public static List<GPXDataSetType> getAvailableSensorYTypes(@NonNull GpxTrackAnalysis analysis) {
+		List<GPXDataSetType> availableTypes = new ArrayList<>();
 		PluginsHelper.getAvailableGPXDataSetTypes(analysis, availableTypes);
 		return availableTypes;
 	}

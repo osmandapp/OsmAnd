@@ -6238,4 +6238,8 @@
     <string name="copy_as_new_folder">Salin sebagai folder baru</string>
     <string name="add_to_a_folder">Tambahkan ke folder</string>
     <string name="amount_of_total_used">%1$s dari %2$s digunakan</string>
+    <string name="copy_link">Salin tautan</string>
+    <string name="delete_folder_description">Hapus folder \"%1$s\"?</string>
+    <string name="vehicle_metrics_chart_category">Metrik kendaraan</string>
+    <string name="lang_mi">Maori</string>
 </resources>

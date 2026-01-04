@@ -27,13 +27,17 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.astro.utils.AstroUtils
+import net.osmand.plus.plugins.astro.SkyObject
 import net.osmand.plus.plugins.astro.StarObjectsViewModel
 import net.osmand.plus.plugins.astro.StarWatcherPlugin
 import net.osmand.plus.plugins.astro.StarWatcherSettings
+import net.osmand.plus.plugins.astro.utils.AstroUtils
+import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.utils.ColorUtilities
 import java.time.Duration
 import java.time.LocalDate
 import java.time.ZoneId
@@ -163,10 +167,12 @@ abstract class StarChartView @JvmOverloads constructor(
 			val checkBox = CheckBox(context).apply { id = CHECKBOX_ID }
 			layout.addView(checkBox)
 
+			val nightMode = (context.applicationContext as OsmandApplication).daynightHelper.isNightMode(ThemeUsageContext.APP)
+			val primaryTextColor = ColorUtilities.getPrimaryTextColor(context, nightMode)
 			val textView = TextView(context).apply {
 				id = TEXT_VIEW_ID
 				textSize = 16f
-				setTextColor(Color.BLACK) // Or use theme color
+				setTextColor(primaryTextColor)
 				val params = LinearLayout.LayoutParams(
 					0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f
 				)

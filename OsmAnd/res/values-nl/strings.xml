@@ -6246,4 +6246,6 @@
     <string name="show_spherical_map">Globeweergave</string>
     <string name="enable_3d_objects">3D-gebouwen</string>
     <string name="lang_mi">Maori</string>
+    <string name="buildings_3d_detail_level">3D-gebouwendetaillering</string>
+    <string name="has_vehicle_metrics">Met OBDII-data</string>
 </resources>

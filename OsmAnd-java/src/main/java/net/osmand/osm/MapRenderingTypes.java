@@ -12,6 +12,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
 import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;
@@ -28,6 +30,8 @@ public abstract class MapRenderingTypes {
 	private static final Log log = PlatformUtil.getLog(MapRenderingTypes.class);
 	public static final String[] langs = new String[] { "af", "als", "ar", "az", "be", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "ckb", "crh", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb",
 		"hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kk", "kn", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mi", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "oc", "os", "pl", "pms", "pt", "ro", "ru", "sat", "sc", "sh", "sk", "sl", "sq", "sr", "sr-latn", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh", "zh-hans", "zh-hant",  };
+	
+	public static final Set<String> langsSet = new TreeSet<>(Arrays.asList(langs)); 
 	
 	
 	public final static byte RESTRICTION_NO_RIGHT_TURN = 1;
