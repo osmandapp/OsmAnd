@@ -2,6 +2,8 @@ package net.osmand.shared.data
 
 class Limits(val min: Number, val max: Number) {
 
+	fun getMidpoint(): Double = (min.toDouble() + max.toDouble()) / 2.0
+
 	override fun toString() = "Limits=[${min};${max}]"
 
 	override fun equals(other: Any?): Boolean {

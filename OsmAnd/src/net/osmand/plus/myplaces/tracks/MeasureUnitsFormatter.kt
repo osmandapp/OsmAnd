@@ -41,6 +41,7 @@ object MeasureUnitsFormatter {
 		app: OsmandApplication,
 		unitType: MeasureUnitType,
 	): String {
+		// TODO: improve - it's not safe using direct call of the settings without application mode
 		val mc = app.settings.METRIC_SYSTEM.get()
 		val am = app.settings.ALTITUDE_METRIC.get()
 		return unitType.getFilterUnitText(mc, am)

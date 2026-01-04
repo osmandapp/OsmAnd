@@ -52,6 +52,7 @@ import net.osmand.plus.myplaces.tracks.DialogClosedListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter;
+import net.osmand.plus.myplaces.tracks.controller.OrganizeTracksByController;
 import net.osmand.plus.myplaces.tracks.controller.OrganizedTracksOptionsController;
 import net.osmand.plus.myplaces.tracks.controller.OrganizedTracksOptionsListener;
 import net.osmand.plus.myplaces.tracks.controller.SmartFolderOptionsController;

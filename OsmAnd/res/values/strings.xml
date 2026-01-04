@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_step">Step</string>
+    <string name="set_step_size_summary">Choose a step size to group your tracks.</string>
+    <string name="set_step_size">Set step size</string>
     <string name="organize_by_summary">Automatically organize your tracks into groups based on a selected parameter like activity, speed, or location.</string>
     <string name="organize_by">Organize by</string>
     <string name="group_general">General</string>

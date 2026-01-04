@@ -28,7 +28,7 @@ enum class OrganizeByType(
 		nameResId = "duration",
 		filterType = TrackFilterType.DURATION,
 		category = OrganizeByCategory.GENERAL,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 180),
 		strategy = OrganizeByRangeStrategy
 	),
 	TIME_IN_MOTION(
@@ -36,7 +36,7 @@ enum class OrganizeByType(
 		nameResId = "moving_time",
 		filterType = TrackFilterType.TIME_IN_MOTION,
 		category = OrganizeByCategory.GENERAL,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 180),
 		strategy = OrganizeByRangeStrategy
 	),
 	LENGTH(
@@ -100,7 +100,7 @@ enum class OrganizeByType(
 		nameResId = "organize_by_max_altitude",
 		filterType = TrackFilterType.MAX_ALTITUDE,
 		category = OrganizeByCategory.ALTITUDE_ELEVATION,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 1000),
 		strategy = OrganizeByRangeStrategy
 	),
 	AVG_ALTITUDE(
@@ -108,7 +108,7 @@ enum class OrganizeByType(
 		nameResId = "shared_string_avg_altitude",
 		filterType = TrackFilterType.AVERAGE_ALTITUDE,
 		category = OrganizeByCategory.ALTITUDE_ELEVATION,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 1000),
 		strategy = OrganizeByRangeStrategy
 	),
 	UPHILL(
@@ -116,7 +116,7 @@ enum class OrganizeByType(
 		nameResId = "shared_string_uphill",
 		filterType = TrackFilterType.UPHILL,
 		category = OrganizeByCategory.ALTITUDE_ELEVATION,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 1000),
 		strategy = OrganizeByRangeStrategy
 	),
 	DOWNHILL(
@@ -124,7 +124,7 @@ enum class OrganizeByType(
 		nameResId = "shared_string_downhill",
 		filterType = TrackFilterType.DOWNHILL,
 		category = OrganizeByCategory.ALTITUDE_ELEVATION,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 1000),
 		strategy = OrganizeByRangeStrategy
 	),
 
@@ -150,7 +150,7 @@ enum class OrganizeByType(
 		nameResId = "max_sensor_heartrate",
 		filterType = TrackFilterType.MAX_SENSOR_HEART_RATE,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 20),
 		strategy = OrganizeByRangeStrategy
 	),
 	HEART_RATE_AVG(
@@ -158,7 +158,7 @@ enum class OrganizeByType(
 		nameResId = "avg_sensor_heartrate",
 		filterType = TrackFilterType.AVERAGE_SENSOR_HEART_RATE,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 20),
 		strategy = OrganizeByRangeStrategy
 	),
 	CADENCE_MAX(
@@ -166,7 +166,7 @@ enum class OrganizeByType(
 		nameResId = "max_sensor_cadence",
 		filterType = TrackFilterType.MAX_SENSOR_CADENCE,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(5, 25),
 		strategy = OrganizeByRangeStrategy
 	),
 	CADENCE_AVG(
@@ -174,7 +174,7 @@ enum class OrganizeByType(
 		nameResId = "avg_sensor_cadence",
 		filterType = TrackFilterType.AVERAGE_SENSOR_CADENCE,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(5, 25),
 		strategy = OrganizeByRangeStrategy
 	),
 	POWER_MAX(
@@ -182,7 +182,7 @@ enum class OrganizeByType(
 		nameResId = "max_sensor_bycicle_power",
 		filterType = TrackFilterType.MAX_SENSOR_BICYCLE_POWER,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(10, 100),
 		strategy = OrganizeByRangeStrategy
 	),
 	POWER_AVG(
@@ -190,7 +190,7 @@ enum class OrganizeByType(
 		nameResId = "avg_sensor_bycicle_power",
 		filterType = TrackFilterType.AVERAGE_SENSOR_BICYCLE_POWER,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(10, 100),
 		strategy = OrganizeByRangeStrategy
 	),
 	TEMP_MAX(
@@ -198,7 +198,7 @@ enum class OrganizeByType(
 		nameResId = "max_sensor_temperature",
 		filterType = TrackFilterType.MAX_SENSOR_TEMPERATURE,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 10),
 		strategy = OrganizeByRangeStrategy
 	),
 	TEMP_AVG(
@@ -206,7 +206,7 @@ enum class OrganizeByType(
 		nameResId = "avg_sensor_temperature",
 		filterType = TrackFilterType.AVERAGE_SENSOR_TEMPERATURE,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 10),
 		strategy = OrganizeByRangeStrategy
 	);
 

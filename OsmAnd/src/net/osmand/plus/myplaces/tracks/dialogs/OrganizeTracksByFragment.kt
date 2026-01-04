@@ -15,7 +15,8 @@ import net.osmand.plus.R
 import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider
-import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByController.Companion.PROCESS_ID
+import net.osmand.plus.myplaces.tracks.controller.OrganizeTracksByController
+import net.osmand.plus.myplaces.tracks.controller.OrganizeTracksByController.Companion.PROCESS_ID
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
@@ -144,7 +145,7 @@ class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDial
 
     private fun setupApplyButton(view: View) {
         view.findViewById<DialogButton>(R.id.save_button).setOnClickListener {
-            controller?.askSaveChanges()
+            controller?.askSaveChanges(activity)
             dismiss()
         }
     }

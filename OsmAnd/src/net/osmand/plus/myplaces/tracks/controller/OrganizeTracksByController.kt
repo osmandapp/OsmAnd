@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces.tracks.dialogs
+package net.osmand.plus.myplaces.tracks.controller
 
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -11,6 +11,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion
 import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.GROUP_HEADER
 import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.SELECTABLE_ITEM
 import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.SPACE
+import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByFragment
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.shared.gpx.organization.enums.OrganizeByCategory
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
@@ -18,6 +19,7 @@ import net.osmand.util.CollectionUtils
 
 class OrganizeTracksByController(
     val app: OsmandApplication,
+    val appMode: ApplicationMode,
     private val folderId: String
 ): BaseDialogController(app) {
 
@@ -30,7 +32,7 @@ class OrganizeTracksByController(
             folderId: String,
             appMode: ApplicationMode
         ) {
-            val controller = OrganizeTracksByController(app, folderId)
+            val controller = OrganizeTracksByController(app, appMode, folderId)
             app.dialogManager.register(PROCESS_ID, controller)
             if (!OrganizeTracksByFragment.showInstance(fragmentManager, appMode)) {
                 app.dialogManager.unregister(PROCESS_ID)
@@ -95,7 +97,12 @@ class OrganizeTracksByController(
         }
     }
 
-    fun askSaveChanges() {
+    fun askSaveChanges(activity: FragmentActivity?) {
         app.organizeTracksHelper.setOrganizeByType(folderId, selectedType)
+        val organizeByType = selectedType ?: return
+        if (organizeByType.stepRange != null) {
+            val manager = activity?.supportFragmentManager ?: return
+            OrganizeTracksStepController.showDialog(app, manager, appMode, folderId, organizeByType)
+        }
     }
 }
