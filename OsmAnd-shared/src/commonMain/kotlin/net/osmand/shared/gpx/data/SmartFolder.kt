@@ -81,6 +81,7 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	fun resetItems() {
 		trackItems = ArrayList()
+		tracksOrganizer.clearCache()
 		folderAnalysis = null
 	}
 }
