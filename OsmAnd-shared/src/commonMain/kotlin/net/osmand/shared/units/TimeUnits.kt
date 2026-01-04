@@ -22,7 +22,7 @@ enum class TimeUnits(
 	),
 
 	MINUTES(
-		nameKey = "shared_string_minute_lowercase",
+		nameKey = "osmand_parking_minutes",
 		symbolKey = "shared_string_minute_lowercase",
 		conversionCoefficient = 1.0 / 60000.0,
 		system = MeasurementSystem.UNIVERSAL
