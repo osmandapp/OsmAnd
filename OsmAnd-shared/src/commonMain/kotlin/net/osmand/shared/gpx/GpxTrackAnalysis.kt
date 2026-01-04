@@ -528,9 +528,7 @@ class GpxTrackAnalysis {
 				if (j > 0) {
 					val prev = s[j - 1]
 					if (distance < 0f) {
-						//distance = KMapUtils.getEllipsoidDistance(prev.lat, prev.lon, point.lat, point.lon).toFloat()
-						// Use Haversine, inaccuracy only 0.1-0.5% for 2-4x faster
-						distance = KMapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon).toFloat()
+						distance = KMapUtils.getEllipsoidDistance(prev.lat, prev.lon, point.lat, point.lon).toFloat()
 					}
 					if (distance > maxDistanceBetweenPoints) {
 						maxDistanceBetweenPoints = distance
