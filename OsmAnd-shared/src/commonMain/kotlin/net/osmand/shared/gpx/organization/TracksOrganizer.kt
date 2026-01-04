@@ -24,8 +24,9 @@ class TracksOrganizer(val parent: SmartFolder) {
 			strategyChanged = true
 		}
 
-		val stepChanged = (oldRules?.stepSize ?: false) != rules.stepSize
+		val stepChanged = oldRules?.stepSize != rules.stepSize
 		if (!strategyChanged && !stepChanged && cachedOrganizedGroups != null) {
+			// if no changes - return cached value
 			return cachedOrganizedGroups
 		}
 		return strategy?.apply(parent, rules, resourceMapper)
