@@ -34,7 +34,7 @@ class OrganizeTracksHelper(val app: OsmandApplication) {
 		var stepSize = stepCache[folderId]
 		if (type?.stepRange != null) {
 			if (typeChanged || stepSize == null) {
-				stepSize = type.getMeasurementUnits().toBase(type.stepRange!!.getMidpoint())
+				stepSize = type.getDisplayUnits().toBase(type.stepRange!!.getMidpoint())
 			}
 			setStepSize(folderId, stepSize)
 		} else {

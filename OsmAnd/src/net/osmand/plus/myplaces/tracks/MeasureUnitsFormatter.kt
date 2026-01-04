@@ -29,7 +29,7 @@ object MeasureUnitsFormatter {
 			MeasureUnitType.ALTITUDE -> OsmAndFormatter.getFormattedAltitudeValue(value.toDouble(), app, am)
 			MeasureUnitType.DISTANCE -> OsmAndFormatter.getFormattedDistanceValue(value.toFloat(), app, formatterParams)
 			MeasureUnitType.TIME_DURATION -> FormattedValue(
-				value.toFloat() / 1000 / 60,
+				(value.toDouble() / 1000 / 60).toFloat(),
 				value,
 				""
 			)

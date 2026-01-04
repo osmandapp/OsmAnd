@@ -2,8 +2,6 @@ package net.osmand.plus.track
 
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.myplaces.tracks.MeasureUnitsFormatter
-import net.osmand.plus.utils.OsmAndFormatterParams
 import net.osmand.shared.data.Limits
 import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
@@ -14,19 +12,15 @@ object AndroidOrganizeTracksResourceMapper: OrganizeTracksResourceMapper() {
 
 	override fun resolveName(type: OrganizeByType, value: Any): String {
 		if (value is Limits) {
-			val params = OsmAndFormatterParams()
-			params.setExtraDecimalPrecision(0)
-			params.setForcePreciseValue(true)
-
-			val unitType = type.filterType.measureUnitType
+			val displayUnits = type.getDisplayUnits()
 			val min = value.min.toDouble()
 			val max = value.max.toDouble()
 
-			val from = MeasureUnitsFormatter.getFormattedValue(app, unitType, min.toString(), params)
-			val to = MeasureUnitsFormatter.getFormattedValue(app, unitType, max.toString(), params)
-			val formattedRange = app.getString(R.string.ltr_or_rtl_combine_via_dash, from.value, to.value)
+			val from = displayUnits.fromBase(min).toInt()
+			val to = displayUnits.fromBase(max).toInt()
+			val formattedRange = app.getString(R.string.ltr_or_rtl_combine_via_dash, from.toString(), to.toString())
 
-			val unitsLabel = MeasureUnitsFormatter.getUnitsLabel(app, unitType)
+			val unitsLabel = displayUnits.getSymbol()
 			return app.getString(R.string.ltr_or_rtl_combine_via_space, formattedRange, unitsLabel)
 		} else if (value is String && type == OrganizeByType.ACTIVITY) {
 			val activity = app.routeActivityHelper.findRouteActivity(value)

@@ -12,11 +12,9 @@ import net.osmand.plus.base.dialog.data.DisplayData
 import net.osmand.plus.card.base.headed.IHeadedContentCard
 import net.osmand.plus.card.base.slider.ISliderCard
 import net.osmand.plus.card.base.slider.SliderCard
-import net.osmand.plus.myplaces.tracks.MeasureUnitsFormatter
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.bottomsheets.CustomizableSliderBottomSheet
 import net.osmand.plus.settings.controllers.ICustomizableSliderDialogController
-import net.osmand.plus.utils.OsmAndFormatterParams
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 class OrganizeTracksStepController(
@@ -104,24 +102,15 @@ class OrganizeTracksStepController(
 	// ----------- Utilities methods -----------
 
 	private fun formatValueWithUnits(value: Int): String {
-		val unitType = organizeByType.filterType.measureUnitType
-		val params = OsmAndFormatterParams().apply {
-			setExtraDecimalPrecision(0)
-			setForcePreciseValue(true)
-		}
-
-		val baseValue = convertToBaseUnits(value)
-		val formatted = MeasureUnitsFormatter.getFormattedValue(app, unitType, baseValue.toString(), params)
-		val unitsLabel = MeasureUnitsFormatter.getUnitsLabel(app, unitType)
-		return "${formatted.value} $unitsLabel"
+		return "$value ${organizeByType.getDisplayUnits().getSymbol()}"
 	}
 
 	private fun convertToBaseUnits(value: Int): Double {
-		return organizeByType.getMeasurementUnits().toBase(value.toDouble())
+		return organizeByType.getDisplayUnits().toBase(value.toDouble())
 	}
 
 	private fun convertFromBaseUnits(value: Double): Double {
-		return organizeByType.getMeasurementUnits().fromBase(value)
+		return organizeByType.getDisplayUnits().fromBase(value)
 	}
 
 	override fun getDisplayData(processId: String): DisplayData {

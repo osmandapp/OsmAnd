@@ -107,7 +107,7 @@ class OrganizeTracksByController(
         if (type.stepRange != null) {
             val manager = activity?.supportFragmentManager ?: return
             val stepSizeInBaseUnits = app.organizeTracksHelper.getStepSize(folderId)!!
-            val stepSize = type.getMeasurementUnits().fromBase(stepSizeInBaseUnits).toInt()
+            val stepSize = type.getDisplayUnits().fromBase(stepSizeInBaseUnits).toInt()
             OrganizeTracksStepController.showDialog(app, manager, appMode, folderId, type, stepSize)
         }
     }

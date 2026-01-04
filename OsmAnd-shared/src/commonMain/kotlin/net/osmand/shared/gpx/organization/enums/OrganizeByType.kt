@@ -214,5 +214,5 @@ enum class OrganizeByType(
 
 	fun getIconName() = iconResId
 
-	fun getMeasurementUnits() = filterType.measureUnitType.getUnit()
+	fun getDisplayUnits() = filterType.measureUnitType.getUnit()
 }
