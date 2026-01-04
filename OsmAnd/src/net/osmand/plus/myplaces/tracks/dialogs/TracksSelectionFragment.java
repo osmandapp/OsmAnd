@@ -25,12 +25,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.R;
+import net.osmand.plus.track.AndroidOrganizeTracksResourceMapper;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
@@ -48,8 +50,8 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 
 	public static final String TAG = TracksSelectionFragment.class.getSimpleName();
 
-	private ItemsSelectionHelper<TrackItem> itemsSelectionHelper = new ItemsSelectionHelper<>();
-	private ItemsSelectionHelper<TracksGroup> groupsSelectionHelper = new ItemsSelectionHelper<>();
+	private final ItemsSelectionHelper<TrackItem> itemsSelectionHelper = new ItemsSelectionHelper<>();
+	private final ItemsSelectionHelper<TracksGroup> groupsSelectionHelper = new ItemsSelectionHelper<>();
 
 	@Nullable
 	private Set<TrackItem> preselectedTrackItems;
@@ -66,10 +68,6 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getStatusBarActiveColorId(nightMode);
-	}
-
-	public boolean getContentStatusBarNightMode() {
-		return nightMode;
 	}
 
 	@NonNull
@@ -97,18 +95,30 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	}
 
 	@Override
-	public void setRootFolder(@NonNull TracksGroup rootFolder) {
-		if (rootFolder instanceof SmartFolder folder) {
+	public void setRootFolder(@NonNull TracksGroup rootGroup) {
+		if (rootGroup instanceof OrganizedTracksGroup organizedTracks) {
+			setSmartFolder(organizedTracks.getRelatedSmartFolder());
+		} else if (rootGroup instanceof SmartFolder folder) {
 			setSmartFolder(folder);
 		} else {
-			super.setRootFolder(rootFolder);
+			super.setRootFolder(rootGroup);
 		}
 		itemsSelectionHelper.clearSelectedItems();
 		groupsSelectionHelper.clearSelectedItems();
 
-		itemsSelectionHelper.setAllItems(rootFolder.getTrackItems());
-		if (rootFolder instanceof TrackFolder) {
-			groupsSelectionHelper.setAllItems(((TrackFolder) rootFolder).getSubFolders());
+		if (rootGroup instanceof TrackFolder folder) {
+			groupsSelectionHelper.setAllItems(folder.getSubFolders());
+		}
+		boolean addIndividualItems = true;
+		if (rootGroup instanceof SmartFolder folder) {
+			List<OrganizedTracksGroup> organizedTracks = folder.getOrganizedTrackItems(AndroidOrganizeTracksResourceMapper.INSTANCE);
+			if (!Algorithms.isEmpty(organizedTracks)) {
+				groupsSelectionHelper.setAllItems(organizedTracks);
+				addIndividualItems = false;
+			}
+		}
+		if (addIndividualItems) {
+			itemsSelectionHelper.setAllItems(rootGroup.getTrackItems());
 		}
 		if (!Algorithms.isEmpty(preselectedTrackItems)) {
 			itemsSelectionHelper.setSelectedItems(preselectedTrackItems);
@@ -139,14 +149,14 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 			items.add(TYPE_SORT_TRACKS);
 
 			Set<TrackItem> trackItems = itemsSelectionHelper.getAllItems();
+			Set<TracksGroup> tracksGroups = groupsSelectionHelper.getAllItems();
 
-			if (trackItems.isEmpty()) {
+			if (trackItems.isEmpty() && tracksGroups.isEmpty()) {
 				items.add(TYPE_EMPTY_FOLDER);
+			} else if (!tracksGroups.isEmpty()){
+				items.addAll(tracksGroups);
 			} else {
 				items.addAll(trackItems);
-				if (shouldShowFolderStats()) {
-					items.add(selectedFolder.getFolderAnalysis());
-				}
 			}
 			return items;
 		}
@@ -372,7 +382,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	}
 
 	public static void showInstance(
-			@NonNull FragmentManager manager, @NonNull TracksGroup trackFolder, @Nullable Fragment target,
+			@NonNull FragmentManager manager, @NonNull TracksGroup tracksGroup, @Nullable Fragment target,
 			@Nullable Set<TrackItem> trackItems, @Nullable Set<TracksGroup> tracksGroups,
 			@Nullable ScreenPositionData screenPositionData
 	) {
@@ -382,9 +392,9 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 			fragment.preselectedTracksGroups = tracksGroups;
 			fragment.screenPositionData = screenPositionData;
 			fragment.setRetainInstance(true);
-			fragment.setRootFolder(trackFolder);
-			if (trackFolder instanceof TrackFolder) {
-				fragment.setSelectedFolder((TrackFolder) trackFolder);
+			fragment.setRootFolder(tracksGroup);
+			if (tracksGroup instanceof TrackFolder trackFolder) {
+				fragment.setSelectedFolder(trackFolder);
 			}
 			fragment.setTargetFragment(target, 0);
 

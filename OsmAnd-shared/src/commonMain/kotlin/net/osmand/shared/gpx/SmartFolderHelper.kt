@@ -136,7 +136,7 @@ object SmartFolderHelper {
 		}
 	}
 
-	private fun notifyFolderUpdatedListeners(smartFolder: SmartFolder) {
+	fun notifyFolderUpdatedListeners(smartFolder: SmartFolder) {
 		for (listener in updateListeners) {
 			listener.onSmartFolderUpdated(smartFolder)
 		}
@@ -273,6 +273,15 @@ object SmartFolderHelper {
 	fun getSmartFolder(name: String): SmartFolder? {
 		for (folder in smartFolderCollection) {
 			if (KAlgorithms.stringsEqual(folder.folderName, name)) {
+				return folder
+			}
+		}
+		return null
+	}
+
+	fun getSmartFolderById(id: String): SmartFolder? {
+		for (folder in smartFolderCollection) {
+			if (KAlgorithms.stringsEqual(folder.getId(), id)) {
 				return folder
 			}
 		}

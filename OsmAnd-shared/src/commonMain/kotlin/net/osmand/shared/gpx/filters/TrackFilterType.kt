@@ -13,8 +13,8 @@ enum class TrackFilterType(
 	val measureUnitType: MeasureUnitType,
 	val defaultParams: List<Any>?,
 	val updateOnOtherFiltersChangeNeeded: Boolean,
-	val additionalData: Any? = null) {
-
+	val additionalData: Any? = null
+) {
 	NAME(
 		"shared_string_name",
 		FilterType.TEXT,
@@ -211,7 +211,5 @@ enum class TrackFilterType(
 		false,
 		listOf(VISIBLE_ON_MAP, WITH_WAYPOINTS, HAS_VEHICLE_METRICS));
 
-	fun getName(): String {
-		return Localization.getString(nameResId)
-	}
+	fun getName() = Localization.getString(nameResId)
 }

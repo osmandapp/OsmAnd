@@ -34,5 +34,4 @@ sealed class BaseTrackFilter(
 		result = 31 * result + (filterChangedListener?.hashCode() ?: 0)
 		return result
 	}
-
 }
