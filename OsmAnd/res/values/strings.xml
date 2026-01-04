@@ -29,7 +29,6 @@
     <string name="organize_by_max_altitude">Max. altitude</string>
     <string name="has_vehicle_metrics">With OBDII data</string>
     <string name="lang_mi">Māori</string>
-    <string name="lang_mi">Maori</string>
     <string name="vehicle_metrics_chart_category">Vehicle metrics</string>
     <string name="delete_folder_description">Delete \"%1$s\" folder?</string>
     <string name="routing_attr_pt_limit_name">Display N best routes</string>
