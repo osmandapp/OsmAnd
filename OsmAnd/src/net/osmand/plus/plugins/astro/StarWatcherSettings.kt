@@ -28,6 +28,8 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		private const val KEY_SHOW_STARS = "showStars"
 		private const val KEY_SHOW_GALAXIES = "showGalaxies"
 		private const val KEY_SHOW_BLACK_HOLES = "showBlackHoles"
+		private const val KEY_SHOW_MAGNITUDE_FILTER = "showMagnitudeFilter"
+		private const val KEY_MAGNITUDE_FILTER = "magnitudeFilter"
 
 		private const val KEY_ITEMS = "items"
 		private const val KEY_ID = "id"
@@ -61,6 +63,8 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showStars: Boolean,
 		val showGalaxies: Boolean,
 		val showBlackHoles: Boolean,
+		val showMagnitudeFilter: Boolean,
+		val magnitudeFilter: Double?,
 		val items: List<SkyObjectConfig>
 	)
 
@@ -156,11 +160,14 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showGalaxies = mapSettings?.optBoolean(KEY_SHOW_GALAXIES, false) ?: false
 		val showBlackHoles = mapSettings?.optBoolean(KEY_SHOW_BLACK_HOLES, false) ?: false
 
+		val showMagnitudeFilter = mapSettings?.optBoolean(KEY_SHOW_MAGNITUDE_FILTER, false) ?: false
+		val magnitudeFilter = mapSettings?.optDouble(KEY_MAGNITUDE_FILTER)?.takeIf { !it.isNaN() }
+
 		val items = parseItems(mapSettings)
 
 		return StarMapConfig(
 			showAzimuthal, showEquatorial, showEcliptic, showSun, showMoon, showPlanets,
-			showConstellations, showStars, showGalaxies, showBlackHoles, items
+			showConstellations, showStars, showGalaxies, showBlackHoles, showMagnitudeFilter, magnitudeFilter, items
 		)
 	}
 
@@ -181,6 +188,13 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		mapSettings.put(KEY_SHOW_STARS, config.showStars)
 		mapSettings.put(KEY_SHOW_GALAXIES, config.showGalaxies)
 		mapSettings.put(KEY_SHOW_BLACK_HOLES, config.showBlackHoles)
+
+		mapSettings.put(KEY_SHOW_MAGNITUDE_FILTER, config.showMagnitudeFilter)
+		if (config.magnitudeFilter == null) {
+			mapSettings.remove(KEY_MAGNITUDE_FILTER)
+		} else {
+			mapSettings.put(KEY_MAGNITUDE_FILTER, config.magnitudeFilter)
+		}
 
 		mapSettings.put(KEY_ITEMS, serializeItems(config.items))
 

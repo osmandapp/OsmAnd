@@ -157,6 +157,7 @@ class StarView @JvmOverloads constructor(
 	var onAnimationFinished: (() -> Unit)? = null
 	var onAzimuthManualChangeListener: ((Double) -> Unit)? = null
 	var onViewAngleChangeListener: ((Double) -> Unit)? = null
+	var magnitudeFilter: Double? = null
 
 	var roll = 0.0
 		set(value) {
@@ -529,7 +530,7 @@ class StarView @JvmOverloads constructor(
 
 	private fun isObjectVisibleInSettings(obj: SkyObject): Boolean {
 		return when (obj.type) {
-			SkyObject.Type.STAR -> showStars
+			SkyObject.Type.STAR -> showStars && (magnitudeFilter?.let { obj.magnitude <= it } ?: true)
 			SkyObject.Type.GALAXY -> showGalaxies
 			SkyObject.Type.BLACK_HOLE -> showBlackHoles
 			SkyObject.Type.SUN -> showSun

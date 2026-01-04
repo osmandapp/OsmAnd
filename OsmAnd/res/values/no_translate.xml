@@ -95,6 +95,7 @@
 	<string name="azimuthal_grid">Azimuthal Grid</string>
 	<string name="equatorial_grid">Equatorial Grid</string>
 	<string name="ecliptic_line">Ecliptic Line</string>
+	<string name="magnitude_filter">Magnitude filter</string>
 	<string name="astro_planets">Planets</string>
 	<string name="astro_constellation">Constellation</string>
 	<string name="astro_constellations">Constellations</string>
