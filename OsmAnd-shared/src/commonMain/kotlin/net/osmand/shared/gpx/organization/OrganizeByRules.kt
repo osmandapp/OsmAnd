@@ -11,5 +11,5 @@ import net.osmand.shared.gpx.organization.enums.OrganizeByType
 @Serializable
 data class OrganizeByRules(
 	val type: OrganizeByType,
-	val stepSize: Int? = null
+	val stepSize: Double? = null
 )

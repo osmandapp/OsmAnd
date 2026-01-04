@@ -213,4 +213,6 @@ enum class OrganizeByType(
 	fun getName() = Localization.getString(nameResId)
 
 	fun getIconName() = iconResId
+
+	fun getMeasurementUnits() = filterType.measureUnitType.getUnit()
 }

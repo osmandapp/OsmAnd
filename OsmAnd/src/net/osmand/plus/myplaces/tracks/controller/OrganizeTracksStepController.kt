@@ -23,7 +23,7 @@ class OrganizeTracksStepController(
 	val app: OsmandApplication,
 	private val folderId: String,
 	private val organizeByType: OrganizeByType,
-	private val initialValue: Int = organizeByType.stepRange!!.getMidpoint().toInt() // TODO: if type doesn't changed - use stored step size, otherwise use midpoint of the range
+	private val initialValue: Int
 ): BaseDialogController(app), ICustomizableSliderDialogController {
 
 	companion object {
@@ -34,9 +34,10 @@ class OrganizeTracksStepController(
 			fragmentManager: FragmentManager,
 			appMode: ApplicationMode,
 			folderId: String,
-			type: OrganizeByType
+			type: OrganizeByType,
+			initialValue: Int
 		) {
-			val controller = OrganizeTracksStepController(app, folderId, type)
+			val controller = OrganizeTracksStepController(app, folderId, type, initialValue)
 			// todo: set listener if needed
 			app.dialogManager.register(PROCESS_ID, controller)
 			CustomizableSliderBottomSheet.showInstance(fragmentManager, appMode, PROCESS_ID)
@@ -81,7 +82,7 @@ class OrganizeTracksStepController(
 	override fun onChangeSliderValue(newValue: Float) {
 		selectedValue = newValue.toInt()
 		headedCard?.updateCardSummary()
-		app.organizeTracksHelper.setStepSize(folderId, selectedValue*1000)
+		app.organizeTracksHelper.setStepSize(folderId, convertToBaseUnits(selectedValue))
 	}
 
 	override fun formatValue(number: Number): String {
@@ -91,11 +92,13 @@ class OrganizeTracksStepController(
 	// ----------- implement specific ICustomizableSliderDialogController methods -----------
 
 	override fun onDiscardChanges() {
-		app.organizeTracksHelper.setStepSize(folderId, initialValue*1000)
+		app.organizeTracksHelper.setStepSize(folderId, convertToBaseUnits(initialValue))
 	}
 
 	override fun onApplyChanges() {
-		// TODO: do nothing, all changes are already applied on flight
+		if (initialValue != selectedValue) {
+			app.organizeTracksHelper.setStepSize(folderId, convertToBaseUnits(selectedValue))
+		}
 	}
 
 	// ----------- Utilities methods -----------
@@ -107,9 +110,18 @@ class OrganizeTracksStepController(
 			setForcePreciseValue(true)
 		}
 
-		val formatted = MeasureUnitsFormatter.getFormattedValue(app, unitType, (value*1000).toString(), params)
+		val baseValue = convertToBaseUnits(value)
+		val formatted = MeasureUnitsFormatter.getFormattedValue(app, unitType, baseValue.toString(), params)
 		val unitsLabel = MeasureUnitsFormatter.getUnitsLabel(app, unitType)
 		return "${formatted.value} $unitsLabel"
+	}
+
+	private fun convertToBaseUnits(value: Int): Double {
+		return organizeByType.getMeasurementUnits().toBase(value.toDouble())
+	}
+
+	private fun convertFromBaseUnits(value: Double): Double {
+		return organizeByType.getMeasurementUnits().fromBase(value)
 	}
 
 	override fun getDisplayData(processId: String): DisplayData {

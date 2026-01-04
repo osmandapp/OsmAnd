@@ -59,6 +59,12 @@ public class CustomizableSliderBottomSheet extends CustomizableBottomSheet {
 		return R.string.shared_string_apply;
 	}
 
+	@Override
+	protected void onRightBottomButtonClick() {
+		controller.onApplyChanges();
+		dismiss();
+	}
+
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull ApplicationMode appMode,
 	                                @NonNull String processId) {

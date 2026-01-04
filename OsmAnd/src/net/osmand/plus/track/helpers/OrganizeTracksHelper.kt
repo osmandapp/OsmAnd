@@ -5,7 +5,7 @@ import net.osmand.plus.track.AndroidOrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.OrganizeByRules
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
-// TODO: need to be improved
+// TODO: needed only for testing purposes
 class OrganizeTracksHelper(val app: OsmandApplication) {
 
 	init {
@@ -14,38 +14,45 @@ class OrganizeTracksHelper(val app: OsmandApplication) {
 	}
 
 	private val typeCache = mutableMapOf<String, OrganizeByType>()
-	private val stepCache = mutableMapOf<String, Int>()
+	private val stepCache = mutableMapOf<String, Double>()
 
-	fun getStepSize(folderId: String): Int? {
-		return stepCache[folderId]
-	}
+	fun getOrganizeByType(folderId: String) = typeCache[folderId]
 
-	fun getOrganizeByType(folderId: String): OrganizeByType? {
-		return typeCache[folderId]
-	}
-
-	fun setStepSize(folderId: String, stepSize: Int?) {
-		if (stepSize != null) {
-			stepCache[folderId] = stepSize
-		} else {
-			stepCache.remove(folderId)
-		}
-		updateFolder(folderId)
-	}
+	fun getStepSize(folderId: String) = stepCache[folderId]
 
 	fun setOrganizeByType(folderId: String, type: OrganizeByType?) {
+		val previousType = typeCache[folderId]
+		val typeChanged = previousType != type
+
 		if (type != null) {
 			typeCache[folderId] = type
 		} else {
 			typeCache.remove(folderId)
 		}
-		updateFolder(folderId)
+
+		// Update step size on flight when type changed and current type has step range
+		var stepSize = stepCache[folderId]
+		if (type?.stepRange != null) {
+			if (typeChanged || stepSize == null) {
+				stepSize = type.getMeasurementUnits().toBase(type.stepRange!!.getMidpoint())
+			}
+			setStepSize(folderId, stepSize)
+		} else {
+			updateFolder(folderId, type, null)
+		}
 	}
 
-	private fun updateFolder(folderId: String) {
+	fun setStepSize(folderId: String, stepSize: Double?) {
+		if (stepSize != null) {
+			stepCache[folderId] = stepSize
+		} else {
+			stepCache.remove(folderId)
+		}
+		updateFolder(folderId, typeCache[folderId], stepSize)
+	}
+
+	private fun updateFolder(folderId: String, type: OrganizeByType?, stepSize: Double?) {
 		val folder = app.smartFolderHelper.getSmartFolderById(folderId)
-		val type = typeCache[folderId]
-		val stepSize = stepCache[folderId] ?: 10_000 // TODO: if type changed - use preselected step size value
 		val rules = if (type != null) OrganizeByRules(type, stepSize) else null
 		folder?.setOrganizeByRules(rules)
 		// TODO: try to find better way to update

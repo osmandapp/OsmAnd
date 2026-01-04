@@ -99,10 +99,16 @@ class OrganizeTracksByController(
 
     fun askSaveChanges(activity: FragmentActivity?) {
         app.organizeTracksHelper.setOrganizeByType(folderId, selectedType)
-        val organizeByType = selectedType ?: return
-        if (organizeByType.stepRange != null) {
+        showStepSizeDialogIfNeeded(activity)
+    }
+
+    private fun showStepSizeDialogIfNeeded(activity: FragmentActivity?) {
+        val type = selectedType ?: return
+        if (type.stepRange != null) {
             val manager = activity?.supportFragmentManager ?: return
-            OrganizeTracksStepController.showDialog(app, manager, appMode, folderId, organizeByType)
+            val stepSizeInBaseUnits = app.organizeTracksHelper.getStepSize(folderId)!!
+            val stepSize = type.getMeasurementUnits().fromBase(stepSizeInBaseUnits).toInt()
+            OrganizeTracksStepController.showDialog(app, manager, appMode, folderId, type, stepSize)
         }
     }
 }

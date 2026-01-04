@@ -45,12 +45,12 @@ object OrganizeByRangeStrategy: OrganizeByStrategy<Limits> {
 	override fun createRepresentedValueId(value: Limits) = "from_${value.min}_to_${value.max}"
 
 
-	private fun getRangeStartIndicator(trackItem: TrackItem, type: OrganizeByType, step: Int): Int? {
+	private fun getRangeStartIndicator(trackItem: TrackItem, type: OrganizeByType, step: Double): Int? {
 		val property = type.filterType.property ?: return null
 
 		val value: Comparable<Any> = trackItem.dataItem?.getParameter(property) ?: return null
 		val valueInt = getInt(property.getComparableValue<Double>(value))
-		return floor((valueInt/step).toDouble()).toInt()
+		return floor((valueInt/step)).toInt()
 	}
 
 	private fun getInt(value: Any?): Int {
