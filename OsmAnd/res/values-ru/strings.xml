@@ -114,7 +114,7 @@
     <string name="index_item_depth_points_southern_hemisphere">Отметки морских глубин южного полушария</string>
     <string name="index_item_depth_points_northern_hemisphere">Отметки морских глубин северного полушария</string>
     <string name="depth_contour_descr">Контуры морских глубин и отметки.</string>
-    <string name="subscribe_email_desc">Подпишитесь на нашу рассылку о скидках на приложение и получите 3 дополнительные загрузки карт!</string>
+    <string name="subscribe_email_desc">Подпишитесь на нашу рассылку о скидках на приложение и получите 3 дополнительных скачивания карт!</string>
     <string name="subscribe_email_error">Ошибка</string>
     <string name="quick_action_auto_zoom">Автомасштаб карты</string>
     <string name="quick_action_auto_zoom_desc">Кнопка включения автомасштабирования на основе скорости.</string>
@@ -193,7 +193,7 @@
     <string name="rendering_value_low_name">Низкая</string>
     <string name="rendering_attr_contourWidth_description">Толщина горизонталей</string>
     <string name="rendering_attr_contourWidth_name">Толщина горизонталей</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Вода</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Скрыть водные объекты</string>
     <string name="rendering_attr_hideWaterPolygons_name">Водные объекты</string>
     <string name="routing_attr_allow_motorway_name">Разрешить магистрали</string>
     <string name="routing_attr_allow_motorway_description">Разрешает движение по автомагистралям.</string>
@@ -223,7 +223,7 @@
     <string name="christmas_poi">Рождественские POI</string>
     <string name="christmas_desc">В преддверии рождественских и новогодних праздников вы можете выбрать отображение связанных с ними POI, таких как рождественские ёлки, ярмарки и т.д.</string>
     <string name="christmas_desc_q">Показывать праздничные POI\?</string>
-    <string name="rendering_attr_contourColorScheme_description">Цвет горизонталей</string>
+    <string name="rendering_attr_contourColorScheme_description">Цветовая гамма контурных линий</string>
     <string name="rendering_value_light_brown_name">Светло-коричневый</string>
     <string name="rendering_value_dark_brown_name">Тёмно-коричневый</string>
     <string name="rendering_attr_contourColorScheme_name">Цветовая схема горизонталей</string>
@@ -402,7 +402,7 @@
     <string name="use_fluorescent_overlays">Флуоресцентные цвета</string>
     <string name="use_fluorescent_overlays_descr">Использовать флуоресцентные цвета для отображения треков и маршрутов.</string>
     <string name="offline_edition">Локальное редактирование</string>
-    <string name="offline_edition_descr">Если используется редактирование на устройстве, то изменения будут сохранены локально и загружены на сервер только по запросу, иначе они будут загружаться немедленно.</string>
+    <string name="offline_edition_descr">Если используется редактирование на устройстве, то изменения будут сохранены локально и отправлены на сервер только по запросу, иначе они будут отправляться немедленно.</string>
     <string name="update_poi_does_not_change_indexes">Изменение POI в приложении не меняет POI загруженные из интернета, однако все изменения сохраняются в локальный файл на устройстве.</string>
     <string name="local_openstreetmap_uploading">Отправка…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/заметок отправлено</string>
@@ -498,7 +498,7 @@
     <string name="local_index_descr_title">Управление картами.</string>
     <string name="local_index_mi_restore">Активировать</string>
     <string name="local_index_mi_backup">Архивировать</string>
-    <string name="shared_string_download">Загрузить</string>
+    <string name="shared_string_download">Скачать</string>
     <string name="local_index_poi_data">POI</string>
     <string name="local_index_address_data">Адрес</string>
     <string name="local_index_transport_data">Данные публичного транспорта</string>
@@ -1705,7 +1705,7 @@
     <string name="shared_string_tracks">Треки</string>
     <string name="shared_string_currently_recording_track">Текущий трек</string>
     <string name="share_note">Поделиться заметкой</string>
-    <string name="shared_string_release">Дата выпуска</string>
+    <string name="shared_string_release">Выпущенный</string>
     <string name="routing_settings_2">Настройки навигации</string>
     <string name="general_settings_2">Общие настройки</string>
     <string name="shared_string_clear_all">Очистить все</string>
@@ -1733,9 +1733,9 @@
     <string name="shared_string_go">Поехали</string>
     <string name="local_osm_changes_upload_all_confirm">Отправить изменения (%1$d) в OSM\?</string>
     <string name="confirmation_to_clear_history">Очистить историю?</string>
-    <string name="plugin_ski_descr">Информация о маршрутах для беговых лыж, горнолыжных трассах, альпийских спусках, фуникулёрах и горнолыжных подъёмниках. Маршруты и спуски отмечены разными цветами в зависимости от сложности и отображаются в особом «зимнем» стиле карты, где используются «снежные» цвета зимнего пейзажа. \n \nПри выборе этого стиля вид карты меняется на «Зимний/лыжный», отображая все детали так, как они выглядят зимой. \nОтключить стиль можно здесь либо через смену стиля карты в разделе «Настройки карты».</string>
+    <string name="plugin_ski_descr">Предназначено для навигации по зонам зимних видов спорта: просматривайте лыжные трассы и подъемники, а также трассы для беговых лыж с цветными линиями, обозначающими уровни сложности. Для использования включите этот плагин, а также перейдите в раздел \"Настройка карты\" и выберите в разделе Тип карты: \"Winter and ski\".</string>
     <string name="current_route">Текущий маршрут</string>
-    <string name="welmode_download_maps">Загрузка карт</string>
+    <string name="welmode_download_maps">Скачивание карт</string>
     <string name="welcome_select_region">Для правильного отображения дорожных знаков и правил выберите свой регион вождения:</string>
     <string name="welcome_header">Добро пожаловать</string>
     <string name="mark_to_delete">Отметить для удаления</string>
@@ -1938,7 +1938,7 @@
     <string name="shared_string_send">Отправить</string>
     <string name="application_dir_description">Выберите, где вы хотите хранить файлы карт и другие данные.</string>
     <string name="show_on_start_description">При выключении сразу открывается карта.</string>
-    <string name="map_downloaded">Карта загружена</string>
+    <string name="map_downloaded">Карта скачена</string>
     <string name="shared_string_qr_code">QR-код</string>
     <string name="go_to_map">Показать карту</string>
     <string name="world_map_download_descr">Базовая карта мира (покрывающая весь мир с низким уровнем масштабирования) отсутствует или устарела. Загрузите её для глобального обзора.</string>
@@ -2171,18 +2171,18 @@
     <string name="storage_place_description">Хранилище данных OsmAnd (для карт, файлов треков и пр.): %1$s.</string>
     <string name="storage_free_space">Свободное место</string>
     <string name="search_location">Определение позиции…</string>
-    <string name="no_inet_connection_desc_map">Требуется загрузить карты.</string>
+    <string name="no_inet_connection_desc_map">Требуется скачать карты.</string>
     <string name="no_inet_connection">Соединение с интернетом отсутствует</string>
     <string name="location_not_found">Не удалось определить местоположение</string>
-    <string name="first_usage_wizard_desc">OsmAnd определит ваше местоположение и предложит загрузить карты для этой области.</string>
+    <string name="first_usage_wizard_desc">OsmAnd определит ваше местоположение и предложит скачать карты для этой области.</string>
     <string name="search_map">Поиск карт…</string>
     <string name="search_another_country">Выберите другой регион</string>
-    <string name="skip_map_downloading">Пропустить загрузку карт</string>
+    <string name="skip_map_downloading">Пропустить скачивание карт</string>
     <string name="skip_map_downloading_desc">Офлайн-карты не загружены. Можете загрузить из списка сейчас или позже («Меню — %1$s»).</string>
     <string name="si_mi_meters">Мили/метры</string>
     <string name="get_for">Получить за %1$s</string>
     <string name="get_it">Получить</string>
-    <string name="osm_live_banner_desc">Получите неограниченное количество загрузок карт, а также еженедельные, ежедневные и даже почасовые обновления.</string>
+    <string name="osm_live_banner_desc">Получите неограниченное количество скачиваний карт, а также еженедельные, ежедневные и даже почасовые обновления.</string>
     <string name="osmand_plus_banner_desc">Неограниченный доступ к картам, обновлениям и плагину «Википедия».</string>
     <string name="select_voice_provider">Голосовое сопровождение</string>
     <string name="osm_live_payment_desc">Абонентская плата взимается за выбранный период. Отменить подписку можно в Google Play в любой момент.</string>
@@ -2249,7 +2249,7 @@
     <string name="shared_string_date">Дата</string>
     <string name="mapillary_menu_descr_username">Просмотр фотографий пользователя</string>
     <string name="mapillary_menu_title_username">Имя пользователя</string>
-    <string name="map_widget_ruler_control">Радиус-линейка</string>
+    <string name="map_widget_ruler_control">Радиусная линейка</string>
     <string name="open_mapillary">Открыть Mapillary</string>
     <string name="shared_string_install">Установить</string>
     <string name="shared_string_paused">Приостановлено</string>
@@ -2588,7 +2588,7 @@
     <string name="delete_search_history">Удалить историю поиска</string>
     <string name="show_images">Показать изображения</string>
     <string name="shared_string_only_with_wifi">Только по Wi-Fi</string>
-    <string name="wikivoyage_download_pics">Загружать изображения</string>
+    <string name="wikivoyage_download_pics">Скачивать изображения</string>
     <string name="wikivoyage_download_pics_descr">Изображения из статей можно загрузить для использования в автономном режиме. 
 \nВы всегда можете изменить настройку в «Исследовать» → «Параметры».</string>
     <string name="shared_string_wifi_only">Только по Wi-Fi</string>
@@ -2605,18 +2605,17 @@
     <string name="in_app_purchase_desc">Разовый платёж</string>
     <string name="purchase_unlim_title">Купить — %1$s</string>
     <string name="wikivoyage_offline">Локальный Викигид</string>
-    <string name="unlimited_downloads">Неограниченные загрузки</string>
+    <string name="unlimited_downloads">Неограниченные скачивания</string>
     <string name="wikipedia_offline">Локальная Википедия</string>
     <string name="unlock_all_features">Разблокировать все функции OsmAnd</string>
     <string name="monthly_map_updates">Обновления карт: ежемесячные
     </string>
-    <string name="daily_map_updates">Обновления карт: ежечасные
-    </string>
+    <string name="daily_map_updates">Ежечасное обновление карты</string>
     <string name="in_app_purchase_desc_ex">После покупки этот план станет доступен для вас навсегда.</string>
     <string name="wikivoyage_travel_guide">Путеводитель</string>
     <string name="wikivoyage_travel_guide_descr">Гид по самым интересным местам планеты в OsmAnd без подключения к интернету.</string>
     <string name="travel_card_update_descr">Доступно обновление Викигида.</string>
-    <string name="travel_card_download_descr">Скачайте путеводители Викигида и читайте о местах по всему миру без подключения к интернету.</string>
+    <string name="travel_card_download_descr">Скачайте путеводители Викигида, чтобы просматривать статьи о местах по всему миру без подключения к Интернету.</string>
     <string name="update_is_available">Доступно обновление</string>
     <string name="download_file">Скачать файл</string>
     <string name="start_editing_card_image_text">Бесплатный путеводитель по всему миру, который может редактировать каждый.</string>
@@ -2656,7 +2655,7 @@
     <string name="shared_string_bookmark">Сохранить</string>
     <string name="off_road_render_descr">Для езды по бездорожью, основано на топографическом стиле (англ. «Topo»), и для использования с зелеными спутниковыми снимками в качестве подложки. Уменьшенная толщина основных дорог, увеличенная толщина дорожек, тропинок, велосипедных и других маршрутов.</string>
     <string name="unirs_render_descr">Модификация стиля по умолчанию для повышения контрастности пешеходных и велосипедных дорог. Используются старые цвета Mapnik.</string>
-    <string name="get_osmand_live">Подпишитесь на OsmAnd Live и разблокируйте все функции: ежедневные обновления карт с неограниченной загрузкой, все платные и бесплатные плагины, Википедия, Викигид и многое другое.</string>
+    <string name="get_osmand_live">Подпишитесь на OsmAnd Live и разблокируйте все функции: ежедневные обновления карт с неограниченными скачиваниями, все платные и бесплатные плагины, Википедия, Викигид и многое другое.</string>
     <string name="access_intermediate_arrival_time">Прибытие в промежуточный пункт</string>
     <string name="map_widget_intermediate_time">Время до промежуточного пункта</string>
     <string name="quick_action_edit_actions">Редактировать действие</string>
@@ -2873,7 +2872,7 @@
     <string name="profile_alert_duplicate_name_msg">Уже есть профиль с таким именем</string>
     <string name="rate_dialog_descr">Пожалуйста, оставьте отзыв и оцените нашу работу в Google Play.</string>
     <string name="settings_privacy_and_security_desc">Укажите, какими данными вы делитесь</string>
-    <string name="app_mode_skiing">Лыжи</string>
+    <string name="app_mode_skiing">Катание на лыжах</string>
     <string name="base_profile_descr_ski">Лыжи</string>
     <string name="profile_alert_cant_delete_base">Вы не можете удалить базовые профили OsmAnd</string>
     <string name="profile_alert_need_save_title">Сохранить изменения</string>
@@ -3071,7 +3070,7 @@
     <string name="rendering_value_white_name">Белый</string>
     <string name="tts_initialization_error">Невозможно запустить механизм преобразования текста в речь.</string>
     <string name="file_import_error">Ошибка импорта %1$s: %2$s</string>
-    <string name="download_map_dialog">Диалог загрузки карты</string>
+    <string name="download_map_dialog">Диалог скачивания карты</string>
     <string name="dialogs_and_notifications_title">Диалоги и уведомления</string>
     <string name="dialogs_and_notifications_descr">Управление всплывающими окнами, диалогами и уведомлениями.</string>
     <string name="add_new_profile_q">Добавить новый профиль «%1$s»\?</string>
@@ -3332,7 +3331,7 @@
     <string name="main_actions">Основные действия</string>
     <string name="move_inside_category">Перемещать элементы можно только внутри данной категории.</string>
     <string name="developer_plugin">Плагин для разработчиков</string>
-    <string name="select_wikipedia_article_langs">Языки отображения статей Википедии на карте. При чтении можно переключаться между доступными языками.</string>
+    <string name="select_wikipedia_article_langs">Выберите языки для статей Википедии на карте. Переключитесь на любой доступный язык во время чтения статьи.</string>
     <string name="lang_yo">Йоруба</string>
     <string name="custom_color">Пользовательский цвет</string>
     <string name="some_articles_may_not_available_in_lang">Некоторые статьи на Википедии могут быть недоступны на вашем языке.</string>
@@ -3480,7 +3479,7 @@
     <string name="app_mode_inline_skates">Роликовые коньки</string>
     <string name="use_volume_buttons_as_zoom_descr">Изменение масштаба карты кнопками громкости.</string>
     <string name="use_volume_buttons_as_zoom">Масштабирование кнопками громкости</string>
-    <string name="lenght_limit_description">Укажите длину автомобиля, для длинных транспортных средств могут применяться ограничения на маршруте.</string>
+    <string name="lenght_limit_description">Укажите длину вашего транспортного средства, поскольку для длинномеров могут быть ограничения на дорогах.</string>
     <string name="please_provide_point_name_error">Задайте название точки</string>
     <string name="quick_action_remove_next_destination_descr">Следующая точка маршрута будет удалена. Если это конечный пункт, навигация завершится.</string>
     <string name="plugin_wikipedia_description">Информация о достопримечательностях из Википедии, карманного автономного путеводителя со статьями о местах и направлениях.</string>
@@ -3763,7 +3762,7 @@
     <string name="live_update_delete_updates_msg">Удалить все live-обновления для %s\?</string>
     <string name="purchases">Покупки</string>
     <string name="quick_action_show_hide_title">Показать/скрыть</string>
-    <string name="rendering_attr_natureReserves_name">Заповедники</string>
+    <string name="rendering_attr_natureReserves_name">Природные заповедники и охраняемые территории</string>
     <string name="track_has_no_altitude">Трек не содержит данных о высоте.</string>
     <string name="track_has_no_speed">Трек не содержит данных о скорости.</string>
     <string name="select_another_colorization">Выберите другой тип окраски.</string>
@@ -3788,8 +3787,8 @@
     <string name="copy_poi_name">Копировать имя POI</string>
     <string name="shared_string_interval">Интервал</string>
     <string name="rendering_attr_natureReserves_description">Показать заповедники, особо охраняемые природные территории и национальные парки.</string>
-    <string name="gpx_upload_trackable_visibility_descr">«Отслеживаемый» означает, что трек не будет виден в любых общедоступных списках, но обработанные точки c отметками времени из него будут доступны через public GPS API (при этом трек не будет ассоциирован с вами). Другие пользователи смогут лишь загружать обработанные точки из вашего трека.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">«Идентифицируемый» означает, что трек будет виден всем в разделе треки пользователя, загрузившего трек и в общем списке треков, доступном на странице GPS-треки. Другие пользователи смогут загрузить данные трека и в свойствах трека будет указано имя пользователя, загрузившего трек. Отметки времени точек трека доступны через public GPS API будут ссылаться на страницу с вашим оригинальным треком.</string>
+    <string name="gpx_upload_trackable_visibility_descr">«Отслеживаемый» означает, что трек не будет виден в любых общедоступных списках, но обработанные точки c отметками времени из него будут доступны через public GPS API . Другие пользователи смогут скачивать обработанные точки из вашего трека (при этом трек и точки не будут ассоциированы с вами).</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Идентифицируемый\" означает, что трек будет публично отображаемым среди ваших GPS-треков и в общедоступных списках GPS-треков, т.е. другие пользователи смогут скачать все данные трека и связать их с вашим именем пользователя. Общедоступные данные о точках отслеживания с отметками времени из GPS API, передаваемые через trackpoints API, будут ссылаться на вашу исходную страницу отслеживания.</string>
     <string name="gpx_upload_public_visibility_descr">«Общедоступный» означает, что трек будет виден всем в разделе треков пользователя, загрузившего трек и в общем списке треков, доступном на странице GPS-треки. Отметки времени точек трека не доступны через public GPS API. Однако, другие пользователи по-прежнему могут загрузить файл трека из общего списка треков и данные трека будут иметь все отметки времени.</string>
     <string name="gpx_upload_private_visibility_descr">«Частный» означает, что трек не будет виден в любых общедоступных списках, но точки из него будут доступны через public GPS API без отметок времени.</string>
     <string name="routing_attr_driving_style_description">Задайте предпочтения, чтобы выбрать между скоростью, временем и безопасностью на маршруте</string>
@@ -3826,9 +3825,9 @@
     <string name="output">Вывод</string>
     <string name="exit_number">Номера съездов</string>
     <string name="srtm_unit_format">Единицы измерения на контурных линиях</string>
-    <string name="srtm_download_single_help_message">Выберите необходимый вариант. Для изменения формата потребуется повторно загрузить файл.</string>
+    <string name="srtm_download_single_help_message">Выберите необходимый вариант. Для изменения формата потребуется повторно скачать файл.</string>
     <string name="shared_string_feet">футы</string>
-    <string name="srtm_download_list_help_message">OsmAnd предоставляет данные изолиний в метрах и футах. Для изменения формата потребуется повторно загрузить файл.</string>
+    <string name="srtm_download_list_help_message">OsmAnd предоставляет данные изолиний в метрах и футах. Для изменения формата потребуется повторно скачать файл.</string>
     <string name="route_line_use_gradient_coloring">Линия маршрута окрашена в зависимости от величины уклона.</string>
     <string name="shared_string_min_height">Мин. высота</string>
     <string name="shared_string_max_height">Макс. высота</string>
@@ -3840,8 +3839,8 @@
     <string name="shared_string_itinerary">Маркеры</string>
     <string name="route_line_use_map_style_width">Используется толщина линии стиля карты (%1$s).</string>
     <string name="route_line_use_map_style_color">Используется цвет стиля карты (%1$s).</string>
-    <string name="routing_attr_avoid_low_emission_zone_description">Избегать зон с низким уровнем выбросов</string>
-    <string name="routing_attr_avoid_low_emission_zone_name">Без зон с низким уровнем выбросов</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Исключить зоны с жесткими эко нормативами (LEZ)</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Избегать зоны с жесткими эко нормативами (LEZ)</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Найти ещё…</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
@@ -3852,7 +3851,7 @@
 \n%1$s</string>
     <string name="osmand_cloud_create_account_descr">Введите адрес электронной почты, и все ваши данные будут привязаны к нему.
 \nМы вышлем вам проверочный код.</string>
-    <string name="osmand_cloud_login_descr">Введите адрес электронной почты, который вы использовали при регистрации. На него будет выслан одноразовый код для следующего шага.</string>
+    <string name="osmand_cloud_login_descr">Укажите адрес электронной почты, который вы использовали при регистрации. На него будет выслан одноразовый пароль.</string>
     <string name="verify_email_address">Подтверждение адреса электронной почты</string>
     <string name="verify_email_address_descr">Проверочный код отправлен на %1$s. Введите его в поле ниже.</string>
     <string name="cloud_email_not_registered">Данный адрес электронной почты не был зарегистрирован в OsmAnd Cloud</string>
@@ -3866,9 +3865,7 @@
     <string name="last_backup">Последнее резервное копирование</string>
     <string name="duration_ago">%1$s назад</string>
     <string name="select_nav_profile_dialog_message">«Режим навигации» определяет правила расчёта маршрутов с использованием автономных или онлайн-маршрутизаторов.</string>
-    <string name="backup_delete_all_data_warning">Вы собираетесь удалить все данные, загруженные в OsmAnd Cloud ранее, включая историю версий.
-\n
-\nВы не сможете восстановить удалённые данные.</string>
+    <string name="backup_delete_all_data_warning">Вы собираетесь удалить все данные, отправленные в OsmAnd Cloud ранее, включая историю версий. \n \nВы не сможете восстановить удалённые данные.</string>
     <string name="backup_delete_old_data_warning">Вы собираетесь удалить историю изменений для ранее загруженных данных.
 \n
 \nТекущая версия данных будет сохранена на сервере, но вы не сможете вернуться к ранее внесённым изменениям.</string>
@@ -3913,20 +3910,20 @@
     <string name="backup_version_history_delete_descr">Удалить историю изменений для отключенных типов данных из OsmAnd Cloud\?</string>
     <string name="delete_version_history">Удалить историю версий</string>
     <string name="routing_attr_avoid_tunnels_description">Избегать тоннелей</string>
-    <string name="routing_attr_avoid_tunnels_name">Без тоннелей</string>
+    <string name="routing_attr_avoid_tunnels_name">Избегать тоннели</string>
     <string name="send_crash_log">Отправить журнал сбоев</string>
     <string name="send_logcat_log">Отправить logcat</string>
     <string name="backup_promocode">Промокод</string>
     <string name="purchases_feature_desc_nautical">Информация о морских глубинах</string>
     <string name="purchases_feature_desc_terrain">Контурные линии, затенение рельефа (отмывка) и цветовая шкала уклонов для отображения вершин и низменностей.</string>
     <string name="purchases_feature_desc_wikivoyage">Изучайте Викигид офлайн. Статьи разделены по странам и регионам и доступны на всех языках.</string>
-    <string name="purchases_feature_desc_wikipedia">Статьи офлайн-Википедии. Разделены по регионам и доступны на всех языках.</string>
+    <string name="purchases_feature_desc_wikipedia">Предоставляет все статьи Википедии, связанные с географией, помогая вам узнавать о местах, которые вы посещаете во время поездки, простым нажатием на карту. Не забудьте скачать файлы карт Википедии для соответствующих регионов для чтения статей в офлайне.</string>
     <string name="purchases_feature_desc_combined_wiki">Читайте статьи Википедии и Викигида на ходу, без подключения к интернету. Данные разделены по странам и доступны на всех языках.</string>
-    <string name="purchases_feature_desc_unlimited_map_download">Неограниченные загрузки локальных карт всех континентов и регионов.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Получите неограниченное количество скачиваний офлайн-карт для всех континентов и регионов.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Доступ к регулярным ежемесячным обновлениям для локальных карт.</string>
-    <string name="purchases_feature_desc_hourly_map_updates">Доступ к более частому обновлению карт, выбирайте между: ежечасными, ежедневными или еженедельными обновлениями. Обновления загружаются постепенно, только для измененной области.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Доступ к более частому обновлению карт, выбирайте между: ежечасными, ежедневными или еженедельными обновлениями. Обновления скачиваются частями, только для измененной области.</string>
     <string name="purchases_feature_desc_osmand_cloud">Облачное хранилище OsmAnd Cloud для хранения всех данных приложения. Забудьте о потере данных после переустановки, сохраняйте и восстанавливайте информацию без проблем.</string>
-    <string name="unlimited_map_downloads">Неограниченные загрузки карт</string>
+    <string name="unlimited_map_downloads">Неограниченные скачивания карт</string>
     <string name="wikipedia_and_wikivoyage_offline">Локальные Википедия и Викигид</string>
     <string name="offline_wikipeadia">Локальная Википедия</string>
     <string name="offline_wikivoyage">Локальный Викигид</string>
@@ -4002,7 +3999,7 @@
     <string name="not_enough_contributions_descr">Для безлимитных обновлений нужно сделать не менее %1$s правок за последние два месяца %2$s.</string>
     <string name="map_updates_are_unavailable_yet">Обновления карт пока недоступны :-(</string>
     <string name="online_maps_searching_descr">Поиск онлайн…</string>
-    <string name="walking_route_osmc_description">Окраска на основе индивидуального цвета (если задано на OpenStreetMap) и типа (международный, региональный, местный).</string>
+    <string name="walking_route_osmc_description">Окраска маршрутов разным цветом (если задано на OpenStreetMap) по типам (международный, региональный, местный).</string>
     <string name="purchases_feature_desc_pro_widgets">Получите доступ к функциям OsmAnd Pro: раскраска маршрутов и многое другое.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Изучите планы OsmAnd, чтобы выбрать подходящий.</string>
     <string name="option_available_only_in_osmand_pro">Доступно в рамках подписки OsmAnd Pro.</string>
@@ -4047,10 +4044,10 @@
     <string name="travel_route_types">Типы маршрутов</string>
     <string name="shared_string_mini">мини</string>
     <string name="horseback_riding">Верховая езда</string>
-    <string name="routing_attr_only_permitted_ways_description">Использовать только специально разрешённые лесные и сельскохозяйственные дороги, а также тропы.</string>
+    <string name="routing_attr_only_permitted_ways_description">Использовать только те линии (дорожки, тропинки и т.д.), которые явно разрешены</string>
     <string name="routing_attr_prefer_horse_routes_description">Предпочитать конные маршруты</string>
     <string name="routing_attr_prefer_horse_routes_name">Предпочитать конные маршруты</string>
-    <string name="routing_attr_only_permitted_streets_description">Использовать только специально разрешённые улицы.</string>
+    <string name="routing_attr_only_permitted_streets_description">Пользуйтесь только теми улицами, которые явно разрешены</string>
     <string name="routing_attr_only_permitted_streets_name">Разрешённые улицы</string>
     <string name="routing_attr_only_permitted_ways_name">Разрешённые дороги</string>
     <string name="routing_attr_allow_gate_description">Разрешить использование ворот</string>
@@ -4191,7 +4188,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Теги note</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показать теги note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Значки на мелком масштабе</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематическое отображение значков на мелком масштабе</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематическое изображение значков на малых масштабах для тех POI, которые обычно там не отображаются</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Отображение водных туннелей на меньших уровнях масштабирования</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Повысить видимость водных туннелей</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теги fixme</string>
@@ -4232,7 +4229,7 @@
     <string name="move_map_to_select_area">Переместите карту, чтобы выбрать необходимую область.</string>
     <string name="shared_string_complete">завершено</string>
     <string name="stop_download_desc">Загрузка не завершена. Если прервать загрузку сейчас, для просмотра будет доступна только часть тайлов.</string>
-    <string name="zoom_levels_difference_description">Большая разница между уровнями масштабирования может увеличить размер загружаемых данных.</string>
+    <string name="zoom_levels_difference_description">Большая разница между уровнями масштабирования может увеличить размер скачиваемых данных.</string>
     <string name="rendering_attr_showFitnessTrails_description">Показать фитнес-маршруты</string>
     <string name="rendering_attr_showFitnessTrails_name">Фитнес-маршруты</string>
     <string name="rendering_attr_showRunningRoutes_name">Беговые маршруты</string>
@@ -4295,7 +4292,7 @@
     <string name="routing_attr_difficulty_preference_expert_name">Эксперт</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Не сходить с трассы</string>
     <string name="routing_attr_freeride_policy_allow_name">Разрешить</string>
-    <string name="routing_attr_difficulty_preference_intermediate_name">Средний</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Средняя</string>
     <string name="release_4_2">• Редизайн виджетов: новое оформление, группировка по страницам, изменение порядка и комбинирование по вашему желанию. \n \n• Пешеходные / велосипедные / туристические маршруты: нажмите на символ маршрута и получите полную информацию о нем. \n \n• Избранные группы: задание внешнего вида по умолчанию для новых точек в группе. \n \n• Исправления: автообновление тайловых онлайн-карт</string>
     <string name="turn_on_public_transport_description">Включите для отображения на карте маршрутов общественного транспорта.</string>
     <string name="av_def_action_choose">По запросу</string>
@@ -4360,7 +4357,7 @@
     <string name="map_widget_trip_recording_downhill">Спуск</string>
     <string name="map_widget_true_bearing">Истинный пеленг</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Скрыть военные зоны</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Военные зоны</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Военные районы</string>
     <string name="explore_plans">Ознакомиться с планами</string>
     <string name="map_widget_time_to_intermediate">Промежуточное время</string>
     <string name="radius_ruler_mode_desc">Вы можете переключить режим радиус-линейки, нажав на виджет.</string>
@@ -4504,7 +4501,7 @@
     <string name="map_widget_ant_bicycle_cadence">Каденс</string>
     <string name="map_widget_camera_tilt_desc">Виджет показывает угол наклона камеры в режиме перспективы. По умолчанию 90° (без наклона).</string>
     <string name="external_sensors_support">Поддержка внешних датчиков</string>
-    <string name="show_borders_of_downloaded_maps">Границы загруженных карт</string>
+    <string name="show_borders_of_downloaded_maps">Границы скаченных карт</string>
     <string name="map_widget_ant_bicycle_power_desc">Показывает выходную мощность велосипедиста, которая используется для движения велосипеда вперед</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Показывает частоту вращения педалей велосипеда</string>
     <string name="depth_contours">Контуры глубин</string>
@@ -4651,15 +4648,15 @@
     <string name="cloud_no_conflicts">Конфликтов нет.</string>
     <string name="deleted_file">Удалённый файл</string>
     <string name="modified_file">Изменённый файл</string>
-    <string name="shared_string_uploaded">Загружено</string>
-    <string name="upload_all">Выгрузить все</string>
-    <string name="cloud_all_changes_uploaded">Все изменения выгружены</string>
-    <string name="cloud_all_changes_downloaded">Все изменения загружены</string>
+    <string name="shared_string_uploaded">Отправлено</string>
+    <string name="upload_all">Отправить всё</string>
+    <string name="cloud_all_changes_uploaded">Все изменения отправлены</string>
+    <string name="cloud_all_changes_downloaded">Все изменения скачены</string>
     <string name="download_cloud_version">Загрузить облачную версию</string>
     <string name="shared_string_do_not_exist">Не существует</string>
     <string name="check_for_updates">Проверить наличие обновлений</string>
     <string name="changes">Изменения %1$s</string>
-    <string name="upload_change">Выгрузить изменение</string>
+    <string name="upload_change">Отправить изменение</string>
     <string name="cloud_changes_will_be_dismissed">Облачные изменения будут отклонены</string>
     <string name="cloud_conflict">Конфликт</string>
     <string name="cloud_all_changes_uploaded_descr">Все изменения, сделанные на этом устройстве, синхронизируются с OsmAnd Cloud.</string>
@@ -4677,7 +4674,7 @@
     <string name="si_nm_ft">Морские мили/футы</string>
     <string name="si_nm_mt">Морские мили/метры</string>
     <string name="value_downloaded_of_mb">Загрузка %1$.1f/%2$.1f МБ</string>
-    <string name="skip_download">Пропустить загрузку</string>
+    <string name="skip_download">Пропустить скачивание</string>
     <string name="determine_location">Позвольте нам определить ваше местоположение</string>
     <string name="share_as_file">Поделиться файлом</string>
     <string name="y_axis">Ось Y</string>
@@ -5046,7 +5043,7 @@
     <string name="shared_string_created">Дата создания</string>
     <string name="live_monitoring_adress_descr">Укажите веб-адрес используя следующие параметры: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_show_icon">Показать значок</string>
-    <string name="bicycle_scd_device_name">Велосипед</string>
+    <string name="bicycle_scd_device_name">Велосипедный прибор</string>
     <string name="smart_folder_name_present">Смарт-папка с таким именем уже существует</string>
     <string name="smart_folder_saved">Смарт-папка сохранена</string>
     <string name="add_smart_folder">Создать смарт-папку</string>
@@ -5166,7 +5163,7 @@
     <string name="battery_optimization_settings">Настройки оптимизации батареи</string>
     <string name="battery_optimization">Оптимизация батареи</string>
     <string name="shared_string_keywords">Ключевые слова</string>
-    <string name="max_sensor_heartrate">Частота пульса, макс.</string>
+    <string name="max_sensor_heartrate">Частота пульса, max</string>
     <string name="avg_sensor_heartrate">Частота пульса, средняя</string>
     <string name="max_sensor_cadence">Вело каденс, макс.</string>
     <string name="avg_sensor_cadence">Каденс, средний</string>
@@ -5297,10 +5294,10 @@
     <string name="assigned_keys">Назначенные клавиши</string>
     <string name="rendering_value_dark_orange_name">Темно-оранжевый</string>
     <string name="wall_height">Высота стены</string>
-    <string name="clear_all_key_shortcuts">Очистить все сочетания клавиш</string>
+    <string name="clear_all_key_shortcuts">Очистить все Горячие клавиши</string>
     <string name="action_icon">Значок действия</string>
     <string name="clear_all_key_shortcuts_summary">Все назначения клавиш для выбранного типа будут удалены.</string>
-    <string name="no_assigned_keys_desc">Выберите действие и назначьте клавишу, нажав кнопку «Добавить».</string>
+    <string name="no_assigned_keys_desc">Выберите действие и назначьте ключ, нажав на кнопку \"Добавить\".</string>
     <string name="key_name_pattern">Клавиша \"%1$s\"</string>
     <string name="no_assigned_keys">Нет назначенных клавиш</string>
     <string name="shared_string_key">Клавиша</string>
@@ -5309,7 +5306,7 @@
     <string name="user_palette">Пользовательская палитра</string>
     <string name="backup_error_failed_to_transfer_file">Не удалось передать облачные файлы.</string>
     <string name="contact_support_retry">Попробуйте еще раз или обратитесь в службу поддержки</string>
-    <string name="missing_maps_ignore">Использовать загруженные карты</string>
+    <string name="missing_maps_ignore">Использовать скаченные карты</string>
     <string name="daynight_mode_sensor_summary">Используется датчик освещенности устройства для переключения между дневным и ночным режимами в зависимости от уровня окружающего освещения.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Автоматическое переключение между дневным и ночным режимами в соответствии с местным временем восхода и захода солнца.</string>
     <string name="daynight_mode_night_summary">Карта всегда отображается в темных тонах, подходящих для ночного времени или условий недостаточной освещенности.</string>
@@ -5317,8 +5314,8 @@
     <string name="daynight_mode_app_theme">Тема приложения</string>
     <string name="key_event_action_continuous_zoom_out">Непрерывное увеличение</string>
     <string name="key_event_action_continuous_zoom_in">Непрерывное уменьшение</string>
-    <string name="remove_key_assignment_summary">Назначение клавиш для выбранного действия будет удалено.</string>
-    <string name="remove_key_assignment">Удалить назначение клавиш</string>
+    <string name="remove_key_assignment_summary">Назначение клавиши для выбранного действия будет удалено.</string>
+    <string name="remove_key_assignment">Удалить назначение клавиши</string>
     <string name="map_settings_weather_wind_animation">Анимация ветра</string>
     <string name="tomorrow">Завтра</string>
     <string name="daynight_mode_app_theme_summary">Отображение карты соответствует теме приложения: дневной режим для светлой темы и ночной режим для темной темы</string>
@@ -5329,7 +5326,7 @@
     <string name="weather_source_GFS_title">GFS</string>
     <string name="shared_string_modify">Изменить</string>
     <string name="weather_source_GFS_description">Глобальная система прогнозов от национальных центров экологического прогнозирования</string>
-    <string name="missing_maps_ignore_details">Некоторые уже загруженные карты могут подойти для вашего маршрута. Если вы знакомы с местностью и картами, вы можете попробовать проложить маршрут, используя существующие карты.</string>
+    <string name="missing_maps_ignore_details">Скаченные карты плохо отображают ваш маршрут? Ориентируйтесь по ним, только если вы хорошо знакомы с местностью.</string>
     <string name="quick_action_map_style">Стиль карты</string>
     <string name="quick_action_to_my_location">К моему местоположению</string>
     <string name="quick_action_terrain_color_scheme">Цветовая схема рельефа</string>
@@ -5606,7 +5603,7 @@
     <string name="default_buttons_opacity_original_description">Каждая кнопка будет иметь свою непрозрачность фона.</string>
     <string name="default_buttons_size_original_description">Каждая кнопка будет иметь свой размер.</string>
     <string name="default_buttons_corners_original_description">Каждая кнопка будет иметь свой радиус скругления.</string>
-    <string name="auto_zoom_3d_angle">Угол наклона при автомасштабе</string>
+    <string name="auto_zoom_3d_angle">Автоматическая регулировка угла взгляда</string>
     <string name="calculate_size">Рассчитать размер</string>
     <string name="calculating_indication_message">Расчет…</string>
     <string name="rendering_attr_showClimbingRoutes_description">Показать скалолазные маршруты</string>
@@ -5619,7 +5616,7 @@
     <string name="display_distance_to_first_intermediate">Показать детали маршрута до следующей остановки</string>
     <string name="shared_string_default_view">Вид по умолчанию</string>
     <string name="map_widget_route_information">Информация о маршруте</string>
-    <string name="map_widget_route_information_desc">Виджет показывает расчетное время прибытия, оставшееся время в пути и расстояние для текущего маршрута навигации.</string>
+    <string name="map_widget_route_information_desc">Виджет показывает расчетное время прибытия, оставшееся время в пути и расстояние для активного маршрута навигации.</string>
     <string name="record_plugin_description">Записывайте свои маршруты или тренировки и анализируйте данные с учетом скорости, подъемов и спусков, профиля высот и других параметров. Записанные треки можно архивировать, делиться ими с друзьями, редактировать и обрабатывать.\n\nПодробнее читайте на %1$s.</string>
     <string name="srtm_plugin_description">Информация о рельефе, такая как горизонтали, затенение рельефа (отмывка) и уклоны, помогает визуально оценить особенности местности, рельеф, проходимость и другие параметры. Топографическая информация на карте может быть представлена контурными линиями, затенением рельефа и/или цветовой индикацией крутизны уклонов.\n\nИсходные данные получены из SRTM и ASTER.\n\nПодробнее читайте на %1$s.</string>
     <string name="no_altitude_data_desc">Чтобы получить данные %1$s, привяжите свой трек к дорогам или рассчитайте его онлайн.</string>
@@ -5699,7 +5696,7 @@
     <string name="grid_color">Цвет сетки</string>
     <string name="shared_string_edges">По краям</string>
     <string name="labels_position">Позиция меток</string>
-    <string name="routing_attr_allow_ferries_description">Разрешить маршрутизацию по паромным маршрутам</string>
+    <string name="routing_attr_allow_ferries_description">Разрешить маршрут через паромы</string>
     <string name="shared_string_no_animation">Без анимации</string>
     <string name="prediction_time">Время прогнозирования</string>
     <string name="position_animation">Анимация положения</string>
@@ -5750,7 +5747,7 @@
     <string name="save_and_access_articles_offline">Сохраняйте данные и получайте доступ к статьям в офлайн в любом месте</string>
     <string name="track_folder_appearance">Внешний вид папки треков</string>
     <string name="update_maps">Обновить карты</string>
-    <string name="reconnect">Переподключение</string>
+    <string name="reconnect">Подключиться заново</string>
     <string name="rendering_attr_showSkiSlopes_name">Показать горнолыжные склоны</string>
     <string name="imperial_gallon">Имперский галлон</string>
     <string name="us_gallon">Американский галлон</string>
@@ -5761,7 +5758,7 @@
     <string name="manage_storage">Управление хранилищем</string>
     <string name="copy_as_new_folder">Копировать как новую папку</string>
     <string name="add_to_a_folder">Добавить в папку</string>
-    <string name="add_to_favorites">Добавить в избранные</string>
+    <string name="add_to_favorites">Добавить в избранное</string>
     <string name="max_weight_at_full_load_description">Укажите максимальный вес вашего автомобиля при полной загрузке, чтобы избежать дорог и мостов с ограничениями по весу.</string>
     <string name="max_axle_load_description">Укажите максимальную нагрузку на ось вашего автомобиля, чтобы избежать дорог и мостов с ограничениями по весу.</string>
     <string name="view_on_phone">Просмотреть в телефоне</string>
@@ -5814,7 +5811,7 @@
     <string name="routing_attr_weightrating_name">Максимальный вес при полной загрузке</string>
     <string name="routing_attr_maxaxleload_name">Максимальная нагрузка на ось</string>
     <string name="deleted_maps_warning">Вы собираетесь удалить %d элементов.\nПродолжить?</string>
-    <string name="deleted_maps_prompt">Данные карты больше не поддерживаются и заменены более мелкими регионами. Пожалуйста, удалите их и скачайте новые версии.</string>
+    <string name="deleted_maps_prompt">Эти карты больше не поддерживаются и были заменены регионами меньшего размера. Пожалуйста, удалите их и скачайте новые версии.</string>
     <string name="unsupported_maps">Неподдерживаемые карты</string>
     <string name="shared_string_price">Стоимость</string>
     <string name="obd_alt_battery_voltage">Напряжение адаптера</string>
@@ -5856,4 +5853,30 @@
     <string name="show_spherical_map">Вид на земной шар</string>
     <string name="help_article_navigation_routing_ski_routing_name">Горнолыжные склоны и маршруты</string>
     <string name="lang_mi">Маори</string>
+    <string name="mpg">MPG</string>
+    <string name="rendering_attr_depthContoursDashed_description">Пунктирные контуры глубины</string>
+    <string name="rendering_attr_hideLightSectorSources_name">Источники секторных огней</string>
+    <string name="rendering_attr_shellsStyle_name">Стиль ракушек</string>
+    <string name="rendering_attr_depthContoursDashed_name">Пунктирные контуры глубины</string>
+    <string name="rendering_attr_tidalFlatStyle_description">Стиль илистых отмелей</string>
+    <string name="rendering_attr_spotSize_name">Величина точечного промера глубины</string>
+    <string name="rendering_attr_showSkiSlopes_description">Упрощённое отображение горнолыжных трасс</string>
+    <string name="rendering_attr_spotSize_description">Величина точечного промера глубины</string>
+    <string name="rendering_attr_hideAreas_name">Области глубины</string>
+    <string name="rendering_attr_hideSpots_name">Точечные промеры глубины</string>
+    <string name="rendering_attr_spotDistance_description">Расстояние между промерными точками</string>
+    <string name="rendering_attr_hideMinorContours_description">Скрыть контуры малой глубины</string>
+    <string name="rendering_attr_hideLightSectors_name">Освещённые сектора</string>
+    <string name="rendering_attr_hideLightSectorSources_description">Скрыть источники секторного света</string>
+    <string name="rendering_attr_spotDistance_name">Расстояние между точками глубинных промеров</string>
+    <string name="rendering_attr_showLNAMmarker_description">Показывать маркеры ENC</string>
+    <string name="rendering_attr_hideAreas_description">Скрыть области глубины</string>
+    <string name="rendering_attr_safetyContour_name">Контур безопасной глубины</string>
+    <string name="rendering_attr_shellsStyle_description">Ракушечный стиль морского дна</string>
+    <string name="rendering_attr_hideSpots_description">Скрыть промерные точки глубин</string>
+    <string name="rendering_attr_hideMinorContours_name">Контуры малой глубины</string>
+    <string name="rendering_attr_tidalFlatStyle_name">Стиль приливных отмелей</string>
+    <string name="rendering_attr_hideLightSectors_description">Скрыть секторный свет</string>
+    <string name="rendering_attr_showLNAMmarker_name">Маркеры ENC</string>
+    <string name="rendering_attr_safetyContour_description">Контур безопасной глубины</string>
 </resources>
