@@ -235,7 +235,6 @@ class StarView @JvmOverloads constructor(
 		var targetAzimuth: Double = 0.0, var targetAltitude: Double = 0.0
 	)
 	private val constellationCenters = mutableMapOf<Constellation, ConstellationCentroid?>()
-	private val tempPathPoint = PointF() // Helper for projection inside onDraw
 
 	private var visualAnimator: ValueAnimator? = null
 
@@ -316,6 +315,9 @@ class StarView @JvmOverloads constructor(
 		skyObjects.sortBy { it.magnitude }
 		skyObjectMap.clear()
 		objects.forEach { skyObjectMap[it.hip] = it }
+
+		updateConstellationCenters()
+
 		recalculatePositions(currentTime, updateTargets = false)
 		skyObjects.forEach {
 			it.azimuth = it.targetAzimuth
@@ -327,14 +329,11 @@ class StarView @JvmOverloads constructor(
 		pinnedObjects.removeAll(toRemove)
 		pathCache.keys.removeAll(toRemove)
 
-		updateConstellationCenters()
 		invalidate()
 	}
 
 	fun setConstellations(list: List<Constellation>) {
 		constellations = list
-		updateConstellationCenters()
-		invalidate()
 	}
 
 	private fun updateConstellationCenters() {
@@ -643,13 +642,13 @@ class StarView @JvmOverloads constructor(
 			}
 		}
 
+		if (showConstellations) drawConstellationLabels(canvas)
+
 		skyObjects.forEach { obj ->
 			if (isObjectVisibleInSettings(obj)) {
 				drawSkyObject(canvas, obj)
 			}
 		}
-
-		if (showConstellations) drawConstellationLabels(canvas)
 
 		// Draw Highlights
 
@@ -1112,12 +1111,31 @@ class StarView @JvmOverloads constructor(
 					constellationTextPaint.color = 0xFFAABBFF.toInt()
 					constellationTextPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD_ITALIC)
 				}
-				
+
 				val text = constellation.name
 				val textSize = constellationTextPaint.textSize
-				
-				// Draw stable label
-				canvas.drawText(text, cx, cy + textSize, constellationTextPaint)
+
+				val textWidth = constellationTextPaint.measureText(text)
+				val threshold = 10f
+				val textRect = RectF(
+					cx - textWidth / 2 - threshold,
+					cy - threshold,
+					cx + textWidth / 2 + threshold,
+					cy + textSize + threshold
+				)
+
+				var overlaps = false
+				for (rect in occupiedRects) {
+					if (RectF.intersects(textRect, rect)) {
+						overlaps = true
+						break
+					}
+				}
+
+				if (!overlaps || isSelected) {
+					canvas.drawText(text, cx, cy + textSize, constellationTextPaint)
+					occupiedRects.add(textRect)
+				}
 			}
 		}
 	}

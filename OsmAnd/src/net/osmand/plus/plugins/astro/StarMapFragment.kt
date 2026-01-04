@@ -298,6 +298,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showPlanets = config.showPlanets
 			showMagnitudeFilter = config.showMagnitudeFilter
 			starView.magnitudeFilter = config.magnitudeFilter
+			starView.is2DMode = config.is2DMode
 			if (config.magnitudeFilter != null) {
 				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", config.magnitudeFilter)
 			}
@@ -308,11 +309,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		updateStarMap(true)
 		setupToolBar(view)
 		buildZoomButtons(view)
-		update2DModeIcon()
 
-		if (starView.is2DMode != swSettings.getCommonConfig().is2DMode) {
-			toggle2DMode()
-		}
+		previousAltitude = starView.getAltitude()
+		previousAzimuth = starView.getAzimuth()
+		previousViewAngle = starView.getViewAngle()
+		apply2DMode(starView.is2DMode)
 
 		return view
 	}
@@ -453,7 +454,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val config = StarWatcherSettings.CommonConfig(
 			showStarMap = starView.isVisible,
 			showStarChart = starChartsView.isVisible,
-			is2DMode = starView.is2DMode,
 		)
 		swSettings.setCommonConfig(config)
 	}
@@ -471,6 +471,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			showStars = starView.showStars,
 			showGalaxies = starView.showGalaxies,
 			showBlackHoles = starView.showBlackHoles,
+			is2DMode = starView.is2DMode,
 			magnitudeFilter = starView.magnitudeFilter
 		)
 		swSettings.setStarMapConfig(config)
@@ -498,7 +499,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun toggle2DMode() {
-		val is2D = !starView.is2DMode
+		apply2DMode(!starView.is2DMode)
+	}
+
+	private fun apply2DMode(is2D: Boolean) {
 		if (is2D) {
 			previousAltitude = starView.getAltitude()
 			previousAzimuth = starView.getAzimuth()
@@ -512,8 +516,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.setCenter(previousAzimuth, previousAltitude)
 			starView.setViewAngle(previousViewAngle)
 		}
+		starView.invalidate()
 		update2DModeIcon()
-		saveCommonSettings()
 	}
 
 	private fun update2DModeIcon() {

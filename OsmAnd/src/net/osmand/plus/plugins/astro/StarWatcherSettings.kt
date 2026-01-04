@@ -48,8 +48,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 
 	data class CommonConfig(
 		val showStarMap: Boolean,
-		val showStarChart: Boolean,
-		val is2DMode: Boolean,
+		val showStarChart: Boolean
 	)
 
 	data class StarMapConfig(
@@ -63,6 +62,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showStars: Boolean,
 		val showGalaxies: Boolean,
 		val showBlackHoles: Boolean,
+		val is2DMode: Boolean,
 		val showMagnitudeFilter: Boolean,
 		val magnitudeFilter: Double?,
 		val items: List<SkyObjectConfig>
@@ -125,9 +125,8 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 
 		val showStarMap = settings?.optBoolean(KEY_SHOW_STAR_MAP, true) ?: true
 		val showStarChart = settings?.optBoolean(KEY_SHOW_STAR_CHART, false) ?: false
-		val is2DMode = settings?.optBoolean(KEY_IS_2D_MODE, false) ?: false
 
-		return CommonConfig(showStarMap, showStarChart, is2DMode)
+		return CommonConfig(showStarMap, showStarChart)
 	}
 
 	fun setCommonConfig(config: CommonConfig) {
@@ -136,7 +135,6 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 
 		settings.put(KEY_SHOW_STAR_MAP, config.showStarMap)
 		settings.put(KEY_SHOW_STAR_CHART, config.showStarChart)
-		settings.put(KEY_IS_2D_MODE, config.is2DMode)
 
 		root.put(KEY_COMMON, settings)
 		setSettingsJson(root)
@@ -160,14 +158,28 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showGalaxies = mapSettings?.optBoolean(KEY_SHOW_GALAXIES, false) ?: false
 		val showBlackHoles = mapSettings?.optBoolean(KEY_SHOW_BLACK_HOLES, false) ?: false
 
+		val is2DMode = mapSettings?.optBoolean(KEY_IS_2D_MODE, false) ?: false
+
 		val showMagnitudeFilter = mapSettings?.optBoolean(KEY_SHOW_MAGNITUDE_FILTER, false) ?: false
 		val magnitudeFilter = mapSettings?.optDouble(KEY_MAGNITUDE_FILTER)?.takeIf { !it.isNaN() }
 
 		val items = parseItems(mapSettings)
 
 		return StarMapConfig(
-			showAzimuthal, showEquatorial, showEcliptic, showSun, showMoon, showPlanets,
-			showConstellations, showStars, showGalaxies, showBlackHoles, showMagnitudeFilter, magnitudeFilter, items
+			showAzimuthalGrid = showAzimuthal,
+			showEquatorialGrid = showEquatorial,
+			showEclipticLine = showEcliptic,
+			showSun = showSun,
+			showMoon = showMoon,
+			showPlanets = showPlanets,
+			showConstellations = showConstellations,
+			showStars = showStars,
+			showGalaxies = showGalaxies,
+			showBlackHoles = showBlackHoles,
+			is2DMode = is2DMode,
+			showMagnitudeFilter = showMagnitudeFilter,
+			magnitudeFilter = magnitudeFilter,
+			items = items
 		)
 	}
 
@@ -188,6 +200,8 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		mapSettings.put(KEY_SHOW_STARS, config.showStars)
 		mapSettings.put(KEY_SHOW_GALAXIES, config.showGalaxies)
 		mapSettings.put(KEY_SHOW_BLACK_HOLES, config.showBlackHoles)
+
+		mapSettings.put(KEY_IS_2D_MODE, config.is2DMode)
 
 		mapSettings.put(KEY_SHOW_MAGNITUDE_FILTER, config.showMagnitudeFilter)
 		if (config.magnitudeFilter == null) {

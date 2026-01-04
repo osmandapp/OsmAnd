@@ -145,7 +145,7 @@ object AstroUtils {
 
 				starView.updateVisibility()
 
-				val newConfig = StarMapConfig(
+				val newConfig = config.copy(
 					showAzimuthalGrid = tempAzimuthal,
 					showEquatorialGrid = tempEquatorial,
 					showEclipticLine = tempEcliptic,
@@ -156,9 +156,7 @@ object AstroUtils {
 					showStars = tempStars,
 					showGalaxies = tempGalaxies,
 					showBlackHoles = tempBlackHoles,
-					showMagnitudeFilter = tempShowMagnitudeFilter,
-					magnitudeFilter = config.magnitudeFilter,
-					items = config.items
+					showMagnitudeFilter = tempShowMagnitudeFilter
 				)
 				swSettings.setStarMapConfig(newConfig)
 				onApply?.invoke(newConfig)
