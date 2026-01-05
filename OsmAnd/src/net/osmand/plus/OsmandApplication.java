@@ -247,9 +247,6 @@ public class OsmandApplication extends MultiDexApplication {
 							.getPreferencesDatabase()
 							.searchablePreferenceScreenGraphRepository()
 							.addGraphTransformer(
-									// FK-FIXME: 1. reactivate PluginSettingsOfConfigureProfileFragmentAdapter
-									//           2. make tests in SettingsSearchTest pass again by fixing PluginSettingsOfConfigureProfileFragmentAdapter
-									// new PluginSettingsOfConfigureProfileFragmentAdapter(getTileSourceTemplatesProvider())
 									new SearchDatabaseRootedAtPreferenceFragmentAdapter(
 											ConfigureProfileFragment.class,
 											getTileSourceTemplatesProvider()));
