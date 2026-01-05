@@ -42,7 +42,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.style.CharacterStyle;
@@ -51,6 +50,7 @@ import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.*;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -980,18 +980,18 @@ public class AndroidUtils {
 			return tv.getCompoundDrawablesRelative();
 	}
 
-	public static void setPadding(View view, int start, int top, int end, int bottom) {
+	public static void setPadding(@NonNull View view, int start, int top, int end, int bottom) {
 		view.setPaddingRelative(start, top, end, bottom);
 	}
 
-	public static void setMargins(ViewGroup.MarginLayoutParams layoutParams, int vertical, int horizontal) {
-		setMargins(layoutParams, horizontal, vertical, horizontal, vertical);
+	public static void setMargins(@NonNull MarginLayoutParams params, int vertical, int horizontal) {
+		setMargins(params, horizontal, vertical, horizontal, vertical);
 	}
 
-	public static void setMargins(ViewGroup.MarginLayoutParams layoutParams, int start, int top, int end, int bottom) {
-		layoutParams.setMargins(start, top, end, bottom);
-			layoutParams.setMarginStart(start);
-			layoutParams.setMarginEnd(end);
+	public static void setMargins(@NonNull MarginLayoutParams params, int start, int top, int end, int bottom) {
+		params.setMargins(start, top, end, bottom);
+		params.setMarginStart(start);
+		params.setMarginEnd(end);
 	}
 
 	public static int getLayoutDirection(@NonNull Context ctx) {
