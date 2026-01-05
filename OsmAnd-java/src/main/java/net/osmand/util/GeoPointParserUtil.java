@@ -839,6 +839,10 @@ public class GeoPointParserUtil {
 	}
 
 	public static boolean isGooGlUrl(String url) {
-		return url != null && url.startsWith("http") && url.contains("goo.gl/");
+		if (url == null) {
+			return false;
+		}
+		String lowerUrl = url.toLowerCase(Locale.ROOT);
+		return lowerUrl.startsWith("http") && lowerUrl.contains("goo.gl/");
 	}
 }
