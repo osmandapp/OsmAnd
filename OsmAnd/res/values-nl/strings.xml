@@ -6205,7 +6205,7 @@
     <string name="track_folder_appearance">Uiterlijk van de track-map</string>
     <string name="update_maps">Update kaarten</string>
     <string name="reconnect">Opnieuw verbinden</string>
-    <string name="trip_recording_downhill_widget_desc">Toont de som van alle afdalingen of de laatste afdaling van de momenteel opgenomen reis.</string>
+    <string name="trip_recording_downhill_widget_desc">Toont de som van alle afdalingen of de laatste afdaling van deze opgenomen rit.</string>
     <string name="trip_recording_uphill_widget_desc">Toont de som van alle beklimmingen of de laatste beklimming van de momenteel opgenomen reis.</string>
     <string name="trip_recording_distance_widget_desc">Toont de totale afstand van je momenteel opgenomen reis, met modi om de afstand te zien van de laatste beklimming en afdaling.</string>
     <string name="trip_recording_max_speed_widget_description">Toont de maximale snelheid van de momenteel opgenomen reis. Tik om de wisselen tussen de algehele snelheid en de maximale snelheid van de laatste beklimming of afdaling.</string>
