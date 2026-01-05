@@ -4715,7 +4715,7 @@
     <string name="ant_plus_searching_text">Érzékelők keresése</string>
     <string name="ant_plus_help_title">Nem tudom milyen típusú érzékelőm van</string>
     <string name="external_device_characteristic_cuff_pressure">Mandzsettanyomás</string>
-    <string name="ant_plus_pair_new_sensor_ble">Bluetooth LE érzékelő párosítása</string>
+    <string name="ant_plus_pair_new_sensor_ble">Bluetooth LE-érzékelő párosítása</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">ANT+ érzékelő párosítása</string>
     <string name="learn_more_about_sensors_link">Tudjon meg többet az érzékelőkről.</string>
     <string name="ant_plus_pair_bluetooth_prompt">Az OsmAnd alkalmazással párosíthat Bluetooth LE- és ANT+-érzékelőket.</string>
@@ -5667,7 +5667,7 @@
     <string name="battery">akkumulátor</string>
     <string name="shared_string_switch">Kapcsoló</string>
     <string name="ski_route_switch_style_description">Fedezze fel a sípályákat, lejtőket, felvonókat a Tél és síelés térképstílussal.</string>
-    <string name="release_5_1">• Hozzáadott támogatás webes és platformfüggetlen vásárlásokhoz\n\n • A hőmérsékleti mértékegységek átkerültek az Általános beállításokba a könnyebb hozzáférés érdekében\n\n • Hozzáadott akkumulátorszint-jelző a BLE érzékelőkhöz\n\n • Új, intuitívabb felhasználói felület a pontok kiválasztásához a Navigációban\n\n • Modulok láthatóságának javítása új körvonallal\n\n • Hozzáadott emelkedők/lejtők elemző\n\n • Bővített Wikipédia és Wikivoyage integráció további érdekes helyekhez (POI).</string>
+    <string name="release_5_1">• Hozzáadott támogatás webes és platformfüggetlen vásárlásokhoz\n\n • A hőmérsékleti mértékegységek átkerültek az Általános beállításokba a könnyebb hozzáférés érdekében\n\n • Hozzáadott akkumulátorszint-jelző a BLE-érzékelőkhöz\n\n • Új, intuitívabb felhasználói felület a pontok kiválasztásához a Navigációban\n\n • Modulok láthatóságának javítása új körvonallal\n\n • Hozzáadott emelkedők/lejtők elemző\n\n • Bővített Wikipédia és Wikivoyage integráció további érdekes helyekhez (POI).</string>
     <string name="osm_live_payment_renews_3_years">Megújul 3 évente</string>
     <string name="years_3">3 év</string>
     <string name="osm_live_payment_3_years_title">3 évente</string>
