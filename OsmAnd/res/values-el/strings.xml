@@ -3535,7 +3535,7 @@
     <string name="routing_attr_prefer_hiking_routes_name">Προτίμηση διαδρομών για πεζοπορία</string>
     <string name="export_not_enough_space_descr">Η συσκευή σας έχει μόνο %1$s ελεύθερα. Παρακαλούμε απελευθερώστε μερικό χώρο ή αποεπιλέξτε αντικείμενα προς εξαγωγή.</string>
     <string name="shared_string_local_maps">Τοπικοί χάρτες</string>
-    <string name="use_native_pt">Εγχώρια ανάπτυξη Δημόσιων Συγκοινωνιών</string>
+    <string name="use_native_pt">Εγχώρια ανάπτυξη Δημόσιας Συγκοινωνίας</string>
     <string name="shared_string_is_saved">αποθηκεύτηκε</string>
     <string name="simplified_track">Απλοποιημένο ίχνος</string>
     <string name="access_hint_enter_address">Εισαγωγή διεύθυνσης</string>
@@ -5621,4 +5621,26 @@
     <string name="send_crash_log">Αποστολή αρχείου καταγραφής κρασαρίσματος</string>
     <string name="has_vehicle_metrics">Με δεδομένα OBDII</string>
     <string name="lang_mi">Μάορι</string>
+    <string name="access_pinch_zoom_magnification">Μεγέθυνση εστίασης με τσίμπημα</string>
+    <string name="access_pinch_zoom_magnification_descr">Χρήση κλιμάκωσης της περιοχής θέασης αντί των διακριτών επιπέδων εστίασης κατά τη διάρκεια των χειρονομιών μεγεθυνσης.</string>
+    <string name="release_4_7">• Νέο γραφικό στοιχείο \"Ταχύμετρο\" συμβατό με το Android Auto\n\n • Διαμόρφωση της οθόνης χάρτη με προσθήκη πολλαπλών κουμπιών \"Γρήγορη Ενέργεια\"\n\n • Βελτιωμένη αναγνωσιμότητα των δεδομένων σε γραφήματα\n\n • Προσθήκη φίλτρων για δεδομένα αισθητήρων από ίχνη\n\n • Βελτιωμένη εμφάνιση της εξατομίκευσης για ομάδες ιχνών\n\n • Προσθήκη υποστήρθξης για πρόσθετες ετικέτες GPX\n\n • Προσαρμογή για \"Απόσταση κατά την πλοήγηση\": επιλέξτε μεταξύ ακριβών ή στρογγυλοποιημένων προς τα πάνω αριθμών\n\n • Ενοποιημένο UI για επιλογή ιχνών\n\n • Αλλαγή σύνδεσης OpenStreetMap σε OAuth 2.0</string>
+    <string name="distance_during_navigation_description">Επιλέξτε πώς θα εμφανίζονται οι πληροφορίες απόστασης στα γραφικά στοιχεία πλοήγησης (απόσταση σε σημείο, επόμενη στροφή, λωρίδες).\n\nΕπιλέξτε “%1$s” για ακριβή αριθμούς, ή “%2$s” για ευκολότερη αναγνωσιμότητα.</string>
+    <string name="buildings_3d_detail_level">Λεπτομέρειες 3D κτιρίων</string>
+    <string name="attach_to_the_roads">Προσκόλληση στους δρόμους</string>
+    <string name="use_native_pt_desc">Εναλλαγή σε υπολογισμό διαδρομής με Java (ασφαλής) Δημόσια Συγκοινωνία</string>
+    <string name="clear_osm_token">Καθαρισμός διακριτικού OpenStreetMap OAuth</string>
+    <string name="token_is_not_valid">Το διακριτικό δεν είναι έγκυρο</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Άκυρο ή ληγμένο διακριτικό</string>
+    <string name="backup_error_token_is_not_valid">Κάτι είναι λάθος με το δοθέν ID συσκευής ή διακριτικό</string>
+    <string name="backup_error_subscription_was_expired_descr">Η OsmAnd Pro συνδρομή σας έληξε, ανανεώστε για να χρησιμοποιήσετε αντίγραφα ασφαλείας. Μπορείτε ακόμη να επαναφέρετε δεδομένα από το Cloud.</string>
+    <string name="release_3_9">• Προσθήκη επιλογής για εξαγωγή και εισαγωγή όλων των δεδομένων συμπεριλαμβανομένου ρυθμίσεων, πηγών, τα μέρη μου\n\n • Σχεδιασμός Διαδρομής: γραφήματα για τμήματα ίχνους με διαδρομή, και προσθήκη δυνατότητας για δημιουργία και επεξεργασία πολλαπλών τμημάτων ίχνους\n\n • Προσθήκη μεθόδου πιστοποίησης OAuth για το OpenStreetMap, βελτιωμένο UI για διαλόγους OSM\n\n • Υποστήριξη για εξατομικευμένα χρώματα για αγαπημένα και waypoints ίχνους</string>
+    <string name="verification_code_missing_description">Μπορεί να πάρει 10 λεπτά. Χρησιμοποιήστε το παρακάτω κουμπί εάν δεν βρεθεί στο φάκελο με τα σπαμ.</string>
+    <string name="announcement_time_intervals">Μεσοδιαστήματα χρόνου και απόστασης</string>
+    <string name="announcement_time_descr">Ο χρονισμός των εκφωνήσεων για διαφορετικές φωνητικές εντολές, βασίζεται στο είδος της εντολής, την τρέχουσα ταχύτητα πλοήγησης και την προεπιλεγμένη ταχύτητα πλοήγησης.</string>
+    <string name="context_menu_read_full">Πλήρης ανάγνωση</string>
+    <string name="trip_recording_logging_interval_info">Το μεσοδιάστημα καταγραφής ορίζει τη χρονική περίοδο στην οποία το OsmAnd θα αιτείται τα δεδομένα για την τρέχουσα τοποθεσία.</string>
+    <string name="backup_storage_taken">Χώρος που καταλαμβάνεται</string>
+    <string name="auto_backup_preference_desc">Από προεπιλογή, το Android αποθηκεύει αντίγραφα ασφαλείας των αγαπημένων, διακριτικών χαρτών και ρυθμίσεων του OsmAnd για να τα επαναφέρει σε νέες συσκευές ή μετά από επανεγκατάσταση. Αυτό το αντίγραφο ασφαλείας περιορίζεται στα 25 MB.\nΌταν χρησιμοποιείται το OsmAnd Cloud, αυτό μπορεί να οδηγήσει σε παρανόηση μετά από επανεγκατάσταση.</string>
+    <string name="attach_roads_descr">Προσκολλήστε το ίχνος σας στους δρόμους για να πάρετε λεπτομερείς πληροφορίες διαδρομής, συμπεριλαμβανομένου οδηγιών βήμα-βήμα και ιδιοτήτων δρόμου.</string>
+    <string name="attach_roads_warning">Μόνο ένα καταγεγραμμένο ίχνος μπορεί να προσκολλήσει στους δρόμους.</string>
 </resources>

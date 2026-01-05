@@ -2233,9 +2233,9 @@
     <string name="mapillary_action_descr">Поделитесь своими уличными видами через Mapillary.</string>
     <string name="mapillary_widget">Виджет Mapillary</string>
     <string name="mapillary_widget_descr">Позволяет быстро внести свой вклад в Mapillary.</string>
-    <string name="mapillary_descr">Просмотр и создание панорам онлайн. Открывайте места, сотрудничайте, снимайте мир.</string>
+    <string name="mapillary_descr">Уличные фотографии онлайн для всех. Открывайте для себя новые места, сотрудничайте, запечатлевайте мир.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="plugin_mapillary_descr">Панорамы местности для всех. Открывайте места, сотрудничайте, снимайте мир.</string>
+    <string name="plugin_mapillary_descr">Фотографии с улиц. Вы также можете ими воспользоваться. Чтобы увидеть слой карты с метками точек съемки, включите \"Фото с улиц\", открыв в меню \"Настройки карты\".</string>
     <string name="save_poi_too_many_uppercase">В названии слишком много заглавных букв. Продолжить\?</string>
     <string name="quick_action_resume_pause_navigation_descr">Кнопка приостановки и возобновления навигации.</string>
     <string name="quick_action_show_navigation_finish_dialog">Показывать диалог завершения навигации</string>
