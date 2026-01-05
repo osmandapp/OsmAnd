@@ -1094,7 +1094,7 @@ public class AndroidNetworkUtils {
 				.head()
 				.build();
 
-        try (Response resp = client.newCall(req).execute()) {
+		try (Response resp = client.newCall(req).execute()) {
 			if (resp.code() < 300 || resp.code() >= 400) {
 				LOG.error("Got no Redirect from " + url);
 				return null;

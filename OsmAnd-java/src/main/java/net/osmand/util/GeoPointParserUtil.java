@@ -377,7 +377,7 @@ public class GeoPointParserUtil {
 	                                                   String fragment, Pattern commaSeparatedPairPattern) {
 		String latString = null;
 		String lonString = null;
-		String ftid1sFinally = null;
+		String ftidCellId = null;
 		String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
 
 		if (params.containsKey("q")) {
@@ -404,7 +404,7 @@ public class GeoPointParserUtil {
 		} else if (params.containsKey("saddr")) {
 			return parseGoogleMapsPath(params.get("saddr"), params);
 		} else if (params.containsKey("ftid")) {
-			ftid1sFinally = params.get("ftid");
+			ftidCellId = params.get("ftid");
 		} else if (params.containsKey("q")) {
 			String opath = params.get("q");
 			final String pref = "loc:";
@@ -461,16 +461,16 @@ public class GeoPointParserUtil {
 						} else if (v.startsWith("4d")) {
 							lon = v.substring(2);
 						} else if (v.startsWith("1s")) {
-							ftid1sFinally = v.substring(2);
+							ftidCellId = v.substring(2);
 						}
 					}
 					if (lat != null && lon != null) {
 						return Collections.singletonList(new GeoParsedPoint(Double.parseDouble(lat), Double.parseDouble(lon)));
 					}
 				} else {
-					if ("/".equals(pref) && ftid1sFinally != null) {
+					if ("/".equals(pref) && ftidCellId != null) {
 						// ftid (1s) processed after 3d/4d and /@
-						LatLon ll = parseS2ftid(ftid1sFinally);
+						LatLon ll = parseS2ftid(ftidCellId);
 						if (ll != null) {
 							return Collections.singletonList(
 									new GeoParsedPoint(ll.getLatitude(), ll.getLongitude(), true));
