@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="show_expand_button">Show expand button</string>
     <string name="imprecise_coordinates">Imprecise coordinates</string>
 	<string name="has_vehicle_metrics">With OBDII data</string>
     <string name="lang_mi">Māori</string>
