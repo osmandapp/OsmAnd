@@ -14,16 +14,6 @@ abstract class VehicleSpecs(
 ) {
 
     companion object {
-        /**
-         * Offset added to or subtracted from vehicle parameter values during storage.
-         * This is necessary because routing.xml uses the ">=" operator for constraint checks
-         * (e.g., maxweight). If a vehicle's weight is exactly 3.5t and the road limit is 3.5t,
-         * the road will be blocked. Subtracting this offset makes the stored weight (e.g., 3.4999t),
-         * allowing it to pass the check.
-         * @see <a href="https://github.com/osmandapp/OsmAnd/issues/4736">Issue #4736</a>
-         */
-        private const val ROUTING_LIMIT_OFFSET = 0.0001f
-
         @JvmStatic
         protected fun createSpecification(
             iconDayId: Int,
@@ -72,7 +62,6 @@ abstract class VehicleSpecs(
     fun readSavedValue(preference: VehicleSpecificationPreference): Float {
         var value = Algorithms.parseDoubleSilently(preference.value, 0.0).toFloat()
         if (value != 0.0f) {
-            value += ROUTING_LIMIT_OFFSET
             // Convert value to display units system
             val units = getMeasurementUnits(preference.specificationType, preference.isUseMetricSystem)
             return units.fromBase(value)
@@ -86,8 +75,6 @@ abstract class VehicleSpecs(
             // Convert value to default units system (meters for length, tones for weight)
             val units = getMeasurementUnits(preference.specificationType, preference.isUseMetricSystem)
             value = units.toBase(value)
-
-            value -= ROUTING_LIMIT_OFFSET
         }
         return value
     }
