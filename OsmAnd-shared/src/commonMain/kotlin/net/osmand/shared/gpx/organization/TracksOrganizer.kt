@@ -14,7 +14,7 @@ class TracksOrganizer(val parent: SmartFolder) {
 		rules?.type?.let {
 			val rules = rules
 			if (cachedOrganizedGroups == null && rules != null) {
-				cachedOrganizedGroups = it.strategy?.apply(parent, rules, resourceMapper)
+				cachedOrganizedGroups = it.strategy.apply(parent, rules, resourceMapper)
 			}
 		}
 		return cachedOrganizedGroups
