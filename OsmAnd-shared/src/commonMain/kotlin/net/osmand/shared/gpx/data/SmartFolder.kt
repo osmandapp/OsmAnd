@@ -22,8 +22,6 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	@Transient
 	private val tracksOrganizer = TracksOrganizer(this)
-	@Transient
-	private var organizeByRules: OrganizeByRules? = null
 
 	constructor() : this("")
 
@@ -59,11 +57,11 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 	}
 
 	fun getOrganizedTrackItems(resourcesMapper: OrganizeTracksResourceMapper): List<OrganizedTracksGroup>? {
-		return tracksOrganizer.getOrganizedTrackItems(organizeByRules ?: return null, resourcesMapper)
+		return tracksOrganizer.getOrganizedTrackItems(resourcesMapper)
 	}
 
 	fun setOrganizeByRules(organizeByRules: OrganizeByRules?) {
-		this.organizeByRules = organizeByRules
+		tracksOrganizer.setOrganizeByRules(organizeByRules)
 	}
 
 	override fun getFolderAnalysis(): TrackFolderAnalysis {

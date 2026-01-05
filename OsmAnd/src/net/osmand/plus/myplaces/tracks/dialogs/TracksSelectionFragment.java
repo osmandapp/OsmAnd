@@ -97,7 +97,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	@Override
 	public void setRootFolder(@NonNull TracksGroup rootGroup) {
 		if (rootGroup instanceof OrganizedTracksGroup organizedTracks) {
-			setSmartFolder(organizedTracks.getRelatedSmartFolder());
+			setRootFolder(organizedTracks.getParentGroup());
 		} else if (rootGroup instanceof SmartFolder folder) {
 			setSmartFolder(folder);
 		} else {

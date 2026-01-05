@@ -11,7 +11,7 @@ class OrganizedTracksGroup(
     private val type: OrganizeByType,
     private val representedValue: Any,
     private val trackItems: List<TrackItem>,
-    private val relatedSmartFolder: SmartFolder,
+    private val parentGroup: TracksGroup,
     private val resourcesMapper: OrganizeTracksResourceMapper
 ) : TracksGroup, ComparableTracksGroup {
 
@@ -28,7 +28,7 @@ class OrganizedTracksGroup(
 
     fun getType() = type
 
-    fun getRelatedSmartFolder() = relatedSmartFolder
+    fun getParentGroup() = parentGroup
 
     override fun getDirName(includingSubdirs: Boolean) = getName()
 

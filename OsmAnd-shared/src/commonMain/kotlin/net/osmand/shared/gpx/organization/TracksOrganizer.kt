@@ -2,38 +2,32 @@ package net.osmand.shared.gpx.organization
 
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.SmartFolder
-import net.osmand.shared.gpx.organization.strategy.OrganizeByStrategy
 
 class TracksOrganizer(val parent: SmartFolder) {
 
-	private var cachedRules: OrganizeByRules? = null
+	private var rules: OrganizeByRules? = null
 	private var cachedOrganizedGroups: List<OrganizedTracksGroup>? = null
-	private var strategy: OrganizeByStrategy<*>? = null
 
 	fun getOrganizedTrackItems(
-		rules: OrganizeByRules,
 		resourceMapper: OrganizeTracksResourceMapper
 	): List<OrganizedTracksGroup>? {
-		var strategyChanged = false
-
-		val oldRules = cachedRules
-		if (strategy == null || oldRules == null || oldRules.type != rules.type) {
-			// Update strategy if organization type changed
-			strategy = rules.type.strategy
-			cachedRules = rules
-			strategyChanged = true
+		rules?.type?.let {
+			val rules = rules
+			if (cachedOrganizedGroups == null && rules != null) {
+				cachedOrganizedGroups = it.strategy?.apply(parent, rules, resourceMapper)
+			}
 		}
+		return cachedOrganizedGroups
+	}
 
-		val stepChanged = oldRules?.stepSize != rules.stepSize
-		if (!strategyChanged && !stepChanged && cachedOrganizedGroups != null) {
-			// if no changes - return cached value
-			return cachedOrganizedGroups
+	fun setOrganizeByRules(newRules: OrganizeByRules?) {
+		if (newRules != rules) {
+			rules = newRules
+			clearCache()
 		}
-		return strategy?.apply(parent, rules, resourceMapper)
 	}
 
 	fun clearCache() {
-		cachedRules = null
 		cachedOrganizedGroups = null
 	}
 }

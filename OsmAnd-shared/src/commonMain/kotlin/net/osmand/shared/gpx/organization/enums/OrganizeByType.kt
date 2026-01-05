@@ -2,6 +2,7 @@ package net.osmand.shared.gpx.organization.enums
 
 import net.osmand.shared.data.Limits
 import net.osmand.shared.gpx.filters.TrackFilterType
+import net.osmand.shared.gpx.organization.strategy.NoImplementedStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByActivityStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByRangeStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByStrategy
@@ -13,7 +14,7 @@ enum class OrganizeByType(
 	val filterType: TrackFilterType,
 	val category: OrganizeByCategory,
 	val stepRange: Limits? = null,
-	val strategy: OrganizeByStrategy<*>? = null // todo must be nonnull
+	val strategy: OrganizeByStrategy
 ) {
 	// General
 	ACTIVITY(
@@ -53,13 +54,15 @@ enum class OrganizeByType(
 		iconResId = "ic_action_calendar_month",
 		nameResId = "year_of_creation",
 		filterType = TrackFilterType.DATE_CREATION,
-		category = OrganizeByCategory.DATE_TIME
+		category = OrganizeByCategory.DATE_TIME,
+		strategy = NoImplementedStrategy
 	),
 	MONTH_AND_YEAR(
 		iconResId = "ic_action_calendar_month",
 		nameResId = "month_year_creation",
 		filterType = TrackFilterType.DATE_CREATION,
-		category = OrganizeByCategory.DATE_TIME
+		category = OrganizeByCategory.DATE_TIME,
+		strategy = NoImplementedStrategy
 	),
 
 	// Location
@@ -67,13 +70,15 @@ enum class OrganizeByType(
 		iconResId = "ic_action_street_name",
 		nameResId = "nearest_city",
 		filterType = TrackFilterType.CITY,
-		category = OrganizeByCategory.LOCATION
+		category = OrganizeByCategory.LOCATION,
+		strategy = NoImplementedStrategy
 	),
 	COUNTRY(
 		iconResId = "ic_world_globe_dark",
 		nameResId = "country",
 		filterType = TrackFilterType.CITY,
-		category = OrganizeByCategory.LOCATION
+		category = OrganizeByCategory.LOCATION,
+		strategy = NoImplementedStrategy
 	),
 
 	// Speed

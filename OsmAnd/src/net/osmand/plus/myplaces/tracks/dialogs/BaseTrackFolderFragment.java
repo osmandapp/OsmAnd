@@ -533,21 +533,21 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 
 	@Override
 	public void showFolderTracksOnMap(@NonNull TrackFolder folder) {
-		showTracksVisibilityDialog(folder.getId(), FOLDER, true);
+		showTracksVisibilityDialog(folder.getId(), true);
 	}
 
 	@Override
 	public void showSmartFolderTracksOnMap(@NonNull SmartFolder smartFolder) {
-		showTracksVisibilityDialog(smartFolder.getId(), SMART_FOLDER, true);
+		showTracksVisibilityDialog(smartFolder.getId(), true);
 	}
 
 	//TODO: implement approach to display tracks of current group
 	@Override
 	public void showOrganizedTracksOnMap(@NonNull OrganizedTracksGroup organizedTracks) {
-		showSmartFolderTracksOnMap(organizedTracks.getRelatedSmartFolder());
+		showTracksVisibilityDialog(organizedTracks.getParentGroup().getId(), false);
 	}
 
-	protected void showTracksVisibilityDialog(@NonNull String id, @NonNull TrackTabType type, boolean selectAll) {
+	protected void showTracksVisibilityDialog(@NonNull String id, boolean selectAll) {
 		callActivity(activity -> {
 			Bundle bundle = new Bundle();
 			bundle.putString(PRESELECTED_TRACKS_TAB_ID, id);

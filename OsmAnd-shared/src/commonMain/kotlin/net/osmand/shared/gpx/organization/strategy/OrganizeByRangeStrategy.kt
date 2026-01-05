@@ -3,16 +3,16 @@ package net.osmand.shared.gpx.organization.strategy
 import net.osmand.shared.data.Limits
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
-import net.osmand.shared.gpx.data.SmartFolder
+import net.osmand.shared.gpx.data.TracksGroup
 import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.OrganizeByRules
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import kotlin.math.floor
 
-object OrganizeByRangeStrategy: OrganizeByStrategy<Limits> {
+object OrganizeByRangeStrategy: OrganizeByStrategy {
 
 	override fun apply(
-		originalGroup: SmartFolder,
+		originalGroup: TracksGroup,
 		rules: OrganizeByRules,
 		resourcesMapper: OrganizeTracksResourceMapper
 	): List<OrganizedTracksGroup>? {
@@ -42,8 +42,9 @@ object OrganizeByRangeStrategy: OrganizeByStrategy<Limits> {
 		return result
 	}
 
-	override fun createRepresentedValueId(value: Limits) = "from_${value.min}_to_${value.max}"
-
+	private fun createId(limits: Limits, originalGroup: TracksGroup, type: OrganizeByType): String {
+		return getBaseId(originalGroup, type) + "from_${limits.min}_to_${limits.max}"
+	}
 
 	private fun getRangeStartIndicator(trackItem: TrackItem, type: OrganizeByType, step: Double): Int? {
 		val property = type.filterType.property ?: return null
