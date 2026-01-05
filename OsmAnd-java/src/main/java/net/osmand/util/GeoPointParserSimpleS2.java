@@ -93,10 +93,10 @@ public final class GeoPointParserSimpleS2 {
 
 	private record Vec3(double x, double y, double z) {
 		Vec3 normalize() {
-				double n = Math.sqrt(x * x + y * y + z * z);
-				return new Vec3(x / n, y / n, z / n);
-			}
+			double n = Math.sqrt(x * x + y * y + z * z);
+			return new Vec3(x / n, y / n, z / n);
 		}
+	}
 
 	private static final class MutableInt { int v; MutableInt(int v) { this.v = v; } }
 
