@@ -4,12 +4,6 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<net.osmand.plus.plugins.astro.views.CelestialPathView
-		android:id="@+id/celestial_path_view"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:visibility="gone"/>
-
 	<net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 		android:id="@+id/star_altitude_view"
 		android:layout_width="match_parent"

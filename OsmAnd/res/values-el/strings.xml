@@ -5619,4 +5619,6 @@
     <string name="rendering_engine_failed">Η απεικόνιση του χάρτη του OsmAnd έχει κρασάρει πρόσφατα.</string>
     <string name="share_crash_log">Κοινοποίηση αρχείου καταγραφής κρασαρίσματος</string>
     <string name="send_crash_log">Αποστολή αρχείου καταγραφής κρασαρίσματος</string>
+    <string name="has_vehicle_metrics">Με δεδομένα OBDII</string>
+    <string name="lang_mi">Μάορι</string>
 </resources>

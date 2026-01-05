@@ -19,6 +19,7 @@ import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.SkyObject
 import net.osmand.plus.plugins.astro.StarWatcherSettings
+import net.osmand.plus.plugins.astro.StarWatcherSettings.StarMapConfig
 import net.osmand.plus.plugins.astro.views.StarView
 import java.time.Instant
 import java.time.ZoneId
@@ -65,7 +66,7 @@ object AstroUtils {
 	fun formatLocalTime(astronomyTime: Time): String {
 		val calendar = Calendar.getInstance(TimeZone.getDefault())
 		calendar.timeInMillis = astronomyTime.toMillisecondsSince1970()
-		return String.Companion.format(
+		return String.format(
 			Locale.getDefault(), "%02d:%02d",
 			calendar.get(Calendar.HOUR_OF_DAY),
 			calendar.get(Calendar.MINUTE))
@@ -75,7 +76,7 @@ object AstroUtils {
 		context: Context,
 		starView: StarView,
 		swSettings: StarWatcherSettings,
-		onApply: (() -> Unit)? = null
+		onApply: ((StarMapConfig) -> Unit)? = null
 	) {
 		val config = swSettings.getStarMapConfig()
 
@@ -83,6 +84,7 @@ object AstroUtils {
 			context.getString(R.string.azimuthal_grid),
 			context.getString(R.string.equatorial_grid),
 			context.getString(R.string.ecliptic_line),
+			context.getString(R.string.magnitude_filter),
 			context.getString(R.string.astro_name_sun),
 			context.getString(R.string.astro_name_moon),
 			context.getString(R.string.astro_planets),
@@ -102,9 +104,10 @@ object AstroUtils {
 		var tempStars = config.showStars
 		var tempGalaxies = config.showGalaxies
 		var tempBlackHoles = config.showBlackHoles
+		var tempShowMagnitudeFilter = config.showMagnitudeFilter
 
 		val checked = booleanArrayOf(
-			tempAzimuthal, tempEquatorial, tempEcliptic, tempSun, tempMoon, tempPlanets,
+			tempAzimuthal, tempEquatorial, tempEcliptic, tempShowMagnitudeFilter, tempSun, tempMoon, tempPlanets,
 			tempConstellations, tempStars, tempGalaxies, tempBlackHoles
 		)
 
@@ -115,13 +118,14 @@ object AstroUtils {
 					0 -> tempAzimuthal = isChecked
 					1 -> tempEquatorial = isChecked
 					2 -> tempEcliptic = isChecked
-					3 -> tempSun = isChecked
-					4 -> tempMoon = isChecked
-					5 -> tempPlanets = isChecked
-					6 -> tempConstellations = isChecked
-					7 -> tempStars = isChecked
-					8 -> tempGalaxies = isChecked
-					9 -> tempBlackHoles = isChecked
+					3 -> tempShowMagnitudeFilter = isChecked
+					4 -> tempSun = isChecked
+					5 -> tempMoon = isChecked
+					6 -> tempPlanets = isChecked
+					7 -> tempConstellations = isChecked
+					8 -> tempStars = isChecked
+					9 -> tempGalaxies = isChecked
+					10 -> tempBlackHoles = isChecked
 				}
 			}
 			.setPositiveButton(R.string.shared_string_apply) { _, _ ->
@@ -141,7 +145,7 @@ object AstroUtils {
 
 				starView.updateVisibility()
 
-				val newConfig = StarWatcherSettings.StarMapConfig(
+				val newConfig = config.copy(
 					showAzimuthalGrid = tempAzimuthal,
 					showEquatorialGrid = tempEquatorial,
 					showEclipticLine = tempEcliptic,
@@ -152,10 +156,10 @@ object AstroUtils {
 					showStars = tempStars,
 					showGalaxies = tempGalaxies,
 					showBlackHoles = tempBlackHoles,
-					items = config.items
+					showMagnitudeFilter = tempShowMagnitudeFilter
 				)
 				swSettings.setStarMapConfig(newConfig)
-				onApply?.invoke()
+				onApply?.invoke(newConfig)
 			}
 			.setNegativeButton(R.string.shared_string_cancel, null)
 			.show()

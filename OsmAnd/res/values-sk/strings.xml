@@ -2889,8 +2889,8 @@
     <string name="edit_profile_setup_map_subtitle">Zvoľte nastavenia mapy pre profil</string>
     <string name="edit_profile_screen_options_subtitle">Zvoľte nastavenia obrazovky pre profil</string>
     <string name="edit_profile_nav_settings_subtitle">Zvoľte nastavenia navigácie pre profil</string>
-    <string name="routing_attr_max_num_changes_description">Zadajte hornú hranicu zmien</string>
-    <string name="routing_attr_max_num_changes_name">Počet zmien</string>
+    <string name="routing_attr_max_num_changes_description">Zadajte hornú hranicu pre počet prestupov</string>
+    <string name="routing_attr_max_num_changes_name">Max. počet prestupov</string>
     <string name="turn_screen_on_router">Prebudiť pri odbočení</string>
     <string name="turn_screen_on_time_descr">Nastavte ako dlho bude obrazovka zapnutá.</string>
     <string name="turn_screen_on_sensor">Použiť senzor priblíženia</string>
@@ -4544,7 +4544,7 @@
     <string name="restart_now">Reštartovať teraz</string>
     <string name="map_rendering_engine_v1">Verzia 1</string>
     <string name="map_rendering_engine_v2">Verzia 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Vykresľovanie Verzie 1 bolo predvolené do OsmAnd 4.3 a je stále vhodnejšie pre staršie zariadenia.\nVerzia 2 (OpenGL) je výkonnejšie jadro na vykresľovanie mapy, ktoré obsahuje aj 2,5D pohľad.</string>
+    <string name="map_rendering_engine_descr">Vykresľovanie Verzie 1 bolo predvolené do OsmAnd 4.3 a je vhodné pre staršie zariadenia.\n\nVerzia 2 (OpenGL) je pokročilejšie a pridáva funkcie ako 3D pohľad.</string>
     <string name="map_rendering_engine">Spôsob vykresľovania mapy</string>
     <string name="weather_offline_forecast">Offline predpoveď</string>
     <string name="weather_online_cache">Online vyrovnávacia pamäť</string>
@@ -5905,4 +5905,16 @@
     <string name="routing_attr_weightrating_name">Maximálna hmotnosť pri plnom zaťažení</string>
     <string name="routing_attr_maxaxleload_name">Maximálne zaťaženie na nápravu</string>
     <string name="is_parking_time_limited">Je parkovanie časovo obmedzené?</string>
+    <string name="show_spherical_map">Zobrazenie guľatej zeme</string>
+    <string name="enable_3d_objects">3D budovy</string>
+    <string name="has_vehicle_metrics">S údajmi OBDII</string>
+    <string name="vehicle_metrics_chart_category">Merania vozidla</string>
+    <string name="delete_folder_description">Odstrániť priečinok \"%1$s\"?</string>
+    <string name="routing_attr_pt_limit_name">Zobraziť N najlepších trás</string>
+    <string name="routing_attr_pt_limit_description">Zadajte počet najlepších trás na zobrazenie</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimetre</string>
+    <string name="bicycle_width_limit_description">Zadajte šírku vášho bicykla, aby ste sa mohli vyhnúť úzkym cyklocestám.</string>
+    <string name="copy_link">Kopírovať odkaz</string>
+    <string name="buildings_3d_detail_level">Úroveň detailov 3D budov</string>
 </resources>

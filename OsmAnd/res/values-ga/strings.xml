@@ -2849,7 +2849,7 @@
     <string name="shared_string_class">Aicme</string>
     <string name="osmand_cloud_deletion_all_data_warning">Beidh na sonraí go léir ó OsmAnd Cloud %1$s. Tá sonraí ar an ngléas fós gan athrú.</string>
     <string name="disable_vertex_hillshade_3d">Díchumasaigh cnocán vertex i 3D</string>
-    <string name="map_rendering_engine_descr">Ba é Leagan 1 an réamhshocrú roimh OsmAnd 4.3 agus is fearr fós é do ghléasanna níos sine.\nIs inneall rindreála léarscáile níos cumhachtaí é Leagan 2 (OpenGL), ina bhfuil radharc 2.5D freisin.</string>
+    <string name="map_rendering_engine_descr">Ba é Leagan 1 an leagan réamhshocraithe roimh OsmAnd 4.3 agus oireann sé do ghléasanna níos sine.\n\nTá Leagan 2 (OpenGL) níos forbartha agus cuireann sé gnéithe cosúil le radharc 3T leis.</string>
     <string name="send_uuid_preference_desc">Úsáidtear UUID randamach chun léarscáileanna as líne a íoslódáil ó fhreastalaithe OsmAnd chun monatóireacht a dhéanamh ar úsáid chothrom acmhainní freastalaí, patrúin tráchta a thuar, agus tuarascálacha léarscáile míosúla gan ainm a ghiniúint.</string>
     <string name="altitude_correction">Ceartú ingearchló</string>
     <string name="save_track_to_gpx_descrp">Taifeadadh rian uathoibríoch-tús agus nascleanúint agus uathoibríoch-shábháil ina dhiaidh sin.</string>

@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Direction
+import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.Location
@@ -35,12 +36,11 @@ import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.astro.utils.AstroUtils.toZoned
+import net.osmand.plus.plugins.astro.AstroDataProvider.Constellation
 import net.osmand.plus.plugins.astro.StarChartState.StarChartType
 import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.plugins.astro.utils.StarMapARModeHelper
 import net.osmand.plus.plugins.astro.utils.StarMapCameraHelper
-import net.osmand.plus.plugins.astro.views.CelestialPathView
 import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
 import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 import net.osmand.plus.plugins.astro.views.StarChartView
@@ -53,11 +53,12 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.controls.maphudbuttons.MapButton
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
 import net.osmand.shared.util.LoggerFactory
-import net.osmand.plus.plugins.astro.AstroDataProvider.Constellation
 import java.time.LocalDate
 import java.time.ZoneId
+import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
+import kotlin.math.ceil
 
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
 	OsmAndCompassListener {
@@ -82,11 +83,16 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var transparencySlider: SeekBar
 	private lateinit var sliderContainer: View
 	private lateinit var resetFovButton: View
+	private lateinit var mode2dButton: ImageButton
+	
+	private lateinit var magnitudeSlider: SeekBar
+	private lateinit var magnitudeValueText: TextView
+	private lateinit var magnitudeSliderContainer: View
+	private lateinit var resetMagnitudeButton: ImageButton
 
 	private lateinit var starChartsView: View
 	private lateinit var starVisiblityView: StarVisiblityChartView
 	private lateinit var starAltitudeView: StarAltitudeChartView
-	private lateinit var celestialPathView: CelestialPathView
 	private lateinit var starChartState: StarChartState
 
 	private val mapButtons = mutableListOf<MapButton>()
@@ -105,6 +111,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private lateinit var arModeHelper: StarMapARModeHelper
 	private lateinit var cameraHelper: StarMapCameraHelper
+
+	private var previousAltitude: Double = 45.0
+	private var previousAzimuth: Double = 0.0
+	private var previousViewAngle: Double = 150.0
+	private var showMagnitudeFilter = false
 
 	companion object {
 		private val log = LoggerFactory.getLogger("StarMapFragment")
@@ -153,6 +164,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		transparencySlider = view.findViewById(R.id.transparency_slider)
 		sliderContainer = view.findViewById(R.id.slider_container)
 		resetFovButton = view.findViewById(R.id.reset_fov_button)
+		mode2dButton = view.findViewById(R.id.mode2d_button)
+		
+		magnitudeSlider = view.findViewById(R.id.magnitude_slider)
+		magnitudeValueText = view.findViewById(R.id.magnitude_value_text)
+		magnitudeSliderContainer = view.findViewById(R.id.magnitude_slider_container)
+		resetMagnitudeButton = view.findViewById(R.id.reset_magnitude_button)
 
 		arModeHelper = StarMapARModeHelper(requireContext(), starView) { enabled ->
 			updateArModeUI(enabled)
@@ -175,6 +192,29 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 			override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 		})
+
+		magnitudeSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+			override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+				val magnitude = progress / 10.0 - 1.0
+				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", magnitude)
+				if (fromUser) {
+					starView.magnitudeFilter = magnitude
+					starView.invalidate()
+				}
+			}
+			override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+			override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+		})
+
+		resetMagnitudeButton.setOnClickListener {
+			val objects = starMapViewModel.skyObjects.value ?: emptyList()
+			if (objects.isNotEmpty()) {
+				val maxMag = calculateMaxMagnitude(objects).toDouble()
+				magnitudeSlider.progress = ((maxMag + 1.0) * 10.0).toInt()
+				starView.magnitudeFilter = null
+				starView.invalidate()
+			}
+		}
 
 		updateArModeUI(arModeHelper.isArModeEnabled)
 		updateCameraUI(cameraHelper.isCameraOverlayEnabled)
@@ -208,7 +248,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		starVisiblityView = view.findViewById(R.id.star_visiblity_view)
 		starAltitudeView = view.findViewById(R.id.star_altitude_view)
-		celestialPathView = view.findViewById(R.id.celestial_path_view)
 		starChartState = StarChartState(app)
 
 		view.findViewById<AppCompatImageView>(R.id.chart_settings_button).apply {
@@ -228,8 +267,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			}
 		}
 		view.findViewById<ImageButton>(R.id.settings_button).apply {
-			setOnClickListener { AstroUtils.showStarMapOptionsDialog(context, starView, swSettings) }
+			setOnClickListener {
+				AstroUtils.showStarMapOptionsDialog(context, starView, swSettings) {
+					showMagnitudeFilter = it.showMagnitudeFilter
+					updateMagnitudeFilterVisibility()
+				}
+			}
 		}
+		mode2dButton.setOnClickListener { toggle2DMode() }
 
 		resetTimeButton.setOnClickListener {
 			starMapViewModel.resetTime(); starChartViewModel.resetTime()
@@ -251,12 +296,24 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showSun = config.showSun
 			starView.showMoon = config.showMoon
 			starView.showPlanets = config.showPlanets
+			showMagnitudeFilter = config.showMagnitudeFilter
+			starView.magnitudeFilter = config.magnitudeFilter
+			starView.is2DMode = config.is2DMode
+			if (config.magnitudeFilter != null) {
+				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", config.magnitudeFilter)
+			}
 		}
 		starView.setConstellations(AstroDataProvider.getConstellations(view.context))
 
+		updateMagnitudeFilterVisibility()
 		updateStarMap(true)
 		setupToolBar(view)
 		buildZoomButtons(view)
+
+		previousAltitude = starView.getAltitude()
+		previousAzimuth = starView.getAzimuth()
+		previousViewAngle = starView.getViewAngle()
+		apply2DMode(starView.is2DMode)
 
 		return view
 	}
@@ -299,6 +356,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	override fun onPause() {
 		super.onPause()
+		saveStarMapSettings()
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
 		app.osmandMap.mapView.removeMapLocationListener(this)
@@ -310,7 +368,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	override fun updateCompassValue(value: Float) {
-		if (arModeHelper.isArModeEnabled) return
+		if (arModeHelper.isArModeEnabled || starView.is2DMode) return
 		val lastResetRotationToNorth = app.mapViewTrackingUtilities.lastResetRotationToNorth
 		if (this.lastResetRotationToNorth < lastResetRotationToNorth) {
 			this.lastResetRotationToNorth = lastResetRotationToNorth
@@ -342,6 +400,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 						}
 					}
 				}
+				if (starView.is2DMode) {
+					starView.setCenter(180.0, 90.0)
+				}
 				updateStarMap(); updateStarChart()
 			}
 		} else if (!manualAzimuth && !arModeHelper.isArModeEnabled) {
@@ -372,6 +433,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val mapControls = view?.findViewById<View>(R.id.map_controls_container)
 		starMapControls?.visibility = if (visible) View.VISIBLE else View.GONE
 		mapControls?.visibility = if (!visible) View.VISIBLE else View.GONE
+		updateMagnitudeFilterVisibility()
 	}
 
 	private fun updateStarChartVisibility(visible: Boolean) {
@@ -396,6 +458,32 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		swSettings.setCommonConfig(config)
 	}
 
+	private fun saveStarMapSettings() {
+		val current = swSettings.getStarMapConfig()
+		val config = current.copy(
+			showAzimuthalGrid = starView.showAzimuthalGrid,
+			showEquatorialGrid = starView.showEquatorialGrid,
+			showEclipticLine = starView.showEclipticLine,
+			showSun = starView.showSun,
+			showMoon = starView.showMoon,
+			showPlanets = starView.showPlanets,
+			showConstellations = starView.showConstellations,
+			showStars = starView.showStars,
+			showGalaxies = starView.showGalaxies,
+			showBlackHoles = starView.showBlackHoles,
+			is2DMode = starView.is2DMode,
+			magnitudeFilter = starView.magnitudeFilter
+		)
+		swSettings.setStarMapConfig(config)
+	}
+
+	private fun updateMagnitudeFilterVisibility() {
+		val visible = starView.showStars && starView.isVisible && showMagnitudeFilter
+		magnitudeSliderContainer.visibility = if (visible) View.VISIBLE else View.GONE
+		magnitudeValueText.visibility = if (visible) View.VISIBLE else View.GONE
+		resetMagnitudeButton.visibility = if (visible) View.VISIBLE else View.GONE
+	}
+
 	private fun updateWidgetsVisibility(activity: MapActivity, visibility: Int) {
 		AndroidUiHelper.setVisibility(activity, visibility, R.id.map_left_widgets_panel,
 			R.id.map_right_widgets_panel, R.id.map_center_info)
@@ -410,6 +498,33 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		toolbar.setBackgroundColor(app.getColor(if (nightMode) R.color.activity_background_color_dark else R.color.list_background_color_light))
 	}
 
+	private fun toggle2DMode() {
+		apply2DMode(!starView.is2DMode)
+	}
+
+	private fun apply2DMode(is2D: Boolean) {
+		if (is2D) {
+			previousAltitude = starView.getAltitude()
+			previousAzimuth = starView.getAzimuth()
+			previousViewAngle = starView.getViewAngle()
+			starView.is2DMode = true
+			starView.setCenter(180.0, 90.0)
+			if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode(false)
+			manualAzimuth = true
+		} else {
+			starView.is2DMode = false
+			starView.setCenter(previousAzimuth, previousAltitude)
+			starView.setViewAngle(previousViewAngle)
+		}
+		starView.invalidate()
+		update2DModeIcon()
+	}
+
+	private fun update2DModeIcon() {
+		val iconId = if (starView.is2DMode) R.drawable.ic_action_3d else R.drawable.ic_action_2d
+		mode2dButton.setImageDrawable(getIcon(iconId, ColorUtilities.getPrimaryIconColorId(nightMode)))
+	}
+
 	private fun setupObservers() {
 		starMapViewModel.currentTime.observe(viewLifecycleOwner) { time ->
 			starView.setDateTime(time, animate = true)
@@ -419,12 +534,31 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			timeSelectionView.setDateTime(calendar)
 		}
 		starChartViewModel.currentTime.observe(viewLifecycleOwner) { updateStarChart() }
-		starMapViewModel.skyObjects.observe(viewLifecycleOwner) { objects -> starView.setSkyObjects(objects) }
+		starMapViewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
+			starView.setSkyObjects(objects)
+			if (objects.isNotEmpty()) {
+				val maxMag = calculateMaxMagnitude(objects).toDouble()
+				val maxSliderVal = ((maxMag + 1.0) * 10.0).toInt()
+				magnitudeSlider.max = maxSliderVal
+
+				val currentFilter = starView.magnitudeFilter
+				if (currentFilter == null || currentFilter > maxMag) {
+					starView.magnitudeFilter = maxMag
+				}
+
+				val filterToUse = starView.magnitudeFilter ?: maxMag
+				magnitudeSlider.progress = ((filterToUse + 1.0) * 10.0).toInt()
+				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", filterToUse)
+			}
+		}
 		starChartViewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
 			starVisiblityView.setChartObjects(objects)
 			starAltitudeView.setChartObjects(objects)
-			celestialPathView.setChartObjects(objects)
 		}
+	}
+
+	private fun calculateMaxMagnitude(objects: List<SkyObject>): Float {
+		return ceil(objects.filter { it.type == SkyObject.Type.STAR }.maxOfOrNull { it.magnitude } ?: 10.0f)
 	}
 
 	private fun setupListeners() {
@@ -461,7 +595,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val tileBox = app.osmandMap.mapView.rotatedTileBox
 		val location = tileBox.centerLatLon
 		starView.setObserverLocation(location.latitude, location.longitude, 0.0)
-		if (updateAzimuth && !arModeHelper.isArModeEnabled) setAzimuth(-tileBox.rotate.toDouble())
+		if (updateAzimuth && !arModeHelper.isArModeEnabled && !starView.is2DMode) {
+			setAzimuth(-tileBox.rotate.toDouble())
+		}
 	}
 
 	private fun updateStarChart() {
@@ -479,17 +615,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		when (chartType) {
 			StarChartType.STAR_VISIBLITY -> {
-				starVisiblityView.visibility = View.VISIBLE; starAltitudeView.visibility = View.GONE; celestialPathView.visibility = View.GONE
+				starVisiblityView.visibility = View.VISIBLE; starAltitudeView.visibility = View.GONE
 				starVisiblityView.updateData(location.latitude, location.longitude, localDate)
 			}
 			StarChartType.STAR_ALTITUDE -> {
-				starVisiblityView.visibility = View.GONE; starAltitudeView.visibility = View.VISIBLE; celestialPathView.visibility = View.GONE
+				starVisiblityView.visibility = View.GONE; starAltitudeView.visibility = View.VISIBLE
 				starAltitudeView.updateData(location.latitude, location.longitude, localDate)
-			}
-			StarChartType.CELESTIAL_PATH -> {
-				starVisiblityView.visibility = View.GONE; starAltitudeView.visibility = View.GONE; celestialPathView.visibility = View.VISIBLE
-				celestialPathView.updateData(location.latitude, location.longitude, localDate)
-				starChartViewModel.currentTime.value?.let { celestialPathView.setMoment(it.toZoned(zoneId)) }
 			}
 		}
 	}
@@ -584,8 +715,15 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		} else obj.body
 
 		if (bodyToCheck != null) {
-			val riseTime = searchRiseSet(bodyToCheck, observer, Direction.Rise, currentTime, 1.0)
-			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, currentTime, 1.0)
+			val calendar = (starMapViewModel.currentCalendar.value ?: Calendar.getInstance()).clone() as Calendar
+			calendar.set(Calendar.HOUR_OF_DAY, 0)
+			calendar.set(Calendar.MINUTE, 0)
+			calendar.set(Calendar.SECOND, 0)
+			calendar.set(Calendar.MILLISECOND, 0)
+			val searchStart = Time.fromMillisecondsSince1970(calendar.timeInMillis)
+
+			val riseTime = searchRiseSet(bodyToCheck, observer, Direction.Rise, searchStart, 1.2)
+			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, searchStart, 1.2)
 
 			if (riseTime != null) {
 				sheetRiseTime?.text = "Rise: ↑${AstroUtils.formatLocalTime(riseTime)}"
