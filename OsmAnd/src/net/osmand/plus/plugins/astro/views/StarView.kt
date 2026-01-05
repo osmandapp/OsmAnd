@@ -1143,11 +1143,30 @@ class StarView @JvmOverloads constructor(
 	private fun drawSkyObject(canvas: Canvas, obj: SkyObject) {
 		if (!skyToScreen(obj.azimuth, obj.altitude, tempPoint)) return
 
-		val baseSize = 15f
-		val radius = max(3f, baseSize - (obj.magnitude * 2f))
+		// Heuristic to determine "Zoomed Out" factor (0.0 = Zoomed In, 1.0 = Zoomed Out)
+		val zoomFactor = (viewAngle - 10.0) / (if (is2DMode) 210.0 else 140.0) // Normalize roughly 0..1
+		val constrainedZoomFactor = max(0.0, min(1.0, zoomFactor))
 
+		// 1. Dynamic Radius & Color
+		var baseSize = 15f
+		var color = obj.color
+		
+		// If significantly zoomed out and star is faint, reduce prominence
+		if (obj.type == SkyObject.Type.STAR) {
+			if (constrainedZoomFactor > 0.3 && obj.magnitude > 2.5) {
+				baseSize = 8f  // Smaller base size for faint stars when zoomed out
+				color = Color.GRAY // Fade to gray
+			}
+		}
+
+		var radius = max(2f, baseSize - (obj.magnitude * 2f))
+		// Further reduce radius for faint stars at high zoom
+		if (obj.type == SkyObject.Type.STAR && constrainedZoomFactor > 0.5) {
+			radius *= 0.7f
+		}
+		
 		paint.style = Paint.Style.FILL
-		paint.color = obj.color
+		paint.color = color
 		canvas.drawCircle(tempPoint.x, tempPoint.y, radius, paint)
 
 		val objRect = RectF(
@@ -1157,12 +1176,29 @@ class StarView @JvmOverloads constructor(
 			tempPoint.y + radius
 		)
 
+		// 2. Dynamic Label Visibility
 		var showLabel = true
 		if (obj.type == SkyObject.Type.STAR) {
-			showLabel = !obj.name.startsWith("HIP", ignoreCase = true)
+			// Don't show HIP names
+			if (obj.name.startsWith("HIP", ignoreCase = true)) {
+				showLabel = false
+			} else {
+				// Dynamic magnitude threshold for labels
+				// Zoomed in (factor 0): show stars up to mag 5.0
+				// Zoomed out (factor 1): show stars up to mag 1.5
+				val magThreshold = 5.0 - (constrainedZoomFactor * 3.5)
+				if (obj.magnitude > magThreshold) {
+					showLabel = false
+				}
+			}
 		}
 
-		if (showLabel || obj == selectedObject || pinnedObjects.contains(obj)) {
+		// Always show label for selected or pinned objects
+		if (obj == selectedObject || pinnedObjects.contains(obj)) {
+			showLabel = true
+		}
+
+		if (showLabel) {
 			val text = obj.name
 			val labelTextSize = 25f
 			textPaint.textSize = labelTextSize
