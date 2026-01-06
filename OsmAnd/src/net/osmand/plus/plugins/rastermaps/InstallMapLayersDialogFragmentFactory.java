@@ -15,7 +15,7 @@ import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.search.Configuration;
-import net.osmand.plus.settings.fragments.search.SearchDatabaseRootedAtPreferenceFragmentAdapter;
+import net.osmand.plus.settings.fragments.search.SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.InstallMapLayersDialogFragment;
@@ -116,7 +116,7 @@ class InstallMapLayersDialogFragmentFactory {
 
 							private void updateSearchDatabase() {
 								getGraphRepository().addGraphTransformer(
-										new SearchDatabaseRootedAtPreferenceFragmentAdapter(
+										new SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter(
 												ConfigureMapFragment.ConfigureMapFragmentProxy.class,
 												getTileSourceTemplatesProvider()));
 							}

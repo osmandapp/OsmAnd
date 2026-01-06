@@ -36,15 +36,16 @@ import de.KnollFrank.lib.settingssearch.graph.GraphPathFactory;
 import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenGraphProviderFactory;
 import de.KnollFrank.lib.settingssearch.results.recyclerview.FragmentContainerViewAdder;
 
-public class SearchDatabaseRootedAtPreferenceFragmentAdapter implements SearchablePreferenceScreenGraphTransformer<Configuration> {
+public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter implements SearchablePreferenceScreenGraphTransformer<Configuration> {
 
 	private final @IdRes int FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
 
 	private final Class<? extends PreferenceFragmentCompat> preferenceFragment;
 	private final TileSourceTemplatesProvider tileSourceTemplatesProvider;
 
-	public SearchDatabaseRootedAtPreferenceFragmentAdapter(final Class<? extends PreferenceFragmentCompat> preferenceFragment,
-														   final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
+	public SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter(
+			final Class<? extends PreferenceFragmentCompat> preferenceFragment,
+			final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
 		this.preferenceFragment = preferenceFragment;
 		this.tileSourceTemplatesProvider = tileSourceTemplatesProvider;
 	}
@@ -53,20 +54,20 @@ public class SearchDatabaseRootedAtPreferenceFragmentAdapter implements Searchab
 	public SearchablePreferenceScreenGraph transformGraph(final SearchablePreferenceScreenGraph graph,
 														  final Configuration actualConfiguration,
 														  final FragmentActivity activityContext) {
-		return adaptGraphAtPreferenceFragment(graph, actualConfiguration, activityContext);
+		return adaptGraphAtPreferenceFragmentForAllApplicationModes(graph, actualConfiguration, activityContext);
 	}
 
-	private SearchablePreferenceScreenGraph adaptGraphAtPreferenceFragment(
+	private SearchablePreferenceScreenGraph adaptGraphAtPreferenceFragmentForAllApplicationModes(
 			final SearchablePreferenceScreenGraph graph,
 			final Configuration newConfiguration,
 			final FragmentActivity activityContext) {
-		return SearchDatabaseRootedAtPreferenceFragmentAdapter
+		return SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter
 				.getApplicationModesWithoutDefault()
 				.stream()
 				.reduce(
 						graph,
 						(currentGraph, applicationMode) ->
-								adaptGraphAtPreferenceFragment(
+								adaptGraphAtPreferenceFragmentForApplicationMode(
 										currentGraph,
 										applicationMode,
 										newConfiguration,
@@ -76,7 +77,7 @@ public class SearchDatabaseRootedAtPreferenceFragmentAdapter implements Searchab
 						});
 	}
 
-	private SearchablePreferenceScreenGraph adaptGraphAtPreferenceFragment(
+	private SearchablePreferenceScreenGraph adaptGraphAtPreferenceFragmentForApplicationMode(
 			final SearchablePreferenceScreenGraph graph,
 			final ApplicationMode applicationMode,
 			final Configuration newConfiguration,
