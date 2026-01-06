@@ -4,16 +4,13 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.graphics.Color
-import io.github.cosinekitty.astronomy.Body
+import androidx.core.graphics.toColorInt
+import net.osmand.IndexConstants
 import net.osmand.PlatformUtil
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.astro.SkyObject.Type
-import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyColor
-import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyName
 import org.json.JSONArray
 import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import androidx.core.graphics.toColorInt
 
 class AstroDataDbProvider : AstroDataProvider() {
 
@@ -35,8 +32,8 @@ class AstroDataDbProvider : AstroDataProvider() {
 		private const val COL_HIP = "hip"
 	}
 
-	private class DbHelper(val context: Context) : SQLiteOpenHelper(
-			context, context.cacheDir.absolutePath + File.separator + DATABASE_NAME, null, DATABASE_VERSION) {
+	private class DbHelper(val app: OsmandApplication) : SQLiteOpenHelper(
+			app, app.getAppPath(IndexConstants.ASTRO_DIR).absolutePath + File.separator + DATABASE_NAME, null, DATABASE_VERSION) {
 
 		override fun onCreate(db: SQLiteDatabase) {
 		}
@@ -45,7 +42,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 		}
 
 		override fun getReadableDatabase(): SQLiteDatabase {
-			val dbFile = File(context.cacheDir, DATABASE_NAME)
+			val dbFile = File(app.getAppPath(IndexConstants.ASTRO_DIR), DATABASE_NAME)
 			if (!dbFile.exists()) {
 				throw IllegalStateException("Database file does not exist: $dbFile")
 			}
@@ -60,7 +57,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 		getPlanets(objects, ctx)
 
 		// 2. Read from DB
-		val dbHelper = DbHelper(ctx)
+		val dbHelper = DbHelper(ctx.applicationContext as OsmandApplication)
 		try {
 			val db = dbHelper.readableDatabase
 			// Select all except constellations (which are lines)
@@ -125,7 +122,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 
 	override fun getConstellationsImpl(ctx: Context): List<Constellation> {
 		val constellations = mutableListOf<Constellation>()
-		val dbHelper = DbHelper(ctx)
+		val dbHelper = DbHelper(ctx.applicationContext as OsmandApplication)
 		try {
 			val db = dbHelper.readableDatabase
 			val cursor = db.query(

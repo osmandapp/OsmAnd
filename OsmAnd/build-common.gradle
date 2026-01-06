@@ -191,6 +191,21 @@ tasks.register('downloadWorldMiniBasemapAnt') {
 	}
 }
 
+tasks.register('downloadStarsDb', Download) {
+	src 'https://builder.osmand.net/basemap/astro/stars.db.gz'
+	def gzFile = layout.buildDirectory.file("downloads/stars.db.gz").get().asFile
+	dest gzFile
+	onlyIfModified true
+
+	def dbFile = file("assets/astro/stars.db")
+	outputs.file(dbFile)
+
+	doLast {
+		ant.gunzip(src: gzFile, dest: dbFile)
+		gzFile.delete()
+	}
+}
+
 tasks.register('collectVoiceAssets', Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
@@ -301,6 +316,7 @@ tasks.register('collectExternalResources') {
 			copyPoiCategories,
 			copyRouteActivities,
 			downloadWorldMiniBasemap,
+			downloadStarsDb,
 			collectTestResources,
 			copy3DModels
 }
