@@ -5900,4 +5900,6 @@
     <string name="delete_folder_description">Obrisati „%1$s“ folder?</string>
     <string name="show_spherical_map">Globusni prikaz</string>
     <string name="enable_3d_objects">3D zgrada</string>
+    <string name="show_expand_button">Pokaži dugme za proširenje</string>
+    <string name="imprecise_coordinates">Neprecizne koordinate</string>
 </resources>
