@@ -42,11 +42,12 @@ class AstroDataDbProvider : AstroDataProvider() {
 		}
 
 		override fun getReadableDatabase(): SQLiteDatabase {
-			val dbFile = File(super.getReadableDatabase().path)
+			val db = super.getReadableDatabase()
+			val dbFile = File(db.path)
 			if (!dbFile.exists()) {
 				throw IllegalStateException("Database file does not exist: $dbFile")
 			}
-			return super.getReadableDatabase()
+			return db
 		}
 	}
 
