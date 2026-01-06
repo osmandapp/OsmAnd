@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="no_date">No date</string>
     <string name="shared_string_step">Step</string>
     <string name="set_step_size_summary">Choose a step size to group your tracks.</string>
     <string name="set_step_size">Set step size</string>
@@ -23,7 +24,6 @@
     <string name="year_of_creation">Year of creation</string>
     <string name="month_year_creation">Month and Year of creation</string>
     <string name="nearest_city">Nearest city</string>
-    <string name="country">Country</string>
     <string name="avg_speed">Avg. speed</string>
     <string name="organize_by_max_speed">Max. speed</string>
     <string name="organize_by_max_altitude">Max. altitude</string>

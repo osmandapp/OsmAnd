@@ -4,6 +4,7 @@ import net.osmand.shared.data.Limits
 import net.osmand.shared.gpx.filters.TrackFilterType
 import net.osmand.shared.gpx.organization.strategy.NoImplementedStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByActivityStrategy
+import net.osmand.shared.gpx.organization.strategy.OrganizeByDateStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByRangeStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByStrategy
 import net.osmand.shared.util.Localization
@@ -45,7 +46,7 @@ enum class OrganizeByType(
 		nameResId = "shared_string_length",
 		filterType = TrackFilterType.LENGTH,
 		category = OrganizeByCategory.GENERAL,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 180),
 		strategy = OrganizeByRangeStrategy
 	),
 
@@ -55,27 +56,20 @@ enum class OrganizeByType(
 		nameResId = "year_of_creation",
 		filterType = TrackFilterType.DATE_CREATION,
 		category = OrganizeByCategory.DATE_TIME,
-		strategy = NoImplementedStrategy
+		strategy = OrganizeByDateStrategy
 	),
 	MONTH_AND_YEAR(
 		iconResId = "ic_action_calendar_month",
 		nameResId = "month_year_creation",
 		filterType = TrackFilterType.DATE_CREATION,
 		category = OrganizeByCategory.DATE_TIME,
-		strategy = NoImplementedStrategy
+		strategy = OrganizeByDateStrategy
 	),
 
 	// Location
 	NEAREST_CITY(
 		iconResId = "ic_action_street_name",
 		nameResId = "nearest_city",
-		filterType = TrackFilterType.CITY,
-		category = OrganizeByCategory.LOCATION,
-		strategy = NoImplementedStrategy
-	),
-	COUNTRY(
-		iconResId = "ic_world_globe_dark",
-		nameResId = "country",
 		filterType = TrackFilterType.CITY,
 		category = OrganizeByCategory.LOCATION,
 		strategy = NoImplementedStrategy
@@ -87,7 +81,7 @@ enum class OrganizeByType(
 		nameResId = "organize_by_max_speed",
 		filterType = TrackFilterType.MAX_SPEED,
 		category = OrganizeByCategory.SPEED,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 180),
 		strategy = OrganizeByRangeStrategy
 	),
 	AVG_SPEED(
@@ -95,7 +89,7 @@ enum class OrganizeByType(
 		nameResId = "avg_speed",
 		filterType = TrackFilterType.AVERAGE_SPEED,
 		category = OrganizeByCategory.SPEED,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 180),
 		strategy = OrganizeByRangeStrategy
 	),
 
@@ -139,7 +133,7 @@ enum class OrganizeByType(
 		nameResId = "max_sensor_speed",
 		filterType = TrackFilterType.MAX_SENSOR_SPEED,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 180),
 		strategy = OrganizeByRangeStrategy
 	),
 	SENSOR_SPEED_AVG(
@@ -147,7 +141,7 @@ enum class OrganizeByType(
 		nameResId = "avg_sensor_speed",
 		filterType = TrackFilterType.AVERAGE_SENSOR_SPEED,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(0, 180),
+		stepRange = Limits(1, 180),
 		strategy = OrganizeByRangeStrategy
 	),
 	HEART_RATE_MAX(
