@@ -117,7 +117,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 				TrackFolder currentFolder = group instanceof TrackFolder ? (TrackFolder) group : null;
 				FragmentManager manager = activity.getSupportFragmentManager();
 				SearchMyPlacesTracksFragment.showInstance(manager,
-						getTargetFragment(),
+						this,
 						false,
 						isUsedOnMap(),
 						null,

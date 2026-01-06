@@ -153,7 +153,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 
 			if (trackItems.isEmpty() && tracksGroups.isEmpty()) {
 				items.add(TYPE_EMPTY_FOLDER);
-			} else if (!tracksGroups.isEmpty()){
+			} else if (!tracksGroups.isEmpty() && organizedGroup == null){
 				items.addAll(tracksGroups);
 			} else {
 				items.addAll(trackItems);
@@ -395,6 +395,8 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 			fragment.setRootFolder(tracksGroup);
 			if (tracksGroup instanceof TrackFolder trackFolder) {
 				fragment.setSelectedFolder(trackFolder);
+			} else if (tracksGroup instanceof OrganizedTracksGroup organizedTracksGroup) {
+				fragment.setOrganizedGroup(organizedTracksGroup);
 			}
 			fragment.setTargetFragment(target, 0);
 
