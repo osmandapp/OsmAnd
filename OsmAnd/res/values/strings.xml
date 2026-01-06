@@ -4587,7 +4587,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="srtm_paid_version_title">Topography plugin</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline topo features like contour lines, hillshade, slope</string>
     <string name="srtm_plugin_name">Topography</string>
-    <string name="srtm_plugin_description">Terrain information, like contour lines, hillshade, slope, help you to visually assess the lay of the land, the relief, navigability, and more. The topographic information can on the map be represented by contour lines, relief shading and/or steepness coloring.\n\nThe underlying data originates from SRTM and ASTER.\n\nFurther reading at %1$s.</string>
+    <string name="srtm_plugin_description">Terrain information provides a visual understanding of the landscape, including its relief and how easily it can be traversed.\n\nOn the map, topography can be displayed using contour lines, hillshading or slope coloring, and a 3D view.\n\nTo enable these features for a region, you need to additionally download the Terrain (3D) map.\n\nThe underlying elevation data is sourced from SRTM and ASTER. Further reading at %1$s.</string>
     <string name="plugin_touringview_name">Touring map view</string>
     <string name="plugin_touringview_descr">Activating this view changes OsmAnd\'s map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.
 		\n\nThis view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks).
