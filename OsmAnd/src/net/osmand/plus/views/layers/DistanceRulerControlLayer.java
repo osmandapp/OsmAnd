@@ -360,6 +360,9 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawDistBetweenFingerAndLocation(Canvas canvas, RotatedTileBox tb, Location currLoc, boolean night) {
+		if (touchPointLatLon == null) {
+			return;
+		}
 		PointF firstScreenPoint = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
 		PointF secondScreenPoint = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, currLoc.getLatitude(), currLoc.getLongitude());
 		float x = firstScreenPoint.x;
