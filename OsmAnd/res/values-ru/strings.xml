@@ -5127,7 +5127,7 @@
     <string name="clear_key_assignment_desc">Привязка клавиши для выбранного действия будет удалена и ей будет присвоено значение «Нет».</string>
     <string name="delete_all_items">Удалить все объекты</string>
     <string name="key_event_action_take_media_note">Сделать медиазаметку</string>
-    <string name="key_event_action_emit_navigation_hint">Вызвать навигационную подсказку</string>
+    <string name="key_event_action_emit_navigation_hint">Навигационные подсказки</string>
     <string name="trash_is_empty_banner_desc">Файлы, удаленные из OsmAnd Cloud, будут доступны здесь в течение %1$s дней.</string>
     <string name="delete_trash_item_confirmation_desc">Удалить «%1$s» окончательно?</string>
     <string name="shared_string_next_event">Следующее событие</string>
