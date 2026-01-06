@@ -4488,7 +4488,7 @@
     <string name="mtb_imba_full">Internationale Mountain Bicycling Association</string>
     <string name="weather_pressure_hectopascals">Hectopascal</string>
     <string name="weather_pressure_inches_of_mercury">Inch kwik</string>
-    <string name="map_rendering_engine_descr">Versie 1 was de standaard voor OsmAnd 4.3, en is nog steeds beter voor oudere toestellen.\nVersie 2 (OpenGL) is een snellere laad methode, met 2,5D zicht.</string>
+    <string name="map_rendering_engine_descr">Versie 1 was de standaard tot OsmAnd 4.3 en is geschikt voor oudere apparaten. \n\nVersie 2 (OpenGL) is geavanceerder en biedt onder meer een 3D-weergave.</string>
     <string name="map_rendering_engine">Laad methode van kaarten</string>
     <string name="show_borders_of_downloaded_maps">Grenzen tonen van gedownloade kaarten</string>
     <string name="purchases_feature_desc_external_sensors">Gegevens van externe sensors tonen en opnemen: fietssnelheid, fietskracht, ritme en hartslag.</string>
@@ -6205,7 +6205,7 @@
     <string name="track_folder_appearance">Uiterlijk van de track-map</string>
     <string name="update_maps">Update kaarten</string>
     <string name="reconnect">Opnieuw verbinden</string>
-    <string name="trip_recording_downhill_widget_desc">Toont de som van alle afdalingen of de laatste afdaling van de momenteel opgenomen reis.</string>
+    <string name="trip_recording_downhill_widget_desc">Toont de som van alle afdalingen of de laatste afdaling van deze opgenomen rit.</string>
     <string name="trip_recording_uphill_widget_desc">Toont de som van alle beklimmingen of de laatste beklimming van de momenteel opgenomen reis.</string>
     <string name="trip_recording_distance_widget_desc">Toont de totale afstand van je momenteel opgenomen reis, met modi om de afstand te zien van de laatste beklimming en afdaling.</string>
     <string name="trip_recording_max_speed_widget_description">Toont de maximale snelheid van de momenteel opgenomen reis. Tik om de wisselen tussen de algehele snelheid en de maximale snelheid van de laatste beklimming of afdaling.</string>
