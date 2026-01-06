@@ -21,6 +21,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Direction
 import io.github.cosinekitty.astronomy.Time
@@ -37,6 +38,7 @@ import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astro.StarChartState.StarChartType
+import net.osmand.plus.plugins.astro.StarWatcherPlugin.DownloadListener
 import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.plugins.astro.utils.StarMapARModeHelper
 import net.osmand.plus.plugins.astro.utils.StarMapCameraHelper
@@ -139,6 +141,38 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 		val view = themedInflater.inflate(R.layout.fragment_star_map, container, false)
+		
+		val plugin = PluginsHelper.requirePlugin(StarWatcherPlugin::class.java)
+		plugin.checkAndDownloadStarsDb(app, object : DownloadListener {
+			private var snackbar: Snackbar? = null
+
+			override fun onProgress(progress: Int) {
+				if (snackbar == null) {
+					snackbar = Snackbar.make(view, "Downloading database...", Snackbar.LENGTH_INDEFINITE)
+					snackbar?.show()
+				}
+			}
+
+			override fun onComplete(success: Boolean, skipDownload: Boolean) {
+				if (skipDownload) {
+					snackbar?.dismiss()
+					return
+				}
+
+				if (success) {
+					snackbar?.setText("Download complete")
+					dataProvider.clearCache()
+					starMapViewModel.loadData()
+					starChartViewModel.loadData()
+
+					starView.postInvalidate()
+				} else {
+					snackbar?.setText("Download failed")
+				}
+				snackbar?.setDuration(Snackbar.LENGTH_SHORT)
+				snackbar?.show()
+			}
+		})
 
 		val app = requireActivity().application as OsmandApplication
 		starMapViewModel = ViewModelProvider(

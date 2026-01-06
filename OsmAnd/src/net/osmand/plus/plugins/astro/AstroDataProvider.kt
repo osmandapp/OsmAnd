@@ -8,8 +8,8 @@ import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyName
 
 abstract class AstroDataProvider {
 
-	private var cachedSkyObjects: List<SkyObject>? = null
-	private var cachedConstellations: List<Constellation>? = null
+	private var cachedSkyObjects:List<SkyObject>?=null
+	private var cachedConstellations:List<Constellation>?=null
 
 	abstract fun getInitialSkyObjectsImpl(ctx: Context): List<SkyObject>
 
@@ -21,6 +21,12 @@ abstract class AstroDataProvider {
 
 		cachedSkyObjects = objects
 		return objects.toList()
+	}
+
+	@Synchronized
+	fun clearCache() {
+		cachedSkyObjects = null
+		cachedConstellations = null
 	}
 
 	abstract fun getConstellationsImpl(ctx: Context): List<Constellation>

@@ -197,12 +197,6 @@ tasks.register('collectVoiceAssets', Sync) {
 	include "**/*.js"
 }
 
-tasks.register('collectAstroAssets', Sync) {
-	from "../../resources/astro"
-	into "assets/astro"
-	include "*.json"
-}
-
 tasks.register('collectFonts', Copy) {
 	from "../../resources/rendering_styles/fonts"
 //	from "../../resources/rendering_styles/fonts/OpenSans"
@@ -296,7 +290,6 @@ tasks.register('copy3DModels', Copy) {
 
 tasks.register('collectExternalResources') {
 	dependsOn collectVoiceAssets,
-			collectAstroAssets,
 			collectFonts,
 			copyMapShaderIcons,
 			copyMapPOIIcons,
