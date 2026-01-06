@@ -187,10 +187,11 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 
 	override fun getSelectionHelper(): ItemsSelectionHelper<TrackItem> {
 		return ItemsSelectionHelper<TrackItem>().apply {
-			val items = smartFolder.getTrackItems()
-			setAllItems(items)
-			setSelectedItems(items)
-			setOriginalSelectedItems(items)
+			currentTrackGroup?.getTrackItems()?.let { items ->
+				setAllItems(items)
+				setSelectedItems(items)
+				setOriginalSelectedItems(items)
+			}
 		}
 	}
 }
