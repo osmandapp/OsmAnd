@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
@@ -21,11 +20,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import io.github.cosinekitty.astronomy.Body
-import io.github.cosinekitty.astronomy.Direction
-import io.github.cosinekitty.astronomy.Time
-import io.github.cosinekitty.astronomy.defineStar
-import io.github.cosinekitty.astronomy.searchRiseSet
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import net.osmand.Location
 import net.osmand.map.IMapLocationListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
@@ -62,20 +57,9 @@ import kotlin.math.ceil
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
 	OsmAndCompassListener {
 
-	private lateinit var starView: StarView
+	internal lateinit var starView: StarView
 	private lateinit var timeSelectionView: DateTimeSelectionView
-	private lateinit var bottomSheet: View
-	private lateinit var sheetTitle: TextView
-	private lateinit var sheetCoords: TextView
 	private lateinit var resetTimeButton: Button
-
-	private lateinit var sheetPinButton: CheckBox
-
-	private var sheetMagnitude: TextView? = null
-	private var sheetDistance: TextView? = null
-	private var sheetRiseTime: TextView? = null
-	private var sheetSetTime: TextView? = null
-	private var sheetWikiButton: View? = null
 
 	private lateinit var arModeButton: ImageButton
 	private lateinit var cameraButton: ImageButton
@@ -83,7 +67,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var sliderContainer: View
 	private lateinit var resetFovButton: View
 	private lateinit var mode2dButton: ImageButton
-	
+
 	private lateinit var magnitudeSlider: SeekBar
 	private lateinit var magnitudeValueText: TextView
 	private lateinit var magnitudeSliderContainer: View
@@ -101,7 +85,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var manualAzimuth: Boolean = false
 	private var lastResetRotationToNorth = 0L
 
-	private lateinit var starMapViewModel: StarObjectsViewModel
+	internal lateinit var starMapViewModel: StarObjectsViewModel
 	private lateinit var starChartViewModel: StarObjectsViewModel
 	private var selectedObject: SkyObject? = null
 
@@ -150,26 +134,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		timeSelectionView = view.findViewById(R.id.time_selection_view)
 		resetTimeButton = view.findViewById(R.id.reset_time_button)
 
-		bottomSheet = view.findViewById(R.id.bottom_sheet)
-		sheetTitle = view.findViewById(R.id.sheet_title)
-		sheetCoords = view.findViewById(R.id.sheet_coords)
-
-		sheetPinButton = view.findViewById(R.id.sheet_pin_button)
-
-		// Attempt to find new structured views
-		sheetMagnitude = view.findViewById(R.id.sheet_magnitude)
-		sheetDistance = view.findViewById(R.id.sheet_distance)
-		sheetRiseTime = view.findViewById(R.id.sheet_rise_time)
-		sheetSetTime = view.findViewById(R.id.sheet_set_time)
-		sheetWikiButton = view.findViewById(R.id.sheet_wiki_button)
-
 		arModeButton = view.findViewById(R.id.ar_mode_button)
 		cameraButton = view.findViewById(R.id.camera_button)
 		transparencySlider = view.findViewById(R.id.transparency_slider)
 		sliderContainer = view.findViewById(R.id.slider_container)
 		resetFovButton = view.findViewById(R.id.reset_fov_button)
 		mode2dButton = view.findViewById(R.id.mode2d_button)
-		
+
 		magnitudeSlider = view.findViewById(R.id.magnitude_slider)
 		magnitudeValueText = view.findViewById(R.id.magnitude_value_text)
 		magnitudeSliderContainer = view.findViewById(R.id.magnitude_slider_container)
@@ -222,12 +193,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		updateArModeUI(arModeHelper.isArModeEnabled)
 		updateCameraUI(cameraHelper.isCameraOverlayEnabled)
-
-		ViewCompat.setOnApplyWindowInsetsListener(bottomSheet) { v, windowInsets ->
-			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-			v.updatePadding(bottom = v.paddingTop + insets.bottom)
-			windowInsets
-		}
 
 		val starMapControlsContainer = view.findViewById<View>(R.id.star_map_controls_container)
 		val mapControlsContainer = view.findViewById<View>(R.id.map_controls_container)
@@ -576,14 +541,16 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			if (obj != null) {
 				showObjectInfo(obj)
 			} else if (starView.getSelectedConstellationItem() == null) {
-				bottomSheet.visibility = View.GONE
+				(childFragmentManager.findFragmentByTag(ConstellationInfoBottomSheet.TAG) as? BottomSheetDialogFragment)?.dismiss()
+				(childFragmentManager.findFragmentByTag(SkyObjectInfoBottomSheet.TAG) as? BottomSheetDialogFragment)?.dismiss()
 			}
 		}
 		starView.onConstellationClickListener = { constellation ->
 			if (constellation != null) {
 				showConstellationInfo(constellation)
 			} else if (selectedObject == null) {
-				bottomSheet.visibility = View.GONE
+				(childFragmentManager.findFragmentByTag(ConstellationInfoBottomSheet.TAG) as? BottomSheetDialogFragment)?.dismiss()
+				(childFragmentManager.findFragmentByTag(SkyObjectInfoBottomSheet.TAG) as? BottomSheetDialogFragment)?.dismiss()
 			}
 		}
 		starView.onAnimationFinished = { if (selectedObject != null) showObjectInfo(selectedObject!!) }
@@ -659,108 +626,20 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun showConstellationInfo(c: Constellation) {
-		sheetTitle.text = c.name
-		sheetCoords.text = getString(R.string.astro_constellation)
-
-		sheetPinButton.visibility = View.GONE
-
-		sheetMagnitude?.isVisible = false
-		sheetDistance?.isVisible = false
-		sheetRiseTime?.isVisible = false
-		sheetSetTime?.isVisible = false
-
-		if (c.wid.isNotEmpty()) {
-			sheetWikiButton?.isVisible = true
-			sheetWikiButton?.setOnClickListener {
-				val uri = Uri.parse("https://www.wikidata.org/wiki/${c.wid}")
-				val intent = Intent(Intent.ACTION_VIEW, uri)
-				try {
-					startActivity(intent)
-				} catch (_: Exception) {
-				}
-			}
-		} else {
-			sheetWikiButton?.isVisible = false
+		(childFragmentManager.findFragmentByTag(SkyObjectInfoBottomSheet.TAG) as? BottomSheetDialogFragment)?.dismiss()
+		val existingFragment = childFragmentManager.findFragmentByTag(ConstellationInfoBottomSheet.TAG) as? ConstellationInfoBottomSheet
+		if (existingFragment == null) {
+			ConstellationInfoBottomSheet.newInstance(c).show(childFragmentManager, ConstellationInfoBottomSheet.TAG)
 		}
-
-		bottomSheet.visibility = View.VISIBLE
 	}
 
 	private fun showObjectInfo(obj: SkyObject) {
-		sheetTitle.text = obj.name
-		val az = String.format(Locale.getDefault(), "%.1f°", obj.azimuth)
-		val alt = String.format(Locale.getDefault(), "%.1f°", obj.altitude)
-		val coordsText = "${getString(R.string.shared_string_azimuth)}: $az  •  ${getString(R.string.altitude)}: $alt"
-		sheetCoords.text = coordsText
-
-		// Show and configure Pin button
-		sheetPinButton.visibility = View.VISIBLE
-		sheetPinButton.setOnCheckedChangeListener(null) // Prevent recursive trigger
-		sheetPinButton.isChecked = starView.isObjectPinned(obj)
-		sheetPinButton.setOnCheckedChangeListener { _, isChecked ->
-			starView.setObjectPinned(obj, isChecked)
-		}
-
-		sheetMagnitude?.text = "${getString(R.string.shared_string_magnitude)}: ${obj.magnitude}"
-		sheetMagnitude?.isVisible = true
-
-		if (obj.type.isSunSystem()) {
-			sheetDistance?.isVisible = true
-			sheetDistance?.text =
-				"${getString(R.string.distance)}: %.3f AU".format(Locale.getDefault(), obj.distAu)
+		(childFragmentManager.findFragmentByTag(ConstellationInfoBottomSheet.TAG) as? BottomSheetDialogFragment)?.dismiss()
+		val existingFragment = childFragmentManager.findFragmentByTag(SkyObjectInfoBottomSheet.TAG) as? SkyObjectInfoBottomSheet
+		if (existingFragment != null) {
+			existingFragment.updateObjectInfo(obj)
 		} else {
-			sheetDistance?.isVisible = false
+			SkyObjectInfoBottomSheet.newInstance(obj).show(childFragmentManager, SkyObjectInfoBottomSheet.TAG)
 		}
-
-		val observer = starView.observer
-		val currentTime = starView.currentTime
-		val bodyToCheck: Body? = if (!obj.type.isSunSystem()) {
-			defineStar(Body.Star2, obj.ra, obj.dec, 1000.0); Body.Star2
-		} else obj.body
-
-		if (bodyToCheck != null) {
-			val calendar = (starMapViewModel.currentCalendar.value ?: Calendar.getInstance()).clone() as Calendar
-			calendar.set(Calendar.HOUR_OF_DAY, 0)
-			calendar.set(Calendar.MINUTE, 0)
-			calendar.set(Calendar.SECOND, 0)
-			calendar.set(Calendar.MILLISECOND, 0)
-			val searchStart = Time.fromMillisecondsSince1970(calendar.timeInMillis)
-
-			val riseTime = searchRiseSet(bodyToCheck, observer, Direction.Rise, searchStart, 1.2)
-			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, searchStart, 1.2)
-
-			if (riseTime != null) {
-				sheetRiseTime?.text = "Rise: ↑${AstroUtils.formatLocalTime(riseTime)}"
-				sheetRiseTime?.isVisible = true
-			} else {
-				sheetRiseTime?.isVisible = false
-			}
-
-			if (setTime != null) {
-				sheetSetTime?.text = "Set: ↓${AstroUtils.formatLocalTime(setTime)}"
-				sheetSetTime?.isVisible = true
-			} else {
-				sheetSetTime?.isVisible = false
-			}
-		} else {
-			sheetRiseTime?.isVisible = false
-			sheetSetTime?.isVisible = false
-		}
-
-		if (obj.wid.isNotEmpty()) {
-			sheetWikiButton?.isVisible = true
-			sheetWikiButton?.setOnClickListener {
-				val uri = Uri.parse("https://www.wikidata.org/wiki/${obj.wid}")
-				val intent = Intent(Intent.ACTION_VIEW, uri)
-				try {
-					startActivity(intent)
-				} catch (_: Exception) {
-				}
-			}
-		} else {
-			sheetWikiButton?.isVisible = false
-		}
-
-		bottomSheet.visibility = View.VISIBLE
 	}
 }
