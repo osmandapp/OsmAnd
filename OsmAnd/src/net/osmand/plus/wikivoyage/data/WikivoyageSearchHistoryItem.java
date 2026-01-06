@@ -32,14 +32,17 @@ public class WikivoyageSearchHistoryItem {
 		return articleFile != null ? TravelArticle.getTravelBook(app, articleFile) : null;
 	}
 
+	@NonNull
 	public String getArticleTitle() {
 		return articleTitle != null ? articleTitle : "";
 	}
 
+	@NonNull
 	public String getLang() {
 		return lang != null ? lang : "";
 	}
 
+	@NonNull
 	public String getIsPartOf() {
 		return isPartOf != null ? isPartOf : "";
 	}
