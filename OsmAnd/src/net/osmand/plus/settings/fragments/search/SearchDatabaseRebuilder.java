@@ -16,6 +16,7 @@ import java.util.Optional;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
+import de.KnollFrank.lib.settingssearch.common.Views;
 import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
 import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphCreator;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceEdge;
@@ -46,7 +47,7 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphC
 				.fromActivity(activityContext)
 				.runBlockingOnUiThread(() -> {
 					FragmentContainerViewAdder.addInvisibleFragmentContainerViewWithIdToParent(
-							activityContext.findViewById(android.R.id.content),
+							Views.getRootViewContainer(activityContext),
 							FRAGMENT_CONTAINER_VIEW_ID);
 					return null;
 				});
@@ -75,7 +76,7 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphC
 		return SearchablePreferenceScreenGraphProviderFactory
 				.createSearchablePreferenceScreenGraphProvider(
 						FRAGMENT_CONTAINER_VIEW_ID,
-						activityContext.findViewById(android.R.id.content),
+						Views.getRootViewContainer(activityContext),
 						activityContext,
 						activityContext.getSupportFragmentManager(),
 						activityContext,

@@ -21,6 +21,7 @@ import java.util.Set;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
+import de.KnollFrank.lib.settingssearch.common.Views;
 import de.KnollFrank.lib.settingssearch.common.graph.Graphs;
 import de.KnollFrank.lib.settingssearch.common.graph.SearchablePreferenceScreenSubtreeReplacerFactory;
 import de.KnollFrank.lib.settingssearch.common.graph.Subtree;
@@ -86,7 +87,7 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 				.fromActivity(activityContext)
 				.runBlockingOnUiThread(() -> {
 					FragmentContainerViewAdder.addInvisibleFragmentContainerViewWithIdToParent(
-							activityContext.findViewById(android.R.id.content),
+							Views.getRootViewContainer(activityContext),
 							FRAGMENT_CONTAINER_VIEW_ID);
 					return null;
 				});
@@ -126,7 +127,7 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 		return SearchablePreferenceScreenGraphProviderFactory
 				.createSearchablePreferenceScreenGraphProvider(
 						FRAGMENT_CONTAINER_VIEW_ID,
-						activityContext.findViewById(android.R.id.content),
+						Views.getRootViewContainer(activityContext),
 						activityContext,
 						activityContext.getSupportFragmentManager(),
 						activityContext,
