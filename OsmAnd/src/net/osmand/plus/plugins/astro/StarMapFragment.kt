@@ -36,7 +36,6 @@ import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.astro.AstroDataProvider.Constellation
 import net.osmand.plus.plugins.astro.StarChartState.StarChartType
 import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.plugins.astro.utils.StarMapARModeHelper
@@ -105,6 +104,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var starMapViewModel: StarObjectsViewModel
 	private lateinit var starChartViewModel: StarObjectsViewModel
 	private var selectedObject: SkyObject? = null
+
+	private val dataProvider: AstroDataProvider by lazy {
+		PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).astroDataProvider
+	}
+
 	private val swSettings: StarWatcherSettings by lazy {
 		PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
 	}
@@ -118,8 +122,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var showMagnitudeFilter = false
 
 	companion object {
-		private val log = LoggerFactory.getLogger("StarMapFragment")
 		val TAG: String = StarMapFragment::class.java.simpleName
+		private val LOG = LoggerFactory.getLogger(TAG)
 
 		fun showInstance(manager: FragmentManager) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
@@ -138,9 +142,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		val app = requireActivity().application as OsmandApplication
 		starMapViewModel = ViewModelProvider(
-			this, StarMapObjectsViewModel.Factory(app, swSettings))[StarMapObjectsViewModel::class.java]
+			this, StarMapObjectsViewModel.Factory(app, swSettings, dataProvider))[StarMapObjectsViewModel::class.java]
 		starChartViewModel = ViewModelProvider(
-			this, StarChartObjectsViewModel.Factory(app, swSettings))[StarChartObjectsViewModel::class.java]
+			this, StarChartObjectsViewModel.Factory(app, swSettings, dataProvider))[StarChartObjectsViewModel::class.java]
 
 		starView = view.findViewById(R.id.star_view)
 		timeSelectionView = view.findViewById(R.id.time_selection_view)
@@ -303,7 +307,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", config.magnitudeFilter)
 			}
 		}
-		starView.setConstellations(AstroDataProvider.getConstellations(view.context))
+		starView.setConstellations(dataProvider.getConstellations(view.context))
 
 		updateMagnitudeFilterVisibility()
 		updateStarMap(true)

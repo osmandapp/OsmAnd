@@ -22,6 +22,9 @@ class StarWatcherPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 	private val _swSettings by lazy { StarWatcherSettings(getSettingsPref()) }
 	val swSettings: StarWatcherSettings get() = _swSettings
 
+	private val _astroDataProvider by lazy { AstroDataDbProvider() }
+	val astroDataProvider: AstroDataProvider get() = _astroDataProvider
+
 	override fun getId(): String {
 		return OsmAndCustomizationConstants.PLUGIN_STAR_WATCHER
 	}

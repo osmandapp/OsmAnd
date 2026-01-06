@@ -28,7 +28,7 @@ import io.github.cosinekitty.astronomy.Vector
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.rotationEclEqd
-import net.osmand.plus.plugins.astro.AstroDataProvider.Constellation
+import net.osmand.plus.plugins.astro.Constellation
 import net.osmand.plus.plugins.astro.SkyObject
 import java.util.Calendar
 import java.util.TimeZone
@@ -535,6 +535,11 @@ class StarView @JvmOverloads constructor(
 			SkyObject.Type.SUN -> showSun
 			SkyObject.Type.MOON -> showMoon
 			SkyObject.Type.PLANET -> showPlanets
+			SkyObject.Type.NEBULA -> showGalaxies // grouped with deep sky
+			SkyObject.Type.OPEN_CLUSTER -> showStars // grouped with stars for now, or new setting? Using stars as they are star clusters.
+			SkyObject.Type.GLOBULAR_CLUSTER -> showStars
+			SkyObject.Type.GALAXY_CLUSTER -> showGalaxies
+			SkyObject.Type.CONSTELLATION -> showConstellations
 		}
 	}
 
