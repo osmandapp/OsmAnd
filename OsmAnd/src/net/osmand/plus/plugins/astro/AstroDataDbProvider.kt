@@ -32,7 +32,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 		private const val COL_HIP = "hip"
 	}
 
-	private class DbHelper(val app: OsmandApplication) : SQLiteOpenHelper(
+	private class DbHelper(app: OsmandApplication) : SQLiteOpenHelper(
 			app, app.getAppPath(IndexConstants.ASTRO_DIR).absolutePath + File.separator + DATABASE_NAME, null, DATABASE_VERSION) {
 
 		override fun onCreate(db: SQLiteDatabase) {
@@ -42,7 +42,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 		}
 
 		override fun getReadableDatabase(): SQLiteDatabase {
-			val dbFile = File(app.getAppPath(IndexConstants.ASTRO_DIR), DATABASE_NAME)
+			val dbFile = File(super.getReadableDatabase().path)
 			if (!dbFile.exists()) {
 				throw IllegalStateException("Database file does not exist: $dbFile")
 			}
