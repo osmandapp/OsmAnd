@@ -5935,4 +5935,6 @@
     <string name="lang_mi">Маорі</string>
     <string name="buildings_3d_detail_level">3D-деталізація будівель</string>
     <string name="has_vehicle_metrics">З даними OBDII</string>
+    <string name="show_expand_button">Показати кнопку розгортання</string>
+    <string name="imprecise_coordinates">Неточні координати</string>
 </resources>
