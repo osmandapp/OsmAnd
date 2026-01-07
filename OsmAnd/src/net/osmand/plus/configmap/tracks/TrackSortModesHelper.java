@@ -8,7 +8,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.shared.gpx.enums.TracksSortScope;
 import net.osmand.util.Algorithms;
 
@@ -70,7 +70,7 @@ public class TrackSortModesHelper {
 		cachedSortModes.putAll(sortModes);
 	}
 
-	public void updateAfterMoveTrackFolder(@NonNull TrackFolder trackFolder, @NonNull File oldDir) {
+	public void onTrackFolderIdChanged(@NonNull TracksGroup trackFolder, @NonNull File oldDir) {
 		String previousId = getFolderId(oldDir.getAbsolutePath());
 		String newId = trackFolder.getId();
 		boolean updated = false;
@@ -86,12 +86,22 @@ public class TrackSortModesHelper {
 		}
 	}
 
-	public void updateAfterDeleteTrackFolder(@NonNull TrackFolder trackFolder) {
+	public void onTrackFolderDeleted(@NonNull TracksGroup trackFolder) {
 		String folderId = trackFolder.getId();
 		for (TracksSortScope scope : trackFolder.getSupportedSortScopes()) {
 			setSortMode(folderId, scope, null);
 		}
+		clearRelatedKeys(folderId);
 		syncSettings();
+	}
+
+	public void clearRelatedKeys(@NonNull String folderId) {
+		String extendedId = folderId + "__";
+		for (String key : getAllCachedInternalIds()) {
+			if (key.startsWith(extendedId)) {
+				cachedSortModes.remove(key);
+			}
+		}
 	}
 
 	public void syncSettings() {
