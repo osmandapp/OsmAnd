@@ -828,7 +828,7 @@
     <string name="audionotes_location_not_defined">Ha szeretne jegyzetet adni a helyhez, koppintson a „Hely használata…” gombra.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hang- és videójegyzetek</string>
-    <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolás, lejtési viszonyok segítenek vizuálisan felmérni a terep fekvését, a domborzatot, a hajózhatóságot és még sok minden mást. A topográfiai információk a térképen szintvonalakkal, domborzatárnyékolással és/vagy meredekségszínezéssel ábrázolhatók. \n \nAz alapul szolgáló adatok az SRTM és az ASTER adataiból származnak. \n \nTovábbi információk: %1$s.</string>
+    <string name="srtm_plugin_description">A domborzat és a részletes topográfia segítségével vizuálisan megérthetővé teszi a táj domborzatát és átjárhatóságát, kontúrvonalak, domborzati árnyékolás vagy lejtő színezés és 3D nézet segítségével.\n\nAhhoz, hogy ezeket a funkciókat engedélyezze egy régióban, le kell töltenie a kontúrvonalak és/vagy a domborzati (3D) térképet, amely SRTM- és ASTER-adatokból áll össze.\n\nTovábbi információk: %1$s.</string>
     <string name="recording_is_recorded">Hang- és videorögzítés. A leállításhoz koppintson az A/V modulra.</string>
     <string name="recording_playing">A megadott rögzítés egyik hangfájljának lejátszása elindult. \n%1$s</string>
     <string name="recording_open_external_player">Külső lejátszó megnyitása</string>
