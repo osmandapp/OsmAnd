@@ -5783,4 +5783,6 @@
     <string name="has_vehicle_metrics">Con datos de OBDII</string>
     <string name="lang_mi">Maorí</string>
     <string name="buildings_3d_detail_level">Detallado de edificios en 3D</string>
+    <string name="show_expand_button">Mostrar botón de expandir</string>
+    <string name="imprecise_coordinates">Coordenadas imprecisas</string>
 </resources>
