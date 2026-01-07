@@ -824,11 +824,7 @@
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isoipse</string>
     <string name="srtm_plugin_name">Topografia</string>
-    <string name="srtm_plugin_description">Informazioni sul terreno come curve di livello, ombreggiature e pendii ti aiutano a valutare visivamente la conformazione del terreno e il rilievo, la navigabilità e altro ancora. Le informazioni topografiche possono essere rappresentate mediante ombreggiatura della pendenza, curve di livello e/o colorazione della pendenza.
-\n
-\nI dati di base sono forniti da SRTM e ASTER.
-\n
-\nUlteriori approfondimenti su %1$s.</string>
+    <string name="srtm_plugin_description">Informazioni sul terreno come curve di livello, ombreggiature e pendii ti aiutano a valutare visivamente la conformazione del terreno e il rilievo, la navigabilità e altro ancora. Le informazioni topografiche possono essere rappresentate mediante ombreggiatura della pendenza, curve di livello e/o colorazione della pendenza. \n \nI dati di base sono forniti da SRTM e ASTER. \n \nUlteriori approfondimenti su %1$s.</string>
     <string name="audionotes_plugin_description">Crea note audio/foto/video durante un viaggio, utilizzando un pulsante della mappa o il menu contestuale della posizione.</string>
     <string name="audionotes_plugin_name">Note audio/video</string>
     <string name="audionotes_location_not_defined">Tocca \'Utilizza posizione...\' per aggiungere una posizione alla nota.</string>
