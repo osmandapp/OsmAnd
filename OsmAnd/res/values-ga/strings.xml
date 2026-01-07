@@ -5731,4 +5731,6 @@
     <string name="lang_mi">Maorach</string>
     <string name="buildings_3d_detail_level">Mionsonrú foirgneamh 3T</string>
     <string name="has_vehicle_metrics">Le sonraí OBDII</string>
+    <string name="show_expand_button">Taispeáin an cnaipe leathnaithe</string>
+    <string name="imprecise_coordinates">Comhordanáidí neamhchruinne</string>
 </resources>
