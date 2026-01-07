@@ -34,11 +34,7 @@
     <string name="map_widget_audionotes">Lydnoter</string>
     <string name="audionotes_plugin_description">Tag lyd-/foto-/videnotater under en tur ved hjælp af enten en kortknap eller kontekstmenuen for stedet.</string>
     <string name="audionotes_plugin_name">Lyd-/videonoter</string>
-    <string name="srtm_plugin_description">Terrænoplysninger som f.eks. konturlinjer, terrænskygge og hældning hjælper dig med at vurdere terrænets beskaffenhed, relief, navigationsmuligheder og meget mere. De topografiske oplysninger kan på kortet repræsenteres ved hjælp af konturlinjer, terrænskygger og/eller farvelægning af stejlhed.
-\n
-\nDe underliggende data stammer fra SRTM og ASTER.
-\n
-\nYderligere oplysninger findes på %1$s.</string>
+    <string name="srtm_plugin_description">Viser terræn og detaljeret topografi for en visuel forståelse af landskabets relief og fremkommelighed ved hjælp af konturlinjer, skyggeeffekter eller farvelægning af skråninger og en 3D-visning.\n \nFor at aktivere disse funktioner for en region skal du desuden downloade konturlinjer og/eller terrænkort (3D), der er sammensat af SRTM- og ASTER-data. \n \nYderligere oplysninger findes på %1$s.</string>
     <string name="srtm_plugin_name">Topografi</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
