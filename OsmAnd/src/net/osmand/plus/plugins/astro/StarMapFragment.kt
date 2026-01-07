@@ -173,7 +173,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				val magnitude = progress / 10.0 - 1.0
 				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", magnitude)
 				if (fromUser) {
-					starView.magnitudeFilter = magnitude
+					starView.magnitudeFilter = magnitude.toFloat()
 					starView.invalidate()
 				}
 			}
@@ -266,7 +266,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showMoon = config.showMoon
 			starView.showPlanets = config.showPlanets
 			showMagnitudeFilter = config.showMagnitudeFilter
-			starView.magnitudeFilter = config.magnitudeFilter
+			starView.magnitudeFilter = config.magnitudeFilter?.toFloat()
 			starView.is2DMode = config.is2DMode
 			if (config.magnitudeFilter != null) {
 				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", config.magnitudeFilter)
@@ -441,13 +441,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			showGalaxies = starView.showGalaxies,
 			showBlackHoles = starView.showBlackHoles,
 			is2DMode = starView.is2DMode,
-			magnitudeFilter = starView.magnitudeFilter
+			magnitudeFilter = starView.magnitudeFilter?.toDouble()
 		)
 		swSettings.setStarMapConfig(config)
 	}
 
 	private fun updateMagnitudeFilterVisibility() {
-		val visible = starView.showStars && starView.isVisible && showMagnitudeFilter
+		val visible = (starView.showStars || starView.showGalaxies || starView.showBlackHoles)
+				&& starView.isVisible && showMagnitudeFilter
 		magnitudeSliderContainer.visibility = if (visible) View.VISIBLE else View.GONE
 		magnitudeValueText.visibility = if (visible) View.VISIBLE else View.GONE
 		resetMagnitudeButton.visibility = if (visible) View.VISIBLE else View.GONE
@@ -506,7 +507,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starMapViewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
 			starView.setSkyObjects(objects)
 			if (objects.isNotEmpty()) {
-				val maxMag = calculateMaxMagnitude(objects).toDouble()
+				val maxMag = calculateMaxMagnitude(objects)
 				val maxSliderVal = ((maxMag + 1.0) * 10.0).toInt()
 				magnitudeSlider.max = maxSliderVal
 
@@ -527,7 +528,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun calculateMaxMagnitude(objects: List<SkyObject>): Float {
-		return ceil(objects.filter { it.type == SkyObject.Type.STAR }.maxOfOrNull { it.magnitude } ?: 10.0f)
+		return ceil(objects.filter { it.type != SkyObject.Type.CONSTELLATION && !it.type.isSunSystem() && it.magnitude < 50.0f }
+			.maxOfOrNull { it.magnitude } ?: 10.0f)
 	}
 
 	private fun setupListeners() {
