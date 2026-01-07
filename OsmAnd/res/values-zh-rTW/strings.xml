@@ -5737,4 +5737,6 @@
     <string name="lang_mi">毛利語</string>
     <string name="has_vehicle_metrics">使用 OBDII 資料</string>
     <string name="buildings_3d_detail_level">3D 建築物細節化處理</string>
+    <string name="show_expand_button">顯示展開按鈕</string>
+    <string name="imprecise_coordinates">不精確的座標</string>
 </resources>
