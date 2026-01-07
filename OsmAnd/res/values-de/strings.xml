@@ -939,11 +939,7 @@
     <string name="close_changeset">Änderungssatz schließen</string>
     <string name="incomplete_locale">unvollständig</string>
     <string name="srtm_plugin_name">Topografie</string>
-    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Hangneigung helfen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Höhenlinien, Reliefschattierungen, und/oder Steilheitsfarben dargestellt werden.
-\n
-\nDie zugrunde liegenden Daten stammen von SRTM und ASTER.
-\n
-\nWeitere Informationen unter %1$s.</string>
+    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Hangneigung helfen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Höhenlinien, Reliefschattierungen, und/oder Steilheitsfarben dargestellt werden. \n \nDie zugrunde liegenden Daten stammen von SRTM und ASTER. \n \nWeitere Informationen unter %1$s.</string>
     <string name="srtm_paid_version_title">Topografie-Erweiterung</string>
     <string name="srtm_paid_version_msg">Bitte erwägen Sie den Kauf der Erweiterung „Topografie“, um die Weiterentwicklung zu fördern.</string>
     <string name="download_select_map_types">Andere Karten</string>
