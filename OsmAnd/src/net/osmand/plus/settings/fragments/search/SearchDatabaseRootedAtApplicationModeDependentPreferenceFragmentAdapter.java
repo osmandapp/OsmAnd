@@ -25,8 +25,9 @@ import de.KnollFrank.lib.settingssearch.common.Views;
 import de.KnollFrank.lib.settingssearch.common.graph.Graphs;
 import de.KnollFrank.lib.settingssearch.common.graph.SearchablePreferenceScreenSubtreeReplacerFactory;
 import de.KnollFrank.lib.settingssearch.common.graph.Subtree;
+import de.KnollFrank.lib.settingssearch.common.graph.UnmodifiableTree;
 import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
-import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphTransformer;
+import de.KnollFrank.lib.settingssearch.db.preference.db.transformer.SearchablePreferenceScreenGraphTransformer;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceEdge;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreen;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
@@ -105,12 +106,12 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 						.createSubtreeReplacer()
 						.replaceSubtreeWithTree(
 								new Subtree<>(
-										graph.graph(),
+										graph.tree(),
 										preferenceScreen),
 								getPojoGraphRootedAt(
 										instantiateSearchablePreferenceScreen(
 												preferenceScreen,
-												graph.graph(),
+												graph.tree().graph(),
 												createGraphPathFactory(searchDatabaseConfig, activityContext)),
 										graph.locale(),
 										activityContext,
@@ -119,22 +120,23 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 				new ConfigurationBundleConverter().convertForward(newConfiguration));
 	}
 
-	private Graph<SearchablePreferenceScreen, SearchablePreferenceEdge> getPojoGraphRootedAt(
+	private UnmodifiableTree<SearchablePreferenceScreen, SearchablePreferenceEdge> getPojoGraphRootedAt(
 			final PreferenceScreenWithHost root,
 			final Locale locale,
 			final FragmentActivity activityContext,
 			final SearchDatabaseConfig searchDatabaseConfig) {
-		return SearchablePreferenceScreenGraphProviderFactory
-				.createSearchablePreferenceScreenGraphProvider(
-						FRAGMENT_CONTAINER_VIEW_ID,
-						Views.getRootViewContainer(activityContext),
-						activityContext,
-						activityContext.getSupportFragmentManager(),
-						activityContext,
-						searchDatabaseConfig,
-						locale,
-						(edge, sourceNodeOfEdge, targetNodeOfEdge) -> true)
-				.getSearchablePreferenceScreenGraph(root);
+		return UnmodifiableTree.of(
+				SearchablePreferenceScreenGraphProviderFactory
+						.createSearchablePreferenceScreenGraphProvider(
+								FRAGMENT_CONTAINER_VIEW_ID,
+								Views.getRootViewContainer(activityContext),
+								activityContext,
+								activityContext.getSupportFragmentManager(),
+								activityContext,
+								searchDatabaseConfig,
+								locale,
+								(edge, sourceNodeOfEdge, targetNodeOfEdge) -> true)
+						.getSearchablePreferenceScreenGraph(root));
 	}
 
 	private SearchablePreferenceScreen getPreferenceScreenOfPreferenceFragment(
@@ -142,7 +144,7 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 			final ApplicationMode applicationMode) {
 		return SearchablePreferenceScreens
 				.findSearchablePreferenceScreenById(
-						graphToSearchIn.graph().vertexSet(),
+						graphToSearchIn.tree().graph().vertexSet(),
 						String.format(
 								"en-%s Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
 								preferenceFragment.getName(),

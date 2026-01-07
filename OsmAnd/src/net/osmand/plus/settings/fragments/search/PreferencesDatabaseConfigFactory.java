@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.db.preference.db.PreferencesDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PrepackagedPreferencesDatabase;
-import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphTransformer;
+import de.KnollFrank.lib.settingssearch.db.preference.db.transformer.SearchablePreferenceScreenGraphTransformer;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
 
 public class PreferencesDatabaseConfigFactory {

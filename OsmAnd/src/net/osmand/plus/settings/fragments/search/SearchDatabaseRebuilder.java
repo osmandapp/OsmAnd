@@ -8,8 +8,6 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
 
-import org.jgrapht.Graph;
-
 import java.util.Locale;
 import java.util.Optional;
 
@@ -17,8 +15,9 @@ import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.common.Views;
+import de.KnollFrank.lib.settingssearch.common.graph.UnmodifiableTree;
 import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
-import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphCreator;
+import de.KnollFrank.lib.settingssearch.db.preference.db.transformer.SearchablePreferenceScreenGraphCreator;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceEdge;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreen;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
@@ -68,22 +67,23 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphC
 				new ConfigurationBundleConverter().convertForward(actualConfiguration));
 	}
 
-	private Graph<SearchablePreferenceScreen, SearchablePreferenceEdge> getPojoGraphRootedAt(
+	private UnmodifiableTree<SearchablePreferenceScreen, SearchablePreferenceEdge> getPojoGraphRootedAt(
 			final PreferenceScreenWithHost root,
 			final Locale locale,
 			final FragmentActivity activityContext,
 			final SearchDatabaseConfig searchDatabaseConfig) {
-		return SearchablePreferenceScreenGraphProviderFactory
-				.createSearchablePreferenceScreenGraphProvider(
-						FRAGMENT_CONTAINER_VIEW_ID,
-						Views.getRootViewContainer(activityContext),
-						activityContext,
-						activityContext.getSupportFragmentManager(),
-						activityContext,
-						searchDatabaseConfig,
-						locale,
-						(edge, sourceNodeOfEdge, targetNodeOfEdge) -> true)
-				.getSearchablePreferenceScreenGraph(root);
+		return UnmodifiableTree.of(
+				SearchablePreferenceScreenGraphProviderFactory
+						.createSearchablePreferenceScreenGraphProvider(
+								FRAGMENT_CONTAINER_VIEW_ID,
+								Views.getRootViewContainer(activityContext),
+								activityContext,
+								activityContext.getSupportFragmentManager(),
+								activityContext,
+								searchDatabaseConfig,
+								locale,
+								(edge, sourceNodeOfEdge, targetNodeOfEdge) -> true)
+						.getSearchablePreferenceScreenGraph(root));
 	}
 
 	private PreferenceScreenWithHost instantiateSearchablePreferenceScreen(
