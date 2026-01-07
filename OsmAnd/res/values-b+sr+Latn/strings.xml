@@ -3330,11 +3330,7 @@
     <string name="audionotes_plugin_name">Zvučni i video zapisi</string>
     <string name="plugin_touringview_descr">Uključivanjem ovog pogleda se menja način izgeda mape na „Turistički pregled“, koji je naročiti bogati pregled za turiste i službene vozače. \n\nOvaj pogled nudi, na svakom stupnju približavanja najveću količinu turističkih detalja na podacima mape (posebno puteve, tragove, staze i znakove snalaženja u prostoru). \n\nTakođe i jasno predstavlja sve vrste puteva po boji, tako da nikad ne bude zabune, što je korisno kada se npr. voze veća vozila. \n\nA nudi se i posebne turističke mogućnosti kao što su prikaz biciklističkih ili planinskih puteva. \n\nNije potrebno preuzimanje posebne mape, pogled se pravi od običnih mapi. \n\nOvaj pogled se može isključiti tako što se ili ovde isključi, ili tako što se, po želji, promeni način izgleda mape pod Podesi mapu.</string>
     <string name="plugin_touringview_name">Turistički pregled mape</string>
-    <string name="srtm_plugin_description">Informacije o terenu, kao što su konturne linije, osenčeni reljef, nagib, pomažu da vizualno proceniš položaj zemlje, reljef, plovnost i još mnogo toga. Topografske informacije na mapi mogu biti predstavljene konturnim linijama, senčanjem reljefa i/ili bojanjem strmine.
-\n
-\nZemaljski podaci (između 70° severno i 70° južno) se zasnovani na SRTM i ASTER.
-\n
-\nViše podataka na %1$s.</string>
+    <string name="srtm_plugin_description">Informacije o terenu, kao što su konturne linije, osenčeni reljef, nagib, pomažu da vizualno proceniš položaj zemlje, reljef, plovnost i još mnogo toga. Topografske informacije na mapi mogu biti predstavljene konturnim linijama, senčanjem reljefa i/ili bojanjem strmine. \n \nZemaljski podaci (između 70° severno i 70° južno) se zasnovani na SRTM i ASTER. \n \nViše podataka na %1$s.</string>
     <string name="srtm_plugin_name">Topografija</string>
     <string name="osmand_srtm_short_description_80_chars">Osmand dodatak za offline topo karakteristike poput kontura, osenčen reljef, nagib</string>
     <string name="srtm_paid_version_title">Topografski dodatak</string>
