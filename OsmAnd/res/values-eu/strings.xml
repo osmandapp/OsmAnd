@@ -160,11 +160,7 @@
     <string name="map_widget_audionotes">Audio oharrak</string>
     <string name="audionotes_plugin_description">Hartu audio/argazki/bideo oharrak bidaian zehar, zuzenean mapan botoi bat erabiliz edo kokalekuaren araberako laster-menuan.</string>
     <string name="audionotes_plugin_name">Audio/bideo oharrak</string>
-    <string name="srtm_plugin_description">Lurzoruaren informazioa, hala nola sestra-kurbak, mendiko itzalak eta maldak, lur-erliebea, nabigagarritasuna eta abar ikusmenaren arabera ebaluatzen laguntzen dizu. Informazio topografikoa mapan malda itzalez, sestra-kurben bidez eta/edo malda-kolorearen bidez irudikatu daiteke.
-\n
-\nAzpiko datuak SRTM eta ASTER-en jatorria dira.
-\n
-\nIrakurketa gehiago %1$s helbidean.</string>
+    <string name="srtm_plugin_description">Lurzoruaren informazioa, hala nola sestra-kurbak, mendiko itzalak eta maldak, lur-erliebea, nabigagarritasuna eta abar ikusmenaren arabera ebaluatzen laguntzen dizu. Informazio topografikoa mapan malda itzalez, sestra-kurben bidez eta/edo malda-kolorearen bidez irudikatu daiteke. \n \nAzpiko datuak SRTM eta ASTER-en jatorria dira. \n \nIrakurketa gehiago %1$s helbidean.</string>
     <string name="srtm_plugin_name">Topografia</string>
     <string name="download_select_map_types">Beste mapak</string>
     <string name="download_roads_only_item">Errepideak bakarrik</string>
