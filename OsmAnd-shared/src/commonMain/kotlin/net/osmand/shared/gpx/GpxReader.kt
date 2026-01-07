@@ -100,7 +100,8 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 			val routeActivityId = routeActivity?.id ?: ""
 			updatedItem.setParameter(GpxParameter.ACTIVITY_TYPE, routeActivityId)
 
-			setupNearestCityName(updatedItem)
+			// 50x penalty for gpx db setup
+			//setupNearestCityName(updatedItem)
 
 			val additionalExaggeration: Double =
 				updatedItem.requireParameter(GpxParameter.ADDITIONAL_EXAGGERATION)
