@@ -197,11 +197,7 @@
     <string name="rendering_attr_streetLighting_name">Iluminação pública</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="track_points">Pontos da trilha</string>
-    <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras e declives, ajudam você a visualizar a forma e a suavidade do terreno, a dirigibilidade e mais. As informações topográficas em um mapa podem ser representadas pelo sombreamento do declive, linhas de contorno e/ou cor da inclinação do plano. 
-\n
-\nOs dados subjacentes são originários do SRTM e ASTER.
-\n
-\nLeia mais em %1$s.</string>
+    <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras e declives, ajudam você a visualizar a forma e a suavidade do terreno, a dirigibilidade e mais. As informações topográficas em um mapa podem ser representadas pelo sombreamento do declive, linhas de contorno e/ou cor da inclinação do plano. \n \nOs dados subjacentes são originários do SRTM e ASTER. \n \nLeia mais em %1$s.</string>
     <string name="osmand_parking_plugin_description">Marque onde seu carro está estacionado e notifique seu calendário quando o parquímetro expirar. Para colocar o marcador, escolha um lugar no mapa, vá em \"Ações\" e toque em \"Adicionar estacionamento\".</string>
     <string name="osm_editing_plugin_description">Faça contribuições para o OpenStreetMap, uma comunidade global que mantém um mapa abrangente do mundo e fornece dados atualizados de código aberto para todos os usuários.
 \n
