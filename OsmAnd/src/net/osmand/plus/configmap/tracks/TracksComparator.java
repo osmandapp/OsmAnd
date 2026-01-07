@@ -7,6 +7,7 @@ import static net.osmand.plus.settings.enums.TracksSortMode.DURATION_ASCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.LAST_MODIFIED;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.VALUE_ASCENDING;
 import static net.osmand.shared.gpx.GpxParameter.FILE_CREATION_TIME;
 
 import androidx.annotation.NonNull;
@@ -82,7 +83,7 @@ public class TracksComparator implements Comparator<Object> {
 				if (predefinedOrder1 != predefinedOrder2) {
 					return Integer.compare(predefinedOrder1, predefinedOrder2);
 				}
-				return compareTrackFolders(folder1, folder2);
+				return compareTrackGroups(folder1, folder2);
 			}
 			return -1;
 		}
@@ -95,22 +96,32 @@ public class TracksComparator implements Comparator<Object> {
 		return 0;
 	}
 
-	private int compareTrackFolders(@NonNull ComparableTracksGroup folder1, @NonNull ComparableTracksGroup folder2) {
+	private int compareTrackGroups(@NonNull ComparableTracksGroup group1,
+	                               @NonNull ComparableTracksGroup group2) {
 		int multiplier;
 		switch (sortMode) {
 			case NAME_ASCENDING, NAME_DESCENDING: {
 				multiplier = sortMode == NAME_ASCENDING ? 1 : -1;
-				return multiplier * compareTrackFolderNames(folder1, folder2);
+				return multiplier * compareTrackFolderNames(group1, group2);
+			}
+
+			case VALUE_ASCENDING, VALUE_DESCENDING: {
+				double v1 = group1.getSortValue();
+				double v2 = group2.getSortValue();
+				if (v1 != v2) {
+					multiplier = sortMode == VALUE_ASCENDING ? 1 : -1;
+					return multiplier * Double.compare(v1, v2);
+				}
 			}
 
 			case LAST_MODIFIED, DATE_ASCENDING, DATE_DESCENDING: {
 				multiplier = sortMode == DATE_DESCENDING ? -1 : 1;
-				return multiplier * compareFolderFilesByLastModified(folder1, folder2);
+				return multiplier * compareFolderFilesByLastModified(group1, group2);
 			}
 
 			case DISTANCE_ASCENDING, DISTANCE_DESCENDING: {
-				float dist1 = folder1.getFolderAnalysis().getTotalDistance();
-				float dist2 = folder2.getFolderAnalysis().getTotalDistance();
+				float dist1 = group1.getFolderAnalysis().getTotalDistance();
+				float dist2 = group2.getFolderAnalysis().getTotalDistance();
 				if (Math.abs(dist1 - dist2) >= EQUIVALENT_TOLERANCE) {
 					multiplier = sortMode == DISTANCE_ASCENDING ? 1 : -1;
 					return multiplier * Float.compare(dist1, dist2);
@@ -118,15 +129,15 @@ public class TracksComparator implements Comparator<Object> {
 			}
 
 			case DURATION_ASCENDING, DURATION_DESCENDING: {
-				int timeSpan1 = folder1.getFolderAnalysis().getTimeSpan();
-				int timeSpan2 = folder2.getFolderAnalysis().getTimeSpan();
+				int timeSpan1 = group1.getFolderAnalysis().getTimeSpan();
+				int timeSpan2 = group2.getFolderAnalysis().getTimeSpan();
 				if (timeSpan1 != timeSpan2) {
 					multiplier = sortMode == DURATION_ASCENDING ? 1 : -1;
 					return multiplier * Long.compare(timeSpan1, timeSpan2);
 				}
 			}
 		}
-		return compareTrackFolderNames(folder1, folder2);
+		return compareTrackFolderNames(group1, group2);
 	}
 
 	private int compareTrackItems(@NonNull TrackItem item1, @NonNull TrackItem item2) {

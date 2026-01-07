@@ -7,4 +7,5 @@ interface ComparableTracksGroup {
 	fun getDirName(includingSubdirs: Boolean): String
 	fun lastModified(): Long
 	fun getDefaultOrder(): Int = -1
+	fun getSortValue(): Double = 0.0
 }

@@ -1,6 +1,7 @@
 package net.osmand.shared.gpx.data
 
 import kotlinx.serialization.Transient
+import net.osmand.shared.data.Limits
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
 import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
@@ -33,6 +34,15 @@ class OrganizedTracksGroup(
     override fun getDirName(includingSubdirs: Boolean) = getName()
 
     override fun lastModified() = 0L
+
+    override fun getSortValue(): Double {
+        if (representedValue is Limits) {
+            return representedValue.min.toDouble()
+        } else if (representedValue is Number) {
+            return representedValue.toDouble()
+        }
+        return super.getSortValue()
+    }
 
     override fun getFolderAnalysis(): TrackFolderAnalysis {
         var analysis = groupAnalysis
