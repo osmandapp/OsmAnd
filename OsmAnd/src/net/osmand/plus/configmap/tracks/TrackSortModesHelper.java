@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TrackSortModesHelper {
@@ -118,6 +119,16 @@ public class TrackSortModesHelper {
 			tokens.add(entry.getKey() + SEPARATOR + value.name());
 		}
 		preference.setStringsList(tokens);
+	}
+
+	@NonNull
+	public Set<String> getAllCachedInternalIds() {
+		return cachedSortModes.keySet();
+	}
+
+	@Nullable
+	public TracksSortMode getRawSortMode(@NonNull String internalId) {
+		return cachedSortModes.get(internalId);
 	}
 
 	@NonNull

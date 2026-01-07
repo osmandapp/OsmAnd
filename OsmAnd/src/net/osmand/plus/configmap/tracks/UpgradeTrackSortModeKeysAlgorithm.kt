@@ -53,12 +53,14 @@ class UpgradeTrackSortModeKeysAlgorithm(
 			)
 		}
 		for (smartFolder in smartFolderHelper.getSmartFolders()) {
+			val folderId = smartFolder.getId()
 			upgradeKey(
 				upgradedKeys = upgradedKeys,
-				groupId = smartFolder.getId(),
+				groupId = folderId,
 				checkOutdatedId = false,
 				supportedSortScopes = smartFolder.getSupportedSortScopes()
 			)
+			preserveOrganizedKeys(upgradedKeys, folderId)
 		}
 		sortModesHelper.setSortModes(upgradedKeys)
 		sortModesHelper.syncSettings()
@@ -86,6 +88,21 @@ class UpgradeTrackSortModeKeysAlgorithm(
 			result.add(getFolderIdV2(absolutePath))
 		}
 		return result
+	}
+
+	private fun preserveOrganizedKeys(
+		upgradedKeys: MutableMap<String, TracksSortMode>,
+		parentId: String
+	) {
+		val organizedPrefix = "${parentId}__organized_by_" // TODO: don't use hardcoded key, create and use global constant instead
+		for (key in sortModesHelper.allCachedInternalIds) {
+			if (key.startsWith(organizedPrefix)) {
+				val sortMode = sortModesHelper.getRawSortMode(key)
+				if (sortMode != null) {
+					upgradedKeys[key] = sortMode
+				}
+			}
+		}
 	}
 
 	private fun upgradeKey(
