@@ -92,8 +92,8 @@ public class SearchCoreFactory {
 
 	// context less (slower)
 	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 500;
-	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 500;
-	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 500;
+	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 650;
+	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 650;
 	private static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
 	private static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
 	
