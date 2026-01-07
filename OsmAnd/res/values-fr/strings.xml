@@ -831,7 +831,7 @@
     <string name="map_widget_max_speed">Limitation de vitesse</string>
     <string name="rendering_attr_noAdminboundaries_name">Frontières</string>
     <string name="rendering_attr_noAdminboundaries_description">Masquer les limites administratives régionales (niveaux 5 à 9).</string>
-    <string name="srtm_plugin_description">Fournit des informations sur le terrain (ombrage du relief, courbes de niveau, pente) pour vous aider à mieux interpréter le relief et l’accessibilité. Ces informations topographiques peuvent être représentées sur la carte par des ombres, des lignes d\'altitude et des couleurs variant selon la pente. \n \nLes données proviennent de SRTM et ASTER. \n \nPlus d\'informations sur %1$s.</string>
+    <string name="srtm_plugin_description">Fournit un relief et une topographie détaillée pour une compréhension visuelle du terrain et de sa praticabilité, grâce aux courbes de niveau, à l\'ombrage ou à la coloration des pentes, et à une vue 3D.\n\nPour activer ces fonctionnalités pour une région, vous devez télécharger la carte des courbes de niveau et/ou du relief (3D), compilée à partir des données SRTM et ASTER.\n\nPlus d\'informations sur %1$s.</string>
     <string name="srtm_plugin_name">Topographie</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
@@ -1847,11 +1847,11 @@
     <string name="access_hint_enter_category">Saisir une catégorie</string>
     <string name="access_hint_enter_description">Saisir une description.</string>
     <string name="access_collapsed_list">Plier la liste</string>
-    <string name="access_expanded_list">Liste développée</string>
+    <string name="access_expanded_list">Liste enrichie</string>
     <string name="access_empty_list">Vider la liste</string>
     <string name="access_tree_list">Liste arborescente</string>
     <string name="access_shared_string_not_installed">Non installé</string>
-    <string name="access_widget_expand">Déplier</string>
+    <string name="access_widget_expand">Développer</string>
     <string name="access_sort">Trier</string>
     <string name="access_smart_autoannounce">Annonces intelligentes</string>
     <string name="access_smart_autoannounce_descr">Annoncer uniquement lorsque la direction de la destination est modifiée.</string>
