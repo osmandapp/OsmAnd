@@ -3,6 +3,7 @@ package net.osmand.shared.gpx.data
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import net.osmand.shared.gpx.TrackItem
+import net.osmand.shared.gpx.enums.TracksSortScope
 import net.osmand.shared.gpx.organization.TracksOrganizer
 import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterSerializer
@@ -62,6 +63,14 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	fun setOrganizeByRules(organizeByRules: OrganizeByRules?) {
 		tracksOrganizer.setOrganizeByRules(organizeByRules)
+	}
+
+	override fun getTracksSortScope(): TracksSortScope {
+		return tracksOrganizer.getOrganizeByRules()?.type?.getTrackSortScope() ?: super.getTracksSortScope()
+	}
+
+	override fun getSupportedSortScopes(): List<TracksSortScope> {
+		return listOf(TracksSortScope.TRACKS, TracksSortScope.ORGANIZED_BY_NAME, TracksSortScope.ORGANIZED_BY_VALUE)
 	}
 
 	override fun getFolderAnalysis(): TrackFolderAnalysis {

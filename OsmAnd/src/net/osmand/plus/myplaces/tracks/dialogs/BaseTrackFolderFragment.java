@@ -3,8 +3,6 @@ package net.osmand.plus.myplaces.tracks.dialogs;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.CALLING_FRAGMENT_TAG;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_ID;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
-import static net.osmand.plus.configmap.tracks.TrackTabType.FOLDER;
-import static net.osmand.plus.configmap.tracks.TrackTabType.SMART_FOLDER;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
@@ -37,7 +35,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
-import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksComparator;
 import net.osmand.plus.configmap.tracks.appearance.DefaultAppearanceController;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
@@ -63,6 +60,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTr
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import net.osmand.shared.gpx.enums.TracksSortScope;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.AndroidOrganizeTracksResourceMapper;
@@ -160,6 +158,11 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 
 	public void setOrganizedGroup(@NonNull OrganizedTracksGroup organizedTracks) {
 		this.organizedGroup = organizedTracks;
+	}
+
+	@Nullable
+	protected TracksGroup getCurrentTrackGroup() {
+		return selectedFolder;
 	}
 
 	@Override
@@ -350,20 +353,27 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	public void showSortByDialog() {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			SortByBottomSheet.showInstance(manager, getTracksSortMode(), this, isUsedOnMap());
+			SortByBottomSheet.showInstance(manager, getTrackSortScope(), getTracksSortMode(), this, isUsedOnMap());
 		}
+	}
+
+	@NonNull
+	@Override
+	public TracksSortScope getTrackSortScope() {
+		TracksGroup tracksGroup = getCurrentTrackGroup();
+		return tracksGroup != null ? tracksGroup.getTracksSortScope() : TracksSortScope.TRACKS;
 	}
 
 	@NonNull
 	@Override
 	public TracksSortMode getTracksSortMode() {
 		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
-		return sortModesHelper.requireSortMode(getSortEntryId());
+		return sortModesHelper.requireSortMode(getSortEntryId(), getTrackSortScope());
 	}
 
 	@Nullable
 	protected String getSortEntryId() {
-		TracksGroup folder = selectedFolder != null ? selectedFolder : smartFolder;
+		TracksGroup folder = getCurrentTrackGroup();
 		return folder != null ? folder.getId() : null;
 	}
 
@@ -372,11 +382,13 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		if (sortSubFolders) {
 			sortSubFolder(sortMode);
 		} else {
-			TracksGroup folder = smartFolder != null ? smartFolder : selectedFolder;
-			TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
-			sortModesHelper.setSortMode(folder.getId(), sortMode);
-			sortModesHelper.syncSettings();
-			updateContent();
+			TracksGroup tracksGroup = getCurrentTrackGroup();
+			if (tracksGroup != null) {
+				TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+				sortModesHelper.setSortMode(tracksGroup.getId(), getTrackSortScope(), sortMode);
+				sortModesHelper.syncSettings();
+				updateContent();
+			}
 		}
 	}
 
@@ -392,7 +404,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	                         @NonNull TrackSortModesHelper sortModesHelper,
 	                         @NonNull TracksSortMode sortMode) {
 		for (TrackFolder folder : trackFolder.getFlattenedSubFolders()) {
-			sortModesHelper.setSortMode(folder.getId(), sortMode);
+			sortModesHelper.setSortMode(folder.getId(), getTrackSortScope(), sortMode);
 		}
 	}
 

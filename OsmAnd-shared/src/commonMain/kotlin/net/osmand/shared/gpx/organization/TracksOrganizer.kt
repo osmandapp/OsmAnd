@@ -27,6 +27,8 @@ class TracksOrganizer(val parent: SmartFolder) {
 		}
 	}
 
+	fun getOrganizeByRules() = rules
+
 	fun clearCache() {
 		cachedOrganizedGroups = null
 	}

@@ -1,6 +1,7 @@
 package net.osmand.shared.gpx.organization.enums
 
 import net.osmand.shared.data.Limits
+import net.osmand.shared.gpx.enums.TracksSortScope
 import net.osmand.shared.gpx.filters.TrackFilterType
 import net.osmand.shared.gpx.organization.strategy.NoImplementedStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByActivityStrategy
@@ -212,6 +213,12 @@ enum class OrganizeByType(
 	fun getName() = Localization.getString(nameResId)
 
 	fun getIconName() = iconResId
+
+	// TODO: use another approach
+	fun getTrackSortScope() =
+		if (strategy == OrganizeByRangeStrategy || strategy == OrganizeByDateStrategy)
+			TracksSortScope.ORGANIZED_BY_VALUE
+		else TracksSortScope.ORGANIZED_BY_NAME
 
 	fun getDisplayUnits() = filterType.measureUnitType.getUnit()
 }

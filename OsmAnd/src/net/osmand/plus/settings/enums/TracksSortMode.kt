@@ -1,63 +1,120 @@
-package net.osmand.plus.settings.enums;
+package net.osmand.plus.settings.enums
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import net.osmand.plus.R
+import net.osmand.shared.gpx.enums.TracksSortScope
 
-import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
+enum class TracksSortMode(
+	@get:StringRes val nameId: Int,
+	@get:DrawableRes val iconId: Int,
+	val scopes: Array<TracksSortScope>
+) {
+	NEAREST(
+		nameId = R.string.shared_string_nearest,
+		iconId = R.drawable.ic_action_nearby,
+		scopes = arrayOf(TracksSortScope.TRACKS)
+	),
+	LAST_MODIFIED(
+		nameId = R.string.sort_last_modified,
+		iconId = R.drawable.ic_action_time,
+		scopes = arrayOf(TracksSortScope.TRACKS)
+	),
+	NAME_ASCENDING(
+		nameId = R.string.sort_name_ascending,
+		iconId = R.drawable.ic_action_sort_by_name_ascending,
+		scopes = arrayOf(TracksSortScope.TRACKS, TracksSortScope.ORGANIZED_BY_NAME)
+	),
+	NAME_DESCENDING(
+		nameId = R.string.sort_name_descending,
+		iconId = R.drawable.ic_action_sort_by_name_descending,
+		scopes = arrayOf(TracksSortScope.TRACKS, TracksSortScope.ORGANIZED_BY_NAME)
+	),
+	VALUE_DESCENDING(
+		nameId = R.string.sort_highest_first,
+		iconId = R.drawable.ic_action_sort_long_to_short,
+		scopes = arrayOf(TracksSortScope.ORGANIZED_BY_VALUE)
+	),
+	VALUE_ASCENDING(
+		nameId = R.string.sort_lowest_first,
+		iconId = R.drawable.ic_action_sort_short_to_long,
+		scopes = arrayOf(TracksSortScope.ORGANIZED_BY_VALUE)
+	),
+	DATE_ASCENDING(
+		nameId = R.string.sort_date_ascending,
+		iconId = R.drawable.ic_action_sort_date_1,
+		scopes = arrayOf(TracksSortScope.TRACKS)
+	),
+	DATE_DESCENDING(
+		nameId = R.string.sort_date_descending,
+		iconId = R.drawable.ic_action_sort_date_31,
+		scopes = arrayOf(TracksSortScope.TRACKS)
+	),
+	DISTANCE_DESCENDING(
+		nameId = R.string.sort_distance_descending,
+		iconId = R.drawable.ic_action_sort_long_to_short,
+		scopes = arrayOf(TracksSortScope.TRACKS)
+	),
+	DISTANCE_ASCENDING(
+		nameId = R.string.sort_distance_ascending,
+		iconId = R.drawable.ic_action_sort_short_to_long,
+		scopes = arrayOf(TracksSortScope.TRACKS)
+	),
+	DURATION_DESCENDING(
+		nameId = R.string.sort_duration_descending,
+		iconId = R.drawable.ic_action_sort_duration_long_to_short,
+		scopes = arrayOf(TracksSortScope.TRACKS)
+	),
+	DURATION_ASCENDING(
+		nameId = R.string.sort_duration_ascending,
+		iconId = R.drawable.ic_action_sort_duration_short_to_long,
+		scopes = arrayOf(TracksSortScope.TRACKS)
+	);
 
-public enum TracksSortMode {
+	fun isAllowedIn(scope: TracksSortScope): Boolean = scopes.contains(scope)
 
-	NEAREST(R.string.shared_string_nearest, R.drawable.ic_action_nearby),
-	LAST_MODIFIED(R.string.sort_last_modified, R.drawable.ic_action_time),
-	NAME_ASCENDING(R.string.sort_name_ascending, R.drawable.ic_action_sort_by_name_ascending),
-	NAME_DESCENDING(R.string.sort_name_descending, R.drawable.ic_action_sort_by_name_descending),
-	DATE_ASCENDING(R.string.sort_date_ascending, R.drawable.ic_action_sort_date_1),
-	DATE_DESCENDING(R.string.sort_date_descending, R.drawable.ic_action_sort_date_31),
-	DISTANCE_DESCENDING(R.string.sort_distance_descending, R.drawable.ic_action_sort_long_to_short),
-	DISTANCE_ASCENDING(R.string.sort_distance_ascending, R.drawable.ic_action_sort_short_to_long),
-	DURATION_DESCENDING(R.string.sort_duration_descending, R.drawable.ic_action_sort_duration_long_to_short),
-	DURATION_ASCENDING(R.string.sort_duration_ascending, R.drawable.ic_action_sort_duration_short_to_long);
+	companion object {
 
-	@StringRes
-	private final int nameId;
-	@DrawableRes
-	private final int iconId;
+		private const val REC_FOLDER = "rec"
+		private const val IMPORT_FOLDER = "import"
 
-	TracksSortMode(@StringRes int nameId, @DrawableRes int iconId) {
-		this.nameId = nameId;
-		this.iconId = iconId;
-	}
-
-	@StringRes
-	public int getNameId() {
-		return nameId;
-	}
-
-	@DrawableRes
-	public int getIconId() {
-		return iconId;
-	}
-
-	@NonNull
-	public static TracksSortMode getDefaultSortMode(@Nullable String sortEntryId) {
-		if (Algorithms.isEmpty(sortEntryId) ||
-				Algorithms.stringsEqual("rec", sortEntryId) ||
-				Algorithms.stringsEqual("import", sortEntryId)) {
-			return LAST_MODIFIED;
+		@JvmStatic
+		fun valuesOf(scope: TracksSortScope): Array<TracksSortMode> {
+			return entries.filter { it.isAllowedIn(scope) }.toTypedArray()
 		}
-		return NAME_ASCENDING;
-	}
 
-	@NonNull
-	public static TracksSortMode getByValue(@NonNull String name) {
-		for (TracksSortMode sortMode : values()) {
-			if (Algorithms.stringsEqual(sortMode.name(), name)) {
-				return sortMode;
+		@JvmStatic
+		fun getByValue(name: String?): TracksSortMode {
+			return entries.find { it.name == name } ?: getDefaultSortMode("")
+		}
+
+		@JvmStatic
+		fun getValidOrDefault(
+			sortEntryId: String?,
+			scope: TracksSortScope,
+			mode: TracksSortMode
+		): TracksSortMode {
+			return if (mode.isAllowedIn(scope)) mode else getDefaultSortMode(sortEntryId, scope)
+		}
+
+		@JvmStatic
+		fun getDefaultSortMode(sortEntryId: String?): TracksSortMode {
+			return getDefaultSortMode(sortEntryId, TracksSortScope.TRACKS)
+		}
+
+		@JvmStatic
+		fun getDefaultSortMode(sortEntryId: String?, scope: TracksSortScope): TracksSortMode {
+			return when (scope) {
+				TracksSortScope.ORGANIZED_BY_VALUE -> VALUE_ASCENDING
+				TracksSortScope.ORGANIZED_BY_NAME -> NAME_ASCENDING
+				TracksSortScope.TRACKS -> {
+					if (sortEntryId.isNullOrEmpty() || sortEntryId == REC_FOLDER || sortEntryId == IMPORT_FOLDER) {
+						LAST_MODIFIED
+					} else {
+						NAME_ASCENDING
+					}
+				}
 			}
 		}
-		return getDefaultSortMode("");
 	}
 }

@@ -55,11 +55,6 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		return TAG;
 	}
 
-	@Nullable
-	protected TracksGroup getCurrentTrackGroup() {
-		return selectedFolder;
-	}
-
 	private boolean isLoadingItems;
 
 	@Override
