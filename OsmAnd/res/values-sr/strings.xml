@@ -5898,4 +5898,6 @@
     <string name="delete_folder_description">Да ли избрисати омот „%1$s“?</string>
     <string name="buildings_3d_detail_level">Подробни просторни приказ зграда</string>
     <string name="lang_mi">Маорски</string>
+    <string name="show_expand_button">Прикажи дугме за проширивање</string>
+    <string name="imprecise_coordinates">Непрецизне координате</string>
 </resources>

@@ -5816,4 +5816,6 @@
     <string name="lang_mi">maori</string>
     <string name="buildings_3d_detail_level">3D épületek részletezése</string>
     <string name="has_vehicle_metrics">OBDII-adatokkal</string>
+    <string name="show_expand_button">Kibontásgomb megjelenítése</string>
+    <string name="imprecise_coordinates">Pontatlan koordináták</string>
 </resources>

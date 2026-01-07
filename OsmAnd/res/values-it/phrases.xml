@@ -4746,4 +4746,13 @@
     <string name="poi_gender_segregated_yes">Divisione per sesso: sì</string>
     <string name="poi_gender_segregated_no">Divisione per sesso: no</string>
     <string name="poi_generator_type_solar_thermal_collector">Tipo generatore: collettore solare termico</string>
+    <string name="poi_historic_spacecraft">Veicolo spaziale storico</string>
+    <string name="poi_denomination_ukrainian_greek_catholic">Greco-cattolico ucraino</string>
+    <string name="poi_denomination_ukrainian_orthodox">Ortodosso ucraino</string>
+    <string name="poi_denomination_thai_mahanikaya">Tailandese Mahanikaya</string>
+    <string name="poi_denomination_thai_thammayut">Tailandese Thammayut</string>
+    <string name="poi_denomination_african_methodist_episcopal">Metodista Africano Episcopale</string>
+    <string name="poi_denomination_soto">Soto</string>
+    <string name="poi_denomination_macedonian_orthodox">Macedone ortodossa</string>
+    <string name="poi_denomination_jodo_shinshu">Jodo Shinshu</string>
 </resources>

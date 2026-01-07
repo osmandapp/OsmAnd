@@ -5930,4 +5930,6 @@
     <string name="lang_mi">Māori</string>
     <string name="buildings_3d_detail_level">Detaily 3D staveb</string>
     <string name="has_vehicle_metrics">S daty OBDII</string>
+    <string name="imprecise_coordinates">Nepřesné souřadnice</string>
+    <string name="show_expand_button">Zobrazit tlačítko rozbalení</string>
 </resources>
