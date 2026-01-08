@@ -1,8 +1,7 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static net.osmand.plus.configmap.tracks.PreselectedTabParams.CALLING_FRAGMENT_TAG;
-import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_ID;
-import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
+import static net.osmand.plus.configmap.tracks.TracksTabsFragment.CALLING_FRAGMENT_TAG;
+import static net.osmand.plus.configmap.tracks.TracksTabsFragment.PRESELECTED_TAB_PARAMS_KEY;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
@@ -33,6 +32,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.configmap.tracks.PreselectedTabParams;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.configmap.tracks.TracksComparator;
@@ -545,25 +545,24 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 
 	@Override
 	public void showFolderTracksOnMap(@NonNull TrackFolder folder) {
-		showTracksVisibilityDialog(folder.getId(), true);
+		openTracksVisibilityDialog(PreselectedTabParams.selectAll(folder.getId()));
 	}
 
 	@Override
 	public void showSmartFolderTracksOnMap(@NonNull SmartFolder smartFolder) {
-		showTracksVisibilityDialog(smartFolder.getId(), true);
+		openTracksVisibilityDialog(PreselectedTabParams.selectAll(smartFolder.getId()));
 	}
 
-	//TODO: implement approach to display tracks of current group
 	@Override
 	public void showOrganizedTracksOnMap(@NonNull OrganizedTracksGroup organizedTracks) {
-		showTracksVisibilityDialog(organizedTracks.getParentGroup().getId(), false);
+		TracksGroup parent = organizedTracks.getParentGroup();
+		openTracksVisibilityDialog(PreselectedTabParams.selectGroup(parent.getId(), organizedTracks.getId()));
 	}
 
-	protected void showTracksVisibilityDialog(@NonNull String id, boolean selectAll) {
+	protected void openTracksVisibilityDialog(@NonNull PreselectedTabParams params) {
 		callActivity(activity -> {
 			Bundle bundle = new Bundle();
-			bundle.putString(PRESELECTED_TRACKS_TAB_ID, id);
-			bundle.putBoolean(SELECT_ALL_ITEMS_ON_TAB, selectAll);
+			bundle.putParcelable(PRESELECTED_TAB_PARAMS_KEY, params);
 			bundle.putString(CALLING_FRAGMENT_TAG, TAG);
 			MapActivity.launchMapActivityMoveToTop(activity, storeState(), null, bundle);
 		});

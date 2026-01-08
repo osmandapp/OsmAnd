@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import net.osmand.plus.configmap.tracks.PreselectedTabParams;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItemsFragment;
@@ -328,7 +329,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		} else if (group instanceof SmartFolder folder) {
 			openSmartFolder(folder, null);
 		} else if (group instanceof VisibleTracksGroup) {
-			showTracksVisibilityDialog(ON_MAP.name(), false);
+			openTracksVisibilityDialog(PreselectedTabParams.openTab(ON_MAP.name()));
 		}
 	}
 

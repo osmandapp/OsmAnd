@@ -1,28 +1,30 @@
-package net.osmand.plus.configmap.tracks;
+package net.osmand.plus.configmap.tracks
 
-import androidx.annotation.NonNull;
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-public class PreselectedTabParams {
+@Parcelize
+data class PreselectedTabParams(
+	val tabId: String,
+	val subGroupId: String? = null,
+	val specificPaths: List<String>? = null,
+	val selectAll: Boolean = false
+) : Parcelable {
 
-	public static final String PRESELECTED_TRACKS_TAB_ID = "preselected_tab_id";
-	public static final String SELECT_ALL_ITEMS_ON_TAB = "select_all_items_on_tab";
-	public static final String CALLING_FRAGMENT_TAG = "calling_fragment_tag";
+	companion object {
+		@JvmStatic
+		fun openTab(tabId: String) = PreselectedTabParams(tabId)
 
-	@NonNull
-	private final String id;
-	private final boolean selectAll;
+		@JvmStatic
+		fun selectAll(tabId: String) =
+			PreselectedTabParams(tabId, selectAll = true)
 
-	public PreselectedTabParams(@NonNull String id, boolean selectAll) {
-		this.id = id;
-		this.selectAll = selectAll;
-	}
+		@JvmStatic
+		fun selectGroup(tabId: String, subGroupId: String) =
+			PreselectedTabParams(tabId, subGroupId = subGroupId)
 
-	public boolean shouldSelectAll() {
-		return selectAll;
-	}
-
-	@NonNull
-	public String getPreselectedTabId() {
-		return id;
+		@JvmStatic
+		fun selectPaths(tabId: String, paths: List<String>) =
+			PreselectedTabParams(tabId, specificPaths = paths)
 	}
 }
