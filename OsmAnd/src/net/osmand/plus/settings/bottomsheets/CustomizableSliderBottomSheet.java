@@ -60,6 +60,12 @@ public class CustomizableSliderBottomSheet extends CustomizableBottomSheet {
 	}
 
 	@Override
+	protected void onDismissButtonClickAction() {
+		controller.onDiscardChanges();
+		dismiss();
+	}
+
+	@Override
 	protected void onRightBottomButtonClick() {
 		controller.onApplyChanges();
 		dismiss();
