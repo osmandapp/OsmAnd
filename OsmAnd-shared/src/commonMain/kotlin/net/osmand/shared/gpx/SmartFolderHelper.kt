@@ -1,6 +1,7 @@
 package net.osmand.shared.gpx
 
 import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.ClassDiscriminatorMode
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
@@ -15,7 +16,7 @@ import net.osmand.shared.gpx.filters.FolderTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterList
 import net.osmand.shared.gpx.filters.TrackFiltersHelper
 import net.osmand.shared.gpx.organization.OrganizeByParameter
-import net.osmand.shared.gpx.organization.strategy.OrganizeByStrategy
+import net.osmand.shared.gpx.organization.OrganizeByRangeParameter
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KCollectionUtils
@@ -40,12 +41,18 @@ object SmartFolderHelper {
 		polymorphic(BaseTrackFilter::class) {
 			subclass(FolderTrackFilter::class)
 		}
+		polymorphic(OrganizeByParameter::class) {
+			subclass(OrganizeByRangeParameter::class)
+		}
 	}
 
 	val json = Json {
 		isLenient = true
 		ignoreUnknownKeys = true
+		useArrayPolymorphism = false
+		encodeDefaults = true
 		classDiscriminator = "className"
+		classDiscriminatorMode = ClassDiscriminatorMode.NONE
 		serializersModule = trackFilterSerializersModule
 	}
 
@@ -77,6 +84,7 @@ object SmartFolderHelper {
 						}
 						smartFolder.filters = newFilters
 					}
+					smartFolder.initTracksOrganizer()
 				}
 				newCollection.addAll(savedFilters)
 			}
@@ -319,6 +327,7 @@ object SmartFolderHelper {
 	fun setOrganizeByParams(folderId: String, params: OrganizeByParameter?) {
 		val folder = getSmartFolderById(folderId)
 		folder?.setOrganizeByParams(params)
+		writeSettings()
 		notifyFolderUpdatedListeners(folder ?: return)
 	}
 

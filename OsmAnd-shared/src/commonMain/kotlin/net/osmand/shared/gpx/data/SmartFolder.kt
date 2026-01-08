@@ -9,6 +9,7 @@ import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterSerializer
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
 import net.osmand.shared.gpx.organization.OrganizeByParameter
+import net.osmand.shared.gpx.organization.OrganizeByParameterSerializer
 import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import net.osmand.shared.gpx.organization.strategy.OrganizeByStrategy
@@ -26,7 +27,7 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 	@Transient
 	private val tracksOrganizer = TracksOrganizer(this)
 
-	@Serializable
+	@Serializable(with = OrganizeByParameterSerializer::class)
 	var organizeByParams: OrganizeByParameter? = null
 		private set
 
@@ -103,11 +104,11 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		folderAnalysis = null
 	}
 
-	fun getOrganizeByStrategy(): OrganizeByStrategy? {
-		return tracksOrganizer.getOrganizeByStrategy()
-	}
-
 	fun getOrganizeByType(): OrganizeByType? {
 		return tracksOrganizer.params?.type
+	}
+
+	fun initTracksOrganizer() {
+		tracksOrganizer.initParams(organizeByParams)
 	}
 }

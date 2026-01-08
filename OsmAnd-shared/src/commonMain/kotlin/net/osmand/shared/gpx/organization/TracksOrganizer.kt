@@ -10,6 +10,10 @@ class TracksOrganizer(val parent: SmartFolder) {
 		private set
 	private var cachedOrganizedGroups: List<OrganizedTracksGroup>? = null
 
+	fun initParams(params: OrganizeByParameter?) {
+		this.params = params
+	}
+
 	fun getOrganizedTrackItems(
 		resourceMapper: OrganizeTracksResourceMapper
 	): List<OrganizedTracksGroup>? {
@@ -32,9 +36,5 @@ class TracksOrganizer(val parent: SmartFolder) {
 
 	fun clearCache() {
 		cachedOrganizedGroups = null
-	}
-
-	fun getOrganizeByStrategy(): OrganizeByStrategy? {
-		return params?.type?.strategy
 	}
 }

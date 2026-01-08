@@ -4,10 +4,16 @@ import kotlinx.serialization.Serializable
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 @Serializable
-class OrganizeByRangeParameter(
-	private val _type: OrganizeByType,
-	var stepSize: Double
-) : OrganizeByParameter(_type) {
+class OrganizeByRangeParameter private constructor() : OrganizeByParameter() {
+	var stepSize: Double = 0.0
+
+	constructor(
+		type: OrganizeByType,
+		stepSize: Double
+	) : this() {
+		this.type = type
+		this.stepSize = stepSize
+	}
 
 	override fun equals(other: Any?): Boolean {
 		return other is OrganizeByRangeParameter && super.equals(other) && stepSize == other.stepSize

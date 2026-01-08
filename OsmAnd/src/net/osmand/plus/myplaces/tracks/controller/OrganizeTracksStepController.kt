@@ -110,7 +110,9 @@ class OrganizeTracksStepController(
 
 	override fun onApplyChanges() {
 		if (initialValue != selectedValue) {
-			setOrganizeByStep(selectedValue)
+			val parameter = app.smartFolderHelper.getOrganizeByParams(folderId) as OrganizeByRangeParameter
+			parameter.stepSize = convertToBaseUnits(selectedValue)
+			app.smartFolderHelper.setOrganizeByParams(folderId, parameter)
 		}
 	}
 
