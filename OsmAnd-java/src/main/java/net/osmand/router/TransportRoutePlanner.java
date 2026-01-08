@@ -208,8 +208,8 @@ public class TransportRoutePlanner {
 						(finish.distFromStart < maxTravelTimeCmpToWalk || results.size() == 0)) {
 					results.add(finish);
 					// Stop when results reached range [1000 min, 2500 (for default limit * changes), 5000 max]
-					int dynamicResultsLimit = 25 * ctx.cfg.ptLimitResultsByNumber * ctx.cfg.maxNumberOfChanges;
-					if (results.size() > Math.min(Math.max(1000, dynamicResultsLimit), 5000)) {
+					int optimalLimitOfResults = 25 * ctx.cfg.ptLimitResultsByNumber * ctx.cfg.maxNumberOfChanges;
+					if (results.size() > Math.min(Math.max(1000, optimalLimitOfResults), 5000)) {
 						break;
 					}
 				}
