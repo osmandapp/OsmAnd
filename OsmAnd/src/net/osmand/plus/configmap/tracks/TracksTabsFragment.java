@@ -42,7 +42,6 @@ import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.shared.SharedUtil;
-import net.osmand.plus.track.AndroidOrganizeTracksResourceMapper;
 import net.osmand.plus.track.BaseTracksTabsFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -61,7 +60,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.shared.gpx.TrackItem;
-import net.osmand.shared.gpx.data.OrganizedTracksGroup;
+import net.osmand.shared.gpx.TrackItemUtils;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
@@ -309,45 +308,17 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 			boolean selectAll = preselectedTabParams.getSelectAll();
 
 			List<TrackItem> itemsToSelect = Collections.emptyList();
-			if (subGroupId != null) {
-				itemsToSelect = findItemsByGroupId(trackTab, subGroupId);
-			} else if (specificPaths != null && !specificPaths.isEmpty()) {
-				itemsToSelect = filterItemsByPaths(trackTab.getTrackItems(), specificPaths);
-			} else if (selectAll){
+			if (selectAll) {
 				itemsToSelect = trackTab.getTrackItems();
+			} else if (subGroupId != null) {
+				itemsToSelect = trackTab.getTrackItemsByGroupId(subGroupId);
+			} else if (specificPaths != null && !specificPaths.isEmpty()) {
+				itemsToSelect = TrackItemUtils.filterByPaths(trackTab.getTrackItems(), specificPaths);
 			}
 			if (!itemsToSelect.isEmpty()) {
 				itemsSelectionHelper.onItemsSelected(itemsToSelect, true);
 			}
 		}
-	}
-
-	@NonNull
-	private List<TrackItem> findItemsByGroupId(@NonNull TrackTab tab, @NonNull String groupId) {
-		if (tab.smartFolder != null) {
-			List<OrganizedTracksGroup> groups = tab.smartFolder.getOrganizedTrackItems(AndroidOrganizeTracksResourceMapper.INSTANCE);
-			if (groups != null) {
-				for (OrganizedTracksGroup group : groups) {
-					if (group.getId().equals(groupId)) {
-						return group.getTrackItems();
-					}
-				}
-			}
-		}
-		return Collections.emptyList();
-	}
-
-	@NonNull
-	private List<TrackItem> filterItemsByPaths(@NonNull List<TrackItem> sourceItems,
-	                                           @NonNull List<String> paths) {
-		Set<String> pathSet = new HashSet<>(paths);
-		List<TrackItem> result = new ArrayList<>();
-		for (TrackItem item : sourceItems) {
-			if (item.getFile() != null && pathSet.contains(item.getPath())) {
-				result.add(item);
-			}
-		}
-		return result;
 	}
 
 	public void saveChanges() {

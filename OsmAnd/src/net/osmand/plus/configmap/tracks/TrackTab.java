@@ -9,9 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.track.AndroidOrganizeTracksResourceMapper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.ComparableTracksGroup;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
@@ -20,6 +22,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TrackTab implements TracksGroup, ComparableTracksGroup {
@@ -148,6 +151,21 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 			}
 		}
 		return trackFolders;
+	}
+
+	@NonNull
+	public List<TrackItem> getTrackItemsByGroupId(@NonNull String groupId) {
+		if (smartFolder != null) {
+			List<OrganizedTracksGroup> groups = smartFolder.getOrganizedTrackItems(AndroidOrganizeTracksResourceMapper.INSTANCE);
+			if (groups != null) {
+				for (OrganizedTracksGroup group : groups) {
+					if (group.getId().equals(groupId)) {
+						return group.getTrackItems();
+					}
+				}
+			}
+		}
+		return Collections.emptyList();
 	}
 
 	@Override
