@@ -15,6 +15,7 @@ import net.osmand.plus.card.base.slider.SliderCard
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.bottomsheets.CustomizableSliderBottomSheet
 import net.osmand.plus.settings.controllers.ICustomizableSliderDialogController
+import net.osmand.shared.gpx.organization.OrganizeByRangeParameter
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 class OrganizeTracksStepController(
@@ -22,7 +23,7 @@ class OrganizeTracksStepController(
 	private val folderId: String,
 	private val organizeByType: OrganizeByType,
 	private val initialValue: Int
-): BaseDialogController(app), ICustomizableSliderDialogController {
+) : BaseDialogController(app), ICustomizableSliderDialogController {
 
 	companion object {
 		const val PROCESS_ID = "select_step_to_organize_tracks"
@@ -80,7 +81,7 @@ class OrganizeTracksStepController(
 	override fun onChangeSliderValue(newValue: Float) {
 		selectedValue = newValue.toInt()
 		headedCard?.updateCardSummary()
-		app.organizeTracksHelper.setStepSize(folderId, convertToBaseUnits(selectedValue))
+		setOrganizeByStep(selectedValue)
 	}
 
 	override fun formatValue(number: Number): String {
@@ -89,13 +90,27 @@ class OrganizeTracksStepController(
 
 	// ----------- implement specific ICustomizableSliderDialogController methods -----------
 
+	private fun setOrganizeByStep(value: Int) {
+		val smartFolder = app.smartFolderHelper.getSmartFolderById(folderId)
+		smartFolder?.let { folder ->
+			val params = app.smartFolderHelper.getOrganizeByParams(folderId)
+			params?.let {
+				if (it is OrganizeByRangeParameter) {
+					it.stepSize = convertToBaseUnits(value)
+					folder.updateOrganizeBy()
+					app.smartFolderHelper.notifyFolderUpdatedListeners(smartFolder)
+				}
+			}
+		}
+	}
+
 	override fun onDiscardChanges() {
-		app.organizeTracksHelper.setStepSize(folderId, convertToBaseUnits(initialValue))
+		setOrganizeByStep(initialValue)
 	}
 
 	override fun onApplyChanges() {
 		if (initialValue != selectedValue) {
-			app.organizeTracksHelper.setStepSize(folderId, convertToBaseUnits(selectedValue))
+			setOrganizeByStep(selectedValue)
 		}
 	}
 
@@ -107,10 +122,6 @@ class OrganizeTracksStepController(
 
 	private fun convertToBaseUnits(value: Int): Double {
 		return organizeByType.getDisplayUnits().toBase(value.toDouble())
-	}
-
-	private fun convertFromBaseUnits(value: Double): Double {
-		return organizeByType.getDisplayUnits().fromBase(value)
 	}
 
 	override fun getDisplayData(processId: String): DisplayData {

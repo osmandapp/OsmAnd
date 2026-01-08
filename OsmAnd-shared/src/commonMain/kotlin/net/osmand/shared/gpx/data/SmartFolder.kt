@@ -8,8 +8,10 @@ import net.osmand.shared.gpx.organization.TracksOrganizer
 import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterSerializer
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
+import net.osmand.shared.gpx.organization.OrganizeByParameter
 import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
-import net.osmand.shared.gpx.organization.OrganizeByRules
+import net.osmand.shared.gpx.organization.enums.OrganizeByType
+import net.osmand.shared.gpx.organization.strategy.OrganizeByStrategy
 import net.osmand.shared.util.KCollectionUtils
 
 @Serializable
@@ -23,6 +25,10 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	@Transient
 	private val tracksOrganizer = TracksOrganizer(this)
+
+	@Serializable
+	var organizeByParams: OrganizeByParameter? = null
+		private set
 
 	constructor() : this("")
 
@@ -61,12 +67,17 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		return tracksOrganizer.getOrganizedTrackItems(resourcesMapper)
 	}
 
-	fun setOrganizeByRules(organizeByRules: OrganizeByRules?) {
-		tracksOrganizer.setOrganizeByRules(organizeByRules)
+	fun setOrganizeByParams(organizeByParameter: OrganizeByParameter?) {
+		organizeByParams = organizeByParameter
+		tracksOrganizer.setOrganizeByParams(organizeByParameter)
+	}
+
+	fun updateOrganizeBy() {
+		tracksOrganizer.clearCache()
 	}
 
 	override fun getTracksSortScope(): TracksSortScope {
-		return tracksOrganizer.getOrganizeByRules()?.type?.getTrackSortScope() ?: super.getTracksSortScope()
+		return tracksOrganizer.params?.type?.getTrackSortScope() ?: super.getTracksSortScope()
 	}
 
 	override fun getSupportedSortScopes(): List<TracksSortScope> {
@@ -90,5 +101,13 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		trackItems = ArrayList()
 		tracksOrganizer.clearCache()
 		folderAnalysis = null
+	}
+
+	fun getOrganizeByStrategy(): OrganizeByStrategy? {
+		return tracksOrganizer.getOrganizeByStrategy()
+	}
+
+	fun getOrganizeByType(): OrganizeByType? {
+		return tracksOrganizer.params?.type
 	}
 }

@@ -14,6 +14,8 @@ import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.filters.FolderTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterList
 import net.osmand.shared.gpx.filters.TrackFiltersHelper
+import net.osmand.shared.gpx.organization.OrganizeByParameter
+import net.osmand.shared.gpx.organization.strategy.OrganizeByStrategy
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KCollectionUtils
@@ -312,5 +314,16 @@ object SmartFolderHelper {
 		for (smartFolder in smartFolderCollection) {
 			updateSmartFolderItems(smartFolder)
 		}
+	}
+
+	fun setOrganizeByParams(folderId: String, params: OrganizeByParameter?) {
+		val folder = getSmartFolderById(folderId)
+		folder?.setOrganizeByParams(params)
+		notifyFolderUpdatedListeners(folder ?: return)
+	}
+
+	fun getOrganizeByParams(folderId: String): OrganizeByParameter? {
+		val folder = getSmartFolderById(folderId)
+		return folder?.organizeByParams
 	}
 }

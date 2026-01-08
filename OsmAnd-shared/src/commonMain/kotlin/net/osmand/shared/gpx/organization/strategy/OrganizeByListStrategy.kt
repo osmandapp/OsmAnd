@@ -8,7 +8,7 @@ import net.osmand.shared.gpx.organization.OrganizeByParameter
 import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
-object OrganizeByActivityStrategy : OrganizeByStrategy {
+object OrganizeByListStrategy : OrganizeByStrategy {
 
 	override fun apply(
 		originalGroup: TracksGroup,
@@ -16,12 +16,13 @@ object OrganizeByActivityStrategy : OrganizeByStrategy {
 		resourcesMapper: OrganizeTracksResourceMapper
 	): List<OrganizedTracksGroup>? {
 		val type = param.type
-		if (type != OrganizeByType.ACTIVITY) return null
+		if (type != OrganizeByType.NEAREST_CITY) return null
 
 		val groupedTracks = HashMap<String, MutableList<TrackItem>>()
 		originalGroup.getTrackItems().let { trackItems ->
 			for (trackItem in trackItems) {
-				val key = trackItem.dataItem?.getParameter<String>(GpxParameter.ACTIVITY_TYPE) ?: ""
+				val key =
+					trackItem.dataItem?.getParameter<String>(GpxParameter.NEAREST_CITY_NAME) ?: ""
 				groupedTracks.getOrPut(key) { mutableListOf() }.add(trackItem)
 			}
 		}

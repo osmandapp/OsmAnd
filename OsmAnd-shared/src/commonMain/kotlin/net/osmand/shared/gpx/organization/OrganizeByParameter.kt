@@ -9,26 +9,19 @@ import net.osmand.shared.gpx.organization.enums.OrganizeByType
  * For named list filters, [stepSize] is null.
  */
 @Serializable
-data class OrganizeByRules(
-	val type: OrganizeByType,
-	val stepSize: Double? = null
+open class OrganizeByParameter(
+	open val type: OrganizeByType
 ) {
-
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
 		if (other == null || this::class != other::class) return false
 
-		other as OrganizeByRules
+		other as OrganizeByParameter
 
-		if (type != other.type) return false
-		if (stepSize != other.stepSize) return false
-
-		return true
+		return type == other.type
 	}
 
 	override fun hashCode(): Int {
-		var result = type.hashCode()
-		result = 31 * result + (stepSize?.hashCode() ?: 0)
-		return result
+		return type.hashCode()
 	}
 }

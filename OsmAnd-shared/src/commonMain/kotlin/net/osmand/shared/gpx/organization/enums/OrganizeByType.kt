@@ -3,9 +3,9 @@ package net.osmand.shared.gpx.organization.enums
 import net.osmand.shared.data.Limits
 import net.osmand.shared.gpx.enums.TracksSortScope
 import net.osmand.shared.gpx.filters.TrackFilterType
-import net.osmand.shared.gpx.organization.strategy.NoImplementedStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByActivityStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByDateStrategy
+import net.osmand.shared.gpx.organization.strategy.OrganizeByListStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByRangeStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByStrategy
 import net.osmand.shared.util.Localization
@@ -73,7 +73,7 @@ enum class OrganizeByType(
 		nameResId = "nearest_city",
 		filterType = TrackFilterType.CITY,
 		category = OrganizeByCategory.LOCATION,
-		strategy = NoImplementedStrategy
+		strategy = OrganizeByListStrategy
 	),
 
 	// Speed
