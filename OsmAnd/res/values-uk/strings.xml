@@ -5446,8 +5446,8 @@
     <string name="raster_layers_action_descr">Змінити растрові шари</string>
     <string name="type_of_activity">Вид діяльності</string>
     <string name="change_activity">Зміна активності</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Стежки для ґрунтового велосипеда</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Показати стежки для ґрунтових велосипедів</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Траси для позашляхових мотоциклів</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Показати траси для позашляхових мотоциклів</string>
     <string name="shared_string_decrease">Зменшити</string>
     <string name="shared_string_increase">Збільшити</string>
     <string name="no_photos_available_descr">До цього місця ще не додано жодної фотографії користувача</string>
