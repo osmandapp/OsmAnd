@@ -831,7 +831,7 @@
     <string name="map_widget_max_speed">Limitation de vitesse</string>
     <string name="rendering_attr_noAdminboundaries_name">Frontières</string>
     <string name="rendering_attr_noAdminboundaries_description">Masquer les limites administratives régionales (niveaux 5 à 9).</string>
-    <string name="srtm_plugin_description">Fournit un relief et une topographie détaillée pour une compréhension visuelle du terrain et de sa praticabilité, grâce aux courbes de niveau, à l\'ombrage ou à la coloration des pentes, et à une vue 3D.\n\nPour activer ces fonctionnalités pour une région, vous devez télécharger la carte des courbes de niveau et/ou du relief (3D), compilée à partir des données SRTM et ASTER.\n\nPlus d\'informations sur %1$s.</string>
+    <string name="srtm_plugin_description">Indique le relief pour apprécier le terrain et sa praticabilité grâce aux courbes de niveau, à l\'ombrage du relief, la coloration des pentes et la vue 3D.\n\nPour activer ces fonctionnalités pour une région, vous devez télécharger la carte des courbes de niveau et/ou du relief (3D), générée à partir des données SRTM et ASTER.\n\nPlus d\'informations sur %1$s.</string>
     <string name="srtm_plugin_name">Topographie</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
