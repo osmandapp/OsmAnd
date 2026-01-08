@@ -37,13 +37,13 @@ class OrganizeTracksStepController(
 			initialValue: Int
 		) {
 			val controller = OrganizeTracksStepController(app, folderId, type, initialValue)
-			// todo: set listener if needed
 			app.dialogManager.register(PROCESS_ID, controller)
 			CustomizableSliderBottomSheet.showInstance(fragmentManager, appMode, PROCESS_ID)
 		}
 	}
 
 	private var selectedValue = initialValue
+	private var applyChanges = false
 
 	private var sliderCard: ISliderCard? = null
 	private var headedCard: IHeadedContentCard? = null
@@ -104,16 +104,29 @@ class OrganizeTracksStepController(
 		}
 	}
 
-	override fun onDiscardChanges() {
-		setOrganizeByStep(initialValue)
-	}
-
 	override fun onApplyChanges() {
 		if (initialValue != selectedValue) {
 			val parameter = app.smartFolderHelper.getOrganizeByParams(folderId) as OrganizeByRangeParameter
 			parameter.stepSize = convertToBaseUnits(selectedValue)
 			app.smartFolderHelper.setOrganizeByParams(folderId, parameter)
+			applyChanges = true
 		}
+	}
+
+	override fun onDestroy(activity: FragmentActivity?) {
+		finishProcessIfNeeded(activity)
+	}
+
+	override fun finishProcessIfNeeded(activity: FragmentActivity?): Boolean {
+		if (super.finishProcessIfNeeded(activity)) {
+			if (!applyChanges) {
+				val parameter = app.smartFolderHelper.getOrganizeByParams(folderId) as OrganizeByRangeParameter
+				parameter.stepSize = convertToBaseUnits(initialValue)
+				app.smartFolderHelper.setOrganizeByParams(folderId, parameter)
+			}
+			return true
+		}
+		return false
 	}
 
 	// ----------- Utilities methods -----------

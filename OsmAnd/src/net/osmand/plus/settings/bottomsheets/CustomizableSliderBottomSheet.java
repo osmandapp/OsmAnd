@@ -60,15 +60,15 @@ public class CustomizableSliderBottomSheet extends CustomizableBottomSheet {
 	}
 
 	@Override
-	protected void onDismissButtonClickAction() {
-		controller.onDiscardChanges();
+	protected void onRightBottomButtonClick() {
+		controller.onApplyChanges();
 		dismiss();
 	}
 
 	@Override
-	protected void onRightBottomButtonClick() {
-		controller.onApplyChanges();
-		dismiss();
+	public void onDestroy() {
+		super.onDestroy();
+		controller.onDestroy(getActivity());
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,

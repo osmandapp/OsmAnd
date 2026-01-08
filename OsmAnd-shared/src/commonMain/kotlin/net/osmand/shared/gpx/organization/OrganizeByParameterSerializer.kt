@@ -1,6 +1,5 @@
 package net.osmand.shared.gpx.organization
 
-//import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.SerialDescriptor

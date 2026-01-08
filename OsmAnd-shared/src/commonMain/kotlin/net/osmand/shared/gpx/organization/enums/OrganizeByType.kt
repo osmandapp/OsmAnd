@@ -217,4 +217,8 @@ enum class OrganizeByType(
 	fun getGpxParameter() = filterType.property!!
 
 	fun getDisplayUnits() = filterType.measureUnitType.getUnit()
+
+	fun getDefaultStepInBaseUnits() = getDisplayUnits().toBase(stepRange!!.getMidpoint())
+
+	fun isRangeRelated() = stepRange != null && strategy is OrganizeByRangeStrategy
 }

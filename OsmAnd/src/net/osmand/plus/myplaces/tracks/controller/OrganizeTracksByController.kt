@@ -101,17 +101,13 @@ class OrganizeTracksByController(
 	}
 
 	fun askSaveChanges(activity: FragmentActivity?) {
+		var params: OrganizeByParameter? = null
 		val type = selectedType
-		if (type == null) {
-			app.smartFolderHelper.setOrganizeByParams(folderId, null)
-		} else {
-			var params: OrganizeByParameter?
-			if (selectedType?.strategy is OrganizeByRangeStrategy && type.stepRange != null) {
+		if (type != null) {
+			if (type.isRangeRelated()) {
 				params = app.smartFolderHelper.getOrganizeByParams(folderId)
-				if (params == null || params !is OrganizeByRangeParameter) {
-					params = OrganizeByRangeParameter(
-						type,
-						type.getDisplayUnits().toBase(type.stepRange!!.getMidpoint()))
+				if (params == null || params.type != type) {
+					params = OrganizeByRangeParameter(type, type.getDefaultStepInBaseUnits())
 				}
 			} else {
 				params = OrganizeByParameter(type)
@@ -119,22 +115,17 @@ class OrganizeTracksByController(
 			app.smartFolderHelper.setOrganizeByParams(folderId, params)
 			showStepSizeDialogIfNeeded(activity)
 		}
+		app.smartFolderHelper.setOrganizeByParams(folderId, params)
 	}
 
 	private fun showStepSizeDialogIfNeeded(activity: FragmentActivity?) {
 		val type = selectedType ?: return
-		if (type.stepRange != null) {
+		if (type.isRangeRelated()) {
 			val manager = activity?.supportFragmentManager ?: return
 			val params = app.smartFolderHelper.getOrganizeByParams(folderId)
 			if (params is OrganizeByRangeParameter) {
 				val stepSize = type.getDisplayUnits().fromBase(params.stepSize).toInt()
-				OrganizeTracksStepController.showDialog(
-					app,
-					manager,
-					appMode,
-					folderId,
-					type,
-					stepSize)
+				OrganizeTracksStepController.showDialog(app, manager, appMode, folderId, type, stepSize)
 			}
 		}
 	}
