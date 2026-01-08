@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.AndroidOrganizeTracksResourceMapper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.ComparableTracksGroup;
@@ -156,7 +155,7 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 	@NonNull
 	public List<TrackItem> getTrackItemsByGroupId(@NonNull String groupId) {
 		if (smartFolder != null) {
-			List<OrganizedTracksGroup> groups = smartFolder.getOrganizedTrackItems(AndroidOrganizeTracksResourceMapper.INSTANCE);
+			List<OrganizedTracksGroup> groups = smartFolder.getOrganizedTrackItems();
 			if (groups != null) {
 				for (OrganizedTracksGroup group : groups) {
 					if (group.getId().equals(groupId)) {

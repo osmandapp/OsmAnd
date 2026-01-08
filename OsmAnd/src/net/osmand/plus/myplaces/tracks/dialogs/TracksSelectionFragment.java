@@ -25,7 +25,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.R;
-import net.osmand.plus.track.AndroidOrganizeTracksResourceMapper;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
@@ -111,7 +110,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		}
 		boolean addIndividualItems = true;
 		if (rootGroup instanceof SmartFolder folder) {
-			List<OrganizedTracksGroup> organizedTracks = folder.getOrganizedTrackItems(AndroidOrganizeTracksResourceMapper.INSTANCE);
+			List<OrganizedTracksGroup> organizedTracks = folder.getOrganizedTrackItems();
 			if (!Algorithms.isEmpty(organizedTracks)) {
 				groupsSelectionHelper.setAllItems(organizedTracks);
 				addIndividualItems = false;

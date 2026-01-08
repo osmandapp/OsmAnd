@@ -2,7 +2,7 @@ package net.osmand.shared.gpx.organization
 
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.SmartFolder
-import net.osmand.shared.gpx.organization.strategy.OrganizeByStrategy
+import net.osmand.shared.util.PlatformUtil
 
 class TracksOrganizer(val parent: SmartFolder) {
 
@@ -14,13 +14,12 @@ class TracksOrganizer(val parent: SmartFolder) {
 		this.params = params
 	}
 
-	fun getOrganizedTrackItems(
-		resourceMapper: OrganizeTracksResourceMapper
-	): List<OrganizedTracksGroup>? {
-		params?.let { parameters ->
-			parameters.type.let {
-				if (cachedOrganizedGroups == null) {
-					cachedOrganizedGroups = it.strategy.apply(parent, parameters, resourceMapper)
+	fun getOrganizedTrackItems(): List<OrganizedTracksGroup>? {
+		if (cachedOrganizedGroups == null) {
+			params?.let { parameters ->
+				parameters.type.let {
+					val mapper = PlatformUtil.getOsmAndContext().getOrganizeTracksResourceMapper()
+					cachedOrganizedGroups = it.strategy.apply(parent, parameters, mapper)
 				}
 			}
 		}

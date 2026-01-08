@@ -12,9 +12,9 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-object AndroidOrganizeTracksResourceMapper : OrganizeTracksResourceMapper() {
-
-	lateinit var app: OsmandApplication
+class AndroidOrganizeTracksResourceMapper(
+	val app: OsmandApplication
+) : OrganizeTracksResourceMapper() {
 
 	override fun resolveName(type: OrganizeByType, value: Any): String {
 		if (type == OrganizeByType.ACTIVITY) {

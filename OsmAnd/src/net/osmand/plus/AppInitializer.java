@@ -81,7 +81,6 @@ import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.OrganizeTracksHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -357,7 +356,6 @@ public class AppInitializer implements IProgress {
 		app.explorePlacesProvider = startupInit(new ExplorePlacesOnlineProvider(app), ExplorePlacesOnlineProvider.class);
 		app.helpArticlesHelper = startupInit(new HelpArticlesHelper(app), HelpArticlesHelper.class);
 		app.clickableWayHelper = startupInit(new ClickableWayHelper(app), ClickableWayHelper.class);
-		app.organizeTracksHelper = startupInit(new OrganizeTracksHelper(app), OrganizeTracksHelper.class);
 		app.autoBackupHelper = startupInit(new AutoBackupHelper(app), AutoBackupHelper.class);
 		initOpeningHoursParser();
 	}

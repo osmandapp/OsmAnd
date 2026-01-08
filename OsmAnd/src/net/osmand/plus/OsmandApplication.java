@@ -31,7 +31,6 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
@@ -108,7 +107,6 @@ import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.OrganizeTracksHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -222,7 +220,6 @@ public class OsmandApplication extends MultiDexApplication {
 	ExplorePlacesOnlineProvider explorePlacesProvider;
 	HelpArticlesHelper helpArticlesHelper;
 	ClickableWayHelper clickableWayHelper;
-	OrganizeTracksHelper organizeTracksHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -712,11 +709,6 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public TrackSortModesHelper getTrackSortModesHelper() {
 		return trackSortModesHelper;
-	}
-
-	@NonNull
-	public OrganizeTracksHelper getOrganizeTracksHelper() {
-		return organizeTracksHelper;
 	}
 
 	@NonNull
