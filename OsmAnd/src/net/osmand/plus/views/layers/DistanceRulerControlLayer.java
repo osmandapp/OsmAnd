@@ -540,6 +540,22 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 			return true;
 		}
 
+		PointF startPixel = NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tileBox, startLatLon);
+		PointF endPixel = NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tileBox, endLatLon);
+
+		int width = tileBox.getPixWidth();
+		int height = tileBox.getPixHeight();
+		boolean startVisible = startPixel.x >= 0 && startPixel.x <= width &&
+				startPixel.y >= 0 && startPixel.y <= height;
+		boolean endVisible = endPixel.x >= 0 && endPixel.x <= width &&
+				endPixel.y >= 0 && endPixel.y <= height;
+
+		if (startVisible || endVisible) {
+			recalculatePath(tileBox, startPixel, endPixel);
+			rotateText = startPixel.x >= endPixel.x;
+			return true;
+		}
+
 		return false;
 	}
 
