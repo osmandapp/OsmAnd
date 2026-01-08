@@ -1847,7 +1847,7 @@
     <string name="access_hint_enter_category">Saisir une catégorie</string>
     <string name="access_hint_enter_description">Saisir une description.</string>
     <string name="access_collapsed_list">Plier la liste</string>
-    <string name="access_expanded_list">Liste enrichie</string>
+    <string name="access_expanded_list">Liste développée</string>
     <string name="access_empty_list">Vider la liste</string>
     <string name="access_tree_list">Liste arborescente</string>
     <string name="access_shared_string_not_installed">Non installé</string>
