@@ -10,6 +10,41 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="star_watcher_plugin_name">Star watcher (Beta)</string>
+	<string name="star_watcher_plugin_description">Star charts, 3D star map</string>
+	<string name="star_map">Star map</string>
+	<string name="star_charts_name">Star charts</string>
+	<string name="star_visibility_name">Star visibility</string>
+	<string name="star_altitude_name">Star altitude</string>
+	<string name="astro_name_sun">Sun</string>
+	<string name="astro_name_moon">Moon</string>
+	<string name="astro_name_mercury">Mercury</string>
+	<string name="astro_name_venus">Venus</string>
+	<string name="astro_name_mars">Mars</string>
+	<string name="astro_name_jupiter">Jupiter</string>
+	<string name="astro_name_saturn">Saturn</string>
+	<string name="astro_name_uranus">Uranus</string>
+	<string name="astro_name_neptune">Neptune</string>
+	<string name="astro_name_pluto">Pluto</string>
+	<string name="azimuthal_grid">Azimuthal Grid</string>
+	<string name="equatorial_grid">Equatorial Grid</string>
+	<string name="ecliptic_line">Ecliptic Line</string>
+	<string name="magnitude_filter">Magnitude filter</string>
+	<string name="astro_planets">Planets</string>
+	<string name="astro_constellation">Constellation</string>
+	<string name="astro_constellations">Constellations</string>
+	<string name="astro_stars">Stars</string>
+	<string name="astro_galaxies">Galaxies</string>
+	<string name="astro_nebulae">Nebulae</string>
+	<string name="astro_open_clusters">Open Clusters</string>
+	<string name="astro_globular_clusters">Globular Clusters</string>
+	<string name="astro_galaxy_clusters">Galaxy Clusters</string>
+	<string name="astro_black_holes">Black Holes</string>
+	<string name="visible_layers_and_objects">Visible Layers &amp; Objects</string>
+	<string name="shared_string_azimuth">Azimuth</string>
+	<string name="shared_string_magnitude">Magnitude</string>
+	<string name="astro_rise">Rise</string>
+	<string name="astro_set">Set</string>
 	<string name="show_expand_button">Show expand button</string>
     <string name="imprecise_coordinates">Imprecise coordinates</string>
 	<string name="has_vehicle_metrics">With OBDII data</string>

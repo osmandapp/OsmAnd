@@ -261,6 +261,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showStars = config.showStars
 			starView.showGalaxies = config.showGalaxies
 			starView.showBlackHoles = config.showBlackHoles
+			starView.showNebulae = config.showNebulae
+			starView.showOpenCluster = config.showOpenClusters
+			starView.showGlobularCluster = config.showGlobularClusters
+			starView.showGalaxyCluster = config.showGalaxyClusters
 			starView.showSun = config.showSun
 			starView.showMoon = config.showMoon
 			starView.showPlanets = config.showPlanets
@@ -439,6 +443,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			showStars = starView.showStars,
 			showGalaxies = starView.showGalaxies,
 			showBlackHoles = starView.showBlackHoles,
+			showNebulae = starView.showNebulae,
+			showOpenClusters = starView.showOpenCluster,
+			showGlobularClusters = starView.showGlobularCluster,
+			showGalaxyClusters = starView.showGalaxyCluster,
 			is2DMode = starView.is2DMode,
 			magnitudeFilter = starView.magnitudeFilter?.toDouble()
 		)
@@ -446,7 +454,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun updateMagnitudeFilterVisibility() {
-		val visible = (starView.showStars || starView.showGalaxies || starView.showBlackHoles)
+		val visible = (starView.showStars || starView.showGalaxies || starView.showBlackHoles
+				|| starView.showNebulae || starView.showOpenCluster || starView.showGlobularCluster
+				|| starView.showGalaxyCluster)
 				&& starView.isVisible && showMagnitudeFilter
 		magnitudeSliderContainer.visibility = if (visible) View.VISIBLE else View.GONE
 		magnitudeValueText.visibility = if (visible) View.VISIBLE else View.GONE

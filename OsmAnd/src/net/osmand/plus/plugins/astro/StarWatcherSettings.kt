@@ -27,6 +27,10 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 
 		private const val KEY_SHOW_STARS = "showStars"
 		private const val KEY_SHOW_GALAXIES = "showGalaxies"
+		private const val KEY_SHOW_NEBULAE = "showNebulae"
+		private const val KEY_SHOW_OPEN_CLUSTERS = "showOpenClusters"
+		private const val KEY_SHOW_GLOBULAR_CLUSTERS = "showGlobularClusters"
+		private const val KEY_SHOW_GALAXY_CLUSTERS = "showGalaxyClusters"
 		private const val KEY_SHOW_BLACK_HOLES = "showBlackHoles"
 		private const val KEY_SHOW_MAGNITUDE_FILTER = "showMagnitudeFilter"
 		private const val KEY_MAGNITUDE_FILTER = "magnitudeFilter"
@@ -61,6 +65,10 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showConstellations: Boolean,
 		val showStars: Boolean,
 		val showGalaxies: Boolean,
+		val showNebulae: Boolean,
+		val showOpenClusters: Boolean,
+		val showGlobularClusters: Boolean,
+		val showGalaxyClusters: Boolean,
 		val showBlackHoles: Boolean,
 		val is2DMode: Boolean,
 		val showMagnitudeFilter: Boolean,
@@ -156,6 +164,10 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 
 		val showStars = mapSettings?.optBoolean(KEY_SHOW_STARS, false) ?: false
 		val showGalaxies = mapSettings?.optBoolean(KEY_SHOW_GALAXIES, false) ?: false
+		val showNebulae = mapSettings?.optBoolean(KEY_SHOW_NEBULAE, false) ?: false
+		val showOpenClusters = mapSettings?.optBoolean(KEY_SHOW_OPEN_CLUSTERS, false) ?: false
+		val showGlobularClusters = mapSettings?.optBoolean(KEY_SHOW_GLOBULAR_CLUSTERS, false) ?: false
+		val showGalaxyClusters = mapSettings?.optBoolean(KEY_SHOW_GALAXY_CLUSTERS, false) ?: false
 		val showBlackHoles = mapSettings?.optBoolean(KEY_SHOW_BLACK_HOLES, false) ?: false
 
 		val is2DMode = mapSettings?.optBoolean(KEY_IS_2D_MODE, false) ?: false
@@ -175,6 +187,10 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 			showConstellations = showConstellations,
 			showStars = showStars,
 			showGalaxies = showGalaxies,
+			showNebulae = showNebulae,
+			showOpenClusters = showOpenClusters,
+			showGlobularClusters = showGlobularClusters,
+			showGalaxyClusters = showGalaxyClusters,
 			showBlackHoles = showBlackHoles,
 			is2DMode = is2DMode,
 			showMagnitudeFilter = showMagnitudeFilter,
@@ -199,6 +215,10 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 
 		mapSettings.put(KEY_SHOW_STARS, config.showStars)
 		mapSettings.put(KEY_SHOW_GALAXIES, config.showGalaxies)
+		mapSettings.put(KEY_SHOW_NEBULAE, config.showNebulae)
+		mapSettings.put(KEY_SHOW_OPEN_CLUSTERS, config.showOpenClusters)
+		mapSettings.put(KEY_SHOW_GLOBULAR_CLUSTERS, config.showGlobularClusters)
+		mapSettings.put(KEY_SHOW_GALAXY_CLUSTERS, config.showGalaxyClusters)
 		mapSettings.put(KEY_SHOW_BLACK_HOLES, config.showBlackHoles)
 
 		mapSettings.put(KEY_IS_2D_MODE, config.is2DMode)

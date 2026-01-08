@@ -91,6 +91,10 @@ object AstroUtils {
 			context.getString(R.string.astro_constellations),
 			context.getString(R.string.astro_stars),
 			context.getString(R.string.astro_galaxies),
+			context.getString(R.string.astro_nebulae),
+			context.getString(R.string.astro_open_clusters),
+			context.getString(R.string.astro_globular_clusters),
+			context.getString(R.string.astro_galaxy_clusters),
 			context.getString(R.string.astro_black_holes)
 		)
 
@@ -103,12 +107,16 @@ object AstroUtils {
 		var tempConstellations = config.showConstellations
 		var tempStars = config.showStars
 		var tempGalaxies = config.showGalaxies
+		var tempNebulae = config.showNebulae
+		var tempOpenClusters = config.showOpenClusters
+		var tempGlobularClusters = config.showGlobularClusters
+		var tempGalaxyClusters = config.showGalaxyClusters
 		var tempBlackHoles = config.showBlackHoles
 		var tempShowMagnitudeFilter = config.showMagnitudeFilter
 
 		val checked = booleanArrayOf(
 			tempAzimuthal, tempEquatorial, tempEcliptic, tempShowMagnitudeFilter, tempSun, tempMoon, tempPlanets,
-			tempConstellations, tempStars, tempGalaxies, tempBlackHoles
+			tempConstellations, tempStars, tempGalaxies, tempNebulae, tempOpenClusters, tempGlobularClusters, tempGalaxyClusters, tempBlackHoles
 		)
 
 		AlertDialog.Builder(context)
@@ -125,7 +133,11 @@ object AstroUtils {
 					7 -> tempConstellations = isChecked
 					8 -> tempStars = isChecked
 					9 -> tempGalaxies = isChecked
-					10 -> tempBlackHoles = isChecked
+					10 -> tempNebulae = isChecked
+					11 -> tempOpenClusters = isChecked
+					12 -> tempGlobularClusters = isChecked
+					13 -> tempGalaxyClusters = isChecked
+					14 -> tempBlackHoles = isChecked
 				}
 			}
 			.setPositiveButton(R.string.shared_string_apply) { _, _ ->
@@ -141,6 +153,10 @@ object AstroUtils {
 
 				starView.showStars = tempStars
 				starView.showGalaxies = tempGalaxies
+				starView.showNebulae = tempNebulae
+				starView.showOpenCluster = tempOpenClusters
+				starView.showGlobularCluster = tempGlobularClusters
+				starView.showGalaxyCluster = tempGalaxyClusters
 				starView.showBlackHoles = tempBlackHoles
 
 				starView.updateVisibility()
@@ -155,6 +171,10 @@ object AstroUtils {
 					showConstellations = tempConstellations,
 					showStars = tempStars,
 					showGalaxies = tempGalaxies,
+					showNebulae = tempNebulae,
+					showOpenClusters = tempOpenClusters,
+					showGlobularClusters = tempGlobularClusters,
+					showGalaxyClusters = tempGalaxyClusters,
 					showBlackHoles = tempBlackHoles,
 					showMagnitudeFilter = tempShowMagnitudeFilter
 				)
