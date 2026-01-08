@@ -166,10 +166,11 @@ public class TransportRoutePlanner {
 								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType());
 						nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
 						nextSegment.nonce = nonce++;
-						double dynamicDecrease = Math.max(1.2, (1 - 0.2 * (segmentDepth - 1))); // -20%
-						double dynamicQueueLimit = ctx.cfg.increaseForAlternativesRoutes * dynamicDecrease;
-						if (nextSegment.distFromStart > finishTime * dynamicQueueLimit) {
-							continue;
+						if (ctx.cfg.ptLimitResultsByNumber > 0) {
+							int dynamicQueueLimit = Math.max(1000, segmentDepth * ctx.cfg.ptLimitResultsByNumber * 50);
+							if (ctx.visitedSegments.size() > dynamicQueueLimit) {
+								continue;
+							}
 						}
 						if (ctx.cfg.useSchedule) {
 							int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
