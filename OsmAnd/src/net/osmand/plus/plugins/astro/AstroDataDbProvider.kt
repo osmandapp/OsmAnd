@@ -5,10 +5,13 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.graphics.Color
 import androidx.core.graphics.toColorInt
+import io.github.cosinekitty.astronomy.Body
 import net.osmand.IndexConstants
 import net.osmand.PlatformUtil
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.astro.SkyObject.Type
+import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyColor
+import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyName
 import org.json.JSONArray
 import java.io.File
 
@@ -54,10 +57,6 @@ class AstroDataDbProvider : AstroDataProvider() {
 	override fun getInitialSkyObjectsImpl(ctx: Context): List<SkyObject> {
 		val objects = mutableListOf<SkyObject>()
 
-		// Planets
-		getPlanets(objects, ctx)
-
-		// 2. Read from DB
 		val dbHelper = DbHelper(ctx.applicationContext as OsmandApplication)
 		try {
 			val db = dbHelper.readableDatabase
@@ -81,9 +80,10 @@ class AstroDataDbProvider : AstroDataProvider() {
 
 				while (c.moveToNext()) {
 					val typeStr = c.getString(idxType)
-					val type = mapType(typeStr) ?: continue
+					var type = mapType(typeStr) ?: continue
 
-					val name = c.getString(idxName)
+					val originalName = c.getString(idxName)
+					var name = originalName
 					val wikidata = if (c.isNull(idxWiki)) "" else c.getString(idxWiki)
 					val ra = if (c.isNull(idxRa)) 0.0 else c.getDouble(idxRa)
 					val dec = if (c.isNull(idxDec)) 0.0 else c.getDouble(idxDec)
@@ -91,10 +91,28 @@ class AstroDataDbProvider : AstroDataProvider() {
 						if (c.isNull(idxMag)) 25f else c.getFloat(idxMag) // High mag if null (invisible)
 					val hip = if (c.isNull(idxHip)) -1 else c.getInt(idxHip)
 
-					// ID Generation logic (matching AstroDataProvider for consistency where possible)
-					val id = generateId(type, name)
+					var body: Body? = null
+					var color: Int
 
-					val color = getTypeColor(type)
+					if (typeStr == "solar_system") {
+						body = getBody(wikidata)
+						if (body != null) {
+							type = when (body) {
+								Body.Sun -> Type.SUN
+								Body.Moon -> Type.MOON
+								else -> Type.PLANET
+							}
+							color = bodyColor(body)
+							name = bodyName(ctx, body)
+						} else {
+							continue
+						}
+					} else {
+						color = getTypeColor(type)
+					}
+
+					// ID Generation logic (matching AstroDataProvider for consistency where possible)
+					val id = generateId(type, originalName)
 
 					objects.add(
 						SkyObject(
@@ -102,7 +120,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 							hip = hip,
 							wid = wikidata,
 							type = type,
-							body = null,
+							body = body,
 							name = name,
 							ra = ra,
 							dec = dec,
@@ -118,6 +136,9 @@ class AstroDataDbProvider : AstroDataProvider() {
 			LOG.error("Error reading initial sky objects from DB", e)
 		}
 
+		if (objects.isEmpty()) {
+			getPlanets(objects, ctx)
+		}
 		return objects
 	}
 
@@ -160,6 +181,22 @@ class AstroDataDbProvider : AstroDataProvider() {
 		return constellations
 	}
 
+	private fun getBody(wid: String): Body? {
+		return when (wid) {
+			"Q525" -> Body.Sun
+			"Q405" -> Body.Moon
+			"Q308" -> Body.Mercury
+			"Q313" -> Body.Venus
+			"Q111" -> Body.Mars
+			"Q319" -> Body.Jupiter
+			"Q193" -> Body.Saturn
+			"Q324" -> Body.Uranus
+			"Q332" -> Body.Neptune
+			"Q339" -> Body.Pluto
+			else -> null
+		}
+	}
+
 	private fun mapType(typeStr: String): Type? {
 		return when (typeStr) {
 			"stars" -> Type.STAR
@@ -170,50 +207,8 @@ class AstroDataDbProvider : AstroDataProvider() {
 			"globular_clusters" -> Type.GLOBULAR_CLUSTER
 			"galaxy_clusters" -> Type.GALAXY_CLUSTER
 			"constellations" -> Type.CONSTELLATION
+			"solar_system" -> Type.PLANET
 			else -> null
 		}
-	}
-
-	private fun generateId(type: Type, name: String): String {
-		return when (type) {
-			Type.STAR -> name.lowercase().replace(' ', '_')
-			Type.GALAXY -> name.lowercase().replace(' ', '_')
-				.filter { it.isLetterOrDigit() || it == '_' }
-
-			Type.BLACK_HOLE -> "bh_" + name.lowercase().replace('*', '_').replace(' ', '_')
-				.replace('-', '_').replace('(', '_').replace(')', '_')
-
-			else -> name.lowercase().replace(' ', '_')
-		}
-	}
-
-	private fun getTypeColor(type: Type): Int {
-		return when (type) {
-			Type.STAR -> Color.WHITE
-			Type.GALAXY, Type.GALAXY_CLUSTER -> Color.LTGRAY
-			Type.BLACK_HOLE -> Color.MAGENTA
-			Type.NEBULA -> "#E0CEF5".toColorInt() // Light
-			// lilac/purple
-			Type.OPEN_CLUSTER -> "#FFFFE0".toColorInt() // Light yellow
-			Type.GLOBULAR_CLUSTER -> "#FFFACD".toColorInt() // Lemon chiffon
-			else -> Color.WHITE
-		}
-	}
-
-	private fun parseLines(json: String?): List<Pair<Int, Int>> {
-		if (json.isNullOrEmpty()) return emptyList()
-		val list = mutableListOf<Pair<Int, Int>>()
-		try {
-			val jsonArray = JSONArray(json)
-			for (i in 0 until jsonArray.length()) {
-				val segment = jsonArray.getJSONArray(i)
-				if (segment.length() >= 2) {
-					list.add(segment.getInt(0) to segment.getInt(1))
-				}
-			}
-		} catch (e: Exception) {
-			LOG.error("Error parsing constellation lines: $json", e)
-		}
-		return list
 	}
 }
