@@ -166,7 +166,7 @@ public class TransportRoutePlanner {
 								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType());
 						nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
 						nextSegment.nonce = nonce++;
-						double dynamicDecrease = Math.min(1.2, (1 - 0.2 * (segmentDepth - 1))); // -20%
+						double dynamicDecrease = Math.max(1.2, (1 - 0.2 * (segmentDepth - 1))); // -20%
 						double dynamicQueueLimit = ctx.cfg.increaseForAlternativesRoutes * dynamicDecrease;
 						if (nextSegment.distFromStart > finishTime * dynamicQueueLimit) {
 							continue;
