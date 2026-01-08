@@ -142,8 +142,7 @@ public class TransportRoutePlanner {
 					break;
 				}
 				sgms.clear();
-				int segmentDepth = segment.getDepth();
-				if (segmentDepth < ctx.cfg.maxNumberOfChanges + 1) {
+				if (segment.getDepth() < ctx.cfg.maxNumberOfChanges + 1) {
 					sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
 					ctx.visitedStops++;
 					for (TransportRouteSegment sgm : sgms) {
