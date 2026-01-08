@@ -88,7 +88,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 					val ra = if (c.isNull(idxRa)) 0.0 else c.getDouble(idxRa)
 					val dec = if (c.isNull(idxDec)) 0.0 else c.getDouble(idxDec)
 					val mag =
-						if (c.isNull(idxMag)) 50f else c.getFloat(idxMag) // High mag if null (invisible)
+						if (c.isNull(idxMag)) 25f else c.getFloat(idxMag) // High mag if null (invisible)
 					val hip = if (c.isNull(idxHip)) -1 else c.getInt(idxHip)
 
 					// ID Generation logic (matching AstroDataProvider for consistency where possible)

@@ -143,6 +143,10 @@ class StarView @JvmOverloads constructor(
 	var showStars = true
 	var showGalaxies = true
 	var showBlackHoles = true
+	var showNebula = true
+	var showOpenCluster = true
+	var showGlobularCluster = true
+	var showGalaxyCluster = true
 	var showSun = true
 	var showMoon = true
 	var showPlanets = true
@@ -539,10 +543,10 @@ class StarView @JvmOverloads constructor(
 			SkyObject.Type.SUN -> showSun
 			SkyObject.Type.MOON -> showMoon
 			SkyObject.Type.PLANET -> showPlanets
-			SkyObject.Type.NEBULA -> showGalaxies // grouped with deep sky
-			SkyObject.Type.OPEN_CLUSTER -> showStars // grouped with stars for now, or new setting? Using stars as they are star clusters.
-			SkyObject.Type.GLOBULAR_CLUSTER -> showStars
-			SkyObject.Type.GALAXY_CLUSTER -> showGalaxies
+			SkyObject.Type.NEBULA -> showNebula
+			SkyObject.Type.OPEN_CLUSTER -> showOpenCluster
+			SkyObject.Type.GLOBULAR_CLUSTER -> showGlobularCluster
+			SkyObject.Type.GALAXY_CLUSTER -> showGalaxyCluster
 			SkyObject.Type.CONSTELLATION -> showConstellations
 		}
 	}

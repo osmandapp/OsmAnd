@@ -1,8 +1,6 @@
 package net.osmand.plus.plugins.astro
 
-import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -49,10 +47,8 @@ import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
 import net.osmand.shared.util.LoggerFactory
 import java.time.LocalDate
 import java.time.ZoneId
-import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
-import kotlin.math.ceil
 
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
 	OsmAndCompassListener {
@@ -108,6 +104,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	companion object {
 		val TAG: String = StarMapFragment::class.java.simpleName
 		private val LOG = LoggerFactory.getLogger(TAG)
+
+		private const val MAX_MAGNITUDE = 7.0f
+
+		@JvmStatic
 
 		fun showInstance(manager: FragmentManager) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
@@ -184,8 +184,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		resetMagnitudeButton.setOnClickListener {
 			val objects = starMapViewModel.skyObjects.value ?: emptyList()
 			if (objects.isNotEmpty()) {
-				val maxMag = calculateMaxMagnitude(objects).toDouble()
-				magnitudeSlider.progress = ((maxMag + 1.0) * 10.0).toInt()
+				magnitudeSlider.progress = ((MAX_MAGNITUDE + 1.0) * 10.0).toInt()
 				starView.magnitudeFilter = null
 				starView.invalidate()
 			}
@@ -507,7 +506,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starMapViewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
 			starView.setSkyObjects(objects)
 			if (objects.isNotEmpty()) {
-				val maxMag = calculateMaxMagnitude(objects)
+				val maxMag = MAX_MAGNITUDE
 				val maxSliderVal = ((maxMag + 1.0) * 10.0).toInt()
 				magnitudeSlider.max = maxSliderVal
 
@@ -525,11 +524,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starVisiblityView.setChartObjects(objects)
 			starAltitudeView.setChartObjects(objects)
 		}
-	}
-
-	private fun calculateMaxMagnitude(objects: List<SkyObject>): Float {
-		return ceil(objects.filter { it.type != SkyObject.Type.CONSTELLATION && !it.type.isSunSystem() && it.magnitude < 50.0f }
-			.maxOfOrNull { it.magnitude } ?: 10.0f)
 	}
 
 	private fun setupListeners() {
