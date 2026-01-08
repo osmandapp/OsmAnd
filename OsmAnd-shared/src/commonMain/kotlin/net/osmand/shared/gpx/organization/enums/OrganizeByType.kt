@@ -1,9 +1,7 @@
 package net.osmand.shared.gpx.organization.enums
 
 import net.osmand.shared.data.Limits
-import net.osmand.shared.gpx.enums.TracksSortScope
 import net.osmand.shared.gpx.filters.TrackFilterType
-import net.osmand.shared.gpx.organization.strategy.OrganizeByActivityStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByDateStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByListStrategy
 import net.osmand.shared.gpx.organization.strategy.OrganizeByRangeStrategy
@@ -24,7 +22,7 @@ enum class OrganizeByType(
 		nameResId = "shared_string_activity",
 		filterType = TrackFilterType.ACTIVITY,
 		category = OrganizeByCategory.GENERAL,
-		strategy = OrganizeByActivityStrategy
+		strategy = OrganizeByListStrategy
 	),
 	DURATION(
 		iconResId = "ic_action_time_span_75",
@@ -214,11 +212,9 @@ enum class OrganizeByType(
 
 	fun getIconName() = iconResId
 
-	// TODO: use another approach
-	fun getTrackSortScope() =
-		if (strategy == OrganizeByRangeStrategy || strategy == OrganizeByDateStrategy)
-			TracksSortScope.ORGANIZED_BY_VALUE
-		else TracksSortScope.ORGANIZED_BY_NAME
+	fun getTrackSortScope() = strategy.getTrackSortScope()
+
+	fun getGpxParameter() = filterType.property!!
 
 	fun getDisplayUnits() = filterType.measureUnitType.getUnit()
 }

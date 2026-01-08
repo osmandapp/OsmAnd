@@ -1,9 +1,9 @@
 package net.osmand.shared.gpx.organization.strategy
 
-import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.TracksGroup
+import net.osmand.shared.gpx.enums.TracksSortScope
 import net.osmand.shared.gpx.organization.OrganizeByParameter
 import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
@@ -14,15 +14,13 @@ object OrganizeByListStrategy : OrganizeByStrategy {
 		originalGroup: TracksGroup,
 		param: OrganizeByParameter,
 		resourcesMapper: OrganizeTracksResourceMapper
-	): List<OrganizedTracksGroup>? {
+	): List<OrganizedTracksGroup> {
 		val type = param.type
-		if (type != OrganizeByType.NEAREST_CITY) return null
 
 		val groupedTracks = HashMap<String, MutableList<TrackItem>>()
 		originalGroup.getTrackItems().let { trackItems ->
 			for (trackItem in trackItems) {
-				val key =
-					trackItem.dataItem?.getParameter<String>(GpxParameter.NEAREST_CITY_NAME) ?: ""
+				val key = trackItem.dataItem?.getParameter<String>(type.getGpxParameter()) ?: ""
 				groupedTracks.getOrPut(key) { mutableListOf() }.add(trackItem)
 			}
 		}
@@ -49,4 +47,6 @@ object OrganizeByListStrategy : OrganizeByStrategy {
 		type: OrganizeByType,
 		value: String
 	) = "${getBaseId(originalGroup, type)}${value.lowercase()}"
+
+	override fun getTrackSortScope() = TracksSortScope.ORGANIZED_BY_NAME
 }

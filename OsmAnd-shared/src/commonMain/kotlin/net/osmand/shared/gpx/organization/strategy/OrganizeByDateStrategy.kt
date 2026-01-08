@@ -10,6 +10,7 @@ import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.TracksGroup
+import net.osmand.shared.gpx.enums.TracksSortScope
 import net.osmand.shared.gpx.organization.OrganizeByParameter
 import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.enums.OrganizeByCategory
@@ -75,4 +76,6 @@ object OrganizeByDateStrategy : OrganizeByStrategy {
 		type: OrganizeByType,
 		value: String
 	) = "${getBaseId(originalGroup, type)}${value.lowercase()}"
+
+	override fun getTrackSortScope() = TracksSortScope.ORGANIZED_BY_VALUE
 }

@@ -2,6 +2,7 @@ package net.osmand.shared.gpx.organization.strategy
 
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.TracksGroup
+import net.osmand.shared.gpx.enums.TracksSortScope
 import net.osmand.shared.gpx.organization.OrganizeByParameter
 import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
@@ -19,4 +20,6 @@ interface OrganizeByStrategy {
 		val typeName = type.name.lowercase()
 		return "${parentId}__organized_by_${typeName}__"
 	}
+
+	fun getTrackSortScope(): TracksSortScope
 }
