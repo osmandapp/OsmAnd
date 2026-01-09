@@ -14,7 +14,7 @@ class TracksOrganizer(val parent: SmartFolder) {
 		this.params = params
 	}
 
-	fun getOrganizedTrackItems(): List<OrganizedTracksGroup>? {
+	fun getOrganizedTrackItems(): List<OrganizedTracksGroup> {
 		if (cachedOrganizedGroups == null) {
 			params?.let { parameters ->
 				parameters.type.let {
@@ -23,7 +23,7 @@ class TracksOrganizer(val parent: SmartFolder) {
 				}
 			}
 		}
-		return cachedOrganizedGroups
+		return cachedOrganizedGroups ?: emptyList()
 	}
 
 	fun setOrganizeByParams(newParameter: OrganizeByParams?) {

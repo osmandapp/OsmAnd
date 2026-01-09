@@ -62,7 +62,11 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		}
 	}
 
-	fun getOrganizedTrackItems(): List<OrganizedTracksGroup>? {
+	fun getOrganizedGroupById(groupId: String): OrganizedTracksGroup? {
+		return getOrganizedTrackItems().find { it.getId() == groupId }
+	}
+
+	fun getOrganizedTrackItems(): List<OrganizedTracksGroup> {
 		return tracksOrganizer.getOrganizedTrackItems()
 	}
 

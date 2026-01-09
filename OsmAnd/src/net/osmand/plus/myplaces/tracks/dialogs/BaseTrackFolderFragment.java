@@ -96,6 +96,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	private static final String TAG = BaseTrackFolderFragment.class.getSimpleName();
 
 	public static final String SELECTED_SMART_FOLDER_KEY = "selected_smart_folder_key";
+	public static final String SELECTED_ORGANIZED_GROUP_KEY = "selected_organized_group_key";
 	public static final String SELECTED_FOLDER_KEY = "selected_folder_key";
 	public static final String SELECTED_ITEM_PATH_KEY = "selected_item_path_key";
 
@@ -155,7 +156,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		this.selectedItemPath = selectedItemPath;
 	}
 
-	public void setOrganizedGroup(@NonNull OrganizedTracksGroup organizedTracks) {
+	public void setOrganizedGroup(@Nullable OrganizedTracksGroup organizedTracks) {
 		this.organizedGroup = organizedTracks;
 	}
 
@@ -451,6 +452,9 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		if (smartFolder != null) {
 			bundle.putString(SELECTED_SMART_FOLDER_KEY, smartFolder.getFolderName());
 		}
+		if (organizedGroup != null) {
+			bundle.putString(SELECTED_ORGANIZED_GROUP_KEY, organizedGroup.getId());
+		}
 		return bundle;
 	}
 
@@ -464,9 +468,14 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 			if (smartFolderName != null) {
 				smartFolder = app.getSmartFolderHelper().getSmartFolder(smartFolderName);
 			}
+			String organizedGroupId = bundle.getString(SELECTED_ORGANIZED_GROUP_KEY);
+			if (smartFolder != null && organizedGroupId != null) {
+				organizedGroup = smartFolder.getOrganizedGroupById(organizedGroupId);
+			}
 			bundle.remove(SELECTED_FOLDER_KEY);
 			bundle.remove(SELECTED_ITEM_PATH_KEY);
 			bundle.remove(SELECTED_SMART_FOLDER_KEY);
+			bundle.remove(SELECTED_ORGANIZED_GROUP_KEY);
 		}
 	}
 

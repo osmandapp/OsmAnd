@@ -155,13 +155,9 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 	@NonNull
 	public List<TrackItem> getTrackItemsByGroupId(@NonNull String groupId) {
 		if (smartFolder != null) {
-			List<OrganizedTracksGroup> groups = smartFolder.getOrganizedTrackItems();
-			if (groups != null) {
-				for (OrganizedTracksGroup group : groups) {
-					if (group.getId().equals(groupId)) {
-						return group.getTrackItems();
-					}
-				}
+			OrganizedTracksGroup group = smartFolder.getOrganizedGroupById(groupId);
+			if (group != null) {
+				return group.getTrackItems();
 			}
 		}
 		return Collections.emptyList();

@@ -13,6 +13,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
 import net.osmand.shared.gpx.SmartFolderUpdateListener
 import net.osmand.shared.gpx.TrackItem
+import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.shared.gpx.data.TracksGroup
 import net.osmand.util.Algorithms
@@ -25,10 +26,12 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		private val TAG = SmartFolderFragment::class.java.simpleName
 
 		fun showInstance(manager: FragmentManager, folder: SmartFolder,
+		                 organizedTracksGroup: OrganizedTracksGroup?,
 						 track: TrackItem?, target: Fragment) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TrackFolderFragment.TAG)) {
 				val fragment = SmartFolderFragment()
 				fragment.setSmartFolder(folder)
+				fragment.setOrganizedGroup(organizedTracksGroup)
 				fragment.setSelectedItemPath(track?.path)
 				fragment.setTargetFragment(target, 0)
 				fragment.retainInstance = true
