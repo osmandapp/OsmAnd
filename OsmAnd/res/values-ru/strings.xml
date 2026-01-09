@@ -1116,7 +1116,7 @@
     <string name="ending_point_too_far">Конец маршрута слишком далеко от ближайшей дороги.</string>
     <string name="add_tag">Добавить тег</string>
     <string name="btn_advanced_mode">Расширенный режим…</string>
-    <string name="poi_filter_parking">Парковки</string>
+    <string name="poi_filter_parking">Парковка</string>
     <string name="poi_filter_emergency">Чрезвычайные обстоятельства</string>
     <string name="poi_filter_public_transport">Общественный транспорт</string>
     <string name="poi_filter_entertainment">Развлечения</string>
