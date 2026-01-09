@@ -28,7 +28,7 @@ import io.github.cosinekitty.astronomy.Vector
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.rotationEclEqd
-import net.osmand.plus.plugins.astro.AstroDataProvider.Constellation
+import net.osmand.plus.plugins.astro.Constellation
 import net.osmand.plus.plugins.astro.SkyObject
 import java.util.Calendar
 import java.util.TimeZone
@@ -143,6 +143,10 @@ class StarView @JvmOverloads constructor(
 	var showStars = true
 	var showGalaxies = true
 	var showBlackHoles = true
+	var showNebulae = true
+	var showOpenCluster = true
+	var showGlobularCluster = true
+	var showGalaxyCluster = true
 	var showSun = true
 	var showMoon = true
 	var showPlanets = true
@@ -157,6 +161,7 @@ class StarView @JvmOverloads constructor(
 	var onAnimationFinished: (() -> Unit)? = null
 	var onAzimuthManualChangeListener: ((Double) -> Unit)? = null
 	var onViewAngleChangeListener: ((Double) -> Unit)? = null
+	var magnitudeFilter: Float? = null
 
 	var roll = 0.0
 		set(value) {
@@ -234,7 +239,6 @@ class StarView @JvmOverloads constructor(
 		var targetAzimuth: Double = 0.0, var targetAltitude: Double = 0.0
 	)
 	private val constellationCenters = mutableMapOf<Constellation, ConstellationCentroid?>()
-	private val tempPathPoint = PointF() // Helper for projection inside onDraw
 
 	private var visualAnimator: ValueAnimator? = null
 
@@ -315,6 +319,9 @@ class StarView @JvmOverloads constructor(
 		skyObjects.sortBy { it.magnitude }
 		skyObjectMap.clear()
 		objects.forEach { skyObjectMap[it.hip] = it }
+
+		updateConstellationCenters()
+
 		recalculatePositions(currentTime, updateTargets = false)
 		skyObjects.forEach {
 			it.azimuth = it.targetAzimuth
@@ -326,14 +333,11 @@ class StarView @JvmOverloads constructor(
 		pinnedObjects.removeAll(toRemove)
 		pathCache.keys.removeAll(toRemove)
 
-		updateConstellationCenters()
 		invalidate()
 	}
 
 	fun setConstellations(list: List<Constellation>) {
 		constellations = list
-		updateConstellationCenters()
-		invalidate()
 	}
 
 	private fun updateConstellationCenters() {
@@ -528,6 +532,10 @@ class StarView @JvmOverloads constructor(
 	}
 
 	private fun isObjectVisibleInSettings(obj: SkyObject): Boolean {
+		val magnitudeFilter = magnitudeFilter
+		if (magnitudeFilter != null && !obj.type.isSunSystem()
+			&& obj.magnitude > magnitudeFilter) return false
+
 		return when (obj.type) {
 			SkyObject.Type.STAR -> showStars
 			SkyObject.Type.GALAXY -> showGalaxies
@@ -535,6 +543,11 @@ class StarView @JvmOverloads constructor(
 			SkyObject.Type.SUN -> showSun
 			SkyObject.Type.MOON -> showMoon
 			SkyObject.Type.PLANET -> showPlanets
+			SkyObject.Type.NEBULA -> showNebulae
+			SkyObject.Type.OPEN_CLUSTER -> showOpenCluster
+			SkyObject.Type.GLOBULAR_CLUSTER -> showGlobularCluster
+			SkyObject.Type.GALAXY_CLUSTER -> showGalaxyCluster
+			SkyObject.Type.CONSTELLATION -> showConstellations
 		}
 	}
 
@@ -642,13 +655,13 @@ class StarView @JvmOverloads constructor(
 			}
 		}
 
+		if (showConstellations) drawConstellationLabels(canvas)
+
 		skyObjects.forEach { obj ->
 			if (isObjectVisibleInSettings(obj)) {
 				drawSkyObject(canvas, obj)
 			}
 		}
-
-		if (showConstellations) drawConstellationLabels(canvas)
 
 		// Draw Highlights
 
@@ -1111,12 +1124,31 @@ class StarView @JvmOverloads constructor(
 					constellationTextPaint.color = 0xFFAABBFF.toInt()
 					constellationTextPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD_ITALIC)
 				}
-				
+
 				val text = constellation.name
 				val textSize = constellationTextPaint.textSize
-				
-				// Draw stable label
-				canvas.drawText(text, cx, cy + textSize, constellationTextPaint)
+
+				val textWidth = constellationTextPaint.measureText(text)
+				val threshold = 10f
+				val textRect = RectF(
+					cx - textWidth / 2 - threshold,
+					cy - threshold,
+					cx + textWidth / 2 + threshold,
+					cy + textSize + threshold
+				)
+
+				var overlaps = false
+				for (rect in occupiedRects) {
+					if (RectF.intersects(textRect, rect)) {
+						overlaps = true
+						break
+					}
+				}
+
+				if (!overlaps || isSelected) {
+					canvas.drawText(text, cx, cy + textSize, constellationTextPaint)
+					occupiedRects.add(textRect)
+				}
 			}
 		}
 	}
@@ -1124,11 +1156,30 @@ class StarView @JvmOverloads constructor(
 	private fun drawSkyObject(canvas: Canvas, obj: SkyObject) {
 		if (!skyToScreen(obj.azimuth, obj.altitude, tempPoint)) return
 
-		val baseSize = 15f
-		val radius = max(3f, baseSize - (obj.magnitude * 2f))
+		// Heuristic to determine "Zoomed Out" factor (0.0 = Zoomed In, 1.0 = Zoomed Out)
+		val zoomFactor = (viewAngle - 10.0) / (if (is2DMode) 210.0 else 140.0) // Normalize roughly 0..1
+		val constrainedZoomFactor = max(0.0, min(1.0, zoomFactor))
 
+		// 1. Dynamic Radius & Color
+		var baseSize = 15f
+		var color = obj.color
+		
+		// If significantly zoomed out and star is faint, reduce prominence
+		if (obj.type == SkyObject.Type.STAR) {
+			if (constrainedZoomFactor > 0.3 && obj.magnitude > 2.5) {
+				baseSize = 8f  // Smaller base size for faint stars when zoomed out
+				color = Color.GRAY // Fade to gray
+			}
+		}
+
+		var radius = max(2f, baseSize - (obj.magnitude * 2f))
+		// Further reduce radius for faint stars at high zoom
+		if (obj.type == SkyObject.Type.STAR && constrainedZoomFactor > 0.5) {
+			radius *= 0.7f
+		}
+		
 		paint.style = Paint.Style.FILL
-		paint.color = obj.color
+		paint.color = color
 		canvas.drawCircle(tempPoint.x, tempPoint.y, radius, paint)
 
 		val objRect = RectF(
@@ -1138,12 +1189,29 @@ class StarView @JvmOverloads constructor(
 			tempPoint.y + radius
 		)
 
+		// 2. Dynamic Label Visibility
 		var showLabel = true
 		if (obj.type == SkyObject.Type.STAR) {
-			showLabel = !obj.name.startsWith("HIP", ignoreCase = true)
+			// Don't show HIP names
+			if (obj.name.startsWith("HIP", ignoreCase = true)) {
+				showLabel = false
+			} else {
+				// Dynamic magnitude threshold for labels
+				// Zoomed in (factor 0): show stars up to mag 5.0
+				// Zoomed out (factor 1): show stars up to mag 1.5
+				val magThreshold = 5.0 - (constrainedZoomFactor * 3.5)
+				if (obj.magnitude > magThreshold) {
+					showLabel = false
+				}
+			}
 		}
 
-		if (showLabel || obj == selectedObject || pinnedObjects.contains(obj)) {
+		// Always show label for selected or pinned objects
+		if (obj == selectedObject || pinnedObjects.contains(obj)) {
+			showLabel = true
+		}
+
+		if (showLabel) {
 			val text = obj.name
 			val labelTextSize = 25f
 			textPaint.textSize = labelTextSize

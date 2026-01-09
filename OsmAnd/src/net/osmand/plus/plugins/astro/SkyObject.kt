@@ -32,7 +32,8 @@ data class SkyObject(
 	var targetAltitude: Double = 0.0
 ) {
 	enum class Type {
-		STAR, GALAXY, BLACK_HOLE, PLANET, SUN, MOON;
+		STAR, GALAXY, BLACK_HOLE, PLANET, SUN, MOON,
+		NEBULA, OPEN_CLUSTER, GLOBULAR_CLUSTER, GALAXY_CLUSTER, CONSTELLATION;
 
 		fun isSunSystem(): Boolean {
 			return this == SUN || this == MOON || this == PLANET

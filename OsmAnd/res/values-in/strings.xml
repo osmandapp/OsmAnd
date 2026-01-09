@@ -4195,11 +4195,7 @@
     <string name="world_map_download_descr">Peta dasar dunia (menutupi semua dunia pada tingkat perbesaran yang rendah) tidak ada atau usang. Mohon pertimbangkan untuk diperbarui untuk ikhtisar global.</string>
     <string name="rendering_value_translucent_pink_name">Merah muda translucent</string>
     <string name="rendering_value_darkyellow_name">Kuning gelap</string>
-    <string name="srtm_plugin_description">Informasi medan, seperti garis kontur, bukitshade, lereng, membantu Anda untuk secara visual menilai peletakan tanah, bantuan, navigabilitas, dan banyak lagi. Informasi topografi dapat di peta diwakili oleh garis kontur, pencukur bantuan dan / atau pewarnaan steepness.
-\n
-\nData yang mendasari berasal dari SRTM dan ASTER.
-\n
-\nBaca lebih lanjut di %1$s.</string>
+    <string name="srtm_plugin_description">Informasi medan, seperti garis kontur, bukitshade, lereng, membantu Anda untuk secara visual menilai peletakan tanah, bantuan, navigabilitas, dan banyak lagi. Informasi topografi dapat di peta diwakili oleh garis kontur, pencukur bantuan dan / atau pewarnaan steepness. \n \nData yang mendasari berasal dari SRTM dan ASTER. \n \nBaca lebih lanjut di %1$s.</string>
     <string name="download_wikipedia_files">Unduh data Wikipedia tambahan (%1$s MB)\?</string>
     <string name="storage_directory_internal_app">Memori aplikasi internal</string>
     <string name="confirm_usage_speed_cameras">Dalam banyak negara (Jerman, Prancis, Italia, dan lainnya) penggunaan peringatan kamera kecepatan ilegal. OsmAnd tidak mengasumsikan tanggung jawab apa pun jika Anda melanggar hukum. Mohon hanya ketuk \'Iya\' jika Anda memenuhi syarat untuk menggunakan fitur ini.</string>

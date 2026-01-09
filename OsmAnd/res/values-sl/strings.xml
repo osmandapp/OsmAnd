@@ -872,11 +872,7 @@
     <string name="map_widget_max_speed">Omejitve hitrosti</string>
     <string name="rendering_attr_noAdminboundaries_name">Ne izriši upravnih mej</string>
     <string name="rendering_attr_noAdminboundaries_description">Izbira onemogoči izris upravnih mej (na ravneh približanja od 5 do 9).</string>
-    <string name="srtm_plugin_description">Informacije o terenu, kot so izohipse, senčenje terena in naklon, ti pomagajo vizualno oceniti lego terena in relief, navigacijo in drugo. Topografske informacije na zemljevidu so lahko predstavljene s senčenjem naklonov, izohipsami in/ali barvanjem strmine.
-\n
-\nOsnovni podatki izvirajo iz SRTM in ASTER.
-\n
-\nNadaljnje branje na %1$s.</string>
+    <string name="srtm_plugin_description">Informacije o terenu, kot so izohipse, senčenje terena in naklon, ti pomagajo vizualno oceniti lego terena in relief, navigacijo in drugo. Topografske informacije na zemljevidu so lahko predstavljene s senčenjem naklonov, izohipsami in/ali barvanjem strmine. \n \nOsnovni podatki izvirajo iz SRTM in ASTER. \n \nNadaljnje branje na %1$s.</string>
     <string name="srtm_plugin_name">Topografija</string>
     <string name="download_select_map_types">Drugi zemljevidi</string>
     <string name="recording_context_menu_play">Predvajaj</string>

@@ -13,13 +13,13 @@
 		android:layout_marginStart="@dimen/content_padding" />
 
 	<LinearLayout
-
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="horizontal"
 		android:paddingHorizontal="@dimen/content_padding">
 
 		<TextView
+			android:id="@+id/title"
 			style="@style/TitleStyle"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"

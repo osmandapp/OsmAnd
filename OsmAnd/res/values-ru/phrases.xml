@@ -4666,4 +4666,5 @@
     <string name="poi_socket_type3c_current">Разъём: Type 3c: текущий</string>
     <string name="poi_socket_type3a_output_high">Высоко</string>
     <string name="poi_hazard_side_winds">Боковой ветер</string>
+    <string name="x">X (ранее Twitter)</string>
 </resources>

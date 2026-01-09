@@ -59,12 +59,12 @@ public class SearchResult {
 	public String addressName;
 	public String cityName;
 	public Collection<String> otherNames;
-	
 
 	public String localeRelatedObjectName;
 	public Object relatedObject;
 	public double distRelatedObjectName;
 
+	private boolean impreciseCoordinates;
 	private double unknownPhraseMatchWeight = 0;
 	private CheckWordsMatchCount completeMatchRes = null;
 
@@ -83,6 +83,14 @@ public class SearchResult {
 
 	public SearchResult(SearchPhrase sp) {
 		this.requiredSearchPhrase = sp;
+	}
+
+	public boolean hasImpreciseCoordinates() {
+		return impreciseCoordinates;
+	}
+
+	public void setImpreciseCoordinates(boolean imprecise) {
+		this.impreciseCoordinates = imprecise;
 	}
 
 	// maximum corresponds to the top entry

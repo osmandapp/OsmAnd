@@ -128,7 +128,7 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 			banner = null;
 			view.findViewById(R.id.freeVersionBanner).setVisibility(View.GONE);
 		}
-		listView = view.findViewById(android.R.id.list);
+		listView = view.findViewById(R.id.category_list);
 		addSubscribeEmailRow();
 		addSearchRow();
 		addRestorePurchasesRow();

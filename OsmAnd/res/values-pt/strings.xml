@@ -918,11 +918,7 @@
     <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
     <string name="recording_photo_description">Fotografia %1$s de %2$s</string>
     <string name="av_def_action_picture">Tirar uma fotografia</string>
-    <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras de relevo, declives, ajudam a avaliar visualmente a configuração do terreno, o relevo, a navegabilidade e muito mais. As informações topográficas podem ser representadas no mapa por linhas de contorno, assombreamento de declives, e/ou coloração da declividade.
-\n
-\nOs dados subjacentes têm origem em SRTM e ASTER.
-\n
-\nVeja mais informações em %1$s.</string>
+    <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras de relevo, declives, ajudam a avaliar visualmente a configuração do terreno, o relevo, a navegabilidade e muito mais. As informações topográficas podem ser representadas no mapa por linhas de contorno, assombreamento de declives, e/ou coloração da declividade. \n \nOs dados subjacentes têm origem em SRTM e ASTER. \n \nVeja mais informações em %1$s.</string>
     <string name="srtm_plugin_name">Topografia</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_srtm_maps">Curvas de nível</string>

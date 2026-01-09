@@ -794,11 +794,7 @@
     <string name="av_settings">Inställningar för ljud och video </string>
     <string name="recording_error">Inspelning misslyckades</string>
     <string name="recording_camera_not_available">Ingen kamera tillgänglig</string>
-    <string name="srtm_plugin_description">Terränginformation som höjdkurvor, terrängskuggning och lutningsgrad hjälper dig visualisera hur landskapet och terrängen ser ut i verkligheten, vilket är en stor hjälp för navigering och kan uppskattas av idrottare, vandrare, terrängcyklister och alla som är intresserade av höjdskillnader i landskapet. Den topografiska informationen kan på kartan representeras av höjdkurvor, terrängskuggning och/eller färgläggning av lutningsgrad.
-\n
-\nUnderliggande data baseras på SRTM och ASTER.
-\n
-\nLäs mer på %1$s.</string>
+    <string name="srtm_plugin_description">Terränginformation som höjdkurvor, terrängskuggning och lutningsgrad hjälper dig visualisera hur landskapet och terrängen ser ut i verkligheten, vilket är en stor hjälp för navigering och kan uppskattas av idrottare, vandrare, terrängcyklister och alla som är intresserade av höjdskillnader i landskapet. Den topografiska informationen kan på kartan representeras av höjdkurvor, terrängskuggning och/eller färgläggning av lutningsgrad. \n \nUnderliggande data baseras på SRTM och ASTER. \n \nLäs mer på %1$s.</string>
     <string name="delete_target_point">Ta bort destination</string>
     <string name="intermediate_point">Mellanliggande destination %1$s</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>

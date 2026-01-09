@@ -197,11 +197,7 @@
     <string name="rendering_attr_streetLighting_name">Iluminação pública</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="track_points">Pontos da trilha</string>
-    <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras e declives, ajudam você a visualizar a forma e a suavidade do terreno, a dirigibilidade e mais. As informações topográficas em um mapa podem ser representadas pelo sombreamento do declive, linhas de contorno e/ou cor da inclinação do plano. 
-\n
-\nOs dados subjacentes são originários do SRTM e ASTER.
-\n
-\nLeia mais em %1$s.</string>
+    <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras e declives, ajudam você a visualizar a forma e a suavidade do terreno, a dirigibilidade e mais. As informações topográficas em um mapa podem ser representadas pelo sombreamento do declive, linhas de contorno e/ou cor da inclinação do plano. \n \nOs dados subjacentes são originários do SRTM e ASTER. \n \nLeia mais em %1$s.</string>
     <string name="osmand_parking_plugin_description">Marque onde seu carro está estacionado e notifique seu calendário quando o parquímetro expirar. Para colocar o marcador, escolha um lugar no mapa, vá em \"Ações\" e toque em \"Adicionar estacionamento\".</string>
     <string name="osm_editing_plugin_description">Faça contribuições para o OpenStreetMap, uma comunidade global que mantém um mapa abrangente do mundo e fornece dados atualizados de código aberto para todos os usuários.
 \n
@@ -4792,7 +4788,7 @@
     <string name="map_rendering_engine">Mecanismo de renderização de mapas</string>
     <string name="show_map_symbols">Mostrar símbolos do mapa</string>
     <string name="show_map_symbols_desc">Texto, placas de trânsito e outros.</string>
-    <string name="map_rendering_engine_descr">A renderização da versão 1 era o padrão antes do OsmAnd 4.3 e ainda é preferível para dispositivos mais antigos.\nA versão 2 (OpenGL) é um mecanismo de renderização de mapas mais rápido, também com visualização 2.5D.</string>
+    <string name="map_rendering_engine_descr">A versão 1 era a padrão antes do OsmAnd 4.3 e é adequada para dispositivos mais antigos.\n\nA versão 2 (OpenGL) é mais avançada e adiciona recursos como a visualização em 3D.</string>
     <string name="show_borders_of_downloaded_maps">Mostrar bordas de mapas baixados</string>
     <string name="speak_route_recalculation">Anunciar o recálculo da rota</string>
     <string name="speak_gps_signal_status">Anunciar a perda ou recuperação do sinal GPS</string>
@@ -6286,4 +6282,5 @@
     <string name="delete_folder_description">Excluir a pasta “%1$s”?</string>
     <string name="show_spherical_map">Visão global</string>
     <string name="buildings_3d_detail_level">Detalhamento de edifícios em 3D</string>
+    <string name="deleted_maps_warning">Você está prestes a excluir %d item(ns)\nDeseja continuar?</string>
 </resources>

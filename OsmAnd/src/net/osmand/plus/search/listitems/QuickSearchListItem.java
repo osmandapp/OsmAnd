@@ -254,7 +254,13 @@ public class QuickSearchListItem {
 					String locationCountry = app.getRegions().getCountryName(latLon);
 					searchResult.localeRelatedObjectName = locationCountry == null ? "" : locationCountry;
 				}
-				return searchResult.localeRelatedObjectName;
+				if (searchResult.hasImpreciseCoordinates()) {
+					String imprecise = app.getString(R.string.imprecise_coordinates);
+					return app.getString(R.string.ltr_or_rtl_combine_via_bold_point,
+							searchResult.localeRelatedObjectName, imprecise);
+				} else {
+					return searchResult.localeRelatedObjectName;
+				}
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
 				return fav.getCategory().length() == 0 ?

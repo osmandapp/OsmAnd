@@ -909,7 +909,7 @@
     <string name="layer_recordings">記錄層</string>
     <string name="intermediate_items_sort_return">已將中途停靠點依最佳路徑順序重新排列。</string>
     <string name="audionotes_location_not_defined">輕觸「使用位置……」以添加註記到地點。</string>
-    <string name="srtm_plugin_description">地形資訊，如等高線、山體陰影、坡度，可以幫助您直觀地評估地形、地貌、可通行性等。地形資訊可以在地圖上以等高線、地形陰影和/或坡度著色的方式呈現。\n \n基礎資料來自 SRTM 與 ASTER。 \n \n更多詳情請見 %1$s 。</string>
+    <string name="srtm_plugin_description">提供地形與詳細地形圖，透過等高線、山丘陰影或坡度著色與 3D 檢視，協助視覺化理解地貌起伏與通行性。\n\n欲啟用區域內此類功能，需額外下載由 SRTM 與 ASTER 資料編譯的等高線及/或地形 (3D) 地圖。\n \n更多詳情請見 %1$s 。</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="av_camera_focus">相機對焦類型</string>
     <string name="av_camera_focus_descr">相機對焦模式：</string>
@@ -4400,7 +4400,7 @@
     <string name="dismiss_changes_descr">所有變更都將被取消。</string>
     <string name="map_rendering_engine_v1">第一版</string>
     <string name="map_rendering_engine_v2">第二版 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">第一版是 OsmAnd 4.3 以前的預設值，對於舊裝置來說可能更好用。\n第二版 (OpenGL) 是較為強大的地圖顯示引擎，並支援 2.5D 視圖。</string>
+    <string name="map_rendering_engine_descr">第 1 版是 OsmAnd 4.3 之前的預設值，適用於較舊的裝置。\n\n第 2 版 (OpenGL) 更為先進，新增了 3D 檢視等功能。</string>
     <string name="map_rendering_engine">地圖繪製引擎</string>
     <string name="weather_online_cache">線上預報</string>
     <string name="empty_screen_weather_wind_layer">開啟以在地圖上檢視風圖層。</string>
@@ -5737,4 +5737,6 @@
     <string name="lang_mi">毛利語</string>
     <string name="has_vehicle_metrics">使用 OBDII 資料</string>
     <string name="buildings_3d_detail_level">3D 建築物細節化處理</string>
+    <string name="show_expand_button">顯示展開按鈕</string>
+    <string name="imprecise_coordinates">不精確的座標</string>
 </resources>

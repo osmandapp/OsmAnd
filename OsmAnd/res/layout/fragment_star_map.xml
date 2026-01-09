@@ -108,19 +108,68 @@
 				android:layout_marginTop="140dp"
 				android:visibility="gone"/>
 
-			<!-- Compass Button (Top Left) -->
-			<FrameLayout
+			<!-- Compass and Magnitude Filter (Top Left) -->
+			<LinearLayout
 				android:layout_width="wrap_content"
-				android:layout_height="wrap_content">
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:gravity="center_horizontal">
 
 				<include
 					layout="@layout/star_map_compass_button"
 					android:layout_width="@dimen/map_small_button_size"
 					android:layout_height="@dimen/map_small_button_size"
 					android:layout_marginStart="@dimen/map_button_margin"
-					android:layout_marginTop="@dimen/map_small_button_margin" />
+					android:layout_marginTop="@dimen/map_small_button_margin"
+					android:layout_marginEnd="@dimen/map_button_margin" />
 
-			</FrameLayout>
+				<!-- Magnitude Number -->
+				<TextView
+					android:id="@+id/magnitude_value_text"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="8dp"
+					android:textColor="@color/osmand_orange"
+					android:textStyle="bold"
+					android:text="10.0"
+					android:textSize="14sp"
+					android:elevation="4dp"
+					android:visibility="gone" />
+
+				<!-- Magnitude Slider Container -->
+				<FrameLayout
+					android:id="@+id/magnitude_slider_container"
+					android:layout_width="40dp"
+					android:layout_height="150dp"
+					android:layout_marginTop="8dp"
+					android:visibility="gone">
+
+					<SeekBar
+						android:id="@+id/magnitude_slider"
+						android:layout_width="150dp"
+						android:layout_height="40dp"
+						android:layout_gravity="center"
+						android:rotation="270"
+						android:progress="100"
+						android:max="110" />
+				</FrameLayout>
+
+				<!-- Reset Magnitude Button -->
+				<ImageButton
+					android:id="@+id/reset_magnitude_button"
+					android:layout_width="@dimen/map_small_button_size"
+					android:layout_height="@dimen/map_small_button_size"
+					android:layout_marginTop="8dp"
+					android:background="@drawable/btn_circle"
+					android:contentDescription="Reset Magnitude"
+					android:padding="12dp"
+					android:scaleType="fitCenter"
+					android:elevation="4dp"
+					android:visibility="gone"
+					app:srcCompat="@drawable/ic_action_reset_to_default_dark"
+					app:tint="#5f6e7c" />
+
+			</LinearLayout>
 
 			<!-- Right Side Controls (AR, Camera, Slider, FOV) -->
 			<LinearLayout
@@ -265,108 +314,6 @@
 			<include layout="@layout/star_charts_content" />
 
 		</LinearLayout>
-
-	</LinearLayout>
-
-	<LinearLayout
-		android:id="@+id/bottom_sheet"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom"
-		android:orientation="vertical"
-		android:padding="16dp"
-		android:background="?attr/card_and_list_background_basic"
-		android:visibility="gone">
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-			android:gravity="center_vertical">
-
-			<TextView
-				android:id="@+id/sheet_title"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:textSize="22sp"
-				android:textStyle="bold"
-				android:textColor="?android:textColorPrimary" />
-
-			<CheckBox
-				android:id="@+id/sheet_pin_button"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Pin"
-				android:layout_marginStart="8dp" />
-		</LinearLayout>
-
-		<TextView
-			android:id="@+id/sheet_coords"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="4dp"
-			android:textSize="14sp"
-			android:textColor="?android:textColorSecondary" />
-
-		<View
-			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:layout_marginTop="12dp"
-			android:layout_marginBottom="12dp"
-			android:background="?android:listDivider" />
-
-		<GridLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:columnCount="2"
-			android:rowCount="2">
-
-			<TextView
-				android:id="@+id/sheet_magnitude"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_columnWeight="1"
-				android:layout_marginBottom="8dp"
-				android:drawablePadding="8dp"
-				android:gravity="center_vertical"
-				android:text="Mag: 2.89"
-				app:drawableStartCompat="@drawable/ic_action_favorite"
-				app:drawableTint="@color/osmand_orange" />
-			<TextView
-				android:id="@+id/sheet_distance"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_columnWeight="1"
-				android:layout_marginBottom="8dp"
-				android:drawablePadding="8dp"
-				android:gravity="center_vertical"
-				android:text="4.2 AU" />
-
-			<TextView
-				android:id="@+id/sheet_rise_time"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_columnWeight="1"
-				android:textColor="?android:textColorSecondary"
-				android:text="Rise: 22:40" />
-
-			<TextView
-				android:id="@+id/sheet_set_time"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_columnWeight="1"
-				android:textColor="?android:textColorSecondary"
-				android:text="Set: 06:00" />
-		</GridLayout>
-
-		<Button
-			android:id="@+id/sheet_wiki_button"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="16dp"
-			android:text="View on Wikidata"
-			style="@style/Widget.AppCompat.Button.Colored" />
 
 	</LinearLayout>
 

@@ -471,8 +471,8 @@ public class RoutingConfiguration {
 
 	private static boolean checkTag(String pname) {
 		return "select".equals(pname) || "if".equals(pname) || "ifnot".equals(pname)
-				|| "gt".equals(pname) || "le".equals(pname) || "eq".equals(pname)
-				|| "min".equals(pname) || "max".equals(pname);
+				|| "gt".equals(pname) || "ge".equals(pname) || "lt".equals(pname) || "le".equals(pname)
+				|| "eq".equals(pname) || "min".equals(pname) || "max".equals(pname);
 	}
 
 	private static void addSubclause(RoutingRule rr, RouteAttributeContext ctx) {
@@ -497,8 +497,14 @@ public class RoutingConfiguration {
 			case "gt":
 				ctx.getLastRule().registerGreatCondition(rr.value1, rr.value2, rr.type);
 				break;
-			case "le":
+			case "ge":
+				ctx.getLastRule().registerGreatOrEqualCondition(rr.value1, rr.value2, rr.type);
+				break;
+			case "lt":
 				ctx.getLastRule().registerLessCondition(rr.value1, rr.value2, rr.type);
+				break;
+			case "le":
+				ctx.getLastRule().registerLessOrEqualCondition(rr.value1, rr.value2, rr.type);
 				break;
 			case "eq":
 				ctx.getLastRule().registerEqualCondition(rr.value1, rr.value2, rr.type);

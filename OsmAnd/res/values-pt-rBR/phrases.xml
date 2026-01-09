@@ -5160,4 +5160,5 @@
     <string name="poi_sample_collection_yes">Sim</string>
     <string name="poi_sample_collection_covid19">COVID19</string>
     <string name="poi_sample_collection_blood">Sangue</string>
+    <string name="poi_hazard_queues_likely">Filas prováveis</string>
 </resources>

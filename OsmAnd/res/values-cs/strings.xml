@@ -852,11 +852,7 @@
     <string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic (administrativní úrovně 5-9).</string>
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
-    <string name="srtm_plugin_description">Informace o terénu, jako jsou obrysové čáry, stínování svahů a strmost, vám pomohou vizuálně zhodnotit reliéf terénu, schůdnost a další. Topografické informace mohou být na mapě znázorněny vrstevnicemi, stínováním svahů a/nebo zbarvením strmosti.
-\n
-\nPodkladová data pocházejí ze systémů SRTM a ASTER.
-\n
-\nDalší informace naleznete na adrese %1$s.</string>
+    <string name="srtm_plugin_description">Informace o terénu, jako jsou obrysové čáry, stínování svahů a strmost, vám pomohou vizuálně zhodnotit reliéf terénu, schůdnost a další. Topografické informace mohou být na mapě znázorněny vrstevnicemi, stínováním svahů a/nebo zbarvením strmosti. \n \nPodkladová data pocházejí ze systémů SRTM a ASTER. \n \nDalší informace naleznete na adrese %1$s.</string>
     <string name="srtm_plugin_name">Topografie</string>
     <string name="download_srtm_maps">Vrstevnice</string>
     <string name="audionotes_location_not_defined">Klepněte na \'Použít polohu...\' pro přidání poznámky k poloze.</string>
@@ -5930,4 +5926,6 @@
     <string name="lang_mi">Māori</string>
     <string name="buildings_3d_detail_level">Detaily 3D staveb</string>
     <string name="has_vehicle_metrics">S daty OBDII</string>
+    <string name="imprecise_coordinates">Nepřesné souřadnice</string>
+    <string name="show_expand_button">Zobrazit tlačítko rozbalení</string>
 </resources>

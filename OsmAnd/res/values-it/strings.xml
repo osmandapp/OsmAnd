@@ -824,11 +824,7 @@
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isoipse</string>
     <string name="srtm_plugin_name">Topografia</string>
-    <string name="srtm_plugin_description">Informazioni sul terreno come curve di livello, ombreggiature e pendii ti aiutano a valutare visivamente la conformazione del terreno e il rilievo, la navigabilità e altro ancora. Le informazioni topografiche possono essere rappresentate mediante ombreggiatura della pendenza, curve di livello e/o colorazione della pendenza.
-\n
-\nI dati di base sono forniti da SRTM e ASTER.
-\n
-\nUlteriori approfondimenti su %1$s.</string>
+    <string name="srtm_plugin_description">Informazioni sul terreno come curve di livello, ombreggiature e pendii ti aiutano a valutare visivamente la conformazione del terreno e il rilievo, la navigabilità e altro ancora. Le informazioni topografiche possono essere rappresentate mediante ombreggiatura della pendenza, curve di livello e/o colorazione della pendenza. \n \nI dati di base sono forniti da SRTM e ASTER. \n \nUlteriori approfondimenti su %1$s.</string>
     <string name="audionotes_plugin_description">Crea note audio/foto/video durante un viaggio, utilizzando un pulsante della mappa o il menu contestuale della posizione.</string>
     <string name="audionotes_plugin_name">Note audio/video</string>
     <string name="audionotes_location_not_defined">Tocca \'Utilizza posizione...\' per aggiungere una posizione alla nota.</string>
@@ -2835,7 +2831,7 @@
     <string name="collected_data">Dati raccolti</string>
     <string name="press_again_to_change_the_map_orientation">Tocca di nuovo per modificare l\'orientamento della mappa</string>
     <string name="shared_string_min_speed">Velocità min</string>
-    <string name="shared_string_max_speed">Velocità max</string>
+    <string name="shared_string_max_speed">Velocità max.</string>
     <string name="default_speed_setting_title">Velocità predefinita</string>
     <string name="default_speed_setting_descr">Cambia le impostazioni della velocità predefinita</string>
     <string name="minmax_speed_dialog_title">Imposta velocità min/max</string>
@@ -2854,8 +2850,8 @@
     <string name="edit_profile_setup_map_subtitle">Scegli le opzioni della mappa per il profilo</string>
     <string name="edit_profile_screen_options_subtitle">Scegli le impostazioni dello schermo per il profilo</string>
     <string name="edit_profile_nav_settings_subtitle">Scegli le impostazioni di navigazione per il profilo</string>
-    <string name="routing_attr_max_num_changes_description">Specifica il massimo numero di cambiamenti</string>
-    <string name="routing_attr_max_num_changes_name">Numero di cambiamenti</string>
+    <string name="routing_attr_max_num_changes_description">Specifica il limite massimo di cambi</string>
+    <string name="routing_attr_max_num_changes_name">Numero massimo di cambi</string>
     <string name="settings_privacy_and_security_desc">Seleziona quali dati condividere</string>
     <string name="osmand_routing_promo">Aggiungi la tua versione personalizzate del file routing.xml in ..osmand/routing</string>
     <string name="app_mode_skiing">Sci</string>
@@ -3668,7 +3664,7 @@
     <string name="announcement_time_arrive">Arrivo a destinazione</string>
     <string name="shared_string_turn">Svolta</string>
     <string name="start_recording">Inizia registrazione</string>
-    <string name="show_track_on_map">Mostra il percorso sulla mappa</string>
+    <string name="show_track_on_map">Visualizza traccia sulla mappa</string>
     <string name="routing_engine_vehicle_type_wheelchair">Sedia a rotelle</string>
     <string name="routing_engine_vehicle_type_hiking">Escursionismo</string>
     <string name="routing_engine_vehicle_type_walking">A piedi</string>
@@ -4021,7 +4017,7 @@
     <string name="cancel_anytime_in_gplay">Puoi cancellarlo in qualsiasi momento da Google Play.</string>
     <string name="shared_string_not_included">Non include</string>
     <string name="amz_manage_subscription_descr">Gestisci la tua sottoscrizione usando l\'app Amazon o dal sito Amazon.com.</string>
-    <string name="no_activity_for_intent">Installa una applicazione che possa completare l\'azione.</string>
+    <string name="no_activity_for_intent">Installa un\'app in grado di eseguire questa azione.</string>
     <string name="grey_color_undefined">Le parti senza dati sono in grigio.</string>
     <string name="osm_live_payment_subscription_management_amz">Il pagamento viene addebitato sul tuo account Amazon alla conferma dell\'acquisto.
 \n
@@ -4189,7 +4185,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichette Note</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra etichette Note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icone a zoom bassi</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Una visualizzazione schematica delle icone a bassi livelli di ingrandimento per questi POI che non sono usualmente mostrati</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualizzazione schematica delle icone a bassi livelli di zoom per quei POI che di solito non vengono visualizzati</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Aumenta la visibilità dei tunnel dei corsi d\'acqua</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilità dei tunnel dei corsi d\'acqua</string>
     <string name="rendering_value_omit_name">Ometti</string>
@@ -4562,7 +4558,7 @@
     <string name="action_not_supported_with_map_style">Questa azione non è supportata dallo stile della mappa attuale.</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="map_rendering_engine">Motore di rendering della mappa</string>
-    <string name="map_rendering_engine_descr">Il rendering Versione 1 era il predefinito prima di OsmAnd 4.3 ed è ancora preferibile per i dispositivi più datati.\nVersione 2 (OpenGL) è un motore di disegno della mappa più veloce, fornisce anche la vista 2.5D.</string>
+    <string name="map_rendering_engine_descr">La versione 1 era la predefinita prima di OsmAnd 4.3 e si adatta ai dispositivi più vecchi.\n\nLa versione 2 (OpenGL) è più avanzata e aggiunge funzionalità come la vista 3D.</string>
     <string name="show_map_symbols">Mostra i simboli della mappa</string>
     <string name="show_map_symbols_desc">Testo, segnali stradali e altro.</string>
     <string name="depth_contours">Isobate</string>
@@ -4647,7 +4643,7 @@
     <string name="mtb_segment_classification">Classificazione segmento</string>
     <string name="mtb_scale">Scala di difficoltà per MTB</string>
     <string name="shared_string_open">Apri</string>
-    <string name="open_weather_action_description">Consente di aprire una schermata con informazioni meteorologiche dettagliate.</string>
+    <string name="open_weather_action_description">Consente di aprire una schermata con informazioni meteo dettagliate.</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolinee delle nuvole</string>
     <string name="open_weather_action">Apri meteo</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolinee delle precipitazioni</string>
@@ -5113,11 +5109,11 @@
     <string name="root_folder">Cartella principale</string>
     <string name="key_event_action_previous_app_profile">Profilo dell\'applicazione precedente</string>
     <string name="shared_string_rows">Righe</string>
-    <string name="key_event_action_move_left">Vai a sinistra</string>
+    <string name="key_event_action_move_left">Sposta a sinistra</string>
     <string name="all_folders">Tutte le cartelle</string>
     <string name="press_button_to_link_with_action">Premi il pulsante sul tuo dispositivo per associarlo all\'azione: %1$s</string>
     <string name="deletion_error">Errore di cancellazione</string>
-    <string name="key_event_action_move_right">Vai a destra</string>
+    <string name="key_event_action_move_right">Sposta a destra</string>
     <string name="shared_string_show_less">Mostra meno</string>
     <string name="shared_string_button">Pulsante</string>
     <string name="key_event_action_next_app_profile">Profilo dell\'applicazione successivo</string>
@@ -5127,16 +5123,16 @@
     <string name="remove_type_q">Rimuovere il tipo \"%1$s\"?</string>
     <string name="shared_string_action">Azione</string>
     <string name="add_new_type">Aggiungi nuovo tipo</string>
-    <string name="key_event_action_move_up">Vai su</string>
-    <string name="key_event_action_zoom_out">Riduci</string>
+    <string name="key_event_action_move_up">Sposta in alto</string>
+    <string name="key_event_action_zoom_out">Riduci lo zoom</string>
     <string name="key_event_action_toggle_drower">Mostra/nascondi il menu laterale</string>
     <string name="key_is_already_assigned_error">Il tasto \"%1$s\" è già assegnato all\'azione: \"%2$s\"</string>
     <string name="external_input_device_title">Dispositivo di input esterno</string>
     <string name="key_bindings">Associazioni dei tasti</string>
-    <string name="key_event_action_move_to_my_location">Vai alla mia posizione</string>
+    <string name="key_event_action_move_to_my_location">Sposta sulla mia posizione</string>
     <string name="not_specified">Non specificato</string>
     <string name="key_event_category_map_interactions">Interazioni sulla mappa</string>
-    <string name="key_event_action_move_down">Vai giù</string>
+    <string name="key_event_action_move_down">Sposta in basso</string>
     <string name="key_event_category_actions">Azioni</string>
     <string name="change_button">Cambia il pulsante</string>
     <string name="show_toast_about_key_pressed">Mostra la notifica del tasto premuto</string>
@@ -5433,12 +5429,12 @@
     <string name="rendering_attr_alpineHiking_name">Grado di difficoltà dei sentieri escursionistici</string>
     <string name="graph_axis">Asse del grafico</string>
     <string name="y_axis_description">Selezionare fino a due opzioni per l\'asse Y.</string>
-    <string name="quick_action_search_view_title">Vista ricerca</string>
-    <string name="quick_action_search_view_desc">Un pulsante per aprire o chiudere la vista ricerca.</string>
+    <string name="quick_action_search_view_title">Menù ricerca</string>
+    <string name="quick_action_search_view_desc">Un pulsante per aprire o chiudere il menù ricerca.</string>
     <string name="quick_action_navigation_view_desc">Un pulsante per aprire o chiudere la vista navigazione.</string>
     <string name="quick_action_navigation_view_title">Vista navigazione</string>
     <string name="quick_action_switch_compass_desc">Un pulsante per cambiare l\'orientamento della mappa.</string>
-    <string name="quick_action_drawer_title">Menu laterale</string>
+    <string name="quick_action_drawer_title">Menù laterale</string>
     <string name="shared_string_interface">Interfaccia</string>
     <string name="quick_action_previous_screen_desc">Un pulsante per tornare alla schermata precedente.</string>
     <string name="quick_action_previous_screen_title">Schermata precedente</string>
@@ -5514,7 +5510,7 @@
     <string name="us_gallons">Galloni USA</string>
     <string name="obd_how_to_connect">Come connettersi:</string>
     <string name="connect_obd_instructions_step">1. Connettere lo scanner alla porta OBD-II del veicolo.\n\n2. Avviare il motore del veicolo\n\n3. Abilitare il Bluetooth sul dispositivo\n\n4. Premere \'%1$s\' e selezionare lo scanner dalla lista.</string>
-    <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
+    <string name="wunderlinq_datagrid">Griglia di dati WunderLINQ</string>
     <string name="record_obd_data">Inserisci metriche del veicolo</string>
     <string name="dynamic_icon_type_summary">L\'icona varia in base alle azioni di stato.</string>
     <string name="obd_connected_to_device">Connesso a %s</string>
@@ -5704,11 +5700,11 @@
     <string name="show_dms_grids">Usa DMS invece di gradi</string>
     <string name="show_dms_grids_description">Mostra la griglia in gradi, minuti, secondi invece che gradi</string>
     <string name="show_dm_grids">Usa DM invece di gradi o DMS</string>
-    <string name="original_color_description">Ogni punto mantiene il proprio colore.</string>
-    <string name="original_shape_description">Ogni punto mantiene la propria forma.</string>
-    <string name="original_icon_description">Ogni punto mantiene la propria icona.</string>
+    <string name="original_color_description">Ogni punto mantiene il suo colore individuale.</string>
+    <string name="original_shape_description">Ogni punto mantiene la sua forma individuale.</string>
+    <string name="original_icon_description">Ogni punto mantiene la sua icona individuale.</string>
     <string name="show_dm_grids_description">Mostra la griglia in gradi e minuti invece che in gradi o DMS</string>
-    <string name="save_favorite_default_appearance">Applicare modifiche ai punti esistenti nella cartella o solo a quelli nuovi?</string>
+    <string name="save_favorite_default_appearance">Applicare le modifiche a tutti i punti esistenti nella cartella, o solo a quelli aggiunti di recente?</string>
     <string name="popular_places">Luoghi popolari</string>
     <string name="show_list">Mostra lista</string>
     <string name="point_location">Posizione del punto</string>
@@ -5717,7 +5713,7 @@
     <string name="shared_string_map_center">Centro della mappa</string>
     <string name="shared_string_manual">Manuale</string>
     <string name="show_image_previews">Mostra l\'immagine precedente</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Attiva la griglia delle coordinate sulla mappa.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Attiva la visibilità della griglia di coordinate sulla mappa.</string>
     <string name="layer_coordinates_grid">Griglia delle coordinate</string>
     <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETA, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta griglia di coordinate con coordinate geografiche\n\n• Aggiunta possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETA e distanza dal waypoint successivo; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più importanti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunto: falesie e aree di arrampicata sulla mappa\n\n• Migliorata la ricerca degli indirizzi negli Stati Uniti\n\n• Aggiunto TTS ebraico per la navigazione</string>
     <string name="equator">Equatore</string>
@@ -5836,8 +5832,8 @@
     <string name="obd_alt_battery_voltage">Tensione adattatore</string>
     <string name="liter_single">Litro</string>
     <string name="imperial_gallon">Gallone imperiale</string>
-    <string name="us_gallon">Gallone US</string>
-    <string name="kilometers">Kilometri</string>
+    <string name="us_gallon">Gallone americano</string>
+    <string name="kilometers">Chilometri</string>
     <string name="miles">Miglia</string>
     <string name="mpg">MPG</string>
     <string name="amount_of_total_used">Usati %1$s di %2$s</string>
@@ -5845,9 +5841,9 @@
     <string name="manage_storage_delete_data_dialog_summary">Sei sicuro di voler cancellare %1$s da OsmAnd Cloud?\n\nPuoi recuperarli dal Cestino entro 30 giorni.</string>
     <string name="manage_storage">Gestisci spazio</string>
     <string name="copy_as_new_folder">Copia come nuova cartella</string>
-    <string name="add_to_a_folder">Aggiungi a una cartella</string>
+    <string name="add_to_a_folder">Aggiungi ad una cartella</string>
     <string name="add_to_favorites">Aggiungi ai preferiti</string>
-    <string name="max_weight_at_full_load_description">Fornisci il peso massimo a pieno carico del tuo veicolo per evitare strade e ponti con limiti di peso.</string>
+    <string name="max_weight_at_full_load_description">Fornisci la massa a pieno carico del tuo veicolo per evitare strade e ponti con limiti di peso.</string>
     <string name="shared_string_osm_link">Link OSM</string>
     <string name="rendering_attr_hideAreas_name">Aree di profondità</string>
     <string name="rendering_attr_hideAreas_description">Nascondi aree di profondità</string>
@@ -5874,17 +5870,17 @@
     <string name="backup_delete_data_warning_extended">Questa azione rimuoverà definitivamente tutti i dati selezionati dal cloud. Non sarà possibile ripristinarli più tardi.</string>
     <string name="private_access_routing_req_short">Permetti di usare una strada privata per raggiungere la tua destinazione?</string>
     <string name="deleted_maps_warning">Stai per cancellare %d oggetto/i\nProseguire?</string>
-    <string name="deleted_maps_prompt">Queste mappe non sono più supportate e sono state sostituite da regioni più piccole. Si consiglia di rimuoverle e scaricare le nuove regioni.</string>
+    <string name="deleted_maps_prompt">Queste mappe non sono più supportate e sono state sostituite da regioni più piccole. Si prega di rimuoverle e scaricare le nuove regioni.</string>
     <string name="unsupported_maps">Mappe non supportate</string>
     <string name="trip_recording_downhill_widget_desc">Visualizza la somma di tutte le discese o solo dell\'ultima del percorso registrato corrente.</string>
     <string name="trip_recording_uphill_widget_desc">Visualizza la somma di tutte le salite o solo dell\'ultima del percorso registrato corrente.</string>
     <string name="trip_recording_distance_widget_desc">Visualizza la distanza totale del percorso registrato corrente, con la possibilità di vedere la lunghezza dell\'ultima salita e discesa.</string>
-    <string name="trip_recording_max_speed_widget_description">Mostra la velocità massima del percorso registrato corrente. Tocca per alternare tra quella assoluta e quella dell\'ultima saluta o discesa.</string>
-    <string name="trip_recording_average_slope_widget_description">Mostra la pendenza media dell\'ultima parte di discesa o salita del percorso registrato corrente.</string>
-    <string name="max_axle_load_description">Fornisci il peso massimo per asse del tuo veicolo per evitare strade e ponto con limiti di peso.</string>
+    <string name="trip_recording_max_speed_widget_description">Mostra la velocità massima per il viaggio attualmente registrato. Toccare per passare dalla velocità massima complessiva alla velocità massima dell\'ultima salita o discesa.</string>
+    <string name="trip_recording_average_slope_widget_description">Mostra la pendenza media per l\'ultima sezione in discesa o in salida del viaggio attualmente registrato.</string>
+    <string name="max_axle_load_description">Fornisci il carico massimo per asse del tuo veicolo per evitare strade e ponti con limiti di peso.</string>
     <string name="marine_render_descr">Stile di navigazione Marino altamente personalizzabile. Basato sullo stile Nautico. Funziona bene con la mappa Boe Mondiali e le mappe opzionali batimetriche.</string>
-    <string name="rendering_attr_hideContours_name">Curve batimetriche</string>
-    <string name="rendering_attr_hideContours_description">Nascondi curve batimetriche</string>
+    <string name="rendering_attr_hideContours_name">Isobate</string>
+    <string name="rendering_attr_hideContours_description">Nascondi isobate</string>
     <string name="rendering_attr_hideFairways_name">Percorso navigabile</string>
     <string name="rendering_attr_hideFairways_description">Nascondi i percorsi navigabili</string>
     <string name="rendering_attr_hideLightSectors_name">Settori luce</string>
@@ -5910,9 +5906,26 @@
     <string name="rendering_attr_showLNAMmarker_description">Mostra i marcatori ENC</string>
     <string name="rendering_attr_spotSize_name">Dimensioni punto profondità</string>
     <string name="rendering_attr_spotSize_description">Dimensioni punto profondità</string>
-    <string name="enable_3d_objects_description">Mostra gli edifici 3D nella mappa</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Discese e percorsi per sci</string>
+    <string name="enable_3d_objects_description">Mostra gli edifici in 3D nella mappa</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Piste da sci e percorsi</string>
     <string name="show_local_names">Mostra i nomi locali</string>
     <string name="rendering_attr_pisteRoutes_name">Discese e percorsi da sci</string>
     <string name="download_wikipedia_label">Scarica Wikipedia</string>
+    <string name="vehicle_metrics_chart_category">Metriche del veicolo</string>
+    <string name="delete_folder_description">Cancellare la cartella \"%1$s\"?</string>
+    <string name="routing_attr_pt_limit_name">Mostra gli N tragitti migliori</string>
+    <string name="routing_attr_pt_limit_description">Specifica il numero di tragitti migliori da mostrare</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimetri</string>
+    <string name="bicycle_width_limit_description">Inserisci la larghezza della tua bicicletta per evitare piste ciclabili strette.</string>
+    <string name="copy_link">Copia link</string>
+    <string name="is_parking_time_limited">Il parcheggio ha un limite di tempo?</string>
+    <string name="efficient_grid">Griglia efficiente</string>
+    <string name="routing_attr_weightrating_name">Peso massimo a pieno carico</string>
+    <string name="routing_attr_maxaxleload_name">Carico massimo dell\'asse</string>
+    <string name="imprecise_coordinates">Coordinate imprecise</string>
+    <string name="has_vehicle_metrics">Con i dati OBDII</string>
+    <string name="lang_mi">Maori</string>
+    <string name="buildings_3d_detail_level">Dettagli degli edifici in 3D</string>
+    <string name="enable_3d_objects">Edifici 3D</string>
 </resources>

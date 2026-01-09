@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_ROUTE_INFO_MENU_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
 import static net.osmand.data.PointDescription.POINT_TYPE_LOCATION;
@@ -2297,6 +2298,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	protected void show(int menuState) {
+		if (app != null && !app.getAppCustomization().isFeatureEnabled(FRAGMENT_ROUTE_INFO_MENU_ID)) {
+			return;
+		}
 		MapRouteMenuStateHolder holder = !menuBackStack.empty() ? menuBackStack.pop() : null;
 		if (holder != null) {
 			holder.showMenu();

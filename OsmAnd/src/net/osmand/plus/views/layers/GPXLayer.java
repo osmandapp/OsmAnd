@@ -520,9 +520,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				if (!Algorithms.isEmpty(groups)) {
 					GpxFile gpxFile = selectedGpxFile.getGpxFile();
 					KFile file = new KFile(gpxFile.getPath());
+					KFile dir = file.getParentFile();
 					boolean selected = isGpxFileSelected(gpxFile);
 					GpxDataItem gpxItem = gpxDbHelper.getItem(file);
-					GpxDirItem dirItem = gpxDbHelper.getGpxDirItem(file);
+					GpxDirItem dirItem = dir != null ? gpxDbHelper.getGpxDirItem(dir) : null;
 
 					int color = appearanceHelper.getTrackColor(gpxFile, cachedColor, gpxItem, dirItem, selected);
 					paintInnerRect.setColor(color);
@@ -550,9 +551,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				GpxFile gpxFile = selectedGpxFile.getGpxFile();
 				String path = gpxFile.getPath();
 				KFile file = new KFile(path);
+				KFile dir = file.getParentFile();
 				boolean selected = isGpxFileSelected(gpxFile);
 				GpxDataItem gpxItem = gpxDbHelper.getItem(file);
-				GpxDirItem dirItem = gpxDbHelper.getGpxDirItem(file);
+				GpxDirItem dirItem = dir != null ? gpxDbHelper.getGpxDirItem(dir) : null;
 
 				Gpx3DLinePositionType trackLinePosition = appearanceHelper.getTrackLinePositionType(gpxFile, gpxItem, dirItem, selected);
 				Gpx3DLinePositionType cachedTrackLinePositionType = cachedTracksWith3dLinePosition.get(path);
@@ -611,9 +613,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 				GpxFile gpxFile = selectedGpxFile.getGpxFile();
 				KFile file = new KFile(gpxFile.getPath());
+				KFile dir = file.getParentFile();
 				boolean selected = isGpxFileSelected(gpxFile);
 				GpxDataItem gpxItem = gpxDbHelper.getItem(file);
-				GpxDirItem dirItem = gpxDbHelper.getGpxDirItem(file);
+				GpxDirItem dirItem = dir != null ? gpxDbHelper.getGpxDirItem(dir) : null;
 
 				Track3DStyle track3DStyle = appearanceHelper.getTrack3DStyle(gpxFile, gpxItem, dirItem, selected);
 				Gpx3DLinePositionType trackLinePosition = track3DStyle.getLinePositionType();
@@ -768,9 +771,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				GpxFile gpxFile = selectedGpxFile.getGpxFile();
 				KFile file = new KFile(gpxFile.getPath());
+				KFile dir = file.getParentFile();
 				boolean selected = isGpxFileSelected(gpxFile);
 				GpxDataItem gpxItem = gpxDbHelper.getItem(file);
-				GpxDirItem dirItem = gpxDbHelper.getGpxDirItem(file);
+				GpxDirItem dirItem = dir != null ? gpxDbHelper.getGpxDirItem(dir) : null;
 
 				CachedTrack cachedTrack = getCachedTrack(selectedGpxFile);
 
@@ -807,9 +811,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				GpxFile gpxFile = selectedGpxFile.getGpxFile();
 				KFile file = new KFile(gpxFile.getPath());
+				KFile dir = file.getParentFile();
 				boolean selected = isGpxFileSelected(gpxFile);
 				GpxDataItem gpxItem = gpxDbHelper.getItem(file);
-				GpxDirItem dirItem = gpxDbHelper.getGpxDirItem(file);
+				GpxDirItem dirItem = dir != null ? gpxDbHelper.getGpxDirItem(dir) : null;
 
 				if (appearanceHelper.isShowStartFinishForTrack(gpxFile, gpxItem, dirItem, selected)) {
 					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
@@ -1055,9 +1060,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				if (pointColor == 0) {
 					GpxFile gpxFile = trackChartPoints.getGpx();
 					KFile file = new KFile(gpxFile.getPath());
+					KFile dir = file.getParentFile();
 					boolean selected = isGpxFileSelected(gpxFile);
 					GpxDataItem gpxItem = gpxDbHelper.getItem(file);
-					GpxDirItem dirItem = gpxDbHelper.getGpxDirItem(file);
+					GpxDirItem dirItem = dir != null ? gpxDbHelper.getGpxDirItem(dir) : null;
 					pointColor = appearanceHelper.getTrackColor(gpxFile, cachedColor, gpxItem, dirItem, selected);
 					trackChartPoints.setSegmentColor(pointColor);
 				}
@@ -1081,9 +1087,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				if (pointColor == 0) {
 					GpxFile gpxFile = trackChartPoints.getGpx();
 					KFile file = new KFile(gpxFile.getPath());
+					KFile dir = file.getParentFile();
 					boolean selected = isGpxFileSelected(gpxFile);
 					GpxDataItem gpxItem = gpxDbHelper.getItem(file);
-					GpxDirItem dirItem = gpxDbHelper.getGpxDirItem(file);
+					GpxDirItem dirItem = dir != null ? gpxDbHelper.getGpxDirItem(dir) : null;
 					pointColor = appearanceHelper.getTrackColor(gpxFile, cachedColor, gpxItem, dirItem, selected);
 				}
 				Bitmap pointBitmap = chartPointsHelper.createXAxisPointBitmap(pointColor, tileBox.getDensity());
@@ -1168,8 +1175,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 			GpxFile gpxFile = selectedGpxFile.getGpxFile();
 			KFile file = new KFile(gpxFile.getPath());
+			KFile dir = file.getParentFile();
 			GpxDataItem gpxItem = gpxDbHelper.getItem(file);
-			GpxDirItem dirItem = gpxDbHelper.getGpxDirItem(file);
+			GpxDirItem dirItem = dir != null ? gpxDbHelper.getGpxDirItem(dir) : null;
 			String width = appearanceHelper.getTrackWidth(gpxFile, defaultWidthPref.get(), gpxItem, dirItem);
 			cachedTrackWidth.putIfAbsent(width, null);
 			if (selectedGpxFile.isShowCurrentTrack()) {
@@ -1198,9 +1206,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return;
 		}
 		KFile file = new KFile(gpxFile.getPath());
+		KFile dir = file.getParentFile();
 		boolean selected = isGpxFileSelected(gpxFile);
 		GpxDataItem gpxItem = gpxDbHelper.getItem(file);
-		GpxDirItem dirItem = gpxDbHelper.getGpxDirItem(file);
+		GpxDirItem dirItem = dir != null ? gpxDbHelper.getGpxDirItem(dir) : null;
 
 		CachedTrack cachedTrack = getCachedTrack(selectedGpxFile);
 		String coloringTypeName = appearanceHelper.getAvailableOrDefaultColoringType(cachedTrack, gpxItem, dirItem, selected);
