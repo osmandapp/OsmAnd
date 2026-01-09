@@ -5823,4 +5823,15 @@
     <string name="has_vehicle_metrics">Avec les données OBDII</string>
     <string name="show_expand_button">Afficher le bouton Développer</string>
     <string name="imprecise_coordinates">Coordonnées imprécises</string>
+    <string name="star_watcher_plugin_name">Observateur d\'étoiles (Bêta)</string>
+    <string name="star_watcher_plugin_description">Cartes stellaires, carte stellaire en 3D</string>
+    <string name="star_map">Carte du ciel</string>
+    <string name="star_charts_name">Cartes stellaires</string>
+    <string name="star_visibility_name">Visibilité des étoiles</string>
+    <string name="star_altitude_name">Altitude des étoiles</string>
+    <string name="azimuthal_grid">Grille azimutale</string>
+    <string name="equatorial_grid">Grille équatoriale</string>
+    <string name="ecliptic_line">Ligne écliptique</string>
+    <string name="magnitude_filter">Filtre de magnitude</string>
+    <string name="visible_layers_and_objects">Calques &amp; Objets Visibles</string>
 </resources>
