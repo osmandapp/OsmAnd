@@ -15,8 +15,8 @@ import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.filters.FolderTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterList
 import net.osmand.shared.gpx.filters.TrackFiltersHelper
-import net.osmand.shared.gpx.organization.OrganizeByParameter
-import net.osmand.shared.gpx.organization.OrganizeByRangeParameter
+import net.osmand.shared.gpx.organization.OrganizeByParams
+import net.osmand.shared.gpx.organization.OrganizeByRangeParams
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KCollectionUtils
@@ -41,8 +41,8 @@ object SmartFolderHelper {
 		polymorphic(BaseTrackFilter::class) {
 			subclass(FolderTrackFilter::class)
 		}
-		polymorphic(OrganizeByParameter::class) {
-			subclass(OrganizeByRangeParameter::class)
+		polymorphic(OrganizeByParams::class) {
+			subclass(OrganizeByRangeParams::class)
 		}
 	}
 
@@ -324,14 +324,14 @@ object SmartFolderHelper {
 		}
 	}
 
-	fun setOrganizeByParams(folderId: String, params: OrganizeByParameter?) {
+	fun setOrganizeByParams(folderId: String, params: OrganizeByParams?) {
 		val folder = getSmartFolderById(folderId)
 		folder?.setOrganizeByParams(params)
 		writeSettings()
 		notifyFolderUpdatedListeners(folder ?: return)
 	}
 
-	fun getOrganizeByParams(folderId: String): OrganizeByParameter? {
+	fun getOrganizeByParams(folderId: String): OrganizeByParams? {
 		val folder = getSmartFolderById(folderId)
 		return folder?.organizeByParams
 	}

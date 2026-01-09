@@ -5,8 +5,8 @@ import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.TracksGroup
 import net.osmand.shared.gpx.enums.TracksSortScope
-import net.osmand.shared.gpx.organization.OrganizeByParameter
-import net.osmand.shared.gpx.organization.OrganizeByRangeParameter
+import net.osmand.shared.gpx.organization.OrganizeByParams
+import net.osmand.shared.gpx.organization.OrganizeByRangeParams
 import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import kotlin.math.floor
@@ -15,11 +15,11 @@ object OrganizeByRangeStrategy : OrganizeByStrategy {
 
 	override fun apply(
 		originalGroup: TracksGroup,
-		param: OrganizeByParameter,
+		params: OrganizeByParams,
 		resourcesMapper: OrganizeTracksResourceMapper
 	): List<OrganizedTracksGroup> {
-		val type = param.type
-		val step = (param as OrganizeByRangeParameter).stepSize
+		val type = params.type
+		val step = (params as OrganizeByRangeParams).stepSize
 		val groupedTracks = HashMap<Int, MutableList<TrackItem>>()
 		originalGroup.getTrackItems().let { trackItems ->
 			for (trackItem in trackItems) {

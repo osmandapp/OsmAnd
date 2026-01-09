@@ -6,11 +6,11 @@ import net.osmand.shared.util.PlatformUtil
 
 class TracksOrganizer(val parent: SmartFolder) {
 
-	var params: OrganizeByParameter? = null
+	var params: OrganizeByParams? = null
 		private set
 	private var cachedOrganizedGroups: List<OrganizedTracksGroup>? = null
 
-	fun initParams(params: OrganizeByParameter?) {
+	fun initParams(params: OrganizeByParams?) {
 		this.params = params
 	}
 
@@ -26,7 +26,7 @@ class TracksOrganizer(val parent: SmartFolder) {
 		return cachedOrganizedGroups
 	}
 
-	fun setOrganizeByParams(newParameter: OrganizeByParameter?) {
+	fun setOrganizeByParams(newParameter: OrganizeByParams?) {
 		if (newParameter != params) {
 			params = newParameter
 			clearCache()

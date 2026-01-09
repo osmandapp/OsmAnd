@@ -11,7 +11,7 @@ import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.TracksGroup
 import net.osmand.shared.gpx.enums.TracksSortScope
-import net.osmand.shared.gpx.organization.OrganizeByParameter
+import net.osmand.shared.gpx.organization.OrganizeByParams
 import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.enums.OrganizeByCategory
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
@@ -20,10 +20,10 @@ object OrganizeByDateStrategy : OrganizeByStrategy {
 
 	override fun apply(
 		originalGroup: TracksGroup,
-		param: OrganizeByParameter,
+		params: OrganizeByParams,
 		resourcesMapper: OrganizeTracksResourceMapper
 	): List<OrganizedTracksGroup>? {
-		val type = param.type
+		val type = params.type
 		if (type.category != OrganizeByCategory.DATE_TIME) return null
 
 		val groupedTracks = HashMap<Long, MutableList<TrackItem>>()

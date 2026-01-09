@@ -8,8 +8,8 @@ import net.osmand.shared.gpx.organization.TracksOrganizer
 import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterSerializer
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
-import net.osmand.shared.gpx.organization.OrganizeByParameter
-import net.osmand.shared.gpx.organization.OrganizeByParameterSerializer
+import net.osmand.shared.gpx.organization.OrganizeByParams
+import net.osmand.shared.gpx.organization.OrganizeByParamsSerializer
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import net.osmand.shared.util.KCollectionUtils
 
@@ -25,8 +25,8 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 	@Transient
 	private val tracksOrganizer = TracksOrganizer(this)
 
-	@Serializable(with = OrganizeByParameterSerializer::class)
-	var organizeByParams: OrganizeByParameter? = null
+	@Serializable(with = OrganizeByParamsSerializer::class)
+	var organizeByParams: OrganizeByParams? = null
 		private set
 
 	constructor() : this("")
@@ -66,13 +66,9 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		return tracksOrganizer.getOrganizedTrackItems()
 	}
 
-	fun setOrganizeByParams(organizeByParameter: OrganizeByParameter?) {
-		organizeByParams = organizeByParameter
-		tracksOrganizer.setOrganizeByParams(organizeByParameter)
-	}
-
-	fun updateOrganizeBy() {
-		tracksOrganizer.clearCache()
+	fun setOrganizeByParams(organizeByParams: OrganizeByParams?) {
+		this.organizeByParams = organizeByParams
+		tracksOrganizer.setOrganizeByParams(organizeByParams)
 	}
 
 	override fun getTracksSortScope(): TracksSortScope {

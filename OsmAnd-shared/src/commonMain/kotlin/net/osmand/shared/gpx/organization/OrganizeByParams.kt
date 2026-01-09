@@ -5,16 +5,12 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
-/**
- * Rules for track organization.
- * [stepSize] is non-null only for range-based filters (e.g., Distance, Altitude).
- * For named list filters, [stepSize] is null.
- */
 @Serializable
 @Polymorphic
-open class OrganizeByParameter protected constructor() {
+open class OrganizeByParams protected constructor() {
 	@SerialName("type")
 	lateinit var type: OrganizeByType
+		protected set
 
 	constructor(type: OrganizeByType) : this() {
 		this.type = type
@@ -24,7 +20,7 @@ open class OrganizeByParameter protected constructor() {
 		if (this === other) return true
 		if (other == null || this::class != other::class) return false
 
-		other as OrganizeByParameter
+		other as OrganizeByParams
 
 		return type == other.type
 	}

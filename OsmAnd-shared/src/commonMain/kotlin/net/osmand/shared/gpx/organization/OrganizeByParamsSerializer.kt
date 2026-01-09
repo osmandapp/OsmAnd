@@ -14,23 +14,23 @@ import kotlinx.serialization.json.jsonPrimitive
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import net.osmand.shared.gpx.organization.strategy.OrganizeByRangeStrategy
 
-object OrganizeByParameterSerializer : KSerializer<OrganizeByParameter> {
+object OrganizeByParamsSerializer : KSerializer<OrganizeByParams> {
 	override val descriptor: SerialDescriptor =
 		buildClassSerialDescriptor("OrganizeByParameter") {
 			element<String>("type")
 			element<Double>("stepSize", isOptional = true)
 		}
 
-	override fun serialize(encoder: Encoder, value: OrganizeByParameter) {
+	override fun serialize(encoder: Encoder, value: OrganizeByParams) {
 		val composite = encoder.beginStructure(descriptor)
 		composite.encodeStringElement(descriptor, 0, value.type.name)
-		if (value is OrganizeByRangeParameter) {
+		if (value is OrganizeByRangeParams) {
 			composite.encodeDoubleElement(descriptor, 1, value.stepSize)
 		}
 		composite.endStructure(descriptor)
 	}
 
-	override fun deserialize(decoder: Decoder): OrganizeByParameter {
+	override fun deserialize(decoder: Decoder): OrganizeByParams {
 		val input = decoder as? JsonDecoder ?: throw SerializationException("Only JSON supported")
 		val jsonObject = input.decodeJsonElement().jsonObject
 
@@ -40,9 +40,9 @@ object OrganizeByParameterSerializer : KSerializer<OrganizeByParameter> {
 		
 		return if (type.strategy is OrganizeByRangeStrategy) {
 			val step = jsonObject["stepSize"]?.jsonPrimitive?.double ?: 0.0
-			OrganizeByRangeParameter(type, step)
+			OrganizeByRangeParams(type, step)
 		} else {
-			OrganizeByParameter(type)
+			OrganizeByParams(type)
 		}
 	}
 }

@@ -15,7 +15,7 @@ import net.osmand.plus.card.base.slider.SliderCard
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.bottomsheets.CustomizableSliderBottomSheet
 import net.osmand.plus.settings.controllers.ICustomizableSliderDialogController
-import net.osmand.shared.gpx.organization.OrganizeByRangeParameter
+import net.osmand.shared.gpx.organization.OrganizeByRangeParams
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 class OrganizeTracksStepController(
@@ -91,24 +91,16 @@ class OrganizeTracksStepController(
 	// ----------- implement specific ICustomizableSliderDialogController methods -----------
 
 	private fun setOrganizeByStep(value: Int) {
-		val smartFolder = app.smartFolderHelper.getSmartFolderById(folderId)
-		smartFolder?.let { folder ->
-			val params = app.smartFolderHelper.getOrganizeByParams(folderId)
-			params?.let {
-				if (it is OrganizeByRangeParameter) {
-					it.stepSize = convertToBaseUnits(value)
-					folder.updateOrganizeBy()
-					app.smartFolderHelper.notifyFolderUpdatedListeners(smartFolder)
-				}
-			}
+		val currentParams = app.smartFolderHelper.getOrganizeByParams(folderId)
+		if (currentParams != null && currentParams is OrganizeByRangeParams) {
+			val newParams = OrganizeByRangeParams(currentParams.type, convertToBaseUnits(value))
+			app.smartFolderHelper.setOrganizeByParams(folderId, newParams)
 		}
 	}
 
 	override fun onApplyChanges() {
 		if (initialValue != selectedValue) {
-			val parameter = app.smartFolderHelper.getOrganizeByParams(folderId) as OrganizeByRangeParameter
-			parameter.stepSize = convertToBaseUnits(selectedValue)
-			app.smartFolderHelper.setOrganizeByParams(folderId, parameter)
+			setOrganizeByStep(selectedValue)
 			applyChanges = true
 		}
 	}
@@ -120,9 +112,7 @@ class OrganizeTracksStepController(
 	override fun finishProcessIfNeeded(activity: FragmentActivity?): Boolean {
 		if (super.finishProcessIfNeeded(activity)) {
 			if (!applyChanges) {
-				val parameter = app.smartFolderHelper.getOrganizeByParams(folderId) as OrganizeByRangeParameter
-				parameter.stepSize = convertToBaseUnits(initialValue)
-				app.smartFolderHelper.setOrganizeByParams(folderId, parameter)
+				setOrganizeByStep(initialValue)
 			}
 			return true
 		}
