@@ -161,7 +161,10 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 
 	@Nullable
 	protected TracksGroup getCurrentTrackGroup() {
-		return selectedFolder;
+		if (organizedGroup != null) {
+			return organizedGroup;
+		}
+		return smartFolder != null ? smartFolder : selectedFolder;
 	}
 
 	@Override
