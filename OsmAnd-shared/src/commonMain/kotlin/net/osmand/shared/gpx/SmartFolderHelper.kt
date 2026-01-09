@@ -146,7 +146,7 @@ object SmartFolderHelper {
 		}
 	}
 
-	fun notifyFolderUpdatedListeners(smartFolder: SmartFolder) {
+	private fun notifyFolderUpdatedListeners(smartFolder: SmartFolder) {
 		for (listener in updateListeners) {
 			listener.onSmartFolderUpdated(smartFolder)
 		}
