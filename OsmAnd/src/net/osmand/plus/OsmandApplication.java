@@ -925,6 +925,11 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	@NonNull
+	public KFile getCacheDirKt() {
+		return new KFile(getCacheDir().getAbsolutePath());
+	}
+
+	@NonNull
 	public File getAppInternalPath(@Nullable String path) {
 		String child = path != null ? path : "";
 		return new File(settings.getInternalAppPath(), child);
