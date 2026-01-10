@@ -858,11 +858,7 @@
     <string name="poi_namefinder_query_empty">Teclegeu per trobar el PDI</string>
     <string name="show_transport_over_map">Mostra les parades del transport</string>
     <string name="use_english_names_descr">Escolliu entre els noms nadius i els anglesos.</string>
-    <string name="srtm_plugin_description">La informació del terreny, com ara corbes de nivell, ombres i vessants, us ajuda a avaluar visualment la disposició del terreny i el relleu, la navegabilitat i molt més. La informació topogràfica es pot representar al mapa per ombrejat de vessants, corbes de nivell i/o coloració de pendent.
-\n
-\nLes dades subjacents provenen de SRTM i ASTER.
-\n
-\nMés informació a %1$s.</string>
+    <string name="srtm_plugin_description">La informació del terreny, com ara corbes de nivell, ombres i vessants, us ajuda a avaluar visualment la disposició del terreny i el relleu, la navegabilitat i molt més. La informació topogràfica es pot representar al mapa per ombrejat de vessants, corbes de nivell i/o coloració de pendent. \n \nLes dades subjacents provenen de SRTM i ASTER. \n \nMés informació a %1$s.</string>
     <string name="rendering_attr_showRoadMaps_description">Trieu quan mostrar mapes de carreteres i prou:</string>
     <string name="auto_announce_on">Inicia els anuncis automàtics</string>
     <string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
@@ -4809,7 +4805,7 @@
     <string name="explore_3d_track_description">Explora la pista en 3D interactiu! Visualitza l\'alçada, la velocitat i més directament al mapa.</string>
     <string name="maps_that_also_be_used">Mapes que també s\'utilitzaran: %1$s</string>
     <string name="getting_list_of_required_maps">S\'està obtenint una llista dels mapes requerits…</string>
-    <string name="required_maps_calculate_online_summary">La llista de mapes que falten es basa en la ruta en línia recta. Per obtenir una llista precisa de mapes, OsmAnd pot calcular prèviament la seva ruta en línia.</string>
+    <string name="required_maps_calculate_online_summary">La llista de mapes que falten es basa en la ruta en línia recta. Per a obtenir una llista precisa de mapes, OsmAnd pot calcular prèviament en línia la vostra ruta.</string>
     <string name="required_maps">Mapes requerits</string>
     <string name="missing_maps_description">Falten alguns mapes fora de línia necessaris per a aquesta ruta o no estan actualitzats. Baixeu o actualitzeu aquests mapes.</string>
     <string name="missing_maps_header">Falten mapes obsolets</string>
@@ -5091,7 +5087,7 @@
     <string name="deleting_complete">Supressió completa</string>
     <string name="delete_account">Suprimeix el compte</string>
     <string name="backup_error_delete_account_email_match">El correu electrònic no coincideix amb el nom d\'usuari d\'inici de sessió</string>
-    <string name="verify_account_deletion_descr">Hem de verificar el vostre compte abans d\'eliminar-lo.\n\nSi us plau, introdueixi l\'adreça de correu electrònic amb la qual es va registrar. S\'hi enviarà una contrasenya única per al pas següent.</string>
+    <string name="verify_account_deletion_descr">Hem de verificar el vostre compte abans d\'eliminar-lo.\n\nIntroduïu l\'adreça de correu electrònic amb la qual us vau registrar. S\'hi enviarà una contrasenya única per al pas següent.</string>
     <string name="verify_account">Verifiqueu el vostre compte</string>
     <string name="slope_legend_description">Slope utilitza colors per a visualitzar l\'escarpament del terreny. Podeu llegir més sobre Slope a %1$s.</string>
     <string name="terrain_category_description">Línies de contorn de terra, ombra de turons en escala de grisos i indicació de pendent d\'escala de color, per mostrar pics i terres baixes.</string>
@@ -5451,7 +5447,7 @@
     <string name="contour_lines_hillshade_slope">Línies de contorn, ombra de turons, pendent</string>
     <string name="hillshade_slope">Ombreig, Pendents</string>
     <string name="backup_error_no_valid_subscription">No hi ha subscripció vàlida</string>
-    <string name="backup_error_user_is_not_registered">Cap usuari registrat amb aquesta adreça de correu electrònic</string>
+    <string name="backup_error_user_is_not_registered">No hi ha cap usuari registrat amb aquesta adreça de correu electrònic</string>
     <string name="backup_error_token_is_not_valid_or_expired">Testimoni no vàlid o caducat</string>
     <string name="backup_error_token_is_not_valid">Alguna cosa no és correcta amb l\'identificador o el testimoni del dispositiu proporcionat</string>
     <string name="backup_error_file_not_available">El fitxer no està disponible</string>
@@ -5532,8 +5528,8 @@
     <string name="enter_verification_code">Introduïu una contrasenya única</string>
     <string name="verify_email_address_descr">Codi de verificació enviat a %1$s. Introduïu-lo al camp de sota.</string>
     <string name="verify_email_address">Verifica l\'adreça de correu electrònic</string>
-    <string name="osmand_cloud_login_descr">Si us plau, introdueixi l\'adreça de correu electrònic amb la qual va registrar. S\'hi enviarà una contrasenya única.</string>
-    <string name="osmand_cloud_create_account_descr">Si us plau, introdueixi la seva adreça de correu electrònic, s\'enviarà un codi de verificació allà,\ni totes les teves dades estaran vinculades a ella.</string>
+    <string name="osmand_cloud_login_descr">Introduïu l\'adreça de correu electrònic amb la qual us vau registrar. S\'hi enviarà una contrasenya única.</string>
+    <string name="osmand_cloud_create_account_descr">Introduïu la vostra adreça electrònica, s\'hi enviarà un codi de verificació,\ni s\'hi vincularan totes les vostres dades.</string>
     <string name="osmand_cloud_help_descr">Necessites ajuda? Contacteu amb nosaltres a %1$s</string>
     <string name="backup_into_file">Fes una còpia de seguretat com a fitxer</string>
     <string name="local_backup">Còpia local</string>

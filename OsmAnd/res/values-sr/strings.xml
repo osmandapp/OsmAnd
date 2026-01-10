@@ -2391,11 +2391,7 @@
 \nДаље читање на %1$s.</string>
     <string name="rendering_attr_pisteGrooming_name">Равнање стазе</string>
     <string name="osmand_plus_extended_description_part8">Приближна покривеност карте и каквоћа:\n • Западна Европа: ****\n • Источна Европа: ***\n • Русија: ***\n • Северна Америка: ***\n • Јужна Америка: **\n • Азија: **\n • Јапан и Кореја: ***\n • Блиски исток: **\n • Африка: **\n • Антарктик: *\n Већина држава на свету се може скинути\n Од Авганистана до Шри Ланке, горе од Аљаске до Аустралије. Аргентина, Бразил, Канада, Француска, Немачка, Мексико, Велика Британија, Шпанија, …</string>
-    <string name="srtm_plugin_description">Информације о терену, као што су контурне линије, осенчен рељеф, нагиб, помажу да се визуелно оцени положај земље, рељеф, могућност навођења, и друго. Топографске информације на мапи могу бити претстављене контурним линијама, сенчењем рељефа и/или бојењем стрмине.
-\n
-\nИзворно подаци потичу од СРТМ и АСТЕР.
-\n
-\nВише се може прочитати на %1$s.</string>
+    <string name="srtm_plugin_description">Пружа терен и детаљну топографију за визуелно разумевање рељефа пејзажа и проходности, користећи контурне линије, сенчење брда или бојење падина и 3Д приказ.\n\nДа бисте омогућили ове функције за регион, потребно је додатно да преузмете карту контурних линија и/или терена (3Д), састављену из СРТМ и АСТЕР података.\n\nВише информација на %1$s.</string>
     <string name="osm_editing_plugin_description">Доприносите ОСМ-у, општој заједници која одржава обимну карту света и обезбеђује редовне податке слободним програмима сваком кориснику.
 \n
 \nМожете пронаћи упутсва како уређивати карту на нашим страницама %1$s.</string>
@@ -4507,15 +4503,15 @@
     <string name="map_center_widget">Координате: средиште карте</string>
     <string name="external_sensors_plugin_name">Спољни пријемници</string>
     <string name="external_sensors_plugin_description">Приступ спољним пријемницима, нпр. откуцајима срца, брзини бицикла, снази кретања бицикла, или такту. Захтева да уређај буде повезан са одговарајућим пријемницима преко АНТ + протокола личне бежичне мреже.</string>
-    <string name="quick_action_temperature_layer">Прекидач за приказ или скривање топлотних слојева на карти.</string>
-    <string name="quick_action_precipitation_layer">Прекидач за приказ или скривање слојева падавина на карти.</string>
-    <string name="quick_action_wind_layer">Прекидач за приказ или скривање слојева ветрова на карти.</string>
+    <string name="quick_action_temperature_layer">Прекидач за приказивање или скривање слоја температуре на мапи.</string>
+    <string name="quick_action_precipitation_layer">Прекидач за приказивање или скривање слоја падавина на мапи.</string>
+    <string name="quick_action_wind_layer">Прекидач за приказивање или скривање слоја ветра на мапи.</string>
     <string name="mtb_scale">Лествица МТБ</string>
     <string name="mtb_imba">ИМБА</string>
     <string name="mtb_imba_full">Међународно удружење планинарских бициклиста</string>
-    <string name="quick_action_cloud_layer">Прекидач за приказ или скривање слојева облака на карти.</string>
+    <string name="quick_action_cloud_layer">Прекидач за приказивање или скривање слоја облака на мапи.</string>
     <string name="mtb_segment_classification">Разврставање чланка</string>
-    <string name="quick_action_air_pressure_layer">Прекидач за приказ или скривање слоја ваздушног притиска на карти.</string>
+    <string name="quick_action_air_pressure_layer">Прекидач за приказивање или скривање слоја ваздушног притиска на мапи.</string>
     <string name="rendering_attr_showMtbScale_description">Приказуј трагове по лествици МТБ-а.</string>
     <string name="rendering_attr_showMtbScale_name">Приказуј лествицу МТБ-а</string>
     <string name="cloud_layer">Слој облака</string>
@@ -4528,7 +4524,7 @@
 \nМолим, подржите побољшања достављањем дневника грешака.</string>
     <string name="rendering_engine_failed">Приказ карте Османда се недавно срушио.</string>
     <string name="map_rendering_engine_v2">Издање 2 (ОпенГЛ)</string>
-    <string name="map_rendering_engine_descr">Верзија 1 је била подразумевана пре ОсмАнд 4.3 и још увек је пожељнија за старије уређаје.\nВерзија 2 (ОпенГЛ) је моћнији механизам за рендеровање мапа, који такође нуди 2.5Д приказ.</string>
+    <string name="map_rendering_engine_descr">Верзија 1 је била подразумевана пре ОсмАнд 4.3 и одговара старијим уређајима.\n\nВерзија 2 (ОпенГЛ) је напреднија и додаје функције попут 3Д приказа.</string>
     <string name="map_rendering_engine">Погон приказа карата</string>
     <string name="external_sensors_support">Подршка спољних пријемника</string>
     <string name="external_sensor_widgets">Спољашњи пријемници</string>
@@ -5869,10 +5865,10 @@
     <string name="save_and_access_articles_offline">Уштедите податке и приступајте чланцима без мреже било где</string>
     <string name="private_access_routing_req_short">Дозволите коришћење приватног пута да бисте стигли до вашег одредишта?</string>
     <string name="download_wikipedia_label">Преузми Википедију</string>
-    <string name="quick_action_weather_layers">Прекидач за приказ или сакривање слојева временских прилика на карти.</string>
-    <string name="quick_action_wind_animation_layer">Прекидач за приказ или сакривање слоја живахности ветра на карти.</string>
-    <string name="wind_animation_layer">Слој живахности ветра</string>
-    <string name="weather_layers">Слојеви временских прилика</string>
+    <string name="quick_action_weather_layers">Прекидач за приказивање или скривање слојева времена на мапи.</string>
+    <string name="quick_action_wind_animation_layer">Прекидач за приказивање или скривање слоја анимације ветра на мапи.</string>
+    <string name="wind_animation_layer">Слој анимације ветра</string>
+    <string name="weather_layers">Временски слојеви</string>
     <string name="lang_crh">Кримски Татарски (латиница)</string>
     <string name="efficient_grid">Учинковита мрежа</string>
     <string name="slots">Прорези</string>
@@ -5890,5 +5886,14 @@
     <string name="centimeter">cm</string>
     <string name="shared_string_centimeters">центиметара</string>
     <string name="bicycle_width_limit_description">Обезбедите ширину свог бицикла како бисте избегли уске бициклистичке стазе.</string>
-    <string name="copy_link">Умножи везу</string>
+    <string name="copy_link">Копирај везу</string>
+    <string name="show_spherical_map">Приказ земаљске кугле</string>
+    <string name="enable_3d_objects">Просторни приказ зграда</string>
+    <string name="has_vehicle_metrics">Са подацима ОБДИИ</string>
+    <string name="vehicle_metrics_chart_category">Мерења са возила</string>
+    <string name="delete_folder_description">Да ли избрисати омот „%1$s“?</string>
+    <string name="buildings_3d_detail_level">Подробни просторни приказ зграда</string>
+    <string name="lang_mi">Маорски</string>
+    <string name="show_expand_button">Прикажи дугме за проширивање</string>
+    <string name="imprecise_coordinates">Непрецизне координате</string>
 </resources>

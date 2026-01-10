@@ -852,11 +852,7 @@
     <string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic (administrativní úrovně 5-9).</string>
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
-    <string name="srtm_plugin_description">Informace o terénu, jako jsou obrysové čáry, stínování svahů a strmost, vám pomohou vizuálně zhodnotit reliéf terénu, schůdnost a další. Topografické informace mohou být na mapě znázorněny vrstevnicemi, stínováním svahů a/nebo zbarvením strmosti.
-\n
-\nPodkladová data pocházejí ze systémů SRTM a ASTER.
-\n
-\nDalší informace naleznete na adrese %1$s.</string>
+    <string name="srtm_plugin_description">Informace o terénu, jako jsou obrysové čáry, stínování svahů a strmost, vám pomohou vizuálně zhodnotit reliéf terénu, schůdnost a další. Topografické informace mohou být na mapě znázorněny vrstevnicemi, stínováním svahů a/nebo zbarvením strmosti. \n \nPodkladová data pocházejí ze systémů SRTM a ASTER. \n \nDalší informace naleznete na adrese %1$s.</string>
     <string name="srtm_plugin_name">Topografie</string>
     <string name="download_srtm_maps">Vrstevnice</string>
     <string name="audionotes_location_not_defined">Klepněte na \'Použít polohu...\' pro přidání poznámky k poloze.</string>
@@ -4391,7 +4387,7 @@
     <string name="restart_now">Restartovat nyní</string>
     <string name="map_rendering_engine_v1">Verze 1</string>
     <string name="map_rendering_engine_v2">Verze 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Verze 1 byla výchozí před vydáním OsmAnd 4.3 a je stále vhodnější pro starší zařízení.\nVerze 2 (OpenGL) je výkonnější vykreslovací jádro map, které rovněž obsahuje 2,5D zobrazení.</string>
+    <string name="map_rendering_engine_descr">Verze 1 byla výchozí před vydáním OsmAnd 4.3 a je vhodnější pro starší zařízení.\n\nVerze 2 (OpenGL) je pokročilejší a přidává funkce jako 3D vykreslování.</string>
     <string name="map_rendering_engine">Vykreslovací jádro mapy</string>
     <string name="weather_wind_mph">mph</string>
     <string name="action_not_supported_with_map_style">Tato akce není podporována vybraným stylem mapy.</string>
@@ -5927,6 +5923,9 @@
     <string name="delete_folder_description">Odstranit složku „%1$s“?</string>
     <string name="show_spherical_map">Sférické zobrazení</string>
     <string name="enable_3d_objects">3D stavby</string>
-    <string name="lang_mi">Maori</string>
+    <string name="lang_mi">Māori</string>
     <string name="buildings_3d_detail_level">Detaily 3D staveb</string>
+    <string name="has_vehicle_metrics">S daty OBDII</string>
+    <string name="imprecise_coordinates">Nepřesné souřadnice</string>
+    <string name="show_expand_button">Zobrazit tlačítko rozbalení</string>
 </resources>

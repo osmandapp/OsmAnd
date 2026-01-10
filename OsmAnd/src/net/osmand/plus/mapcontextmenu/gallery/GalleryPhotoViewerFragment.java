@@ -31,6 +31,8 @@ import net.osmand.shared.util.LoadingImage;
 
 import org.apache.commons.logging.Log;
 
+import java.util.List;
+
 public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	private static final Log LOG = PlatformUtil.getLog(GalleryPhotoViewerFragment.class);
 
@@ -78,15 +80,19 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 		imageView = view.findViewById(R.id.image);
 
 		if (controller != null) {
-			ImageCard imageCard = controller.getOnlinePhotoCards().get(selectedPosition);
-			if (imageCard != null) {
-				if (loadingImage != null) {
-					loadingImage.cancel();
-				}
-				if (!app.getSettings().isInternetConnectionAvailable()) {
-					downloadHiResImage(imageCard, true);
-				} else{
-					downloadThumbnail(imageCard);
+			List<ImageCard> photoCards = controller.getOnlinePhotoCards();
+			int position = selectedPosition;
+			if (photoCards.size() > position) {
+				ImageCard imageCard = photoCards.get(position);
+				if (imageCard != null) {
+					if (loadingImage != null) {
+						loadingImage.cancel();
+					}
+					if (!app.getSettings().isInternetConnectionAvailable()) {
+						downloadHiResImage(imageCard, true);
+					} else {
+						downloadThumbnail(imageCard);
+					}
 				}
 			}
 		}

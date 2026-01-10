@@ -286,7 +286,7 @@
     <string name="failed_op">失败</string>
     <string name="converting_names">正在转换当地 / 英文名称…</string>
     <string name="error_occurred_saving_gpx">无法保存 GPX 文件。</string>
-    <string name="arrived_at_destination">您已到达。</string>
+    <string name="arrived_at_destination">您已抵达目的地。</string>
     <string name="invalid_locations">无效的座标</string>
     <string name="go_back_to_osmand">返回地图</string>
     <string name="shared_string_close">关闭</string>
@@ -781,7 +781,7 @@
     <string name="poi_remove_success">已删除</string>
     <string name="poi_action_add">添加</string>
     <string name="poi_action_change">修改</string>
-    <string name="poi_action_succeded_template">动作 {0} 已完成。</string>
+    <string name="poi_action_succeded_template">操作 {0} 已完成。</string>
     <string name="poi_error_unexpected_template">无法执行动作 {0}。</string>
     <string name="poi_error_io_error_template">执行动作 {0} 时发生 I/O 错误。</string>
     <string name="poi_error_info_not_loaded">节点的信息未能加载</string>
@@ -1264,7 +1264,7 @@
     <string name="rendering_category_details">详细资料</string>
     <string name="show_pedestrian_warnings">人行横道</string>
     <string name="rendering_attr_busRoutes_name">公交路线</string>
-    <string name="traffic_warning_railways">铁道交口</string>
+    <string name="traffic_warning_railways">铁路道口</string>
     <string name="routing_attr_driving_style_name">骑行风格</string>
     <string name="enable_proxy_title">启用 HTTP 代理</string>
     <string name="enable_proxy_descr">为所有网络请求配置 HTTP 代理。</string>
@@ -1569,7 +1569,7 @@
 \n经度 %2$s</string>
     <string name="shared_string_remember_my_choice">记住选择</string>
     <string name="shared_string_unexpected_error">意外的错误</string>
-    <string name="shared_string_action_template">动作 {0}</string>
+    <string name="shared_string_action_template">操作 {0}</string>
     <string name="shared_string_show">显示</string>
     <string name="shared_string_collapse">折叠</string>
     <string name="shared_string_favorite">我的收藏</string>
@@ -1592,11 +1592,7 @@
     <string name="record_plugin_description">记录您的旅行或训练，并分析速度、累计上升和下降、海拔剖面等数据。已记录的轨迹可以归档、与朋友分享、编辑和后期处理。
 \n
 \n详情可见 %1$s。</string>
-    <string name="srtm_plugin_description">地形信息，例如等高线、山体阴影和坡度，可帮助您直观地评估土地和地形的布局以及适航性等。地形信息可在地图上通过地形阴影、等高线以及坡度着色来表示。
-\n
-\n底层数据来自 SRTM 和 ASTER。
-\n
-\n详情可见 %1$s。</string>
+    <string name="srtm_plugin_description">地形信息，例如等高线、山体阴影和坡度，可帮助您直观地评估土地和地形的布局以及适航性等。地形信息可在地图上通过地形阴影、等高线以及坡度着色来表示。 \n \n底层数据来自 SRTM 和 ASTER。 \n \n详情可见 %1$s。</string>
     <string name="plugin_touringview_name">旅游地图视图</string>
     <string name="plugin_nautical_name">航海地图视图</string>
     <string name="audionotes_plugin_description">使用地图按钮或位置上下文菜单，在旅途中记录音频/照片/视频笔记。</string>
@@ -1870,14 +1866,14 @@
     <string name="driving_region_australia">澳洲</string>
     <string name="route_descr_destination">目的地</string>
     <string name="intermediate_items_sort_return">优化了前往目的地的中间目的地的顺序。</string>
-    <string name="plugin_distance_point_hdop">精度</string>
+    <string name="plugin_distance_point_hdop">精确度</string>
     <string name="use_distance_measurement_help">*点击以标记一个点。
 \n *长按地图可删除上一个点。
 \n *长按一个点以查看并附加描述。
 \n * 点击测量小工具以查看更多操作。</string>
     <string name="use_magnetic_sensor_descr">使用磁传感器来确定罗盘值而不是方向传感器。</string>
     <string name="use_magnetic_sensor">使用磁传感器</string>
-    <string name="osmand_background_plugin_description">显示通过定期唤醒 GPS 设备（屏幕仍然关闭）来打开后台追踪和导航的设置。</string>
+    <string name="osmand_background_plugin_description">显示后台轨迹记录和导航的相关设置（屏幕关闭时定期唤醒 GPS）。</string>
     <string name="av_use_external_recorder">使用系统录音机</string>
     <string name="recording_playing">从已指定的录音开始播放音频。
 \n%1$s</string>
@@ -2230,7 +2226,7 @@
     <string name="number_of_edits">编辑次数</string>
     <string name="reports_for">报告</string>
     <string name="file_name_containes_illegal_char">文件名中出现非法字符</string>
-    <string name="quick_action_item_action">动作 %d</string>
+    <string name="quick_action_item_action">操作 %d</string>
     <string name="quick_action_item_screen">屏幕 %d</string>
     <string name="quick_action_map_style_switch">地图风格已变更为 “%s”。</string>
     <string name="quick_action_navigation_voice">打开／关闭语音</string>
@@ -2269,7 +2265,7 @@
     <string name="quick_action_gpx_category_descr">选择一个可选类别。</string>
     <string name="quick_action_poi_list">POI 列表</string>
     <string name="quick_action_sh_poi_descr">添加一或多个要显示在地图上的兴趣点类别。</string>
-    <string name="quick_action_page_list_descr">用于翻阅下面列表的按钮。</string>
+    <string name="quick_action_page_list_descr">用于翻阅下方列表的按钮。</string>
     <string name="quick_action_map_style_action">添加地图样式</string>
     <string name="quick_action_empty_param_error">请填写所有参数</string>
     <string name="quick_action_map_styles">地图样式</string>
@@ -2349,7 +2345,7 @@
     <string name="empty_state_osm_edits_descr">创建或修改 OpenStreetMap 兴趣点，打开或评论 OSM 注记并贡献 GPX 轨迹文件。</string>
     <string name="shared_string_deleted">已删除</string>
     <string name="shared_string_edited">已编辑</string>
-    <string name="shared_string_added">添加于</string>
+    <string name="shared_string_added">新增</string>
     <string name="marker_activated">标记%s 已激活。</string>
     <string name="one_tap_active_descr">点击地图上的标记将其移动到活动标记的顶端, 而不打开上下文菜单。</string>
     <string name="one_tap_active">\'轻触\' 激活</string>
@@ -2648,7 +2644,7 @@
     <string name="points_of_interests">兴趣点（POI）</string>
     <string name="shared_string_capacity">容量</string>
     <string name="rendering_attr_surface_metal_name">金属</string>
-    <string name="rendering_attr_highway_class_path_name">步道</string>
+    <string name="rendering_attr_highway_class_path_name">路径</string>
     <string name="app_mode_helicopter">直升机</string>
     <string name="app_mode_skiing">滑雪</string>
     <string name="base_profile_descr_ski">滑雪</string>
@@ -2705,7 +2701,7 @@
     <string name="rendering_value_white_name">白色</string>
     <string name="swap_two_places">交换 %1$s 和 %2$s</string>
     <string name="route_start_point">起始点</string>
-    <string name="track_saved">追踪已保存</string>
+    <string name="track_saved">轨迹已保存</string>
     <string name="empty_filename">空的文件名</string>
     <string name="copy_location_name">复制地点／兴趣点名称</string>
     <string name="routeInfo_roadClass_name">道路类型</string>
@@ -2808,7 +2804,7 @@
     <string name="routing_attr_allow_expert_name">允许专家路线</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">节点网络</string>
     <string name="hide_compass_ruler">隐藏罗盘标尺</string>
-    <string name="quick_action_terrain_descr">用以在地图上显示或隐藏地形图层的按钮。</string>
+    <string name="quick_action_terrain_descr">在地图上显示或隐藏地形图层的按钮。</string>
     <string name="details_dialog_decr">显示或隐藏额外的地图细节</string>
     <string name="quick_action_showhide_mapillary_descr">用以在地图上显示或隐藏 Mapillary 图层的开关。</string>
     <string name="slope_description">坡度使用颜色来可视化地形陡度。</string>
@@ -3597,8 +3593,7 @@
 \n对短途线路的计算速度没有影响。</string>
     <string name="use_routing_fallback">离线后备路线规划</string>
     <string name="shared_string_statistics">统计数字</string>
-    <string name="gps_filter_hdop_desc">设置 HDOP 的最大接受值。
-\n值较高的点将被隐藏。</string>
+    <string name="gps_filter_hdop_desc">设置水平精度因子的最大接受值。 \n值较高的点将被隐藏。</string>
     <string name="created_on">创建于</string>
     <string name="fold_unfold">折叠/展开</string>
     <string name="app_profile_type">应用程序配置文件类型</string>
@@ -3665,7 +3660,7 @@
     <string name="history_is_disabled_descr">启用历史记录以更快地访问上次使用的结果。</string>
     <string name="clear_all_history_warning">清除所有的应用程序历史条目，包括搜索、导航和标记历史？</string>
     <string name="clear_all_history">清除所有历史记录</string>
-    <string name="history_actions_descr">你可以将历史记录导出到一个文件。</string>
+    <string name="history_actions_descr">您可以将历史记录导出为单个文件。</string>
     <string name="map_markers_history">地图标记历史记录</string>
     <string name="navigation_history">导航历史</string>
     <string name="shared_storage_last_step">你可以之后指定一个新的数据文件夹。</string>
@@ -4002,7 +3997,7 @@
     <string name="rendering_attr_showTrolleybusRoutes_name">无轨电车线路</string>
     <string name="bottom_widgets_panel">底部面板</string>
     <string name="shared_string_buttons">按钮</string>
-    <string name="rendering_attr_showFitnessTrails_description">显示健身步道</string>
+    <string name="rendering_attr_showFitnessTrails_description">显示健身路线</string>
     <string name="stop_and_exit">停止并退出</string>
     <string name="shared_string_complete">完成</string>
     <string name="zoom_levels_difference_description">缩放级别之间的巨大差异会增加下载数据的大小。</string>
@@ -4013,7 +4008,7 @@
     <string name="rendering_attr_showRunningRoutes_description">显示跑步路线</string>
     <string name="stop_download">停止下载</string>
     <string name="stop_download_desc">下载仍未完成。如果现在中断下载，则只有部分瓦片可供查看。</string>
-    <string name="rendering_attr_showFitnessTrails_name">健身步道</string>
+    <string name="rendering_attr_showFitnessTrails_name">健身路线</string>
     <string name="gpx_no_routes_title">这里没有路线</string>
     <string name="routing_attr_allow_advanced_name">允许进阶路线</string>
     <string name="routing_attr_allow_advanced_description">困难的路线，有危险的障碍物和陡峭的路段。</string>
@@ -4474,7 +4469,7 @@
     <string name="map_rendering_engine_descr">在4.3版之前，默认使用第1版的渲染，且其对旧的设备仍然更好。\n第二版（OpenGL）是更快的地图渲染引擎，也具有2.5D视图。</string>
     <string name="map_rendering_engine">地图渲染引擎</string>
     <string name="system_screen_timeout_descr">根据系统的屏幕超时关闭屏幕。</string>
-    <string name="additional_actions_descr">通过点击“%1$s”按钮访问这些操作。</string>
+    <string name="additional_actions_descr">通过点击“%1$s”按钮以访问这些操作。</string>
     <string name="reorder_or_hide_from">重新排序或隐藏 %1$s 中的项目。</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">偏好未铺设道路</string>
     <string name="track_storage_directory">轨迹存储文件夹</string>
@@ -5158,7 +5153,7 @@
     <string name="max_altitude">最高海拔</string>
     <string name="key_event_action_move_up">向上移动</string>
     <string name="key_event_action_take_media_note">获取媒体附注</string>
-    <string name="key_event_category_actions">动作</string>
+    <string name="key_event_category_actions">操作</string>
     <string name="key_event_action_emit_navigation_hint">发出导航提示</string>
     <string name="key_event_action_move_right">向右移动</string>
     <string name="cloud_item_restored">%1$s 已还原至云端。</string>
@@ -5210,7 +5205,7 @@
     <string name="trash_alert_card_desc">回收箱中的物品将在 %1$s 天后删除。</string>
     <string name="with_waypoints">有路径点</string>
     <string name="press_button_to_link_with_action">按下设备上的按钮将其分配给动作：%1$s</string>
-    <string name="shared_string_action">动作</string>
+    <string name="shared_string_action">操作</string>
     <string name="shared_string_show_less">显示较少信息</string>
     <string name="shared_string_is_deleted">%1$s 已删除。</string>
     <string name="shared_string_delete_item">删除项目</string>
@@ -5294,7 +5289,7 @@
     <string name="quick_action_cloud_layer">在地图上切换展示或隐藏云层图层。</string>
     <string name="rendering_attr_showMtbScale_name">显示山地自行车难度分级</string>
     <string name="quick_action_precipitation_layer">在地图上切换展示或隐藏降水图层。</string>
-    <string name="key_event_action_activity_back_pressed">按下活动返回键</string>
+    <string name="key_event_action_activity_back_pressed">Activity 返回键已按下</string>
     <string name="special_routing_cpp">特殊路线规划类型</string>
     <string name="rendering_attr_showMtbScale_description">根据山地自行车难度分级显示路径。</string>
     <string name="cloud_changes">云端变更</string>
@@ -5456,7 +5451,7 @@
     <string name="quick_action_finish_trip_recording_summary">保存 GPX 轨迹并完成行程记录的按钮。</string>
     <string name="start_trip_recording_first_m">请先开始行程记录。</string>
     <string name="new_segment_started_m">开始录制新的轨迹段。</string>
-    <string name="quick_action_save_recorded_trip_and_continue_summary">将当前记录的行程保存为 GPX 文件，同时不中断新轨迹记录的按钮。</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">将当前正在录制的行程保存为 GPX 文件，同时继续录制新轨迹而不中断的按钮。</string>
     <string name="search_action_descr">开启搜索。</string>
     <string name="no_photos_available_descr">该地点尚未添加任何用户照片</string>
     <string name="no_photos_available">无可用照片</string>
@@ -5587,7 +5582,7 @@
     <string name="wikimedia">维基媒体</string>
     <string name="original_icon_description">每个点保留其单独的图标。</string>
     <string name="travel_topics">旅行话题</string>
-    <string name="action_icon">动作图标</string>
+    <string name="action_icon">操作图标</string>
     <string name="routing_type_a_star_classic">A* 经典</string>
     <string name="gpx_approximation_cpp">基于路径规划（C++）</string>
     <string name="original_color_description">每个点保留其单独的颜色。</string>

@@ -3330,11 +3330,7 @@
     <string name="audionotes_plugin_name">Zvučni i video zapisi</string>
     <string name="plugin_touringview_descr">Uključivanjem ovog pogleda se menja način izgeda mape na „Turistički pregled“, koji je naročiti bogati pregled za turiste i službene vozače. \n\nOvaj pogled nudi, na svakom stupnju približavanja najveću količinu turističkih detalja na podacima mape (posebno puteve, tragove, staze i znakove snalaženja u prostoru). \n\nTakođe i jasno predstavlja sve vrste puteva po boji, tako da nikad ne bude zabune, što je korisno kada se npr. voze veća vozila. \n\nA nudi se i posebne turističke mogućnosti kao što su prikaz biciklističkih ili planinskih puteva. \n\nNije potrebno preuzimanje posebne mape, pogled se pravi od običnih mapi. \n\nOvaj pogled se može isključiti tako što se ili ovde isključi, ili tako što se, po želji, promeni način izgleda mape pod Podesi mapu.</string>
     <string name="plugin_touringview_name">Turistički pregled mape</string>
-    <string name="srtm_plugin_description">Informacije o terenu, kao što su konturne linije, osenčeni reljef, nagib, pomažu da vizualno proceniš položaj zemlje, reljef, plovnost i još mnogo toga. Topografske informacije na mapi mogu biti predstavljene konturnim linijama, senčanjem reljefa i/ili bojanjem strmine.
-\n
-\nZemaljski podaci (između 70° severno i 70° južno) se zasnovani na SRTM i ASTER.
-\n
-\nViše podataka na %1$s.</string>
+    <string name="srtm_plugin_description">Pruža teren i detaljnu topografiju za vizuelno razumevanje reljefa pejzaža i prohodnosti, koristeći konturne linije, senčenje brda ili bojenje padina i 3D prikaz.\n\nDa biste omogućili ove funkcije za region, potrebno je dodatno da preuzmete kartu konturnih linija i/ili terena (3D), sastavljenu iz SRTM i ASTER podataka.\n\nViše informacija na %1$s.</string>
     <string name="srtm_plugin_name">Topografija</string>
     <string name="osmand_srtm_short_description_80_chars">Osmand dodatak za offline topo karakteristike poput kontura, osenčen reljef, nagib</string>
     <string name="srtm_paid_version_title">Topografski dodatak</string>
@@ -5029,7 +5025,7 @@
     <string name="rendering_engine_failed_descr">Osmand se je vratio na prikaz mape „Verzija 1“. Možeš pokušati da povratiš novi način za prikaz „Verzija 2 (OpenGL)“ u podešavanjima.
 \n
 \nMolimo, podržite poboljšanja dostavljanjem dnevnika grešaka.</string>
-    <string name="map_rendering_engine_descr">Verzija 1 je podrazumevana pre OsmAnd 4.3 i još uvek je poželjna za starije uređaje. \nVerzija 2 (OpenGL) je moćniji mehanizam za prikazivanje mapa, koji takođe sadrži 2.5D prikaz.</string>
+    <string name="map_rendering_engine_descr">Verzija 1 je bila podrazumevana pre OsmAnd 4.3 i odgovara starijim uređajima.\n\nVerzija 2 (OpenGL) je naprednija i dodaje funkcije poput 3D prikaza.</string>
     <string name="map_rendering_engine">Motor za renderovanje mape</string>
     <string name="show_borders_of_downloaded_maps">Prikazati granice preuzetih mapa</string>
     <string name="dismiss_changes">Odbaciti promene?</string>
@@ -5894,4 +5890,28 @@
     <string name="routing_attr_pt_limit_name">Prikaz N najboljih ruta</string>
     <string name="routing_attr_pt_limit_description">Navedite broj najboljih ruta za prikaz</string>
     <string name="buildings_3d_detail_level">Detaljne 3D zgrade</string>
+    <string name="lang_mi">Maorski</string>
+    <string name="has_vehicle_metrics">Sa OBDII podacima</string>
+    <string name="vehicle_metrics_chart_category">Metrika vozila</string>
+    <string name="delete_folder_description">Obrisati „%1$s“ folder?</string>
+    <string name="show_spherical_map">Globusni prikaz</string>
+    <string name="enable_3d_objects">3D zgrada</string>
+    <string name="show_expand_button">Pokaži dugme za proširenje</string>
+    <string name="imprecise_coordinates">Neprecizne koordinate</string>
+    <string name="star_map">Zvezdana mapa</string>
+    <string name="star_charts_name">Zvezdane mape</string>
+    <string name="star_visibility_name">Vidljivost zvezda</string>
+    <string name="star_altitude_name">Nadmorska visina zvezda</string>
+    <string name="astro_name_sun">Sunce</string>
+    <string name="astro_name_moon">Mesec</string>
+    <string name="astro_name_mercury">Merkur</string>
+    <string name="astro_name_venus">Venera</string>
+    <string name="astro_name_mars">Mars</string>
+    <string name="astro_name_jupiter">Jupiter</string>
+    <string name="astro_name_saturn">Saturn</string>
+    <string name="astro_name_uranus">Uran</string>
+    <string name="astro_name_neptune">Neptun</string>
+    <string name="astro_name_pluto">Pluton</string>
+    <string name="star_watcher_plugin_description">Zvezdane mape, 3D zvezdana mapa</string>
+    <string name="star_watcher_plugin_name">Posmatranje zvezda (Beta)</string>
 </resources>

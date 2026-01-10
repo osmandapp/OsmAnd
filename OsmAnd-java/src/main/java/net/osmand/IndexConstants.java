@@ -112,4 +112,5 @@ public class IndexConstants {
 	public static final String VOICE_PROVIDER_SUFFIX = "-tts";
 	public static final String MODEL_NAME_PREFIX = "model_";
 	public static final String COLOR_PALETTE_DIR = "color-palette/";
+	public static final String ASTRO_DIR = "astro/";
 }

@@ -4303,4 +4303,7 @@
     <string name="poi_museum_transport">Transport</string>
     <string name="poi_museum_railway">Jernbane</string>
     <string name="poi_museum_aerospace">Luftfart</string>
+    <string name="poi_denomination_ukrainian_orthodox">Ukrainsk ortodoks</string>
+    <string name="poi_denomination_evangelical_lutheran">Evangelisk-luthersk</string>
+    <string name="poi_denomination_anabaptist">Anabaptist</string>
 </resources>

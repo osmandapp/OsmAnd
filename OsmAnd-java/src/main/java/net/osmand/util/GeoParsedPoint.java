@@ -16,12 +16,18 @@ public class GeoParsedPoint {
 	private String query;
 	private boolean geoPoint;
 	private boolean geoAddress;
+	private boolean impreciseCoordinates;
 
 	public GeoParsedPoint(double lat, double lon) {
 		super();
 		this.lat = lat;
 		this.lon = lon;
 		this.geoPoint = true;
+	}
+
+	public GeoParsedPoint(double lat, double lon, boolean imprecise) {
+		this(lat, lon);
+		this.impreciseCoordinates = imprecise;
 	}
 
 	public GeoParsedPoint(double lat, double lon, String label) {
@@ -108,6 +114,10 @@ public class GeoParsedPoint {
 
 	public boolean isGeoAddress() {
 		return geoAddress;
+	}
+
+	public boolean hasImpreciseCoordinates() {
+		return impreciseCoordinates;
 	}
 
 	private String formatDouble(double d) {

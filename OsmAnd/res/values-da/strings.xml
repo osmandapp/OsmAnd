@@ -34,11 +34,7 @@
     <string name="map_widget_audionotes">Lydnoter</string>
     <string name="audionotes_plugin_description">Tag lyd-/foto-/videnotater under en tur ved hjælp af enten en kortknap eller kontekstmenuen for stedet.</string>
     <string name="audionotes_plugin_name">Lyd-/videonoter</string>
-    <string name="srtm_plugin_description">Terrænoplysninger som f.eks. konturlinjer, terrænskygge og hældning hjælper dig med at vurdere terrænets beskaffenhed, relief, navigationsmuligheder og meget mere. De topografiske oplysninger kan på kortet repræsenteres ved hjælp af konturlinjer, terrænskygger og/eller farvelægning af stejlhed.
-\n
-\nDe underliggende data stammer fra SRTM og ASTER.
-\n
-\nYderligere oplysninger findes på %1$s.</string>
+    <string name="srtm_plugin_description">Viser terræn og detaljeret topografi for en visuel forståelse af landskabets relief og fremkommelighed ved hjælp af konturlinjer, skyggeeffekter eller farvelægning af skråninger og en 3D-visning.\n \nFor at aktivere disse funktioner for en region skal du desuden downloade konturlinjer og/eller terrænkort (3D), der er sammensat af SRTM- og ASTER-data. \n \nYderligere oplysninger findes på %1$s.</string>
     <string name="srtm_plugin_name">Topografi</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
@@ -4567,7 +4563,7 @@
     <string name="restart_now">Genstart nu</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 1 var standard før OsmAnd 4.3 og er stadig at foretrække for ældre enheder. \nVersion 2 (OpenGL) er en mere kraftfuld kortgengivelsesmotor, der også har 2,5D-visning.</string>
+    <string name="map_rendering_engine_descr">Version 1 var standard før OsmAnd 4.3 og passer til ældre enheder. \n\nVersion 2 (OpenGL) er mere avanceret og tilføjer funktioner som 3D-visning.</string>
     <string name="map_rendering_engine">Kortgengivelsesmotor</string>
     <string name="rendering_engine_failed_descr">OsmAnd er vendt tilbage til kortgengivelse efter \'Version 1\'. Du kan prøve at skifte tilbage til den nye \'Version 2 (OpenGL)\'-gengivelsesmotor i indstillingerne.
 \n
@@ -4641,15 +4637,15 @@
     <string name="rendering_attr_depthContourWidth_name">Linjebredde</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linjefarvesætning</string>
     <string name="storage_migration_fragment_close_descr">Kopiering er kun %1$s%% fuldført. Hvis du stopper nu, fungerer appen muligvis ikke korrekt.</string>
-    <string name="quick_action_precipitation_layer">En omskifter til at vise eller skjule nedbørslaget på kortet.</string>
-    <string name="quick_action_wind_layer">En omskifter til at vise eller skjule vindlaget på kortet.</string>
-    <string name="quick_action_cloud_layer">En omskifter til at vise eller skjule skylaget på kortet.</string>
+    <string name="quick_action_precipitation_layer">En skifter til at vise eller skjule nedbørslaget på kortet.</string>
+    <string name="quick_action_wind_layer">En skifter til at vise eller skjule vindlaget på kortet.</string>
+    <string name="quick_action_cloud_layer">En skifter til at vise eller skjule skylaget på kortet.</string>
     <string name="temperature_layer">Temperaturlag</string>
     <string name="pressure_layer">Tryklag</string>
     <string name="wind_layer">Vindlag</string>
     <string name="precipitation_layer">Nedbørslag</string>
-    <string name="quick_action_temperature_layer">En omskifter til at vise eller skjule temperaturlaget på kortet.</string>
-    <string name="quick_action_air_pressure_layer">En omskifter til at vise eller skjule lufttrykslaget på kortet.</string>
+    <string name="quick_action_temperature_layer">En skifter til at vise eller skjule temperaturlaget på kortet.</string>
+    <string name="quick_action_air_pressure_layer">En skifter til at vise eller skjule lufttrykslaget på kortet.</string>
     <string name="cloud_layer">Skylag</string>
     <string name="rendering_attr_showMtbScale_name">Vis MTB-skala</string>
     <string name="rendering_attr_showMtbScale_description">Vis spor efter deres MTB-skala.</string>
@@ -5958,4 +5954,43 @@
     <string name="show_spherical_map">Klodevisning</string>
     <string name="enable_3d_objects">3D-bygninger</string>
     <string name="lang_mi">Maori</string>
+    <string name="has_vehicle_metrics">Med OBDII-data</string>
+    <string name="buildings_3d_detail_level">3D-bygningers detaljering</string>
+    <string name="show_expand_button">Vis udvidknap</string>
+    <string name="imprecise_coordinates">Upræcise koordinater</string>
+    <string name="star_watcher_plugin_name">Stjernekigger (Beta)</string>
+    <string name="star_map">Stjernekort</string>
+    <string name="star_visibility_name">Stjernesynlighed</string>
+    <string name="star_altitude_name">Stjernehøjde</string>
+    <string name="astro_name_sun">Sol</string>
+    <string name="astro_name_moon">Måne</string>
+    <string name="astro_name_mercury">Merkur</string>
+    <string name="astro_name_venus">Venus</string>
+    <string name="astro_name_mars">Mars</string>
+    <string name="astro_name_jupiter">Jupiter</string>
+    <string name="astro_name_saturn">Saturn</string>
+    <string name="astro_name_uranus">Uranus</string>
+    <string name="astro_name_neptune">Neptun</string>
+    <string name="astro_name_pluto">Pluto</string>
+    <string name="azimuthal_grid">Azimutalt gitter</string>
+    <string name="equatorial_grid">Ækvatorialt gitter</string>
+    <string name="astro_planets">Planeter</string>
+    <string name="astro_constellation">Konstellation</string>
+    <string name="astro_constellations">Konstellationer</string>
+    <string name="astro_stars">Stjerner</string>
+    <string name="astro_galaxies">Galakser</string>
+    <string name="astro_nebulae">Stjernetåge</string>
+    <string name="astro_open_clusters">Åbne stjernehobe</string>
+    <string name="astro_globular_clusters">Kugleformede stjernehobe</string>
+    <string name="astro_galaxy_clusters">Galaksehobe</string>
+    <string name="astro_black_holes">Sorte huller</string>
+    <string name="visible_layers_and_objects">Synlige lag og objekter</string>
+    <string name="astro_rise">Opgang</string>
+    <string name="astro_set">Nedgang</string>
+    <string name="star_watcher_plugin_description">Himmelkort, 3D-stjernekort</string>
+    <string name="star_charts_name">Himmelkort</string>
+    <string name="ecliptic_line">Ekliptika</string>
+    <string name="magnitude_filter">Størrelsesklassefilter</string>
+    <string name="shared_string_azimuth">Azimut</string>
+    <string name="shared_string_magnitude">Størrelsesklasse</string>
 </resources>

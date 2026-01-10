@@ -71,38 +71,4 @@
     <string name="osm_oauth2_dev_secret" translatable="false">Zujj3e_vQEUPGCbbbCGX-xUqbx1h0MQspUkIkT0sA8g</string>
     <string name="osm_oauth2_client_id" translatable="false">P-byvAHx1s3qB7cc8VsYikaVBUnMhimeE1VQ0rYot0k</string>
     <string name="osm_oauth2_client_secret" translatable="false">xegLrDp73nwh2IumrfhWnrRw0P615T-ZSmIhbsJD1sg</string>
-
-    <string name="star_watcher_plugin_name">Star watcher (Beta)</string>
-    <string name="star_watcher_plugin_description">Star charts, 3D star map</string>
-    <string name="star_map">Star map</string>
-    <string name="star_charts_name">Star charts</string>
-    <string name="star_charts_widget_group_desc">A set of views showing various astronomical information.</string>
-    <string name="star_chart_name">Star chart</string>
-    <string name="star_chart_widget_desc">Shows star/planet visibility, altitude and celestial paths for the current map center.</string>
-    <string name="star_visibility_name">Star visibility</string>
-    <string name="star_altitude_name">Star altitude</string>
-    <string name="celestial_paths_name">Celestial paths</string>
-	<string name="astro_name_sun">Sun</string>
-	<string name="astro_name_moon">Moon</string>
-	<string name="astro_name_mercury">Mercury</string>
-	<string name="astro_name_venus">Venus</string>
-	<string name="astro_name_mars">Mars</string>
-	<string name="astro_name_jupiter">Jupiter</string>
-	<string name="astro_name_saturn">Saturn</string>
-	<string name="astro_name_uranus">Uranus</string>
-	<string name="astro_name_neptune">Neptune</string>
-	<string name="astro_name_pluto">Pluto</string>
-	<string name="azimuthal_grid">Azimuthal Grid</string>
-	<string name="equatorial_grid">Equatorial Grid</string>
-	<string name="ecliptic_line">Ecliptic Line</string>
-	<string name="astro_planets">Planets</string>
-	<string name="astro_constellations">Constellations</string>
-	<string name="astro_stars">Stars</string>
-	<string name="astro_galaxies">Galaxies</string>
-	<string name="astro_black_holes">Black Holes</string>
-	<string name="visible_layers_and_objects">Visible Layers &amp; Objects</string>
-	<string name="shared_string_azimuth">Azimuth</string>
-	<string name="shared_string_magnitude">Magnitude</string>
-	<string name="astro_rise">Rise</string>
-	<string name="astro_set">Set</string>
 </resources>

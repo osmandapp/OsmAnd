@@ -17,9 +17,9 @@ import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.searchAltitude
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.plus.R
-import net.osmand.plus.plugins.astro.StarObjectsViewModel
-import net.osmand.plus.plugins.astro.StarWatcherSettings
 import net.osmand.plus.plugins.astro.SkyObject
+import net.osmand.plus.plugins.astro.StarWatcherSettings
+import net.osmand.plus.plugins.astro.StarWatcherSettings.StarMapConfig
 import net.osmand.plus.plugins.astro.views.StarView
 import java.time.Instant
 import java.time.ZoneId
@@ -66,7 +66,7 @@ object AstroUtils {
 	fun formatLocalTime(astronomyTime: Time): String {
 		val calendar = Calendar.getInstance(TimeZone.getDefault())
 		calendar.timeInMillis = astronomyTime.toMillisecondsSince1970()
-		return String.Companion.format(
+		return String.format(
 			Locale.getDefault(), "%02d:%02d",
 			calendar.get(Calendar.HOUR_OF_DAY),
 			calendar.get(Calendar.MINUTE))
@@ -75,9 +75,8 @@ object AstroUtils {
 	fun showStarMapOptionsDialog(
 		context: Context,
 		starView: StarView,
-		starMapViewModel: StarObjectsViewModel,
 		swSettings: StarWatcherSettings,
-		onApply: (() -> Unit)? = null
+		onApply: ((StarMapConfig) -> Unit)? = null
 	) {
 		val config = swSettings.getStarMapConfig()
 
@@ -85,12 +84,17 @@ object AstroUtils {
 			context.getString(R.string.azimuthal_grid),
 			context.getString(R.string.equatorial_grid),
 			context.getString(R.string.ecliptic_line),
+			context.getString(R.string.magnitude_filter),
 			context.getString(R.string.astro_name_sun),
 			context.getString(R.string.astro_name_moon),
 			context.getString(R.string.astro_planets),
 			context.getString(R.string.astro_constellations),
 			context.getString(R.string.astro_stars),
 			context.getString(R.string.astro_galaxies),
+			context.getString(R.string.astro_nebulae),
+			context.getString(R.string.astro_open_clusters),
+			context.getString(R.string.astro_globular_clusters),
+			context.getString(R.string.astro_galaxy_clusters),
 			context.getString(R.string.astro_black_holes)
 		)
 
@@ -103,11 +107,16 @@ object AstroUtils {
 		var tempConstellations = config.showConstellations
 		var tempStars = config.showStars
 		var tempGalaxies = config.showGalaxies
+		var tempNebulae = config.showNebulae
+		var tempOpenClusters = config.showOpenClusters
+		var tempGlobularClusters = config.showGlobularClusters
+		var tempGalaxyClusters = config.showGalaxyClusters
 		var tempBlackHoles = config.showBlackHoles
+		var tempShowMagnitudeFilter = config.showMagnitudeFilter
 
 		val checked = booleanArrayOf(
-			tempAzimuthal, tempEquatorial, tempEcliptic, tempSun, tempMoon, tempPlanets,
-			tempConstellations, tempStars, tempGalaxies, tempBlackHoles
+			tempAzimuthal, tempEquatorial, tempEcliptic, tempShowMagnitudeFilter, tempSun, tempMoon, tempPlanets,
+			tempConstellations, tempStars, tempGalaxies, tempNebulae, tempOpenClusters, tempGlobularClusters, tempGalaxyClusters, tempBlackHoles
 		)
 
 		AlertDialog.Builder(context)
@@ -117,13 +126,18 @@ object AstroUtils {
 					0 -> tempAzimuthal = isChecked
 					1 -> tempEquatorial = isChecked
 					2 -> tempEcliptic = isChecked
-					3 -> tempSun = isChecked
-					4 -> tempMoon = isChecked
-					5 -> tempPlanets = isChecked
-					6 -> tempConstellations = isChecked
-					7 -> tempStars = isChecked
-					8 -> tempGalaxies = isChecked
-					9 -> tempBlackHoles = isChecked
+					3 -> tempShowMagnitudeFilter = isChecked
+					4 -> tempSun = isChecked
+					5 -> tempMoon = isChecked
+					6 -> tempPlanets = isChecked
+					7 -> tempConstellations = isChecked
+					8 -> tempStars = isChecked
+					9 -> tempGalaxies = isChecked
+					10 -> tempNebulae = isChecked
+					11 -> tempOpenClusters = isChecked
+					12 -> tempGlobularClusters = isChecked
+					13 -> tempGalaxyClusters = isChecked
+					14 -> tempBlackHoles = isChecked
 				}
 			}
 			.setPositiveButton(R.string.shared_string_apply) { _, _ ->
@@ -139,11 +153,15 @@ object AstroUtils {
 
 				starView.showStars = tempStars
 				starView.showGalaxies = tempGalaxies
+				starView.showNebulae = tempNebulae
+				starView.showOpenCluster = tempOpenClusters
+				starView.showGlobularCluster = tempGlobularClusters
+				starView.showGalaxyCluster = tempGalaxyClusters
 				starView.showBlackHoles = tempBlackHoles
 
 				starView.updateVisibility()
 
-				val newConfig = StarWatcherSettings.StarMapConfig(
+				val newConfig = config.copy(
 					showAzimuthalGrid = tempAzimuthal,
 					showEquatorialGrid = tempEquatorial,
 					showEclipticLine = tempEcliptic,
@@ -153,11 +171,15 @@ object AstroUtils {
 					showConstellations = tempConstellations,
 					showStars = tempStars,
 					showGalaxies = tempGalaxies,
+					showNebulae = tempNebulae,
+					showOpenClusters = tempOpenClusters,
+					showGlobularClusters = tempGlobularClusters,
+					showGalaxyClusters = tempGalaxyClusters,
 					showBlackHoles = tempBlackHoles,
-					items = config.items
+					showMagnitudeFilter = tempShowMagnitudeFilter
 				)
 				swSettings.setStarMapConfig(newConfig)
-				onApply?.invoke()
+				onApply?.invoke(newConfig)
 			}
 			.setNegativeButton(R.string.shared_string_cancel, null)
 			.show()

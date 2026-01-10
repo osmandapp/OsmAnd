@@ -46,6 +46,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 
 public class SearchCoreFactory {
 
@@ -1890,9 +1891,16 @@ public class SearchCoreFactory {
 		private final DecimalFormat latLonFormatter = new DecimalFormat("#.0####", new DecimalFormatSymbols(Locale.US));
 		
 		private SearchAmenityByNameAPI amenitiesApi;
+		private Function<String, String> httpRedirectRequester = null;
 
 		public SearchLocationAndUrlAPI(SearchAmenityByNameAPI amenitiesApi) {
 			super(ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION);
+			this.amenitiesApi = amenitiesApi;
+		}
+
+		public SearchLocationAndUrlAPI(SearchAmenityByNameAPI amenitiesApi, Function<String, String> requester) {
+			super(ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION);
+			this.httpRedirectRequester = requester;
 			this.amenitiesApi = amenitiesApi;
 		}
 
@@ -2080,13 +2088,28 @@ public class SearchCoreFactory {
 		}
 
 		private boolean parseUrl(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
-			String text = phrase.getUnknownSearchPhrase();
-			GeoParsedPoint pnt = GeoPointParserUtil.parse(text);
+			String lines = phrase.getUnknownSearchPhrase().replace("\r\n", "\n");
+
+			GeoParsedPoint pnt = null;
+			for (String text : lines.split("\n")) {
+				pnt = GeoPointParserUtil.parse(text);
+				if (pnt == null && httpRedirectRequester != null && GeoPointParserUtil.isGooGlUrl(text)) {
+					text = httpRedirectRequester.apply(text);
+					if (text != null) {
+						pnt = GeoPointParserUtil.parse(text);
+					}
+				}
+				if (pnt != null) {
+					break;
+				}
+			}
+
 			if (pnt != null && pnt.isGeoPoint() && phrase.isSearchTypeAllowed(ObjectType.LOCATION)) {
 				SearchResult sp = new SearchResult(phrase);
 				sp.priority = 0;
 				sp.object = pnt;
-				sp.wordsSpan = text;
+				sp.wordsSpan = lines;
+				sp.setImpreciseCoordinates(pnt.hasImpreciseCoordinates());
 				sp.location = new LatLon(pnt.getLatitude(), pnt.getLongitude());
 				sp.localeName = formatLatLon(pnt.getLatitude()) +", " + formatLatLon(pnt.getLongitude());
 				if (pnt.getZoom() > 0) {

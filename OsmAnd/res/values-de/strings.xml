@@ -939,11 +939,7 @@
     <string name="close_changeset">Änderungssatz schließen</string>
     <string name="incomplete_locale">unvollständig</string>
     <string name="srtm_plugin_name">Topografie</string>
-    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Hangneigung helfen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Höhenlinien, Reliefschattierungen, und/oder Steilheitsfarben dargestellt werden.
-\n
-\nDie zugrunde liegenden Daten stammen von SRTM und ASTER.
-\n
-\nWeitere Informationen unter %1$s.</string>
+    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Hangneigung helfen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Höhenlinien, Reliefschattierungen, und/oder Steilheitsfarben dargestellt werden. \n \nDie zugrunde liegenden Daten stammen von SRTM und ASTER. \n \nWeitere Informationen unter %1$s.</string>
     <string name="srtm_paid_version_title">Topografie-Erweiterung</string>
     <string name="srtm_paid_version_msg">Bitte erwägen Sie den Kauf der Erweiterung „Topografie“, um die Weiterentwicklung zu fördern.</string>
     <string name="download_select_map_types">Andere Karten</string>
@@ -2624,7 +2620,7 @@
     <string name="access_intermediate_arrival_time">Ankunftszeit Zwischenziel</string>
     <string name="map_widget_intermediate_time">Zwischenankunftszeit</string>
     <string name="unirs_render_descr">Änderung des Standardstils, um den Kontrast von Fußgänger- und Fahrradwegen zu erhöhen. Verwendet alte Mapnik-Farben.</string>
-    <string name="get_osmand_live">Holen Sie sich OsmAnd Live, um alle Funktionen freizuschalten: tägliche Karten-Updates mit unbegrenzten Downloads, alle kostenpflichtigen und kostenlosen Plugins, Wikipedia, Wikivoyage und vieles mehr.</string>
+    <string name="get_osmand_live">Holen Sie sich OsmAnd Live, um alle Funktionen freizuschalten: tägliche Karten-Updates mit unbegrenzten Downloads, alle kostenpflichtigen und kostenlosen Erweiterungen, Wikipedia, Wikivoyage und vieles mehr.</string>
     <string name="quick_action_edit_actions">Aktionen bearbeiten</string>
     <string name="error_notification_desc">Bitte senden Sie einen Screenshot dieser Meldung an support@osmand.net</string>
     <string name="coord_input_edit_point">Punkt bearbeiten</string>
@@ -3031,7 +3027,7 @@
     <string name="route_parameters_descr">Routenparameter konfigurieren</string>
     <string name="application_profile_changed">App-Profil geändert zu „%s“</string>
     <string name="logcat_buffer">Logcat-Puffer</string>
-    <string name="plugins_settings">Plugin-Einstellungen</string>
+    <string name="plugins_settings">Erweiterungseinstellungen</string>
     <string name="shared_string_by_default">Standardmäßig</string>
     <string name="download_detailed_map">Laden Sie die detaillierte %s-Karte herunter, um diesen Bereich zu sehen.</string>
     <string name="change_data_storage_full_description">OsmAnd-Datendateien an das neue Ziel verschieben\?
@@ -3354,7 +3350,7 @@
     <string name="lang_ba">Baschkirisch</string>
     <string name="main_actions_descr">Hat nur vier Schaltflächen.</string>
     <string name="select_wikipedia_article_langs">Sprachauswahl für Wikipedia-Artikel auf der Karte. Während des Lesens eines Artikels ist ein Wechsel auf jede verfügbare Sprache möglich.</string>
-    <string name="hidden_items_descr">Diese Elemente werden aus dem Menü ausgeblendet, aber die entsprechenden Optionen oder Plugins funktionieren weiterhin.</string>
+    <string name="hidden_items_descr">Diese Elemente sind im Menü ausgeblendet, aber die dargestellten Optionen oder Erweiterungen funktionieren weiterhin.</string>
     <string name="reorder_or_hide_from">Ordnen Sie Elemente aus %1$s neu an oder blenden Sie sie aus.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Die Zahlung wird von Ihrem Google Play-Konto abgebucht, wenn Sie den Kauf bestätigen.
@@ -3410,7 +3406,7 @@
     <string name="profiles_for_action_not_found">Konnte keine solchen Profile finden.</string>
     <string name="index_item_world_basemap_detailed">Weltübersichtskarte (detailliert)</string>
     <string name="unsupported_type_error">Nicht unterstützter Typ</string>
-    <string name="ui_customization_description">Passen Sie die Menge der Elemente in „Schublade“, „Karte konfigurieren“ und „Kontextmenü“ an. \n \nDeaktivieren Sie ungenutzte Erweiterungen, um deren Steuerelemente auszublenden. „%1$s“.</string>
+    <string name="ui_customization_description">Passen Sie die Anzahl der Elemente in „Schublade“, „Karte konfigurieren“ und „Kontextmenü“ an. \n \nDeaktivieren Sie ungenutzte %1$s, um deren Steuerelemente auszublenden.</string>
     <string name="ui_customization_short_descr">Schubladenelemente, Kontextmenü</string>
     <string name="shared_string_drawer">Schublade</string>
     <string name="gpx_parse_error">Probleme mit einer GPX-Datei gefunden.
@@ -4212,8 +4208,8 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icons bei niedrigen Zoomstufen</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme-Tags</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Eine schematische Darstellung von Symbolen bei niedrigen Zoomstufen für diejenigen POIs, die normalerweise nicht angezeigt werden</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Erhöhen der Sichtbarkeit von Wasserstraßentunneln</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Erhöhen der Sichtbarkeit von Wasserstraßentunneln</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Sichtbarkeit von Wasserstraßentunneln erhöhen</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Sichtbarkeit von Wasserstraßentunneln erhöhen</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_name">Meeresbodendetail</string>
     <string name="rendering_attr_seabedDetail_description">Zusätzliche Textinfo zur Oberflächenbeschaffenheit des Meeresbodens, kombinierte Oberflächentypen, Kategorie und Art des Seegrases</string>
@@ -4355,7 +4351,7 @@
     <string name="map_widget_trip_recording_downhill">Bergab</string>
     <string name="map_widget_trip_recording_uphill">Bergauf</string>
     <string name="explore_plans">Pläne erkunden</string>
-    <string name="widget_secondary_desc_part_of">Teil des Plugins %1$s.</string>
+    <string name="widget_secondary_desc_part_of">Teil der Erweiterung „%1$s“.</string>
     <string name="av_notes_choose_action_widget_desc">Aktion auswählen.</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_petrol_name">Benzin</string>
@@ -4565,8 +4561,7 @@
     <string name="restart_now">Jetzt neu starten</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 1 war die Standardeinstellung vor OsmAnd 4.3 und ist für ältere Geräte weiterhin vorzuziehen.
-\nVersion 2 (OpenGL) ist eine leistungsstärkere Karten-Rendering-Engine, die auch eine 2,5D-Ansicht bietet.</string>
+    <string name="map_rendering_engine_descr">Version 1 war Standard vor OsmAnd 4.3 und eignet sich für ältere Geräte.\n\nVersion 2 (OpenGL) ist leistungsfähiger und bietet zusätzliche Funktionen wie die 3D‑Ansicht.</string>
     <string name="map_rendering_engine">Karten-Rendering-Engine</string>
     <string name="weather_offline_forecast">Offline-Vorhersage</string>
     <string name="weather_online_cache">Online-Zwischenspeicher</string>
@@ -4591,8 +4586,8 @@
     <string name="weather_wind_knots">Knoten</string>
     <string name="weather_wind_miles_per_hour">Meilen pro Stunde</string>
     <string name="weather_wind_kilimeters_per_hour">Kilometer pro Stunde</string>
-    <string name="weather_wind_meters_per_second">Meter/Sekunde</string>
-    <string name="weather_widgets_secondary_desc">Die Maßeinheiten können in den Einstellungen des Wetter-Plugins geändert werden.</string>
+    <string name="weather_wind_meters_per_second">Meter pro Sekunde</string>
+    <string name="weather_widgets_secondary_desc">Die Maßeinheiten können in den Einstellungen der Erweiterung „Wetter“ geändert werden.</string>
     <string name="air_pressure_widget_desc">Zeigt den Luftdruck für die aktuelle Kartenmitte an.</string>
     <string name="clouds_widget_desc">Zeigt die Wolkenbedeckung für die aktuelle Kartenmitte an.</string>
     <string name="wind_widget_desc">Zeigt die Windgeschwindigkeit für die aktuelle Kartenmitte an.</string>
@@ -4637,16 +4632,16 @@
     <string name="map_widget_group_sunrise_sunset">Sonnenaufgang, Sonnenuntergang</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linienfarbschema</string>
     <string name="storage_migration_fragment_close_descr">Kopiervorgang erst zu %1$s %% abgeschlossen. Bei Abbruch funktioniert die App möglicherweise nicht richtig.</string>
-    <string name="quick_action_precipitation_layer">Ein Schalter zum Ein- oder Ausblenden der Niederschlagsebene auf der Karte.</string>
-    <string name="quick_action_wind_layer">Ein Schalter zum Ein- oder Ausblenden der Windebene auf der Karte.</string>
-    <string name="quick_action_air_pressure_layer">Ein Schalter zum Ein- oder Ausblenden der Luftdruckebene auf der Karte.</string>
+    <string name="quick_action_precipitation_layer">Eine Schaltfläche zum Ein- und Ausblenden der Niederschlagsebene auf der Karte.</string>
+    <string name="quick_action_wind_layer">Eine Schaltfläche zum Ein- und Ausblenden der Windebene auf der Karte.</string>
+    <string name="quick_action_air_pressure_layer">Eine Schaltfläche zum Ein- und Ausblenden der Luftdruckebene auf der Karte.</string>
     <string name="temperature_layer">Temperaturebene</string>
     <string name="pressure_layer">Luftdruckebene</string>
     <string name="wind_layer">Windebene</string>
     <string name="cloud_layer">Wolkenebene</string>
     <string name="precipitation_layer">Niederschlagsebene</string>
-    <string name="quick_action_temperature_layer">Ein Schalter zum Ein- oder Ausblenden der Temperaturebene auf der Karte.</string>
-    <string name="quick_action_cloud_layer">Ein Schalter zum Ein- oder Ausblenden der Bewölkungsebene auf der Karte.</string>
+    <string name="quick_action_temperature_layer">Eine Schaltfläche zum Ein- und Ausblenden der Temperaturebene auf der Karte.</string>
+    <string name="quick_action_cloud_layer">Eine Schaltfläche zum Ein- und Ausblenden der Wolkenebene auf der Karte.</string>
     <string name="rendering_attr_showMtbScale_name">MTB-Skala anzeigen</string>
     <string name="rendering_attr_showMtbScale_description">Wege nach MTB-Skala anzeigen.</string>
     <string name="mtb_scale">MTB-Skala</string>
@@ -5412,7 +5407,7 @@
     <string name="auto_25_chars_route_tsll">Leicht links abbiegen</string>
     <string name="auto_25_chars_route_tu">Wenden</string>
     <string name="driving_region_india">Indien</string>
-    <string name="driving_region_uk">UK und andere</string>
+    <string name="driving_region_uk">GB und andere</string>
     <string name="hugerock_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Relief usw. für %1$s Monat</string>
     <string name="hugerock_promo">Hugerock-Promo für %1$s Monate</string>
     <string name="shared_string_automatically">Automatisch</string>
@@ -5420,7 +5415,7 @@
     <string name="detailed_track_guidance">Detaillierte Spurführung</string>
     <string name="detailed_track_guidance_description">OsmAnd gleicht Ihren Weg mit nahe gelegenen Straßen ab, um die Abbiegehinweise zu verbessern.</string>
     <string name="quick_action_routes_summary">Ein Schalter, um %1$s auf der Karte anzuzeigen oder auszublenden.</string>
-    <string name="compass_click_north_is_up">Um den Ausrichtungsmodus zu ändern, klicken und halten Sie</string>
+    <string name="compass_click_north_is_up">Klicken und halten Sie, um den Ausrichtungsmodus zu ändern</string>
     <string name="help_article_map_tracks_name">Tracks</string>
     <string name="help_article_map_routes_name">Routen</string>
     <string name="route_roundabout_exit">%1$d. Ausfahrt nehmen</string>
@@ -5903,8 +5898,8 @@
     <string name="shared_string_last_downhill">Letzte Bergabfahrt</string>
     <string name="requires_internet_connection">Erfordert eine Internetverbindung</string>
     <string name="save_and_access_articles_offline">Daten speichern und überall offline auf Artikel zugreifen</string>
-    <string name="quick_action_wind_animation_layer">Ein Schalter zum Ein- oder Ausblenden der Windanimationsebene auf der Karte.</string>
-    <string name="quick_action_weather_layers">Ein Schalter zum Ein- oder Ausblenden von Wetterebenen auf der Karte.</string>
+    <string name="quick_action_wind_animation_layer">Eine Schaltfläche zum Ein- und Ausblenden der Windanimationsebene auf der Karte.</string>
+    <string name="quick_action_weather_layers">Eine Schaltfläche zum Ein- und Ausblenden der Wetterebenen auf der Karte.</string>
     <string name="wind_animation_layer">Windanimationsebene</string>
     <string name="weather_layers">Wetterebenen</string>
     <string name="download_wikipedia_label">Wikipedia herunterladen</string>
@@ -5930,4 +5925,10 @@
     <string name="vehicle_metrics_chart_category">Fahrzeugdaten</string>
     <string name="delete_folder_description">Ordner „%1$s“ löschen?</string>
     <string name="slots">Slots</string>
+    <string name="has_vehicle_metrics">Mit OBD-II-Daten</string>
+    <string name="buildings_3d_detail_level">Detaillierung von 3D-Gebäuden</string>
+    <string name="show_spherical_map">Globusansicht</string>
+    <string name="visualizing_button_grid">Raster der Karten-Schaltflächen</string>
+    <string name="imprecise_coordinates">Ungenaue Koordinaten</string>
+    <string name="show_expand_button">Erweitern-Schaltfläche anzeigen</string>
 </resources>

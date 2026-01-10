@@ -1348,7 +1348,7 @@
     <string name="poi_bicycle_parking_anchors">Ankrud</string>
     <string name="poi_services">Teeninduspiirkond</string>
     <string name="poi_mini_roundabout">Väike ringristmik</string>
-    <string name="poi_railway_crossing">Raudtee ülesõit</string>
+    <string name="poi_railway_crossing">Raudteeülesõit</string>
     <string name="poi_railway_level_crossing">Samatasandiline raudteeülesõit</string>
     <string name="poi_bird_hide">Linnuvaatlushoone</string>
     <string name="poi_horse_riding">Ratsutamine</string>
@@ -1894,7 +1894,7 @@
     <string name="poi_route_light_rail_ref">Kergraudtee</string>
     <string name="poi_route_monorail_ref">Monorelss</string>
     <string name="poi_route_funicular_ref">Köisraudtee</string>
-    <string name="poi_route_railway_ref">Raudtee marsruut</string>
+    <string name="poi_route_railway_ref">Raudteemarsruut</string>
     <string name="poi_historic_yes">Ajalooline objekt</string>
     <string name="poi_surveillance_yes">Valvetehnika: jah</string>
     <string name="poi_service_bicycle_retail_yes">Jaemüük;Jalgrataste jaemüük;Rataste müük</string>

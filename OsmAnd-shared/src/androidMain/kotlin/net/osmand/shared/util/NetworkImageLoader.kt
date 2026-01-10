@@ -24,7 +24,7 @@ class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = f
 
         private const val MAX_THREADS = 8
         private const val MAX_REQUESTS_PER_HOST = 4
-        private const val USER_AGENT = "Mozilla/5.0 (OsmAnd; Android)"
+        const val USER_AGENT = "Mozilla/5.0 (OsmAnd; Android)"
 
         private const val MAX_ATTEMPTS = 5
         private const val HTTP_TOO_MANY_REQUESTS = 429
