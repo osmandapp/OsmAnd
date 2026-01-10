@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets.routeinfo;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_ROUTE_INFO_MENU_ID;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ROUTE_INFO;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DISTANCE_CHANGE_THRESHOLD;
@@ -122,13 +123,22 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		View buttonTappableArea = view.findViewById(R.id.button_tappable_area);
 		buttonTappableArea.setOnClickListener(v -> mapActivity.getMapActions().doRoute());
 
+		ApplicationMode appMode = settings.getApplicationMode();
+		boolean buttonVisible = isShowExpandButtonEnabled(appMode)
+				&& app.getAppCustomization().isFeatureEnabled(FRAGMENT_ROUTE_INFO_MENU_ID);
+
+		if (AndroidUiHelper.updateVisibility(buttonTappableArea, buttonVisible)) {
+			int margin = AndroidUtils.dpToPx(app, 16);
+			MarginLayoutParams params = (MarginLayoutParams) view.findViewById(R.id.primary_block).getLayoutParams();
+			AndroidUtils.setMargins(params, buttonVisible ? 0 : margin, params.topMargin, params.getMarginEnd(), params.bottomMargin);
+		}
 		view.setOnLongClickListener(v -> {
 			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode, true);
 			return true;
 		});
 
-		WidgetSize size = getWidgetSize();
-		boolean useSingleLine = (hasEnoughWidth && !hasSecondaryData) || size == WidgetSize.SMALL;
+		boolean small = getWidgetSize() == WidgetSize.SMALL;
+		boolean useSingleLine = (hasEnoughWidth && !hasSecondaryData) || small;
 		tvPrimaryLine1.setGravity(Gravity.START | (useSingleLine ? Gravity.CENTER_VERTICAL : Gravity.TOP));
 
 		AndroidUiHelper.setVisibility(!useSingleLine, tvSecondaryLine1);
@@ -442,6 +452,14 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	public void setDisplayPriority(@NonNull ApplicationMode appMode,
 	                               @NonNull DisplayPriority displayPriority) {
 		widgetState.setDisplayPriority(appMode, displayPriority);
+	}
+
+	public boolean isShowExpandButtonEnabled(@NonNull ApplicationMode appMode) {
+		return widgetState.isShowExpandButtonEnabled(appMode);
+	}
+
+	public void setShowExpandButtonEnabled(@NonNull ApplicationMode appMode, boolean value) {
+		widgetState.setShowExpandButtonEnabled(appMode, value);
 	}
 
 	private int spToPx(int sp) {

@@ -815,11 +815,7 @@
     <string name="map_widget_audionotes">Аудіопримітки</string>
     <string name="audionotes_plugin_description">Робіть аудіо/фото/відео примітки під час подорожі використовуючи кнопку на мапі або контекстне меню.</string>
     <string name="audionotes_plugin_name">Аудіо/відео примітки</string>
-    <string name="srtm_plugin_description">Дані про рельєф місцевості, такі як ізолінії, рельєф, схили, допомагають візуально оцінити рельєф місцевості, можливості судноплавства тощо. Топографічні відомості можуть бути представлені на мапі ізолініями, рельєфом місцевості та/або розфарбовуванням крутості схилів.
-\n
-\nВихідні дані походять від SRTM та ASTER.
-\n
-\nПодробиці за посиланням %1$s.</string>
+    <string name="srtm_plugin_description">Надає рельєф місцевості та детальну топографію для візуального розуміння рельєфу ландшафту та прохідності, використовуючи контурні лінії, зафарбовування пагорбів або схилів, а також 3D-вигляд.\n\nЩоб активувати ці функції для регіону, вам потрібно додатково завантажити карту контурних ліній та/або рельєфу місцевості (3D), складену з даних SRTM та ASTER.\n\nДодаткова інформація на %1$s.</string>
     <string name="srtm_plugin_name">Топографія</string>
     <string name="download_select_map_types">Інші мапи</string>
     <string name="download_roads_only_item">Тільки дороги</string>
@@ -5450,8 +5446,8 @@
     <string name="raster_layers_action_descr">Змінити растрові шари</string>
     <string name="type_of_activity">Вид діяльності</string>
     <string name="change_activity">Зміна активності</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Стежки для ґрунтового велосипеда</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Показати стежки для ґрунтових велосипедів</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Траси для позашляхових мотоциклів</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Показати траси для позашляхових мотоциклів</string>
     <string name="shared_string_decrease">Зменшити</string>
     <string name="shared_string_increase">Збільшити</string>
     <string name="no_photos_available_descr">До цього місця ще не додано жодної фотографії користувача</string>
@@ -5812,7 +5808,7 @@
     <string name="write_location_provider">Постачальник місцезнаходження для запису</string>
     <string name="altitude_metrics_description">Встановлює одиницю відображення висоти у віджетах та статистиці.</string>
     <string name="average_elevation">Середній висота</string>
-    <string name="ascent">Підйом</string>
+    <string name="ascent">Підйоми</string>
     <string name="descent">Спуск</string>
     <string name="map_orientations_choose_description">Залиште поле порожнім, щоб перемикатися між усіма доступними режимами, або додайте лише потрібні.</string>
     <string name="map_orientations">Орієнтації карти</string>
@@ -5935,4 +5931,41 @@
     <string name="lang_mi">Маорі</string>
     <string name="buildings_3d_detail_level">3D-деталізація будівель</string>
     <string name="has_vehicle_metrics">З даними OBDII</string>
+    <string name="show_expand_button">Показати кнопку розгортання</string>
+    <string name="imprecise_coordinates">Неточні координати</string>
+    <string name="star_watcher_plugin_name">Спостерігач за зірками (бета-версія)</string>
+    <string name="star_watcher_plugin_description">Зоряні карти, 3D-карта зоряного неба</string>
+    <string name="star_map">Зоряна карта</string>
+    <string name="star_charts_name">Зоряні карти</string>
+    <string name="star_visibility_name">Видимість зірок</string>
+    <string name="star_altitude_name">Висота зірки</string>
+    <string name="astro_name_sun">Сонце</string>
+    <string name="astro_name_moon">Місяць</string>
+    <string name="astro_name_mercury">Меркурій</string>
+    <string name="astro_name_venus">Венера</string>
+    <string name="astro_name_mars">Марс</string>
+    <string name="astro_name_jupiter">Юпітер</string>
+    <string name="astro_name_saturn">Сатурн</string>
+    <string name="astro_name_uranus">Уран</string>
+    <string name="astro_name_neptune">Нептун</string>
+    <string name="astro_name_pluto">Плутон</string>
+    <string name="azimuthal_grid">Азимутальна сітка</string>
+    <string name="equatorial_grid">Екваторіальна сітка</string>
+    <string name="ecliptic_line">Лінія екліптики</string>
+    <string name="magnitude_filter">Фільтр величини</string>
+    <string name="astro_planets">Планети</string>
+    <string name="astro_constellation">Сузір</string>
+    <string name="astro_constellations">Сузір\'я</string>
+    <string name="astro_stars">Зірки</string>
+    <string name="astro_galaxies">Галактики</string>
+    <string name="astro_nebulae">Туманності</string>
+    <string name="astro_open_clusters">Розкриті скупчення</string>
+    <string name="astro_globular_clusters">Кулясті скупчення</string>
+    <string name="astro_galaxy_clusters">Скупчення галактик</string>
+    <string name="astro_black_holes">Чорні діри</string>
+    <string name="visible_layers_and_objects">Видимі шари та об\'єкти</string>
+    <string name="shared_string_azimuth">Азимут</string>
+    <string name="shared_string_magnitude">Величина</string>
+    <string name="astro_rise">Підйом</string>
+    <string name="astro_set">Набір</string>
 </resources>

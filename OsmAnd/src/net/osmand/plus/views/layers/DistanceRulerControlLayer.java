@@ -360,6 +360,9 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawDistBetweenFingerAndLocation(Canvas canvas, RotatedTileBox tb, Location currLoc, boolean night) {
+		if (touchPointLatLon == null) {
+			return;
+		}
 		PointF firstScreenPoint = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
 		PointF secondScreenPoint = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, currLoc.getLatitude(), currLoc.getLongitude());
 		float x = firstScreenPoint.x;
@@ -534,6 +537,22 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		if (line != null) {
 			recalculatePath(tileBox, line.first, line.second);
 			rotateText = line.first.x >= line.second.x;
+			return true;
+		}
+
+		PointF startPixel = NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tileBox, startLatLon);
+		PointF endPixel = NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tileBox, endLatLon);
+
+		int width = tileBox.getPixWidth();
+		int height = tileBox.getPixHeight();
+		boolean startVisible = startPixel.x >= 0 && startPixel.x <= width &&
+				startPixel.y >= 0 && startPixel.y <= height;
+		boolean endVisible = endPixel.x >= 0 && endPixel.x <= width &&
+				endPixel.y >= 0 && endPixel.y <= height;
+
+		if (startVisible || endVisible) {
+			recalculatePath(tileBox, startPixel, endPixel);
+			rotateText = startPixel.x >= endPixel.x;
 			return true;
 		}
 

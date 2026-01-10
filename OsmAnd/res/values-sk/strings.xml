@@ -858,11 +858,7 @@
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Vytvárajte obrazové/zvukové/video poznámky počas výletu, buď tlačidlom na mape alebo v kontextovom menu polohy na mape.</string>
     <string name="audionotes_plugin_name">Audio/video poznámky</string>
-    <string name="srtm_plugin_description">Informácie o teréne, ako vrstevnice, tieňované reliéfy, svahy, vám pomôžu opticky zhodnotiť tvar povrchu krajiny, schodnosť a ďalšie. Topografické informácie môžu byť na mape reprezentované tieňovaním svahov, vrstevnicami a farbami sklonu.
-\n
-\nÚdaje pochádzajú od SRTM a ASTER.
-\n
-\nĎalšie podrobnosti na %1$s.</string>
+    <string name="srtm_plugin_description">Informácie o teréne, ako vrstevnice, tieňované reliéfy, svahy, vám pomôžu opticky zhodnotiť tvar povrchu krajiny, schodnosť a ďalšie. Topografické informácie môžu byť na mape reprezentované tieňovaním svahov, vrstevnicami a farbami sklonu. \n \nÚdaje pochádzajú od SRTM a ASTER. \n \nĎalšie podrobnosti na %1$s.</string>
     <string name="srtm_plugin_name">Topografia</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
     <string name="download_srtm_maps">Údaje vrstevníc</string>

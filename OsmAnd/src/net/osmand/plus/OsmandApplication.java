@@ -6,6 +6,8 @@ import static net.osmand.shared.settings.enums.MetricsConstants.KILOMETERS_AND_M
 import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_FEET;
 import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_METERS;
 
+import static btools.routingapp.BRouterServiceConnection.BROUTER_CONNECT_TIMEOUT_MS;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -952,10 +954,15 @@ public class OsmandApplication extends MultiDexApplication {
 	public synchronized IBRouterService reconnectToBRouter() {
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
-			// a delay is necessary as the service process needs time to start..
-			Thread.sleep(800);
 			if (bRouterServiceConnection != null) {
-				return bRouterServiceConnection.getBrouterService();
+				long start = System.currentTimeMillis();
+				while (System.currentTimeMillis() - start < BROUTER_CONNECT_TIMEOUT_MS) {
+					IBRouterService service = bRouterServiceConnection.getBrouterService();
+					if (service != null) {
+						return service;
+					}
+					Thread.sleep(100);
+				}
 			}
 		} catch (Exception e) {
 			LOG.error(e);

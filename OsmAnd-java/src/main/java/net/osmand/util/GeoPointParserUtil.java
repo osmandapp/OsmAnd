@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
 
 public class GeoPointParserUtil {
 
-
 	private static String getQueryParameter(final String param, URI uri) {
 		final String query = uri.getQuery();
 		String value = null;
@@ -129,7 +128,7 @@ public class GeoPointParserUtil {
 		return null;
 	}
 
-	private static URI createUri(final String uriString) {
+	public static URI createUri(final String uriString) {
 		try {
 			// amap.com uses | in their URLs, which is an illegal character for a URL
 			return URI.create(uriString.trim().replaceAll("\\s+", "+")
@@ -169,6 +168,7 @@ public class GeoPointParserUtil {
 		Set<String> simpleDomains = new HashSet<String>();
 		simpleDomains.add("osmand.net");
 		simpleDomains.add("www.osmand.net");
+		simpleDomains.add("test.osmand.net");
 		simpleDomains.add("download.osmand.net");
 		simpleDomains.add("openstreetmap.de");
 		simpleDomains.add("www.openstreetmap.de");
@@ -377,6 +377,7 @@ public class GeoPointParserUtil {
 	                                                   String fragment, Pattern commaSeparatedPairPattern) {
 		String latString = null;
 		String lonString = null;
+		String ftidCellId = null;
 		String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
 
 		if (params.containsKey("q")) {
@@ -402,6 +403,8 @@ public class GeoPointParserUtil {
 			return parseGoogleMapsPath(params.get("daddr"), params);
 		} else if (params.containsKey("saddr")) {
 			return parseGoogleMapsPath(params.get("saddr"), params);
+		} else if (params.containsKey("ftid")) {
+			ftidCellId = params.get("ftid");
 		} else if (params.containsKey("q")) {
 			String opath = params.get("q");
 			final String pref = "loc:";
@@ -457,12 +460,22 @@ public class GeoPointParserUtil {
 							lat = v.substring(2);
 						} else if (v.startsWith("4d")) {
 							lon = v.substring(2);
+						} else if (v.startsWith("1s")) {
+							ftidCellId = v.substring(2);
 						}
 					}
 					if (lat != null && lon != null) {
 						return Collections.singletonList(new GeoParsedPoint(Double.parseDouble(lat), Double.parseDouble(lon)));
 					}
 				} else {
+					if ("/".equals(pref) && ftidCellId != null) {
+						// ftid (1s) processed after 3d/4d and /@
+						LatLon ll = parseS2ftid(ftidCellId);
+						if (ll != null) {
+							return Collections.singletonList(
+									new GeoParsedPoint(ll.getLatitude(), ll.getLongitude(), true));
+						}
+					}
 					return parseGoogleMapsPath(path, params);
 				}
 			}
@@ -808,5 +821,28 @@ public class GeoPointParserUtil {
 		} catch (NumberFormatException e) {
 		}
 		return 0;
+	}
+
+	private static LatLon parseS2ftid(String ftid) {
+		if (!Algorithms.isEmpty(ftid)) {
+			try {
+				GeoPointParserSimpleS2.CellId id = GeoPointParserSimpleS2.CellId.fromFtid(ftid);
+				if (id.isValid()) {
+					double[] ll = id.toLatLon();
+					return new LatLon(ll[0], ll[1]);
+				}
+			} catch(Exception e) {
+				return null;
+			}
+		}
+		return null;
+	}
+
+	public static boolean isGooGlUrl(String url) {
+		if (url == null) {
+			return false;
+		}
+		String lowerUrl = url.toLowerCase(Locale.ROOT);
+		return lowerUrl.startsWith("http") && lowerUrl.contains("goo.gl/");
 	}
 }

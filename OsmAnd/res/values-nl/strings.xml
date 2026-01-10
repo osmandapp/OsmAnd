@@ -312,11 +312,11 @@
     <string name="application_dir">Opslagmap</string>
     <string name="osmand_net_previously_installed">Een oudere OsmAnd versie is al geïnstalleerd. Alle offline gegevens blijven werken in het nieuwe programma, maar Favorieten moeten worden geëxporteerd in de oude versie en dan worden geïmporteerd in de nieuwe.</string>
     <string name="build_installed">Versie {0} succesvol geïnstalleerd ({1}).</string>
-    <string name="downloading_build">Downloaden versie…</string>
+    <string name="downloading_build">Build wordt gedownload…</string>
     <string name="install_selected_build">Doorgaan met de installatie van OsmAnd - {0} van {1} {2} MB\?</string>
     <string name="loading_builds_failed">Kan de lijst met OsmAnd-builds niet ophalen</string>
     <string name="loading_builds">OsmAnd-versies worden geladen…</string>
-    <string name="select_build_to_install">Kies de OsmAnd-versie om te installeren</string>
+    <string name="select_build_to_install">Kies de OsmAnd-build om te installeren</string>
     <string name="contribution_activity">Installeer versie</string>
     <string name="gps_status_app_not_found">GPS-status applicatie is niet geïnstalleerd. Zoeken op Market?</string>
     <string name="voice_is_not_available_msg">Stembegeleiding is niet aanwezig. Ga naar \'Profielinstellingen\', kies \'Stembegeleiding\' en kies of download een stemmenpakket.</string>
@@ -837,11 +837,7 @@
     <string name="map_widget_max_speed">Snelheidslimiet</string>
     <string name="rendering_attr_noAdminboundaries_name">Grenzen</string>
     <string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9).</string>
-    <string name="srtm_plugin_description">Deze plug-in toont hoogtelijnen en een reliëfschaduwlaag bovenop de normale OsmAnd-kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap.
-\n
-\nDe wereldwijde gegevens (van 70° noorderbreedte tot 70° zuiderbreedte) zijn gebaseerd op metingen door SRTM(Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de Terra-satelliet, het vlaggenschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).
-\n
-\nLees verder op %1$s.</string>
+    <string name="srtm_plugin_description">Biedt een gedetailleerde topografie voor een visueel begrip van het reliëf van het landschap en de begaanbaarheid, met behulp van hoogtelijnen, reliëfschaduw of kleurcodering van hellingen en een 3D-weergave.\n\nOm deze functies voor een regio in te schakelen, moet u daarnaast de hoogtelijnen en/of het 3D-terreinkaartmateriaal downloaden, samengesteld uit SRTM- en ASTER-gegevens.\n\nMeer informatie vindt u op %1$s.</string>
     <string name="srtm_plugin_name">Topografie</string>
     <string name="download_select_map_types">Andere kaarten</string>
     <string name="download_srtm_maps">Hoogtelijnen</string>
@@ -903,7 +899,7 @@
     <string name="item_checked">aangevinkt</string>
     <string name="item_unchecked">niet aangevinkt</string>
     <string name="access_arrival_time">Aankomsttijd</string>
-    <string name="map_widget_gps_info">GPS info</string>
+    <string name="map_widget_gps_info">GPS-info</string>
     <string name="layer_hillshade">Reliëfschaduwlaag</string>
     <string name="osmand_play_title_30_chars">OsmAnd Kaarten &amp; Navigatie</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Kaarten &amp; Navigatie</string>
@@ -1261,8 +1257,8 @@
     <string name="rendering_category_others">Overige kaart attributen</string>
     <string name="map_widget_appearance_rem">Resterende onderdelen</string>
     <string name="map_widget_top">Statusbalk</string>
-    <string name="map_widget_right">Widgets Rechter Kolom</string>
-    <string name="map_widget_left">Widgets Linker Kolom</string>
+    <string name="map_widget_right">Rechterpaneel</string>
+    <string name="map_widget_left">Linkerpaneel</string>
     <string name="configure_map">Kaart instellen</string>
     <string name="search_radius_proximity">Binnen</string>
     <string name="anonymous_user_hint">Anonieme gebruikers kunnen geen:
@@ -1475,7 +1471,7 @@
     <string name="current_route">Huidige route</string>
     <string name="osm_changes_added_to_local_edits">OSM-aanpassingen toegevoegd aan lokale changeset</string>
     <string name="mark_to_delete">Markeer om te verwijderen</string>
-    <string name="agps_info">A-GPS info</string>
+    <string name="agps_info">A-GPS-info</string>
     <string name="agps_data_last_downloaded">A-GPS data gedownload: %1$s</string>
     <string name="filter_poi_hint">Filter op naam</string>
     <string name="search_poi_category_hint">Tik om alles te doorzoeken</string>
@@ -4237,7 +4233,7 @@
     <string name="save_changes_into_file">Sla de wijzigingen op in een bestand</string>
     <string name="save_as_copy">Sla op als kopie</string>
     <string name="gps_filter_actions_description">OsmAnd past de wijziging toe op de track zonder het bestand bij te werken. Je kan de wijzigingen handmatig opslaan.</string>
-    <string name="shared_string_gps_filter">GPS filter</string>
+    <string name="shared_string_gps_filter">GPS-filter</string>
     <string name="storage_migration_wrong_folder_warning">Geen OsmAnd gegevens in de geselecteerde map gevonden. Gelieve opnieuw te proberen.</string>
     <string name="icon_group_education">Educatie</string>
     <string name="shared_string_precision">Nauwkeurigheid</string>
@@ -4488,7 +4484,7 @@
     <string name="mtb_imba_full">Internationale Mountain Bicycling Association</string>
     <string name="weather_pressure_hectopascals">Hectopascal</string>
     <string name="weather_pressure_inches_of_mercury">Inch kwik</string>
-    <string name="map_rendering_engine_descr">Versie 1 was de standaard voor OsmAnd 4.3, en is nog steeds beter voor oudere toestellen.\nVersie 2 (OpenGL) is een snellere laad methode, met 2,5D zicht.</string>
+    <string name="map_rendering_engine_descr">Versie 1 was de standaard tot OsmAnd 4.3 en is geschikt voor oudere apparaten. \n\nVersie 2 (OpenGL) is geavanceerder en biedt onder meer een 3D-weergave.</string>
     <string name="map_rendering_engine">Laad methode van kaarten</string>
     <string name="show_borders_of_downloaded_maps">Grenzen tonen van gedownloade kaarten</string>
     <string name="purchases_feature_desc_external_sensors">Gegevens van externe sensors tonen en opnemen: fietssnelheid, fietskracht, ritme en hartslag.</string>
@@ -4504,7 +4500,7 @@
     <string name="rendering_attr_showWaterwayTunnels_description">Verhoog zichtbaarheid voor waterwegtunnels</string>
     <string name="routing_attr_avoid_4wd_only_name">4x4 wegen vermijden</string>
     <string name="no_widgets_here_yet">Nog geen widgets hier</string>
-    <string name="configure_screen_widgets_descr">Kies schermgrootte om widgets toe te voegen of opnieuw in te delen.</string>
+    <string name="configure_screen_widgets_descr">Selecteer een schermkant om widgets toe te voegen of te herschikken.</string>
     <string name="weather_pressure_hpa">hPa</string>
     <string name="auto_25_chars_route_tu_kr">U-bocht maken en rechts aanhouden</string>
     <string name="rendering_attr_depthContourColorScheme_name">Kleurschema van lijnen</string>
@@ -4633,7 +4629,7 @@
     <string name="calculate_altitude">Hoogte berekenen</string>
     <string name="calculating_altitude">Hoogte berekenen</string>
     <string name="track_attach_to_the_roads_descr">Het pad zal worden gekoppeld aan de wegen op de offline kaarten, de loop van het pad zal worden aangepast.</string>
-    <string name="navigation_points">Navigatie punten</string>
+    <string name="navigation_points">Navigatiepunten</string>
     <string name="map_widget_distance_to_destination">Afstand tot bestemming</string>
     <string name="move_map_to_select_area">Beweeg kaart om het benodigde gebied te kiezen.</string>
     <string name="default_appearance">Standaard uiterlijk</string>
@@ -4841,7 +4837,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_name">\'Fixme\' labels</string>
     <string name="turn_arrows_descr">Kies of Afslaan Pijlen zijn aangegeven op de route lijn.</string>
     <string name="use_routing_fallback">Terugvallen op offline wegvinden</string>
-    <string name="map_markers_bar">Markeringen balk</string>
+    <string name="map_markers_bar">Kaartmarkeringenbalk</string>
     <string name="osm_carto_render_descr">Vergelijkbaar met de OpenStreetMap stijl van de OSM website</string>
     <string name="simulation_real_mode_title">Realistische simulatie</string>
     <string name="simulation_preview_mode_title">Snelle voorbeeld modus</string>
@@ -6205,7 +6201,7 @@
     <string name="track_folder_appearance">Uiterlijk van de track-map</string>
     <string name="update_maps">Update kaarten</string>
     <string name="reconnect">Opnieuw verbinden</string>
-    <string name="trip_recording_downhill_widget_desc">Toont de som van alle afdalingen of de laatste afdaling van de momenteel opgenomen reis.</string>
+    <string name="trip_recording_downhill_widget_desc">Toont de som van alle afdalingen of de laatste afdaling van deze opgenomen rit.</string>
     <string name="trip_recording_uphill_widget_desc">Toont de som van alle beklimmingen of de laatste beklimming van de momenteel opgenomen reis.</string>
     <string name="trip_recording_distance_widget_desc">Toont de totale afstand van je momenteel opgenomen reis, met modi om de afstand te zien van de laatste beklimming en afdaling.</string>
     <string name="trip_recording_max_speed_widget_description">Toont de maximale snelheid van de momenteel opgenomen reis. Tik om de wisselen tussen de algehele snelheid en de maximale snelheid van de laatste beklimming of afdaling.</string>
@@ -6248,4 +6244,41 @@
     <string name="lang_mi">Maori</string>
     <string name="buildings_3d_detail_level">3D-gebouwendetaillering</string>
     <string name="has_vehicle_metrics">Met OBDII-data</string>
+    <string name="star_watcher_plugin_name">Sterrenkijker (Bèta)</string>
+    <string name="star_map">Sterrenkaart</string>
+    <string name="astro_name_sun">Zon</string>
+    <string name="astro_name_moon">Maan</string>
+    <string name="astro_name_mercury">Mercurius</string>
+    <string name="astro_name_venus">Venus</string>
+    <string name="astro_name_mars">Mars</string>
+    <string name="astro_name_jupiter">Jupiter</string>
+    <string name="astro_name_saturn">Saturnus</string>
+    <string name="astro_name_uranus">Uranus</string>
+    <string name="astro_name_neptune">Neptunus</string>
+    <string name="astro_name_pluto">Pluto</string>
+    <string name="azimuthal_grid">Azimutaalraster</string>
+    <string name="equatorial_grid">Equatoriaalraster</string>
+    <string name="ecliptic_line">Eclipticalijn</string>
+    <string name="astro_planets">Planeten</string>
+    <string name="astro_constellation">Sterrenbeeld</string>
+    <string name="astro_stars">Sterren</string>
+    <string name="astro_black_holes">Zwarte gaten</string>
+    <string name="visible_layers_and_objects">Zichtbare lagen &amp; objecten</string>
+    <string name="shared_string_azimuth">Azimut</string>
+    <string name="shared_string_magnitude">Magnitude</string>
+    <string name="show_expand_button">Toon uitklapknop</string>
+    <string name="imprecise_coordinates">Onnauwkeurige coördinaten</string>
+    <string name="astro_constellations">Sterrenbeelden</string>
+    <string name="star_watcher_plugin_description">Sterrenoverzicht, 3D-sterrenkaart</string>
+    <string name="star_visibility_name">Ster zichtbaarheid</string>
+    <string name="star_altitude_name">Ster hoogte</string>
+    <string name="magnitude_filter">Magnitude-filter</string>
+    <string name="astro_galaxies">Sterrenstelsels</string>
+    <string name="astro_nebulae">Nevels en gaswolken</string>
+    <string name="astro_globular_clusters">Bolvormige sterrenhopen</string>
+    <string name="astro_open_clusters">Open sterrenhopen</string>
+    <string name="astro_galaxy_clusters">Sterrenstelselclusters</string>
+    <string name="astro_rise">Opkomst</string>
+    <string name="astro_set">Ondergang</string>
+    <string name="star_charts_name">Sterrengrafieken</string>
 </resources>
