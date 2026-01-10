@@ -3421,7 +3421,7 @@
     <string name="shared_string_uninstall_and_restart">Удалить и перезапустить</string>
     <string name="shared_string_uninstall">Удалить</string>
     <string name="routing_attr_length_description">Укажите длину транспортного средства, разрешённую для движения по маршрутам.</string>
-    <string name="routing_attr_length_name">Длина</string>
+    <string name="routing_attr_length_name">Расстояние</string>
     <string name="speed_cameras_removed_descr">В этом устройстве нет камер контроля скорости.</string>
     <string name="app_mode_inline_skates">Роликовые коньки</string>
     <string name="use_volume_buttons_as_zoom_descr">Изменение масштаба карты кнопками громкости.</string>
