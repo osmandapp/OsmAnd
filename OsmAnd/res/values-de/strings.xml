@@ -5933,8 +5933,8 @@
     <string name="show_expand_button">Erweitern-Schaltfläche anzeigen</string>
     <string name="star_watcher_plugin_name">Sternbeobachter (Beta)</string>
     <string name="star_watcher_plugin_description">Sternkarten, 3D-Sternkarte</string>
-    <string name="star_map">Sternenkarte</string>
-    <string name="star_charts_name">Sternenkarten</string>
+    <string name="star_map">Sternkarte</string>
+    <string name="star_charts_name">Sternkarten</string>
     <string name="star_visibility_name">Sichtbarkeit der Sterne</string>
     <string name="star_altitude_name">Sternenhöhe</string>
     <string name="astro_name_sun">Sonne</string>
