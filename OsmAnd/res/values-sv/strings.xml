@@ -5113,7 +5113,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Ogiltig eller utgången token</string>
     <string name="hillshade_slope">Terrängskuggning, lutning</string>
     <string name="mapillary_menu_filter_description_new">Filtrera bilder på datum eller typ. Endast aktivt vid hög zoomnivå.</string>
-    <string name="attach_roads_descr">Anpassa ditt spår efter tillgängliga vägar för att beräkna rutt mellan punkter och koppla till svänginstruktioner och ruttegenskaper.</string>
+    <string name="attach_roads_descr">Koppla ditt spår till vägar för att få detaljerad ruttinformation, inklusive detaljerade svänginstruktioner och vägattribut.</string>
     <string name="backup_error_no_subscription">Ingen prenumeration hittades</string>
     <string name="approx_safe_mode_description">Utför GPX-approximering med långsammare Android istället för appens egna kod.</string>
     <string name="map_widget_sun_position">Solens position</string>
