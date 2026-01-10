@@ -117,7 +117,7 @@ import net.osmand.shared.wiki.WikiHelper;
 import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.wiki.WikiCoreHelper;
+import net.osmand.shared.wiki.WikiCoreHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -734,7 +734,7 @@ public class MenuBuilder {
 			CacheReadTask cacheReadTask = new CacheReadTask(cacheManager, rawKey, json -> {
 				if (!Algorithms.isEmpty(json)) {
 					ImageCardsHolder holder = new ImageCardsHolder(latLon, params);
-					List<WikiImage> wikimediaImageList = WikiCoreHelper.getImagesFromJson(json, wikiTagData.getWikiImages());
+					List<WikiImage> wikimediaImageList = WikiCoreHelper.INSTANCE.getImagesFromJson(json, wikiTagData.getWikiImages());
 					for (WikiImage wikiImage : wikimediaImageList) {
 						holder.addCard(WIKIMEDIA, new WikiImageCard(mapActivity, wikiImage));
 					}

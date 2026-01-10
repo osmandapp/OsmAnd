@@ -14,6 +14,7 @@ typealias CityNameCallback = (String) -> Unit
 
 interface OsmAndContext {
 	fun getAppDir(): KFile
+	fun getCacheDir(): KFile
 	fun getGpxDir(): KFile
 	fun getGpxImportDir(): KFile
 	fun getGpxRecordedDir(): KFile

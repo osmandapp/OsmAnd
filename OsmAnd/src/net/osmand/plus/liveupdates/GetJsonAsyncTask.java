@@ -7,6 +7,7 @@ import com.google.gson.JsonSyntaxException;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.shared.api.NetworkAPI.NetworkResponse;
 
 import org.apache.commons.logging.Log;
 
@@ -24,11 +25,11 @@ public class GetJsonAsyncTask<P> extends AsyncTask<String, Void, P> {
 
 	@Override
 	protected P doInBackground(String... params) {
-		StringBuilder response = new StringBuilder();
-		error = NetworkUtils.sendGetRequest(params[0], null, response);
+		NetworkResponse response = NetworkUtils.sendGetRequest(params[0], null);
+		error = response.getError();
 		if (error == null) {
 			try {
-				return gson.fromJson(response.toString(), protocolClass);
+				return gson.fromJson(response.getResponse(), protocolClass);
 			} catch (JsonSyntaxException e) {
 				error = e.getLocalizedMessage();
 			}
