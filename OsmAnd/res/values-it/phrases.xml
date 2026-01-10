@@ -4792,7 +4792,7 @@
     <string name="poi_healthcare_speciality_audiology">Audiologia</string>
     <string name="poi_healthcare_speciality_proctology">Proctologia</string>
     <string name="poi_healthcare_speciality_pain_control">Controllo del dolore</string>
-    <string name="poi_healthcare_speciality_pedorthist"></string>
+    <string name="poi_healthcare_speciality_pedorthist"/>
     <string name="poi_healthcare_speciality_diabetology">Diabetologia</string>
     <string name="poi_healthcare_speciality_pediatric">Pediatria</string>
     <string name="poi_healthcare_speciality_denturist">Odontotecnico</string>
