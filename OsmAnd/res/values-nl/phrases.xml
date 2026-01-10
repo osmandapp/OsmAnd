@@ -319,7 +319,7 @@
     <string name="poi_craft_bookbinder">Boekbinder</string>
     <string name="poi_craft_carpenter">Timmerman</string>
     <string name="poi_craft_electrician">Elektricien</string>
-    <string name="poi_craft_gardener">Tuinier</string>
+    <string name="poi_craft_gardener">Hovenier</string>
     <string name="poi_craft_locksmith">Slotenmaker</string>
     <string name="poi_craft_jeweller">Juwelier</string>
     <string name="poi_craft_key_cutter">Slotenmaker</string>
@@ -331,9 +331,9 @@
     <string name="poi_craft_plasterer">Stukadoor</string>
     <string name="poi_craft_rigger">Tuiger</string>
     <string name="poi_craft_roofer">Dakdekker</string>
-    <string name="poi_craft_saddler">Zadelaar</string>
+    <string name="poi_craft_saddler">Zadelmaker</string>
     <string name="poi_craft_shoemaker">Schoenmaker</string>
-    <string name="poi_craft_tailor">Kleermaker</string>
+    <string name="poi_craft_tailor">Kleermaker (mannen)</string>
     <string name="poi_beauty">Schoonheidssalon</string>
     <string name="poi_beauty_salon_nails">Nagelsalon</string>
     <string name="poi_hairdresser">Kapper</string>
@@ -409,7 +409,7 @@
     <string name="poi_power_substation">Onderstation</string>
     <string name="poi_power_transformer">Transformator</string>
     <string name="poi_aerialway_station">Kabelbaanstation</string>
-    <string name="poi_recycling">Recyclage</string>
+    <string name="poi_recycling">Recycling</string>
     <string name="poi_landfill">Stortplaats</string>
     <string name="poi_surveillance">Bewaking</string>
     <string name="poi_works">Fabriek</string>
@@ -551,10 +551,10 @@
     <string name="poi_food_court">Eetplein</string>
     <string name="poi_drinking_water">Drinkwater</string>
     <string name="poi_craft_agricultural_engines">Landbouwmachines</string>
-    <string name="poi_craft_carpet_layer">Stoffeerder</string>
+    <string name="poi_craft_carpet_layer">Tapijtlegger</string>
     <string name="poi_craft_caterer">Traiteur</string>
-    <string name="poi_craft_clockmaker">Horlogemaker</string>
-    <string name="poi_craft_dressmaker">Kleermaker</string>
+    <string name="poi_craft_clockmaker">Klokkenmaker</string>
+    <string name="poi_craft_dressmaker">Kleermaker (vrouwen)</string>
     <string name="poi_craft_glaziery">Glasblazer</string>
     <string name="poi_craft_handicraft">Hobby- en handwerk</string>
     <string name="poi_craft_hvac">Loodgieters en installatie bedrijf</string>
@@ -569,7 +569,7 @@
     <string name="poi_craft_stand_builder">Standbouwer</string>
     <string name="poi_craft_stonemason">Steenhouwer</string>
     <string name="poi_craft_sun_protection">Buitensportwinkel</string>
-    <string name="poi_craft_sweep">Vegen</string>
+    <string name="poi_craft_sweep">Schoorsteenveger</string>
     <string name="poi_craft_tiler">Tegelzetter</string>
     <string name="poi_craft_tinsmith">Tingieter</string>
     <string name="poi_craft_upholsterer">Stoffeerder</string>
@@ -1805,7 +1805,7 @@
     <string name="poi_service_bicycle_second_hand_no">Verkoop van tweedehands fietsen: nee</string>
     <string name="poi_service_bicycle_charging_yes">Opladen: ja</string>
     <string name="poi_service_bicycle_charging_no">Opladen: nee</string>
-    <string name="poi_bicycle_repair_station">Fietsherstel;Doe-het-zelf fietsherstel</string>
+    <string name="poi_bicycle_repair_station">Fietsenmaker;Zelfreparatiestation voor fietsen;Fietsenmaker;Zelfreparatiestation voor fietsen</string>
     <string name="poi_wildlife_hide">Plek om wild te observeren</string>
     <string name="poi_training_language">Opleiding: taal</string>
     <string name="poi_training_music">Opleiding: muziek</string>
@@ -1836,7 +1836,7 @@
     <string name="poi_industrial_depot">Type: opslag</string>
     <string name="poi_note">Notitie</string>
     <string name="poi_watering_place">Waterbak</string>
-    <string name="poi_animal_boarding">Dierpension</string>
+    <string name="poi_animal_boarding">Dierenpension</string>
     <string name="poi_animal_boarding_dog">Type: honden</string>
     <string name="poi_animal_boarding_cat">Type: katten</string>
     <string name="poi_animal_boarding_dog_cat">Type: honden en katten</string>
@@ -2612,7 +2612,7 @@
     <string name="poi_denotation">Aanduiding</string>
     <string name="poi_park_ride">Parkeer en reis</string>
     <string name="poi_rtsa_scale_filter">Moeilijkheids categorie</string>
-    <string name="poi_car_pooling">Car pool plaats</string>
+    <string name="poi_car_pooling">Carpoolplaats</string>
     <string name="poi_wiki_lang_oc">Occitaanse wiki</string>
     <string name="poi_wiki_lang_mg">Madagaskaraanse wiki</string>
     <string name="poi_wiki_lang_sco">Schotse wiki</string>
@@ -3167,7 +3167,7 @@
     <string name="poi_date_no">Geen datumweergave</string>
     <string name="poi_animal_keeping_type_paddock">Soort: paddock</string>
     <string name="poi_animal_keeping_horse">Paarden houden</string>
-    <string name="poi_animal_keeping">Dierenhouden</string>
+    <string name="poi_animal_keeping">Veeteelt</string>
     <string name="poi_nutrition_supplements">Voedingsmiddelenwinkel</string>
     <string name="poi_lighting">Verlichting</string>
     <string name="poi_feeding_place">Dierenvoederplaats</string>
@@ -3333,7 +3333,7 @@
     <string name="poi_music_school">Muziekschool</string>
     <string name="poi_electronics_repair_tv">Reparatie van elektronica: tv</string>
     <string name="poi_electronics_repair_computer">Reparatie van elektronica: computers</string>
-    <string name="poi_coworking_space">Coworking space</string>
+    <string name="poi_coworking_space">Coworking-plaats</string>
     <string name="poi_tower_construction_dish">Constructie: schotel</string>
     <string name="poi_cliff">Klif</string>
     <string name="poi_electrical">Elektronica-winkel</string>
@@ -3716,7 +3716,7 @@
     <string name="poi_craft_cabinet_maker">Meubelmaker</string>
     <string name="poi_craft_bakery">Bakkerij</string>
     <string name="poi_craft_floorer">Vloerenlegger</string>
-    <string name="poi_craft_joiner">Schrijnwerker</string>
+    <string name="poi_craft_joiner">Meubelmaker</string>
     <string name="poi_craft_distillery">Destilleerderij</string>
     <string name="poi_craft_builder">Aannemer</string>
     <string name="poi_health_food">Health food</string>
@@ -4301,4 +4301,9 @@
     <string name="poi_us_maps_recreation_area_activity_tubing">Tubing</string>
     <string name="poi_traffic_signals_arrow_no">Pijl in looprichting: nee</string>
     <string name="poi_route_activity_type_truck_hgv">Vrachtwagen</string>
+    <string name="poi_dressing_room">Kleedkamer</string>
+    <string name="poi_hairdresser_supply">Kappersbenodigdhedenwinkel</string>
+    <string name="poi_lavoir">Openbare wasplaats</string>
+    <string name="poi_parcel_locker">Pakketautomaat</string>
+    <string name="poi_waste_transfer_station">Afvalverwerkingsstation</string>
 </resources>
