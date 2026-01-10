@@ -609,18 +609,22 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	@ColorRes
 	public int getAdditionalInfoColorId() {
 		if (openingHoursInfo != null) {
-			boolean open = false;
-			for (OpeningHours.Info info : openingHoursInfo) {
-				if (info.isOpened() || info.isOpened24_7()) {
-					open = true;
-					break;
-				}
-			}
-			return open ? R.color.text_color_positive : R.color.text_color_negative;
+			return isOpeningHoursOpen(openingHoursInfo) ? R.color.text_color_positive : R.color.text_color_negative;
 		} else if (shouldShowMapSize()) {
 			return R.color.icon_color_default_light;
 		}
 		return 0;
+	}
+
+	public static boolean isOpeningHoursOpen(@NonNull List<OpeningHours.Info> openingHoursInfo) {
+		boolean open = false;
+		for (OpeningHours.Info info : openingHoursInfo) {
+			if (info.isOpened() || info.isOpened24_7()) {
+				open = true;
+				break;
+			}
+		}
+		return open;
 	}
 
 	public CharSequence getAdditionalInfoStr() {

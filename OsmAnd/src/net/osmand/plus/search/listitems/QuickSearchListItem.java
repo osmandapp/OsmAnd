@@ -451,6 +451,9 @@ public class QuickSearchListItem {
 			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 			Drawable shieldIcon = NetworkRouteDrawable
 					.getIconByAmenityShieldTags(amenity, app, nightMode, isClickableWay);
+			if(shieldIcon instanceof NetworkRouteDrawable networkRouteDrawable) {
+				networkRouteDrawable.setTextSize(16, nightMode);
+			}
 			if (shieldIcon != null) {
 				return shieldIcon;
 			}

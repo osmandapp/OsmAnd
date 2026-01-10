@@ -687,9 +687,14 @@ public class UiUtilities {
 
 	@NonNull
 	public static SpannableString createColorSpannable(@NonNull String text, @ColorInt int color, @NonNull String... textToStyle) {
+		return createColorSpannable(text, color, true, textToStyle);
+	}
+
+	@NonNull
+	public static SpannableString createColorSpannable(@NonNull String text, @ColorInt int color, boolean isFirstOccurrence, @NonNull String... textToStyle) {
 		SpannableString spannable = new SpannableString(text);
 		for (String s : textToStyle) {
-			setSpan(spannable, new ForegroundColorSpan(color), text, s);
+			setSpan(spannable, new ForegroundColorSpan(color), text, s, isFirstOccurrence);
 		}
 		return spannable;
 	}
@@ -711,8 +716,14 @@ public class UiUtilities {
 	public static void setSpan(@NonNull SpannableString spannable,
 	                           @NonNull Object styleSpan,
 	                           @NonNull String text, @NonNull String textToSpan) {
+		setSpan(spannable, styleSpan, text, textToSpan, true);
+	}
+
+	public static void setSpan(@NonNull SpannableString spannable,
+	                           @NonNull Object styleSpan,
+	                           @NonNull String text, @NonNull String textToSpan, boolean firstOccurrence) {
 		try {
-			int start = text.indexOf(textToSpan);
+			int start = firstOccurrence ? text.indexOf(textToSpan) : text.lastIndexOf(textToSpan);
 			int end = start + textToSpan.length();
 			spannable.setSpan(styleSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 		} catch (RuntimeException e) {

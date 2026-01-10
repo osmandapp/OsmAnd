@@ -25,6 +25,7 @@ import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.util.Algorithms;
 import net.osmand.data.Amenity;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -294,5 +295,17 @@ public class NetworkRouteDrawable extends Drawable {
 			this.prefix = prefix;
 			this.suffix = suffix;
 		}
+	}
+
+	public @Nullable Drawable getBackgroundDrawable() {
+		return backgroundDrawable;
+	}
+
+	public @Nullable String getOsmcText(){
+		return osmcText;
+	}
+
+	public @NotNull Paint getTextPaint() {
+		return new Paint(paint);
 	}
 }
