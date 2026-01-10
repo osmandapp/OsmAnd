@@ -2940,7 +2940,7 @@
     <string name="app_mode_camper">Kampad‑postveturilo</string>
     <string name="app_mode_campervan">Kampad‑veturilo</string>
     <string name="rendering_attr_showLez_description">Montri zonojn nur por malalte aer‑malpurigantaj veturiloj. Ne influas al difinado de kurso.</string>
-    <string name="rendering_attr_showLez_name">Zonoj de restrikta emisio (LEZ)</string>
+    <string name="rendering_attr_showLez_name">Zonoj de restrikta emisio (senpolua transporto)</string>
     <string name="temporary_conditional_routing">Konsideri portempajn limigojn</string>
     <string name="shared_string_default">Implicita</string>
     <string name="new_route_calculated_dist_dbg">Kurso: distanco %1$s, tempo: %2$s

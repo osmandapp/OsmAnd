@@ -5898,4 +5898,20 @@
     <string name="enable_3d_objects">3D zgrada</string>
     <string name="show_expand_button">Pokaži dugme za proširenje</string>
     <string name="imprecise_coordinates">Neprecizne koordinate</string>
+    <string name="star_map">Zvezdana mapa</string>
+    <string name="star_charts_name">Zvezdane mape</string>
+    <string name="star_visibility_name">Vidljivost zvezda</string>
+    <string name="star_altitude_name">Nadmorska visina zvezda</string>
+    <string name="astro_name_sun">Sunce</string>
+    <string name="astro_name_moon">Mesec</string>
+    <string name="astro_name_mercury">Merkur</string>
+    <string name="astro_name_venus">Venera</string>
+    <string name="astro_name_mars">Mars</string>
+    <string name="astro_name_jupiter">Jupiter</string>
+    <string name="astro_name_saturn">Saturn</string>
+    <string name="astro_name_uranus">Uran</string>
+    <string name="astro_name_neptune">Neptun</string>
+    <string name="astro_name_pluto">Pluton</string>
+    <string name="star_watcher_plugin_description">Zvezdane mape, 3D zvezdana mapa</string>
+    <string name="star_watcher_plugin_name">Posmatranje zvezda (Beta)</string>
 </resources>
