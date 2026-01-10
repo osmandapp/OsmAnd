@@ -12,7 +12,6 @@ import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.ComparableTracksGroup;
-import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
@@ -155,7 +154,7 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 	@NonNull
 	public List<TrackItem> getTrackItemsByGroupId(@NonNull String groupId) {
 		if (smartFolder != null) {
-			OrganizedTracksGroup group = smartFolder.getOrganizedGroupById(groupId);
+			TracksGroup group = smartFolder.getSubgroupById(groupId);
 			if (group != null) {
 				return group.getTrackItems();
 			}

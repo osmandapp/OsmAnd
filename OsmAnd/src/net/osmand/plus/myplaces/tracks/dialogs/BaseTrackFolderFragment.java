@@ -254,38 +254,34 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 
 		List<TrackFolder> folders = null;
 		List<TrackItem> trackItems = null;
-		List<OrganizedTracksGroup> organizedTracks = null;
+		List<OrganizedTracksGroup> organizedTrackGroups = null;
 		if (selectedFolder == null) {
 			if (organizedGroup != null) {
 				trackItems = organizedGroup.getTrackItems();
 			} else if (smartFolder != null) {
-				organizedTracks = smartFolder.getOrganizedTrackItems();
+				organizedTrackGroups = smartFolder.getOrganizedTrackItems();
 				trackItems = smartFolder.getTrackItems();
 			}
 		} else {
 			folders = selectedFolder.getSubFolders();
 			trackItems = selectedFolder.getTrackItems();
 		}
-		if (KAlgorithms.INSTANCE.isEmpty(folders) && KAlgorithms.INSTANCE.isEmpty(trackItems)) {
+		if (KAlgorithms.INSTANCE.isEmpty(folders)
+				&& KAlgorithms.INSTANCE.isEmpty(trackItems)
+				&& KAlgorithms.INSTANCE.isEmpty(organizedTrackGroups)) {
 			items.add(getEmptyItem());
 		} else {
 			if (!KAlgorithms.INSTANCE.isEmpty(folders)) {
 				items.addAll(folders);
 			}
-			if (!KAlgorithms.INSTANCE.isEmpty(organizedTracks)) {
-				items.addAll(organizedTracks);
+			if (!KAlgorithms.INSTANCE.isEmpty(organizedTrackGroups)) {
+				items.addAll(organizedTrackGroups);
 			} else {
 				items.addAll(trackItems);
 			}
 
 			if (shouldShowFolderStats()) {
-				TracksGroup tracksGroup = selectedFolder;
-				if (tracksGroup == null) {
-					tracksGroup = organizedGroup;
-				}
-				if (tracksGroup == null) {
-					tracksGroup = smartFolder;
-				}
+				TracksGroup tracksGroup = getCurrentTrackGroup();
 				if (tracksGroup != null) {
 					items.add(new TrackFolderAnalysis(tracksGroup));
 				}
@@ -470,7 +466,10 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 			}
 			String organizedGroupId = bundle.getString(SELECTED_ORGANIZED_GROUP_KEY);
 			if (smartFolder != null && organizedGroupId != null) {
-				organizedGroup = smartFolder.getOrganizedGroupById(organizedGroupId);
+				TracksGroup subGroup = smartFolder.getSubgroupById(organizedGroupId);
+				if (subGroup instanceof OrganizedTracksGroup) {
+					organizedGroup = (OrganizedTracksGroup) subGroup;
+				}
 			}
 			bundle.remove(SELECTED_FOLDER_KEY);
 			bundle.remove(SELECTED_ITEM_PATH_KEY);

@@ -8,6 +8,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.shared.gpx.enums.TracksSortScope;
 import net.osmand.util.Algorithms;
@@ -81,6 +82,7 @@ public class TrackSortModesHelper {
 				updated = true;
 			}
 		}
+		// TODO: update all sub folders / dependent groups as well
 		if (updated) {
 			syncSettings();
 		}
@@ -96,12 +98,28 @@ public class TrackSortModesHelper {
 	}
 
 	public void clearRelatedKeys(@NonNull String folderId) {
-		String extendedId = folderId + "__";
-		for (String key : getAllCachedInternalIds()) {
-			if (key.startsWith(extendedId)) {
-				cachedSortModes.remove(key);
+		List<String> prefixesToRemove = getRelatedKeyPrefixes(folderId);
+		if (prefixesToRemove.isEmpty()) return;
+
+		cachedSortModes.keySet().removeIf(key -> {
+			for (String prefix : prefixesToRemove) {
+				if (key.startsWith(prefix)) {
+					return true;
+				}
 			}
-		}
+			return false;
+		});
+	}
+
+	/**
+	 * Returns a list of ID prefixes that are considered "nested" or dependent on the given folderId.
+	 * Used to clean up cache when the parent folder is modified.
+	 */
+	@NonNull
+	private List<String> getRelatedKeyPrefixes(@NonNull String folderId) {
+		List<String> prefixes = new ArrayList<>();
+		prefixes.add(OrganizedTracksGroup.Companion.getBaseId(folderId));
+		return prefixes;
 	}
 
 	public void syncSettings() {

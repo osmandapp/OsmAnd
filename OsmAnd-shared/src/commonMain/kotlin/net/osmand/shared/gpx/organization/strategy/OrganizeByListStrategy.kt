@@ -6,7 +6,6 @@ import net.osmand.shared.gpx.data.TracksGroup
 import net.osmand.shared.gpx.enums.TracksSortScope
 import net.osmand.shared.gpx.organization.OrganizeByParams
 import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
-import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 object OrganizeByListStrategy : OrganizeByStrategy {
 
@@ -27,26 +26,20 @@ object OrganizeByListStrategy : OrganizeByStrategy {
 
 		val result = mutableListOf<OrganizedTracksGroup>()
 		for (entry in groupedTracks.entries) {
-			val value = entry.key
+			val value = entry.key.ifEmpty { "none" }
 			val trackItems = entry.value
-			val id = createId(originalGroup, type, value)
-			result.add(
-				OrganizedTracksGroup(
-					id,
-					type,
-					value,
-					trackItems,
-					originalGroup,
-					resourcesMapper))
+			val id = OrganizedTracksGroup.createId(originalGroup, type, value)
+			result.add(OrganizedTracksGroup(
+				id = id,
+				name = resourcesMapper.getName(type, value),
+				iconName = resourcesMapper.getIconName(type, value),
+				type = type,
+				trackItems = trackItems,
+				parentGroup = originalGroup
+			))
 		}
 		return result
 	}
-
-	private fun createId(
-		originalGroup: TracksGroup,
-		type: OrganizeByType,
-		value: String
-	) = "${getBaseId(originalGroup, type)}${value.lowercase()}"
 
 	override fun getTrackSortScope() = TracksSortScope.ORGANIZED_BY_NAME
 }

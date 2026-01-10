@@ -62,8 +62,8 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		}
 	}
 
-	fun getOrganizedGroupById(groupId: String): OrganizedTracksGroup? {
-		return getOrganizedTrackItems().find { it.getId() == groupId }
+	override fun getSubgroupById(subgroupId: String): TracksGroup? {
+		return getOrganizedTrackItems().find { it.getId() == subgroupId }
 	}
 
 	fun getOrganizedTrackItems(): List<OrganizedTracksGroup> {

@@ -10,6 +10,8 @@ interface TracksGroup {
 
 	fun getTrackItems(): List<TrackItem>
 
+	fun getSubgroupById(subgroupId: String): TracksGroup? = null
+
 	fun getTracksSortScope() = TracksSortScope.TRACKS
 
 	fun getSupportedSortScopes(): List<TracksSortScope> = listOf(TracksSortScope.TRACKS)

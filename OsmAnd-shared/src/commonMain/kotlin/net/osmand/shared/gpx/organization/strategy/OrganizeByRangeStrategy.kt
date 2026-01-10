@@ -35,29 +35,27 @@ object OrganizeByRangeStrategy : OrganizeByStrategy {
 			val startValue = entry.key * step
 			val endValue = startValue + step
 			val limits = Limits(startValue, endValue)
-
+			val valueIdPart = "from_${startValue}_to_${endValue}"
 			val trackItems = entry.value
-			val id = createId(limits, originalGroup, type)
-			result.add(
-				OrganizedTracksGroup(
-					id,
-					type,
-					limits,
-					trackItems,
-					originalGroup,
-					resourcesMapper))
+			val id = OrganizedTracksGroup.createId(originalGroup, type, valueIdPart)
+			result.add(OrganizedTracksGroup(
+				id = id,
+				name = resourcesMapper.getName(type, limits),
+				iconName = resourcesMapper.getIconName(type, limits),
+				type = type,
+				sortValue = startValue,
+				trackItems = trackItems,
+				parentGroup = originalGroup
+			))
 		}
 		return result
-	}
-
-	private fun createId(limits: Limits, originalGroup: TracksGroup, type: OrganizeByType): String {
-		return getBaseId(originalGroup, type) + "from_${limits.min}_to_${limits.max}"
 	}
 
 	private fun getRangeStartIndicator(
 		trackItem: TrackItem,
 		type: OrganizeByType,
-		step: Double): Int? {
+		step: Double
+	): Int? {
 		val property = type.filterType.property ?: return null
 
 		val value: Comparable<Any> = trackItem.dataItem?.getParameter(property) ?: return null

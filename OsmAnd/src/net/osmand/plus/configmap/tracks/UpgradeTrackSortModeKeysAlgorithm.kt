@@ -6,6 +6,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.settings.enums.TracksSortMode
 import net.osmand.shared.gpx.GpxDbHelper
 import net.osmand.shared.gpx.SmartFolderHelper
+import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.enums.TracksSortScope
 import java.io.File
 
@@ -94,7 +95,7 @@ class UpgradeTrackSortModeKeysAlgorithm(
 		upgradedKeys: MutableMap<String, TracksSortMode>,
 		parentId: String
 	) {
-		val organizedPrefix = "${parentId}__organized_by_" // TODO: don't use hardcoded key, create and use global constant instead
+		val organizedPrefix = OrganizedTracksGroup.getBaseId(parentId)
 		for (key in sortModesHelper.allCachedInternalIds) {
 			if (key.startsWith(organizedPrefix)) {
 				val sortMode = sortModesHelper.getRawSortMode(key)

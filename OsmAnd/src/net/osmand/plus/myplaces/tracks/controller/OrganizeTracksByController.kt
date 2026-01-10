@@ -53,7 +53,7 @@ class OrganizeTracksByController(
 		private set
 
 	init {
-		val savedType = app.smartFolderHelper.getSmartFolder(folderId)?.getOrganizeByType()
+		val savedType = app.smartFolderHelper.getSmartFolderById(folderId)?.getOrganizeByType()
 		selectedType = savedType
 	}
 
@@ -66,17 +66,14 @@ class OrganizeTracksByController(
 		//'None' option represented as a 'null' value
 		items.add(ScreenItem(SELECTABLE_ITEM, null))
 
-		var group: OrganizeByCategory? = null
-		for (type in OrganizeByType.entries) {
-			val currentGroup = type.category
-			if (group != currentGroup) {
-				group = currentGroup
-				items.add(ScreenItem(DIVIDER_FULL))
-				items.add(ScreenItem(GROUP_HEADER, group))
-			}
-			items.add(ScreenItem(SELECTABLE_ITEM, type))
-			if (shouldAddParagraphDivider(type)) {
-				items.add(ScreenItem(DIVIDER_WITH_PADDING))
+		for (category in OrganizeByCategory.entries) {
+			items.add(ScreenItem(DIVIDER_FULL))
+			items.add(ScreenItem(GROUP_HEADER, category))
+			for (type in OrganizeByType.valuesOf(category)) {
+				items.add(ScreenItem(SELECTABLE_ITEM, type))
+				if (shouldAddParagraphDivider(type)) {
+					items.add(ScreenItem(DIVIDER_WITH_PADDING))
+				}
 			}
 		}
 		items.add(ScreenItem(DIVIDER_FULL))
@@ -108,7 +105,7 @@ class OrganizeTracksByController(
 					&& currentParams.type == type
 					&& currentParams is OrganizeByRangeParams
 					&& currentParams.stepSize > 0) {
-					// Preserve existing step size if the type hasn't changed
+					// Preserve existing step size if the type hasn't changed and the step is valid
 					OrganizeByRangeParams(type, currentParams.stepSize)
 				} else {
 					// Reset to default step size if type changed or previous state was invalid

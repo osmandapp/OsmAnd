@@ -42,7 +42,7 @@ class OrganizeTracksStepController(
 		}
 	}
 
-	private var selectedValue = initialValue
+	private var selectedValue = organizeByType.stepRange!!.clamp(initialValue).toInt()
 	private var applyChanges = false
 
 	private var sliderCard: ISliderCard? = null

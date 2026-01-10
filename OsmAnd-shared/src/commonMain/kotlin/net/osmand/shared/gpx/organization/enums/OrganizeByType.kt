@@ -220,5 +220,9 @@ enum class OrganizeByType(
 
 	fun getDefaultStepInBaseUnits() = getDisplayUnits().toBase(stepRange!!.getMidpoint())
 
-	fun isRangeRelated() = stepRange != null && strategy is OrganizeByRangeStrategy
+	fun isRangeRelated() = stepRange != null
+
+	companion object {
+		fun valuesOf(category: OrganizeByCategory) = entries.filter { it.category == category }
+	}
 }

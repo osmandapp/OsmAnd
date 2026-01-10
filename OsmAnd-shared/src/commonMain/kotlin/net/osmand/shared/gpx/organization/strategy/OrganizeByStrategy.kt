@@ -5,7 +5,6 @@ import net.osmand.shared.gpx.data.TracksGroup
 import net.osmand.shared.gpx.enums.TracksSortScope
 import net.osmand.shared.gpx.organization.OrganizeByParams
 import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
-import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 interface OrganizeByStrategy {
 
@@ -14,12 +13,6 @@ interface OrganizeByStrategy {
 		params: OrganizeByParams,
 		resourcesMapper: OrganizeTracksResourceMapper
 	): List<OrganizedTracksGroup>?
-
-	fun getBaseId(originalGroup: TracksGroup, type: OrganizeByType): String {
-		val parentId = originalGroup.getId()
-		val typeName = type.name.lowercase()
-		return "${parentId}__organized_by_${typeName}__"
-	}
 
 	fun getTrackSortScope(): TracksSortScope
 }

@@ -1,31 +1,28 @@
 package net.osmand.shared.gpx.data
 
-import kotlinx.serialization.Transient
-import net.osmand.shared.data.Limits
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
-import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 class OrganizedTracksGroup(
     private val id: String,
+    private val name: String,
+    private val iconName: String,
     private val type: OrganizeByType,
-    private val representedValue: Any,
+    private val sortValue: Double = 0.0,
     private val trackItems: List<TrackItem>,
     private val parentGroup: TracksGroup,
-    private val resourcesMapper: OrganizeTracksResourceMapper
 ) : TracksGroup, ComparableTracksGroup {
 
-    @Transient
     private var groupAnalysis: TrackFolderAnalysis? = null
 
     override fun getId() = id
 
-    override fun getName() = resourcesMapper.getName(type, representedValue)
+    override fun getName() = name
 
     override fun getTrackItems() = trackItems
 
-    fun getIconName() = resourcesMapper.getIconName(type, representedValue)
+    fun getIconName() = iconName
 
     fun getType() = type
 
@@ -35,14 +32,7 @@ class OrganizedTracksGroup(
 
     override fun lastModified() = 0L
 
-    override fun getSortValue(): Double {
-        if (representedValue is Limits) {
-            return representedValue.min.toDouble()
-        } else if (representedValue is Number) {
-            return representedValue.toDouble()
-        }
-        return super.getSortValue()
-    }
+    override fun getSortValue() = sortValue
 
     override fun getFolderAnalysis(): TrackFolderAnalysis {
         var analysis = groupAnalysis
@@ -62,5 +52,21 @@ class OrganizedTracksGroup(
 
     override fun hashCode(): Int {
         return id.hashCode()
+    }
+
+    companion object {
+        private const val ORGANIZED_PREFIX = "organized_by_"
+
+        fun createId(
+            tracksGroup: TracksGroup,
+            type: OrganizeByType,
+            valuePart: String
+        ): String {
+            val parentId = tracksGroup.getId()
+            val typeName = type.name.lowercase()
+            return "${getBaseId(parentId)}${typeName}__${valuePart.lowercase()}"
+        }
+
+        fun getBaseId(parentId: String) = "${parentId}__${ORGANIZED_PREFIX}"
     }
 }

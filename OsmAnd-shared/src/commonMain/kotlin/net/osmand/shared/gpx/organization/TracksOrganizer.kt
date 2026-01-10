@@ -1,10 +1,10 @@
 package net.osmand.shared.gpx.organization
 
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
-import net.osmand.shared.gpx.data.SmartFolder
+import net.osmand.shared.gpx.data.TracksGroup
 import net.osmand.shared.util.PlatformUtil
 
-class TracksOrganizer(val parent: SmartFolder) {
+class TracksOrganizer(val parent: TracksGroup) {
 
 	var params: OrganizeByParams? = null
 		private set

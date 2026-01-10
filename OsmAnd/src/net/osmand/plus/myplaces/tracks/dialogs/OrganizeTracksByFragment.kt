@@ -52,12 +52,6 @@ class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDial
     private var adapter: OrganizeTracksByAdapter? = null
     private var controller: OrganizeTracksByController? = null
 
-    /**
-     * Stores the exact scroll position (state) of the LayoutManager
-     * to restore it after a configuration change (e.g., screen rotation).
-     */
-    private var recyclerState: android.os.Parcelable? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         controller = app.dialogManager.findController(PROCESS_ID) as? OrganizeTracksByController
@@ -65,10 +59,6 @@ class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDial
             controller!!.registerDialog(this)
         } else {
             dismiss()
-        }
-
-        if (savedInstanceState != null) {
-            recyclerState = savedInstanceState.getParcelable(RECYCLER_STATE_KEY)
         }
     }
 
@@ -141,6 +131,7 @@ class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDial
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = adapter
         recyclerView.layoutManager?.isItemPrefetchEnabled = false
+        recyclerView.isSaveEnabled = true
     }
 
     private fun setupApplyButton(view: View) {
@@ -157,13 +148,6 @@ class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDial
     private fun updateScreen() {
         val currentController = controller ?: return
         adapter?.setScreenItems(currentController.populateScreenItems())
-
-        // Restore exact scroll position if we have it (after rotation)
-        if (recyclerState != null) {
-            val recyclerView = view?.findViewById<RecyclerView>(R.id.recycler_view)
-            recyclerView?.layoutManager?.onRestoreInstanceState(recyclerState)
-            recyclerState = null
-        }
     }
 
     override fun onResume() {
