@@ -25,6 +25,6 @@ public enum TrackTabType {
 	}
 
 	public boolean shouldShowFolder() {
-		return this == ON_MAP || this == ALL;
+		return this == ON_MAP || this == ALL || this == SMART_FOLDER;
 	}
 }
