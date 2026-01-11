@@ -5809,4 +5809,5 @@
     <string name="max_axle_load_description">Indique la carga máxima por eje de su vehículo para evitar carreteras y puentes con límites de peso.</string>
     <string name="private_access_routing_req_short">¿Permite el uso de una vía privada para llegar a su destino?</string>
     <string name="buildings_3d_detail_level">Detallado de edificios en 3D</string>
+    <string name="lang_mi">Maorí</string>
 </resources>
