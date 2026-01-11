@@ -25,157 +25,147 @@ import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 
 class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDialogCompletely,
-    IDialogNightModeInfoProvider {
+	IDialogNightModeInfoProvider {
 
-    companion object {
+	companion object {
 
-        private val TAG = OrganizeTracksByFragment::class.java.simpleName
+		private val TAG = OrganizeTracksByFragment::class.java.simpleName
 
-        private const val RECYCLER_STATE_KEY = "recycler_state_key"
+		fun showInstance(
+			manager: androidx.fragment.app.FragmentManager,
+			appMode: ApplicationMode
+		): Boolean {
+			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+				val fragment = OrganizeTracksByFragment()
+				val arguments = Bundle()
+				arguments.putString(APP_MODE_KEY, appMode.stringKey)
+				fragment.arguments = arguments
+				fragment.show(manager, TAG)
+				return true
+			}
+			return false
+		}
+	}
 
-        fun showInstance(
-            manager: androidx.fragment.app.FragmentManager,
-            appMode: ApplicationMode
-        ): Boolean {
-            if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-                val fragment = OrganizeTracksByFragment()
-                val arguments = Bundle()
-                arguments.putString(APP_MODE_KEY, appMode.stringKey)
-                fragment.arguments = arguments
-                fragment.show(manager, TAG)
-                return true
-            }
-            return false
-        }
-    }
+	private var adapter: OrganizeTracksByAdapter? = null
+	private var controller: OrganizeTracksByController? = null
 
-    private var adapter: OrganizeTracksByAdapter? = null
-    private var controller: OrganizeTracksByController? = null
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		controller = app.dialogManager.findController(PROCESS_ID) as? OrganizeTracksByController
+		if (controller != null) {
+			controller!!.registerDialog(this)
+		} else {
+			dismiss()
+		}
+	}
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        controller = app.dialogManager.findController(PROCESS_ID) as? OrganizeTracksByController
-        if (controller != null) {
-            controller!!.registerDialog(this)
-        } else {
-            dismiss()
-        }
-    }
+	override fun getThemeId(): Int {
+		return if (nightMode) R.style.OsmandDarkTheme else R.style.OsmandLightTheme_LightStatusBar
+	}
 
-    override fun getThemeId(): Int {
-        return if (nightMode) R.style.OsmandDarkTheme else R.style.OsmandLightTheme_LightStatusBar
-    }
+	override fun getStatusBarColorId(): Int {
+		return ColorUtilities.getStatusBarSecondaryColorId(nightMode)
+	}
 
-    override fun getStatusBarColorId(): Int {
-        return ColorUtilities.getStatusBarSecondaryColorId(nightMode)
-    }
+	override fun createDialog(savedInstanceState: Bundle?): Dialog {
+		return object : Dialog(requireContext(), themeId) {
+			override fun onBackPressed() {
+				dismiss()
+			}
+		}
+	}
 
-    override fun createDialog(savedInstanceState: Bundle?): Dialog {
-        return object : Dialog(requireContext(), themeId) {
-            override fun onBackPressed() {
-                dismiss()
-            }
-        }
-    }
+	override fun onCreateView(
+		inflater: LayoutInflater,
+		container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View {
+		updateNightMode()
+		val view = inflate(R.layout.fragment_organize_tracks_by, container, false)
+		view.setBackgroundColor(ColorUtilities.getActivityListBgColor(app, nightMode))
+		return view
+	}
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        updateNightMode()
-        val view = inflate(R.layout.fragment_organize_tracks_by, container, false)
-        view.setBackgroundColor(ColorUtilities.getActivityListBgColor(app, nightMode))
-        return view
-    }
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+		setupToolbar(view)
+		setupRecycler(view)
+		setupApplyButton(view)
+		updateScreen()
+	}
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupToolbar(view)
-        setupRecycler(view)
-        setupApplyButton(view)
-        updateScreen()
-    }
+	override fun getInsetTargets(): InsetTargetsCollection {
+		val collection = super.getInsetTargets()
+		// Define targets for edge-to-edge display
+		collection.replace(InsetTarget.createBottomContainer(R.id.buttons_container))
+		collection.replace(InsetTarget.createScrollable(R.id.recycler_view))
+		return collection
+	}
 
-    override fun getInsetTargets(): InsetTargetsCollection {
-        val collection = super.getInsetTargets()
-        // Define targets for edge-to-edge display
-        collection.replace(InsetTarget.createBottomContainer(R.id.buttons_container))
-        collection.replace(InsetTarget.createScrollable(R.id.recycler_view))
-        return collection
-    }
+	private fun setupToolbar(view: View) {
+		val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+		toolbar.findViewById<View>(R.id.toolbar_subtitle).visibility = View.GONE
+		toolbar.findViewById<View>(R.id.action_button).visibility = View.GONE
 
-    private fun setupToolbar(view: View) {
-        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.findViewById<View>(R.id.toolbar_subtitle).visibility = View.GONE
-        toolbar.findViewById<View>(R.id.action_button).visibility = View.GONE
+		val closeButton = toolbar.findViewById<ImageView>(R.id.close_button)
+		closeButton.setImageResource(AndroidUtils.getNavigationIconResId(app))
+		closeButton.setOnClickListener { dismiss() }
 
-        val closeButton = toolbar.findViewById<ImageView>(R.id.close_button)
-        closeButton.setImageResource(AndroidUtils.getNavigationIconResId(app))
-        closeButton.setOnClickListener { dismiss() }
+		val title = toolbar.findViewById<TextView>(R.id.toolbar_title)
+		title.setText(R.string.organize_by)
 
-        val title = toolbar.findViewById<TextView>(R.id.toolbar_title)
-        title.setText(R.string.organize_by)
+		val appbar = view.findViewById<View>(R.id.appbar)
+		if (appbar != null) {
+			ViewCompat.setElevation(appbar, 5.0f)
+		}
+	}
 
-        val appbar = view.findViewById<View>(R.id.appbar)
-        if (appbar != null) {
-            ViewCompat.setElevation(appbar, 5.0f)
-        }
-    }
+	private fun setupRecycler(view: View) {
+		val currentController = controller ?: return
 
-    private fun setupRecycler(view: View) {
-        val currentController = controller ?: return
+		adapter = OrganizeTracksByAdapter(app, appMode, currentController)
+		val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
+		recyclerView.layoutManager = LinearLayoutManager(activity)
+		recyclerView.adapter = adapter
+		recyclerView.layoutManager?.isItemPrefetchEnabled = false
+		recyclerView.isSaveEnabled = true
+	}
 
-        adapter = OrganizeTracksByAdapter(app, appMode, currentController)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager?.isItemPrefetchEnabled = false
-        recyclerView.isSaveEnabled = true
-    }
+	private fun setupApplyButton(view: View) {
+		view.findViewById<DialogButton>(R.id.save_button).setOnClickListener {
+			controller?.askSaveChanges(activity)
+			dismiss()
+		}
+	}
 
-    private fun setupApplyButton(view: View) {
-        view.findViewById<DialogButton>(R.id.save_button).setOnClickListener {
-            controller?.askSaveChanges(activity)
-            dismiss()
-        }
-    }
+	override fun onAskRefreshDialogCompletely(processId: String) {
+		updateScreen()
+	}
 
-    override fun onAskRefreshDialogCompletely(processId: String) {
-        updateScreen()
-    }
+	private fun updateScreen() {
+		val currentController = controller ?: return
+		adapter?.setScreenItems(currentController.populateScreenItems())
+	}
 
-    private fun updateScreen() {
-        val currentController = controller ?: return
-        adapter?.setScreenItems(currentController.populateScreenItems())
-    }
+	override fun onResume() {
+		super.onResume()
+		callMapActivity {
+			it.disableDrawer()
+			controller?.fragmentActivity = it
+		}
+	}
 
-    override fun onResume() {
-        super.onResume()
-        callMapActivity {
-            it.disableDrawer()
-            controller?.fragmentActivity = it
-        }
-    }
+	override fun onPause() {
+		super.onPause()
+		callMapActivity {
+			it.enableDrawer()
+		}
+		controller?.fragmentActivity = null
+	}
 
-    override fun onPause() {
-        super.onPause()
-        callMapActivity {
-            it.enableDrawer()
-        }
-        controller?.fragmentActivity = null
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        controller?.finishProcessIfNeeded(activity)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        // Save the current scroll position before destruction
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycler_view)
-        val state = recyclerView?.layoutManager?.onSaveInstanceState()
-        outState.putParcelable(RECYCLER_STATE_KEY, state)
-    }
+	override fun onDestroy() {
+		super.onDestroy()
+		controller?.finishProcessIfNeeded(activity)
+	}
 }
