@@ -256,6 +256,28 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private float scrollDistanceY;
 	private boolean touchActive;
 
+	// Finalizes an in-progress pinch magnification safely:
+	// - Clears temporary viewport transforms (scale/shift) on the renderer.
+	// - Resets multi-touch anchors and flags without breaking @NonNull getters.
+	// - Leaves the committed zoom/center/rotation intact.
+	private void finalizePinchMagnificationIfActive() {
+		MapRendererView mr = getMapRenderer();
+		if (mr != null) {
+			// Identity scale is 1.0 — clear temporary magnifier
+			mr.setViewportScale(1.0, /*animate*/ false);
+			mr.setViewportShift(0, 0, /*animate*/ false);
+		}
+		// Keep @NonNull contract by resetting to a safe center
+		LatLon center = new LatLon(getLatitude(), getLongitude());
+		firstTouchPointLatLon  = center;
+		secondTouchPointLatLon = center;
+		// Reset state flags and accumulators
+		wasZoomInMultiTouch = false;
+		scrollDistanceX = 0f;
+		scrollDistanceY = 0f;
+		multiTouch = false;
+	}
+
 	public OsmandMapTileView(@NonNull Context ctx, int width, int height) {
 		this.ctx = ctx;
 		init(ctx, width, height);
@@ -2030,6 +2052,25 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		boolean wasInTiltMode = multiTouchSupport != null && multiTouchSupport.isInTiltMode();
 		boolean isMultiTouch = multiTouchSupport != null && multiTouchSupport.onTouchEvent(event);
 
+		// Robust termination: finalize magnification and anchors on abnormal/terminal events.
+		switch (event.getActionMasked()) {
+			case MotionEvent.ACTION_CANCEL:
+			case MotionEvent.ACTION_UP: {
+				finalizePinchMagnificationIfActive();
+				refreshMap();
+				break;
+			}
+			case MotionEvent.ACTION_POINTER_UP: {
+				// If pinch is effectively ending (pointer count drops to 1 or 0), finalize magnification
+				int remaining = event.getPointerCount() - 1; // after this POINTER_UP
+				if (remaining <= 1) {
+					finalizePinchMagnificationIfActive();
+					refreshMap();
+				}
+				break;
+			}
+		}
+
 		MeasurementToolLayer layer = getMeasurementToolLayer();
 		if (mapRenderer != null && multiTouchSupport != null && (layer == null || !layer.isInMeasurementMode())) {
 			int actionCode = event.getActionMasked();
@@ -2192,6 +2233,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private boolean startRotating;
 		private boolean startZooming;
 		private float initialElevation;
+		// Edge gesture guard (drawer/menu swipe zones)
+		private boolean isEdgeGesture;
+		private final int edgeSlopPx = ViewConfiguration.get(ctx).getScaledEdgeSlop();
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
@@ -2229,10 +2273,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				}
 			}
 
-			if (isPinchZoomMagnificationEnabled && mapRenderer != null) {
+			if (isPinchZoomMagnificationEnabled && mapRenderer != null && !isEdgeGesture) {
 				mapRenderer.setViewportScale(0.0, false);
 				mapRenderer.setViewportShift(0, 0, false);
 				changeZoomPosition((float) 0, 0);
+				// Defensive: ensure internal anchors/flags are finalized as well
+				finalizePinchMagnificationIfActive();
 			}
 		}
 
@@ -2261,6 +2307,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			this.y1 = y1;
 			this.x2 = x2;
 			this.y2 = y2;
+			// Detect edge gesture (horizontal edges). Guard when a finger starts in the drawer slop.
+			int w = view != null ? view.getWidth() : 0;
+			isEdgeGesture =
+					(x1 <= edgeSlopPx) || (x2 <= edgeSlopPx) ||
+					(w > 0 && (w - x1) <= edgeSlopPx) || (w > 0 && (w - x2) <= edgeSlopPx);
 			if (x1 != x2 || y1 != y2) {
 				MapRendererView mapRenderer = getMapRenderer();
 				if (mapRenderer != null) {
@@ -2349,8 +2400,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			initialMultiTouchCenterPoint = centerPoint;
 			initialViewport = getRotatedTileBox();
 			MapRendererView mapRenderer = getMapRenderer();
+			// Prevent parent (e.g., DrawerLayout) from intercepting pinch only if it's not an edge gesture
+			if (view != null && !isEdgeGesture) {
+				ViewParent parent = view.getParent();
+				if (parent != null) {
+					parent.requestDisallowInterceptTouchEvent(true);
+				}
+			}
 			// Remember the tile31 under the pinch center so we can re-center later
-			if (isPinchZoomMagnificationEnabled && mapRenderer != null) {
+			if (isPinchZoomMagnificationEnabled && mapRenderer != null && !isEdgeGesture) {
 				PointI elevatedTile = NativeUtilities.get31FromElevatedPixel(mapRenderer, (int) initialMultiTouchCenterPoint.x,
 						(int) initialMultiTouchCenterPoint.y);
 				if (elevatedTile != null) {
@@ -2388,7 +2446,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 
 			if (deltaZoom != 0 || relAngle != 0) {
-				if (isPinchZoomMagnificationEnabled && relativeToStart > 1.0 && mapRenderer != null ) {
+				if (isPinchZoomMagnificationEnabled && relativeToStart > 1.0 && mapRenderer != null && !isEdgeGesture) {
 					int multiTouchCenterX;
 					int multiTouchCenterY;
 					if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()) {
