@@ -489,8 +489,8 @@ class StarView @JvmOverloads constructor(
 			if (!shouldRecalculate(obj)) return@forEach
 
 			val hor: Topocentric
-			if (obj.type.isSunSystem()) {
-				val body = obj.body ?: throw IllegalStateException("Planet without Body enum")
+			if (obj.type.isSunSystem() && obj.body != null) {
+				val body = obj.body
 				val equ = equator(body, time, observer, EquatorEpoch.OfDate, Aberration.Corrected)
 				hor = horizon(time, observer, equ.ra, equ.dec, Refraction.Normal)
 				obj.distAu = equ.dist
