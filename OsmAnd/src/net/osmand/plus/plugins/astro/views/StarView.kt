@@ -533,7 +533,7 @@ class StarView @JvmOverloads constructor(
 
 	private fun isObjectVisibleInSettings(obj: SkyObject): Boolean {
 		val magnitudeFilter = magnitudeFilter
-		if (magnitudeFilter != null && !obj.type.isSunSystem()
+		if (magnitudeFilter != null && obj.type == SkyObject.Type.STAR && showStars
 			&& obj.magnitude > magnitudeFilter) return false
 
 		return when (obj.type) {

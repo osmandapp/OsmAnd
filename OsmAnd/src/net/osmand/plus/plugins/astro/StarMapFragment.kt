@@ -454,10 +454,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun updateMagnitudeFilterVisibility() {
-		val visible = (starView.showStars || starView.showGalaxies || starView.showBlackHoles
-				|| starView.showNebulae || starView.showOpenCluster || starView.showGlobularCluster
-				|| starView.showGalaxyCluster)
-				&& starView.isVisible && showMagnitudeFilter
+		val visible = starView.showStars && starView.isVisible && showMagnitudeFilter
 		magnitudeSliderContainer.visibility = if (visible) View.VISIBLE else View.GONE
 		magnitudeValueText.visibility = if (visible) View.VISIBLE else View.GONE
 		resetMagnitudeButton.visibility = if (visible) View.VISIBLE else View.GONE
