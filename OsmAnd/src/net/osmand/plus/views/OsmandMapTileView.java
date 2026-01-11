@@ -2060,15 +2060,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				refreshMap();
 				break;
 			}
-			case MotionEvent.ACTION_POINTER_UP: {
-				// If pinch is effectively ending (pointer count drops to 1 or 0), finalize magnification
-				int remaining = event.getPointerCount() - 1; // after this POINTER_UP
-				if (remaining <= 1) {
-					finalizePinchMagnificationIfActive();
-					refreshMap();
-				}
-				break;
-			}
 		}
 
 		MeasurementToolLayer layer = getMeasurementToolLayer();
@@ -2277,8 +2268,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				mapRenderer.setViewportScale(0.0, false);
 				mapRenderer.setViewportShift(0, 0, false);
 				changeZoomPosition((float) 0, 0);
-				// Defensive: ensure internal anchors/flags are finalized as well
-				finalizePinchMagnificationIfActive();
 			}
 		}
 
