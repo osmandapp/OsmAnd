@@ -60,6 +60,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.TrackItemUtils;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
@@ -76,6 +77,9 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		TrackSelectionListener, SortTracksListener, EmptyTracksListener, SelectGpxTaskListener {
 
 	public static final String TAG = TracksTabsFragment.class.getSimpleName();
+
+	public static final String PRESELECTED_TAB_PARAMS_KEY = "preselected_tab_params";
+	public static final String CALLING_FRAGMENT_TAG = "calling_fragment_tag";
 
 	private ImageView searchButton;
 
@@ -291,15 +295,28 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	}
 
 	private void applyPreselectedParams() {
-		if (preselectedTabParams != null) {
-			String tabId = preselectedTabParams.getPreselectedTabId();
-			TrackTab trackTab = getTab(tabId);
-			if (trackTab != null) {
-				setSelectedTab(tabId);
+		if (preselectedTabParams == null) return;
 
-				if (preselectedTabParams.shouldSelectAll()) {
-					itemsSelectionHelper.onItemsSelected(trackTab.getTrackItems(), true);
-				}
+		String tabId = preselectedTabParams.getTabId();
+		TrackTab trackTab = getTab(tabId);
+
+		if (trackTab != null) {
+			setSelectedTab(tabId);
+
+			String subGroupId = preselectedTabParams.getSubGroupId();
+			List<String> specificPaths = preselectedTabParams.getSpecificPaths();
+			boolean selectAll = preselectedTabParams.getSelectAll();
+
+			List<TrackItem> itemsToSelect = Collections.emptyList();
+			if (selectAll) {
+				itemsToSelect = trackTab.getTrackItems();
+			} else if (subGroupId != null) {
+				itemsToSelect = trackTab.getTrackItemsByGroupId(subGroupId);
+			} else if (specificPaths != null && !specificPaths.isEmpty()) {
+				itemsToSelect = TrackItemUtils.filterByPaths(trackTab.getTrackItems(), specificPaths);
+			}
+			if (!itemsToSelect.isEmpty()) {
+				itemsSelectionHelper.onItemsSelected(itemsToSelect, true);
 			}
 		}
 	}
@@ -499,13 +516,14 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		reloadTracks();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager) {
-		showInstance(manager, null, null);
+	public static void showInstance(@NonNull FragmentActivity activity) {
+		showInstance(activity, null, null);
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager,
+	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @Nullable PreselectedTabParams params,
 	                                @Nullable String callingFragmentTag) {
+		FragmentManager manager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TracksTabsFragment fragment = new TracksTabsFragment();
 			fragment.preselectedTabParams = params;

@@ -87,9 +87,12 @@ public class TracksGroupViewHolder extends RecyclerView.ViewHolder {
 				listener.onTracksGroupOptionsSelected(v, tracksGroup);
 			}
 		});
-		boolean isFolder = tracksGroup instanceof TrackFolder;
 		AndroidUiHelper.updateVisibility(divider, showDivider);
-		AndroidUiHelper.updateVisibility(menuButton, !selectionMode && isFolder);
+		AndroidUiHelper.updateVisibility(menuButton, !selectionMode && hasOptionsMenu(tracksGroup));
+	}
+
+	protected boolean hasOptionsMenu(@NonNull TracksGroup tracksGroup) {
+		return tracksGroup instanceof TrackFolder;
 	}
 
 	public interface TrackGroupsListener {

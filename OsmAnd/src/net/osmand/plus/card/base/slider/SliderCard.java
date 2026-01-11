@@ -49,8 +49,8 @@ public class SliderCard extends BaseCard implements ISliderCard {
 		slider.setValueTo(max);
 		slider.setValue(selected);
 
-		setText(R.id.value_min, String.valueOf(min));
-		setText(R.id.value_max, String.valueOf(max));
+		setText(R.id.value_min, controller.formatValue(min));
+		setText(R.id.value_max, controller.formatValue(max));
 
 		slider.addOnChangeListener((slider, newValue, fromUser) -> {
 			if (fromUser) {

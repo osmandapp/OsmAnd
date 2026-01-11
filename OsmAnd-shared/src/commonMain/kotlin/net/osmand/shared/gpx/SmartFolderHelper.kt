@@ -1,6 +1,7 @@
 package net.osmand.shared.gpx
 
 import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.ClassDiscriminatorMode
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
@@ -14,6 +15,8 @@ import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.filters.FolderTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterList
 import net.osmand.shared.gpx.filters.TrackFiltersHelper
+import net.osmand.shared.gpx.organization.OrganizeByParams
+import net.osmand.shared.gpx.organization.OrganizeByRangeParams
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KCollectionUtils
@@ -38,12 +41,18 @@ object SmartFolderHelper {
 		polymorphic(BaseTrackFilter::class) {
 			subclass(FolderTrackFilter::class)
 		}
+		polymorphic(OrganizeByParams::class) {
+			subclass(OrganizeByRangeParams::class)
+		}
 	}
 
 	val json = Json {
 		isLenient = true
 		ignoreUnknownKeys = true
+		useArrayPolymorphism = false
+		encodeDefaults = true
 		classDiscriminator = "className"
+		classDiscriminatorMode = ClassDiscriminatorMode.NONE
 		serializersModule = trackFilterSerializersModule
 	}
 
@@ -75,6 +84,7 @@ object SmartFolderHelper {
 						}
 						smartFolder.filters = newFilters
 					}
+					smartFolder.initTracksOrganizer()
 				}
 				newCollection.addAll(savedFilters)
 			}
@@ -279,6 +289,15 @@ object SmartFolderHelper {
 		return null
 	}
 
+	fun getSmartFolderById(id: String): SmartFolder? {
+		for (folder in smartFolderCollection) {
+			if (KAlgorithms.stringsEqual(folder.getId(), id)) {
+				return folder
+			}
+		}
+		return null
+	}
+
 	fun refreshSmartFolder(smartFolder: SmartFolder) {
 		updateSmartFolderItems(smartFolder)
 	}
@@ -303,5 +322,17 @@ object SmartFolderHelper {
 		for (smartFolder in smartFolderCollection) {
 			updateSmartFolderItems(smartFolder)
 		}
+	}
+
+	fun setOrganizeByParams(folderId: String, params: OrganizeByParams?) {
+		val folder = getSmartFolderById(folderId)
+		folder?.setOrganizeByParams(params)
+		writeSettings()
+		notifyFolderUpdatedListeners(folder ?: return)
+	}
+
+	fun getOrganizeByParams(folderId: String): OrganizeByParams? {
+		val folder = getSmartFolderById(folderId)
+		return folder?.organizeByParams
 	}
 }
