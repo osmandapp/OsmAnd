@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="gpx_too_many_points_visible_warning">Large amount of visible GPX tracks leads to high memory usage</string>
 	<string name="star_watcher_plugin_name">Star watcher (Beta)</string>
 	<string name="star_watcher_plugin_description">Star charts, 3D star map</string>
 	<string name="star_map">Star map</string>
