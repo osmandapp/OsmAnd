@@ -192,15 +192,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		routingHelper.addListener(this);
 
 		ApplicationMode appMode = settings.getApplicationMode();
-		if (!isAppModeDerivedFromCar(appMode)) {
-			for (ApplicationMode mode : ApplicationMode.values(app)) {
-				if (isAppModeDerivedFromCar(mode)) {
-					originalAppMode = appMode;
-					settings.setApplicationMode(mode, false);
-					break;
-				}
-			}
-		}
+		if (!appMode.isAppModeDerivedFromCar()) {
+			settings.setApplicationMode(ApplicationMode.getFirstCarMode(app), false);
+ 		}
 		if (navigationCarSurface != null) {
 			navigationCarSurface.handleRecenter();
 		}
@@ -228,7 +222,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void onStop(@NonNull LifecycleOwner owner) {
 		OsmandApplication app = getApp();
 		routingHelper.removeListener(this);
-		settings.setLastKnownMapElevation(app.getOsmandMap().getMapView().getElevationAngle());
 
 		boolean routing = settings.FOLLOW_THE_ROUTE.get() || routingHelper.isRouteCalculated()
 				|| routingHelper.isRouteBeingCalculated();
@@ -263,9 +256,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		app.setCarNavigationSession(null);
 	}
 
-	private boolean isAppModeDerivedFromCar(ApplicationMode appMode) {
-		return appMode == ApplicationMode.CAR || appMode.isDerivedRoutingFrom(ApplicationMode.CAR);
-	}
 
 	public boolean hasStarted() {
 		Lifecycle.State state = getLifecycle().getCurrentState();
