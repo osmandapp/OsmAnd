@@ -498,9 +498,6 @@ dependencies {
 	implementation 'com.github.KnollFrank:SettingsSearch:18f4e4ca72'
 	// https://mvnrepository.com/artifact/com.google.guava/guava
 	implementation 'com.google.guava:guava:33.5.0-android'
-	// FK-TODO: remove jgrapht dependency
-	// https://mvnrepository.com/artifact/org.jgrapht/jgrapht-io
-	implementation 'org.jgrapht:jgrapht-io:1.5.2'
 
 	//implementation "androidx.tracing:tracing:1.1.0"
 	//debugImplementation 'androidx.test:monitor:1.6.1'
