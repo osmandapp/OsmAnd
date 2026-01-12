@@ -12,8 +12,6 @@ import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
 
-import org.jgrapht.Graph;
-
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -22,20 +20,19 @@ import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.common.Views;
-import de.KnollFrank.lib.settingssearch.common.graph.Graphs;
-import de.KnollFrank.lib.settingssearch.common.graph.SearchablePreferenceScreenSubtreeReplacerFactory;
 import de.KnollFrank.lib.settingssearch.common.graph.Subtree;
-import de.KnollFrank.lib.settingssearch.common.graph.UnmodifiableTree;
+import de.KnollFrank.lib.settingssearch.common.graph.SubtreeReplacer;
+import de.KnollFrank.lib.settingssearch.common.graph.Tree;
 import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
 import de.KnollFrank.lib.settingssearch.db.preference.db.transformer.SearchablePreferenceScreenGraphTransformer;
-import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceEdge;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreen;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreens;
 import de.KnollFrank.lib.settingssearch.fragment.FragmentInitializerFactory;
 import de.KnollFrank.lib.settingssearch.fragment.InstantiateAndInitializeFragmentFactory;
-import de.KnollFrank.lib.settingssearch.graph.GraphPathFactory;
 import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenGraphProviderFactory;
+import de.KnollFrank.lib.settingssearch.graph.TreePathInstantiator;
 import de.KnollFrank.lib.settingssearch.results.recyclerview.FragmentContainerViewAdder;
 
 public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter implements SearchablePreferenceScreenGraphTransformer<Configuration> {
@@ -102,49 +99,47 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 						tileSourceTemplatesProvider,
 						activityContext.getSupportFragmentManager());
 		return new SearchablePreferenceScreenGraph(
-				SearchablePreferenceScreenSubtreeReplacerFactory
-						.createSubtreeReplacer()
-						.replaceSubtreeWithTree(
-								new Subtree<>(
+				SubtreeReplacer.replaceSubtreeWithTree(
+						new Subtree<>(
+								graph.tree(),
+								preferenceScreen),
+						getPojoGraphRootedAt(
+								instantiateSearchablePreferenceScreen(
+										preferenceScreen,
 										graph.tree(),
-										preferenceScreen),
-								getPojoGraphRootedAt(
-										instantiateSearchablePreferenceScreen(
-												preferenceScreen,
-												graph.tree().graph(),
-												createGraphPathFactory(searchDatabaseConfig, activityContext)),
-										graph.locale(),
-										activityContext,
-										searchDatabaseConfig)),
+										createTreePathInstantiator(searchDatabaseConfig, activityContext)),
+								graph.locale(),
+								activityContext,
+								searchDatabaseConfig)),
 				graph.locale(),
 				new ConfigurationBundleConverter().convertForward(newConfiguration));
 	}
 
-	private UnmodifiableTree<SearchablePreferenceScreen, SearchablePreferenceEdge> getPojoGraphRootedAt(
+	private Tree<SearchablePreferenceScreen, SearchablePreference> getPojoGraphRootedAt(
 			final PreferenceScreenWithHost root,
 			final Locale locale,
 			final FragmentActivity activityContext,
 			final SearchDatabaseConfig searchDatabaseConfig) {
-		return UnmodifiableTree.of(
-				SearchablePreferenceScreenGraphProviderFactory
-						.createSearchablePreferenceScreenGraphProvider(
-								FRAGMENT_CONTAINER_VIEW_ID,
-								Views.getRootViewContainer(activityContext),
-								activityContext,
-								activityContext.getSupportFragmentManager(),
-								activityContext,
-								searchDatabaseConfig,
-								locale,
-								(edge, sourceNodeOfEdge, targetNodeOfEdge) -> true)
-						.getSearchablePreferenceScreenGraph(root));
+		return SearchablePreferenceScreenGraphProviderFactory
+				.createSearchablePreferenceScreenGraphProvider(
+						FRAGMENT_CONTAINER_VIEW_ID,
+						Views.getRootViewContainer(activityContext),
+						activityContext,
+						activityContext.getSupportFragmentManager(),
+						activityContext,
+						searchDatabaseConfig,
+						locale,
+						(edge, sourceNodeOfEdge, targetNodeOfEdge) -> true)
+				.getSearchablePreferenceScreenTree(root);
 	}
 
+	@SuppressWarnings({"UnstableApiUsage"})
 	private SearchablePreferenceScreen getPreferenceScreenOfPreferenceFragment(
 			final SearchablePreferenceScreenGraph graphToSearchIn,
 			final ApplicationMode applicationMode) {
 		return SearchablePreferenceScreens
 				.findSearchablePreferenceScreenById(
-						graphToSearchIn.tree().graph().vertexSet(),
+						graphToSearchIn.tree().graph().nodes(),
 						String.format(
 								"en-%s Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
 								preferenceFragment.getName(),
@@ -154,16 +149,16 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 
 	private PreferenceScreenWithHost instantiateSearchablePreferenceScreen(
 			final SearchablePreferenceScreen searchablePreferenceScreen,
-			final Graph<SearchablePreferenceScreen, SearchablePreferenceEdge> graph,
-			final GraphPathFactory graphPathFactory) {
-		return graphPathFactory
-				.instantiate(Graphs.getPathFromRootNodeToTarget(graph, searchablePreferenceScreen))
-				.getEndVertex();
+			final Tree<SearchablePreferenceScreen, SearchablePreference> tree,
+			final TreePathInstantiator treePathInstantiator) {
+		return treePathInstantiator
+				.instantiate(tree.getPathFromRootNodeToTarget(searchablePreferenceScreen))
+				.endNode();
 	}
 
-	private GraphPathFactory createGraphPathFactory(final SearchDatabaseConfig searchDatabaseConfig,
-													final FragmentActivity activityContext) {
-		return new GraphPathFactory(
+	private TreePathInstantiator createTreePathInstantiator(final SearchDatabaseConfig searchDatabaseConfig,
+															final FragmentActivity activityContext) {
+		return new TreePathInstantiator(
 				new PreferenceScreenWithHostProvider(
 						InstantiateAndInitializeFragmentFactory.createInstantiateAndInitializeFragment(
 								searchDatabaseConfig.fragmentFactory,

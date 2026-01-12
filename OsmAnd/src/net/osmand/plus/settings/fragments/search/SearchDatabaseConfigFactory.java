@@ -5,8 +5,6 @@ import android.app.Activity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import com.google.common.collect.Sets;
-
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapDialogs;
 import net.osmand.plus.configmap.ConfigureMapFragment;
@@ -21,22 +19,15 @@ import net.osmand.plus.widgets.alert.MapLayerSelectionDialogFragment;
 import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
 import net.osmand.plus.widgets.alert.RoadStyleSelectionDialogFragment;
 
-import org.jgrapht.Graph;
-
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import de.KnollFrank.lib.settingssearch.PreferenceEdge;
-import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.ActivitySearchDatabaseConfigs;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.PrincipalAndProxy;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
-import de.KnollFrank.lib.settingssearch.common.graph.Graphs;
 import de.KnollFrank.lib.settingssearch.graph.ComputePreferencesListener;
 import de.KnollFrank.lib.settingssearch.provider.ActivityInitializer;
-import de.KnollFrank.lib.settingssearch.provider.PreferenceScreenGraphAvailableListener;
 
 public class SearchDatabaseConfigFactory {
 
@@ -54,34 +45,6 @@ public class SearchDatabaseConfigFactory {
 				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 				.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
 				.withComputePreferencesListener(enableCacheForDownloadedTileSourceTemplatesWhileBuildingSearchDatabase(tileSourceTemplatesProvider))
-				// FK-TODO: remove PreferenceScreenGraphAvailableListener
-				.withPreferenceScreenGraphAvailableListener(
-						new PreferenceScreenGraphAvailableListener() {
-
-							@Override
-							public void onPreferenceScreenGraphAvailable(final Graph<PreferenceScreenWithHost, PreferenceEdge> preferenceScreenGraph) {
-								final PreferenceScreenWithHost rootNode =
-										Graphs
-												.getRootNode(preferenceScreenGraph)
-												.orElseThrow();
-
-								final Set<PreferenceScreenWithHost> nodesToRemove =
-										new HashSet<>(
-												Sets.difference(
-														preferenceScreenGraph.vertexSet(),
-														Set.of(rootNode)));
-
-								// preferenceScreenGraph.removeAllVertices(nodesToRemove);
-
-								if (preferenceScreenGraph.vertexSet().size() == 1) {
-									System.out.println("Graph erfolgreich auf den Wurzelknoten reduziert: " +
-											preferenceScreenGraph.vertexSet().iterator().next().host().getClass().getSimpleName());
-								} else {
-									System.err.println("Fehler: Graph konnte nicht korrekt reduziert werden. Verbleibende Knoten: " +
-											preferenceScreenGraph.vertexSet().size());
-								}
-							}
-						})
 				.build();
 	}
 
