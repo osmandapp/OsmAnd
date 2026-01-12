@@ -200,7 +200,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		int iteration = 0;
 		int calcCount = 0;
 		while (route == null) {
-			progress.hhIteration(HHIteration.ROUTING);
+			progress.hhUpdateCalcCounter(calcCount);
+			progress.hhIteration(calcCount == 0 ? HHIteration.ROUTING : HHIteration.RECALCULATION);
 			iteration++;
 			if (recalc && firstIterationTime == 0) {
 				printf(DEBUG_VERBOSE_LEVEL == 0 && SL > 0, "  Recalculating route due to route structure changes...");
@@ -214,7 +215,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				hctx.clearAll(stPoints, endPoints);
 				return new HHNetworkRouteRes("No finalPnt found (points might be filtered by params)");
 			}
-			calcCount++;
 			if (progress.isCancelled) {
 				return cancelledStatus(hctx, stPoints, endPoints);
 			}
@@ -223,7 +223,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			printf((!recalc || DEBUG_VERBOSE_LEVEL > 0) && SL > 0,"%d segments, cost %.2f, %.2f ms\n", route.segments.size(), route.getHHRoutingTime(), time / 1e6);
 			hctx.stats.routingTime += time / 1e6;
 			
-			progress.hhIteration(HHIteration.DETAILED);
+			progress.hhIteration(calcCount == 0 ? HHIteration.DETAILED : HHIteration.RECALCULATION);
 			printf((!recalc || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, " Parse detailed route segments...");
 			time = System.nanoTime();
 			recalc = retrieveSegmentsGeometry(hctx, rrp, route, hctx.config.ROUTE_ALL_SEGMENTS, progress);
@@ -233,6 +233,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			time = (System.nanoTime() - time);
 			printf((firstIterationTime == 0 || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, "%.2f ms\n", time / 1e6);
 			hctx.stats.routingTime += time / 1e6;
+			calcCount++;
 			if (recalc) {
 				if (calcCount > hctx.config.MAX_COUNT_REITERATION) {
 					if (SL >= 0) {
@@ -1064,6 +1065,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		RouteCalculationProgress progress = hctx.rctx == null ? null : hctx.rctx.calculationProgress;
 		double straightStartEndCost = squareRootDist31(hctx.startX, hctx.startY, hctx.endX, hctx.endY) /
 				hctx.rctx.getRouter().getMaxSpeed();
+		if (progress != null && progress.hhGetCalcCounter() > 0) {
+			progress.hhIterationProgress((double) progress.hhGetCalcCounter() / hctx.config.MAX_COUNT_REITERATION);
+		}
 		while (true) {
 			Queue<NetworkDBPointCost<T>> queue;
 			if (HHRoutingContext.USE_GLOBAL_QUEUE) {
@@ -1129,11 +1133,11 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.visited.add(point);
 			(rev ? hctx.visited : hctx.visitedRev).add(point);
 			printPoint(point, rev);
-			if (progress != null && straightStartEndCost > 0) {
+			if (progress != null && straightStartEndCost > 0 && progress.hhGetCalcCounter() == 0) {
 				final double STRAIGHT_TO_ROUTE_COST = 1.25; // approximate, tested on car/bike
 				// correlation between straight-cost and route-cost (enough for the progress bar)
 				double k = (pointCost.cost - straightStartEndCost) / straightStartEndCost * STRAIGHT_TO_ROUTE_COST;
-				progress.hhIterationProgress(k);
+				progress.hhIterationProgress(k); // ROUTING
 			}
 			if (hctx.config.MAX_COST > 0 && pointCost.cost > hctx.config.MAX_COST) {
 				break;
@@ -1297,8 +1301,13 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	
 	private boolean retrieveSegmentsGeometry(HHRoutingContext<T> hctx, RouteResultPreparation rrp, HHNetworkRouteRes route,
 			boolean routeSegments, RouteCalculationProgress progress) throws SQLException, InterruptedException, IOException {
+		if (progress != null && progress.hhGetCalcCounter() > 0) {
+			progress.hhIterationProgress((double) progress.hhGetCalcCounter() / hctx.config.MAX_COUNT_REITERATION);
+		}
 		for (int i = 0; i < route.segments.size(); i++) {
-			progress.hhIterationProgress((double) i / route.segments.size());
+			if (progress != null && progress.hhGetCalcCounter() == 0) {
+				progress.hhIterationProgress((double) i / route.segments.size()); // DETAILED
+			}
 
 			HHNetworkSegmentRes s = route.segments.get(i);
 			if (s.segment == null) {

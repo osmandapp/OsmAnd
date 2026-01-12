@@ -955,7 +955,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		type: OBDTypeWidget, data: Any?): Any? {
 		return when (type) {
 			OBDDataComputer.OBDTypeWidget.SPEED -> getConvertedSpeed(data as Number)
-			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM -> getConvertedDistance(data as Double)
+			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM -> getConvertedDistance((data as Number).toDouble())
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT,

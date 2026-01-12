@@ -54,6 +54,7 @@ public class RouteCalculationProgress implements Serializable {
 	private int hhIterationStep = HHIteration.HH_NOT_STARTED.ordinal();
 	private int hhTargetsDone, hhTargetsTotal;
 	private double hhCurrentStepProgress;
+	private int hhCalcCounter;
 
 	private static final float INITIAL_PROGRESS = 0.05f;
 	private static final float FIRST_ITERATION = 0.72f;
@@ -192,8 +193,9 @@ public class RouteCalculationProgress implements Serializable {
 		SELECT_REGIONS(5),
 		LOAD_POINTS(5),
 		START_END_POINT(15),
-		ROUTING(25),
+		ROUTING(15),
 		DETAILED(50),
+		RECALCULATION(10),
 		ALTERNATIVES(0), // disabled
 		DONE(0); // success
 
@@ -219,5 +221,13 @@ public class RouteCalculationProgress implements Serializable {
 	public void hhTargetsProgress(int done, int total) {
 		this.hhTargetsDone = done;
 		this.hhTargetsTotal = total;
+	}
+
+	public void hhUpdateCalcCounter(int counter) {
+		this.hhCalcCounter = counter;
+	}
+
+	public int hhGetCalcCounter() {
+		return this.hhCalcCounter;
 	}
 }

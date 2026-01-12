@@ -190,6 +190,20 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		return view;
 	}
 
+	public int getHeaderOnlyTopY() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			int shadowHeight = getShadowHeight();
+			if (getHeaderViewHeight() > 0) {
+				return viewHeight - getHeaderViewHeight() - shadowHeight - navBarHeight;
+			} else {
+				return viewHeight - AndroidUtils.dpToPx(mapActivity, 48f) - shadowHeight - navBarHeight;
+			}
+		} else {
+			return 0;
+		}
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();

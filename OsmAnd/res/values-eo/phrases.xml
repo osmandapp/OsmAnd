@@ -5159,8 +5159,9 @@
     <string name="poi_barrier_sliding_gate">Ŝovpordego</string>
     <string name="poi_sample_collection_filter">Specimenoj prenataj</string>
     <string name="x">X (ekse Twitter)</string>
-    <string name="poi_sample_collection">Prenejo de specimenoj</string>
+    <string name="poi_sample_collection">Prenejo de specimenoj;laboratorio;sango</string>
     <string name="poi_sample_collection_yes">jes</string>
     <string name="poi_sample_collection_covid19">KOVIM-19</string>
     <string name="poi_sample_collection_blood">sango</string>
+    <string name="poi_yoga">Jogo</string>
 </resources>

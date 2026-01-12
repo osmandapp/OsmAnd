@@ -105,6 +105,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private static final int DEFAULT_WIDTH_MULTIPLIER = 7;
 	private static final int START_ZOOM = 7;
 	private static final int MAX_SUPPORTED_TRACK_WIDTH_DP = 48;
+	private static final long MANY_POINTS_VISIBLE_WARNING_THRESHOLD = 1_000_000L;
 
 	private Paint paint;
 	private Paint borderPaint;
@@ -178,6 +179,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private net.osmand.core.jni.MapMarker highlightedPointMarker;
 	private LatLon highlightedPointLocationCached;
 	private long trackMarkersChangedTime;
+	private boolean manyPointsWarningShown;
 
 	private ContextMenuLayer contextMenuLayer;
 
@@ -314,7 +316,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 		Map<SelectedGpxFile, Long> visibleGPXFilesMap = new HashMap<>();
 		boolean pointsModified = false;
+		long pointsToDisplayCount = 0;
 		for (SelectedGpxFile selectedGpxFile : visibleGPXFiles) {
+			pointsToDisplayCount += selectedGpxFile.getPointsToDisplayCount();
 			Long pointsModifiedTime = this.visibleGPXFilesMap.get(selectedGpxFile);
 			long newPointsModifiedTime = selectedGpxFile.getPointsModifiedTime();
 			if (pointsModifiedTime == null || pointsModifiedTime != newPointsModifiedTime) {
@@ -323,6 +327,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			visibleGPXFilesMap.put(selectedGpxFile, newPointsModifiedTime);
 		}
 		this.visibleGPXFilesMap = visibleGPXFilesMap;
+		showManyPointsVisibleWarningIfNeeded(pointsToDisplayCount);
+
 		boolean nightMode = settings != null && settings.isNightMode();
 		boolean nightModeChanged = this.nightMode != nightMode;
 		this.nightMode = nightMode;
@@ -401,6 +407,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 		return null;
+	}
+
+	private void showManyPointsVisibleWarningIfNeeded(long total) {
+		if (!manyPointsWarningShown && total > MANY_POINTS_VISIBLE_WARNING_THRESHOLD) {
+			app.showToastMessage(R.string.gpx_too_many_points_visible_warning);
+			manyPointsWarningShown = true;
+		}
 	}
 
 	private boolean updatePaints(int color, String width, boolean routePoints, boolean currentTrack, DrawSettings drawSettings, RotatedTileBox tileBox) {
