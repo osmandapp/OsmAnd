@@ -113,7 +113,7 @@
     <string name="index_item_depth_contours_osmand_ext">Контуры морских глубин</string>
     <string name="index_item_depth_points_southern_hemisphere">Отметки морских глубин южного полушария</string>
     <string name="index_item_depth_points_northern_hemisphere">Отметки морских глубин северного полушария</string>
-    <string name="depth_contour_descr">Изобаты и отметки глубины.</string>
+    <string name="depth_contour_descr">Изобаты и морские ориентиры.</string>
     <string name="subscribe_email_desc">Подпишитесь на нашу рассылку о скидках на приложение и получите 3 дополнительных скачивания карт!</string>
     <string name="subscribe_email_error">Ошибка</string>
     <string name="quick_action_auto_zoom">Автомасштаб карты</string>
@@ -2597,7 +2597,7 @@
     <string name="purchase_cancelled_dialog_descr">Возобновите подписку, чтобы продолжить использовать все функции:</string>
     <string name="hide_full_description">Свернуть описание</string>
     <string name="show_full_description">Развернуть описание</string>
-    <string name="nautical_render_descr">Для морской навигации. Выделяет буи, маяки, речные пути, морские пути и знаки, гавани, услуги для морских судов, изобаты.</string>
+    <string name="nautical_render_descr">Для морской навигации. Выделяет буи, маяки, речные пути, морские пути и ориентиры, гавани, услуги морских ориентиров, изобаты.</string>
     <string name="ski_map_render_descr">Для катания на лыжах. Выделяет горнолыжные трассы, подъёмники, трассы для беговых лыж и пр. Меньше отвлекающих второстепенных объектов на карте.</string>
     <string name="download_all">Скачать всё</string>
     <string name="light_rs_render_descr">Простой стиль вождения. Мягкий ночной режим, контрастные дороги в оранжевом стиле, затемнённые второстепенные объекты на карте, особенности рельефа, показываемые изолиниями.</string>
@@ -4867,7 +4867,7 @@
     <string name="hillshade_slope">Отмывка, уклон</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
-    <string name="help_article_map_legend_ski_map_name">Стиль карты «Зимний/лыжный»</string>
+    <string name="help_article_map_legend_ski_map_name">Лыжный стиль карты</string>
     <string name="help_article_map_track_context_menu_name">Контекстное меню треков</string>
     <string name="help_article_map_vector_maps_name">Векторные карты (стили карт)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
@@ -4925,7 +4925,7 @@
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Прямо-к-точке (лодка)</string>
     <string name="shared_string_setup">Настройка</string>
     <string name="sensor_temperature_desc">Показывает температуру, полученную от датчика</string>
-    <string name="help_article_map_legend_nautical_map_name">Cтиль карты «Морской»</string>
+    <string name="help_article_map_legend_nautical_map_name">Cтиль карты «Nautical »</string>
     <string name="help_article_map_raster_maps_name">Растровые карты (online/offline)</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Навигация по треку</string>
     <string name="help_article_navigation_routing_horse_routing_name">Верховая езда</string>
@@ -5666,7 +5666,7 @@
     <string name="set_home">Установить дом</string>
     <string name="set_intermediate_point">Установить промежуточную точку</string>
     <string name="set_work">Установить роботу</string>
-    <string name="ski_route_switch_style_description">Исследуйте лыжные маршруты, склоны и подъемники в стиле со стилем карты «Зима и лыжи» .</string>
+    <string name="ski_route_switch_style_description">Исследуйте лыжные маршруты, склоны и подъемники с картой в стиле «Winter and ski » .</string>
     <string name="set_parking_position">Установить место для парковки</string>
     <string name="battery">батарея</string>
     <string name="shared_string_split_by">Разделить по</string>
@@ -5768,7 +5768,7 @@
     <string name="description_purchases_fastspring">Вы можете управлять своими покупками через портал управления учетными записями FastSpring.</string>
     <string name="description_subscription_fastspring">Вы можете управлять своей подпиской или отменить ее через портал управления учетными записями FastSpring.</string>
     <string name="shared_string_osm_link">Ссылка на OSM</string>
-    <string name="marine_render_descr">Стиль «Морской» (Marine) предлагает широкие возможности настройки судоходной навигации. Он развивает идеи классического стиля (Nautical) и раскрывает весь свой потенциал с картой «Мировые морские объекты», отображающей навигационные ориентиры, а также с картами глубин.</string>
+    <string name="marine_render_descr">Легко настраиваемый стиль морской навигации «Marine». Основан на стиле «Nautical» (выбирается в разделе «Тип карты»). Лучше работает с «Мировой картой морских ориентиров» и дополнительными картами глубин.</string>
     <string name="rendering_attr_hideTidalFlats_name">Приливные отмели (ватты)</string>
     <string name="rendering_attr_hideTidalFlats_description">Скрыть приливные отмели (ватты)</string>
     <string name="rendering_attr_depthColorScheme_name">Цветовая схема глубин</string>
