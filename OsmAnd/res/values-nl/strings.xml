@@ -625,7 +625,7 @@
     <string name="left_side_navigation">Linksrijdend verkeer</string>
     <string name="left_side_navigation_descr">Activeer in een land waar men links rijdt.</string>
     <string name="unknown_from_location">Vertrekpunt is nog niet bepaald.</string>
-    <string name="confirm_interrupt_download">Downloaden afbreken?</string>
+    <string name="confirm_interrupt_download">Download annuleren?</string>
     <string name="basemap_was_selected_to_download">De basiskaart, nodig voor de goede werking van OsmAnd, is al geselecteerd om te downloaden.</string>
     <string name="map_online_plugin_is_not_installed">Activeer de \'Online Kaarten\' plug-in om andere kaartbronnen te kunnen selecteren</string>
     <string name="map_online_data">Online (raster-) kaarten</string>
