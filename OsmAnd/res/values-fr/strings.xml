@@ -5854,5 +5854,5 @@
     <string name="astro_black_holes">Trous noirs</string>
     <string name="shared_string_azimuth">Azimut</string>
     <string name="shared_string_magnitude">Magnitude</string>
-    <string name="gpx_too_many_points_visible_warning">Un grand nombre de traces GPX visibles entraîne une utilisation élevée de la mémoire</string>
+    <string name="gpx_too_many_points_visible_warning">L\'affichage sur la carte d\'un grand nombre de traces GPX provoque une utilisation élevée de la mémoire</string>
 </resources>
