@@ -3883,7 +3883,7 @@
     <string name="poi_access_main_tag">Πρόσβαση</string>
     <string name="poi_aerodrome_type_airfield">Αεροδρόμιο</string>
     <string name="poi_consulate">Προξενείο</string>
-    <string name="poi_hazard_landslide">Κίνδυνος: κατολίσθηση</string>
+    <string name="poi_hazard_landslide">Κατολίσθηση</string>
     <string name="poi_hazard_additional_yes">Κίνδυνος</string>
     <string name="poi_hazard_falling_rocks">Πτώση βράχων</string>
     <string name="poi_hazard_contamination">Μόλυνση</string>
@@ -4561,4 +4561,17 @@
     <string name="poi_sample_collection">Συλλογή δειγμάτων</string>
     <string name="poi_sample_collection_filter">Συλλογή δειγμάτων</string>
     <string name="poi_whitewater_hazard">Κίνδυνος ορμητικών νερών</string>
+    <string name="poi_hazard_hole">Τρύπα</string>
+    <string name="poi_hazard_curve">Επικίνδυνη στροφή</string>
+    <string name="poi_hazard_curves">Διαδοχικές στροφές</string>
+    <string name="poi_hazard_pedestrians">Πεζοί</string>
+    <string name="poi_hazard_children">Παιδιά</string>
+    <string name="poi_hazard_animal_crossing">Πέρασμα ζώων</string>
+    <string name="poi_hazard_dangerous_junction">Επικίνδυνη διασταύρωση</string>
+    <string name="poi_hazard_school_zone">Σχολική ζώνη</string>
+    <string name="poi_hazard_cyclists">Ποδηλάτες</string>
+    <string name="poi_hazard_shooting_range">Πεδίο βολής</string>
+    <string name="poi_hazard_ice">Πάγος</string>
+    <string name="poi_hazard_side_winds">Πλευρικοί άνεμοι</string>
+    <string name="poi_hazard_queues_likely">Συχνή κυκλοφοριακή συμφόρηση</string>
 </resources>
