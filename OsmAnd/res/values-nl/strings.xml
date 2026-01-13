@@ -4655,7 +4655,7 @@
     <string name="rendering_attr_showFitnessTrails_description">Toon sport paden</string>
     <string name="location_source_descr">Wanneer OsmAnd geïnstalleerd is vanaf Google Play gebruikt het %1$s om de plaats te bepalen. \n \nAls u onnauwkeurige plaatsbepaling ervaart, of als u een apparaat zonder %2$s gebruikt, probeer dan naar \"%3$s\" over te schakelen.</string>
     <string name="auto_backup_title">Automatische back-up</string>
-    <string name="shared_string_duplicate">Dubbel</string>
+    <string name="shared_string_duplicate">Dupliceer</string>
     <string name="updated_map_time">Bijgewerkt: %1$s.</string>
     <string name="next_live_update_date_and_time">Volgende bijwerking op %1$s om %2$s.</string>
     <string name="speak_gps_signal_status">Wegvallen en herstel van GPS verbinding melden</string>
@@ -6281,4 +6281,5 @@
     <string name="astro_rise">Opkomst</string>
     <string name="astro_set">Ondergang</string>
     <string name="star_charts_name">Sterrengrafieken</string>
+    <string name="gpx_too_many_points_visible_warning">Een groot aantal zichtbare GPX-tracks leidt tot een hoog geheugengebruik</string>
 </resources>
