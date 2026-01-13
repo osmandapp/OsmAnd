@@ -824,8 +824,11 @@ public class OsmandApplication extends MultiDexApplication {
 		routingHelper.setRoutePlanningMode(false);
 		settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
 		ApplicationMode appMode = valueOfStringKey(settings.LAST_USED_APPLICATION_MODE.get(), ApplicationMode.DEFAULT);
-		if(getOsmandMap().getMapView().isCarView() && (appMode == null || !appMode.isAppModeDerivedFromCar())) {
-			appMode = ApplicationMode.getFirstCarMode(this);
+		if (getOsmandMap().getMapView().isCarView() && (appMode == null || !appMode.isAppModeDerivedFromCar())) {
+			ApplicationMode carMode = ApplicationMode.getFirstCarMode(this);
+			if (carMode != null) {
+				appMode = carMode;
+			}
 		}
 		settings.setApplicationMode(appMode);
 		targetPointsHelper.removeAllWayPoints(false, false);

@@ -193,7 +193,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 		ApplicationMode appMode = settings.getApplicationMode();
 		if (!appMode.isAppModeDerivedFromCar()) {
-			settings.setApplicationMode(ApplicationMode.getFirstCarMode(app), false);
+			ApplicationMode carMode = ApplicationMode.getFirstCarMode(app);
+			if(carMode != null) {
+				settings.setApplicationMode(carMode, false);
+			}
  		}
 		if (navigationCarSurface != null) {
 			navigationCarSurface.handleRecenter();
