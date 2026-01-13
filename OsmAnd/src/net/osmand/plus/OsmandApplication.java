@@ -836,7 +836,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void startApplication() {
 		feedbackHelper.setExceptionHandler();
-		if (NetworkUtils.getProxy() == null && settings.isProxyEnabled()) {
+		if (NetworkUtils.hasProxy() && settings.isProxyEnabled()) {
 			try {
 				NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
 			} catch (RuntimeException e) {
@@ -930,6 +930,11 @@ public class OsmandApplication extends MultiDexApplication {
 	public KFile getAppPathKt(@Nullable String path) {
 		String child = path != null ? path : "";
 		return new KFile(new KFile(externalStorageDirectory.getPath()), child);
+	}
+
+	@NonNull
+	public KFile getCacheDirKt() {
+		return new KFile(getCacheDir().getAbsolutePath());
 	}
 
 	@NonNull

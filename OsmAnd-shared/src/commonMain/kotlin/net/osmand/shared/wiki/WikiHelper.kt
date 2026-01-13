@@ -4,7 +4,7 @@ import okio.ByteString.Companion.encodeUtf8
 
 object WikiHelper {
     data class WikiTagData(
-        val wikiImages: List<WikiImage>,
+        val wikiImages: MutableList<WikiImage>,
         val wikidataId: String?,
         val wikiCategory: String?,
         val wikiTitle: String?
