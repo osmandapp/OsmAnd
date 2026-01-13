@@ -1150,7 +1150,7 @@
     <string name="gpx_selection_points">%1$s \npunten</string>
     <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
     <string name="save_as_favorites_points">Bewaar als groep van favorieten</string>
-    <string name="loading_smth">Laad %1$s…</string>
+    <string name="loading_smth">%1$s wordt geladen…</string>
     <string name="map_widget_plain_time">Huidige tijd</string>
     <string name="select_destination_and_intermediate_points">Instellen bestemmingen</string>
     <string name="layer_amenity_label">Puntlabels (POI, favorieten)</string>
