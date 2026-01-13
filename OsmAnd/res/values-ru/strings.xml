@@ -5744,7 +5744,7 @@
     <string name="is_parking_time_limited">Ограничено ли время парковки?</string>
     <string name="routing_attr_weightrating_name">Максимальный вес при полной загрузке</string>
     <string name="routing_attr_maxaxleload_name">Максимальная нагрузка на ось</string>
-    <string name="deleted_maps_warning">Вы собираетесь удалить %d элементов.\nПродолжить?</string>
+    <string name="deleted_maps_warning">Вы собираетесь удалить элементы в количестве %d шт\nПродолжить?</string>
     <string name="deleted_maps_prompt">Эти карты больше не поддерживаются и были заменены регионами меньшего размера. Пожалуйста, удалите их и скачайте новые версии.</string>
     <string name="unsupported_maps">Неподдерживаемые карты</string>
     <string name="shared_string_price">Стоимость</string>
@@ -5863,4 +5863,5 @@
     <string name="shared_string_magnitude">Звёздная величина</string>
     <string name="astro_rise">Восход</string>
     <string name="astro_set">Заход</string>
+    <string name="gpx_too_many_points_visible_warning">Большое количество видимых GPX-треков приводит к высокой нагрузке на память</string>
 </resources>
