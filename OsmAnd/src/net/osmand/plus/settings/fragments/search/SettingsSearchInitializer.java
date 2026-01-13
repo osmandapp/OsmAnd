@@ -31,7 +31,7 @@ public class SettingsSearchInitializer {
 		app
 				.preferencesDatabaseManager
 				.getPreferencesDatabase()
-				.searchablePreferenceScreenGraphRepository()
-				.addGraphCreator(new SearchDatabaseRebuilder(app.getTileSourceTemplatesProvider()));
+				.searchablePreferenceScreenTreeRepository()
+				.addTreeCreator(new SearchDatabaseRebuilder(app.getTileSourceTemplatesProvider()));
 	}
 }

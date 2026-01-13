@@ -7,8 +7,8 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.db.preference.db.PreferencesDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PrepackagedPreferencesDatabase;
-import de.KnollFrank.lib.settingssearch.db.preference.db.transformer.SearchablePreferenceScreenGraphTransformer;
-import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
+import de.KnollFrank.lib.settingssearch.db.preference.db.transformer.SearchablePreferenceScreenTreeTransformer;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenTree;
 
 public class PreferencesDatabaseConfigFactory {
 
@@ -27,15 +27,15 @@ public class PreferencesDatabaseConfigFactory {
 				Optional.of(
 						new PrepackagedPreferencesDatabase<>(
 								new File("database/searchable_preferences_prepackaged.db"),
-								new SearchablePreferenceScreenGraphTransformer<>() {
+								new SearchablePreferenceScreenTreeTransformer<>() {
 
 									@Override
-									public SearchablePreferenceScreenGraph transformGraph(final SearchablePreferenceScreenGraph graph,
-																						  final Configuration actualConfiguration,
-																						  final FragmentActivity activityContext) {
-										// FK-TODO: implement by computing graph for actualConfiguration, d.h. actualConfiguration.enabledPlugins haben Preferences, die zum graph dazugefügt oder aus dem graph entfernt werden müssen.
+									public SearchablePreferenceScreenTree transformTree(final SearchablePreferenceScreenTree tree,
+																						final Configuration actualConfiguration,
+																						final FragmentActivity activityContext) {
+										// FK-TODO: implement by computing tree for actualConfiguration, d.h. actualConfiguration.enabledPlugins haben Preferences, die zum graph dazugefügt oder aus dem tree entfernt werden müssen.
 										// siehe SettingsSearch: SearchDatabaseRootedAtPrefsFragmentFirstAdapter
-										return graph;
+										return tree;
 									}
 								})),
 				PreferencesDatabaseConfig.JournalMode.AUTOMATIC);

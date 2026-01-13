@@ -245,8 +245,8 @@ public class OsmandApplication extends MultiDexApplication {
 			plugins ->
 					preferencesDatabaseManager
 							.getPreferencesDatabase()
-							.searchablePreferenceScreenGraphRepository()
-							.addGraphTransformer(
+							.searchablePreferenceScreenTreeRepository()
+							.addTreeTransformer(
 									new SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter(
 											ConfigureProfileFragment.class,
 											getTileSourceTemplatesProvider()));

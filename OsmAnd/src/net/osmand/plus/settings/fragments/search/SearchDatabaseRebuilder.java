@@ -5,6 +5,8 @@ import android.view.View;
 import androidx.annotation.IdRes;
 import androidx.fragment.app.FragmentActivity;
 
+import com.google.common.graph.ImmutableValueGraph;
+
 import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
 
@@ -17,18 +19,18 @@ import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDataba
 import de.KnollFrank.lib.settingssearch.common.Views;
 import de.KnollFrank.lib.settingssearch.common.graph.Tree;
 import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
-import de.KnollFrank.lib.settingssearch.db.preference.db.transformer.SearchablePreferenceScreenGraphCreator;
+import de.KnollFrank.lib.settingssearch.db.preference.db.transformer.SearchablePreferenceScreenTreeCreator;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreen;
-import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenTree;
 import de.KnollFrank.lib.settingssearch.fragment.FragmentFactoryAndInitializer;
 import de.KnollFrank.lib.settingssearch.fragment.FragmentInitializerFactory;
 import de.KnollFrank.lib.settingssearch.fragment.Fragments;
 import de.KnollFrank.lib.settingssearch.fragment.factory.FragmentFactoryAndInitializerRegistry;
-import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenGraphProviderFactory;
+import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenTreeProviderFactory;
 import de.KnollFrank.lib.settingssearch.results.recyclerview.FragmentContainerViewAdder;
 
-public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphCreator<Configuration> {
+public class SearchDatabaseRebuilder implements SearchablePreferenceScreenTreeCreator<Configuration> {
 
 	private final @IdRes int FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
 
@@ -39,9 +41,10 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphC
 	}
 
 	@Override
-	public SearchablePreferenceScreenGraph createGraph(final Locale locale,
-													   final Configuration actualConfiguration,
-													   final FragmentActivity activityContext) {
+	@SuppressWarnings({"UnstableApiUsage"})
+	public SearchablePreferenceScreenTree createTree(final Locale locale,
+													 final Configuration actualConfiguration,
+													 final FragmentActivity activityContext) {
 		OnUiThreadRunnerFactory
 				.fromActivity(activityContext)
 				.runBlockingOnUiThread(() -> {
@@ -55,8 +58,8 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphC
 						MainSettingsFragment.class,
 						tileSourceTemplatesProvider,
 						activityContext.getSupportFragmentManager());
-		return new SearchablePreferenceScreenGraph(
-				getPojoGraphRootedAt(
+		return new SearchablePreferenceScreenTree(
+				getPojoTreeRootedAt(
 						instantiateSearchablePreferenceScreen(
 								searchDatabaseConfig,
 								activityContext),
@@ -67,13 +70,14 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenGraphC
 				new ConfigurationBundleConverter().convertForward(actualConfiguration));
 	}
 
-	private Tree<SearchablePreferenceScreen, SearchablePreference> getPojoGraphRootedAt(
+	@SuppressWarnings({"UnstableApiUsage", "NullableProblems"})
+	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> getPojoTreeRootedAt(
 			final PreferenceScreenWithHost root,
 			final Locale locale,
 			final FragmentActivity activityContext,
 			final SearchDatabaseConfig searchDatabaseConfig) {
-		return SearchablePreferenceScreenGraphProviderFactory
-				.createSearchablePreferenceScreenGraphProvider(
+		return SearchablePreferenceScreenTreeProviderFactory
+				.createSearchablePreferenceScreenTreeProvider(
 						FRAGMENT_CONTAINER_VIEW_ID,
 						Views.getRootViewContainer(activityContext),
 						activityContext,

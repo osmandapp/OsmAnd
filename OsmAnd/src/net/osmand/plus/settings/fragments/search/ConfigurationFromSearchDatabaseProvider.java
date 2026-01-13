@@ -3,28 +3,28 @@ package net.osmand.plus.settings.fragments.search;
 import java.util.Locale;
 import java.util.Optional;
 
-import de.KnollFrank.lib.settingssearch.db.preference.dao.SearchablePreferenceScreenGraphDAO;
-import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
+import de.KnollFrank.lib.settingssearch.db.preference.dao.SearchablePreferenceScreenTreeDAO;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenTree;
 
 // FK-TODO: remove?
 class ConfigurationFromSearchDatabaseProvider {
 
-	private final SearchablePreferenceScreenGraphDAO searchablePreferenceScreenGraphDAO;
+	private final SearchablePreferenceScreenTreeDAO searchablePreferenceScreenTreeDAO;
 	private final Locale locale;
 	private final ConfigurationBundleConverter configurationBundleConverter;
 
-	public ConfigurationFromSearchDatabaseProvider(final SearchablePreferenceScreenGraphDAO searchablePreferenceScreenGraphDAO,
+	public ConfigurationFromSearchDatabaseProvider(final SearchablePreferenceScreenTreeDAO searchablePreferenceScreenTreeDAO,
 												   final Locale locale,
 												   final ConfigurationBundleConverter configurationBundleConverter) {
-		this.searchablePreferenceScreenGraphDAO = searchablePreferenceScreenGraphDAO;
+		this.searchablePreferenceScreenTreeDAO = searchablePreferenceScreenTreeDAO;
 		this.locale = locale;
 		this.configurationBundleConverter = configurationBundleConverter;
 	}
 
 	public Optional<Configuration> getConfigurationFromSearchDatabase() {
-		return searchablePreferenceScreenGraphDAO
-				.findGraphById(locale)
-				.map(SearchablePreferenceScreenGraph::configuration)
+		return searchablePreferenceScreenTreeDAO
+				.findTreeById(locale)
+				.map(SearchablePreferenceScreenTree::configuration)
 				.map(configurationBundleConverter::convertBackward);
 	}
 }

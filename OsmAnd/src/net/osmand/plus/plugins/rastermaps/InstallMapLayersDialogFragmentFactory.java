@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenGraphRepository;
+import de.KnollFrank.lib.settingssearch.db.preference.db.SearchablePreferenceScreenTreeRepository;
 
 class InstallMapLayersDialogFragmentFactory {
 
@@ -115,18 +115,18 @@ class InstallMapLayersDialogFragmentFactory {
 							}
 
 							private void updateSearchDatabase() {
-								getGraphRepository().addGraphTransformer(
+								getTreeRepository().addTreeTransformer(
 										new SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter(
 												ConfigureMapFragment.ConfigureMapFragmentProxy.class,
 												getTileSourceTemplatesProvider()));
 							}
 
-							private SearchablePreferenceScreenGraphRepository<Configuration> getGraphRepository() {
+							private SearchablePreferenceScreenTreeRepository<Configuration> getTreeRepository() {
 								return OsmandApplication
 										.getInstanceFromContext(activity)
 										.preferencesDatabaseManager
 										.getPreferencesDatabase()
-										.searchablePreferenceScreenGraphRepository();
+										.searchablePreferenceScreenTreeRepository();
 							}
 
 							private TileSourceTemplatesProvider getTileSourceTemplatesProvider() {
