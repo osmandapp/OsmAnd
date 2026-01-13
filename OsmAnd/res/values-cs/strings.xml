@@ -5963,4 +5963,5 @@
     <string name="star_altitude_name">Výška hvězd</string>
     <string name="azimuthal_grid">Azimutová mřížka</string>
     <string name="equatorial_grid">Rovníková mřížka</string>
+    <string name="gpx_too_many_points_visible_warning">Velké množství viditelných GPX tras může vést ke zvýšenému využití paměti</string>
 </resources>
