@@ -5768,4 +5768,5 @@
     <string name="shared_string_magnitude">Méid</string>
     <string name="astro_rise">Éirigh</string>
     <string name="astro_set">Socraigh</string>
+    <string name="gpx_too_many_points_visible_warning">Bíonn úsáid ard cuimhne mar thoradh ar líon mór rianta GPX infheicthe</string>
 </resources>
