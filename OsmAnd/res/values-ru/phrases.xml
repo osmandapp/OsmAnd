@@ -4745,4 +4745,12 @@
     <string name="poi_bail_bond_agent">Агент по внесению залога</string>
     <string name="poi_harbour_master">Начальник порта</string>
     <string name="poi_memorial_type">Тип мемориала</string>
+    <string name="poi_international_organization">Международная организация</string>
+    <string name="poi_construction_company">Строительная компания</string>
+    <string name="poi_christian_church">Христианская церковь</string>
+    <string name="poi_apostolic_church">Апостольская церковь</string>
+    <string name="poi_church_of_christ">Церковь Христа</string>
+    <string name="poi_armenian_apostolic_church">Армянская апостольская церковь</string>
+    <string name="poi_new_apostolic_church">Новая апостольская церковь</string>
+    <string name="poi_ukrainian_greek_catholic_church">Украинская грекокатолическая церковь</string>
 </resources>
