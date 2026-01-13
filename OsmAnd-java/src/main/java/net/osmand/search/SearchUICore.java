@@ -261,9 +261,9 @@ public class SearchUICore {
 						String hno = amenity.getHousenumber();
 						String addr = amenity.getStreetName() + (Algorithms.isEmpty(hno) ? "" : " " + hno);
 						if (dominatedCity.equals(mainCity)) {
-							s.addressName = addr + ", " + s.cityName;
+							s.addressName = addr + (Algorithms.isEmpty(s.cityName) ? "" : ", " + s.cityName);
 						} else {
-							s.addressName = (city.length() == 0 ? "" : (s.cityName + ", ")) + addr;
+							s.addressName = (city.isEmpty() ? "" : (city + ", ")) + addr;
 						}
 					}
 				}
