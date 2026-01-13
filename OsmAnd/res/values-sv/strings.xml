@@ -2196,7 +2196,7 @@
     <string name="order_by">Ordna efter:</string>
     <string name="all_markers_moved_to_history">Alla kartmarkörer har flyttats till historiken</string>
     <string name="marker_moved_to_history">Kartmarkören har flyttats till historiken</string>
-    <string name="do_not_use_animations">Inga animeringar</string>
+    <string name="do_not_use_animations">Ta bort animeringar</string>
     <string name="do_not_use_animations_descr">Stänger av kart- och UI-animationer.</string>
     <string name="line">Linje</string>
     <string name="save_as_route_point">Spara som ruttpunkter</string>
@@ -5894,7 +5894,7 @@
     <string name="show_debug_tile">Visa information om ruta</string>
     <string name="enable_msaa">Aktivera MSAA</string>
     <string name="lang_crh">Krimtatariska (latin)</string>
-    <string name="lang_en_barebones">Engelska (barebones)</string>
+    <string name="lang_en_barebones">Engelska (grundläggande)</string>
     <string name="accessibility_independent_features">Oberoende funktioner</string>
     <string name="access_pinch_zoom_magnification">Nypzoomförstoring</string>
     <string name="access_pinch_zoom_magnification_descr">Använd visningsport-skalning istället för diskreta zoomnivåer under inzoomningsgester.</string>

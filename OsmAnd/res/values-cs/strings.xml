@@ -5953,8 +5953,8 @@
     <string name="visible_layers_and_objects">Viditelné vrstvy a objekty</string>
     <string name="shared_string_azimuth">Azimut</string>
     <string name="shared_string_magnitude">Velikost</string>
-    <string name="astro_rise">Úsvit</string>
-    <string name="astro_set">Západ slunce</string>
+    <string name="astro_rise">Východ</string>
+    <string name="astro_set">Západ</string>
     <string name="star_watcher_plugin_name">Sledování hvězd (Beta)</string>
     <string name="star_watcher_plugin_description">Grafy hvězd, 3D mapa hvězd</string>
     <string name="star_map">Mapa hvězd</string>
