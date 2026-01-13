@@ -4124,7 +4124,7 @@
     <string name="poi_generator_type_cold_fusion">Тип генератора: холодный ядерный синтез</string>
     <string name="poi_generator_type_horizontal_axis">Тип генератора: горизонтальная ось (HAWT)</string>
     <string name="poi_generator_type_vertical_axis">Тип генератора: вертикальная ось (VAWT)</string>
-    <string name="poi_generator_type_francis_turbine">Тип генератора: радиально-осевая турбина (турбина Френсиса)</string>
+    <string name="poi_generator_type_francis_turbine">Тип генератора: Турбина Френсиса</string>
     <string name="poi_generator_type_pelton_turbine">Тип генератора: ковшовая турбина (турбина Пелтона)</string>
     <string name="poi_generator_type_hydrodynamic_screw">Тип генератора: гидродинамический винт (Архимедов винт)</string>
     <string name="poi_generator_type_molten_salt">Тип генератора: жидкосолевой</string>
@@ -4744,4 +4744,5 @@
     <string name="poi_chamber">Камера</string>
     <string name="poi_bail_bond_agent">Агент по внесению залога</string>
     <string name="poi_harbour_master">Начальник порта</string>
+    <string name="poi_memorial_type">Тип мемориала</string>
 </resources>
