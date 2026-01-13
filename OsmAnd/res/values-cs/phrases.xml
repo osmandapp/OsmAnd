@@ -5159,8 +5159,9 @@
     <string name="poi_route_activity_type_skiing">Lyžařské trasy</string>
     <string name="poi_sample_collection_filter">Odběr vzorků</string>
     <string name="x">X (dříve Twitter)</string>
-    <string name="poi_sample_collection">Odběr vzorků</string>
+    <string name="poi_sample_collection">Odběr vzorků;Krev;Laboratoř;Test</string>
     <string name="poi_sample_collection_yes">Ano</string>
     <string name="poi_sample_collection_covid19">COVID19</string>
     <string name="poi_sample_collection_blood">Krev</string>
+    <string name="poi_yoga">Jóga</string>
 </resources>

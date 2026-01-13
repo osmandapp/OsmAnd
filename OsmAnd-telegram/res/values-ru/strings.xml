@@ -131,7 +131,7 @@
     <string name="logout_from_osmand_telegram">Выйти из OsmAnd Tracker?</string>
     <string name="shared_string_login">Войти</string>
     <string name="shared_string_logout">Выйти</string>
-    <string name="logout_from_osmand_telegram_descr">Вы уверены, что хотите выйти из OsmAnd Tracker\? Выйдя из приложения, вы не сможете делиться местоположением или не видеть местоположения других.</string>
+    <string name="logout_from_osmand_telegram_descr">Вы уверены, что хотите выйти из OsmAnd Tracker и перестать делиться местоположением или не видеть местоположения других?</string>
     <string name="not_found_yet">Не найдено</string>
     <string name="re_send_location">Отправить местоположение</string>
     <string name="last_available_location">Последнее местоположение</string>

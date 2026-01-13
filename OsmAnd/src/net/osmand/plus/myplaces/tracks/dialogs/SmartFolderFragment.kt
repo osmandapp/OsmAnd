@@ -176,6 +176,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 	override fun setupAdapter(view: View) {
 		super.setupAdapter(view)
 		adapter.setEmptySmartFolderListener(this)
+		adapter.setShouldShowFolder(true)
 	}
 
 	override fun editFilters() {

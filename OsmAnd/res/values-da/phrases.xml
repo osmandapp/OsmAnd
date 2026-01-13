@@ -4306,4 +4306,5 @@
     <string name="poi_denomination_ukrainian_orthodox">Ukrainsk ortodoks</string>
     <string name="poi_denomination_evangelical_lutheran">Evangelisk-luthersk</string>
     <string name="poi_denomination_anabaptist">Anabaptist</string>
+    <string name="poi_memorial_type">Mindesmærketype</string>
 </resources>
