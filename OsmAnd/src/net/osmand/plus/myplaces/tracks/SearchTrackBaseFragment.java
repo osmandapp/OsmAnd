@@ -40,6 +40,7 @@ import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.shared.gpx.enums.TracksSortScope;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -292,8 +293,14 @@ public abstract class SearchTrackBaseFragment extends BaseFullScreenDialogFragme
 	public void showSortByDialog() {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			SortByBottomSheet.showInstance(manager, getTracksSortMode(), this, isUsedOnMap());
+			SortByBottomSheet.showInstance(manager, getTrackSortScope(), getTracksSortMode(), this, isUsedOnMap());
 		}
+	}
+
+	@NonNull
+	@Override
+	public TracksSortScope getTrackSortScope() {
+		return TracksSortScope.TRACKS;
 	}
 
 	@NonNull

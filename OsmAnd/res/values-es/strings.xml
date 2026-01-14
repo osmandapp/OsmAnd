@@ -5810,4 +5810,24 @@
     <string name="private_access_routing_req_short">¿Permite el uso de una vía privada para llegar a su destino?</string>
     <string name="buildings_3d_detail_level">Detallado de edificios en 3D</string>
     <string name="lang_mi">Maorí</string>
+    <string name="visible_layers_and_objects">Capas y objetos visibles</string>
+    <string name="astro_black_holes">Agujeros negros</string>
+    <string name="astro_constellation">Constelación</string>
+    <string name="astro_constellations">Constelaciones</string>
+    <string name="astro_stars">Estrellas</string>
+    <string name="astro_galaxies">Galaxias</string>
+    <string name="astro_name_sun">Sol</string>
+    <string name="astro_name_moon">Luna</string>
+    <string name="astro_name_mercury">Mercurio</string>
+    <string name="astro_name_venus">Venus</string>
+    <string name="astro_name_mars">Marte</string>
+    <string name="astro_name_jupiter">Júpiter</string>
+    <string name="astro_name_saturn">Saturno</string>
+    <string name="astro_name_uranus">Urano</string>
+    <string name="astro_name_neptune">Neptuno</string>
+    <string name="astro_name_pluto">Plutón</string>
+    <string name="astro_planets">Planetas</string>
+    <string name="group_sensors">Sensores</string>
+    <string name="year_of_creation">Año de creación</string>
+    <string name="month_year_creation">Mes y año de creación</string>
 </resources>

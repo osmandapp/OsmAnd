@@ -1,6 +1,5 @@
 package net.osmand.plus.configmap.tracks.viewholders;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter;
+import net.osmand.shared.gpx.enums.TracksSortScope;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.ColorUtilities;
 
@@ -82,8 +82,10 @@ public class SortTracksViewHolder extends RecyclerView.ViewHolder {
 		void showSortByDialog();
 
 		default void showFiltersDialog() {
-
 		}
+
+		@NonNull
+		TracksSortScope getTrackSortScope();
 
 		@NonNull
 		TracksSortMode getTracksSortMode();

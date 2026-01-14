@@ -1,5 +1,6 @@
 package net.osmand.shared.settings.enums
 
+import net.osmand.shared.units.LengthUnits
 import net.osmand.shared.util.Localization
 
 enum class AltitudeMetrics(private val nameKey: String) {
@@ -8,19 +9,12 @@ enum class AltitudeMetrics(private val nameKey: String) {
 
     fun toHumanString() = Localization.getString(nameKey)
 
-    fun shouldUseFeet(): Boolean {
-        return this == FEET
-    }
+    fun shouldUseFeet() = this == FEET
+
+    fun getUnits() = if (shouldUseFeet()) LengthUnits.FEET else LengthUnits.METERS
 
     companion object {
-        fun fromMetricsConstant(mc: MetricsConstants): AltitudeMetrics {
-            return when (mc) {
-                MetricsConstants.KILOMETERS_AND_METERS,
-                MetricsConstants.NAUTICAL_MILES_AND_METERS,
-                MetricsConstants.MILES_AND_METERS -> METERS
-                else -> FEET
-            }
-        }
+        fun fromMetricsConstant(mc: MetricsConstants) = mc.getAltitudeMetrics()
     }
 }
 

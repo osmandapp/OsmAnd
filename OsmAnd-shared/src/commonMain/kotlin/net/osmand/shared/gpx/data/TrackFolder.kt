@@ -89,6 +89,10 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 		return trackItems
 	}
 
+	override fun getSubgroupById(subgroupId: String): TracksGroup? {
+		return subFolders.find { it.getId() == subgroupId }
+	}
+
 	fun setSubFolders(subFolders: List<TrackFolder>) {
 		this.subFolders = ArrayList(subFolders)
 	}

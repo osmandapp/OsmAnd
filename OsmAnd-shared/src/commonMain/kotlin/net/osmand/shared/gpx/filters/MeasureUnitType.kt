@@ -2,8 +2,17 @@ package net.osmand.shared.gpx.filters
 
 import net.osmand.shared.settings.enums.AltitudeMetrics
 import net.osmand.shared.settings.enums.MetricsConstants
-import net.osmand.shared.util.Localization
-import net.osmand.shared.util.OsmAndFormatter
+import net.osmand.shared.settings.enums.SpeedConstants
+import net.osmand.shared.units.HeartRateUnits
+import net.osmand.shared.units.LengthUnits
+import net.osmand.shared.units.MeasurementUnit
+import net.osmand.shared.units.NoUnit
+import net.osmand.shared.units.PowerUnits
+import net.osmand.shared.units.RotationUnits
+import net.osmand.shared.units.SpeedUnits
+import net.osmand.shared.units.TemperatureUnits
+import net.osmand.shared.units.TimeUnits
+import net.osmand.shared.util.PlatformUtil
 
 enum class MeasureUnitType {
 	TIME_DURATION,
@@ -17,87 +26,25 @@ enum class MeasureUnitType {
 	BPM,
 	NONE;
 
-	fun getFilterUnitText(mc: MetricsConstants, am: AltitudeMetrics): String {
-		val unitResId = when (this) {
-			TIME_DURATION -> Localization.getString("shared_string_minute_lowercase")
-			DISTANCE -> getDistanceUnits(mc)
-			ALTITUDE -> getAltitudeUnits(am)
-			SPEED -> getSpeedUnits(mc)
-			TEMPERATURE -> getTemperatureUnits()
-			ROTATIONS -> getRotationUnits()
-			BPM -> getBPMUnits()
-			POWER -> getPowerUnits()
-			else -> ""
-		}
+	fun getFilterUnitText(mc: MetricsConstants, am: AltitudeMetrics) = getUnit(mc, am).getSymbol()
 
-		return unitResId
-	}
+	fun getBaseValueFromFormatted(value: String) = getUnit().toBase(value.toDouble())
 
-	private fun getDistanceUnits(mc: MetricsConstants): String {
-		return when (mc) {
-			MetricsConstants.MILES_AND_METERS,
-			MetricsConstants.MILES_AND_FEET,
-			MetricsConstants.MILES_AND_YARDS -> Localization.getString("mile")
-
-			MetricsConstants.NAUTICAL_MILES_AND_FEET,
-			MetricsConstants.NAUTICAL_MILES_AND_METERS -> Localization.getString("nm")
-
-			MetricsConstants.KILOMETERS_AND_METERS -> Localization.getString("km")
-		}
-	}
-
-	private fun getPowerUnits(): String {
-		return Localization.getString("power_watts_unit")
-	}
-
-	private fun getTemperatureUnits(): String {
-		return Localization.getString("degree_celsius")
-	}
-
-	private fun getBPMUnits(): String {
-		return Localization.getString("beats_per_minute_short")
-	}
-
-	private fun getRotationUnits(): String {
-		return Localization.getString("revolutions_per_minute_unit")
-	}
-
-	private fun getSpeedUnits(mc: MetricsConstants): String {
-		return when (mc) {
-			MetricsConstants.MILES_AND_METERS,
-			MetricsConstants.MILES_AND_FEET,
-			MetricsConstants.MILES_AND_YARDS -> Localization.getString("mile_per_hour")
-
-			MetricsConstants.NAUTICAL_MILES_AND_FEET,
-			MetricsConstants.NAUTICAL_MILES_AND_METERS -> Localization.getString("nm_h")
-
-			MetricsConstants.KILOMETERS_AND_METERS -> Localization.getString("km_h")
-		}
-	}
-
-	private fun getAltitudeUnits(am: AltitudeMetrics): String {
-		val useFeet = am.shouldUseFeet()
-		return if (useFeet) {
-			Localization.getString("foot")
-		} else {
-			Localization.getString("m")
-		}
-	}
-
-	fun getBaseValueFromFormatted(value: String): Float {
+	fun getUnit(
+		mc: MetricsConstants? = PlatformUtil.getOsmAndContext().getMetricSystem(),
+		am: AltitudeMetrics? = PlatformUtil.getOsmAndContext().getAltitudeMetric(),
+		sc: SpeedConstants? = PlatformUtil.getOsmAndContext().getSpeedSystem()
+	): MeasurementUnit<*> {
 		return when (this) {
-			SPEED -> OsmAndFormatter.convertSpeedToMetersPerSecond(
-				value.toFloat())
-
-			ALTITUDE -> OsmAndFormatter.getMetersFromFormattedAltitudeValue(
-				value.toFloat())
-
-			DISTANCE -> OsmAndFormatter.convertToMeters(
-				value.toFloat())
-
-			TIME_DURATION -> value.toFloat() * 1000 * 60
-
-			else -> value.toFloat()
+			DISTANCE -> mc?.getDistanceUnit() ?: LengthUnits.METERS
+			ALTITUDE -> am?.getUnits() ?: LengthUnits.METERS
+			SPEED -> sc?.toUnits() ?: mc?.getSpeedUnit() ?: SpeedUnits.KILOMETERS_PER_HOUR // TODO: we should use only one point of the truth
+			TEMPERATURE -> TemperatureUnits.CELSIUS
+			TIME_DURATION -> TimeUnits.MINUTES
+			ROTATIONS -> RotationUnits.RPM
+			POWER -> PowerUnits.WATTS
+			BPM -> HeartRateUnits.BPM
+			else -> NoUnit
 		}
 	}
 }

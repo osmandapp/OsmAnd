@@ -47,7 +47,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			showPoiFilterDialog(uiAdapter, item);
 			return false;
 		} else if (itemId == R.string.layer_gpx_layer) {
-			TracksTabsFragment.showInstance(mapActivity.getSupportFragmentManager());
+			TracksTabsFragment.showInstance(mapActivity);
 			return false;
 		} else if (itemId == R.string.rendering_category_transport) {
 			TransportLinesMenu.showTransportsDialog(mapActivity);
@@ -96,7 +96,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 				selectedGpxHelper.clearAllGpxFilesToShow(true);
 				item.setDescription(selectedGpxHelper.getGpxDescription());
 			} else {
-				TracksTabsFragment.showInstance(mapActivity.getSupportFragmentManager());
+				TracksTabsFragment.showInstance(mapActivity);
 			}
 		} else if (itemId == R.string.rendering_category_transport) {
 			boolean selected = transportLinesMenu.isShowAnyTransport();

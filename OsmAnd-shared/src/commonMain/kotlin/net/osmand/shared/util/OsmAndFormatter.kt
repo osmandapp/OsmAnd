@@ -22,8 +22,7 @@ object OsmAndFormatter {
 	const val POUNDS_IN_ONE_TON = POUNDS_IN_ONE_KILOGRAM * KILOGRAMS_IN_ONE_TON
 
 
-	fun convertSpeedToMetersPerSecond(
-		formattedValueSrc: Float): Float {
+	fun convertSpeedToMetersPerSecond(formattedValueSrc: Float): Float {
 		val mc = PlatformUtil.getOsmAndContext().getSpeedSystem()
 		return when (mc) {
 			KILOMETERS_PER_HOUR -> formattedValueSrc / 3.6f
@@ -54,6 +53,4 @@ object OsmAndFormatter {
 			}
 		return distance * mainUnitInMeters
 	}
-
-
 }

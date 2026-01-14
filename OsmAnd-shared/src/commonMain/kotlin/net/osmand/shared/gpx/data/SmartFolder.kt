@@ -3,9 +3,14 @@ package net.osmand.shared.gpx.data
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import net.osmand.shared.gpx.TrackItem
+import net.osmand.shared.gpx.enums.TracksSortScope
+import net.osmand.shared.gpx.organization.TracksOrganizer
 import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterSerializer
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
+import net.osmand.shared.gpx.organization.OrganizeByParams
+import net.osmand.shared.gpx.organization.OrganizeByParamsSerializer
+import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import net.osmand.shared.util.KCollectionUtils
 
 @Serializable
@@ -16,6 +21,13 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	@Transient
 	private var trackItems: List<TrackItem>? = null
+
+	@Transient
+	private val tracksOrganizer = TracksOrganizer(this)
+
+	@Serializable(with = OrganizeByParamsSerializer::class)
+	var organizeByParams: OrganizeByParams? = null
+		private set
 
 	constructor() : this("")
 
@@ -50,6 +62,27 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		}
 	}
 
+	override fun getSubgroupById(subgroupId: String): TracksGroup? {
+		return getOrganizedTrackItems().find { it.getId() == subgroupId }
+	}
+
+	fun getOrganizedTrackItems(): List<OrganizedTracksGroup> {
+		return tracksOrganizer.getOrganizedTrackItems()
+	}
+
+	fun setOrganizeByParams(organizeByParams: OrganizeByParams?) {
+		this.organizeByParams = organizeByParams
+		tracksOrganizer.setOrganizeByParams(organizeByParams)
+	}
+
+	override fun getTracksSortScope(): TracksSortScope {
+		return tracksOrganizer.params?.type?.getTrackSortScope() ?: super.getTracksSortScope()
+	}
+
+	override fun getSupportedSortScopes(): List<TracksSortScope> {
+		return listOf(TracksSortScope.TRACKS, TracksSortScope.ORGANIZED_BY_NAME, TracksSortScope.ORGANIZED_BY_VALUE)
+	}
+
 	override fun getFolderAnalysis(): TrackFolderAnalysis {
 		var analysis = folderAnalysis
 		if (analysis == null) {
@@ -65,6 +98,15 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	fun resetItems() {
 		trackItems = ArrayList()
+		tracksOrganizer.clearCache()
 		folderAnalysis = null
+	}
+
+	fun getOrganizeByType(): OrganizeByType? {
+		return tracksOrganizer.params?.type
+	}
+
+	fun initTracksOrganizer() {
+		tracksOrganizer.initParams(organizeByParams)
 	}
 }

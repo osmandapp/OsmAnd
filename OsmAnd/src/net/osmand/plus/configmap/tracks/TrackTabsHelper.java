@@ -22,6 +22,7 @@ import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.enums.TracksSortScope;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
@@ -308,7 +309,7 @@ public class TrackTabsHelper {
 	public void loadTabsSortModes() {
 		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
 		for (TrackTab trackTab : trackTabs.values()) {
-			TracksSortMode sortMode = sortModesHelper.getSortMode(trackTab.getId());
+			TracksSortMode sortMode = sortModesHelper.getSortMode(trackTab.getId(), TracksSortScope.TRACKS);
 			if (sortMode != null) {
 				trackTab.setSortMode(sortMode);
 			}
@@ -317,14 +318,14 @@ public class TrackTabsHelper {
 
 	public void saveTabSortMode(@NonNull TrackTab trackTab) {
 		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
-		sortModesHelper.setSortMode(trackTab.getId(), trackTab.getSortMode());
+		sortModesHelper.setSortMode(trackTab.getId(), TracksSortScope.TRACKS, trackTab.getSortMode());
 		sortModesHelper.syncSettings();
 	}
 
 	public void saveTabsSortModes() {
 		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
 		for (TrackTab trackTab : trackTabs.values()) {
-			sortModesHelper.setSortMode(trackTab.getId(), trackTab.getSortMode());
+			sortModesHelper.setSortMode(trackTab.getId(), TracksSortScope.TRACKS, trackTab.getSortMode());
 		}
 		sortModesHelper.syncSettings();
 	}

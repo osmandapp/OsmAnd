@@ -11,14 +11,12 @@ import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
 actual object PlatformUtil {
 
 	private lateinit var osmAndContext: OsmAndContext
-	private lateinit var sqliteApi: SQLiteAPI
-	private lateinit var networkAPI: NetworkAPI
+
+	private val sqliteApi = SQLiteAPIImpl()
+	private val networkAPI = NetworkAPIImpl()
 
 	fun initialize(osmAndContext: OsmAndContext) {
 		this.osmAndContext = osmAndContext
-		this.sqliteApi = SQLiteAPIImpl()
-		this.networkAPI = NetworkAPIImpl()
-
 		Localization.initialize()
 	}
 

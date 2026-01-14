@@ -119,6 +119,45 @@ enum class GpxParameter(
 
 	fun isGpxDirParameter(): Boolean = GPX_DIR_PARAMETERS.contains(this)
 
+	fun <T : Comparable<T>>getComparableValue(value: Any): T {
+		if (value is String) {
+			return getValueFromString(value)
+		} else if (value is Number) {
+			return when (typeClass) {
+				Int::class -> check<T>(value.toInt()) as T
+				Double::class -> check<T>(value.toDouble()) as T
+				Long::class -> check<T>(value.toLong()) as T
+				Float::class -> check<T>(value.toFloat()) as T
+				else -> throw IllegalArgumentException("Can not cast $value to $typeClass")
+			}
+		}
+		throw IllegalArgumentException("$value is not a number")
+	}
+
+	fun <T>getValueFromString(value: String): T {
+		val convertedValue: T? = when (typeClass) {
+			Double::class -> check(value.toDouble())
+			Float::class -> check(value.toFloat())
+			Int::class -> check(value.toInt())
+			Long::class -> check(value.toLong())
+			else -> null
+		}
+		if (convertedValue != null) {
+			return convertedValue
+		} else {
+			throw IllegalArgumentException("value can not be cast to $typeClass")
+		}
+	}
+
+	@Suppress("UNCHECKED_CAST")
+	fun <T>check(value: Comparable<*>): T? {
+		return try {
+			value as T
+		} catch (err: ClassCastException) {
+			null
+		}
+	}
+
 	companion object {
 
 		private val APPEARANCE_PARAMETERS = listOf(

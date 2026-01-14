@@ -5932,4 +5932,22 @@
     <string name="astro_rise">Излазак</string>
     <string name="astro_set">Скуп</string>
     <string name="gpx_too_many_points_visible_warning">Велика количина видљивих ГПКс трагова доводи до велике потрошње меморије</string>
+    <string name="sort_highest_first">Највиши први</string>
+    <string name="sort_lowest_first">Најнижи први</string>
+    <string name="no_date">Без датума</string>
+    <string name="shared_string_step">Корак</string>
+    <string name="set_step_size_summary">Изаберите величину корака да бисте груписали своје трагове.</string>
+    <string name="set_step_size">Подесите величину корака</string>
+    <string name="organize_by_summary">Аутоматски организујте своје трагове у групе на основу изабраног параметра као што су активност, брзина или локација.</string>
+    <string name="organize_by">Организуј по</string>
+    <string name="group_general">Генерална</string>
+    <string name="group_date_time">Датум и време</string>
+    <string name="group_altitude_elevation">Надморска висина и елевација</string>
+    <string name="group_sensors">Сензори</string>
+    <string name="year_of_creation">Година стварања</string>
+    <string name="month_year_creation">Месец и година стварања</string>
+    <string name="nearest_city">Најближи град</string>
+    <string name="avg_speed">Прос. брзина</string>
+    <string name="organize_by_max_speed">Макс. брзина</string>
+    <string name="organize_by_max_altitude">Макс. надморска висина</string>
 </resources>

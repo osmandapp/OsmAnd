@@ -8,7 +8,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
+import net.osmand.shared.gpx.data.TracksGroup;
+import net.osmand.shared.gpx.enums.TracksSortScope;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -16,12 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TrackSortModesHelper {
 
 	private static final String ROOT_FOLDER_ID = "";
 	private static final String SEPARATOR = ",,";
+	private static final String SCOPE_SEPARATOR = "::";
 
 	private final Map<String, TracksSortMode> cachedSortModes = new ConcurrentHashMap<>();
 	private final ListStringPreference preference;
@@ -34,27 +38,29 @@ public class TrackSortModesHelper {
 
 	@NonNull
 	public TracksSortMode getRootFolderSortMode() {
-		return requireSortMode(ROOT_FOLDER_ID);
+		return requireSortMode(ROOT_FOLDER_ID, TracksSortScope.TRACKS);
 	}
 
 	@NonNull
-	public TracksSortMode requireSortMode(@Nullable String id) {
-		TracksSortMode sortMode = id != null ? getSortMode(id) : null;
-		return sortMode != null ? sortMode : TracksSortMode.getDefaultSortMode(id);
+	public TracksSortMode requireSortMode(@Nullable String id, @NonNull TracksSortScope scope) {
+		TracksSortMode sortMode = id != null ? getSortMode(id, scope) : null;
+		return sortMode != null ? sortMode : TracksSortMode.getDefaultSortMode(id, scope);
 	}
 
 	@Nullable
-	public TracksSortMode getSortMode(@NonNull String id) {
-		id = removeExtraFileSeparator(id);
-		return cachedSortModes.get(id);
+	public TracksSortMode getSortMode(@NonNull String id, @NonNull TracksSortScope scope) {
+		TracksSortMode sortMode = cachedSortModes.get(getInternalId(id, scope));
+		return sortMode != null ? TracksSortMode.getValidOrDefault(id, scope, sortMode) : null;
 	}
 
-	public void setSortMode(@NonNull String id, @Nullable TracksSortMode sortMode) {
-		id = removeExtraFileSeparator(id);
+	public void setSortMode(@NonNull String id,
+	                        @NonNull TracksSortScope scope,
+	                        @Nullable TracksSortMode sortMode) {
+		String internalId = getInternalId(id, scope);
 		if (sortMode != null) {
-			cachedSortModes.put(id, sortMode);
+			cachedSortModes.put(internalId, sortMode);
 		} else {
-			cachedSortModes.remove(id);
+			cachedSortModes.remove(internalId);
 		}
 	}
 
@@ -65,18 +71,55 @@ public class TrackSortModesHelper {
 		cachedSortModes.putAll(sortModes);
 	}
 
-	public void updateAfterMoveTrackFolder(@NonNull TrackFolder trackFolder, @NonNull File oldDir) {
+	public void onTrackFolderIdChanged(@NonNull TracksGroup trackFolder, @NonNull File oldDir) {
 		String previousId = getFolderId(oldDir.getAbsolutePath());
-		TracksSortMode sortMode = getSortMode(previousId);
-		if (sortMode != null) {
-			setSortMode(trackFolder.getId(), sortMode);
+		String newId = trackFolder.getId();
+		boolean updated = false;
+		for (TracksSortScope scope : trackFolder.getSupportedSortScopes()) {
+			TracksSortMode sortMode = getSortMode(previousId, scope);
+			if (sortMode != null) {
+				setSortMode(newId, scope, sortMode);
+				updated = true;
+			}
+		}
+		// TODO: update all sub folders / dependent groups as well
+		if (updated) {
 			syncSettings();
 		}
 	}
 
-	public void updateAfterDeleteTrackFolder(@NonNull TrackFolder trackFolder) {
-		setSortMode(trackFolder.getId(), null);
+	public void onTrackFolderDeleted(@NonNull TracksGroup trackFolder) {
+		String folderId = trackFolder.getId();
+		for (TracksSortScope scope : trackFolder.getSupportedSortScopes()) {
+			setSortMode(folderId, scope, null);
+		}
+		clearRelatedKeys(folderId);
 		syncSettings();
+	}
+
+	public void clearRelatedKeys(@NonNull String folderId) {
+		List<String> prefixesToRemove = getRelatedKeyPrefixes(folderId);
+		if (prefixesToRemove.isEmpty()) return;
+
+		cachedSortModes.keySet().removeIf(key -> {
+			for (String prefix : prefixesToRemove) {
+				if (key.startsWith(prefix)) {
+					return true;
+				}
+			}
+			return false;
+		});
+	}
+
+	/**
+	 * Returns a list of ID prefixes that are considered "nested" or dependent on the given folderId.
+	 * Used to clean up cache when the parent folder is modified.
+	 */
+	@NonNull
+	private List<String> getRelatedKeyPrefixes(@NonNull String folderId) {
+		List<String> prefixes = new ArrayList<>();
+		prefixes.add(OrganizedTracksGroup.Companion.getBaseId(folderId));
+		return prefixes;
 	}
 
 	public void syncSettings() {
@@ -89,11 +132,11 @@ public class TrackSortModesHelper {
 			for (String token : tokens) {
 				String[] tokenParts = token.split(SEPARATOR);
 				if (tokenParts.length == 2) {
-					String id = removeExtraFileSeparator(tokenParts[0]);
-					cachedSortModes.put(id, TracksSortMode.getByValue(tokenParts[1]));
+					String internalId = removeExtraFileSeparator(tokenParts[0]);
+					cachedSortModes.put(internalId, TracksSortMode.getByValue(tokenParts[1]));
 				}
 			}
-			UpgradeTrackSortModeKeysAlgorithm.execute(app, this);
+			UpgradeTrackSortModeKeysAlgorithm.Companion.execute(app, this);
 		}
 	}
 
@@ -104,6 +147,25 @@ public class TrackSortModesHelper {
 			tokens.add(entry.getKey() + SEPARATOR + value.name());
 		}
 		preference.setStringsList(tokens);
+	}
+
+	@NonNull
+	public Set<String> getAllCachedInternalIds() {
+		return cachedSortModes.keySet();
+	}
+
+	@Nullable
+	public TracksSortMode getRawSortMode(@NonNull String internalId) {
+		return cachedSortModes.get(internalId);
+	}
+
+	@NonNull
+	public static String getInternalId(@NonNull String folderId, @NonNull TracksSortScope scope) {
+		String cleanId = removeExtraFileSeparator(folderId);
+		if (scope == TracksSortScope.TRACKS) {
+			return cleanId;
+		}
+		return cleanId + SCOPE_SEPARATOR + scope.name();
 	}
 
 	@NonNull

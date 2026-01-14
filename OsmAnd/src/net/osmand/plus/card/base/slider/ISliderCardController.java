@@ -28,4 +28,8 @@ public interface ISliderCardController {
 
 	void onChangeSliderValue(float newValue);
 
+	@NonNull
+	default String formatValue(@NonNull Number number) {
+		return String.valueOf(number);
+	}
 }

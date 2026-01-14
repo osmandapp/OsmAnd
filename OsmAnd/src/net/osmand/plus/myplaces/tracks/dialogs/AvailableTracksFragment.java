@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import net.osmand.plus.configmap.tracks.PreselectedTabParams;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItemsFragment;
@@ -40,6 +41,7 @@ import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.SmartFolderUpdateListener;
 import net.osmand.shared.gpx.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
@@ -313,12 +315,13 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		}
 	}
 
-	private void openSmartFolder(@NonNull SmartFolder smartFolder, @Nullable TrackItem trackItem) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+	private void openSmartFolder(@NonNull SmartFolder smartFolder,
+	                             @Nullable OrganizedTracksGroup organizedGroup,
+	                             @Nullable TrackItem trackItem) {
+		callActivity(activity -> {
 			FragmentManager manager = activity.getSupportFragmentManager();
-			SmartFolderFragment.Companion.showInstance(manager, smartFolder, trackItem, this);
-		}
+			SmartFolderFragment.Companion.showInstance(manager, smartFolder, organizedGroup, trackItem, this);
+		});
 	}
 
 	@Override
@@ -326,14 +329,14 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		if (group instanceof TrackFolder folder) {
 			openTrackFolder(folder, null);
 		} else if (group instanceof SmartFolder folder) {
-			openSmartFolder(folder, null);
+			openSmartFolder(folder, null, null);
 		} else if (group instanceof VisibleTracksGroup) {
-			showTracksVisibilityDialog(ON_MAP.name(), ON_MAP, false);
+			openTracksVisibilityDialog(PreselectedTabParams.openTab(ON_MAP.name()));
 		}
 	}
 
 	public void showSmartFolderDetails(@NonNull SmartFolder folder) {
-		openSmartFolder(folder, null);
+		openSmartFolder(folder, null, null);
 	}
 
 	@Override
@@ -415,7 +418,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	private void showTrackItem(@NonNull TrackFolder folder, @NonNull TrackItem trackItem) {
 		if (smartFolder != null) {
-			openSmartFolder(smartFolder, trackItem);
+			openSmartFolder(smartFolder, organizedGroup, trackItem);
 		} else {
 			KFile file = trackItem.getFile();
 			if(file != null) {
@@ -428,7 +431,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 					}
 				} else {
 					if (smartFolder != null) {
-						openSmartFolder(smartFolder, trackItem);
+						openSmartFolder(smartFolder, organizedGroup, trackItem);
 					} else {
 						openSubfolder(folder, dirFile, trackItem);
 					}
@@ -569,7 +572,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	@Override
 	public void onSmartFolderCreated(@NonNull SmartFolder smartFolder) {
 		updateContent();
-		openSmartFolder(smartFolder, null);
+		openSmartFolder(smartFolder, null, null);
 	}
 
 	@Override

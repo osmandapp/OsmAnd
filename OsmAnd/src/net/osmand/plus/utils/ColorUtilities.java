@@ -279,6 +279,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getActivityListBgColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getActivityListBgColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getActivityListBgColorId(boolean nightMode) {
+		return nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light;
+	}
+
+	@ColorInt
 	public static int getAppBarColor(@NonNull Context ctx, boolean nightMode) {
 		return getColor(ctx, getAppBarColorId(nightMode));
 	}

@@ -94,6 +94,7 @@ class StarMapCameraHelper(
 			closeCamera()
 			cameraTextureView.visibility = View.GONE
 		}
+		starView.isCameraMode = isCameraOverlayEnabled
 		onCameraStateChanged(isCameraOverlayEnabled)
 	}
 

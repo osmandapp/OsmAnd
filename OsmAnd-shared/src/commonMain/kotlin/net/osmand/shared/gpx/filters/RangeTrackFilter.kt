@@ -7,23 +7,22 @@ import kotlin.math.ceil
 import kotlin.math.floor
 
 @Serializable(with = RangeTrackFilterSerializer::class)
-open class RangeTrackFilter<T : Comparable<T>>
-	: BaseTrackFilter {
+open class RangeTrackFilter<T : Comparable<T>> : BaseTrackFilter {
 
 	constructor(
 		minValue: T,
 		maxValue: T,
 		trackFilterType: TrackFilterType,
-		filterChangedListener: FilterChangedListener?) : super(
+		filterChangedListener: FilterChangedListener?
+	) : super(
 		trackFilterType,
-		filterChangedListener) {
+		filterChangedListener
+	) {
 		this.minValue = minValue
 		this.maxValue = maxValue
 		this.valueFrom = minValue
 		this.valueTo = maxValue
-
 	}
-
 
 	@Serializable
 	var minValue: T
@@ -46,34 +45,18 @@ open class RangeTrackFilter<T : Comparable<T>>
 		}
 	}
 
-	private fun getValueFromString(value: String): T {
-		val convertedValue: T? = when (getProperty().typeClass) {
-			Double::class -> check(value.toDouble())
-			Float::class -> check(value.toFloat())
-			Int::class -> check(value.toInt())
-			Long::class -> check(value.toLong())
-			else -> null
-		}
-		if (convertedValue != null) {
-			return convertedValue
-		} else {
-			throw IllegalArgumentException("value can not be cast to ${trackFilterType.property!!.typeClass}")
-		}
-
-	}
-
 	fun setValueTo(to: String, updateListeners: Boolean = true) {
 		val baseValue = getComparableValue(
-			trackFilterType.measureUnitType.getBaseValueFromFormatted(
-				to))
+			trackFilterType.measureUnitType.getBaseValueFromFormatted(to)
+		)
 		setValueTo(baseValue, updateListeners)
 	}
 
 	fun setValueFrom(from: String, updateListeners: Boolean = true) {
-		val baseValue = getComparableValue(
-			trackFilterType.measureUnitType.getBaseValueFromFormatted(
-				from)).toString()
-		setValueFrom(getValueFromString(baseValue), updateListeners)
+		val property = getProperty()
+		val value = trackFilterType.measureUnitType.getBaseValueFromFormatted(from)
+		val baseValue = getComparableValue(value).toString()
+		setValueFrom(property.getValueFromString(baseValue) as T, updateListeners)
 	}
 
 	private fun setValueTo(to: T, updateListeners: Boolean = true) {
@@ -110,13 +93,12 @@ open class RangeTrackFilter<T : Comparable<T>>
 		}
 	}
 
-	@Suppress("UNCHECKED_CAST")
 	private fun check(value: Comparable<*>): T? {
-		return try {
-			value as T
-		} catch (err: ClassCastException) {
-			null
-		}
+		return getProperty().check(value)
+	}
+
+	fun setMaxValue(value: String) {
+		setMaxValue(getComparableValue(value))
 	}
 
 	fun setMaxValue(value: T) {
@@ -182,18 +164,7 @@ open class RangeTrackFilter<T : Comparable<T>>
 	}
 
 	private fun getComparableValue(value: Any): T {
-		if (value is String) {
-			return getValueFromString(value)
-		} else if (value is Number) {
-			return when (getProperty().typeClass) {
-				Int::class -> check(value.toInt()) as T
-				Double::class -> check(value.toDouble()) as T
-				Long::class -> check(value.toLong()) as T
-				Float::class -> check(value.toFloat()) as T
-				else -> throw IllegalArgumentException("Can not cast $value to " + getProperty().typeClass)
-			}
-		}
-		throw IllegalArgumentException("$value is not a number")
+		return getProperty().getComparableValue(value)
 	}
 
 	override fun hashCode(): Int {

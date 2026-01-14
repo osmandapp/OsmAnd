@@ -49,6 +49,18 @@ class SQLiteAPIImpl : SQLiteAPI {
 			ds.close()
 		}
 
+		override fun beginTransaction() {
+			TODO("Not yet implemented")
+		}
+
+		override fun setTransactionSuccessful() {
+			TODO("Not yet implemented")
+		}
+
+		override fun endTransaction() {
+			TODO("Not yet implemented")
+		}
+
 		override fun rawQuery(sql: String, selectionArgs: Array<String>?): SQLiteCursor {
 			val statement = ds.createStatement(sql)
 			selectionArgs?.forEachIndexed { index, s -> statement.bindString(index + 1, s) }
@@ -188,6 +200,10 @@ class SQLiteAPIImpl : SQLiteAPI {
 
 		override fun bindLong(i: Int, value: Long) {
 			statement.bindLong(i, value)
+		}
+
+		override fun bindDouble(i: Int, value: Double) {
+			statement.bindDouble(i, value)
 		}
 
 		override fun bindBlob(i: Int, value: ByteArray) {
