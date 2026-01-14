@@ -5,20 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.Toolbar
 import androidx.core.graphics.toColorInt
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.button.MaterialButton
 import net.osmand.Location
 import net.osmand.map.IMapLocationListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
@@ -42,9 +42,8 @@ import net.osmand.plus.plugins.astro.views.StarVisiblityChartView
 import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
-import net.osmand.plus.views.controls.maphudbuttons.MapButton
-import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
 import net.osmand.shared.util.LoggerFactory
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Locale
@@ -55,7 +54,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	internal lateinit var starView: StarView
 	private lateinit var timeSelectionView: DateTimeSelectionView
-	private lateinit var resetTimeButton: Button
+	private lateinit var timeControlBtn: MaterialButton
+	private lateinit var resetTimeButton: ImageButton
 
 	private lateinit var arModeButton: ImageButton
 	private lateinit var cameraButton: ImageButton
@@ -74,9 +74,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var starAltitudeView: StarAltitudeChartView
 	private lateinit var starChartState: StarChartState
 
-	private val mapButtons = mutableListOf<MapButton>()
 	private var compassButton: StarCompassButton? = null
-	private var rulerWidget: RulerWidget? = null
 	private var systemBottomInset: Int = 0
 	private var manualAzimuth: Boolean = false
 	private var lastResetRotationToNorth = 0L
@@ -132,6 +130,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		starView = view.findViewById(R.id.star_view)
 		timeSelectionView = view.findViewById(R.id.time_selection_view)
+		timeControlBtn = view.findViewById(R.id.time_control_button)
 		resetTimeButton = view.findViewById(R.id.reset_time_button)
 
 		arModeButton = view.findViewById(R.id.ar_mode_button)
@@ -193,20 +192,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		updateArModeUI(arModeHelper.isArModeEnabled)
 		updateCameraUI(cameraHelper.isCameraOverlayEnabled)
 
-		val starMapControlsContainer = view.findViewById<View>(R.id.star_map_controls_container)
-		val mapControlsContainer = view.findViewById<View>(R.id.map_controls_container)
-
-		val insetsListener = androidx.core.view.OnApplyWindowInsetsListener { _, windowInsets ->
-			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-			systemBottomInset = insets.bottom
-			updateMapControlsPadding()
-			windowInsets
-		}
-
-		ViewCompat.setOnApplyWindowInsetsListener(starMapControlsContainer, insetsListener)
-		if (mapControlsContainer != null) {
-			ViewCompat.setOnApplyWindowInsetsListener(mapControlsContainer, insetsListener)
-		}
+		val timeControlCard: View = view.findViewById(R.id.time_control_card)
+		applyWindowInsets(timeControlCard)
 
 		starChartsView = view.findViewById(R.id.star_charts_view)
 		ViewCompat.setOnApplyWindowInsetsListener(starChartsView) { v, windowInsets ->
@@ -226,6 +213,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		view.findViewById<ImageButton>(R.id.star_map_button).apply {
 			setOnClickListener { updateStarMapVisibility(!starView.isVisible); saveCommonSettings() }
+			applyWindowInsets(this)
 		}
 		view.findViewById<ImageButton>(R.id.star_chart_button).apply {
 			setOnClickListener {
@@ -234,6 +222,19 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				saveCommonSettings()
 			}
 		}
+		view.findViewById<ImageButton>(R.id.close_button).apply {
+			setOnClickListener { requireActivity().onBackPressed() }
+		}
+		view.findViewById<ImageButton>(R.id.search_button).apply {
+			setOnClickListener {
+				// TODO
+			}
+		}
+
+		timeControlBtn.setOnClickListener {
+			timeSelectionView.isVisible = !timeSelectionView.isVisible
+		}
+
 		view.findViewById<ImageButton>(R.id.settings_button).apply {
 			setOnClickListener {
 				AstroUtils.showStarMapOptionsDialog(context, starView, swSettings) {
@@ -279,8 +280,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		updateMagnitudeFilterVisibility()
 		updateStarMap(true)
-		setupToolBar(view)
-		buildZoomButtons(view)
+		
+		view.findViewById<StarCompassButton>(R.id.star_map_compass_button)?.let {
+			it.onSingleTap = { setAzimuth(0.0, true)}
+			it.setMapActivity(requireMapActivity())
+			compassButton = it
+		}
 
 		previousAltitude = starView.getAltitude()
 		previousAzimuth = starView.getAzimuth()
@@ -288,6 +293,18 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		apply2DMode(starView.is2DMode)
 
 		return view
+	}
+
+	private fun applyWindowInsets(view: View) {
+		ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
+			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+			v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+				val baseMarginBottom = v.resources.getDimensionPixelSize(R.dimen.content_padding)
+				bottomMargin = insets.bottom + baseMarginBottom
+			}
+			systemBottomInset = insets.bottom
+			windowInsets
+		}
 	}
 
 	private fun updateArModeUI(enabled: Boolean) {
@@ -401,25 +418,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private fun updateStarMapVisibility(visible: Boolean) {
 		starView.visibility = if (visible) View.VISIBLE else View.GONE
-		val starMapControls = view?.findViewById<View>(R.id.star_map_controls_container)
-		val mapControls = view?.findViewById<View>(R.id.map_controls_container)
-		starMapControls?.visibility = if (visible) View.VISIBLE else View.GONE
-		mapControls?.visibility = if (!visible) View.VISIBLE else View.GONE
 		updateMagnitudeFilterVisibility()
 	}
 
 	private fun updateStarChartVisibility(visible: Boolean) {
 		starChartsView.visibility = if (visible) View.VISIBLE else View.GONE
-		rulerWidget?.visibility = if (visible) View.VISIBLE else View.GONE
-		updateMapControlsPadding()
-	}
-
-	private fun updateMapControlsPadding() {
-		val starMapControls = view?.findViewById<View>(R.id.star_map_controls_container)
-		val mapControls = view?.findViewById<View>(R.id.map_controls_container)
-		val bottomPadding = if (starChartsView.isVisible) 0 else systemBottomInset
-		starMapControls?.updatePadding(bottom = bottomPadding)
-		mapControls?.updatePadding(bottom = bottomPadding)
 	}
 
 	private fun saveCommonSettings() {
@@ -465,15 +468,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			R.id.map_right_widgets_panel, R.id.map_center_info)
 	}
 
-	private fun setupToolBar(view: View) {
-		val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-		toolbar.setTitleTextColor(app.getColor(ColorUtilities.getPrimaryTextColorId(nightMode)))
-		toolbar.setNavigationIcon(getIcon(R.drawable.ic_arrow_back, ColorUtilities.getPrimaryIconColorId(nightMode)))
-		toolbar.setNavigationContentDescription(R.string.shared_string_close)
-		toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-		toolbar.setBackgroundColor(app.getColor(if (nightMode) R.color.activity_background_color_dark else R.color.list_background_color_light))
-	}
-
 	private fun toggle2DMode() {
 		apply2DMode(!starView.is2DMode)
 	}
@@ -497,7 +491,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun update2DModeIcon() {
-		val iconId = if (starView.is2DMode) R.drawable.ic_action_3d else R.drawable.ic_action_2d
+		val iconId = if (starView.is2DMode) R.drawable.ic_action_globe_view else R.drawable.ic_action_celestial_path
 		mode2dButton.setImageDrawable(getIcon(iconId, ColorUtilities.getPrimaryIconColorId(nightMode)))
 	}
 
@@ -508,6 +502,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		starMapViewModel.currentCalendar.observe(viewLifecycleOwner) { calendar ->
 			timeSelectionView.setDateTime(calendar)
+			val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+			timeControlBtn.text = timeFormat.format(calendar.time)
 		}
 		starChartViewModel.currentTime.observe(viewLifecycleOwner) { updateStarChart() }
 		starMapViewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
@@ -597,35 +593,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				starAltitudeView.updateData(location.latitude, location.longitude, localDate)
 			}
 		}
-	}
-
-	private fun buildZoomButtons(view: View) {
-		val activity = requireMapActivity()
-		val mapLayers = activity.mapLayers
-		val layer = mapLayers.mapControlsLayer
-		fun addButtons(container: View, starMap: Boolean): Boolean? {
-			container.findViewById<MapButton?>(R.id.map_zoom_in_button)?.let {
-				mapButtons.add(it)
-				if (starMap) { it.setOnClickListener { starView.zoomIn() }; it.setOnLongClickListener(null) }
-			}
-			container.findViewById<MapButton?>(R.id.map_zoom_out_button)?.let {
-				mapButtons.add(it)
-				if (starMap) { it.setOnClickListener { starView.zoomOut() }; it.setOnLongClickListener(null) }
-			}
-			container.findViewById<MapButton?>(R.id.map_my_location_button)?.let { mapButtons.add(it) }
-			return container.findViewById<View?>(R.id.map_hud_controls)?.let { AndroidUiHelper.updateVisibility(it, true) }
-		}
-		view.findViewById<StarCompassButton?>(R.id.star_map_compass_button)?.let {
-			it.onSingleTap = { setAzimuth(0.0, true)}
-			compassButton = it
-			layer.addCustomMapButton(it)
-			mapButtons.add(it)
-		}
-		view.findViewById<View>(R.id.star_map_controls_container)?.let { addButtons(it, true) }
-		view.findViewById<View>(R.id.map_controls_container)?.let { addButtons(it, false) }
-		layer.addCustomizedDefaultMapButtons(mapButtons)
-		val mapInfoLayer = mapLayers.mapInfoLayer
-		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout))
 	}
 
 	private fun showConstellationInfo(c: Constellation) {

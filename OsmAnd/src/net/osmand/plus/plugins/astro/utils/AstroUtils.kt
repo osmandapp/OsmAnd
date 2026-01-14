@@ -119,7 +119,7 @@ object AstroUtils {
 			tempConstellations, tempStars, tempGalaxies, tempNebulae, tempOpenClusters, tempGlobularClusters, tempGalaxyClusters, tempBlackHoles
 		)
 
-		AlertDialog.Builder(context)
+		val dialog = AlertDialog.Builder(context)
 			.setTitle(R.string.visible_layers_and_objects)
 			.setMultiChoiceItems(items, checked) { _, which, isChecked ->
 				when (which) {
@@ -182,7 +182,11 @@ object AstroUtils {
 				onApply?.invoke(newConfig)
 			}
 			.setNegativeButton(R.string.shared_string_cancel, null)
-			.show()
+			.create()
+
+		dialog.setCancelable(true)
+		dialog.setCanceledOnTouchOutside(true)
+		dialog.show()
 	}
 
 	// ---------- Extensions for Type Conversions ----------
