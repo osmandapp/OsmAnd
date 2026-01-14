@@ -276,10 +276,10 @@ public class SearchUICore {
 		}
 
 		public String createAddressString(String cityName, String mainCity, String dominatedCity, String addr) {
-			if (dominatedCity.equals(mainCity)) {
+			if (dominatedCity != null && dominatedCity.equals(mainCity)) {
 				return addr + (Algorithms.isEmpty(cityName) ? "" : ", " + cityName);
 			} else {
-				return (cityName.isEmpty() ? "" : (cityName + ", ")) + addr;
+				return (Algorithms.isEmpty(cityName) ? "" : (cityName + ", ")) + addr;
 			}
 		}
 		
