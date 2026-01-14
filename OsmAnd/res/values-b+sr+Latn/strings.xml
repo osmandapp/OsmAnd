@@ -5945,4 +5945,11 @@
     <string name="group_general">Generalna</string>
     <string name="group_date_time">Datum i vreme</string>
     <string name="group_altitude_elevation">Nadmorska visina i elevacija</string>
+    <string name="group_sensors">Senzori</string>
+    <string name="year_of_creation">Godina stvaranja</string>
+    <string name="month_year_creation">Mesec i godina stvaranja</string>
+    <string name="nearest_city">Najbliži grad</string>
+    <string name="avg_speed">Pros. brzina</string>
+    <string name="organize_by_max_speed">Maks. brzina</string>
+    <string name="organize_by_max_altitude">Maks. nadmorska visina</string>
 </resources>
