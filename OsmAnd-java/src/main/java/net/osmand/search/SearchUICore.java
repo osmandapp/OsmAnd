@@ -117,7 +117,7 @@ public class SearchUICore {
 		private final SearchPhrase phrase;
 		private boolean useLimit;
 		private static final int DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;
-		public static final Integer DOMINATED_CITY_CRITERIA = 5;
+		private static final Integer DOMINATED_CITY_CRITERIA = 5;
 
 		public SearchResultCollection(SearchPhrase phrase) {
 			this.phrase = phrase;
