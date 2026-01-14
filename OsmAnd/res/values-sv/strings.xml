@@ -5897,7 +5897,7 @@
     <string name="lang_en_barebones">Engelska (grundläggande)</string>
     <string name="accessibility_independent_features">Oberoende funktioner</string>
     <string name="access_pinch_zoom_magnification">Nypzoomförstoring</string>
-    <string name="access_pinch_zoom_magnification_descr">Använd visningsport-skalning istället för diskreta zoomnivåer under inzoomningsgester.</string>
+    <string name="access_pinch_zoom_magnification_descr">Använd skalning av visningsområde istället för diskreta zoomnivåer under inzoomningsgester.</string>
     <string name="download_wikipedia_label">Ladda ner Wikipedia</string>
     <string name="routing_attr_pt_limit_name">Visa N bästa rutter</string>
     <string name="routing_attr_pt_limit_description">Ange antalet bästa rutter som ska visas</string>
@@ -5945,4 +5945,5 @@
     <string name="astro_set">Nedgång</string>
     <string name="show_expand_button">Visa expanderingsknapp</string>
     <string name="imprecise_coordinates">Oprecisa koordinater</string>
+    <string name="gpx_too_many_points_visible_warning">En stor mängd synliga GPX spår leder till hög minnesanvändning</string>
 </resources>
