@@ -2,12 +2,12 @@ package net.osmand.shared.gpx.organization
 
 import co.touchlab.stately.collections.ConcurrentMutableMap
 import net.osmand.shared.data.Limits
+import net.osmand.shared.gpx.RouteActivityHelper
 import net.osmand.shared.gpx.organization.enums.OrganizeByCategory
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import net.osmand.shared.util.DateFormatter
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.Localization
-import net.osmand.shared.util.PlatformUtil
 
 object OrganizeTracksResourceMapper {
 
@@ -74,7 +74,7 @@ object OrganizeTracksResourceMapper {
 				}
 			}
 		} else if (type == OrganizeByType.ACTIVITY && value is String) {
-			val activity = PlatformUtil.getOsmAndContext().findRouteActivityById(value)
+			val activity = RouteActivityHelper.findRouteActivity(value)
 			return activity?.label ?: Localization.getString("shared_string_none")
 		} else if (KAlgorithms.isEmpty(value.toString())) {
 			return Localization.getString("shared_string_none")
@@ -84,7 +84,7 @@ object OrganizeTracksResourceMapper {
 
 	private fun resolveIconName(type: OrganizeByType, value: Any): String {
 		if (value is String && type == OrganizeByType.ACTIVITY) {
-			val activity = PlatformUtil.getOsmAndContext().findRouteActivityById(value)
+			val activity = RouteActivityHelper.findRouteActivity(value)
 			return activity?.iconName ?: "ic_action_activity"
 		}
 		return type.iconResId

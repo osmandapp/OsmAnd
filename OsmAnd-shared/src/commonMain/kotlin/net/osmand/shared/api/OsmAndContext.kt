@@ -3,7 +3,6 @@ package net.osmand.shared.api
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
-import net.osmand.shared.gpx.primitives.RouteActivity
 import net.osmand.shared.io.KFile
 import net.osmand.shared.settings.enums.AltitudeMetrics
 import net.osmand.shared.settings.enums.MetricsConstants
@@ -29,5 +28,4 @@ interface OsmAndContext {
 	fun getTrackPointsAnalyser(): TrackPointsAnalyser?
 	fun getAssetAsString(name: String): String?
 	fun searchNearestCityName(latLon: KLatLon, callback: CityNameCallback)
-	fun findRouteActivityById(id: String): RouteActivity?
 }

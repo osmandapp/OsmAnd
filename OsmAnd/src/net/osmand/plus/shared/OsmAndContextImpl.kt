@@ -88,8 +88,6 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 	override fun getTrackPointsAnalyser(): TrackPointsAnalyser? =
 		PluginsHelper.getTrackPointsAnalyser()
 
-	override fun findRouteActivityById(id: String) = app.routeActivityHelper.findRouteActivity(id)
-
 	override fun searchNearestCityName(latLon: KLatLon, callback: CityNameCallback) {
 		while (app.isApplicationInitializing) {
 			Thread.sleep(50)
