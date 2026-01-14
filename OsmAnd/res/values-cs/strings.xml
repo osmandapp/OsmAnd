@@ -5953,6 +5953,15 @@
     <string name="visible_layers_and_objects">Viditelné vrstvy a objekty</string>
     <string name="shared_string_azimuth">Azimut</string>
     <string name="shared_string_magnitude">Velikost</string>
-    <string name="astro_rise">Úsvit</string>
-    <string name="astro_set">Západ slunce</string>
+    <string name="astro_rise">Východ</string>
+    <string name="astro_set">Západ</string>
+    <string name="star_watcher_plugin_name">Sledování hvězd (Beta)</string>
+    <string name="star_watcher_plugin_description">Grafy hvězd, 3D mapa hvězd</string>
+    <string name="star_map">Mapa hvězd</string>
+    <string name="star_charts_name">Grafy hvězd</string>
+    <string name="star_visibility_name">Viditelnost hvězd</string>
+    <string name="star_altitude_name">Výška hvězd</string>
+    <string name="azimuthal_grid">Azimutová mřížka</string>
+    <string name="equatorial_grid">Rovníková mřížka</string>
+    <string name="gpx_too_many_points_visible_warning">Velké množství viditelných GPX tras může vést ke zvýšenému využití paměti</string>
 </resources>

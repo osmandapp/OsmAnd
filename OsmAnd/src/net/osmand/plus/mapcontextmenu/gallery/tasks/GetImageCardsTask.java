@@ -29,8 +29,8 @@ import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
-import net.osmand.wiki.WikiCoreHelper;
-import net.osmand.wiki.WikiCoreHelper.NetworkResponseListener;
+import net.osmand.shared.wiki.WikiCoreHelper;
+import net.osmand.shared.wiki.WikiCoreHelper.NetworkResponseListener;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -92,7 +92,7 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 				httpPms.put("lang", preferredLang);
 			}
 
-			List<WikiImage> wikimediaImageList = WikiCoreHelper.getWikiImageList(params, networkResponseListener);
+			List<WikiImage> wikimediaImageList = WikiCoreHelper.INSTANCE.getWikiImageList(params, networkResponseListener);
 			for (WikiImage wikiImage : wikimediaImageList) {
 				holder.addCard(WIKIMEDIA, new WikiImageCard(mapActivity, wikiImage));
 			}

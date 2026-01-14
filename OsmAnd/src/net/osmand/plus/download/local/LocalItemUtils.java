@@ -55,6 +55,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class LocalItemUtils {
@@ -305,8 +306,11 @@ public class LocalItemUtils {
 		String formattedSize = item.getSizeDescription(context);
 		String formattedMinDate = getFormattedDate(context, new Date(item.getMinTimestamp()));
 		String formattedMaxDate = getFormattedDate(context, new Date(item.getMaxTimestamp()));
-		String formattedDateRange = context.getString(R.string.ltr_or_rtl_combine_via_dash, formattedMinDate, formattedMaxDate);
-		return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDateRange);
+		String formattedDate = formattedMinDate;
+		if (!Objects.equals(formattedMinDate, formattedMaxDate)) {
+			formattedDate = context.getString(R.string.ltr_or_rtl_combine_via_dash, formattedMinDate, formattedMaxDate);
+		}
+		return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDate);
 	}
 
 	@NonNull
@@ -341,10 +345,12 @@ public class LocalItemUtils {
 	public static List<LocalItem> collectLocalItems(@NonNull Set<BaseLocalItem> items) {
 		List<LocalItem> localItems = new ArrayList<>();
 		for (BaseLocalItem item : items) {
-			if (item instanceof LocalItem) {
-				localItems.add((LocalItem) item);
-			} else if (item instanceof LiveGroupItem) {
-				localItems.addAll(((LiveGroupItem) item).getItems());
+			if (item instanceof LocalItem localItem) {
+				localItems.add(localItem);
+			} else if (item instanceof LiveGroupItem liveGroupItem) {
+				localItems.addAll(liveGroupItem.getItems());
+			} else if (item instanceof MultipleLocalItem multipleLocalItem) {
+				localItems.addAll(multipleLocalItem.getLocalItems());
 			}
 		}
 		return localItems;

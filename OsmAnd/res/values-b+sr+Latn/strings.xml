@@ -5914,4 +5914,24 @@
     <string name="astro_name_pluto">Pluton</string>
     <string name="star_watcher_plugin_description">Zvezdane mape, 3D zvezdana mapa</string>
     <string name="star_watcher_plugin_name">Posmatranje zvezda (Beta)</string>
+    <string name="azimuthal_grid">Azimutalna mreža</string>
+    <string name="equatorial_grid">Ekvatorijalna mreža</string>
+    <string name="ecliptic_line">Ekliptička linija</string>
+    <string name="magnitude_filter">Filter magnitude</string>
+    <string name="astro_planets">Planete</string>
+    <string name="astro_constellation">Sazvežđe</string>
+    <string name="astro_constellations">Sazvežđa</string>
+    <string name="astro_stars">Zvezde</string>
+    <string name="astro_galaxies">Galaksije</string>
+    <string name="astro_nebulae">Magline</string>
+    <string name="astro_open_clusters">Otvoreni Klasteri</string>
+    <string name="astro_globular_clusters">Globularni Klasteri</string>
+    <string name="astro_galaxy_clusters">Galaktički Klasteri</string>
+    <string name="astro_black_holes">Crne rupe</string>
+    <string name="visible_layers_and_objects">Vidljivi Slojevi i Objekti</string>
+    <string name="shared_string_azimuth">Azimut</string>
+    <string name="shared_string_magnitude">Magnituda</string>
+    <string name="astro_rise">Izlazak</string>
+    <string name="astro_set">Skup</string>
+    <string name="gpx_too_many_points_visible_warning">Velika količina vidljivih GPX tragova dovodi do velike potrošnje memorije</string>
 </resources>
