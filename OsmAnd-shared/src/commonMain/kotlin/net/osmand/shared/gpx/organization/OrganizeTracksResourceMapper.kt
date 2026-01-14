@@ -1,11 +1,18 @@
 package net.osmand.shared.gpx.organization
 
+import co.touchlab.stately.collections.ConcurrentMutableMap
+import net.osmand.shared.data.Limits
+import net.osmand.shared.gpx.organization.enums.OrganizeByCategory
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
+import net.osmand.shared.util.DateFormatter
+import net.osmand.shared.util.KAlgorithms
+import net.osmand.shared.util.Localization
+import net.osmand.shared.util.PlatformUtil
 
-abstract class OrganizeTracksResourceMapper {
+object OrganizeTracksResourceMapper {
 
-	private val nameCache = mutableMapOf<String, String>()
-	private val iconNameCache = mutableMapOf<String, String>()
+	private val nameCache = ConcurrentMutableMap<String, String>()
+	private val iconNameCache = ConcurrentMutableMap<String, String>()
 
 	fun getName(type: OrganizeByType, value: Any): String {
 		val key = buildNameKey(type, value)
@@ -22,10 +29,6 @@ abstract class OrganizeTracksResourceMapper {
 		iconNameCache.clear()
 	}
 
-	protected abstract fun resolveName(type: OrganizeByType, value: Any): String
-
-	protected open fun resolveIconName(type: OrganizeByType, value: Any) = type.iconResId
-
 	private fun buildNameKey(type: OrganizeByType, value: Any) = buildFullKey(type, value)
 
 	private fun buildIconKey(type: OrganizeByType, value: Any): String {
@@ -36,4 +39,54 @@ abstract class OrganizeTracksResourceMapper {
 	}
 
 	private fun buildFullKey(type: OrganizeByType, value: Any) = "${type.name}__${value}"
+
+	private fun resolveName(type: OrganizeByType, value: Any): String {
+		if (value is Limits) {
+			val displayUnits = type.getDisplayUnits()
+			val min = value.min.toDouble()
+			val max = value.max.toDouble()
+
+			val from = displayUnits.fromBase(min).toInt()
+			val to = displayUnits.fromBase(max).toInt()
+			val formattedRange = Localization.getString(
+				"ltr_or_rtl_combine_via_dash",
+				from.toString(),
+				to.toString()
+			)
+
+			return Localization.getString(
+				"ltr_or_rtl_combine_via_space",
+				formattedRange,
+				displayUnits.getSymbol()
+			)
+
+		} else if (type.category == OrganizeByCategory.DATE_TIME) {
+			val date = (value as? Number)?.toLong() ?: 0L
+			return if (date == 0L) {
+				Localization.getString("no_date")
+			} else {
+				when (type) {
+					OrganizeByType.YEAR_OF_CREATION -> DateFormatter.formatYear(date)
+
+					OrganizeByType.MONTH_AND_YEAR -> DateFormatter.formatMonthAndYear(date)
+
+					else -> throw IllegalArgumentException("Unknown OrganizeByType $type of category ${type.category}")
+				}
+			}
+		} else if (type == OrganizeByType.ACTIVITY && value is String) {
+			val activity = PlatformUtil.getOsmAndContext().findRouteActivityById(value)
+			return activity?.label ?: Localization.getString("shared_string_none")
+		} else if (KAlgorithms.isEmpty(value.toString())) {
+			return Localization.getString("shared_string_none")
+		}
+		return value.toString()
+	}
+
+	private fun resolveIconName(type: OrganizeByType, value: Any): String {
+		if (value is String && type == OrganizeByType.ACTIVITY) {
+			val activity = PlatformUtil.getOsmAndContext().findRouteActivityById(value)
+			return activity?.iconName ?: "ic_action_activity"
+		}
+		return type.iconResId
+	}
 }

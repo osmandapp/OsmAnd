@@ -2,7 +2,6 @@ package net.osmand.shared.gpx.organization
 
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.TracksGroup
-import net.osmand.shared.util.PlatformUtil
 
 class TracksOrganizer(val parent: TracksGroup) {
 
@@ -18,8 +17,7 @@ class TracksOrganizer(val parent: TracksGroup) {
 		if (cachedOrganizedGroups == null) {
 			params?.let { parameters ->
 				parameters.type.let {
-					val mapper = PlatformUtil.getOsmAndContext().getOrganizeTracksResourceMapper()
-					cachedOrganizedGroups = it.strategy.apply(parent, parameters, mapper)
+					cachedOrganizedGroups = it.strategy.apply(parent, parameters)
 				}
 			}
 		}

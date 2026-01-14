@@ -214,15 +214,19 @@ enum class OrganizeByType(
 
 	fun getTrackSortScope() = strategy.getTrackSortScope()
 
-	fun getGpxParameter() = filterType.property!!
+	fun getGpxParameter() = filterType.property
 
 	fun getDisplayUnits() = filterType.measureUnitType.getUnit()
 
-	fun getDefaultStepInBaseUnits() = getDisplayUnits().toBase(stepRange!!.getMidpoint())
+	fun getDefaultStepInBaseUnits() =
+		getDisplayUnits().toBase(stepRange?.getMidpoint() ?: DEFAULT_STEP_SIZE)
 
 	fun isRangeRelated() = stepRange != null
 
 	companion object {
+
+		const val DEFAULT_STEP_SIZE = 1.0
+
 		fun valuesOf(category: OrganizeByCategory) = entries.filter { it.category == category }
 	}
 }

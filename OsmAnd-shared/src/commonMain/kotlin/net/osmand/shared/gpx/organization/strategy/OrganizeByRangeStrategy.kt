@@ -1,29 +1,29 @@
 package net.osmand.shared.gpx.organization.strategy
 
 import net.osmand.shared.data.Limits
+import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.TracksGroup
 import net.osmand.shared.gpx.enums.TracksSortScope
 import net.osmand.shared.gpx.organization.OrganizeByParams
 import net.osmand.shared.gpx.organization.OrganizeByRangeParams
-import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
-import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import kotlin.math.floor
 
 object OrganizeByRangeStrategy : OrganizeByStrategy {
 
 	override fun apply(
 		originalGroup: TracksGroup,
-		params: OrganizeByParams,
-		resourcesMapper: OrganizeTracksResourceMapper
+		params: OrganizeByParams
 	): List<OrganizedTracksGroup> {
 		val type = params.type
 		val step = (params as OrganizeByRangeParams).stepSize
+		val property = type.getGpxParameter() ?: return emptyList()
+
 		val groupedTracks = HashMap<Int, MutableList<TrackItem>>()
 		originalGroup.getTrackItems().let { trackItems ->
 			for (trackItem in trackItems) {
-				val subRangeStart: Int? = getRangeStartIndicator(trackItem, type, step)
+				val subRangeStart: Int? = getRangeStartIndicator(trackItem, property, step)
 				if (subRangeStart != null) {
 					groupedTracks.getOrPut(subRangeStart) { mutableListOf() }.add(trackItem)
 				}
@@ -40,10 +40,10 @@ object OrganizeByRangeStrategy : OrganizeByStrategy {
 			val id = OrganizedTracksGroup.createId(originalGroup, type, valueIdPart)
 			result.add(OrganizedTracksGroup(
 				id = id,
-				name = resourcesMapper.getName(type, limits),
-				iconName = resourcesMapper.getIconName(type, limits),
+				name = getName(type, limits),
+				iconName = getIconName(type, limits),
 				type = type,
-				sortValue = startValue,
+				comparisonValue = startValue,
 				trackItems = trackItems,
 				parentGroup = originalGroup
 			))
@@ -53,11 +53,9 @@ object OrganizeByRangeStrategy : OrganizeByStrategy {
 
 	private fun getRangeStartIndicator(
 		trackItem: TrackItem,
-		type: OrganizeByType,
+		property: GpxParameter,
 		step: Double
 	): Int? {
-		val property = type.filterType.property ?: return null
-
 		val value: Comparable<Any> = trackItem.dataItem?.getParameter(property) ?: return null
 		val valueInt = getInt(property.getComparableValue<Double>(value))
 		return floor((valueInt / step)).toInt()

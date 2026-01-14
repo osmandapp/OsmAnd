@@ -106,8 +106,8 @@ public class TracksComparator implements Comparator<Object> {
 			}
 
 			case VALUE_ASCENDING, VALUE_DESCENDING: {
-				double v1 = group1.getSortValue();
-				double v2 = group2.getSortValue();
+				double v1 = group1.getComparisonValue();
+				double v2 = group2.getComparisonValue();
 				if (v1 != v2) {
 					multiplier = sortMode == VALUE_ASCENDING ? 1 : -1;
 					return multiplier * Double.compare(v1, v2);

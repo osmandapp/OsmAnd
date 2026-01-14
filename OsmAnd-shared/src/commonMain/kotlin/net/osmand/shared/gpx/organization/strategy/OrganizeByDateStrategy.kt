@@ -12,15 +12,13 @@ import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.TracksGroup
 import net.osmand.shared.gpx.enums.TracksSortScope
 import net.osmand.shared.gpx.organization.OrganizeByParams
-import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 object OrganizeByDateStrategy : OrganizeByStrategy {
 
 	override fun apply(
 		originalGroup: TracksGroup,
-		params: OrganizeByParams,
-		resourcesMapper: OrganizeTracksResourceMapper
+		params: OrganizeByParams
 	): List<OrganizedTracksGroup> {
 		val type = params.type
 
@@ -48,10 +46,10 @@ object OrganizeByDateStrategy : OrganizeByStrategy {
 			val id = OrganizedTracksGroup.createId(originalGroup, type, valueIdPart)
 			result.add(OrganizedTracksGroup(
 				id = id,
-				name = resourcesMapper.getName(type, value),
-				iconName = resourcesMapper.getIconName(type, value),
+				name = getName(type, value),
+				iconName = getIconName(type, value),
 				type = type,
-				sortValue = value.toDouble(),
+				comparisonValue = value.toDouble(),
 				trackItems = trackItems,
 				parentGroup = originalGroup
 			))

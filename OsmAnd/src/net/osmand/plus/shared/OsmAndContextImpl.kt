@@ -10,7 +10,6 @@ import net.osmand.data.City
 import net.osmand.osm.PoiCategory
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.track.AndroidOrganizeTracksResourceMapper
 import net.osmand.shared.api.CityNameCallback
 import net.osmand.shared.api.KStringMatcherMode
 import net.osmand.shared.api.OsmAndContext
@@ -34,7 +33,6 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 	}
 
 	private val settings: SettingsAPIImpl = SettingsAPIImpl(app)
-	private val organizeTracksResourceMapper = AndroidOrganizeTracksResourceMapper(app)
 
 	override fun getAppDir(): KFile = app.getAppPathKt(null)
 
@@ -90,7 +88,7 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 	override fun getTrackPointsAnalyser(): TrackPointsAnalyser? =
 		PluginsHelper.getTrackPointsAnalyser()
 
-	override fun getOrganizeTracksResourceMapper() = organizeTracksResourceMapper
+	override fun findRouteActivityById(id: String) = app.routeActivityHelper.findRouteActivity(id)
 
 	override fun searchNearestCityName(latLon: KLatLon, callback: CityNameCallback) {
 		while (app.isApplicationInitializing) {

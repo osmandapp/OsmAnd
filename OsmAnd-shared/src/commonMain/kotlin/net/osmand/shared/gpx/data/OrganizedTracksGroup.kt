@@ -9,7 +9,7 @@ class OrganizedTracksGroup(
     private val name: String,
     private val iconName: String,
     private val type: OrganizeByType,
-    private val sortValue: Double = 0.0,
+    private val comparisonValue: Double = 0.0,
     private val trackItems: List<TrackItem>,
     private val parentGroup: TracksGroup,
 ) : TracksGroup, ComparableTracksGroup {
@@ -32,7 +32,7 @@ class OrganizedTracksGroup(
 
     override fun lastModified() = 0L
 
-    override fun getSortValue() = sortValue
+    override fun getComparisonValue() = comparisonValue
 
     override fun getFolderAnalysis(): TrackFolderAnalysis {
         var analysis = groupAnalysis
