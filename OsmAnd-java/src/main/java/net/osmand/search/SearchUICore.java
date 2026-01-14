@@ -228,11 +228,11 @@ public class SearchUICore {
 
 		public void calculateAddressString() {
 			String dominatedCity = "";
-			Map<String, Integer> citiesCounterMap = new TreeMap<>();
+			Map<String, Integer> cityCounter = new TreeMap<>();
 			for (SearchResult s : searchResults) {
 				if (!Algorithms.isEmpty(s.cityName)) {
 					String mainCity = getMainCityName(s.cityName);
-					String domCity = getDominatedCity(citiesCounterMap, mainCity);
+					String domCity = getDominatedCity(cityCounter, mainCity);
 					if (domCity != null) {
 						dominatedCity = domCity;
 						break;
