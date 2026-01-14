@@ -228,7 +228,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		view.findViewById<ImageButton>(R.id.search_button).apply {
 			setOnClickListener {
-				// TODO
+				val dialog = StarMapSearchDialogFragment()
+				dialog.setObjects(starMapViewModel.skyObjects.value ?: emptyList())
+				dialog.onObjectSelected = { obj ->
+					starView.setSelectedObject(obj)
+					starView.setCenter(obj.azimuth, obj.altitude, true)
+					showObjectInfo(obj)
+				}
+				dialog.show(childFragmentManager, StarMapSearchDialogFragment.TAG)
 			}
 		}
 

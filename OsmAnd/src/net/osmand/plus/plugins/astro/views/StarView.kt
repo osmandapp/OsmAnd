@@ -256,10 +256,27 @@ class StarView @JvmOverloads constructor(
 		invalidate()
 	}
 
-	fun setCenter(azimuth: Double, altitude: Double) {
-		this.azimuthCenter = azimuth
-		this.altitudeCenter = max(-90.0, min(90.0, altitude))
-		invalidate()
+	fun setCenter(azimuth: Double, altitude: Double, animate: Boolean = false) {
+		if (animate) {
+			val startAz = azimuthCenter
+			val startAlt = altitudeCenter
+			visualAnimator?.cancel()
+			visualAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
+				duration = 500
+				interpolator = DecelerateInterpolator()
+				addUpdateListener { animator ->
+					val fraction = animator.animatedValue as Float
+					azimuthCenter = interpolateAngle(startAz, azimuth, fraction)
+					altitudeCenter = startAlt + (max(-90.0, min(90.0, altitude)) - startAlt) * fraction
+					invalidate()
+				}
+				start()
+			}
+		} else {
+			this.azimuthCenter = azimuth
+			this.altitudeCenter = max(-90.0, min(90.0, altitude))
+			invalidate()
+		}
 	}
 
 	fun getAltitude() = altitudeCenter

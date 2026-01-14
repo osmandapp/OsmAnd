@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.core.content.ContextCompat
@@ -65,6 +66,37 @@ object AstroUtils {
 		Body.Jupiter -> "#8D6E63".toColorInt()
 		Body.Saturn -> "#D4A373".toColorInt()
 		else -> "#FFFFFF".toColorInt()
+	}
+
+	@DrawableRes
+	fun getObjectTypeIcon(type: SkyObject.Type): Int {
+		return when (type) {
+			SkyObject.Type.SUN -> R.drawable.ic_action_sun
+			SkyObject.Type.MOON -> R.drawable.ic_action_moon
+			SkyObject.Type.PLANET -> R.drawable.ic_action_ufo
+			SkyObject.Type.STAR -> R.drawable.ic_action_favorite
+			SkyObject.Type.GALAXY, SkyObject.Type.GALAXY_CLUSTER -> R.drawable.ic_world_globe_dark
+			SkyObject.Type.NEBULA -> R.drawable.ic_action_clouds
+			SkyObject.Type.BLACK_HOLE -> R.drawable.ic_action_circle
+			else -> R.drawable.ic_action_favorite
+		}
+	}
+
+	fun getObjectTypeName(ctx: Context, type: SkyObject.Type): String {
+		return when (type) {
+			SkyObject.Type.SUN -> ctx.getString(R.string.astro_name_sun)
+			SkyObject.Type.MOON -> ctx.getString(R.string.astro_name_moon)
+			SkyObject.Type.PLANET -> ctx.getString(R.string.astro_planets)
+			SkyObject.Type.STAR -> ctx.getString(R.string.astro_stars)
+			SkyObject.Type.GALAXY -> ctx.getString(R.string.astro_galaxies)
+			SkyObject.Type.NEBULA -> ctx.getString(R.string.astro_nebulae)
+			SkyObject.Type.BLACK_HOLE -> ctx.getString(R.string.astro_black_holes)
+			SkyObject.Type.OPEN_CLUSTER -> ctx.getString(R.string.astro_open_clusters)
+			SkyObject.Type.GLOBULAR_CLUSTER -> ctx.getString(R.string.astro_globular_clusters)
+			SkyObject.Type.GALAXY_CLUSTER -> ctx.getString(R.string.astro_galaxy_clusters)
+			SkyObject.Type.CONSTELLATION -> ctx.getString(R.string.astro_constellations)
+			else -> type.name
+		}
 	}
 
 	data class Twilight(
