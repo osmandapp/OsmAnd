@@ -228,11 +228,11 @@ public class SearchUICore {
 
 		public void calculateAddressString() {
 			String dominatedCity = "";
-			Map<String, Integer> cities = new TreeMap<>();
+			Map<String, Integer> citiesCounterMap = new HashMap<>();
 			for (SearchResult s : searchResults) {
 				if (!Algorithms.isEmpty(s.cityName)) {
 					String mainCity = getMainCityName(s.cityName);
-					String domCity = getDominatedCity(cities, mainCity);
+					String domCity = getDominatedCity(citiesCounterMap, mainCity);
 					if (domCity != null) {
 						dominatedCity = domCity;
 						break;
@@ -251,35 +251,6 @@ public class SearchUICore {
 						s.addressName = createAddressString(s.cityName, mainCity, dominatedCity, addr);
 					}
 				}
-			}
-		}
-
-		public String getMainCityName(String cityName) {
-			String mainCity = cityName;
-			if (cityName.contains(",")) {
-				mainCity = mainCity.substring(0, mainCity.indexOf(",")).trim();
-			}
-			return mainCity;
-		}
-
-		public String getDominatedCity(Map<String, Integer> cities, String mainCity) {
-			Integer freq = cities.get(mainCity);
-			if (freq == null) {
-				freq = 0;
-			}
-			freq++;
-			if (freq >= DOMINATED_CITY_CRITERIA) {
-				return mainCity;
-			}
-			cities.put(mainCity, freq);
-			return null;
-		}
-
-		public String createAddressString(String cityName, String mainCity, String dominatedCity, String addr) {
-			if (dominatedCity != null && dominatedCity.equals(mainCity)) {
-				return addr + (Algorithms.isEmpty(cityName) ? "" : ", " + cityName);
-			} else {
-				return (Algorithms.isEmpty(cityName) ? "" : (cityName + ", ")) + addr;
 			}
 		}
 		
@@ -1350,5 +1321,34 @@ public class SearchUICore {
 			return 0;
 		}
 
+	}
+
+	public static String getMainCityName(String cityName) {
+		String mainCity = cityName;
+		if (cityName.contains(",")) {
+			mainCity = mainCity.substring(0, mainCity.indexOf(",")).trim();
+		}
+		return mainCity;
+	}
+
+	public static String getDominatedCity(Map<String, Integer> cities, String mainCity) {
+		Integer freq = cities.get(mainCity);
+		if (freq == null) {
+			freq = 0;
+		}
+		freq++;
+		if (freq >= SearchResultCollection.DOMINATED_CITY_CRITERIA) {
+			return mainCity;
+		}
+		cities.put(mainCity, freq);
+		return null;
+	}
+
+	public static String createAddressString(String cityName, String mainCity, String dominatedCity, String addr) {
+		if (dominatedCity != null && dominatedCity.equals(mainCity)) {
+			return addr + (Algorithms.isEmpty(cityName) ? "" : ", " + cityName);
+		} else {
+			return (Algorithms.isEmpty(cityName) ? "" : (cityName + ", ")) + addr;
+		}
 	}
 }
