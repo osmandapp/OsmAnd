@@ -210,15 +210,18 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			recreateBitmaps();
 			pointSizePx = Math.sqrt(mTargetPoint.getWidth() * mTargetPoint.getWidth()
 					+ mTargetPoint.getHeight() * mTargetPoint.getHeight());
-			if (carViewChanged) {
-				updateTextSize();
-			}
+			updateTextSize();
 		}
 	}
 
 	private void updateTextSize() {
-		mTextPaint.setTextSize(18f * Resources.getSystem().getDisplayMetrics().scaledDensity
-				* getApplication().getOsmandMap().getCarDensityScaleCoef());
+		float density = view.getDensity();
+		float textSize = 18f * textScale * density;
+
+		if (textSize != mTextPaint.getTextSize()) {
+			mTextPaint.setTextSize(textSize);
+			captionStyle = null;
+		}
 	}
 
 	private void recreateBitmaps() {

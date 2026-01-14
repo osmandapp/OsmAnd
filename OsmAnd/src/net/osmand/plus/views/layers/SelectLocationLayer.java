@@ -87,8 +87,9 @@ public class SelectLocationLayer extends OsmandMapLayer {
 	}
 
 	private void updateTextSize() {
-		mTextPaint.setTextSize(18f * Resources.getSystem().getDisplayMetrics().scaledDensity
-				* getApplication().getOsmandMap().getCarDensityScaleCoef());
+		float density = Resources.getSystem().getDisplayMetrics().density;
+		float textSize = 18f * textScale * density;
+		mTextPaint.setTextSize(textSize);
 	}
 
 	@Override
