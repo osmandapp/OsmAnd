@@ -3547,13 +3547,13 @@
     <string name="poi_rescue_box">Caja de rescate</string>
     <string name="poi_climbing_crag">Escalada en roca;Peñón de escalada</string>
     <string name="reddit">Reddit</string>
-    <string name="poi_hazard_additional_erosion">Peligro: erosión</string>
-    <string name="poi_hazard_additional_falling_rocks">Peligro: desprendimiento de rocas</string>
-    <string name="poi_hazard_additional_nuclear">Peligro: nuclear</string>
-    <string name="poi_hazard_additional_flood">Peligro: inundación</string>
-    <string name="poi_hazard_additional_avalanche">Peligro: avalancha</string>
-    <string name="poi_hazard_additional_minefield">Peligro: campo minado</string>
-    <string name="poi_hazard_additional_contamination">Peligro: contaminación</string>
+    <string name="poi_hazard_additional_erosion">Erosión</string>
+    <string name="poi_hazard_additional_falling_rocks">Desprendimiento de rocas</string>
+    <string name="poi_hazard_additional_nuclear">Nuclear</string>
+    <string name="poi_hazard_additional_flood">Inundación</string>
+    <string name="poi_hazard_additional_avalanche">Avalancha</string>
+    <string name="poi_hazard_additional_minefield">Campo minado</string>
+    <string name="poi_hazard_additional_contamination">Contaminación</string>
     <string name="poi_defibrillator_location">Ubicación</string>
     <string name="poi_changing_table_yes">Sí;Cambiador de pañales: sí</string>
     <string name="poi_changing_table_no">No;Cambiador de pañales: no</string>
@@ -5138,4 +5138,16 @@
     <string name="poi_canoe_egress">Desembarco de canoas</string>
     <string name="poi_canoe_put_in_egress">Embarco y desembarco de canoas</string>
     <string name="poi_whitewater_hazard">Peligro de aguas bravas</string>
+    <string name="poi_sample_collection_yes">Sí</string>
+    <string name="poi_sample_collection_covid19">Covid-19</string>
+    <string name="poi_sample_collection_blood">Sangre</string>
+    <string name="poi_hazard_curve">Curva</string>
+    <string name="poi_hazard_curves">Curvas</string>
+    <string name="poi_hazard_pedestrians">Peatones</string>
+    <string name="poi_hazard_cyclists">Ciclistas</string>
+    <string name="poi_hazard_ice">Hielo</string>
+    <string name="poi_yoga">Yoga</string>
+    <string name="poi_hazard_dangerous_junction">Intersección peligrosa</string>
+    <string name="poi_hazard_school_zone">Zona escolar</string>
+    <string name="x">X (antes Twitter)</string>
 </resources>
