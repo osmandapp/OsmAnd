@@ -5774,4 +5774,5 @@
     <string name="shared_string_magnitude">星等</string>
     <string name="astro_rise">升</string>
     <string name="astro_set">沉</string>
+    <string name="gpx_too_many_points_visible_warning">大量可見的 GPX 軌跡會導致記憶體使用量過高</string>
 </resources>
