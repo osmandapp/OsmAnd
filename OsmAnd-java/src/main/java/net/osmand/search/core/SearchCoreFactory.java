@@ -2064,7 +2064,7 @@ public class SearchCoreFactory {
 					int res = 0;
 					int poiTypeIndex = allowedTypes.indexOf(poi.getSubType());
 					if (poiTypeIndex != -1) {
-						res += poiTypeIndex;
+						res += allowedTypes.size() - poiTypeIndex;
 						if (nmEquals.matches(poi.getName()) || nmEquals.matches(poi.getOtherNames())) {
 							res += SEARCH_OLC_WITH_CITY_PRIORITY;
 						}
