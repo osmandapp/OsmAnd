@@ -2028,6 +2028,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		boolean wasInTiltMode = multiTouchSupport != null && multiTouchSupport.isInTiltMode();
+        boolean wasZoomingAndRotating = multiTouchSupport != null && multiTouchSupport.isZoomingAndRotating();
 		boolean isMultiTouch = multiTouchSupport != null && multiTouchSupport.onTouchEvent(event);
 
 		MeasurementToolLayer layer = getMeasurementToolLayer();
@@ -2064,7 +2065,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 				} else if (primaryClear) {
 					// Use map location of second touch for map gestures
-					if (wasInTiltMode && !multiTouchSupport.isInTiltMode()) {
+					if (wasInTiltMode && !multiTouchSupport.isInTiltMode() || !wasZoomingAndRotating) {
 						PointF touchPoint = multiTouchSupport.getSecondPoint();
 						findSecondTouchMapLocation(touchPoint.x, touchPoint.y);
 					}
@@ -2343,6 +2344,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				}
 			}
 		}
+
+        @Override
+        public boolean isZoomingAndRotating() {
+            return startRotating && startZooming;
+        }
 
 		@Override
 		public void onZoomStarted(PointF centerPoint) {

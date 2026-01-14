@@ -826,4 +826,18 @@ public class ApplicationMode {
 	public String toString() {
 		return getStringKey();
 	}
+
+	public boolean isAppModeDerivedFromCar() {
+		return this == ApplicationMode.CAR || this.isDerivedRoutingFrom(ApplicationMode.CAR);
+	}
+
+	@Nullable
+	public static ApplicationMode getFirstCarMode(OsmandApplication app) {
+		for (ApplicationMode mode : ApplicationMode.values(app)) {
+			if (mode.isAppModeDerivedFromCar()) {
+				return mode;
+			}
+		}
+		return null;
+	}
 }

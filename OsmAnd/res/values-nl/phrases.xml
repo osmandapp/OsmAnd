@@ -3865,7 +3865,7 @@
     <string name="poi_diplomatic_services_non_immigrant_visas_yes">Ja</string>
     <string name="poi_embassy_delegation">Delegatie</string>
     <string name="poi_diplomatic_embassy">Ambassade</string>
-    <string name="poi_parking_rooftop">Dakparking</string>
+    <string name="poi_parking_rooftop">Parkeerdak</string>
     <string name="poi_gpx_point">GPX punt</string>
     <string name="poi_fuel_lng">Lng</string>
     <string name="poi_beehive">Bijenkast</string>
@@ -4306,4 +4306,8 @@
     <string name="poi_lavoir">Openbare wasplaats</string>
     <string name="poi_parcel_locker">Pakketautomaat</string>
     <string name="poi_waste_transfer_station">Afvalverwerkingsstation</string>
+    <string name="poi_yoga">Yoga</string>
+    <string name="poi_nuts">Notenwinkel</string>
+    <string name="poi_parking_sheds">Schuren</string>
+    <string name="poi_parking_layby">Parkeerstrook</string>
 </resources>

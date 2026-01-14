@@ -1,9 +1,12 @@
 package net.osmand.shared.api
 
-import net.osmand.shared.api.SQLiteAPI.*
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
+import net.osmand.shared.api.SQLiteAPI.SQLiteCursor
+import net.osmand.shared.api.SQLiteAPI.SQLiteStatement
 import net.osmand.shared.util.LoggerFactory
 import java.sql.Connection
 import java.sql.DriverManager
+import java.sql.SQLException
 
 class SQLiteAPIImpl : SQLiteAPI {
 
@@ -24,10 +27,13 @@ class SQLiteAPIImpl : SQLiteAPI {
 
 	inner class SQLiteDatabaseWrapper(private val ds: Connection) : SQLiteConnection {
 
+		private var inTransaction = false
+		private var shouldCommit = false
+		private var previousAutoCommit = true
+
 		override fun getVersion(): Int {
-			val stmt = ds.createStatement()
-			stmt.use {
-				val resultSet = it.executeQuery("PRAGMA user_version")
+			ds.createStatement().use { stmt ->
+				val resultSet = stmt.executeQuery("PRAGMA user_version")
 				if (resultSet.next()) {
 					return resultSet.getInt(1)
 				}
@@ -90,8 +96,7 @@ class SQLiteAPIImpl : SQLiteAPI {
 		}
 
 		override fun execSQL(query: String, objects: Array<Any?>) {
-			val preparedStatement = ds.prepareStatement(query)
-			preparedStatement.use { stmt ->
+			ds.prepareStatement(query).use { stmt ->
 				objects.forEachIndexed { index, obj ->
 					stmt.setObject(index + 1, obj)
 				}
@@ -114,7 +119,7 @@ class SQLiteAPIImpl : SQLiteAPI {
 							return if (resultSet.next()) {
 								resultSet.getLong(1)
 							} else {
-								throw java.sql.SQLException("Query did not return any result")
+								throw SQLException("Query did not return any result")
 							}
 						}
 					}
@@ -124,20 +129,20 @@ class SQLiteAPIImpl : SQLiteAPI {
 							return if (resultSet.next()) {
 								resultSet.getString(1)
 							} else {
-								throw java.sql.SQLException("Query did not return any result")
+								throw SQLException("Query did not return any result")
 							}
 						}
 					}
 
 					override fun bindLong(i: Int, value: Long) = stmt.setLong(i, value)
 					override fun bindBlob(i: Int, value: ByteArray) = stmt.setBytes(i, value)
+					override fun bindDouble(i: Int, value: Double) = stmt.setDouble(i, value)
 				}
 			}
 		}
 
 		override fun setVersion(newVersion: Int) {
-			val stmt = ds.createStatement()
-			stmt.use {
+			ds.createStatement().use {
 				it.execute("PRAGMA user_version = $newVersion")
 			}
 		}
@@ -145,6 +150,40 @@ class SQLiteAPIImpl : SQLiteAPI {
 		override fun isReadOnly(): Boolean = ds.isReadOnly
 
 		override fun isClosed(): Boolean = ds.isClosed
+
+		override fun beginTransaction() {
+			if (inTransaction) {
+				throw IllegalStateException("Nested transactions are not supported")
+			}
+			previousAutoCommit = ds.autoCommit
+			ds.autoCommit = false
+			inTransaction = true
+			shouldCommit = false
+		}
+
+		override fun setTransactionSuccessful() {
+			if (!inTransaction) {
+				throw IllegalStateException("Not in transaction")
+			}
+			shouldCommit = true
+		}
+
+		override fun endTransaction() {
+			if (!inTransaction) return
+
+			try {
+				if (shouldCommit) ds.commit() else ds.rollback()
+			} catch (e: SQLException) {
+				log.error("Transaction failed (commit=$shouldCommit)", e)
+				runCatching { ds.rollback() }
+				throw e
+			} finally {
+				shouldCommit = false
+				inTransaction = false
+				runCatching { ds.autoCommit = previousAutoCommit }
+					.onFailure { log.error("Failed to restore autoCommit", it) }
+			}
+		}
 	}
 
 	override fun openByAbsolutePath(path: String, readOnly: Boolean): SQLiteConnection? {

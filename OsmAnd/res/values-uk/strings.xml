@@ -5968,4 +5968,5 @@
     <string name="shared_string_magnitude">Величина</string>
     <string name="astro_rise">Підйом</string>
     <string name="astro_set">Набір</string>
+    <string name="gpx_too_many_points_visible_warning">Велика кількість видимих GPX-треків призводить до високого використання пам\'яті</string>
 </resources>

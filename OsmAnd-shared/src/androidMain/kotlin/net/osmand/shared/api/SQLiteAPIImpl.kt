@@ -1,8 +1,16 @@
 package net.osmand.shared.api
 
 import android.content.Context
+import android.content.Context.MODE_ENABLE_WRITE_AHEAD_LOGGING
+import android.content.Context.MODE_PRIVATE
 import android.database.sqlite.SQLiteDatabase
-import net.osmand.shared.api.SQLiteAPI.*
+import android.database.sqlite.SQLiteDatabase.CREATE_IF_NECESSARY
+import android.database.sqlite.SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING
+import android.database.sqlite.SQLiteDatabase.OPEN_READONLY
+import android.database.sqlite.SQLiteDatabase.OPEN_READWRITE
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
+import net.osmand.shared.api.SQLiteAPI.SQLiteCursor
+import net.osmand.shared.api.SQLiteAPI.SQLiteStatement
 import net.osmand.shared.util.LoggerFactory
 
 class SQLiteAPIImpl(private val context: Context) : SQLiteAPI {
@@ -13,7 +21,8 @@ class SQLiteAPIImpl(private val context: Context) : SQLiteAPI {
 
 	override fun getOrCreateDatabase(name: String, readOnly: Boolean): SQLiteConnection? {
 		val db = try {
-			context.openOrCreateDatabase(name, Context.MODE_PRIVATE or (if (readOnly) 0 else Context.MODE_ENABLE_WRITE_AHEAD_LOGGING), null)
+			val mode = MODE_PRIVATE or (if (readOnly) 0 else MODE_ENABLE_WRITE_AHEAD_LOGGING)
+			context.openOrCreateDatabase(name, mode, null)
 		} catch (e: RuntimeException) {
 			log.error("Failed to get or create database", e)
 			null
@@ -28,8 +37,8 @@ class SQLiteAPIImpl(private val context: Context) : SQLiteAPI {
 		override fun close() = ds.close()
 
 		override fun rawQuery(sql: String, selectionArgs: Array<String>?): SQLiteCursor? {
-			val c = ds.rawQuery(sql, selectionArgs)
-			return c?.let { cursor ->
+			val cursor = ds.rawQuery(sql, selectionArgs)
+			return cursor.let { cursor ->
 				object : SQLiteCursor {
 					override fun moveToNext(): Boolean = cursor.moveToNext()
 					override fun getColumnNames(): Array<String> = cursor.columnNames
@@ -62,6 +71,7 @@ class SQLiteAPIImpl(private val context: Context) : SQLiteAPI {
 					override fun simpleQueryForString(): String = statement.simpleQueryForString()
 					override fun bindLong(i: Int, value: Long) = statement.bindLong(i, value)
 					override fun bindBlob(i: Int, value: ByteArray) = statement.bindBlob(i, value)
+					override fun bindDouble(i: Int, value: Double) = statement.bindDouble(i, value)
 				}
 			}
 		}
@@ -73,10 +83,27 @@ class SQLiteAPIImpl(private val context: Context) : SQLiteAPI {
 		override fun isReadOnly(): Boolean = ds.isReadOnly
 
 		override fun isClosed(): Boolean = !ds.isOpen
+
+		override fun beginTransaction() {
+			ds.beginTransaction()
+		}
+
+		override fun setTransactionSuccessful() {
+			ds.setTransactionSuccessful()
+		}
+
+		override fun endTransaction() {
+			ds.endTransaction()
+		}
 	}
 
 	override fun openByAbsolutePath(path: String, readOnly: Boolean): SQLiteConnection? {
-		val db = SQLiteDatabase.openDatabase(path, null, if (readOnly) SQLiteDatabase.OPEN_READONLY else (SQLiteDatabase.OPEN_READWRITE or SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING))
-		return db?.let { SQLiteDatabaseWrapper(it) }
+		return try {
+			val flags = if (readOnly) OPEN_READONLY else (OPEN_READWRITE or ENABLE_WRITE_AHEAD_LOGGING or CREATE_IF_NECESSARY)
+			return SQLiteDatabaseWrapper(SQLiteDatabase.openDatabase(path, null, flags))
+		} catch (e: Exception) {
+			log.error("Failed to open database by path: $path readOnly=$readOnly", e)
+			null
+		}
 	}
 }

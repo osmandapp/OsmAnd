@@ -3,71 +3,37 @@ package net.osmand.osm.io;
 import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
-import net.osmand.PlatformUtil;
+
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
+import net.osmand.shared.api.NetworkAPI;
+import net.osmand.shared.api.NetworkAPI.NetworkResponse;
+import net.osmand.shared.api.NetworkAPIImpl;
+import net.osmand.shared.util.PlatformUtil;
 import net.osmand.util.Algorithms;
+
 import org.apache.commons.logging.Log;
 
 import java.io.*;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 public class NetworkUtils {
-	private static final Log log = PlatformUtil.getLog(NetworkUtils.class);
-	private static final String GPX_UPLOAD_USER_AGENT = "OsmGPXUploadAgent";
-	private static Proxy proxy = null;
 
-	public static String sendGetRequest(String urlText, String userNamePassword, StringBuilder responseBody) {
-		return sendGetRequest(urlText, userNamePassword, responseBody, false);
+	private static final Log log = net.osmand.PlatformUtil.getLog(NetworkUtils.class);
+	private static final String GPX_UPLOAD_USER_AGENT = "OsmGPXUploadAgent";
+
+	public static NetworkResponse sendGetRequest(String url, String auth) {
+		return sendGetRequest(url, auth, false);
 	}
 
-	public static String sendGetRequest(String urlText, String userNamePassword, StringBuilder responseBody, boolean useGzip) {
-		try {
-			log.info("GET : " + urlText);
-			HttpURLConnection conn = getHttpURLConnection(urlText);
-			conn.setDoInput(true);
-			conn.setDoOutput(false);
-			conn.setRequestMethod("GET");
-			if (userNamePassword != null) {
-				conn.setRequestProperty("Authorization", "Basic " + Base64.encode(userNamePassword));
-			}
-			conn.setRequestProperty("User-Agent", "OsmAnd");
-			if (useGzip) {
-				conn.setRequestProperty("Accept-Encoding", "gzip");
-			}
-			log.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
-			if (conn.getResponseCode() != 200) {
-				return conn.getResponseMessage();
-			}
-			String contentEncoding = conn.getHeaderField("Content-Encoding");
-			InputStream inputStream = conn.getInputStream();
-			if (useGzip && contentEncoding != null && contentEncoding.equalsIgnoreCase("gzip")) {
-				inputStream = new GZIPInputStream(inputStream);
-			}
-			responseBody.setLength(0);
-			if (inputStream != null) {
-				BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8")); //$NON-NLS-1$
-				String s;
-				boolean first = true;
-				while ((s = in.readLine()) != null) {
-					if(first){
-						first = false;
-					} else {
-						responseBody.append("\n"); //$NON-NLS-1$
-					}
-					responseBody.append(s);
-				}
-				inputStream.close();
-			}
-			return null;
-		} catch (IOException e) {
-			log.error(e.getMessage(), e);
-			return e.getMessage();
-		}
+	public static NetworkResponse sendGetRequest(String url, String auth, boolean useGzip) {
+		return net.osmand.shared.util.PlatformUtil.INSTANCE.getNetworkAPI().sendGetRequest(url, auth, useGzip, "OsmAnd");
 	}
 
 	public static String sendPostDataRequest(String urlText, String formName, String fileName, InputStream data) {
@@ -222,26 +188,22 @@ public class NetworkUtils {
 	}
 
 	public static void setProxy(String host, int port) {
-		if(host != null && port > 0) {
-			InetSocketAddress isa = new InetSocketAddress(host, port);
-			proxy = new Proxy(Proxy.Type.HTTP, isa);
-		} else {
-			proxy = null;
-		}
-	}
-	public static Proxy getProxy() {
-		return proxy;
+		PlatformUtil.INSTANCE.getNetworkAPI().setProxy(host, port);
 	}
 
-	public static HttpURLConnection getHttpURLConnection(String urlString) throws MalformedURLException, IOException {
-		return getHttpURLConnection(new URL(urlString));
+	public static boolean hasProxy() {
+		return PlatformUtil.INSTANCE.getNetworkAPI().hasProxy();
 	}
 
 	public static HttpURLConnection getHttpURLConnection(URL url) throws IOException {
-		if (proxy != null) {
-			return (HttpURLConnection) url.openConnection(proxy);
-		} else {
-			return (HttpURLConnection) url.openConnection();
+		return getHttpURLConnection(url.toString());
+	}
+
+	public static HttpURLConnection getHttpURLConnection(String url) throws MalformedURLException, IOException {
+		NetworkAPI networkAPI = PlatformUtil.INSTANCE.getNetworkAPI();
+		if (networkAPI instanceof NetworkAPIImpl api) {
+			return api.getHttpURLConnection(url);
 		}
+		return (HttpURLConnection) new URL(url).openConnection();
 	}
 }

@@ -92,7 +92,8 @@ public class Amenity extends MapObject {
 	public static final String ADDR_HOUSENUMBER = "addr_housenumber";
 	public static final String DIFF_ELE_DOWN = "diff_ele_down";
 	public static final String DIFF_ELE_UP = "diff_ele_up";
-	
+	public static final String ALT_NAME_TAG = "short";
+
 	private String subType;
 	private PoiCategory type;
 	// duplicate for fast access

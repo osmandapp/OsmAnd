@@ -62,6 +62,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private boolean useMapCenter;
 
 	private final int dividerMargin;
+	private final int bigDividerMargin;
 	private final int dp1;
 
 	private boolean hasSearchMoreItem;
@@ -88,6 +89,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		this.inflater = UiUtilities.getInflater(activity, nightMode);
 
 		dividerMargin = AndroidUtils.dpToPx(app, 16);
+		bigDividerMargin = AndroidUtils.dpToPx(app, 72);
 		dp1 = AndroidUtils.dpToPx(app, 1f);
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
 	}
@@ -208,6 +210,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		QuickSearchListItemType type = listItem.getType();
 
 		LinearLayout view;
+		boolean useBigDividerMargin = false;
 		if (type == QuickSearchListItemType.BANNER) {
 			view = bindBannerItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.FREE_VERSION_BANNER) {
@@ -231,10 +234,13 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			view = bindDisabledHistoryItem(listItem, convertView);
 		} else {
 			view = bindSearchResultItem(position, convertView, listItem);
+			useBigDividerMargin = listItem.getSearchResult().objectType != ObjectType.POI &&
+					listItem.getSearchResult().objectType != ObjectType.INDEX_ITEM &&
+					listItem.getSearchResult().objectType != ObjectType.GPX_TRACK;
 		}
 
 		setupBackground(view);
-		setupDivider(position, view, listItem);
+		setupDivider(position, view, listItem, useBigDividerMargin);
 		ViewCompat.setAccessibilityDelegate(view, accessibilityAssistant);
 		return view;
 	}
@@ -549,9 +555,11 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private void setupDivider(int position,
 	                          @NonNull View view,
-	                          @NonNull QuickSearchListItem listItem) {
+	                          @NonNull QuickSearchListItem listItem,
+	                          boolean useBigMargin) {
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null) {
+			Object o = getItem(position);
 			if (position == getCount() - 1 || getItem(position + 1).getType() == QuickSearchListItemType.HEADER
 					|| getItem(position + 1).getType() == QuickSearchListItemType.BOTTOM_SHADOW) {
 				divider.setVisibility(View.GONE);
@@ -563,8 +571,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					p.setMargins(0, 0, 0, 0);
 					divider.setLayoutParams(p);
 				} else {
+					int leftMargin = useBigMargin ? bigDividerMargin : dividerMargin;
 					LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp1);
-					AndroidUtils.setMargins(p, dividerMargin, 0, 0, 0);
+					AndroidUtils.setMargins(p, leftMargin, 0, 0, 0);
 					divider.setLayoutParams(p);
 				}
 			}

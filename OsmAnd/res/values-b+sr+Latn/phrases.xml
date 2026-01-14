@@ -5164,4 +5164,5 @@
     <string name="poi_sample_collection_covid19">COVID19</string>
     <string name="poi_sample_collection_blood">Krv</string>
     <string name="poi_yoga">Joga</string>
+    <string name="poi_memorial_type">Tip spomenika</string>
 </resources>

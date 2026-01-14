@@ -5952,8 +5952,8 @@
     <string name="ecliptic_line">Ekliptiklinie</string>
     <string name="magnitude_filter">Magnitudenfilter</string>
     <string name="astro_planets">Planeten</string>
-    <string name="astro_constellation">Konstellation</string>
-    <string name="astro_constellations">Konstellationen</string>
+    <string name="astro_constellation">Sternbild</string>
+    <string name="astro_constellations">Sternbilder</string>
     <string name="astro_stars">Sterne</string>
     <string name="astro_galaxies">Galaxien</string>
     <string name="astro_nebulae">Nebel</string>
@@ -5963,7 +5963,8 @@
     <string name="astro_black_holes">Schwarze Löcher</string>
     <string name="visible_layers_and_objects">Sichtbare Ebenen und Objekte</string>
     <string name="shared_string_azimuth">Azimut</string>
-    <string name="shared_string_magnitude">Magnitude</string>
+    <string name="shared_string_magnitude">Helligkeit</string>
     <string name="astro_rise">Aufgang</string>
     <string name="astro_set">Untergang</string>
+    <string name="gpx_too_many_points_visible_warning">Große Anzahl sichtbarer GPX-Wege führt zu hohem Speicherverbrauch</string>
 </resources>

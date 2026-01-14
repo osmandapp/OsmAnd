@@ -36,6 +36,8 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 
 	override fun getAppDir(): KFile = app.getAppPathKt(null)
 
+	override fun getCacheDir(): KFile = app.cacheDirKt
+
 	override fun getGpxDir(): KFile = app.getAppPathKt(GPX_INDEX_DIR)
 
 	override fun getGpxImportDir(): KFile = app.getAppPathKt(GPX_IMPORT_DIR)
@@ -98,7 +100,7 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 	private fun searchNearestCity(latLon: KLatLon, callback: CityNameCallback) {
 		val cityTypes = City.CityType.entries.associateBy { it.name.lowercase() }
 		val rect = MapUtils.calculateLatLonBbox(latLon.latitude, latLon.longitude, CITY_SEARCH_RADIUS)
-		val travelFileVisibility = app.resourceManager.defaultAmenitySearchSettings.fileVisibility;
+		val travelFileVisibility = app.resourceManager.defaultAmenitySearchSettings.fileVisibility
 		val cities = app.resourceManager.amenitySearcher.searchAmenities(object : SearchPoiTypeFilter {
 			override fun accept(type: PoiCategory, subcategory: String): Boolean {
 				return cityTypes.containsKey(subcategory)

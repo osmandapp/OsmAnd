@@ -2,6 +2,7 @@ package net.osmand.shared.util
 
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.format
+import net.osmand.shared.io.KFile
 import kotlin.math.max
 import kotlin.math.min
 
@@ -171,5 +172,21 @@ object KAlgorithms {
 		} else {
 			s
 		}
+	}
+
+	fun getFileNameWithoutExtension(file: KFile): String {
+		return getFileNameWithoutExtension(file.name())
+	}
+
+	fun getFileNameWithoutExtension(name: String?): String {
+		return name?.substringBeforeLast('.', name) ?: ""
+	}
+
+	fun getFileWithoutDirs(name: String): String {
+		val i: Int = name.lastIndexOf('/')
+		if (i != -1) {
+			return name.substring(i + 1)
+		}
+		return name
 	}
 }
