@@ -4855,4 +4855,18 @@
     <string name="poi_hazard_landslide">انهيار ترابي</string>
     <string name="poi_hazard_hole">حفرة</string>
     <string name="poi_hazard_curve">منعرج</string>
+    <string name="poi_hazard_curves">منعرجات</string>
+    <string name="poi_hazard_pedestrians">مشاة</string>
+    <string name="poi_hazard_children">أطفال</string>
+    <string name="poi_hazard_animal_crossing">مرور حيوانات</string>
+    <string name="poi_hazard_dangerous_junction">تقاطع خطير</string>
+    <string name="poi_hazard_school_zone">منطقة مدرسة</string>
+    <string name="poi_hazard_cyclists">راكبو دراجات</string>
+    <string name="poi_hazard_shooting_range">نطاق رماية</string>
+    <string name="poi_hazard_queues_likely">احتمال زحام</string>
+    <string name="poi_hazard_side_winds">رياح جانبية</string>
+    <string name="poi_hazard_ice">جليد</string>
+    <string name="poi_steps">درج</string>
+    <string name="poi_footway">ممشى</string>
+    <string name="poi_area_highway">منطقة تنقل</string>
 </resources>
