@@ -1393,7 +1393,7 @@
     <string name="poi_aerialway_chair_lift">رافعة بالكرسي</string>
     <string name="poi_aerialway_t_bar">رافعة T</string>
     <string name="poi_aerialway_j_bar">رافعة J</string>
-    <string name="poi_disaster_response">محطة SES</string>
+    <string name="poi_disaster_response">محطة الاستجابة للكوارث</string>
     <string name="poi_aerialway_platter">رافعة متزحلقين</string>
     <string name="poi_aerialway_mixed_lift">رافعة مختلطة</string>
     <string name="poi_aerialway_drag_lift">رافعة سحب</string>
@@ -4765,4 +4765,19 @@
     <string name="poi_routes_air_sports">رياضات هوائية</string>
     <string name="poi_routes_motorcycling">درجات نارية</string>
     <string name="x">إكس (تويتر سابقاً)</string>
+    <string name="poi_impromptu">مرفق مؤقت</string>
+    <string name="poi_network_foot">شبكة المسارات (للتنزه)</string>
+    <string name="poi_network_cycling">شبكة المسارات (للدراجات)</string>
+    <string name="poi_sample_collection_filter">جمع عينة</string>
+    <string name="poi_memorial_type">نوع النصب التذكاري</string>
+    <string name="poi_osmwiki">أماكن مشهورة (ويكيبيديا)</string>
+    <string name="poi_consulate">قنصلية</string>
+    <string name="poi_historic_spacecraft">مركبة فضائية تاريخية</string>
+    <string name="poi_denomination_ukrainian_greek_catholic">الكنيسة الأوكرانية للروم الكاثوليك</string>
+    <string name="poi_yoga">يوجا</string>
+    <string name="poi_financial_advisor">مستشار مالي</string>
+    <string name="poi_security">مكتب أمن</string>
+    <string name="poi_construction_company">شركة مقاولات</string>
+    <string name="poi_union">مكتب نقابي</string>
+    <string name="poi_office_charity">مكتب جمعية خيرية</string>
 </resources>
