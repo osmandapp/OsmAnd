@@ -4869,4 +4869,23 @@
     <string name="poi_steps">درج</string>
     <string name="poi_footway">ممشى</string>
     <string name="poi_area_highway">منطقة تنقل</string>
+    <string name="poi_area_highway_steps">منطقة درج</string>
+    <string name="poi_area_highway_footway">منطقة مشي حر</string>
+    <string name="poi_travel_agency">مكتب سفريات</string>
+    <string name="poi_denomination_syriac_orthodox">أرثودكسية سيريانية</string>
+    <string name="poi_healthcare_speciality_tuina">تدليك توي نا</string>
+    <string name="poi_healthcare_speciality_unani">طب يوناني</string>
+    <string name="poi_healthcare_speciality_body">علاج نفسي جسدي</string>
+    <string name="poi_healthcare_speciality_sophrologist">علم الاسترخاء والتوازن</string>
+    <string name="poi_padus_area">منطقة قاعدة بيانات المناطق المحمية في الولايات المتحدة</string>
+    <string name="poi_padus_category_easement">الفئة: ارتفاق</string>
+    <string name="poi_padus_local_designation">تصنيف محلي</string>
+    <string name="poi_padus_local_manager">مدير محلي</string>
+    <string name="poi_padus_designation_type_fullname">نوع التصنيف</string>
+    <string name="poi_us_maps_recreation_area_activity_backpacking">ترحال بشنطة ظهر</string>
+    <string name="poi_us_maps_recreation_area_activity_beachcombing">تمشيط الشاطئ</string>
+    <string name="poi_us_maps_recreation_area_activity_big_game_hunting">صيد طرائد كبيرة</string>
+    <string name="poi_us_maps_recreation_area_activity_boating_motorized">ملاحة بالقوارب الآلية</string>
+    <string name="poi_us_maps_recreation_area_activity_boating_non_motorized">ملاحة بقوارب التجديف</string>
+    <string name="poi_us_maps_recreation_area_activity_campground_camping">تخييم منظم</string>
 </resources>
