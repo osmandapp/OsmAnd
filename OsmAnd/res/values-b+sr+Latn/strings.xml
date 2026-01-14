@@ -5934,4 +5934,15 @@
     <string name="astro_rise">Izlazak</string>
     <string name="astro_set">Skup</string>
     <string name="gpx_too_many_points_visible_warning">Velika količina vidljivih GPX tragova dovodi do velike potrošnje memorije</string>
+    <string name="sort_highest_first">Najviši prvi</string>
+    <string name="sort_lowest_first">Najniži prvi</string>
+    <string name="no_date">Bez datuma</string>
+    <string name="shared_string_step">Korak</string>
+    <string name="set_step_size_summary">Izaberite veličinu koraka da biste grupisali svoje tragove.</string>
+    <string name="set_step_size">Podesite veličinu koraka</string>
+    <string name="organize_by_summary">Automatski organizujte svoje tragove u grupe na osnovu izabranog parametra kao što su aktivnost, brzina ili lokacija.</string>
+    <string name="organize_by">Organizuj po</string>
+    <string name="group_general">Generalna</string>
+    <string name="group_date_time">Datum i vreme</string>
+    <string name="group_altitude_elevation">Nadmorska visina i elevacija</string>
 </resources>
