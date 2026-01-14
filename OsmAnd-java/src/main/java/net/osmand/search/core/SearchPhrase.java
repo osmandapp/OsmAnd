@@ -37,8 +37,6 @@ public class SearchPhrase {
 	// Object consists of 2 part [known + unknown] 
 	private String fullTextSearchPhrase = "";
 	private String unknownSearchPhrase = "";
-	
-	private boolean likelyAddressSearch = false;
 
 	// words to be used for words span
 	private List<SearchWord> words = new ArrayList<>();
@@ -171,7 +169,6 @@ public class SearchPhrase {
 				}
 			}
 		}
-		sp.likelyAddressSearch = likelyAddressSearch(fullText) || !sp.lastUnknownSearchWordComplete;
 		return sp;
 	}
 
@@ -197,10 +194,6 @@ public class SearchPhrase {
 			}
 		}
 		return false;
-	}
-	
-	public boolean isLikelyAddressSearch() {
-		return likelyAddressSearch;
 	}
 
 	public static List<String> splitWords(String w, List<String> ws, String delimiters) {
@@ -251,7 +244,6 @@ public class SearchPhrase {
 				genUnknownSearchPhrase.append(unknownWords.get(i)).append(" ");
 			}
 			sp.fullTextSearchPhrase = fullTextSearchPhrase; 
-			sp.likelyAddressSearch = likelyAddressSearch;
 			sp.unknownSearchPhrase = genUnknownSearchPhrase.toString().trim();
 		}
 		return sp;
