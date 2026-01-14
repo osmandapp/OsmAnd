@@ -58,6 +58,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.enums.TracksSortScope;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -308,8 +309,14 @@ public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment impl
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FragmentManager manager = activity.getSupportFragmentManager();
-			SortByBottomSheet.showInstance(manager, getTracksSortMode(), this, isUsedOnMap());
+			SortByBottomSheet.showInstance(manager, getTrackSortScope(), getTracksSortMode(), this, isUsedOnMap());
 		}
+	}
+
+	@NonNull
+	@Override
+	public TracksSortScope getTrackSortScope() {
+		return TracksSortScope.TRACKS;
 	}
 
 	@NonNull

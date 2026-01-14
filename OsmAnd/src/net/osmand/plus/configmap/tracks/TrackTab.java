@@ -20,6 +20,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TrackTab implements TracksGroup, ComparableTracksGroup {
@@ -148,6 +149,17 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 			}
 		}
 		return trackFolders;
+	}
+
+	@NonNull
+	public List<TrackItem> getTrackItemsByGroupId(@NonNull String groupId) {
+		if (smartFolder != null) {
+			TracksGroup group = smartFolder.getSubgroupById(groupId);
+			if (group != null) {
+				return group.getTrackItems();
+			}
+		}
+		return Collections.emptyList();
 	}
 
 	@Override
