@@ -90,6 +90,7 @@
 				android:layout_marginTop="@dimen/content_padding"
 				android:background="@drawable/btn_circle"
 				android:elevation="4dp"
+				android:visibility="visible"
 				app:layout_constraintStart_toStartOf="@id/ar_mode_button"
 				app:layout_constraintTop_toBottomOf="@id/ar_mode_button"
 				app:srcCompat="@drawable/ic_action_device_camera"
@@ -304,5 +305,13 @@
 		</LinearLayout>
 
 	</LinearLayout>
+
+	<FrameLayout
+		android:id="@+id/bottom_sheet_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:behavior_hideable="true"
+		app:behavior_peekHeight="0dp"
+		app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

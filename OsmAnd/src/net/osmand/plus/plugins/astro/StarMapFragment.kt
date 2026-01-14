@@ -17,7 +17,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
 import net.osmand.Location
 import net.osmand.map.IMapLocationListener
@@ -93,6 +93,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private lateinit var arModeHelper: StarMapARModeHelper
 	private lateinit var cameraHelper: StarMapCameraHelper
+	private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
 
 	private var previousAltitude: Double = 45.0
 	private var previousAzimuth: Double = 0.0
@@ -292,6 +293,21 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		previousViewAngle = starView.getViewAngle()
 		apply2DMode(starView.is2DMode)
 
+		val bottomSheetContainer = view.findViewById<View>(R.id.bottom_sheet_container)
+		bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetContainer)
+		bottomSheetBehavior.skipCollapsed = true
+		bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+		bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+			override fun onStateChanged(bottomSheet: View, newState: Int) {
+				if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+					starView.setSelectedObject(null)
+					starView.setSelectedConstellation(null)
+					starView.invalidate()
+				}
+			}
+			override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+		})
+
 		return view
 	}
 
@@ -479,12 +495,17 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			previousViewAngle = starView.getViewAngle()
 			starView.is2DMode = true
 			starView.setCenter(180.0, 90.0)
+			if (cameraHelper.isCameraOverlayEnabled) cameraHelper.toggleCameraOverlay()
+			cameraButton.visibility = View.GONE
 			if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode(false)
+			arModeButton.visibility = View.GONE
 			manualAzimuth = true
 		} else {
 			starView.is2DMode = false
 			starView.setCenter(previousAzimuth, previousAltitude)
 			starView.setViewAngle(previousViewAngle)
+			cameraButton.visibility = View.VISIBLE
+			arModeButton.visibility = View.VISIBLE
 		}
 		starView.invalidate()
 		update2DModeIcon()
@@ -498,7 +519,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private fun setupObservers() {
 		starMapViewModel.currentTime.observe(viewLifecycleOwner) { time ->
 			starView.setDateTime(time, animate = true)
-			if (selectedObject != null) showObjectInfo(selectedObject!!)
+			updateBottomSheetInfo()
 		}
 		starMapViewModel.currentCalendar.observe(viewLifecycleOwner) { calendar ->
 			timeSelectionView.setDateTime(calendar)
@@ -539,24 +560,24 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			selectedObject = obj
 			if (obj != null) {
 				showObjectInfo(obj)
-			} else if (starView.getSelectedConstellationItem() == null) {
-				(childFragmentManager.findFragmentByTag(ConstellationInfoBottomSheet.TAG) as? BottomSheetDialogFragment)?.dismiss()
-				(childFragmentManager.findFragmentByTag(SkyObjectInfoBottomSheet.TAG) as? BottomSheetDialogFragment)?.dismiss()
+			} else {
+				if (starView.getSelectedConstellationItem() == null) hideBottomSheet()
 			}
 		}
 		starView.onConstellationClickListener = { constellation ->
 			if (constellation != null) {
 				showConstellationInfo(constellation)
-			} else if (selectedObject == null) {
-				(childFragmentManager.findFragmentByTag(ConstellationInfoBottomSheet.TAG) as? BottomSheetDialogFragment)?.dismiss()
-				(childFragmentManager.findFragmentByTag(SkyObjectInfoBottomSheet.TAG) as? BottomSheetDialogFragment)?.dismiss()
+			} else {
+				if (selectedObject == null) hideBottomSheet()
 			}
 		}
-		starView.onAnimationFinished = { if (selectedObject != null) showObjectInfo(selectedObject!!) }
+		starView.onAnimationFinished = { updateBottomSheetInfo() }
 		starView.onAzimuthManualChangeListener = { azimuth ->
-			if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode()
-			manualAzimuth = true
-			compassButton?.update(-azimuth.toFloat())
+			if (!cameraHelper.isCameraOverlayEnabled) {
+				if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode()
+				manualAzimuth = true
+				compassButton?.update(-azimuth.toFloat())
+			}
 		}
 		starView.onViewAngleChangeListener = { fov -> cameraHelper.updateCameraZoom(fov) }
 	}
@@ -595,21 +616,35 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 	}
 
-	private fun showConstellationInfo(c: Constellation) {
-		(childFragmentManager.findFragmentByTag(SkyObjectInfoBottomSheet.TAG) as? BottomSheetDialogFragment)?.dismiss()
-		val existingFragment = childFragmentManager.findFragmentByTag(ConstellationInfoBottomSheet.TAG) as? ConstellationInfoBottomSheet
-		if (existingFragment == null) {
-			ConstellationInfoBottomSheet.newInstance(c).show(childFragmentManager, ConstellationInfoBottomSheet.TAG)
+	fun hideBottomSheet() {
+		bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+	}
+
+	private fun updateBottomSheetInfo() {
+		(childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? SkyObjectInfoFragment)?.let {
+			selectedObject?.let { obj -> it.updateObjectInfo(obj) }
 		}
 	}
 
-	private fun showObjectInfo(obj: SkyObject) {
-		(childFragmentManager.findFragmentByTag(ConstellationInfoBottomSheet.TAG) as? BottomSheetDialogFragment)?.dismiss()
-		val existingFragment = childFragmentManager.findFragmentByTag(SkyObjectInfoBottomSheet.TAG) as? SkyObjectInfoBottomSheet
-		if (existingFragment != null) {
-			existingFragment.updateObjectInfo(obj)
-		} else {
-			SkyObjectInfoBottomSheet.newInstance(obj).show(childFragmentManager, SkyObjectInfoBottomSheet.TAG)
+	private fun showConstellationInfo(c: Constellation) {
+		val existing = childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? ConstellationInfoFragment
+		if (existing == null || existing.arguments?.getString("name") != c.name) {
+			childFragmentManager.beginTransaction()
+				.replace(R.id.bottom_sheet_container, ConstellationInfoFragment.newInstance(c))
+				.commitNow()
 		}
+		bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+	}
+
+	private fun showObjectInfo(obj: SkyObject) {
+		val existing = childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? SkyObjectInfoFragment
+		if (existing == null || existing.arguments?.getString("skyObjectName") != obj.name) {
+			childFragmentManager.beginTransaction()
+				.replace(R.id.bottom_sheet_container, SkyObjectInfoFragment.newInstance(obj))
+				.commitNow()
+		} else {
+			existing.updateObjectInfo(obj)
+		}
+		bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 	}
 }

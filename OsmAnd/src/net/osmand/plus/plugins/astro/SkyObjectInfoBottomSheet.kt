@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import androidx.core.view.updatePadding
+import androidx.fragment.app.Fragment
 import com.google.android.material.checkbox.MaterialCheckBox
 import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Direction
@@ -17,10 +20,11 @@ import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.utils.AstroUtils
+import net.osmand.plus.utils.AndroidUtils
 import java.util.Calendar
 import java.util.Locale
 
-class SkyObjectInfoBottomSheet : BottomSheetDialogFragment() {
+class SkyObjectInfoFragment : Fragment() {
 
 	private lateinit var sheetTitle: TextView
 	private lateinit var sheetCoords: TextView
@@ -48,12 +52,18 @@ class SkyObjectInfoBottomSheet : BottomSheetDialogFragment() {
 		sheetSetTime = view.findViewById(R.id.sheet_set_time)
 		sheetWikiButton = view.findViewById(R.id.sheet_wiki_button)
 
-		return view
-	}
+		view.findViewById<View>(R.id.close_button).setOnClickListener {
+			parent.hideBottomSheet()
+		}
 
-	override fun onStart() {
-		super.onStart()
-		dialog?.window?.setDimAmount(0f)
+		ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
+			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+			val basePadding = AndroidUtils.dpToPx(v.context, 16f)
+			v.updatePadding(bottom = insets.bottom + basePadding)
+			windowInsets
+		}
+
+		return view
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -144,9 +154,9 @@ class SkyObjectInfoBottomSheet : BottomSheetDialogFragment() {
 	}
 
 	companion object {
-		const val TAG = "SkyObjectInfoBottomSheet"
-		fun newInstance(skyObject: SkyObject): SkyObjectInfoBottomSheet {
-			val fragment = SkyObjectInfoBottomSheet()
+		const val TAG = "SkyObjectInfoFragment"
+		fun newInstance(skyObject: SkyObject): SkyObjectInfoFragment {
+			val fragment = SkyObjectInfoFragment()
 			val args = Bundle()
 			args.putString("skyObjectName", skyObject.name)
 			fragment.arguments = args

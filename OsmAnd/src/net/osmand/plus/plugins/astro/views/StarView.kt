@@ -13,6 +13,8 @@ import android.graphics.PointF
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.view.GestureDetector
+import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
@@ -156,6 +158,12 @@ class StarView @JvmOverloads constructor(
 	private var lastTouchY = 0f
 	private var isPanning = false
 	private val scaleGestureDetector = ScaleGestureDetector(context, ScaleListener())
+	private val gestureDetector = GestureDetector(context, object : SimpleOnGestureListener() {
+		override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+			performClickAt(e.x, e.y); return true;
+		}
+	})
+
 	private var onObjectClickListener: ((SkyObject?) -> Unit)? = null
 
 	var onAnimationFinished: (() -> Unit)? = null
@@ -402,6 +410,16 @@ class StarView @JvmOverloads constructor(
 	}
 
 	fun getSelectedConstellationItem(): Constellation? = selectedConstellation
+
+	fun setSelectedObject(obj: SkyObject?) {
+		selectedObject = obj
+		invalidate()
+	}
+
+	fun setSelectedConstellation(c: Constellation?) {
+		selectedConstellation = c
+		invalidate()
+	}
 
 	// --- Pinning API ---
 
@@ -1246,6 +1264,8 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
+	var isCameraMode: Boolean = false
+
 	var is2DMode: Boolean = false
 		set(value) {
 			field = value
@@ -1302,12 +1322,20 @@ class StarView @JvmOverloads constructor(
 		if (scaleGestureDetector.isInProgress) {
 			lastTouchX = event.x; lastTouchY = event.y; return true
 		}
+		gestureDetector.onTouchEvent(event)
+
 		when (event.actionMasked) {
-			MotionEvent.ACTION_DOWN -> { lastTouchX = event.x; lastTouchY = event.y; isPanning = false }
+			MotionEvent.ACTION_DOWN -> { 
+				parent?.requestDisallowInterceptTouchEvent(true)
+				lastTouchX = event.x; lastTouchY = event.y; isPanning = false 
+			}
 			MotionEvent.ACTION_MOVE -> {
 				val dx = event.x - lastTouchX
 				val dy = event.y - lastTouchY
-				if (sqrt(dx * dx + dy * dy) > 10f) {
+				val hitThreshold = sqrt(dx * dx + dy * dy) > 10f
+				if (isCameraMode && hitThreshold) {
+					isPanning = true
+				} else if (hitThreshold) {
 					isPanning = true
 					if (is2DMode) {
 						panX += dx
@@ -1325,12 +1353,18 @@ class StarView @JvmOverloads constructor(
 					invalidate()
 				}
 			}
-			MotionEvent.ACTION_POINTER_UP -> {
-				if (event.actionIndex == 0 && event.pointerCount > 1) {
-					lastTouchX = event.getX(1); lastTouchY = event.getY(1)
-				}
+			MotionEvent.ACTION_POINTER_DOWN -> {
+				lastTouchX = event.getX(event.actionIndex)
+				lastTouchY = event.getY(event.actionIndex)
 			}
-			MotionEvent.ACTION_UP -> { if (!isPanning) performClickAt(event.x, event.y) }
+			MotionEvent.ACTION_POINTER_UP -> {
+				val pointerIndex = if (event.actionIndex == 0) 1 else 0
+				lastTouchX = event.getX(pointerIndex)
+				lastTouchY = event.getY(pointerIndex)
+			}
+			MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> { 
+				isPanning = false
+			}
 		}
 		return true
 	}
