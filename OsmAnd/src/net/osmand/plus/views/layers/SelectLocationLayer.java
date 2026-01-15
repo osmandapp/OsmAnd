@@ -25,6 +25,8 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 public class SelectLocationLayer extends OsmandMapLayer {
 
+	private static final float CAPTION_TEXT_SIZE = 18f;
+
 	private final Paint bitmapPaint;
 	private final Paint mTextPaint;
 	private Bitmap defaultIconDay;
@@ -88,7 +90,7 @@ public class SelectLocationLayer extends OsmandMapLayer {
 
 	private void updateTextSize() {
 		float density = Resources.getSystem().getDisplayMetrics().density;
-		float textSize = 18f * textScale * density;
+		float textSize = CAPTION_TEXT_SIZE * textScale * density;
 		mTextPaint.setTextSize(textSize);
 	}
 

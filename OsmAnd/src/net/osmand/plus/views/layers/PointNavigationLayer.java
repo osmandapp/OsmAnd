@@ -42,6 +42,8 @@ import java.util.List;
 public class PointNavigationLayer extends OsmandMapLayer implements
 		IContextMenuProvider, IMoveObjectProvider {
 
+	private static final float CAPTION_TEXT_SIZE = 18f;
+
 	private final TargetPointsHelper targetPoints;
 
 	private boolean carView;
@@ -215,7 +217,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	private void updateTextSize() {
 		float density = view.getDensity();
-		float textSize = 18f * textScale * density;
+		float textSize = CAPTION_TEXT_SIZE * textScale * density;
 		mTextPaint.setTextSize(textSize);
 	}
 
