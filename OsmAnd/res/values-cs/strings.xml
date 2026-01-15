@@ -5964,4 +5964,18 @@
     <string name="azimuthal_grid">Azimutová mřížka</string>
     <string name="equatorial_grid">Rovníková mřížka</string>
     <string name="gpx_too_many_points_visible_warning">Velké množství viditelných GPX tras může vést ke zvýšenému využití paměti</string>
+    <string name="sort_highest_first">Od nejvyššího</string>
+    <string name="sort_lowest_first">Od nejnižšího</string>
+    <string name="no_date">Bez data</string>
+    <string name="organize_by_summary">Automaticky organizujte své stopy do skupin podle vybraného parametru, jako je aktivita, rychlost nebo poloha.</string>
+    <string name="organize_by">Organizovat podle</string>
+    <string name="group_general">Obecné</string>
+    <string name="group_date_time">Datum &amp; čas</string>
+    <string name="group_sensors">Snímače</string>
+    <string name="year_of_creation">Rok vytvoření</string>
+    <string name="month_year_creation">Měsíc a rok vytvoření</string>
+    <string name="nearest_city">Nejbližší město</string>
+    <string name="avg_speed">Průměrná rychlost</string>
+    <string name="organize_by_max_speed">Maximální rychlost</string>
+    <string name="organize_by_max_altitude">Maximální výška</string>
 </resources>
