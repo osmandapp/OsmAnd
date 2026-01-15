@@ -5967,4 +5967,9 @@
     <string name="astro_rise">Aufgang</string>
     <string name="astro_set">Untergang</string>
     <string name="gpx_too_many_points_visible_warning">Große Anzahl sichtbarer GPX-Wege führt zu hohem Speicherverbrauch</string>
+    <string name="sort_lowest_first">Aufsteigend</string>
+    <string name="no_date">Ohne Datum</string>
+    <string name="sort_highest_first">Absteigend</string>
+    <string name="organize_by_summary">Tracks automatisch in Gruppen anordnen, die auf einem ausgewählten Parameter wie Aktivität, Geschwindigkeit oder Ort basieren.</string>
+    <string name="organize_by">Anordnen nach</string>
 </resources>
