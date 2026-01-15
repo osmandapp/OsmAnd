@@ -6007,4 +6007,7 @@
     <string name="nearest_city">Nærmeste by</string>
     <string name="avg_speed">Gns. hastighed</string>
     <string name="organize_by_max_speed">Maks. hastighed</string>
+    <string name="shared_string_step">Interval</string>
+    <string name="set_step_size_summary">Vælg en intervalstørrelse til at gruppere dine spor.</string>
+    <string name="set_step_size">Indstil intervalstørrelse</string>
 </resources>
