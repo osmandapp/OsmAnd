@@ -5972,4 +5972,15 @@
     <string name="sort_highest_first">Absteigend</string>
     <string name="organize_by_summary">Tracks automatisch in Gruppen anordnen, die auf einem ausgewählten Parameter wie Aktivität, Geschwindigkeit oder Ort basieren.</string>
     <string name="organize_by">Anordnen nach</string>
+    <string name="shared_string_step"></string>
+    <string name="organize_by_max_altitude">Max. Höhe</string>
+    <string name="organize_by_max_speed">Höchstgeschwindigkeit</string>
+    <string name="avg_speed">Durchschnittsgeschwindigkeit</string>
+    <string name="nearest_city">Nächstgelegene Stadt</string>
+    <string name="month_year_creation">Monat und Jahr der Erstellung</string>
+    <string name="year_of_creation">Entstehungsjahr</string>
+    <string name="group_sensors">Sensoren</string>
+    <string name="group_altitude_elevation">Höhe und Erhebung</string>
+    <string name="group_date_time">Datum &amp; Uhrzeit</string>
+    <string name="group_general">Allgemeines</string>
 </resources>
