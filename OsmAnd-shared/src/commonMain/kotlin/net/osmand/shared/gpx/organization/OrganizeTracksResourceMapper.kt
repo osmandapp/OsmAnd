@@ -5,7 +5,7 @@ import net.osmand.shared.data.Limits
 import net.osmand.shared.gpx.RouteActivityHelper
 import net.osmand.shared.gpx.organization.enums.OrganizeByCategory
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
-import net.osmand.shared.util.DateFormatter
+import net.osmand.shared.util.SharedDateFormatter
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.Localization
 
@@ -66,9 +66,9 @@ object OrganizeTracksResourceMapper {
 				Localization.getString("no_date")
 			} else {
 				when (type) {
-					OrganizeByType.YEAR_OF_CREATION -> DateFormatter.formatYear(date)
+					OrganizeByType.YEAR_OF_CREATION -> SharedDateFormatter.formatYear(date)
 
-					OrganizeByType.MONTH_AND_YEAR -> DateFormatter.formatMonthAndYear(date)
+					OrganizeByType.MONTH_AND_YEAR -> SharedDateFormatter.formatMonthAndYear(date)
 
 					else -> throw IllegalArgumentException("Unknown OrganizeByType $type of category ${type.category}")
 				}

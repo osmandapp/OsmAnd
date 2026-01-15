@@ -6,7 +6,7 @@ import platform.Foundation.NSLocale
 import platform.Foundation.currentLocale
 import platform.Foundation.dateWithTimeIntervalSince1970
 
-actual object DateFormatter {
+actual object SharedDateFormatter {
 
 	actual fun formatYear(timestamp: Long): String {
 		return format(timestamp, "yyyy")
