@@ -5,7 +5,6 @@ import static net.osmand.plus.settings.backend.OsmAndAppCustomizationFields.ROUT
 import static net.osmand.plus.settings.backend.OsmAndAppCustomizationFields.ROUTE_TARGET_POINT;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -138,8 +137,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		MapRendererView mapRenderer = getMapView().getMapRenderer();
 		if (mapRenderer != null) {
 			//OpenGL
-			if (nightMode != settings.isNightMode() || mapActivityInvalidated) {
-				//switch to day/night mode
+			if (nightMode != settings.isNightMode()
+					|| shouldUpdateTextSizeForOpenGL() || mapActivityInvalidated) {
 				captionStyle = null;
 				clearMapMarkersCollections();
 				nightMode = settings.isNightMode();
@@ -217,11 +216,14 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	private void updateTextSize() {
 		float density = view.getDensity();
 		float textSize = 18f * textScale * density;
+		mTextPaint.setTextSize(textSize);
+	}
 
-		if (textSize != mTextPaint.getTextSize()) {
-			mTextPaint.setTextSize(textSize);
-			captionStyle = null;
+	private boolean shouldUpdateTextSizeForOpenGL() {
+		if (mTextPaint != null && captionStyle != null) {
+			return mTextPaint.getTextSize() != captionStyle.getSize();
 		}
+		return true;
 	}
 
 	private void recreateBitmaps() {
