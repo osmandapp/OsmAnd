@@ -50,7 +50,7 @@
     <string name="index_name_tts_voice">Indicaciones por voz (TTS, preferido)</string>
     <string name="amenity_type_osmwiki">Wikipedia (sin conexión)</string>
     <string name="amenity_type_user_defined">Definido por el usuario</string>
-    <string name="fav_export_confirmation">Ya existe un archivo con los favoritos exportados previamente. ¿Quieres sustituirlo\?</string>
+    <string name="fav_export_confirmation">Ya existe un archivo con los favoritos exportados previamente. ¿Quiere sustituirlo?</string>
     <string name="profile_settings">Ajustes de perfiles específicos</string>
     <string name="settings_preset">Perfil predefinido</string>
     <string name="settings_preset_descr">La vista del mapa y los ajustes de navegación se recuerdan por el perfil usado. Elige tu perfil predefinido aquí.</string>
@@ -135,7 +135,7 @@
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) borrado(s).</string>
     <string name="local_index_items_restored">%1$d de %2$d elemento(s) activado(s).</string>
     <string name="local_index_no_items_to_do">Sin elementos para «%1$s»</string>
-    <string name="local_index_action_do">¿Quieres %1$s %2$s elemento(s)?</string>
+    <string name="local_index_action_do">¿Quiere %1$s %2$s elemento(s)?</string>
     <string name="local_index_descr_title">Gestionar mapas.</string>
     <string name="local_index_mi_restore">Activar</string>
     <string name="local_index_mi_backup">Desactivar</string>
@@ -403,7 +403,7 @@
     <string name="transport_search_after">Itinerario siguiente</string>
     <string name="transport_search_before">Itinerario anterior</string>
     <string name="transport_finish_search">Finalizar búsqueda</string>
-    <string name="transport_stop_to_go_out">Elige la parada donde quieres bajar</string>
+    <string name="transport_stop_to_go_out">Elija la parada donde quiere bajar</string>
     <string name="transport_to_go_after">distancia previa</string>
     <string name="transport_to_go_before">distancia siguiente</string>
     <string name="transport_stops_to_pass">paradas a pasar</string>
@@ -1124,7 +1124,7 @@
     <string name="keep_informing_descr">Repite instrucciones de navegación a intervalos regulares.</string>
     <string name="keep_informing">Repetir instrucciones de navegación</string>
     <string name="arrival_distance">Anuncio de llegada</string>
-    <string name="arrival_distance_descr">¿Cuándo quieres el anuncio de llegada\?</string>
+    <string name="arrival_distance_descr">¿Cuándo quiere el anuncio de llegada?</string>
     <string name="shared_string_share">Compartir</string>
     <string name="share_fav_subject">Favoritos compartidos a través de OsmAnd</string>
     <string name="use_points_as_intermediates">Calcular ruta entre puntos</string>
@@ -1465,7 +1465,7 @@
     <string name="shared_string_show_details">Ver detalles</string>
     <string name="local_recordings_delete_all_confirm">¿Borrar %1$d notas\?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
-    <string name="gps_network_not_enabled">Servicio de ubicación desactivado. ¿Quieres activarlo?</string>
+    <string name="gps_network_not_enabled">Servicio de ubicación desactivado. ¿Quiere activarlo?</string>
     <string name="disable_recording_once_app_killed">Prevenir grabación independiente</string>
     <string name="light_theme">Claro</string>
     <string name="dark_theme">Oscuro</string>
@@ -1815,7 +1815,7 @@
     <string name="osm_live_region_desc">Parte de tu donación se enviará a los usuarios de OSM que realicen cambios en el mapa de esa región.</string>
     <string name="osm_live_subscription_settings">Ajustes de suscripción</string>
     <string name="osm_live_ask_for_purchase">Primero compra una suscripción a OsmAnd Live</string>
-    <string name="osm_live_header">Esta suscripción permite actualizaciones cada hora para todos los mapas del mundo. \n Parte de los ingresos vuelven a la comunidad de OSM y se paga por cada contribución OSM. \n Si amas a OsmAnd, OSM y quieres apoyarlos y ser apoyado por ellos, esta es una perfecta manera de hacerlo.</string>
+    <string name="osm_live_header">Esta suscripción permite actualizaciones cada hora para todos los mapas del mundo. \n Parte de los ingresos vuelven a la comunidad de OSM y se paga por cada contribución OSM. \n Si ama OsmAnd, OSM y quiere apoyarlos y que le apoyen, esta es una perfecta manera de hacerlo.</string>
     <string name="show_transparency_seekbar">Mostrar barra de transparencia en el mapa</string>
     <string name="storage_directory_readonly_desc">Se ha cambiado a la memoria interna, porque la carpeta de almacenamiento de datos elegida está protegida contra escritura. Elige una carpeta de almacenamiento válida.</string>
     <string name="storage_directory_shared">Memoria compartida</string>
@@ -2279,7 +2279,7 @@
     <string name="empty_state_favourites">Añadir favoritos</string>
     <string name="empty_state_favourites_desc">Importa los favoritos o añádelos marcando puntos en el mapa.</string>
     <string name="import_track">Importar archivo GPX</string>
-    <string name="import_track_desc">El archivo «%1$s» no contiene puntos de referencia, ¿Quieres importarlo como una traza?</string>
+    <string name="import_track_desc">El archivo «%1$s» no contiene puntos de referencia. ¿Quiere importarlo como una traza?</string>
     <string name="move_point">Mover punto</string>
     <string name="move_all_to_history">Mover todo al historial</string>
     <string name="show_direction">Indicación de distancia</string>
@@ -2592,7 +2592,7 @@
     <string name="mapillary_menu_title_pano">Sólo mostrar imágenes en 360°</string>
     <string name="shared_string_launch">Ejecutar</string>
     <string name="lang_gn_py">Guaraní</string>
-    <string name="run_full_osmand_msg">Estás usando el mapa «{0}» que funciona con OsmAnd. ¿Quieres ejecutar la versión completa de OsmAnd\?</string>
+    <string name="run_full_osmand_msg">Está usando el mapa «{0}» que funciona con OsmAnd. ¿Quiere ejecutar la versión completa de OsmAnd?</string>
     <string name="run_full_osmand_header">¿Ejecutar OsmAnd\?</string>
     <string name="quick_action_switch_day_night_descr">Un botón que alterna entre los modos diurno y nocturno de OsmAnd.</string>
     <string name="quick_action_switch_day_mode">Modo diurno</string>
@@ -2746,7 +2746,7 @@
     <string name="choose_data_to_share">Elige los tipos de datos a compartir:</string>
     <string name="downloaded_maps">Mapas descargados</string>
     <string name="visited_screens">Pantallas visitadas</string>
-    <string name="collected_data_descr">Define qué datos quieres que OsmAnd comparta.</string>
+    <string name="collected_data_descr">Defina qué datos quiere que OsmAnd comparta.</string>
     <string name="downloaded_maps_collect_descr">Nos ayuda a entender la popularidad de los mapas de regiones y países.</string>
     <string name="visited_screens_collect_descr">Nos ayuda a entender la popularidad de las características de OsmAnd.</string>
     <string name="privacy_and_security_change_descr">Pulsa en «Permitir», si aceptas nuestras %1$s</string>
@@ -2772,7 +2772,7 @@
     <string name="collected_data">Datos recopilados</string>
     <string name="press_again_to_change_the_map_orientation">Pulsa de nuevo para cambiar la orientación del mapa</string>
     <string name="shared_string_min_speed">Velocidad mínima</string>
-    <string name="shared_string_max_speed"></string>
+    <string name="shared_string_max_speed"/>
     <string name="default_speed_setting_title">Velocidad predefinida</string>
     <string name="default_speed_setting_descr">Cambiar los ajustes de la velocidad predefinida</string>
     <string name="minmax_speed_dialog_title">Definir velocidad mín/máx</string>
@@ -4397,7 +4397,7 @@
     <string name="map_widget_ant_bicycle_power_desc">Muestra la potencia de salida del ciclista, usada para hacer avanzar la bicicleta</string>
     <string name="lang_sat">Santalí</string>
     <string name="external_sensor_widgets">Sensores externos</string>
-    <string name="ant_missing_dependency_descr">No se puede encontrar el servicio necesario «%1$s». \nDebes instalar o actualizar el servicio para el complemento ANT+. \n¿Quieres abrir Play Store para hacer eso?</string>
+    <string name="ant_missing_dependency_descr">No se puede encontrar el servicio requerido «%1$s». \nDebe instalar o actualizar el servicio de complementos ANT+. \n¿Quiere abrir Play Store para hacerlo?</string>
     <string name="ant_missing_dependency">Falta la dependencia</string>
     <string name="favorites_backup">Copia de seguridad de favoritos</string>
     <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/web) sin costo adicional.</string>
@@ -5581,7 +5581,7 @@
     <string name="prediction_time">Tiempo de predicción</string>
     <string name="position_animation_empty_banner_description">El icono de ubicación se mueve a cada nueva ubicación recibida sin animación.</string>
     <string name="position_animation">Animación de ubicación</string>
-    <string name="map_widget_route_information_desc">Muestra la hora de llegada estimada, el tiempo de viaje restante y la distancia de la ruta de navegación activa.</string>
+    <string name="map_widget_route_information_desc">Muestra la hora estimada de llegada, el tiempo de viaje restante y la distancia para la ruta de navegación activa.</string>
     <string name="wikidata">Wikidata</string>
     <string name="shared_string_no_animation">Sin animación</string>
     <string name="ais_cpa_settings_description">Estos valores definen la presentación de los objetos AIS que pueden acercarse demasiado respecto a su propia ubicación.</string>
@@ -5843,4 +5843,10 @@
     <string name="delete_folder_description">¿Quiere eliminar la carpeta «%1$s»?</string>
     <string name="enable_3d_objects">Edificios en 3D</string>
     <string name="nearest_city">Ciudad más próxima</string>
+    <string name="shared_string_price">Precio</string>
+    <string name="shared_string_magnitude">Magnitud</string>
+    <string name="astro_globular_clusters">Cúmulos globulares</string>
+    <string name="astro_open_clusters">Cúmulos abiertos</string>
+    <string name="astro_galaxy_clusters">Cúmulos galácticos</string>
+    <string name="has_vehicle_metrics">Con datos OBDII</string>
 </resources>
