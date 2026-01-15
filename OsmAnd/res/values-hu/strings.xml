@@ -5854,4 +5854,22 @@
     <string name="astro_rise">Kelte</string>
     <string name="astro_set">Nyugta</string>
     <string name="gpx_too_many_points_visible_warning">A látható GPX-nyomvonalak nagy száma magas memóriahasználatot eredményez</string>
+    <string name="sort_highest_first">Legmagasabb elöl</string>
+    <string name="sort_lowest_first">Legalacsonyabb elöl</string>
+    <string name="no_date">Nincs dátum</string>
+    <string name="shared_string_step">Lépés</string>
+    <string name="set_step_size_summary">Válasszon lépésközt a nyomvonalak csoportosításához.</string>
+    <string name="set_step_size">Lépésköz beállítása</string>
+    <string name="organize_by_summary">Automatikusan csoportokba rendezheti nyomvonalait egy kiválasztott paraméter, például aktivitás típusa, sebesség vagy helyszín alapján.</string>
+    <string name="organize_by">Rendezés:</string>
+    <string name="group_general">Általános</string>
+    <string name="group_date_time">Dátum és idő</string>
+    <string name="group_sensors">Érzékelők</string>
+    <string name="year_of_creation">Létrehozás éve</string>
+    <string name="month_year_creation">Létrehozás éve és hónapja</string>
+    <string name="nearest_city">Legközelebbi település</string>
+    <string name="avg_speed">Átl.sebesség</string>
+    <string name="organize_by_max_speed">Max. sebesség</string>
+    <string name="organize_by_max_altitude">Max. magasság</string>
+    <string name="group_altitude_elevation">Magasság és tengerszint feletti magasság</string>
 </resources>
