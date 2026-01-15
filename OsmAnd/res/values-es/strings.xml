@@ -2772,7 +2772,7 @@
     <string name="collected_data">Datos recopilados</string>
     <string name="press_again_to_change_the_map_orientation">Pulsa de nuevo para cambiar la orientación del mapa</string>
     <string name="shared_string_min_speed">Velocidad mínima</string>
-    <string name="shared_string_max_speed">Velocidad máx.</string>
+    <string name="shared_string_max_speed"></string>
     <string name="default_speed_setting_title">Velocidad predefinida</string>
     <string name="default_speed_setting_descr">Cambiar los ajustes de la velocidad predefinida</string>
     <string name="minmax_speed_dialog_title">Definir velocidad mín/máx</string>
@@ -3918,7 +3918,7 @@
     <string name="routeInfo_smoothness_description">Clasificación con respecto a la usabilidad física de un camino para vehículos con ruedas, particularmente con respecto a la regularidad y planitud de la superficie.</string>
     <string name="routeInfo_winter_ice_road_description">Colorea la ruta o el trazado de la vía según la clasificación del camino en invierno.</string>
     <string name="routeInfo_tracktype_description">Colorea la ruta o el trazado de la vía por su composición superficial. Suele aplicarse cuando la red de caminos está en gran parte sin pavimentar.</string>
-    <string name="no_activity_for_intent">Instala una aplicación que pueda realizar esta acción.</string>
+    <string name="no_activity_for_intent">Instale una aplicación que pueda efectuar esta acción.</string>
     <string name="amz_manage_subscription_descr">Gestiona la suscripción usando la aplicación de Amazon o su página web.</string>
     <string name="osm_live_payment_subscription_management_amz">El pago se carga en la cuenta de Amazon al confirmar la compra.
 \n
@@ -5197,8 +5197,8 @@
     <string name="no_assigned_keys_desc">Selecciona una acción y asigna una tecla para el botón «Añadir».</string>
     <string name="no_assigned_keys">Sin teclas asignadas</string>
     <string name="new_key_assignment">Nueva asignación de tecla</string>
-    <string name="key_assignment_add_key">Añadir tecla</string>
-    <string name="key_assignment_add_action">Añadir una acción</string>
+    <string name="key_assignment_add_key">Añadir clave</string>
+    <string name="key_assignment_add_action">Añadir acción</string>
     <string name="shared_string_key">Tecla</string>
     <string name="key_name_pattern">Tecla «%1$s»</string>
     <string name="action_icon">Añadir icono</string>
@@ -5810,4 +5810,37 @@
     <string name="private_access_routing_req_short">¿Permite el uso de una vía privada para llegar a su destino?</string>
     <string name="buildings_3d_detail_level">Detallado de edificios en 3D</string>
     <string name="lang_mi">Maorí</string>
+    <string name="visible_layers_and_objects">Capas y objetos visibles</string>
+    <string name="astro_black_holes">Agujeros negros</string>
+    <string name="astro_constellation">Constelación</string>
+    <string name="astro_constellations">Constelaciones</string>
+    <string name="astro_stars">Estrellas</string>
+    <string name="astro_galaxies">Galaxias</string>
+    <string name="astro_name_sun">Sol</string>
+    <string name="astro_name_moon">Luna</string>
+    <string name="astro_name_mercury">Mercurio</string>
+    <string name="astro_name_venus">Venus</string>
+    <string name="astro_name_mars">Marte</string>
+    <string name="astro_name_jupiter">Júpiter</string>
+    <string name="astro_name_saturn">Saturno</string>
+    <string name="astro_name_uranus">Urano</string>
+    <string name="astro_name_neptune">Neptuno</string>
+    <string name="astro_name_pluto">Plutón</string>
+    <string name="astro_planets">Planetas</string>
+    <string name="group_sensors">Sensores</string>
+    <string name="year_of_creation">Año de creación</string>
+    <string name="month_year_creation">Mes y año de creación</string>
+    <string name="no_date">Sin fecha</string>
+    <string name="group_general">Generales</string>
+    <string name="organize_by">Organizar por</string>
+    <string name="group_date_time">Fecha y hora</string>
+    <string name="group_altitude_elevation">Altitud y elevación</string>
+    <string name="avg_speed">Vel. promedio</string>
+    <string name="organize_by_max_speed">Vel. máxima</string>
+    <string name="organize_by_max_altitude">Altitud máxima</string>
+    <string name="shared_string_azimuth">Acimut</string>
+    <string name="vehicle_metrics_chart_category">Métricas vehiculares</string>
+    <string name="delete_folder_description">¿Quiere eliminar la carpeta «%1$s»?</string>
+    <string name="enable_3d_objects">Edificios en 3D</string>
+    <string name="nearest_city">Ciudad más próxima</string>
 </resources>

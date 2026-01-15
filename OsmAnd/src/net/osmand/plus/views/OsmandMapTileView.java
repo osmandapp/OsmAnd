@@ -2028,6 +2028,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		boolean wasInTiltMode = multiTouchSupport != null && multiTouchSupport.isInTiltMode();
+        boolean wasZoomingAndRotating = multiTouchSupport != null && multiTouchSupport.isZoomingAndRotating();
 		boolean isMultiTouch = multiTouchSupport != null && multiTouchSupport.onTouchEvent(event);
 
 		MeasurementToolLayer layer = getMeasurementToolLayer();
@@ -2064,7 +2065,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 				} else if (primaryClear) {
 					// Use map location of second touch for map gestures
-					if (wasInTiltMode && !multiTouchSupport.isInTiltMode()) {
+					if (wasInTiltMode && !multiTouchSupport.isInTiltMode() || !wasZoomingAndRotating) {
 						PointF touchPoint = multiTouchSupport.getSecondPoint();
 						findSecondTouchMapLocation(touchPoint.x, touchPoint.y);
 					}
@@ -2188,7 +2189,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private float x2;
 		private float y2;
 		private LatLon initialCenterLatLon;
-		private PointI initialCenterTile;
+		private PointI initialFirstLocation;
 		private boolean startRotating;
 		private boolean startZooming;
 		private float initialElevation;
@@ -2344,6 +2345,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 		}
 
+        @Override
+        public boolean isZoomingAndRotating() {
+            return startRotating && startZooming;
+        }
+
 		@Override
 		public void onZoomStarted(PointF centerPoint) {
 			initialMultiTouchCenterPoint = centerPoint;
@@ -2351,15 +2357,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			MapRendererView mapRenderer = getMapRenderer();
 			// Remember the tile31 under the pinch center so we can re-center later
 			if (isPinchZoomMagnificationEnabled && mapRenderer != null) {
-				PointI elevatedTile = NativeUtilities.get31FromElevatedPixel(mapRenderer, (int) initialMultiTouchCenterPoint.x,
-						(int) initialMultiTouchCenterPoint.y);
-				if (elevatedTile != null) {
-					initialCenterTile = elevatedTile;
+				PointI elevatedLocation = NativeUtilities.get31FromElevatedPixel(mapRenderer, (int) x1,	(int) y1);
+				if (elevatedLocation != null) {
+					initialFirstLocation = elevatedLocation;
 				} else {
 					// Fallback if elevated lookup fails
-					initialCenterTile = new PointI();
-					mapRenderer.getLocationFromScreenPoint(new PointI((int) initialMultiTouchCenterPoint.x,
-							(int) initialMultiTouchCenterPoint.y), initialCenterTile);
+                    initialFirstLocation = new PointI();
+					mapRenderer.getLocationFromScreenPoint(new PointI((int) x1,	(int) y1), initialFirstLocation);
 				}
 			}
 			initialCenterLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport,
@@ -2389,20 +2393,26 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 			if (deltaZoom != 0 || relAngle != 0) {
 				if (isPinchZoomMagnificationEnabled && relativeToStart > 1.0 && mapRenderer != null ) {
+                    int multiTouchFirstX;
+                    int multiTouchFirstY;
 					int multiTouchCenterX;
 					int multiTouchCenterY;
 					if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()) {
 						multiTouchCenterX = (int) multiTouchSupport.getCenterPoint().x;
 						multiTouchCenterY = (int) multiTouchSupport.getCenterPoint().y;
+                        multiTouchFirstX = (int) multiTouchSupport.getFirstPoint().x;
+                        multiTouchFirstY = (int) multiTouchSupport.getFirstPoint().y;
 					} else {
 						multiTouchCenterX = (int) initialMultiTouchCenterPoint.x;
 						multiTouchCenterY = (int) initialMultiTouchCenterPoint.y;
+                        multiTouchFirstX = (int) x1;
+                        multiTouchFirstY = (int) y1;
 					}
 					// Scale and shift around the pinch center
 					mapRenderer.setViewportScale(relativeToStart, false);
-					mapRenderer.setViewportShift(multiTouchCenterX, view.getHeight() - multiTouchCenterY,  false);
+					mapRenderer.setViewportShift(multiTouchFirstX, view.getHeight() - multiTouchFirstY,  false);
 					// Re-center so the same initial tile stays under the finger
-					mapRenderer.setMapTarget(new PointI(multiTouchCenterX, multiTouchCenterY), initialCenterTile);
+					mapRenderer.setMapTarget(new PointI(multiTouchFirstX, multiTouchFirstY), initialFirstLocation);
 					float calcRotate = initialViewport.getRotate() + relAngle;
 					rotateToAnimate(calcRotate, multiTouchCenterX, multiTouchCenterY);
 					refreshMap();

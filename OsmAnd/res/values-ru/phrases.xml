@@ -923,7 +923,7 @@
     <string name="poi_denomination_old_believers">Старообрядчество</string>
     <string name="poi_denomination_serbian_orthodox">Сербское православие</string>
     <string name="poi_denomination_spiritist">Спиритизм</string>
-    <string name="poi_denomination_armenian_apostolic">Армянская апостольская церковь</string>
+    <string name="poi_denomination_armenian_apostolic">Армянский апостольский</string>
     <string name="poi_leaf_type_broadleaved">Широколиственная растительность</string>
     <string name="poi_leaf_type_needleleaved">Хвойная растительность</string>
     <string name="poi_leaf_type_mixed">Смешанного типа</string>
@@ -1763,9 +1763,9 @@
     <string name="poi_denomination_united_methodist">Объединённая методистская церковь</string>
     <string name="poi_denomination_congregational">Конгрегационная церковь</string>
     <string name="poi_denomination_dutch_reformed">Нидерландская (Голландская) реформатская церковь</string>
-    <string name="poi_denomination_apostolic">Апостольская церковь</string>
+    <string name="poi_denomination_apostolic">Апостольский</string>
     <string name="poi_denomination_latter_day_saints">Церковь Иисуса Христа Святых последних дней</string>
-    <string name="poi_denomination_church_of_christ">Церковь Христа</string>
+    <string name="poi_denomination_church_of_christ">Церковь Христа (конфессия)</string>
     <string name="poi_denomination_united_church_of_christ">Объединённая Церковь Христа</string>
     <string name="poi_denomination_georgian_orthodox">Грузинское православие</string>
     <string name="poi_denomination_scientist">Сайентизм</string>
@@ -4745,4 +4745,12 @@
     <string name="poi_bail_bond_agent">Агент по внесению залога</string>
     <string name="poi_harbour_master">Начальник порта</string>
     <string name="poi_memorial_type">Тип мемориала</string>
+    <string name="poi_international_organization">Международная организация</string>
+    <string name="poi_construction_company">Строительная компания</string>
+    <string name="poi_christian_church">Христианская церковь</string>
+    <string name="poi_apostolic_church">Апостольская церковь</string>
+    <string name="poi_church_of_christ">Церковь Христа</string>
+    <string name="poi_armenian_apostolic_church">Армянская апостольская церковь</string>
+    <string name="poi_new_apostolic_church">Новая апостольская церковь</string>
+    <string name="poi_ukrainian_greek_catholic_church">Украинская грекокатолическая церковь</string>
 </resources>

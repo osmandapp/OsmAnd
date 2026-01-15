@@ -5855,4 +5855,22 @@
     <string name="shared_string_azimuth">Azimut</string>
     <string name="shared_string_magnitude">Magnitude</string>
     <string name="gpx_too_many_points_visible_warning">L\'affichage sur la carte d\'un grand nombre de traces GPX provoque une utilisation élevée de la mémoire</string>
+    <string name="sort_highest_first">Le plus élevé en premier</string>
+    <string name="sort_lowest_first">Le plus bas en premier</string>
+    <string name="no_date">Aucune date</string>
+    <string name="shared_string_step">Étape</string>
+    <string name="set_step_size_summary">Choisissez une taille de pas pour regrouper vos pistes.</string>
+    <string name="set_step_size">Définir la taille du pas</string>
+    <string name="organize_by_summary">Organisez automatiquement vos pistes en groupes en fonction d\'un paramètre sélectionné comme l\'activité, la vitesse ou la localisation.</string>
+    <string name="organize_by">Organiser par</string>
+    <string name="group_general">Général</string>
+    <string name="group_date_time">Date &amp; Heure</string>
+    <string name="group_altitude_elevation">Altitude et élévation</string>
+    <string name="group_sensors">Capteurs</string>
+    <string name="year_of_creation">Année de création</string>
+    <string name="month_year_creation">Mois et année de création</string>
+    <string name="nearest_city">Ville la plus proche</string>
+    <string name="avg_speed">Vitesse moyenne</string>
+    <string name="organize_by_max_speed">Vitesse maximale</string>
+    <string name="organize_by_max_altitude">Altitude maximale</string>
 </resources>

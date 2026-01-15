@@ -13,9 +13,9 @@
 		android:minHeight="60dp"
 		android:orientation="vertical"
 		android:paddingStart="@dimen/content_padding"
-		android:paddingTop="@dimen/content_padding_half"
+		android:paddingTop="@dimen/content_padding_small"
 		android:paddingEnd="@dimen/content_padding"
-		android:paddingBottom="@dimen/content_padding_half">
+		android:paddingBottom="@dimen/content_padding_small">
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -37,13 +37,13 @@
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
+				android:layout_marginEnd="@dimen/content_padding_half"
 				android:orientation="vertical">
 
 				<TextView
 					android:id="@+id/title"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginEnd="@dimen/content_padding"
 					android:ellipsize="end"
 					android:maxLines="2"
 					android:textColor="?android:textColorPrimary"
@@ -84,8 +84,8 @@
 							android:id="@+id/dot_divider"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_marginLeft="4dp"
-							android:layout_marginRight="4dp"
+							android:layout_marginLeft="@dimen/content_padding_small_half"
+							android:layout_marginRight="@dimen/content_padding_small_half"
 							android:text="•"
 							android:textColor="?android:textColorSecondary"
 							android:textSize="@dimen/default_desc_text_size"
@@ -97,6 +97,8 @@
 						android:id="@+id/subtitle"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:maxLines="1"
+						android:ellipsize="end"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
 						tools:text="City" />
@@ -110,7 +112,6 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
-				android:layout_marginEnd="8dp"
 				android:background="?attr/activity_background_color">
 
 				<ImageView
@@ -118,7 +119,17 @@
 					android:layout_width="@dimen/nearby_place_error_image_size"
 					android:layout_height="@dimen/nearby_place_error_image_size"
 					android:layout_gravity="center"
-					android:scaleType="fitCenter" />
+					android:scaleType="fitCenter"/>
+
+				<net.osmand.plus.mapcontextmenu.other.TrimToBackgroundTextView
+					android:id="@+id/shieldSign"
+					android:layout_gravity="end|center_vertical"
+					android:gravity="center"
+					android:padding="0dp"
+					android:layout_width="72dp"
+					android:maxLines="1"
+					android:textSize="16sp"
+					android:layout_height="36dp"/>
 			</FrameLayout>
 
 		</LinearLayout>
@@ -150,8 +161,8 @@
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/time_icon"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
+					android:layout_width="12dp"
+					android:layout_height="12dp"
 					android:layout_gravity="center_vertical"
 					android:layout_marginEnd="@dimen/gpx_small_icon_margin"
 					android:layout_marginRight="@dimen/gpx_small_icon_margin"

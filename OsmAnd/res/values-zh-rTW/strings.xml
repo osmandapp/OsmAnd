@@ -5774,4 +5774,23 @@
     <string name="shared_string_magnitude">星等</string>
     <string name="astro_rise">升</string>
     <string name="astro_set">沉</string>
+    <string name="gpx_too_many_points_visible_warning">大量可見的 GPX 軌跡會導致記憶體使用量過高</string>
+    <string name="sort_highest_first">最高的優先</string>
+    <string name="sort_lowest_first">最低的優先</string>
+    <string name="no_date">沒有資料</string>
+    <string name="shared_string_step">步進</string>
+    <string name="set_step_size_summary">請選擇軌跡的分組間距。</string>
+    <string name="set_step_size">設定間距</string>
+    <string name="organize_by_summary">根據您選取的參數（例如活動類型、速度或位置），自動將您的路線分組整理。</string>
+    <string name="organize_by">按以下方式整理：</string>
+    <string name="group_general">一般</string>
+    <string name="group_date_time">日期與時間</string>
+    <string name="group_altitude_elevation">海拔高度與標高</string>
+    <string name="group_sensors">感應器</string>
+    <string name="year_of_creation">建立年份</string>
+    <string name="month_year_creation">建立年月</string>
+    <string name="nearest_city">最近的城市</string>
+    <string name="avg_speed">平均速度</string>
+    <string name="organize_by_max_speed">最高速度</string>
+    <string name="organize_by_max_altitude">最高海拔</string>
 </resources>

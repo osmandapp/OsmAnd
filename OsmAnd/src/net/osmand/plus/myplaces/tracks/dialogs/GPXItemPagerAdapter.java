@@ -1,5 +1,8 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask.getDefaultTypes;
+import static net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask.getSavedSupportedTypes;
+import static net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask.limit;
 import static net.osmand.shared.gpx.GpxParameter.JOIN_SEGMENTS;
 import static net.osmand.plus.charts.ChartUtils.CHART_LABEL_COUNT;
 import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
@@ -41,6 +44,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import net.osmand.plus.charts.ElevationChartAppearance;
 import net.osmand.plus.charts.GpxMarkerView;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.shared.gpx.GpxFile;
@@ -457,7 +461,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 					if (selectedMainSetTypes.size() > 1) {
 						secondType = selectedMainSetTypes.get(1);
 					}
-				} else {
+				} else if (analysis.hasSpeedData()) {
 					secondType = SPEED;
 				}
 				setupChartWithAppearance(chart);
@@ -1024,19 +1028,23 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	void openAnalyzeOnMap(GPXTabItemType tabType) {
 		List<ILineDataSet> dataSets = getDataSets(null, tabType, null, null);
-		prepareGpxItemChartTypes(gpxItem, dataSets);
+		prepareGpxItemChartTypes(gpxItem, dataSets, app.getSettings());
 		actionsListener.openAnalyzeOnMap(gpxItem);
 	}
 
-	public static void prepareGpxItemChartTypes(GpxDisplayItem gpxItem, List<ILineDataSet> dataSets) {
+	public static void prepareGpxItemChartTypes(GpxDisplayItem gpxItem, List<ILineDataSet> dataSets, OsmandSettings settings) {
+		List<GPXDataSetType> result = getSavedSupportedTypes(gpxItem, settings);
+
+		if (Algorithms.isEmpty(result)) {
+			result = getDefaultTypes(gpxItem.analysis);
+		}
+
+		if (!Algorithms.isEmpty(result)) {
+			gpxItem.chartTypes = limit(result).toArray(new GPXDataSetType[0]);
+		}
+
 		WptPt wpt = null;
-		gpxItem.chartTypes = null;
-		if (dataSets != null && dataSets.size() > 0) {
-			gpxItem.chartTypes = new GPXDataSetType[dataSets.size()];
-			for (int i = 0; i < dataSets.size(); i++) {
-				OrderedLineDataSet orderedDataSet = (OrderedLineDataSet) dataSets.get(i);
-				gpxItem.chartTypes[i] = orderedDataSet.getDataSetType();
-			}
+		if (dataSets != null) {
 			if (gpxItem.chartHighlightPos != -1) {
 				TrkSegment segment = getSegmentForAnalysis(gpxItem, gpxItem.analysis);
 				if (segment != null) {
