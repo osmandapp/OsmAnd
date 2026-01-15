@@ -5970,7 +5970,7 @@
     <string name="organize_by_summary">Automaticky organizujte své stopy do skupin podle vybraného parametru, jako je aktivita, rychlost nebo poloha.</string>
     <string name="organize_by">Organizovat podle</string>
     <string name="group_general">Obecné</string>
-    <string name="group_date_time">Datum &amp; čas</string>
+    <string name="group_date_time">Datum a čas</string>
     <string name="group_sensors">Snímače</string>
     <string name="year_of_creation">Rok vytvoření</string>
     <string name="month_year_creation">Měsíc a rok vytvoření</string>
@@ -5978,4 +5978,8 @@
     <string name="avg_speed">Průměrná rychlost</string>
     <string name="organize_by_max_speed">Maximální rychlost</string>
     <string name="organize_by_max_altitude">Maximální výška</string>
+    <string name="shared_string_step">Krok</string>
+    <string name="set_step_size_summary">Vyberte velikost kroku pro seskupení vašich tras.</string>
+    <string name="set_step_size">Nastavit velikost kroku</string>
+    <string name="group_altitude_elevation">Nadmořská výška a převýšení</string>
 </resources>
