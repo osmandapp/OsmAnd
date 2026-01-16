@@ -250,7 +250,7 @@
     <string name="map_widget_bearing">Курсовой угол</string>
     <string name="map_mode">Режим карты</string>
     <string name="rendering_value_thin_name">Тонкая</string>
-    <string name="rendering_value_medium_name">Средний</string>
+    <string name="rendering_value_medium_name">Средняя</string>
     <string name="rendering_value_bold_name">Толстая</string>
     <string name="select_map_markers">Выберите маркеры</string>
     <string name="shared_string_topbar">Верхняя панель</string>
