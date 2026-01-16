@@ -5967,12 +5967,12 @@
     <string name="astro_rise">Aufgang</string>
     <string name="astro_set">Untergang</string>
     <string name="gpx_too_many_points_visible_warning">Große Anzahl sichtbarer GPX-Wege führt zu hohem Speicherverbrauch</string>
-    <string name="sort_lowest_first">Aufsteigend</string>
-    <string name="no_date">Ohne Datum</string>
-    <string name="sort_highest_first">Absteigend</string>
+    <string name="sort_lowest_first">Niedrigste zuerst</string>
+    <string name="no_date">Kein Datum</string>
+    <string name="sort_highest_first">Höchste zuerst</string>
     <string name="organize_by_summary">Tracks automatisch in Gruppen anordnen, die auf einem ausgewählten Parameter wie Aktivität, Geschwindigkeit oder Ort basieren.</string>
     <string name="organize_by">Anordnen nach</string>
-    <string name="shared_string_step"></string>
+    <string name="shared_string_step">Schritt</string>
     <string name="organize_by_max_altitude">Max. Höhe</string>
     <string name="organize_by_max_speed">Höchstgeschwindigkeit</string>
     <string name="avg_speed">Durchschnittsgeschwindigkeit</string>
@@ -5982,5 +5982,6 @@
     <string name="group_sensors">Sensoren</string>
     <string name="group_altitude_elevation">Höhe und Erhebung</string>
     <string name="group_date_time">Datum &amp; Uhrzeit</string>
-    <string name="group_general">Allgemeines</string>
+    <string name="group_general">Allgemein</string>
+    <string name="set_step_size">Schrittgröße festlegen</string>
 </resources>
