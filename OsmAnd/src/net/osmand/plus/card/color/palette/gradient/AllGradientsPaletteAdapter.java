@@ -1,15 +1,18 @@
 package net.osmand.plus.card.color.palette.gradient;
 
+import static android.graphics.Typeface.BOLD;
 import static net.osmand.IndexConstants.TXT_EXT;
-import static net.osmand.plus.card.color.palette.gradient.AllGradientsPaletteAdapter.GradientViewHolder;
 import static net.osmand.plus.helpers.ColorPaletteHelper.GRADIENT_ID_SPLITTER;
 import static net.osmand.plus.helpers.ColorPaletteHelper.ROUTE_PREFIX;
+import static net.osmand.plus.utils.UiUtilities.createSpannableString;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +28,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.card.color.palette.gradient.AllGradientsPaletteAdapter.GradientViewHolder;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
+import net.osmand.plus.helpers.ColorPaletteHelper;
 import net.osmand.plus.plugins.srtm.TerrainMode;
 import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -45,6 +52,7 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 
 	private final OsmandApplication app;
 	private final GradientColorsPaletteController controller;
+	private final ColorPaletteHelper colorPaletteHelper;
 	private List<PaletteColor> colors;
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
@@ -54,6 +62,7 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 		this.app = app;
 		this.nightMode = nightMode;
 		this.controller = controller;
+		this.colorPaletteHelper = app.getColorPaletteHelper();
 		this.colors = controller.getColors(PaletteSortingMode.LAST_USED_TIME);
 		this.themedInflater = UiUtilities.getInflater(context, nightMode);
 		setHasStableIds(true);
@@ -107,7 +116,43 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 		notifyDataSetChanged();
 	}
 
-	public static class GradientViewHolder extends RecyclerView.ViewHolder {
+	public void duplicatePalette(@NonNull Object gradientType, @NonNull String fileName) {
+		colorPaletteHelper.duplicateGradient(fileName, duplicated -> {
+			if (duplicated) {
+				reloadGradientColors(gradientType);
+			}
+		});
+	}
+
+	public void showDeleteDialog(@NonNull Context ctx, @NonNull String paletteName,
+	                             @NonNull Object gradientType, @NonNull String fileName) {
+		int warningColor = ColorUtilities.getColor(app, R.color.deletion_color_warning);
+		int textColor = ColorUtilities.getSecondaryTextColor(ctx, nightMode);
+
+		AlertDialogData dialogData = new AlertDialogData(ctx, nightMode)
+				.setTitle(ctx.getString(R.string.delete_palette))
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.setPositiveButton(R.string.shared_string_delete, ((dialog, which) -> colorPaletteHelper.deleteGradient(fileName, deleted -> {
+					if (deleted) {
+						reloadGradientColors(gradientType);
+					}
+				})))
+				.setPositiveButtonTextColor(warningColor);
+
+		String description = ctx.getString(R.string.delete_colors_palette_dialog_summary, paletteName);
+		SpannableString spannable = createSpannableString(description, BOLD, paletteName);
+		UiUtilities.setSpan(spannable, new ForegroundColorSpan(textColor), description, description);
+		CustomAlert.showSimpleMessage(dialogData, spannable);
+	}
+
+	private void reloadGradientColors(@NonNull Object gradientType) {
+		if (gradientType instanceof TerrainType) {
+			TerrainMode.reloadTerrainMods(app);
+		}
+		controller.reloadGradientColors();
+	}
+
+	public class GradientViewHolder extends RecyclerView.ViewHolder {
 		private final OsmandApplication app;
 		private final GradientColorsPaletteController controller;
 		public final AppCompatRadioButton radioButton;
@@ -147,7 +192,7 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 				gradientDrawable.setCornerRadius(AndroidUtils.dpToPx(app, 2));
 				icon.setImageDrawable(gradientDrawable);
 
-				String titleString = Algorithms.capitalizeFirstLetter(gradientColor.getPaletteName()).replace("_", " ");
+				String titleString = gradientColor.getDisplayName();
 				title.setText(titleString);
 
 				StringBuilder descriptionBuilder = new StringBuilder();
@@ -169,10 +214,11 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 			}
 		}
 
-		private void setupMenuButton(@NonNull PaletteGradientColor gradientColor, boolean nightMode, boolean isSelected){
+		private void setupMenuButton(@NonNull PaletteGradientColor gradientColor, boolean nightMode, boolean isSelected) {
 			Object gradientType = controller.getGradientType();
 			boolean isDefaultColor;
-			String colorPaletteFileName;
+			String paletteName;
+			String fileName;
 
 			if (gradientType instanceof TerrainType) {
 				TerrainMode terrainMode = TerrainMode.getMode((TerrainType) gradientType, gradientColor.getPaletteName());
@@ -180,38 +226,34 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 					menuButton.setVisibility(View.GONE);
 					return;
 				}
-				colorPaletteFileName = terrainMode.getMainFile();
+				paletteName = terrainMode.getKeyName();
+				fileName = terrainMode.getMainFile();
 				isDefaultColor = terrainMode.isDefaultMode();
 			} else {
-				colorPaletteFileName = ROUTE_PREFIX + gradientColor.getTypeName() + GRADIENT_ID_SPLITTER + gradientColor.getPaletteName() + TXT_EXT;
+				paletteName = gradientColor.getPaletteName();
+				fileName = ROUTE_PREFIX + gradientColor.getTypeName() + GRADIENT_ID_SPLITTER + paletteName + TXT_EXT;
 				isDefaultColor = gradientColor.getPaletteName().equals(PaletteGradientColor.DEFAULT_NAME);
 			}
 
 			menuButton.setVisibility(View.VISIBLE);
-			menuButton.setOnClickListener(view -> showItemOptionsMenu(gradientType, colorPaletteFileName, isDefaultColor, view, nightMode, isSelected));
+			menuButton.setOnClickListener(view -> showItemOptionsMenu(gradientType, paletteName, fileName, isDefaultColor, view, nightMode, isSelected));
 		}
 
-		public void showItemOptionsMenu(@NonNull Object gradientType, @NonNull String colorPaletteFileName, boolean isDefaultColor, @NonNull View view, boolean nightMode, boolean isSelected) {
+		public void showItemOptionsMenu(@NonNull Object gradientType, @NonNull String paletteName,
+		                                @NonNull String fileName, boolean isDefaultColor,
+		                                @NonNull View view, boolean nightMode, boolean isSelected) {
 			List<PopUpMenuItem> items = new ArrayList<>();
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_duplicate)
 					.setIcon(getContentIcon(R.drawable.ic_action_copy))
-					.setOnClickListener(v -> app.getColorPaletteHelper().duplicateGradient(colorPaletteFileName, duplicated -> {
-						if (duplicated) {
-							reloadGradientColors(gradientType);
-						}
-					}))
+					.setOnClickListener(v -> duplicatePalette(gradientType, fileName))
 					.create());
 
 			if (!isDefaultColor && !isSelected) {
 				items.add(new PopUpMenuItem.Builder(app)
 						.setTitleId(R.string.shared_string_remove)
 						.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
-						.setOnClickListener(item -> app.getColorPaletteHelper().deleteGradient(colorPaletteFileName, deleted -> {
-							if (deleted) {
-								reloadGradientColors(gradientType);
-							}
-						}))
+						.setOnClickListener(item -> showDeleteDialog(view.getContext(), paletteName, gradientType, fileName))
 						.create());
 			}
 
@@ -220,13 +262,6 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 			displayData.menuItems = items;
 			displayData.nightMode = nightMode;
 			PopUpMenu.show(displayData);
-		}
-
-		private void reloadGradientColors(@NonNull Object gradientType) {
-			if (gradientType instanceof TerrainType) {
-				TerrainMode.reloadTerrainMods(app);
-			}
-			controller.reloadGradientColors();
 		}
 
 		@Nullable

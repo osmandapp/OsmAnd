@@ -2,7 +2,6 @@ package net.osmand.plus.helpers;
 
 import static net.osmand.IndexConstants.TXT_EXT;
 
-import android.os.AsyncTask;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;

@@ -4,7 +4,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -74,7 +73,7 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 		int labelsColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int xAxisGridColor = AndroidUtils.getColorFromAttr(app, R.attr.chart_x_grid_line_axis_color);
 
-		ChartUtils.setupGradientChart(getMyApplication(), chart, 9, 24, false, xAxisGridColor, labelsColor);
+		ChartUtils.setupGradientChart(app, chart, 9, 24, false, xAxisGridColor, labelsColor);
 		Object gradientType = controller.gradientCollection.getGradientType();
 		IAxisValueFormatter formatter = GradientUiHelper.getGradientTypeFormatter(app, gradientType, controller.analysis);
 

@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="delete_palette">Delete palette</string>
+    <string name="delete_colors_palette_dialog_summary">Are you sure you want to delete %1$s palette?</string>
     <string name="sort_highest_first">Highest first</string>
     <string name="sort_lowest_first">Lowest first</string>
     <string name="no_date">No date</string>

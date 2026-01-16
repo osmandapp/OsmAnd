@@ -7,6 +7,8 @@ import net.osmand.ColorPalette.ColorValue;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
+import java.util.Objects;
+
 public class PaletteColor {
 
 	private final long id;
@@ -61,11 +63,8 @@ public class PaletteColor {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof PaletteColor)) return false;
-
-		PaletteColor that = (PaletteColor) o;
-
-		return getId().equals(that.getId());
+		if (!(o instanceof PaletteColor that)) return false;
+		return Objects.equals(getId(), that.getId());
 	}
 
 	@Override

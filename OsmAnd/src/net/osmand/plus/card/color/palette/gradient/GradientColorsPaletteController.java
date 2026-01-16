@@ -122,7 +122,7 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 		return result;
 	}
 
-	public Object getGradientType(){
+	public Object getGradientType() {
 		return gradientCollection.getGradientType();
 	}
 

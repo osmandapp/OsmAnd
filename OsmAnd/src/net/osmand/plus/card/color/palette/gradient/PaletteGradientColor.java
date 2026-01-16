@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.shared.ColorPalette;
+import net.osmand.util.Algorithms;
 
 import java.util.Objects;
 
@@ -48,6 +49,10 @@ public class PaletteGradientColor extends PaletteColor {
 		return typeName;
 	}
 
+	public String getDisplayName() {
+		return Algorithms.capitalizeFirstLetter(paletteName.replace("_", " "));
+	}
+
 	@NonNull
 	public String getPaletteName() {
 		return paletteName;
@@ -61,8 +66,7 @@ public class PaletteGradientColor extends PaletteColor {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof PaletteGradientColor)) return false;
-		PaletteGradientColor that = (PaletteGradientColor) o;
+		if (!(o instanceof PaletteGradientColor that)) return false;
 		return Objects.equals(getStringId(), that.getStringId());
 	}
 

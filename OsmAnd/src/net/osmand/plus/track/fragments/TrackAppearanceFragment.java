@@ -478,8 +478,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		if (paletteColor instanceof PaletteGradientColor) {
-			PaletteGradientColor paletteGradientColor = (PaletteGradientColor) paletteColor;
+		if (paletteColor instanceof PaletteGradientColor paletteGradientColor) {
 			trackDrawInfo.setGradientColorName(paletteGradientColor.getPaletteName());
 			refreshMap();
 		} else {
