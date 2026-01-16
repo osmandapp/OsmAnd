@@ -124,7 +124,7 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 		});
 	}
 
-	public void showDeleteDialog(@NonNull Context ctx, @NonNull String paletteName,
+	public void showDeleteDialog(@NonNull Context ctx, @NonNull String displayName,
 	                             @NonNull Object gradientType, @NonNull String fileName) {
 		int warningColor = ColorUtilities.getColor(app, R.color.deletion_color_warning);
 		int textColor = ColorUtilities.getSecondaryTextColor(ctx, nightMode);
@@ -139,8 +139,8 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 				})))
 				.setPositiveButtonTextColor(warningColor);
 
-		String description = ctx.getString(R.string.delete_colors_palette_dialog_summary, paletteName);
-		SpannableString spannable = createSpannableString(description, BOLD, paletteName);
+		String description = ctx.getString(R.string.delete_colors_palette_dialog_summary, displayName);
+		SpannableString spannable = createSpannableString(description, BOLD, displayName);
 		UiUtilities.setSpan(spannable, new ForegroundColorSpan(textColor), description, description);
 		CustomAlert.showSimpleMessage(dialogData, spannable);
 	}
@@ -217,7 +217,7 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 		private void setupMenuButton(@NonNull PaletteGradientColor gradientColor, boolean nightMode, boolean isSelected) {
 			Object gradientType = controller.getGradientType();
 			boolean isDefaultColor;
-			String paletteName;
+			String displayName;
 			String fileName;
 
 			if (gradientType instanceof TerrainType) {
@@ -226,20 +226,20 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 					menuButton.setVisibility(View.GONE);
 					return;
 				}
-				paletteName = terrainMode.getKeyName();
+				displayName = terrainMode.getKeyName();
 				fileName = terrainMode.getMainFile();
 				isDefaultColor = terrainMode.isDefaultMode();
 			} else {
-				paletteName = gradientColor.getPaletteName();
-				fileName = ROUTE_PREFIX + gradientColor.getTypeName() + GRADIENT_ID_SPLITTER + paletteName + TXT_EXT;
+				displayName = gradientColor.getDisplayName();
+				fileName = ROUTE_PREFIX + gradientColor.getTypeName() + GRADIENT_ID_SPLITTER + displayName + TXT_EXT;
 				isDefaultColor = gradientColor.getPaletteName().equals(PaletteGradientColor.DEFAULT_NAME);
 			}
 
 			menuButton.setVisibility(View.VISIBLE);
-			menuButton.setOnClickListener(view -> showItemOptionsMenu(gradientType, paletteName, fileName, isDefaultColor, view, nightMode, isSelected));
+			menuButton.setOnClickListener(view -> showItemOptionsMenu(gradientType, displayName, fileName, isDefaultColor, view, nightMode, isSelected));
 		}
 
-		public void showItemOptionsMenu(@NonNull Object gradientType, @NonNull String paletteName,
+		public void showItemOptionsMenu(@NonNull Object gradientType, @NonNull String displayName,
 		                                @NonNull String fileName, boolean isDefaultColor,
 		                                @NonNull View view, boolean nightMode, boolean isSelected) {
 			List<PopUpMenuItem> items = new ArrayList<>();
@@ -253,7 +253,7 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 				items.add(new PopUpMenuItem.Builder(app)
 						.setTitleId(R.string.shared_string_remove)
 						.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
-						.setOnClickListener(item -> showDeleteDialog(view.getContext(), paletteName, gradientType, fileName))
+						.setOnClickListener(item -> showDeleteDialog(view.getContext(), displayName, gradientType, fileName))
 						.create());
 			}
 
