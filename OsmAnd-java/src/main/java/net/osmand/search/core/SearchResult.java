@@ -265,10 +265,6 @@ public class SearchResult {
 		if (searchPhraseNames.size() == localResultNames.size()) {
 			cnt.allWordsEqual = true;
 		}
-		String fullSearchPhrase = requiredSearchPhrase.getFullSearchPhrase();
-		if (requiredSearchPhrase.getCollator().equals(fullSearchPhrase, name)) {
-			cnt.allWordsEqual = true;
-		}
 		cnt.allWordsInPhraseAreInResult = true;
 		return true;
 	}
