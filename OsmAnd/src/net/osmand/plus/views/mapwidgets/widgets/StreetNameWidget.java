@@ -348,7 +348,8 @@ public class StreetNameWidget extends MapWidget {
 		if (!previousShields.isEmpty()) {
 			String currentLabel = currentShield.getValue();
 			Map<String, String> currentTags = getShieldTagsMap(currentShield.getAdditional().toString());
-			String currentColorKey = currentShield.getTag().replace("_ref", "_shield_color");  // "route_road_1_ref" -> "route_road_1_shield_color"
+			// "route_road_1_ref"  ->  "route_road_1_shield_color"
+			String currentColorKey = currentShield.getTag().replace("_ref", "_shield_color");
 			String currentColor = currentTags.get(currentColorKey);
 
 			for (RoadShield previousShield : previousShields) {
@@ -366,10 +367,15 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	private static Map<String, String> getShieldTagsMap(String tagsString) {
+		// convert String "tag1=val1;tag2=val2;"  to  Map {tag1: val1, tag2: val2}
 		Map<String, String> map = new LinkedHashMap<>();
-		for (String e : tagsString.split(";")) {
-			int i = e.indexOf('=');
-			if (i > 0) map.put(e.substring(0, i), e.substring(i + 1));
+		for (String tagValue : tagsString.split(";")) {
+			int index = tagValue.indexOf('=');
+			if (index > 0) {
+				String key = tagValue.substring(0, index);
+				String value = tagValue.substring(index + 1);
+				map.put(key, value);
+			}
 		}
 		return map;
 	}
