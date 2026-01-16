@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -142,7 +143,11 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 			DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, surfaceRenderer.getDensity());
 
 			alarmWidget.updateInfo(drawSettings, true);
-			speedometerWidget.updateInfo(drawSettings, true, drawSettings.isNightMode());
+			try {
+				speedometerWidget.updateInfo(drawSettings, true, drawSettings.isNightMode());
+			} catch (Throwable e) {
+				Log.d("Corwin", "onFrameRendered: ");
+			}
 
 			Bitmap alarmBitmap = alarmWidget.getWidgetBitmap();
 			Bitmap speedometerBitmap = speedometerWidget.getWidgetBitmap();

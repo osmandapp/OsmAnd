@@ -380,7 +380,7 @@ public class SpeedometerWidget {
 				AndroidUiHelper.updateVisibility(view, false);
 			}
 			setSpeedLimitDescription();
-			updateTextColor(animationDrawable.getProgress());
+			updateTextColor(animationDrawable != null ? animationDrawable.getProgress() : 0);
 			if (drawBitmap) {
 				if (isChanged) {
 					float density = (drawSettings == null || drawSettings.getDensity() == 0) ? 1 : drawSettings.getDensity() * 0.77f;
