@@ -3427,4 +3427,15 @@
     <string name="centimeter">სმ</string>
     <string name="shared_string_centimeters">სანტიმეტრი</string>
     <string name="lang_mi">მაორი</string>
+    <string name="suggested_maps_descr">ეს რუკები აუცილებელია დამატებისთვის.</string>
+    <string name="vessel_width_limit_description">ვიწრო ხიდების თავიდან ასაცილებლად მიუთითეთ ხომალდის სიგანე</string>
+    <string name="unsaved_changes_will_be_lost">შეუნახავი ცვლილებები დაიკარგება. გავაგრძელო?</string>
+    <string name="public_transport_warning_descr_blog">წაიკითხეთ მეტი OsmAnd-ის მარშრუტიზაციის შესახებ ჩვენს ბლოგზე.</string>
+    <string name="quick_action_bug_descr">კომენტარის ველი შეიცავს ამ შეტყობინებას.</string>
+    <string name="start_editing_card_image_text">უფასო მსოფლიო სამოგზაურო გზამკვლევი, რომლის ჩასწორებაც ნებისმიერ მსურველს შეუძლია.</string>
+    <string name="quick_action_contour_lines_descr">ღილაკი რუკაზე კონტურის ხაზების საჩვენებლად, ან დასამალად.</string>
+    <string name="quick_action_transport_descr">ღილაკი რუკაზე საზოგადოებრივი ტრანსპორტის საჩვენებლად ან დასამალად.</string>
+    <string name="quick_action_fav_name_descr">დატოვეთ ცარიელი მისამართის, ან ადგილის დასახელების გამოსაყენებლად.</string>
+    <string name="route_between_points_add_track_desc">აირჩიეთ ტრეკის ფაილი, რომელშიც გსურთ ახალი სეგმენტის დამატება.</string>
+    <string name="quick_action_hillshade_descr">ღილაკი რუკაზე რელიეფის დაჩრდილვის საჩვენებლად ან დასამალად.</string>
 </resources>

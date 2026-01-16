@@ -38,6 +38,5 @@ data class SkyObject(
 		fun isSunSystem(): Boolean {
 			return this == SUN || this == MOON || this == PLANET
 		}
-
 	}
 }

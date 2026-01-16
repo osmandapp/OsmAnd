@@ -124,7 +124,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 			try {
 				String maxValueInDb = app.getGpxDbHelper().getMaxParameterValue(trackFilterType.getProperty());
 				if (!Algorithms.isEmpty(maxValueInDb)) {
-					((RangeTrackFilter) filter).setMaxValue(maxValueInDb);
+					((RangeTrackFilter<?>) filter).setMaxValue(maxValueInDb);
 				}
 			} catch (NumberFormatException error) {
 				LOG.error("Can not parse max value for filter " + trackFilterType, error);

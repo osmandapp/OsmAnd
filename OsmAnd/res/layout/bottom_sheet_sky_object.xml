@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="?attr/bg_color"
     android:paddingBottom="16dp"
-    style="?attr/bottomSheetStyle"
-    app:behavior_peekHeight="320dp"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    android:clickable="true"
+    android:focusable="true">
 
     <com.google.android.material.bottomsheet.BottomSheetDragHandleView
         android:id="@+id/drag_handle"
@@ -21,7 +21,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:paddingEnd="8dp">
 
         <TextView
             android:id="@+id/sheet_title"
@@ -36,6 +36,15 @@
             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/close_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/shared_string_close"
+            android:src="@drawable/ic_action_close"
+            app:tint="?android:attr/textColorSecondary" />
 
     </LinearLayout>
 

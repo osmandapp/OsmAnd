@@ -8,8 +8,6 @@
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
 	android:paddingEnd="@dimen/content_padding_small"
-	android:paddingLeft="@dimen/content_padding"
-	android:paddingRight="@dimen/content_padding_small"
 	android:paddingStart="@dimen/content_padding">
 
 	<androidx.appcompat.widget.AppCompatImageView
@@ -17,7 +15,6 @@
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
-		android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
 		tools:src="@drawable/ic_action_coordinates_latitude"/>
 
 	<TextView
@@ -25,7 +22,6 @@
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_marginEnd="@dimen/content_padding"
-		android:layout_marginRight="@dimen/content_padding"
 		android:layout_weight="1"
 		android:ellipsize="end"
 		android:maxLines="1"
