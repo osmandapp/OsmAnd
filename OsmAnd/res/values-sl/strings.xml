@@ -5140,4 +5140,9 @@
     <string name="weather_source_ecmwf_description">Evropski center za srednjeročne vremenske napovedi (ECMWF)</string>
     <string name="lang_mi">Maorščina</string>
     <string name="vehicle_metrics_chart_category">Mere vozila</string>
+    <string name="sort_highest_first">Najprej najvišji</string>
+    <string name="sort_lowest_first">Najprej najnižji</string>
+    <string name="no_date">Brez datuma</string>
+    <string name="shared_string_step">Korak</string>
+    <string name="set_step_size_summary">Izberite velikost koraka za razvrščanje vaših sledi.</string>
 </resources>
