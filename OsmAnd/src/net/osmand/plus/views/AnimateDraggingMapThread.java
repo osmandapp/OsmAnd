@@ -53,7 +53,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 	public static final int TARGET_NO_ROTATION = -720;
 
 	private static final float TARGET_MOVE_VELOCITY_LIMIT = 4000f;
-	private static final float TARGET_MOVE_DECELERATION = 8000f;
+	private static final float TARGET_MOVE_DECELERATION = 6000f;
 
 	private static final float MIN_INTERPOLATION_TO_JOIN_ANIMATION = 0.8f;
 	private static final float MAX_OX_OY_SUM_DELTA_TO_ANIMATE = 2400f;

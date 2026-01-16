@@ -902,12 +902,14 @@ class GpxTrackAnalysis {
 			if (segLastUp != null) {
 				val upDist = calculateTotalDistanceForSlope(segLastUp, indexes, distances)
 				val upMaxSpeed = calculateMaxSpeedForSlope(segLastUp, segment)
-				this.lastUphill = segLastUp.copy(distance = upDist, maxSpeed = upMaxSpeed)
+                val upMovingTime = calculateMovingTimeForSlope(segLastUp, segment)
+				this.lastUphill = segLastUp.copy(distance = upDist, maxSpeed = upMaxSpeed, movingTime = upMovingTime)
 			}
 			if (segLastDown != null) {
 				val downDist = calculateTotalDistanceForSlope(segLastDown, indexes, distances)
 				val downMaxSpeed = calculateMaxSpeedForSlope(segLastDown, segment)
-				this.lastDownhill = segLastDown.copy(distance = downDist, maxSpeed = downMaxSpeed)
+                val downMovingTime = calculateMovingTimeForSlope(segLastDown, segment)
+				this.lastDownhill = segLastDown.copy(distance = downDist, maxSpeed = downMaxSpeed, movingTime = downMovingTime)
 			}
 		}
 	}
@@ -950,6 +952,38 @@ class GpxTrackAnalysis {
 		}
 		return maxSpeed
 	}
+ 
+    private fun calculateMovingTimeForSlope(
+        slope: ElevationDiffsCalculator.SlopeInfo?,
+        segment: SplitSegment
+    ): Long {
+        if (slope == null) return 0L
+        val startIdx = slope.startPointIndex
+        val endIdx = slope.endPointIndex
+        if (startIdx >= endIdx) return 0L
+        var movingTime = 0L
+        for (i in (startIdx + 1)..endIdx) {
+            val prev = segment[i - 1]
+            val pt = segment[i]
+            val timeSpecified = pt.time != 0L && prev.time != 0L
+            if (!timeSpecified) continue
+            val timeDiffMillis = maxOf(0L, pt.time - prev.time)
+            val timeDiffSec = (timeDiffMillis / 1000).toInt()
+            if (timeDiffSec <= 0) continue
+            var distance = pt.attributes?.distance ?: -1f
+            if (distance < 0f) {
+                distance = KMapUtils.getEllipsoidDistance(prev.lat, prev.lon, pt.lat, pt.lon).toFloat()
+            }
+            var speed = pt.attributes?.speed?.toDouble() ?: pt.speed ?: 0.0
+            if (speed == 0.0) {
+                speed = distance / timeDiffSec.toDouble()
+            }
+            if (speed > 0 && distance > timeDiffMillis / 10000f) {
+                movingTime += timeDiffMillis
+            }
+        }
+        return movingTime
+    }
 
 	private fun getElevationApproximator(segment: SplitSegment): ElevationApproximator {
 		return object : ElevationApproximator() {

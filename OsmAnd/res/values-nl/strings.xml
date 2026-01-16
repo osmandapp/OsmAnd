@@ -625,7 +625,7 @@
     <string name="left_side_navigation">Linksrijdend verkeer</string>
     <string name="left_side_navigation_descr">Activeer in een land waar men links rijdt.</string>
     <string name="unknown_from_location">Vertrekpunt is nog niet bepaald.</string>
-    <string name="confirm_interrupt_download">Downloaden afbreken?</string>
+    <string name="confirm_interrupt_download">Download annuleren?</string>
     <string name="basemap_was_selected_to_download">De basiskaart, nodig voor de goede werking van OsmAnd, is al geselecteerd om te downloaden.</string>
     <string name="map_online_plugin_is_not_installed">Activeer de \'Online Kaarten\' plug-in om andere kaartbronnen te kunnen selecteren</string>
     <string name="map_online_data">Online (raster-) kaarten</string>
@@ -1150,7 +1150,7 @@
     <string name="gpx_selection_points">%1$s \npunten</string>
     <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
     <string name="save_as_favorites_points">Bewaar als groep van favorieten</string>
-    <string name="loading_smth">Laad %1$s…</string>
+    <string name="loading_smth">%1$s wordt geladen…</string>
     <string name="map_widget_plain_time">Huidige tijd</string>
     <string name="select_destination_and_intermediate_points">Instellen bestemmingen</string>
     <string name="layer_amenity_label">Puntlabels (POI, favorieten)</string>
@@ -4655,7 +4655,7 @@
     <string name="rendering_attr_showFitnessTrails_description">Toon sport paden</string>
     <string name="location_source_descr">Wanneer OsmAnd geïnstalleerd is vanaf Google Play gebruikt het %1$s om de plaats te bepalen. \n \nAls u onnauwkeurige plaatsbepaling ervaart, of als u een apparaat zonder %2$s gebruikt, probeer dan naar \"%3$s\" over te schakelen.</string>
     <string name="auto_backup_title">Automatische back-up</string>
-    <string name="shared_string_duplicate">Dubbel</string>
+    <string name="shared_string_duplicate">Dupliceer</string>
     <string name="updated_map_time">Bijgewerkt: %1$s.</string>
     <string name="next_live_update_date_and_time">Volgende bijwerking op %1$s om %2$s.</string>
     <string name="speak_gps_signal_status">Wegvallen en herstel van GPS verbinding melden</string>
@@ -6281,4 +6281,5 @@
     <string name="astro_rise">Opkomst</string>
     <string name="astro_set">Ondergang</string>
     <string name="star_charts_name">Sterrengrafieken</string>
+    <string name="gpx_too_many_points_visible_warning">Een groot aantal zichtbare GPX-tracks leidt tot een hoog geheugengebruik</string>
 </resources>

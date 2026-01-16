@@ -823,13 +823,20 @@ public class OsmandApplication extends MultiDexApplication {
 		routingHelper.clearCurrentRoute(null, new ArrayList<LatLon>());
 		routingHelper.setRoutePlanningMode(false);
 		settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
-		settings.setApplicationMode(valueOfStringKey(settings.LAST_USED_APPLICATION_MODE.get(), ApplicationMode.DEFAULT));
+		ApplicationMode appMode = valueOfStringKey(settings.LAST_USED_APPLICATION_MODE.get(), ApplicationMode.DEFAULT);
+		if (getOsmandMap().getMapView().isCarView() && (appMode == null || !appMode.isAppModeDerivedFromCar())) {
+			ApplicationMode carMode = ApplicationMode.getFirstCarMode(this);
+			if (carMode != null) {
+				appMode = carMode;
+			}
+		}
+		settings.setApplicationMode(appMode);
 		targetPointsHelper.removeAllWayPoints(false, false);
 	}
 
 	public void startApplication() {
 		feedbackHelper.setExceptionHandler();
-		if (NetworkUtils.getProxy() == null && settings.isProxyEnabled()) {
+		if (NetworkUtils.hasProxy() && settings.isProxyEnabled()) {
 			try {
 				NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
 			} catch (RuntimeException e) {
@@ -923,6 +930,11 @@ public class OsmandApplication extends MultiDexApplication {
 	public KFile getAppPathKt(@Nullable String path) {
 		String child = path != null ? path : "";
 		return new KFile(new KFile(externalStorageDirectory.getPath()), child);
+	}
+
+	@NonNull
+	public KFile getCacheDirKt() {
+		return new KFile(getCacheDir().getAbsolutePath());
 	}
 
 	@NonNull

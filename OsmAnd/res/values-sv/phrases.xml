@@ -5086,7 +5086,7 @@
     <string name="poi_us_maps_recreation_area_facility_natural_endangered_area">Hotat naturområde</string>
     <string name="poi_us_maps_recreation_area_facility_horse_corral">Hästfången</string>
     <string name="poi_us_maps_recreation_area_facility_horse_stanchion">Häststolpe</string>
-    <string name="poi_us_maps_recreation_area_facility_group_shelter">Gruppboende</string>
+    <string name="poi_us_maps_recreation_area_facility_group_shelter">Vindskydd för grupp</string>
     <string name="poi_us_maps_recreation_area_facility_fire_lookout">Brandvakt</string>
     <string name="poi_us_maps_recreation_area_facility_boat_ramp">Båtramp</string>
     <string name="poi_us_maps_recreation_area_facility_boat_launch">Båtsjösättning</string>
@@ -5099,18 +5099,18 @@
     <string name="poi_us_maps_recreation_area_open_status_open_2">Status för åtkomst till rekreationsområde (2): öppet</string>
     <string name="poi_us_maps_recreation_area_open_status_unreachable">Oåtkomlig</string>
     <string name="poi_us_maps_recreation_area_activity_visitor_programs">Besöksprogram</string>
-    <string name="poi_us_maps_recreation_area_activity_viewing_wildlife">Att se vilda djur</string>
+    <string name="poi_us_maps_recreation_area_activity_viewing_wildlife">Titta på vilda djur</string>
     <string name="poi_us_maps_recreation_area_activity_viewing_scenery">Utsikt över landskapet</string>
     <string name="poi_us_maps_recreation_area_activity_viewing_plants">Titta på växter</string>
-    <string name="poi_us_maps_recreation_area_activity_tubing">Slang</string>
-    <string name="poi_us_maps_recreation_area_activity_tidepooling">Tidvattenpooling</string>
+    <string name="poi_us_maps_recreation_area_activity_tubing">Tubing</string>
+    <string name="poi_us_maps_recreation_area_activity_tidepooling">Tidvattenpoolning</string>
     <string name="poi_us_maps_recreation_area_activity_scenic_overlook">Naturskön utsikt</string>
     <string name="poi_us_maps_recreation_area_activity_poi">Sevärdhet (POI)</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_trail_riding">OHV-terrängcykling</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_road_riding">OHV-vägkörning</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_riding_and_camping">OHV-ridning och camping</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_open_area_riding">OHV-körning i öppet område</string>
-    <string name="poi_us_maps_recreation_area_activity_day_use_site">Dagbruksområde; Dagbruksplats; Dagbruksområde; Dagbruksplats; Rekreationsområde för dagsbruk; Rekreationsplats för dagsbruk</string>
+    <string name="poi_us_maps_recreation_area_activity_day_use_site">Område för dagsbruk; Dagbruksplats; Dagbruksområde; Dagbruksplats; Rekreationsområde för dagsbruk; Rekreationsplats för dagsbruk</string>
     <string name="poi_padus_area">PAD-US (Databas över skyddade områden i USA) område</string>
     <string name="poi_barrier_sliding_gate">Skjutgrind</string>
     <string name="poi_barrier_chain">Kedjebarriär</string>
@@ -5163,4 +5163,6 @@
     <string name="poi_spiritist_church">Spiritistisk kyrka</string>
     <string name="poi_united_church">United Church of Canada</string>
     <string name="poi_united_reformed_church">United reformed church</string>
+    <string name="poi_memorial_type">Typ av minnesmärke</string>
+    <string name="poi_yoga">Yoga</string>
 </resources>

@@ -13,6 +13,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
 import net.osmand.shared.gpx.SmartFolderUpdateListener
 import net.osmand.shared.gpx.TrackItem
+import net.osmand.shared.gpx.data.OrganizedTracksGroup
 import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.shared.gpx.data.TracksGroup
 import net.osmand.util.Algorithms
@@ -25,10 +26,12 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		private val TAG = SmartFolderFragment::class.java.simpleName
 
 		fun showInstance(manager: FragmentManager, folder: SmartFolder,
+		                 organizedTracksGroup: OrganizedTracksGroup?,
 						 track: TrackItem?, target: Fragment) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TrackFolderFragment.TAG)) {
 				val fragment = SmartFolderFragment()
 				fragment.setSmartFolder(folder)
+				fragment.setOrganizedGroup(organizedTracksGroup)
 				fragment.setSelectedItemPath(track?.path)
 				fragment.setTargetFragment(target, 0)
 				fragment.retainInstance = true
@@ -45,7 +48,12 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 	}
 
 	override fun onBackPressed() {
-		dismiss()
+		if (organizedGroup != null) {
+			organizedGroup = null
+			updateContent()
+		} else {
+			dismiss()
+		}
 	}
 
 	override fun showFolderOptionMenu(): Boolean {
@@ -56,7 +64,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 			.setOnClickListener {
 				smartFolder?.let {
 					showTracksSelection(
-						folder = it,
+						folder = currentTrackGroup!!,
 						fragment = this,
 						trackItems = null,
 						tracksGroups = null,
@@ -64,23 +72,36 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 				}
 			}.create())
 
+		val generalViewMode = organizedGroup == null
+		if (generalViewMode) {
+			items.add(PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.organize_by)
+				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_tracks_organize))
+				.setOnClickListener {
+					showOrganizeByDialog(smartFolder.getId())
+				}
+				.showTopDivider(true)
+				.create())
+		}
+
 		items.add(PopUpMenuItem.Builder(app)
 			.setTitleId(R.string.shared_string_refresh)
 			.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_update))
 			.setOnClickListener {
 				reloadTracks(true)
 			}
-			.showTopDivider(true)
+			.showTopDivider(generalViewMode)
 			.create())
 
-		items.add(PopUpMenuItem.Builder(app)
-			.setTitleId(R.string.edit_filter)
-			.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_filter_dark))
-			.setOnClickListener {
-				editFilters()
-			}
-			.showTopDivider(true)
-			.create())
+		if (organizedGroup == null) {
+			items.add(PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.edit_filter)
+				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_filter_dark))
+				.setOnClickListener {
+					editFilters()
+				}
+				.create())
+		}
 
 		val view = requireActivity().findViewById<View>(R.id.action_folder_menu)
 		val displayData = PopUpMenuDisplayData()
@@ -125,7 +146,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 	}
 
 	override fun getCurrentTrackGroup(): TracksGroup? {
-		return smartFolder
+		return if (organizedGroup != null) organizedGroup else smartFolder
 	}
 
 	@androidx.annotation.WorkerThread
@@ -170,10 +191,11 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 
 	override fun getSelectionHelper(): ItemsSelectionHelper<TrackItem> {
 		return ItemsSelectionHelper<TrackItem>().apply {
-			val items = smartFolder.getTrackItems()
-			setAllItems(items)
-			setSelectedItems(items)
-			setOriginalSelectedItems(items)
+			currentTrackGroup?.getTrackItems()?.let { items ->
+				setAllItems(items)
+				setSelectedItems(items)
+				setOriginalSelectedItems(items)
+			}
 		}
 	}
 }
