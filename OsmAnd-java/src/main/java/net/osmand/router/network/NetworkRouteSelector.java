@@ -108,7 +108,7 @@ public class NetworkRouteSelector {
 		return lst;
 	}
 
-	public static boolean containsUnsupportedRouteTags(Map<String, String> tags) {
+	public static boolean containsUnclickableRouteTags(Map<String, String> tags) {
 		for (OsmRouteType routeType : OsmRouteType.getAllValues()) {
 			if (routeType.getRenderingPropertyAttr() == null) {
 				String routeName = "route_" + routeType.getName();
@@ -118,7 +118,7 @@ public class NetworkRouteSelector {
 				}
 			}
 		}
-		return false;
+		return ".".equals(tags.get("shield_stub_name"));
 	}
 
 	public static class RouteKey {
