@@ -5855,12 +5855,12 @@
     <string name="shared_string_azimuth">Azimut</string>
     <string name="shared_string_magnitude">Magnitude</string>
     <string name="gpx_too_many_points_visible_warning">L\'affichage sur la carte d\'un grand nombre de traces GPX provoque une utilisation élevée de la mémoire</string>
-    <string name="sort_highest_first">Le plus grand en premier</string>
-    <string name="sort_lowest_first">Le plus bas en premier</string>
+    <string name="sort_highest_first">Plus grand en premier</string>
+    <string name="sort_lowest_first">Plus petit en premier</string>
     <string name="no_date">Aucune date</string>
     <string name="shared_string_step">Pas</string>
-    <string name="set_step_size_summary">Indiquez une longueur de pas pour regrouper vos traces.</string>
-    <string name="set_step_size">Définir la taille du pas</string>
+    <string name="set_step_size_summary">Indiquez la longueur du pas pour regrouper vos traces.</string>
+    <string name="set_step_size">Définir la longueur du pas</string>
     <string name="organize_by_summary">Organisez automatiquement vos traces par groupe en fonction d\'un paramètre sélectionné comme l\'activité, la vitesse ou la localisation.</string>
     <string name="organize_by">Organiser par</string>
     <string name="group_general">Général</string>
