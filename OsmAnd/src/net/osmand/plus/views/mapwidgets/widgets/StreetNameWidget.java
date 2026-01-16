@@ -61,7 +61,11 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class StreetNameWidget extends MapWidget {
 
@@ -239,9 +243,10 @@ public class StreetNameWidget extends MapWidget {
 			boolean isShieldSet = false;
 			shieldImagesContainer.removeAllViews();
 			int maxShields = min(shields.size(), MAX_SHIELDS_QUANTITY);
+			List<RoadShield> addedShields = new ArrayList<>();
 			for (int i = 0; i < maxShields; i++) {
 				RoadShield shield = shields.get(i);
-				isShieldSet |= setShieldImage(shield, mapActivity, shieldImagesContainer, isNightMode());
+				isShieldSet |= setShieldImage(shield, addedShields, mapActivity, shieldImagesContainer, isNightMode());
 			}
 			return isShieldSet;
 		}
@@ -249,6 +254,7 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	public static boolean setShieldImage(@NonNull RoadShield shield,
+			@NonNull List<RoadShield> addedShields,
 			@NonNull MapActivity mapActivity,
 			@NonNull LinearLayout shieldImagesContainer, boolean nightMode) {
 		OsmandApplication app = mapActivity.getApp();
@@ -273,6 +279,10 @@ public class StreetNameWidget extends MapWidget {
 			} else {
 				additional.append(tag).append("=").append(value).append(";");
 			}
+		}
+
+		if (isSameShieldAdded(shield, addedShields)) {
+			return false;
 		}
 
 		rreq.setIntFilter(rreq.ALL.R_TEXT_LENGTH, shieldValue.length());
@@ -330,7 +340,38 @@ public class StreetNameWidget extends MapWidget {
 		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 		imageView.setImageBitmap(bitmap);
 		shieldImagesContainer.addView(imageView);
+		addedShields.add(shield);
 		return true;
+	}
+
+	private static boolean isSameShieldAdded(RoadShield currentShield, List<RoadShield> previousShields) {
+		if (!previousShields.isEmpty()) {
+			String currentLabel = currentShield.getValue();
+			Map<String, String> currentTags = getShieldTagsMap(currentShield.getAdditional().toString());
+			String currentColorKey = currentShield.getTag().replace("_ref", "_shield_color");  // "route_road_1_ref" -> "route_road_1_shield_color"
+			String currentColor = currentTags.get(currentColorKey);
+
+			for (RoadShield previousShield : previousShields) {
+				String previousLabel = previousShield.getValue();
+				Map<String, String> previousTags = getShieldTagsMap(previousShield.getAdditional().toString());
+				String previousColorKey = previousShield.getTag().replace("_ref", "_shield_color");
+				String previousColor = previousTags.get(previousColorKey);
+
+				if (Objects.equals(currentLabel, previousLabel) && Objects.equals(currentColor, previousColor)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private static Map<String, String> getShieldTagsMap(String tagsString) {
+		Map<String, String> map = new LinkedHashMap<>();
+		for (String e : tagsString.split(";")) {
+			int i = e.indexOf('=');
+			if (i > 0) map.put(e.substring(0, i), e.substring(i + 1));
+		}
+		return map;
 	}
 
 	@NonNull
