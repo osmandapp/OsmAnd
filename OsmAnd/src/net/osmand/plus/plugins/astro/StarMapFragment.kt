@@ -76,7 +76,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private var compassButton: StarCompassButton? = null
 	private var systemBottomInset: Int = 0
-	private var manualAzimuth: Boolean = false
+	private var manualAzimuth: Boolean = true
 	private var lastResetRotationToNorth = 0L
 
 	internal lateinit var starMapViewModel: StarObjectsViewModel
@@ -232,6 +232,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				dialog.setObjects(starMapViewModel.skyObjects.value ?: emptyList())
 				dialog.onObjectSelected = { obj ->
 					starView.setSelectedObject(obj)
+					manualAzimuth = true
 					starView.setCenter(obj.azimuth, obj.altitude, true)
 					showObjectInfo(obj)
 				}
@@ -411,9 +412,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 							setAzimuth(location.bearing.toDouble(), true)
 						}
 					}
-				}
-				if (starView.is2DMode) {
-					starView.setCenter(180.0, 90.0)
 				}
 				updateStarMap(); updateStarChart()
 			}
