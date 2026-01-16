@@ -5868,4 +5868,18 @@
     <string name="star_charts_name">Stjernekart</string>
     <string name="star_watcher_plugin_description">Stjernekart, 3D-stjernekart</string>
     <string name="star_watcher_plugin_name">Stjernekikker (Beta)</string>
+    <string name="gpx_too_many_points_visible_warning">Et stort antall synlige GPX-spor leder til høy minnebruk</string>
+    <string name="no_date">Ingen dato</string>
+    <string name="organize_by_summary">Organiser automatisk dine spor i grupper basert på en valgt parameter som aktivitet, hastighet eller sted.</string>
+    <string name="organize_by">Organiser etter</string>
+    <string name="group_general">Generelt</string>
+    <string name="group_date_time">Dato &amp; Tid</string>
+    <string name="group_altitude_elevation">Høyde</string>
+    <string name="group_sensors">Sensorer</string>
+    <string name="year_of_creation">Opprettelsesår</string>
+    <string name="month_year_creation">Opprettelsesmåned og -år</string>
+    <string name="nearest_city">Nærmeste by</string>
+    <string name="avg_speed">Gj. hastighet</string>
+    <string name="organize_by_max_speed">Maks. hastighet</string>
+    <string name="organize_by_max_altitude">Maks. høyde</string>
 </resources>

@@ -20,7 +20,7 @@
     <string name="add_device">Añadir dispositivo</string>
     <string name="share_location_as">Compartir ubicación como</string>
     <string name="live_now_description">Contactos y grupos que comparten la ubicación contigo.</string>
-    <string name="logout_from_osmand_telegram_descr">¿Está seguro de que desea cerrar la sesión de OsmAnd Tracker para no poder compartir la ubicación o ver la ubicación de los demás\?</string>
+    <string name="logout_from_osmand_telegram_descr">¿Confirma que quiere cerrar la sesión de OsmAnd Tracker para no poder compartir la ubicación o ver la ubicación de los demás?</string>
     <string name="logout_from_osmand_telegram">¿Cerrar sesión de «OsmAnd Tracker»\?</string>
     <string name="shared_string_name">Nombre</string>
     <string name="by_distance">Por distancia</string>

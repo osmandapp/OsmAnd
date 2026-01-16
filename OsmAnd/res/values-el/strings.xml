@@ -1700,7 +1700,7 @@
     <string name="mapillary_menu_edit_text_hint">Πληκτρολογήστε όνομα χρήστη</string>
     <string name="mapillary_menu_descr_username">Προβολή μόνο των εικόνων που προστέθηκαν από</string>
     <string name="mapillary_menu_filter_description">Φιλτράρετε εικόνες κατά υποβάλλοντα, κατά ημερομηνία ή κατά τύπο. Μόνο ενεργό σε κοντινή εστίαση.</string>
-    <string name="map_widget_ruler_control">Κανόνας ακτίνας</string>
+    <string name="map_widget_ruler_control">Χάρακας ακτίνας</string>
     <string name="import_gpx_failed_descr">Δεν μπορούσε να εισαχθεί το αρχείο. Παρακαλώ διαβεβαιώστε πως το OsmAnd επιτρέπεται να το αναγνώσει.</string>
     <string name="mapillary_image">Εικόνα Mapillary</string>
     <string name="improve_coverage_mapillary">Βελτίωση κάλυψης φωτογραφίας με Mapillary</string>
@@ -2403,7 +2403,7 @@
     <string name="plugins_menu_group">Πρόσθετα</string>
     <string name="first_usage_item">Πρώτη χρήση</string>
     <string name="navigation_item_description">Διαμόρφωση πλοήγησης.</string>
-    <string name="planning_trip_item">Προγραμματισμός ταξιδιού</string>
+    <string name="planning_trip_item">Σχεδιασμός ταξιδιού</string>
     <string name="faq_item">Συχνές ερωτήσεις</string>
     <string name="faq_item_description">Συχνές ερωτήσεις.</string>
     <string name="map_viewing_item">Προβολή χάρτη</string>
@@ -3895,7 +3895,7 @@
     <string name="routing_attr_hazmat_category_usa_3_name">Εύφλεκτα Υγρά</string>
     <string name="shared_string_loading">Φόρτωση</string>
     <string name="save_changes_into_file">Αποθήκευση αλλαγών στο αρχείο</string>
-    <string name="inch">in</string>
+    <string name="inch">ίν</string>
     <string name="last_synchronized">Τελευταίος συγχρονισμός</string>
     <string name="sort_date_ascending">Νεότερη ημερομηνία πρώτη</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
@@ -3945,7 +3945,7 @@
     <string name="download_to_device">Λήψη στην συσκευή</string>
     <string name="no_search_results">Κανένα αποτέλεσμα</string>
     <string name="telegram_chats_descr">Μπείτε σε μία από τις τοπικές μας συνομιλίες στο Telegram.</string>
-    <string name="metric_lbs">lbs</string>
+    <string name="metric_lbs">λβρ</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">Διαγραφή του λογαριασμού στο OsmAnd Cloud;
 \n
 \nΑυτή η ενέργεια δεν μπορεί να αναιρεθεί.</string>
@@ -5001,7 +5001,7 @@
     <string name="choose_what_to_restore">Επιλέξτε τι να επαναφέρετε.</string>
     <string name="icon_group_amenity">Υποδομή</string>
     <string name="shared_string_sec">δευ</string>
-    <string name="kg">κιλά</string>
+    <string name="kg">κλ</string>
     <string name="max_sensor_speed">Αισθητήρας ταχύτητας, μέγιστη</string>
     <string name="avg_sensor_speed">Αισθητήρας ταχύτητας, μέση</string>
     <string name="max_sensor_heartrate">Καρδιακός παλμός, μέγιστος</string>
@@ -5172,7 +5172,7 @@
     <string name="quick_action_add_route_descr">Κουμπί για να ξεκινήσετε μια διαδρομή από το μέσο της οθόνης.</string>
     <string name="gpx_no_routes_descr">Μπορείτε να χρησιμοποιήσετε το εργαλείο \"%1$s\" για να προσθέσετε διαδρομή στο αρχείο.</string>
     <string name="rendering_attr_seabedDetail_name">Λεπτομέρειες πυθμένα</string>
-    <string name="track_file_description">Πατώντας αυτή την ενέργεια εμφανίζει τα διαθέμα ίχνη.</string>
+    <string name="track_file_description">Πατώντας αυτή την ενέργεια εμφανίζει τα διαθέσιμα ίχνη.</string>
     <string name="exit_without_saving_warning">Έξοδος χωρίς αποθήκευση αλλαγών;</string>
     <string name="app_profile_type">Προσθήκη είδους προφίλ</string>
     <string name="map_marker_options">Ρυθμίσεις δεικτών χάρτη</string>
@@ -5189,7 +5189,7 @@
     <string name="add_group_to_markers">Προσθήκη ομάδας σε λίστα δεικτών</string>
     <string name="routeInfo_roadClass_description">Χρωματισμός της διαδρομής ή της γραμμής ίχνους βάσει της ταξινόμησης του δρόμου.</string>
     <string name="no_items_of_type_message">Δεν έχετε αντικείμενα αυτού του τύπου</string>
-    <string name="no_activity_for_intent">Εγκαταστήστε μια εφαρμογή για να εκτελέσετε αυτή την ενέργεια.</string>
+    <string name="no_activity_for_intent">Εγκαταστήστε μια εφαρμογή για να εκτελέσετε αυτήν την ενέργεια.</string>
     <string name="purchases_restored">Οι αγορές αποκαταστάθηκαν</string>
     <string name="connect_track_points_as">Σύνδεση σημείων διαδρομής</string>
     <string name="contributions_may_calculate_with_delay">Ο υπολογισμός των συνεισφορών μπορεί να διαρκέσει αρκετές ώρες.</string>
@@ -5702,4 +5702,43 @@
     <string name="astro_galaxy_clusters">Σμήνη γαλαξιών</string>
     <string name="rendering_attr_showLNAMmarker_description">Εμφάνιση δεικτών ENC</string>
     <string name="rendering_attr_showLNAMmarker_name">Δείκτες ENC</string>
+    <string name="altitude_correction">Διόρθωση υψομέτρου</string>
+    <string name="show_local_names">Εμφάνιση τοπικών ονομάτων</string>
+    <string name="average_speed_skip_stops_desc">Ταχύτητα μικρότερη από %1$s θα λαμβάνεται υπόψιν και θα επηρεάζει την μέση ταχύτητα.</string>
+    <string name="average_speed_time_interval_desc">Ορίστε το χρονικό μεσοδιάστημα για τον υπολογισμό της μέσης ταχύτητας.</string>
+    <string name="radius_ruler_mode_desc">Πατώντας το γραφικό στοιχείο αλλάζει στη λειτουργία Χάρακα ακτίνων.</string>
+    <string name="explore_plans">Εξερευνήστε Πλάνα</string>
+    <string name="organize_by_max_speed">Μεγ. ταχύτητα</string>
+    <string name="organize_by_max_altitude">Μεγ. υψόμετρο</string>
+    <string name="organize_by">Οργάνωση κατά</string>
+    <string name="group_general">Γενικά</string>
+    <string name="group_date_time">Μέρα &amp; Ώρα</string>
+    <string name="group_altitude_elevation">Υψόμετρο και ανύψωση</string>
+    <string name="group_sensors">Αισθητήρες</string>
+    <string name="year_of_creation">Έτος δημιουργίας</string>
+    <string name="month_year_creation">Μήνας και Έτος δημιουργίας</string>
+    <string name="nearest_city">Κοντινότερη πόλη</string>
+    <string name="avg_speed">Μέση ταχύτητα</string>
+    <string name="gpx_too_many_points_visible_warning">Μεγάλο πλήθος από ορατά ίχνη GPX θα προκαλέσει υψηλή χρήση μνήμης</string>
+    <string name="sort_highest_first">Υψηλότερα πρώτα</string>
+    <string name="sort_lowest_first">Χαμηλότερα πρώτα</string>
+    <string name="no_date">Χωρίς ημερομηνία</string>
+    <string name="shared_string_step">Βήμα</string>
+    <string name="set_step_size_summary">Επιλέξτε μέγεθος βήματος για ομαδοποίηση των ιχνών σας.</string>
+    <string name="set_step_size">Ορισμός μεγέθους βήματος</string>
+    <string name="organize_by_summary">Αυτόματα οργανώστε τα ίχνη σας σε ομάδες βάσει επιλεγμένων παραμέτρων όπως δραστηριότητα, ταχύτητα ή τοποθεσία.</string>
+    <string name="feature_available_as_part_of_plan">%1$s διαθέσιμο ως μέρος του πλάνου %2$s</string>
+    <string name="write_bearing_description">Αποθήκευση προσανατολισμού σε κάθε σημείο του ίχνους κατά την εγγραφή</string>
+    <string name="write_bearing">Γράψιμο Προσανατολισμού</string>
+    <string name="write_heading_description">Αποθήκευση κατεύθυνσης πορείας σε κάθε σημείο του ίχνους κατά την εγγραφή</string>
+    <string name="write_heading">Γράψιμο Πορείας</string>
+    <string name="wheel_circumference">Περιφέρεια τροχού</string>
+    <string name="map_marker_interval_dialog_desc">Ορίστε το χρονικό μεσοδιάστημα για το οποίο η μέση ταχύτητα θα μετράται για τον υπολογισμό της εκτιμώμενης ώρας άφιξης.</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Σημεία διαδρομής GPX (%1$d) αντιγράφηκαν στα αγαπημένα.</string>
+    <string name="quick_action_track_waypoint">Σημείο διαδρομής ίχνους</string>
+    <string name="with_waypoints">Με σημεία διαδρομής</string>
+    <string name="waypoint_template">Πρότυπο σημείου διαδρομής</string>
+    <string name="waypoint_appearance">Εμφάνιση σημείου διαδρομής</string>
+    <string name="delete_waypoints">Διαγραφή σημείου διαδρομής</string>
+    <string name="simplified_track_description">Μόνο η γραμμή της διαδρομής θα αποθηκευτεί, τα σημεία διαδρομής θα διαγραφούν.</string>
 </resources>

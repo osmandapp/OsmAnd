@@ -1,11 +1,11 @@
 package net.osmand.shared.util
 
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 
-actual object DateFormatter {
+actual object SharedDateFormatter {
 
 	actual fun formatYear(timestamp: Long): String {
 		return format(timestamp, "yyyy")
@@ -17,10 +17,8 @@ actual object DateFormatter {
 
 	private fun format(timestamp: Long, pattern: String): String {
 		if (timestamp == 0L) return ""
-
-		val formatter = DateTimeFormatter.ofPattern(pattern, Locale.getDefault())
-		return Instant.ofEpochMilli(timestamp)
-			.atZone(ZoneId.systemDefault())
-			.format(formatter)
+		val dateFormat = SimpleDateFormat(pattern, Locale.getDefault())
+		dateFormat.timeZone = TimeZone.getDefault()
+		return dateFormat.format(Date(timestamp))
 	}
 }

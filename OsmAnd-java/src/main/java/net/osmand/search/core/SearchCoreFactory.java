@@ -1986,7 +1986,7 @@ public class SearchCoreFactory {
 			List<String> unknownWords = phrase.getUnknownSearchWords();
 			String text = !unknownWords.isEmpty() ? unknownWords.get(0) : phrase.getUnknownWordToSearch();
 			
-			final List<String> allowedTypes = Arrays.asList("city", "town", "village");
+			final List<String> allowedTypes = Arrays.asList("village", "town", "city"); // ascending priority
 			QuadRect searchBBox31 = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
 			final NameStringMatcher nm = new NameStringMatcher(text, CHECK_STARTS_FROM_SPACE);
 			final String lang = phrase.getSettings().getLang();

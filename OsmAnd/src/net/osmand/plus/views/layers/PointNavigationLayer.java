@@ -5,7 +5,6 @@ import static net.osmand.plus.settings.backend.OsmAndAppCustomizationFields.ROUT
 import static net.osmand.plus.settings.backend.OsmAndAppCustomizationFields.ROUTE_TARGET_POINT;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -42,6 +41,8 @@ import java.util.List;
 
 public class PointNavigationLayer extends OsmandMapLayer implements
 		IContextMenuProvider, IMoveObjectProvider {
+
+	private static final float CAPTION_TEXT_SIZE = 18f;
 
 	private final TargetPointsHelper targetPoints;
 
@@ -138,8 +139,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		MapRendererView mapRenderer = getMapView().getMapRenderer();
 		if (mapRenderer != null) {
 			//OpenGL
-			if (nightMode != settings.isNightMode() || mapActivityInvalidated) {
-				//switch to day/night mode
+			if (nightMode != settings.isNightMode()
+					|| shouldUpdateTextSizeForOpenGL() || mapActivityInvalidated) {
 				captionStyle = null;
 				clearMapMarkersCollections();
 				nightMode = settings.isNightMode();
@@ -210,15 +211,21 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			recreateBitmaps();
 			pointSizePx = Math.sqrt(mTargetPoint.getWidth() * mTargetPoint.getWidth()
 					+ mTargetPoint.getHeight() * mTargetPoint.getHeight());
-			if (carViewChanged) {
-				updateTextSize();
-			}
+			updateTextSize();
 		}
 	}
 
 	private void updateTextSize() {
-		mTextPaint.setTextSize(18f * Resources.getSystem().getDisplayMetrics().scaledDensity
-				* getApplication().getOsmandMap().getCarDensityScaleCoef());
+		float density = view.getDensity();
+		float textSize = CAPTION_TEXT_SIZE * textScale * density;
+		mTextPaint.setTextSize(textSize);
+	}
+
+	private boolean shouldUpdateTextSizeForOpenGL() {
+		if (mTextPaint != null && captionStyle != null) {
+			return mTextPaint.getTextSize() != captionStyle.getSize();
+		}
+		return true;
 	}
 
 	private void recreateBitmaps() {

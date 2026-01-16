@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.Track;
@@ -106,7 +107,7 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 	}
 
 	private void setItemChartType(@NonNull GpxDisplayItem gpxItem) {
-		List<GPXDataSetType> result = getSavedSupportedTypes(gpxItem);
+		List<GPXDataSetType> result = getSavedSupportedTypes(gpxItem, settings);
 
 		if (Algorithms.isEmpty(result)) {
 			result = getDefaultTypes(gpxItem.analysis);
@@ -118,7 +119,7 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 	}
 
 	@NonNull
-	private List<GPXDataSetType> getSavedSupportedTypes(@NonNull GpxDisplayItem gpxItem) {
+	public static List<GPXDataSetType> getSavedSupportedTypes(@NonNull GpxDisplayItem gpxItem, @NonNull OsmandSettings settings) {
 		List<GPXDataSetType> result = new ArrayList<>();
 		List<GPXDataSetType> savedTypes = ChartUtils.getSavedGeneralYAxis(settings);
 
@@ -141,7 +142,7 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 	}
 
 	@NonNull
-	private List<GPXDataSetType> getSupportedTypes(@NonNull GpxTrackAnalysis analysis) {
+	public static List<GPXDataSetType> getSupportedTypes(@NonNull GpxTrackAnalysis analysis) {
 		List<GPXDataSetType> result = new ArrayList<>();
 
 		result.addAll(getAvailableDefaultYTypes(analysis));
@@ -152,7 +153,7 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 
 
 	@NonNull
-	private List<GPXDataSetType> getDefaultTypes(@NonNull GpxTrackAnalysis analysis) {
+	public static List<GPXDataSetType> getDefaultTypes(@NonNull GpxTrackAnalysis analysis) {
 		List<GPXDataSetType> result = new ArrayList<>();
 
 		if (analysis.hasElevationData()) {
@@ -168,7 +169,7 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 		return result;
 	}
 
-	private List<GPXDataSetType> limit(@NonNull List<GPXDataSetType> list) {
+	public static List<GPXDataSetType> limit(@NonNull List<GPXDataSetType> list) {
 		if (list.size() <= MAX_CHART_TYPES) {
 			return list;
 		}
