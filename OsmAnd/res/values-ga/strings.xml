@@ -5769,4 +5769,22 @@
     <string name="astro_rise">Éirigh</string>
     <string name="astro_set">Socraigh</string>
     <string name="gpx_too_many_points_visible_warning">Bíonn úsáid ard cuimhne mar thoradh ar líon mór rianta GPX infheicthe</string>
+    <string name="sort_highest_first">Is airde ar dtús</string>
+    <string name="sort_lowest_first">Is ísle ar dtús</string>
+    <string name="no_date">Gan dáta</string>
+    <string name="shared_string_step">Céim</string>
+    <string name="set_step_size_summary">Roghnaigh méid céime chun do rianta a ghrúpáil.</string>
+    <string name="set_step_size">Socraigh méid na céime</string>
+    <string name="organize_by_summary">Eagraigh do rianta go huathoibríoch i ngrúpaí bunaithe ar pharaiméadar roghnaithe amhail gníomhaíocht, luas nó suíomh.</string>
+    <string name="organize_by">Eagraigh de réir</string>
+    <string name="group_general">Ginearálta</string>
+    <string name="group_date_time">Dáta &amp; Am</string>
+    <string name="group_altitude_elevation">Airde agus airde</string>
+    <string name="group_sensors">Braiteoirí</string>
+    <string name="year_of_creation">Bliain an chruthaithe</string>
+    <string name="month_year_creation">Mí agus Bliain an chruthaithe</string>
+    <string name="nearest_city">An chathair is gaire</string>
+    <string name="avg_speed">Meán luas</string>
+    <string name="organize_by_max_speed">Uas. luas</string>
+    <string name="organize_by_max_altitude">Uas. Airde</string>
 </resources>
