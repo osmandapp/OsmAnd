@@ -5837,5 +5837,6 @@
     <string name="visible_layers_and_objects">Capas y objetos visibles</string>
     <string name="shared_string_azimuth">Acimut</string>
     <string name="shared_string_magnitude">Magnitud</string>
-    <string name="astro_set">Definir</string>
+    <string name="astro_set">Puesta</string>
+    <string name="astro_rise">Salida</string>
 </resources>
