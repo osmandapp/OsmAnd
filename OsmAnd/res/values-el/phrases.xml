@@ -333,7 +333,7 @@
     <string name="poi_public_transport_stop_position">Θέση στάσης δημόσιας συγκοινωνίας</string>
     <string name="poi_public_transport_platform_tram">Στάση τραμ</string>
     <string name="poi_tram_stop">Στάση τραμ</string>
-    <string name="poi_public_transport_station">Σταθμός δημόσιων συγκοινωνιών</string>
+    <string name="poi_public_transport_station">Σταθμός δημόσιας συγκοινωνίας</string>
     <string name="poi_bus_station">Σταθμός λεωφορείων</string>
     <string name="poi_railway_station">Σιδηροδρομικός σταθμός;Σταθμός σιδηροδρόμου;Σταθμός τραίνου</string>
     <string name="poi_railway_platform">Αποβάθρα σιδηροδρόμου;Αποβάθρα τραίνου</string>
@@ -363,7 +363,7 @@
     <string name="poi_telephone">Τηλέφωνο</string>
     <string name="poi_glacier_type">Τύπος παγετώνα</string>
     <string name="poi_fuel_svo">Αμιγές φυτικό λάδι (SVO)</string>
-    <string name="poi_railway_buffer_stop">Προσκρουστήρας σιδηροδρόμου</string>
+    <string name="poi_railway_buffer_stop">Ταμπονιέρα σιδηροδρόμου</string>
     <string name="poi_aeroway_terminal">Τερματικός αεροδρομίου</string>
     <string name="poi_aeroway_gate">Πύλη αεροδρομίου</string>
     <string name="poi_slipway">Σχάρα καθέλκυσης</string>
