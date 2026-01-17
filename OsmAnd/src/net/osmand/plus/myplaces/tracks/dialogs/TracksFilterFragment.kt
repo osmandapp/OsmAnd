@@ -23,6 +23,7 @@ import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
+import net.osmand.plus.myplaces.tracks.TrackFoldersHelper
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
 import net.osmand.plus.utils.AndroidUtils
@@ -198,10 +199,11 @@ class TracksFilterFragment : BaseFullScreenDialogFragment(),
 							app.showShortToastMessage(R.string.smart_folder_saved)
 							dismiss()
 						} else {
-							app.dialogManager.showSaveSmartFolderDialog(
+							TrackFoldersHelper.showSaveSmartFolderDialog(
 								requireActivity(),
 								nightMode,
-								filter.currentFilters)
+								filter.currentFilters
+							)
 						}
 						true
 					}

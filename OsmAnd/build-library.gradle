@@ -4,6 +4,7 @@ apply from: 'build-common.gradle'
 apply from: rootProject.file("versions.gradle")
 
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
 
 android {
 
@@ -54,7 +55,7 @@ android {
 			osmandTask.dependsOn(copyBundledAssets)
 			osmandTask.dependsOn(copy3DModels)
 			osmandTask.dependsOn(collectVoiceAssets)
-			osmandTask.dependsOn(collectAstroAssets)
+			osmandTask.dependsOn(downloadStarsDb)
 			osmandTask.dependsOn(downloadWorldMiniBasemap)
 		}
 		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"

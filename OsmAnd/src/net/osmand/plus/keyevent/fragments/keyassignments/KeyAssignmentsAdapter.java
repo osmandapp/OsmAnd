@@ -89,17 +89,14 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		boolean editMode = controller.isInEditMode();
 		ScreenItem item = screenItems.get(position);
-		if (holder instanceof EmptyStateViewHolder) {
-			EmptyStateViewHolder h = (EmptyStateViewHolder) holder;
+		if (holder instanceof EmptyStateViewHolder h) {
 			h.btnAdd.setOnClickListener(v -> controller.askAddAssignment(h.btnAdd));
 
-		} else if (holder instanceof HeaderViewHolder) {
-			HeaderViewHolder h = (HeaderViewHolder) holder;
+		} else if (holder instanceof HeaderViewHolder h) {
 			h.title.setText(R.string.shared_string_action);
 			h.summary.setText(R.string.shared_string_key);
 
-		} else if (holder instanceof ActionItemViewHolder) {
-			ActionItemViewHolder h = (ActionItemViewHolder) holder;
+		} else if (holder instanceof ActionItemViewHolder h) {
 			KeyAssignment assignment = (KeyAssignment) item.getValue();
 
 			if (isEditable() && !editMode) {

@@ -10,13 +10,13 @@ import androidx.lifecycle.viewModelScope
 import io.github.cosinekitty.astronomy.Time
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import net.osmand.plus.plugins.astro.SkyObject
 import java.util.Calendar
 import java.util.TimeZone
 
 open class StarObjectsViewModel(
 	private val app: Application,
 	private val settings: StarWatcherSettings,
+	private val dataProvider: AstroDataProvider,
 	val viewType: StarObjectsViewType
 ) : AndroidViewModel(app) {
 
@@ -39,7 +39,7 @@ open class StarObjectsViewModel(
 
 	fun loadData() {
 		viewModelScope.launch(Dispatchers.Default) {
-			val objects = AstroDataProvider.getInitialSkyObjects(app).toMutableList()
+			val objects = dataProvider.getInitialSkyObjects(app).toMutableList()
 			val items = if (viewType == StarObjectsViewType.MAP)
 				settings.getStarMapConfig().items else settings.getStarChartConfig().items
 			// Create lookup map for config items
@@ -80,30 +80,32 @@ open class StarObjectsViewModel(
 	}
 }
 
-class StarMapObjectsViewModel(app: Application, settings: StarWatcherSettings)
-	: StarObjectsViewModel(app, settings, StarObjectsViewType.MAP) {
+class StarMapObjectsViewModel(app: Application, settings: StarWatcherSettings, dataProvider: AstroDataProvider)
+	: StarObjectsViewModel(app, settings, dataProvider, StarObjectsViewType.MAP) {
 
 	class Factory(
 		private val application: Application,
 		private val settings: StarWatcherSettings,
+		private val dataProvider: AstroDataProvider
 	) : ViewModelProvider.Factory {
 		@Suppress("UNCHECKED_CAST")
 		override fun <T : ViewModel> create(modelClass: Class<T>): T {
-			return StarObjectsViewModel(application, settings, StarObjectsViewType.MAP) as T
+			return StarObjectsViewModel(application, settings, dataProvider, StarObjectsViewType.MAP) as T
 		}
 	}
 }
 
-class StarChartObjectsViewModel(app: Application, settings: StarWatcherSettings)
-	: StarObjectsViewModel(app, settings, StarObjectsViewType.CHART) {
+class StarChartObjectsViewModel(app: Application, settings: StarWatcherSettings, dataProvider: AstroDataProvider)
+	: StarObjectsViewModel(app, settings, dataProvider, StarObjectsViewType.CHART) {
 
 	class Factory(
 		private val application: Application,
 		private val settings: StarWatcherSettings,
+		private val dataProvider: AstroDataProvider
 	) : ViewModelProvider.Factory {
 		@Suppress("UNCHECKED_CAST")
 		override fun <T : ViewModel> create(modelClass: Class<T>): T {
-			return StarObjectsViewModel(application, settings, StarObjectsViewType.CHART) as T
+			return StarObjectsViewModel(application, settings, dataProvider, StarObjectsViewType.CHART) as T
 		}
 	}
 }

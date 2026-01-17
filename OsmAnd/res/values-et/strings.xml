@@ -2552,11 +2552,7 @@
     <string name="record_plugin_description">Salvesta oma radu ja treeninguid ning analüüsi nende andmeid nagu kiirus, tõusud, laskumised, kõrgusprofiil, jne. Salvestatud radu saad arhiveerida, jagada sõpradega, muuta ja järeltöödelda.
 \n
 \nLisateave %1$s.</string>
-    <string name="srtm_plugin_description">See laiendus pakub nii kõrgusjoonte ülekatte kui ka (reljeefse) künkavarjutuse kihi, mida kuvatakse OsmAnd standardkaartidel. Seda funktsionaalsust hindavad sportlased, matkajad, rändajad ja kõik teised, kes on huvitatud kontuurjoontest, maastiku reljeefstruktuurist ning nõlvade toonimisest.
-\n
-\nAndmed pärinevad SRTM (süstiku radari topograafiamissioon) ja ASTER (täiustatud kosmose termilise kiirguse ja peegelduse radiomeeter) andmekogudest.
-\n
-\nLisateave: %1$s.</string>
+    <string name="srtm_plugin_description">See laiendus pakub nii kõrgusjoonte ülekatte kui ka (reljeefse) künkavarjutuse kihi, mida kuvatakse OsmAnd standardkaartidel. Seda funktsionaalsust hindavad sportlased, matkajad, rändajad ja kõik teised, kes on huvitatud kontuurjoontest, maastiku reljeefstruktuurist ning nõlvade toonimisest. \n \nAndmed pärinevad SRTM (süstiku radari topograafiamissioon) ja ASTER (täiustatud kosmose termilise kiirguse ja peegelduse radiomeeter) andmekogudest. \n \nLisateave: %1$s.</string>
     <string name="plugin_touringview_descr">Selle vaate aktiveerimine muudab OsmAndi kaardistiili „Reisivaateks“. See on reisijatele ja kutselistele autojuhtidele mõeldud eriline kõrglahutusega vaade.
 \n
 \nSee vaade pakub igal kaardi suurendamisel maksimaalse hulga kaardiandmetes saada olevaid reisiandmeid (eriti teed, rajad ja orientatsioonimärgid).
@@ -4176,7 +4172,7 @@
     <string name="wikipedia_and_travel_maps">Vikipeedia ja reisikaardid</string>
     <string name="offline_weather_forecast">Ilmaennustus, mis ei vaja võrguühendust</string>
     <string name="shared_string_weather">Ilmateade</string>
-    <string name="map_rendering_engine_descr">Kaardimootori versioon 1 oli esmase valikuna kasutusel kuni OsmAndi versioonini 4.3 ning on jätkuvalt mõistlik eelistus vanemates seadmetes.\nKaardimootori versioon 2 (OpenGL) on kiire ning sisaldab ka 2,5-mõõtmelise vaate.</string>
+    <string name="map_rendering_engine_descr">Kaardimootori versioon 1 oli esmase valikuna kasutusel kuni OsmAndi versioonini 4.3 ning on jätkuvalt mõistlik eelistus vanemates seadmetes.\n\nKaardimootori versioon 2 (OpenGL) on kiire ning lisab uut funktsionaalsust, nagu 3-mõõtmelise vaate.</string>
     <string name="rendering_styles">Kaardi kuvamise stiilid</string>
     <string name="sort_subfolders">Sordi alamkaustad</string>
     <string name="empty_screen_view_selected_weather_data">Valitud ilmateate andmete kuvamiseks kaardil lülita see valik sisse.</string>
@@ -5375,4 +5371,14 @@
     <string name="altitude_metrics_description">Seadistab kõrguse mõõtühiku vidinate ja statistika jaoks.</string>
     <string name="quick_action_map_center_widget_descr">Nupp, mis võimaldab näidata või peita kaardi keskpunkti vidinat.</string>
     <string name="key_event_category_map_interactions">Tegevused kaardiga</string>
+    <string name="astro_name_sun">Päike</string>
+    <string name="astro_name_moon">Kuu</string>
+    <string name="astro_name_mercury">Merkuur</string>
+    <string name="astro_name_venus">Veenus</string>
+    <string name="astro_name_mars">Marss</string>
+    <string name="astro_name_jupiter">Jupiter</string>
+    <string name="astro_name_saturn">Saturn</string>
+    <string name="astro_name_uranus">Uraan</string>
+    <string name="astro_name_neptune">Neptuun</string>
+    <string name="astro_name_pluto">Pluuto</string>
 </resources>

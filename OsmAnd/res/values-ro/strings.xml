@@ -3592,11 +3592,7 @@
 \n
 \nAceastă vizualizare poate fi revenită fie prin dezactivarea ei din nou aici, fie prin modificarea \'Stilului hărții\' în \'Configurați harta\', după cum doriți.</string>
     <string name="plugin_touringview_name">Vizualizare hartă turistică</string>
-    <string name="srtm_plugin_description">Informații privind terenul (e.g. curbe de nivel, nuanțe, pante) vă ajută să evaluați vizual așezarea pământului, relieful, navigabilitatea și multe altele. Informațiile topografice pot fi reprezentate pe hartă prin curbe de nivel, umbrirea reliefului și/sau colorarea pantei.
-\n
-\nDatele de bază provin din SRTM și ASTER.
-\n
-\nPentru mai multe informații, consultați %1$s.</string>
+    <string name="srtm_plugin_description">Informații privind terenul (e.g. curbe de nivel, nuanțe, pante) vă ajută să evaluați vizual așezarea pământului, relieful, navigabilitatea și multe altele. Informațiile topografice pot fi reprezentate pe hartă prin curbe de nivel, umbrirea reliefului și/sau colorarea pantei. \n \nDatele de bază provin din SRTM și ASTER. \n \nPentru mai multe informații, consultați %1$s.</string>
     <string name="lang_ber">Berberă</string>
     <string name="lang_kab">Cabila</string>
     <string name="lang_hsb">Sorabă (Superioară)</string>

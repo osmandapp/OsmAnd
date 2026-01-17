@@ -6,6 +6,8 @@ import static net.osmand.shared.settings.enums.MetricsConstants.KILOMETERS_AND_M
 import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_FEET;
 import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_METERS;
 
+import static btools.routingapp.BRouterServiceConnection.BROUTER_CONNECT_TIMEOUT_MS;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -31,7 +33,6 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
@@ -822,13 +823,20 @@ public class OsmandApplication extends MultiDexApplication {
 		routingHelper.clearCurrentRoute(null, new ArrayList<LatLon>());
 		routingHelper.setRoutePlanningMode(false);
 		settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
-		settings.setApplicationMode(valueOfStringKey(settings.LAST_USED_APPLICATION_MODE.get(), ApplicationMode.DEFAULT));
+		ApplicationMode appMode = valueOfStringKey(settings.LAST_USED_APPLICATION_MODE.get(), ApplicationMode.DEFAULT);
+		if (getOsmandMap().getMapView().isCarView() && (appMode == null || !appMode.isAppModeDerivedFromCar())) {
+			ApplicationMode carMode = ApplicationMode.getFirstCarMode(this);
+			if (carMode != null) {
+				appMode = carMode;
+			}
+		}
+		settings.setApplicationMode(appMode);
 		targetPointsHelper.removeAllWayPoints(false, false);
 	}
 
 	public void startApplication() {
 		feedbackHelper.setExceptionHandler();
-		if (NetworkUtils.getProxy() == null && settings.isProxyEnabled()) {
+		if (NetworkUtils.hasProxy() && settings.isProxyEnabled()) {
 			try {
 				NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
 			} catch (RuntimeException e) {
@@ -925,6 +933,11 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	@NonNull
+	public KFile getCacheDirKt() {
+		return new KFile(getCacheDir().getAbsolutePath());
+	}
+
+	@NonNull
 	public File getAppInternalPath(@Nullable String path) {
 		String child = path != null ? path : "";
 		return new File(settings.getInternalAppPath(), child);
@@ -953,10 +966,15 @@ public class OsmandApplication extends MultiDexApplication {
 	public synchronized IBRouterService reconnectToBRouter() {
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
-			// a delay is necessary as the service process needs time to start..
-			Thread.sleep(800);
 			if (bRouterServiceConnection != null) {
-				return bRouterServiceConnection.getBrouterService();
+				long start = System.currentTimeMillis();
+				while (System.currentTimeMillis() - start < BROUTER_CONNECT_TIMEOUT_MS) {
+					IBRouterService service = bRouterServiceConnection.getBrouterService();
+					if (service != null) {
+						return service;
+					}
+					Thread.sleep(100);
+				}
 			}
 		} catch (Exception e) {
 			LOG.error(e);

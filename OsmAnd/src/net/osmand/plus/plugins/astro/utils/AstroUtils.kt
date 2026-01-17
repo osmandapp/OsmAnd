@@ -1,8 +1,16 @@
 package net.osmand.plus.plugins.astro.utils
 
 import android.content.Context
+import android.util.TypedValue
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.ScrollView
+import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
 import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.Body
@@ -16,10 +24,15 @@ import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.searchAltitude
 import io.github.cosinekitty.astronomy.searchRiseSet
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.SkyObject
 import net.osmand.plus.plugins.astro.StarWatcherSettings
+import net.osmand.plus.plugins.astro.StarWatcherSettings.StarMapConfig
 import net.osmand.plus.plugins.astro.views.StarView
+import net.osmand.plus.settings.enums.ThemeUsageContext
+import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.utils.ColorUtilities
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -55,6 +68,37 @@ object AstroUtils {
 		else -> "#FFFFFF".toColorInt()
 	}
 
+	@DrawableRes
+	fun getObjectTypeIcon(type: SkyObject.Type): Int {
+		return when (type) {
+			SkyObject.Type.SUN -> R.drawable.ic_action_sun
+			SkyObject.Type.MOON -> R.drawable.ic_action_moon
+			SkyObject.Type.PLANET -> R.drawable.ic_action_ufo
+			SkyObject.Type.STAR -> R.drawable.ic_action_favorite
+			SkyObject.Type.GALAXY, SkyObject.Type.GALAXY_CLUSTER -> R.drawable.ic_world_globe_dark
+			SkyObject.Type.NEBULA -> R.drawable.ic_action_clouds
+			SkyObject.Type.BLACK_HOLE -> R.drawable.ic_action_circle
+			else -> R.drawable.ic_action_favorite
+		}
+	}
+
+	fun getObjectTypeName(ctx: Context, type: SkyObject.Type): String {
+		return when (type) {
+			SkyObject.Type.SUN -> ctx.getString(R.string.astro_name_sun)
+			SkyObject.Type.MOON -> ctx.getString(R.string.astro_name_moon)
+			SkyObject.Type.PLANET -> ctx.getString(R.string.astro_planets)
+			SkyObject.Type.STAR -> ctx.getString(R.string.astro_stars)
+			SkyObject.Type.GALAXY -> ctx.getString(R.string.astro_galaxies)
+			SkyObject.Type.NEBULA -> ctx.getString(R.string.astro_nebulae)
+			SkyObject.Type.BLACK_HOLE -> ctx.getString(R.string.astro_black_holes)
+			SkyObject.Type.OPEN_CLUSTER -> ctx.getString(R.string.astro_open_clusters)
+			SkyObject.Type.GLOBULAR_CLUSTER -> ctx.getString(R.string.astro_globular_clusters)
+			SkyObject.Type.GALAXY_CLUSTER -> ctx.getString(R.string.astro_galaxy_clusters)
+			SkyObject.Type.CONSTELLATION -> ctx.getString(R.string.astro_constellations)
+			else -> type.name
+		}
+	}
+
 	data class Twilight(
 		val sunrise: ZonedDateTime?, val sunset: ZonedDateTime?,
 		val civilDawn: ZonedDateTime?, val civilDusk: ZonedDateTime?,
@@ -65,7 +109,7 @@ object AstroUtils {
 	fun formatLocalTime(astronomyTime: Time): String {
 		val calendar = Calendar.getInstance(TimeZone.getDefault())
 		calendar.timeInMillis = astronomyTime.toMillisecondsSince1970()
-		return String.Companion.format(
+		return String.format(
 			Locale.getDefault(), "%02d:%02d",
 			calendar.get(Calendar.HOUR_OF_DAY),
 			calendar.get(Calendar.MINUTE))
@@ -75,22 +119,12 @@ object AstroUtils {
 		context: Context,
 		starView: StarView,
 		swSettings: StarWatcherSettings,
-		onApply: (() -> Unit)? = null
+		onApply: ((StarMapConfig) -> Unit)? = null
 	) {
 		val config = swSettings.getStarMapConfig()
 
-		val items = arrayOf(
-			context.getString(R.string.azimuthal_grid),
-			context.getString(R.string.equatorial_grid),
-			context.getString(R.string.ecliptic_line),
-			context.getString(R.string.astro_name_sun),
-			context.getString(R.string.astro_name_moon),
-			context.getString(R.string.astro_planets),
-			context.getString(R.string.astro_constellations),
-			context.getString(R.string.astro_stars),
-			context.getString(R.string.astro_galaxies),
-			context.getString(R.string.astro_black_holes)
-		)
+		val app = (context.applicationContext as OsmandApplication)
+		val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.APP)
 
 		var tempAzimuthal = config.showAzimuthalGrid
 		var tempEquatorial = config.showEquatorialGrid
@@ -101,29 +135,87 @@ object AstroUtils {
 		var tempConstellations = config.showConstellations
 		var tempStars = config.showStars
 		var tempGalaxies = config.showGalaxies
+		var tempNebulae = config.showNebulae
+		var tempOpenClusters = config.showOpenClusters
+		var tempGlobularClusters = config.showGlobularClusters
+		var tempGalaxyClusters = config.showGalaxyClusters
 		var tempBlackHoles = config.showBlackHoles
+		var tempShowMagnitudeFilter = config.showMagnitudeFilter
 
-		val checked = booleanArrayOf(
-			tempAzimuthal, tempEquatorial, tempEcliptic, tempSun, tempMoon, tempPlanets,
-			tempConstellations, tempStars, tempGalaxies, tempBlackHoles
-		)
+		val scrollView = ScrollView(context)
+		val ll = LinearLayout(context)
+		ll.orientation = LinearLayout.VERTICAL
 
-		AlertDialog.Builder(context)
-			.setTitle(R.string.visible_layers_and_objects)
-			.setMultiChoiceItems(items, checked) { _, which, isChecked ->
-				when (which) {
-					0 -> tempAzimuthal = isChecked
-					1 -> tempEquatorial = isChecked
-					2 -> tempEcliptic = isChecked
-					3 -> tempSun = isChecked
-					4 -> tempMoon = isChecked
-					5 -> tempPlanets = isChecked
-					6 -> tempConstellations = isChecked
-					7 -> tempStars = isChecked
-					8 -> tempGalaxies = isChecked
-					9 -> tempBlackHoles = isChecked
-				}
+		val listTextSize = context.resources.getDimensionPixelSize(R.dimen.default_list_text_size).toFloat()
+		val dialogContentPadding = context.resources.getDimensionPixelSize(R.dimen.dialog_content_margin)
+		val contentPadding = context.resources.getDimensionPixelSize(R.dimen.content_padding)
+		val textPadding = context.resources.getDimensionPixelSize(R.dimen.content_padding_small)
+		ll.setPadding(dialogContentPadding, contentPadding, dialogContentPadding, contentPadding)
+		scrollView.addView(ll)
+
+		val activeColorRes = ColorUtilities.getActiveIconColorId(nightMode)
+		val secondaryColorRes = ColorUtilities.getSecondaryIconColorId(nightMode)
+		val checkedColorStateList =
+			AndroidUtils.createCheckedColorStateList(app, secondaryColorRes, activeColorRes)
+
+		fun addSection(title: String) {
+			val tv = TextView(context)
+			tv.text = title.uppercase()
+			tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, listTextSize)
+			tv.setTextColor(ContextCompat.getColor(context, R.color.color_favorite_gray))
+			tv.setPadding(0, contentPadding, 0, contentPadding / 2)
+			ll.addView(tv)
+		}
+
+		fun addCheckBox(title: String, checked: Boolean, onChecked: (Boolean) -> Unit) {
+			val cb = AppCompatCheckBox(context).apply {
+				text = title
+				setTextSize(TypedValue.COMPLEX_UNIT_PX, listTextSize)
+				setTextColor(ColorUtilities.getPrimaryTextColor(context, nightMode))
+				isChecked = checked
+				buttonTintList = checkedColorStateList
+				setPadding(textPadding, 0, contentPadding, 0)
+				setOnCheckedChangeListener { _, isChecked -> onChecked(isChecked) }
 			}
+
+			val params = LinearLayout.LayoutParams(
+				ViewGroup.LayoutParams.MATCH_PARENT,
+				ViewGroup.LayoutParams.WRAP_CONTENT
+			).apply {
+				topMargin = contentPadding / 4
+				bottomMargin = contentPadding / 4
+			}
+
+			ll.addView(cb, params)
+		}
+
+		// MAP
+		addSection(context.getString(R.string.shared_string_map))
+		addCheckBox(context.getString(R.string.azimuthal_grid), tempAzimuthal) { tempAzimuthal = it }
+		addCheckBox(context.getString(R.string.equatorial_grid), tempEquatorial) { tempEquatorial = it }
+		addCheckBox(context.getString(R.string.ecliptic_line), tempEcliptic) { tempEcliptic = it }
+		addCheckBox(context.getString(R.string.magnitude_filter), tempShowMagnitudeFilter) { tempShowMagnitudeFilter = it }
+
+		// PLANETS
+		addSection(context.getString(R.string.astro_planets))
+		addCheckBox(context.getString(R.string.astro_name_sun), tempSun) { tempSun = it }
+		addCheckBox(context.getString(R.string.astro_name_moon), tempMoon) { tempMoon = it }
+		addCheckBox(context.getString(R.string.astro_planets), tempPlanets) { tempPlanets = it }
+
+		// OTHER
+		addSection(context.getString(R.string.shared_string_other))
+		addCheckBox(context.getString(R.string.astro_constellations), tempConstellations) { tempConstellations = it }
+		addCheckBox(context.getString(R.string.astro_stars), tempStars) { tempStars = it }
+		addCheckBox(context.getString(R.string.astro_galaxies), tempGalaxies) { tempGalaxies = it }
+		addCheckBox(context.getString(R.string.astro_nebulae), tempNebulae) { tempNebulae = it }
+		addCheckBox(context.getString(R.string.astro_open_clusters), tempOpenClusters) { tempOpenClusters = it }
+		addCheckBox(context.getString(R.string.astro_globular_clusters), tempGlobularClusters) { tempGlobularClusters = it }
+		addCheckBox(context.getString(R.string.astro_galaxy_clusters), tempGalaxyClusters) { tempGalaxyClusters = it }
+		addCheckBox(context.getString(R.string.astro_black_holes), tempBlackHoles) { tempBlackHoles = it }
+
+		val dialog = AlertDialog.Builder(context)
+			.setTitle(R.string.visible_layers_and_objects)
+			.setView(scrollView)
 			.setPositiveButton(R.string.shared_string_apply) { _, _ ->
 				starView.showAzimuthalGrid = tempAzimuthal
 				starView.showEquatorialGrid = tempEquatorial
@@ -137,11 +229,15 @@ object AstroUtils {
 
 				starView.showStars = tempStars
 				starView.showGalaxies = tempGalaxies
+				starView.showNebulae = tempNebulae
+				starView.showOpenCluster = tempOpenClusters
+				starView.showGlobularCluster = tempGlobularClusters
+				starView.showGalaxyCluster = tempGalaxyClusters
 				starView.showBlackHoles = tempBlackHoles
 
 				starView.updateVisibility()
 
-				val newConfig = StarWatcherSettings.StarMapConfig(
+				val newConfig = config.copy(
 					showAzimuthalGrid = tempAzimuthal,
 					showEquatorialGrid = tempEquatorial,
 					showEclipticLine = tempEcliptic,
@@ -151,14 +247,22 @@ object AstroUtils {
 					showConstellations = tempConstellations,
 					showStars = tempStars,
 					showGalaxies = tempGalaxies,
+					showNebulae = tempNebulae,
+					showOpenClusters = tempOpenClusters,
+					showGlobularClusters = tempGlobularClusters,
+					showGalaxyClusters = tempGalaxyClusters,
 					showBlackHoles = tempBlackHoles,
-					items = config.items
+					showMagnitudeFilter = tempShowMagnitudeFilter
 				)
 				swSettings.setStarMapConfig(newConfig)
-				onApply?.invoke()
+				onApply?.invoke(newConfig)
 			}
 			.setNegativeButton(R.string.shared_string_cancel, null)
-			.show()
+			.create()
+
+		dialog.setCancelable(true)
+		dialog.setCanceledOnTouchOutside(true)
+		dialog.show()
 	}
 
 	// ---------- Extensions for Type Conversions ----------

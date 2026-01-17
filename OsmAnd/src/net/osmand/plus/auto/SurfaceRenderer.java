@@ -324,8 +324,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		synchronized (this) {
 			if (mapView != null && mapView.getAnimatedDraggingThread() != null && offscreenMapRendererView != null) {
 				int adjustedTiltAngle = mapView.getAdjustedTiltAngle(mapView.getZoom(), true);
-				mapView.getAnimatedDraggingThread().startTilting(
-						mapView.getElevationAngle() < DEFAULT_ELEVATION_ANGLE ? DEFAULT_ELEVATION_ANGLE : adjustedTiltAngle, 0.0f);
+				float newAngle = mapView.getElevationAngle() < DEFAULT_ELEVATION_ANGLE ? DEFAULT_ELEVATION_ANGLE : adjustedTiltAngle;
+				getApp().getSettings().setLastKnownMapElevation(newAngle);
+				mapView.getAnimatedDraggingThread().startTilting(newAngle, 0.0f);
 			}
 		}
 	}

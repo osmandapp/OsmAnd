@@ -254,7 +254,13 @@ public class QuickSearchListItem {
 					String locationCountry = app.getRegions().getCountryName(latLon);
 					searchResult.localeRelatedObjectName = locationCountry == null ? "" : locationCountry;
 				}
-				return searchResult.localeRelatedObjectName;
+				if (searchResult.hasImpreciseCoordinates()) {
+					String imprecise = app.getString(R.string.imprecise_coordinates);
+					return app.getString(R.string.ltr_or_rtl_combine_via_bold_point,
+							searchResult.localeRelatedObjectName, imprecise);
+				} else {
+					return searchResult.localeRelatedObjectName;
+				}
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
 				return fav.getCategory().length() == 0 ?
@@ -445,6 +451,9 @@ public class QuickSearchListItem {
 			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 			Drawable shieldIcon = NetworkRouteDrawable
 					.getIconByAmenityShieldTags(amenity, app, nightMode, isClickableWay);
+			if(shieldIcon instanceof NetworkRouteDrawable networkRouteDrawable) {
+				networkRouteDrawable.setTextSize(16, nightMode);
+			}
 			if (shieldIcon != null) {
 				return shieldIcon;
 			}

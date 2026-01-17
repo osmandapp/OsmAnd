@@ -548,11 +548,7 @@
     <string name="map_widget_map_rendering">إعدادات الخريطة</string>
     <string name="local_osm_changes_delete_all_confirm">حذف %1$d من التعديلات؟</string>
     <string name="shared_string_delete_all">احذف الكل</string>
-    <string name="srtm_plugin_description">تساعدك معلومات التضاريس ، مثل الخطوط الكنتورية ، والتضاريس ، والمنحدرات ، على التقييم البصري لشكل سطح الأرض ، مع مراعاة الانحناء ،وقابلية الملاحة ، والانحدار ، ونقاط الارتفاع المتساوية ، والمزيد. يمكن تمثيل المعلومات الجغرافية على الخريطة من خلال تظليل المنحدر ، والخطوط الكنتورية للصعود والهبوط ، ولون انحراف زاوية الانحدار عن المسطح.
-\n
-\nالبيانات الأساسية تنشأ من SRTM و ASTER.
-\n
-\nمزيد من القراءة في %1$s.</string>
+    <string name="srtm_plugin_description">يوفر تضاريس وطبوغرافية مفصلة لفهم مرئي لبروز المعالم الأرضية وإمكانية العبور، وذلك باستخدام خطوط الكنتور، وتظليل التلال أو تلوين المنحدرات، والعرض ثلاثي الأبعاد.\n\nلتفعيل هذه الميزات لمنطقة ما، ستحتاج إلى تنزيل خريطة \"خطوط الكنتور\" و/أو \"التضاريس (3D)\" بشكل إضافي، والمجمعة من بيانات SRTM و ASTER.\n\nلمزيد من القراءة في %1$s.</string>
     <string name="osmand_long_description_1000_chars">أوسماند (اتجاهات التنقل الآلي OSM)
 \n
 \n أوسماند هو تطبيق ملاحة مفتوح المصدر مع إمكانية الوصول إلى مجموعة واسعة من بيانات OpenStreetMap (OSM) العالمية. يمكن تخزين جميع بيانات الخريطة (خرائط التوجيه أو خرائط جانبية) على ذاكرة الهاتف للاستخدام في وضع عدم الاتصال. كما يتم توفير وظائف التوجيه عبر الإنترنت وبدونه ، بما في ذلك التوجيه الصوتي خطوة بخطوة.
@@ -2358,8 +2354,8 @@
     <string name="move_all_to_history">نقل الكل إلى السجل</string>
     <string name="show_direction">مؤشر المسافة</string>
     <string name="sort_by">فرز حسب</string>
-    <string name="do_not_use_animations">تعطيل الرسوم المتحركة</string>
-    <string name="do_not_use_animations_descr">لإيقاف تشغيل الخريطة المتحركة.</string>
+    <string name="do_not_use_animations">حذف الرسوم المتحركة</string>
+    <string name="do_not_use_animations_descr">لإيقاف تشغيل الرسوم المتحركة للخريطة والواجهة.</string>
     <string name="keep_showing_on_map">إبقاء القياس على الخريطة</string>
     <string name="exit_without_saving">خروج بدون الحفظ؟</string>
     <string name="show_guide_line">رسم خط توجيه</string>
@@ -3035,8 +3031,8 @@
     <string name="edit_profile_setup_map_subtitle">حدد خيارات الخريطة للوضع</string>
     <string name="edit_profile_screen_options_subtitle">حدد خيارات الشاشة للوضع</string>
     <string name="edit_profile_nav_settings_subtitle">حدد إعدادات الملاحة للوضع</string>
-    <string name="routing_attr_max_num_changes_description">حدد الحد الأعلى للتغييرات</string>
-    <string name="routing_attr_max_num_changes_name">عدد التغييرات</string>
+    <string name="routing_attr_max_num_changes_description">حدد الحد الأقصى لتغيرات وسائل النقل</string>
+    <string name="routing_attr_max_num_changes_name">العدد الأقصى لتغيرات وسائل النقل</string>
     <string name="turn_screen_on_router">تشغيل عند الانعطاف</string>
     <string name="turn_screen_on_time_descr">تعيين الوقت الذي سيتم تشغيل الشاشة فيه.</string>
     <string name="turn_screen_on_sensor">استخدام مستشعر القرب</string>
@@ -4116,7 +4112,7 @@
     <string name="shared_string_articles">مقالات</string>
     <string name="shared_app_storage_description">لم تعد الذاكرة المشتركة متاحة بسبب تغيير اذ الوصول للتخزين في Android.</string>
     <string name="internal_app_storage_description">التخزين الداخلي ، مخفي عن جميع المستخدمين والتطبيقات الأخرى ، لذلك لا أحد يمكنه الوصول إلى بياناتك باستثناء OsmAnd.</string>
-    <string name="rendering_attr_natureReserves_name">محمية طبيعية</string>
+    <string name="rendering_attr_natureReserves_name">محمية طبيعية والمناطق المحمية</string>
     <string name="release_4_1">• تمت إضافة الدعم الأولي لنظام أندرويد أوتو \n \n • تحديث واجهة المستخدم ل تنسيق البحث UTM \n \n• مرشح GPS لمسارات GPX \n \n• أداة الارتفاع (Pro) \n \n • المفضلة: تمت إضافة القدرة على عرض الأيقونات المستخدمة مؤخرا \n \n • تخطيط الطريق: سيستخدم ملف التعريف المحدد بعد البدأ \n \n • طبقة Mapillary ثابتة ، تم تعطيل الأداة الملحقة الآن افتراضيًا \n \n • شاشة مضافة لإدارة كامل السجل في التطبيق \n \n • لا يتم إعادة تعيين اتجاه الخريطة الى الوضع الافتراضي بعد إعادة تشغيل التطبيق \n \n • تحسين عرض علامة ارتفاع SRTM \n \n • إصلاح تسميات الخريطة التوضيحية العربية \n \n • إصلاح مشكلات التوجيه المختلفة</string>
     <string name="shared_storage_warning_title">تغييرات لقواعد الوصول إلى التخزين</string>
     <string name="purchases_feature_desc_android_auto">يوفر خرائط OsmAnd غير المتصلة بالإنترنت والملاحة على شاشة سيارتك ويتكامل بسهولة مع أدوات التحكم في سيارتك.</string>
@@ -4250,7 +4246,7 @@
     <string name="rendering_attr_showWaterwayTunnels_name">أنفاق الممرات المائية</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">إظهار علامات الملاحظة</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">الأيقونات عند التكبيرات المنخفضة</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">عرض تخطيطي للأيقونات عند التكبيرات المنخفضة</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">تمثيل تخطيطي للأيقونات عند مستويات التكبير المنخفضة لنقاط الاهتمام (POIs) التي لا تُعرض عادةً.</string>
     <string name="rendering_attr_showWaterwayTunnels_description">زيادة الرؤية لأنفاق الممرات المائية</string>
     <string name="shared_string_open_street_map">خريطة الشارع المفتوح</string>
     <string name="rendering_value_all_name">الكل</string>
@@ -4665,7 +4661,7 @@
     <string name="rendering_engine_failed_descr">أوسماند قام بالتغيير إلى عرض الخريطة العادي . يمكنك العودة إلى مشغل العرض (3D)\" في الإعدادات.
 \n
 \nالرجاء دعم التحسينات من خلال توفير سجل الأخطاء الخاص بك.</string>
-    <string name="map_rendering_engine_descr">كان عرض الإصدار العادي هو الافتراضي قبل نسخة أوسماند 4.3 ، ولا يزال هو الأنسب للأجهزة القديمة.\nعرض 3D هو نمط عرض خرائط أسرع .</string>
+    <string name="map_rendering_engine_descr">الإصدار 1 كان الافتراضي قبل إصدار OsmAnd 4.3 ويناسب الأجهزة القديمة.\nالإصدار 2 (OpenGL) أكثر تقدمًا ويضيف ميزات مثل العرض ثلاثي الأبعاد.</string>
     <string name="rendering_attr_depthContourWidth_name">عرض الخط</string>
     <string name="shared_string_next_sunset">غروب الشمس القادم</string>
     <string name="shared_string_next_sunrise">شروق الشمس القادم</string>
@@ -5691,22 +5687,22 @@
     <string name="unit_of_volume">وحدة الحجم</string>
     <string name="obd_ambient_air_temp_desc">يعرض درجة الحرارة خارج السيارة.</string>
     <string name="selected_delayed_profile">الوضع المحدد \"%s\"</string>
-    <string name="original_color_description">ستحتفظ كل نقطة بلونها.</string>
-    <string name="original_icon_description">ستحتفظ كل نقطة برمزها.</string>
-    <string name="original_shape_description">ستحتفظ كل نقطة بشكلها.</string>
+    <string name="original_color_description">تحتفظ كل نقطة بلونها.</string>
+    <string name="original_icon_description">تحتفظ كل نقطة برمزها.</string>
+    <string name="original_shape_description">تحتفظ كل نقطة بشكلها.</string>
     <string name="apply_to_all_points">تطبيق على كل النقاط</string>
     <string name="hmd_promo">عرض ترويجي ل HMD لمدة %1$s شهر</string>
     <string name="hmd_promo_description">الوصول المجاني إلى الميزات بما في ذلك تنزيلات الخرائط غير المحدودة، والتضاريس ثلاثية الأبعاد وما إلى ذلك لمدة %1$s أشهر</string>
     <string name="ais_load_data">تحميل بيانات AIS من ملف</string>
-    <string name="ais_address_settings_description">اختر بروتوكول NMEA (UDP/TCP) وقم بتحديد العناوين</string>
+    <string name="ais_address_settings_description">اختر بروتوكول NMEA (UDP/TCP) وحدد العناوين والمنافذ المقابلة</string>
     <string name="ais_address_nmea_server_description">تحديد عنوان IP لمصدر بيانات NMEA (إذا تم استخدام TCP)</string>
     <string name="ais_port_nmea_server_description">تحديد رقم منفذ TCP لمصدر بيانات NMEA</string>
     <string name="ais_port_nmea_local">منفذ UDP لجهاز استقبال البيانات NMEA المحلي</string>
     <string name="ais_object_lost_timeouts_description">تعيين قيم مهلة زمنية لتحديد عناصر AIS المفقودة إذا لم يتم تلقي أي إشارة لفترة زمنية محددة.</string>
     <string name="ais_address_nmea_server">عنوان IP لمصدر بيانات NMEA</string>
-    <string name="ais_object_lost_timeout">مهلة الرؤية عند فقدان عنصر</string>
+    <string name="ais_object_lost_timeout">مهلة الرؤية عند فقدان السفينة</string>
     <string name="ais_address_settings">إعدادات عنوان IP</string>
-    <string name="save_favorite_default_appearance">تطبيق التغييرات على النقاط الموجودة في المجلد أم على النقاط الجديدة فقط؟</string>
+    <string name="save_favorite_default_appearance">تطبيق التغييرات على كل النقاط الموجودة في المجلد أم على النقاط المضافة حديثًا فقط؟</string>
     <string name="ais_nmea_protocol">بروتوكول لاستقبال بيانات NMEA</string>
     <string name="ais_port_nmea_server">منفذ TCP لمصدر بيانات NMEA</string>
     <string name="ais_port_nmea_local_description">قم بتحديد منفذ UDP حيث يستقبل أوسماند بيانات NMEA</string>
@@ -5723,10 +5719,10 @@
     <string name="shared_string_avg_altitude">متوسط الارتفاع</string>
     <string name="shared_string_length">الطول</string>
     <string name="shared_string_interpolation">الاستيفاء</string>
-    <string name="default_buttons_corners_original_description">سيحتفظ كل زر بحواف شاشتك.</string>
+    <string name="default_buttons_corners_original_description">يحتفظ كل زر بحواف شاشتك.</string>
     <string name="display_distance_to_first_intermediate">إظهار تفاصيل المسار للمحطة التالية</string>
     <string name="plugin_ais_tracker_name">جهاز تعقب السفن AIS</string>
-    <string name="map_widget_route_information_desc">يعرض وقت الوصول المقدر، ووقت السفر المتبقي، والمسافة لمسار الملاحة الحالي.</string>
+    <string name="map_widget_route_information_desc">يعرض وقت الوصول المقدر، ووقت السفر المتبقي، والمسافة لمسار الملاحة النشط.</string>
     <string name="map_widget_route_information">معلومات المسار</string>
     <string name="shared_string_default_view">العرض الافتراضي</string>
     <string name="rendering_attr_showClimbingRoutes_description">عرض مسارات التسلق</string>
@@ -5736,28 +5732,28 @@
     <string name="show_grids_description">السماح بعرض الشبكة على الخريطة</string>
     <string name="show_grids">إظهار شبكة الخريطة</string>
     <string name="map_grid">شبكات الخريطة</string>
-    <string name="ais_object_lost_timeout_description">تعيين مهلة زمنية لرؤية عناصر AIS: سيتم إزالة عنصر AIS من الشاشة بعد هذا الوقت دون استقبال الإشارة.</string>
-    <string name="plugin_ais_tracker_description">عرض مواقع AIS والمعلومات حول السفن المحيطة. يتم استقبال بيانات AIS عبر الشبكة من جهاز استقبال AIS خارجي.</string>
+    <string name="ais_object_lost_timeout_description">تعيين مهلة لظهور عناصر AIS: في حال عدم استقبال أي إشارة خلال المدة المحددة، سيُحذف العنصر تلقائياً من الشاشة.</string>
+    <string name="plugin_ais_tracker_description">يعرض مواقع AIS ومعلومات عن السفن القريبة. تُستقبل بيانات AIS عبر الشبكة من جهاز استقبال AIS خارجي.</string>
     <string name="shared_string_avg_speed">السرعة الأدنى</string>
     <string name="rendering_attr_showClimbingRoutes_name">مسارات التسلق</string>
-    <string name="display_distance_to_first_intermediate_summary">يعرض الوقت والمسافة للمحطة التالية أولاً. قم بإيقاف تشغيله لإظهار تفاصيل الوجهة دائمًا.</string>
+    <string name="display_distance_to_first_intermediate_summary">يعرض الوقت والمسافة إلى التوقف التالي. عطل هذا الخيار لعرض تفاصيل الوجهة النهائية دائمًا بدلاً من ذلك.</string>
     <string name="location_interpolation_percent">نسبة استيفاء الموقع</string>
-    <string name="default_buttons_opacity_original_description">سيحتفظ كل زر بشفافية خلفيتك.</string>
+    <string name="default_buttons_opacity_original_description">يحتفظ كل زر بشفافية خلفيتك.</string>
     <string name="calculate_size">حساب الحجم</string>
-    <string name="ais_cpa_warning_time">وقت التحذير للوصول إلى أقرب نقطة اقتراب (CPA)</string>
+    <string name="ais_cpa_warning_time">وقت التحذير قبل أقرب نقطة اقتراب (CPA)</string>
     <string name="ais_cpa_settings">الاعدادات المتعلقة ب CPA</string>
-    <string name="ais_ship_lost_timeout_description">ضبط مهلة زمنية لرؤية السفينة: بعد هذا الوقت دون استقبال الإشارة، سيتغير حالة رمز السفينة على الشاشة: سيتم شطبه.</string>
+    <string name="ais_ship_lost_timeout_description">تعيين مهلة تقادم رؤية السفينة: بعد انقضاء هذه المدة دون استقبال إشارة، سيتم وضع علامة شطب على رمز السفينة.</string>
     <string name="show_dms_grids_description">إظهار الشبكة بالدرجات والدقائق والثواني بدلاً من الدرجات</string>
     <string name="location_interpolation_percent_desc">قم بتعيين نسبة استيفاء الموقع أثناء التنقل عبر المسار. تعمل هذه على تقليل تأخر موضع موقعك على الخريطة أثناء التحرك.</string>
-    <string name="no_photo_for_location_desc">لم تتم إضافة صور المستخدم إلى هذا الموقع بعد</string>
+    <string name="no_photo_for_location_desc">لم تُضاف صور المستخدم لهذا الموقع بعد</string>
     <string name="no_places_available">لا توجد أماكن في المنطقة المرئية</string>
-    <string name="plugin_ais_tracker_disclaimer">إخلاء المسؤولية\n\nهذه الإضافة مشروع هواية وليست مصممة للموثوقية والدقة. لا تعتمد على هذا البرنامج بأي شكل من الأشكال بما في ذلك للملاحة و/أو سلامة الحياة.</string>
-    <string name="ais_cpa_warning_distance_description">يتم تمييز السفن باللون الأحمر إذا كان ال CPA أقل من هذه القيمة وتم الوصول إلى CPA في المستقبل القريب (راجع ضبط وقت التحذير للوصول إلى CPA).</string>
-    <string name="ais_cpa_settings_description">تعرف هذه القيم على عرض عناصر AIS التي قد تقترب كثيرًا من موضعها.</string>
-    <string name="ais_cpa_warning_time_description">إذا كان TCPA (الوقت المستغرق للوصول إلى CPA مع سفينة أخرى) أقل من هذه القيمة، فسيتم تمييز السفينة باللون الأحمر.</string>
+    <string name="plugin_ais_tracker_disclaimer">إخلاء مسؤولية\n\nهذه الإضافة هي مشروع هواة وغير مخصصة للاستخدام في التطبيقات الحرجة، ولا تضمن الموثوقية أو الدقة. لا تعتمد على هذا البرنامج في الملاحة، أو سلامة الأرواح، أو أي عمليات أساسية أخرى.</string>
+    <string name="ais_cpa_warning_distance_description">تُميز السفن باللون الأحمر إذا كانت مسافة أقرب نقطة تصادم (CPA) أقل من الحد المعين، وكان زمن الوصول إليها (TCPA) يقع ضمن مهلة التحذير المحددة في إعداد \"وقت التحذير للوصول إلى CPA\").</string>
+    <string name="ais_cpa_settings_description">تحدد هذه القيم كيفية عرض عناصر AIS عند اقترابها من موقع السفينة الخاص.</string>
+    <string name="ais_cpa_warning_time_description">إذا انخفض زمن الوصول إلى أقرب نقطة تصادم (TCPA) مع سفينة أخرى عن الحد المحدد، فستُميز السفينة باللون الأحمر.</string>
     <string name="ais_cpa_warning_distance">مسافة التحذير لأقرب نقطة اقتراب (CPA)</string>
-    <string name="ais_ship_lost_timeout">مهلة رؤية السفينة عند عدم تلقي أي إشارة</string>
-    <string name="default_buttons_size_original_description">سيحتفظ كل زر بحجمه.</string>
+    <string name="ais_ship_lost_timeout">مهلة تقادم بيانات السفينة</string>
+    <string name="default_buttons_size_original_description">يحتفظ كل زر بحجمه.</string>
     <string name="calculating_indication_message">يتم الحساب…</string>
     <string name="choose_location">اختر الموقع</string>
     <string name="point_location">موقع النقطة</string>
@@ -5768,7 +5764,7 @@
     <string name="layer_coordinates_grid">شبكة الإحداثيات</string>
     <string name="equator">خط الاستواء</string>
     <string name="show_list">إظهار القائمة</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">إجراء للتحكم في رؤية شبكة الإحداثيات على الخريطة.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">تبديل رؤية شبكة الإحداثيات على الخريطة.</string>
     <string name="prime_meridian">خط الطول الأول</string>
     <string name="meridian_180">خط الطول 180</string>
     <string name="show_image_previews">إظهار معاينات الصور</string>
@@ -5997,4 +5993,37 @@
     <string name="rendering_attr_pisteRoutes_name">منحدرات ومسارات التزلج</string>
     <string name="download_wikipedia_label">تحميل ويكيبيديا</string>
     <string name="rendering_attr_spotSize_description">حجم قياس البقعة</string>
+    <string name="gpx_too_many_points_visible_warning">يؤدي ظهور عدد كبير من مسارات GPX إلى استهلاك عالٍ للذاكرة.</string>
+    <string name="star_watcher_plugin_name">مراقب النجوم (نسخة تجريبية)</string>
+    <string name="star_watcher_plugin_description">خرائط النجوم، خريطة نجوم ثلاثية الأبعاد</string>
+    <string name="star_map">خريطة النجوم</string>
+    <string name="star_charts_name">خرائط النجوم</string>
+    <string name="star_visibility_name">رؤية النجوم</string>
+    <string name="star_altitude_name">ارتفاع النجم</string>
+    <string name="astro_name_sun">الشمس</string>
+    <string name="astro_name_moon">القمر</string>
+    <string name="astro_name_mercury">عطارد</string>
+    <string name="astro_name_venus">الزهرة</string>
+    <string name="astro_name_mars">المريخ</string>
+    <string name="astro_name_jupiter">المشتري</string>
+    <string name="astro_name_saturn">زحل</string>
+    <string name="astro_name_uranus">أورانوس</string>
+    <string name="astro_name_neptune">نيبتون</string>
+    <string name="astro_name_pluto">بلوتو</string>
+    <string name="azimuthal_grid">الشبكة السمتية</string>
+    <string name="equatorial_grid">الشبكة الاستوائية</string>
+    <string name="ecliptic_line">خط مسار الشمس</string>
+    <string name="astro_planets">الكواكب</string>
+    <string name="astro_constellation">الكوكبة</string>
+    <string name="astro_constellations">الكوكبات</string>
+    <string name="astro_stars">النجوم</string>
+    <string name="astro_galaxies">المجرات</string>
+    <string name="astro_nebulae">السديم</string>
+    <string name="astro_open_clusters">العناقيد المفتوحة</string>
+    <string name="astro_globular_clusters">العناقيد النجمية الكروية</string>
+    <string name="astro_galaxy_clusters">عناقيد المجرات</string>
+    <string name="astro_black_holes">الثقوب السوداء</string>
+    <string name="visible_layers_and_objects">الطبقات والأجرام المرئية</string>
+    <string name="shared_string_azimuth">السمت</string>
+    <string name="imprecise_coordinates">إحداثيات غير دقيقة</string>
 </resources>

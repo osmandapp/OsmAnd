@@ -60,6 +60,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 
 public class SearchUICore {
 	
@@ -87,6 +88,8 @@ public class SearchUICore {
 	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(
 			Arrays.asList("building", "internet_access_yes"));
 
+	private Function<String, String> httpRedirectRequester = null;
+
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this.poiTypes = poiTypes;
 		taskQueue = new LinkedBlockingQueue<Runnable>();
@@ -95,6 +98,10 @@ public class SearchUICore {
 		phrase = SearchPhrase.emptyPhrase(searchSettings);
 		currentSearchResult = new SearchResultCollection(phrase);
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
+	}
+
+	public void setHttpRedirectRequester(Function<String, String> httpRedirectRequester) {
+		this.httpRedirectRequester = httpRedirectRequester;
 	}
 
 	public static void setDebugMode(boolean debugMode) {
@@ -221,43 +228,27 @@ public class SearchUICore {
 
 		public void calculateAddressString() {
 			String dominatedCity = "";
-			Map<String, Integer> cities = new TreeMap<String, Integer>();
+			Map<String, Integer> cityCounter = new TreeMap<>();
 			for (SearchResult s : searchResults) {
 				if (!Algorithms.isEmpty(s.cityName)) {
-					String mainCity = s.cityName;
-					if (mainCity.indexOf(",") != -1) {
-						mainCity = mainCity.substring(0, mainCity.indexOf(",")).trim();
-					}
-					Integer freq = cities.get(mainCity);
-					if (freq == null) {
-						freq = 0;
-					}
-					freq++;
-					if (freq >= DOMINATED_CITY_CRITERIA) {
-						dominatedCity = mainCity;
+					String mainCity = getMainCityName(s.cityName);
+					String domCity = getDominatedCity(cityCounter, mainCity);
+					if (domCity != null) {
+						dominatedCity = domCity;
 						break;
 					}
-					cities.put(mainCity, freq);
-
 				}
 			}
 			for (SearchResult s : searchResults) {
 				if (s.object instanceof Amenity amenity && Algorithms.isEmpty(s.alternateName)) {
-					String city = s.cityName == null ? "" : s.cityName; 
-					String mainCity = city;
-					if (city.indexOf(",") != -1) {
-						mainCity = city.substring(0, city.indexOf(",")).trim();
-					}
+					String city = s.cityName == null ? "" : s.cityName;
+					String mainCity = getMainCityName(city);
 					if (Algorithms.isEmpty(amenity.getStreetName())) {
 						s.addressName = city;
 					} else {
 						String hno = amenity.getHousenumber();
 						String addr = amenity.getStreetName() + (Algorithms.isEmpty(hno) ? "" : " " + hno);
-						if (dominatedCity.equals(mainCity)) {
-							s.addressName = addr + ", " + s.cityName;
-						} else {
-							s.addressName = (city.length() == 0 ? "" : (s.cityName + ", ")) + addr;
-						}
+						s.addressName = createAddressString(s.cityName, mainCity, dominatedCity, addr);
 					}
 				}
 			}
@@ -552,7 +543,7 @@ public class SearchUICore {
 	public void init() {
 		SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
 		apis.add(amenitiesApi);
-		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi));
+		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi, httpRedirectRequester));
 		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
 		apis.add(new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
@@ -1330,5 +1321,34 @@ public class SearchUICore {
 			return 0;
 		}
 
+	}
+
+	public static String getMainCityName(String cityName) {
+		String mainCity = cityName;
+		if (cityName.contains(",")) {
+			mainCity = mainCity.substring(0, mainCity.indexOf(",")).trim();
+		}
+		return mainCity;
+	}
+
+	public static String getDominatedCity(Map<String, Integer> cities, String mainCity) {
+		Integer freq = cities.get(mainCity);
+		if (freq == null) {
+			freq = 0;
+		}
+		freq++;
+		if (freq >= SearchResultCollection.DOMINATED_CITY_CRITERIA) {
+			return mainCity;
+		}
+		cities.put(mainCity, freq);
+		return null;
+	}
+
+	public static String createAddressString(String cityName, String mainCity, String dominatedCity, String addr) {
+		if (dominatedCity != null && dominatedCity.equals(mainCity)) {
+			return addr + (Algorithms.isEmpty(cityName) ? "" : ", " + cityName);
+		} else {
+			return (Algorithms.isEmpty(cityName) ? "" : (cityName + ", ")) + addr;
+		}
 	}
 }

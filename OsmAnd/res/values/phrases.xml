@@ -194,6 +194,7 @@
 	<string name="poi_network_foot">Routes network (hiking)</string>
 	<string name="poi_network_cycling">Routes network (cycling)</string>
 	<string name="poi_sample_collection_filter">Sample collection</string>
+	<string name="poi_memorial_type">Memorial type</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -2320,7 +2321,6 @@
 	<string name="poi_training_art">Training: art</string>
 	<string name="poi_training_cooking">Training: cooking</string>
 	<string name="poi_training_computer">Training: computer</string>
-	<string name="poi_training_yoga">Training: yoga</string>
 	<string name="poi_training_martial_art">Training: martial art</string>
 	<string name="poi_training_aviation">Training: aviation</string>
 	<string name="poi_training_hairdressing">Training: hairdressing</string>
@@ -5752,10 +5752,12 @@
 	<string name="poi_canoe_put_in_egress">Canoe launch and take-out</string>
 	<string name="poi_whitewater_hazard">Whitewater hazard</string>
 
-	<string name="poi_sample_collection">Sample collection</string>
+	<string name="poi_sample_collection">Sample collection;Blood;Laboratory;Test</string>
 	<string name="poi_sample_collection_yes">Yes</string>
 	<string name="poi_sample_collection_covid19">COVID19</string>
 	<string name="poi_sample_collection_blood">Blood</string>
 
 	<string name="poi_hazard_yes">Hazard</string>
+	<string name="poi_yoga">Yoga</string>
+
 </resources>

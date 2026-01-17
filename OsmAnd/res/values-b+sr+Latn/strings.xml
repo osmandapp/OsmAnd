@@ -3330,11 +3330,7 @@
     <string name="audionotes_plugin_name">Zvučni i video zapisi</string>
     <string name="plugin_touringview_descr">Uključivanjem ovog pogleda se menja način izgeda mape na „Turistički pregled“, koji je naročiti bogati pregled za turiste i službene vozače. \n\nOvaj pogled nudi, na svakom stupnju približavanja najveću količinu turističkih detalja na podacima mape (posebno puteve, tragove, staze i znakove snalaženja u prostoru). \n\nTakođe i jasno predstavlja sve vrste puteva po boji, tako da nikad ne bude zabune, što je korisno kada se npr. voze veća vozila. \n\nA nudi se i posebne turističke mogućnosti kao što su prikaz biciklističkih ili planinskih puteva. \n\nNije potrebno preuzimanje posebne mape, pogled se pravi od običnih mapi. \n\nOvaj pogled se može isključiti tako što se ili ovde isključi, ili tako što se, po želji, promeni način izgleda mape pod Podesi mapu.</string>
     <string name="plugin_touringview_name">Turistički pregled mape</string>
-    <string name="srtm_plugin_description">Informacije o terenu, kao što su konturne linije, osenčeni reljef, nagib, pomažu da vizualno proceniš položaj zemlje, reljef, plovnost i još mnogo toga. Topografske informacije na mapi mogu biti predstavljene konturnim linijama, senčanjem reljefa i/ili bojanjem strmine.
-\n
-\nZemaljski podaci (između 70° severno i 70° južno) se zasnovani na SRTM i ASTER.
-\n
-\nViše podataka na %1$s.</string>
+    <string name="srtm_plugin_description">Pruža teren i detaljnu topografiju za vizuelno razumevanje reljefa pejzaža i prohodnosti, koristeći konturne linije, senčenje brda ili bojenje padina i 3D prikaz.\n\nDa biste omogućili ove funkcije za region, potrebno je dodatno da preuzmete kartu konturnih linija i/ili terena (3D), sastavljenu iz SRTM i ASTER podataka.\n\nViše informacija na %1$s.</string>
     <string name="srtm_plugin_name">Topografija</string>
     <string name="osmand_srtm_short_description_80_chars">Osmand dodatak za offline topo karakteristike poput kontura, osenčen reljef, nagib</string>
     <string name="srtm_paid_version_title">Topografski dodatak</string>
@@ -5900,4 +5896,60 @@
     <string name="delete_folder_description">Obrisati „%1$s“ folder?</string>
     <string name="show_spherical_map">Globusni prikaz</string>
     <string name="enable_3d_objects">3D zgrada</string>
+    <string name="show_expand_button">Pokaži dugme za proširenje</string>
+    <string name="imprecise_coordinates">Neprecizne koordinate</string>
+    <string name="star_map">Zvezdana mapa</string>
+    <string name="star_charts_name">Zvezdane mape</string>
+    <string name="star_visibility_name">Vidljivost zvezda</string>
+    <string name="star_altitude_name">Nadmorska visina zvezda</string>
+    <string name="astro_name_sun">Sunce</string>
+    <string name="astro_name_moon">Mesec</string>
+    <string name="astro_name_mercury">Merkur</string>
+    <string name="astro_name_venus">Venera</string>
+    <string name="astro_name_mars">Mars</string>
+    <string name="astro_name_jupiter">Jupiter</string>
+    <string name="astro_name_saturn">Saturn</string>
+    <string name="astro_name_uranus">Uran</string>
+    <string name="astro_name_neptune">Neptun</string>
+    <string name="astro_name_pluto">Pluton</string>
+    <string name="star_watcher_plugin_description">Zvezdane mape, 3D zvezdana mapa</string>
+    <string name="star_watcher_plugin_name">Posmatranje zvezda (Beta)</string>
+    <string name="azimuthal_grid">Azimutalna mreža</string>
+    <string name="equatorial_grid">Ekvatorijalna mreža</string>
+    <string name="ecliptic_line">Ekliptička linija</string>
+    <string name="magnitude_filter">Filter magnitude</string>
+    <string name="astro_planets">Planete</string>
+    <string name="astro_constellation">Sazvežđe</string>
+    <string name="astro_constellations">Sazvežđa</string>
+    <string name="astro_stars">Zvezde</string>
+    <string name="astro_galaxies">Galaksije</string>
+    <string name="astro_nebulae">Magline</string>
+    <string name="astro_open_clusters">Otvoreni Klasteri</string>
+    <string name="astro_globular_clusters">Globularni Klasteri</string>
+    <string name="astro_galaxy_clusters">Galaktički Klasteri</string>
+    <string name="astro_black_holes">Crne rupe</string>
+    <string name="visible_layers_and_objects">Vidljivi Slojevi i Objekti</string>
+    <string name="shared_string_azimuth">Azimut</string>
+    <string name="shared_string_magnitude">Magnituda</string>
+    <string name="astro_rise">Izlazak</string>
+    <string name="astro_set">Skup</string>
+    <string name="gpx_too_many_points_visible_warning">Velika količina vidljivih GPX tragova dovodi do velike potrošnje memorije</string>
+    <string name="sort_highest_first">Najviši prvi</string>
+    <string name="sort_lowest_first">Najniži prvi</string>
+    <string name="no_date">Bez datuma</string>
+    <string name="shared_string_step">Korak</string>
+    <string name="set_step_size_summary">Izaberite veličinu koraka da biste grupisali svoje tragove.</string>
+    <string name="set_step_size">Podesite veličinu koraka</string>
+    <string name="organize_by_summary">Automatski organizujte svoje tragove u grupe na osnovu izabranog parametra kao što su aktivnost, brzina ili lokacija.</string>
+    <string name="organize_by">Organizuj po</string>
+    <string name="group_general">Generalna</string>
+    <string name="group_date_time">Datum i vreme</string>
+    <string name="group_altitude_elevation">Nadmorska visina i elevacija</string>
+    <string name="group_sensors">Senzori</string>
+    <string name="year_of_creation">Godina stvaranja</string>
+    <string name="month_year_creation">Mesec i godina stvaranja</string>
+    <string name="nearest_city">Najbliži grad</string>
+    <string name="avg_speed">Pros. brzina</string>
+    <string name="organize_by_max_speed">Maks. brzina</string>
+    <string name="organize_by_max_altitude">Maks. nadmorska visina</string>
 </resources>

@@ -20,7 +20,8 @@ abstract class ElevationDiffsCalculator {
 		val endPointIndex: Int,
 		var elevDiff: Double,
 		var distance: Double = 0.0,
-		var maxSpeed: Double = 0.0
+		var maxSpeed: Double = 0.0,
+        var movingTime: Long = 0L
 	)
 
 	private var lastUphill: SlopeInfo? = null

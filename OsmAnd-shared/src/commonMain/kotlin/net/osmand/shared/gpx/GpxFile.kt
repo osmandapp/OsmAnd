@@ -70,7 +70,7 @@ class GpxFile : GpxExtensions {
 	}
 
 	fun getPointsList(): List<WptPt> {
-		return points.toList()
+		return points
 	}
 
 	fun setPointsList(points: List<WptPt>) {

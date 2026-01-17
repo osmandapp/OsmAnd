@@ -67,10 +67,10 @@ import net.osmand.plus.Version;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
-import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.configmap.routes.MtbClassification;
@@ -2592,6 +2592,7 @@ public class OsmandSettings {
 	private final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
 	private final CommonPreference<Float> LAST_KNOWN_MANUALLY_MAP_ROTATION = new FloatPreference(this, "last_known_manually_map_rotation", 0).makeProfile();
 	private final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
+	private final CommonPreference<Float> LAST_KNOWN_AA_MAP_ELEVATION = new FloatPreference(this, "last_known_aa_map_elevation", 90).makeProfile();
 
 	public float getLastKnownMapRotation() {
 		return getLastKnownMapRotation(getApplicationMode());
@@ -2630,7 +2631,7 @@ public class OsmandSettings {
 	}
 
 	public float getLastKnownMapElevation(@NonNull ApplicationMode appMode) {
-		return LAST_KNOWN_MAP_ELEVATION.getModeValue(appMode);
+		return getLastKnownMapElevationPref().getModeValue(appMode);
 	}
 
 	public void setLastKnownMapElevation(float elevation) {
@@ -2638,7 +2639,16 @@ public class OsmandSettings {
 	}
 
 	public void setLastKnownMapElevation(@NonNull ApplicationMode appMode, float elevation) {
-		LAST_KNOWN_MAP_ELEVATION.setModeValue(appMode, elevation);
+		getLastKnownMapElevationPref().setModeValue(appMode, elevation);
+	}
+
+	private CommonPreference<Float> getLastKnownMapElevationPref() {
+		NavigationSession carNavigationSession = ctx.getCarNavigationSession();
+		if(carNavigationSession != null && carNavigationSession.hasStarted()) {
+			return LAST_KNOWN_AA_MAP_ELEVATION;
+		} else {
+			return LAST_KNOWN_MAP_ELEVATION;
+		}
 	}
 
 	public static final String POINT_NAVIGATE_LAT = "point_navigate_lat";

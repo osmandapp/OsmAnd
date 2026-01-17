@@ -279,11 +279,7 @@
     <string name="map_widget_audionotes">Notas àudio</string>
     <string name="audionotes_plugin_description">Crea notas àudio/foto/vìdeu durante unu biàgiu, impreende o unu butone in sa mapa o su menù de cuntestu de sa positzione.</string>
     <string name="audionotes_plugin_name">Estensione notas àudio/vìdeo</string>
-    <string name="srtm_plugin_description">Sas informatziones de su terrinu, che a sas curvas de livellu, sas umbraduras de sos rilievos e sas pendèntzias, t\'agiudant a valutare cun sos ogros tuos sa dispositzione de su terrinu, sa navigabilidade e àteru. Sas informatziones topogràficas in una mapa si podent rapresentare cun s\'umbradura de sas pendèntzias, curvas de livellu e/o su colore de s\'àngulu de inclinatzione.
-\n
-\nSos datos impreados benint dae su SRTM e dae s\'ASTER.
-\n
-\nÀteras informatziones in %1$s.</string>
+    <string name="srtm_plugin_description">Sas informatziones de su terrinu, che a sas curvas de livellu, sas umbraduras de sos rilievos e sas pendèntzias, t\'agiudant a valutare cun sos ogros tuos sa dispositzione de su terrinu, sa navigabilidade e àteru. Sas informatziones topogràficas in una mapa si podent rapresentare cun s\'umbradura de sas pendèntzias, curvas de livellu e/o su colore de s\'àngulu de inclinatzione. \n \nSos datos impreados benint dae su SRTM e dae s\'ASTER. \n \nÀteras informatziones in %1$s.</string>
     <string name="srtm_plugin_name">Curvas de livellu</string>
     <string name="download_select_map_types">Àteras mapas</string>
     <string name="download_roads_only_item">Caminos ebbia</string>

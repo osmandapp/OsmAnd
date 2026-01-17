@@ -13,6 +13,8 @@ import android.graphics.PointF
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.view.GestureDetector
+import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
@@ -28,7 +30,7 @@ import io.github.cosinekitty.astronomy.Vector
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.rotationEclEqd
-import net.osmand.plus.plugins.astro.AstroDataProvider.Constellation
+import net.osmand.plus.plugins.astro.Constellation
 import net.osmand.plus.plugins.astro.SkyObject
 import java.util.Calendar
 import java.util.TimeZone
@@ -58,6 +60,7 @@ class StarView @JvmOverloads constructor(
 	private val cardinalTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = Color.GREEN
 		textSize = 40f
+		textAlign = Paint.Align.CENTER
 	}
 	private val gridTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = 0xFF888888.toInt()
@@ -142,6 +145,10 @@ class StarView @JvmOverloads constructor(
 	var showStars = true
 	var showGalaxies = true
 	var showBlackHoles = true
+	var showNebulae = true
+	var showOpenCluster = true
+	var showGlobularCluster = true
+	var showGalaxyCluster = true
 	var showSun = true
 	var showMoon = true
 	var showPlanets = true
@@ -151,11 +158,18 @@ class StarView @JvmOverloads constructor(
 	private var lastTouchY = 0f
 	private var isPanning = false
 	private val scaleGestureDetector = ScaleGestureDetector(context, ScaleListener())
+	private val gestureDetector = GestureDetector(context, object : SimpleOnGestureListener() {
+		override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+			performClickAt(e.x, e.y); return true;
+		}
+	})
+
 	private var onObjectClickListener: ((SkyObject?) -> Unit)? = null
 
 	var onAnimationFinished: (() -> Unit)? = null
 	var onAzimuthManualChangeListener: ((Double) -> Unit)? = null
 	var onViewAngleChangeListener: ((Double) -> Unit)? = null
+	var magnitudeFilter: Float? = null
 
 	var roll = 0.0
 		set(value) {
@@ -233,7 +247,6 @@ class StarView @JvmOverloads constructor(
 		var targetAzimuth: Double = 0.0, var targetAltitude: Double = 0.0
 	)
 	private val constellationCenters = mutableMapOf<Constellation, ConstellationCentroid?>()
-	private val tempPathPoint = PointF() // Helper for projection inside onDraw
 
 	private var visualAnimator: ValueAnimator? = null
 
@@ -243,19 +256,58 @@ class StarView @JvmOverloads constructor(
 		invalidate()
 	}
 
-	fun setCenter(azimuth: Double, altitude: Double) {
-		this.azimuthCenter = azimuth
-		this.altitudeCenter = max(-90.0, min(90.0, altitude))
-		invalidate()
+	fun setCenter(azimuth: Double, altitude: Double, animate: Boolean = false) {
+		if (animate) {
+			val startAz = azimuthCenter
+			val startAlt = altitudeCenter
+			visualAnimator?.cancel()
+			visualAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
+				duration = 500
+				interpolator = DecelerateInterpolator()
+				addUpdateListener { animator ->
+					val fraction = animator.animatedValue as Float
+					azimuthCenter = interpolateAngle(startAz, azimuth, fraction)
+					altitudeCenter = startAlt + (max(-90.0, min(90.0, altitude)) - startAlt) * fraction
+					invalidate()
+				}
+				start()
+			}
+		} else {
+			this.azimuthCenter = azimuth
+			this.altitudeCenter = max(-90.0, min(90.0, altitude))
+			invalidate()
+		}
+	}
+
+	fun getAltitude() = altitudeCenter
+
+	fun getAzimuth() = azimuthCenter
+
+	fun getViewAngle() = viewAngle
+
+	private fun updateViewAngle(newAngle: Double, focusX: Float = width / 2f, focusY: Float = height / 2f) {
+		val maxAngle = if (is2DMode) 220.0 else 150.0
+		val finalAngle = max(10.0, min(maxAngle, newAngle))
+		if (abs(this.viewAngle - finalAngle) > 0.001) {
+			if (is2DMode && width > 0 && height > 0) {
+				val oldTan = tan(Math.toRadians(viewAngle) / 4.0)
+				val newTan = tan(Math.toRadians(finalAngle) / 4.0)
+				if (oldTan > 0 && newTan > 0) {
+					val ratio = oldTan / newTan
+					val halfWidth = width / 2f
+					val halfHeight = height / 2f
+					panX = (focusX - halfWidth - (focusX - halfWidth - panX) * ratio).toFloat()
+					panY = (focusY - halfHeight - (focusY - halfHeight - panY) * ratio).toFloat()
+				}
+			}
+			this.viewAngle = finalAngle
+			onViewAngleChangeListener?.invoke(finalAngle)
+			invalidate()
+		}
 	}
 
 	fun setViewAngle(angle: Double) {
-		val newAngle = max(10.0, min(150.0, angle))
-		if (abs(this.viewAngle - newAngle) > 0.001) {
-			this.viewAngle = newAngle
-			onViewAngleChangeListener?.invoke(newAngle)
-			invalidate()
-		}
+		updateViewAngle(angle)
 	}
 
 	fun setAzimuth(azimuth: Double, animate: Boolean = false, fps: Int? = 30) {
@@ -292,6 +344,9 @@ class StarView @JvmOverloads constructor(
 		skyObjects.sortBy { it.magnitude }
 		skyObjectMap.clear()
 		objects.forEach { skyObjectMap[it.hip] = it }
+
+		updateConstellationCenters()
+
 		recalculatePositions(currentTime, updateTargets = false)
 		skyObjects.forEach {
 			it.azimuth = it.targetAzimuth
@@ -303,14 +358,11 @@ class StarView @JvmOverloads constructor(
 		pinnedObjects.removeAll(toRemove)
 		pathCache.keys.removeAll(toRemove)
 
-		updateConstellationCenters()
 		invalidate()
 	}
 
 	fun setConstellations(list: List<Constellation>) {
 		constellations = list
-		updateConstellationCenters()
-		invalidate()
 	}
 
 	private fun updateConstellationCenters() {
@@ -375,6 +427,16 @@ class StarView @JvmOverloads constructor(
 	}
 
 	fun getSelectedConstellationItem(): Constellation? = selectedConstellation
+
+	fun setSelectedObject(obj: SkyObject?) {
+		selectedObject = obj
+		invalidate()
+	}
+
+	fun setSelectedConstellation(c: Constellation?) {
+		selectedConstellation = c
+		invalidate()
+	}
 
 	// --- Pinning API ---
 
@@ -445,22 +507,16 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
+	fun getMinZoom() = if (is2DMode) 200.0 else 150.0
+
+	fun getMaxZoom() = 150.0
+
 	fun zoomIn() {
-		val newAngle = max(10.0, min(150.0, viewAngle / 1.5))
-		if (abs(viewAngle - newAngle) > 0.001) {
-			viewAngle = newAngle
-			onViewAngleChangeListener?.invoke(viewAngle)
-			invalidate()
-		}
+		updateViewAngle(viewAngle / 1.5)
 	}
 
 	fun zoomOut() {
-		val newAngle = max(10.0, min(150.0, viewAngle * 1.5))
-		if (abs(viewAngle - newAngle) > 0.001) {
-			viewAngle = newAngle
-			onViewAngleChangeListener?.invoke(viewAngle)
-			invalidate()
-		}
+		updateViewAngle(viewAngle * 1.5)
 	}
 
 	private fun recalculatePositions(time: Time, updateTargets: Boolean) {
@@ -468,8 +524,8 @@ class StarView @JvmOverloads constructor(
 			if (!shouldRecalculate(obj)) return@forEach
 
 			val hor: Topocentric
-			if (obj.type.isSunSystem()) {
-				val body = obj.body ?: throw IllegalStateException("Planet without Body enum")
+			if (obj.type.isSunSystem() && obj.body != null) {
+				val body = obj.body
 				val equ = equator(body, time, observer, EquatorEpoch.OfDate, Aberration.Corrected)
 				hor = horizon(time, observer, equ.ra, equ.dec, Refraction.Normal)
 				obj.distAu = equ.dist
@@ -511,6 +567,10 @@ class StarView @JvmOverloads constructor(
 	}
 
 	private fun isObjectVisibleInSettings(obj: SkyObject): Boolean {
+		val magnitudeFilter = magnitudeFilter
+		if (magnitudeFilter != null && obj.type == SkyObject.Type.STAR && showStars
+			&& obj.magnitude > magnitudeFilter) return false
+
 		return when (obj.type) {
 			SkyObject.Type.STAR -> showStars
 			SkyObject.Type.GALAXY -> showGalaxies
@@ -518,6 +578,11 @@ class StarView @JvmOverloads constructor(
 			SkyObject.Type.SUN -> showSun
 			SkyObject.Type.MOON -> showMoon
 			SkyObject.Type.PLANET -> showPlanets
+			SkyObject.Type.NEBULA -> showNebulae
+			SkyObject.Type.OPEN_CLUSTER -> showOpenCluster
+			SkyObject.Type.GLOBULAR_CLUSTER -> showGlobularCluster
+			SkyObject.Type.GALAXY_CLUSTER -> showGalaxyCluster
+			SkyObject.Type.CONSTELLATION -> showConstellations
 		}
 	}
 
@@ -543,7 +608,7 @@ class StarView @JvmOverloads constructor(
 
 		// Calculate new path data
 		val startHours = -12
-		val endHours = 12
+		val endHours = 13
 		val stepMinutes = 10
 		val totalMinutes = (endHours - startHours) * 60
 		val steps = totalMinutes / stepMinutes + 1
@@ -625,13 +690,13 @@ class StarView @JvmOverloads constructor(
 			}
 		}
 
+		if (showConstellations) drawConstellationLabels(canvas)
+
 		skyObjects.forEach { obj ->
 			if (isObjectVisibleInSettings(obj)) {
 				drawSkyObject(canvas, obj)
 			}
 		}
-
-		if (showConstellations) drawConstellationLabels(canvas)
 
 		// Draw Highlights
 
@@ -661,12 +726,15 @@ class StarView @JvmOverloads constructor(
 		val pathData = getOrUpdatePathData(obj) ?: return
 
 		if (pathData.count > 1) {
+			val isMoon = obj.type == SkyObject.Type.MOON
+			val drawCount = if (isMoon) pathData.count else min(pathData.count, 145)
+
 			celestialPath.reset()
 			var isPenDown = false
 			val tempPt = PointF()
 			val prevPt = PointF()
 
-			for (i in 0 until pathData.count) {
+			for (i in 0 until drawCount) {
 				val az = pathData.azimuths[i]
 				val alt = pathData.altitudes[i]
 
@@ -699,24 +767,32 @@ class StarView @JvmOverloads constructor(
 			// Draw Labels and Arrows
 			val tempNext = PointF()
 			val tempPrev = PointF()
+			val drawnLabels = mutableSetOf<String>()
 
-			for (i in 1 until pathData.count - 1) {
+			for (i in 0 until drawCount) {
 				val label = pathData.labels[i] ?: continue
+				if (!drawnLabels.add(label)) continue
 
 				val az = pathData.azimuths[i]
 				val alt = pathData.altitudes[i]
 				if (!skyToScreen(az, alt, tempPt)) continue
 
 				// Need neighbors for angle
-				val azPrev = pathData.azimuths[i-1]
-				val altPrev = pathData.altitudes[i-1]
-				val azNext = pathData.azimuths[i+1]
-				val altNext = pathData.altitudes[i+1]
+				val iPrev = if (i > 0) i - 1 else i
+				val iNext = if (i < drawCount - 1) i + 1 else i
+				if (iPrev == iNext) continue
+
+				val azPrev = pathData.azimuths[iPrev]
+				val altPrev = pathData.altitudes[iPrev]
+				val azNext = pathData.azimuths[iNext]
+				val altNext = pathData.altitudes[iNext]
 
 				if (!skyToScreen(azPrev, altPrev, tempPrev) || !skyToScreen(azNext, altNext, tempNext)) continue
 
-				if (hypot(tempPt.x - tempPrev.x, tempPt.y - tempPrev.y) > 200) continue
-				if (hypot(tempNext.x - tempPt.x, tempNext.y - tempPt.y) > 200) continue
+				val distP = hypot(tempPt.x - tempPrev.x, tempPt.y - tempPrev.y)
+				val distN = hypot(tempNext.x - tempPt.x, tempNext.y - tempPt.y)
+				if (i > 0 && distP > 200) continue
+				if (i < drawCount - 1 && distN > 200) continue
 
 				val dx = tempNext.x - tempPrev.x
 				val dy = tempNext.y - tempPrev.y
@@ -745,6 +821,28 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
+	private fun drawOutsideLabel(canvas: Canvas, label: String, az: Double, alt: Double, textPaint: Paint, offset: Float = 25f) {
+		if (!skyToScreen(az, alt, tempPoint)) return
+
+		if (is2DMode) {
+			val centerX = (projHalfWidth + panX).toFloat()
+			val centerY = (projHalfHeight + panY).toFloat()
+			val dx = tempPoint.x - centerX
+			val dy = tempPoint.y - centerY
+			val dist = hypot(dx, dy)
+			if (dist > 0.1) {
+				val px = centerX + dx * (dist + offset) / dist
+				val py = centerY + dy * (dist + offset) / dist
+				val fm = textPaint.fontMetrics
+				canvas.drawText(label, px, py - (fm.ascent + fm.descent) / 2, textPaint)
+			} else {
+				canvas.drawText(label, tempPoint.x, tempPoint.y - offset, textPaint)
+			}
+		} else {
+			canvas.drawText(label, tempPoint.x, tempPoint.y - offset, textPaint)
+		}
+	}
+
 	private fun drawHorizon(canvas: Canvas) {
 		paint.color = 0xFF003300.toInt()
 		paint.style = Paint.Style.FILL
@@ -762,9 +860,7 @@ class StarView @JvmOverloads constructor(
 		canvas.drawPath(gridPath, paint)
 		val cardinals = listOf("N" to 0.0, "E" to 90.0, "S" to 180.0, "W" to 270.0)
 		cardinals.forEach { (label, az) ->
-			if (skyToScreen(az, 0.0, tempPoint)) {
-				canvas.drawText(label, tempPoint.x, tempPoint.y - 10, cardinalTextPaint)
-			}
+			drawOutsideLabel(canvas, label, az, 0.0, cardinalTextPaint, 30f)
 		}
 	}
 
@@ -791,9 +887,12 @@ class StarView @JvmOverloads constructor(
 				} else { first = true }
 			}
 			if (alt != 0) {
+				gridTextPaint.textAlign = Paint.Align.LEFT
+				gridTextPaint.color = 0xFF888888.toInt()
 				if (skyToScreen(azimuthCenter, alt.toDouble(), tempPoint)) {
-					gridTextPaint.textAlign = Paint.Align.LEFT
-					gridTextPaint.color = 0xFF888888.toInt()
+					canvas.drawText("${alt}°", tempPoint.x + 5f, tempPoint.y - 5f, gridTextPaint)
+				}
+				if (skyToScreen(azimuthCenter + 180.0, alt.toDouble(), tempPoint)) {
 					canvas.drawText("${alt}°", tempPoint.x + 5f, tempPoint.y - 5f, gridTextPaint)
 				}
 			}
@@ -809,11 +908,9 @@ class StarView @JvmOverloads constructor(
 				} else { first = true }
 			}
 			if (az % 90 != 0) {
-				if (skyToScreen(az.toDouble(), 0.0, tempPoint)) {
-					gridTextPaint.textAlign = Paint.Align.CENTER
-					gridTextPaint.color = 0xFF888888.toInt()
-					canvas.drawText("${az}°", tempPoint.x, tempPoint.y - 10f, gridTextPaint)
-				}
+				gridTextPaint.textAlign = Paint.Align.CENTER
+				gridTextPaint.color = 0xFF888888.toInt()
+				drawOutsideLabel(canvas, "${az}°", az.toDouble(), 0.0, gridTextPaint, 25f)
 			}
 		}
 		canvas.drawPath(gridPath, paint)
@@ -1062,12 +1159,31 @@ class StarView @JvmOverloads constructor(
 					constellationTextPaint.color = 0xFFAABBFF.toInt()
 					constellationTextPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD_ITALIC)
 				}
-				
+
 				val text = constellation.name
 				val textSize = constellationTextPaint.textSize
-				
-				// Draw stable label
-				canvas.drawText(text, cx, cy + textSize, constellationTextPaint)
+
+				val textWidth = constellationTextPaint.measureText(text)
+				val threshold = 10f
+				val textRect = RectF(
+					cx - textWidth / 2 - threshold,
+					cy - threshold,
+					cx + textWidth / 2 + threshold,
+					cy + textSize + threshold
+				)
+
+				var overlaps = false
+				for (rect in occupiedRects) {
+					if (RectF.intersects(textRect, rect)) {
+						overlaps = true
+						break
+					}
+				}
+
+				if (!overlaps || isSelected) {
+					canvas.drawText(text, cx, cy + textSize, constellationTextPaint)
+					occupiedRects.add(textRect)
+				}
 			}
 		}
 	}
@@ -1075,11 +1191,30 @@ class StarView @JvmOverloads constructor(
 	private fun drawSkyObject(canvas: Canvas, obj: SkyObject) {
 		if (!skyToScreen(obj.azimuth, obj.altitude, tempPoint)) return
 
-		val baseSize = 15f
-		val radius = max(3f, baseSize - (obj.magnitude * 2f))
+		// Heuristic to determine "Zoomed Out" factor (0.0 = Zoomed In, 1.0 = Zoomed Out)
+		val zoomFactor = (viewAngle - 10.0) / (if (is2DMode) 210.0 else 140.0) // Normalize roughly 0..1
+		val constrainedZoomFactor = max(0.0, min(1.0, zoomFactor))
 
+		// 1. Dynamic Radius & Color
+		var baseSize = 15f
+		var color = obj.color
+		
+		// If significantly zoomed out and star is faint, reduce prominence
+		if (obj.type == SkyObject.Type.STAR) {
+			if (constrainedZoomFactor > 0.3 && obj.magnitude > 2.5) {
+				baseSize = 8f  // Smaller base size for faint stars when zoomed out
+				color = Color.GRAY // Fade to gray
+			}
+		}
+
+		var radius = max(2f, baseSize - (obj.magnitude * 2f))
+		// Further reduce radius for faint stars at high zoom
+		if (obj.type == SkyObject.Type.STAR && constrainedZoomFactor > 0.5) {
+			radius *= 0.7f
+		}
+		
 		paint.style = Paint.Style.FILL
-		paint.color = obj.color
+		paint.color = color
 		canvas.drawCircle(tempPoint.x, tempPoint.y, radius, paint)
 
 		val objRect = RectF(
@@ -1089,12 +1224,29 @@ class StarView @JvmOverloads constructor(
 			tempPoint.y + radius
 		)
 
+		// 2. Dynamic Label Visibility
 		var showLabel = true
 		if (obj.type == SkyObject.Type.STAR) {
-			showLabel = !obj.name.startsWith("HIP", ignoreCase = true)
+			// Don't show HIP names
+			if (obj.name.startsWith("HIP", ignoreCase = true)) {
+				showLabel = false
+			} else {
+				// Dynamic magnitude threshold for labels
+				// Zoomed in (factor 0): show stars up to mag 5.0
+				// Zoomed out (factor 1): show stars up to mag 1.5
+				val magThreshold = 5.0 - (constrainedZoomFactor * 3.5)
+				if (obj.magnitude > magThreshold) {
+					showLabel = false
+				}
+			}
 		}
 
-		if (showLabel || obj == selectedObject || pinnedObjects.contains(obj)) {
+		// Always show label for selected or pinned objects
+		if (obj == selectedObject || pinnedObjects.contains(obj)) {
+			showLabel = true
+		}
+
+		if (showLabel) {
 			val text = obj.name
 			val labelTextSize = 25f
 			textPaint.textSize = labelTextSize
@@ -1129,6 +1281,21 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
+	var isCameraMode: Boolean = false
+
+	var is2DMode: Boolean = false
+		set(value) {
+			field = value
+			if (!value) {
+				panX = 0f; panY = 0f
+			} else {
+				roll = 0.0
+			}
+			invalidate()
+		}
+	private var panX: Float = 0f
+	private var panY: Float = 0f
+
 	private fun updateProjectionCache() {
 		val alt0Rad = Math.toRadians(altitudeCenter)
 		projSinAltCenter = sin(alt0Rad)
@@ -1154,13 +1321,16 @@ class StarView @JvmOverloads constructor(
 		val yRaw = projCosAltCenter * sinAlt - projSinAltCenter * cosAlt * cosAz
 		val xScaled = combinedScale * xRaw
 		val yScaled = -combinedScale * yRaw
+
+		// Flip East/West for 2D mode to match geographic map (East on Right) and fix celestial path
+		val xFinal = if (is2DMode) -xScaled else xScaled
 		val rollRad = Math.toRadians(roll)
 		val sinRoll = sin(rollRad)
 		val cosRoll = cos(rollRad)
-		val xRot = xScaled * cosRoll - yScaled * sinRoll
-		val yRot = xScaled * sinRoll + yScaled * cosRoll
-		outPoint.x = (projHalfWidth + xRot).toFloat()
-		outPoint.y = (projHalfHeight + yRot).toFloat()
+		val xRot = xFinal * cosRoll - yScaled * sinRoll
+		val yRot = xFinal * sinRoll + yScaled * cosRoll
+		outPoint.x = (projHalfWidth + xRot + panX).toFloat()
+		outPoint.y = (projHalfHeight + yRot + panY).toFloat()
 		return true
 	}
 
@@ -1169,30 +1339,49 @@ class StarView @JvmOverloads constructor(
 		if (scaleGestureDetector.isInProgress) {
 			lastTouchX = event.x; lastTouchY = event.y; return true
 		}
+		gestureDetector.onTouchEvent(event)
+
 		when (event.actionMasked) {
-			MotionEvent.ACTION_DOWN -> { lastTouchX = event.x; lastTouchY = event.y; isPanning = false }
+			MotionEvent.ACTION_DOWN -> { 
+				parent?.requestDisallowInterceptTouchEvent(true)
+				lastTouchX = event.x; lastTouchY = event.y; isPanning = false 
+			}
 			MotionEvent.ACTION_MOVE -> {
 				val dx = event.x - lastTouchX
 				val dy = event.y - lastTouchY
-				if (sqrt(dx * dx + dy * dy) > 10f) {
+				val hitThreshold = sqrt(dx * dx + dy * dy) > 10f
+				if (isCameraMode && hitThreshold) {
 					isPanning = true
-					val scale = viewAngle / width
-					azimuthCenter -= dx * scale
-					altitudeCenter += dy * scale
-					altitudeCenter = max(-90.0, min(90.0, altitudeCenter))
-					if (azimuthCenter < 0) azimuthCenter += 360
-					if (azimuthCenter >= 360) azimuthCenter -= 360
-					onAzimuthManualChangeListener?.invoke(azimuthCenter)
+				} else if (hitThreshold) {
+					isPanning = true
+					if (is2DMode) {
+						panX += dx
+						panY += dy
+					} else {
+						val scale = viewAngle / width
+						azimuthCenter -= dx * scale
+						altitudeCenter += dy * scale
+						altitudeCenter = max(-90.0, min(90.0, altitudeCenter))
+						if (azimuthCenter < 0) azimuthCenter += 360
+						if (azimuthCenter >= 360) azimuthCenter -= 360
+						onAzimuthManualChangeListener?.invoke(azimuthCenter)
+					}
 					lastTouchX = event.x; lastTouchY = event.y
 					invalidate()
 				}
 			}
-			MotionEvent.ACTION_POINTER_UP -> {
-				if (event.actionIndex == 0 && event.pointerCount > 1) {
-					lastTouchX = event.getX(1); lastTouchY = event.getY(1)
-				}
+			MotionEvent.ACTION_POINTER_DOWN -> {
+				lastTouchX = event.getX(event.actionIndex)
+				lastTouchY = event.getY(event.actionIndex)
 			}
-			MotionEvent.ACTION_UP -> { if (!isPanning) performClickAt(event.x, event.y) }
+			MotionEvent.ACTION_POINTER_UP -> {
+				val pointerIndex = if (event.actionIndex == 0) 1 else 0
+				lastTouchX = event.getX(pointerIndex)
+				lastTouchY = event.getY(pointerIndex)
+			}
+			MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> { 
+				isPanning = false
+			}
 		}
 		return true
 	}
@@ -1314,12 +1503,7 @@ class StarView @JvmOverloads constructor(
 
 	private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
 		override fun onScale(detector: ScaleGestureDetector): Boolean {
-			val newAngle = max(10.0, min(150.0, viewAngle / detector.scaleFactor))
-			if (abs(viewAngle - newAngle) > 0.001) {
-				viewAngle = newAngle
-				onViewAngleChangeListener?.invoke(viewAngle)
-				invalidate()
-			}
+			updateViewAngle(viewAngle / detector.scaleFactor, detector.focusX, detector.focusY)
 			return true
 		}
 	}

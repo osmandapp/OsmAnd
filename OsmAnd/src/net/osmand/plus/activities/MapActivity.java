@@ -217,8 +217,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		public void stateChanged(Boolean enabled) {
 			app.runInUIThread(() -> {
 				OsmandMapTileView mapView = getMapView();
-                mapView.setPinchZoomMagnificationEnabled(enabled);
-            });
+				mapView.setPinchZoomMagnificationEnabled(enabled);
+			});
 		}
 	};
 	private KeyEventHelper keyEventHelper;
@@ -336,7 +336,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		extendedMapActivity.onCreate(this, savedInstanceState);
 	}
 
-	protected int getRootViewId(){
+	protected int getRootViewId() {
 		return R.id.drawer_layout;
 	}
 
@@ -575,9 +575,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
-		if(mapContextMenu.isVisible()) {
+		if (mapContextMenu.isVisible()) {
 			MenuController menuController = mapContextMenu.getMenuController();
-			if(menuController != null && menuController.hasBackAction()) {
+			if (menuController != null && menuController.hasBackAction()) {
 				mapContextMenu.backToolbarAction(menuController);
 				return;
 			}
@@ -680,7 +680,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (settings.APPLICATION_MODE.get() != prevAppMode) {
 				settings.executePreservingPrefTimestamp(prevAppMode, () -> {
 					settings.setLastKnownMapRotation(prevAppMode, getMapRotateTarget());
-					settings.setLastKnownMapElevation(prevAppMode, getMapElevationAngle());
+					if (!app.getOsmandMap().getMapView().getAnimatedDraggingThread().isAnimating()) {
+						settings.setLastKnownMapElevation(prevAppMode, getMapElevationAngle());
+					}
 				});
 				updateApplicationModeSettings();
 			}

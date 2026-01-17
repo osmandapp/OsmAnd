@@ -5004,4 +5004,10 @@
     <string name="show_debug_tile">הצגת פרטי אריח</string>
     <string name="show_rasterization_debug_tile">הצגת פרטי עיבוד תצוגה של אריח</string>
     <string name="copy_link">העתקת קישור</string>
+    <string name="organize_by_max_altitude"></string>
+    <string name="nearest_city">העיר הקרובה ביותר</string>
+    <string name="group_sensors">חיישנים</string>
+    <string name="year_of_creation">שנת יצירה</string>
+    <string name="month_year_creation">חודש ושנת יצירה</string>
+    <string name="group_date_time">תאריך ושעה</string>
 </resources>

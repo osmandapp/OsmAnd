@@ -2391,11 +2391,7 @@
 \nДаље читање на %1$s.</string>
     <string name="rendering_attr_pisteGrooming_name">Равнање стазе</string>
     <string name="osmand_plus_extended_description_part8">Приближна покривеност карте и каквоћа:\n • Западна Европа: ****\n • Источна Европа: ***\n • Русија: ***\n • Северна Америка: ***\n • Јужна Америка: **\n • Азија: **\n • Јапан и Кореја: ***\n • Блиски исток: **\n • Африка: **\n • Антарктик: *\n Већина држава на свету се може скинути\n Од Авганистана до Шри Ланке, горе од Аљаске до Аустралије. Аргентина, Бразил, Канада, Француска, Немачка, Мексико, Велика Британија, Шпанија, …</string>
-    <string name="srtm_plugin_description">Информације о терену, као што су контурне линије, осенчен рељеф, нагиб, помажу да се визуелно оцени положај земље, рељеф, могућност навођења, и друго. Топографске информације на мапи могу бити претстављене контурним линијама, сенчењем рељефа и/или бојењем стрмине.
-\n
-\nИзворно подаци потичу од СРТМ и АСТЕР.
-\n
-\nВише се може прочитати на %1$s.</string>
+    <string name="srtm_plugin_description">Пружа терен и детаљну топографију за визуелно разумевање рељефа пејзажа и проходности, користећи контурне линије, сенчење брда или бојење падина и 3Д приказ.\n\nДа бисте омогућили ове функције за регион, потребно је додатно да преузмете карту контурних линија и/или терена (3Д), састављену из СРТМ и АСТЕР података.\n\nВише информација на %1$s.</string>
     <string name="osm_editing_plugin_description">Доприносите ОСМ-у, општој заједници која одржава обимну карту света и обезбеђује редовне податке слободним програмима сваком кориснику.
 \n
 \nМожете пронаћи упутсва како уређивати карту на нашим страницама %1$s.</string>
@@ -5898,4 +5894,60 @@
     <string name="delete_folder_description">Да ли избрисати омот „%1$s“?</string>
     <string name="buildings_3d_detail_level">Подробни просторни приказ зграда</string>
     <string name="lang_mi">Маорски</string>
+    <string name="show_expand_button">Прикажи дугме за проширивање</string>
+    <string name="imprecise_coordinates">Непрецизне координате</string>
+    <string name="star_watcher_plugin_name">Посматрач звезда (бета)</string>
+    <string name="star_watcher_plugin_description">Звездане карте, 3Д звездана мапа</string>
+    <string name="star_map">Звездана мапа</string>
+    <string name="star_charts_name">Звездане карте</string>
+    <string name="star_visibility_name">Видљивост звезда</string>
+    <string name="star_altitude_name">Надморска висина звезде</string>
+    <string name="astro_name_sun">Сунце</string>
+    <string name="astro_name_moon">Месец</string>
+    <string name="astro_name_mercury">Меркур</string>
+    <string name="astro_name_venus">Венера</string>
+    <string name="astro_name_mars">Марс</string>
+    <string name="astro_name_jupiter">Јупитер</string>
+    <string name="astro_name_saturn">Сатурн</string>
+    <string name="astro_name_uranus">Уран</string>
+    <string name="astro_name_neptune">Нептун</string>
+    <string name="astro_name_pluto">Плутон</string>
+    <string name="azimuthal_grid">Азимутална мрежа</string>
+    <string name="equatorial_grid">Екваторијална мрежа</string>
+    <string name="ecliptic_line">Еклиптичка линија</string>
+    <string name="magnitude_filter">Филтер магнитуде</string>
+    <string name="astro_planets">Планете</string>
+    <string name="astro_constellation">Сазвежђе</string>
+    <string name="astro_constellations">Сазвежђа</string>
+    <string name="astro_stars">Звезде</string>
+    <string name="astro_galaxies">Галаксије</string>
+    <string name="astro_nebulae">Маглине</string>
+    <string name="astro_open_clusters">Отворени кластери</string>
+    <string name="astro_globular_clusters">Глобуларна јата</string>
+    <string name="astro_galaxy_clusters">Галаксијска јата</string>
+    <string name="astro_black_holes">Црне рупе</string>
+    <string name="visible_layers_and_objects">Видљиви слојеви и објекти</string>
+    <string name="shared_string_azimuth">Азимут</string>
+    <string name="shared_string_magnitude">Магнитуда</string>
+    <string name="astro_rise">Излазак</string>
+    <string name="astro_set">Скуп</string>
+    <string name="gpx_too_many_points_visible_warning">Велика количина видљивих ГПКс трагова доводи до велике потрошње меморије</string>
+    <string name="sort_highest_first">Највиши први</string>
+    <string name="sort_lowest_first">Најнижи први</string>
+    <string name="no_date">Без датума</string>
+    <string name="shared_string_step">Корак</string>
+    <string name="set_step_size_summary">Изаберите величину корака да бисте груписали своје трагове.</string>
+    <string name="set_step_size">Подесите величину корака</string>
+    <string name="organize_by_summary">Аутоматски организујте своје трагове у групе на основу изабраног параметра као што су активност, брзина или локација.</string>
+    <string name="organize_by">Организуј по</string>
+    <string name="group_general">Генерална</string>
+    <string name="group_date_time">Датум и време</string>
+    <string name="group_altitude_elevation">Надморска висина и елевација</string>
+    <string name="group_sensors">Сензори</string>
+    <string name="year_of_creation">Година стварања</string>
+    <string name="month_year_creation">Месец и година стварања</string>
+    <string name="nearest_city">Најближи град</string>
+    <string name="avg_speed">Прос. брзина</string>
+    <string name="organize_by_max_speed">Макс. брзина</string>
+    <string name="organize_by_max_altitude">Макс. надморска висина</string>
 </resources>

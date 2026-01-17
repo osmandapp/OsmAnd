@@ -1592,11 +1592,7 @@
     <string name="record_plugin_description">记录您的旅行或训练，并分析速度、累计上升和下降、海拔剖面等数据。已记录的轨迹可以归档、与朋友分享、编辑和后期处理。
 \n
 \n详情可见 %1$s。</string>
-    <string name="srtm_plugin_description">地形信息，例如等高线、山体阴影和坡度，可帮助您直观地评估土地和地形的布局以及适航性等。地形信息可在地图上通过地形阴影、等高线以及坡度着色来表示。
-\n
-\n底层数据来自 SRTM 和 ASTER。
-\n
-\n详情可见 %1$s。</string>
+    <string name="srtm_plugin_description">地形信息，例如等高线、山体阴影和坡度，可帮助您直观地评估土地和地形的布局以及适航性等。地形信息可在地图上通过地形阴影、等高线以及坡度着色来表示。 \n \n底层数据来自 SRTM 和 ASTER。 \n \n详情可见 %1$s。</string>
     <string name="plugin_touringview_name">旅游地图视图</string>
     <string name="plugin_nautical_name">航海地图视图</string>
     <string name="audionotes_plugin_description">使用地图按钮或位置上下文菜单，在旅途中记录音频/照片/视频笔记。</string>
@@ -5877,4 +5873,12 @@
     <string name="kilometers">公里</string>
     <string name="miles">英里</string>
     <string name="mpg">英里/加仑</string>
+    <string name="gpx_too_many_points_visible_warning">显示大量GPX轨迹将占用较高内存</string>
+    <string name="star_watcher_plugin_name">观星（测试中）</string>
+    <string name="star_watcher_plugin_description">星图，3D星图</string>
+    <string name="astro_name_sun">太阳</string>
+    <string name="astro_name_moon">月亮</string>
+    <string name="astro_name_mercury">水星</string>
+    <string name="astro_name_venus">金星</string>
+    <string name="astro_name_mars">火星</string>
 </resources>
