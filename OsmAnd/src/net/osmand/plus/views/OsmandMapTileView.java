@@ -2416,7 +2416,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					mapRenderer.setMapTarget(new PointI(multiTouchFirstX, multiTouchFirstY), initialFirstLocation);
 					float calcRotate = initialViewport.getRotate() + relAngle;
 					rotateToAnimate(calcRotate, multiTouchCenterX, multiTouchCenterY);
-					refreshMap();
+					// rotateToAnimate(...) already triggers a redraw through the renderer’s own invalidation pipeline
+					//refreshMap();
 				} else {
 					changeZoomPosition((float) deltaZoom, relAngle);
 				}
