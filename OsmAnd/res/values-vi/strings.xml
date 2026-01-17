@@ -120,8 +120,8 @@
     <string name="system_locale">Hệ thống</string>
     <string name="preferred_locale_descr">Ngôn ngữ hiển thị trong ứng dụng (được sử dụng sau khi OsmAnd được khởi động lại).</string>
     <string name="preferred_locale">Ngôn ngữ hiển thị</string>
-    <string name="shared_string_next">Tiếp</string>
-    <string name="shared_string_previous">Quay lại</string>
+    <string name="shared_string_next">Tiếp theo</string>
+    <string name="shared_string_previous">Trước</string>
     <string name="unit_of_length_descr">Thay đổi khoảng cách được đo.</string>
     <string name="unit_of_length">Đơn vị độ dài</string>
     <string name="send_location_way_choose_title">Chia sẻ vị trí sử dụng</string>
@@ -307,8 +307,8 @@
     <string name="map_screen_orientation_descr">Chọn hướng màn hình.</string>
     <string name="opening_hours_not_supported">Không thể thay đổi định dạng giờ mở cửa.</string>
     <string name="add_new_rule">Tạo thêm quy tắc mới</string>
-    <string name="transport_Routes">Tuyến đường</string>
-    <string name="transport_Stop">Dừng</string>
+    <string name="transport_Routes">Tuyến xe</string>
+    <string name="transport_Stop">Điểm dừng</string>
     <string name="transport_stops">điểm dừng</string>
     <string name="transport_finish_search">Kết thúc tìm kiếm</string>
     <string name="transport_stop_to_go_out">Chọn điểm dừng để xuống</string>
@@ -3309,7 +3309,7 @@
     <string name="select_items_for_import">Chọn những thứ sẽ được nhập.</string>
     <string name="use_two_phase_routing">Dùng thuật toán tìm đường 2-phase A*</string>
     <string name="in_grace_period">Trong thời gian gia hạn</string>
-    <string name="shared_string_interval">Khoảng thời gian</string>
+    <string name="shared_string_interval">Giãn cách</string>
     <string name="user_login">Đăng nhập</string>
     <string name="benefits_for_contributors">Những quyền lợi cho những nhà đóng góp OSM đang hoạt động</string>
     <string name="setting_supported_by_style">Cài đặt này được cung cấp bởi kiểu bản đồ \'%1$s\'</string>
@@ -4663,4 +4663,9 @@
     <string name="quick_action_start_stop_navigation_descr">Nút để bắt đầu hoặc kết thúc điều hướng.</string>
     <string name="app_mode_bus">Xe buýt</string>
     <string name="stop_routing_confirm">Dừng điều hướng?</string>
+    <string name="route_stops_before">%1$s điểm dừng ở trước</string>
+    <string name="coordinates">Toạ độ</string>
+    <string name="online_photos">Ảnh trực tuyến</string>
+    <string name="mappilary_no_internet_desc">Ảnh từ Mapillary chỉ có sẵn trực tuyến.</string>
+    <string name="tunnel_warning">Hầm ở phía trước</string>
 </resources>
