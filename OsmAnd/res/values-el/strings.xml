@@ -544,7 +544,7 @@
     <string name="thanks_yandex_traffic">Ευχαριστούμε τη Yandex για τις πληροφορίες κυκλοφορίας.</string>
     <string name="layer_yandex_traffic">Κυκλοφορία Yandex</string>
     <string name="layer_route">Διαδρομή</string>
-    <string name="layer_osm_bugs">Σημειώσεις OSM (με σύνδεση)</string>
+    <string name="layer_osm_bugs">Σημειώσεις OSM (μέσω διαδικτύου)</string>
     <string name="layer_poi">Επίστρωμα ΣΕ…</string>
     <string name="layer_map">Πηγή χάρτη…</string>
     <string name="menu_layers">Επίπεδα χάρτη</string>
@@ -613,9 +613,9 @@
     <string name="transport_to_go_before">επακόλουθη απόσταση</string>
     <string name="transport_stops_to_pass">στάσεις προς προσπέραση</string>
     <string name="transport_route_distance">Απόσταση δρομολογίου</string>
-    <string name="transport">Μεταφορές</string>
+    <string name="transport">Συγκοινωνία</string>
     <string name="shared_string_ok">Εντάξει</string>
-    <string name="show_transport_over_map_description">Εμφάνιση στάσεων δημόσιων συγκοινωνιών στον χάρτη.</string>
+    <string name="show_transport_over_map_description">Εμφάνιση στάσεων δημόσιας συγκοινωνίας στο χάρτη.</string>
     <string name="show_transport_over_map">Εμφάνιση στάσεων συγκοινωνίας</string>
     <string name="hello">Εφαρμογή πλοήγησης OsmAnd</string>
     <string name="update_poi_success">Τα δεδομένα ΣΕ ενημερώθηκαν ({0} είχαν φορτωθεί)</string>
@@ -637,12 +637,12 @@
     <string name="searching_address">Αναζήτηση διεύθυνσης…</string>
     <string name="search_osm_nominatim">Αναζήτηση διεύθυνσης χρησιμοποιώντας το OSM Nominatim</string>
     <string name="hint_search_online">Αναζήτηση με σύνδεση: Αριθμός σπιτιού, οδός, πόλη</string>
-    <string name="search_offline_address">Χωρίς σύνδεση</string>
-    <string name="search_online_address">Διαδίκτυο</string>
+    <string name="search_offline_address">Αναζήτηση χωρίς διαδίκτυο</string>
+    <string name="search_online_address">Αναζήτηση με διαδίκτυο</string>
     <string name="max_level_download_tile">Μέγιστη εστίαση με σύνδεση</string>
     <string name="max_level_download_tile_descr">Μην περιηγείστε σε χάρτες με σύνδεση για επίπεδα εστίασης κάτω από αυτό.</string>
     <string name="route_general_information">Συνολική απόσταση %1$s, χρόνος ταξιδιού %2$d ω %3$d λ.</string>
-    <string name="router_service_descr">Υπηρεσία πλοήγησης με ή χωρίς σύνδεση.</string>
+    <string name="router_service_descr">Υπηρεσία πλοήγησης με ή χωρίς διαδίκτυο.</string>
     <string name="router_service">Υπηρεσία πλοήγησης</string>
     <string name="sd_dir_not_accessible">Ο κατάλογος αποθήκευσης στην κάρτα μνήμης δεν είναι προσβάσιμος!</string>
     <string name="download_question">Λήψη {0} - {1} ;</string>
@@ -856,7 +856,7 @@
     <string name="av_settings">Ρυθμίσεις ήχου/video </string>
     <string name="recording_error">Αποτυχία εγγραφής</string>
     <string name="recording_camera_not_available">Μη διαθέσιμη κάμερα</string>
-    <string name="shared_string_control_stop">Στάση</string>
+    <string name="shared_string_control_stop">Διακοπή</string>
     <string name="av_video_format_descr">Μορφή εξόδου βίντεο:</string>
     <string name="av_video_format">Μορφή εξόδου video</string>
     <string name="av_use_external_recorder_descr">Χρήση του καταγραφέα της συσκευής για βίντεο.</string>
@@ -1488,7 +1488,7 @@
     <string name="distance_moving">Η απόσταση διορθώθηκε</string>
     <string name="open_mapillary">Άνοιγμα του Mapillary</string>
     <string name="shared_string_install">Εγκατάσταση</string>
-    <string name="online_photos">Φωτογραφίες με σύνδεση</string>
+    <string name="online_photos">Διαδικτυακές φωτογραφίες</string>
     <string name="shared_string_add_photos">Προσθήκη φωτογραφιών</string>
     <string name="nothing_found">Δεν βρέθηκε τίποτα</string>
     <string name="shared_string_to">Προς</string>
@@ -1688,7 +1688,7 @@
     <string name="quick_action_resume_pause_navigation">Παύση/συνέχιση πλοήγησης</string>
     <string name="quick_action_resume_pause_navigation_descr">Πλήκτρο για σταμάτημα ή συνέχιση της πλοήγησης.</string>
     <string name="quick_action_show_navigation_finish_dialog">Να εμφανίζεται ο διάλογος \'η πλοήγηση ολοκληρώθηκε\'</string>
-    <string name="quick_action_start_stop_navigation">Έναρξη/στάση πλοήγησης</string>
+    <string name="quick_action_start_stop_navigation">Έναρξη/διακοπή πλοήγησης</string>
     <string name="quick_action_start_stop_navigation_descr">Πλήκτρο για εκκίνηση και τερματισμό της πλοήγησης.</string>
     <string name="store_tracks_in_monthly_directories">Αποθήκευση των καταγεγραμμένων ιχνών σε μηνιαίους φακέλους</string>
     <string name="store_tracks_in_monthly_directories_descrp">Αποθήκευση καταγεγραμμένων ιχνών σε υποφακέλους ανά μήνα καταγραφής (όπως 2018-01).</string>
@@ -1709,7 +1709,7 @@
     <string name="mapillary_action_descr">Μοιραστείτε την θέα σας στο επίπεδο του δρόμου μέσω του Mapillary.</string>
     <string name="mapillary_widget">Γραφικό στοιχείο Mapillary</string>
     <string name="mapillary_widget_descr">Επιτρέπει γρήγορες συνεισφορές στο Mapillary.</string>
-    <string name="mapillary_descr">Διαδικτυακές φωτογραφίες δρόμου για όλους. Ανακαλύψτε θέσεις, συνεργαστείτε, αποτυπώστε τον κόσμο.</string>
+    <string name="mapillary_descr">Διαδικτυακές φωτογραφίες επιπέδου δρόμου για όλους. Ανακαλύψτε μέρη, συνεργαστείτε, αποτυπώστε τον κόσμο.</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Φωτογραφίες δρόμου για όλους. Ανακαλύψτε θέσεις, συνεργαστείτε, αποτυπώστε τον κόσμο.</string>
     <string name="private_access_routing_req">Ο προορισμός σας βρίσκεται σε ιδιωτική περιοχή. Να επιτραπεί η πρόσβαση σε ιδιωτικούς δρόμους για αυτό το ταξίδι;</string>
@@ -2337,7 +2337,7 @@
     <string name="av_camera_focus_macro">Κατάσταση μακροεστίασης (κοντινής)</string>
     <string name="av_camera_pic_size">Μέγεθος εικόνας κάμερας</string>
     <string name="av_camera_pic_size_descr">Ορίστε μέγεθος εικόνας κάμερας</string>
-    <string name="plugin_install_needs_network">Χρειάζεται να συνδεθείτε στο διαδίκτυο για να εγκαταστήσετε αυτό το πρόσθετο.</string>
+    <string name="plugin_install_needs_network">Χρειάζεται να είστε στο διαδίκτυο για να εγκαταστήσετε αυτό το πρόσθετο.</string>
     <string name="shared_string_get">Λήψη</string>
     <string name="use_fast_recalculation">Επανυπολογισμός έξυπνης διαδρομής</string>
     <string name="use_fast_recalculation_desc">Επανυπολογίζεται μόνο το αρχικό μέρος της διαδρομής, χρήσιμο για μακριές διαδρομές.</string>
@@ -3601,7 +3601,7 @@
     <string name="icon_group_emergency">Έκτακτη ανάγκη</string>
     <string name="icon_group_symbols">Σύμβολα</string>
     <string name="disable_recording_once_app_killed_descrp">Η καταγραφή ίχνους θα παύεται όταν η εφαρμογή κλείσει (από τις πρόσφατες εφαρμογές). (Η ένδειξη παρασκηνίου του OsmAnd εξαφανίζεται από την γραμμή ειδοποιήσεων Android.)</string>
-    <string name="icon_group_transport">Μεταφορά</string>
+    <string name="icon_group_transport">Συγκοινωνία</string>
     <string name="open_weather_action_description">Σας επιτρέπει να ανοίξετε οθόνη με λεπτομερή καιρικά δεδομένα.</string>
     <string name="shared_string_open">Άνοιγμα</string>
     <string name="open_weather_action">Άνοιγμα καιρού</string>
@@ -4493,7 +4493,7 @@
     <string name="routing_attr_difficulty_preference_advanced_name">Προηγμένη</string>
     <string name="select_backup_data_descr">Επιλέξτε δεδομένα και φακέλους για δημιουργία αντιγράφων ασφαλείας.</string>
     <string name="backup_now">Αντίγραφο ασφαλείας τώρα</string>
-    <string name="help_article_map_raster_maps_name">Χάρτες Raster (Online / Offline)</string>
+    <string name="help_article_map_raster_maps_name">Χάρτες Raster (Με / Χωρίς Διαδίκτυο)</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Φωνητικές υποδείξεις / Ειδοποιήσεις</string>
     <string name="simulation_constant_mode_desc">Η προσομοίωση θα πραγματοποιηθεί με σταθερή επιλεγμένη ταχύτητα.</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Πλοήγηση μέσω δεικτών</string>
@@ -4667,12 +4667,12 @@
     <string name="routing_attr_allow_private_for_truck_description">Να επιτρέπεται η πρόσβαση σε ιδιωτικές περιοχές για φορτηγά.</string>
     <string name="routing_attr_avoid_4wd_only_description">Να αποφεύγει δρόμους κατάλληλους για οχήματα 4χ4</string>
     <string name="routing_attr_avoid_cobblestone_name">Αποφυγή λιθόστρωτου</string>
-    <string name="shared_string_offline_only">Εκτός σύνδεσης μόνο</string>
+    <string name="shared_string_offline_only">Χωρίς διαδίκτυο μόνο</string>
     <string name="labels_position">Θέση ετικετών</string>
     <string name="route_part_of">Μέρος του</string>
     <string name="display_priority">Εμφάνιση προτεραιότητας</string>
     <string name="routing_attr_allow_ferries_name">Να επιτρέπονται πορθμεία</string>
-    <string name="shared_string_online_only">Εντός σύνδεσης μόνο</string>
+    <string name="shared_string_online_only">Με διαδίκτυο μόνο</string>
     <string name="route_members">Μέλη</string>
     <string name="lang_zh_hans">Απλά Κινέζικα</string>
     <string name="unit_of_temperature_description">Οι επιλεγμένες μονάδες θα εφαρμοστούν σε όλα τα δεδομένα σχετικά με θερμοκρασία στο τρέχον προφίλ.</string>
@@ -5741,4 +5741,18 @@
     <string name="waypoint_appearance">Εμφάνιση σημείου διαδρομής</string>
     <string name="delete_waypoints">Διαγραφή σημείου διαδρομής</string>
     <string name="simplified_track_description">Μόνο η γραμμή της διαδρομής θα αποθηκευτεί, τα σημεία διαδρομής θα διαγραφούν.</string>
+    <string name="weather_online">Διαδικτυακός καιρός</string>
+    <string name="use_routing_fallback_description">Να χρησιμοποιείται δρομολόγηση εκτός διαδικτύου όσο η διαδικτυακή δρομολόγηση δεν είναι διαθέσιμη.</string>
+    <string name="use_routing_fallback">Δρομολόγηση χωρίς διαδίκτυο ως εναλλακτική</string>
+    <string name="predefined_waypoint_appearance_description">Πατώντας αυτήν την ενέργεια, αποθηκεύει αυτόματα το σημείο διαδρομής με προκαθορισμένες παραμέτρους.</string>
+    <string name="always_ask_waypoint_appearance_description">Πατώντας αυτήν την ενέργεια, ανοίγει την οθόνη \"Προσθήκη σημείου διαδρομής\" όπου μπορείτε να αλλάξετε όνομα και εμφάνιση.</string>
+    <string name="use_external_timestamps_description">Να χρησιμοποιούνται οι χρονοσφραγίδες του διαδικτυακού δρομολογητή για προσαρμογή του εκτιμώμενου χρόνου και της μέσης ταχύτητας</string>
+    <string name="use_external_timestamps">Χρήση εξωτερικών χρονοσφραγίδων</string>
+    <string name="osmand_online_routing_promo">Χρησιμοποιείστε προκαθορισμένα πρότυπα, ή προσθέστε OSRM, GraphHopper, openrouteservice, ή διαδικτυακή δρομολόγηση GPX.</string>
+    <string name="online_maps_required_descr">Δυστυχώς, το OsmAnd δεν μπόρεσε να καθορίσει μια διαδρομή για τις ρυθμίσεις σας.\n\nΊσως μερικοί χάρτες να μην φορτώθηκαν, μπορείτε να κάνετε έναν διαδικτυακό έλεγχο για τους απαραίτητους χάρτες.</string>
+    <string name="offline_maps_required_descr">Λείπουν μερικοί χάρτες εκτός διαδικτύου που απαιτούνται για αυτήν τη διαδρομή.</string>
+    <string name="online_routing_engine">Διαδικτυακή μηχανή δρομολόγησης</string>
+    <string name="edit_online_routing_engine">Επεξεργασία διαδικτυακής μηχανής δρομολόγησης</string>
+    <string name="add_online_routing_engine">Προσθήκη διαδικτυακής μηχανής δρομολόγησης</string>
+    <string name="online_routing_engines">Διαδικτυακές μηχανές δρομολόγησης</string>
 </resources>
