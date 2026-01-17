@@ -85,7 +85,7 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenTreeCr
 						activityContext,
 						searchDatabaseConfig,
 						locale,
-						(edge, sourceNodeOfEdge, targetNodeOfEdge) -> true)
+						edge -> true)
 				.getSearchablePreferenceScreenTree(root);
 	}
 
