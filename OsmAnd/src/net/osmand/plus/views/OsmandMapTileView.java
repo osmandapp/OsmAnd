@@ -2206,7 +2206,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						? (float) (currentViewport.getZoomAnimation() + currentViewport.getZoomFloatPart())
 						: 0.0f;
 				currentViewport.setZoomAndAnimation(newIntZoom, 0.0, newZoomFloatPart);
-				refreshMap();
+				// OsmandMapTileView will always redraw afterwards anyway
+				//refreshMap();
 			} else {
 				finishZoomAndRotationGesture();
 			}
