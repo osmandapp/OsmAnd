@@ -1,28 +1,26 @@
 package net.osmand.plus.plugins.astro
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseBottomSheetDialogFragment
+import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.utils.InsetTarget
+import net.osmand.plus.utils.InsetTargetsCollection
 import java.util.Locale
 
-class StarMapSearchDialogFragment : BaseBottomSheetDialogFragment() {
+class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	var onObjectSelected: ((SkyObject) -> Unit)? = null
 	private var allObjects: List<SkyObject> = emptyList()
@@ -32,21 +30,6 @@ class StarMapSearchDialogFragment : BaseBottomSheetDialogFragment() {
 	private var isAscending = true
 
 	override fun getThemeUsageContext(): ThemeUsageContext = ThemeUsageContext.APP
-
-	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-		val dialog = super.onCreateDialog(savedInstanceState)
-		dialog.setOnShowListener {
-			val bottomSheetDialog = it as BottomSheetDialog
-			val bottomSheet = bottomSheetDialog.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
-			if (bottomSheet != null) {
-				val behavior = BottomSheetBehavior.from(bottomSheet)
-				behavior.state = BottomSheetBehavior.STATE_EXPANDED
-				behavior.isDraggable = false
-				bottomSheet.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
-			}
-		}
-		return dialog
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		return themedInflater.inflate(R.layout.dialog_star_map_search, container, false)
@@ -93,10 +76,22 @@ class StarMapSearchDialogFragment : BaseBottomSheetDialogFragment() {
 			filter(currentQuery)
 		}
 
-		searchView.requestFocus()
-		AndroidUtils.showSoftKeyboard(requireActivity(), searchView)
+		recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+			override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+				if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+					AndroidUtils.hideSoftKeyboard(requireActivity(), searchView)
+				}
+			}
+		})
 
+		searchView.requestFocus()
 		filter("")
+	}
+
+	override fun getInsetTargets(): InsetTargetsCollection {
+		val collection = super.getInsetTargets()
+		collection.add(InsetTarget.createScrollable(R.id.search_results))
+		return collection
 	}
 
 	fun setObjects(objects: List<SkyObject>) {
