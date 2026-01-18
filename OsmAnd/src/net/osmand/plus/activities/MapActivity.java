@@ -1454,6 +1454,28 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 			}
 		}
+
+		DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+		if (drawerLayout != null && !drawerDisabled) {
+			switch (event.getActionMasked()) {
+				case MotionEvent.ACTION_POINTER_DOWN:
+				case MotionEvent.ACTION_MOVE:
+					// 2+ fingers on screen: disable drawer swipe
+					if (event.getPointerCount() >= 2) {
+						drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, GravityCompat.START);
+						break;
+					}
+				case MotionEvent.ACTION_POINTER_UP:
+				case MotionEvent.ACTION_UP:
+				case MotionEvent.ACTION_CANCEL:
+					// Fall through to possibly unlock again if < 2 fingers (or gesture ended)
+					if (event.getPointerCount() < 2) {
+						drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, GravityCompat.START);
+					}
+					break;
+			}
+		}
+
 		return super.dispatchTouchEvent(event);
 	}
 
