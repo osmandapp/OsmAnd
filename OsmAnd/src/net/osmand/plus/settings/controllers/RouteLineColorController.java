@@ -96,7 +96,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 
 				@Override
 				public PaletteColor provideSelectedColorForPaletteMode(@NonNull PaletteMode paletteMode) {
-					boolean useNightMap = Objects.equals(paletteMode.getTag(), PALETTE_MODE_ID_NIGHT);
+					boolean useNightMap = Objects.equals(paletteMode.tag(), PALETTE_MODE_ID_NIGHT);
 					return collection.findPaletteColor(routeLinePreview.getCustomColor(useNightMap));
 				}
 
@@ -237,7 +237,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 	public boolean isNightMap() {
 		ModedColorsPaletteController paletteController = getColorsPaletteController();
 		PaletteMode paletteMode = paletteController.getSelectedPaletteMode();
-		return Objects.equals(paletteMode.getTag(), PALETTE_MODE_ID_NIGHT);
+		return Objects.equals(paletteMode.tag(), PALETTE_MODE_ID_NIGHT);
 	}
 
 	public void onDestroy(@Nullable FragmentActivity activity) {

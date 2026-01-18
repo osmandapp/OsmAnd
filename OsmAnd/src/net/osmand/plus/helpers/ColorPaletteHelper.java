@@ -40,6 +40,7 @@ public class ColorPaletteHelper {
 		this.app = app;
 	}
 
+	@NonNull
 	public Map<String, Pair<ColorPalette, Long>> getPalletsForType(@NonNull Object gradientType) {
 		Map<String, Pair<ColorPalette, Long>> colorPalettes = new HashMap<>();
 		if (gradientType instanceof ColorizationType) {

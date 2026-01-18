@@ -44,6 +44,7 @@ public class FileColorsCollection extends ColorsCollection {
 		}
 	}
 
+	@NonNull
 	private ColorPalette readFile() throws IOException {
 		return ColorPalette.parseColorPalette(new FileReader(file), false);
 	}

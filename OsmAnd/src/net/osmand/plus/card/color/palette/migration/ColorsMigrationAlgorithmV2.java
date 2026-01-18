@@ -119,7 +119,7 @@ public class ColorsMigrationAlgorithmV2 {
 
 		// Save all unique colors to the user's palette file
 		List<PaletteColor> lastUsedOrder = new ArrayList<>(originalOrder);
-		lastUsedOrder.sort(new Comparator<PaletteColor>() {
+		lastUsedOrder.sort(new Comparator<>() {
 			@Override
 			public int compare(PaletteColor o1, PaletteColor o2) {
 				return Long.compare(getLastUsedTime(o2), getLastUsedTime(o1));
@@ -134,6 +134,7 @@ public class ColorsMigrationAlgorithmV2 {
 		newCollection.setColors(originalOrder, lastUsedOrder);
 	}
 
+	@NonNull
 	public ColorsCollectionV1 getFavoritesColorCollection() {
 		ColorsCollectionBundle bundle = new ColorsCollectionBundle();
 		bundle.predefinedColors = Arrays.asList(DefaultColors.values());
@@ -142,6 +143,7 @@ public class ColorsMigrationAlgorithmV2 {
 		return new ColorsCollectionV1(bundle);
 	}
 
+	@NonNull
 	public ColorsCollectionV1 getProfileColorCollection(@NonNull OsmandApplication app,
 	                                                    @NonNull ApplicationMode appMode) {
 		List<PaletteColorV1> predefinedColors = new ArrayList<>();
@@ -157,6 +159,7 @@ public class ColorsMigrationAlgorithmV2 {
 		return new ColorsCollectionV1(bundle);
 	}
 
+	@NonNull
 	public ColorsCollectionV1 getRouteLineColorCollection() {
 		ColorsCollectionBundle bundle = new ColorsCollectionBundle();
 		bundle.predefinedColors = Arrays.asList(DefaultColors.values());
@@ -164,6 +167,7 @@ public class ColorsMigrationAlgorithmV2 {
 		return new ColorsCollectionV1(bundle);
 	}
 
+	@NonNull
 	public ColorsCollectionV1 getTrackColorCollection(@NonNull OsmandApplication app) {
 		List<PaletteColorV1> predefinedColors = new ArrayList<>();
 		for (AppearanceListItem item : GpxAppearanceAdapter.getUniqueTrackColorItems(app)) {

@@ -173,7 +173,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 		if (paletteColor instanceof PaletteGradientColor paletteGradientColor) {
 			TerrainType terrainType = TerrainType.valueOf(paletteGradientColor.getTypeName());
 			String key = paletteGradientColor.getPaletteName();
-			TerrainMode mode = TerrainMode.getMode(terrainType, key);
+			TerrainMode mode = TerrainMode.valueOf(terrainType, key);
 			if (mode != null) {
 				selectedMode = mode;
 				plugin.setTerrainMode(mode);

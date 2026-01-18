@@ -7,7 +7,6 @@ import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
-import net.osmand.shared.util.PlatformUtil
 import kotlin.math.*
 
 class RouteColorize {

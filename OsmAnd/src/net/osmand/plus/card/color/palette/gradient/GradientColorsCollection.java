@@ -82,10 +82,10 @@ public class GradientColorsCollection extends ColorsCollection {
 	@Override
 	protected void loadColorsInLastUsedOrder() throws IOException {
 		Set<String> addedPaletteIds = new HashSet<>();
-		List<GradientData> loadedPreference = readPaletteColorsPreference();
+		List<GradientData> loadedData = readPaletteColorsPreference();
 
 		// Firstly collect all items those already have last used order
-		for (GradientData gradientData : loadedPreference) {
+		for (GradientData gradientData : loadedData) {
 			int index = gradientData.index;
 			String typeName = gradientData.typeName;
 			String paletteName = gradientData.paletteName;
@@ -190,15 +190,5 @@ public class GradientColorsCollection extends ColorsCollection {
 		jsonObject.put(type, jsonArray);
 	}
 
-	private static class GradientData {
-		private final String typeName;
-		private final String paletteName;
-		private final int index;
-
-		public GradientData(@NonNull String typeName, @NonNull String paletteName, int index) {
-			this.typeName = typeName;
-			this.paletteName = paletteName;
-			this.index = index;
-		}
-	}
+	private record GradientData(String typeName, String paletteName, int index) { }
 }

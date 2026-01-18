@@ -50,7 +50,7 @@ public class ModedColorsPaletteCard extends ColorsPaletteCard {
 		radioGroup.setItems(toggleButtons);
 
 		PaletteMode selectedPaletteMode = controller.getSelectedPaletteMode();
-		TextRadioItem selectedItem = findRadioItem(toggleButtons, selectedPaletteMode.getTag());
+		TextRadioItem selectedItem = findRadioItem(toggleButtons, selectedPaletteMode.tag());
 		radioGroup.setSelectedItem(selectedItem);
 	}
 
@@ -58,8 +58,8 @@ public class ModedColorsPaletteCard extends ColorsPaletteCard {
 	private List<TextRadioItem> collectRadioItems() {
 		List<TextRadioItem> radioItems = new ArrayList<>();
 		for (PaletteMode paletteMode : controller.getAvailablePaletteModes()) {
-			TextRadioItem radioItem = new TextRadioItem(paletteMode.getTitle());
-			radioItem.setTag(paletteMode.getTag());
+			TextRadioItem radioItem = new TextRadioItem(paletteMode.title());
+			radioItem.setTag(paletteMode.tag());
 			radioItem.setOnClickListener((radio, view) -> {
 				controller.selectPaletteMode(paletteMode);
 				return true;

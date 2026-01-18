@@ -43,7 +43,6 @@ import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.shared.ColorPalette.ColorValue;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,7 +146,7 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 
 	private void reloadGradientColors(@NonNull Object gradientType) {
 		if (gradientType instanceof TerrainType) {
-			TerrainMode.reloadTerrainMods(app);
+			TerrainMode.reloadAvailableModes(app);
 		}
 		controller.reloadGradientColors();
 	}
@@ -221,7 +220,7 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 			String fileName;
 
 			if (gradientType instanceof TerrainType) {
-				TerrainMode terrainMode = TerrainMode.getMode((TerrainType) gradientType, gradientColor.getPaletteName());
+				TerrainMode terrainMode = TerrainMode.valueOf((TerrainType) gradientType, gradientColor.getPaletteName());
 				if (terrainMode == null) {
 					menuButton.setVisibility(View.GONE);
 					return;

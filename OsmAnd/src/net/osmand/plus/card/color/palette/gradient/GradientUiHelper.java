@@ -57,8 +57,7 @@ public class GradientUiHelper {
 		AppCompatImageView background = view.findViewById(R.id.background);
 		AppCompatImageView outline = view.findViewById(R.id.outline);
 
-		if (paletteColor instanceof PaletteGradientColor) {
-			PaletteGradientColor gradientColor = (PaletteGradientColor) paletteColor;
+		if (paletteColor instanceof PaletteGradientColor gradientColor) {
 			List<ColorValue> colors = gradientColor.getColorPalette().getColors();
 			background.setImageDrawable(getGradientDrawable(app, colors, RECTANGLE));
 		}

@@ -30,7 +30,7 @@ public class TerrainMode {
 	public static final String COLOR_SLOPE_PREFIX = "slope_";
 
 	public static final String HEIGHT_PREFIX = "height_";
-	private static TerrainMode[] terrainModes;
+	private static TerrainMode[] cachedTerrainModes;
 
 	public enum TerrainType {
 		HILLSHADE(R.string.shared_string_hillshade),
@@ -69,14 +69,13 @@ public class TerrainMode {
 
 	@NonNull
 	public static TerrainMode[] values(OsmandApplication app) {
-		if (terrainModes != null) {
-			return terrainModes;
+		if (cachedTerrainModes == null) {
+			reloadAvailableModes(app);
 		}
-		reloadTerrainMods(app);
-		return terrainModes;
+		return cachedTerrainModes;
 	}
 
-	public static void reloadTerrainMods(@NonNull OsmandApplication app) {
+	public static void reloadAvailableModes(@NonNull OsmandApplication app) {
 		List<TerrainMode> modes = new ArrayList<>();
 		// HILLSHADE first
 		modes.add(new TerrainMode(app, DEFAULT_KEY, HILLSHADE, app.getString(R.string.shared_string_hillshade)));
@@ -114,12 +113,12 @@ public class TerrainMode {
 				}
 			}
 		}
-		terrainModes = modes.toArray(new TerrainMode[0]);
+		cachedTerrainModes = modes.toArray(new TerrainMode[0]);
 	}
 
 	@Nullable
-	public static TerrainMode getMode(@NonNull TerrainType type, @NonNull String keyName) {
-		for (TerrainMode mode : terrainModes) {
+	public static TerrainMode valueOf(@NonNull TerrainType type, @NonNull String keyName) {
+		for (TerrainMode mode : cachedTerrainModes) {
 			if (mode.type == type && Algorithms.stringsEqual(mode.getKeyName(), keyName)) {
 				return mode;
 			}
@@ -129,7 +128,7 @@ public class TerrainMode {
 
 	@Nullable
 	public static TerrainMode getDefaultMode(@NonNull TerrainType type) {
-		for (TerrainMode mode : terrainModes) {
+		for (TerrainMode mode : cachedTerrainModes) {
 			if (mode.type == type && mode.isDefaultMode()) {
 				return mode;
 			}
@@ -139,7 +138,7 @@ public class TerrainMode {
 
 	public static TerrainMode getByKey(String key) {
 		TerrainMode hillshade = null;
-		for (TerrainMode m : terrainModes) {
+		for (TerrainMode m : cachedTerrainModes) {
 			if (Algorithms.stringsEqual(m.getKeyName(), key)) {
 				return m;
 			} else if (m.type == HILLSHADE && hillshade == null) {
@@ -150,7 +149,7 @@ public class TerrainMode {
 	}
 
 	public static boolean isModeExist(@NonNull String key) {
-		for (TerrainMode m : terrainModes) {
+		for (TerrainMode m : cachedTerrainModes) {
 			if (Algorithms.stringsEqual(m.getKeyName(), key)) {
 				return true;
 			}

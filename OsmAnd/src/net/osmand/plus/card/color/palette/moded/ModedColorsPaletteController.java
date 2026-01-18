@@ -32,7 +32,7 @@ public abstract class ModedColorsPaletteController extends ColorsPaletteControll
 	}
 
 	public void selectPaletteMode(@NonNull PaletteMode paletteMode) {
-		if (!Objects.equals(paletteMode.getTag(), selectedPaletteMode.getTag())) {
+		if (!Objects.equals(paletteMode.tag(), selectedPaletteMode.tag())) {
 			PaletteMode oldPaletteMode = this.selectedPaletteMode;
 			this.selectedPaletteMode = paletteMode;
 			onPaletteModeChanged(oldPaletteMode, paletteMode);
@@ -66,7 +66,7 @@ public abstract class ModedColorsPaletteController extends ColorsPaletteControll
 		PaletteMode selectedPaletteMode = getSelectedPaletteMode();
 		List<PaletteColor> paletteColors = new ArrayList<>();
 		for (PaletteMode paletteMode : getAvailablePaletteModes()) {
-			if (!Objects.equals(selectedPaletteMode.getTag(), paletteMode.getTag())) {
+			if (!Objects.equals(selectedPaletteMode.tag(), paletteMode.tag())) {
 				addPaletteColor(paletteColors, paletteMode);
 			}
 		}

@@ -357,7 +357,6 @@ public class TrackDrawInfo {
 			showStartFinish = true;
 			coloringType = ColoringType.Companion.requireValueOf(TRACK, null);
 			gradientColorName = PaletteGradientColor.DEFAULT_NAME;
-			gradientColorName = PaletteGradientColor.DEFAULT_NAME;
 			routeInfoAttribute = ColoringType.Companion.getRouteInfoAttribute(null);
 			trackVisualizationType = Gpx3DVisualizationType.NONE;
 			trackWallColorType = Gpx3DWallColorType.NONE;
@@ -370,7 +369,8 @@ public class TrackDrawInfo {
 			splitInterval = gpxFile.getSplitInterval();
 			splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType()).getType();
 			coloringType = ColoringType.Companion.requireValueOf(TRACK, gpxFile.getColoringType());
-			gradientColorName = !Algorithms.isEmpty(gpxFile.getGradientColorPalette()) ? gpxFile.getGradientColorPalette() : PaletteGradientColor.DEFAULT_NAME ;
+			String savedGradientColorName = gpxFile.getGradientColorPalette();
+			gradientColorName = !Algorithms.isEmpty(savedGradientColorName) ? savedGradientColorName : PaletteGradientColor.DEFAULT_NAME ;
 			routeInfoAttribute = ColoringType.Companion.getRouteInfoAttribute(gpxFile.getColoringType());
 			trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(gpxFile.get3DVisualizationType());
 			trackWallColorType = Gpx3DWallColorType.Companion.get3DWallColorType(gpxFile.get3DWallColoringType());

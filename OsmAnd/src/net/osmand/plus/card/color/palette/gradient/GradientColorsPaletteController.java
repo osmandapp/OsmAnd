@@ -47,23 +47,24 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 		}
 	}
 
-	public void updateContent(@NonNull GradientColorsCollection gradientCollection, @NonNull String selectedGradientName) {
+	public void updateContent(@NonNull GradientColorsCollection gradientCollection,
+	                          @NonNull String selectedGradientName) {
 		this.gradientCollection = gradientCollection;
 		updateContent(selectedGradientName);
 	}
 
 	public void updateContent(@NonNull String selectedGradientName) {
-		PaletteGradientColor newColor = null;
+		PaletteGradientColor selected = null;
 		for (PaletteColor paletteColor : gradientCollection.getPaletteColors()) {
 			PaletteGradientColor gradientColor = (PaletteGradientColor) paletteColor;
 			if (gradientColor.getPaletteName().equals(selectedGradientName)) {
-				newColor = gradientColor;
+				selected = gradientColor;
 			}
 		}
-		if (newColor == null) {
+		if (selected == null) {
 			selectedPaletteColor = gradientCollection.getDefaultGradientPalette();
 		} else {
-			selectedPaletteColor = newColor;
+			selectedPaletteColor = selected;
 		}
 		notifyUpdatePaletteColors(null);
 	}

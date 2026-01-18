@@ -98,11 +98,7 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 	public boolean isNightMap() {
 		ModedColorsPaletteController paletteController = getColorsPaletteController();
 		PaletteMode paletteMode = paletteController.getSelectedPaletteMode();
-		return Objects.equals(paletteMode.getTag(), PALETTE_MODE_ID_NIGHT);
-	}
-
-	private void notifyAllColorsScreenClosed() {
-		externalListener.updateStatusBar();
+		return Objects.equals(paletteMode.tag(), PALETTE_MODE_ID_NIGHT);
 	}
 
 	protected void setSavedColors(boolean applyChanges) {
@@ -144,7 +140,7 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 
 				@Override
 				public PaletteColor provideSelectedColorForPaletteMode(@NonNull PaletteMode paletteMode) {
-					boolean useNightMap = Objects.equals(paletteMode.getTag(), PALETTE_MODE_ID_NIGHT);
+					boolean useNightMap = Objects.equals(paletteMode.tag(), PALETTE_MODE_ID_NIGHT);
 					return collection.findPaletteColor(useNightMap ? colorNight : colorDay, true);
 				}
 
@@ -157,7 +153,7 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 
 				@Override
 				public void onAllColorsScreenClosed() {
-					notifyAllColorsScreenClosed();
+					externalListener.updateStatusBar();
 				}
 			};
 		}

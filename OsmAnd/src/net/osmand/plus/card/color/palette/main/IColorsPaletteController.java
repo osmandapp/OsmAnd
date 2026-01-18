@@ -16,7 +16,7 @@ import java.util.List;
 
 public interface IColorsPaletteController extends IDialogController, ColorPickerListener {
 
-	String ALL_COLORS_PROCESS_ID = "show_all_colors_palette";
+	String ALL_COLORS_PROCESS_ID = "show_all_colors_screen";
 
 	void bindPalette(@NonNull IColorsPalette palette);
 

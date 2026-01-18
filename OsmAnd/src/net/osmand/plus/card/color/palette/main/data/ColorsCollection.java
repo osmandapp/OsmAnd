@@ -29,13 +29,13 @@ public abstract class ColorsCollection {
 	}
 
 	@Nullable
-	public PaletteColor findPaletteColor(@ColorInt int colorInt, boolean registerIfNotFound) {
+	public PaletteColor findPaletteColor(@ColorInt int colorInt, boolean addIfNotFound) {
 		for (PaletteColor paletteColor : originalOrder) {
 			if (paletteColor.getColor() == colorInt) {
 				return paletteColor;
 			}
 		}
-		return registerIfNotFound ? addNewColor(colorInt, false) : null;
+		return addIfNotFound ? addNewColor(colorInt, false) : null;
 	}
 
 	@NonNull
