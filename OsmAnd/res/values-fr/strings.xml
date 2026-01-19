@@ -5872,5 +5872,5 @@
     <string name="nearest_city">Ville la plus proche</string>
     <string name="avg_speed">Vitesse moyenne</string>
     <string name="organize_by_max_speed">Vitesse maximale</string>
-    <string name="organize_by_max_altitude">Altitude maximale</string>
+    <string name="organize_by_max_altitude">Altitude max.</string>
 </resources>
