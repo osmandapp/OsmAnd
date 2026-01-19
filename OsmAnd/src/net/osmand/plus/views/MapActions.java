@@ -132,29 +132,29 @@ public class MapActions {
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from,
-			PointDescription fromName, boolean useIntermediatePointsByDefault, boolean showMenu,
-			@Nullable Boolean passWholeRoute) {
+	                                           PointDescription fromName, boolean useIntermediatePointsByDefault, boolean showMenu,
+	                                           @Nullable Boolean passWholeRoute) {
 		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName,
 				useIntermediatePointsByDefault, showMenu,
 				MapRouteInfoMenu.DEFAULT_MENU_STATE, passWholeRoute);
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from,
-			PointDescription fromName, boolean useIntermediatePointsByDefault, boolean showMenu) {
+	                                           PointDescription fromName, boolean useIntermediatePointsByDefault, boolean showMenu) {
 		enterRoutePlanningModeGivenGpx(gpxFile, from, fromName, useIntermediatePointsByDefault, showMenu,
 				MapRouteInfoMenu.DEFAULT_MENU_STATE);
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from,
-			PointDescription fromName, boolean useIntermediatePointsByDefault, boolean showMenu,
-			int menuState) {
+	                                           PointDescription fromName, boolean useIntermediatePointsByDefault, boolean showMenu,
+	                                           int menuState) {
 		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName, useIntermediatePointsByDefault, showMenu, menuState, null);
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, ApplicationMode appMode,
-			LatLon from, PointDescription fromName,
-			boolean useIntermediatePointsByDefault, boolean showMenu, int menuState,
-			@Nullable Boolean passWholeRoute) {
+	                                           LatLon from, PointDescription fromName,
+	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState,
+	                                           @Nullable Boolean passWholeRoute) {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
 
 		if (gpxFile != null && gpxFile.hasRtePt() && appMode == null) {
@@ -323,7 +323,7 @@ public class MapActions {
 	}
 
 	public void onRequestPermissionsResult(int requestCode, String[] permissions,
-			int[] grantResults) {
+	                                       int[] grantResults) {
 		if ((requestCode == REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION
 				|| requestCode == REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION
 				|| requestCode == REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION)) {
@@ -390,7 +390,7 @@ public class MapActions {
 	}
 
 	private void startRoutePlanningWithDestination(LatLon latLon, PointDescription pointDescription,
-			TargetPointsHelper targets) {
+	                                               TargetPointsHelper targets) {
 		MapActivity activity = getMapActivity();
 		MapActions mapActions = activity != null ? activity.getMapActions() : app.getOsmandMap().getMapActions();
 		boolean hasPointToStart = settings.restorePointToStart();
@@ -492,7 +492,9 @@ public class MapActions {
 		if (settings.getApplicationMode() != routingHelper.getAppMode()) {
 			settings.setApplicationMode(routingHelper.getAppMode(), false);
 		}
-		app.getOsmandMap().getMapView().setElevationAngle(settings.getLastKnownMapElevation());
+		float elevationAngle = settings.getLastKnownMapElevation();
+		AnimateDraggingMapThread animateDraggingMapThread = app.getOsmandMap().getMapView().getAnimatedDraggingThread();
+		animateDraggingMapThread.startTilting(elevationAngle, 0);
 		if (routingHelper.isFollowingMode()) {
 			switchToRouteFollowingLayout();
 		} else {
@@ -525,7 +527,7 @@ public class MapActions {
 	}
 
 	public void selectAddress(String name, double latitude, double longitude,
-			QuickSearchType searchType) {
+	                          QuickSearchType searchType) {
 		PointType pointType = switch (searchType) {
 			case START_POINT -> PointType.START;
 			case DESTINATION, DESTINATION_AND_START -> PointType.TARGET;
@@ -566,7 +568,7 @@ public class MapActions {
 	}
 
 	public void startNavigationForSegment(@NonNull GpxFile gpxFile, int selectedSegment,
-			@NonNull MapActivity mapActivity) {
+	                                      @NonNull MapActivity mapActivity) {
 		settings.GPX_SEGMENT_INDEX.set(selectedSegment);
 		settings.GPX_ROUTE_INDEX.resetToDefault();
 		startNavigationForGpx(gpxFile, mapActivity);
@@ -578,7 +580,7 @@ public class MapActions {
 	}
 
 	public void startNavigationForRoute(@NonNull GpxFile gpxFile, int selectedRoute,
-			@NonNull MapActivity mapActivity) {
+	                                    @NonNull MapActivity mapActivity) {
 		settings.GPX_ROUTE_INDEX.set(selectedRoute);
 		settings.GPX_SEGMENT_INDEX.resetToDefault();
 		startNavigationForGpx(gpxFile, mapActivity);
