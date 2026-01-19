@@ -492,6 +492,7 @@ public class MapActions {
 		if (settings.getApplicationMode() != routingHelper.getAppMode()) {
 			settings.setApplicationMode(routingHelper.getAppMode(), false);
 		}
+		app.getOsmandMap().getMapView().setElevationAngle(settings.getLastKnownMapElevation());
 		if (routingHelper.isFollowingMode()) {
 			switchToRouteFollowingLayout();
 		} else {
