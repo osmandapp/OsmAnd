@@ -157,15 +157,15 @@ public class RoutingHelper {
 	}
 
 	public void onCarNavigationStart() {
-		if(isPausedOnAADisconnect && isPauseNavigation()) {
+		if (isPausedOnAADisconnect && isPauseNavigation()) {
 			isPausedOnAADisconnect = false;
 			resumeNavigation();
 		}
 	}
 
 	public void onCarNavigationSessionChanged() {
-		if(app.getCarNavigationSession() == null) {
-			if(isFollowingMode()) {
+		if (app.getCarNavigationSession() == null) {
+			if (isFollowingMode()) {
 				if (getLeftDistance() < STOP_NAVIGATION_ON_AA_DISCONNECT_DISTANCE_THRESHOLD) {
 					app.stopNavigation();
 				} else {
