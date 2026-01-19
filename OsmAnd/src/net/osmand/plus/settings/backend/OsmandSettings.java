@@ -1838,12 +1838,16 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> GPS_STATUS_APP = new StringPreference(this, "gps_status_app", "").makeGlobal().makeShared();
 
-	public final CommonPreference<String> MAP_INFO_CONTROLS = new StringPreference(this, "map_info_controls", "").makeProfile();
+	private final CommonPreference<String> MAP_INFO_CONTROLS = new StringPreference(this, "map_info_controls", "").makeProfile();
 
 	{
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			MAP_INFO_CONTROLS.setModeDefaultValue(mode, "");
 		}
+	}
+
+	public CommonPreference<String> getMapInfoControls(@Nullable ScreenLayoutMode layoutMode) {
+		return getLayoutPreference(MAP_INFO_CONTROLS, layoutMode);
 	}
 
 	public final OsmandPreference<Boolean> BATTERY_SAVING_MODE = new BooleanPreference(this, "battery_saving", false).makeGlobal().makeShared();
@@ -2135,8 +2139,27 @@ public class OsmandSettings {
 		return builder.toString();
 	}
 
+	public ListStringPreference getPanelOrderPreference(@NonNull WidgetsPanel panel, @Nullable ScreenLayoutMode layoutMode) {
+		if (panel == WidgetsPanel.LEFT) {
+			return getLayoutPreference(LEFT_WIDGET_PANEL_ORDER, layoutMode);
+		} else if (panel == WidgetsPanel.RIGHT) {
+			return getLayoutPreference(RIGHT_WIDGET_PANEL_ORDER, layoutMode);
+		} else if (panel == WidgetsPanel.TOP) {
+			return getLayoutPreference(TOP_WIDGET_PANEL_ORDER, layoutMode);
+		} else if (panel == WidgetsPanel.BOTTOM) {
+			return getLayoutPreference(BOTTOM_WIDGET_PANEL_ORDER, layoutMode);
+		}
+		throw new IllegalStateException("Unsupported panel");
+	}
+
+
+	public ListStringPreference getCustomWidgetsKeys(@Nullable ScreenLayoutMode layoutMode) {
+		return getLayoutPreference(CUSTOM_WIDGETS_KEYS, layoutMode);
+	}
+
 	public final OsmandPreference<Boolean> USE_SEPARATE_LAYOUTS = new BooleanPreference(this, "use_separate_layouts", false).makeProfile();
-	public final ListStringPreference CUSTOM_WIDGETS_KEYS = (ListStringPreference) new ListStringPreference(this, "custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
+
+	private final ListStringPreference CUSTOM_WIDGETS_KEYS = (ListStringPreference) new ListStringPreference(this, "custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
 
 	public final OsmandPreference<Integer> DISPLAYED_MARKERS_WIDGETS_COUNT = new IntPreference(this, "displayed_markers_widgets_count", 1).makeProfile();
 
@@ -3521,6 +3544,9 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> CONFIGURE_PROFILE_FREE_ACCOUNT_CARD_DISMISSED =
 			new BooleanPreference(this, "configure_profile_free_account_card_dismissed", false).makeGlobal();
+
+	public final OsmandPreference<Boolean> MAP_SCREEN_LAYOUT_CARD_DISMISSED =
+			new BooleanPreference(this, "map_screen_layout_card_dismissed", false).makeGlobal();
 
 	public final OsmandPreference<Boolean> TRIPLTEK_PROMO_SHOWED = new BooleanPreference(this, "tripltek_promo_showed", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> HUGEROCK_PROMO_SHOWED = new BooleanPreference(this, "hugerock_promo_showed", false).makeGlobal().makeShared();

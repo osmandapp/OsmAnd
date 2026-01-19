@@ -15,7 +15,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
@@ -157,8 +158,8 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	@NonNull
 	public abstract WidgetsPanel getUpdatedPanel();
 
-	public boolean isEnabledForAppMode(@NonNull ApplicationMode appMode) {
-		List<String> widgetsVisibility = getWidgetsVisibility(appMode);
+	public boolean isEnabledForAppMode(@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode ) {
+		List<String> widgetsVisibility = getWidgetsVisibility(appMode, layoutMode);
 		if (widgetsVisibility.contains(key) || widgetsVisibility.contains(COLLAPSED_PREFIX + key)) {
 			return true;
 		} else if (widgetsVisibility.contains(HIDE_PREFIX + key)) {
@@ -167,8 +168,8 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		return WidgetsAvailabilityHelper.isWidgetVisibleByDefault(getApp(), key, appMode);
 	}
 
-	public void enableDisableForMode(@NonNull ApplicationMode appMode, @Nullable Boolean enabled) {
-		List<String> widgetsVisibility = getWidgetsVisibility(appMode);
+	public void enableDisableForMode(@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode, @Nullable Boolean enabled) {
+		List<String> widgetsVisibility = getWidgetsVisibility(appMode, layoutMode);
 		widgetsVisibility.remove(key);
 		widgetsVisibility.remove(COLLAPSED_PREFIX + key);
 		widgetsVisibility.remove(HIDE_PREFIX + key);
@@ -182,23 +183,18 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 			newVisibilityString.append(visibility).append(SETTINGS_SEPARATOR);
 		}
 
-		getVisibilityPreference().setModeValue(appMode, newVisibilityString.toString());
+		getSettings().getMapInfoControls(layoutMode).setModeValue(appMode, newVisibilityString.toString());
 
-		OsmandPreference<?> settingsPref = widget.getWidgetSettingsPrefToReset(appMode);
+		CommonPreference<?> settingsPref = widget.getWidgetSettingsPrefToReset(appMode);
 		if ((enabled == null || !enabled) && settingsPref != null) {
-			settingsPref.resetModeToDefault(appMode);
+			getSettings().getLayoutPreference(settingsPref, layoutMode).resetModeToDefault(appMode);
 		}
 	}
 
 	@NonNull
-	private List<String> getWidgetsVisibility(@NonNull ApplicationMode appMode) {
-		String widgetsVisibilityString = getVisibilityPreference().getModeValue(appMode);
+	private List<String> getWidgetsVisibility(@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
+		String widgetsVisibilityString = getSettings().getMapInfoControls(layoutMode).getModeValue(appMode);
 		return new ArrayList<>(Arrays.asList(widgetsVisibilityString.split(SETTINGS_SEPARATOR)));
-	}
-
-	@NonNull
-	private OsmandPreference<String> getVisibilityPreference() {
-		return getSettings().MAP_INFO_CONTROLS;
 	}
 
 	@NonNull

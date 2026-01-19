@@ -48,6 +48,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
@@ -383,7 +384,7 @@ public class StreetNameWidget extends MapWidget {
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
-		if (updatedVisibility && widgetType.getPanel(settings) == WidgetsPanel.TOP) {
+		if (updatedVisibility && widgetType.getPanel(settings, ScreenLayoutMode.getDefault(mapActivity)) == WidgetsPanel.TOP) {
 			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {
 				mapInfoLayer.updateVerticalPanels();
@@ -395,7 +396,7 @@ public class StreetNameWidget extends MapWidget {
 
 	private boolean isAnyStreetNameEnabledForMode(@NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
 		for (MapWidgetInfo widgetInfo : widgets) {
-			if (widgetInfo.getWidgetType() == STREET_NAME && widgetInfo.isEnabledForAppMode(mode)) {
+			if (widgetInfo.getWidgetType() == STREET_NAME && widgetInfo.isEnabledForAppMode(mode, ScreenLayoutMode.getDefault(mapActivity))) {
 				return true;
 			}
 		}

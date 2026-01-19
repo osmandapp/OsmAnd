@@ -15,8 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -61,7 +59,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 
 public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectProvider {
 
@@ -318,7 +315,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public void recreateAllControls(@NonNull MapActivity mapActivity) {
 		widgetRegistry.clearWidgets();
 		registerAllControls(mapActivity);
-		widgetRegistry.reorderWidgets();
+		widgetRegistry.reorderWidgets(mapActivity);
 		recreateControls();
 	}
 
@@ -350,7 +347,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			resetCashedTheme();
 			ApplicationMode appMode = settings.getApplicationMode();
 			clearCustomContainers(mapActivity);
-			widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
+			widgetRegistry.updateWidgetsInfo(mapActivity, appMode, drawSettings);
 			topWidgetsPanel.update(drawSettings);
 			bottomWidgetsPanel.update(drawSettings);
 			leftWidgetsPanel.update(drawSettings);
@@ -360,7 +357,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 	public void updateVerticalPanels() {
 		ApplicationMode appMode = settings.getApplicationMode();
-		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
+		widgetRegistry.updateWidgetsInfo(requireMapActivity(), appMode, drawSettings);
 
 		if (topWidgetsPanel != null) {
 			topWidgetsPanel.update(drawSettings);
@@ -550,7 +547,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		this.drawSettings = drawSettings;
 		if (getMapActivity() != null) {
 			updateColorShadowsOfText();
-			widgetRegistry.updateWidgetsInfo(settings.getApplicationMode(), drawSettings);
+			widgetRegistry.updateWidgetsInfo(requireMapActivity(), settings.getApplicationMode(), drawSettings);
 			leftWidgetsPanel.update(drawSettings);
 			rightWidgetsPanel.update(drawSettings);
 			topWidgetsPanel.update(drawSettings);

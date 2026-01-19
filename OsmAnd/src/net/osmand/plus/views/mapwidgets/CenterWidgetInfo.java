@@ -32,15 +32,15 @@ public class CenterWidgetInfo extends MapWidgetInfo {
 		OsmandSettings settings = widget.getMyApplication().getSettings();
 		WidgetType widgetType = getWidgetType();
 		if (widgetType != null) {
-			if (widgetType.defaultPanel == BOTTOM && TOP.contains(key, settings)) {
+			if (widgetType.defaultPanel == BOTTOM && TOP.contains(key, widget.getMapActivity())) {
 				widgetPanel = TOP;
-			} else if (widgetType.defaultPanel == TOP && BOTTOM.contains(key, settings)) {
+			} else if (widgetType.defaultPanel == TOP && BOTTOM.contains(key, widget.getMapActivity())) {
 				widgetPanel = BOTTOM;
 			} else {
 				widgetPanel = widgetType.defaultPanel;
 			}
 		} else {
-			widgetPanel = TOP.contains(key, settings) ? TOP : BOTTOM;
+			widgetPanel = TOP.contains(key, widget.getMapActivity()) ? TOP : BOTTOM;
 		}
 		return widgetPanel;
 	}

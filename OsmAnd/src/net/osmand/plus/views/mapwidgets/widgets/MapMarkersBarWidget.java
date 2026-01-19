@@ -21,6 +21,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -230,7 +231,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
-		if (updatedVisibility && widgetType.getPanel(settings) == WidgetsPanel.TOP) {
+		if (updatedVisibility && widgetType.getPanel(settings, ScreenLayoutMode.getDefault(mapActivity)) == WidgetsPanel.TOP) {
 			mapActivity.updateStatusBarColor();
 		}
 		return updatedVisibility;

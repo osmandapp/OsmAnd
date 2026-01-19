@@ -6,9 +6,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.IComplexWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 public class ComplexWidgetInfo extends MapWidgetInfo {
@@ -46,10 +46,11 @@ public class ComplexWidgetInfo extends MapWidgetInfo {
 	public WidgetsPanel getUpdatedPanel() {
 		OsmandSettings settings = widget.getMyApplication().getSettings();
 		WidgetType widgetType = getWidgetType();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(widget.getMapActivity());
 		if (widgetType != null) {
-			return widgetType.getPanel(key, settings);
+			return widgetType.getPanel(key, settings, layoutMode);
 		} else {
-			WidgetType.findWidgetPanel(key, settings, null);
+			WidgetType.findWidgetPanel(key, settings, null, layoutMode);
 		}
 		return widgetPanel;
 	}

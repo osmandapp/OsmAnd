@@ -23,6 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetsUtils;
@@ -282,7 +283,7 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 
 		Map<Integer, Set<MapWidgetInfo>> rowWidgetMap = new TreeMap<>();
 		for (MapWidgetInfo widgetInfo : allPanelWidget) {
-			if (widgetInfo.isEnabledForAppMode(mode)) {
+			if (widgetInfo.isEnabledForAppMode(mode, ScreenLayoutMode.getDefault(getContext()))) {
 				addWidgetViewToPage(rowWidgetMap, widgetInfo.pageIndex, widgetInfo);
 				widgetsToShow.add(widgetInfo.widget);
 			} else {
@@ -356,7 +357,7 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 			ApplicationMode appMode = settings.getApplicationMode();
 			for (int j = 0; j < rowWidgets.size(); j++) {
 				MapWidgetInfo widgetInfo = rowWidgets.get(j);
-				if (widgetInfo.isEnabledForAppMode(appMode)) {
+				if (widgetInfo.isEnabledForAppMode(appMode, ScreenLayoutMode.getDefault(getContext()))) {
 					enabledMapWidgets.add(widgetInfo);
 				} else {
 					widgetInfo.widget.detachView(getWidgetsPanel(), rowWidgets, appMode);
