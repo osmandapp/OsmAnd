@@ -22,6 +22,7 @@ import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
@@ -211,9 +212,9 @@ public class WidgetsVisibilityHelper {
 			@NonNull WidgetsPanel panel, @NonNull String... widgetsIds) {
 		OsmandApplication app = activity.getApp();
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
-
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(activity, appMode, ENABLED_MODE, Collections.singletonList(panel));
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(activity, appMode, ENABLED_MODE, Collections.singletonList(panel), layoutMode);
 
 		for (MapWidgetInfo widgetInfo : enabledWidgets) {
 			if (CollectionUtils.containsAny(widgetInfo.key, widgetsIds)) {

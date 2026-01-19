@@ -10,7 +10,15 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+	<string name="panels_layout_compact">Compact</string>
+	<string name="panels_layout_wide">Wide</string>
+	<string name="panels_layout">Panels layout</string>
+	<string name="panels_layout_descr">Choose a layout for the top and bottom panels. They can either be wide, spanning the full width of the screen, or compact, fitting between the side panels and buttons.</string>
+	<string name="single_layout">Single layout</string>
+	<string name="separate_layouts">Separate layouts</string>
+	<string name="use_separate_layouts">Use Separate layouts</string>
+	<string name="map_screen_layout">Map screen layout</string>
+	<string name="map_screen_layout_descr">Choose whether to use a single layout for all orientations, or customize Portrait and Landscape separately.</string>
     <string name="sort_highest_first">Highest first</string>
     <string name="sort_lowest_first">Lowest first</string>
     <string name="no_date">No date</string>

@@ -1,10 +1,14 @@
 package net.osmand.plus.views.mapwidgets;
 
+import static net.osmand.plus.settings.enums.ScreenLayoutMode.PORTRAIT;
+
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Pair;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -12,6 +16,8 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -20,10 +26,10 @@ import java.util.List;
 
 public enum WidgetsPanel {
 
-	LEFT(R.drawable.ic_action_screen_side_left, R.string.map_widget_left),
-	RIGHT(R.drawable.ic_action_screen_side_right, R.string.map_widget_right),
-	TOP(R.drawable.ic_action_screen_side_top, R.string.top_widgets_panel),
-	BOTTOM(R.drawable.ic_action_screen_side_bottom, R.string.bottom_widgets_panel);
+	LEFT(R.string.map_widget_left, R.drawable.ic_action_device_portrait_panel_left, R.drawable.ic_action_device_landscape_panel_left),
+	RIGHT(R.string.map_widget_right, R.drawable.ic_action_device_portrait_panel_right, R.drawable.ic_action_device_landscape_panel_right),
+	TOP(R.string.top_widgets_panel, R.drawable.ic_action_device_portrait_panel_top, R.drawable.ic_action_device_landscape_panel_top),
+	BOTTOM(R.string.bottom_widgets_panel, R.drawable.ic_action_device_portrait_panel_bottom, R.drawable.ic_action_device_landscape_panel_bottom);
 
 	public static final String PAGE_SEPARATOR = ";";
 	public static final String WIDGET_SEPARATOR = ",";
@@ -52,24 +58,29 @@ public enum WidgetsPanel {
 		}
 	}
 
-	@DrawableRes
-	private final int iconId;
 	@StringRes
-	private final int titleId;
+	private final int nameId;
+	@DrawableRes
+	private final int portraitIconId;
+	@DrawableRes
+	private final int landscapeIconId;
 
-	WidgetsPanel(@DrawableRes int iconId, @StringRes int titleId) {
-		this.iconId = iconId;
-		this.titleId = titleId;
+	WidgetsPanel(@StringRes int nameId, @DrawableRes int portraitIconId,
+			@DrawableRes int landscapeIconId) {
+		this.nameId = nameId;
+		this.portraitIconId = portraitIconId;
+		this.landscapeIconId = landscapeIconId;
 	}
 
 	@DrawableRes
-	public int getIconId(boolean rtl) {
-		return getRtlPanel(rtl).iconId;
+	public int getIconId(boolean rtl, @Nullable ScreenLayoutMode mode) {
+		WidgetsPanel panel = getRtlPanel(rtl);
+		return mode == null || mode == PORTRAIT ? panel.portraitIconId : panel.landscapeIconId;
 	}
 
 	@StringRes
 	public int getTitleId(boolean rtl) {
-		return getRtlPanel(rtl).titleId;
+		return getRtlPanel(rtl).nameId;
 	}
 
 	@NonNull
@@ -102,27 +113,31 @@ public enum WidgetsPanel {
 		return order != -1 ? order : DEFAULT_ORDER;
 	}
 
-	public int getWidgetPage(@NonNull String widgetId, @NonNull OsmandSettings settings) {
-		return getWidgetPage(settings.getApplicationMode(), widgetId, settings);
+	public int getWidgetPage(@NonNull String widgetId, @NonNull OsmandSettings settings,
+			@Nullable ScreenLayoutMode layoutMode) {
+		return getWidgetPage(settings.getApplicationMode(), widgetId, settings, layoutMode);
 	}
 
-	public int getWidgetPage(@NonNull ApplicationMode appMode, @NonNull String widgetId, @NonNull OsmandSettings settings) {
-		return getPagedOrder(appMode, widgetId, settings).first;
+	public int getWidgetPage(@NonNull ApplicationMode appMode, @NonNull String widgetId,
+			@NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
+		return getPagedOrder(appMode, widgetId, settings, layoutMode).first;
 	}
 
-	public int getWidgetOrder(@NonNull String widgetId, @NonNull OsmandSettings settings) {
-		return getWidgetOrder(settings.getApplicationMode(), widgetId, settings);
+	public int getWidgetOrder(@NonNull String widgetId, @NonNull OsmandSettings settings,
+			@Nullable ScreenLayoutMode layoutMode) {
+		return getWidgetOrder(settings.getApplicationMode(), widgetId, settings, layoutMode);
 	}
 
-	public int getWidgetOrder(@NonNull ApplicationMode appMode, @NonNull String widgetId, @NonNull OsmandSettings settings) {
-		return getPagedOrder(appMode, widgetId, settings).second;
+	public int getWidgetOrder(@NonNull ApplicationMode appMode, @NonNull String widgetId,
+			@NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
+		return getPagedOrder(appMode, widgetId, settings, layoutMode).second;
 	}
 
 	@NonNull
 	private Pair<Integer, Integer> getPagedOrder(@NonNull ApplicationMode appMode,
-	                                             @NonNull String widgetId,
-	                                             @NonNull OsmandSettings settings) {
-		ListStringPreference preference = getOrderPreference(settings);
+			@NonNull String widgetId, @NonNull OsmandSettings settings,
+			@Nullable ScreenLayoutMode layoutMode) {
+		ListStringPreference preference = getOrderPreference(settings, layoutMode);
 		List<String> pages = preference.getStringsListForProfile(appMode);
 		if (!Algorithms.isEmpty(pages)) {
 			if ((this == TOP || this == BOTTOM) &&
@@ -169,8 +184,9 @@ public enum WidgetsPanel {
 
 	public boolean setWidgetsOrder(@NonNull ApplicationMode appMode,
 								   @NonNull List<List<String>> pagedOrder,
-								   @NonNull OsmandSettings settings) {
-		ListStringPreference orderPreference = getOrderPreference(settings);
+								   @NonNull OsmandSettings settings,
+								   @Nullable ScreenLayoutMode layoutMode) {
+		ListStringPreference orderPreference = getOrderPreference(settings, layoutMode);
 		StringBuilder stringBuilder = new StringBuilder();
 		for (List<String> widgets : pagedOrder) {
 			String widgetsOrder = TextUtils.join(WIDGET_SEPARATOR, widgets);
@@ -182,30 +198,22 @@ public enum WidgetsPanel {
 		return orderPreference.setModeValue(appMode, stringBuilder.toString());
 	}
 
-	public boolean contains(@NonNull String widgetId, @NonNull OsmandSettings settings) {
-		return contains(widgetId, settings, settings.getApplicationMode());
+	public boolean contains(@NonNull String widgetId, @NonNull Context context) {
+		OsmandSettings settings = AndroidUtils.getApp(context).getSettings();
+		return contains(widgetId, settings, settings.getApplicationMode(), ScreenLayoutMode.getDefault(context));
 	}
 
-	public boolean contains(@NonNull String widgetId, @NonNull OsmandSettings settings, @NonNull ApplicationMode appMode) {
-		return getWidgetOrder(appMode, widgetId, settings) != DEFAULT_ORDER;
+	public boolean contains(@NonNull String widgetId, @NonNull OsmandSettings settings,
+			@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
+		return getWidgetOrder(appMode, widgetId, settings, layoutMode) != DEFAULT_ORDER;
 	}
 
 	@NonNull
-	public ListStringPreference getOrderPreference(@NonNull OsmandSettings settings) {
-		if (this == LEFT) {
-			return settings.LEFT_WIDGET_PANEL_ORDER;
-		} else if (this == RIGHT) {
-			return settings.RIGHT_WIDGET_PANEL_ORDER;
-		} else if (this == TOP) {
-			return settings.TOP_WIDGET_PANEL_ORDER;
-		} else if (this == BOTTOM) {
-			return settings.BOTTOM_WIDGET_PANEL_ORDER;
-		}
-		throw new IllegalStateException("Unsupported panel");
+	public ListStringPreference getOrderPreference(@NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
+		return settings.getPanelOrderPreference(this, layoutMode);
 	}
 
 	public boolean isPanelVertical() {
 		return this == TOP || this == BOTTOM;
 	}
-
 }

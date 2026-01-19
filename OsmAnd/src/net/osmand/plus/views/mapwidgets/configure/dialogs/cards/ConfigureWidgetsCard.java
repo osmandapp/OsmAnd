@@ -7,8 +7,10 @@ import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
+import static net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment.SCREEN_LAYOUT_MODE;
 
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -21,27 +23,37 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
+import net.osmand.util.CollectionUtils;
 
 import java.util.Collections;
 
 public class ConfigureWidgetsCard extends MapBaseCard {
 
 	private final MapWidgetRegistry widgetRegistry;
+	private final ScreenLayoutMode[] layoutMode;
+
+	private final int profileColor;
+	private final int defaultIconColor;
 
 	@Override
 	public int getCardLayoutId() {
 		return R.layout.configure_widgets_card;
 	}
 
-	public ConfigureWidgetsCard(@NonNull MapActivity mapActivity) {
+	public ConfigureWidgetsCard(@NonNull MapActivity mapActivity,
+			@NonNull ScreenLayoutMode[] layoutMode) {
 		super(mapActivity, false);
-		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
+		this.layoutMode = layoutMode;
+		this.widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
+		this.profileColor = appMode.getProfileColor(nightMode);
+		this.defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 	}
 
 	@Override
@@ -60,50 +72,46 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		setupWidgetGroupView(view.findViewById(R.id.bottom_panel), BOTTOM, appMode);
 
 		setupTransparentWidgetsButton(appMode);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottomShadowView), false);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), false);
 	}
 
-	private void setupWidgetGroupView(@NonNull View view, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
+	private void setupWidgetGroupView(@NonNull View view, @NonNull WidgetsPanel panel,
+			@NonNull ApplicationMode appMode) {
 		boolean rtl = AndroidUtils.isLayoutRtl(app);
-		int activeColor = appMode.getProfileColor(nightMode);
-		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		int count = getWidgetsCount(panel, appMode);
+
+		ImageView icon = view.findViewById(R.id.icon);
+		TextView title = view.findViewById(R.id.title);
+		TextView description = view.findViewById(R.id.items_count_descr);
+
+		title.setText(panel.getTitleId(rtl));
+		description.setText(String.valueOf(count));
+
+		int iconColor = count > 0 ? profileColor : defaultIconColor;
+		icon.setImageDrawable(getPaintedIcon(panel.getIconId(rtl, layoutMode[0]), iconColor));
+
+		view.findViewById(R.id.button_container).setOnClickListener(v -> {
+			Bundle args = new Bundle();
+			args.putSerializable(SCREEN_LAYOUT_MODE, layoutMode[0]);
+			ConfigureWidgetsFragment.showInstance(getMapActivity(), panel, appMode, args);
+		});
 
 		view.setTag(panel.name());
-		ImageView ivIcon = view.findViewById(R.id.icon);
-		TextView tvTitle = view.findViewById(R.id.title);
-
-		int count = getWidgetsCount(panel, appMode);
-		int iconColor = count > 0 ? activeColor : defColor;
-		ivIcon.setImageDrawable(getPaintedIcon(panel.getIconId(rtl), iconColor));
-
-		tvTitle.setText(panel.getTitleId(rtl));
-
-		updateWidgetsCount(view, count);
-
-		view.findViewById(R.id.button_container).setOnClickListener(v -> ConfigureWidgetsFragment.showInstance(getMapActivity(), panel, appMode, null));
-
 		setupListItemBackground(view, appMode);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.short_divider), panel == RIGHT);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.long_divider), panel == BOTTOM);
+		AndroidUiHelper.updateVisibility(description, true);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.short_divider), CollectionUtils.equalsToAny(panel, RIGHT, BOTTOM));
 	}
 
 	private int getWidgetsCount(@NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		int filter = ENABLED_MODE | AVAILABLE_MODE | MATCHING_PANELS_MODE;
-		return widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, Collections.singletonList(panel)).size();
-	}
-
-	private void updateWidgetsCount(@NonNull View container, int count) {
-		TextView countContainer = container.findViewById(R.id.items_count_descr);
-		countContainer.setText(String.valueOf(count));
-		AndroidUiHelper.updateVisibility(countContainer, true);
+		return widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, Collections.singletonList(panel), layoutMode[0]).size();
 	}
 
 	private void setupTransparentWidgetsButton(@NonNull ApplicationMode appMode) {
 		View button = view.findViewById(R.id.transparent_widgets_button);
 
 		boolean enabled = settings.TRANSPARENT_MAP_THEME.getModeValue(appMode);
-		ConfigureButtonsCard.setupButton(button, getString(R.string.map_widget_transparent), null, R.drawable.ic_action_appearance, enabled, nightMode);
+		ConfigureButtonsCard.setupButton(button, getString(R.string.map_widget_transparent),
+				null, R.drawable.ic_action_appearance, enabled, nightMode);
 
 		CompoundButton compoundButton = button.findViewById(R.id.compound_button);
 		compoundButton.setChecked(enabled);
@@ -125,12 +133,12 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 			settings.TRANSPARENT_MAP_THEME.setModeValue(appMode, !transparent);
 			mapActivity.updateApplicationModeSettings();
 		});
+		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), true);
 	}
 
 	private void setupListItemBackground(@NonNull View view, @NonNull ApplicationMode appMode) {
-		View button = view.findViewById(R.id.button_container);
 		int color = appMode.getProfileColor(nightMode);
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
-		AndroidUtils.setBackground(button, background);
+		AndroidUtils.setBackground(view.findViewById(R.id.button_container), background);
 	}
 }

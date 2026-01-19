@@ -1,6 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
-import static androidx.recyclerview.widget.DiffUtil.*;
+import static androidx.recyclerview.widget.DiffUtil.Callback;
+import static androidx.recyclerview.widget.DiffUtil.DiffResult;
+import static androidx.recyclerview.widget.DiffUtil.calculateDiff;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
 
@@ -29,12 +31,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -47,14 +49,7 @@ import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 public class SearchWidgetsFragment extends BaseFullScreenFragment implements SearchWidgetListener {
 
@@ -275,7 +270,7 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 		int filter = AVAILABLE_MODE | DEFAULT_MODE;
 
 		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanel(
-				requireMapActivity(), selectedAppMode, filter, Collections.singletonList(selectedPanel));
+				requireMapActivity(), selectedAppMode, filter, Collections.singletonList(selectedPanel), getScreenLayoutMode());
 		boolean hasAvailableWidgets = !Algorithms.isEmpty(availableWidgets);
 
 		if (hasAvailableWidgets) {
@@ -398,6 +393,15 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 		}
 
 		updateWidgetItems(searchResults);
+	}
+
+	@Nullable
+	private ScreenLayoutMode getScreenLayoutMode() {
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof ConfigureWidgetsFragment configureFragment) {
+			return configureFragment.getScreenLayoutMode();
+		}
+		return null;
 	}
 
 	@Override

@@ -92,7 +92,7 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		collection.removeType(Type.FAB);
 		collection.add(InsetTarget.createBottomContainer(R.id.bottom_buttons_container));
 		collection.add(InsetTarget.createScrollable(R.id.scroll_view, android.R.id.list));
-		collection.add(InsetTarget.createHorizontalLandscape(R.id.modes_toggle, R.id.toolbar, R.id.tab_layout, R.id.toolbar_edit));
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.toolbar, R.id.tab_layout, R.id.toolbar_edit));
 		collection.add(InsetTarget.createRootInset());
 		return collection;
 	}

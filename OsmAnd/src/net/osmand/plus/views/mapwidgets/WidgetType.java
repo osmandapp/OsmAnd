@@ -35,6 +35,7 @@ import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.views.mapwidgets.configure.settings.*;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.util.CollectionUtils;
@@ -305,18 +306,19 @@ public enum WidgetType {
 	}
 
 	@NonNull
-	public WidgetsPanel getPanel(@NonNull OsmandSettings settings) {
-		return getPanel(id, settings);
+	public WidgetsPanel getPanel(@NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
+		return getPanel(id, settings, layoutMode);
 	}
 
 	@NonNull
-	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull OsmandSettings settings) {
-		return getPanel(widgetId, settings.getApplicationMode(), settings);
+	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
+		return getPanel(widgetId, settings.getApplicationMode(), settings, layoutMode);
 	}
 
 	@NonNull
-	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull ApplicationMode mode, @NonNull OsmandSettings settings) {
-		WidgetsPanel widgetsPanel = findWidgetPanel(widgetId, settings, mode);
+	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull ApplicationMode mode,
+			@NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
+		WidgetsPanel widgetsPanel = findWidgetPanel(widgetId, settings, mode, layoutMode);
 		if (widgetsPanel != null) {
 			return widgetsPanel;
 		}
@@ -324,24 +326,25 @@ public enum WidgetType {
 	}
 
 	@Nullable
-	public static WidgetsPanel findWidgetPanel(@NonNull String widgetId, @NonNull OsmandSettings settings, @Nullable ApplicationMode mode) {
+	public static WidgetsPanel findWidgetPanel(@NonNull String widgetId, @NonNull OsmandSettings settings,
+			@Nullable ApplicationMode mode, @Nullable ScreenLayoutMode layoutMode) {
 		ApplicationMode appMode = mode == null ? settings.getApplicationMode() : mode;
 		ArrayList<WidgetsPanel> setPanels = new ArrayList<>();
 		ArrayList<WidgetsPanel> unsetPanels = new ArrayList<>();
 		for (WidgetsPanel widgetsPanel : WidgetsPanel.values()) {
-			if (widgetsPanel.getOrderPreference(settings).isSetForMode(appMode)) {
+			if (widgetsPanel.getOrderPreference(settings, layoutMode).isSetForMode(appMode)) {
 				setPanels.add(widgetsPanel);
 			} else {
 				unsetPanels.add(widgetsPanel);
 			}
 		}
 		for (WidgetsPanel panel : setPanels) {
-			if (panel.contains(widgetId, settings, appMode)) {
+			if (panel.contains(widgetId, settings, appMode, layoutMode)) {
 				return panel;
 			}
 		}
 		for (WidgetsPanel panel : unsetPanels) {
-			if (panel.contains(widgetId, settings, appMode)) {
+			if (panel.contains(widgetId, settings, appMode, layoutMode)) {
 				return panel;
 			}
 		}

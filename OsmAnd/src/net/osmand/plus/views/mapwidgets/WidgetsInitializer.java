@@ -1,46 +1,16 @@
 package net.osmand.plus.views.mapwidgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MAP_CENTER;
-import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MY_LOCATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES_CURRENT_LOCATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES_MAP_CENTER;
-import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.GLIDE_AVERAGE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.GLIDE_TARGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.ROUTE_INFO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SUNRISE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SUNSET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SUN_POSITION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.*;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -51,6 +21,7 @@ public class WidgetsInitializer {
 	private final MapActivity mapActivity;
 	private final OsmandSettings settings;
 	private final ApplicationMode appMode;
+	private final ScreenLayoutMode layoutMode;
 	private final OsmandApplication app;
 
 	private final MapWidgetsFactory factory;
@@ -58,19 +29,21 @@ public class WidgetsInitializer {
 
 	private final List<MapWidgetInfo> mapWidgetsCache = new ArrayList<>();
 
-	private WidgetsInitializer(MapActivity mapActivity, ApplicationMode appMode) {
+	private WidgetsInitializer(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
+			@Nullable ScreenLayoutMode layoutMode) {
 		this.mapActivity = mapActivity;
 		this.appMode = appMode;
+		this.layoutMode = layoutMode;
 		app = mapActivity.getApp();
 		settings = app.getSettings();
 		factory = new MapWidgetsFactory(mapActivity);
-		creator = new WidgetInfoCreator(app, appMode);
+		creator = new WidgetInfoCreator(app, appMode, layoutMode);
 	}
 
 	private List<MapWidgetInfo> createAllControls() {
 		createCommonWidgets();
-		PluginsHelper.createMapWidgets(mapActivity, mapWidgetsCache, appMode);
-		app.getAidlApi().createWidgetControls(mapActivity, mapWidgetsCache, appMode);
+		PluginsHelper.createMapWidgets(mapActivity, mapWidgetsCache, appMode, layoutMode);
+		app.getAidlApi().createWidgetControls(mapActivity, mapWidgetsCache, appMode, layoutMode);
 		createCustomWidgets();
 		return mapWidgetsCache;
 	}
@@ -135,7 +108,7 @@ public class WidgetsInitializer {
 	}
 
 	public void createCustomWidgets() {
-		List<String> widgetKeys = settings.CUSTOM_WIDGETS_KEYS.getStringsListForProfile(appMode);
+		List<String> widgetKeys = settings.getCustomWidgetsKeys(layoutMode).getStringsListForProfile(appMode);
 		if (!Algorithms.isEmpty(widgetKeys)) {
 			for (String key : widgetKeys) {
 				WidgetType widgetType = WidgetType.getById(key);
@@ -150,8 +123,9 @@ public class WidgetsInitializer {
 	}
 
 	public static List<MapWidgetInfo> createAllControls(@NonNull MapActivity mapActivity,
-	                                                    @NonNull ApplicationMode appMode) {
-		WidgetsInitializer initializer = new WidgetsInitializer(mapActivity, appMode);
+	                                                    @NonNull ApplicationMode appMode,
+	                                                    @Nullable ScreenLayoutMode layoutMode) {
+		WidgetsInitializer initializer = new WidgetsInitializer(mapActivity, appMode, layoutMode);
 		return initializer.createAllControls();
 	}
 }

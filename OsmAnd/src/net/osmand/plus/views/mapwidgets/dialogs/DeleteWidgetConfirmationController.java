@@ -10,6 +10,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 
@@ -20,16 +21,19 @@ public class DeleteWidgetConfirmationController extends BaseDialogController {
 	private final ApplicationMode appMode;
 	private final MapWidgetInfo widgetInfo;
 	private final MapWidgetRegistry widgetRegistry;
+	private final ScreenLayoutMode layoutMode;
 
 	private OnCompleteCallback onWidgetDeletedCallback;
 
 	public DeleteWidgetConfirmationController(@NonNull OsmandApplication app,
-											  @NonNull ApplicationMode appMode,
-	                                          @NonNull MapWidgetInfo widgetInfo) {
+			@NonNull ApplicationMode appMode,
+			@NonNull MapWidgetInfo widgetInfo,
+			@Nullable ScreenLayoutMode layoutMode) {
 		super(app);
 		this.appMode = appMode;
 		this.widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		this.widgetInfo = widgetInfo;
+		this.layoutMode = layoutMode;
 	}
 
 	@NonNull
@@ -43,7 +47,7 @@ public class DeleteWidgetConfirmationController extends BaseDialogController {
 	}
 
 	public void onDeleteActionConfirmed(@NonNull MapActivity activity) {
-		widgetRegistry.removeWidget(activity, appMode, widgetInfo);
+		widgetRegistry.removeWidget(activity, appMode, widgetInfo, layoutMode);
 
 		if (onWidgetDeletedCallback != null) {
 			onWidgetDeletedCallback.onComplete();
@@ -63,13 +67,15 @@ public class DeleteWidgetConfirmationController extends BaseDialogController {
 		return (DeleteWidgetConfirmationController) app.getDialogManager().findController(PROCESS_ID);
 	}
 
-	public static void showDialog(@NonNull FragmentActivity activity, @NonNull ApplicationMode appMode,
-	                              @NonNull MapWidgetInfo widgetInfo, boolean usedOnMap,
-	                              @Nullable OnCompleteCallback onWidgetDeletedCallback) {
+	public static void showDialog(@NonNull FragmentActivity activity,
+                              @NonNull ApplicationMode appMode,
+                              @NonNull MapWidgetInfo widgetInfo, boolean usedOnMap,
+                              @Nullable OnCompleteCallback onWidgetDeletedCallback,
+                              @Nullable ScreenLayoutMode layoutMode) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		DialogManager dialogManager = app.getDialogManager();
 
-		DeleteWidgetConfirmationController controller = new DeleteWidgetConfirmationController(app, appMode, widgetInfo);
+		DeleteWidgetConfirmationController controller = new DeleteWidgetConfirmationController(app, appMode, widgetInfo, layoutMode);
 		controller.setListener(onWidgetDeletedCallback);
 
 		dialogManager.register(PROCESS_ID, controller);

@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
@@ -41,7 +40,8 @@ public class ConfigureWidgetsController implements IDialogController {
 	}
 
 	public void openAddNewWidgetScreen(@NonNull MapActivity mapActivity, @NonNull WidgetsPanel selectedPanel,
-	                                   @NonNull String widgetId, @NonNull ApplicationMode selectedAppMode, @Nullable Fragment target) {
+	                                   @NonNull String widgetId, @NonNull ApplicationMode selectedAppMode,
+	                                   @Nullable ConfigureWidgetsFragment target) {
 		WidgetType widgetType = WidgetType.getById(widgetId);
 		OsmandApplication app = mapActivity.getApp();
 		if (widgetType == null) {
@@ -52,7 +52,7 @@ public class ConfigureWidgetsController implements IDialogController {
 		MapWidgetsFactory widgetsFactory = new MapWidgetsFactory(mapActivity);
 		MapWidget widget = widgetsFactory.createMapWidget(id, widgetType, selectedPanel);
 		if (widget != null) {
-			WidgetInfoCreator creator = new WidgetInfoCreator(app, selectedAppMode);
+			WidgetInfoCreator creator = new WidgetInfoCreator(app, selectedAppMode, target.getScreenLayoutMode());
 			widgetInfo = creator.askCreateWidgetInfo(id, widget, widgetType, selectedPanel);
 		}
 
@@ -64,7 +64,8 @@ public class ConfigureWidgetsController implements IDialogController {
 				args.putString(KEY_WIDGET_ID, widgetInfo.key);
 				args.putString(KEY_APP_MODE, selectedAppMode.getStringKey());
 
-				WidgetInfoBaseFragment.showAddWidgetFragment(mapActivity.getSupportFragmentManager(), settingsBaseFragment, target, selectedAppMode, id, selectedPanel);
+				WidgetInfoBaseFragment.showAddWidgetFragment(mapActivity.getSupportFragmentManager(),
+						settingsBaseFragment, target, selectedAppMode, id, selectedPanel, target.getScreenLayoutMode());
 			}
 		}
 	}
