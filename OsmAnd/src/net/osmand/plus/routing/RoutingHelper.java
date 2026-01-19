@@ -864,7 +864,7 @@ public class RoutingHelper {
 	}
 
 	public List<RouteDirectionInfo> getRouteDirections() {
-		return new ArrayList<>(route.getRouteDirections());
+		return new ArrayList<>(route.getRouteDirections(app));
 	}
 
 	public void onSettingsChanged() {
