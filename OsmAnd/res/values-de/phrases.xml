@@ -2740,7 +2740,7 @@
     <string name="poi_shop_craft">Geschäft für Kunsthandwerksbedarf</string>
     <string name="poi_fuel_avia_type">Kraftstoffart (Flugzeuge)</string>
     <string name="poi_payment_fuel_type">Tankkarten</string>
-    <string name="poi_internet_access_type">Internet-Zugangsart</string>
+    <string name="poi_internet_access_type">Art des Internetzugangs</string>
     <string name="poi_clothes_type">Art</string>
     <string name="poi_shoes_type">Art</string>
     <string name="poi_fire_hydrant_type">Art</string>
