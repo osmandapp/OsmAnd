@@ -247,6 +247,7 @@ public class OsmandApplication extends MultiDexApplication {
 							.getPreferencesDatabase()
 							.searchablePreferenceScreenTreeRepository()
 							.addTreeTransformer(
+									// FK-TODO: use new PluginSettingsOfConfigureProfileFragmentAdapter(getTileSourceTemplatesProvider())
 									new SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter(
 											ConfigureProfileFragment.class,
 											getTileSourceTemplatesProvider()));
