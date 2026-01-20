@@ -69,6 +69,7 @@ import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsIdsMapper;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
@@ -158,8 +159,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_1_01 = 5101;
 	public static final int VERSION_5_2_04 = 5204;
 	public static final int VERSION_5_3_00 = 5300;
+	public static final int VERSION_5_3_01 = 5301;
 
-	public static final int LAST_APP_VERSION = VERSION_5_3_00;
+	public static final int LAST_APP_VERSION = VERSION_5_3_01;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -316,6 +318,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_5_3_00) {
 					migrateWidgetPanels();
+				}
+				if (prevAppVersion < VERSION_5_3_01) {
+					migrateWidgetPanelsPages();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -1049,6 +1054,24 @@ public class AppVersionUpgradeOnInit {
 				Boolean value = originalTransparentPreference.getModeValue(appMode);
 				for (ScreenLayoutMode layoutMode : ScreenLayoutMode.values()) {
 					settings.getTransparentMapThemePreference(layoutMode).setModeValue(appMode, value);
+				}
+			}
+		}
+	}
+
+	private void migrateWidgetPanelsPages() {
+		OsmandSettings settings = app.getSettings();
+		for (WidgetsPanel panel : WidgetsPanel.values()) {
+			ListStringPreference originalPreference = panel.getOrderPreference(settings, null);
+			for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+				if (originalPreference.isSetForMode(appMode)) {
+					String value = originalPreference.getModeValue(appMode);
+					for (ScreenLayoutMode layoutMode : ScreenLayoutMode.values()) {
+						ListStringPreference preference = panel.getOrderPreference(settings, layoutMode);
+						if (!preference.isSetForMode(appMode)) {
+							preference.setModeValue(appMode, value);
+						}
+					}
 				}
 			}
 		}
