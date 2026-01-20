@@ -13,6 +13,10 @@
         <item name="android:textColorHint">@color/text_color_secondary_dark</item>
     </style>
 
+    <style name="OsmandDarkTheme.TabLayoutNoCaps" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
 
     <style name="OsmandDarkTheme.BottomSheet">
         <item name="android:statusBarColor">@color/color_transparent</item>
@@ -133,6 +137,7 @@
 
         <item name="appbar_layout_theme">@style/OsmandDarkTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandDarkTheme.SearchTabbar</item>
+        <item name="tab_layout_no_caps_theme">@style/OsmandDarkTheme.TabLayoutNoCaps</item>
         <item name="toolbar_theme">@style/OsmandDarkTheme</item>
         <item name="new_app_theme">@style/OsmandDarkTheme</item>
 

@@ -23,6 +23,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -57,7 +58,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(mapActivity);
 		markers = app.getMapMarkersHelper().getMapMarkers();
 		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-		showDirectionEnabled = WidgetsVisibilityHelper.isWidgetEnabled(mapActivity, TOP, MARKERS_TOP_BAR.id);
+		showDirectionEnabled = WidgetsVisibilityHelper.isWidgetEnabled(mapActivity, TOP,
+				ScreenLayoutMode.getDefault(mapActivity), MARKERS_TOP_BAR.id);
 	}
 
 	public void setShowDirectionEnabled(boolean showDirectionEnabled) {

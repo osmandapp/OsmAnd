@@ -110,6 +110,7 @@ import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
@@ -384,8 +385,9 @@ public class OsmandAidlApi {
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 							String widgetKey = WIDGET_ID_PREFIX + widgetId;
 							ApplicationMode appMode = app.getSettings().getApplicationMode();
+							ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
 
-							WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
+							WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
 							MapWidgetInfo widgetInfo = creator.createExternalWidget(widgetKey, widget, menuIconId,
 									widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder());
 							MapWidgetRegistry registry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
@@ -472,9 +474,10 @@ public class OsmandAidlApi {
 
 	public void createWidgetControls(@NonNull MapActivity mapActivity,
 	                                 @NonNull List<MapWidgetInfo> widgetsInfos,
-	                                 @NonNull ApplicationMode appMode) {
+	                                 @NonNull ApplicationMode appMode,
+	                                 @Nullable ScreenLayoutMode layoutMode) {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
-			connectedApp.createWidgetControls(mapActivity, widgetsInfos, appMode);
+			connectedApp.createWidgetControls(mapActivity, widgetsInfos, appMode, layoutMode);
 		}
 	}
 
