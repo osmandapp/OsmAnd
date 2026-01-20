@@ -5528,7 +5528,7 @@
     <string name="popular_places_nearby">Lieux populaires à proximité</string>
     <string name="recently_visited">Récemment visité</string>
     <string name="shared_string_avg_altitude">Altitude moyenne</string>
-    <string name="shared_string_avg_speed">Vitesse minimale</string>
+    <string name="shared_string_avg_speed">Vitesse min.</string>
     <string name="shared_string_length">Longueur</string>
     <string name="map_widget_route_information">Informations sur l\'itinéraire</string>
     <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, le temps de trajet restant et la distance pour l\'itinéraire de navigation actif.</string>
@@ -5558,7 +5558,7 @@
     <string name="ais_object_lost_timeout_description">Définir un délai d\'expiration pour la visibilité des objets AIS : si aucun signal n\'est reçu dans le délai spécifié, l\'objet sera automatiquement retiré de l\'affichage.</string>
     <string name="ais_cpa_warning_time">Délai d\'avertissement avant le point de rapprochement le plus proche (CPA)</string>
     <string name="ais_cpa_warning_distance_description">Les navires sont surlignés en rouge si le CPA (Point d\'approche le plus proche) est inférieur au seuil défini et si le TCPA (Temps jusqu\'au CPA) se situe dans le délai d\'avertissement défini dans le paramètre « Délai d\'avertissement pour atteindre le CPA ».</string>
-    <string name="plugin_ais_tracker_disclaimer">AVERTISSEMENT\n\nCe plugin est un projet amateur et n\'est pas destiné à un usage critique. Il ne garantit ni sa fiabilité ni sa précision. Ne vous fiez pas à ce logiciel pour la navigation, la sécurité des personnes ou toute autre opération essentielle.</string>
+    <string name="plugin_ais_tracker_disclaimer">AVERTISSEMENT\n\nCette extension est un projet amateur et n\'est pas destinée à un usage critique. Elle ne garantit ni sa fiabilité ni sa précision. Ne vous fiez pas à ce logiciel pour la navigation, la sécurité des personnes ou toute autre opération essentielle.</string>
     <string name="ais_ship_lost_timeout_description">Définir un délai d\'expiration pour la visibilité obsolète du navire : après ce délai sans réception de signal, le symbole du navire sera barré.</string>
     <string name="ais_cpa_settings">Paramètres liés au CPA</string>
     <string name="ais_cpa_settings_description">Ces valeurs déterminent la manière dont les objets AIS sont affichés lorsqu\'ils s\'approchent de la position du navire.</string>
@@ -5646,7 +5646,7 @@
     <string name="set_home">Définir l’emplacement du domicile</string>
     <string name="set_intermediate_point">Définir une étape</string>
     <string name="set_start_point">Définir le départ</string>
-    <string name="ski_route_switch_style_description">Explorez les itinéraires de ski, les pentes et les remontées mécaniques grâce au style de carte Hiver et Ski.</string>
+    <string name="ski_route_switch_style_description">Explorez les itinéraires de ski, les pentes et les remontées mécaniques grâce au style de carte Hiver et ski.</string>
     <string name="shared_string_switch">Basculer</string>
     <string name="release_5_1">• Ajout de la prise en charge des achats sur le Web et multiplateformes.\n\n • Déplacement des unités de température vers les paramètres généraux pour un accès plus facile.\n\n • Ajout d\'un indicateur de niveau de batterie pour les capteurs BLE.\n\n • Nouvelle interface utilisateur plus intuitive pour la sélection de points dans la navigation.\n\n • Amélioration de la visibilité des widgets grâce à un nouveau contour.\n\n • Ajout d\'un analyseur de montées/descentes.\n\n • Intégration étendue de Wikipédia et Wikivoyage pour plus de points d\'intérêt.</string>
     <string name="osm_live_payment_renews_3_years">Renouvelable tous les trois ans</string>
@@ -5829,7 +5829,7 @@
     <string name="equatorial_grid">Grille équatoriale</string>
     <string name="ecliptic_line">Ligne écliptique</string>
     <string name="magnitude_filter">Filtre de magnitude</string>
-    <string name="visible_layers_and_objects">Couches &amp; Objets Visibles</string>
+    <string name="visible_layers_and_objects">Couches &amp; objets visibles</string>
     <string name="astro_name_sun">Soleil</string>
     <string name="astro_name_moon">Lune</string>
     <string name="astro_name_mercury">Mercure</string>
@@ -5855,8 +5855,8 @@
     <string name="shared_string_azimuth">Azimut</string>
     <string name="shared_string_magnitude">Magnitude</string>
     <string name="gpx_too_many_points_visible_warning">L\'affichage sur la carte d\'un grand nombre de traces GPX provoque une utilisation élevée de la mémoire</string>
-    <string name="sort_highest_first">Le Plus grand en premier</string>
-    <string name="sort_lowest_first">Le Plus petit en premier</string>
+    <string name="sort_highest_first">Le plus grand en premier</string>
+    <string name="sort_lowest_first">Le plus petit en premier</string>
     <string name="no_date">Aucune date</string>
     <string name="shared_string_step">Pas</string>
     <string name="set_step_size_summary">Indiquez la longueur du pas pour regrouper vos traces.</string>
@@ -5864,13 +5864,13 @@
     <string name="organize_by_summary">Organisez automatiquement vos traces par groupe en fonction d\'un paramètre sélectionné comme l\'activité, la vitesse ou la localisation.</string>
     <string name="organize_by">Organiser par</string>
     <string name="group_general">Général</string>
-    <string name="group_date_time">Date &amp; Heure</string>
+    <string name="group_date_time">Date &amp; heure</string>
     <string name="group_altitude_elevation">Altitude et élévation</string>
     <string name="group_sensors">Capteurs</string>
     <string name="year_of_creation">Année de création</string>
     <string name="month_year_creation">Mois et année de création</string>
     <string name="nearest_city">Ville la plus proche</string>
     <string name="avg_speed">Vitesse moyenne</string>
-    <string name="organize_by_max_speed">Vitesse maximale</string>
+    <string name="organize_by_max_speed">Vitesse max.</string>
     <string name="organize_by_max_altitude">Altitude max.</string>
 </resources>
