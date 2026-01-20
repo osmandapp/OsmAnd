@@ -1,6 +1,8 @@
 package net.osmand.plus.plugins.astro
 
+import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +12,6 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.graphics.toColorInt
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
@@ -20,6 +21,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import net.osmand.Location
 import net.osmand.map.IMapLocationListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
@@ -64,7 +66,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var cameraButton: ImageButton
 	private lateinit var transparencySlider: SeekBar
 	private lateinit var sliderContainer: View
-	private lateinit var resetFovButton: View
+	private lateinit var resetFovButton: ImageButton
 	private lateinit var mode2dButton: ImageButton
 
 	private lateinit var magnitudeSlider: SeekBar
@@ -176,6 +178,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		magnitudeSliderContainer = view.findViewById(R.id.magnitude_slider_container)
 		resetMagnitudeButton = view.findViewById(R.id.reset_magnitude_button)
 
+		updateImageButtonTheme(arModeButton)
+		updateImageButtonTheme(cameraButton)
+		updateImageButtonTheme(resetFovButton)
+		updateImageButtonTheme(mode2dButton)
+		updateImageButtonTheme(resetMagnitudeButton)
+		updateImageButtonTheme(resetTimeButton)
+
 		arModeHelper = StarMapARModeHelper(requireContext(), starView) { enabled ->
 			updateArModeUI(enabled)
 			if (!enabled) manualAzimuth = true
@@ -223,8 +232,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		updateArModeUI(arModeHelper.isArModeEnabled)
 		updateCameraUI(cameraHelper.isCameraOverlayEnabled)
 
-		val timeControlCard: View = view.findViewById(R.id.time_control_card)
+		val timeControlCard: MaterialCardView = view.findViewById(R.id.time_control_card)
 		applyWindowInsets(timeControlCard)
+		updateTimeControlTheme(timeControlCard, timeControlBtn, resetTimeButton)
 
 		starChartsView = view.findViewById(R.id.star_charts_view)
 		ViewCompat.setOnApplyWindowInsetsListener(starChartsView) { v, windowInsets ->
@@ -243,10 +253,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			setOnClickListener { starChartState.changeToNextState(); updateStarChart() }
 		}
 		view.findViewById<ImageButton>(R.id.star_map_button).apply {
+			updateImageButtonTheme(this)
 			setOnClickListener { updateStarMapVisibility(!starView.isVisible); saveCommonSettings() }
 			applyWindowInsets(this)
 		}
 		view.findViewById<ImageButton>(R.id.star_chart_button).apply {
+			updateImageButtonTheme(this)
 			setOnClickListener {
 				if (starChartsView.isVisible) updateStarChartVisibility(false)
 				else { updateStarChartVisibility(true); updateStarChart() }
@@ -254,12 +266,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			}
 		}
 		view.findViewById<ImageButton>(R.id.close_button).apply {
+			updateImageButtonTheme(this)
 			setOnClickListener {
 				backPressedCallback.isEnabled = false
 				requireActivity().onBackPressedDispatcher.onBackPressed()
 			}
 		}
 		view.findViewById<ImageButton>(R.id.search_button).apply {
+			updateImageButtonTheme(this)
 			setOnClickListener {
 				val tag = StarMapSearchDialogFragment.TAG
 				var dialog = childFragmentManager.findFragmentByTag(tag) as? StarMapSearchDialogFragment
@@ -284,6 +298,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 
 		view.findViewById<ImageButton>(R.id.settings_button).apply {
+			updateImageButtonTheme(this)
 			setOnClickListener {
 				AstroUtils.showStarMapOptionsDialog(context, starView, swSettings) {
 					showMagnitudeFilter = it.showMagnitudeFilter
@@ -387,7 +402,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private fun updateArModeUI(enabled: Boolean) {
 		if (enabled) arModeButton.setColorFilter(Color.BLUE)
-		else arModeButton.setColorFilter("#5f6e7c".toColorInt())
+		else arModeButton.setColorFilter(ColorUtilities.getMapButtonIconColor(requireContext(), nightMode))
 	}
 
 	private fun updateCameraUI(enabled: Boolean) {
@@ -396,7 +411,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			sliderContainer.visibility = View.VISIBLE
 			resetFovButton.visibility = View.VISIBLE
 		} else {
-			cameraButton.setColorFilter("#5f6e7c".toColorInt())
+			cameraButton.setColorFilter(ColorUtilities.getMapButtonIconColor(requireContext(), nightMode))
 			sliderContainer.visibility = View.GONE
 			resetFovButton.visibility = View.GONE
 		}
@@ -751,5 +766,56 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			))
 		}
 		return objects
+	}
+
+	private fun updateImageButtonTheme(button: ImageButton?) {
+		button?.let {
+			val context = it.context
+			val backgroundColor = ColorUtilities.getMapButtonBackgroundColor(context, nightMode)
+			val backgroundPressedColor = ColorUtilities.getMapButtonBackgroundPressedColor(context, nightMode)
+			val strokeWidth = AndroidUtils.dpToPx(context, 1f)
+			val cornerRadius = if (it.layoutParams != null && it.layoutParams.width > 0) {
+				it.layoutParams.width / 2f
+			} else {
+				AndroidUtils.dpToPxF(context, 26f)
+			}
+
+			val normal = GradientDrawable().apply {
+				shape = GradientDrawable.RECTANGLE
+				setColor(backgroundColor)
+				setCornerRadius(cornerRadius)
+				if (nightMode) {
+					setStroke(strokeWidth, ColorUtilities.getColor(context, R.color.map_widget_dark_stroke))
+				}
+			}
+
+			val pressed = GradientDrawable().apply {
+				shape = GradientDrawable.RECTANGLE
+				setColor(backgroundPressedColor)
+				setCornerRadius(cornerRadius)
+				setStroke(strokeWidth, ColorUtilities.getColor(context, if (nightMode) R.color.map_widget_dark_stroke else R.color.map_widget_light_pressed))
+			}
+
+			it.background = AndroidUtils.createPressedStateListDrawable(normal, pressed)
+			it.setColorFilter(ColorUtilities.getMapButtonIconColor(context, nightMode))
+		}
+	}
+
+	private fun updateTimeControlTheme(card: MaterialCardView, button: MaterialButton, resetBtn: ImageButton) {
+		val context = card.context
+		val bgColor = ColorUtilities.getMapButtonBackgroundColor(context, nightMode)
+		val strokeColor = ColorUtilities.getColor(context, if (nightMode) R.color.map_widget_dark_stroke else R.color.map_widget_light_trans)
+		val strokeWidth = AndroidUtils.dpToPx(context, 1f)
+
+		card.setCardBackgroundColor(bgColor)
+		card.strokeColor = strokeColor
+		card.strokeWidth = strokeWidth
+
+		val iconColor = ColorUtilities.getMapButtonIconColor(context, nightMode)
+		//button.setTextColor(iconColor)
+		//button.iconTint = ColorStateList.valueOf(iconColor)
+		button.rippleColor = ColorStateList.valueOf(ColorUtilities.getColorWithAlpha(iconColor, 0.15f))
+
+		updateImageButtonTheme(resetBtn)
 	}
 }
