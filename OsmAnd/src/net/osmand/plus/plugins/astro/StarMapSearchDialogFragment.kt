@@ -26,6 +26,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private var allObjects: List<SkyObject> = emptyList()
 	private val filteredObjects = mutableListOf<SkyObject>()
 	private lateinit var adapter: SearchAdapter
+	private lateinit var recyclerView: RecyclerView
 	
 	private var currentQuery: String = ""
 	private var isAscending: Boolean = true
@@ -66,7 +67,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		super.onViewCreated(view, savedInstanceState)
 
 		val searchView = view.findViewById<SearchView>(R.id.search_view)
-		val recyclerView = view.findViewById<RecyclerView>(R.id.search_results)
+		recyclerView = view.findViewById(R.id.search_results)
 		val closeButton = view.findViewById<View>(R.id.close_button)
 		val sortBar = view.findViewById<View>(R.id.sort_bar)
 		sortIcon = view.findViewById(R.id.sort_icon)
@@ -165,7 +166,12 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			list.sortedByDescending { it.localizedName ?: it.name }
 		}
 		filteredObjects.addAll(sortedList)
-		adapter.notifyDataSetChanged()
+		if (::adapter.isInitialized) {
+			adapter.notifyDataSetChanged()
+		}
+		if (::recyclerView.isInitialized) {
+			recyclerView.scrollToPosition(0)
+		}
 	}
 
 	inner class SearchAdapter : RecyclerView.Adapter<SearchViewHolder>() {
