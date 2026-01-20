@@ -44,6 +44,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiContext;
 import androidx.core.text.util.LocalePreferences;
 
 import net.osmand.IndexConstants;
@@ -75,6 +76,7 @@ import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.configmap.routes.MtbClassification;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.feedback.RateUsState;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.OsmandBackupAgent;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
@@ -2146,6 +2148,20 @@ public class OsmandSettings {
 	}
 
 	public final OsmandPreference<Boolean> USE_SEPARATE_LAYOUTS = new BooleanPreference(this, "use_separate_layouts", false).makeProfile();
+	private final CommonPreference<PanelsLayoutMode> PANELS_LAYOUT_MODE = new EnumStringPreference<>(this, "panels_layout_mode", PanelsLayoutMode.getDefault(), PanelsLayoutMode.values()).makeProfile();
+
+	public CommonPreference<PanelsLayoutMode> getPanelsLayoutMode(@NonNull @UiContext Context context, @Nullable ScreenLayoutMode layoutMode) {
+		boolean tablet = AndroidUiHelper.isTablet(context);
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(context);
+
+		CommonPreference<PanelsLayoutMode> preference = getLayoutPreference(PANELS_LAYOUT_MODE, layoutMode);
+		if (!portrait || tablet) {
+			preference.setDefaultValue(PanelsLayoutMode.COMPACT);
+		} else {
+			preference.setDefaultValue(PanelsLayoutMode.WIDE);
+		}
+		return preference;
+	}
 
 	public final OsmandPreference<Integer> DISPLAYED_MARKERS_WIDGETS_COUNT = new IntPreference(this, "displayed_markers_widgets_count", 1).makeProfile();
 

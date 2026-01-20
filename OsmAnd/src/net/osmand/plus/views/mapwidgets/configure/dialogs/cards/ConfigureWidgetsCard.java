@@ -23,12 +23,14 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.PanelsLayoutMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.PanelsLayoutFragment;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.util.CollectionUtils;
 
@@ -71,6 +73,7 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		setupWidgetGroupView(view.findViewById(R.id.bottom_panel), BOTTOM, appMode);
 
 		setupTransparentWidgetsButton(appMode);
+		setupPanelsLayout(view.findViewById(R.id.panels_layout), appMode);
 	}
 
 	private void setupWidgetGroupView(@NonNull View view, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
@@ -97,6 +100,25 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		setupListItemBackground(view, appMode);
 		AndroidUiHelper.updateVisibility(description, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.short_divider), CollectionUtils.equalsToAny(panel, RIGHT, BOTTOM));
+	}
+
+	private void setupPanelsLayout(@NonNull View view, @NonNull ApplicationMode appMode) {
+		PanelsLayoutMode panelsMode = settings.getPanelsLayoutMode(mapActivity, layoutMode[0]).get();
+
+		ImageView icon = view.findViewById(R.id.icon);
+		TextView title = view.findViewById(R.id.title);
+		TextView description = view.findViewById(R.id.items_count_descr);
+
+		title.setText(R.string.panels_layout);
+		description.setText(panelsMode.toHumanString(app));
+		icon.setImageDrawable(getPaintedIcon(panelsMode.getIcon(layoutMode[0]), profileColor));
+
+		view.findViewById(R.id.button_container).setOnClickListener(v -> PanelsLayoutFragment.showInstance(activity, layoutMode[0]));
+
+		setupListItemBackground(view, appMode);
+		AndroidUiHelper.updateVisibility(description, true);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.short_divider), false);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.long_divider), false);
 	}
 
 	private int getWidgetsCount(@NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
