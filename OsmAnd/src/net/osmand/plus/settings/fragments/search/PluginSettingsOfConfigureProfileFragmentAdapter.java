@@ -141,8 +141,8 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 				.getSearchablePreferenceScreenTree(root);
 	}
 
-	private static AddEdgeToTreePredicate addPluginEdgesOfConfigureProfileFragmentToTree() {
-		return new AddEdgeToTreePredicate() {
+	private static AddEdgeToTreePredicate<PreferenceScreenWithHost, Preference> addPluginEdgesOfConfigureProfileFragmentToTree() {
+		return new AddEdgeToTreePredicate<>() {
 
 			@Override
 			public boolean shallAddEdgeToTree(final Edge<PreferenceScreenWithHost, Preference> edge) {
