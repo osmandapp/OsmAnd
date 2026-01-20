@@ -1030,6 +1030,7 @@ public class AppVersionUpgradeOnInit {
 		OsmandSettings settings = app.getSettings();
 		CommonPreference<String> originalMapControls = settings.getMapInfoControls(null);
 		ListStringPreference originalCustomWidgetsKeys = settings.getCustomWidgetsKeys(null);
+		CommonPreference<Boolean> originalTransparentPreference = settings.getTransparentMapThemePreference(null);
 
 		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
 			if (originalMapControls.isSetForMode(appMode)) {
@@ -1042,6 +1043,12 @@ public class AppVersionUpgradeOnInit {
 				String value = originalCustomWidgetsKeys.getModeValue(appMode);
 				for (ScreenLayoutMode layoutMode : ScreenLayoutMode.values()) {
 					settings.getCustomWidgetsKeys(layoutMode).setModeValue(appMode, value);
+				}
+			}
+			if (originalTransparentPreference.isSetForMode(appMode)) {
+				Boolean value = originalTransparentPreference.getModeValue(appMode);
+				for (ScreenLayoutMode layoutMode : ScreenLayoutMode.values()) {
+					settings.getTransparentMapThemePreference(layoutMode).setModeValue(appMode, value);
 				}
 			}
 		}
