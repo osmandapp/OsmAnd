@@ -43,11 +43,13 @@ import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.shared.util.LoggerFactory
+import net.osmand.util.MapUtils
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Locale
 import java.util.TimeZone
+import kotlin.math.abs
 
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
 	OsmAndCompassListener {
@@ -78,6 +80,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var systemBottomInset: Int = 0
 	private var manualAzimuth: Boolean = true
 	private var lastResetRotationToNorth = 0L
+	private var lastUpdatedLocation: Location? = null
+	private var lastUpdatedAzimuth: Double = -1.0
 
 	internal lateinit var starMapViewModel: StarObjectsViewModel
 	private lateinit var starChartViewModel: StarObjectsViewModel
@@ -406,28 +410,44 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private fun setAzimuth(azimuth: Double, animate: Boolean = false) {
 		starView.setAzimuth(azimuth, animate)
 		compassButton?.update(-azimuth.toFloat(), animate)
+		lastUpdatedAzimuth = azimuth
 	}
 
 	override fun updateLocation(location: Location?) {
 		if (location == null) return
 		arModeHelper.updateGeomagneticField(location)
-		if (app.mapViewTrackingUtilities.isMapLinkedToLocation) {
-			app.runInUIThread {
-				if (!manualAzimuth && !arModeHelper.isArModeEnabled) {
-					if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
-						if (location.hasBearing() && location.bearing != 0f) {
-							setAzimuth(location.bearing.toDouble(), true)
-						}
-					}
-				}
-				updateStarMap(); updateStarChart()
+
+		val isMapLinked = app.mapViewTrackingUtilities.isMapLinkedToLocation
+		val rotateMode = settings.ROTATE_MAP.get()
+		val isRotateBearing = rotateMode == OsmandSettings.ROTATE_MAP_BEARING
+
+		var needsAzimuthUpdate = false
+		if (!manualAzimuth && !arModeHelper.isArModeEnabled && isRotateBearing && location.hasBearing() && location.bearing != 0f) {
+			val bearing = location.bearing.toDouble()
+			if (lastUpdatedAzimuth == -1.0 || abs(MapUtils.degreesDiff(bearing, lastUpdatedAzimuth)) >= 1.0) {
+				needsAzimuthUpdate = true
 			}
-		} else if (!manualAzimuth && !arModeHelper.isArModeEnabled) {
+		}
+
+		val locationThreshold = 500.0 // meters
+		var needsLocationUpdate = false
+		if (isMapLinked) {
+			val lastLoc = lastUpdatedLocation
+			if (lastLoc == null || location.distanceTo(lastLoc) >= locationThreshold) {
+				needsLocationUpdate = true
+			}
+		}
+
+		if (needsAzimuthUpdate || needsLocationUpdate) {
 			app.runInUIThread {
-				if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
-					if (location.hasBearing() && location.bearing != 0f) {
-						setAzimuth(location.bearing.toDouble(), true)
-					}
+				if (needsAzimuthUpdate) {
+					val bearing = location.bearing.toDouble()
+					setAzimuth(bearing, true)
+				}
+				if (needsLocationUpdate) {
+					updateStarMap()
+					updateStarChart()
+					lastUpdatedLocation = Location(location)
 				}
 			}
 		}
