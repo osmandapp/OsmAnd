@@ -6,6 +6,7 @@ import androidx.core.graphics.toColorInt
 import io.github.cosinekitty.astronomy.Body
 import net.osmand.PlatformUtil
 import net.osmand.plus.plugins.astro.SkyObject.Type
+import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyColor
 import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyName
 import org.json.JSONArray
@@ -44,7 +45,14 @@ abstract class AstroDataProvider {
 		cachedConstellations?.let { return it }
 
 		val constellations = getConstellationsImpl(ctx)
-
+		val skyObjectMap = getSkyObjects(ctx).associateBy { it.hip }
+		constellations.forEach { c ->
+			val center = AstroUtils.calculateConstellationCenter(c, skyObjectMap)
+			c.apply {
+				ra = center?.first ?: 0.0
+				dec = center?.second ?: 0.0
+			}
+		}
 		cachedConstellations = constellations
 		return constellations
 	}

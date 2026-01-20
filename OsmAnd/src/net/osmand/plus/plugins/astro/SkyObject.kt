@@ -12,8 +12,8 @@ open class SkyObject(
 	open val type: Type,
 	open val body: Body?, // Null for custom stars not in Body enum
 	open val name: String,
-	open val ra: Double, // Right Ascension
-	open val dec: Double, // Declination
+	open var ra: Double, // Right Ascension
+	open var dec: Double, // Declination
 	open val magnitude: Float,
 	open val color: Int,
 

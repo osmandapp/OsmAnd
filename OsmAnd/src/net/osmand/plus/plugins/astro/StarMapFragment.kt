@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.graphics.toColorInt
 import androidx.core.view.ViewCompat
@@ -104,6 +105,18 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var previousViewAngle: Double = 150.0
 	private var showMagnitudeFilter = false
 
+	private val backPressedCallback = object : OnBackPressedCallback(false) {
+		override fun handleOnBackPressed() {
+			if (childFragmentManager.backStackEntryCount > 0) {
+				childFragmentManager.popBackStack()
+			} else {
+				isEnabled = false
+				requireActivity().onBackPressedDispatcher.onBackPressed()
+				isEnabled = true
+			}
+		}
+	}
+
 	companion object {
 		val TAG: String = StarMapFragment::class.java.simpleName
 		private val LOG = LoggerFactory.getLogger(TAG)
@@ -119,6 +132,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 					.addToBackStack(null)
 					.commitAllowingStateLoss()
 			}
+		}
+	}
+
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
+		childFragmentManager.addOnBackStackChangedListener {
+			backPressedCallback.isEnabled = childFragmentManager.backStackEntryCount > 0
 		}
 	}
 
@@ -228,27 +249,25 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			}
 		}
 		view.findViewById<ImageButton>(R.id.close_button).apply {
-			setOnClickListener { requireActivity().onBackPressed() }
+			setOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
 		}
 		view.findViewById<ImageButton>(R.id.search_button).apply {
 			setOnClickListener {
-				val dialog = StarMapSearchDialogFragment()
-				dialog.setObjects(getSearchableObjects())
-				dialog.onObjectSelected = { obj ->
-					if (obj.type == SkyObject.Type.CONSTELLATION) {
-						val constellations = dataProvider.getConstellations(requireContext())
-						constellations.find { it.name == obj.name }?.let { c ->
-							manualAzimuth = true
-							starView.setSelectedConstellation(c, center = true, animate = true)
-							showConstellationInfo(c)
-						}
-					} else {
-						manualAzimuth = true
-						starView.setSelectedObject(obj, center = true, animate = true)
-						showObjectInfo(obj)
+				val tag = StarMapSearchDialogFragment.TAG
+				var dialog = childFragmentManager.findFragmentByTag(tag) as? StarMapSearchDialogFragment
+				if (dialog == null) {
+					dialog = StarMapSearchDialogFragment()
+					dialog.onObjectSelected = { obj ->
+						handleSearchObjectSelected(obj)
+					}
+					dialog.show(childFragmentManager, tag)
+				} else {
+					// FragmentManager will bring it back if it's in the backstack and we pop it
+					// but here we just show it if it was added but not visible.
+					if (dialog.isHidden) {
+						childFragmentManager.beginTransaction().show(dialog).commit()
 					}
 				}
-				dialog.show(childFragmentManager, StarMapSearchDialogFragment.TAG)
 			}
 		}
 
@@ -330,6 +349,21 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		return view
 	}
 
+	private fun handleSearchObjectSelected(obj: SkyObject) {
+		if (obj.type == SkyObject.Type.CONSTELLATION) {
+			val constellations = dataProvider.getConstellations(requireContext())
+			constellations.find { it.name == obj.name }?.let { c ->
+				manualAzimuth = true
+				starView.setSelectedConstellation(c, center = true, animate = true)
+				showConstellationInfo(c)
+			}
+		} else {
+			manualAzimuth = true
+			starView.setSelectedObject(obj, center = true, animate = true)
+			showObjectInfo(obj)
+		}
+	}
+
 	private fun applyWindowInsets(view: View) {
 		ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
 			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -376,6 +410,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		mapActivity.disableDrawer()
 		updateWidgetsVisibility(mapActivity, View.GONE)
 		mapActivity.refreshMap()
+		backPressedCallback.isEnabled = childFragmentManager.backStackEntryCount > 0
 	}
 
 	override fun onPause() {
@@ -683,12 +718,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 	}
 
-	private fun getSearchableObjects(): List<SkyObject> {
+	internal fun getSearchableObjects(): List<SkyObject> {
 		val objects = starMapViewModel.skyObjects.value?.toMutableList() ?: mutableListOf()
 		val constellations = dataProvider.getConstellations(requireContext())
-		val skyObjectMap = objects.associateBy { it.hip }
 		constellations.forEach { c ->
-			val center = AstroUtils.calculateConstellationCenter(c, skyObjectMap)
 			objects.add(SkyObject(
 				id = "const_${c.name}",
 				hip = -1,
@@ -696,8 +729,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				type = SkyObject.Type.CONSTELLATION,
 				body = null,
 				name = c.name,
-				ra = center?.first ?: 0.0,
-				dec = center?.second ?: 0.0,
+				ra = c.ra,
+				dec = c.dec,
 				magnitude = 2.0f,
 				color = Color.WHITE,
 				localizedName = c.localizedName
