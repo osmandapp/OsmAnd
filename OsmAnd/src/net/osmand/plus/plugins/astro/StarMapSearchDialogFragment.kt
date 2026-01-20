@@ -19,6 +19,7 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
 import java.util.Locale
+import kotlin.math.abs
 
 class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
@@ -108,13 +109,14 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		} else {
 			val lowerQuery = currentQuery.lowercase(Locale.getDefault())
 			allObjects.filter {
-				it.name.lowercase(Locale.getDefault()).contains(lowerQuery)
+				it.name.lowercase(Locale.getDefault()).contains(lowerQuery) ||
+						it.localizedName?.lowercase(Locale.getDefault())?.contains(lowerQuery) == true
 			}
 		}
 		val sortedList = if (isAscending) {
-			list.sortedBy { it.name }
+			list.sortedBy { it.localizedName ?: it.name }
 		} else {
-			list.sortedByDescending { it.name }
+			list.sortedByDescending { it.localizedName ?: it.name }
 		}
 		filteredObjects.addAll(if (currentQuery.isBlank()) sortedList else sortedList)
 		adapter.notifyDataSetChanged()
@@ -139,12 +141,16 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		private val iconView = view.findViewById<ImageView>(R.id.object_icon)
 
 		fun bind(obj: SkyObject) {
-			nameText.text = obj.name
+			nameText.text = obj.localizedName ?: obj.name
 			
 			val typeName = AstroUtils.getObjectTypeName(itemView.context, obj.type)
 			val magStr = String.format(Locale.getDefault(), "mag %.1f", obj.magnitude)
 			if (obj.type.isSunSystem()) {
 				infoText.text = String.format(Locale.getDefault(), "%s • %s", typeName, magStr)
+			} else if (obj.type == SkyObject.Type.CONSTELLATION) {
+				val raStr = formatRA(obj.ra)
+				val decStr = formatDec(obj.dec)
+				infoText.text = String.format(Locale.getDefault(), "%s • %s, %s", typeName, raStr, decStr)
 			} else {
 				val raStr = formatRA(obj.ra)
 				val decStr = formatDec(obj.dec)
@@ -172,7 +178,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 		private fun formatDec(dec: Double): String {
 			val d = dec.toInt()
-			val m = Math.abs((dec - d) * 60).toInt()
+			val m = abs((dec - d) * 60).toInt()
 			return String.format(Locale.getDefault(), "%+02d° %02d′", d, m)
 		}
 	}

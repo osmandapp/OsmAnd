@@ -19,16 +19,16 @@ abstract class AstroDataProvider {
 		private val LOG = PlatformUtil.getLog(AstroDataProvider::class.java)
 	}
 
-	abstract fun getInitialSkyObjectsImpl(ctx: Context): List<SkyObject>
+	abstract fun getSkyObjectsImpl(ctx: Context): List<SkyObject>
 
 	@Synchronized
-	fun getInitialSkyObjects(ctx: Context): List<SkyObject> {
-		cachedSkyObjects?.let { return it.toList() }
+	fun getSkyObjects(ctx: Context): List<SkyObject> {
+		cachedSkyObjects?.let { return it }
 
-		val objects = getInitialSkyObjectsImpl(ctx)
+		val objects = getSkyObjectsImpl(ctx)
 
 		cachedSkyObjects = objects
-		return objects.toList()
+		return objects
 	}
 
 	@Synchronized
@@ -41,12 +41,12 @@ abstract class AstroDataProvider {
 
 	@Synchronized
 	fun getConstellations(ctx: Context): List<Constellation> {
-		cachedConstellations?.let { return it.toList() }
+		cachedConstellations?.let { return it }
 
 		val constellations = getConstellationsImpl(ctx)
 
 		cachedConstellations = constellations
-		return constellations.toList()
+		return constellations
 	}
 
 	protected fun getPlanets(

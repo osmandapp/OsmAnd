@@ -36,6 +36,7 @@ import java.util.Calendar
 import java.util.TimeZone
 import kotlin.math.PI
 import kotlin.math.abs
+import kotlin.math.acos
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.hypot
@@ -222,6 +223,7 @@ class StarView @JvmOverloads constructor(
 	// --- Selection & Multiselection ---
 	private var selectedObject: SkyObject? = null
 	private var selectedConstellation: Constellation? = null
+	private val selectedConstellationStarIds = mutableSetOf<Int>()
 	private val pinnedObjects = mutableSetOf<SkyObject>()
 
 	var onConstellationClickListener: ((Constellation?) -> Unit)? = null
@@ -258,24 +260,34 @@ class StarView @JvmOverloads constructor(
 
 	fun setCenter(azimuth: Double, altitude: Double, animate: Boolean = false) {
 		if (animate) {
-			val startAz = azimuthCenter
-			val startAlt = altitudeCenter
-			visualAnimator?.cancel()
-			visualAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
-				duration = 500
-				interpolator = DecelerateInterpolator()
-				addUpdateListener { animator ->
-					val fraction = animator.animatedValue as Float
-					azimuthCenter = interpolateAngle(startAz, azimuth, fraction)
-					altitudeCenter = startAlt + (max(-90.0, min(90.0, altitude)) - startAlt) * fraction
-					invalidate()
-				}
-				start()
-			}
+			animateTo(azimuth, altitude)
 		} else {
 			this.azimuthCenter = azimuth
 			this.altitudeCenter = max(-90.0, min(90.0, altitude))
 			invalidate()
+		}
+	}
+
+	private fun animateTo(azimuth: Double, altitude: Double, targetViewAngle: Double? = null) {
+		val startAz = azimuthCenter
+		val startAlt = altitudeCenter
+		val startAngle = viewAngle
+		val targetAlt = max(-90.0, min(90.0, altitude))
+
+		visualAnimator?.cancel()
+		visualAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
+			duration = 500
+			interpolator = DecelerateInterpolator()
+			addUpdateListener { animator ->
+				val fraction = animator.animatedValue as Float
+				azimuthCenter = interpolateAngle(startAz, azimuth, fraction)
+				altitudeCenter = startAlt + (targetAlt - startAlt) * fraction
+				if (targetViewAngle != null) {
+					updateViewAngle(startAngle + (targetViewAngle - startAngle) * fraction)
+				}
+				invalidate()
+			}
+			start()
 		}
 	}
 
@@ -338,14 +350,13 @@ class StarView @JvmOverloads constructor(
 	}
 
 	fun setSkyObjects(objects: List<SkyObject>) {
+		//visualAnimator?.cancel()
 		skyObjects.clear()
 		skyObjects.addAll(objects)
 		// Sort by magnitude (ascending): brighter objects (lower mag) come first
 		skyObjects.sortBy { it.magnitude }
 		skyObjectMap.clear()
 		objects.forEach { skyObjectMap[it.hip] = it }
-
-		updateConstellationCenters()
 
 		recalculatePositions(currentTime, updateTargets = false)
 		skyObjects.forEach {
@@ -362,7 +373,11 @@ class StarView @JvmOverloads constructor(
 	}
 
 	fun setConstellations(list: List<Constellation>) {
+		//visualAnimator?.cancel()
 		constellations = list
+		updateConstellationCenters()
+
+		invalidate()
 	}
 
 	private fun updateConstellationCenters() {
@@ -410,6 +425,10 @@ class StarView @JvmOverloads constructor(
 				val hor = horizon(currentTime, observer, ra, dec, Refraction.Normal)
 				center.azimuth = hor.azimuth
 				center.altitude = hor.altitude
+				center.targetAzimuth = hor.azimuth
+				center.targetAltitude = hor.altitude
+				center.startAzimuth = hor.azimuth
+				center.startAltitude = hor.altitude
 				constellationCenters[constellation] = center
 			} else {
 				constellationCenters[constellation] = null
@@ -428,14 +447,70 @@ class StarView @JvmOverloads constructor(
 
 	fun getSelectedConstellationItem(): Constellation? = selectedConstellation
 
-	fun setSelectedObject(obj: SkyObject?) {
-		selectedObject = obj
+	fun setSelectedObject(obj: SkyObject?, center: Boolean = false, animate: Boolean = false) {
+		selectedConstellation = null
+		if (obj != null) {
+			if (obj.azimuth == 0.0 && obj.altitude == 0.0) calculatePosition(obj)
+			selectedObject = obj
+			if (center) setCenter(obj.azimuth, obj.altitude, animate)
+		} else {
+			selectedObject = obj
+			invalidate()
+		}
+	}
+
+	fun setSelectedConstellation(
+		c: Constellation?,
+		center: Boolean = false,
+		animate: Boolean = false
+	) {
+		selectedObject = null
+		selectedConstellation = c
+		selectedConstellationStarIds.clear()
+		c?.lines?.forEach {
+			selectedConstellationStarIds.add(it.first)
+			selectedConstellationStarIds.add(it.second)
+		}
+
+		skyObjects.filter { selectedConstellationStarIds.contains(it.hip) }.forEach {
+			calculatePosition(it, currentTime, false)
+			it.azimuth = it.targetAzimuth
+			it.altitude = it.targetAltitude
+		}
+
+		if (c != null && center) {
+			val center = constellationCenters[c]
+			if (center != null) {
+				var maxDist = 0.0
+				val uniqueStars = mutableSetOf<Int>()
+				c.lines.forEach { (id1, id2) -> uniqueStars.add(id1); uniqueStars.add(id2) }
+				uniqueStars.forEach { id ->
+					val star = skyObjectMap[id]
+					if (star != null) {
+						val d = angularDistance(center.ra, center.dec, star.ra, star.dec)
+						if (d > maxDist) maxDist = d
+					}
+				}
+				// targetAngle logic: Frame the constellation with padding
+				val targetAngle = if (maxDist > 0) max(20.0, min(120.0, maxDist * 3.5)) else viewAngle
+				if (animate) {
+					animateTo(center.azimuth, center.altitude, targetAngle)
+				} else {
+					setCenter(center.azimuth, center.altitude)
+					setViewAngle(targetAngle)
+				}
+			}
+		}
 		invalidate()
 	}
 
-	fun setSelectedConstellation(c: Constellation?) {
-		selectedConstellation = c
-		invalidate()
+	private fun angularDistance(ra1: Double, dec1: Double, ra2: Double, dec2: Double): Double {
+		val phi1 = Math.toRadians(dec1)
+		val phi2 = Math.toRadians(dec2)
+		val lambda1 = Math.toRadians(ra1 * 15.0)
+		val lambda2 = Math.toRadians(ra2 * 15.0)
+		val cosD = sin(phi1) * sin(phi2) + cos(phi1) * cos(phi2) * cos(lambda1 - lambda2)
+		return Math.toDegrees(acos(max(-1.0, min(1.0, cosD))))
 	}
 
 	// --- Pinning API ---
@@ -523,25 +598,7 @@ class StarView @JvmOverloads constructor(
 		skyObjects.forEach { obj ->
 			if (!shouldRecalculate(obj)) return@forEach
 
-			val hor: Topocentric
-			if (obj.type.isSunSystem() && obj.body != null) {
-				val body = obj.body
-				val equ = equator(body, time, observer, EquatorEpoch.OfDate, Aberration.Corrected)
-				hor = horizon(time, observer, equ.ra, equ.dec, Refraction.Normal)
-				obj.distAu = equ.dist
-			} else {
-				hor = horizon(time, observer, obj.ra, obj.dec, Refraction.Normal)
-			}
-
-			if (updateTargets) {
-				obj.targetAzimuth = hor.azimuth
-				obj.targetAltitude = hor.altitude
-			} else {
-				obj.azimuth = hor.azimuth
-				obj.altitude = hor.altitude
-				obj.targetAzimuth = hor.azimuth
-				obj.targetAltitude = hor.altitude
-			}
+			calculatePosition(obj, time, updateTargets)
 		}
 
 		// Update Constellation Centroids positions
@@ -559,10 +616,39 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
+	fun calculatePosition(obj: SkyObject) = calculatePosition(obj, currentTime, false)
+
+	private fun calculatePosition(
+		obj: SkyObject,
+		time: Time,
+		updateTargets: Boolean
+	) {
+		val hor: Topocentric
+		if (obj.type.isSunSystem() && obj.body != null) {
+			val body = obj.body
+			val equ = equator(body, time, observer, EquatorEpoch.OfDate, Aberration.Corrected)
+			hor = horizon(time, observer, equ.ra, equ.dec, Refraction.Normal)
+			obj.distAu = equ.dist
+		} else {
+			hor = horizon(time, observer, obj.ra, obj.dec, Refraction.Normal)
+		}
+
+		if (updateTargets) {
+			obj.targetAzimuth = hor.azimuth
+			obj.targetAltitude = hor.altitude
+		} else {
+			obj.azimuth = hor.azimuth
+			obj.altitude = hor.altitude
+			obj.targetAzimuth = hor.azimuth
+			obj.targetAltitude = hor.altitude
+		}
+	}
+
 	private fun shouldRecalculate(obj: SkyObject): Boolean {
 		if (obj == selectedObject) return true
 		if (pinnedObjects.contains(obj)) return true
 		if (showConstellations) return true
+		if (selectedConstellationStarIds.contains(obj.hip)) return true
 		return isObjectVisibleInSettings(obj)
 	}
 
@@ -675,7 +761,7 @@ class StarView @JvmOverloads constructor(
 		if (showEquatorialGrid) drawEquatorialGrid(canvas)
 		if (showAzimuthalGrid) drawAzimuthalGrid(canvas)
 		if (showEclipticLine) drawEclipticLine(canvas)
-		if (showConstellations) drawConstellationLines(canvas)
+		drawConstellationLines(canvas)
 
 		drawHorizon(canvas)
 
@@ -690,10 +776,10 @@ class StarView @JvmOverloads constructor(
 			}
 		}
 
-		if (showConstellations) drawConstellationLabels(canvas)
+		drawConstellationLabels(canvas)
 
 		skyObjects.forEach { obj ->
-			if (isObjectVisibleInSettings(obj)) {
+			if (isObjectVisibleInSettings(obj) || selectedObject == obj) {
 				drawSkyObject(canvas, obj)
 			}
 		}
@@ -702,7 +788,7 @@ class StarView @JvmOverloads constructor(
 
 		// 1. Draw highlights for pinned objects (Gold)
 		pinnedObjects.forEach { obj ->
-			if (isObjectVisibleInSettings(obj)) {
+			if (isObjectVisibleInSettings(obj) || selectedObject == obj) {
 				if (skyToScreen(obj.azimuth, obj.altitude, tempPoint)) {
 					canvas.drawCircle(tempPoint.x, tempPoint.y, 25f, pinnedHighlightPaint)
 				}
@@ -711,13 +797,11 @@ class StarView @JvmOverloads constructor(
 
 		// 2. Draw highlight for currently selected object (Red)
 		selectedObject?.let {
-			if (isObjectVisibleInSettings(it)) {
-				if (skyToScreen(it.azimuth, it.altitude, tempPoint)) {
-					paint.style = Paint.Style.STROKE
-					paint.color = Color.RED
-					paint.strokeWidth = 3f
-					canvas.drawCircle(tempPoint.x, tempPoint.y, 25f, paint)
-				}
+			if (skyToScreen(it.azimuth, it.altitude, tempPoint)) {
+				paint.style = Paint.Style.STROKE
+				paint.color = Color.RED
+				paint.strokeWidth = 3f
+				canvas.drawCircle(tempPoint.x, tempPoint.y, 25f, paint)
 			}
 		}
 	}
@@ -1120,8 +1204,10 @@ class StarView @JvmOverloads constructor(
 
 	private fun drawConstellationLines(canvas: Canvas) {
 		constellations.forEach { constellation ->
-			gridPath.reset()
 			val isSelected = (constellation == selectedConstellation)
+			if (!showConstellations && !isSelected) return@forEach
+
+			gridPath.reset()
 			val linePaint = if (isSelected) selectedConstellationPaint else constellationPaint
 
 			constellation.lines.forEach { (id1, id2) ->
@@ -1145,13 +1231,15 @@ class StarView @JvmOverloads constructor(
 
 	private fun drawConstellationLabels(canvas: Canvas) {
 		constellations.forEach { constellation ->
+			val isSelected = (constellation == selectedConstellation)
+			if (!showConstellations && !isSelected) return@forEach
+
 			val center = constellationCenters[constellation] ?: return@forEach
 			
 			if (skyToScreen(center.azimuth, center.altitude, tempPoint)) {
 				val cx = tempPoint.x
 				val cy = tempPoint.y
 
-				val isSelected = (constellation == selectedConstellation)
 				if (isSelected) {
 					constellationTextPaint.color = 0xFFFFD700.toInt()
 					constellationTextPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
@@ -1160,7 +1248,7 @@ class StarView @JvmOverloads constructor(
 					constellationTextPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD_ITALIC)
 				}
 
-				val text = constellation.name
+				val text = constellation.localizedName ?: constellation.name
 				val textSize = constellationTextPaint.textSize
 
 				val textWidth = constellationTextPaint.measureText(text)
@@ -1247,7 +1335,7 @@ class StarView @JvmOverloads constructor(
 		}
 
 		if (showLabel) {
-			val text = obj.name
+			val text = obj.localizedName ?: obj.name
 			val labelTextSize = 25f
 			textPaint.textSize = labelTextSize
 
@@ -1403,20 +1491,22 @@ class StarView @JvmOverloads constructor(
 		}
 
 		if (bestObj != null) {
-			selectedObject = bestObj
-			selectedConstellation = null
+			setSelectedObject(bestObj)
 			invalidate()
 			onObjectClickListener?.invoke(bestObj)
 			onConstellationClickListener?.invoke(null)
 			return
 		}
 
-		// 2. Check Constellations (if enabled)
-		if (showConstellations) {
+		// 2. Check Constellations
+		if (showConstellations || selectedConstellation != null) {
 			var bestConst: Constellation? = null
 			var bestConstDist = Float.MAX_VALUE
 
 			constellations.forEach { constellation ->
+				val isSelected = (constellation == selectedConstellation)
+				if (!showConstellations && !isSelected) return@forEach
+
 				// Check distance to lines
 				constellation.lines.forEach { (id1, id2) ->
 					val s1 = skyObjectMap[id1]
@@ -1455,9 +1545,8 @@ class StarView @JvmOverloads constructor(
 			}
 
 			if (bestConst != null) {
-				selectedConstellation = bestConst
+				setSelectedConstellation(bestConst)
 				selectedObject = null
-				invalidate()
 				onObjectClickListener?.invoke(null)
 				onConstellationClickListener?.invoke(bestConst)
 				return
@@ -1466,7 +1555,7 @@ class StarView @JvmOverloads constructor(
 
 		// 3. Nothing clicked (Deselect focused object, but keep pins)
 		selectedObject = null
-		selectedConstellation = null
+		setSelectedConstellation(null)
 		invalidate()
 		onObjectClickListener?.invoke(null)
 		onConstellationClickListener?.invoke(null)

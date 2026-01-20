@@ -17,6 +17,9 @@ data class SkyObject(
 	val magnitude: Float,
 	val color: Int,
 
+	// Localized name from DB
+	var localizedName: String? = null,
+
 	// Real-time calculated coordinates
 	var azimuth: Double = 0.0,
 	var altitude: Double = 0.0,

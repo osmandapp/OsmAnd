@@ -229,12 +229,20 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		view.findViewById<ImageButton>(R.id.search_button).apply {
 			setOnClickListener {
 				val dialog = StarMapSearchDialogFragment()
-				dialog.setObjects(starMapViewModel.skyObjects.value ?: emptyList())
+				dialog.setObjects(getSearchableObjects())
 				dialog.onObjectSelected = { obj ->
-					starView.setSelectedObject(obj)
-					manualAzimuth = true
-					starView.setCenter(obj.azimuth, obj.altitude, true)
-					showObjectInfo(obj)
+					if (obj.type == SkyObject.Type.CONSTELLATION) {
+						val constellations = dataProvider.getConstellations(requireContext())
+						constellations.find { it.name == obj.name }?.let { c ->
+							manualAzimuth = true
+							starView.setSelectedConstellation(c, center = true, animate = true)
+							showConstellationInfo(c)
+						}
+					} else {
+						manualAzimuth = true
+						starView.setSelectedObject(obj, center = true, animate = true)
+						showObjectInfo(obj)
+					}
 				}
 				dialog.show(childFragmentManager, StarMapSearchDialogFragment.TAG)
 			}
@@ -285,7 +293,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", config.magnitudeFilter)
 			}
 		}
-		starView.setConstellations(dataProvider.getConstellations(view.context))
 
 		updateMagnitudeFilterVisibility()
 		updateStarMap(true)
@@ -549,6 +556,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", filterToUse)
 			}
 		}
+		starMapViewModel.constellations.observe(viewLifecycleOwner) { constellations ->
+			starView.setConstellations(constellations)
+		}
 		starChartViewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
 			starVisiblityView.setChartObjects(objects)
 			starAltitudeView.setChartObjects(objects)
@@ -651,5 +661,28 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			existing.updateObjectInfo(obj)
 		}
 		bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+	}
+
+	private fun getSearchableObjects(): List<SkyObject> {
+		val objects = starMapViewModel.skyObjects.value?.toMutableList() ?: mutableListOf()
+		val constellations = dataProvider.getConstellations(requireContext())
+		val skyObjectMap = objects.associateBy { it.hip }
+		constellations.forEach { c ->
+			val center = AstroUtils.calculateConstellationCenter(c, skyObjectMap)
+			objects.add(SkyObject(
+				id = "const_${c.name}",
+				hip = -1,
+				wid = c.wid,
+				type = SkyObject.Type.CONSTELLATION,
+				body = null,
+				name = c.name,
+				ra = center?.first ?: 0.0,
+				dec = center?.second ?: 0.0,
+				magnitude = 2.0f,
+				color = Color.WHITE,
+				localizedName = c.localizedName
+			))
+		}
+		return objects
 	}
 }
