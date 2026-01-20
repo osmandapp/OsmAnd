@@ -6338,4 +6338,5 @@
     <string name="astro_set">Definir</string>
     <string name="show_expand_button">Mostrar botão expandir</string>
     <string name="imprecise_coordinates">Coordenadas imprecisas</string>
+    <string name="shared_string_step">Passo</string>
 </resources>

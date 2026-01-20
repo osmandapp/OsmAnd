@@ -3544,7 +3544,7 @@
     <string name="shared_string_server_url">Σύνδεσμος διακομιστή</string>
     <string name="shared_string_enter_param">Προσθήκη παραμέτρου</string>
     <string name="shared_string_resources">Πηγές</string>
-    <string name="sort_last_modified">Τελευταία επεξεργασία</string>
+    <string name="sort_last_modified">Τελευταία τροποποίηση</string>
     <string name="speed_mode">Λειτουργία ταχύτητας</string>
     <string name="location_source">Πηγή τοποθεσίας</string>
     <string name="show_gpx">Ίχνη</string>
