@@ -43,11 +43,13 @@ import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.shared.util.LoggerFactory
+import net.osmand.util.MapUtils
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Locale
 import java.util.TimeZone
+import kotlin.math.abs
 
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
 	OsmAndCompassListener {
@@ -78,6 +80,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var systemBottomInset: Int = 0
 	private var manualAzimuth: Boolean = true
 	private var lastResetRotationToNorth = 0L
+	private var lastUpdatedLocation: Location? = null
+	private var lastUpdatedAzimuth: Double = -1.0
 
 	internal lateinit var starMapViewModel: StarObjectsViewModel
 	private lateinit var starChartViewModel: StarObjectsViewModel
@@ -229,12 +233,20 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		view.findViewById<ImageButton>(R.id.search_button).apply {
 			setOnClickListener {
 				val dialog = StarMapSearchDialogFragment()
-				dialog.setObjects(starMapViewModel.skyObjects.value ?: emptyList())
+				dialog.setObjects(getSearchableObjects())
 				dialog.onObjectSelected = { obj ->
-					starView.setSelectedObject(obj)
-					manualAzimuth = true
-					starView.setCenter(obj.azimuth, obj.altitude, true)
-					showObjectInfo(obj)
+					if (obj.type == SkyObject.Type.CONSTELLATION) {
+						val constellations = dataProvider.getConstellations(requireContext())
+						constellations.find { it.name == obj.name }?.let { c ->
+							manualAzimuth = true
+							starView.setSelectedConstellation(c, center = true, animate = true)
+							showConstellationInfo(c)
+						}
+					} else {
+						manualAzimuth = true
+						starView.setSelectedObject(obj, center = true, animate = true)
+						showObjectInfo(obj)
+					}
 				}
 				dialog.show(childFragmentManager, StarMapSearchDialogFragment.TAG)
 			}
@@ -285,7 +297,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", config.magnitudeFilter)
 			}
 		}
-		starView.setConstellations(dataProvider.getConstellations(view.context))
 
 		updateMagnitudeFilterVisibility()
 		updateStarMap(true)
@@ -399,28 +410,44 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private fun setAzimuth(azimuth: Double, animate: Boolean = false) {
 		starView.setAzimuth(azimuth, animate)
 		compassButton?.update(-azimuth.toFloat(), animate)
+		lastUpdatedAzimuth = azimuth
 	}
 
 	override fun updateLocation(location: Location?) {
 		if (location == null) return
 		arModeHelper.updateGeomagneticField(location)
-		if (app.mapViewTrackingUtilities.isMapLinkedToLocation) {
-			app.runInUIThread {
-				if (!manualAzimuth && !arModeHelper.isArModeEnabled) {
-					if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
-						if (location.hasBearing() && location.bearing != 0f) {
-							setAzimuth(location.bearing.toDouble(), true)
-						}
-					}
-				}
-				updateStarMap(); updateStarChart()
+
+		val isMapLinked = app.mapViewTrackingUtilities.isMapLinkedToLocation
+		val rotateMode = settings.ROTATE_MAP.get()
+		val isRotateBearing = rotateMode == OsmandSettings.ROTATE_MAP_BEARING
+
+		var needsAzimuthUpdate = false
+		if (!manualAzimuth && !arModeHelper.isArModeEnabled && isRotateBearing && location.hasBearing() && location.bearing != 0f) {
+			val bearing = location.bearing.toDouble()
+			if (lastUpdatedAzimuth == -1.0 || abs(MapUtils.degreesDiff(bearing, lastUpdatedAzimuth)) >= 1.0) {
+				needsAzimuthUpdate = true
 			}
-		} else if (!manualAzimuth && !arModeHelper.isArModeEnabled) {
+		}
+
+		val locationThreshold = 500.0 // meters
+		var needsLocationUpdate = false
+		if (isMapLinked) {
+			val lastLoc = lastUpdatedLocation
+			if (lastLoc == null || location.distanceTo(lastLoc) >= locationThreshold) {
+				needsLocationUpdate = true
+			}
+		}
+
+		if (needsAzimuthUpdate || needsLocationUpdate) {
 			app.runInUIThread {
-				if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
-					if (location.hasBearing() && location.bearing != 0f) {
-						setAzimuth(location.bearing.toDouble(), true)
-					}
+				if (needsAzimuthUpdate) {
+					val bearing = location.bearing.toDouble()
+					setAzimuth(bearing, true)
+				}
+				if (needsLocationUpdate) {
+					updateStarMap()
+					updateStarChart()
+					lastUpdatedLocation = Location(location)
 				}
 			}
 		}
@@ -549,6 +576,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", filterToUse)
 			}
 		}
+		starMapViewModel.constellations.observe(viewLifecycleOwner) { constellations ->
+			starView.setConstellations(constellations)
+		}
 		starChartViewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
 			starVisiblityView.setChartObjects(objects)
 			starAltitudeView.setChartObjects(objects)
@@ -651,5 +681,28 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			existing.updateObjectInfo(obj)
 		}
 		bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+	}
+
+	private fun getSearchableObjects(): List<SkyObject> {
+		val objects = starMapViewModel.skyObjects.value?.toMutableList() ?: mutableListOf()
+		val constellations = dataProvider.getConstellations(requireContext())
+		val skyObjectMap = objects.associateBy { it.hip }
+		constellations.forEach { c ->
+			val center = AstroUtils.calculateConstellationCenter(c, skyObjectMap)
+			objects.add(SkyObject(
+				id = "const_${c.name}",
+				hip = -1,
+				wid = c.wid,
+				type = SkyObject.Type.CONSTELLATION,
+				body = null,
+				name = c.name,
+				ra = center?.first ?: 0.0,
+				dec = center?.second ?: 0.0,
+				magnitude = 2.0f,
+				color = Color.WHITE,
+				localizedName = c.localizedName
+			))
+		}
+		return objects
 	}
 }

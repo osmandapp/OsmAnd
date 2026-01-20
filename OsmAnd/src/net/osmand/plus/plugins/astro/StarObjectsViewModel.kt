@@ -25,6 +25,9 @@ open class StarObjectsViewModel(
 	private val _skyObjects = MutableLiveData<List<SkyObject>>()
 	val skyObjects: LiveData<List<SkyObject>> = _skyObjects
 
+	private val _constellations = MutableLiveData<List<Constellation>>()
+	val constellations: LiveData<List<Constellation>> = _constellations
+
 	private val _currentTime = MutableLiveData<Time>()
 	val currentTime: LiveData<Time> = _currentTime
 
@@ -39,7 +42,7 @@ open class StarObjectsViewModel(
 
 	fun loadData() {
 		viewModelScope.launch(Dispatchers.Default) {
-			val objects = dataProvider.getInitialSkyObjects(app).toMutableList()
+			val objects = dataProvider.getSkyObjects(app).toMutableList()
 			val items = if (viewType == StarObjectsViewType.MAP)
 				settings.getStarMapConfig().items else settings.getStarChartConfig().items
 			// Create lookup map for config items
@@ -52,7 +55,10 @@ open class StarObjectsViewModel(
 			}
 			objects.sortBy { indexMap[it.id] ?: Int.MAX_VALUE }
 
+			val constellations = dataProvider.getConstellations(app).toMutableList()
+
 			_skyObjects.postValue(objects)
+			_constellations.postValue(constellations)
 		}
 	}
 
