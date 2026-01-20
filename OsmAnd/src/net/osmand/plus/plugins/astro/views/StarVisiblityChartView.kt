@@ -167,8 +167,9 @@ class StarVisiblityChartView @JvmOverloads constructor(
 	): List<Span> {
 		fun nextEvent(dir: Direction, from: ZonedDateTime): ZonedDateTime? {
 			val t0 = from.toAstroTime()
-			return if (obj.body != null) {
-				searchRiseSet(obj.body, obs, dir, t0, +2.0)?.toZoned(config.zoneId)
+			val body = obj.body
+			return if (body != null) {
+				searchRiseSet(body, obs, dir, t0, +2.0)?.toZoned(config.zoneId)
 			} else {
 				AstroUtils.withCustomStar(obj.ra, obj.dec) { star ->
 					searchRiseSet(star, obs, dir, t0, +2.0)?.toZoned(config.zoneId)

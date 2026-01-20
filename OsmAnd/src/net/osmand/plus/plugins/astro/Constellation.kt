@@ -1,8 +1,22 @@
 package net.osmand.plus.plugins.astro
 
+import android.graphics.Color
+
 data class Constellation(
-	val name: String,
-	val wid: String, // Wikipedia ID
-	val lines: List<Pair<Int, Int>>, // Pairs of SkyObject HIP IDs
-	var localizedName: String? = null
+	override val name: String,
+	override val wid: String,
+	val lines: List<Pair<Int, Int>>,
+	override var localizedName: String? = null
+) : SkyObject(
+	id = "const_${name.lowercase().replace(' ', '_')}",
+	hip = -1,
+	wid = wid,
+	type = Type.CONSTELLATION,
+	body = null,
+	name = name,
+	ra = 0.0,
+	dec = 0.0,
+	magnitude = 100f,
+	color = Color.WHITE,
+	localizedName = localizedName
 )

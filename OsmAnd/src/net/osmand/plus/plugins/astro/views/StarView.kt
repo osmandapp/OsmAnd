@@ -624,8 +624,8 @@ class StarView @JvmOverloads constructor(
 		updateTargets: Boolean
 	) {
 		val hor: Topocentric
-		if (obj.type.isSunSystem() && obj.body != null) {
-			val body = obj.body
+		val body = obj.body
+		if (obj.type.isSunSystem() && body != null) {
 			val equ = equator(body, time, observer, EquatorEpoch.OfDate, Aberration.Corrected)
 			hor = horizon(time, observer, equ.ra, equ.dec, Refraction.Normal)
 			obj.distAu = equ.dist
@@ -731,8 +731,8 @@ class StarView @JvmOverloads constructor(
 				labels[validCount] = "%02d".format(stepHour)
 			}
 
-			val altAz: Topocentric = if (obj.type.isSunSystem()) {
-				val body = obj.body!!
+			val body = obj.body
+			val altAz: Topocentric = if (obj.type.isSunSystem() && body != null) {
 				val eq = equator(body, tStep, observer, EquatorEpoch.OfDate, Aberration.Corrected)
 				horizon(tStep, observer, eq.ra, eq.dec, Refraction.Normal)
 			} else {

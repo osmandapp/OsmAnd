@@ -297,8 +297,9 @@ object AstroUtils {
 	}
 
 	fun altitude(obj: SkyObject, tLocal: ZonedDateTime, obs: Observer): Double {
-		return if (obj.body != null) {
-			altitude(obj.body, tLocal, obs)
+		val body = obj.body
+		return if (body != null) {
+			altitude(body, tLocal, obs)
 		} else {
 			withCustomStar(obj.ra, obj.dec) { star ->
 				altitude(star, tLocal, obs)
@@ -341,8 +342,9 @@ object AstroUtils {
 		windowStart: ZonedDateTime? = null,
 		windowEnd: ZonedDateTime? = null
 	): Pair<ZonedDateTime?, ZonedDateTime?> {
-		return if (obj.body != null) {
-			nextRiseSet(obj.body, startSearch, obs, windowStart, windowEnd)
+		val body = obj.body
+		return if (body != null) {
+			nextRiseSet(body, startSearch, obs, windowStart, windowEnd)
 		} else {
 			withCustomStar(obj.ra, obj.dec) { star ->
 				nextRiseSet(star, startSearch, obs, windowStart, windowEnd)
