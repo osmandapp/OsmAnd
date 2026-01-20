@@ -50,7 +50,7 @@ public class MapHudLayout extends FrameLayout {
 	private static final int REFRESH_VERTICAL_PANELS_ID = UI_HANDLER_MAP_HUD + 2;
 	private static final int REFRESH_ALARMS_CONTAINER_ID = UI_HANDLER_MAP_HUD + 3;
 	private static final int UI_REFRESH_INTERVAL_MILLIS = 100;
-	private static final float TOP_BAR_MAX_WIDTH_PERCENTAGE_PORTRAIT = 0.4f;
+	private static final float TOP_BAR_MAX_WIDTH_PERCENTAGE_PORTRAIT = 0.5f;
 	private static final float TOP_BAR_MAX_WIDTH_PERCENTAGE_LANDSCAPE = 0.6f;
 
 	private static final Log LOG = PlatformUtil.getLog(MapHudLayout.class);
