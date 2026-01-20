@@ -5415,9 +5415,9 @@
     <string name="background_opacity">Prozirnost pozadine</string>
     <string name="contour_layers_action_descr">Promeni slojeve konture</string>
     <string name="change_zoom_action_descr">Promeni zum mape.</string>
-    <string name="search_action_descr">Otvaranje pretrage.</string>
-    <string name="navigation_action_descr">Otvaranje navigacije.</string>
-    <string name="my_location_action_descr">Centrira mapu na tvojoj trenutnoj lokaciji.</string>
+    <string name="search_action_descr">Otvaranje Pretrage.</string>
+    <string name="navigation_action_descr">Otvaranje Navigacije.</string>
+    <string name="my_location_action_descr">Centrira mapu na vašoj trenutnoj lokaciji.</string>
     <string name="configure_map_description">Promeni stil mape, slojeve ili druga podešavanja.</string>
     <string name="raster_layers_action_descr">Promeni rasterske slojeve</string>
     <string name="drawer_button_description">Otvaranje glavnog menija.</string>
@@ -5553,7 +5553,7 @@
     <string name="shared_string_dynamic">Dinamično</string>
     <string name="obd_connected_to_device">Povezan na %s</string>
     <string name="obd_connecting_to_device">Povezivanje s %s</string>
-    <string name="dynamic_icon_type_summary">Ikona se menja na temelju stanja akcije.</string>
+    <string name="dynamic_icon_type_summary">Ikona se menja na osnovu stanja akcije.</string>
     <string name="obd_not_connected_to_device">Isključeno iz %s</string>
     <string name="fuel_tank_capacity">Kapacitet rezervoara</string>
     <string name="shared_strings_dimensions">Dimenzije</string>
@@ -5952,4 +5952,15 @@
     <string name="avg_speed">Pros. brzina</string>
     <string name="organize_by_max_speed">Maks. brzina</string>
     <string name="organize_by_max_altitude">Maks. nadmorska visina</string>
+    <string name="copy_from_portrait_layout">Kopiraj iz Uspravnog rasporeda</string>
+    <string name="copy_from_landscape_layout">Kopiraj iz Pejzažnog rasporeda</string>
+    <string name="panels_layout_compact">Kompaktno</string>
+    <string name="panels_layout_wide">Široko</string>
+    <string name="panels_layout">Raspored panela</string>
+    <string name="panels_layout_descr">Izaberite raspored za gornji i donji panel. Mogu biti široki, koji se prostiru preko cele širine ekrana, ili kompaktni, koji se uklapaju između bočnih panela i dugmadi.</string>
+    <string name="single_layout">Jedan raspored</string>
+    <string name="separate_layouts">Odvojeni rasporedi</string>
+    <string name="use_separate_layouts">Koristi odvojene rasporede</string>
+    <string name="map_screen_layout">Raspored ekrana mape</string>
+    <string name="map_screen_layout_descr">Izaberite da li želite da koristite jedan raspored za sve orijentacije ili da prilagodite Portretni i Pejzažni režim odvojeno.</string>
 </resources>
