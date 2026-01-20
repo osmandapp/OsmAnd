@@ -107,7 +107,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private val backPressedCallback = object : OnBackPressedCallback(false) {
 		override fun handleOnBackPressed() {
-			if (childFragmentManager.backStackEntryCount > 0) {
+			if (::bottomSheetBehavior.isInitialized && bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
+				bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+				if (childFragmentManager.backStackEntryCount > 0) {
+					childFragmentManager.popBackStack()
+				}
+			} else if (childFragmentManager.backStackEntryCount > 0) {
 				childFragmentManager.popBackStack()
 			} else {
 				isEnabled = false
@@ -139,7 +144,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		super.onCreate(savedInstanceState)
 		requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
 		childFragmentManager.addOnBackStackChangedListener {
-			backPressedCallback.isEnabled = childFragmentManager.backStackEntryCount > 0
+			updateBackPressedCallback()
 		}
 	}
 
@@ -249,7 +254,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			}
 		}
 		view.findViewById<ImageButton>(R.id.close_button).apply {
-			setOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
+			setOnClickListener {
+				backPressedCallback.isEnabled = false
+				requireActivity().onBackPressedDispatcher.onBackPressed()
+			}
 		}
 		view.findViewById<ImageButton>(R.id.search_button).apply {
 			setOnClickListener {
@@ -342,6 +350,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 					starView.setSelectedConstellation(null)
 					starView.invalidate()
 				}
+				updateBackPressedCallback()
 			}
 			override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 		})
@@ -410,7 +419,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		mapActivity.disableDrawer()
 		updateWidgetsVisibility(mapActivity, View.GONE)
 		mapActivity.refreshMap()
-		backPressedCallback.isEnabled = childFragmentManager.backStackEntryCount > 0
+		updateBackPressedCallback()
 	}
 
 	override fun onPause() {
@@ -716,6 +725,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			existing.updateObjectInfo(obj)
 		}
 		bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+	}
+
+	private fun updateBackPressedCallback() {
+		backPressedCallback.isEnabled = childFragmentManager.backStackEntryCount > 0 ||
+				(::bottomSheetBehavior.isInitialized && bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN)
 	}
 
 	internal fun getSearchableObjects(): List<SkyObject> {
