@@ -15,6 +15,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListener;
@@ -83,7 +84,7 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 	@Override
 	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
 		WidgetType widgetType = widgetInfo.getWidgetType();
-		if (isMarkerWidget(widgetType) && widgetInfo.isEnabledForAppMode(settings.getApplicationMode())) {
+		if (isMarkerWidget(widgetType) && widgetInfo.isEnabledForAppMode(settings.getApplicationMode(), ScreenLayoutMode.getDefault(mapActivity))) {
 			addWidget(widgetInfo, widgetType);
 		}
 	}
@@ -92,7 +93,7 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 	public void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
 		WidgetType widgetType = widgetInfo.getWidgetType();
 		if (isMarkerWidget(widgetType)) {
-			if (widgetInfo.isEnabledForAppMode(settings.getApplicationMode())) {
+			if (widgetInfo.isEnabledForAppMode(settings.getApplicationMode(), ScreenLayoutMode.getDefault(mapActivity))) {
 				addWidget(widgetInfo, widgetType);
 			} else {
 				removeWidget(widgetInfo, widgetType);

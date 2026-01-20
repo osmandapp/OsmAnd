@@ -23,6 +23,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.settings.backend.preferences.CommonPreferenceProvider;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.plus.OsmandApplication;
@@ -283,8 +284,8 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos,
-	                          @NonNull ApplicationMode appMode) {
-		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
+	                          @NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
 
 		MapWidget heartRateWidget = new SensorTextWidget(mapActivity, appMode, HEART_RATE);
 		widgetsInfos.add(creator.createWidgetInfo(heartRateWidget));

@@ -30,6 +30,7 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -144,11 +145,22 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		MapActivity mapActivity = requireMapActivity();
 
 		List<List<MapWidgetInfo>> result = new ArrayList<>();
+		ScreenLayoutMode layoutMode = getScreenLayoutMode();
 		int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
-		for (Set<MapWidgetInfo> set : widgetRegistry.getPagedWidgetsForPanel(mapActivity, getAppMode(), selectedPanel, enabledWidgetsFilter)) {
+		for (Set<MapWidgetInfo> set : widgetRegistry.getPagedWidgetsForPanel(mapActivity, getAppMode(),
+				layoutMode, selectedPanel, enabledWidgetsFilter)) {
 			result.add(new ArrayList<>(set));
 		}
 		return result;
+	}
+
+	@Nullable
+	private ScreenLayoutMode getScreenLayoutMode() {
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof ConfigureWidgetsFragment configureFragment) {
+			return configureFragment.getScreenLayoutMode();
+		}
+		return null;
 	}
 
 	public void onApplyChanges() {
@@ -214,18 +226,20 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 
 	private void applyWidgetsVisibility(@NonNull List<String> enabledWidgetsIds) {
 		ApplicationMode appMode = getAppMode();
+		ScreenLayoutMode layoutMode = getScreenLayoutMode();
 		WidgetsPanel panel = selectedPanel;
 		for (MapWidgetInfo widget : widgetRegistry.getWidgetsForPanel(panel)) {
 			boolean enabledFromApply = enabledWidgetsIds.contains(widget.key);
-			if (widget.isEnabledForAppMode(appMode) != enabledFromApply) {
-				widgetRegistry.enableDisableWidgetForMode(appMode, widget, enabledFromApply, false);
+			if (widget.isEnabledForAppMode(appMode, layoutMode) != enabledFromApply) {
+				widgetRegistry.enableDisableWidgetForMode(appMode, widget, enabledFromApply, layoutMode, false);
 			}
 		}
 	}
 
 	private void applyWidgetsOrder(@NonNull List<List<String>> pagedOrder) {
-		selectedPanel.setWidgetsOrder(getAppMode(), pagedOrder, settings);
-		widgetRegistry.reorderWidgets();
+		ScreenLayoutMode layoutMode =  getScreenLayoutMode();
+		selectedPanel.setWidgetsOrder(getAppMode(), pagedOrder, settings, layoutMode);
+		widgetRegistry.reorderWidgets(layoutMode);
 	}
 
 	@Override
@@ -272,8 +286,10 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		WidgetInfoBaseFragment settingsBaseFragment = widgetType.getSettingsFragment(app, widgetInfo);
 		if (settingsBaseFragment != null) {
 			ApplicationMode appMode = getAppMode();
+			ScreenLayoutMode layoutMode = getScreenLayoutMode();
 			FragmentManager manager = requireMapActivity().getSupportFragmentManager();
-			WidgetInfoBaseFragment.showInstance(manager, settingsBaseFragment, requireParentFragment(), appMode, widgetInfo.key, selectedPanel);
+			WidgetInfoBaseFragment.showInstance(manager, settingsBaseFragment, requireParentFragment(),
+					appMode, widgetInfo.key, selectedPanel, layoutMode);
 		}
 	}
 

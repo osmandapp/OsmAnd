@@ -29,6 +29,7 @@ import net.osmand.plus.base.containers.PaintedText;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -133,7 +134,8 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 			AndroidUtils.setMargins(params, buttonVisible ? 0 : margin, params.topMargin, params.getMarginEnd(), params.bottomMargin);
 		}
 		view.setOnLongClickListener(v -> {
-			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode, true);
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
+			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
 			return true;
 		});
 

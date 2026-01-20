@@ -92,6 +92,10 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return settings.getContext();
 	}
 
+	protected OsmandSettings getSettings() {
+		return settings;
+	}
+
 	// common methods
 
 	public final CommonPreference<T> makeGlobal() {
@@ -394,6 +398,26 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	public final String asStringModeValue(@Nullable ApplicationMode mode) {
 		T v = getModeValue(mode);
 		return toString(v);
+	}
+
+	public abstract CommonPreference<T> copyWithId(@NonNull String newId);
+
+	protected <P extends CommonPreference<T>> P setupCopy(P copy) {
+		if (global) {
+			copy.makeGlobal();
+		} else {
+			copy.makeProfile();
+		}
+		if (shared) {
+			copy.makeShared();
+		}
+		if (cache) {
+			copy.cache();
+		}
+		if (lastModifiedTimeStored) {
+			copy.storeLastModifiedTime();
+		}
+		return copy;
 	}
 
 	@NonNull
