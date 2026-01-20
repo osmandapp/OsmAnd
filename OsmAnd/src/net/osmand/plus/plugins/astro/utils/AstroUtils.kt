@@ -237,9 +237,9 @@ object AstroUtils {
 				starView.showStars = tempStars
 				starView.showGalaxies = tempGalaxies
 				starView.showNebulae = tempNebulae
-				starView.showOpenCluster = tempOpenClusters
-				starView.showGlobularCluster = tempGlobularClusters
-				starView.showGalaxyCluster = tempGalaxyClusters
+				starView.showOpenClusters = tempOpenClusters
+				starView.showGlobularClusters = tempGlobularClusters
+				starView.showGalaxyClusters = tempGalaxyClusters
 				starView.showBlackHoles = tempBlackHoles
 
 				starView.updateVisibility()

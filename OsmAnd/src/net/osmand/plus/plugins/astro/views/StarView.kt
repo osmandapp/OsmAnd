@@ -147,9 +147,9 @@ class StarView @JvmOverloads constructor(
 	var showGalaxies = true
 	var showBlackHoles = true
 	var showNebulae = true
-	var showOpenCluster = true
-	var showGlobularCluster = true
-	var showGalaxyCluster = true
+	var showOpenClusters = true
+	var showGlobularClusters = true
+	var showGalaxyClusters = true
 	var showSun = true
 	var showMoon = true
 	var showPlanets = true
@@ -665,9 +665,9 @@ class StarView @JvmOverloads constructor(
 			SkyObject.Type.MOON -> showMoon
 			SkyObject.Type.PLANET -> showPlanets
 			SkyObject.Type.NEBULA -> showNebulae
-			SkyObject.Type.OPEN_CLUSTER -> showOpenCluster
-			SkyObject.Type.GLOBULAR_CLUSTER -> showGlobularCluster
-			SkyObject.Type.GALAXY_CLUSTER -> showGalaxyCluster
+			SkyObject.Type.OPEN_CLUSTER -> showOpenClusters
+			SkyObject.Type.GLOBULAR_CLUSTER -> showGlobularClusters
+			SkyObject.Type.GALAXY_CLUSTER -> showGalaxyClusters
 			SkyObject.Type.CONSTELLATION -> showConstellations
 		}
 	}

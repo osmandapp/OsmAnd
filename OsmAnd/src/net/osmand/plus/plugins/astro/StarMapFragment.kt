@@ -284,9 +284,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showGalaxies = config.showGalaxies
 			starView.showBlackHoles = config.showBlackHoles
 			starView.showNebulae = config.showNebulae
-			starView.showOpenCluster = config.showOpenClusters
-			starView.showGlobularCluster = config.showGlobularClusters
-			starView.showGalaxyCluster = config.showGalaxyClusters
+			starView.showOpenClusters = config.showOpenClusters
+			starView.showGlobularClusters = config.showGlobularClusters
+			starView.showGalaxyClusters = config.showGalaxyClusters
 			starView.showSun = config.showSun
 			starView.showMoon = config.showMoon
 			starView.showPlanets = config.showPlanets
@@ -495,9 +495,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			showGalaxies = starView.showGalaxies,
 			showBlackHoles = starView.showBlackHoles,
 			showNebulae = starView.showNebulae,
-			showOpenClusters = starView.showOpenCluster,
-			showGlobularClusters = starView.showGlobularCluster,
-			showGalaxyClusters = starView.showGalaxyCluster,
+			showOpenClusters = starView.showOpenClusters,
+			showGlobularClusters = starView.showGlobularClusters,
+			showGalaxyClusters = starView.showGalaxyClusters,
 			is2DMode = starView.is2DMode,
 			magnitudeFilter = starView.magnitudeFilter?.toDouble()
 		)
