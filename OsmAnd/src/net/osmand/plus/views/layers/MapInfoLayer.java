@@ -27,6 +27,7 @@ import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
 import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -315,7 +316,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public void recreateAllControls(@NonNull MapActivity mapActivity) {
 		widgetRegistry.clearWidgets();
 		registerAllControls(mapActivity);
-		widgetRegistry.reorderWidgets(mapActivity);
+		widgetRegistry.reorderWidgets(ScreenLayoutMode.getDefault(mapActivity));
 		recreateControls();
 	}
 
@@ -454,7 +455,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		if (mapActivity == null) {
 			return;
 		}
-		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+		boolean transparent = view.getSettings().getTransparentMapThemePreference(layoutMode).get();
 		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 		boolean following = routeLayer.getHelper().isFollowingMode();
 		int calcThemeId = (transparent ? 4 : 0) | (nightMode ? 2 : 0) | (following ? 1 : 0);
@@ -498,7 +500,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 	@NonNull
 	private TextState calculateTextState(boolean verticalWidget) {
-		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(requireMapActivity());
+		boolean transparent = view.getSettings().getTransparentMapThemePreference(layoutMode).get();
 		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 		boolean following = routeLayer.getHelper().isFollowingMode();
 		TextState ts = new TextState();

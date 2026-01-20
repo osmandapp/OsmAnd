@@ -120,7 +120,8 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 	}
 
 	private void applyShadow() {
-		boolean isTransparentWidgets = app.getSettings().TRANSPARENT_MAP_THEME.get();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
+		boolean isTransparentWidgets = app.getSettings().getTransparentMapThemePreference(layoutMode).get();
 		setClipToPadding(false);
 		setOutlineProvider(ViewOutlineProvider.BOUNDS);
 		ViewCompat.setElevation(this, isAnyRowVisible() && !isTransparentWidgets? 5f : 0);
@@ -134,8 +135,9 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 			listener.isVisible(isAnyRowVisible);
 		}
 		if (InsetsUtils.isEdgeToEdgeSupported() && !topPanel) {
-			boolean isTransparentWidgets = app.getSettings().TRANSPARENT_MAP_THEME.get();
-			if (isAnyRowVisible && !isTransparentWidgets) {
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
+			boolean transparentWidgets = app.getSettings().getTransparentMapThemePreference(layoutMode).get();
+			if (isAnyRowVisible && !transparentWidgets) {
 				setBackgroundColor(ColorUtilities.getWidgetBackgroundColor(app, nightMode));
 			} else {
 				setBackgroundColor(Color.TRANSPARENT);
@@ -279,11 +281,12 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 
 	@NonNull
 	protected List<Set<MapWidgetInfo>> getWidgetsToShow(ApplicationMode mode, List<MapWidget> widgetsToShow) {
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
 		Set<MapWidgetInfo> allPanelWidget = widgetRegistry.getWidgetsForPanel(getWidgetsPanel());
 
 		Map<Integer, Set<MapWidgetInfo>> rowWidgetMap = new TreeMap<>();
 		for (MapWidgetInfo widgetInfo : allPanelWidget) {
-			if (widgetInfo.isEnabledForAppMode(mode, ScreenLayoutMode.getDefault(getContext()))) {
+			if (widgetInfo.isEnabledForAppMode(mode, layoutMode)) {
 				addWidgetViewToPage(rowWidgetMap, widgetInfo.pageIndex, widgetInfo);
 				widgetsToShow.add(widgetInfo.widget);
 			} else {
@@ -355,9 +358,10 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 			this.flatOrderedWidgets = flatOrderedWidgets;
 
 			ApplicationMode appMode = settings.getApplicationMode();
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
 			for (int j = 0; j < rowWidgets.size(); j++) {
 				MapWidgetInfo widgetInfo = rowWidgets.get(j);
-				if (widgetInfo.isEnabledForAppMode(appMode, ScreenLayoutMode.getDefault(getContext()))) {
+				if (widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
 					enabledMapWidgets.add(widgetInfo);
 				} else {
 					widgetInfo.widget.detachView(getWidgetsPanel(), rowWidgets, appMode);
@@ -386,7 +390,8 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 			updateFullRowState(enabledMapWidgets, visibleViewsInRowCount);
 			updateValueAlign(enabledMapWidgets, visibleViewsInRowCount);
 
-			boolean transparentMode = app.getSettings().TRANSPARENT_MAP_THEME.get();
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
+			boolean transparentMode = app.getSettings().getTransparentMapThemePreference(layoutMode).get();
 			boolean lastRow = index == totalRows - 1;
 			boolean firstRow = index == 0;
 

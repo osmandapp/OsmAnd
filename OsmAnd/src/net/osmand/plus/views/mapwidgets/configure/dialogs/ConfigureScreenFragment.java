@@ -105,11 +105,18 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 		mapActivity = (MapActivity) requireMyActivity();
 		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
 		widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, appMode);
+
+		if (savedInstanceState != null) {
+			setLayoutMode(AndroidUtils.getSerializable(savedInstanceState, SCREEN_LAYOUT_MODE, ScreenLayoutMode.class));
+		} else {
+			setLayoutMode(ScreenLayoutMode.getDefault(mapActivity));
+		}
 	}
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+			@Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View view = inflate(R.layout.fragment_configure_screen, container, false);
 		if (!InsetsUtils.isEdgeToEdgeSupported()) {
@@ -274,19 +281,33 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 			public void onTabReselected(Tab tab) {
 			}
 		});
+		updateTabs();
 	}
 
-	private void updateTabsVisibility() {
-		boolean useSeparate = settings.USE_SEPARATE_LAYOUTS.get();
-		AndroidUiHelper.updateVisibility(tabLayout, useSeparate);
+	private void updateTabs() {
+		if (tabLayout == null) {
+			return;
+		}
+		boolean separate = settings.USE_SEPARATE_LAYOUTS.get();
+		AndroidUiHelper.updateVisibility(tabLayout, separate);
+
+		if (separate && layoutMode[0] != null) {
+			for (int i = 0; i < tabLayout.getTabCount(); i++) {
+				Tab tab = tabLayout.getTabAt(i);
+				if (tab != null && tab.getTag() == layoutMode[0] && !tab.isSelected()) {
+					tab.select();
+					break;
+				}
+			}
+		}
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 
+		updateTabs();
 		updateCards();
-		updateTabsVisibility();
 
 		settings.SHOW_DISTANCE_RULER.addListener(getDistanceByTapListener());
 		settings.POSITION_PLACEMENT_ON_MAP.addListener(getDisplayPositionListener());
@@ -321,6 +342,15 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 		app.getMapButtonsHelper().removeUpdatesListener(this);
 		widgetRegistry.removeWidgetsRegistryListener(this);
 		mapActivity.enableDrawer();
+	}
+
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (layoutMode[0] != null) {
+			outState.putSerializable(SCREEN_LAYOUT_MODE, layoutMode);
+		}
 	}
 
 	@Override
@@ -452,7 +482,7 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 		if (separateLayoutsListener == null) {
 			separateLayoutsListener = change -> app.runInUIThread(() -> {
 				setLayoutMode(change ? ScreenLayoutMode.getDefault(mapActivity) : null);
-				updateTabsVisibility();
+				updateTabs();
 				updateCards();
 			});
 		}

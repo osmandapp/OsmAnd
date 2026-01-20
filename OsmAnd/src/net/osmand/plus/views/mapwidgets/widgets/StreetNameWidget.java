@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -115,7 +116,8 @@ public class StreetNameWidget extends MapWidget {
 
 	private void setupLongClickListener() {
 		view.setOnLongClickListener(v -> {
-			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode, true);
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
+			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
 			return true;
 		});
 	}
@@ -384,7 +386,8 @@ public class StreetNameWidget extends MapWidget {
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
-		if (updatedVisibility && widgetType.getPanel(settings, ScreenLayoutMode.getDefault(mapActivity)) == WidgetsPanel.TOP) {
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getMapActivity());
+		if (updatedVisibility && widgetType.getPanel(settings, layoutMode) == WidgetsPanel.TOP) {
 			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {
 				mapInfoLayer.updateVerticalPanels();
@@ -394,9 +397,11 @@ public class StreetNameWidget extends MapWidget {
 		return updatedVisibility;
 	}
 
-	private boolean isAnyStreetNameEnabledForMode(@NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
+	private boolean isAnyStreetNameEnabledForMode(@NonNull FragmentActivity activity,
+			@NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
 		for (MapWidgetInfo widgetInfo : widgets) {
-			if (widgetInfo.getWidgetType() == STREET_NAME && widgetInfo.isEnabledForAppMode(mode, ScreenLayoutMode.getDefault(mapActivity))) {
+			if (widgetInfo.getWidgetType() == STREET_NAME && widgetInfo.isEnabledForAppMode(mode, layoutMode)) {
 				return true;
 			}
 		}

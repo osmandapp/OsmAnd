@@ -269,8 +269,8 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 	private void loadWidgets() {
 		int filter = AVAILABLE_MODE | DEFAULT_MODE;
 
-		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanel(
-				requireMapActivity(), selectedAppMode, filter, Collections.singletonList(selectedPanel), getScreenLayoutMode());
+		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanel(requireMapActivity(),
+				selectedAppMode, getScreenLayoutMode(), filter, Collections.singletonList(selectedPanel));
 		boolean hasAvailableWidgets = !Algorithms.isEmpty(availableWidgets);
 
 		if (hasAvailableWidgets) {

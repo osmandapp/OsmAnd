@@ -175,7 +175,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 
 		int filter = ENABLED_MODE | MATCHING_PANELS_MODE;
 		List<WidgetsPanel> panels = Collections.singletonList(widgetPanel);
-		List<MapWidgetInfo> widgetInfos = new ArrayList<>(widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, panels, layoutMode));
+		List<MapWidgetInfo> widgetInfos = new ArrayList<>(widgetRegistry.getWidgetsForPanel(mapActivity, appMode, layoutMode, filter, panels));
 
 		int index = widgetInfos.indexOf(widgetInfo);
 		if (index == -1) {
@@ -195,7 +195,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		if (widgetState != null) {
 			widgetState.copyPrefs(appMode, duplicateId);
 		}
-		duplicateWidgetInfo.enableDisableForMode(appMode, layoutMode, true);
+		duplicateWidgetInfo.enableDisableForMode(appMode, true, layoutMode);
 		widgetInfo.widget.copySettings(appMode, duplicateId);
 
 		Map<Integer, List<String>> pagedOrder = new LinkedHashMap<>();
@@ -417,9 +417,9 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	}
 
 	private static void showInstance(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
-			@Nullable Fragment target, @NonNull ApplicationMode appMode,
-			@NonNull String widgetId, @NonNull WidgetsPanel widgetsPanel,
-			boolean addNewWidgetMode, @Nullable ScreenLayoutMode layoutMode) {
+	                                 @Nullable Fragment target, @NonNull ApplicationMode appMode,
+	                                 @NonNull String widgetId, @NonNull WidgetsPanel widgetsPanel,
+	                                 boolean addNewWidgetMode, @Nullable ScreenLayoutMode layoutMode) {
 		String tag = fragment.getClass().getSimpleName();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, tag, true)) {
 			Bundle args = new Bundle();
@@ -443,14 +443,14 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
-			@Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId,
-			@NonNull WidgetsPanel widgetsPanel, @Nullable ScreenLayoutMode layoutMode) {
+	                                @Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId,
+	                                @NonNull WidgetsPanel widgetsPanel, @Nullable ScreenLayoutMode layoutMode) {
 		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, false, layoutMode);
 	}
 
 	public static void showAddWidgetFragment(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
-			@Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId,
-			@NonNull WidgetsPanel widgetsPanel, @Nullable ScreenLayoutMode layoutMode) {
+	                                @Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId,
+	                                @NonNull WidgetsPanel widgetsPanel, @Nullable ScreenLayoutMode layoutMode) {
 		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, true, layoutMode);
 	}
 }

@@ -36,7 +36,8 @@ public class WidgetsContextMenu {
 
 	static public void showMenu(@NonNull View view, @NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 	                            @Nullable String customId, @Nullable List<PopUpMenuItem> widgetActions,
-	                            WidgetsPanel widgetsPanel, boolean nightMode, boolean usedOnMap) {
+	                            @Nullable ScreenLayoutMode layoutMode, WidgetsPanel widgetsPanel,
+	                            boolean nightMode, boolean usedOnMap) {
 		boolean verticalWidget = widgetsPanel.isPanelVertical();
 		OsmandApplication app = mapActivity.getApp();
 		OsmandSettings settings = app.getSettings();
@@ -77,7 +78,7 @@ public class WidgetsContextMenu {
 							args.putString(KEY_WIDGET_ID, widgetInfo.key);
 							args.putString(KEY_APP_MODE, appMode.getStringKey());
 							FragmentManager manager = mapActivity.getSupportFragmentManager();
-							WidgetInfoBaseFragment.showInstance(manager, fragment, null, appMode, widgetInfo.key, widgetsPanel, ScreenLayoutMode.getDefault(mapActivity));
+							WidgetInfoBaseFragment.showInstance(manager, fragment, null, appMode, widgetInfo.key, widgetsPanel, layoutMode);
 						})
 						.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_settings_outlined, iconColor))
 						.showTopDivider(Algorithms.isEmpty(widgetActions) && !items.isEmpty())
@@ -87,7 +88,7 @@ public class WidgetsContextMenu {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_delete)
 					.setOnClickListener(item -> DeleteWidgetConfirmationController.showDialog(
-							mapActivity, appMode, widgetInfo, usedOnMap, null, ScreenLayoutMode.getDefault(mapActivity))
+							mapActivity, appMode, widgetInfo, usedOnMap, null, layoutMode)
 					)
 					.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_delete_outlined, iconColor))
 					.showTopDivider(true)

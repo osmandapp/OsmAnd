@@ -47,8 +47,7 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		return R.layout.configure_widgets_card;
 	}
 
-	public ConfigureWidgetsCard(@NonNull MapActivity mapActivity,
-			@NonNull ScreenLayoutMode[] layoutMode) {
+	public ConfigureWidgetsCard(@NonNull MapActivity mapActivity, @NonNull ScreenLayoutMode[] layoutMode) {
 		super(mapActivity, false);
 		this.layoutMode = layoutMode;
 		this.widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
@@ -74,8 +73,7 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		setupTransparentWidgetsButton(appMode);
 	}
 
-	private void setupWidgetGroupView(@NonNull View view, @NonNull WidgetsPanel panel,
-			@NonNull ApplicationMode appMode) {
+	private void setupWidgetGroupView(@NonNull View view, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		boolean rtl = AndroidUtils.isLayoutRtl(app);
 		int count = getWidgetsCount(panel, appMode);
 
@@ -103,15 +101,14 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 
 	private int getWidgetsCount(@NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		int filter = ENABLED_MODE | AVAILABLE_MODE | MATCHING_PANELS_MODE;
-		return widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, Collections.singletonList(panel), layoutMode[0]).size();
+		return widgetRegistry.getWidgetsForPanel(mapActivity, appMode, layoutMode[0], filter, Collections.singletonList(panel)).size();
 	}
 
 	private void setupTransparentWidgetsButton(@NonNull ApplicationMode appMode) {
 		View button = view.findViewById(R.id.transparent_widgets_button);
 
-		boolean enabled = settings.TRANSPARENT_MAP_THEME.getModeValue(appMode);
-		ConfigureButtonsCard.setupButton(button, getString(R.string.map_widget_transparent),
-				null, R.drawable.ic_action_appearance, enabled, nightMode);
+		boolean enabled = settings.getTransparentMapThemePreference(layoutMode[0]).getModeValue(appMode);
+		ConfigureButtonsCard.setupButton(button, getString(R.string.map_widget_transparent), null, R.drawable.ic_action_appearance, enabled, nightMode);
 
 		CompoundButton compoundButton = button.findViewById(R.id.compound_button);
 		compoundButton.setChecked(enabled);
@@ -129,8 +126,8 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		compoundButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
 			icon.setColorFilter(isChecked ? activeColor : defColor);
 
-			boolean transparent = settings.TRANSPARENT_MAP_THEME.get();
-			settings.TRANSPARENT_MAP_THEME.setModeValue(appMode, !transparent);
+			boolean transparent = settings.getTransparentMapThemePreference(layoutMode[0]).get();
+			settings.getTransparentMapThemePreference(layoutMode[0]).setModeValue(appMode, !transparent);
 			mapActivity.updateApplicationModeSettings();
 		});
 		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), true);

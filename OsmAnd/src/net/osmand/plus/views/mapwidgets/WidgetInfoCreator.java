@@ -21,12 +21,11 @@ public class WidgetInfoCreator {
 	private final ApplicationMode appMode;
 	private final ScreenLayoutMode layoutMode;
 
-	public WidgetInfoCreator(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode,
-			@Nullable ScreenLayoutMode layoutMode) {
+	public WidgetInfoCreator(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		this.app = app;
 		this.appMode = appMode;
 		this.layoutMode = layoutMode;
-		this.settings = app.getSettings();
+		settings = app.getSettings();
 	}
 
 	@Nullable
@@ -39,9 +38,8 @@ public class WidgetInfoCreator {
 	}
 
 	@Nullable
-	public MapWidgetInfo createWidgetInfo(@NonNull MapWidgetsFactory factory,
-	                                      @NonNull String key, @NonNull WidgetType widgetType) {
-		WidgetsPanel panel = widgetType.getPanel(key, appMode, settings, layoutMode);
+	public MapWidgetInfo createWidgetInfo(@NonNull MapWidgetsFactory factory, @NonNull String key, @NonNull WidgetType widgetType) {
+		WidgetsPanel panel = widgetType.getPanel(key, appMode, layoutMode, settings);
 		MapWidget widget = factory.createMapWidget(key, widgetType, panel);
 		if (widget != null) {
 			return askCreateWidgetInfo(key, widget, widgetType, panel);
@@ -55,9 +53,9 @@ public class WidgetInfoCreator {
 		WidgetType widgetType = widget.getWidgetType();
 		if (widgetType != null) {
 			String widgetId = widgetType.id;
-			WidgetsPanel panel = widgetType.getPanel(widgetId, appMode, settings, layoutMode);
-			int page = panel.getWidgetPage(appMode, widgetId, settings, layoutMode);
-			int order = panel.getWidgetOrder(appMode, widgetId, settings, layoutMode);
+			WidgetsPanel panel = widgetType.getPanel(widgetId, appMode, layoutMode, settings);
+			int page = panel.getWidgetPage(appMode, layoutMode, widgetId, settings);
+			int order = panel.getWidgetOrder(appMode, layoutMode, widgetId, settings);
 			return createWidgetInfo(widgetId, widget, widgetType.dayIconId, widgetType.nightIconId,
 					widgetType.titleId, null, page, order, panel);
 		}
@@ -72,8 +70,8 @@ public class WidgetInfoCreator {
 	                                          @NonNull WidgetsPanel defaultPanel,
 	                                          int order) {
 		WidgetsPanel panel = getExternalWidgetPanel(widgetId, defaultPanel);
-		int page = panel.getWidgetPage(appMode, widgetId, settings, layoutMode);
-		int savedOrder = panel.getWidgetOrder(appMode, widgetId, settings, layoutMode);
+		int page = panel.getWidgetPage(appMode, layoutMode, widgetId, settings);
+		int savedOrder = panel.getWidgetOrder(appMode, layoutMode, widgetId, settings);
 		if (savedOrder != WidgetsPanel.DEFAULT_ORDER) {
 			order = savedOrder;
 		}
@@ -84,8 +82,8 @@ public class WidgetInfoCreator {
 	@NonNull
 	private WidgetsPanel getExternalWidgetPanel(@NonNull String widgetId,
 	                                            @NonNull WidgetsPanel defaultPanel) {
-		boolean storedInLeftPanel = WidgetsPanel.LEFT.getWidgetOrder(appMode, widgetId, settings, layoutMode) != WidgetsPanel.DEFAULT_ORDER;
-		boolean storedInRightPanel = WidgetsPanel.RIGHT.getWidgetOrder(appMode, widgetId, settings, layoutMode) != WidgetsPanel.DEFAULT_ORDER;
+		boolean storedInLeftPanel = WidgetsPanel.LEFT.getWidgetOrder(appMode, layoutMode, widgetId, settings) != WidgetsPanel.DEFAULT_ORDER;
+		boolean storedInRightPanel = WidgetsPanel.RIGHT.getWidgetOrder(appMode, layoutMode, widgetId, settings) != WidgetsPanel.DEFAULT_ORDER;
 		if (storedInLeftPanel) {
 			return WidgetsPanel.LEFT;
 		} else if (storedInRightPanel) {
@@ -107,8 +105,8 @@ public class WidgetInfoCreator {
 	@NonNull
 	private MapWidgetInfo createCustomWidgetInfo(@NonNull String widgetId, @NonNull MapWidget widget,
 	                                             @NonNull WidgetType widgetType, @NonNull WidgetsPanel panel) {
-		int page = panel.getWidgetPage(appMode, widgetId, settings, layoutMode);
-		int order = panel.getWidgetOrder(appMode, widgetId, settings, layoutMode);
+		int page = panel.getWidgetPage(appMode, layoutMode, widgetId, settings);
+		int order = panel.getWidgetOrder(appMode, layoutMode, widgetId, settings);
 		return createWidgetInfo(widgetId, widget, widgetType.dayIconId, widgetType.nightIconId,
 				widgetType.titleId, null, page, order, panel);
 	}

@@ -111,7 +111,8 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 			return;
 		}
 		List<Set<MapWidgetInfo>> widgets = widgetRegistry.getPagedWidgetsForPanel(activity,
-				appMode, widgetInfo.getWidgetPanel(), AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE, layoutMode);
+				appMode, layoutMode, widgetInfo.getWidgetPanel(),
+				AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
 
 		for (Set<MapWidgetInfo> rowMapWidgetsInfo : widgets) {
 			for (MapWidgetInfo info : rowMapWidgetsInfo) {

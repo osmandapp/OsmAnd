@@ -89,7 +89,9 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		this.horizontalMini = horizontalMini;
 		widgetState = new ResizableWidgetState(app, customId, widgetType, WidgetSize.MEDIUM);
 
-		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(customId != null ? customId : widgetType.id, settings, ScreenLayoutMode.getDefault(mapActivity));
+		String id = customId != null ? customId : widgetType.id;
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(id, settings, layoutMode);
 		setVerticalWidget(selectedPanel);
 		setupViews();
 
@@ -120,7 +122,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		findViews();
 		updateWidgetView();
 		setOnLongClickListener(v -> {
-			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode, true);
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
+			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
 			return true;
 		});
 		setOnClickListener(getOnClickListener());

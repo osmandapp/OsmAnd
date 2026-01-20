@@ -253,7 +253,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private boolean isWidgetVisible(@NonNull MapWidgetInfo widgetInfo) {
-		return widgetRegistry.isWidgetVisible(widgetInfo.key, requireMapActivity());
+		return widgetRegistry.isWidgetVisible(requireMapActivity(), widgetInfo.key);
 	}
 
 	private boolean isPanelVisible(WidgetsPanel widgetsPanel) {

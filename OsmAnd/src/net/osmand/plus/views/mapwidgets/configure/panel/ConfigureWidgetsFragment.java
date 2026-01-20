@@ -544,7 +544,8 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 				String selectedWidget = args.getString(CONTEXT_SELECTED_WIDGET);
 				boolean addToNext = args.getBoolean(ADD_TO_NEXT);
 				if (selectedWidget != null) {
-					createNewWidget(requireMapActivity(), widgetInfo, selectedPanel, selectedAppMode, true, selectedWidget, addToNext, layoutMode);
+					createNewWidget(requireMapActivity(), widgetInfo, selectedPanel, selectedAppMode,
+							layoutMode, true, selectedWidget, addToNext);
 					onWidgetsConfigurationChanged();
 					return;
 				}

@@ -278,7 +278,8 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
-		if (updatedVisibility && widgetType.getPanel(settings, ScreenLayoutMode.getDefault(mapActivity)) == WidgetsPanel.TOP) {
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+		if (updatedVisibility && widgetType.getPanel(settings, layoutMode) == WidgetsPanel.TOP) {
 			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {
 				mapInfoLayer.updateVerticalPanels();

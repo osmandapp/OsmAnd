@@ -44,9 +44,10 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 	private ViewHolderBindListener bindListener;
 
 	public WidgetsPagerAdapter(@NonNull Context context, @NonNull WidgetsPanel widgetsPanel) {
-		OsmandApplication app = AndroidUtils.getApp(context);
 		this.context = context;
 		this.widgetsPanel = widgetsPanel;
+
+		OsmandApplication app = AndroidUtils.getApp(context);
 		settings = app.getSettings();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		visiblePages = collectVisiblePages();
@@ -107,19 +108,18 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 	public VisiblePages collectVisiblePages() {
 		Map<Integer, List<View>> visibleViews = new TreeMap<>();
 		ApplicationMode appMode = settings.getApplicationMode();
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
 		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(widgetsPanel);
 
-		collectVisibleViews(visibleViews, widgetInfos, appMode, layoutMode);
+		collectVisibleViews(visibleViews, widgetInfos, appMode);
 
 		return new VisiblePages(visibleViews);
 	}
 
 	public void collectVisibleViews(@NonNull Map<Integer, List<View>> visibleViews,
 	                                @NonNull Set<MapWidgetInfo> widgets,
-	                                @NonNull ApplicationMode appMode,
-	                                @Nullable ScreenLayoutMode layoutMode) {
+	                                @NonNull ApplicationMode appMode) {
 		Map<Integer, List<MapWidget>> textInfoWidgets = new TreeMap<>();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
 		for (MapWidgetInfo widgetInfo : widgets) {
 			if (widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
 				MapWidget widget = widgetInfo.widget;

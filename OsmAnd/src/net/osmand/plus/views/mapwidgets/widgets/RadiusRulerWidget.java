@@ -92,10 +92,10 @@ public class RadiusRulerWidget extends SimpleWidget {
 
 	@Nullable
 	@Override
-	public CommonPreference<?> getWidgetSettingsPrefToReset(@NonNull ApplicationMode appMode) {
+	public CommonPreference<?> getWidgetSettingsPrefToReset(@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		MapWidgetRegistry mapWidgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Set<MapWidgetInfo> widgetInfos = mapWidgetRegistry
-				.getWidgetsForPanel(mapActivity, appMode, ENABLED_MODE, Collections.singletonList(WidgetsPanel.LEFT), ScreenLayoutMode.getDefault(mapActivity));
+		Set<MapWidgetInfo> widgetInfos = mapWidgetRegistry.getWidgetsForPanel(mapActivity, appMode,
+				layoutMode, ENABLED_MODE, Collections.singletonList(WidgetsPanel.LEFT));
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
 			MapWidget widget = widgetInfo.widget;
 			boolean anotherRulerWidgetPresent = widget instanceof RadiusRulerWidget && !widget.equals(this);

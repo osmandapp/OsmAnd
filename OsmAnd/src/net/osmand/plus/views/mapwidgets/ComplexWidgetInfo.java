@@ -43,10 +43,9 @@ public class ComplexWidgetInfo extends MapWidgetInfo {
 
 	@NonNull
 	@Override
-	public WidgetsPanel getUpdatedPanel() {
+	public WidgetsPanel getUpdatedPanel(ScreenLayoutMode layoutMode) {
 		OsmandSettings settings = widget.getMyApplication().getSettings();
 		WidgetType widgetType = getWidgetType();
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(widget.getMapActivity());
 		if (widgetType != null) {
 			return widgetType.getPanel(key, settings, layoutMode);
 		} else {

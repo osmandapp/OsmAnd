@@ -2139,27 +2139,13 @@ public class OsmandSettings {
 		return builder.toString();
 	}
 
-	public ListStringPreference getPanelOrderPreference(@NonNull WidgetsPanel panel, @Nullable ScreenLayoutMode layoutMode) {
-		if (panel == WidgetsPanel.LEFT) {
-			return getLayoutPreference(LEFT_WIDGET_PANEL_ORDER, layoutMode);
-		} else if (panel == WidgetsPanel.RIGHT) {
-			return getLayoutPreference(RIGHT_WIDGET_PANEL_ORDER, layoutMode);
-		} else if (panel == WidgetsPanel.TOP) {
-			return getLayoutPreference(TOP_WIDGET_PANEL_ORDER, layoutMode);
-		} else if (panel == WidgetsPanel.BOTTOM) {
-			return getLayoutPreference(BOTTOM_WIDGET_PANEL_ORDER, layoutMode);
-		}
-		throw new IllegalStateException("Unsupported panel");
-	}
-
+	private final ListStringPreference CUSTOM_WIDGETS_KEYS = (ListStringPreference) new ListStringPreference(this, "custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
 
 	public ListStringPreference getCustomWidgetsKeys(@Nullable ScreenLayoutMode layoutMode) {
 		return getLayoutPreference(CUSTOM_WIDGETS_KEYS, layoutMode);
 	}
 
 	public final OsmandPreference<Boolean> USE_SEPARATE_LAYOUTS = new BooleanPreference(this, "use_separate_layouts", false).makeProfile();
-
-	private final ListStringPreference CUSTOM_WIDGETS_KEYS = (ListStringPreference) new ListStringPreference(this, "custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
 
 	public final OsmandPreference<Integer> DISPLAYED_MARKERS_WIDGETS_COUNT = new IntPreference(this, "displayed_markers_widgets_count", 1).makeProfile();
 
@@ -3397,8 +3383,12 @@ public class OsmandSettings {
 			new IntPreference(this, "live_updates_retryes", 2).makeGlobal();
 
 	// UI boxes
-	public final CommonPreference<Boolean> TRANSPARENT_MAP_THEME =
+	private final CommonPreference<Boolean> TRANSPARENT_MAP_THEME =
 			new BooleanPreference(this, "transparent_map_theme", false).makeProfile();
+
+	public CommonPreference<Boolean> getTransparentMapThemePreference(@Nullable ScreenLayoutMode layoutMode){
+		return getLayoutPreference(TRANSPARENT_MAP_THEME, layoutMode);
+	}
 
 	public final CommonPreference<Boolean> SHOW_STREET_NAME = new BooleanPreference(this, "show_street_name", false).makeProfile();
 

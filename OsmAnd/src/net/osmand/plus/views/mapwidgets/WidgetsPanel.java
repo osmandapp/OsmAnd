@@ -2,7 +2,6 @@ package net.osmand.plus.views.mapwidgets;
 
 import static net.osmand.plus.settings.enums.ScreenLayoutMode.PORTRAIT;
 
-import android.content.Context;
 import android.text.TextUtils;
 import android.util.Pair;
 
@@ -17,7 +16,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -113,30 +111,29 @@ public enum WidgetsPanel {
 		return order != -1 ? order : DEFAULT_ORDER;
 	}
 
-	public int getWidgetPage(@NonNull String widgetId, @NonNull OsmandSettings settings,
-			@Nullable ScreenLayoutMode layoutMode) {
-		return getWidgetPage(settings.getApplicationMode(), widgetId, settings, layoutMode);
+	public int getWidgetPage(@NonNull String widgetId, @NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
+		return getWidgetPage(settings.getApplicationMode(),layoutMode, widgetId, settings);
 	}
 
-	public int getWidgetPage(@NonNull ApplicationMode appMode, @NonNull String widgetId,
-			@NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
+	public int getWidgetPage(@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode,
+			@NonNull String widgetId, @NonNull OsmandSettings settings) {
 		return getPagedOrder(appMode, widgetId, settings, layoutMode).first;
 	}
 
-	public int getWidgetOrder(@NonNull String widgetId, @NonNull OsmandSettings settings,
-			@Nullable ScreenLayoutMode layoutMode) {
-		return getWidgetOrder(settings.getApplicationMode(), widgetId, settings, layoutMode);
+	public int getWidgetOrder(@NonNull String widgetId, @NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
+		return getWidgetOrder(settings.getApplicationMode(), layoutMode, widgetId, settings);
 	}
 
-	public int getWidgetOrder(@NonNull ApplicationMode appMode, @NonNull String widgetId,
-			@NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
+	public int getWidgetOrder(@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode,
+			@NonNull String widgetId, @NonNull OsmandSettings settings) {
 		return getPagedOrder(appMode, widgetId, settings, layoutMode).second;
 	}
 
 	@NonNull
 	private Pair<Integer, Integer> getPagedOrder(@NonNull ApplicationMode appMode,
-			@NonNull String widgetId, @NonNull OsmandSettings settings,
-			@Nullable ScreenLayoutMode layoutMode) {
+	                                             @NonNull String widgetId,
+	                                             @NonNull OsmandSettings settings,
+	                                             @Nullable ScreenLayoutMode layoutMode) {
 		ListStringPreference preference = getOrderPreference(settings, layoutMode);
 		List<String> pages = preference.getStringsListForProfile(appMode);
 		if (!Algorithms.isEmpty(pages)) {
@@ -198,19 +195,27 @@ public enum WidgetsPanel {
 		return orderPreference.setModeValue(appMode, stringBuilder.toString());
 	}
 
-	public boolean contains(@NonNull String widgetId, @NonNull Context context) {
-		OsmandSettings settings = AndroidUtils.getApp(context).getSettings();
-		return contains(widgetId, settings, settings.getApplicationMode(), ScreenLayoutMode.getDefault(context));
+	public boolean contains(@NonNull String widgetId, @NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
+		return contains(widgetId, settings, settings.getApplicationMode(), layoutMode);
 	}
 
 	public boolean contains(@NonNull String widgetId, @NonNull OsmandSettings settings,
 			@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
-		return getWidgetOrder(appMode, widgetId, settings, layoutMode) != DEFAULT_ORDER;
+		return getWidgetOrder(appMode,layoutMode, widgetId, settings) != DEFAULT_ORDER;
 	}
 
 	@NonNull
 	public ListStringPreference getOrderPreference(@NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
-		return settings.getPanelOrderPreference(this, layoutMode);
+		if (this == LEFT) {
+			return settings.getLayoutPreference(settings.LEFT_WIDGET_PANEL_ORDER, layoutMode);
+		} else if (this == RIGHT) {
+			return settings.getLayoutPreference(settings.RIGHT_WIDGET_PANEL_ORDER, layoutMode);
+		} else if (this == TOP) {
+			return settings.getLayoutPreference(settings.TOP_WIDGET_PANEL_ORDER, layoutMode);
+		} else if (this == BOTTOM) {
+			return settings.getLayoutPreference(settings.BOTTOM_WIDGET_PANEL_ORDER, layoutMode);
+		}
+		throw new IllegalStateException("Unsupported panel");
 	}
 
 	public boolean isPanelVertical() {

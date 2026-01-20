@@ -6,6 +6,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleEl
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
@@ -208,13 +209,14 @@ public class WidgetsVisibilityHelper {
 		return shouldShowElementOnActiveScreen(SPEEDOMETER);
 	}
 
-	public static boolean isWidgetEnabled(@NonNull MapActivity activity,
-			@NonNull WidgetsPanel panel, @NonNull String... widgetsIds) {
+	public static boolean isWidgetEnabled(@NonNull MapActivity activity, @NonNull WidgetsPanel panel,
+			@Nullable ScreenLayoutMode layoutMode, @NonNull String... widgetsIds) {
 		OsmandApplication app = activity.getApp();
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
+
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(activity, appMode, ENABLED_MODE, Collections.singletonList(panel), layoutMode);
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(activity, appMode,
+				layoutMode, ENABLED_MODE, Collections.singletonList(panel));
 
 		for (MapWidgetInfo widgetInfo : enabledWidgets) {
 			if (CollectionUtils.containsAny(widgetInfo.key, widgetsIds)) {

@@ -82,9 +82,11 @@
 			android:layout_height="wrap_content"
 			app:tabGravity="fill"
 			app:tabIndicatorColor="?attr/active_color_primary"
+			app:tabMaxWidth="0dp"
 			app:tabMode="fixed"
 			app:tabSelectedTextColor="?attr/active_color_primary"
-			app:tabTextAppearance="?attr/tab_layout_no_caps_theme" />
+			app:tabTextAppearance="?attr/tab_layout_no_caps_theme"
+			app:tabTextColor="?android:textColorPrimary" />
 
 	</com.google.android.material.appbar.AppBarLayout>
 

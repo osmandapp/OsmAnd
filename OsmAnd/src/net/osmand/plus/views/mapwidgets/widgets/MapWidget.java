@@ -65,7 +65,8 @@ public abstract class MapWidget {
 		this.view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
 
 		String id = customId != null ? customId : widgetType.id;
-		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(id, settings, ScreenLayoutMode.getDefault(mapActivity));
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(id, settings, layoutMode);
 		setPanel(selectedPanel);
 	}
 
@@ -86,7 +87,7 @@ public abstract class MapWidget {
 	 * @return preference that needs to be reset after deleting widget
 	 */
 	@Nullable
-	public CommonPreference<?> getWidgetSettingsPrefToReset(@NonNull ApplicationMode appMode) {
+	public CommonPreference<?> getWidgetSettingsPrefToReset(@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		return null;
 	}
 

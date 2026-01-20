@@ -20,15 +20,15 @@ public class DeleteWidgetConfirmationController extends BaseDialogController {
 
 	private final ApplicationMode appMode;
 	private final MapWidgetInfo widgetInfo;
-	private final MapWidgetRegistry widgetRegistry;
 	private final ScreenLayoutMode layoutMode;
+	private final MapWidgetRegistry widgetRegistry;
 
 	private OnCompleteCallback onWidgetDeletedCallback;
 
 	public DeleteWidgetConfirmationController(@NonNull OsmandApplication app,
-			@NonNull ApplicationMode appMode,
-			@NonNull MapWidgetInfo widgetInfo,
-			@Nullable ScreenLayoutMode layoutMode) {
+											  @NonNull ApplicationMode appMode,
+											  @NonNull MapWidgetInfo widgetInfo,
+											  @Nullable ScreenLayoutMode layoutMode) {
 		super(app);
 		this.appMode = appMode;
 		this.widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
@@ -54,11 +54,10 @@ public class DeleteWidgetConfirmationController extends BaseDialogController {
 		}
 	}
 
-	public static void askUpdateListener(@NonNull OsmandApplication app,
-	                                     @Nullable OnCompleteCallback onWidgetDeletedCallback) {
+	public static void askUpdateListener(@NonNull OsmandApplication app, @Nullable OnCompleteCallback callback) {
 		DeleteWidgetConfirmationController controller = getExistedInstance(app);
 		if (controller != null) {
-			controller.setListener(onWidgetDeletedCallback);
+			controller.setListener(callback);
 		}
 	}
 
@@ -68,10 +67,10 @@ public class DeleteWidgetConfirmationController extends BaseDialogController {
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity,
-                              @NonNull ApplicationMode appMode,
-                              @NonNull MapWidgetInfo widgetInfo, boolean usedOnMap,
-                              @Nullable OnCompleteCallback onWidgetDeletedCallback,
-                              @Nullable ScreenLayoutMode layoutMode) {
+	                              @NonNull ApplicationMode appMode,
+	                              @NonNull MapWidgetInfo widgetInfo, boolean usedOnMap,
+	                              @Nullable OnCompleteCallback onWidgetDeletedCallback,
+	                              @Nullable ScreenLayoutMode layoutMode) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		DialogManager dialogManager = app.getDialogManager();
 

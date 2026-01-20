@@ -145,9 +145,10 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		MapActivity mapActivity = requireMapActivity();
 
 		List<List<MapWidgetInfo>> result = new ArrayList<>();
+		ScreenLayoutMode layoutMode = getScreenLayoutMode();
 		int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
 		for (Set<MapWidgetInfo> set : widgetRegistry.getPagedWidgetsForPanel(mapActivity, getAppMode(),
-				selectedPanel, enabledWidgetsFilter, getScreenLayoutMode())) {
+				layoutMode, selectedPanel, enabledWidgetsFilter)) {
 			result.add(new ArrayList<>(set));
 		}
 		return result;
@@ -225,18 +226,20 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 
 	private void applyWidgetsVisibility(@NonNull List<String> enabledWidgetsIds) {
 		ApplicationMode appMode = getAppMode();
+		ScreenLayoutMode layoutMode = getScreenLayoutMode();
 		WidgetsPanel panel = selectedPanel;
 		for (MapWidgetInfo widget : widgetRegistry.getWidgetsForPanel(panel)) {
 			boolean enabledFromApply = enabledWidgetsIds.contains(widget.key);
-			if (widget.isEnabledForAppMode(appMode, getScreenLayoutMode()) != enabledFromApply) {
-				widgetRegistry.enableDisableWidgetForMode(appMode, widget, enabledFromApply, getScreenLayoutMode(), false);
+			if (widget.isEnabledForAppMode(appMode, layoutMode) != enabledFromApply) {
+				widgetRegistry.enableDisableWidgetForMode(appMode, widget, enabledFromApply, layoutMode, false);
 			}
 		}
 	}
 
 	private void applyWidgetsOrder(@NonNull List<List<String>> pagedOrder) {
-		selectedPanel.setWidgetsOrder(getAppMode(), pagedOrder, settings, getScreenLayoutMode());
-		widgetRegistry.reorderWidgets(requireMapActivity());
+		ScreenLayoutMode layoutMode =  getScreenLayoutMode();
+		selectedPanel.setWidgetsOrder(getAppMode(), pagedOrder, settings, layoutMode);
+		widgetRegistry.reorderWidgets(layoutMode);
 	}
 
 	@Override
@@ -283,9 +286,10 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		WidgetInfoBaseFragment settingsBaseFragment = widgetType.getSettingsFragment(app, widgetInfo);
 		if (settingsBaseFragment != null) {
 			ApplicationMode appMode = getAppMode();
+			ScreenLayoutMode layoutMode = getScreenLayoutMode();
 			FragmentManager manager = requireMapActivity().getSupportFragmentManager();
 			WidgetInfoBaseFragment.showInstance(manager, settingsBaseFragment, requireParentFragment(),
-					appMode, widgetInfo.key, selectedPanel, getScreenLayoutMode());
+					appMode, widgetInfo.key, selectedPanel, layoutMode);
 		}
 	}
 
