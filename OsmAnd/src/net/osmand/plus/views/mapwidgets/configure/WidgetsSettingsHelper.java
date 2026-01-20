@@ -85,7 +85,7 @@ public class WidgetsSettingsHelper {
 
 	public void copyConfigureScreenSettings(@NonNull ApplicationMode fromAppMode) {
 		for (WidgetsPanel panel : WidgetsPanel.values()) {
-			copyWidgetsForPanel(fromAppMode, panel);
+			copyWidgetsForPanel(fromAppMode, null, panel);
 		}
 		copyPrefFromAppMode(settings.getTransparentMapThemePreference(layoutMode), fromAppMode);
 		copyPrefFromAppMode(mapButtonsHelper.getCompassButtonState().getVisibilityPref(), fromAppMode);
@@ -94,16 +94,16 @@ public class WidgetsSettingsHelper {
 		copyPrefFromAppMode(settings.DISTANCE_BY_TAP_TEXT_SIZE, fromAppMode);
 		copyPrefFromAppMode(settings.SHOW_SPEEDOMETER, fromAppMode);
 		copyPrefFromAppMode(settings.SPEEDOMETER_SIZE, fromAppMode);
-		copyPrefFromAppMode(mapButtonsHelper.getDefaultSizePref(),fromAppMode);
-		copyPrefFromAppMode(mapButtonsHelper.getDefaultOpacityPref(),fromAppMode);
-		copyPrefFromAppMode(mapButtonsHelper.getDefaultCornerRadiusPref(),fromAppMode);
+		copyPrefFromAppMode(mapButtonsHelper.getDefaultSizePref(), fromAppMode);
+		copyPrefFromAppMode(mapButtonsHelper.getDefaultOpacityPref(), fromAppMode);
+		copyPrefFromAppMode(mapButtonsHelper.getDefaultCornerRadiusPref(), fromAppMode);
 		mapButtonsHelper.copyButtonStatesFromMode(appMode, fromAppMode, mapButtonsHelper.getAllButtonsStates());
 	}
 
-	public void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode, @NonNull WidgetsPanel panel) {
+	public void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode, @Nullable ScreenLayoutMode fromLayoutMode, @NonNull WidgetsPanel panel) {
 		int filter = ENABLED_MODE | AVAILABLE_MODE | MATCHING_PANELS_MODE;
 		List<WidgetsPanel> panels = Collections.singletonList(panel);
-		Set<MapWidgetInfo> widgetInfosToCopy = widgetRegistry.getWidgetsForPanel(mapActivity, fromAppMode, layoutMode,  filter, panels);
+		Set<MapWidgetInfo> widgetInfosToCopy = widgetRegistry.getWidgetsForPanel(mapActivity, fromAppMode, fromLayoutMode, filter, panels);
 
 		int previousPage = -1;
 		List<List<String>> newPagedOrder = new ArrayList<>();

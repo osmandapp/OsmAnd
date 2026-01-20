@@ -22,9 +22,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.PanelsLayoutMode;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
@@ -45,15 +50,21 @@ public class MapHudLayout extends FrameLayout {
 	private static final int REFRESH_VERTICAL_PANELS_ID = UI_HANDLER_MAP_HUD + 2;
 	private static final int REFRESH_ALARMS_CONTAINER_ID = UI_HANDLER_MAP_HUD + 3;
 	private static final int UI_REFRESH_INTERVAL_MILLIS = 100;
-	private static final float TOP_BAR_MAX_WIDTH_PERCENTAGE = 0.6f;
+	private static final float TOP_BAR_MAX_WIDTH_PERCENTAGE_PORTRAIT = 0.4f;
+	private static final float TOP_BAR_MAX_WIDTH_PERCENTAGE_LANDSCAPE = 0.6f;
 
 	private static final Log LOG = PlatformUtil.getLog(MapHudLayout.class);
 
-	protected final OsmandApplication app;
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
 
 	private final List<MapButton> mapButtons = new ArrayList<>();
 	private final Map<View, ButtonPositionSize> widgetPositions = new LinkedHashMap<>();
 	private final Map<View, ButtonPositionSize> additionalWidgetPositions = new LinkedHashMap<>();
+	private final ScreenLayoutMode screenLayoutMode;
+
+	private PanelsLayoutMode panelsLayoutMode;
+	private StateChangedListener<PanelsLayoutMode> panelsLayoutModeListener;
 
 	private View alarmsContainer;
 	private SideWidgetsPanel leftWidgetsPanel;
@@ -68,7 +79,6 @@ public class MapHudLayout extends FrameLayout {
 	private int leftInset;
 	private int rightInset;
 
-	private final boolean tablet;
 	private final boolean portrait;
 
 	private final Paint gridPaint = new Paint();
@@ -92,11 +102,16 @@ public class MapHudLayout extends FrameLayout {
 	public MapHudLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
-		this.app = (OsmandApplication) context.getApplicationContext();
+		this.app = AndroidUtils.getApp(context);
+		this.settings = app.getSettings();
 		this.dpToPx = AndroidUtils.dpToPxF(context, 1);
 		this.panelsMargin = AndroidUtils.dpToPx(context, 16);
-		this.tablet = AndroidUiHelper.isTablet(context);
 		this.portrait = AndroidUiHelper.isOrientationPortrait(context);
+		this.screenLayoutMode = ScreenLayoutMode.getDefault(context);
+
+		CommonPreference<PanelsLayoutMode> preference = settings.getPanelsLayoutMode(context, screenLayoutMode);
+		this.panelsLayoutMode = preference.get();
+		preference.addListener(getPanelsLayoutModeListener());
 
 		gridPaint.setColor(0xE6FF9800); // systemOrange @ 90%
 		gridPaint.setStrokeWidth(1);
@@ -126,6 +141,12 @@ public class MapHudLayout extends FrameLayout {
 		leftWidgetsPanel = findViewById(R.id.map_left_widgets_panel);
 		rightWidgetsPanel = findViewById(R.id.map_right_widgets_panel);
 		bottomWidgetsPanel = findViewById(R.id.map_bottom_widgets_panel);
+
+		setupPositions();
+	}
+
+	private void setupPositions() {
+		widgetPositions.clear();
 
 		if (shouldCenterVerticalPanels()) {
 			addPosition(leftWidgetsPanel, this::updateVerticalPanels);
@@ -464,7 +485,21 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	private boolean shouldCenterVerticalPanels() {
-		return !portrait || tablet;
+		return panelsLayoutMode == PanelsLayoutMode.COMPACT;
+	}
+
+	@NonNull
+	private StateChangedListener<PanelsLayoutMode> getPanelsLayoutModeListener() {
+		if (panelsLayoutModeListener == null) {
+			panelsLayoutModeListener = change -> app.runInUIThread(() -> {
+				panelsLayoutMode = settings.getPanelsLayoutMode(getContext(), screenLayoutMode).get();
+				setupPositions();
+				updateVerticalPanels();
+				updateAlarmsContainer();
+				refresh();
+			});
+		}
+		return panelsLayoutModeListener;
 	}
 
 	@Override
@@ -496,7 +531,9 @@ public class MapHudLayout extends FrameLayout {
 			int rightMargin = 0;
 
 			if (shouldCenterVerticalPanels()) {
-				int defaultWidth = (int) (totalWidth * TOP_BAR_MAX_WIDTH_PERCENTAGE);
+				float percentage = portrait ? TOP_BAR_MAX_WIDTH_PERCENTAGE_PORTRAIT : TOP_BAR_MAX_WIDTH_PERCENTAGE_LANDSCAPE;
+
+				int defaultWidth = (int) (totalWidth * percentage);
 				int defaultMargin = (totalWidth - defaultWidth) / 2;
 
 				int leftWidth = leftWidgetsPanel.getVisibility() == VISIBLE ? leftWidgetsPanel.getWidth() : 0;

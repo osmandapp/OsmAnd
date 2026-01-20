@@ -27,4 +27,8 @@
 		android:id="@+id/transparent_widgets_button"
 		layout="@layout/configure_screen_list_item" />
 
+	<include
+		android:id="@+id/panels_layout"
+		layout="@layout/configure_screen_list_item" />
+
 </LinearLayout>

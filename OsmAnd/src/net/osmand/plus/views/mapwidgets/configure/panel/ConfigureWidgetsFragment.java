@@ -2,6 +2,8 @@ package net.osmand.plus.views.mapwidgets.configure.panel;
 
 import static net.osmand.plus.helpers.AndroidUiHelper.ANIMATION_DURATION;
 import static net.osmand.plus.settings.bottomsheets.WidgetsResetConfirmationBottomSheet.showResetSettingsDialog;
+import static net.osmand.plus.settings.enums.ScreenLayoutMode.LANDSCAPE;
+import static net.osmand.plus.settings.enums.ScreenLayoutMode.PORTRAIT;
 import static net.osmand.plus.utils.WidgetUtils.createNewWidget;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment.SCREEN_LAYOUT_MODE;
 
@@ -253,6 +255,13 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 	private void openActionMenu(@NonNull AppCompatImageButton actionButton) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
+		if (layoutMode != null) {
+			boolean portrait = layoutMode.isPortrait();
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitle(getString(portrait ? R.string.copy_from_landscape_layout : R.string.copy_from_portrait_layout))
+					.setIcon(getContentIcon(portrait ? R.drawable.ic_action_copy_from_landscape : R.drawable.ic_action_copy_from_portrait))
+					.setOnClickListener(v -> copyPreferences(appMode, portrait ? LANDSCAPE : PORTRAIT)).create());
+		}
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitle(getString(R.string.copy_from_other_profile))
 				.setIcon(getContentIcon(R.drawable.ic_action_copy))
@@ -627,17 +636,22 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		if (isEditMode && fragment != null) {
 			fragment.copyAppModePrefs(appMode);
 		} else {
-			WidgetsSettingsHelper helper = new WidgetsSettingsHelper(requireMapActivity(), selectedAppMode);
+			copyPreferences(appMode, layoutMode);
+		}
+	}
 
-			helper.copyWidgetsForPanel(appMode, selectedPanel);
+	private void copyPreferences(@NonNull ApplicationMode fromAppMode, @Nullable ScreenLayoutMode fromLayoutMode) {
+		WidgetsSettingsHelper helper = new WidgetsSettingsHelper(requireMapActivity(), selectedAppMode);
+		helper.setLayoutMode(layoutMode);
+		helper.copyWidgetsForPanel(fromAppMode, fromLayoutMode, selectedPanel);
 
-			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-			if (settings.getApplicationMode().equals(selectedAppMode) && mapInfoLayer != null) {
-				mapInfoLayer.recreateAllControls(requireMapActivity());
-			}
-			if (fragment != null) {
-				fragment.reloadWidgets();
-			}
+		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+		if (settings.getApplicationMode().equals(selectedAppMode) && mapInfoLayer != null) {
+			mapInfoLayer.recreateAllControls(requireMapActivity());
+		}
+		WidgetsListFragment fragment = getSelectedFragment();
+		if (fragment != null) {
+			fragment.reloadWidgets();
 		}
 	}
 

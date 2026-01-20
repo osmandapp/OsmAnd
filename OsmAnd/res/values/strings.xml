@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="copy_from_portrait_layout">Copy from Portrait layout</string>
+	<string name="copy_from_landscape_layout">Copy from Landscape layout</string>
 	<string name="panels_layout_compact">Compact</string>
 	<string name="panels_layout_wide">Wide</string>
 	<string name="panels_layout">Panels layout</string>
