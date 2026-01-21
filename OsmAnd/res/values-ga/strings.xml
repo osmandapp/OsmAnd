@@ -5787,4 +5787,15 @@
     <string name="avg_speed">Meán luas</string>
     <string name="organize_by_max_speed">Uas. luas</string>
     <string name="organize_by_max_altitude">Uas. Airde</string>
+    <string name="copy_from_portrait_layout">Cóipeáil ó leagan amach Portráide</string>
+    <string name="copy_from_landscape_layout">Cóipeáil ó leagan amach Tírdhreacha</string>
+    <string name="panels_layout_compact">Dlúth</string>
+    <string name="panels_layout_wide">Leathan</string>
+    <string name="panels_layout">Leagan amach painéal</string>
+    <string name="panels_layout_descr">Roghnaigh leagan amach do na painéil uachtaracha agus íochtaracha. Is féidir leo a bheith leathan, ag clúdach leithead iomlán an scáileáin, nó dlúth, ag luí idir na painéil taobh agus na cnaipí.</string>
+    <string name="single_layout">Leagan amach aonair</string>
+    <string name="separate_layouts">Leagan amach ar leithligh</string>
+    <string name="use_separate_layouts">Úsáid leagan amach ar leithligh</string>
+    <string name="map_screen_layout">Leagan amach scáileáin léarscáile</string>
+    <string name="map_screen_layout_descr">Roghnaigh an úsáidfidh tú leagan amach aonair do na treoshuíomhanna uile, nó an ndéanfaidh tú Portráid agus Tírdhreach a shaincheapadh ar leithligh.</string>
 </resources>
