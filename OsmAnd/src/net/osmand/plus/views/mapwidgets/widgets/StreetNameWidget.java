@@ -347,37 +347,14 @@ public class StreetNameWidget extends MapWidget {
 	private static boolean isSameShieldAdded(RoadShield currentShield, List<RoadShield> previousShields) {
 		if (!previousShields.isEmpty()) {
 			String currentLabel = currentShield.getValue();
-			Map<String, String> currentTags = getShieldTagsMap(currentShield.getAdditional().toString());
-			// "route_road_1_ref"  ->  "route_road_1_shield_color"
-			String currentColorKey = currentShield.getTag().replace("_ref", "_shield_color");
-			String currentColor = currentTags.get(currentColorKey);
-
 			for (RoadShield previousShield : previousShields) {
 				String previousLabel = previousShield.getValue();
-				Map<String, String> previousTags = getShieldTagsMap(previousShield.getAdditional().toString());
-				String previousColorKey = previousShield.getTag().replace("_ref", "_shield_color");
-				String previousColor = previousTags.get(previousColorKey);
-
-				if (Objects.equals(currentLabel, previousLabel) && Objects.equals(currentColor, previousColor)) {
+				if (Objects.equals(currentLabel, previousLabel)) {
 					return true;
 				}
 			}
 		}
 		return false;
-	}
-
-	private static Map<String, String> getShieldTagsMap(String tagsString) {
-		// convert String "tag1=val1;tag2=val2;"  to  Map {tag1: val1, tag2: val2}
-		Map<String, String> map = new LinkedHashMap<>();
-		for (String tagValue : tagsString.split(";")) {
-			int index = tagValue.indexOf('=');
-			if (index > 0) {
-				String key = tagValue.substring(0, index);
-				String value = tagValue.substring(index + 1);
-				map.put(key, value);
-			}
-		}
-		return map;
 	}
 
 	@NonNull
