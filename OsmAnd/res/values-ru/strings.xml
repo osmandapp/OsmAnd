@@ -140,11 +140,11 @@
     <string name="route_points_category_name">Повороты на маршруте</string>
     <string name="track_points_category_name">Путевые точки, точки интереса, именованные объекты</string>
     <string name="shared_string_gpx_track">Трек</string>
-    <string name="max_speed">Максимальная скорость</string>
+    <string name="max_speed">Макс. скорость</string>
     <string name="average_speed">Сред. скорость</string>
     <string name="shared_string_time_moving">Время движения</string>
     <string name="shared_string_time_span">Общее время</string>
-    <string name="shared_string_max">Max</string>
+    <string name="shared_string_max">Макс.</string>
     <string name="shared_string_start_time">Отправление</string>
     <string name="shared_string_end_time">Прибытие</string>
     <string name="shared_string_color">Цвет</string>
@@ -2231,8 +2231,8 @@
     <string name="average">Средняя</string>
     <string name="ascent_descent">Подъём/спуск</string>
     <string name="moving_time">Время движения</string>
-    <string name="max_min">Макс/Мин</string>
-    <string name="min_max">Мин/Макс</string>
+    <string name="max_min">Макс./мин.</string>
+    <string name="min_max">Мин./макс.</string>
     <string name="quick_action_resume_pause_navigation">Пауза/возобновление навигации</string>
     <string name="mapillary_menu_descr_tile_cache">Скачать тайлы заново для актуализации данных.</string>
     <string name="mapillary_menu_edit_text_hint">Введите имя пользователя</string>
@@ -4377,7 +4377,7 @@
     <string name="compass_visible_if_map_rotated">Виден, если карта повернута</string>
     <string name="compass_always_hidden">Скрыт</string>
     <string name="compass_always_visible">Виден</string>
-    <string name="compass_click_desc">Коснитесь компаса чтобы сменить режим ориентации карты.</string>
+    <string name="compass_click_desc">Дважды коснитесь кнопки компаса, чтобы изменить режим ориентации карты.</string>
     <string name="compass_desc">Кнопка с указателем севера.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Цветовая схема изобат</string>
     <string name="rendering_attr_depthContourWidth_description">Толщина изобат</string>
@@ -4401,7 +4401,7 @@
     <string name="download_heightmap_maps">Карта рельефа</string>
     <string name="display_position">Позиция на экране</string>
     <string name="current_location_widget">Координаты: текущая позиция</string>
-    <string name="external_sensors_plugin_name">Вело-датчики</string>
+    <string name="external_sensors_plugin_name">Внешние датчики</string>
     <string name="map_center_widget">Координаты: центр карты</string>
     <string name="map_widget_altitude_map_center">Высота: центр карты</string>
     <string name="map_widget_altitude_desc">Виджеты показывают высоту над уровнем моря для текущей геолокации или для текущего центра карты</string>
@@ -4416,7 +4416,7 @@
     <string name="favorites_backup">Резервное копирование избранного</string>
     <string name="purchases_feature_desc_cross_buy">Используйте функции подписки на разных платформах (Android/iOS/web) без дополнительной платы.</string>
     <string name="shared_string_cross_buy">Перекрестная покупка</string>
-    <string name="external_sensor_widgets">Вело-датчики</string>
+    <string name="external_sensor_widgets">Внешние датчики</string>
     <string name="ant_go_to_store">Перейти в магазин</string>
     <string name="ant_read_data">Чтение данных</string>
     <string name="map_widget_ant_bicycle_speed">Скорость велосипеда</string>
@@ -4441,7 +4441,7 @@
     <string name="show_map_symbols_desc">Текст, дорожные знаки и прочее.</string>
     <string name="map_widget_ant_bicycle_cadence">Каденс</string>
     <string name="map_widget_camera_tilt_desc">Виджет показывает угол наклона камеры в режиме перспективы. По умолчанию 90° (без наклона).</string>
-    <string name="external_sensors_support">Поддержка вело-датчиков</string>
+    <string name="external_sensors_support">Поддержка внешних датчиков</string>
     <string name="show_borders_of_downloaded_maps">Границы скачанных карт</string>
     <string name="map_widget_ant_bicycle_power_desc">Показывает выходную мощность велосипедиста, которая используется для движения велосипеда вперед</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Показывает частоту вращения педалей велосипеда</string>
@@ -4464,7 +4464,7 @@
     <string name="rendering_engine_failed">Произошел сбой отрисовки карт OsmAnd.</string>
     <string name="map_rendering_engine_descr">Версия 1 использовалась по умолчанию до OsmAnd 4.3 и подходит для более старых устройств. \n\nВерсия 2 (OpenGL) более продвинута и добавляет такие функции, как 3D-просмотр.</string>
     <string name="map_rendering_engine">Движок отрисовки карт</string>
-    <string name="purchases_feature_desc_external_sensors">Отображение и запись данных с вело-датчиков: скорость велосипеда, мощность, каденс и пульс.</string>
+    <string name="purchases_feature_desc_external_sensors">Отображение и запись данных с внешних датчиков: скорость велосипеда, мощность, каденс и пульс.</string>
     <string name="map_widget_ant_bicycle_dist">Расстояние на велосипеде</string>
     <string name="click_on_widget">Нажатие на виджет</string>
     <string name="go_to_marker_location">Переход к местоположению маркера</string>
@@ -4738,7 +4738,7 @@
     <string name="external_device_characteristic_diastolic">Диастолическое</string>
     <string name="external_device_characteristic_pulse_rate">Пульс</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Сопряжение датчика ANT+</string>
-    <string name="ant_plus_pair_bluetooth_prompt">Сопрягайте вело-датчики Bluetooth LE и ANT+ с OsmAnd.</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Сопрягайте датчики Bluetooth LE и ANT+ с OsmAnd.</string>
     <string name="learn_more_about_sensors_link">Узнать больше о датчиках.</string>
     <string name="search_track_by_name">Поиск трека по названию</string>
     <string name="ant_plus_nothing_found_description">Убедитесь, что:
@@ -4791,7 +4791,7 @@
     <string name="rendering_value_name_only_name">Только название</string>
     <string name="save_track_external_sensors_data">Данные</string>
     <string name="there_are_no_connected_sensors_of_this_type">Нет подключённых датчиков этого типа</string>
-    <string name="write_data_from_sensor_to_track">Сохранять данные с вело-датчиков в GPX-файл при записи маршрута.</string>
+    <string name="write_data_from_sensor_to_track">Сохранять данные с внешних датчиков в GPX-файл при записи маршрута.</string>
     <string name="external_sensors_not_found">Датчики не найдены</string>
     <string name="external_sensors_source_of_data">Источник данных</string>
     <string name="power_watts_unit">Ватты</string>
@@ -5100,15 +5100,15 @@
     <string name="battery_optimization_settings">Настройки оптимизации батареи</string>
     <string name="battery_optimization">Оптимизация батареи</string>
     <string name="shared_string_keywords">Ключевые слова</string>
-    <string name="max_sensor_heartrate">Пульс, max</string>
+    <string name="max_sensor_heartrate">Пульс, макс.</string>
     <string name="avg_sensor_heartrate">Пульс, средний</string>
-    <string name="max_sensor_cadence">Вело каденс, MAX</string>
+    <string name="max_sensor_cadence">Каденс, макс.</string>
     <string name="avg_sensor_cadence">Каденс, средний</string>
-    <string name="max_sensor_bycicle_power">Вело мощность, MAX</string>
+    <string name="max_sensor_bycicle_power">Мощность, макс.</string>
     <string name="avg_sensor_bycicle_power">Мощность, средняя</string>
-    <string name="max_sensor_temperature">Температура, MAX</string>
+    <string name="max_sensor_temperature">Температура, макс.</string>
     <string name="avg_sensor_temperature">Температура, средняя</string>
-    <string name="max_sensor_speed">Датчик скорости, MAX</string>
+    <string name="max_sensor_speed">Датчик скорости, макс.</string>
     <string name="avg_sensor_speed">Скорость, средняя</string>
     <string name="shared_string_activity">Активность</string>
     <string name="shared_string_road_maps">Карты дорог</string>
@@ -5512,7 +5512,7 @@
     <string name="obd_fuel_consumption">Расход топлива</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
     <string name="vehicle_metrics_obd_ii">Авто-датчики (OBD-II)</string>
-    <string name="obd_speed_desc">Виджет показывает данные с вело-датчика скорости транспортного средства (VSS).</string>
+    <string name="obd_speed_desc">Виджет показывает данные с датчика скорости транспортного средства (VSS).</string>
     <string name="obd_ambient_air_temp_desc">Виджет показывает температуру снаружи транспортного средства.</string>
     <string name="obd_battery_voltage_desc">Виджет показывает уровень напряжения аккумуляторной батареи ТС</string>
     <string name="obd_engine_coolant_temp_desc">Виджет показывает температуру охлаждающей жидкости двигателя</string>
