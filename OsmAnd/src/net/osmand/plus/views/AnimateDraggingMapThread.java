@@ -148,7 +148,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 			} else {
 				renderer.resetMapTarget();
 			}
-			tileView.setCurrentZoom();
+			tileView.setCurrentZoom(0.0);
 		}
 	}
 
