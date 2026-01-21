@@ -63,7 +63,11 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class StreetNameWidget extends MapWidget {
 
@@ -242,9 +246,10 @@ public class StreetNameWidget extends MapWidget {
 			boolean isShieldSet = false;
 			shieldImagesContainer.removeAllViews();
 			int maxShields = min(shields.size(), MAX_SHIELDS_QUANTITY);
+			List<RoadShield> addedShields = new ArrayList<>();
 			for (int i = 0; i < maxShields; i++) {
 				RoadShield shield = shields.get(i);
-				isShieldSet |= setShieldImage(shield, mapActivity, shieldImagesContainer, isNightMode());
+				isShieldSet |= setShieldImage(shield, addedShields, mapActivity, shieldImagesContainer, isNightMode());
 			}
 			return isShieldSet;
 		}
@@ -252,6 +257,7 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	public static boolean setShieldImage(@NonNull RoadShield shield,
+			@NonNull List<RoadShield> addedShields,
 			@NonNull MapActivity mapActivity,
 			@NonNull LinearLayout shieldImagesContainer, boolean nightMode) {
 		OsmandApplication app = mapActivity.getApp();
@@ -276,6 +282,10 @@ public class StreetNameWidget extends MapWidget {
 			} else {
 				additional.append(tag).append("=").append(value).append(";");
 			}
+		}
+
+		if (isSameShieldAdded(shield, addedShields)) {
+			return false;
 		}
 
 		rreq.setIntFilter(rreq.ALL.R_TEXT_LENGTH, shieldValue.length());
@@ -333,7 +343,21 @@ public class StreetNameWidget extends MapWidget {
 		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 		imageView.setImageBitmap(bitmap);
 		shieldImagesContainer.addView(imageView);
+		addedShields.add(shield);
 		return true;
+	}
+
+	private static boolean isSameShieldAdded(RoadShield currentShield, List<RoadShield> previousShields) {
+		if (!previousShields.isEmpty()) {
+			String currentLabel = currentShield.getValue();
+			for (RoadShield previousShield : previousShields) {
+				String previousLabel = previousShield.getValue();
+				if (Objects.equals(currentLabel, previousLabel)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@NonNull

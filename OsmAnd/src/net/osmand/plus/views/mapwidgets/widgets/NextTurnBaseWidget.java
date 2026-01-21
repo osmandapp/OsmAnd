@@ -50,6 +50,7 @@ import net.osmand.plus.views.mapwidgets.widgetstates.ResizableWidgetState;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget, ISupportVerticalPanel, ISupportWidgetResizing, ISupportMultiRow {
@@ -203,9 +204,10 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		if (!Algorithms.isEmpty(shields)) {
 			shieldImagesContainer.removeAllViews();
 			int maxShields = min(shields.size(), MAX_SHIELDS_QUANTITY);
+			List<RoadShield> addedShields = new ArrayList<>();
 			for (int i = 0; i < maxShields; i++) {
 				RoadShield shield = shields.get(i);
-				isShieldSet |= setShieldImage(shield, mapActivity, shieldImagesContainer, isNightMode());
+				isShieldSet |= setShieldImage(shield, addedShields, mapActivity, shieldImagesContainer, isNightMode());
 			}
 		}
 		AndroidUiHelper.updateVisibility(shieldImagesContainer, isShieldSet);
