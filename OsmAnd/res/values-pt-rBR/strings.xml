@@ -6339,4 +6339,15 @@
     <string name="show_expand_button">Mostrar botão expandir</string>
     <string name="imprecise_coordinates">Coordenadas imprecisas</string>
     <string name="shared_string_step">Passo</string>
+    <string name="copy_from_portrait_layout">Copiar do layout Retrato</string>
+    <string name="copy_from_landscape_layout">Copiar do layout paisagem</string>
+    <string name="panels_layout_compact">Compacto</string>
+    <string name="panels_layout_wide">Amplo</string>
+    <string name="panels_layout">Layout dos painéis</string>
+    <string name="panels_layout_descr">Escolha um layout para os painéis superior e inferior. Eles podem ser largos, ocupando toda a largura da tela, ou compactos, cabendo entre os painéis laterais e os botões.</string>
+    <string name="single_layout">Layout único</string>
+    <string name="separate_layouts">Layout separado</string>
+    <string name="use_separate_layouts">Use layouts separados</string>
+    <string name="map_screen_layout">Layout da tela do mapa</string>
+    <string name="map_screen_layout_descr">Escolha se deseja usar um único layout para todas as orientações ou personalizar retrato e paisagem separadamente.</string>
 </resources>

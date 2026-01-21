@@ -5839,4 +5839,15 @@
     <string name="shared_string_magnitude">Magnitud</string>
     <string name="astro_set">Puesta</string>
     <string name="astro_rise">Salida</string>
+    <string name="copy_from_portrait_layout">Copiar el diseño vertical</string>
+    <string name="copy_from_landscape_layout">Copiar el diseño horizontal</string>
+    <string name="panels_layout_compact">Compacto</string>
+    <string name="panels_layout_wide">Amplio</string>
+    <string name="panels_layout">Diseño de los paneles</string>
+    <string name="panels_layout_descr">Elegí un diseño para los paneles superior e inferior. Pueden ser amplios, ocupando todo el ancho de la pantalla, o compactos, encajando entre los paneles laterales y los botones.</string>
+    <string name="single_layout">Diseño único</string>
+    <string name="separate_layouts">Diseños separados</string>
+    <string name="use_separate_layouts">Usar diseños separados</string>
+    <string name="map_screen_layout">Diseño de la pantalla del mapa</string>
+    <string name="map_screen_layout_descr">Elegí si usar un diseño único para todas las orientaciones, o personalizar la orientación vertical y horizontal por separado.</string>
 </resources>

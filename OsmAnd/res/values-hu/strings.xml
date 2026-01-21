@@ -5320,7 +5320,7 @@
     <string name="app_mode_suv">SUV</string>
     <string name="rendering_attr_alpineHiking_name">Túraútvonalak nehézségi szintje</string>
     <string name="background_opacity">Háttér átlátszatlansága</string>
-    <string name="corner_radius">Lekerekítési sugár</string>
+    <string name="corner_radius">Sarok sugara</string>
     <string name="shared_string_dp">dp</string>
     <string name="shared_string_interface">Interfész</string>
     <string name="quick_action_previous_screen_desc">Kapcsoló az előző képernyőre való navigáláshoz.</string>
@@ -5335,12 +5335,12 @@
     <string name="quick_action_switch_compass_desc">Kapcsoló a térkép tájolásának váltásához.</string>
     <string name="contour_layers_action_descr">Szintvonal rétegek módosítása</string>
     <string name="change_zoom_action_descr">Térképnagyítás módosítása.</string>
-    <string name="search_action_descr">Megnyitja a Keresést.</string>
-    <string name="navigation_action_descr">Megnyitja a Navigálást.</string>
+    <string name="search_action_descr">Megnyitja a keresést.</string>
+    <string name="navigation_action_descr">Megnyitja a navigálást.</string>
     <string name="my_location_action_descr">A tartózkodási helyét teszi a térkép közepére.</string>
     <string name="map_3d_mode_action_descr">Térképdőlés módosítása.</string>
     <string name="drawer_button_description">Megnyitja a főmenüt.</string>
-    <string name="configure_map_description">Térkép stílusának, rétegeinek, egyéb beállításainak módosítása.</string>
+    <string name="configure_map_description">Módosítsa a térkép stílusát, rétegeit vagy egyéb beállításait.</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Krosszmotoros útvonalak megjelenítése</string>
     <string name="raster_layers_action_descr">Raszter rétegek módosítása</string>
     <string name="change_activity">Tevékenység módosítása</string>
@@ -5872,4 +5872,15 @@
     <string name="organize_by_max_speed">Legnagyobb sebesség</string>
     <string name="organize_by_max_altitude">Legnagyobb magasság</string>
     <string name="group_altitude_elevation">Magasság és tengerszint feletti magasság</string>
+    <string name="copy_from_portrait_layout">Másolás az álló elrendezésből</string>
+    <string name="copy_from_landscape_layout">Másolás a fekvő elrendezésből</string>
+    <string name="panels_layout_compact">Kompakt</string>
+    <string name="panels_layout_wide">Széles</string>
+    <string name="panels_layout">Panelek elrendezése</string>
+    <string name="panels_layout_descr">Válasszon elrendezést a felső és alsó panelekhez. Ezek lehetnek szélesek, a képernyő teljes szélességét kitöltve, vagy kompaktak, az oldalsó panelek és gombok közé illeszkedve.</string>
+    <string name="single_layout">Egyszerű elrendezés</string>
+    <string name="separate_layouts">Elrendezések elkülönítése</string>
+    <string name="use_separate_layouts">Elkülönített elrendezések használata</string>
+    <string name="map_screen_layout">Térképképernyő elrendezése</string>
+    <string name="map_screen_layout_descr">Válassza ki, hogy egyetlen elrendezést szeretne használni minden tájoláshoz, vagy külön-külön szeretné testreszabni az álló és fekvő módot.</string>
 </resources>

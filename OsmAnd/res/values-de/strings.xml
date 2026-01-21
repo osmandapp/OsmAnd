@@ -5984,4 +5984,6 @@
     <string name="group_date_time">Datum &amp; Uhrzeit</string>
     <string name="group_general">Allgemein</string>
     <string name="set_step_size">Schrittgröße festlegen</string>
+    <string name="copy_from_landscape_layout">Aus Querformat kopieren</string>
+    <string name="panels_layout_wide">Breit</string>
 </resources>
