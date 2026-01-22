@@ -5882,4 +5882,15 @@
     <string name="avg_speed">Gj. hastighet</string>
     <string name="organize_by_max_speed">Maks. hastighet</string>
     <string name="organize_by_max_altitude">Maks. høyde</string>
+    <string name="copy_from_portrait_layout">Kopier fra stående utforming</string>
+    <string name="copy_from_landscape_layout">Kopier fra liggende utforming</string>
+    <string name="panels_layout_compact">Kompakt</string>
+    <string name="panels_layout_wide">Bred</string>
+    <string name="panels_layout">Panelutforming</string>
+    <string name="panels_layout_descr">Velg en utforming for de øverste og nederste panelene. De kan enten være brede så de dekker hele skjermbredden, eller kompakte, så de passer mellom sidepanelene og knappene.</string>
+    <string name="single_layout">Enkel utforming</string>
+    <string name="separate_layouts">Separate utforminger</string>
+    <string name="use_separate_layouts">Bruk separate utforminger</string>
+    <string name="map_screen_layout">Kartskjermutforming</string>
+    <string name="map_screen_layout_descr">Velg om du vil bruke en enkel utforming for alle orienteringer, eller tilpasse stående og liggende separat.</string>
 </resources>
