@@ -28,6 +28,7 @@ import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.PanelsLayoutFragment;
@@ -35,6 +36,7 @@ import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment
 import net.osmand.util.CollectionUtils;
 
 import java.util.Collections;
+import java.util.List;
 
 public class ConfigureWidgetsCard extends MapBaseCard {
 
@@ -66,19 +68,22 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		description.setText(R.string.configure_screen_widgets_descr);
 
 		ApplicationMode appMode = settings.getApplicationMode();
+		List<MapWidgetInfo> widgets = widgetRegistry.getWidgets(mapActivity, appMode, layoutMode[0]);
 
-		setupWidgetGroupView(view.findViewById(R.id.left_panel), LEFT, appMode);
-		setupWidgetGroupView(view.findViewById(R.id.right_panel), RIGHT, appMode);
-		setupWidgetGroupView(view.findViewById(R.id.top_panel), TOP, appMode);
-		setupWidgetGroupView(view.findViewById(R.id.bottom_panel), BOTTOM, appMode);
+		setupWidgetGroupView(view.findViewById(R.id.left_panel), widgets, LEFT, appMode);
+		setupWidgetGroupView(view.findViewById(R.id.right_panel), widgets, RIGHT, appMode);
+		setupWidgetGroupView(view.findViewById(R.id.top_panel), widgets, TOP, appMode);
+		setupWidgetGroupView(view.findViewById(R.id.bottom_panel), widgets, BOTTOM, appMode);
 
-		setupTransparentWidgetsButton(appMode);
-		setupPanelsLayout(view.findViewById(R.id.panels_layout), appMode);
+		boolean useSeparateLayouts = settings.USE_SEPARATE_LAYOUTS.get();
+		setupTransparentWidgetsButton(appMode, useSeparateLayouts);
+		setupPanelsLayout(view.findViewById(R.id.panels_layout), useSeparateLayouts);
 	}
 
-	private void setupWidgetGroupView(@NonNull View view, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
+	private void setupWidgetGroupView(@NonNull View view, @NonNull List<MapWidgetInfo> widgets,
+			@NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		boolean rtl = AndroidUtils.isLayoutRtl(app);
-		int count = getWidgetsCount(panel, appMode);
+		int count = getWidgetsCount(widgets, panel, appMode);
 
 		ImageView icon = view.findViewById(R.id.icon);
 		TextView title = view.findViewById(R.id.title);
@@ -102,7 +107,8 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.short_divider), CollectionUtils.equalsToAny(panel, RIGHT, BOTTOM));
 	}
 
-	private void setupPanelsLayout(@NonNull View view, @NonNull ApplicationMode appMode) {
+	private void setupPanelsLayout(@NonNull View view, boolean useSeparateLayouts) {
+		ApplicationMode appMode = settings.getApplicationMode();
 		PanelsLayoutMode panelsMode = settings.getPanelsLayoutMode(mapActivity, layoutMode[0]).get();
 
 		ImageView icon = view.findViewById(R.id.icon);
@@ -116,17 +122,18 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		view.findViewById(R.id.button_container).setOnClickListener(v -> PanelsLayoutFragment.showInstance(activity, layoutMode[0]));
 
 		setupListItemBackground(view, appMode);
+		AndroidUiHelper.updateVisibility(view, useSeparateLayouts);
 		AndroidUiHelper.updateVisibility(description, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.short_divider), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.long_divider), false);
 	}
 
-	private int getWidgetsCount(@NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
+	private int getWidgetsCount(@NonNull List<MapWidgetInfo> widgets, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		int filter = ENABLED_MODE | AVAILABLE_MODE | MATCHING_PANELS_MODE;
-		return widgetRegistry.getWidgetsForPanel(mapActivity, appMode, layoutMode[0], filter, Collections.singletonList(panel)).size();
+		return widgetRegistry.getFilteredWidgets(widgets, appMode, layoutMode[0], filter, Collections.singletonList(panel)).size();
 	}
 
-	private void setupTransparentWidgetsButton(@NonNull ApplicationMode appMode) {
+	private void setupTransparentWidgetsButton(@NonNull ApplicationMode appMode, boolean showShortDivider) {
 		View button = view.findViewById(R.id.transparent_widgets_button);
 
 		boolean enabled = settings.getTransparentMapThemePreference(layoutMode[0]).getModeValue(appMode);
@@ -152,7 +159,7 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 			settings.getTransparentMapThemePreference(layoutMode[0]).setModeValue(appMode, !transparent);
 			mapActivity.updateApplicationModeSettings();
 		});
-		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), true);
+		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), showShortDivider);
 	}
 
 	private void setupListItemBackground(@NonNull View view, @NonNull ApplicationMode appMode) {

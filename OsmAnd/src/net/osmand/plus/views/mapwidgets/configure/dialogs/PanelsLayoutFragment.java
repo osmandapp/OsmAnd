@@ -121,7 +121,7 @@ public class PanelsLayoutFragment extends BaseFullScreenFragment {
 
 	private void updatePreviewIcon() {
 		if (previewIcon != null) {
-			boolean portrait = AndroidUiHelper.isOrientationPortrait(requireContext());
+			boolean portrait = layoutMode == null || layoutMode.isPortrait();
 			previewIcon.setImageDrawable(getIcon(panelsMode.getImage(portrait, nightMode)));
 		}
 	}
