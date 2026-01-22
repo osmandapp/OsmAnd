@@ -141,6 +141,7 @@ class StarView @JvmOverloads constructor(
 	var showAzimuthalGrid = true
 	var showEquatorialGrid = false
 	var showEclipticLine = false
+	var showFavorites = true
 	var showConstellations = true
 
 	var showStars = true
@@ -653,6 +654,8 @@ class StarView @JvmOverloads constructor(
 	}
 
 	private fun isObjectVisibleInSettings(obj: SkyObject): Boolean {
+		if (showFavorites && obj.isFavorite) return true
+
 		val magnitudeFilter = magnitudeFilter
 		if (magnitudeFilter != null && obj.type == SkyObject.Type.STAR && showStars
 			&& obj.magnitude > magnitudeFilter) return false
@@ -1335,7 +1338,7 @@ class StarView @JvmOverloads constructor(
 		}
 
 		if (showLabel) {
-			val text = obj.localizedName ?: obj.name
+			val text = obj.niceName()
 			val labelTextSize = 25f
 			textPaint.textSize = labelTextSize
 

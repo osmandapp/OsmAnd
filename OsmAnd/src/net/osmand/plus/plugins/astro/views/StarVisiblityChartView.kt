@@ -72,7 +72,7 @@ class StarVisiblityChartView @JvmOverloads constructor(
 			currentCoroutineContext().ensureActive()
 			val spans = computeVisibleSpans(obj, startLocal, endLocal, obs)
 			val (rise, set) = AstroUtils.nextRiseSet(obj, startLocal, obs, startLocal, endLocal)
-			Row(obj, obj.name, rise, set, spans)
+			Row(obj, obj.niceName(), rise, set, spans)
 		}
 
 		val tw = AstroUtils.computeTwilight(startLocal, endLocal, obs, zone)

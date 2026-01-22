@@ -171,7 +171,7 @@ class StarAltitudeChartView @JvmOverloads constructor(
 			SeriesPath(
 				obj,
 				path,
-				obj.name,
+				obj.niceName(),
 				rise?.toLocalTime()?.format(timeFmt) ?: "—",
 				set?.toLocalTime()?.format(timeFmt) ?: "—",
 				obj.color

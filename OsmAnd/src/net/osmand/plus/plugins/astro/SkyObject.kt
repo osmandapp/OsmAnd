@@ -25,7 +25,6 @@ open class SkyObject(
 	open var altitude: Double = 0.0,
 	open var distAu: Double = 0.0,
 
-	// Visibility flag
 	open var isFavorite: Boolean = false,
 
 	// Animation state helpers
@@ -52,6 +51,8 @@ open class SkyObject(
 	override fun hashCode(): Int {
 		return id.hashCode()
 	}
+
+	fun niceName() = localizedName ?: name
 
 	override fun toString(): String {
 		return "SkyObject(id='$id', name='$name', type=$type)"

@@ -21,6 +21,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		private const val KEY_SHOW_SUN = "showSun"
 		private const val KEY_SHOW_MOON = "showMoon"
 		private const val KEY_SHOW_PLANETS = "showPlanets"
+		private const val KEY_SHOW_FAVORITES = "showFavorites"
 
 		private const val KEY_SHOW_CONSTELLATIONS = "showConstellations"
 
@@ -51,6 +52,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showAzimuthalGrid: Boolean,
 		val showEquatorialGrid: Boolean,
 		val showEclipticLine: Boolean,
+		val showFavorites: Boolean,
 		val showSun: Boolean,
 		val showMoon: Boolean,
 		val showPlanets: Boolean,
@@ -139,6 +141,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showAzimuthal = mapSettings?.optBoolean(KEY_SHOW_AZIMUTHAL, true) ?: true
 		val showEquatorial = mapSettings?.optBoolean(KEY_SHOW_EQUATORIAL, false) ?: false
 		val showEcliptic = mapSettings?.optBoolean(KEY_SHOW_ECLIPTIC, false) ?: false
+		val showFavorites = mapSettings?.optBoolean(KEY_SHOW_FAVORITES, true) ?: true
 
 		val showSun = mapSettings?.optBoolean(KEY_SHOW_SUN, true) ?: true
 		val showMoon = mapSettings?.optBoolean(KEY_SHOW_MOON, true) ?: true
@@ -165,6 +168,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 			showAzimuthalGrid = showAzimuthal,
 			showEquatorialGrid = showEquatorial,
 			showEclipticLine = showEcliptic,
+			showFavorites = showFavorites,
 			showSun = showSun,
 			showMoon = showMoon,
 			showPlanets = showPlanets,
@@ -190,6 +194,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		mapSettings.put(KEY_SHOW_AZIMUTHAL, config.showAzimuthalGrid)
 		mapSettings.put(KEY_SHOW_EQUATORIAL, config.showEquatorialGrid)
 		mapSettings.put(KEY_SHOW_ECLIPTIC, config.showEclipticLine)
+		mapSettings.put(KEY_SHOW_FAVORITES, config.showFavorites)
 
 		mapSettings.put(KEY_SHOW_SUN, config.showSun)
 		mapSettings.put(KEY_SHOW_MOON, config.showMoon)
@@ -218,5 +223,22 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 
 		root.put(KEY_STAR_MAP, mapSettings)
 		setSettingsJson(root)
+	}
+
+	fun addFavorite(id: String) {
+		val config = getStarMapConfig()
+		if (config.favorites.none { it.id == id }) {
+			val favorites = config.favorites.toMutableList()
+			favorites.add(FavoriteConfig(id))
+			setStarMapConfig(config.copy(favorites = favorites))
+		}
+	}
+
+	fun removeFavorite(id: String) {
+		val config = getStarMapConfig()
+		val favorites = config.favorites.toMutableList()
+		if (favorites.removeAll { it.id == id }) {
+			setStarMapConfig(config.copy(favorites = favorites))
+		}
 	}
 }

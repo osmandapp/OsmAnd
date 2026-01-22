@@ -112,8 +112,7 @@ abstract class StarChartView @JvmOverloads constructor(
 				.setTitle(R.string.visible_layers_and_objects)
 				.setView(recyclerView)
 				.setPositiveButton(R.string.shared_string_apply) { _, _ ->
-					val favoritesConfig = dialogObjects.map { FavoriteConfig(it.id) }
-
+					val favoritesConfig = dialogObjects.filter { it.isFavorite }.map { FavoriteConfig(it.id) }
 					val swSettings = PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
 					val currentConfig = swSettings.getStarMapConfig()
 					val newConfig = currentConfig.copy(favorites = favoritesConfig)
@@ -183,7 +182,7 @@ abstract class StarChartView @JvmOverloads constructor(
 
 		override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 			val item = items[position]
-			holder.textView.text = item.name
+			holder.textView.text = item.niceName()
 			// Remove listener before setting state to avoid loop
 			holder.checkBox.setOnCheckedChangeListener(null)
 			holder.checkBox.isChecked = item.isFavorite
