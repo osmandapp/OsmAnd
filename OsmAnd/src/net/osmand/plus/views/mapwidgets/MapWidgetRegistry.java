@@ -291,7 +291,28 @@ public class MapWidgetRegistry {
 	}
 
 	@NonNull
+	public List<MapWidgetInfo> getWidgets(@NonNull MapActivity activity, @NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
+		List<MapWidgetInfo> list = new ArrayList<>();
+		if (settings.getApplicationMode() == appMode && (layoutMode == null || ScreenLayoutMode.getDefault(activity) == layoutMode)) {
+			list.addAll(getAllWidgets());
+		} else {
+			list.addAll(WidgetsInitializer.createAllControls(activity, appMode, layoutMode));
+		}
+		return list;
+	}
+
+	@NonNull
 	public Set<MapWidgetInfo> getWidgetsForPanel(@NonNull MapActivity mapActivity,
+	                                             @NonNull ApplicationMode appMode,
+	                                             @Nullable ScreenLayoutMode layoutMode,
+	                                             int filterModes,
+	                                             @NonNull List<WidgetsPanel> panels) {
+		List<MapWidgetInfo> widgetInfos = getWidgets(mapActivity, appMode, layoutMode);
+		return getFilteredWidgets(widgetInfos, appMode, layoutMode, filterModes, panels);
+	}
+
+	@NonNull
+	public Set<MapWidgetInfo> getFilteredWidgets(@NonNull List<MapWidgetInfo> widgetInfos,
 	                                             @NonNull ApplicationMode appMode,
 	                                             @Nullable ScreenLayoutMode layoutMode,
 	                                             int filterModes,
@@ -307,12 +328,6 @@ public class MapWidgetRegistry {
 			verticalPanel = true;
 			includedWidgetTypes.add(CenterWidgetInfo.class);
 			includedWidgetTypes.add(SimpleWidgetInfo.class);
-		}
-		List<MapWidgetInfo> widgetInfos = new ArrayList<>();
-		if (settings.getApplicationMode() == appMode && (layoutMode == null || ScreenLayoutMode.getDefault(mapActivity) == layoutMode)) {
-			widgetInfos.addAll(getAllWidgets());
-		} else {
-			widgetInfos.addAll(WidgetsInitializer.createAllControls(mapActivity, appMode, layoutMode));
 		}
 		Set<MapWidgetInfo> filteredWidgets = new TreeSet<>();
 		for (MapWidgetInfo widget : widgetInfos) {

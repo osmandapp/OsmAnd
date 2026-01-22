@@ -30,7 +30,7 @@ public class WidgetInfoCreator {
 
 	@Nullable
 	public MapWidgetInfo createWidgetInfo(@NonNull MapWidgetsFactory factory, @NonNull WidgetType widgetType) {
-		MapWidget mapWidget = factory.createMapWidget(widgetType);
+		MapWidget mapWidget = factory.createMapWidget(null, widgetType, null);
 		if (mapWidget != null) {
 			return createWidgetInfo(mapWidget);
 		}
