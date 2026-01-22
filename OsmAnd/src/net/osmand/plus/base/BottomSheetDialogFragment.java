@@ -19,12 +19,21 @@ import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public abstract class BottomSheetDialogFragment extends DialogFragment {
 
 	private OnDialogFragmentResultListener dialogFragmentResultListener;
+	// FK-TODO: BEGIN remove
+	public OsmandSettings settings;
+
+	@Override
+	public void onCreate(@Nullable final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		settings = ((OsmandApplication) requireContext().getApplicationContext()).getSettings();
+	}
+	// FK-TODO: END remove
 
 	@NonNull
 	@Override

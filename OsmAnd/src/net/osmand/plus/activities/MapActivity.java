@@ -118,13 +118,11 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
 import net.osmand.plus.settings.fragments.search.Configuration;
 import net.osmand.plus.settings.fragments.search.ConfigurationBundleConverter;
 import net.osmand.plus.settings.fragments.search.PreferencesDatabaseConfigFactory;
-import net.osmand.plus.settings.fragments.search.SearchDatabaseConfigFactory;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulatedLocation;
@@ -965,12 +963,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(),
 						new ActualConfigurationProvider().getActualConfiguration(),
 						new ConfigurationBundleConverter(),
-						SearchDatabaseConfigFactory
-								.createSearchDatabaseConfig(
-										MainSettingsFragment.class,
-										app.getTileSourceTemplatesProvider(),
-										getSupportFragmentManager())
-								.computePreferencesListener,
 						this);
 
 		// FK-FIXME: the following code block makes the magnifying glass freeze when the user clicks on it on installed OsmAnd-nightlyFree-legacy-fat-debug.apk

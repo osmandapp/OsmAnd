@@ -1,5 +1,6 @@
 package net.osmand.plus.transport;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.buildArguments;
 import static net.osmand.plus.transport.TransportLinesMenu.getTransportName;
 import static net.osmand.plus.transport.TransportLinesMenu.getTransportRules;
 
@@ -29,7 +30,6 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.configmap.ViewOfSettingHighlighter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -37,7 +37,11 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -254,20 +258,10 @@ public class TransportLinesFragment extends BaseOsmAndFragment implements Settin
 
 		private Set<String> attrNames;
 
-		private static int counter = 1;
-
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final TransportLinesFragment transportLinesFragment) {
 			attrNames = transportLinesFragment.viewByAttrName.keySet();
-			setArguments(
-					transportLinesFragment
-							.appMode
-							.map(BaseSettingsFragment::buildArguments)
-							.orElseGet(() -> {
-								final Bundle bundle = new Bundle();
-								bundle.putInt("counter", counter++);
-								return bundle;
-							}));
+			setArguments(buildArguments(transportLinesFragment.settings.APPLICATION_MODE.get()));
 		}
 
 		@Override

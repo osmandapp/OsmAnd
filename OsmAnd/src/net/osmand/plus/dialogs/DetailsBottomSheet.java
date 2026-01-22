@@ -1,5 +1,6 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.buildArguments;
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
@@ -300,16 +301,10 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 
 		private List<RenderingRuleProperty> properties;
 
-		private static int counter = 1;
-
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final DetailsBottomSheet detailsBottomSheet) {
 			properties = detailsBottomSheet.propertiesRepresentingMenuItems;
-			// setArguments(BaseSettingsFragment.buildArguments(detailsBottomSheet.getAppMode()));
-			// FK-TODO: remove counter
-			final Bundle args = new Bundle();
-			args.putInt("counter", counter++);
-			setArguments(args);
+			setArguments(buildArguments(detailsBottomSheet.app.getSettings().APPLICATION_MODE.get()));
 		}
 
 		@Override

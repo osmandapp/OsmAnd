@@ -100,7 +100,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public static final String CONFIGURE_SETTINGS_SEARCH = "configureSettingsSearch";
 
 	protected OsmandApplication app;
-	protected OsmandSettings settings;
+	// FK-TODO: make settings protected again
+	public OsmandSettings settings;
 	protected OsmAndAppCustomization appCustomization;
 	protected UiUtilities iconsCache;
 
@@ -142,7 +143,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	@SuppressLint("RestrictedApi")
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public @NonNull View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateTheme();
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
@@ -405,7 +406,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public static Bundle buildArguments(final ApplicationMode appModeKey) {
-		Bundle args = new Bundle();
+		final Bundle args = new Bundle();
 		args.putString(APP_MODE_KEY, appModeKey.getStringKey());
 		return args;
 	}

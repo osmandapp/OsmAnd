@@ -1,6 +1,7 @@
 package net.osmand.plus.dialogs;
 
 import static net.osmand.osm.OsmRouteType.SKI;
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.buildArguments;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 import android.app.Activity;
@@ -48,7 +49,13 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
@@ -300,15 +307,10 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		private Map<String, String> mapStyleByTranslation;
 
-		private static int counter = 1;
-
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final SelectMapStyleBottomSheetDialogFragment selectMapStyleBottomSheetDialogFragment) {
 			mapStyleByTranslation = selectMapStyleBottomSheetDialogFragment.stylesMap;
-			// FK-TODO: remove counter
-			final Bundle args = new Bundle();
-			args.putInt("counter", counter++);
-			setArguments(args);
+			setArguments(buildArguments(selectMapStyleBottomSheetDialogFragment.settings.APPLICATION_MODE.get()));
 		}
 
 		@Override

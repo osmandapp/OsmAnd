@@ -110,7 +110,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 
 	@SuppressLint("InlinedApi")
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public @NonNull View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			boolean nightMode = isNightMode();

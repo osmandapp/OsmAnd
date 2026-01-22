@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.fragments.search;
 
 import android.app.Activity;
-import android.util.Log;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -24,12 +23,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.ActivitySearchDatabaseConfigs;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.PrincipalAndProxy;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
-import de.KnollFrank.lib.settingssearch.graph.ComputePreferencesListener;
-import de.KnollFrank.lib.settingssearch.graph.TreeBuilderListener;
 import de.KnollFrank.lib.settingssearch.provider.ActivityInitializer;
 
 public class SearchDatabaseConfigFactory {
@@ -47,22 +43,7 @@ public class SearchDatabaseConfigFactory {
 				.withSearchableInfoProvider(SearchDatabaseConfigFactory::getSearchableInfo)
 				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 				.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
-				.withPreferenceScreenTreeBuilderListener(
-						new TreeBuilderListener<>() {
-
-							@Override
-							public void onBuildSubtreeStarted(final PreferenceScreenWithHost subtreeRoot) {
-								// FK-TODO: hier den ApplicationMode vorübergehend global setzen
-								Log.i(SearchDatabaseConfigFactory.class.getSimpleName(), String.format("onBuildSubtreeStarted(%s)", subtreeRoot));
-							}
-
-							@Override
-							public void onBuildSubtreeFinished(final PreferenceScreenWithHost subtreeRoot) {
-								// FK-TODO: hier den ApplicationMode vorübergehend global wieder zurücksetzen
-								Log.i(SearchDatabaseConfigFactory.class.getSimpleName(), String.format("onBuildSubtreeFinished(%s)", subtreeRoot));
-							}
-						})
-				.withComputePreferencesListener(enableCacheForDownloadedTileSourceTemplatesWhileBuildingSearchDatabase(tileSourceTemplatesProvider))
+				.withPreferenceScreenTreeBuilderListener(new TreeBuilderListener(tileSourceTemplatesProvider))
 				.build();
 	}
 
@@ -90,21 +71,5 @@ public class SearchDatabaseConfigFactory {
 		return preference instanceof final SearchableInfoProvider searchableInfoProvider ?
 				Optional.of(searchableInfoProvider.getSearchableInfo()) :
 				Optional.empty();
-	}
-
-	private static ComputePreferencesListener enableCacheForDownloadedTileSourceTemplatesWhileBuildingSearchDatabase(
-			final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
-		return new ComputePreferencesListener() {
-
-			@Override
-			public void onStartComputePreferences() {
-				tileSourceTemplatesProvider.enableCache();
-			}
-
-			@Override
-			public void onFinishComputePreferences() {
-				tileSourceTemplatesProvider.disableCache();
-			}
-		};
 	}
 }
