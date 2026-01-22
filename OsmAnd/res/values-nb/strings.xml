@@ -5893,4 +5893,7 @@
     <string name="use_separate_layouts">Bruk separate utforminger</string>
     <string name="map_screen_layout">Kartskjermutforming</string>
     <string name="map_screen_layout_descr">Velg om du vil bruke en enkel utforming for alle orienteringer, eller tilpasse stående og liggende separat.</string>
+    <string name="shared_string_step">Intervall</string>
+    <string name="set_step_size_summary">Velg en intervallstørrelse til å gruppere dine spor.</string>
+    <string name="set_step_size">Bestem intervallstørrelse</string>
 </resources>
