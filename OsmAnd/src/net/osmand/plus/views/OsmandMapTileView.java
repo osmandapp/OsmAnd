@@ -1618,12 +1618,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				mapRenderer.setTarget(new PointI(targetX, targetY));
 			}
  		}
+        currentViewport.setZoomAndAnimation(zoom, zoomAnimation, zoomFloatPart);
 		setElevationAngle(normalizeElevationAngle(this.elevationAngle));
-        if (mapRenderer != null) {
-            setCurrentZoom(zoomAnimation);
-        } else {
-            currentViewport.setZoomAndAnimation(zoom, zoomAnimation, zoomFloatPart);
-        }
 	}
 
 	private void setMapDensityImpl(double mapDensity) {
