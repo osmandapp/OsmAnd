@@ -1455,8 +1455,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 
-		DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-		if (drawerLayout != null && !drawerDisabled) {
+		if (!isDrawerDisabled()) {
 			switch (event.getActionMasked()) {
 				case MotionEvent.ACTION_POINTER_DOWN:
 				case MotionEvent.ACTION_MOVE:
