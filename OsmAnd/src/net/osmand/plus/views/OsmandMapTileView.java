@@ -1016,6 +1016,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public int getMaxZoom() {
+        MapRendererView mapRendererView = getMapRenderer();
+        if (mapRendererView != null) {
+            return Math.round(mapRendererView.getMaxZoomLevel());
+        }
 		int customizedZoom = app.getAppCustomization().getMaxZoom();
 		int maxSupportedZoom = mainLayer != null ? mainLayer.getMaximumShownMapZoom() : DEFAULT_MAX_ZOOM;
 		if (customizedZoom > 0) {
@@ -1025,6 +1029,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public int getMinZoom() {
+        MapRendererView mapRendererView = getMapRenderer();
+        if (mapRendererView != null) {
+            return Math.round(mapRendererView.getMinZoomLevel());
+        }
 		int customizedZoom = app.getAppCustomization().getMinZoom();
 		int minSupportedZoom = mainLayer != null ? mainLayer.getMinimumShownMapZoom() + 1 : DEFAULT_MIN_ZOOM;
 		return customizedZoom > 0
@@ -1619,7 +1627,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
  		}
         currentViewport.setZoomAndAnimation(zoom, zoomAnimation, zoomFloatPart);
-		setElevationAngle(normalizeElevationAngle(this.elevationAngle));
+        setElevationAngle(normalizeElevationAngle(this.elevationAngle));
 	}
 
 	private void setMapDensityImpl(double mapDensity) {
