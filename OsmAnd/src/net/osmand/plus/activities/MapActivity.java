@@ -1461,7 +1461,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				case MotionEvent.ACTION_MOVE:
 					// 2+ fingers on screen: disable drawer swipe
 					if (event.getPointerCount() >= 2) {
-						drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, GravityCompat.START);
+						drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 						break;
 					}
 				case MotionEvent.ACTION_POINTER_UP:
@@ -1469,7 +1469,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				case MotionEvent.ACTION_CANCEL:
 					// Fall through to possibly unlock again if < 2 fingers (or gesture ended)
 					if (event.getPointerCount() < 2) {
-						drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, GravityCompat.START);
+						drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 					}
 					break;
 			}
