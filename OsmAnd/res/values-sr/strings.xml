@@ -1440,7 +1440,7 @@
     <string name="this_year">Ове године</string>
     <string name="move_all_to_history">Све премести у историју</string>
     <string name="show_direction">Приказ удаљености</string>
-    <string name="sort_by">Распореди по</string>
+    <string name="sort_by">Сортирај по</string>
     <string name="do_not_use_animations">Уклони оживљавања</string>
     <string name="do_not_use_animations_descr">Искључује оживљавање мапа и КИ.</string>
     <string name="keep_showing_on_map">Приказуј на карти</string>
@@ -5948,7 +5948,7 @@
     <string name="month_year_creation">Месец и година стварања</string>
     <string name="nearest_city">Најближи град</string>
     <string name="avg_speed">Прос. брзина</string>
-    <string name="organize_by_max_speed">Највећа брзина</string>
+    <string name="organize_by_max_speed">Најв. брзина</string>
     <string name="organize_by_max_altitude">Највећа надморска висина</string>
     <string name="copy_from_portrait_layout">Умножи из усправног размештаја</string>
     <string name="copy_from_landscape_layout">Умножи из положеног размештаја</string>
