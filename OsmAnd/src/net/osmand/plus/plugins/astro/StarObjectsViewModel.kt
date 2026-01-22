@@ -90,4 +90,9 @@ class StarObjectsViewModel(
 		val now = Calendar.getInstance(TimeZone.getDefault())
 		updateTime(now)
 	}
+
+	fun refreshSkyObjects() {
+		val objects = _skyObjects.value ?: return
+		_skyObjects.value = objects
+	}
 }

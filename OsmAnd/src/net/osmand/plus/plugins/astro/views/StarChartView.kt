@@ -54,6 +54,11 @@ abstract class StarChartView @JvmOverloads constructor(
 	defStyleRes: Int = 0
 ) : View(context, attrs, defStyleAttr, defStyleRes) {
 
+	init {
+		isClickable = true
+		isFocusable = true
+	}
+
 	protected var skyObjects: List<SkyObject> = emptyList()
 
 	// Coroutine scope for background calculations
@@ -118,7 +123,7 @@ abstract class StarChartView @JvmOverloads constructor(
 					val newConfig = currentConfig.copy(favorites = favoritesConfig)
 					swSettings.setStarMapConfig(newConfig)
 
-					viewModel.loadData()
+					viewModel.refreshSkyObjects()
 					onSettingsChanged()
 				}
 				.setNegativeButton(R.string.shared_string_cancel, null)

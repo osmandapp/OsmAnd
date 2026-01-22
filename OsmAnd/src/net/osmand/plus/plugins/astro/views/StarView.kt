@@ -182,6 +182,7 @@ class StarView @JvmOverloads constructor(
 		}
 
 	// --- Astronomy Data ---
+	private var skyObjectsOrig: List<SkyObject>? = null
 	private val skyObjects = mutableListOf<SkyObject>()
 	private var constellations = listOf<Constellation>()
 	private val skyObjectMap = mutableMapOf<Int, SkyObject>()
@@ -255,7 +256,7 @@ class StarView @JvmOverloads constructor(
 
 	fun setObserverLocation(lat: Double, lon: Double, alt: Double) {
 		observer = Observer(lat, lon, alt)
-		recalculatePositions(currentTime, updateTargets = false)
+		recalculatePositions(currentTime, updateTargets = false, force = true)
 		invalidate()
 	}
 
@@ -352,6 +353,12 @@ class StarView @JvmOverloads constructor(
 
 	fun setSkyObjects(objects: List<SkyObject>) {
 		//visualAnimator?.cancel()
+		if (skyObjectsOrig === objects) {
+			refreshObjects()
+			return
+		}
+		skyObjectsOrig = objects
+
 		skyObjects.clear()
 		skyObjects.addAll(objects)
 		// Sort by magnitude (ascending): brighter objects (lower mag) come first
@@ -359,7 +366,7 @@ class StarView @JvmOverloads constructor(
 		skyObjectMap.clear()
 		objects.forEach { skyObjectMap[it.hip] = it }
 
-		recalculatePositions(currentTime, updateTargets = false)
+		recalculatePositions(currentTime, updateTargets = false, force = true)
 		skyObjects.forEach {
 			it.azimuth = it.targetAzimuth
 			it.altitude = it.targetAltitude
@@ -438,6 +445,11 @@ class StarView @JvmOverloads constructor(
 	}
 
 	fun updateVisibility() {
+		recalculatePositions(currentTime, updateTargets = false)
+		invalidate()
+	}
+
+	fun refreshObjects() {
 		recalculatePositions(currentTime, updateTargets = false)
 		invalidate()
 	}
@@ -543,7 +555,7 @@ class StarView @JvmOverloads constructor(
 				it.startAzimuth = it.azimuth
 				it.startAltitude = it.altitude
 			}
-			recalculatePositions(time, updateTargets = true)
+			recalculatePositions(time, updateTargets = true, force = true)
 			currentTime = time
 			visualAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
 				duration = 400
@@ -569,7 +581,7 @@ class StarView @JvmOverloads constructor(
 			}
 		} else {
 			currentTime = time
-			recalculatePositions(time, updateTargets = true)
+			recalculatePositions(time, updateTargets = true, force = true)
 			skyObjects.forEach {
 				it.azimuth = it.targetAzimuth
 				it.altitude = it.targetAltitude
@@ -595,11 +607,11 @@ class StarView @JvmOverloads constructor(
 		updateViewAngle(viewAngle * 1.5)
 	}
 
-	private fun recalculatePositions(time: Time, updateTargets: Boolean) {
+	private fun recalculatePositions(time: Time, updateTargets: Boolean, force: Boolean = false) {
 		skyObjects.forEach { obj ->
 			if (!shouldRecalculate(obj)) return@forEach
 
-			calculatePosition(obj, time, updateTargets)
+			calculatePosition(obj, time, updateTargets, force)
 		}
 
 		// Update Constellation Centroids positions
@@ -619,11 +631,9 @@ class StarView @JvmOverloads constructor(
 
 	fun calculatePosition(obj: SkyObject) = calculatePosition(obj, currentTime, false)
 
-	private fun calculatePosition(
-		obj: SkyObject,
-		time: Time,
-		updateTargets: Boolean
-	) {
+	private fun calculatePosition(obj: SkyObject, time: Time, updateTargets: Boolean, force: Boolean = false) {
+		if (!force && obj.lastUpdateTime == time.tt && !updateTargets) return
+
 		val hor: Topocentric
 		val body = obj.body
 		if (obj.type.isSunSystem() && body != null) {
@@ -642,6 +652,7 @@ class StarView @JvmOverloads constructor(
 			obj.altitude = hor.altitude
 			obj.targetAzimuth = hor.azimuth
 			obj.targetAltitude = hor.altitude
+			obj.lastUpdateTime = time.tt
 		}
 	}
 

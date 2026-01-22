@@ -106,7 +106,7 @@ class SkyObjectInfoFragment : Fragment() {
 			} else {
 				swSettings.removeFavorite(obj.id)
 			}
-			parent.viewModel.loadData()
+			parent.viewModel.refreshSkyObjects()
 		}
 
 		sheetMagnitude.text = "${getString(R.string.shared_string_magnitude)}: ${obj.magnitude}"
