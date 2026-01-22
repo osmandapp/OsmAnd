@@ -1458,7 +1458,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (!isDrawerDisabled()) {
 			switch (event.getActionMasked()) {
 				case MotionEvent.ACTION_POINTER_DOWN:
-				case MotionEvent.ACTION_MOVE:
 					// 2+ fingers on screen: disable drawer swipe
 					if (event.getPointerCount() >= 2) {
 						drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
