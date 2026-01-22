@@ -13,14 +13,11 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.TimeZone
 
-open class StarObjectsViewModel(
+class StarObjectsViewModel(
 	private val app: Application,
 	private val settings: StarWatcherSettings,
 	private val dataProvider: AstroDataProvider,
-	val viewType: StarObjectsViewType
 ) : AndroidViewModel(app) {
-
-	enum class StarObjectsViewType { MAP, CHART }
 
 	private val _skyObjects = MutableLiveData<List<SkyObject>>()
 	val skyObjects: LiveData<List<SkyObject>> = _skyObjects
@@ -35,6 +32,17 @@ open class StarObjectsViewModel(
 	private val _currentCalendar = MutableLiveData<Calendar>()
 	val currentCalendar: LiveData<Calendar> = _currentCalendar
 
+	class Factory(
+		private val application: Application,
+		private val settings: StarWatcherSettings,
+		private val dataProvider: AstroDataProvider
+	) : ViewModelProvider.Factory {
+		@Suppress("UNCHECKED_CAST")
+		override fun <T : ViewModel> create(modelClass: Class<T>): T {
+			return StarObjectsViewModel(application, settings, dataProvider) as T
+		}
+	}
+
 	init {
 		loadData()
 		resetTime()
@@ -43,15 +51,13 @@ open class StarObjectsViewModel(
 	fun loadData() {
 		viewModelScope.launch(Dispatchers.Default) {
 			val objects = dataProvider.getSkyObjects(app).toMutableList()
-			val items = if (viewType == StarObjectsViewType.MAP)
-				settings.getStarMapConfig().items else settings.getStarChartConfig().items
+			val favorites = settings.getStarMapConfig().favorites
 			// Create lookup map for config items
-			val itemMap = items.associateBy { it.id }
-			val indexMap = items.withIndex().associate { it.value.id to it.index }
+			val favoritesMap = favorites.associateBy { it.id }
+			val indexMap = favorites.withIndex().associate { it.value.id to it.index }
 
 			objects.forEach { obj ->
-				val itemConfig = itemMap[obj.id]
-				obj.isVisible = itemConfig?.isVisible ?: false
+				obj.isFavorite = favoritesMap.contains(obj.id)
 			}
 			objects.sortBy { indexMap[it.id] ?: Int.MAX_VALUE }
 
@@ -83,35 +89,5 @@ open class StarObjectsViewModel(
 	fun resetTime() {
 		val now = Calendar.getInstance(TimeZone.getDefault())
 		updateTime(now)
-	}
-}
-
-class StarMapObjectsViewModel(app: Application, settings: StarWatcherSettings, dataProvider: AstroDataProvider)
-	: StarObjectsViewModel(app, settings, dataProvider, StarObjectsViewType.MAP) {
-
-	class Factory(
-		private val application: Application,
-		private val settings: StarWatcherSettings,
-		private val dataProvider: AstroDataProvider
-	) : ViewModelProvider.Factory {
-		@Suppress("UNCHECKED_CAST")
-		override fun <T : ViewModel> create(modelClass: Class<T>): T {
-			return StarObjectsViewModel(application, settings, dataProvider, StarObjectsViewType.MAP) as T
-		}
-	}
-}
-
-class StarChartObjectsViewModel(app: Application, settings: StarWatcherSettings, dataProvider: AstroDataProvider)
-	: StarObjectsViewModel(app, settings, dataProvider, StarObjectsViewType.CHART) {
-
-	class Factory(
-		private val application: Application,
-		private val settings: StarWatcherSettings,
-		private val dataProvider: AstroDataProvider
-	) : ViewModelProvider.Factory {
-		@Suppress("UNCHECKED_CAST")
-		override fun <T : ViewModel> create(modelClass: Class<T>): T {
-			return StarObjectsViewModel(application, settings, dataProvider, StarObjectsViewType.CHART) as T
-		}
 	}
 }

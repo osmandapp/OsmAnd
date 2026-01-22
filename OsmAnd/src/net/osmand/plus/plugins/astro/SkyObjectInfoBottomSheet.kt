@@ -69,7 +69,7 @@ class SkyObjectInfoFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		arguments?.getString("skyObjectName")?.let { name ->
-			parent.starMapViewModel.skyObjects.value?.find { it.name == name }?.let {
+			parent.viewModel.skyObjects.value?.find { it.name == name }?.let {
 				updateObjectInfo(it)
 			}
 		}
@@ -110,7 +110,7 @@ class SkyObjectInfoFragment : Fragment() {
 		} else obj.body
 
 		if (bodyToCheck != null) {
-			val calendar = (parent.starMapViewModel.currentCalendar.value ?: Calendar.getInstance()).clone() as Calendar
+			val calendar = (parent.viewModel.currentCalendar.value ?: Calendar.getInstance()).clone() as Calendar
 			calendar.set(Calendar.HOUR_OF_DAY, 0)
 			calendar.set(Calendar.MINUTE, 0)
 			calendar.set(Calendar.SECOND, 0)

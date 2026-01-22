@@ -26,7 +26,7 @@ open class SkyObject(
 	open var distAu: Double = 0.0,
 
 	// Visibility flag
-	open var isVisible: Boolean = false,
+	open var isFavorite: Boolean = false,
 
 	// Animation state helpers
 	open var startAzimuth: Double = 0.0,

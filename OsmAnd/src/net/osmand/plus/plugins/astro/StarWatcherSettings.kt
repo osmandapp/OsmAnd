@@ -14,7 +14,6 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		private const val KEY_IS_2D_MODE = "is2DMode"
 
 		private const val KEY_STAR_MAP = "star_map"
-		private const val KEY_STAR_CHART = "star_chart"
 
 		private const val KEY_SHOW_AZIMUTHAL = "showAzimuthalGrid"
 		private const val KEY_SHOW_EQUATORIAL = "showEquatorialGrid"
@@ -35,19 +34,12 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		private const val KEY_SHOW_MAGNITUDE_FILTER = "showMagnitudeFilter"
 		private const val KEY_MAGNITUDE_FILTER = "magnitudeFilter"
 
-		private const val KEY_ITEMS = "items"
+		private const val KEY_FAVORITES = "favorites"
 		private const val KEY_ID = "id"
-		private const val KEY_VISIBLE = "visible"
-
-		private val DEFAULT_VISIBLE_IDS = setOf(
-			"sun", "moon", "mercury", "venus", "mars",
-			"jupiter", "saturn", "uranus", "neptune"
-		)
 	}
 
-	data class SkyObjectConfig(
+	data class FavoriteConfig(
 		val id: String,
-		val isVisible: Boolean
 	)
 
 	data class CommonConfig(
@@ -73,11 +65,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val is2DMode: Boolean,
 		val showMagnitudeFilter: Boolean,
 		val magnitudeFilter: Double?,
-		val items: List<SkyObjectConfig>
-	)
-
-	data class StarChartConfig(
-		val items: List<SkyObjectConfig>
+		val favorites: List<FavoriteConfig>
 	)
 
 	private fun getSettingsJson(): JSONObject {
@@ -96,32 +84,28 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		settingsPref.set(json.toString())
 	}
 
-	private fun parseItems(json: JSONObject?): List<SkyObjectConfig> {
-		val itemsList = mutableListOf<SkyObjectConfig>()
-		val itemsJson = json?.optJSONArray(KEY_ITEMS)
+	private fun parseFavorites(json: JSONObject?): List<FavoriteConfig> {
+		val favoritesList = mutableListOf<FavoriteConfig>()
+		val favoritesJson = json?.optJSONArray(KEY_FAVORITES)
 
-		if (itemsJson != null) {
-			for (i in 0 until itemsJson.length()) {
-				val itemObj = itemsJson.optJSONObject(i)
-				val id = itemObj?.optString(KEY_ID)
+		if (favoritesJson != null) {
+			for (i in 0 until favoritesJson.length()) {
+				val favObj = favoritesJson.optJSONObject(i)
+				val id = favObj?.optString(KEY_ID)
 				if (!id.isNullOrEmpty()) {
-					val visible = itemObj.optBoolean(KEY_VISIBLE, true)
-					itemsList.add(SkyObjectConfig(id, visible))
+					favoritesList.add(FavoriteConfig(id))
 				}
 			}
-		} else {
-			DEFAULT_VISIBLE_IDS.forEach { id -> itemsList.add(SkyObjectConfig(id, true)) }
 		}
 
-		return itemsList
+		return favoritesList
 	}
 
-	private fun serializeItems(items: List<SkyObjectConfig>): JSONArray {
+	private fun serializeFavorites(favorites: List<FavoriteConfig>): JSONArray {
 		val array = JSONArray()
-		items.forEach { item ->
+		favorites.forEach { item ->
 			val obj = JSONObject()
 			obj.put(KEY_ID, item.id)
-			obj.put(KEY_VISIBLE, item.isVisible)
 			array.put(obj)
 		}
 		return array
@@ -175,7 +159,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showMagnitudeFilter = mapSettings?.optBoolean(KEY_SHOW_MAGNITUDE_FILTER, false) ?: false
 		val magnitudeFilter = mapSettings?.optDouble(KEY_MAGNITUDE_FILTER)?.takeIf { !it.isNaN() }
 
-		val items = parseItems(mapSettings)
+		val items = parseFavorites(mapSettings)
 
 		return StarMapConfig(
 			showAzimuthalGrid = showAzimuthal,
@@ -195,7 +179,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 			is2DMode = is2DMode,
 			showMagnitudeFilter = showMagnitudeFilter,
 			magnitudeFilter = magnitudeFilter,
-			items = items
+			favorites = items
 		)
 	}
 
@@ -230,24 +214,9 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 			mapSettings.put(KEY_MAGNITUDE_FILTER, config.magnitudeFilter)
 		}
 
-		mapSettings.put(KEY_ITEMS, serializeItems(config.items))
+		mapSettings.put(KEY_FAVORITES, serializeFavorites(config.favorites))
 
 		root.put(KEY_STAR_MAP, mapSettings)
-		setSettingsJson(root)
-	}
-
-	fun getStarChartConfig(): StarChartConfig {
-		val root = getSettingsJson()
-		val chartSettings = root.optJSONObject(KEY_STAR_CHART)
-		val items = parseItems(chartSettings)
-		return StarChartConfig(items)
-	}
-
-	fun setStarChartConfig(config: StarChartConfig) {
-		val root = getSettingsJson()
-		val chartSettings = root.optJSONObject(KEY_STAR_CHART) ?: JSONObject()
-		chartSettings.put(KEY_ITEMS, serializeItems(config.items))
-		root.put(KEY_STAR_CHART, chartSettings)
 		setSettingsJson(root)
 	}
 }

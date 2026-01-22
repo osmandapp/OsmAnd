@@ -68,7 +68,7 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		val endLocal = startLocal.plusDays(1)
 		val obs = Observer(config.latitude, config.longitude, config.elevation)
 
-		val rows = skyObjects.filter { it.isVisible }.map { obj ->
+		val rows = skyObjects.filter { it.isFavorite }.map { obj ->
 			currentCoroutineContext().ensureActive()
 			val spans = computeVisibleSpans(obj, startLocal, endLocal, obs)
 			val (rise, set) = AstroUtils.nextRiseSet(obj, startLocal, obs, startLocal, endLocal)

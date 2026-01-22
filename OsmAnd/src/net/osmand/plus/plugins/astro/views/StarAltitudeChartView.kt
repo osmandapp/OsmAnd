@@ -107,8 +107,7 @@ class StarAltitudeChartView @JvmOverloads constructor(
 
 		val timeFmt = DateTimeFormatter.ofPattern("HH:mm")
 
-		// Filter invisible objects and map to paths
-		val paths = skyObjects.filter { it.isVisible }.map { obj ->
+		val paths = skyObjects.filter { it.isFavorite }.map { obj ->
 			currentCoroutineContext().ensureActive()
 			val path = Path()
 			var t = startLocal

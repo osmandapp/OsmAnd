@@ -86,8 +86,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var lastUpdatedLocation: Location? = null
 	private var lastUpdatedAzimuth: Double = -1.0
 
-	internal lateinit var starMapViewModel: StarObjectsViewModel
-	private lateinit var starChartViewModel: StarObjectsViewModel
+	internal lateinit var viewModel: StarObjectsViewModel
 	private var selectedObject: SkyObject? = null
 
 	private val dataProvider: AstroDataProvider by lazy {
@@ -156,10 +155,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val view = themedInflater.inflate(R.layout.fragment_star_map, container, false)
 
 		val app = requireActivity().application as OsmandApplication
-		starMapViewModel = ViewModelProvider(
-			this, StarMapObjectsViewModel.Factory(app, swSettings, dataProvider))[StarMapObjectsViewModel::class.java]
-		starChartViewModel = ViewModelProvider(
-			this, StarChartObjectsViewModel.Factory(app, swSettings, dataProvider))[StarChartObjectsViewModel::class.java]
+		viewModel = ViewModelProvider(this,
+			StarObjectsViewModel.Factory(app, swSettings, dataProvider))[StarObjectsViewModel::class.java]
 
 		starView = view.findViewById(R.id.star_view)
 		timeSelectionView = view.findViewById(R.id.time_selection_view)
@@ -221,7 +218,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		})
 
 		resetMagnitudeButton.setOnClickListener {
-			val objects = starMapViewModel.skyObjects.value ?: emptyList()
+			val objects = viewModel.skyObjects.value ?: emptyList()
 			if (objects.isNotEmpty()) {
 				magnitudeSlider.progress = ((MAX_MAGNITUDE + 1.0) * 10.0).toInt()
 				starView.magnitudeFilter = null
@@ -247,7 +244,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starChartState = StarChartState(app)
 
 		view.findViewById<AppCompatImageView>(R.id.chart_settings_button).apply {
-			setOnClickListener { StarChartView.showFilterDialog(context, starChartViewModel) { updateStarChart() } }
+			setOnClickListener { StarChartView.showFilterDialog(context, viewModel) { updateStarChart() } }
 		}
 		view.findViewById<AppCompatImageView>(R.id.switch_chart_button).apply {
 			setOnClickListener { starChartState.changeToNextState(); updateStarChart() }
@@ -309,7 +306,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		mode2dButton.setOnClickListener { toggle2DMode() }
 
 		resetTimeButton.setOnClickListener {
-			starMapViewModel.resetTime(); starChartViewModel.resetTime()
+			viewModel.resetTime()
 			resetTimeButton.visibility = View.GONE
 		}
 
@@ -608,18 +605,20 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun setupObservers() {
-		starMapViewModel.currentTime.observe(viewLifecycleOwner) { time ->
+		viewModel.currentTime.observe(viewLifecycleOwner) { time ->
 			starView.setDateTime(time, animate = true)
 			updateBottomSheetInfo()
+			updateStarChart()
 		}
-		starMapViewModel.currentCalendar.observe(viewLifecycleOwner) { calendar ->
+		viewModel.currentCalendar.observe(viewLifecycleOwner) { calendar ->
 			timeSelectionView.setDateTime(calendar)
 			val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 			timeControlBtn.text = timeFormat.format(calendar.time)
 		}
-		starChartViewModel.currentTime.observe(viewLifecycleOwner) { updateStarChart() }
-		starMapViewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
+		viewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
 			starView.setSkyObjects(objects)
+			starVisiblityView.setChartObjects(objects)
+			starAltitudeView.setChartObjects(objects)
 			if (objects.isNotEmpty()) {
 				val maxMag = MAX_MAGNITUDE
 				val maxSliderVal = ((maxMag + 1.0) * 10.0).toInt()
@@ -635,19 +634,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", filterToUse)
 			}
 		}
-		starMapViewModel.constellations.observe(viewLifecycleOwner) { constellations ->
+		viewModel.constellations.observe(viewLifecycleOwner) { constellations ->
 			starView.setConstellations(constellations)
-		}
-		starChartViewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
-			starVisiblityView.setChartObjects(objects)
-			starAltitudeView.setChartObjects(objects)
 		}
 	}
 
 	private fun setupListeners() {
 		timeSelectionView.setOnDateTimeChangeListener { calendar ->
-			starMapViewModel.updateTime(calendar)
-			starChartViewModel.updateTime(calendar)
+			viewModel.updateTime(calendar)
 			resetTimeButton.visibility = View.VISIBLE
 		}
 		starView.setOnObjectClickListener { obj ->
@@ -688,14 +682,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private fun updateStarChart() {
 		val location = app.osmandMap.mapView.currentRotatedTileBox.centerLatLon
 		val chartType = starChartState.getStarChartType()
-		val calendar = starChartViewModel.currentCalendar.value
-		val zoneId: ZoneId
+		val calendar = viewModel.currentCalendar.value
 		val localDate: LocalDate
 		if (calendar != null) {
-			zoneId = calendar.timeZone.toZoneId()
+			val zoneId = calendar.timeZone.toZoneId()
 			localDate = calendar.toInstant().atZone(zoneId).toLocalDate()
 		} else {
-			zoneId = TimeZone.getDefault().toZoneId()
 			localDate = LocalDate.now()
 		}
 		when (chartType) {
@@ -748,7 +740,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	internal fun getSearchableObjects(): List<SkyObject> {
-		val objects = starMapViewModel.skyObjects.value?.toMutableList() ?: mutableListOf()
+		val objects = viewModel.skyObjects.value?.toMutableList() ?: mutableListOf()
 		val constellations = dataProvider.getConstellations(requireContext())
 		constellations.forEach { c ->
 			objects.add(SkyObject(
