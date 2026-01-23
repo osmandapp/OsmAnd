@@ -44,7 +44,7 @@ import de.KnollFrank.lib.settingssearch.graph.TreeMerger;
 import de.KnollFrank.lib.settingssearch.graph.TreePathInstantiator;
 import de.KnollFrank.lib.settingssearch.results.recyclerview.FragmentContainerViewAdder;
 
-// FK-TODO: DRY with SearchDatabaseRootedAtPreferenceFragmentAdapter
+// FK-TODO: DRY with SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter
 @SuppressWarnings({"UnstableApiUsage", "NullableProblems"})
 public class PluginSettingsOfConfigureProfileFragmentAdapter implements SearchablePreferenceScreenTreeTransformer<Configuration> {
 
