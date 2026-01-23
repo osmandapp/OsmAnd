@@ -5321,13 +5321,13 @@
     <string name="corner_radius">Rayon d\'angle</string>
     <string name="raster_layers_action_descr">Modifier les couches matricielles</string>
     <string name="contour_layers_action_descr">Modifier les couches de courbes de niveau</string>
-    <string name="configure_map_description">Modifier le style de carte, les couches ou d\'autres paramètres.</string>
+    <string name="configure_map_description">Modifie le style de la carte, les couches ou d\'autres paramètres.</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Afficher les sentiers de motocross</string>
     <string name="change_zoom_action_descr">Modifier le zoom de la carte.</string>
     <string name="search_action_descr">Ouvre la recherche.</string>
-    <string name="navigation_action_descr">Ouvre le guidage.</string>
-    <string name="my_location_action_descr">Centre la carte sur votre position actuelle.</string>
-    <string name="map_3d_mode_action_descr">Modifier l\'inclinaison de la carte.</string>
+    <string name="navigation_action_descr">Ouvre la navigation.</string>
+    <string name="my_location_action_descr">Centre votre carte en fonction de votre position actuelle.</string>
+    <string name="map_3d_mode_action_descr">Modifie l\'inclinaison de la carte.</string>
     <string name="drawer_button_description">Ouvre le menu principal.</string>
     <string name="shared_string_increase">Augmenter</string>
     <string name="type_of_activity">Type d\'activité</string>
@@ -5464,7 +5464,7 @@
     <string name="obd_connected_to_device">Connecté à %s</string>
     <string name="obd_not_connected_to_device">Déconnecté de %s</string>
     <string name="obd_connecting_to_device">Connexion en cours à %s</string>
-    <string name="dynamic_icon_type_summary">L’icône change en fonction de l\'état de l\'action.</string>
+    <string name="dynamic_icon_type_summary">L\'icône change en fonction de l\'état de l\'action.</string>
     <string name="record_obd_data">Enregistrer les données du véhicule</string>
     <string name="fuel_tank_capacity_description">Saisir la capacité du réservoir pour suivre avec précision le niveau de carburant et la consommation</string>
     <string name="fuel_tank_capacity">Capacité du réservoir de carburant</string>
