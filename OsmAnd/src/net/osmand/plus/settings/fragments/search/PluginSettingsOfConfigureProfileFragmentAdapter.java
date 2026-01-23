@@ -57,15 +57,19 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 	}
 
 	@Override
-	public SearchablePreferenceScreenTree transformTree(final SearchablePreferenceScreenTree tree,
-														final Configuration actualConfiguration,
-														final FragmentActivity activityContext) {
-		return adaptPluginSettingsOfConfigureProfileFragmentForAllApplicationModes(tree, actualConfiguration, activityContext);
+	public Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> transformSearchablePreferenceScreenTree(
+			final SearchablePreferenceScreenTree<Configuration> searchablePreferenceScreenTree,
+			final Configuration targetConfiguration,
+			final FragmentActivity activityContext) {
+		return adaptPluginSettingsOfConfigureProfileFragmentForAllApplicationModes(
+				searchablePreferenceScreenTree.tree(),
+				searchablePreferenceScreenTree.locale(),
+				activityContext);
 	}
 
-	private SearchablePreferenceScreenTree adaptPluginSettingsOfConfigureProfileFragmentForAllApplicationModes(
-			final SearchablePreferenceScreenTree tree,
-			final Configuration newConfiguration,
+	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> adaptPluginSettingsOfConfigureProfileFragmentForAllApplicationModes(
+			final Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> tree,
+			final Locale locale,
 			final FragmentActivity activityContext) {
 		return PluginSettingsOfConfigureProfileFragmentAdapter
 				.getApplicationModesWithoutDefault()
@@ -76,17 +80,17 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 								adaptPluginSettingsOfConfigureProfileFragmentForApplicationMode(
 										currentTree,
 										applicationMode,
-										newConfiguration,
+										locale,
 										activityContext),
 						(tree1, tree2) -> {
 							throw new UnsupportedOperationException("Parallel stream not supported");
 						});
 	}
 
-	private SearchablePreferenceScreenTree adaptPluginSettingsOfConfigureProfileFragmentForApplicationMode(
-			final SearchablePreferenceScreenTree tree,
+	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> adaptPluginSettingsOfConfigureProfileFragmentForApplicationMode(
+			final Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> tree,
 			final ApplicationMode applicationMode,
-			final Configuration newConfiguration,
+			final Locale locale,
 			final FragmentActivity activityContext) {
 		OnUiThreadRunnerFactory
 				.fromActivity(activityContext)
@@ -98,29 +102,26 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 				});
 		final SearchablePreferenceScreen configureProfilePreferenceScreen =
 				getPreferenceScreenOfConfigureProfileFragment(
-						tree.tree().graph().nodes(),
+						tree.graph().nodes(),
 						applicationMode);
 		final SearchDatabaseConfig searchDatabaseConfig =
 				SearchDatabaseConfigFactory.createSearchDatabaseConfig(
 						MainSettingsFragment.class,
 						tileSourceTemplatesProvider,
 						activityContext.getSupportFragmentManager());
-		return new SearchablePreferenceScreenTree(
-				TreeMerger.mergeTreeIntoTreeNode(
-						// FK-TODO: dieser Aufruf von getPojoGraphRootedAt() darf aus Performancegründen ausschließlich den Pluginpreferences folgen.
-						getPojoTreeRootedAt(
-								instantiateSearchablePreferenceScreen(
-										configureProfilePreferenceScreen,
-										tree.tree(),
-										createTreePathInstantiator(searchDatabaseConfig, activityContext)),
-								tree.locale(),
-								activityContext,
-								searchDatabaseConfig),
-						new TreeNode<>(
+		return TreeMerger.mergeTreeIntoTreeNode(
+				// FK-TODO: dieser Aufruf von getPojoGraphRootedAt() darf aus Performancegründen ausschließlich den Pluginpreferences folgen.
+				getPojoTreeRootedAt(
+						instantiateSearchablePreferenceScreen(
 								configureProfilePreferenceScreen,
-								tree.tree())),
-				tree.locale(),
-				new ConfigurationBundleConverter().convertForward(newConfiguration));
+								tree,
+								createTreePathInstantiator(searchDatabaseConfig, activityContext)),
+						locale,
+						activityContext,
+						searchDatabaseConfig),
+				new TreeNode<>(
+						configureProfilePreferenceScreen,
+						tree));
 	}
 
 	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> getPojoTreeRootedAt(

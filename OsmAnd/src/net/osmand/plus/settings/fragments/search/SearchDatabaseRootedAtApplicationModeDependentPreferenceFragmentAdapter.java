@@ -52,15 +52,19 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 	}
 
 	@Override
-	public SearchablePreferenceScreenTree transformTree(final SearchablePreferenceScreenTree tree,
-														final Configuration actualConfiguration,
-														final FragmentActivity activityContext) {
-		return adaptTreeAtPreferenceFragmentForAllApplicationModes(tree, actualConfiguration, activityContext);
+	public Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> transformSearchablePreferenceScreenTree(
+			final SearchablePreferenceScreenTree<Configuration> searchablePreferenceScreenTree,
+			final Configuration targetConfiguration,
+			final FragmentActivity activityContext) {
+		return adaptTreeAtPreferenceFragmentForAllApplicationModes(
+				searchablePreferenceScreenTree.tree(),
+				searchablePreferenceScreenTree.locale(),
+				activityContext);
 	}
 
-	private SearchablePreferenceScreenTree adaptTreeAtPreferenceFragmentForAllApplicationModes(
-			final SearchablePreferenceScreenTree tree,
-			final Configuration newConfiguration,
+	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> adaptTreeAtPreferenceFragmentForAllApplicationModes(
+			final Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> tree,
+			final Locale locale,
 			final FragmentActivity activityContext) {
 		return SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter
 				.getApplicationModesWithoutDefault()
@@ -71,17 +75,17 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 								adaptTreeAtPreferenceFragmentForApplicationMode(
 										currentTree,
 										applicationMode,
-										newConfiguration,
+										locale,
 										activityContext),
 						(tree1, tree2) -> {
 							throw new UnsupportedOperationException("Parallel stream not supported");
 						});
 	}
 
-	private SearchablePreferenceScreenTree adaptTreeAtPreferenceFragmentForApplicationMode(
-			final SearchablePreferenceScreenTree tree,
+	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> adaptTreeAtPreferenceFragmentForApplicationMode(
+			final Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> tree,
 			final ApplicationMode applicationMode,
-			final Configuration newConfiguration,
+			final Locale locale,
 			final FragmentActivity activityContext) {
 		OnUiThreadRunnerFactory
 				.fromActivity(activityContext)
@@ -100,21 +104,18 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 						MainSettingsFragment.class,
 						tileSourceTemplatesProvider,
 						activityContext.getSupportFragmentManager());
-		return new SearchablePreferenceScreenTree(
-				SubtreeReplacer.replaceSubtreeWithTree(
-						new Subtree<>(
-								tree.tree(),
-								preferenceScreen),
-						getPojoTreeRootedAt(
-								instantiateSearchablePreferenceScreen(
-										preferenceScreen,
-										tree.tree(),
-										createTreePathInstantiator(searchDatabaseConfig, activityContext)),
-								tree.locale(),
-								activityContext,
-								searchDatabaseConfig)),
-				tree.locale(),
-				new ConfigurationBundleConverter().convertForward(newConfiguration));
+		return SubtreeReplacer.replaceSubtreeWithTree(
+				new Subtree<>(
+						tree,
+						preferenceScreen),
+				getPojoTreeRootedAt(
+						instantiateSearchablePreferenceScreen(
+								preferenceScreen,
+								tree,
+								createTreePathInstantiator(searchDatabaseConfig, activityContext)),
+						locale,
+						activityContext,
+						searchDatabaseConfig));
 	}
 
 	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> getPojoTreeRootedAt(
@@ -136,11 +137,11 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 	}
 
 	private SearchablePreferenceScreen getPreferenceScreenOfPreferenceFragment(
-			final SearchablePreferenceScreenTree treeToSearchIn,
+			final Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> treeToSearchIn,
 			final ApplicationMode applicationMode) {
 		return SearchablePreferenceScreens
 				.findSearchablePreferenceScreenById(
-						treeToSearchIn.tree().graph().nodes(),
+						treeToSearchIn.graph().nodes(),
 						String.format(
 								"en-%s Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
 								preferenceFragment.getName(),

@@ -2,12 +2,17 @@ package net.osmand.plus.settings.fragments.search;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.google.common.graph.ImmutableValueGraph;
+
 import java.io.File;
 import java.util.Optional;
 
+import de.KnollFrank.lib.settingssearch.common.graph.Tree;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PreferencesDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PrepackagedPreferencesDatabase;
 import de.KnollFrank.lib.settingssearch.db.preference.db.transformer.SearchablePreferenceScreenTreeTransformer;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreen;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenTree;
 
 public class PreferencesDatabaseConfigFactory {
@@ -30,12 +35,14 @@ public class PreferencesDatabaseConfigFactory {
 								new SearchablePreferenceScreenTreeTransformer<>() {
 
 									@Override
-									public SearchablePreferenceScreenTree transformTree(final SearchablePreferenceScreenTree tree,
-																						final Configuration actualConfiguration,
-																						final FragmentActivity activityContext) {
-										// FK-TODO: implement by computing tree for actualConfiguration, d.h. actualConfiguration.enabledPlugins haben Preferences, die zum graph dazugefügt oder aus dem tree entfernt werden müssen.
+									@SuppressWarnings({"UnstableApiUsage", "NullableProblems"})
+									public Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> transformSearchablePreferenceScreenTree(
+											final SearchablePreferenceScreenTree<Configuration> searchablePreferenceScreenTree,
+											final Configuration targetConfiguration,
+											final FragmentActivity activityContext) {
+										// FK-TODO: implement by computing tree for targetConfiguration, d.h. targetConfiguration.enabledPlugins haben Preferences, die zum graph dazugefügt oder aus dem tree entfernt werden müssen.
 										// siehe SettingsSearch: SearchDatabaseRootedAtPrefsFragmentFirstAdapter
-										return tree;
+										return searchablePreferenceScreenTree.tree();
 									}
 								})),
 				PreferencesDatabaseConfig.JournalMode.AUTOMATIC);

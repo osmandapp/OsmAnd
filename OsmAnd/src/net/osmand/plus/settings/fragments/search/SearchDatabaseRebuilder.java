@@ -22,7 +22,6 @@ import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
 import de.KnollFrank.lib.settingssearch.db.preference.db.transformer.SearchablePreferenceScreenTreeCreator;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreen;
-import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenTree;
 import de.KnollFrank.lib.settingssearch.fragment.FragmentFactoryAndInitializer;
 import de.KnollFrank.lib.settingssearch.fragment.FragmentInitializerFactory;
 import de.KnollFrank.lib.settingssearch.fragment.Fragments;
@@ -41,10 +40,11 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenTreeCr
 	}
 
 	@Override
-	@SuppressWarnings({"UnstableApiUsage"})
-	public SearchablePreferenceScreenTree createTree(final Locale locale,
-													 final Configuration actualConfiguration,
-													 final FragmentActivity activityContext) {
+	@SuppressWarnings({"UnstableApiUsage", "NullableProblems"})
+	public Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> createTree(
+			final Locale locale,
+			final Configuration targetConfiguration,
+			final FragmentActivity activityContext) {
 		OnUiThreadRunnerFactory
 				.fromActivity(activityContext)
 				.runBlockingOnUiThread(() -> {
@@ -58,16 +58,13 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenTreeCr
 						MainSettingsFragment.class,
 						tileSourceTemplatesProvider,
 						activityContext.getSupportFragmentManager());
-		return new SearchablePreferenceScreenTree(
-				getPojoTreeRootedAt(
-						instantiateSearchablePreferenceScreen(
-								searchDatabaseConfig,
-								activityContext),
-						locale,
-						activityContext,
-						searchDatabaseConfig),
+		return getPojoTreeRootedAt(
+				instantiateSearchablePreferenceScreen(
+						searchDatabaseConfig,
+						activityContext),
 				locale,
-				new ConfigurationBundleConverter().convertForward(actualConfiguration));
+				activityContext,
+				searchDatabaseConfig);
 	}
 
 	@SuppressWarnings({"UnstableApiUsage", "NullableProblems"})
