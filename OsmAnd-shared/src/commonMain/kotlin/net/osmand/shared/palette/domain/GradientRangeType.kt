@@ -1,4 +1,4 @@
-package net.osmand.plus.palette.domain
+package net.osmand.shared.palette.domain
 
 /**
  * Determines how gradient values are interpreted.

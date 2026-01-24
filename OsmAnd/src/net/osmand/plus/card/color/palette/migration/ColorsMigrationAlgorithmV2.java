@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.DefaultPaletteColors;
 import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
 import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionBundle;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
@@ -22,6 +21,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.track.AppearanceListItem;
 import net.osmand.plus.track.GpxAppearanceAdapter;
+import net.osmand.shared.palette.domain.DefaultPaletteColors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -71,7 +71,7 @@ public class ColorsMigrationAlgorithmV2 {
 	private void executeImpl() {
 		// Collect available colors from the user palette file
 		ColorsCollection newCollection = new FileColorsCollection(app);
-		newCollection.addAllUniqueColors(DefaultPaletteColors.valuesList());
+		newCollection.addAllUniqueColors(DefaultPaletteColors.values());
 		List<PaletteColor> originalOrder = newCollection.getColors(PaletteSortingMode.ORIGINAL);
 
 		// Collect available colors from the old preferences

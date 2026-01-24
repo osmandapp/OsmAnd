@@ -1,4 +1,4 @@
-package net.osmand.plus.palette.domain
+package net.osmand.shared.palette.domain
 
 import net.osmand.shared.gpx.filters.MeasureUnitType
 import net.osmand.shared.units.LengthUnits
@@ -122,12 +122,11 @@ enum class GradientPaletteCategory(
 		 * Determines category by filename prefix.
 		 * Vital for parsing files from the directory (Reverse engineering).
 		 */
-		fun fromFileName(fileName: String): GradientPaletteCategory {
+		fun fromFileName(fileName: String): GradientPaletteCategory? {
 			// Find the longest matching prefix to avoid conflicts (e.g. slope_ vs route_slope_)
 			return entries
 				.filter { it != UNKNOWN && fileName.startsWith(it.filePrefix) }
 				.maxByOrNull { it.filePrefix.length }
-				?: UNKNOWN
 		}
 	}
 }

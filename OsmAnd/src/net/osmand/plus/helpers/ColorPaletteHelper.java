@@ -51,7 +51,7 @@ public class ColorPaletteHelper {
 		return colorPalettes;
 	}
 
-	private Map<String, Pair<ColorPalette, Long>> getColorizationTypePallets(@NonNull ColorizationType type){
+	private Map<String, Pair<ColorPalette, Long>> getColorizationTypePallets(@NonNull ColorizationType type) {
 		Map<String, Pair<ColorPalette, Long>> colorPalettes = new HashMap<>();
 		String colorTypePrefix = ROUTE_PREFIX + type.name().toLowerCase() + GRADIENT_ID_SPLITTER;
 

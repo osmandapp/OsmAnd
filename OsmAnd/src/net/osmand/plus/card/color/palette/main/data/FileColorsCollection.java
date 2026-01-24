@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import net.osmand.ColorPalette;
 import net.osmand.ColorPalette.ColorValue;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.shared.palette.domain.DefaultPaletteColors;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,10 +28,10 @@ public class FileColorsCollection extends ColorsCollection {
 		this(getSourceFile(app));
 	}
 
-	public FileColorsCollection(@NonNull File file) {
+	private FileColorsCollection(@NonNull File file) {
 		this.file = file;
 		if (fileRecreated) {
-			addAllUniqueColors(DefaultPaletteColors.valuesList());
+			addAllUniqueColors(DefaultPaletteColors.values());
 		} else {
 			loadColors();
 		}

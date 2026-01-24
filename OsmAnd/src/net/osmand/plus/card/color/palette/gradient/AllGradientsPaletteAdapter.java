@@ -103,8 +103,8 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 	@Override
 	public long getItemId(int position) {
 		PaletteColor paletteColor = colors.get(position);
-		if (paletteColor instanceof PaletteGradientColor) {
-			return ((PaletteGradientColor) paletteColor).getStringId().hashCode();
+		if (paletteColor instanceof PaletteGradientColor gradientColor) {
+			return gradientColor.getStringId().hashCode();
 		}
 		return paletteColor.getId();
 	}

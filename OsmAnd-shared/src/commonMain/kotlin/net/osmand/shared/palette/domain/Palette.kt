@@ -1,8 +1,9 @@
-package net.osmand.plus.palette.domain
+package net.osmand.shared.palette.domain
+
+import net.osmand.shared.io.KFile
 
 /**
  * Represents a grouped collection of palette items.
- * Maps to a folder (for gradients) or a file (for solid colors).
  */
 sealed class Palette {
 	abstract val id: String
@@ -14,7 +15,8 @@ sealed class Palette {
 		override val id: String,
 		override val displayName: String,
 		override val items: List<PaletteItem.Solid>,
-		override val isEditable: Boolean = true
+		override val isEditable: Boolean = true,
+		val sourceFile: KFile
 	) : Palette()
 
 	data class GradientCollection(
