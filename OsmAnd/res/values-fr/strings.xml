@@ -5326,7 +5326,7 @@
     <string name="change_zoom_action_descr">Modifier le zoom de la carte.</string>
     <string name="search_action_descr">Ouvre la recherche.</string>
     <string name="navigation_action_descr">Ouvre la navigation.</string>
-    <string name="my_location_action_descr">Centre votre carte en fonction de votre position actuelle.</string>
+    <string name="my_location_action_descr">Centre la carte sur votre position actuelle.</string>
     <string name="map_3d_mode_action_descr">Modifie l\'inclinaison de la carte.</string>
     <string name="drawer_button_description">Ouvre le menu principal.</string>
     <string name="shared_string_increase">Augmenter</string>
