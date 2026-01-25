@@ -5948,4 +5948,5 @@
     <string name="copy_from_landscape_layout">Kopii el horizontala aranĝo</string>
     <string name="panels_layout_compact">kompakta</string>
     <string name="panels_layout_wide">larĝa</string>
+    <string name="panels_layout">Aranĝo de paneloj</string>
 </resources>
