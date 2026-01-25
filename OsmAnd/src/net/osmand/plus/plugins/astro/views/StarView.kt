@@ -155,6 +155,7 @@ class StarView @JvmOverloads constructor(
 	private var projScale = 1.0
 	private var projHalfWidth = 0.0
 	private var projHalfHeight = 0.0
+	private var minCosCVisible = -1.0
 
 	// --- Visibility Flags ---
 	var showAzimuthalGrid = true
@@ -1559,9 +1560,31 @@ class StarView @JvmOverloads constructor(
 		projScale = width / (4.0 * tan(viewAngleRad / 4.0))
 		projHalfWidth = width / 2.0
 		projHalfHeight = height / 2.0
+
+		// Optimisation: Calculate minimum cosine of the angular distance from center
+		// that is still visible on screen.
+		val cx = projHalfWidth + panX
+		val cy = projHalfHeight + panY
+		val w = width.toDouble()
+		val h = height.toDouble()
+
+		val d1Sq = cx * cx + cy * cy
+		val d2Sq = (cx - w) * (cx - w) + cy * cy
+		val d3Sq = (cx - w) * (cx - w) + (cy - h) * (cy - h)
+		val d4Sq = cx * cx + (cy - h) * (cy - h)
+
+		val maxDistSq = max(d1Sq, max(d2Sq, max(d3Sq, d4Sq)))
+
+		// Use a generous margin (2.0x screen radius) to allow for lines connecting off-screen points
+		val maxTanHalf = sqrt(maxDistSq) * 2.0 / (2.0 * projScale)
+		val t2 = maxTanHalf * maxTanHalf
+		minCosCVisible = (1.0 - t2) / (1.0 + t2)
 	}
 
 	private fun skyToScreen(azimuth: Double, altitude: Double, outPoint: PointF): Boolean {
+		// Fast rejection based on altitude (avoids trig)
+		if (abs(altitude - altitudeCenter) > viewAngle + 40.0) return false
+
 		val azRad = Math.toRadians(azimuth - azimuthCenter)
 		val altRad = Math.toRadians(altitude)
 		val sinAlt = sin(altRad)
@@ -1569,7 +1592,9 @@ class StarView @JvmOverloads constructor(
 		val sinAz = sin(azRad)
 		val cosAz = cos(azRad)
 		val cosC = projSinAltCenter * sinAlt + projCosAltCenter * cosAlt * cosAz
-		if (cosC <= -0.3) return false
+
+		if (cosC < minCosCVisible) return false
+
 		val k = 2.0 / (1.0 + cosC)
 		val combinedScale = k * projScale
 		val xRaw = cosAlt * sinAz
