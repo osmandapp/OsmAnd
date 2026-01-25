@@ -1,4 +1,4 @@
-package net.osmand.shared.palette.data
+package net.osmand.shared.palette.data.solid
 
 import net.osmand.shared.ColorPalette
 import net.osmand.shared.palette.domain.Palette

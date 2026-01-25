@@ -3,6 +3,9 @@ package net.osmand.shared.palette.data
 import co.touchlab.stately.collections.ConcurrentMutableMap
 import kotlinx.datetime.Clock
 import net.osmand.shared.io.KFile
+import net.osmand.shared.palette.data.solid.SolidPaletteFactory
+import net.osmand.shared.palette.data.solid.SolidPaletteIO
+import net.osmand.shared.palette.data.solid.SolidPaletteModifier
 import net.osmand.shared.palette.domain.GradientPaletteCategory
 import net.osmand.shared.palette.domain.Palette
 import net.osmand.shared.palette.domain.PaletteItem

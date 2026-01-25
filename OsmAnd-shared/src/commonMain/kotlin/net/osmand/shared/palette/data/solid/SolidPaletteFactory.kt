@@ -1,4 +1,4 @@
-package net.osmand.shared.palette.data
+package net.osmand.shared.palette.data.solid
 
 import kotlinx.datetime.Clock
 import net.osmand.shared.palette.domain.DefaultPaletteColors
