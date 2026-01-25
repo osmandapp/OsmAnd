@@ -213,6 +213,15 @@ class StarView @JvmOverloads constructor(
 	private var lastEclipticLat: Double = -999.0
 	private var lastEclipticLon: Double = -999.0
 
+	// Equator Cache
+	private val equatorStep = 2
+	private val equatorPointsCount = (360 / equatorStep) + 1
+	private val equatorAzimuths = DoubleArray(equatorPointsCount)
+	private val equatorAltitudes = DoubleArray(equatorPointsCount)
+	private var lastEquatorTimeT: Double = -1.0
+	private var lastEquatorLat: Double = -999.0
+	private var lastEquatorLon: Double = -999.0
+
 	// Equatorial Grid Cache
 	private var lastEquGridTimeT: Double = -1.0
 	private var lastEquGridLat: Double = -999.0
@@ -1266,15 +1275,33 @@ class StarView @JvmOverloads constructor(
 		canvas.drawPath(gridPath, meridianPaint)
 	}
 
-	private fun drawEquatorLine(canvas: Canvas) {
-		gridPath.reset()
-		var first = true
-		val step = 2
-		// Declination 0, RA 0 to 360
-		for (raDeg in 0..360 step step) {
+	private fun updateEquatorCache() {
+		val timeUnchanged = abs(currentTime.tt - lastEquatorTimeT) < 0.0000001
+		val locUnchanged = observer.latitude == lastEquatorLat && observer.longitude == lastEquatorLon
+		if (timeUnchanged && locUnchanged) return
+
+		var index = 0
+		for (raDeg in 0..360 step equatorStep) {
+			if (index >= equatorPointsCount) break
 			val ra = raDeg / 15.0
 			val hor = horizon(currentTime, observer, ra, 0.0, Refraction.Normal)
-			if (skyToScreen(hor.azimuth, hor.altitude, tempPoint)) {
+			equatorAzimuths[index] = hor.azimuth
+			equatorAltitudes[index] = hor.altitude
+			index++
+		}
+		lastEquatorTimeT = currentTime.tt
+		lastEquatorLat = observer.latitude
+		lastEquatorLon = observer.longitude
+	}
+
+	private fun drawEquatorLine(canvas: Canvas) {
+		updateEquatorCache()
+		gridPath.reset()
+		var first = true
+		for (i in 0 until equatorPointsCount) {
+			val az = equatorAzimuths[i]
+			val alt = equatorAltitudes[i]
+			if (skyToScreen(az, alt, tempPoint)) {
 				if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
 				else gridPath.lineTo(tempPoint.x, tempPoint.y)
 			} else { first = true }

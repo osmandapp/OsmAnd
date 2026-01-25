@@ -204,7 +204,7 @@ object AstroUtils {
 		addCheckBox(context.getString(R.string.azimuthal_grid), tempAzimuthal) { tempAzimuthal = it }
 		addCheckBox(context.getString(R.string.equatorial_grid), tempEquatorial) { tempEquatorial = it }
 		addCheckBox(context.getString(R.string.ecliptic_line), tempEcliptic) { tempEcliptic = it }
-		addCheckBox(context.getString(R.string.prime_meridian_line), tempMeridian) { tempMeridian = it }
+		addCheckBox(context.getString(R.string.meridian_line), tempMeridian) { tempMeridian = it }
 		addCheckBox(context.getString(R.string.equator_line), tempEquator) { tempEquator = it }
 		addCheckBox(context.getString(R.string.favorites_item), tempFavorites) { tempFavorites = it }
 		addCheckBox(context.getString(R.string.magnitude_filter), tempShowMagnitudeFilter) { tempShowMagnitudeFilter = it }
