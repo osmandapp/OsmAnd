@@ -129,8 +129,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 	private void updateTitle(){
 		TerrainMode defaultMode = TerrainMode.getDefaultMode(type);
 		if (defaultMode != null) {
-			String titleString = Algorithms.capitalizeFirstLetter(selectedMode.getKeyName()).replace("_", " ");
-			titleView.setText(titleString);
+			titleView.setText(selectedMode.getDescription());
 		}
 	}
 

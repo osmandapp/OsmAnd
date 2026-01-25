@@ -17,7 +17,7 @@ sealed interface PaletteItemSource {
 }
 
 data class GradientProperties(
-	val category: GradientPaletteCategory,
+	val fileType: PaletteFileType,
 	val rangeType: GradientRangeType,
 	val name: String? = null,
 	val comments: List<String> = emptyList(),
@@ -35,7 +35,7 @@ sealed interface PaletteItem {
 	val id: String
 	val displayName: String
 	val source: PaletteItemSource
-	val isEditable: Boolean
+	val isDefault: Boolean
 	val historyIndex: Int
 	val lastUsedTime: Long
 
@@ -43,7 +43,7 @@ sealed interface PaletteItem {
 		override val id: String,
 		override val displayName: String,
 		override val source: PaletteItemSource.CollectionRecord,
-		override val isEditable: Boolean = true,
+		override val isDefault: Boolean = true,
 		override val historyIndex: Int,
 		override val lastUsedTime: Long = 0,
 		val color: Int
@@ -53,9 +53,10 @@ sealed interface PaletteItem {
 
 	data class Gradient(
 		override val id: String,
+		val paletteName: String,
 		override val displayName: String,
 		override val source: PaletteItemSource.GradientFile,
-		override val isEditable: Boolean,
+		override val isDefault: Boolean,
 		override val historyIndex: Int,
 		override val lastUsedTime: Long = 0,
 		val points: List<GradientPoint>,

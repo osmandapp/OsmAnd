@@ -173,7 +173,7 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 
 		ChartUtils.setupGradientChart(app, gradientChart, 9, 24, false, xAxisGridColor, labelsColor);
 		TerrainMode mode = srtmPlugin.getTerrainMode();
-		ColorPalette colorPalette = app.getColorPaletteHelper().getGradientColorPaletteSync(mode.getMainFile());
+		ColorPalette colorPalette = app.getColorPaletteHelper().getGradientColorPaletteSync(mode.getMainFileName());
 		if (colorPalette != null) {
 			AndroidUiHelper.updateVisibility(gradientChart, true);
 			IAxisValueFormatter formatter = GradientUiHelper.getGradientTypeFormatter(app, mode.getType(), null);

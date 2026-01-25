@@ -6,8 +6,8 @@ import net.osmand.shared.io.KFile
 import net.osmand.shared.palette.data.solid.SolidPaletteFactory
 import net.osmand.shared.palette.data.solid.SolidPaletteIO
 import net.osmand.shared.palette.data.solid.SolidPaletteModifier
-import net.osmand.shared.palette.domain.GradientPaletteCategory
 import net.osmand.shared.palette.domain.Palette
+import net.osmand.shared.palette.domain.PaletteFileType
 import net.osmand.shared.palette.domain.PaletteItem
 import net.osmand.shared.util.LoggerFactory
 
@@ -183,14 +183,14 @@ class PaletteRepository(
 		}
 	}
 
-	private fun readPalette(id: String): Palette? {
-		if (id.startsWith(USER_PALETTE_PREFIX)) {
-			return readSolidPalette(id)
-		}
-		GradientPaletteCategory.fromFileName(id)?.let { category ->
+	private fun readPalette(fileName: String): Palette? {
+		return PaletteFileType.fromFileName(fileName)?.let { fileType ->
+			if (fileType == PaletteFileType.USER_PALETTE) {
+				readSolidPalette(fileName) // TODO: might be improved
+			}
 			// TODO: read gradient palette using GradientPaletteIO
+			null
 		}
-		return null
 	}
 
 	private fun readSolidPalette(id: String): Palette.SolidCollection {

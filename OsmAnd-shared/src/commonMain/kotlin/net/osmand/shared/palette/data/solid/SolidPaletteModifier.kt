@@ -109,7 +109,7 @@ object SolidPaletteModifier {
 			id = newId,
 			displayName = ColorPalette.colorToHex(color),
 			source = PaletteItemSource.CollectionRecord(collection.id, newId),
-			isEditable = true,
+			isDefault = true,
 			color = color,
 			historyIndex = maxHistoryIndex + 1,
 			lastUsedTime = time

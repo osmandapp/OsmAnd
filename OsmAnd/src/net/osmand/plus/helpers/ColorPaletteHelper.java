@@ -74,7 +74,7 @@ public class ColorPaletteHelper {
 		Map<String, Pair<ColorPalette, Long>> colorPalettes = new HashMap<>();
 		for (TerrainMode mode : TerrainMode.values(app)) {
 			if (mode.getType() == type) {
-				String fileName = mode.getMainFile();
+				String fileName = mode.getMainFileName();
 				KFile file = new KFile(getColorPaletteDir(), fileName);
 				ColorPalette colorPalette = getGradientColorPalette(fileName);
 				if (colorPalette != null && file.exists()) {
@@ -130,7 +130,7 @@ public class ColorPaletteHelper {
 
 	public void getColorPaletteAsync(@NonNull String modeKey, @NonNull CollectColorPalletListener listener) {
 		TerrainMode mode = TerrainMode.getByKey(modeKey);
-		String colorPaletteFileName = mode.getMainFile();
+		String colorPaletteFileName = mode.getMainFileName();
 		getGradientColorPaletteAsync(colorPaletteFileName, listener);
 	}
 

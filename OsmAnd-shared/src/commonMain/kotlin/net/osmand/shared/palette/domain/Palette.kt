@@ -22,7 +22,7 @@ sealed class Palette {
 	data class GradientCollection(
 		override val id: String,
 		override val displayName: String,
-		val category: GradientPaletteCategory,
+		val category: PaletteCategory,
 		override val items: List<PaletteItem.Gradient>,
 		override val isEditable: Boolean = true
 	) : Palette()

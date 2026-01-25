@@ -56,7 +56,7 @@ object SolidPaletteIO {
 									paletteId = paletteId,
 									recordId = lineIndex.toString()
 								),
-								isEditable = true,
+								isDefault = true,
 								color = colorInt,
 								historyIndex = colorValue.value.toInt(), // TODO: don't use it
 								lastUsedTime = baseTime - (lineIndex * 1000L)

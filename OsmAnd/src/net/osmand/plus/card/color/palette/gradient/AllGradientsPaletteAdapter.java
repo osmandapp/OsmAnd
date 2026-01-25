@@ -225,8 +225,8 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 					menuButton.setVisibility(View.GONE);
 					return;
 				}
-				displayName = terrainMode.getKeyName();
-				fileName = terrainMode.getMainFile();
+				displayName = terrainMode.getDescription();
+				fileName = terrainMode.getMainFileName();
 				isDefaultColor = terrainMode.isDefaultMode();
 			} else {
 				displayName = gradientColor.getDisplayName();

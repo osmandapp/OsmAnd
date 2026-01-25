@@ -5,6 +5,8 @@ import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HEIGHT;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HILLSHADE;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.SLOPE;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
@@ -44,8 +46,8 @@ public class TerrainMode {
 		}
 
 		@NonNull
-		public String getName(@NonNull OsmandApplication app) {
-			return app.getString(nameRes);
+		public String getName(@NonNull Context ctx) {
+			return ctx.getString(nameRes);
 		}
 	}
 
@@ -56,7 +58,7 @@ public class TerrainMode {
 	private final TerrainType type;
 	private final String key;
 
-	public TerrainMode(@NonNull OsmandApplication app, @NonNull String key, @NonNull TerrainType type, @NonNull String translateName) {
+	private TerrainMode(@NonNull OsmandApplication app, @NonNull String key, @NonNull TerrainType type, @NonNull String translateName) {
 		this.key = key;
 		this.type = type;
 		this.translateName = translateName;
@@ -78,8 +80,8 @@ public class TerrainMode {
 	public static void reloadAvailableModes(@NonNull OsmandApplication app) {
 		List<TerrainMode> modes = new ArrayList<>();
 		// HILLSHADE first
-		modes.add(new TerrainMode(app, DEFAULT_KEY, HILLSHADE, app.getString(R.string.shared_string_hillshade)));
-		modes.add(new TerrainMode(app, DEFAULT_KEY, SLOPE, app.getString(R.string.shared_string_slope)));
+		modes.add(new TerrainMode(app, DEFAULT_KEY, HILLSHADE, HILLSHADE.getName(app)));
+		modes.add(new TerrainMode(app, DEFAULT_KEY, SLOPE, SLOPE.getName(app)));
 
 		File dir = app.getAppPath(IndexConstants.CLR_PALETTE_DIR);
 		File[] files = dir.exists() ? dir.listFiles() : null;
@@ -88,27 +90,27 @@ public class TerrainMode {
 				if (file == null || !file.getName().endsWith(TXT_EXT)) {
 					continue;
 				}
-				String nm = file.getName();
-				if (nm.startsWith(HILLSHADE_PREFIX)) {
-					String key = nm.substring(HILLSHADE_PREFIX.length());
-					key = key.substring(0, key.length() - TXT_EXT.length());
-					String name = Algorithms.capitalizeFirstLetter(key).replace('_', ' ');
-					if (!DEFAULT_KEY.equals(key)) {
-						modes.add(new TerrainMode(app, key, HILLSHADE, name));
+				String fileName = file.getName();
+				if (fileName.startsWith(HILLSHADE_PREFIX)) {
+					String paletteName = fileName.substring(HILLSHADE_PREFIX.length());
+					paletteName = paletteName.substring(0, paletteName.length() - TXT_EXT.length());
+					String name = Algorithms.capitalizeFirstLetter(paletteName).replace('_', ' ');
+					if (!DEFAULT_KEY.equals(paletteName)) {
+						modes.add(new TerrainMode(app, paletteName, HILLSHADE, name));
 					}
-				} else if (nm.startsWith(COLOR_SLOPE_PREFIX)) {
-					String key = nm.substring(COLOR_SLOPE_PREFIX.length());
-					key = key.substring(0, key.length() - TXT_EXT.length());
-					String name = Algorithms.capitalizeFirstLetter(key).replace('_', ' ');
-					if (!DEFAULT_KEY.equals(key)) {
-						modes.add(new TerrainMode(app, key, SLOPE, name));
+				} else if (fileName.startsWith(COLOR_SLOPE_PREFIX)) {
+					String paletteName = fileName.substring(COLOR_SLOPE_PREFIX.length());
+					paletteName = paletteName.substring(0, paletteName.length() - TXT_EXT.length());
+					String name = Algorithms.capitalizeFirstLetter(paletteName).replace('_', ' ');
+					if (!DEFAULT_KEY.equals(paletteName)) {
+						modes.add(new TerrainMode(app, paletteName, SLOPE, name));
 					}
-				} else if (nm.startsWith(HEIGHT_PREFIX)) {
-					String key = nm.substring(HEIGHT_PREFIX.length());
-					key = key.substring(0, key.length() - TXT_EXT.length());
-					String name = Algorithms.capitalizeFirstLetter(key).replace('_', ' ');
-					if (!DEFAULT_KEY.equals(key)) {
-						modes.add(new TerrainMode(app, key, HEIGHT, name));
+				} else if (fileName.startsWith(HEIGHT_PREFIX)) {
+					String paletteName = fileName.substring(HEIGHT_PREFIX.length());
+					paletteName = paletteName.substring(0, paletteName.length() - TXT_EXT.length());
+					String name = Algorithms.capitalizeFirstLetter(paletteName).replace('_', ' ');
+					if (!DEFAULT_KEY.equals(paletteName)) {
+						modes.add(new TerrainMode(app, paletteName, HEIGHT, name));
 					}
 				}
 			}
@@ -138,11 +140,11 @@ public class TerrainMode {
 
 	public static TerrainMode getByKey(String key) {
 		TerrainMode hillshade = null;
-		for (TerrainMode m : cachedTerrainModes) {
-			if (Algorithms.stringsEqual(m.getKeyName(), key)) {
-				return m;
-			} else if (m.type == HILLSHADE && hillshade == null) {
-				hillshade = m;
+		for (TerrainMode mode : cachedTerrainModes) {
+			if (Algorithms.stringsEqual(mode.getKeyName(), key)) {
+				return mode;
+			} else if (mode.isHillshade() && hillshade == null) {
+				hillshade = mode;
 			}
 		}
 		return hillshade;
@@ -165,7 +167,7 @@ public class TerrainMode {
 		return type;
 	}
 
-	public String getMainFile() {
+	public String getMainFileName() {
 		String prefix = HILLSHADE_PREFIX;
 		if (type == HEIGHT) {
 			prefix = HEIGHT_PREFIX;
@@ -175,10 +177,11 @@ public class TerrainMode {
 		return prefix + key + TXT_EXT;
 	}
 
-	public String getSecondFile() {
+	public String getSecondFileName() {
 		return (isHillshade() ? HILLSHADE_SCND_PREFIX : "") + key + TXT_EXT;
 	}
 
+	// TODO: check
 	public String getKeyName() {
 		if (key.equals(DEFAULT_KEY) || key.equals(ALTITUDE_DEFAULT_KEY)) {
 			return type.name().toLowerCase();
@@ -186,6 +189,7 @@ public class TerrainMode {
 		return key;
 	}
 
+	// TODO: check
 	public boolean isDefaultMode() {
 		return type == HEIGHT ? key.equals(ALTITUDE_DEFAULT_KEY) : key.equals(DEFAULT_KEY);
 	}

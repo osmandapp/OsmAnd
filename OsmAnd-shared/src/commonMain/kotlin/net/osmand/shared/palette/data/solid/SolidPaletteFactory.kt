@@ -30,7 +30,7 @@ object SolidPaletteFactory {
 						emptyCollection.id,
 						index.toString()
 					),
-					isEditable = true,
+					isDefault = true,
 					color = colorInt,
 					historyIndex = index + 1,
 					lastUsedTime = baseTime - (index * 1000L)
