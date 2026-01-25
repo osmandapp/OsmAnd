@@ -5944,4 +5944,8 @@
     <string name="astro_set">Subiro</string>
     <string name="show_expand_button">Montri la butonon “etendi”</string>
     <string name="imprecise_coordinates">Proksimumaj koordinatoj</string>
+    <string name="copy_from_portrait_layout">Kopii el vertikala aranĝo</string>
+    <string name="copy_from_landscape_layout">Kopii el horizontala aranĝo</string>
+    <string name="panels_layout_compact">kompakta</string>
+    <string name="panels_layout_wide">larĝa</string>
 </resources>
