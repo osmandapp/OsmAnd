@@ -6023,4 +6023,7 @@
     <string name="use_separate_layouts">Brug separate layouts</string>
     <string name="map_screen_layout">Kortskærmens layout</string>
     <string name="map_screen_layout_descr">Vælg, om du vil bruge et enkelt layout til alle formater, eller vil tilpasse portræt og landskab hver for sig.</string>
+    <string name="equator_line">Ækvatorlinje</string>
+    <string name="galactic_line">Galaktisk linje</string>
+    <string name="meridian_line">Meridianlinje</string>
 </resources>
