@@ -5930,4 +5930,5 @@
     <string name="shared_string_step">Interval</string>
     <string name="set_step_size_summary">Zvoľte veľkosť intervalu pre zoskupovanie vašich stôp.</string>
     <string name="set_step_size">Nastaviť veľkosť intervalu</string>
+    <string name="organize_by_summary">Automaticky organizujte svoje stopy do skupín podľa zvoleného parametra ako je aktivita, rýchlosť a poloha.</string>
 </resources>
