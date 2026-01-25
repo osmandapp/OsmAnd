@@ -5958,4 +5958,20 @@
     <string name="sort_highest_first">malkreskante</string>
     <string name="sort_lowest_first">kreskante</string>
     <string name="no_date">neniu dato</string>
+    <string name="shared_string_step">Paŝo</string>
+    <string name="set_step_size_summary">Elektu grandon de paŝo, kiu estos uzata por grupigi viajn spurojn.</string>
+    <string name="set_step_size">Difini grandon de paŝo</string>
+    <string name="organize_by_summary">Aŭtomate grupigas viajn spurojn laŭ elektita parametro, kiel aktiveco, rapido aŭ loko.</string>
+    <string name="organize_by">Grupigi laŭ</string>
+    <string name="group_general">Ĝeneralaj</string>
+    <string name="group_date_time">Dato</string>
+    <string name="group_altitude_elevation">Altitudo kaj ĝia ŝanĝo</string>
+    <string name="group_sensors">Sentiloj</string>
+    <string name="year_of_creation">Jaro de kreo</string>
+    <string name="month_year_creation">Monato kaj jaro de kreo</string>
+    <string name="nearest_city">Plej proksima urbo</string>
+    <string name="avg_speed">Mezuma rapido</string>
+    <string name="organize_by_max_speed">Maksimuma rapido</string>
+    <string name="organize_by_max_altitude">Maksimuma altitudo</string>
+    <string name="gpx_too_many_points_visible_warning">Granda nombro da videblaj GPX-spuroj kaŭzas altan memor-uzon</string>
 </resources>
