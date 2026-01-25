@@ -136,6 +136,8 @@ object AstroUtils {
 		var tempAzimuthal = config.showAzimuthalGrid
 		var tempEquatorial = config.showEquatorialGrid
 		var tempEcliptic = config.showEclipticLine
+		var tempMeridian = config.showMeridianLine
+		var tempEquator = config.showEquatorLine
 		var tempFavorites = config.showFavorites
 		var tempSun = config.showSun
 		var tempMoon = config.showMoon
@@ -202,6 +204,8 @@ object AstroUtils {
 		addCheckBox(context.getString(R.string.azimuthal_grid), tempAzimuthal) { tempAzimuthal = it }
 		addCheckBox(context.getString(R.string.equatorial_grid), tempEquatorial) { tempEquatorial = it }
 		addCheckBox(context.getString(R.string.ecliptic_line), tempEcliptic) { tempEcliptic = it }
+		addCheckBox(context.getString(R.string.prime_meridian_line), tempMeridian) { tempMeridian = it }
+		addCheckBox(context.getString(R.string.equator_line), tempEquator) { tempEquator = it }
 		addCheckBox(context.getString(R.string.favorites_item), tempFavorites) { tempFavorites = it }
 		addCheckBox(context.getString(R.string.magnitude_filter), tempShowMagnitudeFilter) { tempShowMagnitudeFilter = it }
 
@@ -229,6 +233,8 @@ object AstroUtils {
 				starView.showAzimuthalGrid = tempAzimuthal
 				starView.showEquatorialGrid = tempEquatorial
 				starView.showEclipticLine = tempEcliptic
+				starView.showMeridianLine = tempMeridian
+				starView.showEquatorLine = tempEquator
 				starView.showFavorites = tempFavorites
 
 				starView.showSun = tempSun
@@ -251,6 +257,8 @@ object AstroUtils {
 					showAzimuthalGrid = tempAzimuthal,
 					showEquatorialGrid = tempEquatorial,
 					showEclipticLine = tempEcliptic,
+					showMeridianLine = tempMeridian,
+					showEquatorLine = tempEquator,
 					showFavorites = tempFavorites,
 					showSun = tempSun,
 					showMoon = tempMoon,

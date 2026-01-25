@@ -78,6 +78,18 @@ class StarView @JvmOverloads constructor(
 		strokeWidth = 4f
 		pathEffect = DashPathEffect(floatArrayOf(20f, 20f), 0f)
 	}
+	private val meridianPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFF00FF00.toInt()
+		style = Paint.Style.STROKE
+		strokeWidth = 4f
+		pathEffect = DashPathEffect(floatArrayOf(30f, 20f), 0f)
+	}
+	private val equatorPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFF00AAAA.toInt()
+		style = Paint.Style.STROKE
+		strokeWidth = 4f
+		pathEffect = DashPathEffect(floatArrayOf(30f, 20f), 0f)
+	}
 	private val constellationPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = 0xFF5599FF.toInt()
 		style = Paint.Style.STROKE
@@ -141,6 +153,8 @@ class StarView @JvmOverloads constructor(
 	var showAzimuthalGrid = true
 	var showEquatorialGrid = false
 	var showEclipticLine = false
+	var showMeridianLine = false
+	var showEquatorLine = false
 	var showFavorites = true
 	var showConstellations = true
 
@@ -787,6 +801,8 @@ class StarView @JvmOverloads constructor(
 		if (showEquatorialGrid) drawEquatorialGrid(canvas)
 		if (showAzimuthalGrid) drawAzimuthalGrid(canvas)
 		if (showEclipticLine) drawEclipticLine(canvas)
+		if (showMeridianLine) drawMeridianLine(canvas)
+		if (showEquatorLine) drawEquatorLine(canvas)
 		drawConstellationLines(canvas)
 
 		drawHorizon(canvas)
@@ -1226,6 +1242,44 @@ class StarView @JvmOverloads constructor(
 			} else { first = true }
 		}
 		canvas.drawPath(gridPath, eclipticPaint)
+	}
+
+	private fun drawMeridianLine(canvas: Canvas) {
+		gridPath.reset()
+		val step = 2
+		// Line 1: Azimuth 0
+		var first = true
+		for (alt in -90..90 step step) {
+			if (skyToScreen(0.0, alt.toDouble(), tempPoint)) {
+				if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
+				else gridPath.lineTo(tempPoint.x, tempPoint.y)
+			} else { first = true }
+		}
+		// Line 2: Azimuth 180
+		first = true
+		for (alt in -90..90 step step) {
+			if (skyToScreen(180.0, alt.toDouble(), tempPoint)) {
+				if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
+				else gridPath.lineTo(tempPoint.x, tempPoint.y)
+			} else { first = true }
+		}
+		canvas.drawPath(gridPath, meridianPaint)
+	}
+
+	private fun drawEquatorLine(canvas: Canvas) {
+		gridPath.reset()
+		var first = true
+		val step = 2
+		// Declination 0, RA 0 to 360
+		for (raDeg in 0..360 step step) {
+			val ra = raDeg / 15.0
+			val hor = horizon(currentTime, observer, ra, 0.0, Refraction.Normal)
+			if (skyToScreen(hor.azimuth, hor.altitude, tempPoint)) {
+				if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
+				else gridPath.lineTo(tempPoint.x, tempPoint.y)
+			} else { first = true }
+		}
+		canvas.drawPath(gridPath, equatorPaint)
 	}
 
 	private fun drawConstellationLines(canvas: Canvas) {

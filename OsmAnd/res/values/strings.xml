@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="prime_meridian_line">Prime Meridian Line</string>
+	<string name="equator_line">Equator Line</string>
 	<string name="copy_from_portrait_layout">Copy from Portrait layout</string>
 	<string name="copy_from_landscape_layout">Copy from Landscape layout</string>
 	<string name="panels_layout_compact">Compact</string>
