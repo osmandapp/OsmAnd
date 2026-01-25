@@ -542,6 +542,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		MapRendererView rendererView = rendererContext.getMapRendererView();
 		if (rendererView != null) {
 			rendererView.setFlatEarth(!settings.SPHERICAL_MAP.get());
+			rendererView.set3DBuildingsAlpha(BUILDINGS_3D_ALPHA.get());
 		}
 		if (ENABLE_3D_MAP_OBJECTS.get()) {
 			rendererContext.recreate3DObjectsProvider();
