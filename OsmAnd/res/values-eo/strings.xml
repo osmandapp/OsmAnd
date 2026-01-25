@@ -5949,4 +5949,10 @@
     <string name="panels_layout_compact">kompakta</string>
     <string name="panels_layout_wide">larĝa</string>
     <string name="panels_layout">Aranĝo de paneloj</string>
+    <string name="panels_layout_descr">Elektu aranĝon por supra kaj malsupra paneloj. La aranĝo povas esti larĝa – etendiĝanta al la tuta larĝo de la ekrano, aŭ kompakta – etendiĝanta inter la flankpaneloj kaj butonoj.</string>
+    <string name="single_layout">unuopa aranĝo</string>
+    <string name="separate_layouts">apartaj aranĝoj</string>
+    <string name="use_separate_layouts">Uzi apartajn aranĝojn</string>
+    <string name="map_screen_layout">Aranĝo de mapekrano</string>
+    <string name="map_screen_layout_descr">Elektu inter uzi unu komunan aranĝon por ambaŭ orientiĝoj de ekrano, aŭ uzi apartajn aranĝon por vertikala kaj horizontala orientiĝoj.</string>
 </resources>
