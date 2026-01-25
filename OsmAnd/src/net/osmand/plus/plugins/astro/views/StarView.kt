@@ -303,15 +303,27 @@ class StarView @JvmOverloads constructor(
 		val maxAngle = if (is2DMode) 220.0 else 150.0
 		val finalAngle = max(10.0, min(maxAngle, newAngle))
 		if (abs(this.viewAngle - finalAngle) > 0.001) {
-			if (is2DMode && width > 0 && height > 0) {
-				val oldTan = tan(Math.toRadians(viewAngle) / 4.0)
-				val newTan = tan(Math.toRadians(finalAngle) / 4.0)
-				if (oldTan > 0 && newTan > 0) {
-					val ratio = oldTan / newTan
-					val halfWidth = width / 2f
-					val halfHeight = height / 2f
-					panX = (focusX - halfWidth - (focusX - halfWidth - panX) * ratio).toFloat()
-					panY = (focusY - halfHeight - (focusY - halfHeight - panY) * ratio).toFloat()
+			if (width > 0 && height > 0) {
+				if (is2DMode) {
+					val oldTan = tan(Math.toRadians(viewAngle) / 4.0)
+					val newTan = tan(Math.toRadians(finalAngle) / 4.0)
+					if (oldTan > 0 && newTan > 0) {
+						val ratio = oldTan / newTan
+						val halfWidth = width / 2f
+						val halfHeight = height / 2f
+						panX = (focusX - halfWidth - (focusX - halfWidth - panX) * ratio).toFloat()
+						panY = (focusY - halfHeight - (focusY - halfHeight - panY) * ratio).toFloat()
+					}
+				} else {
+					val oldScale = viewAngle / width
+					val newScale = finalAngle / width
+					val offX = focusX - width / 2f
+					val offY = focusY - height / 2f
+					azimuthCenter += offX * (oldScale - newScale)
+					altitudeCenter -= offY * (oldScale - newScale)
+					altitudeCenter = max(-90.0, min(90.0, altitudeCenter))
+					while (azimuthCenter < 0) azimuthCenter += 360
+					while (azimuthCenter >= 360) azimuthCenter -= 360
 				}
 			}
 			this.viewAngle = finalAngle
@@ -1473,8 +1485,6 @@ class StarView @JvmOverloads constructor(
 				}
 			}
 			MotionEvent.ACTION_POINTER_DOWN -> {
-				lastTouchX = event.getX(event.actionIndex)
-				lastTouchY = event.getY(event.actionIndex)
 			}
 			MotionEvent.ACTION_POINTER_UP -> {
 				val pointerIndex = if (event.actionIndex == 0) 1 else 0
