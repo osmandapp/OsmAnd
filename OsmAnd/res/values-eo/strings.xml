@@ -5933,8 +5933,8 @@
     <string name="astro_stars">Steloj</string>
     <string name="astro_galaxies">Galaksioj</string>
     <string name="astro_nebulae">Nebulozoj</string>
-    <string name="astro_open_clusters">Malferma stelamaso</string>
-    <string name="astro_globular_clusters">Globa stelamaso</string>
+    <string name="astro_open_clusters">Malfermaj stelamasoj</string>
+    <string name="astro_globular_clusters">Globaj stelamasoj</string>
     <string name="astro_galaxy_clusters">Galaksamasoj</string>
     <string name="astro_black_holes">Nigraj truoj</string>
     <string name="visible_layers_and_objects">Videblaj tavoloj kaj objektoj</string>
