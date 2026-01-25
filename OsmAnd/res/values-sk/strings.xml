@@ -5931,4 +5931,15 @@
     <string name="set_step_size_summary">Zvoľte veľkosť intervalu pre zoskupovanie vašich stôp.</string>
     <string name="set_step_size">Nastaviť veľkosť intervalu</string>
     <string name="organize_by_summary">Automaticky organizujte svoje stopy do skupín podľa zvoleného parametra ako je aktivita, rýchlosť a poloha.</string>
+    <string name="organize_by">Organizovať podľa</string>
+    <string name="group_general">Všeobecné</string>
+    <string name="group_date_time">Dátum a čas</string>
+    <string name="group_altitude_elevation">Nadmorská výška a prevýšenie</string>
+    <string name="group_sensors">Senzory</string>
+    <string name="year_of_creation">Rok vytvorenia</string>
+    <string name="month_year_creation">Mesiac a rok vytvorenia</string>
+    <string name="nearest_city">Najbližšie mesto</string>
+    <string name="avg_speed">Priemerná rýchlosť</string>
+    <string name="organize_by_max_speed">Maximálna rýchlosť</string>
+    <string name="organize_by_max_altitude">Maximálna výška</string>
 </resources>
