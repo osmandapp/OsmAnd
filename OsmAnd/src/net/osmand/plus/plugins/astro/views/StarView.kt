@@ -37,6 +37,7 @@ import java.util.TimeZone
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.acos
+import kotlin.math.atan
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.hypot
@@ -89,6 +90,12 @@ class StarView @JvmOverloads constructor(
 		style = Paint.Style.STROKE
 		strokeWidth = 4f
 		pathEffect = DashPathEffect(floatArrayOf(30f, 20f), 0f)
+	}
+	private val galacticPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFFFF00FF.toInt() // Magenta
+		style = Paint.Style.STROKE
+		strokeWidth = 4f
+		pathEffect = DashPathEffect(floatArrayOf(20f, 20f), 0f)
 	}
 	private val constellationPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = 0xFF5599FF.toInt()
@@ -155,6 +162,7 @@ class StarView @JvmOverloads constructor(
 	var showEclipticLine = false
 	var showMeridianLine = false
 	var showEquatorLine = false
+	var showGalacticLine = false
 	var showFavorites = true
 	var showConstellations = true
 
@@ -221,6 +229,15 @@ class StarView @JvmOverloads constructor(
 	private var lastEquatorTimeT: Double = -1.0
 	private var lastEquatorLat: Double = -999.0
 	private var lastEquatorLon: Double = -999.0
+
+	// Galactic Cache
+	private val galacticStep = 5
+	private val galacticPointsCount = (360 / galacticStep) + 1
+	private val galacticAzimuths = DoubleArray(galacticPointsCount)
+	private val galacticAltitudes = DoubleArray(galacticPointsCount)
+	private var lastGalacticTimeT: Double = -1.0
+	private var lastGalacticLat: Double = -999.0
+	private var lastGalacticLon: Double = -999.0
 
 	// Equatorial Grid Cache
 	private var lastEquGridTimeT: Double = -1.0
@@ -812,6 +829,7 @@ class StarView @JvmOverloads constructor(
 		if (showEclipticLine) drawEclipticLine(canvas)
 		if (showMeridianLine) drawMeridianLine(canvas)
 		if (showEquatorLine) drawEquatorLine(canvas)
+		if (showGalacticLine) drawGalacticLine(canvas)
 		drawConstellationLines(canvas)
 
 		drawHorizon(canvas)
@@ -1307,6 +1325,48 @@ class StarView @JvmOverloads constructor(
 			} else { first = true }
 		}
 		canvas.drawPath(gridPath, equatorPaint)
+	}
+
+	private fun updateGalacticCache() {
+		val timeUnchanged = abs(currentTime.tt - lastGalacticTimeT) < 0.0000001
+		val locUnchanged = observer.latitude == lastGalacticLat && observer.longitude == lastGalacticLon
+		if (timeUnchanged && locUnchanged) return
+
+		val alphaNGP = 192.85948
+		val deltaNGP = 27.12825
+		val cotDeltaNGP = 1.0 / tan(Math.toRadians(deltaNGP))
+
+		var index = 0
+		for (raDeg in 0..360 step galacticStep) {
+			if (index >= galacticPointsCount) break
+
+			val alphaDiff = Math.toRadians(raDeg - alphaNGP)
+			val decRad = atan(-cotDeltaNGP * cos(alphaDiff))
+			val decDeg = Math.toDegrees(decRad)
+
+			val hor = horizon(currentTime, observer, raDeg / 15.0, decDeg, Refraction.Normal)
+			galacticAzimuths[index] = hor.azimuth
+			galacticAltitudes[index] = hor.altitude
+			index++
+		}
+		lastGalacticTimeT = currentTime.tt
+		lastGalacticLat = observer.latitude
+		lastGalacticLon = observer.longitude
+	}
+
+	private fun drawGalacticLine(canvas: Canvas) {
+		updateGalacticCache()
+		gridPath.reset()
+		var first = true
+		for (i in 0 until galacticPointsCount) {
+			val az = galacticAzimuths[i]
+			val alt = galacticAltitudes[i]
+			if (skyToScreen(az, alt, tempPoint)) {
+				if (first) { gridPath.moveTo(tempPoint.x, tempPoint.y); first = false }
+				else gridPath.lineTo(tempPoint.x, tempPoint.y)
+			} else { first = true }
+		}
+		canvas.drawPath(gridPath, galacticPaint)
 	}
 
 	private fun drawConstellationLines(canvas: Canvas) {

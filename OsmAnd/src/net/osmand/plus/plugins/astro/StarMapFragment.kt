@@ -320,6 +320,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showEclipticLine = config.showEclipticLine
 			starView.showMeridianLine = config.showMeridianLine
 			starView.showEquatorLine = config.showEquatorLine
+			starView.showGalacticLine = config.showGalacticLine
 			starView.showFavorites = config.showFavorites
 			starView.showConstellations = config.showConstellations
 			starView.showStars = config.showStars
@@ -548,6 +549,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			showEclipticLine = starView.showEclipticLine,
 			showMeridianLine = starView.showMeridianLine,
 			showEquatorLine = starView.showEquatorLine,
+			showGalacticLine = starView.showGalacticLine,
 			showFavorites = starView.showFavorites,
 			showSun = starView.showSun,
 			showMoon = starView.showMoon,

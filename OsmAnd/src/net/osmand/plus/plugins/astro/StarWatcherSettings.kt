@@ -20,6 +20,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		private const val KEY_SHOW_ECLIPTIC = "showEclipticLine"
 		private const val KEY_SHOW_MERIDIAN = "showMeridianLine"
 		private const val KEY_SHOW_EQUATOR = "showEquatorLine"
+		private const val KEY_SHOW_GALACTIC = "showGalacticLine"
 		private const val KEY_SHOW_SUN = "showSun"
 		private const val KEY_SHOW_MOON = "showMoon"
 		private const val KEY_SHOW_PLANETS = "showPlanets"
@@ -56,6 +57,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showEclipticLine: Boolean,
 		val showMeridianLine: Boolean,
 		val showEquatorLine: Boolean,
+		val showGalacticLine: Boolean,
 		val showFavorites: Boolean,
 		val showSun: Boolean,
 		val showMoon: Boolean,
@@ -147,6 +149,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showEcliptic = mapSettings?.optBoolean(KEY_SHOW_ECLIPTIC, false) ?: false
 		val showMeridian = mapSettings?.optBoolean(KEY_SHOW_MERIDIAN, false) ?: false
 		val showEquator = mapSettings?.optBoolean(KEY_SHOW_EQUATOR, false) ?: false
+		val showGalactic = mapSettings?.optBoolean(KEY_SHOW_GALACTIC, false) ?: false
 		val showFavorites = mapSettings?.optBoolean(KEY_SHOW_FAVORITES, true) ?: true
 
 		val showSun = mapSettings?.optBoolean(KEY_SHOW_SUN, true) ?: true
@@ -176,6 +179,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 			showEclipticLine = showEcliptic,
 			showMeridianLine = showMeridian,
 			showEquatorLine = showEquator,
+			showGalacticLine = showGalactic,
 			showFavorites = showFavorites,
 			showSun = showSun,
 			showMoon = showMoon,
@@ -204,6 +208,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		mapSettings.put(KEY_SHOW_ECLIPTIC, config.showEclipticLine)
 		mapSettings.put(KEY_SHOW_MERIDIAN, config.showMeridianLine)
 		mapSettings.put(KEY_SHOW_EQUATOR, config.showEquatorLine)
+		mapSettings.put(KEY_SHOW_GALACTIC, config.showGalacticLine)
 		mapSettings.put(KEY_SHOW_FAVORITES, config.showFavorites)
 
 		mapSettings.put(KEY_SHOW_SUN, config.showSun)

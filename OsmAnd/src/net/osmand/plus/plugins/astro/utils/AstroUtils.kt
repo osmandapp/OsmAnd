@@ -138,6 +138,7 @@ object AstroUtils {
 		var tempEcliptic = config.showEclipticLine
 		var tempMeridian = config.showMeridianLine
 		var tempEquator = config.showEquatorLine
+		var tempGalactic = config.showGalacticLine
 		var tempFavorites = config.showFavorites
 		var tempSun = config.showSun
 		var tempMoon = config.showMoon
@@ -206,6 +207,7 @@ object AstroUtils {
 		addCheckBox(context.getString(R.string.ecliptic_line), tempEcliptic) { tempEcliptic = it }
 		addCheckBox(context.getString(R.string.meridian_line), tempMeridian) { tempMeridian = it }
 		addCheckBox(context.getString(R.string.equator_line), tempEquator) { tempEquator = it }
+		addCheckBox(context.getString(R.string.galactic_line), tempGalactic) { tempGalactic = it }
 		addCheckBox(context.getString(R.string.favorites_item), tempFavorites) { tempFavorites = it }
 		addCheckBox(context.getString(R.string.magnitude_filter), tempShowMagnitudeFilter) { tempShowMagnitudeFilter = it }
 
@@ -235,6 +237,7 @@ object AstroUtils {
 				starView.showEclipticLine = tempEcliptic
 				starView.showMeridianLine = tempMeridian
 				starView.showEquatorLine = tempEquator
+				starView.showGalacticLine = tempGalactic
 				starView.showFavorites = tempFavorites
 
 				starView.showSun = tempSun
@@ -259,6 +262,7 @@ object AstroUtils {
 					showEclipticLine = tempEcliptic,
 					showMeridianLine = tempMeridian,
 					showEquatorLine = tempEquator,
+					showGalacticLine = tempGalactic,
 					showFavorites = tempFavorites,
 					showSun = tempSun,
 					showMoon = tempMoon,
