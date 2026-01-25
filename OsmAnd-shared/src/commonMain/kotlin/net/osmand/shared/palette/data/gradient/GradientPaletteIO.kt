@@ -191,13 +191,15 @@ object GradientPaletteIO {
 		}
 	}
 
-	// --- Internal helpers ---
+	// --- Public helpers ---
 
-	private fun extractPaletteName(fileName: String): String? {
+	fun extractPaletteName(fileName: String): String? {
 		return PaletteFileType.fromFileName(fileName)?.let {
 			fileName.replace(it.filePrefix, "").replace(TXT_EXT, "")
 		}
 	}
+
+	// --- Internal helpers ---
 
 	private fun checkIsDefault(paletteName: String): Boolean {
 		// TODO: is it really enough

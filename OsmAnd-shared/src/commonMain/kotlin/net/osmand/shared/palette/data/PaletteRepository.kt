@@ -3,10 +3,14 @@ package net.osmand.shared.palette.data
 import co.touchlab.stately.collections.ConcurrentMutableMap
 import kotlinx.datetime.Clock
 import net.osmand.shared.io.KFile
+import net.osmand.shared.palette.data.gradient.GradientPaletteIO
+import net.osmand.shared.palette.data.gradient.GradientPaletteModifier
+import net.osmand.shared.palette.data.gradient.GradientSettingsHelper
 import net.osmand.shared.palette.data.solid.SolidPaletteFactory
 import net.osmand.shared.palette.data.solid.SolidPaletteIO
 import net.osmand.shared.palette.data.solid.SolidPaletteModifier
 import net.osmand.shared.palette.domain.Palette
+import net.osmand.shared.palette.domain.PaletteCategory
 import net.osmand.shared.palette.domain.PaletteFileType
 import net.osmand.shared.palette.domain.PaletteItem
 import net.osmand.shared.util.LoggerFactory
@@ -20,6 +24,8 @@ class PaletteRepository(
 ) {
 
 	private val cachedPalettesForId = ConcurrentMutableMap<String, Palette>()
+
+	private val settingsHelper = GradientSettingsHelper()
 
 	// --- Read ---
 
@@ -51,7 +57,12 @@ class PaletteRepository(
 
 		val updatedPalette = when (currentPalette) {
 			is Palette.SolidCollection -> SolidPaletteModifier.updateOrAdd(currentPalette, item)
-			// is Palette.GradientCollection -> GradientPaletteModifier.updateOrAdd(...)
+			is Palette.GradientCollection -> GradientPaletteModifier.updateOrAdd(
+				collection = currentPalette,
+				item = item,
+				directory = directoryProvider.getPaletteDirectory(),
+				settingsHelper = settingsHelper
+			)
 			else -> currentPalette
 		}
 
@@ -63,7 +74,12 @@ class PaletteRepository(
 
 		val updatedPalette = when (currentPalette) {
 			is Palette.SolidCollection -> SolidPaletteModifier.remove(currentPalette, itemId)
-			// is Palette.GradientCollection -> GradientPaletteModifier.remove(...)
+			is Palette.GradientCollection -> GradientPaletteModifier.remove(
+				collection = currentPalette,
+				itemId = itemId,
+				directory = directoryProvider.getPaletteDirectory(),
+				settingsHelper = settingsHelper
+			)
 			else -> currentPalette
 		}
 
@@ -87,8 +103,18 @@ class PaletteRepository(
 					newCollection
 				} ?: currentPalette
 			}
-			// is Palette.GradientCollection -> ...
-			else -> currentPalette
+			is Palette.GradientCollection -> {
+				val result = GradientPaletteModifier.duplicate(
+					collection = currentPalette,
+					originalItemId = originalItemId,
+					directory = directoryProvider.getPaletteDirectory(),
+					settingsHelper = GradientSettingsHelper(),
+				)
+				result?.let { (newCollection, newItem) ->
+					resultItem = newItem
+					newCollection
+				} ?: currentPalette
+			}
 		}
 
 		saveIfChanged(currentPalette, updatedPalette)
@@ -108,7 +134,12 @@ class PaletteRepository(
 				itemId = itemId,
 				timeProvider = { Clock.System.now().toEpochMilliseconds() }
 			)
-			// is Palette.GradientCollection -> ...
+			is Palette.GradientCollection -> GradientPaletteModifier.markAsUsed(
+				collection = currentPalette,
+				itemId = itemId,
+				settingsHelper = settingsHelper,
+				timeProvider = { Clock.System.now().toEpochMilliseconds() }
+			)
 			else -> currentPalette
 		}
 
@@ -175,7 +206,9 @@ class PaletteRepository(
 		try {
 			when (palette) {
 				is Palette.SolidCollection -> SolidPaletteIO.write(palette)
-				// is Palette.GradientCollection -> GradientPaletteIO.write(palette)
+				is Palette.GradientCollection -> {
+					// TODO: save settings here, not in the modifier ??
+				}
 				else -> { /* No IO for unknown types */ }
 			}
 		} catch (e: Exception) {
@@ -183,13 +216,34 @@ class PaletteRepository(
 		}
 	}
 
-	private fun readPalette(fileName: String): Palette? {
-		return PaletteFileType.fromFileName(fileName)?.let { fileType ->
-			if (fileType == PaletteFileType.USER_PALETTE) {
-				readSolidPalette(fileName) // TODO: might be improved
+	private fun readPalette(id: String): Palette? {
+		val fileType = PaletteFileType.fromFileName(id)
+
+		return when {
+			fileType == PaletteFileType.USER_PALETTE -> {
+				readSolidPalette(id)
 			}
-			// TODO: read gradient palette using GradientPaletteIO
-			null
+
+			fileType != null -> {
+				GradientPaletteIO.readCollection(
+					directory = directoryProvider.getPaletteDirectory(),
+					category = fileType.category,
+					settingsHelper = settingsHelper
+				)
+			}
+
+			else -> {
+				val category = PaletteCategory.fromKey(id)
+				if (category != null) {
+					GradientPaletteIO.readCollection(
+						directory = directoryProvider.getPaletteDirectory(),
+						category = category,
+						settingsHelper = settingsHelper
+					)
+				} else {
+					null
+				}
+			}
 		}
 	}
 
