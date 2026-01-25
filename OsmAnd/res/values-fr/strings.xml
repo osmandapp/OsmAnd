@@ -5884,4 +5884,7 @@
     <string name="use_separate_layouts">Utilisez des mises en page séparées</string>
     <string name="map_screen_layout">Disposition de l\'écran de la carte</string>
     <string name="map_screen_layout_descr">Choisissez d\'utiliser une seule mise en page pour toutes les orientations ou de personnaliser les modes Portrait et Paysage séparément.</string>
+    <string name="galactic_line">Ligne galactique</string>
+    <string name="meridian_line">Ligne méridienne</string>
+    <string name="equator_line">Ligne équatoriale</string>
 </resources>
