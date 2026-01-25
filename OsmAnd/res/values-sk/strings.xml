@@ -5913,4 +5913,21 @@
     <string name="bicycle_width_limit_description">Zadajte šírku vášho bicykla, aby ste sa mohli vyhnúť úzkym cyklocestám.</string>
     <string name="copy_link">Kopírovať odkaz</string>
     <string name="buildings_3d_detail_level">Úroveň detailov 3D budov</string>
+    <string name="copy_from_portrait_layout">Kopírovať z rozloženia Na výšku</string>
+    <string name="copy_from_landscape_layout">Kopírovať z rozloženia Na šírku</string>
+    <string name="panels_layout_compact">Kompaktné</string>
+    <string name="panels_layout_wide">Široké</string>
+    <string name="panels_layout">Rozloženie panelov</string>
+    <string name="panels_layout_descr">Vyberte rozloženie pre vrchné a spodné panely. Môžu byť široké (cez celú šírku obrazovky) alebo kompaktné (umiestnené medzi postrannými panelmi a tlačidlami).</string>
+    <string name="single_layout">Jedno rozloženie</string>
+    <string name="separate_layouts">Samostatné rozloženia</string>
+    <string name="use_separate_layouts">Použiť samostatné rozloženia</string>
+    <string name="map_screen_layout">Rozloženie obrazovky s mapou</string>
+    <string name="map_screen_layout_descr">Zvoľte, či použiť jednotné rozloženie pre všetky orientácie, alebo nastaviť samostatné rozloženie pre režimy na šírku a na výšku.</string>
+    <string name="sort_highest_first">Od najvyššieho</string>
+    <string name="sort_lowest_first">Od najnižšieho</string>
+    <string name="no_date">Bez dátumu</string>
+    <string name="shared_string_step">Interval</string>
+    <string name="set_step_size_summary">Zvoľte veľkosť intervalu pre zoskupovanie vašich stôp.</string>
+    <string name="set_step_size">Nastaviť veľkosť intervalu</string>
 </resources>
