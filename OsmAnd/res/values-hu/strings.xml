@@ -2062,7 +2062,7 @@
     <string name="quick_action_page_list_descr">Gomb, amely lépteti az alábbi listát.</string>
     <string name="select_gpx_folder">GPX-fájlok mappájának kijelölése</string>
     <string name="file_can_not_be_moved">Nem sikerült áthelyezni a fájlt.</string>
-    <string name="shared_string_move">Mozgatás</string>
+    <string name="shared_string_move">Áthelyezés</string>
     <string name="shared_string_gpx_tracks">Nyomvonalak</string>
     <string name="routing_attr_driving_style_name">Vezetési stílus</string>
     <string name="route_altitude">Útvonal magassági profilja</string>
