@@ -5895,4 +5895,5 @@
     <string name="map_screen_layout_descr">Выберите, использовать ли единый макет для всех ориентаций или настроить портретную и альбомную ориентацию отдельно.</string>
     <string name="meridian_line">Линия меридиана</string>
     <string name="equator_line">Линия экватора</string>
+    <string name="galactic_line">Галактическая координатная линия</string>
 </resources>
