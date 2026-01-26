@@ -1382,14 +1382,11 @@ class StarView @JvmOverloads constructor(
 				val star1 = skyObjectMap[id1]
 				val star2 = skyObjectMap[id2]
 				if (star1 != null && star2 != null) {
-					val p1Visible = skyToScreen(star1.azimuth, star1.altitude, tempPoint)
-					val p2Visible = skyToScreen(star2.azimuth, star2.altitude, tempPoint2)
+					val p1Visible = skyToScreen(star1.azimuth, star1.altitude, tempPoint, true)
+					val p2Visible = skyToScreen(star2.azimuth, star2.altitude, tempPoint2, true)
 					if (p1Visible && p2Visible) {
-						val dist = hypot(tempPoint.x - tempPoint2.x, tempPoint.y - tempPoint2.y)
-						if (dist < width * 0.8) {
-							gridPath.moveTo(tempPoint.x, tempPoint.y)
-							gridPath.lineTo(tempPoint2.x, tempPoint2.y)
-						}
+						gridPath.moveTo(tempPoint.x, tempPoint.y)
+						gridPath.lineTo(tempPoint2.x, tempPoint2.y)
 					}
 				}
 			}
@@ -1581,9 +1578,9 @@ class StarView @JvmOverloads constructor(
 		minCosCVisible = (1.0 - t2) / (1.0 + t2)
 	}
 
-	private fun skyToScreen(azimuth: Double, altitude: Double, outPoint: PointF): Boolean {
+	private fun skyToScreen(azimuth: Double, altitude: Double, outPoint: PointF, allowOffScreen: Boolean = false): Boolean {
 		// Fast rejection based on altitude (avoids trig)
-		if (abs(altitude - altitudeCenter) > viewAngle + 40.0) return false
+		if (abs(altitude - altitudeCenter) > viewAngle + 40.0 && !allowOffScreen) return false
 
 		val azRad = Math.toRadians(azimuth - azimuthCenter)
 		val altRad = Math.toRadians(altitude)
@@ -1593,7 +1590,8 @@ class StarView @JvmOverloads constructor(
 		val cosAz = cos(azRad)
 		val cosC = projSinAltCenter * sinAlt + projCosAltCenter * cosAlt * cosAz
 		if (is2DMode && cosC <= -0.3) return false
-		if (cosC < minCosCVisible) return false
+		if (!allowOffScreen && cosC < minCosCVisible) return false
+		if (allowOffScreen && cosC <= -0.2) return false
 
 		val k = 2.0 / (1.0 + cosC)
 		val combinedScale = k * projScale
