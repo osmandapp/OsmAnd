@@ -1576,7 +1576,7 @@ class StarView @JvmOverloads constructor(
 		val maxDistSq = max(d1Sq, max(d2Sq, max(d3Sq, d4Sq)))
 
 		// Use a generous margin (2.0x screen radius) to allow for lines connecting off-screen points
-		val maxTanHalf = sqrt(maxDistSq) * 2.0 / (2.0 * projScale)
+		val maxTanHalf = sqrt(maxDistSq) * 1.0 / (2.0 * projScale)
 		val t2 = maxTanHalf * maxTanHalf
 		minCosCVisible = (1.0 - t2) / (1.0 + t2)
 	}
@@ -1592,7 +1592,7 @@ class StarView @JvmOverloads constructor(
 		val sinAz = sin(azRad)
 		val cosAz = cos(azRad)
 		val cosC = projSinAltCenter * sinAlt + projCosAltCenter * cosAlt * cosAz
-
+		if (is2DMode && cosC <= -0.3) return false
 		if (cosC < minCosCVisible) return false
 
 		val k = 2.0 / (1.0 + cosC)
