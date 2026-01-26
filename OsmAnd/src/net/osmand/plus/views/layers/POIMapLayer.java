@@ -234,7 +234,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 								public boolean isCancelled() {
 									return isInterrupted();
 								}
-							});
+							}, true);
 					if (filter.isTopWikiFilter()) {
 						PoiFilterUtils.sortByElo(amenities);
 						res.addAll(0, amenities);

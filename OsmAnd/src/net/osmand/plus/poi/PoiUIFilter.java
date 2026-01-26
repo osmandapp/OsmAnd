@@ -32,6 +32,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.POIMapLayer.PoiUIFilterResultMatcher;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
@@ -186,8 +187,15 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	@NonNull
-	public List<Amenity> getCurrentSearchResult() {
-		return currentSearchResult == null ? Collections.emptyList() : new ArrayList<>(currentSearchResult);
+	public List<Amenity> getCurrentSearchResult(boolean filterUnique) {
+		if (Algorithms.isEmpty(currentSearchResult)) {
+			return Collections.emptyList();
+		}
+		if (!filterUnique) {
+			return new ArrayList<>(currentSearchResult);
+		}
+		AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
+		return amenitySearcher.filterUniqueAmenitiesByOsmIdOrWikidata(currentSearchResult);
 	}
 
 	public DataSourceType getDataSourceType() {
@@ -389,7 +397,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		return searchAmenitiesInternal(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, -1, matcher);
 	}
 
-	public List<Amenity> searchAmenities(double top, double left, double bottom, double right, int zoom, ResultMatcher<Amenity> matcher) {
+	public List<Amenity> searchAmenities(double top, double left, double bottom, double right,
+			int zoom, ResultMatcher<Amenity> matcher, boolean filterUnique) {
 		Set<Amenity> results = new HashSet<>();
 		if (currentSearchResult != null) {
 			List<Amenity> tempResults = new ArrayList<>(currentSearchResult);
@@ -406,9 +415,14 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		List<Amenity> amenities = searchAmenitiesInternal(top / 2 + bottom / 2, left / 2 + right / 2,
 				top, bottom, left, right, zoom, matcher);
 		results.addAll(amenities);
-		ArrayList<Amenity> resultList = new ArrayList<>(results);
-		if(isTopWikiFilter()) {
-			Collections.sort(resultList, (p1, p2) -> p2.getTravelEloNumber() - p1.getTravelEloNumber());
+
+		List<Amenity> resultList = new ArrayList<>(results);
+		if (isTopWikiFilter()) {
+			resultList.sort((p1, p2) -> p2.getTravelEloNumber() - p1.getTravelEloNumber());
+		}
+		if (filterUnique) {
+			AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
+			resultList = amenitySearcher.filterUniqueAmenitiesByOsmIdOrWikidata(resultList);
 		}
 		return resultList;
 	}

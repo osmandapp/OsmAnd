@@ -37,7 +37,7 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 
 	@NonNull
 	private List<Amenity> getAmenities(@NonNull QuadRect rect) {
-		return filter.searchAmenities(rect.top, rect.left, rect.bottom, rect.right, -1, null);
+		return filter.searchAmenities(rect.top, rect.left, rect.bottom, rect.right, -1, null, true);
 	}
 
 	@Override
