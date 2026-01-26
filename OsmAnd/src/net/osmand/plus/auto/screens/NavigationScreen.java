@@ -94,7 +94,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 		OsmandApplication app = getApp();
 		alarmWidget = new AlarmWidget(app, null);
-		speedometerWidget = new SpeedometerWidget(app, null, null);
+		speedometerWidget = new SpeedometerWidget(app);
 		updateUse3DButton();
 		getLifecycle().addObserver(this);
 	}
@@ -143,11 +143,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 			DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, surfaceRenderer.getDensity());
 
 			alarmWidget.updateInfo(drawSettings, true);
-			try {
-				speedometerWidget.updateInfo(drawSettings, true, drawSettings.isNightMode());
-			} catch (Throwable e) {
-				Log.d("Corwin", "onFrameRendered: ");
-			}
+			speedometerWidget.updateInfo(drawSettings, true, drawSettings.isNightMode());
 
 			Bitmap alarmBitmap = alarmWidget.getWidgetBitmap();
 			Bitmap speedometerBitmap = speedometerWidget.getWidgetBitmap();
