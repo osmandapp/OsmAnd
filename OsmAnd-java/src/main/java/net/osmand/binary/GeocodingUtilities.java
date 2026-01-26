@@ -435,20 +435,11 @@ public class GeocodingUtilities {
 		List<GeocodingResult> complete = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		double minBuildingDistance = 0;
 		for (GeocodingResult r : res) {
-			LOG.info("sortGeocodingResults: Looking for reader, regionFP=" + r.regionFP + ", regionLen=" + r.regionLen 
-				+ ", streetName=" + r.streetName);
 			BinaryMapIndexReader reader = null;
-			for (int i = 0; i < list.size(); i++) {
-				BinaryMapIndexReader b = list.get(i);
-				String readerName = b != null && b.getFile() != null ? b.getFile().getName() : "null";
-				List<RouteRegion> routingIndexes = b.getRoutingIndexes();
-				LOG.info("sortGeocodingResults: Checking reader[" + i + "]=" + readerName + ", routingIndexes.size=" + routingIndexes.size());
-				for (int j = 0; j < routingIndexes.size(); j++) {
-					RouteRegion rb = routingIndexes.get(j);
-					LOG.info("sortGeocodingResults:   routingIndexes[" + j + "]: filePointer=" + rb.getFilePointer() + ", length=" + rb.getLength());
+			for (BinaryMapIndexReader b : list) {
+				for (RouteRegion rb : b.getRoutingIndexes()) {
 					if (r.regionFP == rb.getFilePointer() && r.regionLen == rb.getLength()) {
 						reader = b;
-						LOG.info("sortGeocodingResults: MATCH FOUND! Selected reader[" + i + "]=" + readerName);
 						break;
 
 					}
