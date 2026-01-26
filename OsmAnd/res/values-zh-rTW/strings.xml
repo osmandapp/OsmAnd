@@ -5793,4 +5793,18 @@
     <string name="avg_speed">平均速度</string>
     <string name="organize_by_max_speed">最高速度</string>
     <string name="organize_by_max_altitude">最高海拔</string>
+    <string name="galactic_line">銀道</string>
+    <string name="meridian_line">子午線</string>
+    <string name="equator_line">天球赤道</string>
+    <string name="copy_from_portrait_layout">從直式版面複製</string>
+    <string name="copy_from_landscape_layout">從橫式版面複製</string>
+    <string name="panels_layout_compact">精簡</string>
+    <string name="panels_layout_wide">寬</string>
+    <string name="panels_layout">面板佈局</string>
+    <string name="panels_layout_descr">為頂部與底部面板選擇佈局。它們可以是寬版面，橫跨整個螢幕寬度；或是精簡版面，嵌入側邊面板與按鈕之間。</string>
+    <string name="single_layout">單一佈局</string>
+    <string name="separate_layouts">分離佈局</string>
+    <string name="use_separate_layouts">使用分離佈局</string>
+    <string name="map_screen_layout">地圖畫面佈局</string>
+    <string name="map_screen_layout_descr">選擇是否使用單一佈局套用於所有方向，或分別自訂直向與橫向模式。</string>
 </resources>
