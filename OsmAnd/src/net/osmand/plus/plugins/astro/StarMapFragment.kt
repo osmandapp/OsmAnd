@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.astro
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.Point
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +13,6 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -45,18 +45,21 @@ import net.osmand.plus.plugins.astro.views.StarVisiblityChartView
 import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.utils.InsetsUtils
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.util.MapUtils
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.ZoneId
 import java.util.Locale
-import java.util.TimeZone
 import kotlin.math.abs
+
 
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
 	OsmAndCompassListener {
 
+	private val REGULAR_MAP_HEIGHT = 300f
+
+	internal lateinit var mainLayout: View
 	internal lateinit var starView: StarView
 	private lateinit var timeSelectionView: DateTimeSelectionView
 	private lateinit var timeControlBtn: MaterialButton
@@ -79,8 +82,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var starAltitudeView: StarAltitudeChartView
 	private lateinit var starChartState: StarChartState
 
+	private lateinit var timeControlCard: MaterialCardView
+	private lateinit var starMapButton: ImageButton
+
 	private var compassButton: StarCompassButton? = null
-	private var systemBottomInset: Int = 0
 	private var manualAzimuth: Boolean = true
 	private var lastResetRotationToNorth = 0L
 	private var lastUpdatedLocation: Location? = null
@@ -88,6 +93,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	internal lateinit var viewModel: StarObjectsViewModel
 	private var selectedObject: SkyObject? = null
+	private var regularMapVisible = false
 
 	private val dataProvider: AstroDataProvider by lazy {
 		PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).astroDataProvider
@@ -105,6 +111,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var previousAzimuth: Double = 0.0
 	private var previousViewAngle: Double = 150.0
 	private var showMagnitudeFilter = false
+
+	private var systemBottomInset: Int = 0
 
 	private val backPressedCallback = object : OnBackPressedCallback(false) {
 		override fun handleOnBackPressed() {
@@ -158,6 +166,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		viewModel = ViewModelProvider(this,
 			StarObjectsViewModel.Factory(app, swSettings, dataProvider))[StarObjectsViewModel::class.java]
 
+		mainLayout = view.findViewById(R.id.main_layout)
 		starView = view.findViewById(R.id.star_view)
 		timeSelectionView = view.findViewById(R.id.time_selection_view)
 		timeControlBtn = view.findViewById(R.id.time_control_button)
@@ -229,16 +238,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		updateArModeUI(arModeHelper.isArModeEnabled)
 		updateCameraUI(cameraHelper.isCameraOverlayEnabled)
 
-		val timeControlCard: MaterialCardView = view.findViewById(R.id.time_control_card)
-		applyWindowInsets(timeControlCard)
-		updateTimeControlTheme(timeControlCard, timeControlBtn, resetTimeButton)
+		timeControlCard = view.findViewById(R.id.time_control_card)
+		timeControlCard.apply {
+			updateTimeControlTheme(timeControlCard, timeControlBtn, resetTimeButton)
+		}
 
 		starChartsView = view.findViewById(R.id.star_charts_view)
-		ViewCompat.setOnApplyWindowInsetsListener(starChartsView) { v, windowInsets ->
-			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-			v.updatePadding(bottom = insets.bottom)
-			windowInsets
-		}
+
 		starVisiblityView = view.findViewById(R.id.star_visiblity_view)
 		starAltitudeView = view.findViewById(R.id.star_altitude_view)
 		starChartState = StarChartState(app)
@@ -249,10 +255,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		view.findViewById<AppCompatImageView>(R.id.switch_chart_button).apply {
 			setOnClickListener { starChartState.changeToNextState(); updateStarChart() }
 		}
-		view.findViewById<ImageButton>(R.id.star_map_button).apply {
+		starMapButton = view.findViewById(R.id.star_map_button)
+		starMapButton.apply {
 			updateImageButtonTheme(this)
-			setOnClickListener { updateStarMapVisibility(!starView.isVisible); saveCommonSettings() }
-			applyWindowInsets(this)
+			setOnClickListener {
+				updateRegularMapVisibility(!regularMapVisible)
+				saveCommonSettings()
+			}
 		}
 		view.findViewById<ImageButton>(R.id.star_chart_button).apply {
 			updateImageButtonTheme(this)
@@ -311,7 +320,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 
 		swSettings.getCommonConfig().let { config ->
-			updateStarMapVisibility(config.showStarMap)
+			updateRegularMapVisibility(config.showRegularMap)
 			updateStarChartVisibility(config.showStarChart)
 		}
 		swSettings.getStarMapConfig().let { config ->
@@ -374,6 +383,15 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		return view
 	}
 
+	override fun onApplyInsets(insets: WindowInsetsCompat) {
+		super.onApplyInsets(insets)
+		val systemIntets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+		systemBottomInset = systemIntets.bottom
+		applyWindowInsets(timeControlCard, regularMapVisible)
+		applyWindowInsets(starMapButton, regularMapVisible)
+		starChartsView.updatePadding(bottom = systemIntets.bottom)
+	}
+
 	private fun handleSearchObjectSelected(obj: SkyObject) {
 		if (obj.type == SkyObject.Type.CONSTELLATION) {
 			val constellations = dataProvider.getConstellations(requireContext())
@@ -389,15 +407,19 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 	}
 
-	private fun applyWindowInsets(view: View) {
-		ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
-			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-			v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-				val baseMarginBottom = v.resources.getDimensionPixelSize(R.dimen.content_padding)
-				bottomMargin = insets.bottom + baseMarginBottom
+	private fun applyWindowInsets(view: View, reset: Boolean = false) {
+		val baseMarginBottom = view.resources.getDimensionPixelSize(R.dimen.content_padding)
+		if (reset) {
+			view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+				bottomMargin = baseMarginBottom
 			}
-			systemBottomInset = insets.bottom
-			windowInsets
+			return
+		}
+		if (systemBottomInset > 0) {
+			view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+				bottomMargin = baseMarginBottom + systemBottomInset
+			}
+			return
 		}
 	}
 
@@ -446,6 +468,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		app.osmandMap.mapView.removeMapLocationListener(this)
 		arModeHelper.onPause(); cameraHelper.onPause()
 		val mapActivity = requireMapActivity()
+		mapActivity.resetMapViewPaddings()
 		mapActivity.enableDrawer()
 		updateWidgetsVisibility(mapActivity, View.VISIBLE)
 		mapActivity.refreshMap()
@@ -524,9 +547,23 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		cameraHelper.onRequestPermissionsResult(requestCode, grantResults)
 	}
 
-	private fun updateStarMapVisibility(visible: Boolean) {
-		starView.visibility = if (visible) View.VISIBLE else View.GONE
-		updateMagnitudeFilterVisibility()
+	private fun updateRegularMapVisibility(visible: Boolean) {
+		regularMapVisible = visible
+		val mapActivity = requireMapActivity()
+		if (visible) {
+			val bottomPadding = dpToPx(REGULAR_MAP_HEIGHT)
+			mainLayout.setPadding(0, 0, 0, bottomPadding)
+			val display = AndroidUtils.getDisplay(app)
+			val screenDimensions = Point(0, 0)
+			display.getSize(screenDimensions)
+			mapActivity.setMapViewPaddings(0, screenDimensions.y - bottomPadding, 0, 0)
+			mapActivity.refreshMap()
+		} else {
+			mainLayout.setPadding(0, 0, 0, 0)
+			mapActivity.resetMapViewPaddings()
+		}
+		applyWindowInsets(timeControlCard, visible)
+		applyWindowInsets(starMapButton, visible)
 	}
 
 	private fun updateStarChartVisibility(visible: Boolean) {
@@ -535,7 +572,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private fun saveCommonSettings() {
 		val config = StarWatcherSettings.CommonConfig(
-			showStarMap = starView.isVisible,
+			showRegularMap = regularMapVisible,
 			showStarChart = starChartsView.isVisible,
 		)
 		swSettings.setCommonConfig(config)

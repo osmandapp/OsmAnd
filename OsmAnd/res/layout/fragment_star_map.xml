@@ -6,7 +6,7 @@
 	android:background="@color/color_transparent">
 
 	<LinearLayout
-		android:id="@+id/linearLayout2"
+		android:id="@+id/main_layout"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="vertical">

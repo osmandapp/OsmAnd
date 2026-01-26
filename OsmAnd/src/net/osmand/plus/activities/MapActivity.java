@@ -41,8 +41,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
-
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
@@ -334,6 +332,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapViewWithLayers.onCreate(savedInstanceState);
 		}
 		extendedMapActivity.onCreate(this, savedInstanceState);
+	}
+
+	public void setMapViewPaddings(int left, int top, int right, int bottom) {
+		mapViewWithLayers.setPadding(left, top, right, bottom);
+	}
+
+	public void resetMapViewPaddings() {
+		mapViewWithLayers.setPadding(0, 0, 0, 0);
 	}
 
 	protected int getRootViewId() {
