@@ -211,7 +211,7 @@ public class CurrentPositionHelper {
 	}
 	
 	private List<BinaryMapReaderResource> checkReaders(double lat, double lon,
-			List<BinaryMapReaderResource> ur, boolean useGeocoding) {
+			List<BinaryMapReaderResource> ur, boolean requireAddressData) {
 		List<BinaryMapReaderResource> res = ur;
 		for(BinaryMapReaderResource t : ur ) {
 			if(t.isClosed()) {
@@ -224,12 +224,11 @@ public class CurrentPositionHelper {
 		for(BinaryMapReaderResource r : app.getResourceManager().getFileReaders()) {
 			if (!r.isClosed()) {
 				BinaryMapIndexReader shallowReader = r.getShallowReader();
-				if (shallowReader != null && shallowReader.containsRouteData(x31, y31, x31, y31, 15)) {
-					if (!useGeocoding || (shallowReader.containsAddressData() && shallowReader.containsRouteData())) {
-						if (!res.contains(r)) {
-							res = new ArrayList<>(res);
-							res.add(r);
-						}
+				if (shallowReader != null && shallowReader.containsRouteData(x31, y31, x31, y31, 15)
+						&& (!requireAddressData || shallowReader.containsAddressData())) {
+					if (!res.contains(r)) {
+						res = new ArrayList<>(res);
+						res.add(r);
 					}
 				}
 			}
