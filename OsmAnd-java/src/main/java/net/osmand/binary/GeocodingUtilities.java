@@ -527,6 +527,9 @@ public class GeocodingUtilities {
 			BinaryMapIndexReader reader = null;
 			for (int i = 0; i < list.size(); i++) {
 				BinaryMapIndexReader b = list.get(i);
+				if (b.getFile().getName().contains("seamarks")) {
+					continue;
+				}
 				String readerName = b != null && b.getFile() != null ? b.getFile().getName() : "null";
 				List<RouteRegion> routingIndexes = b.getRoutingIndexes();
 				LOG.info("sortGeocodingResults: Checking reader[" + i + "]=" + readerName + ", routingIndexes.size=" + routingIndexes.size());
