@@ -3,8 +3,8 @@ package net.osmand.shared.palette.data.gradient
 import kotlinx.datetime.Clock
 import net.osmand.shared.ColorPalette
 import net.osmand.shared.io.KFile
+import net.osmand.shared.palette.data.PaletteUtils
 import net.osmand.shared.palette.domain.*
-import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.LoggerFactory
 import okio.buffer
 import okio.use
@@ -12,11 +12,8 @@ import okio.use
 object GradientPaletteIO {
 
 	private val LOG = LoggerFactory.getLogger("GradientPaletteIO")
-	private const val TXT_EXT = ".txt"
 	private const val COMMENT_PREFIX = "#"
 	private const val HEADER = "# Value,R,G,B,A"
-	private const val ALTITUDE_DEFAULT_NAME = "altitude_default"
-	private const val DEFAULT_NAME = "default"
 
 	fun readCollection(
 		directory: KFile,
@@ -40,10 +37,10 @@ object GradientPaletteIO {
 
 			// 3. Filter files by category
 			val fileType = PaletteFileType.fromFileName(fileName)
-			if (fileType?.category == category && fileName.endsWith(TXT_EXT)) {
+			if (fileType?.category == category && PaletteUtils.isPaletteFileExt(fileName)) {
 
 				// Extract the ID used in settings (filename contains extension)
-				val paletteName = extractPaletteName(fileName)
+				val paletteName = PaletteUtils.extractPaletteName(fileName)
 				val metadata = settingsMap[paletteName]
 
 				val indexInList = settingsItems.indexOf(metadata)
@@ -120,8 +117,8 @@ object GradientPaletteIO {
 		// 2. Build a gradient item
 		val fileName = file.name()
 		val paletteId = fileType.category.key
-		val paletteName = extractPaletteName(fileName) ?: return null
-		val displayName = KAlgorithms.capitalizeFirstLetter(paletteName.replace("_", " "))
+		val paletteName = PaletteUtils.extractPaletteName(fileName) ?: return null
+		val displayName = PaletteUtils.extractDisplayName(fileName) ?: return null
 
 		// Use index from settings or last modified time (if new file)
 		// TODO: don't use modification time as history index
@@ -140,9 +137,9 @@ object GradientPaletteIO {
 		return PaletteItem.Gradient(
 			id = fileName,
 			paletteName = paletteName,
-			displayName = displayName ?: paletteName,
+			displayName = displayName,
 			source = PaletteItemSource.GradientFile(paletteId, fileName),
-			isDefault = checkIsDefault(paletteName),
+			isDefault = PaletteUtils.isDefaultPalette(paletteName),
 			historyIndex = historyIndex,
 			lastUsedTime = lastUsedTime,
 			points = points,
@@ -189,20 +186,5 @@ object GradientPaletteIO {
 		} catch (e: Exception) {
 			LOG.error("Failed to write gradient item: ${file.path}", e)
 		}
-	}
-
-	// --- Public helpers ---
-
-	fun extractPaletteName(fileName: String): String? {
-		return PaletteFileType.fromFileName(fileName)?.let {
-			fileName.replace(it.filePrefix, "").replace(TXT_EXT, "")
-		}
-	}
-
-	// --- Internal helpers ---
-
-	private fun checkIsDefault(paletteName: String): Boolean {
-		// TODO: is it really enough
-		return paletteName == ALTITUDE_DEFAULT_NAME || paletteName == DEFAULT_NAME
 	}
 }

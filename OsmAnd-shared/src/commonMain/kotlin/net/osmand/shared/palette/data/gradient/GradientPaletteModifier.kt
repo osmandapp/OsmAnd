@@ -3,11 +3,11 @@ package net.osmand.shared.palette.data.gradient
 import kotlinx.datetime.Clock
 import net.osmand.shared.io.KFile
 import net.osmand.shared.palette.data.PaletteModifier
+import net.osmand.shared.palette.data.PaletteUtils
 import net.osmand.shared.palette.domain.Palette
 import net.osmand.shared.palette.domain.PaletteItem
 import net.osmand.shared.palette.domain.PaletteItemSource
 import net.osmand.shared.util.LoggerFactory
-import net.osmand.shared.util.NamingUtils
 import net.osmand.shared.util.PlatformUtil
 
 object GradientPaletteModifier : PaletteModifier<Palette.GradientCollection> {
@@ -94,15 +94,15 @@ object GradientPaletteModifier : PaletteModifier<Palette.GradientCollection> {
 		// 1. Generate Unique ID / Name
 		// In gradients, ID is usually the filename with extension
 		val existingIds = palette.items.map { it.id }.toSet()
-		val newFileName = NamingUtils.generateUniqueName(existingIds, originalItem.id)
+		val newFileName = PaletteUtils.generateUniqueFileName(existingIds, originalItem.id)
+		val paletteName = PaletteUtils.extractPaletteName(newFileName) ?: return null
+		val displayName = PaletteUtils.extractDisplayName(newFileName) ?: return null
 
 		// 2. Create new Item
 		val newItem = originalItem.copy(
 			id = newFileName,
-			paletteName = GradientPaletteIO.extractPaletteName(newFileName) ?: newFileName,
-			// TODO: may be we should use pending name fetching to always get it up to date,
-			//  but if we will implement rename logic, we should always also update name
-			displayName = NamingUtils.getNextName(originalItem.displayName),
+			paletteName = paletteName,
+			displayName = displayName,
 			source = PaletteItemSource.GradientFile(palette.id, newFileName),
 			isDefault = false
 		)
