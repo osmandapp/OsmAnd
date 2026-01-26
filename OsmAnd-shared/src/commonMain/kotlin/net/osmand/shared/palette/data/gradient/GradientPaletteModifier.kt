@@ -2,29 +2,34 @@ package net.osmand.shared.palette.data.gradient
 
 import kotlinx.datetime.Clock
 import net.osmand.shared.io.KFile
+import net.osmand.shared.palette.data.PaletteModifier
 import net.osmand.shared.palette.domain.Palette
 import net.osmand.shared.palette.domain.PaletteItem
 import net.osmand.shared.palette.domain.PaletteItemSource
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.NamingUtils
+import net.osmand.shared.util.PlatformUtil
 
-object GradientPaletteModifier {
+object GradientPaletteModifier : PaletteModifier<Palette.GradientCollection> {
 
 	private val LOG = LoggerFactory.getLogger("GradientPaletteModifier")
+
+	private val settingsHelper = GradientSettingsHelper()
+
+	private val paletteDirectory
+		get() = PlatformUtil.getOsmAndContext().getColorPaletteDir()
 
 	/**
 	 * Updates an existing gradient item (e.g. points changed) or adds a new one.
 	 * Automatically handles sorting of points by value before writing.
 	 */
-	fun updateOrAdd(
-		collection: Palette.GradientCollection,
-		item: PaletteItem,
-		directory: KFile,
-		settingsHelper: GradientSettingsHelper
+	override fun updateOrAdd(
+		palette: Palette.GradientCollection,
+		item: PaletteItem
 	): Palette.GradientCollection {
 		if (item !is PaletteItem.Gradient) {
 			LOG.error("Wrong item type for GradientCollection: ${item::class.simpleName}")
-			return collection
+			return palette
 		}
 
 		// 1. Ensure points are sorted by value (Safety check)
@@ -32,10 +37,10 @@ object GradientPaletteModifier {
 		val sortedItem = item.copy(points = item.points.sortedBy { it.value })
 
 		// 2. Write physical file
-		GradientPaletteIO.writeItem(directory, sortedItem)
+		GradientPaletteIO.writeItem(paletteDirectory, sortedItem)
 
 		// 3. Update Memory Collection
-		val currentItems = collection.items
+		val currentItems = palette.items
 		val index = currentItems.indexOfFirst { it.id == sortedItem.id }
 
 		val newItems = if (index != -1) {
@@ -48,51 +53,47 @@ object GradientPaletteModifier {
 		}
 
 		// 4. Sync Settings (Persist existence and order)
-		saveSettings(collection.category.key, newItems, settingsHelper)
+		saveSettings(palette.category.key, newItems, settingsHelper)
 
-		return collection.copy(items = newItems)
+		return palette.copy(items = newItems)
 	}
 
 	/**
 	 * Removes the gradient file and its entry from settings.
 	 */
-	fun remove(
-		collection: Palette.GradientCollection,
-		itemId: String,
-		directory: KFile,
-		settingsHelper: GradientSettingsHelper
+	override fun remove(
+		palette: Palette.GradientCollection,
+		itemId: String
 	): Palette.GradientCollection {
-		val itemToRemove = collection.items.find { it.id == itemId } ?: return collection
+		val itemToRemove = palette.items.find { it.id == itemId } ?: return palette
 
 		// 1. Delete physical file
-		val file = KFile(directory, itemToRemove.source.fileName)
+		val file = KFile(paletteDirectory, itemToRemove.source.fileName)
 		if (file.exists()) {
 			file.delete()
 		}
 
 		// 2. Update memory
-		val newItems = collection.items.filter { it.id != itemId }
+		val newItems = palette.items.filter { it.id != itemId }
 
 		// 3. Update settings (Remove the entry)
-		saveSettings(collection.category.key, newItems, settingsHelper)
+		saveSettings(palette.category.key, newItems, settingsHelper)
 
-		return collection.copy(items = newItems)
+		return palette.copy(items = newItems)
 	}
 
-	fun duplicate(
-		collection: Palette.GradientCollection,
-		originalItemId: String,
-		directory: KFile,
-		settingsHelper: GradientSettingsHelper
+	override fun duplicate(
+		palette: Palette.GradientCollection,
+		originalItemId: String
 	): Pair<Palette.GradientCollection, PaletteItem>? {
-		val index = collection.items.indexOfFirst { it.id == originalItemId }
+		val index = palette.items.indexOfFirst { it.id == originalItemId }
 		if (index == -1) return null
 
-		val originalItem = collection.items[index]
+		val originalItem = palette.items[index]
 
 		// 1. Generate Unique ID / Name
 		// In gradients, ID is usually the filename with extension
-		val existingIds = collection.items.map { it.id }.toSet()
+		val existingIds = palette.items.map { it.id }.toSet()
 		val newFileName = NamingUtils.generateUniqueName(existingIds, originalItem.id)
 
 		// 2. Create new Item
@@ -102,49 +103,47 @@ object GradientPaletteModifier {
 			// TODO: may be we should use pending name fetching to always get it up to date,
 			//  but if we will implement rename logic, we should always also update name
 			displayName = NamingUtils.getNextName(originalItem.displayName),
-			source = PaletteItemSource.GradientFile(collection.id, newFileName),
+			source = PaletteItemSource.GradientFile(palette.id, newFileName),
 			isDefault = false
 		)
 
 		// 3. Write physical file
-		GradientPaletteIO.writeItem(directory, newItem)
+		GradientPaletteIO.writeItem(paletteDirectory, newItem)
 
 		// 4. Insert into memory (after original)
-		val newItems = collection.items.toMutableList()
+		val newItems = palette.items.toMutableList()
 		newItems.add(index + 1, newItem)
 
 		// 5. Save settings
-		saveSettings(collection.category.key, newItems, settingsHelper)
+		saveSettings(palette.category.key, newItems, settingsHelper)
 
-		return collection.copy(items = newItems) to newItem
+		return palette.copy(items = newItems) to newItem
 	}
 
 	/**
 	 * Updates timestamp (virtual lastUsedTime) and reorders in Settings.
 	 */
-	fun markAsUsed(
-		collection: Palette.GradientCollection,
-		itemId: String,
-		settingsHelper: GradientSettingsHelper,
-		timeProvider: () -> Long = { Clock.System.now().toEpochMilliseconds() }
+	override fun markAsUsed(
+		palette: Palette.GradientCollection,
+		itemId: String
 	): Palette.GradientCollection {
-		val index = collection.items.indexOfFirst { it.id == itemId }
-		if (index == -1) return collection
+		val index = palette.items.indexOfFirst { it.id == itemId }
+		if (index == -1) return palette
 
-		val originalItem = collection.items[index]
+		val originalItem = palette.items[index]
 
 		// 1. Update timestamp in memory
 		val updatedItem = originalItem.copy(
-			lastUsedTime = timeProvider()
+			lastUsedTime = Clock.System.now().toEpochMilliseconds()
 		)
 
-		val tempItems = collection.items.toMutableList()
+		val tempItems = palette.items.toMutableList()
 		tempItems[index] = updatedItem
 
 		// 2. Save new order to Settings
-		saveSettings(collection.category.key, tempItems, settingsHelper)
+		saveSettings(palette.category.key, tempItems, settingsHelper)
 
-		return collection.copy(items = tempItems)
+		return palette.copy(items = tempItems)
 	}
 
 	// --- Helper to sync with Settings ---

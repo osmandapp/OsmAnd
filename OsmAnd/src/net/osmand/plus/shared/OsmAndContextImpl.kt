@@ -1,6 +1,7 @@
 package net.osmand.plus.shared
 
 import net.osmand.CollatorStringMatcher
+import net.osmand.IndexConstants.CLR_PALETTE_DIR
 import net.osmand.IndexConstants.GPX_IMPORT_DIR
 import net.osmand.IndexConstants.GPX_INDEX_DIR
 import net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR
@@ -43,6 +44,8 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 	override fun getGpxImportDir(): KFile = app.getAppPathKt(GPX_IMPORT_DIR)
 
 	override fun getGpxRecordedDir(): KFile = app.getAppPathKt(GPX_RECORDED_INDEX_DIR)
+
+	override fun getColorPaletteDir(): KFile = app.getAppPathKt(CLR_PALETTE_DIR)
 
 	override fun getSettings(): SettingsAPI = settings
 

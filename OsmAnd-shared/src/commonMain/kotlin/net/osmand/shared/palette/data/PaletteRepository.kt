@@ -14,18 +14,22 @@ import net.osmand.shared.palette.domain.PaletteCategory
 import net.osmand.shared.palette.domain.PaletteFileType
 import net.osmand.shared.palette.domain.PaletteItem
 import net.osmand.shared.util.LoggerFactory
+import net.osmand.shared.util.PlatformUtil
 
-interface PaletteDirectoryProvider {
-	fun getPaletteDirectory(): KFile
-}
-
-class PaletteRepository(
-	private val directoryProvider: PaletteDirectoryProvider
-) {
+class PaletteRepository {
 
 	private val cachedPalettesForId = ConcurrentMutableMap<String, Palette>()
 
 	private val settingsHelper = GradientSettingsHelper()
+
+	private fun getPaletteDir(): KFile = PlatformUtil.getOsmAndContext().getColorPaletteDir()
+
+	@Suppress("UNCHECKED_CAST")
+	private val Palette.modifier: PaletteModifier<Palette>
+		get() = when (this) {
+			is Palette.SolidCollection -> SolidPaletteModifier as PaletteModifier<Palette>
+			is Palette.GradientCollection -> GradientPaletteModifier as PaletteModifier<Palette>
+		}
 
 	// --- Read ---
 
@@ -52,19 +56,9 @@ class PaletteRepository(
 	// --- CRUD ---
 
 	fun updatePaletteItem(item: PaletteItem) {
-		val paletteId = item.source.paletteId
-		val currentPalette = getPalette(paletteId) ?: return
+		val currentPalette = getPalette(item.source.paletteId) ?: return
 
-		val updatedPalette = when (currentPalette) {
-			is Palette.SolidCollection -> SolidPaletteModifier.updateOrAdd(currentPalette, item)
-			is Palette.GradientCollection -> GradientPaletteModifier.updateOrAdd(
-				collection = currentPalette,
-				item = item,
-				directory = directoryProvider.getPaletteDirectory(),
-				settingsHelper = settingsHelper
-			)
-			else -> currentPalette
-		}
+		val updatedPalette = currentPalette.modifier.updateOrAdd(currentPalette, item)
 
 		saveIfChanged(currentPalette, updatedPalette)
 	}
@@ -72,16 +66,7 @@ class PaletteRepository(
 	fun removePaletteItem(paletteId: String, itemId: String) {
 		val currentPalette = getPalette(paletteId) ?: return
 
-		val updatedPalette = when (currentPalette) {
-			is Palette.SolidCollection -> SolidPaletteModifier.remove(currentPalette, itemId)
-			is Palette.GradientCollection -> GradientPaletteModifier.remove(
-				collection = currentPalette,
-				itemId = itemId,
-				directory = directoryProvider.getPaletteDirectory(),
-				settingsHelper = settingsHelper
-			)
-			else -> currentPalette
-		}
+		val updatedPalette = currentPalette.modifier.remove(currentPalette, itemId)
 
 		saveIfChanged(currentPalette, updatedPalette)
 	}
@@ -89,36 +74,12 @@ class PaletteRepository(
 	fun duplicatePaletteItem(paletteId: String, originalItemId: String): PaletteItem? {
 		val currentPalette = getPalette(paletteId) ?: return null
 
-		var resultItem: PaletteItem? = null
+		val result = currentPalette.modifier.duplicate(currentPalette, originalItemId)
 
-		val updatedPalette = when (currentPalette) {
-			is Palette.SolidCollection -> {
-				val result = SolidPaletteModifier.duplicate(
-					collection = currentPalette,
-					originalItemId = originalItemId,
-					idGenerator = { ids -> SolidPaletteIO.generateUniqueId(ids) },
-				)
-				result?.let { (newCollection, newItem) ->
-					resultItem = newItem
-					newCollection
-				} ?: currentPalette
-			}
-			is Palette.GradientCollection -> {
-				val result = GradientPaletteModifier.duplicate(
-					collection = currentPalette,
-					originalItemId = originalItemId,
-					directory = directoryProvider.getPaletteDirectory(),
-					settingsHelper = GradientSettingsHelper(),
-				)
-				result?.let { (newCollection, newItem) ->
-					resultItem = newItem
-					newCollection
-				} ?: currentPalette
-			}
+		return result?.let { (newCollection, newItem) ->
+			saveIfChanged(currentPalette, newCollection)
+			newItem
 		}
-
-		saveIfChanged(currentPalette, updatedPalette)
-		return resultItem
 	}
 
 	/**
@@ -128,20 +89,7 @@ class PaletteRepository(
 	fun markPaletteItemAsUsed(paletteId: String, itemId: String) {
 		val currentPalette = getPalette(paletteId) ?: return
 
-		val updatedPalette = when (currentPalette) {
-			is Palette.SolidCollection -> SolidPaletteModifier.markAsUsed(
-				collection = currentPalette,
-				itemId = itemId,
-				timeProvider = { Clock.System.now().toEpochMilliseconds() }
-			)
-			is Palette.GradientCollection -> GradientPaletteModifier.markAsUsed(
-				collection = currentPalette,
-				itemId = itemId,
-				settingsHelper = settingsHelper,
-				timeProvider = { Clock.System.now().toEpochMilliseconds() }
-			)
-			else -> currentPalette
-		}
+		val updatedPalette = currentPalette.modifier.markAsUsed(currentPalette, itemId)
 
 		saveIfChanged(currentPalette, updatedPalette)
 	}
@@ -226,7 +174,7 @@ class PaletteRepository(
 
 			fileType != null -> {
 				GradientPaletteIO.readCollection(
-					directory = directoryProvider.getPaletteDirectory(),
+					directory = getPaletteDir(),
 					category = fileType.category,
 					settingsHelper = settingsHelper
 				)
@@ -236,7 +184,7 @@ class PaletteRepository(
 				val category = PaletteCategory.fromKey(id)
 				if (category != null) {
 					GradientPaletteIO.readCollection(
-						directory = directoryProvider.getPaletteDirectory(),
+						directory = getPaletteDir(),
 						category = category,
 						settingsHelper = settingsHelper
 					)
@@ -267,7 +215,7 @@ class PaletteRepository(
 	}
 
 	private fun getFileForId(id: String): KFile {
-		return KFile(directoryProvider.getPaletteDirectory(), "$id.txt")
+		return KFile(getPaletteDir(), "$id.txt")
 	}
 
 	companion object {

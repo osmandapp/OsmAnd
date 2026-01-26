@@ -1,22 +1,27 @@
 package net.osmand.shared.palette.data.solid
 
+import kotlinx.datetime.Clock
 import net.osmand.shared.ColorPalette
+import net.osmand.shared.palette.data.PaletteModifier
 import net.osmand.shared.palette.domain.Palette
 import net.osmand.shared.palette.domain.PaletteItem
 import net.osmand.shared.palette.domain.PaletteItemSource
 import net.osmand.shared.util.LoggerFactory
 
-object SolidPaletteModifier {
+object SolidPaletteModifier : PaletteModifier<Palette.SolidCollection> {
 
 	private val LOG = LoggerFactory.getLogger("SolidPaletteModifier")
 
-	fun updateOrAdd(collection: Palette.SolidCollection, item: PaletteItem): Palette.SolidCollection {
+	override fun updateOrAdd(
+		palette: Palette.SolidCollection,
+		item: PaletteItem
+	): Palette.SolidCollection {
 		if (item !is PaletteItem.Solid) {
 			LOG.error("Wrong item type for SolidCollection: ${item::class.simpleName}")
-			return collection
+			return palette
 		}
 
-		val currentItems = collection.items
+		val currentItems = palette.items
 		val index = currentItems.indexOfFirst { it.id == item.id }
 
 		val newItems = if (index != -1) {
@@ -29,62 +34,63 @@ object SolidPaletteModifier {
 			currentItems + item
 		}
 
-		return collection.copy(items = newItems)
+		return palette.copy(items = newItems)
 	}
 
-	fun remove(collection: Palette.SolidCollection, itemId: String): Palette.SolidCollection {
-		val newItems = collection.items.filter { it.id != itemId }
-		if (newItems.size == collection.items.size) return collection
+	override fun remove(
+		palette: Palette.SolidCollection,
+		itemId: String
+	): Palette.SolidCollection {
+		val newItems = palette.items.filter { it.id != itemId }
+		if (newItems.size == palette.items.size) return palette
 
-		return collection.copy(items = newItems)
+		return palette.copy(items = newItems)
 	}
 
-	fun duplicate(
-		collection: Palette.SolidCollection,
-		originalItemId: String,
-		idGenerator: (Set<String>) -> String,
+	override fun duplicate(
+		palette: Palette.SolidCollection,
+		originalItemId: String
 	): Pair<Palette.SolidCollection, PaletteItem>? {
-		val index = collection.items.indexOfFirst { it.id == originalItemId }
+		val index = palette.items.indexOfFirst { it.id == originalItemId }
 		if (index == -1) return null
 
-		val originalItem = collection.items[index]
+		val originalItem = palette.items[index]
 
-		val existingIds = collection.items.map { it.id }.toSet()
-		val newId = idGenerator(existingIds)
+		val existingIds = palette.items.map { it.id }.toSet()
+		val newId = SolidPaletteIO.generateUniqueId(existingIds)
 
 		val newItem = originalItem.copy(id = newId)
 
 		// Insert after original
-		val newItems = collection.items.toMutableList()
+		val newItems = palette.items.toMutableList()
 		newItems.add(index + 1, newItem)
 
-		return collection.copy(items = newItems) to newItem
+		return palette.copy(items = newItems) to newItem
 	}
 
 	/**
 	 * Updates the `lastUsedTime` of the item to the current time.
 	 * This effectively moves the item to the top when sorted by "Last Used".
 	 */
-	fun markAsUsed(
-		collection: Palette.SolidCollection,
-		itemId: String,
-		timeProvider: () -> Long
+	override fun markAsUsed(
+		palette: Palette.SolidCollection,
+		itemId: String
 	): Palette.SolidCollection {
-		val index = collection.items.indexOfFirst { it.id == itemId }
-		if (index == -1) return collection
+		val index = palette.items.indexOfFirst { it.id == itemId }
+		if (index == -1) return palette
 
-		val originalItem = collection.items[index]
+		val originalItem = palette.items[index]
 
 		// Update timestamp
 		val updatedItem = originalItem.copy(
-			lastUsedTime = timeProvider()
+			lastUsedTime = Clock.System.now().toEpochMilliseconds()
 		)
 
 		// Replace item in the list
-		val newItems = collection.items.toMutableList()
+		val newItems = palette.items.toMutableList()
 		newItems[index] = updatedItem
 
-		return collection.copy(items = newItems)
+		return palette.copy(items = newItems)
 	}
 
 	/**

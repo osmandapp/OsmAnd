@@ -17,6 +17,7 @@ interface OsmAndContext {
 	fun getGpxDir(): KFile
 	fun getGpxImportDir(): KFile
 	fun getGpxRecordedDir(): KFile
+	fun getColorPaletteDir(): KFile
 
 	fun getSettings(): SettingsAPI
 	fun getSpeedSystem(): SpeedConstants?
