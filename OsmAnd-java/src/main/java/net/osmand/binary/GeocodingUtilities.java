@@ -307,36 +307,7 @@ public class GeocodingUtilities {
 		if (streetsList.size() == 0) {
 			res.add(road);
 		} else {
-			// Log before sorting streetsList
-			LOG.info("justifyReverseGeocodingSearch: BEFORE sorting streetsList, size=" + streetsList.size());
-			for (int i = 0; i < streetsList.size(); i++) {
-				GeocodingResult sr = streetsList.get(i);
-				LOG.info("  streetsList[" + i + "]: street=" + (sr.street != null ? sr.street.getName() : "null") 
-					+ ", distance=" + sr.getDistance() + ", cityDistance=" + sr.getCityDistance());
-			}
-			
 			Collections.sort(streetsList, DISTANCE_COMPARATOR);
-			
-			// Log after sorting streetsList
-			LOG.info("justifyReverseGeocodingSearch: AFTER sorting streetsList, size=" + streetsList.size());
-			for (int i = 0; i < streetsList.size(); i++) {
-				GeocodingResult sr = streetsList.get(i);
-				LOG.info("  streetsList[" + i + "]: street=" + (sr.street != null ? sr.street.getName() : "null") 
-					+ ", distance=" + sr.getDistance() + ", cityDistance=" + sr.getCityDistance());
-			}
-			
-			// Log comparator results for debugging
-			if (streetsList.size() > 1) {
-				for (int i = 0; i < streetsList.size() - 1; i++) {
-					GeocodingResult o1 = streetsList.get(i);
-					GeocodingResult o2 = streetsList.get(i + 1);
-					int cmp = DISTANCE_COMPARATOR.compare(o1, o2);
-					LOG.info("  Comparator check: [" + i + "] vs [" + (i + 1) + "] = " + cmp 
-						+ " (o1.dist=" + (int)o1.getDistance() + ", o1.cityDist=" + o1.getCityDistance()
-						+ " vs o2.dist=" + (int)o2.getDistance() + ", o2.cityDist=" + o2.getCityDistance() + ")");
-				}
-			}
-			
 			double streetDistance = 0;
 			boolean isBuildingFound = knownMinBuildingDistance > 0;
 			for (GeocodingResult street : streetsList) {
@@ -348,31 +319,7 @@ public class GeocodingUtilities {
 				street.resetDistance();//reset to road projection
 				street.connectionPoint = road.connectionPoint;
 				final List<GeocodingResult> streetBuildings = loadStreetBuildings(road, reader, street);
-				
-				// Log before sorting streetBuildings
-				if (streetBuildings.size() > 0) {
-					LOG.info("justifyReverseGeocodingSearch: BEFORE sorting streetBuildings for street=" 
-						+ (street.street != null ? street.street.getName() : "null") + ", size=" + streetBuildings.size());
-					for (int i = 0; i < streetBuildings.size(); i++) {
-						GeocodingResult bld = streetBuildings.get(i);
-						LOG.info("  streetBuildings[" + i + "]: building=" + bld.getBuildingString() 
-							+ ", distance=" + bld.getDistance() + ", cityDistance=" + bld.getCityDistance());
-					}
-				}
-				
 				Collections.sort(streetBuildings, DISTANCE_COMPARATOR);
-				
-				// Log after sorting streetBuildings
-				if (streetBuildings.size() > 0) {
-					LOG.info("justifyReverseGeocodingSearch: AFTER sorting streetBuildings for street=" 
-						+ (street.street != null ? street.street.getName() : "null") + ", size=" + streetBuildings.size());
-					for (int i = 0; i < streetBuildings.size(); i++) {
-						GeocodingResult bld = streetBuildings.get(i);
-						LOG.info("  streetBuildings[" + i + "]: building=" + bld.getBuildingString() 
-							+ ", distance=" + bld.getDistance() + ", cityDistance=" + bld.getCityDistance());
-					}
-				}
-				
 				if (streetBuildings.size() > 0) {
 					Iterator<GeocodingResult> it = streetBuildings.iterator();
 					if (knownMinBuildingDistance == 0) {
@@ -393,39 +340,7 @@ public class GeocodingUtilities {
 				res.add(street);
 			}
 		}
-		
-		// Log before final sort
-		LOG.info("justifyReverseGeocodingSearch: BEFORE final sort, res.size=" + res.size());
-		for (int i = 0; i < res.size(); i++) {
-			GeocodingResult r = res.get(i);
-			LOG.info("  res[" + i + "]: building=" + r.getBuildingString() 
-				+ ", street=" + (r.street != null ? r.street.getName() : (r.streetName != null ? r.streetName : "null"))
-				+ ", distance=" + r.getDistance() + ", cityDistance=" + r.getCityDistance());
-		}
-		
 		Collections.sort(res, DISTANCE_COMPARATOR);
-		
-		// Log after final sort
-		LOG.info("justifyReverseGeocodingSearch: AFTER final sort, res.size=" + res.size());
-		for (int i = 0; i < res.size(); i++) {
-			GeocodingResult r = res.get(i);
-			LOG.info("  res[" + i + "]: building=" + r.getBuildingString() 
-				+ ", street=" + (r.street != null ? r.street.getName() : (r.streetName != null ? r.streetName : "null"))
-				+ ", distance=" + r.getDistance() + ", cityDistance=" + r.getCityDistance());
-		}
-		
-		// Log comparator results for final sort
-		if (res.size() > 1) {
-			for (int i = 0; i < res.size() - 1; i++) {
-				GeocodingResult o1 = res.get(i);
-				GeocodingResult o2 = res.get(i + 1);
-				int cmp = DISTANCE_COMPARATOR.compare(o1, o2);
-				LOG.info("  Final comparator check: [" + i + "] vs [" + (i + 1) + "] = " + cmp 
-					+ " (o1.dist=" + (int)o1.getDistance() + ", o1.cityDist=" + o1.getCityDistance()
-					+ " vs o2.dist=" + (int)o2.getDistance() + ", o2.cityDist=" + o2.getCityDistance() + ")");
-			}
-		}
-		
 		return res;
 	}
 
