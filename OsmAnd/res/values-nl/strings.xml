@@ -6311,4 +6311,7 @@
     <string name="copy_from_portrait_layout">Kopieer van portretindeling</string>
     <string name="copy_from_landscape_layout">Kopiëren van landschapsindeling</string>
     <string name="map_screen_layout_descr">Kies of je één indeling voor alle oriëntaties wilt gebruiken, of portret- en landschapsindeling afzonderlijk wilt instellen.</string>
+    <string name="galactic_line">Galactische lijn</string>
+    <string name="equator_line">Evenaarlijn</string>
+    <string name="meridian_line">Meridiaanlijn</string>
 </resources>
