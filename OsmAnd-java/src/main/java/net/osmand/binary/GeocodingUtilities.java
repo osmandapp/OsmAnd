@@ -250,6 +250,8 @@ public class GeocodingUtilities {
 	public List<GeocodingResult> justifyReverseGeocodingSearch(final GeocodingResult road, BinaryMapIndexReader reader,
 			double knownMinBuildingDistance, final ResultMatcher<GeocodingResult> result) throws IOException {
 		// test address index search
+		String readerName = reader != null && reader.getFile() != null ? reader.getFile().getName() : "null";
+		LOG.info("justifyReverseGeocodingSearch: START, reader=" + readerName + ", streetName=" + road.streetName);
 		final List<GeocodingResult> streetsList = new ArrayList<GeocodingResult>();
 		boolean addCommonWords = false;
 		List<String> streetNamesUsed = prepareStreetName(road.streetName, addCommonWords);
