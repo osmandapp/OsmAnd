@@ -453,7 +453,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		int right = MapUtils.get31TileNumberX(latLonBounds.right);
 		int bottom = MapUtils.get31TileNumberY(latLonBounds.bottom);
 		QuadTree<QuadRect> boundIntersections = initBoundIntersections(left, top, right, bottom);
-		int i = 0;
+		int counter = 0;
 		for (Amenity place : places) {
 			double lat = place.getLocation().getLatitude();
 			double lon = place.getLocation().getLongitude();
@@ -464,8 +464,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			int y31 = MapUtils.get31TileNumberY(lat);
 			if (!intersectsD(boundIntersections, x31, y31, iconSize31, iconSize31)) {
 				res.put(place.getId(), place);
+				counter++;
 			}
-			if (i++ > topPlacesLimit) {
+			if (counter >= topPlacesLimit) {
 				break;
 			}
 		}
