@@ -79,7 +79,7 @@ import java.util.concurrent.Executors;
 public class FavoritesTreeFragment extends OsmandExpandableListFragment implements FragmentStateHolder,
 		OsmAndCompassListener, OsmAndLocationListener, ShareFavoritesListener {
 
-	private static final int IMPORT_FAVOURITES_REQUEST = 1007;
+	public static final int IMPORT_FAVOURITES_REQUEST = 1007;
 	private static final int SEARCH_ID = -1;
 	private static final int DELETE_ID = 2;
 	private static final int DELETE_ACTION_ID = 3;

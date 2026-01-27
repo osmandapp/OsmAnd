@@ -17,12 +17,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
@@ -60,7 +62,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		favouritesHelper = app.getFavoritesHelper();
-		editor = requireMapActivity().getContextMenu().getFavoritePointEditor();
+		if (editor == null) {
+			setupEditor();
+		}
 
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null) {
@@ -75,6 +79,16 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			setColor(getInitialColor());
 			setIcon(getInitialIconId());
 			setBackgroundType(getInitialBackgroundType());
+		}
+	}
+
+	private void setupEditor(){
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			editor = activity.getContextMenu().getFavoritePointEditor();
+		}
+		if (getActivity() instanceof MyPlacesActivity) {
+			editor = new FavoritePointEditor(app);
 		}
 	}
 
@@ -235,14 +249,16 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			}
 			addLastUsedIcon(iconId);
 		}
+
+		if (needDismiss) {
+			dismiss(false);
+		}
+
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
 		}
 		mapActivity.refreshMap();
-		if (needDismiss) {
-			dismiss(false);
-		}
 
 		MapContextMenu menu = mapActivity.getContextMenu();
 		LatLon latLon = new LatLon(favorite.getLatitude(), favorite.getLongitude());
@@ -452,6 +468,21 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 						.addToBackStack(null)
 						.commitAllowingStateLoss();
 			}
+		}
+	}
+
+	public static void showInstance(@NonNull FavoritePointEditor editor, @NonNull FragmentActivity activity,
+	                                @NonNull Fragment targetFragment, boolean skipConfirmationDialog) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, null, true)) {
+			FavoritePointEditorFragment fragment = new FavoritePointEditorFragment();
+			fragment.skipConfirmationDialog = skipConfirmationDialog;
+			fragment.editor = editor;
+			fragment.setTargetFragment(targetFragment, 0);
+			fragmentManager.beginTransaction()
+					.add(R.id.fragmentContainer, fragment)
+					.addToBackStack(null)
+					.commitAllowingStateLoss();
 		}
 	}
 }
