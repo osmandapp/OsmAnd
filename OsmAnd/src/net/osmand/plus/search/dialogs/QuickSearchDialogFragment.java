@@ -2232,7 +2232,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public void showResult(@NonNull PoiUIFilter filter) {
 		buttonToolbarText.setText(R.string.shared_string_show_on_map);
 		mainSearchFragment.getAdapter().clear();
-		updateSearchResult(createSearchResultCollection(app, filter.getCurrentSearchResult()), true);
+		updateSearchResult(createSearchResultCollection(app, filter.getCurrentSearchResult(true)), true);
 		((QuickSearchListAdapter) mainSearchFragment.getAdapter()).setPoiUIFilter(filter);
 		updateTabBarVisibility(false);
 		toolbarEdit.setVisibility(View.GONE);

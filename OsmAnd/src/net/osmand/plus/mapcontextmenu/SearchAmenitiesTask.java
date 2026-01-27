@@ -78,7 +78,7 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 			public boolean isCancelled() {
 				return SearchAmenitiesTask.this.isCancelled();
 			}
-		});
+		}, true);
 	}
 
 	@Override
