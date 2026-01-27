@@ -4053,8 +4053,6 @@
     <string name="pro_features">Pro functies</string>
     <string name="purchases_restored">Aankopen hersteld</string>
     <string name="grey_color_undefined">Delen zonder gegevens zijn grijs gekleurd.</string>
-    <string name="backup_deleting_all_data">Verwijderen van alle gegevens…</string>
-    <string name="backup_deleted_all_data">Verwijder alle gegevens.</string>
     <string name="backup_data_removed">Alle gegevens zijn verwijderd.</string>
     <string name="shared_string_progress">Voortgang</string>
     <string name="backup_do_not_have_any">Je hebt nog geen online back-up</string>

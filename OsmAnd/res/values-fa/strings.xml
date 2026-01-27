@@ -3843,10 +3843,8 @@
     <string name="backup_error_file_not_available">پرونده در دسترس نیست</string>
     <string name="contour_lines_hillshade_slope">خطوط میزان، سایه‌روشن‌ها، شیب</string>
     <string name="duration_moment_ago">لحظه‌ای پیش</string>
-    <string name="backup_deleting_all_data">در حال پاک‌کردن همهٔ داده‌ها…</string>
     <string name="backup_data_removed">کل داده‌ها پاک شد.</string>
     <string name="backup_version_history_removed">کل تاریخچهٔ نسخه پاک شد.</string>
-    <string name="backup_deleted_all_data">همهٔ داده‌ها پاک شد.</string>
     <string name="shared_string_progress">پیشرفت</string>
     <string name="backup_do_not_have_any">هنوز هیچ پشتیبان آنلاینی ندارید</string>
     <string name="backup_dont_have_any_descr">برای پشتیبان‌گیری خودکار برنامه‌ریزی کنید تا داده‌های خود را از دست ندهید.</string>

@@ -3942,8 +3942,6 @@
     <string name="map_updates_are_unavailable_yet">Uppfærslur á kortum eru ekki enn tiltækar. :-(</string>
     <string name="contour_lines_hillshade_slope">Hæðarlínur, hæðaskyggingar, brekkur</string>
     <string name="logout_from_osmand_cloud">Skrá út úr OsmAnd Cloud-tölvuskýi</string>
-    <string name="backup_deleting_all_data">Eyði öllum gögnum…</string>
-    <string name="backup_deleted_all_data">Eyddi öllum gögnum.</string>
     <string name="backup_version_history_removed">Allur útgáfuferill hefur verið fjarlægður.</string>
     <string name="backup_data_removed">Öll gögn hafa verið fjarlægð.</string>
     <string name="shared_string_progress">Framvinda</string>

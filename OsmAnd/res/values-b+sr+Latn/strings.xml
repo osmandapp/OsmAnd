@@ -4333,8 +4333,6 @@
     <string name="setting_supported_by_style">Ova podešavanja su određena izgledom mape „%1$s“</string>
     <string name="logout_from_osmand_cloud">Odjava sa OsmAnd Cloud</string>
     <string name="duration_moment_ago">pre par trenutaka</string>
-    <string name="backup_deleted_all_data">Svi podaci su uklonjeni.</string>
-    <string name="backup_deleting_all_data">Brišem sve podatke…</string>
     <string name="logout_from_osmand_cloud_decsr">Odjavljuješ se?
 \nMoraćeš da se prijaviš ponovo da napraviš kopiju ili da povratiš podatke.</string>
     <string name="routing_attr_avoid_tunnels_description">Tunele</string>
