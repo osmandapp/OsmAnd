@@ -2717,7 +2717,6 @@
     <string name="map_widget_map_rendering">Cách hiển thị bản đồ</string>
     <string name="hide_full_description">Ẩn mô tả đầy đủ</string>
     <string name="osmand_parking_overdue">quá hạn</string>
-    <string name="backup_deleted_all_data">Đã xoá tất cả dữ liệu.</string>
     <string name="shared_string_rendering_style">Kiểu hiển thị</string>
     <string name="map_downloaded">Bản đồ đã tải</string>
     <string name="activity_type_snowmobile_name">Xe trượt tuyết</string>
@@ -3295,7 +3294,6 @@
     <string name="sign_in_with_open_street_map">Đăng nhập bằng OpenStreetMap</string>
     <string name="login_open_street_map">Đăng nhập vào OpenStreetMap</string>
     <string name="all_next_segments">Tất cả đoạn tiếp theo</string>
-    <string name="backup_deleting_all_data">Đang xoá tất cả dữ liệu…</string>
     <string name="continue_with">Tiếp tục với %1$s</string>
     <string name="loading_list_of_routing_services">Đang tải danh sách các dịch vụ chỉ đường có sẵn</string>
     <string name="three_months_subscription">Đăng ký ba tháng</string>

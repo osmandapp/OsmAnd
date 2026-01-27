@@ -4333,7 +4333,6 @@
     <string name="backup_welcome_back">Καλώς ήρθατε πίσω!</string>
     <string name="auto_zoom_discrete">Διακριτό</string>
     <string name="widget_secondary_desc_part_of">Μέρος του πρόσθετου %1$s.</string>
-    <string name="backup_deleting_all_data">Διαγραφή όλων των δεδομένων…</string>
     <string name="app_mode_suv">SUV</string>
     <string name="graph_axis">Άξονας γραφήματος</string>
     <string name="help_article_map_routes_name">Διαδρομές</string>
@@ -4698,7 +4697,6 @@
     <string name="obd_fuel_left_liters">Καύσιμο που έμεινε (λίτρα)</string>
     <string name="obd_fuel_type_ethanol">Αιθανόλη</string>
     <string name="from_with_param">Από %1$s</string>
-    <string name="backup_deleted_all_data">Διαγράφηκαν όλα τα δεδομένα.</string>
     <string name="obd_fuel_type_bifuel_gasoline">Διπλό καύσιμο που τρέχει Βενζίνη</string>
     <string name="obd_air_intake_temp">Θερμοκρασία πρόσληψης αέρα</string>
     <string name="start_recording">Έναρξη καταγραφής</string>

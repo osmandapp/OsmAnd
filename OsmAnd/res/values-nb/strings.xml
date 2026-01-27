@@ -4010,8 +4010,6 @@
     <string name="backup_error_subscription_was_used">Abonnement eller kupong brukt av en annen konto %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">Filen må sendes i .gzip-format</string>
     <string name="backup_error_user_is_not_registered">Ingen brukere registrert med den e-postadressen</string>
-    <string name="backup_deleting_all_data">Sletter alle data…</string>
-    <string name="backup_deleted_all_data">Slettet alle data.</string>
     <string name="backup_version_history_removed">All versjonshistorikk er fjernet.</string>
     <string name="backup_data_removed">Alle data er fjernet.</string>
     <string name="shared_string_progress">Framdrift</string>

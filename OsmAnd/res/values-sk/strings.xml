@@ -3960,8 +3960,6 @@
     <string name="logout_from_osmand_cloud">Odhlásiť z OsmAnd Cloudu</string>
     <string name="logout_from_osmand_cloud_decsr">Odhlásiť sa\?
 \nPred ďalším zálohovaním alebo obnovením údajov sa budete musieť znovu prihlásiť.</string>
-    <string name="backup_deleting_all_data">Odstraňujú sa všetky údaje…</string>
-    <string name="backup_deleted_all_data">Všetky údaje odstránené.</string>
     <string name="promo_subscription">Propagačné predplatné</string>
     <string name="on_hold_since">Pozastavené od %1$s</string>
     <string name="active_till">Aktívne do %1$s</string>
