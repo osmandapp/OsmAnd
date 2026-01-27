@@ -5884,4 +5884,6 @@
     <string name="meridian_line">Kezdőmeridián</string>
     <string name="equator_line">Egyenlítő vonala</string>
     <string name="galactic_line">Galaktikus sík</string>
+    <string name="backup_deleted_all_data">Törölt adat.</string>
+    <string name="backup_deleting_all_data">Adat törlése…</string>
 </resources>
