@@ -2167,7 +2167,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     </string>
     <string name="contour_lines_hillshade_slope">Contour lines, hillshade, slope</string>
     <string name="hillshade_slope">Hillshade, Slope</string>
-    <string name="backup_error_no_valid_subscription">No valid subsc§ription present</string>
+    <string name="backup_error_no_valid_subscription">No valid subscription present</string>
     <string name="backup_error_user_is_not_registered">No user registered with that e-mail address</string>
     <string name="backup_error_token_is_not_valid_or_expired">Invalid or expired token</string>
     <string name="backup_error_token_is_not_valid">Something is wrong with the provided device ID or token</string>
