@@ -227,6 +227,7 @@ public class SpeedometerWidget {
 		}
 
 		boolean isUsaOrCanada = isUsaOrCanadaRegion();
+		AndroidUiHelper.updateVisibility(speedLimitContainer, false);
 		AndroidUiHelper.updateVisibility(speedLimitDescription, isUsaOrCanada);
 		WidgetSize newWidgetSize = settings.SPEEDOMETER_SIZE.getModeValue(mode);
 		DrivingRegion newDrivingRegion = settings.DRIVING_REGION.getModeValue(mode);
