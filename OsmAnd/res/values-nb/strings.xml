@@ -5896,4 +5896,9 @@
     <string name="shared_string_step">Intervall</string>
     <string name="set_step_size_summary">Velg en intervallstørrelse til å gruppere dine spor.</string>
     <string name="set_step_size">Bestem intervallstørrelse</string>
+    <string name="sort_highest_first">Høyeste først</string>
+    <string name="sort_lowest_first">Laveste først</string>
+    <string name="equator_line">Ekvatorlinje</string>
+    <string name="meridian_line">Meridianlinje</string>
+    <string name="galactic_line">Galaktisk linje</string>
 </resources>

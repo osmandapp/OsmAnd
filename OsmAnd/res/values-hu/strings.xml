@@ -5883,4 +5883,7 @@
     <string name="use_separate_layouts">Elkülönített elrendezések használata</string>
     <string name="map_screen_layout">Térképképernyő elrendezése</string>
     <string name="map_screen_layout_descr">Válassza ki, hogy egyetlen elrendezést szeretne használni minden tájoláshoz, vagy külön-külön szeretné testreszabni az álló és fekvő módot.</string>
+    <string name="meridian_line">Kezdőmeridián</string>
+    <string name="equator_line">Egyenlítő vonala</string>
+    <string name="galactic_line">Galaktikus sík</string>
 </resources>

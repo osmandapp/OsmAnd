@@ -5961,4 +5961,7 @@
     <string name="use_separate_layouts">Користи одвојене положаје</string>
     <string name="map_screen_layout">Смештај карте на заслону</string>
     <string name="map_screen_layout_descr">Изаберите да ли желите да користите један распоред за сва усмерења или да прилагодите усправан и положен приказ одвојено.</string>
+    <string name="galactic_line">Галактичка линија</string>
+    <string name="meridian_line">Меридијанска линија</string>
+    <string name="equator_line">Екваторска линија</string>
 </resources>

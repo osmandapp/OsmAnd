@@ -5527,9 +5527,9 @@
     <string name="cloud_email_not_registered">Aquesta adreça de correu electrònic no està registrada a OsmAnd Cloud</string>
     <string name="enter_verification_code">Introduïu una contrasenya única</string>
     <string name="verify_email_address_descr">Codi de verificació enviat a %1$s. Introduïu-lo al camp de sota.</string>
-    <string name="verify_email_address">Verifica l\'adreça de correu electrònic</string>
+    <string name="verify_email_address">Verifiqueu l\'adreça de correu electrònic</string>
     <string name="osmand_cloud_login_descr">Introduïu l\'adreça de correu electrònic amb la qual us vau registrar. S\'hi enviarà una contrasenya única.</string>
-    <string name="osmand_cloud_create_account_descr">Introduïu la vostra adreça electrònica, s\'hi enviarà un codi de verificació,\ni s\'hi vincularan totes les vostres dades.</string>
+    <string name="osmand_cloud_create_account_descr">Introduïu la vostra adreça electrònica: s\'hi enviarà un codi de verificació\ni totes les vostres dades hi restaran vinculades.</string>
     <string name="osmand_cloud_help_descr">Necessites ajuda? Contacteu amb nosaltres a %1$s</string>
     <string name="backup_into_file">Fes una còpia de seguretat com a fitxer</string>
     <string name="local_backup">Còpia local</string>
@@ -5832,4 +5832,13 @@
     <string name="accessibility_independent_features">Característiques independents</string>
     <string name="access_pinch_zoom_magnification">Control tàctil d\'escala per pinçament</string>
     <string name="access_pinch_zoom_magnification_descr">Utilitza el subconjunt d\'escales ja definides, en comptes de tot rang, durant l\'ampliació gestual.</string>
+    <string name="galactic_line">Línia galàctica</string>
+    <string name="meridian_line">Línia meridiana</string>
+    <string name="equator_line">Línia equatorial</string>
+    <string name="copy_from_portrait_layout">Copia amb l\'orientació vertical</string>
+    <string name="copy_from_landscape_layout">Copia amb l\'orientació horitzontal</string>
+    <string name="panels_layout_compact">Compacte</string>
+    <string name="panels_layout_wide">Amplada</string>
+    <string name="panels_layout">Disposició dels panells</string>
+    <string name="panels_layout_descr">Seleccioneu una disposició dels panells superior i inferior. Poden ser amples, abastant tota l\'amplada de la pantalla, o compactes, encaixant entre els panells laterals i els botons.</string>
 </resources>
