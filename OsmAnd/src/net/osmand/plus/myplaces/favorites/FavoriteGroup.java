@@ -29,6 +29,9 @@ public class FavoriteGroup {
 	private int color;
 	private boolean visible = true;
 
+	private long size = 0;
+	private long timeModified = 0;
+
 	public FavoriteGroup() {
 	}
 
@@ -54,6 +57,22 @@ public class FavoriteGroup {
 		iconName = group.iconName;
 		backgroundType = group.backgroundType;
 		points.addAll(group.getPoints());
+	}
+
+	public void setSize(long size) {
+		this.size = size;
+	}
+
+	public void setTimeModified(long timeModified) {
+		this.timeModified = timeModified;
+	}
+
+	public long getSize() {
+		return size;
+	}
+
+	public long getTimeModified() {
+		return timeModified;
 	}
 
 	public String getName() {

@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="favorite_search_empty_state_description">Adjust your search or filters to see if that helps</string>
+    <string name="favorites_empty_folder_description">This folder doesn\’t have any track yet.</string>
 
     <string name="sort_highest_first">Highest first</string>
     <string name="sort_lowest_first">Lowest first</string>
