@@ -33,6 +33,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
@@ -170,6 +171,7 @@ public class SpeedometerWidget {
 	private float speedLimitAlpha = 0;
 	private float lastSpeedLimitAlpha = 0;
 	private float targetSpeedLimitAlpha = 0;
+	private final Paint speedLimitPaint = new Paint();
 
 	public SpeedometerWidget(@NonNull OsmandApplication app) {
 		this(app, null, null);
@@ -606,7 +608,6 @@ public class SpeedometerWidget {
 		if (widgetBitmap == null) {
 			return;
 		}
-		Paint speedLimitPaint = new Paint();
 		speedLimitPaint.setAlpha((int) (255 * speedLimitAlpha));
 		int speedLimitLeft = (int) (speedometerLeft - speedLimitWidth + SPEED_LIMIT_WIDGET_OVERLAP_MARGIN * density);
 		int speedLimitTop = (int) ((float) widgetBitmap.getHeight() / 2 - speedLimitHeight / 2);
@@ -771,25 +772,6 @@ public class SpeedometerWidget {
 		}
 	}
 
-	private int getSpeedTextColor() {
-		int color = 0;
-		switch (currentState) {
-			case SAFE -> color = ColorUtilities.getPrimaryTextColor(app, lastNightMode);
-			case WARNING -> color = app.getColor(R.color.speed_limit_tolerance_value);
-			case EXCEED -> color = app.getColor(R.color.speeding_value);
-		}
-		return color;
-	}
-
-	private int getSpeedUnitTextColor() {
-		int color = 0;
-		switch (currentState) {
-			case SAFE -> color = ColorUtilities.getPrimaryTextColor(app, lastNightMode);
-			case WARNING -> color = app.getColor(R.color.speed_limit_tolerance_units);
-			case EXCEED -> color = app.getColor(R.color.speeding_units);
-		}
-		return color;
-	}
 
 	@NonNull
 	private Bitmap getDrawableBitmap(@NonNull Drawable drawable, int width, int height) {
@@ -916,8 +898,8 @@ public class SpeedometerWidget {
 	}
 
 	private void updateTextColor(float progress) {
-		int currentTextColor = ColorUtilities.interpolateColors(progress, previousSpeedValueTextColor, getSpeedTextColor());
-		int currentSpeedUnitColor = ColorUtilities.interpolateColors(progress, previousSpeedUnitTextColor, getSpeedUnitTextColor());
+		int currentTextColor = ColorUtils.blendARGB(previousSpeedValueTextColor, currentState.getSpeedTextColor(app, lastNightMode), progress);
+		int currentSpeedUnitColor = ColorUtils.blendARGB(previousSpeedUnitTextColor, currentState.getSpeedUnitTextColor(app, lastNightMode), progress);
 		if (drawBitmap) {
 			speedValueTextColor = 0xff000000 | currentTextColor;
 			speedUnitTextColor = 0xff000000 | currentSpeedUnitColor;
