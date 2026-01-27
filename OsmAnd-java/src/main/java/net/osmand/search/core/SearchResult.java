@@ -161,7 +161,7 @@ public class SearchResult {
 			}
 			// if all words from search phrase match (<) the search result words - we prioritize it higher
 			if (matched) {
-				res = getPhraseWeightForCompleteMatch(exactResult, completeMatchRes);
+				res = getPhraseWeightForCompleteMatch(completeMatchRes);
 			}
 			if (object instanceof Amenity a) {
 				int elo = a.getTravelEloNumber();
@@ -178,11 +178,12 @@ public class SearchResult {
 		return res;
 	}
 
-	private double getPhraseWeightForCompleteMatch(SearchResult exactResult, CheckWordsMatchCount completeMatchRes) {
+	private double getPhraseWeightForCompleteMatch(CheckWordsMatchCount completeMatchRes) {
 		double res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10; // range 10 - 40
 		boolean closeDistance = false;
-		if (requiredSearchPhrase.getLastTokenLocation() != null && this.location != null) {
-			double dist = MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(), this.location);
+		LatLon searchLocation = requiredSearchPhrase.getSettings().getOriginalLocation();
+		if (searchLocation != null && this.location != null) {
+			double dist = MapUtils.getDistance(searchLocation, this.location);
 			if (dist <= NEAREST_METERS_LIMIT) {
 				// will sort in groups by object type each ~2 km
 				int coef = (int)(((NEAREST_METERS_LIMIT - dist) / NEAREST_METERS_LIMIT) * 15);
@@ -196,7 +197,10 @@ public class SearchResult {
 			if (objectType != ObjectType.POI || closeDistance) {
 				res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10 + MAX_PHRASE_WEIGHT_TOTAL / 2;
 			}
-			// range 60 - 90
+			if (closeDistance) {
+				res += 1;
+			}
+			// range 60 - 91
 		}
 		return res;
 	}
