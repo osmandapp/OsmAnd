@@ -5798,4 +5798,7 @@
     <string name="use_separate_layouts">Úsáid leagan amach ar leithligh</string>
     <string name="map_screen_layout">Leagan amach scáileáin léarscáile</string>
     <string name="map_screen_layout_descr">Roghnaigh an úsáidfidh tú leagan amach aonair do na treoshuíomhanna uile, nó an ndéanfaidh tú Portráid agus Tírdhreach a shaincheapadh ar leithligh.</string>
+    <string name="galactic_line">Líne Réaltrach</string>
+    <string name="meridian_line">Líne Meridian</string>
+    <string name="equator_line">Líne an Mheánchiorcail</string>
 </resources>
