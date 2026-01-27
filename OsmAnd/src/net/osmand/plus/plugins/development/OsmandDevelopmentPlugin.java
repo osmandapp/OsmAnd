@@ -56,6 +56,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.simulation.DashSimulateFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -77,7 +78,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -225,8 +225,9 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
-		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
+	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos,
+			@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
 
 		MapWidget fpsWidget = createMapWidgetForParams(mapActivity, DEV_FPS);
 		widgetsInfos.add(creator.createWidgetInfo(fpsWidget));
@@ -541,6 +542,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		MapRendererView rendererView = rendererContext.getMapRendererView();
 		if (rendererView != null) {
 			rendererView.setFlatEarth(!settings.SPHERICAL_MAP.get());
+			rendererView.set3DBuildingsAlpha(BUILDINGS_3D_ALPHA.get());
 		}
 		if (ENABLE_3D_MAP_OBJECTS.get()) {
 			rendererContext.recreate3DObjectsProvider();

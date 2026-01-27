@@ -216,6 +216,11 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 		return offset;
 	}
 
+	@Override
+	public boolean waitForLoading() {
+		return true;
+	}
+
 	public static class StopsCollectionPoint extends interface_MapTiledCollectionPoint {
 
 		private final Context ctx;

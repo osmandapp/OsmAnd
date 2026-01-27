@@ -1463,7 +1463,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 				settings.setMapLocationToShow(loc.getLatitude(), loc.getLongitude(),
 						Math.max(13, settings.getLastKnownMapZoom()),
 						new PointDescription(PointDescription.POINT_TYPE_MARKER,
-								routeDirectionInfo.getDescriptionRoutePart() + " " + getTimeDescription(mapActivity.getApp(), routeDirectionInfo)),
+								routeDirectionInfo.getDescriptionRoutePart(app) + " " + getTimeDescription(mapActivity.getApp(), routeDirectionInfo)),
 						false, null);
 				MapActivity.launchMapActivityMoveToTop(mapActivity);
 				dismiss();

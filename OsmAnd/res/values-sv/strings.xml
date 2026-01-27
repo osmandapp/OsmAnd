@@ -5897,7 +5897,7 @@
     <string name="lang_en_barebones">Engelska (grundläggande)</string>
     <string name="accessibility_independent_features">Oberoende funktioner</string>
     <string name="access_pinch_zoom_magnification">Nypzoomförstoring</string>
-    <string name="access_pinch_zoom_magnification_descr">Använd visningsport-skalning istället för diskreta zoomnivåer under inzoomningsgester.</string>
+    <string name="access_pinch_zoom_magnification_descr">Använd skalning av visningsområde istället för diskreta zoomnivåer under inzoomningsgester.</string>
     <string name="download_wikipedia_label">Ladda ner Wikipedia</string>
     <string name="routing_attr_pt_limit_name">Visa N bästa rutter</string>
     <string name="routing_attr_pt_limit_description">Ange antalet bästa rutter som ska visas</string>
@@ -5945,4 +5945,23 @@
     <string name="astro_set">Nedgång</string>
     <string name="show_expand_button">Visa expanderingsknapp</string>
     <string name="imprecise_coordinates">Oprecisa koordinater</string>
+    <string name="gpx_too_many_points_visible_warning">En stor mängd synliga GPX spår leder till hög minnesanvändning</string>
+    <string name="sort_highest_first">Fallande</string>
+    <string name="sort_lowest_first">Stigande</string>
+    <string name="no_date">Inget datum</string>
+    <string name="shared_string_step">Steg</string>
+    <string name="set_step_size_summary">Välj en stegstorlek för att gruppera dina spår.</string>
+    <string name="set_step_size">Ställ in stegstorlek</string>
+    <string name="organize_by_summary">Organisera dina spår automatiskt i grupper baserat på en vald parameter som aktivitet, hastighet eller plats.</string>
+    <string name="organize_by">Organisera efter</string>
+    <string name="group_general">Allmän</string>
+    <string name="group_date_time">Datum och tid</string>
+    <string name="group_altitude_elevation">Altitud och Höjd över havet</string>
+    <string name="group_sensors">Sensorer</string>
+    <string name="year_of_creation">Skapelseår</string>
+    <string name="month_year_creation">Månad och år för skapelsen</string>
+    <string name="nearest_city">Närmaste stad</string>
+    <string name="avg_speed">Genomsnittlig hastighet</string>
+    <string name="organize_by_max_speed">Maxhastighet</string>
+    <string name="organize_by_max_altitude">Max. altitude</string>
 </resources>

@@ -5,31 +5,36 @@ import io.github.cosinekitty.astronomy.Body
 /**
  * Unified data class for any object rendered on the sky.
  */
-data class SkyObject(
-	val id: String,
-	val hip: Int, // Hipparcos catalog ID
-	val wid: String, // Wikipedia ID
-	val type: Type,
-	val body: Body?, // Null for custom stars not in Body enum
-	val name: String,
-	val ra: Double, // Right Ascension
-	val dec: Double, // Declination
-	val magnitude: Float,
-	val color: Int,
+open class SkyObject(
+	open val id: String,
+	open val hip: Int, // Hipparcos catalog ID
+	open val wid: String, // Wikipedia ID
+	open val type: Type,
+	open val body: Body?, // Null for custom stars not in Body enum
+	open val name: String,
+	open var ra: Double, // Right Ascension
+	open var dec: Double, // Declination
+	open val magnitude: Float,
+	open val color: Int,
+
+	// Localized name from DB
+	open var localizedName: String? = null,
 
 	// Real-time calculated coordinates
-	var azimuth: Double = 0.0,
-	var altitude: Double = 0.0,
-	var distAu: Double = 0.0,
+	open var azimuth: Double = 0.0,
+	open var altitude: Double = 0.0,
+	open var distAu: Double = 0.0,
 
-	// Visibility flag
-	var isVisible: Boolean = false,
+	open var isFavorite: Boolean = false,
 
 	// Animation state helpers
-	var startAzimuth: Double = 0.0,
-	var startAltitude: Double = 0.0,
-	var targetAzimuth: Double = 0.0,
-	var targetAltitude: Double = 0.0
+	open var startAzimuth: Double = 0.0,
+	open var startAltitude: Double = 0.0,
+	open var targetAzimuth: Double = 0.0,
+	open var targetAltitude: Double = 0.0,
+
+	// Cache helper
+    open var lastUpdateTime: Double = -1.0
 ) {
 	enum class Type {
 		STAR, GALAXY, BLACK_HOLE, PLANET, SUN, MOON,
@@ -38,6 +43,21 @@ data class SkyObject(
 		fun isSunSystem(): Boolean {
 			return this == SUN || this == MOON || this == PLANET
 		}
+	}
 
+	override fun equals(other: Any?): Boolean {
+		if (this === other) return true
+		if (other !is SkyObject) return false
+		return id == other.id
+	}
+
+	override fun hashCode(): Int {
+		return id.hashCode()
+	}
+
+	fun niceName() = localizedName ?: name
+
+	override fun toString(): String {
+		return "SkyObject(id='$id', name='$name', type=$type)"
 	}
 }

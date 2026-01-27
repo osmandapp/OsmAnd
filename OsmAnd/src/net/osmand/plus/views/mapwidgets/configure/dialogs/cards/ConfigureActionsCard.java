@@ -1,7 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.dialogs.cards;
 
-import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
-
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,32 +7,26 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.UiUtilities;
 
 public class ConfigureActionsCard extends MapBaseCard {
 
-	private final Fragment target;
-	@StringRes
-	private final int screenTitleId;
+	public static final int COPY_BUTTON_INDEX = 0;
+	public static final int RESET_BUTTON_INDEX = 1;
 
 	@Override
 	public int getCardLayoutId() {
 		return R.layout.configure_widgets_actions_card;
 	}
 
-	public ConfigureActionsCard(@NonNull MapActivity mapActivity, @NonNull Fragment target, @StringRes int screenTitleId) {
+	public ConfigureActionsCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity, false);
-		this.target = target;
-		this.screenTitleId = screenTitleId;
 	}
 
 	@Override
@@ -50,24 +42,13 @@ public class ConfigureActionsCard extends MapBaseCard {
 	private void setupCopyButton() {
 		View button = view.findViewById(R.id.copy_button);
 		setupAction(button, R.drawable.ic_action_copy, R.string.copy_from_other_profile);
-		button.setOnClickListener(v -> {
-			FragmentManager manager = target.getFragmentManager();
-			if (manager != null) {
-				ApplicationMode appMode = settings.getApplicationMode();
-				SelectCopyAppModeBottomSheet.showInstance(manager, target, appMode);
-			}
-		});
+		button.setOnClickListener(v -> notifyButtonPressed(COPY_BUTTON_INDEX));
 	}
 
 	private void setupResetButton() {
 		View button = view.findViewById(R.id.reset_button);
 		setupAction(button, R.drawable.ic_action_reset, R.string.reset_to_default);
-		button.setOnClickListener(v -> {
-			FragmentManager manager = target.getFragmentManager();
-			if (manager != null) {
-				showResetSettingsDialog(manager, target, screenTitleId);
-			}
-		});
+		button.setOnClickListener(v -> notifyButtonPressed(RESET_BUTTON_INDEX));
 	}
 
 	private void setupAction(@NonNull View view, @DrawableRes int iconId, @StringRes int titleId) {

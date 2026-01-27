@@ -4,7 +4,7 @@
     <string name="poi_palaeontological_site">Paleontologische site</string>
     <string name="poi_bakery">Bakkerij</string>
     <string name="poi_alcohol">Slijterij</string>
-    <string name="poi_convenience">Supermarkt</string>
+    <string name="poi_convenience">Gemakswinkel</string>
     <string name="poi_mall">Winkelcentrum</string>
     <string name="poi_beverages">Drankwinkel</string>
     <string name="poi_butcher">Slagerij</string>
@@ -322,7 +322,7 @@
     <string name="poi_craft_gardener">Hovenier</string>
     <string name="poi_craft_locksmith">Slotenmaker</string>
     <string name="poi_craft_jeweller">Juwelier</string>
-    <string name="poi_craft_key_cutter">Slotenmaker</string>
+    <string name="poi_craft_key_cutter">Sleutelkopieerservice</string>
     <string name="poi_craft_optician">Opticien</string>
     <string name="poi_craft_painter">Schilder</string>
     <string name="poi_craft_photographer">Fotograaf</string>
@@ -633,7 +633,7 @@
     <string name="poi_military_barracks">Kazerne</string>
     <string name="poi_military_danger_area">Gevaarlijke gebied</string>
     <string name="poi_military_range">Militaire schietbaan</string>
-    <string name="poi_shop_food">Levensmiddelen en supermarkt</string>
+    <string name="poi_shop_food">Gemakswinkel en supermarkt</string>
     <string name="poi_road_obstacle">Weg obstakels</string>
     <string name="poi_filling_station">Tankstation</string>
     <string name="poi_public_transport">Openbaar vervoer</string>
@@ -3865,7 +3865,7 @@
     <string name="poi_diplomatic_services_non_immigrant_visas_yes">Ja</string>
     <string name="poi_embassy_delegation">Delegatie</string>
     <string name="poi_diplomatic_embassy">Ambassade</string>
-    <string name="poi_parking_rooftop">Dakparking</string>
+    <string name="poi_parking_rooftop">Parkeerdak</string>
     <string name="poi_gpx_point">GPX punt</string>
     <string name="poi_fuel_lng">Lng</string>
     <string name="poi_beehive">Bijenkast</string>
@@ -4307,4 +4307,9 @@
     <string name="poi_parcel_locker">Pakketautomaat</string>
     <string name="poi_waste_transfer_station">Afvalverwerkingsstation</string>
     <string name="poi_yoga">Yoga</string>
+    <string name="poi_nuts">Notenwinkel</string>
+    <string name="poi_parking_sheds">Schuren</string>
+    <string name="poi_parking_layby">Parkeerstrook</string>
+    <string name="poi_synagogue">Synagoge</string>
+    <string name="poi_ticket_validator">Toegangsbewijsvalidator</string>
 </resources>

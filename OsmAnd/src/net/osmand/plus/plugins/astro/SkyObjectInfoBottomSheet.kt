@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import androidx.core.view.updatePadding
+import androidx.fragment.app.Fragment
 import com.google.android.material.checkbox.MaterialCheckBox
 import io.github.cosinekitty.astronomy.Body
 import io.github.cosinekitty.astronomy.Direction
@@ -16,15 +19,18 @@ import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.plus.R
+import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astro.utils.AstroUtils
+import net.osmand.plus.utils.AndroidUtils
 import java.util.Calendar
 import java.util.Locale
 
-class SkyObjectInfoBottomSheet : BottomSheetDialogFragment() {
+class SkyObjectInfoFragment : Fragment() {
 
 	private lateinit var sheetTitle: TextView
 	private lateinit var sheetCoords: TextView
 	private lateinit var sheetPinButton: MaterialCheckBox
+	private lateinit var sheetFavoriteButton: MaterialCheckBox
 	private lateinit var sheetMagnitude: TextView
 	private lateinit var sheetDistance: TextView
 	private lateinit var sheetRiseTime: TextView
@@ -42,24 +48,31 @@ class SkyObjectInfoBottomSheet : BottomSheetDialogFragment() {
 		sheetTitle = view.findViewById(R.id.sheet_title)
 		sheetCoords = view.findViewById(R.id.sheet_coords)
 		sheetPinButton = view.findViewById(R.id.sheet_pin_button)
+		sheetFavoriteButton = view.findViewById(R.id.sheet_favorite_button)
 		sheetMagnitude = view.findViewById(R.id.sheet_magnitude)
 		sheetDistance = view.findViewById(R.id.sheet_distance)
 		sheetRiseTime = view.findViewById(R.id.sheet_rise_time)
 		sheetSetTime = view.findViewById(R.id.sheet_set_time)
 		sheetWikiButton = view.findViewById(R.id.sheet_wiki_button)
 
-		return view
-	}
+		view.findViewById<View>(R.id.close_button).setOnClickListener {
+			parent.hideBottomSheet()
+		}
 
-	override fun onStart() {
-		super.onStart()
-		dialog?.window?.setDimAmount(0f)
+		ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
+			val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+			val basePadding = AndroidUtils.dpToPx(v.context, 16f)
+			v.updatePadding(bottom = insets.bottom + basePadding)
+			windowInsets
+		}
+
+		return view
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		arguments?.getString("skyObjectName")?.let { name ->
-			parent.starMapViewModel.skyObjects.value?.find { it.name == name }?.let {
+			parent.viewModel.skyObjects.value?.find { it.name == name }?.let {
 				updateObjectInfo(it)
 			}
 		}
@@ -71,7 +84,7 @@ class SkyObjectInfoBottomSheet : BottomSheetDialogFragment() {
 			return
 		}
 
-		sheetTitle.text = obj.name
+		sheetTitle.text = obj.localizedName ?: obj.name
 		val az = String.format(Locale.getDefault(), "%.1f°", obj.azimuth)
 		val alt = String.format(Locale.getDefault(), "%.1f°", obj.altitude)
 		val coordsText = "${getString(R.string.shared_string_azimuth)}: $az  •  ${getString(R.string.altitude)}: $alt"
@@ -81,6 +94,19 @@ class SkyObjectInfoBottomSheet : BottomSheetDialogFragment() {
 		sheetPinButton.isChecked = parent.starView.isObjectPinned(obj)
 		sheetPinButton.setOnCheckedChangeListener { _, isChecked ->
 			parent.starView.setObjectPinned(obj, isChecked)
+		}
+
+		sheetFavoriteButton.setOnCheckedChangeListener(null)
+		sheetFavoriteButton.isChecked = obj.isFavorite
+		sheetFavoriteButton.setOnCheckedChangeListener { _, isChecked ->
+			obj.isFavorite = isChecked
+			val swSettings = PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
+			if (isChecked) {
+				swSettings.addFavorite(obj.id)
+			} else {
+				swSettings.removeFavorite(obj.id)
+			}
+			parent.viewModel.refreshSkyObjects()
 		}
 
 		sheetMagnitude.text = "${getString(R.string.shared_string_magnitude)}: ${obj.magnitude}"
@@ -100,7 +126,7 @@ class SkyObjectInfoBottomSheet : BottomSheetDialogFragment() {
 		} else obj.body
 
 		if (bodyToCheck != null) {
-			val calendar = (parent.starMapViewModel.currentCalendar.value ?: Calendar.getInstance()).clone() as Calendar
+			val calendar = (parent.viewModel.currentCalendar.value ?: Calendar.getInstance()).clone() as Calendar
 			calendar.set(Calendar.HOUR_OF_DAY, 0)
 			calendar.set(Calendar.MINUTE, 0)
 			calendar.set(Calendar.SECOND, 0)
@@ -144,9 +170,9 @@ class SkyObjectInfoBottomSheet : BottomSheetDialogFragment() {
 	}
 
 	companion object {
-		const val TAG = "SkyObjectInfoBottomSheet"
-		fun newInstance(skyObject: SkyObject): SkyObjectInfoBottomSheet {
-			val fragment = SkyObjectInfoBottomSheet()
+		const val TAG = "SkyObjectInfoFragment"
+		fun newInstance(skyObject: SkyObject): SkyObjectInfoFragment {
+			val fragment = SkyObjectInfoFragment()
 			val args = Bundle()
 			args.putString("skyObjectName", skyObject.name)
 			fragment.arguments = args

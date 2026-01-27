@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -48,6 +49,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
@@ -61,7 +63,11 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class StreetNameWidget extends MapWidget {
 
@@ -114,7 +120,8 @@ public class StreetNameWidget extends MapWidget {
 
 	private void setupLongClickListener() {
 		view.setOnLongClickListener(v -> {
-			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode, true);
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
+			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
 			return true;
 		});
 	}
@@ -239,9 +246,10 @@ public class StreetNameWidget extends MapWidget {
 			boolean isShieldSet = false;
 			shieldImagesContainer.removeAllViews();
 			int maxShields = min(shields.size(), MAX_SHIELDS_QUANTITY);
+			List<RoadShield> addedShields = new ArrayList<>();
 			for (int i = 0; i < maxShields; i++) {
 				RoadShield shield = shields.get(i);
-				isShieldSet |= setShieldImage(shield, mapActivity, shieldImagesContainer, isNightMode());
+				isShieldSet |= setShieldImage(shield, addedShields, mapActivity, shieldImagesContainer, isNightMode());
 			}
 			return isShieldSet;
 		}
@@ -249,6 +257,7 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	public static boolean setShieldImage(@NonNull RoadShield shield,
+			@NonNull List<RoadShield> addedShields,
 			@NonNull MapActivity mapActivity,
 			@NonNull LinearLayout shieldImagesContainer, boolean nightMode) {
 		OsmandApplication app = mapActivity.getApp();
@@ -273,6 +282,10 @@ public class StreetNameWidget extends MapWidget {
 			} else {
 				additional.append(tag).append("=").append(value).append(";");
 			}
+		}
+
+		if (isSameShieldAdded(shield, addedShields)) {
+			return false;
 		}
 
 		rreq.setIntFilter(rreq.ALL.R_TEXT_LENGTH, shieldValue.length());
@@ -330,7 +343,21 @@ public class StreetNameWidget extends MapWidget {
 		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 		imageView.setImageBitmap(bitmap);
 		shieldImagesContainer.addView(imageView);
+		addedShields.add(shield);
 		return true;
+	}
+
+	private static boolean isSameShieldAdded(RoadShield currentShield, List<RoadShield> previousShields) {
+		if (!previousShields.isEmpty()) {
+			String currentLabel = currentShield.getValue();
+			for (RoadShield previousShield : previousShields) {
+				String previousLabel = previousShield.getValue();
+				if (Objects.equals(currentLabel, previousLabel)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@NonNull
@@ -383,7 +410,8 @@ public class StreetNameWidget extends MapWidget {
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
-		if (updatedVisibility && widgetType.getPanel(settings) == WidgetsPanel.TOP) {
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getMapActivity());
+		if (updatedVisibility && widgetType.getPanel(settings, layoutMode) == WidgetsPanel.TOP) {
 			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {
 				mapInfoLayer.updateVerticalPanels();
@@ -393,9 +421,11 @@ public class StreetNameWidget extends MapWidget {
 		return updatedVisibility;
 	}
 
-	private boolean isAnyStreetNameEnabledForMode(@NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
+	private boolean isAnyStreetNameEnabledForMode(@NonNull FragmentActivity activity,
+			@NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
 		for (MapWidgetInfo widgetInfo : widgets) {
-			if (widgetInfo.getWidgetType() == STREET_NAME && widgetInfo.isEnabledForAppMode(mode)) {
+			if (widgetInfo.getWidgetType() == STREET_NAME && widgetInfo.isEnabledForAppMode(mode, layoutMode)) {
 				return true;
 			}
 		}

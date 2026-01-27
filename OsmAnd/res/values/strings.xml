@@ -10,6 +10,38 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="galactic_line">Galactic Line</string>
+	<string name="meridian_line">Meridian Line</string>
+	<string name="equator_line">Equator Line</string>
+	<string name="copy_from_portrait_layout">Copy from Portrait layout</string>
+	<string name="copy_from_landscape_layout">Copy from Landscape layout</string>
+	<string name="panels_layout_compact">Compact</string>
+	<string name="panels_layout_wide">Wide</string>
+	<string name="panels_layout">Panels layout</string>
+	<string name="panels_layout_descr">Choose a layout for the top and bottom panels. They can either be wide, spanning the full width of the screen, or compact, fitting between the side panels and buttons.</string>
+	<string name="single_layout">Single layout</string>
+	<string name="separate_layouts">Separate layouts</string>
+	<string name="use_separate_layouts">Use Separate layouts</string>
+	<string name="map_screen_layout">Map screen layout</string>
+	<string name="map_screen_layout_descr">Choose whether to use a single layout for all orientations, or customize Portrait and Landscape separately.</string>
+    <string name="sort_highest_first">Highest first</string>
+    <string name="sort_lowest_first">Lowest first</string>
+    <string name="no_date">No date</string>
+    <string name="shared_string_step">Step</string>
+    <string name="set_step_size_summary">Choose a step size to group your tracks.</string>
+    <string name="set_step_size">Set step size</string>
+    <string name="organize_by_summary">Automatically organize your tracks into groups based on a selected parameter like activity, speed, or location.</string>
+    <string name="organize_by">Organize by</string>
+    <string name="group_general">General</string>
+    <string name="group_date_time">Date &amp; Time</string>
+    <string name="group_altitude_elevation">Altitude and elevation</string>
+    <string name="group_sensors">Sensors</string>
+    <string name="year_of_creation">Year of creation</string>
+    <string name="month_year_creation">Month and Year of creation</string>
+    <string name="nearest_city">Nearest city</string>
+    <string name="avg_speed">Avg. speed</string>
+    <string name="organize_by_max_speed">Max. speed</string>
+    <string name="organize_by_max_altitude">Max. altitude</string>
 	<string name="gpx_too_many_points_visible_warning">Large amount of visible GPX tracks leads to high memory usage</string>
 	<string name="star_watcher_plugin_name">Star watcher (Beta)</string>
 	<string name="star_watcher_plugin_description">Star charts, 3D star map</string>

@@ -111,7 +111,7 @@
 				android:id="@+id/image_container"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
+				android:layout_gravity="top"
 				android:background="?attr/activity_background_color">
 
 				<ImageView
@@ -161,11 +161,10 @@
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/time_icon"
-					android:layout_width="12dp"
-					android:layout_height="12dp"
+					android:layout_width="12sp"
+					android:layout_height="12sp"
 					android:layout_gravity="center_vertical"
 					android:layout_marginEnd="@dimen/gpx_small_icon_margin"
-					android:layout_marginRight="@dimen/gpx_small_icon_margin"
 					app:srcCompat="@drawable/ic_action_time_16" />
 
 				<TextView

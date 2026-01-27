@@ -41,10 +41,10 @@ class StarCompassButton @JvmOverloads constructor(
 
 		override fun getVisibilityPref() = error("Not implemented")
 
-		override fun getDefaultLayoutId() = R.layout.map_compass_button
+		override fun getDefaultLayoutId() = R.layout.star_map_compass_button
 
 		override fun createAppearanceParams(nightMode: Boolean?): ButtonAppearanceParams {
-			return ButtonAppearanceParams("ic_compass_manual", 40, 0.5f, 20)
+			return ButtonAppearanceParams("ic_compass_white", 52, 1.0f, 26)
 		}
 
 		override fun getDefaultIconName(nightMode: Boolean?): String {

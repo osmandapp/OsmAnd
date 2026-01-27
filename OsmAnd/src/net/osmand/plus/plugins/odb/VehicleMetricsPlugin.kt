@@ -34,7 +34,6 @@ import net.osmand.plus.plugins.OsmandPlugin
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin
 import net.osmand.plus.plugins.externalsensors.DevicesHelper
-import net.osmand.plus.plugins.externalsensors.SensorAttributesUtils
 import net.osmand.plus.plugins.externalsensors.VehicleMetricsBLEDeviceHelper
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.DeviceListener
@@ -48,6 +47,7 @@ import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.settings.backend.preferences.CommonPreferenceProvider
 import net.osmand.plus.settings.backend.preferences.ListStringPreference
+import net.osmand.plus.settings.enums.ScreenLayoutMode
 import net.osmand.plus.settings.enums.VolumeUnit
 import net.osmand.plus.settings.fragments.SettingsScreenType
 import net.osmand.plus.utils.AndroidUtils
@@ -59,7 +59,6 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator
 import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
@@ -67,8 +66,6 @@ import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.gpx.GpxUtilities
-import net.osmand.shared.gpx.PointAttributes
-import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDConnector
 import net.osmand.shared.obd.OBDDataComputer
@@ -158,13 +155,16 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	}
 
 	override fun createWidgets(
-		mapActivity: MapActivity, widgetsInfos: MutableList<MapWidgetInfo?>,
-		appMode: ApplicationMode) {
-		val creator = WidgetInfoCreator(app, appMode)
+		mapActivity: MapActivity, widgetsInfos: MutableList<MapWidgetInfo>,
+		appMode: ApplicationMode, layoutMode: ScreenLayoutMode?
+	) {
+		val creator = WidgetInfoCreator(app, appMode, layoutMode)
 		for (widgetType in WidgetType.getObdTypes()) {
-			val obdWidget: MapWidget =
-				createMapWidgetForParams(mapActivity, widgetType)
-			widgetsInfos.add(creator.createWidgetInfo(obdWidget))
+			val obdWidget = createMapWidgetForParams(mapActivity, widgetType)
+			val widgetInfo = creator.createWidgetInfo(obdWidget)
+			if (widgetInfo != null) {
+				widgetsInfos.add(widgetInfo)
+			}
 		}
 	}
 
@@ -924,7 +924,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		LOG.debug("Try to reconnect to last connected device $lastConnectedDevice")
 		val registry = app.osmandMap.mapLayers.mapWidgetRegistry
 		if (connectedDeviceInfo == null && lastConnectedDevice != null && registry.allWidgets.any {
-				it.widget is OBDTextWidget && it.isEnabledForAppMode(app.settings.applicationMode)
+				it.widget is OBDTextWidget && it.isEnabledForAppMode(app.settings.applicationMode,
+					ScreenLayoutMode.getDefault(activity))
 			}) {
 			currentReconnectAttempt = attemptsCount
 			connectToObdInternal(activity, lastConnectedDevice)

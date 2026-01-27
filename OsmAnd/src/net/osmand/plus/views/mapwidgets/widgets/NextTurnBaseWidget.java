@@ -25,6 +25,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RoadShield;
@@ -49,6 +50,7 @@ import net.osmand.plus.views.mapwidgets.widgetstates.ResizableWidgetState;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget, ISupportVerticalPanel, ISupportWidgetResizing, ISupportMultiRow {
@@ -88,7 +90,9 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		this.horizontalMini = horizontalMini;
 		widgetState = new ResizableWidgetState(app, customId, widgetType, WidgetSize.MEDIUM);
 
-		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
+		String id = customId != null ? customId : widgetType.id;
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(id, settings, layoutMode);
 		setVerticalWidget(selectedPanel);
 		setupViews();
 
@@ -119,7 +123,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		findViews();
 		updateWidgetView();
 		setOnLongClickListener(v -> {
-			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode, true);
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
+			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
 			return true;
 		});
 		setOnClickListener(getOnClickListener());
@@ -199,9 +204,10 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		if (!Algorithms.isEmpty(shields)) {
 			shieldImagesContainer.removeAllViews();
 			int maxShields = min(shields.size(), MAX_SHIELDS_QUANTITY);
+			List<RoadShield> addedShields = new ArrayList<>();
 			for (int i = 0; i < maxShields; i++) {
 				RoadShield shield = shields.get(i);
-				isShieldSet |= setShieldImage(shield, mapActivity, shieldImagesContainer, isNightMode());
+				isShieldSet |= setShieldImage(shield, addedShields, mapActivity, shieldImagesContainer, isNightMode());
 			}
 		}
 		AndroidUiHelper.updateVisibility(shieldImagesContainer, isShieldSet);

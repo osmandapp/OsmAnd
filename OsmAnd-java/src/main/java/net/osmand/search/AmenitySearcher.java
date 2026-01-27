@@ -416,6 +416,36 @@ public class AmenitySearcher {
         return false;
     }
 
+    public List<Amenity> filterUniqueAmenitiesByOsmIdOrWikidata(List<Amenity> amenities) {
+        if (amenities.size() < 2) {
+            return amenities;
+        }
+        int size = amenities.size();
+        Set<Long> seenOsmIds = new HashSet<>(size);
+        Set<String> seenWikidata = new HashSet<>(size);
+        List<Amenity> result = new ArrayList<>(size);
+
+        for (Amenity amenity : amenities) {
+            if (amenity.isRouteTrack()) {
+                result.add(amenity);
+                continue;
+            }
+            Long osmId = amenity.getOsmId();
+            osmId = (osmId != null && osmId < 0) ? null : osmId;
+
+            String wikidata = amenity.getWikidata();
+            wikidata = Algorithms.isEmpty(wikidata) ? null : wikidata;
+
+            boolean duplicateByOsmId = osmId != null && !seenOsmIds.add(osmId);
+            boolean duplicateByWikidata = wikidata != null && !seenWikidata.add(wikidata);
+
+            if (!duplicateByOsmId && !duplicateByWikidata) {
+                result.add(amenity);
+            }
+        }
+        return result;
+    }
+
     public void addAmenityRepository(String fileName, AmenityIndexRepository repository) {
         amenityRepositories.put(fileName, repository);
     }

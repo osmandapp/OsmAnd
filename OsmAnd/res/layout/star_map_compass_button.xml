@@ -2,10 +2,10 @@
 <net.osmand.plus.plugins.astro.views.StarCompassButton xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/star_map_compass_button"
-	android:layout_width="@dimen/map_small_button_size"
-	android:layout_height="@dimen/map_small_button_size"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
 	android:clickable="true"
 	android:focusable="true"
-	tools:background="@drawable/btn_inset_circle_night"
+	tools:background="@drawable/btn_circle"
 	tools:contentDescription="@string/map_widget_compass"
-	tools:src="@drawable/ic_compass_manual" />
+	tools:src="@drawable/ic_compass_white" />

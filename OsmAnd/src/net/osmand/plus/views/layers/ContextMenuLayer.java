@@ -857,6 +857,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null || menu == null || mInChangeMarkerPositionMode || mInGpxDetailsMode
 				|| mapActivity.getFragmentsHelper().getGpsFilterFragment() != null
+				|| mapActivity.getFragmentsHelper().getStarMapFragment() != null
 				|| mapActivity.getFragmentsHelper().getDownloadTilesFragment() != null) {
 			return true;
 		}

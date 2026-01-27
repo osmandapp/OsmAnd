@@ -24,11 +24,10 @@ public class SmartFolderViewHolder extends TracksGroupViewHolder {
 		title.setText(folder.getName());
 		description.setText(app.getString(R.string.number_of_tracks, String.valueOf(tracksGroup.getTrackItems().size())));
 		icon.setImageDrawable(uiUtilities.getActiveIcon(R.drawable.ic_action_folder_smart, nightMode));
-		AndroidUiHelper.updateVisibility(menuButton, !selectionMode);
-		menuButton.setOnClickListener(v -> {
-			if (listener != null) {
-				listener.onTracksGroupOptionsSelected(v, tracksGroup);
-			}
-		});
+	}
+
+	@Override
+	protected boolean hasOptionsMenu(@NonNull TracksGroup tracksGroup) {
+		return true;
 	}
 }

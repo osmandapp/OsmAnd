@@ -784,9 +784,9 @@ public class UiUtilities {
 			ApplicationMode appMode = settings.getApplicationMode();
 			MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
 			int defaultColorId = nightMode ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
-			int colorIdForTopWidget = widgetRegistry.getStatusBarColor(appMode, nightMode);
+			int colorIdForTopWidget = widgetRegistry.getStatusBarColor(activity, appMode, nightMode);
 			if (colorIdForTopWidget != -1) {
-				nightModeForContent = widgetRegistry.getStatusBarContentNightMode(appMode, nightMode);
+				nightModeForContent = widgetRegistry.getStatusBarContentNightMode(activity, appMode, nightMode);
 			}
 
 			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;

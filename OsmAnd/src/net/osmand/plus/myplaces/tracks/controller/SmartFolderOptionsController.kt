@@ -20,8 +20,10 @@ import net.osmand.util.Algorithms
 
 class SmartFolderOptionsController(
 	private val app: OsmandApplication,
-	private val smartFolder: SmartFolder) : BaseDialogController(
-	app), IDisplayDataProvider, IDialogItemClicked {
+	private val smartFolder: SmartFolder
+) : BaseDialogController(
+	app
+), IDisplayDataProvider, IDialogItemClicked {
 	private var optionsListener: SmartFolderOptionsListener? = null
 	fun setSmartFolderOptionsListener(listener: SmartFolderOptionsListener?) {
 		optionsListener = listener
@@ -31,11 +33,11 @@ class SmartFolderOptionsController(
 		return PROCESS_ID
 	}
 
-	override fun getDisplayData(processId: String): DisplayData? {
+	override fun getDisplayData(processId: String): DisplayData {
 		val iconsCache = app.uiUtilities
 		val displayData = DisplayData()
-		val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.MAP)
-		iconsCache.getActiveIcon(R.drawable.ic_action_folder_smart, nightMode)
+		val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.APP)
+
 		displayData.addDisplayItem(
 			DisplayItem()
 				.setTitle(smartFolder.getName())
@@ -175,10 +177,15 @@ class SmartFolderOptionsController(
 	}
 
 	companion object {
+
 		const val PROCESS_ID = "smart_folder_options"
+
 		fun showDialog(
-			app: OsmandApplication, fragmentManager: FragmentManager, folder: SmartFolder,
-			listener: SmartFolderOptionsListener?) {
+			app: OsmandApplication,
+			fragmentManager: FragmentManager,
+			folder: SmartFolder,
+			listener: SmartFolderOptionsListener?
+		) {
 			val controller = SmartFolderOptionsController(app, folder)
 			controller.setSmartFolderOptionsListener(listener)
 			val dialogManager = app.dialogManager
