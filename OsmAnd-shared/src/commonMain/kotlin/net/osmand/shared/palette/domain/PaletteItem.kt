@@ -35,7 +35,7 @@ sealed interface PaletteItem {
 	val id: String
 	val displayName: String
 	val source: PaletteItemSource
-	val isDefault: Boolean
+	val isEditable: Boolean
 	val historyIndex: Int
 	val lastUsedTime: Long
 
@@ -43,7 +43,7 @@ sealed interface PaletteItem {
 		override val id: String,
 		override val displayName: String,
 		override val source: PaletteItemSource.CollectionRecord,
-		override val isDefault: Boolean = true,
+		override val isEditable: Boolean = true,
 		override val historyIndex: Int,
 		override val lastUsedTime: Long = 0,
 		val color: Int
@@ -56,12 +56,32 @@ sealed interface PaletteItem {
 		val paletteName: String,
 		override val displayName: String,
 		override val source: PaletteItemSource.GradientFile,
-		override val isDefault: Boolean,
+		val isDefault: Boolean,
+		override val isEditable: Boolean = !isDefault,
 		override val historyIndex: Int,
 		override val lastUsedTime: Long = 0,
 		val points: List<GradientPoint>,
 		val properties: GradientProperties
 	) : PaletteItem {
+
+		fun withPoints(newPoints: List<GradientPoint>): Gradient {
+			return this.copy(points = newPoints.sortedBy { it.value })
+		}
+
+		fun withPointAdded(point: GradientPoint): Gradient {
+			val newPoints = points + point
+			return this.copy(points = newPoints.sortedBy { it.value })
+		}
+
+		fun withPointUpdated(oldPoint: GradientPoint, newPoint: GradientPoint): Gradient {
+			val newPoints = points.map { if (it == oldPoint) newPoint else it }
+			return this.copy(points = newPoints.sortedBy { it.value })
+		}
+
+		fun withPointRemoved(point: GradientPoint): Gradient {
+			val newPoints = points - point
+			return this.copy(points = newPoints)
+		}
 
 		fun getColorPalette(): ColorPalette {
 			val palette = ColorPalette()

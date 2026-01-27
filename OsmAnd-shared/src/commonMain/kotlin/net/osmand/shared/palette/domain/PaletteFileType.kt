@@ -8,13 +8,13 @@ enum class PaletteFileType(
 	// --- Track / Route Data (Prefix: route_*) ---
 
 	SPEED_FIXED(
-		filePrefix = "route_speed_fixed",
+		filePrefix = "route_speed_fixed_",
 		category = PaletteCategory.SPEED,
 		useFixedValues = true
 	),
 
 	SPEED_RELATIVE(
-		filePrefix = "route_speed",
+		filePrefix = "route_speed_",
 		category = PaletteCategory.SPEED
 	),
 
@@ -102,6 +102,10 @@ enum class PaletteFileType(
 
 		fun valuesOf(category: PaletteCategory) = entries.filter { category == it.category }
 
-		fun fromFileName(fileName: String) = entries.find { fileName.startsWith(it.filePrefix) }
+		fun fromFileName(fileName: String): PaletteFileType? {
+			return entries
+				.sortedByDescending { it.filePrefix.length }
+				.find { fileName.startsWith(it.filePrefix) }
+		}
 	}
 }

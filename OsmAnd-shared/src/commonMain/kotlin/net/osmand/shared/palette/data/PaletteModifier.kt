@@ -5,11 +5,13 @@ import net.osmand.shared.palette.domain.PaletteItem
 
 interface PaletteModifier<P : Palette> {
 
-	fun updateOrAdd(palette: P, item: PaletteItem): P
+	fun update(palette: P, item: PaletteItem): P
+
+	fun add(palette: P, item: PaletteItem): P
+
+	fun insertAfter(palette: P, anchorId: String, item: PaletteItem): P
 
 	fun remove(palette: P, itemId: String): P
-
-	fun duplicate(palette: P, originalItemId: String): Pair<P, PaletteItem>?
 
 	fun markAsUsed(palette: P, itemId: String): P
 }

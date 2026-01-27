@@ -1,12 +1,8 @@
 package net.osmand.shared.palette.data
 
 import co.touchlab.stately.collections.ConcurrentMutableMap
-import kotlinx.datetime.Clock
-import net.osmand.shared.io.KFile
 import net.osmand.shared.palette.data.gradient.GradientPaletteIO
 import net.osmand.shared.palette.data.gradient.GradientPaletteModifier
-import net.osmand.shared.palette.data.gradient.GradientSettingsHelper
-import net.osmand.shared.palette.data.solid.SolidPaletteFactory
 import net.osmand.shared.palette.data.solid.SolidPaletteIO
 import net.osmand.shared.palette.data.solid.SolidPaletteModifier
 import net.osmand.shared.palette.domain.Palette
@@ -14,21 +10,23 @@ import net.osmand.shared.palette.domain.PaletteCategory
 import net.osmand.shared.palette.domain.PaletteFileType
 import net.osmand.shared.palette.domain.PaletteItem
 import net.osmand.shared.util.LoggerFactory
-import net.osmand.shared.util.PlatformUtil
 
 class PaletteRepository {
 
 	private val cachedPalettesForId = ConcurrentMutableMap<String, Palette>()
-
-	private val settingsHelper = GradientSettingsHelper()
-
-	private fun getPaletteDir(): KFile = PlatformUtil.getOsmAndContext().getColorPaletteDir()
 
 	@Suppress("UNCHECKED_CAST")
 	private val Palette.modifier: PaletteModifier<Palette>
 		get() = when (this) {
 			is Palette.SolidCollection -> SolidPaletteModifier as PaletteModifier<Palette>
 			is Palette.GradientCollection -> GradientPaletteModifier as PaletteModifier<Palette>
+		}
+
+	@Suppress("UNCHECKED_CAST")
+	private val Palette.io: PaletteIO<Palette>
+		get() = when (this) {
+			is Palette.SolidCollection -> SolidPaletteIO as PaletteIO<Palette>
+			is Palette.GradientCollection -> GradientPaletteIO as PaletteIO<Palette>
 		}
 
 	// --- Read ---
@@ -57,170 +55,80 @@ class PaletteRepository {
 
 	fun updatePaletteItem(item: PaletteItem) {
 		val currentPalette = getPalette(item.source.paletteId) ?: return
+		val updatedPalette = currentPalette.modifier.update(currentPalette, item)
+		saveIfChanged(currentPalette, updatedPalette)
+	}
 
-		val updatedPalette = currentPalette.modifier.updateOrAdd(currentPalette, item)
+	fun addPaletteItem(paletteId: String, newItem: PaletteItem) {
+		val currentPalette = getPalette(paletteId) ?: return
+		val updatedPalette = currentPalette.modifier.add(currentPalette, newItem)
+		saveIfChanged(currentPalette, updatedPalette)
+	}
 
+	fun insertPaletteItemAfter(paletteId: String, anchorId: String, newItem: PaletteItem) {
+		val currentPalette = getPalette(paletteId) ?: return
+		val updatedPalette = currentPalette.modifier.insertAfter(currentPalette, anchorId, newItem)
 		saveIfChanged(currentPalette, updatedPalette)
 	}
 
 	fun removePaletteItem(paletteId: String, itemId: String) {
 		val currentPalette = getPalette(paletteId) ?: return
-
 		val updatedPalette = currentPalette.modifier.remove(currentPalette, itemId)
-
 		saveIfChanged(currentPalette, updatedPalette)
 	}
 
-	fun duplicatePaletteItem(paletteId: String, originalItemId: String): PaletteItem? {
-		val currentPalette = getPalette(paletteId) ?: return null
-
-		val result = currentPalette.modifier.duplicate(currentPalette, originalItemId)
-
-		return result?.let { (newCollection, newItem) ->
-			saveIfChanged(currentPalette, newCollection)
-			newItem
-		}
-	}
-
-	/**
-	 * Call this when a color is selected/applied by the user.
-	 * It updates the timestamp so it appears first in the "Last Used" sort mode.
-	 */
 	fun markPaletteItemAsUsed(paletteId: String, itemId: String) {
 		val currentPalette = getPalette(paletteId) ?: return
-
 		val updatedPalette = currentPalette.modifier.markAsUsed(currentPalette, itemId)
-
 		saveIfChanged(currentPalette, updatedPalette)
-	}
-
-	fun getOrAddSolidColor(paletteId: String, colorInt: Int): PaletteItem? {
-		val currentPalette = getPalette(paletteId)
-
-		if (currentPalette is Palette.SolidCollection) {
-			val existingItem = currentPalette.items.find { it.color == colorInt }
-
-			if (existingItem != null) {
-				markPaletteItemAsUsed(paletteId, existingItem.id)
-				return getPalette(paletteId)?.let {
-					(it as? Palette.SolidCollection)?.items?.find { item -> item.id == existingItem.id }
-				}
-			}
-		}
-
-		return addSolidColor(paletteId, colorInt, markAsRecentlyUsed = false)
-	}
-
-	fun addSolidColor(
-		paletteId: String,
-		colorInt: Int,
-		markAsRecentlyUsed: Boolean = true
-	): PaletteItem? {
-		val currentPalette = getPalette(paletteId) ?: return null
-		var resultItem: PaletteItem? = null
-
-		val updatedPalette = when (currentPalette) {
-			is Palette.SolidCollection -> {
-				val (newCollection, newItem) = SolidPaletteModifier.addColor(
-					collection = currentPalette,
-					color = colorInt,
-					markAsUsed = markAsRecentlyUsed,
-					idGenerator = { ids -> SolidPaletteIO.generateUniqueId(ids) },
-					timeProvider = { Clock.System.now().toEpochMilliseconds() }
-				)
-				resultItem = newItem
-				newCollection
-			}
-			else -> currentPalette
-		}
-
-		saveIfChanged(currentPalette, updatedPalette)
-		return resultItem
 	}
 
 	// --- Internal Helpers ---
 
 	private fun saveIfChanged(old: Palette, new: Palette) {
 		if (old !== new) {
-			savePalette(new)
+			savePalette(old, new)
 		}
 	}
 
-	private fun savePalette(palette: Palette) {
+	private fun savePalette(old: Palette?, new: Palette) {
 		// 1. Update Cache
-		cachedPalettesForId[palette.id] = palette
+		cachedPalettesForId[new.id] = new
 
-		// 2. Write to Disk
+		// 2. Sync on disk and settings
 		try {
-			when (palette) {
-				is Palette.SolidCollection -> SolidPaletteIO.write(palette)
-				is Palette.GradientCollection -> {
-					// TODO: save settings here, not in the modifier ??
-				}
-				else -> { /* No IO for unknown types */ }
-			}
+			new.io.sync(old, new)
 		} catch (e: Exception) {
-			LOG.error("Failed to save palette ${palette.id}", e)
+			LOG.error("Failed to save palette ${new.id}", e)
 		}
 	}
 
 	private fun readPalette(id: String): Palette? {
-		val fileType = PaletteFileType.fromFileName(id)
+		val io = findPaletteIO(id) ?: return null
+		var palette = io.read(id)
 
-		return when {
-			fileType == PaletteFileType.USER_PALETTE -> {
-				readSolidPalette(id)
-			}
-
-			fileType != null -> {
-				GradientPaletteIO.readCollection(
-					directory = getPaletteDir(),
-					category = fileType.category,
-					settingsHelper = settingsHelper
-				)
-			}
-
-			else -> {
-				val category = PaletteCategory.fromKey(id)
-				if (category != null) {
-					GradientPaletteIO.readCollection(
-						directory = getPaletteDir(),
-						category = category,
-						settingsHelper = settingsHelper
-					)
-				} else {
-					null
-				}
+		if (palette == null) {
+			palette = io.createDefault(id)
+			if (palette != null) {
+				savePalette(null, palette)
 			}
 		}
+		return palette
 	}
 
-	private fun readSolidPalette(id: String): Palette.SolidCollection {
-		val file = getFileForId(id)
-		val isFirstCreation = !file.exists()
-
-		// Returns an empty collection if the file doesn't exist
-		var collection = SolidPaletteIO.read(file)
-
-		if (isFirstCreation && id == DEFAULT_PALETTE_ID) {
-			collection = SolidPaletteFactory.fillWithDefaults(collection)
-
-			try {
-				SolidPaletteIO.write(collection)
-			} catch (e: Exception) {
-				LOG.error("Failed to write default palette", e)
-			}
+	private fun findPaletteIO(paletteId: String): PaletteIO<out Palette>? {
+		val fileType = PaletteFileType.fromFileName(paletteId)
+		if (fileType != null && fileType.category == PaletteCategory.SOLID_PALETTE) {
+			return SolidPaletteIO
 		}
-		return collection
-	}
-
-	private fun getFileForId(id: String): KFile {
-		return KFile(getPaletteDir(), "$id.txt")
+		val paletteCategory = PaletteCategory.fromKey(paletteId)
+		if (paletteCategory != null) {
+			return GradientPaletteIO
+		}
+		return null
 	}
 
 	companion object {
 		private val LOG = LoggerFactory.getLogger("PaletteRepository")
-		const val DEFAULT_PALETTE_ID = "user_palette_default"
-		const val USER_PALETTE_PREFIX = "user_palette_"
 	}
 }

@@ -3,23 +3,71 @@ package net.osmand.shared.palette.data.gradient
 import kotlinx.datetime.Clock
 import net.osmand.shared.ColorPalette
 import net.osmand.shared.io.KFile
+import net.osmand.shared.palette.data.PaletteIO
 import net.osmand.shared.palette.data.PaletteUtils
 import net.osmand.shared.palette.domain.*
 import net.osmand.shared.util.LoggerFactory
+import net.osmand.shared.util.PlatformUtil
 import okio.buffer
 import okio.use
 
-object GradientPaletteIO {
+object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 
 	private val LOG = LoggerFactory.getLogger("GradientPaletteIO")
 	private const val COMMENT_PREFIX = "#"
 	private const val HEADER = "# Value,R,G,B,A"
 
-	fun readCollection(
-		directory: KFile,
-		category: PaletteCategory,
-		settingsHelper: GradientSettingsHelper
-	): Palette.GradientCollection {
+	private val settingsHelper = GradientSettingsHelper()
+
+	private val paletteDirectory: KFile
+		get() = PlatformUtil.getOsmAndContext().getColorPaletteDir()
+
+	override fun sync(
+		oldPalette: Palette.GradientCollection?,
+		newPalette: Palette.GradientCollection
+	) {
+		val oldItemsMap = oldPalette?.items?.associateBy { it.id } ?: emptyMap()
+		val newItems = newPalette.items
+
+		// 1. File System Sync (Write/Update)
+		for (newItem in newItems) {
+			val oldItem = oldItemsMap[newItem.id]
+
+			if (oldItem == null || newItem != oldItem) {
+				writeItem(newItem)
+			}
+		}
+
+		// 2. File System Sync (Delete)
+		if (oldPalette != null) {
+			val newIds = newItems.map { it.id }.toSet()
+			for (oldItem in oldPalette.items) {
+				if (oldItem.id !in newIds) {
+					val file = KFile(paletteDirectory, oldItem.source.fileName)
+					if (file.exists()) {
+						file.delete()
+					}
+				}
+			}
+		}
+
+		// 3. Settings Sync (JSON)
+		saveSettings(newPalette)
+	}
+
+	override fun read(paletteId: String): Palette.GradientCollection? {
+		val category = PaletteCategory.fromKey(paletteId)
+
+		val targetCategory = category ?: PaletteFileType.fromFileName(paletteId)?.category
+
+		if (targetCategory == null) {
+			return null
+		}
+
+		return readCollection(targetCategory)
+	}
+
+	fun readCollection(category: PaletteCategory): Palette.GradientCollection {
 
 		val items = ArrayList<PaletteItem.Gradient>()
 
@@ -30,7 +78,7 @@ object GradientPaletteIO {
 		val baseTime = Clock.System.now().toEpochMilliseconds()
 
 		// 2. Scan directory
-		val files = directory.listFiles() ?: emptyList()
+		val files = paletteDirectory.listFiles() ?: emptyList()
 
 		for (file in files) {
 			val fileName = file.name()
@@ -64,7 +112,7 @@ object GradientPaletteIO {
 	/**
 	 * Reads a single gradient file and converts it into a PaletteItem.Gradient.
 	 */
-	fun readItem(
+	private fun readItem(
 		file: KFile,
 		fileType: PaletteFileType,
 		settingsItem: GradientSettingsItem?,
@@ -147,15 +195,12 @@ object GradientPaletteIO {
 		)
 	}
 
-	fun writeItem(
-		directory: KFile,
-		item: PaletteItem.Gradient
-	) {
+	private fun writeItem(item: PaletteItem.Gradient) {
 		// Ensure filename matches the convention: <type_prefix> + <palette_name> + .txt
 		// e.g. "route_speed_" + "default" + ".txt"
 		val fileName = item.source.fileName
 
-		val file = KFile(directory, fileName)
+		val file = KFile(paletteDirectory, fileName)
 
 		val content = buildString {
 			// 1. Write Comments/Header
@@ -186,5 +231,21 @@ object GradientPaletteIO {
 		} catch (e: Exception) {
 			LOG.error("Failed to write gradient item: ${file.path}", e)
 		}
+	}
+
+	private fun saveSettings(palette: Palette.GradientCollection) {
+		val originalOrder = palette.items
+		val lastUsedOrder = originalOrder.sortedByDescending { it.lastUsedTime }
+		val settingsItems = mutableListOf<GradientSettingsItem>()
+		lastUsedOrder.forEach { item ->
+			settingsItems.add(
+				GradientSettingsItem(
+					typeName = item.properties.fileType.category.key,
+					paletteName = item.paletteName,
+					index = originalOrder.indexOf(item) + 1
+				)
+			)
+		}
+		settingsHelper.saveItems(palette.category.key, settingsItems)
 	}
 }
