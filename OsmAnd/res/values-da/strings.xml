@@ -6024,4 +6024,6 @@
     <string name="equator_line">Ækvatorlinje</string>
     <string name="galactic_line">Galaktisk linje</string>
     <string name="meridian_line">Meridianlinje</string>
+    <string name="backup_deleted_all_data">Slettede data.</string>
+    <string name="backup_deleting_all_data">Sletter data…</string>
 </resources>
