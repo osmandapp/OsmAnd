@@ -491,51 +491,9 @@ public class SpeedometerWidget {
 		if (targetState != currentState) {
 			if (!speedAlertAnimator.isRunning()) {
 				if (drawBitmap) {
-					previousSpeedValueTextColor = speedValueTextColor;
-					previousSpeedUnitTextColor = speedUnitTextColor;
-					if (currentState == SpeedState.WARNING && targetState == SpeedState.EXCEED ||
-							currentState == SpeedState.EXCEED && targetState == SpeedState.WARNING) {
-						revealBackgroundColor = SpeedState.WARNING.getAlertColor();
-					} else {
-						revealBackgroundColor = Color.TRANSPARENT;
-					}
-					switch (currentState) {
-						case SAFE -> {
-							if (targetState == SpeedState.WARNING) {
-								revealColor = SpeedState.WARNING.getAlertColor();
-							} else {
-								revealColor = SpeedState.EXCEED.getAlertColor();
-							}
-						}
-						case WARNING -> {
-							if (targetState == SpeedState.SAFE) {
-								revealColor = SpeedState.WARNING.getAlertColor();
-							} else {
-								revealColor = SpeedState.EXCEED.getAlertColor();
-							}
-						}
-						case EXCEED -> revealColor = SpeedState.EXCEED.getAlertColor();
-					}
-					if (currentState == SpeedState.SAFE || currentState == SpeedState.WARNING && targetState == SpeedState.EXCEED) {
-						startFloatValueAnimator(speedAlertAnimator, false);
-					} else {
-						startFloatValueAnimator(speedAlertAnimator, true);
-					}
+					updateBackgroundColorsForBitmapMode(targetState);
 				} else {
-					int fromColor = (currentState == SpeedState.SAFE) ? themeBg : currentState.getAlertColor();
-					int toColor = (targetState == SpeedState.SAFE) ? themeBg : targetState.getAlertColor();
-					if (targetState == SpeedState.SAFE) {
-						previousSpeedValueTextColor = speedometerValueView.getCurrentTextColor();
-						previousSpeedUnitTextColor = speedometerUnitsView.getCurrentTextColor();
-						animationDrawable.setColors(themeBg, currentState.getAlertColor());
-						startFloatValueAnimator(speedAlertAnimator, true);
-					} else {
-						previousSpeedValueTextColor = speedometerValueView.getCurrentTextColor();
-						previousSpeedUnitTextColor = speedometerUnitsView.getCurrentTextColor();
-						animationDrawable.setColors(fromColor, toColor);
-						animationDrawable.setProgress(0f);
-						startFloatValueAnimator(speedAlertAnimator, false);
-					}
+					updateBackgroundColorsForViewMode(themeBg, targetState);
 				}
 				currentState = targetState;
 			}
@@ -543,6 +501,62 @@ public class SpeedometerWidget {
 			int activeAlert = (currentState == SpeedState.SAFE) ? themeBg : currentState.getAlertColor();
 			animationDrawable.setColors(themeBg, activeAlert);
 			animationDrawable.setProgress(currentState == SpeedState.SAFE ? 0f : 1f);
+		}
+	}
+
+	private void updateBackgroundColorsForViewMode(int themeBg, SpeedState targetState) {
+		if (drawBitmap) {
+			return;
+		}
+		int fromColor = (currentState == SpeedState.SAFE) ? themeBg : currentState.getAlertColor();
+		int toColor = (targetState == SpeedState.SAFE) ? themeBg : targetState.getAlertColor();
+		if (targetState == SpeedState.SAFE) {
+			previousSpeedValueTextColor = speedometerValueView.getCurrentTextColor();
+			previousSpeedUnitTextColor = speedometerUnitsView.getCurrentTextColor();
+			animationDrawable.setColors(themeBg, currentState.getAlertColor());
+			startFloatValueAnimator(speedAlertAnimator, true);
+		} else {
+			previousSpeedValueTextColor = speedometerValueView.getCurrentTextColor();
+			previousSpeedUnitTextColor = speedometerUnitsView.getCurrentTextColor();
+			animationDrawable.setColors(fromColor, toColor);
+			animationDrawable.setProgress(0f);
+			startFloatValueAnimator(speedAlertAnimator, false);
+		}
+	}
+
+	private void updateBackgroundColorsForBitmapMode(SpeedState targetState) {
+		if (!drawBitmap) {
+			return;
+		}
+		previousSpeedValueTextColor = speedValueTextColor;
+		previousSpeedUnitTextColor = speedUnitTextColor;
+		if (currentState == SpeedState.WARNING && targetState == SpeedState.EXCEED ||
+				currentState == SpeedState.EXCEED && targetState == SpeedState.WARNING) {
+			revealBackgroundColor = SpeedState.WARNING.getAlertColor();
+		} else {
+			revealBackgroundColor = Color.TRANSPARENT;
+		}
+		switch (currentState) {
+			case SAFE -> {
+				if (targetState == SpeedState.WARNING) {
+					revealColor = SpeedState.WARNING.getAlertColor();
+				} else {
+					revealColor = SpeedState.EXCEED.getAlertColor();
+				}
+			}
+			case WARNING -> {
+				if (targetState == SpeedState.SAFE) {
+					revealColor = SpeedState.WARNING.getAlertColor();
+				} else {
+					revealColor = SpeedState.EXCEED.getAlertColor();
+				}
+			}
+			case EXCEED -> revealColor = SpeedState.EXCEED.getAlertColor();
+		}
+		if (currentState == SpeedState.SAFE || currentState == SpeedState.WARNING && targetState == SpeedState.EXCEED) {
+			startFloatValueAnimator(speedAlertAnimator, false);
+		} else {
+			startFloatValueAnimator(speedAlertAnimator, true);
 		}
 	}
 
