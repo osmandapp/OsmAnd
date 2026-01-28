@@ -1834,4 +1834,5 @@
     <string name="organize_by_max_altitude">Maks. nadmorska visina</string>
     <string name="gpx_too_many_points_visible_warning">Velik broj vidljivih GPX tragova povećava potrošnju memorije</string>
     <string name="star_watcher_plugin_name">Praćenje zvijezda (Beta)</string>
+    <string name="star_watcher_plugin_description">Zvjezdane karte, 3D karta zvijezda</string>
 </resources>
