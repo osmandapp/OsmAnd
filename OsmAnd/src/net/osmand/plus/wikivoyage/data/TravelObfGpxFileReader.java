@@ -114,7 +114,19 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
 
     @Override
     protected GpxFile doInBackground(Void... voids) {
-        return buildGpxFile(repos, article, this::isCancelled);
+        GpxFile result = buildGpxFile(repos, article, this::isCancelled);
+        if (result != null && article instanceof TravelGpx) {
+            acquireGpxFileHeightData(result, repos, this::isCancelled);
+        }
+        return result;
+    }
+
+    private synchronized void acquireGpxFileHeightData(@NonNull GpxFile gpxFile,
+                                                       @NonNull List<AmenityIndexRepository> repos,
+                                                       @NonNull HeightDataLoader.Cancellable isCancelled) {
+        // TODO pedestrian (default) / bicycle profile depends on activity type?
+        // TODO GpxMultiSegmentsApproximation
+        // TODO GpxElevationMerger
     }
 
     @Override

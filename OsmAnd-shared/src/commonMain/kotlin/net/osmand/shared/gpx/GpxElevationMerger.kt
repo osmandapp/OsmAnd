@@ -19,9 +19,9 @@ class GpxElevationMerger(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: G
 
     fun merge(): Boolean {
         nTargetPoints = 0
-
         nExactPoints = 0
         nInterpolatedPoints = 0
+        elevationPoints.clear()
 
         calcSourceElevationPoints()
         targetMutablePoints = target.getAllSegmentsPoints()
@@ -35,7 +35,6 @@ class GpxElevationMerger(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: G
     }
 
     private fun calcSourceElevationPoints() {
-        elevationPoints.clear()
         for (wpt in src.getAllSegmentsPoints()) {
             if (!wpt.ele.isNaN() && wpt.hasLocation()) {
                 elevationPoints.put(calcPointId(wpt, exactLatLonPrecision), wpt.ele)
