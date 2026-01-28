@@ -1829,7 +1829,7 @@
     <string name="year_of_creation">Godina nastanka</string>
     <string name="month_year_creation">Mjesec i godina nastanka</string>
     <string name="nearest_city">Najbliži grad</string>
-    <string name="avg_speed">Prosječna brzina</string>
+    <string name="avg_speed">Prosj. brzina</string>
     <string name="organize_by_max_speed">Maks. brzina</string>
     <string name="organize_by_max_altitude">Maks. nadmorska visina</string>
     <string name="gpx_too_many_points_visible_warning">Velik broj vidljivih GPX tragova povećava potrošnju memorije</string>
@@ -1851,4 +1851,16 @@
     <string name="astro_name_neptune">Neptun</string>
     <string name="astro_name_pluto">Pluton</string>
     <string name="routing_attr_freeride_policy_description">„Freeride” i „Off‑piste” su neslužbene rute i prolazi. Obično su neuređeni, neodržavani i neprovjeravani navečer. Ulazite na vlastitu odgovornost.</string>
+    <string name="azimuthal_grid">Azimutna mreža</string>
+    <string name="equatorial_grid">Ekvatorijalna mreža</string>
+    <string name="ecliptic_line">Ekliptička linija</string>
+    <string name="magnitude_filter">Filter magnitude</string>
+    <string name="astro_planets">Planete</string>
+    <string name="astro_constellation">Zviježđe</string>
+    <string name="astro_constellations">Zviježđa</string>
+    <string name="astro_stars">Zvijezde</string>
+    <string name="astro_galaxies">Galaksije</string>
+    <string name="astro_nebulae">Maglice</string>
+    <string name="astro_open_clusters">Otvoreni skupovi</string>
+    <string name="astro_globular_clusters">Kuglasti skupovi</string>
 </resources>
