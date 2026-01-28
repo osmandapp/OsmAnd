@@ -1812,4 +1812,26 @@
     <string name="single_layout">Pojedinačni raspored</string>
     <string name="separate_layouts">Odvojeni rasporedi</string>
     <string name="use_separate_layouts">Koristi odvojene rasporede</string>
+    <string name="map_screen_layout">Raspored zaslona karte</string>
+    <string name="map_screen_layout_descr">Odaberite želite li koristiti jedinstveni raspored za sve orijentacije ili zasebno prilagoditi portretni i pejzažni način.</string>
+    <string name="sort_highest_first">Najviše prvo</string>
+    <string name="sort_lowest_first">Najniže prvo</string>
+    <string name="no_date">Bez datuma</string>
+    <string name="shared_string_step">Korak</string>
+    <string name="set_step_size_summary">Odaberite veličinu koraka za grupiranje svojih tragova.</string>
+    <string name="set_step_size">Postavi veličinu koraka</string>
+    <string name="organize_by_summary">Automatski organizirajte svoje tragove u grupe prema odabranom parametru, poput aktivnosti, brzine ili lokacije.</string>
+    <string name="organize_by">Organiziraj prema</string>
+    <string name="group_general">Općenito</string>
+    <string name="group_date_time">Datum i vrijeme</string>
+    <string name="group_altitude_elevation">Nadmorska visina i elevacija</string>
+    <string name="group_sensors">Senzori</string>
+    <string name="year_of_creation">Godina nastanka</string>
+    <string name="month_year_creation">Mjesec i godina nastanka</string>
+    <string name="nearest_city">Najbliži grad</string>
+    <string name="avg_speed">Prosječna brzina</string>
+    <string name="organize_by_max_speed">Maks. brzina</string>
+    <string name="organize_by_max_altitude">Maks. nadmorska visina</string>
+    <string name="gpx_too_many_points_visible_warning">Velik broj vidljivih GPX tragova povećava potrošnju memorije</string>
+    <string name="star_watcher_plugin_name">Praćenje zvijezda (Beta)</string>
 </resources>
