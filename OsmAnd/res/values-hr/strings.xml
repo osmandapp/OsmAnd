@@ -1805,6 +1805,11 @@
     <string name="equator_line">Ekvator</string>
     <string name="copy_from_portrait_layout">Kopiraj iz portretnog izgleda</string>
     <string name="copy_from_landscape_layout">Kopiraj iz pejzažnog izgleda</string>
-    <string name="panels_layout_compact">Kompaktni prikaz</string>
+    <string name="panels_layout_compact">Kompaktno</string>
     <string name="panels_layout_wide">Široko</string>
+    <string name="panels_layout">Raspored panela</string>
+    <string name="panels_layout_descr">Odaberite raspored za gornje i donje panele. Mogu biti široki, preko cijele širine zaslona, ili kompaktni, smješteni između bočnih panela i tipki.</string>
+    <string name="single_layout">Pojedinačni raspored</string>
+    <string name="separate_layouts">Odvojeni rasporedi</string>
+    <string name="use_separate_layouts">Koristi odvojene rasporede</string>
 </resources>
