@@ -7,10 +7,8 @@ import net.osmand.shared.util.LoggerFactory
 class GpxElevationMerger(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: GpxFile) {
     private var nTargetPoints = 0
     private var nExactPoints = 0
-    private var nApproximatePoints = 0
     private var nInterpolatedPoints = 0
-    private val exactLatLonPrecision = 0.00005 // ~6m
-    private val approximateLatLonPrecision = 0.0002 // ~22m
+    private val exactLatLonPrecision = 0.0001 // ~11m
 
     private val src: GpxFile = readOnlySourceGpxFile
     private val target: GpxFile = mutableTargetGpxFile
@@ -23,7 +21,6 @@ class GpxElevationMerger(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: G
         nTargetPoints = 0
 
         nExactPoints = 0
-        nApproximatePoints = 0
         nInterpolatedPoints = 0
 
         calcSourceElevationPoints()
@@ -32,7 +29,7 @@ class GpxElevationMerger(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: G
         mutateTargetPoints()
         ensureTargetSegments()
         interpolateTargetGaps()
-        log.info("XXX GpxElevationMerger: exact=$nExactPoints approx=$nApproximatePoints interpolated=$nInterpolatedPoints")
+        log.info("XXX GpxElevationMerger: exact=$nExactPoints interpolated=$nInterpolatedPoints")
 
         return nResolvedPoints() > 0
     }
@@ -42,7 +39,6 @@ class GpxElevationMerger(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: G
         for (wpt in src.getAllSegmentsPoints()) {
             if (!wpt.ele.isNaN() && wpt.hasLocation()) {
                 elevationPoints.put(calcPointId(wpt, exactLatLonPrecision), wpt.ele)
-                elevationPoints.put(calcPointId(wpt, approximateLatLonPrecision), wpt.ele)
             }
         }
     }
@@ -60,12 +56,6 @@ class GpxElevationMerger(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: G
             if (srcElevationExact != null) {
                 wpt.ele = srcElevationExact
                 nExactPoints++
-                continue
-            }
-            val srcElevationApproximate = elevationPoints.get(calcPointId(wpt, approximateLatLonPrecision))
-            if (srcElevationApproximate != null) {
-                wpt.ele = srcElevationApproximate
-                nApproximatePoints++
                 continue
             }
         }
@@ -157,7 +147,7 @@ class GpxElevationMerger(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: G
     }
 
     private fun nResolvedPoints(): Int {
-        return nExactPoints + nApproximatePoints + nInterpolatedPoints
+        return nExactPoints + nInterpolatedPoints
     }
 
     private fun calcPointId(wpt: WptPt, precision: Double): Long {
