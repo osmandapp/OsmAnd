@@ -1863,4 +1863,24 @@
     <string name="astro_nebulae">Maglice</string>
     <string name="astro_open_clusters">Otvoreni skupovi</string>
     <string name="astro_globular_clusters">Kuglasti skupovi</string>
+    <string name="astro_galaxy_clusters">Skupovi galaksija</string>
+    <string name="astro_black_holes">Crne rupe</string>
+    <string name="visible_layers_and_objects">Vidljivi slojevi i objekti</string>
+    <string name="shared_string_azimuth">Azimut</string>
+    <string name="shared_string_magnitude">Magnituda</string>
+    <string name="astro_rise">Izlazak</string>
+    <string name="astro_set">Zalazak</string>
+    <string name="show_expand_button">Prikaži gumb za proširenje</string>
+    <string name="imprecise_coordinates">Neprecizne koordinate</string>
+    <string name="has_vehicle_metrics">S OBDII podacima</string>
+    <string name="lang_mi">Maori</string>
+    <string name="vehicle_metrics_chart_category">Metrike vozila</string>
+    <string name="delete_folder_description">Izbrisati mapu „%1$s”?</string>
+    <string name="routing_attr_pt_limit_name">Prikaži N najboljih ruta</string>
+    <string name="routing_attr_pt_limit_description">Odredite broj najboljih ruta za prikaz</string>
+    <string name="centimeter">cm</string>
+    <string name="shared_string_centimeters">centimetri</string>
+    <string name="bicycle_width_limit_description">Unesite širinu bicikla kako biste izbjegli uske biciklističke staze.</string>
+    <string name="copy_link">Kopiraj poveznicu</string>
+    <string name="is_parking_time_limited">Je li parkiranje vremenski ograničeno?</string>
 </resources>
