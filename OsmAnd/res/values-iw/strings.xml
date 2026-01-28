@@ -4128,8 +4128,6 @@
     <string name="logout_from_osmand_cloud">יציאה מ־OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">לצאת מהחשבון\?
 \nיהיה עליך להיכנס שוב כדי לגבות או לשחזר נתונים.</string>
-    <string name="backup_deleting_all_data">כל הנתונים נמחקים…</string>
-    <string name="backup_deleted_all_data">כל הנתונים נמחקו.</string>
     <string name="backup_deleting_all_data_descr">נא להמתין לסיום מחיקת כל הנתונים שלך על ידי OsmAnd מהענן. כל הנתונים שבמכשיר יישארו כפי שהם.</string>
     <string name="backup_deleted_all_data_descr">כל הנתונים שלך נמחקו מ־OsmAnd Cloud בהצלחה.</string>
     <string name="backup_version_history_removed">כל היסטוריית הגרסאות הוסרה.</string>

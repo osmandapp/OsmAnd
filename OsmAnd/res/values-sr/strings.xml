@@ -3973,8 +3973,6 @@
     <string name="no_activity_for_intent">Инсталирајте апликацију која може да изведе ову радњу.</string>
     <string name="no_items_of_type_message">Немате ни једну ставку ове врсте</string>
     <string name="routeInfo_tracktype_description">Обојите путању или линију трага према саставу површине. Обично се примењује када је путна мрежа углавном непресвучена.</string>
-    <string name="backup_deleting_all_data">Бришем све податке…</string>
-    <string name="backup_deleted_all_data">Сви подаци су уклоњени.</string>
     <string name="backup_version_history_removed">Сва издања историје су уклоњена.</string>
     <string name="backup_data_removed">Сви подаци су уклоњени.</string>
     <string name="shared_string_progress">Напредак</string>
@@ -5964,4 +5962,6 @@
     <string name="galactic_line">Галактичка линија</string>
     <string name="meridian_line">Меридијанска линија</string>
     <string name="equator_line">Екваторска линија</string>
+    <string name="backup_deleted_all_data">Избрисани подаци.</string>
+    <string name="backup_deleting_all_data">Брисање података…</string>
 </resources>

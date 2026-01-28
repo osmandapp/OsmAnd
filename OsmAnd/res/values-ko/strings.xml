@@ -2309,12 +2309,10 @@
     <string name="update_all">모두 업데이트 (%1$s MB)</string>
     <string name="updates_size">크기 업데이트</string>
     <string name="winter_and_ski_renderer">겨울과 스키</string>
-    <string name="backup_deleted_all_data">데이터를 모두 삭제했습니다.</string>
     <string name="routing_attr_piste_type_skitour_description">스키 투어를 위한 경로입니다.</string>
     <string name="shared_string_purchased">구입됨</string>
     <string name="gpx_monitoring_stop">주행 기록 일시 중지</string>
     <string name="backup_version_history_removed">모든 버전 기록이 제거되었습니다.</string>
-    <string name="backup_deleting_all_data">모든 데이터 삭제 중…</string>
     <string name="live_updates">실시간 업데이트</string>
     <string name="available_maps">사용 가능한 지도</string>
     <string name="search_map">지도 검색 중…</string>

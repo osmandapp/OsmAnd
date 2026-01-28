@@ -4024,8 +4024,6 @@
     <string name="routeInfo_winter_ice_road_description">Obarvit čáru trasy nebo stopy podle její zimní klasifikace.</string>
     <string name="connect_track_points_as">Spojit body trasy</string>
     <string name="benefits_for_contributors_primary_descr">Aktivní přispěvatelé na OpenStreetMap.org mohou mít nárok na neomezené hodinové aktualizace map.</string>
-    <string name="backup_deleted_all_data">Všechna data byla odstraněna.</string>
-    <string name="backup_deleting_all_data">Odstraňují se všechna data…</string>
     <string name="purchases_feature_desc_osmand_cloud">Získejte OsmAnd Cloud pro ukládání všech OsmAnd dat. Po přeinstalování již neztratíte svá data. Zálohujte a obnovujte data jednoduše.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Získejte přístup k častějším aktualizacím map. Hodinové, denní nebo týdenní aktualizace. Aktualizace se stahují inkrementálně, pouze pro změněnou oblast.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Získejte neomezené stahování offline map všech kontinentů a oblastí.</string>
@@ -5996,4 +5994,6 @@
     <string name="galactic_line">Galaktická linka</string>
     <string name="meridian_line">Poledník</string>
     <string name="equator_line">Rovník</string>
+    <string name="backup_deleted_all_data">Data odstraněna.</string>
+    <string name="backup_deleting_all_data">Mazání dat…</string>
 </resources>

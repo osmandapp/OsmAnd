@@ -3913,7 +3913,6 @@
     <string name="explore_wikipedia_offline">Читайте Википедию офлайн.</string>
     <string name="backup_error_subscription_was_expired_descr">Срок действия вашей подписки OsmAnd Pro истёк, возобновите её, чтобы использовать резервное копирование. Вы по-прежнему можете восстановить данные из облака.</string>
     <string name="contour_lines_hillshade_slope">Горизонтали, затенение рельефа (отмывка), уклоны</string>
-    <string name="backup_deleting_all_data">Удаление всех данных…</string>
     <string name="backup_deleting_all_data_descr">Подождите пока OsmAnd удалит данные из облака. Данные на устройстве не будут затронуты.</string>
     <string name="backup_deleted_all_data_descr">Все ваши данные были удалены из OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">Вся история версий удалена.</string>
@@ -3925,7 +3924,6 @@
     <string name="promo_subscription">Промо-подписка</string>
     <string name="on_hold_since">Приостановлена с %1$s</string>
     <string name="active_till">Активна до %1$s</string>
-    <string name="backup_deleted_all_data">Все данные удалены.</string>
     <string name="track_has_no_needed_data">В треке отсутствуют соответствующие данные.</string>
     <string name="enter_verification_code">Введите одноразовый пароль</string>
     <string name="reset_to_original">Сбросить к начальному значению</string>

@@ -507,4 +507,10 @@
 
 	<color name="slider_label_text_light">#ffffff</color>
 	<color name="slider_label_text_dark">#e6e6e6</color>
+
+	<color name="speed_limit_tolerance_value">#000000</color>
+	<color name="speed_limit_tolerance_units">#4C4950</color>
+	<color name="speeding_value">#ffffff</color>
+	<color name="speeding_units">#ffffff</color>
+
 </resources>

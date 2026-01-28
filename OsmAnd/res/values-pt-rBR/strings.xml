@@ -4122,10 +4122,8 @@
     <string name="logout_from_osmand_cloud">Sair do OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Sair\?
 \nVocê precisará entrar novamente para fazer backup ou restaurar os dados.</string>
-    <string name="backup_deleted_all_data">Excluir todos os dados.</string>
     <string name="backup_error_subscription_was_expired_descr">Sua assinatura do OsmAnd Pro expirou, renove-a para usar o backup. Você ainda pode restaurar dados da nuvem.</string>
     <string name="contour_lines_hillshade_slope">Curvas de nível, sombras de relevo, inclinação</string>
-    <string name="backup_deleting_all_data">Excluindo todos os dados…</string>
     <string name="backup_deleting_all_data_descr">Aguarde até que OsmAnd exclua seus dados da nuvem. Todos os dados no dispositivo permanecerão intactos.</string>
     <string name="backup_deleted_all_data_descr">Todos os seus dados foram excluídos com sucesso de OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">Todo o histórico da versão foi removido.</string>
@@ -6350,4 +6348,9 @@
     <string name="use_separate_layouts">Use layouts separados</string>
     <string name="map_screen_layout">Layout da tela do mapa</string>
     <string name="map_screen_layout_descr">Escolha se deseja usar um único layout para todas as orientações ou personalizar retrato e paisagem separadamente.</string>
+    <string name="galactic_line">Linha galáctica</string>
+    <string name="meridian_line">Linha meridiana</string>
+    <string name="equator_line">Linha do equador</string>
+    <string name="backup_deleted_all_data">Dados excluídos.</string>
+    <string name="backup_deleting_all_data">Excluindo dados…</string>
 </resources>
