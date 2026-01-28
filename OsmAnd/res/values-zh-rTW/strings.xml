@@ -5654,7 +5654,7 @@
     <string name="rendering_attr_spotDistance_name">點測深距離</string>
     <string name="rendering_attr_spotDistance_description">定點測距的距離</string>
     <string name="rendering_attr_spotSize_name">點測深大小</string>
-    <string name="rendering_attr_spotSize_description">設定點測深大小</string>
+    <string name="rendering_attr_spotSize_description">檢視附近大小</string>
     <string name="rendering_attr_tidalFlatStyle_name">潮間帶樣式</string>
     <string name="rendering_attr_tidalFlatStyle_description">設定潮間帶樣式</string>
     <string name="rendering_attr_watercolor_name">水色</string>
