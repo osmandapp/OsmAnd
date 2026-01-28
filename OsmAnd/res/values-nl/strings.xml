@@ -6312,4 +6312,6 @@
     <string name="galactic_line">Galactische lijn</string>
     <string name="equator_line">Evenaarlijn</string>
     <string name="meridian_line">Meridiaanlijn</string>
+    <string name="backup_deleted_all_data">Gegevens gewist.</string>
+    <string name="backup_deleting_all_data">Gegevens wissen…</string>
 </resources>
