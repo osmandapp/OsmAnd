@@ -1800,4 +1800,11 @@
     <string name="shared_string_other">Drugi</string>
     <string name="other_menu_group">Drugo</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">Ekstremno</string>
+    <string name="meridian_line">Meridijan</string>
+    <string name="galactic_line">Galaktička linija</string>
+    <string name="equator_line">Ekvator</string>
+    <string name="copy_from_portrait_layout">Kopiraj iz portretnog izgleda</string>
+    <string name="copy_from_landscape_layout">Kopiraj iz pejzažnog izgleda</string>
+    <string name="panels_layout_compact">Kompaktni prikaz</string>
+    <string name="panels_layout_wide">Široko</string>
 </resources>
