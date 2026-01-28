@@ -881,9 +881,7 @@
     <string name="routing_attr_avoid_motorway_description">Izbjegava autoceste</string>
     <string name="routing_attr_weight_description">Odredi dozvoljenu težinu vozila na rutama.</string>
     <string name="routing_attr_weight_name">Težina</string>
-    <string name="android_19_location_disabled">Od KitKat inačice androida (4.4) ne možete preuzimati i ažurirati mape na prethodno mjesto pohrane (%s). Želite li dopustiti aplikaciji da kopira podatke na novo mjesto?
- Napomena : stare datoteke će ostati netaknute (ali ih možete obrisati).
- Napomena : neće biti moguće dijeliti datoteke između OsmAnd i OsmAnd+.</string>
+    <string name="android_19_location_disabled">Od KitKat inačice androida (4.4) ne možete preuzimati i ažurirati mape na prethodno mjesto pohrane (%s). Želite li dopustiti aplikaciji da kopira podatke na novo mjesto? \nNapomena : stare datoteke će ostati netaknute (ali ih možete obrisati). \nNapomena : neće biti moguće dijeliti datoteke između OsmAnd i OsmAnd+.</string>
     <string name="copying_osmand_one_file_descr">Kopiranje datoteke (%s) na novo odredište …</string>
     <string name="copying_osmand_files_descr">Kopiranje OsmAnd datoteka na novo odredište (%s) …</string>
     <string name="copying_osmand_files">Kopiranje OsmAnd datoteka …</string>
@@ -1025,7 +1023,7 @@
     <string name="shared_string_waypoints">Međutočke</string>
     <string name="rendering_attr_subwayMode_name">Linije podzemne željeznice</string>
     <string name="shared_string_waypoint">Međutočke</string>
-    <string name="gpx_info_subtracks">"Pod tragovi: %1$s "</string>
+    <string name="gpx_info_subtracks">Podtragovi: %1$s</string>
     <string name="gpx_info_waypoints">Međutočke: %1$s</string>
     <string name="gpx_info_end_time">Vrijeme završetka: %1$tF, %1$tT</string>
     <string name="gpx_selection_route_points">%1$s
@@ -1620,7 +1618,7 @@
     <string name="uploading_data">Prenošenje podataka …</string>
     <string name="shared_string_capacity">Kapacitet</string>
     <string name="uploading">Prenošenje …</string>
-    <string name="app_mode_paragliding">Paragliding</string>
+    <string name="app_mode_paragliding">Paraglajding</string>
     <string name="rendering_attr_highway_class_state_road_name">Državna cesta</string>
     <string name="rendering_attr_smoothness_very_horrible_name">Preužasno</string>
     <string name="rendering_attr_highway_class_steps_name">Stepenice</string>
@@ -1884,7 +1882,7 @@
     <string name="copy_link">Kopiraj poveznicu</string>
     <string name="is_parking_time_limited">Je li parkiranje vremenski ograničeno?</string>
     <string name="context_menu_read_full">Pročitaj sve</string>
-    <string name="shared_string_drawer">Bočna ladica</string>
+    <string name="shared_string_drawer">Ladica</string>
     <string name="welcome_to_open_beta">Dobrodošli u otvorenu beta verziju</string>
     <string name="wikivoyage_travel_guide_descr">Vodiči do najzanimljivijih mjesta na planetu, unutar OsmAnda, bez potrebe za internetskom vezom.</string>
     <string name="in_app_purchase">Kupnja unutar aplikacije</string>
