@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments.search;
 
+import android.os.PersistableBundle;
 import android.view.View;
 
 import androidx.annotation.IdRes;
@@ -20,6 +21,7 @@ import java.util.Set;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
+import de.KnollFrank.lib.settingssearch.common.Classes;
 import de.KnollFrank.lib.settingssearch.common.Views;
 import de.KnollFrank.lib.settingssearch.common.graph.Subtree;
 import de.KnollFrank.lib.settingssearch.common.graph.SubtreeReplacer;
@@ -43,12 +45,25 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 
 	private final Class<? extends PreferenceFragmentCompat> preferenceFragment;
 	private final TileSourceTemplatesProvider tileSourceTemplatesProvider;
+	private static final String PREFERENCE_FRAGMENT = "preferenceFragment";
 
 	public SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter(
 			final Class<? extends PreferenceFragmentCompat> preferenceFragment,
 			final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
 		this.preferenceFragment = preferenceFragment;
 		this.tileSourceTemplatesProvider = tileSourceTemplatesProvider;
+	}
+
+	// FK-TODO: getParams() + getPreferenceFragment() in einer neuen Configuration-Klasse kapseln, die zwischen ihr und PersistableBundle konvertieren kann?
+	@Override
+	public PersistableBundle getParams() {
+		final PersistableBundle params = new PersistableBundle();
+		params.putString(PREFERENCE_FRAGMENT, preferenceFragment.getName());
+		return params;
+	}
+
+	public static Class<? extends PreferenceFragmentCompat> getPreferenceFragment(final PersistableBundle params) {
+		return Classes.getClass(params.getString(PREFERENCE_FRAGMENT));
 	}
 
 	@Override
@@ -99,7 +114,7 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 				getPreferenceScreenOfPreferenceFragment(
 						tree,
 						applicationMode);
-		final SearchDatabaseConfig searchDatabaseConfig =
+		final SearchDatabaseConfig<Configuration> searchDatabaseConfig =
 				SearchDatabaseConfigFactory.createSearchDatabaseConfig(
 						MainSettingsFragment.class,
 						tileSourceTemplatesProvider,
@@ -122,7 +137,7 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 			final PreferenceScreenWithHost root,
 			final Locale locale,
 			final FragmentActivity activityContext,
-			final SearchDatabaseConfig searchDatabaseConfig) {
+			final SearchDatabaseConfig<Configuration> searchDatabaseConfig) {
 		return SearchablePreferenceScreenTreeProviderFactory
 				.createSearchablePreferenceScreenTreeProvider(
 						FRAGMENT_CONTAINER_VIEW_ID,
@@ -158,7 +173,7 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 				.endNode();
 	}
 
-	private TreePathInstantiator createTreePathInstantiator(final SearchDatabaseConfig searchDatabaseConfig,
+	private TreePathInstantiator createTreePathInstantiator(final SearchDatabaseConfig<Configuration> searchDatabaseConfig,
 															final FragmentActivity activityContext) {
 		return new TreePathInstantiator(
 				new PreferenceScreenWithHostProvider(

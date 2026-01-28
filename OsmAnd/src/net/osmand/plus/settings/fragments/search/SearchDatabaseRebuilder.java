@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments.search;
 
+import android.os.PersistableBundle;
 import android.view.View;
 
 import androidx.annotation.IdRes;
@@ -40,6 +41,11 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenTreeCr
 	}
 
 	@Override
+	public PersistableBundle getParams() {
+		return new PersistableBundle();
+	}
+
+	@Override
 	@SuppressWarnings({"UnstableApiUsage", "NullableProblems"})
 	public Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> createTree(
 			final Locale locale,
@@ -53,7 +59,7 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenTreeCr
 							FRAGMENT_CONTAINER_VIEW_ID);
 					return null;
 				});
-		final SearchDatabaseConfig searchDatabaseConfig =
+		final SearchDatabaseConfig<Configuration> searchDatabaseConfig =
 				SearchDatabaseConfigFactory.createSearchDatabaseConfig(
 						MainSettingsFragment.class,
 						tileSourceTemplatesProvider,
@@ -72,7 +78,7 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenTreeCr
 			final PreferenceScreenWithHost root,
 			final Locale locale,
 			final FragmentActivity activityContext,
-			final SearchDatabaseConfig searchDatabaseConfig) {
+			final SearchDatabaseConfig<Configuration> searchDatabaseConfig) {
 		return SearchablePreferenceScreenTreeProviderFactory
 				.createSearchablePreferenceScreenTreeProvider(
 						FRAGMENT_CONTAINER_VIEW_ID,
@@ -87,7 +93,7 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenTreeCr
 	}
 
 	private PreferenceScreenWithHost instantiateSearchablePreferenceScreen(
-			final SearchDatabaseConfig searchDatabaseConfig,
+			final SearchDatabaseConfig<Configuration> searchDatabaseConfig,
 			final FragmentActivity activityContext) {
 		final PreferenceScreenWithHostProvider preferenceScreenWithHostProvider =
 				new PreferenceScreenWithHostProvider(

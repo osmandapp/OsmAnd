@@ -30,12 +30,14 @@ import de.KnollFrank.lib.settingssearch.provider.ActivityInitializer;
 
 public class SearchDatabaseConfigFactory {
 
-	public static SearchDatabaseConfig createSearchDatabaseConfig(
+	public static SearchDatabaseConfig<Configuration> createSearchDatabaseConfig(
 			final Class<? extends BaseSettingsFragment> rootPreferenceFragment,
 			final TileSourceTemplatesProvider tileSourceTemplatesProvider,
 			final FragmentManager fragmentManager) {
 		return SearchDatabaseConfig
-				.builder(rootPreferenceFragment)
+				.builder(
+						rootPreferenceFragment,
+						new TreeProcessorFactory(tileSourceTemplatesProvider))
 				.withFragmentFactory(new FragmentFactory())
 				.withActivitySearchDatabaseConfigs(createActivitySearchDatabaseConfigs())
 				.withActivityInitializerByActivity(getActivityInitializerByActivity(fragmentManager))

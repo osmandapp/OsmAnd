@@ -123,6 +123,7 @@ import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
 import net.osmand.plus.settings.fragments.search.Configuration;
 import net.osmand.plus.settings.fragments.search.ConfigurationBundleConverter;
 import net.osmand.plus.settings.fragments.search.PreferencesDatabaseConfigFactory;
+import net.osmand.plus.settings.fragments.search.TreeProcessorFactory;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulatedLocation;
@@ -962,6 +963,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile() :
 								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(),
 						new ActualConfigurationProvider().getActualConfiguration(),
+						new TreeProcessorFactory(app.getTileSourceTemplatesProvider()),
 						new ConfigurationBundleConverter(),
 						this);
 

@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments.search;
 
+import android.os.PersistableBundle;
+
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.common.graph.ImmutableValueGraph;
@@ -33,6 +35,11 @@ public class PreferencesDatabaseConfigFactory {
 						new PrepackagedPreferencesDatabase<>(
 								new File("database/searchable_preferences_prepackaged.db"),
 								new SearchablePreferenceScreenTreeTransformer<>() {
+
+									@Override
+									public PersistableBundle getParams() {
+										return new PersistableBundle();
+									}
 
 									@Override
 									@SuppressWarnings({"UnstableApiUsage", "NullableProblems"})

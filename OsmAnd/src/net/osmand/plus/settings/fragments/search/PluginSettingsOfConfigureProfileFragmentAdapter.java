@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments.search;
 
+import android.os.PersistableBundle;
 import android.view.View;
 
 import androidx.annotation.IdRes;
@@ -57,6 +58,11 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 	}
 
 	@Override
+	public PersistableBundle getParams() {
+		return new PersistableBundle();
+	}
+
+	@Override
 	public Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> transformSearchablePreferenceScreenTree(
 			final SearchablePreferenceScreenTree<Configuration> searchablePreferenceScreenTree,
 			final Configuration targetConfiguration,
@@ -104,7 +110,7 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 				getPreferenceScreenOfConfigureProfileFragment(
 						tree.graph().nodes(),
 						applicationMode);
-		final SearchDatabaseConfig searchDatabaseConfig =
+		final SearchDatabaseConfig<Configuration> searchDatabaseConfig =
 				SearchDatabaseConfigFactory.createSearchDatabaseConfig(
 						MainSettingsFragment.class,
 						tileSourceTemplatesProvider,
@@ -128,7 +134,7 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 			final PreferenceScreenWithHost root,
 			final Locale locale,
 			final FragmentActivity activityContext,
-			final SearchDatabaseConfig searchDatabaseConfig) {
+			final SearchDatabaseConfig<Configuration> searchDatabaseConfig) {
 		return SearchablePreferenceScreenTreeProviderFactory
 				.createSearchablePreferenceScreenTreeProvider(
 						FRAGMENT_CONTAINER_VIEW_ID,
@@ -194,7 +200,7 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 	}
 
 	private TreePathInstantiator createTreePathInstantiator(
-			final SearchDatabaseConfig searchDatabaseConfig,
+			final SearchDatabaseConfig<Configuration> searchDatabaseConfig,
 			final FragmentActivity activityContext) {
 		return new TreePathInstantiator(
 				new PreferenceScreenWithHostProvider(
