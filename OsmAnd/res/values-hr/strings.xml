@@ -1883,4 +1883,5 @@
     <string name="bicycle_width_limit_description">Unesite širinu bicikla kako biste izbjegli uske biciklističke staze.</string>
     <string name="copy_link">Kopiraj poveznicu</string>
     <string name="is_parking_time_limited">Je li parkiranje vremenski ograničeno?</string>
+    <string name="context_menu_read_full">Pročitaj sve</string>
 </resources>
