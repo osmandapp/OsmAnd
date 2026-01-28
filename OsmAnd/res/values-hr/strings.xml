@@ -1835,4 +1835,20 @@
     <string name="gpx_too_many_points_visible_warning">Velik broj vidljivih GPX tragova povećava potrošnju memorije</string>
     <string name="star_watcher_plugin_name">Praćenje zvijezda (Beta)</string>
     <string name="star_watcher_plugin_description">Zvjezdane karte, 3D karta zvijezda</string>
+    <string name="star_map">Zvjezdana karta</string>
+    <string name="star_charts_name">Zvjezdane karte</string>
+    <string name="star_visibility_name">Vidljivost zvijezda</string>
+    <string name="star_altitude_name">Visina zvijezde</string>
+    <string name="astro_name_sun">Sunce</string>
+    <string name="astro_name_moon">Mjesec</string>
+    <string name="astro_name_mercury">Merkur</string>
+    <string name="astro_name_venus">Venera</string>
+    <string name="astro_name_mars">Mars</string>
+    <string name="astro_name_jupiter">Jupiter</string>
+    <string name="astro_name_saturn">Saturn</string>
+    <string name="astro_name_uranus">Uran</string>
+    <string name="voice_prompts_timetable">Raspored glasovnih uputa</string>
+    <string name="astro_name_neptune">Neptun</string>
+    <string name="astro_name_pluto">Pluton</string>
+    <string name="routing_attr_freeride_policy_description">„Freeride” i „Off‑piste” su neslužbene rute i prolazi. Obično su neuređeni, neodržavani i neprovjeravani navečer. Ulazite na vlastitu odgovornost.</string>
 </resources>
