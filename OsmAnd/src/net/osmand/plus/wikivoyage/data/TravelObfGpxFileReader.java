@@ -45,12 +45,18 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
+import net.osmand.plus.measurementtool.GpxApproximationHelper;
+import net.osmand.plus.measurementtool.GpxApproximationParams;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.search.core.AmenityIndexRepository;
+import net.osmand.shared.gpx.GpxElevationTransfer;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.Link;
+import net.osmand.shared.gpx.primitives.Metadata;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -82,6 +88,17 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     private static final Set<String> doNotSaveAmenityGpxTags = Set.of(
             "date", "distance", "route_name", "route_bbox_radius", "start_ele", "ele_graph",
             "avg_speed", "min_speed", "max_speed", "time_moving", "time_moving_no_gaps", "time_span", "time_span_no_gaps"
+    );
+
+    private static final Map<String, ApplicationMode> HEIGHT_APPROXIMATION_PROFILES = Map.ofEntries(
+            Map.entry("driving", ApplicationMode.CAR),
+            Map.entry("motorcycling", ApplicationMode.MOTORCYCLE),
+            Map.entry("foot", ApplicationMode.PEDESTRIAN),
+            Map.entry("winter_sport", ApplicationMode.SKI),
+            Map.entry("cycling", ApplicationMode.BICYCLE),
+            Map.entry("water_sport", ApplicationMode.BOAT),
+            Map.entry("routes_other", ApplicationMode.PEDESTRIAN)
+            // taken from poi_type tag="route_type" excluding "air_sports"
     );
 
     private final TravelArticle article;
@@ -116,17 +133,29 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     protected GpxFile doInBackground(Void... voids) {
         GpxFile result = buildGpxFile(repos, article, this::isCancelled);
         if (result != null && article instanceof TravelGpx) {
-            acquireGpxFileHeightData(result, repos, this::isCancelled);
+            acquireGpxFileHeightData(result, this::isCancelled);
         }
         return result;
     }
 
-    private synchronized void acquireGpxFileHeightData(@NonNull GpxFile gpxFile,
-                                                       @NonNull List<AmenityIndexRepository> repos,
+    private synchronized void acquireGpxFileHeightData(@NonNull GpxFile targetGpxFile,
                                                        @NonNull HeightDataLoader.Cancellable isCancelled) {
-        // TODO pedestrian (default) / bicycle profile depends on activity type?
-        // TODO GpxMultiSegmentsApproximation
-        // TODO GpxElevationTransfer
+
+        // TODO support isCancelled during approximation process
+
+        Metadata metadata = targetGpxFile.getMetadata();
+        RouteActivityHelper routeActivityHelper = app.getRouteActivityHelper();
+        RouteActivity routeActivity = metadata.getRouteActivity(routeActivityHelper.getActivities());
+
+        if (routeActivity != null) {
+            ApplicationMode mode = HEIGHT_APPROXIMATION_PROFILES.get(routeActivity.getGroup().getId());
+            if (mode != null) {
+                GpxApproximationParams params = new GpxApproximationParams();
+                params.setAppMode(mode);
+                GpxFile approximatedGpxFile = GpxApproximationHelper.approximateGpxSync(app, targetGpxFile, params);
+                new GpxElevationTransfer(approximatedGpxFile, targetGpxFile).transfer();
+            }
+        }
     }
 
     @Override

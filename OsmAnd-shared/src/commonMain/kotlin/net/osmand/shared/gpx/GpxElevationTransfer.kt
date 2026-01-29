@@ -29,7 +29,7 @@ class GpxElevationTransfer(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile:
         mutateTargetPoints()
         ensureTargetSegments()
         interpolateTargetGaps()
-        log.info("XXX GpxElevationTransfer: original=$nOriginalPoints interpolated=$nInterpolatedPoints")
+        log.info("GpxElevationTransfer: original=$nOriginalPoints interpolated=$nInterpolatedPoints")
 
         return nResolvedPoints() > 0
     }
