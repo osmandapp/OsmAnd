@@ -6348,4 +6348,9 @@
     <string name="use_separate_layouts">Use layouts separados</string>
     <string name="map_screen_layout">Layout da tela do mapa</string>
     <string name="map_screen_layout_descr">Escolha se deseja usar um único layout para todas as orientações ou personalizar retrato e paisagem separadamente.</string>
+    <string name="galactic_line">Linha galáctica</string>
+    <string name="meridian_line">Linha meridiana</string>
+    <string name="equator_line">Linha do equador</string>
+    <string name="backup_deleted_all_data">Dados excluídos.</string>
+    <string name="backup_deleting_all_data">Excluindo dados…</string>
 </resources>

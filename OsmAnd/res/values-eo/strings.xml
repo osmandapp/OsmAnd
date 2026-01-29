@@ -5975,4 +5975,6 @@
     <string name="galactic_line">Galaksia ekvatoro</string>
     <string name="meridian_line">Ĉiela meridiano</string>
     <string name="equator_line">Ĉiela ekvatoro</string>
+    <string name="backup_deleted_all_data">Forigis datumojn.</string>
+    <string name="backup_deleting_all_data">Forigado de datumoj…</string>
 </resources>

@@ -40,9 +40,7 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListener;
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.buttons.CustomMapButtonsFragment;
 import net.osmand.plus.views.mapwidgets.configure.buttons.DefaultMapButtonsFragment;
@@ -59,7 +57,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigureScreenFragment extends BaseFullScreenFragment implements QuickActionUpdatesListener,
-		WidgetsRegistryListener, ConfirmationDialogListener, CopyAppModePrefsListener, AppModeChangedListener, CardListener {
+		ConfirmationDialogListener, CopyAppModePrefsListener, AppModeChangedListener, CardListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
@@ -332,7 +330,6 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 	public void onStart() {
 		super.onStart();
 		app.getMapButtonsHelper().addUpdatesListener(this);
-		widgetRegistry.addWidgetsRegistryListener(this);
 		mapActivity.disableDrawer();
 	}
 
@@ -340,7 +337,6 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 	public void onStop() {
 		super.onStop();
 		app.getMapButtonsHelper().removeUpdatesListener(this);
-		widgetRegistry.removeWidgetsRegistryListener(this);
 		mapActivity.enableDrawer();
 	}
 
@@ -393,21 +389,6 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 	@Override
 	public void onActionsUpdated() {
 		updateCard(ConfigureButtonsCard.class);
-	}
-
-	@Override
-	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
-		updateCard(ConfigureWidgetsCard.class);
-	}
-
-	@Override
-	public void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
-
-	}
-
-	@Override
-	public void onWidgetsCleared() {
-
 	}
 
 	@Override

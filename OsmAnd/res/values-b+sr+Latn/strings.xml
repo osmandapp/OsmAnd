@@ -5964,4 +5964,6 @@
     <string name="galactic_line">Galaktička linija</string>
     <string name="meridian_line">Meridijanska linija</string>
     <string name="equator_line">Ekvatorska linija</string>
+    <string name="backup_deleted_all_data">Izbrisani podaci.</string>
+    <string name="backup_deleting_all_data">Brisanje podataka…</string>
 </resources>

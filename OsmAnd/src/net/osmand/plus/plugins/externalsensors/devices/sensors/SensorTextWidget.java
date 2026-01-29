@@ -1,6 +1,8 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -48,18 +50,23 @@ public class SensorTextWidget extends SimpleWidget {
 		externalDeviceId = getDeviceId(appMode);
 		this.widgetState = new ExternalSensorWidgetState(app, customId, fieldType);
 		applyDeviceId();
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		updateInfo(null);
 		setImageDrawable(getIconId());
 		updateWidgetName();
 	}
 
 	@Override
-	public void setImageDrawable(int res) {
+	public void setImageDrawable(@NonNull ImageView imageView, @Nullable Drawable drawable, int visibility) {
 		if (isDeviceConnected()) {
-			super.setImageDrawable(res);
+			super.setImageDrawable(imageView, drawable, visibility);
 		} else {
 			if (shouldShowIcon()) {
-				setImageDrawable(app.getUIUtilities().getIcon(res, nightMode));
+				imageView.setImageDrawable(drawable);
 				imageView.setVisibility(View.VISIBLE);
 			} else {
 				imageView.setVisibility(View.GONE);

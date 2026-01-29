@@ -5994,4 +5994,6 @@
     <string name="galactic_line">Galaktická linka</string>
     <string name="meridian_line">Poledník</string>
     <string name="equator_line">Rovník</string>
+    <string name="backup_deleted_all_data">Data odstraněna.</string>
+    <string name="backup_deleting_all_data">Mazání dat…</string>
 </resources>

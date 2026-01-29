@@ -64,9 +64,7 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class StreetNameWidget extends MapWidget {
@@ -80,12 +78,12 @@ public class StreetNameWidget extends MapWidget {
 
 	private LocationPointWrapper lastPoint;
 
-	private final TextView addressText;
-	private final TextView addressTextShadow;
-	private final TextView exitRefText;
-	private final LinearLayout shieldImagesContainer;
-	private final ImageView turnIcon;
-	private final View waypointInfoBar;
+	private TextView addressText;
+	private TextView addressTextShadow;
+	private TextView exitRefText;
+	private LinearLayout shieldImagesContainer;
+	private ImageView turnIcon;
+	private View waypointInfoBar;
 
 	private final TurnDrawable turnDrawable;
 	private int shadowRadius;
@@ -104,7 +102,12 @@ public class StreetNameWidget extends MapWidget {
 		waypointHelper = app.getWaypointHelper();
 		rendererRegistry = app.getRendererRegistry();
 		widgetState = new StreetNameWidgetState(app, customId);
+		turnDrawable = new TurnDrawable(mapActivity, true);
+	}
 
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		addressText = view.findViewById(R.id.map_address_text);
 		addressTextShadow = view.findViewById(R.id.map_address_text_shadow);
 		waypointInfoBar = view.findViewById(R.id.waypoint_info_bar);
@@ -112,22 +115,16 @@ public class StreetNameWidget extends MapWidget {
 		shieldImagesContainer = view.findViewById(R.id.map_shields_container);
 		turnIcon = view.findViewById(R.id.map_turn_icon);
 
-		turnDrawable = new TurnDrawable(mapActivity, true);
-
-		setupLongClickListener();
+		view.setOnLongClickListener(v -> {
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
+			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
+			return true;
+		});
 		updateVisibility(false);
 	}
 
-	private void setupLongClickListener() {
-		view.setOnLongClickListener(v -> {
-			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
-			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
-			return true;
-		});
-	}
-
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	public void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
 		ApplicationMode appMode = settings.getApplicationMode();
 		boolean showNextTurn = isShowNextTurnEnabled(appMode);
 
@@ -210,6 +207,7 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	public boolean updateWaypoint() {
+		View view = getView();
 		LocationPointWrapper point = waypointHelper.getMostImportantLocationPoint(null);
 		boolean changed = lastPoint != point;
 		lastPoint = point;
@@ -227,12 +225,12 @@ public class StreetNameWidget extends MapWidget {
 			if (updated || changed) {
 				ImageView moreButton = waypointInfoBar.findViewById(R.id.waypoint_more);
 				ImageView closeButton = waypointInfoBar.findViewById(R.id.waypoint_close);
-				moreButton.setOnClickListener(view -> {
+				moreButton.setOnClickListener(v -> {
 					mapActivity.hideContextAndRouteInfoMenues();
 					ShowAlongTheRouteBottomSheet.showInstance(
 							mapActivity.getSupportFragmentManager(), null, point.type);
 				});
-				closeButton.setOnClickListener(view -> {
+				closeButton.setOnClickListener(v -> {
 					waypointHelper.removeVisibleLocationPoint(point);
 					mapActivity.refreshMap();
 				});
@@ -383,7 +381,7 @@ public class StreetNameWidget extends MapWidget {
 
 		shadowRadius = textState.textShadowRadius;
 
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		View view = getView();
 		view.setBackgroundResource(textState.widgetBackgroundId);
 
 		TextView waypointText = view.findViewById(R.id.waypoint_text);

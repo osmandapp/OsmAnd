@@ -2,6 +2,8 @@ package net.osmand.plus.plugins.development.widget;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_MEMORY;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -23,6 +25,11 @@ public class MemoryInfoWidget extends SimpleWidget {
 
 	public MemoryInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, DEV_MEMORY, customId, widgetsPanel);
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		updateSimpleWidgetInfo(null);
 		setIcons(DEV_MEMORY);
 	}

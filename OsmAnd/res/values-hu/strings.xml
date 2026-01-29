@@ -5834,7 +5834,7 @@
     <string name="astro_name_pluto">Plútó</string>
     <string name="azimuthal_grid">Azimutális háló</string>
     <string name="equatorial_grid">Egyenlítői háló</string>
-    <string name="ecliptic_line">Ekliptikus vonal</string>
+    <string name="ecliptic_line">Ekliptika</string>
     <string name="magnitude_filter">Fényességszűrő</string>
     <string name="astro_planets">Bolygók</string>
     <string name="astro_constellation">Csillagkép</string>
@@ -5881,7 +5881,9 @@
     <string name="use_separate_layouts">Elkülönített elrendezések használata</string>
     <string name="map_screen_layout">Térképképernyő elrendezése</string>
     <string name="map_screen_layout_descr">Válassza ki, hogy egyetlen elrendezést szeretne használni minden tájoláshoz, vagy külön-külön szeretné testreszabni az álló és fekvő módot.</string>
-    <string name="meridian_line">Kezdőmeridián</string>
-    <string name="equator_line">Egyenlítő vonala</string>
-    <string name="galactic_line">Galaktikus sík</string>
+    <string name="meridian_line">Délkör</string>
+    <string name="equator_line">Égi egyenlítő</string>
+    <string name="galactic_line">Galaktikus egyenlítő</string>
+    <string name="backup_deleted_all_data">Adatok törölve.</string>
+    <string name="backup_deleting_all_data">Adatok törlése…</string>
 </resources>

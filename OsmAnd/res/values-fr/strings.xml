@@ -5885,4 +5885,6 @@
     <string name="galactic_line">Ligne galactique</string>
     <string name="meridian_line">Ligne méridienne</string>
     <string name="equator_line">Ligne équatoriale</string>
+    <string name="backup_deleted_all_data">Données supprimées.</string>
+    <string name="backup_deleting_all_data">Suppression des données…</string>
 </resources>

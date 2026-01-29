@@ -5999,4 +5999,6 @@
     <string name="galactic_line">Галактична лінія</string>
     <string name="meridian_line">Лінія меридіана</string>
     <string name="equator_line">Лінія екватора</string>
+    <string name="backup_deleted_all_data">Видалені дані.</string>
+    <string name="backup_deleting_all_data">Видалення даних…</string>
 </resources>

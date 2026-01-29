@@ -1465,7 +1465,10 @@ class StarView @JvmOverloads constructor(
 		if (obj.type == SkyObject.Type.STAR && constrainedZoomFactor > 0.5) {
 			radius *= 0.7f
 		}
-		
+		if (obj.type == SkyObject.Type.SUN || obj.type == SkyObject.Type.MOON) {
+			radius *= 0.5f
+		}
+
 		paint.style = Paint.Style.FILL
 		paint.color = color
 		canvas.drawCircle(tempPoint.x, tempPoint.y, radius, paint)

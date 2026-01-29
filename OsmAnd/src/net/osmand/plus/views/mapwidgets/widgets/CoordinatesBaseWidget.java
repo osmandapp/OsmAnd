@@ -22,16 +22,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.enums.ScreenLayoutMode;
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.util.TextDirectionUtil;
@@ -47,7 +46,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 
 	protected LatLon lastLocation;
 
-	protected final View divider;
+	protected View divider;
 	protected View firstContainer;
 	protected View secondContainer;
 
@@ -69,21 +68,26 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	public CoordinatesBaseWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 			@Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType, customId, panel);
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 
 		divider = view.findViewById(R.id.divider);
-		updateViewIds(isLayoutRtl());
+		updateViewIds(AndroidUtils.isLayoutMirrored(view));
 
 		view.setOnClickListener(v -> copyCoordinates());
 		updateVisibility(false);
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	public void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
 		checkLayoutDirection();
 	}
 
 	private void checkLayoutDirection() {
-		boolean isLayoutRtl = isLayoutRtl();
+		boolean isLayoutRtl = AndroidUtils.isLayoutMirrored(getView());
 		if (cachedLayoutRtl != isLayoutRtl) {
 			cachedLayoutRtl = isLayoutRtl;
 			updateViewIds(isLayoutRtl);
@@ -91,6 +95,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	}
 
 	private void updateViewIds(boolean isLayoutRtl) {
+		View view = getView();
 		if (isLayoutRtl) {
 			firstContainer = view.findViewById(R.id.second_container);
 			secondContainer = view.findViewById(R.id.first_coordinates_container);
@@ -278,8 +283,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
-		if (updatedVisibility && widgetType.getPanel(settings, layoutMode) == WidgetsPanel.TOP) {
+		if (updatedVisibility && panel == WidgetsPanel.TOP) {
 			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {
 				mapInfoLayer.updateVerticalPanels();
@@ -305,11 +309,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		updateTextOutline(firstCoordinate, textState);
 		updateTextOutline(secondCoordinate, textState);
 
-		view.setBackgroundResource(textState.widgetBackgroundId);
+		getView().setBackgroundResource(textState.widgetBackgroundId);
 		updateInfo(null);
-	}
-
-	private boolean isLayoutRtl() {
-		return AndroidUtils.isLayoutMirrored(view);
 	}
 }

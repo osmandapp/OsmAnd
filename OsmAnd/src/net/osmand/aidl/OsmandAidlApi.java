@@ -461,7 +461,7 @@ public class OsmandAidlApi {
 						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
 						TextInfoWidget widgetControl = connectedApp.getWidgetControls().get(widgetId);
 						if (layer != null && widgetControl != null) {
-							layer.removeSideWidget(widgetControl);
+							layer.removeWidget(widgetControl);
 							connectedApp.getWidgetControls().remove(widgetId);
 							layer.recreateControls();
 						}
