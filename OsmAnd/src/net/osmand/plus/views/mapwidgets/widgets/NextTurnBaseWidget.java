@@ -25,12 +25,11 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.enums.ScreenLayoutMode;
-import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RoadShield;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -38,6 +37,7 @@ import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsContextMenu;
@@ -94,9 +94,14 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
 		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(id, settings, layoutMode);
 		setVerticalWidget(selectedPanel);
-		setupViews();
-
 		turnDrawable = new TurnDrawable(mapActivity, !verticalWidget && horizontalMini);
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
+
+		setupViews();
 		if (verticalWidget) {
 			setVerticalImage(turnDrawable);
 		} else if (horizontalMini) {
@@ -115,19 +120,19 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	private void setupViews() {
-		LinearLayout container = (LinearLayout) view;
+		LinearLayout container = (LinearLayout) getView();
 		container.removeAllViews();
 
 		int layoutId = getContentLayoutId();
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
 		updateWidgetView();
-		setOnLongClickListener(v -> {
+		container.setOnLongClickListener(v -> {
 			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
-			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
+			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
 			return true;
 		});
-		setOnClickListener(getOnClickListener());
+		container.setOnClickListener(getOnClickListener());
 	}
 
 	public void updateWidgetView() {
@@ -159,6 +164,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	private void findViews() {
+		View view = getView();
 		container = view.findViewById(R.id.container);
 		if (verticalWidget) {
 			bg = view.findViewById(R.id.widget_bg);
@@ -380,12 +386,12 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		} else {
 			setTextNoUpdateVisibility(text, subText);
 		}
-
+		View view = getView();
 		TurnType turnType = getTurnType();
 		if (turnType != null) {
-			setContentDescription(distance + " " + RouteCalculationResult.toString(turnType, app, true));
+			view.setContentDescription(distance + " " + RouteCalculationResult.toString(turnType, app, true));
 		} else {
-			setContentDescription(distance);
+			view.setContentDescription(distance);
 		}
 	}
 
@@ -453,7 +459,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	@Override
-	public final void updateInfo(@Nullable DrawSettings drawSettings) {
+	public final void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
 		if (!verticalWidget) {
 			updateNavigationInfo(drawSettings);
 			return;
@@ -489,7 +495,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 	@Override
 	protected View getContentView() {
-		return verticalWidget ? view : container;
+		return verticalWidget ? getView() : container;
 	}
 
 	@Override
@@ -514,6 +520,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 	@Override
 	public void recreateView() {
+		View view = getView();
 		View oldContainer = container;
 		if (verticalWidget) {
 			OutlinedTextContainer oldDistanceView = distanceView;

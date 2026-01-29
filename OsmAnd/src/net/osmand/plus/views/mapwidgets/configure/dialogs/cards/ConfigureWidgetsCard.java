@@ -23,6 +23,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.PanelsLayoutMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -136,29 +137,29 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 	private void setupTransparentWidgetsButton(@NonNull ApplicationMode appMode, boolean showShortDivider) {
 		View button = view.findViewById(R.id.transparent_widgets_button);
 
-		boolean enabled = settings.getTransparentMapThemePreference(layoutMode[0]).getModeValue(appMode);
+		CommonPreference<Boolean> preference = settings.getTransparentMapThemePreference(layoutMode[0]);
+		boolean enabled = preference.getModeValue(appMode);
 		ConfigureButtonsCard.setupButton(button, getString(R.string.map_widget_transparent), null, R.drawable.ic_action_appearance, enabled, nightMode);
 
 		CompoundButton compoundButton = button.findViewById(R.id.compound_button);
 		compoundButton.setChecked(enabled);
-		AndroidUiHelper.updateVisibility(compoundButton, true);
 
-		button.setOnClickListener(v -> {
-			boolean newState = !compoundButton.isChecked();
-			compoundButton.setChecked(newState);
-		});
 		int activeColor = appMode.getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		UiUtilities.setupCompoundButton(nightMode, activeColor, compoundButton);
 
 		ImageView icon = button.findViewById(R.id.icon);
-		compoundButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+		icon.setColorFilter(enabled ? activeColor : defColor);
+
+		button.setOnClickListener(v -> {
+			boolean isChecked = !preference.get();
+			compoundButton.setChecked(isChecked);
 			icon.setColorFilter(isChecked ? activeColor : defColor);
 
-			boolean transparent = settings.getTransparentMapThemePreference(layoutMode[0]).get();
-			settings.getTransparentMapThemePreference(layoutMode[0]).setModeValue(appMode, !transparent);
-			mapActivity.updateApplicationModeSettings();
+			preference.setModeValue(appMode, isChecked);
+			mapActivity.refreshMap();
 		});
+		AndroidUiHelper.updateVisibility(compoundButton, true);
 		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), showShortDivider);
 	}
 

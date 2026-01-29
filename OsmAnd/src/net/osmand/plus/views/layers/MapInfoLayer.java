@@ -43,6 +43,7 @@ import net.osmand.plus.views.controls.VerticalWidgetPanel;
 import net.osmand.plus.views.controls.VerticalWidgetPanel.VerticalPanelVisibilityListener;
 import net.osmand.plus.views.controls.WidgetsContainer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.CenterWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
@@ -52,7 +53,6 @@ import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SpeedometerWidget;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -257,8 +257,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		themeId = -1;
 	}
 
-	public void removeSideWidget(TextInfoWidget widget) {
-		widgetRegistry.removeSideWidgetInternal(widget);
+	public void removeWidget(@NonNull MapWidget widget) {
+		widgetRegistry.removeWidget(widget);
 	}
 
 	public void addTopToolbarController(TopToolbarController controller) {
@@ -346,9 +346,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			resetCashedTheme();
-			ApplicationMode appMode = settings.getApplicationMode();
 			clearCustomContainers(mapActivity);
-			widgetRegistry.updateWidgetsInfo(mapActivity, appMode, drawSettings);
+			updateWidgetsInfo(drawSettings);
 			topWidgetsPanel.update(drawSettings);
 			bottomWidgetsPanel.update(drawSettings);
 			leftWidgetsPanel.update(drawSettings);
@@ -357,8 +356,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	}
 
 	public void updateVerticalPanels() {
-		ApplicationMode appMode = settings.getApplicationMode();
-		widgetRegistry.updateWidgetsInfo(requireMapActivity(), appMode, drawSettings);
+		updateWidgetsInfo(drawSettings);
 
 		if (topWidgetsPanel != null) {
 			topWidgetsPanel.update(drawSettings);
@@ -550,7 +548,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		this.drawSettings = drawSettings;
 		if (getMapActivity() != null) {
 			updateColorShadowsOfText();
-			widgetRegistry.updateWidgetsInfo(requireMapActivity(), settings.getApplicationMode(), drawSettings);
+			updateWidgetsInfo(drawSettings);
 			leftWidgetsPanel.update(drawSettings);
 			rightWidgetsPanel.update(drawSettings);
 			topWidgetsPanel.update(drawSettings);
@@ -567,6 +565,19 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			}
 			for (WidgetsContainer container : additionalWidgets) {
 				container.update(drawSettings);
+			}
+		}
+	}
+
+	private void updateWidgetsInfo(@NonNull DrawSettings drawSettings) {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			ApplicationMode appMode = settings.getApplicationMode();
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(requireMapActivity());
+			for (MapWidgetInfo widgetInfo : widgetRegistry.getWidgets(activity, appMode, layoutMode)) {
+				if (widgetInfo.isEnabledForAppMode(appMode, layoutMode) || widgetInfo instanceof CenterWidgetInfo) {
+					widgetInfo.widget.updateInfo(drawSettings);
+				}
 			}
 		}
 	}

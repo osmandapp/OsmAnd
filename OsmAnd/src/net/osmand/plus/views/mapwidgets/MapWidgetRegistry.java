@@ -1,44 +1,23 @@
 package net.osmand.plus.views.mapwidgets;
 
-import android.content.Context;
-
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgetinterfaces.IComplexWidget;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportSidePanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportVerticalPanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
-import net.osmand.plus.views.mapwidgets.widgets.CoordinatesBaseWidget;
-import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
-import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 public class MapWidgetRegistry {
 
@@ -61,21 +40,12 @@ public class MapWidgetRegistry {
 
 	private List<WidgetsRegistryListener> listeners = new ArrayList<>();
 
-	public MapWidgetRegistry(OsmandApplication app) {
+	public MapWidgetRegistry(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
 	}
 
-	public void updateWidgetsInfo(@NonNull MapActivity activity, @NonNull ApplicationMode appMode, @NonNull DrawSettings drawSettings) {
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
-		for (MapWidgetInfo widgetInfo : getAllWidgets()) {
-			if (widgetInfo.isEnabledForAppMode(appMode, layoutMode) || widgetInfo instanceof CenterWidgetInfo) {
-				widgetInfo.widget.updateInfo(drawSettings);
-			}
-		}
-	}
-
-	public void removeSideWidgetInternal(TextInfoWidget widget) {
+	public void removeWidget(MapWidget widget) {
 		Iterator<MapWidgetInfo> it = getLeftWidgets().iterator();
 		while (it.hasNext()) {
 			if (it.next().widget == widget) {
@@ -199,19 +169,19 @@ public class MapWidgetRegistry {
 
 	private void reorderWidgets(@NonNull List<MapWidgetInfo> widgetInfos, @Nullable ScreenLayoutMode layoutMode) {
 		Map<WidgetsPanel, Set<MapWidgetInfo>> newAllWidgets = new HashMap<>();
-		for (MapWidgetInfo widget : widgetInfos) {
-			WidgetsPanel panel = widget.getUpdatedPanel(layoutMode);
-			widget.pageIndex = panel.getWidgetPage(widget.key, settings, layoutMode);
-			widget.priority = panel.getWidgetOrder(widget.key, settings, layoutMode);
+		for (MapWidgetInfo widgetInfo : widgetInfos) {
+			WidgetsPanel panel = widgetInfo.getUpdatedPanel(layoutMode);
+			widgetInfo.pageIndex = panel.getWidgetPage(widgetInfo.key, settings, layoutMode);
+			widgetInfo.priority = panel.getWidgetOrder(widgetInfo.key, settings, layoutMode);
 
 			Set<MapWidgetInfo> widgetsOfPanel = newAllWidgets.get(panel);
 			if (widgetsOfPanel == null) {
 				widgetsOfPanel = new TreeSet<>();
 				newAllWidgets.put(panel, widgetsOfPanel);
 			}
-			widgetsOfPanel.add(widget);
+			widgetInfo.widget.initView();
+			widgetsOfPanel.add(widgetInfo);
 		}
-
 		allWidgets = newAllWidgets;
 	}
 
@@ -338,6 +308,7 @@ public class MapWidgetRegistry {
 				panelSupported = widget.widget instanceof ISupportVerticalPanel;
 			}
 			if (panelSupported || includedWidgetTypes.contains(widget.getClass())) {
+				WidgetType widgetType = widget.getWidgetType();
 				boolean disabledMode = (filterModes & DISABLED_MODE) == DISABLED_MODE;
 				boolean enabledMode = (filterModes & ENABLED_MODE) == ENABLED_MODE;
 				boolean availableMode = (filterModes & AVAILABLE_MODE) == AVAILABLE_MODE;
@@ -348,9 +319,9 @@ public class MapWidgetRegistry {
 				boolean passEnabled = !enabledMode || widget.isEnabledForAppMode(appMode, layoutMode);
 				boolean passAvailable = !availableMode || WidgetsAvailabilityHelper.isWidgetAvailable(app, widget.key, appMode);
 				boolean defaultAvailable = !defaultMode || !widget.isCustomWidget();
-				boolean passMatchedPanels = !matchingPanelsMode || panels.contains(widget.getWidgetPanel());
-				boolean passTypeAllowed = widget.getWidgetType() == null || widget.getWidgetType().isAllowed();
-				boolean passPanelAllowed = widget.getWidgetType() == null || widget.getWidgetType().isPanelsAllowed(panels);
+				boolean passMatchedPanels = !matchingPanelsMode || panels.contains(widget.getUpdatedPanel(layoutMode));
+				boolean passTypeAllowed = widgetType.isAllowed();
+				boolean passPanelAllowed = widgetType.isPanelsAllowed(panels);
 
 				if (passDisabled && passEnabled && passAvailable && defaultAvailable && passMatchedPanels && passTypeAllowed && passPanelAllowed) {
 					filteredWidgets.add(widget);
@@ -368,46 +339,6 @@ public class MapWidgetRegistry {
 			allWidgets.put(panel, widgets);
 		}
 		return widgets;
-	}
-
-	@ColorRes
-	public int getStatusBarColor(@NonNull Context context, @NonNull ApplicationMode appMode, boolean nightMode) {
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
-		Set<MapWidgetInfo> topWidgetsInfo = getWidgetsForPanel(WidgetsPanel.TOP);
-		for (MapWidgetInfo widgetInfo : topWidgetsInfo) {
-			MapWidget widget = widgetInfo.widget;
-			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
-				continue;
-			}
-			if (widget instanceof StreetNameWidget) {
-				return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
-			} else if (widget instanceof MapMarkersBarWidget) {
-				return R.color.status_bar_main_dark;
-			} else if (widget instanceof SimpleWidget || widget instanceof CoordinatesBaseWidget || widget instanceof IComplexWidget) {
-				return nightMode ? R.color.status_bar_secondary_dark : R.color.status_bar_secondary_light;
-			} else {
-				return -1;
-			}
-		}
-
-		return -1;
-	}
-
-	public boolean getStatusBarContentNightMode(@NonNull Context context, @NonNull ApplicationMode appMode, boolean nightMode) {
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
-		Set<MapWidgetInfo> topWidgetsInfo = getWidgetsForPanel(WidgetsPanel.TOP);
-		for (MapWidgetInfo widgetInfo : topWidgetsInfo) {
-			MapWidget widget = widgetInfo.widget;
-			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
-				continue;
-			}
-			if (widget instanceof SimpleWidget || widget instanceof CoordinatesBaseWidget || widget instanceof IComplexWidget) {
-				return nightMode;
-			} else {
-				return true;
-			}
-		}
-		return true;
 	}
 
 	public void registerWidget(@NonNull MapWidgetInfo widgetInfo) {
