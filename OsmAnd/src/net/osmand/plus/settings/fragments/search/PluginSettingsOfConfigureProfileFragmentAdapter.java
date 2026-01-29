@@ -10,7 +10,6 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Sets;
 import com.google.common.graph.ImmutableValueGraph;
 
 import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
@@ -28,6 +27,7 @@ import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.common.Preferences;
+import de.KnollFrank.lib.settingssearch.common.Sets;
 import de.KnollFrank.lib.settingssearch.common.graph.Edge;
 import de.KnollFrank.lib.settingssearch.common.graph.Tree;
 import de.KnollFrank.lib.settingssearch.common.graph.TreeNode;
@@ -67,15 +67,32 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 			final SearchablePreferenceScreenTree<Configuration> searchablePreferenceScreenTree,
 			final Configuration targetConfiguration,
 			final FragmentActivity activityContext) {
-		return adaptPluginSettingsOfConfigureProfileFragmentForAllApplicationModes(
-				searchablePreferenceScreenTree.tree(),
-				searchablePreferenceScreenTree.locale(),
-				activityContext);
+		final Configuration srcConfiguration = searchablePreferenceScreenTree.configuration();
+		return !PluginSettingsOfConfigureProfileFragmentAdapter
+				.getPluginsToRemove(
+						srcConfiguration.enabledPlugins(),
+						targetConfiguration.enabledPlugins())
+				.isEmpty() ?
+				// FK-TODO: in SettingsSearch eine Klasse SubtreeRemover einführen, die einen Teilbaum entfernt und hier verwenden.
+				this
+						.createSearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter()
+						.transformSearchablePreferenceScreenTree(
+								searchablePreferenceScreenTree,
+								targetConfiguration,
+								activityContext) :
+				adaptPluginSettingsOfConfigureProfileFragmentForAllApplicationModes(
+						searchablePreferenceScreenTree.tree(),
+						searchablePreferenceScreenTree.locale(),
+						getPluginsToAdd(
+								srcConfiguration.enabledPlugins(),
+								targetConfiguration.enabledPlugins()),
+						activityContext);
 	}
 
 	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> adaptPluginSettingsOfConfigureProfileFragmentForAllApplicationModes(
 			final Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> tree,
 			final Locale locale,
+			final Set<String> pluginsToAdd,
 			final FragmentActivity activityContext) {
 		return PluginSettingsOfConfigureProfileFragmentAdapter
 				.getApplicationModesWithoutDefault()
@@ -87,6 +104,7 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 										currentTree,
 										applicationMode,
 										locale,
+										pluginsToAdd,
 										activityContext),
 						(tree1, tree2) -> {
 							throw new UnsupportedOperationException("Parallel stream not supported");
@@ -97,6 +115,7 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 			final Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> tree,
 			final ApplicationMode applicationMode,
 			final Locale locale,
+			final Set<String> pluginsToAdd,
 			final FragmentActivity activityContext) {
 		OnUiThreadRunnerFactory
 				.fromActivity(activityContext)
@@ -124,7 +143,8 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 								createTreePathInstantiator(searchDatabaseConfig, activityContext)),
 						locale,
 						activityContext,
-						searchDatabaseConfig),
+						searchDatabaseConfig,
+						pluginsToAdd),
 				new TreeNode<>(
 						configureProfilePreferenceScreen,
 						tree));
@@ -134,7 +154,8 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 			final PreferenceScreenWithHost root,
 			final Locale locale,
 			final FragmentActivity activityContext,
-			final SearchDatabaseConfig<Configuration> searchDatabaseConfig) {
+			final SearchDatabaseConfig<Configuration> searchDatabaseConfig,
+			final Set<String> pluginsToAdd) {
 		return SearchablePreferenceScreenTreeProviderFactory
 				.createSearchablePreferenceScreenTreeProvider(
 						FRAGMENT_CONTAINER_VIEW_ID,
@@ -144,11 +165,11 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 						activityContext,
 						searchDatabaseConfig,
 						locale,
-						addPluginEdgesOfConfigureProfileFragmentToTree())
+						addPluginEdgesOfConfigureProfileFragmentToTree(pluginsToAdd))
 				.getSearchablePreferenceScreenTree(root);
 	}
 
-	private static AddEdgeToTreePredicate<PreferenceScreenWithHost, Preference> addPluginEdgesOfConfigureProfileFragmentToTree() {
+	private static AddEdgeToTreePredicate<PreferenceScreenWithHost, Preference> addPluginEdgesOfConfigureProfileFragmentToTree(final Set<String> pluginsToAdd) {
 		return new AddEdgeToTreePredicate<>() {
 
 			@Override
@@ -161,9 +182,9 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 				return true;
 			}
 
-			private static boolean isPluginPreferenceOfPreferenceScreen(final Preference preference,
-																		final PreferenceScreen preferenceScreen) {
-				return getPluginPreferences(preferenceScreen).contains(preference);
+			private boolean isPluginPreferenceOfPreferenceScreen(final Preference preference,
+																 final PreferenceScreen preferenceScreen) {
+				return pluginsToAdd.contains(preference.getKey()) && getPluginPreferences(preferenceScreen).contains(preference);
 			}
 
 			private static List<Preference> getPluginPreferences(final PreferenceScreen preferenceScreen) {
@@ -218,5 +239,19 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 		return Sets.difference(
 				new HashSet<>(ApplicationMode.allPossibleValues()),
 				Set.of(ApplicationMode.DEFAULT));
+	}
+
+	private SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter createSearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter() {
+		return new SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter(
+				ConfigureProfileFragment.class,
+				tileSourceTemplatesProvider);
+	}
+
+	private static Set<String> getPluginsToAdd(final Set<String> srcPlugins, final Set<String> targetPlugins) {
+		return Sets.difference(targetPlugins, srcPlugins);
+	}
+
+	private static Set<String> getPluginsToRemove(final Set<String> srcPlugins, final Set<String> targetPlugins) {
+		return Sets.difference(srcPlugins, targetPlugins);
 	}
 }
