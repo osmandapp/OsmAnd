@@ -41,15 +41,15 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	private final MapMarkersHelper markersHelper;
 	private final boolean portraitMode;
 
-	private final View markerContainer2nd;
-	private final ImageView arrowImg;
-	private final ImageView arrowImg2nd;
-	private final TextView distText;
-	private final TextView distText2nd;
-	private final TextView addressText;
-	private final TextView addressText2nd;
-	private final ImageButton okButton;
-	private final ImageButton okButton2nd;
+	private View markerContainer2nd;
+	private ImageView arrowImg;
+	private ImageView arrowImg2nd;
+	private TextView distText;
+	private TextView distText2nd;
+	private TextView addressText;
+	private TextView addressText2nd;
+	private ImageButton okButton;
+	private ImageButton okButton2nd;
 
 	private LatLon customLatLon;
 
@@ -63,6 +63,11 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		super(mapActivity, MARKERS_TOP_BAR, customId, panel);
 		markersHelper = app.getMapMarkersHelper();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 
 		markerContainer2nd = view.findViewById(R.id.map_markers_top_bar_2nd);
 		arrowImg = view.findViewById(R.id.map_marker_arrow);
@@ -82,6 +87,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	}
 
 	private void setupMarkersClickListeners() {
+		View view = getView();
 		View rowView = view.findViewById(R.id.map_marker_row);
 		View rowView2nd = view.findViewById(R.id.map_marker_row_2nd);
 		rowView.setOnClickListener(v -> MarkersWidgetsHelper.showMarkerOnMap(mapActivity, 0));
@@ -89,6 +95,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	}
 
 	private void setupMoreButtons() {
+		View view = getView();
 		ImageButton moreButton = view.findViewById(R.id.marker_btn_more);
 		ImageButton moreButton2nd = view.findViewById(R.id.marker_btn_more_2nd);
 
@@ -129,7 +136,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	public void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
 		List<MapMarker> markers = markersHelper.getMapMarkers();
 		int zoom = mapActivity.getMapView().getZoom();
 		if (markers.size() == 0 || zoom < 3 || shouldHide()) {
@@ -227,7 +234,6 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		addressText.setText(descr);
 	}
 
-
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
@@ -242,7 +248,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel,
 			@NonNull List<MapWidget> followingWidgets) {
 		super.attachView(container, panel, followingWidgets);
-		View bottomShadow = view.findViewById(R.id.bottom_shadow);
+		View bottomShadow = getView().findViewById(R.id.bottom_shadow);
 		AndroidUiHelper.updateVisibility(bottomShadow, followingWidgets.isEmpty());
 	}
 }

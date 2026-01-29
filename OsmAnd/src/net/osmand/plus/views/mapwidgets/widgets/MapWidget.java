@@ -4,7 +4,6 @@ import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.TextView;
 
 import androidx.annotation.*;
@@ -48,7 +47,7 @@ public abstract class MapWidget {
 	@Nullable
 	protected String customId;
 
-	protected final View view;
+	private View view;
 
 	public MapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 			@Nullable String customId, @Nullable WidgetsPanel panel) {
@@ -62,7 +61,6 @@ public abstract class MapWidget {
 		this.routingHelper = app.getRoutingHelper();
 		this.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		this.visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
-		this.view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
 
 		String id = customId != null ? customId : widgetType.id;
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
@@ -73,9 +71,23 @@ public abstract class MapWidget {
 	@LayoutRes
 	protected abstract int getLayoutId();
 
+	public void initView() {
+		if (view == null) {
+			view = getView();
+		}
+	}
+
 	@NonNull
 	public View getView() {
+		if (view == null) {
+			view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
+			setupView(view);
+		}
 		return view;
+	}
+
+	protected void setupView(@NonNull View view) {
+
 	}
 
 	@NonNull
@@ -102,15 +114,14 @@ public abstract class MapWidget {
 			@NonNull ApplicationMode appMode, @Nullable String customId) {
 	}
 
-	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel,
-			@NonNull List<MapWidget> followingWidgets) {
-		container.addView(view);
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel, @NonNull List<MapWidget> followingWidgets) {
+		container.addView(getView());
 	}
 
 	public void detachView(@NonNull WidgetsPanel widgetsPanel, @NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
-		ViewParent parent = view.getParent();
-		if (parent instanceof ViewGroup) {
-			((ViewGroup) parent).removeView(view);
+		View view = getView();
+		if (view.getParent() instanceof ViewGroup viewGroup) {
+			viewGroup.removeView(view);
 		}
 	}
 
@@ -133,19 +144,21 @@ public abstract class MapWidget {
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		// Not implemented
+		updateInfo(getView(), drawSettings);
 	}
+
+	protected abstract void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings);
 
 	public void updateColors(@NonNull TextState textState) {
 		nightMode = textState.night;
 	}
 
 	protected boolean updateVisibility(boolean visible) {
-		return AndroidUiHelper.updateVisibility(view, visible);
+		return AndroidUiHelper.updateVisibility(getView(), visible);
 	}
 
 	public boolean isViewVisible() {
-		return view.getVisibility() == View.VISIBLE;
+		return getView().getVisibility() == View.VISIBLE;
 	}
 
 	protected void setPanel(@NonNull WidgetsPanel panel) {

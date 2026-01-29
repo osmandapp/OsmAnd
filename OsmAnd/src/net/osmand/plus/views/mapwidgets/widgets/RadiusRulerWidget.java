@@ -36,6 +36,11 @@ public class RadiusRulerWidget extends SimpleWidget {
 		cachedRadiusRulerMode = settings.RADIUS_RULER_MODE.get();
 
 		updateIcons();
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		setText(NO_VALUE, null);
 	}
 

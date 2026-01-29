@@ -21,6 +21,8 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
+import org.jetbrains.annotations.NotNull;
+
 public class TripRecordingTimeWidget extends SimpleWidget {
 
 	private final SavingTrackHelper savingTrackHelper;
@@ -30,7 +32,11 @@ public class TripRecordingTimeWidget extends SimpleWidget {
 	public TripRecordingTimeWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, TRIP_RECORDING_TIME, customId, widgetsPanel);
 		savingTrackHelper = app.getSavingTrackHelper();
+	}
 
+	@Override
+	protected void setupView(@NonNull @NotNull View view) {
+		super.setupView(view);
 		setIcons(TRIP_RECORDING_TIME);
 		updateInfo(null);
 	}

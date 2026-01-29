@@ -2,6 +2,8 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -23,7 +25,11 @@ public class MaxSpeedWidget extends SimpleWidget {
 	public MaxSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, MAX_SPEED, customId, widgetsPanel);
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
+	}
 
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		setIcons(MAX_SPEED);
 		setText(null, null);
 	}
