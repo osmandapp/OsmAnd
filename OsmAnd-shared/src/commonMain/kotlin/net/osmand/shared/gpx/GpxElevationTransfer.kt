@@ -4,22 +4,22 @@ import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
 
-class GpxElevationMerger(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: GpxFile) {
+class GpxElevationTransfer(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: GpxFile) {
     private var nTargetPoints = 0
-    private var nExactPoints = 0
+    private var nOriginalPoints = 0
     private var nInterpolatedPoints = 0
-    private val exactLatLonPrecision = 0.0001 // ~11m
+    private val originalLatLonPrecision = 0.0001 // ~11m
 
     private val src: GpxFile = readOnlySourceGpxFile
     private val target: GpxFile = mutableTargetGpxFile
     private var targetMutablePoints: List<WptPt> = mutableListOf()
     private val elevationPoints: MutableMap<Long, Double> = HashMap()
 
-    private val log = LoggerFactory.getLogger("GpxElevationMerger")
+    private val log = LoggerFactory.getLogger("GpxElevationTransfer")
 
-    fun merge(): Boolean {
+    fun transfer(): Boolean {
         nTargetPoints = 0
-        nExactPoints = 0
+        nOriginalPoints = 0
         nInterpolatedPoints = 0
         elevationPoints.clear()
 
@@ -29,7 +29,7 @@ class GpxElevationMerger(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: G
         mutateTargetPoints()
         ensureTargetSegments()
         interpolateTargetGaps()
-        log.info("XXX GpxElevationMerger: exact=$nExactPoints interpolated=$nInterpolatedPoints")
+        log.info("XXX GpxElevationTransfer: original=$nOriginalPoints interpolated=$nInterpolatedPoints")
 
         return nResolvedPoints() > 0
     }
@@ -37,7 +37,7 @@ class GpxElevationMerger(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: G
     private fun calcSourceElevationPoints() {
         for (wpt in src.getAllSegmentsPoints()) {
             if (!wpt.ele.isNaN() && wpt.hasLocation()) {
-                elevationPoints.put(calcPointId(wpt, exactLatLonPrecision), wpt.ele)
+                elevationPoints.put(calcPointId(wpt, originalLatLonPrecision), wpt.ele)
             }
         }
     }
@@ -51,10 +51,10 @@ class GpxElevationMerger(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: G
                 continue
             }
             nTargetPoints++
-            val srcElevationExact = elevationPoints.get(calcPointId(wpt, exactLatLonPrecision))
-            if (srcElevationExact != null) {
-                wpt.ele = srcElevationExact
-                nExactPoints++
+            val originalElevation = elevationPoints.get(calcPointId(wpt, originalLatLonPrecision))
+            if (originalElevation != null) {
+                wpt.ele = originalElevation
+                nOriginalPoints++
                 continue
             }
         }
@@ -146,7 +146,7 @@ class GpxElevationMerger(readOnlySourceGpxFile: GpxFile, mutableTargetGpxFile: G
     }
 
     private fun nResolvedPoints(): Int {
-        return nExactPoints + nInterpolatedPoints
+        return nOriginalPoints + nInterpolatedPoints
     }
 
     private fun calcPointId(wpt: WptPt, precision: Double): Long {

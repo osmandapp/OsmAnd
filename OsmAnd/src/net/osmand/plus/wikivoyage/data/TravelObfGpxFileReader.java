@@ -126,7 +126,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                                                        @NonNull HeightDataLoader.Cancellable isCancelled) {
         // TODO pedestrian (default) / bicycle profile depends on activity type?
         // TODO GpxMultiSegmentsApproximation
-        // TODO GpxElevationMerger
+        // TODO GpxElevationTransfer
     }
 
     @Override
