@@ -31,8 +31,6 @@ import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import com.google.common.collect.Sets;
-
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -47,6 +45,8 @@ import org.junit.runner.RunWith;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import de.KnollFrank.lib.settingssearch.common.Sets;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)

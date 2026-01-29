@@ -7,7 +7,6 @@ import androidx.annotation.IdRes;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
-import com.google.common.collect.Sets;
 import com.google.common.graph.ImmutableValueGraph;
 
 import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
@@ -22,6 +21,7 @@ import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.common.Classes;
+import de.KnollFrank.lib.settingssearch.common.Sets;
 import de.KnollFrank.lib.settingssearch.common.Views;
 import de.KnollFrank.lib.settingssearch.common.graph.Subtree;
 import de.KnollFrank.lib.settingssearch.common.graph.SubtreeReplacer;
