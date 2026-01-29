@@ -5979,4 +5979,9 @@
     <string name="show_expand_button">Zobraziť tlačidlo na rozbalenie</string>
     <string name="imprecise_coordinates">Nepresné súradnice</string>
     <string name="lang_mi">Maorčina</string>
+    <string name="backup_deleted_all_data">Údaje boli odstránené.</string>
+    <string name="backup_deleting_all_data">Odstraňujú sa údaje…</string>
+    <string name="galactic_line">Galaktická rovina</string>
+    <string name="meridian_line">Poludníkové čiary</string>
+    <string name="equator_line">Rovník</string>
 </resources>
