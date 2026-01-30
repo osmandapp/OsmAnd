@@ -2900,8 +2900,8 @@
     <string name="edit_profile_setup_map_subtitle">Veldu valkosti landakorts fyrir sniðið</string>
     <string name="edit_profile_screen_options_subtitle">Veldu valkosti skjás fyrir sniðið</string>
     <string name="edit_profile_nav_settings_subtitle">Veldu valkosti leiðsagnar fyrir sniðið</string>
-    <string name="routing_attr_max_num_changes_description">Tilgreindu efri mörk á fjölda breytinga</string>
-    <string name="routing_attr_max_num_changes_name">Fjöldi breytinga</string>
+    <string name="routing_attr_max_num_changes_description">Tilgreindu efri mörk á fjölda breytinga á flutningum</string>
+    <string name="routing_attr_max_num_changes_name">Hámarksfjöldi breytinga á flutningum</string>
     <string name="release_3_4">• Forritasnið: útbúðu þín eigin snið fyrir þínar þarfir, með sérniðnum táknmyndum og litum \n \n • Nú er hægt að sérsníða í öllum sniðum jafnt sjálfgefinn hraða sem hámarks-/lágmarkshraða \n \n • Viðmótshluti með fyrirliggjandi hnitum \n \n • Bætt við valkosti til að birta áttavita og vegalengdarradíus á korti \n \n • Lagfærð ferilskráning í bakgrunni \n \n • Lagfært niðurhal korta í bakgrunni \n \n • Valkosturinn \'Kveikja á skjá\' kemur aftur inn \n \n • Lagfært val á tungumálum Wikipedia \n \n • Lagfærð hegðun áttavitahnapps við leiðsögn \n \n • Aðrir lagfærðir gallar</string>
     <string name="turn_screen_on_router">Vekja við beygjur</string>
     <string name="turn_screen_on_time_descr">Skilgreindu þann tíma sem kveikt er á skjánum.</string>
@@ -4614,7 +4614,7 @@
     <string name="open_weather_action">Opna veður</string>
     <string name="map_markers_bar_widget_desc">Viðmótshluti toppstikunnar birtir vegalengd og stefnu að næsta kortamerki miðað við fyrirliggjandi staðsetningu þína. Hægt er að stilla viðmótshlutann á að birta eitt eða tvö kortamerki.</string>
     <string name="external_sensors_plugin_description">Sækir gögn frá utanaðkomandi skynjurum til að lesa t.d. hraða reiðhjóls, afl við hjólreiðar, takt og hjartslátt. Krefst þess að tækið þitt sé tengt við viðkomandi skynjara með samskiptamáta fyrir þráðlaus ANT+ einkanet.</string>
-    <string name="map_rendering_engine_descr">Myndgerð í útgáfu 1 var sjálfgefin allt að OsmAnd útgáfu 4.3 og er enn sú besta fyrir eldri tæki.\nÚtgáfa 2 (OpenGL) er öflug myndgerðarvél fyrir landakort, sem býður einnig upp á 2.5D-sýn.</string>
+    <string name="map_rendering_engine_descr">Myndgerð í útgáfu 1 var sjálfgefin allt að OsmAnd útgáfu 4.3 og er enn sú besta fyrir eldri tæki.\n\nÚtgáfa 2 (OpenGL) er öflug myndgerðarvél fyrir landakort, sem býður einnig upp á 2.5D-sýn.</string>
     <string name="weather_plugin_description">Gefur kost á\n- 24-stunda og 7-daga veðurspá með 5 gagnaþekjum\n- staðarháðum viðmótshlutum\n- hitastigs- / loftþrýstingslínum\n\nVeðurgögnin koma frá Global Forecast System (GFS, %1$s).</string>
     <string name="distance_by_tap_use_description">Ýttu á kortið til að sjá vegalengdina milli fyrirliggjandi staðsetningar þinnar og punktsins sem þú ýttir á.
 \nÝttu á kortið með 2 fingrum til að sjá vegalengdina milli punktanna sem þú ýttir á</string>
@@ -5885,4 +5885,8 @@
     <string name="lang_crh">Tataríska frá Krím (latnesk)</string>
     <string name="deleted_maps_prompt">Ekki er lengur stuðningur við þessi kort og hefur þeim verið skipt út fyrir smærri svæði. Fjarlægðu þau og sæktu nýju útgáfurnar.</string>
     <string name="release_5_0">• Finndu vinsæla merkisstaði með nýja uppgötvunarhamnum\n\n • Allar OSM-leiðir eru núna leitanlegar! Ganga, hjólreiðar, fjallahjól og fleira\n\n • Nýr leiðsagnarhluti sameinar beygjuörvar og leiðbeiningar\n\n • Núverandi viðmótshluti vegupplýsinga: Birtir ETA, komutíma og vegalengd\n\n • Veldu skíða- og and fjallahjólaleiðir á kortinu til að fá nákvæmar upplýsingar\n\n • Hægt að velja stærð viðmótshluta fyrir vinstri og hægri spjöld\n\n • Bætt við hnitamöskva með landfræðilegum hnitum\n\n • Bætt við möguleika á að sérsníða sjálfgefið útlit eftirlætishópa\n\n • Android Auto: skoða áætlaðan komutíma (ETA) og vegalengd að næsta ferilpunkti; nöfn borga birtast núna í leitarniðurstöðum\n\n • Hægt að finna staka fjallstinda á korti og með leit\n\n • Hæðir fjallatinda í fetum\n\n • Bætt við: Klettar og klifursvæði á kortinu\n\n • Leit að heimilisföngum í BNA hefur verið bætt\n\n • Bætt við TTS fyrir hebresku í raddleiðsögn</string>
+    <string name="show_spherical_map">Kúlulaga hnattkort</string>
+    <string name="enable_3d_objects">Þrívíddarbyggingar</string>
+    <string name="backup_deleted_all_data">Eyddi gögnum.</string>
+    <string name="backup_deleting_all_data">Eyði gögnum…</string>
 </resources>
