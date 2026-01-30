@@ -105,6 +105,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     private final TravelHelper.GpxReadCallback callback;
     private final List<AmenityIndexRepository> repos;
     private final RuleBasedCollator icuNumericCollator;
+    private GpxApproximationHelper gpxApproximationHelper;
 
     public TravelObfGpxFileReader(@NonNull MapActivity mapActivity,
                                   @NonNull TravelArticle article,
@@ -117,6 +118,13 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         this.setShouldShowProgress(article instanceof TravelGpx);
         this.icuNumericCollator = (RuleBasedCollator) Collator.getInstance(Locale.ROOT);
         icuNumericCollator.setNumericCollation(true);
+    }
+
+    @Override
+    protected void onDialogCancelled() {
+        if (gpxApproximationHelper != null) {
+            gpxApproximationHelper.cancelApproximationIfPossible();
+        }
     }
 
     @Override
@@ -133,29 +141,9 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     protected GpxFile doInBackground(Void... voids) {
         GpxFile result = buildGpxFile(repos, article, this::isCancelled);
         if (result != null && article instanceof TravelGpx) {
-            acquireGpxFileHeightData(result, this::isCancelled);
+            acquireGpxFileHeightData(result);
         }
         return result;
-    }
-
-    private synchronized void acquireGpxFileHeightData(@NonNull GpxFile targetGpxFile,
-                                                       @NonNull HeightDataLoader.Cancellable isCancelled) {
-
-        // TODO support isCancelled during approximation process
-
-        Metadata metadata = targetGpxFile.getMetadata();
-        RouteActivityHelper routeActivityHelper = app.getRouteActivityHelper();
-        RouteActivity routeActivity = metadata.getRouteActivity(routeActivityHelper.getActivities());
-
-        if (routeActivity != null) {
-            ApplicationMode mode = HEIGHT_APPROXIMATION_PROFILES.get(routeActivity.getGroup().getId());
-            if (mode != null) {
-                GpxApproximationParams params = new GpxApproximationParams();
-                params.setAppMode(mode);
-                GpxFile approximatedGpxFile = GpxApproximationHelper.approximateGpxSync(app, targetGpxFile, params);
-                new GpxElevationTransfer(approximatedGpxFile, targetGpxFile).transfer();
-            }
-        }
     }
 
     @Override
@@ -166,6 +154,24 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             callback.onGpxFileRead(gpxFile);
         }
         hideProgress();
+    }
+
+    private synchronized void acquireGpxFileHeightData(@NonNull GpxFile targetGpxFile) {
+        Metadata metadata = targetGpxFile.getMetadata();
+        RouteActivityHelper routeActivityHelper = app.getRouteActivityHelper();
+        RouteActivity routeActivity = metadata.getRouteActivity(routeActivityHelper.getActivities());
+
+        if (routeActivity != null) {
+            ApplicationMode mode = HEIGHT_APPROXIMATION_PROFILES.get(routeActivity.getGroup().getId());
+            if (mode != null) {
+                GpxApproximationParams params = new GpxApproximationParams();
+                params.setAppMode(mode);
+                gpxApproximationHelper = new GpxApproximationHelper(app, params);
+                GpxFile approximatedGpxFile = GpxApproximationHelper
+                        .approximateGpxSync(app, targetGpxFile, params, gpxApproximationHelper);
+                new GpxElevationTransfer(approximatedGpxFile, targetGpxFile).transfer();
+            }
+        }
     }
 
     @Nullable
