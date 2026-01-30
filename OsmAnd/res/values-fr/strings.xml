@@ -2509,7 +2509,7 @@
     <string name="start_editing_card_description">Vous pouvez contribuer aux articles sur Wikivoyage et ainsi partager vos connaissances, vos expériences et votre talent.</string>
     <string name="start_editing">Démarrer les modifications</string>
     <string name="get_unlimited_access">Obtenir un accès illimité</string>
-    <string name="welcome_to_open_beta">Bienvenue dans cette bêta publique</string>
+    <string name="welcome_to_open_beta">Bienvenue dans cette version bêta</string>
     <string name="download_wikipedia_description">Télécharger les articles Wikipédia pour %1$s afin de pouvoir les lire hors ligne.</string>
     <string name="open_in_browser_wiki">Ouvrir l\'article en ligne</string>
     <string name="open_in_browser_wiki_description">Afficher l\'article dans un navigateur.</string>
@@ -5817,7 +5817,7 @@
     <string name="has_vehicle_metrics">Avec les données OBDII</string>
     <string name="show_expand_button">Afficher le bouton Développer</string>
     <string name="imprecise_coordinates">Coordonnées imprécises</string>
-    <string name="star_watcher_plugin_name">Observateur d\'étoiles (bêta)</string>
+    <string name="star_watcher_plugin_name">Observateur d\'étoiles</string>
     <string name="star_watcher_plugin_description">Cartes stellaires, carte du ciel en 3D</string>
     <string name="star_map">Carte du ciel</string>
     <string name="star_charts_name">Cartes stellaires</string>
