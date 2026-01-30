@@ -179,7 +179,7 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 							edge.value(),
 							edge.endpointPair().source().preferenceScreen());
 				}
-				return true;
+				return false;
 			}
 
 			private boolean isPluginPreferenceOfPreferenceScreen(final Preference preference,
