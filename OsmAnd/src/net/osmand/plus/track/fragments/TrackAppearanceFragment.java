@@ -50,9 +50,7 @@ import net.osmand.plus.card.base.headed.HeadedContentCard;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
-import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
-import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.configmap.MapOptionSliderFragment.MapOptionSliderListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -88,6 +86,8 @@ import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.io.KFile;
+import net.osmand.shared.palette.data.PaletteUtils;
+import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.routing.ColoringType;
 
 import java.util.ArrayList;
@@ -439,7 +439,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				TrackColorController colorController = getColorCardController();
 				colorController.askSelectColoringStyle(trackDrawInfo.getColoringStyle());
 
-				colorController.getColorsPaletteController().selectColor(trackDrawInfo.getColor());
+				Integer color = trackDrawInfo.getColor();
+				if (color != null) {
+					colorController.getColorsPaletteController().selectPaletteItem(color, false);
+				}
 
 				WidthComponentController widthController = getWidthCardController().getWidthComponentController();
 				widthController.askSelectWidthMode(trackDrawInfo.getWidth());
@@ -470,28 +473,28 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private void updateGradientPalette(@NonNull ColoringStyle coloringStyle) {
 		if (coloringStyle.getType().isGradient() && gpxDataItem != null) {
 			ColoringType coloringType = ColoringType.Companion.requireValueOf(ColoringPurpose.TRACK, gpxDataItem.getParameter(COLORING_TYPE));
-			trackDrawInfo.setGradientColorName(coloringStyle.getType() == coloringType ? gpxDataItem.getParameter(COLOR_PALETTE) : PaletteGradientColor.DEFAULT_NAME);
+			trackDrawInfo.setGradientColorName(coloringStyle.getType() == coloringType ? gpxDataItem.getParameter(COLOR_PALETTE) : PaletteUtils.DEFAULT_NAME);
 		} else {
-			trackDrawInfo.setGradientColorName(PaletteGradientColor.DEFAULT_NAME);
+			trackDrawInfo.setGradientColorName(PaletteUtils.DEFAULT_NAME);
 		}
 	}
 
 	@Override
-	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		if (paletteColor instanceof PaletteGradientColor paletteGradientColor) {
-			trackDrawInfo.setGradientColorName(paletteGradientColor.getPaletteName());
+	public void onPaletteItemSelected(@NonNull PaletteItem item) {
+		if (item instanceof PaletteItem.Gradient gradient) {
+			trackDrawInfo.setGradientColorName(gradient.getPaletteName());
 			refreshMap();
-		} else {
-			trackDrawInfo.setColor(paletteColor.getColor());
-			trackDrawInfo.setGradientColorName(PaletteGradientColor.DEFAULT_NAME);
+		} else if (item instanceof PaletteItem.Solid solid) {
+			trackDrawInfo.setColor(solid.getColor());
+			trackDrawInfo.setGradientColorName(PaletteUtils.DEFAULT_NAME);
 			updateColorItems();
 		}
 	}
 
 	@Override
-	public void onColorAddedToPalette(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
-		if (oldColor != null) {
-			TrackColorController.saveCustomColorsToTracks(app, oldColor.getColor(), newColor.getColor());
+	public void onPaletteItemAdded(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
+		if (oldItem instanceof PaletteItem.Solid oldSolid && newItem instanceof PaletteItem.Solid newSolid) {
+			TrackColorController.saveCustomColorsToTracks(app, oldSolid.getColor(), newSolid.getColor());
 		}
 		updateColorItems();
 	}

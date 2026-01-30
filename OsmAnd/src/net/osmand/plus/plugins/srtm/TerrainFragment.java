@@ -176,7 +176,7 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		ColorPalette colorPalette = app.getColorPaletteHelper().getGradientColorPaletteSync(mode.getMainFileName());
 		if (colorPalette != null) {
 			AndroidUiHelper.updateVisibility(gradientChart, true);
-			IAxisValueFormatter formatter = GradientUiHelper.getGradientTypeFormatter(app, mode.getType(), null);
+			IAxisValueFormatter formatter = GradientUiHelper.getGradientTypeFormatter(app, mode.getType().toPaletteCategory(), null);
 			LineData barData = ChartUtils.buildGradientChart(app, gradientChart, colorPalette, formatter, nightMode);
 
 			gradientChart.setData(barData);

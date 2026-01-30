@@ -54,7 +54,7 @@ enum class PaletteFileType(
 	// --- Terrain / Map Data ---
 
 	TERRAIN_ALTITUDE(
-		filePrefix = "height_altitude_",
+		filePrefix = "height_",
 		category = PaletteCategory.TERRAIN_ALTITUDE,
 		useFixedValues = true
 	),

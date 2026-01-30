@@ -26,8 +26,6 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
-import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -35,7 +33,9 @@ import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.ColorPalette.ColorValue;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.routing.RouteColorize.ColorizationType;
+import net.osmand.shared.palette.domain.PaletteCategory;
+import net.osmand.shared.palette.domain.PaletteItem;
+import net.osmand.util.CollectionUtils;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -52,13 +52,13 @@ public class GradientUiHelper {
 		themedInflater = UiUtilities.getInflater(context, nightMode);
 	}
 
-	public void updateColorItemView(@NonNull View view, @NonNull PaletteColor paletteColor, boolean showOutline) {
+	public void updateColorItemView(@NonNull View view, @NonNull PaletteItem paletteItem, boolean showOutline) {
 		ImageView icon = view.findViewById(R.id.icon);
 		AppCompatImageView background = view.findViewById(R.id.background);
 		AppCompatImageView outline = view.findViewById(R.id.outline);
 
-		if (paletteColor instanceof PaletteGradientColor gradientColor) {
-			List<ColorValue> colors = gradientColor.getColorPalette().getColors();
+		if (paletteItem instanceof PaletteItem.Gradient gradient) {
+			List<ColorValue> colors = gradient.getColorPalette().getColors();
 			background.setImageDrawable(getGradientDrawable(app, colors, RECTANGLE));
 		}
 
@@ -109,68 +109,61 @@ public class GradientUiHelper {
 		return formattedValue;
 	}
 
+	// TODO: extract and improve code
 	@NonNull
-	public static IAxisValueFormatter getGradientTypeFormatter(@NonNull OsmandApplication app, @NonNull Object gradientType, @Nullable GpxTrackAnalysis analysis) {
-		if (gradientType instanceof TerrainType) {
-			return getTerrainTypeFormatter(app, (TerrainType) gradientType);
-		}
-		return getColorizationTypeFormatter(app, (ColorizationType) gradientType, analysis);
-	}
-
-	@NonNull
-	private static IAxisValueFormatter getTerrainTypeFormatter(@NonNull OsmandApplication app, @NonNull TerrainType terrainType) {
+	public static IAxisValueFormatter getGradientTypeFormatter(@NonNull OsmandApplication app,
+	                                                           @NonNull PaletteCategory paletteCategory,
+	                                                           @Nullable GpxTrackAnalysis analysis) {
 		return (value, axis) -> {
 			boolean shouldShowUnit = axis.mEntries.length >= 1 && axis.mEntries[0] == value;
-			String stringValue = GradientUiHelper.formatTerrainTypeValues(value);
-			String typeValue = "";
-			switch (terrainType) {
-				case SLOPE:
-					typeValue = "°";
-					break;
-				case HEIGHT:
-					FormattedValue formattedValue = OsmAndFormatter.getFormattedAltitudeValue(value, app, app.getSettings().ALTITUDE_METRIC.get());
-					stringValue = formattedValue.value;
-					typeValue = formattedValue.unit;
-					break;
-			}
-			return shouldShowUnit ? app.getString(R.string.ltr_or_rtl_combine_via_space, stringValue, typeValue) : stringValue;
-		};
-	}
-
-	private static IAxisValueFormatter getColorizationTypeFormatter(@NonNull OsmandApplication app, @NonNull ColorizationType colorizationType, @Nullable GpxTrackAnalysis analysis) {
-		return (value, axis) -> {
-			boolean shouldShowUnit = axis.mEntries.length >= 1 && axis.mEntries[0] == value;
-			String stringValue = formatValue(value, 100);
-			String type = "%";
-			FormattedValue formattedValue;
-			switch (colorizationType) {
-				case SPEED:
-					if (analysis != null && analysis.getMaxSpeed() != 0) {
-						type = app.getSettings().SPEED_SYSTEM.getModeValue(app.getSettings().getApplicationMode()).toShortString();
-						stringValue = formatValue(value, analysis.getMaxSpeed());
-					}
-					break;
-				case ELEVATION:
-					if (analysis != null) {
-						float calculatedValue;
-						float minElevation = (float) analysis.getMinElevation();
-						float maxElevation = (float) analysis.getMaxElevation() + MAX_ALTITUDE_ADDITION;
-						if (minElevation != (double) MIN_ELEVATION.getDefaultValue() && maxElevation != (double) MAX_ELEVATION.getDefaultValue()) {
-							if (value == 0) {
-								calculatedValue = minElevation;
-							} else {
-								calculatedValue = minElevation + (value * ((maxElevation - minElevation)));
-							}
-						} else {
-							break;
-						}
-						formattedValue = OsmAndFormatter.getFormattedAltitudeValue(calculatedValue, app, app.getSettings().ALTITUDE_METRIC.get());
+			if (CollectionUtils.equalsToAny(paletteCategory, PaletteCategory.TERRAIN_SLOPE,
+					PaletteCategory.TERRAIN_ALTITUDE, PaletteCategory.TERRAIN_HILLSHADE)) {
+				String stringValue = GradientUiHelper.formatTerrainTypeValues(value);
+				String typeValue = "";
+				switch (paletteCategory) {
+					case TERRAIN_SLOPE:
+						typeValue = "°";
+						break;
+					case TERRAIN_ALTITUDE:
+						FormattedValue formattedValue = OsmAndFormatter.getFormattedAltitudeValue(value, app, app.getSettings().ALTITUDE_METRIC.get());
 						stringValue = formattedValue.value;
-						type = formattedValue.unit;
-					}
-					break;
+						typeValue = formattedValue.unit;
+						break;
+				}
+				return shouldShowUnit ? app.getString(R.string.ltr_or_rtl_combine_via_space, stringValue, typeValue) : stringValue;
+			} else {
+				String stringValue = formatValue(value, 100);
+				String type = "%";
+				FormattedValue formattedValue;
+				switch (paletteCategory) {
+					case SPEED:
+						if (analysis != null && analysis.getMaxSpeed() != 0) {
+							type = app.getSettings().SPEED_SYSTEM.getModeValue(app.getSettings().getApplicationMode()).toShortString();
+							stringValue = formatValue(value, analysis.getMaxSpeed());
+						}
+						break;
+					case ALTITUDE:
+						if (analysis != null) {
+							float calculatedValue;
+							float minElevation = (float) analysis.getMinElevation();
+							float maxElevation = (float) analysis.getMaxElevation() + MAX_ALTITUDE_ADDITION;
+							if (minElevation != (double) MIN_ELEVATION.getDefaultValue() && maxElevation != (double) MAX_ELEVATION.getDefaultValue()) {
+								if (value == 0) {
+									calculatedValue = minElevation;
+								} else {
+									calculatedValue = minElevation + (value * ((maxElevation - minElevation)));
+								}
+							} else {
+								break;
+							}
+							formattedValue = OsmAndFormatter.getFormattedAltitudeValue(calculatedValue, app, app.getSettings().ALTITUDE_METRIC.get());
+							stringValue = formattedValue.value;
+							type = formattedValue.unit;
+						}
+						break;
+				}
+				return shouldShowUnit ? app.getString(R.string.ltr_or_rtl_combine_via_space, stringValue, type) : stringValue;
 			}
-			return shouldShowUnit ? app.getString(R.string.ltr_or_rtl_combine_via_space, stringValue, type) : stringValue;
 		};
 	}
 

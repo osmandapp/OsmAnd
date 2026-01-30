@@ -13,7 +13,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.mapcontextmenu.editors.FavoriteShapesCardController;
@@ -23,6 +22,7 @@ import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData.CustomDropDown;
+import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.routing.ColoringType;
 
 public class FavoriteAppearanceController implements IDialogController, IColorCardControllerListener, CardListener, OnIconsPaletteListener<String> {
@@ -104,8 +104,10 @@ public class FavoriteAppearanceController implements IDialogController, IColorCa
 	}
 
 	@Override
-	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		setColor(paletteColor.getColor());
+	public void onPaletteItemSelected(@NonNull PaletteItem item) {
+		if (item instanceof PaletteItem.Solid solidItem) {
+			setColor(solidItem.getColor());
+		}
 	}
 
 	@Override

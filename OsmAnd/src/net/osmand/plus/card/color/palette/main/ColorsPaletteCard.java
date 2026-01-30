@@ -10,11 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.v2.ColorsPaletteAdapter;
+import net.osmand.plus.card.color.palette.main.v2.IColorsPalette;
+import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.HorizontalSpaceItemDecoration;
+import net.osmand.shared.palette.domain.PaletteItem;
 
 public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 
@@ -48,7 +51,7 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 		setupColorsPalette();
 		setupAddCustomColorButton();
 		setupAllColorsButton();
-		askScrollToTargetColorPosition(controller.getSelectedColor(), false);
+		askScrollToTargetColorPosition(controller.getSelectedPaletteItem(), false);
 	}
 
 	private void setupColorsPalette() {
@@ -72,10 +75,10 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 	}
 
 	@Override
-	public void updatePaletteColors(@Nullable PaletteColor targetPaletteColor) {
-		paletteAdapter.updateColorsList();
-		if (targetPaletteColor != null) {
-			askScrollToTargetColorPosition(targetPaletteColor, true);
+	public void updatePaletteItems(@Nullable PaletteItem targetItem) {
+		paletteAdapter.updateItemsList();
+		if (targetItem != null) {
+			askScrollToTargetColorPosition(targetItem, true);
 		}
 		if (controller.isAccentColorCanBeChanged()) {
 			updateAllColorsButton();
@@ -83,10 +86,10 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 	}
 
 	@Override
-	public void updatePaletteSelection(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
-		paletteAdapter.askNotifyItemChanged(oldColor);
-		paletteAdapter.askNotifyItemChanged(newColor);
-		askScrollToTargetColorPosition(newColor, true);
+	public void updatePaletteSelection(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
+		paletteAdapter.askNotifyItemChanged(oldItem);
+		paletteAdapter.askNotifyItemChanged(newItem);
+		askScrollToTargetColorPosition(newItem, true);
 		if (controller.isAccentColorCanBeChanged()) {
 			updateAllColorsButton();
 		}
@@ -98,12 +101,12 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 		UiUtilities.setupListItemBackground(activity, buttonAllColors, controlsAccentColor);
 	}
 
-	private void askScrollToTargetColorPosition(@Nullable PaletteColor targetPaletteColor,
+	private void askScrollToTargetColorPosition(@Nullable PaletteItem targetItem,
 	                                            boolean useSmoothScroll) {
-		if (targetPaletteColor == null) {
+		if (targetItem == null) {
 			return;
 		}
-		int targetPosition = paletteAdapter.indexOf(targetPaletteColor);
+		int targetPosition = paletteAdapter.indexOf(targetItem);
 		LinearLayoutManager lm = (LinearLayoutManager) rvColors.getLayoutManager();
 		int firstVisiblePosition = lm != null ? lm.findFirstCompletelyVisibleItemPosition() : 0;
 		int lastVisiblePosition = lm != null ? lm.findLastCompletelyVisibleItemPosition() : paletteAdapter.getItemCount();

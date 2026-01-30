@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.shared.palette.domain.PaletteCategory;
 import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.Nullable;
@@ -48,6 +49,16 @@ public class TerrainMode {
 		@NonNull
 		public String getName(@NonNull Context ctx) {
 			return ctx.getString(nameRes);
+		}
+
+		// TODO: extract
+		@NonNull
+		public PaletteCategory toPaletteCategory() {
+			return switch (this) {
+				case SLOPE -> PaletteCategory.TERRAIN_SLOPE;
+				case HILLSHADE -> PaletteCategory.TERRAIN_HILLSHADE;
+				case HEIGHT -> PaletteCategory.TERRAIN_ALTITUDE;
+			};
 		}
 	}
 

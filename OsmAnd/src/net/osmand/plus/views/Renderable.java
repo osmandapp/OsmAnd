@@ -14,7 +14,6 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.track.Track3DStyle;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
@@ -23,6 +22,7 @@ import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.palette.data.PaletteUtils;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -88,7 +88,7 @@ public class Renderable {
 
         @NonNull
         protected ColoringType coloringType = ColoringType.TRACK_SOLID;
-        protected String gradientColorPalette = PaletteGradientColor.DEFAULT_NAME;
+        protected String gradientColorPalette = PaletteUtils.DEFAULT_NAME;
         protected String routeInfoAttribute;
 
         protected GpxGeometryWay geometryWay;

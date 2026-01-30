@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Deprecated
 public class ColorPaletteHelper {
 
 	public static final String ROUTE_PREFIX = "route_";

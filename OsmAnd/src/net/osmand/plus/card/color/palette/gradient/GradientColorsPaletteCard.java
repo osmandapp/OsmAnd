@@ -12,8 +12,9 @@ import com.github.mikephil.charting.charts.GradientChart;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.main.IColorsPalette;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteAdapter;
+import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.IColorsPalette;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
@@ -21,6 +22,8 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.HorizontalSpaceItemDecoration;
 import net.osmand.shared.ColorPalette;
+import net.osmand.shared.palette.domain.PaletteCategory;
+import net.osmand.shared.palette.domain.PaletteItem;
 
 public class GradientColorsPaletteCard extends BaseCard implements IColorsPalette {
 
@@ -59,23 +62,27 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 
 	private void updateCard() {
 		setupAllColorsButton();
-		askScrollToTargetColorPosition(controller.getSelectedColor(), false);
+		askScrollToTargetColorPosition(controller.getSelectedPaletteItem(), false);
 		updateChart();
 	}
 
 	private void updateChart() {
-		if (!(controller.selectedPaletteColor instanceof PaletteGradientColor)) {
+		PaletteItem item = controller.getSelectedPaletteItem();
+		if (!(item instanceof PaletteItem.Gradient gradientItem)) {
 			return;
 		}
-		ColorPalette colorPalette = ((PaletteGradientColor) controller.selectedPaletteColor).getColorPalette();
+
+		ColorPalette colorPalette = gradientItem.getColorPalette();
 		GradientChart chart = view.findViewById(R.id.chart);
 
 		int labelsColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int xAxisGridColor = AndroidUtils.getColorFromAttr(app, R.attr.chart_x_grid_line_axis_color);
 
 		ChartUtils.setupGradientChart(app, chart, 9, 24, false, xAxisGridColor, labelsColor);
-		Object gradientType = controller.gradientCollection.getGradientType();
-		IAxisValueFormatter formatter = GradientUiHelper.getGradientTypeFormatter(app, gradientType, controller.analysis);
+
+		// TODO: create and use GradientPaletteCategory
+		PaletteCategory paletteCategory = gradientItem.getPaletteCategory();
+		IAxisValueFormatter formatter = GradientUiHelper.getGradientTypeFormatter(app, paletteCategory, controller.getAnalysis());
 
 		chart.setData(ChartUtils.buildGradientChart(app, chart, colorPalette, formatter, nightMode));
 		chart.notifyDataSetChanged();
@@ -102,17 +109,17 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 		UiUtilities.setupListItemBackground(activity, buttonAllColors, controlsAccentColor);
 	}
 
-	private void askScrollToTargetColorPosition(@Nullable PaletteColor targetPaletteColor,
-	                                            boolean useSmoothScroll) {
-		if (targetPaletteColor == null) {
+	private void askScrollToTargetColorPosition(@Nullable PaletteItem targetItem,
+	                                            boolean smoothScroll) {
+		if (targetItem == null) {
 			return;
 		}
-		int targetPosition = paletteAdapter.indexOf(targetPaletteColor);
+		int targetPosition = paletteAdapter.indexOf(targetItem);
 		LinearLayoutManager lm = (LinearLayoutManager) rvColors.getLayoutManager();
 		int firstVisiblePosition = lm != null ? lm.findFirstCompletelyVisibleItemPosition() : 0;
 		int lastVisiblePosition = lm != null ? lm.findLastCompletelyVisibleItemPosition() : paletteAdapter.getItemCount();
 		if (targetPosition < firstVisiblePosition || targetPosition > lastVisiblePosition) {
-			if (useSmoothScroll) {
+			if (smoothScroll) {
 				rvColors.smoothScrollToPosition(targetPosition);
 			} else {
 				rvColors.scrollToPosition(targetPosition);
@@ -121,16 +128,16 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 	}
 
 	@Override
-	public void updatePaletteColors(@Nullable PaletteColor targetPaletteColor) {
+	public void updatePaletteItems(@Nullable PaletteItem targetItem) {
 		updateCard();
-		paletteAdapter.updateColorsList();
+		paletteAdapter.updateItemsList();
 	}
 
 	@Override
-	public void updatePaletteSelection(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
-		paletteAdapter.askNotifyItemChanged(oldColor);
-		paletteAdapter.askNotifyItemChanged(newColor);
-		askScrollToTargetColorPosition(newColor, true);
+	public void updatePaletteSelection(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
+		paletteAdapter.askNotifyItemChanged(oldItem);
+		paletteAdapter.askNotifyItemChanged(newItem);
+		askScrollToTargetColorPosition(newItem, true);
 		if (controller.isAccentColorCanBeChanged()) {
 			updateAllColorsButton();
 		}

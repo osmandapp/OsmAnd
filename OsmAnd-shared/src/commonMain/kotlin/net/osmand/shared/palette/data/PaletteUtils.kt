@@ -14,7 +14,7 @@ object PaletteUtils {
 
 	private const val TXT_EXT = ".txt"
 	private const val ALTITUDE_DEFAULT_NAME = "altitude_default"
-	private const val DEFAULT_NAME = "default"
+	const val DEFAULT_NAME = "default"
 
 	fun buildFileName(paletteName: String, fileType: PaletteFileType): String {
 		return "${fileType.filePrefix}${paletteName}${TXT_EXT}"
@@ -52,7 +52,7 @@ object PaletteUtils {
 
 	// TODO: use it with modifier/repository method 'insertAfter(...)'
 	//  to place duplicate right after the original item
-	fun createDuplicate(
+	fun createGradientDuplicate(
 		palette: Palette.GradientCollection,
 		originalItemId: String
 	): PaletteItem.Gradient? {
@@ -75,6 +75,28 @@ object PaletteUtils {
 			displayName = displayName,
 			source = PaletteItemSource.GradientFile(palette.id, newFileName),
 			isDefault = false
+		)
+	}
+
+	fun createSolidDuplicate(
+		palette: Palette.SolidCollection,
+		originalItemId: String,
+		markAsUsed: Boolean = false,
+	): PaletteItem.Solid? {
+		val index = palette.items.indexOfFirst { it.id == originalItemId }
+		if (index == -1) return null
+
+		val originalItem = palette.items[index]
+
+		val existingIds = palette.items.map { it.id }.toSet()
+		val newId = generateSolidUniqueId(existingIds)
+		val lastUsedTime =
+			if (markAsUsed) Clock.System.now().toEpochMilliseconds() else originalItem.lastUsedTime
+
+		return originalItem.copy(
+			id = newId,
+			source = PaletteItemSource.CollectionRecord(palette.id, newId),
+			lastUsedTime = lastUsedTime
 		)
 	}
 

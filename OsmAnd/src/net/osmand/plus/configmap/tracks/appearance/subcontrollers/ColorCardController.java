@@ -16,6 +16,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
+import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.ColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
@@ -23,25 +26,16 @@ import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
-import net.osmand.plus.card.color.palette.gradient.GradientColorsCollection;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
-import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
-import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
-import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
+import net.osmand.shared.palette.data.PaletteUtils;
+import net.osmand.shared.palette.domain.PaletteCategory;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.shared.routing.RouteColorize;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,13 +102,12 @@ public class ColorCardController extends ColoringStyleCardController implements 
 
 	@NonNull
 	public GradientColorsPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
-		RouteColorize.ColorizationType colorizationType = gradientScaleType.toColorizationType();
-		GradientColorsCollection gradientCollection = new GradientColorsCollection(app, colorizationType);
-
+		PaletteCategory paletteCategory = gradientScaleType.toPaletteCategory();
+		String paletteId = paletteCategory != null ? paletteCategory.getKey() : "";
 		if (gradientPaletteController == null) {
-			gradientPaletteController = new GradientColorsPaletteController(app, null);
+			gradientPaletteController = new GradientColorsPaletteController(app, paletteId, null);
 		}
-		gradientPaletteController.updateContent(gradientCollection, PaletteGradientColor.DEFAULT_NAME);
+		gradientPaletteController.updatePalette(paletteId, PaletteUtils.DEFAULT_NAME);
 		gradientPaletteController.setPaletteListener(getExternalListener());
 		return gradientPaletteController;
 	}
@@ -122,13 +115,8 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	@NonNull
 	public IColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			ColorsCollection colorsCollection = new FileColorsCollection(app);
 			Integer color = data.getParameter(COLOR);
-			if (color == null) {
-				List<PaletteColor> colors = colorsCollection.getColors(PaletteSortingMode.ORIGINAL);
-				color = !Algorithms.isEmpty(colors) ? colors.get(0).getColor() : null;
-			}
-			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, color);
+			colorsPaletteController = new ColorsPaletteController(app, color, false);
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());
 		return colorsPaletteController;
@@ -173,7 +161,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 		list.add(new CardState(R.string.shared_string_original));
 
 		List<CardState> other = super.collectSupportedCardStates();
-		if (other.size() > 0) {
+		if (!other.isEmpty()) {
 			other.get(0).setShowTopDivider(true);
 		}
 		list.addAll(other);

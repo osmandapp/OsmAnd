@@ -36,7 +36,7 @@ sealed interface PaletteItem {
 	val displayName: String
 	val source: PaletteItemSource
 	val isEditable: Boolean
-	val historyIndex: Int
+	val historyIndex: Int // TODO: maybe better name is 'original index'
 	val lastUsedTime: Long
 
 	data class Solid(
@@ -82,6 +82,10 @@ sealed interface PaletteItem {
 			val newPoints = points - point
 			return this.copy(points = newPoints)
 		}
+
+		fun getTypeName(): String = getPaletteCategory().key
+
+		fun getPaletteCategory() = properties.fileType.category
 
 		fun getColorPalette(): ColorPalette {
 			val palette = ColorPalette()

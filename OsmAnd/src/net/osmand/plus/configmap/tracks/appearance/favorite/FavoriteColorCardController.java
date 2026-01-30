@@ -18,13 +18,11 @@ import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.v2.ColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.routing.ColoringType;
 
 import java.util.ArrayList;
@@ -54,9 +52,9 @@ public class FavoriteColorCardController extends ColoringStyleCardController {
 			onColoringStyleSelected(null);
 		} else {
 			askSelectColoringStyle((ColoringStyle) cardState.getTag());
-			PaletteColor selectedCardColor = colorsPaletteController.getSelectedColor();
-			if (selectedCardColor != null) {
-				getExternalListener().onColorSelectedFromPalette(selectedCardColor);
+			PaletteItem selectedItem = colorsPaletteController.getSelectedPaletteItem();
+			if (selectedItem != null) {
+				getExternalListener().onPaletteItemSelected(selectedItem);
 			}
 		}
 	}
@@ -79,12 +77,11 @@ public class FavoriteColorCardController extends ColoringStyleCardController {
 	@NonNull
 	public IColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			ColorsCollection colorsCollection = new FileColorsCollection(app);
 			Integer color = data.getParameter(COLOR);
 			if (color == null) {
 				color = favoriteAppearanceController.requireColor();
 			}
-			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, color);
+			colorsPaletteController = new ColorsPaletteController(app, color);
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());
 		return colorsPaletteController;

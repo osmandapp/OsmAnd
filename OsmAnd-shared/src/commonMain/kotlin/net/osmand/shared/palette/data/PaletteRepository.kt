@@ -10,6 +10,7 @@ import net.osmand.shared.palette.domain.PaletteCategory
 import net.osmand.shared.palette.domain.PaletteFileType
 import net.osmand.shared.palette.domain.PaletteItem
 import net.osmand.shared.util.LoggerFactory
+import kotlin.jvm.JvmOverloads
 
 class PaletteRepository {
 
@@ -41,11 +42,15 @@ class PaletteRepository {
 		return loadedPalette
 	}
 
-	fun getPaletteItems(paletteId: String, sortMode: PaletteSortMode): List<PaletteItem> {
+	@JvmOverloads
+	fun getPaletteItems(
+		paletteId: String,
+		sortMode: PaletteSortMode = PaletteSortMode.ORIGINAL_ORDER
+	): List<PaletteItem> {
 		getPalette(paletteId)?.let { palette ->
 			return when(sortMode) {
 				PaletteSortMode.LAST_USED_TIME -> palette.items.sortedByDescending { it.lastUsedTime }
-				PaletteSortMode.ORIGINAL_ORDER -> palette.items
+				PaletteSortMode.ORIGINAL_ORDER -> palette.items.sortedBy { it.historyIndex }
 			}
 		}
 		return emptyList()

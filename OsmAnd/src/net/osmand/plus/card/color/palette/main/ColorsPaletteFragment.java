@@ -1,6 +1,6 @@
 package net.osmand.plus.card.color.palette.main;
 
-import static net.osmand.plus.card.color.palette.main.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
+import static net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -22,14 +22,19 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
-import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
+import net.osmand.plus.card.color.palette.main.v2.IColorsPalette;
+import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
+import net.osmand.shared.palette.data.PaletteSortMode;
+import net.osmand.shared.palette.domain.PaletteItem;
 
+// TODO: I think we should have 2 versions of this screen (or use 2 strategies) - list and flow
+//  currently we use flow layout for solid colors (this screen) and list view for the gradient colors
+//  but view is just a representation, so we can use the same representation for gradient and solid colors
 public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implements IColorsPalette {
 
 	public static final String TAG = ColorsPaletteFragment.class.getSimpleName();
@@ -86,34 +91,39 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 		FlowLayout flowLayout = view.findViewById(R.id.palette);
 		flowLayout.removeAllViews();
 		flowLayout.setHorizontalAutoSpacing(true);
-		for (PaletteColor paletteColor : controller.getColors(PaletteSortingMode.ORIGINAL)) {
-			flowLayout.addView(createColorItemView(paletteColor, flowLayout));
+		for (PaletteItem item : controller.getPaletteItems(PaletteSortMode.ORIGINAL_ORDER)) {
+			flowLayout.addView(createColorItemView(item, flowLayout));
 		}
 		flowLayout.addView(createAddCustomColorItemView(flowLayout));
 	}
 
 	@NonNull
-	private View createColorItemView(@NonNull PaletteColor paletteColor, FlowLayout rootView) {
+	private View createColorItemView(@NonNull PaletteItem item, FlowLayout rootView) {
 		View view = paletteElements.createCircleView(rootView);
-		boolean isSelected = controller.isSelectedColor(paletteColor);
-		paletteElements.updateColorItemView(view, paletteColor.getColor(), isSelected);
+		boolean isSelected = controller.isPaletteItemSelected(item);
+
+		int color = 0;
+		if (item instanceof PaletteItem.Solid) {
+			color = ((PaletteItem.Solid) item).getColor();
+		}
+		paletteElements.updateColorItemView(view, color, isSelected);
 
 		ImageView background = view.findViewById(R.id.background);
 		background.setOnClickListener(v -> {
-			controller.onSelectColorFromPalette(paletteColor, true);
+			// TODO: should we immediately renew last used time of the item
+			controller.onSelectItemFromPalette(item, true);
 			dismiss();
 		});
 		background.setOnLongClickListener(v -> {
-			controller.onColorLongClick(requireActivity(), v, paletteColor, nightMode);
+			controller.onPaletteItemLongClick(requireActivity(), v, item, nightMode);
 			return false;
 		});
-		view.setTag(paletteColor);
+		view.setTag(item);
 		return view;
 	}
 
-
 	@Override
-	public void updatePaletteColors(@Nullable PaletteColor targetPaletteColor) {
+	public void updatePaletteItems(@Nullable PaletteItem targetItem) {
 		View view = getView();
 		if (view != null) {
 			setupColorsPalette(view);
@@ -121,22 +131,27 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 	}
 
 	@Override
-	public void updatePaletteSelection(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
+	public void updatePaletteSelection(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
 		View view = getView();
 		if (view == null) {
 			return;
 		}
-		View oldColorContainer = view.findViewWithTag(oldColor);
+		View oldColorContainer = view.findViewWithTag(oldItem);
 		if (oldColorContainer != null) {
 			oldColorContainer.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
 			ImageView icon = oldColorContainer.findViewById(R.id.icon);
 			icon.setImageDrawable(UiUtilities.tintDrawable(
 					icon.getDrawable(), ColorUtilities.getDefaultIconColor(app, nightMode)));
 		}
-		View newColorContainer = view.findViewWithTag(newColor);
+		View newColorContainer = view.findViewWithTag(newItem);
 		if (newColorContainer != null) {
 			AppCompatImageView outline = newColorContainer.findViewById(R.id.outline);
-			Drawable border = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle_contour, newColor.getColor());
+
+			int color = 0;
+			if (newItem instanceof PaletteItem.Solid) {
+				color = ((PaletteItem.Solid) newItem).getColor();
+			}
+			Drawable border = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle_contour, color);
 			outline.setImageDrawable(border);
 			outline.setVisibility(View.VISIBLE);
 		}

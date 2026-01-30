@@ -9,10 +9,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController.OnPaletteModeSelectedListener;
@@ -20,6 +17,7 @@ import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.DayNightHelper.MapThemeProvider;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.shared.palette.domain.PaletteItem;
 
 import java.util.Arrays;
 import java.util.List;
@@ -111,15 +109,14 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 	@ColorInt
 	protected abstract int getSavedColor(boolean nightMode);
 
-	protected abstract void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor);
+	protected abstract void onColorSelectedFromPalette(@NonNull PaletteItem paletteItem);
 
 	protected abstract void onColorsPaletteModeChanged();
 
 	@NonNull
 	public ModedColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			ColorsCollection colorsCollection = new FileColorsCollection(app);
-			colorsPaletteController = new ModedColorsPaletteController(app, colorsCollection) {
+			colorsPaletteController = new ModedColorsPaletteController(app) {
 
 				private PaletteMode paletteModeDay;
 				private PaletteMode paletteModeNight;
@@ -139,9 +136,9 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 				}
 
 				@Override
-				public PaletteColor provideSelectedColorForPaletteMode(@NonNull PaletteMode paletteMode) {
+				public PaletteItem provideSelectedPaletteItemForMode(@NonNull PaletteMode paletteMode) {
 					boolean useNightMap = Objects.equals(paletteMode.tag(), PALETTE_MODE_ID_NIGHT);
-					return collection.findPaletteColor(useNightMap ? colorNight : colorDay, true);
+					return findPaletteItem(useNightMap ? colorNight : colorDay, true);
 				}
 
 				@NonNull
@@ -157,7 +154,16 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 				}
 			};
 		}
-		colorsPaletteController.setPaletteListener(this::onColorSelectedFromPalette);
+		colorsPaletteController.setPaletteListener(new OnColorsPaletteListener() {
+			@Override
+			public void onPaletteItemSelected(@NonNull PaletteItem item) {
+				onColorSelectedFromPalette(item);
+			}
+
+			@Override
+			public void onPaletteItemAdded(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
+			}
+		});
 		colorsPaletteController.setPaletteModeSelectedListener(this::onColorsPaletteModeChanged);
 		return colorsPaletteController;
 	}

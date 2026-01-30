@@ -18,9 +18,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
+import net.osmand.plus.card.color.palette.main.v2.ColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener;
 import net.osmand.plus.card.icon.CircleIconPaletteElements;
 import net.osmand.plus.card.icon.IconsPaletteController;
 import net.osmand.plus.card.icon.IconsPaletteElements;
@@ -37,6 +36,7 @@ import net.osmand.plus.settings.fragments.ProfileOptionsDialogController;
 import net.osmand.plus.settings.fragments.profileappearance.elements.LocationIconPaletteElements;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -334,8 +334,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 		if (colorsCardController == null) {
 			boolean nightMode = isNightMode();
 			int selectedColor = changedProfile.getActualColor(app, nightMode);
-			ColorsCollection colorsCollection = new FileColorsCollection(app);
-			colorsCardController = new ColorsPaletteController(app, colorsCollection, selectedColor) {
+			colorsCardController = new ColorsPaletteController(app, selectedColor) {
 				@Override
 				public void onAllColorsScreenClosed() {
 					if (screen != null) {
@@ -345,8 +344,9 @@ public class ProfileAppearanceController extends BaseDialogController {
 
 				@Override
 				public int getControlsAccentColor(boolean nightMode) {
-					if (selectedPaletteColor != null) {
-						return selectedPaletteColor.getColor();
+					PaletteItem item = getSelectedItem();
+					if (item instanceof PaletteItem.Solid solidItem) {
+						return solidItem.getColor();
 					}
 					return super.getControlsAccentColor(nightMode);
 				}
@@ -356,12 +356,21 @@ public class ProfileAppearanceController extends BaseDialogController {
 					return true;
 				}
 			};
-			colorsCardController.setPaletteListener(paletteColor -> {
-				int colorInt = paletteColor.getColor();
-				changedProfile.color = changedProfile.getProfileColorByColorValue(app, colorInt);
-				changedProfile.customColor = changedProfile.color == null ? colorInt : null;
-				updateColorItems();
-				screen.updateApplyButtonEnable();
+			colorsCardController.setPaletteListener(new OnColorsPaletteListener() {
+				@Override
+				public void onPaletteItemSelected(@NonNull PaletteItem item) {
+					if (item instanceof PaletteItem.Solid solidItem) {
+						int colorInt = solidItem.getColor();
+						changedProfile.color = changedProfile.getProfileColorByColorValue(app, colorInt);
+						changedProfile.customColor = changedProfile.color == null ? colorInt : null;
+						updateColorItems();
+						screen.updateApplyButtonEnable();
+					}
+				}
+
+				@Override
+				public void onPaletteItemAdded(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
+				}
 			});
 		}
 		return colorsCardController;

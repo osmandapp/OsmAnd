@@ -11,11 +11,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
 import net.osmand.plus.views.layers.CoordinatesGridSettings;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.shared.palette.domain.PaletteItem;
 
 public class GridColorController extends MapColorPaletteController {
 
@@ -53,22 +53,24 @@ public class GridColorController extends MapColorPaletteController {
 	private void refreshSelectedPaletteColor() {
 		ModedColorsPaletteController paletteController = getColorsPaletteController();
 		PaletteMode selectedMode = paletteController.getSelectedPaletteMode();
-		PaletteColor newPaletteColor = paletteController.provideSelectedColorForPaletteMode(selectedMode);
+		PaletteItem newPaletteColor = paletteController.provideSelectedPaletteItemForMode(selectedMode);
 		if (newPaletteColor != null) {
-			paletteController.onSelectColorFromPalette(newPaletteColor, false);
+			paletteController.onSelectItemFromPalette(newPaletteColor, false);
 		}
 	}
 
 	@Override
-	protected void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		setSavedColor(paletteColor.getColor(), isNightMap());
-		loadSavedColors();
-		externalListener.onColorSelectedFromPalette(paletteColor);
+	protected void onColorSelectedFromPalette(@NonNull PaletteItem paletteItem) {
+		if (paletteItem instanceof PaletteItem.Solid solidItem) {
+			setSavedColor(solidItem.getColor(), isNightMap());
+			loadSavedColors();
+			externalListener.onPaletteItemSelected(solidItem);
+		}
 	}
 
 	@Override
 	protected void onColorsPaletteModeChanged() {
-		externalListener.onColorsPaletteModeChanged();
+		externalListener.onPaletteModeChanged();
 	}
 
 	@Override

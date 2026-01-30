@@ -97,6 +97,8 @@ enum class PaletteCategory(
 		predefinedValues = listOf(0f, 100f)
 	);
 
+	fun isTerrainRelated() = this in setOf(TERRAIN_ALTITUDE, TERRAIN_SLOPE, TERRAIN_HILLSHADE)
+
 	companion object {
 		private val map = entries.associateBy(PaletteCategory::key)
 

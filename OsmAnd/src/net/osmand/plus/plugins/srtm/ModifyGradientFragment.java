@@ -17,17 +17,14 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
-import net.osmand.plus.card.color.palette.gradient.GradientColorsCollection;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
-import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
-import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.util.Algorithms;
+import net.osmand.shared.palette.domain.PaletteItem;
 
 public class ModifyGradientFragment extends ConfigureMapOptionFragment implements IColorCardControllerListener {
 
@@ -35,7 +32,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 	private static final String ORIGINAL_MODE = "original_mode";
 	private static final String SELECTED_MODE = "selected_mode";
 
-	private final SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+	private final SRTMPlugin plugin = PluginsHelper.requirePlugin(SRTMPlugin.class);
 
 	private TerrainType type;
 	private TerrainMode selectedMode;
@@ -103,13 +100,12 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 
 	@NonNull
 	public GradientColorsPaletteController getController() {
+		String paletteId = type.toPaletteCategory().getKey();
 		if (controller == null) {
-			controller = new GradientColorsPaletteController(app, null);
+			controller = new GradientColorsPaletteController(app, paletteId,null);
 		}
-		GradientColorsCollection collection = new GradientColorsCollection(app, type);
-		controller.updateContent(collection, plugin.getTerrainMode().getKeyName());
+		controller.updatePalette(paletteId, plugin.getTerrainMode().getKeyName());
 		controller.setPaletteListener(this);
-
 		return controller;
 	}
 
@@ -146,7 +142,8 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 		plugin.setTerrainMode(originalMode);
 		selectedMode = originalMode;
 		plugin.updateLayers(requireMapActivity(), requireMapActivity());
-		controller.updateContent(selectedMode.getKeyName());
+		String paletteId = type.toPaletteCategory().getKey();
+		controller.updatePalette(paletteId, selectedMode.getKeyName());
 		updateApplyButton(isChangesMade());
 	}
 
@@ -168,10 +165,10 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 	}
 
 	@Override
-	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		if (paletteColor instanceof PaletteGradientColor paletteGradientColor) {
-			TerrainType terrainType = TerrainType.valueOf(paletteGradientColor.getTypeName());
-			String key = paletteGradientColor.getPaletteName();
+	public void onPaletteItemSelected(@NonNull PaletteItem gradientItem) {
+		if (gradientItem instanceof PaletteItem.Gradient gradient) {
+			TerrainType terrainType = TerrainType.valueOf(gradient.getTypeName());
+			String key = gradient.getPaletteName();
 			TerrainMode mode = TerrainMode.valueOf(terrainType, key);
 			if (mode != null) {
 				selectedMode = mode;

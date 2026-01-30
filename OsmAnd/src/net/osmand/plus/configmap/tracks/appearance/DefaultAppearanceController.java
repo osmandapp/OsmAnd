@@ -15,7 +15,6 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData.AppearanceChangedListener;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ArrowsCardController;
@@ -31,6 +30,7 @@ import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.shared.gpx.GpxParameter;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.util.Algorithms;
 
 import java.util.HashSet;
@@ -90,8 +90,10 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 	}
 
 	@Override
-	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		data.setParameter(COLOR, paletteColor.getColor());
+	public void onPaletteItemSelected(@NonNull PaletteItem item) {
+		if (item instanceof PaletteItem.Solid solid) {
+			data.setParameter(COLOR, solid.getColor());
+		}
 	}
 
 	public boolean hasAnyChangesToSave() {

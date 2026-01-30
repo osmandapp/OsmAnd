@@ -8,8 +8,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.color.cstyle.OnSelectColoringStyleListener;
-import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
+import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener;
 import net.osmand.plus.routing.ColoringStyleAlgorithms;
+import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
@@ -116,5 +117,9 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 	protected abstract ColoringType[] getSupportedColoringTypes();
 
 	public interface IColorCardControllerListener
-			extends OnSelectColoringStyleListener, OnColorsPaletteListener {}
+			extends OnSelectColoringStyleListener, OnColorsPaletteListener {
+		@Override
+		default void onPaletteItemAdded(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
+		}
+	}
 }

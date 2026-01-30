@@ -4,10 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
+import net.osmand.plus.card.color.palette.main.v2.ColorsPaletteController;
+import net.osmand.shared.palette.domain.PaletteItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +18,11 @@ public abstract class ModedColorsPaletteController extends ColorsPaletteControll
 	private OnPaletteModeSelectedListener onPaletteModeSelectedListener;
 	private PaletteMode selectedPaletteMode;
 
-	public ModedColorsPaletteController(@NonNull OsmandApplication app,
-	                                    @NonNull ColorsCollection colorsCollection) {
-		super(app, colorsCollection, 0);
+	public ModedColorsPaletteController(@NonNull OsmandApplication app) {
+		super(app, 0);
 		this.availablePaletteModes = collectAvailablePaletteModes();
 		this.selectedPaletteMode = getInitialPaletteMode();
-		this.selectedPaletteColor = provideSelectedColorForPaletteMode(selectedPaletteMode);
+		this.setSelectedItem(provideSelectedPaletteItemForMode(selectedPaletteMode));
 	}
 
 	public void setPaletteModeSelectedListener(@Nullable OnPaletteModeSelectedListener listener) {
@@ -51,35 +49,36 @@ public abstract class ModedColorsPaletteController extends ColorsPaletteControll
 
 	protected void onPaletteModeChanged(@NonNull PaletteMode oldPaletteMode, @NonNull PaletteMode paletteMode) {
 		if (onPaletteModeSelectedListener != null) {
-			onPaletteModeSelectedListener.onColorsPaletteModeChanged();
+			onPaletteModeSelectedListener.onPaletteModeChanged();
 		}
-		PaletteColor oldPaletteColor = provideSelectedColorForPaletteMode(oldPaletteMode);
-		PaletteColor paletteColor = provideSelectedColorForPaletteMode(paletteMode);
-		selectColor(paletteColor);
-		if (paletteColor != null) {
-			notifyUpdatePaletteSelection(oldPaletteColor, paletteColor);
+		PaletteItem oldModePaletteItem = provideSelectedPaletteItemForMode(oldPaletteMode);
+		PaletteItem newModePaletteItem = provideSelectedPaletteItemForMode(paletteMode);
+		selectPaletteItem(newModePaletteItem);
+		if (newModePaletteItem != null) {
+			notifyUpdatePaletteSelection(oldModePaletteItem, newModePaletteItem);
 		}
 	}
 
 	@Override
 	public void refreshLastUsedTime() {
 		PaletteMode selectedPaletteMode = getSelectedPaletteMode();
-		List<PaletteColor> paletteColors = new ArrayList<>();
+		List<PaletteItem> paletteItems = new ArrayList<>();
 		for (PaletteMode paletteMode : getAvailablePaletteModes()) {
 			if (!Objects.equals(selectedPaletteMode.tag(), paletteMode.tag())) {
-				addPaletteColor(paletteColors, paletteMode);
+				addPaletteItem(paletteMode, paletteItems);
 			}
 		}
-		addPaletteColor(paletteColors, selectedPaletteMode);
-		for (PaletteColor paletteColor : paletteColors) {
-			collection.askRenewLastUsedTime(paletteColor);
+		addPaletteItem(selectedPaletteMode, paletteItems);
+		for (PaletteItem paletteItem : paletteItems) {
+			renewLastUsedTime(paletteItem);
 		}
 	}
 
-	private void addPaletteColor(@NonNull List<PaletteColor> paletteColors, @NonNull PaletteMode paletteMode) {
-		PaletteColor paletteColor = provideSelectedColorForPaletteMode(paletteMode);
-		if (paletteColor != null) {
-			paletteColors.add(paletteColor);
+	private void addPaletteItem(@NonNull PaletteMode paletteMode,
+	                            @NonNull List<PaletteItem> paletteItems) {
+		PaletteItem paletteItem = provideSelectedPaletteItemForMode(paletteMode);
+		if (paletteItem != null) {
+			paletteItems.add(paletteItem);
 		}
 	}
 
@@ -90,9 +89,9 @@ public abstract class ModedColorsPaletteController extends ColorsPaletteControll
 	protected abstract PaletteMode getInitialPaletteMode();
 
 	@Nullable
-	public abstract PaletteColor provideSelectedColorForPaletteMode(@NonNull PaletteMode paletteMode);
+	public abstract PaletteItem provideSelectedPaletteItemForMode(@NonNull PaletteMode paletteMode);
 
 	public interface OnPaletteModeSelectedListener {
-		void onColorsPaletteModeChanged();
+		void onPaletteModeChanged();
 	}
 }

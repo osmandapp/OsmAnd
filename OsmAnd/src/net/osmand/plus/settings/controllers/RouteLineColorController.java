@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
@@ -21,12 +22,7 @@ import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
-import net.osmand.plus.card.color.palette.gradient.GradientColorsCollection;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
-import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteCard;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
@@ -35,13 +31,14 @@ import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.DayNightHelper.MapThemeProvider;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.shared.palette.domain.PaletteCategory;
+import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.PreviewRouteLineLayer;
-import net.osmand.shared.routing.RouteColorize;
 
 import java.util.Arrays;
 import java.util.List;
@@ -74,8 +71,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 	@NonNull
 	public ModedColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			ColorsCollection colorsCollection = new FileColorsCollection(app);
-			colorsPaletteController = new ModedColorsPaletteController(app, colorsCollection) {
+			colorsPaletteController = new ModedColorsPaletteController(app) {
 
 				private PaletteMode paletteModeDay;
 				private PaletteMode paletteModeNight;
@@ -95,9 +91,9 @@ public class RouteLineColorController extends ColoringStyleCardController
 				}
 
 				@Override
-				public PaletteColor provideSelectedColorForPaletteMode(@NonNull PaletteMode paletteMode) {
+				public PaletteItem provideSelectedPaletteItemForMode(@NonNull PaletteMode paletteMode) {
 					boolean useNightMap = Objects.equals(paletteMode.tag(), PALETTE_MODE_ID_NIGHT);
-					return collection.findPaletteColor(routeLinePreview.getCustomColor(useNightMap));
+					return findPaletteItem(routeLinePreview.getCustomColor(useNightMap));
 				}
 
 				@NonNull
@@ -180,11 +176,10 @@ public class RouteLineColorController extends ColoringStyleCardController
 
 	@NonNull
 	public GradientColorsPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
-		RouteColorize.ColorizationType colorizationType = gradientScaleType.toColorizationType();
-		GradientColorsCollection gradientCollection = new GradientColorsCollection(app, colorizationType);
-
+		PaletteCategory paletteCategory = gradientScaleType.toPaletteCategory();
+		String paletteId = paletteCategory != null ? paletteCategory.getKey() : "";
 		if (gradientPaletteController == null) {
-			gradientPaletteController = new GradientColorsPaletteController(app, null) {
+			gradientPaletteController = new GradientColorsPaletteController(app, paletteId,null) {
 				@Override
 				public void onAllColorsScreenClosed() {
 					notifyAllColorsScreenClosed();
@@ -192,7 +187,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 			};
 		}
 		gradientPaletteController.setPaletteListener(getExternalListener());
-		gradientPaletteController.updateContent(gradientCollection, routeLinePreview.getGradientPalette());
+		gradientPaletteController.updatePalette(paletteId, routeLinePreview.getGradientPalette());
 		return gradientPaletteController;
 	}
 

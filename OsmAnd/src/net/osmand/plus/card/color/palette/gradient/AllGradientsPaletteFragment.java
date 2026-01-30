@@ -1,6 +1,6 @@
 package net.osmand.plus.card.color.palette.gradient;
 
-import static net.osmand.plus.card.color.palette.main.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
+import static net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,18 +22,20 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.card.color.palette.main.IColorsPalette;
-import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.gradient.v2.AllGradientsPaletteAdapter;
+import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.IColorsPalette;
+import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.shared.palette.domain.PaletteItem;
 
 public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment implements IColorsPalette {
 
 	public static final String TAG = AllGradientsPaletteFragment.class.getSimpleName();
 
-	private GradientColorsPaletteController controller;
+	private IColorsPaletteController controller;
 	private AllGradientsPaletteAdapter adapter;
 
 	@Override
@@ -84,17 +86,17 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 	}
 
 	@Override
-	public void updatePaletteColors(@Nullable PaletteColor targetPaletteColor) {
+	public void updatePaletteItems(@Nullable PaletteItem targetItem) {
 		if (adapter != null) {
 			adapter.update();
 		}
 	}
 
 	@Override
-	public void updatePaletteSelection(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
+	public void updatePaletteSelection(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
 		if (adapter != null) {
-			adapter.askNotifyItemChanged(oldColor);
-			adapter.askNotifyItemChanged(newColor);
+			adapter.askNotifyItemChanged(oldItem);
+			adapter.askNotifyItemChanged(newItem);
 		}
 		dismiss();
 	}
@@ -109,6 +111,7 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 			// to avoid any possible memory leaks
 			DialogManager manager = app.getDialogManager();
 			manager.unregister(ALL_COLORS_PROCESS_ID);
+			controller.onAllColorsScreenClosed();
 		}
 	}
 
