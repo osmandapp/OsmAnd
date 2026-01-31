@@ -1,16 +1,12 @@
 package net.osmand.plus.card.color.palette.main.v2
 
-import android.graphics.drawable.Drawable
 import android.view.View
-import androidx.annotation.DrawableRes
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.card.color.palette.main.ColorsPaletteFragment
-import net.osmand.plus.palette.contract.IPaletteView
 import net.osmand.plus.palette.controller.BasePaletteController
 import net.osmand.plus.track.fragments.controller.ColorPickerDialogController
-import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
@@ -18,19 +14,13 @@ import net.osmand.shared.palette.data.PaletteSortMode
 import net.osmand.shared.palette.data.PaletteUtils
 import net.osmand.shared.palette.domain.Palette
 import net.osmand.shared.palette.domain.PaletteItem
-import java.lang.ref.WeakReference
 
 open class SolidPaletteController(
-	protected val app: OsmandApplication,
-	private val paletteId: String = "user_palette_default" // TODO: don't use hardcoded ids
-) : BasePaletteController(), ColorPickerDialogController.ColorPickerListener {
-
-	private val repository = app.paletteRepository
-	protected val views = ArrayList<WeakReference<IPaletteView>>()
-	private var listener: OnColorsPaletteListener? = null
+	app: OsmandApplication,
+	paletteId: String = "user_palette_default" // TODO: don't use hardcoded ids
+) : BasePaletteController(app, paletteId), ColorPickerDialogController.ColorPickerListener {
 
 	private var editedItem: PaletteItem.Solid? = null
-	protected var selectedItem: PaletteItem? = null
 
 	@JvmOverloads
 	constructor(
@@ -43,27 +33,8 @@ open class SolidPaletteController(
 		}
 	}
 
-	override fun attachView(view: IPaletteView) {
-		views.add(WeakReference(view))
-	}
-
-	override fun detachView(view: IPaletteView) {
-		val iterator = views.iterator()
-		while (iterator.hasNext()) {
-			if (iterator.next().get() == view) {
-				iterator.remove()
-				break
-			}
-		}
-	}
-
-	override fun setPaletteListener(listener: OnColorsPaletteListener?) {
-		this.listener = listener
-	}
-
 	// --- CRUD Operations ---
 
-	// TODO: solid color
 	override fun onApplyColorPickerSelection(oldColor: Int?, newColor: Int) {
 		val currentPalette = repository.getPalette(paletteId) as? Palette.SolidCollection ?: return
 
@@ -142,71 +113,11 @@ open class SolidPaletteController(
 		return found
 	}
 
-	override fun selectPaletteItem(item: PaletteItem?) {
-		if (selectedItem?.id != item?.id) {
-			val oldSelected = selectedItem
-			selectedItem = item
-			notifyPaletteItemSelected(item)
-
-			if (oldSelected != null && item != null) {
-				notifyUpdatePaletteSelection(oldSelected, item)
-			} else {
-				notifyUpdatePaletteColors(item)
-			}
-		}
-	}
-
-	// TODO: interact with external listener / listeners
-	protected open fun notifyPaletteItemSelected(item: PaletteItem?) {
-		if (item != null) {
-			listener?.onPaletteItemSelected(item)
-		}
-	}
-
-	override fun renewLastUsedTime() {
-		selectedItem?.let { renewLastUsedTime(it) }
-	}
-
-	fun renewLastUsedTime(item: PaletteItem) {
-		repository.markPaletteItemAsUsed(paletteId, item.id)
-	}
-
-	// --- Data Access ---
-
-	override fun getPaletteItems(sortMode: PaletteSortMode): List<PaletteItem> {
-		return repository.getPaletteItems(paletteId, sortMode)
-	}
-
-	override fun getSelectedPaletteItem(): PaletteItem? = selectedItem
-
 	override fun isAddingNewItemsSupported(): Boolean {
 		return true
 	}
 
-	override fun isPaletteItemSelected(item: PaletteItem): Boolean {
-		return item.id == selectedItem?.id
-	}
-
-	override fun isAccentColorCanBeChanged(): Boolean = false
-
-	override fun getControlsAccentColor(nightMode: Boolean): Int {
-		return ColorUtilities.getActiveColor(app, nightMode)
-	}
-
 	// --- UI Interactions ---
-
-	override fun onPaletteItemClick(item: PaletteItem, markAsUsed: Boolean) {
-		if (markAsUsed) {
-			renewLastUsedTime(item)
-		}
-		selectPaletteItem(item)
-	}
-
-	override fun onPaletteItemLongClick(anchorView: View, item: PaletteItem) {
-		if (item is PaletteItem.Solid) {
-			showItemPopUpMenu(anchorView, item)
-		}
-	}
 
 	override fun onAddButtonClick(activity: FragmentActivity) {
 		showColorPickerDialog(activity, null)
@@ -216,8 +127,9 @@ open class SolidPaletteController(
 		ColorsPaletteFragment.showInstance(activity, this)
 	}
 
-	// TODO: should be individual for gradient and solid
-	private fun showItemPopUpMenu(anchorView: View, item: PaletteItem.Solid) {
+	override fun showItemPopUpMenu(anchorView: View, item: PaletteItem) {
+		if (item !is PaletteItem.Solid) return
+
 		val paletteView = collectActivePalettes()[0]
 		val activity = paletteView.getActivity() ?: return
 		val nightMode = paletteView.isNightMode()
@@ -257,44 +169,8 @@ open class SolidPaletteController(
 		ColorPickerDialogController.showDialog(activity, this, color)
 	}
 
-	// --- Helpers ---
-
-	private fun collectActivePalettes(): List<IPaletteView> {
-		val result = ArrayList<IPaletteView>()
-		val iterator = views.iterator()
-		while (iterator.hasNext()) {
-			val palette = iterator.next().get()
-			if (palette != null) {
-				result.add(palette)
-			} else {
-				iterator.remove()
-			}
-		}
-		return result
-	}
-
-	// TODO: add comment?
-	//  This method updates palette view absolutely, each item will be updated
-	private fun notifyUpdatePaletteColors(targetItem: PaletteItem?) {
-		for (palette in collectActivePalettes()) {
-			palette.updatePaletteItems(targetItem)
-		}
-	}
-
-	// TODO: add comment?
-	//  This method updates only palette selection, e.g. old and new selected items view
-	protected fun notifyUpdatePaletteSelection(oldItem: PaletteItem?, newItem: PaletteItem) {
-		for (palette in collectActivePalettes()) {
-			palette.updatePaletteSelection(oldItem, newItem)
-		}
-	}
-
 	fun getColorName(color: Int): String {
 		val found = findPaletteItem(color)
 		return found?.displayName ?: app.getString(R.string.shared_string_custom)
-	}
-
-	protected fun getContentIcon(@DrawableRes id: Int): Drawable? {
-		return app.uiUtilities.getThemedIcon(id)
 	}
 }

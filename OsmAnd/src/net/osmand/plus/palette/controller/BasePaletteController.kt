@@ -1,9 +1,150 @@
 package net.osmand.plus.palette.controller
 
+import android.graphics.drawable.Drawable
+import android.view.View
+import androidx.annotation.DrawableRes
+import net.osmand.plus.OsmandApplication
+import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener
 import net.osmand.plus.palette.contract.IPaletteController
 import net.osmand.plus.palette.contract.IPaletteInteractionListener
+import net.osmand.plus.palette.contract.IPaletteView
+import net.osmand.plus.utils.ColorUtilities
+import net.osmand.shared.palette.data.PaletteRepository
+import net.osmand.shared.palette.data.PaletteSortMode
+import net.osmand.shared.palette.domain.PaletteItem
+import java.lang.ref.WeakReference
 
 abstract class BasePaletteController(
-
+	protected val app: OsmandApplication,
+	protected var paletteId: String
 ) : IPaletteController, IPaletteInteractionListener {
+
+	protected val repository: PaletteRepository = app.paletteRepository
+
+	protected val views = ArrayList<WeakReference<IPaletteView>>()
+	protected var listener: OnColorsPaletteListener? = null
+
+	protected var selectedItem: PaletteItem? = null
+
+	// --- View Management ---
+
+	override fun attachView(view: IPaletteView) {
+		views.add(WeakReference(view))
+	}
+
+	override fun detachView(view: IPaletteView) {
+		val iterator = views.iterator()
+		while (iterator.hasNext()) {
+			if (iterator.next().get() == view) {
+				iterator.remove()
+				break
+			}
+		}
+	}
+
+	protected fun collectActivePalettes(): List<IPaletteView> {
+		val result = ArrayList<IPaletteView>()
+		val iterator = views.iterator()
+		while (iterator.hasNext()) {
+			val palette = iterator.next().get()
+			if (palette != null) {
+				result.add(palette)
+			} else {
+				iterator.remove()
+			}
+		}
+		return result
+	}
+
+	// --- Listener Management ---
+
+	override fun setPaletteListener(listener: OnColorsPaletteListener?) {
+		this.listener = listener
+	}
+
+	// --- Data Access ---
+
+	override fun getPaletteItems(sortMode: PaletteSortMode): List<PaletteItem> {
+		return repository.getPaletteItems(paletteId, sortMode)
+	}
+
+	override fun getSelectedPaletteItem(): PaletteItem? = selectedItem
+
+	override fun isPaletteItemSelected(item: PaletteItem): Boolean {
+		return item.id == selectedItem?.id
+	}
+
+	// --- Selection Logic ---
+
+	override fun selectPaletteItem(item: PaletteItem?) {
+		if (selectedItem?.id != item?.id) {
+			val oldSelected = selectedItem
+			selectedItem = item
+
+			notifyPaletteItemSelected(item)
+
+			if (oldSelected != null && item != null) {
+				notifyUpdatePaletteSelection(oldSelected, item)
+			} else {
+				notifyUpdatePaletteColors(item)
+			}
+		}
+	}
+
+	override fun renewLastUsedTime() {
+		selectedItem?.let { renewLastUsedTime(it) }
+	}
+
+	protected fun renewLastUsedTime(item: PaletteItem) {
+		repository.markPaletteItemAsUsed(paletteId, item.id)
+	}
+
+	// --- IPaletteInteractionListener (Common) ---
+
+	override fun onPaletteItemClick(item: PaletteItem, markAsUsed: Boolean) {
+		if (markAsUsed) {
+			renewLastUsedTime(item)
+		}
+		selectPaletteItem(item)
+	}
+
+	override fun onPaletteItemLongClick(anchorView: View, item: PaletteItem) {
+		if (item is PaletteItem.Gradient) {
+			showItemPopUpMenu(anchorView, item)
+		}
+	}
+
+	protected abstract fun showItemPopUpMenu(anchorView: View, item: PaletteItem)
+
+	// --- Notification Helpers ---
+
+	protected open fun notifyPaletteItemSelected(item: PaletteItem?) {
+		if (item != null) {
+			listener?.onPaletteItemSelected(item)
+		}
+	}
+
+	protected fun notifyUpdatePaletteColors(targetItem: PaletteItem?) {
+		for (palette in collectActivePalettes()) {
+			palette.updatePaletteItems(targetItem)
+		}
+	}
+
+	protected fun notifyUpdatePaletteSelection(oldItem: PaletteItem?, newItem: PaletteItem) {
+		for (palette in collectActivePalettes()) {
+			palette.updatePaletteSelection(oldItem, newItem)
+		}
+	}
+
+	// --- UI Helpers ---
+
+	override fun getControlsAccentColor(nightMode: Boolean): Int {
+		return ColorUtilities.getActiveColor(app, nightMode)
+	}
+
+	override fun isAccentColorCanBeChanged(): Boolean = false
+
+	protected fun getContentIcon(@DrawableRes id: Int): Drawable? {
+		return app.uiUtilities.getThemedIcon(id)
+	}
 }
