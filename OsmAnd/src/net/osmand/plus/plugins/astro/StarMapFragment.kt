@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.astro
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Point
 import android.os.Bundle
@@ -44,8 +45,11 @@ import net.osmand.plus.plugins.astro.views.StarVisiblityChartView
 import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.utils.InsetTarget
+import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.util.MapUtils
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.Calendar
@@ -116,6 +120,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var showMagnitudeFilter = false
 
 	private var systemBottomInset: Int = 0
+	private var systemTopInset: Int = 0
+	private var systemLeftInset: Int = 0
+	private var systemRightInset: Int = 0
 
 	private val backPressedCallback = object : OnBackPressedCallback(false) {
 		override fun handleOnBackPressed() {
@@ -378,11 +385,30 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	override fun onApplyInsets(insets: WindowInsetsCompat) {
 		super.onApplyInsets(insets)
-		val systemIntets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+		val systemIntets = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
 		systemBottomInset = systemIntets.bottom
+		systemTopInset = systemIntets.top
+		systemLeftInset = systemIntets.left
+		systemRightInset = systemIntets.right
+
 		applyWindowInsets(timeControlCard, regularMapVisible)
 		applyWindowInsets(starMapButton, regularMapVisible)
+		applyTopWindowInsets(starChartButton)
+		applyTopWindowInsets(settingsButton)
+		applyTopWindowInsets(closeButton)
+
+		applySideWindowInsets(starChartButton, true)
+		applySideWindowInsets(timeControlCard, true)
+		applySideWindowInsets(closeButton, false)
+		applySideWindowInsets(starMapButton, false)
+
 		starChartsView.updatePadding(bottom = systemIntets.bottom)
+	}
+
+	override fun getInsetTargets(): InsetTargetsCollection {
+		val collection = super.getInsetTargets()
+		collection.removeType(InsetTarget.Type.ROOT_INSET)
+		return collection
 	}
 
 	private fun handleSearchObjectSelected(obj: SkyObject) {
@@ -408,11 +434,32 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			}
 			return
 		}
-		if (systemBottomInset > 0) {
+		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+			bottomMargin = baseMarginBottom + systemBottomInset
+		}
+	}
+
+	private fun applyTopWindowInsets(view: View) {
+		val baseMarginTop = view.resources.getDimensionPixelSize(R.dimen.content_padding)
+		if (systemTopInset > 0) {
 			view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-				bottomMargin = baseMarginBottom + systemBottomInset
+				topMargin = baseMarginTop + systemTopInset
 			}
 			return
+		}
+		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+			topMargin = baseMarginTop
+		}
+	}
+
+	private fun applySideWindowInsets(view: View, isLeft: Boolean) {
+		val baseMargin = view.resources.getDimensionPixelSize(R.dimen.content_padding)
+		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+			if (isLeft) {
+				marginStart = baseMargin + systemLeftInset
+			} else {
+				marginEnd = baseMargin + systemRightInset
+			}
 		}
 	}
 
@@ -677,8 +724,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			val now = Calendar.getInstance()
 			val isToday = now.get(Calendar.YEAR) == calendar.get(Calendar.YEAR) &&
 					now.get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR)
-			val formatString = if (isToday) "HH:mm" else "d MMM HH:mm"
-			val timeFormat = SimpleDateFormat(formatString, Locale.getDefault())
+			val locale = Locale.getDefault()
+			val formatString = if (isToday) {
+				"HH:mm"
+			} else {
+				val shortInstance = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, locale) as SimpleDateFormat
+				shortInstance.toPattern().replace("y+".toRegex(), "yy")
+			}
+			val timeFormat = SimpleDateFormat(formatString, locale)
 			timeControlBtn.text = timeFormat.format(calendar.time)
 		}
 		viewModel.skyObjects.observe(viewLifecycleOwner) { objects ->

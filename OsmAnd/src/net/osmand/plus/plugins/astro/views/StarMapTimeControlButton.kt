@@ -27,7 +27,7 @@ class StarMapTimeControlButton @JvmOverloads constructor(
     private fun updateTheme() {
         if (isInEditMode) return
 
-        val iconColor = ColorUtilities.getMapButtonIconColor(context, nightMode)
+        val iconColor = ColorUtilities.getLinksColor(context, nightMode)
         setTextColor(iconColor)
         iconTint = ColorStateList.valueOf(iconColor)
         rippleColor = ColorStateList.valueOf(ColorUtilities.getColorWithAlpha(iconColor, 0.15f))
