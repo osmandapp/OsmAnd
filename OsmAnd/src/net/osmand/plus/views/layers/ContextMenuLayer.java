@@ -810,6 +810,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 				|| MapRouteInfoMenu.waypointsVisible || MapRouteInfoMenu.followTrackVisible
 				|| mapActivity.getFragmentsHelper().getGpsFilterFragment() != null
 				|| mapActivity.getFragmentsHelper().getDownloadTilesFragment() != null
+				|| mapActivity.getFragmentsHelper().getStarMapFragment() != null
 				|| (plugin != null && plugin.hasCustomForecast())) {
 			return true;
 		}
