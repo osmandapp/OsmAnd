@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.main.v2.ColorsPaletteAdapter;
 import net.osmand.plus.card.color.palette.main.v2.IColorsPalette;
 import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController;
+import net.osmand.plus.card.color.palette.v2.PaletteCardAdapter;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.UiUtilities;
@@ -23,7 +23,7 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 
 	private final IColorsPaletteController controller;
 	private final ColorsPaletteElements paletteElements;
-	private final ColorsPaletteAdapter paletteAdapter;
+	private final PaletteCardAdapter paletteAdapter;
 	private RecyclerView rvColors;
 
 	public ColorsPaletteCard(@NonNull FragmentActivity activity,
@@ -38,7 +38,7 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 		this.controller = controller;
 		controller.bindPalette(this);
 		paletteElements = new ColorsPaletteElements(activity, nightMode);
-		paletteAdapter = new ColorsPaletteAdapter(activity, controller, nightMode);
+		paletteAdapter = new PaletteCardAdapter(activity, controller, nightMode);
 	}
 
 	@Override
@@ -63,6 +63,7 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 	}
 
 	private void setupAddCustomColorButton() {
+		// TODO: check should button be visible
 		ViewGroup container = view.findViewById(R.id.add_button_container);
 		container.addView(paletteElements.createButtonAddColorView(container));
 		container.setOnClickListener(v -> controller.onAddColorButtonClicked(activity));

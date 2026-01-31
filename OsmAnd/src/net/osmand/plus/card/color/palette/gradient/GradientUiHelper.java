@@ -5,7 +5,6 @@ import static android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT;
 import static android.graphics.drawable.GradientDrawable.RECTANGLE;
 import static net.osmand.gpx.GpxParameter.MAX_ELEVATION;
 import static net.osmand.gpx.GpxParameter.MIN_ELEVATION;
-import static net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard.MAX_ALTITUDE_ADDITION;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -42,6 +41,8 @@ import java.util.List;
 
 public class GradientUiHelper {
 
+	private static final float MAX_ALTITUDE_ADDITION = 50f;
+
 	private final OsmandApplication app;
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
@@ -52,15 +53,13 @@ public class GradientUiHelper {
 		themedInflater = UiUtilities.getInflater(context, nightMode);
 	}
 
-	public void updateColorItemView(@NonNull View view, @NonNull PaletteItem paletteItem, boolean showOutline) {
+	public void updateColorItemView(@NonNull View view, @NonNull PaletteItem.Gradient gradient, boolean showOutline) {
 		ImageView icon = view.findViewById(R.id.icon);
 		AppCompatImageView background = view.findViewById(R.id.background);
 		AppCompatImageView outline = view.findViewById(R.id.outline);
 
-		if (paletteItem instanceof PaletteItem.Gradient gradient) {
-			List<ColorValue> colors = gradient.getColorPalette().getColors();
-			background.setImageDrawable(getGradientDrawable(app, colors, RECTANGLE));
-		}
+		List<ColorValue> colors = gradient.getColorPalette().getColors();
+		background.setImageDrawable(getGradientDrawable(app, colors, RECTANGLE));
 
 		if (showOutline) {
 			Drawable border = getPaintedIcon(R.drawable.bg_point_square_contour, ColorUtilities.getActiveIconColor(app, nightMode));

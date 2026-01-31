@@ -1,29 +1,25 @@
-package net.osmand.plus.card.color.palette.main.v2
+package net.osmand.plus.card.color.palette.v2
 
 import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import net.osmand.plus.R
-import net.osmand.plus.card.color.palette.main.ColorsPaletteElements
+import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController
 import net.osmand.shared.palette.data.PaletteSortMode
 import net.osmand.shared.palette.domain.PaletteItem
 
-// TODO: rename to PaletteItemsCardAdapter
-class ColorsPaletteAdapter(
+class PaletteCardAdapter(
 	private val activity: FragmentActivity,
 	private val controller: IColorsPaletteController,
 	private val nightMode: Boolean
-) : RecyclerView.Adapter<ColorsPaletteAdapter.ColorViewHolder>() {
+) : RecyclerView.Adapter<PaletteCardAdapter.ViewHolder>() {
 
-	private val paletteElements = ColorsPaletteElements(activity, nightMode)
 	private var items: List<PaletteItem>
+	private val itemViewBinder = controller.getItemBinder(activity, nightMode)
 
 	init {
 		items = controller.getPaletteItems(PaletteSortMode.LAST_USED_TIME)
-		// TODO: we could use DiffUtils instead of setHasStableIds
 		setHasStableIds(true)
 	}
 
@@ -33,25 +29,22 @@ class ColorsPaletteAdapter(
 		notifyDataSetChanged()
 	}
 
-	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorViewHolder {
-		val view = paletteElements.createCircleView(parent)
-		return ColorViewHolder(view)
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+		val view = itemViewBinder.createView(parent)
+		return ViewHolder(view)
 	}
 
-	override fun onBindViewHolder(holder: ColorViewHolder, position: Int) {
+	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 		val item = items[position]
 		val isSelected = controller.isPaletteItemSelected(item)
 
-		// TODO: don't check here
-		if (item is PaletteItem.Solid) {
-			paletteElements.updateColorItemView(holder.itemView, item.color, isSelected)
-		}
+		itemViewBinder.bindView(holder.itemView, item, isSelected)
 
 		holder.itemView.setOnClickListener {
 			controller.onSelectItemFromPalette(item, false)
 		}
 		holder.itemView.setOnLongClickListener {
-			controller.onPaletteItemLongClick(activity, holder.background, item, nightMode)
+			controller.onPaletteItemLongClick(activity, holder.itemView, item, nightMode)
 			false
 		}
 	}
@@ -76,9 +69,5 @@ class ColorsPaletteAdapter(
 		return items[position].id.hashCode().toLong()
 	}
 
-	// TODO: rename to PaletteItemViewHolder
-	class ColorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-		val outline: ImageView = itemView.findViewById(R.id.outline)
-		val background: ImageView = itemView.findViewById(R.id.background)
-	}
+	class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

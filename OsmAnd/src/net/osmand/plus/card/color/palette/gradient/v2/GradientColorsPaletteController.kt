@@ -12,6 +12,8 @@ import net.osmand.plus.card.color.palette.gradient.AllGradientsPaletteFragment
 import net.osmand.plus.card.color.palette.main.v2.IColorsPalette
 import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController
 import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener
+import net.osmand.plus.palette.view.renderer.GradientItemBinder
+import net.osmand.plus.palette.view.renderer.PaletteItemBinder
 import net.osmand.plus.plugins.srtm.TerrainMode
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
@@ -287,6 +289,13 @@ open class GradientColorsPaletteController(
 		for (palette in collectActivePalettes()) {
 			palette.updatePaletteSelection(oldItem, newItem)
 		}
+	}
+
+	override fun getItemBinder(
+		activity: FragmentActivity,
+		nightMode: Boolean
+	): PaletteItemBinder {
+		return GradientItemBinder(activity, nightMode)
 	}
 
 	private fun getContentIcon(@DrawableRes id: Int): Drawable? {

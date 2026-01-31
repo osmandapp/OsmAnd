@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.card.color.palette.main.ColorsPaletteFragment
+import net.osmand.plus.palette.view.renderer.PaletteItemBinder
+import net.osmand.plus.palette.view.renderer.SolidItemBinder
 import net.osmand.plus.track.fragments.controller.ColorPickerDialogController
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.popup.PopUpMenu
@@ -301,6 +303,13 @@ open class ColorsPaletteController(
 		for (palette in collectActivePalettes()) {
 			palette.updatePaletteSelection(oldItem, newItem)
 		}
+	}
+
+	override fun getItemBinder(
+		activity: FragmentActivity,
+		nightMode: Boolean
+	): PaletteItemBinder {
+		return SolidItemBinder(activity, nightMode)
 	}
 
 	fun getColorName(color: Int): String {
