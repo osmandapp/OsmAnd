@@ -1462,9 +1462,10 @@ public class RouteCalculationResult {
 			RouteDirectionInfo current = directions.get(currentDirectionInfo);
 			int distanceToNextTurn = getListDistance(currentRoute);
 			distanceToNextTurn -= getListDistance(current.routePointOffset);
-			Location l = locations.get(currentRoute);
-			if (fromLoc != null) {
-				distanceToNextTurn += fromLoc.distanceTo(l);
+
+			Location location = currentRoute < locations.size() ? locations.get(currentRoute) : null;
+			if (fromLoc != null && location != null) {
+				distanceToNextTurn += fromLoc.distanceTo(location);
 			}
 			return (int) (distanceToNextTurn / current.getAverageSpeed());
 		}

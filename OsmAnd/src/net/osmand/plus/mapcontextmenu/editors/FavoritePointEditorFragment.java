@@ -180,7 +180,8 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Override
 	protected void save(boolean needDismiss) {
 		FavouritePoint favorite = getFavorite();
-		if (favorite != null) {
+		MapActivity activity = getMapActivity();
+		if (activity != null && favorite != null) {
 			FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
 					getNameTextValue(), getCategoryTextValue(), favorite.getAltitude(), favorite.getTimestamp());
 			point.setDescription(getDescriptionTextValue());
@@ -188,7 +189,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			point.setColor(getColor());
 			point.setIconId(getIconId());
 			point.setBackgroundType(getBackgroundType());
-			AlertDialog.Builder builder = FavoriteDialogs.checkDuplicates(point, requireActivity());
+			AlertDialog.Builder builder = FavoriteDialogs.checkDuplicates(point, activity);
 
 			if (isChanged(favorite, point)) {
 
@@ -200,11 +201,11 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 			if (builder != null && !skipConfirmationDialog) {
 				builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) ->
-						doSave(favorite, point.getName(), point.getCategory(), point.getDescription(), point.getAddress(),
-								point.getColor(), point.getBackgroundType(), point.getIconIdOrDefault(), needDismiss));
+						doSave(activity, favorite, point.getName(), point.getCategory(), point.getDescription(),
+								point.getAddress(), point.getColor(), point.getBackgroundType(), point.getIconIdOrDefault(), needDismiss));
 				builder.create().show();
 			} else {
-				doSave(favorite, point.getName(), point.getCategory(), point.getDescription(), point.getAddress(),
+				doSave(activity, favorite, point.getName(), point.getCategory(), point.getDescription(), point.getAddress(),
 						point.getColor(), point.getBackgroundType(), point.getIconIdOrDefault(), needDismiss);
 			}
 			saved = true;
@@ -221,13 +222,13 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 				Algorithms.stringsEqual(favorite.getAddress(), point.getAddress());
 	}
 
-	private void doSave(FavouritePoint favorite, String name, String category, String description, String address,
+	private void doSave(@NonNull MapActivity activity, FavouritePoint favorite, String name, String category, String description, String address,
 	                    @ColorInt int color, BackgroundType backgroundType, @DrawableRes int iconId, boolean needDismiss) {
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null) {
 			if (editor.isNew()) {
 				FavouritePoint favouritePoint = getFavorite();
-				if(favouritePoint != null) {
+				if (favouritePoint != null) {
 					favouritesHelper.doAddFavorite(name, category, description, address, color, backgroundType, iconId, favouritePoint);
 				}
 			} else {
@@ -235,19 +236,15 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			}
 			addLastUsedIcon(iconId);
 		}
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
-		}
-		mapActivity.refreshMap();
+		activity.refreshMap();
 		if (needDismiss) {
 			dismiss(false);
 		}
 
-		MapContextMenu menu = mapActivity.getContextMenu();
+		MapContextMenu menu = activity.getContextMenu();
 		LatLon latLon = new LatLon(favorite.getLatitude(), favorite.getLongitude());
 		if (menu.getLatLon() != null && menu.getLatLon().equals(latLon)) {
-			menu.update(latLon, favorite.getPointDescription(mapActivity), favorite);
+			menu.update(latLon, favorite.getPointDescription(activity), favorite);
 		}
 	}
 

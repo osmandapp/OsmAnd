@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
@@ -22,8 +23,11 @@ public record PlanRoutePoint(int position) {
 	public String getTitle(@Nullable MapActivity activity) {
 		if (activity == null) return "";
 		MeasurementEditingContext editingCtx = activity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
-
-		String pointName = editingCtx.getPoints().get(position).getName();
+		List<WptPt> points = editingCtx.getPoints();
+		if (position < 0 || position >= points.size()) {
+			return "";
+		}
+		String pointName = points.get(position).getName();
 		if (!TextUtils.isEmpty(pointName)) {
 			return pointName;
 		}
@@ -34,37 +38,42 @@ public record PlanRoutePoint(int position) {
 	@NonNull
 	public String getSummary(@Nullable MapActivity mapActivity, boolean before) {
 		if (mapActivity == null) return "";
-		OsmandApplication app = mapActivity.getApp();
+		OsmandApplication app = AndroidUtils.getApp(mapActivity);
 		MeasurementEditingContext editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
 
-		StringBuilder description = new StringBuilder();
 		List<WptPt> points = editingCtx.getPoints();
-		WptPt pt = points.get(position);
-		String pointDesc = pt.getDesc();
-		if (!TextUtils.isEmpty(pointDesc)) {
-			description.append(pointDesc);
+		if (position < 0 || position >= points.size()) {
+			return "";
+		}
+		WptPt point = points.get(position);
+		StringBuilder builder = new StringBuilder();
+		String description = point.getDesc();
+		if (!TextUtils.isEmpty(description)) {
+			builder.append(description);
 		} else if (position < 1 && before) {
-			description.append(app.getString(R.string.start_point));
+			builder.append(app.getString(R.string.start_point));
 		} else {
 			float distance = getTrimmedDistance(editingCtx, position, before);
-			description.append(OsmAndFormatter.getFormattedDistance(distance, app));
+			builder.append(OsmAndFormatter.getFormattedDistance(distance, app));
 		}
-		double elevation = pt.getEle();
+		double elevation = point.getEle();
 		if (!Double.isNaN(elevation)) {
-			description.append("  ").append((app.getString(R.string.altitude)).charAt(0)).append(": ");
-			description.append(OsmAndFormatter.getFormattedAlt(elevation, app));
+			builder.append("  ").append((app.getString(R.string.altitude)).charAt(0)).append(": ");
+			builder.append(OsmAndFormatter.getFormattedAlt(elevation, app));
 		}
-		float speed = (float) pt.getSpeed();
+		float speed = (float) point.getSpeed();
 		if (speed != 0) {
-			description.append("  ").append((app.getString(R.string.shared_string_speed)).charAt(0)).append(": ");
-			description.append(OsmAndFormatter.getFormattedSpeed(speed, app));
+			builder.append("  ").append((app.getString(R.string.shared_string_speed)).charAt(0)).append(": ");
+			builder.append(OsmAndFormatter.getFormattedSpeed(speed, app));
 		}
-		return description.toString();
+		return builder.toString();
 	}
 
-	private float getTrimmedDistance(@NonNull MeasurementEditingContext editingCtx,
-	                                 int position, boolean before) {
+	private float getTrimmedDistance(@NonNull MeasurementEditingContext editingCtx, int position, boolean before) {
 		List<WptPt> points = editingCtx.getPoints();
+		if (points.isEmpty() || position >= points.size()) {
+			return 0;
+		}
 		Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = editingCtx.getRoadSegmentData();
 		float dist = 0;
 		int startIdx;

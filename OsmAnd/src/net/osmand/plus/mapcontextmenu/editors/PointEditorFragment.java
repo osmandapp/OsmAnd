@@ -462,7 +462,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 	protected String getCategoryTextValue() {
 		RecyclerView recyclerView = view.findViewById(R.id.group_recycler_view);
 		if (recyclerView.getAdapter() != null && selectedGroup != null) {
-			if (isPersonalCategoryDisplayName(requireContext(), selectedGroup.getName())) {
+			if (isPersonalCategoryDisplayName(app, selectedGroup.getName())) {
 				return PERSONAL_CATEGORY;
 			}
 			if (Algorithms.stringsEqual(selectedGroup.getName(), getDefaultCategoryName())) {
