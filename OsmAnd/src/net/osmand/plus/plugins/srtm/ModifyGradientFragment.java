@@ -18,7 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
-import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.gradient.v2.GradientPaletteController;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
@@ -38,7 +38,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 	private TerrainMode selectedMode;
 	private TerrainMode originalMode;
 
-	private GradientColorsPaletteController controller;
+	private GradientPaletteController controller;
 
 	private TextView titleView;
 
@@ -99,10 +99,10 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 	}
 
 	@NonNull
-	public GradientColorsPaletteController getController() {
+	public GradientPaletteController getController() {
 		String paletteId = type.toPaletteCategory().getKey();
 		if (controller == null) {
-			controller = new GradientColorsPaletteController(app, paletteId,null);
+			controller = new GradientPaletteController(app, paletteId,null);
 		}
 		controller.updatePalette(paletteId, plugin.getTerrainMode().getKeyName());
 		controller.setPaletteListener(this);

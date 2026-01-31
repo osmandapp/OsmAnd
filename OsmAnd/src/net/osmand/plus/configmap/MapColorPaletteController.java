@@ -149,7 +149,7 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 				}
 
 				@Override
-				public void onAllColorsScreenClosed() {
+				public void onPaletteScreenClosed() {
 					externalListener.updateStatusBar();
 				}
 			};

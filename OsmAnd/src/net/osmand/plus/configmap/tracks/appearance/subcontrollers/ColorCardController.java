@@ -16,9 +16,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
-import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.gradient.v2.GradientPaletteController;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.v2.SolidColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.SolidPaletteController;
 import net.osmand.plus.palette.controller.BasePaletteController;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
@@ -46,7 +46,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	private final boolean addUnchanged;
 
 	private BasePaletteController colorsPaletteController;
-	private GradientColorsPaletteController gradientPaletteController;
+	private GradientPaletteController gradientPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
 
 	public ColorCardController(@NonNull OsmandApplication app, @NonNull AppearanceData data, boolean addUnchanged) {
@@ -101,11 +101,11 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	}
 
 	@NonNull
-	public GradientColorsPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
+	public GradientPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
 		PaletteCategory paletteCategory = gradientScaleType.toPaletteCategory();
 		String paletteId = paletteCategory != null ? paletteCategory.getKey() : "";
 		if (gradientPaletteController == null) {
-			gradientPaletteController = new GradientColorsPaletteController(app, paletteId, null);
+			gradientPaletteController = new GradientPaletteController(app, paletteId, null);
 		}
 		gradientPaletteController.updatePalette(paletteId, PaletteUtils.DEFAULT_NAME);
 		gradientPaletteController.setPaletteListener(getExternalListener());
@@ -116,7 +116,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	public BasePaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
 			Integer color = data.getParameter(COLOR);
-			colorsPaletteController = new SolidColorsPaletteController(app, color, false);
+			colorsPaletteController = new SolidPaletteController(app, color, false);
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());
 		return colorsPaletteController;

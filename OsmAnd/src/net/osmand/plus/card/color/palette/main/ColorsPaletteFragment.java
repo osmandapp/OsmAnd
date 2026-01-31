@@ -1,6 +1,6 @@
 package net.osmand.plus.card.color.palette.main;
 
-import static net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
+import static net.osmand.plus.palette.contract.IPaletteController.ALL_PALETTE_ITEMS_PROCESS_ID;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -25,7 +25,6 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.palette.contract.IPaletteController;
 import net.osmand.plus.palette.contract.IPaletteInteractionListener;
 import net.osmand.plus.palette.contract.IPaletteView;
-import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -54,7 +53,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DialogManager dialogManager = app.getDialogManager();
-		controller = (IPaletteController) dialogManager.findController(ALL_COLORS_PROCESS_ID);
+		controller = (IPaletteController) dialogManager.findController(ALL_PALETTE_ITEMS_PROCESS_ID);
 		if (controller instanceof IPaletteInteractionListener l) {
 			this.listener = l;
 			controller.attachView(this);
@@ -179,8 +178,8 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 			// Automatically unregister controller when close the dialog
 			// to avoid any possible memory leaks
 			DialogManager manager = app.getDialogManager();
-			manager.unregister(ALL_COLORS_PROCESS_ID);
-			controller.onAllColorsScreenClosed();
+			manager.unregister(ALL_PALETTE_ITEMS_PROCESS_ID);
+			controller.onPaletteScreenClosed();
 		}
 	}
 
@@ -194,7 +193,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 			DialogManager dialogManager = app.getDialogManager();
-			dialogManager.register(ALL_COLORS_PROCESS_ID, controller);
+			dialogManager.register(ALL_PALETTE_ITEMS_PROCESS_ID, controller);
 			new ColorsPaletteFragment().show(fragmentManager, TAG);
 		}
 	}

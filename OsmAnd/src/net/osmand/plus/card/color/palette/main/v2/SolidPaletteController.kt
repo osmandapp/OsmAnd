@@ -7,12 +7,8 @@ import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.card.color.palette.main.ColorsPaletteFragment
-import net.osmand.plus.palette.contract.IPaletteController
-import net.osmand.plus.palette.contract.IPaletteInteractionListener
 import net.osmand.plus.palette.contract.IPaletteView
 import net.osmand.plus.palette.controller.BasePaletteController
-import net.osmand.plus.palette.view.binder.PaletteItemViewBinder
-import net.osmand.plus.palette.view.binder.SolidViewBinder
 import net.osmand.plus.track.fragments.controller.ColorPickerDialogController
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.popup.PopUpMenu
@@ -24,7 +20,7 @@ import net.osmand.shared.palette.domain.Palette
 import net.osmand.shared.palette.domain.PaletteItem
 import java.lang.ref.WeakReference
 
-open class SolidColorsPaletteController(
+open class SolidPaletteController(
 	protected val app: OsmandApplication,
 	private val paletteId: String = "user_palette_default" // TODO: don't use hardcoded ids
 ) : BasePaletteController(), ColorPickerDialogController.ColorPickerListener {
@@ -183,6 +179,10 @@ open class SolidColorsPaletteController(
 
 	override fun getSelectedPaletteItem(): PaletteItem? = selectedItem
 
+	override fun isAddingNewItemsSupported(): Boolean {
+		return true
+	}
+
 	override fun isPaletteItemSelected(item: PaletteItem): Boolean {
 		return item.id == selectedItem?.id
 	}
@@ -287,13 +287,6 @@ open class SolidColorsPaletteController(
 		for (palette in collectActivePalettes()) {
 			palette.updatePaletteSelection(oldItem, newItem)
 		}
-	}
-
-	override fun getItemBinder(
-		activity: FragmentActivity,
-		nightMode: Boolean
-	): PaletteItemViewBinder {
-		return SolidViewBinder(activity, nightMode)
 	}
 
 	fun getColorName(color: Int): String {

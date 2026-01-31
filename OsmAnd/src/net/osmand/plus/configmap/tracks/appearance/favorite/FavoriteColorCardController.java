@@ -18,7 +18,7 @@ import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.v2.SolidColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.SolidPaletteController;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.palette.controller.BasePaletteController;
 import net.osmand.plus.utils.UiUtilities;
@@ -81,7 +81,7 @@ public class FavoriteColorCardController extends ColoringStyleCardController {
 			if (color == null) {
 				color = favoriteAppearanceController.requireColor();
 			}
-			colorsPaletteController = new SolidColorsPaletteController(app, color);
+			colorsPaletteController = new SolidPaletteController(app, color);
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());
 		return colorsPaletteController;

@@ -18,7 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.card.color.palette.main.v2.SolidColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.SolidPaletteController;
 import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener;
 import net.osmand.plus.card.icon.CircleIconPaletteElements;
 import net.osmand.plus.card.icon.IconsPaletteController;
@@ -56,7 +56,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 	private ApplicationProfileObject profile;
 	private ApplicationProfileObject changedProfile;
 
-	private SolidColorsPaletteController colorsCardController;
+	private SolidPaletteController colorsCardController;
 	private IconsPaletteController<Integer> profileIconCardController;
 	private IconsPaletteController<String> restingIconCardController;
 	private IconsPaletteController<String> navigationIconCardController;
@@ -330,13 +330,13 @@ public class ProfileAppearanceController extends BaseDialogController {
 	}
 
 	@NonNull
-	public SolidColorsPaletteController getColorsCardController() {
+	public SolidPaletteController getColorsCardController() {
 		if (colorsCardController == null) {
 			boolean nightMode = isNightMode();
 			int selectedColor = changedProfile.getActualColor(app, nightMode);
-			colorsCardController = new SolidColorsPaletteController(app, selectedColor) {
+			colorsCardController = new SolidPaletteController(app, selectedColor) {
 				@Override
-				public void onAllColorsScreenClosed() {
+				public void onPaletteScreenClosed() {
 					if (screen != null) {
 						screen.updateStatusBar();
 					}

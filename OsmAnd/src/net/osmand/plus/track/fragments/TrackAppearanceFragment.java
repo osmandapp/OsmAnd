@@ -50,7 +50,7 @@ import net.osmand.plus.card.base.headed.HeadedContentCard;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
-import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.gradient.v2.GradientPaletteController;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.configmap.MapOptionSliderFragment.MapOptionSliderListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -632,7 +632,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void onSaveButtonClicked() {
 		getColorCardController().getColorsPaletteController().renewLastUsedTime();
-		GradientColorsPaletteController gradientColorsPaletteController = getColorCardController().getGradientPaletteController();
+		GradientPaletteController gradientColorsPaletteController = getColorCardController().getGradientPaletteController();
 		if (gradientColorsPaletteController != null) {
 			gradientColorsPaletteController.renewLastUsedTime();
 		}

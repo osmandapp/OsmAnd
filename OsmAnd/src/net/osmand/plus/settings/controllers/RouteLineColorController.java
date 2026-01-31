@@ -13,7 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.gradient.v2.GradientPaletteController;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
@@ -55,7 +55,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 	private PreviewRouteLineInfo routeLinePreview;
 
 	private ModedColorsPaletteController colorsPaletteController;
-	private GradientColorsPaletteController gradientPaletteController;
+	private GradientPaletteController gradientPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
 	private boolean initialNightMode;
 
@@ -104,7 +104,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 				}
 
 				@Override
-				public void onAllColorsScreenClosed() {
+				public void onPaletteScreenClosed() {
 					notifyAllColorsScreenClosed();
 				}
 			};
@@ -175,13 +175,13 @@ public class RouteLineColorController extends ColoringStyleCardController
 	}
 
 	@NonNull
-	public GradientColorsPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
+	public GradientPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
 		PaletteCategory paletteCategory = gradientScaleType.toPaletteCategory();
 		String paletteId = paletteCategory != null ? paletteCategory.getKey() : "";
 		if (gradientPaletteController == null) {
-			gradientPaletteController = new GradientColorsPaletteController(app, paletteId,null) {
+			gradientPaletteController = new GradientPaletteController(app, paletteId,null) {
 				@Override
-				public void onAllColorsScreenClosed() {
+				public void onPaletteScreenClosed() {
 					notifyAllColorsScreenClosed();
 				}
 			};
@@ -192,7 +192,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 	}
 
 	@Nullable
-	public GradientColorsPaletteController getGradientPaletteController() {
+	public GradientPaletteController getGradientPaletteController() {
 		return gradientPaletteController;
 	}
 

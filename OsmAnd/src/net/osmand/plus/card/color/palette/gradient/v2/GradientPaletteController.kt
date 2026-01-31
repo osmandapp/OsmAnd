@@ -11,9 +11,8 @@ import net.osmand.plus.R
 import net.osmand.plus.card.color.palette.gradient.AllGradientsPaletteFragment
 import net.osmand.plus.palette.contract.IPaletteView
 import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener
+import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.palette.controller.BasePaletteController
-import net.osmand.plus.palette.view.binder.GradientViewBinder
-import net.osmand.plus.palette.view.binder.PaletteItemViewBinder
 import net.osmand.plus.plugins.srtm.TerrainMode
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
@@ -30,7 +29,7 @@ import net.osmand.shared.palette.domain.PaletteCategory
 import net.osmand.shared.palette.domain.PaletteItem
 import java.lang.ref.WeakReference
 
-open class GradientColorsPaletteController(
+open class GradientPaletteController(
 	private val app: OsmandApplication,
 	private var paletteId: String, // TODO: here we can use GradientPaletteCategory
 	val analysis: GpxTrackAnalysis?
@@ -125,6 +124,10 @@ open class GradientColorsPaletteController(
 	}
 
 	override fun getSelectedPaletteItem(): PaletteItem? = selectedItem
+
+	override fun isAddingNewItemsSupported(): Boolean {
+		return InAppPurchaseUtils.isGradientEditorAvailable(app)
+	}
 
 	override fun isPaletteItemSelected(item: PaletteItem): Boolean {
 		return item.id == selectedItem?.id
@@ -275,13 +278,6 @@ open class GradientColorsPaletteController(
 		for (palette in collectActivePalettes()) {
 			palette.updatePaletteSelection(oldItem, newItem)
 		}
-	}
-
-	override fun getItemBinder(
-		activity: FragmentActivity,
-		nightMode: Boolean
-	): PaletteItemViewBinder {
-		return GradientViewBinder(activity, nightMode)
 	}
 
 	private fun getContentIcon(@DrawableRes id: Int): Drawable? {

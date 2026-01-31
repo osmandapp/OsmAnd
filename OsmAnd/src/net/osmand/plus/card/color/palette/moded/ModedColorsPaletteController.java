@@ -5,14 +5,14 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
-import net.osmand.plus.card.color.palette.main.v2.SolidColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.SolidPaletteController;
 import net.osmand.shared.palette.domain.PaletteItem;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class ModedColorsPaletteController extends SolidColorsPaletteController {
+public abstract class ModedColorsPaletteController extends SolidPaletteController {
 
 	private final List<PaletteMode> availablePaletteModes;
 	private OnPaletteModeSelectedListener onPaletteModeSelectedListener;

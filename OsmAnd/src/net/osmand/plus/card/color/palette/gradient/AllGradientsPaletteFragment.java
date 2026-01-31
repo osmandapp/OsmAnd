@@ -1,6 +1,6 @@
 package net.osmand.plus.card.color.palette.gradient;
 
-import static net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
+import static net.osmand.plus.palette.contract.IPaletteController.ALL_PALETTE_ITEMS_PROCESS_ID;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -47,7 +47,7 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DialogManager dialogManager = app.getDialogManager();
-		controller = (BasePaletteController) dialogManager.findController(ALL_COLORS_PROCESS_ID);
+		controller = (BasePaletteController) dialogManager.findController(ALL_PALETTE_ITEMS_PROCESS_ID);
 		if (controller != null) {
 			controller.attachView(this);
 		}
@@ -110,8 +110,8 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 			// Automatically unregister controller when close the dialog
 			// to avoid any possible memory leaks
 			DialogManager manager = app.getDialogManager();
-			manager.unregister(ALL_COLORS_PROCESS_ID);
-			controller.onAllColorsScreenClosed();
+			manager.unregister(ALL_PALETTE_ITEMS_PROCESS_ID);
+			controller.onPaletteScreenClosed();
 		}
 	}
 
@@ -125,7 +125,7 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 			DialogManager dialogManager = app.getDialogManager();
-			dialogManager.register(ALL_COLORS_PROCESS_ID, controller);
+			dialogManager.register(ALL_PALETTE_ITEMS_PROCESS_ID, controller);
 			new AllGradientsPaletteFragment().show(fragmentManager, TAG);
 		}
 	}

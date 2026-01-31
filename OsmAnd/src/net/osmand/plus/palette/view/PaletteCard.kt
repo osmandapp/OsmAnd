@@ -59,29 +59,31 @@ abstract class PaletteCard(
 		rv.adapter = adapter
 	}
 
-	protected fun setupAddButton() {
+	private fun setupAddButton() {
 		val container = view.findViewById<ViewGroup>(R.id.add_button_container) ?: return
-		container.addView(paletteElements.createAddButtonView(container))
-		container.setOnClickListener {
-			paletteListener.onAddButtonClick(activity)
+		if (controller.isAddingNewItemsSupported()) {
+			container.addView(paletteElements.createAddButtonView(container))
+			container.setOnClickListener {
+				paletteListener.onAddButtonClick(activity)
+			}
+			container.visibility = View.VISIBLE
+		} else {
+			container.visibility = View.GONE
 		}
 	}
 
 	protected open fun setupShowAllButton() {
 		val buttonAllColors = view.findViewById<View>(R.id.button_all_colors) ?: return
-
-		buttonAllColors.setOnClickListener {
-			paletteListener.onShowAllClick(activity)
-		}
-
-		// Оновлюємо фон кнопки "Всі"
+		buttonAllColors.setOnClickListener { paletteListener.onShowAllClick(activity) }
 		updateShowAllButton()
 	}
 
 	private fun updateShowAllButton() {
-		val btnAll = view.findViewById<View>(R.id.button_all_colors) ?: return
-		val accentColor = controller.getControlsAccentColor(nightMode)
-		UiUtilities.setupListItemBackground(activity, btnAll, accentColor)
+		if (controller.isAddingNewItemsSupported()) {
+			val btnAll = view.findViewById<View>(R.id.button_all_colors) ?: return
+			val accentColor = controller.getControlsAccentColor(nightMode)
+			UiUtilities.setupListItemBackground(activity, btnAll, accentColor)
+		}
 	}
 
 	// --- IPaletteView Implementation ---

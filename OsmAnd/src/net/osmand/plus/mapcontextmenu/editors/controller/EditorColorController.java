@@ -9,10 +9,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.card.color.palette.main.v2.SolidColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.SolidPaletteController;
 import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener;
 
-public class EditorColorController extends SolidColorsPaletteController implements IDialogController {
+public class EditorColorController extends SolidPaletteController implements IDialogController {
 
 	private static final String PROCESS_ID = "select_map_point_color";
 
@@ -32,7 +32,7 @@ public class EditorColorController extends SolidColorsPaletteController implemen
 	}
 
 	@Override
-	public void onAllColorsScreenClosed() {
+	public void onPaletteScreenClosed() {
 		if (getTargetFragment() instanceof BaseFullScreenFragment fragment) {
 			fragment.updateStatusBar();
 		}

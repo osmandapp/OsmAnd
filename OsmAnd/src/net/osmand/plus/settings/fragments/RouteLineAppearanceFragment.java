@@ -26,7 +26,7 @@ import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.card.base.multistate.IMultiStateCardController;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
-import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.gradient.v2.GradientPaletteController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.profiles.LocationIcon;
@@ -311,7 +311,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	private void onSaveButtonClicked() {
 		getColorCardController().getColorsPaletteController().renewLastUsedTime();
-		GradientColorsPaletteController gradientColorsPaletteController = getColorCardController().getGradientPaletteController();
+		GradientPaletteController gradientColorsPaletteController = getColorCardController().getGradientPaletteController();
 		if (gradientColorsPaletteController != null) {
 			gradientColorsPaletteController.renewLastUsedTime();
 		}

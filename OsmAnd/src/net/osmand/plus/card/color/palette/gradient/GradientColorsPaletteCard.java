@@ -8,7 +8,7 @@ import com.github.mikephil.charting.charts.GradientChart;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.gradient.v2.GradientPaletteController;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.palette.contract.IPaletteView;
 import net.osmand.plus.charts.ChartUtils;
@@ -22,10 +22,10 @@ import net.osmand.shared.palette.domain.PaletteItem;
 
 public class GradientColorsPaletteCard extends ColorsPaletteCard implements IPaletteView {
 
-	private final GradientColorsPaletteController controller;
+	private final GradientPaletteController controller;
 
 	public GradientColorsPaletteCard(@NonNull FragmentActivity activity,
-	                                 @NonNull GradientColorsPaletteController controller) {
+	                                 @NonNull GradientPaletteController controller) {
 		super(activity, controller);
 		this.controller = controller;
 	}
