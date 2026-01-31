@@ -242,7 +242,7 @@ public class NavigationNotification extends OsmandNotification {
 			notificationBuilder.extend(
 					new CarAppExtender.Builder()
 							//.setImportance(NotificationManagerCompat.IMPORTANCE_HIGH)
-							.setContentIntent(CarPendingIntent.getCarApp(app, intent.hashCode(), intent, 0))
+							.setContentIntent(CarPendingIntent.getCarApp(app, intent.filterHashCode(), intent, 0))
 							.build());
 		}
 
