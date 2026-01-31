@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.OsmandTextFieldBoxes
+		android:id="@+id/edit_text_otfb"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="@dimen/dialog_button_ex_height"
+		android:layout_marginTop="@dimen/text_margin_small"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		app:labelText="@string/enter_path_to_folder"
+		app:primaryColor="?android:textColorPrimary"
+		app:secondaryColor="?android:textColorSecondary"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding">
+
+		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+			android:id="@+id/text"
+			android:inputType="textMultiLine|textNoSuggestions"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:maxLines="10"
+			android:textColor="?android:textColorPrimary"
+			tools:text="Folder path ... " />
+
+	</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginStart="@dimen/content_padding">
+
+		<TextView
+			android:id="@+id/description"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/subHeaderPadding"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:ellipsize="end"
+			android:linksClickable="true"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_sub_text_size"
+			tools:text="EditText description"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingStart="@dimen/content_padding" />
+
+	</FrameLayout>
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginBottom="@dimen/content_padding_half"
+		android:background="?attr/divider_color" />
+
+	<include
+		android:id="@+id/button"
+		layout="@layout/bottom_sheet_item_btn_with_icon_and_text" />
+
+</LinearLayout> 
