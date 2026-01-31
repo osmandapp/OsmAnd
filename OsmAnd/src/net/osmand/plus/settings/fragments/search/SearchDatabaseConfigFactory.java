@@ -51,22 +51,46 @@ public class SearchDatabaseConfigFactory {
 
 	private static ActivitySearchDatabaseConfigs createActivitySearchDatabaseConfigs() {
 		return new ActivitySearchDatabaseConfigs(
-				Map.of(MapActivity.class, ConfigureMapFragment.ConfigureMapFragmentProxy.class),
+				Map.of(
+						MapActivity.class,
+						ConfigureMapFragment.ConfigureMapFragmentProxy.class),
 				Set.of(
-						new PrincipalAndProxy<>(ConfigureMapFragment.class, ConfigureMapFragment.ConfigureMapFragmentProxy.class),
-						new PrincipalAndProxy<>(DetailsBottomSheet.class, DetailsBottomSheet.DetailsBottomSheetProxy.class),
-						new PrincipalAndProxy<>(TransportLinesFragment.class, TransportLinesFragment.TransportLinesFragmentProxy.class),
-						new PrincipalAndProxy<>(SelectMapStyleBottomSheetDialogFragment.class, SelectMapStyleBottomSheetDialogFragment.SelectMapStyleBottomSheetDialogFragmentProxy.class),
-						new PrincipalAndProxy<>(RoadStyleSelectionDialogFragment.class, RoadStyleSelectionDialogFragment.RoadStyleSelectionDialogFragmentProxy.class),
-						new PrincipalAndProxy<>(MultiSelectionDialogFragment.class, MultiSelectionDialogFragment.MultiSelectionDialogFragmentProxy.class),
-						new PrincipalAndProxy<>(InstallMapLayersDialogFragment.class, InstallMapLayersDialogFragment.InstallMapLayersDialogFragmentProxy.class),
-						new PrincipalAndProxy<>(ConfigureMapDialogs.MapLanguageDialog.class, ConfigureMapDialogs.MapLanguageDialog.MapLanguageDialogProxy.class),
-						new PrincipalAndProxy<>(MapLayerSelectionDialogFragment.class, MapLayerSelectionDialogFragment.MapLayerSelectionDialogFragmentProxy.class),
-						new PrincipalAndProxy<>(MapModeFragment.class, MapModeFragment.MapModeFragmentProxy.class)));
+						new PrincipalAndProxy<>(
+								ConfigureMapFragment.class,
+								ConfigureMapFragment.ConfigureMapFragmentProxy.class),
+						new PrincipalAndProxy<>(
+								DetailsBottomSheet.class,
+								DetailsBottomSheet.DetailsBottomSheetProxy.class),
+						new PrincipalAndProxy<>(
+								TransportLinesFragment.class,
+								TransportLinesFragment.TransportLinesFragmentProxy.class),
+						new PrincipalAndProxy<>(
+								SelectMapStyleBottomSheetDialogFragment.class,
+								SelectMapStyleBottomSheetDialogFragment.SelectMapStyleBottomSheetDialogFragmentProxy.class),
+						new PrincipalAndProxy<>(
+								RoadStyleSelectionDialogFragment.class,
+								RoadStyleSelectionDialogFragment.RoadStyleSelectionDialogFragmentProxy.class),
+						new PrincipalAndProxy<>(
+								MultiSelectionDialogFragment.class,
+								MultiSelectionDialogFragment.MultiSelectionDialogFragmentProxy.class),
+						new PrincipalAndProxy<>(
+								InstallMapLayersDialogFragment.class,
+								InstallMapLayersDialogFragment.InstallMapLayersDialogFragmentProxy.class),
+						new PrincipalAndProxy<>(
+								ConfigureMapDialogs.MapLanguageDialog.class,
+								ConfigureMapDialogs.MapLanguageDialog.MapLanguageDialogProxy.class),
+						new PrincipalAndProxy<>(
+								MapLayerSelectionDialogFragment.class,
+								MapLayerSelectionDialogFragment.MapLayerSelectionDialogFragmentProxy.class),
+						new PrincipalAndProxy<>(
+								MapModeFragment.class,
+								MapModeFragment.MapModeFragmentProxy.class)));
 	}
 
 	private static Map<Class<? extends Activity>, ActivityInitializer<?>> getActivityInitializerByActivity(final FragmentManager fragmentManager) {
-		return Map.of(MapActivity.class, new MapActivityInitializer(fragmentManager));
+		return Map.of(
+				MapActivity.class,
+				new MapActivityInitializer(fragmentManager));
 	}
 
 	private static Optional<String> getSearchableInfo(final Preference preference) {
