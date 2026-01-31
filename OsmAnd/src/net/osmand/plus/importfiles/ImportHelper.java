@@ -738,7 +738,7 @@ public class ImportHelper {
 		} else if (fileName != null) {
 			if (forceImportGpx || !Algorithms.isEmpty(gpxFile.getTracks())) {
 				handleResult(gpxFile, fileName, fileSize, save, useImportDir, showSnackbar);
-			} else {
+			} else if (AndroidUtils.isActivityNotDestroyed(activity)) {
 				ImportGpxBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(),
 						this, gpxFile, fileName, fileSize, save, useImportDir, showSnackbar);
 			}

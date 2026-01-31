@@ -516,7 +516,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		OsmandApplication app = getApp();
 		CarContext context = getCarContext();
 		ScreenManager screenManager = context.getCarService(ScreenManager.class);
-		Screen top = screenManager.getTop();
+		Screen top = !screenManager.getScreenStack().isEmpty() ? screenManager.getTop() : null;
+
 		TargetPoint pointToNavigate = app.getTargetPointsHelper().getPointToNavigate();
 		if (app.getRoutingHelper().isRouteCalculated() && !app.getRoutingHelper().isFollowingMode()
 				&& pointToNavigate != null && !(top instanceof RoutePreviewScreen)) {

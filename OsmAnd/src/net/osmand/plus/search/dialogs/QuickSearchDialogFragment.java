@@ -1154,7 +1154,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (app.isApplicationInitializing()) {
 			showProgressBar();
 			app.getAppInitializer().addOnFinishListener(result -> {
-				if (!paused) {
+				if (!paused && isAdded()) {
 					reloadCategoriesInternal();
 					if (!searching) {
 						hideProgressBar();
@@ -1249,7 +1249,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (app.isApplicationInitializing()) {
 			showProgressBar();
 			app.getAppInitializer().addOnFinishListener(result -> {
-				if (!paused) {
+				if (!paused && isAdded()) {
 					reloadCitiesInternal();
 					if (!searching) {
 						hideProgressBar();
@@ -1411,7 +1411,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (app.isApplicationInitializing()) {
 			showProgressBar();
 			app.getAppInitializer().addOnFinishListener(result -> {
-				if (!paused) {
+				if (!paused && isAdded()) {
 					reloadHistoryInternal();
 					if (!searching) {
 						hideProgressBar();

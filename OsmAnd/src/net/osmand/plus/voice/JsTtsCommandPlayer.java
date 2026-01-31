@@ -97,9 +97,12 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 					ttsVoiceStatus = "NO INIT SUCCESS";
 					internalClear();
 					app.showToastMessage(R.string.tts_initialization_error);
-				} else if (mTts != null) {
-					Locale locale = new LocaleBuilder(app, mTts, language).buildLocale();
-					onSuccessfulTtsInit(locale, cSpeechRate);
+				} else {
+					TextToSpeech tts = mTts;
+					if (tts != null) {
+						Locale locale = new LocaleBuilder(app, tts, language).buildLocale();
+						onSuccessfulTtsInit(locale, cSpeechRate);
+					}
 				}
 			});
 			mTts = textToSpeech[0];

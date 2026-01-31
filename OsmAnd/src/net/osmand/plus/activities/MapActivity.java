@@ -696,14 +696,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.APPLICATION_MODE.addListener(applicationModeListener);
 		updateApplicationModeSettings(!app.getPoiFilters().isShowingAnyPoi());
 
-
 		// if destination point was changed try to recalculate route
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (routingHelper.isFollowingMode()
-				&& (!Algorithms.objectEquals(targets.getPointToNavigate().getLatLon(), routingHelper.getFinalLocation()) || !Algorithms
-				.objectEquals(targets.getIntermediatePointsLatLonNavigation(), routingHelper.getIntermediatePoints()))) {
-			targets.updateRouteAndRefresh(true);
+		if (routingHelper.isFollowingMode()) {
+			TargetPoint point = targets.getPointToNavigate();
+			LatLon targetLatLon = point != null ? point.getLatLon() : null;
+			if (!Algorithms.objectEquals(targetLatLon, routingHelper.getFinalLocation())
+					|| !Algorithms.objectEquals(targets.getIntermediatePointsLatLonNavigation(), routingHelper.getIntermediatePoints())) {
+				targets.updateRouteAndRefresh(true);
+			}
 		}
 		app.getLocationProvider().resumeAllUpdates();
 
