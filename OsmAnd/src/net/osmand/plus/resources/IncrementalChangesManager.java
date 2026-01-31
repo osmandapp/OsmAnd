@@ -337,7 +337,7 @@ public class IncrementalChangesManager {
 		return lst;
 	}
 
-	public IncrementalUpdateList getUpdatesByMonth(String fileName) {
+	public synchronized IncrementalUpdateList getUpdatesByMonth(String fileName) {
 		IncrementalUpdateList iul = new IncrementalUpdateList();
 		RegionUpdateFiles ruf = regions.get(fileName.toLowerCase());
 		iul.updateFiles = ruf;
