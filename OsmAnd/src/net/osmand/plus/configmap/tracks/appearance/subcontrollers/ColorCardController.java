@@ -17,8 +17,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.v2.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.main.v2.SolidColorsPaletteController;
+import net.osmand.plus.palette.controller.BasePaletteController;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
@@ -27,7 +28,6 @@ import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.shared.palette.data.PaletteUtils;
@@ -45,7 +45,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	private final AppearanceData data;
 	private final boolean addUnchanged;
 
-	private IColorsPaletteController colorsPaletteController;
+	private BasePaletteController colorsPaletteController;
 	private GradientColorsPaletteController gradientPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
 
@@ -113,10 +113,10 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	}
 
 	@NonNull
-	public IColorsPaletteController getColorsPaletteController() {
+	public BasePaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
 			Integer color = data.getParameter(COLOR);
-			colorsPaletteController = new ColorsPaletteController(app, color, false);
+			colorsPaletteController = new SolidColorsPaletteController(app, color, false);
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());
 		return colorsPaletteController;

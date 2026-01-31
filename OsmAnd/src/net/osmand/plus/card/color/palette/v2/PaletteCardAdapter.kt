@@ -3,20 +3,20 @@ package net.osmand.plus.card.color.palette.v2
 import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController
+import net.osmand.plus.palette.contract.IPaletteController
+import net.osmand.plus.palette.contract.IPaletteInteractionListener
+import net.osmand.plus.palette.view.binder.PaletteItemViewBinder
 import net.osmand.shared.palette.data.PaletteSortMode
 import net.osmand.shared.palette.domain.PaletteItem
 
 class PaletteCardAdapter(
-	private val activity: FragmentActivity,
-	private val controller: IColorsPaletteController,
-	private val nightMode: Boolean
+	private val listener: IPaletteInteractionListener,
+	private val controller: IPaletteController,
+	private val itemViewBinder: PaletteItemViewBinder
 ) : RecyclerView.Adapter<PaletteCardAdapter.ViewHolder>() {
 
 	private var items: List<PaletteItem>
-	private val itemViewBinder = controller.getItemBinder(activity, nightMode)
 
 	init {
 		items = controller.getPaletteItems(PaletteSortMode.LAST_USED_TIME)
@@ -41,10 +41,10 @@ class PaletteCardAdapter(
 		itemViewBinder.bindView(holder.itemView, item, isSelected)
 
 		holder.itemView.setOnClickListener {
-			controller.onSelectItemFromPalette(item, false)
+			listener.onPaletteItemClick(item, false)
 		}
 		holder.itemView.setOnLongClickListener {
-			controller.onPaletteItemLongClick(activity, holder.itemView, item, nightMode)
+			listener.onPaletteItemLongClick(holder.itemView, item)
 			false
 		}
 	}

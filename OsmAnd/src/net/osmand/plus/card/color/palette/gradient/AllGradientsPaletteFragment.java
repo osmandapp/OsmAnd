@@ -23,19 +23,19 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.card.color.palette.gradient.v2.AllGradientsPaletteAdapter;
-import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.v2.IColorsPalette;
-import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController;
+import net.osmand.plus.palette.contract.IPaletteController;
+import net.osmand.plus.palette.contract.IPaletteView;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.palette.controller.BasePaletteController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.palette.domain.PaletteItem;
 
-public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment implements IColorsPalette {
+public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment implements IPaletteView {
 
 	public static final String TAG = AllGradientsPaletteFragment.class.getSimpleName();
 
-	private IColorsPaletteController controller;
+	private BasePaletteController controller;
 	private AllGradientsPaletteAdapter adapter;
 
 	@Override
@@ -47,9 +47,9 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DialogManager dialogManager = app.getDialogManager();
-		controller = (GradientColorsPaletteController) dialogManager.findController(ALL_COLORS_PROCESS_ID);
+		controller = (BasePaletteController) dialogManager.findController(ALL_COLORS_PROCESS_ID);
 		if (controller != null) {
-			controller.bindPalette(this);
+			controller.attachView(this);
 		}
 	}
 
@@ -104,7 +104,7 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.unbindPalette(this);
+		controller.detachView(this);
 		FragmentActivity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
 			// Automatically unregister controller when close the dialog
@@ -120,7 +120,7 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
-									@NonNull IColorsPaletteController controller) {
+									@NonNull IPaletteController controller) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			OsmandApplication app = (OsmandApplication) activity.getApplicationContext();

@@ -22,7 +22,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.card.color.palette.main.v2.IColorsPalette;
+import net.osmand.plus.palette.contract.IPaletteController;
+import net.osmand.plus.palette.contract.IPaletteInteractionListener;
+import net.osmand.plus.palette.contract.IPaletteView;
 import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -35,11 +37,12 @@ import net.osmand.shared.palette.domain.PaletteItem;
 // TODO: I think we should have 2 versions of this screen (or use 2 strategies) - list and flow
 //  currently we use flow layout for solid colors (this screen) and list view for the gradient colors
 //  but view is just a representation, so we can use the same representation for gradient and solid colors
-public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implements IColorsPalette {
+public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implements IPaletteView {
 
 	public static final String TAG = ColorsPaletteFragment.class.getSimpleName();
 
-	private IColorsPaletteController controller;
+	private IPaletteController controller;
+	private IPaletteInteractionListener listener;
 	private ColorsPaletteElements paletteElements;
 
 	@Override
@@ -51,9 +54,12 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DialogManager dialogManager = app.getDialogManager();
-		controller = (IColorsPaletteController) dialogManager.findController(ALL_COLORS_PROCESS_ID);
-		if (controller != null) {
-			controller.bindPalette(this);
+		controller = (IPaletteController) dialogManager.findController(ALL_COLORS_PROCESS_ID);
+		if (controller instanceof IPaletteInteractionListener l) {
+			this.listener = l;
+			controller.attachView(this);
+		} else {
+			dismiss();
 		}
 	}
 
@@ -81,7 +87,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 		closeButton.setOnClickListener(v -> dismiss());
 
 		ImageView actionButton = toolbar.findViewById(R.id.action_button);
-		actionButton.setOnClickListener(v -> controller.onAddColorButtonClicked(requireActivity()));
+		actionButton.setOnClickListener(v -> listener.onAddButtonClick(requireActivity()));
 		actionButton.setImageDrawable(getIcon(R.drawable.ic_action_add_no_bg));
 		actionButton.setContentDescription(getString(R.string.shared_string_add));
 		AndroidUiHelper.updateVisibility(actionButton, true);
@@ -111,11 +117,11 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 		ImageView background = view.findViewById(R.id.background);
 		background.setOnClickListener(v -> {
 			// TODO: should we immediately renew last used time of the item
-			controller.onSelectItemFromPalette(item, true);
+			listener.onPaletteItemClick(item, true);
 			dismiss();
 		});
 		background.setOnLongClickListener(v -> {
-			controller.onPaletteItemLongClick(requireActivity(), v, item, nightMode);
+			listener.onPaletteItemLongClick(v, item);
 			return false;
 		});
 		view.setTag(item);
@@ -159,15 +165,15 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 
 	@NonNull
 	private View createAddCustomColorItemView(FlowLayout rootView) {
-		View view = paletteElements.createButtonAddColorView(rootView);
-		view.setOnClickListener(v -> controller.onAddColorButtonClicked(requireActivity()));
+		View view = paletteElements.createAddButtonView(rootView);
+		view.setOnClickListener(v -> listener.onAddButtonClick(requireActivity()));
 		return view;
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.unbindPalette(this);
+		controller.detachView(this);
 		FragmentActivity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
 			// Automatically unregister controller when close the dialog
@@ -183,7 +189,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @NonNull IColorsPaletteController controller) {
+	                                @NonNull IPaletteController controller) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			OsmandApplication app = (OsmandApplication) activity.getApplicationContext();

@@ -10,15 +10,17 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.v2.IColorsPalette;
+import net.osmand.plus.palette.contract.IPaletteView;
 import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.palette.view.binder.GradientViewBinder;
+import net.osmand.plus.palette.view.binder.PaletteItemViewBinder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.ColorPalette;
 import net.osmand.shared.palette.domain.PaletteCategory;
 import net.osmand.shared.palette.domain.PaletteItem;
 
-public class GradientColorsPaletteCard extends ColorsPaletteCard implements IColorsPalette {
+public class GradientColorsPaletteCard extends ColorsPaletteCard implements IPaletteView {
 
 	private final GradientColorsPaletteController controller;
 
@@ -72,5 +74,11 @@ public class GradientColorsPaletteCard extends ColorsPaletteCard implements ICol
 		chart.setData(ChartUtils.buildGradientChart(app, chart, colorPalette, formatter, nightMode));
 		chart.notifyDataSetChanged();
 		chart.invalidate();
+	}
+
+	@NonNull
+	@Override
+	public PaletteItemViewBinder createViewBinder() {
+		return new GradientViewBinder(activity, nightMode);
 	}
 }

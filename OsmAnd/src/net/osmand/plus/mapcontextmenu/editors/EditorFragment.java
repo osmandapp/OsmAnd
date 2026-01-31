@@ -36,7 +36,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.v2.ColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.SolidColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener;
 import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.mapcontextmenu.editors.controller.EditorColorController;
@@ -324,7 +324,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	@NonNull
-	private ColorsPaletteController getColorController() {
+	private SolidColorsPaletteController getColorController() {
 		return EditorColorController.getInstance(app, this, getColor());
 	}
 
@@ -344,7 +344,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	protected void updateSelectedColorText() {
-		ColorsPaletteController controller = getColorController();
+		SolidColorsPaletteController controller = getColorController();
 		((TextView) view.findViewById(R.id.color_name)).setText(controller.getColorName(color));
 	}
 
@@ -406,7 +406,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	protected void savePressed() {
-		getColorController().refreshLastUsedTime();
+		getColorController().renewLastUsedTime();
 		save(true);
 	}
 

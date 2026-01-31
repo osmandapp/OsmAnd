@@ -7,8 +7,12 @@ import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.card.color.palette.main.ColorsPaletteFragment
-import net.osmand.plus.palette.view.renderer.PaletteItemBinder
-import net.osmand.plus.palette.view.renderer.SolidItemBinder
+import net.osmand.plus.palette.contract.IPaletteController
+import net.osmand.plus.palette.contract.IPaletteInteractionListener
+import net.osmand.plus.palette.contract.IPaletteView
+import net.osmand.plus.palette.controller.BasePaletteController
+import net.osmand.plus.palette.view.binder.PaletteItemViewBinder
+import net.osmand.plus.palette.view.binder.SolidViewBinder
 import net.osmand.plus.track.fragments.controller.ColorPickerDialogController
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.popup.PopUpMenu
@@ -20,14 +24,13 @@ import net.osmand.shared.palette.domain.Palette
 import net.osmand.shared.palette.domain.PaletteItem
 import java.lang.ref.WeakReference
 
-// TODO: extract all methods related to solid colors in the separate controller
-open class ColorsPaletteController(
+open class SolidColorsPaletteController(
 	protected val app: OsmandApplication,
 	private val paletteId: String = "user_palette_default" // TODO: don't use hardcoded ids
-) : IColorsPaletteController {
+) : BasePaletteController(), ColorPickerDialogController.ColorPickerListener {
 
 	private val repository = app.paletteRepository
-	protected val palettes = ArrayList<WeakReference<IColorsPalette>>()
+	protected val views = ArrayList<WeakReference<IPaletteView>>()
 	private var listener: OnColorsPaletteListener? = null
 
 	private var editedItem: PaletteItem.Solid? = null
@@ -44,16 +47,14 @@ open class ColorsPaletteController(
 		}
 	}
 
-	// TODO: bindPaletteView
-	override fun bindPalette(palette: IColorsPalette) {
-		palettes.add(WeakReference(palette))
+	override fun attachView(view: IPaletteView) {
+		views.add(WeakReference(view))
 	}
 
-	// TODO: unbindPaletteView
-	override fun unbindPalette(palette: IColorsPalette) {
-		val iterator = palettes.iterator()
+	override fun detachView(view: IPaletteView) {
+		val iterator = views.iterator()
 		while (iterator.hasNext()) {
-			if (iterator.next().get() == palette) {
+			if (iterator.next().get() == view) {
 				iterator.remove()
 				break
 			}
@@ -121,8 +122,7 @@ open class ColorsPaletteController(
 
 	// --- Selection Logic ---
 
-	// TODO: solid color
-	final override fun selectPaletteItem(color: Int, addIfNoFound: Boolean) {
+	fun selectPaletteItem(color: Int, addIfNoFound: Boolean) {
 		var found = findPaletteItem(color, addIfNoFound)
 		if (found == null) {
 			found = repository.getPaletteItems(paletteId, PaletteSortMode.ORIGINAL_ORDER)[0]
@@ -130,13 +130,12 @@ open class ColorsPaletteController(
 		selectPaletteItem(found)
 	}
 
-	// TODO: solid color
 	@JvmOverloads
-	fun findPaletteItem(color: Int, addIfNoFound: Boolean = false): PaletteItem? {
+	fun findPaletteItem(color: Int, addIfNotFound: Boolean = false): PaletteItem? {
 		val items = repository.getPaletteItems(paletteId, PaletteSortMode.ORIGINAL_ORDER)
 		var found = items.filterIsInstance<PaletteItem.Solid>().find { it.color == color }
 
-		if (found == null && addIfNoFound) {
+		if (found == null && addIfNotFound) {
 			val palette = repository.getPalette(paletteId)
 			if (palette is Palette.SolidCollection) {
 				val newItem = PaletteUtils.createSolidColor(palette, color, false)
@@ -147,12 +146,6 @@ open class ColorsPaletteController(
 		return found
 	}
 
-	// TODO: in previous implementation it was a lot simpler:
-	//  @Override
-	//	 public void selectColor(@Nullable PaletteColor paletteColor) {
-	//		selectedPaletteColor = paletteColor;
-	//		onColorSelected(paletteColor);
-	//	 }
 	override fun selectPaletteItem(item: PaletteItem?) {
 		if (selectedItem?.id != item?.id) {
 			val oldSelected = selectedItem
@@ -167,21 +160,6 @@ open class ColorsPaletteController(
 		}
 	}
 
-	// TODO: maybe rename -- public interface that we call when click on item
-	override fun onSelectItemFromPalette(item: PaletteItem, markAsUsed: Boolean) {
-		if (selectedItem?.id != item.id) {
-			val oldSelected = selectedItem
-			selectPaletteItem(item)
-
-			if (markAsUsed) {
-				repository.markPaletteItemAsUsed(paletteId, item.id)
-				notifyUpdatePaletteColors(item)
-			} else {
-				notifyUpdatePaletteSelection(oldSelected, item)
-			}
-		}
-	}
-
 	// TODO: interact with external listener / listeners
 	protected open fun notifyPaletteItemSelected(item: PaletteItem?) {
 		if (item != null) {
@@ -189,8 +167,7 @@ open class ColorsPaletteController(
 		}
 	}
 
-	// TODO: change name to renewLastUsedTime
-	override fun refreshLastUsedTime() {
+	override fun renewLastUsedTime() {
 		selectedItem?.let { renewLastUsedTime(it) }
 	}
 
@@ -218,25 +195,33 @@ open class ColorsPaletteController(
 
 	// --- UI Interactions ---
 
-	override fun onAddColorButtonClicked(activity: FragmentActivity) {
-		showColorPickerDialog(activity, null)
+	override fun onPaletteItemClick(item: PaletteItem, markAsUsed: Boolean) {
+		if (markAsUsed) {
+			renewLastUsedTime(item)
+		}
+		selectPaletteItem(item)
 	}
 
-	override fun onAllColorsButtonClicked(activity: FragmentActivity) {
-		ColorsPaletteFragment.showInstance(activity, this) // TODO use AllPaletteItemsFragment
-	}
-
-	override fun onPaletteItemLongClick(activity: FragmentActivity, view: View, item: PaletteItem, nightMode: Boolean) {
-		if (item is PaletteItem.Solid) { // TODO: don't check here
-			showItemPopUpMenu(activity, view, item, nightMode)
+	override fun onPaletteItemLongClick(anchorView: View, item: PaletteItem) {
+		if (item is PaletteItem.Solid) {
+			showItemPopUpMenu(anchorView, item)
 		}
 	}
 
+	override fun onAddButtonClick(activity: FragmentActivity) {
+		showColorPickerDialog(activity, null)
+	}
+
+	override fun onShowAllClick(activity: FragmentActivity) {
+		ColorsPaletteFragment.showInstance(activity, this)
+	}
+
 	// TODO: should be individual for gradient and solid
-	private fun showItemPopUpMenu(
-		activity: FragmentActivity, view: View,
-		item: PaletteItem.Solid, nightMode: Boolean
-	) {
+	private fun showItemPopUpMenu(anchorView: View, item: PaletteItem.Solid) {
+		val paletteView = collectActivePalettes()[0]
+		val activity = paletteView.getActivity() ?: return
+		val nightMode = paletteView.isNightMode()
+
 		val menuItems = ArrayList<PopUpMenuItem>()
 
 		menuItems.add(PopUpMenuItem.Builder(activity)
@@ -260,13 +245,12 @@ open class ColorsPaletteController(
 		)
 
 		val displayData = PopUpMenuDisplayData()
-		displayData.anchorView = view
+		displayData.anchorView = anchorView
 		displayData.menuItems = menuItems
 		displayData.nightMode = nightMode
 		PopUpMenu.show(displayData)
 	}
 
-	// TODO: only for solid colors
 	private fun showColorPickerDialog(activity: FragmentActivity, item: PaletteItem.Solid?) {
 		editedItem = item
 		val color = item?.color
@@ -275,9 +259,9 @@ open class ColorsPaletteController(
 
 	// --- Helpers ---
 
-	private fun collectActivePalettes(): List<IColorsPalette> {
-		val result = ArrayList<IColorsPalette>()
-		val iterator = palettes.iterator()
+	private fun collectActivePalettes(): List<IPaletteView> {
+		val result = ArrayList<IPaletteView>()
+		val iterator = views.iterator()
 		while (iterator.hasNext()) {
 			val palette = iterator.next().get()
 			if (palette != null) {
@@ -308,8 +292,8 @@ open class ColorsPaletteController(
 	override fun getItemBinder(
 		activity: FragmentActivity,
 		nightMode: Boolean
-	): PaletteItemBinder {
-		return SolidItemBinder(activity, nightMode)
+	): PaletteItemViewBinder {
+		return SolidViewBinder(activity, nightMode)
 	}
 
 	fun getColorName(color: Int): String {

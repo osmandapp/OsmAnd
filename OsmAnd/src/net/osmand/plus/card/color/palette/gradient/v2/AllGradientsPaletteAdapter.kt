@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.card.color.palette.gradient.GradientUiHelper
-import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController
+import net.osmand.plus.palette.controller.BasePaletteController
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
@@ -24,7 +24,7 @@ import net.osmand.shared.palette.domain.PaletteItem
 class AllGradientsPaletteAdapter(
 	private val app: OsmandApplication,
 	private val activity: FragmentActivity,
-	private val controller: IColorsPaletteController,
+	private val controller: BasePaletteController,
 	private val nightMode: Boolean
 ) : RecyclerView.Adapter<AllGradientsPaletteAdapter.GradientViewHolder>() {
 
@@ -122,13 +122,13 @@ class AllGradientsPaletteAdapter(
 
 				// 3. Clicks
 				itemView.setOnClickListener {
-					controller.onSelectItemFromPalette(item, false)
+					controller.onPaletteItemClick(item, markAsUsed = false)
 				}
 
 				// 4. Menu Button
 				menuButton.visibility = View.VISIBLE
 				menuButton.setOnClickListener {
-					controller.onPaletteItemLongClick(activity, menuButton, item, nightMode)
+					controller.onPaletteItemLongClick(menuButton, item)
 				}
 			}
 		}

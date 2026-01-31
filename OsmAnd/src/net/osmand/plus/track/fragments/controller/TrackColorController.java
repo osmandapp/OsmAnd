@@ -15,8 +15,9 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.plus.card.color.palette.gradient.v2.GradientColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.v2.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.main.v2.SolidColorsPaletteController;
+import net.osmand.plus.palette.contract.IPaletteController;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -31,7 +32,6 @@ import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.shared.palette.domain.PaletteCategory;
 import net.osmand.shared.routing.ColoringType;
@@ -54,7 +54,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 	private final SelectedGpxFile selectedGpx;
 	private final TrackDrawInfo drawInfo;
 
-	private IColorsPaletteController colorsPaletteController;
+	private SolidColorsPaletteController colorsPaletteController;
 	private GradientColorsPaletteController gradientPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
 
@@ -87,9 +87,9 @@ public class TrackColorController extends ColoringStyleCardController implements
 	}
 
 	@NonNull
-	public IColorsPaletteController getColorsPaletteController() {
+	public SolidColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			colorsPaletteController = new ColorsPaletteController(app, drawInfo.getColor());
+			colorsPaletteController = new SolidColorsPaletteController(app, drawInfo.getColor());
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());
 		return colorsPaletteController;

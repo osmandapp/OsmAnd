@@ -55,7 +55,7 @@ public class GridColorController extends MapColorPaletteController {
 		PaletteMode selectedMode = paletteController.getSelectedPaletteMode();
 		PaletteItem newPaletteColor = paletteController.provideSelectedPaletteItemForMode(selectedMode);
 		if (newPaletteColor != null) {
-			paletteController.onSelectItemFromPalette(newPaletteColor, false);
+			paletteController.selectPaletteItem(newPaletteColor);
 		}
 	}
 

@@ -3,20 +3,19 @@ package net.osmand.plus.card.color.palette.main.v2
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController
-import net.osmand.plus.palette.view.renderer.PaletteItemBinder
-import net.osmand.plus.track.fragments.controller.ColorPickerDialogController
+import net.osmand.plus.palette.contract.IPaletteView
+import net.osmand.plus.palette.view.binder.PaletteItemViewBinder
 import net.osmand.shared.palette.data.PaletteSortMode
 import net.osmand.shared.palette.domain.PaletteItem
 
-interface IColorsPaletteController : IDialogController,
-	ColorPickerDialogController.ColorPickerListener {
+interface IColorsPaletteController : IDialogController {
 
 	companion object {
 		const val ALL_COLORS_PROCESS_ID = "show_all_colors_screen"
 	}
 
-	fun bindPalette(palette: IColorsPalette)
-	fun unbindPalette(palette: IColorsPalette)
+	fun bindPalette(palette: IPaletteView)
+	fun unbindPalette(palette: IPaletteView)
 	fun onAllColorsScreenClosed() {}
 
 	fun setPaletteListener(listener: OnColorsPaletteListener?)
@@ -45,5 +44,5 @@ interface IColorsPaletteController : IDialogController,
 	fun getItemBinder(
 		activity: FragmentActivity,
 		nightMode: Boolean
-	): PaletteItemBinder
+	): PaletteItemViewBinder
 }

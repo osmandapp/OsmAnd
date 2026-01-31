@@ -88,7 +88,7 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 	}
 
 	public void saveChanges(@NonNull FragmentActivity activity) {
-		colorCardController.getColorsPaletteController().refreshLastUsedTime();
+		colorCardController.getColorsPaletteController().renewLastUsedTime();
 
 		ChangeTracksAppearanceTask task = new ChangeTracksAppearanceTask(activity, data, items, result -> {
 			isAppearanceSaved = true;

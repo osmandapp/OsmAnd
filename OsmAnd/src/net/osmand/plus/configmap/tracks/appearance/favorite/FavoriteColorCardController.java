@@ -18,9 +18,9 @@ import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.v2.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.SolidColorsPaletteController;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
+import net.osmand.plus.palette.controller.BasePaletteController;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.routing.ColoringType;
@@ -32,7 +32,7 @@ public class FavoriteColorCardController extends ColoringStyleCardController {
 
 	private final AppearanceData data;
 
-	private IColorsPaletteController colorsPaletteController;
+	private BasePaletteController colorsPaletteController;
 	private final FavoriteAppearanceController favoriteAppearanceController;
 
 	public FavoriteColorCardController(@NonNull OsmandApplication app, @NonNull AppearanceData data, @NonNull FavoriteAppearanceController favoriteAppearanceController) {
@@ -75,13 +75,13 @@ public class FavoriteColorCardController extends ColoringStyleCardController {
 	}
 
 	@NonNull
-	public IColorsPaletteController getColorsPaletteController() {
+	public BasePaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
 			Integer color = data.getParameter(COLOR);
 			if (color == null) {
 				color = favoriteAppearanceController.requireColor();
 			}
-			colorsPaletteController = new ColorsPaletteController(app, color);
+			colorsPaletteController = new SolidColorsPaletteController(app, color);
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());
 		return colorsPaletteController;

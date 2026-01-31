@@ -9,11 +9,11 @@ import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.card.color.palette.gradient.AllGradientsPaletteFragment
-import net.osmand.plus.card.color.palette.main.v2.IColorsPalette
-import net.osmand.plus.card.color.palette.main.v2.IColorsPaletteController
+import net.osmand.plus.palette.contract.IPaletteView
 import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener
-import net.osmand.plus.palette.view.renderer.GradientItemBinder
-import net.osmand.plus.palette.view.renderer.PaletteItemBinder
+import net.osmand.plus.palette.controller.BasePaletteController
+import net.osmand.plus.palette.view.binder.GradientViewBinder
+import net.osmand.plus.palette.view.binder.PaletteItemViewBinder
 import net.osmand.plus.plugins.srtm.TerrainMode
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
@@ -34,10 +34,10 @@ open class GradientColorsPaletteController(
 	private val app: OsmandApplication,
 	private var paletteId: String, // TODO: here we can use GradientPaletteCategory
 	val analysis: GpxTrackAnalysis?
-) : IColorsPaletteController {
+) : BasePaletteController() {
 
 	private val repository = app.paletteRepository
-	private val palettes = ArrayList<WeakReference<IColorsPalette>>()
+	private val palettes = ArrayList<WeakReference<IPaletteView>>()
 	private var listener: OnColorsPaletteListener? = null
 
 	private var selectedItem: PaletteItem? = null
@@ -56,14 +56,14 @@ open class GradientColorsPaletteController(
 
 	// --- Binding ---
 
-	override fun bindPalette(palette: IColorsPalette) {
-		palettes.add(WeakReference(palette))
+	override fun attachView(view: IPaletteView) {
+		palettes.add(WeakReference(view))
 	}
 
-	override fun unbindPalette(palette: IColorsPalette) {
+	override fun detachView(view: IPaletteView) {
 		val iterator = palettes.iterator()
 		while (iterator.hasNext()) {
-			if (iterator.next().get() == palette) {
+			if (iterator.next().get() == view) {
 				iterator.remove()
 				break
 			}
@@ -116,35 +116,18 @@ open class GradientColorsPaletteController(
 		}
 	}
 
-	override fun selectPaletteItem(color: Int, addIfNoFound: Boolean) {
-		// TODO: extract and use only for solid colors
-		// Not applicable for Gradients
+	override fun renewLastUsedTime() {
+		selectedItem?.let { renewLastUsedTime(it) }
 	}
 
-	override fun onSelectItemFromPalette(item: PaletteItem, renewLastUsedTime: Boolean) {
-		if (selectedItem?.id != item.id) {
-			val oldSelected = selectedItem
-			selectPaletteItem(item)
-
-			if (renewLastUsedTime) {
-				repository.markPaletteItemAsUsed(paletteId, item.id)
-				notifyUpdatePaletteColors(item)
-			} else {
-				notifyUpdatePaletteSelection(oldSelected, item)
-			}
-		}
+	private fun renewLastUsedTime(item: PaletteItem) {
+		repository.markPaletteItemAsUsed(paletteId, item.id)
 	}
 
 	override fun getSelectedPaletteItem(): PaletteItem? = selectedItem
 
 	override fun isPaletteItemSelected(item: PaletteItem): Boolean {
 		return item.id == selectedItem?.id
-	}
-
-	override fun refreshLastUsedTime() {
-		selectedItem?.let {
-			repository.markPaletteItemAsUsed(paletteId, it.id)
-		}
 	}
 
 	// --- Data Access ---
@@ -155,16 +138,10 @@ open class GradientColorsPaletteController(
 
 	// --- Actions (Duplicate / Remove) ---
 
-	override fun onPaletteItemLongClick(activity: FragmentActivity, view: View, item: PaletteItem, nightMode: Boolean) {
-		if (item is PaletteItem.Gradient) {
-			showItemPopUpMenu(activity, view, item, nightMode)
-		}
-	}
-
-	private fun showItemPopUpMenu(
-		activity: FragmentActivity, view: View,
-		item: PaletteItem.Gradient, nightMode: Boolean
-	) {
+	private fun showItemPopUpMenu(anchorView: View, item: PaletteItem.Gradient) {
+		val paletteView = collectActivePalettes()[0]
+		val activity = paletteView.getActivity() ?: return
+		val nightMode = paletteView.isNightMode()
 		val menuItems = ArrayList<PopUpMenuItem>()
 
 		// Duplicate
@@ -187,7 +164,7 @@ open class GradientColorsPaletteController(
 		}
 
 		val displayData = PopUpMenuDisplayData()
-		displayData.anchorView = view
+		displayData.anchorView = anchorView
 		displayData.menuItems = menuItems
 		displayData.nightMode = nightMode
 		PopUpMenu.show(displayData)
@@ -244,13 +221,26 @@ open class GradientColorsPaletteController(
 
 	// --- UI Interactions ---
 
-	override fun onAllColorsButtonClicked(activity: FragmentActivity) {
-		 AllGradientsPaletteFragment.showInstance(activity, this)
+	override fun onPaletteItemClick(item: PaletteItem, markAsUsed: Boolean) {
+		if (markAsUsed) {
+			renewLastUsedTime(item)
+		}
+		selectPaletteItem(item)
 	}
 
-	override fun onAddColorButtonClicked(activity: FragmentActivity) {
+	override fun onPaletteItemLongClick(anchorView: View, item: PaletteItem) {
+		if (item is PaletteItem.Gradient) {
+			showItemPopUpMenu(anchorView, item)
+		}
+	}
+
+	override fun onAddButtonClick(activity: FragmentActivity) {
 		// TODO: implement with new Gradient Editor UI
 		// Not applicable for Gradients usually
+	}
+
+	override fun onShowAllClick(activity: FragmentActivity) {
+		AllGradientsPaletteFragment.showInstance(activity, this)
 	}
 
 	override fun getControlsAccentColor(nightMode: Boolean): Int {
@@ -259,14 +249,10 @@ open class GradientColorsPaletteController(
 
 	override fun isAccentColorCanBeChanged(): Boolean = false
 
-	override fun onApplyColorPickerSelection(oldColor: Int?, newColor: Int) {
-		// Not applicable
-	}
-
 	// --- Helpers ---
 
-	private fun collectActivePalettes(): List<IColorsPalette> {
-		val result = ArrayList<IColorsPalette>()
+	private fun collectActivePalettes(): List<IPaletteView> {
+		val result = ArrayList<IPaletteView>()
 		val iterator = palettes.iterator()
 		while (iterator.hasNext()) {
 			val palette = iterator.next().get()
@@ -294,8 +280,8 @@ open class GradientColorsPaletteController(
 	override fun getItemBinder(
 		activity: FragmentActivity,
 		nightMode: Boolean
-	): PaletteItemBinder {
-		return GradientItemBinder(activity, nightMode)
+	): PaletteItemViewBinder {
+		return GradientViewBinder(activity, nightMode)
 	}
 
 	private fun getContentIcon(@DrawableRes id: Int): Drawable? {

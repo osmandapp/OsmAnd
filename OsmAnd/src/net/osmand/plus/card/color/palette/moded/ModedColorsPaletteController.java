@@ -5,14 +5,14 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
-import net.osmand.plus.card.color.palette.main.v2.ColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.v2.SolidColorsPaletteController;
 import net.osmand.shared.palette.domain.PaletteItem;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class ModedColorsPaletteController extends ColorsPaletteController {
+public abstract class ModedColorsPaletteController extends SolidColorsPaletteController {
 
 	private final List<PaletteMode> availablePaletteModes;
 	private OnPaletteModeSelectedListener onPaletteModeSelectedListener;
@@ -60,7 +60,7 @@ public abstract class ModedColorsPaletteController extends ColorsPaletteControll
 	}
 
 	@Override
-	public void refreshLastUsedTime() {
+	public void renewLastUsedTime() {
 		PaletteMode selectedPaletteMode = getSelectedPaletteMode();
 		List<PaletteItem> paletteItems = new ArrayList<>();
 		for (PaletteMode paletteMode : getAvailablePaletteModes()) {

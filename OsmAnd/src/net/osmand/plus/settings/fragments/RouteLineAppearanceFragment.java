@@ -310,10 +310,10 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	private void onSaveButtonClicked() {
-		getColorCardController().getColorsPaletteController().refreshLastUsedTime();
+		getColorCardController().getColorsPaletteController().renewLastUsedTime();
 		GradientColorsPaletteController gradientColorsPaletteController = getColorCardController().getGradientPaletteController();
 		if (gradientColorsPaletteController != null) {
-			gradientColorsPaletteController.refreshLastUsedTime();
+			gradientColorsPaletteController.renewLastUsedTime();
 		}
 		saveRouteLineAppearance();
 		dismiss();

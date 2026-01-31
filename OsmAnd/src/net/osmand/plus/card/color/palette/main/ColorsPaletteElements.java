@@ -55,7 +55,7 @@ public class ColorsPaletteElements {
 	}
 
 	@NonNull
-	public View createButtonAddColorView(@NonNull ViewGroup rootView) {
+	public View createAddButtonView(@NonNull ViewGroup rootView) {
 		View itemView = createCircleView(rootView);
 		ImageView icon = itemView.findViewById(R.id.icon);
 		View outline = itemView.findViewById(R.id.outline);

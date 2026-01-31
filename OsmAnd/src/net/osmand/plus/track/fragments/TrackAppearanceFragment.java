@@ -631,10 +631,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void onSaveButtonClicked() {
-		getColorCardController().getColorsPaletteController().refreshLastUsedTime();
+		getColorCardController().getColorsPaletteController().renewLastUsedTime();
 		GradientColorsPaletteController gradientColorsPaletteController = getColorCardController().getGradientPaletteController();
 		if (gradientColorsPaletteController != null) {
-			gradientColorsPaletteController.refreshLastUsedTime();
+			gradientColorsPaletteController.renewLastUsedTime();
 		}
 		saveTrackInfo();
 		dismiss();

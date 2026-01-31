@@ -150,7 +150,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 	@Override
 	protected void applyChanges() {
 		originalMode = selectedMode;
-		controller.refreshLastUsedTime();
+		controller.renewLastUsedTime();
 	}
 
 	private boolean isChangesMade() {

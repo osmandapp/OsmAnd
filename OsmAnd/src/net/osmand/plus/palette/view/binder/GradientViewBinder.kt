@@ -1,4 +1,4 @@
-package net.osmand.plus.palette.view.renderer
+package net.osmand.plus.palette.view.binder
 
 import android.content.Context
 import android.view.View
@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import net.osmand.plus.card.color.palette.gradient.GradientUiHelper
 import net.osmand.shared.palette.domain.PaletteItem
 
-class GradientItemBinder(
+class GradientViewBinder(
 	val context: Context,
 	val nightMode: Boolean
-) : PaletteItemBinder {
+) : PaletteItemViewBinder {
 
 	private val gradientUiHelper = GradientUiHelper(context, nightMode)
 

@@ -107,7 +107,7 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 		boolean splitChanged = typeChanged || intervalChanged;
 
 		if (colorChanged) {
-			colorCardController.getColorsPaletteController().refreshLastUsedTime();
+			colorCardController.getColorsPaletteController().renewLastUsedTime();
 		}
 		for (GpxParameter parameter : GpxParameter.Companion.getAppearanceParameters()) {
 			dirItem.setParameter(parameter, data.getParameter(parameter));
