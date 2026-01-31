@@ -1,14 +1,11 @@
 package net.osmand.plus.plugins.astro
 
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Point
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -20,7 +17,6 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import net.osmand.Location
 import net.osmand.map.IMapLocationListener
@@ -40,16 +36,19 @@ import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
 import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 import net.osmand.plus.plugins.astro.views.StarChartView
 import net.osmand.plus.plugins.astro.views.StarCompassButton
+import net.osmand.plus.plugins.astro.views.StarMapButton
+import net.osmand.plus.plugins.astro.views.StarMapResetButton
+import net.osmand.plus.plugins.astro.views.StarMapTimeControlButton
 import net.osmand.plus.plugins.astro.views.StarView
 import net.osmand.plus.plugins.astro.views.StarVisiblityChartView
 import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
-import net.osmand.plus.utils.InsetsUtils
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.util.MapUtils
 import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.util.Calendar
 import java.util.Locale
 import kotlin.math.abs
 
@@ -62,20 +61,20 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	internal lateinit var mainLayout: View
 	internal lateinit var starView: StarView
 	private lateinit var timeSelectionView: DateTimeSelectionView
-	private lateinit var timeControlBtn: MaterialButton
-	private lateinit var resetTimeButton: ImageButton
+	private lateinit var timeControlBtn: StarMapTimeControlButton
+	private lateinit var resetTimeButton: StarMapResetButton
 
-	private lateinit var arModeButton: ImageButton
-	private lateinit var cameraButton: ImageButton
+	private lateinit var arModeButton: StarMapButton
+	private lateinit var cameraButton: StarMapButton
 	private lateinit var transparencySlider: SeekBar
 	private lateinit var sliderContainer: View
-	private lateinit var resetFovButton: ImageButton
-	private lateinit var mode2dButton: ImageButton
+	private lateinit var resetFovButton: StarMapButton
+	private lateinit var mode2dButton: StarMapButton
 
 	private lateinit var magnitudeSlider: SeekBar
 	private lateinit var magnitudeValueText: TextView
 	private lateinit var magnitudeSliderContainer: View
-	private lateinit var resetMagnitudeButton: ImageButton
+	private lateinit var resetMagnitudeButton: StarMapButton
 
 	private lateinit var starChartsView: View
 	private lateinit var starVisiblityView: StarVisiblityChartView
@@ -83,7 +82,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var starChartState: StarChartState
 
 	private lateinit var timeControlCard: MaterialCardView
-	private lateinit var starMapButton: ImageButton
+	private lateinit var starMapButton: StarMapButton
+	private lateinit var starChartButton: StarMapButton
+	private lateinit var closeButton: StarMapButton
+	private lateinit var searchButton: StarMapButton
+	private lateinit var settingsButton: StarMapButton
 
 	private var compassButton: StarCompassButton? = null
 	private var manualAzimuth: Boolean = true
@@ -157,8 +160,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 	}
 
-	override fun getStatusBarColorId(): Int = ColorUtilities.getStatusBarSecondaryColorId(nightMode)
-
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 		val view = themedInflater.inflate(R.layout.fragment_star_map, container, false)
 
@@ -183,13 +184,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		magnitudeValueText = view.findViewById(R.id.magnitude_value_text)
 		magnitudeSliderContainer = view.findViewById(R.id.magnitude_slider_container)
 		resetMagnitudeButton = view.findViewById(R.id.reset_magnitude_button)
-
-		updateImageButtonTheme(arModeButton)
-		updateImageButtonTheme(cameraButton)
-		updateImageButtonTheme(resetFovButton)
-		updateImageButtonTheme(mode2dButton)
-		updateImageButtonTheme(resetMagnitudeButton)
-		updateImageButtonTheme(resetTimeButton)
 
 		arModeHelper = StarMapARModeHelper(requireContext(), starView) { enabled ->
 			updateArModeUI(enabled)
@@ -257,29 +251,28 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		starMapButton = view.findViewById(R.id.star_map_button)
 		starMapButton.apply {
-			updateImageButtonTheme(this)
 			setOnClickListener {
 				updateRegularMapVisibility(!regularMapVisible)
 				saveCommonSettings()
 			}
 		}
-		view.findViewById<ImageButton>(R.id.star_chart_button).apply {
-			updateImageButtonTheme(this)
+		starChartButton = view.findViewById(R.id.star_chart_button)
+		starChartButton.apply {
 			setOnClickListener {
 				if (starChartsView.isVisible) updateStarChartVisibility(false)
 				else { updateStarChartVisibility(true); updateStarChart() }
 				saveCommonSettings()
 			}
 		}
-		view.findViewById<ImageButton>(R.id.close_button).apply {
-			updateImageButtonTheme(this)
+		closeButton = view.findViewById(R.id.close_button)
+		closeButton.apply {
 			setOnClickListener {
 				backPressedCallback.isEnabled = false
 				requireActivity().onBackPressedDispatcher.onBackPressed()
 			}
 		}
-		view.findViewById<ImageButton>(R.id.search_button).apply {
-			updateImageButtonTheme(this)
+		searchButton = view.findViewById(R.id.search_button)
+		searchButton.apply {
 			setOnClickListener {
 				val tag = StarMapSearchDialogFragment.TAG
 				var dialog = childFragmentManager.findFragmentByTag(tag) as? StarMapSearchDialogFragment
@@ -298,13 +291,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				}
 			}
 		}
-
-		timeControlBtn.setOnClickListener {
-			timeSelectionView.isVisible = !timeSelectionView.isVisible
-		}
-
-		view.findViewById<ImageButton>(R.id.settings_button).apply {
-			updateImageButtonTheme(this)
+		settingsButton = view.findViewById(R.id.settings_button)
+		settingsButton.apply {
 			setOnClickListener {
 				AstroUtils.showStarMapOptionsDialog(context, starView, swSettings) {
 					showMagnitudeFilter = it.showMagnitudeFilter
@@ -312,6 +300,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				}
 			}
 		}
+
+		timeControlBtn.setOnClickListener {
+			timeSelectionView.isVisible = !timeSelectionView.isVisible
+		}
+
 		mode2dButton.setOnClickListener { toggle2DMode() }
 
 		resetTimeButton.setOnClickListener {
@@ -352,7 +345,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		updateMagnitudeFilterVisibility()
 		updateStarMap(true)
-		
+
 		view.findViewById<StarCompassButton>(R.id.star_map_compass_button)?.let {
 			it.onSingleTap = { setAzimuth(0.0, true)}
 			it.setMapActivity(requireMapActivity())
@@ -448,6 +441,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	override fun onResume() {
 		super.onResume()
+		updateNightMode()
+		updateButtonsNightMode()
 		updateStarMap(true)
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
@@ -458,6 +453,27 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		updateWidgetsVisibility(mapActivity, View.GONE)
 		mapActivity.refreshMap()
 		updateBackPressedCallback()
+	}
+
+	private fun updateButtonsNightMode() {
+		if (view == null) return
+
+		val currentNightMode = nightMode
+		arModeButton.nightMode = currentNightMode
+		cameraButton.nightMode = currentNightMode
+		resetFovButton.nightMode = currentNightMode
+		mode2dButton.nightMode = currentNightMode
+		resetMagnitudeButton.nightMode = currentNightMode
+		starMapButton.nightMode = currentNightMode
+		starChartButton.nightMode = currentNightMode
+		closeButton.nightMode = currentNightMode
+		searchButton.nightMode = currentNightMode
+		settingsButton.nightMode = currentNightMode
+		compassButton?.setNightMode(currentNightMode)
+
+		if (::timeControlCard.isInitialized) {
+			updateTimeControlTheme(timeControlCard, timeControlBtn, resetTimeButton)
+		}
 	}
 
 	override fun onPause() {
@@ -657,7 +673,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		viewModel.currentCalendar.observe(viewLifecycleOwner) { calendar ->
 			timeSelectionView.setDateTime(calendar)
-			val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+			val now = Calendar.getInstance()
+			val isToday = now.get(Calendar.YEAR) == calendar.get(Calendar.YEAR) &&
+					now.get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR)
+			val formatString = if (isToday) "HH:mm" else "d MMM HH:mm"
+			val timeFormat = SimpleDateFormat(formatString, Locale.getDefault())
 			timeControlBtn.text = timeFormat.format(calendar.time)
 		}
 		viewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
@@ -805,40 +826,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		return objects
 	}
 
-	private fun updateImageButtonTheme(button: ImageButton?) {
-		button?.let {
-			val context = it.context
-			val backgroundColor = ColorUtilities.getMapButtonBackgroundColor(context, nightMode)
-			val backgroundPressedColor = ColorUtilities.getMapButtonBackgroundPressedColor(context, nightMode)
-			val strokeWidth = AndroidUtils.dpToPx(context, 1f)
-			val cornerRadius = if (it.layoutParams != null && it.layoutParams.width > 0) {
-				it.layoutParams.width / 2f
-			} else {
-				AndroidUtils.dpToPxF(context, 26f)
-			}
-
-			val normal = GradientDrawable().apply {
-				shape = GradientDrawable.RECTANGLE
-				setColor(backgroundColor)
-				setCornerRadius(cornerRadius)
-				if (nightMode) {
-					setStroke(strokeWidth, ColorUtilities.getColor(context, R.color.map_widget_dark_stroke))
-				}
-			}
-
-			val pressed = GradientDrawable().apply {
-				shape = GradientDrawable.RECTANGLE
-				setColor(backgroundPressedColor)
-				setCornerRadius(cornerRadius)
-				setStroke(strokeWidth, ColorUtilities.getColor(context, if (nightMode) R.color.map_widget_dark_stroke else R.color.map_widget_light_pressed))
-			}
-
-			it.background = AndroidUtils.createPressedStateListDrawable(normal, pressed)
-			it.setColorFilter(ColorUtilities.getMapButtonIconColor(context, nightMode))
-		}
-	}
-
-	private fun updateTimeControlTheme(card: MaterialCardView, button: MaterialButton, resetBtn: ImageButton) {
+	private fun updateTimeControlTheme(card: MaterialCardView, button: StarMapTimeControlButton, resetBtn: StarMapResetButton) {
 		val context = card.context
 		val bgColor = ColorUtilities.getMapButtonBackgroundColor(context, nightMode)
 		val strokeColor = ColorUtilities.getColor(context, if (nightMode) R.color.map_widget_dark_stroke else R.color.map_widget_light_trans)
@@ -848,11 +836,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		card.strokeColor = strokeColor
 		card.strokeWidth = strokeWidth
 
-		val iconColor = ColorUtilities.getMapButtonIconColor(context, nightMode)
-		//button.setTextColor(iconColor)
-		//button.iconTint = ColorStateList.valueOf(iconColor)
-		button.rippleColor = ColorStateList.valueOf(ColorUtilities.getColorWithAlpha(iconColor, 0.15f))
-
-		updateImageButtonTheme(resetBtn)
+		button.nightMode = nightMode
+		resetBtn.nightMode = nightMode
 	}
 }
