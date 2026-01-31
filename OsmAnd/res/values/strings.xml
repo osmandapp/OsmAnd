@@ -1582,6 +1582,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     • Default-speed adjustable forecast for elevation-dependent walking/hiking/running trip times\n\n
     • Fixed audio output and volume slider behavior\n\n
     </string>
+    <string name="pebble_voice">Send Pebble Voice notifications</string>
     <string name="speak_gps_signal_status">Announce GPS signal loss and recovery</string>
     <string name="speak_route_recalculation">Announce route recalculation</string>
     <string name="map_center_widget">Coordinates: Map center</string>

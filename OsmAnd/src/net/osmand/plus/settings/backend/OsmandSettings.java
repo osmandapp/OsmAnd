@@ -3351,6 +3351,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT = new BooleanPreference(this, "enable_osmc_public_transport", false).makeProfile();
 
+	public final OsmandPreference<Boolean> PEBBLE_VOICE = new BooleanPreference(this, "pebble_voice", true).makeProfile().cache();
+
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference(this, "voice_mute", false).makeProfile().cache();
 	public final CommonPreference<TrackApproximationType> DETAILED_TRACK_GUIDANCE = new EnumStringPreference<>(this, "detailed_track_guidance",
 			TrackApproximationType.MANUAL, TrackApproximationType.values()).makeProfile().makeShared();
