@@ -904,7 +904,7 @@
     <string name="local_openstreetmap_act_title">Τροποποιήσεις OSM</string>
     <string name="shared_string_more_actions">Άλλες ενέργειες</string>
     <string name="download_using_mobile_internet">Δεν είστε συνδεδεμένοι με ασύρματο δίκτυο. Θέλετε να χρησιμοποιήσετε την τρέχουσα διαδικτυακή σύνδεση για λήψη;</string>
-    <string name="cancel_route">Απόρριψη διαδρομής;</string>
+    <string name="cancel_route">Παράβλεψη διαδρομής;</string>
     <string name="cancel_navigation">Διακοπή πλοήγησης</string>
     <string name="clear_destination">Καθαρισμός προορισμού</string>
     <string name="other_location">Άλλη</string>
@@ -1235,7 +1235,7 @@
     <string name="show_railway_warnings">Διασταυρώσεις σιδηροτροχιάς</string>
     <string name="show_pedestrian_warnings">Διαβάσεις πεζών</string>
     <string name="rendering_attr_transportStops_name">Στάσεις συγκοινωνίας</string>
-    <string name="shared_string_dismiss">Απόρριψη</string>
+    <string name="shared_string_dismiss">Παράβλεψη</string>
     <string name="speak_pedestrian">Διαβάσεις πεζών</string>
     <string name="traffic_warning_pedestrian">Διάβαση πεζών</string>
     <string name="routing_attr_no_new_routing_name">Κανόνες δρομολόγησης v1.9</string>
@@ -4457,7 +4457,7 @@
     <string name="measurement_units">Μονάδες μέτρησης</string>
     <string name="context_menu_edit_descr">Επεξεργασία περιγραφής</string>
     <string name="sync_now">Συγχρονισμός τώρα</string>
-    <string name="local_changes_will_be_dismissed">Οι τοπικές αλλαγές θα ακυρωθούν</string>
+    <string name="local_changes_will_be_dismissed">Οι τοπικές αλλαγές θα παραβλεφθούν</string>
     <string name="weather_offline_forecast">Πρόγνωση εκτός σύνδεσης</string>
     <string name="redeem_promo_code">Εξαργύρωση προωθητικού κωδικού</string>
     <string name="backup_data">Αντίγραφο ασφαλείας δεδομένων</string>
@@ -4481,7 +4481,7 @@
     <string name="rendering_attr_horse_scale_dangerous_name">Επικίνδυνο</string>
     <string name="rendering_attr_horse_scale_critical_name">Κρίσιμο</string>
     <string name="cloud_all_changes_downloaded">Όλες οι αλλαγές έχουν ληφθεί</string>
-    <string name="cloud_changes_will_be_dismissed">Οι αλλαγές στο cloud θα ακυρωθούν</string>
+    <string name="cloud_changes_will_be_dismissed">Οι αλλαγές στο cloud θα παραβλεφθούν</string>
     <string name="backup_pause_all">Παύση όλων</string>
     <string name="rendering_attr_horse_scale_impossible_name">Αδύνατο</string>
     <string name="backup_delete_all_data">Διαγραφή όλων των δεδομένων μου</string>
@@ -5089,7 +5089,7 @@
     <string name="coordinates_widget_map_center">Συντεταγμένες: κέντρο χάρτη</string>
     <string name="quick_action_map_center_widget_descr">Ένας διακόπτης για να εμφανίσει ή να κρύψει το γραφικό στοιχείο κέντρου χάρτη στο χάρτη.</string>
     <string name="quick_action_current_location_widget_descr">Ένας διακόπτης για να εμφανίσει ή να κρύψει το γραφικό στοιχείο τρέχουσας τοποθεσίας στο χάρτη.</string>
-    <string name="dismiss_changes">Απόρριψη αλλαγών;</string>
+    <string name="dismiss_changes">Παράβλεψη αλλαγών;</string>
     <string name="restart_now">Επανεκκίνηση τώρα</string>
     <string name="map_rendering_engine_v1">Έκδοση 1</string>
     <string name="map_rendering_engine_v2">Έκδοση 2 (OpenGL)</string>
@@ -5275,7 +5275,7 @@
     <string name="apply_only_to_new">Εφαρμογή μόνο στα καινούργια</string>
     <string name="change_default_tracks_appearance_confirmation">Εφαρμογή αλλαγών στα υπάρχοντα ίχνη στο φάκελο ή μόνο στα καινούργια;</string>
     <string name="cant_load_map_styles">Δεν μπορούν να φορτωθούν τα στυλ χαρτών.</string>
-    <string name="dismiss_changes_descr">Όλες οι αλλαγές θα απορριφθούν.</string>
+    <string name="dismiss_changes_descr">Όλες οι αλλαγές θα παραβλεφθούν.</string>
     <string name="weather_pressure_hpa">hPa</string>
     <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
