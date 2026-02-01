@@ -1883,7 +1883,7 @@
     <string name="is_parking_time_limited">Je li parkiranje vremenski ograničeno?</string>
     <string name="context_menu_read_full">Pročitaj sve</string>
     <string name="shared_string_drawer">Ladica</string>
-    <string name="welcome_to_open_beta">Dobrodošli u otvorenu beta verziju</string>
+    <string name="welcome_to_open_beta">Dobrodošli na otvorenu beta verziju</string>
     <string name="wikivoyage_travel_guide_descr">Vodiči do najzanimljivijih mjesta na planetu, unutar OsmAnda, bez potrebe za internetskom vezom.</string>
     <string name="in_app_purchase">Kupnja unutar aplikacije</string>
     <string name="in_app_purchase_desc_ex">Nakon kupnje bit će vam trajno dostupno.</string>
