@@ -1886,9 +1886,9 @@
     <string name="welcome_to_open_beta">Dobrodošli u otvorenu betu</string>
     <string name="wikivoyage_travel_guide_descr">Vodi do najzanimljivijih mjesta na planetu, unutar OsmAnd, bez veze s internetom.</string>
     <string name="in_app_purchase">Kupnja iz aplikacije</string>
-    <string name="in_app_purchase_desc_ex">Nakon kupnje bit će vam trajno dostupno.</string>
-    <string name="wikipedia_offline">Wikipedia (offline način)</string>
-    <string name="pick_up_till">Preuzimanje do</string>
+    <string name="in_app_purchase_desc_ex">Jednom kupljeno, bit će Vam trajno dostupan.</string>
+    <string name="wikipedia_offline">Wikipedia izvan mreže</string>
+    <string name="pick_up_till">Pokupiti do</string>
     <string name="type_address">Upišite adresu</string>
     <string name="error_notification_desc">Pošaljite snimak zaslona ove obavijesti na support@osmand.net</string>
     <string name="unirs_render_descr">Izmjena zadanog stila za povećanje kontrasta pješačkih i biciklističkih cesta. Koristi naslijeđene Mapnik boje.</string>
