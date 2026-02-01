@@ -5799,4 +5799,6 @@
     <string name="galactic_line">Líne Réaltrach</string>
     <string name="meridian_line">Líne Meridian</string>
     <string name="equator_line">Líne an Mheánchiorcail</string>
+    <string name="backup_deleted_all_data">Sonraí scriosta.</string>
+    <string name="backup_deleting_all_data">Ag scriosadh sonraí…</string>
 </resources>
