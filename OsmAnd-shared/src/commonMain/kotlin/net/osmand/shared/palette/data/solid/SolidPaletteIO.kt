@@ -83,7 +83,7 @@ object SolidPaletteIO : PaletteIO<Palette.SolidCollection> {
 									paletteId = paletteId,
 									recordId = lineIndex.toString()
 								),
-								color = colorInt,
+								colorInt = colorInt,
 								historyIndex = colorValue.value.toInt(), // TODO: don't use it
 								lastUsedTime = baseTime - (lineIndex * 1000L)
 							))

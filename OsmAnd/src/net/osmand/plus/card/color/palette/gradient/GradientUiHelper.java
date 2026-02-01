@@ -32,13 +32,15 @@ import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.ColorPalette.ColorValue;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.palette.domain.PaletteCategory;
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.util.CollectionUtils;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
+// TODO
+@Deprecated
 public class GradientUiHelper {
 
 	private static final float MAX_ALTITUDE_ADDITION = 50f;
@@ -111,12 +113,12 @@ public class GradientUiHelper {
 	// TODO: extract and improve code
 	@NonNull
 	public static IAxisValueFormatter getGradientTypeFormatter(@NonNull OsmandApplication app,
-	                                                           @NonNull PaletteCategory paletteCategory,
+	                                                           @NonNull GradientPaletteCategory paletteCategory,
 	                                                           @Nullable GpxTrackAnalysis analysis) {
 		return (value, axis) -> {
 			boolean shouldShowUnit = axis.mEntries.length >= 1 && axis.mEntries[0] == value;
-			if (CollectionUtils.equalsToAny(paletteCategory, PaletteCategory.TERRAIN_SLOPE,
-					PaletteCategory.TERRAIN_ALTITUDE, PaletteCategory.TERRAIN_HILLSHADE)) {
+			if (CollectionUtils.equalsToAny(paletteCategory, GradientPaletteCategory.TERRAIN_SLOPE,
+					GradientPaletteCategory.TERRAIN_ALTITUDE, GradientPaletteCategory.TERRAIN_HILLSHADE)) {
 				String stringValue = GradientUiHelper.formatTerrainTypeValues(value);
 				String typeValue = "";
 				switch (paletteCategory) {

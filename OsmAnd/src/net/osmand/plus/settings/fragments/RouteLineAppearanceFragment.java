@@ -536,7 +536,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			callMapActivity(MapActivity::refreshMap);
 		} else if (item instanceof PaletteItem.Solid solidItem) {
 			RouteLineColorController colorController = getColorCardController();
-			previewRouteLineInfo.setCustomColor(solidItem.getColor(), colorController.isNightMap());
+			previewRouteLineInfo.setCustomColor(solidItem.getColorInt(), colorController.isNightMap());
 			updateColorItems();
 		}
 	}

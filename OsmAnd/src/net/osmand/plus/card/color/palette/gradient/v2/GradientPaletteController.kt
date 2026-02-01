@@ -21,7 +21,7 @@ import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.palette.data.PaletteSortMode
 import net.osmand.shared.palette.data.PaletteUtils
 import net.osmand.shared.palette.domain.Palette
-import net.osmand.shared.palette.domain.PaletteCategory
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory
 import net.osmand.shared.palette.domain.PaletteItem
 
 open class GradientPaletteController(
@@ -151,7 +151,7 @@ open class GradientPaletteController(
 	}
 
 	private fun updateExternalDependencies() {
-		val category = PaletteCategory.fromKey(paletteId)
+		val category = GradientPaletteCategory.fromKey(paletteId)
 
 		if (category != null && category.isTerrainRelated()) {
 			TerrainMode.reloadAvailableModes(app)

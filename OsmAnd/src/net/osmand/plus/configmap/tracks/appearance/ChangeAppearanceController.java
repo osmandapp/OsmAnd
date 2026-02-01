@@ -79,7 +79,7 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 			data.setParameter(COLOR_PALETTE, gradientItem.getPaletteName());
 		} else if (paletteItem instanceof PaletteItem.Solid solidItem) {
 			data.setParameter(COLOR_PALETTE, PaletteUtils.DEFAULT_NAME);
-			data.setParameter(COLOR, solidItem.getColor());
+			data.setParameter(COLOR, solidItem.getColorInt());
 		}
 	}
 

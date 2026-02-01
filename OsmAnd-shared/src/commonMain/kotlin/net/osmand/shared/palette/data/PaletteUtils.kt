@@ -3,9 +3,10 @@ package net.osmand.shared.palette.data
 import kotlinx.datetime.Clock
 import net.osmand.shared.ColorPalette
 import net.osmand.shared.palette.domain.Palette
-import net.osmand.shared.palette.domain.PaletteFileType
+import net.osmand.shared.palette.domain.filetype.PaletteFileType
 import net.osmand.shared.palette.domain.PaletteItem
 import net.osmand.shared.palette.domain.PaletteItemSource
+import net.osmand.shared.palette.domain.filetype.PaletteFileTypeRegistry
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.NamingUtils
 import kotlin.random.Random
@@ -26,7 +27,7 @@ object PaletteUtils {
 	}
 
 	fun extractPaletteName(fileName: String): String? {
-		val fileType = PaletteFileType.fromFileName(fileName) ?: return null
+		val fileType = PaletteFileTypeRegistry.fromFileName(fileName) ?: return null
 		return fileName.replace(fileType.filePrefix, "").replace(TXT_EXT, "")
 	}
 
@@ -34,8 +35,8 @@ object PaletteUtils {
 		return paletteName in setOf(ALTITUDE_DEFAULT_NAME, DEFAULT_NAME)
 	}
 
-	fun generateGradientUniqueId(existingIds: Set<String>, baseId: String): String {
-		return NamingUtils.generateUniqueName(existingIds, baseId)
+	private fun generateGradientUniqueFileName(existing: Set<String>, baseName: String): String {
+		return NamingUtils.generateUniqueName(existing, baseName, "_")
 	}
 
 	fun generateSolidUniqueId(existingIds: Set<String>): String {
@@ -50,8 +51,6 @@ object PaletteUtils {
 
 	// TODO: candidates to extraction (temporally placed methods)
 
-	// TODO: use it with modifier/repository method 'insertAfter(...)'
-	//  to place duplicate right after the original item
 	fun createGradientDuplicate(
 		palette: Palette.GradientCollection,
 		originalItemId: String
@@ -64,7 +63,7 @@ object PaletteUtils {
 		// 1. Generate Unique ID / Name
 		// In gradients, ID is the filename with extension
 		val existingIds = palette.items.map { it.id }.toSet()
-		val newFileName = generateGradientUniqueId(existingIds, originalItem.id)
+		val newFileName = generateGradientUniqueFileName(existingIds, originalItem.id)
 		val paletteName = extractPaletteName(newFileName) ?: return null
 		val displayName = extractDisplayName(newFileName) ?: return null
 
@@ -115,9 +114,19 @@ object PaletteUtils {
 			id = newId,
 			displayName = ColorPalette.colorToHex(colorInt),
 			source = PaletteItemSource.CollectionRecord(palette.id, newId),
-			color = colorInt,
+			colorInt = colorInt,
 			historyIndex = maxHistoryIndex + 1,
 			lastUsedTime = lastUsedTime
+		)
+	}
+
+	fun updateSolidColor(
+		originalItem: PaletteItem.Solid,
+		newColorInt: Int
+	): PaletteItem.Solid {
+		return originalItem.copy(
+			colorInt = newColorInt,
+			displayName = ColorPalette.colorToHex(newColorInt)
 		)
 	}
 }

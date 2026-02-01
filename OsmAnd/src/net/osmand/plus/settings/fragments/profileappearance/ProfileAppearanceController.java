@@ -346,7 +346,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 				public int getControlsAccentColor(boolean nightMode) {
 					PaletteItem item = getSelectedItem();
 					if (item instanceof PaletteItem.Solid solidItem) {
-						return solidItem.getColor();
+						return solidItem.getColorInt();
 					}
 					return super.getControlsAccentColor(nightMode);
 				}
@@ -360,7 +360,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 				@Override
 				public void onPaletteItemSelected(@NonNull PaletteItem item) {
 					if (item instanceof PaletteItem.Solid solidItem) {
-						int colorInt = solidItem.getColor();
+						int colorInt = solidItem.getColorInt();
 						changedProfile.color = changedProfile.getProfileColorByColorValue(app, colorInt);
 						changedProfile.customColor = changedProfile.color == null ? colorInt : null;
 						updateColorItems();

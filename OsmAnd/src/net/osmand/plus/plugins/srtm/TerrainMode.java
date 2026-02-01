@@ -15,7 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.shared.palette.domain.PaletteCategory;
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.Nullable;
@@ -53,11 +53,11 @@ public class TerrainMode {
 
 		// TODO: extract
 		@NonNull
-		public PaletteCategory toPaletteCategory() {
+		public GradientPaletteCategory toPaletteCategory() {
 			return switch (this) {
-				case SLOPE -> PaletteCategory.TERRAIN_SLOPE;
-				case HILLSHADE -> PaletteCategory.TERRAIN_HILLSHADE;
-				case HEIGHT -> PaletteCategory.TERRAIN_ALTITUDE;
+				case SLOPE -> GradientPaletteCategory.TERRAIN_SLOPE;
+				case HILLSHADE -> GradientPaletteCategory.TERRAIN_HILLSHADE;
+				case HEIGHT -> GradientPaletteCategory.TERRAIN_ALTITUDE;
 			};
 		}
 	}

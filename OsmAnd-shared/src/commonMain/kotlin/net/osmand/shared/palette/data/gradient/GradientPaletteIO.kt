@@ -6,6 +6,8 @@ import net.osmand.shared.io.KFile
 import net.osmand.shared.palette.data.PaletteIO
 import net.osmand.shared.palette.data.PaletteUtils
 import net.osmand.shared.palette.domain.*
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory
+import net.osmand.shared.palette.domain.filetype.GradientFileType
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.PlatformUtil
 import okio.buffer
@@ -56,9 +58,9 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 	}
 
 	override fun read(paletteId: String): Palette.GradientCollection? {
-		val category = PaletteCategory.fromKey(paletteId)
+		val category = GradientPaletteCategory.fromKey(paletteId)
 
-		val targetCategory = category ?: PaletteFileType.fromFileName(paletteId)?.category
+		val targetCategory = category ?: GradientFileType.fromFileName(paletteId)?.category
 
 		if (targetCategory == null) {
 			return null
@@ -67,12 +69,12 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 		return readCollection(targetCategory)
 	}
 
-	fun readCollection(category: PaletteCategory): Palette.GradientCollection {
+	private fun readCollection(category: GradientPaletteCategory): Palette.GradientCollection {
 
 		val items = ArrayList<PaletteItem.Gradient>()
 
 		// 1. Get metadata from settings (history, names)
-		val settingsItems = settingsHelper.getItems(category.key)
+		val settingsItems = settingsHelper.getItems(category.id)
 		val settingsMap = settingsItems.associateBy { it.paletteName }
 
 		val baseTime = Clock.System.now().toEpochMilliseconds()
@@ -84,7 +86,7 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 			val fileName = file.name()
 
 			// 3. Filter files by category
-			val fileType = PaletteFileType.fromFileName(fileName)
+			val fileType = GradientFileType.fromFileName(fileName)
 			if (fileType?.category == category && PaletteUtils.isPaletteFileExt(fileName)) {
 
 				// Extract the ID used in settings (filename contains extension)
@@ -101,11 +103,11 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 		}
 
 		return Palette.GradientCollection(
-			id = category.key,
+			id = category.id,
 			displayName = category.displayName, // TODO: fix it
 			category = category,
 			items = items.sortedBy { it.historyIndex },
-			isEditable = category.isEditable
+			isEditable = category.editable
 		)
 	}
 
@@ -114,7 +116,7 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 	 */
 	private fun readItem(
 		file: KFile,
-		fileType: PaletteFileType,
+		fileType: GradientFileType,
 		settingsItem: GradientSettingsItem?,
 		lastUsedTime: Long
 	): PaletteItem.Gradient? {
@@ -164,18 +166,17 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 
 		// 2. Build a gradient item
 		val fileName = file.name()
-		val paletteId = fileType.category.key
+		val paletteId = fileType.category.id
 		val paletteName = PaletteUtils.extractPaletteName(fileName) ?: return null
 		val displayName = PaletteUtils.extractDisplayName(fileName) ?: return null
 
 		// Use index from settings or last modified time (if new file)
-		// TODO: don't use modification time as history index
+		// TODO: don't use modification time as an history index
 		val historyIndex = settingsItem?.index ?: file.lastModified().toInt()
 
 		val properties = GradientProperties(
 			fileType = fileType,
-			// TODO: improve it
-			rangeType = if (fileType.useFixedValues) GradientRangeType.FIXED_VALUES else GradientRangeType.RELATIVE,
+			rangeType = fileType.rangeType,
 			// TODO: name to write in properties (implement in the future)
 			name = null,
 			comments = comments,
@@ -240,12 +241,12 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 		lastUsedOrder.forEach { item ->
 			settingsItems.add(
 				GradientSettingsItem(
-					typeName = item.properties.fileType.category.key,
+					typeName = item.properties.fileType.category.id,
 					paletteName = item.paletteName,
 					index = originalOrder.indexOf(item) + 1
 				)
 			)
 		}
-		settingsHelper.saveItems(palette.category.key, settingsItems)
+		settingsHelper.saveItems(palette.category.id, settingsItems)
 	}
 }

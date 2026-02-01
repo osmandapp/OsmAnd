@@ -43,7 +43,7 @@ open class SolidPaletteController(
 
 		if (itemToUpdate != null) {
 			// Update Existing
-			resultItem = itemToUpdate.copy(color = newColor)
+			resultItem = PaletteUtils.updateSolidColor(itemToUpdate, newColor)
 			repository.updatePaletteItem(resultItem)
 		} else {
 			// Add New
@@ -100,7 +100,7 @@ open class SolidPaletteController(
 	@JvmOverloads
 	fun findPaletteItem(color: Int, addIfNotFound: Boolean = false): PaletteItem? {
 		val items = repository.getPaletteItems(paletteId, PaletteSortMode.ORIGINAL_ORDER)
-		var found = items.filterIsInstance<PaletteItem.Solid>().find { it.color == color }
+		var found = items.filterIsInstance<PaletteItem.Solid>().find { it.colorInt == color }
 
 		if (found == null && addIfNotFound) {
 			val palette = repository.getPalette(paletteId)
@@ -165,7 +165,7 @@ open class SolidPaletteController(
 
 	private fun showColorPickerDialog(activity: FragmentActivity, item: PaletteItem.Solid?) {
 		editedItem = item
-		val color = item?.color
+		val color = item?.colorInt
 		ColorPickerDialogController.showDialog(activity, this, color)
 	}
 

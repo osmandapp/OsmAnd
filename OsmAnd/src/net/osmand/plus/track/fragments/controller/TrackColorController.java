@@ -32,7 +32,7 @@ import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
 import net.osmand.plus.chooseplan.PromoBannerCard;
-import net.osmand.shared.palette.domain.PaletteCategory;
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.shared.gpx.GradientScaleType;
@@ -96,8 +96,8 @@ public class TrackColorController extends ColoringStyleCardController implements
 
 	@NonNull
 	public GradientPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
-		PaletteCategory paletteCategory = gradientScaleType.toPaletteCategory();
-		String paletteId = paletteCategory != null ? paletteCategory.getKey() : "";
+		GradientPaletteCategory paletteCategory = gradientScaleType.toPaletteCategory();
+		String paletteId = paletteCategory != null ? paletteCategory.getId() : "";
 		if (gradientPaletteController == null) {
 			gradientPaletteController = new GradientPaletteController(app, paletteId, selectedGpx.getTrackAnalysis(app));
 		}

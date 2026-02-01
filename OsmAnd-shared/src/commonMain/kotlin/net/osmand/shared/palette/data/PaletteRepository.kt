@@ -6,9 +6,11 @@ import net.osmand.shared.palette.data.gradient.GradientPaletteModifier
 import net.osmand.shared.palette.data.solid.SolidPaletteIO
 import net.osmand.shared.palette.data.solid.SolidPaletteModifier
 import net.osmand.shared.palette.domain.Palette
-import net.osmand.shared.palette.domain.PaletteCategory
-import net.osmand.shared.palette.domain.PaletteFileType
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory
 import net.osmand.shared.palette.domain.PaletteItem
+import net.osmand.shared.palette.domain.filetype.GradientFileType
+import net.osmand.shared.palette.domain.filetype.PaletteFileTypeRegistry
+import net.osmand.shared.palette.domain.filetype.SolidFileType
 import net.osmand.shared.util.LoggerFactory
 import kotlin.jvm.JvmOverloads
 
@@ -122,12 +124,11 @@ class PaletteRepository {
 	}
 
 	private fun findPaletteIO(paletteId: String): PaletteIO<out Palette>? {
-		val fileType = PaletteFileType.fromFileName(paletteId)
-		if (fileType != null && fileType.category == PaletteCategory.SOLID_PALETTE) {
+		val fileType = PaletteFileTypeRegistry.fromFileName(paletteId)
+		if (fileType is SolidFileType) {
 			return SolidPaletteIO
 		}
-		val paletteCategory = PaletteCategory.fromKey(paletteId)
-		if (paletteCategory != null) {
+		if (GradientPaletteCategory.fromKey(paletteId) != null || fileType is GradientFileType) {
 			return GradientPaletteIO
 		}
 		return null

@@ -109,7 +109,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 
 		int color = 0;
 		if (item instanceof PaletteItem.Solid) {
-			color = ((PaletteItem.Solid) item).getColor();
+			color = ((PaletteItem.Solid) item).getColorInt();
 		}
 		paletteElements.updateColorItemView(view, color, isSelected);
 
@@ -154,7 +154,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 
 			int color = 0;
 			if (newItem instanceof PaletteItem.Solid) {
-				color = ((PaletteItem.Solid) newItem).getColor();
+				color = ((PaletteItem.Solid) newItem).getColorInt();
 			}
 			Drawable border = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle_contour, color);
 			outline.setImageDrawable(border);

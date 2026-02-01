@@ -31,7 +31,7 @@ object SolidPaletteFactory {
 						index.toString()
 					),
 					isEditable = true,
-					color = colorInt,
+					colorInt = colorInt,
 					historyIndex = index + 1,
 					lastUsedTime = baseTime - (index * 1000L)
 				)

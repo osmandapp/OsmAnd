@@ -77,7 +77,7 @@ abstract class BasePaletteController(
 	// --- Selection Logic ---
 
 	override fun selectPaletteItem(item: PaletteItem?) {
-		if (selectedItem?.id != item?.id) {
+		if (selectedItem != item) {
 			val oldSelected = selectedItem
 			selectedItem = item
 
@@ -109,9 +109,7 @@ abstract class BasePaletteController(
 	}
 
 	override fun onPaletteItemLongClick(anchorView: View, item: PaletteItem) {
-		if (item is PaletteItem.Gradient) {
-			showItemPopUpMenu(anchorView, item)
-		}
+		showItemPopUpMenu(anchorView, item)
 	}
 
 	protected abstract fun showItemPopUpMenu(anchorView: View, item: PaletteItem)

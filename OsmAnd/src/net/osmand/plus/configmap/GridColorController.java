@@ -62,7 +62,7 @@ public class GridColorController extends MapColorPaletteController {
 	@Override
 	protected void onColorSelectedFromPalette(@NonNull PaletteItem paletteItem) {
 		if (paletteItem instanceof PaletteItem.Solid solidItem) {
-			setSavedColor(solidItem.getColor(), isNightMap());
+			setSavedColor(solidItem.getColorInt(), isNightMap());
 			loadSavedColors();
 			externalListener.onPaletteItemSelected(solidItem);
 		}

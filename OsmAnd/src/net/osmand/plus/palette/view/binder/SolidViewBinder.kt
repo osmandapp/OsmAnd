@@ -19,7 +19,7 @@ class SolidViewBinder(
 
 	override fun bindView(itemView: View, item: PaletteItem, selected: Boolean) {
 		if (item is PaletteItem.Solid) {
-			paletteElements.updateColorItemView(itemView, item.color, selected)
+			paletteElements.updateColorItemView(itemView, item.colorInt, selected)
 		}
 	}
 }

@@ -100,7 +100,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 
 	@NonNull
 	public GradientPaletteController getController() {
-		String paletteId = type.toPaletteCategory().getKey();
+		String paletteId = type.toPaletteCategory().getId();
 		if (controller == null) {
 			controller = new GradientPaletteController(app, paletteId,null);
 		}
@@ -142,7 +142,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 		plugin.setTerrainMode(originalMode);
 		selectedMode = originalMode;
 		plugin.updateLayers(requireMapActivity(), requireMapActivity());
-		String paletteId = type.toPaletteCategory().getKey();
+		String paletteId = type.toPaletteCategory().getId();
 		controller.updatePalette(paletteId, selectedMode.getKeyName());
 		updateApplyButton(isChangesMade());
 	}
@@ -167,7 +167,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 	@Override
 	public void onPaletteItemSelected(@NonNull PaletteItem gradientItem) {
 		if (gradientItem instanceof PaletteItem.Gradient gradient) {
-			TerrainType terrainType = TerrainType.valueOf(gradient.getTypeName());
+			TerrainType terrainType = TerrainType.valueOf(gradient.getPaletteId());
 			String key = gradient.getPaletteName();
 			TerrainMode mode = TerrainMode.valueOf(terrainType, key);
 			if (mode != null) {

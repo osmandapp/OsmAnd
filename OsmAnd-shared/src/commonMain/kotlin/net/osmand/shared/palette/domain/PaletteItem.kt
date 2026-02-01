@@ -1,13 +1,14 @@
 package net.osmand.shared.palette.domain
 
 import net.osmand.shared.ColorPalette
+import net.osmand.shared.palette.domain.filetype.GradientFileType
 
 sealed interface PaletteItemSource {
 	val paletteId: String
 
 	data class GradientFile(
 		override val paletteId: String,
-		val fileName: String // e.g. "route_speed_default.txt"
+		val fileName: String             // e.g. "route_speed_default.txt"
 	) : PaletteItemSource
 
 	data class CollectionRecord(
@@ -17,7 +18,7 @@ sealed interface PaletteItemSource {
 }
 
 data class GradientProperties(
-	val fileType: PaletteFileType,
+	val fileType: GradientFileType,
 	val rangeType: GradientRangeType,
 	val name: String? = null,
 	val comments: List<String> = emptyList(),
@@ -46,9 +47,9 @@ sealed interface PaletteItem {
 		override val isEditable: Boolean = true,
 		override val historyIndex: Int,
 		override val lastUsedTime: Long = 0,
-		val color: Int
+		val colorInt: Int
 	) : PaletteItem {
-		fun getColorValue() = ColorPalette.ColorValue(historyIndex.toDouble(), color) // TODO: use color id instead of index
+		fun getColorValue() = ColorPalette.ColorValue(historyIndex.toDouble(), colorInt) // TODO: use color id instead of index
 	}
 
 	data class Gradient(
@@ -83,7 +84,7 @@ sealed interface PaletteItem {
 			return this.copy(points = newPoints)
 		}
 
-		fun getTypeName(): String = getPaletteCategory().key
+		fun getPaletteId(): String = getPaletteCategory().id
 
 		fun getPaletteCategory() = properties.fileType.category
 

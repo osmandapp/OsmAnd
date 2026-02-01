@@ -92,7 +92,7 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 	@Override
 	public void onPaletteItemSelected(@NonNull PaletteItem item) {
 		if (item instanceof PaletteItem.Solid solid) {
-			data.setParameter(COLOR, solid.getColor());
+			data.setParameter(COLOR, solid.getColorInt());
 		}
 	}
 

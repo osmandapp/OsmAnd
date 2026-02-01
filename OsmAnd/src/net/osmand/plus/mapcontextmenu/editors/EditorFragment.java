@@ -308,7 +308,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	@Override
 	public void onPaletteItemSelected(@NonNull PaletteItem item) {
 		if (item instanceof PaletteItem.Solid solidItem) {
-			setColor(solidItem.getColor());
+			setColor(solidItem.getColorInt());
 			updateContent();
 		}
 	}

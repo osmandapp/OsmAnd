@@ -485,7 +485,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			trackDrawInfo.setGradientColorName(gradient.getPaletteName());
 			refreshMap();
 		} else if (item instanceof PaletteItem.Solid solid) {
-			trackDrawInfo.setColor(solid.getColor());
+			trackDrawInfo.setColor(solid.getColorInt());
 			trackDrawInfo.setGradientColorName(PaletteUtils.DEFAULT_NAME);
 			updateColorItems();
 		}
@@ -494,7 +494,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onPaletteItemAdded(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
 		if (oldItem instanceof PaletteItem.Solid oldSolid && newItem instanceof PaletteItem.Solid newSolid) {
-			TrackColorController.saveCustomColorsToTracks(app, oldSolid.getColor(), newSolid.getColor());
+			TrackColorController.saveCustomColorsToTracks(app, oldSolid.getColorInt(), newSolid.getColorInt());
 		}
 		updateColorItems();
 	}

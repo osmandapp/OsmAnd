@@ -106,7 +106,7 @@ public class FavoriteAppearanceController implements IDialogController, IColorCa
 	@Override
 	public void onPaletteItemSelected(@NonNull PaletteItem item) {
 		if (item instanceof PaletteItem.Solid solidItem) {
-			setColor(solidItem.getColor());
+			setColor(solidItem.getColorInt());
 		}
 	}
 

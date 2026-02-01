@@ -18,6 +18,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
+// TODO
+@Deprecated
 public class ColorsPaletteElements {
 
 	public static final double MINIMUM_CONTRAST_RATIO = 1.5;

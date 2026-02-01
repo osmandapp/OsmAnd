@@ -31,7 +31,7 @@ import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.DayNightHelper.MapThemeProvider;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.shared.palette.domain.PaletteCategory;
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -176,8 +176,8 @@ public class RouteLineColorController extends ColoringStyleCardController
 
 	@NonNull
 	public GradientPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
-		PaletteCategory paletteCategory = gradientScaleType.toPaletteCategory();
-		String paletteId = paletteCategory != null ? paletteCategory.getKey() : "";
+		GradientPaletteCategory paletteCategory = gradientScaleType.toPaletteCategory();
+		String paletteId = paletteCategory != null ? paletteCategory.getId() : "";
 		if (gradientPaletteController == null) {
 			gradientPaletteController = new GradientPaletteController(app, paletteId,null) {
 				@Override
