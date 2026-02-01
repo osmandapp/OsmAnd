@@ -195,8 +195,8 @@
     <string name="osmand_parking_position_name">Parkirno mjesto</string>
     <string name="osmand_parking_plugin_description">Parking dodatak vam omogućava da sa lakoćom spremite lokaciju vašeg parkiranog automobila, i prikaz koliko vremena vam je još preostalo ukoliko je parking vremenski ograničen. Također možete pronaći vaš automobil na karti i widgetu. Dodaje podsjetnik u kalendar ukoliko želite obavijesti.</string>
     <string name="context_menu_item_add_parking_point">Označite kao parkirno mjesto</string>
-    <string name="route_kl">Držite se lijevo i vozite</string>
-    <string name="route_kr">Držite se desno i vozite</string>
+    <string name="route_kl">Držite se lijevo i nastavite</string>
+    <string name="route_kr">Držite se desno i nastavite</string>
     <string name="rendering_attr_noPolygons_name">Sakrij poligone</string>
     <string name="rendering_attr_noPolygons_description">Prikaži sve prostorne i zemljište značajke na karti prozirno.</string>
     <string name="rendering_attr_appMode_description">Optimizirate kartu za</string>
@@ -366,11 +366,11 @@
     <string name="map_orientation_landscape">Pejzažno</string>
     <string name="map_orientation_default">Po postavkama uređaja</string>
     <string name="route_tr">Skrenite desno i nastavite voziti po</string>
-    <string name="route_tshr">Skrenite oštro udesno i nastavite voziti po</string>
-    <string name="route_tslr">Skrenite blago udesno i nastavite voziti po</string>
+    <string name="route_tshr">Skrenite oštro desno i nastavite voziti po</string>
+    <string name="route_tslr">Skrenite blago desno i nastavite voziti po</string>
     <string name="route_tl">Skrenite lijevo i nastavite voziti po</string>
-    <string name="route_tshl">Skrenite oštro ulijevo i nastavite voziti po</string>
-    <string name="route_tsll">Skrenite blago ulijevo i nastavite voziti po</string>
+    <string name="route_tshl">Skrenite oštro lijevo i nastavite voziti po</string>
+    <string name="route_tsll">Skrenite blago lijevo i nastavite voziti po</string>
     <string name="route_tu">Polukružno se okrenite i nastavite voziti po</string>
     <string name="menu_mute_off">Zvuk je uključen</string>
     <string name="menu_mute_on">Zvuk je isključen</string>
@@ -1884,12 +1884,12 @@
     <string name="context_menu_read_full">Pročitaj sve</string>
     <string name="shared_string_drawer">Ladica</string>
     <string name="welcome_to_open_beta">Dobrodošli u otvorenu betu</string>
-    <string name="wikivoyage_travel_guide_descr">Vodi do najzanimljivijih mjesta na planetu, unutar OsmAnd, bez veze s internetom.</string>
-    <string name="in_app_purchase">Kupnja iz aplikacije</string>
+    <string name="wikivoyage_travel_guide_descr">Vodiči do najzanimljivijih mjesta na planetu, unutar OsmAnda, bez potrebe za internetskom vezom.</string>
+    <string name="in_app_purchase">Kupnja putem aplikacije</string>
     <string name="in_app_purchase_desc_ex">Jednom kupljeno, bit će Vam trajno dostupan.</string>
     <string name="wikipedia_offline">Wikipedia izvan mreže</string>
-    <string name="pick_up_till">Pokupiti do</string>
-    <string name="type_address">Upišite adresu</string>
+    <string name="pick_up_till">Preuzimanje do</string>
+    <string name="type_address">Upiši adresu</string>
     <string name="error_notification_desc">Pošaljite snimak zaslona ove obavijesti na support@osmand.net</string>
     <string name="unirs_render_descr">Izmjena zadanog stila za povećanje kontrasta pješačkih i biciklističkih cesta. Koristi naslijeđene Mapnik boje.</string>
 </resources>
