@@ -1884,7 +1884,7 @@
     <string name="context_menu_read_full">Pročitaj sve</string>
     <string name="shared_string_drawer">Ladica</string>
     <string name="welcome_to_open_beta">Dobrodošli u otvorenu betu</string>
-    <string name="wikivoyage_travel_guide_descr">Vodi vas do najzanimljivijih mjesta na planetu, unutar OsmAnd‑a, bez potrebe za internetskom vezom.</string>
+    <string name="wikivoyage_travel_guide_descr">Vodi do najzanimljivijih mjesta na planetu, unutar OsmAnd, bez veze s internetom.</string>
     <string name="in_app_purchase">Kupnja putem aplikacije</string>
     <string name="in_app_purchase_desc_ex">Nakon kupnje bit će vam trajno dostupno.</string>
     <string name="wikipedia_offline">Wikipedia (offline način)</string>
