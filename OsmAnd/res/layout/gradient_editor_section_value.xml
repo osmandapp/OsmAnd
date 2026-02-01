@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/list_background_color"
+    android:orientation="vertical">
+
+    <net.osmand.plus.widgets.TextViewEx
+        style="@style/TitleStyle.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_sheet_list_item_height"
+        android:layout_gravity="center_vertical"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="?android:textColorPrimary"
+        android:paddingHorizontal="@dimen/content_padding"
+        android:gravity="center_vertical"
+        android:text="@string/shared_string_value" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_padding_half"
+        android:layout_marginLeft="@dimen/content_padding"
+        android:layout_marginRight="@dimen/content_padding"
+        android:layout_marginStart="@dimen/content_padding"
+        android:layout_marginEnd="@dimen/content_padding">
+
+        <LinearLayout
+            android:id="@+id/text_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:id="@+id/text_caption"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:hintEnabled="false"
+                app:errorIconDrawable="@null"
+                app:boxBackgroundColor="@color/material_text_input_layout_bg">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/favorites_list_item_height"
+                    android:gravity="end|center_vertical"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1"
+                    android:paddingVertical="0dp"
+                    android:paddingHorizontal="@dimen/content_padding_small"
+                    android:textSize="@dimen/default_list_text_size"
+                    tools:text="75"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/unit"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/favorites_list_item_height"
+            android:layout_gravity="start|top"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/content_padding_small"
+            android:textColor="?android:textColorSecondary"
+            tools:text="%" />
+
+    </FrameLayout>
+
+    <net.osmand.plus.widgets.TextViewEx
+        android:id="@+id/summary"
+        style="@style/DescStyle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_sheet_list_item_height"
+        android:layout_gravity="center_vertical"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="?android:textColorSecondary"
+        android:paddingHorizontal="@dimen/content_padding"
+        android:gravity="center_vertical"
+        tools:text="Color of the maximum value found in the track." />
+
+</LinearLayout>

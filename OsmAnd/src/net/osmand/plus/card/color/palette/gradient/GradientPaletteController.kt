@@ -8,6 +8,7 @@ import net.osmand.OnResultCallback
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.card.color.palette.gradient.editor.GradientDraft
+import net.osmand.plus.card.color.palette.gradient.editor.GradientEditorController
 import net.osmand.plus.card.color.palette.gradient.editor.GradientRangeTypeController
 import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.palette.controller.BasePaletteController
@@ -186,13 +187,11 @@ open class GradientPaletteController(
 	}
 
 	private fun editGradient(item: PaletteItem.Gradient) {
-		getFragmentActivity()?.let {
-			editedItem = item
-			showGradientEditor(it, GradientDraft(
-				fileType = item.properties.fileType,
-				points = item.points
-			))
-		}
+		editedItem = item
+		showGradientEditor(GradientDraft(
+			fileType = item.properties.fileType,
+			points = item.points
+		))
 	}
 
 	private fun selectFileType(callback: OnResultCallback<GradientFileType>) {
@@ -218,8 +217,20 @@ open class GradientPaletteController(
 		}
 	}
 
-	private fun showGradientEditor(activity: FragmentActivity, gradientDraft: GradientDraft) {
-		// TODO: show gradient editor
+	private fun showGradientEditor(gradientDraft: GradientDraft) {
+		getFragmentActivity()?.let {
+			GradientEditorController.showDialog(
+				app = app,
+				fragmentManager = it.supportFragmentManager,
+				appMode = app.settings.applicationMode,       // TODO: determine real data
+				gradientDraft = gradientDraft,
+				callback = { result -> onApplyGradientEdits(result) }
+			)
+		}
+	}
+
+	private fun onApplyGradientEdits(gradientDraft: GradientDraft) {
+		// TODO: implement
 	}
 
 	private fun updateExternalDependencies() {
@@ -234,12 +245,11 @@ open class GradientPaletteController(
 
 	override fun onAddButtonClick(activity: FragmentActivity) {
 		selectFileType { fileType ->
-			getFragmentActivity()?.let { activity ->
-				showGradientEditor(activity, GradientDraft(
-					fileType = fileType,
-					points = ColorPalette.MIN_MAX_PALETTE.toGradientPoints() // TODO: in future we can create and use predefined values based on the file type
-				))
-			}
+			showGradientEditor(GradientDraft(
+				fileType = fileType,
+				// TODO: in future we can create and use predefined values based on the file type
+				points = ColorPalette.MIN_MAX_PALETTE.toGradientPoints()
+			))
 		}
 	}
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/list_background_color"
+    android:orientation="vertical">
+
+    <com.github.mikephil.charting.charts.GradientChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/route_info_chart_height" />
+
+    <net.osmand.plus.widgets.chips.HorizontalChipsView
+        android:id="@+id/value_chips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/content_padding"
+        android:paddingVertical="@dimen/content_padding_half"
+        tools:itemCount="3"
+        tools:listitem="@layout/custom_chip_view" />
+
+</LinearLayout>
