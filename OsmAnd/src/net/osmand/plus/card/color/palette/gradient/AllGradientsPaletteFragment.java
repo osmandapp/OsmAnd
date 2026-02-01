@@ -22,7 +22,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.card.color.palette.gradient.v2.AllGradientsPaletteAdapter;
 import net.osmand.plus.palette.contract.IPaletteController;
 import net.osmand.plus.palette.contract.IPaletteView;
 import net.osmand.plus.helpers.AndroidUiHelper;

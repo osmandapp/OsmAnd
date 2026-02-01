@@ -13,7 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.card.color.palette.gradient.v2.GradientPaletteController;
+import net.osmand.plus.card.color.palette.gradient.GradientPaletteController;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;

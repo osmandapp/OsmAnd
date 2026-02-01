@@ -1,12 +1,14 @@
-package net.osmand.plus.card.color.palette.gradient.v2
+package net.osmand.plus.card.color.palette.gradient
 
 import android.graphics.Typeface
 import android.text.style.ForegroundColorSpan
 import android.view.View
 import androidx.fragment.app.FragmentActivity
+import net.osmand.OnResultCallback
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.card.color.palette.gradient.AllGradientsPaletteFragment
+import net.osmand.plus.card.color.palette.gradient.editor.GradientDraft
+import net.osmand.plus.card.color.palette.gradient.editor.GradientRangeTypeController
 import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.palette.controller.BasePaletteController
 import net.osmand.plus.plugins.srtm.TerrainMode
@@ -17,16 +19,20 @@ import net.osmand.plus.widgets.alert.CustomAlert
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
+import net.osmand.shared.ColorPalette
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.palette.data.PaletteSortMode
 import net.osmand.shared.palette.data.PaletteUtils
+import net.osmand.shared.palette.data.toGradientPoints
+import net.osmand.shared.palette.domain.GradientRangeType
 import net.osmand.shared.palette.domain.Palette
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory
 import net.osmand.shared.palette.domain.PaletteItem
+import net.osmand.shared.palette.domain.filetype.GradientFileType
 
 open class GradientPaletteController(
 	app: OsmandApplication,
-	paletteCategory: GradientPaletteCategory,
+	private val paletteCategory: GradientPaletteCategory,
 ) : BasePaletteController(app, paletteCategory.id) {
 
 	var analysis: GpxTrackAnalysis? = null
@@ -79,7 +85,7 @@ open class GradientPaletteController(
 	}
 
 	override fun isAddingNewItemsSupported(): Boolean {
-		return InAppPurchaseUtils.isGradientEditorAvailable(app)
+		return paletteCategory.editable && InAppPurchaseUtils.isGradientEditorAvailable(app)
 	}
 
 	// --- Actions (Duplicate / Remove) ---
@@ -92,7 +98,23 @@ open class GradientPaletteController(
 		val nightMode = paletteView.isNightMode()
 		val menuItems = ArrayList<PopUpMenuItem>()
 
-		// Duplicate
+		if (paletteCategory.editable && item.isEditable) {
+			menuItems.add(PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_rename)
+				.setIcon(getContentIcon(R.drawable.ic_action_edit_outlined))
+				.setOnClickListener { showRenameDialog(activity, item) }
+				.create()
+			)
+
+			menuItems.add(PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_edit)
+				.setIcon(getContentIcon(R.drawable.ic_action_appearance_outlined))
+				.setOnClickListener { editGradient(item) }
+				.create()
+			)
+		}
+
+		// Duplicate (allowed for every item)
 		menuItems.add(PopUpMenuItem.Builder(activity)
 			.setTitleId(R.string.shared_string_duplicate)
 			.setIcon(getContentIcon(R.drawable.ic_action_copy))
@@ -100,7 +122,7 @@ open class GradientPaletteController(
 			.create()
 		)
 
-		// Remove (only if not default and not currently selected, mirroring legacy logic)
+		// Remove (only if not default and not currently selected)
 		val isSelected = isPaletteItemSelected(item)
 		if (!item.isDefault && !isSelected) {
 			menuItems.add(PopUpMenuItem.Builder(activity)
@@ -159,6 +181,47 @@ open class GradientPaletteController(
 		updateExternalDependencies()
 	}
 
+	private fun showRenameDialog(activity: FragmentActivity, item: PaletteItem.Gradient) {
+		// TODO: implement
+	}
+
+	private fun editGradient(item: PaletteItem.Gradient) {
+		getFragmentActivity()?.let {
+			editedItem = item
+			showGradientEditor(it, GradientDraft(
+				fileType = item.properties.fileType,
+				points = item.points
+			))
+		}
+	}
+
+	private fun selectFileType(callback: OnResultCallback<GradientFileType>) {
+		if (paletteCategory.isSupportDifferentRangeTypes()) {
+			showRangeTypeDialog {
+				callback.onResult(paletteCategory.getFileType(it))
+			}
+		} else {
+			callback.onResult(paletteCategory.getFileType())
+		}
+	}
+
+	private fun showRangeTypeDialog(callback: OnResultCallback<GradientRangeType>) {
+		getFragmentActivity()?.let {
+			GradientRangeTypeController.showDialog(
+				app = app,
+				fragmentManager = it.supportFragmentManager,
+				appMode = app.settings.applicationMode,       // TODO: determine real data
+				usedOnMap = true,                             // TODO: determine real data
+				supportedTypes = paletteCategory.getSupportedRangeTypes(),
+				callback = callback
+			)
+		}
+	}
+
+	private fun showGradientEditor(activity: FragmentActivity, gradientDraft: GradientDraft) {
+		// TODO: show gradient editor
+	}
+
 	private fun updateExternalDependencies() {
 		val category = GradientPaletteCategory.fromKey(paletteId)
 
@@ -170,7 +233,14 @@ open class GradientPaletteController(
 	// --- UI Interactions ---
 
 	override fun onAddButtonClick(activity: FragmentActivity) {
-		// TODO: implement with new Gradient Editor UI
+		selectFileType { fileType ->
+			getFragmentActivity()?.let { activity ->
+				showGradientEditor(activity, GradientDraft(
+					fileType = fileType,
+					points = ColorPalette.MIN_MAX_PALETTE.toGradientPoints() // TODO: in future we can create and use predefined values based on the file type
+				))
+			}
+		}
 	}
 
 	override fun onShowAllClick(activity: FragmentActivity) {

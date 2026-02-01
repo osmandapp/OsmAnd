@@ -65,25 +65,6 @@ sealed interface PaletteItem {
 		val properties: GradientProperties
 	) : PaletteItem {
 
-		fun withPoints(newPoints: List<GradientPoint>): Gradient {
-			return this.copy(points = newPoints.sortedBy { it.value })
-		}
-
-		fun withPointAdded(point: GradientPoint): Gradient {
-			val newPoints = points + point
-			return this.copy(points = newPoints.sortedBy { it.value })
-		}
-
-		fun withPointUpdated(oldPoint: GradientPoint, newPoint: GradientPoint): Gradient {
-			val newPoints = points.map { if (it == oldPoint) newPoint else it }
-			return this.copy(points = newPoints.sortedBy { it.value })
-		}
-
-		fun withPointRemoved(point: GradientPoint): Gradient {
-			val newPoints = points - point
-			return this.copy(points = newPoints)
-		}
-
 		fun getPaletteId(): String = getPaletteCategory().id
 
 		fun getPaletteCategory() = properties.fileType.category

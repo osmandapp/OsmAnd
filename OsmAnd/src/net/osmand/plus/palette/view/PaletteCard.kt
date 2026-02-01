@@ -79,11 +79,9 @@ abstract class PaletteCard(
 	}
 
 	private fun updateShowAllButton() {
-		if (controller.isAddingNewItemsSupported()) {
-			val btnAll = view.findViewById<View>(R.id.button_all_colors) ?: return
-			val accentColor = controller.getControlsAccentColor(nightMode)
-			UiUtilities.setupListItemBackground(activity, btnAll, accentColor)
-		}
+		val btnAll = view.findViewById<View>(R.id.button_all_colors) ?: return
+		val accentColor = controller.getControlsAccentColor(nightMode)
+		UiUtilities.setupListItemBackground(activity, btnAll, accentColor)
 	}
 
 	// --- IPaletteView Implementation ---

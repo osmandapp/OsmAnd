@@ -16,7 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
-import net.osmand.plus.card.color.palette.gradient.v2.GradientPaletteController;
+import net.osmand.plus.card.color.palette.gradient.GradientPaletteController;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.color.palette.main.v2.SolidPaletteController;
 import net.osmand.plus.palette.controller.BasePaletteController;

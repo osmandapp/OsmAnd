@@ -20,8 +20,6 @@ open class SolidPaletteController(
 	paletteId: String = "user_palette_default" // TODO: don't use hardcoded ids
 ) : BasePaletteController(app, paletteId), ColorPickerDialogController.ColorPickerListener {
 
-	private var editedItem: PaletteItem.Solid? = null
-
 	@JvmOverloads
 	constructor(
 		app: OsmandApplication,
@@ -38,7 +36,7 @@ open class SolidPaletteController(
 	override fun onApplyColorPickerSelection(oldColor: Int?, newColor: Int) {
 		val currentPalette = repository.getPalette(paletteId) as? Palette.SolidCollection ?: return
 
-		val itemToUpdate = editedItem
+		val itemToUpdate = editedItem as? PaletteItem.Solid
 		val resultItem: PaletteItem.Solid
 
 		if (itemToUpdate != null) {

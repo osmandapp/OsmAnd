@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.gradient.v2
+package net.osmand.plus.card.color.palette.gradient
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.card.color.palette.gradient.GradientUiHelper
 import net.osmand.plus.palette.controller.BasePaletteController
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities

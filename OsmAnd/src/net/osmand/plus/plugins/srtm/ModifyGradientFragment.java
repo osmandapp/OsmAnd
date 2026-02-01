@@ -18,7 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
-import net.osmand.plus.card.color.palette.gradient.v2.GradientPaletteController;
+import net.osmand.plus.card.color.palette.gradient.GradientPaletteController;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;

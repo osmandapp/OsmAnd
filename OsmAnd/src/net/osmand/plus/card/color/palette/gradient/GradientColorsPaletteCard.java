@@ -8,7 +8,6 @@ import com.github.mikephil.charting.charts.GradientChart;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.gradient.v2.GradientPaletteController;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.palette.contract.IPaletteView;
 import net.osmand.plus.charts.ChartUtils;

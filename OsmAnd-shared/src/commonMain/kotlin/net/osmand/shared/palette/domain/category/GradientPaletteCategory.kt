@@ -1,6 +1,8 @@
 package net.osmand.shared.palette.domain.category
 
 import net.osmand.shared.gpx.filters.MeasureUnitType
+import net.osmand.shared.palette.domain.GradientRangeType
+import net.osmand.shared.palette.domain.filetype.GradientFileType
 import net.osmand.shared.units.LengthUnits
 import net.osmand.shared.units.MeasurementUnit
 import net.osmand.shared.units.NoUnit
@@ -88,6 +90,29 @@ enum class GradientPaletteCategory(
 	);
 
 	fun isTerrainRelated() = this in setOf(TERRAIN_ALTITUDE, TERRAIN_SLOPE, TERRAIN_HILLSHADE)
+
+	fun isSupportDifferentRangeTypes(): Boolean {
+		return GradientFileType.valuesOf(this)
+			.map { it.rangeType }
+			.distinct()
+			.size > 1
+	}
+
+	fun getFileType(): GradientFileType {
+		return GradientFileType.valuesOf(this)[0]
+	}
+
+	fun getFileType(rangeType: GradientRangeType): GradientFileType? {
+		return GradientFileType.valuesOf(this)
+			.find { it.rangeType == rangeType }
+	}
+
+	fun getSupportedRangeTypes(): List<GradientRangeType> {
+		return GradientFileType.valuesOf(this)
+			.map { it.rangeType }
+			.distinct()
+			.sortedBy { it.ordinal }
+	}
 
 	companion object {
 		private val map = entries.associateBy(GradientPaletteCategory::id)

@@ -6,6 +6,7 @@ package net.osmand.plus.base.dialog.data;
 public enum DialogExtra {
 	TITLE,
 	SUBTITLE,
+	SUBTITLE_BOTTOM_MARGIN,
 	DRAWABLE,
 	DESCRIPTION,
 	SELECTED_INDEX,

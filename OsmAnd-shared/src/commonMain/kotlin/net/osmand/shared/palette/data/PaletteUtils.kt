@@ -6,6 +6,7 @@ import net.osmand.shared.palette.domain.Palette
 import net.osmand.shared.palette.domain.filetype.PaletteFileType
 import net.osmand.shared.palette.domain.PaletteItem
 import net.osmand.shared.palette.domain.PaletteItemSource
+import net.osmand.shared.palette.domain.filetype.GradientFileType
 import net.osmand.shared.palette.domain.filetype.PaletteFileTypeRegistry
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.NamingUtils

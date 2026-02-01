@@ -24,6 +24,7 @@ abstract class BasePaletteController(
 	protected val views = ArrayList<WeakReference<IPaletteView>>()
 	protected var listener: OnColorsPaletteListener? = null
 
+	protected var editedItem: PaletteItem? = null
 	protected var selectedItem: PaletteItem? = null
 
 	// --- View Management ---
@@ -133,6 +134,12 @@ abstract class BasePaletteController(
 			palette.updatePaletteSelection(oldItem, newItem)
 		}
 	}
+
+	// --- Base UI components ---
+
+	fun isNightMode() = collectActivePalettes()[0].isNightMode()
+
+	fun getFragmentActivity() = collectActivePalettes()[0].getActivity()
 
 	// --- UI Helpers ---
 
