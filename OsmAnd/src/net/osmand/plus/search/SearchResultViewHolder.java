@@ -32,6 +32,7 @@ import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.plus.mapcontextmenu.other.TrimToBackgroundTextView;
 import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.PicassoUtils;
@@ -192,14 +193,15 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		String photoUrl = null;
 		if (amenity != null) {
 			photoUrl = amenity.getWikiIconUrl();
-			if (amenity.isRouteTrack()) {
+			ClickableWayHelper clickableWayHelper = app.getClickableWayHelper();
+			if (amenity.isRouteTrack() || clickableWayHelper.isClickableWayAmenity(amenity)) {
 				typeName = amenity.getRouteActivityType();
 				hasRouteShield = QuickSearchListItem.getRouteShieldDrawable(app, amenity) != null;
 				address = String.format("%s • %s", AmenityExtensionsHelper.getAmenityMetricsFormatted(amenity, app), address);
 			}
 		}
 
-		if (!Algorithms.stringsEqual(name, altName)) {
+		if (!Algorithms.isEmpty(altName) && !Algorithms.stringsEqual(name, altName)) {
 			name = String.format("%s (%s)", name, altName);
 			int textColor = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 			SpannableString spannableName = UiUtilities.createColorSpannable(name, view.getContext().getColor(textColor), false, altName);
