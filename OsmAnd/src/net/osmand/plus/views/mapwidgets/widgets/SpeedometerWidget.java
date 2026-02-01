@@ -227,7 +227,6 @@ public class SpeedometerWidget {
 		}
 
 		boolean isUsaOrCanada = isUsaOrCanadaRegion();
-		AndroidUiHelper.updateVisibility(speedLimitContainer, false);
 		AndroidUiHelper.updateVisibility(speedLimitDescription, isUsaOrCanada);
 		WidgetSize newWidgetSize = settings.SPEEDOMETER_SIZE.getModeValue(mode);
 		DrivingRegion newDrivingRegion = settings.DRIVING_REGION.getModeValue(mode);
@@ -299,6 +298,7 @@ public class SpeedometerWidget {
 				break;
 		}
 		speedLimitContainer.setAlpha(speedLimitContainer.getVisibility() == View.VISIBLE ? 1f : 0f);
+		AndroidUiHelper.updateVisibility(speedLimitContainer, false);
 	}
 
 	private int dpToPx(float dp) {
@@ -456,7 +456,7 @@ public class SpeedometerWidget {
 						speedLimitContainer.getVisibility() == (show ? View.VISIBLE : View.GONE)) {
 					return;
 				}
-				if (show) {
+				if (show || speedLimitContainer.getAlpha() > 0) {
 					speedLimitContainer.setVisibility(View.VISIBLE);
 				}
 				speedLimitContainer.animate()
