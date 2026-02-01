@@ -204,6 +204,12 @@ public class SpeedometerWidget {
 		speedometerUnitsView = hasView ? view.findViewById(R.id.speedometer_units) : null;
 		speedLimitDescription = hasView ? view.findViewById(R.id.limit_description) : null;
 
+		lastNightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.MAP);
+		previousSpeedValueTextColor = currentState.getSpeedTextColor(app, lastNightMode);
+		previousSpeedUnitTextColor = currentState.getSpeedUnitTextColor(app, lastNightMode);
+		speedValueTextColor = previousSpeedValueTextColor;
+		speedUnitTextColor = previousSpeedUnitTextColor;
+
 		animationDrawable = new SpeedometerAnimationDrawable(dpToPx(8));
 		if (speedometerContainer != null) {
 			speedometerContainer.setBackground(animationDrawable);
