@@ -177,9 +177,8 @@ public class RouteLineColorController extends ColoringStyleCardController
 	@NonNull
 	public GradientPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
 		GradientPaletteCategory paletteCategory = gradientScaleType.toPaletteCategory();
-		String paletteId = paletteCategory != null ? paletteCategory.getId() : "";
 		if (gradientPaletteController == null) {
-			gradientPaletteController = new GradientPaletteController(app, paletteId,null) {
+			gradientPaletteController = new GradientPaletteController(app, paletteCategory) {
 				@Override
 				public void onPaletteScreenClosed() {
 					notifyAllColorsScreenClosed();
@@ -187,7 +186,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 			};
 		}
 		gradientPaletteController.setPaletteListener(getExternalListener());
-		gradientPaletteController.updatePalette(paletteId, routeLinePreview.getGradientPalette());
+		gradientPaletteController.updatePalette(paletteCategory, routeLinePreview.getGradientPalette());
 		return gradientPaletteController;
 	}
 

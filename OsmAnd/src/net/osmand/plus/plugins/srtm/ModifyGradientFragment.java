@@ -25,6 +25,7 @@ import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.palette.domain.PaletteItem;
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 
 public class ModifyGradientFragment extends ConfigureMapOptionFragment implements IColorCardControllerListener {
 
@@ -100,11 +101,11 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 
 	@NonNull
 	public GradientPaletteController getController() {
-		String paletteId = type.toPaletteCategory().getId();
+		GradientPaletteCategory paletteCategory = type.toPaletteCategory();
 		if (controller == null) {
-			controller = new GradientPaletteController(app, paletteId,null);
+			controller = new GradientPaletteController(app, paletteCategory);
 		}
-		controller.updatePalette(paletteId, plugin.getTerrainMode().getKeyName());
+		controller.updatePalette(paletteCategory, plugin.getTerrainMode().getKeyName());
 		controller.setPaletteListener(this);
 		return controller;
 	}
@@ -142,8 +143,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 		plugin.setTerrainMode(originalMode);
 		selectedMode = originalMode;
 		plugin.updateLayers(requireMapActivity(), requireMapActivity());
-		String paletteId = type.toPaletteCategory().getId();
-		controller.updatePalette(paletteId, selectedMode.getKeyName());
+		controller.updatePalette(type.toPaletteCategory(), selectedMode.getKeyName());
 		updateApplyButton(isChangesMade());
 	}
 

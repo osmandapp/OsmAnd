@@ -103,11 +103,10 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	@NonNull
 	public GradientPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
 		GradientPaletteCategory paletteCategory = gradientScaleType.toPaletteCategory();
-		String paletteId = paletteCategory != null ? paletteCategory.getId() : "";
 		if (gradientPaletteController == null) {
-			gradientPaletteController = new GradientPaletteController(app, paletteId, null);
+			gradientPaletteController = new GradientPaletteController(app, paletteCategory);
 		}
-		gradientPaletteController.updatePalette(paletteId, PaletteUtils.DEFAULT_NAME);
+		gradientPaletteController.updatePalette(paletteCategory, PaletteUtils.DEFAULT_NAME);
 		gradientPaletteController.setPaletteListener(getExternalListener());
 		return gradientPaletteController;
 	}

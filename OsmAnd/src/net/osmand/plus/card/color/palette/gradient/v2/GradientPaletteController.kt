@@ -26,9 +26,18 @@ import net.osmand.shared.palette.domain.PaletteItem
 
 open class GradientPaletteController(
 	app: OsmandApplication,
-	paletteId: String, // TODO: here we can use GradientPaletteCategory
-	val analysis: GpxTrackAnalysis?
-) : BasePaletteController(app, paletteId) {
+	paletteCategory: GradientPaletteCategory,
+) : BasePaletteController(app, paletteCategory.id) {
+
+	var analysis: GpxTrackAnalysis? = null
+
+	constructor(
+		app: OsmandApplication,
+		paletteCategory: GradientPaletteCategory,
+		analysis: GpxTrackAnalysis
+	): this(app, paletteCategory) {
+		this.analysis = analysis
+	}
 
 	// --- Content Update ---
 
@@ -36,8 +45,8 @@ open class GradientPaletteController(
 	 * Updates the current palette category (e.g. switch from Speed to Elevation)
 	 * and optionally selects an item by name.
 	 */
-	fun updatePalette(newPaletteId: String, selectedItemName: String?) {
-		this.paletteId = newPaletteId
+	fun updatePalette(paletteCategory: GradientPaletteCategory, selectedItemName: String?) {
+		this.paletteId = paletteCategory.id
 		selectPaletteItemByName(selectedItemName)
 		notifyUpdatePaletteColors(null)
 	}

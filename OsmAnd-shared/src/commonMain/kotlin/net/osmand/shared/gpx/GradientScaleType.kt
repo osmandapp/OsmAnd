@@ -40,12 +40,11 @@ enum class GradientScaleType(
 		}
 	}
 
-	fun toPaletteCategory(): GradientPaletteCategory? {
+	fun toPaletteCategory(): GradientPaletteCategory {
 		return when (this) {
 			SPEED -> GradientPaletteCategory.SPEED
 			ALTITUDE -> GradientPaletteCategory.ALTITUDE
 			SLOPE -> GradientPaletteCategory.SLOPE
-			else -> null
 		}
 	}
 
