@@ -5233,7 +5233,7 @@
     <string name="wikimedia">Wikimedia</string>
     <string name="open_in_browser">Öppna i webbläsare</string>
     <string name="drawer_button_description">Öppnar huvudmenyn.</string>
-    <string name="configure_map_description">Ändra kartans stil, lager och andra inställningar.</string>
+    <string name="configure_map_description">Ändra kartstil, lager eller andra inställningar.</string>
     <string name="obd_fuel_type_not_provided">Ingen drivmedelstyp angiven</string>
     <string name="obd_fuel_type_gasoline">Bensin</string>
     <string name="obd_fuel_type_methanol">Metanol</string>
@@ -5245,10 +5245,10 @@
     <string name="raster_layers_action_descr">Ändra raster-lager</string>
     <string name="contour_layers_action_descr">Ändra höjdkurvslager</string>
     <string name="change_zoom_action_descr">Ändra kartzoom.</string>
-    <string name="map_3d_mode_action_descr">Ändra kartlutning.</string>
+    <string name="map_3d_mode_action_descr">Ändra kartans lutning.</string>
     <string name="search_action_descr">Öppnar Sök.</string>
     <string name="navigation_action_descr">Öppnar navigering.</string>
-    <string name="my_location_action_descr">Centrerar kartan till din nuvarande plats.</string>
+    <string name="my_location_action_descr">Centrerar kartan kring din nuvarande plats.</string>
     <string name="track_does_not_contain_data_to_save">Spåret innehåller ingen data att spara.</string>
     <string name="quick_action_new_trip_segment">Knapp för att starta ett nytt segment i pågående GPX-spårinspelning.</string>
     <string name="quick_action_verb_start_pause">Starta / Pausa</string>
@@ -5962,4 +5962,20 @@
     <string name="avg_speed">Genomsnittlig hastighet</string>
     <string name="organize_by_max_speed">Maxhastighet</string>
     <string name="organize_by_max_altitude">Max. altitude</string>
+    <string name="galactic_line">Galaktiska linjen</string>
+    <string name="meridian_line">Meridianlinjen</string>
+    <string name="equator_line">Ekvatorlinjen</string>
+    <string name="copy_from_portrait_layout">Kopiera från stående layout</string>
+    <string name="copy_from_landscape_layout">Kopiera från liggande layout</string>
+    <string name="panels_layout_compact">Kompakt</string>
+    <string name="panels_layout_wide">Bred</string>
+    <string name="panels_layout">Panelernas layout</string>
+    <string name="panels_layout_descr">Välj en layout för de övre och nedre panelerna. De kan antingen vara breda, som sträcker sig över hela skärmens bredd, eller kompakta, som passar mellan sidopanelerna och knapparna.</string>
+    <string name="single_layout">Enkel layout</string>
+    <string name="separate_layouts">Separata layouter</string>
+    <string name="use_separate_layouts">Använd separata layouter</string>
+    <string name="map_screen_layout">Kartskärmens layout</string>
+    <string name="map_screen_layout_descr">Välj om du vill använda en enda layout för alla orienteringar, eller anpassa Stående och Landskap separat.</string>
+    <string name="backup_deleted_all_data">Raderade data.</string>
+    <string name="backup_deleting_all_data">Raderade data.</string>
 </resources>
