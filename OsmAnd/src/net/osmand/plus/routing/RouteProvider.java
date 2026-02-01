@@ -180,7 +180,8 @@ public class RouteProvider {
 		if (params.gpxRoute != null) {
 			GpxApproximationParams approximationParams = params.gpxRoute.approximationParams;
 			if (approximationParams != null && !params.gpxRoute.gpxFile.isAttachedToRoads()) {
-				GpxFile gpxFile = GpxApproximationHelper.approximateGpxSync(params.ctx, params.gpxRoute.gpxFile, approximationParams);
+				GpxFile gpxFile = GpxApproximationHelper
+						.approximateGpxSync(params.ctx, params.gpxRoute.gpxFile, approximationParams, null);
 				if (gpxFile.getError() == null && gpxFile.isAttachedToRoads()) {
 					params.gpxRoute = new GPXRouteParamsBuilder(gpxFile, params.gpxRoute).build(params.ctx, params.end);
 				}

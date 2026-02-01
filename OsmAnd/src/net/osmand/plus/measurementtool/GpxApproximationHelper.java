@@ -207,9 +207,12 @@ public class GpxApproximationHelper {
 
 	@NonNull
 	public static GpxFile approximateGpxSync(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
-			@NonNull GpxApproximationParams params) {
+	                                         @NonNull GpxApproximationParams params,
+	                                         @Nullable GpxApproximationHelper helper) {
 		MeasurementEditingContext context = createEditingContext(app, gpxFile, params);
-		GpxApproximationHelper helper = new GpxApproximationHelper(app, params);
+		if (helper == null) {
+			helper = new GpxApproximationHelper(app, params);
+		}
 		if (helper.canApproximate()) {
 			Pair<List<GpxRouteApproximation>, List<List<WptPt>>> pair = helper.calculateGpxApproximationSync();
 			GpxFile approximatedGpx = createApproximatedGpx(app, context, params, pair.first, pair.second);
@@ -227,6 +230,7 @@ public class GpxApproximationHelper {
 			GpxApproximator approximator = createApproximator(holder);
 			if (approximator != null) {
 				try {
+					this.currentApproximator = approximator;
 					GpxRouteApproximation gctx = approximator.getNewGpxApproximationContext();
 					approximator.calculateGpxApproximationSync(gctx, new ResultMatcher<>() {
 						@Override

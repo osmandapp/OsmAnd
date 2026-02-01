@@ -848,7 +848,8 @@ public class TravelObfHelper implements TravelHelper {
 			if (!app.isApplicationInitializing()) {
 				MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
 				if (mapActivity != null) {
-					OsmAndTaskManager.executeTask(new TravelObfGpxFileReader(mapActivity, article, callback, getTravelGpxRepositories()));
+					OsmAndTaskManager.executeTask(
+							new TravelObfGpxFileReader(mapActivity, article, callback, getTravelGpxRepositories()));
 				}
 			}
 		} else if (callback != null) {
