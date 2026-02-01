@@ -650,6 +650,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			hideKeyboard();
 			searchEditText.setText("");
 			updateTabBarVisibility(true);
+			reloadCities();
 		} else if (!processBackAction()) {
 			Dialog dialog = getDialog();
 			if (dialog != null) {
