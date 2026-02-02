@@ -194,7 +194,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Override
 	protected void save(boolean needDismiss) {
 		FavouritePoint favorite = getFavorite();
-		MapActivity activity = getMapActivity();
+		FragmentActivity activity = getActivity();
 		if (activity != null && favorite != null) {
 			FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
 					getNameTextValue(), getCategoryTextValue(), favorite.getAltitude(), favorite.getTimestamp());
@@ -236,7 +236,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 				Algorithms.stringsEqual(favorite.getAddress(), point.getAddress());
 	}
 
-	private void doSave(@NonNull MapActivity activity, FavouritePoint favorite, String name, String category, String description, String address,
+	private void doSave(@NonNull FragmentActivity activity, FavouritePoint favorite, String name, String category, String description, String address,
 	                    @ColorInt int color, BackgroundType backgroundType, @DrawableRes int iconId, boolean needDismiss) {
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null) {
@@ -250,16 +250,17 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			}
 			addLastUsedIcon(iconId);
 		}
-
 		if (needDismiss) {
 			dismiss(false);
 		}
-		activity.refreshMap();
+		if (activity instanceof MapActivity mapActivity) {
+			mapActivity.refreshMap();
 
-		MapContextMenu menu = activity.getContextMenu();
-		LatLon latLon = new LatLon(favorite.getLatitude(), favorite.getLongitude());
-		if (menu.getLatLon() != null && menu.getLatLon().equals(latLon)) {
-			menu.update(latLon, favorite.getPointDescription(activity), favorite);
+			MapContextMenu menu = mapActivity.getContextMenu();
+			LatLon latLon = new LatLon(favorite.getLatitude(), favorite.getLongitude());
+			if (menu.getLatLon() != null && menu.getLatLon().equals(latLon)) {
+				menu.update(latLon, favorite.getPointDescription(mapActivity), favorite);
+			}
 		}
 	}
 
@@ -289,10 +290,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 				if (needDismiss) {
 					dismiss(true);
 				} else {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						mapActivity.refreshMap();
-					}
+					callMapActivity(MapActivity::refreshMap);
 				}
 			});
 			builder.create().show();

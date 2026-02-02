@@ -18,6 +18,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -222,8 +223,10 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 
 	@Override
 	public void shareFavorites(@Nullable FavoriteGroup group) {
-		ShareFavoritesAsyncTask shareFavoritesTask = new ShareFavoritesAsyncTask(app, group, this);
-		OsmAndTaskManager.executeTask(shareFavoritesTask);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			OsmAndTaskManager.executeTask(new ShareFavoritesAsyncTask(activity, group, this));
+		}
 	}
 
 	@Override
