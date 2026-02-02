@@ -2831,7 +2831,7 @@
     <string name="collected_data">Dati raccolti</string>
     <string name="press_again_to_change_the_map_orientation">Tocca di nuovo per modificare l\'orientamento della mappa</string>
     <string name="shared_string_min_speed">Velocità min</string>
-    <string name="shared_string_max_speed">Velocità max.</string>
+    <string name="shared_string_max_speed">Velocità massima</string>
     <string name="default_speed_setting_title">Velocità predefinita</string>
     <string name="default_speed_setting_descr">Cambia le impostazioni della velocità predefinita</string>
     <string name="minmax_speed_dialog_title">Imposta velocità min/max</string>
@@ -4744,7 +4744,7 @@
     <string name="shared_string_alt_name">Nome alternativo</string>
     <string name="token_is_not_valid">Token non valido</string>
     <string name="app_mode_climbing">Arrampicata</string>
-    <string name="metric_lbs">lbs</string>
+    <string name="metric_lbs">libbre</string>
     <string name="offline_weather_forecast">Previsioni meteorologiche offline</string>
     <string name="weather_forecast">Previsioni meteorologiche</string>
     <string name="enable_3d_maps">Attiva mappe 3D</string>

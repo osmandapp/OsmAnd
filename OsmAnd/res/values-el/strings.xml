@@ -1206,8 +1206,8 @@
     <string name="rendering_category_routes">Διαδρομές</string>
     <string name="rendering_category_details">Λεπτομέρειες</string>
     <string name="rendering_category_others">Άλλα χαρακτηριστικά χάρτη</string>
-    <string name="map_widget_right">Δεξιός πίνακας</string>
-    <string name="map_widget_left">Αριστερός πίνακας</string>
+    <string name="map_widget_right">Δεξιό πλαίσιο</string>
+    <string name="map_widget_left">Αριστερό πλαίσιο</string>
     <string name="configure_map">Διαμόρφωση χάρτη</string>
     <string name="rendering_attr_tramTrainRoutes_name">Διαδρομές τραμ και τρένων</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Διαδρομές τρένου</string>
@@ -4097,7 +4097,7 @@
     <string name="map_3d_mode_hint">Με το παρατεταμένο πάτημα του κουμπιού επιτρέπει την αλλαγή της θέσης του κουμπιού.</string>
     <string name="shared_strings_all_regions">Όλες οι περιοχές</string>
     <string name="default_buttons">Προεπιλεγμένα κουμπιά</string>
-    <string name="top_widgets_panel">Πάνω πίνακας</string>
+    <string name="top_widgets_panel">Πάνω πλαίσιο</string>
     <string name="shared_string_speedometer">Ταχύμετρο</string>
     <string name="copy_to_map_favorites">Αντιγραφή στα αγαπημένα</string>
     <string name="add_button">Προσθήκη κουμπιού</string>
@@ -4105,7 +4105,7 @@
     <string name="shared_string_limit">Όριο</string>
     <string name="speedometer_description">Δείχνει την τρέχουσα ταχύτητα σας, όπως αναφέρεται μέσω GPS</string>
     <string name="modified_file">Τροποποιημένο αρχείο</string>
-    <string name="bottom_widgets_panel">Κάτω πίνακας</string>
+    <string name="bottom_widgets_panel">Κάτω πλαίσιο</string>
     <string name="empty_name">Κενό όνομα</string>
     <string name="simulation_preview_mode_title">Λειτουργία γρήγορης προεπισκόπησης</string>
     <string name="exit_number">Αριθμός εξόδου</string>
@@ -5583,7 +5583,7 @@
     <string name="quick_action_terrain">Είδος χρωματισμού εδάφους</string>
     <string name="enable_3d_objects">3D κτίρια</string>
     <string name="enable_3d_objects_description">Προβολή 3D κτιρίων στο χάρτη</string>
-    <string name="missing_maps_header">Χάρτες που λείπουν ή χωρίς ενημέρωση</string>
+    <string name="missing_maps_header">Ελλιπείς ή ξεπερασμένοι χάρτες</string>
     <string name="use_terrain_maps_summary">Χρησιμοποιεί χάρτες εδάφους για δεδομένα ανύψωσης. Η γεωμετρία του ίχνους παραμένει ίδια.</string>
     <string name="use_terrain_maps">Χρήση χαρτών εδάφους</string>
     <string name="use_nearby_roads_summary">Χρησιμοποιεί χάρτες εκτός σύνδεσης για εύρεση κοντινών δρόμων &amp; δεδομένων ανύψωσης. Ίσως προσαρμόσει τη γεεωμετρία του ίχνους.</string>
@@ -5753,4 +5753,21 @@
     <string name="edit_online_routing_engine">Επεξεργασία διαδικτυακής μηχανής δρομολόγησης</string>
     <string name="add_online_routing_engine">Προσθήκη διαδικτυακής μηχανής δρομολόγησης</string>
     <string name="online_routing_engines">Διαδικτυακές μηχανές δρομολόγησης</string>
+    <string name="weather_forecast_is_outdated">Ξεπερασμένη πρόγνωση.</string>
+    <string name="weight_limit_error">Η ελάχιστη τιμή είναι \"%1$s\" τόνοι. Χρησιμοποιήστε το προφίλ \"%2$s\" αν το βάρος του οχήματος είναι μικρότερο από την ελάχιστη τιμή.</string>
+    <string name="av_audio_format_bottom_sheet_descr">Επιλέξτε μια μορφή ήχου. Η μορφή για τύπο αρχείου κοντέινερ ήχου είναι 3GPP (.3gp).</string>
+    <string name="single_layout">Απλή διάταξη</string>
+    <string name="separate_layouts">Πολλαπλές διατάξεις</string>
+    <string name="use_separate_layouts">Χρήση ξεχωριστών διατάξεων</string>
+    <string name="map_screen_layout">Διάταξη οθόνης χάρτη</string>
+    <string name="galactic_line">Γραμμή Γαλαξία</string>
+    <string name="meridian_line">Γραμμή Μεσημβρινού</string>
+    <string name="equator_line">Γραμμή Ισημερινού</string>
+    <string name="copy_from_portrait_layout">Αντιγραφή από Κατακόρυφη διάταξη</string>
+    <string name="copy_from_landscape_layout">Αντιγραφή από Οριζόντια διάταξη</string>
+    <string name="panels_layout_compact">Συμπαγής</string>
+    <string name="panels_layout_wide">Ευρεία</string>
+    <string name="panels_layout">Διάταξη πλαισίων</string>
+    <string name="panels_layout_descr">Επιλέξτε μια διάταξη για τα πλαίσια στην κορυφή και στο κάτω μέρος. Μπορούν να είναι είτε ευρεία, να εκτείνονται σε όλο το πλάτος της οθόνης, είτε συμπαγή, να χωράνε ανάμεσα στα πλαϊνά πλαίσια και κουμπιά.</string>
+    <string name="map_screen_layout_descr">Επιλέξτε αν θα χρησιμοποιείται μια απλή διάταξη για όλους τους προσανατολισμούς, ή προσαρμογή ξεχωριστά για Κατακόρυφα και Οριζόντια.</string>
 </resources>
