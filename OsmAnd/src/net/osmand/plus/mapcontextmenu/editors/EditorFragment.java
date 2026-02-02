@@ -35,9 +35,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.v2.SolidPaletteController;
-import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener;
+import net.osmand.plus.card.color.palette.solid.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.solid.SolidPaletteController;
+import net.osmand.plus.palette.contract.IExternalPaletteListener;
 import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.mapcontextmenu.editors.controller.EditorColorController;
 import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
@@ -58,7 +58,7 @@ import net.osmand.util.Algorithms;
 import java.util.List;
 
 public abstract class EditorFragment extends BaseFullScreenFragment
-		implements CardListener, OnColorsPaletteListener, OnIconsPaletteListener<String> {
+		implements CardListener, IExternalPaletteListener, OnIconsPaletteListener<String> {
 
 	protected ShapesCard shapesCard;
 

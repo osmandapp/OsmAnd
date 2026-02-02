@@ -1,8 +1,8 @@
-package net.osmand.plus.card.color.palette.main.v2
+package net.osmand.plus.palette.contract
 
 import net.osmand.shared.palette.domain.PaletteItem
 
-interface OnColorsPaletteListener {
+interface IExternalPaletteListener {
 
 	fun onPaletteItemSelected(item: PaletteItem)
 

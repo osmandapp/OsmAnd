@@ -23,7 +23,7 @@ import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.data.PaletteMode;
+import net.osmand.plus.card.color.palette.solid.data.PaletteMode;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteCard;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController.OnPaletteModeSelectedListener;

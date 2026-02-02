@@ -9,8 +9,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.card.color.palette.main.v2.SolidPaletteController;
-import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener;
+import net.osmand.plus.card.color.palette.solid.SolidPaletteController;
+import net.osmand.plus.palette.contract.IExternalPaletteListener;
 
 public class EditorColorController extends SolidPaletteController implements IDialogController {
 
@@ -54,7 +54,7 @@ public class EditorColorController extends SolidPaletteController implements IDi
 			dialogManager.register(PROCESS_ID, controller);
 		}
 		controller.setTargetFragment(targetFragment);
-		if (targetFragment instanceof OnColorsPaletteListener listener) {
+		if (targetFragment instanceof IExternalPaletteListener listener) {
 			controller.setPaletteListener(listener);
 		}
 		return controller;

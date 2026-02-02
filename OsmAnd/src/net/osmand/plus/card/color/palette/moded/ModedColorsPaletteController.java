@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.palette.main.data.PaletteMode;
-import net.osmand.plus.card.color.palette.main.v2.SolidPaletteController;
+import net.osmand.plus.card.color.palette.solid.data.PaletteMode;
+import net.osmand.plus.card.color.palette.solid.SolidPaletteController;
 import net.osmand.shared.palette.domain.PaletteItem;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.main.data;
+package net.osmand.plus.card.color.palette.solid.data;
 
 import static net.osmand.IndexConstants.COLOR_PALETTE_DIR;
 import static net.osmand.plus.helpers.ColorsPaletteUtils.DEFAULT_USER_PALETTE_FILE;
@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class FileColorsCollection extends ColorsCollection {
 
 	private static boolean fileRecreated = false;

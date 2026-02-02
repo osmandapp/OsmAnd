@@ -7,8 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.data.PaletteMode;
+import net.osmand.plus.card.color.palette.solid.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.solid.data.PaletteMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;

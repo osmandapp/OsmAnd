@@ -5,13 +5,13 @@ import static net.osmand.plus.utils.ColorUtilities.getColor;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
+import net.osmand.plus.card.color.palette.solid.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.solid.data.FileColorsCollection;
 import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionBundle;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
-import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
+import net.osmand.plus.card.color.palette.solid.data.PaletteColor;
+import net.osmand.plus.card.color.palette.solid.data.PaletteSortingMode;
 import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionV1;
-import net.osmand.plus.card.color.palette.main.data.DefaultColors;
+import net.osmand.plus.card.color.palette.solid.data.DefaultColors;
 import net.osmand.plus.card.color.palette.migration.data.PaletteColorV1;
 import net.osmand.plus.card.color.palette.migration.data.PredefinedPaletteColor;
 import net.osmand.plus.profiles.ProfileIconColors;

@@ -18,8 +18,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.card.color.palette.main.v2.SolidPaletteController;
-import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener;
+import net.osmand.plus.card.color.palette.solid.SolidPaletteController;
+import net.osmand.plus.palette.contract.IExternalPaletteListener;
 import net.osmand.plus.card.icon.CircleIconPaletteElements;
 import net.osmand.plus.card.icon.IconsPaletteController;
 import net.osmand.plus.card.icon.IconsPaletteElements;
@@ -356,7 +356,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 					return true;
 				}
 			};
-			colorsCardController.setPaletteListener(new OnColorsPaletteListener() {
+			colorsCardController.setPaletteListener(new IExternalPaletteListener() {
 				@Override
 				public void onPaletteItemSelected(@NonNull PaletteItem item) {
 					if (item instanceof PaletteItem.Solid solidItem) {

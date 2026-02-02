@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.main;
+package net.osmand.plus.card.color.palette.solid;
 
 import static net.osmand.plus.palette.contract.IPaletteController.ALL_PALETTE_ITEMS_PROCESS_ID;
 
@@ -26,6 +26,7 @@ import net.osmand.plus.palette.contract.IPaletteController;
 import net.osmand.plus.palette.contract.IPaletteInteractionListener;
 import net.osmand.plus.palette.contract.IPaletteView;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.palette.view.PaletteElements;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -42,7 +43,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 
 	private IPaletteController controller;
 	private IPaletteInteractionListener listener;
-	private ColorsPaletteElements paletteElements;
+	private PaletteElements paletteElements;
 
 	@Override
 	protected int getThemeId() {
@@ -66,7 +67,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		paletteElements = new ColorsPaletteElements(requireContext(), nightMode);
+		paletteElements = new PaletteElements(requireContext(), nightMode);
 
 		View view = inflate(R.layout.fragment_palette, container, false);
 		setupToolbar(view);

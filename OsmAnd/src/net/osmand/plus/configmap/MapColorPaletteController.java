@@ -9,8 +9,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener;
-import net.osmand.plus.card.color.palette.main.data.PaletteMode;
+import net.osmand.plus.palette.contract.IExternalPaletteListener;
+import net.osmand.plus.card.color.palette.solid.data.PaletteMode;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController.OnPaletteModeSelectedListener;
 import net.osmand.plus.helpers.DayNightHelper;
@@ -39,7 +39,7 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 	@ColorInt protected int colorDay;
 	@ColorInt protected int colorNight;
 
-	public interface IMapColorPaletteControllerListener extends OnColorsPaletteListener, OnPaletteModeSelectedListener {
+	public interface IMapColorPaletteControllerListener extends IExternalPaletteListener, OnPaletteModeSelectedListener {
 		void updateStatusBar();
 	}
 
@@ -154,7 +154,7 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 				}
 			};
 		}
-		colorsPaletteController.setPaletteListener(new OnColorsPaletteListener() {
+		colorsPaletteController.setPaletteListener(new IExternalPaletteListener() {
 			@Override
 			public void onPaletteItemSelected(@NonNull PaletteItem item) {
 				onColorSelectedFromPalette(item);

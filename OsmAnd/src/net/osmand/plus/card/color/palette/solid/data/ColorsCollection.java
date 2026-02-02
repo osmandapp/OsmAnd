@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.main.data;
+package net.osmand.plus.card.color.palette.solid.data;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+@Deprecated
 public abstract class ColorsCollection {
 
 	protected static final Log LOG = PlatformUtil.getLog(ColorsCollection.class);

@@ -11,7 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.card.color.palette.main.data.PaletteMode;
+import net.osmand.plus.card.color.palette.solid.data.PaletteMode;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
 import net.osmand.plus.views.layers.CoordinatesGridSettings;
 import net.osmand.plus.settings.backend.ApplicationMode;

@@ -7,8 +7,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
-import net.osmand.plus.card.color.palette.main.ColorsPaletteElements
-import net.osmand.plus.card.color.palette.v2.PaletteCardAdapter
+import net.osmand.plus.palette.view.adapter.PaletteCardAdapter
 import net.osmand.plus.palette.contract.IPaletteInteractionListener
 import net.osmand.plus.palette.contract.IPaletteView
 import net.osmand.plus.palette.controller.BasePaletteController
@@ -26,7 +25,7 @@ abstract class PaletteCard(
 	usedOnMap: Boolean = true
 ) : BaseCard(activity, appMode, usedOnMap), IPaletteView {
 
-	private val paletteElements = ColorsPaletteElements(activity, nightMode) // TODO: PaletteElements
+	private val paletteElements = PaletteElements(activity, nightMode)
 
 	protected val adapter: PaletteCardAdapter = PaletteCardAdapter(paletteListener, controller, createViewBinder())
 	protected var recyclerView: RecyclerView? = null
@@ -46,7 +45,7 @@ abstract class PaletteCard(
 		setupRecyclerView()
 		setupAddButton()
 		setupShowAllButton()
-		askScrollToTargetColorPosition(controller.getSelectedPaletteItem(), smoothScroll = false)
+		askScrollToTargetItemPosition(controller.getSelectedPaletteItem(), smoothScroll = false)
 	}
 
 	protected open fun setupRecyclerView() {
@@ -89,7 +88,7 @@ abstract class PaletteCard(
 	override fun updatePaletteItems(targetItem: PaletteItem?) {
 		adapter.updateItemsList()
 		if (targetItem != null) {
-			askScrollToTargetColorPosition(targetItem, smoothScroll = true)
+			askScrollToTargetItemPosition(targetItem, smoothScroll = true)
 		}
 		updateShowAllButton()
 	}
@@ -97,9 +96,8 @@ abstract class PaletteCard(
 	override fun updatePaletteSelection(oldItem: PaletteItem?, newItem: PaletteItem) {
 		adapter.askNotifyItemChanged(oldItem)
 		adapter.askNotifyItemChanged(newItem)
-		askScrollToTargetColorPosition(newItem, smoothScroll = true)
+		askScrollToTargetItemPosition(newItem, smoothScroll = true)
 
-		// TODO: we can force it as a state
 		if (controller.isAccentColorCanBeChanged()) {
 			updateShowAllButton()
 		}
@@ -109,7 +107,7 @@ abstract class PaletteCard(
 
 	// --- Helpers ---
 
-	private fun askScrollToTargetColorPosition(targetItem: PaletteItem?, smoothScroll: Boolean) {
+	private fun askScrollToTargetItemPosition(targetItem: PaletteItem?, smoothScroll: Boolean) {
 		if (targetItem == null || recyclerView == null) return
 
 		val targetPosition = adapter.indexOf(targetItem)

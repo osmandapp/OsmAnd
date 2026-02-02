@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.v2
+package net.osmand.plus.palette.view.adapter
 
 import android.annotation.SuppressLint
 import android.view.View

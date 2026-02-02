@@ -34,7 +34,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.solid.ColorsPaletteCard;
 import net.osmand.plus.card.icon.IconsPaletteCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;

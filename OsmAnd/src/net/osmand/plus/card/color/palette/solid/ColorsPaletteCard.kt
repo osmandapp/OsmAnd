@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.main
+package net.osmand.plus.card.color.palette.solid
 
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.R

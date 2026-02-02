@@ -15,11 +15,11 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenFragment;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteElements;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.palette.view.PaletteElements;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -208,7 +208,7 @@ public class CoordinatesGridFragment extends BaseFullScreenFragment
 	@Override
 	public void updateGridColorPreview() {
 		View preview = view.findViewById(R.id.color_preview_icon);
-		ColorsPaletteElements paletteElements = new ColorsPaletteElements(view.getContext(), nightMode);
+		PaletteElements paletteElements = new PaletteElements(view.getContext(), nightMode);
 		paletteElements.updateColorItemView(preview, controller.getGridColor(), false);
 	}
 

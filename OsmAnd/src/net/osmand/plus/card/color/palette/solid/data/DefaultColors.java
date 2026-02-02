@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.main.data;
+package net.osmand.plus.card.color.palette.solid.data;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;

@@ -15,8 +15,8 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.plus.card.color.palette.gradient.GradientPaletteController;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.v2.SolidPaletteController;
+import net.osmand.plus.card.color.palette.solid.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.solid.SolidPaletteController;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

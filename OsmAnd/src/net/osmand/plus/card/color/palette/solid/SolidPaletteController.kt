@@ -1,10 +1,9 @@
-package net.osmand.plus.card.color.palette.main.v2
+package net.osmand.plus.card.color.palette.solid
 
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.card.color.palette.main.ColorsPaletteFragment
 import net.osmand.plus.palette.controller.BasePaletteController
 import net.osmand.plus.track.fragments.controller.ColorPickerDialogController
 import net.osmand.plus.widgets.popup.PopUpMenu

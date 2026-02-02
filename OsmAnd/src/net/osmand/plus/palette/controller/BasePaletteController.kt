@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.annotation.DrawableRes
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener
+import net.osmand.plus.palette.contract.IExternalPaletteListener
 import net.osmand.plus.palette.contract.IPaletteController
 import net.osmand.plus.palette.contract.IPaletteInteractionListener
 import net.osmand.plus.palette.contract.IPaletteView
@@ -22,7 +22,7 @@ abstract class BasePaletteController(
 	protected val repository: PaletteRepository = app.paletteRepository
 
 	protected val views = ArrayList<WeakReference<IPaletteView>>()
-	protected var listener: OnColorsPaletteListener? = null
+	protected var listener: IExternalPaletteListener? = null
 
 	protected var editedItem: PaletteItem? = null
 	protected var selectedItem: PaletteItem? = null
@@ -59,7 +59,7 @@ abstract class BasePaletteController(
 
 	// --- Listener Management ---
 
-	override fun setPaletteListener(listener: OnColorsPaletteListener?) {
+	override fun setPaletteListener(listener: IExternalPaletteListener?) {
 		this.listener = listener
 	}
 

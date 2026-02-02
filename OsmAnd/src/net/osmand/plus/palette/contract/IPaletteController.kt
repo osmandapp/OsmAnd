@@ -1,7 +1,6 @@
 package net.osmand.plus.palette.contract
 
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController
-import net.osmand.plus.card.color.palette.main.v2.OnColorsPaletteListener
 import net.osmand.shared.palette.data.PaletteSortMode
 import net.osmand.shared.palette.domain.PaletteItem
 
@@ -51,5 +50,5 @@ interface IPaletteController : IDialogController {
 
 	// --- Listeners ---
 
-	fun setPaletteListener(listener: OnColorsPaletteListener?)
+	fun setPaletteListener(listener: IExternalPaletteListener?)
 }
