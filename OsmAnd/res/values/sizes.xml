@@ -55,7 +55,7 @@
     <dimen name="dashFavIconSize">28dp</dimen>
     <dimen name="dashFavIconMargin">12dp</dimen>
     <dimen name="dashFavDirectionSize">10dp</dimen>
-	<dimen name="directionIconSize">14dp</dimen>
+	<dimen name="directionIconSize">14sp</dimen>
 
     <dimen name="dashNoteIconSize">28dp</dimen>
     <dimen name="dashPluginPadding">4dp</dimen>

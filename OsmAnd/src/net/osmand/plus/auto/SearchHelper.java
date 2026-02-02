@@ -187,8 +187,14 @@ public class SearchHelper {
 					continue;
 				}
 				Drawable icon = QuickSearchListItem.getIcon(app, r);
-				String typeName = showDescription ? addAddress(QuickSearchListItem.getExtendedTypeName(app, r), r) : r.addressName;
+				String typeName = showDescription ? addAddress(QuickSearchListItem.getTypeName(app, r), r) : r.addressName;
 				itemList.setNoItemsMessage(app.getString(R.string.search_nothing_found));
+				if (!Algorithms.isEmpty(typeName)) {
+					int typenameComaPosition = typeName.indexOf(",");
+					if (typenameComaPosition > 0) {
+						typeName = typeName.substring(0, typenameComaPosition);
+					}
+				}
 				Row.Builder builder = buildSearchRow(searchSettings.getOriginalLocation(), r.location, name, icon, typeName);
 				if (builder != null) {
 					builder.setOnClickListener(() -> {

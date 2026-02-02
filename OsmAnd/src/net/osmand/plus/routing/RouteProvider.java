@@ -180,7 +180,8 @@ public class RouteProvider {
 		if (params.gpxRoute != null) {
 			GpxApproximationParams approximationParams = params.gpxRoute.approximationParams;
 			if (approximationParams != null && !params.gpxRoute.gpxFile.isAttachedToRoads()) {
-				GpxFile gpxFile = GpxApproximationHelper.approximateGpxSync(params.ctx, params.gpxRoute.gpxFile, approximationParams);
+				GpxFile gpxFile = GpxApproximationHelper
+						.approximateGpxSync(params.ctx, params.gpxRoute.gpxFile, approximationParams, null);
 				if (gpxFile.getError() == null && gpxFile.isAttachedToRoads()) {
 					params.gpxRoute = new GPXRouteParamsBuilder(gpxFile, params.gpxRoute).build(params.ctx, params.end);
 				}
@@ -198,7 +199,7 @@ public class RouteProvider {
 			int[] startI = {0};
 			int[] endI = {locs.size()};
 			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
-			List<RouteDirectionInfo> directions = calcDirections(startI[0], endI[0], rcr.getRouteDirections());
+			List<RouteDirectionInfo> directions = calcDirections(params, startI[0], endI[0], rcr.getRouteDirections(params.ctx));
 			gpxRouteHelper.insertInitialSegment(params, locs, directions, true);
 			res = new RouteCalculationResult(locs, directions, params, null, true);
 		} catch (RuntimeException e) {
@@ -208,7 +209,7 @@ public class RouteProvider {
 	}
 
 
-	protected List<RouteDirectionInfo> calcDirections(int startIndex, int endIndex,
+	protected List<RouteDirectionInfo> calcDirections(RouteCalculationParams params, int startIndex, int endIndex,
                                                       List<RouteDirectionInfo> inputDirections) {
 		List<RouteDirectionInfo> directions = new ArrayList<RouteDirectionInfo>();
 		if (inputDirections != null) {
@@ -219,7 +220,7 @@ public class RouteProvider {
 					if(info.routeEndPointOffset != 0) {
 						ch.routeEndPointOffset = info.routeEndPointOffset - startIndex;
 					}
-					ch.setDescriptionRoute(info.getDescriptionRoutePart());
+					ch.setDescriptionRoute(info.getDescriptionRoutePart(params.ctx));
 					ch.setRouteDataObject(info.getRouteDataObject());
 					// Issue #2894
 					if (info.getRef() != null && !"null".equals(info.getRef())) {

@@ -26,4 +26,9 @@ public class BooleanPreference extends CommonPreference<Boolean> {
 	public Boolean parseString(String s) {
 		return Boolean.parseBoolean(s);
 	}
+
+	@Override
+	public CommonPreference<Boolean> copyWithId(@NonNull String newId) {
+		return setupCopy(new BooleanPreference(getSettings(), newId, getDefaultValue()));
+	}
 }

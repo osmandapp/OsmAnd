@@ -425,7 +425,7 @@
     <string name="shared_string_export">Sifeḍ</string>
     <string name="shared_string_more_actions">Ugar n tigawin</string>
     <string name="shared_string_refresh">Sismeḍ</string>
-    <string name="shared_string_download">Sider</string>
+    <string name="shared_string_download">Sader</string>
     <string name="shared_string_downloading">Azdam…</string>
     <string name="shared_string_close">Mdel</string>
     <string name="shared_string_exit">Tuffɣa</string>
@@ -544,7 +544,7 @@
     <string name="amenity_type_office">Tanarit</string>
     <string name="amenity_type_shop">Tiɣin</string>
     <string name="poi_filter_custom_filter">Imsizdeg udmawan</string>
-    <string name="filter_existing_indexes">Yettwasider-d</string>
+    <string name="filter_existing_indexes">Yettwasader-d</string>
     <string name="rotate_map_bearing_opt">Ar tnila n umussu</string>
     <string name="send_report">Azen aneqqis</string>
     <string name="any_poi">Ayen yellan</string>
@@ -745,10 +745,10 @@
     <string name="osm_live_payment_monthly_title">Yal aggur</string>
     <string name="shared_string_restore">Err-d</string>
     <string name="shared_string_bookmark">Signet</string>
-    <string name="download_all">Sider meṛṛa</string>
+    <string name="download_all">Sader-iten-d akk</string>
     <string name="show_images">Sken tugniwin</string>
     <string name="start_editing">Bdu taẓrigt</string>
-    <string name="download_file">Sidered afaylu</string>
+    <string name="download_file">Sader-d afaylu</string>
     <string name="update_is_available">Yella ulqem</string>
     <string name="shared_string_wifi_only">Ala ɣef Wi-Fi</string>
     <string name="shared_string_only_with_wifi">Ala ɣef Wi-Fi</string>
@@ -811,7 +811,7 @@
     <string name="proxy_host_title">Asenneftaɣ Apṛuksi</string>
     <string name="shared_string_photo">Tawlaft</string>
     <string name="shared_string_io_error">Tuccḍa I/O</string>
-    <string name="shared_string_download_successful">Yettwasider-d</string>
+    <string name="shared_string_download_successful">Yettwasader-d</string>
     <string name="shared_string_clear_all">Sfeḍ kullec</string>
     <string name="action_delete">Tukksa n tigawt</string>
     <string name="action_modify">Abedden n tigawt</string>
@@ -953,7 +953,7 @@
     <string name="nav_type_hint">Tunigin</string>
     <string name="profile_name_hint">Nom du profil</string>
     <string name="settings_privacy_and_security">Tabaḍnit akked tɣellist</string>
-    <string name="downloaded_maps">yettusider</string>
+    <string name="downloaded_maps">Timkarḍiwin d-yettusadren</string>
     <string name="searching_gps">Anadi...</string>
     <string name="move_maps">Tikarḍiwin</string>
     <string name="send_log">Azen</string>
@@ -1098,7 +1098,7 @@
     <string name="poi_context_menu_delete">Kkes</string>
     <string name="poi_context_menu_modify">Beddel</string>
     <string name="show_point_options">Adig</string>
-    <string name="shared_string_download_map">Sider</string>
+    <string name="shared_string_download_map">Sader-d tamkarḍa</string>
     <string name="amenity_type_emergency">Annar n trusi n utrab</string>
     <string name="send_location">Adig</string>
     <string name="send_location_way_choose_title">Bḍu adig</string>
@@ -1126,7 +1126,7 @@
     <string name="no_info">talɣut</string>
     <string name="front_left">ɣer zdat</string>
     <string name="zoomIs">Seggem aswir n usemɣer/asemẓi</string>
-    <string name="confirm_interrupt_download">Sefsex asider</string>
+    <string name="confirm_interrupt_download">Semmet asader?</string>
     <string name="osmand_parking_no_lim_text">War talast</string>
     <string name="map_widget_next_turn">ar zdat</string>
     <string name="int_continuosly">A_maɣlal</string>
@@ -1191,7 +1191,7 @@
     <string name="drawer">Umuɣ</string>
     <string name="osmand_parking_overdue">Amiḍan-ik ɣer-s akka tura tafaturt ur yettwaxelṣen ara. Xelleṣ tifaturin yeqqimen.</string>
     <string name="confirmation_to_clear_history">Sfeḍ amazray</string>
-    <string name="welmode_download_maps">Sider</string>
+    <string name="welmode_download_maps">Sader-d timkerḍiwin</string>
     <string name="filter_poi_hint">Sizdeg s</string>
     <string name="storage_directory">asekles</string>
     <string name="shared_string_logoff">Yensa</string>

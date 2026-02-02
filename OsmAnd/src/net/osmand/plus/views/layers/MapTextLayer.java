@@ -73,15 +73,13 @@ public class MapTextLayer extends OsmandMapLayer {
 		this.textObjects = textObjectsLoc;
 	}
 
-	public void putData(OsmandMapLayer ml, Collection<?> objects) {
+	public void putData(OsmandMapLayer layer, Collection<?> objects) {
 		if (Algorithms.isEmpty(objects)) {
-			textObjects.remove(ml);
+			textObjects.remove(layer);
+		} else if (layer instanceof MapTextProvider) {
+			textObjects.put(layer, objects);
 		} else {
-			if (ml instanceof MapTextProvider) {
-				textObjects.put(ml, objects);
-			} else {
-				throw new IllegalArgumentException();
-			}
+			throw new IllegalArgumentException();
 		}
 	}
 

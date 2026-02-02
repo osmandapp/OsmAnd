@@ -26,6 +26,7 @@ import io.github.cosinekitty.astronomy.searchAltitude
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.plugins.astro.Constellation
 import net.osmand.plus.plugins.astro.SkyObject
 import net.osmand.plus.plugins.astro.StarWatcherSettings
 import net.osmand.plus.plugins.astro.StarWatcherSettings.StarMapConfig
@@ -39,6 +40,11 @@ import java.time.ZonedDateTime
 import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
+import kotlin.math.PI
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
 
 object AstroUtils {
 
@@ -78,6 +84,7 @@ object AstroUtils {
 			SkyObject.Type.GALAXY, SkyObject.Type.GALAXY_CLUSTER -> R.drawable.ic_world_globe_dark
 			SkyObject.Type.NEBULA -> R.drawable.ic_action_clouds
 			SkyObject.Type.BLACK_HOLE -> R.drawable.ic_action_circle
+			SkyObject.Type.CONSTELLATION -> R.drawable.ic_action_celestial_path
 			else -> R.drawable.ic_action_favorite
 		}
 	}
@@ -129,6 +136,10 @@ object AstroUtils {
 		var tempAzimuthal = config.showAzimuthalGrid
 		var tempEquatorial = config.showEquatorialGrid
 		var tempEcliptic = config.showEclipticLine
+		var tempMeridian = config.showMeridianLine
+		var tempEquator = config.showEquatorLine
+		var tempGalactic = config.showGalacticLine
+		var tempFavorites = config.showFavorites
 		var tempSun = config.showSun
 		var tempMoon = config.showMoon
 		var tempPlanets = config.showPlanets
@@ -194,6 +205,10 @@ object AstroUtils {
 		addCheckBox(context.getString(R.string.azimuthal_grid), tempAzimuthal) { tempAzimuthal = it }
 		addCheckBox(context.getString(R.string.equatorial_grid), tempEquatorial) { tempEquatorial = it }
 		addCheckBox(context.getString(R.string.ecliptic_line), tempEcliptic) { tempEcliptic = it }
+		addCheckBox(context.getString(R.string.meridian_line), tempMeridian) { tempMeridian = it }
+		addCheckBox(context.getString(R.string.equator_line), tempEquator) { tempEquator = it }
+		addCheckBox(context.getString(R.string.galactic_line), tempGalactic) { tempGalactic = it }
+		addCheckBox(context.getString(R.string.favorites_item), tempFavorites) { tempFavorites = it }
 		addCheckBox(context.getString(R.string.magnitude_filter), tempShowMagnitudeFilter) { tempShowMagnitudeFilter = it }
 
 		// PLANETS
@@ -220,6 +235,10 @@ object AstroUtils {
 				starView.showAzimuthalGrid = tempAzimuthal
 				starView.showEquatorialGrid = tempEquatorial
 				starView.showEclipticLine = tempEcliptic
+				starView.showMeridianLine = tempMeridian
+				starView.showEquatorLine = tempEquator
+				starView.showGalacticLine = tempGalactic
+				starView.showFavorites = tempFavorites
 
 				starView.showSun = tempSun
 				starView.showMoon = tempMoon
@@ -230,9 +249,9 @@ object AstroUtils {
 				starView.showStars = tempStars
 				starView.showGalaxies = tempGalaxies
 				starView.showNebulae = tempNebulae
-				starView.showOpenCluster = tempOpenClusters
-				starView.showGlobularCluster = tempGlobularClusters
-				starView.showGalaxyCluster = tempGalaxyClusters
+				starView.showOpenClusters = tempOpenClusters
+				starView.showGlobularClusters = tempGlobularClusters
+				starView.showGalaxyClusters = tempGalaxyClusters
 				starView.showBlackHoles = tempBlackHoles
 
 				starView.updateVisibility()
@@ -241,6 +260,10 @@ object AstroUtils {
 					showAzimuthalGrid = tempAzimuthal,
 					showEquatorialGrid = tempEquatorial,
 					showEclipticLine = tempEcliptic,
+					showMeridianLine = tempMeridian,
+					showEquatorLine = tempEquator,
+					showGalacticLine = tempGalactic,
+					showFavorites = tempFavorites,
 					showSun = tempSun,
 					showMoon = tempMoon,
 					showPlanets = tempPlanets,
@@ -290,8 +313,9 @@ object AstroUtils {
 	}
 
 	fun altitude(obj: SkyObject, tLocal: ZonedDateTime, obs: Observer): Double {
-		return if (obj.body != null) {
-			altitude(obj.body, tLocal, obs)
+		val body = obj.body
+		return if (body != null) {
+			altitude(body, tLocal, obs)
 		} else {
 			withCustomStar(obj.ra, obj.dec) { star ->
 				altitude(star, tLocal, obs)
@@ -334,8 +358,9 @@ object AstroUtils {
 		windowStart: ZonedDateTime? = null,
 		windowEnd: ZonedDateTime? = null
 	): Pair<ZonedDateTime?, ZonedDateTime?> {
-		return if (obj.body != null) {
-			nextRiseSet(obj.body, startSearch, obs, windowStart, windowEnd)
+		val body = obj.body
+		return if (body != null) {
+			nextRiseSet(body, startSearch, obs, windowStart, windowEnd)
 		} else {
 			withCustomStar(obj.ra, obj.dec) { star ->
 				nextRiseSet(star, startSearch, obs, windowStart, windowEnd)
@@ -358,5 +383,39 @@ object AstroUtils {
 			findAlt(Direction.Rise, -12.0), findAlt(Direction.Set, -12.0),
 			findAlt(Direction.Rise, -18.0), findAlt(Direction.Set, -18.0)
 		)
+	}
+
+	fun calculateConstellationCenter(c: Constellation, skyObjectMap: Map<Int, SkyObject>): Pair<Double, Double>? {
+		var sumX = 0.0
+		var sumY = 0.0
+		var sumZ = 0.0
+		var count = 0
+
+		val uniqueStars = mutableSetOf<Int>()
+		c.lines.forEach { (id1, id2) -> uniqueStars.add(id1); uniqueStars.add(id2) }
+
+		uniqueStars.forEach { id ->
+			val star = skyObjectMap[id]
+			if (star != null) {
+				val raRad = Math.toRadians(star.ra * 15.0)
+				val decRad = Math.toRadians(star.dec)
+				sumX += cos(decRad) * cos(raRad)
+				sumY += cos(decRad) * sin(raRad)
+				sumZ += sin(decRad)
+				count++
+			}
+		}
+
+		if (count > 0) {
+			val avgX = sumX / count
+			val avgY = sumY / count
+			val avgZ = sumZ / count
+			val hyp = sqrt(avgX * avgX + avgY * avgY)
+			val decRad = atan2(avgZ, hyp)
+			var raRad = atan2(avgY, avgX)
+			if (raRad < 0) raRad += 2 * PI
+			return (Math.toDegrees(raRad) / 15.0) to Math.toDegrees(decRad)
+		}
+		return null
 	}
 }

@@ -2,6 +2,8 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -17,6 +19,11 @@ public class CurrentTimeWidget extends SimpleWidget {
 
 	public CurrentTimeWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, CURRENT_TIME, customId, widgetsPanel);
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		setIcons(CURRENT_TIME);
 		setText(null, null);
 	}

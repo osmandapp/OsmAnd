@@ -33,6 +33,7 @@ public class NotificationHelper {
 	private GpxNotification gpxNotification;
 	private CarAppNotification carAppNotification;
 	private DownloadNotification downloadNotification;
+	private FallbackNotification fallbackNotification;
 	private final List<OsmandNotification> all = new ArrayList<>();
 
 	public NotificationHelper(@NonNull OsmandApplication app) {
@@ -45,6 +46,7 @@ public class NotificationHelper {
 		gpxNotification = new GpxNotification(app);
 		downloadNotification = new DownloadNotification(app);
 		carAppNotification = new CarAppNotification(app);
+		fallbackNotification = new FallbackNotification(app);
 		all.add(navigationNotification);
 		all.add(gpxNotification);
 		all.add(downloadNotification);
@@ -92,6 +94,11 @@ public class NotificationHelper {
 	@NonNull
 	public Notification buildCarAppNotification() {
 		return carAppNotification.buildNotification(null, false).build();
+	}
+
+	@NonNull
+	public Notification buildFallbackNotification() {
+		return fallbackNotification.buildNotification(null, false).build();
 	}
 
 	@NonNull

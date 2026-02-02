@@ -2704,7 +2704,6 @@
     <string name="backup_delete_old_data">பழைய பதிப்புகளை அகற்று</string>
     <string name="logout_from_osmand_cloud_decsr">வெளியேறு?\n தரவை காப்புப் பிரதி எடுக்க அல்லது மீட்டமைக்க நீங்கள் மீண்டும் உள்நுழைய வேண்டும்.</string>
     <string name="are_you_sure">நீங்கள் உறுதியாக இருக்கிறீர்களா?</string>
-    <string name="backup_deleting_all_data">எல்லா தரவையும் நீக்குதல்…</string>
     <string name="backup_delete_all_data_warning">பதிப்பு வரலாறு உட்பட ஆச்மண்ட் கிளவுட்டில் முன்பு பதிவேற்றப்பட்ட எல்லா தரவையும் நீக்க உள்ளீர்கள்.\n\n நீக்கப்பட்ட தரவை நீங்கள் மீட்டெடுக்க முடியாது.</string>
     <string name="backup_delete_old_data_warning">முன்னர் ஏற்றப்பட்ட தரவுகளுக்கான மாற்ற வரலாற்றை நீக்க உள்ளீர்கள்.\n\n தரவின் தற்போதைய பதிப்பு சேவையகத்தில் சேமிக்கப்படும், ஆனால் நீங்கள் முன்பு செய்யப்பட்ட மாற்றங்களுக்கு திரும்ப முடியாது.</string>
     <string name="delete_all_confirmation">ஆம், அனைத்தையும் நீக்கு</string>
@@ -3523,7 +3522,6 @@
     <string name="on_hold_since">%1$s முதல் நிறுத்தி வைக்கவும்</string>
     <string name="backup_setup">காப்புப்பிரதியை அமைக்கவும்</string>
     <string name="backup_do_not_have_any">உங்களிடம் இன்னும் நிகழ்நிலை காப்புப்பிரதி இல்லை</string>
-    <string name="backup_deleted_all_data">எல்லா தரவையும் நீக்கியது.</string>
     <string name="hillshade_slope">இல்சேட், சாய்வு</string>
     <string name="cancel_anytime_in_gplay">Google Play இல் எப்போது வேண்டுமானாலும் ரத்துசெய்.</string>
     <string name="continue_with">%1$s உடன் தொடரவும்</string>

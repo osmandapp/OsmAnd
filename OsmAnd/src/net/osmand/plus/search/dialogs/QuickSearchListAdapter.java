@@ -2,6 +2,10 @@ package net.osmand.plus.search.dialogs;
 
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.INVALID_ID;
+import static net.osmand.plus.search.listitems.QuickSearchListItemType.BOTTOM_SHADOW;
+import static net.osmand.plus.search.listitems.QuickSearchListItemType.HEADER;
+import static net.osmand.plus.search.listitems.QuickSearchListItemType.SEARCH_MORE;
+import static net.osmand.plus.search.listitems.QuickSearchListItemType.TOP_SHADOW;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
 
 import android.graphics.drawable.ColorDrawable;
@@ -150,7 +154,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		hasSearchMoreItem = false;
 		for (QuickSearchListItem item : items) {
 			add(item);
-			if (!hasSearchMoreItem && item.getType() == QuickSearchListItemType.SEARCH_MORE) {
+			if (!hasSearchMoreItem && item.getType() == SEARCH_MORE) {
 				hasSearchMoreItem = true;
 			}
 		}
@@ -159,12 +163,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	public void addListItem(@NonNull QuickSearchListItem item) {
-		if (hasSearchMoreItem && item.getType() == QuickSearchListItemType.SEARCH_MORE) {
+		if (hasSearchMoreItem && item.getType() == SEARCH_MORE) {
 			return;
 		}
 		setNotifyOnChange(false);
 		add(item);
-		if (item.getType() == QuickSearchListItemType.SEARCH_MORE) {
+		if (item.getType() == SEARCH_MORE) {
 			hasSearchMoreItem = true;
 		}
 		setNotifyOnChange(true);
@@ -172,12 +176,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	public void insertListItem(@NonNull QuickSearchListItem item, int index) {
-		if (hasSearchMoreItem && item.getType() == QuickSearchListItemType.SEARCH_MORE) {
+		if (hasSearchMoreItem && item.getType() == SEARCH_MORE) {
 			return;
 		}
 		setNotifyOnChange(false);
 		insert(item, index);
-		if (item.getType() == QuickSearchListItemType.SEARCH_MORE) {
+		if (item.getType() == SEARCH_MORE) {
 			hasSearchMoreItem = true;
 		}
 		setNotifyOnChange(true);
@@ -186,11 +190,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	@Override
 	public boolean isEnabled(int position) {
-		QuickSearchListItemType type = getItem(position).getType();
-		return type != QuickSearchListItemType.HEADER
-				&& type != QuickSearchListItemType.TOP_SHADOW
-				&& type != QuickSearchListItemType.BOTTOM_SHADOW
-				&& type != QuickSearchListItemType.SEARCH_MORE;
+		if (position < 0 || position >= getCount()) {
+			return false;
+		}
+		QuickSearchListItem item = getItem(position);
+		QuickSearchListItemType type = item != null ? item.getType() : null;
+		return type != null && type != HEADER && type != TOP_SHADOW && type != BOTTOM_SHADOW && type != SEARCH_MORE;
 	}
 
 	@Override
@@ -215,17 +220,17 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			view = bindBannerItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.FREE_VERSION_BANNER) {
 			view = bindFreeVersionBannerItem(convertView);
-		} else if (type == QuickSearchListItemType.SEARCH_MORE) {
+		} else if (type == SEARCH_MORE) {
 			view = bindSearchMoreItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.BUTTON) {
 			view = bindButtonItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.SELECT_ALL) {
 			view = bindSelectAllItem(position, convertView);
-		} else if (type == QuickSearchListItemType.HEADER) {
+		} else if (type == HEADER) {
 			view = bindHeaderItem(convertView, listItem);
-		} else if (type == QuickSearchListItemType.TOP_SHADOW) {
+		} else if (type == TOP_SHADOW) {
 			return bindTopShadowItem(convertView);
-		} else if (type == QuickSearchListItemType.BOTTOM_SHADOW) {
+		} else if (type == BOTTOM_SHADOW) {
 			return bindBottomShadowItem(convertView);
 		} else if (type == QuickSearchListItemType.SEARCH_RESULT &&
 				poiUIFilter != null && poiUIFilter.isWikiFilter()) {
@@ -560,12 +565,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null) {
 			Object o = getItem(position);
-			if (position == getCount() - 1 || getItem(position + 1).getType() == QuickSearchListItemType.HEADER
-					|| getItem(position + 1).getType() == QuickSearchListItemType.BOTTOM_SHADOW) {
+			if (position == getCount() - 1 || getItem(position + 1).getType() == HEADER
+					|| getItem(position + 1).getType() == BOTTOM_SHADOW) {
 				divider.setVisibility(View.GONE);
 			} else {
 				divider.setVisibility(View.VISIBLE);
-				if (getItem(position + 1).getType() == QuickSearchListItemType.SEARCH_MORE
+				if (getItem(position + 1).getType() == SEARCH_MORE
 						|| listItem.getType() == QuickSearchListItemType.SELECT_ALL) {
 					LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp1);
 					p.setMargins(0, 0, 0, 0);

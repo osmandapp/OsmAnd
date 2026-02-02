@@ -9,19 +9,22 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 
 	companion object {
 		private const val KEY_COMMON = "common"
-		private const val KEY_SHOW_STAR_MAP = "showStarMap"
+		private const val KEY_SHOW_REGULAR_MAP = "showRegularMap"
 		private const val KEY_SHOW_STAR_CHART = "showStarChart"
 		private const val KEY_IS_2D_MODE = "is2DMode"
 
 		private const val KEY_STAR_MAP = "star_map"
-		private const val KEY_STAR_CHART = "star_chart"
 
 		private const val KEY_SHOW_AZIMUTHAL = "showAzimuthalGrid"
 		private const val KEY_SHOW_EQUATORIAL = "showEquatorialGrid"
 		private const val KEY_SHOW_ECLIPTIC = "showEclipticLine"
+		private const val KEY_SHOW_MERIDIAN = "showMeridianLine"
+		private const val KEY_SHOW_EQUATOR = "showEquatorLine"
+		private const val KEY_SHOW_GALACTIC = "showGalacticLine"
 		private const val KEY_SHOW_SUN = "showSun"
 		private const val KEY_SHOW_MOON = "showMoon"
 		private const val KEY_SHOW_PLANETS = "showPlanets"
+		private const val KEY_SHOW_FAVORITES = "showFavorites"
 
 		private const val KEY_SHOW_CONSTELLATIONS = "showConstellations"
 
@@ -35,23 +38,16 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		private const val KEY_SHOW_MAGNITUDE_FILTER = "showMagnitudeFilter"
 		private const val KEY_MAGNITUDE_FILTER = "magnitudeFilter"
 
-		private const val KEY_ITEMS = "items"
+		private const val KEY_FAVORITES = "favorites"
 		private const val KEY_ID = "id"
-		private const val KEY_VISIBLE = "visible"
-
-		private val DEFAULT_VISIBLE_IDS = setOf(
-			"sun", "moon", "mercury", "venus", "mars",
-			"jupiter", "saturn", "uranus", "neptune"
-		)
 	}
 
-	data class SkyObjectConfig(
+	data class FavoriteConfig(
 		val id: String,
-		val isVisible: Boolean
 	)
 
 	data class CommonConfig(
-		val showStarMap: Boolean,
+		val showRegularMap: Boolean,
 		val showStarChart: Boolean
 	)
 
@@ -59,6 +55,10 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showAzimuthalGrid: Boolean,
 		val showEquatorialGrid: Boolean,
 		val showEclipticLine: Boolean,
+		val showMeridianLine: Boolean,
+		val showEquatorLine: Boolean,
+		val showGalacticLine: Boolean,
+		val showFavorites: Boolean,
 		val showSun: Boolean,
 		val showMoon: Boolean,
 		val showPlanets: Boolean,
@@ -73,11 +73,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val is2DMode: Boolean,
 		val showMagnitudeFilter: Boolean,
 		val magnitudeFilter: Double?,
-		val items: List<SkyObjectConfig>
-	)
-
-	data class StarChartConfig(
-		val items: List<SkyObjectConfig>
+		val favorites: List<FavoriteConfig>
 	)
 
 	private fun getSettingsJson(): JSONObject {
@@ -96,32 +92,28 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		settingsPref.set(json.toString())
 	}
 
-	private fun parseItems(json: JSONObject?): List<SkyObjectConfig> {
-		val itemsList = mutableListOf<SkyObjectConfig>()
-		val itemsJson = json?.optJSONArray(KEY_ITEMS)
+	private fun parseFavorites(json: JSONObject?): List<FavoriteConfig> {
+		val favoritesList = mutableListOf<FavoriteConfig>()
+		val favoritesJson = json?.optJSONArray(KEY_FAVORITES)
 
-		if (itemsJson != null) {
-			for (i in 0 until itemsJson.length()) {
-				val itemObj = itemsJson.optJSONObject(i)
-				val id = itemObj?.optString(KEY_ID)
+		if (favoritesJson != null) {
+			for (i in 0 until favoritesJson.length()) {
+				val favObj = favoritesJson.optJSONObject(i)
+				val id = favObj?.optString(KEY_ID)
 				if (!id.isNullOrEmpty()) {
-					val visible = itemObj.optBoolean(KEY_VISIBLE, true)
-					itemsList.add(SkyObjectConfig(id, visible))
+					favoritesList.add(FavoriteConfig(id))
 				}
 			}
-		} else {
-			DEFAULT_VISIBLE_IDS.forEach { id -> itemsList.add(SkyObjectConfig(id, true)) }
 		}
 
-		return itemsList
+		return favoritesList
 	}
 
-	private fun serializeItems(items: List<SkyObjectConfig>): JSONArray {
+	private fun serializeFavorites(favorites: List<FavoriteConfig>): JSONArray {
 		val array = JSONArray()
-		items.forEach { item ->
+		favorites.forEach { item ->
 			val obj = JSONObject()
 			obj.put(KEY_ID, item.id)
-			obj.put(KEY_VISIBLE, item.isVisible)
 			array.put(obj)
 		}
 		return array
@@ -131,7 +123,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val root = getSettingsJson()
 		val settings = root.optJSONObject(KEY_COMMON)
 
-		val showStarMap = settings?.optBoolean(KEY_SHOW_STAR_MAP, true) ?: true
+		val showStarMap = settings?.optBoolean(KEY_SHOW_REGULAR_MAP, true) ?: true
 		val showStarChart = settings?.optBoolean(KEY_SHOW_STAR_CHART, false) ?: false
 
 		return CommonConfig(showStarMap, showStarChart)
@@ -141,7 +133,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val root = getSettingsJson()
 		val settings = root.optJSONObject(KEY_COMMON) ?: JSONObject()
 
-		settings.put(KEY_SHOW_STAR_MAP, config.showStarMap)
+		settings.put(KEY_SHOW_REGULAR_MAP, config.showRegularMap)
 		settings.put(KEY_SHOW_STAR_CHART, config.showStarChart)
 
 		root.put(KEY_COMMON, settings)
@@ -155,6 +147,10 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showAzimuthal = mapSettings?.optBoolean(KEY_SHOW_AZIMUTHAL, true) ?: true
 		val showEquatorial = mapSettings?.optBoolean(KEY_SHOW_EQUATORIAL, false) ?: false
 		val showEcliptic = mapSettings?.optBoolean(KEY_SHOW_ECLIPTIC, false) ?: false
+		val showMeridian = mapSettings?.optBoolean(KEY_SHOW_MERIDIAN, false) ?: false
+		val showEquator = mapSettings?.optBoolean(KEY_SHOW_EQUATOR, false) ?: false
+		val showGalactic = mapSettings?.optBoolean(KEY_SHOW_GALACTIC, false) ?: false
+		val showFavorites = mapSettings?.optBoolean(KEY_SHOW_FAVORITES, true) ?: true
 
 		val showSun = mapSettings?.optBoolean(KEY_SHOW_SUN, true) ?: true
 		val showMoon = mapSettings?.optBoolean(KEY_SHOW_MOON, true) ?: true
@@ -175,12 +171,16 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showMagnitudeFilter = mapSettings?.optBoolean(KEY_SHOW_MAGNITUDE_FILTER, false) ?: false
 		val magnitudeFilter = mapSettings?.optDouble(KEY_MAGNITUDE_FILTER)?.takeIf { !it.isNaN() }
 
-		val items = parseItems(mapSettings)
+		val items = parseFavorites(mapSettings)
 
 		return StarMapConfig(
 			showAzimuthalGrid = showAzimuthal,
 			showEquatorialGrid = showEquatorial,
 			showEclipticLine = showEcliptic,
+			showMeridianLine = showMeridian,
+			showEquatorLine = showEquator,
+			showGalacticLine = showGalactic,
+			showFavorites = showFavorites,
 			showSun = showSun,
 			showMoon = showMoon,
 			showPlanets = showPlanets,
@@ -195,7 +195,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 			is2DMode = is2DMode,
 			showMagnitudeFilter = showMagnitudeFilter,
 			magnitudeFilter = magnitudeFilter,
-			items = items
+			favorites = items
 		)
 	}
 
@@ -206,6 +206,10 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		mapSettings.put(KEY_SHOW_AZIMUTHAL, config.showAzimuthalGrid)
 		mapSettings.put(KEY_SHOW_EQUATORIAL, config.showEquatorialGrid)
 		mapSettings.put(KEY_SHOW_ECLIPTIC, config.showEclipticLine)
+		mapSettings.put(KEY_SHOW_MERIDIAN, config.showMeridianLine)
+		mapSettings.put(KEY_SHOW_EQUATOR, config.showEquatorLine)
+		mapSettings.put(KEY_SHOW_GALACTIC, config.showGalacticLine)
+		mapSettings.put(KEY_SHOW_FAVORITES, config.showFavorites)
 
 		mapSettings.put(KEY_SHOW_SUN, config.showSun)
 		mapSettings.put(KEY_SHOW_MOON, config.showMoon)
@@ -230,24 +234,26 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 			mapSettings.put(KEY_MAGNITUDE_FILTER, config.magnitudeFilter)
 		}
 
-		mapSettings.put(KEY_ITEMS, serializeItems(config.items))
+		mapSettings.put(KEY_FAVORITES, serializeFavorites(config.favorites))
 
 		root.put(KEY_STAR_MAP, mapSettings)
 		setSettingsJson(root)
 	}
 
-	fun getStarChartConfig(): StarChartConfig {
-		val root = getSettingsJson()
-		val chartSettings = root.optJSONObject(KEY_STAR_CHART)
-		val items = parseItems(chartSettings)
-		return StarChartConfig(items)
+	fun addFavorite(id: String) {
+		val config = getStarMapConfig()
+		if (config.favorites.none { it.id == id }) {
+			val favorites = config.favorites.toMutableList()
+			favorites.add(FavoriteConfig(id))
+			setStarMapConfig(config.copy(favorites = favorites))
+		}
 	}
 
-	fun setStarChartConfig(config: StarChartConfig) {
-		val root = getSettingsJson()
-		val chartSettings = root.optJSONObject(KEY_STAR_CHART) ?: JSONObject()
-		chartSettings.put(KEY_ITEMS, serializeItems(config.items))
-		root.put(KEY_STAR_CHART, chartSettings)
-		setSettingsJson(root)
+	fun removeFavorite(id: String) {
+		val config = getStarMapConfig()
+		val favorites = config.favorites.toMutableList()
+		if (favorites.removeAll { it.id == id }) {
+			setStarMapConfig(config.copy(favorites = favorites))
+		}
 	}
 }

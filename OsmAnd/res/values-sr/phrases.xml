@@ -2073,7 +2073,7 @@
     <string name="poi_office_camping">Камп канцеларија</string>
     <string name="poi_model_aerodrome">Модел аеродрома</string>
     <string name="poi_guide">Канцеларија водича</string>
-    <string name="poi_quango">КАНВО</string>
+    <string name="poi_quango">Кванго</string>
     <string name="poi_consulting">Саветодавна канцеларија</string>
     <string name="poi_cooperative">Кооперативна канцеларија</string>
     <string name="poi_office_forestry">Шумарска канцеларија</string>
@@ -4006,9 +4006,9 @@
     <string name="poi_authentication_chip_card_no">Провера идентитета картицом са чипом: не</string>
     <string name="poi_authentication_phone_call_number">Телефонски број за проверу идентитета</string>
     <string name="poi_authentication_short_message_yes">Да</string>
-    <string name="poi_authentication_short_message_no">Провера идентитета SMS-ом: не</string>
-    <string name="poi_authentication_short_message_number">Број телефона SMS-а за проверу идентитета</string>
-    <string name="poi_authentication_short_message_text">Текст SMS поруке приликом провере идентитета</string>
+    <string name="poi_authentication_short_message_no">Ауторизација кратком поруком: не</string>
+    <string name="poi_authentication_short_message_number">Број кратке поруке који се користи за ауторизацију</string>
+    <string name="poi_authentication_short_message_text">Кратка порука која се користи за аутентификацију</string>
     <string name="poi_authentication_none_no">Провера идентитета није потребна: не</string>
     <string name="poi_authentication_none_yes">Да; Нема аутентификације</string>
     <string name="poi_permanent_camping_yes">Да; Трајно камповање</string>

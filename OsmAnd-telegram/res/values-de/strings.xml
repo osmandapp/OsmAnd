@@ -269,14 +269,12 @@
     <string name="shared_string_error_short">ERR</string>
     <string name="shared_string_export">Exportieren</string>
     <string name="logcat_buffer">Logcat-Puffer</string>
-    <string name="logcat_buffer_descr">Protokolle der App einsehen und freigeben</string>
+    <string name="logcat_buffer_descr">App Log-Dateien einsehen und freigeben</string>
     <string name="send_report">Bericht senden</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="shared_string_error">Fehler</string>
     <string name="send_live_location_error">Fehler beim Versenden des Live-Standorts: %1$s</string>
-    <string name="location_source_summary">Standardmäßig verwendet OsmAnd, das von Google Play installiert wird, die Google Play Services zur Standortbestimmung.
-\n
-\nWenn du ungenaue Standortinformationen erhältst oder ein Gerät ohne Google Play Services verwendest, versuche, zur Android API zu wechseln</string>
-    <string name="location_source">Standortquelle</string>
+    <string name="location_source_summary">"Standardmäßig verwendet OsmAnd, wenn von Google Play installiert  die Google Play Services zur Standortbestimmung.\n\nWenn du ungenaue Standortinformationen erhältst oder ein Gerät ohne Google Play Services verwendest, versuche, zur Android API zu wechseln"</string>
+    <string name="location_source">Standortanbieter</string>
 </resources>

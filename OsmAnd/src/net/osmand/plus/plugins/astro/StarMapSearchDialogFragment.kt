@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.astro
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,20 +11,53 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseBottomSheetDialogFragment
+import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.settings.enums.ThemeUsageContext
+import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.utils.InsetTarget
+import net.osmand.plus.utils.InsetTargetsCollection
 import java.util.Locale
+import kotlin.math.abs
 
-class StarMapSearchDialogFragment : BaseBottomSheetDialogFragment() {
+class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
-	var onObjectSelected: ((SkyObject) -> Unit)? = null
 	private var allObjects: List<SkyObject> = emptyList()
 	private val filteredObjects = mutableListOf<SkyObject>()
 	private lateinit var adapter: SearchAdapter
+	private lateinit var recyclerView: RecyclerView
+	
+	private var currentQuery: String = ""
+	private var isAscending: Boolean = true
+
+	private lateinit var sortIcon: ImageView
+	private lateinit var sortText: TextView
+
+	var onObjectSelected: ((SkyObject) -> Unit)? = null
+
+	companion object {
+		const val TAG = "StarMapSearchDialog"
+		private const val KEY_QUERY = "current_query"
+		private const val KEY_ASCENDING = "is_ascending"
+	}
 
 	override fun getThemeUsageContext(): ThemeUsageContext = ThemeUsageContext.APP
+
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		if (savedInstanceState != null) {
+			currentQuery = savedInstanceState.getString(KEY_QUERY, "")
+			isAscending = savedInstanceState.getBoolean(KEY_ASCENDING, true)
+		}
+		allObjects = (parentFragment as? StarMapFragment)?.getSearchableObjects() ?: emptyList()
+	}
+
+	override fun onSaveInstanceState(outState: Bundle) {
+		super.onSaveInstanceState(outState)
+		outState.putString(KEY_QUERY, currentQuery)
+		outState.putBoolean(KEY_ASCENDING, isAscending)
+	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		return themedInflater.inflate(R.layout.dialog_star_map_search, container, false)
@@ -33,11 +67,19 @@ class StarMapSearchDialogFragment : BaseBottomSheetDialogFragment() {
 		super.onViewCreated(view, savedInstanceState)
 
 		val searchView = view.findViewById<SearchView>(R.id.search_view)
-		val recyclerView = view.findViewById<RecyclerView>(R.id.search_results)
+		recyclerView = view.findViewById(R.id.search_results)
+		val closeButton = view.findViewById<View>(R.id.close_button)
+		val sortBar = view.findViewById<View>(R.id.sort_bar)
+		sortIcon = view.findViewById(R.id.sort_icon)
+		sortText = view.findViewById(R.id.sort_text)
 
 		adapter = SearchAdapter()
 		recyclerView.layoutManager = LinearLayoutManager(context)
 		recyclerView.adapter = adapter
+
+		closeButton.setOnClickListener {
+			dismiss()
+		}
 
 		searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 			override fun onQueryTextSubmit(query: String?): Boolean {
@@ -51,25 +93,85 @@ class StarMapSearchDialogFragment : BaseBottomSheetDialogFragment() {
 			}
 		})
 
-		filter("")
-	}
-
-	fun setObjects(objects: List<SkyObject>) {
-		allObjects = objects
-		if (isAdded) filter("")
-	}
-
-	private fun filter(query: String?) {
-		filteredObjects.clear()
-		if (query.isNullOrBlank()) {
-			filteredObjects.addAll(allObjects.take(20))
-		} else {
-			val lowerQuery = query.lowercase(Locale.getDefault())
-			filteredObjects.addAll(allObjects.filter {
-				it.name.lowercase(Locale.getDefault()).contains(lowerQuery)
-			})
+		sortBar.setOnClickListener {
+			isAscending = !isAscending
+			updateSortUI()
+			filter(currentQuery)
 		}
-		adapter.notifyDataSetChanged()
+
+		recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+			override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+				if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+					AndroidUtils.hideSoftKeyboard(requireActivity(), searchView)
+				}
+			}
+		})
+
+		// Restore UI state
+		if (currentQuery.isNotEmpty()) {
+			searchView.setQuery(currentQuery, false)
+		} else {
+			filter("")
+		}
+		updateSortUI()
+
+		searchView.requestFocus()
+	}
+
+	private fun updateSortUI() {
+		if (::sortIcon.isInitialized && ::sortText.isInitialized) {
+			val iconColorId = ColorUtilities.getActiveIconColorId(nightMode)
+			val icon = app.uiUtilities.getIcon(
+				if (isAscending) R.drawable.ic_action_sort_by_name_ascending
+				else R.drawable.ic_action_sort_by_name_descending, iconColorId
+			)
+			sortIcon.setImageDrawable(icon)
+			sortText.setText(if (isAscending) R.string.sort_name_ascending else R.string.sort_name_descending)
+		}
+	}
+
+	override fun onHiddenChanged(hidden: Boolean) {
+		super.onHiddenChanged(hidden)
+		if (hidden) {
+			dialog?.hide()
+		} else {
+			dialog?.show()
+			filter(currentQuery)
+		}
+	}
+
+	override fun getInsetTargets(): InsetTargetsCollection {
+		val collection = super.getInsetTargets()
+		collection.add(InsetTarget.createScrollable(R.id.search_results))
+		return collection
+	}
+
+	@SuppressLint("NotifyDataSetChanged")
+	private fun filter(query: String?) {
+		currentQuery = query ?: ""
+		filteredObjects.clear()
+
+		val list = if (currentQuery.isBlank()) {
+			allObjects
+		} else {
+			val lowerQuery = currentQuery.lowercase(Locale.getDefault())
+			allObjects.filter {
+				it.name.lowercase(Locale.getDefault()).contains(lowerQuery) ||
+						it.localizedName?.lowercase(Locale.getDefault())?.contains(lowerQuery) == true
+			}
+		}
+		val sortedList = if (isAscending) {
+			list.sortedBy { it.localizedName ?: it.name }
+		} else {
+			list.sortedByDescending { it.localizedName ?: it.name }
+		}
+		filteredObjects.addAll(sortedList)
+		if (::adapter.isInitialized) {
+			adapter.notifyDataSetChanged()
+		}
+		if (::recyclerView.isInitialized) {
+			recyclerView.scrollToPosition(0)
+		}
 	}
 
 	inner class SearchAdapter : RecyclerView.Adapter<SearchViewHolder>() {
@@ -87,15 +189,26 @@ class StarMapSearchDialogFragment : BaseBottomSheetDialogFragment() {
 
 	inner class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 		private val nameText = view.findViewById<TextView>(R.id.object_name)
-		private val typeText = view.findViewById<TextView>(R.id.object_type)
-		private val magText = view.findViewById<TextView>(R.id.object_magnitude)
+		private val infoText = view.findViewById<TextView>(R.id.object_info)
 		private val iconView = view.findViewById<ImageView>(R.id.object_icon)
 
 		fun bind(obj: SkyObject) {
-			nameText.text = obj.name
-			typeText.text = AstroUtils.getObjectTypeName(itemView.context, obj.type)
-			magText.text = String.format(Locale.getDefault(), "mag %.1f", obj.magnitude)
+			nameText.text = obj.localizedName ?: obj.name
 			
+			val typeName = AstroUtils.getObjectTypeName(itemView.context, obj.type)
+			val magStr = String.format(Locale.getDefault(), "mag %.1f", obj.magnitude)
+			if (obj.type.isSunSystem()) {
+				infoText.text = String.format(Locale.getDefault(), "%s • %s", typeName, magStr)
+			} else if (obj.type == SkyObject.Type.CONSTELLATION) {
+				val raStr = formatRA(obj.ra)
+				val decStr = formatDec(obj.dec)
+				infoText.text = String.format(Locale.getDefault(), "%s • %s, %s", typeName, raStr, decStr)
+			} else {
+				val raStr = formatRA(obj.ra)
+				val decStr = formatDec(obj.dec)
+				infoText.text = String.format(Locale.getDefault(), "%s • %s, %s • %s", typeName, raStr, decStr, magStr)
+			}
+
 			val iconRes = AstroUtils.getObjectTypeIcon(obj.type)
 			val iconColor = if (obj.type.isSunSystem()) obj.color else ColorUtilities.getPrimaryIconColor(itemView.context, nightMode)
 			
@@ -104,12 +217,25 @@ class StarMapSearchDialogFragment : BaseBottomSheetDialogFragment() {
 
 			itemView.setOnClickListener {
 				onObjectSelected?.invoke(obj)
-				dismiss()
+				// Hide the fragment and add to backstack
+				parentFragmentManager.beginTransaction()
+					.hide(this@StarMapSearchDialogFragment)
+					.addToBackStack(TAG)
+					.commit()
 			}
 		}
-	}
 
-	companion object {
-		const val TAG = "StarMapSearchDialog"
+		private fun formatRA(ra: Double): String {
+			val hours = ra / 15.0
+			val h = hours.toInt()
+			val m = ((hours - h) * 60).toInt()
+			return String.format(Locale.getDefault(), "%02dh %02dm", h, m)
+		}
+
+		private fun formatDec(dec: Double): String {
+			val d = dec.toInt()
+			val m = abs((dec - d) * 60).toInt()
+			return String.format(Locale.getDefault(), "%+02d° %02d′", d, m)
+		}
 	}
 }

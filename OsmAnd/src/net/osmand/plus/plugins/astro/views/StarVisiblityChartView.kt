@@ -68,11 +68,11 @@ class StarVisiblityChartView @JvmOverloads constructor(
 		val endLocal = startLocal.plusDays(1)
 		val obs = Observer(config.latitude, config.longitude, config.elevation)
 
-		val rows = skyObjects.filter { it.isVisible }.map { obj ->
+		val rows = skyObjects.filter { it.isFavorite }.map { obj ->
 			currentCoroutineContext().ensureActive()
 			val spans = computeVisibleSpans(obj, startLocal, endLocal, obs)
 			val (rise, set) = AstroUtils.nextRiseSet(obj, startLocal, obs, startLocal, endLocal)
-			Row(obj, obj.name, rise, set, spans)
+			Row(obj, obj.niceName(), rise, set, spans)
 		}
 
 		val tw = AstroUtils.computeTwilight(startLocal, endLocal, obs, zone)
@@ -167,8 +167,9 @@ class StarVisiblityChartView @JvmOverloads constructor(
 	): List<Span> {
 		fun nextEvent(dir: Direction, from: ZonedDateTime): ZonedDateTime? {
 			val t0 = from.toAstroTime()
-			return if (obj.body != null) {
-				searchRiseSet(obj.body, obs, dir, t0, +2.0)?.toZoned(config.zoneId)
+			val body = obj.body
+			return if (body != null) {
+				searchRiseSet(body, obs, dir, t0, +2.0)?.toZoned(config.zoneId)
 			} else {
 				AstroUtils.withCustomStar(obj.ra, obj.dec) { star ->
 					searchRiseSet(star, obs, dir, t0, +2.0)?.toZoned(config.zoneId)

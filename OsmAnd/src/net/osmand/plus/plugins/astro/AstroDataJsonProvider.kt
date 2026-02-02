@@ -17,7 +17,7 @@ class AstroDataJsonProvider : AstroDataProvider() {
 		private val LOG = PlatformUtil.getLog(AstroDataJsonProvider::class.java)
 	}
 
-	override fun getInitialSkyObjectsImpl(ctx: Context): List<SkyObject> {
+	override fun getSkyObjectsImpl(ctx: Context): List<SkyObject> {
 		val objects = mutableListOf<SkyObject>()
 
 		// Planets

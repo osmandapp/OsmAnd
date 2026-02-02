@@ -32,6 +32,14 @@
             tools:text="Sirius" />
 
         <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/sheet_favorite_button"
+            style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_favorite_button"
+            app:buttonTint="@color/selector_favorite_button" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/sheet_pin_button"
             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
             android:layout_width="wrap_content"
