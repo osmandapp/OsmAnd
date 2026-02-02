@@ -19,8 +19,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView.TouchListener;
 import net.osmand.plus.views.Zoom.ComplexZoom;
@@ -39,22 +37,23 @@ public class AnimateDraggingMapThread implements TouchListener {
 	protected static final Log log = PlatformUtil.getLog(AnimateDraggingMapThread.class);
 
 	// CONSTANTS though make them modifiable for experiements as used in library
-	static float DRAGGING_ANIMATION_TIME = 1200f;
-	static float ZOOM_ANIMATION_TIME = 250f;
-	static float ZOOM_MOVE_ANIMATION_TIME = 350f;
-	static float MOVE_MOVE_ANIMATION_TIME = 900f;
-	static float NAV_ANIMATION_TIME = 1000f;
-	static int DEFAULT_SLEEP_TO_REDRAW = 15;
-	static float ROTATION_ANIMATION_TIME = 250f;
-	static float ROTATION_MOVE_ANIMATION_TIME = 1000f;
-	static float SKIP_ANIMATION_TIMEOUT = 10000f;
-	static float TILT_ANIMATION_TIME = 400f;
-	static int TARGET_NO_ROTATION = -720;
-	static float TARGET_MOVE_VELOCITY_LIMIT = 4000f;
-	static float TARGET_MOVE_DECELERATION = 6000f;
-	static float MIN_INTERPOLATION_TO_JOIN_ANIMATION = 0.8f;
-	static int ZOOM_DIFF_SKIP_ANIMATION = 3;
-	static float MAX_OX_OY_SUM_DELTA_TO_ANIMATE = 2400f;
+	public static float DRAGGING_ANIMATION_TIME = 1200f;
+	public static float ZOOM_ANIMATION_TIME = 250f;
+	public static float ZOOM_MOVE_ANIMATION_TIME = 350f;
+	public static float MOVE_MOVE_ANIMATION_TIME = 900f;
+	public static float NAV_ANIMATION_TIME = 1000f;
+	public static int DEFAULT_SLEEP_TO_REDRAW = 15;
+	public static float ROTATION_ANIMATION_TIME = 250f;
+	public static float ROTATION_MOVE_ANIMATION_TIME = 1000f;
+	public static float SKIP_ANIMATION_TIMEOUT = 10000f;
+	public static float SKIP_ANIMATION_DP_THRESHOLD = 20f;
+	public static float TILT_ANIMATION_TIME = 400f;
+	public static int TARGET_NO_ROTATION = -720;
+	public static float TARGET_MOVE_VELOCITY_LIMIT = 4000f;
+	public static float TARGET_MOVE_DECELERATION = 6000f;
+	public static float MIN_INTERPOLATION_TO_JOIN_ANIMATION = 0.8f;
+	public static int ZOOM_DIFF_SKIP_ANIMATION = 3;
+	public static float MAX_OX_OY_SUM_DELTA_TO_ANIMATE = 2400f;
 	// CONSTANTS though make them modifiable for experiements as used in library
 
 	private final OsmandApplication app;
