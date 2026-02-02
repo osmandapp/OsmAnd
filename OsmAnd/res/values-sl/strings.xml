@@ -3646,8 +3646,6 @@
     <string name="shared_string_purchased">Kupljeno</string>
     <string name="logout_from_osmand_cloud_decsr">Odjava\?
 \nZa varnostno kopiranje ali obnovitev podatkov, bo potrebna ponovna prijava.</string>
-    <string name="backup_deleted_all_data">Izbrisani vsi podatki.</string>
-    <string name="backup_deleting_all_data">Brisanje vseh podatkov …</string>
     <string name="shared_string_view_all">Poglej vse</string>
     <string name="backup_delete_types_descr">Želiš izbrisati vse podatke za zastarele vrste podatkov iz OsmAnd Cloud\?</string>
     <string name="provided_by">Priskrbljeno od %1$s</string>

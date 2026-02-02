@@ -38,6 +38,11 @@ public class TripRecordingDistanceWidget extends BaseRecordingWidget {
 		super(mapActivity, TRIP_RECORDING_DISTANCE, customId, widgetsPanel);
 		savingTrackHelper = app.getSavingTrackHelper();
 		this.distanceWidgetState = distanceWidgetState;
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		updateInfo(null);
 		updateWidgetView();
 	}

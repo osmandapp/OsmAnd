@@ -15,8 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -29,6 +27,7 @@ import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
 import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -44,6 +43,7 @@ import net.osmand.plus.views.controls.VerticalWidgetPanel;
 import net.osmand.plus.views.controls.VerticalWidgetPanel.VerticalPanelVisibilityListener;
 import net.osmand.plus.views.controls.WidgetsContainer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.CenterWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
@@ -53,7 +53,6 @@ import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SpeedometerWidget;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -61,7 +60,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 
 public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectProvider {
 
@@ -259,8 +257,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		themeId = -1;
 	}
 
-	public void removeSideWidget(TextInfoWidget widget) {
-		widgetRegistry.removeSideWidgetInternal(widget);
+	public void removeWidget(@NonNull MapWidget widget) {
+		widgetRegistry.removeWidget(widget);
 	}
 
 	public void addTopToolbarController(TopToolbarController controller) {
@@ -318,7 +316,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public void recreateAllControls(@NonNull MapActivity mapActivity) {
 		widgetRegistry.clearWidgets();
 		registerAllControls(mapActivity);
-		widgetRegistry.reorderWidgets();
+		widgetRegistry.reorderWidgets(ScreenLayoutMode.getDefault(mapActivity));
 		recreateControls();
 	}
 
@@ -348,9 +346,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			resetCashedTheme();
-			ApplicationMode appMode = settings.getApplicationMode();
 			clearCustomContainers(mapActivity);
-			widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
+			updateWidgetsInfo(drawSettings);
 			topWidgetsPanel.update(drawSettings);
 			bottomWidgetsPanel.update(drawSettings);
 			leftWidgetsPanel.update(drawSettings);
@@ -359,8 +356,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	}
 
 	public void updateVerticalPanels() {
-		ApplicationMode appMode = settings.getApplicationMode();
-		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
+		updateWidgetsInfo(drawSettings);
 
 		if (topWidgetsPanel != null) {
 			topWidgetsPanel.update(drawSettings);
@@ -457,7 +453,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		if (mapActivity == null) {
 			return;
 		}
-		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+		boolean transparent = view.getSettings().getTransparentMapThemePreference(layoutMode).get();
 		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 		boolean following = routeLayer.getHelper().isFollowingMode();
 		int calcThemeId = (transparent ? 4 : 0) | (nightMode ? 2 : 0) | (following ? 1 : 0);
@@ -501,7 +498,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 	@NonNull
 	private TextState calculateTextState(boolean verticalWidget) {
-		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(requireMapActivity());
+		boolean transparent = view.getSettings().getTransparentMapThemePreference(layoutMode).get();
 		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 		boolean following = routeLayer.getHelper().isFollowingMode();
 		TextState ts = new TextState();
@@ -550,7 +548,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		this.drawSettings = drawSettings;
 		if (getMapActivity() != null) {
 			updateColorShadowsOfText();
-			widgetRegistry.updateWidgetsInfo(settings.getApplicationMode(), drawSettings);
+			updateWidgetsInfo(drawSettings);
 			leftWidgetsPanel.update(drawSettings);
 			rightWidgetsPanel.update(drawSettings);
 			topWidgetsPanel.update(drawSettings);
@@ -567,6 +565,19 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			}
 			for (WidgetsContainer container : additionalWidgets) {
 				container.update(drawSettings);
+			}
+		}
+	}
+
+	private void updateWidgetsInfo(@NonNull DrawSettings drawSettings) {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			ApplicationMode appMode = settings.getApplicationMode();
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(requireMapActivity());
+			for (MapWidgetInfo widgetInfo : widgetRegistry.getWidgets(activity, appMode, layoutMode)) {
+				if (widgetInfo.isEnabledForAppMode(appMode, layoutMode) || widgetInfo instanceof CenterWidgetInfo) {
+					widgetInfo.widget.updateInfo(drawSettings);
+				}
 			}
 		}
 	}

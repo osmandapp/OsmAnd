@@ -142,7 +142,7 @@
     <string name="poi_clothes_children">Odeća za decu</string>
     <string name="poi_shoes">Cipele</string>
     <string name="poi_candles">Sveće</string>
-    <string name="poi_computer">IT oprema</string>
+    <string name="poi_computer">Prodavnica računara</string>
     <string name="poi_copyshop">Fotokopirnica</string>
     <string name="poi_curtain">Zavese</string>
     <string name="poi_fabric">Tkanine</string>
@@ -473,7 +473,7 @@
     <string name="poi_it">IT</string>
     <string name="poi_advertising_agency">Marketing</string>
     <string name="poi_educational_institution">Obrazovna ustanova</string>
-    <string name="poi_studio">TV, radio, film</string>
+    <string name="poi_studio">Studio</string>
     <string name="poi_political_party">Političke organizacije</string>
     <string name="poi_notary">Notari</string>
     <string name="poi_stadium">Stadion</string>
@@ -1482,7 +1482,7 @@
     <string name="poi_traffic_calming_rumble_strip">Vibro-zvučne trake</string>
     <string name="poi_traffic_calming_table">Usporivački prelaz</string>
     <string name="poi_traffic_calming_choker">Suženje na ulici</string>
-    <string name="poi_public_transport_stop_position">„BUS“ označena površina stajališta</string>
+    <string name="poi_public_transport_stop_position">Položaj stajališta javnog prevoza</string>
     <string name="poi_railway_platform">Železnička platforma;Peron</string>
     <string name="poi_halt">Železnička stanica</string>
     <string name="poi_railway_buffer_stop">Pružni predzaustavljač</string>
@@ -2623,7 +2623,7 @@
     <string name="poi_healthcare_speciality_gynaecology">Ginekologija</string>
     <string name="poi_healthcare_speciality_internal">Interno</string>
     <string name="poi_healthcare_speciality_orthopaedics">Ortopedija</string>
-    <string name="poi_healthcare_speciality_otolaryngology">Otorinolaringologija</string>
+    <string name="poi_healthcare_speciality_otolaryngology">Otolaringologija</string>
     <string name="poi_healthcare_speciality_paediatrics">Pedijatrija</string>
     <string name="poi_health_specialty_paediatrics_no">Medicinska specijalizacija: pedijatrija: ne</string>
     <string name="poi_healthcare_speciality_dermatology">Dermatologija</string>
@@ -3453,7 +3453,7 @@
     <string name="poi_post_street">Ulica</string>
     <string name="poi_letter_box">Poštansko sanduče</string>
     <string name="poi_depot">Depo</string>
-    <string name="poi_charging_station">Punjači za EV</string>
+    <string name="poi_charging_station">Punjačka stanica</string>
     <string name="poi_map_size_region">Veličina mape: regija</string>
     <string name="poi_map_size_city">Veličina mape: grad</string>
     <string name="poi_map_size_site">Veličina mape: sajt</string>
@@ -4296,8 +4296,8 @@
     <string name="poi_generator_type_tokamak">Vrsta generatora: Tokamak</string>
     <string name="poi_generator_type_stellarator">Vrsta generatora: Stelarator</string>
     <string name="poi_generator_type_icf">Vrsta generatora: ICF</string>
-    <string name="poi_toilets_disposal_dry_toilet">Na raspolaganju WC: Javni WC</string>
-    <string name="poi_toilets_position_squat">Položaj u WC-u: čučavac</string>
+    <string name="poi_toilets_disposal_dry_toilet">Odlaganje toaleta: suvi toalet</string>
+    <string name="poi_toilets_position_squat">Položaj toaleta: čučavac</string>
     <string name="poi_butcher_pork">Svinjetina</string>
     <string name="poi_butcher_halal">Halal</string>
     <string name="poi_coffee_yes">Da;Kafa</string>
@@ -4392,7 +4392,7 @@
     <string name="poi_generator_type_vver">Vrsta generatora: VVER</string>
     <string name="poi_generator_type_cpr_1000">Vrsta generatora: CPR-1000</string>
     <string name="poi_generator_type_cold_fusion">Vrsta generatora: hladna fuzija</string>
-    <string name="poi_generator_type_horizontal_axis">Vrsta generatora: horizontalna osa (HAWT)</string>
+    <string name="poi_generator_type_horizontal_axis">Vrsta generatora: horizontalna osa</string>
     <string name="poi_generator_type_hydrodynamic_screw">Vrsta generatora: hidrodinamički vijak</string>
     <string name="poi_generator_type_vertical_axis">Vrsta generatora: vertikalna osa</string>
     <string name="poi_generator_type_kaplan_turbine">Vrsta generatora: kaplan turbina</string>
@@ -4431,8 +4431,8 @@
     <string name="poi_museum_person">Osoba</string>
     <string name="poi_museum_health">Zdravlje</string>
     <string name="poi_museum_language">Jezik</string>
-    <string name="poi_toilets_position_urinal">Položaj u WC-u: pisoar</string>
-    <string name="poi_toilets_position_seated">Položaj u WC-u: sedeći</string>
+    <string name="poi_toilets_position_urinal">Položaj toaleta: pisoar</string>
+    <string name="poi_toilets_position_seated">Položaj toaleta: sedeći</string>
     <string name="poi_recycling_metal_packaging">Metalna ambalaža</string>
     <string name="poi_generator_type_pwr">Vrsta generatora: PWR</string>
     <string name="poi_reusable_packaging_accept_yes">Vešekratna ambalaža: da</string>
@@ -4523,7 +4523,7 @@
     <string name="poi_healthcare_speciality_primary_care">Primarna zdravstvena zaštita</string>
     <string name="poi_healthcare_speciality_implantology">Implantologija</string>
     <string name="poi_healthcare_speciality_obstetrics">Akušerstvo</string>
-    <string name="poi_healthcare_speciality_otorhinolaryngology">ORL</string>
+    <string name="poi_healthcare_speciality_otorhinolaryngology">Otorinolaringologija</string>
     <string name="poi_healthcare_speciality_abortion">Abortus</string>
     <string name="poi_healthcare_speciality_pharmacology">Farmakologija</string>
     <string name="poi_healthcare_speciality_cosmetic">Kozmetički</string>
@@ -5025,7 +5025,7 @@
     <string name="poi_new_apostolic_church">Nova apostolska crkva</string>
     <string name="poi_ukrainian_orthodox_church">Ukrajinska pravoslavna crkva</string>
     <string name="poi_united_church">Ujedinjena crkva</string>
-    <string name="poi_security">FTO kancelarija</string>
+    <string name="poi_security">Kancelarija obezbeđenja</string>
     <string name="poi_construction_company">Građevinsko preduzeće</string>
     <string name="poi_union">Kancelarija sindikata</string>
     <string name="poi_office_charity">Dobrotvorna kancelarija</string>

@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.astro.views
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.Gravity
@@ -33,7 +32,7 @@ import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astro.SkyObject
 import net.osmand.plus.plugins.astro.StarObjectsViewModel
 import net.osmand.plus.plugins.astro.StarWatcherPlugin
-import net.osmand.plus.plugins.astro.StarWatcherSettings
+import net.osmand.plus.plugins.astro.StarWatcherSettings.FavoriteConfig
 import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
@@ -54,6 +53,11 @@ abstract class StarChartView @JvmOverloads constructor(
 	defStyleAttr: Int = 0,
 	defStyleRes: Int = 0
 ) : View(context, attrs, defStyleAttr, defStyleRes) {
+
+	init {
+		isClickable = true
+		isFocusable = true
+	}
 
 	protected var skyObjects: List<SkyObject> = emptyList()
 
@@ -78,7 +82,7 @@ abstract class StarChartView @JvmOverloads constructor(
 	companion object {
 		fun showFilterDialog(context: Context, viewModel: StarObjectsViewModel, onSettingsChanged: () -> Unit) {
 			val skyObjects = viewModel.skyObjects.value ?: return
-			val dialogObjects = ArrayList(skyObjects.take(30))
+			val dialogObjects = ArrayList(skyObjects.filter { it.isFavorite })
 
 			val recyclerView = RecyclerView(context)
 			recyclerView.layoutManager = LinearLayoutManager(context)
@@ -113,16 +117,13 @@ abstract class StarChartView @JvmOverloads constructor(
 				.setTitle(R.string.visible_layers_and_objects)
 				.setView(recyclerView)
 				.setPositiveButton(R.string.shared_string_apply) { _, _ ->
-					val itemsConfig = dialogObjects.map {
-						StarWatcherSettings.SkyObjectConfig(it.id, it.isVisible)
-					}
-
+					val favoritesConfig = dialogObjects.filter { it.isFavorite }.map { FavoriteConfig(it.id) }
 					val swSettings = PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
-					val currentConfig = swSettings.getStarChartConfig()
-					val newConfig = currentConfig.copy(items = itemsConfig)
-					swSettings.setStarChartConfig(newConfig)
+					val currentConfig = swSettings.getStarMapConfig()
+					val newConfig = currentConfig.copy(favorites = favoritesConfig)
+					swSettings.setStarMapConfig(newConfig)
 
-					viewModel.loadData()
+					viewModel.refreshSkyObjects()
 					onSettingsChanged()
 				}
 				.setNegativeButton(R.string.shared_string_cancel, null)
@@ -186,13 +187,13 @@ abstract class StarChartView @JvmOverloads constructor(
 
 		override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 			val item = items[position]
-			holder.textView.text = item.name
+			holder.textView.text = item.niceName()
 			// Remove listener before setting state to avoid loop
 			holder.checkBox.setOnCheckedChangeListener(null)
-			holder.checkBox.isChecked = item.isVisible
+			holder.checkBox.isChecked = item.isFavorite
 
 			holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
-				item.isVisible = isChecked
+				item.isFavorite = isChecked
 			}
 
 			// Clicking the text should also toggle checkbox

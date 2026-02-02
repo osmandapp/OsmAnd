@@ -4,7 +4,7 @@
     <string name="poi_palaeontological_site">Paleontologische site</string>
     <string name="poi_bakery">Bakkerij</string>
     <string name="poi_alcohol">Slijterij</string>
-    <string name="poi_convenience">Supermarkt</string>
+    <string name="poi_convenience">Gemakswinkel</string>
     <string name="poi_mall">Winkelcentrum</string>
     <string name="poi_beverages">Drankwinkel</string>
     <string name="poi_butcher">Slagerij</string>
@@ -322,7 +322,7 @@
     <string name="poi_craft_gardener">Hovenier</string>
     <string name="poi_craft_locksmith">Slotenmaker</string>
     <string name="poi_craft_jeweller">Juwelier</string>
-    <string name="poi_craft_key_cutter">Slotenmaker</string>
+    <string name="poi_craft_key_cutter">Sleutelkopieerservice</string>
     <string name="poi_craft_optician">Opticien</string>
     <string name="poi_craft_painter">Schilder</string>
     <string name="poi_craft_photographer">Fotograaf</string>
@@ -488,7 +488,7 @@
     <string name="poi_korfbal">Korfbal</string>
     <string name="poi_sport_motor">Motorsport</string>
     <string name="poi_sport_multi">Meerdere sporten</string>
-    <string name="poi_paddle_tennis">Tafeltennis</string>
+    <string name="poi_paddle_tennis">Poptennis</string>
     <string name="poi_roller_skating">Rolschaatsen</string>
     <string name="poi_rowing">Roeien</string>
     <string name="poi_shooting">Schieten</string>
@@ -633,7 +633,7 @@
     <string name="poi_military_barracks">Kazerne</string>
     <string name="poi_military_danger_area">Gevaarlijke gebied</string>
     <string name="poi_military_range">Militaire schietbaan</string>
-    <string name="poi_shop_food">Levensmiddelen en supermarkt</string>
+    <string name="poi_shop_food">Gemakswinkel en supermarkt</string>
     <string name="poi_road_obstacle">Weg obstakels</string>
     <string name="poi_filling_station">Tankstation</string>
     <string name="poi_public_transport">Openbaar vervoer</string>
@@ -691,7 +691,7 @@
     <string name="poi_sailing">Zeilen</string>
     <string name="poi_wilderness_hut">Schuilhut</string>
     <string name="poi_hunting_lodge">Jachthut</string>
-    <string name="poi_picnic_table">Picnictafel</string>
+    <string name="poi_picnic_table">Picknicktafel</string>
     <string name="poi_tomb">Graf</string>
     <string name="poi_hanami">Hanami</string>
     <string name="poi_wine_cellar">Wijnkelder</string>
@@ -1216,7 +1216,7 @@
     <string name="poi_toll_yes">Tol</string>
     <string name="poi_toll_no">Geen tol</string>
     <string name="poi_toll_hgv_yes">Tol voor vrachtwagens</string>
-    <string name="poi_tactile_paving_yes">Ja;Betegelde bestrating</string>
+    <string name="poi_tactile_paving_yes">Ja;Blindengeleidestrook</string>
     <string name="poi_tactile_paving_no">Zonder blindengeleidestrook</string>
     <string name="poi_traffic_signals_sound_yes">Ja;Geluid van verkeersignalen</string>
     <string name="poi_traffic_signals_sound_no">Geluid: nee</string>
@@ -3080,7 +3080,7 @@
     <string name="poi_bicycle_parking_lockers">Lockers</string>
     <string name="poi_bicycle_parking_tree">Fietsrek</string>
     <string name="poi_bicycle_parking_streetpod">Streetpod</string>
-    <string name="poi_wheelchair_designated">Voorbehouden</string>
+    <string name="poi_wheelchair_designated">Aangewezen</string>
     <string name="poi_spoil_heap">Terril</string>
     <string name="poi_recreation_center">Recreatiecentrum</string>
     <string name="poi_crossing_activation_automatic">Overweg sturing: automatisch</string>
@@ -3313,7 +3313,7 @@
     <string name="poi_reservation_required">Verplicht</string>
     <string name="poi_winter_room_yes">Winterkamer: ja</string>
     <string name="poi_direction_entrance">Richting: ingang</string>
-    <string name="poi_animal_shelter_purpose_release_no">Vrijlaten: ja</string>
+    <string name="poi_animal_shelter_purpose_release_no">Vrijlaten: nee</string>
     <string name="poi_animal_shelter_purpose_adoption_no">Adoptie: nee</string>
     <string name="poi_owner">Eigenaar</string>
     <string name="poi_motorcycle_type_dualsport">Dualsport</string>
@@ -4310,4 +4310,7 @@
     <string name="poi_nuts">Notenwinkel</string>
     <string name="poi_parking_sheds">Schuren</string>
     <string name="poi_parking_layby">Parkeerstrook</string>
+    <string name="poi_synagogue">Synagoge</string>
+    <string name="poi_ticket_validator">Toegangsbewijsvalidator</string>
+    <string name="poi_tactile_paving_contrasted">Contrast</string>
 </resources>

@@ -41,8 +41,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
-
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
@@ -334,6 +332,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapViewWithLayers.onCreate(savedInstanceState);
 		}
 		extendedMapActivity.onCreate(this, savedInstanceState);
+	}
+
+	public void setMapViewPaddings(int left, int top, int right, int bottom) {
+		mapViewWithLayers.setPadding(left, top, right, bottom);
+	}
+
+	public void resetMapViewPaddings() {
+		mapViewWithLayers.setPadding(0, 0, 0, 0);
 	}
 
 	protected int getRootViewId() {
@@ -690,14 +696,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.APPLICATION_MODE.addListener(applicationModeListener);
 		updateApplicationModeSettings(!app.getPoiFilters().isShowingAnyPoi());
 
-
 		// if destination point was changed try to recalculate route
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (routingHelper.isFollowingMode()
-				&& (!Algorithms.objectEquals(targets.getPointToNavigate().getLatLon(), routingHelper.getFinalLocation()) || !Algorithms
-				.objectEquals(targets.getIntermediatePointsLatLonNavigation(), routingHelper.getIntermediatePoints()))) {
-			targets.updateRouteAndRefresh(true);
+		if (routingHelper.isFollowingMode()) {
+			TargetPoint point = targets.getPointToNavigate();
+			LatLon targetLatLon = point != null ? point.getLatLon() : null;
+			if (!Algorithms.objectEquals(targetLatLon, routingHelper.getFinalLocation())
+					|| !Algorithms.objectEquals(targets.getIntermediatePointsLatLonNavigation(), routingHelper.getIntermediatePoints())) {
+				targets.updateRouteAndRefresh(true);
+			}
 		}
 		app.getLocationProvider().resumeAllUpdates();
 
@@ -1454,6 +1462,26 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 			}
 		}
+
+		if (!isDrawerDisabled()) {
+			switch (event.getActionMasked()) {
+				case MotionEvent.ACTION_POINTER_DOWN:
+					// 2+ fingers on screen: disable drawer swipe
+					if (event.getPointerCount() >= 2) {
+						drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+						break;
+					}
+				case MotionEvent.ACTION_POINTER_UP:
+				case MotionEvent.ACTION_UP:
+				case MotionEvent.ACTION_CANCEL:
+					// Fall through to possibly unlock again if < 2 fingers (or gesture ended)
+					if (event.getPointerCount() < 2) {
+						drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+					}
+					break;
+			}
+		}
+
 		return super.dispatchTouchEvent(event);
 	}
 

@@ -23,6 +23,8 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.SunriseSunset;
 
+
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -56,6 +58,11 @@ public class SunriseSunsetWidget extends SimpleWidget {
 		this.dayNightHelper = app.getDaynightHelper();
 		this.widgetState = widgetState;
 		this.mapView = mapActivity.getMapView();
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		setIcons(widgetState.getWidgetType());
 		setText(NO_VALUE, null);
 		updateWidgetName();

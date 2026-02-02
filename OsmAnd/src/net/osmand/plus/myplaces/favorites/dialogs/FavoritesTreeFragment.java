@@ -37,7 +37,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndTaskManager;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -46,7 +45,6 @@ import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
-import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.DeleteFavoritesTask;
@@ -58,14 +56,8 @@ import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask;
 import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask.ShareFavoritesListener;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.FontCache;
-import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.*;
 import net.osmand.plus.utils.InsetTarget.Type;
-import net.osmand.plus.utils.InsetTargetsCollection;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.MapUtils;
@@ -604,8 +596,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	}
 
 	public void shareFavorites(@Nullable FavoriteGroup group) {
-		ShareFavoritesAsyncTask shareFavoritesTask = new ShareFavoritesAsyncTask(app, group, this);
-		OsmAndTaskManager.executeTask(shareFavoritesTask);
+		callActivity(activity -> OsmAndTaskManager.executeTask(new ShareFavoritesAsyncTask(activity, group, this)));
 	}
 
 	private void initListExpandedState() {
@@ -675,22 +666,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	@Override
 	public void shareFavoritesFinished(@NonNull File destFile, @NonNull Spanned pointsDescription) {
 		updateProgressVisibility(false);
-		if (destFile.exists()) {
-			OsmandActionBarActivity activity = requireMyActivity();
-			String type = "text/plain";
-			String extraText = String.valueOf(pointsDescription);
-			String extraSubject = app.getString(R.string.share_fav_subject);
-
-			OsmandApplication app = (OsmandApplication) activity.getApplication();
-			new NativeShareDialogBuilder()
-					.addFileWithSaveAction(destFile, app, activity, true)
-					.setChooserTitle(extraSubject)
-					.setExtraSubject(extraSubject)
-					.setExtraText(extraText)
-					.setExtraStream(AndroidUtils.getUriForFile(app, destFile))
-					.setType(type)
-					.build(app);
-		}
 	}
 
 	private void setupGetOsmAndCloudButton(@NonNull View view) {

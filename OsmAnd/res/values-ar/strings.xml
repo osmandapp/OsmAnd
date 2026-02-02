@@ -4012,8 +4012,6 @@
 \nستحتاج إلى تسجيل الدخول مرة أخرى للنسخ الاحتياطي للبيانات أو استعادتها.</string>
     <string name="backup_error_subscription_was_expired_descr">انتهت صلاحية اشتراكك في أوسماند برو ، قم بتجديده لاستخدام النسخ الاحتياطي. لا يزال بإمكانك استعادة البيانات من السحابة.</string>
     <string name="contour_lines_hillshade_slope">خطوط الكنتور ، التلال ، المنحدر</string>
-    <string name="backup_deleting_all_data">جاري حذف جميع البيانات…</string>
-    <string name="backup_deleted_all_data">حذف جميع البيانات.</string>
     <string name="backup_deleting_all_data_descr">الرجاء الانتظار حتى يقوم OsmAnd بحذف بياناتك من السحابة. ستبقى جميع البيانات على الجهاز دون مساس.</string>
     <string name="backup_deleted_all_data_descr">تم حذف جميع بياناتك بنجاح من سحابة OsmAnd.</string>
     <string name="backup_version_history_removed">تمت إزالة كافة محفوظات الإصدار.</string>

@@ -4,31 +4,25 @@ import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.DimenRes;
-import androidx.annotation.Dimension;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
+import androidx.annotation.*;
 
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
@@ -53,7 +47,7 @@ public abstract class MapWidget {
 	@Nullable
 	protected String customId;
 
-	protected final View view;
+	private View view;
 
 	public MapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 			@Nullable String customId, @Nullable WidgetsPanel panel) {
@@ -67,26 +61,45 @@ public abstract class MapWidget {
 		this.routingHelper = app.getRoutingHelper();
 		this.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		this.visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
-		this.view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
 
 		String id = customId != null ? customId : widgetType.id;
-		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(id, settings);
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(id, settings, layoutMode);
 		setPanel(selectedPanel);
 	}
 
 	@LayoutRes
 	protected abstract int getLayoutId();
 
+	public void initView() {
+		if (view == null) {
+			view = getView();
+		}
+	}
+
 	@NonNull
 	public View getView() {
+		if (view == null) {
+			view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
+			setupView(view);
+		}
 		return view;
+	}
+
+	protected void setupView(@NonNull View view) {
+
+	}
+
+	@NonNull
+	public MapActivity getMapActivity() {
+		return mapActivity;
 	}
 
 	/**
 	 * @return preference that needs to be reset after deleting widget
 	 */
 	@Nullable
-	public OsmandPreference<?> getWidgetSettingsPrefToReset(@NonNull ApplicationMode appMode) {
+	public CommonPreference<?> getWidgetSettingsPrefToReset(@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		return null;
 	}
 
@@ -101,15 +114,14 @@ public abstract class MapWidget {
 			@NonNull ApplicationMode appMode, @Nullable String customId) {
 	}
 
-	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel,
-			@NonNull List<MapWidget> followingWidgets) {
-		container.addView(view);
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel, @NonNull List<MapWidget> followingWidgets) {
+		container.addView(getView());
 	}
 
 	public void detachView(@NonNull WidgetsPanel widgetsPanel, @NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
-		ViewParent parent = view.getParent();
-		if (parent instanceof ViewGroup) {
-			((ViewGroup) parent).removeView(view);
+		View view = getView();
+		if (view.getParent() instanceof ViewGroup viewGroup) {
+			viewGroup.removeView(view);
 		}
 	}
 
@@ -132,19 +144,21 @@ public abstract class MapWidget {
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		// Not implemented
+		updateInfo(getView(), drawSettings);
 	}
+
+	protected abstract void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings);
 
 	public void updateColors(@NonNull TextState textState) {
 		nightMode = textState.night;
 	}
 
 	protected boolean updateVisibility(boolean visible) {
-		return AndroidUiHelper.updateVisibility(view, visible);
+		return AndroidUiHelper.updateVisibility(getView(), visible);
 	}
 
 	public boolean isViewVisible() {
-		return view.getVisibility() == View.VISIBLE;
+		return getView().getVisibility() == View.VISIBLE;
 	}
 
 	protected void setPanel(@NonNull WidgetsPanel panel) {

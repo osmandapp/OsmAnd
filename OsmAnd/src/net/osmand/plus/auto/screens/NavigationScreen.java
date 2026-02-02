@@ -9,7 +9,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
-import androidx.car.app.CarToast;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.ActionStrip;
 import androidx.car.app.model.CarColor;
@@ -93,7 +92,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 		OsmandApplication app = getApp();
 		alarmWidget = new AlarmWidget(app, null);
-		speedometerWidget = new SpeedometerWidget(app, null, null);
+		speedometerWidget = new SpeedometerWidget(app);
 		updateUse3DButton();
 		getLifecycle().addObserver(this);
 	}

@@ -810,6 +810,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 				|| MapRouteInfoMenu.waypointsVisible || MapRouteInfoMenu.followTrackVisible
 				|| mapActivity.getFragmentsHelper().getGpsFilterFragment() != null
 				|| mapActivity.getFragmentsHelper().getDownloadTilesFragment() != null
+				|| mapActivity.getFragmentsHelper().getStarMapFragment() != null
 				|| (plugin != null && plugin.hasCustomForecast())) {
 			return true;
 		}
@@ -857,6 +858,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null || menu == null || mInChangeMarkerPositionMode || mInGpxDetailsMode
 				|| mapActivity.getFragmentsHelper().getGpsFilterFragment() != null
+				|| mapActivity.getFragmentsHelper().getStarMapFragment() != null
 				|| mapActivity.getFragmentsHelper().getDownloadTilesFragment() != null) {
 			return true;
 		}

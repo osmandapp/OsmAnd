@@ -1,10 +1,13 @@
 package net.osmand.plus.routing;
 
+import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -70,12 +73,19 @@ public class RouteDirectionInfo {
 		return descriptionRoute.trim();
 	}
 
-	public String getDescriptionRoutePart() {
-		return getDescriptionRoutePart(false);
+	public void setDescriptionRoute(String descriptionRoute) {
+		this.descriptionRoute = descriptionRoute;
 	}
 
-	public String getDescriptionRoutePart(boolean forceTurnType) {
-		return forceTurnType && Algorithms.isEmpty(descriptionRoute) ? turnType.toString() : descriptionRoute;
+	public String getDescriptionRoutePart(@NonNull Context context) {
+		return getDescriptionRoutePart(context, false);
+	}
+
+	public String getDescriptionRoutePart(@NonNull Context context, boolean forceTurnType) {
+		if (forceTurnType && Algorithms.isEmpty(descriptionRoute)) {
+			return RouteCalculationResult.toString(turnType, context, true);
+		}
+		return descriptionRoute;
 	}
 
 	public String getRef() {
@@ -92,10 +102,6 @@ public class RouteDirectionInfo {
 
 	public void setStreetName(String streetName) {
 		this.streetName = streetName;
-	}
-
-	public void setDescriptionRoute(String descriptionRoute) {
-		this.descriptionRoute = descriptionRoute;
 	}
 
 	public float getAverageSpeed() {
@@ -140,13 +146,13 @@ public class RouteDirectionInfo {
 		this.exitInfo = exitInfo;
 	}
 
-    public String getDestinationRef() {
-        return destinationRef;
-    }
+	public String getDestinationRef() {
+		return destinationRef;
+	}
 
-    public void setDestinationRef(String destinationRef) {
-        this.destinationRef = destinationRef;
-    }
+	public void setDestinationRef(String destinationRef) {
+		this.destinationRef = destinationRef;
+	}
 
 	public String getDestinationRefAndName() {
 		String[] destinations = {destinationRef, destinationName};

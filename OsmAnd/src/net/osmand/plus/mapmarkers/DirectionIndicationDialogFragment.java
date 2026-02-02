@@ -35,6 +35,7 @@ import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -174,10 +175,13 @@ public class DirectionIndicationDialogFragment extends BaseFullScreenDialogFragm
 			}
 		}
 		MapActivity activity = getMapActivity();
-		if (activity != null && WidgetsVisibilityHelper.isWidgetEnabled(activity, TOP, MARKERS_TOP_BAR.id)) {
-			imgList.add(getTopBar1Img());
-			if (count == 2) {
-				imgList.add(getTopBar2Img());
+		if (activity != null) {
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
+			if (WidgetsVisibilityHelper.isWidgetEnabled(activity, TOP, layoutMode, MARKERS_TOP_BAR.id)) {
+				imgList.add(getTopBar1Img());
+				if (count == 2) {
+					imgList.add(getTopBar2Img());
+				}
 			}
 		}
 		((ImageView) mainView.findViewById(R.id.action_bar_image))

@@ -19,6 +19,7 @@ import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.plus.R
+import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.utils.AndroidUtils
 import java.util.Calendar
@@ -29,6 +30,7 @@ class SkyObjectInfoFragment : Fragment() {
 	private lateinit var sheetTitle: TextView
 	private lateinit var sheetCoords: TextView
 	private lateinit var sheetPinButton: MaterialCheckBox
+	private lateinit var sheetFavoriteButton: MaterialCheckBox
 	private lateinit var sheetMagnitude: TextView
 	private lateinit var sheetDistance: TextView
 	private lateinit var sheetRiseTime: TextView
@@ -46,6 +48,7 @@ class SkyObjectInfoFragment : Fragment() {
 		sheetTitle = view.findViewById(R.id.sheet_title)
 		sheetCoords = view.findViewById(R.id.sheet_coords)
 		sheetPinButton = view.findViewById(R.id.sheet_pin_button)
+		sheetFavoriteButton = view.findViewById(R.id.sheet_favorite_button)
 		sheetMagnitude = view.findViewById(R.id.sheet_magnitude)
 		sheetDistance = view.findViewById(R.id.sheet_distance)
 		sheetRiseTime = view.findViewById(R.id.sheet_rise_time)
@@ -69,7 +72,7 @@ class SkyObjectInfoFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		arguments?.getString("skyObjectName")?.let { name ->
-			parent.starMapViewModel.skyObjects.value?.find { it.name == name }?.let {
+			parent.viewModel.skyObjects.value?.find { it.name == name }?.let {
 				updateObjectInfo(it)
 			}
 		}
@@ -81,7 +84,7 @@ class SkyObjectInfoFragment : Fragment() {
 			return
 		}
 
-		sheetTitle.text = obj.name
+		sheetTitle.text = obj.localizedName ?: obj.name
 		val az = String.format(Locale.getDefault(), "%.1f°", obj.azimuth)
 		val alt = String.format(Locale.getDefault(), "%.1f°", obj.altitude)
 		val coordsText = "${getString(R.string.shared_string_azimuth)}: $az  •  ${getString(R.string.altitude)}: $alt"
@@ -91,6 +94,19 @@ class SkyObjectInfoFragment : Fragment() {
 		sheetPinButton.isChecked = parent.starView.isObjectPinned(obj)
 		sheetPinButton.setOnCheckedChangeListener { _, isChecked ->
 			parent.starView.setObjectPinned(obj, isChecked)
+		}
+
+		sheetFavoriteButton.setOnCheckedChangeListener(null)
+		sheetFavoriteButton.isChecked = obj.isFavorite
+		sheetFavoriteButton.setOnCheckedChangeListener { _, isChecked ->
+			obj.isFavorite = isChecked
+			val swSettings = PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
+			if (isChecked) {
+				swSettings.addFavorite(obj.id)
+			} else {
+				swSettings.removeFavorite(obj.id)
+			}
+			parent.viewModel.refreshSkyObjects()
 		}
 
 		sheetMagnitude.text = "${getString(R.string.shared_string_magnitude)}: ${obj.magnitude}"
@@ -110,7 +126,7 @@ class SkyObjectInfoFragment : Fragment() {
 		} else obj.body
 
 		if (bodyToCheck != null) {
-			val calendar = (parent.starMapViewModel.currentCalendar.value ?: Calendar.getInstance()).clone() as Calendar
+			val calendar = (parent.viewModel.currentCalendar.value ?: Calendar.getInstance()).clone() as Calendar
 			calendar.set(Calendar.HOUR_OF_DAY, 0)
 			calendar.set(Calendar.MINUTE, 0)
 			calendar.set(Calendar.SECOND, 0)

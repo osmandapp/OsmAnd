@@ -199,7 +199,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			}
 		}
 
-		if (altName != null) {
+		if (!Algorithms.stringsEqual(name, altName)) {
 			name = String.format("%s (%s)", name, altName);
 			int textColor = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 			SpannableString spannableName = UiUtilities.createColorSpannable(name, view.getContext().getColor(textColor), false, altName);

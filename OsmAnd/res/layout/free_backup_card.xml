@@ -46,12 +46,14 @@
 					app:typefaceWeight="medium" />
 
 				<TextView
+					android:id="@+id/description"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/content_padding_small_half"
 					android:text="@string/free_favorites_backup_description"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size" />
+
 			</LinearLayout>
 
 			<ImageButton

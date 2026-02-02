@@ -3,6 +3,8 @@ package net.osmand.plus;
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION;
 import static net.osmand.plus.OsmAndLocationProvider.NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS;
 import static net.osmand.plus.OsmAndLocationProvider.isRunningOnEmulator;
+import static net.osmand.plus.notifications.OsmandNotification.NotificationType.GPX;
+import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 import static net.osmand.plus.notifications.OsmandNotification.TOP_NOTIFICATION_SERVICE_ID;
 
 import android.app.Notification;
@@ -22,6 +24,7 @@ import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
+import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -137,16 +140,14 @@ public class NavigationService extends Service {
 		locationServiceHelper = app.createLocationServiceHelper();
 		app.setNavigationService(this);
 
-		Notification notification = app.getNotificationHelper().buildTopNotification(this,
-				isUsedBy(USED_BY_NAVIGATION) ? NotificationType.NAVIGATION : NotificationType.GPX);
+		NotificationType type = isUsedBy(USED_BY_NAVIGATION) ? NAVIGATION : GPX;
+		NotificationHelper notificationHelper = app.getNotificationHelper();
+		Notification notification = notificationHelper.buildTopNotification(this, type);
+
 		boolean hasNotification = notification != null;
 		if (hasNotification) {
 			try {
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-					startForeground(TOP_NOTIFICATION_SERVICE_ID, notification, FOREGROUND_SERVICE_TYPE_LOCATION);
-				} else {
-					startForeground(TOP_NOTIFICATION_SERVICE_ID, notification);
-				}
+				startForeground(notification);
 			} catch (Exception e) {
 				app.setNavigationService(null);
 				LOG.error("Failed to start NavigationService (usedBy=" + usedBy + ")", e);
@@ -160,11 +161,27 @@ public class NavigationService extends Service {
 			}
 		} else {
 			LOG.error("NavigationService could not be started because the notification is null. usedBy=" + usedBy);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+				try {
+					startForeground(notificationHelper.buildFallbackNotification());
+					stopForeground(STOP_FOREGROUND_REMOVE);
+				} catch (Exception e) {
+					LOG.error(e);
+				}
+			}
 			stopSelf();
 			return START_NOT_STICKY;
 		}
 		requestLocationUpdates();
 		return START_REDELIVER_INTENT;
+	}
+
+	private void startForeground(@NonNull Notification notification) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			startForeground(TOP_NOTIFICATION_SERVICE_ID, notification, FOREGROUND_SERVICE_TYPE_LOCATION);
+		} else {
+			startForeground(TOP_NOTIFICATION_SERVICE_ID, notification);
+		}
 	}
 
 	@Override

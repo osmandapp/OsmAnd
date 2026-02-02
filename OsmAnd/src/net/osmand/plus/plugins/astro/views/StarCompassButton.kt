@@ -44,7 +44,7 @@ class StarCompassButton @JvmOverloads constructor(
 		override fun getDefaultLayoutId() = R.layout.star_map_compass_button
 
 		override fun createAppearanceParams(nightMode: Boolean?): ButtonAppearanceParams {
-			return ButtonAppearanceParams("ic_compass_white", 48, 1.0f, 24)
+			return ButtonAppearanceParams("ic_compass_white", 52, 1.0f, 26)
 		}
 
 		override fun getDefaultIconName(nightMode: Boolean?): String {

@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.monitoring.widgets;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_DOWNHILL;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_UPHILL;
 
-import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -11,24 +10,21 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidgetState.TripRecordingElevationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.shared.gpx.ElevationDiffsCalculator.SlopeInfo;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.myplaces.tracks.GPXTabItemType;
-import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
-import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
-import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FormattedValue;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.shared.gpx.ElevationDiffsCalculator.SlopeInfo;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
 
 import java.util.ArrayList;
@@ -49,6 +45,11 @@ public abstract class TripRecordingElevationWidget extends BaseRecordingWidget {
 		this.widgetState = widgetState;
 		isUphillType = widgetState.isUphillType;
 		this.savingTrackHelper = app.getSavingTrackHelper();
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		updateInfo(null);
 		updateWidgetName();
 		updateIcon();

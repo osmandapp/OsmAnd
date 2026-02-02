@@ -182,7 +182,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		OsmandApplication app = getApp();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		routingHelper.removeListener(this);
-		if (routingHelper.isRoutePlanningMode()) {
+		if (routingHelper.isRoutePlanningMode() && !routingHelper.isPauseNavigation()) {
 			app.stopNavigation();
 		}
 		getApp().getTargetPointsHelper().removeListener(stateChangedListener);

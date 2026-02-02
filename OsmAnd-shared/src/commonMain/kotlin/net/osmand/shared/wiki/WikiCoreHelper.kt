@@ -296,7 +296,9 @@ object WikiCoreHelper {
 		val wikiLangViews: String? = null,
 		val osmid: Long? = null,
 		val elo: Double? = null,
-		val osmtype: Int = 0
+		val osmtype: Int = 0,
+		val lang: String? = null,
+		val labelsJson: String? = null,
 	)
 
 	@Serializable
