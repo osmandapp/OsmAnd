@@ -7,13 +7,14 @@ import net.osmand.shared.units.LengthUnits
 import net.osmand.shared.units.MeasurementUnit
 import net.osmand.shared.units.NoUnit
 import net.osmand.shared.units.SpeedUnits
+import net.osmand.shared.util.Localization
 
 enum class GradientPaletteCategory(
 	override val id: String,
-	override val displayName: String,
+	override val nameResId: String,
 	val measureUnitType: MeasureUnitType, // Logic for formatting values in UI
 	val baseUnit: MeasurementUnit<*>,     // The unit in which raw data/predefined values are stored
-	val predefinedValues: List<Float>,   // Suggested values for new Fixed Range palettes (in baseUnit)
+	val predefinedValues: List<Float>,    // Suggested values for new Fixed Range palettes (in baseUnit)
 	override val editable: Boolean = false
 ): PaletteCategory {
 
@@ -21,7 +22,7 @@ enum class GradientPaletteCategory(
 
 	SPEED(
 		id = "speed",
-		displayName = "Speed",
+		nameResId = "shared_string_speed",
 		measureUnitType = MeasureUnitType.SPEED,
 		baseUnit = SpeedUnits.METERS_PER_SECOND,
 		predefinedValues = listOf(0f, 13.88f /*50kmh*/, 25.0f /*90kmh*/),
@@ -30,7 +31,7 @@ enum class GradientPaletteCategory(
 
 	MAX_SPEED(
 		id = "maxspeed",
-		displayName = "Max Speed",
+		nameResId = "shared_string_max_speed",
 		measureUnitType = MeasureUnitType.SPEED,
 		baseUnit = SpeedUnits.METERS_PER_SECOND,
 		predefinedValues = listOf(0f, 13.88f, 25.0f)
@@ -38,7 +39,7 @@ enum class GradientPaletteCategory(
 
 	ALTITUDE(
 		id = "elevation", // Legacy key for routes,
-		displayName = "Altitude",
+		nameResId = "altitude",
 		measureUnitType = MeasureUnitType.ALTITUDE,
 		baseUnit = LengthUnits.METERS,
 		predefinedValues = listOf(0f, 500f, 1000f, 2000f),
@@ -47,7 +48,7 @@ enum class GradientPaletteCategory(
 
 	SLOPE(
 		id = "slope", // Legacy key for routes
-		displayName = "Slope",
+		nameResId = "shared_string_slope",
 		measureUnitType = MeasureUnitType.NONE,
 		baseUnit = NoUnit,
 		predefinedValues = listOf(0f, 10f, 20f)
@@ -57,7 +58,7 @@ enum class GradientPaletteCategory(
 
 	TERRAIN_ALTITUDE(
 		id = "HEIGHT", // Legacy key for TerrainMode
-		displayName = "Terrain height",
+		nameResId = "shared_string_height",
 		measureUnitType = MeasureUnitType.ALTITUDE,
 		baseUnit = LengthUnits.METERS,
 		predefinedValues = listOf(0f, 1000f, 2000f, 4000f)
@@ -65,7 +66,7 @@ enum class GradientPaletteCategory(
 
 	TERRAIN_SLOPE(
 		id = "SLOPE", // Legacy key for TerrainMode
-		displayName = "Terrain slope",
+		nameResId = "shared_string_slope",
 		measureUnitType = MeasureUnitType.NONE,
 		baseUnit = NoUnit,
 		predefinedValues = listOf(0f, 15f, 30f, 45f)
@@ -73,7 +74,7 @@ enum class GradientPaletteCategory(
 
 	TERRAIN_HILLSHADE(
 		id = "HILLSHADE",
-		displayName = "Terrain hillshade",
+		nameResId = "shared_string_hillshade",
 		measureUnitType = MeasureUnitType.NONE,
 		baseUnit = NoUnit,
 		predefinedValues = listOf(0f, 255f)
@@ -83,7 +84,7 @@ enum class GradientPaletteCategory(
 
 	WEATHER(
 		id = "weather",
-		displayName = "Weather",
+		nameResId = "shared_string_weather",
 		measureUnitType = MeasureUnitType.NONE,
 		baseUnit = NoUnit,
 		predefinedValues = listOf(0f, 100f)

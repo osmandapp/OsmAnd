@@ -17,6 +17,7 @@
     <string name="gradient_range_type_fixed">Fixed Values</string>
     <string name="gradient_range_type_relative_summary">Colors scale automatically based on the track\'s min/max range.</string>
     <string name="gradient_range_type_relative">Relative</string>
+    <string name="edit_palette">Edit palette</string>
     <string name="add_palette">Add palette</string>
     <string name="delete_palette">Delete palette</string>
     <string name="delete_colors_palette_dialog_summary">Are you sure you want to delete %1$s palette?</string>

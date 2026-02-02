@@ -1,9 +1,10 @@
-package net.osmand.plus.card.color.palette.gradient.editor
+package net.osmand.plus.card.color.palette.gradient.editor.data
 
 import net.osmand.shared.palette.domain.GradientPoint
 import net.osmand.shared.palette.domain.filetype.GradientFileType
 
 data class GradientDraft(
+	val originalId: String?,
 	val fileType: GradientFileType,
 	val points: List<GradientPoint>
 ) {

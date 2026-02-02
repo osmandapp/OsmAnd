@@ -74,7 +74,10 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 		closeButton.setOnClickListener(v -> dismiss());
 
 		ImageView actionButton = toolbar.findViewById(R.id.action_button);
-		AndroidUiHelper.updateVisibility(actionButton, false);
+		actionButton.setOnClickListener(v -> controller.onAddButtonClick(requireActivity()));
+		actionButton.setImageDrawable(getIcon(R.drawable.ic_action_add_no_bg));
+		actionButton.setContentDescription(getString(R.string.shared_string_add));
+		AndroidUiHelper.updateVisibility(actionButton, true);
 	}
 
 	private void setupColorsPalette(@NonNull View view) {

@@ -104,7 +104,7 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 
 		return Palette.GradientCollection(
 			id = category.id,
-			displayName = category.displayName, // TODO: fix it
+			displayName = category.getDisplayName(), // TODO: fix it
 			category = category,
 			items = items.sortedBy { it.historyIndex },
 			isEditable = category.editable

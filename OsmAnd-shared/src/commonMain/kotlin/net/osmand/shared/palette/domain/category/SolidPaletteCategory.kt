@@ -2,7 +2,7 @@ package net.osmand.shared.palette.domain.category
 
 enum class SolidPaletteCategory(
 	override val id: String,
-	override val displayName: String,
+	override val nameResId: String,
 	override val editable: Boolean = false
 ): PaletteCategory {
 
@@ -10,7 +10,7 @@ enum class SolidPaletteCategory(
 
 	SOLID_COLOR_PALETTE(
 		id = "user_palette",
-		displayName = "User palette",
+		nameResId = "user_palette",
 		editable = true
 	),
 }

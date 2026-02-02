@@ -26,9 +26,19 @@ interface IPaletteController : IDialogController {
 	// --- External Control (Commands from outside) ---
 
 	/**
-	 * Programmatically select an item (e.g. "Reset to default").
+	 * Selects the specified [item] as the active element and notifies listeners.
+	 * This method should be used for standard interactions where the selection change
+	 * needs to be propagated to the rest of the application (e.g., saving settings or updating the map).
 	 */
 	fun selectPaletteItem(item: PaletteItem?)
+
+	/**
+	 * Selects the specified [item] without triggering the main selection callback.
+	 * * This is useful for synchronizing the UI with an external state (source of truth)
+	 * to update the visual selection (highlight) without causing circular update loops
+	 * or re-triggering logic that has already been executed.
+	 */
+	fun selectPaletteItemSilently(item: PaletteItem?)
 
 	fun renewLastUsedTime()
 

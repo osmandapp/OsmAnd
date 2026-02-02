@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentActivity
 import net.osmand.OnResultCallback
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.card.color.palette.gradient.editor.GradientDraft
+import net.osmand.plus.card.color.palette.gradient.editor.data.GradientDraft
 import net.osmand.plus.card.color.palette.gradient.editor.GradientEditorController
 import net.osmand.plus.card.color.palette.gradient.editor.GradientRangeTypeController
 import net.osmand.plus.inapp.InAppPurchaseUtils
@@ -188,10 +188,13 @@ open class GradientPaletteController(
 
 	private fun editGradient(item: PaletteItem.Gradient) {
 		editedItem = item
-		showGradientEditor(GradientDraft(
+		showGradientEditor(
+			GradientDraft(
+			originalId = item.id,
 			fileType = item.properties.fileType,
 			points = item.points
-		))
+		)
+		)
 	}
 
 	private fun selectFileType(callback: OnResultCallback<GradientFileType>) {
@@ -245,11 +248,14 @@ open class GradientPaletteController(
 
 	override fun onAddButtonClick(activity: FragmentActivity) {
 		selectFileType { fileType ->
-			showGradientEditor(GradientDraft(
+			showGradientEditor(
+				GradientDraft(
+				originalId = null,
 				fileType = fileType,
 				// TODO: in future we can create and use predefined values based on the file type
 				points = ColorPalette.MIN_MAX_PALETTE.toGradientPoints()
-			))
+			)
+			)
 		}
 	}
 

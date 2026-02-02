@@ -11,13 +11,44 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/route_info_chart_height" />
 
-    <net.osmand.plus.widgets.chips.HorizontalChipsView
-        android:id="@+id/value_chips"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/content_padding"
-        android:paddingVertical="@dimen/content_padding_half"
-        tools:itemCount="3"
-        tools:listitem="@layout/custom_chip_view" />
+        android:orientation="horizontal">
+
+        <net.osmand.plus.widgets.chips.HorizontalChipsView
+            android:id="@+id/gradient_step_chips"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingHorizontal="@dimen/content_padding"
+            android:paddingVertical="@dimen/content_padding_half"
+            tools:itemCount="3"
+            tools:listitem="@layout/custom_chip_view" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="@dimen/dialog_button_height"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/divider_color_basic"/>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/add_button_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginHorizontal="@dimen/content_padding"
+            tools:layout_width="24dp" />
+
+    </LinearLayout>
 
 </LinearLayout>

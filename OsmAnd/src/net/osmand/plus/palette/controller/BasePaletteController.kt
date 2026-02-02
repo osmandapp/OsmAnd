@@ -78,11 +78,21 @@ abstract class BasePaletteController(
 	// --- Selection Logic ---
 
 	override fun selectPaletteItem(item: PaletteItem?) {
+		selectPaletteItemInternal(item)
+	}
+
+	override fun selectPaletteItemSilently(item: PaletteItem?) {
+		selectPaletteItemInternal(item, silently = true)
+	}
+
+	private fun selectPaletteItemInternal(item: PaletteItem?, silently: Boolean = false) {
 		if (selectedItem != item) {
 			val oldSelected = selectedItem
 			selectedItem = item
 
-			notifyPaletteItemSelected(item)
+			if (!silently) {
+				notifyPaletteItemSelected(item)
+			}
 
 			if (oldSelected != null && item != null) {
 				notifyUpdatePaletteSelection(oldSelected, item)
