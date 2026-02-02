@@ -204,6 +204,12 @@ public class SpeedometerWidget {
 		speedometerUnitsView = hasView ? view.findViewById(R.id.speedometer_units) : null;
 		speedLimitDescription = hasView ? view.findViewById(R.id.limit_description) : null;
 
+		lastNightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.MAP);
+		previousSpeedValueTextColor = currentState.getSpeedTextColor(app, lastNightMode);
+		previousSpeedUnitTextColor = currentState.getSpeedUnitTextColor(app, lastNightMode);
+		speedValueTextColor = previousSpeedValueTextColor;
+		speedUnitTextColor = previousSpeedUnitTextColor;
+
 		animationDrawable = new SpeedometerAnimationDrawable(dpToPx(8));
 		if (speedometerContainer != null) {
 			speedometerContainer.setBackground(animationDrawable);
@@ -227,7 +233,6 @@ public class SpeedometerWidget {
 		}
 
 		boolean isUsaOrCanada = isUsaOrCanadaRegion();
-		AndroidUiHelper.updateVisibility(speedLimitContainer, false);
 		AndroidUiHelper.updateVisibility(speedLimitDescription, isUsaOrCanada);
 		WidgetSize newWidgetSize = settings.SPEEDOMETER_SIZE.getModeValue(mode);
 		DrivingRegion newDrivingRegion = settings.DRIVING_REGION.getModeValue(mode);
@@ -299,6 +304,7 @@ public class SpeedometerWidget {
 				break;
 		}
 		speedLimitContainer.setAlpha(speedLimitContainer.getVisibility() == View.VISIBLE ? 1f : 0f);
+		AndroidUiHelper.updateVisibility(speedLimitContainer, false);
 	}
 
 	private int dpToPx(float dp) {
@@ -456,7 +462,7 @@ public class SpeedometerWidget {
 						speedLimitContainer.getVisibility() == (show ? View.VISIBLE : View.GONE)) {
 					return;
 				}
-				if (show) {
+				if (show || speedLimitContainer.getAlpha() > 0) {
 					speedLimitContainer.setVisibility(View.VISIBLE);
 				}
 				speedLimitContainer.animate()
