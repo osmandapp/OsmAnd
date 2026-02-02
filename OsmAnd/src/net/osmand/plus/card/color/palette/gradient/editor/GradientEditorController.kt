@@ -19,7 +19,6 @@ import net.osmand.plus.card.color.palette.gradient.editor.data.ToolbarState
 import net.osmand.plus.card.color.palette.gradient.editor.data.ValueState
 import net.osmand.plus.card.color.palette.solid.SolidPaletteController
 import net.osmand.plus.settings.backend.ApplicationMode
-import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.alert.AlertDialogData
 import net.osmand.plus.widgets.alert.CustomAlert
 import net.osmand.shared.palette.domain.GradientPoint
@@ -221,7 +220,7 @@ class GradientEditorController(
 			val fileType = draft.fileType
 			val paletteCategory = fileType.category
 			val units = if (fileType.rangeType == GradientRangeType.FIXED_VALUES) {
-				paletteCategory.baseUnit.getSymbol()
+				paletteCategory.measurementUnit.getSymbol()
 			} else {
 				"%"
 			}
@@ -280,13 +279,7 @@ class GradientEditorController(
 		}
 
 		val label = "Minimum"
-		val summaryText = "Color for the minimum value found in the track."
-		val hasError = true
-		val summaryColor = if (hasError) {
-			ColorUtilities.getColor(app, R.color.design_default_color_error)
-		} else {
-			ColorUtilities.getSecondaryTextColor(app, isNightMode)
-		}
+		val summary = "Color for the minimum value found in the track."
 
 		return EditorUiState(
 			toolbarState = ToolbarState(
@@ -302,8 +295,8 @@ class GradientEditorController(
 				text = "",
 				interactable = false,
 				showTextField = true,
-				summaryText = summaryText,
-				summaryColor = summaryColor
+				summary = summary,
+				error = "Test error text"
 			),
 			colorState = ColorState(
 				colorInt = points[selectedPointIndex].color

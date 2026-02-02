@@ -5,6 +5,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.card.color.palette.gradient.editor.data.EditorUiState
@@ -17,6 +18,7 @@ class ValuesSection(
 	private val onValueChanged: (String) -> Unit
 ): UiSection(app, nightMode) {
 	private val container: View = rootView.findViewById(R.id.text_field)
+	private val caption: TextInputLayout = rootView.findViewById(R.id.text_caption)
 	private val editText: TextInputEditText = rootView.findViewById(R.id.text_edit)
 	private val unitText: TextView = rootView.findViewById(R.id.unit)
 	private val summaryText: TextView = rootView.findViewById(R.id.summary)
@@ -54,11 +56,11 @@ class ValuesSection(
 		if (oldState?.showTextField != newState.showTextField) {
 			AndroidUiHelper.updateVisibility(container, newState.showTextField)
 		}
-		if (oldState?.summaryText != newState.summaryText) {
-			summaryText.text = newState.summaryText
+		if (oldState?.summary != newState.summary) {
+			summaryText.text = newState.summary
 		}
-		if (oldState?.summaryColor != newState.summaryColor) {
-			summaryText.setTextColor(newState.summaryColor)
+		if (oldState?.error != newState.error) {
+			caption.error = newState.error
 		}
 	}
 
