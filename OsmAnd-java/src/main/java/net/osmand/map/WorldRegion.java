@@ -238,6 +238,8 @@ public class WorldRegion implements Serializable {
 		return res;
 	}
 
+
+	// TODO unit-test for Prague (Central Bohemia to be excluded)
 	public boolean containsRegion(WorldRegion another) {
 		// Firstly check rectangles for greater efficiency
 		if (!containsBoundingBox(another.boundingBox)) {
