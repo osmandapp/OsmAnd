@@ -53,6 +53,7 @@ public class WorldRegion implements Serializable {
 	protected QuadRect boundingBox;
 	protected List<LatLon> polygon;
 	protected List<List<LatLon>> additionalPolygons = new ArrayList<>();
+	protected List<List<LatLon>> excludingPolygons = new ArrayList<>();
 
 	public static class RegionParams {
 		protected String regionLeftHandDriving;
@@ -249,9 +250,9 @@ public class WorldRegion implements Serializable {
 		}
 
 		// Finally check inner point
-		boolean isInnerPoint = another.containsPoint(another.regionCenter);
+		boolean isInnerPoint = another.containsPointInAllPolygons(another.regionCenter);
 		if (isInnerPoint) {
-			return containsPoint(another.regionCenter);
+			return containsPointInAllPolygons(another.regionCenter);
 		} else {
 			// in this case we should find real inner point and check it
 		}
@@ -268,8 +269,26 @@ public class WorldRegion implements Serializable {
 				Algorithms.isFirstPolygonInsideSecond(another, polygon);
 	}
 
-	public boolean containsPoint(LatLon latLon) {
+	protected boolean containsPointInMainPolygon(LatLon latLon) {
 		return polygon != null && Algorithms.isPointInsidePolygon(latLon, polygon);
+	}
+
+	public boolean containsPointInAllPolygons(LatLon latLon) {
+		for (List<LatLon> excluding : excludingPolygons) {
+			if (Algorithms.isPointInsidePolygon(latLon, excluding)) {
+				// E.g., Prague is not part of Central Bohemia.
+				return false;
+			}
+		}
+		if (polygon != null && Algorithms.isPointInsidePolygon(latLon, polygon)) {
+			return true;
+		}
+		for (List<LatLon> additional : additionalPolygons) {
+			if (Algorithms.isPointInsidePolygon(latLon, additional)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean isContinent() {

@@ -1008,7 +1008,7 @@ public class OsmandRegions {
 
 		boolean outside = true;
 		for (LatLon point : polygon) {
-			if (worldRegion.containsPoint(point)) {
+			if (worldRegion.containsPointInMainPolygon(point)) {
 				outside = false;
 				break;
 			}
@@ -1016,6 +1016,8 @@ public class OsmandRegions {
 
 		if (outside) {
 			worldRegion.additionalPolygons.add(polygon);
+		} else {
+			worldRegion.excludingPolygons.add(polygon); // marked with ! in *.poly files
 		}
 	}
 }

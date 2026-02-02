@@ -184,7 +184,7 @@ public class WikiArticleSearchTask extends AsyncTask<Void, Void, List<Amenity>> 
 		for (List<WorldRegion> regions : regionsByLatLon.values()) {
 			boolean containsInAll = true;
 			for (WorldRegion region : regions) {
-				if (!region.containsPoint(location)) {
+				if (!region.containsPointInAllPolygons(location)) {
 					containsInAll = false;
 					break;
 				}
