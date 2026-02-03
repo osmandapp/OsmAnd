@@ -480,7 +480,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		DeleteTracksTask deleteFilesTask = new DeleteTracksTask(app, trackItems, tracksGroups, new GpxFilesDeletionListener() {
 			@Override
 			public void onGpxFilesDeletionFinished() {
-				reloadTracks();
+				reloadTracks(true);
 			}
 		});
 		OsmAndTaskManager.executeTask(deleteFilesTask);
