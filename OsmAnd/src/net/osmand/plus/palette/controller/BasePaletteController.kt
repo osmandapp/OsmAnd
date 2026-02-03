@@ -78,7 +78,7 @@ abstract class BasePaletteController(
 	// --- Selection Logic ---
 
 	override fun selectPaletteItem(item: PaletteItem?) {
-		selectPaletteItemInternal(item)
+		selectPaletteItemInternal(item, silently = false)
 	}
 
 	override fun selectPaletteItemSilently(item: PaletteItem?) {
@@ -100,6 +100,10 @@ abstract class BasePaletteController(
 				notifyUpdatePaletteColors(item)
 			}
 		}
+	}
+
+	override fun scrollToPaletteItem(item: PaletteItem?, smoothScroll: Boolean) {
+		notifyUpdatePaletteScrollPosition(item, smoothScroll)
 	}
 
 	override fun renewLastUsedTime() {
@@ -142,6 +146,12 @@ abstract class BasePaletteController(
 	protected fun notifyUpdatePaletteSelection(oldItem: PaletteItem?, newItem: PaletteItem) {
 		for (palette in collectActivePalettes()) {
 			palette.updatePaletteSelection(oldItem, newItem)
+		}
+	}
+
+	protected fun notifyUpdatePaletteScrollPosition(targetItem: PaletteItem?, smoothScroll: Boolean) {
+		for (palette in collectActivePalettes()) {
+			palette.askScrollToPaletteItemPosition(targetItem, smoothScroll)
 		}
 	}
 

@@ -40,6 +40,8 @@ interface IPaletteController : IDialogController {
 	 */
 	fun selectPaletteItemSilently(item: PaletteItem?)
 
+	fun scrollToPaletteItem(item: PaletteItem?, smoothScroll: Boolean)
+
 	fun renewLastUsedTime()
 
 
@@ -52,6 +54,8 @@ interface IPaletteController : IDialogController {
 	fun getSelectedPaletteItem(): PaletteItem?
 
 	fun isAddingNewItemsSupported(): Boolean
+
+	fun isAutoScrollSupported(): Boolean
 
 	fun getControlsAccentColor(nightMode: Boolean): Int
 

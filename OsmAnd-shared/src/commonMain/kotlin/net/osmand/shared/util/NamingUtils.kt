@@ -9,7 +9,7 @@ object NamingUtils {
 	 * "MyRoute (2)" -> "MyRoute (3)"
 	 * "My.File.txt" -> "My.File (2).txt" (preserves extension if present)
 	 */
-	private fun getNextName(fileName: String, delimiter: String): String {
+	private fun getNextName(fileName: String): String {
 		val extensionIndex = fileName.lastIndexOf('.')
 		val name: String
 		val extension: String
@@ -31,10 +31,10 @@ object NamingUtils {
 			val numberStr = match.groupValues[1]
 			val number = numberStr.toIntOrNull() ?: 1
 			// Replace the old number with incremented one
-			name.replaceRange(match.range, "$delimiter(${number + 1})")
+			name.replaceRange(match.range, " (${number + 1})")
 		} else {
 			// No counter found, append " (2)"
-			"$name$delimiter(2)"
+			"$name (2)"
 		}
 
 		return newBaseName + extension
@@ -44,17 +44,13 @@ object NamingUtils {
 	 * Generates a unique name ensuring it doesn't exist in the provided set.
 	 * Starts by incrementing the original.
 	 */
-	fun generateUniqueName(
-		existingNames: Set<String>,
-		originalName: String,
-		delimiter: String = " "
-	): String {
-		var candidate = getNextName(originalName, delimiter)
+	fun generateUniqueName(existingNames: Set<String>, originalName: String): String {
+		var candidate = getNextName(originalName)
 
 		// Loop until we find a free name
 		// e.g., if "Name (2)" exists, try "Name (3)"
 		while (existingNames.contains(candidate)) {
-			candidate = getNextName(candidate, delimiter)
+			candidate = getNextName(candidate)
 		}
 		return candidate
 	}

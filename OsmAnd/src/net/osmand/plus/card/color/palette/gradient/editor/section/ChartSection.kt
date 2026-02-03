@@ -6,6 +6,7 @@ import com.github.mikephil.charting.charts.GradientChart
 import com.github.mikephil.charting.data.LineData
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.card.color.palette.gradient.GradientFormatterHelper
 import net.osmand.plus.card.color.palette.gradient.GradientUiHelper
 import net.osmand.plus.card.color.palette.gradient.editor.data.EditorUiState
 import net.osmand.plus.card.color.palette.gradient.editor.data.GradientStepData
@@ -55,8 +56,8 @@ class ChartSection(
 
 		if (oldState != newState) {
 			// 1. Update Chart
-			val category = newState.paletteCategory
-			val formatter = GradientUiHelper.getGradientTypeFormatter(app, category, null)
+			val fileType = newState.gradientFileType
+			val formatter = GradientFormatterHelper.getGradientFormatter(app, fileType, null)
 
 			val steps = newState.stepData
 			val points = mutableListOf<GradientPoint>()
@@ -93,6 +94,7 @@ class ChartSection(
 				chipItems.add(chipItem)
 			}
 			chipsView.setItems(chipItems)
+			chipsView.notifyDataSetChanged()
 
 			if (selectedStep != null) {
 				val selected = chipsView.getChipById(selectedStep.id)

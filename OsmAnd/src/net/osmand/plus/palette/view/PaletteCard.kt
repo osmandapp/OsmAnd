@@ -45,7 +45,7 @@ abstract class PaletteCard(
 		setupRecyclerView()
 		setupAddButton()
 		setupShowAllButton()
-		askScrollToTargetItemPosition(controller.getSelectedPaletteItem(), smoothScroll = false)
+		askScrollToPaletteItemPosition(controller.getSelectedPaletteItem(), smoothScroll = false)
 	}
 
 	protected open fun setupRecyclerView() {
@@ -87,8 +87,8 @@ abstract class PaletteCard(
 
 	override fun updatePaletteItems(targetItem: PaletteItem?) {
 		adapter.updateItemsList()
-		if (targetItem != null) {
-			askScrollToTargetItemPosition(targetItem, smoothScroll = true)
+		if (targetItem != null && controller.isAutoScrollSupported()) {
+			askScrollToPaletteItemPosition(targetItem, smoothScroll = true)
 		}
 		updateShowAllButton()
 	}
@@ -96,18 +96,15 @@ abstract class PaletteCard(
 	override fun updatePaletteSelection(oldItem: PaletteItem?, newItem: PaletteItem) {
 		adapter.askNotifyItemChanged(oldItem)
 		adapter.askNotifyItemChanged(newItem)
-		askScrollToTargetItemPosition(newItem, smoothScroll = true)
-
+		if (controller.isAutoScrollSupported()) {
+			askScrollToPaletteItemPosition(newItem, smoothScroll = true)
+		}
 		if (controller.isAccentColorCanBeChanged()) {
 			updateShowAllButton()
 		}
 	}
 
-	override fun getActivity(): FragmentActivity? = super.activity
-
-	// --- Helpers ---
-
-	private fun askScrollToTargetItemPosition(targetItem: PaletteItem?, smoothScroll: Boolean) {
+	override fun askScrollToPaletteItemPosition(targetItem: PaletteItem?, smoothScroll: Boolean) {
 		if (targetItem == null || recyclerView == null) return
 
 		val targetPosition = adapter.indexOf(targetItem)
@@ -124,6 +121,10 @@ abstract class PaletteCard(
 			}
 		}
 	}
+
+	override fun getActivity(): FragmentActivity? = super.activity
+
+	// --- Helpers ---
 
 	abstract fun createViewBinder(): PaletteItemViewBinder
 

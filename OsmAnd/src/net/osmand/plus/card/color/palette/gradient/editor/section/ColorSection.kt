@@ -31,10 +31,12 @@ class ColorSection(
 	override fun update(oldUiState: EditorUiState?, newUiState: EditorUiState) {
 		val oldState = oldUiState?.colorState
 		val newState = newUiState.colorState
+		val initialRender = oldState == null
 		if (oldState?.colorInt != newState.colorInt) {
 			val colorInt = newUiState.colorState.colorInt
 			val item = controller.findPaletteItem(colorInt, addIfNotFound = true)
 			controller.selectPaletteItemSilently(item)
+			controller.scrollToPaletteItem(item, smoothScroll = !initialRender)
 		}
 	}
 }

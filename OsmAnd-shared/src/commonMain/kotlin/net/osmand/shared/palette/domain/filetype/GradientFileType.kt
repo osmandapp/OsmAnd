@@ -1,13 +1,23 @@
 package net.osmand.shared.palette.domain.filetype
 
+import net.osmand.shared.ColorPalette
+import net.osmand.shared.palette.domain.GradientPoint
 import net.osmand.shared.palette.domain.GradientRangeType
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory
+import net.osmand.shared.units.LengthUnits
+import net.osmand.shared.units.MeasurementUnit
+import net.osmand.shared.units.NoUnit
+import net.osmand.shared.units.PercentUnits
+import net.osmand.shared.units.SpeedUnits
 
 enum class GradientFileType(
 	override val category: GradientPaletteCategory,
 	override val filePrefix: String,
-	val rangeType: GradientRangeType
-): PaletteFileType {
+	val rangeType: GradientRangeType,
+	val baseUnits: MeasurementUnit<*>,          // Unit used for storage (e.g., meters, fraction)
+	val displayUnits: MeasurementUnit<*> = baseUnits, // Unit used for UI display (e.g., percent)
+	val defaultValues: List<Float> = emptyList()      // Default steps for new palettes
+) : PaletteFileType {
 
 	// --- Track / Route Data (Prefix: route_*) ---
 
@@ -15,48 +25,68 @@ enum class GradientFileType(
 		filePrefix = "route_speed_fixed_",
 		category = GradientPaletteCategory.SPEED,
 		rangeType = GradientRangeType.FIXED_VALUES,
+		baseUnits = SpeedUnits.KILOMETERS_PER_HOUR,
+		defaultValues = listOf(0f, 50f, 100f)
 	),
 
 	SPEED_RELATIVE(
 		filePrefix = "route_speed_",
 		category = GradientPaletteCategory.SPEED,
-		rangeType = GradientRangeType.RELATIVE
+		rangeType = GradientRangeType.RELATIVE,
+		baseUnits = PercentUnits.FRACTION,
+		displayUnits = PercentUnits.PERCENT,
+		defaultValues = listOf(0f, 0.5f, 1.0f)
 	),
 
 	MAX_SPEED_FIXED(
 		filePrefix = "route_fixed_maxspeed_",
 		category = GradientPaletteCategory.MAX_SPEED,
 		rangeType = GradientRangeType.FIXED_VALUES,
+		baseUnits = SpeedUnits.KILOMETERS_PER_HOUR,
+		defaultValues = listOf(0f, 50f, 100f)
 	),
 
 	MAX_SPEED_RELATIVE(
 		filePrefix = "route_maxspeed_",
 		category = GradientPaletteCategory.MAX_SPEED,
 		rangeType = GradientRangeType.RELATIVE,
+		baseUnits = PercentUnits.FRACTION,
+		displayUnits = PercentUnits.PERCENT,
+		defaultValues = listOf(0f, 0.5f, 1.0f)
 	),
 
 	ELEVATION_FIXED(
 		filePrefix = "route_fixed_elevation_",
 		category = GradientPaletteCategory.ALTITUDE,
 		rangeType = GradientRangeType.FIXED_VALUES,
+		baseUnits = LengthUnits.METERS,
+		defaultValues = listOf(0f, 500f, 1000f, 2000f),
 	),
 
 	ELEVATION_RELATIVE(
 		filePrefix = "route_elevation_",
 		category = GradientPaletteCategory.ALTITUDE,
 		rangeType = GradientRangeType.RELATIVE,
+		baseUnits = PercentUnits.FRACTION,
+		displayUnits = PercentUnits.PERCENT,
+		defaultValues = listOf(0f, 0.5f, 1.0f)
 	),
 
 	SLOPE_FIXED(
 		filePrefix = "route_fixed_slope_",
 		category = GradientPaletteCategory.SLOPE,
 		rangeType = GradientRangeType.FIXED_VALUES,
+		baseUnits = NoUnit, // Usually degrees
+		defaultValues = listOf(0f, 10f, 20f)
 	),
 
 	SLOPE_RELATIVE(
 		filePrefix = "route_slope_",
 		category = GradientPaletteCategory.SLOPE,
 		rangeType = GradientRangeType.RELATIVE,
+		baseUnits = PercentUnits.FRACTION,
+		displayUnits = PercentUnits.PERCENT,
+		defaultValues = listOf(0f, 0.5f, 1.0f)
 	),
 
 	// --- Terrain / Map Data ---
@@ -65,12 +95,16 @@ enum class GradientFileType(
 		filePrefix = "height_",
 		category = GradientPaletteCategory.TERRAIN_ALTITUDE,
 		rangeType = GradientRangeType.FIXED_VALUES,
+		baseUnits = LengthUnits.METERS,
+		defaultValues = listOf(0f, 1000f, 2000f, 4000f)
 	),
 
 	TERRAIN_SLOPE(
 		filePrefix = "slope_",
 		category = GradientPaletteCategory.TERRAIN_SLOPE,
 		rangeType = GradientRangeType.FIXED_VALUES,
+		baseUnits = NoUnit, // Degrees
+		defaultValues = listOf(0f, 15f, 30f, 45f)
 	),
 
 	/**
@@ -82,13 +116,9 @@ enum class GradientFileType(
 		filePrefix = "hillshade_main_",
 		category = GradientPaletteCategory.TERRAIN_HILLSHADE,
 		rangeType = GradientRangeType.FIXED_VALUES,
+		baseUnits = NoUnit, // 0-255 byte value
+		defaultValues = listOf(0f, 255f)
 	),
-
-//	TERRAIN_HILLSHADE_SECONDARY(
-//		filePrefix = "hillshade_color_",
-//		category = PaletteCategory.TERRAIN_HILLSHADE,
-//		useFixedValues = true
-//	),
 
 	// --- Weather (Prefix: weather_*) ---
 
@@ -96,7 +126,25 @@ enum class GradientFileType(
 		filePrefix = "weather_",
 		category = GradientPaletteCategory.WEATHER,
 		rangeType = GradientRangeType.FIXED_VALUES,
+		baseUnits = NoUnit,
+		defaultValues = listOf(0f, 100f)
 	);
+
+	/**
+	 * Generates a list of GradientPoints based on the file type's default values.
+	 * Colors are assigned sequentially from the default palette.
+	 */
+	fun getDefaultGradientPoints(): List<GradientPoint> {
+		val defaultColors = ColorPalette.COLORS
+		val lastColor = defaultColors.last()
+
+		return defaultValues.mapIndexed { index, value ->
+			GradientPoint(
+				value = value,
+				color = defaultColors.getOrElse(index) { lastColor }
+			)
+		}
+	}
 
 	companion object {
 

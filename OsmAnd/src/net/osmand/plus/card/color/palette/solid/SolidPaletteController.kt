@@ -114,6 +114,10 @@ open class SolidPaletteController(
 		return true
 	}
 
+	override fun isAutoScrollSupported(): Boolean {
+		return true
+	}
+
 	// --- UI Interactions ---
 
 	override fun onAddButtonClick(activity: FragmentActivity) {

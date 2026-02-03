@@ -1,8 +1,11 @@
 package net.osmand.plus.card.color.palette.gradient.editor.section
 
+import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -11,6 +14,7 @@ import net.osmand.plus.R
 import net.osmand.plus.card.color.palette.gradient.editor.data.EditorUiState
 import net.osmand.plus.helpers.AndroidUiHelper
 
+@SuppressLint("ClickableViewAccessibility")
 class ValuesSection(
 	rootView: View,
 	app: OsmandApplication,
@@ -26,6 +30,15 @@ class ValuesSection(
 	private var isSelfUpdate = false
 
 	init {
+		editText.clearFocus()
+		editText.setOnTouchListener { v, event ->
+			if (event.action == MotionEvent.ACTION_UP) {
+				v.performClick()
+			}
+			editText.onTouchEvent(event)
+			editText.setSelection(editText.text?.length ?: 0)
+			true
+		}
 		editText.addTextChangedListener(object : TextWatcher {
 			override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 			override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -58,6 +71,7 @@ class ValuesSection(
 		}
 		if (oldState?.summary != newState.summary) {
 			summaryText.text = newState.summary
+			AndroidUiHelper.updateVisibility(summaryText, !newState.summary.isNullOrEmpty())
 		}
 		if (oldState?.error != newState.error) {
 			caption.error = newState.error
@@ -67,6 +81,7 @@ class ValuesSection(
 	private fun setTextSilently(text: String) {
 		isSelfUpdate = true
 		editText.setText(text)
+		editText.setSelection(editText.text?.length ?: 0)
 		isSelfUpdate = false
 	}
 }

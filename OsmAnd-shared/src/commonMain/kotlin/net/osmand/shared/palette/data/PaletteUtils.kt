@@ -37,7 +37,7 @@ object PaletteUtils {
 	}
 
 	private fun generateGradientUniqueFileName(existing: Set<String>, baseName: String): String {
-		return NamingUtils.generateUniqueName(existing, baseName, "_")
+		return NamingUtils.generateUniqueName(existing, baseName)
 	}
 
 	fun generateSolidUniqueId(existingIds: Set<String>): String {

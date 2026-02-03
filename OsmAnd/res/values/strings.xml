@@ -11,6 +11,13 @@
 	Thx - Hardy
 -->
 
+    <string name="relative_gradient_point_m_summary">Color for the maximum value found in the track.</string>
+    <string name="relative_gradient_point_avg_summary">Color for the average value of the track.</string>
+    <string name="relative_gradient_point_min_summary">Color for the minimum value found in the track.</string>
+    <string name="shared_string_maximum">Maximum</string>
+    <string name="shared_string_minimum">Minimum</string>
+    <string name="shared_string_ratio">ratio</string>
+    <string name="shared_string_percentage">percentage</string>
     <string name="remove_step">Remove step</string>
     <string name="shared_string_value">Value</string>
     <string name="gradient_range_type_fixed_summary">Colors are assigned to specific absolute numbers (e.g. 50 km/h).</string>

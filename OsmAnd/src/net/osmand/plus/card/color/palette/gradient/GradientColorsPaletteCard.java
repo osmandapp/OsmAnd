@@ -19,6 +19,8 @@ import net.osmand.shared.ColorPalette;
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.shared.palette.domain.PaletteItem;
 
+import org.jetbrains.annotations.NotNull;
+
 public class GradientColorsPaletteCard extends ColorsPaletteCard implements IPaletteView {
 
 	private final GradientPaletteController controller;
@@ -47,7 +49,7 @@ public class GradientColorsPaletteCard extends ColorsPaletteCard implements IPal
 	}
 
 	@Override
-	public void updatePaletteSelection(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
+	public void updatePaletteSelection(@org.jetbrains.annotations.Nullable PaletteItem oldItem, @NotNull PaletteItem newItem) {
 		super.updatePaletteSelection(oldItem, newItem);
 		updateChart();
 	}

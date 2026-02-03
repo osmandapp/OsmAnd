@@ -20,11 +20,9 @@ import net.osmand.plus.widgets.alert.CustomAlert
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
-import net.osmand.shared.ColorPalette
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.palette.data.PaletteSortMode
 import net.osmand.shared.palette.data.PaletteUtils
-import net.osmand.shared.palette.data.toGradientPoints
 import net.osmand.shared.palette.domain.GradientRangeType
 import net.osmand.shared.palette.domain.Palette
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory
@@ -33,7 +31,7 @@ import net.osmand.shared.palette.domain.filetype.GradientFileType
 
 open class GradientPaletteController(
 	app: OsmandApplication,
-	private val paletteCategory: GradientPaletteCategory,
+	private var paletteCategory: GradientPaletteCategory,
 ) : BasePaletteController(app, paletteCategory.id) {
 
 	var analysis: GpxTrackAnalysis? = null
@@ -53,6 +51,7 @@ open class GradientPaletteController(
 	 * and optionally selects an item by name.
 	 */
 	fun updatePalette(paletteCategory: GradientPaletteCategory, selectedItemName: String?) {
+		this.paletteCategory = paletteCategory
 		this.paletteId = paletteCategory.id
 		selectPaletteItemByName(selectedItemName)
 		notifyUpdatePaletteColors(null)
@@ -87,6 +86,10 @@ open class GradientPaletteController(
 
 	override fun isAddingNewItemsSupported(): Boolean {
 		return paletteCategory.editable && InAppPurchaseUtils.isGradientEditorAvailable(app)
+	}
+
+	override fun isAutoScrollSupported(): Boolean {
+		return true
 	}
 
 	// --- Actions (Duplicate / Remove) ---
@@ -212,8 +215,8 @@ open class GradientPaletteController(
 			GradientRangeTypeController.showDialog(
 				app = app,
 				fragmentManager = it.supportFragmentManager,
-				appMode = app.settings.applicationMode,       // TODO: determine real data
-				usedOnMap = true,                             // TODO: determine real data
+				appMode = app.settings.applicationMode,       // TODO: determine actual appMode
+				usedOnMap = true,                             // TODO: determine actual usedOnMap
 				supportedTypes = paletteCategory.getSupportedRangeTypes(),
 				callback = callback
 			)
@@ -225,7 +228,7 @@ open class GradientPaletteController(
 			GradientEditorController.showDialog(
 				app = app,
 				fragmentManager = it.supportFragmentManager,
-				appMode = app.settings.applicationMode,       // TODO: determine real data
+				appMode = app.settings.applicationMode,       // TODO: determine actual appMode
 				gradientDraft = gradientDraft,
 				callback = { result -> onApplyGradientEdits(result) }
 			)
@@ -237,9 +240,7 @@ open class GradientPaletteController(
 	}
 
 	private fun updateExternalDependencies() {
-		val category = GradientPaletteCategory.fromKey(paletteId)
-
-		if (category != null && category.isTerrainRelated()) {
+		if (paletteCategory.isTerrainRelated()) {
 			TerrainMode.reloadAvailableModes(app)
 		}
 	}
@@ -250,11 +251,10 @@ open class GradientPaletteController(
 		selectFileType { fileType ->
 			showGradientEditor(
 				GradientDraft(
-				originalId = null,
-				fileType = fileType,
-				// TODO: in future we can create and use predefined values based on the file type
-				points = ColorPalette.MIN_MAX_PALETTE.toGradientPoints()
-			)
+					originalId = null,
+					fileType = fileType,
+					points = fileType.getDefaultGradientPoints()
+				)
 			)
 		}
 	}

@@ -34,6 +34,8 @@ import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.shared.palette.data.PaletteSortMode;
 import net.osmand.shared.palette.domain.PaletteItem;
 
+import org.jetbrains.annotations.NotNull;
+
 // TODO: I think we should have 2 versions of this screen (or use 2 strategies) - list and flow
 //  currently we use flow layout for solid colors (this screen) and list view for the gradient colors
 //  but view is just a representation, so we can use the same representation for gradient and solid colors
@@ -137,7 +139,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 	}
 
 	@Override
-	public void updatePaletteSelection(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
+	public void updatePaletteSelection(@org.jetbrains.annotations.Nullable PaletteItem oldItem, @NotNull PaletteItem newItem) {
 		View view = getView();
 		if (view == null) {
 			return;
@@ -161,6 +163,11 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 			outline.setImageDrawable(border);
 			outline.setVisibility(View.VISIBLE);
 		}
+	}
+
+	@Override
+	public void askScrollToPaletteItemPosition(@Nullable PaletteItem targetItem, boolean smoothScroll) {
+		// Not relevant for this type of Palette View
 	}
 
 	@NonNull
