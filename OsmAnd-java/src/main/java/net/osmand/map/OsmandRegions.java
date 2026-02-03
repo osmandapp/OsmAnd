@@ -965,20 +965,9 @@ public class OsmandRegions {
 
 	// TODO unit-test for Prague (Central Bohemia to be excluded)
 	public List<BinaryMapDataObject> getRegionsToDownload(double lat, double lon) throws IOException {
-		List<BinaryMapDataObject> l = new ArrayList<BinaryMapDataObject>();
 		int x31 = MapUtils.get31TileNumberX(lon);
 		int y31 = MapUtils.get31TileNumberY(lat);
-		List<BinaryMapDataObject> cs = query(x31, y31);
-		for (BinaryMapDataObject b : cs) {
-			String downloadName = getDownloadName(b);
-			if (!Algorithms.isEmpty(downloadName) && contain(b, x31, y31)) {
-				WorldRegion loadedRegion = getRegionDataByDownloadName(downloadName);
-				if (loadedRegion == null || loadedRegion.containsPointInAllPolygons(new LatLon(lat, lon))) {
-					l.add(b); // strictly check polygon inclusion only for loaded regions
-				}
-			}
-		}
-		return l;
+		return filterQueryResultsByPoint(query(x31, y31), x31, y31);
 	}
 	
 	public List<String> getRegionsToDownload(double lat, double lon, List<String> keyNames) throws IOException {
