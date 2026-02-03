@@ -83,6 +83,7 @@ public class OsmandRegionSearcher {
 		List<BinaryMapDataObject> mapDataObjects;
 		try {
 			mapDataObjects = osmandRegions.query(point31x, point31x, point31y, point31y);
+			mapDataObjects = osmandRegions.filterQueryResultByPoint(mapDataObjects, point31x, point31y);
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
 			return;

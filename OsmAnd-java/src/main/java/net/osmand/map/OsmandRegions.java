@@ -974,7 +974,7 @@ public class OsmandRegions {
 			if (!Algorithms.isEmpty(downloadName) && contain(b, x31, y31)) {
 				WorldRegion loadedRegion = getRegionDataByDownloadName(downloadName);
 				if (loadedRegion == null || loadedRegion.containsPointInAllPolygons(new LatLon(lat, lon))) {
-					l.add(b); // strict check polygon inclusion only for loaded regions
+					l.add(b); // strictly check polygon inclusion only for loaded regions
 				}
 			}
 		}
@@ -1025,4 +1025,34 @@ public class OsmandRegions {
 			worldRegion.excludingPolygons.add(polygon); // marked with ! in *.poly files
 		}
 	}
+
+	public List<BinaryMapDataObject> filterQueryResultByPoint(List<BinaryMapDataObject> objects, int x, int y) {
+		List<BinaryMapDataObject> filtered = new ArrayList<>();
+		Map<String, Integer> intersectionCounter = new HashMap<>();
+		for (BinaryMapDataObject o : objects) {
+			if (OsmandRegions.contain(o, x, y)) {
+				updateIntersectionCounter(o, intersectionCounter, true);
+			}
+		}
+		for (BinaryMapDataObject o : objects) {
+			int counter = updateIntersectionCounter(o, intersectionCounter, false);
+			if (counter > 0 && counter % 2 != 0 && !o.getName().isEmpty()) {
+				filtered.add(o); // positive odd intersections => outside exclusion polygons; name required
+			}
+		}
+		return filtered;
+	}
+
+	private int updateIntersectionCounter(BinaryMapDataObject o, Map<String, Integer> counter, boolean increase) {
+		String downloadName = getDownloadName(o);
+		if (Algorithms.isEmpty(downloadName)) {
+			return 0;
+		}
+		if (increase) {
+			counter.merge(downloadName, 1, Integer::sum);
+		}
+		Integer result = counter.get(downloadName);
+		return result != null ? result : 0;
+	}
+
 }
