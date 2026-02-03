@@ -155,7 +155,7 @@ public class OsmandRegions {
 					String fullRegionName = getFullName(object);
 					WorldRegion region = fullNamesToRegionData.get(fullRegionName);
 					if (region != null) {
-						addPolygonToRegionIfValid(object, region);
+						addPolygonToRegion(object, region);
 					} else {
 						List<BinaryMapDataObject> unattachedMapObjects = unattachedBoundaryMapObjectsByRegions.get(fullRegionName);
 						if (unattachedMapObjects == null) {
@@ -175,7 +175,7 @@ public class OsmandRegions {
 				List<BinaryMapDataObject> unattachedMapObjects = unattachedBoundaryMapObjectsByRegions.get(region.regionFullName);
 				if (unattachedMapObjects != null) {
 					for (BinaryMapDataObject mapObject : unattachedMapObjects) {
-						addPolygonToRegionIfValid(mapObject, region);
+						addPolygonToRegion(mapObject, region);
 					}
 					unattachedBoundaryMapObjectsByRegions.remove(region.regionFullName);
 				}
@@ -985,7 +985,7 @@ public class OsmandRegions {
 		return keyNames;
 	}
 
-	private void addPolygonToRegionIfValid(BinaryMapDataObject mapObject, WorldRegion worldRegion) {
+	private void addPolygonToRegion(BinaryMapDataObject mapObject, WorldRegion worldRegion) {
 		if (mapObject.getPointsLength() < 3) {
 			return;
 		}
@@ -999,18 +999,11 @@ public class OsmandRegions {
 			polygon.add(new LatLon(lat, lon));
 		}
 
-		boolean outside = true;
-		for (LatLon point : polygon) {
-			if (worldRegion.containsPointInMainPolygon(point)) {
-				outside = false;
-				break;
-			}
-		}
-
-		if (outside) {
-			worldRegion.additionalPolygons.add(polygon);
+		if (worldRegion.containsPoint(polygon.get(polygon.size() / 2))) {
+			// add exclusion zones marked with ! in *.poly files
+			worldRegion.exclusionPolygons.add(polygon);
 		} else {
-			worldRegion.excludingPolygons.add(polygon); // marked with ! in *.poly files
+			worldRegion.additionalPolygons.add(polygon);
 		}
 	}
 

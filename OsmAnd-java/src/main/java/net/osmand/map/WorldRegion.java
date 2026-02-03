@@ -53,7 +53,7 @@ public class WorldRegion implements Serializable {
 	protected QuadRect boundingBox;
 	protected List<LatLon> polygon;
 	protected List<List<LatLon>> additionalPolygons = new ArrayList<>();
-	protected List<List<LatLon>> excludingPolygons = new ArrayList<>();
+	protected List<List<LatLon>> exclusionPolygons = new ArrayList<>();
 
 	public static class RegionParams {
 		protected String regionLeftHandDriving;
@@ -271,12 +271,8 @@ public class WorldRegion implements Serializable {
 				Algorithms.isFirstPolygonInsideSecond(another, polygon);
 	}
 
-	protected boolean containsPointInMainPolygon(LatLon latLon) {
-		return polygon != null && Algorithms.isPointInsidePolygon(latLon, polygon);
-	}
-
 	public boolean containsPoint(LatLon latLon) {
-		for (List<LatLon> excluding : excludingPolygons) {
+		for (List<LatLon> excluding : exclusionPolygons) {
 			if (Algorithms.isPointInsidePolygon(latLon, excluding)) {
 				// E.g., Prague is not part of Central Bohemia.
 				return false;
