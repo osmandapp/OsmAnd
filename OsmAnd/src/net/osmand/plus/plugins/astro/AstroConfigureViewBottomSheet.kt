@@ -126,9 +126,9 @@ class AstroConfigureViewBottomSheet :
         )
 
         val redFilterEnableDrawable = UiUtilities.getLayeredIcon(
-            uiUtilities.getIcon(R.drawable.ic_action_red_filter_overlay_on, activeColor),
+            uiUtilities.getIcon(R.drawable.ic_action_red_filter_base_on, activeColor),
             uiUtilities.getIcon(
-                R.drawable.ic_action_red_filter_base_on,
+                R.drawable.ic_action_red_filter_overlay_on,
                 ColorUtilities.getWarningColorId(nightMode)
             )
         )
