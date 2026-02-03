@@ -252,9 +252,9 @@ public class WorldRegion implements Serializable {
 		}
 
 		// Finally check inner point
-		boolean isInnerPoint = another.containsPointInAllPolygons(another.regionCenter);
+		boolean isInnerPoint = another.containsPoint(another.regionCenter);
 		if (isInnerPoint) {
-			return containsPointInAllPolygons(another.regionCenter);
+			return containsPoint(another.regionCenter);
 		} else {
 			// in this case we should find real inner point and check it
 		}
@@ -275,7 +275,7 @@ public class WorldRegion implements Serializable {
 		return polygon != null && Algorithms.isPointInsidePolygon(latLon, polygon);
 	}
 
-	public boolean containsPointInAllPolygons(LatLon latLon) {
+	public boolean containsPoint(LatLon latLon) {
 		for (List<LatLon> excluding : excludingPolygons) {
 			if (Algorithms.isPointInsidePolygon(latLon, excluding)) {
 				// E.g., Prague is not part of Central Bohemia.
