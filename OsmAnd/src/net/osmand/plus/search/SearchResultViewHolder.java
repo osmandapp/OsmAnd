@@ -251,8 +251,6 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		}
 		Drawable imageDrawable = item.getIcon();
 		FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) imageView.getLayoutParams();
-		TypedValue typedValue = new TypedValue();
-		boolean resolved = app.getTheme().resolveAttribute(R.attr.activity_background_color, typedValue, true);
 		int margin;
 		if (hasRouteShield) {
 			AndroidUiHelper.updateVisibility(shieldSign, true);
@@ -312,21 +310,13 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 				imageContainer.setBackground(null);
 				imageContainer.setPadding(margin, margin, margin, margin);
 			} else {
-				AndroidUtils.resolveAttribute(app, R.attr.activity_background_color);
 				int topPadding = title.getLineCount() > 1 ? AndroidUtils.dpToPx(app, 8) : 0;
 				imageContainer.setPadding(0, topPadding, 0, 0);
 			}
-			if (!hasRouteShield && resolved) {
-				if (typedValue.type >= TypedValue.TYPE_FIRST_COLOR_INT && typedValue.type <= TypedValue.TYPE_LAST_COLOR_INT) {
-					int color = typedValue.data;
-					imageContainer.setBackgroundColor(color);
-				} else {
-					int colorResId = typedValue.resourceId;
-					if (colorResId != 0) {
-						int color = ContextCompat.getColor(app, colorResId);
-						imageContainer.setBackgroundColor(color);
-					}
-				}
+			if (!hasRouteShield) {
+				int colorId = nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
+				int color = ContextCompat.getColor(app, colorId);
+				imageContainer.setBackgroundColor(color);
 			} else {
 				imageContainer.setBackground(null);
 			}
