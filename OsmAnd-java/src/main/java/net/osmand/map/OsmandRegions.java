@@ -963,7 +963,6 @@ public class OsmandRegions {
 		return foundObjects;
 	}
 
-	// TODO unit-test for Prague (Central Bohemia to be excluded)
 	public List<BinaryMapDataObject> getRegionsToDownload(double lat, double lon) throws IOException {
 		int x31 = MapUtils.get31TileNumberX(lon);
 		int y31 = MapUtils.get31TileNumberY(lat);

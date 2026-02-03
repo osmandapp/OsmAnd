@@ -548,19 +548,13 @@ public class FirstUsageWizardFragment extends BaseFullScreenFragment implements 
 			List<BinaryMapDataObject> mapDataObjects = null;
 			try {
 				mapDataObjects = osmandRegions.query(point31x, point31x, point31y, point31y);
+				mapDataObjects = osmandRegions.filterQueryResultsByPoint(mapDataObjects, point31x, point31y);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
 			String selectedFullName = "";
 			if (mapDataObjects != null) {
-				Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
-				while (it.hasNext()) {
-					BinaryMapDataObject o = it.next();
-					if (!osmandRegions.contain(o, point31x, point31y)) {
-						it.remove();
-					}
-				}
 				for (BinaryMapDataObject o : mapDataObjects) {
 					String fullName = osmandRegions.getFullName(o);
 					if (fullName != null && fullName.length() > selectedFullName.length()) {
