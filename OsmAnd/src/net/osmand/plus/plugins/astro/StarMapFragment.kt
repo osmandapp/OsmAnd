@@ -33,7 +33,6 @@ import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astro.StarChartState.StarChartType
-import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.plugins.astro.utils.StarMapARModeHelper
 import net.osmand.plus.plugins.astro.utils.StarMapCameraHelper
 import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
@@ -45,7 +44,6 @@ import net.osmand.plus.plugins.astro.views.StarVisiblityChartView
 import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
-import net.osmand.plus.utils.InsetsUtils
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.util.MapUtils
 import java.text.SimpleDateFormat
@@ -55,7 +53,7 @@ import kotlin.math.abs
 
 
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
-	OsmAndCompassListener {
+	OsmAndCompassListener, AstroConfigureViewBottomSheet.AstroConfigScreenListener {
 
 	private val REGULAR_MAP_HEIGHT = 300f
 
@@ -157,7 +155,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 	}
 
-	override fun getStatusBarColorId(): Int = ColorUtilities.getStatusBarSecondaryColorId(nightMode)
+	override fun getStatusBarColorId(): Int = ColorUtilities.getStatusBarSecondaryColorId(true)
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 		val view = themedInflater.inflate(R.layout.fragment_star_map, container, false)
@@ -302,14 +300,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		timeControlBtn.setOnClickListener {
 			timeSelectionView.isVisible = !timeSelectionView.isVisible
 		}
-
-		view.findViewById<ImageButton>(R.id.settings_button).apply {
+        view.findViewById<ImageButton>(R.id.settings_button).apply {
 			updateImageButtonTheme(this)
 			setOnClickListener {
-				AstroUtils.showStarMapOptionsDialog(context, starView, swSettings) {
-					showMagnitudeFilter = it.showMagnitudeFilter
-					updateMagnitudeFilterVisibility()
-				}
+                val sheet = AstroConfigureViewBottomSheet()
+                sheet.show(
+                    childFragmentManager,
+                    AstroConfigureViewBottomSheet.TAG
+                )
 			}
 		}
 		mode2dButton.setOnClickListener { toggle2DMode() }
@@ -855,4 +853,52 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		updateImageButtonTheme(resetBtn)
 	}
+
+    override fun is2dModeEnabled(): Boolean {
+        return starView.is2DMode
+    }
+
+    override fun set2dModeEnabled(enabled: Boolean) {
+        apply2DMode(enabled)
+    }
+
+    override fun isRegularMapEnabled(): Boolean {
+        return regularMapVisible
+    }
+
+    override fun setRegularMapEnabled(enabled: Boolean) {
+        updateRegularMapVisibility(enabled)
+        saveCommonSettings()
+    }
+
+    override fun onAstroConfigChanged(newConfig: StarWatcherSettings.StarMapConfig) {
+        starView.showAzimuthalGrid = newConfig.showAzimuthalGrid
+        starView.showEquatorialGrid = newConfig.showEquatorialGrid
+        starView.showEclipticLine = newConfig.showEclipticLine
+        starView.showMeridianLine = newConfig.showMeridianLine
+        starView.showEquatorLine = newConfig.showEquatorLine
+        starView.showGalacticLine = newConfig.showGalacticLine
+        starView.showFavorites = newConfig.showFavorites
+
+        starView.showSun = newConfig.showSun
+        starView.showMoon = newConfig.showMoon
+        starView.showPlanets = newConfig.showPlanets
+
+        starView.showConstellations = newConfig.showConstellations
+        starView.showStars = newConfig.showStars
+        starView.showGalaxies = newConfig.showGalaxies
+        starView.showNebulae = newConfig.showNebulae
+        starView.showOpenClusters = newConfig.showOpenClusters
+        starView.showGlobularClusters = newConfig.showGlobularClusters
+        starView.showGalaxyClusters = newConfig.showGalaxyClusters
+        starView.showBlackHoles = newConfig.showBlackHoles
+
+        starView.updateVisibility()
+
+        swSettings.setStarMapConfig(newConfig)
+    }
+
+    override fun getAstroConfig(): StarWatcherSettings.StarMapConfig {
+        return swSettings.getStarMapConfig()
+    }
 }
