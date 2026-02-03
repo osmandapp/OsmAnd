@@ -19,8 +19,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView.TouchListener;
 import net.osmand.plus.views.Zoom.ComplexZoom;
@@ -38,25 +36,25 @@ public class AnimateDraggingMapThread implements TouchListener {
 
 	protected static final Log log = PlatformUtil.getLog(AnimateDraggingMapThread.class);
 
-	private static final float DRAGGING_ANIMATION_TIME = 1200f;
-	public static final float ZOOM_ANIMATION_TIME = 250f;
-	private static final float ZOOM_MOVE_ANIMATION_TIME = 350f;
-	private static final float MOVE_MOVE_ANIMATION_TIME = 900f;
-	public static final float NAV_ANIMATION_TIME = 1000f;
-	private static final int DEFAULT_SLEEP_TO_REDRAW = 15;
-	private static final float ROTATION_ANIMATION_TIME = 250f;
-	private static final float ROTATION_MOVE_ANIMATION_TIME = 1000f;
-	private static final float SKIP_ANIMATION_TIMEOUT = 10000f;
-	public static final float SKIP_ANIMATION_DP_THRESHOLD = 20f;
-	public static final float TILT_ANIMATION_TIME = 400f;
-
-	public static final int TARGET_NO_ROTATION = -720;
-
-	private static final float TARGET_MOVE_VELOCITY_LIMIT = 4000f;
-	private static final float TARGET_MOVE_DECELERATION = 6000f;
-
-	private static final float MIN_INTERPOLATION_TO_JOIN_ANIMATION = 0.8f;
-	private static final float MAX_OX_OY_SUM_DELTA_TO_ANIMATE = 2400f;
+	// CONSTANTS though make them modifiable for experiements as used in library
+	public static float DRAGGING_ANIMATION_TIME = 1200f;
+	public static float ZOOM_ANIMATION_TIME = 250f;
+	public static float ZOOM_MOVE_ANIMATION_TIME = 350f;
+	public static float MOVE_MOVE_ANIMATION_TIME = 900f;
+	public static float NAV_ANIMATION_TIME = 1000f;
+	public static int DEFAULT_SLEEP_TO_REDRAW = 15;
+	public static float ROTATION_ANIMATION_TIME = 250f;
+	public static float ROTATION_MOVE_ANIMATION_TIME = 1000f;
+	public static float SKIP_ANIMATION_TIMEOUT = 10000f;
+	public static float SKIP_ANIMATION_DP_THRESHOLD = 20f;
+	public static float TILT_ANIMATION_TIME = 400f;
+	public static int TARGET_NO_ROTATION = -720;
+	public static float TARGET_MOVE_VELOCITY_LIMIT = 4000f;
+	public static float TARGET_MOVE_DECELERATION = 6000f;
+	public static float MIN_INTERPOLATION_TO_JOIN_ANIMATION = 0.8f;
+	public static int ZOOM_DIFF_SKIP_ANIMATION = 3;
+	public static float MAX_OX_OY_SUM_DELTA_TO_ANIMATE = 2400f;
+	// CONSTANTS though make them modifiable for experiements as used in library
 
 	private final OsmandApplication app;
 	private final OsmandMapTileView tileView;
@@ -517,7 +515,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 		int moveZoom = calculateMoveZoom(rb, finalLat, finalLon, mSt);
 		boolean skipAnimation = moveZoom == 0;
 		// check if animation needed
-		skipAnimation = skipAnimation || (Math.abs(moveZoom - startZoom) >= 3 || Math.abs(endZoom - moveZoom) > 3);
+		skipAnimation = skipAnimation || (Math.abs(moveZoom - startZoom) >= ZOOM_DIFF_SKIP_ANIMATION || Math.abs(endZoom - moveZoom) > ZOOM_DIFF_SKIP_ANIMATION);
 		boolean joinAnimation = allowAnimationJoin && interpolation >= MIN_INTERPOLATION_TO_JOIN_ANIMATION;
 		if (skipAnimation || wasAnimating && !joinAnimation) {
 			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
