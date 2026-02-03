@@ -196,6 +196,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private boolean phraseDefined;
 	private boolean addressSearch;
 	private boolean citiesLoaded;
+	private List<SearchResult> loadCitiesResult;
 	private LatLon storedOriginalLocation;
 
 	private QuickSearchType searchType = QuickSearchType.REGULAR;
@@ -650,7 +651,6 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			hideKeyboard();
 			searchEditText.setText("");
 			updateTabBarVisibility(true);
-			reloadCities();
 		} else if (!processBackAction()) {
 			Dialog dialog = getDialog();
 			if (dialog != null) {
@@ -1301,9 +1301,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 		SearchResult lastCity = null;
 		if (res != null) {
+			if(!res.getCurrentSearchResults().isEmpty()) {
+				loadCitiesResult = res.getCurrentSearchResults();
+			}
 			citiesLoaded = !res.getCurrentSearchResults().isEmpty();
 			long lastCityId = settings.getLastSearchedCity();
-			for (SearchResult sr : res.getCurrentSearchResults()) {
+			for (SearchResult sr : loadCitiesResult) {
 				if (sr.objectType == ObjectType.CITY && ((City) sr.object).getId() == lastCityId) {
 					lastCity = sr;
 					break;
@@ -1393,10 +1396,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			QuickSearchCoordinatesFragment.showInstance(QuickSearchDialogFragment.this, latLon.getLatitude(), latLon.getLongitude());
 		}));
 
-		if (res != null) {
+		if (!Algorithms.isEmpty(loadCitiesResult)) {
 			rows.add(new QuickSearchHeaderListItem(app, getString(R.string.nearest_cities), true));
 			int limit = 15;
-			for (SearchResult sr : res.getCurrentSearchResults()) {
+			for (SearchResult sr : loadCitiesResult) {
 				if (limit > 0) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
