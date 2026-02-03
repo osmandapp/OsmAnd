@@ -1026,33 +1026,28 @@ public class OsmandRegions {
 		}
 	}
 
-	public List<BinaryMapDataObject> filterQueryResultByPoint(List<BinaryMapDataObject> objects, int x, int y) {
+	public List<BinaryMapDataObject> filterQueryResultsByPoint(List<BinaryMapDataObject> objects, int x, int y) {
 		List<BinaryMapDataObject> filtered = new ArrayList<>();
 		Map<String, Integer> intersectionCounter = new HashMap<>();
 		for (BinaryMapDataObject o : objects) {
 			if (OsmandRegions.contain(o, x, y)) {
-				updateIntersectionCounter(o, intersectionCounter, true);
+				String k = getDownloadName(o);
+				if (Algorithms.isEmpty(k)) {
+					continue;
+				}
+				intersectionCounter.merge(k, 1, Integer::sum);
 			}
 		}
 		for (BinaryMapDataObject o : objects) {
-			int counter = updateIntersectionCounter(o, intersectionCounter, false);
-			if (counter > 0 && counter % 2 != 0 && !o.getName().isEmpty()) {
-				filtered.add(o); // positive odd intersections => outside exclusion polygons; name required
+			String k = getDownloadName(o);
+			if (Algorithms.isEmpty(k) || o.getName().isEmpty()) {
+				continue; // both name && download_name required
+			}
+			if (intersectionCounter.getOrDefault(k, 0) % 2 == 1) {
+				filtered.add(o); // odd intersections == outside exclusion polygons
 			}
 		}
 		return filtered;
-	}
-
-	private int updateIntersectionCounter(BinaryMapDataObject o, Map<String, Integer> counter, boolean increase) {
-		String downloadName = getDownloadName(o);
-		if (Algorithms.isEmpty(downloadName)) {
-			return 0;
-		}
-		if (increase) {
-			counter.merge(downloadName, 1, Integer::sum);
-		}
-		Integer result = counter.get(downloadName);
-		return result != null ? result : 0;
 	}
 
 }

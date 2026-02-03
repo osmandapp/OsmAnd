@@ -352,7 +352,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 		try {
 			List<BinaryMapDataObject> result = osmandRegions.query(left, right, top, bottom, false);
-			return osmandRegions.filterQueryResultByPoint(result, left / 2 + right / 2, top / 2 + bottom / 2);
+			return osmandRegions.filterQueryResultsByPoint(result, left / 2 + right / 2, top / 2 + bottom / 2);
 		} catch (IOException e) {
 			return Collections.emptyList();
 		}
