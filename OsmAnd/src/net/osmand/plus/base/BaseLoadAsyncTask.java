@@ -20,7 +20,6 @@ public abstract class BaseLoadAsyncTask<Params, Progress, Result> extends AsyncT
 	protected OsmandSettings settings;
 	protected WeakReference<FragmentActivity> activityRef;
 	protected ProgressDialog progress;
-	private final OnCancelListener cancelListener = dialog -> cancel(false);
 	private boolean shouldShowProgress = true;
 
 	public BaseLoadAsyncTask(@NonNull FragmentActivity activity) {
@@ -60,7 +59,7 @@ public abstract class BaseLoadAsyncTask<Params, Progress, Result> extends AsyncT
 			if (cancelableOnTouchOutside) {
 				progress.setCanceledOnTouchOutside(true);
 			}
-			progress.setOnCancelListener(cancelListener);
+			progress.setOnCancelListener(getCancelListener());
 		}
 	}
 
@@ -70,4 +69,15 @@ public abstract class BaseLoadAsyncTask<Params, Progress, Result> extends AsyncT
 			progress.dismiss();
 		}
 	}
+
+	private OnCancelListener getCancelListener() {
+		return dialog -> {
+			onDialogCancelled();
+			cancel(false);
+		};
+	}
+
+	protected void onDialogCancelled() {
+	}
+
 }

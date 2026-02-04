@@ -6,7 +6,9 @@
 	android:clipChildren="false"
 	android:clipToPadding="false"
 	android:orientation="horizontal"
-	android:padding="@dimen/content_padding_medium">
+	android:paddingTop="@dimen/content_padding"
+	android:paddingBottom="@dimen/content_padding_half"
+	android:paddingHorizontal="@dimen/measurement_tool_menu_title_padding_bottom">
 
 	<LinearLayout
 		android:id="@+id/speedometer_container"
@@ -58,7 +60,6 @@
 		android:layout_width="72dp"
 		android:layout_height="72dp"
 		android:layout_gravity="center"
-		android:layout_marginVertical="9dp"
 		android:background="@drawable/speed_limit_shape"
 		android:elevation="2dp"
 		android:gravity="center"

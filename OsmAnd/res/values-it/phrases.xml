@@ -610,7 +610,7 @@
     <string name="poi_sailing">Vela</string>
     <string name="poi_religious">Luogo di culto</string>
     <string name="poi_internet_access_service">Accesso a Internet: servizio</string>
-    <string name="poi_internet_access_wlan">Accesso a Internet: WLAN</string>
+    <string name="poi_internet_access_wlan">Accesso a Internet: wlan</string>
     <string name="poi_internet_access_terminal">Accesso a Internet: terminale</string>
     <string name="poi_internet_access_wired">Accesso a Internet: via cavo</string>
     <string name="poi_internet_access_public">Accesso a Internet: pubblico</string>

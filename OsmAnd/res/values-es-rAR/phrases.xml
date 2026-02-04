@@ -482,7 +482,7 @@
     <string name="poi_religion_shinto">Sintoísmo</string>
     <string name="poi_religion_taoist">Taoísmo</string>
     <string name="poi_internet_access_wlan">Conexión a Internet: inalámbrico (Wi-Fi)</string>
-    <string name="poi_internet_access_terminal">Conexión a Internet: PC con Internet;terminal</string>
+    <string name="poi_internet_access_terminal">Conexión a Internet: terminal (PC con Internet)</string>
     <string name="poi_internet_access_wired">Conexión a Internet: cableado</string>
     <string name="poi_internet_access_public">Conexión a Internet: público</string>
     <string name="poi_internet_access_service">Conexión a Internet: servicio</string>
@@ -1827,7 +1827,7 @@
     <string name="poi_office_camping">Oficina del campamento</string>
     <string name="poi_model_aerodrome">Pista de aeromodelismo</string>
     <string name="poi_guide">Oficina del guía</string>
-    <string name="poi_quango">ONG casi autónoma</string>
+    <string name="poi_quango">ONG cuasiautónoma</string>
     <string name="poi_consulting">Oficina de consultoría</string>
     <string name="poi_cooperative">Oficina de cooperativa</string>
     <string name="poi_office_forestry">Oficina forestal</string>

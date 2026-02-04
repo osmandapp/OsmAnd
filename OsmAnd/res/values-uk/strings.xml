@@ -5881,8 +5881,8 @@
     <string name="accessibility_independent_features">Незалежні функції</string>
     <string name="show_spherical_map_description">Відображення сфероїдальної моделі Землі</string>
     <string name="shared_string_price">Ціна</string>
-    <string name="rendering_attr_showSkiSlopes_name">Показати гірськолижні схили</string>
-    <string name="rendering_attr_showSkiSlopes_description">Показати спрощені гірськолижні схили</string>
+    <string name="rendering_attr_showSkiSlopes_name">Показати гірськолижні траси</string>
+    <string name="rendering_attr_showSkiSlopes_description">Показати спрощені гірськолижні траси</string>
     <string name="track_folder_appearance">Зовнішній вигляд папки треків</string>
     <string name="update_maps">Оновити карти</string>
     <string name="reconnect">Знову підключитися</string>
@@ -5894,7 +5894,7 @@
     <string name="average_slope">Середній нахил</string>
     <string name="shared_string_last_uphill">Останній підйом</string>
     <string name="shared_string_last_downhill">Останній спуск</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Гірськолижні схили та маршрути</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Гірськолижні траси та маршрути</string>
     <string name="rendering_attr_pisteRoutes_name">Гірськолижні схили та маршрути</string>
     <string name="requires_internet_connection">Потрібне підключення до Інтернету</string>
     <string name="save_and_access_articles_offline">Зберігайте дані та отримуйте доступ до статей офлайн будь-де</string>

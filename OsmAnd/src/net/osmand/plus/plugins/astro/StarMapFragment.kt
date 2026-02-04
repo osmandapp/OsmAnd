@@ -101,13 +101,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	internal lateinit var viewModel: StarObjectsViewModel
 	private var selectedObject: SkyObject? = null
-	private var regularMapVisible = false
+	var regularMapVisible = false
+		private set
 
 	private val dataProvider: AstroDataProvider by lazy {
 		PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).astroDataProvider
 	}
 
-	private val swSettings: StarWatcherSettings by lazy {
+	val swSettings: StarWatcherSettings by lazy {
 		PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
 	}
 
@@ -167,6 +168,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			updateBackPressedCallback()
 		}
 	}
+
+	override fun getStatusBarColorId(): Int = ColorUtilities.getStatusBarSecondaryColorId(true)
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 		val view = themedInflater.inflate(R.layout.fragment_star_map, container, false)
@@ -283,7 +286,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 					}
 					dialog.show(childFragmentManager, tag)
 				} else {
-					// FragmentManager will bring it back if it's in the backstack and we pop it
+					// FragmentManager will bring it back if it's in the backstack, and we pop it
 					// but here we just show it if it was added but not visible.
 					if (dialog.isHidden) {
 						childFragmentManager.beginTransaction().show(dialog).commit()
@@ -294,19 +297,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		settingsButton = view.findViewById(R.id.settings_button)
 		settingsButton.apply {
 			setOnClickListener {
-				AstroUtils.showStarMapOptionsDialog(context, starView, swSettings) {
-					commonConfig: CommonConfig, starMapConfig: StarMapConfig ->
-
-					if (starView.is2DMode != starMapConfig.is2DMode) {
-						starView.is2DMode = starMapConfig.is2DMode
-						apply2DMode(!starMapConfig.is2DMode)
-					}
-					showMagnitudeFilter = starMapConfig.showMagnitudeFilter
-					updateMagnitudeFilterVisibility()
-					if (regularMapVisible != commonConfig.showRegularMap) {
-						updateRegularMapVisibility(commonConfig.showRegularMap)
-					}
-				}
+				val sheet = AstroConfigureViewBottomSheet()
+				sheet.show(
+					childFragmentManager,
+					AstroConfigureViewBottomSheet.TAG
+				)
 			}
 		}
 
@@ -564,7 +559,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private fun setAzimuth(azimuth: Double, animate: Boolean = false) {
 		starView.setAzimuth(azimuth, animate)
-		compassButton?.update(-azimuth.toFloat(), animate)
+		compassButton.update(-azimuth.toFloat(), animate)
 		lastUpdatedAzimuth = azimuth
 	}
 
@@ -637,6 +632,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		applyBottomInsets()
 	}
 
+	fun setRegularMapVisibility(enabled: Boolean) {
+		updateRegularMapVisibility(enabled)
+		saveCommonSettings()
+	}
+
 	private fun updateStarChartVisibility(visible: Boolean) {
 		starChartsView.visibility = if (visible) View.VISIBLE else View.GONE
 	}
@@ -676,6 +676,33 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		swSettings.setStarMapConfig(config)
 	}
 
+	fun setStarMapSettings(newConfig: StarMapConfig) {
+		starView.showAzimuthalGrid = newConfig.showAzimuthalGrid
+		starView.showEquatorialGrid = newConfig.showEquatorialGrid
+		starView.showEclipticLine = newConfig.showEclipticLine
+		starView.showMeridianLine = newConfig.showMeridianLine
+		starView.showEquatorLine = newConfig.showEquatorLine
+		starView.showGalacticLine = newConfig.showGalacticLine
+		starView.showFavorites = newConfig.showFavorites
+
+		starView.showSun = newConfig.showSun
+		starView.showMoon = newConfig.showMoon
+		starView.showPlanets = newConfig.showPlanets
+
+		starView.showConstellations = newConfig.showConstellations
+		starView.showStars = newConfig.showStars
+		starView.showGalaxies = newConfig.showGalaxies
+		starView.showNebulae = newConfig.showNebulae
+		starView.showOpenClusters = newConfig.showOpenClusters
+		starView.showGlobularClusters = newConfig.showGlobularClusters
+		starView.showGalaxyClusters = newConfig.showGalaxyClusters
+		starView.showBlackHoles = newConfig.showBlackHoles
+
+		starView.updateVisibility()
+
+		swSettings.setStarMapConfig(newConfig)
+	}
+
 	private fun updateMagnitudeFilterVisibility() {
 		val visible = starView.showStars && starView.isVisible && showMagnitudeFilter
 		magnitudeSliderContainer.visibility = if (visible) View.VISIBLE else View.GONE
@@ -686,10 +713,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private fun updateWidgetsVisibility(activity: MapActivity, visibility: Int) {
 		AndroidUiHelper.setVisibility(activity, visibility, R.id.map_left_widgets_panel,
 			R.id.map_right_widgets_panel, R.id.map_center_info)
-	}
-
-	private fun toggle2DMode() {
-		apply2DMode(!starView.is2DMode)
 	}
 
 	private fun apply2DMode(is2D: Boolean) {

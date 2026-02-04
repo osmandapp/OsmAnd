@@ -10,6 +10,18 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="astro_rendering">Rendering</string>
+	<string name="astro_configure_view">Configure view</string>
+	<string name="astro_visible_objects">Visible objects</string>
+	<string name="red_filter">Red filter</string>
+	<string name="astro_directions">Directions</string>
+	<string name="astro_daily_path">Daily Path</string>
+	<string name="map_2d">2D</string>
+	<string name="map_3d">3D</string>
+	<string name="astro_deep_sky">Deep sky</string>
+	<string name="astro_star_clusters">Star clusters</string>
+	<string name="astro_nebulas">Nebulas</string>
+	<string name="astro_solar_system">Solar system</string>
 	<string name="galactic_line">Galactic Line</string>
 	<string name="meridian_line">Meridian Line</string>
 	<string name="equator_line">Equator Line</string>
