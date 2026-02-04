@@ -38,6 +38,7 @@
 		tools:tint="?attr/default_icon_color" />
 
 	<LinearLayout
+		android:id="@+id/content_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginStart="@dimen/content_padding"
@@ -71,6 +72,19 @@
 					android:layout_height="wrap_content"
 					android:layout_marginBottom="@dimen/content_padding_small"
 					android:orientation="horizontal">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/prefix_description"
+						style="@style/DescStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:ellipsize="marquee"
+						android:maxLines="1"
+						android:textColor="?android:textColorSecondary"
+						tools:text="28.12.2022"
+						android:visibility="gone"
+						tools:visibility="visible"/>
 
 					<ImageView
 						android:id="@+id/direction_icon"

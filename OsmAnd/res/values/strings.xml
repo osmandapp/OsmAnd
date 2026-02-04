@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="favorite_search_empty_state_description">Adjust your search or filters to see if that helps</string>
+    <string name="favorites_empty_folder_description">This folder doesn\’t have any track yet.</string>
 	<string name="galactic_line">Galactic Line</string>
 	<string name="meridian_line">Meridian Line</string>
 	<string name="equator_line">Equator Line</string>

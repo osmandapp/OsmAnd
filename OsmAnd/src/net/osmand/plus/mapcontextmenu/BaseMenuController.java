@@ -18,12 +18,17 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 public abstract class BaseMenuController {
 
 	@NonNull
-	private final OsmandApplication app;
+	protected final OsmandApplication app;
 	@Nullable
 	private MapActivity mapActivity;
 	private boolean portraitMode;
 	private int landscapeWidthPx;
 	protected boolean nightMode;
+
+	public BaseMenuController(@NonNull OsmandApplication app) {
+		this.app = app;
+		init();
+	}
 
 	public BaseMenuController(@NonNull MapActivity mapActivity) {
 		this.app = mapActivity.getApp();
@@ -32,11 +37,9 @@ public abstract class BaseMenuController {
 	}
 
 	private void init() {
-		if (mapActivity != null) {
-			portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			landscapeWidthPx = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
-			updateNightMode();
-		}
+		portraitMode = AndroidUiHelper.isOrientationPortrait(app);
+		landscapeWidthPx = app.getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
+		updateNightMode();
 	}
 
 	@Nullable
@@ -56,9 +59,7 @@ public abstract class BaseMenuController {
 	}
 
 	public void updateNightMode() {
-		if (mapActivity != null) {
-			nightMode = mapActivity.getApp().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
-		}
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 
 	public boolean isLandscapeLayout() {
@@ -75,7 +76,7 @@ public abstract class BaseMenuController {
 
 	public int getSlideInAnimation() {
 		if (isLandscapeLayout()) {
-			return AndroidUtils.isLayoutRtl(getMapActivity())
+			return AndroidUtils.isLayoutRtl(app)
 					? R.anim.slide_in_right : R.anim.slide_in_left;
 		} else {
 			return R.anim.slide_in_bottom;
@@ -84,7 +85,7 @@ public abstract class BaseMenuController {
 
 	public int getSlideOutAnimation() {
 		if (isLandscapeLayout()) {
-			return AndroidUtils.isLayoutRtl(getMapActivity())
+			return AndroidUtils.isLayoutRtl(app)
 					? R.anim.slide_out_right : R.anim.slide_out_left;
 		} else {
 			return R.anim.slide_out_bottom;
@@ -92,12 +93,9 @@ public abstract class BaseMenuController {
 	}
 
 	protected Drawable getIconOrig(int iconId) {
-		if (mapActivity != null) {
-			UiUtilities iconsCache = mapActivity.getApp().getUIUtilities();
-			return iconsCache.getIcon(iconId, 0);
-		} else {
-			return null;
-		}
+		UiUtilities iconsCache = app.getUIUtilities();
+		return iconsCache.getIcon(iconId, 0);
+
 	}
 
 	protected Drawable getIcon(int iconId) {
@@ -105,17 +103,13 @@ public abstract class BaseMenuController {
 	}
 
 	protected Drawable getIcon(int iconId, int colorId) {
-		if (mapActivity != null) {
-			UiUtilities iconsCache = mapActivity.getApp().getUIUtilities();
-			return iconsCache.getIcon(iconId, colorId);
-		} else {
-			return null;
-		}
+		UiUtilities iconsCache = app.getUIUtilities();
+		return iconsCache.getIcon(iconId, colorId);
 	}
 
 	@NonNull
 	protected String getString(@StringRes int resId, Object... formatArgs) {
-		return mapActivity != null ? mapActivity.getString(resId, formatArgs) : "";
+		return app.getString(resId, formatArgs);
 	}
 
     @NonNull

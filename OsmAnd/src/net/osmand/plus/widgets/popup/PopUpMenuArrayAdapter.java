@@ -57,6 +57,10 @@ public class PopUpMenuArrayAdapter extends ArrayAdapter<PopUpMenuItem> {
 			if (titleColor != null) {
 				tvTitle.setTextColor(titleColor);
 			}
+			Integer titleSize = item.getTitleSize();
+			if (titleSize != null) {
+				tvTitle.setTextSize(titleSize);
+			}
 			ImageView ivIcon = convertView.findViewById(R.id.icon);
 			Drawable icon = item.getIcon();
 			if (icon != null) {
