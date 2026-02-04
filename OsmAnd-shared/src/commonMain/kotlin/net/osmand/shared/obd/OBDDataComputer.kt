@@ -25,7 +25,7 @@ object OBDDataComputer {
 
 	private val log = LoggerFactory.getLogger("OBDDataComputer")
 
-	private val osmAndSettings: SettingsAPI = PlatformUtil.getOsmAndContext().getSettings()
+	private val osmAndSettings: SettingsAPI? = PlatformUtil.getOsmAndContext().getSettings()
 	const val DEFAULT_FUEL_TANK_CAPACITY = 52f
 	private const val SAME_FUEL_LVL_SEQUENCE_LENGTH = 5
 	private const val FUEL_TANK_CAPACITY_SETTING_ID = "fuel_tank_capacity"
@@ -556,7 +556,7 @@ object OBDDataComputer {
 	}
 
 	private fun getFuelTank(): Float {
-		val fuelTank = osmAndSettings.getFloatPreference(FUEL_TANK_CAPACITY_SETTING_ID)
+		val fuelTank = osmAndSettings?.getFloatPreference(FUEL_TANK_CAPACITY_SETTING_ID)
 		return fuelTank ?: DEFAULT_FUEL_TANK_CAPACITY
 	}
 }

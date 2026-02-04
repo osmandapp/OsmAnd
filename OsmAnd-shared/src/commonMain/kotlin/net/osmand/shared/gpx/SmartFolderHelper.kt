@@ -24,13 +24,13 @@ import net.osmand.shared.util.PlatformUtil
 
 object SmartFolderHelper {
 
-	private const val TRACK_FILTERS_SETTINGS_PREF = "track_filters_settings_pref"
+	const val TRACK_FILTERS_SETTINGS_PREF = "track_filters_settings_pref"
 
 	private var smartFolderCollection: List<SmartFolder> = listOf()
 	private var allAvailableTrackItems = HashSet<TrackItem>()
 	private var updateListeners: List<SmartFolderUpdateListener> = listOf()
 	private var isWritingSettings = false
-	private val osmAndSettings: SettingsAPI = PlatformUtil.getOsmAndContext().getSettings()
+	private val osmAndSettings: SettingsAPI? = PlatformUtil.getOsmAndContext().getSettings()
 	private val settingsChangedListener = object : KStateChangedListener<String> {
 		override fun stateChanged(change: String) {
 			onSettingsChanged()
@@ -57,9 +57,11 @@ object SmartFolderHelper {
 	}
 
 	init {
-		osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "", true, true)
-		osmAndSettings.addStringPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
-		readSettings()
+		if (osmAndSettings != null) {
+			osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "", true, true)
+			osmAndSettings.addStringPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
+			readSettings()
+		}
 	}
 
 	private fun onSettingsChanged() {
@@ -69,8 +71,12 @@ object SmartFolderHelper {
 	}
 
 	private fun readSettings() {
+		val settingsJson = osmAndSettings?.getStringPreference(TRACK_FILTERS_SETTINGS_PREF)
+		readJson(settingsJson)
+	}
+
+	fun readJson(settingsJson: String?) {
 		val newCollection = ArrayList<SmartFolder>()
-		val settingsJson = osmAndSettings.getStringPreference(TRACK_FILTERS_SETTINGS_PREF)
 		if (!KAlgorithms.isEmpty(settingsJson)) {
 			TrackFilterList.parseFilters(settingsJson!!)?.let { savedFilters ->
 				for (smartFolder in savedFilters) {
@@ -179,7 +185,7 @@ object SmartFolderHelper {
 	private fun writeSettings() {
 		isWritingSettings = true
 		val json = json.encodeToString(smartFolderCollection)
-		osmAndSettings.setStringPreference(TRACK_FILTERS_SETTINGS_PREF, json)
+		osmAndSettings?.setStringPreference(TRACK_FILTERS_SETTINGS_PREF, json)
 		isWritingSettings = false
 	}
 
