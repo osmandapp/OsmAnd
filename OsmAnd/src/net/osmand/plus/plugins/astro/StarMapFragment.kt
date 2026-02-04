@@ -169,8 +169,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 	}
 
-	override fun getStatusBarColorId(): Int = ColorUtilities.getStatusBarSecondaryColorId(true)
-
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 		val view = themedInflater.inflate(R.layout.fragment_star_map, container, false)
 
@@ -715,7 +713,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			R.id.map_right_widgets_panel, R.id.map_center_info)
 	}
 
-	private fun apply2DMode(is2D: Boolean) {
+	fun apply2DMode(is2D: Boolean) {
 		if (is2D) {
 			previousAltitude = starView.getAltitude()
 			previousAzimuth = starView.getAzimuth()

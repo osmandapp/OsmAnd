@@ -167,7 +167,8 @@
 				android:elevation="10dp"
 				android:visibility="gone"
 				app:layout_constraintBottom_toTopOf="@id/time_control_card"
-				app:layout_constraintStart_toStartOf="@id/time_control_card" />
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintEnd_toEndOf="parent" />
 
 			<TextView
 				android:id="@+id/magnitude_value_text"

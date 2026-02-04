@@ -102,7 +102,7 @@ class AstroConfigureViewBottomSheet :
 				activeColor
 			),
 			toggle = { enabled3d ->
-				requireStarMap().starView.is2DMode = !enabled3d
+				requireStarMap().apply2DMode(!enabled3d)
 			}
 		)
 
