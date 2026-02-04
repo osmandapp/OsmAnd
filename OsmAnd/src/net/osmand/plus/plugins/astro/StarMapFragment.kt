@@ -53,7 +53,7 @@ import kotlin.math.abs
 
 
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
-	OsmAndCompassListener, AstroConfigureViewBottomSheet.AstroConfigScreenListener {
+	OsmAndCompassListener {
 
 	private val REGULAR_MAP_HEIGHT = 300f
 
@@ -91,13 +91,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	internal lateinit var viewModel: StarObjectsViewModel
 	private var selectedObject: SkyObject? = null
-	private var regularMapVisible = false
+	var regularMapVisible = false
+		private set
 
 	private val dataProvider: AstroDataProvider by lazy {
 		PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).astroDataProvider
 	}
 
-	private val swSettings: StarWatcherSettings by lazy {
+	val swSettings: StarWatcherSettings by lazy {
 		PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
 	}
 
@@ -564,6 +565,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		applyWindowInsets(starMapButton, visible)
 	}
 
+	fun setRegularMapVisibility(enabled: Boolean) {
+		updateRegularMapVisibility(enabled)
+		saveCommonSettings()
+	}
+
 	private fun updateStarChartVisibility(visible: Boolean) {
 		starChartsView.visibility = if (visible) View.VISIBLE else View.GONE
 	}
@@ -601,6 +607,33 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			magnitudeFilter = starView.magnitudeFilter?.toDouble()
 		)
 		swSettings.setStarMapConfig(config)
+	}
+
+	fun setStarMapSettings(newConfig: StarWatcherSettings.StarMapConfig) {
+		starView.showAzimuthalGrid = newConfig.showAzimuthalGrid
+		starView.showEquatorialGrid = newConfig.showEquatorialGrid
+		starView.showEclipticLine = newConfig.showEclipticLine
+		starView.showMeridianLine = newConfig.showMeridianLine
+		starView.showEquatorLine = newConfig.showEquatorLine
+		starView.showGalacticLine = newConfig.showGalacticLine
+		starView.showFavorites = newConfig.showFavorites
+
+		starView.showSun = newConfig.showSun
+		starView.showMoon = newConfig.showMoon
+		starView.showPlanets = newConfig.showPlanets
+
+		starView.showConstellations = newConfig.showConstellations
+		starView.showStars = newConfig.showStars
+		starView.showGalaxies = newConfig.showGalaxies
+		starView.showNebulae = newConfig.showNebulae
+		starView.showOpenClusters = newConfig.showOpenClusters
+		starView.showGlobularClusters = newConfig.showGlobularClusters
+		starView.showGalaxyClusters = newConfig.showGalaxyClusters
+		starView.showBlackHoles = newConfig.showBlackHoles
+
+		starView.updateVisibility()
+
+		swSettings.setStarMapConfig(newConfig)
 	}
 
 	private fun updateMagnitudeFilterVisibility() {
@@ -853,52 +886,4 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		updateImageButtonTheme(resetBtn)
 	}
-
-    override fun is2dModeEnabled(): Boolean {
-        return starView.is2DMode
-    }
-
-    override fun set2dModeEnabled(enabled: Boolean) {
-        apply2DMode(enabled)
-    }
-
-    override fun isRegularMapEnabled(): Boolean {
-        return regularMapVisible
-    }
-
-    override fun setRegularMapEnabled(enabled: Boolean) {
-        updateRegularMapVisibility(enabled)
-        saveCommonSettings()
-    }
-
-    override fun onAstroConfigChanged(newConfig: StarWatcherSettings.StarMapConfig) {
-        starView.showAzimuthalGrid = newConfig.showAzimuthalGrid
-        starView.showEquatorialGrid = newConfig.showEquatorialGrid
-        starView.showEclipticLine = newConfig.showEclipticLine
-        starView.showMeridianLine = newConfig.showMeridianLine
-        starView.showEquatorLine = newConfig.showEquatorLine
-        starView.showGalacticLine = newConfig.showGalacticLine
-        starView.showFavorites = newConfig.showFavorites
-
-        starView.showSun = newConfig.showSun
-        starView.showMoon = newConfig.showMoon
-        starView.showPlanets = newConfig.showPlanets
-
-        starView.showConstellations = newConfig.showConstellations
-        starView.showStars = newConfig.showStars
-        starView.showGalaxies = newConfig.showGalaxies
-        starView.showNebulae = newConfig.showNebulae
-        starView.showOpenClusters = newConfig.showOpenClusters
-        starView.showGlobularClusters = newConfig.showGlobularClusters
-        starView.showGalaxyClusters = newConfig.showGalaxyClusters
-        starView.showBlackHoles = newConfig.showBlackHoles
-
-        starView.updateVisibility()
-
-        swSettings.setStarMapConfig(newConfig)
-    }
-
-    override fun getAstroConfig(): StarWatcherSettings.StarMapConfig {
-        return swSettings.getStarMapConfig()
-    }
 }

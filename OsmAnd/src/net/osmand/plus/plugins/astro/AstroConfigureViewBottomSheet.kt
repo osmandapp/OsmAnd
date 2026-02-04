@@ -28,22 +28,12 @@ import net.osmand.plus.utils.UiUtilities
 class AstroConfigureViewBottomSheet :
     BaseMaterialBottomSheetDialogFragment() {
 
-    private lateinit var configScreenListener: AstroConfigScreenListener
     private lateinit var mainView: View
     private var behavior: BottomSheetBehavior<FrameLayout>? = null
 
 
     companion object {
         val TAG: String = AstroConfigureViewBottomSheet::class.java.simpleName
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (parentFragment is AstroConfigScreenListener) {
-            configScreenListener = parentFragment as AstroConfigScreenListener
-        } else {
-            dismiss()
-        }
     }
 
     override fun onCreateView(
@@ -101,7 +91,7 @@ class AstroConfigureViewBottomSheet :
 
         bindToggleMapActionCard(
             card = root.findViewById(R.id.button_3d),
-            isChecked = { !configScreenListener.is2dModeEnabled() },
+            isChecked = { !requireStarMap().starView.is2DMode },
             titleResEnabled = R.string.map_3d,
             titleResDisabled = R.string.map_2d,
             drawableEnabled = uiUtilities.getIcon(R.drawable.ic_action_globe_view, activeColor),
@@ -110,18 +100,18 @@ class AstroConfigureViewBottomSheet :
                 activeColor
             ),
             toggle = { enabled3d ->
-                configScreenListener.set2dModeEnabled(!enabled3d)
+				requireStarMap().starView.is2DMode = !enabled3d
             }
         )
 
         bindToggleMapActionCard(
             card = root.findViewById(R.id.button_map),
-            isChecked = { configScreenListener.isRegularMapEnabled() },
+            isChecked = { requireStarMap().regularMapVisible },
             titleResEnabled = R.string.shared_string_map,
             drawableEnabled = uiUtilities.getIcon(R.drawable.ic_map, activeColor),
             drawableDisabled = uiUtilities.getIcon(R.drawable.ic_action_map_outlined, activeColor),
             toggle = { regularMap ->
-                configScreenListener.setRegularMapEnabled(regularMap)
+                requireStarMap().setRegularMapVisibility(regularMap)
             }
         )
 
@@ -429,23 +419,20 @@ class AstroConfigureViewBottomSheet :
         imageView.setImageDrawable(imageDrawable)
     }
 
+	private fun requireStarMap(): StarMapFragment =
+		(parentFragment as? StarMapFragment)
+			?: run {
+				dismissAllowingStateLoss()
+				throw IllegalStateException(
+					"Wrong parent fragment for ${this::class.java.simpleName}"
+				)
+			}
+
     private fun requireConfig(): StarWatcherSettings.StarMapConfig {
-        return configScreenListener.getAstroConfig()
+		return requireStarMap().swSettings.getStarMapConfig()
     }
 
     private fun applyConfigChange(newConfig: StarWatcherSettings.StarMapConfig) {
-        configScreenListener.onAstroConfigChanged(newConfig)
-    }
-
-    interface AstroConfigScreenListener {
-        fun is2dModeEnabled(): Boolean
-
-        fun set2dModeEnabled(enabled: Boolean)
-
-        fun isRegularMapEnabled(): Boolean
-
-        fun setRegularMapEnabled(enabled: Boolean)
-        fun onAstroConfigChanged(newConfig: StarWatcherSettings.StarMapConfig)
-        fun getAstroConfig(): StarWatcherSettings.StarMapConfig
+        requireStarMap().setStarMapSettings(newConfig)
     }
 }
