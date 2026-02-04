@@ -2,7 +2,6 @@ package net.osmand.plus.helpers;
 
 import static net.osmand.IndexConstants.TXT_EXT;
 
-import android.os.AsyncTask;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -28,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Deprecated
 public class ColorPaletteHelper {
 
 	public static final String ROUTE_PREFIX = "route_";
@@ -41,6 +41,7 @@ public class ColorPaletteHelper {
 		this.app = app;
 	}
 
+	@NonNull
 	public Map<String, Pair<ColorPalette, Long>> getPalletsForType(@NonNull Object gradientType) {
 		Map<String, Pair<ColorPalette, Long>> colorPalettes = new HashMap<>();
 		if (gradientType instanceof ColorizationType) {
@@ -51,7 +52,7 @@ public class ColorPaletteHelper {
 		return colorPalettes;
 	}
 
-	private Map<String, Pair<ColorPalette, Long>> getColorizationTypePallets(@NonNull ColorizationType type){
+	private Map<String, Pair<ColorPalette, Long>> getColorizationTypePallets(@NonNull ColorizationType type) {
 		Map<String, Pair<ColorPalette, Long>> colorPalettes = new HashMap<>();
 		String colorTypePrefix = ROUTE_PREFIX + type.name().toLowerCase() + GRADIENT_ID_SPLITTER;
 
@@ -74,7 +75,7 @@ public class ColorPaletteHelper {
 		Map<String, Pair<ColorPalette, Long>> colorPalettes = new HashMap<>();
 		for (TerrainMode mode : TerrainMode.values(app)) {
 			if (mode.getType() == type) {
-				String fileName = mode.getMainFile();
+				String fileName = mode.getMainFileName();
 				KFile file = new KFile(getColorPaletteDir(), fileName);
 				ColorPalette colorPalette = getGradientColorPalette(fileName);
 				if (colorPalette != null && file.exists()) {
@@ -130,7 +131,7 @@ public class ColorPaletteHelper {
 
 	public void getColorPaletteAsync(@NonNull String modeKey, @NonNull CollectColorPalletListener listener) {
 		TerrainMode mode = TerrainMode.getByKey(modeKey);
-		String colorPaletteFileName = mode.getMainFile();
+		String colorPaletteFileName = mode.getMainFileName();
 		getGradientColorPaletteAsync(colorPaletteFileName, listener);
 	}
 

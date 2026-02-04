@@ -10,5 +10,5 @@ object NoUnit : MeasurementUnit<Nothing> {
 	override fun getSymbol(): String = ""
 
 	// override T-based methods if necessary, but for NONE we can just ignore T
-	override fun from(value: Double, sourceUnit: Nothing): Double = value
+	override fun from(value: Double, sourceUnit: MeasurementUnit<*>): Double = value
 }

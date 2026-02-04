@@ -13,6 +13,7 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.io.IOException;
 
+// TODO: check and delete
 public class DuplicateGradientTask extends AsyncTask<Void, Void, Boolean> {
 
 	private final OsmandApplication app;

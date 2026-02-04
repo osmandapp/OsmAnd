@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
-import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
+import net.osmand.shared.palette.data.PaletteUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.shared.routing.ColoringType;
 
@@ -34,7 +34,7 @@ public class PreviewRouteLineInfo {
 	@ColorInt
 	private int customColorNight;
 	private ColoringType coloringType = ColoringType.DEFAULT;
-	private String gradientPalette = PaletteGradientColor.DEFAULT_NAME;
+	private String gradientPalette = PaletteUtils.DEFAULT_NAME;
 	private String routeInfoAttribute;
 	private String width;
 	private boolean showTurnArrows;

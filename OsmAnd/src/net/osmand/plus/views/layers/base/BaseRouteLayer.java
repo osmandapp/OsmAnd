@@ -15,7 +15,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -27,6 +26,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.shared.palette.data.PaletteUtils;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 
@@ -46,7 +46,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 
 	protected PreviewRouteLineInfo previewRouteLineInfo;
 	protected ColoringType routeColoringType = ColoringType.DEFAULT;
-	protected String routeGradientPalette = PaletteGradientColor.DEFAULT_NAME;
+	protected String routeGradientPalette = PaletteUtils.DEFAULT_NAME;
 	protected String routeInfoAttribute;
 
 	protected RenderingLineAttributes attrs;

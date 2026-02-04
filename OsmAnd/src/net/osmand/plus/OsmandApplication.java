@@ -128,6 +128,7 @@ import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.shared.io.KFile;
+import net.osmand.shared.palette.data.PaletteRepository;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 
@@ -174,7 +175,8 @@ public class OsmandApplication extends MultiDexApplication {
 	CommandPlayer player;
 	GpxSelectionHelper selectedGpxHelper;
 	GpxDisplayHelper gpxDisplayHelper;
-	ColorPaletteHelper colorPaletteHelper;
+	ColorPaletteHelper colorPaletteHelper; // TODO: remove
+	PaletteRepository paletteRepository;
 	SavingTrackHelper savingTrackHelper;
 	AnalyticsHelper analyticsHelper;
 	FeedbackHelper feedbackHelper;
@@ -596,6 +598,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public ColorPaletteHelper getColorPaletteHelper() {
 		return colorPaletteHelper;
+	}
+
+	public PaletteRepository getPaletteRepository() {
+		return paletteRepository;
 	}
 
 	public BackupHelper getBackupHelper() {
