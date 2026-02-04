@@ -4637,7 +4637,6 @@
     <string name="shared_string_is_open_24_7">مفتوح 7/24</string>
     <string name="online_map">خريطة إنترنت</string>
     <string name="downloaded_maps_collect_descr">يساعدنا في فهم أي الخرائط من المناطق والبلدان الأكثر شعبية.</string>
-    <string name="backup_deleted_all_data">حذف جميع البيانات.</string>
     <string name="select_nav_profile_dialog_message">\'نوع التنقل\' يحدد كيفية حساب المسارات عبر محركات توجيه متاحة بالانترنت و بدونها.</string>
     <string name="shared_string_settings">إعدادات</string>
     <string name="regions">المناطق</string>
@@ -5407,7 +5406,6 @@
     <string name="coordinates_format">صيغ الإحداثيات</string>
     <string name="quick_action_hillshade_descr">زر لإظهار وإخفاء التلال على الخريطة.</string>
     <string name="remove_the_tag">إزالة الوسم</string>
-    <string name="backup_deleting_all_data">جاري حذف جميع البيانات…</string>
     <string name="release_3_7">• خرائط جديدة للتضاريس توضح المنحدرات من دون الحاجة للاتصال بالإنترنت \n \n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال \n \n • تخصيص ترتيب العناصر في القائمة السفلية ، تكوين الخريطة ، القائمة الجانبية \n \n • عرض ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط \n \n • إنشاء مرشح / خرائط للمعالم الخاصة بك مع مرونة تامة \n \n • تمت إضافة خيارات لاستعادة إعدادات الأوضاع المخصصة \n \n • مسارات GPX كاملة من الممرات دعم حركة المرور وتعليمات كاملة \n \n • إصلاح أحجام واجهة المستخدم على الأجهزة اللوحية \n \n • إصلاح الخلل مع اللغات التي تكتب من اليمين \n \n</string>
     <string name="delete_map_description">هل أنت متأكد من أنك تريد حذف خريطة %1$s؟</string>
     <string name="lang_de_casual">الألمانية (العادية)</string>

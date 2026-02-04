@@ -198,7 +198,9 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 		builder.setPositiveButton(R.string.shared_string_continue, (dialog, id) -> dialog.dismiss());
 
 		builder.setNeutralButton(R.string.stop_and_exit, (dialog, id) -> {
-			stopTaskListener.onStopTask();
+			if (stopTaskListener != null) {
+				stopTaskListener.onStopTask();
+			}
 			dialog.dismiss();
 			dismiss();
 		});

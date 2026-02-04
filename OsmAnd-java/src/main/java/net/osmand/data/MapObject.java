@@ -371,28 +371,32 @@ public abstract class MapObject implements Comparable<MapObject> {
 		return str != null && str.startsWith(" gz ");
 	}
 
-	protected static void parseJSON(JSONObject json, MapObject o) {
+	protected static void parseJSON(JSONObject json, MapObject object) {
 		if (json.has("name")) {
-			o.name = json.getString("name");
+			object.name = json.getString("name");
 		}
 		if (json.has("enName")) {
-			o.enName = json.getString("enName");
+			object.enName = json.getString("enName");
 		}
 		if (json.has("names")) {
 			JSONObject namesObj = json.getJSONObject("names");
-			o.names = new LinkedHashMap<>();
-			Iterator<String> iterator = namesObj.keys();
-			while (iterator.hasNext()) {
-				String key = iterator.next();
-				String value = namesObj.getString(key);
-				o.names.put(key, value);
-			}
+			parseNamesJSON(namesObj, object);
 		}
 		if (json.has("lat") && json.has("lon")) {
-			o.location = new LatLon(json.getDouble("lat"), json.getDouble("lon"));
+			object.location = new LatLon(json.getDouble("lat"), json.getDouble("lon"));
 		}
 		if (json.has("id")) {
-			o.id = json.getLong("id");
+			object.id = json.getLong("id");
+		}
+	}
+
+	public static void parseNamesJSON(JSONObject json, MapObject object) {
+		object.names = new LinkedHashMap<>();
+		Iterator<String> iterator = json.keys();
+		while (iterator.hasNext()) {
+			String key = iterator.next();
+			String value = json.getString(key);
+			object.names.put(key, value);
 		}
 	}
 

@@ -3646,8 +3646,6 @@
     <string name="shared_string_purchased">Kupljeno</string>
     <string name="logout_from_osmand_cloud_decsr">Odjava\?
 \nZa varnostno kopiranje ali obnovitev podatkov, bo potrebna ponovna prijava.</string>
-    <string name="backup_deleted_all_data">Izbrisani vsi podatki.</string>
-    <string name="backup_deleting_all_data">Brisanje vseh podatkov …</string>
     <string name="shared_string_view_all">Poglej vse</string>
     <string name="backup_delete_types_descr">Želiš izbrisati vse podatke za zastarele vrste podatkov iz OsmAnd Cloud\?</string>
     <string name="provided_by">Priskrbljeno od %1$s</string>
@@ -5145,4 +5143,29 @@
     <string name="no_date">Brez datuma</string>
     <string name="shared_string_step">Korak</string>
     <string name="set_step_size_summary">Izberite velikost koraka za razvrščanje vaših sledi.</string>
+    <string name="group_general">Splošno</string>
+    <string name="group_date_time">Datum in čas</string>
+    <string name="year_of_creation">Zemljepisna in nadmorska višina</string>
+    <string name="avg_speed">Povp. Hitrost</string>
+    <string name="organize_by_max_speed">Najvišja hitrost</string>
+    <string name="organize_by_max_altitude">Največja zem. višina</string>
+    <string name="gpx_too_many_points_visible_warning">Velike količine vidnih sledi GPX pomenijo visoko porabo spomina</string>
+    <string name="star_watcher_plugin_name">Opazovalec zvezd (beta)</string>
+    <string name="star_watcher_plugin_description">Zvezdne karte, 3D zemljevid zvezd</string>
+    <string name="star_map">Zemljevid zvezd</string>
+    <string name="star_charts_name">Zvezdne karte</string>
+    <string name="star_visibility_name">Vidnost zvezde</string>
+    <string name="star_altitude_name">Višina zvezde</string>
+    <string name="astro_name_sun">Sonce</string>
+    <string name="astro_name_moon">Luna</string>
+    <string name="astro_name_mercury">Merkur</string>
+    <string name="astro_name_venus">Venera</string>
+    <string name="astro_name_mars">Mars</string>
+    <string name="astro_name_jupiter">Jupiter</string>
+    <string name="astro_name_saturn">Saturn</string>
+    <string name="astro_name_uranus">Uran</string>
+    <string name="astro_name_neptune">Neptun</string>
+    <string name="astro_name_pluto">Pluton</string>
+    <string name="azimuthal_grid">Azimutska mreža</string>
+    <string name="equatorial_grid">Ekvatorska mreža</string>
 </resources>

@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.development.widget;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
 
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.View.OnClickListener;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,11 @@ public class ZoomLevelWidget extends SimpleWidget {
 		this.osmandMap = app.getOsmandMap();
 		this.mapView = mapActivity.getMapView();
 		this.widgetState = widgetState;
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		updateInfo(null);
 		setIcons(DEV_ZOOM_LEVEL);
 	}

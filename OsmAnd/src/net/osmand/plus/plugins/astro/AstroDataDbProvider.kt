@@ -3,16 +3,12 @@ package net.osmand.plus.plugins.astro
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.graphics.Color
-import androidx.core.graphics.toColorInt
 import io.github.cosinekitty.astronomy.Body
 import net.osmand.IndexConstants
 import net.osmand.PlatformUtil
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.astro.SkyObject.Type
 import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyColor
-import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyName
-import org.json.JSONArray
 import java.io.File
 
 class AstroDataDbProvider : AstroDataProvider() {
@@ -33,6 +29,11 @@ class AstroDataDbProvider : AstroDataProvider() {
 		private const val COL_LINES = "lines"
 		private const val COL_MAG = "mag"
 		private const val COL_HIP = "hip"
+
+		private const val TABLE_NAMES = "Names"
+		private const val COL_NAME_WID = "wikidata"
+		private const val COL_NAME_NAME = "name"
+		private const val COL_NAME_TYPE = "type"
 	}
 
 	private class DbHelper(app: OsmandApplication) : SQLiteOpenHelper(
@@ -54,7 +55,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 		}
 	}
 
-	override fun getInitialSkyObjectsImpl(ctx: Context): List<SkyObject> {
+	override fun getSkyObjectsImpl(ctx: Context): List<SkyObject> {
 		val objects = mutableListOf<SkyObject>()
 
 		val dbHelper = DbHelper(ctx.applicationContext as OsmandApplication)
@@ -83,7 +84,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 					var type = mapType(typeStr) ?: continue
 
 					val originalName = c.getString(idxName)
-					var name = originalName
+					val name = originalName
 					val wikidata = if (c.isNull(idxWiki)) "" else c.getString(idxWiki)
 					val ra = if (c.isNull(idxRa)) 0.0 else c.getDouble(idxRa)
 					val dec = if (c.isNull(idxDec)) 0.0 else c.getDouble(idxDec)
@@ -103,7 +104,6 @@ class AstroDataDbProvider : AstroDataProvider() {
 								else -> Type.PLANET
 							}
 							color = bodyColor(body)
-							name = bodyName(ctx, body)
 						} else {
 							continue
 						}
@@ -130,6 +130,8 @@ class AstroDataDbProvider : AstroDataProvider() {
 					)
 				}
 			}
+
+			loadLocalizedNames(ctx, db, objects)
 
 			db.close()
 		} catch (e: Exception) {
@@ -174,11 +176,92 @@ class AstroDataDbProvider : AstroDataProvider() {
 				}
 			}
 
+			loadLocalizedConstellationNames(ctx, db, constellations)
+
 			db.close()
 		} catch (e: Exception) {
 			LOG.error("Error reading constellations from DB", e)
 		}
 		return constellations
+	}
+
+	private fun loadLocalizedNames(ctx: Context, db: SQLiteDatabase, objects: List<SkyObject>) {
+		loadLocalizedNamesImpl(ctx, db, objects, { it.wid }, { obj, name -> obj.localizedName = name })
+	}
+
+	private fun loadLocalizedConstellationNames(ctx: Context, db: SQLiteDatabase, constellations: List<Constellation>) {
+		loadLocalizedNamesImpl(ctx, db, constellations, { it.wid }, { c, name -> c.localizedName = name })
+	}
+
+	private fun <T> loadLocalizedNamesImpl(
+		ctx: Context,
+		db: SQLiteDatabase,
+		items: List<T>,
+		getWid: (T) -> String,
+		setLocalizedName: (T, String) -> Unit
+	) {
+		val app = ctx.applicationContext as OsmandApplication
+		val lang = app.settings.PREFERRED_LOCALE.get().takeIf { it.isNotEmpty() }?.substringBefore('-')
+			?: ctx.resources.configuration.locale.language
+
+		val langWiki = "${lang}wiki"
+		val enWiki = "enwiki"
+		val en = "en"
+		val mul = "mul"
+		val targets = listOf(lang, langWiki, en, enWiki, mul)
+
+		try {
+			val wikidataIds = items.mapNotNull { getWid(it).takeIf { wid -> wid.isNotEmpty() } }.distinct()
+			if (wikidataIds.isEmpty()) return
+
+			val namesMap = mutableMapOf<String, MutableMap<String, String>>() // wid -> {type -> name}
+
+			wikidataIds.chunked(900).forEach { chunk ->
+				val placeholders = chunk.joinToString(",") { "?" }
+				val cursor = db.query(
+					TABLE_NAMES,
+					null,
+					"$COL_NAME_WID IN ($placeholders)",
+					chunk.toTypedArray(),
+					null, null, null
+				)
+
+				cursor.use { c ->
+					val idxWid = c.getColumnIndex(COL_NAME_WID)
+					val idxName = c.getColumnIndex(COL_NAME_NAME)
+					val idxType = c.getColumnIndex(COL_NAME_TYPE)
+
+					while (c.moveToNext()) {
+						val wid = c.getString(idxWid)
+						val name = c.getString(idxName)
+						val typeStr = c.getString(idxType)
+						val types = typeStr.split(",").map { it.trim().trim('\"') }
+
+						val map = namesMap.getOrPut(wid) { mutableMapOf() }
+						types.forEach { t ->
+							if (targets.contains(t)) {
+								map[t] = name
+							}
+						}
+					}
+				}
+			}
+
+			items.forEach { item ->
+				val wid = getWid(item)
+				if (wid.isNotEmpty()) {
+					val names = namesMap[wid]
+					if (names != null) {
+						val localizedName = names[lang] ?: names[langWiki] ?: names[en] ?: names[enWiki] ?: names[mul]
+						if (localizedName != null) {
+							setLocalizedName(item, localizedName)
+						}
+					}
+				}
+			}
+		} catch (e: Exception) {
+			LOG.error("Error loading localized names", e)
+		}
 	}
 
 	private fun getBody(wid: String): Body? {

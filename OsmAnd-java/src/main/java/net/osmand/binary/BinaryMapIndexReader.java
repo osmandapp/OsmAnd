@@ -680,6 +680,10 @@ public class BinaryMapIndexReader {
 	/**
 	 * Address public methods
 	 */
+	public boolean hasRegions() {
+		return !addressIndexes.isEmpty();
+	}
+
 	public List<String> getRegionNames() {
 		List<String> names = new ArrayList<String>();
 		for (AddressRegion r : addressIndexes) {

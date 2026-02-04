@@ -288,7 +288,7 @@ public class AmenityMenuController extends MenuController {
 
 	@NonNull
 	public static String getTypeStr(@NonNull Amenity amenity) {
-		return amenity.getSubTypeStr();
+		return amenity.getMainSubtype();
 	}
 
 	@NonNull

@@ -62,6 +62,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.render.RendererRegistry.RendererEventListener;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -617,9 +618,10 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void createMapWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
+	public static void createMapWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos,
+			@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.createWidgets(mapActivity, widgetInfos, appMode);
+			plugin.createWidgets(mapActivity, widgetInfos, appMode, layoutMode);
 		}
 	}
 

@@ -147,7 +147,7 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 
 	protected WidgetsPagerAdapter createPagerAdapter() {
 		WidgetsPanel panel = rightSide ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
-		return new WidgetsPagerAdapter(getMyApplication(), panel);
+		return new WidgetsPagerAdapter(getContext(), panel);
 	}
 
 	public void update(@Nullable DrawSettings drawSettings) {

@@ -3847,8 +3847,6 @@
     <string name="logout_from_osmand_cloud_decsr">¿Cerrar sesión? \nDeberás volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
     <string name="backup_error_subscription_was_expired_descr">La suscripción a «OsmAnd Pro» venció, renovála para usar la copia de seguridad. Aún podés restaurar los datos de la nube.</string>
     <string name="contour_lines_hillshade_slope">Curvas de nivel, sombreados, pendientes</string>
-    <string name="backup_deleting_all_data">Borrando todos los datos…</string>
-    <string name="backup_deleted_all_data">Se borraron todos los datos.</string>
     <string name="backup_deleting_all_data_descr">Esperá hasta que OsmAnd borre tus datos de la nube. Todos los datos del dispositivo permanecen intactos.</string>
     <string name="backup_deleted_all_data_descr">Todos tus datos se borraron correctamente de OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">Se quitó todo el historial de versiones.</string>
@@ -5839,4 +5837,20 @@
     <string name="shared_string_magnitude">Magnitud</string>
     <string name="astro_set">Puesta</string>
     <string name="astro_rise">Salida</string>
+    <string name="copy_from_portrait_layout">Copiar el diseño vertical</string>
+    <string name="copy_from_landscape_layout">Copiar el diseño horizontal</string>
+    <string name="panels_layout_compact">Compacto</string>
+    <string name="panels_layout_wide">Amplio</string>
+    <string name="panels_layout">Diseño de los paneles</string>
+    <string name="panels_layout_descr">Elegí un diseño para los paneles superior e inferior. Pueden ser amplios, ocupando todo el ancho de la pantalla, o compactos, encajando entre los paneles laterales y los botones.</string>
+    <string name="single_layout">Diseño único</string>
+    <string name="separate_layouts">Diseños separados</string>
+    <string name="use_separate_layouts">Usar diseños separados</string>
+    <string name="map_screen_layout">Diseño de la pantalla del mapa</string>
+    <string name="map_screen_layout_descr">Elegí si usar un diseño único para todas las orientaciones, o personalizar la orientación vertical y horizontal por separado.</string>
+    <string name="galactic_line">Línea galáctica</string>
+    <string name="meridian_line">Línea del meridiano</string>
+    <string name="equator_line">Línea del ecuador</string>
+    <string name="backup_deleted_all_data">Datos borrados.</string>
+    <string name="backup_deleting_all_data">Borrando datos…</string>
 </resources>

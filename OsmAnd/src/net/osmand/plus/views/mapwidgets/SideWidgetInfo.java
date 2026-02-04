@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 public class SideWidgetInfo extends MapWidgetInfo {
@@ -33,19 +34,19 @@ public class SideWidgetInfo extends MapWidgetInfo {
 
 	@NonNull
 	@Override
-	public WidgetsPanel getUpdatedPanel() {
+	public WidgetsPanel getUpdatedPanel(ScreenLayoutMode layoutMode) {
 		OsmandSettings settings = widget.getMyApplication().getSettings();
 		WidgetType widgetType = getWidgetType();
 		if (widgetType != null) {
-			if (widgetType.defaultPanel == LEFT && RIGHT.contains(key, settings)) {
+			if (widgetType.defaultPanel == LEFT && RIGHT.contains(key, settings, layoutMode)) {
 				widgetPanel = RIGHT;
-			} else if (widgetType.defaultPanel == RIGHT && LEFT.contains(key, settings)) {
+			} else if (widgetType.defaultPanel == RIGHT && LEFT.contains(key, settings, layoutMode)) {
 				widgetPanel = LEFT;
 			} else {
 				widgetPanel = widgetType.defaultPanel;
 			}
 		} else {
-			widgetPanel = LEFT.contains(key, settings) ? LEFT : RIGHT;
+			widgetPanel = LEFT.contains(key, settings, layoutMode) ? LEFT : RIGHT;
 		}
 
 		return widgetPanel;

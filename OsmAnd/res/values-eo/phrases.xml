@@ -3163,7 +3163,7 @@
     <string name="poi_seamark_clearance_height_open">Maksimuma alto (malfermita)</string>
     <string name="poi_seamark_clearance_width">Maksimuma larĝo</string>
     <string name="poi_vhf">VHF-kanalo</string>
-    <string name="poi_memorial_jizo">Kŝitigarbo</string>
+    <string name="poi_memorial_jizo">Jizō (budaisma statueto)</string>
     <string name="poi_memorial_prasat">Prasat (adorejo)</string>
     <string name="poi_gorge">Kanjono</string>
     <string name="poi_couloir">Akvosulko</string>
@@ -5164,4 +5164,5 @@
     <string name="poi_sample_collection_covid19">KOVIM-19</string>
     <string name="poi_sample_collection_blood">sango</string>
     <string name="poi_yoga">Jogo</string>
+    <string name="poi_memorial_type">Speco de memorigaĵo</string>
 </resources>

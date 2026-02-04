@@ -5439,8 +5439,6 @@
     <string name="backup_version_history_removed">S\'ha eliminat tot l\'historial de versions.</string>
     <string name="backup_deleted_all_data_descr">Totes les vostres dades s\'han eliminat amb èxit d\'OsmAnd Cloud.</string>
     <string name="backup_deleting_all_data_descr">Espereu fins que l\'OsmAnd suprimeixi les vostres dades del núvol. Totes les dades del dispositiu romandran intactes.</string>
-    <string name="backup_deleted_all_data">S\'han suprimit totes les dades.</string>
-    <string name="backup_deleting_all_data">S\'estan suprimint totes les dades…</string>
     <string name="logout_from_osmand_cloud_decsr">Sortiu?\nHaureu de tornar a iniciar la sessió per fer còpies de seguretat o restaurar les dades.</string>
     <string name="logout_from_osmand_cloud">Tanca la sessió d\'OsmAnd Cloud</string>
     <string name="duration_moment_ago">fa un moment</string>
@@ -5527,9 +5525,9 @@
     <string name="cloud_email_not_registered">Aquesta adreça de correu electrònic no està registrada a OsmAnd Cloud</string>
     <string name="enter_verification_code">Introduïu una contrasenya única</string>
     <string name="verify_email_address_descr">Codi de verificació enviat a %1$s. Introduïu-lo al camp de sota.</string>
-    <string name="verify_email_address">Verifica l\'adreça de correu electrònic</string>
+    <string name="verify_email_address">Verifiqueu l\'adreça de correu electrònic</string>
     <string name="osmand_cloud_login_descr">Introduïu l\'adreça de correu electrònic amb la qual us vau registrar. S\'hi enviarà una contrasenya única.</string>
-    <string name="osmand_cloud_create_account_descr">Introduïu la vostra adreça electrònica, s\'hi enviarà un codi de verificació,\ni s\'hi vincularan totes les vostres dades.</string>
+    <string name="osmand_cloud_create_account_descr">Introduïu la vostra adreça electrònica: s\'hi enviarà un codi de verificació\ni totes les vostres dades hi restaran vinculades.</string>
     <string name="osmand_cloud_help_descr">Necessites ajuda? Contacteu amb nosaltres a %1$s</string>
     <string name="backup_into_file">Fes una còpia de seguretat com a fitxer</string>
     <string name="local_backup">Còpia local</string>
@@ -5825,11 +5823,20 @@
     <string name="us_gallon">Galó dels EUA</string>
     <string name="kilometers">Quilòmetres</string>
     <string name="miles">Milles</string>
-    <string name="mpg">Milles per galó</string>
+    <string name="mpg">MPG</string>
     <string name="shared_string_osm_link">Enllaç OSM</string>
     <string name="show_spherical_map_description">Mostra el model esferoïdal de la Terra</string>
     <string name="show_local_names">Mostra les denominacions locals</string>
     <string name="accessibility_independent_features">Característiques independents</string>
     <string name="access_pinch_zoom_magnification">Control tàctil d\'escala per pinçament</string>
     <string name="access_pinch_zoom_magnification_descr">Utilitza el subconjunt d\'escales ja definides, en comptes de tot rang, durant l\'ampliació gestual.</string>
+    <string name="galactic_line">Línia galàctica</string>
+    <string name="meridian_line">Línia meridiana</string>
+    <string name="equator_line">Línia equatorial</string>
+    <string name="copy_from_portrait_layout">Copia amb l\'orientació vertical</string>
+    <string name="copy_from_landscape_layout">Copia amb l\'orientació horitzontal</string>
+    <string name="panels_layout_compact">Compacte</string>
+    <string name="panels_layout_wide">Amplada</string>
+    <string name="panels_layout">Disposició dels panells</string>
+    <string name="panels_layout_descr">Seleccioneu una disposició dels panells superior i inferior. Poden ser amples, abastant tota l\'amplada de la pantalla, o compactes, encaixant entre els panells laterals i els botons.</string>
 </resources>

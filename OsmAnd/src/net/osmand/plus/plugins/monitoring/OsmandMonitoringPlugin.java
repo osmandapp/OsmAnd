@@ -28,6 +28,7 @@ import net.osmand.plus.plugins.monitoring.widgets.TripRecordingMaxSpeedWidgetSta
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingSlopeWidget;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidgetState;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
@@ -190,8 +191,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
-		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
+	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos,
+			@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
 
 		MapWidget distanceWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DISTANCE);
 		widgetsInfos.add(creator.createWidgetInfo(distanceWidget));

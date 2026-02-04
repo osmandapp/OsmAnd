@@ -284,4 +284,9 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 	public PointI getPinIconOffset() {
 		return offset;
 	}
+
+	@Override
+	public boolean waitForLoading() {
+		return false;
+	}
 }

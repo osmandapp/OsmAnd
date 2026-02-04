@@ -4053,8 +4053,6 @@
     <string name="pro_features">Pro functies</string>
     <string name="purchases_restored">Aankopen hersteld</string>
     <string name="grey_color_undefined">Delen zonder gegevens zijn grijs gekleurd.</string>
-    <string name="backup_deleting_all_data">Verwijderen van alle gegevens…</string>
-    <string name="backup_deleted_all_data">Verwijder alle gegevens.</string>
     <string name="backup_data_removed">Alle gegevens zijn verwijderd.</string>
     <string name="shared_string_progress">Voortgang</string>
     <string name="backup_do_not_have_any">Je hebt nog geen online back-up</string>
@@ -6300,4 +6298,20 @@
     <string name="shared_string_step">Stap</string>
     <string name="set_step_size_summary">Kies een stapgrootte om je tracks te sorteren.</string>
     <string name="set_step_size">Stel stapgrootte in</string>
+    <string name="panels_layout_compact">Compact</string>
+    <string name="panels_layout_wide">Breed</string>
+    <string name="panels_layout">Paneelindeling</string>
+    <string name="panels_layout_descr">Kies een indeling voor het bovenste paneel en het onderste paneel. Deze kunnen breed zijn en de volledige breedte van het scherm beslaan, of compact, passend tussen de zijpanelen en knoppen.</string>
+    <string name="single_layout">Enkele indeling</string>
+    <string name="separate_layouts">Aparte indelingen</string>
+    <string name="use_separate_layouts">Gebruik aparte indelingen</string>
+    <string name="map_screen_layout">Kaartschermindeling</string>
+    <string name="copy_from_portrait_layout">Kopieer van portretindeling</string>
+    <string name="copy_from_landscape_layout">Kopiëren van landschapsindeling</string>
+    <string name="map_screen_layout_descr">Kies of je één indeling voor alle oriëntaties wilt gebruiken, of portret- en landschapsindeling afzonderlijk wilt instellen.</string>
+    <string name="galactic_line">Galactische lijn</string>
+    <string name="equator_line">Evenaarlijn</string>
+    <string name="meridian_line">Meridiaanlijn</string>
+    <string name="backup_deleted_all_data">Gegevens gewist.</string>
+    <string name="backup_deleting_all_data">Gegevens wissen…</string>
 </resources>

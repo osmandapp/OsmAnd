@@ -449,7 +449,7 @@ public class MapRendererContext {
 		if (showDebugPrimivitisationTiles) {
 			obfMapRasterLayerProvider = new MapPrimitivesMetricsLayerProvider(mapPrimitivesProvider);
 		} else {
-			obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground);
+			obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground, false, true);
 		}
 		// In case there's bound view and configured layer, perform setup
 		MapRendererView mapRendererView = this.mapRendererView;

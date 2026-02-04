@@ -2229,7 +2229,7 @@
     <string name="index_item_depth_contours_osmand_ext">Nautische Tiefenlinien</string>
     <string name="index_item_depth_points_southern_hemisphere">Nautische Meerestiefen der Südhalbkugel</string>
     <string name="index_item_depth_points_northern_hemisphere">Nautische Meerestiefen der Nordhalbkugel</string>
-    <string name="download_depth_countours">Nautische Tiefenlinien</string>
+    <string name="download_depth_countours">Tiefenlinien</string>
     <string name="nautical_maps">Seekarten</string>
     <string name="analyze_on_map">Auf der Karte auswerten</string>
     <string name="shared_string_visible">Sichtbar</string>
@@ -3163,7 +3163,7 @@
     <string name="select_nav_icon_descr">Symbol, das beim Navigieren oder Bewegen angezeigt wird.</string>
     <string name="multimedia_notes_view_descr">Ihre OSM-Hinweise sind in %1$s.</string>
     <string name="button_rate">Bewerten</string>
-    <string name="logcat_buffer_descr">Protokolle der App einsehen und freigeben</string>
+    <string name="logcat_buffer_descr">App Log-Dateien einsehen und freigeben</string>
     <string name="permission_is_required">Für die Verwendung dieser Option ist eine Berechtigung erforderlich.</string>
     <string name="file_does_not_contain_routing_rules">Die Datei \'%1$s\' enthält keine Routing-Regeln. Bitte eine andere Datei wählen.</string>
     <string name="monitoring_min_speed_descr">Dies ist ein Filter, der Punkte unter einer gewissen Geschwindigkeit nicht aufzeichnet. Dadurch können aufgezeichnete Tracks auf der Karte gleichmäßiger aussehen.</string>
@@ -3983,8 +3983,6 @@
     <string name="logout_from_osmand_cloud">Abmelden aus OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Abmelden\?
 \nZum Sichern oder Wiederherstellen von Daten müssen Sie sich erneut anmelden.</string>
-    <string name="backup_deleting_all_data">Alle Daten werden gelöscht …</string>
-    <string name="backup_deleted_all_data">Alle Daten gelöscht.</string>
     <string name="backup_deleting_all_data_descr">Bitte warten Sie, bis OsmAnd alle Ihre Daten aus der Cloud gelöscht hat. Alle Daten auf dem Gerät bleiben unangetastet.</string>
     <string name="backup_deleted_all_data_descr">Alle Ihre Daten wurden erfolgreich aus OsmAnd Cloud gelöscht.</string>
     <string name="backup_version_history_removed">Die gesamte Versionshistorie wurde entfernt.</string>
@@ -4224,7 +4222,7 @@
     <string name="exit_import">Beenden\?</string>
     <string name="import_tracks_descr">%1$s, enthält %2$s separate Tracks. Wählen Sie die zu importierenden Tracks aus.</string>
     <string name="location_source_descr">Standardmäßig verwendet OsmAnd, das von Google Play installiert wurde, %1$s zur Standortbestimmung.\n\nWenn Sie ungenaue Standortinformationen erhalten oder ein Gerät ohne %2$s verwenden, versuchen Sie, zu „%3$s“ zu wechseln.</string>
-    <string name="location_source">Standortquelle</string>
+    <string name="location_source">Standortanbieter</string>
     <string name="points_selection_descr">Schließen und alle Änderungen verwerfen\?</string>
     <string name="exit_import_descr">Beenden, ohne die Änderungen zu speichern\?</string>
     <string name="select_suggested_points">Vorgeschlagene Punkte auswählen</string>
@@ -5978,7 +5976,7 @@
     <string name="sort_lowest_first">Niedrigste zuerst</string>
     <string name="no_date">Kein Datum</string>
     <string name="sort_highest_first">Höchste zuerst</string>
-    <string name="organize_by_summary">Tracks automatisch in Gruppen anordnen, die auf einem ausgewählten Parameter wie Aktivität, Geschwindigkeit oder Ort basieren.</string>
+    <string name="organize_by_summary">Tracks automatisch in Gruppen organisieren, basierend auf einem ausgewählten Parameter wie Aktivität, Geschwindigkeit oder Ort.</string>
     <string name="organize_by">Anordnen nach</string>
     <string name="shared_string_step">Schritt</string>
     <string name="organize_by_max_altitude">Max. Höhe</string>
@@ -5992,4 +5990,6 @@
     <string name="group_date_time">Datum &amp; Uhrzeit</string>
     <string name="group_general">Allgemein</string>
     <string name="set_step_size">Schrittgröße festlegen</string>
+    <string name="copy_from_landscape_layout">Aus Querformat kopieren</string>
+    <string name="panels_layout_wide">Breit</string>
 </resources>

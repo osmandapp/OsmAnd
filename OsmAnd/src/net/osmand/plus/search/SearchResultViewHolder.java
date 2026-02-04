@@ -32,6 +32,7 @@ import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.plus.mapcontextmenu.other.TrimToBackgroundTextView;
 import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.PicassoUtils;
@@ -192,14 +193,15 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		String photoUrl = null;
 		if (amenity != null) {
 			photoUrl = amenity.getWikiIconUrl();
-			if (amenity.isRouteTrack()) {
+			ClickableWayHelper clickableWayHelper = app.getClickableWayHelper();
+			if (amenity.isRouteTrack() || clickableWayHelper.isClickableWayAmenity(amenity)) {
 				typeName = amenity.getRouteActivityType();
 				hasRouteShield = QuickSearchListItem.getRouteShieldDrawable(app, amenity) != null;
 				address = String.format("%s • %s", AmenityExtensionsHelper.getAmenityMetricsFormatted(amenity, app), address);
 			}
 		}
 
-		if (altName != null) {
+		if (!Algorithms.isEmpty(altName) && !Algorithms.stringsEqual(name, altName)) {
 			name = String.format("%s (%s)", name, altName);
 			int textColor = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 			SpannableString spannableName = UiUtilities.createColorSpannable(name, view.getContext().getColor(textColor), false, altName);
@@ -249,8 +251,6 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		}
 		Drawable imageDrawable = item.getIcon();
 		FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) imageView.getLayoutParams();
-		TypedValue typedValue = new TypedValue();
-		boolean resolved = app.getTheme().resolveAttribute(R.attr.activity_background_color, typedValue, true);
 		int margin;
 		if (hasRouteShield) {
 			AndroidUiHelper.updateVisibility(shieldSign, true);
@@ -310,21 +310,13 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 				imageContainer.setBackground(null);
 				imageContainer.setPadding(margin, margin, margin, margin);
 			} else {
-				AndroidUtils.resolveAttribute(app, R.attr.activity_background_color);
 				int topPadding = title.getLineCount() > 1 ? AndroidUtils.dpToPx(app, 8) : 0;
 				imageContainer.setPadding(0, topPadding, 0, 0);
 			}
-			if (!hasRouteShield && resolved) {
-				if (typedValue.type >= TypedValue.TYPE_FIRST_COLOR_INT && typedValue.type <= TypedValue.TYPE_LAST_COLOR_INT) {
-					int color = typedValue.data;
-					imageContainer.setBackgroundColor(color);
-				} else {
-					int colorResId = typedValue.resourceId;
-					if (colorResId != 0) {
-						int color = ContextCompat.getColor(app, colorResId);
-						imageContainer.setBackgroundColor(color);
-					}
-				}
+			if (!hasRouteShield) {
+				int colorId = nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
+				int color = ContextCompat.getColor(app, colorId);
+				imageContainer.setBackgroundColor(color);
 			} else {
 				imageContainer.setBackground(null);
 			}

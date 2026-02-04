@@ -448,7 +448,7 @@
     <string name="poi_attraction_train">Vonat (látványosság)</string>
     <string name="poi_attraction_water_slide">Vízi csúszda</string>
     <string name="poi_hunting_lodge">Vadászház;Menedékhely</string>
-    <string name="poi_internet_access_wlan">Internetcsatlakozás: WLAN (wifi)</string>
+    <string name="poi_internet_access_wlan">Internetcsatlakozás: WLAN (Wi-Fi)</string>
     <string name="poi_internet_access_terminal">Internetcsatlakozás: munkaállomás</string>
     <string name="poi_internet_access_wired">Internetcsatlakozás: kábel</string>
     <string name="poi_internet_access_public">Internetcsatlakozás: nyilvános</string>
@@ -519,7 +519,7 @@
     <string name="poi_car_sharing">Autómegosztó</string>
     <string name="poi_boat_sharing">Hajómegosztó hely</string>
     <string name="poi_dock">Dokk</string>
-    <string name="poi_toilets">WC</string>
+    <string name="poi_toilets">Mosdó; Toalett; WC</string>
     <string name="poi_sauna">Szauna</string>
     <string name="poi_brothel">Bordély</string>
     <string name="poi_smoking_area">Dohányzásra kijelölt hely</string>
@@ -1389,7 +1389,7 @@
     <string name="poi_jersey_barrier">Betonelem</string>
     <string name="poi_horse_stile">Lovaskapu</string>
     <string name="poi_kissing_gate">Lengőkapu</string>
-    <string name="poi_leisure_common">Szabadidős tevékenységre használható közös föld (UK)</string>
+    <string name="poi_leisure_common">Szabadidős tevékenységre használható közös terület (UK)</string>
     <string name="poi_piste_grooming_classic_skating">Klasszikus és szabadsítlus</string>
     <string name="poi_piste_grooming_backcountry">Sítúrázás</string>
     <string name="poi_piste_grooming_scooter">Motoros szán</string>
@@ -2836,7 +2836,7 @@
     <string name="poi_free_flying_site_orientation_se">Siklórepülő hely irányultsága: DK</string>
     <string name="poi_free_flying_site_orientation_s">Siklórepülő hely irányultsága: D</string>
     <string name="poi_free_flying_site_orientation_sw">Siklórepülő hely irányultsága: DNY</string>
-    <string name="poi_free_flying_site_orientation_w">Siklórepülő hely irányultsága: NY</string>
+    <string name="poi_free_flying_site_orientation_w">Siklórepülőhely irányultsága: NY</string>
     <string name="poi_free_flying_site_orientation_nw">Siklórepülő hely irányultsága: ÉNY</string>
     <string name="poi_free_flying_no_flight_time">Repüléstilalmi idő (siklórepüléshez)</string>
     <string name="poi_free_flying_guest_guidelines_yes">Vendégeknek szóló iránymutatás</string>
@@ -3807,7 +3807,7 @@
     <string name="poi_nuts">Mag- és aszaltgyümölcsbolt</string>
     <string name="poi_beehive">Méhkaptár</string>
     <string name="poi_fuel_lng">LNG (cseppfolyósított földgáz)</string>
-    <string name="poi_parking_layby">Út mellett parkolósáv (UK)</string>
+    <string name="poi_parking_layby">Út melletti parkolósáv (UK)</string>
     <string name="poi_parking_sheds">Fedett parkolóhely</string>
     <string name="poi_parking_rooftop">Tető</string>
     <string name="poi_internet_access_fee_customers">Internetcsatlakozás: ügyfeleknek</string>
@@ -3962,8 +3962,8 @@
     <string name="poi_outdoor_seating_poi">Terasz (kiülős hely)</string>
     <string name="poi_authentication_none_yes">Van;Hitelesítés nincs</string>
     <string name="poi_authentication_none_no">Azonosítás szükséges</string>
-    <string name="poi_authentication_short_message_text">Az azonosításhoz használt SMS szövege</string>
-    <string name="poi_authentication_short_message_number">Az azonosításhoz használt SMS-szám</string>
+    <string name="poi_authentication_short_message_text">Azonosításhoz használt SMS szövege</string>
+    <string name="poi_authentication_short_message_number">Azonosításhoz használt SMS-szám</string>
     <string name="poi_authentication_contactless_yes">Van</string>
     <string name="poi_authentication_contactless_no">Érintésmentes azonosítás nincs</string>
     <string name="poi_internet_access_ssid">SSID</string>
@@ -4236,7 +4236,7 @@
     <string name="poi_museum_local">Helytörténeti</string>
     <string name="poi_museum_language">Nyelvészeti</string>
     <string name="poi_museum_health">Egészségügyi</string>
-    <string name="poi_toilets_disposal_dry_toilet">WC ártalmatlanítása: száraz WC</string>
+    <string name="poi_toilets_disposal_dry_toilet">WC-kezelés: száraz WC</string>
     <string name="poi_toilets_position_seated">WC helyzete: ülő</string>
     <string name="poi_toilets_position_urinal">WC helyzete: piszoár</string>
     <string name="poi_toilets_position_squat">WC helyzete: guggoló</string>

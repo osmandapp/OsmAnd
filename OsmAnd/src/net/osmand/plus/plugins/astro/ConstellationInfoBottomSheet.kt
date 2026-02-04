@@ -44,7 +44,7 @@ class ConstellationInfoFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		arguments?.getString("name")?.let { sheetTitle.text = it }
+		arguments?.getString("displayName")?.let { sheetTitle.text = it }
 		val wid = arguments?.getString("wid")
 		if (!wid.isNullOrEmpty()) {
 			sheetWikiButton.isVisible = true
@@ -66,7 +66,7 @@ class ConstellationInfoFragment : Fragment() {
 		fun newInstance(constellation: Constellation): ConstellationInfoFragment {
 			val fragment = ConstellationInfoFragment()
 			val args = Bundle()
-			args.putString("name", constellation.name)
+			args.putString("displayName", constellation.localizedName ?: constellation.name)
 			args.putString("wid", constellation.wid)
 			fragment.arguments = args
 			return fragment

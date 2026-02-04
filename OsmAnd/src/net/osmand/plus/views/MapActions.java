@@ -492,6 +492,9 @@ public class MapActions {
 		if (settings.getApplicationMode() != routingHelper.getAppMode()) {
 			settings.setApplicationMode(routingHelper.getAppMode(), false);
 		}
+		float elevationAngle = settings.getLastKnownMapElevation();
+		AnimateDraggingMapThread animateDraggingMapThread = app.getOsmandMap().getMapView().getAnimatedDraggingThread();
+		animateDraggingMapThread.startTilting(elevationAngle, 0);
 		if (routingHelper.isFollowingMode()) {
 			switchToRouteFollowingLayout();
 		} else {

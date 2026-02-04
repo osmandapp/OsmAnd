@@ -135,8 +135,13 @@ public class LocationPointsTileProvider extends interface_MapTiledCollectionProv
       return MapMarker.PinIconHorisontalAlignment.CenterHorizontal;
    }
 
-   @Override
-   public PointI getPinIconOffset() {
-      return offset;
-   }
+	@Override
+	public PointI getPinIconOffset() {
+		return offset;
+	}
+
+	@Override
+	public boolean waitForLoading() {
+		return true;
+	}
 }

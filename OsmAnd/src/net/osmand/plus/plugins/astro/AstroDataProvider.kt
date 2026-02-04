@@ -6,6 +6,7 @@ import androidx.core.graphics.toColorInt
 import io.github.cosinekitty.astronomy.Body
 import net.osmand.PlatformUtil
 import net.osmand.plus.plugins.astro.SkyObject.Type
+import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyColor
 import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyName
 import org.json.JSONArray
@@ -19,16 +20,16 @@ abstract class AstroDataProvider {
 		private val LOG = PlatformUtil.getLog(AstroDataProvider::class.java)
 	}
 
-	abstract fun getInitialSkyObjectsImpl(ctx: Context): List<SkyObject>
+	abstract fun getSkyObjectsImpl(ctx: Context): List<SkyObject>
 
 	@Synchronized
-	fun getInitialSkyObjects(ctx: Context): List<SkyObject> {
-		cachedSkyObjects?.let { return it.toList() }
+	fun getSkyObjects(ctx: Context): List<SkyObject> {
+		cachedSkyObjects?.let { return it }
 
-		val objects = getInitialSkyObjectsImpl(ctx)
+		val objects = getSkyObjectsImpl(ctx)
 
 		cachedSkyObjects = objects
-		return objects.toList()
+		return objects
 	}
 
 	@Synchronized
@@ -41,12 +42,19 @@ abstract class AstroDataProvider {
 
 	@Synchronized
 	fun getConstellations(ctx: Context): List<Constellation> {
-		cachedConstellations?.let { return it.toList() }
+		cachedConstellations?.let { return it }
 
 		val constellations = getConstellationsImpl(ctx)
-
+		val skyObjectMap = getSkyObjects(ctx).associateBy { it.hip }
+		constellations.forEach { c ->
+			val center = AstroUtils.calculateConstellationCenter(c, skyObjectMap)
+			c.apply {
+				ra = center?.first ?: 0.0
+				dec = center?.second ?: 0.0
+			}
+		}
 		cachedConstellations = constellations
-		return constellations.toList()
+		return constellations
 	}
 
 	protected fun getPlanets(

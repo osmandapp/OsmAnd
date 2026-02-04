@@ -4156,8 +4156,6 @@
     <string name="logout_from_osmand_cloud">Essi dae OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Cheres essire\?
 \nAs a dèpere torrare a intrare pro fàghere una còpia de seguresa o ripristinare sos datos.</string>
-    <string name="backup_deleting_all_data">Iscantzellende totu sos datos…</string>
-    <string name="backup_deleted_all_data">Totu sos datos sunt istados iscantzellados.</string>
     <string name="backup_deleting_all_data_descr">Pro praghere iseta finas a cando OsmAnd at a acabbare de iscantzellare totu sos datos tuos dae sa nue. Totu sos datos in su dispositivu ant a abarrare chene tocados.</string>
     <string name="backup_deleted_all_data_descr">Totu sos datos sunt istados iscantzellados chene problemas dae OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">Totu sas versiones sunt istadas iscantzelladas.</string>

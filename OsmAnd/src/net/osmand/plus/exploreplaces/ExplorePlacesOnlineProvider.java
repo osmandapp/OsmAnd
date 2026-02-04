@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
+import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.edit.Entity.EntityType;
@@ -35,6 +36,8 @@ import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -259,6 +262,14 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		amenity.setEnName(TransliterationHelper.transliterate(amenity.getName()));
 		amenity.setDescription(properties.getWikiDesc());
 
+		String labelsJson = properties.getLabelsJson();
+		if (!Algorithms.isEmpty(labelsJson)) {
+			try {
+				MapObject.parseNamesJSON(new JSONObject(labelsJson), amenity);
+			} catch (JSONException e) {
+				LOG.error(e);
+			}
+		}
 		String wikiLangs = properties.getWikiLangs();
 		if (!Algorithms.isEmpty(wikiLangs)) {
 			amenity.updateContentLocales(Set.of(wikiLangs.split(",")));
@@ -339,7 +350,11 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 					if (!Algorithms.isEmpty(result)) {
 						Map<String, List<OsmandApiFeatureData>> map = new HashMap<>();
 						for (OsmandApiFeatureData data : result) {
-							String lang = data.getProperties().getWikiLang();
+							WikiDataProperties properties = data.getProperties();
+							String lang = properties.getLang();
+							if (Algorithms.isEmpty(lang)) {
+								lang = properties.getWikiLang();
+							}
 							List<OsmandApiFeatureData> list = map.computeIfAbsent(lang, k -> new ArrayList<>());
 							list.add(data);
 						}
