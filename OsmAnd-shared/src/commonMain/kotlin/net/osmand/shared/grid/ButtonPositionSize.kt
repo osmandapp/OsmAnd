@@ -54,6 +54,7 @@ class ButtonPositionSize {
 
 	fun setNonMoveable() = apply { this.xMove = false; this.yMove = false; }
 
+	fun isMovable() = xMove || yMove
 
 	fun setSize(width8dp: Int, height8dp: Int) = apply {
 		this.width = width8dp
