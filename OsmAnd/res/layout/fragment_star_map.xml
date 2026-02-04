@@ -29,29 +29,16 @@
 				android:visibility="gone" />
 
 			<net.osmand.plus.plugins.astro.views.StarMapButton
-				android:id="@+id/star_chart_button"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="@dimen/map_button_size"
-				android:layout_marginStart="@dimen/content_padding"
-				android:layout_marginTop="@dimen/content_padding"
-				android:background="@drawable/btn_circle"
-				android:contentDescription="@string/star_charts_name"
-				android:elevation="4dp"
-				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toTopOf="parent"
-				app:srcCompat="@drawable/ic_layer_top"
-				app:tint="#5f6e7c" />
-
-			<net.osmand.plus.plugins.astro.views.StarMapButton
 				android:id="@+id/search_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
 				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginBottom="@dimen/content_padding"
 				android:background="@drawable/btn_circle"
 				android:contentDescription="@string/shared_string_search"
 				android:elevation="4dp"
-				app:layout_constraintStart_toEndOf="@id/star_chart_button"
-				app:layout_constraintTop_toTopOf="@id/star_chart_button"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
 				app:srcCompat="@drawable/ic_action_search_dark"
 				app:tint="#5f6e7c" />
 
@@ -60,23 +47,11 @@
 				layout="@layout/star_map_compass_button"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginTop="@dimen/content_padding"
 				android:elevation="4dp"
-				app:layout_constraintEnd_toEndOf="@id/star_chart_button"
-				app:layout_constraintStart_toStartOf="@id/star_chart_button"
-				app:layout_constraintTop_toBottomOf="@id/star_chart_button" />
-
-			<net.osmand.plus.plugins.astro.views.StarMapButton
-				android:id="@+id/mode2d_button"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="@dimen/map_button_size"
-				android:layout_marginEnd="@dimen/content_padding"
-				android:background="@drawable/btn_circle"
-				android:elevation="4dp"
-				app:layout_constraintEnd_toStartOf="@id/star_map_button"
-				app:layout_constraintTop_toTopOf="@id/star_map_button"
-				app:srcCompat="@drawable/ic_action_celestial_path"
-				app:tint="#5f6e7c" />
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
 
 			<net.osmand.plus.plugins.astro.views.StarMapButton
 				android:id="@+id/camera_button"
@@ -96,14 +71,14 @@
 				android:id="@+id/settings_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
-				android:layout_marginTop="@dimen/content_padding"
+				android:layout_marginBottom="@dimen/content_padding"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:background="@drawable/btn_circle"
 				android:contentDescription="@string/shared_string_close"
 				android:elevation="4dp"
-				app:layout_constraintEnd_toStartOf="@id/close_button"
-				app:layout_constraintTop_toTopOf="parent"
-				app:srcCompat="@drawable/ic_action_settings"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:srcCompat="@drawable/ic_layer_top"
 				app:tint="#5f6e7c" />
 
 			<net.osmand.plus.plugins.astro.views.StarMapButton
@@ -118,20 +93,6 @@
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintTop_toTopOf="parent"
 				app:srcCompat="@drawable/ic_action_close"
-				app:tint="#5f6e7c" />
-
-			<net.osmand.plus.plugins.astro.views.StarMapButton
-				android:id="@+id/star_map_button"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="@dimen/map_button_size"
-				android:layout_marginEnd="@dimen/content_padding"
-				android:layout_marginBottom="@dimen/content_padding"
-				android:background="@drawable/btn_circle"
-				android:contentDescription="@string/star_map"
-				android:elevation="4dp"
-				app:layout_constraintBottom_toBottomOf="parent"
-				app:layout_constraintEnd_toEndOf="parent"
-				app:srcCompat="@drawable/ic_map"
 				app:tint="#5f6e7c" />
 
 			<net.osmand.plus.plugins.astro.views.StarMapButton
@@ -152,14 +113,14 @@
 				android:id="@+id/time_control_card"
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/map_button_size"
-				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginBottom="@dimen/content_padding"
 				app:cardBackgroundColor="@android:color/white"
 				app:cardCornerRadius="26dp"
 				app:cardElevation="4dp"
 				app:strokeWidth="0dp"
 				app:layout_constraintBottom_toBottomOf="parent"
-				app:layout_constraintStart_toStartOf="parent">
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintEnd_toEndOf="parent">
 
 				<LinearLayout
 					android:layout_width="wrap_content"
@@ -184,8 +145,8 @@
 
 					<net.osmand.plus.plugins.astro.views.StarMapResetButton
 						android:id="@+id/reset_time_button"
-						android:layout_width="44dp"
-						android:layout_height="44dp"
+						android:layout_width="@dimen/map_small_button_size"
+						android:layout_height="@dimen/map_small_button_size"
 						android:layout_marginEnd="2dp"
 						android:background="@drawable/bg_circle_light_blue"
 						android:contentDescription="Reset"

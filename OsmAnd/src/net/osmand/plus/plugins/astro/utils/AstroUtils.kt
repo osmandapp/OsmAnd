@@ -29,6 +29,7 @@ import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.Constellation
 import net.osmand.plus.plugins.astro.SkyObject
 import net.osmand.plus.plugins.astro.StarWatcherSettings
+import net.osmand.plus.plugins.astro.StarWatcherSettings.CommonConfig
 import net.osmand.plus.plugins.astro.StarWatcherSettings.StarMapConfig
 import net.osmand.plus.plugins.astro.views.StarView
 import net.osmand.plus.settings.enums.ThemeUsageContext
@@ -126,8 +127,9 @@ object AstroUtils {
 		context: Context,
 		starView: StarView,
 		swSettings: StarWatcherSettings,
-		onApply: ((StarMapConfig) -> Unit)? = null
+		onApply: ((CommonConfig, StarMapConfig) -> Unit)? = null
 	) {
+		val commonConfig = swSettings.getCommonConfig()
 		val config = swSettings.getStarMapConfig()
 
 		val app = (context.applicationContext as OsmandApplication)
@@ -140,6 +142,8 @@ object AstroUtils {
 		var tempEquator = config.showEquatorLine
 		var tempGalactic = config.showGalacticLine
 		var tempFavorites = config.showFavorites
+		var temp2DMode = config.is2DMode
+		var tempShowRegularMap = commonConfig.showRegularMap
 		var tempSun = config.showSun
 		var tempMoon = config.showMoon
 		var tempPlanets = config.showPlanets
@@ -209,6 +213,8 @@ object AstroUtils {
 		addCheckBox(context.getString(R.string.equator_line), tempEquator) { tempEquator = it }
 		addCheckBox(context.getString(R.string.galactic_line), tempGalactic) { tempGalactic = it }
 		addCheckBox(context.getString(R.string.favorites_item), tempFavorites) { tempFavorites = it }
+		addCheckBox(context.getString(R.string.map_2d_mode_action), temp2DMode) { temp2DMode = it }
+		addCheckBox(context.getString(R.string.show_map), tempShowRegularMap) { tempShowRegularMap = it }
 		addCheckBox(context.getString(R.string.magnitude_filter), tempShowMagnitudeFilter) { tempShowMagnitudeFilter = it }
 
 		// PLANETS
@@ -239,6 +245,7 @@ object AstroUtils {
 				starView.showEquatorLine = tempEquator
 				starView.showGalacticLine = tempGalactic
 				starView.showFavorites = tempFavorites
+				starView.is2DMode = temp2DMode
 
 				starView.showSun = tempSun
 				starView.showMoon = tempMoon
@@ -264,6 +271,7 @@ object AstroUtils {
 					showEquatorLine = tempEquator,
 					showGalacticLine = tempGalactic,
 					showFavorites = tempFavorites,
+					is2DMode = temp2DMode,
 					showSun = tempSun,
 					showMoon = tempMoon,
 					showPlanets = tempPlanets,
@@ -278,7 +286,11 @@ object AstroUtils {
 					showMagnitudeFilter = tempShowMagnitudeFilter
 				)
 				swSettings.setStarMapConfig(newConfig)
-				onApply?.invoke(newConfig)
+
+				val newCommonConfig = commonConfig.copy(showRegularMap = tempShowRegularMap)
+				swSettings.setCommonConfig(newCommonConfig)
+
+				onApply?.invoke(newCommonConfig, newConfig)
 			}
 			.setNegativeButton(R.string.shared_string_cancel, null)
 			.create()
