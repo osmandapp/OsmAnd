@@ -57,6 +57,9 @@ public class OsmandRegionsTest {
         testIncludedExcluded(-35.308056, 149.124444,
                 "australia-oceania_australian-capital-territory_australia-oceania",
                 "australia-oceania_new-south-wales_australia-oceania");
+
+        // Additional subregion query must return the main region name (Lienz, Tirol, Austria)
+        testIncludedExcluded(46.82987, 12.76812, "austria_tyrol_europe", "");
     }
 
     private void testIncludedExcluded(double lat, double lon, String included, String excluded) {
