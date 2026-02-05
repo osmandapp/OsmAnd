@@ -22,6 +22,7 @@ import androidx.preference.Preference;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
@@ -478,6 +479,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			MapViewTrackingUtilities mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 			if (mapViewTrackingUtilities != null) {
 				mapViewTrackingUtilities.updateSettings();
+			}
+			if (settings.ALTITUDE_METRIC.getId().equals(prefId)) {
+				callMapActivity(MapActivity::refreshMapComplete);
 			}
 		}
 	}
