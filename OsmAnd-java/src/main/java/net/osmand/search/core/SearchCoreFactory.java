@@ -848,38 +848,14 @@ public class SearchCoreFactory {
 
 			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,
 					SearchPhraseDataType.POI);
-			Set<File> searchedReaders = new HashSet<>();
 			while (offlineIterator.hasNext()) {
 				BinaryMapIndexReader r = offlineIterator.next();
 				currentFile[0] = r;
 				r.searchPoiByName(r.isBasemap() ? reqUnlimited : req);
-				searchedReaders.add(r.getFile());
 				resultMatcher.apiSearchRegionFinished(this, r, phrase);
 			}
 
-			// Search additional OBFs by using base map POI results
-			Set<BinaryMapIndexReader> baseMapReaders = new LinkedHashSet<>();
-			for (Amenity poi : reqUnlimited.getSearchResults()) {
-				if (poi.getLocation() == null) {
-					continue;
-				}
-				QuadRect poiBbox = SearchPhrase.calculateBbox(BBOX_RADIUS, poi.getLocation());
-				Iterator<BinaryMapIndexReader> poiIterator = phrase.getOfflineIndexes(poiBbox, SearchPhraseDataType.POI);
-				while (poiIterator.hasNext()) {
-					BinaryMapIndexReader r = poiIterator.next();
-					if (r.isBasemap() || searchedReaders.contains(r.getFile())) {
-						continue;
-					}
-					baseMapReaders.add(r);
-				}
-			}
-			for (BinaryMapIndexReader r : baseMapReaders) {
-				currentFile[0] = r;
-				r.searchPoiByName(req);
-				searchedReaders.add(r.getFile());
-				resultMatcher.apiSearchRegionFinished(this, r, phrase);
-			}
-			return true;
+            return true;
 		}
 
 		@Override
