@@ -5919,7 +5919,7 @@
     <string name="astro_constellations">Сазвежђа</string>
     <string name="astro_stars">Звезде</string>
     <string name="astro_galaxies">Галаксије</string>
-    <string name="astro_nebulae">Маглине</string>
+    <string name="astro_nebulae">Маглина</string>
     <string name="astro_open_clusters">Отворени кластери</string>
     <string name="astro_globular_clusters">Глобуларна јата</string>
     <string name="astro_galaxy_clusters">Галаксијска јата</string>
@@ -5964,4 +5964,16 @@
     <string name="equator_line">Екваторска линија</string>
     <string name="backup_deleted_all_data">Избрисани подаци.</string>
     <string name="backup_deleting_all_data">Брисање података…</string>
+    <string name="astro_rendering">Исцртавање</string>
+    <string name="astro_configure_view">Конфигуриши приказ</string>
+    <string name="astro_visible_objects">Видљиви објекти</string>
+    <string name="red_filter">Црвени филтер</string>
+    <string name="astro_directions">Упутства</string>
+    <string name="astro_daily_path">Дневна путања</string>
+    <string name="map_2d">2Д</string>
+    <string name="map_3d">3Д</string>
+    <string name="astro_deep_sky">Дубоко небо</string>
+    <string name="astro_star_clusters">Звездана јата</string>
+    <string name="astro_nebulas">Маглине</string>
+    <string name="astro_solar_system">Сунчев систем</string>
 </resources>
