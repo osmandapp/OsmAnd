@@ -32,6 +32,7 @@ import android.graphics.*;
 import android.graphics.drawable.*;
 import android.hardware.display.DisplayManager;
 import android.net.Uri;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
@@ -1502,14 +1503,34 @@ public class AndroidUtils {
 		return ((OsmandApplication) context.getApplicationContext());
 	}
 
-	public static Intent registerBroadcastReceiver(@NonNull Context context, @Nullable String action, @Nullable BroadcastReceiver receiver) {
+	public static Intent registerBroadcastReceiver(@NonNull Context context, @NonNull String action, @Nullable BroadcastReceiver receiver) {
 		return registerBroadcastReceiver(context, action, receiver, false);
 	}
 
-	public static Intent registerBroadcastReceiver(@NonNull Context context, @Nullable String action, @Nullable BroadcastReceiver receiver, boolean export) {
+	public static Intent registerBroadcastReceiver(@NonNull Context context, @NonNull String action, @Nullable BroadcastReceiver receiver, boolean export) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 			return context.registerReceiver(receiver, new IntentFilter(action), export ? RECEIVER_EXPORTED : RECEIVER_NOT_EXPORTED);
 		}
 		return context.registerReceiver(receiver, new IntentFilter(action));
+	}
+
+	public static int getBatteryLevel(@NonNull Context context) {
+		try {
+			BatteryManager manager = context.getSystemService(BatteryManager.class);
+			int percent = manager != null ? manager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY) : -1;
+			if (percent >= 0 && percent <= 100) {
+				return percent;
+			}
+			Intent intent = registerBroadcastReceiver(context, Intent.ACTION_BATTERY_CHANGED, null, false);
+			if (intent != null) {
+				int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+				int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+
+				return level >= 0 && scale > 0 ? (level * 100) / scale : 0;
+			}
+		} catch (Exception e) {
+			LOG.info(e);
+		}
+		return 0;
 	}
 }

@@ -10,12 +10,13 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxFormatter;
 import net.osmand.util.MapUtils;
 
@@ -59,13 +60,14 @@ public class LiveMonitoringHelper {
 
 		if (shouldRecordLocation(location, locationTime)) {
 			LiveMonitoringData data = new LiveMonitoringData(location.getLatitude(), location.getLongitude(),
-					(float) location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
+					(float) location.getAltitude(), location.getSpeed(), location.getAccuracy(),
+					location.getBearing(), locationTime, AndroidUtils.getBatteryLevel(app));
 			setupLiveDataTimeAndDistance(data, location, locationTime);
 			queue.add(data);
 			lastPoint = new LatLon(location.getLatitude(), location.getLongitude());
 			lastTimeUpdated = locationTime;
 		}
-		if (isLiveMonitoringEnabled() && !queue.isEmpty())  {
+		if (isLiveMonitoringEnabled() && !queue.isEmpty()) {
 			OsmAndTaskManager.executeTask(new LiveSender(), queue);
 		}
 	}
@@ -96,7 +98,7 @@ public class LiveMonitoringHelper {
 		return record;
 	}
 
-	private void setupLiveDataTimeAndDistance(@NonNull LiveMonitoringData data, @Nullable net.osmand.Location location, long locationTime) {
+	private void setupLiveDataTimeAndDistance(@NonNull LiveMonitoringData data, @Nullable Location location, long locationTime) {
 		long timeToArrival = 0, timeToIntermediateOrFinish = 0;
 		int distanceToArrivalOrMarker = 0, distanceToIntermediateOrFinish = 0;
 		RoutingHelper routingHelper = app.getRoutingHelper();
@@ -128,7 +130,7 @@ public class LiveMonitoringHelper {
 
 
 	private static class LiveMonitoringData {
-		public static final int NUMBER_OF_LIVE_DATA_FIELDS = 13;    //change the value after each addition\deletion of data field
+		public static final int NUMBER_OF_LIVE_DATA_FIELDS = 14;    //change the value after each addition\deletion of data field
 
 		private final double lat;
 		private final double lon;
@@ -137,6 +139,7 @@ public class LiveMonitoringHelper {
 		private final float bearing;
 		private final float hdop;
 		private final long time;
+		private final int battery;
 		private long timeToArrival;
 		private long timeToIntermediateOrFinish;
 		private int distanceToArrivalOrMarker;
@@ -149,7 +152,7 @@ public class LiveMonitoringHelper {
 			this.distanceToIntermediateOrFinish = distanceToIntermediateOrFinish;
 		}
 
-		public LiveMonitoringData(double lat, double lon, float alt, float speed, float hdop, float bearing, long time) {
+		public LiveMonitoringData(double lat, double lon, float alt, float speed, float hdop, float bearing, long time, int battery) {
 			this.lat = lat;
 			this.lon = lon;
 			this.alt = alt;
@@ -157,6 +160,7 @@ public class LiveMonitoringHelper {
 			this.hdop = hdop;
 			this.time = time;
 			this.bearing = bearing;
+			this.battery = battery;
 		}
 	}
 
@@ -296,6 +300,9 @@ public class LiveMonitoringHelper {
 				case 12:
 					// accesToken
 					prm.add(app.getSettings().BACKUP_ACCESS_TOKEN.get());
+					break;
+				case 13:
+					prm.add(data.battery + "");
 					break;
 				default:
 					break;
