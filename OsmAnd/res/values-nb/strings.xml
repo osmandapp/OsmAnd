@@ -5912,4 +5912,15 @@
     <string name="navigation_action_descr">Åpner Navigering.</string>
     <string name="rendering_attr_hideFerries_name">Fergeruter</string>
     <string name="rendering_attr_hideFerries_description">Skjul fergeruter</string>
+    <string name="astro_solar_system">Solsystem</string>
+    <string name="astro_nebulas">Stjernetåker</string>
+    <string name="astro_star_clusters">Stjernehoper</string>
+    <string name="map_3d">3D</string>
+    <string name="map_2d">2D</string>
+    <string name="astro_daily_path">Daglig bane</string>
+    <string name="astro_directions">Retninger</string>
+    <string name="red_filter">Rødt filter</string>
+    <string name="astro_visible_objects">Synlige objekter</string>
+    <string name="astro_configure_view">Still inn visning</string>
+    <string name="astro_rendering">Opptegning</string>
 </resources>
