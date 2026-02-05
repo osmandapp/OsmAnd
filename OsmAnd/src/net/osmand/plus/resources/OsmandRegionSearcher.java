@@ -83,28 +83,12 @@ public class OsmandRegionSearcher {
 		List<BinaryMapDataObject> mapDataObjects;
 		try {
 			mapDataObjects = osmandRegions.query(point31x, point31x, point31y, point31y);
+			mapDataObjects = osmandRegions.filterQueryResultsByPoint(mapDataObjects, point31x, point31y);
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
 			return;
 		}
 		if (mapDataObjects != null) {
-			Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
-			while (it.hasNext()) {
-				BinaryMapDataObject o = it.next();
-				if (o.getTypes() != null) {
-					boolean isRegion = true;
-					for (int i = 0; i < o.getTypes().length; i++) {
-						BinaryMapIndexReader.TagValuePair tp = o.getMapIndex().decodeType(o.getTypes()[i]);
-						if ("boundary".equals(tp.value)) {
-							isRegion = false;
-							break;
-						}
-					}
-					if (!isRegion || !osmandRegions.contain(o, point31x, point31y)) {
-						it.remove();
-					}
-				}
-			}
 			double smallestArea = -1;
 			for (BinaryMapDataObject o : mapDataObjects) {
 				String downloadName = osmandRegions.getDownloadName(o);
