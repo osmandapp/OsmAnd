@@ -712,7 +712,7 @@
     <string name="osmand_parking_position_name">Lieu de stationnement</string>
     <string name="osmand_parking_plugin_description">Enregistrez la position de votre véhicule et soyez alertés avant la fin du temps de stationnement. Pour placer une marque, sélectionnez un point sur la carte, allez dans « Actions » et sélectionnez « Stationnement ».</string>
     <string name="osmand_parking_plugin_name">Stationnement</string>
-    <string name="context_menu_item_add_parking_point">Parking</string>
+    <string name="context_menu_item_add_parking_point">Marquer comme emplacement de stationnement</string>
     <string name="context_menu_item_delete_parking_point">Supprimer l\'emplacement de stationnement</string>
     <string name="starting_point_too_far">Point de départ trop éloigné de la route la plus proche.</string>
     <string name="shared_location">Lieu partagé</string>
@@ -1769,7 +1769,7 @@
     <string name="shared_string_status">État</string>
     <string name="shared_string_save_changes">Enregistrer les modifications</string>
     <string name="show_polygons">Afficher les polygones</string>
-    <string name="find_parking">Rechercher un stationnement</string>
+    <string name="find_parking">Trouver un parking</string>
     <string name="rendering_attr_showMtbRoutes_name">Itinéraires de VTT</string>
     <string name="shared_string_reverse_order">Inverser l\'ordre</string>
     <string name="shared_string_toolbar">Barre d\'outils</string>
@@ -1808,7 +1808,7 @@
     <string name="osm_live_enter_user_name">Veuillez indiquer votre nom public</string>
     <string name="shared_string_move_up">Déplacer ↑</string>
     <string name="shared_string_move_down">Déplacer ↓</string>
-    <string name="finish_navigation">Terminer le guidage</string>
+    <string name="finish_navigation">Terminer la navigation</string>
     <string name="storage_permission_restart_is_required">L’application est désormais autorisée à écrire sur le stockage externe, mais doit être redémarrée pour que cela prenne effet.</string>
     <string name="full_report">Rapport complet</string>
     <string name="open_street_map_login_and_pass">Identifiant et mot de passe OpenStreetMap</string>
@@ -5897,4 +5897,6 @@
     <string name="red_filter">Filtre rouge</string>
     <string name="astro_visible_objects">Objets visibles</string>
     <string name="astro_rendering">Rendu</string>
+    <string name="astro_configure_view">Configurer l\'affichage</string>
+    <string name="astro_daily_path">Itinéraire quotidien</string>
 </resources>
