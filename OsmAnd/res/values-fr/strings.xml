@@ -5887,4 +5887,14 @@
     <string name="equator_line">Ligne équatoriale</string>
     <string name="backup_deleted_all_data">Données supprimées.</string>
     <string name="backup_deleting_all_data">Suppression des données…</string>
+    <string name="astro_solar_system">Système solaire</string>
+    <string name="astro_nebulas">Nébuleuses</string>
+    <string name="astro_star_clusters">Amas stellaires</string>
+    <string name="map_3d">3D</string>
+    <string name="map_2d">2D</string>
+    <string name="astro_deep_sky">Ciel profond</string>
+    <string name="astro_directions">Directions</string>
+    <string name="red_filter">Filtre rouge</string>
+    <string name="astro_visible_objects">Objets visibles</string>
+    <string name="astro_rendering">Rendu</string>
 </resources>
