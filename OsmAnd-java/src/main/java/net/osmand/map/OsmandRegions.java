@@ -1016,10 +1016,7 @@ public class OsmandRegions {
 		}
 		for (BinaryMapDataObject o : objects) {
 			String k = getDownloadName(o);
-			if (Algorithms.isEmpty(k) || o.getName().isEmpty()) {
-				continue; // both name && download_name required
-			}
-			if (intersectionCounter.getOrDefault(k, 0) % 2 == 1) {
+			if (!Algorithms.isEmpty(k) && intersectionCounter.getOrDefault(k, 0) % 2 == 1) {
 				filtered.add(o); // odd intersections == outside exclusion polygons
 			}
 		}
