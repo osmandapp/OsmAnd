@@ -40,6 +40,7 @@ import net.osmand.util.LocationParser;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 import net.osmand.util.MapUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -730,8 +731,6 @@ public class SearchCoreFactory {
 		public static class SearchAmenityByNameAPI extends SearchBaseAPI {
 		private static final int LIMIT = 10000;
 		private static final int BBOX_RADIUS = 500 * 1000;
-		private static final int BBOX_RADIUS_INSIDE = 5600 * 1000; // 5600 is the minimum to pass test [14: hisar]
-		private static final int BBOX_RADIUS_POI_IN_CITY = 25 * 1000;
 		private static final int FIRST_WORD_MIN_LENGTH = 3;
 
 		public SearchAmenityByNameAPI() {
@@ -751,11 +750,8 @@ public class SearchCoreFactory {
 			// BEFORE: it was searching exact match of whole phrase.getUnknownSearchPhrase() [ Check feedback ] 
 
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
-			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,
-					SearchPhraseDataType.POI);
 			String searchWord = phrase.getUnknownWordToSearch();
 			final NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
-			QuadRect bbox = phrase.getFileRequest() != null ? phrase.getRadiusBBoxToSearch(BBOX_RADIUS_POI_IN_CITY) : phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
 			final Set<String> ids = new HashSet<String>();
 
 			ResultMatcher<Amenity> rawDataCollector = null;
@@ -836,6 +832,8 @@ public class SearchCoreFactory {
 				}
 			};
 
+			// Optimize POI search in OBF by using reduced BBOX_RADIUS
+            QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int) bbox.centerX(), (int) bbox.centerY(), searchWord,
 					(int) bbox.left, (int) bbox.right, (int) bbox.top, (int) bbox.bottom,
@@ -848,17 +846,38 @@ public class SearchCoreFactory {
 					matcher, rawDataCollector);
 			reqUnlimited.setSearchStat(phrase.getSettings().getStat());
 
-			BinaryMapIndexReader fileRequest = phrase.getFileRequest();
-			if (fileRequest != null) {
-				fileRequest.searchPoiByName(req);
-				resultMatcher.apiSearchRegionFinished(this, fileRequest, phrase);
-			} else {
-				while (offlineIterator.hasNext()) {
-					BinaryMapIndexReader r = offlineIterator.next();
-					currentFile[0] = r;
-					r.searchPoiByName(r.isBasemap() ? reqUnlimited : req);
-					resultMatcher.apiSearchRegionFinished(this, r, phrase);
+			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,
+					SearchPhraseDataType.POI);
+			Set<File> searchedReaders = new HashSet<>();
+			while (offlineIterator.hasNext()) {
+				BinaryMapIndexReader r = offlineIterator.next();
+				currentFile[0] = r;
+				r.searchPoiByName(r.isBasemap() ? reqUnlimited : req);
+				searchedReaders.add(r.getFile());
+				resultMatcher.apiSearchRegionFinished(this, r, phrase);
+			}
+
+			// Search additional OBFs by using base map POI results
+			Set<BinaryMapIndexReader> baseMapReaders = new LinkedHashSet<>();
+			for (Amenity poi : reqUnlimited.getSearchResults()) {
+				if (poi.getLocation() == null) {
+					continue;
 				}
+				QuadRect poiBbox = SearchPhrase.calculateBbox(BBOX_RADIUS, poi.getLocation());
+				Iterator<BinaryMapIndexReader> poiIterator = phrase.getOfflineIndexes(poiBbox, SearchPhraseDataType.POI);
+				while (poiIterator.hasNext()) {
+					BinaryMapIndexReader r = poiIterator.next();
+					if (r.isBasemap() || searchedReaders.contains(r.getFile())) {
+						continue;
+					}
+					baseMapReaders.add(r);
+				}
+			}
+			for (BinaryMapIndexReader r : baseMapReaders) {
+				currentFile[0] = r;
+				r.searchPoiByName(req);
+				searchedReaders.add(r.getFile());
+				resultMatcher.apiSearchRegionFinished(this, r, phrase);
 			}
 			return true;
 		}
