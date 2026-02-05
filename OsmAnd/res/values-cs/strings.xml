@@ -1814,7 +1814,7 @@
     <string name="upload_osm_note_description">Nahrajte OSM poznámku anonymně, nebo prostřednictvím svého účtu OpenStreetMap.org.</string>
     <string name="shared_string_move_up">Posunout ↑</string>
     <string name="shared_string_move_down">Posunout ↓</string>
-    <string name="finish_navigation">Dokončit navigaci</string>
+    <string name="finish_navigation">Ukončit navigaci</string>
     <string name="avoid_road">Vyhnout se cestě</string>
     <string name="storage_directory_readonly_desc">Přepnuto do interní paměti, protože aktuálně vybraná složka je chráněna proti zápisu. Prosím zvolte složku v zapisovatelné paměti.</string>
     <string name="storage_directory_shared">Sdílená paměť</string>
@@ -5996,4 +5996,16 @@
     <string name="equator_line">Rovník</string>
     <string name="backup_deleted_all_data">Data odstraněna.</string>
     <string name="backup_deleting_all_data">Mazání dat…</string>
+    <string name="astro_rendering">Vykreslování</string>
+    <string name="astro_configure_view">Nastavit zobrazení</string>
+    <string name="astro_visible_objects">Viditelné objekty</string>
+    <string name="red_filter">Červený filtr</string>
+    <string name="astro_directions">Směry</string>
+    <string name="astro_daily_path">Denní cesta</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_deep_sky">Hluboký vesmír</string>
+    <string name="astro_star_clusters">Hvězdokupy</string>
+    <string name="astro_nebulas">Mlhoviny</string>
+    <string name="astro_solar_system">Sluneční soustava</string>
 </resources>
