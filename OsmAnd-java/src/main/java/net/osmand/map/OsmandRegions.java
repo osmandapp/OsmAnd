@@ -999,12 +999,7 @@ public class OsmandRegions {
 			polygon.add(new LatLon(lat, lon));
 		}
 
-		if (worldRegion.containsPoint(polygon.get(polygon.size() / 2))) {
-			// add exclusion zones marked with ! in *.poly files
-			worldRegion.exclusionPolygons.add(polygon);
-		} else {
-			worldRegion.additionalPolygons.add(polygon);
-		}
+		worldRegion.additionalPolygons.add(polygon);
 	}
 
 	public List<BinaryMapDataObject> filterQueryResultsByPoint(List<BinaryMapDataObject> objects, int x, int y) {
