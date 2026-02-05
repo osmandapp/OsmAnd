@@ -1043,7 +1043,7 @@
     <string name="osmand_parking_position_name">Место парковки</string>
     <string name="osmand_parking_plugin_description">Отметьте, где припаркован ваш автомобиль, и сообщите в своем календаре, когда закончится срок действия парковочного счетчика. Чтобы разместить метку, выберите место на карте, перейдите в раздел \"Действия\" и нажмите \"Добавить парковку\".</string>
     <string name="osmand_parking_plugin_name">Место парковки</string>
-    <string name="context_menu_item_add_parking_point">Место парковки</string>
+    <string name="context_menu_item_add_parking_point">Отметить как место для парковки</string>
     <string name="context_menu_item_delete_parking_point">Удалить парковку</string>
     <string name="starting_point_too_far">Пункт отправления слишком далеко от ближайшей дороги.</string>
     <string name="shared_location">Общие места</string>
@@ -5894,4 +5894,18 @@
     <string name="meridian_line">Линия меридиана</string>
     <string name="equator_line">Линия экватора</string>
     <string name="galactic_line">Галактическая координатная линия</string>
+    <string name="astro_visible_objects">Видимые объекты</string>
+    <string name="red_filter">Красный фильтр</string>
+    <string name="astro_directions">Направления</string>
+    <string name="astro_daily_path">Путь по дням</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_deep_sky">Глубокий космос</string>
+    <string name="astro_star_clusters">Звездные скопления</string>
+    <string name="astro_nebulas">Туманности</string>
+    <string name="astro_solar_system">Солнечная система</string>
+    <string name="astro_rendering">Визуализация</string>
+    <string name="astro_configure_view">Настройка вида</string>
+    <string name="backup_deleted_all_data">Удаленные данные.</string>
+    <string name="backup_deleting_all_data">Удаление данных…</string>
 </resources>
