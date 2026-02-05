@@ -1765,19 +1765,49 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		clearSelectedFilesSplits();
 	}
 
-	private void cleanupOldRenderedSegments(@NonNull List<SelectedGpxFile> selectedGPXFiles) {
-		Set<String> selectedPaths = new HashSet<>();
-		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
-			selectedPaths.add(selectedGpxFile.getGpxFile().getPath());
-		}
-		List<String> pathsToRemove = new ArrayList<>();
-		for (String path : renderedSegmentsCache.keySet()) {
-			if (!selectedPaths.contains(path)) {
-				pathsToRemove.add(path);
+	private void cleanupOldRenderedSegments(@NonNull List<SelectedGpxFile> selectedGpxFiles) {
+		if (!renderedSegmentsCache.isEmpty()) {
+			Set<String> activePaths = new HashSet<>();
+			for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
+				activePaths.add(selectedGpxFile.getGpxFile().getPath());
+			}
+			boolean needsCleanup = false;
+			Set<TrkSegment> protectedSegments = new HashSet<>();
+			for (Map.Entry<String, Set<TrkSegment>> entry : renderedSegmentsCache.entrySet()) {
+				if (activePaths.contains(entry.getKey())) {
+					Set<TrkSegment> segments = entry.getValue();
+					if (!Algorithms.isEmpty(segments)) {
+						protectedSegments.addAll(segments);
+					}
+				} else {
+					needsCleanup = true;
+				}
+			}
+			if (needsCleanup) {
+				removeObsoleteSegments(activePaths, protectedSegments);
 			}
 		}
-		for (String path : pathsToRemove) {
-			removeSelectedFilesSegments(path);
+	}
+
+	private void removeObsoleteSegments(@NonNull Set<String> activePaths, @NonNull Set<TrkSegment> protectedSegments) {
+		Iterator<Map.Entry<String, Set<TrkSegment>>> iterator = renderedSegmentsCache.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<String, Set<TrkSegment>> entry = iterator.next();
+
+			String path = entry.getKey();
+			if (!activePaths.contains(path)) {
+				continue;
+			}
+			Set<TrkSegment> segments = entry.getValue();
+			if (!Algorithms.isEmpty(segments)) {
+				for (TrkSegment segment : segments) {
+					if (!protectedSegments.contains(segment)) {
+						resetSymbolProviders(segment);
+					}
+				}
+			}
+			iterator.remove();
+			segmentsCache.remove(path);
 		}
 	}
 
