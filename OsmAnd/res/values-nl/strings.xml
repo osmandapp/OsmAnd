@@ -1600,7 +1600,7 @@
     <string name="nm">nmi</string>
     <string name="si_nm">Nautische mijlen</string>
     <string name="si_kmh">Kilometer per uur</string>
-    <string name="si_mph">Mijlen per uur</string>
+    <string name="si_mph">Mijl per uur</string>
     <string name="si_m_s">Meter per seconde</string>
     <string name="si_min_km">Minuten per kilometer</string>
     <string name="si_min_m">Minuten per mijl</string>
