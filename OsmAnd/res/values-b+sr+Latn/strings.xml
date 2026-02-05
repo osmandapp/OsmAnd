@@ -1627,7 +1627,7 @@
     <string name="shared_string_email_address">E-mejl adresa</string>
     <string name="shared_string_save_changes">Sačuvaj izmene</string>
     <string name="shared_string_status">Status</string>
-    <string name="find_parking">Pronađi parking</string>
+    <string name="find_parking">Pronađi parkiralište</string>
     <string name="show_polygons">Prikazuj mnogouglove</string>
     <string name="rendering_attr_showMtbRoutes_name">Putevi planinskih bicikli</string>
     <string name="consider_turning_polygons_off">Preporučuje se da isključiš prikaz poligona.</string>
@@ -1689,7 +1689,7 @@
     <string name="storage_directory_shared">Deljena memorija</string>
     <string name="storage_directory_readonly_desc">Prebačeno na unutrašnje skladište pošto je označeno skladište podataka zaštićeno od pisanja. Izaberi upisivu folder skladišta.</string>
     <string name="avoid_road">Izbegavaj put</string>
-    <string name="finish_navigation">Kraj navođenja</string>
+    <string name="finish_navigation">Završi navođenje</string>
     <string name="shared_string_move_down">Pomeri ↓</string>
     <string name="shared_string_move_up">Pomeri ↑</string>
     <string name="storage_permission_restart_is_required">Programu je sada dozvoljen upis na spoljnju karticu, mora da se restartuje aplikacija.</string>
@@ -5966,4 +5966,16 @@
     <string name="equator_line">Ekvatorska linija</string>
     <string name="backup_deleted_all_data">Izbrisani podaci.</string>
     <string name="backup_deleting_all_data">Brisanje podataka…</string>
+    <string name="astro_rendering">Iscrtavanje</string>
+    <string name="astro_configure_view">Konfiguriši prikaz</string>
+    <string name="astro_visible_objects">Vidljivi objekti</string>
+    <string name="red_filter">Crveni filter</string>
+    <string name="astro_directions">Uputstva</string>
+    <string name="astro_daily_path">Dnevna putanja</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_deep_sky">Duboko nebo</string>
+    <string name="astro_star_clusters">Zvezdana jata</string>
+    <string name="astro_nebulas">Magline</string>
+    <string name="astro_solar_system">Sunčev sistem</string>
 </resources>
