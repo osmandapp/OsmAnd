@@ -39,18 +39,18 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 	@Override
 	public void showSettingsFragmentAndHighlightSetting(final FragmentActivity activity,
 														final Fragment settingsFragment,
-														final SearchablePreferenceOfHostWithinTree setting2Highlight) {
+														final SearchablePreferenceOfHostWithinTree settingToHighlight) {
 		if (activity instanceof final MapActivity mapActivity) {
 			final boolean handled =
 					showSettingsFragmentOfMapActivityAndHighlightSetting(
 							mapActivity,
 							settingsFragment,
-							asSetting(setting2Highlight.searchablePreference()));
+							asSetting(settingToHighlight.searchablePreference()));
 			if (handled) {
 				return;
 			}
 		}
-		delegate.showSettingsFragmentAndHighlightSetting(activity, settingsFragment, setting2Highlight);
+		delegate.showSettingsFragmentAndHighlightSetting(activity, settingsFragment, settingToHighlight);
 	}
 
 	private static boolean showSettingsFragmentOfMapActivityAndHighlightSetting(final MapActivity mapActivity,
