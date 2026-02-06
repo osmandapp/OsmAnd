@@ -5772,4 +5772,16 @@
     <string name="map_screen_layout_descr">Επιλέξτε αν θα χρησιμοποιείται μια απλή διάταξη για όλους τους προσανατολισμούς, ή προσαρμογή ξεχωριστά για Κατακόρυφα και Οριζόντια.</string>
     <string name="backup_deleted_all_data">Διαγράφηκαν τα δεδομένα.</string>
     <string name="backup_deleting_all_data">Διαγράφονται τα δεδομένα…</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_configure_view">Διαμόρφωση προβολής</string>
+    <string name="astro_visible_objects">Ορατά αντικείμενα</string>
+    <string name="red_filter">Κόκκινο φίλτρο</string>
+    <string name="astro_directions">Κατευθύνσεις</string>
+    <string name="astro_daily_path">Ημερήσια Διαδρομή</string>
+    <string name="astro_rendering">Απεικόνιση</string>
+    <string name="astro_deep_sky">Βαθύς ουρανός</string>
+    <string name="astro_star_clusters">Αστρικά σμήνη</string>
+    <string name="astro_nebulas">Νεφελώματα</string>
+    <string name="astro_solar_system">Ηλιακό σύστημα</string>
 </resources>

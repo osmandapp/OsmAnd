@@ -195,11 +195,11 @@
     <string name="km_h">km/u</string>
     <string name="mile_per_hour">mpu</string>
     <string name="si_kmh">Kilometer per uur</string>
-    <string name="si_mph">Mijlen per uur</string>
+    <string name="si_mph">Mijl per uur</string>
     <string name="si_m_s">Meter per seconde</string>
     <string name="si_min_km">Minuten per kilometer</string>
     <string name="si_min_m">Minuten per mijl</string>
-    <string name="si_nm_h">Nautische mijlen per uur (knopen)</string>
+    <string name="si_nm_h">Nautische mijlen per uur (knoop)</string>
     <string name="si_mi_feet">Mijlen/voet</string>
     <string name="si_mi_yard">Mijlen/yards</string>
     <string name="si_km_m">Kilometer/meter</string>
@@ -208,8 +208,7 @@
     <string name="shared_string_hour_short">u</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">s</string>
-    <string name="welcome_descr">Met <b>OsmAnd Tracker</b> kunt u uw locatie delen en die van anderen bekijken.<br/>
-        <br/>The app gebruikt de Telegram API, daarom hebt u een Telegram account nodig.</string>
+    <string name="welcome_descr">Met <b>OsmAnd Tracker</b> kunt u uw locatie delen en die van anderen bekijken.<br/><br/>The app gebruikt de Telegram API, daarom hebt u een Telegram account nodig.</string>
     <string name="my_location">Mijn locatie</string>
     <string name="live_now">Nu live</string>
     <string name="timeline">Tijdlijn</string>
