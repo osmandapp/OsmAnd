@@ -73,6 +73,7 @@ public class SettingsSearchButtonHelper {
 			final Consumer<MergedPreferenceScreen<Configuration>> onMergedPreferenceScreenAvailable,
 			final FragmentActivity fragmentActivity,
 			final @IdRes int fragmentContainerViewId,
+			// FK-TODO: remove rootPreferenceFragment
 			final Class<? extends BaseSettingsFragment> rootPreferenceFragment,
 			final OsmandPreference<String> availableAppModes,
 			final TileSourceTemplatesProvider tileSourceTemplatesProvider,
@@ -81,7 +82,6 @@ public class SettingsSearchButtonHelper {
 		return SearchPreferenceFragments
 				.builder(
 						SearchDatabaseConfigFactory.createSearchDatabaseConfig(
-								rootPreferenceFragment,
 								tileSourceTemplatesProvider,
 								fragmentActivity.getSupportFragmentManager()),
 						SearchConfigFactory.createSearchConfig(

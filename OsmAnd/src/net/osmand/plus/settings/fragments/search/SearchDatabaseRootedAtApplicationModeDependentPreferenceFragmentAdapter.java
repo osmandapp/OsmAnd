@@ -11,14 +11,13 @@ import com.google.common.graph.ImmutableValueGraph;
 
 import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.fragments.MainSettingsFragment;
 
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
-import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
-import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
+import de.KnollFrank.lib.settingssearch.PreferenceScreenOfHostOfActivity;
+import de.KnollFrank.lib.settingssearch.PreferenceScreenProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.common.Classes;
 import de.KnollFrank.lib.settingssearch.common.Sets;
@@ -116,7 +115,6 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 						applicationMode);
 		final SearchDatabaseConfig<Configuration> searchDatabaseConfig =
 				SearchDatabaseConfigFactory.createSearchDatabaseConfig(
-						MainSettingsFragment.class,
 						tileSourceTemplatesProvider,
 						activityContext.getSupportFragmentManager());
 		return SubtreeReplacer.replaceSubtreeWithTree(
@@ -134,7 +132,7 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 	}
 
 	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> getPojoTreeRootedAt(
-			final PreferenceScreenWithHost root,
+			final PreferenceScreenOfHostOfActivity root,
 			final Locale locale,
 			final FragmentActivity activityContext,
 			final SearchDatabaseConfig<Configuration> searchDatabaseConfig) {
@@ -164,7 +162,7 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 				.orElseThrow();
 	}
 
-	private PreferenceScreenWithHost instantiateSearchablePreferenceScreen(
+	private PreferenceScreenOfHostOfActivity instantiateSearchablePreferenceScreen(
 			final SearchablePreferenceScreen searchablePreferenceScreen,
 			final Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> tree,
 			final TreePathInstantiator treePathInstantiator) {
@@ -176,7 +174,7 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 	private TreePathInstantiator createTreePathInstantiator(final SearchDatabaseConfig<Configuration> searchDatabaseConfig,
 															final FragmentActivity activityContext) {
 		return new TreePathInstantiator(
-				new PreferenceScreenWithHostProvider(
+				new PreferenceScreenProvider(
 						InstantiateAndInitializeFragmentFactory.createInstantiateAndInitializeFragment(
 								searchDatabaseConfig.fragmentFactory,
 								FragmentInitializerFactory.createFragmentInitializer(

@@ -9,13 +9,12 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.common.graph.ImmutableValueGraph;
 
 import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
-import net.osmand.plus.settings.fragments.MainSettingsFragment;
 
 import java.util.Locale;
 import java.util.Optional;
 
-import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
-import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
+import de.KnollFrank.lib.settingssearch.PreferenceScreenOfHostOfActivity;
+import de.KnollFrank.lib.settingssearch.PreferenceScreenProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.common.Views;
 import de.KnollFrank.lib.settingssearch.common.graph.Tree;
@@ -61,7 +60,6 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenTreeCr
 				});
 		final SearchDatabaseConfig<Configuration> searchDatabaseConfig =
 				SearchDatabaseConfigFactory.createSearchDatabaseConfig(
-						MainSettingsFragment.class,
 						tileSourceTemplatesProvider,
 						activityContext.getSupportFragmentManager());
 		return getPojoTreeRootedAt(
@@ -75,7 +73,7 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenTreeCr
 
 	@SuppressWarnings({"UnstableApiUsage", "NullableProblems"})
 	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> getPojoTreeRootedAt(
-			final PreferenceScreenWithHost root,
+			final PreferenceScreenOfHostOfActivity root,
 			final Locale locale,
 			final FragmentActivity activityContext,
 			final SearchDatabaseConfig<Configuration> searchDatabaseConfig) {
@@ -92,11 +90,11 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenTreeCr
 				.getSearchablePreferenceScreenTree(root);
 	}
 
-	private PreferenceScreenWithHost instantiateSearchablePreferenceScreen(
+	private PreferenceScreenOfHostOfActivity instantiateSearchablePreferenceScreen(
 			final SearchDatabaseConfig<Configuration> searchDatabaseConfig,
 			final FragmentActivity activityContext) {
-		final PreferenceScreenWithHostProvider preferenceScreenWithHostProvider =
-				new PreferenceScreenWithHostProvider(
+		final PreferenceScreenProvider preferenceScreenProvider =
+				new PreferenceScreenProvider(
 						new Fragments(
 								new FragmentFactoryAndInitializerRegistry(
 										new FragmentFactoryAndInitializer(
@@ -107,6 +105,8 @@ public class SearchDatabaseRebuilder implements SearchablePreferenceScreenTreeCr
 														searchDatabaseConfig.preferenceSearchablePredicate))),
 								activityContext),
 						searchDatabaseConfig.principalAndProxyProvider);
-		return preferenceScreenWithHostProvider.getPreferenceScreenWithHostOfFragment(searchDatabaseConfig.rootPreferenceFragment, Optional.empty()).orElseThrow();
+		return preferenceScreenProvider
+				.getPreferenceScreen(searchDatabaseConfig.rootPreferenceFragment, Optional.empty())
+				.orElseThrow();
 	}
 }

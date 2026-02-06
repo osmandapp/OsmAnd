@@ -293,7 +293,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 	private OptionalInt getPositionOfSetting(final Setting setting) {
 		return Optional
 				.<View>ofNullable(itemsContainer.findViewWithTag(setting.getKey()))
-				.map(view -> IndexSearchResultConverter.minusOne2Empty(itemsContainer.indexOfChild(view)))
+				.map(view -> IndexSearchResultConverter.minusOneToEmpty(itemsContainer.indexOfChild(view)))
 				.orElse(OptionalInt.empty());
 	}
 

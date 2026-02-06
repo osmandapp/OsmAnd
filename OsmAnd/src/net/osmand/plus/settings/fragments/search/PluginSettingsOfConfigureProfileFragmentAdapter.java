@@ -15,7 +15,6 @@ import com.google.common.graph.ImmutableValueGraph;
 import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
-import net.osmand.plus.settings.fragments.MainSettingsFragment;
 
 import java.util.HashSet;
 import java.util.List;
@@ -23,8 +22,8 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
-import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
-import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHostProvider;
+import de.KnollFrank.lib.settingssearch.PreferenceScreenOfHostOfActivity;
+import de.KnollFrank.lib.settingssearch.PreferenceScreenProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.common.Preferences;
 import de.KnollFrank.lib.settingssearch.common.Sets;
@@ -131,7 +130,6 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 						applicationMode);
 		final SearchDatabaseConfig<Configuration> searchDatabaseConfig =
 				SearchDatabaseConfigFactory.createSearchDatabaseConfig(
-						MainSettingsFragment.class,
 						tileSourceTemplatesProvider,
 						activityContext.getSupportFragmentManager());
 		return TreeMerger.mergeTreeIntoTreeNode(
@@ -151,7 +149,7 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 	}
 
 	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> getPojoTreeRootedAt(
-			final PreferenceScreenWithHost root,
+			final PreferenceScreenOfHostOfActivity root,
 			final Locale locale,
 			final FragmentActivity activityContext,
 			final SearchDatabaseConfig<Configuration> searchDatabaseConfig,
@@ -169,12 +167,12 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 				.getSearchablePreferenceScreenTree(root);
 	}
 
-	private static AddEdgeToTreePredicate<PreferenceScreenWithHost, Preference> addPluginEdgesOfConfigureProfileFragmentToTree(final Set<String> pluginsToAdd) {
+	private static AddEdgeToTreePredicate<PreferenceScreenOfHostOfActivity, Preference> addPluginEdgesOfConfigureProfileFragmentToTree(final Set<String> pluginsToAdd) {
 		return new AddEdgeToTreePredicate<>() {
 
 			@Override
-			public boolean shallAddEdgeToTree(final Edge<PreferenceScreenWithHost, Preference> edge) {
-				if (edge.endpointPair().source().host() instanceof ConfigureProfileFragment) {
+			public boolean shallAddEdgeToTree(final Edge<PreferenceScreenOfHostOfActivity, Preference> edge) {
+				if (edge.endpointPair().source().hostOfPreferenceScreen() instanceof ConfigureProfileFragment) {
 					return isPluginPreferenceOfPreferenceScreen(
 							edge.value(),
 							edge.endpointPair().source().preferenceScreen());
@@ -211,7 +209,7 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 				.orElseThrow();
 	}
 
-	private PreferenceScreenWithHost instantiateSearchablePreferenceScreen(
+	private PreferenceScreenOfHostOfActivity instantiateSearchablePreferenceScreen(
 			final SearchablePreferenceScreen searchablePreferenceScreen,
 			final Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> tree,
 			final TreePathInstantiator treePathInstantiator) {
@@ -224,7 +222,7 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 			final SearchDatabaseConfig<Configuration> searchDatabaseConfig,
 			final FragmentActivity activityContext) {
 		return new TreePathInstantiator(
-				new PreferenceScreenWithHostProvider(
+				new PreferenceScreenProvider(
 						InstantiateAndInitializeFragmentFactory.createInstantiateAndInitializeFragment(
 								searchDatabaseConfig.fragmentFactory,
 								FragmentInitializerFactory.createFragmentInitializer(

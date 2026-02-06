@@ -18,24 +18,26 @@ import net.osmand.plus.widgets.alert.RoadStyleSelectionDialogFragment;
 
 import java.util.Optional;
 
-import de.KnollFrank.lib.settingssearch.PreferenceWithHost;
+import de.KnollFrank.lib.settingssearch.FragmentClassOfActivity;
+import de.KnollFrank.lib.settingssearch.PreferenceOfHostOfActivity;
 import de.KnollFrank.lib.settingssearch.fragment.DefaultFragmentFactory;
 import de.KnollFrank.lib.settingssearch.fragment.InstantiateAndInitializeFragment;
 
-class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.FragmentFactory {
+class FragmentFactory implements de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.FragmentFactory {
 
 	@Override
-	public <T extends Fragment> T instantiate(final Class<T> fragmentClass,
-											  final Optional<PreferenceWithHost> src,
-											  final Context context,
-											  final InstantiateAndInitializeFragment instantiateAndInitializeFragment) {
+	public <T extends Fragment> T instantiate(
+			final FragmentClassOfActivity<T> fragmentClass,
+			final Optional<PreferenceOfHostOfActivity> src,
+			final Context context,
+			final InstantiateAndInitializeFragment instantiateAndInitializeFragment) {
 		final T fragment = _instantiate(fragmentClass, src, context, instantiateAndInitializeFragment);
 		setConfigureSettingsSearch(fragment, true);
 		return fragment;
 	}
 
-	private static <T extends Fragment> T _instantiate(final Class<T> fragmentClass,
-													   final Optional<PreferenceWithHost> src,
+	private static <T extends Fragment> T _instantiate(final FragmentClassOfActivity<T> fragmentClass,
+													   final Optional<PreferenceOfHostOfActivity> src,
 													   final Context context,
 													   final InstantiateAndInitializeFragment instantiateAndInitializeFragment) {
 		return FragmentFactory
@@ -44,49 +46,51 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 				.orElseGet(() -> createDefaultInstance(fragmentClass, src, context, instantiateAndInitializeFragment));
 	}
 
-	private static <T extends Fragment> Optional<T> instantiateFragment(final Class<T> fragmentClass, final Optional<PreferenceWithHost> src) {
-		if (InstallMapLayersDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
-			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
+	private static <T extends Fragment> Optional<T> instantiateFragment(
+			final FragmentClassOfActivity<T> fragmentClass,
+			final Optional<PreferenceOfHostOfActivity> src) {
+		if (InstallMapLayersDialogFragment.class.equals(fragmentClass.fragment()) && src.isPresent()) {
+			final PreferenceFragmentCompat srcProxy = src.orElseThrow().hostOfPreference();
 			if (srcProxy instanceof final MapLayerSelectionDialogFragment.MapLayerSelectionDialogFragmentProxy _srcProxy) {
 				return (Optional<T>) _srcProxy.getPrincipal().installMapLayersDialogFragment;
 			} else if (srcProxy instanceof final InstallMapLayersDialogFragment.InstallMapLayersDialogFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}
-		if (MapLayerSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
-			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
+		if (MapLayerSelectionDialogFragment.class.equals(fragmentClass.fragment()) && src.isPresent()) {
+			final PreferenceFragmentCompat srcProxy = src.orElseThrow().hostOfPreference();
 			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().mapLayerDialog().orElseThrow());
 			} else if (srcProxy instanceof final MapLayerSelectionDialogFragment.MapLayerSelectionDialogFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}
-		if (RoadStyleSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
-			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
+		if (RoadStyleSelectionDialogFragment.class.equals(fragmentClass.fragment()) && src.isPresent()) {
+			final PreferenceFragmentCompat srcProxy = src.orElseThrow().hostOfPreference();
 			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().roadStyleDialog().orElseThrow());
 			} else if (srcProxy instanceof final RoadStyleSelectionDialogFragment.RoadStyleSelectionDialogFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}
-		if (MultiSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
-			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
+		if (MultiSelectionDialogFragment.class.equals(fragmentClass.fragment()) && src.isPresent()) {
+			final PreferenceFragmentCompat srcProxy = src.orElseThrow().hostOfPreference();
 			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().hideDialog().orElseThrow());
 			} else if (srcProxy instanceof final MultiSelectionDialogFragment.MultiSelectionDialogFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}
-		if (ConfigureMapDialogs.MapLanguageDialog.class.equals(fragmentClass) && src.isPresent()) {
-			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
+		if (ConfigureMapDialogs.MapLanguageDialog.class.equals(fragmentClass.fragment()) && src.isPresent()) {
+			final PreferenceFragmentCompat srcProxy = src.orElseThrow().hostOfPreference();
 			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().mapLanguageDialog());
 			} else if (srcProxy instanceof final ConfigureMapDialogs.MapLanguageDialog.MapLanguageDialogProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}
-		if (MapModeFragment.class.equals(fragmentClass) && src.isPresent()) {
-			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
+		if (MapModeFragment.class.equals(fragmentClass.fragment()) && src.isPresent()) {
+			final PreferenceFragmentCompat srcProxy = src.orElseThrow().hostOfPreference();
 			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
 				return Optional.of((T) MapModeFragment.createInstanceAndRegisterMapModeController(_srcProxy.getPrincipal().getApp(), _srcProxy.getPrincipal().appMode));
 			} else if (srcProxy instanceof final MapModeFragment.MapModeFragmentProxy _srcProxy) {
@@ -97,22 +101,22 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 	}
 
 	private static <T extends Fragment> Optional<T> instantiatePreferenceFragmentUsingPreferenceFragmentHandler(
-			final Class<T> fragmentClass,
-			final Optional<PreferenceWithHost> src,
+			final FragmentClassOfActivity<T> fragmentClass,
+			final Optional<PreferenceOfHostOfActivity> src,
 			final Context context) {
 		return src
-				.filter(preferenceWithHost -> preferenceWithHost.host() instanceof PreferenceFragmentHandlerProvider)
-				.flatMap(preferenceWithHost -> ((PreferenceFragmentHandlerProvider) preferenceWithHost.host()).getPreferenceFragmentHandler(preferenceWithHost.preference()))
+				.filter(preferenceWithHost -> preferenceWithHost.hostOfPreference() instanceof PreferenceFragmentHandlerProvider)
+				.flatMap(preferenceWithHost -> ((PreferenceFragmentHandlerProvider) preferenceWithHost.hostOfPreference()).getPreferenceFragmentHandler(preferenceWithHost.preference()))
 				.map(preferenceFragmentHandler -> preferenceFragmentHandler.createPreferenceFragment(context, Optional.empty()))
 				.flatMap(
 						preferenceFragment ->
-								fragmentClass.isAssignableFrom(preferenceFragment.getClass()) ?
+								fragmentClass.fragment().isAssignableFrom(preferenceFragment.getClass()) ?
 										Optional.of((T) preferenceFragment) :
 										Optional.empty());
 	}
 
-	private static <T extends Fragment> T createDefaultInstance(final Class<T> fragmentClass,
-																final Optional<PreferenceWithHost> src,
+	private static <T extends Fragment> T createDefaultInstance(final FragmentClassOfActivity<T> fragmentClass,
+																final Optional<PreferenceOfHostOfActivity> src,
 																final Context context,
 																final InstantiateAndInitializeFragment instantiateAndInitializeFragment) {
 		final T fragment = new DefaultFragmentFactory().instantiate(fragmentClass, src, context, instantiateAndInitializeFragment);
@@ -120,8 +124,8 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 		return fragment;
 	}
 
-	private static void configureFragment(final Fragment fragment, final PreferenceWithHost src) {
-		if (src.host() instanceof final BaseSettingsFragment baseSettingsFragment) {
+	private static void configureFragment(final Fragment fragment, final PreferenceOfHostOfActivity src) {
+		if (src.hostOfPreference() instanceof final BaseSettingsFragment baseSettingsFragment) {
 			fragment.setArguments(baseSettingsFragment.buildArguments());
 		}
 	}

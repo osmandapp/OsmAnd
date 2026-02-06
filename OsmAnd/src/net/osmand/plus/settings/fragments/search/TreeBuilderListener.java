@@ -12,10 +12,10 @@ import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
 
 import java.util.Optional;
 
-import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
+import de.KnollFrank.lib.settingssearch.PreferenceScreenOfHostOfActivity;
 import de.KnollFrank.lib.settingssearch.common.graph.Tree;
 
-class TreeBuilderListener implements de.KnollFrank.lib.settingssearch.graph.TreeBuilderListener<PreferenceScreenWithHost, Preference> {
+class TreeBuilderListener implements de.KnollFrank.lib.settingssearch.graph.TreeBuilderListener<PreferenceScreenOfHostOfActivity, Preference> {
 
 	private final TileSourceTemplatesProvider tileSourceTemplatesProvider;
 	private Optional<ApplicationMode> previousApplicationMode = Optional.empty();
@@ -25,27 +25,27 @@ class TreeBuilderListener implements de.KnollFrank.lib.settingssearch.graph.Tree
 	}
 
 	@Override
-	public void onStartBuildTree(final PreferenceScreenWithHost treeRoot) {
+	public void onStartBuildTree(final PreferenceScreenOfHostOfActivity treeRoot) {
 		tileSourceTemplatesProvider.enableCache();
 	}
 
 	@Override
-	public void onStartBuildSubtree(final PreferenceScreenWithHost subtreeRoot) {
-		if (subtreeRoot.host() instanceof final ConfigureProfileFragment configureProfileFragment) {
+	public void onStartBuildSubtree(final PreferenceScreenOfHostOfActivity subtreeRoot) {
+		if (subtreeRoot.hostOfPreferenceScreen() instanceof final ConfigureProfileFragment configureProfileFragment) {
 			setApplicationModePreference(getApplicationModePreference(configureProfileFragment), configureProfileFragment.getSelectedAppMode());
 		}
 	}
 
 	@Override
-	public void onFinishBuildSubtree(final PreferenceScreenWithHost subtreeRoot) {
-		if (subtreeRoot.host() instanceof final ConfigureProfileFragment configureProfileFragment) {
+	public void onFinishBuildSubtree(final PreferenceScreenOfHostOfActivity subtreeRoot) {
+		if (subtreeRoot.hostOfPreferenceScreen() instanceof final ConfigureProfileFragment configureProfileFragment) {
 			restoreApplicationModePreference(getApplicationModePreference(configureProfileFragment));
 		}
 	}
 
 	@Override
 	@SuppressWarnings({"UnstableApiUsage", "NullableProblems"})
-	public void onFinishBuildTree(final Tree<PreferenceScreenWithHost, Preference, ImmutableValueGraph<PreferenceScreenWithHost, Preference>> tree) {
+	public void onFinishBuildTree(final Tree<PreferenceScreenOfHostOfActivity, Preference, ImmutableValueGraph<PreferenceScreenOfHostOfActivity, Preference>> tree) {
 		tileSourceTemplatesProvider.disableCache();
 	}
 

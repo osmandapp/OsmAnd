@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.fragments.search;
 
 import android.app.Activity;
+import android.os.PersistableBundle;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -12,7 +13,7 @@ import net.osmand.plus.configmap.MapModeFragment;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.widgets.alert.InstallMapLayersDialogFragment;
 import net.osmand.plus.widgets.alert.MapLayerSelectionDialogFragment;
@@ -23,6 +24,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import de.KnollFrank.lib.settingssearch.ActivityDescription;
+import de.KnollFrank.lib.settingssearch.FragmentClassOfActivity;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.ActivitySearchDatabaseConfigs;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.PrincipalAndProxy;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
@@ -31,22 +34,29 @@ import de.KnollFrank.lib.settingssearch.provider.ActivityInitializer;
 public class SearchDatabaseConfigFactory {
 
 	public static SearchDatabaseConfig<Configuration> createSearchDatabaseConfig(
-			final Class<? extends BaseSettingsFragment> rootPreferenceFragment,
 			final TileSourceTemplatesProvider tileSourceTemplatesProvider,
 			final FragmentManager fragmentManager) {
 		return SearchDatabaseConfig
 				.builder(
-						rootPreferenceFragment,
+						getRootPreferenceFragment(),
 						new TreeProcessorFactory(tileSourceTemplatesProvider))
 				.withFragmentFactory(new FragmentFactory())
 				.withActivitySearchDatabaseConfigs(createActivitySearchDatabaseConfigs())
 				.withActivityInitializerByActivity(getActivityInitializerByActivity(fragmentManager))
-				.withPreferenceFragmentConnected2PreferenceProvider(new PreferenceFragmentConnected2PreferenceProvider())
+				.withPreferenceFragmentConnectedToPreferenceProvider(new PreferenceFragmentConnectedToPreferenceProvider())
 				.withSearchableInfoProvider(SearchDatabaseConfigFactory::getSearchableInfo)
 				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 				.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
 				.withPreferenceScreenTreeBuilderListener(new TreeBuilderListener(tileSourceTemplatesProvider))
 				.build();
+	}
+
+	private static FragmentClassOfActivity<MainSettingsFragment> getRootPreferenceFragment() {
+		return new FragmentClassOfActivity<>(
+				MainSettingsFragment.class,
+				new ActivityDescription(
+						MapActivity.class,
+						new PersistableBundle()));
 	}
 
 	private static ActivitySearchDatabaseConfigs createActivitySearchDatabaseConfigs() {
