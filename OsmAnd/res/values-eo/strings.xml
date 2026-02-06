@@ -5977,4 +5977,7 @@
     <string name="equator_line">Ĉiela ekvatoro</string>
     <string name="backup_deleted_all_data">Forigis datumojn.</string>
     <string name="backup_deleting_all_data">Forigado de datumoj…</string>
+    <string name="astro_rendering">Bildigado</string>
+    <string name="astro_configure_view">Agordi vidon</string>
+    <string name="astro_visible_objects">Videblaj objektoj</string>
 </resources>
