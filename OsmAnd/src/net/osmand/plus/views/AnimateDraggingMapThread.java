@@ -54,6 +54,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 	public static float MIN_INTERPOLATION_TO_JOIN_ANIMATION = 0.8f;
 	public static int ZOOM_DIFF_SKIP_ANIMATION = 3;
 	public static float MAX_OX_OY_SUM_DELTA_TO_ANIMATE = 2400f;
+	public static boolean ALLOW_ANIMATIONS_OUTSIDE_VIEWPORT = false;
 	// CONSTANTS though make them modifiable for experiements as used in library
 
 	private final OsmandApplication app;
@@ -339,7 +340,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 		}
 
 		boolean skipAnimation = movingTime == 0 || movingTime > SKIP_ANIMATION_TIMEOUT
-				|| !NativeUtilities.containsLatLon(mapRenderer, rb, finalLat, finalLon);
+				|| !ALLOW_ANIMATIONS_OUTSIDE_VIEWPORT && !NativeUtilities.containsLatLon(mapRenderer, rb, finalLat, finalLon);
 		if (skipAnimation) {
 			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
 			tileView.setFractionalZoom(zoom, zoomFP, notifyListener);
