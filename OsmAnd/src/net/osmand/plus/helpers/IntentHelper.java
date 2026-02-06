@@ -65,7 +65,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.ExportSettingsFragment;
-import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
 import net.osmand.plus.settings.fragments.search.Configuration;
@@ -163,7 +162,6 @@ public class IntentHelper {
 								onMergedPreferenceScreenAvailable,
 								mapActivity,
 								MapActivity.FRAGMENT_CONTAINER_VIEW_ID,
-								MainSettingsFragment.class,
 								app.getSettings().AVAILABLE_APP_MODES,
 								app.getTileSourceTemplatesProvider(),
 								app.preferencesDatabaseManager.getPreferencesDatabase(),
