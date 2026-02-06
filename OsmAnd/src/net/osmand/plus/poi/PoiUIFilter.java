@@ -414,6 +414,13 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		}
 		List<Amenity> amenities = searchAmenitiesInternal(top / 2 + bottom / 2, left / 2 + right / 2,
 				top, bottom, left, right, zoom, matcher);
+
+		if (amenities.isEmpty() && !filterId.equals(BY_NAME_FILTER_ID) && !Algorithms.isEmpty(name)) {
+			SearchByNameFilter searchByNameFilter = new SearchByNameFilter(app);
+			searchByNameFilter.setFilterByName(name);
+			amenities = searchByNameFilter.searchAmenitiesInternal(top / 2 + bottom / 2, left / 2 + right / 2,
+					top, bottom, left, right, zoom, matcher);
+		}
 		results.addAll(amenities);
 
 		List<Amenity> resultList = new ArrayList<>(results);
