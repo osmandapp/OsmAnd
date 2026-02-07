@@ -5305,7 +5305,7 @@
     <string name="daynight_mode_app_theme">Etoso de aplikaĵo</string>
     <string name="key_event_action_continuous_zoom_out">Seninterrompa malgrandigo</string>
     <string name="remove_key_assignment_summary">Forigi klav-asignon por la elektita ago.</string>
-    <string name="map_settings_weather_wind_animation">Movbildi venton</string>
+    <string name="map_settings_weather_wind_animation">Vento (movbilda)</string>
     <string name="tomorrow">Morgaŭ</string>
     <string name="key_event_action_continuous_zoom_in">Seninterrompa pligrandigo</string>
     <string name="remove_key_assignment">Forigi klav-asignon</string>
@@ -5930,7 +5930,7 @@
     <string name="astro_constellations">Stelaroj</string>
     <string name="astro_stars">Steloj</string>
     <string name="astro_galaxies">Galaksioj</string>
-    <string name="astro_nebulae">Nebulozoj</string>
+    <string name="astro_nebulae">Nebulastroj</string>
     <string name="astro_open_clusters">Malfermaj stelamasoj</string>
     <string name="astro_globular_clusters">Globaj stelamasoj</string>
     <string name="astro_galaxy_clusters">Galaksamasoj</string>
@@ -5980,4 +5980,11 @@
     <string name="astro_rendering">Bildigado</string>
     <string name="astro_configure_view">Agordi vidon</string>
     <string name="astro_visible_objects">Videblaj objektoj</string>
+    <string name="red_filter">Ruĝlumigi</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_deep_sky">Profunda ĉielo</string>
+    <string name="astro_star_clusters">Stelamasoj</string>
+    <string name="astro_nebulas">Nebulastroj</string>
+    <string name="astro_solar_system">Sunsistemo</string>
 </resources>

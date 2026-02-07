@@ -5862,7 +5862,7 @@
     <string name="map_2d">2D</string>
     <string name="map_3d">3D</string>
     <string name="astro_deep_sky">Cielo profundo</string>
-    <string name="astro_star_clusters">Cúmulo de estrellas</string>
-    <string name="astro_nebulas">Nebulosa</string>
+    <string name="astro_star_clusters">Cúmulos estelares</string>
+    <string name="astro_nebulas">Nebulosas</string>
     <string name="astro_solar_system">Sistema solar</string>
 </resources>
