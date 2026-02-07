@@ -100,8 +100,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public static final String CONFIGURE_SETTINGS_SEARCH = "configureSettingsSearch";
 
 	protected OsmandApplication app;
-	// FK-TODO: make settings protected again
-	public OsmandSettings settings;
+	protected OsmandSettings settings;
 	protected OsmAndAppCustomization appCustomization;
 	protected UiUtilities iconsCache;
 

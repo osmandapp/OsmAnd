@@ -30,8 +30,7 @@ import net.osmand.plus.utils.UiUtilities;
 public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 
 	protected OsmandApplication app;
-	// FK-TODO: make settings protected again
-	public OsmandSettings settings;
+	protected OsmandSettings settings;
 	protected UiUtilities uiUtilities;
 	protected LayoutInflater themedInflater;
 	protected boolean nightMode;
