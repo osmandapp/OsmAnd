@@ -1787,7 +1787,7 @@
     <string name="shared_string_email_address">E-postadress</string>
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Spara ändringar</string>
-    <string name="find_parking">Hitta en parkeringsplats</string>
+    <string name="find_parking">Hitta parkering</string>
     <string name="show_polygons">Visa polygoner</string>
     <string name="rendering_attr_showMtbRoutes_name">Mountainbike-leder</string>
     <string name="select_map_markers">Välj kartmarkörer</string>
@@ -1843,7 +1843,7 @@
     <string name="storage_directory_readonly_desc">Växlade till internminnet eftersom den valda datalagringsmappen är skrivskyddad. Välj en skrivbar lagringskatalog.</string>
     <string name="shared_string_move_up">Flytta ↑</string>
     <string name="shared_string_move_down">Flytta ↓</string>
-    <string name="finish_navigation">Avsluta navigeringen</string>
+    <string name="finish_navigation">Avsluta navigering</string>
     <string name="full_report">Fullständig rapport</string>
     <string name="open_street_map_login_and_pass">OSM-användarnamn och lösenord</string>
     <string name="no_map_markers_found">Lägg till kartmarkörer via kartan</string>
