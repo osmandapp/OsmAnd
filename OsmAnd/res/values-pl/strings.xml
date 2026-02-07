@@ -6187,4 +6187,12 @@
     <string name="buildings_3d_detail_level">Detalizacja budynków 3D</string>
     <string name="accessibility_independent_features">Funkcje niezależne</string>
     <string name="access_pinch_zoom_magnification_descr">Podczas gestów powiększania używaj skalowania widoku zamiast oddzielnych poziomów powiększenia.</string>
+    <string name="astro_rendering">Wyświetlanie</string>
+    <string name="astro_configure_view">Konfiguruj widok</string>
+    <string name="astro_visible_objects">Widoczne obiekty</string>
+    <string name="red_filter">Czerwony filtr</string>
+    <string name="astro_directions">Wskazówki</string>
+    <string name="astro_daily_path">Dzienna ścieżka</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
 </resources>
