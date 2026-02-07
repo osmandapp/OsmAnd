@@ -2,6 +2,7 @@ package net.osmand.plus.dialogs;
 
 import static net.osmand.osm.OsmRouteType.SKI;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.buildArguments;
+import static net.osmand.plus.transport.TransportLinesFragment.TransportLinesFragmentProxy.getApplicationMode;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 import android.app.Activity;
@@ -58,6 +59,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import de.KnollFrank.lib.settingssearch.ActivityDescription;
+import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithActivityDescriptionBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.results.Setting;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
@@ -303,14 +306,18 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		return stylesContainer.findViewWithTag(setting.getKey());
 	}
 
-	public static class SelectMapStyleBottomSheetDialogFragmentProxy extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<SelectMapStyleBottomSheetDialogFragment> {
+	public static class SelectMapStyleBottomSheetDialogFragmentProxy extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<SelectMapStyleBottomSheetDialogFragment>, InitializePreferenceFragmentWithActivityDescriptionBeforeOnCreate {
 
 		private Map<String, String> mapStyleByTranslation;
 
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final SelectMapStyleBottomSheetDialogFragment selectMapStyleBottomSheetDialogFragment) {
 			mapStyleByTranslation = selectMapStyleBottomSheetDialogFragment.stylesMap;
-			setArguments(buildArguments(selectMapStyleBottomSheetDialogFragment.settings.APPLICATION_MODE.get()));
+		}
+
+		@Override
+		public void initializePreferenceFragmentWithActivityDescriptionBeforeOnCreate(final ActivityDescription activityDescription) {
+			setArguments(buildArguments(getApplicationMode(activityDescription)));
 		}
 
 		@Override

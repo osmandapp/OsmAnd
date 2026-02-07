@@ -1,5 +1,6 @@
 package net.osmand.plus.transport;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.buildArguments;
 import static net.osmand.plus.transport.TransportLinesMenu.getTransportName;
 import static net.osmand.plus.transport.TransportLinesMenu.getTransportRules;
@@ -40,11 +41,14 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import de.KnollFrank.lib.settingssearch.ActivityDescription;
+import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithActivityDescriptionBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.results.Setting;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
@@ -254,14 +258,18 @@ public class TransportLinesFragment extends BaseOsmAndFragment implements Settin
 		return viewByAttrName.get(setting.getKey());
 	}
 
-	public static class TransportLinesFragmentProxy extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<TransportLinesFragment> {
+	public static class TransportLinesFragmentProxy extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<TransportLinesFragment>, InitializePreferenceFragmentWithActivityDescriptionBeforeOnCreate {
 
 		private Set<String> attrNames;
 
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final TransportLinesFragment transportLinesFragment) {
 			attrNames = transportLinesFragment.viewByAttrName.keySet();
-			setArguments(buildArguments(transportLinesFragment.settings.APPLICATION_MODE.get()));
+		}
+
+		@Override
+		public void initializePreferenceFragmentWithActivityDescriptionBeforeOnCreate(final ActivityDescription activityDescription) {
+			setArguments(buildArguments(getApplicationMode(activityDescription)));
 		}
 
 		@Override
@@ -288,6 +296,13 @@ public class TransportLinesFragment extends BaseOsmAndFragment implements Settin
 			preference.setKey(attribute);
 			preference.setTitle(getTransportName(attribute, null, context));
 			return preference;
+		}
+
+		public static ApplicationMode getApplicationMode(final ActivityDescription activityDescription) {
+			return Objects.requireNonNull(
+					ApplicationMode.valueOfStringKey(
+							activityDescription.arguments().getString(APP_MODE_KEY),
+							null));
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package net.osmand.plus.dialogs;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.buildArguments;
+import static net.osmand.plus.transport.TransportLinesFragment.TransportLinesFragmentProxy.getApplicationMode;
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
@@ -50,6 +51,8 @@ import java.util.OptionalInt;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
+import de.KnollFrank.lib.settingssearch.ActivityDescription;
+import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithActivityDescriptionBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.common.IndexSearchResultConverter;
 import de.KnollFrank.lib.settingssearch.results.Setting;
@@ -297,14 +300,18 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 				.orElse(OptionalInt.empty());
 	}
 
-	public static class DetailsBottomSheetProxy extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<DetailsBottomSheet> {
+	public static class DetailsBottomSheetProxy extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<DetailsBottomSheet>, InitializePreferenceFragmentWithActivityDescriptionBeforeOnCreate {
 
 		private List<RenderingRuleProperty> properties;
 
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final DetailsBottomSheet detailsBottomSheet) {
 			properties = detailsBottomSheet.propertiesRepresentingMenuItems;
-			setArguments(buildArguments(detailsBottomSheet.app.getSettings().APPLICATION_MODE.get()));
+		}
+
+		@Override
+		public void initializePreferenceFragmentWithActivityDescriptionBeforeOnCreate(final ActivityDescription activityDescription) {
+			setArguments(buildArguments(getApplicationMode(activityDescription)));
 		}
 
 		@Override
