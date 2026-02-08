@@ -2,6 +2,8 @@ package net.osmand.shared.palette.data
 
 import kotlinx.datetime.Clock
 import net.osmand.shared.ColorPalette
+import net.osmand.shared.palette.domain.GradientPoint
+import net.osmand.shared.palette.domain.GradientProperties
 import net.osmand.shared.palette.domain.Palette
 import net.osmand.shared.palette.domain.filetype.PaletteFileType
 import net.osmand.shared.palette.domain.PaletteItem
@@ -16,6 +18,7 @@ object PaletteUtils {
 
 	private const val TXT_EXT = ".txt"
 	private const val ALTITUDE_DEFAULT_NAME = "altitude_default"
+	private const val CUSTOM_NAME = "custom"
 	const val DEFAULT_NAME = "default"
 
 	fun buildFileName(paletteName: String, fileType: PaletteFileType): String {
@@ -51,6 +54,37 @@ object PaletteUtils {
 	fun isPaletteFileExt(fileName: String): Boolean = fileName.endsWith(TXT_EXT)
 
 	// TODO: candidates to extraction (temporally placed methods)
+
+	fun createGradientColor(
+		palette: Palette.GradientCollection,
+		fileType: GradientFileType,
+		points: List<GradientPoint>
+	): PaletteItem.Gradient {
+		val proposedFileName = buildFileName(CUSTOM_NAME, fileType)
+
+		val existingIds = palette.items.map { it.id }.toSet()
+		val newFileName = generateGradientUniqueFileName(existingIds, proposedFileName)
+		val paletteName = extractPaletteName(newFileName)
+			?: throw IllegalStateException("Can't extract palette name from the file name")
+		val displayName = extractDisplayName(newFileName)
+			?: throw IllegalStateException("Can't extract display name from the file name")
+
+		return PaletteItem.Gradient(
+			id = newFileName,
+			paletteName = paletteName,
+			displayName = displayName,
+			source = PaletteItemSource.GradientFile(palette.id, newFileName),
+			isDefault = false,
+			isEditable = true,
+			historyIndex = 0,
+			lastUsedTime = 0,
+			points = points,
+			properties = GradientProperties(
+				fileType = fileType,
+				rangeType = fileType.rangeType
+			)
+		)
+	}
 
 	fun createGradientDuplicate(
 		palette: Palette.GradientCollection,

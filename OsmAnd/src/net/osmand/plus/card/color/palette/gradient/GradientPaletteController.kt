@@ -236,8 +236,34 @@ open class GradientPaletteController(
 		}
 	}
 
-	private fun onApplyGradientEdits(gradientDraft: GradientDraft) {
-		// TODO: implement
+	private fun onApplyGradientEdits(draft: GradientDraft) {
+		val currentPalette = repository.getPalette(paletteId) as? Palette.GradientCollection ?: return
+
+		val itemToUpdate = editedItem as? PaletteItem.Gradient
+		val resultItem: PaletteItem.Gradient
+
+		val fileType = draft.fileType
+		val points = draft.points
+
+		if (itemToUpdate != null && itemToUpdate.id == draft.originalId) {
+			// Update Existing
+			resultItem = itemToUpdate.copy(points = points)
+			repository.updatePaletteItem(resultItem)
+		} else {
+			// Add new
+			resultItem = PaletteUtils.createGradientColor(currentPalette, fileType, points)
+			repository.addPaletteItem(paletteId, resultItem)
+		}
+
+		notifyUpdatePaletteColors(resultItem)
+		listener?.onPaletteItemAdded(itemToUpdate, resultItem)
+
+		if (itemToUpdate?.id == selectedItem?.id) {
+			val oldSelected = selectedItem
+			selectPaletteItem(resultItem)
+			notifyUpdatePaletteSelection(oldSelected, resultItem)
+		}
+		editedItem = null
 	}
 
 	private fun updateExternalDependencies() {
