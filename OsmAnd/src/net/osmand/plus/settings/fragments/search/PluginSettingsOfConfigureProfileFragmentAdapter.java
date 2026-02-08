@@ -12,6 +12,9 @@ import androidx.preference.PreferenceScreen;
 import com.google.common.collect.ImmutableList;
 import com.google.common.graph.ImmutableValueGraph;
 
+import net.osmand.plus.configmap.ConfigureMapFragment;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
@@ -28,6 +31,8 @@ import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDataba
 import de.KnollFrank.lib.settingssearch.common.Preferences;
 import de.KnollFrank.lib.settingssearch.common.Sets;
 import de.KnollFrank.lib.settingssearch.common.graph.Edge;
+import de.KnollFrank.lib.settingssearch.common.graph.Subtree;
+import de.KnollFrank.lib.settingssearch.common.graph.SubtreeReplacer;
 import de.KnollFrank.lib.settingssearch.common.graph.Tree;
 import de.KnollFrank.lib.settingssearch.common.graph.TreeNode;
 import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
@@ -67,11 +72,11 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 			final Configuration targetConfiguration,
 			final FragmentActivity activityContext) {
 		final Configuration srcConfiguration = searchablePreferenceScreenTree.configuration();
-		return !PluginSettingsOfConfigureProfileFragmentAdapter
-				.getPluginsToRemove(
+		final Set<String> pluginsToRemove =
+				getPluginsToRemove(
 						srcConfiguration.enabledPlugins(),
-						targetConfiguration.enabledPlugins())
-				.isEmpty() ?
+						targetConfiguration.enabledPlugins());
+		return !pluginsToRemove.isEmpty() ?
 				// FK-TODO: in SettingsSearch eine Klasse SubtreeRemover einführen, die einen Teilbaum entfernt und hier verwenden.
 				this
 						.createSearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter()
@@ -124,16 +129,34 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 							FRAGMENT_CONTAINER_VIEW_ID);
 					return null;
 				});
-		final SearchablePreferenceScreen configureProfilePreferenceScreen =
-				getPreferenceScreenOfConfigureProfileFragment(
-						tree.graph().nodes(),
-						applicationMode);
 		final SearchDatabaseConfig<Configuration> searchDatabaseConfig =
 				SearchDatabaseConfigFactory.createSearchDatabaseConfig(
 						tileSourceTemplatesProvider,
 						activityContext.getSupportFragmentManager());
+		final var treeHavingPlugins = addPlugins(tree, applicationMode, locale, pluginsToAdd, searchDatabaseConfig, activityContext);
+		return pluginsToAdd.contains(getIdOfRasterMapsPlugin()) ?
+				addRasterMaps(treeHavingPlugins, applicationMode, locale, searchDatabaseConfig, activityContext) :
+				treeHavingPlugins;
+	}
+
+	private static String getIdOfRasterMapsPlugin() {
+		return PluginsHelper
+				.requirePlugin(OsmandRasterMapsPlugin.class)
+				.getId();
+	}
+
+	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> addPlugins(
+			final Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> tree,
+			final ApplicationMode applicationMode,
+			final Locale locale,
+			final Set<String> pluginsToAdd,
+			final SearchDatabaseConfig<Configuration> searchDatabaseConfig,
+			final FragmentActivity activityContext) {
+		final SearchablePreferenceScreen configureProfilePreferenceScreen =
+				getPreferenceScreenOfConfigureProfileFragment(
+						tree.graph().nodes(),
+						applicationMode);
 		return TreeMerger.mergeTreeIntoTreeNode(
-				// FK-TODO: dieser Aufruf von getPojoGraphRootedAt() darf aus Performancegründen ausschließlich den Pluginpreferences folgen.
 				getPojoTreeRootedAt(
 						instantiateSearchablePreferenceScreen(
 								configureProfilePreferenceScreen,
@@ -142,10 +165,36 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 						locale,
 						activityContext,
 						searchDatabaseConfig,
-						pluginsToAdd),
+						addPluginEdgesOfConfigureProfileFragmentToTree(pluginsToAdd)),
 				new TreeNode<>(
 						configureProfilePreferenceScreen,
 						tree));
+	}
+
+	// FK-TODO: eigentlich nur "Map source ..." neu berechnen, nicht das ganze ConfigureMapFragment von MapActivity
+	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> addRasterMaps(
+			final Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> tree,
+			final ApplicationMode applicationMode,
+			final Locale locale,
+			final SearchDatabaseConfig<Configuration> searchDatabaseConfig,
+			final FragmentActivity activityContext) {
+		final SearchablePreferenceScreen configureMapPreferenceScreen =
+				getPreferenceScreenOfConfigureMapFragment(
+						tree.graph().nodes(),
+						applicationMode);
+		return SubtreeReplacer.replaceSubtreeWithTree(
+				new Subtree<>(
+						tree,
+						configureMapPreferenceScreen),
+				getPojoTreeRootedAt(
+						instantiateSearchablePreferenceScreen(
+								configureMapPreferenceScreen,
+								tree,
+								createTreePathInstantiator(searchDatabaseConfig, activityContext)),
+						locale,
+						activityContext,
+						searchDatabaseConfig,
+						edge -> true));
 	}
 
 	private Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> getPojoTreeRootedAt(
@@ -153,7 +202,7 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 			final Locale locale,
 			final FragmentActivity activityContext,
 			final SearchDatabaseConfig<Configuration> searchDatabaseConfig,
-			final Set<String> pluginsToAdd) {
+			final AddEdgeToTreePredicate<PreferenceScreenOfHostOfActivity, Preference> addEdgeToTreePredicate) {
 		return SearchablePreferenceScreenTreeProviderFactory
 				.createSearchablePreferenceScreenTreeProvider(
 						FRAGMENT_CONTAINER_VIEW_ID,
@@ -163,7 +212,7 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 						activityContext,
 						searchDatabaseConfig,
 						locale,
-						addPluginEdgesOfConfigureProfileFragmentToTree(pluginsToAdd))
+						addEdgeToTreePredicate)
 				.getSearchablePreferenceScreenTree(root);
 	}
 
@@ -205,6 +254,19 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 						String.format(
 								"en-%s Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
 								ConfigureProfileFragment.class.getName(),
+								applicationMode.getStringKey()))
+				.orElseThrow();
+	}
+
+	private SearchablePreferenceScreen getPreferenceScreenOfConfigureMapFragment(
+			final Set<SearchablePreferenceScreen> preferenceScreens,
+			final ApplicationMode applicationMode) {
+		return SearchablePreferenceScreens
+				.findSearchablePreferenceScreenById(
+						preferenceScreens,
+						String.format(
+								"en-%s Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
+								ConfigureMapFragment.ConfigureMapFragmentProxy.class.getName(),
 								applicationMode.getStringKey()))
 				.orElseThrow();
 	}

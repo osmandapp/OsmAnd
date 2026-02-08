@@ -109,8 +109,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
-import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
-import net.osmand.plus.settings.fragments.search.SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter;
+import net.osmand.plus.settings.fragments.search.PluginSettingsOfConfigureProfileFragmentAdapter;
 import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
@@ -246,11 +245,7 @@ public class OsmandApplication extends MultiDexApplication {
 					preferencesDatabaseManager
 							.getPreferencesDatabase()
 							.searchablePreferenceScreenTreeRepository()
-							.addTreeTransformer(
-									// FK-TODO: use new PluginSettingsOfConfigureProfileFragmentAdapter(getTileSourceTemplatesProvider())
-									new SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter(
-											ConfigureProfileFragment.class,
-											getTileSourceTemplatesProvider()));
+							.addTreeTransformer(new PluginSettingsOfConfigureProfileFragmentAdapter(getTileSourceTemplatesProvider()));
 
 	public static OsmandApplication getInstanceFromContext(final Context context) {
 		return (OsmandApplication) context.getApplicationContext();
