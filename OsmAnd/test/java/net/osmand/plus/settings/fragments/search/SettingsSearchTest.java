@@ -1018,11 +1018,14 @@ public class SettingsSearchTest extends AndroidTest {
 								"shouldSearchAndFindSpeedCameraSettings4EachApplicationMode",
 								new SettingsSearchTestTemplate() {
 
+									private final List<ApplicationMode> applicationModes =
+											List.of(
+													ApplicationMode.CAR,
+													ApplicationMode.TRUCK);
+
 									@Override
 									protected void initializeTest(final OsmandApplication app) {
-										Stream
-												.of(ApplicationMode.CAR, ApplicationMode.TRUCK)
-												.forEach(applicationMode -> ApplicationMode.changeProfileAvailability(applicationMode, true, app));
+										applicationModes.forEach(applicationMode -> ApplicationMode.changeProfileAvailability(applicationMode, true, app));
 									}
 
 									@Override
@@ -1034,8 +1037,9 @@ public class SettingsSearchTest extends AndroidTest {
 									protected List<String> getExpectedSearchResults(final Context context,
 																					final Set<OsmandPlugin> enabledPlugins,
 																					final Set<OsmandPlugin> disabledPlugins) {
-										return Stream
-												.of("Driving", "Truck")
+										return applicationModes
+												.stream()
+												.map(ApplicationMode::toHumanString)
 												.map(applicationMode -> String.format("Path: %s > Navigation settings > Screen alerts > Speed cameras", applicationMode))
 												.toList();
 									}
