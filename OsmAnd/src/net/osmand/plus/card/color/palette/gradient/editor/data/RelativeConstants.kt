@@ -30,8 +30,8 @@ enum class RelativeConstants(
 		summaryResId = "relative_gradient_point_max_summary"
 	);
 
-	fun getName(full: Boolean): String {
-		return Localization.getString(if (full) longNameResId else shortNameResId)
+	fun getName(useFullName: Boolean): String {
+		return Localization.getString(if (useFullName) longNameResId else shortNameResId)
 	}
 
 	fun getSummary() = Localization.getString(summaryResId)

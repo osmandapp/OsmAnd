@@ -16,8 +16,8 @@ import net.osmand.plus.palette.view.binder.PaletteItemViewBinder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.ColorPalette;
-import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.shared.palette.domain.PaletteItem;
+import net.osmand.shared.palette.domain.filetype.GradientFileType;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -68,8 +68,8 @@ public class GradientColorsPaletteCard extends ColorsPaletteCard implements IPal
 
 		ChartUtils.setupGradientChart(app, chart, 9, 24, false, xAxisGridColor, labelsColor);
 
-		GradientPaletteCategory gradientCategory = gradientItem.getPaletteCategory();
-		IAxisValueFormatter formatter = GradientUiHelper.getGradientTypeFormatter(app, gradientCategory, controller.getAnalysis());
+		GradientFileType fileType = gradientItem.getProperties().getFileType();
+		IAxisValueFormatter formatter = GradientFormatter.getAxisFormatter(fileType, controller.getAnalysis());
 
 		chart.setData(ChartUtils.buildGradientChart(app, chart, colorPalette, formatter, nightMode));
 		chart.notifyDataSetChanged();

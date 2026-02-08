@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/favorites_list_item_height"
                     android:gravity="end|center_vertical"
-                    android:inputType="numberDecimal"
+                    android:inputType="numberDecimal|numberSigned"
                     android:maxLines="1"
                     android:paddingVertical="0dp"
                     android:paddingHorizontal="@dimen/content_padding_small"
@@ -69,16 +69,21 @@
 
     </FrameLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/content_padding"/>
+
     <net.osmand.plus.widgets.TextViewEx
         android:id="@+id/summary"
         style="@style/DescStyle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_sheet_list_item_height"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="?android:textColorSecondary"
         android:paddingHorizontal="@dimen/content_padding"
+        android:paddingBottom="@dimen/content_padding"
         android:gravity="center_vertical"
         tools:text="Color of the maximum value found in the track." />
 

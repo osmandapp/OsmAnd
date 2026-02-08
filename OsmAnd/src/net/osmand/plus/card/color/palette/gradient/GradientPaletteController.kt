@@ -132,6 +132,7 @@ open class GradientPaletteController(
 			menuItems.add(PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_remove)
 				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
+				.showTopDivider(menuItems.isNotEmpty())
 				.setOnClickListener { showDeleteDialog(activity, item, nightMode) }
 				.create()
 			)

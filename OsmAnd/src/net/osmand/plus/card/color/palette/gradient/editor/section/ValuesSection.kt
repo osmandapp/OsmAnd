@@ -71,10 +71,16 @@ class ValuesSection(
 		}
 		if (oldState?.summary != newState.summary) {
 			summaryText.text = newState.summary
-			AndroidUiHelper.updateVisibility(summaryText, !newState.summary.isNullOrEmpty())
 		}
+		AndroidUiHelper.updateVisibility(summaryText, !newState.summary.isNullOrEmpty())
 		if (oldState?.error != newState.error) {
-			caption.error = newState.error
+			if (newState.error != null) {
+				caption.isErrorEnabled = true
+				caption.error = newState.error
+			} else {
+				caption.error = null
+				caption.isErrorEnabled = false
+			}
 		}
 	}
 

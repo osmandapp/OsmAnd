@@ -7,25 +7,19 @@ import net.osmand.plus.R
 import net.osmand.plus.base.dialog.BaseDialogController
 import net.osmand.plus.card.color.palette.gradient.editor.contract.IGradientEditorController
 import net.osmand.plus.card.color.palette.gradient.editor.contract.IGradientEditorView
-import net.osmand.plus.card.color.palette.gradient.editor.data.ColorState
 import net.osmand.plus.card.color.palette.gradient.editor.data.EditorDataState
 import net.osmand.plus.card.color.palette.gradient.editor.data.EditorStaticUiData
-import net.osmand.plus.card.color.palette.gradient.editor.data.EditorUiState
 import net.osmand.plus.card.color.palette.gradient.editor.data.GradientDraft
-import net.osmand.plus.card.color.palette.gradient.editor.data.GradientPreviewState
 import net.osmand.plus.card.color.palette.gradient.editor.data.GradientStepData
-import net.osmand.plus.card.color.palette.gradient.editor.data.RelativeConstants
-import net.osmand.plus.card.color.palette.gradient.editor.data.RemoveButtonState
-import net.osmand.plus.card.color.palette.gradient.editor.data.ToolbarState
-import net.osmand.plus.card.color.palette.gradient.editor.data.ValueState
+import net.osmand.plus.card.color.palette.gradient.editor.behaviour.FixedGradientBehaviour
+import net.osmand.plus.card.color.palette.gradient.editor.behaviour.GradientEditorBehaviour
+import net.osmand.plus.card.color.palette.gradient.editor.behaviour.RelativeGradientBehaviour
+import net.osmand.plus.card.color.palette.gradient.editor.data.GradientUpdateResult
 import net.osmand.plus.card.color.palette.solid.SolidPaletteController
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.widgets.alert.AlertDialogData
 import net.osmand.plus.widgets.alert.CustomAlert
-import net.osmand.shared.palette.domain.GradientPoint
 import net.osmand.shared.palette.domain.GradientRangeType
-import java.text.DecimalFormat
-import kotlin.math.max
 
 class GradientEditorController(
 	app: OsmandApplication,
@@ -35,8 +29,7 @@ class GradientEditorController(
 ) : BaseDialogController(app), IGradientEditorController {
 
 	companion object {
-		private const val PROCESS_ID = "edit_gradient"
-
+		private const val PROCESS_ID = "edit_gradient_palette"
 		private const val UNDO_STACK_LIMIT = 50
 
 		fun showDialog(
@@ -54,19 +47,26 @@ class GradientEditorController(
 		}
 	}
 
-	private var dataState: EditorDataState = EditorDataState(initialDraft, 0)
-
+	// --- State ---
+	private var dataState: EditorDataState = EditorDataState(initialDraft, selectedIndex = 0)
 	private val previousStates = ArrayDeque<EditorDataState>()
+
+	// --- Specific Behaviour for the range type ---
+	private val editorBehaviour: GradientEditorBehaviour = when (initialDraft.fileType.rangeType) {
+		GradientRangeType.RELATIVE -> RelativeGradientBehaviour()
+		GradientRangeType.FIXED_VALUES -> FixedGradientBehaviour()
+	}
+
+	private val uiBuilder = GradientEditorUiBuilder(app, editorBehaviour)
 
 	private var view: IGradientEditorView? = null
 	private var initialUiData: EditorStaticUiData? = null
-	private var colorCardController: SolidPaletteController? = null // TODO: use interface
+	private var colorPaletteController: SolidPaletteController? = null
 
 	override fun getId() = processId
-
 	override fun getProcessId() = PROCESS_ID
 
-	// --- Lifecycle & View Attachment ---
+	// --- Lifecycle ---
 
 	override fun attachView(view: IGradientEditorView) {
 		this.view = view
@@ -77,7 +77,7 @@ class GradientEditorController(
 	}
 
 	override fun onViewInitialized() {
-		view?.render(buildUiState(dataState))
+		refreshView()
 	}
 
 	// --- User Actions ---
@@ -107,130 +107,61 @@ class GradientEditorController(
 	}
 
 	override fun onStepClick(stepData: GradientStepData) {
-		// TODO: check
-		// Find index by unique ID or reference. Here we assume ID matches index string or value.
-		// Safer way: find index of the point in the current draft.
 		val index = dataState.draft.points.indexOf(stepData.point)
 		if (index != -1 && index != dataState.selectedIndex) {
-			// Navigation change doesn't need to be pushed to Undo stack
-			dataState = dataState.copy(selectedIndex = index)
-			refreshView()
+			// Navigation: Switch selection to the new index.
+			// Important: Explicitly clear 'validationError' because the context of the error (previous field) is gone.
+			val newState = dataState.copy(selectedIndex = index, validationError = null)
+			applyState(newState, addToHistory = false)
 		}
 	}
 
-	// TODO: improve it
 	override fun onAddStepClick() {
-
-		val draft = dataState.draft
-		// "Relative" gradients usually have fixed number of steps (min/avg/max),
-		// so we typically don't allow adding points there.
-		if (draft.fileType.rangeType == GradientRangeType.RELATIVE) {
-			// TODO: implement
-
-		} else {
-			pushState()
-
-			val points = draft.points
-			val selectedIndex = dataState.selectedIndex
-
-			// Heuristic: Insert after selected, trying to take midpoint
-			val newPointValue = if (points.isNotEmpty() && selectedIndex in points.indices) {
-				val current = points[selectedIndex]
-				if (selectedIndex < points.lastIndex) {
-					// Insert between current and next
-					val next = points[selectedIndex + 1]
-					(current.value + next.value) / 2f
-				} else {
-					// Append after last. Try to use same step size as previous interval.
-					val prev = if (selectedIndex > 0) points[selectedIndex - 1] else null
-					val step = if (prev != null) current.value - prev.value else 10f
-					current.value + max(1f, step)
-				}
-			} else {
-				0f
-			}
-
-			// Create new point (defaulting to current color or Green)
-			val baseColor = points.getOrNull(selectedIndex)?.color ?: 0xFF00FF00.toInt()
-			val newPoint = GradientPoint(newPointValue, baseColor)
-
-			val newDraft = draft.withPointAdded(newPoint)
-			// Find the index of the newly added point (it might have shifted due to sorting)
-			val newIndex = newDraft.points.indexOf(newPoint)
-
-			dataState = EditorDataState(newDraft, newIndex)
-		}
-		refreshView()
+		val newState = GradientEditorAlgorithms.addStep(dataState) ?: return
+		applyState(newState)
 	}
 
 	override fun onValueInput(text: CharSequence) {
-		val draft = dataState.draft
-		val index = dataState.selectedIndex
+		val result = GradientEditorAlgorithms.updateValue(
+			currentState = dataState,
+			text = text.toString(),
+			behaviour = editorBehaviour
+		)
 
-		// Value editing is disabled for Relative gradients
-		if (draft.fileType.rangeType == GradientRangeType.RELATIVE) return
-		if (index !in draft.points.indices) return
-
-		val newValue = text.toString().toFloatOrNull() ?: return
-		val currentPoint = draft.points[index]
-
-		// Avoid infinite loops if value is same
-		if (currentPoint.value == newValue) return
-
-		pushState()
-
-		val newPoint = currentPoint.copy(value = newValue)
-		val newDraft = draft.withPointUpdated(currentPoint, newPoint)
-
-		// Re-calculate index as sort order might change
-		val newIndex = newDraft.points.indexOfFirst {
-			it.value == newPoint.value && it.color == newPoint.color
+		when (result) {
+			is GradientUpdateResult.Success -> {
+				// Success: Update the state only if the data actually changed.
+				// The validationError will be automatically cleared as it is null in the new state.
+				if (result.newState != dataState) {
+					applyState(result.newState)
+				}
+			}
+			is GradientUpdateResult.Error -> {
+				// Validation Error: Keep the existing data but inject the error message.
+				// addToHistory = false: Typing an invalid character is a transient state and shouldn't be undoable.
+				val errorState = dataState.copy(validationError = result.message)
+				applyState(errorState, addToHistory = false)
+			}
 		}
-
-		dataState = EditorDataState(newDraft, newIndex)
-		refreshView()
-	}
-
-	override fun onColorSelected(colorInt: Int) {
-		val index = dataState.selectedIndex
-		val points = dataState.draft.points
-		if (index !in points.indices) return
-
-		val currentPoint = points[index]
-		if (currentPoint.color == colorInt) return
-
-		pushState()
-
-		val newPoint = currentPoint.copy(color = colorInt)
-		// Updating color preserves order, so index stays same
-		val newDraft = dataState.draft.withPointUpdated(currentPoint, newPoint)
-
-		dataState = dataState.copy(draft = newDraft)
-		refreshView()
 	}
 
 	override fun onRemoveStepClick() {
-		val draft = dataState.draft
-		// Cannot remove steps in Relative mode (fixed min/avg/max structure)
-		if (draft.fileType.rangeType == GradientRangeType.RELATIVE) return
+		val newState = GradientEditorAlgorithms.removeStep(dataState, editorBehaviour) ?: return
+		applyState(newState)
+	}
 
-		val index = dataState.selectedIndex
-		if (index !in draft.points.indices) return
-		if (draft.points.size <= 2) return // Minimum 2 points required
+	override fun onColorSelected(colorInt: Int) {
+		val newState = GradientEditorAlgorithms.updateColor(dataState, colorInt) ?: return
+		applyState(newState)
+	}
 
-		pushState()
-
-		val pointToRemove = draft.points[index]
-		val newDraft = draft.withPointRemoved(pointToRemove)
-
-		// Select neighbor
-		val newIndex = if (newDraft.points.isNotEmpty()) {
-			max(0, index - 1)
-		} else {
-			-1
+	private fun applyState(newState: EditorDataState, addToHistory: Boolean = true) {
+		// Only push to the Undo stack if explicitly requested AND the core data (draft) has changed.
+		// We do not track simple navigation changes or transient validation errors.
+		if (addToHistory && newState.draft != dataState.draft) {
+			pushState() // Pushes the *previous* valid state
 		}
-
-		dataState = EditorDataState(newDraft, newIndex)
+		dataState = newState
 		refreshView()
 	}
 
@@ -238,11 +169,11 @@ class GradientEditorController(
 		callback.onResult(dataState.draft)
 	}
 
-	override fun getColorController(): SolidPaletteController {
-		var colorController = colorCardController
+	override fun getColorPaletteController(): SolidPaletteController {
+		var colorController = colorPaletteController
 		if (colorController == null) {
 			colorController = SolidPaletteController(app)
-			colorCardController = colorController
+			colorPaletteController = colorController
 		}
 		return colorController
 	}
@@ -250,150 +181,26 @@ class GradientEditorController(
 	// --- Internal Helpers ---
 
 	private fun pushState() {
-		// Limit stack size if needed, e.g., 50 states
 		if (previousStates.size > UNDO_STACK_LIMIT) {
 			previousStates.removeFirst()
 		}
-		previousStates.addLast(dataState)
+		previousStates.addLast(dataState.copy(validationError = null))
 	}
 
 	private fun refreshView() {
-		view?.render(buildUiState(dataState))
+		val uiState = uiBuilder.buildUiState(
+			dataState = dataState,
+			isUndoAvailable = previousStates.isNotEmpty()
+		)
+		view?.render(uiState)
 	}
 
 	override fun getStaticUiData(): EditorStaticUiData {
 		var data = initialUiData
 		if (data == null) {
-			val toolbarTitle = getString(
-				if (initialDraft.originalId == null) {
-					R.string.add_palette
-				} else {
-					R.string.edit_palette
-				}
-			)
-
-			val fileType = initialDraft.fileType
-			val paletteCategory = fileType.category
-			val units = if (fileType.rangeType == GradientRangeType.FIXED_VALUES) {
-				fileType.displayUnits.getSymbol()
-			} else {
-				"%"
-			}
-
-			val toolbarSubtitle = getString(
-				R.string.ltr_or_rtl_combine_with_brackets,
-				paletteCategory.getDisplayName(),
-				units
-			)
-
-			data = EditorStaticUiData(
-				toolbarTitle = toolbarTitle,
-				toolbarSubtitle = toolbarSubtitle
-			)
+			data = uiBuilder.buildStaticUiData(initialDraft)
 			initialUiData = data
 		}
 		return data
-	}
-
-	private fun buildUiState(dataState: EditorDataState): EditorUiState {
-		val draft = dataState.draft
-		val rangeType = draft.fileType.rangeType
-		val points = draft.points
-		val selectedIndex = dataState.selectedIndex
-
-		// 1. Build Gradient Steps (Chips)
-		val stepData = points.mapIndexed { index, point ->
-			val label = if (rangeType == GradientRangeType.RELATIVE) {
-				when (point.value) {
-					0f -> getString(R.string.shared_string_min) // "Min"
-					0.5f -> getString(R.string.average) // "Average"
-					1.0f -> getString(R.string.shared_string_max) // "Max"
-					else -> "${(point.value * 100).toInt()}%"
-				}
-			} else {
-				// Fixed values
-				if (point.value % 1.0 == 0.0) {
-					point.value.toInt().toString()
-				} else {
-					point.value.toString()
-				}
-			}
-
-			// Use index as ID to ensure uniqueness even if values are duplicate during editing
-			GradientStepData(
-				id = index.toString(),
-				label = label,
-				point = point
-			)
-		}
-
-		val selectedStep = stepData.getOrNull(selectedIndex)
-		val selectedPoint = points.getOrNull(selectedIndex)
-
-		// 2. Build Value State
-		val isRelative = rangeType == GradientRangeType.RELATIVE
-		val predefinedType = if (isRelative) RelativeConstants.valueOfRatio(selectedPoint?.value ?: -1f) else null
-
-		val valueState = if (selectedPoint != null) {
-			// Label next to input (e.g., "km/h" or empty for %)
-			val inputLabel = if (isRelative) "" else draft.fileType.displayUnits.getSymbol()
-
-			val label = if (isRelative) {
-				predefinedType?.getName(true) ?: "%"
-			} else {
-				inputLabel
-			}
-
-			val decimalFormat = DecimalFormat("0.##")
-
-			val text = if (isRelative && predefinedType != null) {
-				""
-			} else {
-				decimalFormat.format(selectedPoint.value)
-			}
-
-			// Summary text logic
-			val summaryText = if (predefinedType != null) {
-				when (predefinedType) {
-					RelativeConstants.MIN -> "Color for the minimum value found in the track." // TODO: Resource
-					RelativeConstants.AVERAGE -> "Color for the average value of the track."   // TODO: Resource
-					RelativeConstants.MAX -> "Color for the maximum value found in the track." // TODO: Resource
-				}
-			} else {
-				null // Can add validation error text here if needed
-			}
-
-			ValueState(
-				label = label,
-				text = text,
-				interactable = predefinedType == null, // Relative values are fixed (0, 0.5, 1)
-				showTextField = true,
-				summary = summaryText,
-				error = null
-			)
-		} else {
-			// Empty/No Selection State
-			ValueState("", "", false, false, null, null)
-		}
-
-		// 3. Build Other States
-		return EditorUiState(
-			toolbarState = ToolbarState(
-				showUndoButton = previousStates.isNotEmpty()
-			),
-			gradientState = GradientPreviewState(
-				gradientFileType = draft.fileType,
-				stepData = stepData,
-				selectedItem = selectedStep
-			),
-			valueState = valueState,
-			colorState = ColorState(
-				colorInt = selectedPoint?.color ?: 0 // 0 or transparent if none selected
-			),
-			removeButtonState = RemoveButtonState(
-				// Can remove only in Fixed mode and if we have > 2 points
-				enabled = !isRelative && points.size > 2 && selectedIndex != -1
-			)
-		)
 	}
 }

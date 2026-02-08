@@ -27,7 +27,7 @@ interface IGradientEditorController : IDialogController {
 
 	fun onValueInput(text: CharSequence)
 
-	fun getColorController(): SolidPaletteController
+	fun getColorPaletteController(): SolidPaletteController
 
 	fun onColorSelected(colorInt: Int)
 

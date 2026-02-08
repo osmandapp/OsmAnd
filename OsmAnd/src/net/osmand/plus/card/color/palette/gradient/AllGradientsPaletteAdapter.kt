@@ -102,16 +102,13 @@ class AllGradientsPaletteAdapter(
 				title.text = item.displayName
 
 				// Build points description
+				val fileType = item.properties.fileType
 				val sb = StringBuilder()
 				item.points.forEachIndexed { index, point ->
 					if (index > 0) sb.append(" • ")
 
 					val value = point.value
-					val formattedValue = if (item.getPaletteCategory().isTerrainRelated()) {
-						GradientUiHelper.formatTerrainTypeValues(value)
-					} else {
-						value.toString()
-					}
+					val formattedValue = GradientFormatter.formatSimpleValue(value, fileType)
 					sb.append(formattedValue)
 				}
 				description.text = sb.toString()

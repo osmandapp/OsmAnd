@@ -32,7 +32,7 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenFragment;
-import net.osmand.plus.card.color.palette.gradient.GradientUiHelper;
+import net.osmand.plus.card.color.palette.gradient.GradientFormatter;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
@@ -59,6 +59,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.widgets.style.CustomClickableSpan;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.shared.ColorPalette;
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -176,7 +177,9 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		ColorPalette colorPalette = app.getColorPaletteHelper().getGradientColorPaletteSync(mode.getMainFileName());
 		if (colorPalette != null) {
 			AndroidUiHelper.updateVisibility(gradientChart, true);
-			IAxisValueFormatter formatter = GradientUiHelper.getGradientTypeFormatter(app, mode.getType().toPaletteCategory(), null);
+			GradientPaletteCategory paletteCategory = mode.getType().toPaletteCategory();
+			IAxisValueFormatter formatter = GradientFormatter.getAxisFormatter(paletteCategory);
+//			IAxisValueFormatter formatter = GradientUiHelper.getGradientTypeFormatter(app, mode.getType().toPaletteCategory(), null);
 			LineData barData = ChartUtils.buildGradientChart(app, gradientChart, colorPalette, formatter, nightMode);
 
 			gradientChart.setData(barData);

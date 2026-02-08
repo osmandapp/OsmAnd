@@ -112,7 +112,7 @@ class GradientEditorFragment : BaseFullScreenDialogFragment(), IGradientEditorVi
 
 		// 4. Color Section
 		colorSection = ColorSection(view, requireActivity(), app, nightMode,
-			this, controller.getColorController())
+			this, controller.getColorPaletteController())
 
 		// 5. Actions Section (Remove button)
 		actionsSection = ActionsSection(view, app, nightMode) {
@@ -173,6 +173,7 @@ class GradientEditorFragment : BaseFullScreenDialogFragment(), IGradientEditorVi
 
 	override fun onDestroy() {
 		super.onDestroy()
+		controller?.detachView()
 		(controller as? BaseDialogController)?.finishProcessIfNeeded(activity)
 	}
 

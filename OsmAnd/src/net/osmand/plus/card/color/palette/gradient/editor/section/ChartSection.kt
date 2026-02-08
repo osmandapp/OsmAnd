@@ -6,8 +6,7 @@ import com.github.mikephil.charting.charts.GradientChart
 import com.github.mikephil.charting.data.LineData
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.card.color.palette.gradient.GradientFormatterHelper
-import net.osmand.plus.card.color.palette.gradient.GradientUiHelper
+import net.osmand.plus.card.color.palette.gradient.GradientFormatter
 import net.osmand.plus.card.color.palette.gradient.editor.data.EditorUiState
 import net.osmand.plus.card.color.palette.gradient.editor.data.GradientStepData
 import net.osmand.plus.charts.ChartUtils
@@ -57,7 +56,7 @@ class ChartSection(
 		if (oldState != newState) {
 			// 1. Update Chart
 			val fileType = newState.gradientFileType
-			val formatter = GradientFormatterHelper.getGradientFormatter(app, fileType, null)
+			val formatter = GradientFormatter.getAxisFormatter(fileType, realDataLimits = null)
 
 			val steps = newState.stepData
 			val points = mutableListOf<GradientPoint>()

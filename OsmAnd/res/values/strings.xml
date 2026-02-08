@@ -11,6 +11,12 @@
 	Thx - Hardy
 -->
 
+    <string name="gradient_input_value_too_low_warn">Minimum allowed value is %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">Maximum allowed value is %1$s.</string>
+    <string name="gradient_input_value_duplicate_warn">This value already exists in the palette.</string>
+    <string name="gradient_input_invalid_value_warn">Please enter a valid number.</string>
+    <string name="value_cannot_be_edited_warn">This value cannot be edited.</string>
+    <string name="unexpected_error_occurred_warn">An unexpected error occurred.</string>
     <string name="relative_gradient_point_m_summary">Color for the maximum value found in the track.</string>
     <string name="relative_gradient_point_avg_summary">Color for the average value of the track.</string>
     <string name="relative_gradient_point_min_summary">Color for the minimum value found in the track.</string>

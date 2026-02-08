@@ -16,7 +16,9 @@ enum class GradientFileType(
 	val rangeType: GradientRangeType,
 	val baseUnits: MeasurementUnit<*>,          // Unit used for storage (e.g., meters, fraction)
 	val displayUnits: MeasurementUnit<*> = baseUnits, // Unit used for UI display (e.g., percent)
-	val defaultValues: List<Float> = emptyList()      // Default steps for new palettes
+	val defaultValues: List<Float> = emptyList(),     // Default steps for new palettes
+	val minLimit: Float? = null,                // Min allowed value for this type of data
+	val maxLimit: Float? = null                 // Max allowed value for this type of data
 ) : PaletteFileType {
 
 	// --- Track / Route Data (Prefix: route_*) ---
@@ -26,7 +28,9 @@ enum class GradientFileType(
 		category = GradientPaletteCategory.SPEED,
 		rangeType = GradientRangeType.FIXED_VALUES,
 		baseUnits = SpeedUnits.KILOMETERS_PER_HOUR,
-		defaultValues = listOf(0f, 50f, 100f)
+		defaultValues = listOf(0f, 50f, 100f),
+		minLimit = 0f,
+		maxLimit = null
 	),
 
 	SPEED_RELATIVE(
@@ -35,7 +39,9 @@ enum class GradientFileType(
 		rangeType = GradientRangeType.RELATIVE,
 		baseUnits = PercentUnits.FRACTION,
 		displayUnits = PercentUnits.PERCENT,
-		defaultValues = listOf(0f, 0.5f, 1.0f)
+		defaultValues = listOf(0f, 0.5f, 1.0f),
+		minLimit = 0f,
+		maxLimit = 1f
 	),
 
 	MAX_SPEED_FIXED(
@@ -43,7 +49,9 @@ enum class GradientFileType(
 		category = GradientPaletteCategory.MAX_SPEED,
 		rangeType = GradientRangeType.FIXED_VALUES,
 		baseUnits = SpeedUnits.KILOMETERS_PER_HOUR,
-		defaultValues = listOf(0f, 50f, 100f)
+		defaultValues = listOf(0f, 50f, 100f),
+		minLimit = 0f,
+		maxLimit = null
 	),
 
 	MAX_SPEED_RELATIVE(
@@ -52,7 +60,9 @@ enum class GradientFileType(
 		rangeType = GradientRangeType.RELATIVE,
 		baseUnits = PercentUnits.FRACTION,
 		displayUnits = PercentUnits.PERCENT,
-		defaultValues = listOf(0f, 0.5f, 1.0f)
+		defaultValues = listOf(0f, 0.5f, 1.0f),
+		minLimit = 0f,
+		maxLimit = 1f
 	),
 
 	ELEVATION_FIXED(
