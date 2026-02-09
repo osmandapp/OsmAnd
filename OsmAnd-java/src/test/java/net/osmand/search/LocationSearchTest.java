@@ -100,4 +100,9 @@ public class LocationSearchTest {
 		search("15,1235 S, 23,1244 W", new LatLon(-15.1235, -23.1244));
 		search("-15,1235, 23,1244", new LatLon(-15.1235, 23.1244));
 	}
+
+	@Test
+	public void testOLCSearch() throws IOException {
+		search("8GW6WPC6+X4W", new LatLon(48.92249, 24.71033));
+	}
 }

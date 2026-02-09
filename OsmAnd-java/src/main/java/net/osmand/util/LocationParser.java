@@ -94,6 +94,12 @@ public class LocationParser {
 	public static LatLon parseLocation(String locPhrase) {
 		locPhrase = locPhrase.trim();
 		locPhrase = TextDirectionUtil.clearDirectionMarks(locPhrase);
+
+		ParsedOpenLocationCode olcParsed = parseOpenLocationCode(locPhrase);
+		if (olcParsed != null && olcParsed.isFull()) {
+			return olcParsed.getLatLon();
+		}
+
 		boolean valid = isValidLocPhrase(locPhrase);
 		if (!valid) {
 			String[] split = locPhrase.split(" ");
