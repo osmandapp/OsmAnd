@@ -14,6 +14,7 @@ import net.osmand.plus.card.color.palette.gradient.editor.GradientRangeTypeContr
 import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.palette.controller.BasePaletteController
 import net.osmand.plus.plugins.srtm.TerrainMode
+import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.alert.AlertDialogData
@@ -36,6 +37,8 @@ open class GradientPaletteController(
 	app: OsmandApplication,
 	private var paletteCategory: GradientPaletteCategory,
 ) : BasePaletteController(app, paletteCategory.id) {
+
+	private val appMode: ApplicationMode = app.settings.applicationMode
 
 	var analysis: GpxTrackAnalysis? = null
 
@@ -109,11 +112,7 @@ open class GradientPaletteController(
 			menuItems.add(PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_rename)
 				.setIcon(getContentIcon(R.drawable.ic_action_edit_outlined))
-				.setOnClickListener {
-					showRenameDialog(activity, item, nightMode) { newName ->
-						renameGradientItem(item, newName)
-					}
-				}
+				.setOnClickListener { showRenameDialog(activity, item, nightMode) }
 				.create()
 			)
 
@@ -196,8 +195,7 @@ open class GradientPaletteController(
 	private fun showRenameDialog(
 		activity: FragmentActivity,
 		item: PaletteItem.Gradient,
-		nightMode: Boolean,
-		callback: OnResultCallback<String>
+		nightMode: Boolean
 	) {
 		val currentPalette =
 			repository.getPalette(paletteId) as? Palette.GradientCollection ?: return
@@ -225,7 +223,7 @@ open class GradientPaletteController(
 				} else if (existingIds.contains(newPaletteName)) {
 					app.showToastMessage(R.string.message_name_is_already_exists)
 				} else {
-					callback.onResult(newName)
+					renameGradientItem(item, newName)
 				}
 			}
 		}
@@ -238,6 +236,12 @@ open class GradientPaletteController(
 		val newItem = PaletteUtils.renameGradientPalette(item, newName)
 		repository.replacePaletteItem(paletteId, item.id, newItem)
 		notifyUpdatePaletteColors(null)
+
+		if (item.id == selectedItem?.id) {
+			val oldSelected = selectedItem
+			selectPaletteItem(newItem)
+			notifyUpdatePaletteSelection(oldSelected, newItem)
+		}
 		// TODO: update dependent components (tracks, route line)
 	}
 
@@ -267,8 +271,8 @@ open class GradientPaletteController(
 			GradientRangeTypeController.showDialog(
 				app = app,
 				fragmentManager = it.supportFragmentManager,
-				appMode = app.settings.applicationMode,       // TODO: determine actual appMode
-				usedOnMap = true,                             // TODO: determine actual usedOnMap
+				appMode = appMode,
+				usedOnMap = true,
 				supportedTypes = paletteCategory.getSupportedRangeTypes(),
 				callback = callback
 			)
@@ -280,7 +284,7 @@ open class GradientPaletteController(
 			GradientEditorController.showDialog(
 				app = app,
 				fragmentManager = it.supportFragmentManager,
-				appMode = app.settings.applicationMode,       // TODO: determine actual appMode
+				appMode = appMode,
 				gradientDraft = gradientDraft,
 				callback = { result -> onApplyGradientEdits(result) }
 			)
@@ -304,12 +308,17 @@ open class GradientPaletteController(
 			// Add new
 			resultItem = PaletteUtils.createGradientColor(currentPalette, fileType, points)
 			repository.addPaletteItem(paletteId, resultItem)
+
+			val activity = getFragmentActivity()
+			if (activity != null) {
+				showRenameDialog(activity, resultItem, isNightMode())
+			}
 		}
 
 		notifyUpdatePaletteColors(resultItem)
 		listener?.onPaletteItemAdded(itemToUpdate, resultItem)
 
-		if (itemToUpdate?.id == selectedItem?.id) {
+		if (itemToUpdate == null || itemToUpdate.id == selectedItem?.id) {
 			val oldSelected = selectedItem
 			selectPaletteItem(resultItem)
 			notifyUpdatePaletteSelection(oldSelected, resultItem)
