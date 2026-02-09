@@ -2,6 +2,7 @@ package net.osmand.plus.card.color.palette.gradient
 
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import net.osmand.plus.card.color.palette.gradient.editor.data.RelativeConstants
+import net.osmand.shared.ColorPalette
 import net.osmand.shared.gpx.GpxParameter.MAX_ELEVATION
 import net.osmand.shared.gpx.GpxParameter.MIN_ELEVATION
 import net.osmand.shared.gpx.GpxTrackAnalysis
@@ -141,6 +142,34 @@ object GradientFormatter {
 			formattedValue = formattedValue.substring(0, formattedValue.length - 2)
 		}
 		return formattedValue
+	}
+
+	/**
+	 * Returns a palette adjusted to the specific track data limits.
+	 * Useful for Fixed palettes to show only the relevant range on the chart.
+	 */
+	@JvmStatic
+	fun getAdjustedPalette(
+		originalPalette: ColorPalette,
+		analysis: GpxTrackAnalysis?,
+		fileType: GradientFileType
+	): ColorPalette {
+		if (analysis == null) return originalPalette
+
+		// Calculate actual track limits (e.g. 0..120 km/h)
+		val limits = calculateRealDataLimits(analysis, fileType.category.measureUnitType)
+			?: return originalPalette
+
+		// Validate limits (must be a valid range)
+		if (limits.maxValue <= limits.minValue) {
+			return originalPalette
+		}
+
+		// Adjust the palette to fit strictly within the track's min/max
+		return originalPalette.adjustToRange(
+			limits.minValue.toDouble(),
+			limits.maxValue.toDouble()
+		)
 	}
 
 	private fun calculateRealDataLimits(

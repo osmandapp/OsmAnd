@@ -16,6 +16,7 @@ import net.osmand.plus.palette.view.binder.PaletteItemViewBinder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.ColorPalette;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.palette.domain.filetype.GradientFileType;
 
@@ -59,17 +60,22 @@ public class GradientColorsPaletteCard extends ColorsPaletteCard implements IPal
 		if (!(item instanceof PaletteItem.Gradient gradientItem)) {
 			return;
 		}
-
 		ColorPalette colorPalette = gradientItem.getColorPalette();
-		GradientChart chart = view.findViewById(R.id.chart);
+		GpxTrackAnalysis analysis = controller.getAnalysis();
+		GradientFileType fileType = gradientItem.getProperties().getFileType();
 
+		// Use formatter to adjust fixed palettes to track data
+		if (gradientItem.isFixed()) {
+			colorPalette = GradientFormatter.getAdjustedPalette(colorPalette, analysis, fileType);
+		}
+
+		GradientChart chart = view.findViewById(R.id.chart);
 		int labelsColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int xAxisGridColor = AndroidUtils.getColorFromAttr(app, R.attr.chart_x_grid_line_axis_color);
 
 		ChartUtils.setupGradientChart(app, chart, 9, 24, false, xAxisGridColor, labelsColor);
 
-		GradientFileType fileType = gradientItem.getProperties().getFileType();
-		IAxisValueFormatter formatter = GradientFormatter.getAxisFormatter(fileType, controller.getAnalysis());
+		IAxisValueFormatter formatter = GradientFormatter.getAxisFormatter(fileType, analysis);
 
 		chart.setData(ChartUtils.buildGradientChart(app, chart, colorPalette, formatter, nightMode));
 		chart.notifyDataSetChanged();

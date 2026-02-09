@@ -173,6 +173,40 @@ class ColorPalette {
 		}
 	}
 
+	/**
+	 * Creates a new palette adjusted to the [min, max] range.
+	 * - If the range is smaller than the palette, it "slices" the palette.
+	 * - If the range is larger, it extends the edge colors to the new limits.
+	 */
+	fun adjustToRange(min: Double, max: Double): ColorPalette {
+		val newPalette = ColorPalette()
+
+		if (colors.isEmpty()) {
+			return newPalette
+		}
+
+		// 1. Add start point.
+		// getColorByValue() handles interpolation or returns the first color if min < palette.min
+		newPalette.addPoint(min, getColorByValue(min))
+
+		// 2. Keep intermediate points to preserve gradient structure
+		for (cv in colors) {
+			if (cv.value > min && cv.value < max) {
+				newPalette.colors.add(cv)
+			}
+		}
+
+		// 3. Add end point
+		newPalette.addPoint(max, getColorByValue(max))
+
+		return newPalette
+	}
+
+	fun addPoint(value: Double, color: Int) {
+		colors.add(ColorValue(value, color))
+		sortPalette()
+	}
+
 	fun getColorByValue(value: Double): Int {
 		if (value.isNaN()) {
 			return LIGHT_GREY
