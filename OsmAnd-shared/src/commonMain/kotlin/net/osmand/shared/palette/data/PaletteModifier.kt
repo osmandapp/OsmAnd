@@ -11,6 +11,8 @@ interface PaletteModifier<P : Palette> {
 
 	fun insertAfter(palette: P, anchorId: String, item: PaletteItem): P
 
+	fun replace(palette: P, oldItemId: String, newItem: PaletteItem): P
+
 	fun remove(palette: P, itemId: String): P
 
 	fun markAsUsed(palette: P, itemId: String): P

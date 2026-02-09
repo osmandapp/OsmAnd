@@ -29,6 +29,10 @@ object PaletteUtils {
 		return KAlgorithms.capitalizeFirstLetter(paletteName.replace("_", " "))!!
 	}
 
+	fun getPaletteNameFromDisplayName(displayName: String): String {
+		return displayName.replace(" ", "_")
+	}
+
 	fun extractPaletteName(fileName: String): String? {
 		val fileType = PaletteFileTypeRegistry.fromFileName(fileName) ?: return null
 		return fileName.replace(fileType.filePrefix, "").replace(TXT_EXT, "")
@@ -52,7 +56,18 @@ object PaletteUtils {
 
 	fun isPaletteFileExt(fileName: String): Boolean = fileName.endsWith(TXT_EXT)
 
-	// TODO: candidates to extraction (temporally placed methods)
+	fun renameGradientPalette(item: PaletteItem.Gradient, newName: String): PaletteItem.Gradient {
+		val fileType = item.properties.fileType
+		val paletteName = getPaletteNameFromDisplayName(newName)
+
+		return item.copy(
+			id = paletteName,
+			displayName = newName,
+			source = item.source.copy(
+				fileName = buildFileName(paletteName, fileType)
+			)
+		)
+	}
 
 	fun createGradientColor(
 		palette: Palette.GradientCollection,

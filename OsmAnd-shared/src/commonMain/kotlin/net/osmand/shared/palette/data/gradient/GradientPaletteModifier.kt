@@ -79,6 +79,26 @@ object GradientPaletteModifier : PaletteModifier<Palette.GradientCollection> {
 	}
 
 	/**
+	 * Replaces an existing item with a new one at the same position.
+	 * This is typically used for renaming, where the ID changes but the position must be preserved.
+	 */
+	override fun replace(
+		palette: Palette.GradientCollection,
+		oldItemId: String,
+		newItem: PaletteItem
+	): Palette.GradientCollection {
+		if (newItem !is PaletteItem.Gradient) return palette
+
+		// Iterate through the list and replace the item with the matching oldItemId
+		// This guarantees that the new item occupies the exact same index as the old one
+		val newItems = palette.items.map { item ->
+			if (item.id == oldItemId) newItem else item
+		}
+
+		return palette.copy(items = newItems)
+	}
+
+	/**
 	 * Removes an item from the collection by its ID.
 	 */
 	override fun remove(

@@ -3,6 +3,7 @@ package net.osmand.plus.card.color.palette.gradient
 import android.graphics.Typeface
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.widget.EditText
 import androidx.fragment.app.FragmentActivity
 import net.osmand.OnResultCallback
 import net.osmand.plus.OsmandApplication
@@ -16,6 +17,7 @@ import net.osmand.plus.plugins.srtm.TerrainMode
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.alert.AlertDialogData
+import net.osmand.plus.widgets.alert.AlertDialogExtra
 import net.osmand.plus.widgets.alert.CustomAlert
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
@@ -28,6 +30,7 @@ import net.osmand.shared.palette.domain.Palette
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory
 import net.osmand.shared.palette.domain.PaletteItem
 import net.osmand.shared.palette.domain.filetype.GradientFileType
+import net.osmand.shared.util.KAlgorithms
 
 open class GradientPaletteController(
 	app: OsmandApplication,
@@ -106,7 +109,11 @@ open class GradientPaletteController(
 			menuItems.add(PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_rename)
 				.setIcon(getContentIcon(R.drawable.ic_action_edit_outlined))
-				.setOnClickListener { showRenameDialog(activity, item) }
+				.setOnClickListener {
+					showRenameDialog(activity, item, nightMode) { newName ->
+						renameGradientItem(item, newName)
+					}
+				}
 				.create()
 			)
 
@@ -186,18 +193,62 @@ open class GradientPaletteController(
 		updateExternalDependencies()
 	}
 
-	private fun showRenameDialog(activity: FragmentActivity, item: PaletteItem.Gradient) {
-		// TODO: implement
+	private fun showRenameDialog(
+		activity: FragmentActivity,
+		item: PaletteItem.Gradient,
+		nightMode: Boolean,
+		callback: OnResultCallback<String>
+	) {
+		val currentPalette =
+			repository.getPalette(paletteId) as? Palette.GradientCollection ?: return
+
+		val dialogData = AlertDialogData(activity, nightMode)
+			.setTitle(R.string.shared_string_rename)
+			.setControlsColor(getControlsAccentColor(nightMode))
+			.setNegativeButton(R.string.shared_string_cancel, null)
+
+		val paletteName = item.id.lowercase()
+		val oldName = item.displayName
+		val existingIds = currentPalette.items.map { it.id.lowercase() }.toSet()
+
+		dialogData.setPositiveButton(R.string.shared_string_apply) { _, _ ->
+			val editText = dialogData.getExtra(AlertDialogExtra.EDIT_TEXT)
+			if (editText is EditText) {
+				val newName = editText.text.toString().trim()
+				val newPaletteName = PaletteUtils.getPaletteNameFromDisplayName(newName).lowercase()
+				if (oldName == newName && paletteName == newPaletteName) {
+					return@setPositiveButton
+				}
+
+				if (KAlgorithms.isBlank(newName)) {
+					app.showToastMessage(R.string.empty_name)
+				} else if (existingIds.contains(newPaletteName)) {
+					app.showToastMessage(R.string.message_name_is_already_exists)
+				} else {
+					callback.onResult(newName)
+				}
+			}
+		}
+
+		val caption = app.getString(R.string.shared_string_name)
+		CustomAlert.showInput(dialogData, activity, oldName, caption)
+	}
+
+	private fun renameGradientItem(item: PaletteItem.Gradient, newName: String) {
+		val newItem = PaletteUtils.renameGradientPalette(item, newName)
+		repository.replacePaletteItem(paletteId, item.id, newItem)
+		notifyUpdatePaletteColors(null)
+		// TODO: update dependent components (tracks, route line)
 	}
 
 	private fun editGradient(item: PaletteItem.Gradient) {
 		editedItem = item
 		showGradientEditor(
 			GradientDraft(
-			originalId = item.id,
-			fileType = item.properties.fileType,
-			points = item.points
-		)
+				originalId = item.id,
+				fileType = item.properties.fileType,
+				points = item.points
+			)
 		)
 	}
 

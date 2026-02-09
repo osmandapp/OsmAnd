@@ -77,6 +77,12 @@ class PaletteRepository {
 		saveIfChanged(currentPalette, updatedPalette)
 	}
 
+	fun replacePaletteItem(paletteId: String, oldItemId: String, newItem: PaletteItem) {
+		val currentPalette = getPalette(paletteId) ?: return
+		val updatedPalette = currentPalette.modifier.replace(currentPalette, oldItemId, newItem)
+		saveIfChanged(currentPalette, updatedPalette)
+	}
+
 	fun insertPaletteItemAfter(paletteId: String, anchorId: String, newItem: PaletteItem) {
 		val currentPalette = getPalette(paletteId) ?: return
 		val updatedPalette = currentPalette.modifier.insertAfter(currentPalette, anchorId, newItem)

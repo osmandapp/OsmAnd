@@ -77,6 +77,24 @@ object SolidPaletteModifier : PaletteModifier<Palette.SolidCollection> {
 		return palette.copy(items = items)
 	}
 
+	/**
+	 * Replaces an existing item with a new one at the same position.
+	 */
+	override fun replace(
+		palette: Palette.SolidCollection,
+		oldItemId: String,
+		newItem: PaletteItem
+	): Palette.SolidCollection {
+		if (newItem !is PaletteItem.Solid) return palette
+
+		// Replace the item with matching ID to preserve the list order
+		val newItems = palette.items.map { item ->
+			if (item.id == oldItemId) newItem else item
+		}
+
+		return palette.copy(items = newItems)
+	}
+
 	override fun remove(
 		palette: Palette.SolidCollection,
 		itemId: String
