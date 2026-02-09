@@ -35,7 +35,7 @@ class ChartSection(
 		val axisColor = AndroidUtils.getColorFromAttr(app, R.attr.chart_x_grid_line_axis_color)
 
 		ChartUtils.setupGradientChart(app, chart, 16f, 16f, false, axisColor, labelColor)
-		chart.minOffset = 0f // TODO: do we need this
+		chart.minOffset = 0f
 
 		chipsView.setOnSelectChipListener { chip ->
 			onStepClicked(chip.tag as GradientStepData)
@@ -48,12 +48,13 @@ class ChartSection(
 		buttonContainer.setOnClickListener { onAddClicked() }
 	}
 
-	// TODO: check on optimization
 	override fun update(oldUiState: EditorUiState?, newUiState: EditorUiState) {
 		val oldState = oldUiState?.gradientState
 		val newState = newUiState.gradientState
 
-		if (oldState != newState) {
+		val needUpdate = oldState != newState || chart.data == null || chart.data.dataSetCount == 0
+
+		if (needUpdate) {
 			// 1. Update Chart
 			val fileType = newState.gradientFileType
 			val formatter = GradientFormatter.getAxisFormatter(fileType, realDataLimits = null)
@@ -70,7 +71,6 @@ class ChartSection(
 				nightMode
 			)
 
-			// TODO: does it work?
 			val selectedStep = newState.selectedItem
 			val selectedIndex = steps.indexOf(selectedStep)
 			if (selectedIndex != -1) {
@@ -78,7 +78,7 @@ class ChartSection(
 			} else {
 				chart.highlightValue(null)
 			}
-			// TODO: =============
+
 			chart.notifyDataSetChanged()
 			chart.invalidate()
 
@@ -87,7 +87,7 @@ class ChartSection(
 			steps.forEach { step ->
 				val chipItem = ChipItem(step.id)
 				chipItem.title = step.label
-				chipItem.contentDescription = step.label // TODO: we can also use units
+				chipItem.contentDescription = step.label
 				chipItem.tag = step
 				chipItem.titleColor = activeColor
 				chipItems.add(chipItem)

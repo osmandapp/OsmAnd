@@ -85,6 +85,7 @@ class GradientEditorFragment : BaseFullScreenDialogFragment(), IGradientEditorVi
 	}
 
 	private fun initView(controller: IGradientEditorController, view: View) {
+		cachedUiState = null
 		val staticUiData: EditorStaticUiData = controller.getStaticUiData()
 
 		// 1. Toolbar Section
