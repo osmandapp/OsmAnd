@@ -28,6 +28,7 @@ public class FavoriteGroup {
 
 	private int color;
 	private boolean visible = true;
+	private boolean pinned = false;
 
 	private long size = 0;
 	private long timeModified = 0;
@@ -41,19 +42,22 @@ public class FavoriteGroup {
 		visible = point.isVisible();
 		iconName = point.getIconName();
 		backgroundType = point.getBackgroundType();
+		pinned = isBaseFavoriteOrPersonalGroup(name);
 	}
 
-	public FavoriteGroup(String name, List<FavouritePoint> points, int color, boolean visible) {
+	public FavoriteGroup(String name, List<FavouritePoint> points, int color, boolean visible, boolean pinned) {
 		this.name = name;
 		this.color = color;
 		this.points = points;
 		this.visible = visible;
+		this.pinned = pinned;
 	}
 
 	public FavoriteGroup(@NonNull FavoriteGroup group) {
 		name = group.name;
 		color = group.color;
 		visible = group.visible;
+		pinned = group.pinned;
 		iconName = group.iconName;
 		backgroundType = group.backgroundType;
 		points.addAll(group.getPoints());
@@ -99,6 +103,10 @@ public class FavoriteGroup {
 		this.visible = visible;
 	}
 
+	public void setPinned(boolean pinned) {
+		this.pinned = pinned;
+	}
+
 	public String getIconName() {
 		return iconName;
 	}
@@ -125,6 +133,10 @@ public class FavoriteGroup {
 
 	public boolean isPersonal() {
 		return isPersonal(name);
+	}
+
+	public boolean isPinned() {
+		return pinned;
 	}
 
 	public String getDisplayName(@NonNull Context ctx) {
@@ -159,12 +171,13 @@ public class FavoriteGroup {
 		return (color == group.color)
 				&& (backgroundType == group.backgroundType)
 				&& Algorithms.stringsEqual(iconName, group.iconName)
-				&& visible == group.isVisible();
+				&& visible == group.isVisible()
+				&& pinned == group.isPinned();
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, iconName, backgroundType, points.size(), color, visible);
+		return Objects.hash(name, iconName, backgroundType, points.size(), color, visible, pinned);
 	}
 
 	public void copyAppearance(@NonNull FavoriteGroup group) {
@@ -172,6 +185,7 @@ public class FavoriteGroup {
 		setIconName(group.getIconName());
 		setBackgroundType(group.getBackgroundType());
 		setVisible(group.isVisible());
+		setPinned(group.isPinned());
 	}
 
 	private static boolean isPersonal(@NonNull String name) {
@@ -192,8 +206,24 @@ public class FavoriteGroup {
 		return name;
 	}
 
+	public static boolean isBaseFavoriteOrPersonalGroup(@NonNull String name) {
+		return isPersonal(name) || name.isEmpty();
+	}
+
+	public static String getCategoryFromPointGroup(@NonNull Context context, @NonNull PointsGroup group) {
+		String category;
+		if (isPersonalCategoryDisplayName(context, group.getName())) {
+			category = PERSONAL_CATEGORY;
+		} else if (Algorithms.stringsEqual(group.getName(), context.getString(R.string.shared_string_favorites))) {
+			category = "";
+		} else {
+			category = group.getName();
+		}
+		return category;
+	}
+
 	public PointsGroup toPointsGroup(@NonNull Context ctx) {
-		PointsGroup pointsGroup = new PointsGroup(getName(), getIconName(), getBackgroundType().getTypeName(), getColor(), !isVisible());
+		PointsGroup pointsGroup = new PointsGroup(getName(), getIconName(), getBackgroundType().getTypeName(), getColor(), !isVisible(), isPinned());
 		List<FavouritePoint> points = new ArrayList<>(this.points);
 		for (FavouritePoint point : points) {
 			pointsGroup.getPoints().add(point.toWpt(ctx));
@@ -207,6 +237,7 @@ public class FavoriteGroup {
 		favoriteGroup.color = pointsGroup.getColor();
 		favoriteGroup.iconName = pointsGroup.getIconName();
 		favoriteGroup.backgroundType = BackgroundType.getByTypeName(pointsGroup.getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
+		favoriteGroup.pinned = pointsGroup.isPinned();
 
 		for (WptPt point : pointsGroup.getPoints()) {
 			favoriteGroup.points.add(FavouritePoint.fromWpt(point));

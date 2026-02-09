@@ -1,6 +1,6 @@
 package net.osmand.plus.myplaces.favorites.dialogs;
 
-import static net.osmand.plus.myplaces.favorites.dialogs.FavoriteListSortMode.*;
+import static net.osmand.plus.settings.enums.FavoriteListSortMode.*;
 
 import androidx.annotation.NonNull;
 
@@ -11,6 +11,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.data.KLatLon;
 import net.osmand.shared.util.KMapUtils;
@@ -34,27 +35,43 @@ public class FavoriteComparator implements Comparator<Object> {
 
 	@Override
 	public int compare(Object o1, Object o2) {
-		if (o1 instanceof Integer) {
-			return o2 instanceof Integer ? Integer.compare((Integer) o1, (Integer) o2) : -1;
+		if (o1 == o2) return 0;
+		if (o1 == null) return 1;
+		if (o2 == null) return -1;
+
+		int r1 = rank(o1);
+		int r2 = rank(o2);
+		if (r1 != r2) {
+			return Integer.compare(r1, r2);
 		}
-		if (o2 instanceof Integer) {
-			return 1;
+
+		if (o1 instanceof Integer i1 && o2 instanceof Integer i2) {
+			return Integer.compare(i1, i2);
 		}
-		if (o1 instanceof FavoriteGroup group1) {
-			if (o2 instanceof FavoriteGroup group2) {
-				if (group1.isVisible() != group2.isVisible()) {
-					return group1.isVisible() ? -1 : 1;
-				}
-				return compareFavoriteGroups(group1, group2);
-			}
-			return -1;
+
+		if (o1 instanceof FavoriteGroup g1 && o2 instanceof FavoriteGroup g2) {
+			boolean pinned1 = g1.isPinned();
+			boolean pinned2 = g2.isPinned();
+			if (pinned1 != pinned2) return pinned1 ? -1 : 1;
+
+			if (g1.isVisible() != g2.isVisible()) return g1.isVisible() ? -1 : 1;
+
+			return compareFavoriteGroups(g1, g2);
 		}
-		if (o1 instanceof FavouritePoint point1 && o2 instanceof FavouritePoint point2) {
-			return compareFavoritePoints(point1, point2);
+
+		if (o1 instanceof FavouritePoint p1 && o2 instanceof FavouritePoint p2) {
+			return compareFavoritePoints(p1, p2);
 		}
-		return 0;
+
+		return Integer.compare(System.identityHashCode(o1), System.identityHashCode(o2));
 	}
 
+	private int rank(Object o) {
+		if (o instanceof Integer) return 0;
+		if (o instanceof FavoriteGroup) return 1;
+		if (o instanceof FavouritePoint) return 2;
+		return 3;
+	}
 	private int compareFavoritePoints(@NonNull FavouritePoint point1,
 	                                  @NonNull FavouritePoint point2) {
 		int multiplier;

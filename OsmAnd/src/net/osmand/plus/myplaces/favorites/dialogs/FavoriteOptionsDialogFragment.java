@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -34,13 +35,19 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
+
+import java.io.File;
+import java.util.Collections;
 
 public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -70,7 +77,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 			return;
 		}
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		View groupView = LayoutInflater.from(new ContextThemeWrapper(app, themeRes))
+		View groupView = LayoutInflater.from(new ContextThemeWrapper(requireActivity(), themeRes))
 				.inflate(R.layout.track_list_item, null, false);
 		TextView title = groupView.findViewById(R.id.title);
 		TextView description = groupView.findViewById(R.id.description);
@@ -122,6 +129,19 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 				})
 				.create();
 		items.add(showOnMapItem);
+
+		BaseBottomSheetItem pinItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(group.isPinned() ? R.drawable.ic_action_drawing_pin_disable : R.drawable.ic_action_drawing_pin))
+				.setTitle(getString(group.isPinned() ? R.string.unpin_folder : R.string.pin_folder))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(v -> {
+					boolean shouldPin = !group.isPinned();
+					helper.updateGroupPin(group, shouldPin, true);
+					updateAll();
+					dismiss();
+				})
+				.create();
+		items.add(pinItem);
 		items.add(new DividerHalfItem(getContext()));
 
 		BaseBottomSheetItem editNameItem = new SimpleBottomSheetItem.Builder()
@@ -201,6 +221,22 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 					.create();
 			items.add(markersGroupItem);
 
+			BaseBottomSheetItem addToTrackGroupItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_add_to_track))
+					.setTitle(getString(R.string.add_to_a_track))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(view -> {
+						SelectTrackTabsFragment.GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
+							gpxFile.addPointsGroup(group.toPointsGroup(app));
+							saveGpx(app, gpxFile);
+							syncGpx(gpxFile);
+						};
+						dismiss();
+						SelectTrackTabsFragment.showInstance(requireActionBarActivity().getSupportFragmentManager(), gpxFileSelectionListener);
+					})
+					.create();
+			items.add(addToTrackGroupItem);
+
 			Drawable shareIcon = getContentIcon(R.drawable.ic_action_gshare_dark);
 			if (shareIcon != null) {
 				shareIcon = AndroidUtils.getDrawableForDirection(app, shareIcon);
@@ -210,9 +246,9 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 					.setTitle(getString(R.string.shared_string_share))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(view -> {
-						IFavoriteListListener fragment = getFavoriteListListener();
+						BaseFavoriteListFragment fragment = getFavoriteListFragment();
 						if (fragment != null) {
-							fragment.shareFavorites(group);
+							fragment.shareFavorites(Collections.singletonList(group));
 						}
 						dismiss();
 					})
@@ -247,6 +283,22 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 		items.add(deleteItem);
 	}
 
+	private void saveGpx(OsmandApplication app, GpxFile gpxFile) {
+		SaveGpxHelper.saveGpx(new File(gpxFile.getPath()), gpxFile, errorMessage -> {
+			if (errorMessage == null) {
+				app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
+			}
+		});
+	}
+
+	private void syncGpx(GpxFile gpxFile) {
+		MapMarkersHelper helper = app.getMapMarkersHelper();
+		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
+		if (group != null) {
+			helper.runSynchronization(group);
+		}
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -256,16 +308,16 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 	}
 
 	@Nullable
-	private IFavoriteListListener getFavoriteListListener() {
+	private BaseFavoriteListFragment getFavoriteListFragment() {
 		Fragment fragment = getParentFragment();
-		if (fragment instanceof IFavoriteListListener) {
-			return (IFavoriteListListener) fragment;
+		if (fragment instanceof BaseFavoriteListFragment) {
+			return (BaseFavoriteListFragment) fragment;
 		}
 		return null;
 	}
 
 	private void updateAll() {
-		IFavoriteListListener baseFavoriteListFragment = getFavoriteListListener();
+		BaseFavoriteListFragment baseFavoriteListFragment = getFavoriteListFragment();
 		if (baseFavoriteListFragment != null) {
 			baseFavoriteListFragment.reloadData();
 		}

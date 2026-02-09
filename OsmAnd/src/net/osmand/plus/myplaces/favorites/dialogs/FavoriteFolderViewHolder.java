@@ -36,6 +36,7 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 	protected final View checkboxContainer;
 	protected final View menuButton;
 	protected final View divider;
+	protected final View fullDivider;
 
 	protected final boolean nightMode;
 	protected final boolean selectionMode;
@@ -56,6 +57,7 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 		checkboxContainer = view.findViewById(R.id.checkbox_container);
 		menuButton = view.findViewById(R.id.menu_button);
 		divider = view.findViewById(R.id.divider);
+		fullDivider = view.findViewById(R.id.full_divider);
 
 		setupSelectionMode();
 	}
@@ -67,7 +69,7 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), checkbox);
 	}
 
-	public void bindView(@NonNull FavoriteGroup group, boolean showDivider, FavoriteAdapterListener listener) {
+	public void bindView(@NonNull FavoriteGroup group, boolean showDivider, boolean showFullDivider, FavoriteAdapterListener listener) {
 		itemView.setOnLongClickListener(v -> {
 			listener.onItemLongClick(group);
 			return true;
@@ -88,15 +90,18 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 		description.setText(GpxUiHelper.getFavoriteFolderDescription(app, group));
 
 		int color = group.getColor() == 0 ? getColor(app, R.color.color_favorite) : group.getColor();
+		int hiddenColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		if (!group.isPersonal()) {
-			if (group.isVisible()) {
+			if (group.isPinned()) {
+				icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_pin, group.isVisible() ? color : hiddenColor));
+			} else if (group.isVisible()) {
 				icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color));
 			} else {
-				icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_hidden,
-						ColorUtilities.getDefaultIconColor(app, nightMode)));
+				icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_hidden, hiddenColor));
 			}
 		}
 		AndroidUiHelper.updateVisibility(divider, showDivider);
+		AndroidUiHelper.updateVisibility(fullDivider, showFullDivider);
 	}
 
 	public void bindSelectionMode(boolean selectionMode, @NonNull FavoriteAdapterListener listener, @NonNull FavoriteGroup trackFolder) {
