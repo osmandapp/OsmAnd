@@ -167,9 +167,9 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 	@Override
 	public void onPaletteItemSelected(@NonNull PaletteItem gradientItem) {
 		if (gradientItem instanceof PaletteItem.Gradient gradient) {
-			TerrainType terrainType = TerrainType.valueOf(gradient.getPaletteId());
-			String key = gradient.getPaletteName();
-			TerrainMode mode = TerrainMode.valueOf(terrainType, key);
+			TerrainType terrainType = TerrainType.valueOf(gradient.getPaletteCategory().getId());
+			String paletteName = gradient.getId();
+			TerrainMode mode = TerrainMode.valueOf(terrainType, paletteName);
 			if (mode != null) {
 				selectedMode = mode;
 				plugin.setTerrainMode(mode);

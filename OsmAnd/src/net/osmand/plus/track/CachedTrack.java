@@ -16,6 +16,8 @@ import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.shared.palette.domain.PaletteItem;
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.render.RenderingRulesStorage;
@@ -150,10 +152,19 @@ public class CachedTrack {
 		GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		GpxTrackAnalysis trackAnalysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
 		ColorizationType colorizationType = scaleType.toColorizationType();
+		GradientPaletteCategory category = scaleType.toPaletteCategory();
 		float maxSpeed = app.getSettings().getApplicationMode().getMaxSpeed();
-		ColorPalette colorPalette = app.getColorPaletteHelper().getGradientColorPaletteSync(colorizationType, gradientPalette);
 
-		return new RouteColorize(gpxFile, trackAnalysis, colorizationType, colorPalette, maxSpeed);
+		boolean fixedValues = false;
+		ColorPalette colorPalette = null;
+
+		PaletteItem item = app.getPaletteRepository().findPaletteItem(category.getId(), gradientPalette);
+		if (item instanceof PaletteItem.Gradient gradient) {
+			fixedValues = gradient.isFixed();
+			colorPalette = gradient.getColorPalette();
+		}
+
+		return new RouteColorize(gpxFile, trackAnalysis, colorizationType, colorPalette, maxSpeed, fixedValues);
 	}
 
 	@NonNull

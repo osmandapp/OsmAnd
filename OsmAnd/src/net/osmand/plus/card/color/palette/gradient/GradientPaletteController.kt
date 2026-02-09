@@ -50,23 +50,23 @@ open class GradientPaletteController(
 	 * Updates the current palette category (e.g. switch from Speed to Elevation)
 	 * and optionally selects an item by name.
 	 */
-	fun updatePalette(paletteCategory: GradientPaletteCategory, selectedItemName: String?) {
+	fun updatePalette(paletteCategory: GradientPaletteCategory, paletteName: String?) {
 		this.paletteCategory = paletteCategory
 		this.paletteId = paletteCategory.id
-		selectPaletteItemByName(selectedItemName)
+		selectPaletteItemByName(paletteName)
 		notifyUpdatePaletteColors(null)
 	}
 
 	// --- Selection & State ---
 
-	private fun selectPaletteItemByName(name: String?) {
-		if (name == null) {
+	private fun selectPaletteItemByName(paletteName: String?) {
+		if (paletteName == null) {
 			selectDefault()
 			return
 		}
 		val items = getPaletteItems(PaletteSortMode.ORIGINAL_ORDER)
 
-		val found = items.filterIsInstance<PaletteItem.Gradient>().find { it.paletteName == name }
+		val found = items.filterIsInstance<PaletteItem.Gradient>().find { it.id == paletteName }
 
 		if (found != null) {
 			selectPaletteItem(found)

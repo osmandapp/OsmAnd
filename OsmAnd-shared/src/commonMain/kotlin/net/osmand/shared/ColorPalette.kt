@@ -213,6 +213,8 @@ class ColorPalette {
 		return bld.toString().trim()
 	}
 
+	fun isValid() = colors.size >= 2
+
 	private fun sortPalette() {
 		colors.sortWith(compareBy { it.value })
 	}

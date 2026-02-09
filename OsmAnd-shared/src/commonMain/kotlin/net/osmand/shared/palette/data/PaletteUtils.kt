@@ -25,9 +25,8 @@ object PaletteUtils {
 		return "${fileType.filePrefix}${paletteName}${TXT_EXT}"
 	}
 
-	fun extractDisplayName(fileName: String): String? {
-		val paletteName = extractPaletteName(fileName) ?: return null
-		return KAlgorithms.capitalizeFirstLetter(paletteName.replace("_", " "))
+	fun buildDisplayName(paletteName: String): String {
+		return KAlgorithms.capitalizeFirstLetter(paletteName.replace("_", " "))!!
 	}
 
 	fun extractPaletteName(fileName: String): String? {
@@ -39,8 +38,8 @@ object PaletteUtils {
 		return paletteName in setOf(ALTITUDE_DEFAULT_NAME, DEFAULT_NAME)
 	}
 
-	private fun generateGradientUniqueFileName(existing: Set<String>, baseName: String): String {
-		return NamingUtils.generateUniqueName(existing, baseName)
+	private fun generateUniquePaletteName(existingIds: Set<String>, baseId: String): String {
+		return NamingUtils.generateUniqueName(existingIds, baseId)
 	}
 
 	fun generateSolidUniqueId(existingIds: Set<String>): String {
@@ -60,18 +59,14 @@ object PaletteUtils {
 		fileType: GradientFileType,
 		points: List<GradientPoint>
 	): PaletteItem.Gradient {
-		val proposedFileName = buildFileName(CUSTOM_NAME, fileType)
 
 		val existingIds = palette.items.map { it.id }.toSet()
-		val newFileName = generateGradientUniqueFileName(existingIds, proposedFileName)
-		val paletteName = extractPaletteName(newFileName)
-			?: throw IllegalStateException("Can't extract palette name from the file name")
-		val displayName = extractDisplayName(newFileName)
-			?: throw IllegalStateException("Can't extract display name from the file name")
+		val paletteName = generateUniquePaletteName(existingIds, CUSTOM_NAME)
+		val displayName = buildDisplayName(paletteName)
+		val newFileName = buildFileName(paletteName, fileType)
 
 		return PaletteItem.Gradient(
-			id = newFileName,
-			paletteName = paletteName,
+			id = paletteName,
 			displayName = displayName,
 			source = PaletteItemSource.GradientFile(palette.id, newFileName),
 			isDefault = false,
@@ -98,14 +93,13 @@ object PaletteUtils {
 		// 1. Generate Unique ID / Name
 		// In gradients, ID is the filename with extension
 		val existingIds = palette.items.map { it.id }.toSet()
-		val newFileName = generateGradientUniqueFileName(existingIds, originalItem.id)
-		val paletteName = extractPaletteName(newFileName) ?: return null
-		val displayName = extractDisplayName(newFileName) ?: return null
+		val paletteName = generateUniquePaletteName(existingIds, originalItem.id)
+		val newFileName = buildFileName(paletteName, originalItem.properties.fileType)
+		val displayName = buildDisplayName(paletteName)
 
 		// 2. Create new Item
 		return originalItem.copy(
-			id = newFileName,
-			paletteName = paletteName,
+			id = paletteName,
 			displayName = displayName,
 			source = PaletteItemSource.GradientFile(palette.id, newFileName),
 			isDefault = false

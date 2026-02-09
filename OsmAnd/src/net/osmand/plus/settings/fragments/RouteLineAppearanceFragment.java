@@ -532,7 +532,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	@Override
 	public void onPaletteItemSelected(@NonNull PaletteItem item) {
 		if (item instanceof PaletteItem.Gradient gradientItem) {
-			previewRouteLineInfo.setGradientPalette(gradientItem.getPaletteName());
+			previewRouteLineInfo.setGradientPalette(gradientItem.getId());
 			callMapActivity(MapActivity::refreshMap);
 		} else if (item instanceof PaletteItem.Solid solidItem) {
 			RouteLineColorController colorController = getColorCardController();

@@ -129,7 +129,7 @@ object GradientFormatter {
 		return if (fileType.category.isTerrainRelated()) {
 			formatTerrainTypeValues(value)
 		} else {
-			value.toString()
+			decimalFormat.format(value)
 		}
 	}
 

@@ -76,7 +76,7 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 	@Override
 	public void onPaletteItemSelected(@NonNull PaletteItem paletteItem) {
 		if (paletteItem instanceof PaletteItem.Gradient gradientItem) {
-			data.setParameter(COLOR_PALETTE, gradientItem.getPaletteName());
+			data.setParameter(COLOR_PALETTE, gradientItem.getId());
 		} else if (paletteItem instanceof PaletteItem.Solid solidItem) {
 			data.setParameter(COLOR_PALETTE, PaletteUtils.DEFAULT_NAME);
 			data.setParameter(COLOR, solidItem.getColorInt());

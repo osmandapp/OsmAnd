@@ -54,7 +54,6 @@ sealed interface PaletteItem {
 
 	data class Gradient(
 		override val id: String,
-		val paletteName: String,
 		override val displayName: String,
 		override val source: PaletteItemSource.GradientFile,
 		val isDefault: Boolean,
@@ -65,8 +64,6 @@ sealed interface PaletteItem {
 		val properties: GradientProperties
 	) : PaletteItem {
 
-		fun getPaletteId(): String = getPaletteCategory().id
-
 		fun getPaletteCategory() = properties.fileType.category
 
 		fun getColorPalette(): ColorPalette {
@@ -74,5 +71,7 @@ sealed interface PaletteItem {
 			points.forEach { palette.colors.add(it.toColorValue()) }
 			return palette
 		}
+
+		fun isFixed() = properties.fileType.rangeType == GradientRangeType.FIXED_VALUES
 	}
 }

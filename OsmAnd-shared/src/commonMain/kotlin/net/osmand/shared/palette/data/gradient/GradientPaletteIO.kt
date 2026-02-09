@@ -168,7 +168,7 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 		val fileName = file.name()
 		val paletteId = fileType.category.id
 		val paletteName = PaletteUtils.extractPaletteName(fileName) ?: return null
-		val displayName = PaletteUtils.extractDisplayName(fileName) ?: return null
+		val displayName = PaletteUtils.buildDisplayName(paletteName)
 
 		// Use index from settings or last modified time (if new file)
 		// TODO: don't use modification time as an history index
@@ -177,15 +177,12 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 		val properties = GradientProperties(
 			fileType = fileType,
 			rangeType = fileType.rangeType,
-			// TODO: name to write in properties (implement in the future)
-			name = null,
 			comments = comments,
 			unrecognized = unrecognized
 		)
 
 		return PaletteItem.Gradient(
-			id = fileName,
-			paletteName = paletteName,
+			id = paletteName,
 			displayName = displayName,
 			source = PaletteItemSource.GradientFile(paletteId, fileName),
 			isDefault = PaletteUtils.isDefaultPalette(paletteName),
@@ -241,8 +238,8 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 		lastUsedOrder.forEach { item ->
 			settingsItems.add(
 				GradientSettingsItem(
-					typeName = item.properties.fileType.category.id,
-					paletteName = item.paletteName,
+					typeName = item.getPaletteCategory().id,
+					paletteName = item.id,
 					index = originalOrder.indexOf(item) + 1
 				)
 			)

@@ -14,6 +14,7 @@ class RouteColorize {
 	private lateinit var longitudes: DoubleArray
 	private lateinit var values: DoubleArray
 	private lateinit var palette: ColorPalette
+	private var fixedValues = false
 	private var minValue = 0.0
 	private var maxValue = 0.0
 	private var dataList: MutableList<RouteColorizationPoint>? = null
@@ -38,13 +39,15 @@ class RouteColorize {
 		values: DoubleArray,
 		minValue: Double,
 		maxValue: Double,
-		palette: ColorPalette?
+		palette: ColorPalette?,
+		fixedValues: Boolean
 	) {
 		this.latitudes = latitudes
 		this.longitudes = longitudes
 		this.values = values
 		this.minValue = minValue
 		this.maxValue = maxValue
+		this.fixedValues = fixedValues
 		if (minValue.isNaN() || maxValue.isNaN()) {
 			calculateMinMaxValue()
 		}
@@ -62,16 +65,19 @@ class RouteColorize {
 	constructor(
 		gpxFile: GpxFile,
 		type: ColorizationType,
-		palette: ColorPalette?
-	) : this(gpxFile, null, type, palette, 0f)
+		palette: ColorPalette?,
+		fixedValues: Boolean
+	) : this(gpxFile, null, type, palette, 0f, fixedValues)
 
 	constructor(
 		gpxFile: GpxFile,
 		analysis: GpxTrackAnalysis?,
 		type: ColorizationType,
 		palette: ColorPalette?,
-		maxProfileSpeed: Float
+		maxProfileSpeed: Float,
+		fixedValues: Boolean
 	) {
+		this.fixedValues = fixedValues
 		var analysis: GpxTrackAnalysis? = analysis
 		if (!gpxFile.hasTrkPt()) {
 			LOG.warn("GPX file is not consist of track points")
@@ -117,7 +123,9 @@ class RouteColorize {
 			listToArray(valList)
 		}
 		calculateMinMaxValue(analysis, maxProfileSpeed)
-		if (type == ColorizationType.SLOPE) {
+		if (fixedValues) {
+			this.palette = if (isValidPalette(palette)) palette!! else getDefaultPalette(type)
+		} else if (type == ColorizationType.SLOPE) {
 			this.palette =
 				if (isValidPalette(palette)) palette!! else ColorPalette.SLOPE_PALETTE
 		} else {
@@ -490,6 +498,7 @@ class RouteColorize {
 		var SLOPE_RANGE = 150 // 150 meters
 		private const val DEFAULT_BASE = 17.2
 		private const val MIN_DIFFERENCE_SLOPE = 0.05 // 5%
+
 		fun getMinValue(
 			type: ColorizationType?,
 			analysis: GpxTrackAnalysis

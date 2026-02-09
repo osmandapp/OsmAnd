@@ -44,6 +44,7 @@ import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
@@ -59,13 +60,14 @@ import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.widgets.style.CustomClickableSpan;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.shared.ColorPalette;
+import net.osmand.shared.palette.data.PaletteRepository;
+import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -174,12 +176,20 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 
 		ChartUtils.setupGradientChart(app, gradientChart, 9, 24, false, xAxisGridColor, labelsColor);
 		TerrainMode mode = srtmPlugin.getTerrainMode();
-		ColorPalette colorPalette = app.getColorPaletteHelper().getGradientColorPaletteSync(mode.getMainFileName());
+		TerrainType type = mode.getType();
+
+		GradientPaletteCategory category = type.toPaletteCategory();
+		String paletteName = mode.getMainFileName();
+		ColorPalette colorPalette = null;
+
+		PaletteRepository repository = app.getPaletteRepository();
+		if (repository.findPaletteItem(category.getId(), paletteName) instanceof PaletteItem.Gradient gradient) {
+			colorPalette = gradient.getColorPalette();
+		}
+
 		if (colorPalette != null) {
 			AndroidUiHelper.updateVisibility(gradientChart, true);
-			GradientPaletteCategory paletteCategory = mode.getType().toPaletteCategory();
-			IAxisValueFormatter formatter = GradientFormatter.getAxisFormatter(paletteCategory);
-//			IAxisValueFormatter formatter = GradientUiHelper.getGradientTypeFormatter(app, mode.getType().toPaletteCategory(), null);
+			IAxisValueFormatter formatter = GradientFormatter.getAxisFormatter(category);
 			LineData barData = ChartUtils.buildGradientChart(app, gradientChart, colorPalette, formatter, nightMode);
 
 			gradientChart.setData(barData);
@@ -198,12 +208,6 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 			intent.putExtra(DownloadActivity.LOCAL_ITEM_TYPE, LocalItemType.CACHE.name());
 			activity.startActivity(intent);
 		}
-	}
-
-	@NonNull
-	private String formatChartValue(float value) {
-		DecimalFormat decimalFormat = new DecimalFormat("#");
-		return decimalFormat.format(value);
 	}
 
 	private void updateColorSchemeCard(TerrainMode mode) {

@@ -34,6 +34,11 @@ class PaletteRepository {
 
 	// --- Read ---
 
+	fun findPaletteItem(paletteId: String, itemId: String): PaletteItem? {
+		val palette = getPalette(paletteId)
+		return palette?.items?.firstOrNull { it.id == itemId }
+	}
+
 	fun getPalette(id: String): Palette? {
 		cachedPalettesForId[id]?.let { return it }
 
