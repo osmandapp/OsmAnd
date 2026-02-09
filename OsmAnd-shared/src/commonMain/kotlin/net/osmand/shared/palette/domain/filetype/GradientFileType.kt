@@ -16,9 +16,9 @@ enum class GradientFileType(
 	val rangeType: GradientRangeType,
 	val baseUnits: MeasurementUnit<*>,          // Unit used for storage (e.g., meters, fraction)
 	val displayUnits: MeasurementUnit<*> = baseUnits, // Unit used for UI display (e.g., percent)
-	val defaultValues: List<Float> = emptyList(),     // Default steps for new palettes
-	val minLimit: Float? = null,                // Min allowed value for this type of data
-	val maxLimit: Float? = null                 // Max allowed value for this type of data
+	val defaultDisplayValues: List<Float> = emptyList(),        // Default steps for new palettes
+	val minLimit: Float? = null,                // Min allowed value (in base units)
+	val maxLimit: Float? = null                 // Max allowed value (in base units)
 ) : PaletteFileType {
 
 	// --- Track / Route Data (Prefix: route_*) ---
@@ -27,8 +27,9 @@ enum class GradientFileType(
 		filePrefix = "route_speed_fixed_",
 		category = GradientPaletteCategory.SPEED,
 		rangeType = GradientRangeType.FIXED_VALUES,
-		baseUnits = SpeedUnits.KILOMETERS_PER_HOUR,
-		defaultValues = listOf(0f, 50f, 100f),
+		baseUnits = SpeedUnits.METERS_PER_SECOND,
+		displayUnits = SpeedUnits.KILOMETERS_PER_HOUR,
+		defaultDisplayValues = listOf(0f, 50f, 100f),
 		minLimit = 0f,
 		maxLimit = null
 	),
@@ -39,7 +40,7 @@ enum class GradientFileType(
 		rangeType = GradientRangeType.RELATIVE,
 		baseUnits = PercentUnits.FRACTION,
 		displayUnits = PercentUnits.PERCENT,
-		defaultValues = listOf(0f, 0.5f, 1.0f),
+		defaultDisplayValues = listOf(0f, 50f, 100f),
 		minLimit = 0f,
 		maxLimit = 1f
 	),
@@ -48,8 +49,9 @@ enum class GradientFileType(
 		filePrefix = "route_fixed_maxspeed_",
 		category = GradientPaletteCategory.MAX_SPEED,
 		rangeType = GradientRangeType.FIXED_VALUES,
-		baseUnits = SpeedUnits.KILOMETERS_PER_HOUR,
-		defaultValues = listOf(0f, 50f, 100f),
+		baseUnits = SpeedUnits.METERS_PER_SECOND,
+		displayUnits = SpeedUnits.KILOMETERS_PER_HOUR,
+		defaultDisplayValues = listOf(0f, 50f, 100f),
 		minLimit = 0f,
 		maxLimit = null
 	),
@@ -60,7 +62,7 @@ enum class GradientFileType(
 		rangeType = GradientRangeType.RELATIVE,
 		baseUnits = PercentUnits.FRACTION,
 		displayUnits = PercentUnits.PERCENT,
-		defaultValues = listOf(0f, 0.5f, 1.0f),
+		defaultDisplayValues = listOf(0f, 50f, 100f),
 		minLimit = 0f,
 		maxLimit = 1f
 	),
@@ -70,7 +72,7 @@ enum class GradientFileType(
 		category = GradientPaletteCategory.ALTITUDE,
 		rangeType = GradientRangeType.FIXED_VALUES,
 		baseUnits = LengthUnits.METERS,
-		defaultValues = listOf(0f, 500f, 1000f, 2000f),
+		defaultDisplayValues = listOf(0f, 500f, 1000f, 2000f),
 	),
 
 	ELEVATION_RELATIVE(
@@ -79,7 +81,7 @@ enum class GradientFileType(
 		rangeType = GradientRangeType.RELATIVE,
 		baseUnits = PercentUnits.FRACTION,
 		displayUnits = PercentUnits.PERCENT,
-		defaultValues = listOf(0f, 0.5f, 1.0f)
+		defaultDisplayValues = listOf(0f, 50f, 100f)
 	),
 
 	SLOPE_FIXED(
@@ -87,7 +89,7 @@ enum class GradientFileType(
 		category = GradientPaletteCategory.SLOPE,
 		rangeType = GradientRangeType.FIXED_VALUES,
 		baseUnits = NoUnit, // Usually degrees
-		defaultValues = listOf(0f, 10f, 20f)
+		defaultDisplayValues = listOf(0f, 10f, 20f)
 	),
 
 	SLOPE_RELATIVE(
@@ -96,7 +98,7 @@ enum class GradientFileType(
 		rangeType = GradientRangeType.RELATIVE,
 		baseUnits = PercentUnits.FRACTION,
 		displayUnits = PercentUnits.PERCENT,
-		defaultValues = listOf(0f, 0.5f, 1.0f)
+		defaultDisplayValues = listOf(0f, 50f, 100f),
 	),
 
 	// --- Terrain / Map Data ---
@@ -106,7 +108,7 @@ enum class GradientFileType(
 		category = GradientPaletteCategory.TERRAIN_ALTITUDE,
 		rangeType = GradientRangeType.FIXED_VALUES,
 		baseUnits = LengthUnits.METERS,
-		defaultValues = listOf(0f, 1000f, 2000f, 4000f)
+		defaultDisplayValues = listOf(0f, 1000f, 2000f, 4000f)
 	),
 
 	TERRAIN_SLOPE(
@@ -114,7 +116,7 @@ enum class GradientFileType(
 		category = GradientPaletteCategory.TERRAIN_SLOPE,
 		rangeType = GradientRangeType.FIXED_VALUES,
 		baseUnits = NoUnit, // Degrees
-		defaultValues = listOf(0f, 15f, 30f, 45f)
+		defaultDisplayValues = listOf(0f, 15f, 30f, 45f)
 	),
 
 	/**
@@ -127,7 +129,7 @@ enum class GradientFileType(
 		category = GradientPaletteCategory.TERRAIN_HILLSHADE,
 		rangeType = GradientRangeType.FIXED_VALUES,
 		baseUnits = NoUnit, // 0-255 byte value
-		defaultValues = listOf(0f, 255f)
+		defaultDisplayValues = listOf(0f, 255f)
 	),
 
 	// --- Weather (Prefix: weather_*) ---
@@ -137,7 +139,7 @@ enum class GradientFileType(
 		category = GradientPaletteCategory.WEATHER,
 		rangeType = GradientRangeType.FIXED_VALUES,
 		baseUnits = NoUnit,
-		defaultValues = listOf(0f, 100f)
+		defaultDisplayValues = listOf(0f, 100f)
 	);
 
 	/**
@@ -148,9 +150,9 @@ enum class GradientFileType(
 		val defaultColors = ColorPalette.COLORS
 		val lastColor = defaultColors.last()
 
-		return defaultValues.mapIndexed { index, value ->
+		return defaultDisplayValues.mapIndexed { index, value ->
 			GradientPoint(
-				value = value,
+				value = baseUnits.from(value.toDouble(), displayUnits).toFloat(),
 				color = defaultColors.getOrElse(index) { lastColor }
 			)
 		}
