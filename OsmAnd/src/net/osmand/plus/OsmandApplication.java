@@ -824,7 +824,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void startApplication() {
 		feedbackHelper.setExceptionHandler();
-		if (!NetworkUtils.hasProxy() && settings.isProxyEnabled()) {
+		if (NetworkUtils.getProxy() == null && settings.isProxyEnabled()) {
 			try {
 				NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
 			} catch (RuntimeException e) {
