@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.utils.ColorUtilities;
 
 public class SortFavoriteViewHolder extends RecyclerView.ViewHolder {

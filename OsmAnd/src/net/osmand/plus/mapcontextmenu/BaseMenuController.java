@@ -37,7 +37,7 @@ public abstract class BaseMenuController {
 	}
 
 	private void init() {
-		portraitMode = AndroidUiHelper.isOrientationPortrait(app);
+		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity != null ? mapActivity : app);
 		landscapeWidthPx = app.getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
 		updateNightMode();
 	}

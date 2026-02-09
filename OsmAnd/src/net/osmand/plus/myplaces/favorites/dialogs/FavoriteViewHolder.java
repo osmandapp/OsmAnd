@@ -2,7 +2,7 @@ package net.osmand.plus.myplaces.favorites.dialogs;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static net.osmand.plus.myplaces.favorites.dialogs.FavoriteListSortMode.*;
+import static net.osmand.plus.settings.enums.FavoriteListSortMode.*;
 import static net.osmand.plus.utils.UpdateLocationUtils.getFormattedDistance;
 import static net.osmand.plus.utils.UpdateLocationUtils.updateDirectionDrawable;
 
@@ -23,6 +23,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.FavoriteAdapterListener;
+import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationInfo;

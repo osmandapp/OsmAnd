@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.SortFavoriteViewHolder.SortFavoriteListener;
+import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
@@ -36,9 +37,10 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final int TYPE_FOLDER = 1;
 	public static final int TYPE_FAVORITE = 2;
 	public static final int TYPE_EMPTY_FOLDER = 3;
-	public static final int TYPE_FOLDER_STATS = 4;
-	public static final int TYPE_EMPTY_FAVORITES = 5;
-	public static final int TYPE_EMPTY_SEARCH = 6;
+	public static final int TYPE_EMPTY_FOLDERS = 4;
+	public static final int TYPE_FOLDER_STATS = 5;
+	public static final int TYPE_EMPTY_FAVORITES = 6;
+	public static final int TYPE_EMPTY_SEARCH = 7;
 
 
 	private final OsmandApplication app;
@@ -102,6 +104,9 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case TYPE_EMPTY_FOLDER:
 				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
 				return new FavoriteEmptyFolderVHolder(view, listener);
+			case TYPE_EMPTY_FOLDERS:
+				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
+				return new FavoriteEmptyFoldersVHolder(view, listener);
 			case TYPE_FOLDER_STATS:
 				view = inflater.inflate(R.layout.folder_stats_item, parent, false);
 				return new FavoriteStatsViewHolder(app, view);
@@ -131,6 +136,8 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return TYPE_SORT_FAVORITE;
 			} else if (TYPE_EMPTY_FOLDER == item) {
 				return TYPE_EMPTY_FOLDER;
+			} else if (TYPE_EMPTY_FOLDERS == item) {
+				return TYPE_EMPTY_FOLDERS;
 			} else if (TYPE_EMPTY_FAVORITES == item) {
 				return TYPE_EMPTY_FAVORITES;
 			} else if (TYPE_EMPTY_SEARCH == item) {
@@ -144,26 +151,50 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		int itemCount = getItemCount();
 		boolean isStatsLastItem = items.get(itemCount - 1) instanceof FavoriteFolderAnalysis;
 		int offset = (isStatsLastItem && itemCount >= 2) ? 2 : 1;
-		return position != itemCount - offset;
+		return position == itemCount - offset;
+	}
+
+	private boolean isLastPinnedFolder(int position) {
+		Object cur = items.get(position);
+		if (!(cur instanceof FavoriteGroup currentGroup)) {
+			return false;
+		}
+		if (!currentGroup.isPinned()) {
+			return false;
+		}
+
+		for (int i = position + 1; i < items.size(); i++) {
+			Object o = items.get(i);
+			if (o instanceof FavoriteGroup g) {
+				if (g.isPinned()) {
+					return false;
+				} else {
+					break;
+				}
+			}
+		}
+		return true;
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		boolean lastItem = isLastItem(position);
+		boolean lastPinned = isLastPinnedFolder(position);
 
 		if (holder instanceof SortFavoriteViewHolder viewHolder) {
 			viewHolder.bindView(hasTrackItems());
 		} else if (holder instanceof FavoriteViewHolder viewHolder) {
 			FavouritePoint favouritePoint = (FavouritePoint) items.get(position);
-			viewHolder.bindView(sortMode, favouritePoint, lastItem, selectionMode, cache, listener);
+			viewHolder.bindView(sortMode, favouritePoint, !lastItem, selectionMode, cache, listener);
 		} else if (holder instanceof FavoriteFolderViewHolder viewHolder) {
 			FavoriteGroup trackFolder = (FavoriteGroup) items.get(position);
-			viewHolder.bindView(trackFolder, lastItem, listener);
+			viewHolder.bindView(trackFolder, !lastPinned && !lastItem, lastPinned && !lastItem, listener);
 		} else if (holder instanceof FavoriteStatsViewHolder viewHolder) {
 			FavoriteFolderAnalysis folderAnalysis = (FavoriteFolderAnalysis) items.get(position);
 			viewHolder.bindView(folderAnalysis);
-
 		} else if (holder instanceof FavoriteEmptyFolderVHolder viewHolder) {
+			viewHolder.bindView();
+		} else if (holder instanceof FavoriteEmptyFoldersVHolder viewHolder) {
 			viewHolder.bindView();
 		} else if (holder instanceof EmptyTracksViewHolder viewHolder) {
 			viewHolder.bindView();

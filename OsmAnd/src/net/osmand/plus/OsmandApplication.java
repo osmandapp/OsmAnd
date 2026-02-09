@@ -220,7 +220,6 @@ public class OsmandApplication extends MultiDexApplication {
 	RouteLayersHelper routeLayersHelper;
 	Model3dHelper model3dHelper;
 	TrackSortModesHelper trackSortModesHelper;
-	FavoriteSortModesHelper favoriteSortModesHelper;
 	ExplorePlacesOnlineProvider explorePlacesProvider;
 	HelpArticlesHelper helpArticlesHelper;
 	ClickableWayHelper clickableWayHelper;
@@ -717,7 +716,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@NonNull
 	public FavoriteSortModesHelper getFavoriteSortModesHelper() {
-		return favoriteSortModesHelper;
+		return favoritesHelper.getFavoriteSortModesHelper();
 	}
 
 	@NonNull

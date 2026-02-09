@@ -2,7 +2,9 @@ package net.osmand.plus.myplaces.favorites.dialogs;
 
 import static androidx.core.app.ActivityCompat.invalidateOptionsMenu;
 import static net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.*;
+import static net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment.IMPORT_FAVOURITES_REQUEST;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -19,17 +21,21 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.FavoriteAdapterListener;
 import net.osmand.plus.myplaces.favorites.dialogs.SortFavoriteViewHolder.SortFavoriteListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.settings.enums.FavoriteListSortMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -89,7 +95,8 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 
 			@Override
 			public void onEmptyStateClick() {
-
+				Intent intent = ImportHelper.getImportFileIntent();
+				AndroidUtils.startActivityForResultIfSafe(FavoriteFoldersFragment.this, intent, IMPORT_FAVOURITES_REQUEST);
 			}
 		};
 	}
@@ -158,17 +165,20 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 
 		List<FavoriteGroup> favoriteGroups = helper.getFavoriteGroups();
 
-		groups.addAll(favoriteGroups);
-		items.addAll(groups);
+		if (Algorithms.isEmpty(favoriteGroups)) {
+			items.add(TYPE_EMPTY_FOLDERS);
+		} else {
+			groups.addAll(favoriteGroups);
+			items.addAll(groups);
+			items.add(new FavoriteFolderAnalysis(groups));
+		}
 
-		items.add(new FavoriteFolderAnalysis(groups));
 		return items;
 	}
 
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.replace(InsetTarget.createScrollable(android.R.id.list));
 		collection.removeType(Type.ROOT_INSET);
 		return collection;
 	}
@@ -203,12 +213,12 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 		} else if (item.getItemId() == R.id.action_menu) {
 			FavoriteMenu menu = new FavoriteMenu(app, uiUtilities, requireMyActivity());
 			View view = requireMyActivity().findViewById(R.id.action_menu);
-			menu.showFolderOptionsMenu(requireMyActivity(), view, nightMode, this, this);
+			menu.showFoldersOptionsMenu(requireMyActivity(), view, nightMode, this, this);
 			return true;
 		} else if (item.getItemId() == R.id.more_button) {
 			FavoriteMenu menu = new FavoriteMenu(app, uiUtilities, requireMyActivity());
 			View view = requireMyActivity().findViewById(R.id.more_button);
-			menu.showFolderSelectOptionsMenu(view, nightMode);
+			menu.showFolderSelectionOptionsMenu(requireMyActivity(), view, selectionHelper.getSelectedItems(), nightMode, this);
 			return true;
 		}
 		return false;

@@ -1,8 +1,6 @@
 package net.osmand.plus.myplaces.favorites.dialogs;
 
 import static androidx.core.app.ActivityCompat.invalidateOptionsMenu;
-import static net.osmand.plus.myplaces.favorites.FavoriteGroup.PERSONAL_CATEGORY;
-import static net.osmand.plus.myplaces.favorites.FavoriteGroup.isPersonalCategoryDisplayName;
 import static net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.TYPE_EMPTY_FOLDER;
 import static net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.TYPE_SORT_FAVORITE;
 
@@ -29,9 +27,9 @@ import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.Favorit
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteMenu.FavoriteActionListener;
 import net.osmand.plus.myplaces.favorites.dialogs.SortFavoriteViewHolder.SortFavoriteListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
@@ -46,7 +44,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 
 	public static final String TAG = FavoriteFolderFragment.class.getSimpleName();
 
-	protected final ItemsSelectionHelper<FavouritePoint> selectionHelper = new ItemsSelectionHelper<>();
+	protected final ItemsSelectionHelper<FavouritePoint> selectionHelper = new ItemsSelectionHelper<>(true);
 
 	private FavoriteGroup selectedGroup;
 	private FavouritePoint selectedPoint;
@@ -143,7 +141,6 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.replace(InsetTarget.createScrollable(android.R.id.list));
 		collection.removeType(Type.ROOT_INSET);
 		return collection;
 	}
@@ -262,11 +259,15 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 				SearchFavoriteFragment.showInstance(manager, this, selectedGroup.getPoints(), selectedGroup.getDisplayName(app), "");
 			}
 		} else if (item.getItemId() == R.id.action_menu) {
-
+			FavoriteMenu menu = new FavoriteMenu(app, uiUtilities, requireMyActivity());
+			View view = requireMyActivity().findViewById(R.id.action_menu);
+			menu.showFolderOptionsMenu(requireMyActivity(), view, selectedGroup, nightMode, FavoriteFolderFragment.this);
 		} else if (item.getItemId() == R.id.more_button) {
 			FavoriteMenu menu = new FavoriteMenu(app, uiUtilities, requireMyActivity());
 			View view = requireMyActivity().findViewById(R.id.more_button);
-			menu.showFolderSelectOptionsMenu(view, nightMode);
+			if (selectionMode) {
+				menu.showPointsSelectOptionsMenu(view, selectionHelper.getSelectedItems(), selectedGroup, nightMode, FavoriteFolderFragment.this, FavoriteFolderFragment.this, FavoriteFolderFragment.this);
+			}
 		}
 		return false;
 	}
@@ -284,28 +285,28 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 
 	@Override
 	public void onCategorySelected(PointsGroup pointsGroup) {
-		String category;
-		if (isPersonalCategoryDisplayName(requireContext(), pointsGroup.getName())) {
-			category = PERSONAL_CATEGORY;
-		} else if (Algorithms.stringsEqual(pointsGroup.getName(), getString(R.string.shared_string_favorites))) {
-			category = "";
-		} else {
-			category = pointsGroup.getName();
-		}
+		String category = FavoriteGroup.getCategoryFromPointGroup(app, pointsGroup);
 		if (selectionMode) {
 			for (FavouritePoint point : selectionHelper.getSelectedItems()) {
 				helper.editFavouriteName(point, point.getName(), category, point.getDescription(), point.getAddress());
+				selectionHelper.clearSelectedItems();
+				changeTitle(String.valueOf(selectionHelper.getSelectedItems().size()));
+				updateContent();
 			}
 		} else {
 			helper.editFavouriteName(selectedPoint, selectedPoint.getName(), category, selectedPoint.getDescription(), selectedPoint.getAddress());
 		}
 
-		reloadData();
+		updateContent();
 	}
 
 	@Override
 	public void onActionFinish() {
 		updateContent();
+		if (selectionMode) {
+			selectionHelper.clearSelectedItems();
+			changeTitle(String.valueOf(selectionHelper.getSelectedItems().size()));
+		}
 	}
 
 	@Override

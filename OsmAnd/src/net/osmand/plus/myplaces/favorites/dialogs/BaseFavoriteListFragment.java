@@ -35,6 +35,7 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask;
 import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask.ShareFavoritesListener;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.FavoriteAdapterListener;
+import net.osmand.plus.myplaces.favorites.dialogs.FavoriteMenu.FavoriteActionListener;
 import net.osmand.plus.myplaces.favorites.dialogs.SortFavoriteViewHolder.SortFavoriteListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -44,9 +45,10 @@ import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 
 import java.io.File;
+import java.util.List;
 
 public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
-		implements SortFavoriteListener, FragmentStateHolder, IFavoriteListListener, ShareFavoritesListener {
+		implements SortFavoriteListener, FragmentStateHolder, FavoriteActionListener, ShareFavoritesListener {
 
 	protected static final String SELECTED_GROUP_KEY = "selected_group_key";
 
@@ -149,7 +151,6 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 		}
 	}
 
-	@Override
 	public void reloadData() {
 		updateContent();
 	}
@@ -200,6 +201,7 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 		selectionMode = mode;
 		if (!selectionMode) {
 			getSelectionHelper().clearSelectedItems();
+			changeTitle(String.valueOf(getSelectionHelper().getSelectedItems().size()));
 		}
 		adapter.setSelectionMode(selectionMode);
 		updateSelectionToolbar();
@@ -221,11 +223,19 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 		return activity.getSupportActionBar();
 	}
 
-	@Override
-	public void shareFavorites(@Nullable FavoriteGroup group) {
+	public void shareFavorites(@NonNull List<FavoriteGroup> groups) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			OsmAndTaskManager.executeTask(new ShareFavoritesAsyncTask(activity, group, this));
+			OsmAndTaskManager.executeTask(new ShareFavoritesAsyncTask(activity, groups, this));
+		}
+	}
+
+	@Override
+	public void onActionFinish() {
+		updateContent();
+		if (selectionMode) {
+			getSelectionHelper().clearSelectedItems();
+			changeTitle(String.valueOf(getSelectionHelper().getSelectedItems().size()));
 		}
 	}
 

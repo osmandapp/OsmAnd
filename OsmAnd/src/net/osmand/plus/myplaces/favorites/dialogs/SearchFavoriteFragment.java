@@ -45,8 +45,11 @@ import net.osmand.plus.myplaces.favorites.dialogs.FavoriteMenu.FavoriteActionLis
 import net.osmand.plus.myplaces.favorites.dialogs.SortFavoriteViewHolder.SortFavoriteListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
+import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
@@ -66,7 +69,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 	public static final String FAVORITE_SEARCH_QUERY_KEY = "favorite_search_query_key";
 	public static final String FAVORITE_SEARCH_GROUP_KEY = "favorite_search_group_key";
 
-	protected final ItemsSelectionHelper<FavouritePoint> selectionHelper = new ItemsSelectionHelper<>();
+	protected final ItemsSelectionHelper<FavouritePoint> selectionHelper = new ItemsSelectionHelper<>(true);
 	private FavouritesHelper helper;
 
 	private String groupKey;
@@ -117,15 +120,18 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 			groupKey = "";
 		}
 
-		if (points.isEmpty()) {
-			boolean includeAll = groupKey.isEmpty();
-			for (FavoriteGroup group : helper.getFavoriteGroups()) {
-				if (includeAll) {
-					points.addAll(group.getPoints());
-				} else if (group.getName().equals(groupKey)) {
-					points.addAll(group.getPoints());
-					break;
-				}
+		updatePoints();
+	}
+
+	private void updatePoints(){
+		points.clear();
+		boolean includeAll = groupKey.isEmpty();
+		for (FavoriteGroup group : helper.getFavoriteGroups()) {
+			if (includeAll) {
+				points.addAll(group.getPoints());
+			} else if (group.getName().equals(groupKey)) {
+				points.addAll(group.getPoints());
+				break;
 			}
 		}
 	}
@@ -165,6 +171,13 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		updateContent();
 		updateToolbar();
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.recycler_view));
+		return collection;
 	}
 
 	@Override
@@ -388,6 +401,14 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 			}
 		});
 
+		actionButton.setOnClickListener(v -> {
+			if (selectionMode) {
+				FavoriteMenu favoriteMenu = new FavoriteMenu(app, app.getUIUtilities(), requireMyPlacesActivity());
+				favoriteMenu.showPointsSelectOptionsMenu(actionButton, selectionHelper.getSelectedItems(), null, nightMode,
+						SearchFavoriteFragment.this, SearchFavoriteFragment.this, SearchFavoriteFragment.this);
+			}
+		});
+
 		backButton = view.findViewById(R.id.back_button);
 		backButton.setVisibility(View.VISIBLE);
 		backButton.setOnClickListener((v) -> dismiss());
@@ -485,7 +506,10 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 
 	@Override
 	public void onActionFinish() {
+		updatePoints();
 		updateContent();
+		selectionHelper.clearSelectedItems();
+		updateToolbar();
 	}
 
 	private class FavoritesFilter extends Filter {
@@ -524,14 +548,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 
 	@Override
 	public void onCategorySelected(PointsGroup pointsGroup) {
-		String category;
-		if (isPersonalCategoryDisplayName(requireContext(), pointsGroup.getName())) {
-			category = PERSONAL_CATEGORY;
-		} else if (Algorithms.stringsEqual(pointsGroup.getName(), getString(R.string.shared_string_favorites))) {
-			category = "";
-		} else {
-			category = pointsGroup.getName();
-		}
+		String category = FavoriteGroup.getCategoryFromPointGroup(app, pointsGroup);
 		if (selectionMode) {
 			for (FavouritePoint point : selectionHelper.getSelectedItems()) {
 				helper.editFavouriteName(point, point.getName(), category, point.getDescription(), point.getAddress());

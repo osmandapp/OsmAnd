@@ -1,14 +1,12 @@
-package net.osmand.plus.myplaces.favorites.dialogs
+package net.osmand.plus.settings.enums
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import net.osmand.plus.R
-import net.osmand.plus.settings.enums.TracksSortMode
-import net.osmand.shared.gpx.enums.TracksSortScope
 
 enum class FavoriteListSortMode(
-    @get:StringRes val nameId: Int,
-    @get:DrawableRes val iconId: Int
+	@get:StringRes val nameId: Int,
+	@get:DrawableRes val iconId: Int
 ) {
 
     LAST_MODIFIED(
@@ -43,13 +41,8 @@ enum class FavoriteListSortMode(
     companion object {
 
         @JvmStatic
-        fun valuesOf(scope: TracksSortScope): Array<TracksSortMode> {
-            return TracksSortMode.entries.filter { it.isAllowedIn(scope) }.toTypedArray()
-        }
-
-        @JvmStatic
         fun getByValue(name: String?): FavoriteListSortMode {
-            return FavoriteListSortMode.entries.find { it.name == name } ?: getDefaultSortMode()
+            return entries.find { it.name == name } ?: getDefaultSortMode()
         }
 
         @JvmStatic
@@ -60,11 +53,11 @@ enum class FavoriteListSortMode(
         @JvmStatic
         fun getSortModes(includeDistance: Boolean): Array<FavoriteListSortMode> {
             return if (includeDistance) {
-                FavoriteListSortMode.entries
+                entries
                     .filter { it != LAST_MODIFIED }
                     .toTypedArray()
             } else {
-                FavoriteListSortMode.entries
+                entries
                     .filter { it != NEAREST && it != FARTHEST }
                     .toTypedArray()
             }
