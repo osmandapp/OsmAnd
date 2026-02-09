@@ -1,5 +1,6 @@
 package net.osmand.shared.palette.data
 
+import co.touchlab.stately.collections.ConcurrentMutableList
 import co.touchlab.stately.collections.ConcurrentMutableMap
 import net.osmand.shared.palette.data.gradient.GradientPaletteIO
 import net.osmand.shared.palette.data.gradient.GradientPaletteModifier
@@ -18,6 +19,8 @@ class PaletteRepository {
 
 	private val cachedPalettesForId = ConcurrentMutableMap<String, Palette>()
 
+	private val listeners = ConcurrentMutableList<PaletteRepositoryListener>()
+
 	@Suppress("UNCHECKED_CAST")
 	private val Palette.modifier: PaletteModifier<Palette>
 		get() = when (this) {
@@ -31,6 +34,20 @@ class PaletteRepository {
 			is Palette.SolidCollection -> SolidPaletteIO as PaletteIO<Palette>
 			is Palette.GradientCollection -> GradientPaletteIO as PaletteIO<Palette>
 		}
+
+	// --- Listeners Management ---
+
+	fun addListener(listener: PaletteRepositoryListener) {
+		listeners.add(listener)
+	}
+
+	fun removeListener(listener: PaletteRepositoryListener) {
+		listeners.remove(listener)
+	}
+
+	private fun notifyListeners(event: PaletteChangeEvent) {
+		listeners.forEach { it.onPaletteChanged(event) }
+	}
 
 	// --- Read ---
 
@@ -68,44 +85,81 @@ class PaletteRepository {
 	fun updatePaletteItem(item: PaletteItem) {
 		val currentPalette = getPalette(item.source.paletteId) ?: return
 		val updatedPalette = currentPalette.modifier.update(currentPalette, item)
-		saveIfChanged(currentPalette, updatedPalette)
+
+		applyChange(currentPalette, updatedPalette) {
+			PaletteChangeEvent.Updated(item)
+		}
 	}
 
 	fun addPaletteItem(paletteId: String, newItem: PaletteItem) {
 		val currentPalette = getPalette(paletteId) ?: return
 		val updatedPalette = currentPalette.modifier.add(currentPalette, newItem)
-		saveIfChanged(currentPalette, updatedPalette)
+
+		applyChange(currentPalette, updatedPalette) {
+			PaletteChangeEvent.Added(newItem)
+		}
 	}
 
 	fun replacePaletteItem(paletteId: String, oldItemId: String, newItem: PaletteItem) {
 		val currentPalette = getPalette(paletteId) ?: return
 		val updatedPalette = currentPalette.modifier.replace(currentPalette, oldItemId, newItem)
-		saveIfChanged(currentPalette, updatedPalette)
+
+		applyChange(currentPalette, updatedPalette) {
+			PaletteChangeEvent.Replaced(oldItemId, newItem)
+		}
 	}
 
 	fun insertPaletteItemAfter(paletteId: String, anchorId: String, newItem: PaletteItem) {
 		val currentPalette = getPalette(paletteId) ?: return
 		val updatedPalette = currentPalette.modifier.insertAfter(currentPalette, anchorId, newItem)
-		saveIfChanged(currentPalette, updatedPalette)
+
+		applyChange(currentPalette, updatedPalette) {
+			PaletteChangeEvent.Added(newItem)
+		}
 	}
 
 	fun removePaletteItem(paletteId: String, itemId: String) {
 		val currentPalette = getPalette(paletteId) ?: return
 		val updatedPalette = currentPalette.modifier.remove(currentPalette, itemId)
-		saveIfChanged(currentPalette, updatedPalette)
+
+		applyChange(currentPalette, updatedPalette) {
+			PaletteChangeEvent.Removed(itemId, paletteId)
+		}
 	}
 
 	fun markPaletteItemAsUsed(paletteId: String, itemId: String) {
 		val currentPalette = getPalette(paletteId) ?: return
 		val updatedPalette = currentPalette.modifier.markAsUsed(currentPalette, itemId)
-		saveIfChanged(currentPalette, updatedPalette)
+
+		applyChange(currentPalette, updatedPalette) {
+			// We need to find the updated item to pass it in the event
+			val updatedItem = updatedPalette.items.find { it.id == itemId }
+			if (updatedItem != null) {
+				PaletteChangeEvent.Updated(updatedItem)
+			} else {
+				// Should not happen, but as a fallback/dummy
+				// In reality, if item is not found, updatedPalette == currentPalette, so this block won't run
+				PaletteChangeEvent.Updated(currentPalette.items.first())
+			}
+		}
 	}
 
 	// --- Internal Helpers ---
 
-	private fun saveIfChanged(old: Palette, new: Palette) {
-		if (old !== new) {
-			savePalette(old, new)
+	/**
+	 * Checks if changes occurred, saves the palette, and notifies listeners.
+	 * @param oldPalette The state before modification.
+	 * @param newPalette The state after modification.
+	 * @param createEvent A lambda that creates the event object. It is only called if changes actually happened.
+	 */
+	private inline fun applyChange(
+		oldPalette: Palette,
+		newPalette: Palette,
+		createEvent: () -> PaletteChangeEvent
+	) {
+		if (oldPalette !== newPalette) {
+			savePalette(oldPalette, newPalette)
+			notifyListeners(createEvent())
 		}
 	}
 

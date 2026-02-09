@@ -86,6 +86,7 @@ import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
+import net.osmand.shared.palette.data.PaletteChangeEvent;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -364,6 +365,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 		setInvalidated(false);
 		mapActivityInvalidated = false;
+	}
+
+	public void onPaletteChanged(@NonNull PaletteChangeEvent event) {
+		if (event instanceof PaletteChangeEvent.Updated updated) {
+			String paletteName = updated.getItem().getId();
+			for (CachedTrack cachedTrack : segmentsCache.values()) {
+				cachedTrack.onPaletteUpdated(paletteName);
+			}
+		}
 	}
 
 	private boolean updateTmpVisibleTrack(@NonNull List<SelectedGpxFile> visibleGPXFiles) {
