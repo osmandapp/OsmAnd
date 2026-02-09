@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/name_property_container"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:contentDescription="@string/external_sensor_name_property_description"
+	android:orientation="vertical"
+	android:paddingStart="@dimen/content_padding">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingVertical="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:importantForAccessibility="no"
+			android:lineSpacingExtra="5sp"
+			android:text="@string/shared_string_name"
+			android:textSize="@dimen/default_list_text_size" />
+
+		<TextView
+			android:id="@+id/property_name"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical|start"
+			android:importantForAccessibility="no"
+			android:lineSpacingExtra="5sp"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			tools:text="Sensor name" />
+
+	</LinearLayout>
+
+	<include layout="@layout/divider" />
+
+</LinearLayout>
+
