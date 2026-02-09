@@ -293,7 +293,7 @@ public class LocationParser {
 
 	/**
 	 * Converts UTM zone letter to hemisphere 'N' or 'S'.
-	 *
+	 * https://www.maptools.com/tutorials/grid_zone_details
 	 * @return 'N' for northern bands (N,P,Q,R,S,T,U,V,W,X), 'S' for southern (C,D,E,F,G,H,J,K,L,M), or 0 if invalid
 	 */
 	private static char utmZoneLetterToHemisphere(char zoneLetter) {
