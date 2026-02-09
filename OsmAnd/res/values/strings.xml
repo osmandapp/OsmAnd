@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="level_of_details">Level of detail</string>
+	<string name="performance">Performance</string>
+	<string name="view_distance">View distance</string>
 	<string name="galactic_line">Galactic Line</string>
 	<string name="meridian_line">Meridian Line</string>
 	<string name="equator_line">Equator Line</string>

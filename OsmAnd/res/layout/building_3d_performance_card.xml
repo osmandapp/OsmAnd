@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:orientation="vertical">
+
+	<include
+		android:id="@+id/header_container"
+		layout="@layout/bottom_sheet_item_with_two_text" />
+
+	<LinearLayout
+		android:id="@+id/details_lvl_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingStart="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding_round_medium">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:text="@string/level_of_details"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			app:typefaceWeight="medium" />
+
+		<include android:layout_width="112dp"
+			android:layout_height="36dp"
+			android:layout_marginEnd="@dimen/content_padding_double"
+			layout="@layout/custom_icon_radio_buttons" />
+
+	</LinearLayout>
+
+	<include android:id="@+id/detail_lvl_divider" layout="@layout/divider"/>
+
+	<LinearLayout
+		android:id="@+id/view_distance_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:layout_marginTop="@dimen/content_padding_round_medium"
+		android:paddingStart="@dimen/content_padding">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:text="@string/view_distance"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			app:typefaceWeight="medium" />
+
+		<include android:layout_width="112dp"
+			android:layout_height="36dp"
+			android:layout_marginEnd="@dimen/content_padding_double"
+			layout="@layout/custom_icon_radio_buttons" />
+
+	</LinearLayout>
+
+</LinearLayout>

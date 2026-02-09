@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
+	android:layout_height="wrap_content"
 	android:descendantFocusability="blocksDescendants"
 	android:orientation="vertical">
 
@@ -35,41 +35,32 @@
 
 				<include layout="@layout/list_item_divider" />
 
-				<LinearLayout
-					android:id="@+id/preferences_container"
+				<FrameLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:background="?attr/list_background_color"
-					android:orientation="vertical"
-					android:paddingVertical="@dimen/content_padding">
+					android:background="?attr/list_background_color">
 
 					<include
-						android:id="@+id/transparency_container"
-						layout="@layout/terrain_visibility_fragment" />
+						android:id="@+id/appearance_container"
+						layout="@layout/building_3d_appearance_card" />
 
-					<include layout="@layout/simple_divider_item" />
+				</FrameLayout>
 
-					<include
-						android:id="@+id/detalization_container"
-						layout="@layout/cycle_route_types_card" />
+				<include layout="@layout/list_item_divider" />
 
-				</LinearLayout>
-
-				<LinearLayout
-					android:id="@+id/rendering_rules_container"
+				<FrameLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:orientation="vertical" />
+					android:paddingBottom="@dimen/content_padding_round_medium"
+					android:background="?attr/list_background_color">
+
+					<include
+						android:id="@+id/performance_container"
+						layout="@layout/building_3d_performance_card" />
+
+				</FrameLayout>
 
 			</LinearLayout>
-
-			<View
-				android:id="@+id/bottom_empty_space"
-				android:layout_width="match_parent"
-				android:layout_height="0dp"
-				android:layout_weight="1"
-				android:focusable="false"
-				android:minHeight="@dimen/toolbar_height" />
 
 		</LinearLayout>
 

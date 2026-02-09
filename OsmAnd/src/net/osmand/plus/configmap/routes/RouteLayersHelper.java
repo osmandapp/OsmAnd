@@ -56,7 +56,7 @@ public class RouteLayersHelper {
 	public RouteLayersHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
-
+		//**
 		cycleRoutesPreference = settings.getCustomRenderBooleanProperty(BICYCLE.getRenderingPropertyAttr());
 		cycleRoutesNodeNetworkPreference = settings.getCustomRenderBooleanProperty(CYCLE_NODE_NETWORK_ROUTES_ATTR);
 		cycleRoutesLastNodeNetworkState = settings.LAST_CYCLE_ROUTES_NODE_NETWORK_STATE;
