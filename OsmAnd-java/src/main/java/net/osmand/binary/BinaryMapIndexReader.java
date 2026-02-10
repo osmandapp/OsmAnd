@@ -1850,6 +1850,19 @@ public class BinaryMapIndexReader {
 			}
 		}
 
+		public long beginSubSearchStats() {
+			if (searchStat != null) {
+				return searchStat.beginSubSearchStats();
+			}
+			return 0;
+		}
+
+		public void endSubSearchStats(long statReq, String op, String obf) {
+			if (statReq > 0 && searchStat != null) {
+				searchStat.endSubSearchStats(statReq, op, obf);
+			}
+		}
+
 		public long getTileHashOnPath(double lat, double lon) {
 			long x = (int) MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, lon);
 			long y = (int) MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, lat);
