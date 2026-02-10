@@ -377,7 +377,7 @@
 		<item name="cardElevation">0dp</item>
 		<item name="strokeWidth">0dp</item>
 		<item name="cardBackgroundColor">?attr/list_background_color</item>
-		<item name="shapeAppearanceOverlay">@style/Shape.Card16</item>
+		<item name="shapeAppearanceOverlay">@style/Shape.Card12</item>
 	</style>
 
 	<style name="Widget.App.Material.ActionTileCard" parent="Widget.Material3.CardView.Outlined">
@@ -386,8 +386,9 @@
 		<item name="strokeWidth">2dp</item>
 		<item name="strokeColor">@color/action_tile_stroke</item>
 
+		<item name="cardForegroundColor">@android:color/transparent</item>
 		<item name="cardBackgroundColor">@color/action_tile_bg</item>
-		<item name="shapeAppearanceOverlay">@style/Shape.Card12</item>
+		<item name="shapeAppearanceOverlay">@style/Shape.Card6</item>
 
 		<item name="checkedIconVisible">false</item>
 		<item name="checkedIconEnabled">false</item>
@@ -404,6 +405,11 @@
 	<style name="Shape.Card12">
 		<item name="cornerFamily">rounded</item>
 		<item name="cornerSize">12dp</item>
+	</style>
+
+	<style name="Shape.Card6">
+		<item name="cornerFamily">rounded</item>
+		<item name="cornerSize">6dp</item>
 	</style>
 
 	<style name="Shape">
