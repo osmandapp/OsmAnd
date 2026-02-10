@@ -2058,12 +2058,10 @@ public class SearchCoreFactory {
 					}
 					String p1 = a1.getAdditionalInfo(POPULATION);
 					String p2 = a2.getAdditionalInfo(POPULATION);
-					if (!p1.equals(p2)) {
-						long pop1 = Algorithms.parseLongSilently(p1, -1);
-						long pop2 = Algorithms.parseLongSilently(p2, -1);
-						return Long.compare(pop2, pop1); // descending order
-					}
-					return 0;
+					long pop1 = Algorithms.parseLongSilently(p1, -1);
+					long pop2 = Algorithms.parseLongSilently(p2, -1);
+
+					return Long.compare(pop2, pop1); // descending order
 				}
 				
 				private int getIndex(Amenity poi) {
