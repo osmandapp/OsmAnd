@@ -50,8 +50,8 @@ public class GradientColorsPaletteCard extends ColorsPaletteCard implements IPal
 	}
 
 	@Override
-	public void updatePaletteSelection(@org.jetbrains.annotations.Nullable PaletteItem oldItem, @NotNull PaletteItem newItem) {
-		super.updatePaletteSelection(oldItem, newItem);
+	public void updatePaletteSelection(@Nullable PaletteItem oldItem, @NotNull PaletteItem newItem, boolean selectionDone) {
+		super.updatePaletteSelection(oldItem, newItem, selectionDone);
 		updateChart();
 	}
 

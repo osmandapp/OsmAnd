@@ -139,7 +139,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 	}
 
 	@Override
-	public void updatePaletteSelection(@org.jetbrains.annotations.Nullable PaletteItem oldItem, @NotNull PaletteItem newItem) {
+	public void updatePaletteSelection(@Nullable PaletteItem oldItem, @NotNull PaletteItem newItem, boolean selectionDone) {
 		View view = getView();
 		if (view == null) {
 			return;

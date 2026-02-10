@@ -240,7 +240,7 @@ open class GradientPaletteController(
 		if (item.id == selectedItem?.id) {
 			val oldSelected = selectedItem
 			selectPaletteItem(newItem)
-			notifyUpdatePaletteSelection(oldSelected, newItem)
+			notifyUpdatePaletteSelection(oldSelected, newItem, selectionDone = false)
 		}
 		// TODO: update dependent components (tracks, route line)
 	}
@@ -321,7 +321,7 @@ open class GradientPaletteController(
 		if (itemToUpdate == null || itemToUpdate.id == selectedItem?.id) {
 			val oldSelected = selectedItem
 			selectPaletteItem(resultItem)
-			notifyUpdatePaletteSelection(oldSelected, resultItem)
+			notifyUpdatePaletteSelection(oldSelected, resultItem, selectionDone = false)
 		}
 		editedItem = null
 	}

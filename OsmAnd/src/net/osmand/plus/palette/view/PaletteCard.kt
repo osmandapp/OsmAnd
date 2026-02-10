@@ -93,7 +93,11 @@ abstract class PaletteCard(
 		updateShowAllButton()
 	}
 
-	override fun updatePaletteSelection(oldItem: PaletteItem?, newItem: PaletteItem) {
+	override fun updatePaletteSelection(
+		oldItem: PaletteItem?,
+		newItem: PaletteItem,
+		selectionDone: Boolean
+	) {
 		adapter.askNotifyItemChanged(oldItem)
 		adapter.askNotifyItemChanged(newItem)
 		if (controller.isAutoScrollSupported()) {

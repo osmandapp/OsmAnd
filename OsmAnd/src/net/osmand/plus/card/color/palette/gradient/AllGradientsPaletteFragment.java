@@ -97,12 +97,14 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 	}
 
 	@Override
-	public void updatePaletteSelection(@org.jetbrains.annotations.Nullable PaletteItem oldItem, @NotNull PaletteItem newItem) {
+	public void updatePaletteSelection(@org.jetbrains.annotations.Nullable PaletteItem oldItem, @NotNull PaletteItem newItem, boolean selectionDone) {
 		if (adapter != null) {
 			adapter.askNotifyItemChanged(oldItem);
 			adapter.askNotifyItemChanged(newItem);
 		}
-		dismiss();
+		if (selectionDone) {
+			dismiss();
+		}
 	}
 
 	@Override

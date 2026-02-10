@@ -98,7 +98,7 @@ abstract class BasePaletteController(
 			}
 
 			if (oldSelected != null && item != null) {
-				notifyUpdatePaletteSelection(oldSelected, item)
+				notifyUpdatePaletteSelection(oldSelected, item, selectionDone = true)
 			} else {
 				notifyUpdatePaletteColors(item)
 			}
@@ -146,9 +146,13 @@ abstract class BasePaletteController(
 		}
 	}
 
-	protected fun notifyUpdatePaletteSelection(oldItem: PaletteItem?, newItem: PaletteItem) {
+	protected fun notifyUpdatePaletteSelection(
+		oldItem: PaletteItem?,
+		newItem: PaletteItem,
+		selectionDone: Boolean
+	) {
 		for (palette in collectActivePalettes()) {
-			palette.updatePaletteSelection(oldItem, newItem)
+			palette.updatePaletteSelection(oldItem, newItem, selectionDone)
 		}
 	}
 

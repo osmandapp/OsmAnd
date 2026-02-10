@@ -43,7 +43,7 @@ object PaletteUtils {
 	}
 
 	private fun generateUniquePaletteName(existingIds: Set<String>, baseId: String): String {
-		return NamingUtils.generateUniqueName(existingIds, baseId)
+		return NamingUtils.generateUniqueName(existingIds, baseId, "_")
 	}
 
 	fun generateSolidUniqueId(existingIds: Set<String>): String {
@@ -118,7 +118,8 @@ object PaletteUtils {
 			id = paletteName,
 			displayName = displayName,
 			source = PaletteItemSource.GradientFile(palette.id, newFileName),
-			isDefault = false
+			isDefault = false,
+			isEditable = true
 		)
 	}
 

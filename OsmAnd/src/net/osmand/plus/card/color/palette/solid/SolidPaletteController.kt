@@ -58,7 +58,7 @@ open class SolidPaletteController(
 		if (oldColor == null || itemToUpdate?.id == selectedItem?.id) {
 			val oldSelected = selectedItem
 			selectPaletteItem(resultItem)
-			notifyUpdatePaletteSelection(oldSelected, resultItem)
+			notifyUpdatePaletteSelection(oldSelected, resultItem, selectionDone = false)
 		}
 		editedItem = null
 	}
