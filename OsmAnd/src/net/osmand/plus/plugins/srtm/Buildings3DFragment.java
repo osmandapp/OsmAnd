@@ -15,8 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.core.android.MapRendererContext;
-import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -32,11 +30,9 @@ import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 import net.osmand.render.RenderingRuleProperty;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,6 +113,10 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		int progress = ProgressHelper.normalizeProgressPercent((int) (alpha * 100));
 		TextView visibilityTv = container.findViewById(R.id.opacity_value);
 		visibilityTv.setText(String.format("%s%%", progress));
+		container.findViewById(R.id.opacity_container).setOnClickListener((v) -> callMapActivity(mapActivity -> {
+			mapActivity.getDashboard().hideDashboard();
+			Buildings3DVisibilityFragment.showInstance(mapActivity.getSupportFragmentManager());
+		}));
 	}
 
 	private void setupPerformance(@NonNull ViewGroup container) {
@@ -182,17 +182,6 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		plugin.apply3DBuildingsDetalization();
 		refreshMap();
 		viewDistanceToggleButton.setSelectedItem(selectItem);
-	}
-
-	private void apply3DBuildingsAlpha(float alpha) {
-		MapRendererContext ctx = NativeCoreContext.getMapRendererContext();
-		if (ctx != null) {
-			MapRendererView rendererView = ctx.getMapRendererView();
-			if (rendererView != null) {
-				rendererView.set3DBuildingsAlpha(alpha);
-				refreshMap();
-			}
-		}
 	}
 
 	private void showHideTopShadow(@NonNull View view) {

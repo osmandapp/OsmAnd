@@ -80,6 +80,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public static final float MIN_VERTICAL_EXAGGERATION = 1.0f;
 	public static final float MAX_VERTICAL_EXAGGERATION = 3.0f;
+	public static final float BUILDINGS_3D_ALPHA_DEF_VALUE = 0.5f;
 
 
 	public final CommonPreference<Boolean> TERRAIN;
@@ -112,7 +113,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		super(app);
 
 		ENABLE_3D_MAP_OBJECTS = registerBooleanPreference("enable_3d_map_objects", false).makeProfile().cache();
-		BUILDINGS_3D_ALPHA = registerFloatPreference("3d_buildings_alpha", 0.8f).makeProfile().cache();
+		BUILDINGS_3D_ALPHA = registerFloatPreference("3d_buildings_alpha", BUILDINGS_3D_ALPHA_DEF_VALUE).makeProfile().cache();
 		BUILDINGS_3D_VIEW_DISTANCE = registerIntPreference("3d_buildings_view_distance", 1).makeProfile().cache();
 		BUILDINGS_3D_DETAIL_LEVEL = settings.getCustomRenderBooleanProperty("show3DbuildingParts");
 //		BUILDINGS_3D_PARTS.set(true);
@@ -328,6 +329,10 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public void resetTransparencyToDefault() {
 		getTerrainMode().resetTransparencyToDefault();
+	}
+
+	public void reset3DBuildingAlphaToDefault() {
+		BUILDINGS_3D_ALPHA.set(BUILDINGS_3D_ALPHA_DEF_VALUE);
 	}
 
 	public void resetVerticalExaggerationToDefault() {
@@ -796,4 +801,13 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
+	public void apply3DBuildingsAlpha(float alpha) {
+		MapRendererContext ctx = NativeCoreContext.getMapRendererContext();
+		if (ctx != null) {
+			MapRendererView rendererView = ctx.getMapRendererView();
+			if (rendererView != null) {
+				rendererView.set3DBuildingsAlpha(alpha);
+			}
+		}
+	}
 }
