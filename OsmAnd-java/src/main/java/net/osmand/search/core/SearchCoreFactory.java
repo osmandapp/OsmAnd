@@ -16,7 +16,6 @@ import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
-import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
@@ -41,7 +40,6 @@ import net.osmand.util.GeoPointParserUtil;
 import net.osmand.util.LocationParser;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 import net.osmand.util.MapUtils;
-import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -2082,15 +2080,8 @@ public class SearchCoreFactory {
 					if (populationS == null) {
 						return -1;
 					}
-					populationS = populationS.replaceAll("\\D", "");
-					if (!populationS.matches("\\d+")) {
-						return -1;
-					}
-					try {
-						return Long.parseLong(populationS);
-					} catch (NumberFormatException e) {
-						return -1;
-					}
+					String digitsOnly = populationS.replaceAll("\\D", "");
+					return Algorithms.parseLongSilently(digitsOnly, 0);
 				}
 			});
 			
