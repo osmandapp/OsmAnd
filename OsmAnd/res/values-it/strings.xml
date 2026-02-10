@@ -5091,7 +5091,7 @@
     </plurals>
     <string name="help_article_navigation_routing_online_routing_name">Navigazione online</string>
     <string name="delete_trash_item_confirmation_desc">Cancellare definitivamente \"%1$s\"?</string>
-    <string name="live_monitoring_adress_descr">Specifica l\'indirizzo web con la sintassi parametrica: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Specifica l\'indirizzo web con la sintassi parametrica: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_empty_trash">Svuota il cestino</string>
     <string name="shared_string_delete_immediately">Cancella immediatamente</string>
     <string name="shared_string_is_deleted">%1$s è cancellato.</string>

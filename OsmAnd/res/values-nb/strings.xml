@@ -5251,7 +5251,7 @@
     <string name="free_versions">Gratisversjoner</string>
     <string name="about_osmand">Om OsmAnd</string>
     <string name="send_logcat_log_descr">Detaljert loggfil</string>
-    <string name="live_monitoring_adress_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="with_waypoints">Med rutepunkter</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="max_altitude">Maks. høyde</string>

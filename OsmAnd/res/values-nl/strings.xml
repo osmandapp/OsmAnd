@@ -5432,7 +5432,7 @@
     <string name="topography_maps">Topografie kaarten</string>
     <string name="shared_string_action">Actie</string>
     <string name="key_event_action_take_media_note">Medianotitie maken</string>
-    <string name="live_monitoring_adress_descr">Specificeer het webadres met het parameterformaat: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Specificeer het webadres met het parameterformaat: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_temperature">Temperatuur</string>
     <string name="help_article_navigation_routing_train_routing_name">Treinroutes</string>
     <string name="standard_maps">Standaard kaarten</string>

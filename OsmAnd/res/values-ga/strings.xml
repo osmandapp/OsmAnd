@@ -569,7 +569,7 @@
     <string name="external_device_details_battery">Cadhnra</string>
     <string name="map_widget_ant_bicycle_power">Cumhacht rothar</string>
     <string name="daily">Laethúil</string>
-    <string name="live_monitoring_adress_descr">Luaigh an seoladh gréasáin go sonrach leis an gcomhréir pharaiméadair: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Luaigh an seoladh gréasáin go sonrach leis an gcomhréir pharaiméadair: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="shared_string_download_successful">Íoslódáilte</string>
     <string name="shared_string_vehicle">Feithicil</string>

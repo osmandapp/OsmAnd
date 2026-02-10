@@ -4922,7 +4922,7 @@
     <string name="send_crash_log_descr">Contiene sólo datos sobre los cuelgues de la aplicación</string>
     <string name="open_issue_on_github_descr">Haz preguntas, propone características</string>
     <string name="most_viewed">Más visto</string>
-    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="sensor_temperature_desc">Muestra la temperatura del sensor</string>
     <string name="release_4_6">- Android Auto: Añadido el modo 3D \n \n - Pistas: Introducidos filtros y carpetas inteligentes, optimizada la memoria para archivos más grandes \n \n - Paneles de widgets superior e inferior mejorados para dar cabida a todos los widgets \n \n - Gestión mejorada de los recursos locales \n \n - Asignación de botones personalizable para controladores externos \n \n - Nuevos widgets: \"Relación de planeo\" y \"Posición del sol\". \n \n - OsmAnd Cloud: Ahora accede a los archivos borrados \n \n - Mejora de la coloración de la pista en modo Pendiente con un nuevo gradiente simétrico \n \n - Resueltos los problemas con la barra de estado transparente \n \n - Añadido soporte para el widget de temperatura ANT \n \n - Introducido widget \"RAM disponible\"</string>

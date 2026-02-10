@@ -3916,7 +3916,7 @@
     <string name="edit_filter">Editar filtro</string>
     <string name="rendering_styles">Estilos de renderizado</string>
     <string name="sort_country_name_ascending">Nome do país: A – Z</string>
-    <string name="live_monitoring_adress_descr">Especificar o enderezo web con sintaxe de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Especificar o enderezo web con sintaxe de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="discard_filter_changes">Descartar os cambios de filtro</string>
     <string name="app_mode_hang_gliding">Ala delta</string>
     <string name="live_update_frequency_hour_variant">As actualizacións de mapas serán comprobadas cada hora.</string>

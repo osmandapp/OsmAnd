@@ -4882,7 +4882,7 @@
     <string name="help_article_navigation_routing_horse_routing_name">Navegación de ruta a caballo</string>
     <string name="help_article_personal_storage_name">Almacenamiento</string>
     <string name="about_osmand">Sobre OsmAnd</string>
-    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="help_article_map_legend_nautical_map_name">Estilo del mapa náutico</string>
     <string name="help_article_map_legend_osmand_name">Estilo del mapa de OsmAnd</string>
     <string name="help_article_map_legend_ski_map_name">Estilo del mapa invernal</string>
