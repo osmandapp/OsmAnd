@@ -2056,10 +2056,12 @@ public class SearchCoreFactory {
 					if (priorityDiff != 0) {
 						return priorityDiff;
 					}
-					long p1 = parsePopulation(a1.getAdditionalInfo(POPULATION));
-					long p2 = parsePopulation(a2.getAdditionalInfo(POPULATION));
-					if (p1 != p2) {
-						return Long.compare(p2, p1); // descending order
+					String p1 = a1.getAdditionalInfo(POPULATION);
+					String p2 = a2.getAdditionalInfo(POPULATION);
+					if (!p1.equals(p2)) {
+						long pop1 = Algorithms.parseLongSilently(p1, -1);
+						long pop2 = Algorithms.parseLongSilently(p2, -1);
+						return Long.compare(pop2, pop1); // descending order
 					}
 					return 0;
 				}
@@ -2074,14 +2076,6 @@ public class SearchCoreFactory {
 						}
 					}
 					return res;
-				}
-
-				private long parsePopulation(String populationS) {
-					if (populationS == null) {
-						return -1;
-					}
-					String digitsOnly = populationS.replaceAll("\\D", "");
-					return Algorithms.parseLongSilently(digitsOnly, -1);
 				}
 			});
 			
