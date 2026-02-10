@@ -15,6 +15,7 @@ import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
@@ -39,6 +40,7 @@ import net.osmand.util.GeoPointParserUtil;
 import net.osmand.util.LocationParser;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 import net.osmand.util.MapUtils;
+import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -99,6 +101,8 @@ public class SearchCoreFactory {
 	
 	public static final int SEARCH_OLC_WITH_CITY_PRIORITY = 8;
 	public static final int SEARCH_OLC_WITH_CITY_TOTAL_LIMIT = 500;
+
+	private static final Log LOG = PlatformUtil.getLog(SearchCoreFactory.class);
 
 	public static abstract class SearchBaseAPI implements SearchCoreAPI {
 
@@ -2024,6 +2028,14 @@ public class SearchCoreFactory {
 					if (!allowedTypes.contains(subType) || (!nm.matches(localeName) && !nm.matches(otherNames))) {
 						return false;
 					}
+					String fileName = object.file != null && object.file.getFile() != null
+							? object.file.getFile().getName()
+							: "null";
+					LatLon loc = amenity.getLocation();
+					LOG.debug("OLC city candidate: name='" + localeName + "', subtype=" + subType
+							+ ", file=" + fileName
+							+ ", lat=" + (loc != null ? loc.getLatitude() : null)
+							+ ", lon=" + (loc != null ? loc.getLongitude() : null));
 					result.add(object);
 					count++;
 					return true;
