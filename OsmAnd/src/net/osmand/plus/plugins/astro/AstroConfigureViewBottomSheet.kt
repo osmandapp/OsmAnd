@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.astro
 
+import android.app.Dialog
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -60,6 +61,13 @@ class AstroConfigureViewBottomSheet :
 		)
 		collection.removeType(InsetTarget.Type.ROOT_INSET)
 		return collection
+	}
+
+	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+		return (super.onCreateDialog(savedInstanceState) as BottomSheetDialog).apply {
+			setCancelable(true)
+			setCanceledOnTouchOutside(true)
+		}
 	}
 
 	override fun onStart() {
