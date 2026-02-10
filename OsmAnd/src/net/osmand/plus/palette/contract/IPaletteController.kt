@@ -61,6 +61,8 @@ interface IPaletteController : IDialogController {
 
 	fun isAccentColorCanBeChanged(): Boolean
 
+	fun isRenaming() = false
+
 	/**
 	 * Returns a stable unique Long ID for the given String item ID.
 	 * Required for RecyclerView adapters with setHasStableIds(true).

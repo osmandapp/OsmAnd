@@ -42,6 +42,8 @@ open class GradientPaletteController(
 
 	var analysis: GpxTrackAnalysis? = null
 
+	var renaming = false
+
 	constructor(
 		app: OsmandApplication,
 		paletteCategory: GradientPaletteCategory,
@@ -192,6 +194,8 @@ open class GradientPaletteController(
 		updateExternalDependencies()
 	}
 
+	override fun isRenaming() = renaming
+
 	private fun showRenameDialog(
 		activity: FragmentActivity,
 		item: PaletteItem.Gradient,
@@ -233,6 +237,7 @@ open class GradientPaletteController(
 	}
 
 	private fun renameGradientItem(item: PaletteItem.Gradient, newName: String) {
+		renaming = true
 		val newItem = PaletteUtils.renameGradientPalette(item, newName)
 		repository.replacePaletteItem(paletteId, item.id, newItem)
 		notifyUpdatePaletteColors(null)
@@ -243,6 +248,7 @@ open class GradientPaletteController(
 			notifyUpdatePaletteSelection(oldSelected, newItem)
 		}
 		// TODO: update dependent components (tracks, route line)
+		renaming = false
 	}
 
 	private fun editGradient(item: PaletteItem.Gradient) {
