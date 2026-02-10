@@ -100,7 +100,7 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 			adapter.askNotifyItemChanged(oldItem);
 			adapter.askNotifyItemChanged(newItem);
 		}
-		if (!controller.isRenaming()) {
+		if (!controller.shouldKeepAllItemsScreen()) {
 			dismiss();
 		}
 	}

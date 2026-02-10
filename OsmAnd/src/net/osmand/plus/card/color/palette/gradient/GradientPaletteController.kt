@@ -194,8 +194,6 @@ open class GradientPaletteController(
 		updateExternalDependencies()
 	}
 
-	override fun isRenaming() = renaming
-
 	private fun showRenameDialog(
 		activity: FragmentActivity,
 		item: PaletteItem.Gradient,
@@ -355,4 +353,6 @@ open class GradientPaletteController(
 	override fun onShowAllClick(activity: FragmentActivity) {
 		AllGradientsPaletteFragment.showInstance(activity, this)
 	}
+
+	override fun shouldKeepAllItemsScreen() = editedItem != null || renaming
 }

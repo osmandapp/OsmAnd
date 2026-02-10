@@ -61,7 +61,7 @@ interface IPaletteController : IDialogController {
 
 	fun isAccentColorCanBeChanged(): Boolean
 
-	fun isRenaming() = false
+	fun shouldKeepAllItemsScreen() = false
 
 	/**
 	 * Returns a stable unique Long ID for the given String item ID.

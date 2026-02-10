@@ -17,8 +17,8 @@ enum class GradientFileType(
 	val baseUnits: MeasurementUnit<*>,          // Unit used for storage (e.g., meters, fraction)
 	val displayUnits: MeasurementUnit<*> = baseUnits, // Unit used for UI display (e.g., percent)
 	val defaultDisplayValues: List<Float> = emptyList(),        // Default steps for new palettes
-	val minLimit: Float? = null,                // Min allowed value (in base units)
-	val maxLimit: Float? = null                 // Max allowed value (in base units)
+	val minLimit: Float? = null,                             // Min allowed value (in base units)
+	val maxLimit: Float? = null                              // Max allowed value (in base units)
 ) : PaletteFileType {
 
 	// --- Track / Route Data (Prefix: route_*) ---
@@ -81,7 +81,9 @@ enum class GradientFileType(
 		rangeType = GradientRangeType.RELATIVE,
 		baseUnits = PercentUnits.FRACTION,
 		displayUnits = PercentUnits.PERCENT,
-		defaultDisplayValues = listOf(0f, 50f, 100f)
+		defaultDisplayValues = listOf(0f, 50f, 100f),
+		minLimit = 0f,
+		maxLimit = 1f
 	),
 
 	SLOPE_FIXED(
@@ -99,6 +101,8 @@ enum class GradientFileType(
 		baseUnits = PercentUnits.FRACTION,
 		displayUnits = PercentUnits.PERCENT,
 		defaultDisplayValues = listOf(0f, 50f, 100f),
+		minLimit = 0f,
+		maxLimit = 1f
 	),
 
 	// --- Terrain / Map Data ---
