@@ -21,6 +21,7 @@ import de.KnollFrank.lib.settingssearch.PreferenceScreenProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.common.Classes;
 import de.KnollFrank.lib.settingssearch.common.Sets;
+import de.KnollFrank.lib.settingssearch.common.Strings;
 import de.KnollFrank.lib.settingssearch.common.Views;
 import de.KnollFrank.lib.settingssearch.common.graph.Subtree;
 import de.KnollFrank.lib.settingssearch.common.graph.SubtreeReplacer;
@@ -112,7 +113,8 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 		final SearchablePreferenceScreen preferenceScreen =
 				getPreferenceScreenOfPreferenceFragment(
 						tree,
-						applicationMode);
+						applicationMode,
+						locale);
 		final SearchDatabaseConfig<Configuration> searchDatabaseConfig =
 				SearchDatabaseConfigFactory.createSearchDatabaseConfig(
 						tileSourceTemplatesProvider,
@@ -151,14 +153,17 @@ public class SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAda
 
 	private SearchablePreferenceScreen getPreferenceScreenOfPreferenceFragment(
 			final Tree<SearchablePreferenceScreen, SearchablePreference, ImmutableValueGraph<SearchablePreferenceScreen, SearchablePreference>> treeToSearchIn,
-			final ApplicationMode applicationMode) {
+			final ApplicationMode applicationMode,
+			final Locale locale) {
 		return SearchablePreferenceScreens
 				.findSearchablePreferenceScreenById(
 						treeToSearchIn.graph().nodes(),
-						String.format(
-								"en-%s Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
-								preferenceFragment.getName(),
-								applicationMode.getStringKey()))
+						Strings.prefixIdWithLanguage(
+								String.format(
+										"%s Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
+										preferenceFragment.getName(),
+										applicationMode.getStringKey()),
+								locale))
 				.orElseThrow();
 	}
 

@@ -30,6 +30,7 @@ import de.KnollFrank.lib.settingssearch.PreferenceScreenProvider;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.SearchDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.common.Preferences;
 import de.KnollFrank.lib.settingssearch.common.Sets;
+import de.KnollFrank.lib.settingssearch.common.Strings;
 import de.KnollFrank.lib.settingssearch.common.graph.Edge;
 import de.KnollFrank.lib.settingssearch.common.graph.Subtree;
 import de.KnollFrank.lib.settingssearch.common.graph.SubtreeReplacer;
@@ -155,7 +156,8 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 		final SearchablePreferenceScreen configureProfilePreferenceScreen =
 				getPreferenceScreenOfConfigureProfileFragment(
 						tree.graph().nodes(),
-						applicationMode);
+						applicationMode,
+						locale);
 		return TreeMerger.mergeTreeIntoTreeNode(
 				getPojoTreeRootedAt(
 						instantiateSearchablePreferenceScreen(
@@ -181,7 +183,8 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 		final SearchablePreferenceScreen configureMapPreferenceScreen =
 				getPreferenceScreenOfConfigureMapFragment(
 						tree.graph().nodes(),
-						applicationMode);
+						applicationMode,
+						locale);
 		return SubtreeReplacer.replaceSubtreeWithTree(
 				new Subtree<>(
 						tree,
@@ -247,27 +250,33 @@ public class PluginSettingsOfConfigureProfileFragmentAdapter implements Searchab
 
 	private SearchablePreferenceScreen getPreferenceScreenOfConfigureProfileFragment(
 			final Set<SearchablePreferenceScreen> preferenceScreens,
-			final ApplicationMode applicationMode) {
+			final ApplicationMode applicationMode,
+			final Locale locale) {
 		return SearchablePreferenceScreens
 				.findSearchablePreferenceScreenById(
 						preferenceScreens,
-						String.format(
-								"en-%s Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
-								ConfigureProfileFragment.class.getName(),
-								applicationMode.getStringKey()))
+						Strings.prefixIdWithLanguage(
+								String.format(
+										"%s Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
+										ConfigureProfileFragment.class.getName(),
+										applicationMode.getStringKey()),
+								locale))
 				.orElseThrow();
 	}
 
 	private SearchablePreferenceScreen getPreferenceScreenOfConfigureMapFragment(
 			final Set<SearchablePreferenceScreen> preferenceScreens,
-			final ApplicationMode applicationMode) {
+			final ApplicationMode applicationMode,
+			final Locale locale) {
 		return SearchablePreferenceScreens
 				.findSearchablePreferenceScreenById(
 						preferenceScreens,
-						String.format(
-								"en-%s Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
-								ConfigureMapFragment.ConfigureMapFragmentProxy.class.getName(),
-								applicationMode.getStringKey()))
+						Strings.prefixIdWithLanguage(
+								String.format(
+										"%s Bundle[{app_mode_key=%s, configureSettingsSearch=true}]",
+										ConfigureMapFragment.ConfigureMapFragmentProxy.class.getName(),
+										applicationMode.getStringKey()),
+								locale))
 				.orElseThrow();
 	}
 
