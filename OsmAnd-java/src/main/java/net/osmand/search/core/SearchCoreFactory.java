@@ -2081,7 +2081,7 @@ public class SearchCoreFactory {
 						return -1;
 					}
 					String digitsOnly = populationS.replaceAll("\\D", "");
-					return Algorithms.parseLongSilently(digitsOnly, 0);
+					return Algorithms.parseLongSilently(digitsOnly, -1);
 				}
 			});
 			
