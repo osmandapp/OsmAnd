@@ -103,8 +103,6 @@ public class SearchCoreFactory {
 	public static final int SEARCH_OLC_WITH_CITY_PRIORITY = 8;
 	public static final int SEARCH_OLC_WITH_CITY_TOTAL_LIMIT = 500;
 
-	private static final Log LOG = PlatformUtil.getLog(SearchCoreFactory.class);
-
 	public static abstract class SearchBaseAPI implements SearchCoreAPI {
 
 		private ObjectType[] searchTypes;
