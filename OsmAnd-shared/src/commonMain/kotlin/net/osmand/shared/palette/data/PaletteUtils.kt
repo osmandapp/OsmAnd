@@ -104,12 +104,13 @@ object PaletteUtils {
 		if (index == -1) return null
 
 		val originalItem = palette.items[index]
+		val fileType = originalItem.properties.fileType
 
 		// 1. Generate Unique ID / Name
 		// In gradients, ID is the filename with extension
 		val existingIds = palette.items.map { it.id }.toSet()
 		val paletteName = generateUniquePaletteName(existingIds, originalItem.id)
-		val newFileName = buildFileName(paletteName, originalItem.properties.fileType)
+		val newFileName = buildFileName(paletteName, fileType)
 		val displayName = buildDisplayName(paletteName)
 
 		// 2. Create new Item

@@ -54,8 +54,7 @@ class AllGradientsPaletteAdapter(
 	override fun getItemCount(): Int = items.size
 
 	override fun getItemId(position: Int): Long {
-		// TODO: use string to long mapper instead
-		return items[position].id.hashCode().toLong()
+		return controller.getStableId(items[position].id)
 	}
 
 	fun askNotifyItemChanged(item: PaletteItem?) {

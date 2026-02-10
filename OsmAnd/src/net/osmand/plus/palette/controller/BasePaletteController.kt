@@ -8,6 +8,7 @@ import net.osmand.plus.palette.contract.IExternalPaletteListener
 import net.osmand.plus.palette.contract.IPaletteController
 import net.osmand.plus.palette.contract.IPaletteInteractionListener
 import net.osmand.plus.palette.contract.IPaletteView
+import net.osmand.plus.palette.utils.IdMapper
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.shared.palette.data.PaletteRepository
 import net.osmand.shared.palette.data.PaletteSortMode
@@ -26,6 +27,8 @@ abstract class BasePaletteController(
 
 	protected var editedItem: PaletteItem? = null
 	protected var selectedItem: PaletteItem? = null
+
+	private val idMapper = IdMapper()
 
 	// --- View Management ---
 
@@ -168,6 +171,10 @@ abstract class BasePaletteController(
 	}
 
 	override fun isAccentColorCanBeChanged(): Boolean = false
+
+	override fun getStableId(itemId: String): Long {
+		return idMapper.getSafeId(itemId)
+	}
 
 	protected fun getContentIcon(@DrawableRes id: Int): Drawable? {
 		return app.uiUtilities.getThemedIcon(id)

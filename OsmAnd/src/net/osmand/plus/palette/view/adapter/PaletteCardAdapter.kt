@@ -65,8 +65,7 @@ class PaletteCardAdapter(
 	override fun getItemCount(): Int = items.size
 
 	override fun getItemId(position: Int): Long {
-		// TODO: use string to long id mapper (store and fetch via controller)
-		return items[position].id.hashCode().toLong()
+		return controller.getStableId(items[position].id)
 	}
 
 	class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
