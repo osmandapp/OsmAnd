@@ -4923,7 +4923,7 @@
     <string name="open_issue_on_github">Nyisson hibajegyet a Githubon</string>
     <string name="copy_build_version">Összeállítás verziójának másolása</string>
     <string name="most_viewed">Legnézettebb</string>
-    <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_temperature">Hőmérséklet</string>
     <string name="release_4_6">• Android Auto: 3D mód hozzáadva \n \n • Nyomvonalak: szűrők és intelligens mappák bevezetése, optimalizált memória a nagyobb fájlok számára \n \n • Továbbfejlesztett felső és alsó modulpanel az összes modul fogadásához \n \n • Továbbfejlesztett helyi erőforrás-kezelés \n \n • Testre szabható gomb-hozzárendelés külső vezérlőkhöz \n \n • Új modulok: „Siklószám” és „Napszak” \n \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz \n \n • Továbbfejlesztett vonalszínezés a lejtési viszonyok módban új szimmetrikus gradienssel \n \n • Az átlátszó állapotsorral kapcsolatos probléma javítva \n \n • Hozzáadott támogatás az ANT+ hőmérséklet modulhoz \n \n • Bemutatjuk az \"Elérhető RAM\" modult</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>

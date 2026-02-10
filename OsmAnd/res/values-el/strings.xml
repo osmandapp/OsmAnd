@@ -3847,7 +3847,7 @@
     <string name="delete_trash_item_confirmation_desc">Οριστική διαγραφή \"%1$s\";</string>
     <string name="external_device_details_battery">Μπαταρία</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Καταγραφή ίχνους</string>
-    <string name="live_monitoring_adress_descr">Καθορίστε την ηλεκτρονική διεύθυνση με σύνταξη παραμέτρων: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Καθορίστε την ηλεκτρονική διεύθυνση με σύνταξη παραμέτρων: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="help_article_map_legend_nautical_map_name">Στυλ ναυτικού χάρτη</string>
     <string name="rssi_widget_desc">Δείχνει το επίπεδο RSSI της εξωτερικής συσκευής σας.</string>
     <string name="speak_route_deviation">Αναγγελία παρέκκλισης από τη διαδρομή</string>

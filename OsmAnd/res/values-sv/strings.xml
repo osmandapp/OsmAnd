@@ -4598,7 +4598,7 @@
     <string name="quick_action_transport_descr">Knapp som visar eller döljer kollektivtrafik på kartan.</string>
     <string name="filter_tracks_count">Filter: %d</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Undvik miljözoner</string>
-    <string name="live_monitoring_adress_descr">Ange webbadressen enligt följande parameter-syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Ange webbadressen enligt följande parameter-syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="map_widget_group_glide_ratio">Glidtal</string>
     <string name="not_enough_contributions_descr">Minst %1$s ändringar över de senaste två månaderna %2$s krävs för tillgång till obegränsade kartuppdateringar varje timme.</string>
     <string name="routeInfo_horse_scale_description">Rendera stigar enligt svårighetsgrad för ridvägar</string>

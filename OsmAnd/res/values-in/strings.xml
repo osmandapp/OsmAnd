@@ -5377,7 +5377,7 @@
     <string name="open_issue_on_github_descr">Ajukan pertanyaan, minta fitur baru</string>
     <string name="open_issue_on_github">Buka isu baru di GitHub</string>
     <string name="report_an_issues">Laporkan isu</string>
-    <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempel waktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}, pwt={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempel waktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}, pwt={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="release_4_6">• Android Auto: Menambahkan mode 3D
 \n
 \n • Trek: Memperkenalkan filter dan folder cerdas, memori yang dioptimalkan untuk file yang lebih besar

@@ -4909,7 +4909,7 @@
     <string name="help_article_widgets_name">Widgets de la carte</string>
     <string name="help_article_widgets_info_widgets_name">Widgets d\'information</string>
     <string name="help_article_widgets_map_buttons_name">Boutons de la carte</string>
-    <string name="live_monitoring_adress_descr">Indiquer l\'adresse web avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Indiquer l\'adresse web avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_temperature">Température</string>
     <string name="sensor_temperature_desc">Affiche la température fournie par le capteur</string>
     <string name="release_4_6">• Android Auto : ajout du mode 3D \n \n• Traces : Introduction de filtres et de dossiers intelligents, optimisation de la mémoire pour les fichiers plus volumineux \n \n• Amélioration des panneaux de widgets supérieur et inférieur pour accueillir tous les widgets \n \n• Amélioration de la gestion des ressources locales \n \n• Assignation des boutons personnalisable pour les contrôleurs externes \n \n• Nouveaux widgets : « Finesse » et « Position du soleil » \n \n• OsmAnd Cloud : Accès aux fichiers supprimés \n \n• Amélioration de la coloration des pistes en mode Pente avec un nouveau dégradé symétrique \n \n• Résolution des problèmes concernant la barre d\'état transparente \n \n• Ajout de la prise en charge du widget de température ANT+ \n \n• Introduction du widget \"RAM disponible\"</string>

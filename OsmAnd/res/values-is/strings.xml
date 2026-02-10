@@ -4887,7 +4887,7 @@
     <string name="cache_size">Stærð skyndiminnis</string>
     <string name="help_article_widgets_radius_ruler_name">Mælistika út frá miðju og mælistika</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Upptaka ferils</string>
-    <string name="live_monitoring_adress_descr">Tilgreindu vefslóð með málskipan færibreytu: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Tilgreindu vefslóð með málskipan færibreytu: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="help_article_map_legend_nautical_map_name">Sjókortastíll</string>
     <string name="map_widget_group_glide_ratio">Rennslishlutfall</string>
     <string name="folder_export_empty_error">Það er ekkert til að flytja út, mappan er tóm</string>

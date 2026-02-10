@@ -5,7 +5,6 @@ import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 import static net.osmand.shared.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
 import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_FEET;
 import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_METERS;
-
 import static btools.routingapp.BRouterServiceConnection.BROUTER_CONNECT_TIMEOUT_MS;
 
 import android.content.Context;
@@ -81,8 +80,8 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
-import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
+import net.osmand.plus.plugins.monitoring.live.LiveMonitoringHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;

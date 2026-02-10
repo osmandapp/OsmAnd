@@ -1053,7 +1053,7 @@ You will be able to pair this scanner again at any time.</string>
         • Added support for ANT+ temperature widget\n\n
         • Introduced \"Available RAM\" widget\n\n
     </string>
-    <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_temperature">Temperature</string>
     <string name="sensor_temperature_desc">Shows temperature from sensor</string>
     <string name="with_waypoints">With waypoints</string>
