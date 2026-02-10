@@ -6,6 +6,7 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STAR
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsId;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsName;
+import static net.osmand.data.Amenity.POPULATION;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.search.core.ObjectType.POI;
@@ -2028,14 +2029,6 @@ public class SearchCoreFactory {
 					if (!allowedTypes.contains(subType) || (!nm.matches(localeName) && !nm.matches(otherNames))) {
 						return false;
 					}
-					String fileName = object.file != null && object.file.getFile() != null
-							? object.file.getFile().getName()
-							: "null";
-					LatLon loc = amenity.getLocation();
-					LOG.info("OLC city candidate: name='" + localeName + "', subtype=" + subType
-							+ ", file=" + fileName
-							+ ", lat=" + (loc != null ? loc.getLatitude() : null)
-							+ ", lon=" + (loc != null ? loc.getLongitude() : null));
 					result.add(object);
 					count++;
 					return true;
@@ -2052,22 +2045,25 @@ public class SearchCoreFactory {
 			
 			final NameStringMatcher nmEquals = new NameStringMatcher(text, CHECK_EQUALS);
 			
-			Collections.sort(result, new Comparator<SearchResult>() {
+			result.sort(new Comparator<>() {
 				@Override
 				public int compare(SearchResult sr1, SearchResult sr2) {
-					Amenity poi1 = new Amenity();
-					Amenity poi2 = new Amenity();
-					if (sr1.objectType == POI) {
-						poi1 = (Amenity) sr1.object;
+					if (sr1.objectType != POI || sr2.objectType != POI) {
+						return 0;
 					}
-					if (sr2.objectType == POI) {
-						poi2 = (Amenity) sr2.object;
+					Amenity a1 = (Amenity) sr1.object;
+					Amenity a2 = (Amenity) sr2.object;
+
+					int i1 = getIndex(a1);
+					int i2 = getIndex(a2);
+					int priorityDiff = Algorithms.compare(i2, i1);
+					if (priorityDiff != 0) {
+						return priorityDiff;
 					}
-					
-					if (poi1 != null && poi2 != null) {
-						int o1 = getIndex(poi1);
-						int o2 = getIndex(poi2);
-						return Algorithms.compare(o2, o1);
+					long p1 = parsePopulation(a1.getAdditionalInfo(POPULATION));
+					long p2 = parsePopulation(a2.getAdditionalInfo(POPULATION));
+					if (p1 != p2) {
+						return Long.compare(p2, p1); // descending order
 					}
 					return 0;
 				}
@@ -2082,6 +2078,21 @@ public class SearchCoreFactory {
 						}
 					}
 					return res;
+				}
+
+				private long parsePopulation(String populationS) {
+					if (populationS == null) {
+						return -1;
+					}
+					populationS = populationS.replaceAll("\\D", "");
+					if (!populationS.matches("\\d+")) {
+						return -1;
+					}
+					try {
+						return Long.parseLong(populationS);
+					} catch (NumberFormatException e) {
+						return -1;
+					}
 				}
 			});
 			
