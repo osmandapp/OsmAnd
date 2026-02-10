@@ -2032,7 +2032,7 @@ public class SearchCoreFactory {
 							? object.file.getFile().getName()
 							: "null";
 					LatLon loc = amenity.getLocation();
-					LOG.debug("OLC city candidate: name='" + localeName + "', subtype=" + subType
+					LOG.info("OLC city candidate: name='" + localeName + "', subtype=" + subType
 							+ ", file=" + fileName
 							+ ", lat=" + (loc != null ? loc.getLatitude() : null)
 							+ ", lon=" + (loc != null ? loc.getLongitude() : null));
