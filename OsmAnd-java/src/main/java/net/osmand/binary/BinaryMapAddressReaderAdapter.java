@@ -700,7 +700,7 @@ public class BinaryMapAddressReaderAdapter {
 				map.readIndexedStringTable(stringMatcher.getCollator(), Collections.singletonList(req.nameQuery),
 						"", Collections.singletonList(loffsets), charsList);
 				codedIS.popLimit(oldLimit);
-				req.endSubSearchStats(statReq, "TABLE_FIELD", map.getFile().getName());
+				req.endSubSearchStats(statReq, BinaryMapIndexReaderStats.SearchStat.SubOp.ADDRESS_TABLE, map.getFile().getName());
 				break;
 			case OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER:
 				statReq = req.beginSubSearchStats();
@@ -823,7 +823,7 @@ public class BinaryMapAddressReaderAdapter {
 //				LOG.info("Whole address search by name is done in " + (System.currentTimeMillis() - time) + "ms. Found "
 //						+ req.getSearchResults().size());
 				} finally {
-					req.endSubSearchStats(statReq, "ATOM_FIELD", map.getFile().getName());
+					req.endSubSearchStats(statReq, BinaryMapIndexReaderStats.SearchStat.SubOp.ADDRESS_ATOM, map.getFile().getName());
 				}
 				return;
 			default:

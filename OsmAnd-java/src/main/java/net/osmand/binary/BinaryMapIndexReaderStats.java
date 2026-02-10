@@ -113,11 +113,19 @@ public class BinaryMapIndexReaderStats {
 			statByAPI.time += timeCall;
 		}
 
+		public enum SubOp {
+			ADDRESS_TABLE,
+			ADDRESS_ATOM,
+			POI_NAMEINDEX,
+			POI_BOXES,
+			POI_POIDATA
+		}
+
 		public static final class TimingSummary {
 			private final LongAdder totalNs = new LongAdder();
 			private final LongAdder count = new LongAdder();
-			public volatile String[] subKey = new String[2]; // 0 - max key, 1 - min key
-			public volatile long[] subTime = new long[] {0, 0}; // 0 - max time, 1 - min time
+			public volatile String[] subKey = new String[2]; // 0 - max key, 1 - next key
+			public volatile long[] subTime = new long[] {0, 0}; // 0 - max time, 1 - next time
 
 			void add(long elapsedNs) {
 				totalNs.add(elapsedNs);
@@ -137,11 +145,11 @@ public class BinaryMapIndexReaderStats {
 				return count.sum();
 			}
 
-			void updateMaxMinSub(String maxKey, long maxTotalNs, String minKey, long minTotalNs) {
+			void updateMaxMinSub(String maxKey, long maxTotalNs, String afterMaxKey, long afterMaxTotalNs) {
 				subKey[0] = maxKey == null ? "" : maxKey;
 				subTime[0] = Math.max(0, maxTotalNs);
-				subKey[1] = minKey == null ? "" : minKey;
-				subTime[1] = Math.max(0, minTotalNs);
+				subKey[1] = afterMaxKey == null ? "" : afterMaxKey;
+				subTime[1] = Math.max(0, afterMaxTotalNs);
 			}
 		}
 
@@ -159,7 +167,7 @@ public class BinaryMapIndexReaderStats {
 					suffix = key.substring(idx + 1);
 				}
 				if (op == null) {
-					op = "";
+					op = "UNKNOWN";
 				}
 				TimingSummary sub = e.getValue();
 				long subTotalNs = sub.getTotalNs();
@@ -182,30 +190,33 @@ public class BinaryMapIndexReaderStats {
 				TimingSummary summary = e.getValue();
 				HashMap<String, Long> suffixTotals = maxByOpAndSuffix.get(op);
 				if (suffixTotals != null) {
+					ArrayList<Map.Entry<String, Long>> suffixEntries = new ArrayList<>(suffixTotals.entrySet());
+					suffixEntries.sort((a, b) -> {
+						long av = a.getValue() == null ? 0 : a.getValue();
+						long bv = b.getValue() == null ? 0 : b.getValue();
+						if (av == bv) {
+							String ak = a.getKey() == null ? "" : a.getKey();
+							String bk = b.getKey() == null ? "" : b.getKey();
+							return ak.compareTo(bk);
+						}
+						return av < bv ? 1 : -1;
+					});
+
 					String bestSuffix = "";
-					long bestTotal = -1;
-					String minSuffix = "";
-					long minTotal = Long.MAX_VALUE;
-					for (Map.Entry<String, Long> s : suffixTotals.entrySet()) {
-						long t = s.getValue() == null ? 0 : s.getValue();
-						if (t > bestTotal) {
-							bestTotal = t;
-							bestSuffix = s.getKey();
+					long bestTotal = 0;
+					String afterBestSuffix = "";
+					long afterBestTotal = 0;
+					if (!suffixEntries.isEmpty()) {
+						Map.Entry<String, Long> first = suffixEntries.get(0);
+						bestSuffix = first.getKey();
+						bestTotal = first.getValue() == null ? 0 : first.getValue();
+						if (suffixEntries.size() > 1) {
+							Map.Entry<String, Long> second = suffixEntries.get(1);
+							afterBestSuffix = second.getKey();
+							afterBestTotal = second.getValue() == null ? 0 : second.getValue();
 						}
-						if (t < minTotal) {
-							minTotal = t;
-							minSuffix = s.getKey();
-						}
 					}
-					if (bestTotal < 0) {
-						bestTotal = 0;
-						bestSuffix = "";
-					}
-					if (minTotal == Long.MAX_VALUE) {
-						minTotal = 0;
-						minSuffix = "";
-					}
-					summary.updateMaxMinSub(bestSuffix, bestTotal, minSuffix, minTotal);
+					summary.updateMaxMinSub(bestSuffix, bestTotal, afterBestSuffix, afterBestTotal);
 				}
 				result.put(op, summary);
 			}
@@ -219,12 +230,12 @@ public class BinaryMapIndexReaderStats {
 			return subStart;
 		}
 
-		public void endSubSearchStats(long statReq, String op, String obf) {
+		public void endSubSearchStats(long statReq, SubOp op, String obf) {
 			if (statReq != subStart) {
 				System.err.println("ERROR: in sub search stats counting to fix ! " + statReq + " != " + subStart);
 			}
 			long timeCall = (System.nanoTime() - statReq);
-			String key = op + "|" + obf;
+			String key = op.name() + "|" + obf;
 			subTimings.computeIfAbsent(key, k -> new TimingSummary()).add(timeCall);
 		}
 

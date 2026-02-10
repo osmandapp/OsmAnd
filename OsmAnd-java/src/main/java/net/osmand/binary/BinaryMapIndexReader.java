@@ -1857,7 +1857,7 @@ public class BinaryMapIndexReader {
 			return 0;
 		}
 
-		public void endSubSearchStats(long statReq, String op, String obf) {
+		public void endSubSearchStats(long statReq, SearchStat.SubOp op, String obf) {
 			if (statReq > 0 && searchStat != null) {
 				searchStat.endSubSearchStats(statReq, op, obf);
 			}

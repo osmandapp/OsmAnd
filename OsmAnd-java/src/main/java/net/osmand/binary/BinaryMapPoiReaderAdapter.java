@@ -329,13 +329,16 @@ public class BinaryMapPoiReaderAdapter {
 			case 0:
 				return;
 			case OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER:
+				long statReq = req.beginSubSearchStats();
 				long length = readInt();
 				long oldLimit = codedIS.pushLimitLong((long) length);
 				// here offsets are sorted by distance
 				offsets = readPoiNameIndex(matcher.getCollator(), query, req, region, nameIndexCoordinates);
 				codedIS.popLimit(oldLimit);
+				req.endSubSearchStats(statReq, BinaryMapIndexReaderStats.SearchStat.SubOp.POI_NAMEINDEX, map.getFile().getName());
 				break;
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER:
+				statReq = req.beginSubSearchStats();
 				length = readInt();
 				oldLimit = codedIS.pushLimitLong((long) length);
 				if (nameIndexCoordinates.size() > 0 && nameIndexTree == null) {
@@ -353,8 +356,10 @@ public class BinaryMapPoiReaderAdapter {
 				readBoxField(0, 0, 0, 0, 0, 0, 0, offsetsMap, null, req, region, nameIndexTree);
 				req.poiTypeFilter = filter;
 				codedIS.popLimit(oldLimit);
+				req.endSubSearchStats(statReq, BinaryMapIndexReaderStats.SearchStat.SubOp.POI_BOXES, map.getFile().getName());
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
+				statReq = req.beginSubSearchStats();
 				// also offsets can be randomly skipped by limit
 				Integer[] offKeys = new Integer[offsets.size()];
 				if (offsets.size() > 0) {
@@ -398,6 +403,7 @@ public class BinaryMapPoiReaderAdapter {
 //				LOG.info("Whole poi by name search is done in " + (System.currentTimeMillis() - time) +
 //						"ms. Found " + req.getSearchResults().size());
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				req.endSubSearchStats(statReq, BinaryMapIndexReaderStats.SearchStat.SubOp.POI_POIDATA, map.getFile().getName());
 				return;
 			default:
 				skipUnknownField(t);
@@ -570,45 +576,52 @@ public class BinaryMapPoiReaderAdapter {
 			case 0:
 				return;
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER:
+				long statReq = req.beginSubSearchStats();
 				length = readInt();
 				oldLimit = codedIS.pushLimitLong((long) length);
 				readBoxField(left31, right31, top31, bottom31, 0, 0, 0, offsetsMap, skipTiles, req, region, null);
 				codedIS.popLimit(oldLimit);
+				req.endSubSearchStats(statReq, BinaryMapIndexReaderStats.SearchStat.SubOp.POI_BOXES, map.getFile().getName());
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
-				int[] offsets = offsetsMap.keys();
-				// also offsets can be randomly skipped by limit
-				Arrays.sort(offsets);
-				if (skipTiles != null) {
-					skipTiles.clear();
-				}
+				statReq = req.beginSubSearchStats();
+				try {
+					int[] offsets = offsetsMap.keys();
+					// also offsets can be randomly skipped by limit
+					Arrays.sort(offsets);
+					if (skipTiles != null) {
+						skipTiles.clear();
+					}
 //				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) + " ms. Found "
 //						+ offsets.length + " subtrees");
-				for (int j = 0; j < offsets.length; j++) {
-					long skipVal = offsetsMap.get(offsets[j]);
-					if (skipTiles != null && skipVal != -1) {
-						int dzoom = ZOOM_TO_SKIP_FILTER_READ - ZOOM_TO_SKIP_FILTER;
-						long dx = (skipVal >> ZOOM_TO_SKIP_FILTER_READ);
-						long dy = skipVal - (dx << ZOOM_TO_SKIP_FILTER_READ);
-						skipVal = ((dx >> dzoom) << ZOOM_TO_SKIP_FILTER) | (dy >> dzoom);
-						if (skipVal != -1 && skipTiles.contains(skipVal)) {
-							continue;
+					for (int j = 0; j < offsets.length; j++) {
+						long skipVal = offsetsMap.get(offsets[j]);
+						if (skipTiles != null && skipVal != -1) {
+							int dzoom = ZOOM_TO_SKIP_FILTER_READ - ZOOM_TO_SKIP_FILTER;
+							long dx = (skipVal >> ZOOM_TO_SKIP_FILTER_READ);
+							long dy = skipVal - (dx << ZOOM_TO_SKIP_FILTER_READ);
+							skipVal = ((dx >> dzoom) << ZOOM_TO_SKIP_FILTER) | (dy >> dzoom);
+							if (skipVal != -1 && skipTiles.contains(skipVal)) {
+								continue;
+							}
+						}
+						codedIS.seek(offsets[j] + indexOffset);
+						long len = readInt();
+						long oldLim = codedIS.pushLimitLong((long) len);
+						boolean read = readPoiData(left31, right31, top31, bottom31, req, region, skipTiles,
+								req.zoom == -1 ? 31 : req.zoom + ZOOM_TO_SKIP_FILTER);
+						if (read && skipVal != -1 && skipTiles != null) {
+							skipTiles.add(skipVal);
+						}
+						codedIS.popLimit(oldLim);
+						if (req.isCancelled()) {
+							return;
 						}
 					}
-					codedIS.seek(offsets[j] + indexOffset);
-					long len = readInt();
-					long oldLim = codedIS.pushLimitLong((long) len);
-					boolean read = readPoiData(left31, right31, top31, bottom31, req, region, skipTiles,
-							req.zoom == -1 ? 31 : req.zoom + ZOOM_TO_SKIP_FILTER);
-					if (read && skipVal != -1 && skipTiles != null) {
-						skipTiles.add(skipVal);
-					}
-					codedIS.popLimit(oldLim);
-					if (req.isCancelled()) {
-						return;
-					}
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				} finally {
+					req.endSubSearchStats(statReq, BinaryMapIndexReaderStats.SearchStat.SubOp.POI_POIDATA, map.getFile().getName());
 				}
-				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				return;
 			default:
 				skipUnknownField(t);
