@@ -100,6 +100,10 @@ public class SearchUICore {
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
 	}
 
+	public Function<String, String> getHttpRedirectRequester() {
+		return httpRedirectRequester;
+	}
+
 	public void setHttpRedirectRequester(Function<String, String> httpRedirectRequester) {
 		this.httpRedirectRequester = httpRedirectRequester;
 	}
