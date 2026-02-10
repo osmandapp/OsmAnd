@@ -55,7 +55,7 @@ public abstract class ModedColorsPaletteController extends SolidPaletteControlle
 		PaletteItem newModePaletteItem = provideSelectedPaletteItemForMode(paletteMode);
 		selectPaletteItem(newModePaletteItem);
 		if (newModePaletteItem != null) {
-			notifyUpdatePaletteSelection(oldModePaletteItem, newModePaletteItem, false);
+			notifyUpdatePaletteSelection(oldModePaletteItem, newModePaletteItem);
 		}
 	}
 

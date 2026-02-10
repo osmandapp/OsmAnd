@@ -95,8 +95,7 @@ abstract class PaletteCard(
 
 	override fun updatePaletteSelection(
 		oldItem: PaletteItem?,
-		newItem: PaletteItem,
-		selectionDone: Boolean
+		newItem: PaletteItem
 	) {
 		adapter.askNotifyItemChanged(oldItem)
 		adapter.askNotifyItemChanged(newItem)

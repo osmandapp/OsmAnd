@@ -30,8 +30,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.palette.domain.PaletteItem;
 
-import org.jetbrains.annotations.NotNull;
-
 public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment implements IPaletteView {
 
 	public static final String TAG = AllGradientsPaletteFragment.class.getSimpleName();
@@ -97,14 +95,12 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 	}
 
 	@Override
-	public void updatePaletteSelection(@org.jetbrains.annotations.Nullable PaletteItem oldItem, @NotNull PaletteItem newItem, boolean selectionDone) {
+	public void updatePaletteSelection(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
 		if (adapter != null) {
 			adapter.askNotifyItemChanged(oldItem);
 			adapter.askNotifyItemChanged(newItem);
 		}
-		if (selectionDone) {
-			dismiss();
-		}
+		dismiss();
 	}
 
 	@Override
