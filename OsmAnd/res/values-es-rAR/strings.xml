@@ -5858,7 +5858,7 @@
     <string name="astro_visible_objects">Objetos visibles</string>
     <string name="red_filter">Filtro rojo</string>
     <string name="astro_directions">Direcciones</string>
-    <string name="astro_daily_path">Camino diario</string>
+    <string name="astro_daily_path">Recorrido diario</string>
     <string name="map_2d">2D</string>
     <string name="map_3d">3D</string>
     <string name="astro_deep_sky">Cielo profundo</string>
