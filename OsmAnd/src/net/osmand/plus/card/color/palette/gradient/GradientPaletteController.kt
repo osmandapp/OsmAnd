@@ -42,7 +42,8 @@ open class GradientPaletteController(
 
 	var analysis: GpxTrackAnalysis? = null
 
-	var renaming = false
+	private var renaming = false
+	private var applyingEdits = false
 
 	constructor(
 		app: OsmandApplication,
@@ -296,6 +297,7 @@ open class GradientPaletteController(
 	}
 
 	private fun onApplyGradientEdits(draft: GradientDraft) {
+		applyingEdits = true
 		val currentPalette = repository.getPalette(paletteId) as? Palette.GradientCollection ?: return
 
 		val itemToUpdate = editedItem as? PaletteItem.Gradient
@@ -328,6 +330,7 @@ open class GradientPaletteController(
 			notifyUpdatePaletteSelection(oldSelected, resultItem)
 		}
 		editedItem = null
+		applyingEdits = false
 	}
 
 	private fun updateExternalDependencies() {
@@ -354,5 +357,5 @@ open class GradientPaletteController(
 		AllGradientsPaletteFragment.showInstance(activity, this)
 	}
 
-	override fun shouldKeepAllItemsScreen() = editedItem != null || renaming
+	override fun shouldKeepAllItemsScreen() = renaming || applyingEdits
 }

@@ -89,19 +89,16 @@ abstract class BasePaletteController(
 	}
 
 	private fun selectPaletteItemInternal(item: PaletteItem?, silently: Boolean = false) {
-		if (selectedItem != item) {
-			val oldSelected = selectedItem
-			selectedItem = item
+		val oldSelected = selectedItem
+		selectedItem = item
 
-			if (!silently) {
-				notifyPaletteItemSelected(item)
-			}
-
-			if (oldSelected != null && item != null) {
-				notifyUpdatePaletteSelection(oldSelected, item)
-			} else {
-				notifyUpdatePaletteColors(item)
-			}
+		if (!silently) {
+			notifyPaletteItemSelected(item)
+		}
+		if (oldSelected != null && item != null) {
+			notifyUpdatePaletteSelection(oldSelected, item)
+		} else {
+			notifyUpdatePaletteColors(item)
 		}
 	}
 
