@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
@@ -19,36 +20,40 @@ public abstract class BaseMenuController {
 
 	@NonNull
 	protected final OsmandApplication app;
-	@Nullable
-	private MapActivity mapActivity;
+	private FragmentActivity activity;
 	private boolean portraitMode;
 	private int landscapeWidthPx;
 	protected boolean nightMode;
 
-	public BaseMenuController(@NonNull OsmandApplication app) {
-		this.app = app;
-		init();
-	}
-
-	public BaseMenuController(@NonNull MapActivity mapActivity) {
-		this.app = mapActivity.getApp();
-		this.mapActivity = mapActivity;
+	public BaseMenuController(@NonNull FragmentActivity activity) {
+		this.app = (OsmandApplication) activity.getApplication();
+		this.activity = activity;
 		init();
 	}
 
 	private void init() {
-		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity != null ? mapActivity : app);
+		portraitMode = AndroidUiHelper.isOrientationPortrait(activity != null ? activity : app);
 		landscapeWidthPx = app.getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
 		updateNightMode();
 	}
 
 	@Nullable
 	public MapActivity getMapActivity() {
-		return mapActivity;
+		if (activity instanceof MapActivity mapActivity) {
+			return mapActivity;
+		}
+		return null;
+	}
+
+	@NonNull
+	public FragmentActivity getActivity() {
+		return activity;
 	}
 
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
+		if (mapActivity != null && mapActivity != activity) {
+			this.activity = mapActivity;
+		}
 		if (mapActivity != null) {
 			init();
 		}

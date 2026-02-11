@@ -237,7 +237,8 @@ public class FavoriteGroup {
 		favoriteGroup.color = pointsGroup.getColor();
 		favoriteGroup.iconName = pointsGroup.getIconName();
 		favoriteGroup.backgroundType = BackgroundType.getByTypeName(pointsGroup.getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
-		favoriteGroup.pinned = pointsGroup.isPinned();
+		Boolean groupPinned = pointsGroup.isPinned();
+		favoriteGroup.pinned = Objects.requireNonNullElseGet(groupPinned, () -> FavoriteGroup.isBaseFavoriteOrPersonalGroup(favoriteGroup.name));
 
 		for (WptPt point : pointsGroup.getPoints()) {
 			favoriteGroup.points.add(FavouritePoint.fromWpt(point));

@@ -287,7 +287,16 @@ object GpxUtilities {
 			this.color = color
 		}
 
-		constructor(name: String, iconName: String?, backgroundType: String?, color: Int, hidden: Boolean, pinned: Boolean) : this(
+		constructor(name: String, iconName: String?, backgroundType: String?, color: Int, hidden: Boolean) : this(
+			name
+		) {
+			this.iconName = iconName
+			this.backgroundType = backgroundType
+			this.color = color
+			this.hidden = hidden
+		}
+
+		constructor(name: String, iconName: String?, backgroundType: String?, color: Int, hidden: Boolean, pinned: Boolean?) : this(
 			name
 		) {
 			this.iconName = iconName

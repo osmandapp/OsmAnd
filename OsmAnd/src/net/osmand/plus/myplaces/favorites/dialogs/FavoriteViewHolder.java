@@ -134,6 +134,8 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 
 		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.checkbox_container), selectionMode);
 		AndroidUiHelper.updateVisibility(divider, showDivider);
+
+		bindSelectionMode(selectionMode, listener, favouritePoint);
 	}
 
 	@Nullable
@@ -168,22 +170,5 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 		if (selectionMode) {
 			checkbox.setChecked(listener.isItemSelected(favouritePoint));
 		}
-	}
-
-	public void bindIcon(@NonNull FavouritePoint favouritePoint) {
-		int color = app.getFavoritesHelper().getColorWithCategory(favouritePoint, ColorUtilities.getColor(app, R.color.color_favorite));
-		imageView.setImageDrawable(PointImageUtils.getFromPoint(app, color, false, favouritePoint));
-
-		int iconSize = (int) app.getResources().getDimension(R.dimen.favorites_my_places_icon_size);
-		LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) imageView.getLayoutParams();
-		lp.width = iconSize;
-		lp.height = iconSize;
-		imageView.setLayoutParams(lp);
-		imageView.setVisibility(VISIBLE);
-	}
-
-	public void bindTitle(@NonNull FavouritePoint favouritePoint) {
-		title.setText(favouritePoint.getDisplayName(app), TextView.BufferType.SPANNABLE);
-		title.setMaxLines(2);
 	}
 }

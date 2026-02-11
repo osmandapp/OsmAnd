@@ -63,12 +63,8 @@ public class ShareMenu extends BaseMenuController {
 	private String sms;
 	private String urlLink;
 
-	private ShareMenu(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
-	}
-
-	private ShareMenu(@NonNull OsmandApplication app) {
-		super(app);
+	private ShareMenu(@NonNull FragmentActivity activity) {
+		super(activity);
 	}
 
 	@NonNull
@@ -106,7 +102,7 @@ public class ShareMenu extends BaseMenuController {
 	}
 
 	public static void show(LatLon latLon, String title, String address, String urlLink, @NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
-		ShareMenu menu = new ShareMenu(app);
+		ShareMenu menu = new ShareMenu(activity);
 		menu.latLon = latLon;
 		menu.title = title;
 		menu.address = address;
