@@ -5015,7 +5015,7 @@
     <string name="most_viewed">Ofte legataj</string>
     <string name="app_mode_baby_transport">Transporto de beboj</string>
     <string name="release_4_6">• Android Auto: aldonita 3D-reĝimo \n \n • spuroj: filtriloj kaj inteligentaj dosierujoj, optimumigita memor-uzo por grandaj dosieroj \n \n • modernigitaj supra kaj malsupra paneloj por eblo enmeti ĉiun fenestraĵon \n \n • plibonigita administrado de lokaj rimedoj \n \n • eblo ŝanĝi klav-asignojn por eksteraj enigaj aparatoj \n \n • novaj fenestraĵoj: Glisrilato kaj Pozicio de Suno \n \n • OsmAnd-Nubo: aliro por forigitaj dosieroj \n \n • plibonigita kolorigo de spuro en la reĝimo Dekliveco kun nova simetria gradiento \n \n • riparitaj problemoj pri travideblaj stataj strioj \n \n • aldonis fenestraĵon ANT+: temperaturo \n \n • nova fenestraĵo: Disponebla RAM</string>
-    <string name="live_monitoring_adress_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, direkto={6}, eta(alvena tempo)={7}, etfa(alvena tempo al intercelo)={8}, eda(distanco)={9}, edfa(distanco al intercelo)={10}.</string>
+    <string name="live_monitoring_adress_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, direkto={6}, eta(alvena tempo)={7}, etfa(alvena tempo al intercelo)={8}, eda(distanco)={9}, edfa(distanco al intercelo)={10}, elcento_da_baterio={13}.</string>
     <string name="sensor_temperature_desc">Montras temperaturon de sentilo</string>
     <string name="shared_string_temperature">Temperaturo</string>
     <string name="shared_string_cache">Kaŝmemoro</string>
