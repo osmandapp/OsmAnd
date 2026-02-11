@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.solid.data;
+package net.osmand.plus.card.color.palette.migration.data_v2;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -9,7 +9,6 @@ import net.osmand.plus.R;
 
 import java.util.Objects;
 
-@Deprecated
 public class PaletteColor {
 
 	private final long id;

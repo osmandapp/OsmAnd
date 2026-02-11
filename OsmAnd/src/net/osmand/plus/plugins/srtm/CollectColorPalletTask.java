@@ -8,8 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.ColorPalette;
 
-import java.io.File;
-
+@Deprecated
 public class CollectColorPalletTask extends AsyncTask<Void, Void, ColorPalette> {
 
 	private final OsmandApplication app;

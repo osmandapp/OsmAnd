@@ -5,11 +5,10 @@ import static net.osmand.plus.utils.ColorUtilities.getColor;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.palette.solid.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.solid.data.FileColorsCollection;
+import net.osmand.plus.card.color.palette.migration.data_v2.ColorsCollection;
+import net.osmand.plus.card.color.palette.migration.data_v2.FileColorsCollection;
 import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionBundle;
-import net.osmand.plus.card.color.palette.solid.data.PaletteColor;
-import net.osmand.plus.card.color.palette.solid.data.PaletteSortingMode;
+import net.osmand.plus.card.color.palette.migration.data_v2.PaletteColor;
 import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionV1;
 import net.osmand.plus.card.color.palette.solid.data.DefaultColors;
 import net.osmand.plus.card.color.palette.migration.data.PaletteColorV1;
@@ -72,7 +71,7 @@ public class ColorsMigrationAlgorithmV2 {
 		// Collect available colors from the user palette file
 		ColorsCollection newCollection = new FileColorsCollection(app);
 		newCollection.addAllUniqueColors(DefaultPaletteColors.values());
-		List<PaletteColor> originalOrder = newCollection.getColors(PaletteSortingMode.ORIGINAL);
+		List<PaletteColor> originalOrder = newCollection.getColorsInOriginalOrder();
 
 		// Collect available colors from the old preferences
 		List<ColorsCollectionV1> oldCollections = new ArrayList<>();
