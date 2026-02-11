@@ -4536,4 +4536,11 @@
     <string name="resting_position_icon_summary">Ikoni, joka näytetään kun olet paikallasi.</string>
     <string name="ant_plus_nothing_found_description">Varmista että:\n- Bluetooth on päällä\n- Anturi on aktivoitu\n- Tämä laite on anturin lähellä</string>
     <string name="external_sensors_not_found">Antureita ei löydy</string>
+    <string name="astro_configure_view">Muokkaa näkymää</string>
+    <string name="astro_visible_objects">Näkyvät objektit</string>
+    <string name="red_filter">Punainen suodatin</string>
+    <string name="astro_directions">Suunnat</string>
+    <string name="map_2d">2D näkymä</string>
+    <string name="map_3d">3D näkymä</string>
+    <string name="astro_name_jupiter">Jupiter</string>
 </resources>

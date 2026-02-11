@@ -5923,4 +5923,12 @@
     <string name="astro_visible_objects">Synlige objekter</string>
     <string name="astro_configure_view">Still inn visning</string>
     <string name="astro_rendering">Opptegning</string>
+    <string name="years_3">Tre år</string>
+    <string name="osm_live_payment_3_years_title">Hvert tredje år</string>
+    <string name="three_years_subscription">Tre års abonnement</string>
+    <string name="unit_of_temperature_description">Valgte enheter vil bli brukt på alle temperaturrelaterte data i den gjeldende profilen.</string>
+    <string name="travel_guides">Guider</string>
+    <string name="saved_to_device">Lagret på enhet</string>
+    <string name="save_to_device_error">Feil ved lagring på enhet</string>
+    <string name="save_to_device">Lagre på enhet</string>
 </resources>
