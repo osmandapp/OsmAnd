@@ -48,7 +48,7 @@ public class BinaryMapIndexReaderStats {
 	}
 	
 	public static class SearchStat {
-		long lastReq = 0, subStart = 0;
+		long lastReq = 0, subStart = 0, subSize = 0;
 		public long totalTime = 0;
 		public long totalBytes = 0;
 		public int prevResultsSize = 0;
@@ -116,6 +116,9 @@ public class BinaryMapIndexReaderStats {
 		public enum SubOp {
 			ADDRESS_TABLE,
 			ADDRESS_ATOM,
+			ADDRESS_LOAD_CITIES,
+			ADDRESS_LOAD_STREETS,
+			ADDRESS_LOAD_BUILDINGS,
 			POI_NAMEINDEX,
 			POI_BOXES,
 			POI_POIDATA
@@ -124,12 +127,11 @@ public class BinaryMapIndexReaderStats {
 		public static final class TimingSummary {
 			private final LongAdder totalNs = new LongAdder();
 			private final LongAdder count = new LongAdder();
-			public volatile String[] subKey = new String[2]; // 0 - max key, 1 - next key
-			public volatile long[] subTime = new long[] {0, 0}; // 0 - max time, 1 - next time
+			public volatile Map<String, long[]> subKeys = new LinkedHashMap<>(); // 0 - time, 1 - count
 
-			void add(long elapsedNs) {
+			void add(long elapsedNs, long size) {
 				totalNs.add(elapsedNs);
-				count.increment();
+				count.add(size);
 			}
 
 			void addTotal(long elapsedNs, long occurrences) {
@@ -145,17 +147,29 @@ public class BinaryMapIndexReaderStats {
 				return count.sum();
 			}
 
-			void updateMaxMinSub(String maxKey, long maxTotalNs, String afterMaxKey, long afterMaxTotalNs) {
-				subKey[0] = maxKey == null ? "" : maxKey;
-				subTime[0] = Math.max(0, maxTotalNs);
-				subKey[1] = afterMaxKey == null ? "" : afterMaxKey;
-				subTime[1] = Math.max(0, afterMaxTotalNs);
+			void updateSubs(String key1, long time1, long count1, String key2, long time2, long count2) {
+				subKeys.clear();
+				String normalizedKey1 = key1 == null ? "" : key1;
+				String normalizedKey2 = key2 == null ? "" : key2;
+				if (normalizedKey1.isEmpty() && normalizedKey2.isEmpty()) {
+					return;
+				}
+				if (normalizedKey1.equals(normalizedKey2)) {
+					subKeys.put(normalizedKey1, new long[] {Math.max(0, time1 + time2), Math.max(0, count1 + count2)});
+				} else {
+					if (!normalizedKey1.isEmpty()) {
+						subKeys.put(normalizedKey1, new long[] {Math.max(0, time1), Math.max(0, count1)});
+					}
+					if (!normalizedKey2.isEmpty()) {
+						subKeys.put(normalizedKey2, new long[] {Math.max(0, time2), Math.max(0, count2)});
+					}
+				}
 			}
 		}
 
 		public Map<String, TimingSummary> getTimingSummary() {
 			HashMap<String, TimingSummary> grouped = new HashMap<>();
-			HashMap<String, HashMap<String, Long>> maxByOpAndSuffix = new HashMap<>();
+			HashMap<String, HashMap<String, long[]>> maxByOpAndSuffix = new HashMap<>();
 			for (Map.Entry<String, TimingSummary> e : subTimings.entrySet()) {
 				String key = e.getKey(), op, suffix;
 				int idx = key == null ? -1 : key.indexOf('|');
@@ -174,8 +188,10 @@ public class BinaryMapIndexReaderStats {
 				long subCount = sub.getCount();
 				grouped.computeIfAbsent(op, k -> new TimingSummary()).addTotal(subTotalNs, subCount);
 
-				HashMap<String, Long> suffixTotals = maxByOpAndSuffix.computeIfAbsent(op, k -> new HashMap<>());
-				suffixTotals.merge(suffix, subTotalNs, Long::sum);
+				HashMap<String, long[]> suffixTotals = maxByOpAndSuffix.computeIfAbsent(op, k -> new HashMap<>());
+				long[] totals = suffixTotals.computeIfAbsent(suffix, k -> new long[2]);
+				totals[0] += subTotalNs;
+				totals[1] += subCount;
 			}
 
 			ArrayList<Map.Entry<String, TimingSummary>> sorted = new ArrayList<>(grouped.entrySet());
@@ -188,12 +204,13 @@ public class BinaryMapIndexReaderStats {
 			for (Map.Entry<String, TimingSummary> e : sorted) {
 				String op = e.getKey();
 				TimingSummary summary = e.getValue();
-				HashMap<String, Long> suffixTotals = maxByOpAndSuffix.get(op);
+				HashMap<String, long[]> suffixTotals = maxByOpAndSuffix.get(op);
 				if (suffixTotals != null) {
-					ArrayList<Map.Entry<String, Long>> suffixEntries = new ArrayList<>(suffixTotals.entrySet());
+					ArrayList<Map.Entry<String, long[]>> suffixEntries = new ArrayList<>(suffixTotals.entrySet());
 					suffixEntries.sort((a, b) -> {
-						long av = a.getValue() == null ? 0 : a.getValue();
-						long bv = b.getValue() == null ? 0 : b.getValue();
+						long[] aTotals = a.getValue(), bTotals = b.getValue();
+						long av = aTotals == null ? 0 : aTotals[0];
+						long bv = bTotals == null ? 0 : bTotals[0];
 						if (av == bv) {
 							String ak = a.getKey() == null ? "" : a.getKey();
 							String bk = b.getKey() == null ? "" : b.getKey();
@@ -202,21 +219,24 @@ public class BinaryMapIndexReaderStats {
 						return av < bv ? 1 : -1;
 					});
 
-					String bestSuffix = "";
-					long bestTotal = 0;
-					String afterBestSuffix = "";
-					long afterBestTotal = 0;
+					String bestKey = "", afterBestKey = "";
+					long bestTime = 0, bestCount = 0;
+					long afterBestTime = 0, afterBestCount = 0;
 					if (!suffixEntries.isEmpty()) {
-						Map.Entry<String, Long> first = suffixEntries.get(0);
-						bestSuffix = first.getKey();
-						bestTotal = first.getValue() == null ? 0 : first.getValue();
+						Map.Entry<String, long[]> first = suffixEntries.get(0);
+						bestKey = first.getKey();
+						long[] firstTotals = first.getValue();
+						bestTime = firstTotals == null ? 0 : firstTotals[0];
+						bestCount = firstTotals == null ? 0 : firstTotals[1];
 						if (suffixEntries.size() > 1) {
-							Map.Entry<String, Long> second = suffixEntries.get(1);
-							afterBestSuffix = second.getKey();
-							afterBestTotal = second.getValue() == null ? 0 : second.getValue();
+							Map.Entry<String, long[]> second = suffixEntries.get(1);
+							afterBestKey = second.getKey();
+							long[] secondTotals = second.getValue();
+							afterBestTime = secondTotals == null ? 0 : secondTotals[0];
+							afterBestCount = secondTotals == null ? 0 : secondTotals[1];
 						}
 					}
-					summary.updateMaxMinSub(bestSuffix, bestTotal, afterBestSuffix, afterBestTotal);
+					summary.updateSubs(bestKey, bestTime, bestCount, afterBestKey, afterBestTime, afterBestCount);
 				}
 				result.put(op, summary);
 			}
@@ -225,18 +245,19 @@ public class BinaryMapIndexReaderStats {
 			return result;
 		}
 
-		public long beginSubSearchStats() {
+		public long beginSubSearchStats(int size) {
 			subStart = System.nanoTime();
+			subSize = size;
 			return subStart;
 		}
 
-		public void endSubSearchStats(long statReq, SubOp op, String obf) {
+		public void endSubSearchStats(long statReq, SubOp op, String obf, int size) {
 			if (statReq != subStart) {
 				System.err.println("ERROR: in sub search stats counting to fix ! " + statReq + " != " + subStart);
 			}
 			long timeCall = (System.nanoTime() - statReq);
 			String key = op.name() + "|" + obf;
-			subTimings.computeIfAbsent(key, k -> new TimingSummary()).add(timeCall);
+			subTimings.computeIfAbsent(key, k -> new TimingSummary()).add(timeCall, size - subSize);
 		}
 
 		@Override
