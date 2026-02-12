@@ -809,10 +809,10 @@ public class RouteResultPreparation {
 	}
 
 	protected void calculateStatistics(List<RouteSegmentResult> result) {
-		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render1.xml");
+		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
 		final Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
 		try {
-			InputStream pis = RenderingRulesStorage.class.getResourceAsStream("default.render1.xml");
+			InputStream pis = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
 			try {
 				XmlPullParser parser = PlatformUtil.newXMLPullParser();
 				parser.setInput(pis, "UTF-8");

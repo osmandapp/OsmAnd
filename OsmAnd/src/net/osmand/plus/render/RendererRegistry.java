@@ -39,7 +39,7 @@ public class RendererRegistry {
 	private static final Log log = PlatformUtil.getLog(RendererRegistry.class);
 
 	public static final String DEFAULT_RENDER = "OsmAnd";
-	public static final String DEFAULT_RENDER_FILE_PATH = "default.render1.xml";
+	public static final String DEFAULT_RENDER_FILE_PATH = "default.render.xml";
 	public static final String TOURING_VIEW = "Touring view (contrast and details)";
 	public static final String WINTER_SKI_RENDER = "Winter and ski";
 	public static final String NAUTICAL_RENDER = "Nautical";
@@ -58,7 +58,7 @@ public class RendererRegistry {
 	public static final String OSMASSISTANT_RENDER = "OSM Assistant";
 	public static final String PUBLICTRANSPORTROUTES_RENDER = "Public transport routes";
 
-	public static boolean IGNORE_CACHED_STYLES = true; // enable to overwrite RENDERERS_DIR styles (debug)
+	public static boolean IGNORE_CACHED_STYLES = false; // enable to overwrite RENDERERS_DIR styles (debug)
 
 	private final OsmandApplication app;
 
