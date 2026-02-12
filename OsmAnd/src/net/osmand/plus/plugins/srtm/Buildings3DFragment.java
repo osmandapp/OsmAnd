@@ -141,18 +141,19 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 			onDetailsLevelChanged(low, false);
 			return true;
 		});
+		low.setContentDescription(app.getString(R.string.building_3d_low_details_content_desc));
 
 		IconToggleButton.IconRadioItem high = new IconToggleButton.IconRadioItem(R.drawable.ic_action_3d_buildings_level_of_detail_2);
 		high.setOnClickListener((radioItem, v) -> {
 			onDetailsLevelChanged(high, true);
 			return true;
 		});
+		high.setContentDescription(app.getString(R.string.building_3d_high_details_content_desc));
 
 		LinearLayout container = view.findViewById(R.id.custom_radio_buttons);
 		detailsLevelToggleButton = new IconToggleButton(app, container, nightMode);
 		detailsLevelToggleButton.setItems(low, high);
 		detailsLevelToggleButton.setSelectedItem(plugin.BUILDINGS_3D_DETAIL_LEVEL.get() ? high : low);
-		//todo set content description
 	}
 
 	private void setupViewDistanceToggleButtons(@NonNull View view) {
@@ -162,12 +163,14 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 			onViewDistanceChanged(low, 1);
 			return true;
 		});
+		low.setContentDescription(app.getString(R.string.building_3d_near_distance_content_desc));
 
 		IconToggleButton.IconRadioItem high = new IconToggleButton.IconRadioItem(R.drawable.ic_action_3d_buildings_level_of_detail_2);
 		high.setOnClickListener((radioItem, v) -> {
 			onViewDistanceChanged(high, 2);
 			return true;
 		});
+		high.setContentDescription(app.getString(R.string.building_3d_far_distance_content_desc));
 
 		LinearLayout container = view.findViewById(R.id.custom_radio_buttons);
 		viewDistanceToggleButton = new IconToggleButton(app, container, nightMode);
