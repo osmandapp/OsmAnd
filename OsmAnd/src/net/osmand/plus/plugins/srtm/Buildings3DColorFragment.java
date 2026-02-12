@@ -224,6 +224,7 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 			updateDayNightSelection();
 			return true;
 		});
+		day.setContentDescription(app.getString(R.string.building_3d_day_color_content_desc));
 
 		TextToggleButton.TextRadioItem night = new TextToggleButton.TextRadioItem(app.getString(R.string.daynight_mode_night));
 		night.setOnClickListener((radioItem, v) -> {
@@ -233,6 +234,7 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 			updateDayNightSelection();
 			return true;
 		});
+		night.setContentDescription(app.getString(R.string.building_3d_night_color_content_desc));
 
 		LinearLayout container = customColorViewContainer.findViewById(R.id.custom_radio_buttons);
 		dayNightToggleButton = new TextToggleButton(app, container, nightMode);
