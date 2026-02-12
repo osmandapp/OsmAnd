@@ -32,6 +32,8 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.SearchUnit;
+import net.osmand.search.core.SearchUnitProvider;
 import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -43,6 +45,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -212,6 +215,18 @@ public class SearchUICore {
 				LOG.info("Search results added. Current results=" + this.searchResults.size());
 			}
 			return this;
+		}
+		
+		public void sortBySearchUnitPriority() {
+			SearchUnitProvider provider = new SearchUnitProvider(phrase);
+			for (SearchResult result : searchResults) {
+				provider.setSearchResult(result);
+			}
+			searchResults.clear();
+			Collection<SearchUnit> units = provider.getSearchUnits();
+			for (SearchUnit unit : units) {
+				searchResults.addAll(unit.getSearchResults());
+			}
 		}
 
 		public boolean hasSearchResults() {
@@ -763,6 +778,7 @@ public class SearchUICore {
 							LOG.info("Processing search results <" + phrase + ">");
 						}
 						collection.addSearchResults(rm.getRequestResults(), true, true);
+						collection.sortBySearchUnitPriority();
 						if (debugMode) {
 							LOG.info("Finishing search <" + phrase + "> Results=" + rm.getRequestResults().size());
 						}
@@ -908,6 +924,7 @@ public class SearchUICore {
 		private SearchPhrase phrase;
 		private List<MapObject> exportedObjects;
 		private List<City> exportedCities;
+		private final SearchUnitProvider searchUnitProvider;
 
 		public SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
 								   AtomicInteger requestNumber, int totalLimit) {
@@ -916,6 +933,7 @@ public class SearchUICore {
 			this.request = request;
 			this.requestNumber = requestNumber;
 			this.totalLimit = totalLimit;
+			this.searchUnitProvider = new SearchUnitProvider(phrase);
 		}
 
 		public SearchResult setParentSearchResult(SearchResult parentSearchResult) {
@@ -971,6 +989,7 @@ public class SearchUICore {
 		}
 
 		public void apiSearchRegionFinished(SearchCoreAPI api, BinaryMapIndexReader region, SearchPhrase phrase) {
+			searchUnitProvider.calculatePriority(region);
 			if (matcher != null) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_API_REGION_FINISHED;
@@ -1076,7 +1095,11 @@ public class SearchUICore {
 		public JSONObject createTestJSON(SearchResultCollection searchResult) {
 			return SearchUICore.createTestJSON(searchResult, exportedObjects, exportedCities);
 		}
-	}
+
+        public SearchUnitProvider getSearchUnitProvider() {
+            return searchUnitProvider;
+        }
+    }
 
 	public static JSONObject createTestJSON(SearchResultCollection searchResult, List<MapObject> exportedObjects, List<City> exportedCities) {
 		if (searchResult == null)
