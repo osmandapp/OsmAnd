@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="free_custom_color_description">Customize 3D buildings with any color. Perfect for matching a map theme or improving contrast.</string>
 	<string name="buildings_3d_use_map_style_color_description">Use map style (%s) default color.</string>
 	<string name="buildings_3d_visibility_description">Adjust the opacity of 3D structures on the map.</string>
 	<string name="level_of_details">Level of detail</string>

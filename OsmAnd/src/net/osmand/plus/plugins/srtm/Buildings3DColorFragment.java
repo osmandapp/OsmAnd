@@ -18,9 +18,12 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ColorCardController;
@@ -47,6 +50,8 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 	private TextView colorTypeTv;
 	private View customColorViewContainer;
 	private View mapStyleColorViewContainer;
+	private View freeCustomColorContainer;
+	private View paidCustomColorContainer;
 	private TextToggleButton dayNightToggleButton;
 
 	private ColorCardController colorCardController;
@@ -209,6 +214,7 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 
 		customColorViewContainer = view.findViewById(R.id.custom_color_selection);
 		mapStyleColorViewContainer = view.findViewById(R.id.map_style_color_selection);
+		setupBillingCard(view);
 
 		TextToggleButton.TextRadioItem day = new TextToggleButton.TextRadioItem(app.getString(R.string.daynight_mode_day));
 		day.setOnClickListener((radioItem, v) -> {
@@ -235,6 +241,14 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 
 		updateDayNightSelection();
 		updateColorType();
+	}
+
+	private void setupBillingCard(@NonNull View view) {
+		freeCustomColorContainer = view.findViewById(R.id.free_view);
+		paidCustomColorContainer = view.findViewById(R.id.paid_view);
+		freeCustomColorContainer.findViewById(R.id.get_btn_container).setOnClickListener((v)->{
+			ChoosePlanFragment.showInstance(requireMapActivity(), OsmAndFeature.TERRAIN);
+		});
 	}
 
 	private void updateDayNightSelection() {
@@ -270,6 +284,10 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 		colorTypeTv.setText(colorType.getLabelId());
 		AndroidUiHelper.updateVisibility(customColorViewContainer, colorType == Buildings3DColorType.CUSTOM);
 		AndroidUiHelper.updateVisibility(mapStyleColorViewContainer, colorType != Buildings3DColorType.CUSTOM);
+
+		boolean paidVersion = Version.isPaidVersion(app);
+		AndroidUiHelper.updateVisibility(freeCustomColorContainer, !paidVersion);
+		AndroidUiHelper.updateVisibility(paidCustomColorContainer, paidVersion);
 	}
 
 	@NonNull
