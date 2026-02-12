@@ -18,7 +18,7 @@ public interface SearchCoreAPI {
 
 	}
 	
-	public Collection<SearchCoreAPIUnit> getSearchUnits();
+	public Collection<SearchCoreAPIUnit> getSearchUnits(SearchPhrase p) throws IOException;
 
 	/**
 	 * @param phrase

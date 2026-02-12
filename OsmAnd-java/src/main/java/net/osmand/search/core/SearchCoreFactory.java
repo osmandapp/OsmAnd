@@ -136,7 +136,7 @@ public class SearchCoreFactory {
 		}
 		
 		@Override
-		public Collection<SearchCoreAPIUnit> getSearchUnits() {
+		public Collection<SearchCoreAPIUnit> getSearchUnits(SearchPhrase phrase) throws IOException {
 			final SearchBaseAPI thisObj = this;
 			return Collections.singleton(new SearchCoreAPIUnit() {
 
@@ -408,65 +408,55 @@ public class SearchCoreFactory {
 			return phrase.getNextRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
 		}
 
+
+		
 		@Override
-		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
+		public Collection<SearchCoreAPIUnit> getSearchUnits(SearchPhrase phrase) throws IOException {
 			if (!phrase.isUnknownSearchWordPresent() && !phrase.isEmptyQueryAllowed()) {
-				return false;
+				return Collections.emptyList();
 			}
+			
 			// phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE) || phrase.isLastWord(ObjectType.REGION)
 			if (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.BOUNDARY, ObjectType.REGION)
 					|| phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE)
 					|| phrase.getRadiusLevel() >= 2) {
-				initAndSearchCities(phrase, resultMatcher);
-				// not publish results (let it sort)
-				// resultMatcher.apiSearchFinished(this, phrase);
-				searchByName(phrase, resultMatcher);
-			}
-			return true;
-		}
+				List<SearchCoreAPIUnit> units = new ArrayList<>();
+				QuadRect bbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
+				Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes(bbox, SearchPhraseDataType.ADDRESS);
+				initCitiesCache(phrase, offlineIndexes);
+				SearchCoreAPIUnit unitFastSearchByCityName = new SearchCoreAPIUnit() {
 
-		private void initAndSearchCities(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			QuadRect bbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
-			Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes(bbox, SearchPhraseDataType.ADDRESS);
-			while (offlineIndexes.hasNext()) {
-				BinaryMapIndexReader r = offlineIndexes.next();
-				if (!townCitiesInit.contains(r.getRegionName())) {
-					List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE, null, phrase.getSettings().getStat());
-					townCitiesInit.add(r.getRegionName());
-					for (City c  : l) {
-						if (phrase.getSettings().isExportObjects()) {
-							resultMatcher.exportCity(phrase, c);
-						}
-						c.setReferenceFile(r);
-						LatLon cl = c.getLocation();
-						
-						int y = MapUtils.get31TileNumberY(cl.getLatitude());
-						int x = MapUtils.get31TileNumberX(cl.getLongitude());
-						QuadRect qr = new QuadRect(x, y, x, y);
-						int[] bbox31 = c.getBbox31();
-						if (bbox31 != null) {
-							qr = new QuadRect(bbox31[0], bbox31[1], bbox31[2], bbox31[3]);
-						}
-						townCitiesQR.insert(c, qr);
+					@Override
+					public int getSearchPriority(SearchPhrase p) {
+						return 0;
 					}
-					l = r.getCities(null, CityBlocks.BOUNDARY_TYPE, null, phrase.getSettings().getStat());
-					for (City c  : l) {
-						if (phrase.getSettings().isExportObjects()) {
-							resultMatcher.exportCity(phrase, c);
-						}
-						c.setReferenceFile(r);
-						LatLon cl = c.getLocation();
-						int y = MapUtils.get31TileNumberY(cl.getLatitude());
-						int x = MapUtils.get31TileNumberX(cl.getLongitude());
-						QuadRect qr = new QuadRect(x, y, x, y);
-						int[] bbox31 = c.getBbox31();
-						if (bbox31 != null) {
-							qr = new QuadRect(bbox31[0], bbox31[1], bbox31[2], bbox31[3]);
-						}
-						boundariesQR.insert(c, qr);
+
+					@Override
+					public BinaryMapIndexReader getRegion() {
+						return null;
 					}
-				}
+
+					@Override
+					public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+						// TODO results should be mixed with by unit or not ?
+						// not publish results (let it sort)
+						// resultMatcher.apiSearchFinished(this, phrase);
+						searchCitiesFromCache(phrase, bbox, resultMatcher);
+						return true;
+					}
+					
+				};
+				units.add(unitFastSearchByCityName);
+				searchByNameGetUnits(phrase, units);
+				return units;
 			}
+			return super.getSearchUnits(phrase);
+		}
+		
+		
+	
+
+		private void searchCitiesFromCache(final SearchPhrase phrase, QuadRect bbox, final SearchResultMatcher resultMatcher) throws IOException {
 			if (phrase.isNoSelectedType() && bbox != null
 					&& (phrase.isUnknownSearchWordPresent() || phrase.isEmptyQueryAllowed())
 					&& phrase.isSearchTypeAllowed(ObjectType.CITY)) {
@@ -475,6 +465,9 @@ public class SearchCoreFactory {
 				resArray = townCitiesQR.queryInBox(bbox, resArray);
 				int limit = 0;
 				for (City c : resArray) {
+					if (phrase.getSettings().isExportObjects()) {
+						resultMatcher.exportCity(phrase, c);
+					}
 					SearchResult res = new SearchResult(phrase);
 					res.object = c;
 					res.file = (BinaryMapIndexReader) c.getReferenceFile();
@@ -504,132 +497,62 @@ public class SearchCoreFactory {
 				}
 			}
 		}
+
+		private void initCitiesCache(final SearchPhrase phrase, Iterator<BinaryMapIndexReader> offlineIndexes) throws IOException {
+			while (offlineIndexes.hasNext()) {
+				BinaryMapIndexReader r = offlineIndexes.next();
+				if (!townCitiesInit.contains(r.getRegionName())) {
+					List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE, null, phrase.getSettings().getStat());
+					townCitiesInit.add(r.getRegionName());
+					for (City c  : l) {
+						c.setReferenceFile(r);
+						LatLon cl = c.getLocation();
+						
+						int y = MapUtils.get31TileNumberY(cl.getLatitude());
+						int x = MapUtils.get31TileNumberX(cl.getLongitude());
+						QuadRect qr = new QuadRect(x, y, x, y);
+						int[] bbox31 = c.getBbox31();
+						if (bbox31 != null) {
+							qr = new QuadRect(bbox31[0], bbox31[1], bbox31[2], bbox31[3]);
+						}
+						townCitiesQR.insert(c, qr);
+					}
+					l = r.getCities(null, CityBlocks.BOUNDARY_TYPE, null, phrase.getSettings().getStat());
+					for (City c  : l) {
+						c.setReferenceFile(r);
+						LatLon cl = c.getLocation();
+						int y = MapUtils.get31TileNumberY(cl.getLatitude());
+						int x = MapUtils.get31TileNumberX(cl.getLongitude());
+						QuadRect qr = new QuadRect(x, y, x, y);
+						int[] bbox31 = c.getBbox31();
+						if (bbox31 != null) {
+							qr = new QuadRect(bbox31[0], bbox31[1], bbox31[2], bbox31[3]);
+						}
+						boundariesQR.insert(c, qr);
+					}
+				}
+			}
+		}
 		
 
-		private void searchByName(final SearchPhrase phrase, final SearchResultMatcher resultMatcher)
-				throws IOException {
+		private void searchByNameGetUnits(final SearchPhrase phrase, final List<SearchCoreAPIUnit> units) throws IOException {
 			if (phrase.getRadiusLevel() > 1 || phrase.getUnknownWordToSearch().length() > 3 ||
 					phrase.hasMoreThanOneUnknownSearchWord()|| phrase.isSearchTypeAllowed(ObjectType.POSTCODE, true)) {
 				final boolean locSpecified = phrase.getLastTokenLocation() != null;
 				LatLon loc = phrase.getLastTokenLocation();
-				final List<SearchResult> immediateResults = new ArrayList<>();
-//				final QuadRect streetBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
-				final QuadRect postcodeBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
-				final QuadRect villagesBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 3);
-				final QuadRect cityBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5); // covered by separate radius before
-				final int priority = phrase.isNoSelectedType() ?
-						SEARCH_ADDRESS_BY_NAME_PRIORITY : SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2;
+				// TODO looks ugly refrerencing
 				final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
-
-				ResultMatcher<MapObject> rm = new ResultMatcher<MapObject>() {
-					int limit = 0;
-					@Override
-					public boolean publish(MapObject object) {
-						if (isCancelled()) {
-							return false;
-						}
-						SearchResult sr = new SearchResult(phrase);
-						sr.object = object;
-						sr.file = currentFile[0];
-						sr.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-						sr.otherNames = object.getOtherNames(true);
-						sr.localeRelatedObjectName = sr.file.getRegionName();
-						sr.relatedObject = sr.file;
-						sr.location = object.getLocation();
-						sr.priorityDistance = 1;
-						sr.priority = priority;
-						int y = MapUtils.get31TileNumberY(object.getLocation().getLatitude());
-						int x = MapUtils.get31TileNumberX(object.getLocation().getLongitude());
-						List<City> closestCities = null;
-						if (object instanceof Street) {
-							// remove limitation by location
-							if (  //(locSpecified && !streetBbox.contains(x, y, x, y)) || 
-								!phrase.isSearchTypeAllowed(ObjectType.STREET)) {
-								return false;
-							}
-							if (object.getName().startsWith("<")) {
-								return false;
-							}
-							sr.objectType = ObjectType.STREET;
-							sr.localeRelatedObjectName = ((Street)object).getCity().getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-							sr.relatedObject = ((Street)object).getCity();
-						} else if (object instanceof City && !isLastWordCityGroup(phrase)) {
-							CityType type = ((City)object).getType();
-							if (type == CityType.CITY || type == CityType.TOWN) {
-								if (phrase.isNoSelectedType()) {
-									// ignore city/town
-									return false;
-								}
-								if ((locSpecified && !cityBbox.contains(x, y, x, y))
-										|| !phrase.isSearchTypeAllowed(ObjectType.CITY)) {
-									return false;
-								}
-								sr.objectType = ObjectType.CITY;
-								sr.priorityDistance = 0.1;
-							} else if (type == CityType.POSTCODE) {
-								if ((locSpecified && !postcodeBbox.contains(x, y, x, y))
-										|| !phrase.isSearchTypeAllowed(ObjectType.POSTCODE)) {
-									return false;
-								}
-								sr.objectType = ObjectType.POSTCODE;
-								sr.priorityDistance = 0;
-							} else if (type == CityType.BOUNDARY) {
-								if ((locSpecified && !villagesBbox.contains(x, y, x, y))
-										|| !phrase.isSearchTypeAllowed(ObjectType.BOUNDARY)) {
-									return false;
-								}
-								sr.objectType = ObjectType.BOUNDARY;
-								sr.priorityDistance = 0;
-								phrase.countUnknownWordsMatchMainResult(sr);
-							} else if (type == CityType.HAMLET || type == CityType.SUBURB || 
-									type == CityType.VILLAGE) {
-								if ((locSpecified && !villagesBbox.contains(x, y, x, y))
-										|| !phrase.isSearchTypeAllowed(ObjectType.VILLAGE)) {
-									return false;
-								}
-								City closestCity = null;
-								if (closestCities == null) {
-									closestCities = townCitiesQR.queryInBox(villagesBbox, new ArrayList<City>());
-								}
-								double minDist = -1;
-								double pDist = -1;
-								for (City city : closestCities) {
-									double ll = MapUtils.getDistance(city.getLocation(), object.getLocation());
-									double pd = city.getType() == CityType.CITY ? ll : ll * 10;
-									if (minDist == -1 || pd < pDist) {
-										closestCity = city;
-										minDist = ll;
-										pDist = pd;
-									}
-								}
-								if (closestCity != null) {
-									sr.localeRelatedObjectName = closestCity.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-									sr.relatedObject = closestCity;
-									sr.distRelatedObjectName = minDist;
-								}
-								sr.objectType = ObjectType.VILLAGE;
-							}
-						} else {
-							return false;
-						}
-						limit ++;
-						immediateResults.add(sr);
-						return phrase.getSettings().getStat() != null;
-					}
-
-					@Override
-					public boolean isCancelled() {
-						return limit > LIMIT * phrase.getRadiusLevel() ||
-								resultMatcher.isCancelled();
-					}
-				};
-
+				final SearchResultMatcher[] finalResultMatcher = new SearchResultMatcher[1];
+				final List<SearchResult> immediateResults = new ArrayList<>();
+				
+				
+				ResultMatcher<MapObject> rm = getResultMatcherAddressByName(phrase, finalResultMatcher, currentFile, immediateResults);
 				ResultMatcher<MapObject> rawDataCollector = null;
 				if (phrase.getSettings().isExportObjects()) {
 					rawDataCollector = new ResultMatcher<MapObject>() {
 						@Override
 						public boolean publish(MapObject object) {
-							resultMatcher.exportObject(phrase, object);
+							finalResultMatcher[0].exportObject(phrase, object);
 							return true;
 						}
 
@@ -650,6 +573,7 @@ public class SearchCoreFactory {
 				SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
 						phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
 								: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+				req.setSearchStat(phrase.getSettings().getStat());
 				if (locSpecified) {
 					QuadRect rect;
 					if (lastWord != null && lastWord.getResult() != null && lastWord.getResult().object instanceof City c) {
@@ -676,79 +600,219 @@ public class SearchCoreFactory {
 				
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
 					BinaryMapIndexReader r = offlineIterator.next();
-					currentFile[0] = r;
-					immediateResults.clear();
-					req.setSearchStat(phrase.getSettings().getStat());
-
-					r.searchAddressDataByName(req);
-					for (SearchResult res : immediateResults) {
-						if (res.objectType == ObjectType.STREET) {
-							SearchResult newParentSearchResult = null;
-							if (res.parentSearchResult == null && resultMatcher.getParentSearchResult() == null &&
-									res.object instanceof Street && ((Street) res.object).getCity() != null) {
-								City ct = ((Street) res.object).getCity();
-								SearchResult cityResult = new SearchResult(phrase);
-								cityResult.object = ct;
-								cityResult.objectType = ObjectType.CITY;
-								cityResult.localeName = ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-								cityResult.otherNames = ct.getOtherNames(true);
-								cityResult.location = ct.getLocation();
-								cityResult.localeRelatedObjectName = res.file.getRegionName();
-								cityResult.file = res.file;
-								// include parent search result even if it is empty
-								// for street-city don't require exact matching
-								boolean match = matchAddressName(phrase, res, cityResult, true);
-								if (match) {
-									newParentSearchResult = cityResult;
-								} else {
-									resArray.clear();
-									QuadRect bbox = SearchPhrase.calculateBbox(1000, res.location);
-									resArray = boundariesQR.queryInBox(bbox, resArray);
-									for (City boundary : resArray) {
-										int[] bb = boundary.getBbox31();
-										if (bb == null) {
-											continue;
-										}
-										QuadRect boundBox = new QuadRect(bb[0], bb[1], bb[2], bb[3]);
-										if (!QuadRect.intersects(boundBox, bbox)) {
-											continue;
-										}
-										// cityResult.object = boundary; // keep city the same
-										cityResult.localeName = boundary.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-										cityResult.otherNames = boundary.getOtherNames(true);
-										// for another city require exact matching
-										if (matchAddressName(phrase, res, cityResult, true)) {
-											cityResult.object = boundary; 
-											cityResult.location = boundary.getLocation();
-											newParentSearchResult = cityResult;
-											break;
-										}
-									}
-								}
-								
-							}
-							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi, newParentSearchResult, true);
-						} else if (res.objectType == ObjectType.BOUNDARY ) {
-							// require exact matching to speed up
-							if (matchAddressName(phrase, null, res, true)) {
-								subSearchApiOrPublish(phrase, resultMatcher, res, this);
-							}
-						} else {
-							 
-							subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
-							// if subsearch by cityApi we could avoid calling subsearch by boundary 
-							// but it's tricky to check how good matching reuslts (case Hohlmaier 1 Breuningsweiler)
-							
-							// require exact matching to search street by name (not attached to city) 
-							if (matchAddressName(phrase, null, res, true)) {
-								subSearchApiOrPublish(phrase, resultMatcher, res, this);
-							}
+					units.add(new SearchCoreAPIUnit() {
+						
+						@Override
+						public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+							currentFile[0] = r;
+							immediateResults.clear();
+							finalResultMatcher[0] = resultMatcher;
+							searchAddressByNameByRegion(phrase, resultMatcher, immediateResults, req, r);
+							return true;
 						}
-					}
-					// TODO change to resultMatcher.apiSearchFinished(null, phrase) with subunit 
-//					resultMatcher.apiSearchRegionFinished(this, r, phrase);
+						
+						@Override
+						public int getSearchPriority(SearchPhrase p) {
+							return SearchAddressByNameAPI.this.getSearchPriority(phrase);
+						}
+						
+						@Override
+						public BinaryMapIndexReader getRegion() {
+							return r;
+						}
+					});
 				}
 			}
+		}
+
+		private void searchAddressByNameByRegion(final SearchPhrase phrase, final SearchResultMatcher resultMatcher, final List<SearchResult> immediateResults, 
+				SearchRequest<MapObject> req, BinaryMapIndexReader file) throws IOException {
+			file.searchAddressDataByName(req);
+			for (SearchResult res : immediateResults) {
+				if (res.objectType == ObjectType.STREET) {
+					SearchResult newParentSearchResult = null;
+					if (res.parentSearchResult == null && resultMatcher.getParentSearchResult() == null &&
+							res.object instanceof Street && ((Street) res.object).getCity() != null) {
+						City ct = ((Street) res.object).getCity();
+						SearchResult cityResult = new SearchResult(phrase);
+						cityResult.object = ct;
+						cityResult.objectType = ObjectType.CITY;
+						cityResult.localeName = ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+						cityResult.otherNames = ct.getOtherNames(true);
+						cityResult.location = ct.getLocation();
+						cityResult.localeRelatedObjectName = res.file.getRegionName();
+						cityResult.file = res.file;
+						// include parent search result even if it is empty
+						// for street-city don't require exact matching
+						boolean match = matchAddressName(phrase, res, cityResult, true);
+						if (match) {
+							newParentSearchResult = cityResult;
+						} else {
+							resArray.clear();
+							QuadRect bbox = SearchPhrase.calculateBbox(1000, res.location);
+							resArray = boundariesQR.queryInBox(bbox, resArray);
+							for (City boundary : resArray) {
+								int[] bb = boundary.getBbox31();
+								if (bb == null) {
+									continue;
+								}
+								QuadRect boundBox = new QuadRect(bb[0], bb[1], bb[2], bb[3]);
+								if (!QuadRect.intersects(boundBox, bbox)) {
+									continue;
+								}
+								// cityResult.object = boundary; // keep city the same
+								cityResult.localeName = boundary.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+								cityResult.otherNames = boundary.getOtherNames(true);
+								// for another city require exact matching
+								if (matchAddressName(phrase, res, cityResult, true)) {
+									cityResult.object = boundary; 
+									cityResult.location = boundary.getLocation();
+									newParentSearchResult = cityResult;
+									break;
+								}
+							}
+						}
+						
+					}
+					subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi, newParentSearchResult, true);
+				} else if (res.objectType == ObjectType.BOUNDARY ) {
+					// require exact matching to speed up
+					if (matchAddressName(phrase, null, res, true)) {
+						subSearchApiOrPublish(phrase, resultMatcher, res, this);
+					}
+				} else {
+					 
+					subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
+					// if subsearch by cityApi we could avoid calling subsearch by boundary 
+					// but it's tricky to check how good matching reuslts (case Hohlmaier 1 Breuningsweiler)
+					
+					// require exact matching to search street by name (not attached to city) 
+					if (matchAddressName(phrase, null, res, true)) {
+						subSearchApiOrPublish(phrase, resultMatcher, res, this);
+					}
+				}
+			}
+			// TODO change to resultMatcher.apiSearchFinished(null, phrase) with subunit 
+//					resultMatcher.apiSearchRegionFinished(this, r, phrase);
+		}
+
+		private ResultMatcher<MapObject> getResultMatcherAddressByName(final SearchPhrase phrase,
+				final SearchResultMatcher[] resultMatcher, final BinaryMapIndexReader[] currentFile, final List<SearchResult> immediateResults) {
+			final boolean locSpecified = phrase.getLastTokenLocation() != null;
+			ResultMatcher<MapObject> rm;
+			// final QuadRect streetBbox =
+			// phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
+			final QuadRect postcodeBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
+			final QuadRect villagesBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 3);
+			final QuadRect cityBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5); // covered by separate radius before
+			final int priority = phrase.isNoSelectedType() ? SEARCH_ADDRESS_BY_NAME_PRIORITY
+					: SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2;
+
+			rm = new ResultMatcher<MapObject>() {
+				int limit = 0;
+
+				@Override
+				public boolean publish(MapObject object) {
+					if (isCancelled()) {
+						return false;
+					}
+					SearchResult sr = new SearchResult(phrase);
+					sr.object = object;
+					sr.file = currentFile[0];
+					sr.localeName = object.getName(phrase.getSettings().getLang(),
+							phrase.getSettings().isTransliterate());
+					sr.otherNames = object.getOtherNames(true);
+					sr.localeRelatedObjectName = sr.file.getRegionName();
+					sr.relatedObject = sr.file;
+					sr.location = object.getLocation();
+					sr.priorityDistance = 1;
+					sr.priority = priority;
+					int y = MapUtils.get31TileNumberY(object.getLocation().getLatitude());
+					int x = MapUtils.get31TileNumberX(object.getLocation().getLongitude());
+					List<City> closestCities = null;
+					if (object instanceof Street) {
+						// remove limitation by location
+						if ( // (locSpecified && !streetBbox.contains(x, y, x, y)) ||
+						!phrase.isSearchTypeAllowed(ObjectType.STREET)) {
+							return false;
+						}
+						if (object.getName().startsWith("<")) {
+							return false;
+						}
+						sr.objectType = ObjectType.STREET;
+						sr.localeRelatedObjectName = ((Street) object).getCity().getName(phrase.getSettings().getLang(),
+								phrase.getSettings().isTransliterate());
+						sr.relatedObject = ((Street) object).getCity();
+					} else if (object instanceof City && !isLastWordCityGroup(phrase)) {
+						CityType type = ((City) object).getType();
+						if (type == CityType.CITY || type == CityType.TOWN) {
+							if (phrase.isNoSelectedType()) {
+								// ignore city/town
+								return false;
+							}
+							if ((locSpecified && !cityBbox.contains(x, y, x, y))
+									|| !phrase.isSearchTypeAllowed(ObjectType.CITY)) {
+								return false;
+							}
+							sr.objectType = ObjectType.CITY;
+							sr.priorityDistance = 0.1;
+						} else if (type == CityType.POSTCODE) {
+							if ((locSpecified && !postcodeBbox.contains(x, y, x, y))
+									|| !phrase.isSearchTypeAllowed(ObjectType.POSTCODE)) {
+								return false;
+							}
+							sr.objectType = ObjectType.POSTCODE;
+							sr.priorityDistance = 0;
+						} else if (type == CityType.BOUNDARY) {
+							if ((locSpecified && !villagesBbox.contains(x, y, x, y))
+									|| !phrase.isSearchTypeAllowed(ObjectType.BOUNDARY)) {
+								return false;
+							}
+							sr.objectType = ObjectType.BOUNDARY;
+							sr.priorityDistance = 0;
+							phrase.countUnknownWordsMatchMainResult(sr);
+						} else if (type == CityType.HAMLET || type == CityType.SUBURB || type == CityType.VILLAGE) {
+							if ((locSpecified && !villagesBbox.contains(x, y, x, y))
+									|| !phrase.isSearchTypeAllowed(ObjectType.VILLAGE)) {
+								return false;
+							}
+							City closestCity = null;
+							if (closestCities == null) {
+								closestCities = townCitiesQR.queryInBox(villagesBbox, new ArrayList<City>());
+							}
+							double minDist = -1;
+							double pDist = -1;
+							for (City city : closestCities) {
+								double ll = MapUtils.getDistance(city.getLocation(), object.getLocation());
+								double pd = city.getType() == CityType.CITY ? ll : ll * 10;
+								if (minDist == -1 || pd < pDist) {
+									closestCity = city;
+									minDist = ll;
+									pDist = pd;
+								}
+							}
+							if (closestCity != null) {
+								sr.localeRelatedObjectName = closestCity.getName(phrase.getSettings().getLang(),
+										phrase.getSettings().isTransliterate());
+								sr.relatedObject = closestCity;
+								sr.distRelatedObjectName = minDist;
+							}
+							sr.objectType = ObjectType.VILLAGE;
+						}
+					} else {
+						return false;
+					}
+					limit++;
+					immediateResults.add(sr);
+					return phrase.getSettings().getStat() != null;
+				}
+
+				@Override
+				public boolean isCancelled() {
+					return limit > LIMIT * phrase.getRadiusLevel() || resultMatcher[0].isCancelled();
+				}
+			};
+			return rm;
 		}
 		
 	}

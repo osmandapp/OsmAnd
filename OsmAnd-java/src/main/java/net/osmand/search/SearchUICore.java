@@ -506,7 +506,7 @@ public class SearchUICore {
 			preparePhrase(sphrase);
 			AtomicInteger ai = new AtomicInteger();
 			SearchResultMatcher rm = new SearchResultMatcher(matcher, sphrase, ai.get(), ai, totalLimit);
-			Collection<SearchCoreAPIUnit> searchUnits = api.getSearchUnits();
+			Collection<SearchCoreAPIUnit> searchUnits = api.getSearchUnits(sphrase);
 			for (SearchCoreAPIUnit unit : searchUnits) {
 				unit.search(sphrase, rm);
 			}
@@ -853,7 +853,12 @@ public class SearchUICore {
 		preparePhrase(phrase);
 		List<SearchCoreAPIUnit> lst = new ArrayList<>();
 		for(SearchCoreAPI api : apis ) {
-			lst.addAll(api.getSearchUnits()); 
+			try {
+				lst.addAll(api.getSearchUnits(phrase));
+			} catch (Exception e) {
+				e.printStackTrace();
+				LOG.error(e.getMessage(), e);
+			}
 		}
 		Collections.sort(lst, new Comparator<SearchCoreAPIUnit>() {
 
@@ -879,7 +884,7 @@ public class SearchUICore {
 				if (debugMode) {
 					LOG.info("API search done <" + phrase + "> API=<" + api + ">");
 				}
-			} catch (Throwable e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				LOG.error(e.getMessage(), e);
 			}
