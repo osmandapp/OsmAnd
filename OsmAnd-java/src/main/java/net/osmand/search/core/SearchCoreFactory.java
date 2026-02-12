@@ -101,7 +101,7 @@ public class SearchCoreFactory {
 	public static final int SEARCH_OLC_WITH_CITY_PRIORITY = 8;
 	public static final int SEARCH_OLC_WITH_CITY_TOTAL_LIMIT = 500;
 
-	public static abstract class SearchBaseAPI implements SearchCoreAPI {
+	public static class SearchBaseAPI implements SearchCoreAPI {
 
 		private ObjectType[] searchTypes;
 
@@ -114,6 +114,9 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean isSearchAvailable(SearchPhrase p) {
+			if (getSearchPriority(p) < 0) {
+				return false;
+			}
 			ObjectType[] typesToSearch = p.getSearchTypes();
 			ObjectType exclusiveSearchType = p.getExclusiveSearchType();
 			if (exclusiveSearchType != null) {
@@ -131,13 +134,33 @@ public class SearchCoreFactory {
 				return false;
 			}
 		}
-
+		
 		@Override
+		public Collection<SearchCoreAPIUnit> getSearchUnits() {
+			final SearchBaseAPI thisObj = this;
+			return Collections.singleton(new SearchCoreAPIUnit() {
+
+				@Override
+				public int getSearchPriority(SearchPhrase p) {
+					return thisObj.getSearchPriority(p);
+				}
+
+				@Override
+				public BinaryMapIndexReader getRegion() {
+					return null;
+				}
+
+				@Override
+				public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+					return thisObj.search(phrase, resultMatcher);
+				}
+			});
+		}
+
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			return true;
 		}
 
-		@Override
 		public int getSearchPriority(SearchPhrase p) {
 			return 1;
 		}
@@ -288,6 +311,7 @@ public class SearchCoreFactory {
 		public String toString() {
 			return getClass().getSimpleName();
 		}
+
 	}
 
 	public static class SearchRegionByNameAPI extends SearchBaseAPI {
@@ -359,7 +383,7 @@ public class SearchCoreFactory {
 			if (!p.isNoSelectedType() && p.getRadiusLevel() == 1) {
 				return -1;
 			}
-			if(p.isLastWord(ObjectType.POI) || p.isLastWord(ObjectType.POI_TYPE)) {
+			if (p.isLastWord(ObjectType.POI) || p.isLastWord(ObjectType.POI_TYPE)) {
 				return -1;
 			}
 			if (p.isNoSelectedType()) {
@@ -721,14 +745,15 @@ public class SearchCoreFactory {
 							}
 						}
 					}
-					resultMatcher.apiSearchRegionFinished(this, r, phrase);
+					// TODO change to resultMatcher.apiSearchFinished(null, phrase) with subunit 
+//					resultMatcher.apiSearchRegionFinished(this, r, phrase);
 				}
 			}
 		}
 		
 	}
 
-		public static class SearchAmenityByNameAPI extends SearchBaseAPI {
+	public static class SearchAmenityByNameAPI extends SearchBaseAPI {
 		private static final int LIMIT = 10000;
 		private static final int BBOX_RADIUS = 500 * 1000;
 		private static final int BBOX_RADIUS_INSIDE = 5600 * 1000; // 5600 is the minimum to pass test [14: hisar]
@@ -850,16 +875,15 @@ public class SearchCoreFactory {
 			reqUnlimited.setSearchStat(phrase.getSettings().getStat());
 
 			BinaryMapIndexReader fileRequest = phrase.getFileRequest();
-			if (fileRequest != null) {
-				fileRequest.searchPoiByName(req);
-				resultMatcher.apiSearchRegionFinished(this, fileRequest, phrase);
-			} else {
-				while (offlineIterator.hasNext()) {
-					BinaryMapIndexReader r = offlineIterator.next();
-					currentFile[0] = r;
-					r.searchPoiByName(r.isBasemap() ? reqUnlimited : req);
-					resultMatcher.apiSearchRegionFinished(this, r, phrase);
+			while (offlineIterator.hasNext()) {
+				BinaryMapIndexReader r = offlineIterator.next();
+				if (fileRequest != null && fileRequest != r) {
+					continue;
 				}
+				currentFile[0] = r;
+				r.searchPoiByName(r.isBasemap() ? reqUnlimited : req);
+				// TODO replace
+//					resultMatcher.apiSearchRegionFinished(this, r, phrase);
 			}
 			return true;
 		}
@@ -1464,7 +1488,8 @@ public class SearchCoreFactory {
 							(int) bbox.right, (int) bbox.top, (int) bbox.bottom, -1, poiTypeFilter, poiAdditionalFilter, rm);
 					req.setSearchStat(phrase.getSettings().getStat());
 					r.searchPoi(req);
-					resultMatcher.apiSearchRegionFinished(this, r, phrase);
+					// TODO replace
+//					resultMatcher.apiSearchRegionFinished(this, r, phrase);
 				}
 			}
 			return true;

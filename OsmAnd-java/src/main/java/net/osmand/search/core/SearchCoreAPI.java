@@ -1,18 +1,24 @@
 package net.osmand.search.core;
 
 import java.io.IOException;
+import java.util.Collection;
 
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 
 public interface SearchCoreAPI {
 
-	/**
-	 * @param p
-	 * @return order in which search core apis should be called, -1 means do not call
-	 */
-	public int getSearchPriority(SearchPhrase p);
+	public interface SearchCoreAPIUnit {
+		
+		public int getSearchPriority(SearchPhrase p);
 
-	public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException;
+		public BinaryMapIndexReader getRegion();
+		
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException;
+
+	}
+	
+	public Collection<SearchCoreAPIUnit> getSearchUnits();
 
 	/**
 	 * @param phrase

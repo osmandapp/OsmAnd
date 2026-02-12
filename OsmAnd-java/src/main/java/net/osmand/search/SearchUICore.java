@@ -21,6 +21,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
+import net.osmand.search.core.SearchCoreAPI.SearchCoreAPIUnit;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityByNameAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityByTypeAPI;
@@ -43,6 +44,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -504,7 +506,10 @@ public class SearchUICore {
 			preparePhrase(sphrase);
 			AtomicInteger ai = new AtomicInteger();
 			SearchResultMatcher rm = new SearchResultMatcher(matcher, sphrase, ai.get(), ai, totalLimit);
-			api.search(sphrase, rm);
+			Collection<SearchCoreAPIUnit> searchUnits = api.getSearchUnits();
+			for (SearchCoreAPIUnit unit : searchUnits) {
+				unit.search(sphrase, rm);
+			}
 
 			SearchResultCollection collection = new SearchResultCollection(sphrase);
 			if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
@@ -793,8 +798,7 @@ public class SearchUICore {
 
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 		for (SearchCoreAPI api : apis) {
-			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) >= 0
-					&& api.isSearchMoreAvailable(phrase)) {
+			if (api.isSearchAvailable(phrase) && api.isSearchMoreAvailable(phrase)) {
 				return true;
 			}
 		}
@@ -804,7 +808,7 @@ public class SearchUICore {
 	public int getMinimalSearchRadius(SearchPhrase phrase) {
 		int radius = Integer.MAX_VALUE;
 		for (SearchCoreAPI api : apis) {
-			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) != -1) {
+			if (api.isSearchAvailable(phrase)) {
 				int apiMinimalRadius = api.getMinimalSearchRadius(phrase);
 				if (apiMinimalRadius > 0 && apiMinimalRadius < radius) {
 					radius = apiMinimalRadius;
@@ -817,7 +821,7 @@ public class SearchUICore {
 	public int getNextSearchRadius(SearchPhrase phrase) {
 		int radius = Integer.MAX_VALUE;
 		for (SearchCoreAPI api : apis) {
-			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) != -1) {
+			if (api.isSearchAvailable(phrase)) {
 				int apiNextSearchRadius = api.getNextSearchRadius(phrase);
 				if (apiNextSearchRadius > 0 && apiNextSearchRadius < radius) {
 					radius = apiNextSearchRadius;
@@ -847,21 +851,21 @@ public class SearchUICore {
 
 	void searchInternal(final SearchPhrase phrase, SearchResultMatcher matcher) {
 		preparePhrase(phrase);
-		ArrayList<SearchCoreAPI> lst = new ArrayList<>(apis);
-		Collections.sort(lst, new Comparator<SearchCoreAPI>() {
+		List<SearchCoreAPIUnit> lst = new ArrayList<>();
+		for(SearchCoreAPI api : apis ) {
+			lst.addAll(api.getSearchUnits()); 
+		}
+		Collections.sort(lst, new Comparator<SearchCoreAPIUnit>() {
 
 			@Override
-			public int compare(SearchCoreAPI o1, SearchCoreAPI o2) {
+			public int compare(SearchCoreAPIUnit o1, SearchCoreAPIUnit o2) {
 				return Algorithms.compare(o1.getSearchPriority(phrase),
 						o2.getSearchPriority(phrase));
 			}
 		});
-		for (SearchCoreAPI api : lst) {
+		for (SearchCoreAPIUnit api : lst) {
 			if (matcher.isCancelled()) {
 				break;
-			}
-			if (!api.isSearchAvailable(phrase) || api.getSearchPriority(phrase) == -1) {
-				continue;
 			}
 			try {
 				if (debugMode) {
@@ -960,26 +964,16 @@ public class SearchUICore {
 			}
 		}
 
-		public void apiSearchFinished(SearchCoreAPI api, SearchPhrase phrase) {
+		public void apiSearchFinished(SearchCoreAPIUnit api, SearchPhrase phrase) {
 			if (matcher != null) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_API_FINISHED;
 				sr.object = api;
+				sr.file = api.getRegion();
 				sr.parentSearchResult = parentSearchResult;
 				matcher.publish(sr);
-			}
-		}
-
-		public void apiSearchRegionFinished(SearchCoreAPI api, BinaryMapIndexReader region, SearchPhrase phrase) {
-			if (matcher != null) {
-				SearchResult sr = new SearchResult(phrase);
-				sr.objectType = ObjectType.SEARCH_API_REGION_FINISHED;
-				sr.object = api;
-				sr.parentSearchResult = parentSearchResult;
-				sr.file = region;
-				matcher.publish(sr);
-				if (debugMode) {
-					LOG.info("API region search done <" + phrase + "> API=<" + api + "> Region=<" + region.getFile().getName() + ">");
+				if (debugMode && sr.file != null) {
+					LOG.info("API region search done <" + phrase + "> API=<" + api + "> Region=< " + sr.file.getRegionName() + ">");
 				}
 			}
 		}
