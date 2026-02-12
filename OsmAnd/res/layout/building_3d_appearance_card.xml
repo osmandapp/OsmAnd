@@ -12,6 +12,7 @@
 		layout="@layout/bottom_sheet_item_with_two_text" />
 
 	<LinearLayout
+		android:id="@+id/color_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal">
@@ -42,7 +43,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_marginEnd="@dimen/content_padding_double"
-			android:text="@string/shared_string_transparency"
+			android:text="@string/quick_action_map_style"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_list_text_size"
 			android:textStyle="normal" />

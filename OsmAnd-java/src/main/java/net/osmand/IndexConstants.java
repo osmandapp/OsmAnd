@@ -54,7 +54,7 @@ public class IndexConstants {
 
 	public static final String ROUTING_FILE_EXT = ".xml";
 
-	public static final String RENDERER_INDEX_EXT = ".render.xml";
+	public static final String RENDERER_INDEX_EXT = ".render1.xml";
 	public static final String ADDON_RENDERER_INDEX_EXT = ".addon" + RENDERER_INDEX_EXT;
 
 	public static final String GPX_FILE_EXT = ".gpx";

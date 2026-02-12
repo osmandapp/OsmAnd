@@ -113,6 +113,12 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		int progress = ProgressHelper.normalizeProgressPercent((int) (alpha * 100));
 		TextView visibilityTv = container.findViewById(R.id.opacity_value);
 		visibilityTv.setText(String.format("%s%%", progress));
+		TextView colorStyleTv = container.findViewById(R.id.color_scheme_name);
+		colorStyleTv.setText(Buildings3DColorType.Companion.getById(plugin.BUILDINGS_3D_COLOR_STYLE.get()).getLabelId());
+		container.findViewById(R.id.color_container).setOnClickListener((v) -> callMapActivity(mapActivity -> {
+			mapActivity.getDashboard().hideDashboard();
+			Buildings3DColorFragment.showInstance(mapActivity.getSupportFragmentManager());
+		}));
 		container.findViewById(R.id.opacity_container).setOnClickListener((v) -> callMapActivity(mapActivity -> {
 			mapActivity.getDashboard().hideDashboard();
 			Buildings3DVisibilityFragment.showInstance(mapActivity.getSupportFragmentManager());

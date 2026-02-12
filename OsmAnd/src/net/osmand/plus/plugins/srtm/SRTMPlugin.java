@@ -81,15 +81,21 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final float MIN_VERTICAL_EXAGGERATION = 1.0f;
 	public static final float MAX_VERTICAL_EXAGGERATION = 3.0f;
 	public static final float BUILDINGS_3D_ALPHA_DEF_VALUE = 0.5f;
+	public static final int BUILDINGS_3D_DEFAULT_COLOR = 0x666666;
 
 
 	public final CommonPreference<Boolean> TERRAIN;
 	public final CommonPreference<String> TERRAIN_MODE;
 	public final OsmandPreference<Boolean> ENABLE_3D_MAP_OBJECTS;
 	public final OsmandPreference<Boolean> BUILDINGS_3D_DETAIL_LEVEL;
+	public final OsmandPreference<Boolean> BUILDINGS_3D_ENABLE_COLORING;
+	public final OsmandPreference<Boolean> BUILDINGS_3D_coloredBuildings;
 	public final CommonPreference<Float> BUILDINGS_3D_ALPHA;
-	//	public final CommonPreference<Integer> BUILDINGS_3D_DETAIL_LEVEL;
 	public final CommonPreference<Integer> BUILDINGS_3D_VIEW_DISTANCE;
+	public final CommonPreference<Integer> BUILDINGS_3D_COLOR_STYLE;
+	public final CommonPreference<String> BUILDINGS_3D_COLOR;
+	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_NIGHT_COLOR;
+	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_DAY_COLOR;
 
 
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM;
@@ -115,8 +121,17 @@ public class SRTMPlugin extends OsmandPlugin {
 		ENABLE_3D_MAP_OBJECTS = registerBooleanPreference("enable_3d_map_objects", false).makeProfile().cache();
 		BUILDINGS_3D_ALPHA = registerFloatPreference("3d_buildings_alpha", BUILDINGS_3D_ALPHA_DEF_VALUE).makeProfile().cache();
 		BUILDINGS_3D_VIEW_DISTANCE = registerIntPreference("3d_buildings_view_distance", 1).makeProfile().cache();
+
+		BUILDINGS_3D_COLOR_STYLE = registerIntPreference("buildings_3d_color_style", 1).makeProfile().cache();
+		BUILDINGS_3D_CUSTOM_NIGHT_COLOR = registerIntPreference("buildings_3d_custom_night_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
+		BUILDINGS_3D_CUSTOM_DAY_COLOR = registerIntPreference("buildings_3d_custom_day_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
+
+
 		BUILDINGS_3D_DETAIL_LEVEL = settings.getCustomRenderBooleanProperty("show3DbuildingParts");
-//		BUILDINGS_3D_PARTS.set(true);
+		BUILDINGS_3D_coloredBuildings = settings.getCustomRenderBooleanProperty("coloredBuildings");
+		BUILDINGS_3D_ENABLE_COLORING = settings.getCustomRenderBooleanProperty("useDefaultBuildingColor");
+		BUILDINGS_3D_COLOR = settings.getCustomRenderProperty("base3DBuildingsColor");
+
 		TERRAIN = registerBooleanPreference("terrain_layer", true).makeProfile();
 		TerrainMode[] tms = TerrainMode.values(app);
 		TERRAIN_MODE = registerStringPreference("terrain_mode", tms.length == 0 ? "" : tms[0].getKeyName()).makeProfile();
@@ -809,5 +824,17 @@ public class SRTMPlugin extends OsmandPlugin {
 				rendererView.set3DBuildingsAlpha(alpha);
 			}
 		}
+	}
+
+	public void apply3DBuildingsColorStyle(Buildings3DColorType style) {
+		BUILDINGS_3D_ENABLE_COLORING.set(style == Buildings3DColorType.CUSTOM);
+		if (style == Buildings3DColorType.CUSTOM) {
+			boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.MAP);
+			apply3DBuildingsColor(nightMode ? BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get() : BUILDINGS_3D_CUSTOM_DAY_COLOR.get());
+		}
+	}
+
+	public void apply3DBuildingsColor(int color) {
+		BUILDINGS_3D_COLOR.set(Integer.toHexString(color));
 	}
 }

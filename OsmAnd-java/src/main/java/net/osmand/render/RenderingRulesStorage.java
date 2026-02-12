@@ -694,14 +694,14 @@ public class RenderingRulesStorage {
 		if (args.length > 0) {
 			styleFile = new File(args[0]);
 			styleName = styleFile.getName().substring(0, styleFile.getName().indexOf('.'));
-			defaultIS = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
+			defaultIS = RenderingRulesStorage.class.getResourceAsStream("default.render1.xml");
 		} else {
 			
 			File stylesDir = new File("../../resources/rendering_styles/");
 			System.out.println(stylesDir.getCanonicalFile().getAbsolutePath());
-			defaultIS = new FileInputStream(new File(stylesDir, "default.render.xml"));
+			defaultIS = new FileInputStream(new File(stylesDir, "default.render1.xml"));
 			styleName = "default";
-			styleFile = new File(stylesDir, styleName +".render.xml");
+			styleFile = new File(stylesDir, styleName +".render1.xml");
 		}
 		final Map<String, String> renderingConstants = readRenderingConstantsFromInputStream(defaultIS);
 		RenderingRulesStorage storage = new RenderingRulesStorage(styleName, renderingConstants);
@@ -711,7 +711,7 @@ public class RenderingRulesStorage {
 				RenderingRulesStorage depends = new RenderingRulesStorage(name, renderingConstants);
 //				depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name + ".render.xml"), ref);
 				depends.parseRulesFromXmlInputStream(
-						new FileInputStream(new File(styleFile.getParentFile(), name + ".render.xml")), ref, false);
+						new FileInputStream(new File(styleFile.getParentFile(), name + ".render1.xml")), ref, false);
 				return depends;
 			}
 		};
@@ -790,9 +790,9 @@ public class RenderingRulesStorage {
 	public static RenderingRulesStorage initWithStylesFromResources(String... resourceFileNames) {
 		try {
 			RenderingRulesStorage storage = null;
-			final String BASE_EXT = ".render.xml";
+			final String BASE_EXT = ".render1.xml";
 			final String ADDON_EXT = ".addon.render.xml";
-			final String[] defaultStyles = new String[]{"default.render.xml"};
+			final String[] defaultStyles = new String[]{"default.render1.xml"};
 
 			for (String resourceName : resourceFileNames != null ? resourceFileNames : defaultStyles) {
 				boolean addon = resourceName.endsWith(ADDON_EXT);

@@ -67,7 +67,7 @@ public class Buildings3DVisibilityFragment extends ConfigureMapOptionFragment {
 	@Nullable
 	@Override
 	protected String getToolbarTitle() {
-		return getString(R.string.gpx_visibility_txt);
+		return getString(R.string.enable_3d_objects);
 	}
 
 	@Override
