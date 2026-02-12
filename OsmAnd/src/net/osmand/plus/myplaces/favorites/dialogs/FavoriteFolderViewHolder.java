@@ -102,18 +102,20 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 		}
 		AndroidUiHelper.updateVisibility(divider, showDivider);
 		AndroidUiHelper.updateVisibility(fullDivider, showFullDivider);
+
+		bindSelectionMode(selectionMode, listener, group);
 	}
 
-	public void bindSelectionMode(boolean selectionMode, @NonNull FavoriteAdapterListener listener, @NonNull FavoriteGroup trackFolder) {
+	public void bindSelectionMode(boolean selectionMode, @NonNull FavoriteAdapterListener listener, @NonNull FavoriteGroup favoriteFolder) {
 		AndroidUiHelper.updateVisibility(checkboxContainer, selectionMode);
 		AndroidUiHelper.updateVisibility(menuButton, !selectionMode);
 
-		checkbox.setChecked(listener.isItemSelected(trackFolder));
+		checkbox.setChecked(listener.isItemSelected(favoriteFolder));
 	}
 
-	public void bindSelectionToggle(boolean selectionMode, @NonNull FavoriteAdapterListener listener, @NonNull FavoriteGroup trackFolder) {
+	public void bindSelectionToggle(boolean selectionMode, @NonNull FavoriteAdapterListener listener, @NonNull FavoriteGroup favoriteFolder) {
 		if (selectionMode) {
-			checkbox.setChecked(listener.isItemSelected(trackFolder));
+			checkbox.setChecked(listener.isItemSelected(favoriteFolder));
 		}
 	}
 }

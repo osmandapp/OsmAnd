@@ -31,7 +31,6 @@ import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
@@ -40,9 +39,12 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 		implements SortFavoriteListener, FragmentStateHolder, CategorySelectionListener {
+
+	protected static final String SELECTED_GROUPS_KEY = "selected_groups_key";
 
 	protected final ItemsSelectionHelper<FavoriteGroup> selectionHelper = new ItemsSelectionHelper<>();
 
@@ -51,6 +53,34 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 	@Override
 	protected int getLayoutId() {
 		return R.layout.favorite_folders_fragment;
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		selectionHelper.setAllItems(helper.getFavoriteGroups());
+
+		if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_GROUPS_KEY)) {
+			for (String groupName : Objects.requireNonNull(savedInstanceState.getStringArrayList(SELECTED_GROUPS_KEY))) {
+				FavoriteGroup group = helper.getGroup(groupName);
+				if (group != null) {
+					selectionHelper.onItemsSelected(Collections.singletonList(group), true);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		ArrayList<String> selectedGroups = new ArrayList<>();
+		for (FavoriteGroup group : selectionHelper.getSelectedItems()) {
+			selectedGroups.add(group.getName());
+		}
+		if (selectionMode) {
+			outState.putStringArrayList(SELECTED_GROUPS_KEY, selectedGroups);
+		}
 	}
 
 	private void setupSelectionHelper() {
@@ -253,6 +283,7 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 
 		if (selectionMode) {
 			ab.setBackgroundDrawable(new ColorDrawable(ColorUtilities.getToolbarActiveColor(app, isNightMode())));
+			ab.setTitle(String.valueOf(selectionHelper.getSelectedItems().size()));
 			AndroidUiHelper.setStatusBarColor(activity, ColorUtilities.getColor(app, ColorUtilities.getStatusBarActiveColorId(isNightMode())));
 		} else {
 			ab.setBackgroundDrawable(new ColorDrawable(ColorUtilities.getAppBarColor(app, isNightMode())));

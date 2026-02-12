@@ -5,6 +5,7 @@ import static net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.
 import static net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.TYPE_SORT_FAVORITE;
 
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -43,10 +44,10 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 		implements SortFavoriteListener, FragmentStateHolder, CategorySelectionListener, FavoriteActionListener, FavoritesListener {
 
 	public static final String TAG = FavoriteFolderFragment.class.getSimpleName();
+	protected static final String SELECTED_POINTS_KEY = "selected_points_key";
 
 	protected final ItemsSelectionHelper<FavouritePoint> selectionHelper = new ItemsSelectionHelper<>(true);
 
-	private FavoriteGroup selectedGroup;
 	private FavouritePoint selectedPoint;
 
 	@Override
@@ -55,11 +56,46 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 	}
 
 	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		if (selectedGroup == null) {
+			getParentFragmentManager().popBackStack();
+		}
+		selectionHelper.setAllItems(selectedGroup.getPoints());
+
+		if (savedInstanceState != null && selectionMode && savedInstanceState.containsKey(SELECTED_POINTS_KEY)) {
+			ArrayList<String> selectedPointsNames = savedInstanceState.getStringArrayList(SELECTED_POINTS_KEY);
+			if (selectedPointsNames == null) {
+				return;
+			}
+			for (FavouritePoint point : selectedGroup.getPoints()) {
+				if (selectedPointsNames.contains(point.getName())) {
+					selectionHelper.onItemsSelected(Collections.singletonList(point), true);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		ArrayList<String> selectedPoints = new ArrayList<>();
+		for (FavouritePoint point : selectionHelper.getSelectedItems()) {
+			selectedPoints.add(point.getName());
+		}
+		if (selectionMode) {
+			outState.putStringArrayList(SELECTED_POINTS_KEY, selectedPoints);
+		}
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
-		ActionBar ab = requireMyActivity().getSupportActionBar();
-		if (ab != null) {
-			ab.setTitle(selectedGroup.getDisplayName(app));
+		if (selectionMode) {
+			changeTitle(String.valueOf(selectionHelper.getSelectedItems().size()));
+		} else {
+			changeTitle(selectedGroup.getDisplayName(app));
 		}
 		helper.addListener(this);
 	}
@@ -176,6 +212,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 
 		if (selectionMode) {
 			ab.setBackgroundDrawable(new ColorDrawable(ColorUtilities.getToolbarActiveColor(app, isNightMode())));
+			ab.setTitle(String.valueOf(selectionHelper.getSelectedItems().size()));
 			AndroidUiHelper.setStatusBarColor(activity, ColorUtilities.getColor(app, ColorUtilities.getStatusBarActiveColorId(isNightMode())));
 		} else {
 			ab.setBackgroundDrawable(new ColorDrawable(ColorUtilities.getAppBarColor(app, isNightMode())));
@@ -275,24 +312,19 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 	@Override
 	protected void setSelectionMode(boolean mode) {
 		super.setSelectionMode(mode);
-		if (!selectionMode) {
-			ActionBar ab = requireMyActivity().getSupportActionBar();
-			if (ab != null) {
-				ab.setTitle(selectedGroup.getDisplayName(app));
-			}
-		}
+		changeTitle(selectionMode
+				? String.valueOf(selectionHelper.getSelectedItems().size())
+				: selectedGroup.getDisplayName(app));
 	}
 
 	@Override
 	public void onCategorySelected(PointsGroup pointsGroup) {
 		String category = FavoriteGroup.getCategoryFromPointGroup(app, pointsGroup);
 		if (selectionMode) {
-			for (FavouritePoint point : selectionHelper.getSelectedItems()) {
-				helper.editFavouriteName(point, point.getName(), category, point.getDescription(), point.getAddress());
-				selectionHelper.clearSelectedItems();
-				changeTitle(String.valueOf(selectionHelper.getSelectedItems().size()));
-				updateContent();
-			}
+			helper.editFavouritesGroup(new ArrayList<>(selectionHelper.getSelectedItems()), category);
+			selectionHelper.clearSelectedItems();
+			changeTitle(String.valueOf(selectionHelper.getSelectedItems().size()));
+			updateContent();
 		} else {
 			helper.editFavouriteName(selectedPoint, selectedPoint.getName(), category, selectedPoint.getDescription(), selectedPoint.getAddress());
 		}
@@ -305,7 +337,11 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 		updateContent();
 		if (selectionMode) {
 			selectionHelper.clearSelectedItems();
-			changeTitle(String.valueOf(selectionHelper.getSelectedItems().size()));
+			exitSelectionMode();
+			Fragment fragment = getTargetFragment();
+			if (fragment instanceof FavoriteFoldersFragment foldersFragment) {
+				foldersFragment.updateContent();
+			}
 		}
 	}
 
@@ -320,7 +356,6 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 			FavoriteFolderFragment fragment = new FavoriteFolderFragment();
 			fragment.setSelectedGroup(group);
 			fragment.setTargetFragment(target, 0);
-			fragment.setRetainInstance(true);
 
 			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)

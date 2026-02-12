@@ -187,8 +187,8 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			FavouritePoint favouritePoint = (FavouritePoint) items.get(position);
 			viewHolder.bindView(sortMode, favouritePoint, !lastItem, selectionMode, cache, listener);
 		} else if (holder instanceof FavoriteFolderViewHolder viewHolder) {
-			FavoriteGroup trackFolder = (FavoriteGroup) items.get(position);
-			viewHolder.bindView(trackFolder, !lastPinned && !lastItem, lastPinned && !lastItem, listener);
+			FavoriteGroup favFolder = (FavoriteGroup) items.get(position);
+			viewHolder.bindView(favFolder, !lastPinned && !lastItem, lastPinned && !lastItem, listener);
 		} else if (holder instanceof FavoriteStatsViewHolder viewHolder) {
 			FavoriteFolderAnalysis folderAnalysis = (FavoriteFolderAnalysis) items.get(position);
 			viewHolder.bindView(folderAnalysis);
