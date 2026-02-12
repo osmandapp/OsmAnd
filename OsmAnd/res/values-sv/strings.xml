@@ -1787,7 +1787,7 @@
     <string name="shared_string_email_address">E-postadress</string>
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Spara ändringar</string>
-    <string name="find_parking">Hitta en parkeringsplats</string>
+    <string name="find_parking">Hitta parkering</string>
     <string name="show_polygons">Visa polygoner</string>
     <string name="rendering_attr_showMtbRoutes_name">Mountainbike-leder</string>
     <string name="select_map_markers">Välj kartmarkörer</string>
@@ -1843,7 +1843,7 @@
     <string name="storage_directory_readonly_desc">Växlade till internminnet eftersom den valda datalagringsmappen är skrivskyddad. Välj en skrivbar lagringskatalog.</string>
     <string name="shared_string_move_up">Flytta ↑</string>
     <string name="shared_string_move_down">Flytta ↓</string>
-    <string name="finish_navigation">Avsluta navigeringen</string>
+    <string name="finish_navigation">Avsluta navigering</string>
     <string name="full_report">Fullständig rapport</string>
     <string name="open_street_map_login_and_pass">OSM-användarnamn och lösenord</string>
     <string name="no_map_markers_found">Lägg till kartmarkörer via kartan</string>
@@ -4598,7 +4598,7 @@
     <string name="quick_action_transport_descr">Knapp som visar eller döljer kollektivtrafik på kartan.</string>
     <string name="filter_tracks_count">Filter: %d</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Undvik miljözoner</string>
-    <string name="live_monitoring_adress_descr">Ange webbadressen enligt följande parameter-syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Ange webbadressen enligt följande parameter-syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="map_widget_group_glide_ratio">Glidtal</string>
     <string name="not_enough_contributions_descr">Minst %1$s ändringar över de senaste två månaderna %2$s krävs för tillgång till obegränsade kartuppdateringar varje timme.</string>
     <string name="routeInfo_horse_scale_description">Rendera stigar enligt svårighetsgrad för ridvägar</string>

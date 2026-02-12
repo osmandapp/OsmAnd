@@ -3525,7 +3525,7 @@
 \n• \"Available RAM\" 위젯 소개
 \n
 \n</string>
-    <string name="live_monitoring_adress_descr">Lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, Bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, Bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="max_altitude">산 최대 높이</string>
     <string name="map_widget_group_glide_desc">위젯은 목표에 대한 활공비 또는 현재 여행의 평균 활공비를 보여줍니다.</string>
     <string name="map_widget_group_glide_ratio">활공비</string>

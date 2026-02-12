@@ -25,7 +25,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="@dimen/map_button_shadow_margin"
-				android:layout_marginBottom="@dimen/map_alarm_bottom_margin_land"
+				android:layout_marginBottom="@dimen/map_alarm_bottom_margin"
 				android:orientation="horizontal">
 
 				<include

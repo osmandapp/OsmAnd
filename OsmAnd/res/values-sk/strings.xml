@@ -4749,7 +4749,7 @@
     <string name="select_layer">Zvoľte vrstvu</string>
     <string name="weather_download_error">Nepodarilo sa stiahnuť %1$s dlaždíc.</string>
     <string name="contact_us">Kontaktujte nás</string>
-    <string name="live_monitoring_adress_descr">Zadajte webovú adresu pomocou syntaxe parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Zadajte webovú adresu pomocou syntaxe parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_cache">Vyrovnávacia pamäť</string>
     <string name="widget_available_ram_desc">Zobrazí dostupnú pamäť pridelenú pre OsmAnd.</string>
     <string name="delete_map">Vymazať mapu</string>

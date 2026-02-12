@@ -4889,7 +4889,7 @@
     <string name="help_article_widgets_map_buttons_name">Botones del mapa</string>
     <string name="copy_build_version">Copiar la versión de la compilación</string>
     <string name="help_article_widgets_info_widgets_name">Widgets de información</string>
-    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="release_4_6">• Android Auto: Se agregó el modo 3D\n\n• Trazas: Se agregaron filtros y carpetas inteligentes para las trazas y se optimizó la memoria para archivos grandes\n\n• Se agregaron filas para los paneles de widget superior e inferior, con admisión a todos los widgets\n\n• Se mejoró la gestión local de recursos\n\n• Se agregó la capacidad de cambiar los atajos de teclado para dispositivos de entrada externos.\n\n• Se agregó el widget «Relación de planeo» y «Ubicación del Sol»\n\n• OsmAnd Cloud: Ahora podés acceder a archivos borrados\n\n• Se mejoró la coloración de trazas en modo pendiente con un nuevo gradiente simétrico\n\n• Se corrigieron los problemas de transparencia en la barra de estado\n\n• Se agregó el widget de temperatura en ANT+\n\n• Se agregó el widget «RAM disponible»</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="sensor_temperature_desc">Muestra la temperatura del sensor</string>
@@ -5848,4 +5848,21 @@
     <string name="use_separate_layouts">Usar diseños separados</string>
     <string name="map_screen_layout">Diseño de la pantalla del mapa</string>
     <string name="map_screen_layout_descr">Elegí si usar un diseño único para todas las orientaciones, o personalizar la orientación vertical y horizontal por separado.</string>
+    <string name="galactic_line">Línea galáctica</string>
+    <string name="meridian_line">Línea del meridiano</string>
+    <string name="equator_line">Línea del ecuador</string>
+    <string name="backup_deleted_all_data">Datos borrados.</string>
+    <string name="backup_deleting_all_data">Borrando datos…</string>
+    <string name="astro_rendering">Representación</string>
+    <string name="astro_configure_view">Configurar vista</string>
+    <string name="astro_visible_objects">Objetos visibles</string>
+    <string name="red_filter">Filtro rojo</string>
+    <string name="astro_directions">Direcciones</string>
+    <string name="astro_daily_path">Recorrido diario</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_deep_sky">Cielo profundo</string>
+    <string name="astro_star_clusters">Cúmulos estelares</string>
+    <string name="astro_nebulas">Nebulosas</string>
+    <string name="astro_solar_system">Sistema solar</string>
 </resources>

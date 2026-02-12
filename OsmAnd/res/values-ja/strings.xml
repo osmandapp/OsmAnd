@@ -4973,7 +4973,7 @@ POIの更新は利用できません</string>
     <string name="help_article_map_map_context_menu_name">マップコンテキストメニュー</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="filter_tracks_count">フィルター: %d</string>
-    <string name="live_monitoring_adress_descr">以下のパラメータを利用し、指定のWebアドレスへ送信できます: 緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}、eta={7}、etfa={8}、eda={9}、edfa={10}</string>
+    <string name="live_monitoring_adress_descr">以下のパラメータを利用し、指定のWebアドレスへ送信できます: 緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}、eta={7}、etfa={8}、eda={9}、edfa={10}, batproc={13}</string>
     <string name="help_article_map_legend_nautical_map_name">海図のスタイル</string>
     <string name="remove_widget_first">まずウィジェットを削除してください</string>
     <string name="help_article_map_track_context_menu_name">経路コンテキストメニュー</string>

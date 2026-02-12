@@ -3214,7 +3214,7 @@ public class OsmandSettings {
 	public String getRenderPropertyValue(@NonNull RenderingRuleProperty property) {
 		String attrName = property.getAttrName();
 		if (ELEVATION_UNITS_ATTR.equals(attrName)) {
-			boolean useFeet = METRIC_SYSTEM.get().shouldUseFeet();
+			boolean useFeet = ALTITUDE_METRIC.get().shouldUseFeet();
 			return useFeet ? ELEVATION_UNITS_FEET_VALUE : ELEVATION_UNITS_METERS_VALUE;
 		}
 		CommonPreference<String> preference = getCustomRenderProperty(attrName);

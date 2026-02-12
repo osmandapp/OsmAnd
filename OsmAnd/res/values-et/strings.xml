@@ -4175,7 +4175,7 @@
     <string name="sort_subfolders">Sordi alamkaustad</string>
     <string name="empty_screen_view_selected_weather_data">Valitud ilmateate andmete kuvamiseks kaardil lülita see valik sisse.</string>
     <string name="save_track_to_gpx_descrp">Logi GPX teekond liikumise ajal ja hiljem salvesta automaatselt.</string>
-    <string name="live_monitoring_adress_descr">Täpsustage veebiaadress parameetri süntaksiga: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Täpsustage veebiaadress parameetri süntaksiga: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="map_widget_altitude">Praeguse asukoha kõrgus</string>
     <string name="explore_weather_forecast">Tutvu ilmaennustusega.</string>
     <string name="offline_weather_forecast_desc">Sa saad järgmise 7 päeva ilmaennustuse alla laadida.</string>
