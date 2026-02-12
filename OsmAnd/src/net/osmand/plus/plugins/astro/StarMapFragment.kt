@@ -405,7 +405,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private fun applySideInsets() {
 		applySideWindowInsets(compassButton, true)
 		applySideWindowInsets(searchButton, true)
-		applySideWindowInsets(timeControlCard, true)
 		applySideWindowInsets(closeButton, false)
 		applySideWindowInsets(settingsButton, false)
 	}
@@ -469,8 +468,15 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun updateArModeUI(enabled: Boolean) {
-		if (enabled) arModeButton.setColorFilter(Color.BLUE)
-		else arModeButton.setColorFilter(ColorUtilities.getMapButtonIconColor(requireContext(), nightMode))
+		if (enabled) {
+			arModeButton.setColorFilter(Color.BLUE)
+			cameraButton.visibility = View.VISIBLE
+		} else {
+			arModeButton.setColorFilter(ColorUtilities.getMapButtonIconColor(requireContext(), nightMode))
+			if (cameraHelper.isCameraOverlayEnabled) cameraHelper.toggleCameraOverlay()
+			cameraButton.visibility = View.GONE
+			updateCameraUI(false)
+		}
 	}
 
 	private fun updateCameraUI(enabled: Boolean) {
@@ -729,7 +735,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.is2DMode = false
 			starView.setCenter(previousAzimuth, previousAltitude)
 			starView.setViewAngle(previousViewAngle)
-			cameraButton.visibility = View.VISIBLE
+			cameraButton.visibility = if (arModeHelper.isArModeEnabled) View.VISIBLE else View.GONE
 			arModeButton.visibility = View.VISIBLE
 		}
 		starView.invalidate()
