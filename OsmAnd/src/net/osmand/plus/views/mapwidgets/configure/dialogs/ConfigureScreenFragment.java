@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,10 +12,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
-import com.google.android.material.tabs.TabLayout.Tab;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import net.osmand.StateChangedListener;
 import net.osmand.plus.R;
@@ -27,7 +27,6 @@ import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment.AppModeChangedListener;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
-import net.osmand.plus.quickaction.MapButtonsHelper.QuickActionUpdatesListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -40,14 +39,11 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.buttons.CustomMapButtonsFragment;
 import net.osmand.plus.views.mapwidgets.configure.buttons.DefaultMapButtonsFragment;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureActionsCard;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureButtonsCard;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureOtherCard;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureWidgetsCard;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.MapScreenLayoutCard;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -56,27 +52,22 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigureScreenFragment extends BaseFullScreenFragment implements QuickActionUpdatesListener,
-		ConfirmationDialogListener, CopyAppModePrefsListener, AppModeChangedListener, CardListener {
+public class ConfigureScreenFragment extends BaseFullScreenFragment implements ConfirmationDialogListener,
+		CopyAppModePrefsListener, AppModeChangedListener, CardListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
 	public static final String SCREEN_LAYOUT_MODE = "screen_layout_mode";
 
 	private MapActivity mapActivity;
-	private MapWidgetRegistry widgetRegistry;
 	private WidgetsSettingsHelper widgetsSettingsHelper;
 
-	private final List<BaseCard> cards = new ArrayList<>();
 	private final ScreenLayoutMode[] layoutMode = new ScreenLayoutMode[1];
+
 	private TabLayout tabLayout;
-	private ScrollView scrollView;
-
-	private int currentScrollY;
-
-	private StateChangedListener<Integer> displayPositionListener;
-	private StateChangedListener<Boolean> distanceByTapListener;
-	private StateChangedListener<Boolean> speedometerListener;
+	private ViewPager2 viewPager;
+	private ConfigureScreenAdapter adapter;
+	private TabLayoutMediator tabLayoutMediator;
 	private StateChangedListener<Boolean> separateLayoutsListener;
 
 	@Override
@@ -101,7 +92,6 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mapActivity = (MapActivity) requireMyActivity();
-		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
 		widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, appMode);
 
 		if (savedInstanceState != null) {
@@ -109,6 +99,11 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 		} else {
 			setLayoutMode(ScreenLayoutMode.getDefault(mapActivity));
 		}
+	}
+
+	private void setLayoutMode(@Nullable ScreenLayoutMode layoutMode) {
+		this.layoutMode[0] = layoutMode;
+		widgetsSettingsHelper.setLayoutMode(layoutMode);
 	}
 
 	@Nullable
@@ -121,20 +116,9 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}
 		setupToolbar(view);
-		setupTabLayout(view);
-		setupCards(view);
-
-		scrollView = view.findViewById(R.id.scroll_view);
-		if (currentScrollY > 0) {
-			scrollView.scrollTo(0, currentScrollY);
-		}
+		setupViewPager(view);
 
 		return view;
-	}
-
-	private void setLayoutMode(@Nullable ScreenLayoutMode layoutMode) {
-		this.layoutMode[0] = layoutMode;
-		widgetsSettingsHelper.setLayoutMode(layoutMode);
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -216,86 +200,45 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 		PopUpMenu.show(displayData);
 	}
 
-	private void setupCards(@NonNull View view) {
-		ViewGroup container = view.findViewById(R.id.cards_container);
-		container.removeAllViews();
-		cards.clear();
-
-		if (!settings.MAP_SCREEN_LAYOUT_CARD_DISMISSED.get() && !settings.USE_SEPARATE_LAYOUTS.get()) {
-			inflate(R.layout.list_item_divider, container);
-			addCard(container, new MapScreenLayoutCard(mapActivity));
-		}
-
-		inflate(R.layout.list_item_divider, container);
-		addCard(container, new ConfigureWidgetsCard(mapActivity, layoutMode));
-		inflate(R.layout.list_item_divider, container);
-
-		addCard(container, new ConfigureButtonsCard(mapActivity));
-		inflate(R.layout.list_item_divider, container);
-
-		addCard(container, new ConfigureOtherCard(mapActivity));
-		inflate(R.layout.list_item_divider, container);
-
-		addCard(container, new ConfigureActionsCard(mapActivity));
-		inflate(R.layout.card_bottom_divider, container);
-	}
-
-	private void addCard(@NonNull ViewGroup container, @NonNull BaseCard card) {
-		cards.add(card);
-		card.setListener(this);
-		container.addView(card.build());
-	}
-
-	private void updateCards() {
-		for (BaseCard card : cards) {
-			card.update();
-		}
-	}
-
-	private void setupTabLayout(@NonNull View view) {
+	private void setupViewPager(@NonNull View view) {
 		tabLayout = view.findViewById(R.id.layout_tab_layout);
-		tabLayout.removeAllTabs();
+		viewPager = view.findViewById(R.id.view_pager);
 
-		for (ScreenLayoutMode mode : ScreenLayoutMode.values()) {
-			Tab tab = tabLayout.newTab();
-			tab.setText(mode.toHumanString(app));
-			tab.setTag(mode);
-			tabLayout.addTab(tab);
+		if (viewPager.getChildAt(0) instanceof RecyclerView recyclerView) {
+			recyclerView.setItemAnimator(null);
 		}
-		tabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
-			@Override
-			public void onTabSelected(Tab tab) {
-				if (tab.getTag() instanceof ScreenLayoutMode mode) {
-					setLayoutMode(mode);
-					updateCards();
-				}
-			}
 
-			@Override
-			public void onTabUnselected(Tab tab) {
-			}
+		adapter = new ConfigureScreenAdapter(this);
+		viewPager.setAdapter(adapter);
 
+		viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
 			@Override
-			public void onTabReselected(Tab tab) {
+			public void onPageSelected(int position) {
+				boolean separate = settings.USE_SEPARATE_LAYOUTS.get();
+				setLayoutMode(separate ? ScreenLayoutMode.values()[position] : null);
 			}
 		});
-		updateTabs();
+		updateTabsAndPager();
 	}
 
-	private void updateTabs() {
-		if (tabLayout == null) {
-			return;
+	private void updateTabsAndPager() {
+		if (tabLayoutMediator != null) {
+			tabLayoutMediator.detach();
 		}
+
 		boolean separate = settings.USE_SEPARATE_LAYOUTS.get();
 		AndroidUiHelper.updateVisibility(tabLayout, separate);
 
-		if (separate && layoutMode[0] != null) {
-			for (int i = 0; i < tabLayout.getTabCount(); i++) {
-				Tab tab = tabLayout.getTabAt(i);
-				if (tab != null && tab.getTag() == layoutMode[0] && !tab.isSelected()) {
-					tab.select();
-					break;
-				}
+		adapter.notifyDataSetChanged();
+
+		if (separate) {
+			tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) ->
+					tab.setText(ScreenLayoutMode.values()[position].toHumanString(app))
+			);
+			tabLayoutMediator.attach();
+
+			if (layoutMode[0] != null) {
+				viewPager.setCurrentItem(layoutMode[0].ordinal(), false);
 			}
 		}
 	}
@@ -303,43 +246,17 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		updateTabs();
-		updateCards();
-
-		settings.SHOW_DISTANCE_RULER.addListener(getDistanceByTapListener());
-		settings.POSITION_PLACEMENT_ON_MAP.addListener(getDisplayPositionListener());
-		settings.SHOW_SPEEDOMETER.addListener(getSpeedometerListener());
-		settings.USE_SEPARATE_LAYOUTS.addListener(getSeparateLayoutsListener());
-
+		updateTabsAndPager();
 		callMapActivity(MapActivity::disableDrawer);
+		settings.USE_SEPARATE_LAYOUTS.addListener(getSeparateLayoutsListener());
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		settings.SHOW_DISTANCE_RULER.removeListener(getDistanceByTapListener());
-		settings.POSITION_PLACEMENT_ON_MAP.removeListener(getDisplayPositionListener());
-		settings.SHOW_SPEEDOMETER.removeListener(getSpeedometerListener());
-		settings.USE_SEPARATE_LAYOUTS.removeListener(getSeparateLayoutsListener());
-
 		callMapActivity(MapActivity::enableDrawer);
+		settings.USE_SEPARATE_LAYOUTS.removeListener(getSeparateLayoutsListener());
 	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		app.getMapButtonsHelper().addUpdatesListener(this);
-		mapActivity.disableDrawer();
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-		app.getMapButtonsHelper().removeUpdatesListener(this);
-		mapActivity.enableDrawer();
-	}
-
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -351,26 +268,24 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 
 	@Override
 	public void onActionConfirmed(int actionId) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			widgetsSettingsHelper.setAppMode(appMode);
+			widgetsSettingsHelper.resetConfigureScreenSettings();
+			recreateControlsCompletely(activity);
+			updateFragment();
 		}
-		widgetsSettingsHelper.setAppMode(appMode);
-		widgetsSettingsHelper.resetConfigureScreenSettings();
-		recreateControlsCompletely(mapActivity);
-		updateFragment();
 	}
 
 	@Override
 	public void copyAppModePrefs(@NonNull ApplicationMode fromAppMode) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			widgetsSettingsHelper.setAppMode(appMode);
+			widgetsSettingsHelper.copyConfigureScreenSettings(fromAppMode);
+			recreateControlsCompletely(activity);
+			updateFragment();
 		}
-		widgetsSettingsHelper.setAppMode(appMode);
-		widgetsSettingsHelper.copyConfigureScreenSettings(fromAppMode);
-		recreateControlsCompletely(mapActivity);
-		updateFragment();
 	}
 
 	private void recreateControlsCompletely(@NonNull MapActivity mapActivity) {
@@ -384,11 +299,6 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 	public void onAppModeChanged(ApplicationMode appMode) {
 		setAppMode(appMode);
 		updateFragment();
-	}
-
-	@Override
-	public void onActionsUpdated() {
-		updateCard(ConfigureButtonsCard.class);
 	}
 
 	@Override
@@ -416,55 +326,12 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 		}
 	}
 
-	@Nullable
-	private <T extends BaseCard> T getCard(Class<T> clazz) {
-		for (BaseCard card : cards) {
-			if (clazz.isInstance(card)) {
-				return clazz.cast(card);
-			}
-		}
-		return null;
-	}
-
-
-	private <T extends BaseCard> void updateCard(Class<T> clazz) {
-		BaseCard card = getCard(clazz);
-		if (card != null) {
-			card.update();
-		}
-	}
-
-	@NonNull
-	private StateChangedListener<Integer> getDisplayPositionListener() {
-		if (displayPositionListener == null) {
-			displayPositionListener = change -> app.runInUIThread(() -> updateCard(ConfigureOtherCard.class));
-		}
-		return displayPositionListener;
-	}
-
-	@NonNull
-	private StateChangedListener<Boolean> getDistanceByTapListener() {
-		if (distanceByTapListener == null) {
-			distanceByTapListener = change -> app.runInUIThread(() -> updateCard(ConfigureOtherCard.class));
-		}
-		return distanceByTapListener;
-	}
-
-	@NonNull
-	private StateChangedListener<Boolean> getSpeedometerListener() {
-		if (speedometerListener == null) {
-			speedometerListener = change -> app.runInUIThread(() -> updateCard(ConfigureOtherCard.class));
-		}
-		return speedometerListener;
-	}
-
 	@NonNull
 	private StateChangedListener<Boolean> getSeparateLayoutsListener() {
 		if (separateLayoutsListener == null) {
 			separateLayoutsListener = change -> app.runInUIThread(() -> {
 				setLayoutMode(change ? ScreenLayoutMode.getDefault(mapActivity) : null);
-				updateTabs();
-				updateCards();
+				updateTabsAndPager();
 			});
 		}
 		return separateLayoutsListener;
@@ -474,7 +341,6 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		Fragment fragment = manager.findFragmentByTag(TAG);
 		if (fragment != null && AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			currentScrollY = scrollView.getScrollY();
 			manager.beginTransaction().detach(fragment).commitAllowingStateLoss();
 			manager.beginTransaction().attach(fragment).commitAllowingStateLoss();
 		}

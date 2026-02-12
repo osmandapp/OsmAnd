@@ -221,7 +221,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public void setWindowInsets(@NonNull WindowInsetsCompat windowInsets) {
 		super.setWindowInsets(windowInsets);
 		this.lastWindowInsets = windowInsets;
-		Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.navigationBars());
+		Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
 		if (leftWidgetsPanel != null) {
 			leftWidgetsPanel.setInsets(insets);
 		}
