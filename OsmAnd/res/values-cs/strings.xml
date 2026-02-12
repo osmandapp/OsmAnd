@@ -4932,7 +4932,7 @@
     <string name="map_widget_group_glide_desc">Widgety zobrazují poměr klouzavosti k cíli nebo průměrný poměr klouzavosti pro aktuální let.</string>
     <string name="average_glide_time_interval_desc">Zadejte časový interval pro průměrování klouzání.</string>
     <string name="average_glide_ratio">Průměrný klouzavý poměr</string>
-    <string name="live_monitoring_adress_descr">Zadejte webovou adresu pomocí syntaxe parametrů: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Zadejte webovou adresu pomocí syntaxe parametrů: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="glide_ratio_to_target">Klouzavý poměr k cíli</string>
     <string name="map_widget_group_glide_ratio">Klouzavý poměr</string>
     <string name="help_article_map_legend_osmand_name">OsmAnd styl mapy</string>

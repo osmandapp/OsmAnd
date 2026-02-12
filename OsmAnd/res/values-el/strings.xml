@@ -242,7 +242,7 @@
     <string name="offline_edition">Επεξεργασία χωρίς διαδίκτυο</string>
     <string name="offline_edition_descr">Αν η επεξεργασία έκτος σύνδεσης είναι ενεργοποιημένη, οι αλλαγές σας θα αποθηκεύτουν τοπικά πρώτα και μεταφωρτοθούν με αίτημα, διαφορετικά οι αλλαγές θα μεταφωρτοθούν άμεσα.</string>
     <string name="update_poi_does_not_change_indexes">Οι αλλαγές στα ΣΕ μέσω της εφαρμογής δεν επηρεάζουν τα ληφθέντα αρχεία χάρτη, οι αλλαγές αποθηκεύονται ως αρχείο στη συσκευή σας.</string>
-    <string name="local_openstreetmap_uploading">Αποστολή…</string>
+    <string name="local_openstreetmap_uploading">Γίνεται μεταφόρτωση…</string>
     <string name="local_openstreetmap_were_uploaded">{0} ΣΕ/Οι σημειώσεις απεστάλησαν</string>
     <string name="local_openstreetmap_uploadall">Αποστολή όλων</string>
     <string name="local_openstreetmap_upload">Αποστολή επεξεργασίας στο OSM</string>
@@ -2752,9 +2752,9 @@
     <string name="shared_string_launch">Εκκίνηση</string>
     <string name="lang_gn_py">Γκουράνι</string>
     <string name="quick_action_switch_day_night_descr">Εναλλαγή διακόπτη μεταξύ καταστάσεων ημέρας και νύχτας του OsmAnd.</string>
-    <string name="quick_action_switch_day_mode">Κατάσταση ημέρας</string>
-    <string name="quick_action_switch_night_mode">Κατάσταση νύχτας</string>
-    <string name="quick_action_day_night_switch_mode">Εναλλαγή κατάστασης ημέρας/νύχτας</string>
+    <string name="quick_action_switch_day_mode">Λειτουργία μέρας</string>
+    <string name="quick_action_switch_night_mode">Λειτουργία νύχτας</string>
+    <string name="quick_action_day_night_switch_mode">Εναλλαγή λειτουργίας μέρας/νύχτας</string>
     <string name="routeInfo_roadClass_name">Τύπος δρόμου</string>
     <string name="routeInfo_surface_name">Επιφάνεια</string>
     <string name="routeInfo_smoothness_name">Ομαλότητα</string>
@@ -3847,7 +3847,7 @@
     <string name="delete_trash_item_confirmation_desc">Οριστική διαγραφή \"%1$s\";</string>
     <string name="external_device_details_battery">Μπαταρία</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Καταγραφή ίχνους</string>
-    <string name="live_monitoring_adress_descr">Καθορίστε την ηλεκτρονική διεύθυνση με σύνταξη παραμέτρων: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Καθορίστε την ηλεκτρονική διεύθυνση με σύνταξη παραμέτρων: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="help_article_map_legend_nautical_map_name">Στυλ ναυτικού χάρτη</string>
     <string name="rssi_widget_desc">Δείχνει το επίπεδο RSSI της εξωτερικής συσκευής σας.</string>
     <string name="speak_route_deviation">Αναγγελία παρέκκλισης από τη διαδρομή</string>
@@ -4015,7 +4015,7 @@
     <string name="shared_string_nearest">Κοντινότερο</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Σχετικά με τη δρομολόγηση του OsmAnd</string>
     <string name="routing_attr_avoid_tunnels_name">Αποφυγή σηράγγων</string>
-    <string name="key_assignments">Αναθέσεις κουμπιού</string>
+    <string name="key_assignments">Αναθέσεις πλήκτρων</string>
     <string name="activity_type_riding_name">Ιππασία</string>
     <string name="activity_type_offroad_name">Εκτός δρόμου</string>
     <string name="routing_attr_motor_type_description">Επιλέξτε τον τύπο καυσίμου του κινητήρα σας, αυτό είναι απαραίτητο για την εκτίμηση των εκπομπών CO2.</string>
@@ -4033,7 +4033,7 @@
     <string name="internal_app_storage_description">Εσωτερική αποθήκευση, κρυφή από όλους τους χρήστες και άλλες εφαρμογές, ώστε μόνο το OsmAnd να έχει πρόσβαση στα δεδομένα σας.</string>
     <string name="weather_widgets_secondary_desc">Οι μονάδες μέτρησης μπορού να αλλαχθούν στις ρυθμίσεις του πρόσθετου Καιρός.</string>
     <string name="routing_attr_motor_type_hybrid_name">Υβριδικό</string>
-    <string name="press_button_to_link_with_action">Πατήστε το κουμπί στην συσκευή σας για να το αναθέσετε στην ενέργεια: %1$s</string>
+    <string name="press_button_to_link_with_action">Πατήστε το κουμπί στη συσκευή σας για να το αναθέσετε στην ενέργεια: %1$s</string>
     <string name="button_already_assigned_to_this_action">Κουμπί ήδη ανατεθειμένο σε αυτή την ενέργεια.</string>
     <string name="snap_to_road_descr">Το εικονίδιο της τρέχουσας τοποθεσίας θα κλειδώσει στην τρέχουσα διαδρομή πλοήγησης</string>
     <string name="key_event_action_move_right">Μετακίνηση δεξιά</string>
@@ -4277,9 +4277,9 @@
     <string name="required_maps">Απαιτούμενοι Χάρτες</string>
     <string name="quick_action_move_map_left">Χάρτης στα αριστερά</string>
     <string name="shared_string_not_checked">Μη ελεγμένο</string>
-    <string name="new_key_assignment">Νέα ανάθεση κλειδιού</string>
+    <string name="new_key_assignment">Νέα ανάθεση πλήκτρου</string>
     <string name="key_name_pattern">Κλειδί \"%1$s\"</string>
-    <string name="key_assignment_add_key">Προσθήκη κλειδιού</string>
+    <string name="key_assignment_add_key">Προσθήκη πλήκτρου</string>
     <string name="action_icon">Εικονίδιο ενέργειας</string>
     <string name="quick_action_first_intermediate">Πρώτη ενδιάμεση</string>
     <string name="rendering_value_sacScale_description">Swiss Alpine Club (Ελβετική Αλπική Λέσχη)</string>
@@ -4571,7 +4571,7 @@
     <string name="litres">Λίτρα</string>
     <string name="shared_string_instant">Άμεσο</string>
     <string name="unit_of_volume">Μονάδα όγκου</string>
-    <string name="dynamic_icon_type_summary">Τα εικονίδεια αλλάζουν με βάση την κατάσταση ενέργειας.</string>
+    <string name="dynamic_icon_type_summary">Τα εικονίδια αλλάζουν με βάση την κατάσταση ενέργειας.</string>
     <string name="shared_string_dynamic">Δυναμικά</string>
     <string name="record_obd_data">Καταγραφή μετρικών οχήματος</string>
     <string name="change_activity">Αλλαγή δραστηριότητας</string>
@@ -5784,4 +5784,46 @@
     <string name="astro_star_clusters">Αστρικά σμήνη</string>
     <string name="astro_nebulas">Νεφελώματα</string>
     <string name="astro_solar_system">Ηλιακό σύστημα</string>
+    <string name="rendering_attr_hideSpots_name">Βυθομετρήσεις σημείων</string>
+    <string name="rendering_attr_hideSpots_description">Απόκρυψη βυθομετρήσεων σημείων</string>
+    <string name="key_event_action_activity_back_pressed">Πατήθηκε η ενέργεια πίσω</string>
+    <string name="common_weight_limit_error">Η ελάχιστη τιμή είναι \"%1$s\" %2$s. Χρησιμοποιήστε το προφίλ \"%3$s\" εάν το βάρος του οχήματος είναι μικρότερο από την ελάχιστη τιμή.</string>
+    <string name="map_rendering_engine_descr">Η έκδοση 1 ήταν η προεπιλεγμένη πριν το OsmAnd 4.3 και ταιριάζει σε παλιότερες συσκευές. \n\nΗ έκδοση 2 (OpenGL) είναι πιο προχωρημένη και προσθέτει λειτουργίες όπως την προβολή 3D.</string>
+    <string name="map_widget_altitude_map_center">Υψόμετρο: κέντρο χάρτη</string>
+    <string name="map_widget_altitude_map_center_desc">Δείχνει το υψόμετρο από το ύψος της θάλασσας του τρέχοντος κέντρου χάρτη.</string>
+    <string name="map_widget_altitude_current_location">Υψόμετρο: τρέχουσα θέση</string>
+    <string name="map_widget_altitude_current_location_desc">Δείχνει το υψόμετρο από το ύψος της θάλασσας της τρέχουσας θέσης.</string>
+    <string name="purchases_feature_desc_cross_buy">Χρησιμοποιήστε τις συνδρομητικές λειτουργίες σε διαφορετικές πλατφόρμες (Android/iOS/ιστός) χωρίς πρόσθετο κόστος.</string>
+    <string name="get_altitude_information">Λήψη πληροφορίας υψομέτρου</string>
+    <string name="calculating_altitude">Γίνεται υπολογισμός υψομέτρου</string>
+    <string name="get_altitude_data">Λήψη δεδομένων υψομέτρου</string>
+    <string name="calculate_altitude">Υπολογισμός υψομέτρου</string>
+    <string name="no_altitude_data">Κανένα δεδομένο υψομέτρου</string>
+    <string name="routing_attr_only_permitted_streets_name">Ρητά επιτρεπτοί δρόμοι</string>
+    <string name="routing_attr_only_permitted_streets_description">Να χρησιμοποιούνται δρόμοι οι οποίοι είναι ρητά επιτρεπτοί</string>
+    <string name="routing_attr_only_permitted_ways_name">Ρητά επιτρεπτά μονοπάτια</string>
+    <string name="routing_attr_only_permitted_ways_description">Να χρησιμοποιούνται μονοπάτια τα οποία είναι ρητά επιτρεπτά</string>
+    <string name="shared_storage_first_step">Πατήστε \"%1$s\".\nΑνοίγει ο διαχειριστής αρχείων όπου πρέπει να βρείτε και να ανοίξετε το φάκελο osmand.</string>
+    <string name="shared_storage_migration_descr">Λόγω αλλαγών στην άδεια αποθηκευτικού χώρου του Android, το OsmAnd δεν μπορεί πια να χρησιμοποιήσει το %1$s.\n\nΑντιγράψτε όλα τα δεδομένα σας σε νέο φάκελο.</string>
+    <string name="approx_safe_mode_description">Να εκτελείται η προσέγγιση GPX χρησιμοποιώντας πιο αργό Android αντί του εγγενούς κώδικα.</string>
+    <string name="shared_storage_warning_description">Λόγω των νέων κανόνων του Android, ξεκινώντας από Νοέμβριο 2021 το OsmAnd 4.2 θα χάσει την πρόσβαση στον Κοινόχρηστο αποθηκευτικό χώρο.\n\nΠαρακαλούμε μεταφέρετε το φάκελο δεδομένων από τον Κοινόχρηστο αποθηκευτικό χώρο σε διαθέσιμο αποθηκευτικό χώρο, αλλιώς η εφαρμογή θα χάσει την πρόσβαση στα δεδομένα σας όπως τους χάρτες εκτός σύνδεσης, ίχνη GPX, κλπ.</string>
+    <string name="shared_string_skip_warning">Παράλειψη της μετεγκατάστασης; Το OsmAnd δεν έχει πια πρόσβαση στα αρχεία σας στον κοινόχρηστο αποθηκευτικό χώρο.\n\nΗ εφαρμογή θα αρχίσει να χρησιμοποιεί το νέο φάκελο δεδομένων σας.</string>
+    <string name="option_available_only_in_osmand_pro">Διαθέσιμη ως μέρος της συνδρομής OsmAnd Pro.</string>
+    <string name="purchases_feature_desc_pro_widgets">Αποκτήστε πρόσβαση σε λειτουργίες OsmAnd Pro: Χρωματισμός διαδρομής και άλλα.</string>
+    <string name="backup_delete_types_descr">Διαγραφή όλων των δεδομένων για παρωχημένους τύπους δεδομένων από το OsmAnd Cloud;</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Αποκτήστε πρόσβαση σε πιο συχνές ενημερώσεις χαρτών. Ωριαίες, ημερήσιες ή εβδομαδιαίες ενημερώσεις. Οι ενημερώσεις κατεβαίνουν αυξητικά, μόνο για την αλλαγμένη περιοχή.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Αποκτήστε πρόσβαση σε τακτικές μηνιαίες ενημερώσεις για χάρτες εκτός σύνδεσης.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Αποκτήστε απεριόριστες λήψεις για όλες χάρτες ηπείρων και περιοχών εκτός σύνδεσης.</string>
+    <string name="purchases_feature_desc_combined_wiki">Εξερευνήστε άρθρα της Βικιπαίδεια εν κινήσει, χωρίς σύνδεση στο διαδίκτυο. Δεδομένα εκτός σύνδεσης χωρισμένα ανά χώρες και διαθέσιμα σε όλες τις γλώσσες.</string>
+    <string name="purchases_feature_desc_wikipedia">Παρέχει άρθρα της Βικιπαίδειας εκτός σύνδεσης σχετικά με όλα τα μέρη, όπου σας βοηθά να μάθετε περισσότερα για τα μέρη που επισκέπτεστε στο ταξίδι με απλά πατήματα στο χάρτη. Μην ξεχνάτε να κατεβάσετε τα αρχεία του χάρτη Βικιπαίδειας για τις αντίστοιχες περιοχές.</string>
+    <string name="backup_promocode">Προωθητικός κωδικός</string>
+    <string name="backup_version_history_delete_descr">Διαγραφή του αρχείου αλλαγών για τους παρωχημένους τύπους δεδομένων από το OsmAnd Cloud;</string>
+    <string name="backup_error_subscription_was_used">Συνδρομή ή προώθηση χρησιμοποιήθηκε από άλλον λογαριασμό %1$s</string>
+    <string name="no_assigned_keys">Κανένα ανατιθέμενο πλήκτρο</string>
+    <string name="no_assigned_keys_desc">Επιλέξτε μια ενέργεια και αναθέστε ένα πλήκτρο πατώντας το κουμπί \'Προσθήκη\'.</string>
+    <string name="clear_all_key_shortcuts_summary">Όλες οι αναθέσεις πλήκτρων για τους επιλεγμένους τύπους θα αφαιρεθούν.</string>
+    <string name="rendering_attr_spotSize_name">Μέγεθος βυθομέτρησης σημείου</string>
+    <string name="rendering_attr_spotSize_description">Μέγεθος βυθομέτρησης σημείου</string>
+    <string name="rendering_attr_spotDistance_description">Απόσταση βυθομέτρησης σημείου</string>
+    <string name="rendering_attr_spotDistance_name">Απόσταση βυθομέτρησης σημείου</string>
 </resources>

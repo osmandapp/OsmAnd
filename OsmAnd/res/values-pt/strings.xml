@@ -5054,7 +5054,7 @@
     <string name="help_article_widgets_radius_ruler_name">Régua radial e régua</string>
     <string name="delete_trash_item_confirmation_desc">Eliminar \"%1$s\" permanentemente?</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Gravar viagem</string>
-    <string name="live_monitoring_adress_descr">Especificar o endereço web com a sintaxe de parâmetros lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Especificar o endereço web com a sintaxe de parâmetros lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="help_article_map_legend_nautical_map_name">Estilo de mapa náutico</string>
     <string name="discard_filter_changes">Descartar alterações do filtro</string>
     <string name="map_widget_group_glide_ratio">Rácio de deslizamento</string>

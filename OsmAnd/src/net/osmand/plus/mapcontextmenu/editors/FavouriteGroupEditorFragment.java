@@ -33,7 +33,11 @@ public class FavouriteGroupEditorFragment extends GroupEditorFragment {
 	@Nullable
 	@Override
 	protected PointEditor getEditor() {
-		return requireMapActivity().getContextMenu().getFavoritePointEditor();
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			return activity.getContextMenu().getFavoritePointEditor();
+		}
+		return null;
 	}
 
 	@Override

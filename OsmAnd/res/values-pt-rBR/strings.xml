@@ -5364,7 +5364,7 @@
     <string name="configure_filter">Configurar filtro</string>
     <string name="smart_folder_saved">Pasta inteligente salva</string>
     <string name="no_config_smart_folder_title">Não configurado</string>
-    <string name="live_monitoring_adress_descr">Especifique o endereço da web com a sintaxe do parâmetro lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Especifique o endereço da web com a sintaxe do parâmetro lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="discard_filter_changes">Descartar alterações de filtro</string>
     <string name="shared_string_loading">Carregando</string>
     <string name="discard_filter_changes_prompt">Redefinir todos os filtros?</string>

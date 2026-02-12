@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.astro
 
+import android.app.Dialog
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.doOnPreDraw
+import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
@@ -61,6 +63,13 @@ class AstroConfigureViewBottomSheet :
 		return collection
 	}
 
+	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+		return (super.onCreateDialog(savedInstanceState) as BottomSheetDialog).apply {
+			setCancelable(true)
+			setCanceledOnTouchOutside(true)
+		}
+	}
+
 	override fun onStart() {
 		super.onStart()
 
@@ -85,6 +94,8 @@ class AstroConfigureViewBottomSheet :
 
 			b.peekHeight = peek
 			b.state = BottomSheetBehavior.STATE_COLLAPSED
+			val scroll = mainView.findViewById<NestedScrollView>(R.id.configureViewRoot)
+			scroll.scrollTo(0, 0)
 		}
 	}
 
@@ -292,7 +303,7 @@ class AstroConfigureViewBottomSheet :
 
 		addSwitchRow(
 			parent = personalContainer,
-			iconRes = R.drawable.ic_action_star_clusters,
+			iconRes = R.drawable.ic_action_target_direction_on,
 			titleRes = R.string.astro_directions,
 			checked = false,
 			smallItem = false,
@@ -302,7 +313,7 @@ class AstroConfigureViewBottomSheet :
 
 		addSwitchRow(
 			parent = personalContainer,
-			iconRes = R.drawable.ic_action_favorite,
+			iconRes = R.drawable.ic_action_bookmark_filled,
 			titleRes = R.string.favorites_item,
 			checked = current.showFavorites,
 			smallItem = false,
@@ -312,7 +323,7 @@ class AstroConfigureViewBottomSheet :
 
 		addSwitchRow(
 			parent = personalContainer,
-			iconRes = R.drawable.ic_action_star_clusters,
+			iconRes = R.drawable.ic_action_target_path_on,
 			titleRes = R.string.astro_daily_path,
 			checked = false,
 			smallItem = false,

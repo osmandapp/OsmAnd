@@ -5279,7 +5279,7 @@
     <string name="help_article_personal_import_export_name">Import / Eksport</string>
     <string name="help_article_widgets_radius_ruler_name">Linijka promienia i linijka</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Nagrywanie ścieżki</string>
-    <string name="live_monitoring_adress_descr">Określ adres internetowy za pomocą składni parametrów: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Określ adres internetowy za pomocą składni parametrów: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="help_article_plan_route_name">Zaplanuj trasę</string>
     <string name="help_article_widgets_map_buttons_name">Przyciski mapy</string>
     <string name="shared_string_included">Dołączony</string>
@@ -6195,4 +6195,5 @@
     <string name="astro_daily_path">Dzienna ścieżka</string>
     <string name="map_2d">2D</string>
     <string name="map_3d">3D</string>
+    <string name="astro_solar_system">Układ słoneczny</string>
 </resources>

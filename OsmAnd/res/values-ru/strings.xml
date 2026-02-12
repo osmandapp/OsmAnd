@@ -4976,7 +4976,7 @@
     <string name="may_be_used_if_there_is_shortcut">Может быть использован при наличии ярлыка</string>
     <string name="widget_available_ram">Доступная оперативная память</string>
     <string name="shared_string_created">Дата создания</string>
-    <string name="live_monitoring_adress_descr">Укажите веб-адрес используя следующий синтаксис: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Укажите веб-адрес используя следующий синтаксис: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_show_icon">Показать значок</string>
     <string name="bicycle_scd_device_name">Велосипедный прибор</string>
     <string name="smart_folder_name_present">Смарт-папка с таким именем уже существует</string>

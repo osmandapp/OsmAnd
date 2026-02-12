@@ -5233,7 +5233,7 @@
     <string name="help_article_map_legend_nautical_map_name">Stilul hărții nautice</string>
     <string name="release_4_6">• Android Auto: S-a adăugat modul 3D\n\n• Tracks:S-au introdus filtre și foldere inteligente, s-a optimizat memoria pentru fișiere mai mari\n\n• Gestionarea mai bună a resurselor locale\n\n• Mapare personalizabilă a butoanelor pentru controllere externe\n\n•Widget-uri noi: \"Glide Ratio\" și \"Sun Position\"\n\n• OsmAnd Cloud: Acum accesați fișierele șterse\n\n• Colorare mai bună a pistei în modul Slope cu noul gradient simetric\n\n• Probleme rezolvate cu bara de stare transparentă\n\n• S-a adăugat suport la widget-ul ANT+ de temperatură\n\n• S-a introdus widgetul \"RAM disponibil\"</string>
     <string name="app_mode_baby_transport">Transportul bebelușilor</string>
-    <string name="live_monitoring_adress_descr">Specificați adresa web cu sintaxa parametrilor: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Specificați adresa web cu sintaxa parametrilor: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_temperature">Temperatură</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Rutare în linie dreaptă (aeronave)</string>
     <string name="help_article_navigation_routing_train_routing_name">Rutare folosind trenuri</string>

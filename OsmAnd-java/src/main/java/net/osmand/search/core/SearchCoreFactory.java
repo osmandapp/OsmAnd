@@ -6,6 +6,7 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STAR
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsId;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsName;
+import static net.osmand.data.Amenity.POPULATION;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.search.core.ObjectType.POI;
@@ -2040,24 +2041,27 @@ public class SearchCoreFactory {
 			
 			final NameStringMatcher nmEquals = new NameStringMatcher(text, CHECK_EQUALS);
 			
-			Collections.sort(result, new Comparator<SearchResult>() {
+			result.sort(new Comparator<>() {
 				@Override
 				public int compare(SearchResult sr1, SearchResult sr2) {
-					Amenity poi1 = new Amenity();
-					Amenity poi2 = new Amenity();
-					if (sr1.objectType == POI) {
-						poi1 = (Amenity) sr1.object;
+					if (sr1.objectType != POI || sr2.objectType != POI) {
+						return 0;
 					}
-					if (sr2.objectType == POI) {
-						poi2 = (Amenity) sr2.object;
+					Amenity a1 = (Amenity) sr1.object;
+					Amenity a2 = (Amenity) sr2.object;
+
+					int i1 = getIndex(a1);
+					int i2 = getIndex(a2);
+					int priorityDiff = Algorithms.compare(i2, i1);
+					if (priorityDiff != 0) {
+						return priorityDiff;
 					}
-					
-					if (poi1 != null && poi2 != null) {
-						int o1 = getIndex(poi1);
-						int o2 = getIndex(poi2);
-						return Algorithms.compare(o2, o1);
-					}
-					return 0;
+					String p1 = a1.getAdditionalInfo(POPULATION);
+					String p2 = a2.getAdditionalInfo(POPULATION);
+					long pop1 = Algorithms.parseLongSilently(p1, -1);
+					long pop2 = Algorithms.parseLongSilently(p2, -1);
+
+					return Long.compare(pop2, pop1); // descending order
 				}
 				
 				private int getIndex(Amenity poi) {
