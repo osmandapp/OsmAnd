@@ -78,13 +78,13 @@ public class FavoriteMenu {
 		}
 		List<PopUpMenuItem> items = new ArrayList<>();
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitle(favouritePoint.getDisplayName(app))
 				.setTitleColor(ColorUtilities.getSecondaryTextColor(app, nightMode))
 				.setTitleSize(14)
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_edit)
 				.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
 				.setOnClickListener(v -> {
@@ -98,7 +98,7 @@ public class FavoriteMenu {
 					}
 				}).create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_move)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_folder_move))
 				.setOnClickListener(v -> {
@@ -108,7 +108,7 @@ public class FavoriteMenu {
 				.showTopDivider(true)
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_gshare_dark))
 				.setOnClickListener(v -> {
@@ -120,14 +120,14 @@ public class FavoriteMenu {
 				.showTopDivider(true)
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_add_to_map_markers)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_add_to_markers))
 				.setOnClickListener(v -> addToMarkers(Collections.singleton(favouritePoint)))
 				.showTopDivider(true)
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.add_to_track)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_track_add))
 				.setOnClickListener(v -> {
@@ -143,7 +143,7 @@ public class FavoriteMenu {
 				})
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.add_to_navigation)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_navigation_outlined))
 				.setOnClickListener(v -> {
@@ -161,7 +161,7 @@ public class FavoriteMenu {
 				})
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_delete)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_delete_outlined))
 				.setOnClickListener(v -> {
@@ -209,14 +209,14 @@ public class FavoriteMenu {
 		}
 		List<PopUpMenuItem> items = new ArrayList<>();
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_select)
 				.setIcon(getContentIcon(R.drawable.ic_action_deselect_all))
 				.setOnClickListener(v -> {
 					fragment.setSelectionMode(!fragment.selectionMode);
 				}).create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.change_appearance)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_appearance_outlined))
 				.setOnClickListener(v -> {
@@ -227,11 +227,11 @@ public class FavoriteMenu {
 				.showTopDivider(true)
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_delete)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_delete_outlined))
 				.setOnClickListener(v -> {
-					AlertDialog.Builder b = new AlertDialog.Builder(getThemedContext(app, nightMode));
+					AlertDialog.Builder b = new AlertDialog.Builder(getThemedContext(activity, nightMode));
 					b.setTitle(R.string.favorite_delete_group);
 					String groupName = Algorithms.isEmpty(selectedGroup.getName()) ? app.getString(R.string.shared_string_favorites) : selectedGroup.getName();
 					b.setMessage(app.getString(R.string.favorite_confirm_delete_group, groupName, selectedGroup.getPoints().size()));
@@ -242,6 +242,7 @@ public class FavoriteMenu {
 						helper.saveCurrentPointsIntoFile(true);
 						FavoriteSortModesHelper sortModesHelper = app.getFavoriteSortModesHelper();
 						sortModesHelper.onFavoriteFolderDeleted(selectedGroup);
+						fragment.getParentFragmentManager().popBackStack();
 					});
 					b.show();
 				})
@@ -262,7 +263,7 @@ public class FavoriteMenu {
 		}
 		List<PopUpMenuItem> items = new ArrayList<>();
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_gshare_dark))
 				.setOnClickListener(v -> {
@@ -271,7 +272,7 @@ public class FavoriteMenu {
 				.showTopDivider(true)
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_delete)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_delete_outlined))
 				.setOnClickListener(v -> {
@@ -309,7 +310,7 @@ public class FavoriteMenu {
 		}
 		List<PopUpMenuItem> items = new ArrayList<>();
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_move)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_folder_move))
 				.setOnClickListener(v -> {
@@ -321,14 +322,14 @@ public class FavoriteMenu {
 				})
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_add_to_map_markers)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_add_to_markers))
 				.setOnClickListener(v -> addToMarkers(points))
 				.showTopDivider(true)
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.add_to_track)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_track_add))
 				.setOnClickListener(v -> {
@@ -346,7 +347,7 @@ public class FavoriteMenu {
 				})
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.add_to_navigation)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_navigation_outlined))
 				.setOnClickListener(v -> {
@@ -365,7 +366,7 @@ public class FavoriteMenu {
 				})
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_delete)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_delete_outlined))
 				.setOnClickListener(v -> {
@@ -397,14 +398,14 @@ public class FavoriteMenu {
 		}
 		List<PopUpMenuItem> items = new ArrayList<>();
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_select)
 				.setIcon(getContentIcon(R.drawable.ic_action_deselect_all))
 				.setOnClickListener(v -> {
 					fragment.setSelectionMode(!fragment.selectionMode);
 				}).create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.add_new_folder)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_folder_add_outlined))
 				.setOnClickListener(v -> {
@@ -414,7 +415,7 @@ public class FavoriteMenu {
 				.showTopDivider(true)
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_import)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_import))
 				.setOnClickListener(v -> importFavourites(fragment))

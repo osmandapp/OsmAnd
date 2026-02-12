@@ -97,7 +97,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return new FavoriteViewHolder(view, nightMode);
 			case TYPE_FOLDER:
 				view = inflater.inflate(R.layout.track_list_item, parent, false);
-				return new FavoriteFolderViewHolder(view, null, nightMode, selectionMode);
+				return new FavoriteFolderViewHolder(view, nightMode);
 			case TYPE_SORT_FAVORITE:
 				view = inflater.inflate(R.layout.sort_type_view, parent, false);
 				return new SortFavoriteViewHolder(view, sortListener, nightMode);
@@ -188,7 +188,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			viewHolder.bindView(sortMode, favouritePoint, !lastItem, selectionMode, cache, listener);
 		} else if (holder instanceof FavoriteFolderViewHolder viewHolder) {
 			FavoriteGroup favFolder = (FavoriteGroup) items.get(position);
-			viewHolder.bindView(favFolder, !lastPinned && !lastItem, lastPinned && !lastItem, listener);
+			viewHolder.bindView(favFolder, !lastPinned && !lastItem, lastPinned && !lastItem, selectionMode, listener);
 		} else if (holder instanceof FavoriteStatsViewHolder viewHolder) {
 			FavoriteFolderAnalysis folderAnalysis = (FavoriteFolderAnalysis) items.get(position);
 			viewHolder.bindView(folderAnalysis);
