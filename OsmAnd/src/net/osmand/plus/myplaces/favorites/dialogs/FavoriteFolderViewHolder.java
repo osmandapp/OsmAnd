@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
@@ -17,7 +16,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.FavoriteAdapterListener;
-import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
@@ -27,7 +25,6 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 
 	protected final OsmandApplication app;
 	protected final UiUtilities uiUtilities;
-	protected final TrackGroupsListener listener;
 
 	protected final TextView title;
 	protected final TextView description;
@@ -39,14 +36,10 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 	protected final View fullDivider;
 
 	protected final boolean nightMode;
-	protected final boolean selectionMode;
 
-	public FavoriteFolderViewHolder(@NonNull View view, @Nullable TrackGroupsListener listener,
-	                                boolean nightMode, boolean selectionMode) {
+	public FavoriteFolderViewHolder(@NonNull View view, boolean nightMode) {
 		super(view);
-		this.listener = listener;
 		this.nightMode = nightMode;
-		this.selectionMode = selectionMode;
 		app = (OsmandApplication) view.getContext().getApplicationContext().getApplicationContext();
 		uiUtilities = app.getUIUtilities();
 
@@ -69,7 +62,7 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), checkbox);
 	}
 
-	public void bindView(@NonNull FavoriteGroup group, boolean showDivider, boolean showFullDivider, FavoriteAdapterListener listener) {
+	public void bindView(@NonNull FavoriteGroup group, boolean showDivider, boolean showFullDivider, boolean selectionMode, FavoriteAdapterListener listener) {
 		itemView.setOnLongClickListener(v -> {
 			listener.onItemLongClick(group);
 			return true;
