@@ -704,127 +704,125 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER:
 				statReq = req.beginSubSearchStats();
-				try {
-					// also offsets can be randomly skipped by limit
-					loffsets.sort();
-					TIntArrayList[] refs = new TIntArrayList[CityBlocks.STREET_TYPE.index + 1];
-					TIntArrayList[] refsToCities = new TIntArrayList[CityBlocks.STREET_TYPE.index + 1];
-					for (int i = 0; i < refs.length; i++) {
-						refs[i] = new TIntArrayList();
-						refsToCities[i] = new TIntArrayList();
-					}
+				// also offsets can be randomly skipped by limit
+				loffsets.sort();
+				TIntArrayList[] refs = new TIntArrayList[CityBlocks.STREET_TYPE.index + 1];
+				TIntArrayList[] refsToCities = new TIntArrayList[CityBlocks.STREET_TYPE.index + 1];
+				for (int i = 0; i < refs.length; i++) {
+					refs[i] = new TIntArrayList();
+					refsToCities[i] = new TIntArrayList();
+				}
 
 //				LOG.info("Searched address structure in " + (System.currentTimeMillis() - time) + "ms. Found " + loffsets.size()
 //						+ " subtress");
-					for (int j = 0; j < loffsets.size(); j++) {
-						long fp = indexOffset + loffsets.get(j);
-						codedIS.seek(fp);
-						long len = codedIS.readRawVarint32();
-						long oldLim = codedIS.pushLimitLong((long) len);
-						int stag = 0;
-						do {
-							int st = codedIS.readTag();
-							stag = WireFormat.getTagFieldNumber(st);
-							if (stag == AddressNameIndexData.ATOM_FIELD_NUMBER) {
-								long slen = codedIS.readRawVarint32();
-								long soldLim = codedIS.pushLimitLong((long) slen);
-								readAddressNameData(req, refs, refsToCities, fp);
-								codedIS.popLimit(soldLim);
-							} else if (stag != 0) {
-								skipUnknownField(st);
-							}
-						} while (stag != 0);
-
-						codedIS.popLimit(oldLim);
-						if (req.isCancelled()) {
-							return;
+				for (int j = 0; j < loffsets.size(); j++) {
+					long fp = indexOffset + loffsets.get(j);
+					codedIS.seek(fp);
+					long len = codedIS.readRawVarint32();
+					long oldLim = codedIS.pushLimitLong((long) len);
+					int stag = 0;
+					do {
+						int st = codedIS.readTag();
+						stag = WireFormat.getTagFieldNumber(st);
+						if (stag == AddressNameIndexData.ATOM_FIELD_NUMBER) {
+							long slen = codedIS.readRawVarint32();
+							long soldLim = codedIS.pushLimitLong((long) slen);
+							readAddressNameData(req, refs, refsToCities, fp);
+							codedIS.popLimit(soldLim);
+						} else if (stag != 0) {
+							skipUnknownField(st);
 						}
+					} while (stag != 0);
+
+					codedIS.popLimit(oldLim);
+					if (req.isCancelled()) {
+						req.endSubSearchStats(statReq, BinaryMapIndexReaderStats.SearchStat.SubOp.ADDRESS_ATOM, map.getFile().getName());
+						return;
 					}
+				}
 
-					for (CityBlocks block : typeFilter) {
-						if (req.isCancelled()) {
-							break;
+				for (CityBlocks block : typeFilter) {
+					if (req.isCancelled()) {
+						break;
+					}
+					TIntArrayList list = refs[block.index];
+					TIntArrayList listCities = refsToCities[block.index];
+					if (block == CityBlocks.STREET_TYPE) {
+						Map<Integer, City> streetGroups = new HashMap<>();
+						TIntArrayList sortedCities = new TIntArrayList(listCities);
+						sortedCities.sort();
+						for (int j = 0; j < sortedCities.size() && !req.isCancelled(); j++) {
+							int offset = sortedCities.get(j);
+							if (j > 0 && offset == sortedCities.get(j - 1)) {
+								continue;
+							}
+							codedIS.seek(offset);
+							long len = codedIS.readRawVarint32();
+							long old = codedIS.pushLimitLong((long) len);
+							City obj = readCityHeader(req, null, offset, reg.attributeTagsTable);
+							codedIS.popLimit(old);
+							streetGroups.put(offset, obj);
 						}
-						TIntArrayList list = refs[block.index];
-						TIntArrayList listCities = refsToCities[block.index];
-						if (block == CityBlocks.STREET_TYPE) {
-							Map<Integer, City> streetGroups = new HashMap<>();
-							TIntArrayList sortedCities = new TIntArrayList(listCities);
-							sortedCities.sort();
-							for (int j = 0; j < sortedCities.size() && !req.isCancelled(); j++) {
-								int offset = sortedCities.get(j);
-								if (j > 0 && offset == sortedCities.get(j - 1)) {
-									continue;
-								}
+						for (int j = 0; j < list.size(); j++) {
+							streetGroups.put(list.get(j), streetGroups.get(listCities.get(j)));
+						}
+						list.sort();
+						for (int j = 0; j < list.size() && !req.isCancelled(); j++) {
+							int offset = list.get(j);
+							if (j > 0 && offset == list.get(j - 1)) {
+								continue;
+							}
+							City obj = streetGroups.get(offset);
+							if (obj != null) {
 								codedIS.seek(offset);
 								long len = codedIS.readRawVarint32();
 								long old = codedIS.pushLimitLong((long) len);
-								City obj = readCityHeader(req, null, offset, reg.attributeTagsTable);
-								codedIS.popLimit(old);
-								streetGroups.put(offset, obj);
-							}
-							for (int j = 0; j < list.size(); j++) {
-								streetGroups.put(list.get(j), streetGroups.get(listCities.get(j)));
-							}
-							list.sort();
-							for (int j = 0; j < list.size() && !req.isCancelled(); j++) {
-								int offset = list.get(j);
-								if (j > 0 && offset == list.get(j - 1)) {
-									continue;
-								}
-								City obj = streetGroups.get(offset);
-								if (obj != null) {
-									codedIS.seek(offset);
-									long len = codedIS.readRawVarint32();
-									long old = codedIS.pushLimitLong((long) len);
-									LatLon l = obj.getLocation();
-									Street s = new Street(obj);
-									s.setFileOffset(offset);
-									readStreet(s, null, false, MapUtils.get31TileNumberX(l.getLongitude()) >> 7,
-											MapUtils.get31TileNumberY(l.getLatitude()) >> 7, obj.isPostcode() ? obj.getName() : null,
-											reg.attributeTagsTable);
-									publishRawData(req, s);
-									boolean matches = stringMatcher.matches(s.getName());
-									if (!matches) {
-										for (String n : s.getOtherNames()) {
-											matches = stringMatcher.matches(n);
-											if (matches) {
-												break;
-											}
+								LatLon l = obj.getLocation();
+								Street s = new Street(obj);
+								s.setFileOffset(offset);
+								readStreet(s, null, false, MapUtils.get31TileNumberX(l.getLongitude()) >> 7,
+										MapUtils.get31TileNumberY(l.getLatitude()) >> 7, obj.isPostcode() ? obj.getName() : null,
+										reg.attributeTagsTable);
+								publishRawData(req, s);
+								boolean matches = stringMatcher.matches(s.getName());
+								if (!matches) {
+									for (String n : s.getOtherNames()) {
+										matches = stringMatcher.matches(n);
+										if (matches) {
+											break;
 										}
 									}
-									if (matches) {
-										req.publish(s);
-									}
-									codedIS.popLimit(old);
 								}
-							}
-						} else {
-							list.sort();
-							TIntSet published = new TIntHashSet();
-							for (int j = 0; j < list.size() && !req.isCancelled(); j++) {
-								int offset = list.get(j);
-								if (j > 0 && offset == list.get(j - 1)) {
-									continue;
-								}
-								codedIS.seek(offset);
-								long len = codedIS.readRawVarint32();
-								long old = codedIS.pushLimitLong((long) len);
-								City obj = readCityHeader(req, cityPostcodeMatcher, list.get(j), reg.attributeTagsTable);
-								publishRawData(req, obj);
-								if (obj != null && !published.contains(offset)) {
-									req.publish(obj);
-									published.add(offset);
+								if (matches) {
+									req.publish(s);
 								}
 								codedIS.popLimit(old);
 							}
 						}
+					} else {
+						list.sort();
+						TIntSet published = new TIntHashSet();
+						for (int j = 0; j < list.size() && !req.isCancelled(); j++) {
+							int offset = list.get(j);
+							if (j > 0 && offset == list.get(j - 1)) {
+								continue;
+							}
+							codedIS.seek(offset);
+							long len = codedIS.readRawVarint32();
+							long old = codedIS.pushLimitLong((long) len);
+							City obj = readCityHeader(req, cityPostcodeMatcher, list.get(j), reg.attributeTagsTable);
+							publishRawData(req, obj);
+							if (obj != null && !published.contains(offset)) {
+								req.publish(obj);
+								published.add(offset);
+							}
+							codedIS.popLimit(old);
+						}
 					}
+				}
 //				LOG.info("Whole address search by name is done in " + (System.currentTimeMillis() - time) + "ms. Found "
 //						+ req.getSearchResults().size());
-				} finally {
-					req.endSubSearchStats(statReq, BinaryMapIndexReaderStats.SearchStat.SubOp.ADDRESS_ATOM, map.getFile().getName());
-				}
+				req.endSubSearchStats(statReq, BinaryMapIndexReaderStats.SearchStat.SubOp.ADDRESS_ATOM, map.getFile().getName());
 				return;
 			default:
 				skipUnknownField(t);

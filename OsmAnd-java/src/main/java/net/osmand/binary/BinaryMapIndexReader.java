@@ -715,11 +715,11 @@ public class BinaryMapIndexReader {
 		for (AddressRegion r : inds) {
 			for (CitiesBlock block : r.cities) {
 				if (type != null && block.type == type.index) {
-					long statReq = 0, suStart = 0;
+					long statReq = 0, subStart = 0;
 					int citiesSize = cities.size();
 					if (searchStat != null) {
 						statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_CITIES, resultMatcher, r, codedIS, null);
-						suStart = searchStat.beginSubSearchStats(citiesSize);
+						subStart = searchStat.beginSubSearchStats(citiesSize);
 					}
 					codedIS.seek(block.filePointer);
 					long old = codedIS.pushLimitLong((long) block.length);
@@ -728,7 +728,7 @@ public class BinaryMapIndexReader {
 					if (statReq > 0) {
 						searchStat.endSearchStats(statReq, BinaryMapIndexReaderApiName.LOAD_CITIES, 
 								cities.subList(citiesSize, cities.size()), r, codedIS, null);
-						searchStat.endSubSearchStats(suStart, SearchStat.SubOp.ADDRESS_LOAD_CITIES, file.getName(),	cities.size());
+						searchStat.endSubSearchStats(subStart, SearchStat.SubOp.ADDRESS_LOAD_CITIES, file.getName(),	cities.size());
 					}
 				}
 			}
@@ -747,10 +747,10 @@ public class BinaryMapIndexReader {
 		} catch (IllegalArgumentException e) {
 			throw new IOException(e.getMessage() + " while reading " + c + " (id: " + c.getId() + ")");
 		}
-		long statReq = 0, suStart = 0;
+		long statReq = 0, subStart = 0;
 		if (searchStat != null) {
 			statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_STREETS, resultMatcher, reg, codedIS, null);
-			suStart = searchStat.beginSubSearchStats(c.getStreets().size());
+			subStart = searchStat.beginSubSearchStats(c.getStreets().size());
 		}
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
@@ -759,7 +759,7 @@ public class BinaryMapIndexReader {
 		codedIS.popLimit(old);
 		if (statReq > 0) {
 			searchStat.endSearchStats(statReq, BinaryMapIndexReaderApiName.LOAD_STREETS, c.getStreets(), reg, codedIS, null);
-			searchStat.endSubSearchStats(suStart, SearchStat.SubOp.ADDRESS_LOAD_STREETS, file.getName(), c.getStreets().size());
+			searchStat.endSubSearchStats(subStart, SearchStat.SubOp.ADDRESS_LOAD_STREETS, file.getName(), c.getStreets().size());
 		}
 		return size;
 	}
