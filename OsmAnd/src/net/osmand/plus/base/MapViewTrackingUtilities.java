@@ -63,6 +63,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private static final long MOVE_ANIMATION_TIME = 500;
 	public static final int AUTO_ZOOM_DEFAULT_CHANGE_ZOOM = 4500;
 	private static final float DELAY_TO_ROTATE_AFTER_RESET_ROTATION = 1000f;
+	public static final long KEEP_ELEVATION_ANGLE_AFTER_SURFACE_HIT = 5000;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -76,6 +77,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	private boolean isMapLinkedToLocation = true;
 	private boolean movingToMyLocation;
+
+	private long hitTime;
 
 	private long lastResetRotationToNorth;
 	private long lastTimeAutoZooming;
@@ -366,7 +369,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 		int elevationAngle = 0;
 		if (zoomParams != null && mapView.getElevationAngle() != DEFAULT_ELEVATION_ANGLE) {
-			elevationAngle = settings.AUTO_ZOOM_3D_ANGLE.get();
+			if (mapRenderer.hitSurface())
+				hitTime = System.currentTimeMillis();
+			else if (System.currentTimeMillis() - hitTime > KEEP_ELEVATION_ANGLE_AFTER_SURFACE_HIT)
+				elevationAngle = settings.AUTO_ZOOM_3D_ANGLE.get();
 		}
 		double latitude = predictedLocation != null ? predictedLocation.getLatitude() : location.getLatitude();
 		double longitude = predictedLocation != null ? predictedLocation.getLongitude() : location.getLongitude();
