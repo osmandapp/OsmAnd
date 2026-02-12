@@ -2271,7 +2271,7 @@
     <string name="shared_string_total">Укупно</string>
     <string name="clear_all_intermediates">Очисти сва пролазна одредишта</string>
     <string name="transport_nearby_routes">Близу</string>
-    <string name="speech_rate_descr">Одаберите брзину изговора вештачког гласа ТТС.</string>
+    <string name="speech_rate_descr">Одаберите брзину изговора вештачког гласа.</string>
     <string name="local_osm_changes_backup">Прави складишни умножак измена ОСМ-а</string>
     <string name="osmand_service">Позадински рад</string>
     <string name="osmand_service_descr">ОсмАнд ради у позадини док је заслон искључен.</string>
@@ -2957,7 +2957,7 @@
     <string name="utm_format_descr">ОсмАнд користи стандардни облик УТМ који је сличан, али није истоветан са обликом НАТО-а УТМ-а.</string>
     <string name="shared_string_example">Пример</string>
     <string name="navigate_point_format_utm">Стандард УТМ-а</string>
-    <string name="navigate_point_format_olc">Отворени код положаја (ОЛЦ)</string>
+    <string name="navigate_point_format_olc">Отворени код положаја</string>
     <string name="coordinates_format_info">Означени облик ће бити примењен кроз цели програм.</string>
     <string name="pref_selected_by_default_for_profiles">Ова поставка је подразумевано одабрана за налоге : %s</string>
     <string name="change_default_settings">Промени поставке</string>
