@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments.search;
 
+import com.google.common.collect.MoreCollectors;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 
@@ -33,8 +35,7 @@ class PluginsHelper {
 				.stream()
 				.filter(plugin::isInstance)
 				.map(plugin::cast)
-				.findFirst()
-				.orElseThrow();
+				.collect(MoreCollectors.onlyElement());
 	}
 
 	private static void setPluginState(final OsmandPlugin plugin,

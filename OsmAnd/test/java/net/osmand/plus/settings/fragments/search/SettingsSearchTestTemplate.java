@@ -8,7 +8,6 @@ import static net.osmand.plus.settings.fragments.search.SearchButtonClick.clickS
 import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.hasSearchResultWithSubstring;
 import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.searchResultsView;
 import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.searchView;
-
 import static org.hamcrest.Matchers.not;
 
 import android.content.Context;
@@ -66,14 +65,16 @@ abstract class SettingsSearchTestTemplate implements ISettingsSearchTest {
 	}
 
 	private Set<OsmandPlugin> enablePlugins(final OsmandApplication app) {
-		return getEnabledPluginClasses()
+		return this
+				.getEnabledPluginClasses()
 				.stream()
 				.map(enabledPluginClass -> PluginsHelper.enablePlugin(enabledPluginClass, app))
 				.collect(Collectors.toUnmodifiableSet());
 	}
 
 	private Set<OsmandPlugin> disablePlugins(final OsmandApplication app) {
-		return getDisabledPluginClasses()
+		return this
+				.getDisabledPluginClasses()
 				.stream()
 				.map(disabledPluginClass -> PluginsHelper.disablePlugin(disabledPluginClass, app))
 				.collect(Collectors.toUnmodifiableSet());
