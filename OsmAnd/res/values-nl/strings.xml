@@ -1600,7 +1600,7 @@
     <string name="nm">nmi</string>
     <string name="si_nm">Nautische mijlen</string>
     <string name="si_kmh">Kilometer per uur</string>
-    <string name="si_mph">Mijlen per uur</string>
+    <string name="si_mph">Mijl per uur</string>
     <string name="si_m_s">Meter per seconde</string>
     <string name="si_min_km">Minuten per kilometer</string>
     <string name="si_min_m">Minuten per mijl</string>
@@ -5029,7 +5029,7 @@
     <string name="external_device_details_disconnect">Verbreek verbinding</string>
     <string name="external_device_ble">BLE</string>
     <string name="ant_plus_searching_text">Sensoren zoeken</string>
-    <string name="release_4_4">- Verbeterd \"Tracks\" menu in \"Kaart configureren\". \n \n - Contextmenu toont nu gelokaliseerde namen voor POI\'s \n \n - Optie toegevoegd om route via link te delen \n \n - Lengte-eenheid \"Nautische mijlen/voeten\" toegevoegd \n \n - Kaartoriëntatie nieuwe vaste modus toegevoegd \n \n - Startscherm vereenvoudigd \n \n - Vaste locatiepositie in gesplitste schermmodus in Android Auto \n \n - Snelheids-/hellinggrafiek toegevoegd voor trackanalyse \n \n - Android 13 verplaatst app taalselectie naar systeeminstellingen \n \n - Problemen met de weergave van Vegan-plaatsen opgelost \n \n - Mogelijkheid toegevoegd om online tegels te downloaden die worden gebruikt als \"Overlay\" of \"Underlay\" kaarten \n \n - Ondersteuning toegevoegd van imperiale eenheden voor \"Voertuigparameters\". \n \n - Nieuw bromfietsprofiel \n \n - Nieuwe \"Automatisch\" weergavepositie optie toegevoegd \n \n - Kaartbewegingen voor kantelen, zoomen en draaien opgelost</string>
+    <string name="release_4_4">- Verbetert \"Tracks\" menu in \"Kaart configureren\". \n \n - Contextmenu toont nu gelokaliseerde namen voor POI\'s \n \n - Optie toegevoegd om route via link te delen \n \n - Lengte-eenheid \"Nautische mijlen/voeten\" toegevoegd \n \n - Kaartoriëntatie nieuwe vaste modus toegevoegd \n \n - Startscherm vereenvoudigd \n \n - Vaste locatiepositie in gesplitste schermmodus in Android Auto \n \n - Snelheids-/hellinggrafiek toegevoegd voor trackanalyse \n \n - Android 13 verplaatst app taalselectie naar systeeminstellingen \n \n - Problemen met de weergave van Vegan-plaatsen opgelost \n \n - Mogelijkheid toegevoegd om online tegels te downloaden die worden gebruikt als \"Overlay\" of \"Underlay\" kaarten \n \n - Ondersteuning toegevoegd van imperiale eenheden voor \"Voertuigparameters\". \n \n - Nieuw bromfietsprofiel \n \n - Nieuwe \"Automatisch\" weergavepositie optie toegevoegd \n \n - Kaartbewegingen voor kantelen, zoomen en draaien opgelost</string>
     <string name="sort_duration_ascending">Kortste duur eerst</string>
     <string name="selected_value">Geselecteerde waarde</string>
     <string name="common_weight_limit_error">De minimumwaarde is \"%1$s\" %2$s. Gebruik het \"%3$s\" profiel indien het gewicht van het voertuig lager is dan de minimumwaarde.</string>
@@ -5432,7 +5432,7 @@
     <string name="topography_maps">Topografie kaarten</string>
     <string name="shared_string_action">Actie</string>
     <string name="key_event_action_take_media_note">Medianotitie maken</string>
-    <string name="live_monitoring_adress_descr">Specificeer het webadres met het parameterformaat: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Specificeer het webadres met het parameterformaat: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_temperature">Temperatuur</string>
     <string name="help_article_navigation_routing_train_routing_name">Treinroutes</string>
     <string name="standard_maps">Standaard kaarten</string>
@@ -6314,4 +6314,16 @@
     <string name="meridian_line">Meridiaanlijn</string>
     <string name="backup_deleted_all_data">Gegevens gewist.</string>
     <string name="backup_deleting_all_data">Gegevens wissen…</string>
+    <string name="astro_visible_objects">Zichtbare objecten</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_star_clusters">Sterrenhopen</string>
+    <string name="astro_nebulas">Nevels en gaswolken</string>
+    <string name="astro_solar_system">Zonnestelsel</string>
+    <string name="astro_rendering">Renderen</string>
+    <string name="red_filter">Roodfilter</string>
+    <string name="astro_deep_sky">Deepsky</string>
+    <string name="astro_configure_view">Configureer weergave</string>
+    <string name="astro_directions">Richtingen</string>
+    <string name="astro_daily_path">Dagelijkse baan</string>
 </resources>

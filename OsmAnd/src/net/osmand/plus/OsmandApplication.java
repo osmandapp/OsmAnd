@@ -5,7 +5,6 @@ import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 import static net.osmand.shared.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
 import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_FEET;
 import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_METERS;
-
 import static btools.routingapp.BRouterServiceConnection.BROUTER_CONNECT_TIMEOUT_MS;
 
 import android.content.Context;
@@ -75,14 +74,15 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.dialogs.FavoriteSortModesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
-import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
+import net.osmand.plus.plugins.monitoring.live.LiveMonitoringHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
@@ -714,6 +714,11 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	@NonNull
+	public FavoriteSortModesHelper getFavoriteSortModesHelper() {
+		return favoritesHelper.getFavoriteSortModesHelper();
+	}
+
+	@NonNull
 	public HelpArticlesHelper getHelpArticlesHelper() {
 		return helpArticlesHelper;
 	}
@@ -836,7 +841,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void startApplication() {
 		feedbackHelper.setExceptionHandler();
-		if (NetworkUtils.hasProxy() && settings.isProxyEnabled()) {
+		if (!NetworkUtils.hasProxy() && settings.isProxyEnabled()) {
 			try {
 				NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
 			} catch (RuntimeException e) {

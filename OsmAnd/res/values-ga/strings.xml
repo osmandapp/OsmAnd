@@ -569,7 +569,7 @@
     <string name="external_device_details_battery">Cadhnra</string>
     <string name="map_widget_ant_bicycle_power">Cumhacht rothar</string>
     <string name="daily">Laethúil</string>
-    <string name="live_monitoring_adress_descr">Luaigh an seoladh gréasáin go sonrach leis an gcomhréir pharaiméadair: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Luaigh an seoladh gréasáin go sonrach leis an gcomhréir pharaiméadair: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="shared_string_download_successful">Íoslódáilte</string>
     <string name="shared_string_vehicle">Feithicil</string>
@@ -5801,4 +5801,16 @@
     <string name="equator_line">Líne an Mheánchiorcail</string>
     <string name="backup_deleted_all_data">Sonraí scriosta.</string>
     <string name="backup_deleting_all_data">Ag scriosadh sonraí…</string>
+    <string name="astro_rendering">Rindreáil</string>
+    <string name="astro_configure_view">Cumraigh an radharc</string>
+    <string name="astro_visible_objects">Réada infheicthe</string>
+    <string name="red_filter">Scagaire dearg</string>
+    <string name="astro_directions">Treoracha</string>
+    <string name="astro_daily_path">Cosán Laethúil</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_deep_sky">Spéir dhomhain</string>
+    <string name="astro_star_clusters">Réaltbhraislí</string>
+    <string name="astro_nebulas">Néalta</string>
+    <string name="astro_solar_system">Córas gréine</string>
 </resources>

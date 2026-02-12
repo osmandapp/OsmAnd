@@ -5087,7 +5087,7 @@
     <string name="max_altitude">حداکثر ارتفاع</string>
     <string name="app_mode_baby_transport">حمل کودک</string>
     <string name="release_4_6">• اندروید اتو: افزودن حالت سه‌بعدی\n\n • رد ها: معرفی پالایه‌ها و پوشه‌های هوشمند، بهینه‌سازی حافظه برای پرونده‌های بزرگ‌تر\n\n • بهبود پنل‌های ابزارک بالا و پایین برای جای دادن همه ابزارک‌ها\n\n • بهبود مدیریت منابع محلی\n\n • نگاشت دکمه‌های سفارشی برای کنترلرهای خارجی\n\n • ابزارک‌های جدید: «نسبت گلاید» و «موقعیت خورشید»\n\n • ابر OsmAnd: دسترسی به پرونده‌های پاک‌شده\n\n • بهبود رنگ‌آمیزی رد در حالت شیب با گرادیان متقارن جدید\n\n • رفع مشکلات نوار وضعیت شفاف\n\n • افزودن پشتیبانی از ابزارک دمای ANT+\n\n • معرفی ابزارک «حافظه رم در دسترس»</string>
-    <string name="live_monitoring_adress_descr">نشانی وب را با سینتکس پارامتر مشخص کنید: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">نشانی وب را با سینتکس پارامتر مشخص کنید: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_temperature">دما</string>
     <string name="sensor_temperature_desc">دما را از حسگر نمایش می‌دهد</string>
     <string name="with_waypoints">با نقاط راه</string>

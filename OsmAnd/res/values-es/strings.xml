@@ -3649,7 +3649,7 @@
     <string name="shared_string_sec">seg</string>
     <string name="shared_string_turn">Giros</string>
     <string name="start_recording">Iniciar grabación</string>
-    <string name="show_track_on_map">Mostrar traza en el mapa</string>
+    <string name="show_track_on_map">Mostrar la pista en el mapa</string>
     <string name="routing_engine_vehicle_type_wheelchair">Silla de ruedas</string>
     <string name="routing_engine_vehicle_type_hiking">Senderismo</string>
     <string name="routing_engine_vehicle_type_walking">Peatón</string>
@@ -4922,7 +4922,7 @@
     <string name="send_crash_log_descr">Contiene sólo datos sobre los cuelgues de la aplicación</string>
     <string name="open_issue_on_github_descr">Haz preguntas, propone características</string>
     <string name="most_viewed">Más visto</string>
-    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="sensor_temperature_desc">Muestra la temperatura del sensor</string>
     <string name="release_4_6">- Android Auto: Añadido el modo 3D \n \n - Pistas: Introducidos filtros y carpetas inteligentes, optimizada la memoria para archivos más grandes \n \n - Paneles de widgets superior e inferior mejorados para dar cabida a todos los widgets \n \n - Gestión mejorada de los recursos locales \n \n - Asignación de botones personalizable para controladores externos \n \n - Nuevos widgets: \"Relación de planeo\" y \"Posición del sol\". \n \n - OsmAnd Cloud: Ahora accede a los archivos borrados \n \n - Mejora de la coloración de la pista en modo Pendiente con un nuevo gradiente simétrico \n \n - Resueltos los problemas con la barra de estado transparente \n \n - Añadido soporte para el widget de temperatura ANT \n \n - Introducido widget \"RAM disponible\"</string>
@@ -5542,7 +5542,7 @@
     <string name="recently_visited">Vistos recientemente</string>
     <string name="hmd_promo_description">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s meses</string>
     <string name="show_image_previews">Mostrar vistas previas de las imágenes</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Alternar la visibilidad de la cuadrícula de coordenadas en el mapa.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Acción para controlar la visibilidad de la red de coordenadas en el mapa.</string>
     <string name="layer_coordinates_grid">Cuadrícula de coordenadas</string>
     <string name="choose_location">Elija una ubicación</string>
     <string name="point_location">Ubicación del punto</string>
@@ -5688,7 +5688,7 @@
     <string name="descent">Descenso</string>
     <string name="map_orientations_choose_description">Deja este campo en blanco para cambiar entre todos los modos disponibles o añadir solo los que prefieras.</string>
     <string name="map_orientations">Orientaciones del mapa</string>
-    <string name="altitude_metrics_description">Establece la unidad de visualización de la altitud en widgets y estadísticas.</string>
+    <string name="altitude_metrics_description">Establece la unidad mostrada para la altitud tanto en los widgets como en las estadísticas.</string>
     <string name="write_location_provider_description">Guardar proveedor de ubicación en cada punto del recorrido durante la grabación</string>
     <string name="write_location_provider">Escribir proveedor de ubicación</string>
     <string name="map_orientation_portrait_inverted">Vertical (invertido)</string>
@@ -5895,4 +5895,7 @@
     <string name="organize_by_summary">Organiza automáticamente tus recorridos en grupos según un parámetro seleccionado, como actividad, velocidad o ubicación.</string>
     <string name="map_screen_layout_descr">Elija si desea utilizar un diseño único para todas las orientaciones o personalizar Vertical y Horizontal por separado.</string>
     <string name="panels_layout_descr">Elija un diseño para los paneles superior e inferior. Pueden ser anchos, abarcando todo el ancho de la pantalla, o compactos, encajando entre los paneles laterales y los botones.</string>
+    <string name="galactic_line">Línea Galáctica</string>
+    <string name="meridian_line">Línea Meridiana</string>
+    <string name="equator_line">Línea del Ecuador</string>
 </resources>

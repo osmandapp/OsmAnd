@@ -4137,7 +4137,7 @@
     <string name="rendering_attr_alpineHiking_name">Скала на трудност на пешеходни маршрути</string>
     <string name="auto_zoom_smooth">Плавно</string>
     <string name="auto_zoom_discrete">Дискретно</string>
-    <string name="live_monitoring_adress_descr">Укажете адрес със следния синтаксис на параметрите: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Укажете адрес със следния синтаксис на параметрите: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="upload_local_versions">Качване на местна версия</string>
     <string name="contact_us">Свържете се с нас</string>
     <string name="quick_action_map_style">Стил на картата</string>
