@@ -530,6 +530,35 @@ public class FavouritesHelper {
 		return true;
 	}
 
+	public void editFavouritesGroup(@NonNull List<FavouritePoint> points, @NonNull String newCategory) {
+		for (FavouritePoint point : points) {
+			String oldCategory = point.getCategory();
+			point.setCategory(newCategory);
+			if (!oldCategory.equals(newCategory)) {
+				FavoriteGroup old = flatGroups.get(oldCategory);
+				if (old != null) {
+					old.getPoints().remove(point);
+				}
+				FavoriteGroup pg = getOrCreateGroup(point);
+				point.setVisible(pg.isVisible());
+				if (SpecialPointType.PARKING == point.getSpecialPointType()) {
+					point.setColor(ContextCompat.getColor(app, R.color.parking_icon_background));
+				} else {
+					if (point.getColor() == 0) {
+						point.setColor(pg.getColor());
+					}
+				}
+				pg.getPoints().add(point);
+			}
+		}
+
+		sortAll();
+		saveCurrentPointsIntoFile(true);
+		if (!Algorithms.isEmpty(points)) {
+			runSyncWithMarkers(getOrCreateGroup(points.get(0)));
+		}
+	}
+
 	private void editAddressDescription(@NonNull FavouritePoint p, @Nullable String address) {
 		p.setAddress(address);
 		saveCurrentPointsIntoFile(true);

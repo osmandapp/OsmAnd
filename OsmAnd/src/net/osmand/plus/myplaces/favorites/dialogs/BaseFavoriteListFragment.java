@@ -51,6 +51,7 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 		implements SortFavoriteListener, FragmentStateHolder, FavoriteActionListener, ShareFavoritesListener {
 
 	protected static final String SELECTED_GROUP_KEY = "selected_group_key";
+	protected static final String SELECTION_MODE_KEY = "selection_mode_key";
 
 	protected FavouritesHelper helper;
 	protected ImportHelper importHelper;
@@ -65,6 +66,27 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 		importHelper = app.getImportHelper();
 		setHasOptionsMenu(true);
 		helper = app.getFavoritesHelper();
+		if (savedInstanceState != null) {
+			if (savedInstanceState.containsKey(SELECTION_MODE_KEY)) {
+				selectionMode = savedInstanceState.getBoolean(SELECTION_MODE_KEY, false);
+			}
+			if (savedInstanceState.containsKey(SELECTED_GROUP_KEY)) {
+				FavoriteGroup group = helper.getGroup(savedInstanceState.getString(SELECTED_GROUP_KEY));
+				if (group != null) {
+					selectedGroup = group;
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+
+		outState.putBoolean(SELECTION_MODE_KEY, selectionMode);
+		if (selectedGroup != null) {
+			outState.putString(SELECTED_GROUP_KEY, selectedGroup.getName());
+		}
 	}
 
 	@Nullable
@@ -100,6 +122,7 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 				setEnabled(true);
 			}
 		};
+		setSelectionMode(selectionMode);
 
 		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backCallback);
 	}
@@ -214,7 +237,10 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 	@Override
 	public void onPause() {
 		super.onPause();
-		exitSelectionMode();
+		Activity activity = getActivity();
+		if (activity == null || !activity.isChangingConfigurations()) {
+			exitSelectionMode();
+		}
 	}
 
 	@Nullable
