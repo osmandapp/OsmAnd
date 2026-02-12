@@ -155,7 +155,11 @@ public class FavouritesFileHelper {
 			String key = entry.getKey();
 			PointsGroup pointsGroup = entry.getValue();
 			FavoriteGroup favoriteGroup = FavoriteGroup.fromPointsGroup(pointsGroup);
-
+			File file = new File(gpxFile.getPath());
+			if (file.exists()) {
+				favoriteGroup.setSize(file.length());
+				favoriteGroup.setTimeModified(gpxFile.getModifiedTime());
+			}
 			favoriteGroups.put(key, favoriteGroup);
 		}
 	}

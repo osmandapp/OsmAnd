@@ -296,6 +296,16 @@ object GpxUtilities {
 			this.hidden = hidden
 		}
 
+		constructor(name: String, iconName: String?, backgroundType: String?, color: Int, hidden: Boolean, pinned: Boolean?) : this(
+			name
+		) {
+			this.iconName = iconName
+			this.backgroundType = backgroundType
+			this.color = color
+			this.hidden = hidden
+			this.pinned = pinned
+		}
+
 		constructor(point: WptPt) : this(point.category ?: "") {
 			color = point.getColor()
 			iconName = point.getIconName()

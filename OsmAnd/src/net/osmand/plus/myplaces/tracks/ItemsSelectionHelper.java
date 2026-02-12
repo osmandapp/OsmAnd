@@ -7,13 +7,33 @@ import net.osmand.util.Algorithms;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class ItemsSelectionHelper<T> {
 
-	private final Set<T> allItems = Collections.synchronizedSet(new HashSet<>());
-	private final Set<T> selectedItems = Collections.synchronizedSet(new HashSet<>());
-	private final Set<T> originalSelectedItems = Collections.synchronizedSet(new HashSet<>());
+	private final Supplier<Set<T>> setFactory;
+
+	private final Set<T> allItems;
+	private final Set<T> selectedItems;
+	private final Set<T> originalSelectedItems;
+
+	public ItemsSelectionHelper() {
+		this(HashSet::new);
+	}
+
+	public ItemsSelectionHelper(boolean preserveSelectionOrder) {
+		this(preserveSelectionOrder ? LinkedHashSet::new : HashSet::new);
+	}
+
+	public ItemsSelectionHelper(@NonNull Supplier<Set<T>> setFactory) {
+		this.setFactory = setFactory;
+
+		this.allItems = Collections.synchronizedSet(setFactory.get());
+		this.selectedItems = Collections.synchronizedSet(setFactory.get());
+		this.originalSelectedItems = Collections.synchronizedSet(setFactory.get());
+	}
 
 	public void syncWith(@NonNull ItemsSelectionHelper<T> helper) {
 		setAllItems(helper.getAllItems());
@@ -23,17 +43,25 @@ public class ItemsSelectionHelper<T> {
 
 	@NonNull
 	public Set<T> getAllItems() {
-		return new HashSet<>(allItems);
+		return copyOf(allItems);
 	}
 
 	@NonNull
 	public Set<T> getSelectedItems() {
-		return new HashSet<>(selectedItems);
+		return copyOf(selectedItems);
 	}
 
 	@NonNull
 	public Set<T> getOriginalSelectedItems() {
-		return new HashSet<>(originalSelectedItems);
+		return copyOf(originalSelectedItems);
+	}
+
+	private Set<T> copyOf(@NonNull Set<T> src) {
+		Set<T> copy = setFactory.get();
+		synchronized (src) {
+			copy.addAll(src);
+		}
+		return copy;
 	}
 
 	public void setAllItems(@NonNull Collection<? extends T> allItems) {
