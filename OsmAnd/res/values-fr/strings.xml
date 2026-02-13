@@ -5900,9 +5900,9 @@
     <string name="astro_configure_view">Configurer l\'affichage</string>
     <string name="astro_daily_path">Itinéraire quotidien</string>
     <string name="delete_groups_confirmation">Supprimer les groupes ?</string>
-    <string name="add_to_track">Ajouter à la piste</string>
+    <string name="add_to_track">Ajouter à la trace</string>
     <string name="unpin_folder">Détacher le dossier</string>
     <string name="pin_folder">Épingler le dossier</string>
     <string name="favorite_search_empty_state_description">Ajustez votre recherche ou vos filtres pour voir si cela aide</string>
-    <string name="favorites_empty_folder_description">Ce dossier ne contient encore aucun point.</string>
+    <string name="favorites_empty_folder_description">Ce dossier ne contient aucun point pour l\'instant.</string>
 </resources>
