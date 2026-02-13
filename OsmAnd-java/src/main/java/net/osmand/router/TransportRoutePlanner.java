@@ -80,7 +80,11 @@ public class TransportRoutePlanner {
 		double maxTravelTimeCmpToWalk = totalDistance / ctx.cfg.walkSpeed;
 		List<TransportRouteSegment> results = new ArrayList<TransportRouteSegment>();
 		initProgressBar(ctx, start, end);
+		long dedup1 = 0, dedup2 = 0, dedup3 = 0, maxQueueSize = 0;
+		long sumSgms = 0, cntSgms = 0, maxSgms = 0;
+		int[] depthCnt = new int[16];
 		while (!queue.isEmpty()) {
+			maxQueueSize = Math.max(maxQueueSize, queue.size());
 			long beginMs = MEASURE_TIME ? System.currentTimeMillis() : 0;
 			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 				return null;
@@ -92,6 +96,7 @@ public class TransportRoutePlanner {
 				if (exDistFromStart > segment.distFromStart) {
 					System.err.printf("exDistFromStart %.1f > %.1f (%s)%n", exDistFromStart, segment.distFromStart, segment);
 				}
+				dedup1++;
 				continue;
 			}
 			ctx.visitedRoutesCount++;
@@ -99,6 +104,7 @@ public class TransportRoutePlanner {
 
 			if (segment.distFromStart > finishTime * ctx.cfg.increaseForAlternativesRoutes ||
 					segment.distFromStart > maxTravelTimeCmpToWalk) {
+				System.err.printf("WARN: XXX break-1\n");
 				break;
 			}
 			TransportRouteSegment finish = null;
@@ -143,16 +149,22 @@ public class TransportRoutePlanner {
 				}
 				sgms.clear();
 				if (segment.getDepth() < ctx.cfg.maxNumberOfChanges + 1) {
+					depthCnt[Math.min(15, segment.getDepth())]++;
 					sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
+					maxSgms = Math.max(maxSgms, sgms.size());
+					sumSgms += sgms.size();
+					cntSgms++;
 					ctx.visitedStops++;
 					for (TransportRouteSegment sgm : sgms) {
 						if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 							return null;
 						}
 						if (segment.wasVisited(sgm)) {
+							dedup3++;
 							continue;
 						}
 						if (ctx.visitedSegmentsDistFromStart.containsKey(segmentWithParentId(sgm, segment))) {
+							dedup2++;
 							continue;
 						}
 						TransportRouteSegment nextSegment = new TransportRouteSegment(sgm);
@@ -204,12 +216,13 @@ public class TransportRoutePlanner {
 				if (finishTime > finish.distFromStart) {
 					finishTime = finish.distFromStart;
 				}
-				if (finish.distFromStart < finishTime * ctx.cfg.increaseForAlternativesRoutes && 
+				if (finish.distFromStart < finishTime * ctx.cfg.increaseForAlternativesRoutes &&
 						(finish.distFromStart < maxTravelTimeCmpToWalk || results.size() == 0)) {
 					results.add(finish);
 					// Stop when results reached range [1000 min, 2500 (for default limit * changes), 5000 max]
 					int optimalLimitOfResults = 25 * ctx.cfg.ptLimitResultsByNumber * ctx.cfg.maxNumberOfChanges;
 					if (results.size() > Math.min(Math.max(1000, optimalLimitOfResults), 5000)) {
+						System.err.printf("WARN: XXX break-2\n");
 						break;
 					}
 				}
@@ -228,11 +241,14 @@ public class TransportRoutePlanner {
 			updateCalculationProgress(ctx, queue);
 			
 		}
+		System.err.printf("WARN: XXX queue max=%,d d1=%,d d2=%,d d3=%,d\n", maxQueueSize, dedup1, dedup2, dedup3);
+		System.err.printf("WARN: XXX segments max=%,d avg=%,d\n", maxSgms, sumSgms / cntSgms);
 		return prepareResults(ctx, results);
 	}
 
 	private long segmentWithParentId(TransportRouteSegment segment, TransportRouteSegment parent) {
-		return ((parent != null ? ObfConstants.getOsmIdFromBinaryMapObjectId(parent.road.getId()) : 0) << 30l) 
+//		if ((segment.getId() >>> 30) != 0) System.out.println("XXX SEGID>2^30 " + segment.getId());
+		return ((parent != null ? ObfConstants.getOsmIdFromBinaryMapObjectId(parent.road.getId()) : 0) << 31L)
 				+ segment.getId();
 	}
 	
