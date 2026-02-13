@@ -63,7 +63,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private static final long MOVE_ANIMATION_TIME = 500;
 	public static final int AUTO_ZOOM_DEFAULT_CHANGE_ZOOM = 4500;
 	private static final float DELAY_TO_ROTATE_AFTER_RESET_ROTATION = 1000f;
-	public static final long KEEP_ELEVATION_ANGLE_AFTER_SURFACE_HIT = 5000;
+	public static final long KEEP_VIEWPOINT_AFTER_SURFACE_HIT = 5000;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -373,7 +373,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 		if (mapRenderer.hitSurface())
 			hitTime = System.currentTimeMillis();
-		if (System.currentTimeMillis() - hitTime < KEEP_ELEVATION_ANGLE_AFTER_SURFACE_HIT) {
+		if (System.currentTimeMillis() - hitTime < KEEP_VIEWPOINT_AFTER_SURFACE_HIT) {
 			elevationAngle = 0;
 			zoomParams = null;
 		}
