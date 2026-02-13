@@ -5903,5 +5903,5 @@
     <string name="unpin_folder">Mappa kitűzésének megszüntetése</string>
     <string name="pin_folder">Mappa kitűzése</string>
     <string name="favorite_search_empty_state_description">Finomítsa a keresést vagy módosítsa a szűrőket, hátha úgy sikerül</string>
-    <string name="favorites_empty_folder_description">Ebben a mappában még nincsenek pontok.</string>
+    <string name="favorites_empty_folder_description">Ebben a mappában még nincs pont.</string>
 </resources>
