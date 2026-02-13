@@ -724,7 +724,7 @@
     <string name="osmand_parking_position_name">Lugar del aparcamiento</string>
     <string name="osmand_parking_plugin_description">Marque dónde está estacionado su automóvil y notifique a su calendario cuándo caducará el parquímetro. Para colocar el marcador, elija un lugar en el mapa, vaya a \"Acciones\" y toque \"Agregar estacionamiento\".</string>
     <string name="osmand_parking_plugin_name">Aparcamiento</string>
-    <string name="context_menu_item_add_parking_point">Marcar como aparcamiento</string>
+    <string name="context_menu_item_add_parking_point">Marcar como ubicación de aparcamiento</string>
     <string name="context_menu_item_delete_parking_point">Quitar marcador de aparcamiento</string>
     <string name="starting_point_too_far">Punto de partida demasiado lejos del camino más cercano.</string>
     <string name="shared_location">Ubicación compartida</string>
@@ -2877,7 +2877,7 @@
     <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación.</string>
     <string name="rendering_attr_showLez_name">Zonas de baja emisión</string>
     <string name="temporary_conditional_routing">Considerar limitaciones temporales</string>
-    <string name="shared_string_default">Predefinido</string>
+    <string name="shared_string_default">Predeterminado</string>
     <string name="app_mode_camper">Casa rodante (camper)</string>
     <string name="new_route_calculated_dist_dbg">Ruta: distancia %1$s, tiempo de navegación %2$s
 \nCálculo: %3$.1f seg, %4$d carreteras, %5$d teselas)</string>
@@ -5014,7 +5014,7 @@
     <string name="remove_type_q">¿Quitar el periférico «%1$s»?</string>
     <string name="shared_string_action">Acción</string>
     <string name="add_new_type">Añadir nuevo periférico</string>
-    <string name="key_event_action_move_up">Mover arriba</string>
+    <string name="key_event_action_move_up">Subir</string>
     <string name="key_event_action_open_search_view">Abrir vista de búsqueda</string>
     <string name="key_event_action_zoom_out">Alejar</string>
     <string name="key_event_action_toggle_drower">Mostrar/ocultar menú lateral</string>
@@ -5024,7 +5024,7 @@
     <string name="key_bindings">Atajos de teclado</string>
     <string name="key_event_action_move_to_my_location">Mover a mi ubicación</string>
     <string name="key_event_category_map_interactions">Interacciones del mapa</string>
-    <string name="key_event_action_move_down">Mover abajo</string>
+    <string name="key_event_action_move_down">Bajar</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Abrir cuadrícula de datos de WunderLINQ</string>
     <string name="key_event_category_actions">Acciones</string>
     <string name="deletion_error">Error de borrado</string>
@@ -5327,10 +5327,10 @@
     <string name="quick_action_navigation_view_desc">Un interruptor que abre o cierra la vista de la navegación.</string>
     <string name="quick_action_navigation_view_title">Vista de navegación</string>
     <string name="quick_action_switch_compass_desc">Un interruptor que alterna la orientación del mapa.</string>
-    <string name="corner_radius">Redondear esquinas</string>
+    <string name="corner_radius">Radio de esquina</string>
     <string name="shared_string_dp">dp</string>
     <string name="background_opacity">Opacidad del fondo</string>
-    <string name="my_location_action_descr">Centra el mapa en tu ubicación actual.</string>
+    <string name="my_location_action_descr">Centra el mapa en función de su ubicación actual.</string>
     <string name="map_3d_mode_action_descr">Cambia la inclinación del mapa.</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Muestra senderos para motos todoterreno</string>
     <string name="raster_layers_action_descr">Cambia las capas rasterizadas</string>
@@ -5468,7 +5468,7 @@
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Muestra la tasa de consumo del combustible, según los cálculos (%/h)</string>
     <string name="kpa_unit">kPa</string>
     <string name="bt_start_pair_failed">No se puede vincular con el dispositivo</string>
-    <string name="dynamic_icon_type_summary">El icono cambia según el estado de la acción.</string>
+    <string name="dynamic_icon_type_summary">El icono cambia en función del estado de acción.</string>
     <string name="shared_string_dynamic">Dinámico</string>
     <string name="obd_connected_to_device">Conectado a %s</string>
     <string name="obd_not_connected_to_device">Desconectado de %s</string>
@@ -5898,4 +5898,20 @@
     <string name="galactic_line">Línea Galáctica</string>
     <string name="meridian_line">Línea Meridiana</string>
     <string name="equator_line">Línea del Ecuador</string>
+    <string name="delete_groups_confirmation">¿Quiere eliminar los grupos?</string>
+    <string name="add_to_track">Añadir a traza</string>
+    <string name="unpin_folder">Desanclar carpeta</string>
+    <string name="pin_folder">Anclar carpeta</string>
+    <string name="favorites_empty_folder_description">Esta carpeta aún no tiene ningún punto.</string>
+    <string name="astro_rendering">Representación</string>
+    <string name="astro_configure_view">Configurar vista</string>
+    <string name="astro_visible_objects">Objetos visibles</string>
+    <string name="red_filter">Filtro rojo</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_star_clusters">Cúmulos estelares</string>
+    <string name="astro_nebulas">Nebulosas</string>
+    <string name="astro_solar_system">Sistema solar</string>
+    <string name="backup_deleted_all_data">Datos eliminados.</string>
+    <string name="backup_deleting_all_data">Eliminando datos…</string>
 </resources>
