@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -34,6 +35,7 @@ import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -78,10 +80,21 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public static final float MIN_VERTICAL_EXAGGERATION = 1.0f;
 	public static final float MAX_VERTICAL_EXAGGERATION = 3.0f;
+	public static final float BUILDINGS_3D_ALPHA_DEF_VALUE = 0.5f;
+	public static final int BUILDINGS_3D_DEFAULT_COLOR = 0x666666;
 
 
 	public final CommonPreference<Boolean> TERRAIN;
 	public final CommonPreference<String> TERRAIN_MODE;
+	public final OsmandPreference<Boolean> ENABLE_3D_MAP_OBJECTS;
+	public final OsmandPreference<Boolean> BUILDINGS_3D_DETAIL_LEVEL;
+	public final OsmandPreference<Boolean> BUILDINGS_3D_ENABLE_COLORING;
+	public final CommonPreference<Float> BUILDINGS_3D_ALPHA;
+	public final CommonPreference<Integer> BUILDINGS_3D_VIEW_DISTANCE;
+	public final CommonPreference<Integer> BUILDINGS_3D_COLOR_STYLE;
+	public final CommonPreference<String> BUILDINGS_3D_COLOR;
+	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_NIGHT_COLOR;
+	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_DAY_COLOR;
 
 
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM;
@@ -91,6 +104,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	private final StateChangedListener<String> terrainModeListener;
 	private final StateChangedListener<Float> verticalExaggerationListener;
 	private final StateChangedListener<MetricsConstants> metricSystemListener;
+	private final StateChangedListener<Boolean> map3DObjectsListener;
+
 
 	private TerrainLayer terrainLayer;
 
@@ -101,6 +116,19 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public SRTMPlugin(OsmandApplication app) {
 		super(app);
+
+		ENABLE_3D_MAP_OBJECTS = registerBooleanPreference("enable_3d_map_objects", false).makeProfile().cache();
+		BUILDINGS_3D_ALPHA = registerFloatPreference("3d_buildings_alpha", BUILDINGS_3D_ALPHA_DEF_VALUE).makeProfile().cache();
+		BUILDINGS_3D_VIEW_DISTANCE = registerIntPreference("3d_buildings_view_distance", 1).makeProfile().cache();
+
+		BUILDINGS_3D_COLOR_STYLE = registerIntPreference("buildings_3d_color_style", 1).makeProfile().cache();
+		BUILDINGS_3D_CUSTOM_NIGHT_COLOR = registerIntPreference("buildings_3d_custom_night_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
+		BUILDINGS_3D_CUSTOM_DAY_COLOR = registerIntPreference("buildings_3d_custom_day_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
+
+
+		BUILDINGS_3D_DETAIL_LEVEL = settings.getCustomRenderBooleanProperty("show3DbuildingParts");
+		BUILDINGS_3D_ENABLE_COLORING = settings.getCustomRenderBooleanProperty("useDefaultBuildingColor");
+		BUILDINGS_3D_COLOR = settings.getCustomRenderProperty("base3DBuildingsColor");
 
 		TERRAIN = registerBooleanPreference("terrain_layer", true).makeProfile();
 		TerrainMode[] tms = TerrainMode.values(app);
@@ -141,6 +169,18 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		metricSystemListener = constants -> app.getOsmandMap().getMapView().refreshMapComplete();
 		app.getSettings().METRIC_SYSTEM.addListener(metricSystemListener);
+
+		map3DObjectsListener = enabled -> {
+			MapRendererContext ctx = net.osmand.plus.views.corenative.NativeCoreContext.getMapRendererContext();
+			if (ctx != null) {
+				if (Boolean.TRUE.equals(enabled)) {
+					ctx.recreate3DObjectsProvider();
+				} else {
+					ctx.reset3DObjectsProvider();
+				}
+			}
+		};
+		ENABLE_3D_MAP_OBJECTS.addListener(map3DObjectsListener);
 	}
 
 	@Override
@@ -210,6 +250,14 @@ public class SRTMPlugin extends OsmandPlugin {
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
 		OsmandSettings settings = app.getSettings();
 		settings.getCustomRenderProperty(CONTOUR_LINES_ATTR).setDefaultValue("13");
+		MapRendererContext ctx = net.osmand.plus.views.corenative.NativeCoreContext.getMapRendererContext();
+		if (ctx != null) {
+			if (Boolean.TRUE.equals(ENABLE_3D_MAP_OBJECTS.get())) {
+				ctx.recreate3DObjectsProvider();
+			} else {
+				ctx.reset3DObjectsProvider();
+			}
+		}
 		return true;
 	}
 
@@ -294,6 +342,10 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public void resetTransparencyToDefault() {
 		getTerrainMode().resetTransparencyToDefault();
+	}
+
+	public void reset3DBuildingAlphaToDefault() {
+		BUILDINGS_3D_ALPHA.set(BUILDINGS_3D_ALPHA_DEF_VALUE);
 	}
 
 	public void resetVerticalExaggerationToDefault() {
@@ -454,7 +506,7 @@ public class SRTMPlugin extends OsmandPlugin {
 						settings.ENABLE_3D_MAPS.set(isChecked);
 						item.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 						item.setSelected(isChecked);
-						item.setDescription(app.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
+						item.setDescription(app.getString(isChecked ? get3DBuildingDetailLvlDescription() : R.string.shared_string_off));
 						uiAdapter.onDataSetChanged();
 
 						app.runInUIThread(() -> app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateAllControls(mapActivity));
@@ -493,9 +545,53 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setListener(listener)
 
 		);
+
+		boolean enabled = ENABLE_3D_MAP_OBJECTS.get();
+		adapter.addItem(new ContextMenuItem(TERRAIN_3D_MAP_OBJECTS)
+				.setTitleId(R.string.enable_3d_objects, mapActivity)
+				.setIcon(R.drawable.ic_action_3d_buildings)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setDescription(app.getString(enabled ? get3DBuildingDetailLvlDescription() : R.string.shared_string_off))
+				.setSelected(enabled)
+				.setColor(app, enabled ? R.color.osmand_orange : INVALID_ID)
+				.setListener(new OnRowItemClick() {
+
+					@Override
+					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+					                              @NonNull View view, @NonNull ContextMenuItem item) {
+						int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
+						int itemId = item.getTitleId();
+						if (itemId == R.string.enable_3d_objects) {
+							mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.BUILDINGS_3D, viewCoordinates);
+							return false;
+						}
+						return true;
+					}
+
+					@Override
+					public boolean onContextMenuClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+					                                  @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+						int itemId = item.getTitleId();
+						if (itemId == R.string.enable_3d_objects) {
+							ENABLE_3D_MAP_OBJECTS.set(isChecked);
+							item.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+							item.setSelected(isChecked);
+							item.setDescription(app.getString(isChecked ? get3DBuildingDetailLvlDescription() : R.string.shared_string_off));
+							uiAdapter.onDataSetChanged();
+						}
+						return true;
+					}
+				}).setItemDeleteAction(ENABLE_3D_MAP_OBJECTS));
+
+
 		if (app.useOpenGlRenderer()) {
 			add3DReliefItem(adapter, mapActivity, listener);
 		}
+	}
+
+	private int get3DBuildingDetailLvlDescription() {
+		boolean level = BUILDINGS_3D_DETAIL_LEVEL.get();
+		return Building3DDetailLevel.Companion.fromValue(level).getLabelResId();
 	}
 
 	private void add3DReliefItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity, @NonNull ItemClickListener listener) {
@@ -513,51 +609,13 @@ public class SRTMPlugin extends OsmandPlugin {
 			item.setColor(app, enabled3DMode ? R.color.osmand_orange : INVALID_ID);
 			item.setSelected(enabled3DMode);
 			item.setSecondaryIcon(R.drawable.ic_action_additional_option);
-			item.setDescription(app.getString(enabled3DMode ? R.string.shared_string_on : R.string.shared_string_off));
+			item.setDescription(app.getString(enabled3DMode ? get3DBuildingDetailLvlDescription() : R.string.shared_string_off));
 		}
 		adapter.addItem(item);
 	}
 
 	private void createDeveloperItems(@NonNull OsmandDevelopmentPlugin plugin,
-			@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
-		boolean enabled = plugin.ENABLE_3D_MAP_OBJECTS.get();
-		adapter.addItem(new ContextMenuItem(TERRAIN_3D_MAP_OBJECTS)
-				.setTitleId(R.string.enable_3d_objects, activity)
-				.setIcon(R.drawable.ic_action_3d)
-				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setDescription(app.getString(enabled ? R.string.shared_string_on : R.string.shared_string_off))
-				.setSelected(enabled)
-				.setColor(app, enabled ? R.color.osmand_orange : INVALID_ID)
-				.setListener(new OnRowItemClick() {
-
-					@Override
-					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
-							@NonNull View view, @NonNull ContextMenuItem item) {
-						int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
-						int itemId = item.getTitleId();
-						if (itemId == R.string.enable_3d_objects) {
-							activity.getDashboard().setDashboardVisibility(true, DashboardType.BUILDINGS_3D, viewCoordinates);
-							return false;
-						}
-						return true;
-					}
-
-					@Override
-					public boolean onContextMenuClick(@NonNull OnDataChangeUiAdapter uiAdapter,
-							@Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
-						int itemId = item.getTitleId();
-						if (itemId == R.string.enable_3d_objects) {
-							plugin.ENABLE_3D_MAP_OBJECTS.set(isChecked);
-							item.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-							item.setSelected(isChecked);
-							item.setDescription(app.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
-							uiAdapter.onDataSetChanged();
-						}
-						return true;
-					}
-				}).setItemDeleteAction(plugin.ENABLE_3D_MAP_OBJECTS));
-
-
+	                                  @NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
 		adapter.addItem(new ContextMenuItem(TERRAIN_SPHERICAL_MAP)
 				.setTitleId(R.string.show_spherical_map, activity)
 				.setIcon(R.drawable.ic_world_globe_dark)
@@ -567,7 +625,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setListener(new OnRowItemClick() {
 					@Override
 					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
-							@Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+					                                  @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
 						settings.SPHERICAL_MAP.set(isChecked);
 						item.setColor(app, settings.SPHERICAL_MAP.get() ? R.color.osmand_orange : INVALID_ID);
 						if (uiAdapter != null) {
@@ -639,8 +697,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void selectPropertyValue(@NonNull MapActivity activity,
-			@NonNull RenderingRuleProperty property,
-			@NonNull CommonPreference<String> preference, @Nullable Runnable callback) {
+	                                @NonNull RenderingRuleProperty property,
+	                                @NonNull CommonPreference<String> preference, @Nullable Runnable callback) {
 		List<String> possibleValues = new ArrayList<>(Arrays.asList(property.getPossibleValues()));
 
 		int index = AndroidUtils.getRenderPropertySelectedValueIndex(app, property);
@@ -730,9 +788,51 @@ public class SRTMPlugin extends OsmandPlugin {
 		mapRendererContext.updateElevationConfiguration();
 		mapRendererContext.recreateHeightmapProvider();
 		mapRendererContext.updateVerticalExaggerationScale();
+		MapRendererView rendererView = mapRendererContext.getMapRendererView();
+		if (rendererView != null) {
+			rendererView.set3DBuildingsAlpha(BUILDINGS_3D_ALPHA.get());
+			rendererView.set3DBuildingsDetalization(BUILDINGS_3D_VIEW_DISTANCE.get());
+		}
+		if (ENABLE_3D_MAP_OBJECTS.get()) {
+			mapRendererContext.recreate3DObjectsProvider();
+		} else {
+			mapRendererContext.reset3DObjectsProvider();
+		}
 	}
 
 	public void getTerrainModeIcon(@NonNull String modeKey, @NonNull CollectColorPalletListener listener) {
 		app.getColorPaletteHelper().getColorPaletteAsync(modeKey, listener);
+	}
+
+	public void apply3DBuildingsDetalization() {
+		MapRendererContext ctx = NativeCoreContext.getMapRendererContext();
+		if (ctx != null) {
+			MapRendererView rendererView = ctx.getMapRendererView();
+			if (rendererView != null) {
+				rendererView.set3DBuildingsDetalization(BUILDINGS_3D_VIEW_DISTANCE.get());
+			}
+		}
+	}
+
+	public void apply3DBuildingsAlpha(float alpha) {
+		MapRendererContext ctx = NativeCoreContext.getMapRendererContext();
+		if (ctx != null) {
+			MapRendererView rendererView = ctx.getMapRendererView();
+			if (rendererView != null) {
+				rendererView.set3DBuildingsAlpha(alpha);
+			}
+		}
+	}
+
+	public void apply3DBuildingsColorStyle(Buildings3DColorType style) {
+		BUILDINGS_3D_ENABLE_COLORING.set(style == Buildings3DColorType.CUSTOM);
+		if (style == Buildings3DColorType.CUSTOM) {
+			boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.MAP);
+			apply3DBuildingsColor(nightMode ? BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get() : BUILDINGS_3D_CUSTOM_DAY_COLOR.get());
+		}
+	}
+
+	public void apply3DBuildingsColor(int color) {
+		BUILDINGS_3D_COLOR.set(Algorithms.colorToString(color));
 	}
 }
