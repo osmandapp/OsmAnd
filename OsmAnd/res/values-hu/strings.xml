@@ -5898,10 +5898,10 @@
     <string name="astro_deep_sky">Mélyég</string>
     <string name="astro_star_clusters">Csillaghalmazok</string>
     <string name="astro_nebulas">Ködök</string>
-    <string name="delete_groups_confirmation">Csoportok törlése?</string>
+    <string name="delete_groups_confirmation">Biztosan törli a csoportokat?</string>
     <string name="add_to_track">Hozzáadás a nyomvonalhoz</string>
-    <string name="unpin_folder">Mappa kitűzésének feloldása</string>
+    <string name="unpin_folder">Mappa kitűzésének megszüntetése</string>
     <string name="pin_folder">Mappa kitűzése</string>
-    <string name="favorite_search_empty_state_description">Módosítsa a keresést vagy a szűrőket, hátha segít</string>
-    <string name="favorites_empty_folder_description">Ennek a mappának még nincsenek pontjai.</string>
+    <string name="favorite_search_empty_state_description">Finomítsa a keresést vagy módosítsa a szűrőket, hátha úgy sikerül</string>
+    <string name="favorites_empty_folder_description">Ebben a mappában még nincsenek pontok.</string>
 </resources>
