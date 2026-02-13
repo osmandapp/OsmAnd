@@ -6001,4 +6001,11 @@
     <string name="equator_line">Лінія екватора</string>
     <string name="backup_deleted_all_data">Видалені дані.</string>
     <string name="backup_deleting_all_data">Видалення даних…</string>
+    <string name="astro_configure_view">Налаштувати вигляд</string>
+    <string name="astro_visible_objects">Видимі об\'єкти</string>
+    <string name="red_filter">Червоний фільтр</string>
+    <string name="astro_directions">Напрямки</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_solar_system">Сонячна система</string>
 </resources>

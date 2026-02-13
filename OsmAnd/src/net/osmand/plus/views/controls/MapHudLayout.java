@@ -331,7 +331,7 @@ public class MapHudLayout extends FrameLayout {
 		} else if (view instanceof SideWidgetsPanel panel) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_TOP);
-			position.setPositionHorizontal(panel.rightSide ? POS_RIGHT : POS_LEFT);
+			position.setPositionHorizontal(panel.isRightSide() ? POS_RIGHT : POS_LEFT);
 			position.setNonMoveable();
 		} else if (id == R.id.left_side_menu) {
 			position.setMoveDescendantsHorizontal();

@@ -72,8 +72,8 @@ class LiveSender extends AsyncTask<Void, Void, Void> {
 				baseUrl = "https://" + baseUrl + "/userdata/translation/msg?" +
 						"lat={0}&lon={1}&lat={0}&timestamp={2}&" +
 						"hdop={3}&altitude={4}&speed={5}&" +
-						"bearing={6}&tta={7}&ttf={8}&dta={9}&dtf={10}&&" +
-						"deviceid={11}&accessToken={12}";
+						"bearing={6}&tta={7}&ttf={8}&dta={9}&dtf={10}&batproc={11}&" +
+						"deviceid={12}&accessToken={13}";
 			}
 			urlStr = getLiveUrl(baseUrl, data);
 		} catch (IllegalArgumentException e) {
@@ -161,15 +161,15 @@ class LiveSender extends AsyncTask<Void, Void, Void> {
 					prm.add(data.distanceToIntermediateOrFinish + "");
 					break;
 				case 11:
+					prm.add(data.battery + "");
+					break;
+				case 12:
 					// deviceid
 					prm.add(app.getSettings().BACKUP_DEVICE_ID.get());
 					break;
-				case 12:
+				case 13:
 					// accessToken
 					prm.add(app.getSettings().BACKUP_ACCESS_TOKEN.get());
-					break;
-				case 13:
-					prm.add(data.battery + "");
 					break;
 				default:
 					break;

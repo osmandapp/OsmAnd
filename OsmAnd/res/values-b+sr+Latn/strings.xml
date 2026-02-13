@@ -1437,7 +1437,7 @@
     <string name="gpx_monitoring_disabled_warn">Zapisuj rutu koristeći vidžet GPX-a ili preko podešavanja na Snimanje putovanja.</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Odredite vremenski skladište u kojem se drže lokacije radi slanja bez interneta</string>
     <string name="live_monitoring_max_interval_to_send">Vremenski skladište za mrežno praćenje</string>
-    <string name="live_monitoring_url">WEB adresa za internet praćenje</string>
+    <string name="live_monitoring_url">Web adresa za onlajn praćenje</string>
     <string name="live_monitoring_url_descr">Unesi veb adresu sa sledećim oblikom za odrednice: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_interval">Interval praćenja na internetu</string>
     <string name="live_monitoring_interval_descr">Odredi inerval praćenja na internetu.</string>
@@ -1526,9 +1526,7 @@
     <string name="days_behind">prethodni dani</string>
     <string name="debugging_and_development">OsmAnd razvoj</string>
     <string name="osmand_development_plugin_description">Podešavanja za razvoj i otklanjanje grešaka kao što su simuliranje navođenja, učinak iscrtavanja ili glasovni upiti. Namenjeno programerima, nepotrebno prilikom normalnog korišćenja.</string>
-    <string name="osm_editing_plugin_description">Doprinosi OSM-u, opštoj zajednici koja stvara i održava obimnu mapu sveta i obezbeđuje redovna ažuriranje svakom korisniku.
-\n
-\nMožeš pronaći uputsva kako uređivati mapu na našim stranicama %1$s.</string>
+    <string name="osm_editing_plugin_description">Doprinesite OSM-u, globalnoj zajednici koja održava sveobuhvatnu mapu sveta i pruža ažurirane podatke otvorenog koda svakom korisniku.\n\nUputstva o tome kako da uredite mapu možete pronaći na našoj veb stranici %1$s.</string>
     <string name="osm_editing_plugin_name">Uređivanje OSM mapa</string>
     <string name="osmand_accessibility_description">Čini da se mogućnosti pristupačnosti iz uređaja mogu koristiti direktno u OsmAnd-u. Može da upravlja brzinom izgovora veštačkih glasova, podešavanje D-pada za navođenje, korišćenje točkića za upravljanje približavanja, izgovara čitanje, npr. da ti kaže lokaciju.</string>
     <string name="shared_string_accessibility">Pristupačnost</string>
@@ -1811,7 +1809,7 @@
     <string name="disable_complex_routing_descr">Isključi dvostepeno usmeravanje navigacije u autu.</string>
     <string name="complex_route_calculation_failed">Brzo izračunavanje rute nije uspelo (%s), prebacujem se na sporo izračunavanje.</string>
     <string name="speech_rate">Brzina izgovora</string>
-    <string name="speech_rate_descr">Odaberi brzinu izgovora komjuterskog glasa TTS.</string>
+    <string name="speech_rate_descr">Odaberi brzinu izgovora komjuterskog glasa.</string>
     <string name="routing_preferences_descr">Podešavanje rutiranja</string>
     <string name="guidance_preferences_descr">Podešavanje navigacije</string>
     <string name="app_mode_truck">Kamion</string>
@@ -1908,7 +1906,7 @@
     <string name="city_type_district">Distrikt</string>
     <string name="shared_string_from">iz</string>
     <string name="postcode">Poštanski broj</string>
-    <string name="search_categories">TOI kategorije</string>
+    <string name="search_categories">Kategorije</string>
     <string name="share_history_subject">deljeno preko OsmAnd-a</string>
     <string name="dist_away_from_my_location">Traži %1$s udaljeno</string>
     <string name="show_something_on_map">Prikazati na mapi %1$s</string>
@@ -2592,7 +2590,7 @@
     <string name="apply_filters">Primeni filtere</string>
     <string name="shared_string_filters">Filteri</string>
     <string name="custom_search">Opširnija pretraga</string>
-    <string name="create_custom_poi">TOI kategorije za pretragu</string>
+    <string name="create_custom_poi">Napravi prilagođeni filter</string>
     <string name="selected_categories">Izabrane kategorije</string>
     <string name="subcategories">Potkategorije</string>
     <string name="edit_filter">Uredi filter</string>
@@ -2818,7 +2816,7 @@
     <string name="street_level_imagery">Slike na nivou ulice</string>
     <string name="plan_route_exit_dialog_descr">Odbaci sve promene na planiranoj ruti?</string>
     <string name="in_case_of_reverse_direction">U slučaju obrnutog pravca</string>
-    <string name="shared_string_save_as_gpx">Sačuvaj kao novu fajl GPX trase</string>
+    <string name="shared_string_save_as_gpx">Sačuvaj kao novi fajl trase</string>
     <string name="add_segment_to_the_track">Dodaj u fajl trase</string>
     <string name="shared_string_gpx_files">Trase</string>
     <string name="layer_gpx_layer">Trase</string>
@@ -3371,7 +3369,7 @@
     <string name="voice_announces_info">Glasovna obaveštenja su samo za vreme navigacije.</string>
     <string name="vehicle_parameters">Parametri vozila</string>
     <string name="vehicle_parameters_descr">Težina, visina, dužina, brzina</string>
-    <string name="shared_string_other">GPS najave</string>
+    <string name="shared_string_other">Drugo</string>
     <string name="map_during_navigation">Mapa za vreme navođenja</string>
     <string name="map_during_navigation_info">Mapa za vreme navođenja</string>
     <string name="turn_screen_on">Uključivanje ekrana</string>
@@ -3400,7 +3398,7 @@
     <string name="change_default_settings">Promeni podešavanja</string>
     <string name="pref_selected_by_default_for_profiles">Ovo podešavanje je odabrano za podrazumevani profile : %s</string>
     <string name="coordinates_format_info">Označeni oblik će biti primenjen kroz celi program.</string>
-    <string name="navigate_point_format_olc">Otvoreni kod lokacija (OLC)</string>
+    <string name="navigate_point_format_olc">Otvoreni kod lokacija</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="navigate_point_format_utm">Standard UTM-a</string>
     <string name="shared_string_example">Primer</string>
@@ -3795,7 +3793,7 @@
     <string name="update_all_maps_added">Ažuriraj sve mape dodate na %1$s?</string>
     <string name="exit_number">Broj izlaza</string>
     <string name="announce_when_exceeded">Obavestiti na prekoračenu brzinu</string>
-    <string name="user_points">Sopstvene TOI</string>
+    <string name="user_points">Sopstvene tačke</string>
     <string name="output">Izlaz</string>
     <string name="estimated_download_size">Procenjena veličina preuzimanja</string>
     <string name="transparent_status_bar">Transparentna statusna traka</string>
@@ -4624,7 +4622,7 @@
     <string name="routing_attr_hazmat_category_usa_5_name">Zapaljive i nagrizajuće materije i organski peroksidi</string>
     <string name="routing_attr_hazmat_category_usa_6_name">Otrovne i zarazne materije</string>
     <string name="shared_string_class">Klasa</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Koristi raster SQLite za senčenja reljefa/ padina</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Koristi raster sqlitedb za senčenja reljefa / padina</string>
     <string name="osmand_cloud_deleting_account_descr">Kroz nekoliko trenutaka će svi Vaši podaci i nalozi biti izbrisani iz Oblaka OsmAnda.
 \n
 \nSvi podaci na uređaju ostaće celoviti.</string>
@@ -4763,7 +4761,7 @@
     <string name="sort_country_name_ascending">Po imenu od A – Ž</string>
     <string name="sort_country_name_descending">Po imenu od Ž – A</string>
     <string name="sensor_temperature_desc">Prikazuje temperaturu izmerenu senzorom</string>
-    <string name="help_article_map_point_layers_on_map_name">TOI na mapi</string>
+    <string name="help_article_map_point_layers_on_map_name">Tačke na mapi</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O OsmAnd rutiranju</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Navođenje pomoću oznaka</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Rutiranje biciklom (MTB)</string>
@@ -4771,7 +4769,7 @@
     <string name="help_article_personal_import_export_name">Uvoz / izvoz</string>
     <string name="help_article_personal_profiles_name">Profili (podešavanja)</string>
     <string name="help_article_navigation_guidance_name">Navigacijsko vođenje</string>
-    <string name="help_article_plan_route_web_name">WEB planer rute</string>
+    <string name="help_article_plan_route_web_name">Web planer rute</string>
     <string name="help_article_search_search_all_name">Pretraži sve</string>
     <string name="help_article_purchases_giveaway_name">Poklon</string>
     <string name="help_article_purchases_ios_name">Kupovina iOS-om</string>
@@ -5101,7 +5099,7 @@
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="delete_trash_item_confirmation_desc">Brišeš \"%1$s\" trajno?</string>
-    <string name="no_config_smart_folder_title">NIje konfigurisano</string>
+    <string name="no_config_smart_folder_title">Nije konfigurisano</string>
     <string name="not_specified">Nije naznačeno</string>
     <string name="shared_string_is_deleted">%1$s je obrisan.</string>
     <string name="shared_string_delete_immediately">Obriši odmah</string>

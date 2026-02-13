@@ -170,7 +170,7 @@
     <string name="poi_traffic_calming_table">Підвищений пішохідний перехід</string>
     <string name="poi_traffic_calming_choker">Звуження дороги</string>
     <string name="poi_traffic_signals">Світлофор</string>
-    <string name="poi_car_repair">Ремонт машин (СТО)</string>
+    <string name="poi_car_repair">Ремонт авто (СТО)</string>
     <string name="poi_service_tyres">Шини; Шина; Шини</string>
     <string name="poi_vehicle_inspection">Огляд автомобіля</string>
     <string name="poi_car_wash">Мийка автомобіля</string>
@@ -370,7 +370,7 @@
     <string name="poi_training">Навчальний центр</string>
     <string name="poi_university">Університет</string>
     <string name="poi_prison">Вʼязниця</string>
-    <string name="poi_register_office">РАГС</string>
+    <string name="poi_register_office">РАЦС</string>
     <string name="poi_embassy">Посольство</string>
     <string name="poi_pension_fund">Пенсійний фонд</string>
     <string name="poi_customs">Митниця</string>
@@ -4799,7 +4799,7 @@
     <string name="poi_us_maps_recreation_area_activity_rv_camping">Кемпінг на колесах</string>
     <string name="poi_us_maps_recreation_area_activity_scuba_diving">Підводне плавання з аквалангом</string>
     <string name="poi_us_maps_recreation_area_activity_trapping">Відлов у пастки</string>
-    <string name="poi_nfs_yes">Під управлінням Лісової служби США</string>
+    <string name="poi_nfs_yes">Керується Лісовою службою США</string>
     <string name="poi_us_maps_recreation_area_activity_viewing_wildlife">Спостереження за дикою природою</string>
     <string name="poi_us_maps_recreation_area_activity_visitor_centers">Центри для відвідувачів</string>
     <string name="poi_us_maps_recreation_area_activity_water_activities">Активність на воді</string>

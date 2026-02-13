@@ -2093,7 +2093,7 @@
     <string name="quick_action_btn_tutorial_descr">Tryk og hold og træk knappen skifter dens placering på skærmen.</string>
     <string name="quick_action_interim_dialog">Vis en midlertidig dialogboks</string>
     <string name="shared_string_action_name">Genvejsnavn</string>
-    <string name="navigate_point_olc">Open Location Code (OLC)</string>
+    <string name="navigate_point_olc">Open Location Code</string>
     <string name="navigate_point_olc_info_invalid">Ugyldig OLC
 \n</string>
     <string name="navigate_point_olc_info_short">Kort OLC 
@@ -2973,7 +2973,7 @@
     <string name="utm_format_descr">OsmAnd bruger UTM standard, som er tilsvarende, men ikke identisk med UTM NATO-format.</string>
     <string name="shared_string_example">Eksempel</string>
     <string name="navigate_point_format_utm">UTM standard</string>
-    <string name="navigate_point_format_olc">Open Location Code (OLC)</string>
+    <string name="navigate_point_format_olc">Open Location Code</string>
     <string name="coordinates_format_info">Det valgte format vil blive anvendt alle steder i programmet.</string>
     <string name="pref_selected_by_default_for_profiles">Indstillingen er valgt som standard for profiler: %s</string>
     <string name="change_default_settings">Skift indstilling</string>
@@ -4519,7 +4519,7 @@
     <string name="depth_contours">Dybdekonturer</string>
     <string name="nautical_depth_points">Nautiske dybdepunkter</string>
     <string name="worldwide_maps">Globale kort</string>
-    <string name="external_sensor_widgets">ANT+ moduler</string>
+    <string name="external_sensor_widgets">Eksterne sensorer</string>
     <string name="ant_missing_dependency_descr">Den krævede tjeneste \"%1$s\" blev ikke fundet.
 \nDu skal installere ANT+ Plugins-tjenesten.
 \nVil du starte Play Store for at gøre dette\?</string>
