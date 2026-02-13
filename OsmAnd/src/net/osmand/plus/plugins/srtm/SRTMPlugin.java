@@ -89,7 +89,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> ENABLE_3D_MAP_OBJECTS;
 	public final OsmandPreference<Boolean> BUILDINGS_3D_DETAIL_LEVEL;
 	public final OsmandPreference<Boolean> BUILDINGS_3D_ENABLE_COLORING;
-	public final OsmandPreference<Boolean> BUILDINGS_3D_coloredBuildings;
 	public final CommonPreference<Float> BUILDINGS_3D_ALPHA;
 	public final CommonPreference<Integer> BUILDINGS_3D_VIEW_DISTANCE;
 	public final CommonPreference<Integer> BUILDINGS_3D_COLOR_STYLE;
@@ -128,7 +127,6 @@ public class SRTMPlugin extends OsmandPlugin {
 
 
 		BUILDINGS_3D_DETAIL_LEVEL = settings.getCustomRenderBooleanProperty("show3DbuildingParts");
-		BUILDINGS_3D_coloredBuildings = settings.getCustomRenderBooleanProperty("coloredBuildings");
 		BUILDINGS_3D_ENABLE_COLORING = settings.getCustomRenderBooleanProperty("useDefaultBuildingColor");
 		BUILDINGS_3D_COLOR = settings.getCustomRenderProperty("base3DBuildingsColor");
 
@@ -835,6 +833,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void apply3DBuildingsColor(int color) {
-		BUILDINGS_3D_COLOR.set(Integer.toHexString(color));
+		BUILDINGS_3D_COLOR.set(Algorithms.colorToString(color));
 	}
 }

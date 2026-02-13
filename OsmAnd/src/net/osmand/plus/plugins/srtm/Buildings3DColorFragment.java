@@ -54,7 +54,6 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 	private View paidCustomColorContainer;
 	private TextToggleButton dayNightToggleButton;
 
-	private ColorCardController colorCardController;
 	private boolean isDayModeColorSelection = true;
 	private int dayColor;
 	private int nightColor;
@@ -142,17 +141,6 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 				srtmPlugin.BUILDINGS_3D_COLOR_STYLE.get() != colorType.getId();
 	}
 
-
-	private ColorCardController getColorCardController() {
-		if (colorCardController == null) {
-			AppearanceData data = new AppearanceData();
-			data.setParameter(GpxParameter.COLOR, null);
-			data.setParameter(GpxParameter.COLORING_TYPE, null);
-			colorCardController = new ColorCardController(app, data, true);
-		}
-		return colorCardController;
-	}
-
 	public static void showInstance(@NonNull FragmentManager manager) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			manager.beginTransaction()
@@ -160,21 +148,6 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 					.addToBackStack(null)
 					.commitAllowingStateLoss();
 		}
-	}
-
-	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) {
-		BaseCard.CardListener.super.onCardLayoutNeeded(card);
-	}
-
-	@Override
-	public void onCardPressed(@NonNull BaseCard card) {
-		BaseCard.CardListener.super.onCardPressed(card);
-	}
-
-	@Override
-	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
-		BaseCard.CardListener.super.onCardButtonPressed(card, buttonIndex);
 	}
 
 	private void createColorSelector(@NonNull View view) {

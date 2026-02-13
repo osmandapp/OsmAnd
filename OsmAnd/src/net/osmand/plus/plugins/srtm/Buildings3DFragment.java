@@ -158,14 +158,14 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 
 	private void setupViewDistanceToggleButtons(@NonNull View view) {
 		int level = plugin.BUILDINGS_3D_VIEW_DISTANCE.get();
-		IconToggleButton.IconRadioItem low = new IconToggleButton.IconRadioItem(R.drawable.ic_action_3d_buildings_level_of_detail_1);
+		IconToggleButton.IconRadioItem low = new IconToggleButton.IconRadioItem(R.drawable.ic_action_view_distance_low);
 		low.setOnClickListener((radioItem, v) -> {
 			onViewDistanceChanged(low, 1);
 			return true;
 		});
 		low.setContentDescription(app.getString(R.string.building_3d_near_distance_content_desc));
 
-		IconToggleButton.IconRadioItem high = new IconToggleButton.IconRadioItem(R.drawable.ic_action_3d_buildings_level_of_detail_2);
+		IconToggleButton.IconRadioItem high = new IconToggleButton.IconRadioItem(R.drawable.ic_action_view_distance_high);
 		high.setOnClickListener((radioItem, v) -> {
 			onViewDistanceChanged(high, 2);
 			return true;
@@ -202,7 +202,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		boolean enabled = plugin.ENABLE_3D_MAP_OBJECTS.get();
 		if (enabled) {
 			int profileColor = settings.getApplicationMode().getProfileColor(nightMode);
-			iconIv.setImageDrawable(getPaintedIcon(R.drawable.ic_action_3d, profileColor));
+			iconIv.setImageDrawable(getPaintedIcon(R.drawable.ic_action_3d_buildings, profileColor));
 			stateTv.setText(R.string.shared_string_on);
 		} else {
 			iconIv.setImageDrawable(getIcon(R.drawable.ic_action_3d, ColorUtilities.getSecondaryIconColorId(nightMode)));
@@ -222,17 +222,6 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		collection.replace(InsetTarget.createBottomContainer(R.id.main_container).landscapeLeftSided(true));
 		collection.removeType(Type.ROOT_INSET);
 		return collection;
-	}
-
-	@NonNull
-	public static List<RenderingRuleProperty> get3DBuildingsRules(@NonNull OsmandApplication app) {
-		List<RenderingRuleProperty> rules = new ArrayList<>();
-		for (RenderingRuleProperty property : ConfigureMapUtils.getCustomRules(app)) {
-			if (BUILDINGS_3D.equals(property.getCategory())) {
-				rules.add(property);
-			}
-		}
-		return rules;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

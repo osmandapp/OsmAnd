@@ -32,7 +32,6 @@
 	<string name="building_3d_day_color_content_desc">3d buildings day theme color</string>
 	<string name="building_3d_night_color_content_desc">3d buildings night theme color</string>
 	<string name="building_3d_low_details_content_desc">3d buildings low details</string>
-	<string name="building_3d_low_details_content_desc">3d buildings low details</string>
 	<string name="building_3d_high_details_content_desc">3d buildings high</string>
 	<string name="building_3d_near_distance_content_desc">3d buildings distance near</string>
 	<string name="building_3d_far_distance_content_desc">3d buildings distance far</string>
