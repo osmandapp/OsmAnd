@@ -5865,4 +5865,10 @@
     <string name="astro_star_clusters">Cúmulos estelares</string>
     <string name="astro_nebulas">Nebulosas</string>
     <string name="astro_solar_system">Sistema solar</string>
+    <string name="delete_groups_confirmation">¿Borrar los grupos?</string>
+    <string name="add_to_track">Agregar a la traza</string>
+    <string name="unpin_folder">Desfijar carpeta</string>
+    <string name="pin_folder">Fijar carpeta</string>
+    <string name="favorite_search_empty_state_description">Ajusta mejor tu búsqueda o filtros, para ver si esto ayuda</string>
+    <string name="favorites_empty_folder_description">Esta carpeta no contiene puntos todavía.</string>
 </resources>
