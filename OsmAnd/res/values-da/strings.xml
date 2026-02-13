@@ -6038,4 +6038,10 @@
     <string name="astro_solar_system">Solsystem</string>
     <string name="astro_rendering">Gengivelse</string>
     <string name="astro_deep_sky">Det dybe rum</string>
+    <string name="delete_groups_confirmation">Slet grupper?</string>
+    <string name="add_to_track">Føj til spor</string>
+    <string name="unpin_folder">Frigør mappe</string>
+    <string name="pin_folder">Fastgør mappe</string>
+    <string name="favorite_search_empty_state_description">Juster din søgning eller filtre for at se, om det hjælper</string>
+    <string name="favorites_empty_folder_description">Denne mappe har endnu ingen punkter.</string>
 </resources>
