@@ -369,11 +369,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 		int elevationAngle = 0;
 		if (zoomParams != null && mapView.getElevationAngle() != DEFAULT_ELEVATION_ANGLE) {
-			if (mapRenderer.hitSurface())
-				hitTime = System.currentTimeMillis();
-			else if (System.currentTimeMillis() - hitTime > KEEP_ELEVATION_ANGLE_AFTER_SURFACE_HIT)
-				elevationAngle = settings.AUTO_ZOOM_3D_ANGLE.get();
+			elevationAngle = settings.AUTO_ZOOM_3D_ANGLE.get();
 		}
+		if (mapRenderer.hitSurface())
+			hitTime = System.currentTimeMillis();
+		if (System.currentTimeMillis() - hitTime < KEEP_ELEVATION_ANGLE_AFTER_SURFACE_HIT) {
+			elevationAngle = 0;
+			zoomParams = null;
+		}
+
 		double latitude = predictedLocation != null ? predictedLocation.getLatitude() : location.getLatitude();
 		double longitude = predictedLocation != null ? predictedLocation.getLongitude() : location.getLongitude();
 		mapView.getAnimatedDraggingThread().startMoving(
