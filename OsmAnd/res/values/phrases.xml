@@ -3341,7 +3341,7 @@
 	<string name="poi_cuisine_noodle">Noodle</string>
 	<string name="poi_cuisine_donut">Donut</string>
 	<string name="poi_cuisine_ramen">Ramen</string>
-	<string name="poi_cuisine_crepe">Crepe</string>
+	<string name="poi_cuisine_crepe">Crepe;Crepes</string>
 	<string name="poi_cuisine_breakfast">Breakfast</string>
 	<string name="poi_cuisine_beef_bowl">Gyudon</string>
 	<string name="poi_cuisine_steak">Steak</string>
@@ -3386,7 +3386,6 @@
 	<string name="poi_cuisine_yogurt">Yogurt</string>
 	<string name="poi_cuisine_gyros">Gyros</string>
 	<string name="poi_cuisine_empanada">Empanada</string>
-	<string name="poi_cuisine_crepes">Crepes</string>
 	<string name="poi_cuisine_yakiniku">Yakiniku</string>
 	<string name="poi_cuisine_suki">Suki</string>
 	<string name="poi_cuisine_udon">Udon</string>
