@@ -32,7 +32,6 @@ import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
 import net.osmand.PlatformUtil;
-import net.osmand.StateChangedListener;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
@@ -109,7 +108,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
-import net.osmand.plus.settings.fragments.search.PluginSettingsOfConfigureProfileFragmentAdapter;
 import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
@@ -240,12 +238,6 @@ public class OsmandApplication extends MultiDexApplication {
 	private TileSourceTemplatesProvider tileSourceTemplatesProvider;
 
 	public final PreferencesDatabaseManager<net.osmand.plus.settings.fragments.search.Configuration> preferencesDatabaseManager = new PreferencesDatabaseManager<>();
-	private final StateChangedListener<String> pluginsListenerAdaptingSearchDatabase =
-			plugins ->
-					preferencesDatabaseManager
-							.getPreferencesDatabase()
-							.searchablePreferenceScreenTreeRepository()
-							.addTreeTransformer(new PluginSettingsOfConfigureProfileFragmentAdapter(getTileSourceTemplatesProvider()));
 
 	public static OsmandApplication getInstanceFromContext(final Context context) {
 		return (OsmandApplication) context.getApplicationContext();
@@ -319,7 +311,6 @@ public class OsmandApplication extends MultiDexApplication {
 						new TileSourceTemplatesDownloader(
 								Version.getVersionAsURLParam(this)),
 						false);
-		settings.PLUGINS.addListener(pluginsListenerAdaptingSearchDatabase);
 	}
 
 	public TileSourceTemplatesProvider getTileSourceTemplatesProvider() {

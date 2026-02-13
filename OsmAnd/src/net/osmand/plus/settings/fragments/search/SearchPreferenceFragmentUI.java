@@ -15,10 +15,10 @@ import de.KnollFrank.lib.settingssearch.search.ui.ProgressContainerUI;
 
 class SearchPreferenceFragmentUI implements de.KnollFrank.lib.settingssearch.search.ui.SearchPreferenceFragmentUI {
 
-	private final SearchResultsFilter searchResultsFilter;
+	private final EnabledProfilesSearchResultsFilter enabledProfilesSearchResultsFilter;
 
-	public SearchPreferenceFragmentUI(final SearchResultsFilter searchResultsFilter) {
-		this.searchResultsFilter = searchResultsFilter;
+	public SearchPreferenceFragmentUI(final EnabledProfilesSearchResultsFilter enabledProfilesSearchResultsFilter) {
+		this.enabledProfilesSearchResultsFilter = enabledProfilesSearchResultsFilter;
 	}
 
 	@Override
@@ -60,10 +60,10 @@ class SearchPreferenceFragmentUI implements de.KnollFrank.lib.settingssearch.sea
 	}
 
 	private void configureCheckBox(final CheckBox searchInsideDisabledProfiles, final SearchForQueryAndDisplayResultsCommand searchForQueryAndDisplayResultsCommand) {
-		searchInsideDisabledProfiles.setChecked(!searchResultsFilter.shallRemoveSearchResultsConnectedToDisabledProfiles());
+		searchInsideDisabledProfiles.setChecked(!enabledProfilesSearchResultsFilter.shallRemoveSearchResultsConnectedToDisabledProfiles());
 		searchInsideDisabledProfiles.setOnCheckedChangeListener(
 				(_checkBox, _searchInsideDisabledProfiles) -> {
-					searchResultsFilter.setRemoveSearchResultsConnectedToDisabledProfiles(!_searchInsideDisabledProfiles);
+					enabledProfilesSearchResultsFilter.setRemoveSearchResultsConnectedToDisabledProfiles(!_searchInsideDisabledProfiles);
 					searchForQueryAndDisplayResultsCommand.searchForQueryAndDisplayResults();
 				});
 	}

@@ -963,7 +963,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile() :
 								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(),
 						new ActualConfigurationProvider().getActualConfiguration(),
-						new TreeProcessorFactory(app.getTileSourceTemplatesProvider()),
+						new TreeProcessorFactory(),
 						new ConfigurationBundleConverter(),
 						this);
 

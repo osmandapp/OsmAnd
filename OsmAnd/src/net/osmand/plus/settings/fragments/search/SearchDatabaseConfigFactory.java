@@ -39,7 +39,7 @@ public class SearchDatabaseConfigFactory {
 		return SearchDatabaseConfig
 				.builder(
 						getRootPreferenceFragment(),
-						new TreeProcessorFactory(tileSourceTemplatesProvider))
+						new TreeProcessorFactory())
 				.withFragmentFactory(new FragmentFactory())
 				.withActivitySearchDatabaseConfigs(createActivitySearchDatabaseConfigs())
 				.withActivityInitializerByActivity(getActivityInitializerByActivity(fragmentManager))

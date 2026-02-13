@@ -1,9 +1,34 @@
 package net.osmand.plus;
 
 import static net.osmand.IndexConstants.SETTINGS_DIR;
-import static net.osmand.plus.AppInitEvents.*;
+import static net.osmand.plus.AppInitEvents.BROUTER_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.FAVORITES_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.GPX_DB_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.INDEXES_RELOADED;
+import static net.osmand.plus.AppInitEvents.INDEX_REGION_BOUNDARIES;
+import static net.osmand.plus.AppInitEvents.INIT_RENDERERS;
+import static net.osmand.plus.AppInitEvents.LIVE_UPDATES_ALERTS_CHECKED;
+import static net.osmand.plus.AppInitEvents.LOAD_GPX_TRACKS;
+import static net.osmand.plus.AppInitEvents.MARKERS_GROUPS_SYNCED;
+import static net.osmand.plus.AppInitEvents.NATIVE_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.NATIVE_OPEN_GL_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.POI_FILTERS_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.POI_TYPES_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.ROUTING_CONFIG_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.SAVE_GPX_TRACKS;
+import static net.osmand.plus.AppInitEvents.SEARCH_UI_CORE_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.TASK_CHANGED;
+import static net.osmand.plus.AppInitEvents.TRAVEL_INITIALIZED;
 import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.*;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastSuccessfulUpdateCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -39,7 +64,13 @@ import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
-import net.osmand.plus.helpers.*;
+import net.osmand.plus.helpers.ColorPaletteHelper;
+import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.helpers.LauncherShortcutsHelper;
+import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.Model3dHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -71,7 +102,6 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
-import net.osmand.plus.settings.fragments.search.SettingsSearchInitializer;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -127,7 +157,6 @@ public class AppInitializer implements IProgress {
 	private boolean routingConfigInitialized;
 	private String taskName;
 	private SharedPreferences startPrefs;
-	private SettingsSearchInitializer settingsSearchInitializer;
 
 	public interface LoadRoutingFilesCallback {
 		void onRoutingFilesLoaded();
@@ -279,8 +308,6 @@ public class AppInitializer implements IProgress {
 		} else {
 			settings.setApplicationMode(settings.DEFAULT_APPLICATION_MODE.get());
 		}
-		settingsSearchInitializer = new SettingsSearchInitializer(app);
-		settingsSearchInitializer.rebuildSearchDatabaseOnAppProfileChanged();
 		startTime = System.currentTimeMillis();
 		getLazyRoutingConfig();
 		app.applyTheme(app);

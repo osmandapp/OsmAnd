@@ -4,19 +4,23 @@ import java.util.function.Predicate;
 
 import de.KnollFrank.lib.settingssearch.PreferencePath;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceOfHostWithinTree;
+import de.KnollFrank.lib.settingssearch.results.SearchResultsFilter;
 
-class SearchResultsFilter implements de.KnollFrank.lib.settingssearch.results.SearchResultsFilter {
+class EnabledProfilesSearchResultsFilter implements SearchResultsFilter {
 
 	private final Predicate<String> isDisabledProfile;
+	private final SearchResultsFilter delegate;
 	private boolean removeSearchResultsConnectedToDisabledProfiles = true;
 
-	SearchResultsFilter(final Predicate<String> isDisabledProfile) {
+	public EnabledProfilesSearchResultsFilter(final Predicate<String> isDisabledProfile,
+											  final SearchResultsFilter delegate) {
 		this.isDisabledProfile = isDisabledProfile;
+		this.delegate = delegate;
 	}
 
 	@Override
 	public boolean includePreferenceInSearchResults(final SearchablePreferenceOfHostWithinTree preference) {
-		return new IncludePreferenceInSearchResultsPredicate().includePreferenceInSearchResults(preference) &&
+		return delegate.includePreferenceInSearchResults(preference) &&
 				(removeSearchResultsConnectedToDisabledProfiles ?
 						!isConnectedToDisabledProfile(preference) :
 						true);

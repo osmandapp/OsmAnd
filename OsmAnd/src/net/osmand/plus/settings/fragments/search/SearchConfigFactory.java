@@ -12,7 +12,7 @@ class SearchConfigFactory {
 	public static SearchConfig createSearchConfig(final FragmentActivity fragmentActivity,
 												  final @IdRes int fragmentContainerViewId,
 												  final OsmandPreference<String> availableAppModes) {
-		final SearchResultsFilter searchResultsFilter =
+		final EnabledProfilesSearchResultsFilter searchResultsFilter =
 				SearchResultsFilterFactory.createSearchResultsFilter(
 						PreferencePathDisplayerFactory.getApplicationModeKeys(),
 						availableAppModes);

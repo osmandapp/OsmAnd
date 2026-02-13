@@ -152,6 +152,7 @@ public class IntentHelper {
 	}
 
 	private void parseContinueWithPreferencePathNavigation() {
+		final Configuration actualConfiguration = new ActualConfigurationProvider().getActualConfiguration();
 		continueWithPreferencePathNavigation(
 				mapActivity,
 				mapActivity.findViewById(R.id.content),
@@ -165,8 +166,9 @@ public class IntentHelper {
 								app.getSettings().AVAILABLE_APP_MODES,
 								app.getTileSourceTemplatesProvider(),
 								app.preferencesDatabaseManager.getPreferencesDatabase(),
-								new ActualConfigurationProvider().getActualConfiguration()),
-				getLocale());
+								actualConfiguration),
+				getLocale(),
+				actualConfiguration);
 	}
 
 	private Locale getLocale() {

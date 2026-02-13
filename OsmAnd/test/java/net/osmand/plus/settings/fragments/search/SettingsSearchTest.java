@@ -1225,7 +1225,7 @@ public class SettingsSearchTest extends AndroidTest {
 								}
 						},
 						{
-								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapSource_onlineTiles_onlineMapsPluginInactive",
+								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapSource_onlineTiles1_onlineMapsPluginInactive",
 								new SettingsSearchTestTemplate() {
 
 									@Override
@@ -1247,6 +1247,28 @@ public class SettingsSearchTest extends AndroidTest {
 
 									private static String getOnlineTiles() {
 										return TileSourceManager.getMapnikSource().getName();
+									}
+								}
+						},
+						{
+								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapSource_onlineTiles2_onlineMapsPluginInactive",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return "Microsoft Maps";
+									}
+
+									@Override
+									protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+										return Set.of(OsmandRasterMapsPlugin.class);
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context,
+																					 final Set<OsmandPlugin> enabledPlugins,
+																					 final Set<OsmandPlugin> disabledPlugins) {
+										return List.of(getSearchQuery(context));
 									}
 								}
 						},

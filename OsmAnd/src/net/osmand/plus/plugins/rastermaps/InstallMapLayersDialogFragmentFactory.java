@@ -11,11 +11,9 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.ResultMatcher;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.search.Configuration;
-import net.osmand.plus.settings.fragments.search.SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.InstallMapLayersDialogFragment;
@@ -85,17 +83,12 @@ class InstallMapLayersDialogFragmentFactory {
 							public void onClick(final DialogInterface dialog, final int which) {
 								if (!activity.isFinishing()) {
 									final List<TileSourceTemplate> toInstall = getSelectedTileSourceTemplates();
-									boolean someTileSourceWasInstalled = false;
 									for (final TileSourceTemplate ts : toInstall) {
 										if (settings.installTileSource(ts)) {
-											someTileSourceWasInstalled = true;
 											if (result != null) {
 												result.publish(ts);
 											}
 										}
-									}
-									if (someTileSourceWasInstalled) {
-										updateSearchDatabase();
 									}
 									// at the end publish null to show end of process
 									if (!toInstall.isEmpty() && result != null) {
@@ -112,13 +105,6 @@ class InstallMapLayersDialogFragmentFactory {
 									}
 								}
 								return selectedTileSourceTemplates;
-							}
-
-							private void updateSearchDatabase() {
-								getTreeRepository().addTreeTransformer(
-										new SearchDatabaseRootedAtApplicationModeDependentPreferenceFragmentAdapter(
-												ConfigureMapFragment.ConfigureMapFragmentProxy.class,
-												getTileSourceTemplatesProvider()));
 							}
 
 							private SearchablePreferenceScreenTreeRepository<Configuration> getTreeRepository() {
