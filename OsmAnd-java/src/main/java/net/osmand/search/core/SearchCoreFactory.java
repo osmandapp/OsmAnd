@@ -114,9 +114,6 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean isSearchAvailable(SearchPhrase p) {
-			if (getSearchPriority(p) < 0) {
-				return false;
-			}
 			ObjectType[] typesToSearch = p.getSearchTypes();
 			ObjectType exclusiveSearchType = p.getExclusiveSearchType();
 			if (exclusiveSearchType != null) {
@@ -153,6 +150,11 @@ public class SearchCoreFactory {
 				@Override
 				public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 					return thisObj.search(phrase, resultMatcher);
+				}
+
+				@Override
+				public boolean isSearchAvailable(SearchPhrase phrase) {
+					return thisObj.isSearchAvailable(phrase);
 				}
 			});
 		}
@@ -408,6 +410,18 @@ public class SearchCoreFactory {
 			return phrase.getNextRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
 		}
 
+		@Override
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+			// is running recursively in subSearchApiOrPublish
+			if (!phrase.isUnknownSearchWordPresent() && !phrase.isEmptyQueryAllowed()) {
+				return false;
+			}
+			Collection<SearchCoreAPIUnit> searchUnits = getSearchUnits(phrase);
+			for (SearchCoreAPIUnit unit : searchUnits) {
+				unit.search(phrase, resultMatcher);
+			}
+			return true;
+		}
 
 		
 		@Override
@@ -424,6 +438,7 @@ public class SearchCoreFactory {
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
 				Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes(bbox, SearchPhraseDataType.ADDRESS);
 				initCitiesCache(phrase, offlineIndexes);
+				final SearchBaseAPI thisObj = this;
 				SearchCoreAPIUnit unitFastSearchByCityName = new SearchCoreAPIUnit() {
 
 					@Override
@@ -444,7 +459,12 @@ public class SearchCoreFactory {
 						searchCitiesFromCache(phrase, bbox, resultMatcher);
 						return true;
 					}
-					
+
+					@Override
+					public boolean isSearchAvailable(SearchPhrase phrase) {
+						return thisObj.isSearchAvailable(phrase);
+					}
+
 				};
 				units.add(unitFastSearchByCityName);
 				searchByNameGetUnits(phrase, units);
@@ -452,9 +472,9 @@ public class SearchCoreFactory {
 			}
 			return super.getSearchUnits(phrase);
 		}
-		
-		
-	
+
+
+
 
 		private void searchCitiesFromCache(final SearchPhrase phrase, QuadRect bbox, final SearchResultMatcher resultMatcher) throws IOException {
 			if (phrase.isNoSelectedType() && bbox != null
@@ -597,7 +617,8 @@ public class SearchCoreFactory {
 					}
                     offlineIterator = phrase.getOfflineIndexes(rect, SearchPhraseDataType.ADDRESS);
                 }
-				
+
+				final SearchBaseAPI thisObj = this;
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
 					BinaryMapIndexReader r = offlineIterator.next();
 					units.add(new SearchCoreAPIUnit() {
@@ -610,7 +631,12 @@ public class SearchCoreFactory {
 							searchAddressByNameByRegion(phrase, resultMatcher, immediateResults, req, r);
 							return true;
 						}
-						
+
+						@Override
+						public boolean isSearchAvailable(SearchPhrase phrase) {
+							return thisObj.isSearchAvailable(phrase);
+						}
+
 						@Override
 						public int getSearchPriority(SearchPhrase p) {
 							return SearchAddressByNameAPI.this.getSearchPriority(phrase);

@@ -16,6 +16,8 @@ public interface SearchCoreAPI {
 		
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException;
 
+		public boolean isSearchAvailable(SearchPhrase phrase);
+
 	}
 	
 	public Collection<SearchCoreAPIUnit> getSearchUnits(SearchPhrase p) throws IOException;

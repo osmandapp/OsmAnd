@@ -798,7 +798,8 @@ public class SearchUICore {
 
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 		for (SearchCoreAPI api : apis) {
-			if (api.isSearchAvailable(phrase) && api.isSearchMoreAvailable(phrase)) {
+			if (api.isSearchAvailable(phrase) && getPriority(api, phrase) >= 0
+					&& api.isSearchMoreAvailable(phrase)) {
 				return true;
 			}
 		}
@@ -808,7 +809,7 @@ public class SearchUICore {
 	public int getMinimalSearchRadius(SearchPhrase phrase) {
 		int radius = Integer.MAX_VALUE;
 		for (SearchCoreAPI api : apis) {
-			if (api.isSearchAvailable(phrase)) {
+			if (api.isSearchAvailable(phrase) && getPriority(api, phrase) != -1) {
 				int apiMinimalRadius = api.getMinimalSearchRadius(phrase);
 				if (apiMinimalRadius > 0 && apiMinimalRadius < radius) {
 					radius = apiMinimalRadius;
@@ -821,7 +822,7 @@ public class SearchUICore {
 	public int getNextSearchRadius(SearchPhrase phrase) {
 		int radius = Integer.MAX_VALUE;
 		for (SearchCoreAPI api : apis) {
-			if (api.isSearchAvailable(phrase)) {
+			if (api.isSearchAvailable(phrase) && getPriority(api, phrase) != -1) {
 				int apiNextSearchRadius = api.getNextSearchRadius(phrase);
 				if (apiNextSearchRadius > 0 && apiNextSearchRadius < radius) {
 					radius = apiNextSearchRadius;
@@ -871,6 +872,9 @@ public class SearchUICore {
 		for (SearchCoreAPIUnit api : lst) {
 			if (matcher.isCancelled()) {
 				break;
+			}
+			if (!api.isSearchAvailable(phrase) || api.getSearchPriority(phrase) == -1) {
+				continue;
 			}
 			try {
 				if (debugMode) {
@@ -1349,5 +1353,9 @@ public class SearchUICore {
 		} else {
 			return (Algorithms.isEmpty(cityName) ? "" : (cityName + ", ")) + addr;
 		}
+	}
+
+	private int getPriority(SearchCoreAPI api, SearchPhrase phrase) {
+		return (api instanceof SearchCoreFactory.SearchBaseAPI baseAPI) ? baseAPI.getSearchPriority(phrase) : 1;
 	}
 }
