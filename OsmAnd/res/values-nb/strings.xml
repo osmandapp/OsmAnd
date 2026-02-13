@@ -5931,4 +5931,7 @@
     <string name="saved_to_device">Lagret på enhet</string>
     <string name="save_to_device_error">Feil ved lagring på enhet</string>
     <string name="save_to_device">Lagre på enhet</string>
+    <string name="delete_groups_confirmation">Slette grupper?</string>
+    <string name="favorite_search_empty_state_description">Juster dine søk eller filtere for å se om det hjelper</string>
+    <string name="favorites_empty_folder_description">Denne mappen har ikke noen punkter ennå.</string>
 </resources>
