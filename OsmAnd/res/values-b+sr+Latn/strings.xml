@@ -5976,4 +5976,10 @@
     <string name="astro_star_clusters">Zvezdana jata</string>
     <string name="astro_nebulas">Magline</string>
     <string name="astro_solar_system">Sunčev sistem</string>
+    <string name="delete_groups_confirmation">Obrisati grupe?</string>
+    <string name="add_to_track">Dodaj stazi</string>
+    <string name="unpin_folder">Otkači folder</string>
+    <string name="pin_folder">Zakači folder</string>
+    <string name="favorite_search_empty_state_description">Prilagodite pretragu ili filtere da biste videli da li to pomaže</string>
+    <string name="favorites_empty_folder_description">Ovaj folder još uvek nema tačaka.</string>
 </resources>
