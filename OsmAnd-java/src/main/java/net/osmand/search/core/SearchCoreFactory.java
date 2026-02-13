@@ -403,7 +403,7 @@ public class SearchCoreFactory {
 
 		private void initAndSearchCities(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
 			QuadRect bbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
-			Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes(bbox, SearchPhraseDataType.ADDRESS);
+			Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes(bbox, SearchPhraseDataType.ADDRESS, resultMatcher.getSearchUnitProvider());
 			while (offlineIndexes.hasNext()) {
 				BinaryMapIndexReader r = offlineIndexes.next();
 				if (!townCitiesInit.contains(r.getRegionName())) {
@@ -617,7 +617,7 @@ public class SearchCoreFactory {
 				}
 
 				SearchWord lastWord = phrase.getLastSelectedWord();
-				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5, SearchPhraseDataType.ADDRESS);
+				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5, SearchPhraseDataType.ADDRESS, resultMatcher.getSearchUnitProvider());
 				String wordToSearch = phrase.getUnknownWordToSearch();
 				Set<String> wordToSearchSplit = splitAddressSearchNames(wordToSearch);
 				if (wordToSearchSplit.size() > 1) {
@@ -647,7 +647,7 @@ public class SearchCoreFactory {
 						rect = SearchPhrase.calculateBbox(radius, loc);
 						req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(), radius);
 					}
-                    offlineIterator = phrase.getOfflineIndexes(rect, SearchPhraseDataType.ADDRESS);
+                    offlineIterator = phrase.getOfflineIndexes(rect, SearchPhraseDataType.ADDRESS, resultMatcher.getSearchUnitProvider());
                 }
 				
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
@@ -753,7 +753,7 @@ public class SearchCoreFactory {
 
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
 			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,
-					SearchPhraseDataType.POI);
+					SearchPhraseDataType.POI, resultMatcher.getSearchUnitProvider());
 			String searchWord = phrase.getUnknownWordToSearch();
 			final NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
 			QuadRect bbox = phrase.getFileRequest() != null ? phrase.getRadiusBBoxToSearch(BBOX_RADIUS_POI_IN_CITY) : phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
@@ -1262,7 +1262,7 @@ public class SearchCoreFactory {
 			if (phrase.isEmpty()) {
 				return;
 			}
-			Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,	SearchPhraseDataType.POI);
+			Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,	SearchPhraseDataType.POI, resultMatcher.getSearchUnitProvider());
 			NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
 			Map<String, HashSet<String>> matchedValues = new HashMap<>();
 			while (offlineIndexes.hasNext()) {

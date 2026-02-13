@@ -399,14 +399,17 @@ public class SearchPhrase {
 	}
 	
 	
-	public Iterator<BinaryMapIndexReader> getRadiusOfflineIndexes(int meters, final SearchPhraseDataType dt) {
+	public Iterator<BinaryMapIndexReader> getRadiusOfflineIndexes(int meters, final SearchPhraseDataType dt, final SearchUnitProvider searchUnitProvider) {
 		final QuadRect rect = meters > 0 ? getRadiusBBoxToSearch(meters) : null;
-		return getOfflineIndexes(rect, dt);
+		return getOfflineIndexes(rect, dt, searchUnitProvider);
 		
 	}
 
-	public Iterator<BinaryMapIndexReader> getOfflineIndexes(final QuadRect rect, final SearchPhraseDataType dt) {
+	public Iterator<BinaryMapIndexReader> getOfflineIndexes(final QuadRect rect, final SearchPhraseDataType dt, final SearchUnitProvider searchUnitProvider) {
 		List<BinaryMapIndexReader> list = indexes != null ? indexes : settings.getOfflineIndexes();
+		if (searchUnitProvider != null) {
+			searchUnitProvider.sortOfflineIndexes(list);
+		}
 		final Iterator<BinaryMapIndexReader> lit = list.iterator();
 		return new Iterator<BinaryMapIndexReader>() {
 			BinaryMapIndexReader next = null;
