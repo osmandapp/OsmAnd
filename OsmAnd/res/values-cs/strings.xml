@@ -148,7 +148,7 @@
     <string name="button_upgrade_osmandplus">Upgradovat OsmAnd+</string>
     <string name="map_version_changed_info">Stáhněte si novou verzi aplikace, abyste mohli používat nové mapové soubory.</string>
     <string name="shared_string_rename">Přejmenovat</string>
-    <string name="poi_filter_nominatim">On-line POI filtr „Nominatim“</string>
+    <string name="poi_filter_nominatim">Online „Nominatim“</string>
     <string name="search_position_current_location_search">Hledané polohy…</string>
     <string name="search_position_current_location_found">Moje poloha [nalezeno]</string>
     <string name="search_position_address">Adresy…</string>
@@ -232,7 +232,7 @@
     <string name="poi_filter_food_shop">Potraviny</string>
     <string name="poi_filter_for_tourists">Pro turisty</string>
     <string name="poi_filter_fuel">Palivo</string>
-    <string name="poi_filter_namefinder">On-line POI filtr „NameFinder“</string>
+    <string name="poi_filter_namefinder">Online „NameFinder“</string>
     <string name="reading_cached_tiles">Načítání uložených dlaždic…</string>
     <string name="version_index_is_big_for_memory">Index \'\'{0}\'\' se nevejde do paměti</string>
     <string name="version_index_is_not_supported">Verze indexu \'\'{0}\'\' není podporována</string>
@@ -2096,7 +2096,7 @@
     <string name="quick_action_page_list_descr">Tlačítko pro posunutí seznamu na další stranu.</string>
     <string name="rendering_attr_depthContours_description">Zobrazit hloubkové vrstevnice a body.</string>
     <string name="rendering_attr_depthContours_name">Námořní hloubkové vrstevnice</string>
-    <string name="navigate_point_olc">Open Location Code (OLC)</string>
+    <string name="navigate_point_olc">Open Location Code</string>
     <string name="route_altitude">Stoupání trasy</string>
     <string name="altitude_descent">Klesání</string>
     <string name="altitude_ascent">Stoupání</string>
@@ -2275,7 +2275,7 @@
     <string name="empty_state_favourites">Přidejte Oblíbené</string>
     <string name="empty_state_favourites_desc">Importujte Oblíbené nebo je přidejte označením bodů na mapě.</string>
     <string name="import_track">Import souboru GPX</string>
-    <string name="import_track_desc">Soubor %1$s neobsahuje body GPX trasy, chcete jej přesto importovat jako trasu?</string>
+    <string name="import_track_desc">Soubor %1$s neobsahuje body trasy, chcete jej přesto importovat jako trasu?</string>
     <string name="move_point">Přesunout bod</string>
     <string name="move_all_to_history">Přesunout vše do historie</string>
     <string name="show_direction">Indikace vzdálenosti</string>
@@ -6008,4 +6008,10 @@
     <string name="astro_star_clusters">Hvězdokupy</string>
     <string name="astro_nebulas">Mlhoviny</string>
     <string name="astro_solar_system">Sluneční soustava</string>
+    <string name="delete_groups_confirmation">Odstranit skupiny?</string>
+    <string name="add_to_track">Přidat do stopy</string>
+    <string name="unpin_folder">Odepnout složku</string>
+    <string name="pin_folder">Připnout složku</string>
+    <string name="favorite_search_empty_state_description">Upravte své vyhledávání nebo filtry pro zjištění, zda to pomohlo</string>
+    <string name="favorites_empty_folder_description">Tato složka zatím nemá žádné body.</string>
 </resources>

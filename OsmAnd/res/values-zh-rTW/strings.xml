@@ -5807,7 +5807,7 @@
     <string name="map_screen_layout_descr">選擇是否使用單一佈局套用於所有方向，或分別自訂直向與橫向模式。</string>
     <string name="backup_deleted_all_data">已刪除的資料。</string>
     <string name="backup_deleting_all_data">正在刪除資料……</string>
-    <string name="astro_rendering">渲染中</string>
+    <string name="astro_rendering">正在繪製</string>
     <string name="astro_configure_view">設定檢視</string>
     <string name="astro_visible_objects">可見物件</string>
     <string name="red_filter">紅色篩選</string>
@@ -5819,4 +5819,10 @@
     <string name="astro_star_clusters">星團</string>
     <string name="astro_nebulas">星雲</string>
     <string name="astro_solar_system">太陽系</string>
+    <string name="delete_groups_confirmation">刪除群組？</string>
+    <string name="add_to_track">新增至軌跡</string>
+    <string name="unpin_folder">取消釘選資料夾</string>
+    <string name="pin_folder">釘選資料夾</string>
+    <string name="favorite_search_empty_state_description">請調整您的搜尋或篩選條件，看看是否有所幫助</string>
+    <string name="favorites_empty_folder_description">此資料夾尚無任何點。</string>
 </resources>

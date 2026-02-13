@@ -5976,4 +5976,10 @@
     <string name="astro_star_clusters">Звездана јата</string>
     <string name="astro_nebulas">Маглине</string>
     <string name="astro_solar_system">Сунчев систем</string>
+    <string name="delete_groups_confirmation">Обрисати групе?</string>
+    <string name="add_to_track">Додај стази</string>
+    <string name="unpin_folder">Откачи фолдер</string>
+    <string name="pin_folder">Закачи фолдер</string>
+    <string name="favorite_search_empty_state_description">Прилагодите претрагу или филтере да бисте видели да ли то помаже</string>
+    <string name="favorites_empty_folder_description">Овај фолдер још увек нема тачака.</string>
 </resources>

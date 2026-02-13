@@ -5984,4 +5984,8 @@
     <string name="set_step_size">Schrittgröße festlegen</string>
     <string name="copy_from_landscape_layout">Aus Querformat kopieren</string>
     <string name="panels_layout_wide">Breit</string>
+    <string name="astro_solar_system">Sonnensystem</string>
+    <string name="backup_deleted_all_data">Daten löschen.</string>
+    <string name="backup_deleting_all_data">Lösche Daten…</string>
+    <string name="pin_folder">Ordner anpinnen</string>
 </resources>
