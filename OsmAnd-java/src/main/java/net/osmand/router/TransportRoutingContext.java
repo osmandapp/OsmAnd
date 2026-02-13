@@ -24,7 +24,7 @@ public class TransportRoutingContext {
 
 	public NativeLibrary library;
 	public RouteCalculationProgress calculationProgress;
-	public TLongObjectHashMap<TransportRouteSegment> visitedSegments = new TLongObjectHashMap<TransportRouteSegment>();
+	public TLongObjectHashMap<Double> visitedSegmentsDistFromStart = new TLongObjectHashMap<>();
 	public TransportRoutingConfiguration cfg;
 	public TLongObjectHashMap<TransportRoute> combinedRoutesCache = new TLongObjectHashMap<TransportRoute>();
 	public Map<TransportStop, List<TransportRoute>> missingStopsCache = new HashMap<TransportStop, List<TransportRoute>>();

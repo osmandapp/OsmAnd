@@ -87,16 +87,16 @@ public class TransportRoutePlanner {
 			}
 			TransportRouteSegment segment = queue.poll();
 			long segIdWithParent = segmentWithParentId(segment, segment.parentRoute);
-			TransportRouteSegment ex = ctx.visitedSegments.get(segIdWithParent);
-			if (ex != null) {
-				if (ex.distFromStart > segment.distFromStart) {
-					System.err.println(String.format("%.1f (%s) > %.1f (%s)", ex.distFromStart, ex, segment.distFromStart, segment));
+			Double exDistFromStart = ctx.visitedSegmentsDistFromStart.get(segIdWithParent);
+			if (exDistFromStart != null) {
+				if (exDistFromStart > segment.distFromStart) {
+					System.err.printf("exDistFromStart %.1f > %.1f (%s)%n", exDistFromStart, segment.distFromStart, segment);
 				}
 				continue;
 			}
 			ctx.visitedRoutesCount++;
-			ctx.visitedSegments.put(segIdWithParent, segment);
-			
+			ctx.visitedSegmentsDistFromStart.put(segIdWithParent, segment.distFromStart);
+
 			if (segment.distFromStart > finishTime * ctx.cfg.increaseForAlternativesRoutes ||
 					segment.distFromStart > maxTravelTimeCmpToWalk) {
 				break;
@@ -125,7 +125,7 @@ public class TransportRoutePlanner {
 					return null;
 				}
 				segIdWithParent ++;
-				ctx.visitedSegments.put(segIdWithParent, segment);
+				ctx.visitedSegmentsDistFromStart.put(segIdWithParent, segment.distFromStart);
 				TransportStop stop = segment.getStop(ind);
 				// could be geometry size
 				double segmentDist = MapUtils.getDistance(prevStop.getLocation(), stop.getLocation());
@@ -152,7 +152,7 @@ public class TransportRoutePlanner {
 						if (segment.wasVisited(sgm)) {
 							continue;
 						}
-						if (ctx.visitedSegments.containsKey(segmentWithParentId(sgm, segment))) {
+						if (ctx.visitedSegmentsDistFromStart.containsKey(segmentWithParentId(sgm, segment))) {
 							continue;
 						}
 						TransportRouteSegment nextSegment = new TransportRouteSegment(sgm);
