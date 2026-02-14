@@ -10,11 +10,13 @@ public class PreferenceMarker {
 
 	private static final String KEY = "settings.search.connectionToPlugin";
 
-	public static void markPreferenceAsConnectedToPlugin(final Preference preference, final Class<? extends OsmandPlugin> plugin) {
+	public static void markPreferenceAsConnectedToPlugin(final Preference preference,
+														 final Class<? extends OsmandPlugin> plugin) {
 		preference.getExtras().putString(KEY, plugin.getName());
 	}
 
-	public static boolean isPreferenceConnectedToPlugin(final SearchablePreferenceOfHostWithinTree preference, final Class<? extends OsmandPlugin> plugin) {
+	public static boolean isPreferenceConnectedToPlugin(final SearchablePreferenceOfHostWithinTree preference,
+														final Class<? extends OsmandPlugin> plugin) {
 		return plugin.getName().equals(preference.searchablePreference().getExtras().getString(KEY));
 	}
 }
