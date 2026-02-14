@@ -2841,7 +2841,7 @@
     <string name="poi_cuisine_barbecue">Barbecue</string>
     <string name="poi_cuisine_noodle">Nudeln</string>
     <string name="poi_cuisine_donut">Donut</string>
-    <string name="poi_cuisine_crepe">Crêpes</string>
+    <string name="poi_cuisine_crepe">Crepe;Crepes</string>
     <string name="poi_cuisine_ramen">Ramen</string>
     <string name="poi_cuisine_breakfast">Frühstück</string>
     <string name="poi_cuisine_beef_bowl">Gyudon (Rindfleischschüssel)</string>
