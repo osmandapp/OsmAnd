@@ -5904,4 +5904,16 @@
     <string name="pin_folder">Mappa kitűzése</string>
     <string name="favorite_search_empty_state_description">Finomítsa a keresést vagy módosítsa a szűrőket, hátha úgy sikerül</string>
     <string name="favorites_empty_folder_description">Ebben a mappában még nincs pont.</string>
+    <string name="building_3d_day_color_content_desc">3D épületek színe a nappali témában</string>
+    <string name="building_3d_night_color_content_desc">3D épületek színe az éjszakai témában</string>
+    <string name="building_3d_low_details_content_desc">Alacsony részletességű 3D épületek</string>
+    <string name="building_3d_high_details_content_desc">Magas részletességű 3D épületek</string>
+    <string name="building_3d_near_distance_content_desc">3D épületek közeli megjelenítési távolsága</string>
+    <string name="building_3d_far_distance_content_desc">3D épületek távoli megjelenítési távolsága</string>
+    <string name="free_custom_color_description">Tetszőlegesen testre szabhatja a 3D épületek színeit. Ideális a térképstílushoz való igazításhoz vagy a kontraszt javításához.</string>
+    <string name="buildings_3d_use_map_style_color_description">Térképstílus (%s) alapértelmezett színének használata.</string>
+    <string name="buildings_3d_visibility_description">3D struktúrák átlátszatlanságának módosítása a térképen.</string>
+    <string name="level_of_details">Részletesség szintje</string>
+    <string name="performance">Teljesítmény</string>
+    <string name="view_distance">Megjelenítési távolság</string>
 </resources>
