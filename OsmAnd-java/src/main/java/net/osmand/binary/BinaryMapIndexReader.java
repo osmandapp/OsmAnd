@@ -1441,10 +1441,8 @@ public class BinaryMapIndexReader {
 		for (PoiRegion poiIndex : poiIndexes) {
 			long statReq = req.beginSearchStats(BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
 			poiAdapter.initCategories(poiIndex);
-
 			codedIS.seek(poiIndex.filePointer);
 			long old = codedIS.pushLimitLong((long) poiIndex.length);
-
 			poiAdapter.searchPoiByName(poiIndex, req);
 			codedIS.popLimit(old);
 			req.endSearchStats(statReq, BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
@@ -1524,7 +1522,6 @@ public class BinaryMapIndexReader {
 			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
 			long old = codedIS.pushLimitLong((long) poiIndex.length);
-
 			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 			codedIS.popLimit(old);
 			req.endSearchStats(statReq, BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
