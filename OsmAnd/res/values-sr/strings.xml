@@ -5982,4 +5982,16 @@
     <string name="pin_folder">Закачи фолдер</string>
     <string name="favorite_search_empty_state_description">Прилагодите претрагу или филтере да бисте видели да ли то помаже</string>
     <string name="favorites_empty_folder_description">Овај фолдер још увек нема тачака.</string>
+    <string name="building_3d_day_color_content_desc">Боја дневне теме за 3Д зграда</string>
+    <string name="building_3d_night_color_content_desc">Боја ноћне теме за 3Д зграда</string>
+    <string name="building_3d_low_details_content_desc">3Д зграда са ниским детаљима</string>
+    <string name="building_3d_high_details_content_desc">3Д зграда са високим</string>
+    <string name="building_3d_near_distance_content_desc">3D zgrada udaljenost blizu</string>
+    <string name="building_3d_far_distance_content_desc">3D zgrada udaljenost daleko</string>
+    <string name="free_custom_color_description">Прилагодите 3Д зграда било којом бојом. Идеално за усклађивање са темом мапе или побољшање контраста.</string>
+    <string name="buildings_3d_use_map_style_color_description">Користи подразумевану боју стила мапе (%s).</string>
+    <string name="buildings_3d_visibility_description">Подесите непрозирност 3Д структура на мапи.</string>
+    <string name="level_of_details">Ниво детаља</string>
+    <string name="performance">Перформансе</string>
+    <string name="view_distance">Видна удаљеност</string>
 </resources>
