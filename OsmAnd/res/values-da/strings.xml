@@ -6044,4 +6044,16 @@
     <string name="pin_folder">Fastgør mappe</string>
     <string name="favorite_search_empty_state_description">Juster din søgning eller filtre for at se, om det hjælper</string>
     <string name="favorites_empty_folder_description">Denne mappe har endnu ingen punkter.</string>
+    <string name="building_3d_day_color_content_desc">3D-bygninger dagstema-farve</string>
+    <string name="building_3d_night_color_content_desc">3D-bygninger nattema-farve</string>
+    <string name="building_3d_low_details_content_desc">3D-bygninger lav detaljegrad</string>
+    <string name="building_3d_high_details_content_desc">3D-bygninger høj detaljegrad</string>
+    <string name="building_3d_far_distance_content_desc">3D-bygninger fjern afstand</string>
+    <string name="building_3d_near_distance_content_desc">3D-bygninger afstand nær</string>
+    <string name="free_custom_color_description">Tilpas 3D-bygninger med en hvilken som helst farve. Perfekt til at matche et korttema eller forbedre kontrasten.</string>
+    <string name="buildings_3d_use_map_style_color_description">Brug standardfarve for kortstil (%s).</string>
+    <string name="buildings_3d_visibility_description">Juster gennemsigtigheden af 3D-strukturer på kortet.</string>
+    <string name="level_of_details">Detaljeringsgrad</string>
+    <string name="performance">Ydeevne</string>
+    <string name="view_distance">Visningsafstand</string>
 </resources>
