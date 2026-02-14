@@ -12,7 +12,6 @@ import de.KnollFrank.lib.settingssearch.PreferencePath;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceOfHostWithinTree;
 import de.KnollFrank.lib.settingssearch.results.SearchResultsFilter;
 
-// FK-TODO: improve performance
 class ActivePluginsSearchResultsFilter implements SearchResultsFilter {
 
 	@Override
