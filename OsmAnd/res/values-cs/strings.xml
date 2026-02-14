@@ -6014,4 +6014,16 @@
     <string name="pin_folder">Připnout složku</string>
     <string name="favorite_search_empty_state_description">Upravte své vyhledávání nebo filtry pro zjištění, zda to pomohlo</string>
     <string name="favorites_empty_folder_description">Tato složka zatím nemá žádné body.</string>
+    <string name="building_3d_day_color_content_desc">Denní barva 3D budov</string>
+    <string name="building_3d_night_color_content_desc">Noční barva 3D budov</string>
+    <string name="building_3d_low_details_content_desc">Nízké detaily 3D budov</string>
+    <string name="building_3d_high_details_content_desc">Vysoké detaily 3D budov</string>
+    <string name="building_3d_near_distance_content_desc">Blízké 3D budovy</string>
+    <string name="building_3d_far_distance_content_desc">Vzdálené 3D budovy</string>
+    <string name="free_custom_color_description">Přizpůsobte si 3D budovy jakoukoliv barvou. Perfektní pro doplnění mapového motivu nebo zvýšení kontrastu.</string>
+    <string name="buildings_3d_use_map_style_color_description">Použít výchozí barvu mapového stylu (%s).</string>
+    <string name="buildings_3d_visibility_description">Upravit průhlednost 3D struktur na mapě.</string>
+    <string name="level_of_details">Úroveň podrobností</string>
+    <string name="performance">Výkon</string>
+    <string name="view_distance">Vykreslovací vzdálenost</string>
 </resources>
