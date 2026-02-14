@@ -5,7 +5,9 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.PreferencePath;
@@ -13,6 +15,8 @@ import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceO
 import de.KnollFrank.lib.settingssearch.results.SearchResultsFilter;
 
 class ActivePluginsSearchResultsFilter implements SearchResultsFilter {
+
+	private final Map<SearchablePreferenceOfHostWithinTree, PreferencePath> preferencePathByPreference = new HashMap<>();
 
 	@Override
 	public boolean includePreferenceInSearchResults(final SearchablePreferenceOfHostWithinTree preference) {
@@ -34,10 +38,10 @@ class ActivePluginsSearchResultsFilter implements SearchResultsFilter {
 				.toList();
 	}
 
-	private static boolean isPreferenceConnectedToPlugin(final SearchablePreferenceOfHostWithinTree preference,
-														 final OsmandPlugin plugin) {
+	private boolean isPreferenceConnectedToPlugin(final SearchablePreferenceOfHostWithinTree preference,
+												  final OsmandPlugin plugin) {
 		return isPreferenceOnSettingsScreen(preference, Optional.ofNullable(plugin.getSettingsScreenType())) ||
-				isPreferencePathConnectedToPlugin(preference.getPreferencePath(), plugin) ||
+				isPreferencePathConnectedToPlugin(getPreferencePath(preference), plugin) ||
 				isMapSourcePreferenceConnectedToPlugin(preference, plugin);
 	}
 
@@ -61,17 +65,23 @@ class ActivePluginsSearchResultsFilter implements SearchResultsFilter {
 				.anyMatch(preference -> PreferenceMarker.isPreferenceConnectedToPlugin(preference, plugin.getClass()));
 	}
 
-	private static boolean isMapSourcePreferenceConnectedToPlugin(final SearchablePreferenceOfHostWithinTree preference,
-																  final OsmandPlugin plugin) {
+	private boolean isMapSourcePreferenceConnectedToPlugin(final SearchablePreferenceOfHostWithinTree preference,
+														   final OsmandPlugin plugin) {
 		return plugin instanceof OsmandRasterMapsPlugin && isMapSourcePreference(preference);
 	}
 
-	private static boolean isMapSourcePreference(final SearchablePreferenceOfHostWithinTree preference) {
-		return preference
-				.getPreferencePath()
+	private boolean isMapSourcePreference(final SearchablePreferenceOfHostWithinTree preference) {
+		return this
+				.getPreferencePath(preference)
 				.preferences()
 				.stream()
 				// FK-FIXME: "en-" ist zu speziell
 				.anyMatch(_preference -> _preference.hostOfPreference().id().startsWith("en-net.osmand.plus.widgets.alert.MapLayerSelectionDialogFragment$MapLayerSelectionDialogFragmentProxy"));
+	}
+
+	private PreferencePath getPreferencePath(final SearchablePreferenceOfHostWithinTree preference) {
+		return preferencePathByPreference.computeIfAbsent(
+				preference,
+				SearchablePreferenceOfHostWithinTree::getPreferencePath);
 	}
 }
