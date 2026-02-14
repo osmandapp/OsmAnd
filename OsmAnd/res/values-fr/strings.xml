@@ -5905,4 +5905,16 @@
     <string name="pin_folder">Épingler le dossier</string>
     <string name="favorite_search_empty_state_description">Ajustez votre recherche ou vos filtres pour voir si cela aide</string>
     <string name="favorites_empty_folder_description">Ce dossier ne contient aucun point pour l\'instant.</string>
+    <string name="building_3d_day_color_content_desc">Couleur thématique du jour pour les bâtiments en 3D</string>
+    <string name="building_3d_night_color_content_desc">Couleur du thème nocturne des bâtiments en 3D</string>
+    <string name="building_3d_low_details_content_desc">Bâtiments 3D à faible niveau de détail</string>
+    <string name="building_3d_high_details_content_desc">Bâtiments en 3D élevés</string>
+    <string name="building_3d_near_distance_content_desc">Distance entre les bâtiments en 3D à proximité</string>
+    <string name="building_3d_far_distance_content_desc">Bâtiments en 3D éloignés</string>
+    <string name="free_custom_color_description">Personnalisez les bâtiments en 3D avec n\'importe quelle couleur. Idéal pour assortir le thème d\'une carte ou améliorer le contraste.</string>
+    <string name="buildings_3d_use_map_style_color_description">Utiliser la couleur par défaut du style de carte (%s).</string>
+    <string name="buildings_3d_visibility_description">Ajustez l\'opacité des structures 3D sur la carte.</string>
+    <string name="level_of_details">Niveau de détail</string>
+    <string name="performance">Performance</string>
+    <string name="view_distance">Distance de visibilité</string>
 </resources>
