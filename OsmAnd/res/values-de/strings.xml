@@ -6025,4 +6025,5 @@
     <string name="use_separate_layouts">Separate Anordnungen verwenden</string>
     <string name="map_screen_layout">Anordnung der Kartenansicht</string>
     <string name="map_screen_layout_descr">Wähle aus, ob eine einzelne Anordnung für alle Ausrichtungen verwendet werden soll oder ob du Hoch- und Querformat separat anpassen möchtest.</string>
+    <string name="panels_layout_compact">Kompakt</string>
 </resources>
