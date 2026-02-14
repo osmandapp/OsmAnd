@@ -2981,7 +2981,7 @@
     <string name="poi_fuel_1_25">1:25 breosla</string>
     <string name="poi_fuel_e10">2007/20</string>
     <string name="poi_fuel_e20">20lgh -</string>
-    <string name="poi_fuel_autogas">GPL</string>
+    <string name="poi_fuel_autogas">Gás uathoibríoch</string>
     <string name="poi_aeroway_fuel">Stáisiún breosla aerárthaí</string>
     <string name="poi_waterway_fuel">Stáisiún gáis do bháid</string>
     <string name="poi_electricity_combined_charging">Stáisiún luchtaithe; Stáisiún luchtaithe feithiclí leictreacha; Stáisiún luchtaithe EV; Pointe athluchtaithe leictreach; Pointe muirir; Stáisiún luchtaithe leictreonach; Trealamh soláthair feithiclí leictreacha</string>
@@ -3419,7 +3419,7 @@
     <string name="poi_payment_v_pay_no">V Ní ghlactar le cártaí PÁ</string>
     <string name="poi_payment_dogecoin_yes">Dogecoin</string>
     <string name="poi_payment_dogecoin_no">Ní ghlactar le Dogecoin</string>
-    <string name="poi_payment_cibus_no">Ní ghlactar le cártaí BFS</string>
+    <string name="poi_payment_cibus_no">Ní ghlactar le cártaí Cibus</string>
     <string name="poi_payment_wire_transfer_yes">Aistrithe sreang</string>
     <string name="poi_payment_wire_transfer_no">Ní ghlactar le haistrithe sreinge</string>
     <string name="poi_payment_ep_avant_yes">AvantCardName</string>
@@ -4006,7 +4006,7 @@
     <string name="poi_cuisine_fish">Éisc</string>
     <string name="poi_cuisine_fish_and_chips">Éisc agus sceallóga</string>
     <string name="poi_cuisine_ramen">Meastachán</string>
-    <string name="poi_cuisine_crepe">CrepeName</string>
+    <string name="poi_cuisine_crepe">Crêpe;Crêpes</string>
     <string name="poi_cuisine_diner">DinerName</string>
     <string name="poi_cuisine_sausage">Ispíní</string>
     <string name="poi_cuisine_fast_food">Bia gasta</string>
