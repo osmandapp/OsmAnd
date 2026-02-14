@@ -6026,4 +6026,7 @@
     <string name="map_screen_layout">Anordnung der Kartenansicht</string>
     <string name="map_screen_layout_descr">Wähle aus, ob eine einzelne Anordnung für alle Ausrichtungen verwendet werden soll oder ob du Hoch- und Querformat separat anpassen möchtest.</string>
     <string name="panels_layout_compact">Kompakt</string>
+    <string name="add_to_track">Zum Track hinzufügen</string>
+    <string name="set_step_size_summary">Wählen Sie eine Schrittgröße, um Ihre Tracks zu gruppieren.</string>
+    <string name="astro_deep_sky">Deep Sky</string>
 </resources>
