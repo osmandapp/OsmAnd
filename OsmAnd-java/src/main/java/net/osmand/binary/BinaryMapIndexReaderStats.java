@@ -1,8 +1,6 @@
 package net.osmand.binary;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.LongAdder;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.CodedOutputStream;
@@ -32,37 +30,81 @@ public class BinaryMapIndexReaderStats {
 		POI_NAME_OBJECTS
 	}
 	
-	private static class SubStatByAPI {
-		BinaryMapIndexReaderSubApiName api;
-		String mapName;
-		int calls;
-		long time;
-		// long bytes;
+	public static class SubStatByAPI {
+		public final BinaryMapIndexReaderApiName api;
+		public final BinaryMapIndexReaderSubApiName subApi;
+		public final String mapName;
+		private long time = 0, size = 0, count = 0, bytes = 0;
+
+		SubStatByAPI(BinaryMapIndexReaderApiName api, BinaryMapIndexReaderSubApiName subApi, String mapName) {
+			this.api = api;
+			this.subApi = subApi;
+			this.mapName = mapName;
+		}
+
+		void add(long timeNs, long size, long bytes) {
+			this.time += timeNs;
+			this.size += size;
+			this.bytes += bytes;
+			count++;
+		}
+
+		public long getTime() {
+			return time;
+		}
+
+		public long getBytes() {
+			return bytes;
+		}
+
+		public long getCount() {
+			return count;
+		}
+
+		public long getSize() {
+			return size;
+		}
 	}
 	
-	private static class StatByAPI {
+	public static class StatByAPI {
 		BinaryMapIndexReaderApiName api;
-		int calls;
-		long time;
-		long bytes;
+		public int calls;
+		public long time;
+		public long bytes;
 		// int objects; // if we can count 
-		Map<String, SubStatByAPI> subapis = new HashMap<String, BinaryMapIndexReaderStats.SubStatByAPI>();
+		Map<String, SubStatByAPI> subApis = new HashMap<>();
 		
-		public SubStatByAPI getSubApi(String mapName, BinaryMapIndexReaderSubApiName api) {
-			String key = api.name() + "_" + mapName;
-			SubStatByAPI subapi = subapis.get(key);
-			if (!subapis.containsKey(key)) {
-				subapi = new SubStatByAPI();
-				subapi.mapName = mapName;
-				subapi.api = api;
-				subapis.put(key, subapi);
+		public SubStatByAPI getSubApi(BinaryMapIndexReaderSubApiName subApi, String mapName) {
+			String key = subApi.name() + '|' + mapName;
+			SubStatByAPI subStat = subApis.get(key);
+			if (!subApis.containsKey(key)) {
+				subStat = new SubStatByAPI(api, subApi, mapName);
+				subApis.put(key, subStat);
 			}
-			return subapi;
+			return subStat;
 		}
 		
 		@Override
 		public String toString() {
 			return String.format("API %s [call %d, time %.2f, %,d KB]", api, calls, time / 1e9, bytes/1024);
+		}
+
+		public List<SubStatByAPI> getSummary() {
+			Map<String, SubStatByAPI> grouped = new HashMap<>();
+			for (SubStatByAPI st : subApis.values()) {
+				if (st == null || st.mapName == null) {
+					continue;
+				}
+				String key = st.subApi.name() + '|' + st.mapName;
+				SubStatByAPI agg = grouped.computeIfAbsent(key, k -> new SubStatByAPI(api, st.subApi, st.mapName));
+				agg.time += st.time;
+				agg.size += st.size;
+				agg.bytes += st.bytes;
+				agg.count += st.count;
+			}
+			List<SubStatByAPI> result = new ArrayList<>(grouped.values());
+			result.sort((a, b) -> Long.compare(b.time, a.time));
+			return result;
 		}
 	}
 	
@@ -87,10 +129,37 @@ public class BinaryMapIndexReaderStats {
 		public String requestWord = "";
 		Map<BinaryMapIndexReaderApiName, StatByAPI> byApis = new HashMap<>();
 		Map<String, WordSearchStat> wordStats = new HashMap<String, WordSearchStat>();
-		final ConcurrentHashMap<String, TimingSummary> subTimings = new ConcurrentHashMap<>();
-		
+
 		public Map<String, WordSearchStat> getWordStats() {
 			return wordStats;
+		}
+
+		public Map<BinaryMapIndexReaderApiName, StatByAPI> getByApis() {
+			return byApis;
+		}
+
+		public List<SubStatByAPI> getSubStatsSummary() {
+			Map<String, SubStatByAPI> grouped = new HashMap<>();
+			for (StatByAPI apiStats : byApis.values()) {
+				if (apiStats == null || apiStats.subApis == null) {
+					continue;
+				}
+				for (SubStatByAPI st : apiStats.subApis.values()) {
+					if (st == null) {
+						continue;
+					}
+					String mapName = st.mapName == null ? "" : st.mapName;
+					String key = st.api.name() + '|' + st.subApi.name() + '|' + mapName;
+					SubStatByAPI agg = grouped.computeIfAbsent(key, k -> new SubStatByAPI(st.api, st.subApi, st.mapName));
+					agg.time += st.time;
+					agg.size += st.size;
+					agg.bytes += st.bytes;
+					agg.count += st.count;
+				}
+			}
+			List<SubStatByAPI> result = new ArrayList<>(grouped.values());
+			result.sort((a, b) -> Long.compare(b.time, a.time));
+			return result;
 		}
 		
 		public long beginSearchStats(BinaryMapIndexReaderApiName api, SearchRequest<?> req, BinaryIndexPart part, CodedInputStream codedIS, String extraInfo) {
@@ -145,151 +214,25 @@ public class BinaryMapIndexReaderStats {
 			statByAPI.time += timeCall;
 		}
 
-		public enum SubOp {
-			ADDRESS_TABLE,
-			ADDRESS_ATOM,
-			ADDRESS_LOAD_CITIES,
-			ADDRESS_LOAD_STREETS,
-			ADDRESS_LOAD_BUILDINGS,
-			POI_NAMEINDEX,
-			POI_BOXES,
-			POI_POIDATA
-		}
-
-		public static final class TimingSummary {
-			private final LongAdder totalNs = new LongAdder();
-			private final LongAdder count = new LongAdder();
-			public volatile Map<String, long[]> subKeys = new LinkedHashMap<>(); // 0 - time, 1 - count
-
-			void add(long elapsedNs, long size) {
-				totalNs.add(elapsedNs);
-				count.add(size);
-			}
-
-			void addTotal(long elapsedNs, long occurrences) {
-				totalNs.add(elapsedNs);
-				count.add(occurrences);
-			}
-
-			public long getTotalNs() {
-				return totalNs.sum();
-			}
-
-			public long getCount() {
-				return count.sum();
-			}
-
-			void updateSubs(String key1, long time1, long count1, String key2, long time2, long count2) {
-				subKeys.clear();
-				String normalizedKey1 = key1 == null ? "" : key1;
-				String normalizedKey2 = key2 == null ? "" : key2;
-				if (normalizedKey1.isEmpty() && normalizedKey2.isEmpty()) {
-					return;
-				}
-				if (normalizedKey1.equals(normalizedKey2)) {
-					subKeys.put(normalizedKey1, new long[] {Math.max(0, time1 + time2), Math.max(0, count1 + count2)});
-				} else {
-					if (!normalizedKey1.isEmpty()) {
-						subKeys.put(normalizedKey1, new long[] {Math.max(0, time1), Math.max(0, count1)});
-					}
-					if (!normalizedKey2.isEmpty()) {
-						subKeys.put(normalizedKey2, new long[] {Math.max(0, time2), Math.max(0, count2)});
-					}
-				}
-			}
-		}
-
-		public Map<String, TimingSummary> getTimingSummary() {
-			HashMap<String, TimingSummary> grouped = new HashMap<>();
-			HashMap<String, HashMap<String, long[]>> maxByOpAndSuffix = new HashMap<>();
-			for (Map.Entry<String, TimingSummary> e : subTimings.entrySet()) {
-				String key = e.getKey(), op, suffix;
-				int idx = key == null ? -1 : key.indexOf('|');
-				if (idx < 0) {
-					op = key;
-					suffix = "";
-				} else {
-					op = key.substring(0, idx);
-					suffix = key.substring(idx + 1);
-				}
-				if (op == null) {
-					op = "UNKNOWN";
-				}
-				TimingSummary sub = e.getValue();
-				long subTotalNs = sub.getTotalNs();
-				long subCount = sub.getCount();
-				grouped.computeIfAbsent(op, k -> new TimingSummary()).addTotal(subTotalNs, subCount);
-
-				HashMap<String, long[]> suffixTotals = maxByOpAndSuffix.computeIfAbsent(op, k -> new HashMap<>());
-				long[] totals = suffixTotals.computeIfAbsent(suffix, k -> new long[2]);
-				totals[0] += subTotalNs;
-				totals[1] += subCount;
-			}
-
-			ArrayList<Map.Entry<String, TimingSummary>> sorted = new ArrayList<>(grouped.entrySet());
-			sorted.sort((o1, o2) -> {
-				long d = o2.getValue().getTotalNs() - o1.getValue().getTotalNs();
-				return d == 0 ? 0 : (d > 0 ? 1 : -1);
-			});
-
-			LinkedHashMap<String, TimingSummary> result = new LinkedHashMap<>();
-			for (Map.Entry<String, TimingSummary> e : sorted) {
-				String op = e.getKey();
-				TimingSummary summary = e.getValue();
-				HashMap<String, long[]> suffixTotals = maxByOpAndSuffix.get(op);
-				if (suffixTotals != null) {
-					ArrayList<Map.Entry<String, long[]>> suffixEntries = new ArrayList<>(suffixTotals.entrySet());
-					suffixEntries.sort((a, b) -> {
-						long[] aTotals = a.getValue(), bTotals = b.getValue();
-						long av = aTotals == null ? 0 : aTotals[0];
-						long bv = bTotals == null ? 0 : bTotals[0];
-						if (av == bv) {
-							String ak = a.getKey() == null ? "" : a.getKey();
-							String bk = b.getKey() == null ? "" : b.getKey();
-							return ak.compareTo(bk);
-						}
-						return av < bv ? 1 : -1;
-					});
-
-					String bestKey = "", afterBestKey = "";
-					long bestTime = 0, bestCount = 0;
-					long afterBestTime = 0, afterBestCount = 0;
-					if (!suffixEntries.isEmpty()) {
-						Map.Entry<String, long[]> first = suffixEntries.get(0);
-						bestKey = first.getKey();
-						long[] firstTotals = first.getValue();
-						bestTime = firstTotals == null ? 0 : firstTotals[0];
-						bestCount = firstTotals == null ? 0 : firstTotals[1];
-						if (suffixEntries.size() > 1) {
-							Map.Entry<String, long[]> second = suffixEntries.get(1);
-							afterBestKey = second.getKey();
-							long[] secondTotals = second.getValue();
-							afterBestTime = secondTotals == null ? 0 : secondTotals[0];
-							afterBestCount = secondTotals == null ? 0 : secondTotals[1];
-						}
-					}
-					summary.updateSubs(bestKey, bestTime, bestCount, afterBestKey, afterBestTime, afterBestCount);
-				}
-				result.put(op, summary);
-			}
-
-			subTimings.clear();
-			return result;
-		}
-
 		public long beginSubSearchStats(int size) {
 			subStart = System.nanoTime();
 			subSize = size;
 			return subStart;
 		}
 
-		public void endSubSearchStats(long statReq, SubOp op, String obf, int size) {
+		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryMapIndexReaderSubApiName op, String obf, int size, long bytes) {
 			if (statReq != subStart) {
 				System.err.println("ERROR: in sub search stats counting to fix ! " + statReq + " != " + subStart);
 			}
 			long timeCall = (System.nanoTime() - statReq);
-			String key = op.name() + "|" + obf;
-			subTimings.computeIfAbsent(key, k -> new TimingSummary()).add(timeCall, size - subSize);
+			StatByAPI statByAPI = byApis.get(api);
+			if (statByAPI == null) {
+				statByAPI = new StatByAPI();
+				statByAPI.api = api;
+				byApis.put(api, statByAPI);
+			}
+			SubStatByAPI subStatByAPI = statByAPI.getSubApi(op, obf);
+			subStatByAPI.add(timeCall, size - subSize, bytes);
 		}
 
 		@Override

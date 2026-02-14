@@ -715,11 +715,10 @@ public class BinaryMapIndexReader {
 		for (AddressRegion r : inds) {
 			for (CitiesBlock block : r.cities) {
 				if (type != null && block.type == type.index) {
-					long statReq = 0, subStart = 0;
+					long statReq = 0;
 					int citiesSize = cities.size();
 					if (searchStat != null) {
 						statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_CITIES, resultMatcher, r, codedIS, null);
-						subStart = searchStat.beginSubSearchStats(citiesSize);
 					}
 					codedIS.seek(block.filePointer);
 					long old = codedIS.pushLimitLong((long) block.length);
@@ -728,7 +727,6 @@ public class BinaryMapIndexReader {
 					if (statReq > 0) {
 						searchStat.endSearchStats(statReq, BinaryMapIndexReaderApiName.LOAD_CITIES, 
 								cities.subList(citiesSize, cities.size()), r, codedIS, null);
-						searchStat.endSubSearchStats(subStart, SearchStat.SubOp.ADDRESS_LOAD_CITIES, file.getName(),	cities.size());
 					}
 				}
 			}
@@ -747,10 +745,9 @@ public class BinaryMapIndexReader {
 		} catch (IllegalArgumentException e) {
 			throw new IOException(e.getMessage() + " while reading " + c + " (id: " + c.getId() + ")");
 		}
-		long statReq = 0, subStart = 0;
+		long statReq = 0;
 		if (searchStat != null) {
 			statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_STREETS, resultMatcher, reg, codedIS, null);
-			subStart = searchStat.beginSubSearchStats(c.getStreets().size());
 		}
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
@@ -759,7 +756,6 @@ public class BinaryMapIndexReader {
 		codedIS.popLimit(old);
 		if (statReq > 0) {
 			searchStat.endSearchStats(statReq, BinaryMapIndexReaderApiName.LOAD_STREETS, c.getStreets(), reg, codedIS, null);
-			searchStat.endSubSearchStats(subStart, SearchStat.SubOp.ADDRESS_LOAD_STREETS, file.getName(), c.getStreets().size());
 		}
 		return size;
 	}
@@ -776,10 +772,9 @@ public class BinaryMapIndexReader {
 
 	public void preloadBuildings(Street s, SearchRequest<Building> resultMatcher, SearchStat searchStat) throws IOException {
 		AddressRegion reg = checkAddressIndex(s.getFileOffset());
-		long statReq = 0, subStart = 0;
+		long statReq = 0;
 		if (searchStat != null) {
 			statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_BUILDINGS, resultMatcher, reg, codedIS, null);
-			subStart = searchStat.beginSubSearchStats(s.getBuildings().size());
 		}
 		codedIS.seek(s.getFileOffset());
 		long size = codedIS.readRawVarint32();
@@ -790,7 +785,6 @@ public class BinaryMapIndexReader {
 		codedIS.popLimit(old);
 		if (statReq > 0) {
 			searchStat.endSearchStats(statReq, BinaryMapIndexReaderApiName.LOAD_BUILDINGS, s.getBuildings(), reg, codedIS, null);
-			searchStat.endSubSearchStats(subStart, SearchStat.SubOp.ADDRESS_LOAD_BUILDINGS, file.getName(), s.getBuildings().size());
 		}
 	}
 
@@ -1447,8 +1441,10 @@ public class BinaryMapIndexReader {
 		for (PoiRegion poiIndex : poiIndexes) {
 			long statReq = req.beginSearchStats(BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
 			poiAdapter.initCategories(poiIndex);
+
 			codedIS.seek(poiIndex.filePointer);
 			long old = codedIS.pushLimitLong((long) poiIndex.length);
+
 			poiAdapter.searchPoiByName(poiIndex, req);
 			codedIS.popLimit(old);
 			req.endSearchStats(statReq, BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
@@ -1528,6 +1524,7 @@ public class BinaryMapIndexReader {
 			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
 			long old = codedIS.pushLimitLong((long) poiIndex.length);
+
 			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 			codedIS.popLimit(old);
 			req.endSearchStats(statReq, BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
@@ -1863,9 +1860,9 @@ public class BinaryMapIndexReader {
 			return 0;
 		}
 
-		public void endSubSearchStats(long statReq, SearchStat.SubOp op, String obf) {
+		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName op, String obf, long bytes) {
 			if (statReq > 0 && searchStat != null) {
-				searchStat.endSubSearchStats(statReq, op, obf, getSearchResults().size());
+				searchStat.endSubSearchStats(statReq, api, op, obf, getSearchResults().size(), bytes);
 			}
 		}
 

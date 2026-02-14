@@ -684,13 +684,13 @@ public class BinaryMapAddressReaderAdapter {
 			if (req.isCancelled()) {
 				return;
 			}
+			final long subStart = req.beginSubSearchStats(), bytes = codedIS.getBytesCounter();
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
 				return;
 			case OsmAndAddressNameIndexData.TABLE_FIELD_NUMBER:
-				long statReq = req.beginSubSearchStats();
 				long length = readInt();
 				indexOffset = codedIS.getTotalBytesRead();
 				long oldLimit = codedIS.pushLimitLong((long) length);
@@ -700,10 +700,10 @@ public class BinaryMapAddressReaderAdapter {
 				map.readIndexedStringTable(stringMatcher.getCollator(), Collections.singletonList(req.nameQuery),
 						"", Collections.singletonList(loffsets), charsList);
 				codedIS.popLimit(oldLimit);
-				req.endSubSearchStats(statReq, BinaryMapIndexReaderStats.SearchStat.SubOp.ADDRESS_TABLE, map.getFile().getName());
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.ADDRESS_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.ADDRESS_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			case OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER:
-				statReq = req.beginSubSearchStats();
 				// also offsets can be randomly skipped by limit
 				loffsets.sort();
 				TIntArrayList[] refs = new TIntArrayList[CityBlocks.STREET_TYPE.index + 1];
@@ -736,10 +736,14 @@ public class BinaryMapAddressReaderAdapter {
 
 					codedIS.popLimit(oldLim);
 					if (req.isCancelled()) {
-						req.endSubSearchStats(statReq, BinaryMapIndexReaderStats.SearchStat.SubOp.ADDRESS_ATOM, map.getFile().getName());
+						req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.ADDRESS_BY_NAME,
+								BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.ADDRESS_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 						return;
 					}
 				}
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.ADDRESS_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.ADDRESS_NAME_REFERENCES, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
+
 
 				for (CityBlocks block : typeFilter) {
 					if (req.isCancelled()) {
@@ -822,7 +826,8 @@ public class BinaryMapAddressReaderAdapter {
 				}
 //				LOG.info("Whole address search by name is done in " + (System.currentTimeMillis() - time) + "ms. Found "
 //						+ req.getSearchResults().size());
-				req.endSubSearchStats(statReq, BinaryMapIndexReaderStats.SearchStat.SubOp.ADDRESS_ATOM, map.getFile().getName());
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.ADDRESS_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.ADDRESS_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				return;
 			default:
 				skipUnknownField(t);
