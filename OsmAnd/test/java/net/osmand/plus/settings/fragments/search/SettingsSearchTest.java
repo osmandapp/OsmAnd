@@ -843,7 +843,7 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-						{ // FK-TODO: fails, Einzeltest: Ok, App: Ok
+						{
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AccessibilityPlugin",
 								new SettingsSearchTestTemplate() {
 
@@ -1014,7 +1014,7 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-						{ // FK-TODO: fails, Einzeltest: Ok, App: Ok
+						{
 								"shouldSearchAndFindSpeedCameraSettings4EachApplicationMode",
 								new SettingsSearchTestTemplate() {
 
