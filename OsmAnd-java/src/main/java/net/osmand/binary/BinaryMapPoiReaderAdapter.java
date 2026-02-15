@@ -323,6 +323,8 @@ public class BinaryMapPoiReaderAdapter {
 			if (req.isCancelled()) {
 				return;
 			}
+			final long subStart = req.beginSubSearchStats(), bytes = codedIS.getBytesCounter();
+
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
@@ -334,6 +336,8 @@ public class BinaryMapPoiReaderAdapter {
 				// here offsets are sorted by distance
 				offsets = readPoiNameIndex(matcher.getCollator(), query, req, region, nameIndexCoordinates);
 				codedIS.popLimit(oldLimit);
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER:
 				length = readInt();
@@ -353,6 +357,8 @@ public class BinaryMapPoiReaderAdapter {
 				readBoxField(0, 0, 0, 0, 0, 0, 0, offsetsMap, null, req, region, nameIndexTree);
 				req.poiTypeFilter = filter;
 				codedIS.popLimit(oldLimit);
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_REFERENCES, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
 				// also offsets can be randomly skipped by limit
@@ -392,12 +398,16 @@ public class BinaryMapPoiReaderAdapter {
 					readPoiData(matcher, req, region);
 					codedIS.popLimit(oldLim);
 					if (req.isCancelled() || req.limitExceeded()) {
+						req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+								BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 						return;
 					}
 				}
 //				LOG.info("Whole poi by name search is done in " + (System.currentTimeMillis() - time) +
 //						"ms. Found " + req.getSearchResults().size());
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				return;
 			default:
 				skipUnknownField(t);
@@ -564,6 +574,7 @@ public class BinaryMapPoiReaderAdapter {
 			if (req.isCancelled()) {
 				return;
 			}
+			final long subStart = req.beginSubSearchStats(), bytes = codedIS.getBytesCounter();
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
@@ -574,6 +585,8 @@ public class BinaryMapPoiReaderAdapter {
 				oldLimit = codedIS.pushLimitLong((long) length);
 				readBoxField(left31, right31, top31, bottom31, 0, 0, 0, offsetsMap, skipTiles, req, region, null);
 				codedIS.popLimit(oldLimit);
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_REFERENCES, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
 				int[] offsets = offsetsMap.keys();
@@ -605,10 +618,15 @@ public class BinaryMapPoiReaderAdapter {
 					}
 					codedIS.popLimit(oldLim);
 					if (req.isCancelled()) {
+						req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+								BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 						return;
 					}
 				}
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
+
 				return;
 			default:
 				skipUnknownField(t);

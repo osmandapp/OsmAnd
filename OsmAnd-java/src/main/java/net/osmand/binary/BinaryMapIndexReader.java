@@ -715,7 +715,7 @@ public class BinaryMapIndexReader {
 		for (AddressRegion r : inds) {
 			for (CitiesBlock block : r.cities) {
 				if (type != null && block.type == type.index) {
-					long statReq = 0; 
+					long statReq = 0;
 					int citiesSize = cities.size();
 					if (searchStat != null) {
 						statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_CITIES, resultMatcher, r, codedIS, null);
@@ -745,7 +745,7 @@ public class BinaryMapIndexReader {
 		} catch (IllegalArgumentException e) {
 			throw new IOException(e.getMessage() + " while reading " + c + " (id: " + c.getId() + ")");
 		}
-		long statReq = 0; 
+		long statReq = 0;
 		if (searchStat != null) {
 			statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_STREETS, resultMatcher, reg, codedIS, null);
 		}
@@ -772,7 +772,7 @@ public class BinaryMapIndexReader {
 
 	public void preloadBuildings(Street s, SearchRequest<Building> resultMatcher, SearchStat searchStat) throws IOException {
 		AddressRegion reg = checkAddressIndex(s.getFileOffset());
-		long statReq = 0; 
+		long statReq = 0;
 		if (searchStat != null) {
 			statReq = searchStat.beginSearchStats(BinaryMapIndexReaderApiName.LOAD_BUILDINGS, resultMatcher, reg, codedIS, null);
 		}
@@ -1847,6 +1847,19 @@ public class BinaryMapIndexReader {
 				List<?> res = req.getSearchResults();
 				List<?> sublist = res.subList(searchStat.prevResultsSize, res.size());
 				searchStat.endSearchStats(statReq, api, sublist, part, codedIS, nameQuery);
+			}
+		}
+
+		public long beginSubSearchStats() {
+			if (searchStat != null) {
+				return searchStat.beginSubSearchStats(getSearchResults().size());
+			}
+			return 0;
+		}
+
+		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName op, String obf, long bytes) {
+			if (statReq > 0 && searchStat != null) {
+				searchStat.endSubSearchStats(statReq, api, op, obf, getSearchResults().size(), bytes);
 			}
 		}
 
