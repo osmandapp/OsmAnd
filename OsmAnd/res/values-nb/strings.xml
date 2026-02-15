@@ -5934,4 +5934,7 @@
     <string name="delete_groups_confirmation">Slette grupper?</string>
     <string name="favorite_search_empty_state_description">Juster dine søk eller filtere for å se om det hjelper</string>
     <string name="favorites_empty_folder_description">Denne mappen har ikke noen punkter ennå.</string>
+    <string name="level_of_details">Detaljnivå</string>
+    <string name="pin_folder">Fest mappe</string>
+    <string name="unpin_folder">Løsne mappe</string>
 </resources>
