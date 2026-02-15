@@ -93,6 +93,7 @@ import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.shared.palette.data.PaletteRepository;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.OpeningHoursParser;
@@ -308,7 +309,7 @@ public class AppInitializer implements IProgress {
 		app.daynightHelper = startupInit(new DayNightHelper(app), DayNightHelper.class);
 		app.avoidRoadsHelper = startupInit(new AvoidRoadsHelper(app), AvoidRoadsHelper.class);
 		app.gpxDisplayHelper = startupInit(new GpxDisplayHelper(app), GpxDisplayHelper.class);
-		app.colorPaletteHelper = startupInit(new ColorPaletteHelper(app), ColorPaletteHelper.class);
+		app.paletteRepository = startupInit(new PaletteRepository(), PaletteRepository.class);
 		app.savingTrackHelper = startupInit(new SavingTrackHelper(app), SavingTrackHelper.class);
 		app.analyticsHelper = startupInit(new AnalyticsHelper(app), AnalyticsHelper.class);
 		app.feedbackHelper = startupInit(new FeedbackHelper(app), FeedbackHelper.class);

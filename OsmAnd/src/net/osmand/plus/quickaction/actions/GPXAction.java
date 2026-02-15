@@ -37,7 +37,7 @@ import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.card.color.palette.main.data.DefaultColors;
+import net.osmand.plus.card.color.palette.solid.data.DefaultColors;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;

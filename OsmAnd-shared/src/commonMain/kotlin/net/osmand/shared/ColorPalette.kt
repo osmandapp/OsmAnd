@@ -111,30 +111,54 @@ class ColorPalette {
 			while (true) {
 				line = buf.readUtf8Line()
 				if (line == null) break
-				val t = line.trim { it <= ' ' }
-				if (t.startsWith("#")) {
-					continue
-				}
-				val values = t.split(",".toRegex()).dropLastWhile { it.isEmpty() }
-					.toTypedArray()
-				if (values.size >= 4) {
-					try {
-						val rgba: ColorValue =
-							ColorValue.rgba(
-								values[0].toDouble(),
-								values[1].toInt(),
-								values[2].toInt(),
-								values[3].toInt(),
-								if (values.size >= 4) values[4].toInt() else 255
-							)
-						palette.colors.add(rgba)
-					} catch (e: NumberFormatException) {
-						LOG.error(e.message, e)
-					}
+
+				val colorValue = parseColorValue(line)
+				if (colorValue != null) {
+					palette.colors.add(colorValue)
 				}
 			}
 			palette.sortPalette()
 			return palette
+		}
+
+		fun parseColorValue(line: String): ColorValue? {
+			val t = line.trim { it <= ' ' }
+			if (t.isEmpty() || t.startsWith("#")) {
+				return null
+			}
+
+			val values = t.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+
+			if (values.size >= 4) {
+				try {
+					val alpha = if (values.size > 4) values[4].trim().toInt() else 255
+
+					return ColorValue.rgba(
+						values[0].trim().toDouble(),
+						values[1].trim().toInt(),
+						values[2].trim().toInt(),
+						values[3].trim().toInt(),
+						alpha
+					)
+				} catch (e: NumberFormatException) {
+					LOG.error(e.message, e)
+				}
+			}
+			return null
+		}
+
+		fun formatColorValue(v: ColorValue): String {
+			return StringBuilder()
+				.append(v.value).append(",")
+				.append(v.r).append(",")
+				.append(v.g).append(",")
+				.append(v.b).append(",")
+				.append(v.a)
+				.toString()
+		}
+
+		fun colorToHex(color: Int): String {
+			return "#" + color.toUInt().toString(16).padStart(8, '0').uppercase()
 		}
 	}
 
@@ -147,6 +171,40 @@ class ColorPalette {
 			val value = cv.value * (maxVal - minVal) + minVal
 			colors.add(ColorValue(value, cv.clr))
 		}
+	}
+
+	/**
+	 * Creates a new palette adjusted to the [min, max] range.
+	 * - If the range is smaller than the palette, it "slices" the palette.
+	 * - If the range is larger, it extends the edge colors to the new limits.
+	 */
+	fun adjustToRange(min: Double, max: Double): ColorPalette {
+		val newPalette = ColorPalette()
+
+		if (colors.isEmpty()) {
+			return newPalette
+		}
+
+		// 1. Add start point.
+		// getColorByValue() handles interpolation or returns the first color if min < palette.min
+		newPalette.addPoint(min, getColorByValue(min))
+
+		// 2. Keep intermediate points to preserve gradient structure
+		for (cv in colors) {
+			if (cv.value > min && cv.value < max) {
+				newPalette.colors.add(cv)
+			}
+		}
+
+		// 3. Add end point
+		newPalette.addPoint(max, getColorByValue(max))
+
+		return newPalette
+	}
+
+	fun addPoint(value: Double, color: Int) {
+		colors.add(ColorValue(value, color))
+		sortPalette()
 	}
 
 	fun getColorByValue(value: Double): Int {
@@ -184,12 +242,12 @@ class ColorPalette {
 	fun writeColorPalette(): String {
 		val bld = StringBuilder()
 		for (v in colors) {
-			bld.append(v.value).append(",")
-			bld.append(v.r).append(",").append(v.g).append(",").append(v.b).append(",").append(v.a)
-				.append("\n")
+			bld.append(formatColorValue(v)).append("\n")
 		}
 		return bld.toString().trim()
 	}
+
+	fun isValid() = colors.size >= 2
 
 	private fun sortPalette() {
 		colors.sortWith(compareBy { it.value })

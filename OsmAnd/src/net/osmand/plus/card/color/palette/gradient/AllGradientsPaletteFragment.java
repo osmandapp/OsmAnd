@@ -1,6 +1,6 @@
 package net.osmand.plus.card.color.palette.gradient;
 
-import static net.osmand.plus.card.color.palette.main.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
+import static net.osmand.plus.palette.contract.IPaletteController.ALL_PALETTE_ITEMS_PROCESS_ID;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,18 +22,19 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.card.color.palette.main.IColorsPalette;
-import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.palette.contract.IPaletteController;
+import net.osmand.plus.palette.contract.IPaletteView;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.palette.controller.BasePaletteController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.shared.palette.domain.PaletteItem;
 
-public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment implements IColorsPalette {
+public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment implements IPaletteView {
 
 	public static final String TAG = AllGradientsPaletteFragment.class.getSimpleName();
 
-	private GradientColorsPaletteController controller;
+	private BasePaletteController controller;
 	private AllGradientsPaletteAdapter adapter;
 
 	@Override
@@ -45,9 +46,9 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DialogManager dialogManager = app.getDialogManager();
-		controller = (GradientColorsPaletteController) dialogManager.findController(ALL_COLORS_PROCESS_ID);
+		controller = (BasePaletteController) dialogManager.findController(ALL_PALETTE_ITEMS_PROCESS_ID);
 		if (controller != null) {
-			controller.bindPalette(this);
+			controller.attachView(this);
 		}
 	}
 
@@ -73,7 +74,10 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 		closeButton.setOnClickListener(v -> dismiss());
 
 		ImageView actionButton = toolbar.findViewById(R.id.action_button);
-		AndroidUiHelper.updateVisibility(actionButton, false);
+		actionButton.setOnClickListener(v -> controller.onAddButtonClick(requireActivity()));
+		actionButton.setImageDrawable(getIcon(R.drawable.ic_action_add_no_bg));
+		actionButton.setContentDescription(getString(R.string.shared_string_add));
+		AndroidUiHelper.updateVisibility(actionButton, true);
 	}
 
 	private void setupColorsPalette(@NonNull View view) {
@@ -84,31 +88,39 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 	}
 
 	@Override
-	public void updatePaletteColors(@Nullable PaletteColor targetPaletteColor) {
+	public void updatePaletteItems(@Nullable PaletteItem targetItem) {
 		if (adapter != null) {
 			adapter.update();
 		}
 	}
 
 	@Override
-	public void updatePaletteSelection(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
+	public void updatePaletteSelection(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
 		if (adapter != null) {
-			adapter.askNotifyItemChanged(oldColor);
-			adapter.askNotifyItemChanged(newColor);
+			adapter.askNotifyItemChanged(oldItem);
+			adapter.askNotifyItemChanged(newItem);
 		}
-		dismiss();
+		if (!controller.shouldKeepAllItemsScreen()) {
+			dismiss();
+		}
+	}
+
+	@Override
+	public void askScrollToPaletteItemPosition(@Nullable PaletteItem targetItem, boolean smoothScroll) {
+		// Not relevant for this type of Palette View
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.unbindPalette(this);
+		controller.detachView(this);
 		FragmentActivity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
 			// Automatically unregister controller when close the dialog
 			// to avoid any possible memory leaks
 			DialogManager manager = app.getDialogManager();
-			manager.unregister(ALL_COLORS_PROCESS_ID);
+			manager.unregister(ALL_PALETTE_ITEMS_PROCESS_ID);
+			controller.onPaletteScreenClosed();
 		}
 	}
 
@@ -117,12 +129,12 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
-									@NonNull IColorsPaletteController controller) {
+									@NonNull IPaletteController controller) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 			DialogManager dialogManager = app.getDialogManager();
-			dialogManager.register(ALL_COLORS_PROCESS_ID, controller);
+			dialogManager.register(ALL_PALETTE_ITEMS_PROCESS_ID, controller);
 			new AllGradientsPaletteFragment().show(fragmentManager, TAG);
 		}
 	}
