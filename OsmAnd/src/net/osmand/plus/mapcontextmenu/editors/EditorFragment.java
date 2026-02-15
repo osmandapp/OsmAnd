@@ -24,6 +24,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -33,6 +34,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import net.osmand.data.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.palette.solid.ColorsPaletteCard;
@@ -41,6 +43,7 @@ import net.osmand.plus.palette.contract.IExternalPaletteListener;
 import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.mapcontextmenu.editors.controller.EditorColorController;
 import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -168,6 +171,13 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		if (!InsetsUtils.isEdgeToEdgeSupported()) {
 			view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		}
+		OsmandActionBarActivity actionBarActivity = getActionBarActivity();
+		if (actionBarActivity instanceof MyPlacesActivity myPlacesActivity) {
+			ActionBar actionBar = myPlacesActivity.getSupportActionBar();
+			if (actionBar != null) {
+				actionBar.hide();
+			}
+		}
 	}
 
 	@Override
@@ -176,6 +186,13 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		requireMapActivity().enableDrawer();
 		if (!InsetsUtils.isEdgeToEdgeSupported()) {
 			view.getViewTreeObserver().removeOnGlobalLayoutListener(getOnGlobalLayoutListener());
+		}
+		OsmandActionBarActivity actionBarActivity = getActionBarActivity();
+		if (actionBarActivity instanceof MyPlacesActivity myPlacesActivity) {
+			ActionBar actionBar = myPlacesActivity.getSupportActionBar();
+			if (actionBar != null) {
+				actionBar.show();
+			}
 		}
 	}
 
@@ -264,11 +281,11 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	private void createIconSelector() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
 			EditorIconController iconController = getIconController();
 			ViewGroup iconsCardContainer = view.findViewById(R.id.icons_card_container);
-			iconsCardContainer.addView(new MultiStateCard(mapActivity, iconController.getCardController()) {
+			iconsCardContainer.addView(new MultiStateCard(activity, iconController.getCardController()) {
 				@Override
 				public int getCardLayoutId() {
 					return R.layout.card_select_editor_icon;
@@ -278,21 +295,21 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	private void createColorSelector() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			ColorsPaletteCard colorsPaletteCard = new ColorsPaletteCard(mapActivity, getColorController());
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			ColorsPaletteCard colorsPaletteCard = new ColorsPaletteCard(activity, getColorController());
 			ViewGroup colorsCardContainer = view.findViewById(R.id.colors_card_container);
 			colorsCardContainer.addView(colorsPaletteCard.build(view.getContext()));
 		}
 	}
 
 	private void createShapeSelector() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			shapesCard = new ShapesCard(mapActivity, getBackgroundType(), getColor());
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			shapesCard = new ShapesCard(activity, getBackgroundType(), getColor());
 			shapesCard.setListener(this);
 			ViewGroup shapesCardContainer = view.findViewById(R.id.shapes_card_container);
-			shapesCardContainer.addView(shapesCard.build(mapActivity));
+			shapesCardContainer.addView(shapesCard.build(activity));
 			updateSelectedShapeText();
 		}
 	}

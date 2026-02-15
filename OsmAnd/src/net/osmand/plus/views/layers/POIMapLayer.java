@@ -1026,6 +1026,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			return amenity.getLocation();
 		} else if (object instanceof RenderedObject renderedObject) {
 			return renderedObject.getLatLon();
+		} else if (object instanceof MapObject mapObject) {
+			return mapObject.getLocation();
 		}
 		return null;
 	}

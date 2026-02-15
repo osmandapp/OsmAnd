@@ -5067,4 +5067,9 @@
     <string name="poi_route_point_category">Kategori perjalanan</string>
     <string name="poi_chamber">Dewan</string>
     <string name="poi_yoga">Yoga</string>
+    <string name="poi_denomination_church_of_god">Gereja Tuhan</string>
+    <string name="poi_denomination_sufi">Sufi</string>
+    <string name="poi_denomination_zen">Zen</string>
+    <string name="poi_denomination_conservative">Konservatif</string>
+    <string name="poi_denomination_charismatic">Karismatik</string>
 </resources>

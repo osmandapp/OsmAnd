@@ -282,9 +282,7 @@
     <string name="gpx_option_reverse_route">Obrátiť smer stopy</string>
     <string name="gpx_option_destination_point">Použiť aktuálny cieľový bod</string>
     <string name="gpx_option_from_start_point">Prejsť pozdĺž celej trasy</string>
-    <string name="switch_to_vector_map_to_see">Pre túto oblasť je dostupná offline vektorová mapa.
-\n\t
-\n\tNa jej použitie aktivujte \'Menu\' → \'Zobrazenie\' → \'Zdroj mapy…\' → \'Vektorové OSM mapy\'.</string>
+    <string name="switch_to_vector_map_to_see">Pre túto oblasť je dostupná offline vektorová mapa. \n\t \n\tNa jej použitie aktivujte \'Menu\' → \'Nastaviť mapu\' → \'Zdroj mapy…\' → \'Vektorové offline mapy\'.</string>
     <string name="choose_audio_stream">Výstup hlasových pokynov</string>
     <string name="choose_audio_stream_descr">Vybrať reproduktor pre hlasové pokyny.</string>
     <string name="voice_stream_voice_call">Zvuk telefónneho hovoru (preruší Bluetooth stereo v aute)</string>
@@ -425,7 +423,7 @@
     <string name="no_vector_map_loaded">Vektorové mapy neboli načítané</string>
     <string name="gpx_files_not_found">Žiadne GPX súbory neboli nájdené v priečinku stôp</string>
     <string name="error_reading_gpx">Nepodarilo sa načítať GPX údaje.</string>
-    <string name="vector_data">Vektorové OSM mapy</string>
+    <string name="vector_data">Vektorové off-line mapy</string>
     <string name="transport_context_menu">Hľadať prepravu na zastávke</string>
     <string name="poi_context_menu_modify">Upraviť bod záujmu (POI)</string>
     <string name="poi_context_menu_delete">Vymazať bod záujmu (POI)</string>
@@ -4478,7 +4476,7 @@
     <string name="current_location_widget">Súradnice: Súčasná poloha</string>
     <string name="purchases_feature_desc_cross_buy">Použite vaše predplatené funkcie na iných platformách (Android/iOS/web) bez ďalších nákladov.</string>
     <string name="shared_string_cross_buy">Prenosný nákup</string>
-    <string name="external_sensor_widgets">Nástroje ANT+</string>
+    <string name="external_sensor_widgets">Externé senzory</string>
     <string name="ant_read_data">Načítať údaje</string>
     <string name="ant_go_to_store">Prejsť do obchodu</string>
     <string name="map_widget_ant_bicycle_dist_desc">Zobrazuje prejdenú vzdialenosť</string>
@@ -4749,7 +4747,7 @@
     <string name="select_layer">Zvoľte vrstvu</string>
     <string name="weather_download_error">Nepodarilo sa stiahnuť %1$s dlaždíc.</string>
     <string name="contact_us">Kontaktujte nás</string>
-    <string name="live_monitoring_adress_descr">Zadajte webovú adresu pomocou syntaxe parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Zadajte webovú adresu pomocou syntaxe parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_cache">Vyrovnávacia pamäť</string>
     <string name="widget_available_ram_desc">Zobrazí dostupnú pamäť pridelenú pre OsmAnd.</string>
     <string name="delete_map">Vymazať mapu</string>
@@ -5984,4 +5982,22 @@
     <string name="galactic_line">Galaktická rovina</string>
     <string name="meridian_line">Poludníkové čiary</string>
     <string name="equator_line">Rovník</string>
+    <string name="delete_groups_confirmation">Vymazať skupiny?</string>
+    <string name="add_to_track">Pridať do stopy</string>
+    <string name="unpin_folder">Odopnúť priečinok</string>
+    <string name="pin_folder">Pripnúť priečinok</string>
+    <string name="favorite_search_empty_state_description">Upravte svoje vyhľadávanie alebo filter, aby ste zistili, či to pomohlo</string>
+    <string name="favorites_empty_folder_description">Tento priečinok zatiaľ nemá žiadne body.</string>
+    <string name="astro_rendering">Vykresľovanie</string>
+    <string name="astro_configure_view">Nastaviť zobrazenie</string>
+    <string name="astro_visible_objects">Viditeľné objekty</string>
+    <string name="red_filter">Červený filter</string>
+    <string name="astro_directions">Smery</string>
+    <string name="astro_daily_path">Denná dráha</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_deep_sky">Hlboký vesmír</string>
+    <string name="astro_star_clusters">Hviezdokopy</string>
+    <string name="astro_nebulas">Hmloviny</string>
+    <string name="astro_solar_system">Slnečná sústava</string>
 </resources>

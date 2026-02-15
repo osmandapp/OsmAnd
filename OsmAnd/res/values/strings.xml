@@ -34,7 +34,38 @@
     <string name="add_palette">Add palette</string>
     <string name="delete_palette">Delete palette</string>
     <string name="delete_colors_palette_dialog_summary">Are you sure you want to delete %1$s palette?</string>
-	<string name="galactic_line">Galactic Line</string>
+    <string name="stars_articles">Stars articles</string>
+	<string name="delete_groups_confirmation">Delete groups?</string>
+	<string name="add_to_track">Add to track</string>
+	<string name="unpin_folder">Unpin folder</string>
+	<string name="pin_folder">Pin folder</string>
+	<string name="favorite_search_empty_state_description">Adjust your search or filters to see if that helps</string>
+	<string name="favorites_empty_folder_description">This folder doesn\’t have any points yet.</string>
+	<string name="astro_rendering">Rendering</string>
+	<string name="astro_configure_view">Configure view</string>
+	<string name="astro_visible_objects">Visible objects</string>
+	<string name="red_filter">Red filter</string>
+	<string name="astro_directions">Directions</string>
+	<string name="astro_daily_path">Daily Path</string>
+	<string name="map_2d">2D</string>
+	<string name="map_3d">3D</string>
+	<string name="astro_deep_sky">Deep sky</string>
+	<string name="astro_star_clusters">Star clusters</string>
+	<string name="astro_nebulas">Nebulas</string>
+	<string name="astro_solar_system">Solar system</string>
+	<string name="building_3d_day_color_content_desc">3d buildings day theme color</string>
+	<string name="building_3d_night_color_content_desc">3d buildings night theme color</string>
+	<string name="building_3d_low_details_content_desc">3d buildings low details</string>
+	<string name="building_3d_high_details_content_desc">3d buildings high</string>
+	<string name="building_3d_near_distance_content_desc">3d buildings distance near</string>
+	<string name="building_3d_far_distance_content_desc">3d buildings distance far</string>
+	<string name="free_custom_color_description">Customize 3D buildings with any color. Perfect for matching a map theme or improving contrast.</string>
+	<string name="buildings_3d_use_map_style_color_description">Use map style (%s) default color.</string>
+	<string name="buildings_3d_visibility_description">Adjust the opacity of 3D structures on the map.</string>
+	<string name="level_of_details">Level of detail</string>
+	<string name="performance">Performance</string>
+	<string name="view_distance">View distance</string>
+    <string name="galactic_line">Galactic Line</string>
 	<string name="meridian_line">Meridian Line</string>
 	<string name="equator_line">Equator Line</string>
 	<string name="copy_from_portrait_layout">Copy from Portrait layout</string>
@@ -1065,7 +1096,7 @@ You will be able to pair this scanner again at any time.</string>
         • Added support for ANT+ temperature widget\n\n
         • Introduced \"Available RAM\" widget\n\n
     </string>
-    <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_temperature">Temperature</string>
     <string name="sensor_temperature_desc">Shows temperature from sensor</string>
     <string name="with_waypoints">With waypoints</string>

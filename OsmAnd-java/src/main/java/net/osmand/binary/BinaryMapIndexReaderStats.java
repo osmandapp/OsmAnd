@@ -22,11 +22,43 @@ public class BinaryMapIndexReaderStats {
 		POI_BY_TYPE,
 	}
 	
+	public enum BinaryMapIndexReaderSubApiName {
+		ADDRESS_NAME_INDEX,
+		ADDRESS_NAME_REFERENCES,
+		ADDRESS_NAME_OBJECTS,
+
+		POI_NAME_INDEX,
+		POI_NAME_REFERENCES, 
+		POI_NAME_OBJECTS
+	}
+	
+	private static class SubStatByAPI {
+		BinaryMapIndexReaderSubApiName api;
+		String mapName;
+		int calls;
+		long time;
+		// long bytes;
+	}
+	
 	private static class StatByAPI {
 		BinaryMapIndexReaderApiName api;
 		int calls;
 		long time;
 		long bytes;
+		// int objects; // if we can count 
+		Map<String, SubStatByAPI> subapis = new HashMap<String, BinaryMapIndexReaderStats.SubStatByAPI>();
+		
+		public SubStatByAPI getSubApi(String mapName, BinaryMapIndexReaderSubApiName api) {
+			String key = api.name() + "_" + mapName;
+			SubStatByAPI subapi = subapis.get(key);
+			if (!subapis.containsKey(key)) {
+				subapi = new SubStatByAPI();
+				subapi.mapName = mapName;
+				subapi.api = api;
+				subapis.put(key, subapi);
+			}
+			return subapi;
+		}
 		
 		@Override
 		public String toString() {

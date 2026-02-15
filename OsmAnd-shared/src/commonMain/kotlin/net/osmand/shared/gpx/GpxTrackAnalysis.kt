@@ -414,7 +414,7 @@ class GpxTrackAnalysis {
 		var elevationPoints = 0
 		var speedCount = 0
 		var timeDiffMillis: Long = 0
-		var timeDiff = 0
+		var timeDiff = 0.0
 		var totalSpeedSum = 0.0
 
 		var sensorSpeedCount = 0
@@ -525,6 +525,9 @@ class GpxTrackAnalysis {
 				updateHdop(point)
 
 				var distance = point.attributes?.distance ?: -1f
+				if(j == 1 && s.startCoeff > 0) {
+					distance = -1f
+				}
 				if (j > 0) {
 					val prev = s[j - 1]
 					if (distance < 0f) {
@@ -538,10 +541,10 @@ class GpxTrackAnalysis {
 					point.distance = segmentDistance.toDouble()
 
 					timeDiffMillis = maxOf(0, point.time - prev.time)
-					timeDiff = (timeDiffMillis / 1000).toInt()
+					timeDiff = timeDiffMillis.toDouble() / 1000
 
 					if (!hasSpeedInTrack && speed == 0f && timeDiff > 0) {
-						speed = distance / timeDiff
+						speed = (distance / timeDiff).toFloat()
 					}
 
 					val timeSpecified = point.time != 0L && prev.time != 0L
@@ -556,7 +559,7 @@ class GpxTrackAnalysis {
 				} else {
 					distance = 0f
 					timeDiffMillis = 0
-					timeDiff = 0
+					timeDiff = 0.0
 				}
 
 				_minSpeed = minOf(speed, _minSpeed)

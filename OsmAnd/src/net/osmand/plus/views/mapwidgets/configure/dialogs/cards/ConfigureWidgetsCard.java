@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -42,7 +43,8 @@ import java.util.List;
 public class ConfigureWidgetsCard extends MapBaseCard {
 
 	private final MapWidgetRegistry widgetRegistry;
-	private final ScreenLayoutMode[] layoutMode;
+	@Nullable
+	private final ScreenLayoutMode layoutMode;
 
 	private final int profileColor;
 	private final int defaultIconColor;
@@ -52,7 +54,7 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		return R.layout.configure_widgets_card;
 	}
 
-	public ConfigureWidgetsCard(@NonNull MapActivity mapActivity, @NonNull ScreenLayoutMode[] layoutMode) {
+	public ConfigureWidgetsCard(@NonNull MapActivity mapActivity, @Nullable ScreenLayoutMode layoutMode) {
 		super(mapActivity, false);
 		this.layoutMode = layoutMode;
 		this.widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
@@ -69,7 +71,7 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		description.setText(R.string.configure_screen_widgets_descr);
 
 		ApplicationMode appMode = settings.getApplicationMode();
-		List<MapWidgetInfo> widgets = widgetRegistry.getWidgets(mapActivity, appMode, layoutMode[0]);
+		List<MapWidgetInfo> widgets = widgetRegistry.getWidgets(mapActivity, appMode, layoutMode);
 
 		setupWidgetGroupView(view.findViewById(R.id.left_panel), widgets, LEFT, appMode);
 		setupWidgetGroupView(view.findViewById(R.id.right_panel), widgets, RIGHT, appMode);
@@ -94,11 +96,11 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		description.setText(String.valueOf(count));
 
 		int iconColor = count > 0 ? profileColor : defaultIconColor;
-		icon.setImageDrawable(getPaintedIcon(panel.getIconId(rtl, layoutMode[0]), iconColor));
+		icon.setImageDrawable(getPaintedIcon(panel.getIconId(rtl, layoutMode), iconColor));
 
 		view.findViewById(R.id.button_container).setOnClickListener(v -> {
 			Bundle args = new Bundle();
-			args.putSerializable(SCREEN_LAYOUT_MODE, layoutMode[0]);
+			args.putSerializable(SCREEN_LAYOUT_MODE, layoutMode);
 			ConfigureWidgetsFragment.showInstance(getMapActivity(), panel, appMode, args);
 		});
 
@@ -110,7 +112,7 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 
 	private void setupPanelsLayout(@NonNull View view, boolean useSeparateLayouts) {
 		ApplicationMode appMode = settings.getApplicationMode();
-		PanelsLayoutMode panelsMode = settings.getPanelsLayoutMode(mapActivity, layoutMode[0]).get();
+		PanelsLayoutMode panelsMode = settings.getPanelsLayoutMode(mapActivity, layoutMode).get();
 
 		ImageView icon = view.findViewById(R.id.icon);
 		TextView title = view.findViewById(R.id.title);
@@ -118,9 +120,9 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 
 		title.setText(R.string.panels_layout);
 		description.setText(panelsMode.toHumanString(app));
-		icon.setImageDrawable(getPaintedIcon(panelsMode.getIcon(layoutMode[0]), profileColor));
+		icon.setImageDrawable(getPaintedIcon(panelsMode.getIcon(layoutMode), profileColor));
 
-		view.findViewById(R.id.button_container).setOnClickListener(v -> PanelsLayoutFragment.showInstance(activity, layoutMode[0]));
+		view.findViewById(R.id.button_container).setOnClickListener(v -> PanelsLayoutFragment.showInstance(activity, layoutMode));
 
 		setupListItemBackground(view, appMode);
 		AndroidUiHelper.updateVisibility(view, useSeparateLayouts);
@@ -131,13 +133,13 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 
 	private int getWidgetsCount(@NonNull List<MapWidgetInfo> widgets, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		int filter = ENABLED_MODE | AVAILABLE_MODE | MATCHING_PANELS_MODE;
-		return widgetRegistry.getFilteredWidgets(widgets, appMode, layoutMode[0], filter, Collections.singletonList(panel)).size();
+		return widgetRegistry.getFilteredWidgets(widgets, appMode, layoutMode, filter, Collections.singletonList(panel)).size();
 	}
 
 	private void setupTransparentWidgetsButton(@NonNull ApplicationMode appMode, boolean showShortDivider) {
 		View button = view.findViewById(R.id.transparent_widgets_button);
 
-		CommonPreference<Boolean> preference = settings.getTransparentMapThemePreference(layoutMode[0]);
+		CommonPreference<Boolean> preference = settings.getTransparentMapThemePreference(layoutMode);
 		boolean enabled = preference.getModeValue(appMode);
 		ConfigureButtonsCard.setupButton(button, getString(R.string.map_widget_transparent), null, R.drawable.ic_action_appearance, enabled, nightMode);
 

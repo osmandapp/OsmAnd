@@ -1175,7 +1175,7 @@
     <string name="visualized_by">Được làm trực quan bởi</string>
     <string name="explore_3d_track_description">Khám phá đường dẫn dưới dạng 3D đầy tính tương tác! Minh hoạ chiều cao, tốc độ, và nhiều hơn nữa trực tiếp trong bản đồ.</string>
     <string name="change_default_appearance_confirmation">Thay đổi hình thức mặc định của %1$s?</string>
-    <string name="live_monitoring_adress_descr">Chỉ rõ địa chỉ trang web với ký hiệu tham số: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Chỉ rõ địa chỉ trang web với ký hiệu tham số: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="routing_attr_allow_via_ferrata_name">Tuyến đường ven núi (Đường leo núi)</string>
     <string name="navigation_points_desc">Widget về điều hướng được bật trong khi dẫn đường để hiển thị thông tin như khoảng cách, thời gian đến hoặc thời gian còn lại, những lối rẽ tiếp theo, hướng đi, tên phố hiện tại/tiếp theo, làn đường, tốc độ tối đa, khi tiếp cận những cảnh báo, POIs, điểm trên bản đồ.</string>
     <string name="no_widgets_descr">Thêm một hoặc nhiều widget từ danh sách những widget hiện có.</string>

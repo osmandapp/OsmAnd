@@ -5015,7 +5015,7 @@
     <string name="send_logcat_log_descr">Докладний файл журналу</string>
     <string name="free_versions">Безплатні версії</string>
     <string name="about_osmand">Про OsmAnd</string>
-    <string name="live_monitoring_adress_descr">Вкажіть вебадресу з параметром syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Вкажіть вебадресу з параметром syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_temperature">Температура</string>
     <string name="sensor_temperature_desc">Показує температуру з сенсорів</string>
     <string name="with_waypoints">З маршрутними точками</string>
@@ -6001,4 +6001,11 @@
     <string name="equator_line">Лінія екватора</string>
     <string name="backup_deleted_all_data">Видалені дані.</string>
     <string name="backup_deleting_all_data">Видалення даних…</string>
+    <string name="astro_configure_view">Налаштувати вигляд</string>
+    <string name="astro_visible_objects">Видимі об\'єкти</string>
+    <string name="red_filter">Червоний фільтр</string>
+    <string name="astro_directions">Напрямки</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_solar_system">Сонячна система</string>
 </resources>

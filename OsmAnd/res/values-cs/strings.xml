@@ -148,7 +148,7 @@
     <string name="button_upgrade_osmandplus">Upgradovat OsmAnd+</string>
     <string name="map_version_changed_info">Stáhněte si novou verzi aplikace, abyste mohli používat nové mapové soubory.</string>
     <string name="shared_string_rename">Přejmenovat</string>
-    <string name="poi_filter_nominatim">On-line POI filtr „Nominatim“</string>
+    <string name="poi_filter_nominatim">Online „Nominatim“</string>
     <string name="search_position_current_location_search">Hledané polohy…</string>
     <string name="search_position_current_location_found">Moje poloha [nalezeno]</string>
     <string name="search_position_address">Adresy…</string>
@@ -232,7 +232,7 @@
     <string name="poi_filter_food_shop">Potraviny</string>
     <string name="poi_filter_for_tourists">Pro turisty</string>
     <string name="poi_filter_fuel">Palivo</string>
-    <string name="poi_filter_namefinder">On-line POI filtr „NameFinder“</string>
+    <string name="poi_filter_namefinder">Online „NameFinder“</string>
     <string name="reading_cached_tiles">Načítání uložených dlaždic…</string>
     <string name="version_index_is_big_for_memory">Index \'\'{0}\'\' se nevejde do paměti</string>
     <string name="version_index_is_not_supported">Verze indexu \'\'{0}\'\' není podporována</string>
@@ -1814,7 +1814,7 @@
     <string name="upload_osm_note_description">Nahrajte OSM poznámku anonymně, nebo prostřednictvím svého účtu OpenStreetMap.org.</string>
     <string name="shared_string_move_up">Posunout ↑</string>
     <string name="shared_string_move_down">Posunout ↓</string>
-    <string name="finish_navigation">Dokončit navigaci</string>
+    <string name="finish_navigation">Ukončit navigaci</string>
     <string name="avoid_road">Vyhnout se cestě</string>
     <string name="storage_directory_readonly_desc">Přepnuto do interní paměti, protože aktuálně vybraná složka je chráněna proti zápisu. Prosím zvolte složku v zapisovatelné paměti.</string>
     <string name="storage_directory_shared">Sdílená paměť</string>
@@ -2096,7 +2096,7 @@
     <string name="quick_action_page_list_descr">Tlačítko pro posunutí seznamu na další stranu.</string>
     <string name="rendering_attr_depthContours_description">Zobrazit hloubkové vrstevnice a body.</string>
     <string name="rendering_attr_depthContours_name">Námořní hloubkové vrstevnice</string>
-    <string name="navigate_point_olc">Open Location Code (OLC)</string>
+    <string name="navigate_point_olc">Open Location Code</string>
     <string name="route_altitude">Stoupání trasy</string>
     <string name="altitude_descent">Klesání</string>
     <string name="altitude_ascent">Stoupání</string>
@@ -2275,7 +2275,7 @@
     <string name="empty_state_favourites">Přidejte Oblíbené</string>
     <string name="empty_state_favourites_desc">Importujte Oblíbené nebo je přidejte označením bodů na mapě.</string>
     <string name="import_track">Import souboru GPX</string>
-    <string name="import_track_desc">Soubor %1$s neobsahuje body GPX trasy, chcete jej přesto importovat jako trasu?</string>
+    <string name="import_track_desc">Soubor %1$s neobsahuje body trasy, chcete jej přesto importovat jako trasu?</string>
     <string name="move_point">Přesunout bod</string>
     <string name="move_all_to_history">Přesunout vše do historie</string>
     <string name="show_direction">Indikace vzdálenosti</string>
@@ -4932,7 +4932,7 @@
     <string name="map_widget_group_glide_desc">Widgety zobrazují poměr klouzavosti k cíli nebo průměrný poměr klouzavosti pro aktuální let.</string>
     <string name="average_glide_time_interval_desc">Zadejte časový interval pro průměrování klouzání.</string>
     <string name="average_glide_ratio">Průměrný klouzavý poměr</string>
-    <string name="live_monitoring_adress_descr">Zadejte webovou adresu pomocí syntaxe parametrů: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Zadejte webovou adresu pomocí syntaxe parametrů: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="glide_ratio_to_target">Klouzavý poměr k cíli</string>
     <string name="map_widget_group_glide_ratio">Klouzavý poměr</string>
     <string name="help_article_map_legend_osmand_name">OsmAnd styl mapy</string>
@@ -5996,4 +5996,34 @@
     <string name="equator_line">Rovník</string>
     <string name="backup_deleted_all_data">Data odstraněna.</string>
     <string name="backup_deleting_all_data">Mazání dat…</string>
+    <string name="astro_rendering">Vykreslování</string>
+    <string name="astro_configure_view">Nastavit zobrazení</string>
+    <string name="astro_visible_objects">Viditelné objekty</string>
+    <string name="red_filter">Červený filtr</string>
+    <string name="astro_directions">Směry</string>
+    <string name="astro_daily_path">Denní cesta</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_deep_sky">Hluboký vesmír</string>
+    <string name="astro_star_clusters">Hvězdokupy</string>
+    <string name="astro_nebulas">Mlhoviny</string>
+    <string name="astro_solar_system">Sluneční soustava</string>
+    <string name="delete_groups_confirmation">Odstranit skupiny?</string>
+    <string name="add_to_track">Přidat do stopy</string>
+    <string name="unpin_folder">Odepnout složku</string>
+    <string name="pin_folder">Připnout složku</string>
+    <string name="favorite_search_empty_state_description">Upravte své vyhledávání nebo filtry pro zjištění, zda to pomohlo</string>
+    <string name="favorites_empty_folder_description">Tato složka zatím nemá žádné body.</string>
+    <string name="building_3d_day_color_content_desc">Denní barva 3D budov</string>
+    <string name="building_3d_night_color_content_desc">Noční barva 3D budov</string>
+    <string name="building_3d_low_details_content_desc">Nízké detaily 3D budov</string>
+    <string name="building_3d_high_details_content_desc">Vysoké detaily 3D budov</string>
+    <string name="building_3d_near_distance_content_desc">Blízké 3D budovy</string>
+    <string name="building_3d_far_distance_content_desc">Vzdálené 3D budovy</string>
+    <string name="free_custom_color_description">Přizpůsobte si 3D budovy jakoukoliv barvou. Perfektní pro doplnění mapového motivu nebo zvýšení kontrastu.</string>
+    <string name="buildings_3d_use_map_style_color_description">Použít výchozí barvu mapového stylu (%s).</string>
+    <string name="buildings_3d_visibility_description">Upravit průhlednost 3D struktur na mapě.</string>
+    <string name="level_of_details">Úroveň podrobností</string>
+    <string name="performance">Výkon</string>
+    <string name="view_distance">Vykreslovací vzdálenost</string>
 </resources>

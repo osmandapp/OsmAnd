@@ -97,7 +97,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             Map.entry("winter_sport", ApplicationMode.SKI),
             Map.entry("cycling", ApplicationMode.BICYCLE),
             Map.entry("water_sport", ApplicationMode.BOAT),
-            Map.entry("routes_other", ApplicationMode.PEDESTRIAN)
+            Map.entry("other", ApplicationMode.PEDESTRIAN)
             // taken from poi_type tag="route_type" excluding "air_sports"
     );
 

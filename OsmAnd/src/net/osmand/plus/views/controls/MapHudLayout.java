@@ -48,7 +48,6 @@ public class MapHudLayout extends FrameLayout {
 
 	private static final int REFRESH_UI_ID = UI_HANDLER_MAP_HUD + 1;
 	private static final int REFRESH_VERTICAL_PANELS_ID = UI_HANDLER_MAP_HUD + 2;
-	private static final int REFRESH_ALARMS_CONTAINER_ID = UI_HANDLER_MAP_HUD + 3;
 	private static final int UI_REFRESH_INTERVAL_MILLIS = 100;
 	private static final float TOP_BAR_MAX_WIDTH_PERCENTAGE_PORTRAIT = 0.5f;
 	private static final float TOP_BAR_MAX_WIDTH_PERCENTAGE_LANDSCAPE = 0.6f;
@@ -69,6 +68,7 @@ public class MapHudLayout extends FrameLayout {
 	private View alarmsContainer;
 	private SideWidgetsPanel leftWidgetsPanel;
 	private SideWidgetsPanel rightWidgetsPanel;
+	private VerticalWidgetPanel topWidgetsPanel;
 	private VerticalWidgetPanel bottomWidgetsPanel;
 
 	private final float dpToPx;
@@ -140,6 +140,7 @@ public class MapHudLayout extends FrameLayout {
 		alarmsContainer = findViewById(R.id.alarms_container);
 		leftWidgetsPanel = findViewById(R.id.map_left_widgets_panel);
 		rightWidgetsPanel = findViewById(R.id.map_right_widgets_panel);
+		topWidgetsPanel = findViewById(R.id.top_widgets_panel);
 		bottomWidgetsPanel = findViewById(R.id.map_bottom_widgets_panel);
 
 		setupPositions();
@@ -153,11 +154,11 @@ public class MapHudLayout extends FrameLayout {
 			addPosition(rightWidgetsPanel, this::updateVerticalPanels);
 
 			addPosition(findViewById(R.id.widget_top_bar));
-			addPosition(findViewById(R.id.top_widgets_panel));
-			addPosition(bottomWidgetsPanel, this::updateAlarmsContainer);
+			addPosition(topWidgetsPanel);
+			addPosition(bottomWidgetsPanel);
 		} else {
 			addPosition(findViewById(R.id.widget_top_bar));
-			addPosition(findViewById(R.id.top_widgets_panel));
+			addPosition(topWidgetsPanel);
 			addPosition(bottomWidgetsPanel);
 
 			addPosition(leftWidgetsPanel);
@@ -167,6 +168,8 @@ public class MapHudLayout extends FrameLayout {
 		addPosition(findViewById(R.id.measurement_buttons));
 		addPosition(findViewById(R.id.recording_note_layout));
 		addPosition(findViewById(R.id.add_gpx_point_bottom_sheet));
+
+		addWidget(alarmsContainer);
 	}
 
 	private void addPosition(@Nullable View view) {
@@ -217,7 +220,9 @@ public class MapHudLayout extends FrameLayout {
 		}
 		addViewChangeListener(button, null);
 
-		addView(button, params);
+		if (button.getParent() == null) {
+			addView(button, params);
+		}
 		mapButtons.add(button);
 	}
 
@@ -228,7 +233,9 @@ public class MapHudLayout extends FrameLayout {
 		updateButtonParams(params, position);
 		addViewChangeListener(view, null);
 
-		addView(view, params);
+		if (view.getParent() == null) {
+			addView(view, params);
+		}
 		additionalWidgetPositions.put(view, position);
 	}
 
@@ -248,8 +255,9 @@ public class MapHudLayout extends FrameLayout {
 		Map<View, ButtonPositionSize> map = getButtonPositionSizes();
 		for (Map.Entry<View, ButtonPositionSize> entry : map.entrySet()) {
 			View view = entry.getKey();
-			if (view instanceof MapButton || view instanceof RulerWidget) {
-				updatePositionParams(view, entry.getValue());
+			ButtonPositionSize position = entry.getValue();
+			if (view instanceof MapButton || view instanceof RulerWidget || position.isMovable()) {
+				updatePositionParams(view, position);
 			}
 		}
 	}
@@ -284,7 +292,7 @@ public class MapHudLayout extends FrameLayout {
 		for (Map.Entry<View, ButtonPositionSize> entry : widgetPositions.entrySet()) {
 			View view = entry.getKey();
 			if (view.getVisibility() == VISIBLE) {
-				ButtonPositionSize position = createWidgetPosition(view);
+				ButtonPositionSize position = updateWidgetPosition(view, entry.getValue());
 				if (position.getHeight() > 0 && position.getWidth() > 0) {
 					map.put(view, position);
 				}
@@ -323,7 +331,7 @@ public class MapHudLayout extends FrameLayout {
 		} else if (view instanceof SideWidgetsPanel panel) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_TOP);
-			position.setPositionHorizontal(panel.rightSide ? POS_RIGHT : POS_LEFT);
+			position.setPositionHorizontal(panel.isRightSide() ? POS_RIGHT : POS_LEFT);
 			position.setNonMoveable();
 		} else if (id == R.id.left_side_menu) {
 			position.setMoveDescendantsHorizontal();
@@ -350,6 +358,10 @@ public class MapHudLayout extends FrameLayout {
 			position.setNonMoveable();
 		} else if (view instanceof RulerWidget) {
 			position.setMoveHorizontal();
+			position.setPositionVertical(POS_BOTTOM);
+			position.setPositionHorizontal(POS_LEFT);
+		} else if (id == R.id.alarms_container) {
+			position.setMoveVertical();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
 		}
@@ -392,6 +404,10 @@ public class MapHudLayout extends FrameLayout {
 		} else if (view instanceof RulerWidget) {
 			position.setMarginX(0);
 			position.setMarginY(0);
+		} else if (id == R.id.alarms_container) {
+			int margin = getResources().getDimensionPixelSize(R.dimen.map_alarm_bottom_margin);
+			position.setMarginX(0);
+			position.setMarginY((int) AndroidUtils.pxToDpF(getContext(), margin) / 8);
 		}
 		return position;
 	}
@@ -495,7 +511,6 @@ public class MapHudLayout extends FrameLayout {
 				panelsLayoutMode = settings.getPanelsLayoutMode(getContext(), screenLayoutMode).get();
 				setupPositions();
 				updateVerticalPanels();
-				updateAlarmsContainer();
 				refresh();
 			});
 		}
@@ -507,16 +522,12 @@ public class MapHudLayout extends FrameLayout {
 		super.onSizeChanged(w, h, oldw, oldh);
 		if (w > 0 && w != oldw) {
 			updateVerticalPanels();
-
-			if (shouldCenterVerticalPanels()) {
-				updateAlarmsContainer();
-			}
 		}
 	}
 
 	public void updateVerticalPanels() {
 		app.runInUIThreadAndCancelPrevious(REFRESH_VERTICAL_PANELS_ID, () -> {
-			updateHorizontalMargins(findViewById(R.id.top_widgets_panel));
+			updateHorizontalMargins(topWidgetsPanel);
 			updateHorizontalMargins(bottomWidgetsPanel);
 		}, UI_REFRESH_INTERVAL_MILLIS);
 	}
@@ -548,25 +559,6 @@ public class MapHudLayout extends FrameLayout {
 				view.setLayoutParams(params);
 			}
 		}
-	}
-
-	private void updateAlarmsContainer() {
-		app.runInUIThreadAndCancelPrevious(REFRESH_ALARMS_CONTAINER_ID, () -> {
-			if (alarmsContainer != null && alarmsContainer.getLayoutParams() instanceof MarginLayoutParams params) {
-				int marginId = portrait ? R.dimen.map_alarm_bottom_margin : R.dimen.map_alarm_bottom_margin_land;
-				int baseMargin = getResources().getDimensionPixelSize(marginId);
-
-				int panelMargin = 0;
-				if (shouldCenterVerticalPanels() && bottomWidgetsPanel != null && bottomWidgetsPanel.getVisibility() == VISIBLE) {
-					panelMargin = bottomWidgetsPanel.getHeight();
-				}
-				int bottomMargin = Math.max(baseMargin, panelMargin);
-				if (params.bottomMargin != bottomMargin) {
-					params.bottomMargin = bottomMargin;
-					alarmsContainer.setLayoutParams(params);
-				}
-			}
-		}, UI_REFRESH_INTERVAL_MILLIS);
 	}
 
 	@Override

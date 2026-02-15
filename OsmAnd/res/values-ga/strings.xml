@@ -506,7 +506,7 @@
     <string name="lang_nl">Ísiltíris</string>
     <string name="weather_precip_in">in</string>
     <string name="lang_lb">Lucsambuirgis</string>
-    <string name="map_widget_rssi">RSSI</string>
+    <string name="map_widget_rssi">Rssi</string>
     <string name="routing_engine_vehicle_type_foot">Ag siúl</string>
     <string name="shared_string_ok">Ceart go leor</string>
     <string name="edit_tilesource_url_to_load">URL</string>
@@ -569,7 +569,7 @@
     <string name="external_device_details_battery">Cadhnra</string>
     <string name="map_widget_ant_bicycle_power">Cumhacht rothar</string>
     <string name="daily">Laethúil</string>
-    <string name="live_monitoring_adress_descr">Luaigh an seoladh gréasáin go sonrach leis an gcomhréir pharaiméadair: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Luaigh an seoladh gréasáin go sonrach leis an gcomhréir pharaiméadair: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="shared_string_download_successful">Íoslódáilte</string>
     <string name="shared_string_vehicle">Feithicil</string>
@@ -2213,7 +2213,7 @@
     <string name="dangerous_goods">Earraí contúirteacha</string>
     <string name="may_be_used_if_there_is_shortcut">Is féidir a úsáid má tá aicearra ann</string>
     <string name="shared_string_copyright">Cóipcheart</string>
-    <string name="weather_source_ecmwf_description">Airmheán Eorpach um Réamhaisnéisí Aimsire Meántréimhseacha (ECMWF)</string>
+    <string name="weather_source_ecmwf_description">Lárionad Eorpach um Réamhaisnéisí Aimsire Meántéarmacha</string>
     <string name="cache_size">Méid na taisce</string>
     <string name="driving_region_india">An India</string>
     <string name="auto_25_chars_route_tslr">Cas beagáinín ar dheis</string>
@@ -3515,7 +3515,7 @@
     <string name="dynamic_icon_type_summary">Athruithe deilbhíní bunaithe ar staid an ghnímh.</string>
     <string name="obd_fuel_level_percent">Leibhéal breosla (%)</string>
     <string name="obd_fuel_left_km">Breosla fágtha (km)</string>
-    <string name="obd_fuel_consumption_rate_scanner">Ráta ídithe breosla (DAB)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Ráta ídithe breosla (obd)</string>
     <string name="obd_widget_vehicle_speed">Luas na feithicle</string>
     <string name="route_guidance_desc">Soláthraíonn sé treoir bealaigh fíor-ama, lena n-áirítear achar go dtí an chéad chasadh eile, ainm an bhóthair, ainm reatha na sráide, agus faisnéis faoi lána. Tá giuirléidí gníomhach le linn loingseoireachta.</string>
     <string name="obd_nothing_found_description">Seiceáil an méid seo a leanas le do thoil:\n - Cinntigh go bhfuil Bluetooth casta air\n - Tá inneall feithicle ag rith\n - Déan cinnte go bhfuil do ghléas laistigh de raon an scanóra.</string>
@@ -5183,7 +5183,7 @@
     <string name="voice_prompts_timetable">Leideanna gutha amanna</string>
     <string name="driving_region_uk">Ríocht Aontaithe agus a leithéid</string>
     <string name="map_widget_distance_by_tap">Fad ar sconna</string>
-    <string name="weather_data_sources_prompt">Soláthraíonn OSMand sonraí aimsire ó dhá fhoinse:</string>
+    <string name="weather_data_sources_prompt">Soláthraíonn OsmAnd sonraí aimsire ó dhá fhoinse:</string>
     <string name="data_source">Foinse Sonraí</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="getting_list_of_required_maps">Liosta de na léarscáileanna riachtanacha á bhfáil…</string>
@@ -5801,4 +5801,22 @@
     <string name="equator_line">Líne an Mheánchiorcail</string>
     <string name="backup_deleted_all_data">Sonraí scriosta.</string>
     <string name="backup_deleting_all_data">Ag scriosadh sonraí…</string>
+    <string name="astro_rendering">Rindreáil</string>
+    <string name="astro_configure_view">Cumraigh an radharc</string>
+    <string name="astro_visible_objects">Réada infheicthe</string>
+    <string name="red_filter">Scagaire dearg</string>
+    <string name="astro_directions">Treoracha</string>
+    <string name="astro_daily_path">Cosán Laethúil</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_deep_sky">Spéir dhomhain</string>
+    <string name="astro_star_clusters">Réaltbhraislí</string>
+    <string name="astro_nebulas">Néalta</string>
+    <string name="astro_solar_system">Córas gréine</string>
+    <string name="delete_groups_confirmation">Scrios grúpaí?</string>
+    <string name="add_to_track">Cuir leis an rian</string>
+    <string name="unpin_folder">Díphionáil fillteán</string>
+    <string name="pin_folder">Fillteán bioráin</string>
+    <string name="favorite_search_empty_state_description">Coigeartaigh do chuardach nó do scagairí le feiceáil an gcabhraíonn sé sin</string>
+    <string name="favorites_empty_folder_description">Níl aon phointí sa fhillteán seo go fóill.</string>
 </resources>

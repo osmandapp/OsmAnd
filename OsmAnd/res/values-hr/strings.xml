@@ -241,7 +241,7 @@
     <string name="default_buttons_commit">Izvršiti</string>
     <string name="poi_remove_title">Obriši POI</string>
     <string name="shared_string_delete">Izbriši</string>
-    <string name="poi_remove_success">POI je uspješno izbrisan</string>
+    <string name="poi_remove_success">Izbrisano</string>
     <string name="poi_action_add">dodaj</string>
     <string name="poi_action_change">izmjeni</string>
     <string name="poi_action_succeded_template">Radnja {0} je uspješno završena.</string>
@@ -307,7 +307,7 @@
     <string name="saving_gpx_tracks">Spremanje GPX staza na memorijsku karticu…</string>
     <string name="finished_task">Gotovo</string>
     <string name="search_address_building_option">Zgrada</string>
-    <string name="osm_editing_plugin_name">OSM uređivanje</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap uređivanje</string>
     <string name="data_settings_descr">Odredite jezik, preuzmite ili ponovno učitajte podatke.</string>
     <string name="loading_data">Učitavanje podataka…</string>
     <string name="go_back_to_osmand">Vrati se na OsmAnd kartu</string>
@@ -422,8 +422,7 @@
     <string name="build_installed">Nadogradnja{0} je uspješno instalirana ({1}).</string>
     <string name="install_selected_build">Želite li instalirati OsmAnd - {0} iz {1} {2} MB ?</string>
     <string name="sd_unmounted">Memorijska kartica nije dostupna.\nNećete biti u mogućnosti vidjeti karte ili pronaći stvari.</string>
-    <string name="sd_mounted_ro">SD kartica je samo za čitanje.
-\nMožete vidjeti samo učitanu kartu i ne možete ju preuzeti s Interneta.</string>
+    <string name="sd_mounted_ro">SD kartica je samo za čitanje. \nSada je moguće vidjeti unaprijed učitanu kartu ali ne preuzimanje novih područja.</string>
     <string name="voice_data_initializing">Pokretanje glasovnih podataka…</string>
     <string name="network_provider">Mreža</string>
     <string name="fav_saved_sucessfully">Favoriti uspješno spremljeni u {0}</string>
@@ -532,7 +531,7 @@
     <string name="fav_points_edited">Točka u favoritima je bila uređena</string>
     <string name="fav_points_not_exist">Točke favorita ne postoje</string>
     <string name="reading_indexes">Čitanje lokalnih podataka…</string>
-    <string name="save_track_interval">Interval bilježenja</string>
+    <string name="save_track_interval">Interval bilježenja tijekom navigacije</string>
     <string name="save_track_interval_descr">Odaberite interval bilježenja za staze</string>
     <string name="map_view_3d_descr">Omogući 3D prikaz karte.</string>
     <string name="map_view_3d">3D prikaz karte</string>
@@ -687,7 +686,7 @@
     <string name="use_transparent_map_theme">Prozirna tema</string>
     <string name="download_files_not_enough_space">Nema dovoljno slobodnog prostora za preuzimanje %1$s MB (slobodno je:%2$s).</string>
     <string name="download_files_question_space">Preuzeti {0} datoteke(a)?\n Koristit će se {1} MB (od {2} MB).</string>
-    <string name="user_password">Vaša OSM lozinka</string>
+    <string name="user_password">Lozinka</string>
     <string name="osmand_service">Modus pozadine</string>
     <string name="osmand_service_descr">OsmAnd radi u pozadini s isključenim zaslonom.</string>
     <string name="open_street_map_login_descr">Potrebno za slanje na openstreetmap.org.</string>
@@ -1892,4 +1891,8 @@
     <string name="type_address">Upiši adresu</string>
     <string name="error_notification_desc">Pošaljite snimak zaslona ove obavijesti na support@osmand.net</string>
     <string name="unirs_render_descr">Izmjena zadanog stila za povećanje kontrasta pješačkih i biciklističkih cesta. Koristi naslijeđene Mapnik boje.</string>
+    <string name="shared_string_deleted">Izbrisano</string>
+    <string name="shared_string_edited">Uređeno</string>
+    <string name="shared_string_added">Dodano</string>
+    <string name="date_added">Dodano</string>
 </resources>

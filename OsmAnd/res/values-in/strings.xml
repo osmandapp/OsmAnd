@@ -4036,7 +4036,7 @@
     <string name="osm_recipient_stat">Penyuntingan %1$s, jumlah %2$s mBTC</string>
     <string name="select_map_marker">Pilih penanda peta</string>
     <string name="no_microphone_permission">Berikan akses mikrofon.</string>
-    <string name="find_parking">Cari parkir</string>
+    <string name="find_parking">Temukan parkiran</string>
     <string name="shared_string_save_changes">Simpan perubahan</string>
     <string name="av_audio_format">Format keluaran audio</string>
     <string name="av_audio_format_descr">Pilih format keluaran audio.</string>
@@ -4380,7 +4380,7 @@
     <string name="gpx_option_from_start_point">Lewati dengan seluruh trek</string>
     <string name="bg_service_sleep_mode_off">Jalankan 
 \n aplikasi di latar belakang</string>
-    <string name="context_menu_item_add_parking_point">Tandai sebagai lokasi parkir</string>
+    <string name="context_menu_item_add_parking_point">Tandai sebagai tempat parkir</string>
     <string name="route_kr">Tetap kanan dan jalan</string>
     <string name="local_indexes_cat_tile">Peta ubin daring dan cache</string>
     <string name="zoom_by_trackball">Gunakan trackball untuk kontrol perbesaran</string>
@@ -5377,7 +5377,7 @@
     <string name="open_issue_on_github_descr">Ajukan pertanyaan, minta fitur baru</string>
     <string name="open_issue_on_github">Buka isu baru di GitHub</string>
     <string name="report_an_issues">Laporkan isu</string>
-    <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempel waktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}, pwt={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempel waktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}, pwt={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="release_4_6">• Android Auto: Menambahkan mode 3D
 \n
 \n • Trek: Memperkenalkan filter dan folder cerdas, memori yang dioptimalkan untuk file yang lebih besar
@@ -6279,4 +6279,13 @@
     <string name="copy_from_landscape_layout">Salin dari tata letak Horizontal</string>
     <string name="panels_layout_wide">Lebar</string>
     <string name="panels_layout">Tata letak panel</string>
+    <string name="astro_solar_system">Tata surya</string>
+    <string name="galactic_line">Garis Galaksi</string>
+    <string name="meridian_line">Garis Meridian</string>
+    <string name="astro_nebulas">Nebula</string>
+    <string name="astro_star_clusters">Klaster bintang</string>
+    <string name="astro_directions">Arah</string>
+    <string name="red_filter">Filter merah</string>
+    <string name="astro_visible_objects">Objek tampak</string>
+    <string name="astro_configure_view">Konfigurasi tampilan</string>
 </resources>

@@ -2271,7 +2271,7 @@
     <string name="shared_string_total">Укупно</string>
     <string name="clear_all_intermediates">Очисти сва пролазна одредишта</string>
     <string name="transport_nearby_routes">Близу</string>
-    <string name="speech_rate_descr">Одаберите брзину изговора вештачког гласа ТТС.</string>
+    <string name="speech_rate_descr">Одаберите брзину изговора вештачког гласа.</string>
     <string name="local_osm_changes_backup">Прави складишни умножак измена ОСМ-а</string>
     <string name="osmand_service">Позадински рад</string>
     <string name="osmand_service_descr">ОсмАнд ради у позадини док је заслон искључен.</string>
@@ -2957,7 +2957,7 @@
     <string name="utm_format_descr">ОсмАнд користи стандардни облик УТМ који је сличан, али није истоветан са обликом НАТО-а УТМ-а.</string>
     <string name="shared_string_example">Пример</string>
     <string name="navigate_point_format_utm">Стандард УТМ-а</string>
-    <string name="navigate_point_format_olc">Отворени код положаја (ОЛЦ)</string>
+    <string name="navigate_point_format_olc">Отворени код положаја</string>
     <string name="coordinates_format_info">Означени облик ће бити примењен кроз цели програм.</string>
     <string name="pref_selected_by_default_for_profiles">Ова поставка је подразумевано одабрана за налоге : %s</string>
     <string name="change_default_settings">Промени поставке</string>
@@ -4839,7 +4839,7 @@
     <string name="rendering_attr_alpineHiking_description">Разврставање по тежини врста путања.</string>
     <string name="rendering_value_sacScale_name">САК</string>
     <string name="rendering_value_caiScale_name">КАИ</string>
-    <string name="live_monitoring_adress_descr">Одредите адресу веба са правилима израза за одреднице: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Одредите адресу веба са правилима израза за одреднице: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="free_favorites_backup_description">Пријавите се у Облаку ОсмАнда ради добављања бесплатног складишта за омиљено и поставке.</string>
     <string name="write_heading">Пиши усмерење</string>
     <string name="wheel_circumference">Обим точка</string>
@@ -5919,7 +5919,7 @@
     <string name="astro_constellations">Сазвежђа</string>
     <string name="astro_stars">Звезде</string>
     <string name="astro_galaxies">Галаксије</string>
-    <string name="astro_nebulae">Маглине</string>
+    <string name="astro_nebulae">Маглина</string>
     <string name="astro_open_clusters">Отворени кластери</string>
     <string name="astro_globular_clusters">Глобуларна јата</string>
     <string name="astro_galaxy_clusters">Галаксијска јата</string>
@@ -5964,4 +5964,34 @@
     <string name="equator_line">Екваторска линија</string>
     <string name="backup_deleted_all_data">Избрисани подаци.</string>
     <string name="backup_deleting_all_data">Брисање података…</string>
+    <string name="astro_rendering">Исцртавање</string>
+    <string name="astro_configure_view">подеси приказ</string>
+    <string name="astro_visible_objects">Видљиви предмети</string>
+    <string name="red_filter">Пропусник црвене</string>
+    <string name="astro_directions">Упутства</string>
+    <string name="astro_daily_path">Дневна путања</string>
+    <string name="map_2d">2Д</string>
+    <string name="map_3d">3Д</string>
+    <string name="astro_deep_sky">Дубоко небо</string>
+    <string name="astro_star_clusters">Звездана јата</string>
+    <string name="astro_nebulas">Маглине</string>
+    <string name="astro_solar_system">Сунчев систем</string>
+    <string name="delete_groups_confirmation">Обрисати групе?</string>
+    <string name="add_to_track">Додај стази</string>
+    <string name="unpin_folder">Откачи фолдер</string>
+    <string name="pin_folder">Закачи фолдер</string>
+    <string name="favorite_search_empty_state_description">Прилагодите претрагу или филтере да бисте видели да ли то помаже</string>
+    <string name="favorites_empty_folder_description">Овај фолдер још увек нема тачака.</string>
+    <string name="building_3d_day_color_content_desc">Боја дневне теме за 3Д зграда</string>
+    <string name="building_3d_night_color_content_desc">Боја ноћне теме за 3Д зграда</string>
+    <string name="building_3d_low_details_content_desc">3Д зграда са ниским детаљима</string>
+    <string name="building_3d_high_details_content_desc">3Д зграда са високим</string>
+    <string name="building_3d_near_distance_content_desc">3D zgrada udaljenost blizu</string>
+    <string name="building_3d_far_distance_content_desc">3D zgrada udaljenost daleko</string>
+    <string name="free_custom_color_description">Прилагодите 3Д зграда било којом бојом. Идеално за усклађивање са темом мапе или побољшање контраста.</string>
+    <string name="buildings_3d_use_map_style_color_description">Користи подразумевану боју стила мапе (%s).</string>
+    <string name="buildings_3d_visibility_description">Подесите непрозирност 3Д структура на мапи.</string>
+    <string name="level_of_details">Ниво детаља</string>
+    <string name="performance">Перформансе</string>
+    <string name="view_distance">Видна удаљеност</string>
 </resources>

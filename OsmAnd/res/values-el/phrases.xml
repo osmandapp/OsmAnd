@@ -4558,7 +4558,7 @@
     <string name="poi_sample_collection_yes">Ναι</string>
     <string name="poi_sample_collection_covid19">COVID19</string>
     <string name="poi_sample_collection_blood">Αίμα</string>
-    <string name="poi_sample_collection">Συλλογή δειγμάτων</string>
+    <string name="poi_sample_collection">Συλλογή δειγμάτων;Αίμα;Εργαστήριο;Τεστ</string>
     <string name="poi_sample_collection_filter">Συλλογή δειγμάτων</string>
     <string name="poi_whitewater_hazard">Κίνδυνος ορμητικών νερών</string>
     <string name="poi_hazard_hole">Τρύπα</string>
@@ -4606,4 +4606,6 @@
     <string name="poi_generator_type_icf">Τύπος γεννήτριας: ICF</string>
     <string name="poi_generator_type_horizontal_axis">Τύπος γεννήτριας: οριζόντιος άξονας</string>
     <string name="poi_generator_type_vertical_axis">Τύπος γεννήτριας: κάθετος άξονας</string>
+    <string name="poi_route_activity_type_cross_country_skiing">Σκι αντοχής</string>
+    <string name="poi_route_activity_type_drone_flying">Πέταγμα drone</string>
 </resources>

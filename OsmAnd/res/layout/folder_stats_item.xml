@@ -17,6 +17,7 @@
 		android:layout_marginHorizontal="@dimen/content_padding"
 		android:layout_marginVertical="@dimen/content_padding_small"
 		android:gravity="center"
+		android:layout_gravity="center"
 		android:textColor="?android:attr/textColorSecondary"
 		tools:text="@string/empty_tracks_description" />
 

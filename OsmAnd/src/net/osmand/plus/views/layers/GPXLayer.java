@@ -58,6 +58,7 @@ import net.osmand.plus.track.helpers.ParseGpxRouteTask.ParseGpxRouteListener;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -92,6 +93,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.*;
@@ -99,7 +101,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
+public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt>, RenameCallback {
 
 	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
 
@@ -150,7 +152,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private Map<SelectedGpxFile, Long> visibleGPXFilesMap = new HashMap<>();
 	private final Map<String, CachedTrack> segmentsCache = new ConcurrentHashMap<>();
-	private final Map<String, Set<TrkSegment>> renderedSegmentsCache = new HashMap<>();
+	private final Map<String, Set<TrkSegment>> renderedSegmentsCache = new ConcurrentHashMap<>();
 	private SelectedGpxFile tmpVisibleTrack;
 
 	private final List<WptPt> pointsCache = new ArrayList<>();
@@ -363,6 +365,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				textLayer.putData(this, pointsCache);
 			}
 		}
+		cleanupOldRenderedSegments(visibleGPXFiles);
+
 		setInvalidated(false);
 		mapActivityInvalidated = false;
 	}
@@ -1213,7 +1217,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (currentTrack != null) {
 			drawSelectedFileSegments(currentTrack, true, canvas, tileBox, settings, baseOrder);
 		}
-		cleanupOldRenderedSegments(selectedGPXFiles);
 	}
 
 	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack,
@@ -1776,18 +1779,35 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void cleanupOldRenderedSegments(@NonNull List<SelectedGpxFile> selectedGPXFiles) {
-		Set<String> selectedPaths = new HashSet<>();
-		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
-			selectedPaths.add(selectedGpxFile.getGpxFile().getPath());
-		}
-		List<String> pathsToRemove = new ArrayList<>();
-		for (String path : renderedSegmentsCache.keySet()) {
-			if (!selectedPaths.contains(path)) {
-				pathsToRemove.add(path);
+		if (!Algorithms.isEmpty(renderedSegmentsCache)) {
+			Set<String> selectedPaths = new HashSet<>();
+			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
+				selectedPaths.add(selectedGpxFile.getGpxFile().getPath());
+			}
+			List<String> pathsToRemove = new ArrayList<>();
+			for (String path : renderedSegmentsCache.keySet()) {
+				if (!selectedPaths.contains(path)) {
+					pathsToRemove.add(path);
+				}
+			}
+			for (String path : pathsToRemove) {
+				removeSelectedFilesSegments(path);
 			}
 		}
-		for (String path : pathsToRemove) {
-			removeSelectedFilesSegments(path);
+	}
+
+	@Override
+	public void fileRenamed(@NonNull File src, @NonNull File dest) {
+		String oldPath = src.getAbsolutePath();
+		String newPath = dest.getAbsolutePath();
+
+		Set<TrkSegment> segments = renderedSegmentsCache.remove(oldPath);
+		if (segments != null) {
+			renderedSegmentsCache.put(newPath, segments);
+		}
+		CachedTrack cachedTrack = segmentsCache.remove(oldPath);
+		if (cachedTrack != null) {
+			segmentsCache.put(newPath, cachedTrack);
 		}
 	}
 

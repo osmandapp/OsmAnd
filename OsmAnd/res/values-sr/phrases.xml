@@ -2358,7 +2358,7 @@
     <string name="poi_cuisine_noodle">Нудле</string>
     <string name="poi_cuisine_donut">Крофне</string>
     <string name="poi_cuisine_ramen">Рамен</string>
-    <string name="poi_cuisine_crepe">Палачинке</string>
+    <string name="poi_cuisine_crepe">Палачинка;Палачинке</string>
     <string name="poi_cuisine_breakfast">Доручак</string>
     <string name="poi_cuisine_steak">Шницле</string>
     <string name="poi_cuisine_tapas">Тапас</string>

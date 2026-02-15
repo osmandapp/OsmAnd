@@ -145,8 +145,7 @@ public class FileUtils {
 		return null;
 	}
 
-	public static void updateRenamedGpx(@NonNull OsmandApplication app, @NonNull File src,
-			@NonNull File dest) {
+	public static void updateRenamedGpx(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
 		GpxFile gpxFile = null;
 		app.getGpxDbHelper().rename(SharedUtil.kFile(src), SharedUtil.kFile(dest));
 		app.getMapButtonsHelper().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
@@ -156,6 +155,8 @@ public class FileUtils {
 		if (selectedGpxFile != null) {
 			gpxFile = selectedGpxFile.getGpxFile();
 			gpxFile.setPath(dest.getAbsolutePath());
+			app.getOsmandMap().getMapLayers().getGpxLayer().fileRenamed(src, dest);
+
 			gpxSelectionHelper.updateSelectedGpxFile(selectedGpxFile);
 			GpxDisplayHelper gpxDisplayHelper = app.getGpxDisplayHelper();
 			gpxDisplayHelper.updateDisplayGroupsNames(selectedGpxFile);

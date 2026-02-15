@@ -196,7 +196,7 @@
     <string name="osmand_parking_position_name">Parkeringsplads</string>
     <string name="osmand_parking_plugin_description">Markér, hvor din bil er parkeret, og giv din kalender besked om, hvornår parkometeret udløber. Du placerer markeringen ved at vælge et sted på kortet, gå til \"Handlinger\", og tryk på \"Tilføj parkering\".</string>
     <string name="osmand_parking_plugin_name">Parkeringsplacering</string>
-    <string name="context_menu_item_add_parking_point">Markér som parkeringssted</string>
+    <string name="context_menu_item_add_parking_point">Markér som parkeringsplads</string>
     <string name="context_menu_item_delete_parking_point">Slet parkeringsmarkør</string>
     <string name="gpxup_public">Offentligt</string>
     <string name="gpxup_identifiable">Identificerbar</string>
@@ -1869,7 +1869,7 @@
     <string name="storage_directory_shared">Delt hukommelse</string>
     <string name="storage_directory_readonly_desc">Skiftet til intern hukommelse, da den valgte datamappe er skrivebeskyttet. Vælg en skrivbar mappe.</string>
     <string name="avoid_road">Undgå vej</string>
-    <string name="finish_navigation">Stop navigation</string>
+    <string name="finish_navigation">Afslut navigation</string>
     <string name="shared_string_move_up">Flyt ↑</string>
     <string name="shared_string_move_down">Flyt ↓</string>
     <string name="full_report">Fuldstændig rapport</string>
@@ -2093,7 +2093,7 @@
     <string name="quick_action_btn_tutorial_descr">Tryk og hold og træk knappen skifter dens placering på skærmen.</string>
     <string name="quick_action_interim_dialog">Vis en midlertidig dialogboks</string>
     <string name="shared_string_action_name">Genvejsnavn</string>
-    <string name="navigate_point_olc">Open Location Code (OLC)</string>
+    <string name="navigate_point_olc">Open Location Code</string>
     <string name="navigate_point_olc_info_invalid">Ugyldig OLC
 \n</string>
     <string name="navigate_point_olc_info_short">Kort OLC 
@@ -2973,7 +2973,7 @@
     <string name="utm_format_descr">OsmAnd bruger UTM standard, som er tilsvarende, men ikke identisk med UTM NATO-format.</string>
     <string name="shared_string_example">Eksempel</string>
     <string name="navigate_point_format_utm">UTM standard</string>
-    <string name="navigate_point_format_olc">Open Location Code (OLC)</string>
+    <string name="navigate_point_format_olc">Open Location Code</string>
     <string name="coordinates_format_info">Det valgte format vil blive anvendt alle steder i programmet.</string>
     <string name="pref_selected_by_default_for_profiles">Indstillingen er valgt som standard for profiler: %s</string>
     <string name="change_default_settings">Skift indstilling</string>
@@ -4519,7 +4519,7 @@
     <string name="depth_contours">Dybdekonturer</string>
     <string name="nautical_depth_points">Nautiske dybdepunkter</string>
     <string name="worldwide_maps">Globale kort</string>
-    <string name="external_sensor_widgets">ANT+ moduler</string>
+    <string name="external_sensor_widgets">Eksterne sensorer</string>
     <string name="ant_missing_dependency_descr">Den krævede tjeneste \"%1$s\" blev ikke fundet.
 \nDu skal installere ANT+ Plugins-tjenesten.
 \nVil du starte Play Store for at gøre dette\?</string>
@@ -5043,7 +5043,7 @@
     <string name="copy_build_version">Kopiér build-version</string>
     <string name="most_viewed">Mest sete</string>
     <string name="help_article_plan_route_web_name">Ruteplanlægning på nettet</string>
-    <string name="live_monitoring_adress_descr">Angiv webadressen med parameter-syntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Angiv webadressen med parameter-syntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_temperature">Temperatur</string>
     <string name="release_4_6">• Android Auto: Tilføjet 3D-tilstand \n \n • Spor: Introduceret filtre og smarte mapper, optimeret hukommelse til større filer \n \n • Forbedrede modulpaneler i top og bund til at rumme alle moduler \n \n • Forbedret lokal ressourceforvaltning \n \n • Brugerdefinerbar knaptilknytning til eksterne controllere \n \n • Nye moduler: \"Glidetal\" og \"Solens position\" \n \n • OsmAnd Cloud: Nu med adgang til slettede filer \n \n • Forbedret sporfarvning i hældningstilstand med ny symmetrisk gradient \n \n • Løst problemer med gennemsigtig statuslinje \n \n • Tilføjet understøttelse af ANT+ temperatur-modul \n \n • Introduceret \"Tilgængelig RAM\"-modul</string>
     <string name="sensor_temperature_desc">Viser temperatur fra sensor</string>
@@ -6026,4 +6026,34 @@
     <string name="meridian_line">Meridianlinje</string>
     <string name="backup_deleted_all_data">Slettede data.</string>
     <string name="backup_deleting_all_data">Sletter data…</string>
+    <string name="astro_configure_view">Konfigurer visning</string>
+    <string name="astro_visible_objects">Synlige objekter</string>
+    <string name="red_filter">Rødfilter</string>
+    <string name="astro_directions">Vejledning</string>
+    <string name="astro_daily_path">Daglig bane</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_star_clusters">Stjernehobe</string>
+    <string name="astro_nebulas">Nebulaer</string>
+    <string name="astro_solar_system">Solsystem</string>
+    <string name="astro_rendering">Gengivelse</string>
+    <string name="astro_deep_sky">Det dybe rum</string>
+    <string name="delete_groups_confirmation">Slet grupper?</string>
+    <string name="add_to_track">Føj til spor</string>
+    <string name="unpin_folder">Frigør mappe</string>
+    <string name="pin_folder">Fastgør mappe</string>
+    <string name="favorite_search_empty_state_description">Juster din søgning eller filtre for at se, om det hjælper</string>
+    <string name="favorites_empty_folder_description">Denne mappe har endnu ingen punkter.</string>
+    <string name="building_3d_day_color_content_desc">3D-bygninger dagstema-farve</string>
+    <string name="building_3d_night_color_content_desc">3D-bygninger nattema-farve</string>
+    <string name="building_3d_low_details_content_desc">3D-bygninger lav detaljegrad</string>
+    <string name="building_3d_high_details_content_desc">3D-bygninger høj detaljegrad</string>
+    <string name="building_3d_far_distance_content_desc">3D-bygninger fjern afstand</string>
+    <string name="building_3d_near_distance_content_desc">3D-bygninger afstand nær</string>
+    <string name="free_custom_color_description">Tilpas 3D-bygninger med en hvilken som helst farve. Perfekt til at matche et korttema eller forbedre kontrasten.</string>
+    <string name="buildings_3d_use_map_style_color_description">Brug standardfarve for kortstil (%s).</string>
+    <string name="buildings_3d_visibility_description">Juster gennemsigtigheden af 3D-strukturer på kortet.</string>
+    <string name="level_of_details">Detaljeringsgrad</string>
+    <string name="performance">Ydeevne</string>
+    <string name="view_distance">Visningsafstand</string>
 </resources>

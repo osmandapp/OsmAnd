@@ -5004,7 +5004,7 @@
     <string name="help_article_navigation_routing_car_based_routing_name">汽车路线规划（卡车、摩托车）</string>
     <string name="help_article_navigation_routing_boat_navigation_name">船只航线规划</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">自行车路线规划（山地车）</string>
-    <string name="live_monitoring_adress_descr">使用参数语法指定网页地址： lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">使用参数语法指定网页地址： lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="rendering_value_defaultMedium_name">默认（中等）</string>
     <string name="routing_attr_allow_via_ferrata_name">山腰路线（铁索攀岩）</string>
     <string name="shared_string_cache">缓存</string>

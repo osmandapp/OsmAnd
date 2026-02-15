@@ -724,7 +724,7 @@
     <string name="osmand_parking_position_name">Lugar del aparcamiento</string>
     <string name="osmand_parking_plugin_description">Marque dónde está estacionado su automóvil y notifique a su calendario cuándo caducará el parquímetro. Para colocar el marcador, elija un lugar en el mapa, vaya a \"Acciones\" y toque \"Agregar estacionamiento\".</string>
     <string name="osmand_parking_plugin_name">Aparcamiento</string>
-    <string name="context_menu_item_add_parking_point">Marcar como aparcamiento</string>
+    <string name="context_menu_item_add_parking_point">Marcar como ubicación de aparcamiento</string>
     <string name="context_menu_item_delete_parking_point">Quitar marcador de aparcamiento</string>
     <string name="starting_point_too_far">Punto de partida demasiado lejos del camino más cercano.</string>
     <string name="shared_location">Ubicación compartida</string>
@@ -2877,7 +2877,7 @@
     <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación.</string>
     <string name="rendering_attr_showLez_name">Zonas de baja emisión</string>
     <string name="temporary_conditional_routing">Considerar limitaciones temporales</string>
-    <string name="shared_string_default">Predefinido</string>
+    <string name="shared_string_default">Predeterminado</string>
     <string name="app_mode_camper">Casa rodante (camper)</string>
     <string name="new_route_calculated_dist_dbg">Ruta: distancia %1$s, tiempo de navegación %2$s
 \nCálculo: %3$.1f seg, %4$d carreteras, %5$d teselas)</string>
@@ -3649,7 +3649,7 @@
     <string name="shared_string_sec">seg</string>
     <string name="shared_string_turn">Giros</string>
     <string name="start_recording">Iniciar grabación</string>
-    <string name="show_track_on_map">Mostrar traza en el mapa</string>
+    <string name="show_track_on_map">Mostrar la pista en el mapa</string>
     <string name="routing_engine_vehicle_type_wheelchair">Silla de ruedas</string>
     <string name="routing_engine_vehicle_type_hiking">Senderismo</string>
     <string name="routing_engine_vehicle_type_walking">Peatón</string>
@@ -4922,7 +4922,7 @@
     <string name="send_crash_log_descr">Contiene sólo datos sobre los cuelgues de la aplicación</string>
     <string name="open_issue_on_github_descr">Haz preguntas, propone características</string>
     <string name="most_viewed">Más visto</string>
-    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="sensor_temperature_desc">Muestra la temperatura del sensor</string>
     <string name="release_4_6">- Android Auto: Añadido el modo 3D \n \n - Pistas: Introducidos filtros y carpetas inteligentes, optimizada la memoria para archivos más grandes \n \n - Paneles de widgets superior e inferior mejorados para dar cabida a todos los widgets \n \n - Gestión mejorada de los recursos locales \n \n - Asignación de botones personalizable para controladores externos \n \n - Nuevos widgets: \"Relación de planeo\" y \"Posición del sol\". \n \n - OsmAnd Cloud: Ahora accede a los archivos borrados \n \n - Mejora de la coloración de la pista en modo Pendiente con un nuevo gradiente simétrico \n \n - Resueltos los problemas con la barra de estado transparente \n \n - Añadido soporte para el widget de temperatura ANT \n \n - Introducido widget \"RAM disponible\"</string>
@@ -5014,7 +5014,7 @@
     <string name="remove_type_q">¿Quitar el periférico «%1$s»?</string>
     <string name="shared_string_action">Acción</string>
     <string name="add_new_type">Añadir nuevo periférico</string>
-    <string name="key_event_action_move_up">Mover arriba</string>
+    <string name="key_event_action_move_up">Subir</string>
     <string name="key_event_action_open_search_view">Abrir vista de búsqueda</string>
     <string name="key_event_action_zoom_out">Alejar</string>
     <string name="key_event_action_toggle_drower">Mostrar/ocultar menú lateral</string>
@@ -5024,7 +5024,7 @@
     <string name="key_bindings">Atajos de teclado</string>
     <string name="key_event_action_move_to_my_location">Mover a mi ubicación</string>
     <string name="key_event_category_map_interactions">Interacciones del mapa</string>
-    <string name="key_event_action_move_down">Mover abajo</string>
+    <string name="key_event_action_move_down">Bajar</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Abrir cuadrícula de datos de WunderLINQ</string>
     <string name="key_event_category_actions">Acciones</string>
     <string name="deletion_error">Error de borrado</string>
@@ -5327,10 +5327,10 @@
     <string name="quick_action_navigation_view_desc">Un interruptor que abre o cierra la vista de la navegación.</string>
     <string name="quick_action_navigation_view_title">Vista de navegación</string>
     <string name="quick_action_switch_compass_desc">Un interruptor que alterna la orientación del mapa.</string>
-    <string name="corner_radius">Redondear esquinas</string>
+    <string name="corner_radius">Radio de esquina</string>
     <string name="shared_string_dp">dp</string>
     <string name="background_opacity">Opacidad del fondo</string>
-    <string name="my_location_action_descr">Centra el mapa en tu ubicación actual.</string>
+    <string name="my_location_action_descr">Centra el mapa en función de su ubicación actual.</string>
     <string name="map_3d_mode_action_descr">Cambia la inclinación del mapa.</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Muestra senderos para motos todoterreno</string>
     <string name="raster_layers_action_descr">Cambia las capas rasterizadas</string>
@@ -5468,7 +5468,7 @@
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Muestra la tasa de consumo del combustible, según los cálculos (%/h)</string>
     <string name="kpa_unit">kPa</string>
     <string name="bt_start_pair_failed">No se puede vincular con el dispositivo</string>
-    <string name="dynamic_icon_type_summary">El icono cambia según el estado de la acción.</string>
+    <string name="dynamic_icon_type_summary">El icono cambia en función del estado de acción.</string>
     <string name="shared_string_dynamic">Dinámico</string>
     <string name="obd_connected_to_device">Conectado a %s</string>
     <string name="obd_not_connected_to_device">Desconectado de %s</string>
@@ -5542,7 +5542,7 @@
     <string name="recently_visited">Vistos recientemente</string>
     <string name="hmd_promo_description">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s meses</string>
     <string name="show_image_previews">Mostrar vistas previas de las imágenes</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Alternar la visibilidad de la cuadrícula de coordenadas en el mapa.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Acción para controlar la visibilidad de la red de coordenadas en el mapa.</string>
     <string name="layer_coordinates_grid">Cuadrícula de coordenadas</string>
     <string name="choose_location">Elija una ubicación</string>
     <string name="point_location">Ubicación del punto</string>
@@ -5688,7 +5688,7 @@
     <string name="descent">Descenso</string>
     <string name="map_orientations_choose_description">Deja este campo en blanco para cambiar entre todos los modos disponibles o añadir solo los que prefieras.</string>
     <string name="map_orientations">Orientaciones del mapa</string>
-    <string name="altitude_metrics_description">Establece la unidad de visualización de la altitud en widgets y estadísticas.</string>
+    <string name="altitude_metrics_description">Establece la unidad mostrada para la altitud tanto en los widgets como en las estadísticas.</string>
     <string name="write_location_provider_description">Guardar proveedor de ubicación en cada punto del recorrido durante la grabación</string>
     <string name="write_location_provider">Escribir proveedor de ubicación</string>
     <string name="map_orientation_portrait_inverted">Vertical (invertido)</string>
@@ -5895,4 +5895,23 @@
     <string name="organize_by_summary">Organiza automáticamente tus recorridos en grupos según un parámetro seleccionado, como actividad, velocidad o ubicación.</string>
     <string name="map_screen_layout_descr">Elija si desea utilizar un diseño único para todas las orientaciones o personalizar Vertical y Horizontal por separado.</string>
     <string name="panels_layout_descr">Elija un diseño para los paneles superior e inferior. Pueden ser anchos, abarcando todo el ancho de la pantalla, o compactos, encajando entre los paneles laterales y los botones.</string>
+    <string name="galactic_line">Línea Galáctica</string>
+    <string name="meridian_line">Línea Meridiana</string>
+    <string name="equator_line">Línea del Ecuador</string>
+    <string name="delete_groups_confirmation">¿Quiere eliminar los grupos?</string>
+    <string name="add_to_track">Añadir a traza</string>
+    <string name="unpin_folder">Desanclar carpeta</string>
+    <string name="pin_folder">Anclar carpeta</string>
+    <string name="favorites_empty_folder_description">Esta carpeta aún no tiene ningún punto.</string>
+    <string name="astro_rendering">Representación</string>
+    <string name="astro_configure_view">Configurar vista</string>
+    <string name="astro_visible_objects">Objetos visibles</string>
+    <string name="red_filter">Filtro rojo</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_star_clusters">Cúmulos estelares</string>
+    <string name="astro_nebulas">Nebulosas</string>
+    <string name="astro_solar_system">Sistema solar</string>
+    <string name="backup_deleted_all_data">Datos eliminados.</string>
+    <string name="backup_deleting_all_data">Eliminando datos…</string>
 </resources>

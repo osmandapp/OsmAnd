@@ -81,6 +81,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
+import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.RelativeDirectionStyle;
 import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
@@ -2169,6 +2170,8 @@ public class OsmandSettings {
 	public final CommonPreference<TracksSortMode> SEARCH_TRACKS_SORT_MODE = new EnumStringPreference<>(this, "search_tracks_sort_mode", TracksSortMode.getDefaultSortMode(null), TracksSortMode.values());
 	public final CommonPreference<FavoritesSortMode> FAVORITES_SORT_MODE = new EnumStringPreference<>(this, "favorites_sort_mode", FavoritesSortMode.getDefaultSortMode(), FavoritesSortMode.values());
 	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;").makeGlobal().makeShared().cache();
+	public final ListStringPreference FAVORITE_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "favorite_sort_modes", null, ";;").makeGlobal().makeShared().cache();
+	public final CommonPreference<FavoriteListSortMode> SEARCH_FAVORITE_SORT_MODE = new EnumStringPreference<>(this, "search_favorite_sort_mode", FavoriteListSortMode.getDefaultSortMode(), FavoriteListSortMode.getSortModes(true)).makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
 
@@ -3210,7 +3213,7 @@ public class OsmandSettings {
 	public String getRenderPropertyValue(@NonNull RenderingRuleProperty property) {
 		String attrName = property.getAttrName();
 		if (ELEVATION_UNITS_ATTR.equals(attrName)) {
-			boolean useFeet = METRIC_SYSTEM.get().shouldUseFeet();
+			boolean useFeet = ALTITUDE_METRIC.get().shouldUseFeet();
 			return useFeet ? ELEVATION_UNITS_FEET_VALUE : ELEVATION_UNITS_METERS_VALUE;
 		}
 		CommonPreference<String> preference = getCustomRenderProperty(attrName);
