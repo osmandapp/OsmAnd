@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.util.Algorithms;
 
@@ -26,8 +27,8 @@ import java.util.List;
 
 public class TerrainMode {
 
-	public static final String DEFAULT_KEY = "default";
-	public static final String ALTITUDE_DEFAULT_KEY = "altitude_default";
+	public static final String DEFAULT_KEY = PaletteConstants.DEFAULT_NAME;
+	public static final String ALTITUDE_DEFAULT_KEY = PaletteConstants.ALTITUDE_DEFAULT_NAME;
 	public static final String HILLSHADE_PREFIX = "hillshade_main_";
 	public static final String HILLSHADE_SCND_PREFIX = "hillshade_color_";
 	public static final String COLOR_SLOPE_PREFIX = "slope_";
@@ -51,7 +52,6 @@ public class TerrainMode {
 			return ctx.getString(nameRes);
 		}
 
-		// TODO: extract
 		@NonNull
 		public GradientPaletteCategory toPaletteCategory() {
 			return switch (this) {
@@ -192,7 +192,6 @@ public class TerrainMode {
 		return (isHillshade() ? HILLSHADE_SCND_PREFIX : "") + key + TXT_EXT;
 	}
 
-	// TODO: check
 	public String getKeyName() {
 		if (key.equals(DEFAULT_KEY) || key.equals(ALTITUDE_DEFAULT_KEY)) {
 			return type.name().toLowerCase();
@@ -200,7 +199,6 @@ public class TerrainMode {
 		return key;
 	}
 
-	// TODO: check
 	public boolean isDefaultMode() {
 		return type == HEIGHT ? key.equals(ALTITUDE_DEFAULT_KEY) : key.equals(DEFAULT_KEY);
 	}

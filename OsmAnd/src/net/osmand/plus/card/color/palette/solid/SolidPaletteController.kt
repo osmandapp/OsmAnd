@@ -12,11 +12,12 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem
 import net.osmand.shared.palette.data.PaletteSortMode
 import net.osmand.shared.palette.data.PaletteUtils
 import net.osmand.shared.palette.domain.Palette
+import net.osmand.shared.palette.domain.PaletteConstants
 import net.osmand.shared.palette.domain.PaletteItem
 
 open class SolidPaletteController(
 	app: OsmandApplication,
-	paletteId: String = "user_palette_default" // TODO: don't use hardcoded ids
+	paletteId: String = PaletteConstants.DEFAULT_SOLID_PALETTE_ID
 ) : BasePaletteController(app, paletteId), ColorPickerDialogController.ColorPickerListener {
 
 	@JvmOverloads
@@ -44,11 +45,7 @@ open class SolidPaletteController(
 			repository.updatePaletteItem(resultItem)
 		} else {
 			// Add New
-			// TODO: here we mark this color as last used (it works like in previous version),
-			//  but I think we shouldn't renew last used time before user confirm his selection
-			//  by clicking on the "Apply" button. We can select this item on palette view,
-			//  but don't pick it on the first position in the palette items list
-			resultItem = PaletteUtils.createSolidColor(currentPalette, newColor, markAsUsed = true)
+			resultItem = PaletteUtils.createSolidColor(currentPalette, newColor, markAsUsed = false)
 			repository.addPaletteItem(paletteId, resultItem)
 		}
 
@@ -63,8 +60,6 @@ open class SolidPaletteController(
 		editedItem = null
 	}
 
-	// TODO: in this case only for solid color (the same should be implemented for gradient,
-	//  maybe use the same method, but with different palette utils createDuplicate calls)
 	private fun duplicateColor(item: PaletteItem.Solid) {
 		val currentPalette = repository.getPalette(paletteId) as? Palette.SolidCollection ?: return
 		val newItem = PaletteUtils.createSolidDuplicate(currentPalette, item.id)

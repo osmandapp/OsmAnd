@@ -109,7 +109,7 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.GeneralRouter;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.obd.OBDDataComputer;
-import net.osmand.shared.palette.data.PaletteUtils;
+import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.MetricsConstants;
@@ -1773,7 +1773,7 @@ public class OsmandSettings {
 	public final CommonPreference<String> CURRENT_TRACK_3D_LINE_POSITION_TYPE = new StringPreference(this, "currentTrackVisualization3dPositionType", "none").makeGlobal().makeShared().cache();
 	public final CommonPreference<Float> CURRENT_TRACK_ADDITIONAL_EXAGGERATION = new FloatPreference(this, "currentTrackVerticalExaggerationScale", 1f).makeGlobal().makeShared().cache();
 	public final CommonPreference<Float> CURRENT_TRACK_ELEVATION_METERS = new FloatPreference(this, "current_track_elevation_meters", 1000f).makeGlobal().makeShared().cache();
-	public final CommonPreference<String> CURRENT_GRADIENT_PALETTE = new StringPreference(this, "current_track_gradient_palette", PaletteUtils.DEFAULT_NAME).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_GRADIENT_PALETTE = new StringPreference(this, "current_track_gradient_palette", PaletteConstants.DEFAULT_NAME).makeGlobal().makeShared().cache();
 	public final CommonPreference<String> CURRENT_TRACK_ROUTE_ACTIVITY = new StringPreference(this, "current_track_route_activity", "").makeProfile().cache();
 
 	{
@@ -3340,7 +3340,7 @@ public class OsmandSettings {
 	public final CommonPreference<ColoringType> ROUTE_COLORING_TYPE = new EnumStringPreference<>(this,
 			"route_line_coloring_type", ColoringType.DEFAULT, ColoringType.Companion.valuesOf(ColoringPurpose.ROUTE_LINE)).cache().makeProfile();
 
-	public final CommonPreference<String> ROUTE_GRADIENT_PALETTE = new StringPreference(this, "route_gradient_palette", PaletteUtils.DEFAULT_NAME).makeProfile().cache();
+	public final CommonPreference<String> ROUTE_GRADIENT_PALETTE = new StringPreference(this, "route_gradient_palette", PaletteConstants.DEFAULT_NAME).makeProfile().cache();
 	public final CommonPreference<String> ROUTE_INFO_ATTRIBUTE = new StringPreference(this, "route_info_attribute", null)
 			.cache().makeProfile();
 	public final CommonPreference<String> ROUTE_LINE_WIDTH = new StringPreference(this, "route_line_width", null).makeProfile();

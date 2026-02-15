@@ -30,7 +30,7 @@ import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
-import net.osmand.shared.palette.data.PaletteUtils;
+import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.GpxAppearanceAdapter;
@@ -106,7 +106,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 		if (gradientPaletteController == null) {
 			gradientPaletteController = new GradientPaletteController(app, paletteCategory);
 		}
-		gradientPaletteController.updatePalette(paletteCategory, PaletteUtils.DEFAULT_NAME);
+		gradientPaletteController.updatePalette(paletteCategory, PaletteConstants.DEFAULT_NAME);
 		gradientPaletteController.setPaletteListener(getExternalListener());
 		return gradientPaletteController;
 	}

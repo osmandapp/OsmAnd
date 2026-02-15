@@ -12,8 +12,7 @@ sealed interface PaletteItemSource {
 	) : PaletteItemSource
 
 	data class CollectionRecord(
-		override val paletteId: String,
-		val recordId: String // TODO: do we need this at all?
+		override val paletteId: String
 	) : PaletteItemSource
 }
 
@@ -37,7 +36,7 @@ sealed interface PaletteItem {
 	val displayName: String
 	val source: PaletteItemSource
 	val isEditable: Boolean
-	val historyIndex: Int // TODO: maybe better name is 'original index'
+	val historyIndex: Int
 	val lastUsedTime: Long
 
 	data class Solid(
@@ -49,7 +48,7 @@ sealed interface PaletteItem {
 		override val lastUsedTime: Long = 0,
 		val colorInt: Int
 	) : PaletteItem {
-		fun getColorValue() = ColorPalette.ColorValue(historyIndex.toDouble(), colorInt) // TODO: use color id instead of index
+		fun getColorValue() = ColorPalette.ColorValue(historyIndex.toDouble(), colorInt)
 	}
 
 	data class Gradient(

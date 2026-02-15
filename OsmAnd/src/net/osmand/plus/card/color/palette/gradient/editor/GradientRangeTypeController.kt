@@ -44,8 +44,7 @@ class GradientRangeTypeController(
 			val dialogManager = app.dialogManager
 			dialogManager.register(PROCESS_ID, controller)
 
-			// TODO: pass app mode and use on map
-			CustomizableSingleSelectionBottomSheet.showInstance(fragmentManager, PROCESS_ID, null, true)
+			CustomizableSingleSelectionBottomSheet.showInstance(fragmentManager, PROCESS_ID, appMode, usedOnMap)
 		}
 	}
 

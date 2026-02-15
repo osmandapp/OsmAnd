@@ -104,7 +104,7 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 
 		return Palette.GradientCollection(
 			id = category.id,
-			displayName = category.getDisplayName(), // TODO: fix it
+			displayName = category.getDisplayName(),
 			category = category,
 			items = items.sortedBy { it.historyIndex },
 			isEditable = category.editable
@@ -171,7 +171,6 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 		val displayName = PaletteUtils.buildDisplayName(paletteName)
 
 		// Use index from settings or last modified time (if new file)
-		// TODO: don't use modification time as an history index
 		val historyIndex = settingsItem?.index ?: file.lastModified().toInt()
 
 		val properties = GradientProperties(

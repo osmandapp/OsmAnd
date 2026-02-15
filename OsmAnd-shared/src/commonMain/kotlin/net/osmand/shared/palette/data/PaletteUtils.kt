@@ -5,6 +5,8 @@ import net.osmand.shared.ColorPalette
 import net.osmand.shared.palette.domain.GradientPoint
 import net.osmand.shared.palette.domain.GradientProperties
 import net.osmand.shared.palette.domain.Palette
+import net.osmand.shared.palette.domain.PaletteConstants.ALTITUDE_DEFAULT_NAME
+import net.osmand.shared.palette.domain.PaletteConstants.DEFAULT_NAME
 import net.osmand.shared.palette.domain.filetype.PaletteFileType
 import net.osmand.shared.palette.domain.PaletteItem
 import net.osmand.shared.palette.domain.PaletteItemSource
@@ -17,9 +19,7 @@ import kotlin.random.Random
 object PaletteUtils {
 
 	private const val TXT_EXT = ".txt"
-	private const val ALTITUDE_DEFAULT_NAME = "altitude_default"
 	private const val CUSTOM_NAME = "custom"
-	const val DEFAULT_NAME = "default"
 
 	fun buildFileName(paletteName: String, fileType: PaletteFileType): String {
 		return "${fileType.filePrefix}${paletteName}${TXT_EXT}"
@@ -140,7 +140,7 @@ object PaletteUtils {
 
 		return originalItem.copy(
 			id = newId,
-			source = PaletteItemSource.CollectionRecord(palette.id, newId),
+			source = PaletteItemSource.CollectionRecord(palette.id),
 			lastUsedTime = lastUsedTime
 		)
 	}
@@ -159,7 +159,7 @@ object PaletteUtils {
 		return PaletteItem.Solid(
 			id = newId,
 			displayName = ColorPalette.colorToHex(colorInt),
-			source = PaletteItemSource.CollectionRecord(palette.id, newId),
+			source = PaletteItemSource.CollectionRecord(palette.id),
 			colorInt = colorInt,
 			historyIndex = maxHistoryIndex + 1,
 			lastUsedTime = lastUsedTime

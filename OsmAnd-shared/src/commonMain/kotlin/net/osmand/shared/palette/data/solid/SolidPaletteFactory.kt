@@ -26,10 +26,7 @@ object SolidPaletteFactory {
 				PaletteItem.Solid(
 					id = stableId,
 					displayName = net.osmand.shared.ColorPalette.colorToHex(colorInt),
-					source = PaletteItemSource.CollectionRecord(
-						emptyCollection.id,
-						index.toString()
-					),
+					source = PaletteItemSource.CollectionRecord(emptyCollection.id),
 					isEditable = true,
 					colorInt = colorInt,
 					historyIndex = index + 1,

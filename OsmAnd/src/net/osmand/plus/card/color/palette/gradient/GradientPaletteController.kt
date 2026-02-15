@@ -177,15 +177,10 @@ open class GradientPaletteController(
 
 	private fun duplicateGradient(item: PaletteItem.Gradient) {
 		val currentPalette = repository.getPalette(paletteId) as? Palette.GradientCollection ?: return
-
-		// 1. Factory create
 		val newItem = PaletteUtils.createGradientDuplicate(currentPalette, item.id) ?: return
 
-		// 2. Repository insert
 		repository.insertPaletteItemAfter(paletteId, item.id, newItem)
-
 		notifyUpdatePaletteColors(newItem)
-
 		updateExternalDependencies()
 	}
 

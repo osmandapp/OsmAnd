@@ -20,7 +20,7 @@ import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 
-import net.osmand.shared.palette.data.PaletteUtils;
+import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.Gpx3DWallColorType;
 
 import android.os.Bundle;
@@ -92,7 +92,7 @@ public class TrackDrawInfo {
 	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
 	private float additionalExaggeration = 1f;
 	private float elevationMeters = 1000f;
-	private String gradientColorName = PaletteUtils.DEFAULT_NAME;
+	private String gradientColorName = PaletteConstants.DEFAULT_NAME;
 
 	@TrackAppearanceType
 	private final int appearanceType;
@@ -356,7 +356,7 @@ public class TrackDrawInfo {
 			showArrows = false;
 			showStartFinish = true;
 			coloringType = ColoringType.Companion.requireValueOf(TRACK, null);
-			gradientColorName = PaletteUtils.DEFAULT_NAME;
+			gradientColorName = PaletteConstants.DEFAULT_NAME;
 			routeInfoAttribute = ColoringType.Companion.getRouteInfoAttribute(null);
 			trackVisualizationType = Gpx3DVisualizationType.NONE;
 			trackWallColorType = Gpx3DWallColorType.NONE;
@@ -370,7 +370,7 @@ public class TrackDrawInfo {
 			splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType()).getType();
 			coloringType = ColoringType.Companion.requireValueOf(TRACK, gpxFile.getColoringType());
 			String savedGradientColorName = gpxFile.getGradientColorPalette();
-			gradientColorName = !Algorithms.isEmpty(savedGradientColorName) ? savedGradientColorName : PaletteUtils.DEFAULT_NAME ;
+			gradientColorName = !Algorithms.isEmpty(savedGradientColorName) ? savedGradientColorName : PaletteConstants.DEFAULT_NAME ;
 			routeInfoAttribute = ColoringType.Companion.getRouteInfoAttribute(gpxFile.getColoringType());
 			trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(gpxFile.get3DVisualizationType());
 			trackWallColorType = Gpx3DWallColorType.Companion.get3DWallColorType(gpxFile.get3DWallColoringType());

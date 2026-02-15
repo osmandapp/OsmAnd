@@ -36,9 +36,6 @@ import net.osmand.shared.palette.domain.PaletteItem;
 
 import org.jetbrains.annotations.NotNull;
 
-// TODO: I think we should have 2 versions of this screen (or use 2 strategies) - list and flow
-//  currently we use flow layout for solid colors (this screen) and list view for the gradient colors
-//  but view is just a representation, so we can use the same representation for gradient and solid colors
 public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implements IPaletteView {
 
 	public static final String TAG = ColorsPaletteFragment.class.getSimpleName();
@@ -118,8 +115,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 
 		ImageView background = view.findViewById(R.id.background);
 		background.setOnClickListener(v -> {
-			// TODO: should we immediately renew last used time of the item
-			listener.onPaletteItemClick(item, true);
+			listener.onPaletteItemClick(item, false);
 			dismiss();
 		});
 		background.setOnLongClickListener(v -> {

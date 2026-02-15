@@ -25,7 +25,7 @@ import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxParameter;
-import net.osmand.shared.palette.data.PaletteUtils;
+import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.util.Algorithms;
@@ -337,7 +337,7 @@ public class GpxAppearanceHelper {
 	public String getTrackGradientPalette(@NonNull GpxFile gpxFile, @Nullable GpxDataItem gpxItem,
 			@Nullable GpxDirItem dirItem, boolean selected) {
 		String gradientPaletteName = getGradientPaletteName(gpxFile, gpxItem, dirItem);
-		return !Algorithms.isEmpty(gradientPaletteName) ? gradientPaletteName : PaletteUtils.DEFAULT_NAME;
+		return !Algorithms.isEmpty(gradientPaletteName) ? gradientPaletteName : PaletteConstants.DEFAULT_NAME;
 	}
 
 	public String getAvailableOrDefaultColoringType(@NonNull CachedTrack cachedTrack,

@@ -22,7 +22,7 @@ import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.shared.gpx.primitives.WptPt;
-import net.osmand.shared.palette.data.PaletteUtils;
+import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -88,7 +88,7 @@ public class Renderable {
 
         @NonNull
         protected ColoringType coloringType = ColoringType.TRACK_SOLID;
-        protected String gradientColorPalette = PaletteUtils.DEFAULT_NAME;
+        protected String gradientColorPalette = PaletteConstants.DEFAULT_NAME;
         protected String routeInfoAttribute;
 
         protected GpxGeometryWay geometryWay;

@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -48,6 +49,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.shared.ColorPalette;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 
@@ -733,6 +735,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void getTerrainModeIcon(@NonNull String modeKey, @NonNull CollectColorPalletListener listener) {
-		app.getColorPaletteHelper().getColorPaletteAsync(modeKey, listener);
+		TerrainMode mode = TerrainMode.getByKey(modeKey);
+		String fileName = mode.getMainFileName();
+		CollectColorPalletTask.execute(app, fileName, listener);
 	}
 }

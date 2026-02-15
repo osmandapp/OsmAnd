@@ -86,7 +86,7 @@ import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.io.KFile;
-import net.osmand.shared.palette.data.PaletteUtils;
+import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.routing.ColoringType;
 
@@ -473,9 +473,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private void updateGradientPalette(@NonNull ColoringStyle coloringStyle) {
 		if (coloringStyle.getType().isGradient() && gpxDataItem != null) {
 			ColoringType coloringType = ColoringType.Companion.requireValueOf(ColoringPurpose.TRACK, gpxDataItem.getParameter(COLORING_TYPE));
-			trackDrawInfo.setGradientColorName(coloringStyle.getType() == coloringType ? gpxDataItem.getParameter(COLOR_PALETTE) : PaletteUtils.DEFAULT_NAME);
+			trackDrawInfo.setGradientColorName(coloringStyle.getType() == coloringType ? gpxDataItem.getParameter(COLOR_PALETTE) : PaletteConstants.DEFAULT_NAME);
 		} else {
-			trackDrawInfo.setGradientColorName(PaletteUtils.DEFAULT_NAME);
+			trackDrawInfo.setGradientColorName(PaletteConstants.DEFAULT_NAME);
 		}
 	}
 
@@ -486,7 +486,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			refreshMap();
 		} else if (item instanceof PaletteItem.Solid solid) {
 			trackDrawInfo.setColor(solid.getColorInt());
-			trackDrawInfo.setGradientColorName(PaletteUtils.DEFAULT_NAME);
+			trackDrawInfo.setGradientColorName(PaletteConstants.DEFAULT_NAME);
 			updateColorItems();
 		}
 	}

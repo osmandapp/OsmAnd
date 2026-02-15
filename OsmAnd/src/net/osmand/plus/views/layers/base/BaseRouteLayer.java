@@ -26,7 +26,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.shared.palette.data.PaletteUtils;
+import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 
@@ -46,7 +46,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 
 	protected PreviewRouteLineInfo previewRouteLineInfo;
 	protected ColoringType routeColoringType = ColoringType.DEFAULT;
-	protected String routeGradientPalette = PaletteUtils.DEFAULT_NAME;
+	protected String routeGradientPalette = PaletteConstants.DEFAULT_NAME;
 	protected String routeInfoAttribute;
 
 	protected RenderingLineAttributes attrs;

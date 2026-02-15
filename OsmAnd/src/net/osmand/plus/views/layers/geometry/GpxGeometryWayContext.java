@@ -9,7 +9,7 @@ import android.graphics.Paint.Style;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.shared.palette.data.PaletteUtils;
+import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
 
 public class GpxGeometryWayContext extends MultiColoringGeometryWayContext {
@@ -48,7 +48,7 @@ public class GpxGeometryWayContext extends MultiColoringGeometryWayContext {
 	@NonNull
 	@Override
 	protected String getDefaultGradientPalette() {
-		return PaletteUtils.DEFAULT_NAME;
+		return PaletteConstants.DEFAULT_NAME;
 	}
 
 	@Override

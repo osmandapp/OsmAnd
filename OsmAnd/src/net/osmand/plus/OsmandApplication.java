@@ -175,7 +175,6 @@ public class OsmandApplication extends MultiDexApplication {
 	CommandPlayer player;
 	GpxSelectionHelper selectedGpxHelper;
 	GpxDisplayHelper gpxDisplayHelper;
-	ColorPaletteHelper colorPaletteHelper; // TODO: remove
 	PaletteRepository paletteRepository;
 	SavingTrackHelper savingTrackHelper;
 	AnalyticsHelper analyticsHelper;
@@ -594,10 +593,6 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public OnlineRoutingHelper getOnlineRoutingHelper() {
 		return onlineRoutingHelper;
-	}
-
-	public ColorPaletteHelper getColorPaletteHelper() {
-		return colorPaletteHelper;
 	}
 
 	public PaletteRepository getPaletteRepository() {

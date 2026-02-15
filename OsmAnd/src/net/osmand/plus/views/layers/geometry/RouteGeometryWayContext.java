@@ -5,7 +5,7 @@ import android.graphics.Paint;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.shared.palette.data.PaletteUtils;
+import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
 
 public class RouteGeometryWayContext extends MultiColoringGeometryWayContext {
@@ -29,6 +29,6 @@ public class RouteGeometryWayContext extends MultiColoringGeometryWayContext {
 	@NonNull
 	@Override
 	protected String getDefaultGradientPalette() {
-		return PaletteUtils.DEFAULT_NAME;
+		return PaletteConstants.DEFAULT_NAME;
 	}
 }

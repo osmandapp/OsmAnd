@@ -25,7 +25,7 @@ import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardContr
 import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.shared.gpx.GpxParameter;
 import net.osmand.shared.gpx.TrackItem;
-import net.osmand.shared.palette.data.PaletteUtils;
+import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.util.Algorithms;
 
@@ -70,7 +70,7 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 	@Override
 	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		data.setParameter(COLORING_TYPE, coloringStyle != null ? coloringStyle.getId() : null);
-		data.setParameter(COLOR_PALETTE, PaletteUtils.DEFAULT_NAME);
+		data.setParameter(COLOR_PALETTE, PaletteConstants.DEFAULT_NAME);
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 		if (paletteItem instanceof PaletteItem.Gradient gradientItem) {
 			data.setParameter(COLOR_PALETTE, gradientItem.getId());
 		} else if (paletteItem instanceof PaletteItem.Solid solidItem) {
-			data.setParameter(COLOR_PALETTE, PaletteUtils.DEFAULT_NAME);
+			data.setParameter(COLOR_PALETTE, PaletteConstants.DEFAULT_NAME);
 			data.setParameter(COLOR, solidItem.getColorInt());
 		}
 	}
