@@ -27,14 +27,14 @@ enum class GradientPaletteCategory(
 	),
 
 	ALTITUDE(
-		id = "elevation", // Legacy key for routes
+		id = "altitude",
 		nameResId = "altitude",
 		measureUnitType = MeasureUnitType.ALTITUDE,
 		editable = true
 	),
 
 	SLOPE(
-		id = "slope", // Legacy key for routes
+		id = "slope",
 		nameResId = "shared_string_slope",
 		measureUnitType = MeasureUnitType.NONE
 	),

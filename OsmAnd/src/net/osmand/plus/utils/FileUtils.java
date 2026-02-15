@@ -15,6 +15,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.dialogs.RenameFileBottomSheet;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
@@ -22,11 +24,16 @@ import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxParameter;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.shared.io.KFile;
+import net.osmand.shared.palette.domain.PaletteItem;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -248,6 +255,65 @@ public class FileUtils {
 			return null;
 		}
 		return dest;
+	}
+
+	public static void updateRenamedPaletteDependencies(@NonNull OsmandApplication app,
+	                                                    @NonNull PaletteItem.Gradient oldItem,
+	                                                    @NonNull PaletteItem.Gradient newItem) {
+		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
+		List<GpxDataItem> items = gpxDbHelper.getItems();
+
+		String oldColoringType = oldItem.getPaletteCategory().getId();
+		String newColoringType = newItem.getPaletteCategory().getId();
+
+		String oldPaletteId = oldItem.getId();
+		String newPaletteId = newItem.getId();
+
+		// Update related GPX tracks
+		for (GpxDataItem item : items) {
+			String itemColoringType = item.getParameter(GpxParameter.COLORING_TYPE);
+			String itemPaletteId = item.getParameter(GpxParameter.COLOR_PALETTE);
+
+			if (Algorithms.stringsEqual(oldColoringType, itemColoringType)
+					&& Algorithms.stringsEqual(oldPaletteId, itemPaletteId)) {
+
+				if (!Algorithms.stringsEqual(newColoringType, itemColoringType)) {
+					gpxDbHelper.updateDataItemParameter(item, GpxParameter.COLORING_TYPE, newColoringType);
+				}
+
+				gpxDbHelper.updateDataItemParameter(item, GpxParameter.COLOR_PALETTE, newPaletteId);
+			}
+		}
+
+		// Update related preferences
+		OsmandSettings settings = app.getSettings();
+
+		// Convert String Category ID to Enum ColoringType
+		ColoringType oldType = ColoringType.Companion.valueOfId(oldColoringType);
+		ColoringType newType = ColoringType.Companion.valueOfId(newColoringType);
+
+		if (oldType == null || newType == null) {
+			return;
+		}
+
+		// Update Current Track Settings
+		if (settings.CURRENT_TRACK_COLORING_TYPE.get() == oldType &&
+				Algorithms.stringsEqual(settings.CURRENT_GRADIENT_PALETTE.get(), oldPaletteId)) {
+
+			settings.CURRENT_TRACK_COLORING_TYPE.set(newType);
+			settings.CURRENT_GRADIENT_PALETTE.set(newPaletteId);
+		}
+
+		// Update Route Line Settings (Profile Dependent)
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			ColoringType itemType = settings.ROUTE_COLORING_TYPE.getModeValue(mode);
+			String itemPaletteId = settings.ROUTE_GRADIENT_PALETTE.getModeValue(mode);
+
+			if (itemType == oldType && Algorithms.stringsEqual(itemPaletteId, oldPaletteId)) {
+				settings.ROUTE_COLORING_TYPE.setModeValue(mode, newType);
+				settings.ROUTE_GRADIENT_PALETTE.setModeValue(mode, newPaletteId);
+			}
+		}
 	}
 
 	public static boolean isValidFileName(@Nullable String name) {

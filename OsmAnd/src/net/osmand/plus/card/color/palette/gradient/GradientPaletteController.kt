@@ -16,6 +16,7 @@ import net.osmand.plus.palette.controller.BasePaletteController
 import net.osmand.plus.plugins.srtm.TerrainMode
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.utils.FileUtils
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.alert.AlertDialogData
 import net.osmand.plus.widgets.alert.AlertDialogExtra
@@ -246,7 +247,7 @@ open class GradientPaletteController(
 			selectPaletteItem(newItem)
 			notifyUpdatePaletteSelection(oldSelected, newItem)
 		}
-		// TODO: update dependent components (tracks, route line)
+		FileUtils.updateRenamedPaletteDependencies(app, item, newItem)
 		renaming = false
 	}
 
