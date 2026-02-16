@@ -165,11 +165,13 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 			} else {
 				nightColor = paletteColor.getColor();
 			}
-			if(isDayModeColorSelection && !nightMode || !isDayModeColorSelection && nightMode) {
+			if (isDayModeColorSelection && !nightMode || !isDayModeColorSelection && nightMode) {
 				srtmPlugin.apply3DBuildingsColor(paletteColor.getColor());
-				MapActivity activity = requireMapActivity();
-				activity.refreshMapComplete();
-				activity.updateLayers();
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					activity.refreshMapComplete();
+					activity.updateLayers();
+				}
 			}
 			updateApplyButton(isChangesMade());
 		});
@@ -221,7 +223,7 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 	private void setupBillingCard(@NonNull View view) {
 		freeCustomColorContainer = view.findViewById(R.id.free_view);
 		paidCustomColorContainer = view.findViewById(R.id.paid_view);
-		freeCustomColorContainer.findViewById(R.id.get_btn_container).setOnClickListener((v)->{
+		freeCustomColorContainer.findViewById(R.id.get_btn_container).setOnClickListener((v) -> {
 			ChoosePlanFragment.showInstance(requireMapActivity(), OsmAndFeature.TERRAIN);
 		});
 	}
