@@ -5987,4 +5987,12 @@
     <string name="astro_star_clusters">Stelamasoj</string>
     <string name="astro_nebulas">Nebulastroj</string>
     <string name="astro_solar_system">Sunsistemo</string>
+    <string name="delete_groups_confirmation">Ĉu forigi grupojn?</string>
+    <string name="add_to_track">Aldoni al spuro</string>
+    <string name="unpin_folder">Depingli dosierujon</string>
+    <string name="pin_folder">Alpingli dosierujon</string>
+    <string name="favorite_search_empty_state_description">Provu alĝustigi vian serĉpeton aŭ filtrilojn</string>
+    <string name="favorites_empty_folder_description">Tiu ĉi dosierujo ankoraŭ enhavas neniun punkton.</string>
+    <string name="building_3d_day_color_content_desc">Koloro de 3-dimensiaj konstruaĵoj (taga haŭto)</string>
+    <string name="building_3d_night_color_content_desc">Koloro de 3-dimensiaj konstruaĵoj (nokta haŭto)</string>
 </resources>
