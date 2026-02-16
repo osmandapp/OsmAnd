@@ -34,7 +34,7 @@ public enum SpeedState {
 	public int getSpeedUnitTextColor(Context context, boolean nightMode) {
 		int color = 0;
 		switch (this) {
-			case SAFE -> color = ColorUtilities.getPrimaryTextColor(context, nightMode);
+			case SAFE -> color = ColorUtilities.getSecondaryTextColor(context, nightMode);
 			case WARNING -> color = context.getColor(R.color.speed_limit_tolerance_units);
 			case EXCEED -> color = context.getColor(R.color.speeding_units);
 		}

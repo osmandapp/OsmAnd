@@ -28,6 +28,7 @@ import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvi
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -335,7 +336,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		alarmWidget.setVisibility(false);
 
 		View speedometerView = mapActivity.findViewById(R.id.speedometer_widget);
-		speedometerWidget = new SpeedometerWidget(app, mapActivity, speedometerView);
+		speedometerWidget = new SpeedometerWidget(app, mapActivity, speedometerView, ThemeUsageContext.MAP);
 		speedometerWidget.setVisibility(false);
 
 		setupRulerWidget(rulerWidget);
