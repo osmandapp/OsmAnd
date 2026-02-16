@@ -7,11 +7,15 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import de.KnollFrank.lib.settingssearch.PreferencePath;
+import de.KnollFrank.lib.settingssearch.common.Strings;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceOfHostWithinTree;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreen;
 import de.KnollFrank.lib.settingssearch.results.SearchResultsFilter;
 
 class ActivePluginsSearchResultsFilter implements SearchResultsFilter {
@@ -19,15 +23,17 @@ class ActivePluginsSearchResultsFilter implements SearchResultsFilter {
 	private final Map<SearchablePreferenceOfHostWithinTree, PreferencePath> preferencePathByPreference = new HashMap<>();
 
 	@Override
-	public boolean includePreferenceInSearchResults(final SearchablePreferenceOfHostWithinTree preference) {
-		return !isPreferenceConnectedToAnyInactivePlugin(preference);
+	public boolean includePreferenceInSearchResults(final SearchablePreferenceOfHostWithinTree preference,
+													final Locale locale) {
+		return !isPreferenceConnectedToAnyInactivePlugin(preference, locale);
 	}
 
-	private boolean isPreferenceConnectedToAnyInactivePlugin(final SearchablePreferenceOfHostWithinTree preference) {
+	private boolean isPreferenceConnectedToAnyInactivePlugin(final SearchablePreferenceOfHostWithinTree preference,
+															 final Locale locale) {
 		return ActivePluginsSearchResultsFilter
 				.getInactivePlugins()
 				.stream()
-				.anyMatch(inactivePlugin -> isPreferenceConnectedToPlugin(preference, inactivePlugin));
+				.anyMatch(inactivePlugin -> isPreferenceConnectedToPlugin(preference, inactivePlugin, locale));
 	}
 
 	private static List<OsmandPlugin> getInactivePlugins() {
@@ -39,10 +45,11 @@ class ActivePluginsSearchResultsFilter implements SearchResultsFilter {
 	}
 
 	private boolean isPreferenceConnectedToPlugin(final SearchablePreferenceOfHostWithinTree preference,
-												  final OsmandPlugin plugin) {
+												  final OsmandPlugin plugin,
+												  final Locale locale) {
 		return isPreferenceOnSettingsScreen(preference, Optional.ofNullable(plugin.getSettingsScreenType())) ||
 				isPreferencePathConnectedToPlugin(getPreferencePath(preference), plugin) ||
-				isMapSourcePreferenceConnectedToPlugin(preference, plugin);
+				isMapSourcePreferenceConnectedToPlugin(preference, plugin, locale);
 	}
 
 	private static boolean isPreferenceOnSettingsScreen(final SearchablePreferenceOfHostWithinTree preference,
@@ -66,22 +73,33 @@ class ActivePluginsSearchResultsFilter implements SearchResultsFilter {
 	}
 
 	private boolean isMapSourcePreferenceConnectedToPlugin(final SearchablePreferenceOfHostWithinTree preference,
-														   final OsmandPlugin plugin) {
-		return plugin instanceof OsmandRasterMapsPlugin && isMapSourcePreference(preference);
+														   final OsmandPlugin plugin,
+														   final Locale locale) {
+		return plugin instanceof OsmandRasterMapsPlugin && isMapSourcePreference(preference, locale);
 	}
 
-	private boolean isMapSourcePreference(final SearchablePreferenceOfHostWithinTree preference) {
+	private boolean isMapSourcePreference(final SearchablePreferenceOfHostWithinTree preference,
+										  final Locale locale) {
 		return this
 				.getPreferencePath(preference)
 				.preferences()
 				.stream()
-				// FK-FIXME: "en-" ist zu speziell
-				.anyMatch(_preference -> _preference.hostOfPreference().id().startsWith("en-net.osmand.plus.widgets.alert.MapLayerSelectionDialogFragment$MapLayerSelectionDialogFragmentProxy"));
+				.map(SearchablePreferenceOfHostWithinTree::hostOfPreference)
+				.map(SearchablePreferenceScreen::id)
+				.anyMatch(
+						idStartsWith(
+								Strings.prefixIdWithLanguage(
+										"net.osmand.plus.widgets.alert.MapLayerSelectionDialogFragment$MapLayerSelectionDialogFragmentProxy",
+										locale)));
 	}
 
 	private PreferencePath getPreferencePath(final SearchablePreferenceOfHostWithinTree preference) {
 		return preferencePathByPreference.computeIfAbsent(
 				preference,
 				SearchablePreferenceOfHostWithinTree::getPreferencePath);
+	}
+
+	private static Predicate<String> idStartsWith(final String idPrefix) {
+		return id -> id.startsWith(idPrefix);
 	}
 }
