@@ -21,9 +21,9 @@ abstract class AstroDataProvider {
 		private val LOG = PlatformUtil.getLog(AstroDataProvider::class.java)
 	}
 
-	abstract fun getSkyObjectsImpl(ctx: Context): List<SkyObject>
+	protected abstract fun getSkyObjectsImpl(ctx: Context): List<SkyObject>
 
-	abstract fun getCatalogsImpl(ctx: Context): List<Catalog>
+	protected abstract fun getCatalogsImpl(ctx: Context): List<Catalog>
 
 	@Synchronized
 	fun getCatalogs(ctx: Context): List<Catalog> {
@@ -53,7 +53,7 @@ abstract class AstroDataProvider {
 		cachedConstellations = null
 	}
 
-	abstract fun getConstellationsImpl(ctx: Context): List<Constellation>
+	protected abstract fun getConstellationsImpl(ctx: Context): List<Constellation>
 
 	@Synchronized
 	fun getConstellations(ctx: Context): List<Constellation> {
@@ -70,6 +70,12 @@ abstract class AstroDataProvider {
 		}
 		cachedConstellations = constellations
 		return constellations
+	}
+
+	protected abstract fun getAstroArticleImpl(ctx: Context, wikidataId: String, lang: String? = null): AstroArticle?
+
+	fun getAstroArticle(ctx: Context, wikidataId: String, lang: String? = null): AstroArticle? {
+		return getAstroArticleImpl(ctx, wikidataId, lang)
 	}
 
 	protected fun getPlanets(

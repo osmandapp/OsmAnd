@@ -51,6 +51,15 @@ class AstroDataDbProvider : AstroDataProvider() {
 		private const val COL_CATALOG_IDS_CATALOG_ID = "catalogId"
 		private const val COL_CATALOG_IDS_WIKIDATA_ID = "wikidataid"
 
+		private const val TABLE_WIKIPEDIA = "Wikipedia"
+		private const val COL_WIKI_WIKIDATA = "wikidata"
+		private const val COL_WIKI_LANG = "lang"
+		private const val COL_WIKI_TITLE = "title"
+		private const val COL_WIKI_EXTRACT = "extract"
+		private const val COL_WIKI_THUMBNAIL_URL = "thumbnail_url"
+		private const val COL_WIKI_SUMMARY_JSON = "summary_json"
+		private const val COL_WIKI_MOBILE_HTML = "mobile_html"
+
 		private fun getDatabaseFilePath(app: OsmandApplication): String {
 			val astroDir = app.getAppPath(IndexConstants.ASTRO_DIR).absolutePath
 			val embeddedDbPath = astroDir + File.separator + DATABASE_NAME
@@ -247,6 +256,62 @@ class AstroDataDbProvider : AstroDataProvider() {
 			LOG.error("Error reading constellations from DB", e)
 		}
 		return constellations
+	}
+
+	override fun getAstroArticleImpl(ctx: Context, wikidataId: String, lang: String?): AstroArticle? {
+		val dbHelper = DbHelper(ctx.applicationContext as OsmandApplication)
+		try {
+			val bestLang = if (lang == null) {
+				val app = ctx.applicationContext as OsmandApplication
+				app.settings.PREFERRED_LOCALE.get().takeIf { it.isNotEmpty() }
+					?.substringBefore('-')
+					?: ctx.resources.configuration.locale.language
+			} else { lang }
+
+			val db = dbHelper.readableDatabase
+			val cursor = db.query(
+				TABLE_WIKIPEDIA,
+				null,
+				"$COL_WIKI_WIKIDATA = ? AND ($COL_WIKI_LANG = ? OR $COL_WIKI_LANG = ?)",
+				arrayOf(wikidataId, bestLang, "en"),
+				null, null, null
+			)
+
+			var bestArticle: AstroArticle? = null
+			var enArticle: AstroArticle? = null
+
+			cursor.use { c ->
+				val idxLang = c.getColumnIndex(COL_WIKI_LANG)
+				val idxTitle = c.getColumnIndex(COL_WIKI_TITLE)
+				val idxExtract = c.getColumnIndex(COL_WIKI_EXTRACT)
+				val idxThumb = c.getColumnIndex(COL_WIKI_THUMBNAIL_URL)
+				val idxSummary = c.getColumnIndex(COL_WIKI_SUMMARY_JSON)
+				val idxMobile = c.getColumnIndex(COL_WIKI_MOBILE_HTML)
+
+				while (c.moveToNext()) {
+					val l = c.getString(idxLang)
+					val title = if (idxTitle >= 0) c.getString(idxTitle) else ""
+					val extract = if (idxExtract >= 0) c.getString(idxExtract) else ""
+					val thumb = if (idxThumb >= 0) c.getStringOrNull(idxThumb) else null
+					val summary = if (idxSummary >= 0) c.getStringOrNull(idxSummary) else null
+					val mobile = if (idxMobile >= 0 && !c.isNull(idxMobile)) c.getBlob(idxMobile) else null
+
+					val article = AstroArticle(wikidataId, l, title, extract, thumb, summary, mobile)
+					if (l == bestLang) {
+						bestArticle = article
+					}
+					if (l == "en") {
+						enArticle = article
+					}
+				}
+			}
+
+			db.close()
+			return bestArticle ?: enArticle
+		} catch (e: Exception) {
+			LOG.error("Error reading Wikipedia article from DB", e)
+		}
+		return null
 	}
 
 	private fun loadLocalizedNames(ctx: Context, db: SQLiteDatabase, objects: List<SkyObject>) {
