@@ -105,6 +105,7 @@ public class BinaryMapIndexReaderStats {
 	}
 	
 	public static class SearchStat {
+		private static final boolean TO_DETAILED_STRING = false;
 		long lastReq = 0, subSize = 0;
 		public long totalTime = 0;
 		public long totalBytes = 0;
@@ -217,7 +218,28 @@ public class BinaryMapIndexReaderStats {
 
 		@Override
 		public String toString() {
-			String c1 = "API       ", c2 = "Sub-API / Top-2 OBF                       ", c3 = "Time (s)", c4 = "Size ", c5 = "Volume (KB)", c6 = "Calls";
+			if (TO_DETAILED_STRING) {
+				return toDetailedString();
+			}
+			return String.format("Search stat: time %.3f, bytes %,d KB, by apis - %s; words %s", totalTime / 1e9, totalBytes / 1024,
+					byApis.values(), wordStats);
+		}
+
+		private String toDetailedString() {
+			DetailedStringData data = buildDetailedStringData();
+			return renderDetailedString(data);
+		}
+
+		private record DetailedStringData(String c1, String c2, String c3, String c4, String c5, String c6,
+		                                  Map<BinaryMapIndexReaderApiName, Map<BinaryMapIndexReaderSubApiName, List<SubStatByAPI>>> rows,
+		                                  Map<BinaryMapIndexReaderApiName, Map<BinaryMapIndexReaderSubApiName, SubStatByAPI>> totalsByApiSubApi,
+		                                  Map<BinaryMapIndexReaderApiName, SubStatByAPI> totalsByApi,
+		                                  List<BinaryMapIndexReaderApiName> apis) {
+		}
+
+		private DetailedStringData buildDetailedStringData() {
+			String c1 = "API       ", c2 = "Sub-API / Top-2 OBF                       ", c3 = "Time (s)",
+					c4 = "Count (O)", c5 = "Volume (KB)", c6 = "Calls";
 
 			Map<BinaryMapIndexReaderApiName, Map<BinaryMapIndexReaderSubApiName, List<SubStatByAPI>>> rows = new HashMap<>();
 			Map<BinaryMapIndexReaderApiName, Map<BinaryMapIndexReaderSubApiName, SubStatByAPI>> totalsByApiSubApi = new HashMap<>();
@@ -227,7 +249,8 @@ public class BinaryMapIndexReaderStats {
 					continue;
 				}
 				if (apiStats.subApis.isEmpty()) {
-					SubStatByAPI apiTotal = totalsByApi.computeIfAbsent(apiStats.api, k -> new SubStatByAPI(apiStats.api, null, ""));
+					SubStatByAPI apiTotal = totalsByApi.computeIfAbsent(apiStats.api,
+							k -> new SubStatByAPI(apiStats.api, null, ""));
 					apiTotal.time += apiStats.time;
 					apiTotal.bytes += apiStats.bytes;
 					apiTotal.calls += apiStats.calls;
@@ -261,14 +284,17 @@ public class BinaryMapIndexReaderStats {
 
 			List<BinaryMapIndexReaderApiName> apis = new ArrayList<>(totalsByApi.keySet());
 			apis.sort((a, b) -> Long.compare(totalsByApi.get(b).time, totalsByApi.get(a).time));
+			return new DetailedStringData(c1, c2, c3, c4, c5, c6, rows, totalsByApiSubApi, totalsByApi, apis);
+		}
 
-			int w1 = c1.length(), w2 = c2.length(), w3 = c3.length(), w4 = c4.length(), w5 = c5.length(), w6 = c6.length();
-			for (BinaryMapIndexReaderApiName api : apis) {
+		private String renderDetailedString(DetailedStringData data) {
+			int w1 = data.c1.length(), w2 = data.c2.length(), w3 = data.c3.length(), w4 = data.c4.length(), w5 = data.c5.length(), w6 = data.c6.length();
+			for (BinaryMapIndexReaderApiName api : data.apis) {
 				if (api == null) {
 					continue;
 				}
 				w1 = Math.max(w1, api.name().length());
-				Map<BinaryMapIndexReaderSubApiName, SubStatByAPI> bySub = totalsByApiSubApi.get(api);
+				Map<BinaryMapIndexReaderSubApiName, SubStatByAPI> bySub = data.totalsByApiSubApi.get(api);
 				if (bySub == null) {
 					continue;
 				}
@@ -279,7 +305,7 @@ public class BinaryMapIndexReaderStats {
 						continue;
 					}
 					w2 = Math.max(w2, subApi.name().length());
-					List<SubStatByAPI> detail = rows.getOrDefault(api, Collections.emptyMap()).getOrDefault(subApi, Collections.emptyList());
+					List<SubStatByAPI> detail = data.rows.getOrDefault(api, Collections.emptyMap()).getOrDefault(subApi, Collections.emptyList());
 					detail.sort((a, b) -> Long.compare(b.time, a.time));
 				}
 			}
@@ -288,18 +314,16 @@ public class BinaryMapIndexReaderStats {
 			sb.append(String.format(Locale.US, "Search stat: time %.3f, bytes % d KB, by APIs:",
 					totalTime / 1e9, totalBytes / 1024));
 			sb.append("\n");
-			sb.append(padRight(c1, w1)).append(", ")
-					.append(padRight(c2, w2)).append(", ")
-					.append(padRight(c3, w3)).append(", ")
-					.append(padRight(c4, w4)).append(", ")
-					.append(padRight(c5, w5)).append(", ")
-					.append(padRight(c6, w6));
+			sb.append(padRight(data.c1, w1)).append(", ")
+					.append(padRight(data.c2, w2)).append(", ").append(padRight(data.c3, w3)).append(", ")
+					.append(padRight(data.c4, w4)).append(", ").append(padRight(data.c5, w5)).append(", ")
+					.append(padRight(data.c6, w6));
 
-			for (BinaryMapIndexReaderApiName api : apis) {
+			for (BinaryMapIndexReaderApiName api : data.apis) {
 				if (api == null) {
 					continue;
 				}
-				SubStatByAPI apiTotal = totalsByApi.get(api);
+				SubStatByAPI apiTotal = data.totalsByApi.get(api);
 				if (apiTotal == null) {
 					continue;
 				}
@@ -311,7 +335,7 @@ public class BinaryMapIndexReaderStats {
 						.append(padLeft(String.format(Locale.US, "% d", apiTotal.bytes / 1024), w5)).append(", ")
 						.append(padLeft(String.format(Locale.US, "% d", apiTotal.calls), w6));
 
-				Map<BinaryMapIndexReaderSubApiName, SubStatByAPI> bySub = totalsByApiSubApi.get(api);
+				Map<BinaryMapIndexReaderSubApiName, SubStatByAPI> bySub = data.totalsByApiSubApi.get(api);
 				if (bySub == null) {
 					continue;
 				}
@@ -333,7 +357,7 @@ public class BinaryMapIndexReaderStats {
 							.append(padLeft(String.format(Locale.US, "% d", subTotal.bytes / 1024), w5)).append(", ")
 							.append(padLeft(String.format(Locale.US, "% d", subTotal.calls), w6));
 
-					List<SubStatByAPI> detail = rows.getOrDefault(api, Collections.emptyMap()).getOrDefault(subApi, Collections.emptyList());
+					List<SubStatByAPI> detail = data.rows.getOrDefault(api, Collections.emptyMap()).getOrDefault(subApi, Collections.emptyList());
 					detail.sort((a, b) -> Long.compare(b.time, a.time));
 					for (int i = 0; i < detail.size() && i < 2; i++) {
 						SubStatByAPI st = detail.get(i);
