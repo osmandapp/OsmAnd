@@ -74,8 +74,8 @@ public class MapHudLayout extends FrameLayout {
 	private VerticalWidgetPanel bottomWidgetsPanel;
 
 	private final float dpToPx;
-	private final int panelsMargin;
 	private final int buttonsMargin;
+	private final int defaultMargin;
 
 	private int topInset;
 	private int bottomInset;
@@ -110,8 +110,8 @@ public class MapHudLayout extends FrameLayout {
 		this.dpToPx = AndroidUtils.dpToPxF(context, 1);
 		this.portrait = AndroidUiHelper.isOrientationPortrait(context);
 		this.screenLayoutMode = ScreenLayoutMode.getDefault(context);
-		this.panelsMargin = AndroidUtils.dpToPx(context, DEF_MARGIN_DP * 2);
-		this.buttonsMargin = AndroidUtils.dpToPx(context, (BIG_SIZE_DP + (DEF_MARGIN_DP * 4)) * 2);
+		this.defaultMargin = (int) (dpToPx * DEF_MARGIN_DP);
+		this.buttonsMargin = (int) (dpToPx * ((BIG_SIZE_DP + (DEF_MARGIN_DP * 4)) * 2));
 
 		CommonPreference<PanelsLayoutMode> preference = settings.getPanelsLayoutMode(context, screenLayoutMode);
 		this.panelsLayoutMode = preference.get();
@@ -362,6 +362,7 @@ public class MapHudLayout extends FrameLayout {
 			position.setPositionHorizontal(POS_LEFT);
 		} else if (id == R.id.alarms_container) {
 			position.setMoveVertical();
+			position.setMoveHorizontal();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
 		}
@@ -401,7 +402,7 @@ public class MapHudLayout extends FrameLayout {
 			position.calcGridPositionFromPixel(dpToPx, parentWidth, parentHeight, left, x, top, y);
 
 			position.setMarginY(0);
-		} else if (view instanceof RulerWidget || view instanceof SideWidgetsPanel || view instanceof VerticalWidgetPanel) {
+		} else if (view instanceof RulerWidget || view instanceof SideWidgetsPanel) {
 			position.setMarginX(0);
 			position.setMarginY(0);
 		} else if (id == R.id.alarms_container) {
@@ -440,6 +441,14 @@ public class MapHudLayout extends FrameLayout {
 		int marginX = position.getXStartPix(dpToPx);
 		int marginY = position.getYStartPix(dpToPx);
 
+		if (shouldIgnoreEdgeMargins(position)) {
+			if (marginX == defaultMargin) {
+				marginX = 0;
+			}
+			if (marginY == defaultMargin) {
+				marginY = 0;
+			}
+		}
 		if (position.isLeft()) {
 			gravity = Gravity.START;
 			endMargin = 0;
@@ -504,6 +513,13 @@ public class MapHudLayout extends FrameLayout {
 		return panelsLayoutMode == PanelsLayoutMode.COMPACT;
 	}
 
+	private boolean shouldIgnoreEdgeMargins(@NonNull ButtonPositionSize position) {
+		return switch (position.getId()) {
+			case "top_widgets_panel", "map_bottom_widgets_panel", "map_left_widgets_panel", "map_right_widgets_panel" -> true;
+			default -> false;
+		};
+	}
+
 	@NonNull
 	private StateChangedListener<PanelsLayoutMode> getPanelsLayoutModeListener() {
 		if (panelsLayoutModeListener == null) {
@@ -540,6 +556,7 @@ public class MapHudLayout extends FrameLayout {
 			if (shouldCenterVerticalPanels()) {
 				float percentage = portrait ? TOP_BAR_MAX_WIDTH_PERCENTAGE_PORTRAIT : TOP_BAR_MAX_WIDTH_PERCENTAGE_LANDSCAPE;
 
+				int panelsMargin = defaultMargin * 2;
 				int defaultWidth = (int) (totalWidth * percentage);
 				int defaultMargin = (totalWidth - defaultWidth) / 2;
 

@@ -61,6 +61,14 @@ public class QuickSearchButtonState extends MapButtonState {
 		return "ic_action_search_dark";
 	}
 
+	@Override
+	protected void updatePosition(@NonNull ButtonPositionSize position) {
+		super.updatePosition(position);
+		if (!portrait) {
+			position.setMoveHorizontal();
+		}
+	}
+
 	@NonNull
 	@Override
 	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
