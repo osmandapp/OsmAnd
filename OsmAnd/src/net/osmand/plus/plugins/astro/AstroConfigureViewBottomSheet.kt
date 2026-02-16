@@ -305,10 +305,10 @@ class AstroConfigureViewBottomSheet :
 			parent = personalContainer,
 			iconRes = R.drawable.ic_action_target_direction_on,
 			titleRes = R.string.astro_directions,
-			checked = false,
+			checked = current.showDirections,
 			smallItem = false,
-		) {
-
+		) { checked ->
+			applyConfigChange(requireConfig().copy(showDirections = checked))
 		}
 
 		addSwitchRow(
@@ -325,11 +325,11 @@ class AstroConfigureViewBottomSheet :
 			parent = personalContainer,
 			iconRes = R.drawable.ic_action_target_path_on,
 			titleRes = R.string.astro_daily_path,
-			checked = false,
+			checked = current.showCelestialPaths,
 			smallItem = false,
 			showDivider = false
-		) {
-
+		) { checked ->
+			applyConfigChange(requireConfig().copy(showCelestialPaths = checked))
 		}
 
 		addSwitchRow(

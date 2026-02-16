@@ -167,6 +167,8 @@ class StarView @JvmOverloads constructor(
 	var showEquatorLine = false
 	var showGalacticLine = false
 	var showFavorites = true
+	var showDirections = true
+	var showCelestialPaths = true
 	var showRedFilter = false
 		set(value) {
 			if (field != value) {
@@ -725,7 +727,7 @@ class StarView @JvmOverloads constructor(
 
 	private fun shouldRecalculate(obj: SkyObject): Boolean {
 		if (obj == selectedObject) return true
-		if (pinnedObjects.contains(obj)) return true
+		if (showCelestialPaths && pinnedObjects.contains(obj)) return true
 		if (showConstellations) return true
 		if (selectedConstellationStarIds.contains(obj.hip)) return true
 		return isObjectVisibleInSettings(obj)
@@ -852,7 +854,7 @@ class StarView @JvmOverloads constructor(
 		// Draw Celestial Paths for all Selected Objects (Current + Pinned)
 		val objectsToDrawPath = mutableSetOf<SkyObject>()
 		if (selectedObject != null) objectsToDrawPath.add(selectedObject!!)
-		objectsToDrawPath.addAll(pinnedObjects)
+		if (showCelestialPaths) objectsToDrawPath.addAll(pinnedObjects)
 
 		objectsToDrawPath.forEach { obj ->
 			if (isObjectVisibleInSettings(obj)) {
@@ -871,10 +873,12 @@ class StarView @JvmOverloads constructor(
 		// Draw Highlights
 
 		// 1. Draw highlights for pinned objects (Gold)
-		pinnedObjects.forEach { obj ->
-			if (isObjectVisibleInSettings(obj) || selectedObject == obj) {
-				if (skyToScreen(obj.azimuth, obj.altitude, tempPoint)) {
-					canvas.drawCircle(tempPoint.x, tempPoint.y, 25f, pinnedHighlightPaint)
+		if (showCelestialPaths) {
+			pinnedObjects.forEach { obj ->
+				if (isObjectVisibleInSettings(obj) || selectedObject == obj) {
+					if (skyToScreen(obj.azimuth, obj.altitude, tempPoint)) {
+						canvas.drawCircle(tempPoint.x, tempPoint.y, 25f, pinnedHighlightPaint)
+					}
 				}
 			}
 		}
@@ -1512,7 +1516,7 @@ class StarView @JvmOverloads constructor(
 		}
 
 		// Always show label for selected or pinned objects
-		if (obj == selectedObject || pinnedObjects.contains(obj)) {
+		if (obj == selectedObject || (showCelestialPaths && pinnedObjects.contains(obj))) {
 			showLabel = true
 		}
 
@@ -1541,8 +1545,11 @@ class StarView @JvmOverloads constructor(
 				}
 			}
 
-			if (!textOverlaps || obj == selectedObject || pinnedObjects.contains(obj)) {
-				textPaint.color = if (obj == selectedObject) Color.RED else if(pinnedObjects.contains(obj)) Color.YELLOW else Color.LTGRAY
+			if (!textOverlaps || obj == selectedObject || (showCelestialPaths && pinnedObjects.contains(obj))) {
+				textPaint.color =
+					if (obj == selectedObject) Color.RED
+					else if (showCelestialPaths && pinnedObjects.contains(obj)) Color.YELLOW
+					else Color.LTGRAY
 				canvas.drawText(text, xText, yText, textPaint)
 
 				occupiedRects.add(textRect)

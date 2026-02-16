@@ -333,6 +333,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showEquatorLine = config.showEquatorLine
 			starView.showGalacticLine = config.showGalacticLine
 			starView.showFavorites = config.showFavorites
+			starView.showDirections = config.showDirections
+			starView.showCelestialPaths = config.showCelestialPaths
 			starView.showRedFilter = config.showRedFilter
 			starView.showConstellations = config.showConstellations
 			starView.showStars = config.showStars
@@ -674,6 +676,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			showEquatorLine = starView.showEquatorLine,
 			showGalacticLine = starView.showGalacticLine,
 			showFavorites = starView.showFavorites,
+			showDirections = starView.showDirections,
+			showCelestialPaths = starView.showCelestialPaths,
 			showRedFilter = starView.showRedFilter,
 			showSun = starView.showSun,
 			showMoon = starView.showMoon,
@@ -700,6 +704,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starView.showEquatorLine = newConfig.showEquatorLine
 		starView.showGalacticLine = newConfig.showGalacticLine
 		starView.showFavorites = newConfig.showFavorites
+		starView.showDirections = newConfig.showDirections
+		starView.showCelestialPaths = newConfig.showCelestialPaths
 		starView.showRedFilter = newConfig.showRedFilter
 
 		starView.showSun = newConfig.showSun
