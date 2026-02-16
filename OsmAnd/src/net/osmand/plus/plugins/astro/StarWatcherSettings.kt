@@ -40,12 +40,26 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		private const val KEY_MAGNITUDE_FILTER = "magnitudeFilter"
 
 		private const val KEY_FAVORITES = "favorites"
+		private const val KEY_DIRECTIONS = "directions"
+		private const val KEY_CELESTIAL_PATHS = "celestialPaths"
 		private const val KEY_ID = "id"
 	}
 
-	data class FavoriteConfig(
-		val id: String,
+	abstract class Config(
+		open val id: String,
 	)
+
+	data class FavoriteConfig(
+		override val id: String,
+	) : Config(id)
+
+	data class DirectionConfig(
+		override val id: String,
+	) : Config(id)
+
+	data class CelestialPathConfig(
+		override val id: String,
+	) : Config(id)
 
 	data class CommonConfig(
 		val showRegularMap: Boolean,
@@ -76,7 +90,9 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val is2DMode: Boolean,
 		val showMagnitudeFilter: Boolean,
 		val magnitudeFilter: Double?,
-		val favorites: List<FavoriteConfig>
+		val favorites: List<FavoriteConfig>,
+		val directions: List<DirectionConfig>,
+		val celestialPaths: List<CelestialPathConfig>
 	)
 
 	private fun getSettingsJson(): JSONObject {
@@ -95,26 +111,26 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		settingsPref.set(json.toString())
 	}
 
-	private fun parseFavorites(json: JSONObject?): List<FavoriteConfig> {
-		val favoritesList = mutableListOf<FavoriteConfig>()
-		val favoritesJson = json?.optJSONArray(KEY_FAVORITES)
+	private fun <T : Config> parseItems(json: JSONObject?, key: String, factory: (String) -> T): List<T> {
+		val itemsList = mutableListOf<T>()
+		val itemsJson = json?.optJSONArray(key)
 
-		if (favoritesJson != null) {
-			for (i in 0 until favoritesJson.length()) {
-				val favObj = favoritesJson.optJSONObject(i)
-				val id = favObj?.optString(KEY_ID)
+		if (itemsJson != null) {
+			for (i in 0 until itemsJson.length()) {
+				val itemObj = itemsJson.optJSONObject(i)
+				val id = itemObj?.optString(KEY_ID)
 				if (!id.isNullOrEmpty()) {
-					favoritesList.add(FavoriteConfig(id))
+					itemsList.add(factory(id))
 				}
 			}
 		}
 
-		return favoritesList
+		return itemsList
 	}
 
-	private fun serializeFavorites(favorites: List<FavoriteConfig>): JSONArray {
+	private fun serializeItems(items: List<Config>): JSONArray {
 		val array = JSONArray()
-		favorites.forEach { item ->
+		items.forEach { item ->
 			val obj = JSONObject()
 			obj.put(KEY_ID, item.id)
 			array.put(obj)
@@ -175,7 +191,9 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showMagnitudeFilter = mapSettings?.optBoolean(KEY_SHOW_MAGNITUDE_FILTER, false) ?: false
 		val magnitudeFilter = mapSettings?.optDouble(KEY_MAGNITUDE_FILTER)?.takeIf { !it.isNaN() }
 
-		val items = parseFavorites(mapSettings)
+		val favorites = parseItems(mapSettings, KEY_FAVORITES) { FavoriteConfig(it) }
+		val directions = parseItems(mapSettings, KEY_DIRECTIONS) { DirectionConfig(it) }
+		val celestialPaths = parseItems(mapSettings, KEY_CELESTIAL_PATHS) { CelestialPathConfig(it) }
 
 		return StarMapConfig(
 			showAzimuthalGrid = showAzimuthal,
@@ -200,7 +218,9 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 			is2DMode = is2DMode,
 			showMagnitudeFilter = showMagnitudeFilter,
 			magnitudeFilter = magnitudeFilter,
-			favorites = items
+			favorites = favorites,
+			directions = directions,
+			celestialPaths = celestialPaths
 		)
 	}
 
@@ -240,7 +260,21 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 			mapSettings.put(KEY_MAGNITUDE_FILTER, config.magnitudeFilter)
 		}
 
-		mapSettings.put(KEY_FAVORITES, serializeFavorites(config.favorites))
+		if (config.favorites.isEmpty()) {
+			mapSettings.remove(KEY_FAVORITES)
+		} else {
+			mapSettings.put(KEY_FAVORITES, serializeItems(config.favorites))
+		}
+		if (config.directions.isEmpty()) {
+			mapSettings.remove(KEY_DIRECTIONS)
+		} else {
+			mapSettings.put(KEY_DIRECTIONS, serializeItems(config.directions))
+		}
+		if (config.celestialPaths.isEmpty()) {
+			mapSettings.remove(KEY_CELESTIAL_PATHS)
+		} else {
+			mapSettings.put(KEY_CELESTIAL_PATHS, serializeItems(config.celestialPaths))
+		}
 
 		root.put(KEY_STAR_MAP, mapSettings)
 		setSettingsJson(root)
@@ -260,6 +294,40 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val favorites = config.favorites.toMutableList()
 		if (favorites.removeAll { it.id == id }) {
 			setStarMapConfig(config.copy(favorites = favorites))
+		}
+	}
+
+	fun addDirection(id: String) {
+		val config = getStarMapConfig()
+		if (config.directions.none { it.id == id }) {
+			val directions = config.directions.toMutableList()
+			directions.add(DirectionConfig(id))
+			setStarMapConfig(config.copy(directions = directions))
+		}
+	}
+
+	fun removeDirection(id: String) {
+		val config = getStarMapConfig()
+		val directions = config.directions.toMutableList()
+		if (directions.removeAll { it.id == id }) {
+			setStarMapConfig(config.copy(directions = directions))
+		}
+	}
+
+	fun addCelestialPath(id: String) {
+		val config = getStarMapConfig()
+		if (config.celestialPaths.none { it.id == id }) {
+			val paths = config.celestialPaths.toMutableList()
+			paths.add(CelestialPathConfig(id))
+			setStarMapConfig(config.copy(celestialPaths = paths))
+		}
+	}
+
+	fun removeCelestialPath(id: String) {
+		val config = getStarMapConfig()
+		val paths = config.celestialPaths.toMutableList()
+		if (paths.removeAll { it.id == id }) {
+			setStarMapConfig(config.copy(celestialPaths = paths))
 		}
 	}
 }

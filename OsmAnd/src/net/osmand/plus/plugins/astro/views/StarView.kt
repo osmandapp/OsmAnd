@@ -430,15 +430,19 @@ class StarView @JvmOverloads constructor(
 		objects.forEach { skyObjectMap[it.hip] = it }
 
 		recalculatePositions(currentTime, updateTargets = false, force = true)
+		val celestialPathObjects = mutableSetOf<SkyObject>()
+		val directionObjects = mutableSetOf<SkyObject>()
 		skyObjects.forEach {
 			it.azimuth = it.targetAzimuth
 			it.altitude = it.targetAltitude
+			if (it.showCelestialPath) celestialPathObjects.add(it)
+			if (it.showDirection) directionObjects.add(it)
 		}
 
-		// Clean up pinned objects that might no longer exist
-		val toRemove = pinnedObjects.filter { !skyObjectMap.containsValue(it) }
+		val toRemove = pinnedObjects.filter { !celestialPathObjects.contains(it) }
 		pinnedObjects.removeAll(toRemove)
 		pathCache.keys.removeAll(toRemove)
+		pinnedObjects.addAll(celestialPathObjects)
 
 		invalidate()
 	}
@@ -595,14 +599,14 @@ class StarView @JvmOverloads constructor(
 		return pinnedObjects.contains(obj)
 	}
 
-	fun setObjectPinned(obj: SkyObject, pinned: Boolean) {
+	fun setObjectPinned(obj: SkyObject, pinned: Boolean, forceUpdate: Boolean = false) {
 		if (pinned) {
 			pinnedObjects.add(obj)
 		} else {
 			pinnedObjects.remove(obj)
 			pathCache.remove(obj) // Free up cache if deselected
 		}
-		invalidate()
+		if (forceUpdate) invalidate()
 	}
 
 	// -------------------

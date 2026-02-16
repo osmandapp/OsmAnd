@@ -34,6 +34,8 @@ open class SkyObject(
 	open var distAu: Double = 0.0,
 
 	open var isFavorite: Boolean = false,
+	open var showDirection: Boolean = false,
+	open var showCelestialPath: Boolean = false,
 
 	// Animation state helpers
 	open var startAzimuth: Double = 0.0,
@@ -42,7 +44,7 @@ open class SkyObject(
 	open var targetAltitude: Double = 0.0,
 
 	// Cache helper
-    open var lastUpdateTime: Double = -1.0
+	open var lastUpdateTime: Double = -1.0
 ) {
 	enum class Type {
 		STAR, GALAXY, BLACK_HOLE, PLANET, SUN, MOON,
