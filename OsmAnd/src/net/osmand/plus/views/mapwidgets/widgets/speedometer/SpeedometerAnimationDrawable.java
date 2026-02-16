@@ -31,6 +31,11 @@ public class SpeedometerAnimationDrawable extends Drawable {
 		}
 	}
 
+	@Override
+	public void getOutline(@NonNull android.graphics.Outline outline) {
+		outline.setRoundRect(getBounds(), cornerRadius);
+	}
+
 	public int getBackgroundColor() {
 		return backgroundColor;
 	}
