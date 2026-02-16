@@ -88,24 +88,6 @@ public class BinaryMapIndexReaderStats {
 		public String toString() {
 			return String.format("API %s [call %d, time %.2f, %,d KB]", api, calls, time / 1e9, bytes/1024);
 		}
-
-		public List<SubStatByAPI> getSummary() {
-			Map<String, SubStatByAPI> grouped = new HashMap<>();
-			for (SubStatByAPI st : subApis.values()) {
-				if (st == null || st.mapName == null) {
-					continue;
-				}
-				String key = st.subApi.name() + '|' + st.mapName;
-				SubStatByAPI agg = grouped.computeIfAbsent(key, k -> new SubStatByAPI(api, st.subApi, st.mapName));
-				agg.time += st.time;
-				agg.size += st.size;
-				agg.bytes += st.bytes;
-				agg.count += st.count;
-			}
-			List<SubStatByAPI> result = new ArrayList<>(grouped.values());
-			result.sort((a, b) -> Long.compare(b.time, a.time));
-			return result;
-		}
 	}
 	
 	public static class WordSearchStat {
@@ -237,8 +219,150 @@ public class BinaryMapIndexReaderStats {
 
 		@Override
 		public String toString() {
-			return String.format("Search stat: time %.3f, bytes %,d KB, by apis - %s; words %s", totalTime / 1e9, totalBytes / 1024,
-					byApis.values(), wordStats);
+			String c1 = "API       ", c2 = "Sub-API / Top-2 OBF                       ", c3 = "Time (s)", c4 = "Size ", c5 = "Volume (KB)", c6 = "Calls";
+
+			Map<BinaryMapIndexReaderApiName, Map<BinaryMapIndexReaderSubApiName, List<SubStatByAPI>>> rows = new HashMap<>();
+			Map<BinaryMapIndexReaderApiName, Map<BinaryMapIndexReaderSubApiName, SubStatByAPI>> totalsByApiSubApi = new HashMap<>();
+			Map<BinaryMapIndexReaderApiName, SubStatByAPI> totalsByApi = new HashMap<>();
+			for (StatByAPI apiStats : byApis.values()) {
+				if (apiStats == null || apiStats.api == null || apiStats.subApis == null) {
+					continue;
+				}
+				if (apiStats.subApis.isEmpty()) {
+					SubStatByAPI apiTotal = totalsByApi.computeIfAbsent(apiStats.api, k -> new SubStatByAPI(apiStats.api, null, ""));
+					apiTotal.time += apiStats.time;
+					apiTotal.bytes += apiStats.bytes;
+					apiTotal.count += apiStats.calls;
+					rows.computeIfAbsent(apiStats.api, k -> new HashMap<>());
+					continue;
+				}
+				for (SubStatByAPI st : apiStats.subApis.values()) {
+						if (st == null || st.subApi == null) {
+							continue;
+						}
+						rows.computeIfAbsent(apiStats.api, k -> new HashMap<>())
+								.computeIfAbsent(st.subApi, k -> new ArrayList<>())
+								.add(st);
+
+						totalsByApiSubApi.computeIfAbsent(apiStats.api, k -> new HashMap<>());
+						SubStatByAPI subTotal = totalsByApiSubApi.get(apiStats.api).computeIfAbsent(st.subApi,
+								k -> new SubStatByAPI(apiStats.api, st.subApi, ""));
+						subTotal.time += st.time;
+						subTotal.size += st.size;
+						subTotal.bytes += st.bytes;
+						subTotal.count += st.count;
+
+						SubStatByAPI apiTotal = totalsByApi.computeIfAbsent(apiStats.api, k ->
+								new SubStatByAPI(apiStats.api, st.subApi, ""));
+						apiTotal.time += st.time;
+						apiTotal.size += st.size;
+						apiTotal.bytes += st.bytes;
+						apiTotal.count += st.count;
+				}
+			}
+
+			List<BinaryMapIndexReaderApiName> apis = new ArrayList<>(totalsByApi.keySet());
+			apis.sort((a, b) -> Long.compare(totalsByApi.get(b).time, totalsByApi.get(a).time));
+
+			int w1 = c1.length(), w2 = c2.length(), w3 = c3.length(), w4 = c4.length(), w5 = c5.length(), w6 = c6.length();
+			for (BinaryMapIndexReaderApiName api : apis) {
+				if (api == null) {
+					continue;
+				}
+				w1 = Math.max(w1, api.name().length());
+				Map<BinaryMapIndexReaderSubApiName, SubStatByAPI> bySub = totalsByApiSubApi.get(api);
+				if (bySub == null) {
+					continue;
+				}
+				List<BinaryMapIndexReaderSubApiName> subApis = new ArrayList<>(bySub.keySet());
+				subApis.sort((a, b) -> Long.compare(bySub.get(b).time, bySub.get(a).time));
+				for (BinaryMapIndexReaderSubApiName subApi : subApis) {
+					if (subApi == null) {
+						continue;
+					}
+					w2 = Math.max(w2, subApi.name().length());
+					List<SubStatByAPI> detail = rows.getOrDefault(api, Collections.emptyMap()).getOrDefault(subApi, Collections.emptyList());
+					detail.sort((a, b) -> Long.compare(b.time, a.time));
+				}
+			}
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(String.format(Locale.US, "Search stat: time %.3f, bytes % d KB, by APIs:",
+					totalTime / 1e9, totalBytes / 1024));
+			sb.append("\n");
+			sb.append(padRight(c1, w1)).append(", ")
+					.append(padRight(c2, w2)).append(", ")
+					.append(padRight(c3, w3)).append(", ")
+					.append(padRight(c4, w4)).append(", ")
+					.append(padRight(c5, w5)).append(", ")
+					.append(padRight(c6, w6));
+
+			for (BinaryMapIndexReaderApiName api : apis) {
+				if (api == null) {
+					continue;
+				}
+				SubStatByAPI apiTotal = totalsByApi.get(api);
+				if (apiTotal == null) {
+					continue;
+				}
+				sb.append("\n");
+				sb.append(padRight(api.name(), w1)).append(", ")
+						.append(padRight("", w2)).append(", ")
+						.append(padLeft(String.format(Locale.US, "%.2f", apiTotal.time / 1e9), w3)).append(", ")
+						.append(padLeft(String.format(Locale.US, "% d", apiTotal.size), w4)).append(", ")
+						.append(padLeft(String.format(Locale.US, "% d", apiTotal.bytes / 1024), w5)).append(", ")
+						.append(padLeft(String.format(Locale.US, "% d", apiTotal.count), w6));
+
+				Map<BinaryMapIndexReaderSubApiName, SubStatByAPI> bySub = totalsByApiSubApi.get(api);
+				if (bySub == null) {
+					continue;
+				}
+				List<BinaryMapIndexReaderSubApiName> subApis = new ArrayList<>(bySub.keySet());
+				subApis.sort((a, b) -> Long.compare(bySub.get(b).time, bySub.get(a).time));
+				for (BinaryMapIndexReaderSubApiName subApi : subApis) {
+					if (subApi == null) {
+						continue;
+					}
+					SubStatByAPI subTotal = bySub.get(subApi);
+					if (subTotal == null) {
+						continue;
+					}
+					sb.append("\n");
+					sb.append(padRight("", w1)).append(", ")
+							.append(padRight(subApi.name(), w2)).append(", ")
+							.append(padLeft(String.format(Locale.US, "%.2f", subTotal.time / 1e9), w3)).append(", ")
+							.append(padLeft(String.format(Locale.US, "% d", subTotal.size), w4)).append(", ")
+							.append(padLeft(String.format(Locale.US, "% d", subTotal.bytes / 1024), w5)).append(", ")
+							.append(padLeft(String.format(Locale.US, "% d", subTotal.count), w6));
+
+					List<SubStatByAPI> detail = rows.getOrDefault(api, Collections.emptyMap()).getOrDefault(subApi, Collections.emptyList());
+					detail.sort((a, b) -> Long.compare(b.time, a.time));
+					for (int i = 0; i < detail.size() && i < 2; i++) {
+						SubStatByAPI st = detail.get(i);
+						if (st == null) {
+							continue;
+						}
+						sb.append("\n");
+						sb.append(padRight("", w1)).append(", ")
+								.append(padRight(st.mapName == null ? "" : st.mapName, w2)).append(", ")
+								.append(padLeft(String.format(Locale.US, "%.2f", st.time / 1e9), w3)).append(", ")
+								.append(padLeft(String.format(Locale.US, "% d", st.size), w4)).append(", ")
+								.append(padLeft(String.format(Locale.US, "% d", st.bytes / 1024), w5)).append(", ")
+								.append(padLeft(String.format(Locale.US, "% d", st.count), w6));
+					}
+				}
+			}
+
+			sb.append("\nWords ").append(wordStats);
+			return sb.toString();
+		}
+
+		private static String padRight(String value, int width) {
+			return String.format("%-" + width + "s", value == null ? "" : value);
+		}
+
+		private static String padLeft(String value, int width) {
+			return String.format("%" + width + "s", value == null ? "" : value);
 		}
 	}
 	
