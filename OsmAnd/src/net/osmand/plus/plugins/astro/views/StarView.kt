@@ -165,9 +165,10 @@ class StarView @JvmOverloads constructor(
 	var showEquatorLine = false
 	var showGalacticLine = false
 	var showFavorites = true
-	var showConstellations = true
+	var showRedFilter = false
 
 	var showStars = true
+	var showConstellations = true
 	var showGalaxies = true
 	var showBlackHoles = true
 	var showNebulae = true

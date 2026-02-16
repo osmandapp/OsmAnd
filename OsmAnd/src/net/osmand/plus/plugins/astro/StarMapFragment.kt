@@ -324,6 +324,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showEquatorLine = config.showEquatorLine
 			starView.showGalacticLine = config.showGalacticLine
 			starView.showFavorites = config.showFavorites
+			starView.showRedFilter = config.showRedFilter
 			starView.showConstellations = config.showConstellations
 			starView.showStars = config.showStars
 			starView.showGalaxies = config.showGalaxies
@@ -636,6 +637,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		applyBottomInsets()
 	}
 
+	fun applyRedFilter(enabled: Boolean) {
+		starView.showRedFilter = enabled
+		starView.invalidate()
+		saveStarMapSettings()
+	}
+
 	fun setRegularMapVisibility(enabled: Boolean) {
 		updateRegularMapVisibility(enabled)
 		saveCommonSettings()
@@ -663,6 +670,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			showEquatorLine = starView.showEquatorLine,
 			showGalacticLine = starView.showGalacticLine,
 			showFavorites = starView.showFavorites,
+			showRedFilter = starView.showRedFilter,
 			showSun = starView.showSun,
 			showMoon = starView.showMoon,
 			showPlanets = starView.showPlanets,
@@ -688,6 +696,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starView.showEquatorLine = newConfig.showEquatorLine
 		starView.showGalacticLine = newConfig.showGalacticLine
 		starView.showFavorites = newConfig.showFavorites
+		starView.showRedFilter = newConfig.showRedFilter
 
 		starView.showSun = newConfig.showSun
 		starView.showMoon = newConfig.showMoon

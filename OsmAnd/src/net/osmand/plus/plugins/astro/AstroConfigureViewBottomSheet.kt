@@ -137,15 +137,15 @@ class AstroConfigureViewBottomSheet :
 		)
 		bindToggleMapActionCard(
 			card = root.findViewById(R.id.button_red_filter),
-			isChecked = { true },
+			isChecked = { requireStarMap().starView.showRedFilter },
 			titleResEnabled = R.string.red_filter,
 			drawableEnabled = redFilterEnableDrawable,
 			drawableDisabled = uiUtilities.getIcon(
 				R.drawable.ic_action_red_filter_off,
 				activeColor
 			),
-			toggle = {
-
+			toggle = { checked ->
+				requireStarMap().applyRedFilter(checked)
 			}
 		)
 	}

@@ -25,6 +25,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		private const val KEY_SHOW_MOON = "showMoon"
 		private const val KEY_SHOW_PLANETS = "showPlanets"
 		private const val KEY_SHOW_FAVORITES = "showFavorites"
+		private const val KEY_SHOW_RED_FILTER = "showRedFilter"
 
 		private const val KEY_SHOW_CONSTELLATIONS = "showConstellations"
 
@@ -59,6 +60,8 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showEquatorLine: Boolean,
 		val showGalacticLine: Boolean,
 		val showFavorites: Boolean,
+		val showRedFilter: Boolean,
+
 		val showSun: Boolean,
 		val showMoon: Boolean,
 		val showPlanets: Boolean,
@@ -151,6 +154,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		val showEquator = mapSettings?.optBoolean(KEY_SHOW_EQUATOR, false) ?: false
 		val showGalactic = mapSettings?.optBoolean(KEY_SHOW_GALACTIC, false) ?: false
 		val showFavorites = mapSettings?.optBoolean(KEY_SHOW_FAVORITES, true) ?: true
+		val showRedFilter = mapSettings?.optBoolean(KEY_SHOW_RED_FILTER, false) ?: false
 
 		val showSun = mapSettings?.optBoolean(KEY_SHOW_SUN, true) ?: true
 		val showMoon = mapSettings?.optBoolean(KEY_SHOW_MOON, true) ?: true
@@ -181,6 +185,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 			showEquatorLine = showEquator,
 			showGalacticLine = showGalactic,
 			showFavorites = showFavorites,
+			showRedFilter = showRedFilter,
 			showSun = showSun,
 			showMoon = showMoon,
 			showPlanets = showPlanets,
@@ -210,6 +215,7 @@ class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
 		mapSettings.put(KEY_SHOW_EQUATOR, config.showEquatorLine)
 		mapSettings.put(KEY_SHOW_GALACTIC, config.showGalacticLine)
 		mapSettings.put(KEY_SHOW_FAVORITES, config.showFavorites)
+		mapSettings.put(KEY_SHOW_RED_FILTER, config.showRedFilter)
 
 		mapSettings.put(KEY_SHOW_SUN, config.showSun)
 		mapSettings.put(KEY_SHOW_MOON, config.showMoon)
