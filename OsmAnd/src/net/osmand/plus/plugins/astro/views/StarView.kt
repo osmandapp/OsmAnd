@@ -6,6 +6,8 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.DashPathEffect
 import android.graphics.Paint
 import android.graphics.Path
@@ -166,6 +168,13 @@ class StarView @JvmOverloads constructor(
 	var showGalacticLine = false
 	var showFavorites = true
 	var showRedFilter = false
+		set(value) {
+			if (field != value) {
+				field = value
+				updateRedFilter()
+				invalidate()
+			}
+		}
 
 	var showStars = true
 	var showConstellations = true
@@ -1786,6 +1795,21 @@ class StarView @JvmOverloads constructor(
 		override fun onScale(detector: ScaleGestureDetector): Boolean {
 			updateViewAngle(viewAngle / detector.scaleFactor, detector.focusX, detector.focusY)
 			return true
+		}
+	}
+
+	private fun updateRedFilter() {
+		if (showRedFilter) {
+			val lumToRed = ColorMatrix(floatArrayOf(
+				0.33f, 0.33f, 0.33f, 0f, 0f,
+				0f, 0f, 0f, 0f, 0f,
+				0f, 0f, 0f, 0f, 0f,
+				0f, 0f, 0f, 1f, 0f
+			))
+			val filter = ColorMatrixColorFilter(lumToRed)
+			setLayerType(LAYER_TYPE_HARDWARE, Paint().apply { colorFilter = filter })
+		} else {
+			setLayerType(LAYER_TYPE_NONE, null)
 		}
 	}
 }
