@@ -27,14 +27,15 @@ public class BinaryMapIndexReaderStats {
 
 		POI_NAME_INDEX,
 		POI_NAME_REFERENCES, 
-		POI_NAME_OBJECTS
+		POI_NAME_OBJECTS,
+		POI_NAME_GROUPS_BBOXES
 	}
 	
 	public static class SubStatByAPI {
 		public final BinaryMapIndexReaderApiName api;
 		public final BinaryMapIndexReaderSubApiName subApi;
 		public final String mapName;
-		private long time = 0, size = 0, count = 0, bytes = 0;
+		private long time = 0, count = 0, calls = 0, bytes = 0;
 
 		SubStatByAPI(BinaryMapIndexReaderApiName api, BinaryMapIndexReaderSubApiName subApi, String mapName) {
 			this.api = api;
@@ -42,11 +43,11 @@ public class BinaryMapIndexReaderStats {
 			this.mapName = mapName;
 		}
 
-		void add(long timeNs, long size, long bytes) {
+		void add(long timeNs, long count, long bytes) {
 			this.time += timeNs;
-			this.size += size;
+			this.count += count;
 			this.bytes += bytes;
-			count++;
+			calls++;
 		}
 
 		public long getTime() {
@@ -57,12 +58,12 @@ public class BinaryMapIndexReaderStats {
 			return bytes;
 		}
 
-		public long getCount() {
-			return count;
+		public long getCalls() {
+			return calls;
 		}
 
-		public long getSize() {
-			return size;
+		public long getCount() {
+			return count;
 		}
 	}
 	
@@ -104,7 +105,7 @@ public class BinaryMapIndexReaderStats {
 	}
 	
 	public static class SearchStat {
-		long lastReq = 0, subStart = 0, subSize = 0;
+		long lastReq = 0, subSize = 0;
 		public long totalTime = 0;
 		public long totalBytes = 0;
 		public int prevResultsSize = 0;
@@ -134,9 +135,9 @@ public class BinaryMapIndexReaderStats {
 					String key = st.api.name() + '|' + st.subApi.name() + '|' + mapName;
 					SubStatByAPI agg = grouped.computeIfAbsent(key, k -> new SubStatByAPI(st.api, st.subApi, st.mapName));
 					agg.time += st.time;
-					agg.size += st.size;
-					agg.bytes += st.bytes;
 					agg.count += st.count;
+					agg.bytes += st.bytes;
+					agg.calls += st.calls;
 				}
 			}
 			List<SubStatByAPI> result = new ArrayList<>(grouped.values());
@@ -197,15 +198,12 @@ public class BinaryMapIndexReaderStats {
 		}
 
 		public long beginSubSearchStats(int size) {
-			subStart = System.nanoTime();
+			long subStart = System.nanoTime();
 			subSize = size;
 			return subStart;
 		}
 
 		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryMapIndexReaderSubApiName op, String obf, int size, long bytes) {
-			if (statReq != subStart) {
-				System.err.println("ERROR: in sub search stats counting to fix ! " + statReq + " != " + subStart);
-			}
 			long timeCall = (System.nanoTime() - statReq);
 			StatByAPI statByAPI = byApis.get(api);
 			if (statByAPI == null) {
@@ -232,7 +230,7 @@ public class BinaryMapIndexReaderStats {
 					SubStatByAPI apiTotal = totalsByApi.computeIfAbsent(apiStats.api, k -> new SubStatByAPI(apiStats.api, null, ""));
 					apiTotal.time += apiStats.time;
 					apiTotal.bytes += apiStats.bytes;
-					apiTotal.count += apiStats.calls;
+					apiTotal.calls += apiStats.calls;
 					rows.computeIfAbsent(apiStats.api, k -> new HashMap<>());
 					continue;
 				}
@@ -248,16 +246,16 @@ public class BinaryMapIndexReaderStats {
 						SubStatByAPI subTotal = totalsByApiSubApi.get(apiStats.api).computeIfAbsent(st.subApi,
 								k -> new SubStatByAPI(apiStats.api, st.subApi, ""));
 						subTotal.time += st.time;
-						subTotal.size += st.size;
-						subTotal.bytes += st.bytes;
 						subTotal.count += st.count;
+						subTotal.bytes += st.bytes;
+						subTotal.calls += st.calls;
 
 						SubStatByAPI apiTotal = totalsByApi.computeIfAbsent(apiStats.api, k ->
 								new SubStatByAPI(apiStats.api, st.subApi, ""));
 						apiTotal.time += st.time;
-						apiTotal.size += st.size;
-						apiTotal.bytes += st.bytes;
 						apiTotal.count += st.count;
+						apiTotal.bytes += st.bytes;
+						apiTotal.calls += st.calls;
 				}
 			}
 
@@ -309,9 +307,9 @@ public class BinaryMapIndexReaderStats {
 				sb.append(padRight(api.name(), w1)).append(", ")
 						.append(padRight("", w2)).append(", ")
 						.append(padLeft(String.format(Locale.US, "%.2f", apiTotal.time / 1e9), w3)).append(", ")
-						.append(padLeft(String.format(Locale.US, "% d", apiTotal.size), w4)).append(", ")
+						.append(padLeft(String.format(Locale.US, "% d", apiTotal.count), w4)).append(", ")
 						.append(padLeft(String.format(Locale.US, "% d", apiTotal.bytes / 1024), w5)).append(", ")
-						.append(padLeft(String.format(Locale.US, "% d", apiTotal.count), w6));
+						.append(padLeft(String.format(Locale.US, "% d", apiTotal.calls), w6));
 
 				Map<BinaryMapIndexReaderSubApiName, SubStatByAPI> bySub = totalsByApiSubApi.get(api);
 				if (bySub == null) {
@@ -331,9 +329,9 @@ public class BinaryMapIndexReaderStats {
 					sb.append(padRight("", w1)).append(", ")
 							.append(padRight(subApi.name(), w2)).append(", ")
 							.append(padLeft(String.format(Locale.US, "%.2f", subTotal.time / 1e9), w3)).append(", ")
-							.append(padLeft(String.format(Locale.US, "% d", subTotal.size), w4)).append(", ")
+							.append(padLeft(String.format(Locale.US, "% d", subTotal.count), w4)).append(", ")
 							.append(padLeft(String.format(Locale.US, "% d", subTotal.bytes / 1024), w5)).append(", ")
-							.append(padLeft(String.format(Locale.US, "% d", subTotal.count), w6));
+							.append(padLeft(String.format(Locale.US, "% d", subTotal.calls), w6));
 
 					List<SubStatByAPI> detail = rows.getOrDefault(api, Collections.emptyMap()).getOrDefault(subApi, Collections.emptyList());
 					detail.sort((a, b) -> Long.compare(b.time, a.time));
@@ -346,9 +344,9 @@ public class BinaryMapIndexReaderStats {
 						sb.append(padRight("", w1)).append(", ")
 								.append(padRight(st.mapName == null ? "" : st.mapName, w2)).append(", ")
 								.append(padLeft(String.format(Locale.US, "%.2f", st.time / 1e9), w3)).append(", ")
-								.append(padLeft(String.format(Locale.US, "% d", st.size), w4)).append(", ")
+								.append(padLeft(String.format(Locale.US, "% d", st.count), w4)).append(", ")
 								.append(padLeft(String.format(Locale.US, "% d", st.bytes / 1024), w5)).append(", ")
-								.append(padLeft(String.format(Locale.US, "% d", st.count), w6));
+								.append(padLeft(String.format(Locale.US, "% d", st.calls), w6));
 					}
 				}
 			}

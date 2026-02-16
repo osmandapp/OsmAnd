@@ -336,8 +336,6 @@ public class BinaryMapPoiReaderAdapter {
 				// here offsets are sorted by distance
 				offsets = readPoiNameIndex(matcher.getCollator(), query, req, region, nameIndexCoordinates);
 				codedIS.popLimit(oldLimit);
-				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
-						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER:
 				length = readInt();
@@ -358,7 +356,7 @@ public class BinaryMapPoiReaderAdapter {
 				req.poiTypeFilter = filter;
 				codedIS.popLimit(oldLimit);
 				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
-						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_REFERENCES, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_GROUPS_BBOXES, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
 				// also offsets can be randomly skipped by limit
@@ -422,6 +420,7 @@ public class BinaryMapPoiReaderAdapter {
 		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
 		long offset = 0;
 		while (true) {
+			final long subStart = req.beginSubSearchStats(), bytes = codedIS.getBytesCounter();
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
@@ -440,6 +439,9 @@ public class BinaryMapPoiReaderAdapter {
 				}
 				map.readIndexedStringTable(instance, queries, "", listOffsets, charsList);
 				codedIS.popLimit(oldLimit);
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_INDEX,
+						map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			}
 			case OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER: {
@@ -456,6 +458,9 @@ public class BinaryMapPoiReaderAdapter {
 							codedIS.popLimit(oldLim);
 							if (req.isCancelled()) {
 								codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+								req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+										BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_REFERENCES,
+										map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 								return offsets;
 							}
 						}
@@ -480,6 +485,9 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_REFERENCES,
+						map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				return offsets;
 			}
 			default:
