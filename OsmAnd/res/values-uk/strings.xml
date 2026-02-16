@@ -6008,4 +6008,7 @@
     <string name="map_2d">2D</string>
     <string name="map_3d">3D</string>
     <string name="astro_solar_system">Сонячна система</string>
+    <string name="performance">Продуктивність</string>
+    <string name="level_of_details">Рівень деталізації</string>
+    <string name="view_distance">Відстань перегляду</string>
 </resources>

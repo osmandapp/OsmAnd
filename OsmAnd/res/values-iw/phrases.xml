@@ -756,7 +756,7 @@
     <string name="poi_cuisine_noodle">אטריות</string>
     <string name="poi_cuisine_donut">דונאט</string>
     <string name="poi_cuisine_ramen">ראמן</string>
-    <string name="poi_cuisine_crepe">קרפ</string>
+    <string name="poi_cuisine_crepe">קרפ;קרפים</string>
     <string name="poi_cuisine_breakfast">ארוחת בוקר</string>
     <string name="poi_cuisine_beef_bowl">גיודון</string>
     <string name="poi_cuisine_steak">סטייק</string>

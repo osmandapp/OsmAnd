@@ -5819,4 +5819,16 @@
     <string name="pin_folder">Fillteán bioráin</string>
     <string name="favorite_search_empty_state_description">Coigeartaigh do chuardach nó do scagairí le feiceáil an gcabhraíonn sé sin</string>
     <string name="favorites_empty_folder_description">Níl aon phointí sa fhillteán seo go fóill.</string>
+    <string name="building_3d_day_color_content_desc">Dath téama lá foirgneamh 3T</string>
+    <string name="building_3d_night_color_content_desc">Dath téama oíche foirgneamh 3T</string>
+    <string name="building_3d_low_details_content_desc">Foirgnimh 3T le sonraí ísle</string>
+    <string name="building_3d_high_details_content_desc">Foirgnimh 3T arda</string>
+    <string name="building_3d_near_distance_content_desc">Fad foirgneamh 3T in aice láimhe</string>
+    <string name="building_3d_far_distance_content_desc">Fad foirgneamh 3T i bhfad i gcéin</string>
+    <string name="free_custom_color_description">Saincheap foirgnimh 3T le haon dath. Foirfe chun téama léarscáile a mheaitseáil nó codarsnacht a fheabhsú.</string>
+    <string name="buildings_3d_use_map_style_color_description">Úsáid dath réamhshocraithe stíl léarscáile (%s).</string>
+    <string name="buildings_3d_visibility_description">Coigeartaigh teimhneacht struchtúr 3T ar an léarscáil.</string>
+    <string name="level_of_details">Leibhéal mionsonraí</string>
+    <string name="performance">Feidhmíocht</string>
+    <string name="view_distance">Fad radhairc</string>
 </resources>
