@@ -19,7 +19,6 @@ import java.util.Locale;
  */
 public class OpeningHoursParserTest {
 
-
 	/**
 	 * test if the calculated opening hours are what you expect
 	 *
@@ -41,16 +40,17 @@ public class OpeningHoursParserTest {
 	/**
 	 * test if the calculated opening hours are what you expect
 	 *
-	 * @param time        the time to test in the format "dd.MM.yyyy HH:mm"
-	 * @param hours       the OpeningHours object
-	 * @param expected    the expected string in format:
-	 *                         "Open from HH:mm"     - open in 5 hours
-	 *                         "Will open at HH:mm"  - open in 2 hours
-	 *                         "Open till HH:mm"     - close in 5 hours
-	 *                         "Will close at HH:mm" - close in 2 hours
-	 *                         "Will open on HH:mm (Mo,Tu,We,Th,Fr,Sa,Su)" - open in >5 hours
-	 *                         "Will open tomorrow at HH:mm" - open in >5 hours tomorrow
-	 *                         "Open 24/7"           - open 24/7
+	 * @param time     the time to test in the format "dd.MM.yyyy HH:mm"
+	 * @param hours    the OpeningHours object
+	 * @param expected the expected string in format:
+	 *                 "Open from HH:mm" - open in 5 hours
+	 *                 "Will open at HH:mm" - open in 2 hours
+	 *                 "Open till HH:mm" - close in 5 hours
+	 *                 "Will close at HH:mm" - close in 2 hours
+	 *                 "Will open on HH:mm (Mo,Tu,We,Th,Fr,Sa,Su)" - open in >5
+	 *                 hours
+	 *                 "Will open tomorrow at HH:mm" - open in >5 hours tomorrow
+	 *                 "Open 24/7" - open 24/7
 	 */
 	private void testInfo(String time, OpeningHours hours, String expected) throws ParseException {
 		testInfo(time, hours, expected, OpeningHours.ALL_SEQUENCES);
@@ -59,16 +59,18 @@ public class OpeningHoursParserTest {
 	/**
 	 * test if the calculated opening hours are what you expect
 	 *
-	 * @param time        the time to test in the format "dd.MM.yyyy HH:mm"
-	 * @param hours       the OpeningHours object
-	 * @param expected    the expected string in format:
-	 *                         "Open from HH:mm"     - open in 5 hours
-	 *                         "Will open at HH:mm"  - open in 2 hours
-	 *                         "Open till HH:mm"     - close in 5 hours
-	 *                         "Will close at HH:mm" - close in 2 hours
-	 *                         "Will open on HH:mm (Mo,Tu,We,Th,Fr,Sa,Su)" - open in >5 hours
-	 *                         "Will open tomorrow at HH:mm" - open in >5 hours tomorrow
-	 *                         "Open 24/7"           - open 24/7
+	 * @param time          the time to test in the format "dd.MM.yyyy HH:mm"
+	 * @param hours         the OpeningHours object
+	 * @param expected      the expected string in format:
+	 *                      "Open from HH:mm" - open in 5 hours
+	 *                      "Will open at HH:mm" - open in 2 hours
+	 *                      "Open till HH:mm" - close in 5 hours
+	 *                      "Will close at HH:mm" - close in 2 hours
+	 *                      "Will open on HH:mm (Mo,Tu,We,Th,Fr,Sa,Su)" - open in >5
+	 *                      hours
+	 *                      "Will open tomorrow at HH:mm" - open in >5 hours
+	 *                      tomorrow
+	 *                      "Open 24/7" - open 24/7
 	 * @param sequenceIndex sequence index of rules separated by ||
 	 */
 	private void testInfo(String time, OpeningHours hours, String expected, int sequenceIndex) throws ParseException {
@@ -96,6 +98,28 @@ public class OpeningHoursParserTest {
 		Assert.assertTrue(fmt, isCorrect);
 	}
 
+	/**
+	 * test if the calculated short opening hours are what you expect
+	 *
+	 * @param time     the time to test in the format "dd.MM.yyyy HH:mm"
+	 * @param hours    the OpeningHours object
+	 * @param expected the expected string
+	 */
+	private void testShortInfo(String time, OpeningHours hours, String expected) throws ParseException {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.US).parse(time));
+
+		OpeningHours.Info info = hours.getCombinedInfo(cal);
+		String description = info.getShortInfo();
+		boolean result = expected.equalsIgnoreCase(description.replace("\u202F", " "));
+
+		String fmt = String.format("  %sok: Expected %s (%s): %s (rule %s)\n",
+				(!result ? "NOT " : ""), time, expected, description,
+				hours.getCurrentRuleTime(cal, OpeningHours.ALL_SEQUENCES));
+		System.out.println(fmt);
+		Assert.assertTrue(fmt, result);
+	}
+
 	@Test
 	public void testOpeningHours() throws ParseException {
 		// 0. not properly supported
@@ -103,14 +127,26 @@ public class OpeningHoursParserTest {
 
 		OpeningHoursParser.initLocalStrings(Locale.UK);
 		OpeningHoursParser.setTwelveHourFormattingEnabled(false, Locale.UK);
-		OpeningHours hours = parseOpenedHours("Mo-Fr 11:00-22:00; Sa,Su,PH 12:00-22:00; 2022 jul 31-2022 Aug 31 off \"Betriebsferien\"");
+		// Initialize short strings for testing
+		OpeningHoursParser.setAdditionalString("is_open_24_7_short", "24/7");
+		OpeningHoursParser.setAdditionalString("will_open_at_short", "");
+		OpeningHoursParser.setAdditionalString("open_from_short", "");
+		OpeningHoursParser.setAdditionalString("will_close_at_short", "Until");
+		OpeningHoursParser.setAdditionalString("open_till_short", "Till");
+		OpeningHoursParser.setAdditionalString("will_open_tomorrow_at_short", "Tomorrow");
+		OpeningHoursParser.setAdditionalString("will_open_on_short", "");
+
+		OpeningHours hours = parseOpenedHours(
+				"Mo-Fr 11:00-22:00; Sa,Su,PH 12:00-22:00; 2022 jul 31-2022 Aug 31 off \"Betriebsferien\"");
 		System.out.println(hours);
 		testOpened("25.08.2022 11:30", hours, false);
 		testOpened("31.08.2022 21:59", hours, false);
 		testOpened("01.09.2022 11:00", hours, true); // Thursday
-		testInfo("25.08.2022 11:30", hours, "Will open on 11:00 Thu."); // (2022 jul 31-2022 Aug 31 off "Betriebsferien")
+		testInfo("25.08.2022 11:30", hours, "Will open on 11:00 Thu."); // (2022 jul 31-2022 Aug 31 off
+																		// "Betriebsferien")
 
-		hours = parseOpenedHours("Mo-Fr 10:00-18:30; We 10:00-14:00; Sa 10:00-13:00; Dec-Feb Mo-Fr 11:00-17:00; Dec-Feb We off; Dec-Feb Sa 11:00-13:00; Dec 24-Dec 31 off \"Inventurarbeiten\"; PH off");
+		hours = parseOpenedHours(
+				"Mo-Fr 10:00-18:30; We 10:00-14:00; Sa 10:00-13:00; Dec-Feb Mo-Fr 11:00-17:00; Dec-Feb We off; Dec-Feb Sa 11:00-13:00; Dec 24-Dec 31 off \"Inventurarbeiten\"; PH off");
 		System.out.println(hours);
 		testOpened("05.11.2022 10:30", hours, true); // saturday
 		testOpened("05.12.2022 10:30", hours, false); // Thursday
@@ -168,10 +204,10 @@ public class OpeningHoursParserTest {
 		testOpened("25.08.2022 10:00", hours, false);
 		testOpened("25.08.2023 10:00", hours, true);
 
-//		test for opening_hours not handled correctly #17521
+		// test for opening_hours not handled correctly #17521
 		hours = parseOpenedHours("11:00-14:00,17:00-22:00; We off; Fr,Sa 11:00-14:00,17:00-00:00");
 		System.out.println(hours);
-		testOpened("28.06.2023 12:00", hours, false); // We 
+		testOpened("28.06.2023 12:00", hours, false); // We
 
 		hours = parseOpenedHours("Mo 09:00-12:00; We,Sa 13:30-17:00, Apr 01-Oct 31 We,Sa 17:00-18:30; PH off");
 		System.out.println(hours);
@@ -182,7 +218,8 @@ public class OpeningHoursParserTest {
 		hours = parseOpenedHours("Mo-We 07:00-21:00, Th-Fr 07:00-21:30, PH,Sa-Su 08:00-21:00");
 		System.out.println(hours);
 		testOpened("29.08.2021 10:09", hours, true);
-		hours = parseOpenedHours("Mo-Fr 08:00-12:30, Mo-We 12:30-16:30 \"Sur rendez-vous\", Fr 12:30-15:30 \"Sur rendez-vous\"");
+		hours = parseOpenedHours(
+				"Mo-Fr 08:00-12:30, Mo-We 12:30-16:30 \"Sur rendez-vous\", Fr 12:30-15:30 \"Sur rendez-vous\"");
 		System.out.println(hours);
 		testInfo("13.10.2019 18:00", hours, "Will open tomorrow at 08:00");
 
@@ -220,7 +257,8 @@ public class OpeningHoursParserTest {
 		testOpened("15.03.2020 15:00", hours, false);
 		testOpened("15.04.2020 15:00", hours, false);
 
-		hours = parseOpenedHours("2019 Jul 23 05:00-24:00; 2019 Jul 24-2019 Jul 26 00:00-24:00; 2019 Jul 27 00:00-18:00");
+		hours = parseOpenedHours(
+				"2019 Jul 23 05:00-24:00; 2019 Jul 24-2019 Jul 26 00:00-24:00; 2019 Jul 27 00:00-18:00");
 		System.out.println(hours);
 		testOpened("23.07.2018 15:00", hours, false);
 		testOpened("23.07.2019 15:00", hours, true);
@@ -348,7 +386,7 @@ public class OpeningHoursParserTest {
 		System.out.println(hours);
 		testOpened("09.08.2012 11:00", hours, true);
 		testOpened("09.08.2012 16:00", hours, false);
-		//hours = parseOpenedHours("mo-fr 07:00-19:00; sa 12:00-18:00");
+		// hours = parseOpenedHours("mo-fr 07:00-19:00; sa 12:00-18:00");
 
 		String string = "Mo-Fr 11:30-15:00, 17:30-23:00; Sa, Su, PH 11:30-23:00";
 		hours = parseOpenedHours(string);
@@ -633,12 +671,49 @@ public class OpeningHoursParserTest {
 
 		testAmPm();
 		testComma();
+		testShortInfo();
 	}
-	
+
+	private void testShortInfo() throws ParseException {
+		OpeningHoursParser.setTwelveHourFormattingEnabled(false, Locale.US);
+		// Initialize short strings for testing (ensure they are set if not already)
+		OpeningHoursParser.setAdditionalString("is_open_24_7_short", "24/7");
+		OpeningHoursParser.setAdditionalString("will_open_at_short", "");
+		OpeningHoursParser.setAdditionalString("open_from_short", "");
+		OpeningHoursParser.setAdditionalString("will_close_at_short", "Until");
+		OpeningHoursParser.setAdditionalString("open_till_short", "Till");
+		OpeningHoursParser.setAdditionalString("will_open_tomorrow_at_short", "Tomorrow");
+		OpeningHoursParser.setAdditionalString("will_open_on_short", "");
+
+		OpeningHours hours = parseOpenedHours("Mo-Fr 09:00-18:00; Sa 10:00-14:00");
+		System.out.println("Testing short info for: " + hours);
+
+		// Open now, closes later today
+		testShortInfo("15.01.2018 10:00", hours, "Till 18:00"); // Mon
+		testShortInfo("20.01.2018 11:00", hours, "Till 14:00"); // Sat
+
+		// Closed now, opens later today
+		testShortInfo("15.01.2018 08:00", hours, "09:00"); // Mon 08:00 -> 09:00
+
+		// Closing soon (handled same as open)
+		testShortInfo("15.01.2018 17:30", hours, "Until 18:00");
+
+		// Closed, opens tomorrow
+		testShortInfo("15.01.2018 19:00", hours, "Tomorrow 09:00"); // Mon 19:00 -> Tue 09:00
+
+		// Closed, opens later than tomorrow
+		testShortInfo("20.01.2018 15:00", hours, "09:00 Mon"); // Sat 15:00 -> Mon 09:00
+
+		// 24/7
+		hours = parseOpenedHours("24/7");
+		testShortInfo("15.01.2018 12:00", hours, "24/7");
+	}
+
 	private void testComma() throws ParseException {
 		OpeningHoursParser.setTwelveHourFormattingEnabled(true, Locale.US);
 
-		OpeningHours hours = parseOpenedHours("Mo-Fr 09:00-13:00,Tu 14:00-18:00, Th 14:00-17:00; We \"Nach Vereinbarung\"; Sa,Su,PH closed");
+		OpeningHours hours = parseOpenedHours(
+				"Mo-Fr 09:00-13:00,Tu 14:00-18:00, Th 14:00-17:00; We \"Nach Vereinbarung\"; Sa,Su,PH closed");
 		System.out.println(hours);
 		testOpened("24.03.2025 10:00", hours, true); // Mo
 		testOpened("24.03.2025 13:30", hours, false);
@@ -652,7 +727,6 @@ public class OpeningHoursParserTest {
 		testInfo("25.03.2025 17:50", hours, "Will close at 6:00 PM");
 		testInfo("25.03.2025 18:50", hours, "Will open on 9:00 AM Thu."); // not ok
 	}
-
 
 	private void testAmPm() throws ParseException {
 		OpeningHoursParser.setTwelveHourFormattingEnabled(true, Locale.US);

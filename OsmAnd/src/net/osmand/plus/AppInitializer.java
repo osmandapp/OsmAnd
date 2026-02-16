@@ -163,7 +163,7 @@ public class AppInitializer implements IProgress {
 		return routingConfigInitialized;
 	}
 
-	@SuppressLint({"CommitPrefEdits", "ApplySharedPref"})
+	@SuppressLint({ "CommitPrefEdits", "ApplySharedPref" })
 	public void initVariables() {
 		if (initSettings) {
 			return;
@@ -211,7 +211,7 @@ public class AppInitializer implements IProgress {
 	public boolean checkAppVersionChanged() {
 		initVariables();
 		boolean showRecentChangesDialog = !isFirstTime() && isAppVersionChanged();
-//		showRecentChangesDialog = true;
+		// showRecentChangesDialog = true;
 		if (showRecentChangesDialog && !activityChangesShowed) {
 			activityChangesShowed = true;
 			return true;
@@ -227,7 +227,7 @@ public class AppInitializer implements IProgress {
 				app.getSettings().isInternetConnectionAvailable()) {
 			app.getDownloadThread().runReloadIndexFiles();
 		} else if (Version.isDeveloperVersion(app)) {
-//			app.getDownloadThread().runReloadIndexFiles();
+			// app.getDownloadThread().runReloadIndexFiles();
 		}
 	}
 
@@ -238,7 +238,8 @@ public class AppInitializer implements IProgress {
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !isFirstTime()) {
 				if (writeFileSize) {
-					activity.getPreferences(Context.MODE_PRIVATE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
+					activity.getPreferences(Context.MODE_PRIVATE).edit().putLong(EXCEPTION_FILE_SIZE, file.length())
+							.commit();
 				}
 				return true;
 			}
@@ -354,7 +355,8 @@ public class AppInitializer implements IProgress {
 		app.routeLayersHelper = startupInit(new RouteLayersHelper(app), RouteLayersHelper.class);
 		app.model3dHelper = startupInit(new Model3dHelper(app), Model3dHelper.class);
 		app.trackSortModesHelper = startupInit(new TrackSortModesHelper(app), TrackSortModesHelper.class);
-		app.explorePlacesProvider = startupInit(new ExplorePlacesOnlineProvider(app), ExplorePlacesOnlineProvider.class);
+		app.explorePlacesProvider = startupInit(new ExplorePlacesOnlineProvider(app),
+				ExplorePlacesOnlineProvider.class);
 		app.helpArticlesHelper = startupInit(new HelpArticlesHelper(app), HelpArticlesHelper.class);
 		app.clickableWayHelper = startupInit(new ClickableWayHelper(app), ClickableWayHelper.class);
 		app.autoBackupHelper = startupInit(new AutoBackupHelper(app), AutoBackupHelper.class);
@@ -371,6 +373,15 @@ public class AppInitializer implements IProgress {
 		OpeningHoursParser.setAdditionalString("open_till", app.getString(R.string.open_till));
 		OpeningHoursParser.setAdditionalString("will_open_tomorrow_at", app.getString(R.string.will_open_tomorrow_at));
 		OpeningHoursParser.setAdditionalString("will_open_on", app.getString(R.string.will_open_on));
+
+		OpeningHoursParser.setAdditionalString("is_open_24_7_short", app.getString(R.string.is_open_24_7_short));
+		OpeningHoursParser.setAdditionalString("will_open_at_short", app.getString(R.string.will_open_at_short));
+		OpeningHoursParser.setAdditionalString("open_from_short", app.getString(R.string.open_from_short));
+		OpeningHoursParser.setAdditionalString("will_close_at_short", app.getString(R.string.will_close_at_short));
+		OpeningHoursParser.setAdditionalString("open_till_short", app.getString(R.string.open_till_short));
+		OpeningHoursParser.setAdditionalString("will_open_tomorrow_at_short",
+				app.getString(R.string.will_open_tomorrow_at_short));
+		OpeningHoursParser.setAdditionalString("will_open_on_short", app.getString(R.string.will_open_on_short));
 	}
 
 	private void updateRegionVars() {
@@ -402,7 +413,6 @@ public class AppInitializer implements IProgress {
 		});
 		app.regions.setLocale(app.getLanguage(), app.getLocaleHelper().getCountry());
 	}
-
 
 	private <T> T startupInit(T object, Class<T> class1) {
 		long t = System.currentTimeMillis();
@@ -437,8 +447,10 @@ public class AppInitializer implements IProgress {
 							if (f.isFile() && f.getName().endsWith(IndexConstants.ROUTING_FILE_EXT) && f.canRead()) {
 								try {
 									String fileName = f.getName();
-									RoutingConfiguration.Builder builder = new RoutingConfiguration.Builder(defaultAttributes);
-									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), fileName, builder);
+									RoutingConfiguration.Builder builder = new RoutingConfiguration.Builder(
+											defaultAttributes);
+									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), fileName,
+											builder);
 
 									customConfigs.put(fileName, builder);
 								} catch (XmlPullParserException | IOException e) {
@@ -478,12 +490,11 @@ public class AppInitializer implements IProgress {
 		});
 	}
 
-
 	public synchronized void initVoiceDataInDifferentThread(@NonNull Context context,
-	                                                        @NonNull ApplicationMode applicationMode,
-	                                                        @NonNull String voiceProvider,
-	                                                        @Nullable Runnable onFinishInitialization,
-	                                                        boolean showProgress) {
+			@NonNull ApplicationMode applicationMode,
+			@NonNull String voiceProvider,
+			@Nullable Runnable onFinishInitialization,
+			boolean showProgress) {
 		String progressTitle = app.getString(R.string.loading_data);
 		String progressMessage = app.getString(R.string.voice_data_initializing);
 		ProgressDialog progressDialog = showProgress && context instanceof Activity
@@ -567,6 +578,7 @@ public class AppInitializer implements IProgress {
 			}
 		}
 	}
+
 	private void checkLiveUpdatesAlerts() {
 		OsmandSettings settings = app.getSettings();
 		if (InAppPurchaseUtils.isLiveUpdatesAvailable(app) && settings.IS_LIVE_UPDATES_ON.get()) {
@@ -600,7 +612,8 @@ public class AppInitializer implements IProgress {
 			if (System.currentTimeMillis() - timeUpdated >= 1000 * 60 * 30) {
 				startTask(app.getString(R.string.saving_gpx_tracks), -1);
 				try {
-					warnings.addAll(app.savingTrackHelper.saveDataToGpx(app.getAppCustomization().getTracksDir()).getWarnings());
+					warnings.addAll(app.savingTrackHelper.saveDataToGpx(app.getAppCustomization().getTracksDir())
+							.getWarnings());
 				} catch (RuntimeException e) {
 					warnings.add(e.getMessage());
 				}
@@ -657,7 +670,8 @@ public class AppInitializer implements IProgress {
 				try {
 					settings.OPENGL_RENDER_FAILED.set(settings.OPENGL_RENDER_FAILED.get() + 1);
 					NativeCoreContext.init(app);
-					settings.USE_OPENGL_RENDER.setDefaultValue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && NativeCore.is64Bit());
+					settings.USE_OPENGL_RENDER
+							.setDefaultValue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && NativeCore.is64Bit());
 					settings.OPENGL_RENDER_FAILED.set(0);
 				} catch (Throwable throwable) {
 					LOG.error("NativeCoreContext", throwable);
@@ -738,24 +752,23 @@ public class AppInitializer implements IProgress {
 					item.setShouldReplace(true);
 				}
 				app.getFileSettingsHelper().importSettings(file, items, "", 1, new ImportListener() {
-							@Override
-							public void onImportFinished(boolean succeed, boolean needRestart,
-														 @NonNull List<SettingsItem> importedItems) {
-								if (!succeed) {
-									LOG.error("Import bundled settings failed for " + file.getName());
-								}
-								LOG.info("Import bundled settings done for " + file.getName() + " in " + (System.currentTimeMillis() - start) + " ms");
-								semaphore.release();
-							}
+					@Override
+					public void onImportFinished(boolean succeed, boolean needRestart,
+							@NonNull List<SettingsItem> importedItems) {
+						if (!succeed) {
+							LOG.error("Import bundled settings failed for " + file.getName());
 						}
-				);
+						LOG.info("Import bundled settings done for " + file.getName() + " in "
+								+ (System.currentTimeMillis() - start) + " ms");
+						semaphore.release();
+					}
+				});
 			} else {
 				LOG.error("Error importing bundled settings file: " + file.getName() + " succeed=" + succeed
 						+ " items=" + items.size() + " empty=" + empty);
 				semaphore.release();
 			}
-		}
-		);
+		});
 
 		try {
 			boolean acquired = semaphore.tryAcquire(timeoutSec, TimeUnit.SECONDS);
@@ -824,18 +837,15 @@ public class AppInitializer implements IProgress {
 		return taskName;
 	}
 
-
 	@Override
 	public boolean isIndeterminate() {
 		return true;
 	}
 
-
 	@Override
 	public boolean isInterrupted() {
 		return false;
 	}
-
 
 	private boolean applicationBgInitializing;
 
@@ -868,7 +878,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	public void addOnProgressListener(@NonNull AppInitEvents trackedEvent,
-	                                  @NonNull OnResultCallback<AppInitializer> callback) {
+			@NonNull OnResultCallback<AppInitializer> callback) {
 		addListener(new AppInitializeListener() {
 			@Override
 			public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {

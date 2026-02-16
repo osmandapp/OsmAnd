@@ -13,6 +13,14 @@
 
 	<string name="stars_articles">Stars articles</string>
 	<string name="delete_groups_confirmation">Delete groups?</string>
+
+    <string name="is_open_24_7_short">24/7</string>
+    <string name="will_open_at_short"></string>
+    <string name="open_from_short"></string>
+    <string name="will_close_at_short">Until</string>
+    <string name="open_till_short">Till</string>
+    <string name="will_open_tomorrow_at_short">Tomorrow</string>
+    <string name="will_open_on_short"></string>
 	<string name="add_to_track">Add to track</string>
   <string name="unpin_folder">Unpin folder</string>
   <string name="pin_folder">Pin folder</string>

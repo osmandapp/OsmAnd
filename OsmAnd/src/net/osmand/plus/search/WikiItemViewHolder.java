@@ -98,7 +98,7 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 				if (rs != null && rs.getInfo() != null) {
 					int colorOpen = R.color.text_color_positive;
 					int colorClosed = R.color.text_color_negative;
-					SpannableString openHours = MenuController.getSpannableOpeningHours(
+					SpannableString openHours = MenuController.getSpannableOpeningHoursShort(
 							rs.getInfo(),
 							ContextCompat.getColor(app, colorOpen),
 							ContextCompat.getColor(app, colorClosed));
@@ -108,7 +108,8 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 					TextView timeText = timeLayout.findViewById(R.id.time);
 					ImageView timeIcon = timeLayout.findViewById(R.id.time_icon);
 					timeText.setText(openHours);
-					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_opening_hour_16, colorId));
+					timeIcon.setImageDrawable(
+							app.getUIUtilities().getIcon(R.drawable.ic_action_opening_hour_16, colorId));
 				} else {
 					timeLayout.setVisibility(View.GONE);
 				}

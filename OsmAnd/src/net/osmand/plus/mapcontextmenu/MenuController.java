@@ -188,10 +188,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public static MenuController getMenuController(@NonNull MapActivity mapActivity,
-	                                               @NonNull LatLon latLon,
-	                                               @NonNull PointDescription pointDescription,
-	                                               @Nullable Object object,
-	                                               @NonNull MenuType menuType) {
+			@NonNull LatLon latLon,
+			@NonNull PointDescription pointDescription,
+			@Nullable Object object,
+			@NonNull MenuType menuType) {
 		MenuController menuController = null;
 		if (object != null) {
 			if (object instanceof Amenity) {
@@ -221,25 +221,30 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			} else if (object instanceof MapMarker) {
 				menuController = new MapMarkerMenuController(mapActivity, pointDescription, (MapMarker) object);
 			} else if (object instanceof TransportStopRoute) {
-				menuController = new TransportRouteController(mapActivity, pointDescription, (TransportStopRoute) object);
+				menuController = new TransportRouteController(mapActivity, pointDescription,
+						(TransportStopRoute) object);
 			} else if (object instanceof TransportStop) {
 				menuController = new TransportStopController(mapActivity, pointDescription, (TransportStop) object);
 			} else if (object instanceof AidlMapPointWrapper) {
-				menuController = new AMapPointMenuController(mapActivity, pointDescription, (AidlMapPointWrapper) object);
+				menuController = new AMapPointMenuController(mapActivity, pointDescription,
+						(AidlMapPointWrapper) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isMyLocation()) {
 					menuController = new MyLocationMenuController(mapActivity, pointDescription);
 				}
 			} else if (object instanceof AvoidRoadInfo) {
-				menuController = new ImpassibleRoadsMenuController(mapActivity, pointDescription, (AvoidRoadInfo) object);
+				menuController = new ImpassibleRoadsMenuController(mapActivity, pointDescription,
+						(AvoidRoadInfo) object);
 			} else if (object instanceof RenderedObject) {
-				menuController = new RenderedObjectMenuController(mapActivity, pointDescription, (RenderedObject) object);
+				menuController = new RenderedObjectMenuController(mapActivity, pointDescription,
+						(RenderedObject) object);
 			} else if (object instanceof MapillaryImage) {
 				menuController = new MapillaryMenuController(mapActivity, pointDescription, (MapillaryImage) object);
 			} else if (object instanceof AisObject) {
 				menuController = new AisObjectMenuController(mapActivity, pointDescription, (AisObject) object);
 			} else if (object instanceof SelectedGpxPoint) {
-				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, (SelectedGpxPoint) object);
+				menuController = new SelectedGpxMenuController(mapActivity, pointDescription,
+						(SelectedGpxPoint) object);
 			} else if (object instanceof ClickableWay) {
 				SelectedGpxPoint point = ((ClickableWay) object).getSelectedGpxPoint();
 				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, point);
@@ -249,14 +254,16 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				if (detailsObject instanceof PlaceDetailsObject placeDetailsObject) {
 					WptPt wptPt = placeDetailsObject.getWptPt();
 					if (wptPt != null) {
-						menuController = WptPtMenuController.getInstance(mapActivity, pointDescription, wptPt, placeDetailsObject);
+						menuController = WptPtMenuController.getInstance(mapActivity, pointDescription, wptPt,
+								placeDetailsObject);
 					}
 					FavouritePoint point = placeDetailsObject.getFavouritePoint();
 					if (point != null) {
 						if (pointDescription.isParking() || SpecialPointType.PARKING == point.getSpecialPointType()) {
 							menuController = new ParkingPositionMenuController(mapActivity, pointDescription, point);
 						} else {
-							menuController = new FavouritePointMenuController(mapActivity, pointDescription, point, detailsObject.getSyntheticAmenity());
+							menuController = new FavouritePointMenuController(mapActivity, pointDescription, point,
+									detailsObject.getSyntheticAmenity());
 						}
 					}
 				}
@@ -307,8 +314,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return true;
 	}
 
-	public void addPlainMenuItem(int iconId, String buttonText, String text, String textPrefix, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
-		builder.addPlainMenuItem(iconId, buttonText, text,textPrefix, needLinks, isUrl, onClickListener);
+	public void addPlainMenuItem(int iconId, String buttonText, String text, String textPrefix, boolean needLinks,
+			boolean isUrl, OnClickListener onClickListener) {
+		builder.addPlainMenuItem(iconId, buttonText, text, textPrefix, needLinks, isUrl, onClickListener);
 	}
 
 	public void clearPlainMenuItems() {
@@ -510,6 +518,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	public boolean needStreetName() {
 		return !displayDistanceDirection();
 	}
+
 	public boolean needAsyncAmenityName() {
 		return false;
 	}
@@ -652,8 +661,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public static SpannableString getSpannableOpeningHours(List<OpeningHours.Info> openingHoursInfo,
-	                                                       int colorOpen,
-	                                                       int colorClosed) {
+			int colorOpen,
+			int colorClosed) {
 		StringBuilder sb = new StringBuilder();
 		int[] pos = new int[openingHoursInfo.size()];
 		for (int i = 0; i < openingHoursInfo.size(); i++) {
@@ -662,6 +671,31 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				sb.append("\n");
 			}
 			sb.append(info.getInfo());
+			pos[i] = sb.length();
+		}
+		SpannableString infoStr = new SpannableString(sb.toString());
+		int k = 0;
+		for (int i = 0; i < openingHoursInfo.size(); i++) {
+			OpeningHours.Info info = openingHoursInfo.get(i);
+			boolean opened = info.isFallback() ? openingHoursInfo.get(i - 1).isOpened() : info.isOpened();
+			int color = opened ? colorOpen : colorClosed;
+			infoStr.setSpan(new ForegroundColorSpan(color), k, pos[i], 0);
+			k = pos[i];
+		}
+		return infoStr;
+	}
+
+	public static SpannableString getSpannableOpeningHoursShort(List<OpeningHours.Info> openingHoursInfo,
+			int colorOpen,
+			int colorClosed) {
+		StringBuilder sb = new StringBuilder();
+		int[] pos = new int[openingHoursInfo.size()];
+		for (int i = 0; i < openingHoursInfo.size(); i++) {
+			OpeningHours.Info info = openingHoursInfo.get(i);
+			if (sb.length() > 0) {
+				sb.append("\n");
+			}
+			sb.append(info.getShortInfo());
 			pos[i] = sb.length();
 		}
 		SpannableString infoStr = new SpannableString(sb.toString());
@@ -726,7 +760,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && downloadMapDataObject != null) {
 			if (indexItem == null) {
-				List<IndexItem> indexItems = new LinkedList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
+				List<IndexItem> indexItems = new LinkedList<>(
+						downloadThread.getIndexes().getIndexItems(downloadRegion));
 				for (IndexItem item : indexItems) {
 					if (item.getType() == DownloadActivityType.NORMAL_FILE) {
 						indexItem = item;
@@ -742,8 +777,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			leftDownloadButtonController.visible = !downloaded;
 			leftDownloadButtonController.startIconId = R.drawable.ic_action_import;
 
-			boolean internetConnectionAvailable =
-					mapActivity.getSettings().isInternetConnectionAvailable();
+			boolean internetConnectionAvailable = mapActivity.getSettings().isInternetConnectionAvailable();
 
 			boolean isDownloading = indexItem != null && downloadThread.isDownloading(indexItem);
 			if (isDownloading) {
@@ -758,7 +792,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				double mb = indexItem.getArchiveSizeMB();
 				String v;
 				if (titleProgressController.progress != -1) {
-					v = mapActivity.getString(R.string.value_downloaded_of_max, mb * titleProgressController.progress / 100, mb);
+					v = mapActivity.getString(R.string.value_downloaded_of_max,
+							mb * titleProgressController.progress / 100, mb);
 				} else {
 					v = mapActivity.getString(R.string.file_size_in_mb, mb);
 				}
@@ -876,8 +911,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 						}
 					}
 				};
-				leftDownloadButtonController.caption =
-						downloadRegion != null ? downloadRegion.getLocaleName() : mapActivity.getString(R.string.shared_string_download);
+				leftDownloadButtonController.caption = downloadRegion != null ? downloadRegion.getLocaleName()
+						: mapActivity.getString(R.string.shared_string_download);
 				leftDownloadButtonController.startIconId = R.drawable.ic_action_import;
 
 				titleProgressController = new TitleProgressController() {
