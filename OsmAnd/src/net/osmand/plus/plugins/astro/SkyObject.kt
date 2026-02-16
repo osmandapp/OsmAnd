@@ -8,7 +8,11 @@ import io.github.cosinekitty.astronomy.Body
 open class SkyObject(
 	open val id: String,
 	open val hip: Int, // Hipparcos catalog ID
+
+	open var catalog: Catalog? = null,
+	open var catalogId: String? = null,
 	open val wid: String, // Wikipedia ID
+	open val centerWId: String? = null, // Wikipedia ID of parent object like Sun for Earth
 	open val type: Type,
 	open val body: Body?, // Null for custom stars not in Body enum
 	open val name: String,
@@ -16,6 +20,10 @@ open class SkyObject(
 	open var dec: Double, // Declination
 	open val magnitude: Float,
 	open val color: Int,
+
+	open var radius: Double? = null,
+	open var distance: Double? = null,
+	open var mass: Double? = null,
 
 	// Localized name from DB
 	open var localizedName: String? = null,

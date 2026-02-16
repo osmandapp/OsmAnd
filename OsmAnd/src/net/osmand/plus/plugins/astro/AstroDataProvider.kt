@@ -14,6 +14,7 @@ import org.json.JSONArray
 abstract class AstroDataProvider {
 
 	private var cachedSkyObjects:List<SkyObject>?=null
+	private var cachedCatalogs:List<Catalog>?=null
 	private var cachedConstellations:List<Constellation>?=null
 
 	companion object {
@@ -22,12 +23,26 @@ abstract class AstroDataProvider {
 
 	abstract fun getSkyObjectsImpl(ctx: Context): List<SkyObject>
 
+	abstract fun getCatalogsImpl(ctx: Context): List<Catalog>
+
+	@Synchronized
+	fun getCatalogs(ctx: Context): List<Catalog> {
+		cachedCatalogs?.let { return it }
+
+		val catalogs = getCatalogsImpl(ctx)
+		cachedCatalogs = catalogs
+		return catalogs
+	}
+
 	@Synchronized
 	fun getSkyObjects(ctx: Context): List<SkyObject> {
+		if (cachedCatalogs == null) {
+			cachedCatalogs = getCatalogsImpl(ctx)
+		}
+
 		cachedSkyObjects?.let { return it }
 
 		val objects = getSkyObjectsImpl(ctx)
-
 		cachedSkyObjects = objects
 		return objects
 	}

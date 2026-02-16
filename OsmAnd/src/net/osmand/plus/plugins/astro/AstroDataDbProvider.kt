@@ -3,6 +3,8 @@ package net.osmand.plus.plugins.astro
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import androidx.core.database.getDoubleOrNull
+import androidx.core.database.getStringOrNull
 import io.github.cosinekitty.astronomy.Body
 import net.osmand.IndexConstants
 import net.osmand.PlatformUtil
@@ -29,11 +31,24 @@ class AstroDataDbProvider : AstroDataProvider() {
 		private const val COL_LINES = "lines"
 		private const val COL_MAG = "mag"
 		private const val COL_HIP = "hip"
+		private const val COL_RADIUS = "radius"
+		private const val COL_DISTANCE = "distance"
+		private const val COL_MASS = "mass"
+		private const val COL_CENTER_WID = "centerwid"
 
 		private const val TABLE_NAMES = "Names"
 		private const val COL_NAME_WID = "wikidata"
 		private const val COL_NAME_NAME = "name"
 		private const val COL_NAME_TYPE = "type"
+
+		private const val TABLE_CATALOGS = "Catalogs"
+		private const val COL_CATALOGS_WID = "catalogWid"
+		private const val COL_CATALOGS_NAME = "catalogName"
+
+		private const val TABLE_CATALOG_IDS = "CatalogIds"
+		private const val COL_CATALOG_IDS_WID = "catalogWid"
+		private const val COL_CATALOG_IDS_CATALOG_ID = "catalogId"
+		private const val COL_CATALOG_IDS_WIKIDATA_ID = "wikidataid"
 	}
 
 	private class DbHelper(app: OsmandApplication) : SQLiteOpenHelper(
@@ -78,6 +93,10 @@ class AstroDataDbProvider : AstroDataProvider() {
 				val idxDec = c.getColumnIndex(COL_DEC)
 				val idxMag = c.getColumnIndex(COL_MAG)
 				val idxHip = c.getColumnIndex(COL_HIP)
+				val idxRadius = c.getColumnIndex(COL_RADIUS)
+				val idxDistance = c.getColumnIndex(COL_DISTANCE)
+				val idxMass = c.getColumnIndex(COL_MASS)
+				val idxCenterWId = c.getColumnIndex(COL_CENTER_WID)
 
 				while (c.moveToNext()) {
 					val typeStr = c.getString(idxType)
@@ -91,6 +110,10 @@ class AstroDataDbProvider : AstroDataProvider() {
 					val mag =
 						if (c.isNull(idxMag)) 25f else c.getFloat(idxMag) // High mag if null (invisible)
 					val hip = if (c.isNull(idxHip)) -1 else c.getInt(idxHip)
+					val radius = c.getDoubleOrNull(idxRadius)
+					val distance = c.getDoubleOrNull(idxDistance)
+					val mass = c.getDoubleOrNull(idxMass)
+					val centerWId = c.getStringOrNull(idxCenterWId)
 
 					var body: Body? = null
 					var color: Int
@@ -125,13 +148,18 @@ class AstroDataDbProvider : AstroDataProvider() {
 							ra = ra,
 							dec = dec,
 							magnitude = mag,
-							color = color
+							color = color,
+							radius = radius,
+							distance = distance,
+							mass = mass,
+							centerWId = centerWId
 						)
 					)
 				}
 			}
 
 			loadLocalizedNames(ctx, db, objects)
+			loadCatalogs(ctx, db, objects)
 
 			db.close()
 		} catch (e: Exception) {
@@ -142,6 +170,33 @@ class AstroDataDbProvider : AstroDataProvider() {
 			getPlanets(objects, ctx)
 		}
 		return objects
+	}
+
+	override fun getCatalogsImpl(ctx: Context): List<Catalog> {
+		val catalogs = mutableListOf<Catalog>()
+
+		val dbHelper = DbHelper(ctx.applicationContext as OsmandApplication)
+		try {
+			val db = dbHelper.readableDatabase
+			// Read catalogs
+			val cursor = db.query(TABLE_CATALOGS, null, null, null, null, null, null)
+			cursor.use { c ->
+				val idxWId = c.getColumnIndex(COL_CATALOGS_WID)
+				val idxName = c.getColumnIndex(COL_CATALOGS_NAME)
+
+				while (c.moveToNext()) {
+					val wId = c.getString(idxWId)
+					val name = c.getString(idxName)
+					catalogs.add(Catalog(wId, name))
+				}
+			}
+
+			db.close()
+		} catch (e: Exception) {
+			LOG.error("Error reading catalogs from DB", e)
+		}
+
+		return catalogs
 	}
 
 	override fun getConstellationsImpl(ctx: Context): List<Constellation> {
@@ -176,7 +231,8 @@ class AstroDataDbProvider : AstroDataProvider() {
 				}
 			}
 
-			loadLocalizedConstellationNames(ctx, db, constellations)
+			loadLocalizedNames(ctx, db, constellations)
+			loadCatalogs(ctx, db, constellations)
 
 			db.close()
 		} catch (e: Exception) {
@@ -187,10 +243,6 @@ class AstroDataDbProvider : AstroDataProvider() {
 
 	private fun loadLocalizedNames(ctx: Context, db: SQLiteDatabase, objects: List<SkyObject>) {
 		loadLocalizedNamesImpl(ctx, db, objects, { it.wid }, { obj, name -> obj.localizedName = name })
-	}
-
-	private fun loadLocalizedConstellationNames(ctx: Context, db: SQLiteDatabase, constellations: List<Constellation>) {
-		loadLocalizedNamesImpl(ctx, db, constellations, { it.wid }, { c, name -> c.localizedName = name })
 	}
 
 	private fun <T> loadLocalizedNamesImpl(
@@ -261,6 +313,66 @@ class AstroDataDbProvider : AstroDataProvider() {
 			}
 		} catch (e: Exception) {
 			LOG.error("Error loading localized names", e)
+		}
+	}
+
+	private fun loadCatalogs(ctx: Context, db: SQLiteDatabase, objects: List<SkyObject>) {
+		loadCatalogsImpl(ctx, db, objects, { it.wid }, { obj, catalogId, catalog -> obj.catalogId = catalogId; obj.catalog = catalog })
+	}
+
+	private fun <T> loadCatalogsImpl(
+		ctx: Context,
+		db: SQLiteDatabase,
+		items: List<T>,
+		getWid: (T) -> String,
+		setCatalog: (T, String, Catalog) -> Unit
+	) {
+		try {
+			val wikidataIds = items.mapNotNull { getWid(it).takeIf { wid -> wid.isNotEmpty() } }.distinct()
+			if (wikidataIds.isEmpty()) return
+
+			val catalogsMap = mutableMapOf<String, Catalog>()
+			val catalogs = getCatalogs(ctx)
+			catalogs.forEach { catalogsMap[it.wid] = it }
+
+			val catalogIdsMap = mutableMapOf<String, Pair<String, Catalog>>()
+
+			wikidataIds.chunked(900).forEach { chunk ->
+				val placeholders = chunk.joinToString(",") { "?" }
+				val cursor = db.query(
+					TABLE_CATALOG_IDS,
+					null,
+					"$COL_CATALOG_IDS_WIKIDATA_ID IN ($placeholders)",
+					chunk.toTypedArray(),
+					null, null, null
+				)
+				cursor.use { c ->
+					val idxWikiId = c.getColumnIndex(COL_CATALOG_IDS_WIKIDATA_ID)
+					val idxCatalogId = c.getColumnIndex(COL_CATALOG_IDS_CATALOG_ID)
+					val idxCatalogWikiId = c.getColumnIndex(COL_CATALOG_IDS_WID)
+
+					while (c.moveToNext()) {
+						val wikiId = c.getString(idxWikiId)
+						val catalogId = c.getString(idxCatalogId)
+						val catalogWikiId = c.getString(idxCatalogWikiId)
+
+						val catalog = catalogsMap[catalogWikiId]
+						if (catalog != null) catalogIdsMap[wikiId] = catalogId to catalog
+					}
+				}
+			}
+
+			items.forEach { item ->
+				val wid = getWid(item)
+				if (wid.isNotEmpty()) {
+					val catalogHolder = catalogIdsMap[wid]
+					if (catalogHolder != null) {
+						setCatalog(item, catalogHolder.first ,catalogHolder.second)
+					}
+				}
+			}
+		} catch (e: Exception) {
+			LOG.error("Error fetching catalogs", e)
 		}
 	}
 
