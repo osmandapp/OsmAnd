@@ -61,7 +61,11 @@ class ChartSection(
 
 			val steps = newState.stepData
 			val points = mutableListOf<GradientPoint>()
-			steps.forEach { points.add(it.point) }
+			steps.forEach { step ->
+				if (!step.point.value.isNaN()) {
+					points.add(step.point)
+				}
+			}
 			val colorPalette = points.toColorPalette()
 			chart.data = ChartUtils.buildGradientChart<LineData>(
 				app,
@@ -73,7 +77,7 @@ class ChartSection(
 
 			val selectedStep = newState.selectedItem
 			val selectedIndex = steps.indexOf(selectedStep)
-			if (selectedIndex != -1) {
+			if (selectedIndex != -1 && !steps[selectedIndex].point.value.isNaN()) {
 				chart.highlightValue(selectedIndex.toFloat(), 0, false)
 			} else {
 				chart.highlightValue(null)

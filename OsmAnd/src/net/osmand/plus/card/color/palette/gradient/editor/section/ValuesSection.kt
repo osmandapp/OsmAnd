@@ -5,7 +5,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -21,7 +20,9 @@ class ValuesSection(
 	nightMode: Boolean,
 	private val onValueChanged: (String) -> Unit
 ): UiSection(app, nightMode) {
-	private val container: View = rootView.findViewById(R.id.text_field)
+	private val container: View = rootView.findViewById(R.id.text_field_container)
+	private val textField: View = rootView.findViewById(R.id.text_field)
+	private val bottomSpace: View = rootView.findViewById(R.id.text_field_bottom_margin)
 	private val caption: TextInputLayout = rootView.findViewById(R.id.text_caption)
 	private val editText: TextInputEditText = rootView.findViewById(R.id.text_edit)
 	private val unitText: TextView = rootView.findViewById(R.id.unit)
@@ -51,7 +52,7 @@ class ValuesSection(
 
 	private fun setInteractable(enabled: Boolean) {
 		editText.isEnabled = enabled
-		container.alpha = if (enabled) 1.0f else 0.5f
+		textField.alpha = if (enabled) 1.0f else 0.5f
 	}
 
 	override fun update(oldUiState: EditorUiState?, newUiState: EditorUiState) {
@@ -66,13 +67,13 @@ class ValuesSection(
 		if (oldState?.interactable != newState.interactable) {
 			setInteractable(newState.interactable)
 		}
-		if (oldState?.showTextField != newState.showTextField) {
-			AndroidUiHelper.updateVisibility(container, newState.showTextField)
-		}
 		if (oldState?.summary != newState.summary) {
 			summaryText.text = newState.summary
 		}
-		AndroidUiHelper.updateVisibility(summaryText, !newState.summary.isNullOrEmpty())
+		val showSummary = !newState.summary.isNullOrEmpty()
+		AndroidUiHelper.updateVisibility(summaryText, showSummary)
+		AndroidUiHelper.updateVisibility(container, newState.showTextField)
+		AndroidUiHelper.updateVisibility(bottomSpace, newState.showTextField || !showSummary)
 		if (oldState?.error != newState.error) {
 			if (newState.error != null) {
 				caption.isErrorEnabled = true

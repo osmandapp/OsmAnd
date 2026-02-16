@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="gradient_no_data_point_summary">Color applied when data is missing or undefined.</string>
     <string name="gradient_input_value_too_low_warn">Minimum allowed value is %1$s.</string>
     <string name="gradient_input_value_too_high_warn">Maximum allowed value is %1$s.</string>
     <string name="gradient_input_value_duplicate_warn">This value already exists in the palette.</string>

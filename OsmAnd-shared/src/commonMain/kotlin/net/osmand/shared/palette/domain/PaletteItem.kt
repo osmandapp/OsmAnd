@@ -60,6 +60,7 @@ sealed interface PaletteItem {
 		override val historyIndex: Int,
 		override val lastUsedTime: Long = 0,
 		val points: List<GradientPoint>,
+		val noDataColor: Int?,
 		val properties: GradientProperties
 	) : PaletteItem {
 
@@ -68,6 +69,7 @@ sealed interface PaletteItem {
 		fun getColorPalette(): ColorPalette {
 			val palette = ColorPalette()
 			points.forEach { palette.colors.add(it.toColorValue()) }
+			palette.noDataColor = noDataColor
 			return palette
 		}
 

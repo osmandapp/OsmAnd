@@ -71,7 +71,7 @@ class ColorPalette {
 				}
 				c?.let { palette.colors.add(it) }
 			}
-			palette.sortPalette()
+			palette.normalize()
 			return palette
 		}
 
@@ -117,7 +117,7 @@ class ColorPalette {
 					palette.colors.add(colorValue)
 				}
 			}
-			palette.sortPalette()
+			palette.normalize()
 			return palette
 		}
 
@@ -163,6 +163,7 @@ class ColorPalette {
 	}
 
 	val colors = mutableListOf<ColorValue>()
+	var noDataColor: Int? = null
 
 	constructor()
 
@@ -204,12 +205,12 @@ class ColorPalette {
 
 	fun addPoint(value: Double, color: Int) {
 		colors.add(ColorValue(value, color))
-		sortPalette()
+		normalize()
 	}
 
 	fun getColorByValue(value: Double): Int {
 		if (value.isNaN()) {
-			return LIGHT_GREY
+			return noDataColor ?: LIGHT_GREY
 		}
 		for (i in 0 until colors.size - 1) {
 			val min = colors[i]
@@ -241,6 +242,11 @@ class ColorPalette {
 
 	fun writeColorPalette(): String {
 		val bld = StringBuilder()
+		val noDataColor = noDataColor
+		if (noDataColor != null) {
+			val noDataVal = ColorValue(Double.NaN, noDataColor)
+			bld.append(formatColorValue(noDataVal)).append("\n")
+		}
 		for (v in colors) {
 			bld.append(formatColorValue(v)).append("\n")
 		}
@@ -249,7 +255,22 @@ class ColorPalette {
 
 	fun isValid() = colors.size >= 2
 
-	private fun sortPalette() {
+	/**
+	 * Normalizes the palette data:
+	 * 1. Extracts "No Data" values (NaN) into [noDataColor].
+	 * 2. Sorts the remaining gradient points by value.
+	 *
+	 * Should be called after parsing or modifying colors to ensure the palette is valid for interpolation.
+	 */
+	private fun normalize() {
+		val iterator = colors.iterator()
+		while (iterator.hasNext()) {
+			val cv = iterator.next()
+			if (cv.value.isNaN()) {
+				noDataColor = cv.clr
+				iterator.remove()
+			}
+		}
 		colors.sortWith(compareBy { it.value })
 	}
 

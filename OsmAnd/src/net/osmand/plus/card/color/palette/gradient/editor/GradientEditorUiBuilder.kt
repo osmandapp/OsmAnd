@@ -4,12 +4,18 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.card.color.palette.gradient.editor.behaviour.GradientEditorBehaviour
 import net.osmand.plus.card.color.palette.gradient.editor.data.*
+import net.osmand.shared.ColorPalette
+import net.osmand.shared.palette.domain.GradientPoint
 import java.text.DecimalFormat
 
 class GradientEditorUiBuilder(
 	private val app: OsmandApplication,
 	private val behaviour: GradientEditorBehaviour
 ) {
+
+	companion object {
+		const val NO_DATA_STEP_ID = "no_data_step"
+	}
 
 	private val decimalFormat = DecimalFormat("0.#####")
 
@@ -51,17 +57,32 @@ class GradientEditorUiBuilder(
 		val selectedIndex = dataState.selectedIndex
 		val fileType = draft.fileType
 
-		// 1. Build Gradient Steps (Chips) via Behaviour
-		val stepData = points.mapIndexed { index, point ->
-			GradientStepData(
-				id = index.toString(),
-				label = behaviour.getStepLabel(point, fileType),
-				point = point
-			)
+		val noDataColor = draft.noDataColor ?: ColorPalette.LIGHT_GREY
+		val noDataPoint = GradientPoint(Float.NaN, noDataColor)
+
+		// 1. Build Gradient Steps (Chips)
+		val stepData = buildList {
+
+			// A. Add regular steps via Behaviour
+			addAll(points.mapIndexed { index, point ->
+				GradientStepData(
+					id = index.toString(),
+					label = behaviour.getStepLabel(point, fileType),
+					point = point
+				)
+			})
+
+			// B. Add "No Data" step
+			add(GradientStepData(
+				id = NO_DATA_STEP_ID,
+				label = app.getString(R.string.gpx_logging_no_data),
+				point = noDataPoint
+			))
 		}
 
+		val isNoDataSelected = selectedIndex == points.size
 		val selectedStep = stepData.getOrNull(selectedIndex)
-		val selectedPoint = points.getOrNull(selectedIndex)
+		val selectedPoint = if (isNoDataSelected) noDataPoint else points.getOrNull(selectedIndex)
 
 		val baseUnits = fileType.baseUnits
 		val displayUnits = fileType.displayUnits
@@ -69,24 +90,36 @@ class GradientEditorUiBuilder(
 		// 2. Build Value State via Behaviour
 		// We inject the validation error from the dataState here
 		val valueState = if (selectedPoint != null) {
-			val mandatory = behaviour.isMandatoryPoint(selectedPoint)
-			ValueState(
-				label = if (mandatory) {
-					behaviour.getStepLabel(selectedPoint, fileType, useFullName = true)
-				} else {
-					fileType.displayUnits.getSymbol()
-				},
-				text = if (mandatory) {
-					""
-				} else {
-					val valueInDisplayUnits = displayUnits.from(selectedPoint.value.toDouble(), baseUnits)
-					decimalFormat.format(valueInDisplayUnits)
-				},
-				interactable = !mandatory,
-				showTextField = true,
-				summary = behaviour.getSummary(selectedPoint),
-				error = dataState.validationError
-			)
+			if (isNoDataSelected) {
+				ValueState(
+					label = "",
+					text = "",
+					interactable = false,
+					showTextField = false,
+					summary = app.getString(R.string.gradient_no_data_point_summary),
+					error = null
+				)
+			} else {
+				val mandatory = behaviour.isMandatoryPoint(selectedPoint)
+				ValueState(
+					label = if (mandatory) {
+						behaviour.getStepLabel(selectedPoint, fileType, useFullName = true)
+					} else {
+						fileType.displayUnits.getSymbol()
+					},
+					text = if (mandatory) {
+						""
+					} else {
+						val valueInDisplayUnits =
+							displayUnits.from(selectedPoint.value.toDouble(), baseUnits)
+						decimalFormat.format(valueInDisplayUnits)
+					},
+					interactable = !mandatory,
+					showTextField = true,
+					summary = behaviour.getSummary(selectedPoint),
+					error = dataState.validationError
+				)
+			}
 		} else {
 			ValueState(
 				label = "",
@@ -113,7 +146,7 @@ class GradientEditorUiBuilder(
 				colorInt = selectedPoint?.color ?: 0
 			),
 			removeButtonState = RemoveButtonState(
-				enabled = behaviour.isRemoveEnabled(draft, selectedIndex)
+				enabled = !isNoDataSelected && behaviour.isRemoveEnabled(draft, selectedIndex)
 			)
 		)
 	}

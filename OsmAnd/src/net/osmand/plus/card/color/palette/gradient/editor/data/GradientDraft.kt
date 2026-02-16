@@ -6,7 +6,8 @@ import net.osmand.shared.palette.domain.filetype.GradientFileType
 data class GradientDraft(
 	val originalId: String?,
 	val fileType: GradientFileType,
-	val points: List<GradientPoint>
+	val points: List<GradientPoint>,
+	val noDataColor: Int?
 ) {
 	fun withPoints(newPoints: List<GradientPoint>): GradientDraft {
 		return this.copy(points = newPoints.sortedBy { it.value })
