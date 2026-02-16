@@ -31,6 +31,9 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.PanelsLayoutMode;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -47,9 +50,11 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 
 	private static final int BORDER_WIDTH_DP = 2;
 	private static final int BORDER_RADIUS_DP = 5;
-	private static final float SIDE_PANEL_WEIGHT_RATIO = 0.45f;
+	private static final float SIDE_PANEL_WEIGHT_RATIO_WIDE = 0.45f;
+	private static final float SIDE_PANEL_WEIGHT_RATIO_COMPACT = 0.35f;
 
 	private final OsmandApplication app;
+	private final OsmandSettings settings;
 	private final UiUtilities utilities;
 
 	private final Path borderPath = new Path();
@@ -84,6 +89,7 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 	public SideWidgetsPanel(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 		app = AndroidUtils.getApp(context);
+		settings = app.getSettings();
 		utilities = app.getUIUtilities();
 		layoutRtl = AndroidUtils.isLayoutRtl(app);
 		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
@@ -311,7 +317,12 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 			int measuredHeight = viewToWrap.getMeasuredHeight();
 
 			if (screenWidth != -1) {
-				int maxAllowedWidth = (int) (screenWidth * SIDE_PANEL_WEIGHT_RATIO);
+				Context context = getContext();
+				ScreenLayoutMode screenLayoutMode = ScreenLayoutMode.getDefault(context);
+				PanelsLayoutMode panelsLayoutMode = settings.getPanelsLayoutMode(context, screenLayoutMode).get();
+
+				float ratio = panelsLayoutMode == PanelsLayoutMode.WIDE ? SIDE_PANEL_WEIGHT_RATIO_WIDE : SIDE_PANEL_WEIGHT_RATIO_COMPACT;
+				int maxAllowedWidth = (int) (screenWidth * ratio);
 
 				if (measuredWidth > maxAllowedWidth) {
 					measuredWidth = maxAllowedWidth;
