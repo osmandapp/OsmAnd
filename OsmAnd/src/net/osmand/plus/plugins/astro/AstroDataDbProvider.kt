@@ -19,6 +19,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 		private val LOG = PlatformUtil.getLog(AstroDataDbProvider::class.java)
 
 		private const val DATABASE_NAME = "stars.db"
+		private const val DATABASE_NAME_EXTENDED = "stars-articles.stardb"
 		private const val DATABASE_VERSION = 1
 
 		// Table and Columns
@@ -49,10 +50,17 @@ class AstroDataDbProvider : AstroDataProvider() {
 		private const val COL_CATALOG_IDS_WID = "catalogWid"
 		private const val COL_CATALOG_IDS_CATALOG_ID = "catalogId"
 		private const val COL_CATALOG_IDS_WIKIDATA_ID = "wikidataid"
+
+		private fun getDatabaseFilePath(app: OsmandApplication): String {
+			val astroDir = app.getAppPath(IndexConstants.ASTRO_DIR).absolutePath
+			val embeddedDbPath = astroDir + File.separator + DATABASE_NAME
+			val extendedDbPath = astroDir + File.separator + DATABASE_NAME_EXTENDED
+			return if (File(extendedDbPath).exists()) extendedDbPath else embeddedDbPath
+		}
 	}
 
 	private class DbHelper(app: OsmandApplication) : SQLiteOpenHelper(
-			app, app.getAppPath(IndexConstants.ASTRO_DIR).absolutePath + File.separator + DATABASE_NAME, null, DATABASE_VERSION) {
+			app, getDatabaseFilePath(app), null, DATABASE_VERSION) {
 
 		override fun onCreate(db: SQLiteDatabase) {
 		}
