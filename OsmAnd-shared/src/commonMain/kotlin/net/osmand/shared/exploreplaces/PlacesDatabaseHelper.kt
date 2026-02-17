@@ -25,6 +25,7 @@ class PlacesDatabaseHelper {
 		private const val DATABASE_VERSION = 2
 
 		private const val DATA_EXPIRATION_TIME = 30L * 24 * 60 * 60 * 1000 // 1 month
+		private const val EMPTY_DATA_EXPIRATION_TIME = 7L * 24 * 60 * 60 * 1000 // 7 days
 
 		private const val TABLE_PLACES = "places"
 		private const val COLUMN_ZOOM = "zoom"
@@ -162,18 +163,25 @@ class PlacesDatabaseHelper {
 		try {
 			db = openConnection(readOnly = true) ?: return true
 			val (selection, args) = getSelectionWithArgs(zoom, tileX, tileY, languages)
-			val sql = "SELECT $COLUMN_LANG, $COLUMN_TIMESTAMP FROM $TABLE_PLACES WHERE $selection"
+			val sql = "SELECT $COLUMN_LANG, $COLUMN_TIMESTAMP, length($COLUMN_DATA) as data_length FROM $TABLE_PLACES WHERE $selection"
 
 			cursor = db.rawQuery(sql, args)
 			if (cursor != null && cursor.moveToFirst()) {
 				val foundLangs = HashSet<String>()
 				val currentTime = currentTimeMillis()
 				val timestampIndex = cursor.getColumnIndex(COLUMN_TIMESTAMP)
+				val langIndex = cursor.getColumnIndex(COLUMN_LANG)
+				val dataLengthIndex = cursor.getColumnIndex("data_length")
 				do {
-					val ts = cursor.getLong(timestampIndex)
-					if ((currentTime - ts) > DATA_EXPIRATION_TIME) return true
-					val langIndex = cursor.getColumnIndex(COLUMN_LANG)
 					val lang = cursor.getString(langIndex)
+					val ts = cursor.getLong(timestampIndex)
+					val dataLen = if (cursor.isNull(dataLengthIndex)) 0 else cursor.getInt(dataLengthIndex)
+					val emptyData = dataLen <= 2 // Check for empty JSON array "[]"
+
+					val expirationTime = if (emptyData) EMPTY_DATA_EXPIRATION_TIME else DATA_EXPIRATION_TIME
+					if ((currentTime - ts) > expirationTime){
+						return true
+					}
 					foundLangs.add(lang)
 				} while (cursor.moveToNext())
 

@@ -317,26 +317,20 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 	@SuppressLint("DefaultLocale")
 	private void loadTile(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
-		double left;
-		double right;
-		double top;
-		double bottom;
-
 		TileKey tileKey = new TileKey(zoom, tileX, tileY);
 		synchronized (loadingTasks) {
 			if (loadingTasks.containsKey(tileKey)) {
 				return;
 			}
-			left = MapUtils.getLongitudeFromTile(zoom, tileX);
-			right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
-			top = MapUtils.getLatitudeFromTile(zoom, tileY);
-			bottom = MapUtils.getLatitudeFromTile(zoom, tileY + 1);
 		}
+		double left = MapUtils.getLongitudeFromTile(zoom, tileX);
+		double right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
+		double top = MapUtils.getLatitudeFromTile(zoom, tileY);
+		double bottom = MapUtils.getLatitudeFromTile(zoom, tileY + 1);
 
 		KQuadRect tileRect = new KQuadRect(left, top, right, bottom);
 		synchronized (loadingTasks) {
-			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(tileRect, zoom,
-					languages, new GetImageCardsListener() {
+			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(tileRect, zoom, languages, new GetImageCardsListener() {
 
 				@Override
 				public void onTaskStarted() {
@@ -347,8 +341,8 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 					synchronized (ExplorePlacesOnlineProvider.this) {
 						notifyListeners(isLoading());
 					}
+					Map<String, List<OsmandApiFeatureData>> map = new HashMap<>();
 					if (!Algorithms.isEmpty(result)) {
-						Map<String, List<OsmandApiFeatureData>> map = new HashMap<>();
 						for (OsmandApiFeatureData data : result) {
 							WikiDataProperties properties = data.getProperties();
 							String lang = properties.getLang();
@@ -358,8 +352,12 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 							List<OsmandApiFeatureData> list = map.computeIfAbsent(lang, k -> new ArrayList<>());
 							list.add(data);
 						}
-						dbHelper.insertPlaces(zoom, tileX, tileY, map);
 					}
+					for (String lang : languages) {
+						map.putIfAbsent(lang, Collections.emptyList());
+					}
+					dbHelper.insertPlaces(zoom, tileX, tileY, map);
+
 					synchronized (loadingTasks) {
 						loadingTasks.remove(tileKey);
 					}
