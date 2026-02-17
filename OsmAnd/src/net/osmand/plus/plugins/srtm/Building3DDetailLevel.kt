@@ -3,7 +3,7 @@ package net.osmand.plus.plugins.srtm
 import net.osmand.plus.R
 
 enum class Building3DDetailLevel (val labelResId: Int, val value: Boolean) {
-	LOW(R.string.shared_string_off, false),
+	LOW(R.string.rendering_value_low_name, false),
 	HIGH(R.string.rendering_value_high_name, true);
 
 	companion object {
