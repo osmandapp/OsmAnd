@@ -2842,7 +2842,7 @@
     <string name="poi_cuisine_noodle">aziaj nudeloj</string>
     <string name="poi_cuisine_donut">kuketoj</string>
     <string name="poi_cuisine_ramen">rameno</string>
-    <string name="poi_cuisine_crepe">patkukoj maldikaj (crêpe)</string>
+    <string name="poi_cuisine_crepe">patkukoj maldikaj (crêpe);krespoj</string>
     <string name="poi_cuisine_breakfast">matenmanĝoj</string>
     <string name="poi_cuisine_beef_bowl">gyūdon (pelvo de bovaĵo)</string>
     <string name="poi_cuisine_steak">viandtranĉaĵoj (stekoj)</string>

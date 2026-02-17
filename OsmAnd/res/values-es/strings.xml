@@ -5914,4 +5914,12 @@
     <string name="astro_solar_system">Sistema solar</string>
     <string name="backup_deleted_all_data">Datos eliminados.</string>
     <string name="backup_deleting_all_data">Eliminando datos…</string>
+    <string name="favorite_search_empty_state_description">Ajusta tu búsqueda o filtros para ver si eso ayuda</string>
+    <string name="astro_directions">Indicaciones</string>
+    <string name="free_custom_color_description">Personaliza los edificios 3D con cualquier color. Perfecto para combinar con un tema de mapa o mejorar el contraste.</string>
+    <string name="buildings_3d_use_map_style_color_description">Usa el color por defecto del estilo de mapa (%s).</string>
+    <string name="buildings_3d_visibility_description">Ajusta la opacidad de las estructuras 3D en el mapa.</string>
+    <string name="level_of_details">Nivel de detalle</string>
+    <string name="performance">Rendimiento</string>
+    <string name="view_distance">Ver distancia</string>
 </resources>

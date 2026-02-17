@@ -2015,7 +2015,7 @@
     <string name="quick_action_take_photo_note_descr">在畫面中央新增照片註記的按鈕。</string>
     <string name="quick_action_add_osm_bug_descr">在畫面中央新增 OSM 註記的按鈕。</string>
     <string name="quick_action_add_poi_descr">在畫面中央新增 POI 的按鈕。</string>
-    <string name="navigate_point_olc">開放地址識別碼（OLC）</string>
+    <string name="navigate_point_olc">開放位置編號（OLC）</string>
     <string name="navigate_point_olc_info_invalid">無效的 OLC
 \n</string>
     <string name="quick_action_navigation_voice_descr">停用或啟用導航時的語音導引開關。</string>
@@ -4322,7 +4322,7 @@
     <string name="ant_go_to_store">到商店</string>
     <string name="ant_read_data">讀取資料</string>
     <string name="ant_write_to_gpx">將資料寫入至軌跡</string>
-    <string name="external_sensor_widgets">ANT+ 小工具</string>
+    <string name="external_sensor_widgets">外部感測器</string>
     <string name="map_widget_ant_bicycle_power">自行車功率</string>
     <string name="ant_missing_dependency_descr">未偵測到必要的服務「%1$s」。 \n您需要安裝或更新 ANT+ 外掛程式服務。 \n是否要前往 Play 商店進行安裝？</string>
     <string name="ant_heart_rate_write_gpx_desc">在軌跡中包含心率</string>
@@ -4678,7 +4678,7 @@
     <string name="delete_track_folder_dialog_message">這將會刪除資料夾「%1$s」與其包含的全部 %2$s 個軌跡。</string>
     <string name="delete_folder">刪除資料夾</string>
     <string name="rssi_widget_desc">顯示您外部裝置的 RSSI 層級。</string>
-    <string name="map_widget_rssi">RSSI</string>
+    <string name="map_widget_rssi">Rssi</string>
     <string name="tracks_empty_folder_description">此資料夾尚無任何軌跡。</string>
     <string name="tracks_empty_folder">空資料夾</string>
     <string name="track_not_recorded">未記錄</string>
@@ -5349,7 +5349,7 @@
     <string name="obd_how_to_connect">如何連線：</string>
     <string name="connect_obd_instructions_step2">開啟您的車輛引擎</string>
     <string name="connect_obd_instructions_step3">在您的裝置上啟用藍牙</string>
-    <string name="learn_more_about_obd_sensors">深入了解 OBD 感測器。</string>
+    <string name="learn_more_about_obd_sensors">深入了解感測器。</string>
     <string name="screen_is_unlocked">觸控螢幕已經解鎖。</string>
     <string name="screen_is_locked_by_action_button">觸控螢幕已經鎖定，點一下底下來解鎖。</string>
     <string name="connect_obd_instructions_step1">將掃描器連線至您車輛的 OBD-II 連接埠。</string>
@@ -5384,7 +5384,7 @@
     <string name="liter">公升</string>
     <string name="percent_hour">%/小時</string>
     <string name="l_100km">公升/100公里</string>
-    <string name="simulate_obd">模擬 OBD 資料</string>
+    <string name="simulate_obd">模擬 obd 資料</string>
     <string name="kpa_unit">千帕</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">顯示根據計算得出的車輛燃料消耗率（%/小時）</string>
     <string name="obd_fuel_pressure">燃料壓力</string>
@@ -5825,4 +5825,17 @@
     <string name="pin_folder">釘選資料夾</string>
     <string name="favorite_search_empty_state_description">請調整您的搜尋或篩選條件，看看是否有所幫助</string>
     <string name="favorites_empty_folder_description">此資料夾尚無任何點。</string>
+    <string name="stars_articles">README：- 偏好的翻譯方式是經由 https://hosted.weblate.org/engage/osmand/ 來進行 - 如果您直接編輯 strings.xml 檔案的話，請確認：1. 不要產生重覆字串 (檢查名稱確認沒有重覆) 2. 每個撇號 (引號) 前面加反斜線。3. 如果您更多英文字串檔案，請在檔案開頭加上新字串，這會讓版本發佈前的定期審核更為容易。- 而為了用詞以及一致性，請注意 https://docs.osmand.net/docs/technical/contributions/translating-osmand 的相關規定，謝謝 - Hardy</string>
+    <string name="building_3d_day_color_content_desc">3D 建築白天主題顏色</string>
+    <string name="building_3d_night_color_content_desc">3D 建築夜晚主題顏色</string>
+    <string name="building_3d_low_details_content_desc">3D 建築低細節</string>
+    <string name="building_3d_high_details_content_desc">3D 建築高</string>
+    <string name="building_3d_near_distance_content_desc">3D 建築距離近</string>
+    <string name="building_3d_far_distance_content_desc">3D 建築距離遠</string>
+    <string name="free_custom_color_description">以任何顏色自訂 3D 建築，適合匹配地圖主題或是增加對比。</string>
+    <string name="buildings_3d_use_map_style_color_description">使用地圖樣式 (%s) 的預設顏色。</string>
+    <string name="buildings_3d_visibility_description">調整地圖上 3D 結構的透明度。</string>
+    <string name="level_of_details">細節的層次</string>
+    <string name="performance">效能</string>
+    <string name="view_distance">檢視距離</string>
 </resources>
