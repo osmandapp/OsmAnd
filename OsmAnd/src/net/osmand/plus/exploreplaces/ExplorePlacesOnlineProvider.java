@@ -171,8 +171,8 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		float maxTileX = (float) MapUtils.getTileNumberX(zoom, rect.right);
 		float minTileY = (float) MapUtils.getTileNumberY(zoom, rect.top);
 		float maxTileY = (float) MapUtils.getTileNumberY(zoom, rect.bottom);
-		boolean loadAll = zoom == MAX_LEVEL_ZOOM_CACHE &&
-				Math.abs(maxTileX - minTileX) <= LOAD_ALL_TINY_RECT || Math.abs(maxTileY - minTileY) <= LOAD_ALL_TINY_RECT;
+		boolean loadAll = zoom == MAX_LEVEL_ZOOM_CACHE
+				&& (Math.abs(maxTileX - minTileX) <= LOAD_ALL_TINY_RECT || Math.abs(maxTileY - minTileY) <= LOAD_ALL_TINY_RECT);
 
 		// Fetch data for all tiles within the bounds
 		List<Amenity> filteredAmenities = new ArrayList<>();
@@ -263,7 +263,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		amenity.setDescription(properties.getWikiDesc());
 
 		String labelsJson = properties.getLabelsJson();
-		if (!Algorithms.isEmpty(labelsJson)) {
+		if (!Algorithms.isEmpty(labelsJson) && labelsJson.length() > 2) {
 			try {
 				MapObject.parseNamesJSON(new JSONObject(labelsJson), amenity);
 			} catch (JSONException e) {
