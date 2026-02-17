@@ -2612,7 +2612,7 @@ req.setSearchStat(stat);
 		final boolean[] matched = new boolean[qn];
 		final int[] matchedIdx = new int[qn];
 
-		// Immutable view of original queries so we can restore fast after recursion
+		// Immutable view of original queries, can restore fast after recursion
 		final String[] originalQueries = queries.toArray(new String[qn]);
 
 		readIndexedStringTableWorker(instance, queries, prefix, listOffsets, matchedCharacters, matched, matchedIdx, originalQueries);
@@ -2634,20 +2634,18 @@ req.setSearchStat(stat);
 					return;
 
 				case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER: {
-					// Concatenate; later, you can micro-opt by avoiding permanent strings
 					String segment = codedIS.readString();
 					fullKey = (prefix.length() > 0) ? (prefix + segment) : segment;
 
-					// Compute matched[] and compact matchedIdx list ONCE per key
-					matchedCount = matchIndexByNameKeyCollect(instance, queries, listOffsets,
-														  matchedCharacters, fullKey, matched, matchedIdx);
+					// Compute matched[] and compact matchedIdx list only ONCE per key
+					matchedCount = matchIndexByNameKeyCollect(instance, queries, listOffsets, matchedCharacters, fullKey, matched, matchedIdx);
 					shouldReadSubtable = matchedCount > 0;
 					break;
 				}
 
 				case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER: {
-					int val = (int) readInt(); // FIXME if 64-bit values are introduced
-					// Only touch matched indices; avoid scanning all queries
+					int val = (int) readInt(); // FIXME for 64 bit support
+					// Only touch matched indices, not scanning all queries
 					for (int k = 0; k < matchedCount; k++) {
 						int qi = matchedIdx[k];
 						listOffsets.get(qi).add(val);
@@ -2656,13 +2654,12 @@ req.setSearchStat(stat);
 				}
 
 				case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER: {
-					int len = codedIS.readRawVarint32();
-					int oldLim = codedIS.pushLimit(len);
+					final long len = codedIS.readRawVarint32();
+					final long oldLim = codedIS.pushLimitLong(len);
 					if (shouldReadSubtable && fullKey != null) {
-						// In-place filter: set non-matching queries to null; remember what we changed.
-						// We restore from originalQueries[] after recursion.
-						// Using a small stack-like list avoids allocating a full copy each time.
-						TIntArrayList changed = new TIntArrayList();
+						// In-place filter: set non-matching queries to null; remember what was changed.
+						// Restore from originalQueries[] after recursion (exception-safe).
+						final TIntArrayList changed = new TIntArrayList();
 						for (int i = 0; i < qn; i++) {
 							// If this query did not match at this key, null it for the subtree
 							if (!matched[i] && queries.get(i) != null) {
@@ -2672,15 +2669,18 @@ req.setSearchStat(stat);
 						}
 
 						// Recurse with updated prefix = fullKey
-						readIndexedStringTableWorker(instance, queries, fullKey, listOffsets, matchedCharacters,
-								matched, matchedIdx, originalQueries);
-
-						// Restore queries to original (constant-time per changed index)
-						for (int p = changed.size() - 1; p >= 0; p--) {
-							int i = changed.get(p);
-							queries.set(i, originalQueries[i]);
+						try {
+							readIndexedStringTableWorker(instance, queries, fullKey, listOffsets, matchedCharacters,
+									matched, matchedIdx, originalQueries);
+						} finally {
+							// Restore queries to original (constant-time per changed index)
+							for (int p = changed.size() - 1; p >= 0; p--) {
+								final int i = changed.get(p);
+								queries.set(i, originalQueries[i]);
+							}
 						}
 					} else {
+						// Skip bytes if we don't need to traverse this subtable
 						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					}
 					codedIS.popLimit(oldLim);
@@ -2694,12 +2694,12 @@ req.setSearchStat(stat);
 		}
 	}
 
-	// Replacement for matchIndexByNameKey that also builds a compact matched index list ---
 	private int matchIndexByNameKeyCollect(Collator instance, List<String> queries, List<TIntArrayList> listOffsets, TIntArrayList matchedCharacters,
 			String key, boolean[] matched, int[] matchedIdx) {
 		int count = 0;
 		final int qn = queries.size();
 
+		// Alao build a compact matched index list:
 		for (int i = 0; i < qn; i++) {
 			matched[i] = false;
 
@@ -2710,10 +2710,6 @@ req.setSearchStat(stat);
 			final int charMatches = matchedCharacters.get(i);
 
 			boolean m = false;
-
-			// Hook for a future ASCII fast path if you decide to add it:
-			// if (fastAsciiStartsWith(key, query) || fastAsciiStartsWith(query, key)) { ... }
-			// else fallback to Collator...
 
 			// (1) query is prefix of key
 			if (CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
