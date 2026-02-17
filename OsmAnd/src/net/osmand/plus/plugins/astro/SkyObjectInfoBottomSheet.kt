@@ -30,6 +30,7 @@ class SkyObjectInfoFragment : Fragment() {
 	private lateinit var sheetTitle: TextView
 	private lateinit var sheetCoords: TextView
 	private lateinit var sheetPinButton: MaterialCheckBox
+	private lateinit var sheetDirectionButton: MaterialCheckBox
 	private lateinit var sheetFavoriteButton: MaterialCheckBox
 	private lateinit var sheetMagnitude: TextView
 	private lateinit var sheetDistance: TextView
@@ -48,6 +49,7 @@ class SkyObjectInfoFragment : Fragment() {
 		sheetTitle = view.findViewById(R.id.sheet_title)
 		sheetCoords = view.findViewById(R.id.sheet_coords)
 		sheetPinButton = view.findViewById(R.id.sheet_pin_button)
+		sheetDirectionButton = view.findViewById(R.id.sheet_direction_button)
 		sheetFavoriteButton = view.findViewById(R.id.sheet_favorite_button)
 		sheetMagnitude = view.findViewById(R.id.sheet_magnitude)
 		sheetDistance = view.findViewById(R.id.sheet_distance)
@@ -97,6 +99,15 @@ class SkyObjectInfoFragment : Fragment() {
 			val swSettings = PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
 			if (isChecked) swSettings.addCelestialPath(obj.id) else swSettings.removeCelestialPath(obj.id)
 			parent.starView.setObjectPinned(obj, isChecked, true)
+		}
+
+		sheetDirectionButton.setOnCheckedChangeListener(null)
+		sheetDirectionButton.isChecked = obj.showDirection
+		sheetDirectionButton.setOnCheckedChangeListener { _, isChecked ->
+			obj.showDirection = isChecked
+			val swSettings = PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
+			if (isChecked) swSettings.addDirection(obj.id) else swSettings.removeDirection(obj.id)
+			parent.starView.invalidate()
 		}
 
 		sheetFavoriteButton.setOnCheckedChangeListener(null)

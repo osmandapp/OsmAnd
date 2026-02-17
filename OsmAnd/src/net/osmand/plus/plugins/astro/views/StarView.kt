@@ -4,6 +4,8 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrix
@@ -12,6 +14,9 @@ import android.graphics.DashPathEffect
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.PointF
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.AttributeSet
@@ -32,6 +37,7 @@ import io.github.cosinekitty.astronomy.Vector
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.rotationEclEqd
+import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.Constellation
 import net.osmand.plus.plugins.astro.SkyObject
 import java.util.Calendar
@@ -146,6 +152,11 @@ class StarView @JvmOverloads constructor(
 	private val reusableCal = Calendar.getInstance()
 	private val arrowPath = Path()
 	private val occupiedRects = mutableListOf<RectF>()
+
+	private var arrowShadowBmp: Bitmap? = null
+	private var arrowToDestinationBmp: Bitmap? = null
+	private var arrowLightBmp: Bitmap? = null
+	private val directionArrowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { isFilterBitmap = true }
 
 	// --- View State ---
 	private var azimuthCenter = 180.0
@@ -892,6 +903,34 @@ class StarView @JvmOverloads constructor(
 				canvas.drawCircle(tempPoint.x, tempPoint.y, 25f, paint)
 			}
 		}
+
+		if (showDirections) {
+			val cx = width / 2f
+			val cy = height / 2f
+			val density = resources.displayMetrics.density
+			val distToShow = 80f * density
+
+			// Initialize bitmaps lazily
+			if (arrowShadowBmp == null) {
+				arrowShadowBmp = BitmapFactory.decodeResource(resources, R.drawable.map_marker_direction_arrow_p3_shadow)
+				arrowToDestinationBmp = BitmapFactory.decodeResource(resources, R.drawable.map_marker_direction_arrow_p2_color)
+				arrowLightBmp = BitmapFactory.decodeResource(resources, R.drawable.map_marker_direction_arrow_p1_light)
+			}
+
+			skyObjects.forEach { obj ->
+				if (obj.showDirection && isObjectVisibleInSettings(obj)) {
+					if (!skyToScreen(obj.azimuth, obj.altitude, tempPoint) || !isPointInView(tempPoint)) {
+						drawDirectionArrow(canvas, obj, cx, cy, density, distToShow)
+					}
+				}
+			}
+		}
+	}
+
+	private fun isPointInView(point: PointF): Boolean {
+		val rect = Rect()
+		getDrawingRect(rect)
+		return rect.contains(point.x.toInt(), point.y.toInt())
 	}
 
 	private fun drawCelestialPath(canvas: Canvas, obj: SkyObject) {
@@ -990,6 +1029,28 @@ class StarView @JvmOverloads constructor(
 			arrowPath.lineTo(-size, size * 0.6f)
 			arrowPath.close()
 			drawPath(arrowPath, arrowPaint)
+		}
+	}
+
+	private fun drawDirectionArrow(canvas: Canvas, obj: SkyObject, cx: Float, cy: Float, density: Float, distToShow: Float) {
+		if (skyToScreen(obj.azimuth, obj.altitude, tempPoint, allowOffScreen = true)) {
+			val dx = tempPoint.x - cx
+			val dy = tempPoint.y - cy
+			val rotation = Math.toDegrees(atan2(dy.toDouble(), dx.toDouble())).toFloat()
+
+			canvas.save()
+			canvas.rotate(rotation, cx, cy)
+			canvas.translate(-24 * density + distToShow, -22 * density)
+
+			arrowShadowBmp?.let { canvas.drawBitmap(it, cx, cy, directionArrowPaint) }
+
+			directionArrowPaint.colorFilter = PorterDuffColorFilter(obj.color, PorterDuff.Mode.SRC_IN)
+			arrowToDestinationBmp?.let { canvas.drawBitmap(it, cx, cy, directionArrowPaint) }
+
+			directionArrowPaint.colorFilter = null
+			arrowLightBmp?.let { canvas.drawBitmap(it, cx, cy, directionArrowPaint) }
+
+			canvas.restore()
 		}
 	}
 

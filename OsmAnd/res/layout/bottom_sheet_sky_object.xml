@@ -45,6 +45,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/sheet_direction_button"
+            style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <ImageButton
             android:id="@+id/close_button"
             android:layout_width="48dp"
