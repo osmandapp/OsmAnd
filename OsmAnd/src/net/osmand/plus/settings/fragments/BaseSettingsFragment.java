@@ -97,6 +97,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public static final String OPEN_CONFIG_ON_MAP = "openConfigOnMap";
 	public static final String MAP_CONFIG = "openMapConfigMenu";
 	public static final String SCREEN_CONFIG = "screenConfig";
+	// FK-TODO: remove
 	public static final String CONFIGURE_SETTINGS_SEARCH = "configureSettingsSearch";
 
 	protected OsmandApplication app;
@@ -112,8 +113,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	private int statusBarColor = -1;
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
-	// FK-TODO: remove configureSettingsSearch?
-	private boolean configureSettingsSearch = false;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -121,7 +120,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		settings = app.getSettings();
 		appCustomization = app.getAppCustomization();
 		Bundle args = getArguments();
-		configureSettingsSearch = args != null && args.getBoolean(CONFIGURE_SETTINGS_SEARCH, false);
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
@@ -156,12 +154,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			} else {
 				updateAllSettings();
 			}
-			if (!configureSettingsSearch) {
-				createToolbar(inflater, view);
-				setDivider(null);
-				view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
-				AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
-			}
+			createToolbar(inflater, view);
+			setDivider(null);
+			view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}
 		return view;
 	}
@@ -177,9 +173,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		if (configureSettingsSearch) {
-			return;
-		}
 		super.onViewCreated(view, savedInstanceState);
 		updateToolbar();
 	}
@@ -218,9 +211,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (configureSettingsSearch) {
-			return;
-		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
@@ -234,9 +224,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (configureSettingsSearch) {
-			return;
-		}
 		Activity activity = getActivity();
 		if (activity != null) {
 			if (!wasDrawerDisabled && activity instanceof MapActivity) {
@@ -252,9 +239,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		if (configureSettingsSearch) {
-			return;
-		}
 		if (getStatusBarColorId() != -1) {
 			Activity activity = getActivity();
 			if (activity instanceof MapActivity) {
@@ -393,9 +377,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			recreate();
 		} else {
 			getPreferenceManager().setPreferenceDataStore(settings.getDataStore(appMode));
-			if (!configureSettingsSearch) {
-				updateToolbar();
-			}
+			updateToolbar();
 			updateAllSettings();
 		}
 	}
