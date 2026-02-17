@@ -2606,88 +2606,141 @@ req.setSearchStat(stat);
 
 	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
 			TIntArrayList matchedCharacters) throws IOException {
-		boolean[] matched = new boolean[matchedCharacters.size()];
-		String key = null;
-		boolean shouldWeReadSubtable = false;
+		final int qn = queries.size();
+
+		// NEW - Reusable buffers for the whole traversal
+		final boolean[] matched = new boolean[qn];
+		final int[] matchedIdx = new int[qn];
+
+		// Immutable view of original queries so we can restore fast after recursion
+		final String[] originalQueries = queries.toArray(new String[qn]);
+
+		readIndexedStringTableWorker(instance, queries, prefix, listOffsets, matchedCharacters, matched, matchedIdx, originalQueries);
+	}
+
+	private void readIndexedStringTableWorker(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
+			TIntArrayList matchedCharacters, boolean[] matched, int[] matchedIdx, String[] originalQueries) throws IOException {
+		final int qn = queries.size();
+
+		String fullKey = null;			  // concatenated prefix + current key segment
+		int matchedCount = 0;			  // compact matched indices count
+		boolean shouldReadSubtable = false;
+
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
-			case 0:
-				return;
-			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
-				key = codedIS.readString();
-				if (prefix.length() > 0) {
-					key = prefix + key;
+				case 0:
+					return;
+
+				case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER: {
+					// Concatenate; later, you can micro-opt by avoiding permanent strings
+					String segment = codedIS.readString();
+					fullKey = (prefix.length() > 0) ? (prefix + segment) : segment;
+
+					// Compute matched[] and compact matchedIdx list ONCE per key
+					matchedCount = matchIndexByNameKeyCollect(instance, queries, listOffsets,
+														  matchedCharacters, fullKey, matched, matchedIdx);
+					shouldReadSubtable = matchedCount > 0;
+					break;
 				}
-				shouldWeReadSubtable = matchIndexByNameKey(instance, queries, listOffsets, matchedCharacters, key,
-						matched);
-				break;
-			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
-				int val = (int) readInt(); // FIXME for 64 bit support
-				for (int i = 0; i < queries.size(); i++) {
-					if (matched[i]) {
-						listOffsets.get(i).add(val);
+
+				case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER: {
+					int val = (int) readInt(); // FIXME if 64-bit values are introduced
+					// Only touch matched indices; avoid scanning all queries
+					for (int k = 0; k < matchedCount; k++) {
+						int qi = matchedIdx[k];
+						listOffsets.get(qi).add(val);
 					}
+					break;
 				}
-				break;
-			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
-				long len = codedIS.readRawVarint32();
-				long oldLim = codedIS.pushLimitLong((long) len);
-				if (shouldWeReadSubtable && key != null) {
-					List<String> subqueries = new ArrayList<>(queries);
-					// reset query so we don't search what was not matched
-					for(int i = 0; i < queries.size(); i++) {
-						if(!matched[i]) {
-							subqueries.set(i, null);
+
+				case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER: {
+					int len = codedIS.readRawVarint32();
+					int oldLim = codedIS.pushLimit(len);
+					if (shouldReadSubtable && fullKey != null) {
+						// In-place filter: set non-matching queries to null; remember what we changed.
+						// We restore from originalQueries[] after recursion.
+						// Using a small stack-like list avoids allocating a full copy each time.
+						TIntArrayList changed = new TIntArrayList();
+						for (int i = 0; i < qn; i++) {
+							// If this query did not match at this key, null it for the subtree
+							if (!matched[i] && queries.get(i) != null) {
+								changed.add(i);
+								queries.set(i, null);
+							}
 						}
+
+						// Recurse with updated prefix = fullKey
+						readIndexedStringTableWorker(instance, queries, fullKey, listOffsets, matchedCharacters,
+								matched, matchedIdx, originalQueries);
+
+						// Restore queries to original (constant-time per changed index)
+						for (int p = changed.size() - 1; p >= 0; p--) {
+							int i = changed.get(p);
+							queries.set(i, originalQueries[i]);
+						}
+					} else {
+						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					}
-					readIndexedStringTable(instance, subqueries, key, listOffsets, matchedCharacters);
-				} else {
-					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					codedIS.popLimit(oldLim);
+					break;
 				}
-				codedIS.popLimit(oldLim);
-				break;
-			default:
-				skipUnknownField(t);
-				break;
+
+				default:
+					skipUnknownField(t);
+					break;
 			}
 		}
 	}
 
-	private boolean matchIndexByNameKey(Collator instance, List<String> queries, List<TIntArrayList> listOffsets,
-			TIntArrayList matchedCharacters, String key, boolean[] matched) {
-		boolean shouldWeReadSubtable = false;
-		for (int i = 0; i < queries.size(); i++) {
-			int charMatches = matchedCharacters.get(i);
-			String query = queries.get(i);
+	// Replacement for matchIndexByNameKey that also builds a compact matched index list ---
+	private int matchIndexByNameKeyCollect(Collator instance, List<String> queries, List<TIntArrayList> listOffsets, TIntArrayList matchedCharacters,
+			String key, boolean[] matched, int[] matchedIdx) {
+		int count = 0;
+		final int qn = queries.size();
+
+		for (int i = 0; i < qn; i++) {
 			matched[i] = false;
+
+			final String query = queries.get(i);
 			if (query == null) {
 				continue;
 			}
-			
-			// check query is part of key (the best matching)
+			final int charMatches = matchedCharacters.get(i);
+
+			boolean m = false;
+
+			// Hook for a future ASCII fast path if you decide to add it:
+			// if (fastAsciiStartsWith(key, query) || fastAsciiStartsWith(query, key)) { ... }
+			// else fallback to Collator...
+
+			// (1) query is prefix of key
 			if (CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 				if (query.length() >= charMatches) {
 					if (query.length() > charMatches) {
 						matchedCharacters.set(i, query.length());
 						listOffsets.get(i).clear();
 					}
-					matched[i] = true;
+					m = true;
 				}
-				// check key is part of query
+			// (2) key is prefix of query
 			} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 				if (key.length() >= charMatches) {
 					if (key.length() > charMatches) {
 						matchedCharacters.set(i, key.length());
 						listOffsets.get(i).clear();
 					}
-					matched[i] = true;
+					m = true;
 				}
 			}
-			shouldWeReadSubtable |= matched[i];
+
+			if (m) {
+				matched[i] = true;
+				matchedIdx[count++] = i;
+			}
 		}
-		return shouldWeReadSubtable;
+		return count;
 	}
 
 	private static void testAddressSearchByName(BinaryMapIndexReader reader, SearchStat stat) throws IOException {
