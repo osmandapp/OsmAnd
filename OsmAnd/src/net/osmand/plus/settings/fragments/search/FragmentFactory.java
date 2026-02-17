@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static net.osmand.plus.settings.fragments.search.SettingsSearchConfigurer.setConfigureSettingsSearch;
-
 import android.content.Context;
 
 import androidx.fragment.app.Fragment;
@@ -31,15 +29,6 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.client.searchD
 			final Optional<PreferenceOfHostOfActivity> src,
 			final Context context,
 			final InstantiateAndInitializeFragment instantiateAndInitializeFragment) {
-		final T fragment = _instantiate(fragmentClass, src, context, instantiateAndInitializeFragment);
-		setConfigureSettingsSearch(fragment, true);
-		return fragment;
-	}
-
-	private static <T extends Fragment> T _instantiate(final FragmentClassOfActivity<T> fragmentClass,
-													   final Optional<PreferenceOfHostOfActivity> src,
-													   final Context context,
-													   final InstantiateAndInitializeFragment instantiateAndInitializeFragment) {
 		return FragmentFactory
 				.instantiateFragment(fragmentClass, src)
 				.or(() -> instantiatePreferenceFragmentUsingPreferenceFragmentHandler(fragmentClass, src, context))

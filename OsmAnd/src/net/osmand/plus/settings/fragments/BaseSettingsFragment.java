@@ -97,8 +97,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public static final String OPEN_CONFIG_ON_MAP = "openConfigOnMap";
 	public static final String MAP_CONFIG = "openMapConfigMenu";
 	public static final String SCREEN_CONFIG = "screenConfig";
-	// FK-TODO: remove
-	public static final String CONFIGURE_SETTINGS_SEARCH = "configureSettingsSearch";
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;

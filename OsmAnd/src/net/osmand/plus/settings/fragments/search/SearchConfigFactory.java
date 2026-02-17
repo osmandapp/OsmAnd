@@ -23,7 +23,6 @@ class SearchConfigFactory {
 				.withPreferencePathDisplayer(PreferencePathDisplayerFactory.createPreferencePathDisplayer(fragmentActivity))
 				.withSearchPreferenceFragmentUI(new SearchPreferenceFragmentUI(searchResultsFilter))
 				.withSearchResultsFragmentUI(new SearchResultsFragmentUI())
-				.withPrepareShow(new PrepareShow())
 				.withShowSettingsFragmentAndHighlightSetting(new ShowSettingsFragmentAndHighlightSetting(fragmentContainerViewId))
 				.build();
 	}
