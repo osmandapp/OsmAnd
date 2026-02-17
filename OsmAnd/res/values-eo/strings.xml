@@ -1196,7 +1196,7 @@
     <string name="switch_to_raster_map_to_see">Elŝutu malkonektan vektoran mapon por tiu ĉi loko per la menuo “Elŝuti mapojn”, aŭ aktivigu la kromprogramon “Enretaj mapoj”.</string>
     <string name="send_files_to_osm">Ĉu alŝuti GPX-dosierojn al OSM?</string>
     <string name="gpx_tags_txt">Etikedoj</string>
-    <string name="gpx_visibility_txt">Videbla</string>
+    <string name="gpx_visibility_txt">Videblo</string>
     <string name="shared_string_description">Priskribo</string>
     <string name="validate_gpx_upload_name_pwd">Bonvolu enmeti vian uzantnomon kaj pasvorton al OSM por alŝuti GPX-dosierojn.</string>
     <string name="default_buttons_support">Subteni</string>
@@ -5995,4 +5995,17 @@
     <string name="favorites_empty_folder_description">Tiu ĉi dosierujo ankoraŭ enhavas neniun punkton.</string>
     <string name="building_3d_day_color_content_desc">Koloro de 3-dimensiaj konstruaĵoj (taga haŭto)</string>
     <string name="building_3d_night_color_content_desc">Koloro de 3-dimensiaj konstruaĵoj (nokta haŭto)</string>
+    <string name="stars_articles">Astroj: artikoloj</string>
+    <string name="astro_directions">Direktoj al</string>
+    <string name="astro_daily_path">Tagaj spuroj</string>
+    <string name="building_3d_low_details_content_desc">3-dimensiaj konstruaĵoj: malaltaj detaloj</string>
+    <string name="building_3d_high_details_content_desc">3-dimensiaj konstruaĵoj: altaj detaloj</string>
+    <string name="building_3d_near_distance_content_desc">3-dimensiaj konstruaĵoj: malalta viddistanco</string>
+    <string name="building_3d_far_distance_content_desc">3-dimensiaj konstruaĵoj: alta viddistanco</string>
+    <string name="free_custom_color_description">Vidigu konstruaĵojn en iu ajn koloro. Uzebla eblo por konveni al elektita map-aspekto aŭ por pliigi kontraston.</string>
+    <string name="buildings_3d_use_map_style_color_description">Uzi implicitan koloron por la map-stilo %s.</string>
+    <string name="buildings_3d_visibility_description">Alĝustigi travideblon de 3-dimensiajn konstruaĵojn sur la mapo.</string>
+    <string name="level_of_details">Detalnivelo</string>
+    <string name="performance">Rendimento</string>
+    <string name="view_distance">Videbla distanco</string>
 </resources>
