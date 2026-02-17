@@ -72,7 +72,8 @@ object PaletteUtils {
 	fun createGradientColor(
 		palette: Palette.GradientCollection,
 		fileType: GradientFileType,
-		points: List<GradientPoint>
+		points: List<GradientPoint>,
+		noDataColor: Int?
 	): PaletteItem.Gradient {
 
 		val existingIds = palette.items.map { it.id }.toSet()
@@ -89,6 +90,7 @@ object PaletteUtils {
 			historyIndex = 0,
 			lastUsedTime = 0,
 			points = points,
+			noDataColor = noDataColor,
 			properties = GradientProperties(
 				fileType = fileType,
 				rangeType = fileType.rangeType

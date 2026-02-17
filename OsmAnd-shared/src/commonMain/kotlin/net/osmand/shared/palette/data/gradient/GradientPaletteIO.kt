@@ -126,6 +126,7 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 		val points = mutableListOf<GradientPoint>()
 		val comments = mutableListOf<String>()
 		val unrecognized = mutableMapOf<String, String>()
+		var noDataColor: Int? = null
 
 		try {
 			file.source().buffer().use { source ->
@@ -145,10 +146,14 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 					val colorValue = ColorPalette.parseColorValue(trimmed)
 
 					if (colorValue != null) {
-						points.add(GradientPoint(
-							value = colorValue.value.toFloat(),
-							color = colorValue.clr
-						))
+						if (colorValue.value.isNaN()) {
+							noDataColor = colorValue.clr
+						} else {
+							points.add(GradientPoint(
+								value = colorValue.value.toFloat(),
+								color = colorValue.clr
+							))
+						}
 					} else {
 						// C) Handle Unrecognized lines
 						unrecognized[trimmed] = trimmed
@@ -188,6 +193,7 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 			historyIndex = historyIndex,
 			lastUsedTime = lastUsedTime,
 			points = points,
+			noDataColor = noDataColor,
 			properties = properties
 		)
 	}
@@ -211,7 +217,14 @@ object GradientPaletteIO : PaletteIO<Palette.GradientCollection> {
 				append("\n")
 			}
 
-			// 2. Write Points
+			// 2. Write No Data Color (if present)
+			if (item.noDataColor != null) {
+				val noDataVal = ColorPalette.ColorValue(Double.NaN, item.noDataColor)
+				append(ColorPalette.formatColorValue(noDataVal))
+				append("\n")
+			}
+
+			// 3. Write Points
 			item.points.forEach { point ->
 				val cv = point.toColorValue()
 				append(ColorPalette.formatColorValue(cv))

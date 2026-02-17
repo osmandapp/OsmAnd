@@ -1,8 +1,10 @@
 package net.osmand.plus.card.color.palette.gradient.editor.section
 
+import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import com.github.mikephil.charting.charts.GradientChart
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.LineData
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
@@ -10,6 +12,7 @@ import net.osmand.plus.card.color.palette.gradient.GradientFormatter
 import net.osmand.plus.card.color.palette.gradient.editor.data.EditorUiState
 import net.osmand.plus.card.color.palette.gradient.editor.data.GradientStepData
 import net.osmand.plus.charts.ChartUtils
+import net.osmand.plus.charts.HighlightGradientXAxisRenderer
 import net.osmand.plus.palette.view.PaletteElements
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
@@ -27,15 +30,28 @@ class ChartSection(
 	private val chipsView: HorizontalChipsView = rootView.findViewById(R.id.gradient_step_chips)
 	private val activeColor = ColorUtilities.getActiveColor(app, nightMode)
 
+	private var highlightRenderer: HighlightGradientXAxisRenderer? = null
+
 	lateinit var onStepClicked: (GradientStepData) -> Unit
 	lateinit var onAddClicked: () -> Unit
 
 	init {
-		val labelColor = ColorUtilities.getPrimaryTextColor(app, nightMode)
+		val labelColor = ColorUtilities.getSecondaryTextColor(app, nightMode)
 		val axisColor = AndroidUtils.getColorFromAttr(app, R.attr.chart_x_grid_line_axis_color)
 
-		ChartUtils.setupGradientChart(app, chart, 16f, 16f, false, axisColor, labelColor)
+		ChartUtils.setupGradientChart(app, chart, 16f, 20f, false, axisColor, labelColor)
 		chart.minOffset = 0f
+
+		highlightRenderer = HighlightGradientXAxisRenderer(
+			chart,
+			chart.viewPortHandler,
+			chart.xAxis,
+			chart.getTransformer(YAxis.AxisDependency.LEFT)
+		).apply {
+			activeBackgroundColor = ColorUtilities.getActiveColor(app, nightMode)
+			activeTextColor = Color.WHITE
+		}
+		chart.setXAxisRenderer(highlightRenderer)
 
 		chipsView.setOnSelectChipListener { chip ->
 			onStepClicked(chip.tag as GradientStepData)
@@ -61,7 +77,11 @@ class ChartSection(
 
 			val steps = newState.stepData
 			val points = mutableListOf<GradientPoint>()
-			steps.forEach { points.add(it.point) }
+			steps.forEach { step ->
+				if (!step.point.value.isNaN()) {
+					points.add(step.point)
+				}
+			}
 			val colorPalette = points.toColorPalette()
 			chart.data = ChartUtils.buildGradientChart<LineData>(
 				app,
@@ -72,12 +92,12 @@ class ChartSection(
 			)
 
 			val selectedStep = newState.selectedItem
-			val selectedIndex = steps.indexOf(selectedStep)
-			if (selectedIndex != -1) {
-				chart.highlightValue(selectedIndex.toFloat(), 0, false)
+			val highlightValue = if (selectedStep != null && !selectedStep.point.value.isNaN()) {
+				selectedStep.point.value
 			} else {
-				chart.highlightValue(null)
+				null
 			}
+			highlightRenderer?.highlightedValue = highlightValue
 
 			chart.notifyDataSetChanged()
 			chart.invalidate()

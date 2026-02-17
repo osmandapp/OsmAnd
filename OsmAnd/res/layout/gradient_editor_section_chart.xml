@@ -14,6 +14,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/text_margin_small"
+        android:paddingBottom="@dimen/content_padding_half"
         android:orientation="horizontal">
 
         <net.osmand.plus.widgets.chips.HorizontalChipsView
@@ -22,7 +24,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingHorizontal="@dimen/content_padding"
-            android:paddingVertical="@dimen/content_padding_half"
             tools:itemCount="3"
             tools:listitem="@layout/custom_chip_view" />
 
@@ -31,15 +32,6 @@
             android:layout_height="@dimen/dialog_button_height"
             android:layout_gravity="center_vertical"
             android:background="?attr/divider_color_basic"/>
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical">
-
-
-
-        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/add_button_container"

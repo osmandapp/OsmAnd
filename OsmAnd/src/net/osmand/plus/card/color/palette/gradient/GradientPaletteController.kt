@@ -252,7 +252,8 @@ open class GradientPaletteController(
 			GradientDraft(
 				originalId = item.id,
 				fileType = item.properties.fileType,
-				points = item.points
+				points = item.points,
+				noDataColor = item.noDataColor
 			)
 		)
 	}
@@ -301,14 +302,16 @@ open class GradientPaletteController(
 
 		val fileType = draft.fileType
 		val points = draft.points
+		val noDataColor = draft.noDataColor
 
 		if (itemToUpdate != null && itemToUpdate.id == draft.originalId) {
 			// Update Existing
-			resultItem = itemToUpdate.copy(points = points)
+			resultItem = itemToUpdate.copy(points = points, noDataColor = noDataColor)
 			repository.updatePaletteItem(resultItem)
 		} else {
 			// Add new
-			resultItem = PaletteUtils.createGradientColor(currentPalette, fileType, points)
+			resultItem =
+				PaletteUtils.createGradientColor(currentPalette, fileType, points, noDataColor)
 			repository.addPaletteItem(paletteId, resultItem)
 
 			val activity = getFragmentActivity()
@@ -343,7 +346,8 @@ open class GradientPaletteController(
 				GradientDraft(
 					originalId = null,
 					fileType = fileType,
-					points = fileType.getDefaultGradientPoints()
+					points = fileType.getDefaultGradientPoints(),
+					noDataColor = null
 				)
 			)
 		}

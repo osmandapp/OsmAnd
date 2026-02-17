@@ -107,7 +107,12 @@ class GradientEditorController(
 	}
 
 	override fun onStepClick(stepData: GradientStepData) {
-		val index = dataState.draft.points.indexOf(stepData.point)
+		// Check if this is the "No Data" item (value is NaN)
+		val index = if (stepData.id == GradientEditorUiBuilder.NO_DATA_STEP_ID) {
+			dataState.draft.points.size
+		} else {
+			stepData.id.toIntOrNull() ?: -1
+		}
 		if (index != -1 && index != dataState.selectedIndex) {
 			// Navigation: Switch selection to the new index.
 			// Important: Explicitly clear 'validationError' because the context of the error (previous field) is gone.

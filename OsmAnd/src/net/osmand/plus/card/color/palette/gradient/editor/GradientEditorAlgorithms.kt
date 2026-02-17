@@ -222,6 +222,15 @@ object GradientEditorAlgorithms {
 		val selectedIndex = currentState.selectedIndex
 		val points = draft.points
 
+		// Case 1: "No Data" selected
+		if (selectedIndex == points.size) {
+			val currentColor = draft.noDataColor ?: net.osmand.shared.ColorPalette.LIGHT_GREY
+			if (currentColor == newColor) return null
+			val newDraft = draft.copy(noDataColor = newColor)
+			return currentState.copy(draft = newDraft)
+		}
+
+		// Case 2: Regular Gradient Point selected
 		// 1. Validate selection
 		if (selectedIndex !in points.indices) return null
 

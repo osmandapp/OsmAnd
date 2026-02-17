@@ -20,6 +20,7 @@
         android:text="@string/shared_string_value" />
 
     <FrameLayout
+        android:id="@+id/text_field_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/content_padding">
@@ -70,6 +71,7 @@
     </FrameLayout>
 
     <View
+        android:id="@+id/text_field_bottom_margin"
         android:layout_width="match_parent"
         android:layout_height="@dimen/content_padding"/>
 
