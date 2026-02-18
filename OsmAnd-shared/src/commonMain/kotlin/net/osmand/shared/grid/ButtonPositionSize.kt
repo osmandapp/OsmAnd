@@ -52,6 +52,8 @@ class ButtonPositionSize {
 
 	fun setMoveHorizontal() = apply { this.xMove = true }
 
+	fun setMoveAny() = apply { this.xMove = true; this.yMove = true; }
+
 	fun setNonMoveable() = apply { this.xMove = false; this.yMove = false; }
 
 	fun isMovable() = xMove || yMove
