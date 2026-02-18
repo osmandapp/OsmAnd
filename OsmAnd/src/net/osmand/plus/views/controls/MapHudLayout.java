@@ -362,7 +362,6 @@ public class MapHudLayout extends FrameLayout {
 			position.setPositionHorizontal(POS_LEFT);
 		} else if (id == R.id.alarms_container) {
 			position.setMoveVertical();
-			position.setMoveHorizontal();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
 		}
