@@ -3,6 +3,7 @@ package net.osmand.plus.search.dialogs;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.INVALID_ID;
 import static net.osmand.plus.search.listitems.QuickSearchListItemType.BOTTOM_SHADOW;
+import static net.osmand.plus.search.listitems.QuickSearchListItemType.CARD_DIVIDER;
 import static net.osmand.plus.search.listitems.QuickSearchListItemType.HEADER;
 import static net.osmand.plus.search.listitems.QuickSearchListItemType.SEARCH_MORE;
 import static net.osmand.plus.search.listitems.QuickSearchListItemType.TOP_SHADOW;
@@ -232,8 +233,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			return bindTopShadowItem(convertView);
 		} else if (type == BOTTOM_SHADOW) {
 			return bindBottomShadowItem(convertView);
+		} else if (type == CARD_DIVIDER) {
+			return bindCardDividerItem(convertView);
 		} else if (type == QuickSearchListItemType.SEARCH_RESULT &&
-				poiUIFilter != null && poiUIFilter.isWikiFilter()) {
+				(poiUIFilter != null && poiUIFilter.isWikiFilter() ||
+						listItem.getSearchResult().object instanceof Amenity amenity &&
+						amenity.getType().isWiki())) {
 			return bindWikiItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.DISABLED_HISTORY) {
 			view = bindDisabledHistoryItem(listItem, convertView);
@@ -430,6 +435,10 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private LinearLayout bindBottomShadowItem(@Nullable View convertView) {
 		return getLinearLayout(convertView, R.layout.list_shadow_footer);
+	}
+
+	private LinearLayout bindCardDividerItem(@Nullable View convertView) {
+		return getLinearLayout(convertView, R.layout.list_item_divider);
 	}
 
 	@NonNull
