@@ -139,6 +139,7 @@ public class TurnType {
 	private boolean possiblyLeftTurn;
 	private boolean possiblyRightTurn;
 	private List<Float> otherTurnAngles;
+	private RoadSplitStructure roadSplitStructure;
 
 	public TurnType(int value, int exitOut, float turnAngle, boolean skipToSpeak, int[] lanes,
 	                boolean possiblyLeftTurn, boolean possiblyRightTurn) {
@@ -622,4 +623,13 @@ public class TurnType {
 	public void setOtherTurnAngles(List<Float> turnAngles) {
 		this.otherTurnAngles = turnAngles;
 	}
+
+	public void setRoadSplitStructure(RoadSplitStructure rs) {
+		this.roadSplitStructure = rs;
+	}
+
+	public RoadSplitStructure getRoadSplitStructure() {
+		return roadSplitStructure;
+	}
+	
 }
