@@ -385,8 +385,6 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public RulerWidget setupRulerWidget(@NonNull RulerWidget widget) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			widget.setVisibility(false);
-
 			TextState state = calculateTextState(false);
 			boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 			widget.updateTextSize(nightMode, state.textColor, state.textShadowColor, (int) (2 * view.getDensity()));
@@ -550,6 +548,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		if (getMapActivity() != null) {
 			updateColorShadowsOfText();
 			updateWidgetsInfo(drawSettings);
+
 			leftWidgetsPanel.update(drawSettings);
 			rightWidgetsPanel.update(drawSettings);
 			topWidgetsPanel.update(drawSettings);
@@ -558,8 +557,10 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			alarmWidget.updateInfo(drawSettings, false);
 			speedometerWidget.updateInfo(drawSettings);
 
-			for (RulerWidget rulerWidget : rulerWidgets) {
-				rulerWidget.updateInfo(tileBox);
+			boolean hasCustomRulers = rulerWidgets.size() > 1;
+			for (RulerWidget widget : rulerWidgets) {
+				boolean enabled = !hasCustomRulers || rulerWidget != widget;
+				widget.updateInfo(tileBox, enabled);
 			}
 			for (SideWidgetsPanel panel : sideWidgetsPanels) {
 				panel.update(drawSettings);

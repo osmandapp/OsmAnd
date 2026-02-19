@@ -629,7 +629,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		FragmentManager fragmentManager = getSupportFragmentManager();
 
 		if (app.getMapMarkersHelper().getPlanRouteContext().isFragmentVisible()) {
-			PlanRouteFragment.showInstance(this);
+			PlanRouteFragment.showInstance(this, null);
 		}
 
 		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
