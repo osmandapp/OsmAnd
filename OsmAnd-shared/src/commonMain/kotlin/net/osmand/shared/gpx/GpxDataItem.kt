@@ -12,6 +12,24 @@ class GpxDataItem(
 
 	companion object {
 		fun isRegularTrack(file: KFile) = file.path().startsWith(PlatformUtil.getOsmAndContext().getGpxDir().path())
+
+		fun fromGpxFile(gpxFile: GpxFile, filePath: String? = null): GpxDataItem {
+			val path = filePath ?: gpxFile.path
+			val kFile = KFile(path)
+			val dataItem = GpxDataItem(kFile)
+
+			dataItem.setParameter(GpxParameter.FILE_NAME, kFile.name())
+			if (gpxFile.path.isNotEmpty()) {
+				dataItem.setParameter(GpxParameter.FILE_DIR, GpxDbUtils.getGpxFileDir(kFile))
+			}
+			dataItem.setParameter(GpxParameter.FILE_LAST_MODIFIED_TIME, gpxFile.modifiedTime)
+			dataItem.setParameter(GpxParameter.FILE_CREATION_TIME, gpxFile.metadata.time)
+
+			for (parameter in GpxParameter.getAppearanceParameters()) {
+				dataItem.readGpxAppearanceParameter(gpxFile, parameter)
+			}
+			return dataItem
+		}
 	}
 
 	fun isRegularTrack() = Companion.isRegularTrack(file)
