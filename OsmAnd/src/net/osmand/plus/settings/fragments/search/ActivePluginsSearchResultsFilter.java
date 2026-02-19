@@ -7,12 +7,12 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
 import de.KnollFrank.lib.settingssearch.PreferencePath;
+import de.KnollFrank.lib.settingssearch.common.LanguageCode;
 import de.KnollFrank.lib.settingssearch.common.Strings;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceOfHostWithinTree;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreen;
@@ -24,16 +24,16 @@ class ActivePluginsSearchResultsFilter implements SearchResultsFilter {
 
 	@Override
 	public boolean includePreferenceInSearchResults(final SearchablePreferenceOfHostWithinTree preference,
-													final Locale locale) {
-		return !isPreferenceConnectedToAnyInactivePlugin(preference, locale);
+													final LanguageCode languageCode) {
+		return !isPreferenceConnectedToAnyInactivePlugin(preference, languageCode);
 	}
 
 	private boolean isPreferenceConnectedToAnyInactivePlugin(final SearchablePreferenceOfHostWithinTree preference,
-															 final Locale locale) {
+															 final LanguageCode languageCode) {
 		return ActivePluginsSearchResultsFilter
 				.getInactivePlugins()
 				.stream()
-				.anyMatch(inactivePlugin -> isPreferenceConnectedToPlugin(preference, inactivePlugin, locale));
+				.anyMatch(inactivePlugin -> isPreferenceConnectedToPlugin(preference, inactivePlugin, languageCode));
 	}
 
 	private static List<OsmandPlugin> getInactivePlugins() {
@@ -46,10 +46,10 @@ class ActivePluginsSearchResultsFilter implements SearchResultsFilter {
 
 	private boolean isPreferenceConnectedToPlugin(final SearchablePreferenceOfHostWithinTree preference,
 												  final OsmandPlugin plugin,
-												  final Locale locale) {
+												  final LanguageCode languageCode) {
 		return isPreferenceOnSettingsScreen(preference, Optional.ofNullable(plugin.getSettingsScreenType())) ||
 				isPreferencePathConnectedToPlugin(getPreferencePath(preference), plugin) ||
-				isMapSourcePreferenceConnectedToPlugin(preference, plugin, locale);
+				isMapSourcePreferenceConnectedToPlugin(preference, plugin, languageCode);
 	}
 
 	private static boolean isPreferenceOnSettingsScreen(final SearchablePreferenceOfHostWithinTree preference,
@@ -74,12 +74,12 @@ class ActivePluginsSearchResultsFilter implements SearchResultsFilter {
 
 	private boolean isMapSourcePreferenceConnectedToPlugin(final SearchablePreferenceOfHostWithinTree preference,
 														   final OsmandPlugin plugin,
-														   final Locale locale) {
-		return plugin instanceof OsmandRasterMapsPlugin && isMapSourcePreference(preference, locale);
+														   final LanguageCode languageCode) {
+		return plugin instanceof OsmandRasterMapsPlugin && isMapSourcePreference(preference, languageCode);
 	}
 
 	private boolean isMapSourcePreference(final SearchablePreferenceOfHostWithinTree preference,
-										  final Locale locale) {
+										  final LanguageCode languageCode) {
 		return this
 				.getPreferencePath(preference)
 				.preferences()
@@ -90,7 +90,7 @@ class ActivePluginsSearchResultsFilter implements SearchResultsFilter {
 						idStartsWith(
 								Strings.prefixIdWithLanguage(
 										"net.osmand.plus.widgets.alert.MapLayerSelectionDialogFragment$MapLayerSelectionDialogFragmentProxy",
-										locale)));
+										languageCode)));
 	}
 
 	private PreferencePath getPreferencePath(final SearchablePreferenceOfHostWithinTree preference) {

@@ -93,7 +93,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import de.KnollFrank.lib.settingssearch.MergedPreferenceScreen;
-import de.KnollFrank.lib.settingssearch.common.Locales;
+import de.KnollFrank.lib.settingssearch.common.LanguageCode;
 
 public class IntentHelper {
 
@@ -167,16 +167,15 @@ public class IntentHelper {
 								app.getTileSourceTemplatesProvider(),
 								app.preferencesDatabaseManager.getPreferencesDatabase(),
 								actualConfiguration),
-				getLocale(),
+				LanguageCode.from(getLocale()),
 				actualConfiguration);
 	}
 
 	private Locale getLocale() {
 		final LocaleHelper localeHelper = app.getLocaleHelper();
-		return Locales.getLanguageLocale(
-				Optional
-						.ofNullable(localeHelper.getPreferredLocale())
-						.orElseGet(localeHelper::getDefaultLocale));
+		return Optional
+				.ofNullable(localeHelper.getPreferredLocale())
+				.orElseGet(localeHelper::getDefaultLocale);
 	}
 
 	private boolean parseNavigationIntent() {

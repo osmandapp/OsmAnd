@@ -1,9 +1,9 @@
 package net.osmand.plus.settings.fragments.search;
 
-import java.util.Locale;
 import java.util.function.Predicate;
 
 import de.KnollFrank.lib.settingssearch.PreferencePath;
+import de.KnollFrank.lib.settingssearch.common.LanguageCode;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceOfHostWithinTree;
 import de.KnollFrank.lib.settingssearch.results.SearchResultsFilter;
 
@@ -20,8 +20,9 @@ class EnabledProfilesSearchResultsFilter implements SearchResultsFilter {
 	}
 
 	@Override
-	public boolean includePreferenceInSearchResults(final SearchablePreferenceOfHostWithinTree preference, final Locale locale) {
-		return delegate.includePreferenceInSearchResults(preference, locale) &&
+	public boolean includePreferenceInSearchResults(final SearchablePreferenceOfHostWithinTree preference,
+													final LanguageCode languageCode) {
+		return delegate.includePreferenceInSearchResults(preference, languageCode) &&
 				(removeSearchResultsConnectedToDisabledProfiles ?
 						!isConnectedToDisabledProfile(preference) :
 						true);
