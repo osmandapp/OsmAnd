@@ -1821,8 +1821,6 @@ public class BinaryMapIndexReader {
 		public MapObjectStat getStat() {
 			return stat;
 		}
-		
-		
 
 		public void setSearchStat(SearchStat stat) {
 			this.searchStat = stat;
