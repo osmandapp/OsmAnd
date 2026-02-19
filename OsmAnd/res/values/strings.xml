@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <plurals name="tracks_count">
+        <item quantity="one">%d track</item>
+        <item quantity="other">%d tracks</item>
+    </plurals>
 	<string name="stars_articles">Stars articles</string>
 	<string name="delete_groups_confirmation">Delete groups?</string>
 	<string name="add_to_track">Add to track</string>
