@@ -4839,7 +4839,7 @@
     <string name="rendering_attr_alpineHiking_description">Разврставање по тежини врста путања.</string>
     <string name="rendering_value_sacScale_name">САК</string>
     <string name="rendering_value_caiScale_name">КАИ</string>
-    <string name="live_monitoring_adress_descr">Одредите адресу веба са правилима израза за одреднице: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
+    <string name="live_monitoring_adress_descr">Одредите адресу веба са правилима израза за одреднице: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="free_favorites_backup_description">Пријавите се у Облаку ОсмАнда ради добављања бесплатног складишта за омиљено и поставке.</string>
     <string name="write_heading">Пиши усмерење</string>
     <string name="wheel_circumference">Обим точка</string>
@@ -5976,4 +5976,23 @@
     <string name="astro_star_clusters">Звездана јата</string>
     <string name="astro_nebulas">Маглине</string>
     <string name="astro_solar_system">Сунчев систем</string>
+    <string name="delete_groups_confirmation">Обрисати групе?</string>
+    <string name="add_to_track">Додај стази</string>
+    <string name="unpin_folder">Откачи фолдер</string>
+    <string name="pin_folder">Закачи фолдер</string>
+    <string name="favorite_search_empty_state_description">Прилагодите претрагу или филтере да бисте видели да ли то помаже</string>
+    <string name="favorites_empty_folder_description">Овај фолдер још увек нема тачака.</string>
+    <string name="building_3d_day_color_content_desc">Боја дневне теме за 3Д зграда</string>
+    <string name="building_3d_night_color_content_desc">Боја ноћне теме за 3Д зграда</string>
+    <string name="building_3d_low_details_content_desc">3Д зграда са ниским детаљима</string>
+    <string name="building_3d_high_details_content_desc">3Д зграда са високим</string>
+    <string name="building_3d_near_distance_content_desc">3D zgrada udaljenost blizu</string>
+    <string name="building_3d_far_distance_content_desc">3D zgrada udaljenost daleko</string>
+    <string name="free_custom_color_description">Прилагодите 3Д зграда било којом бојом. Идеално за усклађивање са темом мапе или побољшање контраста.</string>
+    <string name="buildings_3d_use_map_style_color_description">Користи подразумевану боју стила мапе (%s).</string>
+    <string name="buildings_3d_visibility_description">Подесите непрозирност 3Д структура на мапи.</string>
+    <string name="level_of_details">Ниво детаља</string>
+    <string name="performance">Перформансе</string>
+    <string name="view_distance">Видна удаљеност</string>
+    <string name="stars_articles">Чланци о звездама</string>
 </resources>

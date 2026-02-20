@@ -11,6 +11,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.shared.gpx.GpxFormatter;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -70,7 +71,7 @@ class LiveSender extends AsyncTask<Void, Void, Void> {
 			if (baseUrl.equals("test.osmand.net") || baseUrl.equals("osmand.net")) {
 				// "https://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeProfile();
 				baseUrl = "https://" + baseUrl + "/userdata/translation/msg?" +
-						"lat={0}&lon={1}&lat={0}&timestamp={2}&" +
+						"lat={0}&lon={1}&timestamp={2}&" +
 						"hdop={3}&altitude={4}&speed={5}&" +
 						"bearing={6}&tta={7}&ttf={8}&dta={9}&dtf={10}&batproc={11}&" +
 						"deviceid={12}&accessToken={13}";
@@ -80,6 +81,7 @@ class LiveSender extends AsyncTask<Void, Void, Void> {
 			log.error("Could not construct live url from base url: " + baseUrl, e);
 			return false;
 		}
+		InputStream is = null;
 		try {
 			// Parse the URL and let the URI constructor handle proper encoding of special characters such as spaces
 			URL url = new URL(urlStr);
@@ -95,23 +97,24 @@ class LiveSender extends AsyncTask<Void, Void, Void> {
 			} else {
 				retry = true; // move to next point
 				queue.poll();
-				InputStream is = urlConnection.getInputStream();
-				StringBuilder responseBody = new StringBuilder();
+				is = urlConnection.getInputStream();
+				StringBuilder builder = new StringBuilder();
 				if (is != null) {
 					BufferedReader in = new BufferedReader(new InputStreamReader(is, UTF_8));
 					String s;
 					while ((s = in.readLine()) != null) {
-						responseBody.append(s);
-						responseBody.append("\n");
+						builder.append(s);
+						builder.append("\n");
 					}
-					is.close();
 				}
-				log.info("Monitor response (" + urlConnection.getHeaderField("Content-Type") + "): " + responseBody);
+				log.info("Monitor response (" + urlConnection.getHeaderField("Content-Type") + "): " + builder);
 			}
 			urlConnection.disconnect();
 		} catch (Exception e) {
 			retry = false;
 			log.error("Failed connect to " + urlStr + ": " + e.getMessage(), e);
+		} finally {
+			Algorithms.closeStream(is);
 		}
 		return retry;
 	}

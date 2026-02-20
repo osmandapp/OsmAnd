@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:orientation="vertical">
+
+	<include
+		android:id="@+id/header_container"
+		layout="@layout/bottom_sheet_item_with_two_text" />
+
+	<LinearLayout
+		android:id="@+id/color_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon_appearance"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
+			android:layout_marginTop="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:tint="?attr/default_icon_color"
+			app:srcCompat="@drawable/ic_action_appearance" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:text="@string/shared_string_color"
+			android:layout_marginStart="@dimen/content_padding_double"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"/>
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/color_scheme_name"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/content_padding_double"
+			android:text="@string/quick_action_map_style"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			android:textStyle="normal" />
+
+	</LinearLayout>
+
+	<include layout="@layout/divider_half_item"/>
+
+	<LinearLayout
+		android:id="@+id/opacity_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon_opacity"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:tint="?attr/default_icon_color"
+			app:srcCompat="@drawable/ic_action_opacity" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:layout_marginStart="@dimen/content_padding_double"
+			android:text="@string/gpx_visibility_txt"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"/>
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/opacity_value"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/content_padding_double"
+			tools:text="100%"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			android:textStyle="normal" />
+
+	</LinearLayout>
+
+</LinearLayout>

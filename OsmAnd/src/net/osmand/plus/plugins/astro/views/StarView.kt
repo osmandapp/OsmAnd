@@ -4,12 +4,19 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.DashPathEffect
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.PointF
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.AttributeSet
@@ -30,6 +37,7 @@ import io.github.cosinekitty.astronomy.Vector
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.rotationEclEqd
+import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.Constellation
 import net.osmand.plus.plugins.astro.SkyObject
 import java.util.Calendar
@@ -145,6 +153,11 @@ class StarView @JvmOverloads constructor(
 	private val arrowPath = Path()
 	private val occupiedRects = mutableListOf<RectF>()
 
+	private var arrowShadowBmp: Bitmap? = null
+	private var arrowToDestinationBmp: Bitmap? = null
+	private var arrowLightBmp: Bitmap? = null
+	private val directionArrowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { isFilterBitmap = true }
+
 	// --- View State ---
 	private var azimuthCenter = 180.0
 	private var altitudeCenter = 45.0
@@ -165,9 +178,19 @@ class StarView @JvmOverloads constructor(
 	var showEquatorLine = false
 	var showGalacticLine = false
 	var showFavorites = true
-	var showConstellations = true
+	var showDirections = true
+	var showCelestialPaths = true
+	var showRedFilter = false
+		set(value) {
+			if (field != value) {
+				field = value
+				updateRedFilter()
+				invalidate()
+			}
+		}
 
 	var showStars = true
+	var showConstellations = true
 	var showGalaxies = true
 	var showBlackHoles = true
 	var showNebulae = true
@@ -420,15 +443,19 @@ class StarView @JvmOverloads constructor(
 		objects.forEach { skyObjectMap[it.hip] = it }
 
 		recalculatePositions(currentTime, updateTargets = false, force = true)
+		val celestialPathObjects = mutableSetOf<SkyObject>()
+		val directionObjects = mutableSetOf<SkyObject>()
 		skyObjects.forEach {
 			it.azimuth = it.targetAzimuth
 			it.altitude = it.targetAltitude
+			if (it.showCelestialPath) celestialPathObjects.add(it)
+			if (it.showDirection) directionObjects.add(it)
 		}
 
-		// Clean up pinned objects that might no longer exist
-		val toRemove = pinnedObjects.filter { !skyObjectMap.containsValue(it) }
+		val toRemove = pinnedObjects.filter { !celestialPathObjects.contains(it) }
 		pinnedObjects.removeAll(toRemove)
 		pathCache.keys.removeAll(toRemove)
+		pinnedObjects.addAll(celestialPathObjects)
 
 		invalidate()
 	}
@@ -585,14 +612,14 @@ class StarView @JvmOverloads constructor(
 		return pinnedObjects.contains(obj)
 	}
 
-	fun setObjectPinned(obj: SkyObject, pinned: Boolean) {
+	fun setObjectPinned(obj: SkyObject, pinned: Boolean, forceUpdate: Boolean = false) {
 		if (pinned) {
 			pinnedObjects.add(obj)
 		} else {
 			pinnedObjects.remove(obj)
 			pathCache.remove(obj) // Free up cache if deselected
 		}
-		invalidate()
+		if (forceUpdate) invalidate()
 	}
 
 	// -------------------
@@ -711,7 +738,7 @@ class StarView @JvmOverloads constructor(
 
 	private fun shouldRecalculate(obj: SkyObject): Boolean {
 		if (obj == selectedObject) return true
-		if (pinnedObjects.contains(obj)) return true
+		if (showCelestialPaths && pinnedObjects.contains(obj)) return true
 		if (showConstellations) return true
 		if (selectedConstellationStarIds.contains(obj.hip)) return true
 		return isObjectVisibleInSettings(obj)
@@ -838,7 +865,7 @@ class StarView @JvmOverloads constructor(
 		// Draw Celestial Paths for all Selected Objects (Current + Pinned)
 		val objectsToDrawPath = mutableSetOf<SkyObject>()
 		if (selectedObject != null) objectsToDrawPath.add(selectedObject!!)
-		objectsToDrawPath.addAll(pinnedObjects)
+		if (showCelestialPaths) objectsToDrawPath.addAll(pinnedObjects)
 
 		objectsToDrawPath.forEach { obj ->
 			if (isObjectVisibleInSettings(obj)) {
@@ -857,10 +884,12 @@ class StarView @JvmOverloads constructor(
 		// Draw Highlights
 
 		// 1. Draw highlights for pinned objects (Gold)
-		pinnedObjects.forEach { obj ->
-			if (isObjectVisibleInSettings(obj) || selectedObject == obj) {
-				if (skyToScreen(obj.azimuth, obj.altitude, tempPoint)) {
-					canvas.drawCircle(tempPoint.x, tempPoint.y, 25f, pinnedHighlightPaint)
+		if (showCelestialPaths) {
+			pinnedObjects.forEach { obj ->
+				if (isObjectVisibleInSettings(obj) || selectedObject == obj) {
+					if (skyToScreen(obj.azimuth, obj.altitude, tempPoint)) {
+						canvas.drawCircle(tempPoint.x, tempPoint.y, 25f, pinnedHighlightPaint)
+					}
 				}
 			}
 		}
@@ -874,6 +903,34 @@ class StarView @JvmOverloads constructor(
 				canvas.drawCircle(tempPoint.x, tempPoint.y, 25f, paint)
 			}
 		}
+
+		if (showDirections) {
+			val cx = width / 2f
+			val cy = height / 2f
+			val density = resources.displayMetrics.density
+			val distToShow = 80f * density
+
+			// Initialize bitmaps lazily
+			if (arrowShadowBmp == null) {
+				arrowShadowBmp = BitmapFactory.decodeResource(resources, R.drawable.map_marker_direction_arrow_p3_shadow)
+				arrowToDestinationBmp = BitmapFactory.decodeResource(resources, R.drawable.map_marker_direction_arrow_p2_color)
+				arrowLightBmp = BitmapFactory.decodeResource(resources, R.drawable.map_marker_direction_arrow_p1_light)
+			}
+
+			skyObjects.forEach { obj ->
+				if (obj.showDirection && isObjectVisibleInSettings(obj)) {
+					if (!skyToScreen(obj.azimuth, obj.altitude, tempPoint) || !isPointInView(tempPoint)) {
+						drawDirectionArrow(canvas, obj, cx, cy, density, distToShow)
+					}
+				}
+			}
+		}
+	}
+
+	private fun isPointInView(point: PointF): Boolean {
+		val rect = Rect()
+		getDrawingRect(rect)
+		return rect.contains(point.x.toInt(), point.y.toInt())
 	}
 
 	private fun drawCelestialPath(canvas: Canvas, obj: SkyObject) {
@@ -972,6 +1029,28 @@ class StarView @JvmOverloads constructor(
 			arrowPath.lineTo(-size, size * 0.6f)
 			arrowPath.close()
 			drawPath(arrowPath, arrowPaint)
+		}
+	}
+
+	private fun drawDirectionArrow(canvas: Canvas, obj: SkyObject, cx: Float, cy: Float, density: Float, distToShow: Float) {
+		if (skyToScreen(obj.azimuth, obj.altitude, tempPoint, allowOffScreen = true)) {
+			val dx = tempPoint.x - cx
+			val dy = tempPoint.y - cy
+			val rotation = Math.toDegrees(atan2(dy.toDouble(), dx.toDouble())).toFloat()
+
+			canvas.save()
+			canvas.rotate(rotation, cx, cy)
+			canvas.translate(-24 * density + distToShow, -22 * density)
+
+			arrowShadowBmp?.let { canvas.drawBitmap(it, cx, cy, directionArrowPaint) }
+
+			directionArrowPaint.colorFilter = PorterDuffColorFilter(obj.color, PorterDuff.Mode.SRC_IN)
+			arrowToDestinationBmp?.let { canvas.drawBitmap(it, cx, cy, directionArrowPaint) }
+
+			directionArrowPaint.colorFilter = null
+			arrowLightBmp?.let { canvas.drawBitmap(it, cx, cy, directionArrowPaint) }
+
+			canvas.restore()
 		}
 	}
 
@@ -1498,7 +1577,7 @@ class StarView @JvmOverloads constructor(
 		}
 
 		// Always show label for selected or pinned objects
-		if (obj == selectedObject || pinnedObjects.contains(obj)) {
+		if (obj == selectedObject || (showCelestialPaths && pinnedObjects.contains(obj))) {
 			showLabel = true
 		}
 
@@ -1527,8 +1606,11 @@ class StarView @JvmOverloads constructor(
 				}
 			}
 
-			if (!textOverlaps || obj == selectedObject || pinnedObjects.contains(obj)) {
-				textPaint.color = if (obj == selectedObject) Color.RED else if(pinnedObjects.contains(obj)) Color.YELLOW else Color.LTGRAY
+			if (!textOverlaps || obj == selectedObject || (showCelestialPaths && pinnedObjects.contains(obj))) {
+				textPaint.color =
+					if (obj == selectedObject) Color.RED
+					else if (showCelestialPaths && pinnedObjects.contains(obj)) Color.YELLOW
+					else Color.LTGRAY
 				canvas.drawText(text, xText, yText, textPaint)
 
 				occupiedRects.add(textRect)
@@ -1785,6 +1867,21 @@ class StarView @JvmOverloads constructor(
 		override fun onScale(detector: ScaleGestureDetector): Boolean {
 			updateViewAngle(viewAngle / detector.scaleFactor, detector.focusX, detector.focusY)
 			return true
+		}
+	}
+
+	private fun updateRedFilter() {
+		if (showRedFilter) {
+			val lumToRed = ColorMatrix(floatArrayOf(
+				0.33f, 0.33f, 0.33f, 0f, 0f,
+				0f, 0f, 0f, 0f, 0f,
+				0f, 0f, 0f, 0f, 0f,
+				0f, 0f, 0f, 1f, 0f
+			))
+			val filter = ColorMatrixColorFilter(lumToRed)
+			setLayerType(LAYER_TYPE_HARDWARE, Paint().apply { colorFilter = filter })
+		} else {
+			setLayerType(LAYER_TYPE_NONE, null)
 		}
 	}
 }

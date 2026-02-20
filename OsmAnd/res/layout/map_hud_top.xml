@@ -1,92 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
-	<!-- Toolbar -->
 	<include layout="@layout/widget_top_bar" />
 
-	<!-- Container for top widgets: Coordinates, Map markers bar, Street name, Lanes -->
 	<net.osmand.plus.views.controls.VerticalWidgetPanel
 		android:id="@+id/top_widgets_panel"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_gravity="top"
 		android:orientation="vertical"
 		app:topPanel="true" />
 
-	<!-- LEFT, CENTER and RIGHT widgets -->
 	<FrameLayout
+		android:id="@+id/top_controls_container"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="wrap_content">
 
-		<!-- LEFT widgets colon -->
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-			android:weightSum="1">
-
-			<LinearLayout
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_gravity="top|start"
-				android:layout_weight="0.45"
-				android:orientation="vertical">
-
-				<net.osmand.plus.views.controls.SideWidgetsPanel
-					android:id="@+id/map_left_widgets_panel"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="top|start"
-					android:layout_marginTop="@dimen/content_padding_small_half"
-					app:rightSide="false" />
-
-			</LinearLayout>
-
-			<!-- empty block to not let widgets grow more than 45% -->
-			<Space
-				android:layout_width="0dp"
-				android:layout_height="0dp"
-				android:layout_weight="0.55" />
-
-		</LinearLayout>
-
-		<!-- RIGHT widgets colon -->
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-			android:weightSum="1">
-
-			<!-- empty block to not let widgets grow more than 45% -->
-			<Space
-				android:layout_width="0dp"
-				android:layout_height="0dp"
-				android:layout_weight="0.55" />
-
-			<FrameLayout
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_gravity="top|end"
-				android:layout_weight="0.45">
-
-				<net.osmand.plus.views.controls.SideWidgetsPanel
-					android:id="@+id/map_right_widgets_panel"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="top|end"
-					android:layout_marginTop="@dimen/content_padding_small_half"
-					app:rightSide="true"
-					tools:ignore="UselessParent" />
-
-			</FrameLayout>
-
-		</LinearLayout>
-
-		<!-- Lanes widget (default position) -->
 		<FrameLayout
 			android:id="@+id/lanes_widget_special_position"
 			android:layout_width="wrap_content"
@@ -96,4 +30,21 @@
 
 	</FrameLayout>
 
-</LinearLayout>
+	<net.osmand.plus.views.controls.SideWidgetsPanel
+		android:id="@+id/map_left_widgets_panel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="top|start"
+		android:layout_marginTop="@dimen/content_padding_small_half"
+		app:rightSide="false" />
+
+	<net.osmand.plus.views.controls.SideWidgetsPanel
+		android:id="@+id/map_right_widgets_panel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="top|end"
+		android:layout_marginTop="@dimen/content_padding_small_half"
+		app:rightSide="true"
+		tools:ignore="UselessParent" />
+
+</FrameLayout>

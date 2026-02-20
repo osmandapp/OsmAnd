@@ -14,20 +14,35 @@ import org.json.JSONArray
 abstract class AstroDataProvider {
 
 	private var cachedSkyObjects:List<SkyObject>?=null
+	private var cachedCatalogs:List<Catalog>?=null
 	private var cachedConstellations:List<Constellation>?=null
 
 	companion object {
 		private val LOG = PlatformUtil.getLog(AstroDataProvider::class.java)
 	}
 
-	abstract fun getSkyObjectsImpl(ctx: Context): List<SkyObject>
+	protected abstract fun getSkyObjectsImpl(ctx: Context): List<SkyObject>
+
+	protected abstract fun getCatalogsImpl(ctx: Context): List<Catalog>
+
+	@Synchronized
+	fun getCatalogs(ctx: Context): List<Catalog> {
+		cachedCatalogs?.let { return it }
+
+		val catalogs = getCatalogsImpl(ctx)
+		cachedCatalogs = catalogs
+		return catalogs
+	}
 
 	@Synchronized
 	fun getSkyObjects(ctx: Context): List<SkyObject> {
+		if (cachedCatalogs == null) {
+			cachedCatalogs = getCatalogsImpl(ctx)
+		}
+
 		cachedSkyObjects?.let { return it }
 
 		val objects = getSkyObjectsImpl(ctx)
-
 		cachedSkyObjects = objects
 		return objects
 	}
@@ -38,7 +53,7 @@ abstract class AstroDataProvider {
 		cachedConstellations = null
 	}
 
-	abstract fun getConstellationsImpl(ctx: Context): List<Constellation>
+	protected abstract fun getConstellationsImpl(ctx: Context): List<Constellation>
 
 	@Synchronized
 	fun getConstellations(ctx: Context): List<Constellation> {
@@ -55,6 +70,12 @@ abstract class AstroDataProvider {
 		}
 		cachedConstellations = constellations
 		return constellations
+	}
+
+	protected abstract fun getAstroArticleImpl(ctx: Context, wikidataId: String, lang: String? = null): AstroArticle?
+
+	fun getAstroArticle(ctx: Context, wikidataId: String, lang: String? = null): AstroArticle? {
+		return getAstroArticleImpl(ctx, wikidataId, lang)
 	}
 
 	protected fun getPlanets(

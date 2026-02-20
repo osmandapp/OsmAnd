@@ -1,6 +1,9 @@
 package net.osmand.plus.plugins.astro
 
 import android.graphics.Color
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.Paint
 import android.graphics.Point
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -312,6 +315,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			resetTimeButton.visibility = View.GONE
 		}
 
+		view.findViewById<StarCompassButton>(R.id.star_map_compass_button)?.let {
+			it.onSingleTap = { setAzimuth(0.0, true)}
+			it.setMapActivity(requireMapActivity())
+			compassButton = it
+		}
+
 		swSettings.getCommonConfig().let { config ->
 			updateRegularMapVisibility(config.showRegularMap)
 			updateStarChartVisibility(config.showStarChart)
@@ -324,6 +333,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showEquatorLine = config.showEquatorLine
 			starView.showGalacticLine = config.showGalacticLine
 			starView.showFavorites = config.showFavorites
+			starView.showDirections = config.showDirections
+			starView.showCelestialPaths = config.showCelestialPaths
+			starView.showRedFilter = config.showRedFilter
 			starView.showConstellations = config.showConstellations
 			starView.showStars = config.showStars
 			starView.showGalaxies = config.showGalaxies
@@ -341,12 +353,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			if (config.magnitudeFilter != null) {
 				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", config.magnitudeFilter)
 			}
-		}
-
-		view.findViewById<StarCompassButton>(R.id.star_map_compass_button)?.let {
-			it.onSingleTap = { setAzimuth(0.0, true)}
-			it.setMapActivity(requireMapActivity())
-			compassButton = it
+			updateRedMode(config.showRedFilter)
 		}
 
 		updateMagnitudeFilterVisibility()
@@ -636,6 +643,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		applyBottomInsets()
 	}
 
+	fun applyRedFilter(enabled: Boolean) {
+		starView.showRedFilter = enabled
+		updateRedMode(enabled)
+		saveStarMapSettings()
+	}
+
 	fun setRegularMapVisibility(enabled: Boolean) {
 		updateRegularMapVisibility(enabled)
 		saveCommonSettings()
@@ -663,6 +676,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			showEquatorLine = starView.showEquatorLine,
 			showGalacticLine = starView.showGalacticLine,
 			showFavorites = starView.showFavorites,
+			showDirections = starView.showDirections,
+			showCelestialPaths = starView.showCelestialPaths,
+			showRedFilter = starView.showRedFilter,
 			showSun = starView.showSun,
 			showMoon = starView.showMoon,
 			showPlanets = starView.showPlanets,
@@ -688,6 +704,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starView.showEquatorLine = newConfig.showEquatorLine
 		starView.showGalacticLine = newConfig.showGalacticLine
 		starView.showFavorites = newConfig.showFavorites
+		starView.showDirections = newConfig.showDirections
+		starView.showCelestialPaths = newConfig.showCelestialPaths
+		starView.showRedFilter = newConfig.showRedFilter
 
 		starView.showSun = newConfig.showSun
 		starView.showMoon = newConfig.showMoon
@@ -920,5 +939,41 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		button.nightMode = nightMode
 		resetBtn.nightMode = nightMode
+	}
+
+	private fun updateRedMode(enabled: Boolean) {
+		if (context == null) return
+		val paint = if (enabled) {
+			val lumToRed = ColorMatrix(floatArrayOf(
+				0.33f, 0.33f, 0.33f, 0f, 0f,
+				0f, 0f, 0f, 0f, 0f,
+				0f, 0f, 0f, 0f, 0f,
+				0f, 0f, 0f, 1f, 0f
+			))
+			Paint().apply { colorFilter = ColorMatrixColorFilter(lumToRed) }
+		} else {
+			null
+		}
+
+		val layerType = if (enabled) View.LAYER_TYPE_HARDWARE else View.LAYER_TYPE_NONE
+
+		val viewsToFilter = mutableListOf<View>()
+		if (::timeControlCard.isInitialized) viewsToFilter.add(timeControlCard)
+		if (::timeSelectionView.isInitialized) viewsToFilter.add(timeSelectionView)
+		if (::arModeButton.isInitialized) viewsToFilter.add(arModeButton)
+		if (::cameraButton.isInitialized) viewsToFilter.add(cameraButton)
+		if (::resetFovButton.isInitialized) viewsToFilter.add(resetFovButton)
+		if (::magnitudeSliderContainer.isInitialized) viewsToFilter.add(magnitudeSliderContainer)
+		if (::compassButton.isInitialized) viewsToFilter.add(compassButton)
+		if (::closeButton.isInitialized) viewsToFilter.add(closeButton)
+		if (::searchButton.isInitialized) viewsToFilter.add(searchButton)
+		if (::settingsButton.isInitialized) viewsToFilter.add(settingsButton)
+		if (::starChartsView.isInitialized) viewsToFilter.add(starChartsView)
+		if (::sliderContainer.isInitialized) viewsToFilter.add(sliderContainer)
+
+		viewsToFilter.forEach { it.setLayerType(layerType, paint) }
+
+		view?.findViewById<View>(R.id.chart_settings_button)?.setLayerType(layerType, paint)
+		view?.findViewById<View>(R.id.switch_chart_button)?.setLayerType(layerType, paint)
 	}
 }

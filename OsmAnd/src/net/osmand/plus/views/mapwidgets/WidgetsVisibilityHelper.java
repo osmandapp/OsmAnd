@@ -121,6 +121,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInRouteLineAppearanceMode()
 				&& !isInConfigureMapOptionMode()
 				&& !isContextMenuFragmentVisible()
+				&& !isInPlanRouteMode()
 				&& shouldShowElementOnActiveScreen(BOTTOM_MENU_BUTTONS);
 	}
 
@@ -137,6 +138,8 @@ public class WidgetsVisibilityHelper {
 		return showTopControls
 				&& !isInFollowTrackMode()
 				&& !isInConfigureMapOptionMode()
+				&& !isInMeasurementToolMode()
+				&& !isInPlanRouteMode()
 				&& (additionalDialogsHide || !isPortrait());
 	}
 
@@ -174,7 +177,9 @@ public class WidgetsVisibilityHelper {
 		boolean showTopControls = !mapActivity.shouldHideTopControls()
 				|| (isInTrackMenuMode() && !isPortrait());
 		return showTopControls
+				&& !isInMeasurementToolMode()
 				&& !isInConfigureMapOptionMode()
+				&& !isInPlanRouteMode()
 				&& !(isMapLinkedToLocation() && routingHelper.isFollowingMode())
 				&& (additionalDialogsHide || !isPortrait());
 	}
@@ -267,8 +272,8 @@ public class WidgetsVisibilityHelper {
 		return false;
 	}
 
-	private boolean isInPlanRouteMode() {
-		return mapLayers.getMapMarkersLayer().isInPlanRouteMode();
+	public boolean isInPlanRouteMode() {
+		return fragmentsHelper.getPlanRouteFragment() != null;
 	}
 
 	private boolean isInTrackAppearanceMode() {
@@ -436,7 +441,7 @@ public class WidgetsVisibilityHelper {
 		EXPLORE_PLACES(),
 		WEATHER_FORECAST(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON),
 		STAR_MAP(),
-		MEASUREMENT_MODE(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON, SUGGEST_MAP_BANNER, TOP_BUTTONS, COMPASS),
+		MEASUREMENT_MODE(SUGGEST_MAP_BANNER, TOP_BUTTONS, COMPASS),
 		PLAN_ROUTE_MODE(TOP_COORDINATES_WIDGET, SUGGEST_MAP_BANNER),
 		TRACK_APPEARANCE_MODE(SUGGEST_MAP_BANNER),
 		SELECTING_TILES_ZONE_MODE(),

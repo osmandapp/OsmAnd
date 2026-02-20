@@ -145,6 +145,8 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 
 		CompoundButton compoundButton = button.findViewById(R.id.compound_button);
 		compoundButton.setChecked(enabled);
+		compoundButton.setClickable(false);
+		compoundButton.setFocusable(false);
 
 		int activeColor = appMode.getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);

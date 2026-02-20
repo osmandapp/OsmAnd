@@ -51,13 +51,20 @@ class StarObjectsViewModel(
 	fun loadData() {
 		viewModelScope.launch(Dispatchers.Default) {
 			val objects = dataProvider.getSkyObjects(app).toMutableList()
-			val favorites = settings.getStarMapConfig().favorites
+			val starMapConfig = settings.getStarMapConfig()
+			val favorites = starMapConfig.favorites
+			val directions = starMapConfig.directions
+			val celestialPaths = starMapConfig.celestialPaths
 			// Create lookup map for config items
 			val favoritesMap = favorites.associateBy { it.id }
+			val directionsMap = directions.associateBy { it.id }
+			val celestialPathsMap = celestialPaths.associateBy { it.id }
 			val indexMap = favorites.withIndex().associate { it.value.id to it.index }
 
 			objects.forEach { obj ->
 				obj.isFavorite = favoritesMap.contains(obj.id)
+				obj.showDirection = directionsMap.contains(obj.id)
+				obj.showCelestialPath = celestialPathsMap.contains(obj.id)
 			}
 			objects.sortBy { indexMap[it.id] ?: Int.MAX_VALUE }
 
