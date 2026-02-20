@@ -34,9 +34,9 @@ import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astro.StarChartState.StarChartType
 import net.osmand.plus.plugins.astro.StarWatcherSettings.CommonConfig
 import net.osmand.plus.plugins.astro.StarWatcherSettings.StarMapConfig
-import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.plugins.astro.utils.StarMapARModeHelper
 import net.osmand.plus.plugins.astro.utils.StarMapCameraHelper
+import net.osmand.plus.plugins.astro.views.AstroContextMenuFragment
 import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
 import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 import net.osmand.plus.plugins.astro.views.StarChartView
@@ -890,11 +890,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun showObjectInfo(obj: SkyObject) {
-		val existing = childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? SkyObjectInfoFragment
+		val existing = childFragmentManager.findFragmentByTag(AstroContextMenuFragment.TAG) as? AstroContextMenuFragment
 		if (existing == null || existing.arguments?.getString("skyObjectName") != obj.name) {
-			childFragmentManager.beginTransaction()
+/*			childFragmentManager.beginTransaction()
 				.replace(R.id.bottom_sheet_container, SkyObjectInfoFragment.newInstance(obj))
-				.commitNow()
+				.commitNow()*/
+
+			val bottomSheet = AstroContextMenuFragment.newInstance(obj)
+			bottomSheet.show(childFragmentManager, AstroContextMenuFragment.TAG)
 		} else {
 			existing.updateObjectInfo(obj)
 		}
