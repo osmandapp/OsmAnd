@@ -5916,4 +5916,5 @@
     <string name="performance">Teljesítmény</string>
     <string name="view_distance">Megjelenítési távolság</string>
     <string name="stars_articles">Csillagok leírása</string>
+    <string name="astronomy_plugin_name">Csillagászat</string>
 </resources>
