@@ -5908,4 +5908,7 @@
     <string name="astro_configure_view">Настройка вида</string>
     <string name="backup_deleted_all_data">Удаленные данные.</string>
     <string name="backup_deleting_all_data">Удаление данных…</string>
+    <string name="stars_articles">Статьи о звездах</string>
+    <string name="delete_groups_confirmation">Удалить группы?</string>
+    <string name="add_to_track">Добавить в трек</string>
 </resources>
