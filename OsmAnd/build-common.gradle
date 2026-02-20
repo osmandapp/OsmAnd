@@ -405,10 +405,21 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
         assetPathAndName="${ext.assetPathAndName}"
         testClassName="${ext.testClassName}"
         absoluteLocalAssetPath="${project.projectDir}/assets/\${assetPathAndName}"
-
+        
+        echo ">>> Waiting for package manager to recognize the app..."
+        WAIT_SECONDS=0
+        MAX_WAIT=30
+        until "\${adb}" shell pm list packages | grep -qF "\${appPackage}"; do
+            if [ \${WAIT_SECONDS} -ge \${MAX_WAIT} ]; then
+                echo "!!! ERROR: Timed out waiting for package '\${appPackage}' to become available."
+                "\${adb}" shell pm list packages
+                exit 1
+            fi
+            sleep 1
+            WAIT_SECONDS=\$((WAIT_SECONDS + 1))
+        done
+        echo ">>> Package found after \${WAIT_SECONDS} seconds."
         mkdir -p "\$(dirname "\${absoluteLocalAssetPath}")"
-        echo ">>> Pausing for 2 seconds to ensure apps are fully registered by the package manager..."
-        sleep 2
         echo ">>> Starting test to create database on device..."
         INSTRUMENTATION_OUTPUT=\$("\${adb}" shell am instrument -w -e class \${testClassName} \${appPackage}.test/androidx.test.runner.AndroidJUnitRunner 2>&1)
         echo "--- Test Output Start ---"
