@@ -5992,8 +5992,7 @@
     <string name="download_wikipedia_label">تحميل ويكيبيديا</string>
     <string name="rendering_attr_spotSize_description">حجم قياس البقعة</string>
     <string name="gpx_too_many_points_visible_warning">يؤدي ظهور عدد كبير من مسارات GPX إلى استهلاك عالٍ للذاكرة.</string>
-    <string name="star_watcher_plugin_name">مراقب النجوم (نسخة تجريبية)</string>
-    <string name="star_watcher_plugin_description">خرائط النجوم، خريطة نجوم ثلاثية الأبعاد</string>
+    <string name="astronomy_plugin_description">خرائط النجوم، خريطة نجوم ثلاثية الأبعاد</string>
     <string name="star_map">خريطة النجوم</string>
     <string name="star_charts_name">خرائط النجوم</string>
     <string name="star_visibility_name">رؤية النجوم</string>

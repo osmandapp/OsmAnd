@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro.views
+package net.osmand.plus.plugins.astronomy.views
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -15,11 +15,11 @@ import io.github.cosinekitty.astronomy.searchRiseSet
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import net.osmand.plus.R
-import net.osmand.plus.plugins.astro.SkyObject
-import net.osmand.plus.plugins.astro.utils.AstroUtils
-import net.osmand.plus.plugins.astro.utils.AstroUtils.Twilight
-import net.osmand.plus.plugins.astro.utils.AstroUtils.toAstroTime
-import net.osmand.plus.plugins.astro.utils.AstroUtils.toZoned
+import net.osmand.plus.plugins.astronomy.SkyObject
+import net.osmand.plus.plugins.astronomy.utils.AstroUtils
+import net.osmand.plus.plugins.astronomy.utils.AstroUtils.Twilight
+import net.osmand.plus.plugins.astronomy.utils.AstroUtils.toAstroTime
+import net.osmand.plus.plugins.astronomy.utils.AstroUtils.toZoned
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 

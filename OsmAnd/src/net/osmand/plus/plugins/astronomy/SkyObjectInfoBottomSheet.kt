@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro
+package net.osmand.plus.plugins.astronomy
 
 import android.content.Intent
 import android.net.Uri
@@ -20,7 +20,7 @@ import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.searchRiseSet
 import net.osmand.plus.R
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.astro.utils.AstroUtils
+import net.osmand.plus.plugins.astronomy.utils.AstroUtils
 import net.osmand.plus.utils.AndroidUtils
 import java.util.Calendar
 import java.util.Locale
@@ -96,8 +96,8 @@ class SkyObjectInfoFragment : Fragment() {
 		sheetPinButton.isChecked = obj.showCelestialPath
 		sheetPinButton.setOnCheckedChangeListener { _, isChecked ->
 			obj.showCelestialPath = isChecked
-			val swSettings = PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
-			if (isChecked) swSettings.addCelestialPath(obj.id) else swSettings.removeCelestialPath(obj.id)
+			val astroSettings = PluginsHelper.requirePlugin(AstronomyPlugin::class.java).astroSettings
+			if (isChecked) astroSettings.addCelestialPath(obj.id) else astroSettings.removeCelestialPath(obj.id)
 			parent.starView.setObjectPinned(obj, isChecked, true)
 		}
 
@@ -105,8 +105,8 @@ class SkyObjectInfoFragment : Fragment() {
 		sheetDirectionButton.isChecked = obj.showDirection
 		sheetDirectionButton.setOnCheckedChangeListener { _, isChecked ->
 			obj.showDirection = isChecked
-			val swSettings = PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
-			if (isChecked) swSettings.addDirection(obj.id) else swSettings.removeDirection(obj.id)
+			val astroSettings = PluginsHelper.requirePlugin(AstronomyPlugin::class.java).astroSettings
+			if (isChecked) astroSettings.addDirection(obj.id) else astroSettings.removeDirection(obj.id)
 			parent.starView.invalidate()
 		}
 
@@ -114,8 +114,8 @@ class SkyObjectInfoFragment : Fragment() {
 		sheetFavoriteButton.isChecked = obj.isFavorite
 		sheetFavoriteButton.setOnCheckedChangeListener { _, isChecked ->
 			obj.isFavorite = isChecked
-			val swSettings = PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
-			if (isChecked) swSettings.addFavorite(obj.id) else swSettings.removeFavorite(obj.id)
+			val astroSettings = PluginsHelper.requirePlugin(AstronomyPlugin::class.java).astroSettings
+			if (isChecked) astroSettings.addFavorite(obj.id) else astroSettings.removeFavorite(obj.id)
 			parent.starView.invalidate()
 		}
 

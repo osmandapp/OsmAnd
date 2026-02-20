@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro
+package net.osmand.plus.plugins.astronomy
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -9,8 +9,8 @@ import io.github.cosinekitty.astronomy.Body
 import net.osmand.IndexConstants
 import net.osmand.PlatformUtil
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.plugins.astro.SkyObject.Type
-import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyColor
+import net.osmand.plus.plugins.astronomy.SkyObject.Type
+import net.osmand.plus.plugins.astronomy.utils.AstroUtils.bodyColor
 import java.io.File
 
 class AstroDataDbProvider : AstroDataProvider() {

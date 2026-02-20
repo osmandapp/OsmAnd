@@ -5929,8 +5929,7 @@
     <string name="visualizing_button_grid">Raster der Karten-Schaltflächen</string>
     <string name="imprecise_coordinates">Ungenaue Koordinaten</string>
     <string name="show_expand_button">Erweitern-Schaltfläche anzeigen</string>
-    <string name="star_watcher_plugin_name">Sternbeobachter (Beta)</string>
-    <string name="star_watcher_plugin_description">Sternkarten, 3D-Sternkarte</string>
+    <string name="astronomy_plugin_description">Sternkarten, 3D-Sternkarte</string>
     <string name="star_map">Sternkarte</string>
     <string name="star_charts_name">Sternkarten</string>
     <string name="star_visibility_name">Sichtbarkeit der Sterne</string>

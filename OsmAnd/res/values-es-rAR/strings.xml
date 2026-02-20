@@ -5783,8 +5783,7 @@
     <string name="buildings_3d_detail_level">Detallado de edificios en 3D</string>
     <string name="show_expand_button">Mostrar botón de expandir</string>
     <string name="imprecise_coordinates">Coordenadas imprecisas</string>
-    <string name="star_watcher_plugin_name">Visor estelar (Beta)</string>
-    <string name="star_watcher_plugin_description">Cartas estelares, mapa estelar en 3D</string>
+    <string name="astronomy_plugin_description">Cartas estelares, mapa estelar en 3D</string>
     <string name="star_map">Mapa estelar</string>
     <string name="star_charts_name">Cartas estelares</string>
     <string name="star_visibility_name">Visibilidad de estrellas</string>

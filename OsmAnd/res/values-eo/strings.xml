@@ -5905,8 +5905,7 @@
     <string name="enable_3d_objects">3-dimensiaj konstruaĵoj</string>
     <string name="buildings_3d_detail_level">Detal-nivelo de 3-dimensiaj konstruaĵoj</string>
     <string name="has_vehicle_metrics">Kun OBDII-datumoj</string>
-    <string name="star_watcher_plugin_name">Astrobservanto (Beta)</string>
-    <string name="star_watcher_plugin_description">3-dimensia stelmapo</string>
+    <string name="astronomy_plugin_description">3-dimensia stelmapo</string>
     <string name="star_map">Stelmapo</string>
     <string name="star_charts_name">Diagramo de astroj</string>
     <string name="star_visibility_name">Videbloj de astroj</string>

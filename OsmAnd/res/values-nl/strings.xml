@@ -6242,7 +6242,6 @@
     <string name="lang_mi">Maori</string>
     <string name="buildings_3d_detail_level">3D-gebouwendetaillering</string>
     <string name="has_vehicle_metrics">Met OBDII-data</string>
-    <string name="star_watcher_plugin_name">Sterrenkijker (Bèta)</string>
     <string name="star_map">Sterrenkaart</string>
     <string name="astro_name_sun">Zon</string>
     <string name="astro_name_moon">Maan</string>
@@ -6267,7 +6266,7 @@
     <string name="show_expand_button">Toon uitklapknop</string>
     <string name="imprecise_coordinates">Onnauwkeurige coördinaten</string>
     <string name="astro_constellations">Sterrenbeelden</string>
-    <string name="star_watcher_plugin_description">Sterrenoverzicht, 3D-sterrenkaart</string>
+    <string name="astronomy_plugin_description">Sterrenoverzicht, 3D-sterrenkaart</string>
     <string name="star_visibility_name">Ster zichtbaarheid</string>
     <string name="star_altitude_name">Ster hoogte</string>
     <string name="magnitude_filter">Magnitude-filter</string>

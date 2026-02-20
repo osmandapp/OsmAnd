@@ -1,11 +1,8 @@
-package net.osmand.plus.plugins.astro
+package net.osmand.plus.plugins.astronomy
 
 import android.app.Activity
 import android.graphics.drawable.Drawable
 import android.view.View
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import net.osmand.PlatformUtil
 import net.osmand.aidlapi.OsmAndCustomizationConstants
 import net.osmand.plus.OsmandApplication
@@ -13,36 +10,34 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.OsmandPlugin
 import net.osmand.plus.settings.backend.preferences.CommonPreference
-import net.osmand.plus.utils.AndroidNetworkUtils
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
-import java.io.File
-import java.net.URL
 
-class StarWatcherPlugin(app: OsmandApplication) : OsmandPlugin(app) {
+class AstronomyPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 
 	companion object {
-		private val LOG = PlatformUtil.getLog(StarWatcherPlugin::class.java)
-		private const val SETTINGS_PREFERENCE_ID = "star_watcher_settings"
+		private val LOG = PlatformUtil.getLog(AstronomyPlugin::class.java)
+		private const val SETTINGS_PREFERENCE_ID = "astronomy_settings"
 	}
 
-	private val _swSettings by lazy { StarWatcherSettings(getSettingsPref()) }
-	val swSettings: StarWatcherSettings get() = _swSettings
+	private val astronomySettings by lazy { AstronomyPluginSettings(getSettingsPref()) }
+	val astroSettings: AstronomyPluginSettings get() = astronomySettings
 
-	private val _astroDataProvider by lazy { AstroDataDbProvider() }
-	val astroDataProvider: AstroDataProvider get() = _astroDataProvider
+	private val astroDataProvider by lazy { AstroDataDbProvider() }
+	val dataProvider: AstroDataProvider get() = astroDataProvider
 
 	override fun getId(): String {
-		return OsmAndCustomizationConstants.PLUGIN_STAR_WATCHER
+		return OsmAndCustomizationConstants.PLUGIN_ASTRONOMY
 	}
 
 	override fun getName(): String {
-		return app.getString(R.string.star_watcher_plugin_name)
+		val name = app.getString(R.string.astronomy_plugin_name)
+		return app.getString(R.string.ltr_or_rtl_combine_via_space, name, "(Beta)")
 	}
 
 	override fun getDescription(linksEnabled: Boolean): CharSequence {
-		return app.getString(R.string.star_watcher_plugin_description)
+		return app.getString(R.string.astronomy_plugin_description)
 	}
 
 	override fun getLogoResourceId(): Int {

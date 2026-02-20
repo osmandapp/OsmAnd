@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro.utils
+package net.osmand.plus.plugins.astronomy.utils
 
 import android.content.Context
 import android.hardware.GeomagneticField
@@ -10,7 +10,7 @@ import android.view.Surface
 import android.view.WindowManager
 import android.widget.Toast
 import net.osmand.Location
-import net.osmand.plus.plugins.astro.views.StarView
+import net.osmand.plus.plugins.astronomy.views.StarView
 import kotlin.math.abs
 import kotlin.math.asin
 import kotlin.math.atan2

@@ -5817,8 +5817,7 @@
     <string name="has_vehicle_metrics">Avec les données OBDII</string>
     <string name="show_expand_button">Afficher le bouton Développer</string>
     <string name="imprecise_coordinates">Coordonnées imprécises</string>
-    <string name="star_watcher_plugin_name">Observateur d\'étoiles</string>
-    <string name="star_watcher_plugin_description">Cartes stellaires, carte du ciel en 3D</string>
+    <string name="astronomy_plugin_description">Cartes stellaires, carte du ciel en 3D</string>
     <string name="star_map">Carte du ciel</string>
     <string name="star_charts_name">Cartes stellaires</string>
     <string name="star_visibility_name">Visibilité des étoiles</string>

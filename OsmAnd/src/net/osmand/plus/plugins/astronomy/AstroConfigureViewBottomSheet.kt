@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro
+package net.osmand.plus.plugins.astronomy
 
 import android.app.Dialog
 import android.graphics.drawable.Drawable
@@ -269,10 +269,10 @@ class AstroConfigureViewBottomSheet :
 		card: MaterialCardView,
 		@DrawableRes iconRes: Int,
 		@StringRes titleRes: Int,
-		isChecked: (StarWatcherSettings.StarMapConfig) -> Boolean,
-		toggle: (StarWatcherSettings.StarMapConfig) -> StarWatcherSettings.StarMapConfig
+		isChecked: (AstronomyPluginSettings.StarMapConfig) -> Boolean,
+		toggle: (AstronomyPluginSettings.StarMapConfig) -> AstronomyPluginSettings.StarMapConfig
 	) {
-		fun render(c: StarWatcherSettings.StarMapConfig) {
+		fun render(c: AstronomyPluginSettings.StarMapConfig) {
 			val drawable = uiUtilities.getIcon(
 				iconRes,
 				ColorUtilities.getActiveIconColorId(nightMode)
@@ -441,11 +441,11 @@ class AstroConfigureViewBottomSheet :
 				)
 			}
 
-	private fun requireConfig(): StarWatcherSettings.StarMapConfig {
-		return requireStarMap().swSettings.getStarMapConfig()
+	private fun requireConfig(): AstronomyPluginSettings.StarMapConfig {
+		return requireStarMap().astroSettings.getStarMapConfig()
 	}
 
-	private fun applyConfigChange(newConfig: StarWatcherSettings.StarMapConfig) {
+	private fun applyConfigChange(newConfig: AstronomyPluginSettings.StarMapConfig) {
 		requireStarMap().setStarMapSettings(newConfig)
 	}
 }

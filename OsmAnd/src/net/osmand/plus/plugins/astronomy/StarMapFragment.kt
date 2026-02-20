@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro
+package net.osmand.plus.plugins.astronomy
 
 import android.graphics.Color
 import android.graphics.ColorMatrix
@@ -31,21 +31,20 @@ import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.astro.StarChartState.StarChartType
-import net.osmand.plus.plugins.astro.StarWatcherSettings.CommonConfig
-import net.osmand.plus.plugins.astro.StarWatcherSettings.StarMapConfig
-import net.osmand.plus.plugins.astro.utils.AstroUtils
-import net.osmand.plus.plugins.astro.utils.StarMapARModeHelper
-import net.osmand.plus.plugins.astro.utils.StarMapCameraHelper
-import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
-import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
-import net.osmand.plus.plugins.astro.views.StarChartView
-import net.osmand.plus.plugins.astro.views.StarCompassButton
-import net.osmand.plus.plugins.astro.views.StarMapButton
-import net.osmand.plus.plugins.astro.views.StarMapResetButton
-import net.osmand.plus.plugins.astro.views.StarMapTimeControlButton
-import net.osmand.plus.plugins.astro.views.StarView
-import net.osmand.plus.plugins.astro.views.StarVisiblityChartView
+import net.osmand.plus.plugins.astronomy.StarChartState.StarChartType
+import net.osmand.plus.plugins.astronomy.AstronomyPluginSettings.CommonConfig
+import net.osmand.plus.plugins.astronomy.AstronomyPluginSettings.StarMapConfig
+import net.osmand.plus.plugins.astronomy.utils.StarMapARModeHelper
+import net.osmand.plus.plugins.astronomy.utils.StarMapCameraHelper
+import net.osmand.plus.plugins.astronomy.views.DateTimeSelectionView
+import net.osmand.plus.plugins.astronomy.views.StarAltitudeChartView
+import net.osmand.plus.plugins.astronomy.views.StarChartView
+import net.osmand.plus.plugins.astronomy.views.StarCompassButton
+import net.osmand.plus.plugins.astronomy.views.StarMapButton
+import net.osmand.plus.plugins.astronomy.views.StarMapResetButton
+import net.osmand.plus.plugins.astronomy.views.StarMapTimeControlButton
+import net.osmand.plus.plugins.astronomy.views.StarView
+import net.osmand.plus.plugins.astronomy.views.StarVisiblityChartView
 import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
@@ -108,11 +107,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		private set
 
 	private val dataProvider: AstroDataProvider by lazy {
-		PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).astroDataProvider
+		PluginsHelper.requirePlugin(AstronomyPlugin::class.java).dataProvider
 	}
 
-	val swSettings: StarWatcherSettings by lazy {
-		PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
+	val astroSettings: AstronomyPluginSettings by lazy {
+		PluginsHelper.requirePlugin(AstronomyPlugin::class.java).astroSettings
 	}
 
 	private lateinit var arModeHelper: StarMapARModeHelper
@@ -177,7 +176,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		val app = requireActivity().application as OsmandApplication
 		viewModel = ViewModelProvider(this,
-			StarObjectsViewModel.Factory(app, swSettings, dataProvider))[StarObjectsViewModel::class.java]
+			StarObjectsViewModel.Factory(app, astroSettings, dataProvider))[StarObjectsViewModel::class.java]
 
 		mainLayout = view.findViewById(R.id.main_layout)
 		starView = view.findViewById(R.id.star_view)
@@ -321,11 +320,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			compassButton = it
 		}
 
-		swSettings.getCommonConfig().let { config ->
+		astroSettings.getCommonConfig().let { config ->
 			updateRegularMapVisibility(config.showRegularMap)
 			updateStarChartVisibility(config.showStarChart)
 		}
-		swSettings.getStarMapConfig().let { config ->
+		astroSettings.getStarMapConfig().let { config ->
 			starView.showAzimuthalGrid = config.showAzimuthalGrid
 			starView.showEquatorialGrid = config.showEquatorialGrid
 			starView.showEclipticLine = config.showEclipticLine
@@ -663,11 +662,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			showRegularMap = regularMapVisible,
 			showStarChart = starChartsView.isVisible,
 		)
-		swSettings.setCommonConfig(config)
+		astroSettings.setCommonConfig(config)
 	}
 
 	private fun saveStarMapSettings() {
-		val current = swSettings.getStarMapConfig()
+		val current = astroSettings.getStarMapConfig()
 		val config = current.copy(
 			showAzimuthalGrid = starView.showAzimuthalGrid,
 			showEquatorialGrid = starView.showEquatorialGrid,
@@ -693,7 +692,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			is2DMode = starView.is2DMode,
 			magnitudeFilter = starView.magnitudeFilter?.toDouble()
 		)
-		swSettings.setStarMapConfig(config)
+		astroSettings.setStarMapConfig(config)
 	}
 
 	fun setStarMapSettings(newConfig: StarMapConfig) {
@@ -723,7 +722,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		starView.updateVisibility()
 
-		swSettings.setStarMapConfig(newConfig)
+		astroSettings.setStarMapConfig(newConfig)
 	}
 
 	private fun updateMagnitudeFilterVisibility() {
