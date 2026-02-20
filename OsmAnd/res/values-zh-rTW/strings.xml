@@ -5737,8 +5737,7 @@
     <string name="buildings_3d_detail_level">3D 建築物細節化處理</string>
     <string name="show_expand_button">顯示展開按鈕</string>
     <string name="imprecise_coordinates">不精確的座標</string>
-    <string name="star_watcher_plugin_name">星空觀測（測試版）</string>
-    <string name="star_watcher_plugin_description">星圖，3D 星空地圖</string>
+    <string name="astronomy_plugin_description">星圖，3D 星空地圖</string>
     <string name="star_map">星空地圖</string>
     <string name="star_charts_name">星圖</string>
     <string name="star_visibility_name">星體能見度</string>

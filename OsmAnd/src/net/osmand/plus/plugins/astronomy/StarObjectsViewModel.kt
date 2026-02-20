@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro
+package net.osmand.plus.plugins.astronomy
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -15,7 +15,7 @@ import java.util.TimeZone
 
 class StarObjectsViewModel(
 	private val app: Application,
-	private val settings: StarWatcherSettings,
+	private val settings: AstronomyPluginSettings,
 	private val dataProvider: AstroDataProvider,
 ) : AndroidViewModel(app) {
 
@@ -34,7 +34,7 @@ class StarObjectsViewModel(
 
 	class Factory(
 		private val application: Application,
-		private val settings: StarWatcherSettings,
+		private val settings: AstronomyPluginSettings,
 		private val dataProvider: AstroDataProvider
 	) : ViewModelProvider.Factory {
 		@Suppress("UNCHECKED_CAST")

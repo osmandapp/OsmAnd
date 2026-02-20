@@ -6299,8 +6299,7 @@
     <string name="organize_by_max_speed">Velocidade máxima</string>
     <string name="organize_by_max_altitude">Altitude máxima</string>
     <string name="gpx_too_many_points_visible_warning">Uma grande quantidade de trilhas GPX visíveis leva a um alto uso de memória</string>
-    <string name="star_watcher_plugin_name">Observador de estrelas (Beta)</string>
-    <string name="star_watcher_plugin_description">Mapas estelares, mapa estelar 3D</string>
+    <string name="astronomy_plugin_description">Mapas estelares, mapa estelar 3D</string>
     <string name="star_map">Mapa estelar</string>
     <string name="star_charts_name">Mapas estelares</string>
     <string name="star_visibility_name">Visibilidade das estrelas</string>

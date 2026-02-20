@@ -5956,7 +5956,6 @@
     <string name="buildings_3d_detail_level">3D-bygningers detaljering</string>
     <string name="show_expand_button">Vis udvidknap</string>
     <string name="imprecise_coordinates">Upræcise koordinater</string>
-    <string name="star_watcher_plugin_name">Stjernekigger (Beta)</string>
     <string name="star_map">Stjernekort</string>
     <string name="star_visibility_name">Stjernesynlighed</string>
     <string name="star_altitude_name">Stjernehøjde</string>
@@ -5985,7 +5984,7 @@
     <string name="visible_layers_and_objects">Synlige lag og objekter</string>
     <string name="astro_rise">Opgang</string>
     <string name="astro_set">Nedgang</string>
-    <string name="star_watcher_plugin_description">Himmelkort, 3D-stjernekort</string>
+    <string name="astronomy_plugin_description">Himmelkort, 3D-stjernekort</string>
     <string name="star_charts_name">Himmelkort</string>
     <string name="ecliptic_line">Ekliptika</string>
     <string name="magnitude_filter">Størrelsesklassefilter</string>

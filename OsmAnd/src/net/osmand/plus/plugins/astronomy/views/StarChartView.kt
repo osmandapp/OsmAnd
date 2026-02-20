@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro.views
+package net.osmand.plus.plugins.astronomy.views
 
 import android.content.Context
 import android.graphics.Canvas
@@ -29,11 +29,11 @@ import kotlinx.coroutines.withContext
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.astro.SkyObject
-import net.osmand.plus.plugins.astro.StarObjectsViewModel
-import net.osmand.plus.plugins.astro.StarWatcherPlugin
-import net.osmand.plus.plugins.astro.StarWatcherSettings.FavoriteConfig
-import net.osmand.plus.plugins.astro.utils.AstroUtils
+import net.osmand.plus.plugins.astronomy.SkyObject
+import net.osmand.plus.plugins.astronomy.StarObjectsViewModel
+import net.osmand.plus.plugins.astronomy.AstronomyPlugin
+import net.osmand.plus.plugins.astronomy.AstronomyPluginSettings.FavoriteConfig
+import net.osmand.plus.plugins.astronomy.utils.AstroUtils
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
@@ -118,10 +118,10 @@ abstract class StarChartView @JvmOverloads constructor(
 				.setView(recyclerView)
 				.setPositiveButton(R.string.shared_string_apply) { _, _ ->
 					val favoritesConfig = dialogObjects.filter { it.isFavorite }.map { FavoriteConfig(it.id) }
-					val swSettings = PluginsHelper.requirePlugin(StarWatcherPlugin::class.java).swSettings
-					val currentConfig = swSettings.getStarMapConfig()
+					val astroSettings = PluginsHelper.requirePlugin(AstronomyPlugin::class.java).astroSettings
+					val currentConfig = astroSettings.getStarMapConfig()
 					val newConfig = currentConfig.copy(favorites = favoritesConfig)
-					swSettings.setStarMapConfig(newConfig)
+					astroSettings.setStarMapConfig(newConfig)
 
 					viewModel.refreshSkyObjects()
 					onSettingsChanged()

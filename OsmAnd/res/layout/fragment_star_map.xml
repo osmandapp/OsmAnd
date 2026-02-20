@@ -16,7 +16,7 @@
 			android:layout_height="0dp"
 			android:layout_weight="1">
 
-			<net.osmand.plus.plugins.astro.views.StarView
+			<net.osmand.plus.plugins.astronomy.views.StarView
 				android:id="@+id/star_view"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent" />
@@ -28,7 +28,7 @@
 				android:alpha="0.5"
 				android:visibility="gone" />
 
-			<net.osmand.plus.plugins.astro.views.StarMapButton
+			<net.osmand.plus.plugins.astronomy.views.StarMapButton
 				android:id="@+id/search_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
@@ -53,7 +53,7 @@
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toTopOf="parent" />
 
-			<net.osmand.plus.plugins.astro.views.StarMapButton
+			<net.osmand.plus.plugins.astronomy.views.StarMapButton
 				android:id="@+id/camera_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
@@ -67,7 +67,7 @@
 				app:srcCompat="@drawable/ic_action_device_camera"
 				app:tint="#5f6e7c" />
 
-			<net.osmand.plus.plugins.astro.views.StarMapButton
+			<net.osmand.plus.plugins.astronomy.views.StarMapButton
 				android:id="@+id/settings_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
@@ -81,7 +81,7 @@
 				app:srcCompat="@drawable/ic_layer_top"
 				app:tint="#5f6e7c" />
 
-			<net.osmand.plus.plugins.astro.views.StarMapButton
+			<net.osmand.plus.plugins.astronomy.views.StarMapButton
 				android:id="@+id/close_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
@@ -95,7 +95,7 @@
 				app:srcCompat="@drawable/ic_action_close"
 				app:tint="#5f6e7c" />
 
-			<net.osmand.plus.plugins.astro.views.StarMapButton
+			<net.osmand.plus.plugins.astronomy.views.StarMapButton
 				android:id="@+id/ar_mode_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
@@ -130,7 +130,7 @@
 					android:paddingStart="4dp"
 					android:paddingEnd="4dp">
 
-					<net.osmand.plus.plugins.astro.views.StarMapTimeControlButton
+					<net.osmand.plus.plugins.astronomy.views.StarMapTimeControlButton
 						android:id="@+id/time_control_button"
 						style="@style/Widget.MaterialComponents.Button.TextButton"
 						android:layout_width="wrap_content"
@@ -143,7 +143,7 @@
 						app:iconTint="#4285F4"
 						app:rippleColor="#154285F4" />
 
-					<net.osmand.plus.plugins.astro.views.StarMapResetButton
+					<net.osmand.plus.plugins.astronomy.views.StarMapResetButton
 						android:id="@+id/reset_time_button"
 						android:layout_width="@dimen/map_small_button_size"
 						android:layout_height="@dimen/map_small_button_size"
@@ -159,7 +159,7 @@
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
 
-			<net.osmand.plus.plugins.astro.views.DateTimeSelectionView
+			<net.osmand.plus.plugins.astronomy.views.DateTimeSelectionView
 				android:id="@+id/time_selection_view"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
 					android:rotation="270" />
 			</FrameLayout>
 
-			<net.osmand.plus.plugins.astro.views.StarMapButton
+			<net.osmand.plus.plugins.astronomy.views.StarMapButton
 				android:id="@+id/reset_magnitude_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
@@ -236,7 +236,7 @@
 					android:rotation="270" />
 			</FrameLayout>
 
-			<net.osmand.plus.plugins.astro.views.StarMapButton
+			<net.osmand.plus.plugins.astronomy.views.StarMapButton
 				android:id="@+id/reset_fov_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"

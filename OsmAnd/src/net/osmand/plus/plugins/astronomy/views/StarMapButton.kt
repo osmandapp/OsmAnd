@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro.views
+package net.osmand.plus.plugins.astronomy.views
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable

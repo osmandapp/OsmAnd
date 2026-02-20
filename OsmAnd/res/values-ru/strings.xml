@@ -5826,8 +5826,7 @@
     <string name="vehicle_metrics_chart_category">Показатели ТС</string>
     <string name="imprecise_coordinates">Примерные координаты</string>
     <string name="show_expand_button">Показать кнопку \"развернуть\"</string>
-    <string name="star_watcher_plugin_name">Звездочёт (Beta)</string>
-    <string name="star_watcher_plugin_description">Карта звёзд в 3D</string>
+    <string name="astronomy_plugin_description">Карта звёзд в 3D</string>
     <string name="star_map">Карта звёзд</string>
     <string name="star_charts_name">Карты звёзд</string>
     <string name="star_visibility_name">Видимость звезд</string>

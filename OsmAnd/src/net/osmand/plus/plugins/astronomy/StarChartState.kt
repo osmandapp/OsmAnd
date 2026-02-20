@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro
+package net.osmand.plus.plugins.astronomy
 
 import androidx.annotation.StringRes
 import net.osmand.plus.OsmandApplication

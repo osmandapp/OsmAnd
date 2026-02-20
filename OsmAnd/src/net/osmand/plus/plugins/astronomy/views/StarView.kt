@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro.views
+package net.osmand.plus.plugins.astronomy.views
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -38,8 +38,8 @@ import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.rotationEclEqd
 import net.osmand.plus.R
-import net.osmand.plus.plugins.astro.Constellation
-import net.osmand.plus.plugins.astro.SkyObject
+import net.osmand.plus.plugins.astronomy.Constellation
+import net.osmand.plus.plugins.astronomy.SkyObject
 import java.util.Calendar
 import java.util.TimeZone
 import kotlin.math.PI

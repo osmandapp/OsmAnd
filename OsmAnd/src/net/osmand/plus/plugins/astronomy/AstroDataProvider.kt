@@ -1,14 +1,14 @@
-package net.osmand.plus.plugins.astro
+package net.osmand.plus.plugins.astronomy
 
 import android.content.Context
 import android.graphics.Color
 import androidx.core.graphics.toColorInt
 import io.github.cosinekitty.astronomy.Body
 import net.osmand.PlatformUtil
-import net.osmand.plus.plugins.astro.SkyObject.Type
-import net.osmand.plus.plugins.astro.utils.AstroUtils
-import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyColor
-import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyName
+import net.osmand.plus.plugins.astronomy.SkyObject.Type
+import net.osmand.plus.plugins.astronomy.utils.AstroUtils
+import net.osmand.plus.plugins.astronomy.utils.AstroUtils.bodyColor
+import net.osmand.plus.plugins.astronomy.utils.AstroUtils.bodyName
 import org.json.JSONArray
 
 abstract class AstroDataProvider {

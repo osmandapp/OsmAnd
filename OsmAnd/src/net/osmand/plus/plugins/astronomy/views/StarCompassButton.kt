@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro.views
+package net.osmand.plus.plugins.astronomy.views
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
@@ -19,7 +19,6 @@ import net.osmand.plus.views.controls.maphudbuttons.CompassDrawable
 import net.osmand.plus.views.controls.maphudbuttons.MapButton
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState
 import net.osmand.shared.grid.ButtonPositionSize
-import net.osmand.util.Algorithms
 
 class StarCompassButton @JvmOverloads constructor(
 	context: Context,

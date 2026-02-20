@@ -5150,8 +5150,7 @@
     <string name="organize_by_max_speed">Najvišja hitrost</string>
     <string name="organize_by_max_altitude">Največja zem. višina</string>
     <string name="gpx_too_many_points_visible_warning">Velike količine vidnih sledi GPX pomenijo visoko porabo spomina</string>
-    <string name="star_watcher_plugin_name">Opazovalec zvezd (beta)</string>
-    <string name="star_watcher_plugin_description">Zvezdne karte, 3D zemljevid zvezd</string>
+    <string name="astronomy_plugin_description">Zvezdne karte, 3D zemljevid zvezd</string>
     <string name="star_map">Zemljevid zvezd</string>
     <string name="star_charts_name">Zvezdne karte</string>
     <string name="star_visibility_name">Vidnost zvezde</string>

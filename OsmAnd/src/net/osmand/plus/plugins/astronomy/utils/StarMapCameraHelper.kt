@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astro.utils
+package net.osmand.plus.plugins.astronomy.utils
 
 import android.Manifest
 import android.content.Context
@@ -19,7 +19,7 @@ import androidx.annotation.RequiresPermission
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import net.osmand.plus.plugins.astro.views.StarView
+import net.osmand.plus.plugins.astronomy.views.StarView
 import net.osmand.shared.util.LoggerFactory
 import kotlin.math.abs
 import kotlin.math.atan

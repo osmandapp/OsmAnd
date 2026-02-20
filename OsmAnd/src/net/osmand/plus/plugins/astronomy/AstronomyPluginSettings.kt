@@ -1,11 +1,11 @@
-package net.osmand.plus.plugins.astro
+package net.osmand.plus.plugins.astronomy
 
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
 
-class StarWatcherSettings(private val settingsPref: CommonPreference<String>) {
+class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>) {
 
 	companion object {
 		private const val KEY_COMMON = "common"

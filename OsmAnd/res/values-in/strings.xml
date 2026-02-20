@@ -6239,7 +6239,7 @@
     <string name="show_expand_button">Tampilkan tombol perluas</string>
     <string name="imprecise_coordinates">Koordinat tidak tepat</string>
     <string name="has_vehicle_metrics">Dengan data OBDII</string>
-    <string name="star_watcher_plugin_description">Bagan bintang, peta bintang 3D</string>
+    <string name="astronomy_plugin_description">Bagan bintang, peta bintang 3D</string>
     <string name="star_map">Peta bintang</string>
     <string name="star_charts_name">Bagan bintang</string>
     <string name="star_visibility_name">Visibilitas bintang</string>

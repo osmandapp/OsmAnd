@@ -5677,9 +5677,8 @@
     <string name="star_map">Χάρτης αστέρων</string>
     <string name="star_visibility_name">Ορατότητα αστέρων</string>
     <string name="star_altitude_name">Ύψος αστέρων</string>
-    <string name="star_watcher_plugin_name">Παρατηρητής αστέρων (Beta)</string>
     <string name="star_charts_name">Χάρτες αστέρων</string>
-    <string name="star_watcher_plugin_description">3D χάρτης αστέρων</string>
+    <string name="astronomy_plugin_description">3D χάρτης αστέρων</string>
     <string name="azimuthal_grid">Πλέγμα αζιμούθιου</string>
     <string name="equatorial_grid">Πλέγμα ισημερινού</string>
     <string name="ecliptic_line">Εκλειπτική γραμμή</string>

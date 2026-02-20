@@ -5908,8 +5908,7 @@
     <string name="astro_name_uranus">Uran</string>
     <string name="astro_name_neptune">Neptun</string>
     <string name="astro_name_pluto">Pluton</string>
-    <string name="star_watcher_plugin_description">Zvezdane mape, 3D zvezdana mapa</string>
-    <string name="star_watcher_plugin_name">Posmatranje zvezda (Beta)</string>
+    <string name="astronomy_plugin_description">Zvezdane mape, 3D zvezdana mapa</string>
     <string name="azimuthal_grid">Azimutalna mreža</string>
     <string name="equatorial_grid">Ekvatorijalna mreža</string>
     <string name="ecliptic_line">Ekliptička linija</string>
