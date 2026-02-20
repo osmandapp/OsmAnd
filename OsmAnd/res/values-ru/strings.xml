@@ -1679,7 +1679,7 @@
     <string name="shared_string_tracks">Треки</string>
     <string name="shared_string_currently_recording_track">Текущий трек</string>
     <string name="share_note">Поделиться заметкой</string>
-    <string name="shared_string_release">Выпущенный</string>
+    <string name="shared_string_release">Выпуск</string>
     <string name="routing_settings_2">Настройки навигации</string>
     <string name="general_settings_2">Общие настройки</string>
     <string name="shared_string_clear_all">Очистить все</string>
@@ -5911,4 +5911,14 @@
     <string name="stars_articles">Статьи о звездах</string>
     <string name="delete_groups_confirmation">Удалить группы?</string>
     <string name="add_to_track">Добавить в трек</string>
+    <string name="unpin_folder">Открепить папку</string>
+    <string name="pin_folder">Закрепить папку</string>
+    <string name="favorite_search_empty_state_description">Попробуйте изменить параметры поиска или фильтры, возможно это поможет</string>
+    <string name="favorites_empty_folder_description">В этой папке пока нет избранных точек.</string>
+    <string name="free_custom_color_description">Придайте 3D-зданиям любой цвет. Идеально подходит для соответствия теме карты или улучшения контраста.</string>
+    <string name="buildings_3d_use_map_style_color_description">Использовать цвета стиля карты (%s).</string>
+    <string name="buildings_3d_visibility_description">Отрегулируйте непрозрачность 3D-структур на карте.</string>
+    <string name="level_of_details">Детализация</string>
+    <string name="performance">Производительность</string>
+    <string name="view_distance">Дальность видимости</string>
 </resources>
