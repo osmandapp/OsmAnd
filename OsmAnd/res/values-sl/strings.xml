@@ -5267,8 +5267,15 @@
     <string name="reconnect">Ponovno poveži</string>
     <string name="rendering_attr_showSkiSlopes_name">Prikaži smučarske proge</string>
     <string name="rendering_attr_showSkiSlopes_description">Prikaži poenostavljene smučarske proge</string>
-    <string name="trip_recording_downhill_widget_desc">Prikaži vsoto vseh spustov ali zadnji spust trenutno beležene sledi.</string>
-    <string name="trip_recording_uphill_widget_desc">Prikaže vsoto vseh vzponov ali zadnji vzpon trenutno beležene sledi.</string>
-    <string name="trip_recording_distance_widget_desc">Prikaže celotno razdaljo vaše trenutno beležene sledi, z načini za ogled razdalje zadnjega vzpona in spusta.</string>
-    <string name="trip_recording_max_speed_widget_description">Pokaže najvišjo hitrost trenutno beležene sledi. Kliknite za preklop med nasploh najvišjo hitrostjo in najvišjo hitrostjo od zadnjega vzpona ali spusta.</string>
+    <string name="trip_recording_downhill_widget_desc">Prikaži vsoto vseh spustov ali zadnji spust trenutno beležene poti.</string>
+    <string name="trip_recording_uphill_widget_desc">Prikaže vsoto vseh vzponov ali zadnji vzpon trenutno beležene poti.</string>
+    <string name="trip_recording_distance_widget_desc">Prikaže celotno razdaljo vaše trenutno beležene poti, z načini za ogled razdalje zadnjega vzpona in spusta.</string>
+    <string name="trip_recording_max_speed_widget_description">Pokaže najvišjo hitrost trenutno beležene poti. Kliknite za preklop med nasploh najvišjo hitrostjo in najvišjo hitrostjo od zadnjega vzpona ali spusta.</string>
+    <string name="trip_recording_average_slope_widget_description">Prikaže povprečni naklon zadnjega spusta ali vzpona trenutno beležene poti.</string>
+    <string name="average_slope">Povprečni naklon</string>
+    <string name="shared_string_last_uphill">Zadnji vzpon</string>
+    <string name="shared_string_last_downhill">Zadnji spust</string>
+    <string name="shared_string_price">Cena</string>
+    <string name="obd_alt_battery_voltage">Napetost priključka</string>
+    <string name="liter_single">Liter</string>
 </resources>
