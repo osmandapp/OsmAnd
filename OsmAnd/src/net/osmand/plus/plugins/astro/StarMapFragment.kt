@@ -36,7 +36,7 @@ import net.osmand.plus.plugins.astro.StarWatcherSettings.CommonConfig
 import net.osmand.plus.plugins.astro.StarWatcherSettings.StarMapConfig
 import net.osmand.plus.plugins.astro.utils.StarMapARModeHelper
 import net.osmand.plus.plugins.astro.utils.StarMapCameraHelper
-import net.osmand.plus.plugins.astro.views.AstroContextMenuFragment
+import net.osmand.plus.plugins.astro.contextmenu.AstroContextMenuFragment
 import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
 import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 import net.osmand.plus.plugins.astro.views.StarChartView
