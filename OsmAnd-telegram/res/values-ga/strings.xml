@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="searching_for_gps">Ag aimsiú suímh…</string>
-    <string name="si_nm_h">Muirmhílte san uair</string>
+    <string name="si_nm_h">Míle farraige san uair (snaidhm)</string>
     <string name="install_osmand_dialog_message">Caithfidh tú an leagan íoctha no an leagan saor in aisce d\'OsmAnd ar dtús</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="shared_string_login">Logáil isteach</string>

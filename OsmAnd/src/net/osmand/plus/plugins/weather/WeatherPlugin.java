@@ -620,10 +620,16 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public boolean isMapPositionIconNeeded() {
+		return hasCustomForecast();
+	}
+
+	@Override
 	protected boolean layerShouldBeDisabled(@NonNull OsmandMapLayer layer) {
 		return hasCustomForecast() && layer instanceof DownloadedRegionsLayer;
 	}
 
+	@Override
 	public void onIndexItemDownloaded(@NonNull IndexItem item, boolean updatingFile) {
 		if (item.getType() == WEATHER_FORECAST) {
 			weatherHelper.updateForecastCache(item.getTargetFile(app).getAbsolutePath());

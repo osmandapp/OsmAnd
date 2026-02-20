@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+
+	<item
+		android:id="@+id/select_all"
+		android:icon="@drawable/ic_action_select_all"
+		android:title="@string/shared_string_select_all"
+		app:showAsAction="ifRoom"/>
+
+	<item
+		android:id="@+id/more_button"
+		android:icon="@drawable/ic_overflow_menu_white"
+		android:title="@string/shared_string_more"
+		app:showAsAction="ifRoom"/>
+</menu>

@@ -13,19 +13,19 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
-		<net.osmand.plus.plugins.astro.views.CelestialPathView
+		<net.osmand.plus.plugins.astronomy.views.CelestialPathView
 			android:id="@+id/celestial_path_view"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:visibility="gone"/>
 
-		<net.osmand.plus.plugins.astro.views.StarAltitudeChartView
+		<net.osmand.plus.plugins.astronomy.views.StarAltitudeChartView
 			android:id="@+id/star_altitude_view"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:visibility="gone"/>
 
-		<net.osmand.plus.plugins.astro.views.StarVisiblityChartView
+		<net.osmand.plus.plugins.astronomy.views.StarVisiblityChartView
 			android:id="@+id/star_visiblity_view"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"

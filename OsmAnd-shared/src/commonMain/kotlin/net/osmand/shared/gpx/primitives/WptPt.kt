@@ -127,6 +127,10 @@ class WptPt : GpxExtensions {
 		return getExtensionsToRead()[GpxUtilities.HIDDEN_EXTENSION]?.toBoolean() ?: false
 	}
 
+	fun isPinned(): Boolean {
+		return getExtensionsToRead()[GpxUtilities.PINNED_EXTENSION]?.toBoolean() ?: false
+	}
+
 	fun getIconNameOrDefault(): String {
 		var iconName = getIconName()
 		if (iconName == null) {

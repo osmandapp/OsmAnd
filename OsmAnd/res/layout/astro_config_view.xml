@@ -38,6 +38,7 @@
 					<TextView
 						android:id="@+id/title"
 						style="@style/TitleStyle"
+						android:textStyle="bold"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
 						android:layout_marginVertical="12dp"
@@ -49,11 +50,19 @@
 
 					<FrameLayout
 						android:id="@+id/closeBtn"
-						android:layout_width="44dp"
-						android:layout_height="44dp"
+						android:layout_width="48dp"
+						android:layout_height="48dp"
 						android:layout_gravity="center"
 						android:layout_marginEnd="4dp"
 						android:background="?attr/selectableItemBackground">
+
+						<FrameLayout
+							android:layout_width="32dp"
+							android:layout_height="32dp"
+							android:layout_gravity="center"
+							android:background="@drawable/bg_circle">
+
+						</FrameLayout>
 
 						<com.google.android.material.imageview.ShapeableImageView
 							android:layout_width="24dp"
@@ -112,11 +121,12 @@
 
 				<TextView
 					android:id="@+id/visibleObjectsTitle"
-					android:layout_width="wrap_content"
+					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginHorizontal="16dp"
 					android:layout_marginVertical="12dp"
 					android:text="@string/astro_visible_objects"
+					style="@style/TextAppearance.Material3.TitleMedium"
 					android:textColor="?attr/text_color_primary_v2"
 					android:textSize="16sp" />
 
@@ -204,10 +214,12 @@
 				android:orientation="vertical">
 
 				<TextView
+					style="@style/TextAppearance.Material3.TitleMedium"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginVertical="12dp"
-					android:layout_marginStart="16dp"
+					android:layout_marginHorizontal="16dp"
+
 					android:text="@string/personal_category_name"
 					android:textColor="?attr/text_color_primary_v2"
 					android:textSize="16sp" />
@@ -236,10 +248,11 @@
 				android:orientation="vertical">
 
 				<TextView
+					style="@style/TextAppearance.Material3.TitleMedium"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginVertical="12dp"
-					android:layout_marginStart="16dp"
+					android:layout_marginHorizontal="16dp"
 					android:text="@string/astro_rendering"
 					android:textColor="?attr/text_color_primary_v2"
 					android:textSize="16sp" />

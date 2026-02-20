@@ -11,6 +11,7 @@ public class PopUpMenuItem {
 	private final CharSequence title;
 	@ColorInt
 	private final Integer titleColor;
+	private final Integer titleSize;
 	private final Drawable icon;
 	private final OnPopUpMenuItemClickListener onClickListener;
 	@ColorInt
@@ -20,7 +21,8 @@ public class PopUpMenuItem {
 	private final Object tag;
 
 	private PopUpMenuItem(CharSequence title,
-						  @ColorInt @Nullable Integer titleColor,
+	                      @ColorInt @Nullable Integer titleColor,
+	                      Integer titleSize,
 	                      Drawable icon,
 	                      OnPopUpMenuItemClickListener onClickListener,
 	                      Integer compoundBtnColor,
@@ -29,6 +31,7 @@ public class PopUpMenuItem {
 	                      Object tag) {
 		this.title = title;
 		this.titleColor = titleColor;
+		this.titleSize = titleSize;
 		this.icon = icon;
 		this.onClickListener = onClickListener;
 		this.compoundBtnColor = compoundBtnColor;
@@ -45,6 +48,10 @@ public class PopUpMenuItem {
 	@Nullable
 	public Integer getTitleColor() {
 		return titleColor;
+	}
+
+	public Integer getTitleSize() {
+		return titleSize;
 	}
 
 	public Drawable getIcon() {
@@ -85,6 +92,7 @@ public class PopUpMenuItem {
 		private CharSequence title;
 		@ColorInt
 		private Integer titleColor;
+		private Integer titleSize;
 		private Drawable icon;
 		private OnPopUpMenuItemClickListener onClickListener;
 		@ColorInt
@@ -109,6 +117,11 @@ public class PopUpMenuItem {
 
 		public Builder setTitleColor(@ColorInt Integer titleColor) {
 			this.titleColor = titleColor;
+			return this;
+		}
+
+		public Builder setTitleSize(Integer titleSize) {
+			this.titleSize = titleSize;
 			return this;
 		}
 
@@ -143,7 +156,7 @@ public class PopUpMenuItem {
 		}
 
 		public PopUpMenuItem create() {
-			return new PopUpMenuItem(title, titleColor, icon,
+			return new PopUpMenuItem(title, titleColor, titleSize, icon,
 					onClickListener, compoundBtnColor, selected, showTopDivider, tag);
 		}
 	}

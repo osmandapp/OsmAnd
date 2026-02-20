@@ -998,7 +998,7 @@ public class Amenity extends MapObject {
 	}
 
 	public static String getPoiStringWithoutType(Amenity amenity, String locale, boolean transliterate) {
-		String typeName = amenity.getSubTypeStr();
+		String typeName = amenity.getMainSubtype();
 		String localName = amenity.getName(locale, transliterate);
 		if (typeName != null && localName.contains(typeName)) {
 			// type is contained in name e.g.

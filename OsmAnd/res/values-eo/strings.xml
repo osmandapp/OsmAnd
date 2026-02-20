@@ -1196,7 +1196,7 @@
     <string name="switch_to_raster_map_to_see">Elŝutu malkonektan vektoran mapon por tiu ĉi loko per la menuo “Elŝuti mapojn”, aŭ aktivigu la kromprogramon “Enretaj mapoj”.</string>
     <string name="send_files_to_osm">Ĉu alŝuti GPX-dosierojn al OSM?</string>
     <string name="gpx_tags_txt">Etikedoj</string>
-    <string name="gpx_visibility_txt">Videbla</string>
+    <string name="gpx_visibility_txt">Videblo</string>
     <string name="shared_string_description">Priskribo</string>
     <string name="validate_gpx_upload_name_pwd">Bonvolu enmeti vian uzantnomon kaj pasvorton al OSM por alŝuti GPX-dosierojn.</string>
     <string name="default_buttons_support">Subteni</string>
@@ -5015,7 +5015,7 @@
     <string name="most_viewed">Ofte legataj</string>
     <string name="app_mode_baby_transport">Transporto de beboj</string>
     <string name="release_4_6">• Android Auto: aldonita 3D-reĝimo \n \n • spuroj: filtriloj kaj inteligentaj dosierujoj, optimumigita memor-uzo por grandaj dosieroj \n \n • modernigitaj supra kaj malsupra paneloj por eblo enmeti ĉiun fenestraĵon \n \n • plibonigita administrado de lokaj rimedoj \n \n • eblo ŝanĝi klav-asignojn por eksteraj enigaj aparatoj \n \n • novaj fenestraĵoj: Glisrilato kaj Pozicio de Suno \n \n • OsmAnd-Nubo: aliro por forigitaj dosieroj \n \n • plibonigita kolorigo de spuro en la reĝimo Dekliveco kun nova simetria gradiento \n \n • riparitaj problemoj pri travideblaj stataj strioj \n \n • aldonis fenestraĵon ANT+: temperaturo \n \n • nova fenestraĵo: Disponebla RAM</string>
-    <string name="live_monitoring_adress_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, direkto={6}, eta(alvena tempo)={7}, etfa(alvena tempo al intercelo)={8}, eda(distanco)={9}, edfa(distanco al intercelo)={10}.</string>
+    <string name="live_monitoring_adress_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, kompas-direkto={6}, eta(alvena tempo)={7}, etfa(alvena tempo al intercelo)={8}, eda(distanco)={9}, edfa(distanco al intercelo)={10}, elcento_da_baterio={11}.</string>
     <string name="sensor_temperature_desc">Montras temperaturon de sentilo</string>
     <string name="shared_string_temperature">Temperaturo</string>
     <string name="shared_string_cache">Kaŝmemoro</string>
@@ -5305,7 +5305,7 @@
     <string name="daynight_mode_app_theme">Etoso de aplikaĵo</string>
     <string name="key_event_action_continuous_zoom_out">Seninterrompa malgrandigo</string>
     <string name="remove_key_assignment_summary">Forigi klav-asignon por la elektita ago.</string>
-    <string name="map_settings_weather_wind_animation">Movbildi venton</string>
+    <string name="map_settings_weather_wind_animation">Vento (movbilda)</string>
     <string name="tomorrow">Morgaŭ</string>
     <string name="key_event_action_continuous_zoom_in">Seninterrompa pligrandigo</string>
     <string name="remove_key_assignment">Forigi klav-asignon</string>
@@ -5905,8 +5905,7 @@
     <string name="enable_3d_objects">3-dimensiaj konstruaĵoj</string>
     <string name="buildings_3d_detail_level">Detal-nivelo de 3-dimensiaj konstruaĵoj</string>
     <string name="has_vehicle_metrics">Kun OBDII-datumoj</string>
-    <string name="star_watcher_plugin_name">Astrobservanto (Beta)</string>
-    <string name="star_watcher_plugin_description">3-dimensia stelmapo</string>
+    <string name="astronomy_plugin_description">3-dimensia stelmapo</string>
     <string name="star_map">Stelmapo</string>
     <string name="star_charts_name">Diagramo de astroj</string>
     <string name="star_visibility_name">Videbloj de astroj</string>
@@ -5930,7 +5929,7 @@
     <string name="astro_constellations">Stelaroj</string>
     <string name="astro_stars">Steloj</string>
     <string name="astro_galaxies">Galaksioj</string>
-    <string name="astro_nebulae">Nebulozoj</string>
+    <string name="astro_nebulae">Nebulastroj</string>
     <string name="astro_open_clusters">Malfermaj stelamasoj</string>
     <string name="astro_globular_clusters">Globaj stelamasoj</string>
     <string name="astro_galaxy_clusters">Galaksamasoj</string>
@@ -5977,4 +5976,35 @@
     <string name="equator_line">Ĉiela ekvatoro</string>
     <string name="backup_deleted_all_data">Forigis datumojn.</string>
     <string name="backup_deleting_all_data">Forigado de datumoj…</string>
+    <string name="astro_rendering">Bildigado</string>
+    <string name="astro_configure_view">Agordi vidon</string>
+    <string name="astro_visible_objects">Videblaj objektoj</string>
+    <string name="red_filter">Ruĝlumigi</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_deep_sky">Profunda ĉielo</string>
+    <string name="astro_star_clusters">Stelamasoj</string>
+    <string name="astro_nebulas">Nebulastroj</string>
+    <string name="astro_solar_system">Sunsistemo</string>
+    <string name="delete_groups_confirmation">Ĉu forigi grupojn?</string>
+    <string name="add_to_track">Aldoni al spuro</string>
+    <string name="unpin_folder">Depingli dosierujon</string>
+    <string name="pin_folder">Alpingli dosierujon</string>
+    <string name="favorite_search_empty_state_description">Provu alĝustigi vian serĉpeton aŭ filtrilojn</string>
+    <string name="favorites_empty_folder_description">Tiu ĉi dosierujo ankoraŭ enhavas neniun punkton.</string>
+    <string name="building_3d_day_color_content_desc">Koloro de 3-dimensiaj konstruaĵoj (taga haŭto)</string>
+    <string name="building_3d_night_color_content_desc">Koloro de 3-dimensiaj konstruaĵoj (nokta haŭto)</string>
+    <string name="stars_articles">Astroj: artikoloj</string>
+    <string name="astro_directions">Direktoj al</string>
+    <string name="astro_daily_path">Tagaj spuroj</string>
+    <string name="building_3d_low_details_content_desc">3-dimensiaj konstruaĵoj: malaltaj detaloj</string>
+    <string name="building_3d_high_details_content_desc">3-dimensiaj konstruaĵoj: altaj detaloj</string>
+    <string name="building_3d_near_distance_content_desc">3-dimensiaj konstruaĵoj: malalta viddistanco</string>
+    <string name="building_3d_far_distance_content_desc">3-dimensiaj konstruaĵoj: alta viddistanco</string>
+    <string name="free_custom_color_description">Vidigu konstruaĵojn en iu ajn koloro. Uzebla eblo por konveni al elektita map-aspekto aŭ por pliigi kontraston.</string>
+    <string name="buildings_3d_use_map_style_color_description">Uzi implicitan koloron por la map-stilo %s.</string>
+    <string name="buildings_3d_visibility_description">Alĝustigi travideblon de 3-dimensiajn konstruaĵojn sur la mapo.</string>
+    <string name="level_of_details">Detalnivelo</string>
+    <string name="performance">Rendimento</string>
+    <string name="view_distance">Videbla distanco</string>
 </resources>

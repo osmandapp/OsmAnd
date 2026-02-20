@@ -37,6 +37,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
@@ -222,6 +223,28 @@ public class GpxUiHelper {
 			return app.getString(R.string.ltr_or_rtl_combine_via_comma, formattedDate, numberOfTracks);
 		}
 		return numberOfTracks;
+	}
+
+	@NonNull
+	public static String getFavoriteFolderDescription(@NonNull OsmandApplication app, @NonNull FavoriteGroup group) {
+		long lastModified = group.getTimeModified();
+		int pointsCount = group.getPoints().size();
+
+		String description;
+		String empty = app.getString(R.string.shared_string_empty);
+		String numberOfPoints = pointsCount > 0 ? app.getString(R.string.gpx_selection_number_of_points, String.valueOf(pointsCount)) : empty;
+		if (lastModified > 0) {
+			String formattedDate = OsmAndFormatter.getFormattedDate(app, lastModified);
+			description = app.getString(R.string.ltr_or_rtl_combine_via_comma, formattedDate, numberOfPoints);
+		} else {
+			description = numberOfPoints;
+		}
+
+		if (!group.isVisible()) {
+			String hidden = app.getString(R.string.shared_string_hidden);
+			return app.getString(R.string.ltr_or_rtl_combine_via_bold_point, hidden, description);
+		}
+		return description;
 	}
 
 	@NonNull

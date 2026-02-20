@@ -28,7 +28,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.srtm.Buildings3DColorType;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
@@ -234,8 +234,7 @@ public class MapRendererContext {
 			}
 			if (tryCount < 3) {
 				tryCount++;
-				if (tryCount > 1)
-				{
+				if (tryCount > 1) {
 					Log.e(TAG, "Failed to load '" + rendName + "' style, will keep trying");
 					app.showToastMessage(R.string.cant_load_map_styles);
 				}
@@ -436,6 +435,7 @@ public class MapRendererContext {
 			heightmapsActive = false;
 		}
 	}
+
 	public void resetHeightmapProvider() {
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView != null) {
@@ -487,6 +487,7 @@ public class MapRendererContext {
 			updateObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
 		}
 	}
+
 	public void presetMapRendererOptions(@NonNull MapRendererView mapRendererView, boolean MSAAEnabled) {
 		File shadersCache = new File(app.getCacheDir(), OPENGL_SHADERS_CACHE_DIR);
 		if (!shadersCache.exists()) {
@@ -531,9 +532,11 @@ public class MapRendererContext {
 				return;
 			}
 
-			OsmandDevelopmentPlugin devPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			if (devPlugin != null && devPlugin.ENABLE_3D_MAP_OBJECTS.get()) {
-				map3DObjectsProvider = new Map3DObjectsTiledProvider(mapPrimitivesProvider, mapPresentationEnvironment);
+			SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+			if (srtmPlugin != null && srtmPlugin.ENABLE_3D_MAP_OBJECTS.get()) {
+				Buildings3DColorType buildings3DColorType = srtmPlugin.get3DBuildingsColorStyle();
+				int buildings3DCustomColor = srtmPlugin.getBuildings3dColor();
+				map3DObjectsProvider = new Map3DObjectsTiledProvider(mapPrimitivesProvider, mapPresentationEnvironment, buildings3DColorType == Buildings3DColorType.CUSTOM, NativeUtilities.createFColorRGB(buildings3DCustomColor));
 				mapRendererView.setMap3DObjectsProvider(map3DObjectsProvider);
 			} else {
 				mapRendererView.resetMap3DObjectsProvider();
@@ -630,7 +633,7 @@ public class MapRendererContext {
 			if (collection.calculateHeights(
 					ZoomLevel.ZoomLevel14, mapRendererView.getElevationDataTileSize(), qpoints, heights)) {
 				if (heights.size() == points.size()) {
-					int size = (int)heights.size();
+					int size = (int) heights.size();
 					float[] res = new float[size];
 					for (int i = 0; i < size; i++) {
 						res[i] = heights.get(i);
@@ -828,7 +831,7 @@ public class MapRendererContext {
 			object.addLocation(p.getX(), p.getY());
 			rect.expand(p.getX(), p.getY(), p.getX(), p.getY());
 		}
-		object.setBbox((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom);
+		object.setBbox((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom);
 		ObfMapObject obfMapObject;
 		try {
 			obfMapObject = ObfMapObject.dynamic_pointer_cast(mapObject);

@@ -280,7 +280,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 
 		expListView.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
 			WikivoyageSearchResult articleItem = listAdapter.getArticleItem(groupPosition, childPosition);
-			if (groupPosition == 0 && !showWikivoyageArticleDialogFragment(articleItem)) {
+			if (!showWikivoyageArticleDialogFragment(articleItem)) {
 				String selectTravelBook = getString(R.string.select_travel_book);
 				String title = articleItem.getArticleTitle();
 				String toastTitle = getString(R.string.ltr_or_rtl_combine_via_colon_with_space, selectTravelBook, title);

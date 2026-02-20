@@ -2,6 +2,8 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.ObfConstants;
@@ -11,6 +13,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Entity.EntityType;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
@@ -27,6 +30,10 @@ public class FavoritePointEditor extends PointEditor {
 
 	public FavoritePointEditor(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
+	}
+
+	public FavoritePointEditor(@NonNull OsmandApplication app) {
+		super(app);
 	}
 
 	@Override
@@ -136,5 +143,14 @@ public class FavoritePointEditor extends PointEditor {
 		isNew = false;
 		this.favorite = favorite;
 		FavoritePointEditorFragment.showInstance(mapActivity);
+	}
+
+	public void edit(@Nullable FavouritePoint favorite, @NonNull FragmentActivity activity, @NonNull Fragment targetFragment) {
+		if (favorite == null) {
+			return;
+		}
+		isNew = false;
+		this.favorite = favorite;
+		FavoritePointEditorFragment.showInstance(this, activity, targetFragment, false);
 	}
 }

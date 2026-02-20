@@ -119,7 +119,13 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		}
 		if (object.nameIds != null) {
 			for (int nameId : object.nameIds) {
+				if (nameId >= region.quickGetEncodingRulesSize()) {
+					continue;
+				}
 				String name = object.names.get(nameId);
+				if (name == null) {
+					continue;
+				}
 				String tag = region.quickGetEncodingRule(nameId).getTag();
 				RouteTypeRule r = new RouteTypeRule(tag, name);
 				if (!rules.containsKey(r)) {
@@ -134,6 +140,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 				int[] types = object.pointNameTypes[i];
 				if (types != null) {
 					for (int type : types) {
+						if (type >= region.quickGetEncodingRulesSize()) {
+							continue;
+						}
 						RouteTypeRule r = region.quickGetEncodingRule(type);
 						if (!rules.containsKey(r)) {
 							rules.put(r, rules.size());
@@ -147,6 +156,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	private void collectRules(Map<RouteTypeRule, Integer> rules, int[] types) {
 		RouteRegion region = object.region;
 		for (int type : types) {
+			if (type >= region.quickGetEncodingRulesSize()) {
+				continue;
+			}
 			RouteTypeRule rule = region.quickGetEncodingRule(type);
 			String tag = rule.getTag();
 			if (tag.equals("osmand_ele_start") || tag.equals("osmand_ele_end")
@@ -167,6 +179,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		List<Integer> arr = new ArrayList<>();
 		for (int i = 0; i < types.length; i++) {
 			int type = types[i];
+			if (type >= object.region.quickGetEncodingRulesSize()) {
+				continue;
+			}
 			RouteTypeRule rule = object.region.quickGetEncodingRule(type);
 			Integer ruleId = rules.get(rule);
 			if (ruleId != null) {
@@ -201,7 +216,13 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		int[] res = new int[nameIds.length];
 		for (int i = 0; i < nameIds.length; i++) {
 			int nameId = nameIds[i];
+			if (nameId >= object.region.quickGetEncodingRulesSize()) {
+				continue;
+			}
 			String name = object.names.get(nameId);
+			if (name == null) {
+				continue;
+			}
 			String tag = object.region.quickGetEncodingRule(nameId).getTag();
 			RouteTypeRule rule = new RouteTypeRule(tag, name);
 			Integer ruleId = rules.get(rule);
@@ -224,6 +245,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 				int[] arr = new int[types.length];
 				for (int k = 0; k < types.length; k++) {
 					int type = types[k];
+					if (type >= object.region.quickGetEncodingRulesSize()) {
+						continue;
+					}
 					String tag = object.region.quickGetEncodingRule(type).getTag();
 					String name = pointNames[i][k];
 					RouteTypeRule rule = new RouteTypeRule(tag, name);
@@ -274,6 +298,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 					pointNameTypes[i] = new int[namesIds.length];
 					for (int k = 0; k < namesIds.length; k++) {
 						int id = namesIds[k];
+						if (id >= object.region.quickGetEncodingRulesSize()) {
+							continue;
+						}
 						RouteTypeRule r = object.region.quickGetEncodingRule(id);
 						if (r != null) {
 							pointNames[i][k] = r.getValue();

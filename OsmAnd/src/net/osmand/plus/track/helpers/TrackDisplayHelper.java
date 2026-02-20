@@ -95,19 +95,31 @@ public class TrackDisplayHelper {
 	}
 
 	public boolean setJoinSegments(boolean joinSegments) {
+		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath());
 		if (gpxDataItem != null) {
 			boolean updated = app.getGpxDbHelper().updateDataItemParameter(gpxDataItem, JOIN_SEGMENTS, joinSegments);
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath());
 			if (updated && selectedGpxFile != null) {
 				selectedGpxFile.setJoinSegments(joinSegments);
 			}
 			return updated;
+		} else if (selectedGpxFile != null) {
+			selectedGpxFile.setJoinSegments(joinSegments);
+			return true;
 		}
 		return false;
 	}
 
 	public boolean isJoinSegments() {
-		return gpxDataItem != null ? gpxDataItem.getParameter(JOIN_SEGMENTS) : false;
+		if (gpxDataItem != null) {
+			Boolean joinSegments = gpxDataItem.getParameter(JOIN_SEGMENTS);
+			return joinSegments != null ? joinSegments : false;
+		} else {
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath());
+			if (selectedGpxFile != null) {
+				return selectedGpxFile.isJoinSegments();
+			}
+		}
+		return false;
 	}
 
 	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {
