@@ -386,7 +386,8 @@ public class SearchPhrase {
 	}
 
 	public static QuadRect calculateBbox(int radiusMeters, LatLon l) {
-		float coeff = (float) (radiusMeters / MapUtils.getTileDistanceWidth(SearchRequest.ZOOM_TO_SEARCH_POI));
+		double lat = Math.max(Math.abs(l.getLatitude()) - 4, 30.0);
+		float coeff = (float) (radiusMeters / MapUtils.getTileDistanceWidth(lat, SearchRequest.ZOOM_TO_SEARCH_POI));
 		double tx = MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLongitude());
 		double ty = MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLatitude());
 		double topLeftX = Math.max(0, tx - coeff);
