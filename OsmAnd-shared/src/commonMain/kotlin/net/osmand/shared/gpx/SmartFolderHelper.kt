@@ -241,8 +241,11 @@ object SmartFolderHelper {
 						}
 					}
 				}
+
 				if (trackAccepted) {
 					smartFolder.addTrackItem(item)
+				} else {
+					smartFolder.removeTrackItem(item)
 				}
 			}
 		}
