@@ -31,7 +31,7 @@ class SearchButtonClick {
 	public static Matcher<View> mapMenuButton() {
 		return allOf(
 				withId(R.id.map_menu_button),
-				withContentDescription("Back to menu"),
+				withContentDescription(R.string.backToMenu),
 				childAtPosition(
 						allOf(
 								withId(R.id.map_hud_layout),
