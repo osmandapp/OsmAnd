@@ -29,7 +29,11 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 	@Nullable
 	@Override
 	protected PointEditor getPointEditor() {
-		return ((MapActivity) requireActivity()).getContextMenu().getFavoritePointEditor();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return mapActivity.getContextMenu().getFavoritePointEditor();
+		}
+		return null;
 	}
 
 	@Override

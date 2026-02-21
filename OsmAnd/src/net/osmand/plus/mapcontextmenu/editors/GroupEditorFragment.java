@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
@@ -45,7 +46,12 @@ public abstract class GroupEditorFragment extends EditorFragment {
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
 
-		collection.replace(InsetTarget.createScrollable(R.id.editor_scroll_view).build());
+		if (getActionBarActivity() instanceof MyPlacesActivity) {
+			collection.removeType(Type.ROOT_INSET);
+		} else {
+			collection = super.getInsetTargets();
+			collection.add(InsetTarget.createScrollable(R.id.editor_scroll_view).build());
+		}
 		return collection;
 	}
 

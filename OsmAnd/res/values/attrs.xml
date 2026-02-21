@@ -48,6 +48,14 @@
 		<attr name="icon_color_primary" format="reference" />
 		<attr name="active_color_secondary" format="reference" />
 
+	    <attr name="text_color_primary_v2" format="reference" />
+	    <attr name="icon_color_default_v2" format="reference" />
+	    <attr name="icon_color_active_v2" format="reference" />
+	    <attr name="active_color_primary_v2" format="reference" />
+	    <attr name="active_color_secondary_v2" format="reference" />
+	    <attr name="color_button_secondary_v2" format="reference" />
+	    <attr name="color_material_switch_outline" format="reference" />
+
         <attr name="dashboard_divider" format="reference" />
 		<attr name="dashboard_button" format="reference" />
 
@@ -70,6 +78,7 @@
 
         <attr name="appbar_layout_theme" format="reference"/>
         <attr name="search_tabbar_layout_theme" format="reference"/>
+        <attr name="tab_layout_no_caps_theme" format="reference"/>
         <attr name="toolbar_theme" format="reference"/>
         <attr name="new_app_theme" format="reference"/>
 	    <attr name="app_bar_primary_item_color" format="color"/>

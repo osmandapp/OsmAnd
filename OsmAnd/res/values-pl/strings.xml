@@ -4112,8 +4112,6 @@
 \nAby utworzyć kopię zapasową lub przywrócić dane, konieczne będzie ponowne zalogowanie się.</string>
     <string name="backup_deleting_all_data_descr">Poczekaj, aż OsmAnd usunie Twoje dane z chmury. Wszystkie dane na urządzeniu pozostaną nietknięte.</string>
     <string name="backup_error_subscription_was_expired_descr">Twoja subskrypcja OsmAnd Pro wygasła - odnów ją, aby korzystać z kopii zapasowej. Nadal możesz przywracać dane z chmury.</string>
-    <string name="backup_deleting_all_data">Usuwanie wszystkich danych…</string>
-    <string name="backup_deleted_all_data">Usunięto wszystkie dane.</string>
     <string name="backup_deleted_all_data_descr">Wszystkie Twoje dane zostały pomyślnie usunięte z OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">Cała historia wersji została usunięta.</string>
     <string name="backup_data_removed">Wszystkie dane zostały usunięte.</string>
@@ -5281,7 +5279,7 @@
     <string name="help_article_personal_import_export_name">Import / Eksport</string>
     <string name="help_article_widgets_radius_ruler_name">Linijka promienia i linijka</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Nagrywanie ścieżki</string>
-    <string name="live_monitoring_adress_descr">Określ adres internetowy za pomocą składni parametrów: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Określ adres internetowy za pomocą składni parametrów: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="help_article_plan_route_name">Zaplanuj trasę</string>
     <string name="help_article_widgets_map_buttons_name">Przyciski mapy</string>
     <string name="shared_string_included">Dołączony</string>
@@ -6189,4 +6187,13 @@
     <string name="buildings_3d_detail_level">Detalizacja budynków 3D</string>
     <string name="accessibility_independent_features">Funkcje niezależne</string>
     <string name="access_pinch_zoom_magnification_descr">Podczas gestów powiększania używaj skalowania widoku zamiast oddzielnych poziomów powiększenia.</string>
+    <string name="astro_rendering">Wyświetlanie</string>
+    <string name="astro_configure_view">Konfiguruj widok</string>
+    <string name="astro_visible_objects">Widoczne obiekty</string>
+    <string name="red_filter">Czerwony filtr</string>
+    <string name="astro_directions">Wskazówki</string>
+    <string name="astro_daily_path">Dzienna ścieżka</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_solar_system">Układ słoneczny</string>
 </resources>

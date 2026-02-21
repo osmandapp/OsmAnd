@@ -401,7 +401,7 @@ dependencies {
 	implementation 'androidx.gridlayout:gridlayout:1.0.0'
 	implementation 'androidx.cardview:cardview:1.0.0'
 	implementation 'androidx.appcompat:appcompat:1.6.1'
-	implementation 'com.google.android.material:material:1.9.0'
+	implementation 'com.google.android.material:material:1.13.0'
 	implementation 'androidx.browser:browser:1.0.0'
 	implementation 'androidx.preference:preference:1.1.0'
 	implementation 'androidx.lifecycle:lifecycle-process:2.6.0'

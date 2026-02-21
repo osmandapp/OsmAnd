@@ -144,6 +144,7 @@ public class GpxApproximator {
 	public void calculateGpxApproximationSync(@NonNull GpxRouteApproximation gctx,
 	                                          @NonNull ResultMatcher<GpxRouteApproximation> matcher) {
 		try {
+			this.gctx = gctx;
 			List<GpxPoint> gpxPoints = getPoints();
 			boolean useExternalTimestamps = !gpxPoints.isEmpty() && gpxPoints.get(0).time > 0;
 			// useExternalTimestamps affects RouteSegmentResult speed but does nothing on GPX timestamps

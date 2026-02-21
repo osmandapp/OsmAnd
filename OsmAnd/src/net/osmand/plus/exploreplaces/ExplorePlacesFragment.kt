@@ -468,7 +468,7 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 			valueAnimator.addUpdateListener { animator ->
 				val fraction = animator.animatedValue as Float
 
-				val currentTranslationX = if (AndroidUtils.isLayoutRtl(requireActivity())) {
+				val currentTranslationX = if (AndroidUtils.isLayoutRtl(mapActivity)) {
 					if (!isLandScapeVisible) {
 						fragmentWidthPx - fragmentWidthPx * fraction
 					} else {
@@ -487,7 +487,7 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 
 			valueAnimator.start()
 		} else {
-			viewContainer.translationX = if (AndroidUtils.isLayoutRtl(requireActivity())) {
+			viewContainer.translationX = if (AndroidUtils.isLayoutRtl(mapActivity)) {
 				if (!isLandScapeVisible()) 0f else fragmentWidthPx
 			} else {
 				if (!isLandScapeVisible()) 0f else -fragmentWidthPx

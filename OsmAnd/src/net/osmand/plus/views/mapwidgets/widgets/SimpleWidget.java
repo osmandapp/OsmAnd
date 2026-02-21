@@ -7,7 +7,6 @@ import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
-import android.text.Layout;
 import android.text.TextPaint;
 import android.view.Gravity;
 import android.view.View;
@@ -25,16 +24,18 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
-import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsContextMenu;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -58,23 +59,30 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	                    @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType, customId, panel);
 		widgetState = new SimpleWidgetState(app, customId, widgetType, getDefaultWidgetSize());
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 
 		setupViews();
 		updateWidgetView();
 	}
 
 	private void setupViews() {
-		LinearLayout container = (LinearLayout) view;
+		LinearLayout container = (LinearLayout) getView();
 		container.removeAllViews();
 
 		int layoutId = getContentLayoutId();
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
-		setOnLongClickListener(v -> {
-			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, getWidgetActions(), panel, nightMode, true);
+		container.setOnLongClickListener(v -> {
+			List<PopUpMenuItem> actions = getWidgetActions();
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
+			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, actions, layoutMode, panel, nightMode, true);
 			return true;
 		});
-		setOnClickListener(getOnClickListener());
+		container.setOnClickListener(getOnClickListener());
 	}
 
 	@LayoutRes
@@ -101,6 +109,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	private void findViews() {
+		View view = getView();
 		container = view.findViewById(R.id.container);
 		emptyBanner = view.findViewById(R.id.empty_banner);
 		imageView = view.findViewById(R.id.widget_icon);
@@ -174,6 +183,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	public void recreateView() {
+		initView();
 		ImageView oldImageView = imageView;
 		OutlinedTextContainer oldTextView = textView;
 		OutlinedTextContainer oldSmallTextView = smallTextView;
@@ -187,7 +197,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 		imageView.setImageDrawable(oldImageView.getDrawable());
 		copyView(imageView, oldImageView);
-		view.setVisibility(oldContainer.getVisibility());
+		AndroidUiHelper.setVisibility(oldContainer.getVisibility(), getView());
 
 		copyTextView(textView, oldTextView);
 		copyTextView(smallTextView, oldSmallTextView);
@@ -205,7 +215,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	@Override
-	public final void updateInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
+	public final void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
 		boolean shouldHide = shouldHide();
 		boolean emptyValueTextView = Algorithms.isEmpty(textView.getText());
 		boolean typeAllowed = widgetType != null && widgetType.isAllowed();
@@ -343,11 +353,10 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		return null;
 	}
 
-	public void setImageDrawable(int res) {
-		Drawable imageDrawable = iconsCache.getIcon(res, 0);
+	public void setImageDrawable(@NonNull ImageView imageView, @Nullable Drawable drawable, int visibility) {
 		if (shouldShowIcon()) {
-			if (imageDrawable != null) {
-				imageView.setImageDrawable(imageDrawable);
+			if (drawable != null) {
+				imageView.setImageDrawable(drawable);
 				Object anim = imageView.getDrawable();
 				if (anim instanceof AnimationDrawable) {
 					((AnimationDrawable) anim).start();
@@ -360,7 +369,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		imageView.invalidate();
 	}
 
-	public void updateIcon(){
+	public void updateIcon() {
 		int iconId = getIconId();
 		if (iconId != 0) {
 			setImageDrawable(iconId);
@@ -392,7 +401,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		if (iconId != 0) {
 			setImageDrawable(iconId);
 		}
-		view.findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
+		getView().findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
 
 		if (bottomDivider != null) {
 			bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
@@ -404,7 +413,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	@Override
 	protected View getContentView() {
-		return isVerticalWidget() ? view : container;
+		return isVerticalWidget() ? getView() : container;
 	}
 
 	@Override

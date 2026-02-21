@@ -8,7 +8,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.PRIMARY;
 import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -208,10 +207,6 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			activity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.VISIBLE);
-		}
 		Fragment fragment = getTargetFragment();
 		if (fragment != null && !continued) {
 			fragment.onActivityResult(REQUEST_CODE, CANCEL_RESULT_CODE, null);

@@ -1,6 +1,11 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
 import net.osmand.OnResultCallback;
 import net.osmand.core.android.MapRendererView;
@@ -14,8 +19,6 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class AltitudeWidget extends SimpleWidget {
 
@@ -25,6 +28,11 @@ public class AltitudeWidget extends SimpleWidget {
 	public AltitudeWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, widgetType, customId, widgetsPanel);
 		this.mapView = mapActivity.getMapView();
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		setIcons(widgetType);
 		setText(NO_VALUE, null);
 	}

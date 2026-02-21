@@ -341,30 +341,21 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				return Collections.emptyList();
 			}
 		}
+		if (zoom < ZOOM_TO_SHOW_SELECTION) {
+			return Collections.emptyList();
+		}
 
-		List<BinaryMapDataObject> result;
 		int left = MapUtils.get31TileNumberX(latLonBounds.left);
 		int right = MapUtils.get31TileNumberX(latLonBounds.right);
 		int top = MapUtils.get31TileNumberY(latLonBounds.top);
 		int bottom = MapUtils.get31TileNumberY(latLonBounds.bottom);
 
 		try {
-			result = osmandRegions.query(left, right, top, bottom, false);
+			List<BinaryMapDataObject> result = osmandRegions.query(left, right, top, bottom, false);
+			return osmandRegions.filterQueryResultsByPoint(result, left / 2 + right / 2, top / 2 + bottom / 2);
 		} catch (IOException e) {
-			return null;
+			return Collections.emptyList();
 		}
-
-		Iterator<BinaryMapDataObject> it = result.iterator();
-		while (it.hasNext()) {
-			BinaryMapDataObject o = it.next();
-			if (zoom >= ZOOM_TO_SHOW_SELECTION) {
-				if (!osmandRegions.contain(o, left / 2 + right / 2, top / 2 + bottom / 2)) {
-					it.remove();
-				}
-			}
-		}
-
-		return result;
 	}
 
 	private boolean checkIfMapEmpty(int zoom) {

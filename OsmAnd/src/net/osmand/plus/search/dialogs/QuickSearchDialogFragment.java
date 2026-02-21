@@ -196,6 +196,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private boolean phraseDefined;
 	private boolean addressSearch;
 	private boolean citiesLoaded;
+	private List<SearchResult> loadCitiesResult;
 	private LatLon storedOriginalLocation;
 
 	private QuickSearchType searchType = QuickSearchType.REGULAR;
@@ -1154,7 +1155,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (app.isApplicationInitializing()) {
 			showProgressBar();
 			app.getAppInitializer().addOnFinishListener(result -> {
-				if (!paused) {
+				if (!paused && isAdded()) {
 					reloadCategoriesInternal();
 					if (!searching) {
 						hideProgressBar();
@@ -1249,7 +1250,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (app.isApplicationInitializing()) {
 			showProgressBar();
 			app.getAppInitializer().addOnFinishListener(result -> {
-				if (!paused) {
+				if (!paused && isAdded()) {
 					reloadCitiesInternal();
 					if (!searching) {
 						hideProgressBar();
@@ -1300,9 +1301,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 		SearchResult lastCity = null;
 		if (res != null) {
+			if(!res.getCurrentSearchResults().isEmpty()) {
+				loadCitiesResult = res.getCurrentSearchResults();
+			}
 			citiesLoaded = !res.getCurrentSearchResults().isEmpty();
 			long lastCityId = settings.getLastSearchedCity();
-			for (SearchResult sr : res.getCurrentSearchResults()) {
+			for (SearchResult sr : loadCitiesResult) {
 				if (sr.objectType == ObjectType.CITY && ((City) sr.object).getId() == lastCityId) {
 					lastCity = sr;
 					break;
@@ -1392,10 +1396,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			QuickSearchCoordinatesFragment.showInstance(QuickSearchDialogFragment.this, latLon.getLatitude(), latLon.getLongitude());
 		}));
 
-		if (res != null) {
+		if (!Algorithms.isEmpty(loadCitiesResult)) {
 			rows.add(new QuickSearchHeaderListItem(app, getString(R.string.nearest_cities), true));
 			int limit = 15;
-			for (SearchResult sr : res.getCurrentSearchResults()) {
+			for (SearchResult sr : loadCitiesResult) {
 				if (limit > 0) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
@@ -1411,7 +1415,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (app.isApplicationInitializing()) {
 			showProgressBar();
 			app.getAppInitializer().addOnFinishListener(result -> {
-				if (!paused) {
+				if (!paused && isAdded()) {
 					reloadHistoryInternal();
 					if (!searching) {
 						hideProgressBar();
@@ -2232,7 +2236,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public void showResult(@NonNull PoiUIFilter filter) {
 		buttonToolbarText.setText(R.string.shared_string_show_on_map);
 		mainSearchFragment.getAdapter().clear();
-		updateSearchResult(createSearchResultCollection(app, filter.getCurrentSearchResult()), true);
+		updateSearchResult(createSearchResultCollection(app, filter.getCurrentSearchResult(true)), true);
 		((QuickSearchListAdapter) mainSearchFragment.getAdapter()).setPoiUIFilter(filter);
 		updateTabBarVisibility(false);
 		toolbarEdit.setVisibility(View.GONE);

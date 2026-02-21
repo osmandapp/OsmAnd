@@ -162,15 +162,11 @@ public class OutlinedTextContainer extends FrameLayoutEx {
 
 	@NonNull
 	private TextView createTextView(int type) {
-		Context context = getContext();
-		switch (type) {
-			case 1: // autoScale
-				return new AutoScaleTextView(getContext());
-			case 2: // multi
-				return new MultiTextViewEx(getContext());
-			default: // normal
-				return new TextView(getContext());
-		}
+		return switch (type) {
+			case 1 -> new AutoScaleTextView(getContext());
+			case 2 -> new MultiTextViewEx(getContext());
+			default -> new TextView(getContext());
+		};
 	}
 
 	public void setText(@Nullable CharSequence text) {

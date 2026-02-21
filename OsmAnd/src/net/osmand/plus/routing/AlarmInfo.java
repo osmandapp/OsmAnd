@@ -81,10 +81,11 @@ public class AlarmInfo implements LocationPoint {
 	}
 
 	@NonNull
-	public static AlarmInfo createSpeedLimit(int speed, @NonNull Location location) {
+	public static AlarmInfo createSpeedLimit(int speed, @NonNull Location location, float speedMetersPerSecond) {
 		AlarmInfo info = new AlarmInfo(SPEED_LIMIT, 0);
 		info.setLatLon(location.getLatitude(), location.getLongitude());
 		info.setIntValue(speed);
+		info.setFloatValue(speedMetersPerSecond);
 		return info;
 	}
 

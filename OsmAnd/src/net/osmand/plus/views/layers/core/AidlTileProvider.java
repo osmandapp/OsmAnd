@@ -224,6 +224,11 @@ public class AidlTileProvider extends interface_MapTiledCollectionProvider {
 		return offset;
 	}
 
+	@Override
+	public boolean waitForLoading() {
+		return true;
+	}
+
 	public void addToData(@NonNull AidlMapPointWrapper mapPoint, Bitmap image, boolean isStale, String caption) throws IllegalStateException {
 		if (providerInstance != null) {
 			throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");

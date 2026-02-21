@@ -155,7 +155,7 @@ public class OsmandRegions {
 					String fullRegionName = getFullName(object);
 					WorldRegion region = fullNamesToRegionData.get(fullRegionName);
 					if (region != null) {
-						addPolygonToRegionIfValid(object, region);
+						addPolygonToRegion(object, region);
 					} else {
 						List<BinaryMapDataObject> unattachedMapObjects = unattachedBoundaryMapObjectsByRegions.get(fullRegionName);
 						if (unattachedMapObjects == null) {
@@ -175,7 +175,7 @@ public class OsmandRegions {
 				List<BinaryMapDataObject> unattachedMapObjects = unattachedBoundaryMapObjectsByRegions.get(region.regionFullName);
 				if (unattachedMapObjects != null) {
 					for (BinaryMapDataObject mapObject : unattachedMapObjects) {
-						addPolygonToRegionIfValid(mapObject, region);
+						addPolygonToRegion(mapObject, region);
 					}
 					unattachedBoundaryMapObjectsByRegions.remove(region.regionFullName);
 				}
@@ -964,16 +964,9 @@ public class OsmandRegions {
 	}
 
 	public List<BinaryMapDataObject> getRegionsToDownload(double lat, double lon) throws IOException {
-		List<BinaryMapDataObject> l = new ArrayList<BinaryMapDataObject>();
 		int x31 = MapUtils.get31TileNumberX(lon);
 		int y31 = MapUtils.get31TileNumberY(lat);
-		List<BinaryMapDataObject> cs = query(x31, y31);
-		for (BinaryMapDataObject b : cs) {
-			if (contain(b, x31, y31) && !Algorithms.isEmpty(getDownloadName(b))) {
-				l.add(b);
-			}
-		}
-		return l;
+		return filterQueryResultsByPoint(query(x31, y31), x31, y31);
 	}
 	
 	public List<String> getRegionsToDownload(double lat, double lon, List<String> keyNames) throws IOException {
@@ -992,7 +985,7 @@ public class OsmandRegions {
 		return keyNames;
 	}
 
-	private void addPolygonToRegionIfValid(BinaryMapDataObject mapObject, WorldRegion worldRegion) {
+	private void addPolygonToRegion(BinaryMapDataObject mapObject, WorldRegion worldRegion) {
 		if (mapObject.getPointsLength() < 3) {
 			return;
 		}
@@ -1006,16 +999,28 @@ public class OsmandRegions {
 			polygon.add(new LatLon(lat, lon));
 		}
 
-		boolean outside = true;
-		for (LatLon point : polygon) {
-			if (worldRegion.containsPoint(point)) {
-				outside = false;
-				break;
+		worldRegion.additionalPolygons.add(polygon);
+	}
+
+	public List<BinaryMapDataObject> filterQueryResultsByPoint(List<BinaryMapDataObject> objects, int x, int y) {
+		List<BinaryMapDataObject> filtered = new ArrayList<>();
+		Map<String, Integer> intersectionCounter = new HashMap<>();
+		for (BinaryMapDataObject o : objects) {
+			if (OsmandRegions.contain(o, x, y)) {
+				String k = getDownloadName(o);
+				if (Algorithms.isEmpty(k)) {
+					continue;
+				}
+				intersectionCounter.merge(k, 1, Integer::sum);
 			}
 		}
-
-		if (outside) {
-			worldRegion.additionalPolygons.add(polygon);
+		for (BinaryMapDataObject o : objects) {
+			String k = getDownloadName(o);
+			if (!Algorithms.isEmpty(k) && intersectionCounter.getOrDefault(k, 0) % 2 == 1) {
+				filtered.add(o); // odd intersections == outside exclusion polygons
+			}
 		}
+		return filtered;
 	}
+
 }

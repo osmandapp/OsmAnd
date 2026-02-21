@@ -105,6 +105,11 @@ public class ElevationProfileWidget extends MapWidget {
 		super(mapActivity, ELEVATION_PROFILE, customId, panel);
 		this.showSlopePreference = registerShowSlopePref(customId);
 		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		updateVisibility(false);
 		setupStatisticBlocks();
 	}
@@ -165,7 +170,7 @@ public class ElevationProfileWidget extends MapWidget {
 	}
 
 	private View setupStatisticBlock(int viewId, int textId, int iconId) {
-		View blockView = view.findViewById(viewId);
+		View blockView = getView().findViewById(viewId);
 
 		TextView title = blockView.findViewById(R.id.title);
 		title.setText(textId);
@@ -180,7 +185,7 @@ public class ElevationProfileWidget extends MapWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	public void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
 		boolean visible = visibilityHelper.shouldShowElevationProfileWidget();
 		updateVisibility(visible);
 		if (visible) {
@@ -198,6 +203,7 @@ public class ElevationProfileWidget extends MapWidget {
 			updateWidgets();
 		}
 		if (settingsUpdated) {
+			View view = getView();
 			view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 				@Override
 				public void onGlobalLayout() {
@@ -222,6 +228,7 @@ public class ElevationProfileWidget extends MapWidget {
 			((TextView) block.findViewById(R.id.widget_text_small)).setTextColor(secondaryTextColor);
 			((TextView) block.findViewById(R.id.title)).setTextColor(secondaryTextColor);
 		}
+		View view = getView();
 		View[] dividers = new View[] {
 				view.findViewById(R.id.statistics_block_divider_1),
 				view.findViewById(R.id.statistics_block_divider_2)
@@ -255,7 +262,7 @@ public class ElevationProfileWidget extends MapWidget {
 		lastVisiblePointIndex = -1;
 		slopeDataSet = null;
 
-		chart = view.findViewById(R.id.line_chart);
+		chart = getView().findViewById(R.id.line_chart);
 		BaseCommonChartAdapter chartAdapter = new BaseCommonChartAdapter(app, chart, true);
 		updateChartAppearance(chart);
 

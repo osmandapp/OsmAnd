@@ -129,4 +129,9 @@ public class ListStringPreference extends StringPreference {
 	public String getRawModeValue(@NonNull ApplicationMode mode) {
 		return super.getModeValue(mode);
 	}
+
+	@Override
+	public CommonPreference<String> copyWithId(@NonNull String newId) {
+		return setupCopy(new ListStringPreference(getSettings(), newId, getDefaultValue(), delimiter));
+	}
 }

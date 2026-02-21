@@ -142,6 +142,14 @@ public class CompassButtonState extends MapButtonState {
 		return drawable;
 	}
 
+	@Override
+	protected void updatePosition(@NonNull ButtonPositionSize position) {
+		super.updatePosition(position);
+		if (!portrait) {
+			position.setMoveHorizontal();
+		}
+	}
+
 	@NonNull
 	@Override
 	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {

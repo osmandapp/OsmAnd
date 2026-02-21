@@ -33,18 +33,19 @@
 			android:layout_height="wrap_content"
 			android:visibility="gone" />
 
+		<net.osmand.plus.views.controls.VerticalWidgetPanel
+			android:id="@+id/map_bottom_widgets_panel"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:orientation="vertical"
+			app:topPanel="false" />
+
 	</net.osmand.plus.views.controls.MapHudLayout>
 
 	<net.osmand.plus.views.ObservableFrameLayout
 		android:id="@+id/bottomFragmentContainer"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" />
-
-	<net.osmand.plus.views.controls.VerticalWidgetPanel
-		android:id="@+id/map_bottom_widgets_panel"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		app:topPanel="false" />
 
 </LinearLayout>

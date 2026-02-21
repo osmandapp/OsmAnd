@@ -69,6 +69,9 @@ public class IndexConstants {
 	public static final String OBJ_FILE_EXT = ".obj";
 	public static final String TXT_EXT = ".txt";
 
+	public static final String STAR_MAP_INDEX_EXT = ".stardb";
+	public static final String STAR_MAP_INDEX_EXT_GZ = ".stardb.gz";
+
 	public static final String POI_TABLE = "poi";
 
 	public static final String INDEX_DOWNLOAD_DOMAIN = "download.osmand.net";

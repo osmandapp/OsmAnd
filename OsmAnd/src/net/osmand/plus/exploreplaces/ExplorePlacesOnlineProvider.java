@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
+import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.edit.Entity.EntityType;
@@ -35,6 +36,8 @@ import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -168,8 +171,8 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		float maxTileX = (float) MapUtils.getTileNumberX(zoom, rect.right);
 		float minTileY = (float) MapUtils.getTileNumberY(zoom, rect.top);
 		float maxTileY = (float) MapUtils.getTileNumberY(zoom, rect.bottom);
-		boolean loadAll = zoom == MAX_LEVEL_ZOOM_CACHE &&
-				Math.abs(maxTileX - minTileX) <= LOAD_ALL_TINY_RECT || Math.abs(maxTileY - minTileY) <= LOAD_ALL_TINY_RECT;
+		boolean loadAll = zoom == MAX_LEVEL_ZOOM_CACHE
+				&& (Math.abs(maxTileX - minTileX) <= LOAD_ALL_TINY_RECT || Math.abs(maxTileY - minTileY) <= LOAD_ALL_TINY_RECT);
 
 		// Fetch data for all tiles within the bounds
 		List<Amenity> filteredAmenities = new ArrayList<>();
@@ -259,6 +262,14 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		amenity.setEnName(TransliterationHelper.transliterate(amenity.getName()));
 		amenity.setDescription(properties.getWikiDesc());
 
+		String labelsJson = properties.getLabelsJson();
+		if (!Algorithms.isEmpty(labelsJson) && labelsJson.length() > 2) {
+			try {
+				MapObject.parseNamesJSON(new JSONObject(labelsJson), amenity);
+			} catch (JSONException e) {
+				LOG.error(e);
+			}
+		}
 		String wikiLangs = properties.getWikiLangs();
 		if (!Algorithms.isEmpty(wikiLangs)) {
 			amenity.updateContentLocales(Set.of(wikiLangs.split(",")));
@@ -306,26 +317,20 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 	@SuppressLint("DefaultLocale")
 	private void loadTile(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
-		double left;
-		double right;
-		double top;
-		double bottom;
-
 		TileKey tileKey = new TileKey(zoom, tileX, tileY);
 		synchronized (loadingTasks) {
 			if (loadingTasks.containsKey(tileKey)) {
 				return;
 			}
-			left = MapUtils.getLongitudeFromTile(zoom, tileX);
-			right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
-			top = MapUtils.getLatitudeFromTile(zoom, tileY);
-			bottom = MapUtils.getLatitudeFromTile(zoom, tileY + 1);
 		}
+		double left = MapUtils.getLongitudeFromTile(zoom, tileX);
+		double right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
+		double top = MapUtils.getLatitudeFromTile(zoom, tileY);
+		double bottom = MapUtils.getLatitudeFromTile(zoom, tileY + 1);
 
 		KQuadRect tileRect = new KQuadRect(left, top, right, bottom);
 		synchronized (loadingTasks) {
-			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(tileRect, zoom,
-					languages, new GetImageCardsListener() {
+			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(tileRect, zoom, languages, new GetImageCardsListener() {
 
 				@Override
 				public void onTaskStarted() {
@@ -336,15 +341,23 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 					synchronized (ExplorePlacesOnlineProvider.this) {
 						notifyListeners(isLoading());
 					}
+					Map<String, List<OsmandApiFeatureData>> map = new HashMap<>();
 					if (!Algorithms.isEmpty(result)) {
-						Map<String, List<OsmandApiFeatureData>> map = new HashMap<>();
 						for (OsmandApiFeatureData data : result) {
-							String lang = data.getProperties().getWikiLang();
+							WikiDataProperties properties = data.getProperties();
+							String lang = properties.getLang();
+							if (Algorithms.isEmpty(lang)) {
+								lang = properties.getWikiLang();
+							}
 							List<OsmandApiFeatureData> list = map.computeIfAbsent(lang, k -> new ArrayList<>());
 							list.add(data);
 						}
-						dbHelper.insertPlaces(zoom, tileX, tileY, map);
 					}
+					for (String lang : languages) {
+						map.putIfAbsent(lang, Collections.emptyList());
+					}
+					dbHelper.insertPlaces(zoom, tileX, tileY, map);
+
 					synchronized (loadingTasks) {
 						loadingTasks.remove(tileKey);
 					}

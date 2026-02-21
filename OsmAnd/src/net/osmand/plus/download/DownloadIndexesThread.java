@@ -108,13 +108,17 @@ public class DownloadIndexesThread {
 
 	@UiThread
 	protected void downloadHasStarted() {
-		boolean shouldStartService = Build.VERSION.SDK_INT < Build.VERSION_CODES.S || uiActivity != null;
+		boolean shouldStartService = Build.VERSION.SDK_INT < Build.VERSION_CODES.S || app.isAppInForeground();
 		if (shouldStartService) {
 			if (app.getDownloadService() == null) {
-				startDownloadService();
+				try {
+					startDownloadService();
+				} catch (IllegalStateException e) {
+					LOG.error(e);
+				}
 			}
-			if (uiActivity instanceof FragmentActivity) {
-				AndroidUtils.requestNotificationPermissionIfNeeded((FragmentActivity) uiActivity);
+			if (uiActivity instanceof FragmentActivity activity) {
+				AndroidUtils.requestNotificationPermissionIfNeeded(activity);
 			}
 		}
 		updateNotification();

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@color/color_transparent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:orientation="horizontal"
+		android:paddingTop="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding">
+
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/shared_string_color"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size" />
+
+		<TextView
+			android:id="@+id/coloring_type"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			tools:text="50%" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/select_coloring_indicator"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:tint="?attr/default_icon_color"
+			tools:srcCompat="@drawable/ic_action_arrow_down" />
+
+	</LinearLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:id="@+id/map_style_color_selection"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingStart="@dimen/content_padding">
+
+			<include layout="@layout/divider" />
+
+			<TextView
+				android:id="@+id/custom_color_description"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding"
+				android:text="@string/buildings_3d_use_map_style_color_description"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_list_text_size" />
+
+		</LinearLayout>
+
+		<FrameLayout
+			android:id="@+id/custom_color_selection"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:id="@+id/paid_view"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:visibility="gone">
+
+				<include
+					layout="@layout/custom_radio_buttons"
+					android:layout_width="match_parent"
+					android:layout_height="36dp"
+					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginEnd="@dimen/content_padding" />
+
+				<FrameLayout
+					android:id="@+id/color_card_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/free_view"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:paddingStart="@dimen/content_padding">
+
+				<include layout="@layout/divider" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding"
+					android:text="@string/custom_color"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size" />
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding"
+					android:layout_marginBottom="@dimen/content_padding"
+					android:text="@string/free_custom_color_description"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_list_text_size" />
+
+				<include layout="@layout/divider" />
+
+				<LinearLayout
+					android:id="@+id/get_btn_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:paddingTop="@dimen/content_padding"
+					android:paddingEnd="@dimen/content_padding"
+					android:paddingBottom="@dimen/content_padding">
+
+					<net.osmand.plus.widgets.TextViewEx
+						style="@style/DescStyle.Medium"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_gravity="start"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:layout_weight="1"
+						android:text="@string/shared_string_get"
+						android:textColor="?attr/active_color_basic" />
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/secondary_icon"
+						android:layout_width="@dimen/standard_icon_size"
+						android:layout_height="@dimen/standard_icon_size"
+						android:layout_gravity="center"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginLeft="@dimen/content_padding"
+						app:srcCompat="@drawable/ic_action_osmand_maps_plus" />
+
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</FrameLayout>
+
+
+	</FrameLayout>
+
+</LinearLayout>

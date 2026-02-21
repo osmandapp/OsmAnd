@@ -51,8 +51,8 @@ public class WorldRegion implements Serializable {
 	protected boolean regionJoinRoadsDownload;
 	protected LatLon regionCenter;
 	protected QuadRect boundingBox;
-	protected List<LatLon> polygon;
-	protected List<List<LatLon>> additionalPolygons = new ArrayList<>();
+	protected List<LatLon> polygon; // the biggest polygon of the region (CountryOcbfGeneration)
+	protected List<List<LatLon>> additionalPolygons = new ArrayList<>(); // all the inclusions and exclusions
 
 	public static class RegionParams {
 		protected String regionLeftHandDriving;
@@ -269,7 +269,20 @@ public class WorldRegion implements Serializable {
 	}
 
 	public boolean containsPoint(LatLon latLon) {
-		return polygon != null && Algorithms.isPointInsidePolygon(latLon, polygon);
+		int intersections = 0;
+		if (polygon != null) {
+			if (Algorithms.isPointInsidePolygon(latLon, polygon)) {
+				intersections++;
+			}
+			for (List<LatLon> additional : additionalPolygons) {
+				if (Algorithms.isPointInsidePolygon(latLon, additional)) {
+					if (++intersections % 2 == 0) {
+						break; // optimize
+					}
+				}
+			}
+		}
+		return intersections % 2 == 1;
 	}
 
 	public boolean isContinent() {

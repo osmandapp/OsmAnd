@@ -31,7 +31,6 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
@@ -250,7 +249,9 @@ public class AdvancedEditPoiFragment extends BaseFullScreenFragment implements E
 
 	@Override
 	public void onSaveButtonClick() {
-		contentAdapter.clearFocus();
+		if (contentAdapter != null) {
+			contentAdapter.clearFocus();
+		}
 	}
 
 	public static void addPoiToStringSet(AbstractPoiType abstractPoiType, Set<String> stringSet,

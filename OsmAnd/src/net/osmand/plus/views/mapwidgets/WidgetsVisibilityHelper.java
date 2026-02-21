@@ -6,6 +6,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleEl
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
@@ -22,6 +23,7 @@ import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
@@ -119,6 +121,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInRouteLineAppearanceMode()
 				&& !isInConfigureMapOptionMode()
 				&& !isContextMenuFragmentVisible()
+				&& !isInPlanRouteMode()
 				&& shouldShowElementOnActiveScreen(BOTTOM_MENU_BUTTONS);
 	}
 
@@ -135,6 +138,8 @@ public class WidgetsVisibilityHelper {
 		return showTopControls
 				&& !isInFollowTrackMode()
 				&& !isInConfigureMapOptionMode()
+				&& !isInMeasurementToolMode()
+				&& !isInPlanRouteMode()
 				&& (additionalDialogsHide || !isPortrait());
 	}
 
@@ -172,7 +177,9 @@ public class WidgetsVisibilityHelper {
 		boolean showTopControls = !mapActivity.shouldHideTopControls()
 				|| (isInTrackMenuMode() && !isPortrait());
 		return showTopControls
+				&& !isInMeasurementToolMode()
 				&& !isInConfigureMapOptionMode()
+				&& !isInPlanRouteMode()
 				&& !(isMapLinkedToLocation() && routingHelper.isFollowingMode())
 				&& (additionalDialogsHide || !isPortrait());
 	}
@@ -207,13 +214,14 @@ public class WidgetsVisibilityHelper {
 		return shouldShowElementOnActiveScreen(SPEEDOMETER);
 	}
 
-	public static boolean isWidgetEnabled(@NonNull MapActivity activity,
-			@NonNull WidgetsPanel panel, @NonNull String... widgetsIds) {
+	public static boolean isWidgetEnabled(@NonNull MapActivity activity, @NonNull WidgetsPanel panel,
+			@Nullable ScreenLayoutMode layoutMode, @NonNull String... widgetsIds) {
 		OsmandApplication app = activity.getApp();
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(activity, appMode, ENABLED_MODE, Collections.singletonList(panel));
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(activity, appMode,
+				layoutMode, ENABLED_MODE, Collections.singletonList(panel));
 
 		for (MapWidgetInfo widgetInfo : enabledWidgets) {
 			if (CollectionUtils.containsAny(widgetInfo.key, widgetsIds)) {
@@ -264,8 +272,8 @@ public class WidgetsVisibilityHelper {
 		return false;
 	}
 
-	private boolean isInPlanRouteMode() {
-		return mapLayers.getMapMarkersLayer().isInPlanRouteMode();
+	public boolean isInPlanRouteMode() {
+		return fragmentsHelper.getPlanRouteFragment() != null;
 	}
 
 	private boolean isInTrackAppearanceMode() {
@@ -433,7 +441,7 @@ public class WidgetsVisibilityHelper {
 		EXPLORE_PLACES(),
 		WEATHER_FORECAST(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON),
 		STAR_MAP(),
-		MEASUREMENT_MODE(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON, SUGGEST_MAP_BANNER, TOP_BUTTONS, COMPASS),
+		MEASUREMENT_MODE(SUGGEST_MAP_BANNER, TOP_BUTTONS, COMPASS),
 		PLAN_ROUTE_MODE(TOP_COORDINATES_WIDGET, SUGGEST_MAP_BANNER),
 		TRACK_APPEARANCE_MODE(SUGGEST_MAP_BANNER),
 		SELECTING_TILES_ZONE_MODE(),

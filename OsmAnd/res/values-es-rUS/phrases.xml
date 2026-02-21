@@ -621,7 +621,7 @@
     <string name="poi_craft_stand_builder">Creador de estand</string>
     <string name="poi_craft_stonemason">Cantería;Albañilería (piedras);Cabuquero;Entallador;Cantero;Picapedrero;Tallista;Labrante</string>
     <string name="poi_craft_sun_protection">Fábrica de toldos</string>
-    <string name="poi_craft_sweep">Deshollinador</string>
+    <string name="poi_craft_chimney_sweeper">Deshollinador</string>
     <string name="poi_craft_tailor">Sastre</string>
     <string name="poi_craft_tiler">Albañilería (azulejos);Alicatador</string>
     <string name="poi_craft_tinsmith">Hojalatería;Hojalatero;Hojalatera</string>

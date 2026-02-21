@@ -374,7 +374,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, true), (obj) -> {
 					if (obj != null) {
 						getApp().runInUIThread(() -> {
-							getApp().getOsmandMap().getMapActions().startNavigation();
 							if (hasStarted()) {
 								startNavigationScreen();
 							}
@@ -516,7 +515,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		OsmandApplication app = getApp();
 		CarContext context = getCarContext();
 		ScreenManager screenManager = context.getCarService(ScreenManager.class);
-		Screen top = screenManager.getTop();
+		Screen top = !screenManager.getScreenStack().isEmpty() ? screenManager.getTop() : null;
+
 		TargetPoint pointToNavigate = app.getTargetPointsHelper().getPointToNavigate();
 		if (app.getRoutingHelper().isRouteCalculated() && !app.getRoutingHelper().isFollowingMode()
 				&& pointToNavigate != null && !(top instanceof RoutePreviewScreen)) {
@@ -547,7 +547,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, false), (obj) -> {
 				if (obj != null) {
 					app.runInUIThread(() -> {
-						app.getOsmandMap().getMapActions().startNavigation();
 						if (hasStarted()) {
 							startNavigationScreen();
 						}

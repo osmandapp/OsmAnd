@@ -9,7 +9,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
-import androidx.car.app.CarToast;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.ActionStrip;
 import androidx.car.app.model.CarColor;
@@ -40,6 +39,7 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapTileView.ElevationListener;
@@ -93,7 +93,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 		OsmandApplication app = getApp();
 		alarmWidget = new AlarmWidget(app, null);
-		speedometerWidget = new SpeedometerWidget(app, null, null);
+		speedometerWidget = new SpeedometerWidget(app, ThemeUsageContext.MAP);
 		updateUse3DButton();
 		getLifecycle().addObserver(this);
 	}

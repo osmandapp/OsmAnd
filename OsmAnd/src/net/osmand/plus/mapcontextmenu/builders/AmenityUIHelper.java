@@ -151,20 +151,21 @@ public class AmenityUIHelper extends MenuBuilder {
 				List<PoiType> categoryTypes = new ArrayList<>();
 
 				if (!Algorithms.isEmpty(e.getValue())) {
-					StringBuilder sb = new StringBuilder();
+					StringBuilder builder = new StringBuilder();
 					List<String> records = new ArrayList<>(Arrays.asList(e.getValue().split(Amenity.SEPARATOR)));
 					for (String record : records) {
-						AbstractPoiType pt = poiTypes.getPoiAdditionalType(poiCategory, record);
-						if (pt == null) {
-							pt = poiTypes.getAnyPoiAdditionalTypeByKey(record);
+						AbstractPoiType type = poiTypes.getPoiAdditionalType(poiCategory, record);
+						if (type == null) {
+							type = poiTypes.getAnyPoiAdditionalTypeByKey(record);
 						}
-						categoryTypes.add((PoiType) pt);
-						if (sb.length() > 0) {
-							sb.append(" • ");
+						if (type instanceof PoiType pt) {
+							categoryTypes.add(pt);
+							if (builder.length() > 0) {
+								builder.append(" • ");
+							}
+							builder.append(pt.getTranslation());
 						}
-						sb.append(pt.getTranslation());
 					}
-
 					Drawable icon;
 					PoiType pType = categoryTypes.get(0);
 					String poiAdditionalCategoryName = pType.getPoiAdditionalCategory();
@@ -184,7 +185,7 @@ public class AmenityUIHelper extends MenuBuilder {
 							categoryTypes, true, cuisineOrDish ? cuisineRow : null, poiCategory);
 					infoRows.add(new AmenityInfoRow.Builder(poiAdditionalCategoryName)
 							.setIcon(icon).setTextPrefix(pType.getPoiAdditionalCategoryTranslation())
-							.setText(sb.toString()).setCollapsableView(collapsableView)
+							.setText(builder.toString()).setCollapsableView(collapsableView)
 							.setOrder(pType.getOrder())
 							.setName(pType.getKeyName())
 							.setTextLinesLimit(1)

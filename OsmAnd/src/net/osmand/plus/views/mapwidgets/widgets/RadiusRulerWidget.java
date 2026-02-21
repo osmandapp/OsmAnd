@@ -13,7 +13,8 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -35,6 +36,11 @@ public class RadiusRulerWidget extends SimpleWidget {
 		cachedRadiusRulerMode = settings.RADIUS_RULER_MODE.get();
 
 		updateIcons();
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		setText(NO_VALUE, null);
 	}
 
@@ -91,10 +97,10 @@ public class RadiusRulerWidget extends SimpleWidget {
 
 	@Nullable
 	@Override
-	public OsmandPreference<?> getWidgetSettingsPrefToReset(@NonNull ApplicationMode appMode) {
+	public CommonPreference<?> getWidgetSettingsPrefToReset(@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		MapWidgetRegistry mapWidgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Set<MapWidgetInfo> widgetInfos = mapWidgetRegistry
-				.getWidgetsForPanel(mapActivity, appMode, ENABLED_MODE, Collections.singletonList(WidgetsPanel.LEFT));
+		Set<MapWidgetInfo> widgetInfos = mapWidgetRegistry.getWidgetsForPanel(mapActivity, appMode,
+				layoutMode, ENABLED_MODE, Collections.singletonList(WidgetsPanel.LEFT));
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
 			MapWidget widget = widgetInfo.widget;
 			boolean anotherRulerWidgetPresent = widget instanceof RadiusRulerWidget && !widget.equals(this);

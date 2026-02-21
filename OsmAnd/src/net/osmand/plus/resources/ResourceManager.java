@@ -642,7 +642,7 @@ public class ResourceManager {
 						// travel files should be indexed separately (so it's possible to turn on / off)
 						continue;
 					}
-					if (!mapReader.getRegionNames().isEmpty()) {
+					if (mapReader.hasRegions()) {
 						RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(this, resource);
 						addressMap.put(fileName, rarb);
 					}

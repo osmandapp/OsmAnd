@@ -297,6 +297,11 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		return offset;
 	}
 
+	@Override
+	public boolean waitForLoading() {
+		return true;
+	}
+
 	private boolean isMapRendererLost() {
 		return !((OsmandApplication) ctx.getApplicationContext()).getOsmandMap().getMapView().hasMapRenderer();
 	}

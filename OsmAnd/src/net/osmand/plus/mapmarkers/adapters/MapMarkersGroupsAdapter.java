@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
@@ -94,7 +95,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
 		int markersCount = mapMarkers.size();
 		showDirectionMarkers = new ArrayList<>(mapMarkers.subList(0, getToIndex(markersCount)));
-		showDirectionEnabled = WidgetsVisibilityHelper.isWidgetEnabled(mapActivity, TOP, MARKERS_TOP_BAR.id);
+		showDirectionEnabled = WidgetsVisibilityHelper.isWidgetEnabled(mapActivity, TOP,
+				ScreenLayoutMode.getDefault(mapActivity), MARKERS_TOP_BAR.id);
 	}
 
 	private int getToIndex(int markersCount) {

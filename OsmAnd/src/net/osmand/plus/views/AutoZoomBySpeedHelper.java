@@ -158,7 +158,7 @@ public class AutoZoomBySpeedHelper implements MapZoomChangeListener, TouchListen
 
 		int minZoom = mapView.getMinZoom();
 		int maxZoom = mapView.getMaxZoom();
-		Zoom boundedZoom = Zoom.checkZoomBounds(expectedSurfaceZoom, minZoom, maxZoom);
+		Zoom boundedZoom = Zoom.checkZoomBounds(mapRenderer, expectedSurfaceZoom, minZoom, maxZoom);
 		return ComplexZoom.fromPreferredBase(boundedZoom.getBaseZoom() + boundedZoom.getZoomFloatPart(), mapView.getZoom());
 	}
 
@@ -213,7 +213,7 @@ public class AutoZoomBySpeedHelper implements MapZoomChangeListener, TouchListen
 
 		int minZoom = mapView.getMinZoom();
 		int maxZoom = mapView.getMaxZoom();
-		Zoom boundedZoom = Zoom.checkZoomBounds(expectedSurfaceZoom, minZoom, maxZoom);
+		Zoom boundedZoom = Zoom.checkZoomBounds(mapRenderer, expectedSurfaceZoom, minZoom, maxZoom);
 		return new ComplexZoom(boundedZoom.getBaseZoom(), boundedZoom.getZoomFloatPart());
 	}
 	@Nullable

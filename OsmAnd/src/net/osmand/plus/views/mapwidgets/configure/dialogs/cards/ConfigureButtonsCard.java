@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -20,8 +19,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.configure.buttons.CustomMapButtonsFragment;
-import net.osmand.plus.views.mapwidgets.configure.buttons.DefaultMapButtonsFragment;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 
@@ -30,7 +27,9 @@ import java.util.List;
 
 public class ConfigureButtonsCard extends MapBaseCard {
 
-	private final Fragment target;
+	public static final int CUSTOM_MAP_BUTTONS_INDEX = 0;
+	public static final int DEFAULT_MAP_BUTTONS_INDEX = 1;
+
 	private final MapButtonsHelper mapButtonsHelper;
 
 	@Override
@@ -38,9 +37,8 @@ public class ConfigureButtonsCard extends MapBaseCard {
 		return R.layout.configure_buttons_card;
 	}
 
-	public ConfigureButtonsCard(@NonNull MapActivity activity, @NonNull Fragment target) {
+	public ConfigureButtonsCard(@NonNull MapActivity activity) {
 		super(activity, false);
-		this.target = target;
 		this.mapButtonsHelper = app.getMapButtonsHelper();
 	}
 
@@ -57,19 +55,19 @@ public class ConfigureButtonsCard extends MapBaseCard {
 	}
 
 	private void setupCustomWidgetsButton() {
-		List<QuickActionButtonState> buttons = mapButtonsHelper.getQuickActionButtonsStates();
-		List<QuickActionButtonState> enabledButtons = mapButtonsHelper.getEnabledButtonsStates();
+		List<QuickActionButtonState> states = mapButtonsHelper.getQuickActionButtonsStates();
+		List<QuickActionButtonState> enabledStates = getEnabledButtonsStates(states);
 
-		boolean enabled = !enabledButtons.isEmpty();
+		boolean enabled = !enabledStates.isEmpty();
 		String title = getString(R.string.custom_buttons);
 
 		View button = view.findViewById(R.id.custom_buttons);
 		setupButton(button, title, null, R.drawable.ic_quick_action, enabled, nightMode);
 
 		TextView count = button.findViewById(R.id.items_count_descr);
-		count.setText(getString(R.string.ltr_or_rtl_combine_via_slash, enabledButtons.size(), buttons.size()));
+		count.setText(getString(R.string.ltr_or_rtl_combine_via_slash, enabledStates.size(), states.size()));
 
-		button.setOnClickListener(v -> CustomMapButtonsFragment.showInstance(mapActivity.getSupportFragmentManager(), target));
+		button.setOnClickListener(v -> notifyButtonPressed(CUSTOM_MAP_BUTTONS_INDEX));
 
 		AndroidUiHelper.updateVisibility(count, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.short_divider), true);
@@ -77,7 +75,7 @@ public class ConfigureButtonsCard extends MapBaseCard {
 
 	private void setupDefaultWidgetsButton() {
 		int enabledButtons = 0;
-		List<MapButtonState> buttonStates = getDefaultButtonsStates();
+		List<MapButtonState> buttonStates = mapButtonsHelper.getDefaultButtonsStates();
 		for (MapButtonState buttonState : buttonStates) {
 			if (buttonState.isEnabled()) {
 				enabledButtons++;
@@ -92,14 +90,21 @@ public class ConfigureButtonsCard extends MapBaseCard {
 		TextView count = button.findViewById(R.id.items_count_descr);
 		count.setText(getString(R.string.ltr_or_rtl_combine_via_slash, enabledButtons, buttonStates.size()));
 
-		button.setOnClickListener(v -> DefaultMapButtonsFragment.showInstance(mapActivity.getSupportFragmentManager(), target));
+		button.setOnClickListener(v -> notifyButtonPressed(DEFAULT_MAP_BUTTONS_INDEX));
 
 		AndroidUiHelper.updateVisibility(count, true);
 	}
 
 	@NonNull
-	public List<MapButtonState> getDefaultButtonsStates() {
-		return new ArrayList<>(mapButtonsHelper.getDefaultButtonsStates());
+	private List<QuickActionButtonState> getEnabledButtonsStates(
+			@NonNull List<QuickActionButtonState> buttonStates) {
+		List<QuickActionButtonState> list = new ArrayList<>();
+		for (QuickActionButtonState buttonState : buttonStates) {
+			if (buttonState.isEnabled()) {
+				list.add(buttonState);
+			}
+		}
+		return list;
 	}
 
 	public static void setupButton(@NonNull View view, @NonNull String title, @Nullable String description,

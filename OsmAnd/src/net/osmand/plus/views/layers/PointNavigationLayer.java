@@ -139,8 +139,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		MapRendererView mapRenderer = getMapView().getMapRenderer();
 		if (mapRenderer != null) {
 			//OpenGL
-			if (nightMode != settings.isNightMode()
-					|| shouldUpdateTextSizeForOpenGL() || mapActivityInvalidated) {
+			if (nightMode != settings.isNightMode() || mapActivityInvalidated || textSizeChanged()) {
 				captionStyle = null;
 				clearMapMarkersCollections();
 				nightMode = settings.isNightMode();
@@ -221,11 +220,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		mTextPaint.setTextSize(textSize);
 	}
 
-	private boolean shouldUpdateTextSizeForOpenGL() {
-		if (mTextPaint != null && captionStyle != null) {
-			return mTextPaint.getTextSize() != captionStyle.getSize();
-		}
-		return true;
+	private boolean textSizeChanged() {
+		return mTextPaint != null && captionStyle != null && mTextPaint.getTextSize() != captionStyle.getSize();
 	}
 
 	private void recreateBitmaps() {

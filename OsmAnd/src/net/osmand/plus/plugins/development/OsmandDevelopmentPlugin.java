@@ -56,6 +56,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.simulation.DashSimulateFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -77,7 +78,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -91,15 +91,11 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SAVE_LOCATION_PROVIDER_TO_GPX;
 	public final OsmandPreference<Boolean> SHOW_PRIMITIVES_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
-	public final OsmandPreference<Boolean> ENABLE_3D_MAP_OBJECTS;
-	public final CommonPreference<Float> BUILDINGS_3D_ALPHA;
-	public final CommonPreference<Integer> BUILDINGS_3D_DETAIL_LEVEL;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
 	private final StateChangedListener<Boolean> debugRenderingInfoListener;
 	private final StateChangedListener<Boolean> msaaListener;
 	private final StateChangedListener<Boolean> sphericalListener;
-	private final StateChangedListener<Boolean> map3DObjectsListener;
 
 	private static final Log LOG_termal = PlatformUtil.getLog("ThermalState");
 
@@ -130,9 +126,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SAVE_LOCATION_PROVIDER_TO_GPX = registerBooleanPreference("save_location_provider_to_gpx", true).makeGlobal().makeShared().cache();
 		SHOW_PRIMITIVES_DEBUG_INFO = registerBooleanPreference("show_primitives_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
-		ENABLE_3D_MAP_OBJECTS = registerBooleanPreference("enable_3d_map_objects", false).makeProfile().cache();
-		BUILDINGS_3D_ALPHA = registerFloatPreference("3d_buildings_alpha", 0.8f).makeProfile().cache();
-		BUILDINGS_3D_DETAIL_LEVEL = registerIntPreference("3d_buildings_detail_level", 1).makeProfile().cache();
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();
@@ -171,17 +164,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		};
 		settings.SPHERICAL_MAP.addListener(sphericalListener);
 
-		map3DObjectsListener = enabled -> {
-			MapRendererContext ctx = net.osmand.plus.views.corenative.NativeCoreContext.getMapRendererContext();
-			if (ctx != null) {
-				if (Boolean.TRUE.equals(enabled)) {
-					ctx.recreate3DObjectsProvider();
-				} else {
-					ctx.reset3DObjectsProvider();
-				}
-			}
-		};
-		ENABLE_3D_MAP_OBJECTS.addListener(map3DObjectsListener);
 	}
 
 	@Override
@@ -225,8 +207,9 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
-		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
+	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos,
+			@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
 
 		MapWidget fpsWidget = createMapWidgetForParams(mapActivity, DEV_FPS);
 		widgetsInfos.add(creator.createWidgetInfo(fpsWidget));
@@ -297,14 +280,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			startThermalStatusListening();
 		}
 
-		MapRendererContext ctx = net.osmand.plus.views.corenative.NativeCoreContext.getMapRendererContext();
-		if (ctx != null) {
-			if (Boolean.TRUE.equals(ENABLE_3D_MAP_OBJECTS.get())) {
-				ctx.recreate3DObjectsProvider();
-			} else {
-				ctx.reset3DObjectsProvider();
-			}
-		}
 		return true;
 	}
 
@@ -541,11 +516,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		MapRendererView rendererView = rendererContext.getMapRendererView();
 		if (rendererView != null) {
 			rendererView.setFlatEarth(!settings.SPHERICAL_MAP.get());
-		}
-		if (ENABLE_3D_MAP_OBJECTS.get()) {
-			rendererContext.recreate3DObjectsProvider();
-		} else {
-			rendererContext.reset3DObjectsProvider();
 		}
 	}
 }

@@ -222,4 +222,9 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 	public PointI getPinIconOffset() {
 		return offset;
 	}
+
+	@Override
+	public boolean waitForLoading() {
+		return true;
+	}
 }

@@ -75,7 +75,7 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment, ISu
 		collection.add(InsetTarget.createFab(R.id.fab));
 		collection.add(InsetTarget.createBottomContainer(R.id.bottom_buttons_container));
 		collection.add(InsetTarget.createScrollable(R.id.scroll_view, R.id.recycler_view));
-		collection.replace(InsetTarget.createHorizontalLandscape(R.id.modes_toggle, R.id.toolbar, R.id.tab_layout));
+		collection.replace(InsetTarget.createHorizontalLandscape(R.id.toolbar, R.id.tab_layout));
 		collection.add(InsetTarget.createRootInset());
 		return collection;
 	}

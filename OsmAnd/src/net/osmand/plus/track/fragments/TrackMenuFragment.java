@@ -1644,7 +1644,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					params.hideFromMap();
 				}
 				selectedGpxFile = gpxSelectionHelper.selectGpxFile(gpx, params);
-				saveGpx(gpx, errorMessage -> {
+				SaveGpxHelper.saveGpx(new File(gpx.getPath()), gpx,  errorMessage -> {
 					SelectedGpxFile selectedGpxFile = showOnMap ? this.selectedGpxFile : null;
 					if (selectedGpxFile != null) {
 						List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(
@@ -1666,10 +1666,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			}
 		}
 		return false;
-	}
-
-	private void saveGpx(GpxFile gpxFile, SaveGpxListener listener) {
-		SaveGpxHelper.saveGpx(new File(gpxFile.getPath()), gpxFile, listener);
 	}
 
 	private boolean isCurrentRecordingTrack() {

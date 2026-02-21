@@ -49,4 +49,9 @@ public class ContextMenuItemsPreference extends CommonPreference<ContextMenuItem
 	public String getIdScheme() {
 		return idScheme;
 	}
+
+	@Override
+	public CommonPreference<ContextMenuItemsSettings> copyWithId(@NonNull String newId) {
+		return setupCopy(new ContextMenuItemsPreference(getSettings(), newId, idScheme, getDefaultValue()));
+	}
 }

@@ -19,8 +19,10 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class SelectedMapObjectsMerger extends MapObjectsMerger<SelectedMapObject> {
 
@@ -48,7 +50,7 @@ public class SelectedMapObjectsMerger extends MapObjectsMerger<SelectedMapObject
 	@NonNull
 	@Override
 	public List<SelectedMapObject> merge(@NonNull List<SelectedMapObject> original) {
-		if (original.size() == 1) {
+		if (original.size() <= 1) {
 			return new ArrayList<>(original);
 		}
 
@@ -69,19 +71,24 @@ public class SelectedMapObjectsMerger extends MapObjectsMerger<SelectedMapObject
 				unmergedItems.add(item);
 			}
 		}));
-
-		for (BaseDetailsObject object : groupedDetails) {
-			if (object.getLocation() == null) {
-				object.getSyntheticAmenity().setLocation(pointLatLon);
-				LOG.debug("BaseDetailsObject without location " + object);
+		Map<Object, IContextMenuProvider> providersMap = new HashMap<>();
+		for (SelectedMapObject object : original) {
+			providersMap.put(object.object(), object.provider());
+		}
+		for (BaseDetailsObject detailsObject : groupedDetails) {
+			if (detailsObject.getLocation() == null) {
+				detailsObject.getSyntheticAmenity().setLocation(pointLatLon);
+				LOG.debug("BaseDetailsObject without location " + detailsObject);
 			}
-			if (object.getObjects().size() > 1) {
-				result.add(new SelectedMapObject(object, poiProvider));
-			} else {
-				result.add(new SelectedMapObject(object.getObjects().get(0), poiProvider));
+			List<Object> objects = detailsObject.getObjects();
+			if (objects.size() > 1) {
+				result.add(new SelectedMapObject(detailsObject, poiProvider));
+			} else if (!Algorithms.isEmpty(objects)) {
+				Object object = objects.get(0);
+				IContextMenuProvider provider = providersMap.get(object);
+				result.add(new SelectedMapObject(object, provider != null ? provider : poiProvider));
 			}
 		}
-
 		result.addAll(unmergedItems);
 		return result;
 	}
@@ -89,39 +96,25 @@ public class SelectedMapObjectsMerger extends MapObjectsMerger<SelectedMapObject
 	@NonNull
 	private List<BaseDetailsObject> processPoints(@NonNull List<SelectedMapObject> mapObjects) {
 		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
-
 		for (Iterator<SelectedMapObject> iterator = mapObjects.iterator(); iterator.hasNext(); ) {
-			Object object = iterator.next().object();
+			Object obj = iterator.next().object();
 
-			if (object instanceof WptPt point) {
-				String originName = point.getAmenityOriginName();
-				if (!Algorithms.isEmpty(originName)) {
-					List<? extends MapObject> filtered = filterMapObjects(originName, mapObjects);
-					if (!Algorithms.isEmpty(filtered)) {
-						PlaceDetailsObject detailsObject =
-								new PlaceDetailsObject(filtered, searchSettings.language().get());
-						detailsObject.addObject(point);
-						detailsObjects.add(detailsObject);
-						iterator.remove();
-					}
-				}
+			String originName = null;
+			if (obj instanceof WptPt point) {
+				originName = point.getAmenityOriginName();
+			} else if (obj instanceof FavouritePoint point) {
+				originName = point.getAmenityOriginName();
 			}
-
-			if (object instanceof FavouritePoint point) {
-				String originName = point.getAmenityOriginName();
-				if (!Algorithms.isEmpty(originName)) {
-					List<? extends MapObject> filtered = filterMapObjects(originName, mapObjects);
-					if (!Algorithms.isEmpty(filtered)) {
-						PlaceDetailsObject detailsObject =
-								new PlaceDetailsObject(filtered, searchSettings.language().get());
-						detailsObject.addObject(point);
-						detailsObjects.add(detailsObject);
-						iterator.remove();
-					}
+			if (!Algorithms.isEmpty(originName)) {
+				List<? extends MapObject> filtered = filterMapObjects(originName, mapObjects);
+				if (!Algorithms.isEmpty(filtered)) {
+					PlaceDetailsObject detailsObject = new PlaceDetailsObject(filtered, searchSettings.language().get());
+					detailsObject.addObject(obj);
+					detailsObjects.add(detailsObject);
+					iterator.remove();
 				}
 			}
 		}
-
 		clearOverlappedObjects(mapObjects, detailsObjects);
 		return detailsObjects;
 	}
@@ -148,7 +141,6 @@ public class SelectedMapObjectsMerger extends MapObjectsMerger<SelectedMapObject
 	private List<? extends MapObject> filterMapObjects(
 			@NonNull String nameEn,
 			@NonNull List<SelectedMapObject> selectedMapObjects) {
-
 		if (nameEn.startsWith("Amenity")) {
 			if (amenities == null) {
 				amenities = searcher.searchAmenities(pointLatLon, searchSettings);
@@ -178,7 +170,6 @@ public class SelectedMapObjectsMerger extends MapObjectsMerger<SelectedMapObject
 			}
 			return result;
 		}
-
 		return null;
 	}
 }

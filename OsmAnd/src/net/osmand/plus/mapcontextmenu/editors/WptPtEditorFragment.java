@@ -384,10 +384,8 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	@NonNull
 	@Override
 	public Map<String, PointsGroup> getPointsGroups() {
-		if (editor != null) {
-			return editor.getPointsGroups();
-		}
-		return new LinkedHashMap<>();
+		Map<String, PointsGroup> groups = editor != null ? editor.getPointsGroups() : null;
+		return groups != null ? groups : new LinkedHashMap<>();
 	}
 
 	@NonNull

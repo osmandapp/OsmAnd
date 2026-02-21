@@ -25,4 +25,9 @@ public class LongPreference extends CommonPreference<Long> {
 	public Long parseString(String s) {
 		return Long.parseLong(s);
 	}
+
+	@Override
+	public CommonPreference<Long> copyWithId(@NonNull String newId) {
+		return setupCopy(new LongPreference(getSettings(), newId, getDefaultValue()));
+	}
 }

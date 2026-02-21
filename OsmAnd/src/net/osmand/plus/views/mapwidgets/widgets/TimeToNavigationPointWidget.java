@@ -40,7 +40,11 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 		this.routingHelper = app.getRoutingHelper();
 		this.arrivalTimeOtherwiseTimeToGoPref = widgetState.getPreference();
 		this.cachedArrivalTimeOtherwiseTimeToGo = arrivalTimeOtherwiseTimeToGoPref.get();
+	}
 
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		setText(null, null);
 		updateIcons();
 		updateContentTitle();

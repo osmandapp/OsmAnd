@@ -2,6 +2,8 @@ package net.osmand.plus.plugins.development.widget;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_FPS;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -20,6 +22,11 @@ public class FPSTextInfoWidget extends SimpleWidget {
 	public FPSTextInfoWidget(@NonNull MapActivity activity, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(activity, DEV_FPS, customId, panel);
 		this.mapView = activity.getMapView();
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		updateSimpleWidgetInfo(null);
 		setIcons(DEV_FPS);
 	}

@@ -186,7 +186,8 @@ open class OBDTextWidget(
 		return true
 	}
 
-	init {
+	override fun setupView(view: View) {
+		super.setupView(view)
 		updateInfo(null)
 		setIcons(widgetType)
 	}

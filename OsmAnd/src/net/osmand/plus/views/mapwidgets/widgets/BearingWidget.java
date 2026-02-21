@@ -5,6 +5,7 @@ import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType
 import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.TRUE_BEARING;
 
 import android.hardware.GeomagneticField;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,7 +38,11 @@ public class BearingWidget extends SimpleWidget {
 		super(mapActivity, bearingType.widgetType, customId, widgetsPanel);
 		this.locationProvider = app.getLocationProvider();
 		this.bearingType = bearingType;
+	}
 
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		setText(null, null);
 		setIcons(bearingType.widgetType);
 		setContentTitle(bearingType.widgetType.titleId);

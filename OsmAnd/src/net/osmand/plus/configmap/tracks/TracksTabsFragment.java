@@ -270,13 +270,15 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 	@Override
 	public void loadTracksFinished(@NonNull TrackFolder folder) {
-		trackTabsHelper.updateTrackItems(folder);
-		AndroidUiHelper.updateVisibility(progressBar, false);
-		updateTrackTabs();
-		applyPreselectedParams();
-		updateTabsContent();
-		updateButtonsState();
-		preselectedTabParams = null;
+		if (isAdded()) {
+			trackTabsHelper.updateTrackItems(folder);
+			AndroidUiHelper.updateVisibility(progressBar, false);
+			updateTrackTabs();
+			applyPreselectedParams();
+			updateTabsContent();
+			updateButtonsState();
+			preselectedTabParams = null;
+		}
 	}
 
 	@Override

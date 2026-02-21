@@ -1,27 +1,20 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.configmap.ConfigureMapMenu.createRenderingProperty;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.BUILDINGS_3D;
-import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.slider.Slider;
-
-import net.osmand.core.android.MapRendererContext;
-import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -30,22 +23,16 @@ import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.plus.widgets.ctxmenu.ViewCreator;
-import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
-import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 import net.osmand.render.RenderingRuleProperty;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +41,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = Buildings3DFragment.class.getSimpleName();
 
-	private final OsmandDevelopmentPlugin plugin = PluginsHelper.requirePlugin(OsmandDevelopmentPlugin.class);
+	private final SRTMPlugin plugin = PluginsHelper.requirePlugin(SRTMPlugin.class);
 
 	private ViewGroup contentContainer;
 
@@ -63,6 +50,8 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 	private CompoundButton compoundButton;
 	private ImageView iconIv;
 	private View titleDivider;
+	private IconToggleButton detailsLevelToggleButton;
+	private IconToggleButton viewDistanceToggleButton;
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -111,124 +100,97 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 	protected void setupContent(@NonNull View view) {
 		contentContainer = view.findViewById(R.id.content_container);
 
-		setupSlider(contentContainer);
-		setupDetalization(contentContainer);
-		setupRenderingRules(contentContainer);
+		setupAppearance(contentContainer);
+		setupPerformance(contentContainer);
 	}
 
-	@SuppressLint("SetTextI18n")
-	private void setupSlider(@NonNull ViewGroup container) {
-		View view = container.findViewById(R.id.transparency_container);
-		AndroidUtils.setBackgroundColor(view.getContext(), view, ColorUtilities.getListBgColorId(nightMode));
-		Slider visibilitySlider = view.findViewById(R.id.transparency_slider);
-		TextView visibilityTv = view.findViewById(R.id.transparency_value_tv);
-		TextView title = view.findViewById(R.id.title);
-		title.setText(R.string.gpx_visibility_txt);
-
+	private void setupAppearance(@NonNull ViewGroup container) {
+		View appearanceContainer = container.findViewById(R.id.appearance_container);
+		AndroidUtils.setBackgroundColor(appearanceContainer.getContext(), appearanceContainer, ColorUtilities.getListBgColorId(nightMode));
+		TextViewEx title = appearanceContainer.findViewById(R.id.title);
+		title.setText(R.string.shared_string_appearance);
 		float alpha = plugin.BUILDINGS_3D_ALPHA.get();
 		int progress = ProgressHelper.normalizeProgressPercent((int) (alpha * 100));
-
-		visibilityTv.setText(progress + "%");
-
-		visibilitySlider.addOnChangeListener((slider, value, fromUser) -> {
-			if (fromUser) {
-				float newValue = value / 100f;
-				plugin.BUILDINGS_3D_ALPHA.set(newValue);
-				visibilityTv.setText(ProgressHelper.normalizeProgressPercent((int) value) + "%");
-				apply3DBuildingsAlpha(newValue);
-			}
-		});
-		visibilitySlider.setValueTo(100);
-		visibilitySlider.setValueFrom(0);
-		visibilitySlider.setValue(progress);
-		int profileColor = settings.getApplicationMode().getProfileColor(nightMode);
-		UiUtilities.setupSlider(visibilitySlider, nightMode, profileColor);
+		TextView visibilityTv = container.findViewById(R.id.opacity_value);
+		visibilityTv.setText(String.format("%s%%", progress));
+		TextView colorStyleTv = container.findViewById(R.id.color_scheme_name);
+		colorStyleTv.setText(Buildings3DColorType.Companion.getById(plugin.BUILDINGS_3D_COLOR_STYLE.get()).getLabelId());
+		container.findViewById(R.id.color_container).setOnClickListener((v) -> callMapActivity(mapActivity -> {
+			mapActivity.getDashboard().hideDashboard();
+			Buildings3DColorFragment.showInstance(mapActivity.getSupportFragmentManager());
+		}));
+		container.findViewById(R.id.opacity_container).setOnClickListener((v) -> callMapActivity(mapActivity -> {
+			mapActivity.getDashboard().hideDashboard();
+			Buildings3DVisibilityFragment.showInstance(mapActivity.getSupportFragmentManager());
+		}));
 	}
 
-	private void apply3DBuildingsAlpha(float alpha) {
-		MapRendererContext ctx = NativeCoreContext.getMapRendererContext();
-		if (ctx != null) {
-			MapRendererView rendererView = ctx.getMapRendererView();
-			if (rendererView != null) {
-				rendererView.set3DBuildingsAlpha(alpha);
-				refreshMap();
-			}
-		}
+	private void setupPerformance(@NonNull ViewGroup container) {
+		View performanceContainer = container.findViewById(R.id.performance_container);
+		AndroidUtils.setBackgroundColor(performanceContainer.getContext(), performanceContainer, ColorUtilities.getListBgColorId(nightMode));
+		TextViewEx title = performanceContainer.findViewById(R.id.title);
+		title.setText(R.string.performance);
+
+		setupDetailsLevelToggleButtons(performanceContainer.findViewById(R.id.details_lvl_container));
+		setupViewDistanceToggleButtons(performanceContainer.findViewById(R.id.view_distance_container));
 	}
 
-	private void setupRenderingRules(@NonNull View view) {
-		ViewGroup container = view.findViewById(R.id.rendering_rules_container);
-		container.removeAllViews();
-
-		MapActivity mapActivity = requireMapActivity();
-		ViewCreator viewCreator = new ViewCreator(mapActivity, nightMode);
-		viewCreator.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
-		viewCreator.setCustomControlsColor(appMode.getProfileColor(nightMode));
-
-		List<RenderingRuleProperty> rules = get3DBuildingsRules(app);
-		if (!Algorithms.isEmpty(rules)) {
-			container.addView(inflate(R.layout.list_item_divider));
-		}
-		for (int i = 0; i < rules.size(); i++) {
-			RenderingRuleProperty property = rules.get(i);
-			ContextMenuItem item = createRenderingProperty(mapActivity, INVALID_ID, property,
-					BUILDINGS_3D + property.getName(), nightMode);
-
-			boolean lastItem = i == rules.size() - 1;
-			item.setHideDivider(lastItem);
-
-			View itemView = viewCreator.getView(item, null);
-			container.addView(itemView);
-
-			if (lastItem) {
-				container.addView(inflate(R.layout.card_bottom_divider));
-			}
-		}
-		if (rules.isEmpty()) {
-			container.addView(inflate(R.layout.card_bottom_divider));
-		}
-	}
-
-	private void setupDetalization(@NonNull View view) {
-		ViewGroup container = view.findViewById(R.id.detalization_container);
-
-		TextView title = container.findViewById(R.id.title);
-		title.setText(R.string.buildings_3d_detail_level);
-		title.setTypeface(FontCache.getNormalFont());
-
-		int level = plugin.BUILDINGS_3D_DETAIL_LEVEL.get();
-		TextRadioItem medium = createRadioButton(R.string.rendering_value_medium_name, 1);
-		TextRadioItem high = createRadioButton(R.string.rendering_value_high_name, 2);
-
-		TextToggleButton radioGroup = new TextToggleButton(app, container.findViewById(R.id.custom_radio_buttons), nightMode);
-		radioGroup.setItems(medium, high);
-		radioGroup.setSelectedItemByTag(level);
-
-		AndroidUiHelper.updateVisibility(container.findViewById(R.id.descr), false);
-		AndroidUiHelper.updateVisibility(container.findViewById(R.id.description), false);
-	}
-
-	@NonNull
-	private TextRadioItem createRadioButton(@StringRes int titleId, int level) {
-		TextRadioItem item = new TextRadioItem(getString(titleId));
-		item.setTag(level);
-		item.setOnClickListener((radioItem, view) -> {
-			plugin.BUILDINGS_3D_DETAIL_LEVEL.set(level);
-			apply3DBuildingsDetalization(level);
+	private void setupDetailsLevelToggleButtons(@NonNull View view) {
+		IconToggleButton.IconRadioItem low = new IconToggleButton.IconRadioItem(R.drawable.ic_action_3d_buildings_level_of_detail_1);
+		low.setOnClickListener((radioItem, v) -> {
+			onDetailsLevelChanged(low, false);
 			return true;
 		});
-		return item;
+		low.setContentDescription(app.getString(R.string.building_3d_low_details_content_desc));
+
+		IconToggleButton.IconRadioItem high = new IconToggleButton.IconRadioItem(R.drawable.ic_action_3d_buildings_level_of_detail_2);
+		high.setOnClickListener((radioItem, v) -> {
+			onDetailsLevelChanged(high, true);
+			return true;
+		});
+		high.setContentDescription(app.getString(R.string.building_3d_high_details_content_desc));
+
+		LinearLayout container = view.findViewById(R.id.custom_radio_buttons);
+		detailsLevelToggleButton = new IconToggleButton(app, container, nightMode);
+		detailsLevelToggleButton.setItems(low, high);
+		detailsLevelToggleButton.setSelectedItem(plugin.BUILDINGS_3D_DETAIL_LEVEL.get() ? high : low);
 	}
 
-	private void apply3DBuildingsDetalization(int level) {
-		MapRendererContext ctx = NativeCoreContext.getMapRendererContext();
-		if (ctx != null) {
-			MapRendererView rendererView = ctx.getMapRendererView();
-			if (rendererView != null) {
-				rendererView.set3DBuildingsDetalization(level);
-				refreshMap();
-			}
-		}
+	private void setupViewDistanceToggleButtons(@NonNull View view) {
+		int level = plugin.BUILDINGS_3D_VIEW_DISTANCE.get();
+		IconToggleButton.IconRadioItem low = new IconToggleButton.IconRadioItem(R.drawable.ic_action_view_distance_low);
+		low.setOnClickListener((radioItem, v) -> {
+			onViewDistanceChanged(low, 1);
+			return true;
+		});
+		low.setContentDescription(app.getString(R.string.building_3d_near_distance_content_desc));
+
+		IconToggleButton.IconRadioItem high = new IconToggleButton.IconRadioItem(R.drawable.ic_action_view_distance_high);
+		high.setOnClickListener((radioItem, v) -> {
+			onViewDistanceChanged(high, 2);
+			return true;
+		});
+		high.setContentDescription(app.getString(R.string.building_3d_far_distance_content_desc));
+
+		LinearLayout container = view.findViewById(R.id.custom_radio_buttons);
+		viewDistanceToggleButton = new IconToggleButton(app, container, nightMode);
+		viewDistanceToggleButton.setItems(low, high);
+		viewDistanceToggleButton.setSelectedItem(level == 2 ? high : low);
+	}
+
+	private void onDetailsLevelChanged(@NonNull IconToggleButton.IconRadioItem selectItem, boolean enable) {
+		plugin.BUILDINGS_3D_DETAIL_LEVEL.set(enable);
+		MapActivity activity = requireMapActivity();
+		activity.refreshMapComplete();
+		activity.updateLayers();
+		detailsLevelToggleButton.setSelectedItem(selectItem);
+	}
+
+	private void onViewDistanceChanged(@NonNull IconToggleButton.IconRadioItem selectItem, int level) {
+		plugin.BUILDINGS_3D_VIEW_DISTANCE.set(level);
+		plugin.apply3DBuildingsDetalization();
+		refreshMap();
+		viewDistanceToggleButton.setSelectedItem(selectItem);
 	}
 
 	private void showHideTopShadow(@NonNull View view) {
@@ -240,7 +202,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		boolean enabled = plugin.ENABLE_3D_MAP_OBJECTS.get();
 		if (enabled) {
 			int profileColor = settings.getApplicationMode().getProfileColor(nightMode);
-			iconIv.setImageDrawable(getPaintedIcon(R.drawable.ic_action_3d, profileColor));
+			iconIv.setImageDrawable(getPaintedIcon(R.drawable.ic_action_3d_buildings, profileColor));
 			stateTv.setText(R.string.shared_string_on);
 		} else {
 			iconIv.setImageDrawable(getIcon(R.drawable.ic_action_3d, ColorUtilities.getSecondaryIconColorId(nightMode)));
@@ -260,17 +222,6 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		collection.replace(InsetTarget.createBottomContainer(R.id.main_container).landscapeLeftSided(true));
 		collection.removeType(Type.ROOT_INSET);
 		return collection;
-	}
-
-	@NonNull
-	public static List<RenderingRuleProperty> get3DBuildingsRules(@NonNull OsmandApplication app) {
-		List<RenderingRuleProperty> rules = new ArrayList<>();
-		for (RenderingRuleProperty property : ConfigureMapUtils.getCustomRules(app)) {
-			if (BUILDINGS_3D.equals(property.getCategory())) {
-				rules.add(property);
-			}
-		}
-		return rules;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

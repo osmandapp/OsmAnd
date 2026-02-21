@@ -1264,7 +1264,7 @@ public class RouteCalculationResult {
 	}
 
 
-	public List<RouteDirectionInfo> getRouteDirections() {
+	public List<RouteDirectionInfo> getRouteDirections(OsmandApplication app) {
 		if (currentDirectionInfo < directions.size() - 1) {
 			if (cacheCurrentTextDirectionInfo != currentDirectionInfo) {
 				cacheCurrentTextDirectionInfo = currentDirectionInfo;
@@ -1285,7 +1285,7 @@ public class RouteCalculationResult {
 						p.setDestinationName(i.getDestinationName());
 						p.setRef(i.getRef());
 						p.setStreetName(i.getStreetName());
-						p.setDescriptionRoute(i.getDescriptionRoutePart());
+						p.setDescriptionRoute(i.getDescriptionRoutePart(app));
 						cacheAgreggatedDirections.add(p);
 					}
 					float time = i.getExpectedTime() + p.getExpectedTime();
@@ -1462,9 +1462,10 @@ public class RouteCalculationResult {
 			RouteDirectionInfo current = directions.get(currentDirectionInfo);
 			int distanceToNextTurn = getListDistance(currentRoute);
 			distanceToNextTurn -= getListDistance(current.routePointOffset);
-			Location l = locations.get(currentRoute);
-			if (fromLoc != null) {
-				distanceToNextTurn += fromLoc.distanceTo(l);
+
+			Location location = currentRoute < locations.size() ? locations.get(currentRoute) : null;
+			if (fromLoc != null && location != null) {
+				distanceToNextTurn += fromLoc.distanceTo(location);
 			}
 			return (int) (distanceToNextTurn / current.getAverageSpeed());
 		}

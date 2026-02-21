@@ -42,6 +42,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -248,8 +249,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
-		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
+	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos,
+			@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
 		MapWidget widget = createMapWidgetForParams(mapActivity, WidgetType.MAPILLARY);
 		widgetsInfos.add(creator.createWidgetInfo(widget));
 	}
@@ -330,8 +332,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 		if (mapillaryWidgetRegInfo != null) {
 			MapWidgetRegistry widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
 			List<ApplicationMode> allModes = ApplicationMode.allPossibleValues();
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
 			for (ApplicationMode mode : allModes) {
-				widgetRegistry.enableDisableWidgetForMode(mode, mapillaryWidgetRegInfo, visible, false);
+				widgetRegistry.enableDisableWidgetForMode(mode, mapillaryWidgetRegInfo, visible, layoutMode, false);
 			}
 			MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mil != null) {

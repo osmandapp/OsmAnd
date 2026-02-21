@@ -63,6 +63,14 @@ public class ConfigureMapButtonState extends MapButtonState {
 		return appMode.getIconName();
 	}
 
+	@Override
+	protected void updatePosition(@NonNull ButtonPositionSize position) {
+		super.updatePosition(position);
+		if (!portrait) {
+			position.setMoveHorizontal();
+		}
+	}
+
 	@NonNull
 	@Override
 	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {

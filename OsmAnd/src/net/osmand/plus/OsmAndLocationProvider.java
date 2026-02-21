@@ -665,11 +665,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			return;
 		}
 		prevLocation = location;
-		if (location != null && isPointAccurateForRouting(location) && !isTunnelLocationSimulated(location)) {
+		if (location != null) {
 			lastTimeLocationFixed = System.currentTimeMillis();
-			simulatePosition = null;
-			notifyGpsLocationRecovered();
-			scheduleCheckIfGpsLost(location);
+			if (isPointAccurateForRouting(location) && !isTunnelLocationSimulated(location)) {
+				simulatePosition = null;
+				notifyGpsLocationRecovered();
+				scheduleCheckIfGpsLost(location);
+			}
 		}
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		app.getSavingTrackHelper().updateLocation(location, heading);
@@ -701,12 +703,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 		enhanceLocation(location);
 
-		if (location != null && isPointAccurateForRouting(location) && !isTunnelLocationSimulated(location)) {
+		if (location != null) {
 			// use because there is a bug on some devices with location.getTime()
 			lastTimeLocationFixed = System.currentTimeMillis();
-			simulatePosition = null;
-			notifyGpsLocationRecovered();
-			scheduleCheckIfGpsLost(location);
+			if (isPointAccurateForRouting(location) && !isTunnelLocationSimulated(location)) {
+				simulatePosition = null;
+				notifyGpsLocationRecovered();
+				scheduleCheckIfGpsLost(location);
+			}
 		}
 
 		RoutingHelper routingHelper = app.getRoutingHelper();

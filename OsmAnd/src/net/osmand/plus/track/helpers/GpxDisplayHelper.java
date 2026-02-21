@@ -74,7 +74,7 @@ public class GpxDisplayHelper {
 		String name = getGroupName(app, gpxFile);
 		if (gpxFile.getTracks().size() > 0) {
 			for (int i = 0; i < gpxFile.getTracks().size(); i++) {
-				TrackDisplayGroup group = buildTrackDisplayGroup(gpxFile, i, name);
+				TrackDisplayGroup group = buildTrackDisplayGroup(gpxFile, i, name, false);
 				if (processTrack) {
 					GpxDataItem dataItem = !Algorithms.isEmpty(gpxFile.getPath())
 							? app.getGpxDbHelper().getItem(new KFile(gpxFile.getPath())) : null;
@@ -101,13 +101,15 @@ public class GpxDisplayHelper {
 
 	@NonNull
 	public TrackDisplayGroup buildTrackDisplayGroup(@NonNull GpxFile gpxFile) {
-		return buildTrackDisplayGroup(gpxFile, 0, "");
+		return buildTrackDisplayGroup(gpxFile, 0, "", true);
 	}
 
 	@NonNull
-	private TrackDisplayGroup buildTrackDisplayGroup(@NonNull GpxFile gpxFile, int trackIndex, @NonNull String name) {
+	private TrackDisplayGroup buildTrackDisplayGroup(@NonNull GpxFile gpxFile, int trackIndex, @NonNull String name,
+	                                                 boolean overrideIsGeneralTrack) {
 		Track track = gpxFile.getTracks().get(trackIndex);
-		TrackDisplayGroup group = new TrackDisplayGroup(gpxFile, track, track.getGeneralTrack(), trackIndex);
+		boolean isGeneralTrack = overrideIsGeneralTrack || track.getGeneralTrack();
+		TrackDisplayGroup group = new TrackDisplayGroup(gpxFile, track, isGeneralTrack, trackIndex);
 		group.applyName(app, name);
 		group.setColor(track.getColor(gpxFile.getColor(0)));
 		String description = "";

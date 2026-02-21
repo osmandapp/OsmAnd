@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@color/color_transparent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:orientation="horizontal">
+
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/gpx_visibility_txt"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size" />
+
+		<TextView
+			android:id="@+id/transparency_value_tv"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			tools:text="50%" />
+
+	</LinearLayout>
+
+	<com.google.android.material.slider.Slider
+		android:id="@+id/transparency_slider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:stepSize="1" />
+
+	<TextView
+		android:id="@+id/description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small_half"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding"
+		android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+		android:text="@string/buildings_3d_visibility_description"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_list_text_size" />
+
+
+</LinearLayout>

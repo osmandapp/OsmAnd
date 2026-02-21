@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/switchRowRoot"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:minHeight="48dp"
+	android:background="?attr/selectableItemBackground"
+	android:orientation="vertical"
+	android:clickable="true"
+	android:focusable="true">
+
+	<LinearLayout
+		android:layout_height="0dp"
+		android:layout_width="match_parent"
+		android:layout_weight="1"
+		android:orientation="horizontal"
+		android:gravity="center_vertical"
+		android:paddingStart="16dp"
+		android:paddingEnd="16dp">
+
+		<ImageView
+			android:id="@+id/icon"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
+			android:src="@drawable/ic_map"
+			android:contentDescription="@null" />
+
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:layout_marginStart="32dp"
+			android:layout_marginEnd="32dp"
+			android:textSize="16sp"
+			android:textColor="?attr/text_color_primary_v2"
+			tools:text="Title" />
+
+		<com.google.android.material.materialswitch.MaterialSwitch
+			android:id="@+id/switcher"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:clickable="false"
+			android:checked="false" />
+	</LinearLayout>
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="72dp"
+		android:background="?attr/divider_color" />
+
+</LinearLayout>

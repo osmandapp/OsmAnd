@@ -46,15 +46,17 @@ public class EditGpxDescriptionController extends EditDescriptionController {
 		gpx.getMetadata().setDesc(editedText);
 
 		File file = trackMenuFragment.getDisplayHelper().getFile();
-		SaveGpxHelper.saveGpx(file, gpx, errorMessage -> {
-			if (errorMessage != null) {
-				log.error(errorMessage);
-			}
-			if (activity.getFragmentsHelper().getTrackMenuFragment() != null) {
-				activity.getFragmentsHelper().getTrackMenuFragment().updateContent();
-			}
-			callback.onDescriptionSaved();
-		});
+		if (file != null) {
+			SaveGpxHelper.saveGpx(file, gpx, errorMessage -> {
+				if (errorMessage != null) {
+					log.error(errorMessage);
+				}
+				if (activity.getFragmentsHelper().getTrackMenuFragment() != null) {
+					activity.getFragmentsHelper().getTrackMenuFragment().updateContent();
+				}
+				callback.onDescriptionSaved();
+			});
+		}
 	}
 
 	@Nullable

@@ -1,6 +1,8 @@
 package net.osmand.shared.gpx
 
 import net.osmand.shared.util.KAlgorithms
+import net.osmand.shared.util.LoggerFactory
+import net.osmand.shared.util.PlatformUtil
 import kotlin.reflect.KClass
 
 enum class GpxParameter(
@@ -101,6 +103,8 @@ enum class GpxParameter(
 	AVG_OBD_FUEL_LEVEL("avgVmFuel", "double", Double::class, 0.0, true),
 	MAX_OBD_FUEL_LEVEL("maxVmFuel", "double", Double::class, 0.0, true);
 
+	val log = LoggerFactory.getLogger("GpxParameter")
+
 	fun isNullSupported(): Boolean = defaultValue == null
 
 	fun isAnalysisRecalculationNeeded(): Boolean {
@@ -135,11 +139,24 @@ enum class GpxParameter(
 	}
 
 	fun <T>getValueFromString(value: String): T {
+		var numberValue: Comparable<*>? = null
+		try {
+			numberValue = when (typeClass) {
+				Double::class -> value.toDouble()
+				Float::class -> value.toFloat()
+				Int::class -> value.toInt()
+				Long::class -> value.toLong()
+				else -> null
+			}
+		} catch (_: Throwable) {
+			log.error("Can't parse $value for type $typeClass")
+		}
+
 		val convertedValue: T? = when (typeClass) {
-			Double::class -> check(value.toDouble())
-			Float::class -> check(value.toFloat())
-			Int::class -> check(value.toInt())
-			Long::class -> check(value.toLong())
+			Double::class -> check(numberValue ?: 0.0)
+			Float::class -> check(numberValue ?: 0f)
+			Int::class -> check(numberValue ?: 0)
+			Long::class -> check(numberValue ?: 0L)
 			else -> null
 		}
 		if (convertedValue != null) {
@@ -153,7 +170,7 @@ enum class GpxParameter(
 	fun <T>check(value: Comparable<*>): T? {
 		return try {
 			value as T
-		} catch (err: ClassCastException) {
+		} catch (_: ClassCastException) {
 			null
 		}
 	}
