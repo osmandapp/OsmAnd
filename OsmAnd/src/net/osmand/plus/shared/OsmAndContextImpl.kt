@@ -4,12 +4,16 @@ import net.osmand.CollatorStringMatcher
 import net.osmand.IndexConstants.GPX_IMPORT_DIR
 import net.osmand.IndexConstants.GPX_INDEX_DIR
 import net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter
-import net.osmand.data.Amenity
+import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks.CITY_TOWN_TYPE
+import net.osmand.binary.BinaryMapIndexReader
 import net.osmand.data.City
-import net.osmand.osm.PoiCategory
+import net.osmand.data.LatLon
+import net.osmand.data.QuadRect
+import net.osmand.data.QuadTree
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.PluginsHelper
+import net.osmand.search.core.SearchPhrase
+import net.osmand.search.core.SearchPhrase.SearchPhraseDataType.ADDRESS
 import net.osmand.shared.api.CityNameCallback
 import net.osmand.shared.api.KStringMatcherMode
 import net.osmand.shared.api.OsmAndContext
@@ -21,7 +25,9 @@ import net.osmand.shared.io.KFile
 import net.osmand.shared.settings.enums.AltitudeMetrics
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.shared.settings.enums.SpeedConstants
+import net.osmand.shared.util.KLock
 import net.osmand.shared.util.KStringMatcher
+import net.osmand.shared.util.synchronized
 import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
 import java.io.IOException
@@ -33,6 +39,10 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 	}
 
 	private val settings: SettingsAPIImpl = SettingsAPIImpl(app)
+
+	private val townCitiesLock = KLock()
+	private val townCitiesInit = mutableSetOf<String>()
+	private val townCitiesQR: QuadTree<City> = QuadTree(QuadRect(0.0, 0.0, Int.MAX_VALUE.toDouble(), Int.MAX_VALUE.toDouble()), 12, 0.55f)
 
 	override fun getAppDir(): KFile = app.getAppPathKt(null)
 
@@ -94,43 +104,54 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 		while (app.isApplicationInitializing) {
 			Thread.sleep(50)
 		}
-		searchNearestCity(latLon, callback)
-	}
+		val jLatLon = SharedUtil.jLatLon(latLon)
+		val rect = SearchPhrase.calculateBbox(CITY_SEARCH_RADIUS, jLatLon)
+		val offlineIndexes = app.resourceManager.getQuickSearchFiles(null).toList()
+		val iterator = SearchPhrase.getOfflineIndexes(rect, ADDRESS, offlineIndexes)
 
-	private fun searchNearestCity(latLon: KLatLon, callback: CityNameCallback) {
-		val cityTypes = City.CityType.entries.associateBy { it.name.lowercase() }
-		val rect = MapUtils.calculateLatLonBbox(latLon.latitude, latLon.longitude, CITY_SEARCH_RADIUS)
-		val travelFileVisibility = app.resourceManager.defaultAmenitySearchSettings.fileVisibility
-		val cities = app.resourceManager.amenitySearcher.searchAmenities(object : SearchPoiTypeFilter {
-			override fun accept(type: PoiCategory, subcategory: String): Boolean {
-				return cityTypes.containsKey(subcategory)
-			}
-
-			override fun isEmpty(): Boolean {
-				return false
-			}
-		}, rect, false, travelFileVisibility, null)
-
+		val cities = searchNearestCities(rect, iterator)
 		if (cities.isNotEmpty()) {
-			sortAmenities(cities, cityTypes, latLon)
+			sortCities(cities, jLatLon)
 			callback(cities.first().name)
 		} else {
 			callback("")
 		}
 	}
 
-	private fun sortAmenities(
-		amenities: MutableList<Amenity>,
-		cityTypes: Map<String, City.CityType>,
-		latLon: KLatLon
-	) {
-		val jLatLon = SharedUtil.jLatLon(latLon)
-		amenities.sortWith { o1, o2 ->
-			val rad1 = cityTypes[o1.subType]?.radius ?: 1000.0
-			val rad2 = cityTypes[o2.subType]?.radius ?: 1000.0
-			val distance1 = MapUtils.getDistance(jLatLon, o1.location) / rad1
-			val distance2 = MapUtils.getDistance(jLatLon, o2.location) / rad2
-			distance1.compareTo(distance2)
+	private fun searchNearestCities(rect: QuadRect, iterator: Iterator<BinaryMapIndexReader>): MutableList<City> = synchronized(townCitiesLock) {
+		while (iterator.hasNext()) {
+			val reader = iterator.next()
+			if (townCitiesInit.add(reader.regionName)) {
+				val cities = reader.getCities(null, CITY_TOWN_TYPE, null, null)
+				for (city in cities) {
+					val bbox31 = city.bbox31
+					val cityRect = if (bbox31 != null) {
+						QuadRect(
+							bbox31[0].toDouble(),
+							bbox31[1].toDouble(),
+							bbox31[2].toDouble(),
+							bbox31[3].toDouble()
+						)
+					} else {
+						val location = city.location
+						val y = MapUtils.get31TileNumberY(location.latitude)
+						val x = MapUtils.get31TileNumberX(location.longitude)
+						QuadRect(x.toDouble(), y.toDouble(), x.toDouble(), y.toDouble())
+					}
+					townCitiesQR.insert(city, cityRect)
+				}
+			}
+		}
+		townCitiesQR.queryInBox(rect, ArrayList<City>())
+	}
+
+	private fun sortCities(cities: MutableList<City>, jLatLon: LatLon) {
+		cities.sortWith { c1, c2 ->
+			val rad1 = c1.type.radius.toDouble().let { if (it > 0) it else 1000.0 }
+			val rad2 = c2.type.radius.toDouble().let { if (it > 0) it else 1000.0 }
+			val d1 = MapUtils.getDistance(jLatLon, c1.location) / rad1
+			val d2 = MapUtils.getDistance(jLatLon, c2.location) / rad2
+			d1.compareTo(d2)
 		}
 	}
 }
