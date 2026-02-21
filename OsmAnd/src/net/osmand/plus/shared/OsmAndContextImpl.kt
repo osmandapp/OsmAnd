@@ -6,10 +6,15 @@ import net.osmand.IndexConstants.GPX_INDEX_DIR
 import net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks.CITY_TOWN_TYPE
 import net.osmand.binary.BinaryMapIndexReader
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter
+import net.osmand.data.Amenity
 import net.osmand.data.City
+import net.osmand.data.City.CityType
 import net.osmand.data.LatLon
+import net.osmand.data.MapObject
 import net.osmand.data.QuadRect
 import net.osmand.data.QuadTree
+import net.osmand.osm.PoiCategory
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.search.core.SearchPhrase
@@ -41,8 +46,19 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 	private val settings: SettingsAPIImpl = SettingsAPIImpl(app)
 
 	private val townCitiesLock = KLock()
-	private val townCitiesInit = mutableSetOf<String>()
+	private val townCitiesInit = LinkedHashSet<String>()
+	private val cityTypes = CityType.entries.associateBy { it.name.lowercase() }
 	private val townCitiesQR: QuadTree<City> = QuadTree(QuadRect(0.0, 0.0, Int.MAX_VALUE.toDouble(), Int.MAX_VALUE.toDouble()), 12, 0.55f)
+
+	private val cityFilter = object : SearchPoiTypeFilter {
+		override fun accept(type: PoiCategory, subcategory: String): Boolean {
+			return cityTypes.containsKey(subcategory)
+		}
+
+		override fun isEmpty(): Boolean {
+			return false
+		}
+	}
 
 	override fun getAppDir(): KFile = app.getAppPathKt(null)
 
@@ -104,18 +120,30 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 		while (app.isApplicationInitializing) {
 			Thread.sleep(50)
 		}
+		callback(findNearestCityName(latLon))
+	}
+
+	private fun findNearestCityName(latLon: KLatLon): String {
 		val jLatLon = SharedUtil.jLatLon(latLon)
 		val rect = SearchPhrase.calculateBbox(CITY_SEARCH_RADIUS, jLatLon)
 		val offlineIndexes = app.resourceManager.getQuickSearchFiles(null).toList()
 		val iterator = SearchPhrase.getOfflineIndexes(rect, ADDRESS, offlineIndexes)
 
-		val cities = searchNearestCities(rect, iterator)
-		if (cities.isNotEmpty()) {
-			sortCities(cities, jLatLon)
-			callback(cities.first().name)
+		return if (iterator.hasNext()) {
+			val cities = searchNearestCities(rect, iterator)
+			getNearestMapObjectName(cities) { sortCities(it, jLatLon) }
 		} else {
-			callback("")
+			val amenities = searchNearestAmenities(latLon)
+			getNearestMapObjectName(amenities) { sortAmenities(it, jLatLon) }
 		}
+	}
+
+	private inline fun <T : MapObject> getNearestMapObjectName(items: MutableList<T>, sortItems: (MutableList<T>) -> Unit): String {
+		if (items.isEmpty()) {
+			return ""
+		}
+		sortItems(items)
+		return items.first().name
 	}
 
 	private fun searchNearestCities(rect: QuadRect, iterator: Iterator<BinaryMapIndexReader>): MutableList<City> = synchronized(townCitiesLock) {
@@ -145,13 +173,28 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 		townCitiesQR.queryInBox(rect, ArrayList<City>())
 	}
 
+	private fun searchNearestAmenities(latLon: KLatLon): MutableList<Amenity> {
+		val rect = MapUtils.calculateLatLonBbox(latLon.latitude, latLon.longitude, CITY_SEARCH_RADIUS)
+		return app.resourceManager.amenitySearcher.searchAmenities(cityFilter, rect, false, null, null)
+	}
+
 	private fun sortCities(cities: MutableList<City>, jLatLon: LatLon) {
 		cities.sortWith { c1, c2 ->
 			val rad1 = c1.type.radius.toDouble().let { if (it > 0) it else 1000.0 }
 			val rad2 = c2.type.radius.toDouble().let { if (it > 0) it else 1000.0 }
-			val d1 = MapUtils.getDistance(jLatLon, c1.location) / rad1
-			val d2 = MapUtils.getDistance(jLatLon, c2.location) / rad2
-			d1.compareTo(d2)
+			val distance1 = MapUtils.getDistance(jLatLon, c1.location) / rad1
+			val distance2 = MapUtils.getDistance(jLatLon, c2.location) / rad2
+			distance1.compareTo(distance2)
+		}
+	}
+
+	private fun sortAmenities(amenities: MutableList<Amenity>, jLatLon: LatLon) {
+		amenities.sortWith { o1, o2 ->
+			val rad1 = cityTypes[o1.subType]?.radius ?: 1000.0
+			val rad2 = cityTypes[o2.subType]?.radius ?: 1000.0
+			val distance1 = MapUtils.getDistance(jLatLon, o1.location) / rad1
+			val distance2 = MapUtils.getDistance(jLatLon, o2.location) / rad2
+			distance1.compareTo(distance2)
 		}
 	}
 }
