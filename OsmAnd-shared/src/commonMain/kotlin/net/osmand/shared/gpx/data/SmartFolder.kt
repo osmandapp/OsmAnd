@@ -123,7 +123,7 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		invalidateCache()
 	}
 
-	private fun invalidateCache() {
+	fun invalidateCache() {
 		tracksOrganizer.clearCache()
 		folderAnalysis = null
 	}
