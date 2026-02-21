@@ -15,13 +15,12 @@ import com.squareup.picasso.RequestCreator;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
+import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
@@ -66,9 +65,6 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 
 	public void bindItem(@NonNull QuickSearchListItem item, boolean useMapCenter) {
 		MapObject mapObject = (MapObject) item.getSearchResult().object;
-		DownloadIndexesThread downloadThread;
-		downloadThread = app.getDownloadThread();
-		DownloadResources resources = downloadThread.getIndexes();
 		BinaryMapIndexReader mapReaderResource = null;
 		if (mapObject.getReferenceFile() instanceof BinaryMapIndexReader) {
 			mapReaderResource = (BinaryMapIndexReader) mapObject.getReferenceFile();
@@ -80,6 +76,13 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 			}
 		} else if (mapObject instanceof Street street) {
 			addressTv.setText(street.getCity().getName());
+		} else if (mapObject instanceof Building) {
+			StringBuilder address = new StringBuilder(item.getSearchResult().localeRelatedObjectName);
+			if (item.getSearchResult().relatedObject instanceof Street street){
+				address.append(", ");
+				address.append(street.getCity().getName());
+			}
+			addressTv.setText(address.toString());
 		} else {
 			addressTv.setText(item.getAddress());
 		}
@@ -89,6 +92,8 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 			} else if (item.getSearchResult().objectType == ObjectType.STREET_INTERSECTION) {
 				type.setText(R.string.intersection);
 			}
+		} else if (mapObject instanceof Building) {
+			type.setText(R.string.search_address_building);
 		} else {
 			type.setText(item.getTypeName());
 		}
