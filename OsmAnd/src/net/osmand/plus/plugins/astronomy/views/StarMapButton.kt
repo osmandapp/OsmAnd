@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.astronomy.views
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageButton
@@ -13,6 +14,14 @@ open class StarMapButton @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : AppCompatImageButton(context, attrs, defStyleAttr) {
+
+    var active: Boolean = false
+        set(value) {
+            if (field != value) {
+                field = value
+                updateTheme()
+            }
+        }
 
     var nightMode: Boolean = false
         set(value) {
@@ -38,9 +47,11 @@ open class StarMapButton @JvmOverloads constructor(
             return
         }
 
-        val backgroundColor = ColorUtilities.getMapButtonBackgroundColor(context, nightMode)
+        val backgroundColor =
+            if (active) ColorUtilities.getActiveColor(context, nightMode)
+            else ColorUtilities.getMapButtonBackgroundColor(context, nightMode)
         val backgroundPressedColor = ColorUtilities.getMapButtonBackgroundPressedColor(context, nightMode)
-        val strokeWidth = AndroidUtils.dpToPx(context, 1f)
+        val strokeWidth = if (active) 0 else AndroidUtils.dpToPx(context, 1f)
 
         val normal = GradientDrawable().apply {
             shape = GradientDrawable.OVAL
@@ -57,6 +68,9 @@ open class StarMapButton @JvmOverloads constructor(
         }
 
         background = AndroidUtils.createPressedStateListDrawable(normal, pressed)
-        setColorFilter(ColorUtilities.getMapButtonIconColor(context, nightMode))
+        val iconColor =
+            if (active) Color.WHITE
+            else ColorUtilities.getMapButtonIconColor(context, nightMode)
+        setColorFilter(iconColor)
     }
 }

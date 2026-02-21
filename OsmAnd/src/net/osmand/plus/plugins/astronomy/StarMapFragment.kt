@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -76,12 +77,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var transparencySlider: SeekBar
 	private lateinit var sliderContainer: View
 	private lateinit var resetFovButton: StarMapButton
-	//private lateinit var mode2dButton: StarMapButton
 
+	private lateinit var magnitudeFilterButton: MaterialCardView
+	private lateinit var magnitudeFilterIcon: ImageView
+	private lateinit var magnitudeFilterText: TextView
+	private lateinit var magnitudeSliderCard: MaterialCardView
 	private lateinit var magnitudeSlider: SeekBar
-	private lateinit var magnitudeValueText: TextView
-	private lateinit var magnitudeSliderContainer: View
-	private lateinit var resetMagnitudeButton: StarMapButton
+	private lateinit var magnitudeSliderValue: TextView
 
 	private lateinit var starChartsView: View
 	private lateinit var starVisiblityView: StarVisiblityChartView
@@ -89,8 +91,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var starChartState: StarChartState
 
 	private lateinit var timeControlCard: MaterialCardView
-	//private lateinit var starMapButton: StarMapButton
-	//private lateinit var starChartButton: StarMapButton
 	private lateinit var closeButton: StarMapButton
 	private lateinit var searchButton: StarMapButton
 	private lateinit var settingsButton: StarMapButton
@@ -121,7 +121,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var previousAltitude: Double = 45.0
 	private var previousAzimuth: Double = 0.0
 	private var previousViewAngle: Double = 150.0
-	private var showMagnitudeFilter = false
 
 	private var systemBottomInset: Int = 0
 	private var systemTopInset: Int = 0
@@ -190,10 +189,17 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		sliderContainer = view.findViewById(R.id.slider_container)
 		resetFovButton = view.findViewById(R.id.reset_fov_button)
 
+		magnitudeFilterButton = view.findViewById(R.id.magnitude_filter_button)
+		magnitudeFilterIcon = view.findViewById(R.id.magnitude_filter_icon)
+		magnitudeFilterText = view.findViewById(R.id.magnitude_filter_text)
+		magnitudeSliderCard = view.findViewById(R.id.magnitude_slider_card)
 		magnitudeSlider = view.findViewById(R.id.magnitude_slider)
-		magnitudeValueText = view.findViewById(R.id.magnitude_value_text)
-		magnitudeSliderContainer = view.findViewById(R.id.magnitude_slider_container)
-		resetMagnitudeButton = view.findViewById(R.id.reset_magnitude_button)
+		magnitudeSliderValue = view.findViewById(R.id.magnitude_slider_value)
+
+		magnitudeFilterButton.setOnClickListener {
+			magnitudeSliderCard.isVisible = !magnitudeSliderCard.isVisible
+			updateMagnitudeFilterTheme()
+		}
 
 		arModeHelper = StarMapARModeHelper(requireContext(), starView) { enabled ->
 			updateArModeUI(enabled)
@@ -220,7 +226,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		magnitudeSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 			override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
 				val magnitude = progress / 10.0 - 1.0
-				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", magnitude)
+				val magnitudeStr = String.format(Locale.getDefault(), "%.1f", magnitude)
+				magnitudeFilterText.text = magnitudeStr
+				magnitudeSliderValue.text = magnitudeStr
 				if (fromUser) {
 					starView.magnitudeFilter = magnitude.toFloat()
 					starView.invalidate()
@@ -229,15 +237,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 			override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 		})
-
-		resetMagnitudeButton.setOnClickListener {
-			val objects = viewModel.skyObjects.value ?: emptyList()
-			if (objects.isNotEmpty()) {
-				magnitudeSlider.progress = ((MAX_MAGNITUDE + 1.0) * 10.0).toInt()
-				starView.magnitudeFilter = null
-				starView.invalidate()
-			}
-		}
 
 		updateArModeUI(arModeHelper.isArModeEnabled)
 		updateCameraUI(cameraHelper.isCameraOverlayEnabled)
@@ -259,14 +258,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		view.findViewById<AppCompatImageView>(R.id.switch_chart_button).apply {
 			setOnClickListener { starChartState.changeToNextState(); updateStarChart() }
 		}
-//		starChartButton = view.findViewById(R.id.star_chart_button)
-//		starChartButton.apply {
-//			setOnClickListener {
-//				if (starChartsView.isVisible) updateStarChartVisibility(false)
-//				else { updateStarChartVisibility(true); updateStarChart() }
-//				saveCommonSettings()
-//			}
-//		}
+
 		closeButton = view.findViewById(R.id.close_button)
 		closeButton.apply {
 			setOnClickListener {
@@ -307,6 +299,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		timeControlBtn.setOnClickListener {
 			timeSelectionView.isVisible = !timeSelectionView.isVisible
+			updateTimeControlTheme(timeControlCard, timeControlBtn, resetTimeButton)
 		}
 
 		resetTimeButton.setOnClickListener {
@@ -346,16 +339,16 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.showSun = config.showSun
 			starView.showMoon = config.showMoon
 			starView.showPlanets = config.showPlanets
-			showMagnitudeFilter = config.showMagnitudeFilter
 			starView.magnitudeFilter = config.magnitudeFilter?.toFloat()
 			starView.is2DMode = config.is2DMode
 			if (config.magnitudeFilter != null) {
-				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", config.magnitudeFilter)
+				val text = String.format(Locale.getDefault(), "%.1f", config.magnitudeFilter)
+				magnitudeFilterText.text = text
+				magnitudeSliderValue.text = text
 			}
 			updateRedMode(config.showRedFilter)
 		}
 
-		updateMagnitudeFilterVisibility()
 		updateStarMap(true)
 
 		previousAltitude = starView.getAltitude()
@@ -526,11 +519,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		arModeButton.nightMode = currentNightMode
 		cameraButton.nightMode = currentNightMode
 		resetFovButton.nightMode = currentNightMode
-		resetMagnitudeButton.nightMode = currentNightMode
 		closeButton.nightMode = currentNightMode
 		searchButton.nightMode = currentNightMode
 		settingsButton.nightMode = currentNightMode
 		compassButton.setNightMode(currentNightMode)
+
+		updateMagnitudeFilterTheme()
 
 		if (::timeControlCard.isInitialized) {
 			updateTimeControlTheme(timeControlCard, timeControlBtn, resetTimeButton)
@@ -725,13 +719,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		astroSettings.setStarMapConfig(newConfig)
 	}
 
-	private fun updateMagnitudeFilterVisibility() {
-		val visible = starView.showStars && starView.isVisible && showMagnitudeFilter
-		magnitudeSliderContainer.visibility = if (visible) View.VISIBLE else View.GONE
-		magnitudeValueText.visibility = if (visible) View.VISIBLE else View.GONE
-		resetMagnitudeButton.visibility = if (visible) View.VISIBLE else View.GONE
-	}
-
 	private fun updateWidgetsVisibility(activity: MapActivity, visibility: Int) {
 		AndroidUiHelper.setVisibility(activity, visibility, R.id.map_left_widgets_panel,
 			R.id.map_right_widgets_panel, R.id.map_center_info)
@@ -797,7 +784,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 				val filterToUse = starView.magnitudeFilter ?: maxMag
 				magnitudeSlider.progress = ((filterToUse + 1.0) * 10.0).toInt()
-				magnitudeValueText.text = String.format(Locale.getDefault(), "%.1f", filterToUse)
+				val text = String.format(Locale.getDefault(), "%.1f", filterToUse)
+				magnitudeFilterText.text = text
+				magnitudeSliderValue.text = text
 			}
 		}
 		viewModel.constellations.observe(viewLifecycleOwner) { constellations ->
@@ -932,12 +921,52 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val strokeColor = ColorUtilities.getColor(context, if (nightMode) R.color.map_widget_dark_stroke else R.color.map_widget_light_trans)
 		val strokeWidth = AndroidUtils.dpToPx(context, 1f)
 
-		card.setCardBackgroundColor(bgColor)
+		if (timeSelectionView.isVisible) {
+			card.setCardBackgroundColor(ColorUtilities.getActiveColor(context, nightMode))
+			button.active = true
+			resetBtn.active = true
+			card.strokeWidth = 0
+		} else {
+			card.setCardBackgroundColor(bgColor)
+			button.active = false
+			resetBtn.active = false
+			card.strokeWidth = strokeWidth
+		}
 		card.strokeColor = strokeColor
-		card.strokeWidth = strokeWidth
 
 		button.nightMode = nightMode
 		resetBtn.nightMode = nightMode
+	}
+
+	private fun updateMagnitudeFilterTheme() {
+		val context = requireContext()
+		val isSliderVisible = magnitudeSliderCard.isVisible
+
+		val cardBgColor = ColorUtilities.getMapButtonBackgroundColor(context, nightMode)
+		val textColor = ColorUtilities.getColor(context, if (nightMode) R.color.text_color_primary_dark else R.color.text_color_primary_light)
+		val valueColor = ColorUtilities.getMapButtonIconColor(context, nightMode)
+		val strokeColor = ColorUtilities.getColor(context, if (nightMode) R.color.map_widget_dark_stroke else R.color.map_widget_light_trans)
+		val strokeWidth = AndroidUtils.dpToPx(context, 1f)
+
+		if (isSliderVisible) {
+			magnitudeFilterButton.setCardBackgroundColor(ColorUtilities.getActiveColor(context, nightMode))
+			magnitudeFilterIcon.setColorFilter(Color.WHITE)
+			magnitudeFilterText.setTextColor(Color.WHITE)
+			magnitudeFilterButton.strokeWidth = 0
+		} else {
+			magnitudeFilterButton.setCardBackgroundColor(cardBgColor)
+			magnitudeFilterIcon.setColorFilter(valueColor)
+			magnitudeFilterText.setTextColor(valueColor)
+			magnitudeFilterButton.strokeColor = strokeColor
+			magnitudeFilterButton.strokeWidth = strokeWidth
+		}
+
+		magnitudeSliderCard.setCardBackgroundColor(cardBgColor)
+		magnitudeSliderCard.strokeColor = strokeColor
+		magnitudeSliderCard.strokeWidth = strokeWidth
+
+		view?.findViewById<TextView>(R.id.magnitude_slider_label)?.setTextColor(textColor)
+		magnitudeSliderValue.setTextColor(valueColor)
 	}
 
 	private fun updateRedMode(enabled: Boolean) {
@@ -962,7 +991,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (::arModeButton.isInitialized) viewsToFilter.add(arModeButton)
 		if (::cameraButton.isInitialized) viewsToFilter.add(cameraButton)
 		if (::resetFovButton.isInitialized) viewsToFilter.add(resetFovButton)
-		if (::magnitudeSliderContainer.isInitialized) viewsToFilter.add(magnitudeSliderContainer)
+		if (::magnitudeFilterButton.isInitialized) viewsToFilter.add(magnitudeFilterButton)
+		if (::magnitudeSliderCard.isInitialized) viewsToFilter.add(magnitudeSliderCard)
 		if (::compassButton.isInitialized) viewsToFilter.add(compassButton)
 		if (::closeButton.isInitialized) viewsToFilter.add(closeButton)
 		if (::searchButton.isInitialized) viewsToFilter.add(searchButton)
