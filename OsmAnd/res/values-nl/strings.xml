@@ -6344,4 +6344,5 @@
     <string name="building_3d_day_color_content_desc">3D-gebouwen dagstijlkleur</string>
     <string name="building_3d_night_color_content_desc">3D-gebouwen nachtstijlkleur</string>
     <string name="delete_groups_confirmation">Groepen verwijderen?</string>
+    <string name="astronomy_plugin_name">Astronomie</string>
 </resources>
