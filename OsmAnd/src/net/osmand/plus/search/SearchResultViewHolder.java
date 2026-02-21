@@ -78,11 +78,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 
 		imageView.setImageDrawable(item.getIcon());
 		String name = item.getName();
-		if (item.getSpannableName() != null) {
-			title.setText(item.getSpannableName());
-		} else {
-			title.setText(name);
-		}
+		title.setText(item.getSpannableName());
 
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		String desc = item.getTypeName();
@@ -207,11 +203,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			SpannableString spannableName = UiUtilities.createColorSpannable(name, view.getContext().getColor(textColor), false, altName);
 			title.setText(spannableName);
 		} else {
-			if (item.getSpannableName() != null) {
-				title.setText(item.getSpannableName());
-			} else {
-				title.setText(name);
-			}
+			title.setText(item.getSpannableName());
 		}
 
 		AndroidUiHelper.setTextAndChangeVisibility(addressTv, address);

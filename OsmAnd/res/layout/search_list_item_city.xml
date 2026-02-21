@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/card_and_list_background_basic"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/searchListItemLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="60dp"
+		android:orientation="horizontal"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_small">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/item_title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="2"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="Amsterdam" />
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<LinearLayout
+					android:id="@+id/compass_layout"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:orientation="horizontal">
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/direction"
+						android:layout_width="@dimen/directionIconSize"
+						android:layout_height="@dimen/directionIconSize"
+						android:layout_gravity="center_vertical"
+						android:layout_marginTop="1sp" />
+
+					<TextView
+						android:id="@+id/distance"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:layout_marginStart="2dp"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_desc_text_size"
+						tools:text="100500 km" />
+
+				</LinearLayout>
+
+				<TextView
+					android:id="@+id/dot_divider"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/content_padding_small_half"
+					android:text="•"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size"
+					android:visibility="visible" />
+
+
+				<TextView
+					android:id="@+id/item_type"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/content_padding_small_half"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size"
+					tools:text="City" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/content_padding_small_half"
+					android:text="•"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size" />
+
+				<TextView
+					android:id="@+id/address"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/content_padding_small_half"
+					android:layout_weight="1"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size"
+					tools:text="City" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<FrameLayout
+			android:id="@+id/image_container"
+			android:layout_width="@dimen/big_icon_size"
+			android:layout_height="@dimen/big_icon_size"
+			android:layout_gravity="top"
+			android:background="?attr/activity_background_color">
+
+			<ImageView
+				android:id="@+id/item_icon"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_gravity="center"
+				android:scaleType="fitCenter" />
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider" />
+
+</LinearLayout>

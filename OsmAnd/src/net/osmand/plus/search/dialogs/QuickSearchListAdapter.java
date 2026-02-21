@@ -7,7 +7,11 @@ import static net.osmand.plus.search.listitems.QuickSearchListItemType.CARD_DIVI
 import static net.osmand.plus.search.listitems.QuickSearchListItemType.HEADER;
 import static net.osmand.plus.search.listitems.QuickSearchListItemType.SEARCH_MORE;
 import static net.osmand.plus.search.listitems.QuickSearchListItemType.TOP_SHADOW;
+import static net.osmand.search.core.ObjectType.CITY;
+import static net.osmand.search.core.ObjectType.HOUSE;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
+import static net.osmand.search.core.ObjectType.STREET;
+import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
 
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -32,10 +36,10 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.search.CityStructureItemViewHolder;
 import net.osmand.plus.search.SearchResultViewHolder;
 import net.osmand.plus.search.WikiItemViewHolder;
 import net.osmand.plus.search.listitems.*;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.*;
@@ -235,10 +239,15 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			return bindBottomShadowItem(convertView);
 		} else if (type == CARD_DIVIDER) {
 			return bindCardDividerItem(convertView);
+		} else if (listItem.getSearchResult().objectType == CITY ||
+				listItem.getSearchResult().objectType == STREET ||
+				listItem.getSearchResult().objectType == STREET_INTERSECTION ||
+				listItem.getSearchResult().objectType == HOUSE) {
+			view = bindCityStructureItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.SEARCH_RESULT &&
 				(poiUIFilter != null && poiUIFilter.isWikiFilter() ||
 						listItem.getSearchResult().object instanceof Amenity amenity &&
-						amenity.getType().isWiki())) {
+								amenity.getType().isWiki())) {
 			return bindWikiItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.DISABLED_HISTORY) {
 			view = bindDisabledHistoryItem(listItem, convertView);
@@ -337,11 +346,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	                                        @NonNull QuickSearchListItem listItem) {
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_more_list_item);
 
-		if (listItem.getSpannableName() != null) {
-			((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
-		} else {
-			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
-		}
+		((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
 
 		QuickSearchMoreListItem searchMoreItem = (QuickSearchMoreListItem) listItem;
 		int emptyDescId = searchMoreItem.isSearchMoreAvailable() ? R.string.nothing_found_descr : R.string.modify_the_search_query;
@@ -392,11 +397,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	                                    @NonNull QuickSearchListItem listItem) {
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_custom_list_item);
 		((ImageView) view.findViewById(R.id.imageView)).setImageDrawable(listItem.getIcon());
-		if (listItem.getSpannableName() != null) {
-			((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
-		} else {
-			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
-		}
+		((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
 		return view;
 	}
 
@@ -421,11 +422,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_header_list_item);
 		view.findViewById(R.id.top_divider)
 				.setVisibility(((QuickSearchHeaderListItem) listItem).isShowTopDivider() ? View.VISIBLE : View.GONE);
-		if (listItem.getSpannableName() != null) {
-			((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
-		} else {
-			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
-		}
+		((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
 		return view;
 	}
 
@@ -439,6 +436,18 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private LinearLayout bindCardDividerItem(@Nullable View convertView) {
 		return getLinearLayout(convertView, R.layout.list_item_divider);
+	}
+
+	private LinearLayout bindCityStructureItem(@Nullable View convertView, @NonNull QuickSearchListItem listItem) {
+		LinearLayout view = getLinearLayout(convertView, R.layout.search_list_item_city);
+		CityStructureItemViewHolder viewHolder = (CityStructureItemViewHolder) view.getTag(R.id.view_holder_as_tag);
+		if(viewHolder == null) {
+			viewHolder = new CityStructureItemViewHolder(view, updateLocationViewCache);
+			view.setTag(R.id.view_holder_as_tag, viewHolder);
+		}
+		viewHolder.setNightMode(nightMode);
+		viewHolder.bindItem(listItem, useMapCenter);
+		return view;
 	}
 
 	@NonNull
@@ -637,7 +646,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	public static void updateCompass(@NonNull View view, @NonNull QuickSearchListItem item,
-			@NonNull UpdateLocationViewCache updateLocationViewCache, boolean useMapCenter) {
+	                                 @NonNull UpdateLocationViewCache updateLocationViewCache, boolean useMapCenter) {
 		boolean showCompass = item.getSearchResult().location != null;
 		if (showCompass) {
 			updateLocationView(view, item, updateLocationViewCache, useMapCenter);
@@ -646,7 +655,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	public static void updateLocationView(@NonNull View view, @NonNull QuickSearchListItem item,
-			@NonNull UpdateLocationViewCache updateLocationViewCache, boolean useMapCenter) {
+	                                      @NonNull UpdateLocationViewCache updateLocationViewCache, boolean useMapCenter) {
 		OsmandApplication app = AndroidUtils.getApp(view.getContext());
 		TextView distanceText = view.findViewById(R.id.distance);
 		ImageView direction = view.findViewById(R.id.direction);

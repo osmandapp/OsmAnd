@@ -370,10 +370,11 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 					int separateTypeLastIndex = 0;
 					for (int i = 1; i < listItems.size() - 1; i++) {
 						QuickSearchListItem listItem = listItems.get(i);
-						if (listItem.getSearchResult().objectType == firstItemObjectType) {
+						if (listItem.getSearchResult() != null &&
+								listItem.getSearchResult().objectType == firstItemObjectType) {
 							separateTypeLastIndex = i;
 						} else {
-							if (separateTypeLastIndex < listItems.size() - 1) {
+							if (separateTypeLastIndex < listItems.size() - 1 && !(listItem instanceof QuickSearchButtonListItem)) {
 								list.add(i, new QuickSearchCardDividerListItem(app));
 							}
 							break;
