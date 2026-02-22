@@ -12,6 +12,7 @@ import static net.osmand.search.core.ObjectType.HOUSE;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
 import static net.osmand.search.core.ObjectType.STREET;
 import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
+import static net.osmand.search.core.ObjectType.VILLAGE;
 
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -242,7 +243,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		} else if (listItem.getSearchResult().objectType == CITY ||
 				listItem.getSearchResult().objectType == STREET ||
 				listItem.getSearchResult().objectType == STREET_INTERSECTION ||
-				listItem.getSearchResult().objectType == HOUSE) {
+				listItem.getSearchResult().objectType == HOUSE ||
+				listItem.getSearchResult().objectType == VILLAGE
+		) {
 			view = bindCityStructureItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.SEARCH_RESULT &&
 				(poiUIFilter != null && poiUIFilter.isWikiFilter() ||

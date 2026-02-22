@@ -365,21 +365,24 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 			List<QuickSearchListItem> list = new ArrayList<>(listItems);
 			if (!list.isEmpty()) {
 				showResult = false;
-				SearchResult searchResult = listItems.get(0).getSearchResult();
-				if (searchResult != null) {
-					ObjectType firstItemObjectType = listItems.get(0).getSearchResult().objectType;
-					if (firstItemObjectType == POI_TYPE || firstItemObjectType == INDEX_ITEM) {
-						int separateTypeLastIndex = 0;
-						for (int i = 1; i < listItems.size() - 1; i++) {
-							QuickSearchListItem listItem = listItems.get(i);
-							if (listItem.getSearchResult() != null &&
-									listItem.getSearchResult().objectType == firstItemObjectType) {
-								separateTypeLastIndex = i;
-							} else {
-								if (separateTypeLastIndex < listItems.size() - 1 && !(listItem instanceof QuickSearchButtonListItem)) {
-									list.add(i, new QuickSearchCardDividerListItem(app));
+				QuickSearchListItem listItem = listItems.get(0);
+				if(listItem != null) {
+					SearchResult searchResult = listItem.getSearchResult();
+					if (searchResult != null) {
+						ObjectType firstItemObjectType = listItems.get(0).getSearchResult().objectType;
+						if (firstItemObjectType == POI_TYPE || firstItemObjectType == INDEX_ITEM) {
+							int separateTypeLastIndex = 0;
+							for (int i = 1; i < listItems.size() - 1; i++) {
+								listItem = listItems.get(i);
+								if (listItem.getSearchResult() != null &&
+										listItem.getSearchResult().objectType == firstItemObjectType) {
+									separateTypeLastIndex = i;
+								} else {
+									if (separateTypeLastIndex < listItems.size() - 1 && !(listItem instanceof QuickSearchButtonListItem)) {
+										list.add(i, new QuickSearchCardDividerListItem(app));
+									}
+									break;
 								}
-								break;
 							}
 						}
 					}

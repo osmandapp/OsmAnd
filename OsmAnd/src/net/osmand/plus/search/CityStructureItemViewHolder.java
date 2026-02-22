@@ -32,10 +32,11 @@ import net.osmand.util.Algorithms;
 
 public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 
+	public static final String OLD_NAME_TAG = "old_name";
 	public final OsmandApplication app;
 	public final UpdateLocationViewCache locationViewCache;
 
-	public final TextView title;
+	public final TextView titleTv;
 	public final TextView addressTv;
 	public final TextView type;
 	public final ImageView icon;
@@ -51,7 +52,7 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 		this.app = AndroidUtils.getApp(view.getContext());
 		this.locationViewCache = locationViewCache;
 
-		title = view.findViewById(R.id.item_title);
+		titleTv = view.findViewById(R.id.item_title);
 		addressTv = view.findViewById(R.id.address);
 		type = view.findViewById(R.id.item_type);
 		icon = view.findViewById(R.id.item_icon);
@@ -64,6 +65,7 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindItem(@NonNull QuickSearchListItem item, boolean useMapCenter) {
+		CharSequence title = item.getSpannableName();
 		MapObject mapObject = (MapObject) item.getSearchResult().object;
 		BinaryMapIndexReader mapReaderResource = null;
 		if (mapObject.getReferenceFile() instanceof BinaryMapIndexReader) {
@@ -73,12 +75,20 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 		if (mapObject instanceof City city) {
 			if (mapReaderResource != null) {
 				addressTv.setText(mapReaderResource.getRegionName());
+			} else if (item.getSearchResult().relatedObject instanceof City relatedCity) {
+				if (relatedCity.getReferenceFile() instanceof BinaryMapIndexReader relatedMapReaderResource) {
+					addressTv.setText(String.format("%s, %s", relatedCity, relatedMapReaderResource.getRegionName()));
+				}
 			}
 		} else if (mapObject instanceof Street street) {
+			if (!Algorithms.isEmpty(street.getOtherNames()) && street.getOtherNames().contains(OLD_NAME_TAG)) {
+				String oldName = street.getName(OLD_NAME_TAG);
+				title = String.format("%s (%s)", title, oldName);
+			}
 			addressTv.setText(street.getCity().getName());
 		} else if (mapObject instanceof Building) {
 			StringBuilder address = new StringBuilder(item.getSearchResult().localeRelatedObjectName);
-			if (item.getSearchResult().relatedObject instanceof Street street){
+			if (item.getSearchResult().relatedObject instanceof Street street) {
 				address.append(", ");
 				address.append(street.getCity().getName());
 			}
@@ -86,7 +96,17 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 		} else {
 			addressTv.setText(item.getAddress());
 		}
-		if (mapObject instanceof Street) {
+		if (mapObject instanceof City city) {
+			City.CityType cityType = city.getType();
+			String cityTypeString;
+			switch (cityType) {
+				case VILLAGE -> cityTypeString = app.getString(R.string.city_type_village);
+				case SUBURB -> cityTypeString = app.getString(R.string.city_type_suburb);
+				case TOWN -> cityTypeString = app.getString(R.string.city_type_town);
+				default -> cityTypeString = app.getString(R.string.city_type_city);
+			}
+			type.setText(cityTypeString);
+		} else if (mapObject instanceof Street) {
 			if (item.getSearchResult().objectType == ObjectType.STREET) {
 				type.setText(R.string.search_address_street);
 			} else if (item.getSearchResult().objectType == ObjectType.STREET_INTERSECTION) {
@@ -97,7 +117,7 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 		} else {
 			type.setText(item.getTypeName());
 		}
-		title.setText(item.getSpannableName());
+		titleTv.setText(title);
 
 		Drawable drawable = item.getIcon();
 		icon.setImageDrawable(drawable);
