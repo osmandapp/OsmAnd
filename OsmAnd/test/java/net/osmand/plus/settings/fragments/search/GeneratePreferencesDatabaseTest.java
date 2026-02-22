@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
+import java.util.Locale;
 
 @RunWith(AndroidJUnit4.class)
 public class GeneratePreferencesDatabaseTest extends AndroidTest {
@@ -27,9 +28,16 @@ public class GeneratePreferencesDatabaseTest extends AndroidTest {
 
 	@Test
 	public void generateDatabaseAndWaitForCompletion() {
+		// FK-TODO: Remove hardcoded values, use parameters
+		setLocale(Locale.CHINESE);
 		enableAvailablePlugins();
 		clickSearchButton(app);
 		onView(searchView()).perform(replaceText("tst"), closeSoftKeyboard());
+	}
+
+	private void setLocale(final Locale locale) {
+		app.getSettings().PREFERRED_LOCALE.set(locale.getLanguage());
+		app.getLocaleHelper().checkPreferredLocale();
 	}
 
 	private void enableAvailablePlugins() {
