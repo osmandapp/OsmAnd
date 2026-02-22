@@ -51,6 +51,7 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
+import net.osmand.plus.utils.InsetsUtils
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.util.MapUtils
 import java.text.DateFormat
@@ -65,6 +66,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	OsmAndCompassListener {
 
 	private val REGULAR_MAP_HEIGHT = 300f
+	private val REGULAR_MAP_HEIGHT_LANDSCAPE = 110f
 
 	internal lateinit var mainLayout: View
 	internal lateinit var starView: StarView
@@ -403,7 +405,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private fun applySideInsets() {
 		applySideWindowInsets(compassButton, true)
-		applySideWindowInsets(searchButton, true)
 		applySideWindowInsets(closeButton, false)
 		applySideWindowInsets(settingsButton, false)
 	}
@@ -622,7 +623,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		regularMapVisible = visible
 		val mapActivity = requireMapActivity()
 		if (visible) {
-			val bottomPadding = dpToPx(REGULAR_MAP_HEIGHT)
+			val mapHeight =
+				if (InsetsUtils.isLandscape(app)) REGULAR_MAP_HEIGHT_LANDSCAPE
+				else REGULAR_MAP_HEIGHT
+			val bottomPadding = dpToPx(mapHeight)
 			mainLayout.setPadding(0, 0, 0, bottomPadding)
 			val display = AndroidUtils.getDisplay(app)
 			val screenDimensions = Point(0, 0)
