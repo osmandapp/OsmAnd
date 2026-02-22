@@ -5995,4 +5995,5 @@
     <string name="view_distance">Видна удаљеност</string>
     <string name="stars_articles">Чланци о звездама</string>
     <string name="astronomy_plugin_name">Астрономија</string>
+    <string name="astro_min_magnitude">Мин. магнитуда</string>
 </resources>
