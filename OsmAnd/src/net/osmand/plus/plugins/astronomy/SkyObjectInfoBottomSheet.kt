@@ -106,7 +106,11 @@ class SkyObjectInfoFragment : Fragment() {
 		sheetDirectionButton.setOnCheckedChangeListener { _, isChecked ->
 			obj.showDirection = isChecked
 			val astroSettings = PluginsHelper.requirePlugin(AstronomyPlugin::class.java).astroSettings
-			if (isChecked) astroSettings.addDirection(obj.id) else astroSettings.removeDirection(obj.id)
+			if (isChecked) {
+				obj.colorIndex = astroSettings.addDirection(obj.id)
+			} else {
+				astroSettings.removeDirection(obj.id)
+			}
 			parent.starView.invalidate()
 		}
 

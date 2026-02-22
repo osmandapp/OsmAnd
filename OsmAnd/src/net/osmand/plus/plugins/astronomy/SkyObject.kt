@@ -36,6 +36,7 @@ open class SkyObject(
 	open var isFavorite: Boolean = false,
 	open var showDirection: Boolean = false,
 	open var showCelestialPath: Boolean = false,
+	open var colorIndex: Int = 0,
 
 	// Animation state helpers
 	open var startAzimuth: Double = 0.0,

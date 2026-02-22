@@ -5837,4 +5837,5 @@
     <string name="level_of_details">細節的層次</string>
     <string name="performance">效能</string>
     <string name="view_distance">檢視距離</string>
+    <string name="astronomy_plugin_name">天文</string>
 </resources>

@@ -5835,4 +5835,5 @@
     <string name="level_of_details">Επίπεδο λεπτομέρειας</string>
     <string name="performance">Απόδοση</string>
     <string name="view_distance">Απόσταση θέασης</string>
+    <string name="astronomy_plugin_name">Αστρονομία</string>
 </resources>
