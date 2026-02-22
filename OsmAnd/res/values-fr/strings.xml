@@ -5918,4 +5918,5 @@
     <string name="view_distance">Distance de visibilité</string>
     <string name="stars_articles">Articles vedettes</string>
     <string name="astronomy_plugin_name">Astronomie</string>
+    <string name="astro_min_magnitude">Magnitude min.</string>
 </resources>
