@@ -6060,4 +6060,7 @@
     <string name="trip_recording_uphill_widget_desc">Afișează suma tuturor urcărilor sau ultima urcare din călătoria înregistrată actuală.</string>
     <string name="trip_recording_distance_widget_desc">Afișează distanța toată a călătoriei înregistrată actuală, cu opțiuni de a vedea distanța ultimei urcări sau coborâri.</string>
     <string name="trip_recording_max_speed_widget_description">Afișează vitezi maximă a călătoriei înregistrată curentă. Atingeți pentru a comuta viteza maximă generală sau viteza maximă în timpul ultimei urcări sau coborâri.</string>
+    <string name="astro_min_magnitude">Magnitudine min.</string>
+    <string name="stars_articles">Articole stele</string>
+    <string name="delete_groups_confirmation">Șterge grupurile?</string>
 </resources>

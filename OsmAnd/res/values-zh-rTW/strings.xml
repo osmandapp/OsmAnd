@@ -5838,4 +5838,5 @@
     <string name="performance">效能</string>
     <string name="view_distance">檢視距離</string>
     <string name="astronomy_plugin_name">天文</string>
+    <string name="astro_min_magnitude">讀我：我們偏好的翻譯方式為在 https://hosted.weblate.org/engage/osmand/ 進行-如果您直接編輯 strings.xml 檔案，請確認： 1. 不要產生重覆字串 (檢查名稱來確認是否已經存在) 2. 每個撇號（引號）前面都有背斜線 3. 如果您變動英文字串檔案，請將新的字串加到檔案開頭，這讓釋出前的定期檢核更容易。- 而為了文字與一致，請注意 https://docs.osmand.net/docs/technical/contributions/translating-osmand 感謝 - Hardy</string>
 </resources>

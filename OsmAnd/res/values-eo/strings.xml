@@ -6008,4 +6008,5 @@
     <string name="performance">Rendimento</string>
     <string name="view_distance">Videbla distanco</string>
     <string name="astronomy_plugin_name">Astronomio</string>
+    <string name="astro_min_magnitude">Minimuma heleco</string>
 </resources>

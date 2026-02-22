@@ -6364,4 +6364,23 @@
     <string name="astro_star_clusters">Aglomerados estelares</string>
     <string name="astro_nebulas">Nebulosas</string>
     <string name="astro_solar_system">Sistema solar</string>
+    <string name="delete_groups_confirmation">Excluir grupos?</string>
+    <string name="add_to_track">Adicionar à trilha</string>
+    <string name="unpin_folder">Desafixar pasta</string>
+    <string name="pin_folder">Fixar pasta</string>
+    <string name="favorite_search_empty_state_description">Ajuste sua pesquisa ou filtros para ver se isso ajuda</string>
+    <string name="favorites_empty_folder_description">Esta pasta ainda não tem nenhum ponto.</string>
+    <string name="building_3d_day_color_content_desc">Cores temáticas para o dia dos edifícios 3D</string>
+    <string name="building_3d_night_color_content_desc">Cores noturnas para edifícios 3D</string>
+    <string name="building_3d_low_details_content_desc">Edifícios 3D com poucos detalhes</string>
+    <string name="building_3d_high_details_content_desc">Edifícios 3D altos</string>
+    <string name="building_3d_near_distance_content_desc">Distância entre edifícios 3D próximos</string>
+    <string name="building_3d_far_distance_content_desc">Edifícios 3D distantes</string>
+    <string name="free_custom_color_description">Personalize edifícios 3D com qualquer cor. Perfeito para combinar com o tema do mapa ou melhorar o contraste.</string>
+    <string name="buildings_3d_use_map_style_color_description">Usar cor padrão do estilo do mapa (%s).</string>
+    <string name="buildings_3d_visibility_description">Ajuste a opacidade das estruturas 3D no mapa.</string>
+    <string name="level_of_details">Nível de detalhe</string>
+    <string name="performance">Desempenho</string>
+    <string name="view_distance">Distância de visualização</string>
+    <string name="astronomy_plugin_name">Astronomia</string>
 </resources>
