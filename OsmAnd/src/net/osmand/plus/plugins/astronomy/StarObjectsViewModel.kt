@@ -64,6 +64,7 @@ class StarObjectsViewModel(
 			objects.forEach { obj ->
 				obj.isFavorite = favoritesMap.contains(obj.id)
 				obj.showDirection = directionsMap.contains(obj.id)
+				obj.colorIndex = directionsMap[obj.id]?.colorIndex ?: 0
 				obj.showCelestialPath = celestialPathsMap.contains(obj.id)
 			}
 			objects.sortBy { indexMap[it.id] ?: Int.MAX_VALUE }
