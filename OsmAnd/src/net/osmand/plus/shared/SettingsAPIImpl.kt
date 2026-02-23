@@ -2,12 +2,20 @@ package net.osmand.plus.shared
 
 import net.osmand.StateChangedListener
 import net.osmand.plus.OsmandApplication
+import net.osmand.plus.settings.backend.preferences.EnumStringPreference
 import net.osmand.plus.settings.backend.preferences.FloatPreference
 import net.osmand.plus.settings.backend.preferences.StringPreference
 import net.osmand.shared.api.SettingsAPI
 import net.osmand.shared.api.KStateChangedListener
+import java.util.WeakHashMap
+import kotlin.reflect.KClass
 
 class SettingsAPIImpl(private val app: OsmandApplication) : SettingsAPI {
+
+	// Store strong references to the platform listeners, bound to the lifecycle
+	// of the shared listeners, to prevent them from being garbage collected
+	// by the SharedPreferences WeakHashMap.
+	private val listenersCache = WeakHashMap<KStateChangedListener<*>, StateChangedListener<*>>()
 
 	override fun registerPreference(
 		name: String,
@@ -40,7 +48,9 @@ class SettingsAPIImpl(private val app: OsmandApplication) : SettingsAPI {
 		listener: KStateChangedListener<String>) {
 		val pref = app.settings.getPreference(name)
 		if (pref is StringPreference) {
-			pref.addListener(StateChangedListener { change -> listener.stateChanged(change) })
+			val wrappedListener = StateChangedListener<String> { change -> listener.stateChanged(change) }
+			listenersCache[listener] = wrappedListener
+			pref.addListener(wrappedListener)
 		}
 	}
 
@@ -73,7 +83,50 @@ class SettingsAPIImpl(private val app: OsmandApplication) : SettingsAPI {
 	override fun addFloatPreferenceListener(name: String, listener: KStateChangedListener<Float>) {
 		val pref = app.settings.getPreference(name)
 		if (pref is FloatPreference) {
-			pref.addListener(StateChangedListener { change -> listener.stateChanged(change) })
+			val wrappedListener = StateChangedListener<Float> { change -> listener.stateChanged(change) }
+			listenersCache[listener] = wrappedListener
+			pref.addListener(wrappedListener)
+		}
+	}
+
+	override fun <T : Enum<T>> registerEnumPreference(name: String, defValue: T, values: Array<T>,
+	                                                  clazz: KClass<T>, global: Boolean, shared: Boolean) {
+		val preference = app.settings.registerEnumStringPreference(name, defValue, values, clazz.java)
+		if (global) {
+			preference.makeGlobal()
+		}
+		if (shared) {
+			preference.makeShared()
+		}
+	}
+
+	override fun <T : Enum<T>> getEnumPreference(name: String): T? {
+		val pref = app.settings.getPreference(name)
+		if (pref is EnumStringPreference<*>) {
+			@Suppress("UNCHECKED_CAST")
+			return pref.get() as T
+		}
+		return null
+	}
+
+	override fun <T : Enum<T>> setEnumPreference(name: String, value: T) {
+		val pref = app.settings.getPreference(name)
+		if (pref is EnumStringPreference<*>) {
+			@Suppress("UNCHECKED_CAST")
+			(pref as EnumStringPreference<T>).set(value)
+		}
+	}
+
+	override fun <T : Enum<T>> addEnumPreferenceListener(
+		name: String,
+		listener: KStateChangedListener<T>
+	) {
+		val pref = app.settings.getPreference(name)
+		if (pref is EnumStringPreference<*>) {
+			val wrappedListener = StateChangedListener<T> { change -> listener.stateChanged(change) }
+			listenersCache[listener] = wrappedListener
+			@Suppress("UNCHECKED_CAST")
+			(pref as EnumStringPreference<T>).addListener(wrappedListener)
 		}
 	}
 }

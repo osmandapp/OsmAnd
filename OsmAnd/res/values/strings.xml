@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <plurals name="tracks_count">
+        <item quantity="one">%d track</item>
+        <item quantity="other">%d tracks</item>
+    </plurals>
     <string name="gradient_no_data_point_summary">Color applied when data is missing or undefined.</string>
     <string name="gradient_input_value_too_low_warn">Minimum allowed value is %1$s.</string>
     <string name="gradient_input_value_too_high_warn">Maximum allowed value is %1$s.</string>
