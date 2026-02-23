@@ -104,10 +104,7 @@ public class PaletteColorV1 {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof PaletteColorV1)) return false;
-
-		PaletteColorV1 that = (PaletteColorV1) o;
-
+		if (!(o instanceof PaletteColorV1 that)) return false;
 		return getId().equals(that.getId());
 	}
 
