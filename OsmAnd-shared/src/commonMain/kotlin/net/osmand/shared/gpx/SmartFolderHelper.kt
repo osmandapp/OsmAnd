@@ -276,7 +276,7 @@ object SmartFolderHelper {
 				}
 
 				if (trackAccepted) {
-					smartFolder.addTrackItem(item)
+					smartFolder.addTrackItem(item, forceInvalidate = true)
 				} else {
 					smartFolder.removeTrackItem(item)
 				}

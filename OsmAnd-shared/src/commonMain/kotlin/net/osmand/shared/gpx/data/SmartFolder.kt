@@ -60,18 +60,26 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 	 * Since [TrackItem] is mutable, its properties (e.g., Activity) might have changed
 	 * even if it's already in the list, requiring a re-evaluation of organized groups.
 	 */
-	fun addTrackItem(trackItem: TrackItem) {
+	fun addTrackItem(trackItem: TrackItem, forceInvalidate: Boolean = false) {
+		var added = false
 		val currentItems = getTrackItems()
 		if (!currentItems.contains(trackItem)) {
 			trackItems = KCollectionUtils.addToList(currentItems, trackItem)
+			added = true
 		}
-		invalidateCache()
+		if (added || forceInvalidate) {
+			invalidateCache()
+		}
 	}
 
-	fun removeTrackItem(trackItem: TrackItem) {
+	fun removeTrackItem(trackItem: TrackItem, forceInvalidate: Boolean = false) {
+		var removed = false
 		val currentItems = getTrackItems()
 		if (currentItems.contains(trackItem)) {
 			trackItems = KCollectionUtils.removeFromList(currentItems, trackItem)
+			removed = true
+		}
+		if (removed || forceInvalidate) {
 			invalidateCache()
 		}
 	}
