@@ -341,4 +341,10 @@ object SmartFolderHelper {
 		val folder = getSmartFolderById(folderId)
 		return folder?.organizeByParams
 	}
+
+	fun resetSmartFolders() {
+		resetSmartFoldersItems()
+		getAllAvailableTrackItems().clear()
+		smartFolderCollection = listOf()
+	}
 }
