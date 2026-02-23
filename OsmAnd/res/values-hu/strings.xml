@@ -5816,8 +5816,7 @@
     <string name="has_vehicle_metrics">OBDII-adatokkal</string>
     <string name="show_expand_button">Kibontásgomb megjelenítése</string>
     <string name="imprecise_coordinates">Pontatlan koordináták</string>
-    <string name="star_watcher_plugin_name">Csillagfigyelő (Béta)</string>
-    <string name="star_watcher_plugin_description">Csillagászati térképek, 3D csillagtérkép</string>
+    <string name="astronomy_plugin_description">Csillagászati térképek, 3D csillagtérkép</string>
     <string name="star_map">Csillagtérkép</string>
     <string name="star_charts_name">Csillagászati térképek</string>
     <string name="star_visibility_name">Csillagláthatóság</string>
@@ -5917,4 +5916,6 @@
     <string name="performance">Teljesítmény</string>
     <string name="view_distance">Megjelenítési távolság</string>
     <string name="stars_articles">Csillagok leírása</string>
+    <string name="astronomy_plugin_name">Csillagászat</string>
+    <string name="astro_min_magnitude">Legkisebb fényesség</string>
 </resources>
