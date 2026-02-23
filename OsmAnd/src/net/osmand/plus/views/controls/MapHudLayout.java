@@ -38,6 +38,7 @@ import net.osmand.plus.views.mapwidgets.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.shared.grid.ButtonPositionSize;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -160,7 +161,7 @@ public class MapHudLayout extends FrameLayout {
 		addPosition(leftWidgetsPanel, this::updateVerticalPanels);
 		addPosition(rightWidgetsPanel, this::updateVerticalPanels);
 
-		addPosition(findViewById(R.id.top_controls_container));
+		addPosition(findViewById(R.id.lanes_widget_special_position));
 		addPosition(findViewById(R.id.left_side_menu));
 		addPosition(findViewById(R.id.recording_note_layout));
 		addPosition(findViewById(R.id.add_gpx_point_bottom_sheet));
@@ -364,6 +365,10 @@ public class MapHudLayout extends FrameLayout {
 			position.setMoveVertical();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
+		} else if (id == R.id.lanes_widget_special_position) {
+			position.setMoveVertical();
+			position.setPositionVertical(POS_TOP);
+			position.setPositionHorizontal(POS_LEFT);
 		}
 		return updateWidgetPosition(view, position);
 	}
@@ -380,6 +385,7 @@ public class MapHudLayout extends FrameLayout {
 	@NonNull
 	private ButtonPositionSize updateWidgetPosition(@NonNull View view, @NonNull ButtonPositionSize position) {
 		if (view.getWidth() <= 0 && view.getHeight() <= 0) {
+			position.setSize(0, 0);
 			return position;
 		}
 		int id = view.getId();
@@ -387,7 +393,7 @@ public class MapHudLayout extends FrameLayout {
 		int height = (int) AndroidUtils.pxToDpF(getContext(), view.getHeight()) / 8;
 		position.setSize(width, height);
 
-		if (view instanceof VerticalWidgetPanel && shouldCenterVerticalPanels()) {
+		if (view instanceof VerticalWidgetPanel && shouldCenterVerticalPanels() || id == R.id.lanes_widget_special_position) {
 			int[] margins = AndroidUtils.getRelativeMargins(this, view);
 			applyInsetsToMargins(margins);
 
@@ -466,16 +472,24 @@ public class MapHudLayout extends FrameLayout {
 			topMargin = 0;
 			bottomMargin = marginY;
 		}
-		if (startMargin != params.getMarginStart() || topMargin != params.topMargin
-				|| endMargin != params.getMarginEnd() || bottomMargin != params.bottomMargin) {
-			changed = true;
+		boolean verticalMarginsChanged = !shouldIgnoreVerticalMargins(position)
+				&& (topMargin != params.topMargin || bottomMargin != params.bottomMargin);
 
-			params.topMargin = topMargin;
-			params.bottomMargin = bottomMargin;
-			params.setMarginStart(startMargin);
-			params.setMarginEnd(endMargin);
+		boolean horizontalMarginsChanged = !shouldIgnoreHorizontalMargins(position)
+				&& (startMargin != params.getMarginStart() || endMargin != params.getMarginEnd());
+
+		if (horizontalMarginsChanged || verticalMarginsChanged) {
+			changed = true;
+			if (verticalMarginsChanged) {
+				params.topMargin = topMargin;
+				params.bottomMargin = bottomMargin;
+			}
+			if (horizontalMarginsChanged) {
+				params.setMarginStart(startMargin);
+				params.setMarginEnd(endMargin);
+			}
 		}
-		if (params.gravity != gravity) {
+		if (!shouldIgnoreGravity(position) && params.gravity != gravity) {
 			changed = true;
 			params.gravity = gravity;
 		}
@@ -519,6 +533,18 @@ public class MapHudLayout extends FrameLayout {
 		};
 	}
 
+	private boolean shouldIgnoreGravity(@NonNull ButtonPositionSize position) {
+		return Algorithms.objectEquals("lanes_widget_special_position", position.getId());
+	}
+
+	private boolean shouldIgnoreHorizontalMargins(@NonNull ButtonPositionSize position) {
+		return Algorithms.objectEquals("lanes_widget_special_position", position.getId());
+	}
+
+	private boolean shouldIgnoreVerticalMargins(@NonNull ButtonPositionSize position) {
+		return false;
+	}
+
 	@NonNull
 	private StateChangedListener<PanelsLayoutMode> getPanelsLayoutModeListener() {
 		if (panelsLayoutModeListener == null) {
@@ -543,16 +569,17 @@ public class MapHudLayout extends FrameLayout {
 		updateHorizontalMargins(bottomWidgetsPanel);
 	}
 
-	private void updateHorizontalMargins(@Nullable View view) {
+	private void updateHorizontalMargins(@Nullable VerticalWidgetPanel panel) {
 		int totalWidth = getWidth();
-		if (view == null || leftWidgetsPanel == null || rightWidgetsPanel == null || totalWidth <= 0) {
+		if (panel == null || leftWidgetsPanel == null || rightWidgetsPanel == null || totalWidth <= 0) {
 			return;
 		}
-		if (view.getLayoutParams() instanceof MarginLayoutParams params) {
+		if (panel.getLayoutParams() instanceof MarginLayoutParams params) {
 			int leftMargin = 0;
 			int rightMargin = 0;
 
 			if (shouldCenterVerticalPanels()) {
+				boolean top = panel.isTopPanel();
 				float percentage = portrait ? TOP_BAR_MAX_WIDTH_PERCENTAGE_PORTRAIT : TOP_BAR_MAX_WIDTH_PERCENTAGE_LANDSCAPE;
 
 				int panelsMargin = defaultMargin * 2;
@@ -571,7 +598,7 @@ public class MapHudLayout extends FrameLayout {
 			if (params.leftMargin != leftMargin || params.rightMargin != rightMargin) {
 				params.leftMargin = leftMargin;
 				params.rightMargin = rightMargin;
-				view.setLayoutParams(params);
+				panel.setLayoutParams(params);
 			}
 		}
 	}
