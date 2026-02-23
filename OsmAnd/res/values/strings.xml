@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+	<string name="share_favorite">Share favorite</string>
+	<string name="copy_list">Copy list</string>
 	<string name="stars_articles">Stars articles</string>
 	<string name="delete_groups_confirmation">Delete groups?</string>
 	<string name="add_to_track">Add to track</string>

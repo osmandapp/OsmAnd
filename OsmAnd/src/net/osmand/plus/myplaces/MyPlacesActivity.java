@@ -1,31 +1,42 @@
 package net.osmand.plus.myplaces;
 
 import static net.osmand.plus.backup.ui.BackupAuthorizationFragment.OPEN_BACKUP_AUTH;
+import static net.osmand.plus.helpers.AndroidUiHelper.ANIMATION_DURATION;
 import static net.osmand.plus.helpers.IntentHelper.REQUEST_CODE_CREATE_FILE;
 import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
+import static net.osmand.plus.mapcontextmenu.other.ShareItem.COPY_LIST;
+import static net.osmand.plus.mapcontextmenu.other.ShareItem.SAVE_AS_FILE;
 import static net.osmand.plus.mapcontextmenu.other.ShareMenu.KEY_SAVE_FILE_NAME;
+import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_ACTION_ID;
+import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_LIST;
 import static net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment.FAV_SEARCH_QUERY_KEY;
 import static net.osmand.plus.myplaces.favorites.dialogs.SearchFavoriteFragment.FAVORITE_SEARCH_GROUP_KEY;
 import static net.osmand.plus.myplaces.favorites.dialogs.SearchFavoriteFragment.FAVORITE_SEARCH_QUERY_KEY;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import net.osmand.data.PointDescription;
+import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
@@ -54,7 +65,11 @@ public class MyPlacesActivity extends TabActivity {
 	public static final int GPX_TAB = R.string.shared_string_tracks;
 	public static final int FAV_TAB = R.string.shared_string_my_favorites;
 
-	private ViewPager viewPager;
+	private LockableViewPager viewPager;
+	private PagerSlidingTabStrip mSlidingTabLayout;
+	private AppBarLayout appBar;
+	@Nullable private ValueAnimator tabsHeightAnimator;
+
 	private final List<WeakReference<FragmentStateHolder>> fragmentsStateList = new ArrayList<>();
 	private int tabSize;
 
@@ -126,7 +141,14 @@ public class MyPlacesActivity extends TabActivity {
 	}
 
 	private void setTabs(@NonNull List<TabItem> tabItems) {
-		PagerSlidingTabStrip mSlidingTabLayout = findViewById(R.id.sliding_tabs);
+		appBar = findViewById(R.id.appbar);
+
+		mSlidingTabLayout = findViewById(R.id.sliding_tabs);
+		mSlidingTabLayout.setBackgroundColor(Color.TRANSPARENT);
+		appBar.setBackgroundColor(Color.TRANSPARENT);
+		appBar.setElevation(0);
+		appBar.setOutlineProvider(null);
+
 		Integer tabId = settings.FAVORITES_TAB.get();
 		int tab = 0;
 		for (int i = 0; i < tabItems.size(); i++) {
@@ -138,6 +160,113 @@ public class MyPlacesActivity extends TabActivity {
 		setViewPagerAdapter(viewPager, tabItems);
 		mSlidingTabLayout.setViewPager(viewPager);
 		viewPager.setCurrentItem(tab);
+	}
+
+	private void animateHeight(View v, int from, int to, @Nullable Runnable endAction) {
+		if (tabsHeightAnimator != null) tabsHeightAnimator.cancel();
+
+		tabsHeightAnimator = ValueAnimator.ofInt(from, to);
+		tabsHeightAnimator.setDuration(ANIMATION_DURATION);
+		tabsHeightAnimator.addUpdateListener(anim -> {
+			int h = (int) anim.getAnimatedValue();
+			ViewGroup.LayoutParams lp = v.getLayoutParams();
+			lp.height = h;
+			v.setLayoutParams(lp);
+		});
+		tabsHeightAnimator.addListener(new android.animation.AnimatorListenerAdapter() {
+			@Override public void onAnimationEnd(android.animation.Animator animation) {
+				if (endAction != null) endAction.run();
+			}
+		});
+		tabsHeightAnimator.start();
+	}
+
+	public void animateShowHideTabs(boolean hideTabs) {
+		updateScreen(hideTabs);
+		viewPager.setSwipeLocked(hideTabs);
+
+		final int tabsH = getResources().getDimensionPixelSize(R.dimen.list_item_height);
+
+		mSlidingTabLayout.animate().cancel();
+
+		if (hideTabs) {
+			if (isDisableAnimations()) {
+
+				ViewGroup.LayoutParams lp = mSlidingTabLayout.getLayoutParams();
+				lp.height = 0;
+				mSlidingTabLayout.setLayoutParams(lp);
+				mSlidingTabLayout.setVisibility(View.GONE);
+				return;
+			}
+
+			mSlidingTabLayout.setVisibility(View.VISIBLE);
+			ensureTabsHeight(tabsH);
+
+			mSlidingTabLayout.setTranslationY(0f);
+			mSlidingTabLayout.setAlpha(1f);
+
+			mSlidingTabLayout.animate()
+					.translationY(-tabsH)
+					.alpha(0f)
+					.setDuration(ANIMATION_DURATION)
+					.start();
+
+			animateHeight(mSlidingTabLayout, tabsH, 0, () -> {
+				mSlidingTabLayout.setVisibility(View.GONE);
+				mSlidingTabLayout.setTranslationY(0f);
+				mSlidingTabLayout.setAlpha(1f);
+			});
+
+		} else {
+			if (isDisableAnimations()) {
+
+				mSlidingTabLayout.setVisibility(View.VISIBLE);
+				ViewGroup.LayoutParams lp = mSlidingTabLayout.getLayoutParams();
+				lp.height = tabsH;
+				mSlidingTabLayout.setLayoutParams(lp);
+
+				mSlidingTabLayout.setTranslationY(0f);
+				mSlidingTabLayout.setAlpha(1f);
+				return;
+			}
+
+			mSlidingTabLayout.setVisibility(View.VISIBLE);
+			ViewGroup.LayoutParams lp = mSlidingTabLayout.getLayoutParams();
+			lp.height = 0;
+			mSlidingTabLayout.setLayoutParams(lp);
+
+			mSlidingTabLayout.setTranslationY(-tabsH);
+			mSlidingTabLayout.setAlpha(0f);
+
+			animateHeight(mSlidingTabLayout, 0, tabsH, null);
+
+			mSlidingTabLayout.animate()
+					.translationY(0f)
+					.alpha(1f)
+					.setDuration(ANIMATION_DURATION)
+					.start();
+		}
+	}
+
+	private void ensureTabsHeight(int tabsH) {
+		ViewGroup.LayoutParams lp = mSlidingTabLayout.getLayoutParams();
+		if (lp.height != tabsH) {
+			lp.height = tabsH;
+			mSlidingTabLayout.setLayoutParams(lp);
+		}
+	}
+
+	private void updateScreen(boolean hideTabs) {
+		appBar.setExpanded(true, true);
+
+		mSlidingTabLayout.setClickable(!hideTabs);
+		mSlidingTabLayout.setFocusable(!hideTabs);
+
+		updateToolbar();
+	}
+
+	private boolean isDisableAnimations() {
+		return app.getSettings().DO_NOT_USE_ANIMATIONS.getModeValue(app.getSettings().getApplicationMode());
 	}
 
 	@NonNull
@@ -170,11 +299,22 @@ public class MyPlacesActivity extends TabActivity {
 	}
 
 	@Override
-	protected void onNewIntent(Intent intent) {
+	protected void onNewIntent(@NonNull Intent intent) {
 		super.onNewIntent(intent);
 		setIntent(intent);
 
-		if (intent.hasExtra(KEY_SAVE_FILE_NAME)) {
+		int actionId = intent.getIntExtra(KEY_SHARE_ACTION_ID, -1);
+
+		if (actionId == COPY_LIST.ordinal()) {
+			String text = intent.getStringExtra(KEY_SHARE_LIST);
+			if (Algorithms.isEmpty(text)) {
+				return;
+			}
+			ShareMenu.copyToClipboard(this, text);
+			return;
+		}
+
+		if (actionId == SAVE_AS_FILE.ordinal() || intent.hasExtra(KEY_SAVE_FILE_NAME)) {
 			String filePath = intent.getStringExtra("file_path");
 			if (Algorithms.isEmpty(filePath)) {
 				return;

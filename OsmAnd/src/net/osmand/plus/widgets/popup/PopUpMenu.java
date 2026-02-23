@@ -42,14 +42,17 @@ public class PopUpMenu {
 
 		int contentPadding = getDimension(ctx, R.dimen.content_padding);
 		int contentPaddingHalf = getDimension(ctx, R.dimen.content_padding_half);
-		int defaultListTextSize = getDimension(ctx, R.dimen.default_list_text_size);
 		int standardIconSize = getDimension(ctx, R.dimen.standard_icon_size);
-		boolean hasIcon = false;
+		float maxItemWidth = 0;
 
-		List<String> titles = new ArrayList<>();
 		for (PopUpMenuItem item : menuItems) {
-			titles.add(String.valueOf(item.getTitle()));
-			hasIcon = hasIcon || item.getIcon() != null;
+			float w = AndroidUtils.getTextWidth(String.valueOf(item.getTitle()), item.getTitleSize(), null) + contentPadding * 2;
+			if (item.getIcon() != null) {
+				w += standardIconSize + contentPaddingHalf;
+			}
+			if (w > maxItemWidth) {
+				maxItemWidth = w;
+			}
 		}
 
 		int minWidth = 0;
@@ -57,15 +60,12 @@ public class PopUpMenu {
 			minWidth = anchorView.getWidth();
 		}
 
-		float itemWidth = AndroidUtils.getTextMaxWidth(defaultListTextSize, titles) + contentPadding * 2;
-		float iconPartWidth = hasIcon ? standardIconSize + contentPaddingHalf : 0;
 		float compoundBtnWidth = contentPadding * 3;
-
-		float additional = iconPartWidth;
+		float additional = 0;
 		if (widthMode == PopUpMenuWidthMode.STANDARD && displayData.showCompound) {
 			additional += compoundBtnWidth;
 		}
-		int totalWidth = (int) (Math.max(itemWidth, minWidth) + additional);
+		int totalWidth = (int) (Math.max(maxItemWidth, minWidth) + additional);
 
 		PopUpMenuArrayAdapter adapter = new PopUpMenuArrayAdapter(ctx, displayData.layoutId, menuItems, nightMode);
 		ListPopupWindow listPopupWindow = new ListPopupWindow(ctx);

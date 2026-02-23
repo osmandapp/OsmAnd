@@ -1,8 +1,6 @@
 package net.osmand.plus.myplaces.favorites.dialogs;
 
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS;
-import static net.osmand.plus.myplaces.favorites.FavoriteGroup.PERSONAL_CATEGORY;
-import static net.osmand.plus.myplaces.favorites.FavoriteGroup.isPersonalCategoryDisplayName;
 import static net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.TYPE_EMPTY_SEARCH;
 import static net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.TYPE_SORT_FAVORITE;
 
@@ -12,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageButton;
@@ -27,10 +26,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 
+import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
@@ -54,6 +57,7 @@ import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,7 +66,8 @@ import java.util.List;
 import java.util.Set;
 
 public class SearchFavoriteFragment extends BaseFullScreenDialogFragment implements
-		SortFavoriteListener, FragmentStateHolder, CategorySelectionListener, FavoriteActionListener, FavoritesListener {
+		SortFavoriteListener, FragmentStateHolder, CategorySelectionListener, FavoriteActionListener,
+		FavoritesListener, OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = SearchFavoriteFragment.class.getSimpleName();
 
@@ -91,6 +96,11 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 	private ImageButton selectButton;
 	private ImageButton backButton;
 	private View appbar;
+
+	private Location lastLocation;
+	private float lastHeading;
+	private boolean compassUpdateAllowed = true;
+	private boolean locationUpdateStarted;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -164,6 +174,13 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setAdapter(adapter);
+		recyclerView.addOnScrollListener(new OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+				super.onScrollStateChanged(recyclerView, newState);
+				compassUpdateAllowed = newState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
+			}
+		});
 
 		setupToolbar(view);
 		setupSearch(view);
@@ -193,12 +210,35 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 	public void onResume() {
 		super.onResume();
 		helper.addListener(this);
+		startLocationUpdate();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		helper.removeListener(this);
+		stopLocationUpdate();
+	}
+
+	private void startLocationUpdate() {
+		if (!locationUpdateStarted) {
+			locationUpdateStarted = true;
+			app.getLocationProvider().resumeAllUpdates();
+			app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
+			app.getLocationProvider().addCompassListener(this);
+			app.getLocationProvider().addLocationListener(this);
+			updateLocationUi();
+		}
+	}
+
+	private void stopLocationUpdate() {
+		if (locationUpdateStarted) {
+			locationUpdateStarted = false;
+			app.getLocationProvider().removeLocationListener(this);
+			app.getLocationProvider().removeCompassListener(this);
+			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
+			app.getLocationProvider().pauseAllUpdates();
+		}
 	}
 
 	FavoriteAdapterListener getFavoriteFolderListener() {
@@ -510,6 +550,31 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		updateContent();
 		selectionHelper.clearSelectedItems();
 		updateToolbar();
+	}
+
+	@Override
+	public void updateCompassValue(float heading) {
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			lastHeading = heading;
+			updateLocationUi();
+		}
+	}
+
+	@Override
+	public void updateLocation(Location location) {
+		if (!MapUtils.areLatLonEqual(lastLocation, location)) {
+			lastLocation = location;
+			updateLocationUi();
+		}
+	}
+
+	private void updateLocationUi() {
+		if (!compassUpdateAllowed) {
+			return;
+		}
+		if (adapter != null) {
+			adapter.updateLocationAllItems();
+		}
 	}
 
 	private class FavoritesFilter extends Filter {

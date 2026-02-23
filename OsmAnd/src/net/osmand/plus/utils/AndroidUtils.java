@@ -615,6 +615,26 @@ public class AndroidUtils {
 		return width;
 	}
 
+	public static int getTextWidth(
+			@NonNull String title,
+			@NonNull Integer sizeSp,
+			@Nullable Typeface typeface
+	) {
+		Paint paint = new Paint();
+
+		paint.setTextSize(TypedValue.applyDimension(
+				TypedValue.COMPLEX_UNIT_SP,
+				sizeSp,
+				Resources.getSystem().getDisplayMetrics()
+		));
+
+		if (typeface != null) {
+			paint.setTypeface(typeface);
+		}
+
+		return (int) paint.measureText(title);
+	}
+
 	public static void setTruncatedText(OutlinedTextContainer textView, String text) {
 		Paint paint = new Paint();
 		paint.setTextSize(textView.getTextSize());
@@ -1532,5 +1552,16 @@ public class AndroidUtils {
 			LOG.info(e);
 		}
 		return 0;
+	}
+
+	public static String trimTextToMax(@Nullable String text, int maxSymbolNumber) {
+		if (Algorithms.isEmpty(text)) return "";
+
+		if (text.codePointCount(0, text.length()) <= maxSymbolNumber) {
+			return text;
+		}
+
+		int endIndex = text.offsetByCodePoints(0, maxSymbolNumber - 1);
+		return text.substring(0, endIndex) + "…";
 	}
 }

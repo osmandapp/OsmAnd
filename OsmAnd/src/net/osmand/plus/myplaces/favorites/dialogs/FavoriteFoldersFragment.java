@@ -269,6 +269,14 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 	}
 
 	@Override
+	protected void setSelectionMode(boolean mode) {
+		if (mode != selectionMode) {
+			requireMyActivity().animateShowHideTabs(mode);
+		}
+		super.setSelectionMode(mode);
+	}
+
+	@Override
 	protected void updateSelectionToolbar() {
 		MyPlacesActivity activity = requireMyActivity();
 		ActionBar ab = activity.getSupportActionBar();
