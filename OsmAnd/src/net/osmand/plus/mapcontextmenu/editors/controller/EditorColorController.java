@@ -9,21 +9,17 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
+import net.osmand.plus.card.color.palette.solid.SolidPaletteController;
+import net.osmand.plus.palette.contract.IExternalPaletteListener;
 
-public class EditorColorController extends ColorsPaletteController implements IDialogController {
+public class EditorColorController extends SolidPaletteController implements IDialogController {
 
 	private static final String PROCESS_ID = "select_map_point_color";
 
 	private Fragment targetFragment;
 
-	public EditorColorController(@NonNull OsmandApplication app,
-	                             @NonNull ColorsCollection colorsCollection,
-	                             @ColorInt int selectedColorInt) {
-		super(app, colorsCollection, selectedColorInt);
+	public EditorColorController(@NonNull OsmandApplication app, @ColorInt int selectedColorInt) {
+		super(app, selectedColorInt);
 	}
 
 	public void setTargetFragment(@NonNull Fragment targetFragment) {
@@ -36,7 +32,7 @@ public class EditorColorController extends ColorsPaletteController implements ID
 	}
 
 	@Override
-	public void onAllColorsScreenClosed() {
+	public void onPaletteScreenClosed() {
 		if (getTargetFragment() instanceof BaseFullScreenFragment fragment) {
 			fragment.updateStatusBar();
 		}
@@ -54,12 +50,11 @@ public class EditorColorController extends ColorsPaletteController implements ID
 		DialogManager dialogManager = app.getDialogManager();
 		EditorColorController controller = (EditorColorController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
-			ColorsCollection colorsCollection = new FileColorsCollection(app);
-			controller = new EditorColorController(app, colorsCollection, selectedColor);
+			controller = new EditorColorController(app, selectedColor);
 			dialogManager.register(PROCESS_ID, controller);
 		}
 		controller.setTargetFragment(targetFragment);
-		if (targetFragment instanceof OnColorsPaletteListener listener) {
+		if (targetFragment instanceof IExternalPaletteListener listener) {
 			controller.setPaletteListener(listener);
 		}
 		return controller;

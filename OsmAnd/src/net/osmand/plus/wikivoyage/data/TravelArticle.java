@@ -23,7 +23,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.palette.main.data.DefaultColors;
+import net.osmand.plus.card.color.palette.solid.data.DefaultColors;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.wiki.WikivoyageOSMTags;

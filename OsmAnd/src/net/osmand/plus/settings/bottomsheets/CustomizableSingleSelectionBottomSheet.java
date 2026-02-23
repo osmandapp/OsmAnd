@@ -3,6 +3,7 @@ package net.osmand.plus.settings.bottomsheets;
 import static net.osmand.plus.base.dialog.data.DialogExtra.SELECTED_INDEX;
 import static net.osmand.plus.base.dialog.data.DialogExtra.SHOW_BOTTOM_BUTTONS;
 import static net.osmand.plus.base.dialog.data.DialogExtra.SUBTITLE;
+import static net.osmand.plus.base.dialog.data.DialogExtra.SUBTITLE_BOTTOM_MARGIN;
 import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 
 import android.content.Context;
@@ -16,6 +17,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton.Builder;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.base.dialog.data.DisplayItem;
@@ -49,10 +51,15 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 			items.add(titleItem);
 		}
 
-		String description = (String) displayData.getExtra(SUBTITLE);
+		CharSequence description = (CharSequence) displayData.getExtra(SUBTITLE);
 		if (description != null) {
 			LongDescriptionItem descriptionItem = new LongDescriptionItem(description);
 			items.add(descriptionItem);
+
+			Integer bottomMargin = (Integer) displayData.getExtra(SUBTITLE_BOTTOM_MARGIN);
+			if (bottomMargin != null) {
+				items.add(new DividerSpaceItem(app, bottomMargin));
+			}
 		}
 
 		List<DisplayItem> displayItems = displayData.getDisplayItems();

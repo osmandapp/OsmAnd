@@ -386,16 +386,13 @@ public class SearchPhrase {
 	}
 
 	public static QuadRect calculateBbox(int radiusMeters, LatLon l) {
-		float coeff = (float) (radiusMeters / MapUtils.getTileDistanceWidth(SearchRequest.ZOOM_TO_SEARCH_POI));
-		double tx = MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLongitude());
-		double ty = MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLatitude());
-		double topLeftX = Math.max(0, tx - coeff);
-		double topLeftY = Math.max(0, ty - coeff);
-		int max = (1 << SearchRequest.ZOOM_TO_SEARCH_POI)  - 1;
-		double bottomRightX = Math.min(max, tx + coeff);
-		double bottomRightY = Math.min(max, ty + coeff);
-		double pw = MapUtils.getPowZoom(31 - SearchRequest.ZOOM_TO_SEARCH_POI);
-		return new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
+		LatLon northWest = MapUtils.rhumbDestinationPoint(l.getLatitude(), l.getLongitude(), radiusMeters, 315);
+		LatLon southEast = MapUtils.rhumbDestinationPoint(l.getLatitude(), l.getLongitude(), radiusMeters, 135);
+		int top = MapUtils.get31TileNumberY(northWest.getLatitude());
+		int left = MapUtils.get31TileNumberX(northWest.getLongitude());
+		int bottom = MapUtils.get31TileNumberY(southEast.getLatitude());
+		int right = MapUtils.get31TileNumberX(southEast.getLongitude());
+		return new QuadRect(left, top, right, bottom);
 	}
 	
 	

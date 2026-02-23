@@ -7,8 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.data.PaletteMode;
+import net.osmand.plus.card.color.palette.solid.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.solid.data.PaletteMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
@@ -50,7 +50,7 @@ public class ModedColorsPaletteCard extends ColorsPaletteCard {
 		radioGroup.setItems(toggleButtons);
 
 		PaletteMode selectedPaletteMode = controller.getSelectedPaletteMode();
-		TextRadioItem selectedItem = findRadioItem(toggleButtons, selectedPaletteMode.getTag());
+		TextRadioItem selectedItem = findRadioItem(toggleButtons, selectedPaletteMode.tag());
 		radioGroup.setSelectedItem(selectedItem);
 	}
 
@@ -58,8 +58,8 @@ public class ModedColorsPaletteCard extends ColorsPaletteCard {
 	private List<TextRadioItem> collectRadioItems() {
 		List<TextRadioItem> radioItems = new ArrayList<>();
 		for (PaletteMode paletteMode : controller.getAvailablePaletteModes()) {
-			TextRadioItem radioItem = new TextRadioItem(paletteMode.getTitle());
-			radioItem.setTag(paletteMode.getTag());
+			TextRadioItem radioItem = new TextRadioItem(paletteMode.title());
+			radioItem.setTag(paletteMode.tag());
 			radioItem.setOnClickListener((radio, view) -> {
 				controller.selectPaletteMode(paletteMode);
 				return true;

@@ -152,6 +152,10 @@ public class InAppPurchaseUtils {
 		return Version.isPaidVersion(app) || checkDeveloperBuildIfNeeded(app, true);
 	}
 
+	public static boolean isGradientEditorAvailable(@NonNull OsmandApplication app) {
+		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app);
+	}
+
 	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication app) {
 		long time = System.currentTimeMillis();
 		long installTime = Math.max(Version.getUpdateTime(app), Version.getInstallTime(app));

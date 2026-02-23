@@ -11,11 +11,11 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteCard;
 import net.osmand.plus.configmap.MapColorPaletteController.IMapColorPaletteControllerListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.palette.domain.PaletteItem;
 
 public class MapColorPaletteFragment extends ConfigureMapOptionFragment implements IMapColorPaletteControllerListener {
 
@@ -89,12 +89,16 @@ public class MapColorPaletteFragment extends ConfigureMapOptionFragment implemen
 	}
 
 	@Override
-	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
+	public void onPaletteItemSelected(@NonNull PaletteItem item) {
 		updateApplyButton(controller.hasChanges());
 	}
 
 	@Override
-	public void onColorsPaletteModeChanged() {
+	public void onPaletteItemAdded(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
+	}
+
+	@Override
+	public void onPaletteModeChanged() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.refreshMap();

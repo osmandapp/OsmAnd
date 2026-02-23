@@ -36,8 +36,11 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.shared.ColorPalette;
 import net.osmand.shared.gpx.GradientScaleType;
+import net.osmand.shared.palette.domain.PaletteItem;
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.routing.RouteColorize;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -217,8 +220,16 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		ColorPalette previewPalette = ColorPalette.Companion.getMIN_MAX_PALETTE();
 		GradientScaleType gradientScaleType = routeColoringType.toGradientScaleType();
 		if (gradientScaleType != null) {
-			RouteColorize.ColorizationType colorizationType = gradientScaleType.toColorizationType();
-			previewPalette = getApplication().getColorPaletteHelper().requireGradientColorPaletteSync(colorizationType, routeGradientPalette);
+			ColorizationType colorizationType = gradientScaleType.toColorizationType();
+			GradientPaletteCategory category = gradientScaleType.toPaletteCategory();
+			PaletteItem item = getApplication().getPaletteRepository().findPaletteItem(category.getId(), routeGradientPalette);
+
+			if (item instanceof PaletteItem.Gradient gradient) {
+				previewPalette = gradient.getColorPalette();
+			}
+			if (!previewPalette.isValid()) {
+				previewPalette = RouteColorize.Companion.getDefaultPalette(colorizationType);
+			}
 		}
 		List<Integer> palette = new ArrayList<>();
 		for (ColorPalette.ColorValue colorValue : previewPalette.getColors()) {
