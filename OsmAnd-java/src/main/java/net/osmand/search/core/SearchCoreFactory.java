@@ -744,7 +744,8 @@ public class SearchCoreFactory {
 		
 	}
 
-		public static class SearchAmenityByNameAPI extends SearchBaseAPI {
+
+	public static class SearchAmenityByNameAPI extends SearchBaseAPI {
 		private static final int LIMIT = 10000;
 		private static final int BBOX_RADIUS = 500 * 1000;
 		private static final int BBOX_RADIUS_INSIDE = 5600 * 1000; // 5600 is the minimum to pass test [14: hisar]
