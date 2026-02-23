@@ -698,7 +698,7 @@ public class BinaryMapAddressReaderAdapter {
 				TIntArrayList charsList = new TIntArrayList();
 				charsList.add(0);
 				map.readIndexedStringTable(stringMatcher.getCollator(), Collections.singletonList(req.nameQuery),
-						"", Collections.singletonList(loffsets), charsList);
+						"", Collections.singletonList(loffsets), charsList, ":addr");
 				codedIS.popLimit(oldLimit);
 				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.ADDRESS_BY_NAME,
 						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.ADDRESS_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);

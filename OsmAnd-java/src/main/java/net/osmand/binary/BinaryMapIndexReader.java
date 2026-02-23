@@ -139,6 +139,8 @@ public class BinaryMapIndexReader {
 
 	private static final String BASEMAP_NAME = "basemap";
 
+	private static final IndexedStringTableCache INDEXED_STRING_TABLE_CACHE = new IndexedStringTableCache();
+
 	public BinaryMapIndexReader(final RandomAccessFile raf, File file) throws IOException {
 		this.raf = raf;
 		this.file = file;
@@ -2619,14 +2621,29 @@ req.setSearchStat(stat);
 
 	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
 			TIntArrayList matchedCharacters) throws IOException {
+		readIndexedStringTable(instance, queries, prefix, listOffsets, matchedCharacters, null);
+	}
+
+	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
+			TIntArrayList matchedCharacters, String cacheKeySuffixId) throws IOException {
 		boolean[] matched = new boolean[matchedCharacters.size()];
 		String key = null;
 		boolean shouldWeReadSubtable = false;
+		boolean canUseCache = INDEXED_STRING_TABLE_CACHE.canUseCache(prefix, cacheKeySuffixId);
+		if (INDEXED_STRING_TABLE_CACHE.trySearch(getFile(), prefix, cacheKeySuffixId, this, instance, queries, listOffsets, matchedCharacters)) {
+			codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+			return;
+		}
+
+		IndexedStringTableCache.Builder cacheBuilderPerRead = INDEXED_STRING_TABLE_CACHE.newBuilderIfEnabled(prefix, cacheKeySuffixId);
+		boolean hasSubtables = false;
+
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
+				INDEXED_STRING_TABLE_CACHE.saveIfNeeded(getFile(), cacheKeySuffixId, cacheBuilderPerRead, hasSubtables);
 				return;
 			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
 				key = codedIS.readString();
@@ -2635,6 +2652,9 @@ req.setSearchStat(stat);
 				}
 				shouldWeReadSubtable = matchIndexByNameKey(instance, queries, listOffsets, matchedCharacters, key,
 						matched);
+				if (canUseCache && cacheBuilderPerRead != null) {
+					cacheBuilderPerRead.onKey(key);
+				}
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
 				int val = (int) readInt(); // FIXME for 64 bit support
@@ -2643,10 +2663,18 @@ req.setSearchStat(stat);
 						listOffsets.get(i).add(val);
 					}
 				}
+				if (canUseCache && cacheBuilderPerRead != null) {
+					cacheBuilderPerRead.onVal(val);
+					if (!cacheBuilderPerRead.isEnabled()) {
+						canUseCache = false;
+						cacheBuilderPerRead = null;
+					}
+				}
 				break;
 			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
 				long len = codedIS.readRawVarint32();
 				long oldLim = codedIS.pushLimitLong((long) len);
+				hasSubtables = true;
 				if (shouldWeReadSubtable && key != null) {
 					List<String> subqueries = new ArrayList<>(queries);
 					// reset query so we don't search what was not matched
@@ -2668,7 +2696,7 @@ req.setSearchStat(stat);
 		}
 	}
 
-	private boolean matchIndexByNameKey(Collator instance, List<String> queries, List<TIntArrayList> listOffsets,
+	boolean matchIndexByNameKey(Collator instance, List<String> queries, List<TIntArrayList> listOffsets,
 			TIntArrayList matchedCharacters, String key, boolean[] matched) {
 		boolean shouldWeReadSubtable = false;
 		for (int i = 0; i < queries.size(); i++) {

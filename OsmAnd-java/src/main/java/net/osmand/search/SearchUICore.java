@@ -8,6 +8,7 @@ import net.osmand.Collator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReaderStats;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
@@ -846,6 +847,7 @@ public class SearchUICore {
 	}
 
 	void searchInternal(final SearchPhrase phrase, SearchResultMatcher matcher) {
+        phrase.getSettings().setStat(new BinaryMapIndexReaderStats.SearchStat());
 		preparePhrase(phrase);
 		ArrayList<SearchCoreAPI> lst = new ArrayList<>(apis);
 		Collections.sort(lst, new Comparator<SearchCoreAPI>() {
@@ -880,6 +882,7 @@ public class SearchUICore {
 				LOG.error(e.getMessage(), e);
 			}
 		}
+        LOG.info("Stats:" + phrase.getSettings().getStat());
 	}
 
 	private void preparePhrase(final SearchPhrase phrase) {
