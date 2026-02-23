@@ -2300,4 +2300,5 @@
     <string name="poi_shop_yes">Dućan</string>
     <string name="poi_payment_fuel_type">Kartice za gorivo</string>
     <string name="poi_vending_type">Vrsta automata</string>
+    <string name="poi_fuel_diesel">Dizel</string>
 </resources>
