@@ -5043,7 +5043,7 @@
     <string name="copy_build_version">Kopiér build-version</string>
     <string name="most_viewed">Mest sete</string>
     <string name="help_article_plan_route_web_name">Ruteplanlægning på nettet</string>
-    <string name="live_monitoring_adress_descr">Angiv webadressen med parameter-syntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
+    <string name="live_monitoring_adress_descr">Angiv webadressen med parameter-syntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="shared_string_temperature">Temperatur</string>
     <string name="release_4_6">• Android Auto: Tilføjet 3D-tilstand \n \n • Spor: Introduceret filtre og smarte mapper, optimeret hukommelse til større filer \n \n • Forbedrede modulpaneler i top og bund til at rumme alle moduler \n \n • Forbedret lokal ressourceforvaltning \n \n • Brugerdefinerbar knaptilknytning til eksterne controllere \n \n • Nye moduler: \"Glidetal\" og \"Solens position\" \n \n • OsmAnd Cloud: Nu med adgang til slettede filer \n \n • Forbedret sporfarvning i hældningstilstand med ny symmetrisk gradient \n \n • Løst problemer med gennemsigtig statuslinje \n \n • Tilføjet understøttelse af ANT+ temperatur-modul \n \n • Introduceret \"Tilgængelig RAM\"-modul</string>
     <string name="sensor_temperature_desc">Viser temperatur fra sensor</string>
@@ -5956,7 +5956,6 @@
     <string name="buildings_3d_detail_level">3D-bygningers detaljering</string>
     <string name="show_expand_button">Vis udvidknap</string>
     <string name="imprecise_coordinates">Upræcise koordinater</string>
-    <string name="star_watcher_plugin_name">Stjernekigger (Beta)</string>
     <string name="star_map">Stjernekort</string>
     <string name="star_visibility_name">Stjernesynlighed</string>
     <string name="star_altitude_name">Stjernehøjde</string>
@@ -5985,7 +5984,7 @@
     <string name="visible_layers_and_objects">Synlige lag og objekter</string>
     <string name="astro_rise">Opgang</string>
     <string name="astro_set">Nedgang</string>
-    <string name="star_watcher_plugin_description">Himmelkort, 3D-stjernekort</string>
+    <string name="astronomy_plugin_description">Himmelkort, 3D-stjernekort</string>
     <string name="star_charts_name">Himmelkort</string>
     <string name="ecliptic_line">Ekliptika</string>
     <string name="magnitude_filter">Størrelsesklassefilter</string>
@@ -6056,4 +6055,7 @@
     <string name="level_of_details">Detaljeringsgrad</string>
     <string name="performance">Ydeevne</string>
     <string name="view_distance">Visningsafstand</string>
+    <string name="stars_articles">Stjerneartikler</string>
+    <string name="astronomy_plugin_name">Astronomi</string>
+    <string name="astro_min_magnitude">Min. størrelsesklasse</string>
 </resources>

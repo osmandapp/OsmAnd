@@ -5432,7 +5432,7 @@
     <string name="topography_maps">Topografie kaarten</string>
     <string name="shared_string_action">Actie</string>
     <string name="key_event_action_take_media_note">Medianotitie maken</string>
-    <string name="live_monitoring_adress_descr">Specificeer het webadres met het parameterformaat: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
+    <string name="live_monitoring_adress_descr">Specificeer het webadres met het parameterformaat: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="shared_string_temperature">Temperatuur</string>
     <string name="help_article_navigation_routing_train_routing_name">Treinroutes</string>
     <string name="standard_maps">Standaard kaarten</string>
@@ -6242,7 +6242,6 @@
     <string name="lang_mi">Maori</string>
     <string name="buildings_3d_detail_level">3D-gebouwendetaillering</string>
     <string name="has_vehicle_metrics">Met OBDII-data</string>
-    <string name="star_watcher_plugin_name">Sterrenkijker (Bèta)</string>
     <string name="star_map">Sterrenkaart</string>
     <string name="astro_name_sun">Zon</string>
     <string name="astro_name_moon">Maan</string>
@@ -6267,7 +6266,7 @@
     <string name="show_expand_button">Toon uitklapknop</string>
     <string name="imprecise_coordinates">Onnauwkeurige coördinaten</string>
     <string name="astro_constellations">Sterrenbeelden</string>
-    <string name="star_watcher_plugin_description">Sterrenoverzicht, 3D-sterrenkaart</string>
+    <string name="astronomy_plugin_description">Sterrenoverzicht, 3D-sterrenkaart</string>
     <string name="star_visibility_name">Ster zichtbaarheid</string>
     <string name="star_altitude_name">Ster hoogte</string>
     <string name="magnitude_filter">Magnitude-filter</string>
@@ -6326,4 +6325,24 @@
     <string name="astro_configure_view">Configureer weergave</string>
     <string name="astro_directions">Richtingen</string>
     <string name="astro_daily_path">Dagelijkse baan</string>
+    <string name="favorite_search_empty_state_description">Pas je zoekopdracht of filters aan om te zien of dat helpt</string>
+    <string name="favorites_empty_folder_description">Deze map heeft nog geen punten.</string>
+    <string name="building_3d_low_details_content_desc">3D-gebouwen met laag detailniveau</string>
+    <string name="building_3d_high_details_content_desc">3D-gebouwen met hoog detailniveau</string>
+    <string name="building_3d_near_distance_content_desc">3D-gebouwen in de buurt</string>
+    <string name="building_3d_far_distance_content_desc">3D-gebouwen in wijde omtrek</string>
+    <string name="free_custom_color_description">Pas 3D-gebouwen aan met elke gewenste kleur. Perfect om een kaartstijl te laten overeenkomen of het contrast te verbeteren.</string>
+    <string name="buildings_3d_use_map_style_color_description">Gebruik de standaardkleur van de kaartstijl (%s).</string>
+    <string name="buildings_3d_visibility_description">Pas de transparantie van de 3D-structuren op de kaart aan.</string>
+    <string name="level_of_details">Detailniveau</string>
+    <string name="performance">Prestaties</string>
+    <string name="view_distance">Zichtafstand</string>
+    <string name="stars_articles">Sterrenartikelen</string>
+    <string name="add_to_track">Aan track toevoegen</string>
+    <string name="unpin_folder">Map losmaken</string>
+    <string name="pin_folder">Map pinnen</string>
+    <string name="building_3d_day_color_content_desc">3D-gebouwen dagstijlkleur</string>
+    <string name="building_3d_night_color_content_desc">3D-gebouwen nachtstijlkleur</string>
+    <string name="delete_groups_confirmation">Groepen verwijderen?</string>
+    <string name="astronomy_plugin_name">Astronomie</string>
 </resources>

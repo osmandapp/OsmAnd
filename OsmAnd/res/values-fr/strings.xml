@@ -2110,7 +2110,7 @@
 \nL\'extension OsmAnd ski maps permet de visualiser les pistes de ski avec leur niveau de difficulté et d\'autres informations utiles comme l\'emplacement et le type des remontées mécaniques.</string>
     <string name="osmand_extended_description_part7">Contribuez à OpenStreetMap (OSM) \n • Signalez des anomalies \n • Envoyez des traces GPX vers OSM directement depuis l\'application \n • Ajoutez des POI et envoyez-les vers OSM (immédiatement ou plus tard si vous êtes hors ligne)</string>
     <string name="osmand_plus_extended_description_part8">Couverture et qualité des cartes : \n • Europe de l\'Ouest : **** \n • Europe de l\'Est : *** \n • Russie : *** \n • Amérique du Nord : *** \n • Amérique du Sud : ** \n • Asie : ** \n • Japon et Corée : *** \n • Moyen-Orient : ** \n • Afrique : ** \n • Antarctique : * \n La majorité des pays autour du Monde sont disponibles au téléchargement\nDe l\'Afghanistan au Zimbabwe, de l\'Australie aux États-Unis. Argentine, Brésil, Canada, France, Allemagne, Mexique, Royaume-Uni, Espagne, …</string>
-    <string name="fonts_header">Fontes de carte</string>
+    <string name="fonts_header">Polices des textes sur la carte</string>
     <string name="osmand_plus_extended_description_part5">Fonctions liées à la sécurité \n • Bascule automatique en mode jour/nuit (option) \n • Affichage des limitations de vitesse avec rappels en cas de dépassement (option) \n • Zoom adapté à la vitesse (option) \n • Partage de votre position afin qu\'on puisse vous rejoindre rapidement</string>
     <string name="restore_purchases">Restaurer vos achats</string>
     <string name="shared_string_visible">Visible</string>
@@ -4230,7 +4230,7 @@
     <string name="map_markers_bar_widget_desc">Le widget affiche la distance et la direction de la prochaine marque à partir de votre position actuelle. Le widget peut être configuré pour afficher 1 ou 2 marque(s).</string>
     <string name="street_name_widget_desc">Le widget des noms de rue affiche le nom de la rue actuelle ou le nom de la rue suivante avec une flèche indiquant la prochaine manœuvre à effectuer.</string>
     <string name="lanes_widgets_desc">Affiche la disposition des voies de la route et met en évidence la voie à emprunter pendant la navigation.</string>
-    <string name="bearing_desc">Indique le cap absolu ou relatif d\'une cible (sur 180 degrés, 360 degrés ou en milliradians).</string>
+    <string name="bearing_desc">Affiche le cap relatif ou absolu vers une destination en unités angulaires (en mode 180 degrés, 360 degrés ou milliradians).</string>
     <string name="navigation_points_desc">Les widgets de navigation sont activés pendant la navigation et affichent des informations telles que la distance, l\'heure d\'arrivée ou la durée restante, les prochaines bifurcations, l\'orientation, le nom de la rue actuelle, les informations sur les voies, la vitesse maximale, les alertes, les POI et les points de passage.</string>
     <string name="track_attach_to_the_roads_descr">La trace sera déplacée sur la route en utilisant les cartes hors ligne, la géométrie de la trace sera modifiée.</string>
     <string name="route_maneuvers_desc">Les widgets de navigation sont activés pendant la navigation et affichent des informations telles que la distance, l\'heure d\'arrivée ou de départ, les prochaines bifurcations, l\'orientation, le nom de la rue actuelle, les informations sur les voies, la vitesse maximale, les alertes, les POI et les points de passage.</string>
@@ -4909,7 +4909,7 @@
     <string name="help_article_widgets_name">Widgets de la carte</string>
     <string name="help_article_widgets_info_widgets_name">Widgets d\'information</string>
     <string name="help_article_widgets_map_buttons_name">Boutons de la carte</string>
-    <string name="live_monitoring_adress_descr">Indiquer l\'adresse web avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
+    <string name="live_monitoring_adress_descr">Indiquer l\'adresse web avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="shared_string_temperature">Température</string>
     <string name="sensor_temperature_desc">Affiche la température fournie par le capteur</string>
     <string name="release_4_6">• Android Auto : ajout du mode 3D \n \n• Traces : Introduction de filtres et de dossiers intelligents, optimisation de la mémoire pour les fichiers plus volumineux \n \n• Amélioration des panneaux de widgets supérieur et inférieur pour accueillir tous les widgets \n \n• Amélioration de la gestion des ressources locales \n \n• Assignation des boutons personnalisable pour les contrôleurs externes \n \n• Nouveaux widgets : « Finesse » et « Position du soleil » \n \n• OsmAnd Cloud : Accès aux fichiers supprimés \n \n• Amélioration de la coloration des pistes en mode Pente avec un nouveau dégradé symétrique \n \n• Résolution des problèmes concernant la barre d\'état transparente \n \n• Ajout de la prise en charge du widget de température ANT+ \n \n• Introduction du widget \"RAM disponible\"</string>
@@ -5817,8 +5817,7 @@
     <string name="has_vehicle_metrics">Avec les données OBDII</string>
     <string name="show_expand_button">Afficher le bouton Développer</string>
     <string name="imprecise_coordinates">Coordonnées imprécises</string>
-    <string name="star_watcher_plugin_name">Observateur d\'étoiles</string>
-    <string name="star_watcher_plugin_description">Cartes stellaires, carte du ciel en 3D</string>
+    <string name="astronomy_plugin_description">Cartes stellaires, carte du ciel en 3D</string>
     <string name="star_map">Carte du ciel</string>
     <string name="star_charts_name">Cartes stellaires</string>
     <string name="star_visibility_name">Visibilité des étoiles</string>
@@ -5917,4 +5916,7 @@
     <string name="level_of_details">Niveau de détail</string>
     <string name="performance">Performance</string>
     <string name="view_distance">Distance de visibilité</string>
+    <string name="stars_articles">Articles vedettes</string>
+    <string name="astronomy_plugin_name">Astronomie</string>
+    <string name="astro_min_magnitude">Magnitude min.</string>
 </resources>

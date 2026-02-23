@@ -5251,7 +5251,7 @@
     <string name="free_versions">Gratisversjoner</string>
     <string name="about_osmand">Om OsmAnd</string>
     <string name="send_logcat_log_descr">Detaljert loggfil</string>
-    <string name="live_monitoring_adress_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
+    <string name="live_monitoring_adress_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="with_waypoints">Med rutepunkter</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="max_altitude">Maks. høyde</string>
@@ -5864,8 +5864,7 @@
     <string name="star_visibility_name">Stjernesynlighet</string>
     <string name="star_map">Stjernekart</string>
     <string name="star_charts_name">Stjernekart</string>
-    <string name="star_watcher_plugin_description">Stjernekart, 3D-stjernekart</string>
-    <string name="star_watcher_plugin_name">Stjernekikker (Beta)</string>
+    <string name="astronomy_plugin_description">Stjernekart, 3D-stjernekart</string>
     <string name="gpx_too_many_points_visible_warning">Et stort antall synlige GPX-spor leder til høy minnebruk</string>
     <string name="no_date">Ingen dato</string>
     <string name="organize_by_summary">Organiser automatisk dine spor i grupper basert på en valgt parameter som aktivitet, hastighet eller sted.</string>
@@ -5934,4 +5933,7 @@
     <string name="delete_groups_confirmation">Slette grupper?</string>
     <string name="favorite_search_empty_state_description">Juster dine søk eller filtere for å se om det hjelper</string>
     <string name="favorites_empty_folder_description">Denne mappen har ikke noen punkter ennå.</string>
+    <string name="level_of_details">Detaljnivå</string>
+    <string name="pin_folder">Fest mappe</string>
+    <string name="unpin_folder">Løsne mappe</string>
 </resources>

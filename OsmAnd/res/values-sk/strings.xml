@@ -4747,7 +4747,7 @@
     <string name="select_layer">Zvoľte vrstvu</string>
     <string name="weather_download_error">Nepodarilo sa stiahnuť %1$s dlaždíc.</string>
     <string name="contact_us">Kontaktujte nás</string>
-    <string name="live_monitoring_adress_descr">Zadajte webovú adresu pomocou syntaxe parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
+    <string name="live_monitoring_adress_descr">Zadajte webovú adresu pomocou syntaxe parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="shared_string_cache">Vyrovnávacia pamäť</string>
     <string name="widget_available_ram_desc">Zobrazí dostupnú pamäť pridelenú pre OsmAnd.</string>
     <string name="delete_map">Vymazať mapu</string>
@@ -5939,8 +5939,7 @@
     <string name="organize_by_max_speed">Maximálna rýchlosť</string>
     <string name="organize_by_max_altitude">Maximálna nadm. výška</string>
     <string name="gpx_too_many_points_visible_warning">Veľké množstvo viditeľných stôp GPX môže viesť k vysokej spotrebe pamäte</string>
-    <string name="star_watcher_plugin_name">Pozorovateľ hviezd (Beta)</string>
-    <string name="star_watcher_plugin_description">Mapy hviezd, 3D hviezdna mapa</string>
+    <string name="astronomy_plugin_description">Mapy hviezd, 3D hviezdna mapa</string>
     <string name="star_map">Mapa hviezd</string>
     <string name="star_charts_name">Hviezdne mapy</string>
     <string name="star_visibility_name">Viditeľnosť hviezd</string>

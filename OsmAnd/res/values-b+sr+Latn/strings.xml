@@ -4866,7 +4866,7 @@
     <string name="goods_delivery_desc_2">Putevi zabranjeni za dostavna vozila biće izbegnuti.</string>
     <string name="goods_delivery_desc">Dostavna vozila mogu biti zabranjena na nekim putevima.</string>
     <string name="release_4_6">• Android Auto: Dodat 3D mod\n\n • Trase: Uvedeni filteri i pametne mape, optimizovana memorija za veće fajlove\n\n • Poboljšani gornji i donji paneli vidžeta za smeštaj svih vidžeta\n\n • Poboljšano upravljanje lokalnim resursima\n\n • Prilagodljivo mapiranje dugmeta za spoljne kontrolere\n\n • Novi vidžet: \"Koeficijent klizanja\" i \"Položaj sunca\"\n\n • OsmAnd Cloud: Sada pristupi izbrisanim fajlovima\n\n • Poboljšano bojenje trase u načinu nagiba s novim simetričnim prelazom\n\n • Eliminiše probleme s transparentnom statusnom linijom\n\n • Dodata podrška za vidžet ANT + temperature vidžet\n\n • Predstavljen vidžet \"Dostupan RAM\"</string>
-    <string name="live_monitoring_adress_descr">Odredi WEB adresu sa pravilima izraza za odrednice: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
+    <string name="live_monitoring_adress_descr">Odredi WEB adresu sa pravilima izraza za odrednice: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="map_widget_glide_target_desc">Prikazuje razmeru jedrenja potrebnu za dostizanje odredišta.</string>
     <string name="average_glide_time_interval_desc">Odredite međuvreme za određivanje proseka jedrenja.</string>
     <string name="help_article_map_tracks_on_map_name">Trase i rute</string>
@@ -5908,8 +5908,7 @@
     <string name="astro_name_uranus">Uran</string>
     <string name="astro_name_neptune">Neptun</string>
     <string name="astro_name_pluto">Pluton</string>
-    <string name="star_watcher_plugin_description">Zvezdane mape, 3D zvezdana mapa</string>
-    <string name="star_watcher_plugin_name">Posmatranje zvezda (Beta)</string>
+    <string name="astronomy_plugin_description">Zvezdane mape, 3D zvezdana mapa</string>
     <string name="azimuthal_grid">Azimutalna mreža</string>
     <string name="equatorial_grid">Ekvatorijalna mreža</string>
     <string name="ecliptic_line">Ekliptička linija</string>
@@ -5994,4 +5993,7 @@
     <string name="level_of_details">Nivo detalja</string>
     <string name="performance">Performanse</string>
     <string name="view_distance">Vidna udaljenost</string>
+    <string name="stars_articles">Članci o zvezdama</string>
+    <string name="astronomy_plugin_name">Astronomija</string>
+    <string name="astro_min_magnitude">Min. magnituda</string>
 </resources>

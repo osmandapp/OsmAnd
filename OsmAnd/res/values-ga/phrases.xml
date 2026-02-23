@@ -1887,7 +1887,7 @@
     <string name="poi_cuisine_latin_american">Meiriceá Laidineach</string>
     <string name="poi_cuisine_nepalese">Neipeal</string>
     <string name="poi_cuisine_middle_eastern">An Meánoirthear</string>
-    <string name="poi_cuisine_afghan">HAfganastáine</string>
+    <string name="poi_cuisine_afghan">Afganach</string>
     <string name="poi_cuisine_belgian">An Bheilg</string>
     <string name="poi_cuisine_basque">Bascais</string>
     <string name="poi_cuisine_pakistani">Pacastáine</string>
@@ -3134,7 +3134,7 @@
     <string name="poi_craft_shoemaker">Gréasaí</string>
     <string name="poi_craft_stonemason">Saor cloiche</string>
     <string name="poi_craft_sun_protection">Árthaí cosanta gréine</string>
-    <string name="poi_craft_sweep">Scuabadh</string>
+    <string name="poi_craft_chimney_sweeper">Scuabadh</string>
     <string name="poi_craft_tailor">Táilliúir</string>
     <string name="poi_craft_tinsmith">Gabha stáin</string>
     <string name="poi_craft_window_construction">Tógáil fuinneoige</string>
@@ -3487,7 +3487,7 @@
     <string name="poi_outdoor_seating_no">Gan suíocháin lasmuigh</string>
     <string name="poi_outdoor_seating_garden">Suíocháin lasmuigh: gairdín</string>
     <string name="poi_outdoor_seating_terrace">Suíocháin lasmuigh: ardán</string>
-    <string name="poi_outdoor_seating_patio">Suíocháin lasmuigh: PATIO</string>
+    <string name="poi_outdoor_seating_patio">Suíocháin lasmuigh: patio</string>
     <string name="poi_indoor_seating_no">Gan suíocháin faoi dhíon</string>
     <string name="poi_indoor_seating_bar_table">Suíocháin faoi dhíon: tábla barra</string>
     <string name="poi_service_electrical">Deisiú feithiclí leictreacha</string>
@@ -4920,7 +4920,7 @@
     <string name="poi_route_activity_type_snowmobiling">Gluaiseacht sneachta</string>
     <string name="poi_route_activity_type_sport_motorcycling">Spóirt Gluaisrothar</string>
     <string name="poi_route_activity_type_ski_touring">Camchuairt Sciála</string>
-    <string name="poi_route_activity_type_off_road_motorcycling_dirt_biking">Gluaisrothair Easbhóthair (DIRT Biking)</string>
+    <string name="poi_route_activity_type_off_road_motorcycling_dirt_biking">Gluaisrothar Lasmuigh den Bhóthar (Rothar Salachar)</string>
     <string name="poi_route_activity_type_road_running">Rith Bóthair</string>
     <string name="poi_route_activity_type_e_mountain_bike">R-rothar sléibhe</string>
     <string name="poi_route_activity_type_hot_air_ballooning">Balún Aer Te</string>

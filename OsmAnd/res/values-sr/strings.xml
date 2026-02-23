@@ -4839,7 +4839,7 @@
     <string name="rendering_attr_alpineHiking_description">Разврставање по тежини врста путања.</string>
     <string name="rendering_value_sacScale_name">САК</string>
     <string name="rendering_value_caiScale_name">КАИ</string>
-    <string name="live_monitoring_adress_descr">Одредите адресу веба са правилима израза за одреднице: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
+    <string name="live_monitoring_adress_descr">Одредите адресу веба са правилима израза за одреднице: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="free_favorites_backup_description">Пријавите се у Облаку ОсмАнда ради добављања бесплатног складишта за омиљено и поставке.</string>
     <string name="write_heading">Пиши усмерење</string>
     <string name="wheel_circumference">Обим точка</string>
@@ -5894,8 +5894,7 @@
     <string name="lang_mi">Маорски</string>
     <string name="show_expand_button">Прикажи дугме за проширивање</string>
     <string name="imprecise_coordinates">Непрецизне координате</string>
-    <string name="star_watcher_plugin_name">Посматрач звезда (бета)</string>
-    <string name="star_watcher_plugin_description">Звездане карте, 3Д звездана мапа</string>
+    <string name="astronomy_plugin_description">Звездане карте, 3Д звездана мапа</string>
     <string name="star_map">Звездана мапа</string>
     <string name="star_charts_name">Звездане карте</string>
     <string name="star_visibility_name">Видљивост звезда</string>
@@ -5994,4 +5993,7 @@
     <string name="level_of_details">Ниво детаља</string>
     <string name="performance">Перформансе</string>
     <string name="view_distance">Видна удаљеност</string>
+    <string name="stars_articles">Чланци о звездама</string>
+    <string name="astronomy_plugin_name">Астрономија</string>
+    <string name="astro_min_magnitude">Мин. магнитуда</string>
 </resources>

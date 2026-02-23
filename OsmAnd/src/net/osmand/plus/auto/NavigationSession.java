@@ -374,7 +374,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, true), (obj) -> {
 					if (obj != null) {
 						getApp().runInUIThread(() -> {
-							getApp().getOsmandMap().getMapActions().startNavigation();
 							if (hasStarted()) {
 								startNavigationScreen();
 							}
@@ -548,7 +547,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, false), (obj) -> {
 				if (obj != null) {
 					app.runInUIThread(() -> {
-						app.getOsmandMap().getMapActions().startNavigation();
 						if (hasStarted()) {
 							startNavigationScreen();
 						}

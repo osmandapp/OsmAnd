@@ -611,7 +611,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			item.setColor(app, enabled3DMode ? R.color.osmand_orange : INVALID_ID);
 			item.setSelected(enabled3DMode);
 			item.setSecondaryIcon(R.drawable.ic_action_additional_option);
-			item.setDescription(app.getString(enabled3DMode ? get3DBuildingDetailLvlDescription() : R.string.shared_string_off));
+			item.setDescription(app.getString(enabled3DMode ? R.string.shared_string_on : R.string.shared_string_off));
 		}
 		adapter.addItem(item);
 	}
@@ -829,14 +829,42 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void apply3DBuildingsColorStyle(Buildings3DColorType style) {
-		BUILDINGS_3D_ENABLE_COLORING.set(style == Buildings3DColorType.CUSTOM);
+		BUILDINGS_3D_ENABLE_COLORING.set(false);
+		BUILDINGS_3D_COLOR_STYLE.set(style.getId());
 		if (style == Buildings3DColorType.CUSTOM) {
 			boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.MAP);
 			apply3DBuildingsColor(nightMode ? BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get() : BUILDINGS_3D_CUSTOM_DAY_COLOR.get());
 		}
+		updateMapPresentationEnvironment();
+	}
+
+	@NonNull
+	public Buildings3DColorType get3DBuildingsColorStyle() {
+		int styleId = BUILDINGS_3D_COLOR_STYLE.get();
+		return Buildings3DColorType.Companion.getById(styleId);
 	}
 
 	public void apply3DBuildingsColor(int color) {
 		BUILDINGS_3D_COLOR.set(Algorithms.colorToString(color));
+		updateMapPresentationEnvironment();
 	}
+
+	public int getBuildings3dColor() {
+		String color = BUILDINGS_3D_COLOR.get();
+		if(Algorithms.isEmpty(color)) {
+			return 0;
+		}
+		if(!color.startsWith("#")) {
+			color = String.format("#%s", color);
+		}
+		return Algorithms.parseColor(color);
+	}
+
+	private void updateMapPresentationEnvironment() {
+		MapRendererContext mapRenderer = NativeCoreContext.getMapRendererContext();
+		if (mapRenderer != null) {
+			updateMapPresentationEnvironment(mapRenderer);
+		}
+	}
+
 }

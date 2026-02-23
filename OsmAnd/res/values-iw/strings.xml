@@ -5002,10 +5002,16 @@
     <string name="show_debug_tile">הצגת פרטי אריח</string>
     <string name="show_rasterization_debug_tile">הצגת פרטי עיבוד תצוגה של אריח</string>
     <string name="copy_link">העתקת קישור</string>
-    <string name="organize_by_max_altitude"></string>
+    <string name="organize_by_max_altitude"/>
     <string name="nearest_city">העיר הקרובה ביותר</string>
     <string name="group_sensors">חיישנים</string>
     <string name="year_of_creation">שנת יצירה</string>
     <string name="month_year_creation">חודש ושנת יצירה</string>
     <string name="group_date_time">תאריך ושעה</string>
+    <string name="delete_groups_confirmation">למחוק קבוצות?</string>
+    <string name="add_to_track">הוספה למסלול</string>
+    <string name="unpin_folder">ניתוק נעיצת תיקייה</string>
+    <string name="pin_folder">נעיצת תיקייה</string>
+    <string name="favorite_search_empty_state_description">אפשר לכוון את החיפוש או המסננים שלך ולראות אם זה עוזר</string>
+    <string name="favorites_empty_folder_description">לתיקייה הזאת אין נקודות עדיין.</string>
 </resources>

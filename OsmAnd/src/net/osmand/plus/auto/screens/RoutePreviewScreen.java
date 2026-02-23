@@ -245,6 +245,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	}
 
 	private void onNavigate() {
+		getApp().getOsmandMap().getMapActions().startNavigation();
 		setResult(searchResult);
 		finish();
 	}

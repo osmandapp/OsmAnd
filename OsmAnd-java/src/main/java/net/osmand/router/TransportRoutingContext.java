@@ -84,7 +84,7 @@ public class TransportRoutingContext {
 				}
 				for(TransportRouteSegment r : list) {
 					TransportStop st = r.getStop(r.segStart);
-					if (Math.abs(st.x31 - sx) > walkRadiusIn31 || Math.abs(st.y31 - sy) > walkRadiusIn31) {
+					if (Math.abs(st.x31 - sx) > d || Math.abs(st.y31 - sy) > d) {
 						wrongLoadedWays++;
 					} else if (!alreadyLoaded.containsKey(r.getId())) {
 						alreadyLoaded.put(r.getId(), true);

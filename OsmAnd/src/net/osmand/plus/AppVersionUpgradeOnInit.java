@@ -160,8 +160,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_2_04 = 5204;
 	public static final int VERSION_5_3_00 = 5300;
 	public static final int VERSION_5_3_01 = 5301;
+	public static final int VERSION_5_3_02 = 5302;
 
-	public static final int LAST_APP_VERSION = VERSION_5_3_01;
+	public static final int LAST_APP_VERSION = VERSION_5_3_02;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -321,6 +322,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_5_3_01) {
 					migrateWidgetPanelsPages();
+				}
+				if (prevAppVersion < VERSION_5_3_02) {
+					migrateAstronomyPreferences();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -1073,6 +1077,19 @@ public class AppVersionUpgradeOnInit {
 						}
 					}
 				}
+			}
+		}
+	}
+
+	private void migrateAstronomyPreferences() {
+		OsmandSettings settings = app.getSettings();
+		CommonPreference<String> newPreference = settings.registerStringPreference("astronomy_settings", "").makeProfile().makeShared();
+		CommonPreference<String> oldPreference = settings.registerStringPreference("star_watcher_settings", "").makeProfile().makeShared();
+
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			if (oldPreference.isSetForMode(appMode)) {
+				String value = oldPreference.getModeValue(appMode);
+				newPreference.setModeValue(appMode, value);
 			}
 		}
 	}

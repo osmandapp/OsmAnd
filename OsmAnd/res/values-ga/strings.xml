@@ -569,7 +569,7 @@
     <string name="external_device_details_battery">Cadhnra</string>
     <string name="map_widget_ant_bicycle_power">Cumhacht rothar</string>
     <string name="daily">Laethúil</string>
-    <string name="live_monitoring_adress_descr">Luaigh an seoladh gréasáin go sonrach leis an gcomhréir pharaiméadair: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
+    <string name="live_monitoring_adress_descr">Luaigh an seoladh gréasáin go sonrach leis an gcomhréir pharaiméadair: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="shared_string_download_successful">Íoslódáilte</string>
     <string name="shared_string_vehicle">Feithicil</string>
@@ -5731,8 +5731,7 @@
     <string name="has_vehicle_metrics">Le sonraí OBDII</string>
     <string name="show_expand_button">Taispeáin an cnaipe leathnaithe</string>
     <string name="imprecise_coordinates">Comhordanáidí neamhchruinne</string>
-    <string name="star_watcher_plugin_name">Faireoir réaltaí (Béite)</string>
-    <string name="star_watcher_plugin_description">Cairteacha réalta, léarscáil réalta 3T</string>
+    <string name="astronomy_plugin_description">Cairteacha réalta, léarscáil réalta 3T</string>
     <string name="star_map">Léarscáil réalta</string>
     <string name="star_charts_name">Cairteacha réalta</string>
     <string name="star_visibility_name">Infheictheacht réalta</string>
@@ -5819,4 +5818,18 @@
     <string name="pin_folder">Fillteán bioráin</string>
     <string name="favorite_search_empty_state_description">Coigeartaigh do chuardach nó do scagairí le feiceáil an gcabhraíonn sé sin</string>
     <string name="favorites_empty_folder_description">Níl aon phointí sa fhillteán seo go fóill.</string>
+    <string name="building_3d_day_color_content_desc">Dath téama lá foirgneamh 3T</string>
+    <string name="building_3d_night_color_content_desc">Dath téama oíche foirgneamh 3T</string>
+    <string name="building_3d_low_details_content_desc">Foirgnimh 3T le sonraí ísle</string>
+    <string name="building_3d_high_details_content_desc">Foirgnimh 3T arda</string>
+    <string name="building_3d_near_distance_content_desc">Fad foirgneamh 3T in aice láimhe</string>
+    <string name="building_3d_far_distance_content_desc">Fad foirgneamh 3T i bhfad i gcéin</string>
+    <string name="free_custom_color_description">Saincheap foirgnimh 3T le haon dath. Foirfe chun téama léarscáile a mheaitseáil nó codarsnacht a fheabhsú.</string>
+    <string name="buildings_3d_use_map_style_color_description">Úsáid dath réamhshocraithe stíl léarscáile (%s).</string>
+    <string name="buildings_3d_visibility_description">Coigeartaigh teimhneacht struchtúr 3T ar an léarscáil.</string>
+    <string name="level_of_details">Leibhéal mionsonraí</string>
+    <string name="performance">Feidhmíocht</string>
+    <string name="view_distance">Fad radhairc</string>
+    <string name="stars_articles">Airteagail réaltaí</string>
+    <string name="astronomy_plugin_name">Réalteolaíocht</string>
 </resources>

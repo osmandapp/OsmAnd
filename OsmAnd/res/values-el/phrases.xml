@@ -940,7 +940,7 @@
     <string name="poi_craft_stand_builder">Κατασκευαστής πάγκων</string>
     <string name="poi_craft_stonemason">Λιθοδόμος</string>
     <string name="poi_craft_sun_protection">Αντιηλιακή προστασία</string>
-    <string name="poi_craft_sweep">Καπνοκαθαριστής</string>
+    <string name="poi_craft_chimney_sweeper">Καπνοκαθαριστής</string>
     <string name="poi_craft_tailor">Ράφτης</string>
     <string name="poi_craft_tiler">Πλακάς</string>
     <string name="poi_craft_tinsmith">Λευκοσιδηρουργός</string>
@@ -2900,7 +2900,7 @@
     <string name="poi_cuisine_noodle">Ζυμαρικά (νουντλ)</string>
     <string name="poi_cuisine_donut">Λουκουμάς (ντόνατ)</string>
     <string name="poi_cuisine_ramen">Ράμεν</string>
-    <string name="poi_cuisine_crepe">Κρέπα</string>
+    <string name="poi_cuisine_crepe">Κρέπα;Κρέπες</string>
     <string name="poi_cuisine_breakfast">Πρωινό</string>
     <string name="poi_cuisine_beef_bowl">Γκίντον (βόειο κρέας με ρύζι)</string>
     <string name="poi_cuisine_steak">Μπριζόλα</string>

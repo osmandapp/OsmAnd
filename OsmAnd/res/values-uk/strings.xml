@@ -5015,7 +5015,7 @@
     <string name="send_logcat_log_descr">Докладний файл журналу</string>
     <string name="free_versions">Безплатні версії</string>
     <string name="about_osmand">Про OsmAnd</string>
-    <string name="live_monitoring_adress_descr">Вкажіть вебадресу з параметром syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={13}.</string>
+    <string name="live_monitoring_adress_descr">Вкажіть вебадресу з параметром syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="shared_string_temperature">Температура</string>
     <string name="sensor_temperature_desc">Показує температуру з сенсорів</string>
     <string name="with_waypoints">З маршрутними точками</string>
@@ -5931,8 +5931,7 @@
     <string name="has_vehicle_metrics">З даними OBDII</string>
     <string name="show_expand_button">Показати кнопку розгортання</string>
     <string name="imprecise_coordinates">Неточні координати</string>
-    <string name="star_watcher_plugin_name">Спостерігач за зірками (бета-версія)</string>
-    <string name="star_watcher_plugin_description">Зоряні карти, 3D-карта зоряного неба</string>
+    <string name="astronomy_plugin_description">Зоряні карти, 3D-карта зоряного неба</string>
     <string name="star_map">Зоряна карта</string>
     <string name="star_charts_name">Зоряні карти</string>
     <string name="star_visibility_name">Видимість зірок</string>
@@ -6008,4 +6007,7 @@
     <string name="map_2d">2D</string>
     <string name="map_3d">3D</string>
     <string name="astro_solar_system">Сонячна система</string>
+    <string name="performance">Продуктивність</string>
+    <string name="level_of_details">Рівень деталізації</string>
+    <string name="view_distance">Відстань перегляду</string>
 </resources>

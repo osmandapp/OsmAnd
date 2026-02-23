@@ -238,6 +238,10 @@
 	<!-- Speedometer -->
 	<color name="speedometer_text_speed_exceed_day">#E71D36</color>
 	<color name="speedometer_text_speed_exceed_night">#E71D36</color>
+	<color name="speedometer_bg_limit_day">#E71D34</color>
+	<color name="speedometer_bg_limit_night">#E71D34</color>
+	<color name="speedometer_bg_tolerance_day">#FFBF00</color>
+	<color name="speedometer_bg_tolerance_night">#FFBF00</color>
 
 	<color name="color_myloc_distance">#0080FF</color>
 	<color name="wpt_distance_color">#dd6CB336</color>

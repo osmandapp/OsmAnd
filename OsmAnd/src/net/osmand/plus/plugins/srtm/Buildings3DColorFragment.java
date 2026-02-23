@@ -42,10 +42,12 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 	public static final String DAY_COLOR = "day_color";
 	public static final String NIGHT_COLOR = "night_color";
 	public static final String COLOR_TYPE = "color_type";
+	public static final String INITIAL_COLOR_TYPE = "initial_color_type";
 	public static final String DAY_NIGHT_SELECTOR = "day_night_selector";
 
 	private SRTMPlugin srtmPlugin;
 	private Buildings3DColorType colorType = Buildings3DColorType.MAP_STYLE;
+	private Buildings3DColorType initialColorType = colorType;
 	private TextView colorTypeTv;
 	private View customColorViewContainer;
 	private View mapStyleColorViewContainer;
@@ -68,11 +70,13 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 				dayColor = savedInstanceState.getInt(DAY_COLOR);
 				nightColor = savedInstanceState.getInt(NIGHT_COLOR);
 				colorType = Buildings3DColorType.Companion.getById(savedInstanceState.getInt(COLOR_TYPE));
+				initialColorType = Buildings3DColorType.Companion.getById(savedInstanceState.getInt(INITIAL_COLOR_TYPE));
 				isDayModeColorSelection = savedInstanceState.getBoolean(DAY_NIGHT_SELECTOR);
 			} else {
 				dayColor = srtmPlugin.BUILDINGS_3D_CUSTOM_DAY_COLOR.get();
 				nightColor = srtmPlugin.BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get();
 				colorType = Buildings3DColorType.Companion.getById(srtmPlugin.BUILDINGS_3D_COLOR_STYLE.get());
+				initialColorType = colorType;
 				isDayModeColorSelection = true;
 			}
 		}
@@ -88,6 +92,9 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 
 	@Override
 	public void onDestroy() {
+		if(initialColorType != colorType) {
+			srtmPlugin.BUILDINGS_3D_COLOR_STYLE.set(initialColorType.getId());
+		}
 		srtmPlugin.apply3DBuildingsColorStyle(Buildings3DColorType.Companion.getById(srtmPlugin.BUILDINGS_3D_COLOR_STYLE.get()));
 		srtmPlugin.apply3DBuildingsColor(nightMode ? srtmPlugin.BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get() : srtmPlugin.BUILDINGS_3D_CUSTOM_DAY_COLOR.get());
 		super.onDestroy();
@@ -98,6 +105,8 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 		super.onSaveInstanceState(outState);
 		outState.putInt(DAY_COLOR, dayColor);
 		outState.putInt(NIGHT_COLOR, nightColor);
+		outState.putInt(INITIAL_COLOR_TYPE, initialColorType.getId());
+		outState.putInt(COLOR_TYPE, colorType.getId());
 	}
 
 	@Nullable
@@ -127,17 +136,18 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 
 	@Override
 	protected void applyChanges() {
+		initialColorType = colorType;
+		srtmPlugin.BUILDINGS_3D_COLOR_STYLE.set(colorType.getId());
 		srtmPlugin.BUILDINGS_3D_CUSTOM_DAY_COLOR.set(dayColor);
 		srtmPlugin.BUILDINGS_3D_CUSTOM_NIGHT_COLOR.set(nightColor);
-		srtmPlugin.BUILDINGS_3D_COLOR_STYLE.set(colorType.getId());
 		srtmPlugin.apply3DBuildingsColorStyle(colorType);
 	}
 
 	private boolean isChangesMade() {
-
 		return srtmPlugin.BUILDINGS_3D_CUSTOM_DAY_COLOR.get() != dayColor ||
 				srtmPlugin.BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get() != nightColor ||
-				srtmPlugin.BUILDINGS_3D_COLOR_STYLE.get() != colorType.getId();
+				srtmPlugin.BUILDINGS_3D_COLOR_STYLE.get() != colorType.getId() ||
+				initialColorType != colorType;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
@@ -229,7 +239,7 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 	private void setupBillingCard(@NonNull View view) {
 		freeCustomColorContainer = view.findViewById(R.id.free_view);
 		paidCustomColorContainer = view.findViewById(R.id.paid_view);
-		freeCustomColorContainer.findViewById(R.id.get_btn_container).setOnClickListener((v)->{
+		freeCustomColorContainer.findViewById(R.id.get_btn_container).setOnClickListener((v) -> {
 			ChoosePlanFragment.showInstance(requireMapActivity(), OsmAndFeature.TERRAIN);
 		});
 	}
@@ -264,6 +274,7 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 	}
 
 	private void updateColorType() {
+		srtmPlugin.apply3DBuildingsColorStyle(colorType);
 		colorTypeTv.setText(colorType.getLabelId());
 		AndroidUiHelper.updateVisibility(customColorViewContainer, colorType == Buildings3DColorType.CUSTOM);
 		AndroidUiHelper.updateVisibility(mapStyleColorViewContainer, colorType != Buildings3DColorType.CUSTOM);
