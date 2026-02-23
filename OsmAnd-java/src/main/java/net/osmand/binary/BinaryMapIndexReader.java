@@ -1518,13 +1518,13 @@ public class BinaryMapIndexReader {
 		req.numberOfReadSubtrees = 0;
 		List<PoiRegion> lst = onlyIndex == null ? poiIndexes : Collections.singletonList(onlyIndex);
 		for (PoiRegion poiIndex : lst) {
-			long statReq = req.beginSearchStats(BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
+			long statReq = req.beginSearchStats(BinaryMapIndexReaderApiName.POI_BY_TYPE, req, poiIndex, codedIS);
 			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
 			long old = codedIS.pushLimitLong((long) poiIndex.length);
 			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 			codedIS.popLimit(old);
-			req.endSearchStats(statReq, BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
+			req.endSearchStats(statReq, BinaryMapIndexReaderApiName.POI_BY_TYPE, req, poiIndex, codedIS);
 		}
 		return req.getSearchResults();
 	}
