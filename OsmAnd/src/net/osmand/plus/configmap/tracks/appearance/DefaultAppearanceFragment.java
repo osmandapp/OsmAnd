@@ -190,10 +190,7 @@ public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void onAppearanceSaved() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			((MapActivity) activity).refreshMapComplete();
-		}
+		callMapActivity(MapActivity::refreshMapComplete);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

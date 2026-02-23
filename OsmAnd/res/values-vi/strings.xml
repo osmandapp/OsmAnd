@@ -4696,8 +4696,7 @@
     <string name="organize_by_max_speed">Tốc độ tối đa</string>
     <string name="organize_by_max_altitude">Độ cao của vật so với mực nước biển tối đa</string>
     <string name="gpx_too_many_points_visible_warning">Hiển thị số lượng lớn cung đường GPX dẫn đến việc dùng nhiều bộ nhớ hơn</string>
-    <string name="star_watcher_plugin_name">Theo dõi sao (Beta)</string>
-    <string name="star_watcher_plugin_description">Bản đồ sao, bản đồ sao 3D</string>
+    <string name="astronomy_plugin_description">Bản đồ sao, bản đồ sao 3D</string>
     <string name="star_map">Bản đồ sao</string>
     <string name="star_charts_name">Bản đồ sao</string>
     <string name="star_visibility_name">Khả năng nhìn thấy sao</string>

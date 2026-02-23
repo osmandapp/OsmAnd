@@ -5953,8 +5953,7 @@
     <string name="shared_string_magnitude">Velikost</string>
     <string name="astro_rise">Východ</string>
     <string name="astro_set">Západ</string>
-    <string name="star_watcher_plugin_name">Sledování hvězd (Beta)</string>
-    <string name="star_watcher_plugin_description">Grafy hvězd, 3D mapa hvězd</string>
+    <string name="astronomy_plugin_description">Grafy hvězd, 3D mapa hvězd</string>
     <string name="star_map">Mapa hvězd</string>
     <string name="star_charts_name">Grafy hvězd</string>
     <string name="star_visibility_name">Viditelnost hvězd</string>
@@ -6027,4 +6026,6 @@
     <string name="performance">Výkon</string>
     <string name="view_distance">Vykreslovací vzdálenost</string>
     <string name="stars_articles">Články o hvězdách</string>
+    <string name="astro_min_magnitude">Min. magnituda</string>
+    <string name="astronomy_plugin_name">Astronomie</string>
 </resources>

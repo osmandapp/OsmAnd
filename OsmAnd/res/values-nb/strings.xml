@@ -5864,8 +5864,7 @@
     <string name="star_visibility_name">Stjernesynlighet</string>
     <string name="star_map">Stjernekart</string>
     <string name="star_charts_name">Stjernekart</string>
-    <string name="star_watcher_plugin_description">Stjernekart, 3D-stjernekart</string>
-    <string name="star_watcher_plugin_name">Stjernekikker (Beta)</string>
+    <string name="astronomy_plugin_description">Stjernekart, 3D-stjernekart</string>
     <string name="gpx_too_many_points_visible_warning">Et stort antall synlige GPX-spor leder til høy minnebruk</string>
     <string name="no_date">Ingen dato</string>
     <string name="organize_by_summary">Organiser automatisk dine spor i grupper basert på en valgt parameter som aktivitet, hastighet eller sted.</string>

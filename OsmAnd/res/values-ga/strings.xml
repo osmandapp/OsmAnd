@@ -5731,8 +5731,7 @@
     <string name="has_vehicle_metrics">Le sonraí OBDII</string>
     <string name="show_expand_button">Taispeáin an cnaipe leathnaithe</string>
     <string name="imprecise_coordinates">Comhordanáidí neamhchruinne</string>
-    <string name="star_watcher_plugin_name">Faireoir réaltaí (Béite)</string>
-    <string name="star_watcher_plugin_description">Cairteacha réalta, léarscáil réalta 3T</string>
+    <string name="astronomy_plugin_description">Cairteacha réalta, léarscáil réalta 3T</string>
     <string name="star_map">Léarscáil réalta</string>
     <string name="star_charts_name">Cairteacha réalta</string>
     <string name="star_visibility_name">Infheictheacht réalta</string>
@@ -5832,4 +5831,5 @@
     <string name="performance">Feidhmíocht</string>
     <string name="view_distance">Fad radhairc</string>
     <string name="stars_articles">Airteagail réaltaí</string>
+    <string name="astronomy_plugin_name">Réalteolaíocht</string>
 </resources>

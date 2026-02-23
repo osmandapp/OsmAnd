@@ -79,7 +79,7 @@ object SmartFolderHelper {
 	}
 
 	init {
-		osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "", true, true)
+		osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "", global = true, shared = true)
 		osmAndSettings.addStringPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
 		osmAndSettings.addEnumPreferenceListener(METRIC_SYSTEM_PREF, metricSystemListener)
 		osmAndSettings.addEnumPreferenceListener(ALTITUDE_SYSTEM_PREF, altitudeSystemListener)
