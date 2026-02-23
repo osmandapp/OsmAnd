@@ -364,7 +364,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		} else {
 			cardsContainer = mapActivity.findViewById(R.id.left_side_menu);
 			bottomMapControls = mapActivity.findViewById(R.id.bottom_controls_container);
-			topMapControls = mapActivity.findViewById(R.id.top_controls_container);
+			topMapControls = mapActivity.findViewById(R.id.lanes_widget_special_position);
 
 			infoTypeBtn = new IconToggleButton(app, infoButtonsContainer, nightMode);
 			pointsBtn = new IconRadioItem(R.drawable.ic_action_plan_route_point_colored).setUseDefaultColor();
