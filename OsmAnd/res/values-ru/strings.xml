@@ -5920,4 +5920,12 @@
     <string name="level_of_details">Детализация</string>
     <string name="performance">Производительность</string>
     <string name="view_distance">Дальность видимости</string>
+    <string name="astro_min_magnitude">Мин. величина</string>
+    <string name="building_3d_day_color_content_desc">Тема цвета 3d-зданий днём</string>
+    <string name="building_3d_night_color_content_desc">Тема цвета 3d-зданий ночью</string>
+    <string name="building_3d_low_details_content_desc">Низкая детализация 3D-зданий</string>
+    <string name="building_3d_high_details_content_desc">Высокая детализация 3D-зданий</string>
+    <string name="building_3d_near_distance_content_desc">3D-здания вблизи</string>
+    <string name="building_3d_far_distance_content_desc">3D-здания издалека</string>
+    <string name="astronomy_plugin_name">Астрономия</string>
 </resources>
