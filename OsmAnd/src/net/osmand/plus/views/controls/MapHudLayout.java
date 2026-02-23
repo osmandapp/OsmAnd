@@ -393,19 +393,10 @@ public class MapHudLayout extends FrameLayout {
 		int height = (int) AndroidUtils.pxToDpF(getContext(), view.getHeight()) / 8;
 		position.setSize(width, height);
 
-		if (view instanceof VerticalWidgetPanel && shouldCenterVerticalPanels() || id == R.id.lanes_widget_special_position) {
-			int[] margins = AndroidUtils.getRelativeMargins(this, view);
-			applyInsetsToMargins(margins);
-
-			int parentWidth = getAdjustedWidth();
-			int parentHeight = getAdjustedHeight();
-
-			boolean top = position.isTop();
-			boolean left = position.isLeft();
-			int x = left ? margins[0] : margins[2];
-			int y = top ? margins[1] : margins[3];
-			position.calcGridPositionFromPixel(dpToPx, parentWidth, parentHeight, left, x, top, y);
-
+		if (view instanceof VerticalWidgetPanel) {
+			if (shouldCenterVerticalPanels()) {
+				calcGridPositionFromPixel(view, position);
+			}
 			position.setMarginY(0);
 		} else if (view instanceof RulerWidget || view instanceof SideWidgetsPanel) {
 			position.setMarginX(0);
@@ -414,8 +405,25 @@ public class MapHudLayout extends FrameLayout {
 			int margin = getResources().getDimensionPixelSize(R.dimen.map_alarm_bottom_margin);
 			position.setMarginX(0);
 			position.setMarginY((int) AndroidUtils.pxToDpF(getContext(), margin) / 8);
+		} else if (id == R.id.lanes_widget_special_position) {
+			calcGridPositionFromPixel(view, position);
+			position.setMarginY(0);
 		}
 		return position;
+	}
+
+	private void calcGridPositionFromPixel(@NonNull View view, @NonNull ButtonPositionSize position) {
+		int[] margins = AndroidUtils.getRelativeMargins(this, view);
+		applyInsetsToMargins(margins);
+
+		int parentWidth = getAdjustedWidth();
+		int parentHeight = getAdjustedHeight();
+
+		boolean top = position.isTop();
+		boolean left = position.isLeft();
+		int x = left ? margins[0] : margins[2];
+		int y = top ? margins[1] : margins[3];
+		position.calcGridPositionFromPixel(dpToPx, parentWidth, parentHeight, left, x, top, y);
 	}
 
 	private void applyInsetsToMargins(int[] margins) {
