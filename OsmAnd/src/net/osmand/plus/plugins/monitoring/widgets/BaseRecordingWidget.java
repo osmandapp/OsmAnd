@@ -53,6 +53,7 @@ public class BaseRecordingWidget extends SimpleWidget {
 			oldInfo.setElevDiff(Math.max(oldInfo.getElevDiff(), newInfo.getElevDiff()));
 			oldInfo.setDistance(Math.max(oldInfo.getDistance(), newInfo.getDistance()));
 			oldInfo.setMaxSpeed(Math.max(oldInfo.getMaxSpeed(), newInfo.getMaxSpeed()));
+			oldInfo.setMovingTime(Math.max(oldInfo.getMovingTime(), newInfo.getMovingTime()));
 			return oldInfo;
 		} else if (isNextSlope) {
 			return newInfo;
