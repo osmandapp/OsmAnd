@@ -6,8 +6,6 @@ import static androidx.test.espresso.action.ViewActions.replaceText;
 import static net.osmand.plus.settings.fragments.search.SearchButtonClick.clickSearchButton;
 import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.searchView;
 
-import android.os.Bundle;
-
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -23,6 +21,7 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 @RunWith(AndroidJUnit4.class)
 public class GeneratePreferencesDatabaseTest extends AndroidTest {
@@ -30,16 +29,12 @@ public class GeneratePreferencesDatabaseTest extends AndroidTest {
 	@Rule
 	public ActivityScenarioRule<MapActivity> activityRule = new ActivityScenarioRule<>(MapActivity.class);
 
-	// FK-TODO: refactor
 	@Before
 	public void setLocaleFromArguments() {
-		final Bundle arguments = InstrumentationRegistry.getArguments();
-		if (arguments.containsKey("testLocale")) {
-			String localeString = arguments.getString("testLocale");
-			if (localeString != null && !localeString.isEmpty()) {
-				setLocale(new Locale(localeString));
-			}
-		}
+		this
+				.getTestLocaleFromArguments()
+				.map(Locale::new)
+				.ifPresent(this::setLocale);
 	}
 
 	@Test
@@ -47,6 +42,13 @@ public class GeneratePreferencesDatabaseTest extends AndroidTest {
 		enableAvailablePlugins();
 		clickSearchButton(app);
 		onView(searchView()).perform(replaceText("tst"), closeSoftKeyboard());
+	}
+
+	private Optional<String> getTestLocaleFromArguments() {
+		return Optional.ofNullable(
+				InstrumentationRegistry
+						.getArguments()
+						.getString("testLocale"));
 	}
 
 	private void setLocale(final Locale locale) {
