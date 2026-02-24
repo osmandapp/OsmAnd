@@ -28,10 +28,8 @@ abstract class ElevationDiffsCalculator {
 	private var lastDownhill: SlopeInfo? = null
 
 	abstract fun getPointDistance(index: Int): Double
-
 	abstract fun getPointElevation(index: Int): Double
 	abstract fun getPointIndex(index: Int): Int
-
 	abstract fun getPointsCount(): Int
 
 	fun getDiffElevationUp(): Double {
