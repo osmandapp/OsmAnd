@@ -241,15 +241,7 @@ public class SearchUICore {
 			}
 			for (SearchResult s : searchResults) {
 				if (s.object instanceof Amenity amenity && Algorithms.isEmpty(s.alternateName)) {
-					String city = s.cityName == null ? "" : s.cityName;
-					String mainCity = getMainCityName(city);
-					if (Algorithms.isEmpty(amenity.getStreetName())) {
-						s.addressName = city;
-					} else {
-						String hno = amenity.getHousenumber();
-						String addr = amenity.getStreetName() + (Algorithms.isEmpty(hno) ? "" : " " + hno);
-						s.addressName = createAddressString(s.cityName, mainCity, dominatedCity, addr);
-					}
+					updateSearchResultAddress(s, amenity, dominatedCity);
 				}
 			}
 		}
@@ -453,7 +445,18 @@ public class SearchUICore {
 		}
 	}
 
-	
+	public static void updateSearchResultAddress(SearchResult s, Amenity amenity, String dominatedCity) {
+		String city = s.cityName == null ? "" : s.cityName;
+		String mainCity = getMainCityName(city);
+		if (Algorithms.isEmpty(amenity.getStreetName())) {
+			s.addressName = city;
+		} else {
+			String hno = amenity.getHousenumber();
+			String addr = amenity.getStreetName() + (Algorithms.isEmpty(hno) ? "" : " " + hno);
+			s.addressName = createAddressString(s.cityName, mainCity, dominatedCity, addr);
+		}
+	}
+
 	public MapPoiTypes getPoiTypes() {
 		return poiTypes;
 	}

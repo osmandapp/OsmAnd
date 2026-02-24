@@ -443,7 +443,7 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 		}
 	}
 
-	private fun setupInitTranslation(){
+	private fun setupInitTranslation() {
 		if (isPortrait) {
 			return
 		}
