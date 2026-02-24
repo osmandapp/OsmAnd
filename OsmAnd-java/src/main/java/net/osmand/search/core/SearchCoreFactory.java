@@ -88,14 +88,14 @@ public class SearchCoreFactory {
 	// context less (slow)
 	public static final int SEARCH_ADDRESS_BY_NAME_API_PRIORITY = 500;
 	public static final int SEARCH_ADDRESS_BY_NAME_API_PRIORITY_RADIUS2 = 500;
+	// results priority
 	public static final int SEARCH_ADDRESS_BY_NAME_PRIORITY = 500;
 	public static final int SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2 = 500;
 
 	// context less (slower)
-	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 600;
-	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 600;
+	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 500;
+	// api priority
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 600;
-	
 	public static final int SEARCH_ADDRESS_BY_NAME_LONG_API_PRIORITY = 700;
 	
 	private static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
