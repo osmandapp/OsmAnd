@@ -70,7 +70,7 @@ public class QuickSearchHelper implements ResourceListener {
 	public static final int SEARCH_FAVORITE_API_CATEGORY_PRIORITY = 150;
 	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 150;
 	public static final int SEARCH_FAVORITE_CATEGORY_PRIORITY = 151;
-	public static final int SEARCH_WPT_API_PRIORITY = 150;
+	public static final int SEARCH_WPT_API_PRIORITY = 600;
 	public static final int SEARCH_WPT_OBJECT_PRIORITY = 152;
 	public static final int SEARCH_TRACK_API_PRIORITY = 600;
 	public static final int SEARCH_TRACK_OBJECT_PRIORITY = 153;
