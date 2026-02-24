@@ -57,14 +57,14 @@ object OrganizeByRangeStrategy : OrganizeByStrategy {
 		step: Double
 	): Int? {
 		val value: Comparable<Any> = trackItem.dataItem?.getParameter(property) ?: return null
-		val valueInt = getInt(property.getComparableValue<Double>(value))
+		val valueInt = getDouble(property.getComparableValue<Double>(value))
 		return floor((valueInt / step)).toInt()
 	}
 
-	private fun getInt(value: Any?): Int {
+	private fun getDouble(value: Any?): Double {
 		return when (value) {
-			is Number -> value.toInt()
-			else -> value.toString().toDouble().toInt()
+			is Number -> value.toDouble()
+			else -> value.toString().toDouble()
 		}
 	}
 

@@ -1894,4 +1894,7 @@
     <string name="shared_string_edited">Uređeno</string>
     <string name="shared_string_added">Dodano</string>
     <string name="date_added">Dodano</string>
+    <string name="routing_attr_motor_type_diesel_name">Dizel</string>
+    <string name="obd_fuel_type_diesel">Dizel</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzin</string>
 </resources>

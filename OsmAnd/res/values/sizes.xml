@@ -286,6 +286,7 @@
 	<dimen name="content_padding_double">32dp</dimen>
 	<dimen name="content_padding_small">12dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
+	<dimen name="content_padding_half_inverted">-8dp</dimen>
 	<dimen name="content_padding_small_half">6dp</dimen>
 	<dimen name="content_padding_medium">9dp</dimen>
 	<dimen name="content_padding_round_medium">10dp</dimen>

@@ -6288,4 +6288,6 @@
     <string name="red_filter">Filter merah</string>
     <string name="astro_visible_objects">Objek tampak</string>
     <string name="astro_configure_view">Konfigurasi tampilan</string>
+    <string name="astronomy_plugin_name">Astronomi</string>
+    <string name="astro_min_magnitude">Magnitudo min.</string>
 </resources>

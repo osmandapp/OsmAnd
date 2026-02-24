@@ -5836,4 +5836,5 @@
     <string name="performance">Απόδοση</string>
     <string name="view_distance">Απόσταση θέασης</string>
     <string name="astronomy_plugin_name">Αστρονομία</string>
+    <string name="astro_min_magnitude">Ελάχιστο μέγεθος</string>
 </resources>

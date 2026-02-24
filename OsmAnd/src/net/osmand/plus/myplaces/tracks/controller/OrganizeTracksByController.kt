@@ -84,6 +84,7 @@ class OrganizeTracksByController(
 	private fun shouldAddParagraphDivider(type: OrganizeByType): Boolean {
 		return CollectionUtils.equalsToAny(
 			type,
+			OrganizeByType.ACTIVITY,
 			OrganizeByType.AVG_ALTITUDE, OrganizeByType.SENSOR_SPEED_AVG,
 			OrganizeByType.HEART_RATE_AVG, OrganizeByType.CADENCE_AVG, OrganizeByType.POWER_AVG
 		)

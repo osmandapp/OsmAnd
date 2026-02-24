@@ -5936,4 +5936,7 @@
     <string name="level_of_details">Detaljnivå</string>
     <string name="pin_folder">Fest mappe</string>
     <string name="unpin_folder">Løsne mappe</string>
+    <string name="astro_min_magnitude">Min. magnitude</string>
+    <string name="stars_articles">Stjerneartikler</string>
+    <string name="astronomy_plugin_name">Astronomi</string>
 </resources>

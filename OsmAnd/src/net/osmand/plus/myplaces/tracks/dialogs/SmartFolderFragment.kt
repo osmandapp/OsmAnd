@@ -73,16 +73,6 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 			}.create())
 
 		val generalViewMode = organizedGroup == null
-		if (generalViewMode) {
-			items.add(PopUpMenuItem.Builder(app)
-				.setTitleId(R.string.organize_by)
-				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_tracks_organize))
-				.setOnClickListener {
-					showOrganizeByDialog(smartFolder.getId())
-				}
-				.showTopDivider(true)
-				.create())
-		}
 
 		items.add(PopUpMenuItem.Builder(app)
 			.setTitleId(R.string.shared_string_refresh)
@@ -100,6 +90,17 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 				.setOnClickListener {
 					editFilters()
 				}
+				.create())
+		}
+
+		if (generalViewMode) {
+			items.add(PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.organize_by)
+				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_tracks_organize))
+				.setOnClickListener {
+					showOrganizeByDialog(smartFolder.getId())
+				}
+				.showTopDivider(true)
 				.create())
 		}
 

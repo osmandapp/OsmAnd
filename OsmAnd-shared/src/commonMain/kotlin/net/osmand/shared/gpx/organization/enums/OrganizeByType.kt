@@ -29,7 +29,7 @@ enum class OrganizeByType(
 		nameResId = "duration",
 		filterType = TrackFilterType.DURATION,
 		category = OrganizeByCategory.GENERAL,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 60),
 		strategy = OrganizeByRangeStrategy
 	),
 	TIME_IN_MOTION(
@@ -37,7 +37,7 @@ enum class OrganizeByType(
 		nameResId = "moving_time",
 		filterType = TrackFilterType.TIME_IN_MOTION,
 		category = OrganizeByCategory.GENERAL,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 60),
 		strategy = OrganizeByRangeStrategy
 	),
 	LENGTH(
@@ -45,7 +45,7 @@ enum class OrganizeByType(
 		nameResId = "shared_string_length",
 		filterType = TrackFilterType.LENGTH,
 		category = OrganizeByCategory.GENERAL,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 100),
 		strategy = OrganizeByRangeStrategy
 	),
 
@@ -80,7 +80,7 @@ enum class OrganizeByType(
 		nameResId = "organize_by_max_speed",
 		filterType = TrackFilterType.MAX_SPEED,
 		category = OrganizeByCategory.SPEED,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 50),
 		strategy = OrganizeByRangeStrategy
 	),
 	AVG_SPEED(
@@ -88,7 +88,7 @@ enum class OrganizeByType(
 		nameResId = "avg_speed",
 		filterType = TrackFilterType.AVERAGE_SPEED,
 		category = OrganizeByCategory.SPEED,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 50),
 		strategy = OrganizeByRangeStrategy
 	),
 
@@ -132,7 +132,7 @@ enum class OrganizeByType(
 		nameResId = "max_sensor_speed",
 		filterType = TrackFilterType.MAX_SENSOR_SPEED,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 50),
 		strategy = OrganizeByRangeStrategy
 	),
 	SENSOR_SPEED_AVG(
@@ -140,7 +140,7 @@ enum class OrganizeByType(
 		nameResId = "avg_sensor_speed",
 		filterType = TrackFilterType.AVERAGE_SENSOR_SPEED,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 50),
 		strategy = OrganizeByRangeStrategy
 	),
 	HEART_RATE_MAX(

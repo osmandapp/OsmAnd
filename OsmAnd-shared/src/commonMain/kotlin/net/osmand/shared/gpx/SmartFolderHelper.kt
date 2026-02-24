@@ -17,7 +17,11 @@ import net.osmand.shared.gpx.filters.TrackFilterList
 import net.osmand.shared.gpx.filters.TrackFiltersHelper
 import net.osmand.shared.gpx.organization.OrganizeByParams
 import net.osmand.shared.gpx.organization.OrganizeByRangeParams
+import net.osmand.shared.gpx.organization.OrganizeTracksResourceMapper
 import net.osmand.shared.io.KFile
+import net.osmand.shared.settings.enums.AltitudeMetrics
+import net.osmand.shared.settings.enums.MetricsConstants
+import net.osmand.shared.settings.enums.SpeedConstants
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.PlatformUtil
@@ -25,6 +29,9 @@ import net.osmand.shared.util.PlatformUtil
 object SmartFolderHelper {
 
 	private const val TRACK_FILTERS_SETTINGS_PREF = "track_filters_settings_pref"
+	private const val METRIC_SYSTEM_PREF = "default_metric_system"
+	private const val ALTITUDE_SYSTEM_PREF = "altitude_metrics"
+	private const val SPEED_SYSTEM_PREF = "default_speed_system"
 
 	private var smartFolderCollection: List<SmartFolder> = listOf()
 	private var allAvailableTrackItems = HashSet<TrackItem>()
@@ -34,6 +41,21 @@ object SmartFolderHelper {
 	private val settingsChangedListener = object : KStateChangedListener<String> {
 		override fun stateChanged(change: String) {
 			onSettingsChanged()
+		}
+	}
+	private val metricSystemListener = object : KStateChangedListener<MetricsConstants> {
+		override fun stateChanged(change: MetricsConstants) {
+			onUnitsSettingsChanged()
+		}
+	}
+	private val altitudeSystemListener = object : KStateChangedListener<AltitudeMetrics> {
+		override fun stateChanged(change: AltitudeMetrics) {
+			onUnitsSettingsChanged()
+		}
+	}
+	private val speedSystemListener = object : KStateChangedListener<SpeedConstants> {
+		override fun stateChanged(change: SpeedConstants) {
+			onUnitsSettingsChanged()
 		}
 	}
 
@@ -59,6 +81,9 @@ object SmartFolderHelper {
 	init {
 		osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "", global = true, shared = true)
 		osmAndSettings.addStringPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
+		osmAndSettings.addEnumPreferenceListener(METRIC_SYSTEM_PREF, metricSystemListener)
+		osmAndSettings.addEnumPreferenceListener(ALTITUDE_SYSTEM_PREF, altitudeSystemListener)
+		osmAndSettings.addEnumPreferenceListener(SPEED_SYSTEM_PREF, speedSystemListener)
 		readSettings()
 	}
 
@@ -66,6 +91,14 @@ object SmartFolderHelper {
 		if (!isWritingSettings) {
 			updateSmartFolderSettings()
 		}
+	}
+
+	fun onUnitsSettingsChanged() {
+		OrganizeTracksResourceMapper.clearCache()
+		for (smartFolder in smartFolderCollection) {
+			smartFolder.invalidateCache()
+		}
+		notifyUpdateListeners()
 	}
 
 	private fun readSettings() {
@@ -241,8 +274,11 @@ object SmartFolderHelper {
 						}
 					}
 				}
+
 				if (trackAccepted) {
-					smartFolder.addTrackItem(item)
+					smartFolder.addTrackItem(item, forceInvalidate = true)
+				} else {
+					smartFolder.removeTrackItem(item)
 				}
 			}
 		}
