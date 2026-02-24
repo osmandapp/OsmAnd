@@ -29,7 +29,11 @@ public class GeneratePreferencesDatabaseTest extends AndroidTest {
 	@Test
 	public void generateDatabaseAndWaitForCompletion() {
 		// FK-TODO: Remove hardcoded values, use parameters
-		setLocale(Locale.CHINESE);
+		generateDatabaseAndWaitForCompletion(Locale.GERMAN);
+	}
+
+	private void generateDatabaseAndWaitForCompletion(final Locale locale) {
+		setLocale(locale);
 		enableAvailablePlugins();
 		clickSearchButton(app);
 		onView(searchView()).perform(replaceText("tst"), closeSoftKeyboard());
