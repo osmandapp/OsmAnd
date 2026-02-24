@@ -319,11 +319,7 @@ public class SearchResult {
 	}
 
 	public double getSearchDistance(LatLon location) {
-		double distance = 0;
-		if (location != null && this.location != null) {
-			distance = MapUtils.getDistance(location, this.location);
-		}
-		return priority - 1 / (1 + priorityDistance * distance);
+		return getSearchDistance(location, priorityDistance);
 	}
 
 	public double getSearchDistance(LatLon location, double pd) {
@@ -331,7 +327,7 @@ public class SearchResult {
 		if (location != null && this.location != null) {
 			distance = MapUtils.getDistance(location, this.location);
 		}
-		return priority - 1 / (1 + pd * distance);
+		return pd * distance / 1000;
 	}
 
 	@Override
