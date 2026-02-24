@@ -228,6 +228,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				TripRecordingMaxSpeedWidgetState maxSpeedWidgetState = new TripRecordingMaxSpeedWidgetState(app, customId, widgetType);
 				yield new TripRecordingMaxSpeedWidget(mapActivity, maxSpeedWidgetState, widgetType, customId, widgetsPanel);
 			}
+			case TRIP_RECORDING_AVG_SPEED -> {
+				TripRecordingAvgSpeedWidgetState avgSpeedWidgetState = new TripRecordingAvgSpeedWidgetState(app, customId, widgetType);
+				yield new TripRecordingAvgSpeedWidget(mapActivity, avgSpeedWidgetState, widgetType, customId, widgetsPanel);
+			}
+			case TRIP_RECORDING_MOVING_TIME -> {
+				TripRecordingMovingTimeWidgetState movingTimeWidgetState = new TripRecordingMovingTimeWidgetState(app, customId, widgetType);
+				yield new TripRecordingMovingTimeWidget(mapActivity, movingTimeWidgetState, widgetType, customId, widgetsPanel);
+			}
 			default -> null;
 		};
 	}

@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_trip_average">Trip average</string>
+    <string name="trip_recording_avg_speed_widget_description">Shows the average speed of the current trip, or the average speed during the last uphill or downhill section.</string>
+    <string name="trip_recording_moving_time_widget_description">Shows the currently recorded moving time, or the time for the last uphill and downhill.</string>
+    <string name="trip_recording_moving_time">Moving time</string>
     <plurals name="tracks_count">
         <item quantity="one">%d track</item>
         <item quantity="other">%d tracks</item>
