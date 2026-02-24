@@ -2266,7 +2266,7 @@
     <string name="edit_line">Править линию</string>
     <string name="add_point_before">Добавить точку перед</string>
     <string name="add_point_after">Добавить точку после</string>
-    <string name="shared_string_options">Параметры</string>
+    <string name="shared_string_options">Опции</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd соединит точки с маршрутом для выбранного профиля.</string>
     <string name="measurement_tool_save_as_new_track_descr">Сохранить точки, как точки маршрута или как линию.</string>
     <string name="choose_navigation_type">Выберите профиль навигации</string>
@@ -2279,7 +2279,7 @@
     <string name="yesterday">Вчера</string>
     <string name="last_seven_days">За последние 7 дней</string>
     <string name="this_year">В этом году</string>
-    <string name="plan_route">Проект маршрута</string>
+    <string name="plan_route">Планирование маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
     <string name="move_to_history">Переместить в историю</string>
     <string name="group_will_be_removed_after_restart">Группа будет выключена при следующем запуске приложения.</string>
@@ -3440,7 +3440,7 @@
     <string name="add_to_a_track">Добавить к треку</string>
     <string name="set_working_days_to_continue">Для продолжения задайте рабочие дни</string>
     <string name="route_between_points">Маршрут между точками</string>
-    <string name="plan_a_route">Проект маршрута</string>
+    <string name="plan_a_route">Планирование маршрута</string>
     <string name="gpx_split_interval_none_descr">Выберите способ разбиения: по времени или по расстоянию.</string>
     <string name="gpx_split_interval_descr">Выберите интервал, через который будут отображаться метки с расстоянием или временем на треке.</string>
     <string name="shared_string_custom">Своё значение</string>
@@ -3517,7 +3517,7 @@
     <string name="shared_string_is_saved">сохранён</string>
     <string name="one_point_error">Добавьте хотя бы две точки.</string>
     <string name="shared_string_redo">Повторить</string>
-    <string name="release_3_8">• Обновлённая функция \"Проект маршрута\" позволяет применять к сегментам разные режимы навигации и настраивать привязку к дорогам \n \n • Новые настройки вида треков: выбор цвета и толщины линии, указатели направления, метки начала и конца маршрута \n \n • Повышенная видимость точек веломаршрутов \n \n • Треки теперь выбираются нажатием, у них есть контекстное меню с основной информацией. \n \n • Улучшенные алгоритмы поиска \n \n • Улучшенные настройки ведения по треку в Навигации \n \n • Исправлены проблемы с импортом/экспортом настроек профиля</string>
+    <string name="release_3_8">• Обновлённая функция \"Планирование маршрута\" позволяет применять к сегментам разные режимы навигации и настраивать привязку к дорогам \n \n • Новые настройки вида треков: выбор цвета и толщины линии, указатели направления, метки начала и конца маршрута \n \n • Повышенная видимость точек веломаршрутов \n \n • Треки теперь выбираются нажатием, у них есть контекстное меню с основной информацией. \n \n • Улучшенные алгоритмы поиска \n \n • Улучшенные настройки ведения по треку в Навигации \n \n • Исправлены проблемы с импортом/экспортом настроек профиля</string>
     <string name="sort_last_modified">По дате</string>
     <string name="sort_name_descending">По имени: Я–А</string>
     <string name="sort_name_ascending">По имени: А–Я</string>
@@ -4907,7 +4907,7 @@
     <string name="help_article_navigation_routing_straight_line_routing_name">Прямая линия (воздушное судно)</string>
     <string name="help_article_navigation_routing_train_routing_name">Поезд</string>
     <string name="help_article_personal_import_export_name">Импорт/экспорт</string>
-    <string name="help_article_plan_route_name">Проектирование маршрута</string>
+    <string name="help_article_plan_route_name">Планирование маршрута</string>
     <string name="help_article_plan_route_coordinate_input_name">Ввод координат</string>
     <string name="help_article_plan_route_web_name">Веб-планировщик маршрутов</string>
     <string name="help_article_purchases_android_name">Покупки на Android</string>
@@ -5920,4 +5920,12 @@
     <string name="level_of_details">Детализация</string>
     <string name="performance">Производительность</string>
     <string name="view_distance">Дальность видимости</string>
+    <string name="astro_min_magnitude">Мин. величина</string>
+    <string name="building_3d_day_color_content_desc">Тема цвета 3d-зданий днём</string>
+    <string name="building_3d_night_color_content_desc">Тема цвета 3d-зданий ночью</string>
+    <string name="building_3d_low_details_content_desc">Низкая детализация 3D-зданий</string>
+    <string name="building_3d_high_details_content_desc">Высокая детализация 3D-зданий</string>
+    <string name="building_3d_near_distance_content_desc">3D-здания вблизи</string>
+    <string name="building_3d_far_distance_content_desc">3D-здания издалека</string>
+    <string name="astronomy_plugin_name">Астрономия</string>
 </resources>
