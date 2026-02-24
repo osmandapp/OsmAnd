@@ -378,7 +378,7 @@ tasks.register('appStart', Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'
 }
 
-// execute this task using: ./gradlew uninstallNightlyFreeLegacyFatDebug installNightlyFreeLegacyFatDebug installNightlyFreeLegacyFatDebugAndroidTest generateAndPullPreferencesDatabase -PgeneratePreferencesDb=true
+// execute this task using: ./gradlew uninstallNightlyFreeLegacyFatDebug installNightlyFreeLegacyFatDebug installNightlyFreeLegacyFatDebugAndroidTest generateAndPullPreferencesDatabase -PgeneratePreferencesDb=true -PtestLocale=de
 final String generateAndPullPreferencesDatabaseTaskName = 'generateAndPullPreferencesDatabase'
 tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
     group = "Database"
@@ -389,14 +389,16 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
 
     onlyIf { gradle.startParameter.taskNames.contains(generateAndPullPreferencesDatabaseTaskName) }
 
-    ext {
-        // dbNameOnDevice MUST match PreferencesDatabaseFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile().databaseFileName()
-        dbNameOnDevice = "searchable_preferences.db"
-        // assetPathAndName MUST match PreferencesDatabaseFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile().prepackagedPreferencesDatabase().get().databaseAssetFile().getPath()
-        assetPathAndName = "database/searchable_preferences_prepackaged.db"
-        testClassName = "net.osmand.plus.settings.fragments.search.GeneratePreferencesDatabaseTest"
-    }
-    workingDir project.rootDir
+	ext {
+		dbNameOnDevice = "searchable_preferences.db"
+		def baseAssetPath = "database/searchable_preferences_prepackaged"
+		def localeSuffix = project.hasProperty('testLocale') ? "_${project.property('testLocale')}" : ""
+		assetPathAndName = "${baseAssetPath}${localeSuffix}.db"
+		testClassName = "net.osmand.plus.settings.fragments.search.GeneratePreferencesDatabaseTest"
+		// FK-TODO: rename testLocale to locale
+		testLocaleArgs = project.hasProperty('testLocale') ? "-e testLocale ${project.property('testLocale')}" : ""
+	}
+	workingDir project.rootDir
     commandLine 'sh', '-c', """
         set -e
         appPackage="net.osmand.dev"
@@ -405,6 +407,7 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
         assetPathAndName="${ext.assetPathAndName}"
         testClassName="${ext.testClassName}"
         absoluteLocalAssetPath="${project.projectDir}/assets/\${assetPathAndName}"
+        testLocaleArgs="${ext.testLocaleArgs}"
         
         echo ">>> Waiting for package manager to recognize the app..."
         WAIT_SECONDS=0
@@ -421,7 +424,7 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
         echo ">>> Package found after \${WAIT_SECONDS} seconds."
         mkdir -p "\$(dirname "\${absoluteLocalAssetPath}")"
         echo ">>> Starting test to create database on device..."
-        INSTRUMENTATION_OUTPUT=\$("\${adb}" shell am instrument -w -e class \${testClassName} \${appPackage}.test/androidx.test.runner.AndroidJUnitRunner 2>&1)
+        INSTRUMENTATION_OUTPUT=\$("\${adb}" shell am instrument -w -e class \${testClassName} \${testLocaleArgs} \${appPackage}.test/androidx.test.runner.AndroidJUnitRunner 2>&1)
         echo "--- Test Output Start ---"
         echo "\${INSTRUMENTATION_OUTPUT}"
         echo "--- Test Output End ---"

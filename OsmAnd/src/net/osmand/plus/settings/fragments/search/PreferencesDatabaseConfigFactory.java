@@ -9,6 +9,7 @@ import com.google.common.graph.ImmutableValueGraph;
 import java.io.File;
 import java.util.Optional;
 
+import de.KnollFrank.lib.settingssearch.common.LanguageCode;
 import de.KnollFrank.lib.settingssearch.common.graph.Tree;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PreferencesDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PrepackagedPreferencesDatabase;
@@ -19,21 +20,20 @@ import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceS
 
 public class PreferencesDatabaseConfigFactory {
 
-	public static final String SEARCHABLE_PREFERENCES_DB = "searchable_preferences.db";
-
 	public static PreferencesDatabaseConfig<Configuration> createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile() {
 		return new PreferencesDatabaseConfig<>(
-				SEARCHABLE_PREFERENCES_DB,
+				"searchable_preferences.db",
 				Optional.empty(),
 				PreferencesDatabaseConfig.JournalMode.TRUNCATE);
 	}
 
-	public static PreferencesDatabaseConfig<Configuration> createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile() {
+	public static PreferencesDatabaseConfig<Configuration> createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(final LanguageCode languageCode) {
+		final File databaseAssetFile = new File(String.format("database/searchable_preferences_prepackaged_%s.db", languageCode.code()));
 		return new PreferencesDatabaseConfig<>(
-				SEARCHABLE_PREFERENCES_DB,
+				databaseAssetFile.getName(),
 				Optional.of(
 						new PrepackagedPreferencesDatabase<>(
-								new File("database/searchable_preferences_prepackaged.db"),
+								databaseAssetFile,
 								new SearchablePreferenceScreenTreeTransformer<>() {
 
 									@Override

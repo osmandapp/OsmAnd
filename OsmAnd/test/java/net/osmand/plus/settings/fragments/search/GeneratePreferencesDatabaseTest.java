@@ -6,13 +6,17 @@ import static androidx.test.espresso.action.ViewActions.replaceText;
 import static net.osmand.plus.settings.fragments.search.SearchButtonClick.clickSearchButton;
 import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.searchView;
 
+import android.os.Bundle;
+
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.test.common.AndroidTest;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,14 +30,20 @@ public class GeneratePreferencesDatabaseTest extends AndroidTest {
 	@Rule
 	public ActivityScenarioRule<MapActivity> activityRule = new ActivityScenarioRule<>(MapActivity.class);
 
-	@Test
-	public void generateDatabaseAndWaitForCompletion() {
-		// FK-TODO: Remove hardcoded values, use parameters
-		generateDatabaseAndWaitForCompletion(Locale.GERMAN);
+	// FK-TODO: refactor
+	@Before
+	public void setLocaleFromArguments() {
+		final Bundle arguments = InstrumentationRegistry.getArguments();
+		if (arguments.containsKey("testLocale")) {
+			String localeString = arguments.getString("testLocale");
+			if (localeString != null && !localeString.isEmpty()) {
+				setLocale(new Locale(localeString));
+			}
+		}
 	}
 
-	private void generateDatabaseAndWaitForCompletion(final Locale locale) {
-		setLocale(locale);
+	@Test
+	public void generateDatabaseAndWaitForCompletion() {
 		enableAvailablePlugins();
 		clickSearchButton(app);
 		onView(searchView()).perform(replaceText("tst"), closeSoftKeyboard());

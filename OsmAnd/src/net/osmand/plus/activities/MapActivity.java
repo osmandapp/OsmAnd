@@ -159,6 +159,8 @@ import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import de.KnollFrank.lib.settingssearch.common.LanguageCode;
+import de.KnollFrank.lib.settingssearch.common.Locales;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PreferencesDatabase;
 
@@ -961,7 +963,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				.initPreferencesDatabase(
 						BuildConfig.GENERATE_PREFERENCES_DATABASE_FOR_ASSET ?
 								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile() :
-								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(),
+								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(LanguageCode.from(Locales.getCurrentLocale(getResources()))),
 						new ActualConfigurationProvider().getActualConfiguration(),
 						new TreeProcessorFactory(),
 						new ConfigurationBundleConverter(),
