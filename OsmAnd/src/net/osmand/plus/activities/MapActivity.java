@@ -1016,7 +1016,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		stopped = true;
 		lockHelper.onStop(this);
 		extendedMapActivity.onStop(this);
-		fragmentsHelper.onStop();
 
 		super.onStop();
 	}
