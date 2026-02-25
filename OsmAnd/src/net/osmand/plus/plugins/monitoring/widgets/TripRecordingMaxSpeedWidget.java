@@ -10,7 +10,6 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingMaxSpeedWidgetState.MaxSpeedMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.ColorUtilities;
@@ -22,7 +21,6 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.shared.gpx.ElevationDiffsCalculator.SlopeInfo;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +28,6 @@ import java.util.List;
 public class TripRecordingMaxSpeedWidget extends BaseRecordingWidget {
 	private final TripRecordingMaxSpeedWidgetState widgetState;
 
-	protected final SavingTrackHelper savingTrackHelper;
 	protected double cachedMaxSpeed = -1;
 	private int lastMaxSpeed;
 	private boolean forceUpdate;
@@ -39,7 +36,6 @@ public class TripRecordingMaxSpeedWidget extends BaseRecordingWidget {
 	                                   @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, widgetType, customId, widgetsPanel);
 		this.widgetState = widgetState;
-		savingTrackHelper = app.getSavingTrackHelper();
 		updateWidgetView();
 		updateInfo(null);
 	}
@@ -127,13 +123,13 @@ public class TripRecordingMaxSpeedWidget extends BaseRecordingWidget {
 		return R.string.ltr_or_rtl_combine_via_colon;
 	}
 
-	@NonNull
-	protected GpxTrackAnalysis getAnalysis() {
-		return savingTrackHelper.getCurrentTrack().getTrackAnalysis(app);
-	}
-
 	@Nullable
 	public OsmandPreference<MaxSpeedMode> getMaxSpeedModeOsmandPreference() {
 		return widgetState != null ? widgetState.getMaxSpeedModePreference() : null;
+	}
+
+	@Override
+	public boolean isMetricSystemDepended() {
+		return true;
 	}
 }

@@ -5,6 +5,8 @@ import static net.osmand.plus.helpers.IntentHelper.REQUEST_CODE_CREATE_FILE;
 import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
 import static net.osmand.plus.mapcontextmenu.other.ShareMenu.KEY_SAVE_FILE_NAME;
 import static net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment.FAV_SEARCH_QUERY_KEY;
+import static net.osmand.plus.myplaces.favorites.dialogs.SearchFavoriteFragment.FAVORITE_SEARCH_GROUP_KEY;
+import static net.osmand.plus.myplaces.favorites.dialogs.SearchFavoriteFragment.FAVORITE_SEARCH_QUERY_KEY;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
@@ -23,9 +26,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment;
-import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
+import net.osmand.plus.myplaces.favorites.dialogs.SearchFavoriteFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -81,6 +85,14 @@ public class MyPlacesActivity extends TabActivity {
 					FavoritesSearchFragment.showInstance(this, searchQuery);
 				}
 
+				if (bundle != null && bundle.containsKey(FAVORITE_SEARCH_QUERY_KEY) && bundle.containsKey(FAVORITE_SEARCH_GROUP_KEY)) {
+					String searchQuery = bundle.getString(FAVORITE_SEARCH_QUERY_KEY, "");
+					String groupKey = bundle.getString(FAVORITE_SEARCH_GROUP_KEY, "");
+					FragmentManager manager = getSupportFragmentManager();
+
+					SearchFavoriteFragment.showInstance(manager, null, new ArrayList<>(), groupKey, searchQuery);
+				}
+
 				if (intent.hasExtra(MapActivity.INTENT_PARAMS)) {
 					intentParams = intent.getBundleExtra(MapActivity.INTENT_PARAMS);
 					int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
@@ -131,7 +143,7 @@ public class MyPlacesActivity extends TabActivity {
 	@NonNull
 	private List<TabItem> getTabItems() {
 		List<TabItem> mTabs = new ArrayList<>();
-		mTabs.add(getTabIndicator(FAV_TAB, FavoritesTreeFragment.class));
+		mTabs.add(getTabIndicator(FAV_TAB, FavoriteFoldersFragment.class));
 		mTabs.add(getTabIndicator(GPX_TAB, AvailableTracksFragment.class));
 		PluginsHelper.addMyPlacesTabPlugins(this, mTabs, getIntent());
 		return mTabs;

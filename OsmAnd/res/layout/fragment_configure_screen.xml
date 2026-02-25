@@ -80,6 +80,8 @@
 			android:id="@+id/layout_tab_layout"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:background="?attr/list_background_color"
+			app:tabBackground="?attr/list_background_color"
 			app:tabGravity="fill"
 			app:tabIndicatorColor="?attr/active_color_primary"
 			app:tabMaxWidth="0dp"
@@ -94,19 +96,10 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 
-		<ScrollView
-			android:id="@+id/scroll_view"
+		<androidx.viewpager2.widget.ViewPager2
+			android:id="@+id/view_pager"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent">
-
-			<LinearLayout
-				android:id="@+id/cards_container"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginBottom="@dimen/content_padding"
-				android:orientation="vertical" />
-
-		</ScrollView>
+			android:layout_height="match_parent" />
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/shadow_view"

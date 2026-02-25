@@ -20,11 +20,8 @@ public abstract class MapObjectsMerger<T> {
 	public abstract List<T> merge(@NonNull List<T> originalObjects);
 
 	@NonNull
-	protected List<BaseDetailsObject> processObjects(@NonNull List<T> items,
-	                                                 @NonNull MergeStrategy<T> strategy) {
-
+	protected List<BaseDetailsObject> processObjects(@NonNull List<T> items, @NonNull MergeStrategy<T> strategy) {
 		List<BaseDetailsObject> merged = new ArrayList<>();
-
 		for (T item : items) {
 			Object object = strategy.unwrap(item);
 			List<BaseDetailsObject> overlapped = collectOverlappedObjects(object, merged);
@@ -50,18 +47,13 @@ public abstract class MapObjectsMerger<T> {
 	}
 
 	@NonNull
-	protected List<BaseDetailsObject> collectOverlappedObjects(
-			@NonNull Object object,
-			@NonNull List<BaseDetailsObject> detailsObjects) {
-
+	protected List<BaseDetailsObject> collectOverlappedObjects(@NonNull Object object, @NonNull List<BaseDetailsObject> detailsObjects) {
 		List<BaseDetailsObject> overlapped = new ArrayList<>();
-
 		for (BaseDetailsObject detailsObject : detailsObjects) {
 			if (detailsObject.overlapsWith(object)) {
 				overlapped.add(detailsObject);
 			}
 		}
-
 		return overlapped;
 	}
 

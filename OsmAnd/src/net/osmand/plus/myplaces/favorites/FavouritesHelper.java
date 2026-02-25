@@ -29,6 +29,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
 import net.osmand.plus.myplaces.favorites.add.AddFavoriteOptions;
 import net.osmand.plus.myplaces.favorites.add.AddFavoriteResult;
+import net.osmand.plus.myplaces.favorites.dialogs.FavoriteSortModesHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
@@ -59,6 +60,7 @@ public class FavouritesHelper {
 
 	private final OsmandApplication app;
 	private final FavouritesFileHelper fileHelper;
+	private final FavoriteSortModesHelper favoriteSortModesHelper;
 
 	private List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 	private Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<>();
@@ -73,6 +75,7 @@ public class FavouritesHelper {
 	public FavouritesHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		fileHelper = new FavouritesFileHelper(app);
+		favoriteSortModesHelper = new FavoriteSortModesHelper(app);
 	}
 
 	public long getLastUploadedTime() {
@@ -86,6 +89,11 @@ public class FavouritesHelper {
 	@NonNull
 	public FavouritesFileHelper getFileHelper() {
 		return fileHelper;
+	}
+
+	@NonNull
+	public FavoriteSortModesHelper getFavoriteSortModesHelper() {
+		return favoriteSortModesHelper;
 	}
 
 	@NonNull
@@ -522,6 +530,35 @@ public class FavouritesHelper {
 		return true;
 	}
 
+	public void editFavouritesGroup(@NonNull List<FavouritePoint> points, @NonNull String newCategory) {
+		for (FavouritePoint point : points) {
+			String oldCategory = point.getCategory();
+			point.setCategory(newCategory);
+			if (!oldCategory.equals(newCategory)) {
+				FavoriteGroup old = flatGroups.get(oldCategory);
+				if (old != null) {
+					old.getPoints().remove(point);
+				}
+				FavoriteGroup pg = getOrCreateGroup(point);
+				point.setVisible(pg.isVisible());
+				if (SpecialPointType.PARKING == point.getSpecialPointType()) {
+					point.setColor(ContextCompat.getColor(app, R.color.parking_icon_background));
+				} else {
+					if (point.getColor() == 0) {
+						point.setColor(pg.getColor());
+					}
+				}
+				pg.getPoints().add(point);
+			}
+		}
+
+		sortAll();
+		saveCurrentPointsIntoFile(true);
+		if (!Algorithms.isEmpty(points)) {
+			runSyncWithMarkers(getOrCreateGroup(points.get(0)));
+		}
+	}
+
 	private void editAddressDescription(@NonNull FavouritePoint p, @Nullable String address) {
 		p.setAddress(address);
 		saveCurrentPointsIntoFile(true);
@@ -605,6 +642,9 @@ public class FavouritesHelper {
 		Map<String, FavoriteGroup> tmpFlatGroups = new LinkedHashMap<>(flatGroups);
 		tmpFlatGroups.put(group.getName(), group);
 		flatGroups = tmpFlatGroups;
+		if (FavoriteGroup.isBaseFavoriteOrPersonalGroup(group.getName())){
+			group.setPinned(true);
+		}
 		return group;
 	}
 
@@ -813,6 +853,15 @@ public class FavouritesHelper {
 			}
 			group.setVisible(visible);
 			runSyncWithMarkers(group);
+		}
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile(true);
+		}
+	}
+
+	public void updateGroupPin(@NonNull FavoriteGroup group, boolean pinned, boolean saveImmediately) {
+		if (group.isPinned() != pinned) {
+			group.setPinned(pinned);
 		}
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile(true);

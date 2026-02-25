@@ -137,8 +137,7 @@
 	<dimen name="map_alarm_bottom_text_margin">8dp</dimen>
 
 
-	<dimen name="map_alarm_bottom_margin">87dp</dimen>
-	<dimen name="map_alarm_bottom_margin_land">57dp</dimen>
+	<dimen name="map_alarm_bottom_margin">68dp</dimen>
 	<dimen name="map_button_shadow_height">85dp</dimen>
 	<dimen name="map_button_shadow_width">56dp</dimen>
 	<dimen name="map_button_shadow_margin">4dp</dimen>
@@ -287,6 +286,7 @@
 	<dimen name="content_padding_double">32dp</dimen>
 	<dimen name="content_padding_small">12dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
+	<dimen name="content_padding_half_inverted">-8dp</dimen>
 	<dimen name="content_padding_small_half">6dp</dimen>
 	<dimen name="content_padding_medium">9dp</dimen>
 	<dimen name="content_padding_round_medium">10dp</dimen>

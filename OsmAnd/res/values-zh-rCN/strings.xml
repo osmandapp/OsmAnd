@@ -5004,7 +5004,7 @@
     <string name="help_article_navigation_routing_car_based_routing_name">汽车路线规划（卡车、摩托车）</string>
     <string name="help_article_navigation_routing_boat_navigation_name">船只航线规划</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">自行车路线规划（山地车）</string>
-    <string name="live_monitoring_adress_descr">使用参数语法指定网页地址： lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">使用参数语法指定网页地址： lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="rendering_value_defaultMedium_name">默认（中等）</string>
     <string name="routing_attr_allow_via_ferrata_name">山腰路线（铁索攀岩）</string>
     <string name="shared_string_cache">缓存</string>
@@ -5872,8 +5872,7 @@
     <string name="miles">英里</string>
     <string name="mpg">英里/加仑</string>
     <string name="gpx_too_many_points_visible_warning">显示大量GPX轨迹将占用较高内存</string>
-    <string name="star_watcher_plugin_name">观星（测试中）</string>
-    <string name="star_watcher_plugin_description">星图，3D星图</string>
+    <string name="astronomy_plugin_description">星图，3D星图</string>
     <string name="astro_name_sun">太阳</string>
     <string name="astro_name_moon">月亮</string>
     <string name="astro_name_mercury">水星</string>

@@ -351,14 +351,15 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 		private final List<MapWidget> flatOrderedWidgets;
 
 		Row(@NonNull List<MapWidgetInfo> rowWidgets, @NonNull List<MapWidget> flatOrderedWidgets) {
-			this.view = inflate(UiUtilities.getThemedContext(getContext(), nightMode), R.layout.vertical_widget_row, null);
+			Context context = getContext();
+			this.view = inflate(UiUtilities.getThemedContext(context, nightMode), R.layout.vertical_widget_row, null);
 			this.bottomDivider = view.findViewById(R.id.bottom_divider);
 			this.topDivider = view.findViewById(R.id.top_divider);
 			this.rowContainer = view.findViewById(R.id.widgets_container);
 			this.flatOrderedWidgets = flatOrderedWidgets;
 
 			ApplicationMode appMode = settings.getApplicationMode();
-			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
 			for (int j = 0; j < rowWidgets.size(); j++) {
 				MapWidgetInfo widgetInfo = rowWidgets.get(j);
 				if (widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
@@ -390,13 +391,17 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 			updateFullRowState(enabledMapWidgets, visibleViewsInRowCount);
 			updateValueAlign(enabledMapWidgets, visibleViewsInRowCount);
 
-			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
+			Context context = getContext();
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
 			boolean transparentMode = app.getSettings().getTransparentMapThemePreference(layoutMode).get();
 			boolean lastRow = index == totalRows - 1;
 			boolean firstRow = index == 0;
 
-			boolean showTopDivider =  (visibleViewsInRowCount > 0 && rowWidgetsSupportBottomDivider) && (firstRow && !topPanel && transparentMode);
-			boolean showBottomDivider = (visibleViewsInRowCount > 0 && rowWidgetsSupportBottomDivider) && ((!lastRow || (topPanel && transparentMode)) || ((InsetsUtils.isEdgeToEdgeSupported() && AndroidUiHelper.isOrientationPortrait(app) && lastRow)));
+			boolean showTopDivider =  (visibleViewsInRowCount > 0 && rowWidgetsSupportBottomDivider)
+					&& (firstRow && !topPanel && transparentMode);
+			boolean showBottomDivider = (visibleViewsInRowCount > 0 && rowWidgetsSupportBottomDivider)
+					&& ((!lastRow || (topPanel && transparentMode))
+					|| ((InsetsUtils.isEdgeToEdgeSupported() && AndroidUiHelper.isOrientationPortrait(context) && lastRow)));
 
 			AndroidUiHelper.updateVisibility(bottomDivider, showBottomDivider);
 			AndroidUiHelper.updateVisibility(topDivider, showTopDivider);

@@ -595,20 +595,21 @@ class GpxTrackAnalysis {
 					}
 				}
 
-				var attributes = point.attributes
-				if (attributes == null) {
-					attributes = PointAttributes(distance, timeDiff.toFloat(), firstPoint, lastPoint).apply {
-						this.speed = speed
-						this.elevation = elevation
-					}
-				} else {
-					attributes.distance = distance
-					attributes.timeDiff = timeDiff.toFloat()
-					attributes.firstPoint = firstPoint
-					attributes.lastPoint = lastPoint
-					attributes.speed = speed
-					attributes.elevation = elevation
+				// Reuse existing PointAttributes to avoid per‑point allocation
+				val attributes = point.attributes ?: run {
+					val a = PointAttributes(0f, 0f, false, false)
+					point.attributes = a
+					a
 				}
+
+				// Update fields (no new object created)
+				attributes.distance = distance
+				attributes.timeDiff = timeDiff.toFloat()
+				attributes.firstPoint = firstPoint
+				attributes.lastPoint = lastPoint
+				attributes.speed = speed
+				attributes.elevation = elevation
+
 				addWptAttribute(point, attributes, pointsAnalyser)
 				if (attributes.sensorSpeed > 0 && !attributes.sensorSpeed.isInfinite()) {
 					_maxSensorSpeed = maxOf(attributes.sensorSpeed, _maxSensorSpeed)

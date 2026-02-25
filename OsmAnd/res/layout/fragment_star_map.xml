@@ -16,7 +16,7 @@
 			android:layout_height="0dp"
 			android:layout_weight="1">
 
-			<net.osmand.plus.plugins.astro.views.StarView
+			<net.osmand.plus.plugins.astronomy.views.StarView
 				android:id="@+id/star_view"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent" />
@@ -28,30 +28,17 @@
 				android:alpha="0.5"
 				android:visibility="gone" />
 
-			<ImageButton
-				android:id="@+id/star_chart_button"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="@dimen/map_button_size"
-				android:layout_marginStart="@dimen/content_padding"
-				android:layout_marginTop="@dimen/content_padding"
-				android:background="@drawable/btn_circle"
-				android:contentDescription="@string/star_charts_name"
-				android:elevation="4dp"
-				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toTopOf="parent"
-				app:srcCompat="@drawable/ic_layer_top"
-				app:tint="#5f6e7c" />
-
-			<ImageButton
+			<net.osmand.plus.plugins.astronomy.views.StarMapButton
 				android:id="@+id/search_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
-				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginBottom="@dimen/content_padding"
 				android:background="@drawable/btn_circle"
 				android:contentDescription="@string/shared_string_search"
 				android:elevation="4dp"
-				app:layout_constraintStart_toEndOf="@id/star_chart_button"
-				app:layout_constraintTop_toTopOf="@id/star_chart_button"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="@id/star_map_compass_button"
+				app:layout_constraintStart_toStartOf="@id/star_map_compass_button"
 				app:srcCompat="@drawable/ic_action_search_dark"
 				app:tint="#5f6e7c" />
 
@@ -60,25 +47,13 @@
 				layout="@layout/star_map_compass_button"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginTop="@dimen/content_padding"
 				android:elevation="4dp"
-				app:layout_constraintEnd_toEndOf="@id/star_chart_button"
-				app:layout_constraintStart_toStartOf="@id/star_chart_button"
-				app:layout_constraintTop_toBottomOf="@id/star_chart_button" />
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
 
-			<ImageButton
-				android:id="@+id/mode2d_button"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="@dimen/map_button_size"
-				android:layout_marginEnd="@dimen/content_padding"
-				android:background="@drawable/btn_circle"
-				android:elevation="4dp"
-				app:layout_constraintEnd_toStartOf="@id/star_map_button"
-				app:layout_constraintTop_toTopOf="@id/star_map_button"
-				app:srcCompat="@drawable/ic_action_celestial_path"
-				app:tint="#5f6e7c" />
-
-			<ImageButton
+			<net.osmand.plus.plugins.astronomy.views.StarMapButton
 				android:id="@+id/camera_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
@@ -92,21 +67,121 @@
 				app:srcCompat="@drawable/ic_action_device_camera"
 				app:tint="#5f6e7c" />
 
-			<ImageButton
+			<net.osmand.plus.plugins.astronomy.views.StarMapButton
 				android:id="@+id/settings_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
-				android:layout_marginTop="@dimen/content_padding"
 				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginBottom="@dimen/content_padding"
 				android:background="@drawable/btn_circle"
 				android:contentDescription="@string/shared_string_close"
 				android:elevation="4dp"
-				app:layout_constraintEnd_toStartOf="@id/close_button"
-				app:layout_constraintTop_toTopOf="parent"
-				app:srcCompat="@drawable/ic_action_settings"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:srcCompat="@drawable/ic_layer_top"
 				app:tint="#5f6e7c" />
 
-			<ImageButton
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/magnitude_filter_button"
+				android:layout_width="@dimen/map_button_size"
+				android:layout_height="76dp"
+				android:layout_marginBottom="@dimen/content_padding"
+				app:cardBackgroundColor="@android:color/white"
+				app:cardCornerRadius="26dp"
+				app:cardElevation="4dp"
+				app:strokeWidth="0dp"
+				app:layout_constraintBottom_toTopOf="@id/settings_button"
+				app:layout_constraintEnd_toEndOf="@id/settings_button"
+				app:layout_constraintStart_toStartOf="@id/settings_button">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:gravity="center"
+					android:orientation="vertical"
+					android:paddingTop="@dimen/content_padding_half"
+					android:paddingBottom="@dimen/content_padding_half">
+
+					<ImageView
+						android:id="@+id/magnitude_filter_icon"
+						android:layout_width="@dimen/standard_icon_size"
+						android:layout_height="@dimen/standard_icon_size"
+						android:contentDescription="@string/shared_string_settings"
+						app:srcCompat="@drawable/ic_action_stars"
+						app:tint="#5f6e7c" />
+
+					<TextView
+						android:id="@+id/magnitude_filter_text"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="@string/shared_string_two"
+						android:textColor="#5f6e7c"
+						android:textSize="@dimen/default_list_text_size"
+						android:layout_marginTop="4dp"
+						android:textStyle="bold" />
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
+
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/magnitude_slider_card"
+				android:layout_width="240dp"
+				android:layout_height="0dp"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:visibility="gone"
+				app:cardBackgroundColor="@android:color/white"
+				app:cardCornerRadius="@dimen/content_padding"
+				app:cardElevation="4dp"
+				app:strokeWidth="0dp"
+				app:layout_constraintBottom_toBottomOf="@id/magnitude_filter_button"
+				app:layout_constraintEnd_toStartOf="@id/magnitude_filter_button"
+				app:layout_constraintTop_toTopOf="@id/magnitude_filter_button">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:gravity="center_vertical"
+					android:orientation="vertical"
+					android:padding="@dimen/content_padding_half">
+
+					<RelativeLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+
+						<TextView
+							android:id="@+id/magnitude_slider_label"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:paddingStart="@dimen/content_padding_half"
+							android:paddingEnd="@dimen/content_padding_half"
+							android:layout_alignParentStart="true"
+							android:layout_toStartOf="@id/magnitude_slider_value"
+							android:text="@string/astro_min_magnitude"
+							android:textColor="#000000"
+							android:textSize="@dimen/default_list_text_size" />
+
+						<TextView
+							android:id="@+id/magnitude_slider_value"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:paddingStart="@dimen/content_padding_half"
+							android:paddingEnd="@dimen/content_padding_half"
+							android:layout_alignParentEnd="true"
+							android:text="5.0"
+							android:textColor="#5f6e7c"
+							android:textSize="@dimen/default_list_text_size" />
+					</RelativeLayout>
+
+					<SeekBar
+						android:id="@+id/magnitude_slider"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/content_padding_half"
+						android:max="110"
+						android:progress="100" />
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
+
+			<net.osmand.plus.plugins.astronomy.views.StarMapButton
 				android:id="@+id/close_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
@@ -120,21 +195,7 @@
 				app:srcCompat="@drawable/ic_action_close"
 				app:tint="#5f6e7c" />
 
-			<ImageButton
-				android:id="@+id/star_map_button"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="@dimen/map_button_size"
-				android:layout_marginEnd="@dimen/content_padding"
-				android:layout_marginBottom="@dimen/content_padding"
-				android:background="@drawable/btn_circle"
-				android:contentDescription="@string/star_map"
-				android:elevation="4dp"
-				app:layout_constraintBottom_toBottomOf="parent"
-				app:layout_constraintEnd_toEndOf="parent"
-				app:srcCompat="@drawable/ic_map"
-				app:tint="#5f6e7c" />
-
-			<ImageButton
+			<net.osmand.plus.plugins.astronomy.views.StarMapButton
 				android:id="@+id/ar_mode_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
@@ -152,14 +213,14 @@
 				android:id="@+id/time_control_card"
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/map_button_size"
-				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginBottom="@dimen/content_padding"
 				app:cardBackgroundColor="@android:color/white"
 				app:cardCornerRadius="26dp"
 				app:cardElevation="4dp"
 				app:strokeWidth="0dp"
 				app:layout_constraintBottom_toBottomOf="parent"
-				app:layout_constraintStart_toStartOf="parent">
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintEnd_toEndOf="parent">
 
 				<LinearLayout
 					android:layout_width="wrap_content"
@@ -169,7 +230,7 @@
 					android:paddingStart="4dp"
 					android:paddingEnd="4dp">
 
-					<com.google.android.material.button.MaterialButton
+					<net.osmand.plus.plugins.astronomy.views.StarMapTimeControlButton
 						android:id="@+id/time_control_button"
 						style="@style/Widget.MaterialComponents.Button.TextButton"
 						android:layout_width="wrap_content"
@@ -182,10 +243,10 @@
 						app:iconTint="#4285F4"
 						app:rippleColor="#154285F4" />
 
-					<ImageButton
+					<net.osmand.plus.plugins.astronomy.views.StarMapResetButton
 						android:id="@+id/reset_time_button"
-						android:layout_width="44dp"
-						android:layout_height="44dp"
+						android:layout_width="@dimen/map_small_button_size"
+						android:layout_height="@dimen/map_small_button_size"
 						android:layout_marginEnd="2dp"
 						android:background="@drawable/bg_circle_light_blue"
 						android:contentDescription="Reset"
@@ -198,7 +259,7 @@
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
 
-			<net.osmand.plus.plugins.astro.views.DateTimeSelectionView
+			<net.osmand.plus.plugins.astronomy.views.DateTimeSelectionView
 				android:id="@+id/time_selection_view"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -206,54 +267,8 @@
 				android:elevation="10dp"
 				android:visibility="gone"
 				app:layout_constraintBottom_toTopOf="@id/time_control_card"
-				app:layout_constraintStart_toStartOf="@id/time_control_card" />
-
-			<TextView
-				android:id="@+id/magnitude_value_text"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/content_padding"
-				android:elevation="4dp"
-				android:textAlignment="center"
-				android:text="10.0"
-				android:textColor="@color/osmand_orange"
-				android:textSize="16sp"
-				android:textStyle="bold"
-				android:visibility="gone"
-				app:layout_constraintBottom_toTopOf="@id/magnitude_slider_container"
-				app:layout_constraintStart_toStartOf="@id/close_button"
-				app:layout_constraintTop_toBottomOf="@id/close_button" />
-
-			<FrameLayout
-				android:id="@+id/magnitude_slider_container"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="150dp"
-				android:visibility="gone"
-				app:layout_constraintStart_toStartOf="@id/magnitude_value_text"
-				app:layout_constraintTop_toBottomOf="@id/magnitude_value_text">
-
-				<SeekBar
-					android:id="@+id/magnitude_slider"
-					android:layout_width="150dp"
-					android:layout_height="40dp"
-					android:layout_gravity="center"
-					android:max="110"
-					android:progress="100"
-					android:rotation="270" />
-			</FrameLayout>
-
-			<ImageButton
-				android:id="@+id/reset_magnitude_button"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="@dimen/map_button_size"
-				android:background="@drawable/btn_circle"
-				android:visibility="gone"
-				android:layout_marginTop="8dp"
-				app:layout_constraintEnd_toEndOf="@id/magnitude_slider_container"
-				app:layout_constraintStart_toStartOf="@id/magnitude_slider_container"
-				app:layout_constraintTop_toBottomOf="@id/magnitude_slider_container"
-				app:srcCompat="@drawable/ic_action_reset_to_default_dark"
-				app:tint="#5f6e7c" />
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintEnd_toEndOf="parent" />
 
 			<FrameLayout
 				android:id="@+id/slider_container"
@@ -274,7 +289,7 @@
 					android:rotation="270" />
 			</FrameLayout>
 
-			<ImageButton
+			<net.osmand.plus.plugins.astronomy.views.StarMapButton
 				android:id="@+id/reset_fov_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"

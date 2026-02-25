@@ -1799,7 +1799,7 @@
     <string name="storage_directory_readonly_desc">選取的資料儲存資料夾有寫入保護，因此已切換到內部記憶體。請選取一個可寫入的儲存目錄。</string>
     <string name="storage_directory_shared">共用記憶體</string>
     <string name="avoid_road">避開道路</string>
-    <string name="finish_navigation">導航完成</string>
+    <string name="finish_navigation">完成導航</string>
     <string name="shared_string_move_up">上移 ↑</string>
     <string name="shared_string_move_down">下移 ↓</string>
     <string name="full_report">完整報告</string>
@@ -1937,8 +1937,8 @@
     <string name="shared_string_continue">繼續</string>
     <string name="shared_string_pause">暫停</string>
     <string name="shared_string_trip">旅程</string>
-    <string name="shared_string_recorded">錄音檔</string>
-    <string name="shared_string_record">記錄</string>
+    <string name="shared_string_recorded">已錄製</string>
+    <string name="shared_string_record">錄製</string>
     <string name="gpx_logging_no_data">沒有資料</string>
     <string name="christmas_desc">在聖誕節和新年假期期間，您可以選擇顯示相關的 POI，例如聖誕樹、市集等。</string>
     <string name="donation_to_osm_desc">您的部分捐款將發送給 OSM 製圖者，而訂閱的費用將保持不變。</string>
@@ -2015,7 +2015,7 @@
     <string name="quick_action_take_photo_note_descr">在畫面中央新增照片註記的按鈕。</string>
     <string name="quick_action_add_osm_bug_descr">在畫面中央新增 OSM 註記的按鈕。</string>
     <string name="quick_action_add_poi_descr">在畫面中央新增 POI 的按鈕。</string>
-    <string name="navigate_point_olc">開放地址識別碼（OLC）</string>
+    <string name="navigate_point_olc">開放位置編號（OLC）</string>
     <string name="navigate_point_olc_info_invalid">無效的 OLC
 \n</string>
     <string name="quick_action_navigation_voice_descr">停用或啟用導航時的語音導引開關。</string>
@@ -4322,7 +4322,7 @@
     <string name="ant_go_to_store">到商店</string>
     <string name="ant_read_data">讀取資料</string>
     <string name="ant_write_to_gpx">將資料寫入至軌跡</string>
-    <string name="external_sensor_widgets">ANT+ 小工具</string>
+    <string name="external_sensor_widgets">外部感測器</string>
     <string name="map_widget_ant_bicycle_power">自行車功率</string>
     <string name="ant_missing_dependency_descr">未偵測到必要的服務「%1$s」。 \n您需要安裝或更新 ANT+ 外掛程式服務。 \n是否要前往 Play 商店進行安裝？</string>
     <string name="ant_heart_rate_write_gpx_desc">在軌跡中包含心率</string>
@@ -4678,7 +4678,7 @@
     <string name="delete_track_folder_dialog_message">這將會刪除資料夾「%1$s」與其包含的全部 %2$s 個軌跡。</string>
     <string name="delete_folder">刪除資料夾</string>
     <string name="rssi_widget_desc">顯示您外部裝置的 RSSI 層級。</string>
-    <string name="map_widget_rssi">RSSI</string>
+    <string name="map_widget_rssi">Rssi</string>
     <string name="tracks_empty_folder_description">此資料夾尚無任何軌跡。</string>
     <string name="tracks_empty_folder">空資料夾</string>
     <string name="track_not_recorded">未記錄</string>
@@ -4844,7 +4844,7 @@
     <string name="help_article_navigation_routing_public_transport_navigation_name">大眾運輸導航</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">直線導航 (飛行器)</string>
     <string name="help_article_navigation_routing_train_routing_name">火車導航</string>
-    <string name="live_monitoring_adress_descr">使用參數語法指定網址：lat={0}、lon={1}、timestamp={2}、hdop={3}、altitude={4}、speed={5}、bearing={6}、 eta= {7}、etfa={8}、eda={9}、edfa={10}。</string>
+    <string name="live_monitoring_adress_descr">使用參數語法指定網址：lat={0}、lon={1}、timestamp={2}、hdop={3}、altitude={4}、speed={5}、bearing={6}、 eta= {7}、etfa={8}、eda={9}、edfa={10}, batproc={11}。</string>
     <string name="shared_string_temperature">溫度</string>
     <string name="release_4_6">• Android Auto：新增 3D 模式 \n \n • 軌跡：引入了篩選條件與智慧型資料夾，改善了較大檔案的記憶體使用量 \n \n • 強化的頂部與底部小工具面板以容納所有小工具 \n \n • 改善的本機資源管理 \n \n • 外部控制器的可自訂按鈕對應 \n \n • 新的小工具：「滑翔比」與「太陽位置」 \n \n • OsmAnd Cloud：現在可以存取已刪除的檔案 \n \n • 使用新的對稱漸層強化坡度模式下的軌跡上色 \n \n • 解決了透明狀態列的問題 \n \n • 新增了對 ANT+ 溫度小工具的支援 \n \n • 引入了「可用記憶體」小工具</string>
     <string name="sensor_temperature_desc">顯示來自偵測器的溫度</string>
@@ -5349,7 +5349,7 @@
     <string name="obd_how_to_connect">如何連線：</string>
     <string name="connect_obd_instructions_step2">開啟您的車輛引擎</string>
     <string name="connect_obd_instructions_step3">在您的裝置上啟用藍牙</string>
-    <string name="learn_more_about_obd_sensors">深入了解 OBD 感測器。</string>
+    <string name="learn_more_about_obd_sensors">深入了解感測器。</string>
     <string name="screen_is_unlocked">觸控螢幕已經解鎖。</string>
     <string name="screen_is_locked_by_action_button">觸控螢幕已經鎖定，點一下底下來解鎖。</string>
     <string name="connect_obd_instructions_step1">將掃描器連線至您車輛的 OBD-II 連接埠。</string>
@@ -5384,7 +5384,7 @@
     <string name="liter">公升</string>
     <string name="percent_hour">%/小時</string>
     <string name="l_100km">公升/100公里</string>
-    <string name="simulate_obd">模擬 OBD 資料</string>
+    <string name="simulate_obd">模擬 obd 資料</string>
     <string name="kpa_unit">千帕</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">顯示根據計算得出的車輛燃料消耗率（%/小時）</string>
     <string name="obd_fuel_pressure">燃料壓力</string>
@@ -5737,8 +5737,7 @@
     <string name="buildings_3d_detail_level">3D 建築物細節化處理</string>
     <string name="show_expand_button">顯示展開按鈕</string>
     <string name="imprecise_coordinates">不精確的座標</string>
-    <string name="star_watcher_plugin_name">星空觀測（測試版）</string>
-    <string name="star_watcher_plugin_description">星圖，3D 星空地圖</string>
+    <string name="astronomy_plugin_description">星圖，3D 星空地圖</string>
     <string name="star_map">星空地圖</string>
     <string name="star_charts_name">星圖</string>
     <string name="star_visibility_name">星體能見度</string>
@@ -5807,4 +5806,64 @@
     <string name="map_screen_layout_descr">選擇是否使用單一佈局套用於所有方向，或分別自訂直向與橫向模式。</string>
     <string name="backup_deleted_all_data">已刪除的資料。</string>
     <string name="backup_deleting_all_data">正在刪除資料……</string>
+    <string name="astro_rendering">正在繪製</string>
+    <string name="astro_configure_view">設定檢視</string>
+    <string name="astro_visible_objects">可見物件</string>
+    <string name="red_filter">紅色篩選</string>
+    <string name="astro_directions">方向</string>
+    <string name="astro_daily_path">日常路徑</string>
+    <string name="map_2d">2D</string>
+    <string name="map_3d">3D</string>
+    <string name="astro_deep_sky">深太空</string>
+    <string name="astro_star_clusters">星團</string>
+    <string name="astro_nebulas">星雲</string>
+    <string name="astro_solar_system">太陽系</string>
+    <string name="delete_groups_confirmation">刪除群組？</string>
+    <string name="add_to_track">新增至軌跡</string>
+    <string name="unpin_folder">取消釘選資料夾</string>
+    <string name="pin_folder">釘選資料夾</string>
+    <string name="favorite_search_empty_state_description">請調整您的搜尋或篩選條件，看看是否有所幫助</string>
+    <string name="favorites_empty_folder_description">此資料夾尚無任何點。</string>
+    <string name="stars_articles">README：- 偏好的翻譯方式是經由 https://hosted.weblate.org/engage/osmand/ 來進行 - 如果您直接編輯 strings.xml 檔案的話，請確認：1. 不要產生重覆字串 (檢查名稱確認沒有重覆) 2. 每個撇號 (引號) 前面加反斜線。3. 如果您更多英文字串檔案，請在檔案開頭加上新字串，這會讓版本發佈前的定期審核更為容易。- 而為了用詞以及一致性，請注意 https://docs.osmand.net/docs/technical/contributions/translating-osmand 的相關規定，謝謝 - Hardy</string>
+    <string name="building_3d_day_color_content_desc">3D 建築白天主題顏色</string>
+    <string name="building_3d_night_color_content_desc">3D 建築夜晚主題顏色</string>
+    <string name="building_3d_low_details_content_desc">3D 建築低細節</string>
+    <string name="building_3d_high_details_content_desc">3D 建築高</string>
+    <string name="building_3d_near_distance_content_desc">3D 建築距離近</string>
+    <string name="building_3d_far_distance_content_desc">3D 建築距離遠</string>
+    <string name="free_custom_color_description">以任何顏色自訂 3D 建築，適合匹配地圖主題或是增加對比。</string>
+    <string name="buildings_3d_use_map_style_color_description">使用地圖樣式 (%s) 的預設顏色。</string>
+    <string name="buildings_3d_visibility_description">調整地圖上 3D 結構的透明度。</string>
+    <string name="level_of_details">細節的層次</string>
+    <string name="performance">效能</string>
+    <string name="view_distance">檢視距離</string>
+    <string name="astronomy_plugin_name">天文</string>
+    <string name="astro_min_magnitude">讀我：我們偏好的翻譯方式為在 https://hosted.weblate.org/engage/osmand/ 進行-如果您直接編輯 strings.xml 檔案，請確認： 1. 不要產生重覆字串 (檢查名稱來確認是否已經存在) 2. 每個撇號（引號）前面都有背斜線 3. 如果您變動英文字串檔案，請將新的字串加到檔案開頭，這讓釋出前的定期檢核更容易。- 而為了文字與一致，請注意 https://docs.osmand.net/docs/technical/contributions/translating-osmand 感謝 - Hardy</string>
+    <plurals name="tracks_count">
+        <item quantity="other">%d 個軌跡</item>
+    </plurals>
+    <string name="gradient_no_data_point_summary">當資料遺失或未定義時所套用的顏色。</string>
+    <string name="gradient_input_value_too_low_warn">最小允許的值為 %1$s。</string>
+    <string name="gradient_input_value_too_high_warn">最大允許的值為 %1$s。</string>
+    <string name="gradient_input_value_duplicate_warn">此值已存在於調色板中。</string>
+    <string name="gradient_input_invalid_value_warn">請輸入有效數字。</string>
+    <string name="value_cannot_be_edited_warn">此值無法編輯。</string>
+    <string name="unexpected_error_occurred_warn">發生未預期的錯誤。</string>
+    <string name="relative_gradient_point_m_summary">為軌跡中找到的最大值著色。</string>
+    <string name="relative_gradient_point_avg_summary">為軌跡的平均值設定顏色。</string>
+    <string name="relative_gradient_point_min_summary">為軌跡中找到的最小值設定顏色。</string>
+    <string name="shared_string_maximum">最大</string>
+    <string name="shared_string_minimum">最小</string>
+    <string name="shared_string_ratio">比例</string>
+    <string name="shared_string_percentage">百分比</string>
+    <string name="remove_step">移除步驟</string>
+    <string name="shared_string_value">值</string>
+    <string name="gradient_range_type_fixed_summary">分配給特定絕對數值的顏色（例如 50 公里/小時）。</string>
+    <string name="gradient_range_type_fixed">固定值</string>
+    <string name="gradient_range_type_relative_summary">顏色會根據軌跡的最小值/最大值範圍自動調整。</string>
+    <string name="gradient_range_type_relative">相對</string>
+    <string name="edit_palette">編輯調色板</string>
+    <string name="add_palette">新增調色板</string>
+    <string name="delete_palette">刪除調色板</string>
+    <string name="delete_colors_palette_dialog_summary">您確定您想要刪除 %1$s 調色板嗎？</string>
 </resources>

@@ -217,7 +217,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		while (true) {
 			number++;
 			String name = item.getName() + " (" + number + ")";
-			FavoriteGroup renamedItem = new FavoriteGroup(name, item.getPoints(), item.getColor(), item.isVisible());
+			FavoriteGroup renamedItem = new FavoriteGroup(name, item.getPoints(), item.getColor(), item.isVisible(), item.isPinned());
 			if (!isDuplicate(renamedItem)) {
 				for (FavouritePoint point : renamedItem.getPoints()) {
 					point.setCategory(renamedItem.getName());

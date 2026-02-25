@@ -31,6 +31,9 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.PanelsLayoutMode;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -47,23 +50,29 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 
 	private static final int BORDER_WIDTH_DP = 2;
 	private static final int BORDER_RADIUS_DP = 5;
-	private static final float SIDE_PANEL_WEIGHT_RATIO = 0.45f;
-	private final Paint borderPaint = new Paint();
+	private static final float SIDE_PANEL_WEIGHT_RATIO_WIDE = 0.45f;
+	private static final float SIDE_PANEL_WEIGHT_RATIO_COMPACT = 0.35f;
+
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
+	private final UiUtilities utilities;
+
 	private final Path borderPath = new Path();
+	private final Paint borderPaint = new Paint();
 
-	protected boolean nightMode;
-	protected boolean rightSide;
-	protected boolean selfShowAllowed;
-	protected boolean selfVisibilityChanging;
+	private boolean nightMode;
+	private boolean rightSide;
+	private boolean selfShowAllowed;
+	private boolean selfVisibilityChanging;
+	private final boolean layoutRtl;
 
-	protected ViewPager2 viewPager;
-	protected WidgetsPagerAdapter adapter;
-	protected LinearLayout dots;
+	private ViewPager2 viewPager;
+	private WidgetsPagerAdapter adapter;
+	private LinearLayout dots;
 
+	private Insets insets;
 	private int screenWidth = -1;
 	private int screenHeight = -1;
-	private int topInset = -1;
-	private int bottomInset = -1;
 
 	public SideWidgetsPanel(@NonNull Context context) {
 		this(context, null);
@@ -79,8 +88,11 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 
 	public SideWidgetsPanel(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
-		nightMode = getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
-		context = UiUtilities.getThemedContext(getContext(), nightMode);
+		app = AndroidUtils.getApp(context);
+		settings = app.getSettings();
+		utilities = app.getUIUtilities();
+		layoutRtl = AndroidUtils.isLayoutRtl(app);
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 
 		definePanelSide(context, attrs);
 		setWillNotDraw(false);
@@ -90,16 +102,26 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 		setupChildren();
 	}
 
+	public boolean isRightSide() {
+		return rightSide;
+	}
+
 	private void definePanelSide(@NonNull Context context, @Nullable AttributeSet attrs) {
 		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SideWidgetsPanel);
 		rightSide = typedArray.getBoolean(R.styleable.SideWidgetsPanel_rightSide, true);
 		typedArray.recycle();
 	}
 
+	private boolean isDetached() {
+		boolean positionedOnLeft = layoutRtl ^ !rightSide;
+		return insets != null && (positionedOnLeft ? insets.left : insets.right) > 0;
+	}
+
 	private void setupPaddings() {
+		boolean detached = isDetached();
 		int padding = AndroidUtils.dpToPx(getContext(), BORDER_WIDTH_DP);
-		int startPadding = rightSide ? padding : 0;
-		int endPadding = rightSide ? 0 : padding;
+		int startPadding = (rightSide || detached) ? padding : 0;
+		int endPadding = (!rightSide || detached) ? padding : 0;
 		setPaddingRelative(startPadding, padding, endPadding, padding);
 	}
 
@@ -130,9 +152,7 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 			@Override
 			public void onPageScrollStateChanged(int state) {
 				if (state == SCROLL_STATE_IDLE) { // when dragging is ended
-					runInUIThread(() -> {
-						wrapContentAroundPage(null);
-					});
+					app.runInUIThread(() -> wrapContentAroundPage(null));
 				}
 			}
 
@@ -183,7 +203,7 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 				AndroidUtils.setMargins(dotParams, dp3, 0, dp3, 0);
 				dot.setLayoutParams(dotParams);
 				int dotColor = getDotColorId(i == viewPager.getCurrentItem());
-				dot.setImageDrawable(getIconsCache().getIcon(R.drawable.ic_dot_position, dotColor));
+				dot.setImageDrawable(utilities.getIcon(R.drawable.ic_dot_position, dotColor));
 				dots.addView(dot);
 			}
 		} else {
@@ -191,7 +211,7 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 				View childView = dots.getChildAt(i);
 				if (childView instanceof ImageView dot) {
 					int dotColor = getDotColorId(i == viewPager.getCurrentItem());
-					dot.setImageDrawable(getIconsCache().getIcon(R.drawable.ic_dot_position, dotColor));
+					dot.setImageDrawable(utilities.getIcon(R.drawable.ic_dot_position, dotColor));
 				}
 			}
 		}
@@ -214,7 +234,7 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 	}
 
 	@Override
-	protected void dispatchDraw(Canvas canvas) {
+	protected void dispatchDraw(@NonNull Canvas canvas) {
 		super.dispatchDraw(canvas);
 
 		if (hasVisibleContent()) {
@@ -230,7 +250,7 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 				for (View view : views) {
 					View emptyBanner = view.findViewById(R.id.empty_banner);
 					if (view.findViewById(R.id.container).getVisibility() == VISIBLE
-							|| (emptyBanner != null &&  emptyBanner.getVisibility() == VISIBLE)) {
+							|| (emptyBanner != null && emptyBanner.getVisibility() == VISIBLE)) {
 						return true;
 					}
 				}
@@ -240,19 +260,27 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 	}
 
 	private void drawBorder(@NonNull Canvas canvas) {
-		boolean rtl = AndroidUtils.isLayoutRtl(getContext());
-		boolean positionedOnLeft = rtl ^ !rightSide;
-		float inset = (float) Math.ceil(borderPaint.getStrokeWidth() / 2);
-		float screenEdgeX = positionedOnLeft ? 0 : getWidth();
-		float roundedCornerX = positionedOnLeft ? getWidth() - inset : inset;
-		float bottomY = getHeight() - inset;
+		float halfStroke = borderPaint.getStrokeWidth() / 2f;
+		float left = halfStroke;
+		float top = halfStroke;
+		float right = getWidth() - halfStroke;
+		float bottom = getHeight() - halfStroke;
+
+		boolean detached = isDetached();
+		boolean positionedOnLeft = layoutRtl ^ !rightSide;
 
 		borderPath.reset();
-		borderPath.moveTo(screenEdgeX, inset);
-		borderPath.lineTo(roundedCornerX, inset);
-		borderPath.lineTo(roundedCornerX, bottomY);
-		borderPath.lineTo(screenEdgeX, bottomY);
+		if (detached) {
+			borderPath.addRect(left, top, right, bottom, Path.Direction.CW);
+		} else {
+			float startX = positionedOnLeft ? 0 : getWidth();
+			float outerX = positionedOnLeft ? right : left;
 
+			borderPath.moveTo(startX, top);
+			borderPath.lineTo(outerX, top);
+			borderPath.lineTo(outerX, bottom);
+			borderPath.lineTo(startX, bottom);
+		}
 		canvas.drawPath(borderPath, borderPaint);
 	}
 
@@ -289,7 +317,12 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 			int measuredHeight = viewToWrap.getMeasuredHeight();
 
 			if (screenWidth != -1) {
-				int maxAllowedWidth = (int) (screenWidth * SIDE_PANEL_WEIGHT_RATIO);
+				Context context = getContext();
+				ScreenLayoutMode screenLayoutMode = ScreenLayoutMode.getDefault(context);
+				PanelsLayoutMode panelsLayoutMode = settings.getPanelsLayoutMode(context, screenLayoutMode).get();
+
+				float ratio = panelsLayoutMode == PanelsLayoutMode.WIDE ? SIDE_PANEL_WEIGHT_RATIO_WIDE : SIDE_PANEL_WEIGHT_RATIO_COMPACT;
+				int maxAllowedWidth = (int) (screenWidth * ratio);
 
 				if (measuredWidth > maxAllowedWidth) {
 					measuredWidth = maxAllowedWidth;
@@ -298,8 +331,8 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 
 			if (screenHeight != -1) {
 				int occupied = 0;
-				if (topInset != -1 && bottomInset != -1) {
-					occupied = topInset + bottomInset;
+				if (insets != null) {
+					occupied = insets.top + insets.bottom;
 					occupied += getPaddingTop() + getPaddingBottom();
 					if (getLayoutParams() instanceof MarginLayoutParams lp) {
 						occupied += lp.topMargin + lp.bottomMargin;
@@ -330,28 +363,14 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 		return viewHolder != null ? viewHolder.itemView : null;
 	}
 
-	private void runInUIThread(@NonNull Runnable runnable) {
-		getMyApplication().runInUIThread(runnable);
-	}
-
-	@NonNull
-	protected UiUtilities getIconsCache() {
-		return getMyApplication().getUIUtilities();
-	}
-
-	@NonNull
-	protected OsmandApplication getMyApplication() {
-		return ((OsmandApplication) getContext().getApplicationContext());
-	}
-
 	public void setScreenSize(@NonNull Activity activity) {
 		screenWidth = AndroidUtils.getScreenWidth(activity);
 		screenHeight = AndroidUtils.getScreenHeight(activity);
 	}
 
 	public void setInsets(@NonNull Insets insets) {
-		topInset = insets.top;
-		bottomInset = insets.bottom;
+		this.insets = insets;
+		setupPaddings();
 		wrapContentAroundPage(null);
 	}
 }

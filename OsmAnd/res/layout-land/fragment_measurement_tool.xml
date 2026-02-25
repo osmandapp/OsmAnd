@@ -4,19 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_transparent"
-    android:clickable="true"
-    android:focusable="true">
+    android:background="@color/color_transparent">
 
     <LinearLayout
         android:id="@+id/main_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:focusable="true"
         android:orientation="vertical"
-        android:clickable="true"
         tools:ignore="UselessParent">
+
+        <FrameLayout
+            android:id="@+id/map_controls_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/content_padding_half">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|bottom"
+                android:orientation="horizontal">
+
+                <include layout="@layout/measurement_buttons" />
+
+                <include
+                    layout="@layout/map_ruler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/content_padding_small_half" />
+
+            </LinearLayout>
+
+            <include
+                layout="@layout/map_hud_controls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginBottom="@dimen/content_padding_small_half" />
+
+        </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -43,9 +71,11 @@
             android:id="@+id/main_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/list_background_color">
+            android:background="?attr/list_background_color"
+            android:clickable="true"
+            android:focusable="true">
 
-            <RelativeLayout
+        <RelativeLayout
                 android:id="@+id/up_down_row"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/measurement_tool_controls_height"

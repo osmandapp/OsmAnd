@@ -28,6 +28,7 @@ import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvi
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -221,7 +222,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public void setWindowInsets(@NonNull WindowInsetsCompat windowInsets) {
 		super.setWindowInsets(windowInsets);
 		this.lastWindowInsets = windowInsets;
-		Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.navigationBars());
+		Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
 		if (leftWidgetsPanel != null) {
 			leftWidgetsPanel.setInsets(insets);
 		}
@@ -335,7 +336,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		alarmWidget.setVisibility(false);
 
 		View speedometerView = mapActivity.findViewById(R.id.speedometer_widget);
-		speedometerWidget = new SpeedometerWidget(app, mapActivity, speedometerView);
+		speedometerWidget = new SpeedometerWidget(app, mapActivity, speedometerView, ThemeUsageContext.MAP);
 		speedometerWidget.setVisibility(false);
 
 		setupRulerWidget(rulerWidget);
@@ -384,8 +385,6 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public RulerWidget setupRulerWidget(@NonNull RulerWidget widget) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			widget.setVisibility(false);
-
 			TextState state = calculateTextState(false);
 			boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 			widget.updateTextSize(nightMode, state.textColor, state.textShadowColor, (int) (2 * view.getDensity()));
@@ -549,6 +548,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		if (getMapActivity() != null) {
 			updateColorShadowsOfText();
 			updateWidgetsInfo(drawSettings);
+
 			leftWidgetsPanel.update(drawSettings);
 			rightWidgetsPanel.update(drawSettings);
 			topWidgetsPanel.update(drawSettings);
@@ -557,8 +557,10 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			alarmWidget.updateInfo(drawSettings, false);
 			speedometerWidget.updateInfo(drawSettings);
 
-			for (RulerWidget rulerWidget : rulerWidgets) {
-				rulerWidget.updateInfo(tileBox);
+			boolean hasCustomRulers = rulerWidgets.size() > 1;
+			for (RulerWidget widget : rulerWidgets) {
+				boolean enabled = !hasCustomRulers || rulerWidget != widget;
+				widget.updateInfo(tileBox, enabled);
 			}
 			for (SideWidgetsPanel panel : sideWidgetsPanels) {
 				panel.update(drawSettings);

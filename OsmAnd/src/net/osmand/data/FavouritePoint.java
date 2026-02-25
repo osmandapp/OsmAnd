@@ -2,8 +2,6 @@ package net.osmand.data;
 
 import static net.osmand.data.SpecialPointType.HOME;
 import static net.osmand.data.SpecialPointType.WORK;
-import static net.osmand.data.SpecialPointType.HOME;
-import static net.osmand.data.SpecialPointType.WORK;
 import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.CREATION_DATE;
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;

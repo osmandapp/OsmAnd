@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -62,8 +63,8 @@ public class ShareMenu extends BaseMenuController {
 	private String sms;
 	private String urlLink;
 
-	private ShareMenu(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+	private ShareMenu(@NonNull FragmentActivity activity) {
+		super(activity);
 	}
 
 	@NonNull
@@ -94,7 +95,21 @@ public class ShareMenu extends BaseMenuController {
 		menu.urlLink = urlLink;
 
 		if (Build.VERSION.SDK_INT >= 34) {
-			showNativeShareDialog(menu, activity);
+			showNativeShareDialog(menu, activity.getApp(), activity);
+		} else {
+			ShareMenuFragment.showInstance(activity.getSupportFragmentManager(), menu);
+		}
+	}
+
+	public static void show(LatLon latLon, String title, String address, String urlLink, @NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
+		ShareMenu menu = new ShareMenu(activity);
+		menu.latLon = latLon;
+		menu.title = title;
+		menu.address = address;
+		menu.urlLink = urlLink;
+
+		if (Build.VERSION.SDK_INT >= 34) {
+			showNativeShareDialog(menu, app, null);
 		} else {
 			ShareMenuFragment.showInstance(activity.getSupportFragmentManager(), menu);
 		}
@@ -102,17 +117,14 @@ public class ShareMenu extends BaseMenuController {
 
 	public void share(@NonNull ShareItem item) {
 		MapActivity activity = getMapActivity();
-		if (activity != null) {
-			setupSharingFields(activity);
-			startAction(activity, item, sms, address, title, coordinates, geoUrl, urlLink);
-		}
+		setupSharingFields(app, activity);
+		startAction(app, item, sms, address, title, coordinates, geoUrl, urlLink);
 	}
 
 	@RequiresApi(api = 34)
-	private static void showNativeShareDialog(@NonNull ShareMenu menu, @NonNull MapActivity activity) {
-		menu.setupSharingFields(activity);
+	private static void showNativeShareDialog(@NonNull ShareMenu menu, @NonNull OsmandApplication app, @Nullable MapActivity activity) {
+		menu.setupSharingFields(app, activity);
 
-		OsmandApplication app = activity.getApp();
 		List<ShareItem> items = ShareItem.getNativeShareItems();
 		ChooserAction[] actions = new ChooserAction[items.size()];
 
@@ -134,7 +146,7 @@ public class ShareMenu extends BaseMenuController {
 					intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
 			actions[i] = new ChooserAction.Builder(Icon.createWithResource(app, item.getIconId()),
-					activity.getString(item.getTitleId()), pendingIntent).build();
+					app.getString(item.getTitleId()), pendingIntent).build();
 		}
 
 		Intent sendIntent = new Intent(Intent.ACTION_SEND);
@@ -144,18 +156,18 @@ public class ShareMenu extends BaseMenuController {
 
 		Intent shareIntent = Intent.createChooser(sendIntent, null);
 		shareIntent.putExtra(Intent.EXTRA_CHOOSER_CUSTOM_ACTIONS, actions);
-		AndroidUtils.startActivityIfSafe(activity.getApp(), sendIntent, shareIntent);
+		AndroidUtils.startActivityIfSafe(app, sendIntent, shareIntent);
 	}
 
-	private void setupSharingFields(@NonNull MapActivity activity) {
+	private void setupSharingFields(OsmandApplication app, @Nullable MapActivity activity) {
 		StringBuilder builder = new StringBuilder();
 		if (!Algorithms.isEmpty(title)) {
 			builder.append(title).append("\n");
 		}
-		if (!Algorithms.isEmpty(address) && !address.equals(title) && !address.equals(activity.getString(R.string.no_address_found))) {
+		if (!Algorithms.isEmpty(address) && !address.equals(title) && !address.equals(app.getString(R.string.no_address_found))) {
 			builder.append(address).append("\n");
 		}
-		builder.append(activity.getString(R.string.shared_string_location)).append(": ");
+		builder.append(app.getString(R.string.shared_string_location)).append(": ");
 		if (TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL) {
 			builder.append("\n");
 		}
@@ -164,7 +176,12 @@ public class ShareMenu extends BaseMenuController {
 		try {
 			double latVal = latLon.getLatitude();
 			double lonVal = latLon.getLongitude();
-			int zoom = activity.getMapView().getZoom();
+			int zoom;
+			if (activity != null) {
+				zoom = activity.getMapView().getZoom();
+			} else {
+				zoom = app.getSettings().getLastKnownMapZoom();
+			}
 
 			Pair<String, String> formattedLatLon = getFormattedShareLatLon(latLon);
 			String latStr = formattedLatLon.first;
@@ -185,7 +202,7 @@ public class ShareMenu extends BaseMenuController {
 		}
 		sms = builder.toString();
 
-		OsmandSettings settings = ((OsmandApplication) activity.getApplicationContext()).getSettings();
+		OsmandSettings settings = app.getSettings();
 		int format = settings.COORDINATES_FORMAT.get();
 		coordinates = OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), format, false);
 	}
@@ -291,7 +308,7 @@ public class ShareMenu extends BaseMenuController {
 	}
 
 	public static void copyToClipboardWithToast(@NonNull Context context, @NonNull String text,
-			boolean longToast) {
+	                                            boolean longToast) {
 		copyToClipboard(context, text);
 
 		String message = context.getString(R.string.copied_to_clipboard) + ":\n" + text;
@@ -308,7 +325,7 @@ public class ShareMenu extends BaseMenuController {
 		return false;
 	}
 
-	public static class NativeShareDialogBuilder{
+	public static class NativeShareDialogBuilder {
 
 		private List<ChooserAction> chooserActions = new ArrayList<>();
 		private File file = null;
@@ -320,7 +337,8 @@ public class ShareMenu extends BaseMenuController {
 		private boolean newTask = false;
 		private boolean newDocument = false;
 
-		public NativeShareDialogBuilder() {}
+		public NativeShareDialogBuilder() {
+		}
 
 		public NativeShareDialogBuilder addFileWithSaveAction(@NonNull File file, @NonNull OsmandApplication app,
 		                                                      @NonNull Activity activity, boolean singleTop) {

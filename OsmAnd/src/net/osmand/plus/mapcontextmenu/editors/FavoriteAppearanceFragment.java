@@ -36,7 +36,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.myplaces.favorites.SaveOption;
-import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
+import net.osmand.plus.myplaces.favorites.dialogs.BaseFavoriteListFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -267,7 +267,7 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 			if (controller.getColor() != null) {
 				favouritesHelper.updateGroupColor(favoriteGroup, controller.getColor(), saveOption, false);
 				shouldSave = true;
-				controller.getColorCardController().getColorsPaletteController().refreshLastUsedTime();
+				controller.getColorCardController().getColorsPaletteController().renewLastUsedTime();
 			}
 			if (controller.getIcon() != null) {
 				favouritesHelper.updateGroupIconName(favoriteGroup, controller.getIcon(), saveOption, false);
@@ -285,8 +285,8 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 		}
 
 		Fragment targetFragment = getTargetFragment();
-		if (targetFragment instanceof FavoritesTreeFragment treeFragment) {
-			treeFragment.reloadData();
+		if (targetFragment instanceof BaseFavoriteListFragment listFragment) {
+			listFragment.reloadData();
 		}
 		super.dismiss();
 	}

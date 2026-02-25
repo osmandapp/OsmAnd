@@ -38,9 +38,15 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 	public ShareFavoritesAsyncTask(@NonNull FragmentActivity activity,
 	                               @Nullable FavoriteGroup group,
 	                               @Nullable ShareFavoritesListener listener) {
+		this(activity, group != null
+				? Collections.singletonList(group) : AndroidUtils.getApp(activity).getFavoritesHelper().getFavoriteGroups(), listener);
+	}
+
+	public ShareFavoritesAsyncTask(@NonNull FragmentActivity activity,
+	                               @NonNull List<FavoriteGroup> groups,
+	                               @Nullable ShareFavoritesListener listener) {
 		this.app = AndroidUtils.getApp(activity);
-		this.groups = group != null
-				? Collections.singletonList(group) : app.getFavoritesHelper().getFavoriteGroups();
+		this.groups = groups;
 		this.listener = listener;
 		this.favouritesHelper = app.getFavoritesHelper();
 		this.activityRef = new WeakReference<>(activity);

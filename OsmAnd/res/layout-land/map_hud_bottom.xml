@@ -18,14 +18,12 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom|start">
 
-			<!-- ALARM -->
-
 			<LinearLayout
 				android:id="@+id/alarms_container"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="@dimen/map_button_shadow_margin"
-				android:layout_marginBottom="@dimen/map_alarm_bottom_margin_land"
+				android:layout_marginBottom="@dimen/map_alarm_bottom_margin"
 				android:orientation="horizontal">
 
 				<include
@@ -47,50 +45,14 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="bottom|start">
 
-				<!-- PREPARATION SCREEN -->
-
 				<include
 					layout="@layout/recording_note_fragment"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="bottom|start" />
 
-				<LinearLayout
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="bottom|start"
-					android:layout_marginStart="@dimen/map_button_margin"
-					android:layout_marginEnd="@dimen/map_button_spacing_land"
-					android:layout_marginBottom="@dimen/map_button_margin"
-					android:orientation="horizontal">
-
-					<net.osmand.plus.widgets.FrameLayoutEx
-						android:id="@+id/measurement_buttons"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content">
-
-						<ImageButton
-							android:id="@+id/snap_to_road_image_button"
-							android:layout_width="@dimen/map_button_size"
-							android:layout_height="@dimen/map_button_size"
-							android:layout_gravity="bottom"
-							android:background="@drawable/btn_circle"
-							android:contentDescription="@string/snap_to_road"
-							android:visibility="gone"
-							tools:src="@drawable/ic_action_remove_dark" />
-
-						<include
-							android:id="@+id/profile_with_config_btn"
-							layout="@layout/profile_with_config_btn_layout"
-							android:layout_width="wrap_content"
-							android:layout_height="@dimen/map_button_size"
-							android:layout_gravity="bottom"
-							android:visibility="gone" />
-
-					</net.osmand.plus.widgets.FrameLayoutEx>
-
-				</LinearLayout>
 			</LinearLayout>
+
 		</FrameLayout>
 
 		<FrameLayout
@@ -99,8 +61,6 @@
 			android:layout_gravity="bottom"
 			android:layout_marginBottom="@dimen/map_button_margin"
 			android:layout_weight="1">
-
-			<!-- TRANSPARENCY -->
 
 			<LinearLayout
 				android:id="@+id/map_transparency_layout"

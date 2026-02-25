@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<net.osmand.plus.widgets.LinearLayoutEx
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<net.osmand.plus.widgets.LinearLayoutEx xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
@@ -26,7 +25,7 @@
 				layout="@layout/map_alarm_warning"
 				android:layout_width="@dimen/map_alarm_size"
 				android:layout_height="@dimen/map_alarm_size"
-				android:layout_marginStart="@dimen/map_button_margin" />
+				android:layout_marginStart="@dimen/content_padding_minimal" />
 
 			<include
 				android:id="@+id/speedometer_widget"
@@ -66,40 +65,6 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:layout_marginHorizontal="@dimen/dashPadding" />
-
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="bottom|start"
-			android:layout_marginStart="@dimen/map_button_margin"
-			android:layout_marginBottom="@dimen/map_button_margin">
-
-			<FrameLayout
-				android:id="@+id/measurement_buttons"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content">
-
-				<ImageButton
-					android:id="@+id/snap_to_road_image_button"
-					android:layout_width="@dimen/map_button_size"
-					android:layout_height="@dimen/map_button_size"
-					android:layout_gravity="bottom"
-					android:background="@drawable/btn_circle"
-					android:contentDescription="@string/snap_to_road"
-					android:visibility="gone"
-					tools:src="@drawable/ic_action_remove_dark" />
-
-				<include
-					android:id="@+id/profile_with_config_btn"
-					layout="@layout/profile_with_config_btn_layout"
-					android:layout_width="wrap_content"
-					android:layout_height="@dimen/map_button_size"
-					android:layout_gravity="bottom"
-					android:visibility="gone" />
-
-			</FrameLayout>
 
 		</LinearLayout>
 

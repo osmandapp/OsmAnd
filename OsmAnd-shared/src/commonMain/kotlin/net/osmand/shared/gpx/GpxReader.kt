@@ -2,7 +2,6 @@ package net.osmand.shared.gpx
 
 import kotlinx.coroutines.delay
 import net.osmand.shared.KAsyncTask
-import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
 import net.osmand.shared.gpx.GpxTrackAnalysis.Companion.ANALYSIS_VERSION
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.LoggerFactory
@@ -139,11 +138,7 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 			item.setParameter(GpxParameter.NEAREST_CITY_NAME, "")
 		} else {
 			PlatformUtil.getOsmAndContext().searchNearestCityName(latLon) { cityName ->
-				if (cityName.isNotEmpty()) {
-					GpxDbHelper.updateDataItemParameter(item, GpxParameter.NEAREST_CITY_NAME, cityName)
-				} else {
-					item.setParameter(GpxParameter.NEAREST_CITY_NAME, "")
-				}
+				item.setParameter(GpxParameter.NEAREST_CITY_NAME, cityName)
 			}
 		}
 	}
