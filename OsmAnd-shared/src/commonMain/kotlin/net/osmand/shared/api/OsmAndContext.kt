@@ -19,7 +19,7 @@ interface OsmAndContext {
 	fun getGpxImportDir(): KFile
 	fun getGpxRecordedDir(): KFile
 
-	fun getSettings(): SettingsAPI?
+	fun getSettings(): SettingsAPI
 	fun getSpeedSystem(): SpeedConstants?
 	fun getMetricSystem(): MetricsConstants?
 	fun getAltitudeMetric(): AltitudeMetrics?
