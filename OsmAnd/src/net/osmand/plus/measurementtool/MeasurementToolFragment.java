@@ -95,8 +95,8 @@ import net.osmand.plus.utils.*;
 import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 import net.osmand.plus.utils.AndroidNetworkUtils.OnFileUploadCallback;
 import net.osmand.plus.utils.InsetTarget.Type;
-import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
@@ -178,8 +178,10 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	private ImageView undoBtn;
 	private ImageView redoBtn;
 	private ImageView mainIcon;
+	private View measurementButtons;
 	private ImageButton snapToRoadButton;
 	private View profileConfigButton;
+	private MapHudLayout mapHudLayout;
 
 	private OnBackPressedCallback onBackPressedCallback;
 	private OnGlobalLayoutListener widgetsLayoutListener;
@@ -532,8 +534,10 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 				callMapActivity(activity -> dismiss(activity, false));
 			}
 		});
-		snapToRoadButton = view.findViewById(R.id.snap_to_road_image_button);
-		profileConfigButton = view.findViewById(R.id.profile_with_config_btn);
+		mapHudLayout = mapActivity.findViewById(R.id.map_hud_layout);
+		measurementButtons = inflate(R.layout.measurement_buttons, mapHudLayout, false);
+		snapToRoadButton = measurementButtons.findViewById(R.id.snap_to_road_image_button);
+		profileConfigButton = measurementButtons.findViewById(R.id.profile_with_config_btn);
 
 		snapToRoadButton.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
 		snapToRoadButton.setOnClickListener(v -> startSnapToRoad(false));
@@ -591,27 +595,6 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		}
 
 		return view;
-	}
-
-	protected void setupControlButtons(@NonNull View view) {
-		removeControlButtons();
-
-		mapButtons = new ArrayList<>();
-		mapButtons.add(view.findViewById(R.id.map_zoom_in_button));
-		mapButtons.add(view.findViewById(R.id.map_zoom_out_button));
-		mapButtons.add(view.findViewById(R.id.map_my_location_button));
-
-		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
-		mapLayers.getMapControlsLayer().addCustomizedDefaultMapButtons(mapButtons);
-		rulerWidget = mapLayers.getMapInfoLayer().setupRulerWidget(view.findViewById(R.id.map_ruler_layout));
-	}
-
-	protected void removeControlButtons() {
-		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
-		mapLayers.getMapControlsLayer().removeCustomMapButtons(mapButtons);
-		if (rulerWidget != null) {
-			mapLayers.getMapInfoLayer().removeRulerWidgets(Collections.singletonList(rulerWidget));
-		}
 	}
 
 	@Override
@@ -807,9 +790,8 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 				updateToolbar();
 			}
 		});
-		View view = getView();
-		if (view != null) {
-			setupControlButtons(view);
+		if (mapHudLayout != null && measurementButtons != null) {
+			mapHudLayout.addWidget(measurementButtons);
 		}
 	}
 
@@ -823,6 +805,10 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		detailsMenu.onDismiss();
 		detailsMenu.setMapActivity(null);
 		updateMapDisplayPosition();
+
+		if (mapHudLayout != null && measurementButtons != null) {
+			mapHudLayout.removeWidget(measurementButtons);
+		}
 	}
 
 	@Override
@@ -835,8 +821,6 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		MeasurementToolLayer layer = getMeasurementLayer();
 		layer.setOnSingleTapListener(null);
 		layer.setOnEnterMovePointModeListener(null);
-
-		removeControlButtons();
 	}
 
 	@Override

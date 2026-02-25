@@ -77,11 +77,11 @@ public class RulerWidget extends FrameLayoutEx implements ViewChangeProvider {
 		icon.setBackgroundResource(isNight ? R.drawable.ruler_night : R.drawable.ruler);
 	}
 
-	public boolean updateInfo(@NonNull RotatedTileBox tileBox, boolean enabled) {
+	public boolean updateInfo(@NonNull RotatedTileBox tileBox) {
 		boolean visible = true;
 		float mapDensity = settings.MAP_DENSITY.get();
 		// update cache
-		if (mapTileView.isZooming() || mapTileView.isCarView() || !enabled) {
+		if (mapTileView.isZooming() || mapTileView.isCarView()) {
 			visible = false;
 		} else if ((tileBox.getZoom() + tileBox.getZoomFloatPart() != cacheRulerZoom
 				|| Math.abs(tileBox.getCenterTileX() - cacheRulerTileX) > 1

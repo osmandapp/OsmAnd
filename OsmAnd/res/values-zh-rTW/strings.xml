@@ -1937,8 +1937,8 @@
     <string name="shared_string_continue">繼續</string>
     <string name="shared_string_pause">暫停</string>
     <string name="shared_string_trip">旅程</string>
-    <string name="shared_string_recorded">錄音檔</string>
-    <string name="shared_string_record">記錄</string>
+    <string name="shared_string_recorded">已錄製</string>
+    <string name="shared_string_record">錄製</string>
     <string name="gpx_logging_no_data">沒有資料</string>
     <string name="christmas_desc">在聖誕節和新年假期期間，您可以選擇顯示相關的 POI，例如聖誕樹、市集等。</string>
     <string name="donation_to_osm_desc">您的部分捐款將發送給 OSM 製圖者，而訂閱的費用將保持不變。</string>
@@ -5839,4 +5839,31 @@
     <string name="view_distance">檢視距離</string>
     <string name="astronomy_plugin_name">天文</string>
     <string name="astro_min_magnitude">讀我：我們偏好的翻譯方式為在 https://hosted.weblate.org/engage/osmand/ 進行-如果您直接編輯 strings.xml 檔案，請確認： 1. 不要產生重覆字串 (檢查名稱來確認是否已經存在) 2. 每個撇號（引號）前面都有背斜線 3. 如果您變動英文字串檔案，請將新的字串加到檔案開頭，這讓釋出前的定期檢核更容易。- 而為了文字與一致，請注意 https://docs.osmand.net/docs/technical/contributions/translating-osmand 感謝 - Hardy</string>
+    <plurals name="tracks_count">
+        <item quantity="other">%d 個軌跡</item>
+    </plurals>
+    <string name="gradient_no_data_point_summary">當資料遺失或未定義時所套用的顏色。</string>
+    <string name="gradient_input_value_too_low_warn">最小允許的值為 %1$s。</string>
+    <string name="gradient_input_value_too_high_warn">最大允許的值為 %1$s。</string>
+    <string name="gradient_input_value_duplicate_warn">此值已存在於調色板中。</string>
+    <string name="gradient_input_invalid_value_warn">請輸入有效數字。</string>
+    <string name="value_cannot_be_edited_warn">此值無法編輯。</string>
+    <string name="unexpected_error_occurred_warn">發生未預期的錯誤。</string>
+    <string name="relative_gradient_point_m_summary">為軌跡中找到的最大值著色。</string>
+    <string name="relative_gradient_point_avg_summary">為軌跡的平均值設定顏色。</string>
+    <string name="relative_gradient_point_min_summary">為軌跡中找到的最小值設定顏色。</string>
+    <string name="shared_string_maximum">最大</string>
+    <string name="shared_string_minimum">最小</string>
+    <string name="shared_string_ratio">比例</string>
+    <string name="shared_string_percentage">百分比</string>
+    <string name="remove_step">移除步驟</string>
+    <string name="shared_string_value">值</string>
+    <string name="gradient_range_type_fixed_summary">分配給特定絕對數值的顏色（例如 50 公里/小時）。</string>
+    <string name="gradient_range_type_fixed">固定值</string>
+    <string name="gradient_range_type_relative_summary">顏色會根據軌跡的最小值/最大值範圍自動調整。</string>
+    <string name="gradient_range_type_relative">相對</string>
+    <string name="edit_palette">編輯調色板</string>
+    <string name="add_palette">新增調色板</string>
+    <string name="delete_palette">刪除調色板</string>
+    <string name="delete_colors_palette_dialog_summary">您確定您想要刪除 %1$s 調色板嗎？</string>
 </resources>
