@@ -6,7 +6,7 @@ tasks.register('printc') {
 
 final String generateAndPullPreferencesDatabaseTaskName = 'generateAndPullPreferencesDatabase'
 def isDbGenerationRequested = gradle.startParameter.taskNames.any {
-	it == generateAndPullPreferencesDatabaseTaskName || it.endsWith(":" + generateAndPullPreferencesDatabaseTaskName)
+	it == generateAndPullPreferencesDatabaseTaskName || it.endsWith(":${generateAndPullPreferencesDatabaseTaskName}")
 }
 
 android {
