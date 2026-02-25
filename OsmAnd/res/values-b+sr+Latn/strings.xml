@@ -5996,4 +5996,33 @@
     <string name="stars_articles">Članci o zvezdama</string>
     <string name="astronomy_plugin_name">Astronomija</string>
     <string name="astro_min_magnitude">Min. magnituda</string>
+    <plurals name="tracks_count">
+        <item quantity="one">%d putanja</item>
+        <item quantity="few">%d putanje</item>
+        <item quantity="other">%d putanja</item>
+    </plurals>
+    <string name="gradient_no_data_point_summary">Boja se primenjuje kada podaci nedostaju ili nisu definisani.</string>
+    <string name="gradient_input_value_too_low_warn">Minimalna dozvoljena vrednost je %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">Maksimalna dozvoljena vrednost je %1$s.</string>
+    <string name="gradient_input_value_duplicate_warn">Ova vrednost već postoji u paleti.</string>
+    <string name="gradient_input_invalid_value_warn">Molimo da unesete važeći broj.</string>
+    <string name="value_cannot_be_edited_warn">Ova vrednost se ne može izmeniti.</string>
+    <string name="unexpected_error_occurred_warn">Došlo je do neočekivane greške.</string>
+    <string name="relative_gradient_point_m_summary">Boja za maksimalnu vrednost pronađena u putanji.</string>
+    <string name="relative_gradient_point_avg_summary">Boja za prosečnu vrednost putanje.</string>
+    <string name="relative_gradient_point_min_summary">Boja za minimalnu vrednost pronađena u putanji.</string>
+    <string name="shared_string_maximum">Maksimum</string>
+    <string name="shared_string_minimum">Minimum</string>
+    <string name="shared_string_ratio">odnos</string>
+    <string name="shared_string_percentage">procenat</string>
+    <string name="remove_step">Ukloni korak</string>
+    <string name="shared_string_value">Vrednost</string>
+    <string name="gradient_range_type_fixed_summary">Boje su dodeljene određenim apsolutnim brojevima (npr. 50 km/h).</string>
+    <string name="gradient_range_type_fixed">Fiksne vrednosti</string>
+    <string name="gradient_range_type_relative_summary">Boje se automatski skaliraju na osnovu min./maks. opsega putanje.</string>
+    <string name="gradient_range_type_relative">Relativan</string>
+    <string name="edit_palette">Uredi paletu</string>
+    <string name="add_palette">Dodaj paletu</string>
+    <string name="delete_palette">Obriši paletu</string>
+    <string name="delete_colors_palette_dialog_summary">Da li ste sigurni da želite da obrišete paletu %1$s?</string>
 </resources>
