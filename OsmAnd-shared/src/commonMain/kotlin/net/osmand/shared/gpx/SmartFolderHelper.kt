@@ -22,38 +22,44 @@ import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.PlatformUtil
 
-object SmartFolderHelper {
+class SmartFolderHelper {
 
-	const val TRACK_FILTERS_SETTINGS_PREF = "track_filters_settings_pref"
+	companion object {
+		const val TRACK_FILTERS_SETTINGS_PREF = "track_filters_settings_pref"
+
+		private val trackFilterSerializersModule = SerializersModule {
+			polymorphic(BaseTrackFilter::class) {
+				subclass(FolderTrackFilter::class)
+			}
+			polymorphic(OrganizeByParams::class) {
+				subclass(OrganizeByRangeParams::class)
+			}
+		}
+
+		val json = Json {
+			isLenient = true
+			ignoreUnknownKeys = true
+			useArrayPolymorphism = false
+			encodeDefaults = true
+			classDiscriminator = "className"
+			classDiscriminatorMode = ClassDiscriminatorMode.NONE
+			serializersModule = trackFilterSerializersModule
+		}
+	}
 
 	private var smartFolderCollection: List<SmartFolder> = listOf()
 	private var allAvailableTrackItems = HashSet<TrackItem>()
 	private var updateListeners: List<SmartFolderUpdateListener> = listOf()
 	private var isWritingSettings = false
-	private val osmAndSettings: SettingsAPI? = PlatformUtil.getOsmAndContext().getSettings()
+	private val osmAndSettings: SettingsAPI? = try {
+		PlatformUtil.getOsmAndContext().getSettings()
+	} catch (e: UnsupportedOperationException) {
+		null
+	}
 	private val settingsChangedListener = object : KStateChangedListener<String> {
 		override fun stateChanged(change: String) {
 			onSettingsChanged()
 		}
-	}
-
-	private val trackFilterSerializersModule = SerializersModule {
-		polymorphic(BaseTrackFilter::class) {
-			subclass(FolderTrackFilter::class)
-		}
-		polymorphic(OrganizeByParams::class) {
-			subclass(OrganizeByRangeParams::class)
-		}
-	}
-
-	val json = Json {
-		isLenient = true
-		ignoreUnknownKeys = true
-		useArrayPolymorphism = false
-		encodeDefaults = true
-		classDiscriminator = "className"
-		classDiscriminatorMode = ClassDiscriminatorMode.NONE
-		serializersModule = trackFilterSerializersModule
 	}
 
 	init {
@@ -184,8 +190,8 @@ object SmartFolderHelper {
 
 	private fun writeSettings() {
 		isWritingSettings = true
-		val json = json.encodeToString(smartFolderCollection)
-		osmAndSettings?.setStringPreference(TRACK_FILTERS_SETTINGS_PREF, json)
+		val jsonStr = json.encodeToString(smartFolderCollection)
+		osmAndSettings?.setStringPreference(TRACK_FILTERS_SETTINGS_PREF, jsonStr)
 		isWritingSettings = false
 	}
 
@@ -312,7 +318,7 @@ object SmartFolderHelper {
 		return allAvailableTrackItems
 	}
 
-	private class SmartFoldersUpdateTask : KAsyncTask<Unit, Unit, Unit>() {
+	private inner class SmartFoldersUpdateTask : KAsyncTask<Unit, Unit, Unit>() {
 
 		override suspend fun doInBackground(vararg params: Unit) {
 			readSettings()
@@ -340,11 +346,5 @@ object SmartFolderHelper {
 	fun getOrganizeByParams(folderId: String): OrganizeByParams? {
 		val folder = getSmartFolderById(folderId)
 		return folder?.organizeByParams
-	}
-
-	fun resetSmartFolders() {
-		resetSmartFoldersItems()
-		getAllAvailableTrackItems().clear()
-		smartFolderCollection = listOf()
 	}
 }
