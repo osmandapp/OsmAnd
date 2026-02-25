@@ -5599,7 +5599,7 @@
     <string name="intermediate_first">Intermédiaire d\'abord</string>
     <string name="destination_first">Destination d\'abord</string>
     <string name="display_priority">Priorité d\'affichage</string>
-    <string name="poi_source">Source POI</string>
+    <string name="poi_source">Source des POI</string>
     <string name="wikidata">Wikidata</string>
     <string name="wiki_around">Lieux populaires à proximité</string>
     <string name="prediction_time_description">L\'icône de position dans OsmAnd s\'anime à chaque mise à jour GPS (une fois par seconde). Un léger retard peut se produire, en particulier lors de mouvements rapides ou lorsque le signal GPS est instable.</string>
@@ -5949,7 +5949,7 @@
     <string name="gradient_range_type_fixed_summary">Les couleurs sont attribuées selon des valeurs précises (par exemple : 50 km/h).</string>
     <string name="gradient_range_type_relative_summary">Les couleurs sont attribuées automatiquement selon l\'entendue des valeurs de la trace.</string>
     <string name="shared_string_trip_average">Moyenne du trajet</string>
-    <string name="trip_recording_avg_speed_widget_description">Indique la vitesse moyenne du trajet actuel, ou la vitesse moyenne durant la dernière montée ou descente.</string>
-    <string name="trip_recording_moving_time_widget_description">Affiche le temps de déplacement actuellement enregistré, ou le temps de la dernière montée et de la dernière descente.</string>
-    <string name="trip_recording_moving_time">Temps de déplacement</string>
+    <string name="trip_recording_avg_speed_widget_description">Affiche la vitesse moyenne du trajet actuel ou la vitesse moyenne de la dernière ascension ou descente.</string>
+    <string name="trip_recording_moving_time_widget_description">Affiche la durée de déplacement actuellement enregistrée ou la durée de la dernière ascension et descente.</string>
+    <string name="trip_recording_moving_time">Durée de déplacement</string>
 </resources>
