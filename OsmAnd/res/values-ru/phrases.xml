@@ -2230,7 +2230,7 @@
     <string name="poi_conveying_yes">Эскалатор/траволатор</string>
     <string name="poi_bridge_ref">Номер моста (в реестре)</string>
     <string name="poi_tunnel_ref">Номер туннеля (в реестре)</string>
-    <string name="poi_ref">Код</string>
+    <string name="poi_ref">Метка</string>
     <string name="poi_ferry_terminal_cargo">Перевозимый груз</string>
     <string name="poi_cargo_passengers">Пассажиры</string>
     <string name="poi_cargo_vehicle">Автомобили</string>
@@ -2837,7 +2837,7 @@
     <string name="poi_cuisine_noodle">Лапша</string>
     <string name="poi_cuisine_donut">Пончик</string>
     <string name="poi_cuisine_ramen">Рамэн</string>
-    <string name="poi_cuisine_crepe">Блинчики</string>
+    <string name="poi_cuisine_crepe">Крепы;Блинчики</string>
     <string name="poi_cuisine_breakfast">Завтрак</string>
     <string name="poi_cuisine_beef_bowl">Гюдон</string>
     <string name="poi_cuisine_steak">Стейк</string>

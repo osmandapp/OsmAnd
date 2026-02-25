@@ -121,6 +121,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInRouteLineAppearanceMode()
 				&& !isInConfigureMapOptionMode()
 				&& !isContextMenuFragmentVisible()
+				&& !isInPlanRouteMode()
 				&& shouldShowElementOnActiveScreen(BOTTOM_MENU_BUTTONS);
 	}
 
@@ -137,6 +138,7 @@ public class WidgetsVisibilityHelper {
 		return showTopControls
 				&& !isInFollowTrackMode()
 				&& !isInConfigureMapOptionMode()
+				&& !isInPlanRouteMode()
 				&& (additionalDialogsHide || !isPortrait());
 	}
 
@@ -175,6 +177,7 @@ public class WidgetsVisibilityHelper {
 				|| (isInTrackMenuMode() && !isPortrait());
 		return showTopControls
 				&& !isInConfigureMapOptionMode()
+				&& !isInPlanRouteMode()
 				&& !(isMapLinkedToLocation() && routingHelper.isFollowingMode())
 				&& (additionalDialogsHide || !isPortrait());
 	}
@@ -267,8 +270,8 @@ public class WidgetsVisibilityHelper {
 		return false;
 	}
 
-	private boolean isInPlanRouteMode() {
-		return mapLayers.getMapMarkersLayer().isInPlanRouteMode();
+	public boolean isInPlanRouteMode() {
+		return fragmentsHelper.getPlanRouteFragment() != null;
 	}
 
 	private boolean isInTrackAppearanceMode() {

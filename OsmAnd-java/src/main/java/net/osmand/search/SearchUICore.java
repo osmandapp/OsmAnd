@@ -554,7 +554,9 @@ public class SearchUICore {
 		apis.add(streetsApi);
 		SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
 		apis.add(cityApi);
-		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi));
+		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false));
+		// ?LONG?
+//		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false));
 	}
 
 	public void clearCustomSearchPoiFilters() {

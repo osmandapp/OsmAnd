@@ -2110,7 +2110,7 @@
 \nL\'extension OsmAnd ski maps permet de visualiser les pistes de ski avec leur niveau de difficulté et d\'autres informations utiles comme l\'emplacement et le type des remontées mécaniques.</string>
     <string name="osmand_extended_description_part7">Contribuez à OpenStreetMap (OSM) \n • Signalez des anomalies \n • Envoyez des traces GPX vers OSM directement depuis l\'application \n • Ajoutez des POI et envoyez-les vers OSM (immédiatement ou plus tard si vous êtes hors ligne)</string>
     <string name="osmand_plus_extended_description_part8">Couverture et qualité des cartes : \n • Europe de l\'Ouest : **** \n • Europe de l\'Est : *** \n • Russie : *** \n • Amérique du Nord : *** \n • Amérique du Sud : ** \n • Asie : ** \n • Japon et Corée : *** \n • Moyen-Orient : ** \n • Afrique : ** \n • Antarctique : * \n La majorité des pays autour du Monde sont disponibles au téléchargement\nDe l\'Afghanistan au Zimbabwe, de l\'Australie aux États-Unis. Argentine, Brésil, Canada, France, Allemagne, Mexique, Royaume-Uni, Espagne, …</string>
-    <string name="fonts_header">Fontes de carte</string>
+    <string name="fonts_header">Polices des textes sur la carte</string>
     <string name="osmand_plus_extended_description_part5">Fonctions liées à la sécurité \n • Bascule automatique en mode jour/nuit (option) \n • Affichage des limitations de vitesse avec rappels en cas de dépassement (option) \n • Zoom adapté à la vitesse (option) \n • Partage de votre position afin qu\'on puisse vous rejoindre rapidement</string>
     <string name="restore_purchases">Restaurer vos achats</string>
     <string name="shared_string_visible">Visible</string>
@@ -4230,7 +4230,7 @@
     <string name="map_markers_bar_widget_desc">Le widget affiche la distance et la direction de la prochaine marque à partir de votre position actuelle. Le widget peut être configuré pour afficher 1 ou 2 marque(s).</string>
     <string name="street_name_widget_desc">Le widget des noms de rue affiche le nom de la rue actuelle ou le nom de la rue suivante avec une flèche indiquant la prochaine manœuvre à effectuer.</string>
     <string name="lanes_widgets_desc">Affiche la disposition des voies de la route et met en évidence la voie à emprunter pendant la navigation.</string>
-    <string name="bearing_desc">Indique le cap absolu ou relatif d\'une cible (sur 180 degrés, 360 degrés ou en milliradians).</string>
+    <string name="bearing_desc">Affiche le cap relatif ou absolu vers une destination en unités angulaires (en mode 180 degrés, 360 degrés ou milliradians).</string>
     <string name="navigation_points_desc">Les widgets de navigation sont activés pendant la navigation et affichent des informations telles que la distance, l\'heure d\'arrivée ou la durée restante, les prochaines bifurcations, l\'orientation, le nom de la rue actuelle, les informations sur les voies, la vitesse maximale, les alertes, les POI et les points de passage.</string>
     <string name="track_attach_to_the_roads_descr">La trace sera déplacée sur la route en utilisant les cartes hors ligne, la géométrie de la trace sera modifiée.</string>
     <string name="route_maneuvers_desc">Les widgets de navigation sont activés pendant la navigation et affichent des informations telles que la distance, l\'heure d\'arrivée ou de départ, les prochaines bifurcations, l\'orientation, le nom de la rue actuelle, les informations sur les voies, la vitesse maximale, les alertes, les POI et les points de passage.</string>
@@ -5817,8 +5817,7 @@
     <string name="has_vehicle_metrics">Avec les données OBDII</string>
     <string name="show_expand_button">Afficher le bouton Développer</string>
     <string name="imprecise_coordinates">Coordonnées imprécises</string>
-    <string name="star_watcher_plugin_name">Observateur d\'étoiles</string>
-    <string name="star_watcher_plugin_description">Cartes stellaires, carte du ciel en 3D</string>
+    <string name="astronomy_plugin_description">Cartes stellaires, carte du ciel en 3D</string>
     <string name="star_map">Carte du ciel</string>
     <string name="star_charts_name">Cartes stellaires</string>
     <string name="star_visibility_name">Visibilité des étoiles</string>
@@ -5918,4 +5917,35 @@
     <string name="performance">Performance</string>
     <string name="view_distance">Distance de visibilité</string>
     <string name="stars_articles">Articles vedettes</string>
+    <string name="astronomy_plugin_name">Astronomie</string>
+    <string name="astro_min_magnitude">Magnitude min.</string>
+    <plurals name="tracks_count">
+        <item quantity="one">%d trace</item>
+        <item quantity="many">%d traces</item>
+        <item quantity="other">%d traces</item>
+    </plurals>
+    <string name="gradient_no_data_point_summary">Couleur lorsqu\'il n\'y a aucune donnée.</string>
+    <string name="gradient_input_value_too_low_warn">La valeur minimale autorisée est : %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">La valeur maximale autorisée est : %1$s.</string>
+    <string name="gradient_input_value_duplicate_warn">Cette valeur existe déjà dans la palette.</string>
+    <string name="gradient_input_invalid_value_warn">Veuillez saisir un nombre valide.</string>
+    <string name="value_cannot_be_edited_warn">Cette valeur ne peut pas être modifiée.</string>
+    <string name="unexpected_error_occurred_warn">Une erreur est survenue.</string>
+    <string name="relative_gradient_point_m_summary">Couleur pour la valeur maximale de la trace.</string>
+    <string name="relative_gradient_point_avg_summary">Couleur pour la valeur moyenne de la trace.</string>
+    <string name="relative_gradient_point_min_summary">Couleur pour la valeur minimale de la trace.</string>
+    <string name="shared_string_maximum">Maximum</string>
+    <string name="shared_string_minimum">Minimum</string>
+    <string name="shared_string_ratio">proportion</string>
+    <string name="shared_string_percentage">pourcentage</string>
+    <string name="remove_step">Retirer l\'étape</string>
+    <string name="shared_string_value">Valeur</string>
+    <string name="gradient_range_type_fixed">Valeurs fixes</string>
+    <string name="gradient_range_type_relative">Relatif</string>
+    <string name="edit_palette">Modifier la palette</string>
+    <string name="add_palette">Ajouter une palette</string>
+    <string name="delete_palette">Supprimer la palette</string>
+    <string name="delete_colors_palette_dialog_summary">Êtes-vous certain de vouloir supprimer la palette %1$s ?</string>
+    <string name="gradient_range_type_fixed_summary">Les couleurs sont attribuées selon des valeurs précises (par exemple : 50 km/h).</string>
+    <string name="gradient_range_type_relative_summary">Les couleurs sont attribuées automatiquement selon l\'entendue des valeurs de la trace.</string>
 </resources>

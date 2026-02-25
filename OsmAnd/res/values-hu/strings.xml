@@ -4375,7 +4375,7 @@
     <string name="display_position">Pozíció megjelenítése</string>
     <string name="rotate_map_manual_opt">Kézzel forgatott</string>
     <string name="shared_string_large">Nagy</string>
-    <string name="how_to_use">Használat:</string>
+    <string name="how_to_use">Használati útmutató:</string>
     <string name="shared_string_normal">Normál</string>
     <string name="distance_by_tap_use_description">Jelenlegi tartózkodási helye és a koppintással kijelölt pont közötti távolság megtekintéséhez koppintson a térképre.
 \nKattintással kijelölt pontok közötti távolság megtekintéséhez koppintson két ujjával a térképre</string>
@@ -5436,7 +5436,7 @@
     <string name="obd_vehicle_info">Jármű-információ</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="connect_obd_instructions_step1">Helyezze az olvasót a járműve OBD-II aljzatába.</string>
-    <string name="obd_how_to_connect">Hogyan működik:</string>
+    <string name="obd_how_to_connect">Útmutató a kapcsolódáshoz:</string>
     <string name="route_guidance">Útvonalvezetés</string>
     <string name="obd_widget_vehicle_speed">Jármű sebessége</string>
     <string name="obd_widget_engine_speed">Motor fordulatszáma</string>
@@ -5816,8 +5816,7 @@
     <string name="has_vehicle_metrics">OBDII-adatokkal</string>
     <string name="show_expand_button">Kibontásgomb megjelenítése</string>
     <string name="imprecise_coordinates">Pontatlan koordináták</string>
-    <string name="star_watcher_plugin_name">Csillagfigyelő (Béta)</string>
-    <string name="star_watcher_plugin_description">Csillagászati térképek, 3D csillagtérkép</string>
+    <string name="astronomy_plugin_description">Csillagászati térképek, 3D csillagtérkép</string>
     <string name="star_map">Csillagtérkép</string>
     <string name="star_charts_name">Csillagászati térképek</string>
     <string name="star_visibility_name">Csillagláthatóság</string>
@@ -5917,4 +5916,34 @@
     <string name="performance">Teljesítmény</string>
     <string name="view_distance">Megjelenítési távolság</string>
     <string name="stars_articles">Csillagok leírása</string>
+    <string name="astronomy_plugin_name">Csillagászat</string>
+    <string name="astro_min_magnitude">Legkisebb fényesség</string>
+    <plurals name="tracks_count">
+        <item quantity="one">%d nyomvonal</item>
+        <item quantity="other">%d nyomvonal</item>
+    </plurals>
+    <string name="gradient_no_data_point_summary">Szín, amely akkor lesz használva, ha az adatok hiányoznak vagy nincsenek meghatározva.</string>
+    <string name="gradient_input_value_too_low_warn">Legkisebb megengedett érték: %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">Legnagyobb megengedett érték: %1$s.</string>
+    <string name="gradient_input_value_duplicate_warn">Ez az érték már létezik a palettán.</string>
+    <string name="gradient_input_invalid_value_warn">Adjon meg egy érvényes értéket.</string>
+    <string name="value_cannot_be_edited_warn">Ez az érték nem szerkeszthető.</string>
+    <string name="unexpected_error_occurred_warn">Egy váratlan hiba történt.</string>
+    <string name="relative_gradient_point_m_summary">A nyomvonalban található legnagyobb érték színe.</string>
+    <string name="relative_gradient_point_avg_summary">A nyomvonal átlagértékéhez tartozó szín.</string>
+    <string name="relative_gradient_point_min_summary">A nyomvonalban található legkisebb érték színe.</string>
+    <string name="shared_string_maximum">Legnagyobb</string>
+    <string name="shared_string_minimum">Legkisebb</string>
+    <string name="shared_string_ratio">arány</string>
+    <string name="shared_string_percentage">százalék</string>
+    <string name="shared_string_value">Érték</string>
+    <string name="gradient_range_type_fixed_summary">A színek konkrét abszolút értékekhez vannak hozzárendelve (például: 50 km/h).</string>
+    <string name="gradient_range_type_fixed">Rögzített értékek</string>
+    <string name="gradient_range_type_relative_summary">A színek automatikusan skálázódnak a nyomvonal legkisebb és legnagyobb értékei alapján.</string>
+    <string name="gradient_range_type_relative">Viszonylagos</string>
+    <string name="edit_palette">Paletta szerkesztése</string>
+    <string name="add_palette">Paletta hozzáadása</string>
+    <string name="delete_palette">Paletta törlése</string>
+    <string name="delete_colors_palette_dialog_summary">Biztosan törölni szeretné a(z) %1$s palettát?</string>
+    <string name="remove_step">Lépés eltávolítása</string>
 </resources>

@@ -4,19 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_transparent"
-    android:clickable="true"
-    android:focusable="true">
+    android:background="@color/color_transparent">
 
     <LinearLayout
         android:id="@+id/main_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="vertical"
-        android:clickable="true"
-        android:focusable="true"
-        tools:ignore="UselessParent">
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="bottom"
+	    android:orientation="vertical"
+	    tools:ignore="UselessParent">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -39,15 +35,17 @@
 
         </FrameLayout>
 
-        <LinearLayout
-            android:id="@+id/main_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/list_background_color"
-            android:orientation="vertical">
+	    <LinearLayout
+		    android:id="@+id/main_content"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:background="?attr/list_background_color"
+		    android:clickable="true"
+		    android:focusable="true"
+		    android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/up_down_row"
+		    <RelativeLayout
+			    android:id="@+id/up_down_row"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/measurement_tool_up_down_row_height"
                 android:background="?attr/selectableItemBackground">
