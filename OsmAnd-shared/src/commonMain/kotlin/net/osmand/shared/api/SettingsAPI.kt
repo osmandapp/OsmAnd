@@ -15,9 +15,5 @@ interface SettingsAPI {
 	fun getFloatPreference(name: String): Float?
 	fun setFloatPreference(name: String, value: Float)
 
-	fun <T : Enum<T>> registerEnumPreference(name: String, defValue: T, values: Array<T>,
-	                                         clazz: KClass<T>, global: Boolean, shared: Boolean)
 	fun <T : Enum<T>> addEnumPreferenceListener(name: String, listener: KStateChangedListener<T>)
-	fun <T : Enum<T>> getEnumPreference(name: String): T?
-	fun <T : Enum<T>> setEnumPreference(name: String, value: T)
 }

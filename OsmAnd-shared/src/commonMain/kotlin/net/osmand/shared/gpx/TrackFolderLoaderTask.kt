@@ -13,6 +13,7 @@ import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallbackEx
 import net.osmand.shared.gpx.data.TrackFolder
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.LoggerFactory
+import net.osmand.shared.util.PlatformUtil
 
 class TrackFolderLoaderTask(
 	private val folder: TrackFolder,
@@ -74,7 +75,7 @@ class TrackFolderLoaderTask(
 		if (result === cachedRootFolder) folder.update(cachedRootFolder)
 		resetCachedData(folder)
 		listener.loadTracksFinished(folder)
-		SmartFolderHelper.notifyUpdateListeners()
+		PlatformUtil.getOsmAndContext().getSmartFolderHelper().notifyUpdateListeners()
 	}
 
 	private suspend fun loadGPXFolder(
@@ -85,7 +86,7 @@ class TrackFolderLoaderTask(
 		withContext(Dispatchers.IO) {
 			scanFolder(rootFolder, progress, trackItems)
 		}
-		SmartFolderHelper.addTrackItemsToSmartFolder(trackItems)
+		PlatformUtil.getOsmAndContext().getSmartFolderHelper().addTrackItemsToSmartFolder(trackItems)
 
 		resetCachedData(rootFolder)
 	}
