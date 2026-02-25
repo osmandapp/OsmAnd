@@ -557,10 +557,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			alarmWidget.updateInfo(drawSettings, false);
 			speedometerWidget.updateInfo(drawSettings);
 
-			boolean hasCustomRulers = rulerWidgets.size() > 1;
 			for (RulerWidget widget : rulerWidgets) {
-				boolean enabled = !hasCustomRulers || rulerWidget != widget;
-				widget.updateInfo(tileBox, enabled);
+				widget.updateInfo(tileBox);
 			}
 			for (SideWidgetsPanel panel : sideWidgetsPanels) {
 				panel.update(drawSettings);

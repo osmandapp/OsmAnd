@@ -239,6 +239,7 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	public void removeWidget(@NonNull View view) {
+		removeView(view);
 		additionalWidgetPositions.remove(view);
 	}
 
@@ -307,7 +308,7 @@ public class MapHudLayout extends FrameLayout {
 				}
 			}
 		}
-		for (Map.Entry<View, ButtonPositionSize> entry : additionalWidgetPositions.entrySet()) {
+		for (Map.Entry<View, ButtonPositionSize> entry : getSortedAdditionalWidgetEntries()) {
 			View view = entry.getKey();
 			if (view.getVisibility() == VISIBLE) {
 				ButtonPositionSize position = updateWidgetPosition(view, entry.getValue());
@@ -317,6 +318,26 @@ public class MapHudLayout extends FrameLayout {
 			}
 		}
 		return map;
+	}
+
+	@NonNull
+	private List<Map.Entry<View, ButtonPositionSize>> getSortedAdditionalWidgetEntries() {
+		List<Map.Entry<View, ButtonPositionSize>> list = new ArrayList<>(additionalWidgetPositions.entrySet());
+		list.sort((e1, e2) -> Integer.compare(
+				getAdditionalWidgetPriority(e1.getKey()),
+				getAdditionalWidgetPriority(e2.getKey())
+		));
+		return list;
+	}
+
+	private int getAdditionalWidgetPriority(@NonNull View view) {
+		int id = view.getId();
+		if (R.id.measurement_buttons == id) {
+			return 0;
+		} else if (R.id.map_ruler_layout == id) {
+			return 1;
+		}
+		return 100;
 	}
 
 	@NonNull
@@ -369,6 +390,9 @@ public class MapHudLayout extends FrameLayout {
 			position.setMoveVertical();
 			position.setPositionVertical(POS_TOP);
 			position.setPositionHorizontal(POS_LEFT);
+		} else if (id == R.id.measurement_buttons) {
+			position.setPositionVertical(POS_BOTTOM);
+			position.setPositionHorizontal(POS_LEFT);
 		}
 		return updateWidgetPosition(view, position);
 	}
@@ -398,7 +422,7 @@ public class MapHudLayout extends FrameLayout {
 				calcGridPositionFromPixel(view, position);
 			}
 			position.setMarginY(0);
-		} else if (view instanceof RulerWidget || view instanceof SideWidgetsPanel) {
+		} else if (view instanceof RulerWidget || view instanceof SideWidgetsPanel || id == R.id.measurement_buttons) {
 			position.setMarginX(0);
 			position.setMarginY(0);
 		} else if (id == R.id.alarms_container) {
