@@ -8,7 +8,6 @@ import net.osmand.plus.settings.backend.preferences.StringPreference
 import net.osmand.shared.api.SettingsAPI
 import net.osmand.shared.api.KStateChangedListener
 import java.util.WeakHashMap
-import kotlin.reflect.KClass
 
 class SettingsAPIImpl(private val app: OsmandApplication) : SettingsAPI {
 
@@ -86,34 +85,6 @@ class SettingsAPIImpl(private val app: OsmandApplication) : SettingsAPI {
 			val wrappedListener = StateChangedListener<Float> { change -> listener.stateChanged(change) }
 			listenersCache[listener] = wrappedListener
 			pref.addListener(wrappedListener)
-		}
-	}
-
-	override fun <T : Enum<T>> registerEnumPreference(name: String, defValue: T, values: Array<T>,
-	                                                  clazz: KClass<T>, global: Boolean, shared: Boolean) {
-		val preference = app.settings.registerEnumStringPreference(name, defValue, values, clazz.java)
-		if (global) {
-			preference.makeGlobal()
-		}
-		if (shared) {
-			preference.makeShared()
-		}
-	}
-
-	override fun <T : Enum<T>> getEnumPreference(name: String): T? {
-		val pref = app.settings.getPreference(name)
-		if (pref is EnumStringPreference<*>) {
-			@Suppress("UNCHECKED_CAST")
-			return pref.get() as T
-		}
-		return null
-	}
-
-	override fun <T : Enum<T>> setEnumPreference(name: String, value: T) {
-		val pref = app.settings.getPreference(name)
-		if (pref is EnumStringPreference<*>) {
-			@Suppress("UNCHECKED_CAST")
-			(pref as EnumStringPreference<T>).set(value)
 		}
 	}
 
