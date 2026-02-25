@@ -60,7 +60,7 @@ class SmartFolderHelper {
 	private var isWritingSettings = false
 	private val osmAndSettings: SettingsAPI? = try {
 		PlatformUtil.getOsmAndContext().getSettings()
-	} catch (e: UnsupportedOperationException) {
+	} catch (e: Exception) {
 		null
 	}
 	private val settingsChangedListener = object : KStateChangedListener<String> {
