@@ -105,7 +105,7 @@ public class BinaryMapIndexReaderStats {
 	}
 	
 	public static class SearchStat {
-		private static final boolean TO_DETAILED_STRING = true;
+		private static final boolean TO_DETAILED_STRING = false;
 		long lastReq = 0, subSize = 0;
 		public long totalTime = 0;
 		public long totalBytes = 0;

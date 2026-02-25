@@ -847,7 +847,6 @@ public class SearchUICore {
 	}
 
 	void searchInternal(final SearchPhrase phrase, SearchResultMatcher matcher) {
-        phrase.getSettings().setStat(new BinaryMapIndexReaderStats.SearchStat());
 		preparePhrase(phrase);
 		ArrayList<SearchCoreAPI> lst = new ArrayList<>(apis);
 		Collections.sort(lst, new Comparator<SearchCoreAPI>() {
@@ -882,7 +881,6 @@ public class SearchUICore {
 				LOG.error(e.getMessage(), e);
 			}
 		}
-        LOG.info("Stats:" + phrase.getSettings().getStat());
 	}
 
 	private void preparePhrase(final SearchPhrase phrase) {

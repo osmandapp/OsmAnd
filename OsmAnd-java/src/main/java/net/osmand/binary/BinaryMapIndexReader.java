@@ -139,7 +139,7 @@ public class BinaryMapIndexReader {
 
 	private static final String BASEMAP_NAME = "basemap";
 
-	private static final IndexedStringTableCache INDEXED_STRING_TABLE_CACHE = new IndexedStringTableCache();
+	private static final IndexedStringTableCache tableCache = new IndexedStringTableCache();
 
 	public BinaryMapIndexReader(final RandomAccessFile raf, File file) throws IOException {
 		this.raf = raf;
@@ -2629,13 +2629,13 @@ req.setSearchStat(stat);
 		boolean[] matched = new boolean[matchedCharacters.size()];
 		String key = null;
 		boolean shouldWeReadSubtable = false;
-		boolean canUseCache = INDEXED_STRING_TABLE_CACHE.canUseCache(prefix, cacheKeySuffixId);
-		if (INDEXED_STRING_TABLE_CACHE.trySearch(getFile(), prefix, cacheKeySuffixId, this, instance, queries, listOffsets, matchedCharacters)) {
+		boolean canUseCache = tableCache.canUseCache(prefix, cacheKeySuffixId);
+		if (tableCache.trySearch(getFile(), prefix, cacheKeySuffixId, this, instance, queries, listOffsets, matchedCharacters)) {
 			codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 			return;
 		}
 
-		IndexedStringTableCache.Builder cacheBuilderPerRead = INDEXED_STRING_TABLE_CACHE.newBuilderIfEnabled(prefix, cacheKeySuffixId);
+		IndexedStringTableCache.Builder cacheBuilderPerRead = tableCache.newBuilderIfEnabled(prefix, cacheKeySuffixId);
 		boolean hasSubtables = false;
 
 		while (true) {
@@ -2643,7 +2643,7 @@ req.setSearchStat(stat);
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				INDEXED_STRING_TABLE_CACHE.saveIfNeeded(getFile(), cacheKeySuffixId, cacheBuilderPerRead, hasSubtables);
+				tableCache.saveIfNeeded(getFile(), cacheKeySuffixId, cacheBuilderPerRead, hasSubtables);
 				return;
 			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
 				key = codedIS.readString();

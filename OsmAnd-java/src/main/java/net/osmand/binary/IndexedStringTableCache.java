@@ -1,49 +1,103 @@
 package net.osmand.binary;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.text.Normalizer;
 import java.util.*;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicLong;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.Collator;
+import net.osmand.PlatformUtil;
+import org.apache.commons.logging.Log;
 
 class IndexedStringTableCache {
-	static final boolean ENABLED = true;
+	private static final Log LOG = PlatformUtil.getLog(IndexedStringTableCache.class);
+
+	static final boolean ENABLED = readEnabledFromEnv();
+	private static final int MAX_KEYS_PER_BUCKET = 300_000;
+	private static final int MAX_VALS_PER_BUCKET = 32_000_000;
+
+	private static boolean readEnabledFromEnv() {
+		String env = System.getenv("TABLE_CACHE");
+		return env == null || env.trim().isEmpty() || switch (env.trim().toLowerCase()) {
+			case "0", "false", "no", "off", "disabled" -> false;
+			default -> true;
+		};
+	}
+
 	private static final Object DISK_CACHE_IO_LOCK = new Object();
+	private static final Object RAM_BUDGET_LOCK = new Object();
+	private static final class RandomAccessFileOutputStream extends java.io.OutputStream {
+		private final RandomAccessFile raf;
+		private RandomAccessFileOutputStream(RandomAccessFile raf) {
+			this.raf = raf;
+		}
+		@Override
+		public void write(int b) throws IOException {
+			raf.write(b);
+		}
+		@Override
+		public void write(byte[] b, int off, int len) throws IOException {
+			raf.write(b, off, len);
+		}
+	}
 	private static final ExecutorService DISK_SAVE_EXECUTOR = Executors.newSingleThreadExecutor(r -> {
 		Thread t = new Thread(r, "IndexedStringTableCache-DiskSave");
 		t.setDaemon(true);
 		return t;
 	});
 
-	private static final int DISK_CACHE_FORMAT_VERSION = 3;
+	private static final int DISK_CACHE_FORMAT_VERSION = 4;
 	private static final int DISK_CACHE_MAGIC = 0x49535443;
 	private static final String DISK_CACHE_FILE_SUFFIX = ".cache";
+	private static final long RAM_LIMIT_BYTES = 20 * 1024L * 1024L;
+	// In-memory LRU key format: obfPath + suffixId + "#b" + 8-hex bucketKey.
+	private static final String BUCKET_KEY_MARKER = "#b";
+	private static final int STATS_PRINT_EVERY_REQUESTS = 1000;
+	private static final int STAT_GET_REQUESTS = 0, STAT_EVICTIONS = 1,
+			STAT_SEARCH_CALLS = 2, STAT_SEARCH_SUCCESS = 3, STAT_SEARCH_RAM_SUCCESS = 4;
+	private static final int STATS_SIZE = 5;
+	private static final AtomicLong[] STATS = new AtomicLong[STATS_SIZE];
+	static {
+		for (int i = 0; i < STATS_SIZE; i++) {
+			STATS[i] = new AtomicLong();
+		}
+	}
 
+	// Disk cache metadata for a single OBF file (used to validate that *.cache matches the current OBF).
+	// suffixes: :poi/:addr sections
 	private record DiskMeta(long size, long mtime, HashSet<String> suffixes) {
+	}
+
+	// Pointer to a serialized bucket blob inside the *.cache file (random-access seek + read).
+	private record DiskBucketRef(long offset, int lengthBytes) {
+	}
+
+	// In-memory index for a single OBF file: per suffixId -> bucketKey -> location in *.cache.
+	private record DiskIndex(long size, long mtime, HashMap<String, HashMap<Integer, DiskBucketRef>> bucketsBySuffix) {
+	}
+
+	// File positions of the (offset,len) fields for one bucket entry in the on-disk index (used for patching/updating).
+	private record BucketIndexPos(String suffix, int bucketKey, long offsetPos, long lenPos) {
 	}
 
 	record Entry(String[] keys, int[] vals, int[] valStart, int[] valLength,
 			TIntObjectHashMap<TIntArrayList> bucket1, TIntObjectHashMap<TIntArrayList> bucket2) {
 		long estimateEntryRamBytes() {
-			final long objectHeaderMin = 16;
-			final long arrayHeaderMin = 16;
-			final int refSizeMin = 4;
-			final int intSize = 4;
-
+			final long objectHeaderMin = 16, arrayHeaderMin = 16;
+			final int refSizeMin = 4, intSize = 4;
 			long min = 0;
 
 			int keysCount = keys() == null ? 0 : keys().length;
@@ -95,19 +149,75 @@ class IndexedStringTableCache {
 		if (map == null || map.isEmpty()) {
 			return 0;
 		}
+		final long objectHeaderMin = 16L;
+		final long arrayHeaderMin = 16L;
+		final int refSizeMin = 4;
+		final int intSize = 4;
+		final int byteSize = 1;
 		long min = 0;
-		min += 16L;
-		min += 16L;
-		min += (long) map.size() * 4;
+
+		min += objectHeaderMin;
+		boolean usedCapacityModel = false;
+		try {
+			int setCapacity = getArrayLengthByFieldName(map, "_set", int[].class);
+			int statesCapacity = getArrayLengthByFieldName(map, "_states", byte[].class);
+			int valuesCapacity = getArrayLengthByFieldName(map, "_values", Object[].class);
+			if (setCapacity > 0 && statesCapacity > 0 && valuesCapacity > 0) {
+				min += arrayHeaderMin + (long) setCapacity * intSize;
+				min += arrayHeaderMin + (long) statesCapacity * byteSize;
+				min += arrayHeaderMin + (long) valuesCapacity * refSizeMin;
+				usedCapacityModel = true;
+			}
+		} catch (Throwable ignore) {
+			// ignore
+		}
+
+		if (!usedCapacityModel) {
+			min += arrayHeaderMin;
+			min += (long) map.size() * intSize;
+		}
+
 		for (TIntArrayList list : map.valueCollection()) {
 			if (list == null) {
 				continue;
 			}
-			int sz = list.size();
-			min += 16L;
-			min += 16L + (long) sz * 4;
+			min += objectHeaderMin;
+			int dataCapacity = -1;
+			try {
+				dataCapacity = getArrayLengthByFieldName(list, "_data", int[].class);
+			} catch (Throwable ignore) {
+				// ignore
+			}
+			if (dataCapacity > 0) {
+				min += arrayHeaderMin + (long) dataCapacity * intSize;
+			} else {
+				min += arrayHeaderMin + (long) list.size() * intSize;
+			}
 		}
 		return min;
+	}
+
+	private static int getArrayLengthByFieldName(Object instance, String fieldName, Class<?> expectedArrayType) {
+		if (instance == null || fieldName == null || fieldName.isEmpty() || expectedArrayType == null) {
+			return -1;
+		}
+		Class<?> cls = instance.getClass();
+		while (cls != null) {
+			try {
+				java.lang.reflect.Field f = cls.getDeclaredField(fieldName);
+				f.setAccessible(true);
+				Object v = f.get(instance);
+				if (v == null || v.getClass() != expectedArrayType) {
+					return -1;
+				}
+				return java.lang.reflect.Array.getLength(v);
+			} catch (NoSuchFieldException e) {
+				cls = cls.getSuperclass();
+			} catch (IllegalAccessException e) {
+				return -1;
+			}
+		}
+		return -1;
 	}
 
 	long estimateCacheRamBytesByPrefix(String obfPathPrefix) {
@@ -197,14 +307,20 @@ class IndexedStringTableCache {
 
 	private final Map<String, Entry> cache = new ConcurrentHashMap<>();
 	private final Map<String, DiskMeta> diskMetaByObfPath = new ConcurrentHashMap<>();
+	private final Map<String, DiskIndex> diskIndexByObfPath = new ConcurrentHashMap<>();
 	private final HashSet<String> diskSaveInFlight = new HashSet<>();
+	// Tracks LRU ordering for *loaded* bucket entries only (bounded by RAM_LIMIT_BYTES).
+	private final LinkedHashMap<String, Boolean> lruBucketKeys = new LinkedHashMap<>(16, 0.75f, true);
+	private long currentRamBytes = 0;
+	// Persistence is independent of RAM/LRU: we keep a full snapshot of buckets to be written to disk.
+	private final HashMap<String, HashMap<String, HashMap<Integer, Entry>>> pendingPersistByObf = new HashMap<>();
 
 	private static String getObfPathKey(File obfFile) {
 		return obfFile.getAbsolutePath();
 	}
 
-	private static String getInMemoryCacheKey(File obfFile, String suffixId) {
-		return getObfPathKey(obfFile) + suffixId;
+	private static String getInMemoryBucketCacheKey(File obfFile, String suffixId, int bucketKey) {
+		return getObfPathKey(obfFile) + suffixId + BUCKET_KEY_MARKER + String.format(Locale.ROOT, "%08x", bucketKey);
 	}
 
 	private static File getDiskCacheFile(File obfFile) {
@@ -223,21 +339,54 @@ class IndexedStringTableCache {
 		return canUseCache(prefix, suffixId) ? new Builder() : null;
 	}
 
+	// Fast path: load disk index (meta + per-bucket offsets) and then lazily load only required 2-char buckets.
 	boolean trySearch(File obfFile, String prefix, String suffixId, BinaryMapIndexReader reader, Collator instance,
 			List<String> queries, List<TIntArrayList> listOffsets, TIntArrayList matchedCharacters) {
 		if (!canUseCache(prefix, suffixId) || obfFile == null) {
 			return false;
 		}
-		String cacheKey = getInMemoryCacheKey(obfFile, suffixId);
-		Entry entry = get(cacheKey);
-		if (entry == null) {
-			load(obfFile);
-			entry = get(cacheKey);
-		}
-		if (entry == null) {
+		LinkedHashSet<Integer> requiredBucketsPerKeys = collectRequiredBucketKeys(queries);
+		if (requiredBucketsPerKeys.isEmpty()) {
 			return false;
 		}
-		search(entry, reader, instance, queries, listOffsets, matchedCharacters);
+		STATS[STAT_SEARCH_CALLS].incrementAndGet();
+
+		boolean hasAllBuckets = true;
+		boolean allBucketsServedFromRam = true;
+		for (int bucketKey : requiredBucketsPerKeys) {
+			String bucketCacheKey = getInMemoryBucketCacheKey(obfFile, suffixId, bucketKey);
+			Entry entry = get(bucketCacheKey);
+			if (entry == null) {
+				allBucketsServedFromRam = false;
+				if (!load(obfFile)) {
+					hasAllBuckets = false;
+					break;
+				}
+				entry = get(bucketCacheKey);
+				if (entry == null) {
+					entry = loadBucketFromDisk(obfFile, suffixId, bucketKey);
+				}
+			}
+			if (entry == null) {
+				hasAllBuckets = false;
+				break;
+			}
+		}
+		if (!hasAllBuckets) {
+			return false;
+		}
+
+		for (int bucketKey : requiredBucketsPerKeys) {
+			String bucketCacheKey = getInMemoryBucketCacheKey(obfFile, suffixId, bucketKey);
+			Entry entry = get(bucketCacheKey);
+			if (entry != null) {
+				search(entry, reader, instance, queries, listOffsets, matchedCharacters);
+			}
+		}
+		STATS[STAT_SEARCH_SUCCESS].incrementAndGet();
+		if (allBucketsServedFromRam) {
+			STATS[STAT_SEARCH_RAM_SUCCESS].incrementAndGet();
+		}
 		return true;
 	}
 
@@ -249,9 +398,138 @@ class IndexedStringTableCache {
 		if (built == null) {
 			return;
 		}
-		String cacheKey = getInMemoryCacheKey(obfFile, suffixId);
-		put(cacheKey, built);
+		// Lazy RAM: buckets will be loaded on demand from disk index via loadBucketFromDisk() and cached in RAM with LRU.
+		addPendingPersistSnapshot(obfFile, suffixId, built);
 		scheduleSaveToDiskIfNeeded(obfFile, suffixId);
+	}
+
+	// Builds a full (suffixId -> bucketKey -> bucketEntry) snapshot that will be persisted to disk.
+	// This is intentionally independent of the RAM-limited LRU (which may evict bucket entries).
+	private void addPendingPersistSnapshot(File obfFile, String suffixId, Entry full) {
+		if (!ENABLED || obfFile == null || suffixId == null || full == null || full.keys() == null) {
+			return;
+		}
+		String obfPathKey = getObfPathKey(obfFile);
+		HashMap<Integer, Entry> buckets = buildAllBuckets(full);
+		if (buckets.isEmpty()) {
+			return;
+		}
+		synchronized (DISK_CACHE_IO_LOCK) {
+			pendingPersistByObf
+					.computeIfAbsent(obfPathKey, k -> new HashMap<>())
+					.put(suffixId, buckets);
+		}
+	}
+
+	// Splits a full Entry into a set of bucket entries (2-char bucketKey -> bucketEntry).
+	// A bucket-entry contains only keys/vals for that bucket and does NOT have bucket1/bucket2 maps (they are null).
+	private static HashMap<Integer, Entry> buildAllBuckets(Entry full) {
+		HashMap<Integer, ArrayList<Integer>> keyIdxByBucket = new HashMap<>();
+		for (int i = 0; i < full.keys().length; i++) {
+			String key = full.keys()[i];
+			int bucketKey = bucketKey2FromString(key);
+			if (bucketKey == -1) {
+				continue;
+			}
+			keyIdxByBucket.computeIfAbsent(bucketKey, k -> new ArrayList<>()).add(i);
+		}
+		HashMap<Integer, Entry> out = new HashMap<>();
+		for (Map.Entry<Integer, ArrayList<Integer>> e : keyIdxByBucket.entrySet()) {
+			Entry bucketEntry = buildBucketEntry(full, e.getValue());
+			if (bucketEntry != null) {
+				out.put(e.getKey(), bucketEntry);
+			}
+		}
+		return out;
+	}
+
+	// Creates a standalone bucket Entry (subset of keys/vals) for a given set of key indices.
+	private static Entry buildBucketEntry(Entry full, ArrayList<Integer> indices) {
+		if (full == null || indices == null || indices.isEmpty()) {
+			return null;
+		}
+		String[] keys = new String[indices.size()];
+		int[] valStart = new int[indices.size()];
+		int[] valLength = new int[indices.size()];
+		int totalVals = 0;
+		for (int i = 0; i < indices.size(); i++) {
+			int fullIdx = indices.get(i);
+			keys[i] = full.keys()[fullIdx];
+			int len = full.valLength()[fullIdx];
+			valStart[i] = totalVals;
+			valLength[i] = len;
+			totalVals += len;
+		}
+		int[] vals = new int[totalVals];
+		int p = 0;
+		for (int fullIdx : indices) {
+			int start = full.valStart()[fullIdx];
+			int len = full.valLength()[fullIdx];
+			for (int j = 0; j < len; j++) {
+				vals[p++] = full.vals()[start + j];
+			}
+		}
+		assert p == totalVals;
+		return new Entry(keys, vals, valStart, valLength, null, null);
+	}
+
+	// RAM budget + global LRU eviction across all loaded buckets.
+	// Note: persistence is not affected; disk snapshot is managed via pendingPersistByObf.
+	private void putBucketWithBudget(String bucketCacheKey, Entry bucketEntry) {
+		if (!ENABLED || bucketCacheKey == null || bucketEntry == null) {
+			return;
+		}
+		final long entryBytes = bucketEntry.estimateEntryRamBytes();
+		if (entryBytes > RAM_LIMIT_BYTES) {
+			return;
+		}
+		synchronized (RAM_BUDGET_LOCK) {
+			if (currentRamBytes == 0 && !cache.isEmpty()) {
+				currentRamBytes = Math.max(0, estimateCacheRamBytesByPrefix(null));
+			}
+			if (lruBucketKeys.isEmpty() && !cache.isEmpty()) {
+				long recalculatedRamBytes = 0;
+				for (Map.Entry<String, Entry> e : cache.entrySet()) {
+					String key = e.getKey();
+					Entry value = e.getValue();
+					if (key == null || value == null) {
+						continue;
+					}
+					lruBucketKeys.put(key, Boolean.TRUE);
+					recalculatedRamBytes += value.estimateEntryRamBytes();
+				}
+				currentRamBytes = recalculatedRamBytes;
+			}
+			while (currentRamBytes + entryBytes > RAM_LIMIT_BYTES) {
+				String evictKey = getLruEldestKey();
+				if (evictKey == null) {
+					break;
+				}
+				Entry evicted = cache.remove(evictKey);
+				lruBucketKeys.remove(evictKey);
+				if (evicted != null) {
+					currentRamBytes -= evicted.estimateEntryRamBytes();
+					if (currentRamBytes < 0) {
+						currentRamBytes = 0;
+					}
+					STATS[STAT_EVICTIONS].incrementAndGet();
+				}
+			}
+			Entry prev = cache.put(bucketCacheKey, bucketEntry);
+			if (prev != null) {
+				currentRamBytes -= prev.estimateEntryRamBytes();
+				if (currentRamBytes < 0) {
+					currentRamBytes = 0;
+				}
+			}
+			currentRamBytes += entryBytes;
+			lruBucketKeys.put(bucketCacheKey, Boolean.TRUE);
+		}
+	}
+
+	private String getLruEldestKey() {
+		Iterator<String> it = lruBucketKeys.keySet().iterator();
+		return it.hasNext() ? it.next() : null;
 	}
 
 	private void scheduleSaveToDiskIfNeeded(File obfFile, String suffixId) {
@@ -283,19 +561,35 @@ class IndexedStringTableCache {
 		if (!ENABLED) {
 			return null;
 		}
-		return cache.get(cacheKey);
+		Entry entry = cache.get(cacheKey);
+		long req = STATS[STAT_GET_REQUESTS].incrementAndGet();
+		if (req % STATS_PRINT_EVERY_REQUESTS == 0) {
+			printStatsIfNeeded(req);
+		}
+		return entry;
 	}
 
-	void put(String cacheKey, Entry entry) {
-		if (!ENABLED) {
-			return;
-		}
-		if (entry == null) {
-			return;
-		}
-		cache.put(cacheKey, entry);
+	private static void printStatsIfNeeded(long reqCount) {
+		long evictions = STATS[STAT_EVICTIONS].get();
+		long tryCalls = STATS[STAT_SEARCH_CALLS].get();
+		long tryOk = STATS[STAT_SEARCH_SUCCESS].get();
+		long tryRamOk = STATS[STAT_SEARCH_RAM_SUCCESS].get();
+
+		// Global cumulative rates.
+		double evictionRate = tryCalls <= 0 ? 0d : (double) evictions / (double) tryCalls;
+		double trySuccessRate = tryCalls <= 0 ? 0d : (double) tryOk / (double) tryCalls;
+		double ramSuccessRate = tryCalls <= 0 ? 0d : (double) tryRamOk / (double) tryCalls;
+
+		LOG.info("Cache stats: req_count, ram_hit_rate, cache_hit_rate, evict_rate");
+		LOG.info(reqCount +
+					"," + String.format(Locale.ROOT, "%.2f", ramSuccessRate * 100d) + "%" +
+					"," + String.format(Locale.ROOT, "%.2f", trySuccessRate * 100d) + "%" +
+					"," + String.format(Locale.ROOT, "%.4f", evictionRate)
+		);
 	}
 
+	// Reads only disk meta + per-suffix bucket index.
+	// Bucket blobs are read on-demand by loadBucketFromDisk() using RandomAccessFile seek(offset).
 	boolean load(File obfFile) {
 		if (!ENABLED) {
 			return false;
@@ -306,13 +600,18 @@ class IndexedStringTableCache {
 		String obfPathKey = getObfPathKey(obfFile);
 		long obfSize = obfFile.length();
 		long obfMtime = obfFile.lastModified();
+		File sourceFile = getDiskCacheFile(obfFile);
 
 		DiskMeta prevMeta = diskMetaByObfPath.get(obfPathKey);
-		if (prevMeta != null && prevMeta.size == obfSize && prevMeta.mtime == obfMtime) {
+		DiskIndex prevIndex = diskIndexByObfPath.get(obfPathKey);
+		if (prevMeta != null && prevMeta.size == obfSize && prevMeta.mtime == obfMtime && prevIndex != null) {
+			if (sourceFile != null && sourceFile.exists() && sourceFile.isFile()) {
 			return true;
+			}
+			diskMetaByObfPath.remove(obfPathKey);
+			diskIndexByObfPath.remove(obfPathKey);
+			return false;
 		}
-
-		File sourceFile = getDiskCacheFile(obfFile);
 		if (sourceFile == null || !sourceFile.exists() || !sourceFile.isFile()) {
 			return false;
 		}
@@ -331,29 +630,89 @@ class IndexedStringTableCache {
 			if (sizeInCache != obfSize || mtimeInCache != obfMtime) {
 				return false;
 			}
-			int entryCount = in.readInt();
-			if (entryCount < 0) {
+			int suffixCount = in.readInt();
+			if (suffixCount < 0) {
 				return false;
 			}
 
 			HashSet<String> suffixes = new HashSet<>();
-			for (int i = 0; i < entryCount; i++) {
+			HashMap<String, HashMap<Integer, DiskBucketRef>> bucketsBySuffix = new HashMap<>();
+			for (int i = 0; i < suffixCount; i++) {
 				String suffixId = readString(in);
-				Entry entry = readEntry(in);
-				if (suffixId == null || entry == null) {
+				if (suffixId == null) {
 					return false;
 				}
 				suffixes.add(suffixId);
-				cache.put(getInMemoryCacheKey(obfFile, suffixId), entry);
+				int bucketCount = in.readInt();
+				if (bucketCount < 0) {
+					return false;
+				}
+				HashMap<Integer, DiskBucketRef> refs = new HashMap<>();
+				for (int bi = 0; bi < bucketCount; bi++) {
+					int bucketKey = in.readInt();
+					long offset = in.readLong();
+					int lenBytes = in.readInt();
+					if (offset < 0 || lenBytes < 0) {
+						return false;
+					}
+					refs.put(bucketKey, new DiskBucketRef(offset, lenBytes));
+				}
+				bucketsBySuffix.put(suffixId, refs);
 			}
 
 			diskMetaByObfPath.put(obfPathKey, new DiskMeta(obfSize, obfMtime, suffixes));
+			diskIndexByObfPath.put(obfPathKey, new DiskIndex(obfSize, obfMtime, bucketsBySuffix));
 			return true;
 		} catch (IOException e) {
 			return false;
 		}
 	}
 
+	// Loads a single bucket blob by (suffixId, bucketKey) using disk index offsets.
+	private Entry loadBucketFromDisk(File obfFile, String suffixId, int bucketKey) {
+		if (!ENABLED || obfFile == null || suffixId == null) {
+			return null;
+		}
+		String obfPathKey = getObfPathKey(obfFile);
+		DiskIndex index = diskIndexByObfPath.get(obfPathKey);
+		if (index == null || index.bucketsBySuffix() == null) {
+			return null;
+		}
+		HashMap<Integer, DiskBucketRef> refs = index.bucketsBySuffix().get(suffixId);
+		if (refs == null) {
+			return null;
+		}
+		DiskBucketRef ref = refs.get(bucketKey);
+		if (ref == null) {
+			return null;
+		}
+		if (ref.lengthBytes() <= 0) {
+			return null;
+		}
+		File sourceFile = getDiskCacheFile(obfFile);
+		if (sourceFile == null || !sourceFile.exists() || !sourceFile.isFile()) {
+			return null;
+		}
+		try (RandomAccessFile raf = new RandomAccessFile(sourceFile, "r")) {
+			raf.seek(ref.offset());
+			try (DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(raf.getFD()), ref.lengthBytes()))) {
+				Entry entry = readEntry(in);
+				if (entry == null) {
+					return null;
+				}
+				String bucketCacheKey = getInMemoryBucketCacheKey(obfFile, suffixId, bucketKey);
+				putBucketWithBudget(bucketCacheKey, entry);
+				return entry;
+			}
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	// Schedules a disk save only when:
+	// - cache file doesn't exist yet for this OBF
+	// - OBF changed (size/mtime)
+	// - a new suffix section needs to be added (e.g. :addr existed, now :poi is built)
 	private void saveToDiskIfNeeded(File obfFile, String suffixId) throws IOException {
 		if (!ENABLED) {
 			return;
@@ -365,6 +724,7 @@ class IndexedStringTableCache {
 			String obfPathKey = getObfPathKey(obfFile);
 			long obfSize = obfFile.length();
 			long obfMtime = obfFile.lastModified();
+			File cacheFile = getDiskCacheFile(obfFile);
 
 			DiskMeta meta = diskMetaByObfPath.get(obfPathKey);
 			boolean needsSave = false;
@@ -376,6 +736,9 @@ class IndexedStringTableCache {
 				}
 			}
 			if (!needsSave) {
+				if (cacheFile == null || !cacheFile.exists() || !cacheFile.isFile()) {
+					needsSave = true;
+				} else
 				if (meta.size != obfSize || meta.mtime != obfMtime) {
 					needsSave = true;
 				} else if (!meta.suffixes.contains(suffixId)) {
@@ -393,6 +756,12 @@ class IndexedStringTableCache {
 		}
 	}
 
+	// Disk format:
+	// - header: magic + version + (obfSize, obfMtime)
+	// - index: per suffixId a list of (bucketKey -> offset,length)
+	// - blobs: serialized bucket Entry per (suffixId,bucketKey)
+	// Persistence is full (all buckets), independent of RAM/LRU. When adding a new suffix section,
+	// unchanged sections are copied raw-bytes from the existing .cache file using copyBytes(offset, len).
 	private void saveToDisk(File obfFile) throws IOException {
 		if (!ENABLED) {
 			return;
@@ -408,21 +777,51 @@ class IndexedStringTableCache {
 		long obfSize = obfFile.length();
 		long obfMtime = obfFile.lastModified();
 
-		ArrayList<String> keysToWrite = new ArrayList<>();
-		HashSet<String> suffixes = new HashSet<>();
-		for (Map.Entry<String, Entry> e : cache.entrySet()) {
-			String key = e.getKey();
-			if (key == null || !key.startsWith(obfPathKey)) {
-				continue;
-			}
-			if (e.getValue() == null) {
-				continue;
-			}
-			keysToWrite.add(key);
-			suffixes.add(key.substring(obfPathKey.length()));
+		HashMap<String, HashMap<Integer, Entry>> pending;
+		synchronized (DISK_CACHE_IO_LOCK) {
+			pending = pendingPersistByObf.get(obfPathKey);
 		}
-		if (keysToWrite.isEmpty()) {
+		if (pending == null || pending.isEmpty()) {
 			return;
+		}
+
+		HashMap<String, HashMap<Integer, Entry>> writeBySuffix = new HashMap<>();
+		HashSet<String> suffixes = new HashSet<>();
+		for (Map.Entry<String, HashMap<Integer, Entry>> e : pending.entrySet()) {
+			String suffix = e.getKey();
+			HashMap<Integer, Entry> buckets = e.getValue();
+			if (suffix == null || buckets == null || buckets.isEmpty()) {
+				continue;
+			}
+			suffixes.add(suffix);
+			writeBySuffix.put(suffix, new HashMap<>(buckets));
+		}
+		if (writeBySuffix.isEmpty()) {
+			return;
+		}
+
+		DiskIndex existingIndex = diskIndexByObfPath.get(obfPathKey);
+		File existingFile = getDiskCacheFile(obfFile);
+		if (existingIndex != null && existingIndex.bucketsBySuffix() != null && existingFile != null && existingFile.exists() && existingFile.isFile()) {
+			for (Map.Entry<String, HashMap<Integer, DiskBucketRef>> e : existingIndex.bucketsBySuffix().entrySet()) {
+				String suffix = e.getKey();
+				if (suffix == null) {
+					continue;
+				}
+				if (writeBySuffix.containsKey(suffix)) {
+					continue;
+				}
+				HashMap<Integer, DiskBucketRef> refs = e.getValue();
+				if (refs == null || refs.isEmpty()) {
+					continue;
+				}
+				HashMap<Integer, Entry> placeholder = new HashMap<>();
+				for (int bk : refs.keySet()) {
+					placeholder.put(bk, null);
+				}
+				suffixes.add(suffix);
+				writeBySuffix.put(suffix, placeholder);
+			}
 		}
 
 		File targetFile = getDiskCacheFile(obfFile);
@@ -430,18 +829,96 @@ class IndexedStringTableCache {
 			return;
 		}
 		File tmpFile = new File(parent, obfFile.getName() + DISK_CACHE_FILE_SUFFIX + ".tmp");
-		try (DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(tmpFile)))) {
-			out.writeInt(DISK_CACHE_MAGIC);
-			out.writeInt(DISK_CACHE_FORMAT_VERSION);
-			out.writeLong(obfSize);
-			out.writeLong(obfMtime);
-			out.writeInt(keysToWrite.size());
-			for (String fullKey : keysToWrite) {
-				Entry entry = cache.get(fullKey);
-				assert entry != null;
-				String suffixId = fullKey.substring(obfPathKey.length());
-				writeString(out, suffixId);
-				writeEntry(out, entry);
+		DiskIndex updatedIndex;
+		try (RandomAccessFile raf = new RandomAccessFile(tmpFile, "rw")) {
+			raf.setLength(0);
+			try (DataOutputStream out = new DataOutputStream(new RandomAccessFileOutputStream(raf))) {
+				out.writeInt(DISK_CACHE_MAGIC);
+				out.writeInt(DISK_CACHE_FORMAT_VERSION);
+				out.writeLong(obfSize);
+				out.writeLong(obfMtime);
+				out.writeInt(writeBySuffix.size());
+
+				ArrayList<BucketIndexPos> indexPositions = new ArrayList<>();
+				ArrayList<String> suffixOrder = new ArrayList<>(writeBySuffix.keySet());
+				suffixOrder.sort(String::compareTo);
+
+				for (String suffix : suffixOrder) {
+					HashMap<Integer, Entry> buckets = writeBySuffix.get(suffix);
+					if (buckets == null || buckets.isEmpty()) {
+						continue;
+					}
+					writeString(out, suffix);
+					ArrayList<Integer> bucketKeys = new ArrayList<>(buckets.keySet());
+					bucketKeys.sort(Integer::compareTo);
+					out.writeInt(bucketKeys.size());
+					for (int bk : bucketKeys) {
+						out.writeInt(bk);
+						long offsetPos = raf.getFilePointer();
+						out.writeLong(0L);
+						long lenPos = raf.getFilePointer();
+						out.writeInt(0);
+						indexPositions.add(new BucketIndexPos(suffix, bk, offsetPos, lenPos));
+					}
+				}
+				HashMap<String, HashMap<Integer, BucketIndexPos>> posMap = new HashMap<>();
+				for (BucketIndexPos p : indexPositions) {
+					posMap.computeIfAbsent(p.suffix, k -> new HashMap<>()).put(p.bucketKey, p);
+				}
+
+				HashMap<String, HashMap<Integer, DiskBucketRef>> bucketsBySuffix = new HashMap<>();
+				for (String suffix : suffixOrder) {
+					HashMap<Integer, Entry> buckets = writeBySuffix.get(suffix);
+					if (buckets == null || buckets.isEmpty()) {
+						continue;
+					}
+					bucketsBySuffix.put(suffix, new HashMap<>());
+				}
+
+				try (RandomAccessFile src = existingFile != null && existingFile.exists() ? new RandomAccessFile(existingFile, "r") : null) {
+					for (String suffix : suffixOrder) {
+						HashMap<Integer, Entry> buckets = writeBySuffix.get(suffix);
+						if (buckets == null) {
+							continue;
+						}
+						ArrayList<Integer> bucketKeys = new ArrayList<>(buckets.keySet());
+						bucketKeys.sort(Integer::compareTo);
+						for (int bk : bucketKeys) {
+							Entry entry = buckets.get(bk);
+							long entryOffset = raf.getFilePointer();
+							if (entry != null) {
+								writeEntry(out, entry);
+							} else {
+								DiskBucketRef ref = null;
+								if (existingIndex != null && existingIndex.bucketsBySuffix() != null) {
+									HashMap<Integer, DiskBucketRef> refs = existingIndex.bucketsBySuffix().get(suffix);
+									ref = refs == null ? null : refs.get(bk);
+								}
+								if (src != null && ref != null) {
+									copyBytes(src, ref.offset(), ref.lengthBytes(), raf);
+								}
+							}
+							long entryEnd = raf.getFilePointer();
+							int entryLen = (int) (entryEnd - entryOffset);
+							HashMap<Integer, BucketIndexPos> suffixPos = posMap.get(suffix);
+							BucketIndexPos pos = suffixPos == null ? null : suffixPos.get(bk);
+							if (pos != null) {
+								raf.seek(pos.offsetPos);
+								raf.writeLong(entryOffset);
+								raf.seek(pos.lenPos);
+								raf.writeInt(entryLen);
+								raf.seek(entryEnd);
+							}
+							HashMap<Integer, DiskBucketRef> dstRefs = bucketsBySuffix.get(suffix);
+							if (dstRefs != null && entryLen > 0) {
+								dstRefs.put(bk, new DiskBucketRef(entryOffset, entryLen));
+							}
+							raf.seek(entryEnd);
+						}
+					}
+				}
+				updatedIndex = new DiskIndex(obfSize, obfMtime, bucketsBySuffix);
+				out.flush();
 			}
 		}
 		if (targetFile.exists() && !targetFile.delete()) {
@@ -454,13 +931,38 @@ class IndexedStringTableCache {
 		if (!tmpFile.renameTo(targetFile)) {
 			//noinspection ResultOfMethodCallIgnored
 			tmpFile.delete();
+			return;
 		}
 		diskMetaByObfPath.put(obfPathKey, new DiskMeta(obfSize, obfMtime, suffixes));
+		diskIndexByObfPath.put(obfPathKey, updatedIndex);
+		synchronized (DISK_CACHE_IO_LOCK) {
+			pendingPersistByObf.remove(obfPathKey);
+		}
+	}
+
+	// Raw byte copy used for "merge" saves: keep unchanged bucket blobs without re-serializing them.
+	private static void copyBytes(RandomAccessFile src, long srcOffset, int length, RandomAccessFile dst) throws IOException {
+		if (length <= 0) {
+			return;
+		}
+		final int bufSize = 64 * 1024;
+		byte[] buffer = new byte[Math.min(bufSize, length)];
+		src.seek(srcOffset);
+		int remaining = length;
+		while (remaining > 0) {
+			int toRead = Math.min(remaining, buffer.length);
+			int read = src.read(buffer, 0, toRead);
+			if (read <= 0) {
+				break;
+			}
+			dst.write(buffer, 0, read);
+			remaining -= read;
+		}
 	}
 
 	private static Entry readEntry(DataInputStream in) throws IOException {
 		int keysCount = in.readInt();
-		if (keysCount < 0) {
+		if (keysCount < 0 || keysCount > MAX_KEYS_PER_BUCKET) {
 			return null;
 		}
 		String[] keys = new String[keysCount];
@@ -473,7 +975,7 @@ class IndexedStringTableCache {
 		}
 
 		int valsCount = in.readInt();
-		if (valsCount < 0) {
+		if (valsCount < 0 || valsCount > MAX_VALS_PER_BUCKET) {
 			return null;
 		}
 		int[] vals = new int[valsCount];
@@ -523,9 +1025,6 @@ class IndexedStringTableCache {
 
 	private static String readString(DataInputStream in) throws IOException {
 		int len = in.readInt();
-		if (len == -1) {
-			return null;
-		}
 		if (len < 0) {
 			return null;
 		}
@@ -573,7 +1072,13 @@ class IndexedStringTableCache {
 		}
 		boolean[] matched = new boolean[matchedCharacters.size()];
 		TIntHashSet candidateIndices = new TIntHashSet();
-		boolean useBuckets = true;
+		boolean useBuckets = entry.bucket1() != null && entry.bucket2() != null;
+		if (!useBuckets) {
+			for (int i = 0; i < entry.keys().length; i++) {
+				processKeyIndex(entry, reader, instance, queries, listOffsets, matchedCharacters, matched, i);
+			}
+			return;
+		}
 
 		for (String query : queries) {
 			if (query == null) {
@@ -618,6 +1123,26 @@ class IndexedStringTableCache {
 		}
 	}
 
+	// Determines which 2-char buckets are required for the current query set.
+	private static LinkedHashSet<Integer> collectRequiredBucketKeys(List<String> queries) {
+		LinkedHashSet<Integer> res = new LinkedHashSet<>();
+		if (queries == null) {
+			return res;
+		}
+		for (String q : queries) {
+			int k = bucketKey2FromString(q);
+			if (k != -1) {
+				res.add(k);
+			}
+		}
+		return res;
+	}
+
+	private static int bucketKey2FromString(String value) {
+		String folded = foldForBucket(value);
+		return bucketKey2FromFolded(folded);
+	}
+
 	private void processKeyIndex(Entry entry, BinaryMapIndexReader reader, Collator instance,
 			List<String> queries, List<TIntArrayList> listOffsets, TIntArrayList matchedCharacters, boolean[] matched,
 			int idx) {
@@ -635,6 +1160,10 @@ class IndexedStringTableCache {
 		}
 	}
 
+	// Normalizes input for bucket derivation / matching:
+	// 1) lower-case
+	// 2) alignChars (OsmAnd-specific character alignment)
+	// 3) strip diacritics (NFD, remove NON_SPACING_MARK)
 	private static String foldForBucket(String value) {
 		if (value == null) {
 			return "";
@@ -663,6 +1192,7 @@ class IndexedStringTableCache {
 		return folded.charAt(0);
 	}
 
+	// 2-char bucket key used for segmented cache (c0<<16)|c1; if there is no second char, c1=0.
 	private static int bucketKey2FromFolded(String folded) {
 		if (folded == null || folded.length() < 2) {
 			return -1;
