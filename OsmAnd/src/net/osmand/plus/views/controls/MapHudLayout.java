@@ -624,8 +624,10 @@ public class MapHudLayout extends FrameLayout {
 				leftMargin = Math.max(defaultMargin, leftWidth > 0 ? leftWidth + panelsMargin : 0);
 				rightMargin = Math.max(defaultMargin, rightWidth > 0 ? rightWidth + panelsMargin : 0);
 
-				leftMargin = Math.max(leftMargin, buttonsMargin);
-				rightMargin = Math.max(rightMargin, buttonsMargin);
+				if (!panel.isTopPanel()) {
+					leftMargin = Math.max(leftMargin, buttonsMargin);
+					rightMargin = Math.max(rightMargin, buttonsMargin);
+				}
 			}
 			if (params.leftMargin != leftMargin || params.rightMargin != rightMargin) {
 				params.leftMargin = leftMargin;

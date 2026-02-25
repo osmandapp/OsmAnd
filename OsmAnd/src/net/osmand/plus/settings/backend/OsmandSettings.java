@@ -101,7 +101,6 @@ import net.osmand.plus.settings.enums.*;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
-import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingClass;
@@ -2049,29 +2048,11 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOW_INFO_ABOUT_PRESSED_KEY = new BooleanPreference(this, "show_info_about_pressed_key", false).makeGlobal().makeShared();
 
-	public final ListStringPreference TOP_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR) {
-		@Override
-		public String getModeValue(ApplicationMode mode) {
-			String value = super.getModeValue(mode);
-			if (!Algorithms.isEmpty(value)) {
-				return getPagedWidgetIds(Arrays.asList(value.split(getDelimiter())));
-			}
-			return value;
-		}
-	}.makeProfile();
+	public final ListStringPreference TOP_WIDGET_PANEL_ORDER = (ListStringPreference) new VerticalWidgetOrderPreference(this,
+			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
-	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR) {
-		@Override
-		public String getModeValue(ApplicationMode mode) {
-			String value = super.getModeValue(mode);
-			if (!Algorithms.isEmpty(value)) {
-				return getPagedWidgetIds(Arrays.asList(value.split(getDelimiter())));
-			}
-			return value;
-		}
-	}.makeProfile();
+	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new VerticalWidgetOrderPreference(this,
+			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
 			"left_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.LEFT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
@@ -2116,30 +2097,6 @@ public class OsmandSettings {
 
 	public final ListStringPreference RIGHT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
 			"right_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.RIGHT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
-
-	@NonNull
-	private String getPagedWidgetIds(@NonNull List<String> pages) {
-		StringBuilder builder = new StringBuilder();
-
-		Iterator<String> iterator = pages.iterator();
-		while (iterator.hasNext()) {
-			boolean pageSeparatorAdded = false;
-			String page = iterator.next();
-			for (String id : page.split(WIDGET_SEPARATOR)) {
-				if (WidgetType.isComplexWidget(id)) {
-					pageSeparatorAdded = true;
-					builder.append(id).append(PAGE_SEPARATOR);
-				} else {
-					pageSeparatorAdded = false;
-					builder.append(id).append(WIDGET_SEPARATOR);
-				}
-			}
-			if (iterator.hasNext() && !pageSeparatorAdded) {
-				builder.append(PAGE_SEPARATOR);
-			}
-		}
-		return builder.toString();
-	}
 
 	private final ListStringPreference CUSTOM_WIDGETS_KEYS = (ListStringPreference) new ListStringPreference(this, "custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
 
