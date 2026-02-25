@@ -81,7 +81,7 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 				}
 			}
 		} else if (mapObject instanceof Street street) {
-			if (!Algorithms.isEmpty(street.getOtherNames()) && street.getOtherNames().contains(OLD_NAME_TAG)) {
+			if (street.getNamesMap(false).containsKey(OLD_NAME_TAG)) {
 				String oldName = street.getName(OLD_NAME_TAG);
 				title = String.format("%s (%s)", title, oldName);
 			}
@@ -122,8 +122,11 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 		Drawable drawable = item.getIcon();
 		icon.setImageDrawable(drawable);
 		if (mapObject instanceof Amenity amenity) {
+			if(Algorithms.stringsEqual(amenity.getSubType(), "city")) {
+				addressTv.setText(amenity.getRegionName());
+			}
 			String wikiImageUrl = amenity.getWikiImageStubUrl();
-			boolean shouldLayoutWithImages = !Algorithms.isEmpty(wikiImageUrl);
+			boolean shouldLayoutWithImages = !Algorithms.isEmpty(wikiImageUrl) && image != null;
 			AndroidUiHelper.updateVisibility(imageViewContainer, shouldLayoutWithImages);
 			if (shouldLayoutWithImages) {
 				if (image.getTag() != wikiImageUrl) {

@@ -244,7 +244,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				listItem.getSearchResult().objectType == STREET ||
 				listItem.getSearchResult().objectType == STREET_INTERSECTION ||
 				listItem.getSearchResult().objectType == HOUSE ||
-				listItem.getSearchResult().objectType == VILLAGE
+				listItem.getSearchResult().objectType == VILLAGE ||
+				listItem.getSearchResult().object instanceof Amenity amenity && amenity.getType().isAdministrative()
 		) {
 			view = bindCityStructureItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.SEARCH_RESULT &&

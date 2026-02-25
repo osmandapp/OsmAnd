@@ -107,7 +107,7 @@ public class QuickSearchListItem {
 				int colorId = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 				return UiUtilities.createColorSpannable(name, app.getColor(colorId), false, STREET_INTERSECTION_DIVIDER);
 			}
-		return getName(app, searchResult);
+			return getName(app, searchResult);
 		} else {
 			return getName();
 		}
@@ -156,7 +156,7 @@ public class QuickSearchListItem {
 	}
 
 	public static String getExtendedTypeName(@NonNull OsmandApplication app,
-			@NonNull SearchResult searchResult) {
+	                                         @NonNull SearchResult searchResult) {
 		String typeName = getTypeName(app, searchResult);
 		String alternateName = searchResult.alternateName;
 		if (searchResult.object instanceof Amenity amenity) {
@@ -428,7 +428,11 @@ public class QuickSearchListItem {
 				if (id != null) {
 					iconId = RenderingIcons.getBigIconResourceId(id);
 					if (iconId > 0) {
-						icon = getIcon(app, iconId);
+						if (amenity.getType().isAdministrative()) {
+							icon = getIcon(app, iconId, defIconColor);
+						} else {
+							icon = getIcon(app, iconId);
+						}
 					}
 				}
 				if (icon == null) {
@@ -483,7 +487,7 @@ public class QuickSearchListItem {
 			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 			Drawable shieldIcon = NetworkRouteDrawable
 					.getIconByAmenityShieldTags(amenity, app, nightMode, isClickableWay);
-			if(shieldIcon instanceof NetworkRouteDrawable networkRouteDrawable) {
+			if (shieldIcon instanceof NetworkRouteDrawable networkRouteDrawable) {
 				networkRouteDrawable.setTextSize(16, nightMode);
 			}
 			if (shieldIcon != null) {
@@ -494,7 +498,7 @@ public class QuickSearchListItem {
 	}
 
 	public static int getHistoryIconId(@NonNull OsmandApplication app,
-			@NonNull HistoryEntry entry) {
+	                                   @NonNull HistoryEntry entry) {
 		int iconId = -1;
 		PointDescription name = entry.getName();
 		if (name != null && !Algorithms.isEmpty(name.getIconName())) {
