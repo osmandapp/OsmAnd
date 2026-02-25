@@ -4,6 +4,11 @@ tasks.register('printc') {
 	configurations.each { if (it.isCanBeResolved()) println it.name }
 }
 
+final String generateAndPullPreferencesDatabaseTaskName = 'generateAndPullPreferencesDatabase'
+def isDbGenerationRequested = gradle.startParameter.taskNames.any {
+	it == generateAndPullPreferencesDatabaseTaskName || it.endsWith(":" + generateAndPullPreferencesDatabaseTaskName)
+}
+
 android {
     compileSdk osmand_compileSdk
     buildToolsVersion = osmand_buildToolsVersion
@@ -14,7 +19,7 @@ android {
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "boolean", "GENERATE_PREFERENCES_DATABASE_FOR_ASSET", "false"
+        buildConfigField "boolean", "GENERATE_PREFERENCES_DATABASE_FOR_ASSET", isDbGenerationRequested.toString()
     }
 
 	lintOptions {
@@ -120,11 +125,6 @@ clean.doFirst {
 		include 'fonts/**'
 		include 'voice/**'
 	}
-}
-
-final String generateAndPullPreferencesDatabaseTaskName = 'generateAndPullPreferencesDatabase'
-if (gradle.startParameter.taskNames.any { it.contains(generateAndPullPreferencesDatabaseTaskName) }) {
-	android.buildTypes.debug.buildConfigField "boolean", "GENERATE_PREFERENCES_DATABASE_FOR_ASSET", "true"
 }
 
 tasks.register('validateTranslations') {
@@ -386,7 +386,7 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
     mustRunAfter(tasks.named('installNightlyFreeLegacyFatDebug'))
     mustRunAfter(tasks.named('installNightlyFreeLegacyFatDebugAndroidTest'))
 
-    onlyIf { gradle.startParameter.taskNames.contains(generateAndPullPreferencesDatabaseTaskName) }
+    onlyIf { isDbGenerationRequested }
 
 	ext {
 		dbNameOnDevice = "searchable_preferences.db"
