@@ -3,6 +3,7 @@ package net.osmand.plus.views.controls;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static net.osmand.plus.OsmAndConstants.UI_HANDLER_MAP_HUD;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.SMALL_SIZE_DP;
 import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES;
 import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS;
 import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_DRAW_SLOTS;
@@ -75,7 +76,8 @@ public class MapHudLayout extends FrameLayout {
 	private VerticalWidgetPanel bottomWidgetsPanel;
 
 	private final float dpToPx;
-	private final int buttonsMargin;
+	private final int topButtonsMargin;
+	private final int bottomButtonsMargin;
 	private final int defaultMargin;
 
 	private int topInset;
@@ -112,7 +114,8 @@ public class MapHudLayout extends FrameLayout {
 		this.portrait = AndroidUiHelper.isOrientationPortrait(context);
 		this.screenLayoutMode = ScreenLayoutMode.getDefault(context);
 		this.defaultMargin = (int) (dpToPx * DEF_MARGIN_DP);
-		this.buttonsMargin = (int) (dpToPx * ((BIG_SIZE_DP + (DEF_MARGIN_DP * 4)) * 2));
+		this.topButtonsMargin = (int) (dpToPx * ((SMALL_SIZE_DP + (DEF_MARGIN_DP * 4)) * 2));
+		this.bottomButtonsMargin = (int) (dpToPx * ((BIG_SIZE_DP + (DEF_MARGIN_DP * 4)) * 2));
 
 		CommonPreference<PanelsLayoutMode> preference = settings.getPanelsLayoutMode(context, screenLayoutMode);
 		this.panelsLayoutMode = preference.get();
@@ -611,7 +614,6 @@ public class MapHudLayout extends FrameLayout {
 			int rightMargin = 0;
 
 			if (shouldCenterVerticalPanels()) {
-				boolean top = panel.isTopPanel();
 				float percentage = portrait ? TOP_BAR_MAX_WIDTH_PERCENTAGE_PORTRAIT : TOP_BAR_MAX_WIDTH_PERCENTAGE_LANDSCAPE;
 
 				int panelsMargin = defaultMargin * 2;
@@ -624,10 +626,9 @@ public class MapHudLayout extends FrameLayout {
 				leftMargin = Math.max(defaultMargin, leftWidth > 0 ? leftWidth + panelsMargin : 0);
 				rightMargin = Math.max(defaultMargin, rightWidth > 0 ? rightWidth + panelsMargin : 0);
 
-				if (!panel.isTopPanel()) {
-					leftMargin = Math.max(leftMargin, buttonsMargin);
-					rightMargin = Math.max(rightMargin, buttonsMargin);
-				}
+				boolean top = panel.isTopPanel();
+				leftMargin = Math.max(leftMargin, top ? topButtonsMargin : bottomButtonsMargin);
+				rightMargin = Math.max(rightMargin, top ? topButtonsMargin : bottomButtonsMargin);
 			}
 			if (params.leftMargin != leftMargin || params.rightMargin != rightMargin) {
 				params.leftMargin = leftMargin;
