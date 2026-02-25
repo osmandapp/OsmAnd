@@ -247,7 +247,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				listItem.getSearchResult().objectType == VILLAGE ||
 				listItem.getSearchResult().object instanceof Amenity amenity && amenity.getType().isAdministrative()
 		) {
-			view = bindCityStructureItem(convertView, listItem);
+			view = bindAdministrativeItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.SEARCH_RESULT &&
 				(poiUIFilter != null && poiUIFilter.isWikiFilter() ||
 						listItem.getSearchResult().object instanceof Amenity amenity &&
@@ -442,8 +442,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		return getLinearLayout(convertView, R.layout.list_item_divider);
 	}
 
-	private LinearLayout bindCityStructureItem(@Nullable View convertView, @NonNull QuickSearchListItem listItem) {
-		LinearLayout view = getLinearLayout(convertView, R.layout.search_list_item_city);
+	private LinearLayout bindAdministrativeItem(@Nullable View convertView, @NonNull QuickSearchListItem listItem) {
+		LinearLayout view = getLinearLayout(convertView, R.layout.search_list_item_administrative);
 		CityStructureItemViewHolder viewHolder = (CityStructureItemViewHolder) view.getTag(R.id.view_holder_as_tag);
 		if(viewHolder == null) {
 			viewHolder = new CityStructureItemViewHolder(view, updateLocationViewCache);

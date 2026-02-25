@@ -65,7 +65,7 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 		return switch (viewType) {
 			case CITY_TYPE -> {
-				View view = inflater.inflate(R.layout.search_list_item_city, parent, false);
+				View view = inflater.inflate(R.layout.search_list_item_administrative, parent, false);
 				yield new CityStructureItemViewHolder(view, locationViewCache);
 			}
 			case WIKI_TYPE -> {
