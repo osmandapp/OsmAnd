@@ -266,7 +266,7 @@ public class MyPlacesActivity extends TabActivity {
 	}
 
 	private boolean isDisableAnimations() {
-		return app.getSettings().DO_NOT_USE_ANIMATIONS.getModeValue(app.getSettings().getApplicationMode());
+		return app.getSettings().DO_NOT_USE_ANIMATIONS.get();
 	}
 
 	@NonNull

@@ -3,7 +3,7 @@ package net.osmand.plus.myplaces.favorites.dialogs;
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
 import static net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment.IMPORT_FAVOURITES_REQUEST;
-import static net.osmand.plus.utils.AndroidUtils.trimTextToMax;
+import static net.osmand.plus.utils.AndroidUtils.truncateWithEllipsis;
 import static net.osmand.plus.utils.UiUtilities.getThemedContext;
 import static net.osmand.shared.gpx.GpxFile.DEFAULT_WPT_GROUP_NAME;
 
@@ -81,7 +81,7 @@ public class FavoriteMenu {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		items.add(new PopUpMenuItem.Builder(activity)
-				.setTitle(trimTextToMax(favouritePoint.getDisplayName(app), MAX_TITLE_NAME_SYMBOLS))
+				.setTitle(truncateWithEllipsis(favouritePoint.getDisplayName(app), MAX_TITLE_NAME_SYMBOLS))
 				.setTitleColor(ColorUtilities.getSecondaryTextColor(app, nightMode))
 				.setTitleSize(14)
 				.create());

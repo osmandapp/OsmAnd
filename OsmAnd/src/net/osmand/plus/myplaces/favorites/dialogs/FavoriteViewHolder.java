@@ -115,7 +115,7 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 		boolean showSuffix = sortMode == NAME_ASCENDING || sortMode == NAME_DESCENDING
 				|| sortMode == NEAREST || sortMode == FARTHEST;
 		if (showSuffix) {
-			String category = " | " + AndroidUtils.trimTextToMax(favouritePoint.getCategoryDisplayName(app), 12);
+			String category = " | " + AndroidUtils.truncateWithEllipsis(favouritePoint.getCategoryDisplayName(app), 12);
 			if (!Algorithms.isEmpty(category)) {
 				suffixDescription.setText(category);
 				suffixDescription.setVisibility(VISIBLE);

@@ -3,6 +3,7 @@ package net.osmand.plus.widgets.popup;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -46,7 +47,11 @@ public class PopUpMenu {
 		float maxItemWidth = 0;
 
 		for (PopUpMenuItem item : menuItems) {
-			float w = AndroidUtils.getTextWidth(String.valueOf(item.getTitle()), item.getTitleSize(), null) + contentPadding * 2;
+			float textSize = TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_SP,
+					item.getTitleSize(),
+					Resources.getSystem().getDisplayMetrics());
+			float w = AndroidUtils.getTextWidth(null, textSize, String.valueOf(item.getTitle())) + contentPadding * 2;
 			if (item.getIcon() != null) {
 				w += standardIconSize + contentPaddingHalf;
 			}
