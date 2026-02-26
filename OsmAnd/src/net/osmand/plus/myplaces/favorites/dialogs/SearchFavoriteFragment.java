@@ -641,7 +641,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 				bundle.putString(FAVORITE_SEARCH_GROUP_KEY, groupKey);
 			}
 			fragment.setArguments(bundle);
-			fragment.points = points;
+			fragment.points.addAll(points);
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(manager, TAG);
