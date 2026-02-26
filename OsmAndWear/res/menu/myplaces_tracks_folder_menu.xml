@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<item
+		android:id="@+id/action_folder_search"
+		android:contentDescription="@string/shared_string_search"
+		android:icon="@drawable/ic_action_search_dark"
+		android:title="@string/shared_string_search"
+		app:showAsAction="always" />
+	<item
+		android:id="@+id/action_folder_menu"
+		android:contentDescription="@string/shared_string_more"
+		android:icon="@drawable/ic_overflow_menu_white"
+		android:title="@string/shared_string_more_actions"
+		app:showAsAction="always" />
+</menu>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/list_background_color">
+
+	<LinearLayout
+		android:id="@+id/selectable_list_item"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical"
+		android:minHeight="@dimen/bottom_sheet_list_item_height"
+		android:orientation="horizontal">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/action_button"
+			style="@style/Widget.AppCompat.ActionButton"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/list_content_padding_large"
+			android:clickable="false"
+			android:focusable="false"
+			tools:ignore="ContentDescription"
+			tools:src="@drawable/ic_action_remove"
+			tools:tint="@color/color_osm_edit_delete" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center"
+			android:layout_marginEnd="@dimen/title_padding"
+			android:tint="?attr/active_color_basic"
+			android:visibility="gone"
+			tools:src="@drawable/mm_air_transport"
+			tools:visibility="visible" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_weight="1"
+			android:ellipsize="marquee"
+			android:maxLines="1"
+			android:paddingTop="@dimen/content_padding_half"
+			android:paddingBottom="@dimen/content_padding_half"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			android:textStyle="normal"
+			tools:text="@string/poi_aerialway_transport" />
+
+		<FrameLayout
+			android:id="@+id/assigned_key"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/acceptable_touch_radius"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:visibility="gone"
+			tools:visibility="visible">
+
+			<include layout="@layout/item_key_assignment_button" />
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+</FrameLayout>

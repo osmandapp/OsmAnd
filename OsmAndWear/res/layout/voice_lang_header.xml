@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<include
+		android:id="@+id/title_container"
+		layout="@layout/bottom_sheet_item_title_with_description" />
+
+	<Space
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_small" />
+
+	<include
+		android:id="@+id/voice_type_buttons"
+		layout="@layout/custom_radio_buttons" />
+
+	<Space
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_small" />
+
+	<include
+		android:id="@+id/voice_type_description"
+		layout="@layout/bottom_sheet_item_description_long" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:background="?attr/divider_color_basic" />
+
+</LinearLayout>

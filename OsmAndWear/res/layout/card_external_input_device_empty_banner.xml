@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/list_background_color"
+		android:orientation="vertical">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:layout_width="@dimen/icon_size_double"
+			android:layout_height="@dimen/icon_size_double"
+			android:layout_gravity="center"
+			android:layout_marginTop="@dimen/content_padding_large"
+			android:src="@drawable/ic_action_keyboard_disabled"
+			android:tint="?attr/default_icon_color" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/DescStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:gravity="center_horizontal"
+			android:layout_marginTop="@dimen/content_padding_small_half"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:layout_marginHorizontal="@dimen/dialog_content_margin"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingBottom="@dimen/content_padding"
+			android:text="@string/enable_to_use_external_input_device"
+			android:textColor="?android:textColorSecondary" />
+
+	</LinearLayout>
+
+</LinearLayout>

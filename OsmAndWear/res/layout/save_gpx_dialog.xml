@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/gpx_name_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+        android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+        android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+        android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+        android:layout_marginTop="@dimen/bottom_sheet_content_margin"
+        android:inputType="text"/>
+
+    <TextView
+        android:id="@+id/file_exists_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+        android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+        android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+        android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+        android:gravity="center_horizontal"
+        android:text="@string/file_with_name_already_exists"
+        android:textColor="@color/color_warning"
+        android:visibility="invisible"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/measurement_tool_divider_margin"
+        android:background="?attr/dashboard_divider"/>
+
+    <RelativeLayout
+        android:id="@+id/button_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/content_padding">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/toggle_show_on_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+            android:layout_marginStart="@dimen/bottom_sheet_content_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/toggle_row_toggle"
+            android:layout_toStartOf="@id/toggle_row_toggle"
+            android:textColor="?android:textColorPrimary"
+            android:text="@string/show_on_map_after_saving"/>
+    </RelativeLayout>
+
+</LinearLayout>

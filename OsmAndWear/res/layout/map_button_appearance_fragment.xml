@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<include layout="@layout/simple_toolbar" />
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="?attr/activity_background_basic">
+
+		<ScrollView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/dialog_button_ex_height">
+
+				<LinearLayout
+					android:id="@+id/cards_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/card_and_list_background_basic"
+					android:orientation="vertical" />
+
+				<include layout="@layout/card_bottom_divider" />
+
+			</LinearLayout>
+
+		</ScrollView>
+
+		<LinearLayout
+			android:id="@+id/apply_button_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:orientation="vertical">
+
+			<include layout="@layout/simple_divider_item" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/list_background_color"
+				android:clickable="true"
+				android:focusable="true"
+				android:paddingHorizontal="@dimen/content_padding"
+				android:paddingTop="@dimen/measurement_tool_undo_redo_padding_medium"
+				android:paddingBottom="@dimen/content_padding">
+
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
+					android:id="@+id/apply_button"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					app:dialogButtonTitle="@string/shared_string_apply"
+					app:dialogButtonType="primary" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</FrameLayout>
+
+</LinearLayout>

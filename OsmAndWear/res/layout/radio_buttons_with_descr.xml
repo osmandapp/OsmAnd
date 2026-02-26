@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:minHeight="@dimen/setting_list_item_small_height"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:textSize="8sp"
+		android:textAppearance="@style/TextAppearance.ListItemTitle"
+		android:textStyle="normal"
+		tools:text="@string/pass_whole_track_descr"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding" />
+
+	<include layout="@layout/custom_radio_buttons" />
+
+</LinearLayout>

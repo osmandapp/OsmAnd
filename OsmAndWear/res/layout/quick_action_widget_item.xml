@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:grid="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="0dp"
+             android:layout_height="100dp"
+             android:animateLayoutChanges="true"
+             android:background="?attr/selectableItemBackground"
+             grid:layout_columnWeight="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageView"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_horizontal"
+                android:tint="?attr/default_icon_color"
+                android:scaleType="centerInside"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageSlash"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerInside"/>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="12dp"
+            android:maxLines="2"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_sub_text_size"
+            tools:text="Add marker"
+	        android:layout_marginEnd="16dp"
+	        android:layout_marginStart="16dp" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/dividerRight"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="?attr/dashboard_divider"
+        android:visibility="gone"/>
+
+    <View
+        android:id="@+id/dividerBot"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:background="?attr/dashboard_divider"
+        android:visibility="gone"/>
+
+</FrameLayout>

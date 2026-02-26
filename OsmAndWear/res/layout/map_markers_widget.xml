@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:minHeight="@dimen/map_address_height"
+	android:clickable="true"
+	android:visibility="gone"
+	tools:visibility="visible">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/favorites_list_item_height"
+			android:background="@color/markers_top_bar_background">
+
+			<LinearLayout
+				android:id="@+id/map_marker_row"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginTop="@dimen/measurement_tool_menu_title_padding_bottom"
+				android:layout_marginBottom="@dimen/measurement_tool_menu_title_padding_bottom"
+				android:orientation="horizontal"
+				android:background="?attr/selectableItemBackground"
+				android:gravity="center_vertical">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/map_marker_arrow"
+					android:layout_width="@dimen/card_title_row_min_height"
+					android:layout_height="@dimen/dialog_button_height"
+					app:srcCompat="@drawable/ic_arrow_marker_diretion" />
+
+				<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:orientation="vertical">
+
+					<TextView
+						android:id="@+id/map_marker_dist"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="@color/card_and_list_background_light"
+						android:textSize="26sp"
+						app:typefaceWeight="medium"
+						tools:text="500 m" />
+
+					<TextView
+						android:id="@+id/map_marker_address"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:maxLines="1"
+						android:ellipsize="end"
+						android:textColor="@color/marker_top_2nd_line_color"
+						android:textSize="@dimen/default_list_text_size"
+						app:typefaceWeight="medium"
+						tools:text="Dmitrievskaya st., 45" />
+
+				</LinearLayout>
+
+				<ImageButton
+					android:id="@+id/marker_btn_ok"
+					android:layout_width="@dimen/list_item_height"
+					android:layout_height="@dimen/list_item_height"
+					android:background="@drawable/marker_circle_background_top_bar_with_inset"
+					android:contentDescription="@string/move_to_history"
+					tools:src="@drawable/ic_action_marker_passed" />
+
+				<ImageButton
+					android:id="@+id/marker_btn_more"
+					android:layout_width="@dimen/list_item_height"
+					android:layout_height="@dimen/list_item_height"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/shared_string_more"
+					app:srcCompat="@drawable/ic_action_markers_list" />
+
+			</LinearLayout>
+
+		</FrameLayout>
+
+		<FrameLayout
+			android:id="@+id/map_markers_top_bar_2nd"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/list_item_height"
+			android:background="@color/markers_top_bar_2nd_background"
+			android:visibility="visible">
+
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:foreground="@drawable/bg_contextmenu_shadow"
+				android:foregroundGravity="fill_horizontal|top" />
+
+			<LinearLayout
+				android:id="@+id/map_marker_row_2nd"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:orientation="horizontal"
+				android:background="?attr/selectableItemBackground"
+				android:gravity="center_vertical">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/map_marker_arrow_2nd"
+					android:layout_width="@dimen/card_title_row_min_height"
+					android:layout_height="@dimen/dialog_content_margin"
+					app:srcCompat="@drawable/ic_arrow_marker_diretion" />
+
+				<RelativeLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:layout_marginVertical="@dimen/content_padding_small_half"
+					android:orientation="horizontal"
+					android:gravity="center_vertical">
+
+					<TextView
+						android:id="@+id/map_marker_dist_2nd"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="@color/card_and_list_background_light"
+						android:textSize="@dimen/default_list_text_size_large"
+						app:typefaceWeight="medium"
+						tools:text="500 m" />
+
+					<TextView
+						android:id="@+id/map_marker_address_2nd"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignBaseline="@+id/map_marker_dist_2nd"
+						android:layout_toEndOf="@+id/map_marker_dist_2nd"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:textColor="@color/marker_top_2nd_line_color"
+						android:textSize="@dimen/default_list_text_size"
+						app:typefaceWeight="medium"
+						tools:text="  •  Dmitr" />
+
+				</RelativeLayout>
+
+				<ImageButton
+					android:id="@+id/marker_btn_ok_2nd"
+					android:layout_width="@dimen/list_item_height"
+					android:layout_height="@dimen/list_item_height"
+					android:background="@drawable/marker_circle_background_top_bar_with_inset"
+					android:contentDescription="@string/move_to_history"
+					tools:src="@drawable/ic_action_marker_passed" />
+
+			</LinearLayout>
+
+		</FrameLayout>
+
+		<FrameLayout
+			android:id="@+id/bottom_shadow"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:foreground="@drawable/bg_contextmenu_shadow"
+			android:foregroundGravity="fill_horizontal|top" />
+
+	</LinearLayout>
+
+</FrameLayout>

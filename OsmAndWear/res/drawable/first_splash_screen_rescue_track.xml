@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+    <item android:drawable="@color/splash_screen_background_color"/>
+    <item android:top="@dimen/splash_screen_logo_top">
+        <bitmap
+            android:gravity="center_horizontal|top"
+            android:src="@drawable/avd_logo_rescuetrack"/>
+    </item>
+</layer-list>
