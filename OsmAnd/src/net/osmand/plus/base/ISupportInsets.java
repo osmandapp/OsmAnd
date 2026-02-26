@@ -33,19 +33,19 @@ public interface ISupportInsets {
 
 	void setLastRootInsets(@NonNull WindowInsetsCompat rootInsets);
 
-	default int getNavigationBarColorId(){
+	default int getNavigationBarColorId() {
 		return -1;
 	}
 
-	default boolean isNavigationBarContentLight(){
+	default boolean isNavigationBarContentLight() {
 		return !isNightMode();
 	}
 
-	default void updateNavBarColor(){
-		InsetsUtils.processNavBarColor(this);
+	default void updateNavigationBarColor() {
+		InsetsUtils.processNavigationBarColor(this);
 	}
 
-	default boolean isNightMode(){
+	default boolean isNightMode() {
 		return ((OsmandApplication) requireActivity().getApplication()).getDaynightHelper().isNightMode(APP);
 	}
 }

@@ -199,22 +199,14 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		if (mapActivity == null || lastWindowInsets == null) {
 			return;
 		}
-		InsetTargetsCollection targetsCollection = new InsetTargetsCollection();
-		InsetTargetBuilder mapHudLayoutBuilder = InsetTarget.createCustomBuilder(mapHudLayout).applyPadding(true);
+		InsetTargetsCollection collection = new InsetTargetsCollection();
+		InsetTargetBuilder builder = InsetTarget.createCustomBuilder(mapHudLayout).preferMargin(true);
 
-		if (isVisible) {
-			targetsCollection.add(InsetTarget.createCustomBuilder(bottomWidgetsPanel)
-					.portraitSides(InsetSide.BOTTOM)
-					.applyPadding(true).build());
+		InsetSide[] sides = {InsetSide.TOP, InsetSide.BOTTOM, InsetSide.LEFT, InsetSide.RIGHT};
+		builder.portraitSides(sides).landscapeSides(sides);
 
-			mapHudLayoutBuilder.portraitSides(InsetSide.TOP, InsetSide.RESET)
-					.landscapeSides(InsetSide.TOP, InsetSide.BOTTOM, InsetSide.LEFT, InsetSide.RIGHT);
-		} else {
-			mapHudLayoutBuilder.portraitSides(InsetSide.TOP, InsetSide.BOTTOM, InsetSide.RESET)
-					.landscapeSides(InsetSide.TOP, InsetSide.BOTTOM, InsetSide.LEFT, InsetSide.RIGHT);
-		}
-		targetsCollection.add(mapHudLayoutBuilder);
-		InsetsUtils.processInsets(mapActivity.findViewById(R.id.map_hud_container), targetsCollection, lastWindowInsets);
+		collection.add(builder);
+		InsetsUtils.processInsets(mapActivity.findViewById(R.id.map_hud_container), collection, lastWindowInsets);
 		isContentVisible = isVisible;
 	}
 
@@ -231,7 +223,6 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 		if (bottomWidgetsPanel != null && mapHudLayout != null) {
 			updateLayerInsets(bottomWidgetsPanel.isAnyRowVisible(), true);
-			mapHudLayout.setWindowInsets(windowInsets);
 		}
 	}
 
