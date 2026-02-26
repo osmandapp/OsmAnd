@@ -70,20 +70,22 @@ public class ClickableWay {
 
     @Nullable
     private String findSuitableName(@NonNull Map<String, String> tags) {
+        String ref = tags.get("ref");
+        if (ref != null) {
+            return ref;
+        }
+        String underscoreName = null;
         for (Map.Entry<String, String> entry : tags.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            if ("ref".equals(key)) {
-                return value;
-            }
             if (key.endsWith(":name")) {
                 return value;
             }
-            if (key.endsWith("_name") && !"shield_stub_name".equals(key)) {
-                return value;
+            if (underscoreName == null && key.endsWith("_name") && !"shield_stub_name".equals(key)) {
+                underscoreName = value;
             }
         }
-        return null;
+        return underscoreName;
     }
 
     @Nullable
