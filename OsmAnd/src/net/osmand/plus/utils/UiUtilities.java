@@ -794,7 +794,7 @@ public class UiUtilities {
 		if (color == NO_COLOR) {
 			ApplicationMode appMode = settings.getApplicationMode();
 			int defaultColorId = nightMode ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
-			int colorIdForTopWidget = getStatusBarColor(activity, appMode, nightMode);
+			int colorIdForTopWidget = getStatusBarWidgetColor(activity, appMode, nightMode);
 			if (colorIdForTopWidget != -1) {
 				nightModeForContent = getStatusBarContentNightMode(activity, appMode, nightMode);
 			}
@@ -807,7 +807,7 @@ public class UiUtilities {
 	}
 
 	@ColorRes
-	private static int getStatusBarColor(@NonNull Context context, @NonNull ApplicationMode appMode, boolean nightMode) {
+	private static int getStatusBarWidgetColor(@NonNull Context context, @NonNull ApplicationMode appMode, boolean nightMode) {
 		OsmandApplication app = AndroidUtils.getApp(context);
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
@@ -828,7 +828,6 @@ public class UiUtilities {
 				return -1;
 			}
 		}
-
 		return -1;
 	}
 
@@ -860,5 +859,4 @@ public class UiUtilities {
 		}
 		return bitmap;
 	}
-
 }
