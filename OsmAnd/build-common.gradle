@@ -443,6 +443,42 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
     """
 }
 
+// ./gradlew generateDatabasesForLocales -Plocales=de,en
+tasks.register('generateDatabasesForLocales') {
+	group = "Database"
+	description = "Generates databases for specified locales or falls back to the system default locale."
+
+	doLast {
+		def localesProp = project.findProperty('locales') ?: Locale.getDefault().getLanguage()
+		def localeList = localesProp.split(',').collect { it.trim() }
+		println ">>> Starting database generation for: ${localeList.join(', ')}"
+		localeList.each { locale ->
+			println "\n" + "=" * 70
+			println ">>> PROCESSING LOCALE: ${locale}"
+			println "=" * 70
+			try {
+				exec {
+					workingDir project.rootDir
+					commandLine './gradlew',
+							'uninstallNightlyFreeLegacyFatDebug',
+							'installNightlyFreeLegacyFatDebug',
+							'installNightlyFreeLegacyFatDebugAndroidTest',
+							generateAndPullPreferencesDatabaseTaskName,
+							"-PtestLocale=${locale}"
+					ignoreExitValue = false
+				}
+				println ">>> SUCCESS: Locale '${locale}' processed successfully."
+			} catch (final Exception e) {
+				println "\n" + "!" * 70
+				println "!!! ABORTING: Execution failed for locale '${locale}'."
+				println "!" * 70
+				throw new GradleException("Multi-locale process failed at: ${locale}", e)
+			}
+		}
+		println "\n>>> Process finished. All requested databases are ready."
+	}
+}
+
 dependencies {
 	implementation project(path: ':OsmAnd-java', configuration: 'android')
 	implementation project(':OsmAnd-api')
