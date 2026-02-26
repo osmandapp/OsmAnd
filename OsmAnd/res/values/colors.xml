@@ -533,4 +533,31 @@
 	<color name="speeding_value">#ffffff</color>
 	<color name="speeding_units">#ffffff</color>
 
+	<!-- Astro visibility graph -->
+	<color name="astro_visibility_x_tick_color">#BEBCC2</color>
+	<color name="astro_visibility_x_label_color">#7D738C</color>
+	<color name="astro_visibility_y_label_color">#2183F4</color>
+	<color name="astro_visibility_y_grid_color">#80D8D7DB</color>
+	<color name="astro_visibility_y_zero_color">#D8D7DB</color>
+
+	<color name="astro_visibility_marker_border_color">#AEB4C2</color>
+	<color name="astro_visibility_marker_az_color">#14CC9E</color>
+
+	<color name="astro_visibility_cursor_line_center">#E6EBF9</color>
+	<color name="astro_visibility_cursor_line_side">#33FFFFFF</color>
+	<color name="astro_visibility_cursor_dot_fill">#1852FF</color>
+	<color name="astro_visibility_cursor_dot_stroke">#FFFFFF</color>
+
+	<color name="astro_visibility_sun_gt_15">#80A0FF</color>
+	<color name="astro_visibility_sun_6_15">#668CFF</color>
+	<color name="astro_visibility_sun_0_6">#2E62FF</color>
+	<color name="astro_visibility_sun_m6_0">#0034CC</color>
+	<color name="astro_visibility_sun_m12_m6">#00134D</color>
+	<color name="astro_visibility_sun_lt_m12">#020D2C</color>
+
+	<color name="astro_visibility_fill_gt_45">#F3FF5A</color>
+	<color name="astro_visibility_fill_15_45">#F7D750</color>
+	<color name="astro_visibility_fill_0_15">#FB5934</color>
+	<color name="astro_visibility_fill_lt_0">#8E24AA</color>
+
 </resources>

@@ -1,16 +1,8 @@
 package net.osmand.plus.plugins.astro.utils
 
 import android.content.Context
-import android.util.TypedValue
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.ScrollView
-import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AppCompatCheckBox
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
 import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.Body
@@ -24,17 +16,9 @@ import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.searchAltitude
 import io.github.cosinekitty.astronomy.searchRiseSet
-import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astro.Constellation
 import net.osmand.plus.plugins.astro.SkyObject
-import net.osmand.plus.plugins.astro.StarWatcherSettings
-import net.osmand.plus.plugins.astro.StarWatcherSettings.CommonConfig
-import net.osmand.plus.plugins.astro.StarWatcherSettings.StarMapConfig
-import net.osmand.plus.plugins.astro.views.StarView
-import net.osmand.plus.settings.enums.ThemeUsageContext
-import net.osmand.plus.utils.AndroidUtils
-import net.osmand.plus.utils.ColorUtilities
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -252,5 +236,10 @@ object AstroUtils {
 			return (Math.toDegrees(raRad) / 15.0) to Math.toDegrees(decRad)
 		}
 		return null
+	}
+
+	fun getAstroTypeName(context: Context, key: String): String {
+		val resId = context.resources.getIdentifier(key, "string", context.packageName)
+		return if (resId != 0) context.getString(resId) else key
 	}
 }
