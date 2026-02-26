@@ -3719,8 +3719,8 @@
     <string name="poi_access_motorhome">Доступ для автодомов</string>
     <string name="poi_tactile_paving_incorrect">Неправильное</string>
     <string name="poi_tactile_paving_primitive">Примитивное</string>
-    <string name="poi_booth">Тип стенда</string>
-    <string name="poi_covered_booth">Стенд</string>
+    <string name="poi_booth">Будка</string>
+    <string name="poi_covered_booth">Да</string>
     <string name="poi_url">URL</string>
     <string name="poi_socket_cee_red_125a_yes">CEE красный 125A</string>
     <string name="poi_socket_cee_red_63a_yes">CEE красный 63A</string>
