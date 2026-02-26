@@ -6,9 +6,12 @@ import static androidx.test.espresso.action.ViewActions.replaceText;
 import static net.osmand.plus.settings.fragments.search.SearchButtonClick.clickSearchButton;
 import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.searchView;
 
+import android.Manifest;
+
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.rule.GrantPermissionRule;
 
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -28,6 +31,9 @@ public class GeneratePreferencesDatabaseTest extends AndroidTest {
 
 	@Rule
 	public ActivityScenarioRule<MapActivity> activityRule = new ActivityScenarioRule<>(MapActivity.class);
+
+	@Rule
+	public GrantPermissionRule permissionRule = GrantPermissionRule.grant(Manifest.permission.ACCESS_FINE_LOCATION);
 
 	@Before
 	public void setLocaleFromArguments() {
