@@ -11,6 +11,7 @@ import net.osmand.PlatformUtil
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.astro.SkyObject.Type
 import net.osmand.plus.plugins.astro.utils.AstroUtils.bodyColor
+import net.osmand.util.Algorithms
 import java.io.File
 
 class AstroDataDbProvider : AstroDataProvider() {
@@ -204,7 +205,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 				while (c.moveToNext()) {
 					val wId = c.getString(idxWId)
 					val name = c.getString(idxName)
-					catalogs.add(Catalog(wId, name))
+					catalogs.add(Catalog(wId, name, ""))
 				}
 			}
 
@@ -390,7 +391,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 	}
 
 	private fun loadCatalogs(ctx: Context, db: SQLiteDatabase, objects: List<SkyObject>) {
-		loadCatalogsImpl(ctx, db, objects, { it.wid }, { obj, catalogId, catalog -> obj.catalogId = catalogId; obj.catalog = catalog })
+		loadCatalogsImpl(ctx, db, objects, { it.wid }, { obj, catalogs -> obj.catalogs = catalogs })
 	}
 
 	private fun <T> loadCatalogsImpl(
@@ -398,7 +399,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 		db: SQLiteDatabase,
 		items: List<T>,
 		getWid: (T) -> String,
-		setCatalog: (T, String, Catalog) -> Unit
+		setCatalog: (T, List<Catalog>) -> Unit
 	) {
 		try {
 			val wikidataIds = items.mapNotNull { getWid(it).takeIf { wid -> wid.isNotEmpty() } }.distinct()
@@ -408,7 +409,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 			val catalogs = getCatalogs(ctx)
 			catalogs.forEach { catalogsMap[it.wid] = it }
 
-			val catalogIdsMap = mutableMapOf<String, Pair<String, Catalog>>()
+			val allCatalogsMap = mutableMapOf<String, MutableList<Catalog>>()
 
 			wikidataIds.chunked(900).forEach { chunk ->
 				val placeholders = chunk.joinToString(",") { "?" }
@@ -429,8 +430,12 @@ class AstroDataDbProvider : AstroDataProvider() {
 						val catalogId = c.getString(idxCatalogId)
 						val catalogWikiId = c.getString(idxCatalogWikiId)
 
-						val catalog = catalogsMap[catalogWikiId]
-						if (catalog != null) catalogIdsMap[wikiId] = catalogId to catalog
+						val baseCatalog = catalogsMap[catalogWikiId]
+						if (baseCatalog != null) {
+							val catalogWithId = baseCatalog.copy(catalogId = catalogId)
+
+							allCatalogsMap.getOrPut(wikiId) { ArrayList() }.add(catalogWithId)
+						}
 					}
 				}
 			}
@@ -438,9 +443,9 @@ class AstroDataDbProvider : AstroDataProvider() {
 			items.forEach { item ->
 				val wid = getWid(item)
 				if (wid.isNotEmpty()) {
-					val catalogHolder = catalogIdsMap[wid]
-					if (catalogHolder != null) {
-						setCatalog(item, catalogHolder.first ,catalogHolder.second)
+					val catalogs = allCatalogsMap[wid] ?: emptyList()
+					if (!Algorithms.isEmpty(catalogs)) {
+						setCatalog(item, catalogs)
 					}
 				}
 			}
