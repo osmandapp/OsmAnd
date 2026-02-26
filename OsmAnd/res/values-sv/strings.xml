@@ -5906,8 +5906,7 @@
     <string name="enable_3d_objects">3D-byggnader</string>
     <string name="has_vehicle_metrics">Med OBDII data</string>
     <string name="buildings_3d_detail_level">3D-byggnader detalisering</string>
-    <string name="star_watcher_plugin_name">Stjärnskådare (Beta)</string>
-    <string name="star_watcher_plugin_description">Stjärndiagram, 3D-stjärnkarta</string>
+    <string name="astronomy_plugin_description">Stjärndiagram, 3D-stjärnkarta</string>
     <string name="star_map">Stjärnkarta</string>
     <string name="star_charts_name">Stjärndiagram</string>
     <string name="star_visibility_name">Stjärnsynlighet</string>

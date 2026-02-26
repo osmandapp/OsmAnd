@@ -5931,8 +5931,7 @@
     <string name="has_vehicle_metrics">З даними OBDII</string>
     <string name="show_expand_button">Показати кнопку розгортання</string>
     <string name="imprecise_coordinates">Неточні координати</string>
-    <string name="star_watcher_plugin_name">Спостерігач за зірками (бета-версія)</string>
-    <string name="star_watcher_plugin_description">Зоряні карти, 3D-карта зоряного неба</string>
+    <string name="astronomy_plugin_description">Зоряні карти, 3D-карта зоряного неба</string>
     <string name="star_map">Зоряна карта</string>
     <string name="star_charts_name">Зоряні карти</string>
     <string name="star_visibility_name">Видимість зірок</string>

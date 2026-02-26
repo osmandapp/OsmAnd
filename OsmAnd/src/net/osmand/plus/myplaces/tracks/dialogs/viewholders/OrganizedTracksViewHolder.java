@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.TracksGroup;
@@ -23,8 +24,8 @@ public class OrganizedTracksViewHolder extends TracksGroupViewHolder {
 
 		OrganizedTracksGroup organizedTracks = (OrganizedTracksGroup) tracksGroup;
 		title.setText(organizedTracks.getName());
-		int itemsCount = tracksGroup.getTrackItems().size();
-		description.setText(app.getString(R.string.number_of_tracks, String.valueOf(itemsCount)));
+		int count = tracksGroup.getTrackItems().size();
+		description.setText(GpxUiHelper.formatTracksCount(app, count));
 
 		String iconName = organizedTracks.getIconName();
 		int iconId = AndroidUtils.getDrawableId(app, iconName, R.drawable.ic_action_folder);

@@ -733,8 +733,8 @@ public class RenderingRulesStorage {
 //		for (RenderingRuleProperty p :  storage.PROPS.getCustomRules()) {
 //			System.out.println(p.getCategory() + " " + p.getName() + " " + p.getAttrName());
 //		}
-//		printAllRules(storage);
-		testSearch(storage);
+		printAllRules(storage);
+//		testSearch(storage);
 	}
 
 	protected static void testSearch(RenderingRulesStorage storage) {

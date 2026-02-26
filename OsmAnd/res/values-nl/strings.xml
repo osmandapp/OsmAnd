@@ -6242,7 +6242,6 @@
     <string name="lang_mi">Maori</string>
     <string name="buildings_3d_detail_level">3D-gebouwendetaillering</string>
     <string name="has_vehicle_metrics">Met OBDII-data</string>
-    <string name="star_watcher_plugin_name">Sterrenkijker (Bèta)</string>
     <string name="star_map">Sterrenkaart</string>
     <string name="astro_name_sun">Zon</string>
     <string name="astro_name_moon">Maan</string>
@@ -6267,7 +6266,7 @@
     <string name="show_expand_button">Toon uitklapknop</string>
     <string name="imprecise_coordinates">Onnauwkeurige coördinaten</string>
     <string name="astro_constellations">Sterrenbeelden</string>
-    <string name="star_watcher_plugin_description">Sterrenoverzicht, 3D-sterrenkaart</string>
+    <string name="astronomy_plugin_description">Sterrenoverzicht, 3D-sterrenkaart</string>
     <string name="star_visibility_name">Ster zichtbaarheid</string>
     <string name="star_altitude_name">Ster hoogte</string>
     <string name="magnitude_filter">Magnitude-filter</string>
@@ -6345,4 +6344,34 @@
     <string name="building_3d_day_color_content_desc">3D-gebouwen dagstijlkleur</string>
     <string name="building_3d_night_color_content_desc">3D-gebouwen nachtstijlkleur</string>
     <string name="delete_groups_confirmation">Groepen verwijderen?</string>
+    <string name="astronomy_plugin_name">Astronomie</string>
+    <string name="astro_min_magnitude">Min. magnitude</string>
+    <string name="gradient_no_data_point_summary">Kleur voor ontbrekende of ongedefinieerd gegevens.</string>
+    <string name="gradient_input_value_too_low_warn">De minimale toegestane waarde is: %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">De maximale toegestane waarde is %1$s.</string>
+    <string name="gradient_input_value_duplicate_warn">Deze waarde bestaat al in het palet.</string>
+    <string name="gradient_input_invalid_value_warn">Voer een geldig getal in.</string>
+    <string name="value_cannot_be_edited_warn">Deze waarde kan niet worden bewerkt.</string>
+    <string name="unexpected_error_occurred_warn">Er is een onverwachte fout opgetreden.</string>
+    <string name="relative_gradient_point_m_summary">Kleur voor de maximale waarde in de track.</string>
+    <string name="relative_gradient_point_avg_summary">Kleur voor de gemiddelde waarde in de track.</string>
+    <string name="relative_gradient_point_min_summary">Kleur voor de minimale waarde in de track.</string>
+    <string name="shared_string_maximum">Maximum</string>
+    <string name="shared_string_minimum">Minimum</string>
+    <string name="shared_string_percentage">percentage</string>
+    <string name="remove_step">Verwijder stap</string>
+    <string name="shared_string_value">Waarde</string>
+    <string name="gradient_range_type_fixed_summary">Kleuren worden toegewezen aan specifieke absolute waarden (bijv. 50 km/u).</string>
+    <string name="gradient_range_type_fixed">Vaste waarden</string>
+    <string name="gradient_range_type_relative">Relatief</string>
+    <string name="edit_palette">Bewerk palet</string>
+    <string name="add_palette">Palet toevoegen</string>
+    <string name="delete_palette">Palet verwijderen</string>
+    <string name="delete_colors_palette_dialog_summary">Weet je zeker dat je het palet %1$s wilt verwijderen?</string>
+    <plurals name="tracks_count">
+        <item quantity="one">%d track</item>
+        <item quantity="other">%d tracks</item>
+    </plurals>
+    <string name="gradient_range_type_relative_summary">Kleuren worden automatisch aangepast aan het min/max-bereik van de track.</string>
+    <string name="shared_string_ratio">verhouding</string>
 </resources>

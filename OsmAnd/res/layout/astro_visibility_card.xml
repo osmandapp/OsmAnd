@@ -59,7 +59,7 @@
 			</FrameLayout>
 		</LinearLayout>
 
-		<net.osmand.plus.plugins.astro.views.AstroVisibilityGraphView
+		<net.osmand.plus.plugins.astronomy.views.AstroVisibilityGraphView
 			android:id="@+id/visibilityGraphView"
 			android:layout_width="match_parent"
 			android:layout_height="220dp"

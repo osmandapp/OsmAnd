@@ -437,17 +437,6 @@
 	<style name="Widget.App.Material.BottomSheet" parent="Widget.Material3.BottomSheet.Modal">
 		<item name="backgroundTint">?attr/activity_background_color</item>
 
-		<item name="shapeAppearanceOverlay">@style/Shape.BottomSheet</item>
-
-		<item name="paddingTopSystemWindowInsets">false</item>
-		<item name="paddingBottomSystemWindowInsets">false</item>
-		<item name="paddingLeftSystemWindowInsets">false</item>
-		<item name="paddingRightSystemWindowInsets">false</item>
-
-		<item name="marginTopSystemWindowInsets">false</item>
-		<item name="marginLeftSystemWindowInsets">false</item>
-		<item name="marginRightSystemWindowInsets">false</item>
-
 		<item name="android:navigationBarColor">@android:color/transparent</item>
 		<item name="android:statusBarColor">@android:color/transparent</item>
 	</style>

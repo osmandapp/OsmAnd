@@ -29,7 +29,7 @@
 			android:textColor="?android:attr/textColorSecondary"
 			android:textSize="16sp" />
 
-		<net.osmand.plus.plugins.astro.views.AstroScheduleDayGraphView
+		<net.osmand.plus.plugins.astronomy.views.AstroScheduleDayGraphView
 			android:id="@+id/schedule_day_graph"
 			android:layout_width="0dp"
 			android:layout_height="24dp"
