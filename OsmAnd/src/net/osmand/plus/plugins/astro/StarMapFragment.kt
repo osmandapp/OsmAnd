@@ -34,9 +34,10 @@ import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astro.StarChartState.StarChartType
 import net.osmand.plus.plugins.astro.StarWatcherSettings.CommonConfig
 import net.osmand.plus.plugins.astro.StarWatcherSettings.StarMapConfig
-import net.osmand.plus.plugins.astro.utils.AstroUtils
 import net.osmand.plus.plugins.astro.utils.StarMapARModeHelper
 import net.osmand.plus.plugins.astro.utils.StarMapCameraHelper
+import net.osmand.plus.plugins.astro.views.contextmenu.AstroBottomSheetBehavior
+import net.osmand.plus.plugins.astro.views.contextmenu.AstroContextMenuFragment
 import net.osmand.plus.plugins.astro.views.DateTimeSelectionView
 import net.osmand.plus.plugins.astro.views.StarAltitudeChartView
 import net.osmand.plus.plugins.astro.views.StarChartView
@@ -117,7 +118,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private lateinit var arModeHelper: StarMapARModeHelper
 	private lateinit var cameraHelper: StarMapCameraHelper
-	private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+	private lateinit var bottomSheetContainer: View
+	private lateinit var bottomSheetBehavior: AstroBottomSheetBehavior<View>
 
 	private var previousAltitude: Double = 45.0
 	private var previousAzimuth: Double = 0.0
@@ -132,7 +134,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private val backPressedCallback = object : OnBackPressedCallback(false) {
 		override fun handleOnBackPressed() {
 			if (::bottomSheetBehavior.isInitialized && bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
-				bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+				hideBottomSheet()
 				if (childFragmentManager.backStackEntryCount > 0) {
 					childFragmentManager.popBackStack()
 				}
@@ -364,16 +366,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		previousViewAngle = starView.getViewAngle()
 		apply2DMode(starView.is2DMode)
 
-		val bottomSheetContainer = view.findViewById<View>(R.id.bottom_sheet_container)
-		bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetContainer)
-		bottomSheetBehavior.skipCollapsed = true
+		bottomSheetContainer = view.findViewById(R.id.bottom_sheet_container)
+		bottomSheetBehavior = (BottomSheetBehavior.from(bottomSheetContainer) as? AstroBottomSheetBehavior<View>)
+			?: throw IllegalStateException("bottom_sheet_container must use AstroBottomSheetBehavior")
 		bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 		bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
 			override fun onStateChanged(bottomSheet: View, newState: Int) {
 				if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-					starView.setSelectedObject(null)
-					starView.setSelectedConstellation(null)
-					starView.invalidate()
+					clearSelectedObject()
 				}
 				updateBackPressedCallback()
 			}
@@ -869,13 +869,20 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 	}
 
+	private fun clearSelectedObject() {
+		selectedObject = null
+		starView.setSelectedObject(null)
+		starView.setSelectedConstellation(null)
+		starView.invalidate()
+	}
+
 	fun hideBottomSheet() {
 		bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 	}
 
 	private fun updateBottomSheetInfo() {
-		(childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? SkyObjectInfoFragment)?.let {
-			selectedObject?.let { obj -> it.updateObjectInfo(obj) }
+		getAstroContextMenuFragment()?.let { fragment ->
+			selectedObject?.let { obj -> fragment.updateObjectInfo(obj) }
 		}
 	}
 
@@ -890,15 +897,25 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun showObjectInfo(obj: SkyObject) {
-		val existing = childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? SkyObjectInfoFragment
+		val existing = childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? AstroContextMenuFragment
 		if (existing == null || existing.arguments?.getString("skyObjectName") != obj.name) {
+			val created = AstroContextMenuFragment.newInstance(obj)
 			childFragmentManager.beginTransaction()
-				.replace(R.id.bottom_sheet_container, SkyObjectInfoFragment.newInstance(obj))
+				.replace(
+					R.id.bottom_sheet_container,
+					created,
+					AstroContextMenuFragment.TAG
+				)
 				.commitNow()
 		} else {
 			existing.updateObjectInfo(obj)
 		}
-		bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+		bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+	}
+
+	private fun getAstroContextMenuFragment(): AstroContextMenuFragment? {
+		return childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? AstroContextMenuFragment
 	}
 
 	private fun updateBackPressedCallback() {
