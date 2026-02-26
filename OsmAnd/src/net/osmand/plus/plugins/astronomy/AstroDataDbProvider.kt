@@ -399,7 +399,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 		db: SQLiteDatabase,
 		items: List<T>,
 		getWid: (T) -> String,
-		setCatalog: (T, List<Catalog>) -> Unit
+		setCatalogs: (T, List<Catalog>) -> Unit
 	) {
 		try {
 			val wikidataIds = items.mapNotNull { getWid(it).takeIf { wid -> wid.isNotEmpty() } }.distinct()
@@ -445,7 +445,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 				if (wid.isNotEmpty()) {
 					val catalogs = allCatalogsMap[wid] ?: emptyList()
 					if (!Algorithms.isEmpty(catalogs)) {
-						setCatalog(item, catalogs)
+						setCatalogs(item, catalogs)
 					}
 				}
 			}
