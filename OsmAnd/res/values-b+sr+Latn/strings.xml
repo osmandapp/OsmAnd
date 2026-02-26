@@ -4793,7 +4793,7 @@
     <string name="favorites_backup">Omiljeno skladište</string>
     <string name="marker_1st">Prvi marker</string>
     <string name="rotate_map_manual_opt">Ručno okretanje</string>
-    <string name="offline_weather_forecast">Internet vremenska prognoza</string>
+    <string name="offline_weather_forecast">Vanmrežna vremenska prognoza</string>
     <string name="key_event_action_zoom_out">Smanji prikaz</string>
     <string name="key_event_action_zoom_in">Uvećaj prikaz</string>
     <string name="key_event_action_move_right">Pomeri desno</string>
@@ -5678,13 +5678,13 @@
     <string name="choose_location_on_map">Izaberite lokaciju na mapi.</string>
     <string name="layer_coordinates_grid">Koordinatna mreža</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Uključi/isključi vidljivost koordinatne mreže na mapi.</string>
-    <string name="show_image_previews">Prikaži pregled slika</string>
+    <string name="show_image_previews">Prikaži preglede slika</string>
     <string name="meridian_180">180. meridijan</string>
     <string name="prime_meridian">Nulti meridijan</string>
     <string name="equator">Ekvator</string>
     <string name="release_5_0">• Otkrijte najbolje rangirane tačke interesa pomoću novog režima istraživanja\n\n• Sve OSM rute, sada se mogu pretraživati! Planinarenje, biciklizam, MTB i još mnogo toga\n\n• Novi vidžet za navigaciju kombinuje strelicu za skretanje i uputstva za navigaciju\n\n• Vidžet sa informacijama o trenutnoj ruti: prikazuje ETA, vreme dolaska i udaljenost\n\n• Izaberite ski staze i MTB staze na mapi za detaljne informacije\n\n• Mogućnost izbora veličine vidžeta za levi i desni panel\n\n• Dodata koordinatna mreža sa geografskim koordinatama\n\n• Dodata mogućnost prilagođavanja podrazumevanog izgleda omiljenih grupa\n\n• Android Auto: pogledajte ETA i udaljenost do sledeće tačke; imena gradova se sada pojavljuju u rezultatima pretrage\n• Istaknuti vrhovi se sada mogu otkriti putem mape i pretrage\n\n• Visina planinskih vrhova u stopama\n\n• Dodato: stene i penjališta na mapi\n\n• Pretraga adresa u SAD je poboljšana\n\n• Dodat je hebrejski TTS za navigaciju</string>
-    <string name="shared_string_offline_only">Samo bez interneta</string>
-    <string name="shared_string_online_only">Samo sa internetom</string>
+    <string name="shared_string_offline_only">Samo oflajn</string>
+    <string name="shared_string_online_only">Samo onlajn</string>
     <string name="add_widget">Dodajte widžet</string>
     <string name="row_height">Visina reda</string>
     <string name="intermediate_first">Prvo međuodredište</string>
@@ -6025,4 +6025,8 @@
     <string name="add_palette">Dodaj paletu</string>
     <string name="delete_palette">Obriši paletu</string>
     <string name="delete_colors_palette_dialog_summary">Da li ste sigurni da želite da obrišete paletu %1$s?</string>
+    <string name="shared_string_trip_average">Prosečna vrednost putovanja</string>
+    <string name="trip_recording_avg_speed_widget_description">Prikazuje prosečnu brzinu trenutnog putovanja ili prosečnu brzinu tokom poslednjeg uspona ili spusta.</string>
+    <string name="trip_recording_moving_time_widget_description">Prikazuje trenutno zabeleženo vreme kretanja ili vreme za poslednji uspon i spust.</string>
+    <string name="trip_recording_moving_time">Vreme kretanja</string>
 </resources>
