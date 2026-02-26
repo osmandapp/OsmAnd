@@ -4633,7 +4633,7 @@
     <string name="common_weight_limit_error">La valeur minimale est « %1$s » %2$s. Si le poids de votre véhicule est inférieur à cette valeur, utilisez le profil « %3$s ».</string>
     <string name="weather_forecast">Prévisions météo</string>
     <string name="offline_weather_forecast_desc">Vous pouvez télécharger les prévisions météo des 7 prochains jours.</string>
-    <string name="offline_weather_forecast">Prévisions météo hors ligne</string>
+    <string name="offline_weather_forecast">Prévisions météorologiques hors ligne</string>
     <string name="rendering_value_defaultMedium_name">Par défaut (moyen)</string>
     <string name="select_layer">Sélectionner la couche</string>
     <string name="camera_app">Application d\'appareil photo</string>
@@ -5592,9 +5592,9 @@
     <string name="equator">Équateur</string>
     <string name="meridian_180">180ème méridien</string>
     <string name="release_5_0">• Découvrez les points d\'intérêt les mieux classés grâce au nouveau mode Explorer.\n\n • Tous les itinéraires OSM sont désormais consultables ! Randonnée, cyclisme, VTT et plus encore.\n\n • Le nouveau widget de navigation combine flèche de direction et instructions de navigation.\n\n • Widget d\'informations sur l\'itinéraire actuel : affiche l\'heure d\'arrivée prévue, l\'heure d\'arrivée et la distance.\n\n • Sélectionnez les pistes de ski et les sentiers de VTT sur la carte pour obtenir des informations détaillées.\n\n • Possibilité de sélectionner la taille du widget pour les panneaux gauche et droit.\n\n • Ajout d\'une grille de coordonnées avec les coordonnées géographiques.\n\n • Ajout de la possibilité de personnaliser l\'apparence par défaut des groupes favoris.\n\n • Android Auto : affichez l\'heure d\'arrivée prévue et la distance jusqu\'au prochain point de passage ; les noms des villes apparaissent désormais dans les résultats de recherche.\n • Les sommets importants sont désormais visibles sur la carte et dans les résultats de recherche.\n\n • Altitude des sommets en pieds.\n\n • Ajout : falaises et zones d\'escalade sur la carte.\n\n • Amélioration de la recherche d\'adresses aux États-Unis.\n\n • Ajout de la synthèse vocale en hébreu pour la navigation.</string>
-    <string name="shared_string_online_only">Uniquement en ligne</string>
+    <string name="shared_string_online_only">En ligne uniquement</string>
     <string name="row_height">Hauteur de la ligne</string>
-    <string name="shared_string_offline_only">Uniquement hors-ligne</string>
+    <string name="shared_string_offline_only">Hors ligne uniquement</string>
     <string name="add_widget">Ajouter un widget</string>
     <string name="intermediate_first">Intermédiaire d\'abord</string>
     <string name="destination_first">Destination d\'abord</string>
@@ -5948,4 +5948,8 @@
     <string name="delete_colors_palette_dialog_summary">Êtes-vous certain de vouloir supprimer la palette %1$s ?</string>
     <string name="gradient_range_type_fixed_summary">Les couleurs sont attribuées selon des valeurs précises (par exemple : 50 km/h).</string>
     <string name="gradient_range_type_relative_summary">Les couleurs sont attribuées automatiquement selon l\'entendue des valeurs de la trace.</string>
+    <string name="shared_string_trip_average">Moyenne du trajet</string>
+    <string name="trip_recording_avg_speed_widget_description">Affiche la vitesse moyenne du trajet actuel ou la vitesse moyenne de la dernière ascension ou descente.</string>
+    <string name="trip_recording_moving_time_widget_description">Affiche la durée de déplacement actuellement enregistrée ou la durée de la dernière ascension et descente.</string>
+    <string name="trip_recording_moving_time">Durée de déplacement</string>
 </resources>

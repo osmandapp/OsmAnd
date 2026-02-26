@@ -4679,7 +4679,7 @@
     <string name="weather_forecast_is_outdated">Прогноз устарел.</string>
     <string name="shared_string_all_world">Весь мир</string>
     <string name="weather_forecast">Прогноз погоды</string>
-    <string name="offline_weather_forecast">Офлайн-прогноз погоды</string>
+    <string name="offline_weather_forecast">Прогноз погоды офлайн</string>
     <string name="offline_weather_forecast_desc">Вы можете скачать прогноз погоды на 7 дней.</string>
     <string name="clear_online_cache_description">Это очистит весь кеш онлайн-тайлов погоды.</string>
     <string name="free_maps_updates">Бесплатные обновления (экстренные)</string>
@@ -5610,7 +5610,7 @@
     <string name="shared_string_manual">Руководство</string>
     <string name="layer_coordinates_grid">Координатная сетка</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Переключить видимость координатной сетки на карте.</string>
-    <string name="show_image_previews">Предварительный просмотр изображений</string>
+    <string name="show_image_previews">Показывать предпросмотр изображений</string>
     <string name="prime_meridian">Нулевой меридиан</string>
     <string name="equator">Экватор</string>
     <string name="meridian_180">180-й меридиан</string>
@@ -5928,4 +5928,38 @@
     <string name="building_3d_near_distance_content_desc">3D-здания вблизи</string>
     <string name="building_3d_far_distance_content_desc">3D-здания издалека</string>
     <string name="astronomy_plugin_name">Астрономия</string>
+    <string name="shared_string_trip_average">Среднее время поездки</string>
+    <string name="trip_recording_avg_speed_widget_description">Показывает среднюю скорость текущей поездки или среднюю скорость на последнем участке подъема или спуска.</string>
+    <string name="trip_recording_moving_time_widget_description">Показывает текущую длительность записи перемещения или продолжительносить последнего подъема и спуска с горы.</string>
+    <string name="trip_recording_moving_time">Длительность движения</string>
+    <plurals name="tracks_count">
+        <item quantity="one">%d трек</item>
+        <item quantity="few">%d трека</item>
+        <item quantity="many">%d треков</item>
+        <item quantity="other">%d треков</item>
+    </plurals>
+    <string name="gradient_no_data_point_summary">Цвет применяется, когда данные отсутствуют или не определены.</string>
+    <string name="gradient_input_value_too_low_warn">Минимально допустимое значение %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">Максимально допустимое значение %1$s.</string>
+    <string name="gradient_input_value_duplicate_warn">Это значение уже существует в палитре.</string>
+    <string name="gradient_input_invalid_value_warn">Пожалуйста, введите допустимое значение.</string>
+    <string name="value_cannot_be_edited_warn">Это значение невозможно отредактировать.</string>
+    <string name="unexpected_error_occurred_warn">Произошла непредвиденная ошибка.</string>
+    <string name="relative_gradient_point_m_summary">Цвет соответствует максимальному значению, найденному в треке.</string>
+    <string name="relative_gradient_point_avg_summary">Цвет для обозначения среднего значения трека.</string>
+    <string name="relative_gradient_point_min_summary">Цвет соответствует минимальному значению, найденному в треке.</string>
+    <string name="shared_string_maximum">Максимум</string>
+    <string name="shared_string_minimum">Минимум</string>
+    <string name="shared_string_ratio">соотношение</string>
+    <string name="shared_string_percentage">процент</string>
+    <string name="remove_step">Удалить шаг</string>
+    <string name="shared_string_value">Значение</string>
+    <string name="gradient_range_type_fixed_summary">Цвета соответствуют определенным абсолютным значениям (например, 50 км/ч).</string>
+    <string name="gradient_range_type_fixed">Фиксированные значения</string>
+    <string name="gradient_range_type_relative_summary">Цветовая шкала выбирается автоматически, в зависимости от минимального/максимального диапазона трека.</string>
+    <string name="gradient_range_type_relative">Соответствие</string>
+    <string name="edit_palette">Редактировать палитру</string>
+    <string name="add_palette">Добавить палитру</string>
+    <string name="delete_palette">Удалить палитру</string>
+    <string name="delete_colors_palette_dialog_summary">Вы уверены, что хотите удалить палитру %1$s?</string>
 </resources>
