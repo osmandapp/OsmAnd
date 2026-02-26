@@ -271,6 +271,6 @@
 		android:layout_height="wrap_content"
 		app:behavior_hideable="true"
 		app:behavior_peekHeight="0dp"
-		app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
+		app:layout_behavior="net.osmand.plus.plugins.astro.views.contextmenu.AstroBottomSheetBehavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
