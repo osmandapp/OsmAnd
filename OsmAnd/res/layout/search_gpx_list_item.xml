@@ -32,8 +32,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
             app:srcCompat="@drawable/ic_action_polygom_dark"
             android:layout_gravity="center_vertical"
             android:visibility="visible"

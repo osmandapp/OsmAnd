@@ -22,6 +22,7 @@ import net.osmand.data.Street;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.utils.AndroidUtils;
@@ -67,62 +68,56 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 	public void bindItem(@NonNull QuickSearchListItem item, boolean useMapCenter) {
 		CharSequence title = item.getSpannableName();
 		MapObject mapObject = (MapObject) item.getSearchResult().object;
-		BinaryMapIndexReader mapReaderResource = null;
-		if (mapObject.getReferenceFile() instanceof BinaryMapIndexReader) {
-			mapReaderResource = (BinaryMapIndexReader) mapObject.getReferenceFile();
-		}
+		String addressText = item.getAddress();
+		String typeName = item.getTypeName();
 
 		if (mapObject instanceof City city) {
-			if (mapReaderResource != null) {
-				addressTv.setText(mapReaderResource.getRegionName());
-			} else if (item.getSearchResult().relatedObject instanceof City relatedCity) {
-				if (relatedCity.getReferenceFile() instanceof BinaryMapIndexReader relatedMapReaderResource) {
-					addressTv.setText(String.format("%s, %s", relatedCity, relatedMapReaderResource.getRegionName()));
-				}
+			BinaryMapIndexReader mapReaderResource = null;
+			if (mapObject.getReferenceFile() instanceof BinaryMapIndexReader) {
+				mapReaderResource = (BinaryMapIndexReader) mapObject.getReferenceFile();
 			}
+			if (mapReaderResource != null) {
+				addressText = FileNameTranslationHelper.getFileNameWithRegion(app, mapReaderResource.getFile().getName());
+			} else if (item.getSearchResult().relatedObject instanceof City relatedCity &&
+					relatedCity.getReferenceFile() instanceof BinaryMapIndexReader relatedMapReaderResource) {
+				addressText = String.format("%s, %s", relatedCity, FileNameTranslationHelper.getFileNameWithRegion(app, relatedMapReaderResource.getFile().getName()));
+			}
+			typeName = switch (city.getType()) {
+				case VILLAGE -> app.getString(R.string.city_type_village);
+				case SUBURB -> app.getString(R.string.city_type_suburb);
+				case TOWN -> app.getString(R.string.city_type_town);
+				default -> app.getString(R.string.city_type_city);
+			};
 		} else if (mapObject instanceof Street street) {
 			if (street.getNamesMap(false).containsKey(OLD_NAME_TAG)) {
-				String oldName = street.getName(OLD_NAME_TAG);
-				title = String.format("%s (%s)", title, oldName);
+				title = String.format("%s (%s)", title, street.getName(OLD_NAME_TAG));
 			}
-			addressTv.setText(street.getCity().getName());
+			addressText = street.getCity().getName();
+			if (item.getSearchResult().objectType == ObjectType.STREET) {
+				typeName = app.getString(R.string.search_address_street);
+			} else if (item.getSearchResult().objectType == ObjectType.STREET_INTERSECTION) {
+				typeName = app.getString(R.string.intersection);
+			}
 		} else if (mapObject instanceof Building) {
 			StringBuilder address = new StringBuilder(item.getSearchResult().localeRelatedObjectName);
 			if (item.getSearchResult().relatedObject instanceof Street street) {
-				address.append(", ");
-				address.append(street.getCity().getName());
+				address.append(", ").append(street.getCity().getName());
 			}
-			addressTv.setText(address.toString());
-		} else {
-			addressTv.setText(item.getAddress());
+			addressText = address.toString();
+			typeName = app.getString(R.string.search_address_building);
 		}
-		if (mapObject instanceof City city) {
-			City.CityType cityType = city.getType();
-			String cityTypeString;
-			switch (cityType) {
-				case VILLAGE -> cityTypeString = app.getString(R.string.city_type_village);
-				case SUBURB -> cityTypeString = app.getString(R.string.city_type_suburb);
-				case TOWN -> cityTypeString = app.getString(R.string.city_type_town);
-				default -> cityTypeString = app.getString(R.string.city_type_city);
-			}
-			type.setText(cityTypeString);
-		} else if (mapObject instanceof Street) {
-			if (item.getSearchResult().objectType == ObjectType.STREET) {
-				type.setText(R.string.search_address_street);
-			} else if (item.getSearchResult().objectType == ObjectType.STREET_INTERSECTION) {
-				type.setText(R.string.intersection);
-			}
-		} else if (mapObject instanceof Building) {
-			type.setText(R.string.search_address_building);
-		} else {
-			type.setText(item.getTypeName());
-		}
+		addressTv.setText(addressText);
 		titleTv.setText(title);
+		type.setText(typeName);
+		bindImage(item, mapObject);
+		QuickSearchListAdapter.updateCompass(itemView, item, locationViewCache, useMapCenter);
+	}
 
+	private void bindImage(@NonNull QuickSearchListItem item, MapObject mapObject) {
 		Drawable drawable = item.getIcon();
 		icon.setImageDrawable(drawable);
 		if (mapObject instanceof Amenity amenity) {
-			if(Algorithms.stringsEqual(amenity.getSubType(), "city")) {
+			if (Algorithms.stringsEqual(amenity.getSubType(), "city")) {
 				addressTv.setText(amenity.getRegionName());
 			}
 			String wikiImageUrl = amenity.getWikiImageStubUrl();
@@ -147,7 +142,5 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 				}
 			}
 		}
-
-		QuickSearchListAdapter.updateCompass(itemView, item, locationViewCache, useMapCenter);
 	}
 }
