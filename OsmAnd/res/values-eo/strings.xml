@@ -6041,4 +6041,6 @@
     <string name="trip_recording_avg_speed_widget_description">Montras la mezuman rapidon de la nuna spuro aŭ la mezuman rapidon dum la antaŭa suprenira aŭ malspurenira fragmento.</string>
     <string name="trip_recording_moving_time_widget_description">Montras tempon dum movo aŭ tempon de la antaŭa supreniro aŭ malsupreniro.</string>
     <string name="trip_recording_moving_time">Tempo dum movo</string>
+    <string name="share_favorite">Kunhavigi ŝatatan ejon</string>
+    <string name="copy_list">Kopii liston</string>
 </resources>
