@@ -963,7 +963,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				.initPreferencesDatabase(
 						BuildConfig.GENERATE_PREFERENCES_DATABASE_FOR_ASSET ?
 								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile() :
-								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(LanguageCode.from(Locales.getCurrentLocale(getResources()))),
+								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(
+										LanguageCode.from(Locales.getCurrentLocale(getResources())),
+										getAssets()),
 						new ActualConfigurationProvider().getActualConfiguration(),
 						new TreeProcessorFactory(),
 						new ConfigurationBundleConverter(),

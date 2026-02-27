@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments.search;
 
+import android.content.res.AssetManager;
 import android.os.PersistableBundle;
 
 import androidx.fragment.app.FragmentActivity;
@@ -13,6 +14,7 @@ import de.KnollFrank.lib.settingssearch.common.LanguageCode;
 import de.KnollFrank.lib.settingssearch.common.graph.Tree;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PreferencesDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PrepackagedPreferencesDatabase;
+import de.KnollFrank.lib.settingssearch.db.preference.db.source.AssetDatabaseSourceProvider;
 import de.KnollFrank.lib.settingssearch.db.preference.db.transformer.SearchablePreferenceScreenTreeTransformer;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreen;
@@ -27,13 +29,15 @@ public class PreferencesDatabaseConfigFactory {
 				PreferencesDatabaseConfig.JournalMode.TRUNCATE);
 	}
 
-	public static PreferencesDatabaseConfig<Configuration> createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(final LanguageCode languageCode) {
+	public static PreferencesDatabaseConfig<Configuration> createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(
+			final LanguageCode languageCode,
+			final AssetManager assetManager) {
 		final File databaseAssetFile = new File(String.format("database/searchable_preferences_prepackaged_%s.db", languageCode.code()));
 		return new PreferencesDatabaseConfig<>(
 				databaseAssetFile.getName(),
 				Optional.of(
 						new PrepackagedPreferencesDatabase<>(
-								databaseAssetFile,
+								new AssetDatabaseSourceProvider(databaseAssetFile, assetManager),
 								new SearchablePreferenceScreenTreeTransformer<>() {
 
 									@Override

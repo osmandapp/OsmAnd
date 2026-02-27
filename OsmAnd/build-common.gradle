@@ -378,7 +378,6 @@ tasks.register('appStart', Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'
 }
 
-// execute this task using: ./gradlew uninstallNightlyFreeLegacyFatDebug installNightlyFreeLegacyFatDebug installNightlyFreeLegacyFatDebugAndroidTest generateAndPullPreferencesDatabase -PtestLocale=de
 tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
     group = "Database"
     description = "Generates and pulls the prepackaged preferences database. Use with the full installation command."
@@ -543,7 +542,7 @@ dependencies {
 	implementation "androidx.car.app:app-projected:1.4.0"
 
 	implementation 'com.google.android.gms:play-services-location:21.3.0'
-	implementation 'com.github.KnollFrank:SettingsSearch:d7b4a83788'
+	implementation 'com.github.KnollFrank:SettingsSearch:e8c6146c03'
 	// https://mvnrepository.com/artifact/com.google.guava/guava
 	implementation 'com.google.guava:guava:33.5.0-android'
 
