@@ -293,7 +293,9 @@ public class MyPlacesActivity extends TabActivity {
 	@Override
 	public void onAttachFragment(@NonNull Fragment fragment) {
 		if (fragment instanceof FragmentStateHolder) {
-			fragment.setArguments(intentParams);
+			if (fragment.getArguments() == null && intentParams != null) {
+				fragment.setArguments(new Bundle(intentParams));
+			}
 			fragmentsStateList.add(new WeakReference<>((FragmentStateHolder) fragment));
 		}
 	}

@@ -114,14 +114,14 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		if (savedInstanceState != null) {
 			searchQuery = savedInstanceState.getString(FAVORITE_SEARCH_QUERY_KEY);
 			groupKey = savedInstanceState.getString(FAVORITE_SEARCH_GROUP_KEY);
-			savedInstanceState.remove(FAVORITE_SEARCH_QUERY_KEY);
-			savedInstanceState.remove(FAVORITE_SEARCH_GROUP_KEY);
 		}
-		if (searchQuery == null && arguments != null) {
-			searchQuery = arguments.getString(FAVORITE_SEARCH_QUERY_KEY);
-			groupKey = arguments.getString(FAVORITE_SEARCH_GROUP_KEY);
-			arguments.remove(FAVORITE_SEARCH_QUERY_KEY);
-			arguments.remove(FAVORITE_SEARCH_GROUP_KEY);
+		if (arguments != null) {
+			if (searchQuery == null) {
+				searchQuery = arguments.getString(FAVORITE_SEARCH_QUERY_KEY);
+			}
+			if (groupKey == null) {
+				groupKey = arguments.getString(FAVORITE_SEARCH_GROUP_KEY);
+			}
 		}
 		if (searchQuery == null) {
 			searchQuery = "";
@@ -615,9 +615,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 	public void onCategorySelected(PointsGroup pointsGroup) {
 		String category = FavoriteGroup.getCategoryFromPointGroup(app, pointsGroup);
 		if (selectionMode) {
-			for (FavouritePoint point : selectionHelper.getSelectedItems()) {
-				helper.editFavouriteName(point, point.getName(), category, point.getDescription(), point.getAddress());
-			}
+			helper.editFavouritesGroup(new ArrayList<>(selectionHelper.getSelectedItems()), category);
 		} else {
 			helper.editFavouriteName(selectedPoint, selectedPoint.getName(), category, selectedPoint.getDescription(), selectedPoint.getAddress());
 		}
@@ -642,7 +640,6 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 			}
 			fragment.setArguments(bundle);
 			fragment.points.addAll(points);
-			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(manager, TAG);
 		}
