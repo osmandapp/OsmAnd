@@ -54,7 +54,6 @@ import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
-import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.CumulativeInfo;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.RouteDetailsFragmentListener;
@@ -860,7 +859,7 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 				}
 			}
 		}
-		updateNavBarColor();
+		updateNavigationBarColor();
 	}
 
 	@Override

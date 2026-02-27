@@ -2,6 +2,7 @@ package net.osmand.plus.widgets.popup;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,7 @@ public class PopUpMenuArrayAdapter extends ArrayAdapter<PopUpMenuItem> {
 			}
 			Integer titleSize = item.getTitleSize();
 			if (titleSize != null) {
-				tvTitle.setTextSize(titleSize);
+				tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, titleSize);
 			}
 			ImageView ivIcon = convertView.findViewById(R.id.icon);
 			Drawable icon = item.getIcon();

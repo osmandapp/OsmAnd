@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import static net.osmand.plus.mapcontextmenu.other.ShareItem.COPY_LIST;
 import static net.osmand.plus.mapcontextmenu.other.ShareItem.SAVE_AS_FILE;
 import static net.osmand.plus.mapcontextmenu.other.SharePoiParams.getFormattedShareLatLon;
 import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.*;
@@ -53,6 +54,7 @@ public class ShareMenu extends BaseMenuController {
 
 	private static final String KEY_SHARE_MENU_LATLON = "key_share_menu_latlon";
 	private static final String KEY_SHARE_MENU_POINT_TITLE = "key_share_menu_point_title";
+	private static final String KEY_SHARE_MENU_IS_FAVORITE = "key_share_menu_is_favorite";
 	public static final String KEY_SAVE_FILE_NAME = "key_save_file_name";
 
 	private LatLon latLon;
@@ -62,7 +64,11 @@ public class ShareMenu extends BaseMenuController {
 	private String geoUrl;
 	private String sms;
 	private String urlLink;
+	private Boolean isFavorite = false;
 
+	public Boolean isFavorite() {
+		return isFavorite;
+	}
 	private ShareMenu(@NonNull FragmentActivity activity) {
 		super(activity);
 	}
@@ -102,11 +108,17 @@ public class ShareMenu extends BaseMenuController {
 	}
 
 	public static void show(LatLon latLon, String title, String address, String urlLink, @NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
+		show(latLon, title, address, urlLink, app, activity, false);
+	}
+
+	public static void show(LatLon latLon, String title, String address, String urlLink,
+	                        @NonNull OsmandApplication app, @NonNull FragmentActivity activity, @NonNull Boolean isFavorite) {
 		ShareMenu menu = new ShareMenu(activity);
 		menu.latLon = latLon;
 		menu.title = title;
 		menu.address = address;
 		menu.urlLink = urlLink;
+		menu.isFavorite = isFavorite;
 
 		if (Build.VERSION.SDK_INT >= 34) {
 			showNativeShareDialog(menu, app, null);
@@ -271,12 +283,14 @@ public class ShareMenu extends BaseMenuController {
 	public void saveMenu(@NonNull Bundle bundle) {
 		bundle.putSerializable(KEY_SHARE_MENU_LATLON, latLon);
 		bundle.putString(KEY_SHARE_MENU_POINT_TITLE, title);
+		bundle.putBoolean(KEY_SHARE_MENU_IS_FAVORITE, isFavorite);
 	}
 
 	@NonNull
 	public static ShareMenu restoreMenu(@NonNull Bundle bundle, @NonNull MapActivity activity) {
 		ShareMenu menu = new ShareMenu(activity);
 		menu.title = bundle.getString(KEY_SHARE_MENU_POINT_TITLE);
+		menu.isFavorite = bundle.getBoolean(KEY_SHARE_MENU_IS_FAVORITE);
 		menu.latLon = AndroidUtils.getSerializable(bundle, KEY_SHARE_MENU_LATLON, LatLon.class);
 		return menu;
 	}
@@ -342,6 +356,11 @@ public class ShareMenu extends BaseMenuController {
 
 		public NativeShareDialogBuilder addFileWithSaveAction(@NonNull File file, @NonNull OsmandApplication app,
 		                                                      @NonNull Activity activity, boolean singleTop) {
+			return addFileWithSaveAction(file, app, activity, null, singleTop);
+		}
+
+		public NativeShareDialogBuilder addFileWithSaveAction(@NonNull File file, @NonNull OsmandApplication app,
+		                                                      @NonNull Activity activity, @Nullable String text, boolean singleTop) {
 			this.file = file;
 
 			if (Build.VERSION.SDK_INT >= 34) {
@@ -355,19 +374,32 @@ public class ShareMenu extends BaseMenuController {
 					intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				}
 
-				ShareItem item = SAVE_AS_FILE;
-				intent.putExtra(KEY_SHARE_ACTION_ID, item.ordinal());
-				PendingIntent pendingIntent = PendingIntent.getActivity(
+				ShareItem saveFileItem = SAVE_AS_FILE;
+				intent.putExtra(KEY_SHARE_ACTION_ID, saveFileItem.ordinal());
+				PendingIntent savePendingIntent = PendingIntent.getActivity(
 						app,
-						0,
+						saveFileItem.ordinal(),
 						intent,
 						PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
 				);
-
-				ChooserAction saveToDeviceAction = new ChooserAction.Builder(Icon.createWithResource(app, item.getIconId()),
-						app.getString(item.getTitleId()), pendingIntent).build();
-
+				ChooserAction saveToDeviceAction = new ChooserAction.Builder(Icon.createWithResource(app, saveFileItem.getIconId()),
+						app.getString(saveFileItem.getTitleId()), savePendingIntent).build();
 				chooserActions.add(saveToDeviceAction);
+
+				if (!Algorithms.isEmpty(text)) {
+					intent.putExtra(KEY_SHARE_LIST, text);
+					ShareItem copyListItem = COPY_LIST;
+					intent.putExtra(KEY_SHARE_ACTION_ID, copyListItem.ordinal());
+					PendingIntent copyListPendingIntent = PendingIntent.getActivity(
+							app,
+							copyListItem.ordinal(),
+							intent,
+							PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+					);
+					ChooserAction copyListActionAction = new ChooserAction.Builder(Icon.createWithResource(app, copyListItem.getIconId()),
+							app.getString(copyListItem.getTitleId()), copyListPendingIntent).build();
+					chooserActions.add(copyListActionAction);
+				}
 			}
 
 			return this;

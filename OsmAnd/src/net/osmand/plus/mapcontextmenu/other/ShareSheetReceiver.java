@@ -14,6 +14,7 @@ public class ShareSheetReceiver extends BroadcastReceiver {
 	public static final String KEY_SHARE_COORDINATES = "key_share_coordinates";
 	public static final String KEY_SHARE_GEOURL = "key_share_geourl";
 	public static final String KEY_SHARE_LINK = "key_share_link";
+	public static final String KEY_SHARE_LIST = "key_share_list";
 
 	@Override
 	public void onReceive(Context context, Intent intent) {

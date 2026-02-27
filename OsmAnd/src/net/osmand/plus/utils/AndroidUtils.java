@@ -1533,4 +1533,15 @@ public class AndroidUtils {
 		}
 		return 0;
 	}
+
+	public static String truncateWithEllipsis(@Nullable String text, int maxSymbolNumber) {
+		if (Algorithms.isEmpty(text)) return "";
+
+		if (text.codePointCount(0, text.length()) <= maxSymbolNumber) {
+			return text;
+		}
+
+		int endIndex = text.offsetByCodePoints(0, maxSymbolNumber - 1);
+		return text.substring(0, endIndex) + "…";
+	}
 }

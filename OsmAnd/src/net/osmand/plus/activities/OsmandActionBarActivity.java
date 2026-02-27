@@ -22,7 +22,6 @@ import net.osmand.StateChangedListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.ISupportInsets;
-import net.osmand.plus.help.HelpActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -53,8 +52,8 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 		if (InsetsUtils.isEdgeToEdgeSupported()) {
 			EdgeToEdge.enable(this);
 		}
-		updateNavBarColor();
-		stateChangedListener = o -> updateNavBarColor();
+		updateNavigationBarColor();
+		stateChangedListener = o -> app.runInUIThread(this::updateNavigationBarColor);
 		settings.DAYNIGHT_MODE.addListener(stateChangedListener);
 
 		super.onCreate(savedInstanceState);
@@ -102,7 +101,7 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 					@Override
 					public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
 						if (f instanceof ISupportInsets) {
-							((ISupportInsets) f).updateNavBarColor();
+							((ISupportInsets) f).updateNavigationBarColor();
 						}
 					}
 
@@ -111,11 +110,11 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 						super.onFragmentDestroyed(fm, f);
 						Fragment top = getTopFragment(fm);
 						if (top == null) {
-							updateNavBarColor();
+							updateNavigationBarColor();
 
 						} else if (f instanceof BaseOsmAndDialogFragment) {
 							if (top instanceof ISupportInsets) {
-								((ISupportInsets) top).updateNavBarColor();
+								((ISupportInsets) top).updateNavigationBarColor();
 							}
 						}
 					}
@@ -153,10 +152,6 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 		if (colorId != -1) {
 			AndroidUiHelper.setStatusBarColor(this, getColor(colorId));
 		}
-	}
-
-	public void updateNavigationBarColor() {
-		updateNavBarColor();
 	}
 
 	@Override

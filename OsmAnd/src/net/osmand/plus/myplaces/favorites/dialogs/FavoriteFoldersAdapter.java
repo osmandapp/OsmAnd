@@ -28,10 +28,9 @@ import java.util.Set;
 
 public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-	public static final Object SELECTION_MODE = new Object();
-	public static final Object SELECTION_TOGGLE = new Object();
-
-	private final UpdateLocationViewCache cache;
+	public static final Object SELECTION_MODE_PAYLOAD = new Object();
+	public static final Object SELECTION_TOGGLE_PAYLOAD = new Object();
+	public static final Object LOCATION_UPDATE_PAYLOAD = new Object();
 
 	public static final int TYPE_SORT_FAVORITE = 0;
 	public static final int TYPE_FOLDER = 1;
@@ -60,10 +59,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.nightMode = nightMode;
 		this.listener = listener;
 		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
-		locationViewCache.arrowResId = R.drawable.ic_direction_arrow;
-		locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode);
 		sortMode = FavoriteListSortMode.NAME_ASCENDING;
-		cache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 
 		setHasStableIds(true);
 	}
@@ -80,7 +76,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public void setSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
-		notifyItemRangeChanged(0, getItemCount(), SELECTION_MODE);
+		notifyItemRangeChanged(0, getItemCount(), SELECTION_MODE_PAYLOAD);
 	}
 
 	public void setSortFavoriteListener(@Nullable SortFavoriteListener sortListener) {
@@ -94,7 +90,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		switch (viewType) {
 			case TYPE_FAVORITE:
 				View view = inflater.inflate(R.layout.track_list_item, parent, false);
-				return new FavoriteViewHolder(view, nightMode);
+				return new FavoriteViewHolder(view, locationViewCache, nightMode);
 			case TYPE_FOLDER:
 				view = inflater.inflate(R.layout.track_list_item, parent, false);
 				return new FavoriteFolderViewHolder(view, nightMode);
@@ -185,7 +181,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			viewHolder.bindView(hasTrackItems());
 		} else if (holder instanceof FavoriteViewHolder viewHolder) {
 			FavouritePoint favouritePoint = (FavouritePoint) items.get(position);
-			viewHolder.bindView(sortMode, favouritePoint, !lastItem, selectionMode, cache, listener);
+			viewHolder.bindView(sortMode, favouritePoint, !lastItem, selectionMode, listener);
 		} else if (holder instanceof FavoriteFolderViewHolder viewHolder) {
 			FavoriteGroup favFolder = (FavoriteGroup) items.get(position);
 			viewHolder.bindView(favFolder, !lastPinned && !lastItem, lastPinned && !lastItem, selectionMode, listener);
@@ -208,7 +204,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	                             @NonNull List<Object> payloads) {
 		if (!payloads.isEmpty()) {
 			for (Object p : payloads) {
-				if (p == SELECTION_MODE) {
+				if (p == SELECTION_MODE_PAYLOAD) {
 					if (holder instanceof FavoriteViewHolder viewHolder) {
 						FavouritePoint favouritePoint = (FavouritePoint) items.get(position);
 						viewHolder.bindSelectionMode(selectionMode, listener, favouritePoint);
@@ -217,13 +213,19 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 						viewHolder.bindSelectionMode(selectionMode, listener, trackFolder);
 					}
 					return;
-				} else if (p == SELECTION_TOGGLE) {
+				} else if (p == SELECTION_TOGGLE_PAYLOAD) {
 					if (holder instanceof FavoriteViewHolder viewHolder) {
 						FavouritePoint favouritePoint = (FavouritePoint) items.get(position);
 						viewHolder.bindSelectionToggle(selectionMode, listener, favouritePoint);
 					} else if (holder instanceof FavoriteFolderViewHolder viewHolder) {
 						FavoriteGroup trackFolder = (FavoriteGroup) items.get(position);
 						viewHolder.bindSelectionToggle(selectionMode, listener, trackFolder);
+					}
+					return;
+				} else if (p == LOCATION_UPDATE_PAYLOAD) {
+					if (holder instanceof FavoriteViewHolder viewHolder) {
+						FavouritePoint favouritePoint = (FavouritePoint) items.get(position);
+						viewHolder.bindLocation(sortMode, favouritePoint);
 					}
 					return;
 				}
@@ -284,11 +286,15 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public void selectItem(Object object) {
 		getItemPosition(object);
-		notifyItemChanged(getItemPosition(object), SELECTION_TOGGLE);
+		notifyItemChanged(getItemPosition(object), SELECTION_TOGGLE_PAYLOAD);
 	}
 
 	public void updateSelectionAllItems() {
-		notifyItemRangeChanged(0, getItemCount(), SELECTION_TOGGLE);
+		notifyItemRangeChanged(0, getItemCount(), SELECTION_TOGGLE_PAYLOAD);
+	}
+
+	public void updateLocationAllItems() {
+		notifyItemRangeChanged(0, getItemCount(), LOCATION_UPDATE_PAYLOAD);
 	}
 
 	public interface FavoriteAdapterListener {

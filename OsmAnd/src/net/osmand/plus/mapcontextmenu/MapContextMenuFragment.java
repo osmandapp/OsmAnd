@@ -970,7 +970,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		}
 
 		applyPosY(currentY, needCloseMenu, needMapAdjust, currentMenuState, newMenuState, 0);
-		updateNavBarColor();
+		updateNavigationBarColor();
 	}
 
 	private void restoreCustomMapRatio() {
