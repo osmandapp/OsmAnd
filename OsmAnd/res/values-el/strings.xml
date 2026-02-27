@@ -514,7 +514,7 @@
     <string name="download_type_to_filter">πληκτρ/στε. για φιλτράρισμα</string>
     <string name="use_high_res_maps">Οθόνη υψηλής ανάλυσης</string>
     <string name="use_high_res_maps_descr">Χωρίς επέκταση (και θόλωμα) των πλακιδίων χάρτη σε οθόνες υψηλής πυκνότητας.</string>
-    <string name="context_menu_item_search_transport">Αναζήτηση δημοσίων συγκοινωνιών</string>
+    <string name="context_menu_item_search_transport">Αναζήτηση δημόσιας συγκοινωνίας</string>
     <string name="transport_searching_transport">Αποτελέσματα μέσων μεταφοράς (χωρίς προορισμό):</string>
     <string name="transport_searching_route">Αποτελέσματα μέσων μεταφοράς ({0} μέχρι τον προορισμό):</string>
     <string name="transport_search_again">Καθαρισμός αναζήτησης συγκοινωνίας</string>
@@ -2654,7 +2654,7 @@
     <string name="shared_string_milliradians">Χιλιοστά ακτινίων</string>
     <string name="angular_measeurement">Γωνιώδης μονάδα</string>
     <string name="angular_measeurement_descr">Αλλάξτε τι αζιμούθιο θα μετριέται.</string>
-    <string name="avoid_pt_types_descr">Αποφυγή ειδών δημοσίων ΜΜΜ στην πλοήγηση:</string>
+    <string name="avoid_pt_types_descr">Επιλέξτε είδη δημόσιας συγκοινωνίας προς αποφυγή στην πλοήγηση:</string>
     <string name="quick_action_day_night_mode">%s λειτουργία</string>
     <string name="avoid_pt_types">Αποφυγή ειδών συγκοινωνίας…</string>
     <string name="shared_string_walk">Περπάτημα</string>
@@ -2710,7 +2710,7 @@
     <string name="rendering_attr_highway_class_path_name">Μονοπάτι</string>
     <string name="rendering_attr_highway_class_cycleway_name">Ποδηλατόδρομος</string>
     <string name="rendering_attr_undefined_name">Ακαθόριστο</string>
-    <string name="use_osm_live_public_transport_description">Ενεργοποίηση των τροποποιήσεων δημοσίων συγκοινωνιών με το OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport_description">Ενεργοποίηση των τροποποιήσεων δημόσιας συγκοινωνίας με το OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Δημόσια συγκοινωνία OsmAnd Live</string>
     <string name="time_of_day">Ώρα της ημέρας</string>
     <string name="by_transport_type">Κατά %1$s</string>
@@ -5547,8 +5547,8 @@
     <string name="save_and_access_articles_offline">Αποθηκεύστε δεδομένα και δείτε άρθρα εκτός σύνδεσης οπουδήποτε</string>
     <string name="rendering_attr_showSkiSlopes_name">Εμφάνιση πιστών σκι</string>
     <string name="rendering_attr_showSkiSlopes_description">Εμφάνιση απλοποιημένων πιστών σκι</string>
-    <string name="trip_recording_average_slope_widget_description">Δείχνει την μέση κλίση για την τελευταία κατηφόρα ή τμήμα ανηφόρας του τρέχοντος καταγεγραμμένου ίχνους.</string>
-    <string name="trip_recording_max_speed_widget_description">Δείχνει τη μέγιστη ταχύτητα για το τρέχον καταγεγραμμένο ίχνος. Πατήστε για εναλλαγή μεταξύ συνολικής μέγιστης ταχύτητας και μέγιστης ταχύτητας από την τελευταία ανηφόρα ή κατηφόρα.</string>
+    <string name="trip_recording_average_slope_widget_description">Δείχνει την μέση κλίση για το τελευταίο τμήμα κατηφόρας ή ανηφόρας της τρέχουσας καταγεγραμμένης διαδρομής.</string>
+    <string name="trip_recording_max_speed_widget_description">Δείχνει τη μέγιστη ταχύτητα για την τρέχουσα καταγεγραμμένη διαδρομή. Πατήστε για εναλλαγή μεταξύ συνολικής μέγιστης ταχύτητας και μέγιστης ταχύτητας από την τελευταία ανηφόρα ή κατηφόρα.</string>
     <string name="average_elevation">Μέση ανύψωση</string>
     <string name="shared_string_osm_link">Σύνδεσμος OSM</string>
     <string name="msg_favorites_skipped_as_existing">Αγαπημένα σημεία (%1$d) έχουν παραλειφθεί καθώς ήδη υπάρχουν.</string>
@@ -5865,4 +5865,10 @@
     <string name="add_palette">Προσθήκη παλέττας</string>
     <string name="delete_palette">Διαγραφή παλέττας</string>
     <string name="delete_colors_palette_dialog_summary">Σίγουρα θέλετε να διαγράψε την παλέττα %1$s;</string>
+    <string name="share_favorite">Κοινοποίηση αγαπημένου</string>
+    <string name="copy_list">Αντιγραφή λίστας</string>
+    <string name="shared_string_trip_average">Μέσος όρος διαδρομής</string>
+    <string name="trip_recording_avg_speed_widget_description">Δείχνει την μέση ταχύτητα της τρέχουσας διαδρομής, ή την μέση ταχύτητα κατά το τελευταίο τμήμα ανηφόρας ή κατηφόρας.</string>
+    <string name="trip_recording_moving_time_widget_description">Δείχνει τον τρέχον κατεγεγραμμένο χρόνο σε κίνηση, ή τον χρόνο της τελευταίας ανηφόρας και κατηφόρας.</string>
+    <string name="trip_recording_moving_time">Χρόνος σε κίνηση</string>
 </resources>
