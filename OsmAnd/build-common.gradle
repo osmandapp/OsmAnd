@@ -48,8 +48,8 @@ android {
 			aidl.srcDirs = ["src"]
 			java.srcDirs = ["src"]
 			resources.srcDirs = ["src"]
-			res.srcDirs = ["res"]
-			assets.srcDirs = ["assets"]
+			res.srcDirs = ["res", layout.buildDirectory.dir("generated/osmand/res")]
+			assets.srcDirs = ["assets", layout.buildDirectory.dir("generated/osmand/assets")]
 		}
 		androidTest {
 			java.srcDirs = ["test/java"]
@@ -181,7 +181,7 @@ tasks.register('validateTranslations') {
 
 tasks.register('downloadWorldMiniBasemap', Download) {
 	src 'https://builder.osmand.net/basemap/World_basemap_mini_2.obf'
-	dest 'assets/World_basemap_mini.obf'
+	dest layout.buildDirectory.file("generated/osmand/assets/World_basemap_mini.obf").get().asFile
 	onlyIfModified true
 }
 
@@ -193,29 +193,29 @@ tasks.register('downloadWorldMiniBasemapAnt') {
 
 tasks.register('downloadStarsDb', Download) {
 	src 'https://builder.osmand.net/basemap/astro/stars.db.gz'
-	def gzFile = layout.buildDirectory.file("downloads/stars.db.gz").get().asFile
-	dest gzFile
+	def gzFile = layout.buildDirectory.file("downloads/stars.db.gz")
+	dest gzFile.get().asFile
 	onlyIfModified true
 
-	def dbFile = file("assets/astro/stars.db")
+	def dbFile = layout.buildDirectory.file("generated/osmand/assets/astro/stars.db")
 	outputs.file(dbFile)
 
 	doLast {
-		ant.gunzip(src: gzFile, dest: dbFile)
-		gzFile.delete()
+		ant.gunzip(src: gzFile.get().asFile, dest: dbFile.get().asFile)
+		// Keeping gzFile for incrementality
 	}
 }
 
 tasks.register('collectVoiceAssets', Sync) {
 	from "../../resources/voice"
-	into "assets/voice"
+	into layout.buildDirectory.dir("generated/osmand/assets/voice")
 	include "**/*.js"
 }
 
 tasks.register('collectFonts', Copy) {
 	from "../../resources/rendering_styles/fonts"
 //	from "../../resources/rendering_styles/fonts/OpenSans"
-	into "assets/fonts"
+	into layout.buildDirectory.dir("generated/osmand/assets/fonts")
 	include "*.ttf"
 }
 
@@ -223,19 +223,19 @@ tasks.register('copyBundledAssets', Copy) {
 	from("../../resources/bundled_assets.json") {
 		include "bundled_assets.json"
 	}
-	into "assets"
+	into layout.buildDirectory.dir("generated/osmand/assets")
 }
 
 tasks.register('copyProjDb', Copy) {
 	from("../../resources/proj") {
 		include "proj.db"
 	}
-	into "assets"
+	into layout.buildDirectory.dir("generated/osmand/assets")
 }
 
 tasks.register('copyColorPalettes', Copy) {
 	from "../../resources/color-palette"
-	into "assets/color-palette"
+	into layout.buildDirectory.dir("generated/osmand/assets/color-palette")
 	include "*.*"
 }
 
@@ -243,49 +243,24 @@ tasks.register('copyPoiCategories', Copy) {
 	from("../../resources/poi") {
 		include "poi_categories.json"
 	}
-	into "assets"
+	into layout.buildDirectory.dir("generated/osmand/assets")
 }
 
 tasks.register('copyRouteActivities', Copy) {
 	from("../../resources/poi") {
 		include "activities.json"
 	}
-	into "assets"
+	into layout.buildDirectory.dir("generated/osmand/assets")
 }
 
-tasks.register('copyMapShaderIcons', Sync) {
-	// from "../../resources/rendering_styles/style-icons/map-shaders-png"
-	// into "res/"
-	from "../../resources/rendering_styles/style-icons/map-shaders-vector"
-	into "res/drawable"
+// Consolidated task to avoid "Sync fighting" and constant re-indexing
+tasks.register('copyIcons', Sync) {
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
+	from("../../resources/rendering_styles/style-icons/map-shaders-vector")
+	from("../../resources/rendering_styles/style-icons/map-icons-vector")
+	from("../../resources/rendering_styles/style-icons/poi-icons-vector")
+	into layout.buildDirectory.dir("generated/osmand/res/drawable")
 	include "**/*.png", "**/*.xml"
-	preserve {
-		include '**/*'
-		exclude "**/h_*"
-	}
-}
-
-tasks.register('copyMapPOIIcons', Sync) {
-	from "../../resources/rendering_styles/style-icons/map-icons-vector"
-	into "res/drawable/"
-	// from "../../resources/rendering_styles/style-icons/map-icons-png"
-	// into "res/"
-
-	include "**/*.png", "**/*.xml"
-	preserve {
-		include '**/*'
-		exclude "**/mm_*"
-	}
-}
-
-tasks.register('copyLargePOIIcons', Sync) {
-	from "../../resources/rendering_styles/style-icons/poi-icons-vector"
-	into "res/drawable/"
-	include "**/*.png", "**/*.xml"
-	preserve {
-		include '**/*'
-		exclude "**/mx_*"
-	}
 }
 
 tasks.register('collectTestResources', Copy) {
@@ -299,16 +274,14 @@ tasks.register('collectTestResources', Copy) {
 
 tasks.register('copy3DModels', Copy) {
 	from "../../resources/models"
-	into "assets/models"
+	into layout.buildDirectory.dir("generated/osmand/assets/models")
 	include "**/*.*"
 }
 
 tasks.register('collectExternalResources') {
 	dependsOn collectVoiceAssets,
 			collectFonts,
-			copyMapShaderIcons,
-			copyMapPOIIcons,
-			copyLargePOIIcons,
+			copyIcons,
 			validateTranslations,
 			copyBundledAssets,
 			copyProjDb,
