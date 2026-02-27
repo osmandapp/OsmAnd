@@ -1,7 +1,9 @@
 package net.osmand.plus.plugins.astronomy.views
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.DashPathEffect
 import android.graphics.LinearGradient
 import android.graphics.Paint
@@ -38,6 +40,8 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 import androidx.core.graphics.withClip
+import androidx.core.graphics.createBitmap
+import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroChartMath.VISIBILITY_SAMPLE_COUNT
 
 class AstroVisibilityGraphView @JvmOverloads constructor(
 	context: Context,
@@ -112,6 +116,10 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 	private var date: LocalDate = LocalDate.now()
 	private var zoneId: ZoneId = ZoneId.systemDefault()
 	private var model: Model? = null
+	private var palette: AstroChartColorPalette? = null
+	private var staticLayerInvalidate = true
+	private var staticLayerBitmap: Bitmap? = null
+	private var staticLayerCanvas: Canvas? = null
 
 	private var isTouchTracking = false
 	private var cursorVisible = false
@@ -182,6 +190,10 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		textAlign = Paint.Align.LEFT
 	}
 
+	init {
+		refreshThemeResources()
+	}
+
 	fun submitObject(
 		objectToRender: SkyObject?,
 		observer: Observer?,
@@ -197,6 +209,7 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 
 	override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
 		super.onSizeChanged(w, h, oldw, oldh)
+		invalidateStaticLayer()
 		if (w > 0 && h > 0) {
 			triggerAsyncRebuild()
 		}
@@ -204,6 +217,7 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 
 	override fun onAttachedToWindow() {
 		super.onAttachedToWindow()
+		refreshThemeResources()
 		triggerAsyncRebuild()
 	}
 
@@ -218,6 +232,7 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		super.onDetachedFromWindow()
 		computeJob?.cancel()
 		computeJob = null
+		clearStaticLayer()
 	}
 
 	override fun onDraw(canvas: Canvas) {
@@ -225,16 +240,12 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		val chartArea = getPlotArea() ?: return
 		val currentModel = model ?: return
 		if (currentModel.size < 2) return
-		val palette = AstroChartColorPalette.fromContext(context)
+		val localPalette = palette ?: return
 
-		applyThemeColors()
-		drawDynamicBackground(canvas, chartArea, currentModel, palette)
-		val trajectory = buildTrajectoryPath(chartArea, currentModel) ?: return
-		drawObjectFill(canvas, chartArea, trajectory, palette)
-
-		drawYAxisGridAndLabels(canvas, chartArea)
-		drawXAxisTicksAndLabels(canvas, chartArea, currentModel)
-		drawSunriseSunsetIcons(canvas, chartArea, currentModel)
+		ensureStaticLayer(chartArea, currentModel, localPalette)
+		staticLayerBitmap?.let { bitmap ->
+			canvas.drawBitmap(bitmap, 0f, 0f, null)
+		}
 
 		if (cursorVisible) {
 			drawCursor(canvas, chartArea, currentModel)
@@ -289,18 +300,23 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		val localObserver = observer
 		if (width == 0 || height == 0 || localObject == null || localObserver == null) {
 			model = null
+			invalidateStaticLayer()
 			invalidate()
 			return
 		}
+		val sampleCount = VISIBILITY_SAMPLE_COUNT
 
 		computeJob?.cancel()
 		ensureScope()
 		computeJob = viewScope.launch {
 			val result = withContext(Dispatchers.Default) {
-				computeModel(localObject, localObserver, date, zoneId, width)
+				computeModel(localObject, localObserver, date, zoneId, sampleCount)
 			}
 			if (isActive) {
-				model = result
+				if (model != result) {
+					model = result
+					invalidateStaticLayer()
+				}
 				invalidate()
 			}
 		}
@@ -311,11 +327,10 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		observer: Observer,
 		date: LocalDate,
 		zoneId: ZoneId,
-		viewWidth: Int
+		sampleCount: Int
 	): Model {
 		val startLocal = date.atTime(12, 0).atZone(zoneId)
 		val endLocal = startLocal.plusDays(1)
-		val sampleCount = max(480, viewWidth * 2)
 		val samples = AstroChartMath.computeDaySamples(
 			objectToRender = objectToRender,
 			observer = observer,
@@ -335,17 +350,59 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		)
 	}
 
+	private fun ensureStaticLayer(
+		area: PlotArea,
+		model: Model,
+		palette: AstroChartColorPalette
+	) {
+		if (!staticLayerInvalidate && staticLayerBitmap != null) {
+			return
+		}
+		val bitmap = obtainStaticBitmap(width, height)
+		bitmap.eraseColor(Color.TRANSPARENT)
+		val staticCanvas = staticLayerCanvas ?: Canvas(bitmap).also { staticLayerCanvas = it }
+
+		drawDynamicBackground(staticCanvas, area, model, palette)
+		val trajectory = buildTrajectoryPath(area, model)
+		if (trajectory != null) {
+			drawObjectFill(staticCanvas, area, trajectory, palette)
+		}
+		drawYAxisGridAndLabels(staticCanvas, area)
+		drawXAxisTicksAndLabels(staticCanvas, area, model)
+		drawSunriseSunsetIcons(staticCanvas, area, model)
+		staticLayerInvalidate = false
+	}
+
+	private fun obtainStaticBitmap(width: Int, height: Int): Bitmap {
+		val existing = staticLayerBitmap
+		if (existing != null && !existing.isRecycled && existing.width == width && existing.height == height) {
+			return existing
+		}
+		existing?.recycle()
+		val bitmap = createBitmap(width.coerceAtLeast(1), height.coerceAtLeast(1))
+		staticLayerBitmap = bitmap
+		staticLayerCanvas = Canvas(bitmap)
+		return bitmap
+	}
+
+	private fun invalidateStaticLayer() {
+		staticLayerInvalidate = true
+	}
+
+	private fun clearStaticLayer() {
+		staticLayerInvalidate = true
+		staticLayerCanvas = null
+		staticLayerBitmap?.recycle()
+		staticLayerBitmap = null
+	}
+
 	private fun drawDynamicBackground(
 		canvas: Canvas,
 		area: PlotArea,
 		model: Model,
 		palette: AstroChartColorPalette
 	) {
-		val drawStepPx = if (area.width > BG_FINE_SAMPLES_MAX_WIDTH_PX) {
-			BG_STRIPE_STEP_DEFAULT_PX
-		} else {
-			BG_STRIPE_STEP_DETAIL_PX
-		}
+		val drawStepPx = BG_STRIPE_STEP_DEFAULT_PX
 		var x = area.left
 		while (x < area.right) {
 			val nextX = min(area.right, x + drawStepPx)
@@ -417,14 +474,11 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		for (i in 1 until altitudes.size) {
 			val prev = altitudes[i - 1]
 			val current = altitudes[i]
-			if (kotlin.math.abs(prev) < 0) {
-				continue
-			}
 			if ((prev > 0.0 && current > 0.0) || (prev < 0.0 && current < 0.0)) {
 				continue
 			}
 			val delta = current - prev
-			if (kotlin.math.abs(delta) < 0) {
+			if (delta == 0.0) {
 				continue
 			}
 			val t = ((0.0 - prev) / delta).coerceIn(0.0, 1.0)
@@ -596,12 +650,14 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 
 	private fun buildTrajectoryPath(area: PlotArea, model: Model): Path? {
 		if (model.size < 2) return null
+		val renderSampleCount = min(model.size, max(2, area.width.roundToInt()))
+		if (renderSampleCount < 2) return null
 
 		trajectoryPath.reset()
-		for (i in 0 until model.size) {
-			val fraction = i.toFloat() / (model.size - 1).toFloat()
+		for (i in 0 until renderSampleCount) {
+			val fraction = i.toFloat() / (renderSampleCount - 1).toFloat()
 			val x = area.left + fraction * area.width
-			val y = altitudeToY(model.objectAltitudes[i], area)
+			val y = altitudeToY(interpolate(model.objectAltitudes, fraction), area)
 			if (i == 0) {
 				trajectoryPath.moveTo(x, y)
 			} else {
@@ -671,7 +727,8 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		return x >= area.left && x <= area.right && y >= area.top && y <= area.bottom
 	}
 
-	private fun applyThemeColors() {
+	private fun refreshThemeResources() {
+		palette = AstroChartColorPalette.fromContext(context)
 		dashedGridPaint.color = color(R.color.astro_visibility_y_grid_color)
 		zeroGridPaint.color = color(R.color.astro_visibility_y_zero_color)
 		yAxisLabelPaint.color = color(R.color.astro_visibility_y_label_color)
@@ -691,6 +748,7 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		)
 		markerAltitudePaint.color = yAxisLabelPaint.color
 		markerAzimuthPaint.color = color(R.color.astro_visibility_marker_az_color)
+		invalidateStaticLayer()
 	}
 
 	private fun interpolate(values: DoubleArray, fraction: Float): Double {
@@ -756,14 +814,13 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		}
 	}
 
-	private companion object {
+	companion object {
 		const val MIN_ALTITUDE_RENDER = -40.0
 		const val MAX_ALTITUDE_RENDER = 95.0
 		const val FOUR_HOURS_MILLIS = 4L * 60L * 60L * 1000L
 
 		const val BG_STRIPE_STEP_DETAIL_PX = 1f
 		const val BG_STRIPE_STEP_DEFAULT_PX = 2f
-		const val BG_FINE_SAMPLES_MAX_WIDTH_PX = 256f
 
 		const val OUTER_LEFT_PADDING_DP = 16f
 		const val OUTER_RIGHT_PADDING_DP = 16f

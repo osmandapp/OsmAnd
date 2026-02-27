@@ -553,28 +553,22 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 		val defaultStartDate =
 			Instant.ofEpochMilli(currentCalendar.timeInMillis).atZone(graphZoneId).toLocalDate()
 		val periodStart = periodStartOverride ?: scheduleCardModel?.periodStart ?: defaultStartDate
-		scheduleCardModel = scheduleCardModel?.apply {
-			updateCard(
-				skyObject = obj,
-				observer = parent.starView.observer,
-				periodStart = periodStart,
-				zoneId = graphZoneId
-			)
-		} ?: AstroScheduleCardModel(app).apply {
-			updateCard(
-				skyObject = obj,
-				observer = parent.starView.observer,
-				periodStart = periodStart,
-				zoneId = graphZoneId
-			)
+		val model = scheduleCardModel ?: AstroScheduleCardModel(app).also {
+			scheduleCardModel = it
 		}
+		model.onDataChanged = { notifyScheduleCardChanged() }
+		model.updateCard(
+			skyObject = obj,
+			observer = parent.starView.observer,
+			periodStart = periodStart,
+			zoneId = graphZoneId
+		)
 	}
 
 	private fun shiftSchedulePeriod(daysDelta: Int) {
 		val obj = skyObject ?: return
 		val currentStart = scheduleCardModel?.periodStart ?: return
 		updateScheduleCard(obj, currentStart.plusDays(daysDelta.toLong()))
-		notifyScheduleCardChanged()
 	}
 
 	private fun resetScheduleToCurrentPeriod() {
@@ -584,7 +578,6 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 		val zoneId = currentCalendar.timeZone.toZoneId()
 		val today = LocalDate.now(zoneId)
 		updateScheduleCard(obj, today)
-		notifyScheduleCardChanged()
 	}
 
 	private fun notifyScheduleCardChanged() {
@@ -957,6 +950,8 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 	override fun onDestroyView() {
 		visibilityCardModel?.cancelPendingLookups()
 		visibilityCardModel?.onDataChanged = null
+		scheduleCardModel?.cancelPendingComputations()
+		scheduleCardModel?.onDataChanged = null
 		tabSelectedListener?.let { listener ->
 			if (::bottomTabs.isInitialized) {
 				bottomTabs.removeOnTabSelectedListener(listener)

@@ -56,6 +56,11 @@ data class AstroChartCulmination(
 
 object AstroChartMath {
 
+	const val DAY_MINUTES: Int = 24 * 60
+	const val VISIBILITY_SAMPLE_COUNT: Int = DAY_MINUTES + 1
+	const val SCHEDULE_SAMPLE_STEP_MINUTES: Int = 5
+	const val SCHEDULE_SAMPLE_COUNT: Int = DAY_MINUTES / SCHEDULE_SAMPLE_STEP_MINUTES + 1
+
 	private data class HorizontalPoint(
 		val altitude: Double,
 		val azimuth: Double
@@ -121,14 +126,14 @@ object AstroChartMath {
 			refineEnd = endLocal
 		}
 
-		val fineBest = sampleBestAltitudeTime(
+		val fineResult = sampleBestAltitudeTime(
 			obj = obj,
 			observer = observer,
 			startLocal = refineStart,
 			endLocal = refineEnd,
 			stepMinutes = CULMINATION_FINE_STEP_MINUTES
 		)
-		val culminationTime = fineBest ?: coarseBest
+		val culminationTime = fineResult ?: coarseBest
 		return AstroChartCulmination(
 			time = culminationTime,
 			altitude = culminationTime.let { AstroUtils.altitude(obj, it, observer) }
@@ -236,12 +241,14 @@ class AstroChartColorPalette private constructor(
 				to = fillGt45,
 				ratio = (altitude - (45.0 - transitionHalf)) / (2.0 * transitionHalf)
 			)
+
 			altitude >= (15.0 + transitionHalf) -> fill15To45
 			altitude >= (15.0 - transitionHalf) -> blend(
 				from = fill0To15,
 				to = fill15To45,
 				ratio = (altitude - (15.0 - transitionHalf)) / (2.0 * transitionHalf)
 			)
+
 			else -> fill0To15
 		}
 	}
@@ -268,6 +275,7 @@ class AstroChartColorPalette private constructor(
 			)
 		}
 
-		private fun color(context: Context, resId: Int): Int = ContextCompat.getColor(context, resId)
+		private fun color(context: Context, resId: Int): Int =
+			ContextCompat.getColor(context, resId)
 	}
 }

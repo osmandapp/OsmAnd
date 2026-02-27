@@ -1,11 +1,18 @@
 package net.osmand.plus.plugins.astronomy.views
 
 import io.github.cosinekitty.astronomy.Observer
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroContextCard
 import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
 import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroChartMath
+import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroContextCard
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -51,6 +58,10 @@ class AstroScheduleCardModel(app: OsmandApplication) : AstroContextCard(app) {
 	var periodStart: LocalDate = LocalDate.now()
 	var rangeLabel: String = ""
 	var days: List<ScheduleDayEntry> = emptyList()
+	var onDataChanged: (() -> Unit)? = null
+
+	private var computeScope = createScope()
+	private var computeJob: Job? = null
 
 	private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
 	private val dayLabelFormatter = DateTimeFormatter.ofPattern("EEE, d", Locale.getDefault())
@@ -66,22 +77,54 @@ class AstroScheduleCardModel(app: OsmandApplication) : AstroContextCard(app) {
 		this.observer = observer
 		this.periodStart = periodStart
 		this.zoneId = zoneId
+		computeJob?.cancel()
 
 		if (skyObject == null || observer == null) {
 			rangeLabel = ""
 			days = emptyList()
+			onDataChanged?.invoke()
 			return
 		}
 
 		val periodEnd = periodStart.plusDays((PERIOD_DAYS - 1).toLong())
 		rangeLabel = "${rangeFormatter.format(periodStart)} - ${rangeFormatter.format(periodEnd)}"
+		days = emptyList()
 
+		ensureScope()
+		computeJob = computeScope.launch {
+			val entries = withContext(Dispatchers.Default) {
+				buildPeriodEntries(
+					obj = skyObject,
+					observer = observer,
+					periodStart = periodStart,
+					zoneId = zoneId
+				)
+			}
+			if (!isActive) {
+				return@launch
+			}
+			days = entries
+			onDataChanged?.invoke()
+		}
+	}
+
+	fun cancelPendingComputations() {
+		computeJob?.cancel()
+		computeJob = null
+	}
+
+	private fun buildPeriodEntries(
+		obj: SkyObject,
+		observer: Observer,
+		periodStart: LocalDate,
+		zoneId: ZoneId
+	): List<ScheduleDayEntry> {
 		val entries = ArrayList<ScheduleDayEntry>(PERIOD_DAYS)
 		for (offset in 0 until PERIOD_DAYS) {
 			val day = periodStart.plusDays(offset.toLong())
-			entries.add(buildDayEntry(skyObject, observer, day, zoneId))
+			entries.add(buildDayEntry(obj, observer, day, zoneId))
 		}
-		days = entries
+		return entries
 	}
 
 	private fun buildDayEntry(
@@ -113,8 +156,19 @@ class AstroScheduleCardModel(app: OsmandApplication) : AstroContextCard(app) {
 		)
 	}
 
+	private fun createScope(): CoroutineScope {
+		return CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+	}
+
+	private fun ensureScope() {
+		val scopeJob = computeScope.coroutineContext[Job]
+		if (scopeJob == null || !scopeJob.isActive) {
+			computeScope = createScope()
+		}
+	}
+
 	companion object {
 		const val PERIOD_DAYS: Int = 7
-		private const val SAMPLE_COUNT: Int = 192
+		private const val SAMPLE_COUNT: Int = AstroChartMath.SCHEDULE_SAMPLE_COUNT
 	}
 }
