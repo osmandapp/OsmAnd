@@ -5952,6 +5952,6 @@
     <string name="trip_recording_avg_speed_widget_description">Affiche la vitesse moyenne du trajet actuel ou la vitesse moyenne de la dernière ascension ou descente.</string>
     <string name="trip_recording_moving_time_widget_description">Affiche la durée de déplacement actuellement enregistrée ou la durée de la dernière ascension et descente.</string>
     <string name="trip_recording_moving_time">Durée de déplacement</string>
-    <string name="share_favorite">Partager les favoris</string>
+    <string name="share_favorite">Partager le favori</string>
     <string name="copy_list">Copier la liste</string>
 </resources>
