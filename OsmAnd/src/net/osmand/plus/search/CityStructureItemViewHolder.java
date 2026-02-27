@@ -39,6 +39,7 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 
 	public final TextView titleTv;
 	public final TextView addressTv;
+	public final View addressDotDivider;
 	public final TextView type;
 	public final ImageView icon;
 	public final ImageView image;
@@ -55,6 +56,7 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 
 		titleTv = view.findViewById(R.id.item_title);
 		addressTv = view.findViewById(R.id.address);
+		addressDotDivider = view.findViewById(R.id.address_dot_divider);
 		type = view.findViewById(R.id.item_type);
 		icon = view.findViewById(R.id.item_icon);
 		image = view.findViewById(R.id.item_image);
@@ -75,6 +77,8 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 			BinaryMapIndexReader mapReaderResource = null;
 			if (mapObject.getReferenceFile() instanceof BinaryMapIndexReader) {
 				mapReaderResource = (BinaryMapIndexReader) mapObject.getReferenceFile();
+			} else if(city.getType() == City.CityType.POSTCODE) {
+				mapReaderResource = item.getSearchResult().file;
 			}
 			if (mapReaderResource != null) {
 				addressText = FileNameTranslationHelper.getFileNameWithRegion(app, mapReaderResource.getFile().getName());
@@ -86,6 +90,8 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 				case VILLAGE -> app.getString(R.string.city_type_village);
 				case SUBURB -> app.getString(R.string.city_type_suburb);
 				case TOWN -> app.getString(R.string.city_type_town);
+				case BOUNDARY -> app.getString(R.string.poi_boundary_stone);
+				case POSTCODE -> app.getString(R.string.postcode);
 				default -> app.getString(R.string.city_type_city);
 			};
 		} else if (mapObject instanceof Street street) {
@@ -107,6 +113,8 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 			typeName = app.getString(R.string.search_address_building);
 		}
 		addressTv.setText(addressText);
+		AndroidUiHelper.updateVisibility(addressTv, !Algorithms.isEmpty(addressText));
+		AndroidUiHelper.updateVisibility(addressDotDivider, !Algorithms.isEmpty(addressText));
 		titleTv.setText(title);
 		type.setText(typeName);
 		bindImage(item, mapObject);

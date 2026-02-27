@@ -388,7 +388,7 @@ public class QuickSearchListItem {
 			case VILLAGE:
 				return getIcon(app, R.drawable.mx_village, defIconColor);
 			case POSTCODE:
-				return getIcon(app, R.drawable.ic_action_street_name);
+				return getIcon(app, R.drawable.ic_action_postcode, defIconColor);
 			case STREET:
 				return getIcon(app, R.drawable.ic_action_street_name, defIconColor);
 			case HOUSE:

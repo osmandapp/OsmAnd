@@ -240,11 +240,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			return bindBottomShadowItem(convertView);
 		} else if (type == CARD_DIVIDER) {
 			return bindCardDividerItem(convertView);
-		} else if (listItem.getSearchResult().objectType == CITY ||
-				listItem.getSearchResult().objectType == STREET ||
-				listItem.getSearchResult().objectType == STREET_INTERSECTION ||
-				listItem.getSearchResult().objectType == HOUSE ||
-				listItem.getSearchResult().objectType == VILLAGE ||
+		} else if (ObjectType.isAddress(listItem.getSearchResult().objectType) ||
 				listItem.getSearchResult().object instanceof Amenity amenity && amenity.getType().isAdministrative()
 		) {
 			view = bindAdministrativeItem(convertView, listItem);

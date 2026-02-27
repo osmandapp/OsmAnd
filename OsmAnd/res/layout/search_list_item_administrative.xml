@@ -86,6 +86,7 @@
 					tools:text="City" />
 
 				<TextView
+					android:id="@+id/address_dot_divider"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginStart="@dimen/content_padding_small_half"
