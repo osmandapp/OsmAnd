@@ -133,6 +133,9 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 				if (mapActivity != null) {
 					showExitDialog();
 				}
+				if (getActivity() instanceof MyPlacesActivity) {
+					showExitDialog();
+				}
 			}
 		});
 	}

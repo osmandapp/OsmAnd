@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces.favorites;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
 import android.os.AsyncTask;
+import android.os.Build;
 import android.text.Html;
 import android.text.Spanned;
 
@@ -138,14 +139,18 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 		String extraText = String.valueOf(pointsDescription);
 		String extraSubject = app.getString(R.string.share_fav_subject);
 
-		new NativeShareDialogBuilder()
-				.addFileWithSaveAction(destFile, app, activity, true)
+		NativeShareDialogBuilder builder = new NativeShareDialogBuilder()
+				.addFileWithSaveAction(destFile, app, activity, extraText, true)
 				.setChooserTitle(extraSubject)
-				.setExtraSubject(extraSubject)
-				.setExtraText(extraText)
 				.setExtraStream(AndroidUtils.getUriForFile(app, destFile))
-				.setType(type)
-				.build(app);
+				.setType(type);
+
+		if (Build.VERSION.SDK_INT < 34) {
+			builder.setExtraSubject(extraSubject);
+			builder.setExtraText(extraText);
+		}
+
+		builder.build(app);
 	}
 
 	public interface ShareFavoritesListener {
