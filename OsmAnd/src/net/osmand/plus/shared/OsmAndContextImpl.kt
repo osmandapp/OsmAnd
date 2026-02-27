@@ -1,6 +1,7 @@
 package net.osmand.plus.shared
 
 import net.osmand.CollatorStringMatcher
+import net.osmand.IndexConstants.CLR_PALETTE_DIR
 import net.osmand.IndexConstants.GPX_IMPORT_DIR
 import net.osmand.IndexConstants.GPX_INDEX_DIR
 import net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR
@@ -26,6 +27,7 @@ import net.osmand.shared.api.SettingsAPI
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
+import net.osmand.shared.gpx.SmartFolderHelper
 import net.osmand.shared.io.KFile
 import net.osmand.shared.settings.enums.AltitudeMetrics
 import net.osmand.shared.settings.enums.MetricsConstants
@@ -69,6 +71,8 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 	override fun getGpxImportDir(): KFile = app.getAppPathKt(GPX_IMPORT_DIR)
 
 	override fun getGpxRecordedDir(): KFile = app.getAppPathKt(GPX_RECORDED_INDEX_DIR)
+
+	override fun getColorPaletteDir(): KFile = app.getAppPathKt(CLR_PALETTE_DIR)
 
 	override fun getSettings(): SettingsAPI = settings
 
@@ -115,6 +119,8 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 
 	override fun getTrackPointsAnalyser(): TrackPointsAnalyser? =
 		PluginsHelper.getTrackPointsAnalyser()
+
+	override fun getSmartFolderHelper(): SmartFolderHelper = app.smartFolderHelper
 
 	override fun searchNearestCityName(latLon: KLatLon, callback: CityNameCallback) {
 		while (app.isApplicationInitializing) {

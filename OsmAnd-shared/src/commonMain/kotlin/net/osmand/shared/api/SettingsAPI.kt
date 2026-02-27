@@ -1,5 +1,7 @@
 package net.osmand.shared.api
 
+import kotlin.reflect.KClass
+
 interface SettingsAPI {
 	fun registerPreference(name: String, defValue: String, global: Boolean, shared: Boolean)
 	fun addStringPreferenceListener(name: String, listener: KStateChangedListener<String>)
@@ -12,4 +14,6 @@ interface SettingsAPI {
 
 	fun getFloatPreference(name: String): Float?
 	fun setFloatPreference(name: String, value: Float)
+
+	fun <T : Enum<T>> addEnumPreferenceListener(name: String, listener: KStateChangedListener<T>)
 }

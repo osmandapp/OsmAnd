@@ -2230,7 +2230,7 @@
     <string name="poi_conveying_yes">Эскалатор/траволатор</string>
     <string name="poi_bridge_ref">Номер моста (в реестре)</string>
     <string name="poi_tunnel_ref">Номер туннеля (в реестре)</string>
-    <string name="poi_ref">Код</string>
+    <string name="poi_ref">Метка</string>
     <string name="poi_ferry_terminal_cargo">Перевозимый груз</string>
     <string name="poi_cargo_passengers">Пассажиры</string>
     <string name="poi_cargo_vehicle">Автомобили</string>
@@ -3422,7 +3422,7 @@
     <string name="poi_atoll">Атолл</string>
     <string name="poi_toll_gantry">Рамка оплаты</string>
     <string name="poi_childcare">Уход за детьми</string>
-    <string name="poi_denotation">Значение</string>
+    <string name="poi_denotation">Обозначение</string>
     <string name="poi_denotation_natural_monument">Памятник природы</string>
     <string name="poi_denotation_landmark">Ориентир</string>
     <string name="poi_park_ride">Перехватывающая парковка</string>
@@ -3719,8 +3719,8 @@
     <string name="poi_access_motorhome">Доступ для автодомов</string>
     <string name="poi_tactile_paving_incorrect">Неправильное</string>
     <string name="poi_tactile_paving_primitive">Примитивное</string>
-    <string name="poi_booth">Тип стенда</string>
-    <string name="poi_covered_booth">Стенд</string>
+    <string name="poi_booth">Будка</string>
+    <string name="poi_covered_booth">Да</string>
     <string name="poi_url">URL</string>
     <string name="poi_socket_cee_red_125a_yes">CEE красный 125A</string>
     <string name="poi_socket_cee_red_63a_yes">CEE красный 63A</string>

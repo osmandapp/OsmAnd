@@ -8,16 +8,22 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 
+import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
@@ -35,13 +41,15 @@ import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class FavoriteFolderFragment extends BaseFavoriteListFragment
-		implements SortFavoriteListener, FragmentStateHolder, CategorySelectionListener, FavoriteActionListener, FavoritesListener {
+		implements SortFavoriteListener, FragmentStateHolder, CategorySelectionListener,
+		FavoriteActionListener, FavoritesListener, OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = FavoriteFolderFragment.class.getSimpleName();
 	protected static final String SELECTED_POINTS_KEY = "selected_points_key";
@@ -49,6 +57,10 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 	protected final ItemsSelectionHelper<FavouritePoint> selectionHelper = new ItemsSelectionHelper<>(true);
 
 	private FavouritePoint selectedPoint;
+	private Location lastLocation;
+	private float lastHeading;
+	private boolean compassUpdateAllowed = true;
+	private boolean locationUpdateStarted;
 
 	@Override
 	protected int getLayoutId() {
@@ -98,12 +110,49 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 			changeTitle(selectedGroup.getDisplayName(app));
 		}
 		helper.addListener(this);
+		startLocationUpdate();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		helper.removeListener(this);
+		stopLocationUpdate();
+	}
+
+	private void startLocationUpdate() {
+		if (!locationUpdateStarted) {
+			locationUpdateStarted = true;
+			app.getLocationProvider().resumeAllUpdates();
+			app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
+			app.getLocationProvider().addCompassListener(this);
+			app.getLocationProvider().addLocationListener(this);
+			updateLocationUi();
+		}
+	}
+
+	private void stopLocationUpdate() {
+		if (locationUpdateStarted) {
+			locationUpdateStarted = false;
+			app.getLocationProvider().removeLocationListener(this);
+			app.getLocationProvider().removeCompassListener(this);
+			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
+			app.getLocationProvider().pauseAllUpdates();
+		}
+	}
+
+
+	@Override
+	protected void setupViews(@NonNull View view) {
+		super.setupViews(view);
+
+		recyclerView.addOnScrollListener(new OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+				super.onScrollStateChanged(recyclerView, newState);
+				compassUpdateAllowed = newState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
+			}
+		});
 	}
 
 	private void setupSelectionHelper() {
@@ -342,6 +391,31 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 			if (fragment instanceof FavoriteFoldersFragment foldersFragment) {
 				foldersFragment.updateContent();
 			}
+		}
+	}
+
+	@Override
+	public void updateCompassValue(float heading) {
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			lastHeading = heading;
+			updateLocationUi();
+		}
+	}
+
+	@Override
+	public void updateLocation(Location location) {
+		if (!MapUtils.areLatLonEqual(lastLocation, location)) {
+			lastLocation = location;
+			updateLocationUi();
+		}
+	}
+
+	private void updateLocationUi() {
+		if (!compassUpdateAllowed) {
+			return;
+		}
+		if (adapter != null) {
+			adapter.updateLocationAllItems();
 		}
 	}
 

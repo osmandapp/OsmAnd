@@ -377,6 +377,16 @@ class AstroConfigureViewBottomSheet :
 		) { checked ->
 			applyConfigChange(requireConfig().copy(showEquatorLine = checked))
 		}
+
+		addSwitchRow(
+			parent = renderingContainer,
+			iconRes = R.drawable.ic_action_galaxy,
+			titleRes = R.string.galactic_line,
+			checked = current.showGalacticLine,
+			showDivider = false
+		) { checked ->
+			applyConfigChange(requireConfig().copy(showGalacticLine = checked))
+		}
 	}
 
 	private fun addSwitchRow(

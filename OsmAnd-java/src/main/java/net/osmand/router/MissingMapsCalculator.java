@@ -87,8 +87,8 @@ public class MissingMapsCalculator {
 		LatLon prev = start;
 		for (int i = 0; i < targets.size(); i++) {
 			end = targets.get(i);
-			if (MapUtils.getDistance(prev, end) < DISTANCE_SKIP) {
-				// skip point they too close
+			if (i > 0 && MapUtils.getDistance(prev, end) < DISTANCE_SKIP) {
+				// skip intermediate points that are too close together
 				continue;
 			}
 			split(ctx, knownMaps, pointsToCheck, prev, end);

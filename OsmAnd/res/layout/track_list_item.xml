@@ -4,12 +4,13 @@
 	android:id="@+id/container"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/selectableItemBackground"
 	android:orientation="vertical">
 
 	<LinearLayout
+		android:id="@+id/button_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
 		android:orientation="horizontal">
 
 		<FrameLayout
@@ -55,6 +56,7 @@
 				android:orientation="horizontal">
 
 				<LinearLayout
+					android:id="@+id/info_container"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
@@ -73,7 +75,7 @@
 						tools:text="Track name" />
 
 					<LinearLayout
-						android:layout_width="wrap_content"
+						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layout_marginBottom="@dimen/content_padding_small"
 						android:orientation="horizontal">
@@ -93,21 +95,35 @@
 
 						<ImageView
 							android:id="@+id/direction_icon"
-							android:layout_width="@dimen/content_padding"
-							android:layout_height="@dimen/content_padding"
+							android:layout_width="@dimen/directionIconSize"
+							android:layout_height="@dimen/directionIconSize"
+							android:layout_marginTop="1sp"
 							android:layout_gravity="center_vertical"
 							tools:src="@drawable/ic_direction_arrow" />
 
 						<net.osmand.plus.widgets.TextViewEx
 							android:id="@+id/description"
 							style="@style/DescStyle"
-							android:layout_width="wrap_content"
+							android:layout_width="0dp"
+							android:layout_weight="1"
 							android:layout_height="wrap_content"
 							android:layout_gravity="center_vertical"
-							android:ellipsize="marquee"
+							android:ellipsize="end"
 							android:maxLines="2"
 							android:textColor="?android:textColorSecondary"
 							tools:text="28.12.2022 | 5,1 km • 0:59:09 • 11" />
+
+						<net.osmand.plus.widgets.TextViewEx
+							android:id="@+id/suffix_description"
+							style="@style/DescStyle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							android:ellipsize="end"
+							android:maxLines="1"
+							android:visibility="gone"
+							android:textColor="?android:textColorSecondary"
+							tools:text="| fav" />
 
 					</LinearLayout>
 
@@ -137,6 +153,9 @@
 	<include
 		android:id="@+id/full_divider"
 		layout="@layout/simple_divider_item"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginVertical="8dp"
 		android:visibility="gone"/>
 
 </LinearLayout>

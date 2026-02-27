@@ -1,13 +1,9 @@
 package net.osmand.plus.base
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.annotation.StyleRes
-import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -53,7 +49,7 @@ open class BaseMaterialBottomSheetDialogFragment :
         val dialog = getDialog()
         if (dialog != null && dialog.window != null && InsetsUtils.isEdgeToEdgeSupported()) {
             dialog.window!!.setNavigationBarContrastEnforced(false)
-            InsetsUtils.processNavBarColor(this, dialog)
+            InsetsUtils.processNavigationBarColor(this, dialog)
 
             if (Build.VERSION.SDK_INT >= 36) {
                 //WindowCompat.enableEdgeToEdge(window);

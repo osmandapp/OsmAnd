@@ -4794,7 +4794,7 @@
     <string name="learn_more_about_sensors_link">Сазнајте подробније о пријемницима.</string>
     <string name="shared_string_pounds">фунта</string>
     <string name="weather_forecast">Временске прилике</string>
-    <string name="offline_weather_forecast">Ванмрежне временске прилике</string>
+    <string name="offline_weather_forecast">Ванмрежна временска прогноза</string>
     <string name="offline_weather_forecast_desc">Можете преузети седмодневне временске прилике.</string>
     <string name="delete_folder_question">Да ли избрисати фасциклу\?</string>
     <string name="show_all_tracks_on_the_map">Приказуј све трагове на карти</string>
@@ -5670,7 +5670,7 @@
     <string name="show_dm_grids">Користи DM уместо степени или DMS</string>
     <string name="show_dm_grids_description">Прикажи мрежу у степенима и минутима уместо у степенима или DMS</string>
     <string name="show_list">Приказуј списак</string>
-    <string name="popular_places">Позната места</string>
+    <string name="popular_places">Популарна места</string>
     <string name="show_image_previews">Прикажи прегледе слика</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Укључи/искључи видљивост координатне мреже на мапи.</string>
     <string name="layer_coordinates_grid">Координатна мрежа</string>
@@ -5687,7 +5687,7 @@
     <string name="shared_string_offline_only">Само ван мреже</string>
     <string name="row_height">Висина реда</string>
     <string name="add_widget">Додај справицу</string>
-    <string name="poi_source">Извор тачака занимања</string>
+    <string name="poi_source">Извор ТОИ-а</string>
     <string name="intermediate_first">Међуодредиште прво</string>
     <string name="display_priority">Приоритет приказа</string>
     <string name="destination_first">Одредиште прво</string>
@@ -5996,4 +5996,37 @@
     <string name="stars_articles">Чланци о звездама</string>
     <string name="astronomy_plugin_name">Астрономија</string>
     <string name="astro_min_magnitude">Мин. магнитуда</string>
+    <plurals name="tracks_count">
+        <item quantity="one">%d путања</item>
+        <item quantity="few">%d путање</item>
+        <item quantity="other">%d путања</item>
+    </plurals>
+    <string name="gradient_no_data_point_summary">Боја се примењује када подаци недостају или нису дефинисани.</string>
+    <string name="gradient_input_value_too_low_warn">Минимална дозвољена вредност је %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">Максимална дозвољена вредност је %1$s.</string>
+    <string name="gradient_input_value_duplicate_warn">Ова вредност већ постоји у палети.</string>
+    <string name="gradient_input_invalid_value_warn">Молимо да унесете важећи број.</string>
+    <string name="value_cannot_be_edited_warn">Ова вредност се не може изменити.</string>
+    <string name="unexpected_error_occurred_warn">Дошло је до неочекиване грешке.</string>
+    <string name="relative_gradient_point_m_summary">Боја за максималну вредност пронађена у путањи.</string>
+    <string name="relative_gradient_point_avg_summary">Боја за просечну вредност путање.</string>
+    <string name="relative_gradient_point_min_summary">Боја за минималну вредност пронађена у путањи.</string>
+    <string name="shared_string_maximum">Максимум</string>
+    <string name="shared_string_minimum">Минимум</string>
+    <string name="shared_string_ratio">однос</string>
+    <string name="shared_string_percentage">проценат</string>
+    <string name="remove_step">Уклони корак</string>
+    <string name="shared_string_value">Vrednost</string>
+    <string name="gradient_range_type_fixed_summary">Боје су додељене одређеним апсолутним бројевима (нпр. 50 km/h).</string>
+    <string name="gradient_range_type_fixed">Фиксне вредности</string>
+    <string name="gradient_range_type_relative_summary">Боје се аутоматски скалирају на основу мин./макс. опсега путање.</string>
+    <string name="gradient_range_type_relative">Релативан</string>
+    <string name="edit_palette">Уреди палету</string>
+    <string name="add_palette">Додај палету</string>
+    <string name="delete_palette">Обриши палету</string>
+    <string name="delete_colors_palette_dialog_summary">Да ли сте сигурни да желите да обришете палету %1$s?</string>
+    <string name="shared_string_trip_average">Просечна вредност путовања</string>
+    <string name="trip_recording_avg_speed_widget_description">Приказује просечну брзину тренутног путовања или просечну брзину током последњег успона или спуста.</string>
+    <string name="trip_recording_moving_time_widget_description">Приказује тренутно забележено време кретања или време за последњи успон и спуст.</string>
+    <string name="trip_recording_moving_time">Време кретања</string>
 </resources>
