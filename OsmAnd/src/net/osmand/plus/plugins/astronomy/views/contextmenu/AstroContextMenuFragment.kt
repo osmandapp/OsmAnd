@@ -44,8 +44,6 @@ import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.plugins.astronomy.StarMapFragment
 import net.osmand.plus.plugins.astronomy.AstronomyPlugin
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
-import net.osmand.plus.plugins.astronomy.views.AstroScheduleCardModel
-import net.osmand.plus.plugins.astronomy.views.AstroVisibilityCardModel
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.wikipedia.WikiImageCard

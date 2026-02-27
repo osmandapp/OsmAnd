@@ -1,15 +1,12 @@
-package net.osmand.plus.plugins.astronomy.views
+package net.osmand.plus.plugins.astronomy.views.contextmenu
 
 import net.osmand.data.LatLon
 import net.osmand.plus.GeocodingLookupService
 import io.github.cosinekitty.astronomy.Observer
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroContextCard
 import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroChartColorPalette
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroChartMath
 import net.osmand.util.Algorithms
 import java.time.LocalDate
 import java.time.ZoneId

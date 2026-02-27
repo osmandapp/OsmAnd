@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astronomy.views
+package net.osmand.plus.plugins.astronomy.views.contextmenu
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -27,8 +27,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astronomy.SkyObject
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroChartColorPalette
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroChartMath
 import net.osmand.plus.utils.AndroidUtils
 import java.time.Instant
 import java.time.LocalDate

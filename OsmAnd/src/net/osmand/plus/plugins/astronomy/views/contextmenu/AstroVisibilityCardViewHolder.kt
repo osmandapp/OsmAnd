@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astronomy.views
+package net.osmand.plus.plugins.astronomy.views.contextmenu
 
 import android.view.View
 import android.widget.TextView

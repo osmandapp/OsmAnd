@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astronomy.views
+package net.osmand.plus.plugins.astronomy.views.contextmenu
 
 import android.view.View
 import android.widget.ImageView
@@ -14,7 +14,6 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridFragment
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridItemDecorator
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroGalleryCardModel
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.util.Algorithms

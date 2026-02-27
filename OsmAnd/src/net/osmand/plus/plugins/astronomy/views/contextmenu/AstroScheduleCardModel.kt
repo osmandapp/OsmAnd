@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astronomy.views
+package net.osmand.plus.plugins.astronomy.views.contextmenu
 
 import io.github.cosinekitty.astronomy.Observer
 import kotlinx.coroutines.CoroutineScope
@@ -11,8 +11,6 @@ import kotlinx.coroutines.withContext
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroChartMath
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroContextCard
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter

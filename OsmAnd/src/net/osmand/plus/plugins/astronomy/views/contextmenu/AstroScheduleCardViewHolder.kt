@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astronomy.views
+package net.osmand.plus.plugins.astronomy.views.contextmenu
 
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +33,7 @@ class AstroScheduleCardViewHolder(
 			val dayLabelView: TextView = rowView.findViewById(R.id.schedule_day_label)
 			val riseTimeView: TextView = rowView.findViewById(R.id.schedule_rise_time)
 			val setTimeView: TextView = rowView.findViewById(R.id.schedule_set_time)
-			val dayGraphView: AstroScheduleDayGraphView =
+			val dayGraphView: AstroScheduleGraphView =
 				rowView.findViewById(R.id.schedule_day_graph)
 			val divider: View = rowView.findViewById(R.id.schedule_row_divider)
 

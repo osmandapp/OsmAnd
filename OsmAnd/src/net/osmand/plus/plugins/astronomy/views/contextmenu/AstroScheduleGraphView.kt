@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astronomy.views
+package net.osmand.plus.plugins.astronomy.views.contextmenu
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -10,19 +10,19 @@ import android.graphics.Path
 import android.graphics.RectF
 import android.graphics.Shader
 import android.util.AttributeSet
+import android.view.View
 import androidx.core.graphics.withClip
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroChartColorPalette
 import net.osmand.plus.utils.AndroidUtils
 import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
 import androidx.core.graphics.createBitmap
 
-class AstroScheduleDayGraphView @JvmOverloads constructor(
+class AstroScheduleGraphView @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0
-) : android.view.View(context, attrs, defStyleAttr) {
+) : View(context, attrs, defStyleAttr) {
 
 	private var model: AstroScheduleCardModel.ScheduleDayGraphData? = null
 	private var palette: AstroChartColorPalette? = null

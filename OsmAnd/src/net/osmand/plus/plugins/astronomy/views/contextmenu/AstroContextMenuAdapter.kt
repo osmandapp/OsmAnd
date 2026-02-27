@@ -10,18 +10,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter
 import net.osmand.plus.mapcontextmenu.gallery.GalleryPhotoPagerFragment
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroContextCard
 import net.osmand.plus.plugins.astronomy.SkyObject
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroCatalogsCardModel
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroCatalogsCardViewHolder
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroDescriptionCardModel
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroDescriptionCardViewHolder
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroGalleryCardModel
-import net.osmand.plus.plugins.astronomy.views.AstroGalleryCardViewHolder
-import net.osmand.plus.plugins.astronomy.views.AstroScheduleCardModel
-import net.osmand.plus.plugins.astronomy.views.AstroScheduleCardViewHolder
-import net.osmand.plus.plugins.astronomy.views.AstroVisibilityCardModel
-import net.osmand.plus.plugins.astronomy.views.AstroVisibilityCardViewHolder
 
 class AstroContextMenuAdapter(
 	private val app: OsmandApplication,
