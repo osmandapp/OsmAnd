@@ -11,6 +11,27 @@
 	Thx - Hardy
 -->
 
+	<string name="astro_culmination">Culmination</string>
+	<string name="astro_today_visibility">Today visibility</string>
+	<string name="astro_alt_short">Alt</string>
+	<string name="astro_az_short">Az</string>
+	<string name="astronomy_schedule">Schedule</string>
+	<string name="astro_catalogs">Catalogs</string>
+	<string name="astro_path">Path</string>
+	<string name="astro_direction">Direction</string>
+	<string name="astro_locate">Locate</string>
+	<string name="astro_type_earth">Earth</string>
+	<string name="astro_type_star">Star</string>
+	<string name="astro_type_galaxy">Galaxy</string>
+	<string name="astro_type_black_hole">Black hole</string>
+	<string name="astro_type_planet">Planet</string>
+	<string name="astro_type_sun">Sun</string>
+	<string name="astro_type_satellite">Satellite</string>
+	<string name="astro_type_nebula">Nebula</string>
+	<string name="astro_type_open_cluster">Open cluster</string>
+	<string name="astro_type_globular_cluster">Globular cluster</string>
+	<string name="astro_type_galaxy_cluster">Galaxy cluster</string>
+	<string name="astro_type_constellation">Constellation</string>
     <string name="shared_string_trip_average">Trip average</string>
     <string name="trip_recording_avg_speed_widget_description">Shows the average speed of the current trip, or the average speed during the last uphill or downhill section.</string>
     <string name="trip_recording_moving_time_widget_description">Shows the currently recorded moving time, or the time for the last uphill and downhill.</string>

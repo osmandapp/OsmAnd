@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/visibilityCard"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="16dp"
+	app:cardBackgroundColor="?attr/list_background_color"
+	app:cardElevation="0dp"
+	app:shapeAppearanceOverlay="@style/Shape.Card12"
+	app:strokeWidth="0dp">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
+			android:gravity="center_vertical"
+			android:minHeight="48dp"
+			android:orientation="horizontal">
+
+			<TextView
+				android:id="@+id/visibility_title"
+				style="@style/MaterialAlertDialog.Material3.Title.Text"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:text="@string/astro_today_visibility"
+				android:textColor="?android:attr/textColorPrimary"
+				android:textSize="16sp"
+				android:textStyle="bold" />
+
+			<FrameLayout
+				android:id="@+id/calendar_button"
+				android:layout_width="44dp"
+				android:layout_height="44dp"
+				android:layout_marginEnd="8dp"
+				android:background="?attr/selectableItemBackgroundBorderless"
+				android:foreground="?attr/selectableItemBackgroundBorderless">
+
+				<FrameLayout
+					android:layout_width="40dp"
+					android:layout_height="40dp"
+					android:layout_gravity="center"
+					android:background="@drawable/bg_circle" />
+
+				<ImageView
+					android:id="@+id/calendar_icon"
+					android:layout_width="24dp"
+					android:layout_height="24dp"
+					android:layout_gravity="center"
+					android:contentDescription="@string/astronomy_schedule"
+					android:src="@drawable/ic_action_calendar_month"
+					app:tint="?attr/icon_color_active" />
+			</FrameLayout>
+		</LinearLayout>
+
+		<net.osmand.plus.plugins.astronomy.views.AstroVisibilityGraphView
+			android:id="@+id/visibilityGraphView"
+			android:layout_width="match_parent"
+			android:layout_height="220dp"
+			android:layout_marginTop="8dp" />
+
+		<LinearLayout
+			android:id="@+id/events_row"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="16dp"
+			android:layout_marginTop="12dp"
+			android:orientation="horizontal">
+
+			<LinearLayout
+				android:id="@+id/rise_container"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical"
+					android:orientation="horizontal">
+
+					<TextView
+						android:id="@+id/rise_time"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="?attr/icon_color_active"
+						android:textSize="16sp"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/rise_symbol"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="6dp"
+						android:textColor="?attr/icon_color_active"
+						android:textSize="16sp"
+						android:textStyle="bold" />
+				</LinearLayout>
+
+				<TextView
+					android:id="@+id/rise_label"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="2dp"
+					android:text="@string/astro_rise"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="12sp" />
+			</LinearLayout>
+
+			<View
+				android:id="@+id/divider_rise"
+				android:layout_width="1dp"
+				android:layout_height="match_parent"
+				android:layout_marginHorizontal="8dp"
+				android:background="?attr/divider_color" />
+
+			<LinearLayout
+				android:id="@+id/culmination_container"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical"
+					android:orientation="horizontal">
+
+					<TextView
+						android:id="@+id/culmination_time"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="?attr/icon_color_active"
+						android:textSize="16sp"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/culmination_symbol"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="6dp"
+						android:textColor="#FF9800"
+						android:textSize="16sp"
+						android:textStyle="bold" />
+				</LinearLayout>
+
+				<TextView
+					android:id="@+id/culmination_label"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="2dp"
+					android:text="@string/astro_culmination"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="12sp" />
+			</LinearLayout>
+
+			<View
+				android:id="@+id/divider_set"
+				android:layout_width="1dp"
+				android:layout_height="match_parent"
+				android:layout_marginHorizontal="8dp"
+				android:background="?attr/divider_color" />
+
+			<LinearLayout
+				android:id="@+id/set_container"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical"
+					android:orientation="horizontal">
+
+					<TextView
+						android:id="@+id/set_time"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="?attr/icon_color_active"
+						android:textSize="16sp"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/set_symbol"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="6dp"
+						android:textColor="?attr/icon_color_active"
+						android:textSize="16sp"
+						android:textStyle="bold" />
+				</LinearLayout>
+
+				<TextView
+					android:id="@+id/set_label"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="2dp"
+					android:text="@string/astro_set"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="12sp" />
+			</LinearLayout>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/location_row"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="16dp"
+			android:layout_marginTop="12dp"
+			android:layout_marginBottom="16dp"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
+
+			<ImageView
+				android:id="@+id/location_icon"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:src="@drawable/ic_action_marker_dark"
+				app:tint="?attr/text_color_secondary" />
+
+			<TextView
+				android:id="@+id/location_text"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="10dp"
+				android:layout_weight="1"
+				android:textColor="?android:attr/textColorSecondary"
+				android:textSize="14sp" />
+		</LinearLayout>
+
+	</LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="splash_screen_background_color">@color/list_background_color_dark</color>
+
+	<!-- Astro visibility graph -->
+	<color name="astro_visibility_x_tick_color">#595959</color>
+	<color name="astro_visibility_x_label_color">#98989E</color>
+	<color name="astro_visibility_y_label_color">#5294E0</color>
+	<color name="astro_visibility_y_grid_color">#803F3D43</color>
+	<color name="astro_visibility_y_zero_color">#3F3D43</color>
+
+	<color name="astro_visibility_marker_border_color">#59FFFFFF</color>
+	<color name="astro_visibility_marker_az_color">#5CD6B8</color>
 </resources>
