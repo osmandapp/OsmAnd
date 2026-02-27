@@ -5677,9 +5677,8 @@
     <string name="star_map">Χάρτης αστέρων</string>
     <string name="star_visibility_name">Ορατότητα αστέρων</string>
     <string name="star_altitude_name">Ύψος αστέρων</string>
-    <string name="star_watcher_plugin_name">Παρατηρητής αστέρων (Beta)</string>
     <string name="star_charts_name">Χάρτες αστέρων</string>
-    <string name="star_watcher_plugin_description">3D χάρτης αστέρων</string>
+    <string name="astronomy_plugin_description">3D χάρτης αστέρων</string>
     <string name="azimuthal_grid">Πλέγμα αζιμούθιου</string>
     <string name="equatorial_grid">Πλέγμα ισημερινού</string>
     <string name="ecliptic_line">Εκλειπτική γραμμή</string>
@@ -5836,4 +5835,34 @@
     <string name="level_of_details">Επίπεδο λεπτομέρειας</string>
     <string name="performance">Απόδοση</string>
     <string name="view_distance">Απόσταση θέασης</string>
+    <string name="astronomy_plugin_name">Αστρονομία</string>
+    <string name="astro_min_magnitude">Ελάχιστο μέγεθος</string>
+    <plurals name="tracks_count">
+        <item quantity="one">%d ίχνος</item>
+        <item quantity="other">%d ίχνη</item>
+    </plurals>
+    <string name="gradient_no_data_point_summary">Χρώμα που εφαρμόζεται όταν τα δεδομένα λείπουν ή δεν έχουν οριστεί.</string>
+    <string name="gradient_input_value_too_low_warn">Ελάχιστη επιτρεπτή τιμή είναι %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">Μέγιστη επιτρεπτή τιμή είναι %1$s.</string>
+    <string name="gradient_input_value_duplicate_warn">Αυτή η τιμή υπάρχει ήδη στην παλέττα.</string>
+    <string name="gradient_input_invalid_value_warn">Παρακαλούμε εισάγετε έναν έγκυρο αριθμό.</string>
+    <string name="value_cannot_be_edited_warn">Αυτή η τιμή δεν μπορεί να τροποποιηθεί.</string>
+    <string name="unexpected_error_occurred_warn">Προέκυψε ένα απρόσμενο σφάλμα.</string>
+    <string name="relative_gradient_point_m_summary">Χρώμα για την μέγιστη τιμή που υπάρχει στο ίχνος.</string>
+    <string name="relative_gradient_point_avg_summary">Χρώμα για την μέση τιμή του ίχνους.</string>
+    <string name="relative_gradient_point_min_summary">Χρώμα για την ελάχιστη τιμή που υπάρχει στο ίχνος.</string>
+    <string name="shared_string_maximum">Μέγιστο</string>
+    <string name="shared_string_minimum">Ελάχιστο</string>
+    <string name="shared_string_ratio">αναλογία</string>
+    <string name="shared_string_percentage">ποσοστό</string>
+    <string name="remove_step">Αφαίρεση βήματος</string>
+    <string name="shared_string_value">Τιμή</string>
+    <string name="gradient_range_type_fixed_summary">Χρώματα που ανατίθενται σε συγκεκριμένα απόλυτα νούμερα (π.χ. 50 χλμ/ω).</string>
+    <string name="gradient_range_type_fixed">Σταθερές Τιμές</string>
+    <string name="gradient_range_type_relative_summary">Τα χρώματα κλιμακώνονται αυτόματα ανάλογα με το μέγιστο/ελάχιστο εύρος του ίχνους.</string>
+    <string name="gradient_range_type_relative">Σχετικό</string>
+    <string name="edit_palette">Επεξεγασία παλέττας</string>
+    <string name="add_palette">Προσθήκη παλέττας</string>
+    <string name="delete_palette">Διαγραφή παλέττας</string>
+    <string name="delete_colors_palette_dialog_summary">Σίγουρα θέλετε να διαγράψε την παλέττα %1$s;</string>
 </resources>

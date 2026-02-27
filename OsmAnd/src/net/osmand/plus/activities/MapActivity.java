@@ -108,6 +108,7 @@ import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
@@ -120,6 +121,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
@@ -131,6 +133,7 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.MapViewWithLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapTileView.OnDrawMapListener;
+import net.osmand.plus.views.controls.VerticalWidgetPanel;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
@@ -849,7 +852,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void updateStatusBarColor() {
+		updateNavigationBarColor();
 		UiUtilities.updateStatusBarColor(this);
+	}
+
+	@Override
+	public int getNavigationBarColorId() {
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(this);
+			VerticalWidgetPanel panel = findViewById(R.id.map_bottom_widgets_panel);
+			boolean transparent = settings.getTransparentMapThemePreference(layoutMode).get();
+			if (panel != null && panel.getVisibility() == View.VISIBLE && panel.isAnyRowVisible() && !transparent) {
+				return ColorUtilities.getWidgetBackgroundColorId(isNightMode());
+			}
+		}
+		return super.getNavigationBarColorId();
 	}
 
 	@Override
@@ -1158,6 +1175,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		app.getSearchUICore().refreshCustomPoiFilters();
 		app.getMapButtonsHelper().updateActiveActions();
+		app.getSmartFolderHelper().onUnitsSettingsChanged();
 		getMapViewTrackingUtilities().appModeChanged();
 		keyEventHelper.updateGlobalCommands();
 

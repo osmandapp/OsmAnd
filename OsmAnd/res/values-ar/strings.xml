@@ -1987,7 +1987,7 @@
     <string name="selected_categories">الفئات المحددة</string>
     <string name="create_custom_poi">إنشاء تصفية مخصصة</string>
     <string name="custom_search">بحث مخصص</string>
-    <string name="edit_filter">تحرير الفلتر</string>
+    <string name="edit_filter">عدِّل التصفية</string>
     <string name="subcategories">فئات فرعية</string>
     <string name="translit_names">أسماء بترجمة حرفية</string>
     <string name="search_hint">أدخل المدينة، العنوان أو نقاط الاهتمام</string>
@@ -5123,12 +5123,12 @@
     <string name="delete_smart_folder_dialog_message">سيؤدي هذا إلى إزالة المجلد الذكي \"%1$s\". (لن يتم حذف أي مسارات.)</string>
     <string name="empty_smart_folder_title">لا يوجد مسار مطابق</string>
     <string name="empty_smart_folder_description">المسارات المطابقة تظهر هنا</string>
-    <string name="configure_filter">تعديل الفلتر</string>
+    <string name="configure_filter">اضبط التصفية</string>
     <string name="no_config_smart_folder_title">غير مهيأ</string>
-    <string name="discard_filter_changes">تجاهل تغييرات الفلتر</string>
+    <string name="discard_filter_changes">تجاهل تغييرات التصفية</string>
     <string name="shared_string_loading">قيد التحميل</string>
-    <string name="discard_filter_changes_prompt">إعادة تعيين كافة الفلاتر؟</string>
-    <string name="no_config_smart_folder_description">تسمح الملفات الذكية بتجميع المسارات حسب الفلاتر المطبقة</string>
+    <string name="discard_filter_changes_prompt">صفّر كل التصفيات؟</string>
+    <string name="no_config_smart_folder_description">تسمح الملفات الذكية بتجميع المسارات حسب التصفية المطبقة</string>
     <string name="loading_tracks">إعادة تحميل المسارات</string>
     <string name="searching_matching_tracks">ابحث في جميع المسارات المتطابقة</string>
     <plurals name="tracks">
@@ -5992,8 +5992,7 @@
     <string name="download_wikipedia_label">تحميل ويكيبيديا</string>
     <string name="rendering_attr_spotSize_description">حجم قياس البقعة</string>
     <string name="gpx_too_many_points_visible_warning">يؤدي ظهور عدد كبير من مسارات GPX إلى استهلاك عالٍ للذاكرة.</string>
-    <string name="star_watcher_plugin_name">مراقب النجوم (نسخة تجريبية)</string>
-    <string name="star_watcher_plugin_description">خرائط النجوم، خريطة نجوم ثلاثية الأبعاد</string>
+    <string name="astronomy_plugin_description">خرائط النجوم، خريطة نجوم ثلاثية الأبعاد</string>
     <string name="star_map">خريطة النجوم</string>
     <string name="star_charts_name">خرائط النجوم</string>
     <string name="star_visibility_name">رؤية النجوم</string>
@@ -6024,4 +6023,11 @@
     <string name="visible_layers_and_objects">الطبقات والأجرام المرئية</string>
     <string name="shared_string_azimuth">السمت</string>
     <string name="imprecise_coordinates">إحداثيات غير دقيقة</string>
+    <string name="astro_min_magnitude">الحد الأدنى للقدر</string>
+    <string name="delete_groups_confirmation">حذف المجموعات؟</string>
+    <string name="add_to_track">أضف إلى المسار</string>
+    <string name="unpin_folder">ألغِ تثبيت المجلد</string>
+    <string name="pin_folder">ثبت المجلد</string>
+    <string name="favorite_search_empty_state_description">جرب تعديل خيارات البحث أو التصفيات لعل ذلك يساعدك</string>
+    <string name="favorites_empty_folder_description">لا يحتوي هذا المجلد على أي نقاط بعد.</string>
 </resources>

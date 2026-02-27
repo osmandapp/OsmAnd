@@ -14,6 +14,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import net.osmand.plus.card.color.palette.gradient.GradientPaletteController;
+import net.osmand.plus.card.color.palette.solid.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.solid.SolidPaletteController;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -27,15 +30,9 @@ import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
-import net.osmand.plus.card.color.palette.gradient.GradientColorsCollection;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
-import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
 import net.osmand.plus.chooseplan.PromoBannerCard;
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.shared.gpx.GradientScaleType;
@@ -44,7 +41,6 @@ import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.shared.routing.RouteColorize;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -57,8 +53,8 @@ public class TrackColorController extends ColoringStyleCardController implements
 	private final SelectedGpxFile selectedGpx;
 	private final TrackDrawInfo drawInfo;
 
-	private IColorsPaletteController colorsPaletteController;
-	private GradientColorsPaletteController gradientPaletteController;
+	private SolidPaletteController colorsPaletteController;
+	private GradientPaletteController gradientPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
 
 	public TrackColorController(@NonNull OsmandApplication app,
@@ -90,30 +86,27 @@ public class TrackColorController extends ColoringStyleCardController implements
 	}
 
 	@NonNull
-	public IColorsPaletteController getColorsPaletteController() {
+	public SolidPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			ColorsCollection colorsCollection = new FileColorsCollection(app);
-			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, drawInfo.getColor());
+			colorsPaletteController = new SolidPaletteController(app, drawInfo.getColor());
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());
 		return colorsPaletteController;
 	}
 
 	@NonNull
-	public GradientColorsPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
-		RouteColorize.ColorizationType colorizationType = gradientScaleType.toColorizationType();
-		GradientColorsCollection gradientCollection = new GradientColorsCollection(app, colorizationType);
-
+	public GradientPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
+		GradientPaletteCategory paletteCategory = gradientScaleType.toPaletteCategory();
 		if (gradientPaletteController == null) {
-			gradientPaletteController = new GradientColorsPaletteController(app, selectedGpx.getTrackAnalysis(app));
+			gradientPaletteController = new GradientPaletteController(app, paletteCategory, selectedGpx.getTrackAnalysis(app));
 		}
-		gradientPaletteController.updateContent(gradientCollection, drawInfo.getGradientColorName());
+		gradientPaletteController.updatePalette(paletteCategory, drawInfo.getGradientColorName());
 		gradientPaletteController.setPaletteListener(getExternalListener());
 		return gradientPaletteController;
 	}
 
 	@Nullable
-	public GradientColorsPaletteController getGradientPaletteController() {
+	public GradientPaletteController getGradientPaletteController() {
 		return gradientPaletteController;
 	}
 

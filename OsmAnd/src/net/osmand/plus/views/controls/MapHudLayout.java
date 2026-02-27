@@ -3,6 +3,7 @@ package net.osmand.plus.views.controls;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static net.osmand.plus.OsmAndConstants.UI_HANDLER_MAP_HUD;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.SMALL_SIZE_DP;
 import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES;
 import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS;
 import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_DRAW_SLOTS;
@@ -19,8 +20,6 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.graphics.Insets;
-import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -38,6 +37,7 @@ import net.osmand.plus.views.mapwidgets.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.shared.grid.ButtonPositionSize;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -74,13 +74,9 @@ public class MapHudLayout extends FrameLayout {
 	private VerticalWidgetPanel bottomWidgetsPanel;
 
 	private final float dpToPx;
-	private final int buttonsMargin;
+	private final int topButtonsMargin;
+	private final int bottomButtonsMargin;
 	private final int defaultMargin;
-
-	private int topInset;
-	private int bottomInset;
-	private int leftInset;
-	private int rightInset;
 
 	private final boolean portrait;
 
@@ -111,7 +107,8 @@ public class MapHudLayout extends FrameLayout {
 		this.portrait = AndroidUiHelper.isOrientationPortrait(context);
 		this.screenLayoutMode = ScreenLayoutMode.getDefault(context);
 		this.defaultMargin = (int) (dpToPx * DEF_MARGIN_DP);
-		this.buttonsMargin = (int) (dpToPx * ((BIG_SIZE_DP + (DEF_MARGIN_DP * 4)) * 2));
+		this.topButtonsMargin = (int) (dpToPx * ((SMALL_SIZE_DP + (DEF_MARGIN_DP * 4)) * 2));
+		this.bottomButtonsMargin = (int) (dpToPx * ((BIG_SIZE_DP + (DEF_MARGIN_DP * 4)) * 2));
 
 		CommonPreference<PanelsLayoutMode> preference = settings.getPanelsLayoutMode(context, screenLayoutMode);
 		this.panelsLayoutMode = preference.get();
@@ -160,7 +157,7 @@ public class MapHudLayout extends FrameLayout {
 		addPosition(leftWidgetsPanel, this::updateVerticalPanels);
 		addPosition(rightWidgetsPanel, this::updateVerticalPanels);
 
-		addPosition(findViewById(R.id.top_controls_container));
+		addPosition(findViewById(R.id.lanes_widget_special_position));
 		addPosition(findViewById(R.id.left_side_menu));
 		addPosition(findViewById(R.id.recording_note_layout));
 		addPosition(findViewById(R.id.add_gpx_point_bottom_sheet));
@@ -238,6 +235,7 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	public void removeWidget(@NonNull View view) {
+		removeView(view);
 		additionalWidgetPositions.remove(view);
 	}
 
@@ -273,8 +271,8 @@ public class MapHudLayout extends FrameLayout {
 //		}
 //		LOG.info("--------");
 
-		int width = Math.round(getAdjustedWidth() / dpToPx / CELL_SIZE_DP);
-		int height = Math.round(getAdjustedHeight() / dpToPx / CELL_SIZE_DP);
+		int width = Math.round(getWidth() / dpToPx / CELL_SIZE_DP);
+		int height = Math.round(getHeight() / dpToPx / CELL_SIZE_DP);
 		ButtonPositionSize.Companion.computeNonOverlap(1, list, width, height);
 
 //		for (ButtonPositionSize b : list) {
@@ -306,7 +304,7 @@ public class MapHudLayout extends FrameLayout {
 				}
 			}
 		}
-		for (Map.Entry<View, ButtonPositionSize> entry : additionalWidgetPositions.entrySet()) {
+		for (Map.Entry<View, ButtonPositionSize> entry : getSortedAdditionalWidgetEntries()) {
 			View view = entry.getKey();
 			if (view.getVisibility() == VISIBLE) {
 				ButtonPositionSize position = updateWidgetPosition(view, entry.getValue());
@@ -316,6 +314,28 @@ public class MapHudLayout extends FrameLayout {
 			}
 		}
 		return map;
+	}
+
+	@NonNull
+	private List<Map.Entry<View, ButtonPositionSize>> getSortedAdditionalWidgetEntries() {
+		List<Map.Entry<View, ButtonPositionSize>> list = new ArrayList<>(additionalWidgetPositions.entrySet());
+		list.sort((e1, e2) -> Integer.compare(
+				getAdditionalWidgetPriority(e1.getKey()),
+				getAdditionalWidgetPriority(e2.getKey())
+		));
+		return list;
+	}
+
+	private int getAdditionalWidgetPriority(@NonNull View view) {
+		int id = view.getId();
+		if (R.id.alarms_container == id) {
+			return 0;
+		} else if (R.id.measurement_buttons == id) {
+			return 1;
+		} else if (R.id.map_ruler_layout == id) {
+			return 2;
+		}
+		return 100;
 	}
 
 	@NonNull
@@ -364,6 +384,13 @@ public class MapHudLayout extends FrameLayout {
 			position.setMoveVertical();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
+		} else if (id == R.id.lanes_widget_special_position) {
+			position.setMoveVertical();
+			position.setPositionVertical(POS_TOP);
+			position.setPositionHorizontal(POS_LEFT);
+		} else if (id == R.id.measurement_buttons) {
+			position.setPositionVertical(POS_BOTTOM);
+			position.setPositionHorizontal(POS_LEFT);
 		}
 		return updateWidgetPosition(view, position);
 	}
@@ -380,6 +407,7 @@ public class MapHudLayout extends FrameLayout {
 	@NonNull
 	private ButtonPositionSize updateWidgetPosition(@NonNull View view, @NonNull ButtonPositionSize position) {
 		if (view.getWidth() <= 0 && view.getHeight() <= 0) {
+			position.setSize(0, 0);
 			return position;
 		}
 		int id = view.getId();
@@ -387,36 +415,35 @@ public class MapHudLayout extends FrameLayout {
 		int height = (int) AndroidUtils.pxToDpF(getContext(), view.getHeight()) / 8;
 		position.setSize(width, height);
 
-		if (view instanceof VerticalWidgetPanel && shouldCenterVerticalPanels()) {
-			int[] margins = AndroidUtils.getRelativeMargins(this, view);
-			applyInsetsToMargins(margins);
-
-			int parentWidth = getAdjustedWidth();
-			int parentHeight = getAdjustedHeight();
-
-			boolean top = position.isTop();
-			boolean left = position.isLeft();
-			int x = left ? margins[0] : margins[2];
-			int y = top ? margins[1] : margins[3];
-			position.calcGridPositionFromPixel(dpToPx, parentWidth, parentHeight, left, x, top, y);
-
+		if (view instanceof VerticalWidgetPanel) {
+			if (shouldCenterVerticalPanels()) {
+				calcGridPositionFromPixel(view, position);
+			}
 			position.setMarginY(0);
-		} else if (view instanceof RulerWidget || view instanceof SideWidgetsPanel) {
+		} else if (view instanceof RulerWidget || view instanceof SideWidgetsPanel || id == R.id.measurement_buttons) {
 			position.setMarginX(0);
 			position.setMarginY(0);
 		} else if (id == R.id.alarms_container) {
 			int margin = getResources().getDimensionPixelSize(R.dimen.map_alarm_bottom_margin);
 			position.setMarginX(0);
 			position.setMarginY((int) AndroidUtils.pxToDpF(getContext(), margin) / 8);
+		} else if (id == R.id.lanes_widget_special_position) {
+			calcGridPositionFromPixel(view, position);
+			position.setMarginY(0);
 		}
 		return position;
 	}
 
-	private void applyInsetsToMargins(int[] margins) {
-		margins[0] -= leftInset;
-		margins[1] -= topInset;
-		margins[2] -= rightInset;
-		margins[3] -= bottomInset;
+	private void calcGridPositionFromPixel(@NonNull View view, @NonNull ButtonPositionSize position) {
+		int width = getWidth();
+		int height = getHeight();
+		boolean top = position.isTop();
+		boolean left = position.isLeft();
+
+		int[] margins = AndroidUtils.getRelativeMargins(this, view);
+		int x = left ? margins[0] : margins[2];
+		int y = top ? margins[1] : margins[3];
+		position.calcGridPositionFromPixel(dpToPx, width, height, left, x, top, y);
 	}
 
 	public void updatePositionParams(@NonNull View view, @NonNull ButtonPositionSize position) {
@@ -466,16 +493,24 @@ public class MapHudLayout extends FrameLayout {
 			topMargin = 0;
 			bottomMargin = marginY;
 		}
-		if (startMargin != params.getMarginStart() || topMargin != params.topMargin
-				|| endMargin != params.getMarginEnd() || bottomMargin != params.bottomMargin) {
-			changed = true;
+		boolean verticalMarginsChanged = !shouldIgnoreVerticalMargins(position)
+				&& (topMargin != params.topMargin || bottomMargin != params.bottomMargin);
 
-			params.topMargin = topMargin;
-			params.bottomMargin = bottomMargin;
-			params.setMarginStart(startMargin);
-			params.setMarginEnd(endMargin);
+		boolean horizontalMarginsChanged = !shouldIgnoreHorizontalMargins(position)
+				&& (startMargin != params.getMarginStart() || endMargin != params.getMarginEnd());
+
+		if (horizontalMarginsChanged || verticalMarginsChanged) {
+			changed = true;
+			if (verticalMarginsChanged) {
+				params.topMargin = topMargin;
+				params.bottomMargin = bottomMargin;
+			}
+			if (horizontalMarginsChanged) {
+				params.setMarginStart(startMargin);
+				params.setMarginEnd(endMargin);
+			}
 		}
-		if (params.gravity != gravity) {
+		if (!shouldIgnoreGravity(position) && params.gravity != gravity) {
 			changed = true;
 			params.gravity = gravity;
 		}
@@ -486,8 +521,8 @@ public class MapHudLayout extends FrameLayout {
 		MapButtonState buttonState = button.getButtonState();
 		ButtonPositionSize positionSize = buttonState != null ? buttonState.getPositionSize() : null;
 		if (buttonState != null) {
-			int width = getAdjustedWidth();
-			int height = getAdjustedHeight();
+			int width = getWidth();
+			int height = getHeight();
 			LayoutParams params = (LayoutParams) button.getLayoutParams();
 
 			positionSize.calcGridPositionFromPixel(dpToPx, width, height,
@@ -500,14 +535,6 @@ public class MapHudLayout extends FrameLayout {
 		updateButtons(); // relayout to avoid overlap
 	}
 
-	public int getAdjustedHeight() {
-		return getHeight() - topInset - bottomInset;
-	}
-
-	public int getAdjustedWidth() {
-		return getWidth() - leftInset - rightInset;
-	}
-
 	private boolean shouldCenterVerticalPanels() {
 		return panelsLayoutMode == PanelsLayoutMode.COMPACT;
 	}
@@ -517,6 +544,18 @@ public class MapHudLayout extends FrameLayout {
 			case "top_widgets_panel", "map_bottom_widgets_panel", "map_left_widgets_panel", "map_right_widgets_panel" -> true;
 			default -> false;
 		};
+	}
+
+	private boolean shouldIgnoreGravity(@NonNull ButtonPositionSize position) {
+		return Algorithms.objectEquals("lanes_widget_special_position", position.getId());
+	}
+
+	private boolean shouldIgnoreHorizontalMargins(@NonNull ButtonPositionSize position) {
+		return Algorithms.objectEquals("lanes_widget_special_position", position.getId());
+	}
+
+	private boolean shouldIgnoreVerticalMargins(@NonNull ButtonPositionSize position) {
+		return false;
 	}
 
 	@NonNull
@@ -543,12 +582,12 @@ public class MapHudLayout extends FrameLayout {
 		updateHorizontalMargins(bottomWidgetsPanel);
 	}
 
-	private void updateHorizontalMargins(@Nullable View view) {
+	private void updateHorizontalMargins(@Nullable VerticalWidgetPanel panel) {
 		int totalWidth = getWidth();
-		if (view == null || leftWidgetsPanel == null || rightWidgetsPanel == null || totalWidth <= 0) {
+		if (panel == null || leftWidgetsPanel == null || rightWidgetsPanel == null || totalWidth <= 0) {
 			return;
 		}
-		if (view.getLayoutParams() instanceof MarginLayoutParams params) {
+		if (panel.getLayoutParams() instanceof MarginLayoutParams params) {
 			int leftMargin = 0;
 			int rightMargin = 0;
 
@@ -562,16 +601,20 @@ public class MapHudLayout extends FrameLayout {
 				int leftWidth = leftWidgetsPanel.getVisibility() == VISIBLE ? leftWidgetsPanel.getWidth() : 0;
 				int rightWidth = rightWidgetsPanel.getVisibility() == VISIBLE ? rightWidgetsPanel.getWidth() : 0;
 
-				leftMargin = Math.max(defaultMargin, leftWidth > 0 ? leftWidth + panelsMargin : 0);
-				rightMargin = Math.max(defaultMargin, rightWidth > 0 ? rightWidth + panelsMargin : 0);
+				if (panel.isTopPanel()) {
+					leftMargin = Math.max(defaultMargin, leftWidth > 0 ? leftWidth + panelsMargin : 0);
+					rightMargin = Math.max(defaultMargin, rightWidth > 0 ? rightWidth + panelsMargin : 0);
 
-				leftMargin = Math.max(leftMargin, buttonsMargin);
-				rightMargin = Math.max(rightMargin, buttonsMargin);
+					leftMargin = Math.max(leftMargin, topButtonsMargin);
+				} else {
+					leftMargin = Math.max(defaultMargin, bottomButtonsMargin);
+					rightMargin = Math.max(defaultMargin, bottomButtonsMargin);
+				}
 			}
 			if (params.leftMargin != leftMargin || params.rightMargin != rightMargin) {
 				params.leftMargin = leftMargin;
 				params.rightMargin = rightMargin;
-				view.setLayoutParams(params);
+				panel.setLayoutParams(params);
 			}
 		}
 	}
@@ -583,7 +626,6 @@ public class MapHudLayout extends FrameLayout {
 		if (!DEV_GRID_LAYOUT_DRAW_CELLS && !DEV_GRID_LAYOUT_DRAW_SLOTS && !DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES) {
 			return;
 		}
-
 		float cellSizePx = CELL_SIZE_DP * dpToPx;
 		float marginPx = DEF_MARGIN_DP * dpToPx;
 		int width = getWidth();
@@ -592,12 +634,11 @@ public class MapHudLayout extends FrameLayout {
 		if (cellSizePx <= 0) {
 			return;
 		}
-
 		if (DEV_GRID_LAYOUT_DRAW_CELLS) {
-			float left0 = marginPx + leftInset;
-			float right0 = width - marginPx - rightInset;
-			float top0 = marginPx + topInset;
-			float bottom0 = height - marginPx - bottomInset;
+			float left0 = marginPx;
+			float right0 = width - marginPx;
+			float top0 = marginPx;
+			float bottom0 = height - marginPx;
 			float midX = (left0 + right0) / 2;
 			float midY = (top0 + bottom0) / 2;
 
@@ -647,33 +688,23 @@ public class MapHudLayout extends FrameLayout {
 					int viewHeight = position.getHeightPix(dpToPx);
 
 					if (position.isLeft()) {
-						left = marginX + leftInset;
+						left = marginX;
 						right = left + viewWidth;
 					} else {
-						right = width - marginX - rightInset;
+						right = width - marginX;
 						left = right - viewWidth;
 					}
-
 					if (position.isTop()) {
-						top = marginY + topInset;
+						top = marginY;
 						bottom = top + viewHeight;
 					} else {
-						bottom = height - marginY - bottomInset;
+						bottom = height - marginY;
 						top = bottom - viewHeight;
 					}
-
 					canvas.drawRect(left, top, right, bottom, slotPaintFill);
 					canvas.drawRect(left, top, right, bottom, slotPaintStroke);
 				}
 			}
 		}
-	}
-
-	public void setWindowInsets(@NonNull WindowInsetsCompat windowInsets) {
-		Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
-		topInset = insets.top;
-		bottomInset = insets.bottom;
-		leftInset = insets.left;
-		rightInset = insets.right;
 	}
 }

@@ -126,6 +126,7 @@
 					android:layout_marginHorizontal="16dp"
 					android:layout_marginVertical="12dp"
 					android:text="@string/astro_visible_objects"
+					style="@style/TextAppearance.Material3.TitleMedium"
 					android:textColor="?attr/text_color_primary_v2"
 					android:textSize="16sp" />
 
@@ -217,7 +218,8 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginVertical="12dp"
-					android:layout_marginStart="16dp"
+					android:layout_marginHorizontal="16dp"
+
 					android:text="@string/personal_category_name"
 					android:textColor="?attr/text_color_primary_v2"
 					android:textSize="16sp" />
@@ -250,7 +252,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginVertical="12dp"
-					android:layout_marginStart="16dp"
+					android:layout_marginHorizontal="16dp"
 					android:text="@string/astro_rendering"
 					android:textColor="?attr/text_color_primary_v2"
 					android:textSize="16sp" />

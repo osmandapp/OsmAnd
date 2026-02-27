@@ -37,10 +37,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.solid.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.solid.SolidPaletteController;
+import net.osmand.plus.palette.contract.IExternalPaletteListener;
 import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.mapcontextmenu.editors.controller.EditorColorController;
 import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
@@ -56,12 +55,13 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
 public abstract class EditorFragment extends BaseFullScreenFragment
-		implements CardListener, OnColorsPaletteListener, OnIconsPaletteListener<String> {
+		implements CardListener, IExternalPaletteListener, OnIconsPaletteListener<String> {
 
 	protected ShapesCard shapesCard;
 
@@ -170,10 +170,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	@Override
 	public void onResume() {
 		super.onResume();
-		MapActivity activity = getMapActivity();
-		if (activity != null) {
-			activity.disableDrawer();
-		}
+		requireMapActivity().disableDrawer();
 		if (!InsetsUtils.isEdgeToEdgeSupported()) {
 			view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		}
@@ -189,10 +186,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	@Override
 	public void onPause() {
 		super.onPause();
-		MapActivity activity = getMapActivity();
-		if (activity != null) {
-			activity.enableDrawer();
-		}
+		requireMapActivity().enableDrawer();
 		if (!InsetsUtils.isEdgeToEdgeSupported()) {
 			view.getViewTreeObserver().removeOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		}
@@ -332,9 +326,15 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	@Override
-	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		setColor(paletteColor.getColor());
-		updateContent();
+	public void onPaletteItemSelected(@NonNull PaletteItem item) {
+		if (item instanceof PaletteItem.Solid solidItem) {
+			setColor(solidItem.getColorInt());
+			updateContent();
+		}
+	}
+
+	@Override
+	public void onPaletteItemAdded(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
 	}
 
 	@Override
@@ -344,7 +344,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	@NonNull
-	private ColorsPaletteController getColorController() {
+	private SolidPaletteController getColorController() {
 		return EditorColorController.getInstance(app, this, getColor());
 	}
 
@@ -364,7 +364,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	protected void updateSelectedColorText() {
-		ColorsPaletteController controller = getColorController();
+		SolidPaletteController controller = getColorController();
 		((TextView) view.findViewById(R.id.color_name)).setText(controller.getColorName(color));
 	}
 
@@ -426,7 +426,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	protected void savePressed() {
-		getColorController().refreshLastUsedTime();
+		getColorController().renewLastUsedTime();
 		save(true);
 	}
 

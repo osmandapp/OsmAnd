@@ -20,10 +20,10 @@ actual object PlatformUtil {
 	private lateinit var networkAPI: NetworkAPI
 	private lateinit var xmlFactoryApi: XmlFactoryAPI
 
-	fun initialize(osmAndContext: OsmAndContext, xmlFactoryApi: XmlFactoryAPI) {
+	fun initialize(osmAndContext: OsmAndContext, xmlFactoryApi: XmlFactoryAPI, networkAPI: NetworkAPI) {
 		this.osmAndContext = osmAndContext
 		this.sqliteApi = SQLiteAPIImpl()
-		this.networkAPI = NetworkAPIImpl()
+		this.networkAPI = networkAPI
 		this.xmlFactoryApi = xmlFactoryApi
 	}
 
