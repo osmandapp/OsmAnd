@@ -62,7 +62,8 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		this.locationViewCache = locationViewCache;
 		this.nightMode = nightMode;
 		itemView.setBackgroundColor(ColorUtilities.getCardAndListBackgroundColor(app, nightMode));
-		AndroidUtils.setBackground(itemView.findViewById(R.id.searchListItemLayout), UiUtilities.getSelectableDrawable(app));
+		AndroidUtils.setBackground(itemView.findViewById(R.id.searchListItemLayout),
+				UiUtilities.getSelectableDrawable(app));
 	}
 
 	public void bindItem(@NonNull QuickSearchListItem item, boolean useMapCenter, @NonNull Calendar calendar) {
@@ -71,7 +72,8 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 
 	}
 
-	public static void bindSearchResult(@NonNull View view, @NonNull QuickSearchListItem item, @NonNull Calendar calendar) {
+	public static void bindSearchResult(@NonNull View view, @NonNull QuickSearchListItem item,
+			@NonNull Calendar calendar) {
 		TextView title = view.findViewById(R.id.title);
 		TextView subtitle = view.findViewById(R.id.subtitle);
 		ImageView imageView = view.findViewById(R.id.imageView);
@@ -140,7 +142,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 				if (rs != null && rs.getInfo() != null) {
 					int colorOpen = R.color.text_color_positive;
 					int colorClosed = R.color.text_color_negative;
-					SpannableString openHours = MenuController.getSpannableOpeningHours(
+					SpannableString openHours = MenuController.getSpannableOpeningHoursShort(
 							rs.getInfo(),
 							ContextCompat.getColor(app, colorOpen),
 							ContextCompat.getColor(app, colorClosed));
@@ -150,7 +152,8 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 					TextView timeText = view.findViewById(R.id.time);
 					ImageView timeIcon = view.findViewById(R.id.time_icon);
 					timeText.setText(openHours);
-					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_opening_hour_16, colorId));
+					timeIcon.setImageDrawable(
+							app.getUIUtilities().getIcon(R.drawable.ic_action_opening_hour_16, colorId));
 				} else {
 					timeLayout.setVisibility(View.GONE);
 				}
@@ -161,7 +164,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public static void bindPOISearchResult(@NonNull View view, @NonNull QuickSearchListItem item,
-	                                       boolean nightMode, Calendar calendar) {
+			boolean nightMode, Calendar calendar) {
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		TextView title = view.findViewById(R.id.title);
 		TextView subtitle = view.findViewById(R.id.subtitle);
@@ -197,14 +200,16 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			if (amenity.isRouteTrack() || clickableWayHelper.isClickableWayAmenity(amenity)) {
 				typeName = amenity.getRouteActivityType();
 				hasRouteShield = QuickSearchListItem.getRouteShieldDrawable(app, amenity) != null;
-				address = String.format("%s • %s", AmenityExtensionsHelper.getAmenityMetricsFormatted(amenity, app), address);
+				address = String.format("%s • %s", AmenityExtensionsHelper.getAmenityMetricsFormatted(amenity, app),
+						address);
 			}
 		}
 
 		if (!Algorithms.isEmpty(altName) && !Algorithms.stringsEqual(name, altName)) {
 			name = String.format("%s (%s)", name, altName);
 			int textColor = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
-			SpannableString spannableName = UiUtilities.createColorSpannable(name, view.getContext().getColor(textColor), false, altName);
+			SpannableString spannableName = UiUtilities.createColorSpannable(name,
+					view.getContext().getColor(textColor), false, altName);
 			title.setText(spannableName);
 		} else {
 			if (item.getSpannableName() != null) {
@@ -224,7 +229,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 				if (openHourInfo != null) {
 					int colorOpen = R.color.text_color_positive;
 					int colorClosed = R.color.text_color_negative;
-					SpannableString openHours = MenuController.getSpannableOpeningHours(
+					SpannableString openHours = MenuController.getSpannableOpeningHoursShort(
 							openHourInfo,
 							ContextCompat.getColor(app, colorOpen),
 							ContextCompat.getColor(app, colorClosed));
@@ -240,7 +245,8 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 						TextView timeText = view.findViewById(R.id.time);
 						ImageView timeIcon = view.findViewById(R.id.time_icon);
 						timeText.setText(openHours);
-						timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_opening_hour_16, colorId));
+						timeIcon.setImageDrawable(
+								app.getUIUtilities().getIcon(R.drawable.ic_action_opening_hour_16, colorId));
 					}
 				} else {
 					timeLayout.setVisibility(View.GONE);
@@ -314,7 +320,8 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 				imageContainer.setPadding(0, topPadding, 0, 0);
 			}
 			if (!hasRouteShield) {
-				int colorId = nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
+				int colorId = nightMode ? R.color.activity_background_color_dark
+						: R.color.activity_background_color_light;
 				int color = ContextCompat.getColor(app, colorId);
 				imageContainer.setBackgroundColor(color);
 			} else {
@@ -334,4 +341,3 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		}
 	}
 }
-
