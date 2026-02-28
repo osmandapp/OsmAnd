@@ -1,7 +1,7 @@
 package net.osmand.search;
 
 import static net.osmand.data.Amenity.ROUTE_ID;
-import static net.osmand.search.core.ObjectType.ONLINE_SEARCH;
+import static net.osmand.search.core.ObjectType.*;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Collator;
@@ -18,21 +18,13 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.search.core.CustomSearchPoiFilter;
-import net.osmand.search.core.ObjectType;
-import net.osmand.search.core.SearchCoreAPI;
-import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.*;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityByNameAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityByTypeAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchStreetByCityAPI;
-import net.osmand.search.core.SearchExportSettings;
-import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
-import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchSettings;
-import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -159,6 +151,7 @@ public class SearchUICore {
 				if (removeDuplicates) {
 					filterSearchDuplicateResults();
 				}
+				filterByGroups();
 			} else {
 				if (!removeDuplicates) {
 					this.searchResults.addAll(sr);
@@ -264,6 +257,53 @@ public class SearchUICore {
 			}
 		}
 
+		public void filterByGroups() {
+			List<SearchResultGroup> groups = new ArrayList<>();
+			SearchResultGroup lastGroup = null;
+			for (SearchResult s : searchResults) {
+				if (lastGroup == null) {
+					lastGroup = new SearchResultGroup(s, phrase);
+					groups.add(lastGroup);
+					continue;
+				}
+				if (lastGroup.isSameGroup(s)) {
+					lastGroup.addSearchResult(s);
+				} else {
+					lastGroup = new SearchResultGroup(s, phrase);
+					groups.add(lastGroup);
+				}
+			}
+			//System.out.println(groups);
+			SearchResultGroup cur = null;
+			/*int i = 0;
+			int mixed = 0;
+			while (i < groups.size() - 1) {
+				if (cur == null) {
+					mixed = i;
+					cur = groups.get(i);
+				}
+				SearchResultGroup next = groups.get(i + 1);
+				if (cur.getSize() > 5) {
+					int afterIndex = mixed == 0 ? 10 : 0;
+					if (!cur.mixAnotherGroup(next, afterIndex)) {
+						cur = null;
+						i = mixed;
+					}
+				} else {
+					cur = null;
+				}
+				i++;
+			}*/
+			for (SearchResultGroup gr : groups) {
+				gr.cutGroupResult();
+			}
+			//System.out.println(groups);
+			this.searchResults.clear();
+			for (SearchResultGroup gr : groups) {
+				this.searchResults.addAll(gr.getSearchResults());
+			}
+		}
+		
 		public void filterSearchDuplicateResults() {
 			if (debugMode) {
 				LOG.info("Filter duplicate results <" + phrase + "> Results=" + searchResults.size());

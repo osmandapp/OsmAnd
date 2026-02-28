@@ -2,6 +2,7 @@ package net.osmand.search;
 
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.SearchUICore.SearchResultCollection;
@@ -203,8 +204,13 @@ public class SearchUICoreTest {
 				// String present = result.toString();
 				String present = res == null ? ("#MISSING " + (i + 1)) : formatResult(simpleTest, res, phrase);
 				if (!Algorithms.stringsEqual(expected, present)) {
+					double expectedNDCG = calculateDCGMetrics(result);
+					double currentNDCG= calculateDCGMetrics(searchResults, phrase.getLastTokenLocation(), result.size());
+					double diff = currentNDCG - expectedNDCG;
 					System.out.printf("Phrase: %s%n", phrase);
 					System.out.printf("Mismatch for '%s' != '%s'. Result: %n", expected, present);
+					System.out.printf("Order metrics (by dist): %s%% - %s%% = %s%.2f%%", expectedNDCG, currentNDCG, diff > 0 ? "+" : "", diff);
+					System.out.println("\n");
 					System.out.println("CURRENT RESULTS: ");
 					for (SearchResult r : searchResults) {
 						System.out.printf("\t\"%s\",%n", formatResult(false, r, phrase));
@@ -349,5 +355,80 @@ public class SearchUICoreTest {
 			}
 			return val;
 		}
+	}
+
+	private double getMaxDist(List<Double> distances) {
+		double maxDist = 0.0;
+		for (Double dist : distances) {
+			if (dist > maxDist) {
+				maxDist = dist;
+			}
+		}
+		return maxDist;
+	}
+
+	private double calculateDCGMetrics(List<String> expectedList) {
+		List<Double> distances = new ArrayList<>();
+		for (String line : expectedList) {
+			double dist = parseDistance(line);
+			distances.add(dist);
+		}
+		double maxDist = getMaxDist(distances);
+		double expectedDCG = computeDCG(distances, maxDist);
+		Collections.sort(distances);
+		double idealDCG = computeDCG(distances, maxDist);
+		return getNDCG(expectedDCG, idealDCG);
+	}
+
+	private double calculateDCGMetrics(List<SearchResult> searchResults, LatLon originalLocation, int size) {
+		List<Double> distances = new ArrayList<>();
+		for (int i = 0; i < searchResults.size() && i < size; i++) {
+			SearchResult r = searchResults.get(i);
+			if (r.location == null) {
+				distances.add(0.0);
+				continue;
+			}
+			double dist = MapUtils.getDistance(r.location, originalLocation); // in meters
+			dist /= 1000;
+			distances.add(dist);
+		}
+		double maxDist = getMaxDist(distances);
+		double expectedDCG = computeDCG(distances, maxDist);		
+		Collections.sort(distances);		
+		double idealDCG = computeDCG(distances, maxDist);
+		return getNDCG(expectedDCG, idealDCG);
+	}
+
+	private double computeDCG(List<Double> distances, double maxDist) {
+		double dcg = 0.0;
+		for (int i = 0; i < distances.size(); i++) {
+			double dist = distances.get(i);
+			double relevance = Math.max(0, maxDist - dist);
+			int rank = i + 1;
+			dcg += relevance / (Math.log(rank + 1) / Math.log(2));
+		}
+		return dcg;
+	}
+
+	private double parseDistance(String line) {
+		try {
+			int openBracketIndex = line.indexOf("[[");
+			if (openBracketIndex == -1) return 0.0;
+			String content = line.substring(openBracketIndex + 2).replace("]]", "").trim();
+			String[] parts = content.split(",");
+			String distPart = parts[parts.length - 1].trim().replace("km", "").trim();
+			return Double.parseDouble(distPart);
+		} catch (Exception e) {
+			return 0.0;
+		}
+	}
+	
+	private double getNDCG(double actualDCG, double idealDCG) {
+		if (idealDCG <= 0) {
+			return 0;
+		}
+		double nDCG = actualDCG / idealDCG;
+		double n = Math.min(1.0, nDCG) * 100.0;
+		return Math.round(n * 100.0) / 100.0;
 	}
 }
