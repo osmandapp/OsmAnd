@@ -3318,9 +3318,9 @@
     <string name="poi_counselling_no">Conseils : non</string>
     <string name="poi_office_physician">Cabinet de médecin</string>
     <string name="poi_office_therapist">Bureau de thérapeute</string>
-    <string name="poi_office_podologist">Cabinet du podologue</string>
-    <string name="poi_office_healer">Bureau du guérisseur</string>
-    <string name="poi_office_psychologist">Bureau du psychologue</string>
+    <string name="poi_office_podologist">Cabinet de podologue</string>
+    <string name="poi_office_healer">Bureau de guérisseur</string>
+    <string name="poi_office_psychologist">Bureau de psychologue</string>
     <string name="poi_office_nursing_service">Service de soins infirmiers</string>
     <string name="poi_office_midwife">Cabinet de sage-femme</string>
     <string name="poi_fire_hydrant_diameter">Diamètre de la bouche d\'incendie</string>
@@ -3338,7 +3338,7 @@
     <string name="poi_cuisine_savory_pancakes">Crêpes salées</string>
     <string name="poi_animal_keeping_type_open_stable">Type : écurie ouverte</string>
     <string name="poi_tower_construction_lattice">Construction : treillis</string>
-    <string name="poi_energy_supplier">Bureau des fournisseurs d\'énergie</string>
+    <string name="poi_energy_supplier">Bureau d\'un fournisseur d\'énergie</string>
     <string name="poi_resort_kids_camp">Camp pour enfants</string>
     <string name="poi_zoo_petting_zoo">Zoo pour enfants</string>
     <string name="poi_zoo_wildlife_park">Parc animalier</string>
@@ -4823,7 +4823,7 @@
     <string name="poi_us_maps_recreation_area_activity_group_camping">Camping de groupe</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_trail_riding">Randonnée en VTT</string>
     <string name="poi_us_maps_recreation_area_open_status_open_2">Statut de l\'accès à la zone de loisirs (2) : ouvert</string>
-    <string name="poi_us_maps_recreation_area_facility_cabin">Cabine</string>
+    <string name="poi_us_maps_recreation_area_facility_cabin">Cabane</string>
     <string name="poi_property_management">Bureau de gestion immobilière</string>
     <string name="poi_us_maps_recreation_area_activity_hang_gliding">Deltaplane</string>
     <string name="poi_us_maps_recreation_area_activity_beachcombing">Pêche à pied</string>
@@ -5027,7 +5027,7 @@
     <string name="poi_bulgarian_orthodox_church">Église orthodoxe bulgare</string>
     <string name="poi_african_methodist_episcopal_church">Église épiscopale méthodiste africaine</string>
     <string name="poi_construction_company">Entreprise de construction</string>
-    <string name="poi_union">Bureau du syndicat</string>
+    <string name="poi_union">Bureau de syndicat</string>
     <string name="poi_courier">Bureau de messagerie</string>
     <string name="poi_surveyor">Bureau d\'arpentage</string>
     <string name="poi_office_university">Bureau de l\'université</string>
@@ -5165,5 +5165,5 @@
     <string name="poi_sample_collection_blood">Sang</string>
     <string name="poi_yoga">Yoga</string>
     <string name="poi_memorial_type">Type de mémorial</string>
-    <string name="poi_covered_booth_filter">Stand</string>
+    <string name="poi_covered_booth_filter">Cabine</string>
 </resources>
