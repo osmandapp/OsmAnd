@@ -437,7 +437,7 @@ public class BinaryMapPoiReaderAdapter {
 					charsList.add(0);
 					listOffsets.add(new TIntArrayList());
 				}
-				map.readIndexedStringTable(instance, queries, "", listOffsets, charsList);
+				map.readIndexedStringTable(instance, queries, "", listOffsets, charsList, ":poi");
 				codedIS.popLimit(oldLimit);
 				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
 						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_INDEX,
