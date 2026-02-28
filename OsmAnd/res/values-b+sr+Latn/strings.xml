@@ -6029,4 +6029,6 @@
     <string name="trip_recording_avg_speed_widget_description">Prikazuje prosečnu brzinu trenutnog putovanja ili prosečnu brzinu tokom poslednjeg uspona ili spusta.</string>
     <string name="trip_recording_moving_time_widget_description">Prikazuje trenutno zabeleženo vreme kretanja ili vreme za poslednji uspon i spust.</string>
     <string name="trip_recording_moving_time">Vreme kretanja</string>
+    <string name="share_favorite">Podeli omiljeno</string>
+    <string name="copy_list">Kopiraj listu</string>
 </resources>
