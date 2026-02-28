@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.common.graph.ImmutableValueGraph;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.common.LanguageCode;
@@ -15,6 +17,9 @@ import de.KnollFrank.lib.settingssearch.common.graph.Tree;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PreferencesDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PrepackagedPreferencesDatabase;
 import de.KnollFrank.lib.settingssearch.db.preference.db.source.AssetDatabaseSourceProvider;
+import de.KnollFrank.lib.settingssearch.db.preference.db.source.DatabaseSourceProvider;
+import de.KnollFrank.lib.settingssearch.db.preference.db.source.DatabaseSourceProviders;
+import de.KnollFrank.lib.settingssearch.db.preference.db.source.UrlDatabaseSourceProvider;
 import de.KnollFrank.lib.settingssearch.db.preference.db.transformer.SearchablePreferenceScreenTreeTransformer;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreen;
@@ -37,7 +42,7 @@ public class PreferencesDatabaseConfigFactory {
 				databaseAssetFile.getName(),
 				Optional.of(
 						new PrepackagedPreferencesDatabase<>(
-								new AssetDatabaseSourceProvider(databaseAssetFile, assetManager),
+								createDatabaseSourceProvider(databaseAssetFile, assetManager),
 								new SearchablePreferenceScreenTreeTransformer<>() {
 
 									@Override
@@ -57,5 +62,25 @@ public class PreferencesDatabaseConfigFactory {
 									}
 								})),
 				PreferencesDatabaseConfig.JournalMode.AUTOMATIC);
+	}
+
+	private static DatabaseSourceProvider createDatabaseSourceProvider(final File databaseAssetFile,
+																	   final AssetManager assetManager) {
+		return DatabaseSourceProviders.firstAvailable(
+				new AssetDatabaseSourceProvider(databaseAssetFile, assetManager),
+				new UrlDatabaseSourceProvider(
+						// FK-TODO: make URL configurable
+						getUrl(
+								String.format(
+										"http://192.168.178.41/%s",
+										databaseAssetFile.getName()))));
+	}
+
+	private static URL getUrl(final String url) {
+		try {
+			return new URL(url);
+		} catch (final MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
