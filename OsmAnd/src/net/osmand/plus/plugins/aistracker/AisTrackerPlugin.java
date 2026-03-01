@@ -57,6 +57,9 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	public static final String AIS_SHIP_LOST_TIMEOUT_ID = "ais_ship_lost_timeout"; // see xml/ais_settings.xml
 	public static final String AIS_CPA_WARNING_TIME_ID = "ais_cpa_warning_time"; // see xml/ais_settings.xml
 	public static final String AIS_CPA_WARNING_DISTANCE_ID = "ais_cpa_warning_distance"; // see xml/ais_settings.xml
+	public static final String AIS_OWN_MMSI_ID = "ais_own_mmsi"; // see xml/ais_settings.xml
+    public static final String AIS_DISPLAY_OWN_POSITION_ID = "ais_display_own_position"; // see xml/ais_settings.xml
+    public static final String AIS_RECEIVE_IN_BACKGROUND_ID = "ais_receive_in_background"; // see xml/ais_settings.xml
 	public final CommonPreference<Integer> AIS_NMEA_PROTOCOL;
 	public static final int AIS_NMEA_PROTOCOL_UDP = 0;
 	public static final int AIS_NMEA_PROTOCOL_TCP = 1;
@@ -76,13 +79,19 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	public static final Integer AIS_CPA_DEFAULT_WARNING_TIME = 0;
 	public final CommonPreference<Float> AIS_CPA_WARNING_DISTANCE; // in miles
 	public static final Float AIS_CPA_WARNING_DEFAULT_DISTANCE = 1.0f;
+	public final CommonPreference<Integer> AIS_OWN_MMSI;
+	public static final Integer AIS_DEFAULT_OWN_MMSI = 0;
+	public final CommonPreference<Boolean> AIS_DISPLAY_OWN_POSITION;
+	public static final Boolean AIS_DISPLAY_OWN_POSITION_DEFAULT = false;
+    public final CommonPreference<Boolean> AIS_RECEIVE_IN_BACKGROUND;
+    public static final Boolean AIS_RECEIVE_IN_BACKGROUND_DEFAULT = true;
 
 	/* timestamp of last AIS message received for all instances: */
 	private long lastMessageReceived = 0;
 	private Location fakeOwnPosition = null; // used for test purposes to fake own position
 
-	private final StateChangedListener<String> addrPrefListener = change -> restartNetworkListener(true);
-	private final StateChangedListener<Integer> protocolPortPrefListener = change -> restartNetworkListener(true);
+	private final StateChangedListener<String> addrPrefListener = change -> restartNetworkListener();
+	private final StateChangedListener<Integer> protocolPortPrefListener = change -> restartNetworkListener();
 
 	public class AisDataManager implements AisDataListener {
 
@@ -197,6 +206,9 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		AIS_SHIP_LOST_TIMEOUT = registerIntPreference(AIS_SHIP_LOST_TIMEOUT_ID, AIS_SHIP_LOST_DEFAULT_TIMEOUT);
 		AIS_CPA_WARNING_TIME = registerIntPreference(AIS_CPA_WARNING_TIME_ID, AIS_CPA_DEFAULT_WARNING_TIME);
 		AIS_CPA_WARNING_DISTANCE = registerFloatPreference(AIS_CPA_WARNING_DISTANCE_ID, AIS_CPA_WARNING_DEFAULT_DISTANCE);
+		AIS_OWN_MMSI = registerIntPreference(AIS_OWN_MMSI_ID, AIS_DEFAULT_OWN_MMSI);
+		AIS_DISPLAY_OWN_POSITION = registerBooleanPreference(AIS_DISPLAY_OWN_POSITION_ID, AIS_DISPLAY_OWN_POSITION_DEFAULT);
+        AIS_RECEIVE_IN_BACKGROUND = registerBooleanPreference(AIS_RECEIVE_IN_BACKGROUND_ID, AIS_RECEIVE_IN_BACKGROUND_DEFAULT);
 		AIS_NMEA_IP_ADDRESS.addListener(addrPrefListener);
 		AIS_NMEA_PROTOCOL.addListener(protocolPortPrefListener);
 		AIS_NMEA_TCP_PORT.addListener(protocolPortPrefListener);
@@ -315,7 +327,9 @@ public class AisTrackerPlugin extends OsmandPlugin {
 
 	@Override
 	public void mapActivityPause(@NonNull MapActivity activity) {
-		stopAisListener();
+        if (!AIS_RECEIVE_IN_BACKGROUND.get()) {
+            stopAisListener();
+        }
 	}
 
 	@Override
@@ -323,7 +337,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (isActive()) {
 			if (layer == null) {
-				Log.d("AisTrackerPlugin", "call registerLayers()");
+				Log.d("AisTrackerPlugin", "call updateLayers()");
 				registerLayers(context, mapActivity);
 			}
 			if (!mapView.getLayers().contains(layer)) {
@@ -410,8 +424,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		if (aisListener != null) {
 			if (aisListener.checkTcpSocket()) {
 				if (((System.currentTimeMillis() - getAndUpdateLastMessageReceived()) / 1000) > 20) {
-					Log.d("AisTrackerLayer", "checkTcpConnection(): restart TCP socket");
-					restartNetworkListener(false);
+					Log.d("AisTrackerLayer", "restartStalledTcpConnection(): restart TCP socket");
+					restartNetworkListener();
 					return true;
 				}
 			}
@@ -419,11 +433,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		return false;
 	}
 
-	public void restartNetworkListener(boolean clearData) {
+	public void restartNetworkListener() {
 		stopAisListener();
-		if (clearData) {
-			aisDataManager.cleanupResources();
-		}
 		startAisNetworkListener();
 	}
 
