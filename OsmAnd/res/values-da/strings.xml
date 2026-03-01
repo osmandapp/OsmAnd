@@ -6090,4 +6090,6 @@
     <string name="trip_recording_avg_speed_widget_description">Viser den gennemsnitlige hastighed for den aktuelle tur eller den gennemsnitlige hastighed under den sidste opadgående eller nedadgående sektion.</string>
     <string name="trip_recording_moving_time_widget_description">Viser den aktuelt registrerede bevægelsestid eller tiden for den sidste op- og nedkørsel.</string>
     <string name="trip_recording_moving_time">Tid i bevægelse</string>
+    <string name="share_favorite">Del favorit</string>
+    <string name="copy_list">Kopiér liste</string>
 </resources>

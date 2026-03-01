@@ -3760,9 +3760,9 @@
     <string name="poi_video_telephone">Video</string>
     <string name="poi_sms_yes">Ja</string>
     <string name="poi_sms_no">Nej</string>
-    <string name="poi_covered_booth">Stand</string>
-    <string name="poi_booth">Stand type</string>
-    <string name="poi_video_yes">Ja</string>
+    <string name="poi_covered_booth">Ja</string>
+    <string name="poi_booth">Standtype</string>
+    <string name="poi_video_yes">Ja;Video</string>
     <string name="poi_video_no">Nej</string>
     <string name="poi_internet_access_fee_customers">Internetadgang: kunder</string>
     <string name="poi_traffic_signals_sound_locate">Kun når det er tilladt at gå</string>
@@ -4307,4 +4307,5 @@
     <string name="poi_denomination_evangelical_lutheran">Evangelisk-luthersk</string>
     <string name="poi_denomination_anabaptist">Anabaptist</string>
     <string name="poi_memorial_type">Mindesmærketype</string>
+    <string name="poi_covered_booth_filter">Stand</string>
 </resources>

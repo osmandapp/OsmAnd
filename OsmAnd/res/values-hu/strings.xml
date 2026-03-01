@@ -5950,4 +5950,6 @@
     <string name="trip_recording_avg_speed_widget_description">Megjeleníti a jelenlegi túra átlagos sebességét, vagy az utolsó emelkedő vagy lejtő szakaszának átlagos sebességét.</string>
     <string name="trip_recording_moving_time_widget_description">Megjeleníti a jelenleg rögzített mozgással töltött időt, vagy az utolsó emelkedő és lejtő idejét.</string>
     <string name="trip_recording_moving_time">Mozgással töltött idő</string>
+    <string name="share_favorite">Kedvenc megosztása</string>
+    <string name="copy_list">Lista másolása</string>
 </resources>
