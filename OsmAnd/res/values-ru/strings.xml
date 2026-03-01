@@ -667,7 +667,7 @@
     <string name="poi_context_menu_modify">Править POI</string>
     <string name="poi_context_menu_delete">Удалить POI</string>
     <string name="rotate_map_compass_opt">По направлению компаса</string>
-    <string name="rotate_map_bearing_opt">по направлению движения</string>
+    <string name="rotate_map_bearing_opt">По направлению движения</string>
     <string name="rotate_map_north_opt">Север всегда сверху</string>
     <string name="rotate_map_to_descr">Выравнивание карты:</string>
     <string name="rotate_map_to">Ориентация карты</string>
@@ -736,7 +736,7 @@
     <string name="search_near_map">Поиск вблизи текущего центра карты</string>
     <string name="search_nearby">Поиск рядом</string>
     <string name="map_orientation_default">Автоматически</string>
-    <string name="map_orientation_portrait">Портрет</string>
+    <string name="map_orientation_portrait">Книжная</string>
     <string name="map_orientation_landscape">Альбомная</string>
     <string name="map_screen_orientation">Ориентация экрана</string>
     <string name="map_screen_orientation_descr">Выберите ориентацию экрана.</string>
@@ -5751,8 +5751,8 @@
     <string name="map_orientations">Ориентации карты</string>
     <string name="write_location_provider_description">Сохраненять поставщика местоположения для каждой точки трека во время записи</string>
     <string name="write_location_provider">Запись поставщика местоположения</string>
-    <string name="map_orientation_portrait_inverted">Портрет (перевернутый)</string>
-    <string name="map_orientation_landscape_inverted">Пейзаж (перевернутый)</string>
+    <string name="map_orientation_portrait_inverted">Книжная (перевернутая)</string>
+    <string name="map_orientation_landscape_inverted">Альбомная (перевернутая)</string>
     <string name="reverse_mode_calculate_route">Рассчитать маршрут</string>
     <string name="reverse_mode_calculate_route_desc">Рассчитать новый, оптимизированный маршрут до стартовой точки.</string>
     <string name="reverse_mode_original_track">Оригинальный трек</string>
@@ -5962,4 +5962,5 @@
     <string name="add_palette">Добавить палитру</string>
     <string name="delete_palette">Удалить палитру</string>
     <string name="delete_colors_palette_dialog_summary">Вы уверены, что хотите удалить палитру %1$s?</string>
+    <string name="copy_list">Копировать список</string>
 </resources>
