@@ -195,8 +195,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private boolean runSearchFirstTime;
 	private boolean phraseDefined;
 	private boolean addressSearch;
-	private boolean citiesLoaded;
-	private List<SearchResult> loadCitiesResult;
+	private List<SearchResult> nearestCities;
 	private LatLon storedOriginalLocation;
 
 	private QuickSearchType searchType = QuickSearchType.REGULAR;
@@ -487,7 +486,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				hideKeyboard();
 				addressSearch = position == 2;
 				updateClearButtonAndHint();
-				if (addressSearch && !citiesLoaded) {
+				if (addressSearch && !isCitiesLoaded()) {
 					reloadCities();
 				} else {
 					restoreSearch();
@@ -1127,7 +1126,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 			case ADDRESS:
 				addressSearchFragment = (QuickSearchAddressListFragment) searchListFragment;
-				if (addressSearch && !citiesLoaded) {
+				if (addressSearch && !isCitiesLoaded()) {
 					reloadCities();
 				}
 				break;
@@ -1300,15 +1299,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			LOG.info("UI >> Start last city searching (within nearests)");
 		}
 		SearchResult lastCity = null;
-		if (res != null) {
-			if(!res.getCurrentSearchResults().isEmpty()) {
-				loadCitiesResult = res.getCurrentSearchResults();
-			}
-			citiesLoaded = !res.getCurrentSearchResults().isEmpty();
+		List<SearchResult> results = res != null ? res.getCurrentSearchResults() : null;
+		if (!Algorithms.isEmpty(results)) {
+			nearestCities = results;
+
 			long lastCityId = settings.getLastSearchedCity();
-			for (SearchResult sr : loadCitiesResult) {
-				if (sr.objectType == ObjectType.CITY && ((City) sr.object).getId() == lastCityId) {
-					lastCity = sr;
+			for (SearchResult result : nearestCities) {
+				if (result.objectType == CITY && ((City) result.object).getId() == lastCityId) {
+					lastCity = result;
 					break;
 				}
 			}
@@ -1396,10 +1394,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			QuickSearchCoordinatesFragment.showInstance(QuickSearchDialogFragment.this, latLon.getLatitude(), latLon.getLongitude());
 		}));
 
-		if (!Algorithms.isEmpty(loadCitiesResult)) {
+		if (!Algorithms.isEmpty(nearestCities)) {
 			rows.add(new QuickSearchHeaderListItem(app, getString(R.string.nearest_cities), true));
 			int limit = 15;
-			for (SearchResult sr : loadCitiesResult) {
+			for (SearchResult sr : nearestCities) {
 				if (limit > 0) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
@@ -1409,6 +1407,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (addressSearchFragment != null) {
 			addressSearchFragment.updateListAdapter(rows, false);
 		}
+	}
+
+	public boolean isCitiesLoaded() {
+		return !Algorithms.isEmpty(nearestCities);
 	}
 
 	public void reloadHistory() {
