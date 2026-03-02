@@ -196,6 +196,7 @@
 	<string name="poi_sample_collection_filter">Sample collection</string>
 	<string name="poi_memorial_type">Memorial type</string>
 	<string name="poi_covered_booth_filter">Booth</string>
+	<string name="poi_rapids_filter">Rapids grade</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -5759,5 +5760,14 @@
 
 	<string name="poi_hazard_yes">Hazard</string>
 	<string name="poi_yoga">Yoga</string>
+
+	<string name="poi_rapids_grade_0">0 (flatwater)</string>
+	<string name="poi_rapids_grade_1">1 (easy)</string>
+	<string name="poi_rapids_grade_2">2 (novice)</string>
+	<string name="poi_rapids_grade_3">3 (intermediate)</string>
+	<string name="poi_rapids_grade_4">4 (advanced)</string>
+	<string name="poi_rapids_grade_5">5 (expert)</string>
+	<string name="poi_rapids_grade_6">6 (extreme)</string>
+	<string name="poi_rapids_grade_x">X (not runnable)</string>
 
 </resources>
