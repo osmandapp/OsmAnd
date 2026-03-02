@@ -162,7 +162,51 @@ public class RenderedObjectMenuController extends MenuController {
 			typeStr = searchObjectNameByIconRes();
 		}
 
+		if (Algorithms.isEmpty(typeStr) && renderedObject != null && mapPoiTypes != null) {
+			typeStr = searchObjectNameByRawTags(mapPoiTypes, renderedObject.getTags());
+		}
+
 		return typeStr != null ? typeStr : super.getTypeStr();
+	}
+
+	@Nullable
+	private static String searchObjectNameByRawTags(@NonNull MapPoiTypes poiTypes,
+	                                                @NonNull Map<String, String> rawTags) {
+		for (Map.Entry<String, String> entry : rawTags.entrySet()) {
+			String key = entry.getKey();
+			String value = entry.getValue();
+
+			// Skip common metadata and name tags that shouldn't represent the object type
+			if (key.equals("name") || key.startsWith("name:") || key.equals("ele")
+					|| key.equals("height") || key.equals("min_height")
+					|| key.equals("levels") || key.equals("layer")
+					|| key.equals("type") || key.equals("osmwiki")) {
+				continue;
+			}
+
+			String translation = null;
+
+			// Try to translate the key-value pair first
+			if (!Algorithms.isEmpty(value) && !value.equals("yes")) {
+				translation = poiTypes.getPoiTranslation(key + "_" + value);
+
+				// Ignore auto-generated capitalized fallbacks to prioritize translating just the key
+				String autoFallback = Algorithms.capitalizeFirstLetter((key + "_" + value).replace('_', ' '));
+				if (translation != null && translation.equalsIgnoreCase(autoFallback)) {
+					translation = null;
+				}
+			}
+
+			// Fallback to translating just the key (e.g., "building")
+			if (Algorithms.isEmpty(translation)) {
+				translation = poiTypes.getPoiTranslation(key);
+			}
+
+			if (!Algorithms.isEmpty(translation)) {
+				return translation;
+			}
+		}
+		return null;
 	}
 
 	@NonNull
