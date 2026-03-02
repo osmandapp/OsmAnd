@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces.favorites.dialogs;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static net.osmand.plus.settings.enums.FavoriteListSortMode.*;
+import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 import static net.osmand.plus.utils.UpdateLocationUtils.getFormattedDistance;
 import static net.osmand.plus.utils.UpdateLocationUtils.updateDirectionDrawable;
 
@@ -24,7 +25,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.FavoriteAdapterListener;
 import net.osmand.plus.settings.enums.FavoriteListSortMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationInfo;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
@@ -32,30 +35,31 @@ import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 
 	private final OsmandApplication app;
-
 	private final boolean nightMode;
+	private final UpdateLocationViewCache locationViewCache;
 
 	private final TextView title;
 	private final TextView description;
 	private final TextView prefixDescription;
+	private final TextView suffixDescription;
 	private final ImageView imageView;
 	private final CompoundButton checkbox;
 	protected final View checkboxContainer;
 	private final View menuButton;
 	private final View divider;
 	private final ImageView directionIcon;
+	private final LinearLayout infoContainer;
 
-	public FavoriteViewHolder(@NonNull View itemView, boolean nightMode) {
+	public FavoriteViewHolder(@NonNull View itemView, UpdateLocationViewCache locationViewCache, boolean nightMode) {
 		super(itemView);
 		this.app = (OsmandApplication) itemView.getContext().getApplicationContext();
 		this.nightMode = nightMode;
+		this.locationViewCache = locationViewCache;
 
 		title = itemView.findViewById(R.id.title);
 		description = itemView.findViewById(R.id.description);
@@ -66,6 +70,13 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 		imageView = itemView.findViewById(R.id.icon);
 		divider = itemView.findViewById(R.id.divider);
 		prefixDescription = itemView.findViewById(R.id.prefix_description);
+		suffixDescription = itemView.findViewById(R.id.suffix_description);
+		infoContainer = itemView.findViewById(R.id.info_container);
+		LinearLayout contentContainer = itemView.findViewById(R.id.content_container);
+
+		LinearLayout.LayoutParams contentParams = (LinearLayout.LayoutParams) contentContainer.getLayoutParams();
+		contentParams.setMarginStart(dpToPx(app, 10));
+		contentContainer.setLayoutParams(contentParams);
 
 		setupSelectionMode();
 	}
@@ -78,7 +89,7 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindView(@NonNull FavoriteListSortMode sortMode, @NonNull FavouritePoint favouritePoint,
-	                     boolean showDivider, boolean selectionMode, UpdateLocationViewCache cache, FavoriteAdapterListener listener) {
+	                     boolean showDivider, boolean selectionMode, FavoriteAdapterListener listener) {
 		itemView.setOnLongClickListener(v -> {
 			listener.onItemLongClick(favouritePoint);
 			return true;
@@ -99,37 +110,25 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 		imageView.setLayoutParams(lp);
 		imageView.setVisibility(VISIBLE);
 
-		SpannableStringBuilder spannable = new SpannableStringBuilder();
+		bindLocation(sortMode, favouritePoint);
 
-		LatLon toLoc = new LatLon(favouritePoint.getLatitude(), favouritePoint.getLongitude());
-		LatLon specialFrom = cache == null ? null : cache.specialFrom;
-		UpdateLocationInfo info = new UpdateLocationInfo(app, specialFrom, toLoc);
-		updateDirectionDrawable(app, directionIcon, info, cache);
-		CharSequence distance = getFormattedDistance(app, info, cache);
-		spannable.append(distance);
-
-		if (favouritePoint.isAddressSpecified()) {
-			spannable.append(" • ");
-			spannable.append(prepareAddress(favouritePoint.getAddress()));
-		}
-		if (sortMode == DATE_ASCENDING || sortMode == DATE_DESCENDING) {
-			StringBuilder dateString = new StringBuilder();
-			long creationTime = favouritePoint.getTimestamp();
-			DateFormat format = new SimpleDateFormat("d.MM.yyyy", Locale.getDefault());
-			dateString.append(format.format(new Date(creationTime)));
-			dateString.append(" | ");
-			prefixDescription.setText(dateString);
-			prefixDescription.setVisibility(VISIBLE);
+		boolean showSuffix = sortMode == NAME_ASCENDING || sortMode == NAME_DESCENDING
+				|| sortMode == NEAREST || sortMode == FARTHEST;
+		if (showSuffix) {
+			String category = " | " + AndroidUtils.truncateWithEllipsis(favouritePoint.getCategoryDisplayName(app), 12);
+			if (!Algorithms.isEmpty(category)) {
+				suffixDescription.setText(category);
+				suffixDescription.setVisibility(VISIBLE);
+			} else {
+				suffixDescription.setVisibility(GONE);
+			}
 		} else {
-			spannable.append(" | ");
-			long creationTime = favouritePoint.getTimestamp();
-			DateFormat format = new SimpleDateFormat("d.MM.yyyy", Locale.getDefault());
-			spannable.append(format.format(new Date(creationTime)));
-			prefixDescription.setVisibility(GONE);
+			suffixDescription.setVisibility(GONE);
 		}
-		description.setText(spannable);
+
 		prefixDescription.setMaxLines(1);
 		description.setMaxLines(1);
+		suffixDescription.setMaxLines(1);
 		directionIcon.setVisibility(VISIBLE);
 
 		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.checkbox_container), selectionMode);
@@ -163,6 +162,10 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 		AndroidUiHelper.updateVisibility(checkboxContainer, selectionMode);
 		AndroidUiHelper.updateVisibility(menuButton, !selectionMode);
 
+		LinearLayout.LayoutParams infoParams = (LinearLayout.LayoutParams) infoContainer.getLayoutParams();
+		infoParams.setMarginEnd(dpToPx(app, selectionMode ? 16 : 0));
+		infoContainer.setLayoutParams(infoParams);
+
 		checkbox.setChecked(listener.isItemSelected(favouritePoint));
 	}
 
@@ -170,5 +173,32 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 		if (selectionMode) {
 			checkbox.setChecked(listener.isItemSelected(favouritePoint));
 		}
+	}
+
+	public void bindLocation(@NonNull FavoriteListSortMode sortMode, @NonNull FavouritePoint favouritePoint) {
+		SpannableStringBuilder spannable = new SpannableStringBuilder();
+
+		LatLon toLoc = new LatLon(favouritePoint.getLatitude(), favouritePoint.getLongitude());
+		UpdateLocationInfo info = new UpdateLocationInfo(app, null, toLoc);
+		CharSequence distance = getFormattedDistance(app, info, locationViewCache);
+		updateDirectionDrawable(app, directionIcon, info, locationViewCache);
+		spannable.append(distance);
+
+		if (favouritePoint.isAddressSpecified()) {
+			spannable.append(" • ");
+			spannable.append(prepareAddress(favouritePoint.getAddress()));
+		}
+		if (sortMode == DATE_ASCENDING || sortMode == DATE_DESCENDING) {
+			StringBuilder dateString = new StringBuilder();
+			long creationTime = favouritePoint.getTimestamp();
+			DateFormat format = OsmAndFormatter.getDateFormat(app);
+			dateString.append(format.format(new Date(creationTime)));
+			dateString.append(" | ");
+			prefixDescription.setText(dateString);
+			prefixDescription.setVisibility(VISIBLE);
+		} else {
+			prefixDescription.setVisibility(GONE);
+		}
+		description.setText(spannable);
 	}
 }

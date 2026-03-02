@@ -26,10 +26,12 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.mapcontextmenu.editors.controller.EditorColorController;
 import net.osmand.plus.palette.contract.IExternalPaletteListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
@@ -38,7 +40,7 @@ import net.osmand.shared.palette.domain.PaletteItem;
 import java.util.List;
 import java.util.Locale;
 
-public class Buildings3DColorFragment extends ConfigureMapOptionFragment implements BaseCard.CardListener {
+public class Buildings3DColorFragment extends ConfigureMapOptionFragment implements BaseCard.CardListener, DayNightHelper.MapThemeProvider {
 	public static final String DAY_COLOR = "day_color";
 	public static final String NIGHT_COLOR = "night_color";
 	public static final String COLOR_TYPE = "color_type";
@@ -92,7 +94,7 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 
 	@Override
 	public void onDestroy() {
-		if(initialColorType != colorType) {
+		if (initialColorType != colorType) {
 			srtmPlugin.BUILDINGS_3D_COLOR_STYLE.set(initialColorType.getId());
 		}
 		srtmPlugin.apply3DBuildingsColorStyle(Buildings3DColorType.Companion.getById(srtmPlugin.BUILDINGS_3D_COLOR_STYLE.get()));
@@ -292,5 +294,22 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 	@ColorInt
 	public int getColor() {
 		return isDayModeColorSelection ? dayColor : nightColor;
+	}
+
+	@Override
+	public DayNightMode getMapTheme() {
+		return colorType == Buildings3DColorType.CUSTOM ? isDayModeColorSelection ? DayNightMode.DAY : DayNightMode.NIGHT : null;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		app.getDaynightHelper().setExternalMapThemeProvider(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		app.getDaynightHelper().setExternalMapThemeProvider(null);
 	}
 }

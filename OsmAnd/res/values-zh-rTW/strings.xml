@@ -5866,4 +5866,8 @@
     <string name="add_palette">新增調色板</string>
     <string name="delete_palette">刪除調色板</string>
     <string name="delete_colors_palette_dialog_summary">您確定您想要刪除 %1$s 調色板嗎？</string>
+    <string name="shared_string_trip_average">旅程平均</string>
+    <string name="trip_recording_avg_speed_widget_description">顯示目前行程的平均速率，或是最近一次上坡或下坡路段的平均速率。</string>
+    <string name="trip_recording_moving_time_widget_description">顯示目前記錄的移動時間，或最近一次上坡與下坡的時間。</string>
+    <string name="trip_recording_moving_time">移動時間</string>
 </resources>

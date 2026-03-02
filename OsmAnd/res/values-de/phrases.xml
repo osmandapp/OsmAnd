@@ -718,7 +718,7 @@
     <string name="poi_camera">Kameras und Objektive</string>
     <string name="poi_charity">Sozialkaufhaus</string>
     <string name="poi_cabin">Hütte</string>
-    <string name="poi_lean_to">Unterstand</string>
+    <string name="poi_lean_to">Pultdach-Unterstand</string>
     <string name="poi_wilderness_hut">Unbewirtschaftete Schutzhütte</string>
     <string name="poi_wiki_lang_zh">Chinesisches Wiki</string>
     <string name="poi_wiki_lang_tr">Türkisches Wiki</string>
@@ -3769,7 +3769,7 @@
     <string name="poi_traffic_signals_sound_locate">Nur Pilotton</string>
     <string name="poi_tactile_paving_contrasted">Farblich abgesetzt</string>
     <string name="poi_tactile_paving_incorrect">Fehlerhaft</string>
-    <string name="poi_covered_booth">Unterstand</string>
+    <string name="poi_covered_booth">Ja</string>
     <string name="poi_booth">Unterstandsart</string>
     <string name="poi_tactile_paving_primitive">Primitiv</string>
     <string name="poi_seamark_water_level_part_submerged">Wasserstand: teilweise überflutet</string>
@@ -5165,4 +5165,6 @@
     <string name="poi_sample_collection_blood">Blut</string>
     <string name="poi_yoga">Yoga</string>
     <string name="poi_memorial_type">Art des Denkmals</string>
+    <string name="poi_covered_booth_filter">Häuschen</string>
+
 </resources>

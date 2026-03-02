@@ -5939,4 +5939,32 @@
     <string name="astro_min_magnitude">Min. magnitude</string>
     <string name="stars_articles">Stjerneartikler</string>
     <string name="astronomy_plugin_name">Astronomi</string>
+    <string name="share_favorite">Del favoritt</string>
+    <string name="copy_list">Kopier liste</string>
+    <string name="shared_string_trip_average">Turgjennomsnitt</string>
+    <string name="trip_recording_avg_speed_widget_description">Viser den gjennomsnittlige hastigheten for den gjeldende turen eller den gjennomsnittlige hastigheten under den siste oppover- eller nedoverbakkeseksjonen.</string>
+    <string name="trip_recording_moving_time_widget_description">Viser den gjeldende registrerte tid i bevegelse eller tiden for den siste oppover- og nedoverbakken.</string>
+    <string name="trip_recording_moving_time">Tid i bevegelse</string>
+    <plurals name="tracks_count">
+        <item quantity="one">%d spor</item>
+        <item quantity="other">%d spor</item>
+    </plurals>
+    <string name="gradient_input_value_too_low_warn">Minimum tillatt verdi er %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">Maksimum tillatt verdi er %1$s.</string>
+    <string name="gradient_input_value_duplicate_warn">Denne verdien finnes allerede i paletten.</string>
+    <string name="gradient_input_invalid_value_warn">Angi et gyldig tall.</string>
+    <string name="value_cannot_be_edited_warn">Denne verdien kan ikke redigeres.</string>
+    <string name="unexpected_error_occurred_warn">En uventet feil oppstod.</string>
+    <string name="relative_gradient_point_m_summary">Farge for maksimumsverdien funnet i sporet.</string>
+    <string name="relative_gradient_point_avg_summary">Farge for sporets gjennomsnittsverdi.</string>
+    <string name="relative_gradient_point_min_summary">Farge for minimumsverdien funnet i sporet.</string>
+    <string name="shared_string_maximum">Maksimum</string>
+    <string name="shared_string_percentage">prosent</string>
+    <string name="shared_string_value">Verdi</string>
+    <string name="gradient_range_type_fixed">Faste verdier</string>
+    <string name="gradient_range_type_relative">Relativ</string>
+    <string name="edit_palette">Rediger palett</string>
+    <string name="add_palette">Legg til palett</string>
+    <string name="delete_palette">Slett palett</string>
+    <string name="delete_colors_palette_dialog_summary">Er du sikker på at du vil slette paletten %1$s?</string>
 </resources>

@@ -5864,4 +5864,10 @@
     <string name="delete_palette">Scrios an pailéad</string>
     <string name="delete_colors_palette_dialog_summary">An bhfuil tú cinnte gur mian leat pailéad %1$s a scriosadh?</string>
     <string name="astro_min_magnitude">Méid íosta</string>
+    <string name="share_favorite">Roinn an rogha is fearr leat</string>
+    <string name="copy_list">Cóipeáil liosta</string>
+    <string name="shared_string_trip_average">Meán an turais</string>
+    <string name="trip_recording_avg_speed_widget_description">Taispeánann sé meánluas an turais reatha, nó an meánluas le linn na coda deiridh suas an cnoc nó síos an cnoc.</string>
+    <string name="trip_recording_moving_time_widget_description">Taispeánann sé an t-am gluaiseachta atá taifeadta faoi láthair, nó an t-am don dul suas an cnoc agus síos an cnoc deireanach.</string>
+    <string name="trip_recording_moving_time">Am ag bogadh</string>
 </resources>

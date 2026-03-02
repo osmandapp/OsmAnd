@@ -752,7 +752,7 @@
     <string name="show_traffic_warnings">Ostrzeżenia drogowe</string>
     <string name="avoid_toll_roads">Bez płatnych dróg</string>
     <string name="map_widget_top_text">Ulica</string>
-    <string name="map_widget_config">Skonfiguruj ekranu</string>
+    <string name="map_widget_config">Skonfiguruj ekran</string>
     <string name="map_widget_back_to_loc">Gdzie jestem</string>
     <string name="map_widget_lock_screen">Zablokuj ekran</string>
     <string name="map_widget_compass">Kompas</string>
@@ -2971,7 +2971,7 @@
     <string name="app_mode_offroad">Off-road</string>
     <string name="edit_profile_setup_subtitle">Profil zachowa własne ustawienia</string>
     <string name="edit_profile_setup_map_subtitle">Wybiera opcje mapy dla profilu</string>
-    <string name="edit_profile_screen_options_subtitle">Wybiera opcje ekranu</string>
+    <string name="edit_profile_screen_options_subtitle">Wybierz opcje ekranu dla profilu</string>
     <string name="edit_profile_nav_settings_subtitle">Wybiera ustawienia nawigacji dla profilu</string>
     <string name="routing_attr_max_num_changes_description">Określ górny limit zmian w transporcie</string>
     <string name="routing_attr_max_num_changes_name">Maksymalna liczba zmian transportu</string>

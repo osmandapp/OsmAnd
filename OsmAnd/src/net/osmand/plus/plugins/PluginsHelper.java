@@ -445,14 +445,9 @@ public class PluginsHelper {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T extends OsmandPlugin> T getActivePlugin(Class<T> clz) {
-		for (OsmandPlugin lr : getActivePlugins()) {
-			if (clz.isInstance(lr)) {
-				return (T) lr;
-			}
-		}
-		return null;
+		T plugin = getPlugin(clz);
+		return plugin != null && plugin.isActive() ? plugin : null;
 	}
 
 	@SuppressWarnings("unchecked")

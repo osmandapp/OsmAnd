@@ -681,6 +681,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			navigationManager.navigationStarted();
 		}
 		carNavigationShouldBeActive = true;
+		updateCarNavigation(getApp().getLocationProvider().getLastKnownLocation());
 	}
 
 	/**
