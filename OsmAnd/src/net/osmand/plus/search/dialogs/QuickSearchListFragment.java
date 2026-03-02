@@ -35,6 +35,7 @@ import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
+import net.osmand.plus.search.listitems.QuickSearchCardDividerListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
@@ -49,6 +50,7 @@ import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
@@ -363,6 +365,28 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 			List<QuickSearchListItem> list = new ArrayList<>(listItems);
 			if (!list.isEmpty()) {
 				showResult = false;
+				QuickSearchListItem listItem = listItems.get(0);
+				if(listItem != null) {
+					SearchResult searchResult = listItem.getSearchResult();
+					if (searchResult != null) {
+						ObjectType firstItemObjectType = listItems.get(0).getSearchResult().objectType;
+						if (firstItemObjectType == POI_TYPE || firstItemObjectType == INDEX_ITEM) {
+							int separateTypeLastIndex = 0;
+							for (int i = 1; i < listItems.size() - 1; i++) {
+								listItem = listItems.get(i);
+								if (listItem.getSearchResult() != null &&
+										listItem.getSearchResult().objectType == firstItemObjectType) {
+									separateTypeLastIndex = i;
+								} else {
+									if (separateTypeLastIndex < listItems.size() - 1 && !(listItem instanceof QuickSearchButtonListItem)) {
+										list.add(i, new QuickSearchCardDividerListItem(app));
+									}
+									break;
+								}
+							}
+						}
+					}
+				}
 				if (addShadows) {
 					list.add(0, new QuickSearchTopShadowListItem(app));
 					list.add(new QuickSearchBottomShadowListItem(app));

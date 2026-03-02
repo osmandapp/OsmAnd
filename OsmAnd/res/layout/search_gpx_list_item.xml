@@ -32,13 +32,12 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
             app:srcCompat="@drawable/ic_action_polygom_dark"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/list_content_padding"
             android:visibility="visible"
-            android:layout_marginEnd="@dimen/list_content_padding" />
+            android:layout_marginEnd="8dp" />
 
         <LinearLayout
             android:id="@+id/name_and_read_section_container"
@@ -46,7 +45,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/gpx_text_top_margin"
             android:paddingBottom="@dimen/gpx_text_top_margin"
-            android:layout_marginRight="@dimen/showAllButtonMarginRight"
+            android:layout_marginStart="26dp"
             android:layout_marginEnd="@dimen/showAllButtonMarginRight"
             android:layout_weight="1"
             android:orientation="vertical">

@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import net.osmand.data.Amenity;
 import net.osmand.plus.R;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.search.CityStructureItemViewHolder;
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
 import net.osmand.plus.search.SearchResultViewHolder;
 import net.osmand.plus.search.WikiItemViewHolder;
+import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchWikiItem;
 import net.osmand.plus.utils.UiUtilities;
@@ -32,6 +34,7 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	private static final int POI_TYPE = 0;
 	private static final int WIKI_TYPE = 1;
+	private static final int CITY_TYPE = 2;
 
 	private final UpdateLocationViewCache locationViewCache;
 	private final NearbyItemClickListener itemClickListener;
@@ -61,6 +64,10 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 		return switch (viewType) {
+			case CITY_TYPE -> {
+				View view = inflater.inflate(R.layout.search_list_item_administrative, parent, false);
+				yield new CityStructureItemViewHolder(view, locationViewCache);
+			}
 			case WIKI_TYPE -> {
 				View view = inflater.inflate(R.layout.search_nearby_item_vertical, parent, false);
 				yield new WikiItemViewHolder(view, locationViewCache, nightMode);
@@ -76,25 +83,22 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		if (holder instanceof WikiItemViewHolder viewHolder) {
-			QuickSearchWikiItem item = (QuickSearchWikiItem) items.get(position);
-			viewHolder.bindItem(item, poiUIFilter, false);
-
-			viewHolder.itemView.setOnClickListener(v -> {
-				if (itemClickListener != null) {
-					itemClickListener.onNearbyItemClicked(item.getAmenity());
-				}
-			});
+		QuickSearchListItem item = items.get(position);
+		holder.itemView.setOnClickListener(v -> {
+			if (itemClickListener != null && item.getSearchResult().object instanceof Amenity amenity) {
+				itemClickListener.onNearbyItemClicked(amenity);
+			}
+		});
+		if (holder instanceof CityStructureItemViewHolder viewHolder) {
+			viewHolder.setNightMode(nightMode);
+			viewHolder.bindItem(item, false);
+		} else if (holder instanceof WikiItemViewHolder viewHolder) {
+			QuickSearchWikiItem wikiItem = (QuickSearchWikiItem) item;
+			viewHolder.bindItem(wikiItem, poiUIFilter, false);
 		} else if (holder instanceof SearchResultViewHolder viewHolder) {
-			QuickSearchListItem item = items.get(position);
-			viewHolder.bindItem(item, false, calendar);
-
-			viewHolder.itemView.setOnClickListener(v -> {
-				if (itemClickListener != null && item.getSearchResult().object instanceof Amenity amenity) {
-					itemClickListener.onNearbyItemClicked(amenity);
-				}
-			});
+			SearchResultViewHolder.bindPOISearchResult(holder.itemView, item, nightMode, calendar);
 		}
+		QuickSearchListAdapter.updateCompass(holder.itemView, item, locationViewCache, false);
 	}
 
 	public void setPoiUIFilter(@Nullable PoiUIFilter filter) {
@@ -105,9 +109,15 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	@Override
 	public int getItemViewType(int position) {
 		QuickSearchListItem item = items.get(position);
-		if (item instanceof QuickSearchWikiItem) {
+		Amenity amenity = null;
+		if (item.getSearchResult().object instanceof Amenity) {
+			amenity = (Amenity) item.getSearchResult().object;
+		}
+		if (amenity != null && amenity.getType().isAdministrative()) {
+			return CITY_TYPE;
+		} else if (item instanceof QuickSearchWikiItem) {
 			return WIKI_TYPE;
-		} else if (item.getType() == SEARCH_RESULT && item.getSearchResult().object instanceof Amenity) {
+		} else if (item.getType() == SEARCH_RESULT && amenity != null) {
 			return POI_TYPE;
 		}
 		throw new IllegalArgumentException("Unsupported view type " + item);
