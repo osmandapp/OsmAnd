@@ -362,40 +362,42 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 
 	public void updateListAdapter(List<QuickSearchListItem> listItems, boolean append, boolean addShadows) {
 		if (listAdapter != null) {
-			List<QuickSearchListItem> list = new ArrayList<>(listItems);
-			if (!list.isEmpty()) {
+			List<QuickSearchListItem> items = new ArrayList<>(listItems);
+			if (!items.isEmpty()) {
 				showResult = false;
-				QuickSearchListItem listItem = listItems.get(0);
-				if(listItem != null) {
-					SearchResult searchResult = listItem.getSearchResult();
-					if (searchResult != null) {
-						ObjectType firstItemObjectType = listItems.get(0).getSearchResult().objectType;
-						if (firstItemObjectType == POI_TYPE || firstItemObjectType == INDEX_ITEM) {
-							int separateTypeLastIndex = 0;
-							for (int i = 1; i < listItems.size() - 1; i++) {
-								listItem = listItems.get(i);
-								if (listItem.getSearchResult() != null &&
-										listItem.getSearchResult().objectType == firstItemObjectType) {
-									separateTypeLastIndex = i;
-								} else {
-									if (separateTypeLastIndex < listItems.size() - 1 && !(listItem instanceof QuickSearchButtonListItem)) {
-										list.add(i, new QuickSearchCardDividerListItem(app));
-									}
-									break;
-								}
-							}
-						}
-					}
-				}
-				if (addShadows) {
-					list.add(0, new QuickSearchTopShadowListItem(app));
-					list.add(new QuickSearchBottomShadowListItem(app));
-				}
+				insertListDecorations(items, listItems, addShadows);
 			}
-			listAdapter.setListItems(list);
+			listAdapter.setListItems(items);
 			if (!append && isVisible()) {
 				getListView().setSelection(0);
 			}
+		}
+	}
+
+	private void insertListDecorations(List<QuickSearchListItem> items, List<QuickSearchListItem> listItems, boolean addShadows) {
+		QuickSearchListItem item = listItems.get(0);
+		SearchResult searchResult = item != null ? item.getSearchResult() : null;
+		if (searchResult != null) {
+			ObjectType firstItemObjectType = searchResult.objectType;
+			if (firstItemObjectType == POI_TYPE || firstItemObjectType == INDEX_ITEM) {
+				int separateTypeLastIndex = 0;
+				for (int i = 1; i < listItems.size() - 1; i++) {
+					item = listItems.get(i);
+					if (item.getSearchResult() != null &&
+							item.getSearchResult().objectType == firstItemObjectType) {
+						separateTypeLastIndex = i;
+					} else {
+						if (separateTypeLastIndex < listItems.size() - 1 && !(item instanceof QuickSearchButtonListItem)) {
+							items.add(i, new QuickSearchCardDividerListItem(app));
+						}
+						break;
+					}
+				}
+			}
+		}
+		if (addShadows) {
+			items.add(0, new QuickSearchTopShadowListItem(app));
+			items.add(new QuickSearchBottomShadowListItem(app));
 		}
 	}
 

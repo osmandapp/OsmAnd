@@ -438,15 +438,15 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		return getLinearLayout(convertView, R.layout.list_item_divider);
 	}
 
-	private LinearLayout bindAdministrativeItem(@Nullable View convertView, @NonNull QuickSearchListItem listItem) {
+	private LinearLayout bindAdministrativeItem(@Nullable View convertView, @NonNull QuickSearchListItem item) {
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_list_item_administrative);
 		CityStructureItemViewHolder viewHolder = (CityStructureItemViewHolder) view.getTag(R.id.view_holder_as_tag);
-		if(viewHolder == null) {
+		if (viewHolder == null) {
 			viewHolder = new CityStructureItemViewHolder(view, updateLocationViewCache);
 			view.setTag(R.id.view_holder_as_tag, viewHolder);
 		}
 		viewHolder.setNightMode(nightMode);
-		viewHolder.bindItem(listItem, useMapCenter);
+		viewHolder.bindItem(item, useMapCenter);
 		return view;
 	}
 

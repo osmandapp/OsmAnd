@@ -77,7 +77,7 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 			BinaryMapIndexReader mapReaderResource = null;
 			if (mapObject.getReferenceFile() instanceof BinaryMapIndexReader) {
 				mapReaderResource = (BinaryMapIndexReader) mapObject.getReferenceFile();
-			} else if(city.getType() == City.CityType.POSTCODE) {
+			} else if (city.getType() == City.CityType.POSTCODE) {
 				mapReaderResource = item.getSearchResult().file;
 			}
 			if (mapReaderResource != null) {
