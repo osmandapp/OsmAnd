@@ -111,9 +111,11 @@ android {
 
 	buildTypes {
 		debug {
+			buildConfigField "String", "DATABASE_URL_TEMPLATE", '"http://192.168.178.41/%s"'
 			debuggable true
 		}
 		release {
+			buildConfigField "String", "DATABASE_URL_TEMPLATE", '"https://github.com/KnollFrank/OsmAnd/releases/download/testing_v5/%s"'
 			debuggable false
 		}
 	}

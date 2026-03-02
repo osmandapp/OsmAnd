@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.google.common.graph.ImmutableValueGraph;
 
+import net.osmand.plus.BuildConfig;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -68,15 +70,14 @@ public class PreferencesDatabaseConfigFactory {
 																	   final AssetManager assetManager) {
 		return DatabaseSourceProviders.firstAvailable(
 				new AssetDatabaseSourceProvider(databaseAssetFile, assetManager),
-				new UrlDatabaseSourceProvider(
-						// FK-TODO: make URL configurable
-						getUrl(
-								String.format(
-										"http://192.168.178.41/%s",
-										databaseAssetFile.getName()))));
+				new UrlDatabaseSourceProvider(getDatabaseSourceUrl(databaseAssetFile.getName())));
 	}
 
-	private static URL getUrl(final String url) {
+	private static URL getDatabaseSourceUrl(final String name) {
+		return asUrl(String.format(BuildConfig.DATABASE_URL_TEMPLATE, name));
+	}
+
+	private static URL asUrl(final String url) {
 		try {
 			return new URL(url);
 		} catch (final MalformedURLException e) {
