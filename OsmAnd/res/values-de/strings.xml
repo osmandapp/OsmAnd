@@ -1822,7 +1822,7 @@
     <string name="shared_string_save_changes">Änderungen speichern</string>
     <string name="shared_string_email_address">E-Mail-Adresse</string>
     <string name="find_parking">Parkplatz suchen</string>
-    <string name="show_polygons">Flächen anzeigen</string>
+    <string name="show_polygons">Zeige Polygone</string>
     <string name="rendering_attr_showMtbRoutes_name">Mountainbike-Routen</string>
     <string name="shared_string_reverse_order">Reihenfolge umkehren</string>
     <string name="map_marker_1st">Erste Kartenmarkierung</string>
@@ -4747,7 +4747,7 @@
     <string name="enable_3d_maps">3D-Karten aktivieren</string>
     <string name="generate_hillshade_from_3d_maps">Schummerungs-Rasterkarten aus 3D-Karten erzeugen</string>
     <string name="app_mode_climbing">Klettern</string>
-    <string name="offline_weather_forecast">Offline-Wettervorhersage</string>
+    <string name="offline_weather_forecast">Offline Wettervorhersage</string>
     <string name="offline_weather_forecast_desc">Sie können die Wettervorhersage für 7 Tage herunterladen.</string>
     <string name="clear_online_cache_description">Dies wird den Cache der Online-Wetterkacheln löschen.</string>
     <string name="clear_online_cache">Online-Cache leeren</string>
@@ -5714,7 +5714,7 @@
     <string name="point_location">Punktortung</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Sichtbarkeit des Koordinatengitters auf der Karte umschalten.</string>
     <string name="layer_coordinates_grid">Koordinatengitter</string>
-    <string name="show_image_previews">Bildvorschauen anzeigen</string>
+    <string name="show_image_previews">Zeige Bildvorschau</string>
     <string name="equator">Äquator</string>
     <string name="add_widget">Widget hinzufügen</string>
     <string name="shared_string_online_only">Nur online</string>
@@ -5724,7 +5724,7 @@
     <string name="intermediate_first">Fortgeschrittene zuerst</string>
     <string name="destination_first">Ziel zuerst</string>
     <string name="display_priority">Priorität anzeigen</string>
-    <string name="poi_source">POI-Quelle</string>
+    <string name="poi_source">POI Quelle</string>
     <string name="row_height">Zeilenhöhe</string>
     <string name="wikidata">Wikidata</string>
     <string name="prediction_time">Vorhersagezeit</string>
@@ -6043,4 +6043,8 @@
     <string name="edit_palette">Palette bearbeiten</string>
     <string name="add_palette">Palette hinzufügen</string>
     <string name="delete_palette">Palette löschen</string>
+    <string name="trip_recording_avg_speed_widget_description">Zeigt die Durchschnittsgeschwindigkeit von der aktuellen Strecke oder die Durchschnittsgeschwindigkeit während des letzten Anstiegs- ober Abfahrtsabschnitts.</string>
+    <string name="gradient_no_data_point_summary">Angezeigte Farbe, wenn Daten fehlen oder undefiniert sind.</string>
+    <string name="gradient_input_value_too_low_warn">Der erlaubte Minimalwert ist %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">Der erlaubte Maximalwert ist %1$s.</string>
 </resources>
