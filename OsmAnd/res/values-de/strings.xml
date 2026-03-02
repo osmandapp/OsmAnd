@@ -5913,7 +5913,7 @@
     <string name="centimeter">cm</string>
     <string name="shared_string_centimeters">Zentimeter</string>
     <string name="bicycle_width_limit_description">Fahrradbreite angeben, um schmale Radwege zu vermeiden.</string>
-    <string name="copy_link">Link kopieren</string>
+    <string name="copy_link">Verknüpfung kopieren</string>
     <string name="button_frames">Schaltflächenrahmen</string>
     <string name="routing_attr_pt_limit_name">Die N besten Routen anzeigen</string>
     <string name="routing_attr_pt_limit_description">Gibt die Anzahl der anzuzeigenden besten Routen an</string>
@@ -5984,8 +5984,8 @@
     <string name="copy_from_landscape_layout">Aus Querformat kopieren</string>
     <string name="panels_layout_wide">Breit</string>
     <string name="astro_solar_system">Sonnensystem</string>
-    <string name="backup_deleted_all_data">Daten löschen.</string>
-    <string name="backup_deleting_all_data">Lösche Daten…</string>
+    <string name="backup_deleted_all_data">Gelöschte Daten.</string>
+    <string name="backup_deleting_all_data">Daten werden gelöscht…</string>
     <string name="pin_folder">Ordner anpinnen</string>
     <string name="view_distance">Sichtweite</string>
     <string name="equator_line">Äquatorlinie</string>
