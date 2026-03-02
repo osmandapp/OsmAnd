@@ -81,7 +81,7 @@ public class PreferencesDatabaseConfigFactory {
 		try {
 			return new URL(url);
 		} catch (final MalformedURLException e) {
-			throw new RuntimeException(e);
+			throw new IllegalArgumentException(e);
 		}
 	}
 }
