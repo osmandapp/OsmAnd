@@ -30,6 +30,7 @@ public class MapPoiTypes {
 	public static final String WIKI_LANG = "wiki_lang";
 	public static final String WIKI_PLACE = "wiki_place";
 	public static final String OSM_WIKI_CATEGORY = "osmwiki";
+	public static final String ADMINISTRATIVE_CATEGORY = "administrative";
 	public static final String SPEED_CAMERA = "speed_camera";
 
 	public static final String ROUTES = "routes";

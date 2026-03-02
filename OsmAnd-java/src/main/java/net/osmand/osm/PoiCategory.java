@@ -50,7 +50,10 @@ public class PoiCategory extends PoiFilter {
 		return acceptedTypes;
 	}
 
-	
+	public boolean isAdministrative() {
+		return keyName.equals(MapPoiTypes.ADMINISTRATIVE_CATEGORY);
+	}
+
 	public boolean isWiki() {
 		return keyName.equals(MapPoiTypes.OSM_WIKI_CATEGORY);
 	}
