@@ -913,7 +913,7 @@
     <string name="poi_payment_credit_cards_no">Ekki tekið við greiðslukortum</string>
     <string name="poi_payment_notes_yes">Peningaseðlar</string>
     <string name="poi_payment_notes_no">Ekki tekið við peningaseðlum</string>
-    <string name="poi_payment_visa_yes">VISA</string>
+    <string name="poi_payment_visa_yes">Visakort</string>
     <string name="poi_payment_visa_no">Ekki tekið við VISA-kortum</string>
     <string name="poi_payment_mastercard_yes">MasterCard</string>
     <string name="poi_payment_mastercard_no">Ekki tekið við MasterCard-kortum</string>
@@ -1466,8 +1466,8 @@
     <string name="poi_cuisine_burger">Hamborgarar</string>
     <string name="poi_cuisine_coffee_shop">Kaffi</string>
     <string name="poi_cuisine_sandwich">Samlokur</string>
-    <string name="poi_cuisine_kebab">Kebab</string>
-    <string name="poi_cuisine_doner">Doner kebab (shawarma)</string>
+    <string name="poi_cuisine_kebab">Kebab;Matur</string>
+    <string name="poi_cuisine_doner">Doner kebab (shawarma);Matur</string>
     <string name="poi_cuisine_chicken">Kjúklingar</string>
     <string name="poi_cuisine_ice_cream">Ís</string>
     <string name="poi_cuisine_sushi">Sushi</string>
@@ -1476,7 +1476,7 @@
     <string name="poi_cuisine_barbecue">Kolagrill</string>
     <string name="poi_cuisine_noodle">Ramen-núðlur</string>
     <string name="poi_cuisine_donut">Kleinuhringir</string>
-    <string name="poi_cuisine_crepe">Krepur</string>
+    <string name="poi_cuisine_crepe">Pönnukökur;Krepur</string>
     <string name="poi_cuisine_breakfast">Morgunverður</string>
     <string name="poi_cuisine_steak">Steik</string>
     <string name="poi_cuisine_tapas">Tapas</string>
@@ -1665,7 +1665,7 @@
     <string name="poi_paint">Málningarvöruverslun</string>
     <string name="poi_pet">Gæludýraverslun</string>
     <string name="poi_stationery">Ritfangaverslun</string>
-    <string name="poi_tyres">Dekkjasala</string>
+    <string name="poi_tyres">Hjólbarði;Hjólbarðar;Dekk;Dekkjasala</string>
     <string name="poi_electronics">Rafeindatækjaverslun</string>
     <string name="poi_video_games">Tölvuleikir</string>
     <string name="poi_spices">Kryddverslun</string>
@@ -3432,7 +3432,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">Gírkassaviðgerðir</string>
     <string name="poi_service_vehicle_motor_yes">Vélaviðgerðir</string>
     <string name="poi_service_vehicle_insurance_yes">Tryggingar</string>
-    <string name="poi_service_vehicle_tyres_yes">Hjólbarðar</string>
+    <string name="poi_service_vehicle_tyres_yes">Hjólbarði;Hjólbarðar;Dekk</string>
     <string name="poi_aerialway_zip_line">Brunlína</string>
     <string name="poi_climbing_adventure">Klifurævintýri</string>
     <string name="poi_via_ferrata">Manngerðir hengistígar (Via ferrata)</string>

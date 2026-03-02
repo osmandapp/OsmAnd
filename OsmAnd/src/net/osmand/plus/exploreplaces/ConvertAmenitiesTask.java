@@ -65,6 +65,7 @@ public class ConvertAmenitiesTask extends AsyncTask<Void, Void, List<QuickSearch
 				break;
 			}
 			SearchResult result = SearchCoreFactory.createSearchResult(amenity, phrase, core.getPoiTypes());
+			SearchUICore.updateSearchResultAddress(result, amenity, null);
 			if (topImagesFilter) {
 				items.add(new QuickSearchWikiItem(app, result));
 			} else {

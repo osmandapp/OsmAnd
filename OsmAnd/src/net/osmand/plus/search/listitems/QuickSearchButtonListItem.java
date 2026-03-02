@@ -57,8 +57,8 @@ public class QuickSearchButtonListItem extends QuickSearchListItem {
 	}
 
 	@Override
-	public Spannable getSpannableName() {
-		return spannableTitle;
+	public CharSequence getSpannableName() {
+		return spannableTitle != null ? spannableTitle : super.getSpannableName();
 	}
 
 	public View.OnClickListener getOnClickListener() {

@@ -3789,7 +3789,7 @@
     <string name="poi_internet_access_fee_customers">Πρόσβαση Διαδικτύου: πελάτες</string>
     <string name="poi_video_no">Όχι</string>
     <string name="poi_booth">Τύπος θαλάμου</string>
-    <string name="poi_covered_booth">Θάλαμος</string>
+    <string name="poi_covered_booth">Ναι</string>
     <string name="poi_sms_yes">Ναι;SMS</string>
     <string name="poi_dive_centre">Κέντρο αυτόνομης κατάδυσης</string>
     <string name="poi_resort_hunting">Βάση κυνηγιού</string>

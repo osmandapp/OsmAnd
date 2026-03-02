@@ -46,6 +46,7 @@
     <string name="delete_palette">Delete palette</string>
     <string name="delete_colors_palette_dialog_summary">Are you sure you want to delete %1$s palette?</string>
 	<string name="astro_min_magnitude">Min. magnitude</string>
+	<string name="intersection">Intersection</string>
 	<string name="stars_articles">Stars articles</string>
 	<string name="delete_groups_confirmation">Delete groups?</string>
 	<string name="add_to_track">Add to track</string>

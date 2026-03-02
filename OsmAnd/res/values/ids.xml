@@ -3,6 +3,7 @@
     <item name="index_item" type="id"/>
 
     <item name="item_as_tag" type="id"/>
+    <item name="view_holder_as_tag" type="id"/>
 
     <!-- Bearing widget ids-->
     <item name="bearing_widget_state_relative_bearing" type="id"/>

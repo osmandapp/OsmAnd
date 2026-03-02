@@ -13,8 +13,7 @@
 	<LinearLayout
 		android:id="@+id/details_lvl_container"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="@dimen/content_padding_round_medium"
+		android:layout_height="@dimen/setting_list_item_large_height"
 		android:orientation="horizontal"
 		android:paddingStart="@dimen/content_padding">
 
@@ -31,7 +30,8 @@
 			layout="@layout/custom_icon_radio_buttons"
 			android:layout_width="112dp"
 			android:layout_height="36dp"
-			android:layout_marginEnd="@dimen/content_padding_double" />
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/content_padding" />
 
 	</LinearLayout>
 
@@ -43,8 +43,7 @@
 	<LinearLayout
 		android:id="@+id/view_distance_container"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="@dimen/content_padding_round_medium"
+		android:layout_height="@dimen/setting_list_item_large_height"
 		android:orientation="horizontal"
 		android:paddingStart="@dimen/content_padding">
 
@@ -61,7 +60,8 @@
 			layout="@layout/custom_icon_radio_buttons"
 			android:layout_width="112dp"
 			android:layout_height="36dp"
-			android:layout_marginEnd="@dimen/content_padding_double" />
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/content_padding" />
 
 	</LinearLayout>
 

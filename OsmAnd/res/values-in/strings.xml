@@ -6098,8 +6098,8 @@
     <string name="meridian_180">Meridian ke-180</string>
     <string name="equator">Ekuator</string>
     <string name="release_5_0">• Temukan POI peringkat teratas dengan mode Jelajahi baru\n\n• Semua rute OSM sekarang dapat dicari! Hiking, bersepeda, MTB, dan lainnya\n\n• Widget navigasi baru menggabungkan panah belokan dan petunjuk navigasi\n\n• Widget info rute saat ini: menampilkan ETA, waktu kedatangan, dan jarak\n\n• Pilih lereng ski dan jalur MTB di peta untuk informasi terperinci\n\n• Kemampuan memilih ukuran widget untuk panel kiri dan kanan\n\n• Ditambahkan grid koordinat dengan koordinat geografis\n\n• Ditambahkan kemampuan untuk menyesuaikan tampilan default grup favorit\n\n• Android Auto: lihat ETA dan jarak ke waypoint berikutnya; nama kota sekarang muncul dalam hasil pencarian\n• Puncak menonjol sekarang dapat ditemukan melalui peta dan pencarian\n\n• Ketinggian puncak gunung sekarang tersedia dalam satuan kaki\n\n• Ditambahkan: tebing dan area panjat tebing di peta\n\n• Pencarian alamat di Amerika Serikat telah ditingkatkan\n\n• Ditambahkan TTS Bahasa Ibrani untuk navigasi</string>
-    <string name="shared_string_online_only">Hanya Daring</string>
-    <string name="shared_string_offline_only">Hanya Luring</string>
+    <string name="shared_string_online_only">Daring Saja</string>
+    <string name="shared_string_offline_only">Luring Saja</string>
     <string name="intermediate_first">Perantara dahulu</string>
     <string name="destination_first">Tujuan dahulu</string>
     <string name="display_priority">Prioritas tampilan</string>
@@ -6290,4 +6290,14 @@
     <string name="astro_configure_view">Konfigurasi tampilan</string>
     <string name="astronomy_plugin_name">Astronomi</string>
     <string name="astro_min_magnitude">Magnitudo min.</string>
+    <string name="shared_string_ratio">rasio</string>
+    <string name="shared_string_percentage">persentase</string>
+    <string name="shared_string_value">Nilai</string>
+    <string name="gradient_range_type_relative">Relatif</string>
+    <string name="edit_palette">Edit palet</string>
+    <string name="add_palette">Tambahkan palet</string>
+    <string name="delete_palette">Hapus palet</string>
+    <string name="delete_colors_palette_dialog_summary">Apakah Anda yakin Anda ingin menghapus palet %1$s?</string>
+    <string name="shared_string_trip_average">Rerata trip</string>
+    <string name="gradient_range_type_fixed">Nilai Tetap</string>
 </resources>

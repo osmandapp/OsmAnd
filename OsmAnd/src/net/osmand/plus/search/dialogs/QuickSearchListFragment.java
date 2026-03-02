@@ -35,6 +35,7 @@ import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
+import net.osmand.plus.search.listitems.QuickSearchCardDividerListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
@@ -49,6 +50,7 @@ import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
@@ -360,18 +362,42 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 
 	public void updateListAdapter(List<QuickSearchListItem> listItems, boolean append, boolean addShadows) {
 		if (listAdapter != null) {
-			List<QuickSearchListItem> list = new ArrayList<>(listItems);
-			if (!list.isEmpty()) {
+			List<QuickSearchListItem> items = new ArrayList<>(listItems);
+			if (!items.isEmpty()) {
 				showResult = false;
-				if (addShadows) {
-					list.add(0, new QuickSearchTopShadowListItem(app));
-					list.add(new QuickSearchBottomShadowListItem(app));
-				}
+				insertListDecorations(items, listItems, addShadows);
 			}
-			listAdapter.setListItems(list);
+			listAdapter.setListItems(items);
 			if (!append && isVisible()) {
 				getListView().setSelection(0);
 			}
+		}
+	}
+
+	private void insertListDecorations(List<QuickSearchListItem> items, List<QuickSearchListItem> listItems, boolean addShadows) {
+		QuickSearchListItem item = listItems.get(0);
+		SearchResult searchResult = item != null ? item.getSearchResult() : null;
+		if (searchResult != null) {
+			ObjectType firstItemObjectType = searchResult.objectType;
+			if (firstItemObjectType == POI_TYPE || firstItemObjectType == INDEX_ITEM) {
+				int separateTypeLastIndex = 0;
+				for (int i = 1; i < listItems.size() - 1; i++) {
+					item = listItems.get(i);
+					if (item.getSearchResult() != null &&
+							item.getSearchResult().objectType == firstItemObjectType) {
+						separateTypeLastIndex = i;
+					} else {
+						if (separateTypeLastIndex < listItems.size() - 1 && !(item instanceof QuickSearchButtonListItem)) {
+							items.add(i, new QuickSearchCardDividerListItem(app));
+						}
+						break;
+					}
+				}
+			}
+		}
+		if (addShadows) {
+			items.add(0, new QuickSearchTopShadowListItem(app));
+			items.add(new QuickSearchBottomShadowListItem(app));
 		}
 	}
 
