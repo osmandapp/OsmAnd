@@ -115,7 +115,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		visibilityTv.setText(String.format("%s%%", progress));
 		TextView colorStyleTv = container.findViewById(R.id.color_scheme_name);
 		colorStyleTv.setText(Buildings3DColorType.Companion.getById(plugin.BUILDINGS_3D_COLOR_STYLE.get()).getLabelId());
-		container.findViewById(R.id.color_container).setOnClickListener((v) -> callMapActivity(mapActivity -> {
+		container.findViewById(R.id.color_scheme_button).setOnClickListener((v) -> callMapActivity(mapActivity -> {
 			mapActivity.getDashboard().hideDashboard();
 			Buildings3DColorFragment.showInstance(mapActivity.getSupportFragmentManager());
 		}));
@@ -205,7 +205,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 			iconIv.setImageDrawable(getPaintedIcon(R.drawable.ic_action_3d_buildings, profileColor));
 			stateTv.setText(R.string.shared_string_on);
 		} else {
-			iconIv.setImageDrawable(getIcon(R.drawable.ic_action_3d, ColorUtilities.getSecondaryIconColorId(nightMode)));
+			iconIv.setImageDrawable(getIcon(R.drawable.ic_action_3d_buildings, ColorUtilities.getSecondaryIconColorId(nightMode)));
 			stateTv.setText(R.string.shared_string_off);
 		}
 		AndroidUiHelper.updateVisibility(contentContainer, enabled);

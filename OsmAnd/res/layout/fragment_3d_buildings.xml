@@ -8,6 +8,7 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:background="?attr/activity_background_basic"
 		android:orientation="vertical">
 
 		<include layout="@layout/shadow_on_map" />
@@ -59,6 +60,10 @@
 						layout="@layout/building_3d_performance_card" />
 
 				</FrameLayout>
+
+				<include
+					android:id="@+id/download_container_bottom_divider"
+					layout="@layout/card_bottom_divider" />
 
 			</LinearLayout>
 
