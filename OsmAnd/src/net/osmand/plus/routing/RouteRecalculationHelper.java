@@ -335,6 +335,12 @@ class RouteRecalculationHelper {
 		}
 	}
 
+	public boolean hasCurrentMissingMaps() {
+		return lastTask != null
+				&& lastTask.params.calculationProgress != null
+				&& lastTask.params.calculationProgress.hasMissingMapsNow;
+	}
+
 	private class RouteRecalculationTask implements Runnable {
 
 		private final RouteRecalculationHelper routingThreadHelper;

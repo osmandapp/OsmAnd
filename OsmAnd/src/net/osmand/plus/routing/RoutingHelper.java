@@ -970,4 +970,12 @@ public class RoutingHelper {
 			voiceRouter.newRouteIsCalculated(true);
 		}
 	}
+
+	public boolean hasCurrentMissingMaps() {
+		return routeRecalculationHelper != null && routeRecalculationHelper.hasCurrentMissingMaps();
+	}
+
+	public void stopCalculationImmediately() {
+		routeRecalculationHelper.stopCalculation();
+	}
 }

@@ -25,6 +25,11 @@ public class MissingMapsWarningCard extends MapBaseCard {
 	}
 
 	private void showMissingMapsDialog() {
+		// TODO TO THINK CALCULATE_MISSING_MAPS
+		// 0 - ignore at all (testing, button pressed)
+		// 1 - switch to A* and continue
+		// 2 - return error
+		app.getRoutingHelper().stopCalculationImmediately(); // TODO it should not restart calculation !!!
 		RequiredMapsController.showDialog(getMapActivity());
 	}
 }
