@@ -314,6 +314,8 @@ tasks.register('collectExternalResources') {
 }
 
 // Legacy core build
+
+import groovy.xml.Namespace
 import org.apache.tools.ant.taskdefs.condition.Os
 
 tasks.register('buildOsmAndCore', Exec) {
@@ -380,12 +382,54 @@ tasks.register('appStart', Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'
 }
 
+def getMandatoryAvdName() {
+	if (!project.hasProperty('avdName') || project.property('avdName').toString().trim().isEmpty()) {
+		throw new GradleException("\n>>> ERROR: 'avdName' is mandatory! Usage: ./gradlew <task> -PavdName=Name")
+	}
+	return project.property('avdName')
+}
+
+tasks.register('startEmulator') {
+	group = "Emulator"
+	doLast {
+		def avd = getMandatoryAvdName()
+		def emulatorBin = "${android.sdkDirectory}/emulator/emulator"
+		def adbBin = "${android.sdkDirectory}/platform-tools/adb"
+
+		println ">>> Starting Emulator: ${avd}..."
+		new ProcessBuilder(emulatorBin, "-avd", avd, "-no-snapshot", "-no-audio").start()
+
+		println ">>> Waiting for boot completion..."
+		def booted = false
+		while (!booted) {
+			// Check the sys.boot_completed property via adb shell
+			def process = "${adbBin} shell getprop sys.boot_completed".execute()
+			if (process.text.trim() == "1") {
+				booted = true
+				println ">>> Emulator is ready."
+			} else {
+				print "."
+				sleep(2000)
+			}
+		}
+	}
+}
+
+tasks.register('stopEmulator', Exec) {
+	group = "Emulator"
+	executable "${android.sdkDirectory}/platform-tools/adb"
+	args "emu", "kill"
+	ignoreExitValue true
+}
+
 def getAllConfiguredLocales() {
-    def configFile = file("res/xml/locales_config.xml")
-    if (configFile.exists()) {
-        return configFile.text.findAll(/android:name="([^"]+)"/) { it[1] }
-    }
-    return []
+	def configFile = file("res/xml/locales_config.xml")
+	if (configFile.exists()) {
+		def root = new XmlParser().parse(configFile)
+		def androidNs = new Namespace("http://schemas.android.com/apk/res/android", 'android')
+		return root.locale.collect { it.attribute(androidNs.name) }.findAll { it != null }
+	}
+	return []
 }
 
 tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
@@ -452,13 +496,14 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
     """
 }
 
-// ./gradlew generateDatabasesForLocales -Plocales=de,en
-// ./gradlew generateDatabasesForLocales
+// ./gradlew generateDatabasesForLocales -PavdName=Medium_Phone -Plocales=de,en
+// ./gradlew generateDatabasesForLocales -PavdName=Medium_Phone
 tasks.register('generateDatabasesForLocales') {
 	group = "Database"
 	description = "Generates databases for specified locales."
 
 	doLast {
+		def avd = getMandatoryAvdName()
 		def localeList = getTargetLocales()
 		println ">>> Starting database generation for ${localeList.size()} locales: ${localeList.join(', ')}"
 		localeList.each { locale ->
@@ -468,12 +513,17 @@ tasks.register('generateDatabasesForLocales') {
 			try {
 				exec {
 					workingDir project.rootDir
-					commandLine './gradlew',
+					commandLine 'bash', './gradlew', 'startEmulator', "-PavdName=${avd}"
+				}
+				exec {
+					workingDir project.rootDir
+					commandLine 'bash', './gradlew',
 							'uninstallNightlyFreeLegacyFatDebug',
 							'installNightlyFreeLegacyFatDebug',
 							'installNightlyFreeLegacyFatDebugAndroidTest',
 							generateAndPullPreferencesDatabaseTaskName,
-							"-PtestLocale=${locale}"
+							"-PtestLocale=${locale}",
+							"-PavdName=${avd}"
 					ignoreExitValue = false
 				}
 				println ">>> SUCCESS: Locale '${locale}' processed successfully."
@@ -482,6 +532,13 @@ tasks.register('generateDatabasesForLocales') {
 				println "!!! ABORTING: Execution failed for locale '${locale}'."
 				println "!" * 70
 				throw new GradleException("Multi-locale process failed at: ${locale}", e)
+			} finally {
+				println ">>> Stopping Emulator..."
+				exec {
+					workingDir project.rootDir
+					commandLine 'bash', './gradlew', 'stopEmulator'
+				}
+				sleep(5000)
 			}
 		}
 		println "\n>>> Process finished. All requested databases are ready."
