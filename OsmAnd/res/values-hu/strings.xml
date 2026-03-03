@@ -5952,4 +5952,5 @@
     <string name="trip_recording_moving_time">Mozgással töltött idő</string>
     <string name="share_favorite">Kedvenc megosztása</string>
     <string name="copy_list">Lista másolása</string>
+    <string name="intersection">Kereszteződés</string>
 </resources>
