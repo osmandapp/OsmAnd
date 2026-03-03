@@ -380,6 +380,14 @@ tasks.register('appStart', Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'
 }
 
+def getAllConfiguredLocales() {
+    def configFile = file("res/xml/locales_config.xml")
+    if (configFile.exists()) {
+        return configFile.text.findAll(/android:name="([^"]+)"/) { it[1] }
+    }
+    return []
+}
+
 tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
     group = "Database"
     description = "Generates and pulls the prepackaged preferences database. Use with the full installation command."
@@ -445,14 +453,24 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
 }
 
 // ./gradlew generateDatabasesForLocales -Plocales=de,en
+// ./gradlew generateDatabasesForLocales
 tasks.register('generateDatabasesForLocales') {
 	group = "Database"
-	description = "Generates databases for specified locales or falls back to the system default locale."
+	description = "Generates databases for specified locales."
 
 	doLast {
-		def localesProp = project.findProperty('locales') ?: Locale.getDefault().getLanguage()
-		def localeList = localesProp.split(',').collect { it.trim() }
-		println ">>> Starting database generation for: ${localeList.join(', ')}"
+		def localeList = []
+
+		def localesProp = project.findProperty('locales')
+		if (localesProp) {
+			localeList = localesProp.split(',').collect { it.trim() }
+		} else {
+			localeList = getAllConfiguredLocales()
+			if (localeList.isEmpty()) {
+				localeList = [Locale.getDefault().getLanguage()]
+			}
+		}
+		println ">>> Starting database generation for ${localeList.size()} locales: ${localeList.join(', ')}"
 		localeList.each { locale ->
 			println "\n" + "=" * 70
 			println ">>> PROCESSING LOCALE: ${locale}"
