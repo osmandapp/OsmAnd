@@ -9,7 +9,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -210,15 +209,17 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	}
 
 	public void applyActualListViewPosition() {
-		float titleHeight = getResources().getDimension(R.dimen.multi_selection_header_height);
-		int maxHeight = (int) (titleHeight);
-		for (int i = 0; i < SHOW_ELEMENTS && i < listAdapter.getCount(); i++) {
-			View childView = listAdapter.getView(i, null, view.findViewById(R.id.list));
-			childView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-					View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-			maxHeight += childView.getMeasuredHeight();
+		if (isAdded()) {
+			float titleHeight = getResources().getDimension(R.dimen.multi_selection_header_height);
+			int maxHeight = (int) (titleHeight);
+			for (int i = 0; i < SHOW_ELEMENTS && i < listAdapter.getCount(); i++) {
+				View childView = listAdapter.getView(i, null, view.findViewById(R.id.list));
+				childView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+						View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+				maxHeight += childView.getMeasuredHeight();
+			}
+			listView.setSelectionFromTop(0, -maxHeight - statusBarHeight - navBarHeight);
 		}
-		listView.setSelectionFromTop(0, -maxHeight - statusBarHeight - navBarHeight);
 	}
 
 	@Override
