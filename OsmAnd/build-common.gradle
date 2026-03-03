@@ -315,7 +315,6 @@ tasks.register('collectExternalResources') {
 
 // Legacy core build
 
-import groovy.xml.Namespace
 import org.apache.tools.ant.taskdefs.condition.Os
 
 tasks.register('buildOsmAndCore', Exec) {
@@ -424,12 +423,13 @@ tasks.register('stopEmulator', Exec) {
 
 def getAllConfiguredLocales() {
 	def configFile = file("res/xml/locales_config.xml")
-	if (configFile.exists()) {
-		def root = new XmlParser().parse(configFile)
-		def androidNs = new Namespace("http://schemas.android.com/apk/res/android", 'android')
-		return root.locale.collect { it.attribute(androidNs.name) }.findAll { it != null }
+	if (!configFile.exists()) {
+		return []
 	}
-	return []
+	def root = new XmlParser(false, false).parse(configFile)
+	return root.'locale'.collect { node ->
+		node.attribute('android:name')
+	}.findAll { it != null }
 }
 
 tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
