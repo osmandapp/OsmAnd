@@ -459,17 +459,7 @@ tasks.register('generateDatabasesForLocales') {
 	description = "Generates databases for specified locales."
 
 	doLast {
-		def localeList = []
-
-		def localesProp = project.findProperty('locales')
-		if (localesProp) {
-			localeList = localesProp.split(',').collect { it.trim() }
-		} else {
-			localeList = getAllConfiguredLocales()
-			if (localeList.isEmpty()) {
-				localeList = [Locale.getDefault().getLanguage()]
-			}
-		}
+		def localeList = getTargetLocales()
 		println ">>> Starting database generation for ${localeList.size()} locales: ${localeList.join(', ')}"
 		localeList.each { locale ->
 			println "\n" + "=" * 70
@@ -496,6 +486,21 @@ tasks.register('generateDatabasesForLocales') {
 		}
 		println "\n>>> Process finished. All requested databases are ready."
 	}
+}
+
+def getTargetLocales() {
+    def localeList = []
+
+    def localesProp = project.findProperty('locales')
+    if (localesProp) {
+        localeList = localesProp.split(',').collect { it.trim() }
+    } else {
+        localeList = getAllConfiguredLocales()
+        if (localeList.isEmpty()) {
+            localeList = [Locale.getDefault().getLanguage()]
+        }
+    }
+	return localeList
 }
 
 dependencies {
