@@ -1775,15 +1775,15 @@ class StarView @JvmOverloads constructor(
 	private fun performClickAt(x: Float, y: Float) {
 		val clickRadius = 60f
 		var bestObj: SkyObject? = null
-		var bestDist = Float.MAX_VALUE
 
 		// 1. Check Stars/Planets
 		for (obj in skyObjects) {
 			if (!isObjectVisibleInSettings(obj)) continue
 			if (skyToScreen(obj.azimuth, obj.altitude, tempPoint)) {
 				val dist = hypot(x - tempPoint.x, y - tempPoint.y)
-				if (dist < clickRadius && dist < bestDist) {
-					bestDist = dist; bestObj = obj
+				if (dist < clickRadius) {
+					bestObj = obj
+					break
 				}
 			}
 		}
