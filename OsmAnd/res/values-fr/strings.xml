@@ -5954,4 +5954,5 @@
     <string name="trip_recording_moving_time">Durée de déplacement</string>
     <string name="share_favorite">Partager le favori</string>
     <string name="copy_list">Copier la liste</string>
+    <string name="intersection">Intersection</string>
 </resources>
