@@ -5964,4 +5964,5 @@
     <string name="delete_colors_palette_dialog_summary">Вы уверены, что хотите удалить палитру %1$s?</string>
     <string name="copy_list">Копировать список</string>
     <string name="share_favorite">Поделиться избранным</string>
+    <string name="intersection">Пересечение</string>
 </resources>
