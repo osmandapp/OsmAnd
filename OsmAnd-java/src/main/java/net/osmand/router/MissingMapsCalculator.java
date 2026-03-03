@@ -163,9 +163,12 @@ public class MissingMapsCalculator {
 		}
 
 		if(!result.hasMissingMaps()) {
+			ctx.calculationProgress.missingMapsCalculationResult = null;
+			ctx.calculationProgress.hasMissingMapsNow = false;
 			return false;
 		}
 
+		ctx.calculationProgress.hasMissingMapsNow = true;
 		ctx.calculationProgress.missingMapsCalculationResult = result.prepare(or);
 
 		LOG.info(String.format("Check missing maps %d points %.2f sec", pointsToCheck.size(),

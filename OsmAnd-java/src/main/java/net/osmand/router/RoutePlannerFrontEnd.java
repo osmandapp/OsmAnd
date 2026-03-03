@@ -403,7 +403,8 @@ public class RoutePlannerFrontEnd {
 		if (CALCULATE_MISSING_MAPS) {
 			MissingMapsCalculator calculator = new MissingMapsCalculator(osmandRegions);
 			if (calculator.checkIfThereAreMissingMaps(ctx, start, targets, hhRoutingConfig != null)) {
-				return new RouteCalcResult(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
+				log.info(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
+//				return new RouteCalcResult(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
 			}
 		}
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
@@ -411,7 +412,8 @@ public class RoutePlannerFrontEnd {
 		}
 		if (hhRoutingConfig != null && ctx.calculationMode != RouteCalculationMode.BASE) {
 			calculateRegionsWithAllRoutePoints(ctx, osmandRegions, start, targets);
-			if (ctx.nativeLib == null || hhRoutingType == HHRoutingType.JAVA) {
+			if (!ctx.calculationProgress.hasMissingMapsNow
+					&& (ctx.nativeLib == null || hhRoutingType == HHRoutingType.JAVA)) {
 				HHNetworkRouteRes r = runHHRoute(ctx, start, targets);
 				if ((r != null && r.isCorrect()) || useOnlyHHRouting) {
 					return r;
