@@ -27,7 +27,9 @@ class TripRecordingMovingTimeWidget(
 	private var cachedMovingTime: Long = -1L
 	private var forceUpdate: Boolean = false
 
-	init {
+	override fun setupView(view: View) {
+		super.setupView(view)
+
 		updateWidgetView()
 		updateInfo(null)
 	}

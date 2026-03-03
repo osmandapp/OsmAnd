@@ -25,7 +25,9 @@ class TripRecordingAvgSpeedWidget(
 	private var cachedAvgSpeed: Float = -1f
 	private var forceUpdate: Boolean = false
 
-	init {
+	override fun setupView(view: View) {
+		super.setupView(view)
+
 		updateWidgetView()
 		updateInfo(null)
 	}
