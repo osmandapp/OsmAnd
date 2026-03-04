@@ -412,8 +412,7 @@ public class RoutePlannerFrontEnd {
 		}
 		if (hhRoutingConfig != null && ctx.calculationMode != RouteCalculationMode.BASE) {
 			calculateRegionsWithAllRoutePoints(ctx, osmandRegions, start, targets);
-			if (!ctx.calculationProgress.hasMissingMapsNow
-					&& (ctx.nativeLib == null || hhRoutingType == HHRoutingType.JAVA)) {
+			if (ctx.nativeLib == null || hhRoutingType == HHRoutingType.JAVA) {
 				HHNetworkRouteRes r = runHHRoute(ctx, start, targets);
 				if ((r != null && r.isCorrect()) || useOnlyHHRouting) {
 					return r;
