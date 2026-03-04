@@ -57,8 +57,8 @@ data class AstroChartCulmination(
 object AstroChartMath {
 
 	const val DAY_MINUTES: Int = 24 * 60
-	const val VISIBILITY_SAMPLE_COUNT: Int = DAY_MINUTES + 1
 	const val SCHEDULE_SAMPLE_STEP_MINUTES: Int = 5
+	const val VISIBILITY_SAMPLE_COUNT: Int = DAY_MINUTES / SCHEDULE_SAMPLE_STEP_MINUTES + 1
 	const val SCHEDULE_SAMPLE_COUNT: Int = DAY_MINUTES / SCHEDULE_SAMPLE_STEP_MINUTES + 1
 
 	private data class HorizontalPoint(
