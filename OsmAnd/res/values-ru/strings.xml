@@ -86,7 +86,7 @@
     <string name="edit_name">Задать имя</string>
     <string name="route_is_too_long_v2">Для больших расстояний: добавьте промежуточные пункты, если маршрут не построен в течение 10 минут.</string>
     <string name="routing_attr_allow_private_name">Частные зоны</string>
-    <string name="routing_attr_allow_private_description">Разрешить доступ в частные зоны (например с проездом через шлагбаум или КПП).</string>
+    <string name="routing_attr_allow_private_description">Разрешить доступ в частные зоны (например с проездом через шлагбаум).</string>
     <string name="shared_string_overview">Обзор</string>
     <string name="select_street">Выберите улицу</string>
     <string name="shared_string_in_name">в %1$s</string>
@@ -2943,7 +2943,7 @@
     <string name="manage_profiles">Управление профилями…</string>
     <string name="utm_format_descr">OsmAnd использует формат UTM Standard, который похож, но не идентичен формату UTM NATO.</string>
     <string name="navigate_point_format_utm">UTM Стандарт</string>
-    <string name="navigate_point_format_olc">Открытый код местоположения (OLC)</string>
+    <string name="navigate_point_format_olc">Открытый код местоположения</string>
     <string name="coordinates_format_info">Выбранный формат будет применён во всём приложении.</string>
     <string name="pref_selected_by_default_for_profiles">Параметр выбран по умолчанию для профилей: %s</string>
     <string name="route_parameters_info">Настройки маршрутизации в профиле «%1$s».</string>
@@ -3786,8 +3786,8 @@
     <string name="shared_string_itinerary">Маркеры</string>
     <string name="route_line_use_map_style_width">Используется толщина линии стиля карты (%1$s).</string>
     <string name="route_line_use_map_style_color">Используется цвет стиля карты (%1$s).</string>
-    <string name="routing_attr_avoid_low_emission_zone_description">Исключить зоны с жесткими эко нормативами (LEZ)</string>
-    <string name="routing_attr_avoid_low_emission_zone_name">Избегать зоны с жесткими эко нормативами (LEZ)</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Исключить зоны с жесткими эко нормативами</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Избегать зоны с жесткими эко нормативами</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Найти ещё…</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
@@ -4280,7 +4280,7 @@
     <string name="colour_of_circles">Окраска окружностей</string>
     <string name="routing_attr_avoid_highway_name">Без автомагистралей</string>
     <string name="routing_attr_avoid_highway_description">Избегать автомагистралей</string>
-    <string name="routing_attr_allow_private_for_truck_description">Разрешить доступ в частные зоны (например с проездом через шлагбаум или КПП).</string>
+    <string name="routing_attr_allow_private_for_truck_description">Разрешить доступ в частные зоны (например с проездом через шлагбаум).</string>
     <string name="map_widget_trip_recording_duration">Длительность</string>
     <string name="map_widget_trip_recording_uphill">Подъём</string>
     <string name="routing_attr_hazmat_category_name">Категория опасности</string>
@@ -4770,7 +4770,7 @@
     <string name="delete_folder">Удалить папку</string>
     <string name="show_all_tracks_on_the_map">Показать все треки на карте</string>
     <string name="rssi_widget_desc">Показывать уровень сигнала (RSSI) внешнего устройства.</string>
-    <string name="map_widget_rssi">RSSI</string>
+    <string name="map_widget_rssi">Rssi</string>
     <string name="tracks_empty_folder_description">В этой папке еще нет ни одного трека.</string>
     <string name="tracks_empty_folder">Пустая папка</string>
     <string name="track_not_recorded">Не записано</string>
@@ -5451,7 +5451,7 @@
     <string name="connect_obd_instructions_step">1. Подключите сканер к порту OBD-II транспортного средства.\n\n2. Запустите двигатель ТС.\n\n3. Включите Bluetooth на устройстве.\n\n4. Нажмите «%1$s» и выберите ваш сканер из списка.</string>
     <string name="obd_bluetooth_off_description">Включите Bluetooth для поиска и подключения сканеров.</string>
     <string name="obd_nothing_found_description">Пожалуйста, проверьте следующее:\n - Bluetooth включен;\n - двигатель автомобиля работает;\n - ваше устройство находится в зоне действия сканера.</string>
-    <string name="obd_searching_text_description">Пожалуйста, держите устройство поближе к сканеру. Убедитесь, что двигатель ТС работает.</string>
+    <string name="obd_searching_text_description">Пожалуйста, держите устройство поближе к сканеру. Убедитесь, что двигатель транспортного средства работает.</string>
     <string name="obd_searching_text">Поиск сканеров</string>
     <string name="obd_device_forget_sensor_description">Сканер будет удален из списка. Вы сможете снова подключить этот сканер в любое время.</string>
     <string name="obd_fuel_consumption_rate_l_h">Расход топлива (л/ч)</string>
@@ -5964,4 +5964,5 @@
     <string name="delete_colors_palette_dialog_summary">Вы уверены, что хотите удалить палитру %1$s?</string>
     <string name="copy_list">Копировать список</string>
     <string name="share_favorite">Поделиться избранным</string>
+    <string name="intersection">Пересечение</string>
 </resources>

@@ -5967,4 +5967,17 @@
     <string name="add_palette">Legg til palett</string>
     <string name="delete_palette">Slett palett</string>
     <string name="delete_colors_palette_dialog_summary">Er du sikker på at du vil slette paletten %1$s?</string>
+    <string name="intersection">Kryss</string>
+    <string name="shared_string_ratio">forhold</string>
+    <string name="gradient_range_type_fixed_summary">Farger er tildelt spesifikke absolutte tall (f.eks. 50 km/t).</string>
+    <string name="gradient_range_type_relative_summary">Farger blir automatisk tilpasset basert på sporets min./maks. intervall.</string>
+    <string name="building_3d_day_color_content_desc">3D-bygninger dagtemafarge</string>
+    <string name="building_3d_night_color_content_desc">3D-bygninger nattemafarge</string>
+    <string name="building_3d_low_details_content_desc">3D-bygninger lavt detaljnivå</string>
+    <string name="building_3d_high_details_content_desc">3D-bygninger høyt detaljnivå</string>
+    <string name="building_3d_near_distance_content_desc">3D-bygninger i nærheten</string>
+    <string name="building_3d_far_distance_content_desc">3D-bygninger langt borte</string>
+    <string name="free_custom_color_description">Tilpass 3D-bygninger med hvilken som helst farge. Perfekt for å matche et karttema eller forbedre kontrasten.</string>
+    <string name="buildings_3d_visibility_description">Juster gjennomsiktigheten til 3D-strukturer på kartet.</string>
+    <string name="performance">Ytelse</string>
 </resources>

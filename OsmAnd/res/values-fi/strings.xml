@@ -4544,4 +4544,29 @@
     <string name="map_3d">3D näkymä</string>
     <string name="astro_name_jupiter">Jupiter</string>
     <string name="delete_groups_confirmation">Poista ryhmät?</string>
+    <string name="share_favorite">Jaa suosikkisi</string>
+    <string name="copy_list">Kopioluettelo</string>
+    <string name="shared_string_trip_average">Matkan keskimääräinen pituus</string>
+    <string name="trip_recording_avg_speed_widget_description">Näyttää nykyisen matkan keskinopeuden tai edellisen ylä- tai alamäen keskinopeuden.</string>
+    <string name="trip_recording_moving_time_widget_description">Näyttää kuluneen ajan tai edellisessä ylä- tai alamäessä kuluneen ajan.</string>
+    <string name="trip_recording_moving_time">Siirtymisaika</string>
+    <plurals name="tracks_count">
+        <item quantity="one">%d jälki</item>
+        <item quantity="other">%d jäljet</item>
+    </plurals>
+    <string name="gradient_no_data_point_summary">Asetettu väri, kun tieto puuttuu tai ei ole määritelty.</string>
+    <string name="gradient_input_value_too_low_warn">Pienin sallittu arvo on %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">Suurin sallittu arvo on %1$s.</string>
+    <string name="gradient_input_value_duplicate_warn">Tämä arvo on jo olemassa paletissa.</string>
+    <string name="gradient_input_invalid_value_warn">Ole hyvä ja anna sopiva numero.</string>
+    <string name="value_cannot_be_edited_warn">Tätä arvoa ei voi muokata.</string>
+    <string name="unexpected_error_occurred_warn">Tapahtui odottamaton virhe.</string>
+    <string name="shared_string_maximum">Maksimi</string>
+    <string name="shared_string_minimum">Minimi</string>
+    <string name="shared_string_ratio">suhde</string>
+    <string name="shared_string_percentage">prosentti</string>
+    <string name="remove_step">Poista askel</string>
+    <string name="shared_string_value">Arvo</string>
+    <string name="gradient_range_type_fixed_summary">Värejä asetetaan tietyille absoluuttisille luvuille (esim. 50 km/h).</string>
+    <string name="gradient_range_type_fixed">Vakioarvo</string>
 </resources>

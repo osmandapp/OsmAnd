@@ -6048,4 +6048,6 @@
     <string name="building_3d_near_distance_content_desc">3D budovy - blízke</string>
     <string name="building_3d_far_distance_content_desc">3D budovy - vzdialené</string>
     <string name="astronomy_plugin_name">Astronómia</string>
+    <string name="share_favorite">Zdieľať obľúbené</string>
+    <string name="copy_list">Kopírovať zoznam</string>
 </resources>

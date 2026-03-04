@@ -1209,13 +1209,16 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	private boolean isTopPlace(Object object) {
 		if (topPlaces != null) {
-			Long id;
+			Long id = null;
 			if (object instanceof Amenity) {
 				id = ((Amenity) object).getId();
-			} else if (object instanceof BaseDetailsObject) {
-				id = ((BaseDetailsObject) object).getSyntheticAmenity().getId();
-			} else {
-				id = null;
+			} else if (object instanceof BaseDetailsObject baseObject) {
+				for (Object o : baseObject.getObjects()) {
+					if (o instanceof MapObject mapObject && topPlaces.containsKey(mapObject.getId())) {
+						return true;
+					}
+				}
+				id = baseObject.getSyntheticAmenity().getId();
 			}
 			return id != null && topPlaces.containsKey(id);
 		}
