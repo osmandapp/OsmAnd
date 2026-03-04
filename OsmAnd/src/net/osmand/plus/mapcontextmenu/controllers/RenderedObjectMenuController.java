@@ -14,6 +14,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.RenderedObjectMenuBuilder;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.mapcontextmenu.other.SharePoiParams;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -193,6 +195,33 @@ public class RenderedObjectMenuController extends MenuController {
 	@Override
 	public boolean needTypeStr() {
 		return !Algorithms.isEmpty(getNameOnlyStr());
+	}
+
+	@Override
+	public void share(LatLon latLon, String title, String address) {
+		String name = getNameOnlyStr();
+		String type = getTypeStr();
+
+		Long osmId = null;
+		if (builder != null && builder.getAmenity() != null) {
+			osmId = builder.getAmenity().getOsmId();
+		}
+		if (Algorithms.isEmpty(name) && Algorithms.isEmpty(type) && osmId == null) {
+			super.share(latLon, title, address);
+			return;
+		}
+
+		SharePoiParams params = new SharePoiParams(latLon);
+		params.addName(name);
+		params.addType(type);
+		if (Algorithms.isEmpty(name)) {
+			params.addOsmId(osmId);
+		}
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			ShareMenu.show(latLon, title, address, ShareMenu.buildOsmandPoiUri(params), mapActivity);
+		}
 	}
 
 	private boolean isStartingWithRTLChar(String s) {
