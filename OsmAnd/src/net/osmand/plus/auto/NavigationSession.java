@@ -771,6 +771,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void showMissingMapsScreen() {
 		CarContext carContext = getCarContext();
 		if (carContext != null) {
+			getApp().getSettings().STOP_ON_MISSING_MAPS = true; // TODO test
 			carContext.getCarService(ScreenManager.class).push(new MissingMapsScreen(carContext));
 		}
 	}
@@ -782,7 +783,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onUpdateCalculationProgress(int progress) {
-
+		// TODO catchCurrentMissingMaps() + showMissingMapsScreen() as in MapRouteInfoMenu ???
+		// TODO getApp().getSettings().STOP_ON_MISSING_MAPS = true on Android Auto navigation start ???
 	}
 
 	@Override
