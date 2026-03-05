@@ -6051,8 +6051,8 @@
     <string name="trip_recording_moving_time_widget_description">Zeigt die aktuell aufgezeichnete Bewegungszeit oder die Zeit für den letzten Anstieg und Abstieg an.</string>
     <string name="trip_recording_moving_time">Zeit in Bewegung</string>
     <plurals name="tracks_count">
-        <item quantity="one"></item>
-        <item quantity="other">%d Tracks</item>
+        <item quantity="one">%d track</item>
+        <item quantity="other">%d tracks</item>
     </plurals>
     <string name="gradient_input_value_duplicate_warn">Dieser Wert existiert bereits in der Palette.</string>
     <string name="gradient_input_invalid_value_warn">Gib bitte eine gültige Nummer ein.</string>
