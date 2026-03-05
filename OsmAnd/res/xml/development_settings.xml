@@ -222,6 +222,14 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/button_frames" />
 
+	<SwitchPreferenceCompat
+		android:key="grid_layout_show_logs"
+		android:layout="@layout/preference_switch"
+		android:persistent="false"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/show_layout_grid_logs" />
+
 	<PreferenceCategory
 		android:key="info"
 		android:layout="@layout/preference_category_with_descr"
