@@ -1,82 +1,447 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="?attr/list_background_color">
+    android:background="?attr/activity_background_color">
 
-    <!-- Header Toolbar -->
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/explore_container"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="4dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="ifContentScrolls"
+        android:scrollbars="vertical">
 
-        <ImageView
-            android:id="@+id/close_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:padding="12dp"
-            android:src="@drawable/ic_arrow_back"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="?attr/default_icon_color"/>
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:iconifiedByDefault="false"
-            app:searchIcon="@null"
-            app:queryHint="@string/search_poi_category_hint"
-            app:queryBackground="@android:color/transparent" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/divider_color" />
-
-    <!-- Sort Bar -->
-    <LinearLayout
-        android:id="@+id/sort_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="12dp"
-        android:background="?attr/selectableItemBackground">
-
-        <ImageView
-            android:id="@+id/sort_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_action_sort_by_name_ascending"
-            app:tint="?attr/active_color_primary"/>
-
-        <TextView
-            android:id="@+id/sort_text"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/explore_scroll"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="@string/sort_name_ascending"
-            android:textSize="14sp"
-            android:textColor="?attr/active_color_primary"/>
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/content_padding">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/explore_search_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginTop="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                app:cardBackgroundColor="?attr/search_background"
+                app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/content_padding_small_half"
+                    android:paddingEnd="@dimen/content_padding_small_half">
+
+                    <ImageView
+                        android:id="@+id/explore_close_button"
+                        android:layout_width="@dimen/acceptable_touch_radius"
+                        android:layout_height="@dimen/acceptable_touch_radius"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+						android:contentDescription="@string/shared_string_close"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_action_remove_dark"
+                        app:tint="?attr/default_icon_color" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingHorizontal="@dimen/content_padding_small"
+                        android:text="@string/shared_string_search"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="@dimen/default_list_text_size" />
+
+                    <ImageView
+                        android:id="@+id/explore_search_icon"
+                        android:layout_width="@dimen/acceptable_touch_radius"
+                        android:layout_height="@dimen/acceptable_touch_radius"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+						android:contentDescription="@string/shared_string_search"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_action_search_dark"
+                        app:tint="?attr/default_icon_color" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <HorizontalScrollView
+                android:id="@+id/recent_chips_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_padding_half"
+                android:scrollbars="none"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/recent_chips_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/content_padding"
+                    android:paddingEnd="@dimen/content_padding" />
+            </HorizontalScrollView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginTop="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                app:cardBackgroundColor="?attr/list_background_color"
+                app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/card_row_min_height"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/content_padding"
+                        android:paddingVertical="@dimen/content_padding">
+
+                        <ImageView
+                            android:layout_width="@dimen/standard_icon_size"
+                            android:layout_height="@dimen/standard_icon_size"
+                            android:layout_gravity="center_vertical"
+							android:contentDescription="@string/astro_explore_watch_now"
+							android:src="@drawable/ic_action_search_dark"
+                            app:tint="?attr/active_color_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/content_padding"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/astro_explore_watch_now"
+                                android:textColor="?android:textColorPrimary"
+                                android:textSize="@dimen/default_list_text_size" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/astro_explore_watch_now_subtitle"
+                                android:textColor="?android:textColorSecondary"
+                                android:textSize="@dimen/default_desc_text_size" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/content_padding"
+                        android:background="?attr/list_divider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/card_row_min_height"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/content_padding"
+                        android:paddingVertical="@dimen/content_padding_small">
+
+                        <ImageView
+                            android:layout_width="@dimen/standard_icon_size"
+                            android:layout_height="@dimen/standard_icon_size"
+                            android:layout_gravity="center_vertical"
+							android:contentDescription="@string/astro_explore_schedule"
+							android:src="@drawable/ic_action_calendar_month"
+                            app:tint="?attr/active_color_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/content_padding"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/astro_explore_schedule"
+                                android:textColor="?android:textColorPrimary"
+                                android:textSize="@dimen/default_list_text_size" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/astro_explore_schedule_subtitle"
+                                android:textColor="?android:textColorSecondary"
+                                android:textSize="@dimen/default_desc_text_size" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginTop="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                app:cardBackgroundColor="?attr/list_background_color"
+                app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:id="@+id/categories_rows_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginTop="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                app:cardBackgroundColor="?attr/list_background_color"
+                app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/content_padding"
+                        android:paddingEnd="@dimen/content_padding"
+                        android:paddingTop="@dimen/content_padding"
+                        android:paddingBottom="@dimen/content_padding_small"
+                        android:text="@string/astro_explore_my_data"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/default_list_text_size"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/my_data_rows_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginTop="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                app:cardBackgroundColor="?attr/list_background_color"
+                app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/content_padding"
+                        android:paddingEnd="@dimen/content_padding"
+                        android:paddingTop="@dimen/content_padding"
+                        android:paddingBottom="@dimen/content_padding_small"
+                        android:text="@string/astro_explore_catalogs"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/default_list_text_size"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/catalogs_rows_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/content_padding"
+                        android:background="?attr/list_divider" />
+
+                    <LinearLayout
+                        android:id="@+id/catalogs_view_all_row"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/card_row_min_height"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/content_padding">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/shared_string_show_all"
+                            android:textColor="?attr/active_color_primary"
+                            android:textSize="@dimen/default_list_text_size" />
+
+                        <TextView
+                            android:id="@+id/catalogs_view_all_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_list_text_size"
+                            android:text="0" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/full_search_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/activity_background_color"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:background="?attr/search_background"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/content_padding_small_half">
+
+            <ImageView
+                android:id="@+id/full_search_back_button"
+                android:layout_width="@dimen/acceptable_touch_radius"
+                android:layout_height="@dimen/acceptable_touch_radius"
+                android:background="?attr/selectableItemBackgroundBorderless"
+				android:contentDescription="@string/shared_string_back"
+                android:scaleType="center"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="?attr/default_icon_color" />
+
+            <EditText
+                android:id="@+id/full_search_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:hint="@string/astro_search_input_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="?android:textColorPrimary"
+                android:textColorHint="?android:textColorSecondary"
+                android:textSize="@dimen/default_list_text_size" />
+
+            <ImageView
+                android:id="@+id/full_search_clear_button"
+                android:layout_width="@dimen/acceptable_touch_radius"
+                android:layout_height="@dimen/acceptable_touch_radius"
+                android:background="?attr/selectableItemBackgroundBorderless"
+				android:contentDescription="@string/shared_string_close"
+                android:scaleType="center"
+
+                android:src="@drawable/ic_action_remove_dark"
+                app:tint="?attr/default_icon_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sort_filter_toolbar_height"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/content_padding">
+
+            <LinearLayout
+                android:id="@+id/sort_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/content_padding_small"
+                android:background="?attr/selectableItemBackground">
+
+                <ImageView
+                    android:id="@+id/sort_icon"
+                    android:layout_width="@dimen/standard_icon_size"
+                    android:layout_height="@dimen/standard_icon_size"
+                    android:src="@drawable/ic_action_sort_by_name_ascending"
+                    app:tint="?attr/active_color_primary" />
+
+                <TextView
+                    android:id="@+id/sort_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/content_padding_small"
+                    android:textColor="?attr/active_color_primary"
+                    android:textSize="@dimen/default_desc_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/filter_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/content_padding_small"
+                android:background="?attr/selectableItemBackground">
+
+                <TextView
+                    android:id="@+id/filter_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/active_color_primary"
+                    android:textSize="@dimen/default_desc_text_size" />
+
+                <ImageView
+                    android:layout_width="@dimen/standard_icon_size"
+                    android:layout_height="@dimen/standard_icon_size"
+                    android:layout_marginStart="@dimen/content_padding_small"
+                    android:src="@drawable/ic_action_filter_dark"
+                    app:tint="?attr/active_color_primary" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_results"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:scrollbars="vertical" />
+
+            <include
+                android:id="@+id/empty_state_container"
+                layout="@layout/view_star_search_empty_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+        </FrameLayout>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/divider_color" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_results"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scrollbars="vertical"
-        android:clipToPadding="false" />
-
-</LinearLayout>
+</FrameLayout>

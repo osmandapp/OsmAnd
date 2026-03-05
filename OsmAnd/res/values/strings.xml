@@ -11,6 +11,29 @@
 	Thx - Hardy
 -->
 
+	<string name="astro_search_never_rises">Never rises</string>
+	<string name="astro_search_always_up">Always up</string>
+	<string name="astro_search_sets_at">↘ Sets %1$s</string>
+	<string name="astro_search_rises_at">↗ Rises %1$s</string>
+	<string name="astro_search_magnitude_short">mag %.1f</string>
+	<string name="astro_filter_naked_eye">Naked eye visible</string>
+	<string name="astro_filter_visible_tonight">Visible tonight</string>
+	<string name="astro_filter_visible_now">Visible now</string>
+	<string name="astro_filter_show_all">Show all</string>
+	<string name="astro_sort_sets_soonest">Sets soonest</string>
+	<string name="astro_sort_rises_soonest">Rises soonest</string>
+	<string name="astro_sort_faintest_first">Faintest first</string>
+	<string name="astro_sort_brightest_first">Brightest first</string>
+	<string name="astro_search_empty_description">Refine your search or adjust filters.</string>
+	<string name="astro_search_input_hint">Input text</string>
+	<string name="astro_explore_catalogs">Catalogs</string>
+	<string name="astro_explore_my_data">My data</string>
+	<string name="astro_explore_schedule_subtitle">Upcoming astronomical events</string>
+	<string name="astro_explore_schedule">Schedule</string>
+	<string name="astro_explore_watch_now_subtitle">See what is in the sky tonight</string>
+	<string name="astro_explore_watch_now">Watch now</string>
+	<string name="astro_explore_deep_sky_subtitle">Galaxy, Galaxy Clusters, Black holes</string>
+
 	<string name="share_favorite">Share favorite</string>
 	<string name="copy_list">Copy list</string>
     <string name="shared_string_trip_average">Trip average</string>

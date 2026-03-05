@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:background="?attr/list_background_color"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/content_padding_small">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/content_padding"
+        android:paddingBottom="@dimen/content_padding_small"
+        android:text="@string/sort_by"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="@dimen/default_desc_text_size"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/row_sort_name_asc"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_row_min_height"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/content_padding">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/radio_sort_name_asc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/sort_name_ascending"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row_sort_name_desc"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_row_min_height"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/content_padding">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/radio_sort_name_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/sort_name_descending"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/list_divider" />
+
+    <LinearLayout
+        android:id="@+id/row_sort_brightest"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_row_min_height"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/content_padding">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/radio_sort_brightest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/astro_sort_brightest_first"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row_sort_faintest"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_row_min_height"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/content_padding">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/radio_sort_faintest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/astro_sort_faintest_first"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/list_divider" />
+
+    <LinearLayout
+        android:id="@+id/row_sort_rises"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_row_min_height"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/content_padding">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/radio_sort_rises"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/astro_sort_rises_soonest"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row_sort_sets"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_row_min_height"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/content_padding">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/radio_sort_sets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/astro_sort_sets_soonest"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size" />
+
+    </LinearLayout>
+
+</LinearLayout>
