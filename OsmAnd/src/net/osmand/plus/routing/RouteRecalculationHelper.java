@@ -3,6 +3,7 @@ package net.osmand.plus.routing;
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -342,10 +343,11 @@ class RouteRecalculationHelper {
 				&& lastTask.params.calculationProgress.hasMissingMapsNow;
 	}
 
-    public MissingMapsCalculationResult getCurrentMissingMapsCalculationResult() {
+	@Nullable
+	public MissingMapsCalculationResult getCurrentMissingMapsCalculationResult() {
 		return lastTask != null && lastTask.params.calculationProgress != null ?
 				lastTask.params.calculationProgress.missingMapsCalculationResult : null;
-    }
+	}
 
 	private class RouteRecalculationTask implements Runnable {
 
