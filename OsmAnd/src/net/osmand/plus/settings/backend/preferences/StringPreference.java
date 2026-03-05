@@ -26,4 +26,9 @@ public class StringPreference extends CommonPreference<String> {
 	public String parseString(String s) {
 		return s;
 	}
+
+	@Override
+	public CommonPreference<String> copyWithId(@NonNull String newId) {
+		return setupCopy(new StringPreference(getSettings(), newId, getDefaultValue()));
+	}
 }

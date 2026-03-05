@@ -148,25 +148,28 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void createDataBase() {
-		SQLiteConnection db = app.getSQLiteAPI().getOrCreateDatabase(
-				app.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + fileName + SQLITE_EXT, true);
+		String name = app.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + fileName + SQLITE_EXT;
+		SQLiteConnection db = app.getSQLiteAPI().getOrCreateDatabase(name, true);
+		if (db != null) {
+			try {
+				db.execSQL("CREATE TABLE IF NOT EXISTS tiles (x int, y int, z int, s int, image blob, time long, PRIMARY KEY (x,y,z,s))");
+				db.execSQL("CREATE INDEX IF NOT EXISTS IND on tiles (x,y,z,s)");
+				db.execSQL("CREATE TABLE IF NOT EXISTS info(tilenumbering,minzoom,maxzoom)");
+				db.execSQL("INSERT INTO info (tilenumbering,minzoom,maxzoom) VALUES ('simple','" + minZoom + "','" + maxZoom + "');");
 
-		db.execSQL("CREATE TABLE IF NOT EXISTS tiles (x int, y int, z int, s int, image blob, time long, PRIMARY KEY (x,y,z,s))");
-		db.execSQL("CREATE INDEX IF NOT EXISTS IND on tiles (x,y,z,s)");
-		db.execSQL("CREATE TABLE IF NOT EXISTS info(tilenumbering,minzoom,maxzoom)");
-		db.execSQL("INSERT INTO info (tilenumbering,minzoom,maxzoom) VALUES ('simple','" + minZoom + "','" + maxZoom + "');");
-
-		addInfoColumn(db, TITLE, title);
-		addInfoColumn(db, URL, urlTemplate);
-		addInfoColumn(db, RANDOMS, randoms);
-		addInfoColumn(db, ELLIPSOID, isEllipsoid ? "1" : "0");
-		addInfoColumn(db, INVERTED_Y, invertedY ? "1" : "0");
-		addInfoColumn(db, REFERER, referer);
-		addInfoColumn(db, USER_AGENT, userAgent);
-		addInfoColumn(db, TIME_COLUMN, timeSupported ? "yes" : "no");
-		addInfoColumn(db, EXPIRE_MINUTES, String.valueOf(getExpirationTimeMinutes()));
-
-		db.close();
+				addInfoColumn(db, TITLE, title);
+				addInfoColumn(db, URL, urlTemplate);
+				addInfoColumn(db, RANDOMS, randoms);
+				addInfoColumn(db, ELLIPSOID, isEllipsoid ? "1" : "0");
+				addInfoColumn(db, INVERTED_Y, invertedY ? "1" : "0");
+				addInfoColumn(db, REFERER, referer);
+				addInfoColumn(db, USER_AGENT, userAgent);
+				addInfoColumn(db, TIME_COLUMN, timeSupported ? "yes" : "no");
+				addInfoColumn(db, EXPIRE_MINUTES, String.valueOf(getExpirationTimeMinutes()));
+			} finally {
+				db.close();
+			}
+		}
 	}
 
 	@Override

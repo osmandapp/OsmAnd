@@ -55,6 +55,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class LocalItemUtils {
@@ -222,7 +223,8 @@ public class LocalItemUtils {
 	}
 
 	@NonNull
-	public static CharSequence getItemName(@NonNull Context context, @NonNull LocalItem item) {
+	public static CharSequence getItemName(@NonNull Context context, @NonNull LocalItem item,
+	                                       boolean includingParent) {
 		LocalItemType type = item.getType();
 		String fileName = item.getFileName();
 		Object attachedObject = item.getAttachedObject();
@@ -268,7 +270,7 @@ public class LocalItemUtils {
 		boolean reversed = !getSortModePref(app, type).get().isCountryMode();
 
 		String divider = ", ";
-		String name = FileNameTranslationHelper.getFileName(context, regions, fileName, divider, true, reversed);
+		String name = FileNameTranslationHelper.getFileName(context, regions, fileName, divider, includingParent, reversed);
 		if (!Algorithms.isEmpty(name)) {
 			int index = name.indexOf(divider);
 			if (index != -1) {
@@ -278,6 +280,12 @@ public class LocalItemUtils {
 			return name;
 		}
 		return Algorithms.getFileNameWithoutExtension(fileName).replace('_', ' ');
+	}
+
+	@NonNull
+	public static CharSequence getItemName(@NonNull Context context, @NonNull MultipleLocalItem item) {
+		String itemsSize = String.valueOf(item.getItems().size());
+		return context.getString(R.string.ltr_or_rtl_combine_via_dash, item.getName(), itemsSize);
 	}
 
 	@NonNull
@@ -291,6 +299,18 @@ public class LocalItemUtils {
 			String formattedDate = getFormattedDate(context, new Date(item.getLastModified()));
 			return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDate);
 		}
+	}
+
+	@NonNull
+	public static String getItemDescription(@NonNull Context context, @NonNull MultipleLocalItem item) {
+		String formattedSize = item.getSizeDescription(context);
+		String formattedMinDate = getFormattedDate(context, new Date(item.getMinTimestamp()));
+		String formattedMaxDate = getFormattedDate(context, new Date(item.getMaxTimestamp()));
+		String formattedDate = formattedMinDate;
+		if (!Objects.equals(formattedMinDate, formattedMaxDate)) {
+			formattedDate = context.getString(R.string.ltr_or_rtl_combine_via_dash, formattedMinDate, formattedMaxDate);
+		}
+		return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDate);
 	}
 
 	@NonNull
@@ -325,10 +345,12 @@ public class LocalItemUtils {
 	public static List<LocalItem> collectLocalItems(@NonNull Set<BaseLocalItem> items) {
 		List<LocalItem> localItems = new ArrayList<>();
 		for (BaseLocalItem item : items) {
-			if (item instanceof LocalItem) {
-				localItems.add((LocalItem) item);
-			} else if (item instanceof LiveGroupItem) {
-				localItems.addAll(((LiveGroupItem) item).getItems());
+			if (item instanceof LocalItem localItem) {
+				localItems.add(localItem);
+			} else if (item instanceof LiveGroupItem liveGroupItem) {
+				localItems.addAll(liveGroupItem.getItems());
+			} else if (item instanceof MultipleLocalItem multipleLocalItem) {
+				localItems.addAll(multipleLocalItem.getLocalItems());
 			}
 		}
 		return localItems;

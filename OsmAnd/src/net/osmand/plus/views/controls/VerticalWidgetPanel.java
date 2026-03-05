@@ -23,6 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetsUtils;
@@ -119,7 +120,8 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 	}
 
 	private void applyShadow() {
-		boolean isTransparentWidgets = app.getSettings().TRANSPARENT_MAP_THEME.get();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
+		boolean isTransparentWidgets = app.getSettings().getTransparentMapThemePreference(layoutMode).get();
 		setClipToPadding(false);
 		setOutlineProvider(ViewOutlineProvider.BOUNDS);
 		ViewCompat.setElevation(this, isAnyRowVisible() && !isTransparentWidgets? 5f : 0);
@@ -133,8 +135,9 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 			listener.isVisible(isAnyRowVisible);
 		}
 		if (InsetsUtils.isEdgeToEdgeSupported() && !topPanel) {
-			boolean isTransparentWidgets = app.getSettings().TRANSPARENT_MAP_THEME.get();
-			if (isAnyRowVisible && !isTransparentWidgets) {
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
+			boolean transparentWidgets = app.getSettings().getTransparentMapThemePreference(layoutMode).get();
+			if (isAnyRowVisible && !transparentWidgets) {
 				setBackgroundColor(ColorUtilities.getWidgetBackgroundColor(app, nightMode));
 			} else {
 				setBackgroundColor(Color.TRANSPARENT);
@@ -278,11 +281,12 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 
 	@NonNull
 	protected List<Set<MapWidgetInfo>> getWidgetsToShow(ApplicationMode mode, List<MapWidget> widgetsToShow) {
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
 		Set<MapWidgetInfo> allPanelWidget = widgetRegistry.getWidgetsForPanel(getWidgetsPanel());
 
 		Map<Integer, Set<MapWidgetInfo>> rowWidgetMap = new TreeMap<>();
 		for (MapWidgetInfo widgetInfo : allPanelWidget) {
-			if (widgetInfo.isEnabledForAppMode(mode)) {
+			if (widgetInfo.isEnabledForAppMode(mode, layoutMode)) {
 				addWidgetViewToPage(rowWidgetMap, widgetInfo.pageIndex, widgetInfo);
 				widgetsToShow.add(widgetInfo.widget);
 			} else {
@@ -347,16 +351,18 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 		private final List<MapWidget> flatOrderedWidgets;
 
 		Row(@NonNull List<MapWidgetInfo> rowWidgets, @NonNull List<MapWidget> flatOrderedWidgets) {
-			this.view = inflate(UiUtilities.getThemedContext(getContext(), nightMode), R.layout.vertical_widget_row, null);
+			Context context = getContext();
+			this.view = inflate(UiUtilities.getThemedContext(context, nightMode), R.layout.vertical_widget_row, null);
 			this.bottomDivider = view.findViewById(R.id.bottom_divider);
 			this.topDivider = view.findViewById(R.id.top_divider);
 			this.rowContainer = view.findViewById(R.id.widgets_container);
 			this.flatOrderedWidgets = flatOrderedWidgets;
 
 			ApplicationMode appMode = settings.getApplicationMode();
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
 			for (int j = 0; j < rowWidgets.size(); j++) {
 				MapWidgetInfo widgetInfo = rowWidgets.get(j);
-				if (widgetInfo.isEnabledForAppMode(appMode)) {
+				if (widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
 					enabledMapWidgets.add(widgetInfo);
 				} else {
 					widgetInfo.widget.detachView(getWidgetsPanel(), rowWidgets, appMode);
@@ -385,12 +391,17 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 			updateFullRowState(enabledMapWidgets, visibleViewsInRowCount);
 			updateValueAlign(enabledMapWidgets, visibleViewsInRowCount);
 
-			boolean transparentMode = app.getSettings().TRANSPARENT_MAP_THEME.get();
+			Context context = getContext();
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
+			boolean transparentMode = app.getSettings().getTransparentMapThemePreference(layoutMode).get();
 			boolean lastRow = index == totalRows - 1;
 			boolean firstRow = index == 0;
 
-			boolean showTopDivider =  (visibleViewsInRowCount > 0 && rowWidgetsSupportBottomDivider) && (firstRow && !topPanel && transparentMode);
-			boolean showBottomDivider = (visibleViewsInRowCount > 0 && rowWidgetsSupportBottomDivider) && ((!lastRow || (topPanel && transparentMode)) || ((InsetsUtils.isEdgeToEdgeSupported() && AndroidUiHelper.isOrientationPortrait(app) && lastRow)));
+			boolean showTopDivider =  (visibleViewsInRowCount > 0 && rowWidgetsSupportBottomDivider)
+					&& (firstRow && !topPanel && transparentMode);
+			boolean showBottomDivider = (visibleViewsInRowCount > 0 && rowWidgetsSupportBottomDivider)
+					&& ((!lastRow || (topPanel && transparentMode))
+					|| ((InsetsUtils.isEdgeToEdgeSupported() && AndroidUiHelper.isOrientationPortrait(context) && lastRow)));
 
 			AndroidUiHelper.updateVisibility(bottomDivider, showBottomDivider);
 			AndroidUiHelper.updateVisibility(topDivider, showTopDivider);

@@ -382,7 +382,7 @@ public class WaypointHelper {
 				} else {
 					speed = Math.round(mxspeed * 3.6f);
 				}
-				speedAlarm = AlarmInfo.createSpeedLimit(speed, loc);
+				speedAlarm = AlarmInfo.createSpeedLimit(speed, loc, mxspeed);
 			}
 		}
 		return speedAlarm;

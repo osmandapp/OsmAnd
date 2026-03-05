@@ -42,7 +42,7 @@ import net.osmand.data.*;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.card.color.palette.main.data.DefaultColors;
+import net.osmand.plus.card.color.palette.solid.data.DefaultColors;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -234,7 +234,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 								public boolean isCancelled() {
 									return isInterrupted();
 								}
-							});
+							}, true);
 					if (filter.isTopWikiFilter()) {
 						PoiFilterUtils.sortByElo(amenities);
 						res.addAll(0, amenities);
@@ -255,64 +255,42 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			}
 
 			@NonNull
-			private Set<Amenity> collectDisplayedPoints(@NonNull QuadRect latLonBounds, int zoom, List<Amenity> res) {
+			private Set<Amenity> collectDisplayedPoints(@NonNull QuadRect latLonBounds, int zoom, @NonNull List<Amenity> res) {
 				Set<Amenity> displayedPoints = new HashSet<>();
-				int i = 0;
-				for (Amenity amenity : res) {
-					if (shouldDraw(amenity, zoom)) {
-						displayedPoints.add(amenity);
-						if (i++ > TOP_PLACES_LIMIT) {
-							break;
-						}
-					}
-				}
-				float minTileX = (float) MapUtils.getTileNumberX(zoom, latLonBounds.left);
-				float maxTileX = (float) MapUtils.getTileNumberX(zoom, latLonBounds.right);
-				float minTileY = (float) MapUtils.getTileNumberY(zoom, latLonBounds.top);
-				float maxTileY = (float) MapUtils.getTileNumberY(zoom, latLonBounds.bottom);
-				for (int tileX = (int) minTileX; tileX <= (int) maxTileX; tileX++) {
-					for (int tileY = (int) minTileY; tileY <= (int) maxTileY; tileY++) {
-						QuadRect tileLatLonBounds = new QuadRect(
-								MapUtils.getLongitudeFromTile(zoom, alignTile(zoom, tileX)),
-								MapUtils.getLatitudeFromTile(zoom, alignTile(zoom, tileY)),
-								MapUtils.getLongitudeFromTile(zoom, alignTile(zoom, tileX + 1.0)),
-								MapUtils.getLatitudeFromTile(zoom, alignTile(zoom, tileY + 1.0)));
-						QuadRect extTileLatLonBounds = new QuadRect(
-								MapUtils.getLongitudeFromTile(zoom, alignTile(zoom, tileX - 0.5)),
-								MapUtils.getLatitudeFromTile(zoom, alignTile(zoom, tileY - 0.5)),
-								MapUtils.getLongitudeFromTile(zoom, alignTile(zoom, tileX + 1.5)),
-								MapUtils.getLatitudeFromTile(zoom, alignTile(zoom, tileY + 1.5)));
 
-						i = 0;
-						for (Amenity amenity : res) {
-							if (!shouldDraw(amenity, zoom)) {
-								continue;
-							}
-							LatLon latLon = amenity.getLocation();
-							if (extTileLatLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
-									latLon.getLongitude(), latLon.getLatitude())) {
-								if (tileLatLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
-										latLon.getLongitude(), latLon.getLatitude())) {
-									displayedPoints.add(amenity);
-									if (++i == TILE_POINTS_LIMIT) {
-										break;
-									}
-								}
-							}
+				int minTileX = (int) MapUtils.getTileNumberX(zoom, latLonBounds.left);
+				int maxTileX = (int) MapUtils.getTileNumberX(zoom, latLonBounds.right);
+				int minTileY = (int) MapUtils.getTileNumberY(zoom, latLonBounds.top);
+				int maxTileY = (int) MapUtils.getTileNumberY(zoom, latLonBounds.bottom);
+
+				int width = maxTileX - minTileX + 1;
+				int height = maxTileY - minTileY + 1;
+				int[] tileCounts = (width > 0 && height > 0) ? new int[width * height] : null;
+
+				int topPlacesCounter = 0;
+				for (Amenity amenity : res) {
+					if (!shouldDraw(amenity, zoom)) {
+						continue;
+					}
+					if (topPlacesCounter < TOP_PLACES_LIMIT) {
+						displayedPoints.add(amenity);
+						topPlacesCounter++;
+					}
+					if (tileCounts != null) {
+						LatLon latLon = amenity.getLocation();
+						int tileX = (int) MapUtils.getTileNumberX(zoom, latLon.getLongitude());
+						int tileY = (int) MapUtils.getTileNumberY(zoom, latLon.getLatitude());
+						if (tileX < minTileX || tileX > maxTileX || tileY < minTileY || tileY > maxTileY) {
+							continue;
+						}
+						int index = (tileX - minTileX) + (tileY - minTileY) * width;
+						if (tileCounts[index] < TILE_POINTS_LIMIT) {
+							displayedPoints.add(amenity);
+							tileCounts[index]++;
 						}
 					}
 				}
 				return displayedPoints;
-			}
-
-			private double alignTile(double zoom, double tile) {
-				if (tile < 0) {
-					return 0;
-				}
-				if (tile >= MapUtils.getPowZoom(zoom)) {
-					return MapUtils.getPowZoom(zoom) - .000001;
-				}
-				return tile;
 			}
 		};
 	}
@@ -453,7 +431,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		int right = MapUtils.get31TileNumberX(latLonBounds.right);
 		int bottom = MapUtils.get31TileNumberY(latLonBounds.bottom);
 		QuadTree<QuadRect> boundIntersections = initBoundIntersections(left, top, right, bottom);
-		int i = 0;
+		int counter = 0;
 		for (Amenity place : places) {
 			double lat = place.getLocation().getLatitude();
 			double lon = place.getLocation().getLongitude();
@@ -464,8 +442,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			int y31 = MapUtils.get31TileNumberY(lat);
 			if (!intersectsD(boundIntersections, x31, y31, iconSize31, iconSize31)) {
 				res.put(place.getId(), place);
+				counter++;
 			}
-			if (i++ > topPlacesLimit) {
+			if (counter >= topPlacesLimit) {
 				break;
 			}
 		}
@@ -1025,6 +1004,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			return amenity.getLocation();
 		} else if (object instanceof RenderedObject renderedObject) {
 			return renderedObject.getLatLon();
+		} else if (object instanceof MapObject mapObject) {
+			return mapObject.getLocation();
 		}
 		return null;
 	}
@@ -1228,13 +1209,16 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	private boolean isTopPlace(Object object) {
 		if (topPlaces != null) {
-			Long id;
+			Long id = null;
 			if (object instanceof Amenity) {
 				id = ((Amenity) object).getId();
-			} else if (object instanceof BaseDetailsObject) {
-				id = ((BaseDetailsObject) object).getSyntheticAmenity().getId();
-			} else {
-				id = null;
+			} else if (object instanceof BaseDetailsObject baseObject) {
+				for (Object o : baseObject.getObjects()) {
+					if (o instanceof MapObject mapObject && topPlaces.containsKey(mapObject.getId())) {
+						return true;
+					}
+				}
+				id = baseObject.getSyntheticAmenity().getId();
 			}
 			return id != null && topPlaces.containsKey(id);
 		}

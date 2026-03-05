@@ -2,10 +2,8 @@ package net.osmand.shared.gpx.filters
 
 import kotlinx.serialization.Serializable
 import net.osmand.shared.gpx.GpxParameter
-import net.osmand.shared.gpx.filters.OtherTrackParam.VISIBLE_ON_MAP
-import net.osmand.shared.gpx.filters.OtherTrackParam.WITH_WAYPOINTS
+import net.osmand.shared.gpx.filters.OtherTrackParam.*
 import net.osmand.shared.util.Localization
-import net.osmand.shared.util.PlatformUtil
 
 @Serializable
 enum class TrackFilterType(
@@ -15,8 +13,8 @@ enum class TrackFilterType(
 	val measureUnitType: MeasureUnitType,
 	val defaultParams: List<Any>?,
 	val updateOnOtherFiltersChangeNeeded: Boolean,
-	val additionalData: Any? = null) {
-
+	val additionalData: Any? = null
+) {
 	NAME(
 		"shared_string_name",
 		FilterType.TEXT,
@@ -211,9 +209,7 @@ enum class TrackFilterType(
 		MeasureUnitType.NONE,
 		null,
 		false,
-		listOf(VISIBLE_ON_MAP, WITH_WAYPOINTS));
+		listOf(VISIBLE_ON_MAP, WITH_WAYPOINTS, HAS_VEHICLE_METRICS));
 
-	fun getName(): String {
-		return Localization.getString(nameResId)
-	}
+	fun getName() = Localization.getString(nameResId)
 }

@@ -64,6 +64,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListener;
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchByRouteIdListener;
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchType;
@@ -116,7 +117,7 @@ import net.osmand.shared.wiki.WikiHelper;
 import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.wiki.WikiCoreHelper;
+import net.osmand.shared.wiki.WikiCoreHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -733,7 +734,7 @@ public class MenuBuilder {
 			CacheReadTask cacheReadTask = new CacheReadTask(cacheManager, rawKey, json -> {
 				if (!Algorithms.isEmpty(json)) {
 					ImageCardsHolder holder = new ImageCardsHolder(latLon, params);
-					List<WikiImage> wikimediaImageList = WikiCoreHelper.getImagesFromJson(json, wikiTagData.getWikiImages());
+					List<WikiImage> wikimediaImageList = WikiCoreHelper.INSTANCE.getImagesFromJson(json, wikiTagData.getWikiImages());
 					for (WikiImage wikiImage : wikimediaImageList) {
 						holder.addCard(WIKIMEDIA, new WikiImageCard(mapActivity, wikiImage));
 					}
@@ -1674,7 +1675,8 @@ public class MenuBuilder {
 
 	private void searchSortedAmenities(@NonNull PoiUIFilter filter, @NonNull LatLon latLon,
 			@Nullable SearchAmenitiesListener listener) {
-		SearchAmenitiesTask task = new SearchAmenitiesTask(filter, latLon, amenity);
+		String lang = LocaleHelper.getPreferredPlacesLanguage(app);
+		SearchAmenitiesTask task = new SearchAmenitiesTask(filter, latLon, lang, amenity);
 		task.setListener(amenities -> {
 			searchAmenitiesTasks.remove(task);
 			if (listener != null) {

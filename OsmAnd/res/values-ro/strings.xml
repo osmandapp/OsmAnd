@@ -3031,8 +3031,6 @@
     <string name="logout_from_osmand_cloud">Deconectați-vă de la OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Vă deconectați\?
 \nVa trebui să vă conectați din nou pentru a face backup sau a restaura date.</string>
-    <string name="backup_deleting_all_data">Se șterg toate datele…</string>
-    <string name="backup_deleted_all_data">Toate datele au fost șterse.</string>
     <string name="backup_deleting_all_data_descr">Așteptați până când OsmAnd vă șterge datele din cloud. Toate datele de pe dispozitiv vor rămâne neatinse.</string>
     <string name="backup_deleted_all_data_descr">Toate datele dumneavoastră au fost șterse cu succes din OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">Tot istoricul versiunilor a fost eliminat.</string>
@@ -3592,11 +3590,7 @@
 \n
 \nAceastă vizualizare poate fi revenită fie prin dezactivarea ei din nou aici, fie prin modificarea \'Stilului hărții\' în \'Configurați harta\', după cum doriți.</string>
     <string name="plugin_touringview_name">Vizualizare hartă turistică</string>
-    <string name="srtm_plugin_description">Informații privind terenul (e.g. curbe de nivel, nuanțe, pante) vă ajută să evaluați vizual așezarea pământului, relieful, navigabilitatea și multe altele. Informațiile topografice pot fi reprezentate pe hartă prin curbe de nivel, umbrirea reliefului și/sau colorarea pantei.
-\n
-\nDatele de bază provin din SRTM și ASTER.
-\n
-\nPentru mai multe informații, consultați %1$s.</string>
+    <string name="srtm_plugin_description">Informații privind terenul (e.g. curbe de nivel, nuanțe, pante) vă ajută să evaluați vizual așezarea pământului, relieful, navigabilitatea și multe altele. Informațiile topografice pot fi reprezentate pe hartă prin curbe de nivel, umbrirea reliefului și/sau colorarea pantei. \n \nDatele de bază provin din SRTM și ASTER. \n \nPentru mai multe informații, consultați %1$s.</string>
     <string name="lang_ber">Berberă</string>
     <string name="lang_kab">Cabila</string>
     <string name="lang_hsb">Sorabă (Superioară)</string>
@@ -5239,7 +5233,7 @@
     <string name="help_article_map_legend_nautical_map_name">Stilul hărții nautice</string>
     <string name="release_4_6">• Android Auto: S-a adăugat modul 3D\n\n• Tracks:S-au introdus filtre și foldere inteligente, s-a optimizat memoria pentru fișiere mai mari\n\n• Gestionarea mai bună a resurselor locale\n\n• Mapare personalizabilă a butoanelor pentru controllere externe\n\n•Widget-uri noi: \"Glide Ratio\" și \"Sun Position\"\n\n• OsmAnd Cloud: Acum accesați fișierele șterse\n\n• Colorare mai bună a pistei în modul Slope cu noul gradient simetric\n\n• Probleme rezolvate cu bara de stare transparentă\n\n• S-a adăugat suport la widget-ul ANT+ de temperatură\n\n• S-a introdus widgetul \"RAM disponibil\"</string>
     <string name="app_mode_baby_transport">Transportul bebelușilor</string>
-    <string name="live_monitoring_adress_descr">Specificați adresa web cu sintaxa parametrilor: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Specificați adresa web cu sintaxa parametrilor: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="shared_string_temperature">Temperatură</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Rutare în linie dreaptă (aeronave)</string>
     <string name="help_article_navigation_routing_train_routing_name">Rutare folosind trenuri</string>
@@ -6066,4 +6060,7 @@
     <string name="trip_recording_uphill_widget_desc">Afișează suma tuturor urcărilor sau ultima urcare din călătoria înregistrată actuală.</string>
     <string name="trip_recording_distance_widget_desc">Afișează distanța toată a călătoriei înregistrată actuală, cu opțiuni de a vedea distanța ultimei urcări sau coborâri.</string>
     <string name="trip_recording_max_speed_widget_description">Afișează vitezi maximă a călătoriei înregistrată curentă. Atingeți pentru a comuta viteza maximă generală sau viteza maximă în timpul ultimei urcări sau coborâri.</string>
+    <string name="astro_min_magnitude">Magnitudine min.</string>
+    <string name="stars_articles">Articole stele</string>
+    <string name="delete_groups_confirmation">Șterge grupurile?</string>
 </resources>

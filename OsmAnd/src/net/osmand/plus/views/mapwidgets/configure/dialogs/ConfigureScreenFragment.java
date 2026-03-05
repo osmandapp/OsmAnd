@@ -1,6 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,318 +9,66 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.AppBarLayout.Behavior;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import net.osmand.StateChangedListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
+import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment.AppModeChangedListener;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
-import net.osmand.plus.quickaction.MapButtonsHelper.QuickActionUpdatesListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListener;
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
+import net.osmand.plus.views.mapwidgets.configure.buttons.CustomMapButtonsFragment;
+import net.osmand.plus.views.mapwidgets.configure.buttons.DefaultMapButtonsFragment;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureActionsCard;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureButtonsCard;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureOtherCard;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureWidgetsCard;
-import net.osmand.plus.widgets.chips.ChipItem;
-import net.osmand.plus.widgets.chips.HorizontalChipsView;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.MapScreenLayoutCard;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigureScreenFragment extends BaseFullScreenFragment implements QuickActionUpdatesListener,
-		WidgetsRegistryListener, ConfirmationDialogListener, CopyAppModePrefsListener {
+public class ConfigureScreenFragment extends BaseFullScreenFragment implements ConfirmationDialogListener,
+		CopyAppModePrefsListener, AppModeChangedListener, CardListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
-	private MapWidgetRegistry widgetRegistry;
-	private WidgetsSettingsHelper widgetsSettingsHelper;
+	public static final String SCREEN_LAYOUT_MODE = "screen_layout_mode";
 
 	private MapActivity mapActivity;
+	private WidgetsSettingsHelper widgetsSettingsHelper;
 
-	private AppBarLayout appBar;
-	private HorizontalChipsView modesToggle;
-	private ViewGroup cardsContainer;
-	private NestedScrollView scrollView;
+	private final ScreenLayoutMode[] layoutMode = new ScreenLayoutMode[1];
 
-	private ConfigureWidgetsCard widgetsCard;
-	private ConfigureButtonsCard buttonsCard;
-	private ConfigureOtherCard otherCard;
-	private ConfigureActionsCard actionsCard;
-
-	private int currentScrollY;
-	private int currentAppBarOffset;
-
-	private StateChangedListener<Integer> displayPositionListener;
-	private StateChangedListener<Boolean> distanceByTapListener;
-	private StateChangedListener<Boolean> speedometerListener;
-
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		mapActivity = (MapActivity) requireMyActivity();
-		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
-		widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, appMode);
-	}
-
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		updateNightMode();
-		View view = inflate(R.layout.fragment_configure_screen, container, false);
-		if (!InsetsUtils.isEdgeToEdgeSupported()) {
-			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
-		}
-
-		appBar = view.findViewById(R.id.appbar);
-		modesToggle = view.findViewById(R.id.modes_toggle);
-		cardsContainer = view.findViewById(R.id.cards_container);
-		scrollView = view.findViewById(R.id.scroll_view);
-
-		setupAppBar();
-		setupToolbar(view);
-		setupModesToggle();
-		setupCards();
-
-		if (currentScrollY > 0) {
-			scrollView.scrollTo(0, currentScrollY);
-		}
-
-		return view;
-	}
-
-	@Override
-	public InsetTargetsCollection getInsetTargets() {
-		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
-		return collection;
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		updateCard(widgetsCard);
-		updateCard(buttonsCard);
-
-		settings.SHOW_DISTANCE_RULER.addListener(getDistanceByTapListener());
-		settings.POSITION_PLACEMENT_ON_MAP.addListener(getDisplayPositionListener());
-		settings.SHOW_SPEEDOMETER.addListener(getSpeedometerListener());
-
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.disableDrawer();
-		}
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		settings.SHOW_DISTANCE_RULER.removeListener(getDistanceByTapListener());
-		settings.POSITION_PLACEMENT_ON_MAP.removeListener(getDisplayPositionListener());
-		settings.SHOW_SPEEDOMETER.removeListener(getSpeedometerListener());
-
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.enableDrawer();
-		}
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		app.getMapButtonsHelper().addUpdatesListener(this);
-		widgetRegistry.addWidgetsRegistryListener(this);
-		mapActivity.disableDrawer();
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-		app.getMapButtonsHelper().removeUpdatesListener(this);
-		widgetRegistry.removeWidgetsRegistryListener(this);
-		mapActivity.enableDrawer();
-	}
-
-	private void setupAppBar() {
-		appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> currentAppBarOffset = verticalOffset);
-		CoordinatorLayout.LayoutParams param = (CoordinatorLayout.LayoutParams) appBar.getLayoutParams();
-		param.setBehavior(new AppBarLayout.Behavior());
-		setAppBarOffset(currentAppBarOffset);
-	}
-
-	private void setAppBarOffset(int verticalOffset) {
-		CoordinatorLayout.LayoutParams param = (CoordinatorLayout.LayoutParams) appBar.getLayoutParams();
-		AppBarLayout.Behavior behavior = (Behavior) param.getBehavior();
-		if (behavior != null) {
-			behavior.setTopAndBottomOffset(verticalOffset);
-		}
-	}
-
-	private void setupToolbar(@NonNull View view) {
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
-
-		ImageButton backButton = toolbar.findViewById(R.id.back_button);
-		backButton.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				activity.onBackPressed();
-			}
-		});
-		backButton.setImageDrawable(getContentIcon(AndroidUtils.getNavigationIconResId(app)));
-
-		View infoButton = toolbar.findViewById(R.id.info_button);
-		infoButton.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				AndroidUtils.openUrl(activity, R.string.docs_widget_configure_screen, nightMode);
-			}
-		});
-
-		View actionsButton = toolbar.findViewById(R.id.actions_button);
-		actionsButton.setOnClickListener(v -> {
-			appBar.setExpanded(false);
-
-			View cardView = actionsCard != null ? actionsCard.getView() : null;
-			if (cardView != null) {
-				scrollView.smoothScrollTo(0, (int) cardView.getY());
-			}
-		});
-	}
-
-	private void setupModesToggle() {
-		ChipItem selectedItem = null;
-		List<ChipItem> items = new ArrayList<>();
-		for (ApplicationMode mode : ApplicationMode.values(app)) {
-			ChipItem item = new ChipItem(mode.getStringKey());
-			int profileColor = mode.getProfileColor(nightMode);
-			int bgSelectedColor = ColorUtilities.getColorWithAlpha(profileColor, 0.25f);
-			// Do not use iconsCache to prevent same coloring for profiles with same icons
-			item.icon = ContextCompat.getDrawable(app, mode.getIconRes());
-			item.iconColor = profileColor;
-			item.iconSelectedColor = profileColor;
-			item.strokeSelectedColor = profileColor;
-			item.strokeSelectedWidth = AndroidUtils.dpToPx(app, 2);
-			item.rippleColor = profileColor;
-			item.bgSelectedColor = bgSelectedColor;
-			item.contentDescription = mode.toHumanString();
-			item.tag = mode;
-			if (Algorithms.objectEquals(appMode, mode)) {
-				selectedItem = item;
-			}
-			items.add(item);
-		}
-		modesToggle.setItems(items);
-		modesToggle.setSelected(selectedItem);
-		modesToggle.setOnSelectChipListener(chip -> {
-			if (chip.tag instanceof ApplicationMode mode) {
-				if (!Algorithms.stringsEqual(mode.getStringKey(), appMode.getStringKey())) {
-					setAppMode(mode);
-					modesToggle.scrollTo(chip);
-					settings.setApplicationMode(mode);
-					updateFragment();
-				}
-			}
-			return true;
-		});
-		if (selectedItem != null) {
-			modesToggle.scrollTo(selectedItem);
-		}
-	}
-
-	private void setupCards() {
-		cardsContainer.removeAllViews();
-
-		widgetsCard = new ConfigureWidgetsCard(mapActivity);
-		cardsContainer.addView(widgetsCard.build(mapActivity));
-
-		buttonsCard = new ConfigureButtonsCard(mapActivity, this);
-		cardsContainer.addView(buttonsCard.build(mapActivity));
-
-		otherCard = new ConfigureOtherCard(mapActivity);
-		cardsContainer.addView(otherCard.build(mapActivity));
-
-		actionsCard = new ConfigureActionsCard(mapActivity, this, R.string.map_widget_config);
-		cardsContainer.addView(actionsCard.build(mapActivity));
-	}
-
-	private void updateCard(@Nullable BaseCard card) {
-		if (card != null) {
-			card.update();
-		}
-	}
-
-	@Override
-	public void onActionConfirmed(int actionId) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
-		}
-		widgetsSettingsHelper.setAppMode(appMode);
-		widgetsSettingsHelper.resetConfigureScreenSettings();
-		recreateControlsCompletely(mapActivity);
-		updateFragment();
-	}
-
-	@Override
-	public void copyAppModePrefs(@NonNull ApplicationMode fromAppMode) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
-		}
-		widgetsSettingsHelper.setAppMode(appMode);
-		widgetsSettingsHelper.copyConfigureScreenSettings(fromAppMode);
-		recreateControlsCompletely(mapActivity);
-		updateFragment();
-	}
-
-	private void recreateControlsCompletely(@NonNull MapActivity mapActivity) {
-		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null) {
-			mapInfoLayer.recreateAllControls(mapActivity);
-		}
-	}
-
-	@Override
-	public void onActionsUpdated() {
-		updateCard(buttonsCard);
-	}
-
-	@Override
-	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
-		updateCard(widgetsCard);
-	}
-
-	@Override
-	public void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
-
-	}
-
-	@Override
-	public void onWidgetsCleared() {
-
-	}
+	private TabLayout tabLayout;
+	private ViewPager2 viewPager;
+	private ConfigureScreenAdapter adapter;
+	private TabLayoutMediator tabLayoutMediator;
+	private StateChangedListener<Boolean> separateLayoutsListener;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -334,35 +81,266 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 		return nightMode;
 	}
 
-	@NonNull
-	private StateChangedListener<Integer> getDisplayPositionListener() {
-		if (displayPositionListener == null) {
-			displayPositionListener = value -> app.runInUIThread(() -> updateCard(otherCard));
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		mapActivity = (MapActivity) requireMyActivity();
+		widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, appMode);
+
+		if (savedInstanceState != null) {
+			setLayoutMode(AndroidUtils.getSerializable(savedInstanceState, SCREEN_LAYOUT_MODE, ScreenLayoutMode.class));
+		} else {
+			setLayoutMode(ScreenLayoutMode.getDefault(mapActivity));
 		}
-		return displayPositionListener;
+	}
+
+	private void setLayoutMode(@Nullable ScreenLayoutMode layoutMode) {
+		this.layoutMode[0] = layoutMode;
+		widgetsSettingsHelper.setLayoutMode(layoutMode);
+	}
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+			@Nullable Bundle savedInstanceState) {
+		updateNightMode();
+		View view = inflate(R.layout.fragment_configure_screen, container, false);
+		if (!InsetsUtils.isEdgeToEdgeSupported()) {
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+		}
+		setupToolbar(view);
+		setupViewPager(view);
+
+		return view;
+	}
+
+	private void setupToolbar(@NonNull View view) {
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+
+		ImageButton backButton = toolbar.findViewById(R.id.back_button);
+		backButton.setImageDrawable(getContentIcon(AndroidUtils.getNavigationIconResId(app)));
+		backButton.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				activity.onBackPressed();
+			}
+		});
+
+		ImageButton profilesButton = toolbar.findViewById(R.id.profiles_button);
+		profilesButton.setImageDrawable(getPaintedIcon(appMode.getIconRes(), appMode.getProfileColor(nightMode)));
+		profilesButton.setOnClickListener(v -> {
+			FragmentManager manager = getFragmentManager();
+			if (manager != null) {
+				SelectAppModesBottomSheetDialogFragment.showInstance(manager,
+						ConfigureScreenFragment.this, isUsedOnMap(), appMode, true);
+			}
+		});
+		ImageButton actionsButton = toolbar.findViewById(R.id.actions_button);
+		actionsButton.setOnClickListener(v -> openActionMenu(actionsButton));
+	}
+
+	private void openActionMenu(@NonNull ImageButton actionButton) {
+		List<PopUpMenuItem> items = new ArrayList<>();
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitle(getString(R.string.map_screen_layout))
+				.setIcon(getContentIcon(R.drawable.ic_action_map_screen_layout_portrait))
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						MapScreenLayoutFragment.showInstance(activity);
+					}
+				}).create());
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitle(getString(R.string.copy_from_other_profile))
+				.setIcon(getContentIcon(R.drawable.ic_action_copy))
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						FragmentManager manager = activity.getSupportFragmentManager();
+						SelectCopyAppModeBottomSheet.showInstance(manager, this, appMode);
+					}
+				}).create());
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitle(getString(R.string.shared_string_help))
+				.setIcon(getContentIcon(R.drawable.ic_action_help))
+				.showTopDivider(true)
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						AndroidUtils.openUrl(activity, R.string.docs_widget_configure_screen, nightMode);
+					}
+				}).create());
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitle(getString(R.string.reset_to_default))
+				.setIcon(getContentIcon(R.drawable.ic_action_reset))
+				.showTopDivider(true)
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						FragmentManager manager = activity.getSupportFragmentManager();
+						ConfirmationBottomSheet.showResetSettingsDialog(manager, this, R.string.map_widget_config);
+					}
+				}).create());
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = actionButton;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		PopUpMenu.show(displayData);
+	}
+
+	private void setupViewPager(@NonNull View view) {
+		tabLayout = view.findViewById(R.id.layout_tab_layout);
+		viewPager = view.findViewById(R.id.view_pager);
+
+		if (viewPager.getChildAt(0) instanceof RecyclerView recyclerView) {
+			recyclerView.setItemAnimator(null);
+		}
+
+		adapter = new ConfigureScreenAdapter(this);
+		viewPager.setAdapter(adapter);
+
+		viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+			@Override
+			public void onPageSelected(int position) {
+				boolean separate = settings.USE_SEPARATE_LAYOUTS.get();
+				setLayoutMode(separate ? ScreenLayoutMode.values()[position] : null);
+			}
+		});
+		updateTabsAndPager();
+	}
+
+	private void updateTabsAndPager() {
+		if (tabLayoutMediator != null) {
+			tabLayoutMediator.detach();
+		}
+
+		boolean separate = settings.USE_SEPARATE_LAYOUTS.get();
+		AndroidUiHelper.updateVisibility(tabLayout, separate);
+
+		adapter.notifyDataSetChanged();
+
+		if (separate) {
+			tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) ->
+					tab.setText(ScreenLayoutMode.values()[position].toHumanString(app))
+			);
+			tabLayoutMediator.attach();
+
+			if (layoutMode[0] != null) {
+				viewPager.setCurrentItem(layoutMode[0].ordinal(), false);
+			}
+		}
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		updateTabsAndPager();
+		callMapActivity(MapActivity::disableDrawer);
+		settings.USE_SEPARATE_LAYOUTS.addListener(getSeparateLayoutsListener());
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		callMapActivity(MapActivity::enableDrawer);
+		settings.USE_SEPARATE_LAYOUTS.removeListener(getSeparateLayoutsListener());
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (layoutMode[0] != null) {
+			outState.putSerializable(SCREEN_LAYOUT_MODE, layoutMode);
+		}
+	}
+
+	@Override
+	public void onActionConfirmed(int actionId) {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			widgetsSettingsHelper.setAppMode(appMode);
+			widgetsSettingsHelper.resetConfigureScreenSettings();
+			recreateControlsCompletely(activity);
+			updateFragment();
+		}
+	}
+
+	@Override
+	public void copyAppModePrefs(@NonNull ApplicationMode fromAppMode) {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			widgetsSettingsHelper.setAppMode(appMode);
+			widgetsSettingsHelper.copyConfigureScreenSettings(fromAppMode);
+			recreateControlsCompletely(activity);
+			updateFragment();
+		}
+	}
+
+	private void recreateControlsCompletely(@NonNull MapActivity mapActivity) {
+		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+		if (mapInfoLayer != null) {
+			mapInfoLayer.recreateAllControls(mapActivity);
+		}
+	}
+
+	@Override
+	public void onAppModeChanged(ApplicationMode appMode) {
+		setAppMode(appMode);
+		updateFragment();
+	}
+
+	@Override
+	public void onCardPressed(@NonNull BaseCard card) {
+		if (card instanceof MapScreenLayoutCard) {
+			updateFragment();
+		}
+	}
+
+	@Override
+	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		if (card instanceof ConfigureActionsCard) {
+			if (buttonIndex == ConfigureActionsCard.COPY_BUTTON_INDEX) {
+				SelectCopyAppModeBottomSheet.showInstance(manager, ConfigureScreenFragment.this, appMode);
+			} else if (buttonIndex == ConfigureActionsCard.RESET_BUTTON_INDEX) {
+				ConfirmationBottomSheet.showResetSettingsDialog(manager, ConfigureScreenFragment.this, R.string.map_widget_config);
+			}
+		} else if (card instanceof ConfigureButtonsCard) {
+			if (buttonIndex == ConfigureButtonsCard.CUSTOM_MAP_BUTTONS_INDEX) {
+				CustomMapButtonsFragment.showInstance(manager, ConfigureScreenFragment.this);
+			} else if (buttonIndex == ConfigureButtonsCard.DEFAULT_MAP_BUTTONS_INDEX) {
+				DefaultMapButtonsFragment.showInstance(manager, ConfigureScreenFragment.this);
+			}
+		}
 	}
 
 	@NonNull
-	private StateChangedListener<Boolean> getDistanceByTapListener() {
-		if (distanceByTapListener == null) {
-			distanceByTapListener = change -> app.runInUIThread(() -> updateCard(otherCard));
+	private StateChangedListener<Boolean> getSeparateLayoutsListener() {
+		if (separateLayoutsListener == null) {
+			separateLayoutsListener = change -> app.runInUIThread(() -> {
+				setLayoutMode(change ? ScreenLayoutMode.getDefault(mapActivity) : null);
+				updateTabsAndPager();
+			});
 		}
-		return distanceByTapListener;
-	}
-
-	@NonNull
-	private StateChangedListener<Boolean> getSpeedometerListener() {
-		if (speedometerListener == null) {
-			speedometerListener = change -> app.runInUIThread(() -> updateCard(otherCard));
-		}
-		return speedometerListener;
+		return separateLayoutsListener;
 	}
 
 	private void updateFragment() {
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		Fragment fragment = manager.findFragmentByTag(TAG);
 		if (fragment != null && AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			currentScrollY = scrollView.getScrollY();
 			manager.beginTransaction().detach(fragment).commitAllowingStateLoss();
 			manager.beginTransaction().attach(fragment).commitAllowingStateLoss();
 		}

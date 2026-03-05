@@ -169,15 +169,15 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			if (sortMode == NAME_ASCENDING || sortMode == NAME_DESCENDING) {
 				appendNameDescription(builder, trackItem, analysis, shouldShowFolder);
 			} else if (sortMode == DATE_ASCENDING || sortMode == DATE_DESCENDING) {
-				appendCreationTimeDescription(builder, trackItem, analysis);
+				appendCreationTimeDescription(builder, trackItem, analysis, shouldShowFolder);
 			} else if (sortMode == DISTANCE_ASCENDING || sortMode == DISTANCE_DESCENDING) {
 				appendDistanceDescription(builder, trackItem, analysis, shouldShowFolder);
 			} else if (sortMode == DURATION_ASCENDING || sortMode == DURATION_DESCENDING) {
 				appendDurationDescription(builder, trackItem, analysis, shouldShowFolder);
 			} else if (sortMode == NEAREST) {
-				appendNearestDescription(builder, analysis, cityName);
+				appendNearestDescription(builder, trackItem, analysis, cityName, shouldShowFolder);
 			} else if (sortMode == LAST_MODIFIED) {
-				appendLastModifiedDescription(builder, trackItem, analysis);
+				appendLastModifiedDescription(builder, trackItem, analysis, shouldShowFolder);
 			}
 			description.setText(builder);
 		}
@@ -206,7 +206,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		appendFolderName(builder, trackItem, shouldShowFolder);
 	}
 
-	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem, @NonNull GpxTrackAnalysis analysis) {
+	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder,
+	                                           @NonNull TrackItem trackItem,
+	                                           @NonNull GpxTrackAnalysis analysis,
+	                                           boolean shouldShowFolder) {
 		GpxDataItem dataItem = trackItem.getDataItem();
 		long creationTime = dataItem != null ? dataItem.getParameter(FILE_CREATION_TIME) : -1;
 		if (creationTime > 10) {
@@ -221,9 +224,13 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			appendDuration(builder, analysis);
 		}
 		appendPoints(builder, analysis);
+		appendFolderName(builder, trackItem, shouldShowFolder);
 	}
 
-	private void appendLastModifiedDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem, @NonNull GpxTrackAnalysis analysis) {
+	private void appendLastModifiedDescription(@NonNull SpannableStringBuilder builder,
+	                                           @NonNull TrackItem trackItem,
+	                                           @NonNull GpxTrackAnalysis analysis,
+	                                           boolean shouldShowFolder) {
 		long lastModified = trackItem.getLastModified();
 		if (lastModified > 0) {
 			DateFormat format = OsmAndFormatter.getDateFormat(app);
@@ -237,6 +244,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			appendDuration(builder, analysis);
 		}
 		appendPoints(builder, analysis);
+		appendFolderName(builder, trackItem, shouldShowFolder);
 	}
 
 	private void appendDistanceDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem,
@@ -266,8 +274,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private void appendNearestDescription(@NonNull SpannableStringBuilder builder,
+										  @NonNull TrackItem trackItem,
 	                                      @NonNull GpxTrackAnalysis analysis,
-	                                      @Nullable String cityName) {
+	                                      @Nullable String cityName,
+	                                      boolean shouldShowFolder) {
 		KLatLon latLon = analysis.getLatLonStart();
 		if (latLon != null) {
 			UpdateLocationInfo locationInfo = new UpdateLocationInfo(app, null, SharedUtil.jLatLon(latLon));
@@ -285,6 +295,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			appendDuration(builder, analysis);
 		}
 		appendPoints(builder, analysis);
+		appendFolderName(builder, trackItem, shouldShowFolder);
 	}
 
 	private void appendDuration(@NonNull SpannableStringBuilder builder, @NonNull GpxTrackAnalysis analysis) {

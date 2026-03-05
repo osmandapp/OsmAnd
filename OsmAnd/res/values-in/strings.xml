@@ -1949,8 +1949,6 @@
     <string name="logout_from_osmand_cloud">Keluar dari OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Keluar\?
 \nAnda harus masuk lagi untuk mencadangkan atau memulihkan data.</string>
-    <string name="backup_deleting_all_data">Menghapus semua data…</string>
-    <string name="backup_deleted_all_data">Semua data dihapus.</string>
     <string name="backup_deleting_all_data_descr">Mohon tunggu sampai OsmAnd selesai menghapus semua data Anda dari cloud. Semua data pada perangkat tidak disentuh.</string>
     <string name="backup_deleted_all_data_descr">Semua data Anda berhasil dihapus dari OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">Semua riwayat versi terhapus.</string>
@@ -4038,7 +4036,7 @@
     <string name="osm_recipient_stat">Penyuntingan %1$s, jumlah %2$s mBTC</string>
     <string name="select_map_marker">Pilih penanda peta</string>
     <string name="no_microphone_permission">Berikan akses mikrofon.</string>
-    <string name="find_parking">Cari parkir</string>
+    <string name="find_parking">Temukan parkiran</string>
     <string name="shared_string_save_changes">Simpan perubahan</string>
     <string name="av_audio_format">Format keluaran audio</string>
     <string name="av_audio_format_descr">Pilih format keluaran audio.</string>
@@ -4195,11 +4193,7 @@
     <string name="world_map_download_descr">Peta dasar dunia (menutupi semua dunia pada tingkat perbesaran yang rendah) tidak ada atau usang. Mohon pertimbangkan untuk diperbarui untuk ikhtisar global.</string>
     <string name="rendering_value_translucent_pink_name">Merah muda translucent</string>
     <string name="rendering_value_darkyellow_name">Kuning gelap</string>
-    <string name="srtm_plugin_description">Informasi medan, seperti garis kontur, bukitshade, lereng, membantu Anda untuk secara visual menilai peletakan tanah, bantuan, navigabilitas, dan banyak lagi. Informasi topografi dapat di peta diwakili oleh garis kontur, pencukur bantuan dan / atau pewarnaan steepness.
-\n
-\nData yang mendasari berasal dari SRTM dan ASTER.
-\n
-\nBaca lebih lanjut di %1$s.</string>
+    <string name="srtm_plugin_description">Informasi medan, seperti garis kontur, bukitshade, lereng, membantu Anda untuk secara visual menilai peletakan tanah, bantuan, navigabilitas, dan banyak lagi. Informasi topografi dapat di peta diwakili oleh garis kontur, pencukur bantuan dan / atau pewarnaan steepness. \n \nData yang mendasari berasal dari SRTM dan ASTER. \n \nBaca lebih lanjut di %1$s.</string>
     <string name="download_wikipedia_files">Unduh data Wikipedia tambahan (%1$s MB)\?</string>
     <string name="storage_directory_internal_app">Memori aplikasi internal</string>
     <string name="confirm_usage_speed_cameras">Dalam banyak negara (Jerman, Prancis, Italia, dan lainnya) penggunaan peringatan kamera kecepatan ilegal. OsmAnd tidak mengasumsikan tanggung jawab apa pun jika Anda melanggar hukum. Mohon hanya ketuk \'Iya\' jika Anda memenuhi syarat untuk menggunakan fitur ini.</string>
@@ -4386,7 +4380,7 @@
     <string name="gpx_option_from_start_point">Lewati dengan seluruh trek</string>
     <string name="bg_service_sleep_mode_off">Jalankan 
 \n aplikasi di latar belakang</string>
-    <string name="context_menu_item_add_parking_point">Tandai sebagai lokasi parkir</string>
+    <string name="context_menu_item_add_parking_point">Tandai sebagai tempat parkir</string>
     <string name="route_kr">Tetap kanan dan jalan</string>
     <string name="local_indexes_cat_tile">Peta ubin daring dan cache</string>
     <string name="zoom_by_trackball">Gunakan trackball untuk kontrol perbesaran</string>
@@ -5383,7 +5377,7 @@
     <string name="open_issue_on_github_descr">Ajukan pertanyaan, minta fitur baru</string>
     <string name="open_issue_on_github">Buka isu baru di GitHub</string>
     <string name="report_an_issues">Laporkan isu</string>
-    <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempel waktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}, pwt={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempel waktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}, pwt={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="release_4_6">• Android Auto: Menambahkan mode 3D
 \n
 \n • Trek: Memperkenalkan filter dan folder cerdas, memori yang dioptimalkan untuk file yang lebih besar
@@ -6104,8 +6098,8 @@
     <string name="meridian_180">Meridian ke-180</string>
     <string name="equator">Ekuator</string>
     <string name="release_5_0">• Temukan POI peringkat teratas dengan mode Jelajahi baru\n\n• Semua rute OSM sekarang dapat dicari! Hiking, bersepeda, MTB, dan lainnya\n\n• Widget navigasi baru menggabungkan panah belokan dan petunjuk navigasi\n\n• Widget info rute saat ini: menampilkan ETA, waktu kedatangan, dan jarak\n\n• Pilih lereng ski dan jalur MTB di peta untuk informasi terperinci\n\n• Kemampuan memilih ukuran widget untuk panel kiri dan kanan\n\n• Ditambahkan grid koordinat dengan koordinat geografis\n\n• Ditambahkan kemampuan untuk menyesuaikan tampilan default grup favorit\n\n• Android Auto: lihat ETA dan jarak ke waypoint berikutnya; nama kota sekarang muncul dalam hasil pencarian\n• Puncak menonjol sekarang dapat ditemukan melalui peta dan pencarian\n\n• Ketinggian puncak gunung sekarang tersedia dalam satuan kaki\n\n• Ditambahkan: tebing dan area panjat tebing di peta\n\n• Pencarian alamat di Amerika Serikat telah ditingkatkan\n\n• Ditambahkan TTS Bahasa Ibrani untuk navigasi</string>
-    <string name="shared_string_online_only">Hanya Daring</string>
-    <string name="shared_string_offline_only">Hanya Luring</string>
+    <string name="shared_string_online_only">Daring Saja</string>
+    <string name="shared_string_offline_only">Luring Saja</string>
     <string name="intermediate_first">Perantara dahulu</string>
     <string name="destination_first">Tujuan dahulu</string>
     <string name="display_priority">Prioritas tampilan</string>
@@ -6238,4 +6232,72 @@
     <string name="copy_as_new_folder">Salin sebagai folder baru</string>
     <string name="add_to_a_folder">Tambahkan ke folder</string>
     <string name="amount_of_total_used">%1$s dari %2$s digunakan</string>
+    <string name="copy_link">Salin tautan</string>
+    <string name="delete_folder_description">Hapus folder \"%1$s\"?</string>
+    <string name="vehicle_metrics_chart_category">Metrik kendaraan</string>
+    <string name="lang_mi">Māori</string>
+    <string name="show_expand_button">Tampilkan tombol perluas</string>
+    <string name="imprecise_coordinates">Koordinat tidak tepat</string>
+    <string name="has_vehicle_metrics">Dengan data OBDII</string>
+    <string name="astronomy_plugin_description">Bagan bintang, peta bintang 3D</string>
+    <string name="star_map">Peta bintang</string>
+    <string name="star_charts_name">Bagan bintang</string>
+    <string name="star_visibility_name">Visibilitas bintang</string>
+    <string name="star_altitude_name">Ketinggian bintang</string>
+    <string name="astro_name_sun">Matahari</string>
+    <string name="astro_name_moon">Bulan</string>
+    <string name="astro_name_mercury">Merkurius</string>
+    <string name="astro_name_venus">Venus</string>
+    <string name="astro_name_mars">Mars</string>
+    <string name="astro_name_jupiter">Jupiter</string>
+    <string name="astro_name_saturn">Saturnus</string>
+    <string name="astro_name_uranus">Uranus</string>
+    <string name="astro_name_neptune">Neptunus</string>
+    <string name="astro_name_pluto">Pluto</string>
+    <string name="azimuthal_grid">Grid Azimut</string>
+    <string name="equatorial_grid">Grid Ekuator</string>
+    <string name="ecliptic_line">Garis Ekliptika</string>
+    <string name="magnitude_filter">Filter magnitudo</string>
+    <string name="astro_planets">Planet</string>
+    <string name="astro_constellation">Rasi</string>
+    <string name="astro_constellations">Rasi</string>
+    <string name="astro_stars">Bintang</string>
+    <string name="astro_galaxies">Galaksi</string>
+    <string name="astro_nebulae">Nebula</string>
+    <string name="astro_open_clusters">Kluster Terbuka</string>
+    <string name="astro_globular_clusters">Kluster Globular</string>
+    <string name="astro_galaxy_clusters">Kluster Galaksi</string>
+    <string name="astro_black_holes">Lubang Hitam</string>
+    <string name="visible_layers_and_objects">Lapisan &amp; Objek yang Terlihat</string>
+    <string name="shared_string_azimuth">Azimut</string>
+    <string name="shared_string_magnitude">Magnitudo</string>
+    <string name="astro_rise">Terbit</string>
+    <string name="astro_set">Terbenam</string>
+    <string name="shared_string_centimeters">centimeter</string>
+    <string name="equator_line">Garis Khatulistiwa</string>
+    <string name="copy_from_portrait_layout">Salin dari tata letak Vertikal</string>
+    <string name="copy_from_landscape_layout">Salin dari tata letak Horizontal</string>
+    <string name="panels_layout_wide">Lebar</string>
+    <string name="panels_layout">Tata letak panel</string>
+    <string name="astro_solar_system">Tata surya</string>
+    <string name="galactic_line">Garis Galaksi</string>
+    <string name="meridian_line">Garis Meridian</string>
+    <string name="astro_nebulas">Nebula</string>
+    <string name="astro_star_clusters">Klaster bintang</string>
+    <string name="astro_directions">Arah</string>
+    <string name="red_filter">Filter merah</string>
+    <string name="astro_visible_objects">Objek tampak</string>
+    <string name="astro_configure_view">Konfigurasi tampilan</string>
+    <string name="astronomy_plugin_name">Astronomi</string>
+    <string name="astro_min_magnitude">Magnitudo min.</string>
+    <string name="shared_string_ratio">rasio</string>
+    <string name="shared_string_percentage">persentase</string>
+    <string name="shared_string_value">Nilai</string>
+    <string name="gradient_range_type_relative">Relatif</string>
+    <string name="edit_palette">Edit palet</string>
+    <string name="add_palette">Tambahkan palet</string>
+    <string name="delete_palette">Hapus palet</string>
+    <string name="delete_colors_palette_dialog_summary">Apakah Anda yakin Anda ingin menghapus palet %1$s?</string>
+    <string name="shared_string_trip_average">Rerata trip</string>
+    <string name="gradient_range_type_fixed">Nilai Tetap</string>
 </resources>

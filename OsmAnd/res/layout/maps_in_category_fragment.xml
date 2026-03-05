@@ -24,7 +24,7 @@
     <include layout="@layout/progress_with_two_texts"/>
 
     <ExpandableListView
-        android:id="@android:id/list"
+        android:id="@+id/category_list"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="0dp"

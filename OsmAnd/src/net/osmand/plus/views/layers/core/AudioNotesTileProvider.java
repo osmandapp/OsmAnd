@@ -204,8 +204,13 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
         return MapMarker.PinIconHorisontalAlignment.CenterHorizontal;
     }
 
-    @Override
-    public PointI getPinIconOffset() {
-        return offset;
-    }
+	@Override
+	public PointI getPinIconOffset() {
+		return offset;
+	}
+
+	@Override
+	public boolean waitForLoading() {
+		return true;
+	}
 }

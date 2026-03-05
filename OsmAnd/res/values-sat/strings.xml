@@ -322,7 +322,6 @@
     <string name="backup_welcome_back">ᱥᱟᱹᱜᱩᱱ ᱫᱟᱨᱟᱢ ᱫᱚᱦᱲᱟ!</string>
     <string name="backup_restore_now">ᱱᱤᱛᱜᱮ ᱫᱚᱦᱲᱟ ᱡᱚᱜᱟᱣ ᱢᱮ</string>
     <string name="backup_setup">ᱵᱮᱠᱚᱯ ᱥᱮᱴᱚᱯ ᱢᱮ</string>
-    <string name="backup_deleted_all_data">ᱡᱷᱚᱛᱚ ᱥᱟᱹᱠᱷᱤᱭᱟᱹᱛ ᱢᱮᱴᱟᱣ ᱦᱩᱭᱮᱱᱟ᱾</string>
     <string name="contour_lines_hillshade_slope">ᱨᱩᱯᱛᱮᱭᱟᱨ ᱜᱟᱨ, ᱵᱩᱨᱩᱩᱢᱩᱞᱠᱚ, ᱫᱟᱲᱟᱝ</string>
     <string name="backup_error_user_is_not_registered">ᱚᱱᱟ ᱤᱢᱮᱞ ᱴᱷᱤᱠᱟᱹᱱᱟ ᱛᱮ ᱠᱚᱱᱦᱚᱸ ᱵᱮᱵᱷᱟᱨᱤᱭᱟᱹ ᱨᱮᱡᱤᱥᱴᱚᱨ ᱵᱟᱹᱱᱩᱜ ᱠᱚᱣᱟ</string>
     <string name="shared_string_view_all">ᱡᱷᱚᱛᱚ ᱧᱮᱞ ᱢᱮ</string>
@@ -467,7 +466,6 @@
     <string name="attribute">ᱜᱟᱞᱟᱝ</string>
     <string name="shared_string_progress">ᱞᱟᱦᱟ ᱟᱠᱟᱱᱟ</string>
     <string name="backup_data_removed">ᱡᱷᱚᱛᱚ ᱥᱟᱹᱠᱷᱤᱭᱟᱹᱛ ᱚᱪᱚᱜ ᱦᱚᱭᱮᱱᱟ᱾</string>
-    <string name="backup_deleting_all_data">ᱡᱷᱚᱛᱚ ᱥᱟᱹᱠᱷᱤᱭᱟᱹᱛ ᱢᱮᱴᱟᱣ ᱦᱩᱭᱩᱜ ᱠᱟᱱᱟ…</string>
     <string name="backup_error_token_is_not_valid_or_expired">ᱵᱟᱝ ᱵᱟᱛᱟᱣ ᱵᱟᱝᱠᱷᱟᱱ ᱯᱟᱨᱚᱢ ᱟᱠᱟᱱ ᱴᱚᱠᱮᱱ</string>
     <string name="backup_error_token_is_not_valid">ᱮᱢᱟᱠᱟᱱ ᱥᱟᱫᱷᱚᱱ ID ᱵᱟᱝᱠᱷᱟᱱ ᱴᱚᱠᱮᱱ ᱨᱮ ᱡᱟᱦᱟᱱᱟᱜ ᱵᱷᱩᱞ ᱢᱮᱱᱟᱜᱼᱟ</string>
     <string name="backup_error_file_not_available">ᱨᱮᱫ ᱵᱟᱹᱱᱩᱜᱼᱟ</string>

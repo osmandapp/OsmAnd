@@ -10,17 +10,13 @@ import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
-import net.osmand.shared.settings.enums.SpeedConstants;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkerSideWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
-import java.util.Iterator;
-import java.util.Queue;
+import net.osmand.shared.settings.enums.SpeedConstants;
 
 public class AverageSpeedComputer extends AverageValueComputer {
 
@@ -37,7 +33,7 @@ public class AverageSpeedComputer extends AverageValueComputer {
 			MapWidget widget = widgetInfo.widget;
 			boolean usesAverageSpeed = widget instanceof AverageSpeedWidget || widget instanceof MapMarkerSideWidget;
 			if (usesAverageSpeed
-					&& widgetInfo.isEnabledForAppMode(appMode)
+					&& widgetInfo.isEnabledForAppMode(appMode, ScreenLayoutMode.getDefault(widget.getMapActivity()))
 					&& WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, appMode)) {
 				return true;
 			}

@@ -47,6 +47,7 @@ import net.osmand.plus.download.local.dialogs.MemoryInfo;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
@@ -64,12 +65,14 @@ import net.osmand.util.Algorithms;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ChartUtils {
 
 	public static final int CHART_LABEL_COUNT = 3;
 	private static final int MAX_CHART_DATA_ITEMS = 10000;
+	public static final int MAX_CHART_TYPES = 2;
 
 	public static void setupElevationChart(ElevationChart chart) {
 		setupElevationChart(chart, new ElevationChartAppearance());
@@ -938,5 +941,50 @@ public class ChartUtils {
 				return PluginsHelper.getOrderedLineDataSet(chart, analysis, graphType, gpxDataSetAxisType, calcWithoutGaps, useRightAxis);
 			}
 		}
+	}
+
+	@Nullable
+	public static List<GPXDataSetType> getSavedChartTypes(@NonNull ListStringPreference listStringPreference) {
+		List<GPXDataSetType> savedYAxisTypes = new ArrayList<>();
+		List<String> setTypes = listStringPreference.getStringsList();
+		if (Algorithms.isEmpty(setTypes)) {
+			return null;
+		}
+
+		for (GPXDataSetType type : GPXDataSetType.values()) {
+			if (setTypes.contains(type.name())) {
+				savedYAxisTypes.add(type);
+				if (savedYAxisTypes.size() >= MAX_CHART_TYPES) {
+					break;
+				}
+			}
+		}
+
+		return Algorithms.isEmpty(savedYAxisTypes) ? null : savedYAxisTypes;
+	}
+
+	@NonNull
+	public static List<GPXDataSetType> getSavedGeneralYAxis(@NonNull OsmandSettings settings) {
+		List<GPXDataSetType> dataSetTypes = getSavedChartTypes(settings.TRACK_CHART_Y_AXIS);
+		if (!Algorithms.isEmpty(dataSetTypes)) {
+			return dataSetTypes;
+		}
+
+		return Arrays.asList(GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE);
+	}
+
+	public static void saveYAxis(@NonNull ListStringPreference preference, @NonNull List<GPXDataSetType> dataSetTypes) {
+		List<String> names = new ArrayList<>();
+		for (GPXDataSetType type : dataSetTypes) {
+			names.add(type.name());
+			if (names.size() >= MAX_CHART_TYPES) {
+				break;
+			}
+		}
+		preference.setStringsList(names);
+	}
+
+	public static void saveGeneralYAxis(@NonNull OsmandSettings settings, @NonNull List<GPXDataSetType> dataSetTypes) {
+		saveYAxis(settings.TRACK_CHART_Y_AXIS, dataSetTypes);
 	}
 }

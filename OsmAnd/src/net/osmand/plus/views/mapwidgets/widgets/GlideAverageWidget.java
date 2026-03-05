@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -28,6 +30,11 @@ public class GlideAverageWidget extends GlideBaseWidget {
 		super(mapActivity, WidgetType.GLIDE_AVERAGE, customId, widgetsPanel);
 		averageGlideComputer = app.getAverageGlideComputer();
 		measuredIntervalPref = registerMeasuredIntervalPref(customId);
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		updateInfo(null);
 	}
 

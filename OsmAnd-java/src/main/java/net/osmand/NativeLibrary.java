@@ -1,7 +1,5 @@
 package net.osmand;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_GZ_FILE_EXT;
 import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.data.Amenity.WIKIDATA;
 

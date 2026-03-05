@@ -168,7 +168,7 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 			askEnableProxy();
 		} else if (settings.isProxyEnabled()) {
 			// Update proxy in Network Utils, when proxy is already enabled
-			settings.ENABLE_PROXY.set(NetworkUtils.getProxy() != null);
+			settings.ENABLE_PROXY.set(NetworkUtils.hasProxy());
 		}
 	}
 

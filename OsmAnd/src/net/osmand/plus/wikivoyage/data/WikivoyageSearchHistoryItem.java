@@ -33,15 +33,15 @@ public class WikivoyageSearchHistoryItem {
 	}
 
 	public String getArticleTitle() {
-		return articleTitle;
+		return articleTitle != null ? articleTitle : "";
 	}
 
 	public String getLang() {
-		return lang;
+		return lang != null ? lang : "";
 	}
 
 	public String getIsPartOf() {
-		return isPartOf;
+		return isPartOf != null ? isPartOf : "";
 	}
 
 	public long getLastAccessed() {

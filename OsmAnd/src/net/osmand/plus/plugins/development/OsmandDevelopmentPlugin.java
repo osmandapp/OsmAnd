@@ -1,33 +1,41 @@
 package net.osmand.plus.plugins.development;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_TILT;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_FPS;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_MEMORY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_TARGET_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
+
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.PowerManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.squareup.picasso.Picasso;
 
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.NativeCore;
-import net.osmand.core.android.MapRendererContext;
-import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.plus.utils.PicassoUtils;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
@@ -47,10 +55,14 @@ import net.osmand.plus.quickaction.actions.LocationSimulationAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.simulation.DashSimulateFragment;
-import net.osmand.plus.views.AutoZoomBySpeedHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -59,26 +71,15 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.ZoomLevelWidgetState;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
+
+import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_TILT;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_FPS;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_MEMORY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_TARGET_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
-
-import org.apache.commons.logging.Log;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
@@ -90,14 +91,11 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SAVE_LOCATION_PROVIDER_TO_GPX;
 	public final OsmandPreference<Boolean> SHOW_PRIMITIVES_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
-	public final OsmandPreference<Boolean> ENABLE_3D_MAP_OBJECTS;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
 	private final StateChangedListener<Boolean> debugRenderingInfoListener;
 	private final StateChangedListener<Boolean> msaaListener;
 	private final StateChangedListener<Boolean> sphericalListener;
-	private final StateChangedListener<Boolean> map3DObjectsListener;
-	public static final String ZOOM_TILT_ANIMATION_LOG_TAG = "zoom_tilt_animation_log_tag";
 
 	private static final Log LOG_termal = PlatformUtil.getLog("ThermalState");
 
@@ -128,7 +126,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SAVE_LOCATION_PROVIDER_TO_GPX = registerBooleanPreference("save_location_provider_to_gpx", true).makeGlobal().makeShared().cache();
 		SHOW_PRIMITIVES_DEBUG_INFO = registerBooleanPreference("show_primitives_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
-		ENABLE_3D_MAP_OBJECTS = registerBooleanPreference("enable_3d_map_objects", false).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();
@@ -167,17 +164,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		};
 		settings.SPHERICAL_MAP.addListener(sphericalListener);
 
-		map3DObjectsListener = enabled -> {
-			MapRendererContext ctx = net.osmand.plus.views.corenative.NativeCoreContext.getMapRendererContext();
-			if (ctx != null) {
-				if (Boolean.TRUE.equals(enabled)) {
-					ctx.recreate3DObjectsProvider();
-				} else {
-					ctx.reset3DObjectsProvider();
-				}
-			}
-		};
-		ENABLE_3D_MAP_OBJECTS.addListener(map3DObjectsListener);
 	}
 
 	@Override
@@ -221,8 +207,9 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
-		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
+	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos,
+			@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
 
 		MapWidget fpsWidget = createMapWidgetForParams(mapActivity, DEV_FPS);
 		widgetsInfos.add(creator.createWidgetInfo(fpsWidget));
@@ -293,14 +280,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			startThermalStatusListening();
 		}
 
-		MapRendererContext ctx = net.osmand.plus.views.corenative.NativeCoreContext.getMapRendererContext();
-		if (ctx != null) {
-			if (Boolean.TRUE.equals(ENABLE_3D_MAP_OBJECTS.get())) {
-				ctx.recreate3DObjectsProvider();
-			} else {
-				ctx.reset3DObjectsProvider();
-			}
-		}
 		return true;
 	}
 
@@ -315,7 +294,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	private String getThermalStateName(int stateCode) {
 		String name;
-		switch (stateCode){
+		switch (stateCode) {
 			case PowerManager.THERMAL_STATUS_NONE:
 				name = "None";
 				break;
@@ -378,7 +357,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType> availableTypes) {
 		// Disable AutoZoom dev chart
 		//AutoZoomBySpeedHelper.addAvailableGPXDataSetTypes(app, analysis, availableTypes);
 	}
@@ -529,6 +508,14 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 			NativeCoreContext.setMapRendererContext(app, 1.0f);
 			app.getOsmandMap().setupRenderingView();
+		}
+	}
+
+	@Override
+	public void updateMapPresentationEnvironment(@NonNull MapRendererContext rendererContext) {
+		MapRendererView rendererView = rendererContext.getMapRendererView();
+		if (rendererView != null) {
+			rendererView.setFlatEarth(!settings.SPHERICAL_MAP.get());
 		}
 	}
 }

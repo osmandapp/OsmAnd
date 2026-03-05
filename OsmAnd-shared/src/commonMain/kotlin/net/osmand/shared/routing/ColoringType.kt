@@ -27,6 +27,13 @@ enum class ColoringType(val id: String, val titleId: String, val iconId: String)
 			}
 		}
 
+		fun valueOfId(id: String): ColoringType? {
+			if (!getRouteInfoAttribute(id).isNullOrEmpty()) {
+				return ATTRIBUTE
+			}
+			return entries.find { it.id.equals(id, ignoreCase = true) }
+		}
+
 		fun valueOf(scaleType: GradientScaleType?): ColoringType? {
 			return when (scaleType) {
 				GradientScaleType.SPEED -> SPEED
@@ -76,7 +83,6 @@ enum class ColoringType(val id: String, val titleId: String, val iconId: String)
 			purpose: ColoringPurpose): Boolean {
 			return ColoringType.valuesOf(purpose).contains(type)
 		}
-
 	}
 
 	fun getName(routeInfoAttribute: String?): String? {
@@ -116,7 +122,6 @@ enum class ColoringType(val id: String, val titleId: String, val iconId: String)
 			else -> null
 		}
 	}
-
 }
 
 object RouteStatisticsHelper {

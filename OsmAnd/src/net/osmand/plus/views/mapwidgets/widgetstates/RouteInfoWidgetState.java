@@ -14,18 +14,28 @@ import net.osmand.util.Algorithms;
 
 public class RouteInfoWidgetState extends ResizableWidgetState {
 
+	private static final String SHOW_EXPAND_BUTTON_PREF_ID = "show_expand_button";
 	private static final String DEFAULT_VALUE_PREF_ID = "route_info_widget_display_mode";
 	private static final String DISPLAY_PRIORITY_PREF_ID = "route_info_widget_display_priority";
 
 	private final CommonPreference<DisplayValue> defaultViewPref;
 	private final CommonPreference<DisplayPriority> displayPriorityPref;
+	private final CommonPreference<Boolean> showExpandButtonPref;
 
 	public RouteInfoWidgetState(@NonNull OsmandApplication app, @Nullable String customId) {
 		super(app, customId, WidgetType.ROUTE_INFO, WidgetSize.MEDIUM);
 		defaultViewPref = registerDefaultViewPreference(customId);
 		displayPriorityPref = registerDisplayPriorityPreference(customId);
+		showExpandButtonPref = registerShowExpandButtonPreference(customId);
 	}
 
+	public boolean isShowExpandButtonEnabled(@NonNull ApplicationMode appMode) {
+		return showExpandButtonPref.getModeValue(appMode);
+	}
+
+	public void setShowExpandButtonEnabled(@NonNull ApplicationMode appMode, boolean value) {
+		showExpandButtonPref.setModeValue(appMode, value);
+	}
 	@NonNull
 	public DisplayValue getDefaultView() {
 		return getDefaultView(settings.getApplicationMode());
@@ -65,6 +75,7 @@ public class RouteInfoWidgetState extends ResizableWidgetState {
 		super.copyPrefsFromMode(sourceAppMode, appMode, customId);
 		registerDefaultViewPreference(customId).setModeValue(appMode, defaultViewPref.getModeValue(sourceAppMode));
 		registerDisplayPriorityPreference(customId).setModeValue(appMode, displayPriorityPref.getModeValue(sourceAppMode));
+		registerShowExpandButtonPreference(customId).setModeValue(appMode, showExpandButtonPref.getModeValue(sourceAppMode));
 	}
 
 	@NonNull
@@ -87,5 +98,14 @@ public class RouteInfoWidgetState extends ResizableWidgetState {
 		DisplayPriority defValue = DisplayPriority.DESTINATION_FIRST;
 		DisplayPriority[] values = DisplayPriority.values();
 		return settings.registerEnumStringPreference(prefId, defValue, values, DisplayPriority.class).makeProfile().cache();
+	}
+
+	@NonNull
+	private CommonPreference<Boolean> registerShowExpandButtonPreference(@Nullable String customId) {
+		String prefId = SHOW_EXPAND_BUTTON_PREF_ID;
+		if (!Algorithms.isEmpty(customId)) {
+			prefId += "_" + customId;
+		}
+		return settings.registerBooleanPreference(prefId, true).makeProfile().cache();
 	}
 }

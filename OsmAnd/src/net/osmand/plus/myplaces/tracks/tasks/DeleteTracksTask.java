@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.plus.utils.FileUtils;
@@ -72,9 +73,8 @@ public class DeleteTracksTask extends AsyncTask<Void, File, Void> {
 			if (isCancelled()) {
 				break;
 			}
-			if (tracksGroup instanceof TrackFolder) {
+			if (tracksGroup instanceof TrackFolder trackFolder) {
 				totalFiles++;
-				TrackFolder trackFolder = (TrackFolder) tracksGroup;
 				deleteTrackItems(trackFolder.getFlattenedTrackItems());
 
 				File dirFile = SharedUtil.jFile(trackFolder.getDirFile());
@@ -82,9 +82,10 @@ public class DeleteTracksTask extends AsyncTask<Void, File, Void> {
 					deletedFiles++;
 					publishProgress(dirFile);
 				}
-			} else if (tracksGroup instanceof VisibleTracksGroup) {
-				VisibleTracksGroup visibleTracksGroup = (VisibleTracksGroup) tracksGroup;
+			} else if (tracksGroup instanceof VisibleTracksGroup visibleTracksGroup) {
 				deleteTrackItems(visibleTracksGroup.getTrackItems());
+			} else if (tracksGroup instanceof OrganizedTracksGroup organizedTracks) {
+				deleteTrackItems(organizedTracks.getTrackItems());
 			}
 		}
 	}

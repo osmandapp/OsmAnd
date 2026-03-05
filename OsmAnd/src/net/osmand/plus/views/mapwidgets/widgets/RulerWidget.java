@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.utils.OsmAndFormatterParams.NO_TRAILING_ZEROS;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -14,9 +16,9 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatterParams;
-import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.ViewChangeProvider;
 import net.osmand.plus.widgets.FrameLayoutEx;
@@ -24,7 +26,8 @@ import net.osmand.plus.widgets.FrameLayoutEx;
 public class RulerWidget extends FrameLayoutEx implements ViewChangeProvider {
 
 	private final OsmandApplication app;
-	private final OsmandMap osmandMap;
+	private final OsmandSettings settings;
+	private final OsmandMapTileView mapTileView;
 
 	private View layout;
 	private ImageView icon;
@@ -49,13 +52,13 @@ public class RulerWidget extends FrameLayoutEx implements ViewChangeProvider {
 		this(context, attrs, defStyleAttr, 0);
 	}
 
-	public RulerWidget(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-			int defStyleRes) {
+	public RulerWidget(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
-		this.app = (OsmandApplication) context.getApplicationContext();
-		osmandMap = app.getOsmandMap();
-		cacheMapDensity = osmandMap.getMapDensity();
+		this.app = AndroidUtils.getApp(context);
+		this.settings = app.getSettings();
+		this.mapTileView = app.getOsmandMap().getMapView();
+		this.cacheMapDensity = settings.MAP_DENSITY.get();
 	}
 
 	@Override
@@ -69,53 +72,42 @@ public class RulerWidget extends FrameLayoutEx implements ViewChangeProvider {
 		maxWidth = getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
 	}
 
-	public void updateTextSize(boolean isNight, int textColor, int textShadowColor,
-			int shadowRadius) {
+	public void updateTextSize(boolean isNight, int textColor, int textShadowColor, int shadowRadius) {
 		TextInfoWidget.updateTextColor(text, textShadow, textColor, textShadowColor, false, shadowRadius);
 		icon.setBackgroundResource(isNight ? R.drawable.ruler_night : R.drawable.ruler);
 	}
 
-	public boolean updateInfo(@NonNull RotatedTileBox tb) {
+	public boolean updateInfo(@NonNull RotatedTileBox tileBox) {
 		boolean visible = true;
-		OsmandMapTileView view = osmandMap.getMapView();
-		float mapDensity = osmandMap.getMapDensity();
+		float mapDensity = settings.MAP_DENSITY.get();
 		// update cache
-		if (view.isZooming() || osmandMap.getMapView().isCarView()) {
+		if (mapTileView.isZooming() || mapTileView.isCarView()) {
 			visible = false;
-		} else if ((tb.getZoom() + tb.getZoomFloatPart() != cacheRulerZoom
-				|| Math.abs(tb.getCenterTileX() - cacheRulerTileX) > 1
-				|| Math.abs(tb.getCenterTileY() - cacheRulerTileY) > 1
+		} else if ((tileBox.getZoom() + tileBox.getZoomFloatPart() != cacheRulerZoom
+				|| Math.abs(tileBox.getCenterTileX() - cacheRulerTileX) > 1
+				|| Math.abs(tileBox.getCenterTileY() - cacheRulerTileY) > 1
 				|| mapDensity != cacheMapDensity)
-				&& tb.getPixWidth() > 0 && maxWidth > 0) {
-			cacheRulerZoom = (float) (tb.getZoom() + tb.getZoomFloatPart());
-			cacheRulerTileX = tb.getCenterTileX();
-			cacheRulerTileY = tb.getCenterTileY();
+				&& tileBox.getPixWidth() > 0 && maxWidth > 0) {
+			cacheRulerZoom = (float) (tileBox.getZoom() + tileBox.getZoomFloatPart());
+			cacheRulerTileX = tileBox.getCenterTileX();
+			cacheRulerTileY = tileBox.getCenterTileY();
 			cacheMapDensity = mapDensity;
 
-			double pixDensity = tb.getPixDensity();
+			double pixDensity = tileBox.getPixDensity();
 			double roundedDist = OsmAndFormatter.calculateRoundedDist(maxWidth / pixDensity, app);
-
 			int cacheRulerDistPix = (int) (pixDensity * roundedDist);
-			String cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
-			textShadow.setText(cacheRulerText);
-			text.setText(cacheRulerText);
-			ViewGroup.LayoutParams lp = layout.getLayoutParams();
-			lp.width = cacheRulerDistPix;
-			layout.setLayoutParams(lp);
+
+			String distance = OsmAndFormatter.getFormattedDistance((float) roundedDist, app, NO_TRAILING_ZEROS);
+			text.setText(distance);
+			textShadow.setText(distance);
+
+			ViewGroup.LayoutParams params = layout.getLayoutParams();
+			params.width = cacheRulerDistPix;
+			layout.setLayoutParams(params);
 			layout.requestLayout();
 		}
 		AndroidUiHelper.updateVisibility(layout, visible);
+
 		return true;
-	}
-
-	public void setVisibility(boolean visibility) {
-		AndroidUiHelper.updateVisibility(layout, visibility);
-	}
-
-	public static double getRulerDistance(@NonNull OsmandApplication app,
-			@NonNull RotatedTileBox tileBox) {
-		double pixDensity = tileBox.getPixDensity();
-		int maxWidth = app.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
-		return OsmAndFormatter.calculateRoundedDist(maxWidth / pixDensity, app);
 	}
 }

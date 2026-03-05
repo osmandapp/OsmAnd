@@ -7,6 +7,38 @@
     android:background="?attr/bg_color"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:id="@+id/map_controls_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/content_padding_half">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|bottom"
+            android:orientation="horizontal">
+
+            <include layout="@layout/measurement_buttons" />
+
+            <include
+                layout="@layout/map_ruler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/content_padding_small_half" />
+
+        </LinearLayout>
+
+        <include
+            layout="@layout/map_hud_controls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginBottom="@dimen/content_padding_small_half" />
+
+    </FrameLayout>
+
     <include layout="@layout/plan_route_toolbar_and_up_down_row"/>
 
     <FrameLayout
@@ -21,6 +53,7 @@
             android:layout_height="match_parent"/>
 
         <include layout="@layout/card_bottom_divider"/>
+
     </FrameLayout>
 
 </LinearLayout>

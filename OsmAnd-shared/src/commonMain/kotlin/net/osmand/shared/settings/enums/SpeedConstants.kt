@@ -1,5 +1,6 @@
 package net.osmand.shared.settings.enums
 
+import net.osmand.shared.units.SpeedUnits
 import net.osmand.shared.util.Localization
 
 enum class SpeedConstants(val key: String, val descr: String, val imperial: Boolean) {
@@ -16,5 +17,14 @@ enum class SpeedConstants(val key: String, val descr: String, val imperial: Bool
 
 	fun toShortString(): String {
 		return Localization.getString(key)
+	}
+
+	fun toUnits(): SpeedUnits? {
+		return when(this) {
+			KILOMETERS_PER_HOUR -> SpeedUnits.KILOMETERS_PER_HOUR
+			MILES_PER_HOUR -> SpeedUnits.MILES_PER_HOUR
+			NAUTICALMILES_PER_HOUR -> SpeedUnits.KNOTS
+			else -> null
+		}
 	}
 }

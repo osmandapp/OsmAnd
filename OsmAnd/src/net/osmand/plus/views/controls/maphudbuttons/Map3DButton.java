@@ -62,6 +62,7 @@ public class Map3DButton extends MapButton {
 			boolean flatMode = buttonState.isFlatMapMode();
 			float tiltAngle = mapView.normalizeElevationAngle(
 					flatMode ? getElevationAngle(mapView.getZoom()) : DEFAULT_ELEVATION_ANGLE);
+			settings.setLastKnownMapElevation(tiltAngle);
 			animateDraggingMapThread.startTilting(tiltAngle, 0.0f);
 			mapView.refreshMap();
 		};

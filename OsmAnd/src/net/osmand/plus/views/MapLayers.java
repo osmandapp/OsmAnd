@@ -48,6 +48,8 @@ import net.osmand.plus.widgets.ctxmenu.ViewCreator;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.shared.palette.data.PaletteChangeEvent;
+import net.osmand.shared.palette.data.PaletteRepositoryListener;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -96,6 +98,7 @@ public class MapLayers {
 	private StateChangedListener<Integer> transparencyListener;
 	private StateChangedListener<Integer> overlayTransparencyListener;
 	private StateChangedListener<Boolean> enable3DMapsListener;
+	private PaletteRepositoryListener paletteRepositoryListener;
 
 	public MapLayers(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -218,6 +221,12 @@ public class MapLayers {
 			}
 		});
 		app.getSettings().ENABLE_3D_MAPS.addListener(enable3DMapsListener);
+
+		paletteRepositoryListener = event -> {
+			gpxLayer.onPaletteChanged(event);
+			mapView.refreshMap();
+		};
+		app.getPaletteRepository().addListener(paletteRepositoryListener);
 
 		createAdditionalLayers(null);
 	}

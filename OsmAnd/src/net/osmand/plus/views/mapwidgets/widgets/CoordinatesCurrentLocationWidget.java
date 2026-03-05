@@ -2,6 +2,8 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES_CURRENT_LOCATION;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -21,8 +23,8 @@ public class CoordinatesCurrentLocationWidget extends CoordinatesBaseWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		super.updateInfo(drawSettings);
+	public void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
+		super.updateInfo(view, drawSettings);
 		boolean visible = visibilityHelper.shouldShowTopCoordinatesWidget();
 		updateVisibility(visible);
 		if (visible) {

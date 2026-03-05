@@ -120,7 +120,7 @@ public class RenderedObjectMenuController extends MenuController {
 	}
 
 	@Nullable
-	private String searchObjectNameByAmenityTags(@NonNull Amenity amenity) {
+	private String searchObjectTypeByAmenityTags(@NonNull Amenity amenity) {
 		if (poiTranslator == null) {
 			return null;
 		}
@@ -133,7 +133,6 @@ public class RenderedObjectMenuController extends MenuController {
 			if (!Algorithms.isEmpty(translation)) {
 				break;
 			}
-			// nameStr uses (key_value - value - key) sequence
 			if (Algorithms.isEmpty(translation)) {
 				translation = poiTranslator.getTranslation(translationKey + "_" + value);
 			}
@@ -156,9 +155,7 @@ public class RenderedObjectMenuController extends MenuController {
 		}
 
 		if (builder instanceof RenderedObjectMenuBuilder that) {
-			typeStr = searchObjectNameByAmenityTags(that.getAmenity());
-		} else {
-			typeStr = getTranslatedType(renderedObject); // probably never used
+			typeStr = searchObjectTypeByAmenityTags(that.getAmenity());
 		}
 
 		if (Algorithms.isEmpty(typeStr)) {
@@ -166,77 +163,6 @@ public class RenderedObjectMenuController extends MenuController {
 		}
 
 		return typeStr != null ? typeStr : super.getTypeStr();
-	}
-
-	private String getTranslatedType(RenderedObject renderedObject) {
-		if (poiTranslator == null || mapPoiTypes == null) {
-			return "";
-		}
-		PoiType pt = null;
-		PoiType otherPt = null;
-		String translated = null;
-		String firstTag = "";
-		String separate = null;
-		String single = null;
-		for (Map.Entry<String, String> e : renderedObject.getTags().entrySet()) {
-			String key = e.getKey();
-			String value = e.getValue();
-			String translationKey = key.replace("osmand_", "").replace(":", "_");
-			if (key.startsWith("name")) {
-				continue;
-			}
-			if (Algorithms.isEmpty(value) && otherPt == null) {
-				otherPt = mapPoiTypes.getPoiTypeByKey(key);
-			}
-			pt = mapPoiTypes.getPoiTypeByKey(key + "_" + value);
-			if (pt == null && key.startsWith("osmand_")) {
-				pt = mapPoiTypes.getPoiTypeByKey(key.replace("osmand_", "") + "_" + value);
-			}
-			if (pt != null) {
-				break;
-			}
-			firstTag = firstTag.isEmpty() ? key + ": " + value : firstTag;
-			if (!Algorithms.isEmpty(value)) {
-				// typeStr uses (key - key_value - value) sequence
-				String t = poiTranslator.getTranslation(translationKey);
-				if (Algorithms.isEmpty(t)) {
-					t = poiTranslator.getTranslation(translationKey + "_" + value);
-				}
-				if (Algorithms.isEmpty(t)) {
-					t = poiTranslator.getTranslation(value);
-				}
-				if (translated == null && !Algorithms.isEmpty(t)) {
-					translated = t;
-				}
-				String t1 = poiTranslator.getTranslation(key);
-				String t2 = poiTranslator.getTranslation(value);
-				if (separate == null && t1 != null && t2 != null) {
-					separate = t1 + ": " + t2.toLowerCase();
-				}
-				if (single == null && t2 != null && !value.equals("yes") && !value.equals("no")) {
-					single = t2;
-				}
-				if (key.equals("amenity")) {
-					translated = t2;
-				}
-			}
-		}
-		if (pt != null) {
-			return pt.getTranslation();
-		}
-		if (translated != null) {
-			return translated;
-		}
-		if (otherPt != null) {
-			return otherPt.getTranslation();
-		}
-		if (separate != null) {
-			return separate;
-		}
-		if (single != null) {
-			return single;
-		}
-		return firstTag;
 	}
 
 	@NonNull

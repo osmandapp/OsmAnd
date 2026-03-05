@@ -424,7 +424,7 @@
     <string name="poi_car_sharing">Zdieľanie áut</string>
     <string name="poi_boat_sharing">Zdieľanie lodí</string>
     <string name="poi_dock">Dok</string>
-    <string name="poi_toilets">WC</string>
+    <string name="poi_toilets">WC;Toalety</string>
     <string name="poi_sauna">Sauna</string>
     <string name="poi_brothel">Nevestinec</string>
     <string name="poi_mortuary">Márnica</string>
@@ -666,7 +666,7 @@
     <string name="poi_craft_stand_builder">Stavba stánkov</string>
     <string name="poi_craft_stonemason">Kamenár</string>
     <string name="poi_craft_sun_protection">Ochrana pred slnkom</string>
-    <string name="poi_craft_sweep">Kominár</string>
+    <string name="poi_craft_chimney_sweeper">Kominár</string>
     <string name="poi_craft_tailor">Krajčír</string>
     <string name="poi_craft_tiler">Pokrývač dlaždíc</string>
     <string name="poi_craft_tinsmith">Cínová výroba</string>
@@ -2694,7 +2694,7 @@
     <string name="poi_cuisine_noodle">Rezance</string>
     <string name="poi_cuisine_donut">Šisky</string>
     <string name="poi_cuisine_ramen">Ramen</string>
-    <string name="poi_cuisine_crepe">Palacinky</string>
+    <string name="poi_cuisine_crepe">Francúzske palacinky;Palacinky</string>
     <string name="poi_cuisine_breakfast">Raňajky</string>
     <string name="poi_cuisine_beef_bowl">Gyudon</string>
     <string name="poi_cuisine_steak">Stejk</string>
@@ -3135,7 +3135,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">Opravy prevodovky</string>
     <string name="poi_service_vehicle_motor_yes">Motory</string>
     <string name="poi_service_vehicle_insurance_yes">Poistenie</string>
-    <string name="poi_service_vehicle_tyres_yes">Pneumatiky</string>
+    <string name="poi_service_vehicle_tyres_yes">Pneumatiky;Pneuservis</string>
     <string name="poi_aerialway_zip_line">Lanový sklz</string>
     <string name="poi_via_ferrata">Zaistená cesta (Via ferrata)</string>
     <string name="poi_cable_number">Počet lán</string>
@@ -4713,7 +4713,7 @@
     <string name="poi_barrier_chain">Prekážka z reťaze</string>
     <string name="poi_barrier_log">Brvno</string>
     <string name="poi_barrier_sliding_gate">Posuvná brána</string>
-    <string name="poi_sample_collection">Odber vzoriek</string>
+    <string name="poi_sample_collection">Odber vzoriek;Odber krvi;Krvné testy</string>
     <string name="poi_sample_collection_yes">Áno</string>
     <string name="poi_sample_collection_covid19">COVID19</string>
     <string name="poi_sample_collection_blood">Krv</string>

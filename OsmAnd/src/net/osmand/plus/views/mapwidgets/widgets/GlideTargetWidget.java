@@ -40,6 +40,11 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	public GlideTargetWidget(@NonNull MapActivity mapActivity, @NonNull GlideTargetWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, WidgetType.GLIDE_TARGET, customId, widgetsPanel);
 		this.widgetState = widgetState;
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		updateInfo(null);
 		updateWidgetName();
 	}

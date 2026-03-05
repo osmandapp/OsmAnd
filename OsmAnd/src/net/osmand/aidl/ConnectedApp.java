@@ -20,6 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
@@ -183,8 +184,9 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 
 	void createWidgetControls(@NonNull MapActivity mapActivity,
 	                          @NonNull List<MapWidgetInfo> widgetsInfos,
-	                          @NonNull ApplicationMode appMode) {
-		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
+	                          @NonNull ApplicationMode appMode,
+	                          @Nullable ScreenLayoutMode layoutMode) {
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
 		for (AidlMapWidgetWrapper widgetData : widgets.values()) {
 			String baseWidgetId = widgetData.getId();
 			String widgetKey = WIDGET_ID_PREFIX + baseWidgetId;

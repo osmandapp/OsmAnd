@@ -918,11 +918,7 @@
     <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
     <string name="recording_photo_description">Fotografia %1$s de %2$s</string>
     <string name="av_def_action_picture">Tirar uma fotografia</string>
-    <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras de relevo, declives, ajudam a avaliar visualmente a configuração do terreno, o relevo, a navegabilidade e muito mais. As informações topográficas podem ser representadas no mapa por linhas de contorno, assombreamento de declives, e/ou coloração da declividade.
-\n
-\nOs dados subjacentes têm origem em SRTM e ASTER.
-\n
-\nVeja mais informações em %1$s.</string>
+    <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras de relevo, declives, ajudam a avaliar visualmente a configuração do terreno, o relevo, a navegabilidade e muito mais. As informações topográficas podem ser representadas no mapa por linhas de contorno, assombreamento de declives, e/ou coloração da declividade. \n \nOs dados subjacentes têm origem em SRTM e ASTER. \n \nVeja mais informações em %1$s.</string>
     <string name="srtm_plugin_name">Topografia</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_srtm_maps">Curvas de nível</string>
@@ -3976,8 +3972,6 @@
     <string name="backup_dont_have_any_descr">Configure uma cópia de segurança automática para não ter de se preocupar com a perda de dados.</string>
     <string name="backup_error_subscription_was_expired_descr">A sua subscrição do OsmAnd Pro expirou, renove-a para poder usar cópias de segurança. Ainda pode restaurar os dados da Cloud.</string>
     <string name="contour_lines_hillshade_slope">Curvas de nível, sombras de relevo, declives</string>
-    <string name="backup_deleting_all_data">A eliminar todos os dados…</string>
-    <string name="backup_deleted_all_data">Todos os dados eliminados.</string>
     <string name="backup_deleting_all_data_descr">Aguarde que o OsmAnd elimine todos os seus dados na Cloud. Todos os dados no dispositivo permanecem intactos.</string>
     <string name="backup_deleted_all_data_descr">Todos os seus dados da OsmAnd Cloud foram eliminados.</string>
     <string name="backup_version_history_removed">Todo o histórico da versão foi removido.</string>
@@ -5060,7 +5054,7 @@
     <string name="help_article_widgets_radius_ruler_name">Régua radial e régua</string>
     <string name="delete_trash_item_confirmation_desc">Eliminar \"%1$s\" permanentemente?</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Gravar viagem</string>
-    <string name="live_monitoring_adress_descr">Especificar o endereço web com a sintaxe de parâmetros lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Especificar o endereço web com a sintaxe de parâmetros lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="help_article_map_legend_nautical_map_name">Estilo de mapa náutico</string>
     <string name="discard_filter_changes">Descartar alterações do filtro</string>
     <string name="map_widget_group_glide_ratio">Rácio de deslizamento</string>
@@ -5909,7 +5903,6 @@
     <string name="private_access_routing_req_short">Permitir o uso de uma estrada privada para chegar ao seu destino?</string>
     <string name="rendering_attr_hideNoLNAM_name">Marcas marítimas OSM (algumas)</string>
     <string name="rendering_attr_hideNoLNAM_description">Ocultar marcas marítimas OSM (algumas)</string>
-    <string name="show_spherical_map">Mostrar mapa esférico</string>
     <string name="show_spherical_map_description">Exibir modelo esferoidal da Terra</string>
     <string name="help_article_navigation_routing_ski_routing_name">Pistas e rotas de esqui</string>
     <string name="accessibility_independent_features">Recursos independentes</string>

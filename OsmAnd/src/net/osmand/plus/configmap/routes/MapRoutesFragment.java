@@ -47,6 +47,8 @@ public abstract class MapRoutesFragment extends BaseFullScreenFragment implement
 
 	private static final Log log = PlatformUtil.getLog(MapRoutesFragment.class);
 
+	public static final String ATTR_NAME_KEY = "attr_name_key";
+
 	protected RouteLayersHelper routeLayersHelper;
 
 	protected final List<BaseCard> cards = new ArrayList<>();
@@ -196,8 +198,8 @@ public abstract class MapRoutesFragment extends BaseFullScreenFragment implement
 		return defaultScreens || pair != null;
 	}
 
-	@Nullable
-	public static String getFragmentName(@Nullable String attrName) {
+	@NonNull
+	public static String getFragmentName(@NonNull String attrName) {
 		if (Algorithms.stringsEqual(BICYCLE.getRenderingPropertyAttr(), attrName)) {
 			return CycleRoutesFragment.class.getName();
 		} else if (Algorithms.stringsEqual(MTB.getRenderingPropertyAttr(), attrName)) {
@@ -226,7 +228,11 @@ public abstract class MapRoutesFragment extends BaseFullScreenFragment implement
 		FragmentManager manager = activity.getSupportFragmentManager();
 		if (!Algorithms.isEmpty(name) && AndroidUtils.isFragmentCanBeAdded(manager, name)) {
 			try {
+				Bundle args = new Bundle();
+				args.putString(ATTR_NAME_KEY, attrName);
+
 				Fragment fragment = Fragment.instantiate(activity, name);
+				fragment.setArguments(args);
 				manager.beginTransaction()
 						.replace(R.id.content, fragment, fragment.getTag())
 						.commitAllowingStateLoss();

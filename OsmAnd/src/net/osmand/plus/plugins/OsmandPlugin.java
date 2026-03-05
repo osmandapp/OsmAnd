@@ -54,6 +54,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -309,7 +310,7 @@ public abstract class OsmandPlugin {
 	 * Add menu rows to the map context menu.
 	 */
 	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view,
-			@Nullable Object object, @Nullable Amenity amenity) {
+	                                 @Nullable Object object, @Nullable Amenity amenity) {
 	}
 
 	/*
@@ -348,7 +349,8 @@ public abstract class OsmandPlugin {
 	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 	}
 
-	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
+	public void createWidgets(@NonNull MapActivity activity, @NonNull List<MapWidgetInfo> widgetInfos,
+	                          @NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 	}
 
 	public void mapActivityCreate(@NonNull MapActivity activity) {
@@ -445,8 +447,14 @@ public abstract class OsmandPlugin {
 	}
 
 	protected CommonPreference<Boolean> registerBooleanPreference(@NonNull String prefId, boolean defValue) {
+		return registerBooleanPreference(prefId, defValue, true);
+	}
+
+	protected CommonPreference<Boolean> registerBooleanPreference(@NonNull String prefId, boolean defValue, boolean setRelatedPlugin) {
 		CommonPreference<Boolean> preference = settings.registerBooleanPreference(prefId, defValue);
-		preference.setRelatedPlugin(this);
+		if (setRelatedPlugin) {
+			preference.setRelatedPlugin(this);
+		}
 		pluginPreferences.add(preference);
 		return preference;
 	}
@@ -546,7 +554,7 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType> availableTypes) {
 
 	}
 

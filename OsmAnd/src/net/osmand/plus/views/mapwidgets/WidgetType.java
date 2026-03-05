@@ -21,6 +21,8 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingAvgSpeedWidgetInfoFragment;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingMovingTimeWidgetInfoFragment;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingSlopeInfoFragment;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingDistanceInfoFragment;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingMaxSpeedWidgetInfoFragment;
@@ -35,6 +37,7 @@ import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.views.mapwidgets.configure.settings.*;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.util.CollectionUtils;
@@ -81,6 +84,8 @@ public enum WidgetType {
 	TRIP_RECORDING_DOWNHILL("trip_recording_downhill", R.string.map_widget_trip_recording_downhill, R.string.trip_recording_downhill_widget_desc, R.drawable.widget_track_recording_downhill_day, R.drawable.widget_track_recording_downhill_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_AVERAGE_SLOPE("trip_recording_average_slope", R.string.average_slope, R.string.trip_recording_average_slope_widget_description, R.drawable.widget_track_recording_average_slope_uphill_day, R.drawable.widget_track_recording_average_slope_uphill_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_MAX_SPEED("trip_recording_max_speed", R.string.shared_string_max_speed, R.string.trip_recording_max_speed_widget_description, R.drawable.widget_track_recording_max_speed_day, R.drawable.widget_track_recording_max_speed_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
+	TRIP_RECORDING_AVG_SPEED("trip_recording_avg_speed", R.string.map_widget_average_speed, R.string.trip_recording_avg_speed_widget_description, R.drawable.widget_track_recording_average_speed_day, R.drawable.widget_track_recording_average_speed_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
+	TRIP_RECORDING_MOVING_TIME("trip_recording_moving_time", R.string.trip_recording_moving_time, R.string.trip_recording_moving_time_widget_description, R.drawable.widget_track_recording_moving_time_day, R.drawable.widget_track_recording_moving_time_night, 0, TRIP_RECORDING, RIGHT),
 
 	CURRENT_TIME("plain_time", R.string.map_widget_plain_time, R.string.current_time_widget_desc, R.drawable.widget_time_day, R.drawable.widget_time_night, R.string.docs_widget_current_time, null, RIGHT),
 	BATTERY("battery", R.string.map_widget_battery, R.string.battery_widget_desc, R.drawable.widget_battery_day, R.drawable.widget_battery_night, R.string.docs_widget_battery, null, RIGHT),
@@ -305,18 +310,19 @@ public enum WidgetType {
 	}
 
 	@NonNull
-	public WidgetsPanel getPanel(@NonNull OsmandSettings settings) {
-		return getPanel(id, settings);
+	public WidgetsPanel getPanel(@NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
+		return getPanel(id, settings, layoutMode);
 	}
 
 	@NonNull
-	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull OsmandSettings settings) {
-		return getPanel(widgetId, settings.getApplicationMode(), settings);
+	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
+		return getPanel(widgetId, settings.getApplicationMode(), layoutMode, settings);
 	}
 
 	@NonNull
-	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull ApplicationMode mode, @NonNull OsmandSettings settings) {
-		WidgetsPanel widgetsPanel = findWidgetPanel(widgetId, settings, mode);
+	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull ApplicationMode mode,
+			@Nullable ScreenLayoutMode layoutMode, @NonNull OsmandSettings settings) {
+		WidgetsPanel widgetsPanel = findWidgetPanel(widgetId, settings, mode, layoutMode);
 		if (widgetsPanel != null) {
 			return widgetsPanel;
 		}
@@ -324,24 +330,27 @@ public enum WidgetType {
 	}
 
 	@Nullable
-	public static WidgetsPanel findWidgetPanel(@NonNull String widgetId, @NonNull OsmandSettings settings, @Nullable ApplicationMode mode) {
-		ApplicationMode appMode = mode == null ? settings.getApplicationMode() : mode;
+	public static WidgetsPanel findWidgetPanel(@NonNull String widgetId, @NonNull OsmandSettings settings,
+			@Nullable ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
+		if (appMode == null) {
+			appMode = settings.getApplicationMode();
+		}
 		ArrayList<WidgetsPanel> setPanels = new ArrayList<>();
 		ArrayList<WidgetsPanel> unsetPanels = new ArrayList<>();
 		for (WidgetsPanel widgetsPanel : WidgetsPanel.values()) {
-			if (widgetsPanel.getOrderPreference(settings).isSetForMode(appMode)) {
+			if (widgetsPanel.getOrderPreference(settings, layoutMode).isSetForMode(appMode)) {
 				setPanels.add(widgetsPanel);
 			} else {
 				unsetPanels.add(widgetsPanel);
 			}
 		}
 		for (WidgetsPanel panel : setPanels) {
-			if (panel.contains(widgetId, settings, appMode)) {
+			if (panel.contains(widgetId, settings, appMode, layoutMode)) {
 				return panel;
 			}
 		}
 		for (WidgetsPanel panel : unsetPanels) {
-			if (panel.contains(widgetId, settings, appMode)) {
+			if (panel.contains(widgetId, settings, appMode, layoutMode)) {
 				return panel;
 			}
 		}
@@ -418,6 +427,10 @@ public enum WidgetType {
 			return new TripRecordingDistanceInfoFragment();
 		} else if (this == TRIP_RECORDING_MAX_SPEED) {
 			return new TripRecordingMaxSpeedWidgetInfoFragment();
+		} else if (this == TRIP_RECORDING_AVG_SPEED) {
+			return new TripRecordingAvgSpeedWidgetInfoFragment();
+		} else if (this == TRIP_RECORDING_MOVING_TIME) {
+			return new TripRecordingMovingTimeWidgetInfoFragment();
 		}
 
 		return null;

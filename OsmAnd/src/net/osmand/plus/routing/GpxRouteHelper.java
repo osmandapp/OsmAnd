@@ -144,7 +144,7 @@ public class GpxRouteHelper {
                     routeParams.start, routeParams.end, startI, endI);
         }
         List<RouteDirectionInfo> inputDirections = gpxParams.directions;
-        List<RouteDirectionInfo> gpxDirections = provider.calcDirections(startI[0], endI[0], inputDirections);
+        List<RouteDirectionInfo> gpxDirections = provider.calcDirections(routeParams, startI[0], endI[0], inputDirections);
         insertIntermediateSegments(routeParams, gpxRoute, gpxDirections, gpxParams.segmentEndpoints, calculateOsmAndRouteParts);
         insertInitialSegment(routeParams, gpxRoute, gpxDirections, calculateOsmAndRouteParts);
         insertFinalSegment(routeParams, gpxRoute, gpxDirections, calculateOsmAndRouteParts);
@@ -152,7 +152,7 @@ public class GpxRouteHelper {
         if (routeParams.recheckRouteNearestPoint()) {
             int index = findNearestPointIndexOnRecalculate(routeParams.previousToRecalculate, gpxRoute, routeParams.start);
             if (index > 0) {
-                gpxDirections = provider.calcDirections(index, gpxRoute.size(), gpxDirections);
+                gpxDirections = provider.calcDirections(routeParams, index, gpxRoute.size(), gpxDirections);
                 gpxRoute = gpxRoute.subList(index, gpxRoute.size());
             }
         }

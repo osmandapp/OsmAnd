@@ -16,12 +16,18 @@ public class GeoParsedPoint {
 	private String query;
 	private boolean geoPoint;
 	private boolean geoAddress;
+	private boolean impreciseCoordinates;
 
 	public GeoParsedPoint(double lat, double lon) {
 		super();
 		this.lat = lat;
 		this.lon = lon;
 		this.geoPoint = true;
+	}
+
+	public GeoParsedPoint(double lat, double lon, boolean imprecise) {
+		this(lat, lon);
+		this.impreciseCoordinates = imprecise;
 	}
 
 	public GeoParsedPoint(double lat, double lon, String label) {
@@ -106,25 +112,44 @@ public class GeoParsedPoint {
 		return geoPoint;
 	}
 
-	private String formatDouble(double d) {
-		if (d == (long) d)
-			return String.format(Locale.ENGLISH, "%d", (long) d);
-		else
-			return String.format("%s", d);
-	}
-
 	public boolean isGeoAddress() {
 		return geoAddress;
+	}
+
+	public boolean hasImpreciseCoordinates() {
+		return impreciseCoordinates;
+	}
+
+	private String formatDouble(double d) {
+		return formatDouble(d, -1);
+	}
+
+	private String formatDouble(double d, int precision) {
+		if (d == (long) d) {
+			return String.format(Locale.US, "%d", (long) d);
+		}
+		if (precision < 0) {
+			return String.format(Locale.US, "%s", d);
+		}
+		return String.format(Locale.US, "%." + precision + "f", d);
+	}
+
+	public String getGeoUriString() {
+		return buildGeoUri(formatDouble(lat), formatDouble(lon));
+	}
+
+	public String getGeoUriString(int precision) {
+		return buildGeoUri(formatDouble(lat, precision), formatDouble(lon, precision));
 	}
 
 	/**
 	 * Generates a URI string according to https://tools.ietf.org/html/rfc5870 and
 	 * https://developer.android.com/guide/components/intents-common.html#Maps
 	 */
-	public String getGeoUriString() {
+	private String buildGeoUri(String latStr, String lonStr) {
 		String uriString;
 		if (isGeoPoint()) {
-			String latlon = formatDouble(lat) + "," + formatDouble(lon);
+			String latlon = latStr + "," + lonStr;
 			uriString = "geo:" + latlon;
 			LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 			if (zoom != NO_ZOOM)

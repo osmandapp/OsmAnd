@@ -4,7 +4,6 @@ import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
 import static net.osmand.plus.helpers.AndroidUiHelper.isOrientationPortrait;
 import static net.osmand.plus.helpers.AndroidUiHelper.processSystemBarScrims;
-import static net.osmand.plus.settings.enums.ThemeUsageContext.APP;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -13,14 +12,11 @@ import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.Window;
-import android.view.WindowInsets;
-import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.graphics.ColorUtils;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -29,7 +25,6 @@ import androidx.core.view.WindowInsetsCompat.Type.InsetsType;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -309,38 +304,20 @@ public class InsetsUtils {
 		}
 	}
 
-	private static void applyMargin(View view, InsetTarget target, EnumSet<InsetSide> sides, @NonNull WindowInsetsCompat insets) {
-		Insets sysBars = insets.getInsets(target.getTypeMask());
+	private static void applyMargin(@NonNull View view, @NonNull InsetTarget target,
+			@NonNull EnumSet<InsetSide> sides, @NonNull WindowInsetsCompat insets) {
 		applyClipPadding(view);
+
 		ViewGroup.LayoutParams params = view.getLayoutParams();
-
-		int marginTop;
-		int marginBottom;
-		int marginRight;
-		int marginLeft;
-
-		boolean left = sides.contains(InsetSide.LEFT);
-		boolean top = sides.contains(InsetSide.TOP);
-		boolean right = sides.contains(InsetSide.RIGHT);
-		boolean bottom = sides.contains(InsetSide.BOTTOM);
-
-		if (params instanceof RelativeLayout.LayoutParams p1) {
-			marginTop = p1.topMargin;
-			marginBottom = p1.bottomMargin;
-			marginRight = p1.rightMargin;
-			marginLeft = p1.leftMargin;
-			final int initialLeft = (Integer) (view.getTag(R.id.initial_margin_left) != null
-					? view.getTag(R.id.initial_margin_left)
-					: marginLeft);
-			final int initialTop = (Integer) (view.getTag(R.id.initial_margin_top) != null
-					? view.getTag(R.id.initial_margin_top)
-					: marginTop);
-			final int initialRight = (Integer) (view.getTag(R.id.initial_margin_right) != null
-					? view.getTag(R.id.initial_margin_right)
-					: marginRight);
-			final int initialBottom = (Integer) (view.getTag(R.id.initial_margin_bottom) != null
-					? view.getTag(R.id.initial_margin_bottom)
-					: marginBottom);
+		if (params instanceof MarginLayoutParams marginParams) {
+			int initialLeft = (Integer) (view.getTag(R.id.initial_margin_left) != null
+					? view.getTag(R.id.initial_margin_left) : marginParams.leftMargin);
+			int initialTop = (Integer) (view.getTag(R.id.initial_margin_top) != null
+					? view.getTag(R.id.initial_margin_top) : marginParams.topMargin);
+			int initialRight = (Integer) (view.getTag(R.id.initial_margin_right) != null
+					? view.getTag(R.id.initial_margin_right) : marginParams.rightMargin);
+			int initialBottom = (Integer) (view.getTag(R.id.initial_margin_bottom) != null
+					? view.getTag(R.id.initial_margin_bottom) : marginParams.bottomMargin);
 
 			if (view.getTag(R.id.initial_margin_left) == null) {
 				view.setTag(R.id.initial_margin_left, initialLeft);
@@ -348,70 +325,18 @@ public class InsetsUtils {
 				view.setTag(R.id.initial_margin_right, initialRight);
 				view.setTag(R.id.initial_margin_bottom, initialBottom);
 			}
-			p1.bottomMargin = bottom ? initialBottom + sysBars.bottom : initialBottom;
-			p1.leftMargin = left ? initialLeft + sysBars.left : initialLeft;
-			p1.rightMargin = right ? initialRight + sysBars.right : initialRight;
-			p1.topMargin = top ? initialTop + sysBars.top : initialTop;
-			view.setLayoutParams(p1);
-		} else if (params instanceof CoordinatorLayout.LayoutParams p1) {
-			marginTop = p1.topMargin;
-			marginBottom = p1.bottomMargin;
-			marginRight = p1.rightMargin;
-			marginLeft = p1.leftMargin;
 
-			final int initialLeft = (Integer) (view.getTag(R.id.initial_margin_left) != null
-					? view.getTag(R.id.initial_margin_left)
-					: marginLeft);
-			final int initialTop = (Integer) (view.getTag(R.id.initial_margin_top) != null
-					? view.getTag(R.id.initial_margin_top)
-					: marginTop);
-			final int initialRight = (Integer) (view.getTag(R.id.initial_margin_right) != null
-					? view.getTag(R.id.initial_margin_right)
-					: marginRight);
-			final int initialBottom = (Integer) (view.getTag(R.id.initial_margin_bottom) != null
-					? view.getTag(R.id.initial_margin_bottom)
-					: marginBottom);
+			boolean left = sides.contains(InsetSide.LEFT);
+			boolean top = sides.contains(InsetSide.TOP);
+			boolean right = sides.contains(InsetSide.RIGHT);
+			boolean bottom = sides.contains(InsetSide.BOTTOM);
+			Insets sysBars = insets.getInsets(target.getTypeMask());
 
-			if (view.getTag(R.id.initial_margin_left) == null) {
-				view.setTag(R.id.initial_margin_left, initialLeft);
-				view.setTag(R.id.initial_margin_top, initialTop);
-				view.setTag(R.id.initial_margin_right, initialRight);
-				view.setTag(R.id.initial_margin_bottom, initialBottom);
-			}
-			p1.bottomMargin = bottom ? initialBottom + sysBars.bottom : initialBottom;
-			p1.leftMargin = left ? initialLeft + sysBars.left : initialLeft;
-			p1.rightMargin = right ? initialRight + sysBars.right : initialRight;
-			p1.topMargin = top ? initialTop + sysBars.top : initialTop;
-			view.setLayoutParams(p1);
-		} else if (params instanceof FrameLayout.LayoutParams p1) {
-			marginTop = p1.topMargin;
-			marginBottom = p1.bottomMargin;
-			marginRight = p1.rightMargin;
-			marginLeft = p1.leftMargin;
-			final int initialLeft = (Integer) (view.getTag(R.id.initial_margin_left) != null
-					? view.getTag(R.id.initial_margin_left)
-					: marginLeft);
-			final int initialTop = (Integer) (view.getTag(R.id.initial_margin_top) != null
-					? view.getTag(R.id.initial_margin_top)
-					: marginTop);
-			final int initialRight = (Integer) (view.getTag(R.id.initial_margin_right) != null
-					? view.getTag(R.id.initial_margin_right)
-					: marginRight);
-			final int initialBottom = (Integer) (view.getTag(R.id.initial_margin_bottom) != null
-					? view.getTag(R.id.initial_margin_bottom)
-					: marginBottom);
-
-			if (view.getTag(R.id.initial_margin_left) == null) {
-				view.setTag(R.id.initial_margin_left, initialLeft);
-				view.setTag(R.id.initial_margin_top, initialTop);
-				view.setTag(R.id.initial_margin_right, initialRight);
-				view.setTag(R.id.initial_margin_bottom, initialBottom);
-			}
-			p1.bottomMargin = bottom ? initialBottom + sysBars.bottom : initialBottom;
-			p1.leftMargin = left ? initialLeft + sysBars.left : initialLeft;
-			p1.rightMargin = right ? initialRight + sysBars.right : initialRight;
-			p1.topMargin = top ? initialTop + sysBars.top : initialTop;
-			view.setLayoutParams(p1);
+			marginParams.bottomMargin = bottom ? initialBottom + sysBars.bottom : initialBottom;
+			marginParams.leftMargin = left ? initialLeft + sysBars.left : initialLeft;
+			marginParams.rightMargin = right ? initialRight + sysBars.right : initialRight;
+			marginParams.topMargin = top ? initialTop + sysBars.top : initialTop;
+			view.setLayoutParams(marginParams);
 		}
 	}
 
@@ -440,7 +365,7 @@ public class InsetsUtils {
 		return result;
 	}
 
-	public static void processNavBarColor(@NonNull ISupportInsets iSupportInsets, @Nullable Dialog dialog) {
+	public static void processNavigationBarColor(@NonNull ISupportInsets iSupportInsets, @Nullable Dialog dialog) {
 		if (dialog == null || dialog.getWindow() == null) {
 			return;
 		}
@@ -449,8 +374,7 @@ public class InsetsUtils {
 		AndroidUiHelper.setNavigationBarContentColor(window, contentLight);
 	}
 
-	public static void processNavBarColor(@NonNull ISupportInsets iSupportInsets) {
-
+	public static void processNavigationBarColor(@NonNull ISupportInsets iSupportInsets) {
 		boolean contentLight = iSupportInsets.isNavigationBarContentLight();
 		int colorId = iSupportInsets.getNavigationBarColorId();
 		Activity activity = iSupportInsets.requireActivity();

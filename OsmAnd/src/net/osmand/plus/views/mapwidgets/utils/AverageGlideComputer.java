@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.widgets.GlideAverageWidget;
@@ -47,7 +48,7 @@ public class AverageGlideComputer extends AverageValueComputer {
 		for (MapWidgetInfo widgetInfo : registry.getAllWidgets()) {
 			MapWidget widget = widgetInfo.widget;
 			if (widget instanceof GlideAverageWidget
-					&& widgetInfo.isEnabledForAppMode(appMode)
+					&& widgetInfo.isEnabledForAppMode(appMode, ScreenLayoutMode.getDefault(widget.getMapActivity()))
 					&& WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, appMode)) {
 				return true;
 			}

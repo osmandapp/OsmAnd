@@ -31,6 +31,7 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private final LocalItemListener listener;
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
+	private boolean isInsideFolder;
 	private boolean selectionMode;
 
 	public LocalItemsAdapter(@NonNull Context context, @NonNull LocalItemListener listener, boolean nightMode) {
@@ -50,45 +51,47 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.selectionMode = selectionMode;
 	}
 
+	public void setInsideFolder(boolean insideFolder) {
+		this.isInsideFolder = insideFolder;
+	}
+
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		switch (viewType) {
-			case LIST_ITEM_TYPE:
-				View itemView = themedInflater.inflate(R.layout.local_list_item, parent, false);
-				return new LocalItemHolder(itemView, listener, nightMode);
-			case MEMORY_USAGE_TYPE:
+		View itemView;
+		return switch (viewType) {
+			case LIST_ITEM_TYPE -> {
+				itemView = themedInflater.inflate(R.layout.local_list_item, parent, false);
+				yield new LocalItemHolder(itemView, listener, nightMode);
+			}
+			case MEMORY_USAGE_TYPE -> {
 				itemView = themedInflater.inflate(R.layout.local_memory_card, parent, false);
-				return new MemoryViewHolder(itemView, false, nightMode);
-			case LIST_HEADER_TYPE:
+				yield new MemoryViewHolder(itemView, false, nightMode);
+			}
+			case LIST_HEADER_TYPE -> {
 				itemView = themedInflater.inflate(R.layout.changes_list_header_item, parent, false);
-				return new HeaderViewHolder(itemView);
-			default:
-				throw new IllegalArgumentException("Unsupported view type");
-		}
+				yield new HeaderViewHolder(itemView);
+			}
+			default -> throw new IllegalArgumentException("Unsupported view type");
+		};
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		if (holder instanceof MemoryViewHolder) {
+		if (holder instanceof MemoryViewHolder viewHolder) {
 			MemoryInfo memoryInfo = (MemoryInfo) items.get(position);
-
 			boolean lastItem = position == getItemCount() - 1;
 			boolean hideDivider = !lastItem && items.get(position + 1) instanceof HeaderGroup;
-
-			MemoryViewHolder viewHolder = (MemoryViewHolder) holder;
 			viewHolder.bindView(memoryInfo, !hideDivider);
-		} else if (holder instanceof LocalItemHolder) {
+
+		} else if (holder instanceof LocalItemHolder viewHolder) {
 			BaseLocalItem item = (BaseLocalItem) items.get(position);
 			boolean lastItem = position == getItemCount() - 1;
 			boolean hideDivider = !lastItem && items.get(position + 1) instanceof HeaderGroup;
+			viewHolder.bindView(item, selectionMode, isInsideFolder, lastItem, hideDivider);
 
-			LocalItemHolder viewHolder = (LocalItemHolder) holder;
-			viewHolder.bindView(item, selectionMode, lastItem, hideDivider);
-		} else if (holder instanceof HeaderViewHolder) {
+		} else if (holder instanceof HeaderViewHolder viewHolder) {
 			HeaderGroup headerGroup = (HeaderGroup) items.get(position);
-
-			HeaderViewHolder viewHolder = (HeaderViewHolder) holder;
 			viewHolder.bindView(headerGroup);
 		}
 	}

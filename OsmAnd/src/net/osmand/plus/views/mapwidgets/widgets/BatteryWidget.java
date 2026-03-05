@@ -4,6 +4,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
 
 import android.content.Intent;
 import android.os.BatteryManager;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,11 @@ public class BatteryWidget extends SimpleWidget {
 
 	public BatteryWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, BATTERY, customId, widgetsPanel);
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		setIcons(false);
 		setText(null, null);
 	}

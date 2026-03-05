@@ -2,4 +2,5 @@
 <resources>
     <string name="shared_string_hide">隱藏</string>
     <string name="timeline">時間軸</string>
+    <string name="km_h">km/h</string>
 </resources>

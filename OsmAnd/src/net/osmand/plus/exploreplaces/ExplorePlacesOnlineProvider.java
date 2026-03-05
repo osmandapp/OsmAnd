@@ -11,33 +11,36 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
+import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.edit.Entity;
+import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.search.GetExplorePlacesImagesTask;
-import net.osmand.plus.search.GetExplorePlacesImagesTask.GetImageCardsListener;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.shared.KAsyncTask;
 import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.exploreplaces.GetExplorePlacesImagesTask;
+import net.osmand.shared.exploreplaces.GetExplorePlacesImagesTask.GetImageCardsListener;
+import net.osmand.shared.exploreplaces.PlacesDatabaseHelper;
+import net.osmand.shared.wiki.WikiCoreHelper.OsmandApiFeatureData;
+import net.osmand.shared.wiki.WikiCoreHelper.WikiDataGeometry;
+import net.osmand.shared.wiki.WikiCoreHelper.WikiDataProperties;
 import net.osmand.shared.wiki.WikiHelper;
 import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
-import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
-import net.osmand.wiki.WikiCoreHelper.WikiDataProperties;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Set;
 
 // Extra: display new categories from web
 
@@ -87,7 +90,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 	public ExplorePlacesOnlineProvider(OsmandApplication app) {
 		this.app = app;
-		this.dbHelper = new PlacesDatabaseHelper(app);
+		this.dbHelper = new PlacesDatabaseHelper();
 	}
 
 	private List<ExplorePlacesListener> listeners = Collections.emptyList();
@@ -168,8 +171,8 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		float maxTileX = (float) MapUtils.getTileNumberX(zoom, rect.right);
 		float minTileY = (float) MapUtils.getTileNumberY(zoom, rect.top);
 		float maxTileY = (float) MapUtils.getTileNumberY(zoom, rect.bottom);
-		boolean loadAll = zoom == MAX_LEVEL_ZOOM_CACHE &&
-				Math.abs(maxTileX - minTileX) <= LOAD_ALL_TINY_RECT || Math.abs(maxTileY - minTileY) <= LOAD_ALL_TINY_RECT;
+		boolean loadAll = zoom == MAX_LEVEL_ZOOM_CACHE
+				&& (Math.abs(maxTileX - minTileX) <= LOAD_ALL_TINY_RECT || Math.abs(maxTileY - minTileY) <= LOAD_ALL_TINY_RECT);
 
 		// Fetch data for all tiles within the bounds
 		List<Amenity> filteredAmenities = new ArrayList<>();
@@ -251,27 +254,41 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	@Nullable
 	private Amenity createAmenity(@NonNull OsmandApiFeatureData featureData) {
 		Amenity amenity = new Amenity();
-		WikiDataProperties properties = featureData.properties;
+		WikiDataProperties properties = featureData.getProperties();
 
-		amenity.setAdditionalInfo(WIKIDATA, app.getString(R.string.wikidata_id_pattern, properties.id));
-		amenity.setName(properties.wikiTitle);
+		String id = properties.getId();
+		amenity.setAdditionalInfo(WIKIDATA, app.getString(R.string.wikidata_id_pattern, id));
+		amenity.setName(properties.getWikiTitle());
 		amenity.setEnName(TransliterationHelper.transliterate(amenity.getName()));
-		amenity.setDescription(properties.wikiDesc);
+		amenity.setDescription(properties.getWikiDesc());
 
-		if (!Algorithms.isEmpty(properties.wikiLangs)) {
-			amenity.updateContentLocales(Set.of(properties.wikiLangs.split(",")));
+		String labelsJson = properties.getLabelsJson();
+		if (!Algorithms.isEmpty(labelsJson) && labelsJson.length() > 2) {
+			try {
+				MapObject.parseNamesJSON(new JSONObject(labelsJson), amenity);
+			} catch (JSONException e) {
+				LOG.error(e);
+			}
+		}
+		String wikiLangs = properties.getWikiLangs();
+		if (!Algorithms.isEmpty(wikiLangs)) {
+			amenity.updateContentLocales(Set.of(wikiLangs.split(",")));
 		}
 
-		if (!Algorithms.isEmpty(properties.photoTitle)) {
-			WikiImage imageData = WikiHelper.INSTANCE.getImageData(properties.photoTitle);
+		String photoTitle = properties.getPhotoTitle();
+		if (!Algorithms.isEmpty(photoTitle)) {
+			WikiImage imageData = WikiHelper.INSTANCE.getImageData(photoTitle);
 			amenity.setWikiPhoto(imageData.getImageHiResUrl());
 			amenity.setWikiIconUrl(imageData.getImageIconUrl());
 			amenity.setWikiImageStubUrl(imageData.getImageStubUrl());
 		}
-		amenity.setLocation(featureData.geometry.coordinates[1], featureData.geometry.coordinates[0]);
+		WikiDataGeometry geometry = featureData.getGeometry();
+		if (geometry != null) {
+			amenity.setLocation(geometry.getCoordinates()[1], geometry.getCoordinates()[0]);
+		}
 
-		String poitype = properties.poitype;
-		String subtype = properties.poisubtype;
+		String poitype = properties.getPoitype();
+		String subtype = properties.getPoisubtype();
 		PoiCategory wikiCategory = app.getPoiTypes().getPoiCategoryByName("osmwiki");
 		PoiCategory category = Algorithms.isEmpty(poitype) ? null : app.getPoiTypes().getPoiCategoryByName(poitype);
 		if (Algorithms.isEmpty(subtype) || category == null) {
@@ -283,57 +300,64 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		}
 		amenity.setType(category);
 		amenity.setSubType(subtype);
-		if (properties.osmid > 0) {
-			amenity.setId(ObfConstants.createMapObjectIdFromCleanOsmId(properties.osmid, Entity.EntityType.valueOf(properties.osmtype)));
-		} else {
-			amenity.setId(-Long.parseLong(properties.id));
+
+		Long osmId = properties.getOsmid();
+		if (osmId != null && osmId > 0) {
+			amenity.setId(ObfConstants.createMapObjectIdFromCleanOsmId(osmId, EntityType.valueOf(properties.getOsmtype())));
+		} else if (id != null) {
+			amenity.setId(-Long.parseLong(id));
 		}
 		//amenity.setTravelTopic(properties.wikiTitle);
 		//amenity.setWikiCategory(properties.wikiDesc);
-		amenity.setTravelEloNumber(properties.elo != null ? properties.elo.intValue() : DEFAULT_ELO);
+		Double elo = properties.getElo();
+		amenity.setTravelEloNumber(elo != null ? elo.intValue() : DEFAULT_ELO);
+
 		return amenity;
 	}
 
 	@SuppressLint("DefaultLocale")
 	private void loadTile(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
-		double left;
-		double right;
-		double top;
-		double bottom;
-
 		TileKey tileKey = new TileKey(zoom, tileX, tileY);
 		synchronized (loadingTasks) {
 			if (loadingTasks.containsKey(tileKey)) {
 				return;
 			}
-			left = MapUtils.getLongitudeFromTile(zoom, tileX);
-			right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
-			top = MapUtils.getLatitudeFromTile(zoom, tileY);
-			bottom = MapUtils.getLatitudeFromTile(zoom, tileY + 1);
 		}
+		double left = MapUtils.getLongitudeFromTile(zoom, tileX);
+		double right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
+		double top = MapUtils.getLatitudeFromTile(zoom, tileY);
+		double bottom = MapUtils.getLatitudeFromTile(zoom, tileY + 1);
 
 		KQuadRect tileRect = new KQuadRect(left, top, right, bottom);
 		synchronized (loadingTasks) {
-			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(app, tileRect, zoom,
-					languages, new GetImageCardsListener() {
+			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(tileRect, zoom, languages, new GetImageCardsListener() {
+
 				@Override
 				public void onTaskStarted() {
 				}
 
 				@Override
-				public void onFinish(@Nullable List<? extends OsmandApiFeatureData> result) {
+				public void onFinish(@NonNull List<OsmandApiFeatureData> result) {
 					synchronized (ExplorePlacesOnlineProvider.this) {
 						notifyListeners(isLoading());
 					}
-					if (result != null) {
-						Map<String, List<OsmandApiFeatureData>> map = new HashMap<>();
+					Map<String, List<OsmandApiFeatureData>> map = new HashMap<>();
+					if (!Algorithms.isEmpty(result)) {
 						for (OsmandApiFeatureData data : result) {
-							List<OsmandApiFeatureData> list = map.computeIfAbsent(
-									data.properties.wikiLang, k -> new ArrayList<>());
+							WikiDataProperties properties = data.getProperties();
+							String lang = properties.getLang();
+							if (Algorithms.isEmpty(lang)) {
+								lang = properties.getWikiLang();
+							}
+							List<OsmandApiFeatureData> list = map.computeIfAbsent(lang, k -> new ArrayList<>());
 							list.add(data);
 						}
-						dbHelper.insertPlaces(zoom, tileX, tileY, map);
 					}
+					for (String lang : languages) {
+						map.putIfAbsent(lang, Collections.emptyList());
+					}
+					dbHelper.insertPlaces(zoom, tileX, tileY, map);
+
 					synchronized (loadingTasks) {
 						loadingTasks.remove(tileKey);
 					}

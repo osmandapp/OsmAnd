@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.osmand.plus.plugins.astronomy.views.StarCompassButton xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/star_map_compass_button"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:clickable="true"
+	android:focusable="true"
+	tools:background="@drawable/btn_circle"
+	tools:contentDescription="@string/map_widget_compass"
+	tools:src="@drawable/ic_compass_white" />

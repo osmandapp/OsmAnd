@@ -1,0 +1,39 @@
+package net.osmand.plus.myplaces.tracks.dialogs.viewholders;
+
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.plus.R;
+import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
+import net.osmand.shared.gpx.data.TracksGroup;
+
+public class OrganizedTracksViewHolder extends TracksGroupViewHolder {
+
+	public OrganizedTracksViewHolder(@NonNull View view, @Nullable TrackGroupsListener listener,
+	                                 boolean nightMode, boolean selectionMode) {
+		super(view, listener, nightMode, selectionMode);
+	}
+
+	@Override
+	public void bindView(@NonNull TracksGroup tracksGroup, boolean showDivider) {
+		super.bindView(tracksGroup, showDivider);
+
+		OrganizedTracksGroup organizedTracks = (OrganizedTracksGroup) tracksGroup;
+		title.setText(organizedTracks.getName());
+		int count = tracksGroup.getTrackItems().size();
+		description.setText(GpxUiHelper.formatTracksCount(app, count));
+
+		String iconName = organizedTracks.getIconName();
+		int iconId = AndroidUtils.getDrawableId(app, iconName, R.drawable.ic_action_folder);
+		icon.setImageDrawable(uiUtilities.getActiveIcon(iconId, nightMode));
+	}
+
+	@Override
+	protected boolean hasOptionsMenu(@NonNull TracksGroup tracksGroup) {
+		return true;
+	}
+}

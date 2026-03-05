@@ -17,8 +17,6 @@
 	<dimen name="map_alarm_text_top_padding">30dp</dimen>
 	<dimen name="map_alarm_bottom_text_size">22sp</dimen>
 	<dimen name="map_alarm_bottom_si_text_size">18sp</dimen>
-	<dimen name="map_alarm_bottom_margin">131dp</dimen>
-	<dimen name="map_alarm_bottom_margin_land">81dp</dimen>
 
 	<dimen name="map_routing_progress_width">150dp</dimen>
 	<dimen name="map_mode_button_width">48dp</dimen>

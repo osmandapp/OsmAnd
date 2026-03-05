@@ -85,7 +85,6 @@ public class GpxMultiSegmentsApproximation {
 		this.gpxPoints = gpxPoints;
 		minPointApproximation = gctx.ctx.config.minPointApproximation;
 		initDist = minPointApproximation / 2;
-		
 	}
 	
 	public void loadConnections(RouteSegmentAppr last, List<RouteSegmentAppr> connected) {
@@ -152,7 +151,10 @@ public class GpxMultiSegmentsApproximation {
 		RouteSegmentAppr last = new RouteSegmentAppr(0, currentPoint.pnt);
 		List<RouteSegmentAppr> connected = new ArrayList<>();
 		RouteSegmentAppr bestRoute = null;
-		while (last.gpxNext() < gpxPoints.size()) { 
+		while (last.gpxNext() < gpxPoints.size()) {
+			if (gctx.ctx.calculationProgress != null && gctx.ctx.calculationProgress.isCancelled) {
+				break;
+			}
 			RouteSegmentAppr bestNext = null;
 			if (!isVisited(last)) {
 				visit(last);
@@ -191,10 +193,13 @@ public class GpxMultiSegmentsApproximation {
 					bestRoute = null;
 				}
 			}
-
 		}
 		if (gctx.ctx.calculationProgress != null) {
 			gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
+			if (gctx.ctx.calculationProgress.isCancelled) {
+				System.out.println("Approximation cancelled");
+				return gctx;
+			}
 		}
 		if (bestRoute == null || bestRoute.gpxNext() < last.gpxNext()) {
 			bestRoute = last; // prefer the farthest end-of-the-route

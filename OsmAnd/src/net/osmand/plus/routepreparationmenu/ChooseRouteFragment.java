@@ -54,7 +54,6 @@ import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
-import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.CumulativeInfo;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.RouteDetailsFragmentListener;
@@ -649,7 +648,7 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 					", " + NBSP +
 					RouteDetailsFragment.getTimeDescription(app, routeDirectionInfo);
 			String distance = sb.replaceAll("\\s", NBSP);
-			String description = routeDirectionInfo.getDescriptionRoutePart();
+			String description = routeDirectionInfo.getDescriptionRoutePart(app);
 			html.append(BR);
 			html.append("<p>")
 					.append(i + 1).append(". ")
@@ -696,7 +695,7 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 			html.append("<td>");
 			html.append(distance);
 			html.append("</td>");
-			String description = routeDirectionInfo.getDescriptionRoutePart();
+			String description = routeDirectionInfo.getDescriptionRoutePart(app);
 			html.append("<td>");
 			html.append(i + 1).append(". ").append(description);
 			html.append("</td>");
@@ -860,7 +859,7 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 				}
 			}
 		}
-		updateNavBarColor();
+		updateNavigationBarColor();
 	}
 
 	@Override

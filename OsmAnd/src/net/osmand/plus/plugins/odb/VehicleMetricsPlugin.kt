@@ -15,6 +15,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.annotation.MainThread
+import com.github.mikephil.charting.charts.LineChart
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import net.osmand.Location
@@ -25,6 +26,9 @@ import net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_VEHICLE_METRICS_ID
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.charts.GPXDataSetAxisType
+import net.osmand.plus.charts.GPXDataSetType
+import net.osmand.plus.charts.OrderedLineDataSet
 import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.plugins.OsmandPlugin
 import net.osmand.plus.plugins.PluginsHelper
@@ -43,6 +47,7 @@ import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.settings.backend.preferences.CommonPreferenceProvider
 import net.osmand.plus.settings.backend.preferences.ListStringPreference
+import net.osmand.plus.settings.enums.ScreenLayoutMode
 import net.osmand.plus.settings.enums.VolumeUnit
 import net.osmand.plus.settings.fragments.SettingsScreenType
 import net.osmand.plus.utils.AndroidUtils
@@ -54,16 +59,17 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator
 import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
 import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.shared.data.KLatLon
+import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDConnector
 import net.osmand.shared.obd.OBDDataComputer
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
 import net.osmand.shared.obd.OBDDispatcher
 import net.osmand.shared.obd.OBDDispatcher.OBDReadStatusListener
 import net.osmand.shared.obd.OBDSimulationSource
@@ -149,13 +155,16 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	}
 
 	override fun createWidgets(
-		mapActivity: MapActivity, widgetsInfos: MutableList<MapWidgetInfo?>,
-		appMode: ApplicationMode) {
-		val creator = WidgetInfoCreator(app, appMode)
+		mapActivity: MapActivity, widgetsInfos: MutableList<MapWidgetInfo>,
+		appMode: ApplicationMode, layoutMode: ScreenLayoutMode?
+	) {
+		val creator = WidgetInfoCreator(app, appMode, layoutMode)
 		for (widgetType in WidgetType.getObdTypes()) {
-			val obdWidget: MapWidget =
-				createMapWidgetForParams(mapActivity, widgetType)
-			widgetsInfos.add(creator.createWidgetInfo(obdWidget))
+			val obdWidget = createMapWidgetForParams(mapActivity, widgetType)
+			val widgetInfo = creator.createWidgetInfo(obdWidget)
+			if (widgetInfo != null) {
+				widgetsInfos.add(widgetInfo)
+			}
 		}
 	}
 
@@ -615,6 +624,37 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		return connectionState == OBDConnectionState.DISCONNECTED
 	}
 
+	override fun getTrackPointsAnalyser(): GpxTrackAnalysis.TrackPointsAnalyser {
+		return VehicleTrackPointsAnalyser()
+	}
+
+	override fun getAvailableGPXDataSetTypes(
+		analysis: GpxTrackAnalysis,
+		out: MutableList<GPXDataSetType?>
+	) {
+		VehicleMetricAttributesUtils.getAvailableGPXDataSetTypes(analysis, out)
+	}
+
+	override fun getOrderedLineDataSet(
+		chart: LineChart,
+		analysis: GpxTrackAnalysis,
+		graphType: GPXDataSetType,
+		axisType: GPXDataSetAxisType,
+		calcWithoutGaps: Boolean, useRightAxis: Boolean
+	): OrderedLineDataSet {
+		return VehicleMetricAttributesUtils.createVehicleMetricsDataSet(
+			app,
+			this,
+			chart,
+			analysis,
+			graphType,
+			axisType,
+			useRightAxis,
+			true,
+			calcWithoutGaps
+		)
+	}
+
 	companion object {
 		private val LOG = PlatformUtil.getLog(VehicleMetricsPlugin::class.java)
 		const val REQUEST_BT_PERMISSION_CODE = 50
@@ -884,7 +924,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		LOG.debug("Try to reconnect to last connected device $lastConnectedDevice")
 		val registry = app.osmandMap.mapLayers.mapWidgetRegistry
 		if (connectedDeviceInfo == null && lastConnectedDevice != null && registry.allWidgets.any {
-				it.widget is OBDTextWidget && it.isEnabledForAppMode(app.settings.applicationMode)
+				it.widget is OBDTextWidget && it.isEnabledForAppMode(app.settings.applicationMode,
+					ScreenLayoutMode.getDefault(activity))
 			}) {
 			currentReconnectAttempt = attemptsCount
 			connectToObdInternal(activity, lastConnectedDevice)
@@ -906,9 +947,16 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 				return "-"
 			}
 		}
-		val convertedData = when (computerWidget.type) {
+		val convertedData = getWidgetConvertedValue(computerWidget.type, data)
+
+		return computerWidget.type.formatter.format(convertedData)
+	}
+
+	fun getWidgetConvertedValue(
+		type: OBDTypeWidget, data: Any?): Any? {
+		return when (type) {
 			OBDDataComputer.OBDTypeWidget.SPEED -> getConvertedSpeed(data as Number)
-			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM -> getConvertedDistance(data as Double)
+			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM -> getConvertedDistance((data as Number).toDouble())
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT,
@@ -922,7 +970,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM -> getFormatVolumePerDistance(
 				data as Number)
 
-			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime(data as Int)
+			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime((data as Number).toInt())
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR,
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE,
 			OBDDataComputer.OBDTypeWidget.ADAPTER_BATTERY_VOLTAGE,
@@ -938,12 +986,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_M_PER_LITER -> getFormatDistancePerVolume(
 				data as Number)
 		}
-
-		return computerWidget.type.formatter.format(convertedData)
 	}
 
 	fun getWidgetUnit(computerWidget: OBDDataComputer.OBDComputerWidget): String? {
-		return when (computerWidget.type) {
+		return getWidgetUnit(computerWidget.type)
+	}
+
+	fun getWidgetUnit(type: OBDTypeWidget): String? {
+		return when (type) {
 			OBDDataComputer.OBDTypeWidget.SPEED -> getSpeedUnit()
 			OBDDataComputer.OBDTypeWidget.RPM -> app.getString(R.string.rpm_unit)
 			OBDDataComputer.OBDTypeWidget.FUEL_PRESSURE -> app.getString(R.string.kpa_unit)

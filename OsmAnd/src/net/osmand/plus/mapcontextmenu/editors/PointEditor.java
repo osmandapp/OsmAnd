@@ -21,6 +21,10 @@ public abstract class PointEditor {
 		this.mapActivity = mapActivity;
 	}
 
+	public PointEditor(@NonNull OsmandApplication app) {
+		this.app = app;
+	}
+
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 	}

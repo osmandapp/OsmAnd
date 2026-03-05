@@ -3241,8 +3241,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="logout_from_osmand_cloud">Izrakstīties no OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Izrakstīties\?
 \nJums vajadzēs no jauna pierakstīties, lai dublētu vai atjaunotu datus.</string>
-    <string name="backup_deleting_all_data">Tiek dzēsti dati…</string>
-    <string name="backup_deleted_all_data">Dzēst visus datus.</string>
     <string name="backup_deleting_all_data_descr">Lūdzu uzgaidiet, kamēr OsmAnd izdzēsīs jūsu datus no cloud. Ierīces dati paliks neskarti.</string>
     <string name="backup_deleted_all_data_descr">Jūsu dati tika veiksmīgi izdzēsti no OsmAnd Could.</string>
     <string name="backup_version_history_removed">Versiju vēsture ir dzēsta.</string>

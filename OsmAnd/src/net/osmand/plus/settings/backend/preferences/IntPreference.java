@@ -25,4 +25,9 @@ public class IntPreference extends CommonPreference<Integer> {
 	public Integer parseString(String s) {
 		return Integer.parseInt(s);
 	}
+
+	@Override
+	public CommonPreference<Integer> copyWithId(@NonNull String newId) {
+		return setupCopy(new IntPreference(getSettings(), newId, getDefaultValue()));
+	}
 }

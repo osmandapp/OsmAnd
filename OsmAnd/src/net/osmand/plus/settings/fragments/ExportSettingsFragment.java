@@ -318,7 +318,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	private void shareProfile(@NonNull File file, @NonNull FragmentActivity activity) {
 		new NativeShareDialogBuilder()
 				.addFileWithSaveAction(file, app, activity, false)
-				.setChooserTitle(getString(R.string.shared_string_share))
+				.setChooserTitle(app.getString(R.string.shared_string_share))
 				.setExtraStream(AndroidUtils.getUriForFile(app, file))
 				.setExtraSubject(file.getName())
 				.build(app);

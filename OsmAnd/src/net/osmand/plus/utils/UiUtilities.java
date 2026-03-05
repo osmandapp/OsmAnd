@@ -59,11 +59,20 @@ import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.IComplexWidget;
+import net.osmand.plus.views.mapwidgets.widgets.CoordinatesBaseWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
+import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomClickableSpan;
@@ -72,6 +81,8 @@ import net.osmand.plus.widgets.style.CustomURLSpan;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+
+import java.util.Set;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -687,9 +698,14 @@ public class UiUtilities {
 
 	@NonNull
 	public static SpannableString createColorSpannable(@NonNull String text, @ColorInt int color, @NonNull String... textToStyle) {
+		return createColorSpannable(text, color, true, textToStyle);
+	}
+
+	@NonNull
+	public static SpannableString createColorSpannable(@NonNull String text, @ColorInt int color, boolean isFirstOccurrence, @NonNull String... textToStyle) {
 		SpannableString spannable = new SpannableString(text);
 		for (String s : textToStyle) {
-			setSpan(spannable, new ForegroundColorSpan(color), text, s);
+			setSpan(spannable, new ForegroundColorSpan(color), text, s, isFirstOccurrence);
 		}
 		return spannable;
 	}
@@ -711,8 +727,14 @@ public class UiUtilities {
 	public static void setSpan(@NonNull SpannableString spannable,
 	                           @NonNull Object styleSpan,
 	                           @NonNull String text, @NonNull String textToSpan) {
+		setSpan(spannable, styleSpan, text, textToSpan, true);
+	}
+
+	public static void setSpan(@NonNull SpannableString spannable,
+	                           @NonNull Object styleSpan,
+	                           @NonNull String text, @NonNull String textToSpan, boolean firstOccurrence) {
 		try {
-			int start = text.indexOf(textToSpan);
+			int start = firstOccurrence ? text.indexOf(textToSpan) : text.lastIndexOf(textToSpan);
 			int end = start + textToSpan.length();
 			spannable.setSpan(styleSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 		} catch (RuntimeException e) {
@@ -771,11 +793,10 @@ public class UiUtilities {
 		}
 		if (color == NO_COLOR) {
 			ApplicationMode appMode = settings.getApplicationMode();
-			MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
 			int defaultColorId = nightMode ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
-			int colorIdForTopWidget = widgetRegistry.getStatusBarColor(appMode, nightMode);
+			int colorIdForTopWidget = getStatusBarWidgetColor(activity, appMode, nightMode);
 			if (colorIdForTopWidget != -1) {
-				nightModeForContent = widgetRegistry.getStatusBarContentNightMode(appMode, nightMode);
+				nightModeForContent = getStatusBarContentNightMode(activity, appMode, nightMode);
 			}
 
 			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
@@ -783,6 +804,51 @@ public class UiUtilities {
 		}
 		AndroidUiHelper.setStatusBarColor(activity, color);
 		AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
+	}
+
+	@ColorRes
+	private static int getStatusBarWidgetColor(@NonNull Context context, @NonNull ApplicationMode appMode, boolean nightMode) {
+		OsmandApplication app = AndroidUtils.getApp(context);
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		Set<MapWidgetInfo> topWidgetsInfo = widgetRegistry.getWidgetsForPanel(WidgetsPanel.TOP);
+
+		for (MapWidgetInfo widgetInfo : topWidgetsInfo) {
+			MapWidget widget = widgetInfo.widget;
+			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
+				continue;
+			}
+			if (widget instanceof StreetNameWidget) {
+				return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
+			} else if (widget instanceof MapMarkersBarWidget) {
+				return R.color.status_bar_main_dark;
+			} else if (widget instanceof SimpleWidget || widget instanceof CoordinatesBaseWidget || widget instanceof IComplexWidget) {
+				return nightMode ? R.color.status_bar_secondary_dark : R.color.status_bar_secondary_light;
+			} else {
+				return -1;
+			}
+		}
+		return -1;
+	}
+
+	private static boolean getStatusBarContentNightMode(@NonNull Context context, @NonNull ApplicationMode appMode, boolean nightMode) {
+		OsmandApplication app = AndroidUtils.getApp(context);
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		Set<MapWidgetInfo> topWidgetsInfo = widgetRegistry.getWidgetsForPanel(WidgetsPanel.TOP);
+
+		for (MapWidgetInfo widgetInfo : topWidgetsInfo) {
+			MapWidget widget = widgetInfo.widget;
+			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
+				continue;
+			}
+			if (widget instanceof SimpleWidget || widget instanceof CoordinatesBaseWidget || widget instanceof IComplexWidget) {
+				return nightMode;
+			} else {
+				return true;
+			}
+		}
+		return true;
 	}
 
 	public Bitmap getScaledBitmap(@UiContext Context context, @DrawableRes int drawableId, float scale) {
@@ -793,5 +859,4 @@ public class UiUtilities {
 		}
 		return bitmap;
 	}
-
 }

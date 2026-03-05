@@ -2,10 +2,13 @@ package net.osmand.plus.plugins.weather.widgets;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.Metric;
+import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.WeatherTileResourcesManager.IObtainValueAsyncCallback;
 import net.osmand.core.jni.WeatherTileResourcesManager.ValueRequest;
@@ -33,10 +36,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class WeatherWidget extends SimpleWidget {
 
@@ -85,6 +84,11 @@ public class WeatherWidget extends SimpleWidget {
 			}
 		};
 		this.callback.swigReleaseOwnership();
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		setIcons(widgetType);
 		setText(NO_VALUE, null);
 	}

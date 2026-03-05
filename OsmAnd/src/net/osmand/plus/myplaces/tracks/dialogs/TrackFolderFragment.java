@@ -30,6 +30,7 @@ import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.util.Algorithms;
@@ -52,11 +53,6 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	@Override
 	public String getFragmentTag() {
 		return TAG;
-	}
-
-	@Nullable
-	protected TracksGroup getCurrentTrackGroup() {
-		return selectedFolder;
 	}
 
 	private boolean isLoadingItems;
@@ -116,7 +112,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 				TrackFolder currentFolder = group instanceof TrackFolder ? (TrackFolder) group : null;
 				FragmentManager manager = activity.getSupportFragmentManager();
 				SearchMyPlacesTracksFragment.showInstance(manager,
-						getTargetFragment(),
+						this,
 						false,
 						isUsedOnMap(),
 						null,
@@ -240,15 +236,19 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 				foldersHelper.showTracksSelection(selectedFolder, this, trackItems, tracksGroups, screenPositionData);
 			} else if (smartFolder != null) {
 				Set<TrackItem> trackItems = trackItem != null ? Collections.singleton(trackItem) : null;
-				foldersHelper.showTracksSelection(smartFolder, this, trackItems, null, screenPositionData);
+				Set<TracksGroup> tracksGroups = tracksGroup != null ? Collections.singleton(tracksGroup) : null;
+				TracksGroup group = organizedGroup != null ? organizedGroup : smartFolder;
+				foldersHelper.showTracksSelection(group, this, trackItems, tracksGroups, screenPositionData);
 			}
 		}
 	}
 
 	@Override
 	public void onTracksGroupSelected(@NonNull TracksGroup group, boolean selected) {
-		if (group instanceof TrackFolder) {
-			setSelectedFolder((TrackFolder) group);
+		if (group instanceof TrackFolder trackFolder) {
+			setSelectedFolder(trackFolder);
+		} else if (group instanceof OrganizedTracksGroup organizedTracks) {
+			setOrganizedGroup(organizedTracks);
 		}
 		updateContent();
 	}
@@ -258,13 +258,8 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		super.restoreState(bundle);
 
 		if (rootFolder != null && !Algorithms.isEmpty(selectedItemPath)) {
-			TrackItem trackItem = geTrackItem(rootFolder, selectedItemPath);
-			if (trackItem != null) {
-				int index = adapter.getItemPosition(trackItem);
-				if (index != -1) {
-					recyclerView.scrollToPosition(index);
-				}
-			}
+			TrackItem trackItem = getTrackItem(rootFolder, selectedItemPath);
+			scrollToItemPosition(trackItem);
 			selectedItemPath = null;
 		}
 	}
@@ -277,6 +272,15 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		selectionHelper.setSelectedItems(selectedFolder.getFlattenedTrackItems());
 		selectionHelper.setOriginalSelectedItems(selectedFolder.getFlattenedTrackItems());
 		return selectionHelper;
+	}
+
+	protected void scrollToItemPosition(@Nullable TrackItem trackItem) {
+		if (trackItem != null && adapter != null && recyclerView != null) {
+			int index = adapter.getItemPosition(trackItem);
+			if (index != -1) {
+				recyclerView.scrollToPosition(index);
+			}
+		}
 	}
 
 	@Override
@@ -295,11 +299,13 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		updateContent();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder folder, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder folder,
+	                                @Nullable TrackItem trackItem, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TrackFolderFragment fragment = new TrackFolderFragment();
 			fragment.setRootFolder(folder.getNextAfterRootFolder());
 			fragment.setSelectedFolder(folder);
+			fragment.setSelectedItemPath(trackItem != null ? trackItem.getPath() : null);
 			fragment.setTargetFragment(target, 0);
 			fragment.setRetainInstance(true);
 

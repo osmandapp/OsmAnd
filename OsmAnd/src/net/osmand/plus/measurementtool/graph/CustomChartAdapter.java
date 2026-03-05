@@ -25,7 +25,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteElements;
+import net.osmand.plus.palette.view.PaletteElements;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -123,7 +123,7 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 			legendIcon.setImageDrawable(circle);
 			double contrastRatio = ColorUtils.calculateContrast(segmentColor,
 					AndroidUtils.getColorFromAttr(themedCtx, R.attr.card_and_list_background_basic));
-			if (contrastRatio < ColorsPaletteElements.MINIMUM_CONTRAST_RATIO) {
+			if (contrastRatio < PaletteElements.MINIMUM_CONTRAST_RATIO) {
 				legendIcon.setBackgroundResource(AndroidUtils.resolveAttribute(themedCtx, R.attr.bg_circle_contour));
 			}
 			String propertyName = segment.getUserPropertyName();

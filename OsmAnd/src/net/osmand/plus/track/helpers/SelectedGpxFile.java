@@ -166,6 +166,14 @@ public class SelectedGpxFile {
 		}
 	}
 
+	public long getPointsToDisplayCount() {
+		long total = 0;
+		for (TrkSegment segment : getPointsToDisplay()) {
+			total += segment.getPoints().size();
+		}
+		return total;
+	}
+
 	public final void addEmptySegmentToDisplay() {
 		processedPointsToDisplay.add(new TrkSegment());
 	}

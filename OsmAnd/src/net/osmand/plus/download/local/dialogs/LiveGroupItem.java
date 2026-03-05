@@ -79,4 +79,19 @@ public class LiveGroupItem extends BaseLocalItem {
 	public String toString() {
 		return name;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!super.equals(o)) return false;
+		LiveGroupItem that = (LiveGroupItem) o;
+		return name.equals(that.name) && items.equals(that.items);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + name.hashCode();
+		result = 31 * result + items.hashCode();
+		return result;
+	}
 }

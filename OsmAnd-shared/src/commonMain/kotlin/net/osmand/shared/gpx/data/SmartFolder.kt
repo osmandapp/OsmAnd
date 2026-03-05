@@ -3,9 +3,14 @@ package net.osmand.shared.gpx.data
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import net.osmand.shared.gpx.TrackItem
+import net.osmand.shared.gpx.enums.TracksSortScope
+import net.osmand.shared.gpx.organization.TracksOrganizer
 import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterSerializer
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
+import net.osmand.shared.gpx.organization.OrganizeByParams
+import net.osmand.shared.gpx.organization.OrganizeByParamsSerializer
+import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import net.osmand.shared.util.KCollectionUtils
 
 @Serializable
@@ -16,6 +21,13 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	@Transient
 	private var trackItems: List<TrackItem>? = null
+
+	@Transient
+	private val tracksOrganizer = TracksOrganizer(this)
+
+	@Serializable(with = OrganizeByParamsSerializer::class)
+	var organizeByParams: OrganizeByParams? = null
+		private set
 
 	constructor() : this("")
 
@@ -43,11 +55,54 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		return trackItems
 	}
 
-	fun addTrackItem(trackItem: TrackItem) {
-		if (!getTrackItems().contains(trackItem)) {
-			trackItems = KCollectionUtils.addToList(getTrackItems(), trackItem)
-			folderAnalysis = null
+	/**
+	 * Ensures the track is present in the folder and forces a cache update.
+	 * Since [TrackItem] is mutable, its properties (e.g., Activity) might have changed
+	 * even if it's already in the list, requiring a re-evaluation of organized groups.
+	 */
+	fun addTrackItem(trackItem: TrackItem, forceInvalidate: Boolean = false) {
+		var added = false
+		val currentItems = getTrackItems()
+		if (!currentItems.contains(trackItem)) {
+			trackItems = KCollectionUtils.addToList(currentItems, trackItem)
+			added = true
 		}
+		if (added || forceInvalidate) {
+			invalidateCache()
+		}
+	}
+
+	fun removeTrackItem(trackItem: TrackItem, forceInvalidate: Boolean = false) {
+		var removed = false
+		val currentItems = getTrackItems()
+		if (currentItems.contains(trackItem)) {
+			trackItems = KCollectionUtils.removeFromList(currentItems, trackItem)
+			removed = true
+		}
+		if (removed || forceInvalidate) {
+			invalidateCache()
+		}
+	}
+
+	override fun getSubgroupById(subgroupId: String): TracksGroup? {
+		return getOrganizedTrackItems().find { it.getId() == subgroupId }
+	}
+
+	fun getOrganizedTrackItems(): List<OrganizedTracksGroup> {
+		return tracksOrganizer.getOrganizedTrackItems()
+	}
+
+	fun setOrganizeByParams(organizeByParams: OrganizeByParams?) {
+		this.organizeByParams = organizeByParams
+		tracksOrganizer.setOrganizeByParams(organizeByParams)
+	}
+
+	override fun getTracksSortScope(): TracksSortScope {
+		return tracksOrganizer.params?.type?.getTrackSortScope() ?: super.getTracksSortScope()
+	}
+
+	override fun getSupportedSortScopes(): List<TracksSortScope> {
+		return listOf(TracksSortScope.TRACKS, TracksSortScope.ORGANIZED_BY_NAME, TracksSortScope.ORGANIZED_BY_VALUE)
 	}
 
 	override fun getFolderAnalysis(): TrackFolderAnalysis {
@@ -63,8 +118,21 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	override fun lastModified() = creationTime
 
+	fun getOrganizeByType(): OrganizeByType? {
+		return tracksOrganizer.params?.type
+	}
+
+	fun initTracksOrganizer() {
+		tracksOrganizer.initParams(organizeByParams)
+	}
+
 	fun resetItems() {
 		trackItems = ArrayList()
+		invalidateCache()
+	}
+
+	fun invalidateCache() {
+		tracksOrganizer.clearCache()
 		folderAnalysis = null
 	}
 }

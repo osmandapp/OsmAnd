@@ -27,6 +27,7 @@ import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.SpeedLimitWarningState;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -69,7 +70,7 @@ public class SpeedometerSettingsFragment extends BaseFullScreenFragment {
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		View speedometerView = view.findViewById(R.id.speedometer_widget);
-		widget = new SpeedometerWidget(app, getMapActivity(), speedometerView);
+		widget = new SpeedometerWidget(app, getMapActivity(), speedometerView, ThemeUsageContext.OVER_MAP);
 		widget.updatePreviewInfo(nightMode);
 
 		setupToolbar(view);

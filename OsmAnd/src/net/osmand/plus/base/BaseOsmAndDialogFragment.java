@@ -64,7 +64,7 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		Dialog dialog = getDialog();
 		if (dialog != null && dialog.getWindow() != null && InsetsUtils.isEdgeToEdgeSupported()) {
 			dialog.getWindow().setNavigationBarContrastEnforced(false);
-			InsetsUtils.processNavBarColor(this, dialog);
+			InsetsUtils.processNavigationBarColor(this, dialog);
 
 			if (Build.VERSION.SDK_INT >= 36) {
 				//WindowCompat.enableEdgeToEdge(window);
@@ -92,7 +92,7 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		collection.removeType(Type.FAB);
 		collection.add(InsetTarget.createBottomContainer(R.id.bottom_buttons_container));
 		collection.add(InsetTarget.createScrollable(R.id.scroll_view, android.R.id.list));
-		collection.add(InsetTarget.createHorizontalLandscape(R.id.modes_toggle, R.id.toolbar, R.id.tab_layout, R.id.toolbar_edit));
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.toolbar, R.id.tab_layout, R.id.toolbar_edit));
 		collection.add(InsetTarget.createRootInset());
 		return collection;
 	}

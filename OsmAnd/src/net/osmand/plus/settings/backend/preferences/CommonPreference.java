@@ -92,6 +92,10 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return settings.getContext();
 	}
 
+	protected OsmandSettings getSettings() {
+		return settings;
+	}
+
 	// common methods
 
 	public final CommonPreference<T> makeGlobal() {
@@ -174,6 +178,10 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	public void setDefaultValue(T defaultValue) {
 		this.defaultValue = defaultValue;
+	}
+
+	public void setDefaultValues(Map<ApplicationMode, T> defaultValues) {
+		this.defaultValues = defaultValues;
 	}
 
 	public final boolean hasDefaultValues() {
@@ -394,6 +402,29 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	public final String asStringModeValue(@Nullable ApplicationMode mode) {
 		T v = getModeValue(mode);
 		return toString(v);
+	}
+
+	public abstract CommonPreference<T> copyWithId(@NonNull String newId);
+
+	protected <P extends CommonPreference<T>> P setupCopy(P copy) {
+		if (global) {
+			copy.makeGlobal();
+		} else {
+			copy.makeProfile();
+		}
+		if (shared) {
+			copy.makeShared();
+		}
+		if (cache) {
+			copy.cache();
+		}
+		if (lastModifiedTimeStored) {
+			copy.storeLastModifiedTime();
+		}
+		copy.setDefaultValue(defaultValue);
+		copy.setDefaultValues(defaultValues);
+
+		return copy;
 	}
 
 	@NonNull

@@ -198,7 +198,7 @@ public class WeatherForecastFragment extends BaseFullScreenFragment implements W
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.replace(InsetTarget.createBottomContainer(R.id.main_content).landscapeSides(InsetSide.BOTTOM, InsetSide.LEFT));
-		collection.replace(InsetTarget.createHorizontalLandscape(true, R.id.modes_toggle, R.id.toolbar, R.id.tab_layout));
+		collection.replace(InsetTarget.createHorizontalLandscape(true, R.id.toolbar, R.id.tab_layout));
 		return collection;
 	}
 

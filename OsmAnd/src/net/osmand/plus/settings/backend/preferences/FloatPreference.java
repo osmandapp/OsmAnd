@@ -26,4 +26,9 @@ public class FloatPreference extends CommonPreference<Float> {
 	public Float parseString(String s) {
 		return Float.parseFloat(s);
 	}
+
+	@Override
+	public CommonPreference<Float> copyWithId(@NonNull String newId) {
+		return setupCopy(new FloatPreference(getSettings(), newId, getDefaultValue()));
+	}
 }

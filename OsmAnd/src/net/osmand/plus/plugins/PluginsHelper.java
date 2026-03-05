@@ -54,7 +54,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.skimaps.SkiMapsPlugin;
-import net.osmand.plus.plugins.astro.StarWatcherPlugin;
+import net.osmand.plus.plugins.astronomy.AstronomyPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -62,6 +62,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.render.RendererRegistry.RendererEventListener;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -121,7 +122,7 @@ public class PluginsHelper {
 		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new ExternalSensorsPlugin(app));
 		allPlugins.add(new VehicleMetricsPlugin(app));
-		allPlugins.add(new StarWatcherPlugin(app));
+		allPlugins.add(new AstronomyPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
@@ -444,14 +445,9 @@ public class PluginsHelper {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T extends OsmandPlugin> T getActivePlugin(Class<T> clz) {
-		for (OsmandPlugin lr : getActivePlugins()) {
-			if (clz.isInstance(lr)) {
-				return (T) lr;
-			}
-		}
-		return null;
+		T plugin = getPlugin(clz);
+		return plugin != null && plugin.isActive() ? plugin : null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -617,9 +613,10 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void createMapWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
+	public static void createMapWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos,
+			@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.createWidgets(mapActivity, widgetInfos, appMode);
+			plugin.createWidgets(mapActivity, widgetInfos, appMode, layoutMode);
 		}
 	}
 
@@ -883,6 +880,12 @@ public class PluginsHelper {
 				trackPointsAnalysers.add(plugin.getTrackPointsAnalyser());
 			}
 		}
+		if (!isActive(VehicleMetricsPlugin.class)) {
+			OsmandPlugin plugin = getPlugin(VehicleMetricsPlugin.class);
+			if (plugin != null) {
+				trackPointsAnalysers.add(plugin.getTrackPointsAnalyser());
+			}
+		}
 		return (gpxTrackAnalysis, wptPt, pointAttributes) -> {
 			for (TrackPointsAnalyser analyser : trackPointsAnalysers) {
 				analyser.onAnalysePoint(gpxTrackAnalysis, wptPt, pointAttributes);
@@ -905,7 +908,7 @@ public class PluginsHelper {
 		return null;
 	}
 
-	public static void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public static void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType> availableTypes) {
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			plugin.getAvailableGPXDataSetTypes(analysis, availableTypes);
 		}

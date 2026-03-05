@@ -31,6 +31,11 @@
         <item name="android:textColorHint">@color/text_color_secondary_light</item>
     </style>
 
+    <style name="OsmandLightTheme.TabLayoutNoCaps" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
     <style name="OsmandLightTheme.Toolbar">
         <item name="android:textColorPrimary">@color/card_and_list_background_light</item>
         <item name="android:textColorSecondary">@color/card_and_list_background_light</item>
@@ -152,6 +157,14 @@
         <item name="colorPrimaryDark">@color/osmand_orange_dark</item>
         <item name="colorAccent">@color/active_color_primary_light</item>
 
+	    <item name="text_color_primary_v2">@color/text_color_primary_light_v2</item>
+	    <item name="icon_color_default_v2">@color/icon_color_default_light_v2</item>
+	    <item name="icon_color_active_v2">@color/icon_color_active_light_v2</item>
+	    <item name="active_color_primary_v2">@color/active_color_primary_light_v2</item>
+	    <item name="active_color_secondary_v2">@color/active_color_secondary_light_v2</item>
+	    <item name="color_button_secondary_v2">@color/buttons_secondary_light_v2</item>
+	    <item name="color_material_switch_outline">@color/material_switch_outline_light</item>
+
         <item name="android:actionModeBackground">@color/app_bar_main_light</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="android:actionModeCloseDrawable">@drawable/ic_arrow_back</item>
@@ -171,6 +184,7 @@
 
         <item name="appbar_layout_theme">@style/OsmandLightTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandLightTheme.SearchTabbar</item>
+        <item name="tab_layout_no_caps_theme">@style/OsmandLightTheme.TabLayoutNoCaps</item>
         <item name="toolbar_theme">@style/OsmandLightTheme.Toolbar</item>
         <item name="new_app_theme">@style/OsmandLightTheme.NewAppTheme</item>
         <item name="contextMenuButtonColor">@color/map_widget_blue</item>

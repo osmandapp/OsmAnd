@@ -1,8 +1,5 @@
 package net.osmand.search.core;
 
-import java.util.*;
-import java.util.regex.Pattern;
-
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -19,6 +16,9 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.ArabicNormalizer;
 import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
+
+import java.util.*;
+import java.util.regex.Pattern;
 
 // Immutable object !
 public class SearchPhrase {
@@ -37,8 +37,6 @@ public class SearchPhrase {
 	// Object consists of 2 part [known + unknown] 
 	private String fullTextSearchPhrase = "";
 	private String unknownSearchPhrase = "";
-	
-	private boolean likelyAddressSearch = false;
 
 	// words to be used for words span
 	private List<SearchWord> words = new ArrayList<>();
@@ -171,7 +169,6 @@ public class SearchPhrase {
 				}
 			}
 		}
-		sp.likelyAddressSearch = likelyAddressSearch(fullText) || !sp.lastUnknownSearchWordComplete;
 		return sp;
 	}
 
@@ -197,10 +194,6 @@ public class SearchPhrase {
 			}
 		}
 		return false;
-	}
-	
-	public boolean isLikelyAddressSearch() {
-		return likelyAddressSearch;
 	}
 
 	public static List<String> splitWords(String w, List<String> ws, String delimiters) {
@@ -251,7 +244,6 @@ public class SearchPhrase {
 				genUnknownSearchPhrase.append(unknownWords.get(i)).append(" ");
 			}
 			sp.fullTextSearchPhrase = fullTextSearchPhrase; 
-			sp.likelyAddressSearch = likelyAddressSearch;
 			sp.unknownSearchPhrase = genUnknownSearchPhrase.toString().trim();
 		}
 		return sp;
@@ -368,7 +360,7 @@ public class SearchPhrase {
 		
 		int radiusInMeters = getRadiusSearch(radius);
 		QuadRect cache1kmRect = get1km31Rect();
-		if(cache1kmRect == null) {
+		if (cache1kmRect == null) {
 			return null;
 		}
 		int max = (1 << 31) - 1;
@@ -394,16 +386,13 @@ public class SearchPhrase {
 	}
 
 	public static QuadRect calculateBbox(int radiusMeters, LatLon l) {
-		float coeff = (float) (radiusMeters / MapUtils.getTileDistanceWidth(SearchRequest.ZOOM_TO_SEARCH_POI));
-		double tx = MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLongitude());
-		double ty = MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLatitude());
-		double topLeftX = Math.max(0, tx - coeff);
-		double topLeftY = Math.max(0, ty - coeff);
-		int max = (1 << SearchRequest.ZOOM_TO_SEARCH_POI)  - 1;
-		double bottomRightX = Math.min(max, tx + coeff);
-		double bottomRightY = Math.min(max, ty + coeff);
-		double pw = MapUtils.getPowZoom(31 - SearchRequest.ZOOM_TO_SEARCH_POI);
-		return new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
+		LatLon northWest = MapUtils.rhumbDestinationPoint(l.getLatitude(), l.getLongitude(), radiusMeters, 315);
+		LatLon southEast = MapUtils.rhumbDestinationPoint(l.getLatitude(), l.getLongitude(), radiusMeters, 135);
+		int top = MapUtils.get31TileNumberY(northWest.getLatitude());
+		int left = MapUtils.get31TileNumberX(northWest.getLongitude());
+		int bottom = MapUtils.get31TileNumberY(southEast.getLatitude());
+		int right = MapUtils.get31TileNumberX(southEast.getLongitude());
+		return new QuadRect(left, top, right, bottom);
 	}
 	
 	
@@ -413,32 +402,37 @@ public class SearchPhrase {
 		
 	}
 
-	public Iterator<BinaryMapIndexReader> getOfflineIndexes(final QuadRect rect, final SearchPhraseDataType dt) {
+	public Iterator<BinaryMapIndexReader> getOfflineIndexes(QuadRect rect, SearchPhraseDataType dataType) {
 		List<BinaryMapIndexReader> list = indexes != null ? indexes : settings.getOfflineIndexes();
-		final Iterator<BinaryMapIndexReader> lit = list.iterator();
-		return new Iterator<BinaryMapIndexReader>() {
+		return getOfflineIndexes(rect, dataType, list);
+	}
+
+	public static Iterator<BinaryMapIndexReader> getOfflineIndexes(QuadRect rect, SearchPhraseDataType dataType, List<BinaryMapIndexReader> list) {
+		Iterator<BinaryMapIndexReader> iterator = list.iterator();
+		return new Iterator<>() {
 			BinaryMapIndexReader next = null;
+
 			@Override
 			public boolean hasNext() {
-				while (lit.hasNext()) {
-					next = lit.next();
-					if(rect != null) {
-						if(dt == SearchPhraseDataType.POI) {
-							if(next.containsPoiData((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom)) {
+				while (iterator.hasNext()) {
+					next = iterator.next();
+					if (rect != null) {
+						if (dataType == SearchPhraseDataType.POI) {
+							if (next.containsPoiData((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom)) {
 								return true;
 							}
-						} else if(dt == SearchPhraseDataType.ADDRESS) {
+						} else if (dataType == SearchPhraseDataType.ADDRESS) {
 							// containsAddressData not all maps supported
-							if(next.containsPoiData((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom) && 
+							if (next.containsPoiData((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom) &&
 									next.containsAddressData()) {
 								return true;
 							}
-						} else if(dt == SearchPhraseDataType.ROUTING) {
-							if(next.containsRouteData((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom, 15)) {
+						} else if (dataType == SearchPhraseDataType.ROUTING) {
+							if (next.containsRouteData((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom, 15)) {
 								return true;
 							}
 						} else {
-							if(next.containsMapData((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom, 15)) {
+							if (next.containsMapData((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom, 15)) {
 								return true;
 							}
 						}

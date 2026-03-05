@@ -32,7 +32,11 @@ public class ParkingMapWidget extends SimpleWidget {
 	public ParkingMapWidget(@NonNull ParkingPositionPlugin plugin, @NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, PARKING, customId, widgetsPanel);
 		this.plugin = plugin;
+	}
 
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		setText(null, null);
 		setIcons(PARKING);
 		updateInfo(null);

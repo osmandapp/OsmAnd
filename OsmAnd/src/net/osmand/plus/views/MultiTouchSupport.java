@@ -25,6 +25,8 @@ public class MultiTouchSupport {
 
 	public interface MultiTouchZoomListener {
 
+        boolean isZoomingAndRotating();
+
 		void onZoomStarted(PointF centerPoint);
 
 		void onZoomingOrRotating(double relativeToStart, float angle);
@@ -71,6 +73,10 @@ public class MultiTouchSupport {
 	public boolean isInTiltMode() {
 		return inTiltMode;
 	}
+
+    public boolean isZoomingAndRotating() {
+        return listener.isZoomingAndRotating();
+    }
 
 	private void initMethods() {
 		try {

@@ -51,4 +51,9 @@ public class EnumStringPreference<E extends Enum<E>> extends CommonPreference<E>
 	public E[] getValues() {
 		return values;
 	}
+
+	@Override
+	public CommonPreference<E> copyWithId(@NonNull String newId) {
+		return setupCopy(new EnumStringPreference<>(getSettings(), newId, getDefaultValue(), values));
+	}
 }

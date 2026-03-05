@@ -2909,7 +2909,7 @@
     <string name="default_speed_setting_title">מהירות כבררת מחדל</string>
     <string name="default_speed_setting_descr">החלפת הגדרות מהירות בררת מחדל</string>
     <string name="minmax_speed_dialog_title">הגדרת מהירות מרבית/מזערית</string>
-    <string name="app_mode_ufo">חיזר</string>
+    <string name="app_mode_ufo">עב״מ</string>
     <string name="app_mode_personal_transporter">אמצעי תעבורה אישי</string>
     <string name="app_mode_monowheel">חד־אופן</string>
     <string name="app_mode_scooter">קטנוע/קורקינט</string>
@@ -2921,8 +2921,8 @@
     <string name="edit_profile_setup_map_subtitle">יש לבחור אפשרויות מפה לפרופיל</string>
     <string name="edit_profile_screen_options_subtitle">נא לבחור הגדרות מסך לפרופיל</string>
     <string name="edit_profile_nav_settings_subtitle">נא לבחור הגדרות ניווט לפרופיל</string>
-    <string name="routing_attr_max_num_changes_description">ציון הסף העליון לשינויים</string>
-    <string name="routing_attr_max_num_changes_name">מספר החלפות</string>
+    <string name="routing_attr_max_num_changes_description">ציון הסף העליון להחלפת אמצעי תחבורה</string>
+    <string name="routing_attr_max_num_changes_name">מספר ההחלפות המרבי</string>
     <string name="turn_screen_on_router">להתעורר בפניות</string>
     <string name="turn_screen_on_time_descr">להגדיר את זמן פעילות המסך.</string>
     <string name="turn_screen_on_sensor">להשתמש בחיישן מרחק</string>
@@ -4128,8 +4128,6 @@
     <string name="logout_from_osmand_cloud">יציאה מ־OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">לצאת מהחשבון\?
 \nיהיה עליך להיכנס שוב כדי לגבות או לשחזר נתונים.</string>
-    <string name="backup_deleting_all_data">כל הנתונים נמחקים…</string>
-    <string name="backup_deleted_all_data">כל הנתונים נמחקו.</string>
     <string name="backup_deleting_all_data_descr">נא להמתין לסיום מחיקת כל הנתונים שלך על ידי OsmAnd מהענן. כל הנתונים שבמכשיר יישארו כפי שהם.</string>
     <string name="backup_deleted_all_data_descr">כל הנתונים שלך נמחקו מ־OsmAnd Cloud בהצלחה.</string>
     <string name="backup_version_history_removed">כל היסטוריית הגרסאות הוסרה.</string>
@@ -5003,4 +5001,17 @@
     <string name="enable_3d_objects_description">הצגת עצמי מבנים בתלת־ממד במפה</string>
     <string name="show_debug_tile">הצגת פרטי אריח</string>
     <string name="show_rasterization_debug_tile">הצגת פרטי עיבוד תצוגה של אריח</string>
+    <string name="copy_link">העתקת קישור</string>
+    <string name="organize_by_max_altitude"/>
+    <string name="nearest_city">העיר הקרובה ביותר</string>
+    <string name="group_sensors">חיישנים</string>
+    <string name="year_of_creation">שנת יצירה</string>
+    <string name="month_year_creation">חודש ושנת יצירה</string>
+    <string name="group_date_time">תאריך ושעה</string>
+    <string name="delete_groups_confirmation">למחוק קבוצות?</string>
+    <string name="add_to_track">הוספה למסלול</string>
+    <string name="unpin_folder">ניתוק נעיצת תיקייה</string>
+    <string name="pin_folder">נעיצת תיקייה</string>
+    <string name="favorite_search_empty_state_description">אפשר לכוון את החיפוש או המסננים שלך ולראות אם זה עוזר</string>
+    <string name="favorites_empty_folder_description">לתיקייה הזאת אין נקודות עדיין.</string>
 </resources>

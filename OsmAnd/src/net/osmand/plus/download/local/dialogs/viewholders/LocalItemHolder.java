@@ -1,5 +1,8 @@
 package net.osmand.plus.download.local.dialogs.viewholders;
 
+import static net.osmand.plus.download.local.LocalItemType.LIVE_UPDATES;
+import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
+import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
 import static net.osmand.plus.download.local.LocalItemType.TERRAIN_DATA;
 
 import android.content.Context;
@@ -19,11 +22,13 @@ import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.download.local.MultipleLocalItem;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.CollectionUtils;
 
 public class LocalItemHolder extends RecyclerView.ViewHolder {
 
@@ -59,9 +64,10 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 		AndroidUtils.setBackground(itemView.findViewById(R.id.selectable_list_item), drawable);
 	}
 
-	public void bindView(@NonNull BaseLocalItem item, boolean selectionMode, boolean lastItem, boolean hideDivider) {
+	public void bindView(@NonNull BaseLocalItem item, boolean selectionMode,
+	                     boolean isInsideFolder, boolean lastItem, boolean hideDivider) {
 		Context context = itemView.getContext();
-		title.setText(item.getName(context));
+		title.setText(item.getName(context, !isInsideFolder));
 		description.setText(item.getDescription(context));
 		icon.setImageDrawable(getIcon(item));
 
@@ -87,8 +93,8 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	@NonNull
 	private Drawable getIcon(@NonNull BaseLocalItem item) {
 		int iconId = getIconId(item);
-		LocalItemType type = item.getType();
 		if (item instanceof LocalItem localItem) {
+			LocalItemType type = item.getType();
 			if (localItem.isDeprecated()) {
 				return uiUtilities.getThemedIcon(iconId);
 			} else if (type.isDownloadType() && !localItem.isBackuped(app)) {
@@ -106,6 +112,12 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 			if (type == TERRAIN_DATA && SrtmDownloadItem.isSrtmFile(localItem.getFileName())) {
 				return R.drawable.ic_plugin_srtm;
 			}
+			if (CollectionUtils.equalsToAny(type,
+					MAP_DATA, ROAD_DATA, LIVE_UPDATES) && listener.itemUpdateAvailable(localItem)) {
+				return R.drawable.ic_action_map_update;
+			}
+		} else if (item instanceof MultipleLocalItem) {
+			return R.drawable.ic_action_folder;
 		}
 		return type.getIconId();
 	}

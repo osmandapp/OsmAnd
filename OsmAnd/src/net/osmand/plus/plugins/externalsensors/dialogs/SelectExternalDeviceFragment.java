@@ -27,6 +27,10 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
@@ -75,6 +79,14 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		updateCurrentStateView();
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection targetsCollection = new InsetTargetsCollection();
+		targetsCollection.add(InsetTarget.createRootInset());
+
+		return targetsCollection;
 	}
 
 	@Override
@@ -154,6 +166,9 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	protected void setupToolbar(@NonNull View view) {
 		super.setupToolbar(view);
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			toolbar.setFitsSystemWindows(false);
+		}
 		toolbar.setOnMenuItemClickListener(item -> {
 			if (item.getItemId() == R.id.action_add) {
 				showPairNewSensorBottomSheet();

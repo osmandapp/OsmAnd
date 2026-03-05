@@ -96,7 +96,10 @@ import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 import net.osmand.plus.utils.AndroidNetworkUtils.OnFileUploadCallback;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.MapHudLayout;
+import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
+import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton.IconRadioItem;
@@ -121,6 +124,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -174,6 +178,11 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	private ImageView undoBtn;
 	private ImageView redoBtn;
 	private ImageView mainIcon;
+	private View measurementButtons;
+	private ImageButton snapToRoadButton;
+	private View profileConfigButton;
+	private MapHudLayout mapHudLayout;
+
 	private OnBackPressedCallback onBackPressedCallback;
 	private OnGlobalLayoutListener widgetsLayoutListener;
 
@@ -196,6 +205,10 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	private LatLon initialPoint;
 	private UploadFileTask calculateSrtmTask;
 	private HeightsResolverTask calculateHeightmapTask;
+
+	@Nullable
+	private RulerWidget rulerWidget;
+	private List<MapButton> mapButtons = new ArrayList<>();
 
 	enum FinalSaveAction {
 		SHOW_SNACK_BAR_AND_CLOSE,
@@ -353,7 +366,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		} else {
 			cardsContainer = mapActivity.findViewById(R.id.left_side_menu);
 			bottomMapControls = mapActivity.findViewById(R.id.bottom_controls_container);
-			topMapControls = mapActivity.findViewById(R.id.top_controls_container);
+			topMapControls = mapActivity.findViewById(R.id.lanes_widget_special_position);
 
 			infoTypeBtn = new IconToggleButton(app, infoButtonsContainer, nightMode);
 			pointsBtn = new IconRadioItem(R.drawable.ic_action_plan_route_point_colored).setUseDefaultColor();
@@ -521,22 +534,24 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 				callMapActivity(activity -> dismiss(activity, false));
 			}
 		});
+		mapHudLayout = mapActivity.findViewById(R.id.map_hud_layout);
+		measurementButtons = inflate(R.layout.measurement_buttons, mapHudLayout, false);
+		snapToRoadButton = measurementButtons.findViewById(R.id.snap_to_road_image_button);
+		profileConfigButton = measurementButtons.findViewById(R.id.profile_with_config_btn);
 
-		ImageButton snapToRoadBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
-		snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
-		snapToRoadBtn.setOnClickListener(v -> startSnapToRoad(false));
-		snapToRoadBtn.setVisibility(View.VISIBLE);
-		LinearLayout profileWithConfig = mapActivity.findViewById(R.id.profile_with_config_btn);
+		snapToRoadButton.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
+		snapToRoadButton.setOnClickListener(v -> startSnapToRoad(false));
+		snapToRoadButton.setVisibility(View.VISIBLE);
 
-		View background = profileWithConfig.findViewById(R.id.btn_background);
+		View background = profileConfigButton.findViewById(R.id.btn_background);
 		AndroidUtils.setBackground(background, AppCompatResources.getDrawable(view.getContext(),
 				AndroidUtils.resolveAttribute(view.getContext(), R.attr.bg_round_btn)));
-		View divider = profileWithConfig.findViewById(R.id.divider);
+		View divider = profileConfigButton.findViewById(R.id.divider);
 		divider.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), R.attr.divider_color));
-		ImageButton profileBtn = profileWithConfig.findViewById(R.id.profile);
+		ImageButton profileBtn = profileConfigButton.findViewById(R.id.profile);
 		profileBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night_no_shadow : R.drawable.btn_circle_no_shadow);
 		profileBtn.setOnClickListener(v -> startSnapToRoad(false));
-		ImageButton configBtn = profileWithConfig.findViewById(R.id.profile_config);
+		ImageButton configBtn = profileConfigButton.findViewById(R.id.profile_config);
 		configBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night_no_shadow : R.drawable.btn_circle_no_shadow);
 		configBtn.setImageDrawable(getContentIcon(R.drawable.ic_action_settings));
 		configBtn.setOnClickListener(v ->
@@ -587,6 +602,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.removeType(Type.ROOT_INSET);
 		collection.replace(InsetTarget.createBottomContainer(R.id.main_content).build());
+		collection.replace(InsetTarget.createHorizontalLandscape(R.id.map_controls_container).build());
 		return collection;
 	}
 
@@ -774,6 +790,9 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 				updateToolbar();
 			}
 		});
+		if (mapHudLayout != null && measurementButtons != null) {
+			mapHudLayout.addWidget(measurementButtons);
+		}
 	}
 
 	@Override
@@ -786,6 +805,10 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		detailsMenu.onDismiss();
 		detailsMenu.setMapActivity(null);
 		updateMapDisplayPosition();
+
+		if (mapHudLayout != null && measurementButtons != null) {
+			mapHudLayout.removeWidget(measurementButtons);
+		}
 	}
 
 	@Override
@@ -1501,23 +1524,21 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		ApplicationMode appMode = editingCtx.getAppMode();
 		callMapActivity(mapActivity -> {
 			Drawable icon;
-			ImageButton snapToRoadBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
-			LinearLayout profileWithConfig = mapActivity.findViewById(R.id.profile_with_config_btn);
-			ImageButton configBtn = profileWithConfig.findViewById(R.id.profile);
+			ImageButton configBtn = profileConfigButton.findViewById(R.id.profile);
 			if (isTrackReadyToCalculate()) {
 				if (appMode == DEFAULT_APP_MODE) {
 					icon = getActiveIcon(R.drawable.ic_action_split_interval);
-					snapToRoadBtn.setVisibility(View.VISIBLE);
-					profileWithConfig.setVisibility(View.GONE);
+					snapToRoadButton.setVisibility(View.VISIBLE);
+					profileConfigButton.setVisibility(View.GONE);
 				} else {
 					icon = getPaintedIcon(appMode.getIconRes(), appMode.getProfileColor(nightMode));
-					snapToRoadBtn.setVisibility(View.GONE);
-					profileWithConfig.setVisibility(View.VISIBLE);
+					snapToRoadButton.setVisibility(View.GONE);
+					profileConfigButton.setVisibility(View.VISIBLE);
 				}
 			} else {
 				icon = getContentIcon(R.drawable.ic_action_help);
 			}
-			snapToRoadBtn.setImageDrawable(icon);
+			snapToRoadButton.setImageDrawable(icon);
 			configBtn.setImageDrawable(icon);
 			mapActivity.refreshMap();
 		});
@@ -1528,10 +1549,8 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	}
 
 	private void hideSnapToRoadIcon() {
-		callMapActivity(mapActivity -> {
-			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
-			mapActivity.findViewById(R.id.profile_with_config_btn).setVisibility(View.GONE);
-		});
+		AndroidUiHelper.updateVisibility(snapToRoadButton, false);
+		AndroidUiHelper.updateVisibility(profileConfigButton, false);
 	}
 
 	private void collectPoints() {

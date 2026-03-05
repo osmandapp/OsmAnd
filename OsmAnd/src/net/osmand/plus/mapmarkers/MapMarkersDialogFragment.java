@@ -356,7 +356,7 @@ public class MapMarkersDialogFragment extends BaseFullScreenDialogFragment imple
 					if (app.getMapMarkersHelper().getMapMarkers().isEmpty()) {
 						app.showShortToastMessage(R.string.plan_route_no_markers_toast);
 					} else {
-						PlanRouteFragment.showInstance(mapActivity);
+						PlanRouteFragment.showInstance(mapActivity, null);
 						MapMarkersDialogFragment.this.dismiss();
 					}
 				}

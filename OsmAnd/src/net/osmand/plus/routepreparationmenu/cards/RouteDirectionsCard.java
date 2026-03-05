@@ -112,13 +112,13 @@ public class RouteDirectionsCard extends MapBaseCard {
 			lanesIcon.setVisibility(View.VISIBLE);
 		}
 
-		label.setText(model.getDescriptionRoutePart(true));
+		label.setText(model.getDescriptionRoutePart(app, true));
 		if (model.distance > 0) {
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, app));
 			timeLabel.setText(getTimeDescription(app, model));
 			row.setContentDescription(label.getText() + " " + timeLabel.getText());
 		} else {
-			if (Algorithms.isEmpty(model.getDescriptionRoutePart())) {
+			if (Algorithms.isEmpty(model.getDescriptionRoutePart(app))) {
 				label.setText(mapActivity.getString((directionInfoIndex != directionsInfo.size() - 1) ? R.string.arrived_at_intermediate_point : R.string.arrived_at_destination));
 			}
 			distanceLabel.setText("");

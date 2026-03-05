@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets.widgets;
 import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES_MAP_CENTER;
 
 import android.graphics.drawable.Drawable;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,8 +25,8 @@ public class CoordinatesMapCenterWidget extends CoordinatesBaseWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		super.updateInfo(drawSettings);
+	public void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
+		super.updateInfo(view, drawSettings);
 		boolean visible = visibilityHelper.shouldShowTopCoordinatesWidget();
 
 		updateVisibility(visible);

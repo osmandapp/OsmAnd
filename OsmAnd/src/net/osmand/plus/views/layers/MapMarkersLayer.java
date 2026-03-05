@@ -139,7 +139,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private ContextMenuLayer contextMenuLayer;
 
-	private boolean inPlanRouteMode;
 	private boolean defaultAppMode = true;
 	private boolean carView;
 	private float textScale = 1f;
@@ -172,11 +171,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	public boolean isInPlanRouteMode() {
-		return inPlanRouteMode;
-	}
-
-	public void setInPlanRouteMode(boolean inPlanRouteMode) {
-		this.inPlanRouteMode = inPlanRouteMode;
+		MapActivity activity = getMapActivity();
+		return activity != null && activity.getWidgetsVisibilityHelper().isInPlanRouteMode();
 	}
 
 	public void setDefaultAppMode(boolean defaultAppMode) {
@@ -633,12 +629,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public boolean disableSingleTap() {
-		return inPlanRouteMode;
+		return isInPlanRouteMode();
 	}
 
 	@Override
 	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
-		return inPlanRouteMode;
+		return isInPlanRouteMode();
 	}
 
 	@Override

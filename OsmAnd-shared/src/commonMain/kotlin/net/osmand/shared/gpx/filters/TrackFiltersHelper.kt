@@ -14,33 +14,33 @@ object TrackFiltersHelper {
 	// SmartFolderHelper -> trackFilterSerializersModule in order to serialize correctly
 
 
-	fun createTextFilter(
+	private fun createTextFilter(
 		filterType: TrackFilterType,
 		listener: FilterChangedListener?): BaseTrackFilter {
 		return TextTrackFilter(filterType, listener)
 	}
 
-	fun createDateFilter(
+	private fun createDateFilter(
 		trackFilterType: TrackFilterType,
 		minDate: Long,
 		listener: FilterChangedListener?): BaseTrackFilter {
 		return DateTrackFilter(trackFilterType, minDate, listener)
 	}
 
-	fun createOtherFilter(
+	private fun createOtherFilter(
 		trackFilterType: TrackFilterType,
 		listener: FilterChangedListener?): BaseTrackFilter {
 		return OtherTrackFilter(trackFilterType, listener)
 	}
 
-	fun createSingleListFilter(
+	private fun createSingleListFilter(
 		trackFilterType: TrackFilterType,
 		listener: FilterChangedListener?): BaseTrackFilter {
 		return if (trackFilterType === TrackFilterType.FOLDER) FolderTrackFilter(
 			listener) else ListTrackFilter(trackFilterType, listener)
 	}
 
-	fun createRangeFilter(
+	private fun createRangeFilter(
 		trackFilterType: TrackFilterType,
 		listener: FilterChangedListener?): BaseTrackFilter {
 		if (trackFilterType.defaultParams == null || trackFilterType.defaultParams.size < 2) {
@@ -86,7 +86,8 @@ object TrackFiltersHelper {
 
 	fun createFilter(
 		trackFilterType: TrackFilterType,
-		filterChangedListener: FilterChangedListener?): BaseTrackFilter {
+		filterChangedListener: FilterChangedListener?
+	): BaseTrackFilter {
 		val newFilter: BaseTrackFilter = when (trackFilterType.filterType) {
 			TEXT -> {
 				createTextFilter(

@@ -191,6 +191,21 @@ tasks.register('downloadWorldMiniBasemapAnt') {
 	}
 }
 
+tasks.register('downloadStarsDb', Download) {
+	src 'https://builder.osmand.net/basemap/astro/stars.db.gz'
+	def gzFile = layout.buildDirectory.file("downloads/stars.db.gz").get().asFile
+	dest gzFile
+	onlyIfModified true
+
+	def dbFile = file("assets/astro/stars.db")
+	outputs.file(dbFile)
+
+	doLast {
+		ant.gunzip(src: gzFile, dest: dbFile)
+		gzFile.delete()
+	}
+}
+
 tasks.register('collectVoiceAssets', Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
@@ -301,6 +316,7 @@ tasks.register('collectExternalResources') {
 			copyPoiCategories,
 			copyRouteActivities,
 			downloadWorldMiniBasemap,
+			downloadStarsDb,
 			collectTestResources,
 			copy3DModels
 }
@@ -385,7 +401,7 @@ dependencies {
 	implementation 'androidx.gridlayout:gridlayout:1.0.0'
 	implementation 'androidx.cardview:cardview:1.0.0'
 	implementation 'androidx.appcompat:appcompat:1.6.1'
-	implementation 'com.google.android.material:material:1.9.0'
+	implementation 'com.google.android.material:material:1.13.0'
 	implementation 'androidx.browser:browser:1.0.0'
 	implementation 'androidx.preference:preference:1.1.0'
 	implementation 'androidx.lifecycle:lifecycle-process:2.6.0'

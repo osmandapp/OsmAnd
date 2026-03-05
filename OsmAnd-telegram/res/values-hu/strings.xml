@@ -22,7 +22,7 @@
     <string name="shared_string_sent">Elküldve</string>
     <string name="monitoring_is_enabled">Figyelemmel kísérés engedélyezve</string>
     <string name="monitoring_is_disabled">Figyelemmel kísérés letiltva</string>
-    <string name="time_on_the_move">Mozgással töltött idő</string>
+    <string name="time_on_the_move">Mozgásban töltött idő</string>
     <string name="average_altitude">Átlagos magasság</string>
     <string name="average_speed">Átlagsebesség</string>
     <string name="open_in_osmand">Megjelenítés az OsmAndban</string>

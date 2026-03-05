@@ -187,7 +187,7 @@ public class EditProfilesFragment extends BaseFullScreenFragment {
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.add(InsetTarget.createHorizontalLandscape(R.id.profiles_list).build());
+		collection.add(InsetTarget.createScrollable(R.id.profiles_list).build());
 		return collection;
 	}
 

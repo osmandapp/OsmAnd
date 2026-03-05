@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets.routeinfo;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_ROUTE_INFO_MENU_ID;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ROUTE_INFO;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DISTANCE_CHANGE_THRESHOLD;
@@ -14,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -28,6 +28,7 @@ import net.osmand.plus.base.containers.PaintedText;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -45,7 +46,6 @@ import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoCalculator.DestinationInfo;
 import net.osmand.plus.views.mapwidgets.widgetstates.RouteInfoWidgetState;
-import net.osmand.plus.widgets.MultiTextViewEx;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -81,7 +81,11 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		super(mapActivity, ROUTE_INFO, customId, panel);
 		widgetState = new RouteInfoWidgetState(app, customId);
 		calculator = new RouteInfoCalculator(mapActivity);
+	}
 
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		setupViews();
 		updateVisibility(false);
 	}
@@ -101,13 +105,13 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	private void setupViews() {
-		LinearLayout container = (LinearLayout) view;
+		LinearLayout container = (LinearLayout) getView();
 		container.removeAllViews();
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 		inflater.inflate(getContentLayoutId(), container);
 		collectViews();
 		if (textState != null) {
-			view.setBackgroundResource(textState.widgetBackgroundId);
+			container.setBackgroundResource(textState.widgetBackgroundId);
 			int color = ColorUtilities.getSecondaryActiveColor(app, nightMode);
 			Drawable normal = UiUtilities.createTintedDrawable(app, R.drawable.rectangle_rounded_small, color);
 
@@ -115,31 +119,42 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 			Drawable selected = AppCompatResources.getDrawable(app, rippleDrawableId);
 
 			Drawable drawable = UiUtilities.getLayeredIcon(normal, selected);
-			AndroidUtils.setBackground(view.findViewById(R.id.button_body), drawable);
+			AndroidUtils.setBackground(container.findViewById(R.id.button_body), drawable);
 		}
 		updateWidgetRowView();
 
-		View buttonTappableArea = view.findViewById(R.id.button_tappable_area);
+		View buttonTappableArea = container.findViewById(R.id.button_tappable_area);
 		buttonTappableArea.setOnClickListener(v -> mapActivity.getMapActions().doRoute());
 
-		view.setOnLongClickListener(v -> {
-			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode, true);
+		ApplicationMode appMode = settings.getApplicationMode();
+		boolean buttonVisible = isShowExpandButtonEnabled(appMode)
+				&& app.getAppCustomization().isFeatureEnabled(FRAGMENT_ROUTE_INFO_MENU_ID);
+
+		if (AndroidUiHelper.updateVisibility(buttonTappableArea, buttonVisible)) {
+			int margin = AndroidUtils.dpToPx(app, 16);
+			MarginLayoutParams params = (MarginLayoutParams) container.findViewById(R.id.primary_block).getLayoutParams();
+			AndroidUtils.setMargins(params, buttonVisible ? 0 : margin, params.topMargin, params.getMarginEnd(), params.bottomMargin);
+		}
+		container.setOnLongClickListener(v -> {
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
+			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
 			return true;
 		});
 
-		WidgetSize size = getWidgetSize();
-		boolean useSingleLine = (hasEnoughWidth && !hasSecondaryData) || size == WidgetSize.SMALL;
+		boolean small = getWidgetSize() == WidgetSize.SMALL;
+		boolean useSingleLine = (hasEnoughWidth && !hasSecondaryData) || small;
 		tvPrimaryLine1.setGravity(Gravity.START | (useSingleLine ? Gravity.CENTER_VERTICAL : Gravity.TOP));
 
 		AndroidUiHelper.setVisibility(!useSingleLine, tvSecondaryLine1);
 
 		boolean secondaryBlockVisible = hasSecondaryData && hasEnoughWidth;
-		View blocksDivider = view.findViewById(R.id.blocks_divider);
-		View secondaryBlock = view.findViewById(R.id.secondary_block);
+		View blocksDivider = container.findViewById(R.id.blocks_divider);
+		View secondaryBlock = container.findViewById(R.id.secondary_block);
 		AndroidUiHelper.setVisibility(secondaryBlockVisible, blocksDivider, secondaryBlock);
 	}
 
 	private void collectViews() {
+		View view = getView();
 		tvPrimaryLine1 = view.findViewById(R.id.primary_line_1);
 		tvSecondaryLine1 = view.findViewById(R.id.secondary_line_1);
 		tvPrimaryLine2 = view.findViewById(R.id.primary_line_2);
@@ -162,7 +177,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	public void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
 		updateInfoInternal();
 	}
 
@@ -211,7 +226,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		updatePrimaryBlock(cachedRouteInfo.get(0), orderedDisplayValues);
 		updateSecondaryBlock(cachedRouteInfo.size() > 1 ? cachedRouteInfo.get(1) : null, orderedDisplayValues);
 		forceUpdate = false;
-		view.post(this::applySuitableTextSize);
+		getView().post(this::applySuitableTextSize);
 	}
 
 	private void updatePrimaryBlock(@NonNull DestinationInfo destinationInfo,
@@ -266,6 +281,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	private void applySuitableTextSize() {
+		View view = getView();
 		WidgetSize widgetSize = getWidgetSize();
 		TextSizeMode textSize = TextSizeMode.valueOf(widgetSize);
 		boolean useSingleLine = widgetSize == WidgetSize.SMALL || (hasEnoughWidth && !hasSecondaryData);
@@ -415,6 +431,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 
 	@Override
 	public void recreateView() {
+		initView();
 		forceUpdate = true;
 		setupViews();
 		updateInfoInternal();
@@ -442,6 +459,14 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	public void setDisplayPriority(@NonNull ApplicationMode appMode,
 	                               @NonNull DisplayPriority displayPriority) {
 		widgetState.setDisplayPriority(appMode, displayPriority);
+	}
+
+	public boolean isShowExpandButtonEnabled(@NonNull ApplicationMode appMode) {
+		return widgetState.isShowExpandButtonEnabled(appMode);
+	}
+
+	public void setShowExpandButtonEnabled(@NonNull ApplicationMode appMode, boolean value) {
+		widgetState.setShowExpandButtonEnabled(appMode, value);
 	}
 
 	private int spToPx(int sp) {

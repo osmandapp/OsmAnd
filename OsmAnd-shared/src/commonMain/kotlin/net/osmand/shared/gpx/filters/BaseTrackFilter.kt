@@ -9,7 +9,8 @@ import net.osmand.shared.gpx.TrackItem
 sealed class BaseTrackFilter(
 	@Serializable
 	@SerialName("filterType") val trackFilterType: TrackFilterType,
-	@Transient var filterChangedListener: FilterChangedListener? = null) {
+	@Transient var filterChangedListener: FilterChangedListener? = null
+) {
 
 	abstract fun isEnabled(): Boolean
 
@@ -34,5 +35,4 @@ sealed class BaseTrackFilter(
 		result = 31 * result + (filterChangedListener?.hashCode() ?: 0)
 		return result
 	}
-
 }

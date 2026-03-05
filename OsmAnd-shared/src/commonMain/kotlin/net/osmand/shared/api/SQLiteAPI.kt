@@ -12,6 +12,9 @@ interface SQLiteAPI {
 		fun getVersion(): Int
 		fun isReadOnly(): Boolean
 		fun isClosed(): Boolean
+		fun beginTransaction()
+		fun setTransactionSuccessful()
+		fun endTransaction()
 	}
 
 	interface SQLiteCursor {
@@ -37,6 +40,7 @@ interface SQLiteAPI {
 		fun simpleQueryForString(): String
 		fun bindLong(i: Int, value: Long)
 		fun bindBlob(i: Int, value: ByteArray)
+		fun bindDouble(i: Int, value: Double)
 	}
 
 	fun getOrCreateDatabase(name: String, readOnly: Boolean): SQLiteConnection?

@@ -3,24 +3,17 @@ package net.osmand.plus.views.controls.maphudbuttons
 import android.graphics.Canvas
 import android.graphics.ColorFilter
 import android.graphics.drawable.Drawable
+import androidx.core.graphics.withRotation
 
 class CompassDrawable(private val original: Drawable) : Drawable() {
 
-	private var mapRotation = 0f
-
-	fun setMapRotation(mapRotation: Float) {
-		this.mapRotation = mapRotation
-	}
-
-	fun getMapRotation(): Float {
-		return mapRotation
-	}
+	var mapRotation = 0f
+	var linkedToMapRotation = true
 
 	override fun draw(canvas: Canvas) {
-		canvas.save()
-		canvas.rotate(mapRotation, intrinsicWidth / 2f, intrinsicHeight / 2f)
-		original.draw(canvas)
-		canvas.restore()
+		canvas.withRotation(mapRotation, intrinsicWidth / 2f, intrinsicHeight / 2f) {
+			original.draw(this)
+		}
 	}
 
 	override fun getMinimumHeight(): Int {

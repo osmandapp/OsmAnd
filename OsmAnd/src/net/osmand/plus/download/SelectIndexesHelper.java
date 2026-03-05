@@ -65,7 +65,8 @@ public class SelectIndexesHelper {
 	                              @NonNull ItemsToDownloadSelectedListener l) {
 
 		SelectIndexesHelper h = new SelectIndexesHelper(di, a, df, showRemoteDate, multiSelectionMode, l);
-		if (di.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
+		if (di.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
+				&& multiSelectionMode == MultiSelectionMode.DOWNLOAD) {
 			if (di instanceof MultipleDownloadItem) {
 				h.showSrtmMultipleSelectionDialog();
 			} else {

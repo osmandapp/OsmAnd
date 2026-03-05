@@ -2,11 +2,13 @@ package net.osmand.plus.views.mapwidgets.configure.panel;
 
 import static net.osmand.plus.helpers.AndroidUiHelper.ANIMATION_DURATION;
 import static net.osmand.plus.settings.bottomsheets.WidgetsResetConfirmationBottomSheet.showResetSettingsDialog;
+import static net.osmand.plus.settings.enums.ScreenLayoutMode.LANDSCAPE;
+import static net.osmand.plus.settings.enums.ScreenLayoutMode.PORTRAIT;
 import static net.osmand.plus.utils.WidgetUtils.createNewWidget;
+import static net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment.SCREEN_LAYOUT_MODE;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +47,7 @@ import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -99,11 +102,17 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 	private TextView toolbarTitleView;
 	private View view;
 
+	private ScreenLayoutMode layoutMode;
 	public boolean isEditMode = false;
 
 	@NonNull
 	public WidgetsPanel getSelectedPanel() {
 		return selectedPanel;
+	}
+
+	@Nullable
+	public ScreenLayoutMode getScreenLayoutMode() {
+		return layoutMode;
 	}
 
 	@Override
@@ -116,12 +125,16 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 			selectedAppMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(SELECTED_GROUP_ATTR));
 			isEditMode = savedInstanceState.getBoolean(EDIT_MODE_KEY, false);
+			layoutMode = AndroidUtils.getSerializable(savedInstanceState, SCREEN_LAYOUT_MODE, ScreenLayoutMode.class);
 		}
-
 		Bundle args = getArguments();
-		if (args != null && (args.containsKey(CONTEXT_SELECTED_WIDGET)
-				|| args.containsKey(ADD_TO_NEXT))) {
-			addNewWidget();
+		if (args != null) {
+			if (args.containsKey(SCREEN_LAYOUT_MODE)) {
+				layoutMode = AndroidUtils.getSerializable(args, SCREEN_LAYOUT_MODE, ScreenLayoutMode.class);
+			}
+			if (args.containsKey(CONTEXT_SELECTED_WIDGET) || args.containsKey(ADD_TO_NEXT)) {
+				addNewWidget();
+			}
 		}
 		onBackPressedCallback = new OnBackPressedCallback(true) {
 			@Override
@@ -242,6 +255,13 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 	private void openActionMenu(@NonNull AppCompatImageButton actionButton) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
+		if (layoutMode != null) {
+			boolean portrait = layoutMode.isPortrait();
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitle(getString(portrait ? R.string.copy_from_landscape_layout : R.string.copy_from_portrait_layout))
+					.setIcon(getContentIcon(portrait ? R.drawable.ic_action_copy_from_landscape : R.drawable.ic_action_copy_from_portrait))
+					.setOnClickListener(v -> copyPreferences(appMode, portrait ? LANDSCAPE : PORTRAIT)).create());
+		}
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitle(getString(R.string.copy_from_other_profile))
 				.setIcon(getContentIcon(R.drawable.ic_action_copy))
@@ -433,6 +453,10 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		outState.putString(APP_MODE_ATTR, selectedAppMode.getStringKey());
 		outState.putString(SELECTED_GROUP_ATTR, selectedPanel.name());
 		outState.putBoolean(EDIT_MODE_KEY, isEditMode);
+
+		if (layoutMode != null) {
+			outState.putSerializable(SCREEN_LAYOUT_MODE, layoutMode);
+		}
 	}
 
 	private void setupTabLayout() {
@@ -477,7 +501,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 			WidgetsPanel panel = panels.get(i);
 			if (tab != null) {
 				tab.setTag(panel);
-				tab.setIcon(panel.getIconId(AndroidUtils.isLayoutRtl(app)));
+				tab.setIcon(panel.getIconId(AndroidUtils.isLayoutRtl(app), layoutMode));
 			}
 		}
 
@@ -529,12 +553,13 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 				String selectedWidget = args.getString(CONTEXT_SELECTED_WIDGET);
 				boolean addToNext = args.getBoolean(ADD_TO_NEXT);
 				if (selectedWidget != null) {
-					createNewWidget(requireMapActivity(), widgetInfo, selectedPanel, selectedAppMode, true, selectedWidget, addToNext);
+					createNewWidget(requireMapActivity(), widgetInfo, selectedPanel, selectedAppMode,
+							layoutMode, true, selectedWidget, addToNext);
 					onWidgetsConfigurationChanged();
 					return;
 				}
 			}
-			createNewWidget(requireMapActivity(), widgetInfo, selectedPanel, selectedAppMode, true);
+			createNewWidget(requireMapActivity(), widgetInfo, selectedPanel, selectedAppMode, layoutMode, true);
 			onWidgetsConfigurationChanged();
 		}
 	}
@@ -611,17 +636,22 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		if (isEditMode && fragment != null) {
 			fragment.copyAppModePrefs(appMode);
 		} else {
-			WidgetsSettingsHelper helper = new WidgetsSettingsHelper(requireMapActivity(), selectedAppMode);
+			copyPreferences(appMode, layoutMode);
+		}
+	}
 
-			helper.copyWidgetsForPanel(appMode, selectedPanel);
+	private void copyPreferences(@NonNull ApplicationMode fromAppMode, @Nullable ScreenLayoutMode fromLayoutMode) {
+		WidgetsSettingsHelper helper = new WidgetsSettingsHelper(requireMapActivity(), selectedAppMode);
+		helper.setLayoutMode(layoutMode);
+		helper.copyWidgetsForPanel(fromAppMode, fromLayoutMode, selectedPanel);
 
-			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-			if (settings.getApplicationMode().equals(selectedAppMode) && mapInfoLayer != null) {
-				mapInfoLayer.recreateAllControls(requireMapActivity());
-			}
-			if (fragment != null) {
-				fragment.reloadWidgets();
-			}
+		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+		if (settings.getApplicationMode().equals(selectedAppMode) && mapInfoLayer != null) {
+			mapInfoLayer.recreateAllControls(requireMapActivity());
+		}
+		WidgetsListFragment fragment = getSelectedFragment();
+		if (fragment != null) {
+			fragment.reloadWidgets();
 		}
 	}
 

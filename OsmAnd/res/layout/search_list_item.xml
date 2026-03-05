@@ -43,9 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="8dp"
             android:orientation="vertical"
-	        android:layout_marginStart="8dp">
+	        android:layout_marginStart="26dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -134,10 +133,9 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/time_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="16sp"
+                        android:layout_height="16sp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginRight="@dimen/gpx_small_icon_margin"
                         app:srcCompat="@drawable/ic_action_time_16"
 	                    android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
@@ -167,6 +165,7 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+	    android:layout_marginStart="@dimen/content_padding_extra_large"
         android:background="?attr/dashboard_divider"/>
 
 </LinearLayout>

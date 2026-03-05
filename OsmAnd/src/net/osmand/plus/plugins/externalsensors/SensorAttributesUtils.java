@@ -18,6 +18,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 
+import net.osmand.plus.R;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -32,7 +33,9 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SensorAttributesUtils {
 
@@ -69,21 +72,21 @@ public class SensorAttributesUtils {
 		return Algorithms.parseFloatSilently(value, defaultValue);
 	}
 
-	public static void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public static void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType> availableTypes) {
 		if (hasSensorSpeedData(analysis)) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_SPEED});
+			availableTypes.add(GPXDataSetType.SENSOR_SPEED);
 		}
 		if (hasHeartRateData(analysis)) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_HEART_RATE});
+			availableTypes.add(GPXDataSetType.SENSOR_HEART_RATE);
 		}
 		if (hasBikePowerData(analysis)) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_BIKE_POWER});
+			availableTypes.add(GPXDataSetType.SENSOR_BIKE_POWER);
 		}
 		if (hasBikeCadenceData(analysis)) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_BIKE_CADENCE});
+			availableTypes.add(GPXDataSetType.SENSOR_BIKE_CADENCE);
 		}
 		if (hasTemperatureData(analysis)) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_TEMPERATURE});
+			availableTypes.add(GPXDataSetType.SENSOR_TEMPERATURE);
 		}
 	}
 

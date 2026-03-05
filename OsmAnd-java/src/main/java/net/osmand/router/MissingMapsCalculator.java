@@ -87,8 +87,8 @@ public class MissingMapsCalculator {
 		LatLon prev = start;
 		for (int i = 0; i < targets.size(); i++) {
 			end = targets.get(i);
-			if (MapUtils.getDistance(prev, end) < DISTANCE_SKIP) {
-				// skip point they too close
+			if (i > 0 && MapUtils.getDistance(prev, end) < DISTANCE_SKIP) {
+				// skip intermediate points that are too close together
 				continue;
 			}
 			split(ctx, knownMaps, pointsToCheck, prev, end);
@@ -190,12 +190,14 @@ public class MissingMapsCalculator {
 		boolean onlyJointMap = true;
 		List<String> regions = new ArrayList<String>();
 		for (BinaryMapDataObject o : resList) {
-			boolean hasMapType = or.isDownloadOfType(o, OsmandRegions.MAP_TYPE);
-			boolean hasRoadsType = or.isDownloadOfType(o, OsmandRegions.ROADS_TYPE);
-			boolean hasMapJoinType = or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE);
-			boolean hasRoadsJoinType = or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE);
+			String downloadName = or.getDownloadName(o);
+			WorldRegion region = or.getRegionDataByDownloadName(downloadName);
+			boolean hasMapType = region != null && region.isRegionMapDownload();
+			boolean hasRoadsType = region != null && region.isRegionRoadsDownload();
+			boolean hasMapJoinType = region != null && region.isRegionJoinMapDownload();
+			boolean hasRoadsJoinType = region != null && region.isRegionJoinRoadsDownload();
 			if (hasMapType || hasRoadsType || hasMapJoinType || hasRoadsJoinType) {
-				regions.add(or.getDownloadName(o));
+				regions.add(downloadName);
 				if (!hasMapJoinType && !hasRoadsJoinType) {
 					onlyJointMap = false;
 				}

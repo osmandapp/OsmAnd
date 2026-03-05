@@ -8,6 +8,8 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.search.core.SearchResult.SearchResultResource;
 import net.osmand.util.Algorithms;
@@ -282,6 +284,9 @@ public class BaseDetailsObject {
 				}
 			}
 			if (syntheticAmenity.getType() == null) {
+				Amenity amenity = convertRenderedObjectToAmenity(renderedObject, MapPoiTypes.getDefault());
+				syntheticAmenity.setType(amenity.getType());
+				syntheticAmenity.setSubType(amenity.getSubType());
 				syntheticAmenity.copyAdditionalInfo(renderedObject.getTags(), false);
 			}
 			syntheticAmenity.copyNames(renderedObject);
@@ -565,4 +570,81 @@ public class BaseDetailsObject {
 	public String toString() {
 		return getSyntheticAmenity().toString();
 	}
+
+	public static Amenity convertRenderedObjectToAmenity(RenderedObject renderedObject, MapPoiTypes mapPoiTypes) {
+		Amenity am = new Amenity();
+		am.setType(mapPoiTypes.getOtherPoiCategory());
+		am.setSubType("");
+		MapPoiTypes.PoiTranslator poiTranslator = mapPoiTypes.getPoiTranslator();
+		PoiType pt = null;
+		PoiType otherPt = null;
+		String subtype = null;
+		Map<String, String> additionalInfo = new LinkedHashMap<>();
+		for (Map.Entry<String, String> e : renderedObject.getTags().entrySet()) {
+			String tag = e.getKey();
+			String value = e.getValue();
+			if (tag.equals("name")) {
+				am.setName(value);
+				continue;
+			}
+			if (e.getKey().startsWith("name:")) {
+				am.setName(tag.substring("name:".length()), value);
+				continue;
+			}
+			if (tag.equals("amenity")) {
+				if (pt != null) {
+					otherPt = pt;
+				}
+				pt = mapPoiTypes.getPoiTypeByKey(value);
+			} else {
+				PoiType poiType = mapPoiTypes.getPoiTypeByKey(e.getKey() + "_" + e.getValue());
+				if (poiType == null) {
+					poiType = mapPoiTypes.getPoiTypeByKey(e.getKey());
+				}
+				if (poiType != null) {
+					otherPt = pt != null ? poiType : otherPt;
+					subtype = pt == null ? value : subtype;
+					pt = pt == null ? poiType : pt;
+				}
+			}
+			if (Algorithms.isEmpty(value) && otherPt == null) {
+				otherPt = mapPoiTypes.getPoiTypeByKey(tag);
+			}
+			if (otherPt == null) {
+				PoiType poiType = mapPoiTypes.getPoiTypeByKey(value);
+				if (poiType != null && poiType.getOsmTag().equals(tag)) {
+					otherPt = poiType;
+				}
+			}
+			if (!Algorithms.isEmpty(value)) {
+				String translate = poiTranslator.getTranslation(tag + "_" + value);
+				String translate2 = poiTranslator.getTranslation(value);
+				if (translate != null && translate2 != null) {
+					additionalInfo.put(translate, translate2);
+				} else {
+					additionalInfo.put(tag, value);
+				}
+			}
+		}
+		if (pt != null) {
+			am.setType(pt.getCategory());
+		} else if (otherPt != null) {
+			am.setType(otherPt.getCategory());
+			am.setSubType(otherPt.getKeyName());
+		}
+		if (subtype != null) {
+			am.setSubType(subtype);
+		}
+		Entity.EntityType type = ObfConstants.getOsmEntityType(renderedObject);
+		if (type != null) {
+			long osmId = ObfConstants.getOsmObjectId(renderedObject);
+			long objectId = ObfConstants.createMapObjectIdFromCleanOsmId(osmId, type);
+			am.setId(objectId);
+		}
+		am.setAdditionalInfo(additionalInfo);
+		am.setX(renderedObject.getX());
+		am.setY(renderedObject.getY());
+		return am;
+	}
+
 }

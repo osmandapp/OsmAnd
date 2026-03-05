@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 
 public class BRouterServiceConnection implements ServiceConnection {
 
+	public static final long BROUTER_CONNECT_TIMEOUT_MS = 800;
+
 	private IBRouterService brouterService;
 
 	public void onServiceConnected(ComponentName className, IBinder boundService) {

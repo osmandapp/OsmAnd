@@ -644,11 +644,11 @@ public class PointLocationLayer extends OsmandMapLayer
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
 		Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
-		if (view == null || tileBox.getZoom() < MIN_ZOOM || lastKnownLocation == null) {
+        MapRendererView mapRenderer = getMapRenderer();
+		if (view == null || (mapRenderer == null && tileBox.getZoom() < MIN_ZOOM) || lastKnownLocation == null) {
 			clearMapMarkersCollections();
 			return;
 		}
-		MapRendererView mapRenderer = getMapRenderer();
 		boolean markersRecreated = false;
 		if (mapRenderer != null && (markersInvalidated || mapMarkersCollection == null)) {
 			markersRecreated = recreateMarkerCollection();
@@ -680,7 +680,7 @@ public class PointLocationLayer extends OsmandMapLayer
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
-		if (view == null || tileBox.getZoom() < MIN_ZOOM || lastKnownLocation == null) {
+		if (view == null || (!hasMapRenderer() && tileBox.getZoom() < MIN_ZOOM) || lastKnownLocation == null) {
 			return;
 		}
 		if (!hasMapRenderer()) {
@@ -697,10 +697,10 @@ public class PointLocationLayer extends OsmandMapLayer
 
 	@Override
 	public void updateLocation(Location location) {
-		if (view == null || view.getZoom() < MIN_ZOOM || location == null) {
+        MapRendererView mapRenderer = getMapRenderer();
+		if (view == null || (mapRenderer == null && view.getZoom() < MIN_ZOOM) || location == null) {
 			return;
 		}
-		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && (!isMapLinkedToLocation() || isMovingToMyLocation())) {
 			boolean dataChanged = !MapUtils.areLatLonEqual(prevLocation, location, HIGH_LATLON_PRECISION);
 			if (dataChanged) {

@@ -41,8 +41,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
-
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
@@ -110,6 +108,7 @@ import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
@@ -122,6 +121,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
@@ -133,6 +133,7 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.MapViewWithLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapTileView.OnDrawMapListener;
+import net.osmand.plus.views.controls.VerticalWidgetPanel;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
@@ -217,8 +218,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		public void stateChanged(Boolean enabled) {
 			app.runInUIThread(() -> {
 				OsmandMapTileView mapView = getMapView();
-                mapView.setPinchZoomMagnificationEnabled(enabled);
-            });
+				mapView.setPinchZoomMagnificationEnabled(enabled);
+			});
 		}
 	};
 	private KeyEventHelper keyEventHelper;
@@ -336,7 +337,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		extendedMapActivity.onCreate(this, savedInstanceState);
 	}
 
-	protected int getRootViewId(){
+	public void setMapViewPaddings(int left, int top, int right, int bottom) {
+		mapViewWithLayers.setPadding(left, top, right, bottom);
+	}
+
+	public void resetMapViewPaddings() {
+		mapViewWithLayers.setPadding(0, 0, 0, 0);
+	}
+
+	protected int getRootViewId() {
 		return R.id.drawer_layout;
 	}
 
@@ -349,11 +358,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		collection.add(InsetTarget.createLeftSideContainer(true, true, R.id.menuItems));
 
 		View dashboardView = findViewById(R.id.dashboard);
-		ObservableScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
 		collection.add(InsetTarget.createLeftSideContainer(false, true, dashboardView));
-		collection.add(InsetTarget.createLeftSideContainer(true, true, scrollView));
 		collection.add(InsetTarget.createLeftSideContainer(true, false, R.id.dashboard_content_container));
-		collection.add(InsetTarget.createScrollable(scrollView).landscapeSides().build());
 
 		return collection;
 	}
@@ -578,9 +584,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
-		if(mapContextMenu.isVisible()) {
+		if (mapContextMenu.isVisible()) {
 			MenuController menuController = mapContextMenu.getMenuController();
-			if(menuController != null && menuController.hasBackAction()) {
+			if (menuController != null && menuController.hasBackAction()) {
 				mapContextMenu.backToolbarAction(menuController);
 				return;
 			}
@@ -626,7 +632,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		FragmentManager fragmentManager = getSupportFragmentManager();
 
 		if (app.getMapMarkersHelper().getPlanRouteContext().isFragmentVisible()) {
-			PlanRouteFragment.showInstance(this);
+			PlanRouteFragment.showInstance(this, null);
 		}
 
 		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
@@ -683,7 +689,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (settings.APPLICATION_MODE.get() != prevAppMode) {
 				settings.executePreservingPrefTimestamp(prevAppMode, () -> {
 					settings.setLastKnownMapRotation(prevAppMode, getMapRotateTarget());
-					settings.setLastKnownMapElevation(prevAppMode, getMapElevationAngle());
+					if (!app.getOsmandMap().getMapView().getAnimatedDraggingThread().isAnimating()) {
+						settings.setLastKnownMapElevation(prevAppMode, getMapElevationAngle());
+					}
 				});
 				updateApplicationModeSettings();
 			}
@@ -691,14 +699,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.APPLICATION_MODE.addListener(applicationModeListener);
 		updateApplicationModeSettings(!app.getPoiFilters().isShowingAnyPoi());
 
-
 		// if destination point was changed try to recalculate route
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (routingHelper.isFollowingMode()
-				&& (!Algorithms.objectEquals(targets.getPointToNavigate().getLatLon(), routingHelper.getFinalLocation()) || !Algorithms
-				.objectEquals(targets.getIntermediatePointsLatLonNavigation(), routingHelper.getIntermediatePoints()))) {
-			targets.updateRouteAndRefresh(true);
+		if (routingHelper.isFollowingMode()) {
+			TargetPoint point = targets.getPointToNavigate();
+			LatLon targetLatLon = point != null ? point.getLatLon() : null;
+			if (!Algorithms.objectEquals(targetLatLon, routingHelper.getFinalLocation())
+					|| !Algorithms.objectEquals(targets.getIntermediatePointsLatLonNavigation(), routingHelper.getIntermediatePoints())) {
+				targets.updateRouteAndRefresh(true);
+			}
 		}
 		app.getLocationProvider().resumeAllUpdates();
 
@@ -842,7 +852,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void updateStatusBarColor() {
+		updateNavigationBarColor();
 		UiUtilities.updateStatusBarColor(this);
+	}
+
+	@Override
+	public int getNavigationBarColorId() {
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(this);
+			VerticalWidgetPanel panel = findViewById(R.id.map_bottom_widgets_panel);
+			boolean transparent = settings.getTransparentMapThemePreference(layoutMode).get();
+			if (panel != null && panel.getVisibility() == View.VISIBLE && panel.isAnyRowVisible() && !transparent) {
+				return ColorUtilities.getWidgetBackgroundColorId(isNightMode());
+			}
+		}
+		return super.getNavigationBarColorId();
 	}
 
 	@Override
@@ -1009,7 +1033,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		stopped = true;
 		lockHelper.onStop(this);
 		extendedMapActivity.onStop(this);
-		fragmentsHelper.onStop();
 
 		super.onStop();
 	}
@@ -1151,6 +1174,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		app.getSearchUICore().refreshCustomPoiFilters();
 		app.getMapButtonsHelper().updateActiveActions();
+		app.getSmartFolderHelper().onUnitsSettingsChanged();
 		getMapViewTrackingUtilities().appModeChanged();
 		keyEventHelper.updateGlobalCommands();
 
@@ -1455,6 +1479,26 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 			}
 		}
+
+		if (!isDrawerDisabled()) {
+			switch (event.getActionMasked()) {
+				case MotionEvent.ACTION_POINTER_DOWN:
+					// 2+ fingers on screen: disable drawer swipe
+					if (event.getPointerCount() >= 2) {
+						drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+						break;
+					}
+				case MotionEvent.ACTION_POINTER_UP:
+				case MotionEvent.ACTION_UP:
+				case MotionEvent.ACTION_CANCEL:
+					// Fall through to possibly unlock again if < 2 fingers (or gesture ended)
+					if (event.getPointerCount() < 2) {
+						drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+					}
+					break;
+			}
+		}
+
 		return super.dispatchTouchEvent(event);
 	}
 

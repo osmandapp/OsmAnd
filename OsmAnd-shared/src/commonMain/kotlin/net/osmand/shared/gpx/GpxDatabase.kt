@@ -23,7 +23,7 @@ class GpxDatabase {
 	companion object {
 		val log = LoggerFactory.getLogger("GpxDatabase")
 
-		const val DB_VERSION = 33
+		const val DB_VERSION = 34
 		const val DB_NAME = "gpx_database"
 		const val GPX_TABLE_NAME = "gpxTable"
 		const val GPX_DIR_TABLE_NAME = "gpxDirTable"
@@ -253,7 +253,7 @@ class GpxDatabase {
 		var minDate = -1L
 		var db: SQLiteConnection? = null
 		try {
-			db = openConnection(false)
+			db = openConnection(true)
 			db?.let {
 				var query: SQLiteCursor? = null
 				try {
@@ -275,7 +275,7 @@ class GpxDatabase {
 		var maxValue = ""
 		var db: SQLiteConnection? = null
 		try {
-			db = openConnection(false)
+			db = openConnection(true)
 			if (db != null) {
 				val queryString = GPX_MAX_COLUMN_VALUE.format(parameter.columnName)
 				var query: SQLiteCursor? = null
@@ -326,7 +326,7 @@ class GpxDatabase {
 		val folderCollection = mutableListOf<StringIntPair>()
 		var db: SQLiteConnection? = null
 		try {
-			db = openConnection(false)
+			db = openConnection(true)
 			db?.let {
 				var query: SQLiteCursor? = null
 				try {
@@ -350,7 +350,7 @@ class GpxDatabase {
 		val items = mutableSetOf<GpxDataItem>()
 		var db: SQLiteConnection? = null
 		try {
-			db = openConnection(false)
+			db = openConnection(true)
 			db?.let {
 				var query: SQLiteCursor? = null
 				try {
@@ -447,7 +447,7 @@ class GpxDatabase {
 		val items = mutableSetOf<GpxDirItem>()
 		var db: SQLiteConnection? = null
 		try {
-			db = openConnection(false)
+			db = openConnection(true)
 			db?.let {
 				var query: SQLiteCursor? = null
 				try {
@@ -479,7 +479,7 @@ class GpxDatabase {
 	private fun getDataItem(file: KFile): DataItem? {
 		var db: SQLiteConnection? = null
 		try {
-			db = openConnection(false)
+			db = openConnection(true)
 			db?.let { return getDataItem(file, db) } ?: return null
 		} finally {
 			db?.close()

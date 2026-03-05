@@ -66,7 +66,7 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 	protected void onRightBottomButtonClick() {
 		if (!settings.isInternetConnectionAvailable()) {
 			app.showToastMessage(R.string.internet_not_available);
-			dismiss();
+			dismissAllowingStateLoss();
 		} else {
 			AndroidNetworkUtils.sendRequestAsync(app, "https://osmand.net/api/missing_search", params,
 					null, true, true, (result, error, resultCode) -> {
@@ -82,7 +82,7 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 
 							}
 						}
-						dismiss();
+						dismissAllowingStateLoss();
 					});
 		}
 	}

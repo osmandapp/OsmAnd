@@ -2,20 +2,22 @@ package net.osmand.plus.views;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.core.android.MapRendererView;
+
 public class Zoom {
 
 	private int baseZoom;
 	private float zoomFloatPart;
 	private float zoomAnimation;
 
-	private final int minZoom;
-	private final int maxZoom;
+	private final float minZoom;
+	private final float maxZoom;
 
 	public Zoom(int baseZoom, float zoomFloatPart, int minZoom, int maxZoom) {
 		this.baseZoom = baseZoom;
 		this.zoomFloatPart = zoomFloatPart;
-		this.minZoom = minZoom;
-		this.maxZoom = maxZoom;
+		this.minZoom = (float) minZoom;
+		this.maxZoom = (float) maxZoom;
 	}
 
 	public int getBaseZoom() {
@@ -30,46 +32,46 @@ public class Zoom {
 		return zoomAnimation;
 	}
 
-	public boolean isZoomInAllowed() {
-		return baseZoom < maxZoom || baseZoom == maxZoom && zoomFloatPart < 0;
+	public boolean isZoomInAllowed(MapRendererView mapRendererView) {
+        return zoomFloatPart + baseZoom < (mapRendererView != null ? mapRendererView.getMaxZoomLevel() : maxZoom);
 	}
 
-	public boolean isZoomOutAllowed() {
-		return baseZoom > minZoom || baseZoom == minZoom && zoomFloatPart > 0;
+	public boolean isZoomOutAllowed(MapRendererView mapRendererView) {
+        return zoomFloatPart + baseZoom > (mapRendererView != null ? mapRendererView.getMinZoomLevel() : minZoom);
 	}
 
-	public void zoomIn() {
-		changeZoom(1);
+	public void zoomIn(MapRendererView mapRendererView) {
+		changeZoom(mapRendererView, 1);
 	}
 
-	public void zoomOut() {
-		changeZoom(-1);
+	public void zoomOut(MapRendererView mapRendererView) {
+		changeZoom(mapRendererView, -1);
 	}
 
-	public void partialChangeZoom(float deltaZoom) {
-		while (zoomFloatPart + deltaZoom >= 0.5 && baseZoom + 1 <= maxZoom) {
+	public void partialChangeZoom(MapRendererView mapRendererView, float deltaZoom) {
+		while (zoomFloatPart + deltaZoom >= 0.5) {
 			deltaZoom--;
 			baseZoom++;
 		}
-		while (zoomFloatPart + deltaZoom < -0.5 && baseZoom - 1 >= minZoom) {
+		while (zoomFloatPart + deltaZoom < -0.5) {
 			deltaZoom++;
 			baseZoom--;
 		}
 		zoomFloatPart += deltaZoom;
-		checkZoomBounds();
+		checkZoomBounds(mapRendererView, minZoom, maxZoom);
 	}
 
-	public void changeZoom(int step) {
+	public void changeZoom(MapRendererView mapRendererView, int step) {
 		baseZoom += step;
-		checkZoomBounds();
+		checkZoomBounds(mapRendererView, minZoom, maxZoom);
 	}
 
-	public void calculateAnimatedZoom(int currentBaseZoom, float deltaZoom) {
-		while (zoomFloatPart + deltaZoom >= 0.5 && baseZoom + 1 <= maxZoom) {
+	public void calculateAnimatedZoom(MapRendererView mapRendererView, int currentBaseZoom, float deltaZoom) {
+		while (zoomFloatPart + deltaZoom >= 0.5) {
 			deltaZoom--;
 			baseZoom++;
 		}
-		while (zoomFloatPart + deltaZoom < -0.5 && baseZoom - 1 >= minZoom) {
+		while (zoomFloatPart + deltaZoom < -0.5) {
 			deltaZoom++;
 			baseZoom--;
 		}
@@ -87,40 +89,52 @@ public class Zoom {
 			deltaZoom = invertedZoomFloatPart - zoomFloatPart;
 		}
 
-		boolean zoomInOverflow = baseZoom == maxZoom && zoomFloatPart + deltaZoom > 0;
-		boolean zoomOutOverflow = baseZoom == minZoom && zoomFloatPart + deltaZoom < 0;
-		if (zoomInOverflow || zoomOutOverflow) {
-			deltaZoom = -zoomFloatPart;
-		}
+        float minZoom = this.minZoom;
+        float maxZoom = this.maxZoom;
+        if (mapRendererView != null) {
+            minZoom = mapRendererView.getMinZoomLevel();
+            maxZoom = mapRendererView.getMaxZoomLevel();
+        }
+
+        if (baseZoom == (int) maxZoom && zoomFloatPart + deltaZoom > maxZoom - baseZoom) {
+            deltaZoom = maxZoom - baseZoom - zoomFloatPart;
+        }
+        else if (baseZoom == (int) Math.ceil(minZoom) && zoomFloatPart + deltaZoom < minZoom - baseZoom) {
+            deltaZoom = minZoom - baseZoom - zoomFloatPart;
+        }
 
 		zoomAnimation = deltaZoom;
 	}
 
-	private void checkZoomBounds() {
-		if (baseZoom == maxZoom) {
-			zoomFloatPart = Math.min(0, zoomFloatPart);
-		} else if (baseZoom > maxZoom) {
-			baseZoom = maxZoom;
-			zoomFloatPart = 0;
-		}
+    private void clampZoom(float minZoom, float maxZoom) {
+        float zoom = (float) baseZoom + zoomFloatPart;
+        if (zoom > maxZoom) {
+            baseZoom = (int) maxZoom;
+            zoomFloatPart = maxZoom - baseZoom;
+        }
 
-		if (baseZoom == minZoom) {
-			zoomFloatPart = Math.max(0, zoomFloatPart);
-		} else if (baseZoom < minZoom) {
-			baseZoom = minZoom;
-			zoomFloatPart = 0;
-		}
+        if (zoom < minZoom) {
+            baseZoom = (int) Math.ceil(minZoom);
+            zoomFloatPart = minZoom - baseZoom;
+        }
+    }
+
+    private void checkZoomBounds(MapRendererView mapRendererView, float minZoom, float maxZoom) {
+        if (mapRendererView != null)
+            clampZoom(mapRendererView.getMinZoomLevel(), mapRendererView.getMaxZoomLevel());
+        else
+            clampZoom(minZoom, maxZoom);
+    }
+
+	@NonNull
+	public static Zoom checkZoomBounds(MapRendererView mapRendererView, float zoom, int minZoom, int maxZoom) {
+		return checkZoomBounds(mapRendererView, (int) zoom, zoom - (int) zoom, minZoom, maxZoom);
 	}
 
 	@NonNull
-	public static Zoom checkZoomBounds(float zoom, int minZoom, int maxZoom) {
-		return checkZoomBounds((int) zoom, zoom - (int) zoom, minZoom, maxZoom);
-	}
-
-	@NonNull
-	public static Zoom checkZoomBounds(int baseZoom, float zoomFloatPart, int minZoom, int maxZoom) {
+	public static Zoom checkZoomBounds(MapRendererView mapRendererView, int baseZoom, float zoomFloatPart, int minZoom, int maxZoom) {
 		Zoom zoom = new Zoom(baseZoom, zoomFloatPart, minZoom, maxZoom);
-		zoom.checkZoomBounds();
+		zoom.checkZoomBounds(mapRendererView, minZoom, maxZoom);
 		return zoom;
 	}
 

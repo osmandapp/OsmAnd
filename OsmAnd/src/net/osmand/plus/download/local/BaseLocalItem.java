@@ -23,6 +23,11 @@ public abstract class BaseLocalItem {
 	public abstract CharSequence getName(@NonNull Context context);
 
 	@NonNull
+	public CharSequence getName(@NonNull Context context, boolean includeParent) {
+		return getName(context);
+	}
+
+	@NonNull
 	public abstract String getDescription(@NonNull Context context);
 
 	@NonNull
@@ -33,4 +38,17 @@ public abstract class BaseLocalItem {
 	public abstract long getSize();
 
 	public abstract long getLastModified();
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		BaseLocalItem that = (BaseLocalItem) o;
+		return type == that.type;
+	}
+
+	@Override
+	public int hashCode() {
+		return type.hashCode();
+	}
 }

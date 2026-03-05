@@ -66,6 +66,8 @@ public interface OsmAndCustomizationConstants {
 	String CONTOUR_LINES = TERRAIN_ITEMS_ID_SCHEME + "contour_lines";
 	String RELIEF_3D_ID = TERRAIN_ITEMS_ID_SCHEME + "relief_3d";
 	String TERRAIN_DEPTH_CONTOURS = TERRAIN_ITEMS_ID_SCHEME + "depth_contours";
+	String TERRAIN_SPHERICAL_MAP = TERRAIN_ITEMS_ID_SCHEME + "spherical_map";
+	String TERRAIN_3D_MAP_OBJECTS = TERRAIN_ITEMS_ID_SCHEME + "3d_map_objects";
 
 	String OPEN_STREET_MAP_ITEMS_ID_SCHEME = CONFIGURE_MAP_ITEM_ID_SCHEME + "open_street_map.";
 	String OSM_NOTES = OPEN_STREET_MAP_ITEMS_ID_SCHEME + "osm_notes";
@@ -141,7 +143,7 @@ public interface OsmAndCustomizationConstants {
 	String PLUGIN_ANT_PLUS = "osmand.antplus";
 	String PLUGIN_VEHICLE_METRICS = "osmand.vehicle.metrics";
 	String PLUGIN_WEATHER = "osmand.weather";
-	String PLUGIN_STAR_WATCHER = "osmand.starwatcher";
+	String PLUGIN_ASTRONOMY = "osmand.astronomy";
 
 	//Settings:
 	String SETTINGS_ID = "settings.";
@@ -205,6 +207,7 @@ public interface OsmAndCustomizationConstants {
 	String FRAGMENT_TRIPLTEK_PROMO_ID = FRAGMENT_ID + "tripltek_promo";
 	String FRAGMENT_HUGEROCK_PROMO_ID = FRAGMENT_ID + "hugerock_promo";
 	String FRAGMENT_HMD_PROMO_ID = FRAGMENT_ID + "hmd_promo";
+	String FRAGMENT_ROUTE_INFO_MENU_ID = FRAGMENT_ID + "route_info_menu";
 
 	//Map Context Menu rows:
 	String MAP_CONTEXT_MENU_ROWS = "context.menu.rows.";

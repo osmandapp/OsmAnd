@@ -858,11 +858,7 @@
     <string name="poi_namefinder_query_empty">Teclegeu per trobar el PDI</string>
     <string name="show_transport_over_map">Mostra les parades del transport</string>
     <string name="use_english_names_descr">Escolliu entre els noms nadius i els anglesos.</string>
-    <string name="srtm_plugin_description">La informació del terreny, com ara corbes de nivell, ombres i vessants, us ajuda a avaluar visualment la disposició del terreny i el relleu, la navegabilitat i molt més. La informació topogràfica es pot representar al mapa per ombrejat de vessants, corbes de nivell i/o coloració de pendent.
-\n
-\nLes dades subjacents provenen de SRTM i ASTER.
-\n
-\nMés informació a %1$s.</string>
+    <string name="srtm_plugin_description">La informació del terreny, com ara corbes de nivell, ombres i vessants, us ajuda a avaluar visualment la disposició del terreny i el relleu, la navegabilitat i molt més. La informació topogràfica es pot representar al mapa per ombrejat de vessants, corbes de nivell i/o coloració de pendent. \n \nLes dades subjacents provenen de SRTM i ASTER. \n \nMés informació a %1$s.</string>
     <string name="rendering_attr_showRoadMaps_description">Trieu quan mostrar mapes de carreteres i prou:</string>
     <string name="auto_announce_on">Inicia els anuncis automàtics</string>
     <string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
@@ -4809,7 +4805,7 @@
     <string name="explore_3d_track_description">Explora la pista en 3D interactiu! Visualitza l\'alçada, la velocitat i més directament al mapa.</string>
     <string name="maps_that_also_be_used">Mapes que també s\'utilitzaran: %1$s</string>
     <string name="getting_list_of_required_maps">S\'està obtenint una llista dels mapes requerits…</string>
-    <string name="required_maps_calculate_online_summary">La llista de mapes que falten es basa en la ruta en línia recta. Per obtenir una llista precisa de mapes, OsmAnd pot calcular prèviament la seva ruta en línia.</string>
+    <string name="required_maps_calculate_online_summary">La llista de mapes que falten es basa en la ruta en línia recta. Per a obtenir una llista precisa de mapes, OsmAnd pot calcular prèviament en línia la vostra ruta.</string>
     <string name="required_maps">Mapes requerits</string>
     <string name="missing_maps_description">Falten alguns mapes fora de línia necessaris per a aquesta ruta o no estan actualitzats. Baixeu o actualitzeu aquests mapes.</string>
     <string name="missing_maps_header">Falten mapes obsolets</string>
@@ -5091,7 +5087,7 @@
     <string name="deleting_complete">Supressió completa</string>
     <string name="delete_account">Suprimeix el compte</string>
     <string name="backup_error_delete_account_email_match">El correu electrònic no coincideix amb el nom d\'usuari d\'inici de sessió</string>
-    <string name="verify_account_deletion_descr">Hem de verificar el vostre compte abans d\'eliminar-lo.\n\nSi us plau, introdueixi l\'adreça de correu electrònic amb la qual es va registrar. S\'hi enviarà una contrasenya única per al pas següent.</string>
+    <string name="verify_account_deletion_descr">Hem de verificar el vostre compte abans d\'eliminar-lo.\n\nIntroduïu l\'adreça de correu electrònic amb la qual us vau registrar. S\'hi enviarà una contrasenya única per al pas següent.</string>
     <string name="verify_account">Verifiqueu el vostre compte</string>
     <string name="slope_legend_description">Slope utilitza colors per a visualitzar l\'escarpament del terreny. Podeu llegir més sobre Slope a %1$s.</string>
     <string name="terrain_category_description">Línies de contorn de terra, ombra de turons en escala de grisos i indicació de pendent d\'escala de color, per mostrar pics i terres baixes.</string>
@@ -5443,15 +5439,13 @@
     <string name="backup_version_history_removed">S\'ha eliminat tot l\'historial de versions.</string>
     <string name="backup_deleted_all_data_descr">Totes les vostres dades s\'han eliminat amb èxit d\'OsmAnd Cloud.</string>
     <string name="backup_deleting_all_data_descr">Espereu fins que l\'OsmAnd suprimeixi les vostres dades del núvol. Totes les dades del dispositiu romandran intactes.</string>
-    <string name="backup_deleted_all_data">S\'han suprimit totes les dades.</string>
-    <string name="backup_deleting_all_data">S\'estan suprimint totes les dades…</string>
     <string name="logout_from_osmand_cloud_decsr">Sortiu?\nHaureu de tornar a iniciar la sessió per fer còpies de seguretat o restaurar les dades.</string>
     <string name="logout_from_osmand_cloud">Tanca la sessió d\'OsmAnd Cloud</string>
     <string name="duration_moment_ago">fa un moment</string>
     <string name="contour_lines_hillshade_slope">Línies de contorn, ombra de turons, pendent</string>
     <string name="hillshade_slope">Ombreig, Pendents</string>
     <string name="backup_error_no_valid_subscription">No hi ha subscripció vàlida</string>
-    <string name="backup_error_user_is_not_registered">Cap usuari registrat amb aquesta adreça de correu electrònic</string>
+    <string name="backup_error_user_is_not_registered">No hi ha cap usuari registrat amb aquesta adreça de correu electrònic</string>
     <string name="backup_error_token_is_not_valid_or_expired">Testimoni no vàlid o caducat</string>
     <string name="backup_error_token_is_not_valid">Alguna cosa no és correcta amb l\'identificador o el testimoni del dispositiu proporcionat</string>
     <string name="backup_error_file_not_available">El fitxer no està disponible</string>
@@ -5531,9 +5525,9 @@
     <string name="cloud_email_not_registered">Aquesta adreça de correu electrònic no està registrada a OsmAnd Cloud</string>
     <string name="enter_verification_code">Introduïu una contrasenya única</string>
     <string name="verify_email_address_descr">Codi de verificació enviat a %1$s. Introduïu-lo al camp de sota.</string>
-    <string name="verify_email_address">Verifica l\'adreça de correu electrònic</string>
-    <string name="osmand_cloud_login_descr">Si us plau, introdueixi l\'adreça de correu electrònic amb la qual va registrar. S\'hi enviarà una contrasenya única.</string>
-    <string name="osmand_cloud_create_account_descr">Si us plau, introdueixi la seva adreça de correu electrònic, s\'enviarà un codi de verificació allà,\ni totes les teves dades estaran vinculades a ella.</string>
+    <string name="verify_email_address">Verifiqueu l\'adreça de correu electrònic</string>
+    <string name="osmand_cloud_login_descr">Introduïu l\'adreça de correu electrònic amb la qual us vau registrar. S\'hi enviarà una contrasenya única.</string>
+    <string name="osmand_cloud_create_account_descr">Introduïu la vostra adreça electrònica: s\'hi enviarà un codi de verificació\ni totes les vostres dades hi restaran vinculades.</string>
     <string name="osmand_cloud_help_descr">Necessites ajuda? Contacteu amb nosaltres a %1$s</string>
     <string name="backup_into_file">Fes una còpia de seguretat com a fitxer</string>
     <string name="local_backup">Còpia local</string>
@@ -5829,12 +5823,20 @@
     <string name="us_gallon">Galó dels EUA</string>
     <string name="kilometers">Quilòmetres</string>
     <string name="miles">Milles</string>
-    <string name="mpg">Milles per galó</string>
+    <string name="mpg">MPG</string>
     <string name="shared_string_osm_link">Enllaç OSM</string>
-    <string name="show_spherical_map">Mostra el mapa esfèric</string>
     <string name="show_spherical_map_description">Mostra el model esferoïdal de la Terra</string>
     <string name="show_local_names">Mostra les denominacions locals</string>
     <string name="accessibility_independent_features">Característiques independents</string>
     <string name="access_pinch_zoom_magnification">Control tàctil d\'escala per pinçament</string>
     <string name="access_pinch_zoom_magnification_descr">Utilitza el subconjunt d\'escales ja definides, en comptes de tot rang, durant l\'ampliació gestual.</string>
+    <string name="galactic_line">Línia galàctica</string>
+    <string name="meridian_line">Línia meridiana</string>
+    <string name="equator_line">Línia equatorial</string>
+    <string name="copy_from_portrait_layout">Copia amb l\'orientació vertical</string>
+    <string name="copy_from_landscape_layout">Copia amb l\'orientació horitzontal</string>
+    <string name="panels_layout_compact">Compacte</string>
+    <string name="panels_layout_wide">Amplada</string>
+    <string name="panels_layout">Disposició dels panells</string>
+    <string name="panels_layout_descr">Seleccioneu una disposició dels panells superior i inferior. Poden ser amples, abastant tota l\'amplada de la pantalla, o compactes, encaixant entre els panells laterals i els botons.</string>
 </resources>

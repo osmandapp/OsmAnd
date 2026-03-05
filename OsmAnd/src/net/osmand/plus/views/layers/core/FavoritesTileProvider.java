@@ -176,6 +176,11 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		return offset;
 	}
 
+	@Override
+	public boolean waitForLoading() {
+		return true;
+	}
+
 	public void addToData(@NonNull FavouritePoint favorite, int color, boolean withShadow,
 	                      boolean hasMarker, float textScale) throws IllegalStateException {
 		if (providerInstance != null) {

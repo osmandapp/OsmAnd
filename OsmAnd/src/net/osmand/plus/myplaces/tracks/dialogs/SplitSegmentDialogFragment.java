@@ -46,6 +46,8 @@ import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.shared.gpx.GpxDataItem;
@@ -187,6 +189,13 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 		listView.setAdapter(adapter);
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.list));
+		return collection;
 	}
 
 	@Override

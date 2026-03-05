@@ -2,6 +2,8 @@ package net.osmand.plus.plugins.development.widget;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_DISTANCE;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -24,6 +26,11 @@ public class CameraDistanceWidget extends SimpleWidget {
 	public CameraDistanceWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, WidgetType.DEV_CAMERA_DISTANCE, customId, widgetsPanel);
 		this.mapView = mapActivity.getMapView();
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		updateSimpleWidgetInfo(null);
 		setIcons(DEV_CAMERA_DISTANCE);
 	}

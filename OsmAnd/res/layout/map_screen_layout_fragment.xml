@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/card_and_list_background_basic">
+
+		<include layout="@layout/profile_preference_toolbar" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="?attr/list_background_color">
+
+		<ScrollView
+			android:id="@+id/scroll_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/content_padding_extra_large">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="229dp"
+					android:background="?attr/activity_background_color"
+					android:gravity="center">
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/preview_icon"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center"
+						tools:srcCompat="@drawable/img_map_screen_layout_single_day" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/settings"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/list_background_color"
+					android:orientation="vertical">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/description"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_horizontal"
+						android:padding="@dimen/content_padding"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/default_list_text_size"
+						app:lineHeight="@dimen/default_title_line_height"
+						tools:text="@string/map_screen_layout_descr" />
+
+					<include layout="@layout/simple_divider_item" />
+
+					<LinearLayout
+						android:id="@+id/items_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:background="?attr/list_background_color"
+						android:orientation="vertical">
+
+						<include
+							android:id="@+id/single_layout_button"
+							layout="@layout/bottom_sheet_item_with_radio_btn_left" />
+
+						<include layout="@layout/divider_half_item" />
+
+						<include
+							android:id="@+id/separate_layouts_button"
+							layout="@layout/bottom_sheet_item_with_radio_btn_left" />
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</ScrollView>
+
+		<LinearLayout
+			android:id="@+id/bottom_buttons_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:background="?attr/list_background_color"
+			android:clickable="true"
+			android:focusable="true"
+			android:orientation="vertical"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingTop="@dimen/measurement_tool_undo_redo_padding_medium"
+			android:paddingBottom="@dimen/content_padding">
+
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
+				android:id="@+id/apply_button"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:dialogButtonTitle="@string/shared_string_apply"
+				app:dialogButtonType="primary" />
+
+		</LinearLayout>
+
+	</FrameLayout>
+
+</LinearLayout>

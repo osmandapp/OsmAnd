@@ -72,9 +72,13 @@ public class DownloadService extends Service {
 
 	@Override
 	public void onTimeout(int startId, int fgsType) {
-		super.onTimeout(startId, fgsType);
-		stopForeground((OsmandApplication) getApplication());
-		stopSelf();
+		try {
+			stopForeground(STOP_FOREGROUND_REMOVE);
+		} catch (Exception e) {
+			LOG.error(e);
+		} finally {
+			stopSelf();
+		}
 	}
 
 	private void stopForeground(@NonNull OsmandApplication app) {

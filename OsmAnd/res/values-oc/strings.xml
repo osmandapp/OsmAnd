@@ -1379,8 +1379,6 @@
     <string name="backup_do_not_have_any">Avètz pas encar de sauvagardas en linha.</string>
     <string name="backup_data_removed">Totei lei donadas son estadas suprimidas.</string>
     <string name="backup_version_history_removed">Tot l\'istoric dei versions es estat suprimit.</string>
-    <string name="backup_deleted_all_data">Suprimir totei lei donadas.</string>
-    <string name="backup_deleting_all_data">A suprimir totei lei donadas…</string>
     <string name="duration_moment_ago">i a gaire</string>
     <string name="backup_error_no_valid_subscription">Ges d\'abonament valide</string>
     <string name="backup_error_file_not_available">Fichier non disponible</string>

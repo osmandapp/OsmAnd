@@ -87,11 +87,11 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 	private int menuBottomViewHeight;
 	private int menuFullHeight;
 	private int screenHeight;
-	private int viewHeight;
+	protected int viewHeight;
 	private int currentMenuState;
 	private int shadowHeight;
 	private int statusBarHeight;
-	private int navBarHeight;
+	protected int navBarHeight;
 
 	private String preferredMapLang;
 	private boolean transliterateNames;
