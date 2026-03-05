@@ -5172,7 +5172,7 @@
     <string name="poi_rapids_grade_4">4 (avancé)</string>
     <string name="poi_rapids_grade_5">5 (expert)</string>
     <string name="poi_rapids_grade_6">6 (extrême)</string>
-    <string name="poi_rapids_grade_x">X (infranchissable)</string>
+    <string name="poi_rapids_grade_x">X (impraticable)</string>
     <string name="poi_rapids_filter">Niveau de rapides</string>
     <string name="poi_rapids_grade_0">0 (eau calme)</string>
 </resources>
