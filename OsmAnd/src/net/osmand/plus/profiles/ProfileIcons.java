@@ -1,5 +1,7 @@
 package net.osmand.plus.profiles;
 
+import android.content.res.Resources;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
@@ -9,6 +11,7 @@ import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 public enum ProfileIcons {
 	DEFAULT(R.drawable.ic_world_globe_dark, "ic_world_globe_dark"),
@@ -67,17 +70,17 @@ public enum ProfileIcons {
 	}
 
 	public static ArrayList<Integer> getIcons(OsmandApplication app) {
-		ArrayList<Integer> list = new ArrayList<>();
+		LinkedHashSet<Integer> iconIds = new LinkedHashSet<>();
 		for (ProfileIcons pi : values()) {
-			list.add(pi.resId);
+			iconIds.add(pi.resId);
 		}
 		for (RouteActivity activity : RouteActivityHelper.INSTANCE.getActivities()) {
 			int categoryIconId = app.getResources().getIdentifier("mx_" + activity.getIconName(), "drawable", app.getPackageName());
 			if (categoryIconId != 0) {
-				list.add(categoryIconId);
+				iconIds.add(categoryIconId);
 			}
 		}
-		return list;
+		return new ArrayList<>(iconIds);
 	}
 
 	public int getResId() {
@@ -88,12 +91,31 @@ public enum ProfileIcons {
 		return resStringId;
 	}
 
+	@NonNull
 	public static String getResStringByResId(int resId) {
+		String resStringId = findResStringByResId(resId);
+		return resStringId != null ? resStringId : DEFAULT.getResStringId();
+	}
+
+	@NonNull
+	public static String getResStringByResId(@NonNull OsmandApplication app, int resId) {
+		String resStringId = findResStringByResId(resId);
+		if (resStringId != null) {
+			return resStringId;
+		}
+		try {
+			return app.getResources().getResourceEntryName(resId);
+		} catch (Resources.NotFoundException e) {
+			return DEFAULT.getResStringId();
+		}
+	}
+
+	private static String findResStringByResId(int resId) {
 		for (ProfileIcons pi : values()) {
 			if (pi.resId == resId) {
 				return pi.resStringId;
 			}
 		}
-		return DEFAULT.getResStringId();
+		return null;
 	}
 }

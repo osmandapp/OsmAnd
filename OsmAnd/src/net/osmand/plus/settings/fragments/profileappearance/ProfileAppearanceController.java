@@ -240,7 +240,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 		} else {
 			ApplicationMode mode = screen.getSelectedAppMode();
 			mode.setParentAppMode(changedProfile.parent);
-			mode.setIconResName(ProfileIcons.getResStringByResId(changedProfile.iconRes));
+			mode.setIconResName(ProfileIcons.getResStringByResId(app, changedProfile.iconRes));
 			mode.setUserProfileName(changedProfile.name.trim());
 			mode.setRoutingProfile(changedProfile.routingProfile);
 			mode.setRouteService(changedProfile.routeService);
@@ -259,7 +259,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 
 		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
 				.createCustomMode(changedProfile.parent, changedProfile.stringKey, app)
-				.setIconResName(ProfileIcons.getResStringByResId(changedProfile.iconRes))
+				.setIconResName(ProfileIcons.getResStringByResId(app, changedProfile.iconRes))
 				.setUserProfileName(changedProfile.name.trim())
 				.setRoutingProfile(changedProfile.routingProfile)
 				.setRouteService(changedProfile.routeService)
