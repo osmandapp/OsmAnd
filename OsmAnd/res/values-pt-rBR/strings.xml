@@ -5653,7 +5653,6 @@
     <string name="unchanged_parameter_summary">Cada trilha manterá seus próprios parâmetros.</string>
     <string name="gpx_approximation_cpp">Baseado em roteamento (C++)</string>
     <string name="gpx_approximation_java">Baseado em roteamento (Java)</string>
-    <string name="missing_maps_ignore">Usar mapas baixados</string>
     <string name="rendering_value_dark_orange_name">Laranja escuro</string>
     <string name="user_palette">Paleta do usuário</string>
     <string name="shared_string_create">Criar</string>

@@ -5329,7 +5329,6 @@
     <string name="shared_string_colors">Farver</string>
     <string name="backup_error_failed_to_transfer_file">Kunne ikke overføre cloud-fil(er).</string>
     <string name="contact_support_retry">Prøv igen, eller kontakt support</string>
-    <string name="missing_maps_ignore">Brug downloadede kort</string>
     <string name="daynight_mode_sensor_summary">Bruger enhedens lyssensor til at skifte mellem lyse og mørke temaer alt efter det omgivende lysniveau.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Skifter automatisk mellem dag- og nattemaer baseret på lokale solopgangs- og solnedgangstider.</string>
     <string name="daynight_mode_night_summary">Viser altid kortet i et mørkt tema, der er velegnet til natlige eller svage lysforhold.</string>

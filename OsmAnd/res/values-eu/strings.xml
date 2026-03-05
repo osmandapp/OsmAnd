@@ -5700,7 +5700,6 @@
     <string name="key_assignment_add_key">Gehitu tekla</string>
     <string name="key_assignment_add_action">Gehitu ekintza</string>
     <string name="action_icon">Ekintzaren ikonoa</string>
-    <string name="missing_maps_ignore">Erabili deskargatutako mapak</string>
     <string name="missing_maps_ignore_details">Deskargatutako mapek zure ibilbidea hartzen dute? Nabigatu haiekin ingurua ezagutzen baduzu.</string>
     <string name="clear_key_assignment_summary">Hautatutako ekintzarako tekla-esleipena garbituko da.</string>
     <string name="shared_string_key">Tekla</string>

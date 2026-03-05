@@ -5207,7 +5207,6 @@
     <string name="user_palette">Felhasználói paletta</string>
     <string name="backup_error_failed_to_transfer_file">Nem sikerült a felhőfájl(ok) átvitele.</string>
     <string name="contact_support_retry">Próbálja újra, vagy lépjen kapcsolatba az ügyfélszolgálattal</string>
-    <string name="missing_maps_ignore">Letöltött térképek használata</string>
     <string name="daynight_mode_sensor_summary">A környezeti megvilágítás szintjének megfelelően az eszköz fényérzékelőjét használja a világos és sötét témák közötti váltáshoz.</string>
     <string name="daynight_mode_sunrise_sunset_summary">A helyi napkelte és napnyugta időpontja alapján automatikusan vált a nappali és éjszakai téma között.</string>
     <string name="daynight_mode_app_theme">Alkalmazás témája</string>

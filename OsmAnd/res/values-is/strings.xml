@@ -5245,7 +5245,6 @@
     <string name="navigation_position">Staða leiðsagnar</string>
     <string name="resting_navigation_position">Staða leiðsagnar og hvíldar</string>
     <string name="weather_source_GFS_title">GFS</string>
-    <string name="missing_maps_ignore">Nota sótt kort</string>
     <string name="clear_all_key_shortcuts">Hreinsa alla flýtilykla</string>
     <string name="assigned_keys">Úthlutaðir lyklar</string>
     <string name="quick_action_remove_next_destination">Eyða næsta áfangastað</string>

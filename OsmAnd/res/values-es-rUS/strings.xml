@@ -5179,7 +5179,6 @@
     <string name="key_assignment_add_key">Agregar tecla</string>
     <string name="apply_only_to_new">Aplicar sólo para nuevos</string>
     <string name="change_default_tracks_appearance_confirmation">¿Aplicar cambios a las trazas existentes en la carpeta o sólo a las nuevas?</string>
-    <string name="missing_maps_ignore">Usar mapas descargados</string>
     <string name="shared_string_colors">Colores</string>
     <string name="clear_key_assignment_summary">Se vaciará la asignación de tecla para la acción elegida.</string>
     <string name="clear_all_key_shortcuts_summary">Se quitarán todas las asignaciones de tecla para el periférico elegido.</string>

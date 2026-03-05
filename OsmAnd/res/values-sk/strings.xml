@@ -5300,7 +5300,6 @@
     <string name="key_name_pattern">Kláves \"%1$s\"</string>
     <string name="key_assignment_add_action">Pridať akciu</string>
     <string name="assigned_keys">Priradené klávesy</string>
-    <string name="missing_maps_ignore">Použiť stiahnuté mapy</string>
     <string name="daynight_mode_app_theme_summary">Zobrazenie mapy sa prispôsobuje všeobecnej téme aplikácie — denný režim pre svetlú tému a nočný režim pre tmavú tému</string>
     <string name="daynight_mode_sensor_summary">Použije svetelný senzor zariadenia na prepnutie medzi svetlou a tmavou témou podľa úrovne okolitého svetla.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Automaticky prepne medzi dennou a nočnou témou podľa východu a západu slnka na danom mieste.</string>

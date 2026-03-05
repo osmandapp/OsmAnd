@@ -4474,7 +4474,6 @@
     <string name="clear_all_key_shortcuts_summary">Всички зададени клавиши за избрания вид ще бъдат премахнати.</string>
     <string name="reset_key_assignments_desc">Всички зададени клавиши за избрания вид ще бъдат премахнати.</string>
     <string name="clear_key_assignment_summary">Значението на клавиша за избраното действие ще бъде премахнато.</string>
-    <string name="missing_maps_ignore">Използване на изтеглените карти</string>
     <string name="avg_sensor_temperature">Температура, средна</string>
     <string name="key_assignments_already_cleared_message">Всички зададени клавиши са вече премахнати</string>
     <string name="animate_my_location">Анимиране на моето местоположение</string>

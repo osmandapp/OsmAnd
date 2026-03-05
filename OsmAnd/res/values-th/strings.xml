@@ -240,7 +240,6 @@
     <string name="lang_ta_in">ทมิฬ (อินเดีย)</string>
     <string name="shared_string_all_colors">สีทั้งหมด</string>
     <string name="key_assignment_add_key">เพิ่มปุ่ม</string>
-    <string name="missing_maps_ignore">ใช้แผนที่ที่ดาวน์โหลด</string>
     <string name="contact_support_retry">ลองอีกครั้ง หรือลองติดต่อผู้ช่วยเหลือ</string>
     <string name="wall_height">ความสูงของกำแพง</string>
     <string name="disable_map_layers">ปิดเลเยอร์ของแผนที่</string>

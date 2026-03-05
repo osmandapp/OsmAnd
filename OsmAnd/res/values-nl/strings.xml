@@ -5309,7 +5309,6 @@
     <string name="remove_key_assignment_summary">Verwijdert de toetstoewijzing voor de geselecteerde actie.</string>
     <string name="remove_key_assignment">Verwijder toetstoewijzing</string>
     <string name="tomorrow">Morgen</string>
-    <string name="missing_maps_ignore">Gebruik gedownloade kaart</string>
     <string name="required_maps">Benodigde kaarten</string>
     <string name="auto_25_chars_route_tshr">Scherp rechts afslaan</string>
     <string name="quick_action_display_position_in_center">Laat positie altijd in het midden zien</string>

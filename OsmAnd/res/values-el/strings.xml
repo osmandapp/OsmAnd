@@ -4930,7 +4930,6 @@
     <string name="maps_that_also_be_used">Χάρτες που επίσης θα χρησιμοποιηθούν: %1$s</string>
     <string name="when_exceeded">Όταν υπερβεί</string>
     <string name="custom_map_button_name_present">Τέτοιο κουμπί υπάρχει ήδη</string>
-    <string name="missing_maps_ignore">Χρήση ληφθέντων χαρτών</string>
     <string name="missing_maps_ignore_details">Οι ληφθέντες χάρτες καλύπτουν την διαδρομή σας; Πλοηγηθείτε με αυτούς εάν είστε οικείοι με την περιοχή.</string>
     <string name="track_vertical_exaggeration_description">Αλλάζοντας την τιμή της κλίμακας, μπορείτε να αλλάξετε το ύψος του 3D ίχνους.</string>
     <string name="rendering_attr_padusHideBoundaries_description">Κρύψε τα όρια της δημόσιας γης αλλά άφησε τις περιοχές</string>
