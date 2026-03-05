@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+	<string name="show_layout_grid_logs">Show grid logs</string>
 	<string name="share_favorite">Share favorite</string>
 	<string name="copy_list">Copy list</string>
     <string name="shared_string_trip_average">Trip average</string>
