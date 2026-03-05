@@ -5703,7 +5703,6 @@
     <string name="location_radius">Radius lokasi</string>
     <string name="location_radius_description">Menunjukkan seberapa luas lingkaran yang menunjukkan keakuratan lokasi Anda saat ini</string>
     <string name="route_roundabout_exit">Ambil jalan keluar %1$d</string>
-    <string name="missing_maps_ignore_details">Apakah peta yang Anda unduh meliputi rute yang Anda maksud? Navigasikan rute yang Anda maksud jika Anda mengenali area tersebut.</string>
     <string name="add_widget_to_the_right">Tambahkan gawit di sisi kanan layar</string>
     <string name="add_widget_to_the_left">Tambahkan gawit di sisi kiri layar</string>
     <string name="add_widget_above">Tambahkan gawit di atas layar</string>

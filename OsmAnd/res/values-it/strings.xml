@@ -5334,7 +5334,6 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="shared_string_modify">Modifica</string>
-    <string name="missing_maps_ignore_details">Le mappe scaricate coprono il tuo percorso? Naviga con quelle se hai familiarità con la zona.</string>
     <string name="quick_action_remove_next_destination">Punto di destinazione successivo</string>
     <string name="quick_action_map_overlay">Cambia la mappa di sovrapposizione</string>
     <string name="quick_action_map_style">Stile della mappa</string>

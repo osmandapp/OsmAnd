@@ -5303,7 +5303,6 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Izvor podataka</string>
-    <string name="missing_maps_ignore_details">Preuzete mape pokrivaju vašu rutu? Krećite se sa njima ako ste upoznati sa područjem.</string>
     <string name="quick_action_directions_from">Polazna tačka</string>
     <string name="quick_action_destination">Odredište</string>
     <string name="quick_action_terrain_color_scheme">Šema boja terena</string>

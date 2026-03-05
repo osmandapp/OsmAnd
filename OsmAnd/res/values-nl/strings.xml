@@ -5214,7 +5214,6 @@
     <string name="quick_action_previous_app_profile">App-profiel naar vorige</string>
     <string name="delete_actions_button_confirmation">Weet u zeker dat u \"%1$s\" met alle toegevoegde acties wil verwijderen?</string>
     <string name="quick_action_photo_note">Fotonotitie</string>
-    <string name="missing_maps_ignore_details">Dekken gedownloade kaarten je route? Gebruik ze om te navigeren als je bekent met het gebied.</string>
     <string name="user_palette">Gebruikerspalet</string>
     <string name="quick_action_verb_start_stop">Start / Stop</string>
     <string name="weather_screen">Weerscherm</string>

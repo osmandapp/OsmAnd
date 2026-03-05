@@ -5197,7 +5197,6 @@
     <string name="quick_action_parking_place">Lugar de estacionamiento</string>
     <string name="shared_string_replace">Reemplazar</string>
     <string name="quick_action_verb_show_hide">Mostrar / Ocultar</string>
-    <string name="missing_maps_ignore_details">¿Los mapas descargados cubren tu ruta? Podés navegar con ellos si conocés la zona.</string>
     <string name="quick_action_remove_next_destination">Siguiente punto de destino</string>
     <string name="quick_action_map_style">Estilo del mapa</string>
     <string name="quick_action_destination">Destino</string>

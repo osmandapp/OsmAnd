@@ -5277,7 +5277,6 @@
     <string name="weather_screen">Pantalla meteorológica</string>
     <string name="weather_source_ecmwf_description">Centro Europeo de Previsiones Meteorológicas a Plazo Medio</string>
     <string name="weather_source_GFS_description">Sistema Global de Predicción de los Centros Nacionales de Predicción Medioambiental</string>
-    <string name="missing_maps_ignore_details">¿Los mapas descargados cubren tu ruta? Puedes navegar con ellos si conoces la zona.</string>
     <string name="choose_map_orientation">Elige la orientación del mapa</string>
     <string name="energy_avg_info">Estadísticas de energía (rangos en 1, 5 y 15 min.)</string>
     <string name="energy_avg_info_description">Nivel de batería por minuto: %1$s

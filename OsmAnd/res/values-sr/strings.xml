@@ -5303,7 +5303,6 @@
     <string name="weather_source_GFS_title">ГФС</string>
     <string name="data_source">Извор података</string>
     <string name="shared_string_modify">Измени</string>
-    <string name="missing_maps_ignore_details">Да ли преузете карте покривају вашу путању? Крећите се помоћу њих уколико познајете област.</string>
     <string name="quick_action_map_underlay">Подслој</string>
     <string name="quick_action_map_overlay">Надслој</string>
     <string name="quick_action_to_my_location">Ка Мојој локацији</string>

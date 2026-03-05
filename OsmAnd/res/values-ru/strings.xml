@@ -5260,7 +5260,6 @@
     <string name="weather_source_GFS_title">GFS</string>
     <string name="shared_string_modify">Изменить</string>
     <string name="weather_source_GFS_description">Глобальная система прогнозов от национальных центров экологического прогнозирования</string>
-    <string name="missing_maps_ignore_details">Скачанные карты плохо отображают ваш маршрут? Ориентируйтесь по ним, только если вы хорошо знакомы с местностью.</string>
     <string name="quick_action_map_style">Стиль карты</string>
     <string name="quick_action_to_my_location">К моему местоположению</string>
     <string name="quick_action_terrain_color_scheme">Цветовая схема рельефа</string>

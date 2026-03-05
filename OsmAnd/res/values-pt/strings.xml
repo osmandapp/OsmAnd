@@ -5313,7 +5313,6 @@
     <string name="no_assigned_keys_desc">Selecione uma ação e atribua uma tecla tocando no botão \"Adicionar\".</string>
     <string name="action_icon">Ícone da ação</string>
     <string name="assigned_keys">Teclas atribuídas</string>
-    <string name="missing_maps_ignore_details">Os mapas descarregados cobrem o seu percurso? Navegue com eles se estiver familiarizado com a zona.</string>
     <string name="daynight_mode_app_theme_summary">O ecrã do mapa ajusta-se ao tema geral da aplicação - modo dia para um tema claro e modo noite para um tema escuro</string>
     <string name="daynight_mode_sensor_summary">Utiliza o sensor de luz do dispositivo para alternar entre temas claros e escuros de acordo com os níveis de luz ambiente.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Muda automaticamente entre temas diurnos e noturnos com base nas horas locais do nascer e do pôr do sol.</string>

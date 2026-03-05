@@ -5348,7 +5348,6 @@
     <string name="weather_source_ecmwf_description">Det Europæiske Center for mellemfristede vejrprognoser</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Datakilde</string>
-    <string name="missing_maps_ignore_details">Dækker downloadede kort din rute? Naviger med dem, hvis du er fortrolig med området.</string>
     <string name="quick_action_map_style">Kortstil</string>
     <string name="quick_action_terrain_color_scheme">Farvetema for terræn</string>
     <string name="quick_action_directions_from">Startpunkt</string>

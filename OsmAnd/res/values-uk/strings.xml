@@ -5360,7 +5360,6 @@
     <string name="shared_string_replace">Замінити</string>
     <string name="quick_action_audio_note">Аудіонотатка</string>
     <string name="quick_action_map_style">Стиль мапи</string>
-    <string name="missing_maps_ignore_details">Завантажені мапи покривають ваш маршрут? Орієнтуйтеся за ними, якщо ви знайомі з місцевістю.</string>
     <string name="quick_action_location_by_gpx">Розташування за GPX</string>
     <string name="energy_avg_info_description">Розряджання акумулятора на хвилину: %1$s
 \nСпоживання енергії (мАг): %2$s</string>

@@ -5616,7 +5616,6 @@
     <string name="daynight_mode_day_summary">始终以浅色主题显示地图，是白天需要高辨识度时的理想选择。</string>
     <string name="disable_map_layers">停用地图图层</string>
     <string name="daynight_mode_sensor_summary">使用设备的光线传感器，根据环境光线水平在明暗主题之间切换。</string>
-    <string name="missing_maps_ignore_details">下载的地图是否涵盖您的路线？如果您熟悉该地区，可以使用它们导航。</string>
     <string name="new_key_assignment">分配新按键</string>
     <string name="remove_key_assignment_summary">所选操作的按键分配将被移除。</string>
     <string name="map_settings_weather_wind_animation">风动画</string>

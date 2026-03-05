@@ -5391,7 +5391,6 @@
     <string name="show_debug_info">Hata ayıklama bilgilerini göster</string>
     <string name="show_debug_info_description">Her harita metninin yerleşimi hakkında grafiksel bilgi görüntüleme</string>
     <string name="routing_attr_avoid_cobblestone_name">Parke taşlarından kaçının</string>
-    <string name="missing_maps_ignore_details">İndirilen haritalar güzergahınızı kapsıyor mu? Bölgeyi iyi biliyorsanız, bu haritalarla yolunuzu bulun.</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="map_text">Harita metinleri</string>
     <string name="routing_attr_avoid_cobblestone_description">Parke taşlarından kaçının</string>

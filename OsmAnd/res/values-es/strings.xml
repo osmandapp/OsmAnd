@@ -5224,7 +5224,6 @@
     <string name="data_source">Proveedor de datos</string>
     <string name="weather_data_sources_prompt">OsmAnd ofrece datos meteorológicos de dos proveedores:</string>
     <string name="shared_string_modify">Modificar</string>
-    <string name="missing_maps_ignore_details">¿Los mapas descargados cubren tu ruta? Puedes navegar con ellos si conoces la zona.</string>
     <string name="quick_action_map_overlay">Capa superpuesta</string>
     <string name="quick_action_next_app_profile">Perfil siguiente de la aplicación</string>
     <string name="app_profile">Perfil de la aplicación</string>

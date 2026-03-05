@@ -5541,7 +5541,6 @@
     <string name="upload_local_versions">Prześlij wersje lokalne</string>
     <string name="download_cloud_versions">Pobierz wersje z chmury</string>
     <string name="weather_source_GFS_description">Globalny system prognoz z Krajowych Centrów Prognoz Środowiskowych</string>
-    <string name="missing_maps_ignore_details">Pobrane mapy zasłaniają Twoją trasę? Nawiguj z nimi jeżeli okolica jest Tobie znana.</string>
     <string name="use_nearby_roads_summary">Korzysta z mapy offline, aby znaleźć pobliskie drogi i dane wysokości. Może dostosować geometrię trasy.</string>
     <string name="retrieve_elevation_data_summary">OsmAnd może pobierać dane o wysokości z pobliskich dróg lub map terenowych.</string>
     <string name="relief_3d_download_description">Do wyświetlania terenu na mapie wymagane są dodatkowe mapy.</string>

@@ -2704,7 +2704,6 @@
     <string name="show_guide_line_descr">Taispeáin líne treorach ó do sheasamh go dtí na suíomhanna marcóra gníomhacha.</string>
     <string name="energy_avg_info_description">Leibhéal an chadhnra sa nóiméad: %1$s\nTomhaltas fuinnimh (mAh): %2$s</string>
     <string name="shared_string_replace">Ionadaigh</string>
-    <string name="missing_maps_ignore_details">Clúdaíonn léarscáileanna íoslódáilte do bhealach? Téigh timpeall orthu má tá cur amach agat ar an gceantar.</string>
     <string name="key_event_action_activity_back_pressed">Gníomhaíocht ar ais brúite</string>
     <string name="average_glide_time_interval_desc">Sonraigh an t-eatramh ama le haghaidh meánú faoile.</string>
     <string name="send_logcat_log_descr">Logchomhad mionsonraithe</string>

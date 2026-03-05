@@ -4954,7 +4954,6 @@
     <string name="quick_action_map_underlay">שכבת רקע</string>
     <string name="quick_action_map_overlay">שכבת על</string>
     <string name="quick_action_map_style">סגנון מפה</string>
-    <string name="missing_maps_ignore_details">המפות שהורדו מכסות את הנתיב שלך? אפשר לנווט באמצעות אם האזור הזה לא מוכר לך.</string>
     <string name="wikimedia">ויקימדיה</string>
     <string name="open_in_browser">פתיחה בדפדפן</string>
     <string name="shared_string_source">מקור</string>

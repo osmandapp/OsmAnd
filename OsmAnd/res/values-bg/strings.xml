@@ -4525,7 +4525,6 @@
     <string name="quick_action_poi_list">Списък с категории</string>
     <string name="quick_action_bug_message">Съобщение</string>
     <string name="no_assigned_keys_desc">Изберете действие и задайте клавиш, като докоснете бутона „Добавяне“.</string>
-    <string name="missing_maps_ignore_details">Изтеглените карти покриват маршрута? Използвайте тях, ако познавате района.</string>
     <string name="button_already_assigned_to_this_action">На клавишът вече е зададено това действие.</string>
     <string name="quick_action_verb_navigate">Маршрутизиране</string>
     <string name="map_widget_sun_position_desc">Показва времето до изгрев или залез.</string>

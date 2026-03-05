@@ -5336,7 +5336,6 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Datenquelle</string>
-    <string name="missing_maps_ignore_details">Decken heruntergeladene Karten Ihre Route ab? Navigieren Sie mit ihnen, wenn Sie sich in der Gegend auskennen.</string>
     <string name="quick_action_map_overlay">Überlagerung</string>
     <string name="quick_action_verb_turn_on_off">Einschalten / Ausschalten</string>
     <string name="quick_action_terrain_color_scheme">Gelände-Farbschema</string>

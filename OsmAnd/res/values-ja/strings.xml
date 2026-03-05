@@ -5460,7 +5460,6 @@ POIの更新は利用できません</string>
     <string name="obd_air_intake_temp">吸気温度</string>
     <string name="obd_fuel_consumption_rate">燃料消費率</string>
     <string name="obd_fuel_type">燃料タイプ</string>
-    <string name="missing_maps_ignore_details">ダウンロードしたマップはルートをカバーしていますか？その地域に詳しいなら、ナビゲートしてください。</string>
     <string name="obd_rpm_desc">OBDセンサー上の車両タコメーター回転数を表示します</string>
     <string name="add_to_navigation">ナビゲーションに追加</string>
     <string name="delete_widget">ウィジェットを削除しますか？</string>
