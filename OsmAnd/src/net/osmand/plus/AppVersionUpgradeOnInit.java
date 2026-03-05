@@ -162,9 +162,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_3_00 = 5300;
 	public static final int VERSION_5_3_01 = 5301;
 	public static final int VERSION_5_3_02 = 5302;
-	public static final int VERSION_5_3_03 = 5303;
+	public static final int VERSION_5_3_04 = 5304;
 
-	public static final int LAST_APP_VERSION = VERSION_5_3_03;
+	public static final int LAST_APP_VERSION = VERSION_5_3_04;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -328,7 +328,7 @@ public class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_5_3_02) {
 					migrateAstronomyPreferences();
 				}
-				if (prevAppVersion < VERSION_5_3_03) {
+				if (prevAppVersion < VERSION_5_3_04) {
 					migrateProfileIconsToMx(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();

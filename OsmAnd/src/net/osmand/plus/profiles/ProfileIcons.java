@@ -19,11 +19,9 @@ public enum ProfileIcons {
 	DEFAULT(R.drawable.ic_world_globe_dark, "ic_world_globe_dark"),
 	CAR(R.drawable.ic_action_car_dark, "ic_action_car_dark"),
 	TAXI(R.drawable.ic_action_taxi, "ic_action_taxi"),
-	TRUCK(R.drawable.ic_action_truck_dark, "ic_action_truck_dark"),
 	SHUTTLE_BUS(R.drawable.ic_action_shuttle_bus, "ic_action_shuttle_bus"),
 	BUS(R.drawable.ic_action_bus_dark, "ic_action_bus_dark"),
 	SUBWAY(R.drawable.ic_action_subway, "ic_action_subway"),
-	BICYCLE(R.drawable.ic_action_bicycle_dark, "ic_action_bicycle_dark"),
 	HORSE(R.drawable.ic_action_horse, "ic_action_horse"),
 	SAIL_BOAT(R.drawable.ic_action_sail_boat_dark, "ic_action_sail_boat_dark"),
 	AIRCRAFT(R.drawable.ic_action_aircraft, "ic_action_aircraft"),
@@ -121,6 +119,8 @@ public enum ProfileIcons {
 			case "ic_action_motorcycle_dark" -> "mx_activities_motorcycle";
 			case "ic_action_enduro_motorcycle" -> "mx_activities_enduro_motorcycle";
 			case "ic_action_motor_scooter" -> "mx_activities_motor_scooter";
+			case "ic_action_truck_dark" -> "mx_activities_truck";
+			case "ic_action_bicycle_dark" -> "mx_activities_bicycle";
 			case "ic_action_mountain_bike" -> "mx_activities_mountain_bike";
 			case "ic_action_pedestrian_dark" -> "mx_activities_pedestrian";
 			case "ic_action_trekking_dark" -> "mx_activities_trekking";
