@@ -63,6 +63,7 @@ public class SearchResult {
 	public String localeRelatedObjectName;
 	public Object relatedObject;
 	public double distRelatedObjectName;
+	private int regionPriority = -1;
 
 	private boolean impreciseCoordinates;
 	private double unknownPhraseMatchWeight = 0;
@@ -503,5 +504,12 @@ public class SearchResult {
 			otherNames = oth;
 		}
 		return backup;
+	}
+
+	public int getRegionPriority() {
+		if (regionPriority == -1) {
+			regionPriority = requiredSearchPhrase.getRegionPriority(this);
+		}
+		return regionPriority;
 	}
 }

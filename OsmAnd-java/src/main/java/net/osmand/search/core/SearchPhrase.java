@@ -956,5 +956,12 @@ public class SearchPhrase {
 		}
 		return retName;
 	}
-	
+
+	public int getRegionPriority(SearchResult searchResult) {
+		if (regionPriorityProvider != null) {
+			return regionPriorityProvider.getRegionWeight(searchResult);
+		}
+		return 0;
+	}
+
 }
