@@ -42,7 +42,7 @@ public class BinaryMapPoiReaderAdapter {
 	private static final int BASE_POI_ZOOM = 31 - BASE_POI_SHIFT;// 24 zoom
 	private static final int FINAL_POI_ZOOM = 31 - FINAL_POI_SHIFT;// 26 zoom
 	private static final int POI_NAME_INDEX_DATA_KEY_BLOOM_FIELD_NUMBER = 6;
-	private static final int POI_NAME_INDEX_DATA_ATOM_HASH_FIELD_NUMBER = 15;
+	private static final int POI_NAME_INDEX_DATA_ATOM_NAME_FIELD_NUMBER = 15;
 
 
 	public static class PoiSubType {
@@ -194,12 +194,12 @@ public class BinaryMapPoiReaderAdapter {
 		return false;
 	}
 
-	private boolean matchesAnyAtomHash(int atomHash, List<Integer> queryTokenHashes) {
-		if (queryTokenHashes == null || queryTokenHashes.isEmpty()) {
+	private boolean matchesAnyAtomName(String atomName, List<String> queryTokens, StringMatcherMode mode) {
+		if (Algorithms.isEmpty(atomName) || queryTokens == null || queryTokens.isEmpty()) {
 			return true;
 		}
-		for (int queryTokenHash : queryTokenHashes) {
-			if (atomHash == queryTokenHash) {
+		for (String queryToken : queryTokens) {
+			if (CollatorStringMatcher.cmatches(OsmAndCollator.primaryCollator(), atomName, queryToken, mode)) {
 				return true;
 			}
 		}
@@ -444,7 +444,6 @@ public class BinaryMapPoiReaderAdapter {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		List<TIntArrayList> listOffsets = null;
 		List<String> queries = null;
-		List<Integer> queryTokenHashes = null;
 		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
 		long offset = 0;
 		while (true) {
@@ -459,7 +458,6 @@ public class BinaryMapPoiReaderAdapter {
 				long oldLimit = codedIS.pushLimitLong((long) length);
 				offset = codedIS.getTotalBytesRead();
 				queries = splitAndNormalize(query);
-				queryTokenHashes = toTokenHashes(queries);
 				TIntArrayList charsList = new TIntArrayList(queries.size());
 				listOffsets = new ArrayList<>(queries.size());
 				while (listOffsets.size() < queries.size()) {
@@ -483,7 +481,7 @@ public class BinaryMapPoiReaderAdapter {
 							codedIS.seek(dataOffsets.get(i) + offset);
 							int len = codedIS.readRawVarint32();
 							long oldLim = codedIS.pushLimitLong((long) len);
-							readPoiNameIndexData(offsetMap, req, region, nameIndexCoordinates, queryTokenHashes, queries);
+							readPoiNameIndexData(offsetMap, req, region, nameIndexCoordinates, queries);
 							codedIS.popLimit(oldLim);
 							if (req.isCancelled()) {
 								codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
@@ -528,7 +526,7 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
-			List<Integer> nameIndexCoordinates, List<Integer> queryTokenHashes, List<String> queryTokens) throws IOException {
+			List<Integer> nameIndexCoordinates, List<String> queryTokens) throws IOException {
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -546,7 +544,7 @@ public class BinaryMapPoiReaderAdapter {
 				case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:
 					int len = codedIS.readRawVarint32();
 					long oldLim = codedIS.pushLimitLong((long) len);
-					readPoiNameIndexDataAtom(offsets, req, region, nameIndexCoordinates, queryTokenHashes);
+					readPoiNameIndexDataAtom(offsets, req, region, nameIndexCoordinates, queryTokens);
 					codedIS.popLimit(oldLim);
 					break;
 				default:
@@ -557,18 +555,18 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
-	                                      List<Integer> nameIndexCoordinates, List<Integer> queryTokenHashes) throws IOException {
+	                                      List<Integer> nameIndexCoordinates, List<String> queryTokens) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 15;
 		int shift = Integer.MIN_VALUE;
-		boolean atomHashMatched = true, atomHashSeen = false;
+		boolean atomNameMatched = true;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if (shift != Integer.MIN_VALUE && (!atomHashSeen || atomHashMatched)) {
+				if (shift != Integer.MIN_VALUE && atomNameMatched) {
 					int x31 = (x << (31 - zoom));
 					int y31 = (y << (31 - zoom));
 					int x31r = ((x + 1) << (31 - zoom));
@@ -596,11 +594,10 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.ZOOM_FIELD_NUMBER:
 				zoom = codedIS.readUInt32();
 				break;
-			case POI_NAME_INDEX_DATA_ATOM_HASH_FIELD_NUMBER:
-				atomHashSeen = true;
-				int atomHash = codedIS.readInt32();
-				atomHashMatched = matchesAnyAtomHash(atomHash, queryTokenHashes);
-				if (!atomHashMatched && shift != Integer.MIN_VALUE) {
+			case POI_NAME_INDEX_DATA_ATOM_NAME_FIELD_NUMBER:
+				String atomName = codedIS.readString();
+				atomNameMatched = matchesAnyAtomName(atomName, queryTokens, req.matcherMode);
+				if (!atomNameMatched && shift != Integer.MIN_VALUE) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}
 				break;
@@ -632,14 +629,6 @@ public class BinaryMapPoiReaderAdapter {
 			}
 		}
 		return queryTokens;
-	}
-
-	private List<Integer> toTokenHashes(List<String> queryTokens) {
-		List<Integer> queryTokenHashes = new ArrayList<>(queryTokens.size());
-		for (String queryToken : queryTokens) {
-			queryTokenHashes.add(queryToken.hashCode());
-		}
-		return queryTokenHashes;
 	}
 
 	protected void searchPoiIndex(int left31, int right31, int top31, int bottom31,

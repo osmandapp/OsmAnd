@@ -1,5 +1,6 @@
 package net.osmand.binary;
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.util.Algorithms;
 
 import java.util.Locale;
@@ -28,7 +29,10 @@ public final class BloomFilter {
 		if (bloom == null || bloom.length == 0 || Algorithms.isEmpty(token)) {
 			return;
 		}
-		String normalizedToken = token.toLowerCase(Locale.ROOT);
+		String normalizedToken = normalize(token);
+		if (Algorithms.isEmpty(normalizedToken)) {
+			return;
+		}
 		int h1 = normalizedToken.hashCode();
 		int h2 = Integer.rotateLeft(h1, 16) ^ 0x9E3779B9;
 		if (h2 == 0) {
@@ -50,7 +54,10 @@ public final class BloomFilter {
 		if (bloom == null || bloom.length == 0 || Algorithms.isEmpty(token)) {
 			return true;
 		}
-		String normalizedToken = token.toLowerCase(Locale.ROOT);
+		String normalizedToken = normalize(token);
+		if (Algorithms.isEmpty(normalizedToken)) {
+			return true;
+		}
 		int h1 = normalizedToken.hashCode();
 		int h2 = Integer.rotateLeft(h1, 16) ^ 0x9E3779B9;
 		if (h2 == 0) {
@@ -69,5 +76,13 @@ public final class BloomFilter {
 			}
 		}
 		return true;
+	}
+
+	private static String normalize(String token) {
+		if (Algorithms.isEmpty(token)) {
+			return "";
+		}
+		String normalizedToken = CollatorStringMatcher.alignChars(token);
+		return normalizedToken.toLowerCase(Locale.ROOT);
 	}
 }
