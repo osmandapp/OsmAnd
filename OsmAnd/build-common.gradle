@@ -444,11 +444,10 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
 	ext {
 		dbNameOnDevice = "searchable_preferences.db"
 		def baseAssetPath = "database/searchable_preferences_prepackaged"
-		def localeSuffix = project.hasProperty('testLocale') ? "_${project.property('testLocale')}" : ""
+		def localeSuffix = project.hasProperty('locale') ? "_${project.property('locale')}" : ""
 		assetPathAndName = "${baseAssetPath}${localeSuffix}.db"
 		testClassName = "net.osmand.plus.settings.fragments.search.GeneratePreferencesDatabaseTest"
-		// FK-TODO: rename testLocale to locale
-		testLocaleArgs = project.hasProperty('testLocale') ? "-e testLocale ${project.property('testLocale')}" : ""
+		localeArgs = project.hasProperty('locale') ? "-e locale ${project.property('locale')}" : ""
 	}
 	workingDir project.rootDir
     commandLine 'sh', '-c', """
@@ -459,7 +458,7 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
         assetPathAndName="${ext.assetPathAndName}"
         testClassName="${ext.testClassName}"
         absoluteLocalAssetPath="${project.projectDir}/assets/\${assetPathAndName}"
-        testLocaleArgs="${ext.testLocaleArgs}"
+        localeArgs="${ext.localeArgs}"
         
         echo ">>> Waiting for package manager to recognize the app..."
         WAIT_SECONDS=0
@@ -476,7 +475,7 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
         echo ">>> Package found after \${WAIT_SECONDS} seconds."
         mkdir -p "\$(dirname "\${absoluteLocalAssetPath}")"
         echo ">>> Starting test to create database on device..."
-        INSTRUMENTATION_OUTPUT=\$("\${adb}" shell am instrument -w -e class \${testClassName} \${testLocaleArgs} \${appPackage}.test/androidx.test.runner.AndroidJUnitRunner 2>&1)
+        INSTRUMENTATION_OUTPUT=\$("\${adb}" shell am instrument -w -e class \${testClassName} \${localeArgs} \${appPackage}.test/androidx.test.runner.AndroidJUnitRunner 2>&1)
         echo "--- Test Output Start ---"
         echo "\${INSTRUMENTATION_OUTPUT}"
         echo "--- Test Output End ---"
@@ -522,7 +521,7 @@ tasks.register('generateDatabasesForLocales') {
 							'installNightlyFreeLegacyFatDebug',
 							'installNightlyFreeLegacyFatDebugAndroidTest',
 							generateAndPullPreferencesDatabaseTaskName,
-							"-PtestLocale=${locale}",
+							"-Plocale=${locale}",
 							"-PavdName=${avd}"
 					ignoreExitValue = false
 				}

@@ -38,7 +38,7 @@ public class GeneratePreferencesDatabaseTest extends AndroidTest {
 	@Before
 	public void setLocaleFromArguments() {
 		this
-				.getTestLocaleFromArguments()
+				.getLocaleFromArguments()
 				.map(Locale::new)
 				.ifPresent(this::setLocale);
 	}
@@ -50,11 +50,11 @@ public class GeneratePreferencesDatabaseTest extends AndroidTest {
 		onView(searchView()).perform(replaceText("tst"), closeSoftKeyboard());
 	}
 
-	private Optional<String> getTestLocaleFromArguments() {
+	private Optional<String> getLocaleFromArguments() {
 		return Optional.ofNullable(
 				InstrumentationRegistry
 						.getArguments()
-						.getString("testLocale"));
+						.getString("locale"));
 	}
 
 	private void setLocale(final Locale locale) {
