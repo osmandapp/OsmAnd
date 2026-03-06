@@ -5960,7 +5960,7 @@
     <string name="astro_black_holes">Schwarze Löcher</string>
     <string name="visible_layers_and_objects">Sichtbare Ebenen und Objekte</string>
     <string name="shared_string_azimuth">Azimut</string>
-    <string name="shared_string_magnitude">Helligkeit</string>
+    <string name="shared_string_magnitude">Magnitude</string>
     <string name="astro_rise">Aufgang</string>
     <string name="astro_set">Untergang</string>
     <string name="gpx_too_many_points_visible_warning">Große Anzahl sichtbarer GPX-Wege führt zu hohem Speicherverbrauch</string>
@@ -6033,7 +6033,7 @@
     <string name="share_favorite">Favorit teilen</string>
     <string name="copy_list">Liste kopieren</string>
     <string name="shared_string_maximum">Maximum</string>
-    <string name="shared_string_minimum">Minimal</string>
+    <string name="shared_string_minimum">Minimum</string>
     <string name="shared_string_ratio">Verhältnis</string>
     <string name="shared_string_percentage">Prozent</string>
     <string name="remove_step">Schritt entfernen</string>
@@ -6051,8 +6051,8 @@
     <string name="trip_recording_moving_time_widget_description">Zeigt die aktuell aufgezeichnete Bewegungszeit oder die Zeit für den letzten Anstieg und Abstieg an.</string>
     <string name="trip_recording_moving_time">Zeit in Bewegung</string>
     <plurals name="tracks_count">
-        <item quantity="one">%d track</item>
-        <item quantity="other">%d tracks</item>
+        <item quantity="one">%d Track</item>
+        <item quantity="other">%d Tracks</item>
     </plurals>
     <string name="gradient_input_value_duplicate_warn">Dieser Wert existiert bereits in der Palette.</string>
     <string name="gradient_input_invalid_value_warn">Gib bitte eine gültige Nummer ein.</string>
