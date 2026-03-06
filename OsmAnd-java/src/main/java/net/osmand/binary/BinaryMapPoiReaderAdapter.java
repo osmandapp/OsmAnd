@@ -6,11 +6,8 @@ import com.google.protobuf.WireFormat;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.set.hash.TLongHashSet;
-import net.osmand.Collator;
-import net.osmand.CollatorStringMatcher;
+import net.osmand.*;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
@@ -42,7 +39,7 @@ public class BinaryMapPoiReaderAdapter {
 	private static final int BASE_POI_ZOOM = 31 - BASE_POI_SHIFT;// 24 zoom
 	private static final int FINAL_POI_ZOOM = 31 - FINAL_POI_SHIFT;// 26 zoom
 	private static final int POI_NAME_INDEX_DATA_KEY_BLOOM_FIELD_NUMBER = 6;
-	private static final int POI_NAME_INDEX_DATA_ATOM_NAME_FIELD_NUMBER = 15;
+	private static final int POI_NAME_INDEX_DATA_ATOM_BLOOM_FIELD_NUMBER = 15;
 
 
 	public static class PoiSubType {
@@ -194,12 +191,12 @@ public class BinaryMapPoiReaderAdapter {
 		return false;
 	}
 
-	private boolean matchesAnyAtomName(String atomName, List<String> queryTokens, StringMatcherMode mode) {
-		if (Algorithms.isEmpty(atomName) || queryTokens == null || queryTokens.isEmpty()) {
+	private boolean matchesAnyAtomBloom(int atomBloom, List<String> queryTokens) {
+		if (queryTokens == null || queryTokens.isEmpty()) {
 			return true;
 		}
 		for (String queryToken : queryTokens) {
-			if (CollatorStringMatcher.cmatches(OsmAndCollator.primaryCollator(), atomName, queryToken, mode)) {
+			if (BloomFilter.matchesInt32(atomBloom, queryToken)) {
 				return true;
 			}
 		}
@@ -560,13 +557,13 @@ public class BinaryMapPoiReaderAdapter {
 		int y = 0;
 		int zoom = 15;
 		int shift = Integer.MIN_VALUE;
-		boolean atomNameMatched = true;
+		boolean atomMatched = true;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if (shift != Integer.MIN_VALUE && atomNameMatched) {
+				if (shift != Integer.MIN_VALUE && atomMatched) {
 					int x31 = (x << (31 - zoom));
 					int y31 = (y << (31 - zoom));
 					int x31r = ((x + 1) << (31 - zoom));
@@ -594,10 +591,10 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.ZOOM_FIELD_NUMBER:
 				zoom = codedIS.readUInt32();
 				break;
-			case POI_NAME_INDEX_DATA_ATOM_NAME_FIELD_NUMBER:
-				String atomName = codedIS.readString();
-				atomNameMatched = matchesAnyAtomName(atomName, queryTokens, req.matcherMode);
-				if (!atomNameMatched && shift != Integer.MIN_VALUE) {
+			case POI_NAME_INDEX_DATA_ATOM_BLOOM_FIELD_NUMBER:
+				int atomBloom = codedIS.readInt32();
+				atomMatched = matchesAnyAtomBloom(atomBloom, queryTokens);
+				if (!atomMatched && shift != Integer.MIN_VALUE) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}
 				break;
