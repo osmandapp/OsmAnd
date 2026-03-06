@@ -5172,7 +5172,6 @@
     <string name="shared_string_colors">Colores</string>
     <string name="backup_error_failed_to_transfer_file">Error al transferir archivos de la nube.</string>
     <string name="contact_support_retry">Probá de nuevo o contactá con nosotros</string>
-    <string name="missing_maps_ignore">Usar mapas descargados</string>
     <string name="daynight_mode_app_theme_summary">La pantalla del mapa se vincula al tema general de la aplicación: «modo diurno» para un tema claro y «modo nocturno» para un tema oscuro</string>
     <string name="daynight_mode_sensor_summary">Usa el sensor de luz del dispositivo para alternar entre temas claros y oscuros, según la luz de ambiente.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Alterna automáticamente entre los temas diurno y nocturno, basado en el amanecer y atardecer local.</string>
@@ -5198,7 +5197,6 @@
     <string name="quick_action_parking_place">Lugar de estacionamiento</string>
     <string name="shared_string_replace">Reemplazar</string>
     <string name="quick_action_verb_show_hide">Mostrar / Ocultar</string>
-    <string name="missing_maps_ignore_details">¿Los mapas descargados cubren tu ruta? Podés navegar con ellos si conocés la zona.</string>
     <string name="quick_action_remove_next_destination">Siguiente punto de destino</string>
     <string name="quick_action_map_style">Estilo del mapa</string>
     <string name="quick_action_destination">Destino</string>

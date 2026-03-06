@@ -5209,7 +5209,6 @@
     <string name="shared_string_delete_item">删除项目</string>
     <string name="cloud_trash_clear_confirmation">要永久删除回收箱中的所有项目吗？</string>
     <string name="zoom_non_animated">非动画缩放</string>
-    <string name="missing_maps_ignore">使用下载的地图</string>
     <string name="backup_error_failed_to_transfer_file">无法传输云文件。</string>
     <string name="contact_support_retry">重试或联系支持人员</string>
     <string name="user_palette">用户调色板</string>
@@ -5617,7 +5616,6 @@
     <string name="daynight_mode_day_summary">始终以浅色主题显示地图，是白天需要高辨识度时的理想选择。</string>
     <string name="disable_map_layers">停用地图图层</string>
     <string name="daynight_mode_sensor_summary">使用设备的光线传感器，根据环境光线水平在明暗主题之间切换。</string>
-    <string name="missing_maps_ignore_details">下载的地图是否涵盖您的路线？如果您熟悉该地区，可以使用它们导航。</string>
     <string name="new_key_assignment">分配新按键</string>
     <string name="remove_key_assignment_summary">所选操作的按键分配将被移除。</string>
     <string name="map_settings_weather_wind_animation">风动画</string>

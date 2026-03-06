@@ -5373,7 +5373,6 @@
     <string name="key_event_action_continuous_zoom_out">Devamlı uzaklaştır</string>
     <string name="map_settings_weather_wind_animation">Rüzgar animasyonu</string>
     <string name="tomorrow">Yarın</string>
-    <string name="missing_maps_ignore">İndirilen haritaları kullan</string>
     <string name="backup_error_failed_to_transfer_file">Bulut dosya(ları) gönderme basarışız oldu.</string>
     <string name="contact_support_retry">Tekrar deneyin yada destek ile temasa geçin</string>
     <string name="shared_string_colors">Renkler</string>
@@ -5392,7 +5391,6 @@
     <string name="show_debug_info">Hata ayıklama bilgilerini göster</string>
     <string name="show_debug_info_description">Her harita metninin yerleşimi hakkında grafiksel bilgi görüntüleme</string>
     <string name="routing_attr_avoid_cobblestone_name">Parke taşlarından kaçının</string>
-    <string name="missing_maps_ignore_details">İndirilen haritalar güzergahınızı kapsıyor mu? Bölgeyi iyi biliyorsanız, bu haritalarla yolunuzu bulun.</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="map_text">Harita metinleri</string>
     <string name="routing_attr_avoid_cobblestone_description">Parke taşlarından kaçının</string>

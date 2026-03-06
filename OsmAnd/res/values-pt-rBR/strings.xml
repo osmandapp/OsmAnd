@@ -5653,7 +5653,6 @@
     <string name="unchanged_parameter_summary">Cada trilha manterá seus próprios parâmetros.</string>
     <string name="gpx_approximation_cpp">Baseado em roteamento (C++)</string>
     <string name="gpx_approximation_java">Baseado em roteamento (Java)</string>
-    <string name="missing_maps_ignore">Usar mapas baixados</string>
     <string name="rendering_value_dark_orange_name">Laranja escuro</string>
     <string name="user_palette">Paleta do usuário</string>
     <string name="shared_string_create">Criar</string>
@@ -5694,7 +5693,6 @@
     <string name="quick_action_video_note">Nota de vídeo</string>
     <string name="quick_action_photo_note">Nota de foto</string>
     <string name="quick_action_verb_start_stop">Iniciar / Parar</string>
-    <string name="missing_maps_ignore_details">Os mapas baixados cobrem sua rota? Navegue com eles se você estiver familiarizado com a área.</string>
     <string name="clear_all_key_shortcuts_summary">Todas as atribuições de teclas para o tipo selecionado serão removidas.</string>
     <string name="play_weather_forecast">Reproduzir a previsão do tempo</string>
     <string name="rendering_avg_info">Estatísticas de renderização (média de 1 / 5 / 15 minutos)</string>

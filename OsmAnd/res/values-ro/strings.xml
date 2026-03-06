@@ -5592,7 +5592,6 @@
     <string name="key_assignment_add_key">Adaugă tastă</string>
     <string name="backup_error_failed_to_transfer_file">Nu a reușit transferul de fișiere în cloud.</string>
     <string name="contact_support_retry">Încercați din nou sau contactați asistența</string>
-    <string name="missing_maps_ignore">Utilizați hărți descărcate</string>
     <string name="daynight_mode_app_theme_summary">Afișarea hărții se aliniază cu tema generală a aplicației - modul zi pentru o temă luminoasă și modul noapte pentru o temă întunecată</string>
     <string name="daynight_mode_sunrise_sunset_summary">Comută automat între temele de zi și de noapte în funcție de orele locale de răsărit și apus.</string>
     <string name="daynight_mode_night_summary">Afișează întotdeauna harta într-o temă întunecată, potrivită pentru timpul nopții sau în condiții de iluminare slabă.</string>
@@ -5612,7 +5611,6 @@
     <string name="weather_source_ecmwf_description">Centrul european pentru prognoze meteorologice pe termen mediu</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="shared_string_modify">Modifică</string>
-    <string name="missing_maps_ignore_details">Hărțile descărcate acoperă traseul dumneavoastră? Navigați cu ajutorul acestora dacă sunteți familiarizat cu zona.</string>
     <string name="quick_action_directions_from">Punct de plecare</string>
     <string name="quick_action_terrain_color_scheme">Schema de culori a terenului</string>
     <string name="quick_action_destination">Destinație</string>

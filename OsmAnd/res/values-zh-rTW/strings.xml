@@ -5127,8 +5127,6 @@
     <string name="shared_string_colors">顏色</string>
     <string name="backup_error_failed_to_transfer_file">無法傳輸檔案。</string>
     <string name="contact_support_retry">再試一次或聯絡客服</string>
-    <string name="missing_maps_ignore_details">已下載的地圖是否涵蓋了您的路徑？如果您熟悉該區域，請使用這些地圖進行導航。</string>
-    <string name="missing_maps_ignore">使用已下載的地圖</string>
     <string name="daynight_mode_app_theme_summary">地圖的顯示與應用程式的整體主題一致，白天模式適用於淺色主題，夜間模式適用於深色主題</string>
     <string name="daynight_mode_sunrise_sunset_summary">根據當地日出與日落的時間自動切換日間與夜間主題。</string>
     <string name="daynight_mode_sensor_summary">使用裝置的光感測器根據環境光線在深淺主題之間切換。</string>

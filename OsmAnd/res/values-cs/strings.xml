@@ -5231,7 +5231,6 @@
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="relief_3d_download_description">Pro zobrazení terénu na mapě jsou potřeba další mapy.</string>
     <string name="shared_string_scale">Měřítko</string>
-    <string name="missing_maps_ignore">Použít stažené mapy</string>
     <string name="weather_data_sources_prompt">OsmAnd poskytuje data o počasí ze dvou zdrojů:</string>
     <string name="weather_source_ecmwf_description">Evropské centrum pro střednědobé předpovědi počasí</string>
     <string name="weather_source_GFS_description">Globální předpovědní systém od Národních center pro environmentální předpovědi</string>
@@ -5362,7 +5361,6 @@
     <string name="play_weather_forecast">Přehrát předpověď počasí</string>
     <string name="quick_action_previous_app_profile">Na předchozí profil aplikace</string>
     <string name="quick_action_next_app_profile">Na další profil aplikace</string>
-    <string name="missing_maps_ignore_details">Pokrývají stažené mapy vaši trasu? Navigujte podle nich, pokud oblast dobře znáte.</string>
     <string name="show_debug_info">Zobrazit informace o ladění</string>
     <string name="route_line_use_coloring_speed">Linie trasy je barevně odlišena podle rychlosti pohybu.</string>
     <string name="gpx_approximation_geo_cpp">Na základě geometrie (C++, rychlé)</string>

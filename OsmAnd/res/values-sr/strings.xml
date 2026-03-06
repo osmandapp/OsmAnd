@@ -5282,7 +5282,6 @@
     <string name="action_icon">Сличица дејства</string>
     <string name="user_palette">Кориснички образац боја</string>
     <string name="shared_string_colors">Боје</string>
-    <string name="missing_maps_ignore">Користи преузете карте</string>
     <string name="backup_error_failed_to_transfer_file">Пренос датотеке(а) у облаку није успео.</string>
     <string name="contact_support_retry">Покушајте поново или се обратите подршци</string>
     <string name="tomorrow">Сутрадан</string>
@@ -5304,7 +5303,6 @@
     <string name="weather_source_GFS_title">ГФС</string>
     <string name="data_source">Извор података</string>
     <string name="shared_string_modify">Измени</string>
-    <string name="missing_maps_ignore_details">Да ли преузете карте покривају вашу путању? Крећите се помоћу њих уколико познајете област.</string>
     <string name="quick_action_map_underlay">Подслој</string>
     <string name="quick_action_map_overlay">Надслој</string>
     <string name="quick_action_to_my_location">Ка Мојој локацији</string>

@@ -5365,9 +5365,7 @@
     <string name="shared_string_set">تحديد</string>
     <string name="shared_string_create">إنشاء</string>
     <string name="quick_action_remove_next_destination">نقطة الوجهة التالية</string>
-    <string name="missing_maps_ignore_details">هل تغطي الخرائط التي تم تنزيلها مسارك؟ تواصل معهم إذا كنت على دراية بالمنطقة.</string>
     <string name="assigned_keys">المفاتيح المخصصة</string>
-    <string name="missing_maps_ignore">استخدام الخرائط المحملة</string>
     <string name="contact_support_retry">حاول مرة أخرى أو اتصل بالدعم</string>
     <string name="no_assigned_keys_desc">حدد إجراء وقم بتعيين مفتاح من خلال النقر على الزر \"إضافة\".</string>
     <string name="quick_action_map_overlay">العلوية</string>
