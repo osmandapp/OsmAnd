@@ -3776,7 +3776,7 @@
     <string name="poi_video_no">Не</string>
     <string name="poi_video_yes">Да; Видео</string>
     <string name="poi_booth">Тип кабине</string>
-    <string name="poi_covered_booth">Кабина</string>
+    <string name="poi_covered_booth">Да</string>
     <string name="poi_sms_no">Не</string>
     <string name="poi_sms_yes">Да; СМС</string>
     <string name="poi_dive_centre">Ронилачки центар</string>
@@ -5165,4 +5165,14 @@
     <string name="poi_sample_collection_blood">Крв</string>
     <string name="poi_yoga">Јога</string>
     <string name="poi_memorial_type">Тип споменика</string>
+    <string name="poi_covered_booth_filter">Кабина</string>
+    <string name="poi_rapids_filter">Нивои брзака</string>
+    <string name="poi_rapids_grade_0">0 (мирна вода)</string>
+    <string name="poi_rapids_grade_1">1 (лаки)</string>
+    <string name="poi_rapids_grade_2">2 (почетнички)</string>
+    <string name="poi_rapids_grade_3">3 (средњи)</string>
+    <string name="poi_rapids_grade_4">4 (напредни)</string>
+    <string name="poi_rapids_grade_5">5 (стручни)</string>
+    <string name="poi_rapids_grade_6">6 (екстремно)</string>
+    <string name="poi_rapids_grade_x">X (не може се кретати)</string>
 </resources>

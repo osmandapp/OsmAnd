@@ -531,14 +531,20 @@ public class FavouritesHelper {
 	}
 
 	public void editFavouritesGroup(@NonNull List<FavouritePoint> points, @NonNull String newCategory) {
+		int skippedDuplicates = 0;
+		FavoriteGroup targetGroup = flatGroups.get(newCategory);
 		for (FavouritePoint point : points) {
 			String oldCategory = point.getCategory();
-			point.setCategory(newCategory);
 			if (!oldCategory.equals(newCategory)) {
+				if (targetGroup != null && targetGroup.containsPointByName(point.getName())) {
+					skippedDuplicates++;
+					continue;
+				}
 				FavoriteGroup old = flatGroups.get(oldCategory);
 				if (old != null) {
 					old.getPoints().remove(point);
 				}
+				point.setCategory(newCategory);
 				FavoriteGroup pg = getOrCreateGroup(point);
 				point.setVisible(pg.isVisible());
 				if (SpecialPointType.PARKING == point.getSpecialPointType()) {
@@ -549,6 +555,7 @@ public class FavouritesHelper {
 					}
 				}
 				pg.getPoints().add(point);
+				targetGroup = pg;
 			}
 		}
 
@@ -556,6 +563,9 @@ public class FavouritesHelper {
 		saveCurrentPointsIntoFile(true);
 		if (!Algorithms.isEmpty(points)) {
 			runSyncWithMarkers(getOrCreateGroup(points.get(0)));
+		}
+		if (skippedDuplicates > 0) {
+			app.showShortToastMessage(R.string.msg_favorites_skipped_as_existing, skippedDuplicates);
 		}
 	}
 
@@ -870,6 +880,9 @@ public class FavouritesHelper {
 
 	public void updateGroupName(@NonNull FavoriteGroup group, @NonNull String newName, boolean saveImmediately) {
 		if (!Algorithms.stringsEqual(group.getName(), newName)) {
+			if (flatGroups.containsKey(newName)) {
+				return;
+			}
 			flatGroups.remove(group.getName());
 			boolean isInMarkers = removeFromMarkers(group);
 

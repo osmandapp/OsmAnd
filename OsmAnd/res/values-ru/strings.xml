@@ -86,7 +86,7 @@
     <string name="edit_name">Задать имя</string>
     <string name="route_is_too_long_v2">Для больших расстояний: добавьте промежуточные пункты, если маршрут не построен в течение 10 минут.</string>
     <string name="routing_attr_allow_private_name">Частные зоны</string>
-    <string name="routing_attr_allow_private_description">Разрешить доступ в частные зоны (например с проездом через шлагбаум или КПП).</string>
+    <string name="routing_attr_allow_private_description">Разрешить доступ в частные зоны (например с проездом через шлагбаум).</string>
     <string name="shared_string_overview">Обзор</string>
     <string name="select_street">Выберите улицу</string>
     <string name="shared_string_in_name">в %1$s</string>
@@ -667,7 +667,7 @@
     <string name="poi_context_menu_modify">Править POI</string>
     <string name="poi_context_menu_delete">Удалить POI</string>
     <string name="rotate_map_compass_opt">По направлению компаса</string>
-    <string name="rotate_map_bearing_opt">по направлению движения</string>
+    <string name="rotate_map_bearing_opt">По направлению движения</string>
     <string name="rotate_map_north_opt">Север всегда сверху</string>
     <string name="rotate_map_to_descr">Выравнивание карты:</string>
     <string name="rotate_map_to">Ориентация карты</string>
@@ -718,8 +718,7 @@
     <string name="voice_data_not_supported">Неподдерживаемая версия голосовых данных</string>
     <string name="voice_data_corrupted">Неправильный формат голосовых данных</string>
     <string name="voice_data_unavailable">Выбранный пакет недоступен</string>
-    <string name="sd_unmounted">SD-карта недоступна. 
-\nВы не сможете работать с картой.</string>
+    <string name="sd_unmounted">Карта памяти недоступна.\nВы не сможете просматривать карты или искать что-либо.</string>
     <string name="sd_mounted_ro">Карта памяти доступна только для чтения. \nТеперь можно только просматривать предварительно ранее скачанную карту, не докачивая новые области.</string>
     <string name="unzipping_file">Распаковка файла…</string>
     <string name="route_tr">Направо</string>
@@ -736,7 +735,7 @@
     <string name="search_near_map">Поиск вблизи текущего центра карты</string>
     <string name="search_nearby">Поиск рядом</string>
     <string name="map_orientation_default">Автоматически</string>
-    <string name="map_orientation_portrait">Портрет</string>
+    <string name="map_orientation_portrait">Книжная</string>
     <string name="map_orientation_landscape">Альбомная</string>
     <string name="map_screen_orientation">Ориентация экрана</string>
     <string name="map_screen_orientation_descr">Выберите ориентацию экрана.</string>
@@ -784,7 +783,7 @@
     <string name="route_general_information">Общая протяжённость = %1$s, время в пути = %2$d ч %3$d мин.</string>
     <string name="router_service_descr">Онлайн или локальный сервис для прокладки маршрута.</string>
     <string name="router_service">Прокладка маршрута</string>
-    <string name="sd_dir_not_accessible">Папка для хранения данных на SD-карте недоступна!</string>
+    <string name="sd_dir_not_accessible">Папка с данными на карте памяти недоступна!</string>
     <string name="download_question">Скачать {0} — {1}?</string>
     <string name="download_question_exist">Локальная карта для {0} уже существует ({1}). Хотите её обновить ({2})\?</string>
     <string name="address">Адрес</string>
@@ -1829,7 +1828,7 @@
     <string name="we_really_care_about_your_opinion">Ваше мнение и отзывы ценятся.</string>
     <string name="user_hates_app_get_feedback">Скажите нам почему.</string>
     <string name="try_again">Попробуйте снова</string>
-    <string name="shared_string_undo">ОТМЕНИТЬ</string>
+    <string name="shared_string_undo">Отменить</string>
     <string name="shared_string_skip">Пропустить</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="plugin_settings">Плагины</string>
@@ -1960,7 +1959,7 @@
     <string name="routing_attr_avoid_borders_name">Без пересечений границы</string>
     <string name="only_download_over_wifi">Скачивать только по Wi-Fi</string>
     <string name="update_now">Обновить</string>
-    <string name="missing_write_external_storage_permission">Приложение не имеет разрешения на использование SD-карты</string>
+    <string name="missing_write_external_storage_permission">У OsmAnd нет разрешения на использование карты памяти</string>
     <string name="available_maps">Доступные карты</string>
     <string name="starting_point">Пункт отправления</string>
     <string name="shared_string_not_selected">Не выбрано</string>
@@ -2279,7 +2278,7 @@
     <string name="yesterday">Вчера</string>
     <string name="last_seven_days">За последние 7 дней</string>
     <string name="this_year">В этом году</string>
-    <string name="plan_route">Планирование маршрута</string>
+    <string name="plan_route">Проект маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
     <string name="move_to_history">Переместить в историю</string>
     <string name="group_will_be_removed_after_restart">Группа будет выключена при следующем запуске приложения.</string>
@@ -2943,7 +2942,7 @@
     <string name="manage_profiles">Управление профилями…</string>
     <string name="utm_format_descr">OsmAnd использует формат UTM Standard, который похож, но не идентичен формату UTM NATO.</string>
     <string name="navigate_point_format_utm">UTM Стандарт</string>
-    <string name="navigate_point_format_olc">Открытый код местоположения (OLC)</string>
+    <string name="navigate_point_format_olc">Открытый код местоположения</string>
     <string name="coordinates_format_info">Выбранный формат будет применён во всём приложении.</string>
     <string name="pref_selected_by_default_for_profiles">Параметр выбран по умолчанию для профилей: %s</string>
     <string name="route_parameters_info">Настройки маршрутизации в профиле «%1$s».</string>
@@ -3786,8 +3785,8 @@
     <string name="shared_string_itinerary">Маркеры</string>
     <string name="route_line_use_map_style_width">Используется толщина линии стиля карты (%1$s).</string>
     <string name="route_line_use_map_style_color">Используется цвет стиля карты (%1$s).</string>
-    <string name="routing_attr_avoid_low_emission_zone_description">Исключить зоны с жесткими эко нормативами (LEZ)</string>
-    <string name="routing_attr_avoid_low_emission_zone_name">Избегать зоны с жесткими эко нормативами (LEZ)</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Исключить зоны с жесткими эко нормативами</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Избегать зоны с жесткими эко нормативами</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Найти ещё…</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
@@ -4280,7 +4279,7 @@
     <string name="colour_of_circles">Окраска окружностей</string>
     <string name="routing_attr_avoid_highway_name">Без автомагистралей</string>
     <string name="routing_attr_avoid_highway_description">Избегать автомагистралей</string>
-    <string name="routing_attr_allow_private_for_truck_description">Разрешить доступ в частные зоны (например с проездом через шлагбаум или КПП).</string>
+    <string name="routing_attr_allow_private_for_truck_description">Разрешить доступ в частные зоны (например с проездом через шлагбаум).</string>
     <string name="map_widget_trip_recording_duration">Длительность</string>
     <string name="map_widget_trip_recording_uphill">Подъём</string>
     <string name="routing_attr_hazmat_category_name">Категория опасности</string>
@@ -4770,7 +4769,7 @@
     <string name="delete_folder">Удалить папку</string>
     <string name="show_all_tracks_on_the_map">Показать все треки на карте</string>
     <string name="rssi_widget_desc">Показывать уровень сигнала (RSSI) внешнего устройства.</string>
-    <string name="map_widget_rssi">RSSI</string>
+    <string name="map_widget_rssi">Rssi</string>
     <string name="tracks_empty_folder_description">В этой папке еще нет ни одного трека.</string>
     <string name="tracks_empty_folder">Пустая папка</string>
     <string name="track_not_recorded">Не записано</string>
@@ -4907,7 +4906,7 @@
     <string name="help_article_navigation_routing_straight_line_routing_name">Прямая линия (воздушное судно)</string>
     <string name="help_article_navigation_routing_train_routing_name">Поезд</string>
     <string name="help_article_personal_import_export_name">Импорт/экспорт</string>
-    <string name="help_article_plan_route_name">Планирование маршрута</string>
+    <string name="help_article_plan_route_name">Проект маршрута</string>
     <string name="help_article_plan_route_coordinate_input_name">Ввод координат</string>
     <string name="help_article_plan_route_web_name">Веб-планировщик маршрутов</string>
     <string name="help_article_purchases_android_name">Покупки на Android</string>
@@ -5409,7 +5408,7 @@
     <string name="unknown_bt_device">Неизвестное устройство</string>
     <string name="obd_vin">VIN</string>
     <string name="obd_vin_desc">VIN-код по OBD</string>
-    <string name="vehicle_metrics_plugin_settings">Настройки показателей ТС</string>
+    <string name="vehicle_metrics_plugin_settings">Настройки показателей транспортного средства</string>
     <string name="reset_average_speed">Сбросить среднюю скорость</string>
     <string name="quick_action_finish_trip_recording_summary">Кнопка сохранения трека GPX и завершения записи маршрута.</string>
     <string name="start_trip_recording_first_m">Сначала начните запись поездки.</string>
@@ -5451,7 +5450,7 @@
     <string name="connect_obd_instructions_step">1. Подключите сканер к порту OBD-II транспортного средства.\n\n2. Запустите двигатель ТС.\n\n3. Включите Bluetooth на устройстве.\n\n4. Нажмите «%1$s» и выберите ваш сканер из списка.</string>
     <string name="obd_bluetooth_off_description">Включите Bluetooth для поиска и подключения сканеров.</string>
     <string name="obd_nothing_found_description">Пожалуйста, проверьте следующее:\n - Bluetooth включен;\n - двигатель автомобиля работает;\n - ваше устройство находится в зоне действия сканера.</string>
-    <string name="obd_searching_text_description">Пожалуйста, держите устройство поближе к сканеру. Убедитесь, что двигатель ТС работает.</string>
+    <string name="obd_searching_text_description">Пожалуйста, держите устройство поближе к сканеру. Убедитесь, что двигатель транспортного средства работает.</string>
     <string name="obd_searching_text">Поиск сканеров</string>
     <string name="obd_device_forget_sensor_description">Сканер будет удален из списка. Вы сможете снова подключить этот сканер в любое время.</string>
     <string name="obd_fuel_consumption_rate_l_h">Расход топлива (л/ч)</string>
@@ -5512,7 +5511,7 @@
     <string name="vehicle_metrics_obd_ii">Авто-датчики (OBD-II)</string>
     <string name="obd_speed_desc">Виджет показывает данные с датчика скорости транспортного средства (VSS).</string>
     <string name="obd_ambient_air_temp_desc">Виджет показывает температуру снаружи транспортного средства.</string>
-    <string name="obd_battery_voltage_desc">Виджет показывает уровень напряжения аккумуляторной батареи ТС</string>
+    <string name="obd_battery_voltage_desc">Виджет показывает уровень напряжения аккумуляторной батареи транспортного средства</string>
     <string name="obd_engine_coolant_temp_desc">Виджет показывает температуру охлаждающей жидкости двигателя</string>
     <string name="obd_throttle_position">Положение дроссельной заслонки</string>
     <string name="obd_calculated_engine_load">Расчетная нагрузка двигателя</string>
@@ -5751,8 +5750,8 @@
     <string name="map_orientations">Ориентации карты</string>
     <string name="write_location_provider_description">Сохраненять поставщика местоположения для каждой точки трека во время записи</string>
     <string name="write_location_provider">Запись поставщика местоположения</string>
-    <string name="map_orientation_portrait_inverted">Портрет (перевернутый)</string>
-    <string name="map_orientation_landscape_inverted">Пейзаж (перевернутый)</string>
+    <string name="map_orientation_portrait_inverted">Книжная (перевернутая)</string>
+    <string name="map_orientation_landscape_inverted">Альбомная (перевернутая)</string>
     <string name="reverse_mode_calculate_route">Рассчитать маршрут</string>
     <string name="reverse_mode_calculate_route_desc">Рассчитать новый, оптимизированный маршрут до стартовой точки.</string>
     <string name="reverse_mode_original_track">Оригинальный трек</string>
@@ -5962,4 +5961,7 @@
     <string name="add_palette">Добавить палитру</string>
     <string name="delete_palette">Удалить палитру</string>
     <string name="delete_colors_palette_dialog_summary">Вы уверены, что хотите удалить палитру %1$s?</string>
+    <string name="copy_list">Копировать список</string>
+    <string name="share_favorite">Поделиться избранным</string>
+    <string name="intersection">Пересечение</string>
 </resources>

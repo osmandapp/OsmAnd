@@ -3755,7 +3755,7 @@
     <string name="poi_video_telephone">Videó</string>
     <string name="poi_sms_yes">igen;SMS</string>
     <string name="poi_sms_no">nem</string>
-    <string name="poi_covered_booth">Fülke</string>
+    <string name="poi_covered_booth">Igen</string>
     <string name="poi_booth">Fülke típusa</string>
     <string name="poi_video_yes">igen;videó</string>
     <string name="poi_video_no">nem</string>
@@ -5165,4 +5165,14 @@
     <string name="poi_sample_collection_blood">Vér</string>
     <string name="poi_yoga">Jóga</string>
     <string name="poi_memorial_type">Emlékmű típusa</string>
+    <string name="poi_covered_booth_filter">Fülke</string>
+    <string name="poi_rapids_filter">Zúgók fokozata</string>
+    <string name="poi_rapids_grade_0">0 (síkvíz)</string>
+    <string name="poi_rapids_grade_1">1 (könnyű)</string>
+    <string name="poi_rapids_grade_2">2 (kezdő)</string>
+    <string name="poi_rapids_grade_3">3 (középfokú)</string>
+    <string name="poi_rapids_grade_4">4 (haladó)</string>
+    <string name="poi_rapids_grade_5">5 (szakértő)</string>
+    <string name="poi_rapids_grade_6">6 (extrém)</string>
+    <string name="poi_rapids_grade_x">X (járhatatlan)</string>
 </resources>

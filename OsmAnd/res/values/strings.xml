@@ -32,6 +32,9 @@
 	<string name="astro_type_globular_cluster">Globular cluster</string>
 	<string name="astro_type_galaxy_cluster">Galaxy cluster</string>
 	<string name="astro_type_constellation">Constellation</string>
+	<string name="show_layout_grid_logs">Show grid logs</string>
+	<string name="share_favorite">Share favorite</string>
+	<string name="copy_list">Copy list</string>
     <string name="shared_string_trip_average">Trip average</string>
     <string name="trip_recording_avg_speed_widget_description">Shows the average speed of the current trip, or the average speed during the last uphill or downhill section.</string>
     <string name="trip_recording_moving_time_widget_description">Shows the currently recorded moving time, or the time for the last uphill and downhill.</string>
@@ -65,6 +68,7 @@
     <string name="delete_palette">Delete palette</string>
     <string name="delete_colors_palette_dialog_summary">Are you sure you want to delete %1$s palette?</string>
 	<string name="astro_min_magnitude">Min. magnitude</string>
+	<string name="intersection">Intersection</string>
 	<string name="stars_articles">Stars articles</string>
 	<string name="delete_groups_confirmation">Delete groups?</string>
 	<string name="add_to_track">Add to track</string>

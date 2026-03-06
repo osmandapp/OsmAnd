@@ -2544,7 +2544,7 @@
     <string name="apply_to_current_profile">Sadece \"%1$s\"e uygula</string>
     <string name="apply_to_all_profiles">Tüm profillere uygula</string>
     <string name="start_up_message_pref">Başlangıç mesajı</string>
-    <string name="analytics_pref_title">Analytics</string>
+    <string name="analytics_pref_title">Analitik</string>
     <string name="turn_screen_on_info">Navigasyon sırasında haritayı kilit ekranında göster.</string>
     <string name="route_parameters_info">Seçili profildeki yönlendirme ayarları \"%1$s\".</string>
     <string name="wake_time">Uyandıktan sonra zaman aşımı</string>

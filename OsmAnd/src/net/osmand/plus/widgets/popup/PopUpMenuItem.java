@@ -92,7 +92,7 @@ public class PopUpMenuItem {
 		private CharSequence title;
 		@ColorInt
 		private Integer titleColor;
-		private Integer titleSize;
+		private Integer titleSize = 16; //SP
 		private Drawable icon;
 		private OnPopUpMenuItemClickListener onClickListener;
 		@ColorInt
@@ -120,8 +120,13 @@ public class PopUpMenuItem {
 			return this;
 		}
 
-		public Builder setTitleSize(Integer titleSize) {
-			this.titleSize = titleSize;
+		/**
+		 * Sets title text size in SP units.
+		 *
+		 * @param titleSizeSp text size in scaled pixels (SP)
+		 */
+		public Builder setTitleSize(Integer titleSizeSp) {
+			this.titleSize = titleSizeSp;
 			return this;
 		}
 

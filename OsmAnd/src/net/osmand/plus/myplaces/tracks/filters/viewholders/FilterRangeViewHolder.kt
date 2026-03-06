@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks.filters.viewholders
 
-//import net.osmand.plus.myplaces.tracks.filters.MeasureUnitType
 import android.text.Editable
 import android.view.View
 import android.widget.ImageView
@@ -26,6 +25,7 @@ import java.text.DecimalFormatSymbols
 import java.util.Locale
 import kotlin.math.ceil
 import kotlin.math.floor
+import kotlin.math.roundToInt
 
 open class FilterRangeViewHolder(
 	itemView: View,
@@ -113,8 +113,7 @@ open class FilterRangeViewHolder(
 				if (!Algorithms.isEmpty(newText) && Algorithms.isInt(newText.toString())) {
 					val newValue = newText.toString().toInt()
 					if (getDisplayValueFrom(filter) != newValue
-						&& filter.valueTo is Number
-						&& newValue < (filter.valueTo as Number).toInt()
+						&& newValue < getDisplayValueTo(filter)
 						&& !isSliderDragging
 						&& !isBinding) {
 						filter.setValueFrom(newValue.toString())
@@ -130,8 +129,7 @@ open class FilterRangeViewHolder(
 				if (!Algorithms.isEmpty(newText) && Algorithms.isInt(newText.toString())) {
 					val newValue = newText.toString().toInt()
 					if (getDisplayValueTo(filter) != newValue
-						&& filter.valueFrom is Number
-						&& newValue > (filter.valueFrom as Number).toInt()
+						&& newValue > getDisplayValueFrom(filter)
 						&& !isSliderDragging
 						&& !isBinding) {
 						filter.setValueTo(newValue.toString())
@@ -181,7 +179,9 @@ open class FilterRangeViewHolder(
 		if (maxValue > minValue) {
 			slider.valueTo = maxValue.toFloat()
 			slider.valueFrom = minValue.toFloat()
-			slider.setValues(valueFrom.toFloat(), valueTo.toFloat())
+			val safeValueFrom = maxOf(minValue.toFloat(), minOf(valueFrom.toFloat(), maxValue.toFloat()))
+			val safeValueTo = maxOf(safeValueFrom, minOf(valueTo.toFloat(), maxValue.toFloat()))
+			slider.setValues(safeValueFrom, safeValueTo)
 		} else {
 			expanded = false
 			updateExpandState()
@@ -214,18 +214,18 @@ open class FilterRangeViewHolder(
 	open fun getDisplayMinValue(filter: RangeTrackFilter<*>): Int {
 		val formattedValue =
 			getFormattedValue(filter.trackFilterType.measureUnitType, filter.ceilMinValue())
-		return formattedValue.valueSrc.toInt()
+		return floor(formattedValue.valueSrc).toInt()
 	}
 
 	open fun getDisplayValueFrom(filter: RangeTrackFilter<*>): Int {
 		val formattedValue =
 			getFormattedValue(filter.trackFilterType.measureUnitType, filter.valueFrom.toString())
-		return formattedValue.valueSrc.toInt()
+		return formattedValue.valueSrc.roundToInt()
 	}
 
 	open fun getDisplayValueTo(filter: RangeTrackFilter<*>): Int {
 		val formattedValue = getFormattedValue(filter.trackFilterType.measureUnitType, filter.ceilValueTo())
-		return formattedValue.valueSrc.toInt()
+		return formattedValue.valueSrc.roundToInt()
 	}
 
 	fun getFormattedValue(measureUnitType: MeasureUnitType, value: String): FormattedValue {

@@ -65,12 +65,6 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		AndroidUtils.setBackground(itemView.findViewById(R.id.searchListItemLayout), UiUtilities.getSelectableDrawable(app));
 	}
 
-	public void bindItem(@NonNull QuickSearchListItem item, boolean useMapCenter, @NonNull Calendar calendar) {
-		bindSearchResult(itemView, item, calendar);
-		QuickSearchListAdapter.updateCompass(itemView, item, locationViewCache, useMapCenter);
-
-	}
-
 	public static void bindSearchResult(@NonNull View view, @NonNull QuickSearchListItem item, @NonNull Calendar calendar) {
 		TextView title = view.findViewById(R.id.title);
 		TextView subtitle = view.findViewById(R.id.subtitle);
@@ -78,11 +72,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 
 		imageView.setImageDrawable(item.getIcon());
 		String name = item.getName();
-		if (item.getSpannableName() != null) {
-			title.setText(item.getSpannableName());
-		} else {
-			title.setText(name);
-		}
+		title.setText(item.getSpannableName());
 
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		String desc = item.getTypeName();
@@ -207,11 +197,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			SpannableString spannableName = UiUtilities.createColorSpannable(name, view.getContext().getColor(textColor), false, altName);
 			title.setText(spannableName);
 		} else {
-			if (item.getSpannableName() != null) {
-				title.setText(item.getSpannableName());
-			} else {
-				title.setText(name);
-			}
+			title.setText(item.getSpannableName());
 		}
 
 		AndroidUiHelper.setTextAndChangeVisibility(addressTv, address);

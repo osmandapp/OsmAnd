@@ -380,17 +380,19 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	override fun onApplyInsets(insets: WindowInsetsCompat) {
 		super.onApplyInsets(insets)
-		val systemIntets = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
-		systemBottomInset = systemIntets.bottom
-		systemTopInset = systemIntets.top
-		systemLeftInset = systemIntets.left
-		systemRightInset = systemIntets.right
+		val cutout = insets.getInsets(WindowInsetsCompat.Type.displayCutout())
+		val sysBars = InsetsUtils.getSysBars(requireContext(), insets)
+		
+		systemBottomInset = maxOf(sysBars?.bottom ?: 0, cutout.bottom)
+		systemTopInset = maxOf(sysBars?.top ?: 0, cutout.top)
+		systemLeftInset = maxOf(sysBars?.left ?: 0, cutout.left)
+		systemRightInset = maxOf(sysBars?.right ?: 0, cutout.right)
 
 		applyBottomInsets()
 		applyTopInsets()
 		applySideInsets()
 
-		starChartsView.updatePadding(bottom = systemIntets.bottom)
+		starChartsView.updatePadding(bottom = systemBottomInset)
 	}
 
 	private fun applyBottomInsets() {

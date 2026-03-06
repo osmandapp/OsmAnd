@@ -6010,4 +6010,11 @@
     <string name="performance">Продуктивність</string>
     <string name="level_of_details">Рівень деталізації</string>
     <string name="view_distance">Відстань перегляду</string>
+    <string name="astronomy_plugin_name">Астрономія</string>
+    <plurals name="tracks_count">
+        <item quantity="one">%d трек</item>
+        <item quantity="few">%d треки</item>
+        <item quantity="many">%d треків</item>
+        <item quantity="other">%d трека</item>
+    </plurals>
 </resources>

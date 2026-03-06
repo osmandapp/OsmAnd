@@ -59,6 +59,7 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 
 	protected FavoriteFoldersAdapter adapter;
 	protected FavoriteGroup selectedGroup;
+	protected RecyclerView recyclerView;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,16 +95,20 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View view = inflate(getLayoutId(), container, false);
-		adapter = new FavoriteFoldersAdapter(requireMyActivity(), nightMode, getFavoriteFolderListener());
-		adapter.setSortFavoriteListener(this);
 
-		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-		recyclerView.setLayoutManager(new LinearLayoutManager(app));
-		recyclerView.setAdapter(adapter);
-
+		setupViews(view);
 		updateContent();
 
 		return view;
+	}
+
+	protected void setupViews(@NonNull View view){
+		adapter = new FavoriteFoldersAdapter(requireMyActivity(), nightMode, getFavoriteFolderListener());
+		adapter.setSortFavoriteListener(this);
+
+		recyclerView = view.findViewById(R.id.recycler_view);
+		recyclerView.setLayoutManager(new LinearLayoutManager(app));
+		recyclerView.setAdapter(adapter);
 	}
 
 	@Override
@@ -273,22 +278,6 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 	@Override
 	public void shareFavoritesFinished(@NonNull File destFile, @NonNull Spanned pointsDescription) {
 		updateProgressVisibility(false);
-		if (destFile.exists()) {
-			OsmandActionBarActivity activity = requireMyActivity();
-			String type = "text/plain";
-			String extraText = String.valueOf(pointsDescription);
-			String extraSubject = app.getString(R.string.share_fav_subject);
-
-			OsmandApplication app = (OsmandApplication) activity.getApplication();
-			new NativeShareDialogBuilder()
-					.addFileWithSaveAction(destFile, app, activity, true)
-					.setChooserTitle(extraSubject)
-					.setExtraSubject(extraSubject)
-					.setExtraText(extraText)
-					.setExtraStream(AndroidUtils.getUriForFile(app, destFile))
-					.setType(type)
-					.build(app);
-		}
 	}
 
 	private void updateProgressVisibility(boolean visible) {
