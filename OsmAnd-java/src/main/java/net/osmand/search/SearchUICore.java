@@ -89,6 +89,7 @@ public class SearchUICore {
 			Arrays.asList("building", "internet_access_yes"));
 
 	private Function<String, String> httpRedirectRequester = null;
+	private static final int MIN_COMPLETE_MATCH_WEIGHT = 40;
 
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this.poiTypes = poiTypes;
@@ -554,9 +555,9 @@ public class SearchUICore {
 		apis.add(streetsApi);
 		SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
 		apis.add(cityApi);
-		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false));
-		// ?LONG?
-//		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false));
+		SearchCoreFactory.TownCitiesCache townCitiesCache = new SearchCoreFactory.TownCitiesCache();
+		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache));
+		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache));
 	}
 
 	public void clearCustomSearchPoiFilters() {
@@ -1171,6 +1172,7 @@ public class SearchUICore {
 		TOP_VISIBLE,
 		FOUND_WORD_COUNT, // more is better (top)
 		OBF_RESOURCE,
+		REGION_PRIORITY,
 		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
 		SEARCH_DISTANCE_IF_NOT_BY_NAME,
 		COMPARE_FIRST_NUMBER_IN_NAME,
@@ -1204,6 +1206,15 @@ public class SearchUICore {
 				int ord2 = fp2 ? 0 : o2.getResourceType().ordinal();
 				if (ord1 != ord2) {
 					return ord2 > ord1 ? -1 : 1;
+				}
+				break; 
+			case REGION_PRIORITY:
+				double w1 = o1.getUnknownPhraseMatchWeight();
+				double w2 = o2.getUnknownPhraseMatchWeight();
+				int p1 = w1 > MIN_COMPLETE_MATCH_WEIGHT ? 0 : o1.getRegionPriority();
+				int p2 = w2 > MIN_COMPLETE_MATCH_WEIGHT ? 0 : o2.getRegionPriority();
+				if (p1 != p2) {
+					return Integer.compare(p1, p2);
 				}
 				break;
 			case UNKNOWN_PHRASE_MATCH_WEIGHT:
