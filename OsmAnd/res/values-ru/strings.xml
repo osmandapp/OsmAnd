@@ -718,8 +718,7 @@
     <string name="voice_data_not_supported">Неподдерживаемая версия голосовых данных</string>
     <string name="voice_data_corrupted">Неправильный формат голосовых данных</string>
     <string name="voice_data_unavailable">Выбранный пакет недоступен</string>
-    <string name="sd_unmounted">SD-карта недоступна. 
-\nВы не сможете работать с картой.</string>
+    <string name="sd_unmounted">Карта памяти недоступна.\nВы не сможете просматривать карты или искать что-либо.</string>
     <string name="sd_mounted_ro">Карта памяти доступна только для чтения. \nТеперь можно только просматривать предварительно ранее скачанную карту, не докачивая новые области.</string>
     <string name="unzipping_file">Распаковка файла…</string>
     <string name="route_tr">Направо</string>
@@ -784,7 +783,7 @@
     <string name="route_general_information">Общая протяжённость = %1$s, время в пути = %2$d ч %3$d мин.</string>
     <string name="router_service_descr">Онлайн или локальный сервис для прокладки маршрута.</string>
     <string name="router_service">Прокладка маршрута</string>
-    <string name="sd_dir_not_accessible">Папка для хранения данных на SD-карте недоступна!</string>
+    <string name="sd_dir_not_accessible">Папка с данными на карте памяти недоступна!</string>
     <string name="download_question">Скачать {0} — {1}?</string>
     <string name="download_question_exist">Локальная карта для {0} уже существует ({1}). Хотите её обновить ({2})\?</string>
     <string name="address">Адрес</string>
@@ -1829,7 +1828,7 @@
     <string name="we_really_care_about_your_opinion">Ваше мнение и отзывы ценятся.</string>
     <string name="user_hates_app_get_feedback">Скажите нам почему.</string>
     <string name="try_again">Попробуйте снова</string>
-    <string name="shared_string_undo">ОТМЕНИТЬ</string>
+    <string name="shared_string_undo">Отменить</string>
     <string name="shared_string_skip">Пропустить</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="plugin_settings">Плагины</string>
@@ -1960,7 +1959,7 @@
     <string name="routing_attr_avoid_borders_name">Без пересечений границы</string>
     <string name="only_download_over_wifi">Скачивать только по Wi-Fi</string>
     <string name="update_now">Обновить</string>
-    <string name="missing_write_external_storage_permission">Приложение не имеет разрешения на использование SD-карты</string>
+    <string name="missing_write_external_storage_permission">У OsmAnd нет разрешения на использование карты памяти</string>
     <string name="available_maps">Доступные карты</string>
     <string name="starting_point">Пункт отправления</string>
     <string name="shared_string_not_selected">Не выбрано</string>
@@ -5409,7 +5408,7 @@
     <string name="unknown_bt_device">Неизвестное устройство</string>
     <string name="obd_vin">VIN</string>
     <string name="obd_vin_desc">VIN-код по OBD</string>
-    <string name="vehicle_metrics_plugin_settings">Настройки показателей ТС</string>
+    <string name="vehicle_metrics_plugin_settings">Настройки показателей транспортного средства</string>
     <string name="reset_average_speed">Сбросить среднюю скорость</string>
     <string name="quick_action_finish_trip_recording_summary">Кнопка сохранения трека GPX и завершения записи маршрута.</string>
     <string name="start_trip_recording_first_m">Сначала начните запись поездки.</string>
@@ -5512,7 +5511,7 @@
     <string name="vehicle_metrics_obd_ii">Авто-датчики (OBD-II)</string>
     <string name="obd_speed_desc">Виджет показывает данные с датчика скорости транспортного средства (VSS).</string>
     <string name="obd_ambient_air_temp_desc">Виджет показывает температуру снаружи транспортного средства.</string>
-    <string name="obd_battery_voltage_desc">Виджет показывает уровень напряжения аккумуляторной батареи ТС</string>
+    <string name="obd_battery_voltage_desc">Виджет показывает уровень напряжения аккумуляторной батареи транспортного средства</string>
     <string name="obd_engine_coolant_temp_desc">Виджет показывает температуру охлаждающей жидкости двигателя</string>
     <string name="obd_throttle_position">Положение дроссельной заслонки</string>
     <string name="obd_calculated_engine_load">Расчетная нагрузка двигателя</string>

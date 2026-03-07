@@ -31,6 +31,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ import java.util.List;
 public class GalleryGridFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = GalleryGridFragment.class.getSimpleName();
+	private static final String TITLE_KEY = "title_key";
 
 	protected static final float SCALE_MULTIPLIER = 3f;
 
@@ -49,6 +51,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	private GalleryGridAdapter adapter;
 	private ScaleGestureDetector scaleDetector;
 	private GridLayoutManager layoutManager;
+	private String title = null;
 
 	private float newScaleFactor;
 
@@ -71,6 +74,14 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 		updateNightMode();
 		View view = inflate(R.layout.gallery_grid_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+
+		if (getArguments() != null && getArguments().containsKey(TITLE_KEY)) {
+			title = getArguments().getString(TITLE_KEY);
+		}
+
+		if (title == null && savedInstanceState != null && savedInstanceState.containsKey(TITLE_KEY)) {
+			title = savedInstanceState.getString(TITLE_KEY);
+		}
 
 		setupScaleDetector();
 		recyclerView = view.findViewById(R.id.content_list);
@@ -108,6 +119,14 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 		setupOnBackPressedCallback();
 
 		return view;
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (Algorithms.isEmpty(title)) {
+			outState.putString(TITLE_KEY, title);
+		}
 	}
 
 	public InsetTargetsCollection getInsetTargets() {
@@ -176,7 +195,11 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 
 	private void setupToolbar() {
 		TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
-		tvTitle.setText(requireMapActivity().getContextMenu().getTitleStr());
+		if (!Algorithms.isEmpty(title)) {
+			tvTitle.setText(title);
+		} else {
+			tvTitle.setText(requireMapActivity().getContextMenu().getTitleStr());
+		}
 
 		ImageView navigationIcon = toolbar.findViewById(R.id.back_button);
 		navigationIcon.setOnClickListener(view -> {
@@ -236,9 +259,18 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity) {
+		showInstance(activity, null);
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, @Nullable String title) {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			GalleryGridFragment fragment = new GalleryGridFragment();
+			if (!Algorithms.isEmpty(title)) {
+				Bundle args = new Bundle();
+				args.putString(TITLE_KEY, title);
+				fragment.setArguments(args);
+			}
 			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)

@@ -6032,4 +6032,5 @@
     <string name="share_favorite">Podeli omiljeno</string>
     <string name="copy_list">Kopiraj listu</string>
     <string name="intersection">Raskršće</string>
+    <string name="show_layout_grid_logs">Prikaži logove mreže</string>
 </resources>

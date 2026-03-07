@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/scheduleCard"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="16dp"
+	app:cardBackgroundColor="?attr/list_background_color"
+	app:cardElevation="0dp"
+	app:shapeAppearanceOverlay="@style/Shape.Card12"
+	app:strokeWidth="0dp">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="16dp">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:baselineAligned="false"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/schedule_title"
+					style="@style/MaterialAlertDialog.Material3.Title.Text"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/astronomy_schedule"
+					android:textColor="?android:attr/textColorPrimary"
+					android:textSize="16sp"
+					android:textStyle="bold" />
+
+				<TextView
+					android:id="@+id/schedule_range"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="2dp"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="14sp" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<FrameLayout
+					android:id="@+id/schedule_date_button"
+					android:layout_width="44dp"
+					android:layout_height="44dp"
+					android:background="?attr/selectableItemBackgroundBorderless">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center"
+						android:contentDescription="@string/astronomy_schedule"
+						android:src="@drawable/ic_action_calendar_month"
+						app:tint="?attr/icon_color_active" />
+				</FrameLayout>
+
+				<FrameLayout
+					android:id="@+id/schedule_prev_button"
+					android:layout_width="44dp"
+					android:layout_height="44dp"
+					android:layout_marginStart="4dp"
+					android:background="?attr/selectableItemBackgroundBorderless">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center"
+						android:contentDescription="@string/shared_string_previous"
+						android:scaleX="-1"
+						android:src="@drawable/ic_action_arrow_forward_16"
+						app:tint="?attr/icon_color_active" />
+				</FrameLayout>
+
+				<FrameLayout
+					android:id="@+id/schedule_next_button"
+					android:layout_width="44dp"
+					android:layout_height="44dp"
+					android:layout_marginStart="4dp"
+					android:background="?attr/selectableItemBackgroundBorderless">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center"
+						android:contentDescription="@string/shared_string_next"
+						android:src="@drawable/ic_action_arrow_forward_16"
+						app:tint="?attr/icon_color_active" />
+				</FrameLayout>
+			</LinearLayout>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/schedule_days_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="12dp"
+			android:orientation="vertical" />
+
+	</LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

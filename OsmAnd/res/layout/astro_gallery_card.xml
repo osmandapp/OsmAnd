@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/catalogsCard"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="16dp"
+	app:cardBackgroundColor="?attr/list_background_color"
+	app:cardElevation="0dp"
+	app:shapeAppearanceOverlay="@style/Shape.Card12"
+	app:strokeWidth="0dp">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:id="@+id/collapse_button"
+			android:layout_width="match_parent"
+			android:layout_height="52dp"
+			android:background="?attr/selectableItemBackground"
+			android:orientation="horizontal">
+
+			<ImageView
+				android:layout_width="24dp"
+				android:layout_height="24dp"
+				android:layout_gravity="center_vertical"
+				android:layout_marginHorizontal="16dp"
+				android:src="@drawable/ic_action_photo"
+				app:tint="?attr/default_icon_color" />
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical"
+				android:layout_marginHorizontal="16dp"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:paddingVertical="2dp"
+				android:text="@string/online_photos"
+				android:textColor="?android:attr/textColorPrimary" />
+
+			<FrameLayout
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:layout_gravity="center_vertical"
+				android:layout_marginStart="16dp"
+				android:layout_marginEnd="4dp">
+
+				<ImageView
+					android:id="@+id/arrow_icon"
+					android:layout_width="24dp"
+					android:layout_height="24dp"
+					android:layout_gravity="center"
+					android:src="@drawable/ic_action_arrow_up" />
+
+			</FrameLayout>
+
+		</LinearLayout>
+
+		<com.google.android.material.progressindicator.LinearProgressIndicator
+			android:id="@+id/progress_bar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:indeterminate="true"
+			app:indicatorColor="?attr/active_color_primary" />
+
+
+		<LinearLayout
+			android:id="@+id/content_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingBottom="16dp">
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/gallery_grid_recycler_view"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
+				android:id="@+id/view_all"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/content_padding"
+				android:paddingHorizontal="@dimen/content_padding"
+				app:dialogButtonHeight="@dimen/dialog_button_height"
+				app:dialogButtonTitle="@string/shared_string_view_all"
+				app:dialogButtonTopMargin="@dimen/content_padding_small"
+				app:dialogButtonTouchableHeight="@dimen/bottom_sheet_list_item_height"
+				app:dialogButtonType="secondaryActive" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

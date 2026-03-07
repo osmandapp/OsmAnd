@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/personalCard"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="16dp">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/description"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="16dp"
+			android:layout_marginVertical="12dp"
+			android:lineSpacingExtra="5sp"
+			android:text="@string/personal_category_name"
+			android:textColor="?android:attr/textColorPrimary"
+			android:textSize="16sp" />
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/read_article_button"
+			style="@style/Widget.Material3.Button.OutlinedButton"
+			android:layout_width="wrap_content"
+			android:layout_height="36dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="12dp"
+			android:layout_marginBottom="16dp"
+			android:gravity="center_vertical"
+			android:insetLeft="0dp"
+			android:insetTop="0dp"
+			android:insetRight="0dp"
+			android:insetBottom="0dp"
+			android:minHeight="48dp"
+			android:paddingStart="14dp"
+			android:paddingEnd="14dp"
+			android:textAllCaps="false"
+			android:textColor="?android:attr/textColorSecondary"
+			android:textSize="16sp"
+			app:backgroundTint="@android:color/transparent"
+			app:cornerRadius="12dp"
+			app:iconGravity="textStart"
+			app:iconPadding="10dp"
+			app:iconTint="?attr/default_icon_color"
+			app:rippleColor="?attr/colorControlHighlight"
+			app:strokeColor="@android:color/darker_gray"
+			app:strokeWidth="1dp" />
+
+	</LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

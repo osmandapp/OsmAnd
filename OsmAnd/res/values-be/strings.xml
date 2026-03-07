@@ -5061,4 +5061,10 @@
     <string name="location_interpolation_percent">Працэнт інтэрпаляцыі месцазнаходжання</string>
     <string name="selected_delayed_profile">Абраны профіль \"%s\"</string>
     <string name="shared_string_interpolation">Інтэрпаляцыя</string>
+    <plurals name="tracks_count">
+        <item quantity="one">%d трэк</item>
+        <item quantity="few">%d трэкі</item>
+        <item quantity="many">%d трэкаў</item>
+        <item quantity="other">%d трэка</item>
+    </plurals>
 </resources>

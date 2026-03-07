@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/chipCard"
+	android:layout_width="wrap_content"
+	android:layout_height="38dp"
+	android:background="@drawable/bg_catalog_chip"
+	app:cardBackgroundColor="?attr/ctx_menu_card_btn"
+	app:cardElevation="0dp"
+	app:shapeAppearanceOverlay="@style/Shape.CatalogChip"
+	app:strokeWidth="0dp">
+
+	<TextView
+		android:id="@+id/text"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:gravity="center"
+		android:paddingHorizontal="12dp"
+		android:textAllCaps="false"
+		android:textColor="?attr/active_color_primary"
+		android:textSize="14sp" />
+</com.google.android.material.card.MaterialCardView>

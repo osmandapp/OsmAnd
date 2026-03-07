@@ -5278,4 +5278,21 @@
     <string name="shared_string_price">Cena</string>
     <string name="obd_alt_battery_voltage">Napetost priključka</string>
     <string name="liter_single">Liter</string>
+    <string name="share_favorite">Deli priljubljene</string>
+    <string name="copy_list">Kopiraj seznam</string>
+    <string name="shared_string_trip_average">Povprečje potovanja</string>
+    <string name="trip_recording_avg_speed_widget_description">Prikaže povprečno hitrost trenutne poti ali povprečno hitrost med zadnjim vzponom ali spustom.</string>
+    <string name="trip_recording_moving_time_widget_description">Prikaže trenutno zabeleženi čas gibanja ali čas zadnjega vzpona in spusta.</string>
+    <string name="trip_recording_moving_time">Čas premikanja</string>
+    <plurals name="tracks_count">
+        <item quantity="one">%d sled</item>
+        <item quantity="two">%d sledi</item>
+        <item quantity="few">%d sledi</item>
+        <item quantity="other">%d sledi</item>
+    </plurals>
+    <string name="gradient_no_data_point_summary">Barva, ki se uporabi, kadar podatki manjkajo ali niso določeni.</string>
+    <string name="gradient_input_value_too_low_warn">Najmanjša dovoljena vrednost je %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">Največja dovoljena vrednost je %1$s.</string>
+    <string name="gradient_input_value_duplicate_warn">Ta vrednost že obstaja v paleti.</string>
+    <string name="gradient_input_invalid_value_warn">Vnesi veljavno številko.</string>
 </resources>
