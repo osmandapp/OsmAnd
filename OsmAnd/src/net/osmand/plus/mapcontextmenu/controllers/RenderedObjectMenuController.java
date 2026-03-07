@@ -18,6 +18,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
+import java.util.Collection;
 import java.util.Map;
 
 public class RenderedObjectMenuController extends MenuController {
@@ -163,7 +164,9 @@ public class RenderedObjectMenuController extends MenuController {
 		}
 
 		if (Algorithms.isEmpty(typeStr) && renderedObject != null && mapPoiTypes != null) {
-			typeStr = searchObjectNameByRawTags(mapPoiTypes, renderedObject.getTags());
+			Amenity amenity = builder != null ? builder.getAmenity() : null;
+			Collection<String> additionalInfoKeys = amenity != null ? amenity.getAdditionalInfoKeys() : null;
+			typeStr = searchObjectNameByRawTags(mapPoiTypes, renderedObject.getTags(), additionalInfoKeys);
 		}
 
 		return typeStr != null ? typeStr : super.getTypeStr();
@@ -171,35 +174,24 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Nullable
 	private static String searchObjectNameByRawTags(@NonNull MapPoiTypes poiTypes,
-	                                                @NonNull Map<String, String> rawTags) {
+													@NonNull Map<String, String> rawTags,
+													@Nullable Collection<String> additionalInfoKeys) {
 		for (Map.Entry<String, String> entry : rawTags.entrySet()) {
 			String key = entry.getKey();
 			String value = entry.getValue();
 
-			// Skip common metadata and name tags that shouldn't represent the object type
-			if (key.equals("name") || key.startsWith("name:") || key.equals("ele")
-					|| key.equals("height") || key.equals("min_height")
-					|| key.equals("levels") || key.equals("layer")
-					|| key.equals("type") || key.equals("osmwiki")) {
+			if (additionalInfoKeys != null && additionalInfoKeys.contains(key)) {
 				continue;
 			}
 
 			String translation = null;
-
-			// Try to translate the key-value pair first
-			if (!Algorithms.isEmpty(value) && !value.equals("yes")) {
-				translation = poiTypes.getPoiTranslation(key + "_" + value);
-
-				// Ignore auto-generated capitalized fallbacks to prioritize translating just the key
-				String autoFallback = Algorithms.capitalizeFirstLetter((key + "_" + value).replace('_', ' '));
-				if (translation != null && translation.equalsIgnoreCase(autoFallback)) {
-					translation = null;
-				}
+			if (!Algorithms.isEmpty(value)) {
+				String complexKey = key + "_" + value;
+				translation = poiTypes.getPoiTranslation(complexKey, false);
 			}
 
-			// Fallback to translating just the key (e.g., "building")
 			if (Algorithms.isEmpty(translation)) {
-				translation = poiTypes.getPoiTranslation(key);
+				translation = poiTypes.getPoiTranslation(key, false);
 			}
 
 			if (!Algorithms.isEmpty(translation)) {

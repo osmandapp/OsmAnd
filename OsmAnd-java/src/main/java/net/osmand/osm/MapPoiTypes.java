@@ -929,15 +929,22 @@ public class MapPoiTypes {
 	}
 
 	public String getPoiTranslation(String keyName) {
+		return getPoiTranslation(keyName, true);
+	}
+
+	public String getPoiTranslation(String keyName, boolean withDefault) {
 		if (poiTranslator != null) {
 			String translation = poiTranslator.getTranslation(keyName);
 			if (!Algorithms.isEmpty(translation)) {
 				return translation;
 			}
 		}
-		String name = keyName;
-		name = name.replace('_', ' ');
-		return Algorithms.capitalizeFirstLetter(name);
+		if (withDefault) {
+			String name = keyName;
+			name = name.replace('_', ' ');
+			return Algorithms.capitalizeFirstLetter(name);
+		}
+		return null;
 	}
 
 	public boolean isRegisteredType(PoiCategory t) {
