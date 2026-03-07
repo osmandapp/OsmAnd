@@ -6094,4 +6094,23 @@
     <string name="copy_list">Kopiér liste</string>
     <string name="intersection">Kryds</string>
     <string name="show_layout_grid_logs">Vis gitterlogs</string>
+    <string name="astro_type_earth">Jorden</string>
+    <string name="astro_type_star">Stjerne</string>
+    <string name="astro_type_galaxy">Galakse</string>
+    <string name="astro_type_black_hole">Sort hul</string>
+    <string name="astro_type_planet">Planet</string>
+    <string name="astro_type_sun">Sol</string>
+    <string name="astro_type_satellite">Satellit</string>
+    <string name="astro_culmination">Kulmination</string>
+    <string name="astro_today_visibility">Synlighed i dag</string>
+    <string name="astronomy_schedule">Tidsplan</string>
+    <string name="astro_catalogs">Kataloger</string>
+    <string name="astro_path">Bane</string>
+    <string name="astro_direction">Retning</string>
+    <string name="astro_locate">Lokalisér</string>
+    <string name="astro_type_nebula">Tåge</string>
+    <string name="astro_type_open_cluster">Åben stjernehob</string>
+    <string name="astro_type_globular_cluster">Kuglehob</string>
+    <string name="astro_type_galaxy_cluster">Galaksehob</string>
+    <string name="astro_type_constellation">Stjernebillede</string>
 </resources>
