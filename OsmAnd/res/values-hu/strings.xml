@@ -5953,4 +5953,5 @@
     <string name="share_favorite">Kedvenc megosztása</string>
     <string name="copy_list">Lista másolása</string>
     <string name="intersection">Kereszteződés</string>
+    <string name="show_layout_grid_logs">Rácsnaplók megjelenítése</string>
 </resources>

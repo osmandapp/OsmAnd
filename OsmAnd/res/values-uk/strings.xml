@@ -5907,7 +5907,7 @@
     <string name="lang_crh">Кримськотатарська (латиниця)</string>
     <string name="efficient_grid">Ефективна мережа</string>
     <string name="slots">Слоти</string>
-    <string name="button_frames">Рамки для ґудзиків</string>
+    <string name="button_frames">Рамки для кнопок</string>
     <string name="visualizing_button_grid">Сітка кнопок карти</string>
     <string name="enable_3d_objects">3D-будівлі</string>
     <string name="enable_3d_objects_description">Відображення 3D-об\'єктів будівель на карті</string>

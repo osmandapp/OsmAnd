@@ -5955,4 +5955,5 @@
     <string name="share_favorite">Partager le favori</string>
     <string name="copy_list">Copier la liste</string>
     <string name="intersection">Intersection</string>
+    <string name="show_layout_grid_logs">Afficher les journaux de la grille</string>
 </resources>

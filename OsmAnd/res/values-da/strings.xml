@@ -5930,10 +5930,10 @@
     <string name="wind_animation_layer">Vindanimationslag</string>
     <string name="weather_layers">Vejrlag</string>
     <string name="lang_crh">Krimtatarisk (latin)</string>
-    <string name="efficient_grid">Effektivt net</string>
+    <string name="efficient_grid">Effektivt gitter</string>
     <string name="slots">Pladser</string>
     <string name="button_frames">Knaprammer</string>
-    <string name="visualizing_button_grid">Kortknap net</string>
+    <string name="visualizing_button_grid">Kortknap gitter</string>
     <string name="enable_3d_objects_description">Vis 3D-bygningsobjekter på kortet</string>
     <string name="deleted_maps_warning">Du er ved at slette %d element(er)\nFortsæt?</string>
     <string name="deleted_maps_prompt">Disse kort understøttes ikke længere og er blevet erstattet af mindre regioner. Fjern dem og download de nye versioner.</string>
@@ -6093,4 +6093,5 @@
     <string name="share_favorite">Del favorit</string>
     <string name="copy_list">Kopiér liste</string>
     <string name="intersection">Kryds</string>
+    <string name="show_layout_grid_logs">Vis gitterlogs</string>
 </resources>

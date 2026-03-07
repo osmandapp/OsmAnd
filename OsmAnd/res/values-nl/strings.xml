@@ -6374,4 +6374,12 @@
     </plurals>
     <string name="gradient_range_type_relative_summary">Kleuren worden automatisch aangepast aan het min/max-bereik van de track.</string>
     <string name="shared_string_ratio">verhouding</string>
+    <string name="share_favorite">Deel favoriet</string>
+    <string name="copy_list">Kopieer lijst</string>
+    <string name="trip_recording_avg_speed_widget_description">Toont de gemiddelde snelheid van de huidige rit of toont de gemiddelde snelheid tijdens de laatste beklimming of afdaling.</string>
+    <string name="trip_recording_moving_time_widget_description">Toont de momenteel opgenomen bewegingstijd of de tijd voor de laatste beklimming en afdaling.</string>
+    <string name="trip_recording_moving_time">Bewegingstijd</string>
+    <string name="show_layout_grid_logs">Toon rasterlogboeken</string>
+    <string name="shared_string_trip_average">Rit gemiddelde</string>
+    <string name="intersection">Kruising</string>
 </resources>
