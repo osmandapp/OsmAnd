@@ -49,6 +49,8 @@ public class RouteCalculationProgress implements Serializable {
 	public boolean requestPrivateAccessRouting;
 
 	public long routeCalculationStartTime;
+
+	public boolean hasMissingMapsNow; // pass to native routing
 	public MissingMapsCalculationResult missingMapsCalculationResult;
 
 	private int hhIterationStep = HHIteration.HH_NOT_STARTED.ordinal();

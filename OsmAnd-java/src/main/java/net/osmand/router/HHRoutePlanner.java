@@ -235,7 +235,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.stats.routingTime += time / 1e6;
 			calcCount++;
 			if (recalc) {
-				if (calcCount > hctx.config.MAX_COUNT_REITERATION) {
+				int maxCount = progress.hasMissingMapsNow ?
+						hctx.config.MAX_COUNT_REITERATION_WITH_MISSED_MAPS : hctx.config.MAX_COUNT_REITERATION;
+				if (calcCount > maxCount) {
 					if (SL >= 0) {
 						printFinalMessage(" [too many cancelled]", start, end, startTime, hctx);
 					}
@@ -1066,7 +1068,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		double straightStartEndCost = squareRootDist31(hctx.startX, hctx.startY, hctx.endX, hctx.endY) /
 				hctx.rctx.getRouter().getMaxSpeed();
 		if (progress != null && progress.hhGetCalcCounter() > 0) {
-			progress.hhIterationProgress((double) progress.hhGetCalcCounter() / hctx.config.MAX_COUNT_REITERATION);
+			int maxCount = progress.hasMissingMapsNow ?
+					hctx.config.MAX_COUNT_REITERATION_WITH_MISSED_MAPS : hctx.config.MAX_COUNT_REITERATION;
+			progress.hhIterationProgress((double) progress.hhGetCalcCounter() / maxCount);
 		}
 		while (true) {
 			Queue<NetworkDBPointCost<T>> queue;
@@ -1302,7 +1306,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	private boolean retrieveSegmentsGeometry(HHRoutingContext<T> hctx, RouteResultPreparation rrp, HHNetworkRouteRes route,
 			boolean routeSegments, RouteCalculationProgress progress) throws SQLException, InterruptedException, IOException {
 		if (progress != null && progress.hhGetCalcCounter() > 0) {
-			progress.hhIterationProgress((double) progress.hhGetCalcCounter() / hctx.config.MAX_COUNT_REITERATION);
+			int maxCount = progress.hasMissingMapsNow ?
+					hctx.config.MAX_COUNT_REITERATION_WITH_MISSED_MAPS : hctx.config.MAX_COUNT_REITERATION;
+			progress.hhIterationProgress((double) progress.hhGetCalcCounter() / maxCount);
 		}
 		for (int i = 0; i < route.segments.size(); i++) {
 			if (progress != null && progress.hhGetCalcCounter() == 0) {
