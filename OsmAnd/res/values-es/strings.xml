@@ -5921,4 +5921,26 @@
     <string name="level_of_details">Nivel de detalle</string>
     <string name="performance">Rendimiento</string>
     <string name="view_distance">Ver distancia</string>
+    <string name="show_layout_grid_logs">Mostrar registros de cuadrícula</string>
+    <string name="share_favorite">Compartir favorito</string>
+    <string name="copy_list">Copiar lista</string>
+    <string name="shared_string_trip_average">Promedio del viaje</string>
+    <string name="trip_recording_avg_speed_widget_description">Muestra la velocidad promedio del trayecto actual, o la velocidad promedio durante la última sección cuesta abajo o cuesta arriba</string>
+    <string name="trip_recording_moving_time_widget_description">Muestra el tiempo de movimiento registrado actualmente, o el tiempo de la última subida y bajada.</string>
+    <string name="trip_recording_moving_time">Tiempo de traslado</string>
+    <plurals name="tracks_count">
+        <item quantity="one">%d pista</item>
+        <item quantity="many">%d pistas</item>
+        <item quantity="other">%d pistas</item>
+    </plurals>
+    <string name="gradient_no_data_point_summary">Color aplicado cuando faltan datos o estos no están definidos.</string>
+    <string name="gradient_input_value_too_low_warn">El valor mínimo permitido es %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">El valor máximo permitido es %1$s.</string>
+    <string name="gradient_input_value_duplicate_warn">Este valor ya existe en la paleta.</string>
+    <string name="gradient_input_invalid_value_warn">Por favor, ingrese un número válido.</string>
+    <string name="value_cannot_be_edited_warn">Este valor no se puede modificar.</string>
+    <string name="unexpected_error_occurred_warn">Se produjo un error inesperado.</string>
+    <string name="relative_gradient_point_m_summary">Color para el valor máximo encontrado en la pista.</string>
+    <string name="relative_gradient_point_avg_summary">Color para el valor promedio de la pista.</string>
+    <string name="relative_gradient_point_min_summary">Color para el valor mínimo encontrado en la pista.</string>
 </resources>
