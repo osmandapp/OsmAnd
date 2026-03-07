@@ -5956,4 +5956,25 @@
     <string name="copy_list">Copier la liste</string>
     <string name="intersection">Intersection</string>
     <string name="show_layout_grid_logs">Afficher les journaux de la grille</string>
+    <string name="astro_culmination">Culmination</string>
+    <string name="astro_today_visibility">Visibilité aujourd\'hui</string>
+    <string name="astro_alt_short">Alt</string>
+    <string name="astro_az_short">Az</string>
+    <string name="astronomy_schedule">Calendrier</string>
+    <string name="astro_catalogs">Catalogues</string>
+    <string name="astro_path">Chemin</string>
+    <string name="astro_direction">Direction</string>
+    <string name="astro_locate">Localiser</string>
+    <string name="astro_type_earth">Terre</string>
+    <string name="astro_type_star">Étoile</string>
+    <string name="astro_type_galaxy">Galaxie</string>
+    <string name="astro_type_black_hole">Trou noir</string>
+    <string name="astro_type_planet">Planète</string>
+    <string name="astro_type_sun">Soleil</string>
+    <string name="astro_type_satellite">Satellite</string>
+    <string name="astro_type_nebula">Nébuleuse</string>
+    <string name="astro_type_open_cluster">Amas ouvert</string>
+    <string name="astro_type_globular_cluster">Amas globulaire</string>
+    <string name="astro_type_galaxy_cluster">Amas de galaxies</string>
+    <string name="astro_type_constellation">Constellation</string>
 </resources>
