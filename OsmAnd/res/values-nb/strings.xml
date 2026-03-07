@@ -5980,4 +5980,21 @@
     <string name="free_custom_color_description">Tilpass 3D-bygninger med hvilken som helst farge. Perfekt for å matche et karttema eller forbedre kontrasten.</string>
     <string name="buildings_3d_visibility_description">Juster gjennomsiktigheten til 3D-strukturer på kartet.</string>
     <string name="performance">Ytelse</string>
+    <string name="astro_type_constellation">Stjernebilde</string>
+    <string name="astro_culmination">Kulminasjon</string>
+    <string name="astro_today_visibility">Synlighet i dag</string>
+    <string name="astro_catalogs">Kataloger</string>
+    <string name="astro_path">Bane</string>
+    <string name="astro_direction">Retning</string>
+    <string name="astro_type_earth">Jorden</string>
+    <string name="astro_type_star">Stjerne</string>
+    <string name="astro_type_galaxy">Galakse</string>
+    <string name="astro_type_black_hole">Svart hull</string>
+    <string name="astro_type_planet">Planet</string>
+    <string name="astro_type_sun">Solen</string>
+    <string name="astro_type_satellite">Satellitt</string>
+    <string name="astro_type_nebula">Stjernetåke</string>
+    <string name="astro_type_open_cluster">Åpen stjernehop</string>
+    <string name="astro_type_globular_cluster">Kulehop</string>
+    <string name="astro_type_galaxy_cluster">Galaksehop</string>
 </resources>
