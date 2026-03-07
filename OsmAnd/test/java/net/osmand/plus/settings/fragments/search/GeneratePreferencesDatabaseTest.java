@@ -39,7 +39,7 @@ public class GeneratePreferencesDatabaseTest extends AndroidTest {
 	public void setLocaleFromArguments() {
 		this
 				.getLocaleFromArguments()
-				.map(Locale::new)
+				.map(Locale::forLanguageTag)
 				.ifPresent(this::setLocale);
 	}
 
@@ -58,7 +58,7 @@ public class GeneratePreferencesDatabaseTest extends AndroidTest {
 	}
 
 	private void setLocale(final Locale locale) {
-		app.getSettings().PREFERRED_LOCALE.set(locale.getLanguage());
+		app.getSettings().PREFERRED_LOCALE.set(locale.toString());
 		app.getLocaleHelper().checkPreferredLocale();
 	}
 

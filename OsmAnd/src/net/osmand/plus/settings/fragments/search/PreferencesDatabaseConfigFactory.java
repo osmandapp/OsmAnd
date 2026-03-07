@@ -12,9 +12,9 @@ import net.osmand.plus.BuildConfig;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Optional;
 
-import de.KnollFrank.lib.settingssearch.common.LanguageCode;
 import de.KnollFrank.lib.settingssearch.common.graph.Tree;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PreferencesDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PrepackagedPreferencesDatabase;
@@ -37,9 +37,9 @@ public class PreferencesDatabaseConfigFactory {
 	}
 
 	public static PreferencesDatabaseConfig<Configuration> createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(
-			final LanguageCode languageCode,
+			final Locale locale,
 			final AssetManager assetManager) {
-		final File databaseAssetFile = new File(String.format("database/searchable_preferences_prepackaged_%s.db", languageCode.code()));
+		final File databaseAssetFile = new File(String.format("database/searchable_preferences_prepackaged_%s.db", locale.toLanguageTag()));
 		return new PreferencesDatabaseConfig<>(
 				databaseAssetFile.getName(),
 				Optional.of(
