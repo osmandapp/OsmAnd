@@ -5954,4 +5954,25 @@
     <string name="copy_list">Lista másolása</string>
     <string name="intersection">Kereszteződés</string>
     <string name="show_layout_grid_logs">Rácsnaplók megjelenítése</string>
+    <string name="astro_culmination">Delelés</string>
+    <string name="astro_today_visibility">Mai láthatóság</string>
+    <string name="astronomy_schedule">Események</string>
+    <string name="astro_catalogs">Katalógusok</string>
+    <string name="astro_path">Pálya</string>
+    <string name="astro_direction">Irány</string>
+    <string name="astro_locate">Megkeresés</string>
+    <string name="astro_type_earth">Föld</string>
+    <string name="astro_type_star">Csillag</string>
+    <string name="astro_type_galaxy">Galaxis</string>
+    <string name="astro_type_black_hole">Fekete lyuk</string>
+    <string name="astro_type_planet">Bolygó</string>
+    <string name="astro_type_sun">Nap</string>
+    <string name="astro_type_satellite">Műhold</string>
+    <string name="astro_type_nebula">Köd</string>
+    <string name="astro_type_open_cluster">Nyílthalmaz</string>
+    <string name="astro_type_globular_cluster">Gömbhalmaz</string>
+    <string name="astro_type_galaxy_cluster">Galaxishalmaz</string>
+    <string name="astro_type_constellation">Csillagkép</string>
+    <string name="astro_alt_short">Magasság</string>
+    <string name="astro_az_short">Azimut</string>
 </resources>
