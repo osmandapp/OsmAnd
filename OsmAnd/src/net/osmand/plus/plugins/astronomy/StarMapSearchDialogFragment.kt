@@ -17,6 +17,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
@@ -42,10 +43,15 @@ import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 import java.util.Calendar
+import java.util.concurrent.ConcurrentHashMap
 
 class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
@@ -69,10 +75,17 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		BROWSE
 	}
 
+	private data class RiseSetCacheEntry(
+		val nextRise: ZonedDateTime?,
+		val nextSet: ZonedDateTime?
+	)
+
 	private lateinit var searchAdapter: StarMapSearchResultsAdapter
 	private lateinit var searchState: StarMapSearchState
 	private val preparedEntries = mutableListOf<StarMapSearchEntry>()
 	private val visibleEntries = mutableListOf<StarMapSearchEntry>()
+	private val riseSetCache = ConcurrentHashMap<String, RiseSetCacheEntry>()
+	private val visibleTonightCache = ConcurrentHashMap<String, Boolean>()
 
 	private lateinit var searchResultsPanel: View
 	private lateinit var searchRecycler: RecyclerView
@@ -95,6 +108,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private lateinit var sortIcon: ImageView
 	private lateinit var sortText: TextView
 	private lateinit var filterText: TextView
+	private lateinit var sortProgress: View
 	private lateinit var emptyStateContainer: View
 	private lateinit var emptyStateResetButton: View
 	private lateinit var recentChipsContainer: LinearLayout
@@ -107,10 +121,13 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private var sortPopup: ListPopupWindow? = null
 	private var filterPopup: ListPopupWindow? = null
+	private var filterAndSortJob: Job? = null
+	private var filterAndSortRequestId = 0
 
 	private var currentMode: ScreenMode = ScreenMode.EXPLORE
 	private var currentFullSearchMode: FullSearchMode = FullSearchMode.INPUT
 	private var currentInputPresentation: InputPresentation = InputPresentation.EXPLORE_BAR
+	private var wasInfoHeaderVisible = false
 	private val widToDisplayName = mutableMapOf<String, String>()
 	private var observerForComputations = Observer(0.0, 0.0, 0.0)
 	private var nowForComputations: ZonedDateTime = ZonedDateTime.now()
@@ -206,6 +223,11 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	}
 
 	override fun onDestroyView() {
+		filterAndSortJob?.cancel()
+		filterAndSortJob = null
+		if (::sortProgress.isInitialized) {
+			sortProgress.isVisible = false
+		}
 		dismissPopups()
 		restoreSearchSoftInputMode()
 		super.onDestroyView()
@@ -258,6 +280,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		sortIcon = searchResultsPanel.findViewById(R.id.sort_icon)
 		sortText = searchResultsPanel.findViewById(R.id.sort_text)
 		filterText = searchResultsPanel.findViewById(R.id.filter_text)
+		sortProgress = searchResultsPanel.findViewById(R.id.sort_progress)
 		emptyStateContainer = searchResultsPanel.findViewById(R.id.empty_state_container)
 		emptyStateResetButton = searchResultsPanel.findViewById(R.id.empty_state_reset_button)
 		searchRecycler = searchResultsPanel.findViewById(R.id.search_results)
@@ -805,6 +828,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private fun refreshPreparedEntries() {
 		preparedEntries.clear()
 		widToDisplayName.clear()
+		riseSetCache.clear()
+		visibleTonightCache.clear()
 		val parent = parentFragment as? StarMapFragment
 		val objects = parent?.getSearchableObjects().orEmpty()
 
@@ -872,70 +897,137 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	}
 
 	private fun updateInfoCard() {
-		if (::searchAdapter.isInitialized) {
-			searchAdapter.notifyDataSetChanged()
+		if (!::searchAdapter.isInitialized) {
+			return
 		}
+		val isInfoHeaderVisible = shouldShowInfoHeader()
+		when {
+			wasInfoHeaderVisible && isInfoHeaderVisible -> searchAdapter.notifyItemChanged(0)
+			wasInfoHeaderVisible -> searchAdapter.notifyItemRemoved(0)
+			isInfoHeaderVisible -> searchAdapter.notifyItemInserted(0)
+		}
+		wasInfoHeaderVisible = isInfoHeaderVisible
 	}
 
 	@SuppressLint("NotifyDataSetChanged")
 	private fun applyFiltersAndSort(scrollToTop: Boolean) {
-		visibleEntries.clear()
-		visibleEntries.addAll(
-			searchState.filterAndSort(
-				preparedEntries = preparedEntries,
-				visibleTonightProvider = ::getVisibleTonight,
-				riseSortValueProvider = ::getRiseSortValue,
-				setSortValueProvider = ::getSetSortValue
-			)
-		)
-		if (::searchAdapter.isInitialized) {
-			searchAdapter.notifyDataSetChanged()
-		}
-		if (scrollToTop && ::searchRecycler.isInitialized && visibleEntries.isNotEmpty()) {
-			searchRecycler.scrollToPosition(0)
-		}
-		if (scrollToTop && currentMode == ScreenMode.FULL_SEARCH && currentFullSearchMode == FullSearchMode.BROWSE) {
-			fullSearchAppBar.setExpanded(true, false)
-		}
+		filterAndSortJob?.cancel()
+		val requestId = ++filterAndSortRequestId
+		val stateSnapshot = searchState.snapshot()
+		val preparedEntriesSnapshot = preparedEntries.toList()
+		val observerSnapshot = observerForComputations
+		val nowSnapshot = nowForComputations
+		val duskSnapshot = duskForComputations
+		val dawnSnapshot = dawnForComputations
 		updateSortControls()
 		updateFilterControls()
-		updateEmptyStateVisibility()
+		updateSortProgressVisibility(true)
+		if (::emptyStateContainer.isInitialized) {
+			emptyStateContainer.isVisible = false
+		}
+		filterAndSortJob = viewLifecycleOwner.lifecycleScope.launch {
+			try {
+				val filteredEntries = withContext(Dispatchers.Default) {
+					stateSnapshot.filterAndSort(
+						preparedEntries = preparedEntriesSnapshot.map { it.copy() },
+						visibleTonightProvider = { entry -> getVisibleTonight(entry, observerSnapshot, duskSnapshot, dawnSnapshot) },
+						riseSortValueProvider = { entry -> getRiseSortValue(entry, observerSnapshot, nowSnapshot) },
+						setSortValueProvider = { entry -> getSetSortValue(entry, observerSnapshot, nowSnapshot) }
+					)
+				}
+				if (requestId != filterAndSortRequestId || view == null) {
+					return@launch
+				}
+				visibleEntries.clear()
+				visibleEntries.addAll(filteredEntries)
+				if (::searchAdapter.isInitialized) {
+					searchAdapter.notifyDataSetChanged()
+				}
+				if (scrollToTop && ::searchRecycler.isInitialized && visibleEntries.isNotEmpty()) {
+					searchRecycler.scrollToPosition(0)
+				}
+				if (scrollToTop && currentMode == ScreenMode.FULL_SEARCH && currentFullSearchMode == FullSearchMode.BROWSE) {
+					fullSearchAppBar.setExpanded(true, false)
+				}
+				updateEmptyStateVisibility()
+			} finally {
+				if (requestId == filterAndSortRequestId && view != null) {
+					updateSortProgressVisibility(false)
+				}
+			}
+		}
 	}
 
-	private fun ensureRiseSet(entry: StarMapSearchEntry) {
+	private fun updateSortProgressVisibility(isVisible: Boolean) {
+		if (::sortProgress.isInitialized) {
+			sortProgress.isVisible = isVisible
+		}
+	}
+
+	private fun ensureRiseSet(
+		entry: StarMapSearchEntry,
+		observer: Observer = observerForComputations,
+		now: ZonedDateTime = nowForComputations
+	) {
 		if (entry.riseSetCalculated) {
 			return
 		}
-		val (rise, set) = AstroUtils.nextRiseSet(entry.objectRef, nowForComputations, observerForComputations)
+		riseSetCache[entry.objectRef.id]?.let { cachedRiseSet ->
+			entry.nextRise = cachedRiseSet.nextRise
+			entry.nextSet = cachedRiseSet.nextSet
+			entry.riseSetCalculated = true
+			return
+		}
+		val (rise, set) = AstroUtils.nextRiseSet(entry.objectRef, now, observer)
 		entry.nextRise = rise
 		entry.nextSet = set
 		entry.riseSetCalculated = true
+		riseSetCache[entry.objectRef.id] = RiseSetCacheEntry(rise, set)
 	}
 
-	private fun getVisibleTonight(entry: StarMapSearchEntry): Boolean {
+	private fun getVisibleTonight(
+		entry: StarMapSearchEntry,
+		observer: Observer = observerForComputations,
+		dusk: ZonedDateTime = duskForComputations,
+		dawn: ZonedDateTime = dawnForComputations
+	): Boolean {
 		if (entry.visibleTonightCalculated) {
 			return entry.isVisibleTonight
 		}
+		visibleTonightCache[entry.objectRef.id]?.let { cachedVisibleTonight ->
+			entry.isVisibleTonight = cachedVisibleTonight
+			entry.visibleTonightCalculated = true
+			return cachedVisibleTonight
+		}
 		val (nightRise, nightSet) = AstroUtils.nextRiseSet(
 			entry.objectRef,
-			duskForComputations,
-			observerForComputations,
-			duskForComputations,
-			dawnForComputations
+			dusk,
+			observer,
+			dusk,
+			dawn
 		)
-		val visibleAtDusk = AstroUtils.altitude(entry.objectRef, duskForComputations, observerForComputations) > 0
+		val visibleAtDusk = AstroUtils.altitude(entry.objectRef, dusk, observer) > 0
 		entry.isVisibleTonight = visibleAtDusk || nightRise != null || nightSet != null
 		entry.visibleTonightCalculated = true
+		visibleTonightCache[entry.objectRef.id] = entry.isVisibleTonight
 		return entry.isVisibleTonight
 	}
 
-	private fun getRiseSortValue(entry: StarMapSearchEntry): Long {
-		ensureRiseSet(entry)
+	private fun getRiseSortValue(
+		entry: StarMapSearchEntry,
+		observer: Observer = observerForComputations,
+		now: ZonedDateTime = nowForComputations
+	): Long {
+		ensureRiseSet(entry, observer, now)
 		return entry.nextRise?.toInstant()?.toEpochMilli() ?: Long.MAX_VALUE
 	}
 
-	private fun getSetSortValue(entry: StarMapSearchEntry): Long {
-		ensureRiseSet(entry)
+	private fun getSetSortValue(
+		entry: StarMapSearchEntry,
+		observer: Observer = observerForComputations,
+		now: ZonedDateTime = nowForComputations
+	): Long {
+		ensureRiseSet(entry, observer, now)
 		return entry.nextSet?.toInstant()?.toEpochMilli() ?: Long.MAX_VALUE
 	}
 

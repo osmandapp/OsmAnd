@@ -59,6 +59,93 @@ internal data class StarMapSearchEntry(
 	var visibleTonightCalculated: Boolean = false
 )
 
+internal data class StarMapSearchStateSnapshot(
+	val query: String,
+	val sortMode: StarMapSearchSortMode,
+	val typeFilter: StarMapSearchTypeFilter,
+	val nakedEyeOnly: Boolean,
+	val quickPresetType: StarMapSearchQuickPresetType,
+	val quickPresetCatalogWid: String?,
+	val selectedCategories: Set<StarMapSearchCategoryFilter>
+) {
+
+	fun filterAndSort(
+		preparedEntries: List<StarMapSearchEntry>,
+		visibleTonightProvider: (StarMapSearchEntry) -> Boolean,
+		riseSortValueProvider: (StarMapSearchEntry) -> Long,
+		setSortValueProvider: (StarMapSearchEntry) -> Long
+	): List<StarMapSearchEntry> {
+		val filteredEntries = mutableListOf<StarMapSearchEntry>()
+		val queryLower = query.lowercase(Locale.getDefault())
+		val specificCategories = selectedCategories.filter { it != StarMapSearchCategoryFilter.ALL }.toSet()
+
+		for (entry in preparedEntries) {
+			if (!matchesQuickPreset(entry)) continue
+			if (queryLower.isNotEmpty() && !matchesQuery(entry, queryLower)) continue
+			if (!matchesTypeFilter(entry, visibleTonightProvider)) continue
+			if (nakedEyeOnly && entry.magnitude > 6.0f) continue
+			if (specificCategories.isNotEmpty() && entry.category !in specificCategories) continue
+			filteredEntries.add(entry)
+		}
+
+		filteredEntries.sortWith(createComparator(riseSortValueProvider, setSortValueProvider))
+		return filteredEntries
+	}
+
+	private fun matchesQuickPreset(entry: StarMapSearchEntry): Boolean {
+		return when (quickPresetType) {
+			StarMapSearchQuickPresetType.NONE -> true
+			StarMapSearchQuickPresetType.CATEGORY_SOLAR_SYSTEM -> entry.category == StarMapSearchCategoryFilter.SOLAR_SYSTEM
+			StarMapSearchQuickPresetType.CATEGORY_CONSTELLATIONS -> entry.category == StarMapSearchCategoryFilter.CONSTELLATIONS
+			StarMapSearchQuickPresetType.CATEGORY_STARS -> entry.category == StarMapSearchCategoryFilter.STARS
+			StarMapSearchQuickPresetType.CATEGORY_NEBULAS -> entry.category == StarMapSearchCategoryFilter.NEBULAS
+			StarMapSearchQuickPresetType.CATEGORY_STAR_CLUSTERS -> entry.category == StarMapSearchCategoryFilter.STAR_CLUSTERS
+			StarMapSearchQuickPresetType.CATEGORY_DEEP_SKY -> entry.category == StarMapSearchCategoryFilter.DEEP_SKY
+			StarMapSearchQuickPresetType.MY_DATA_FAVORITES -> entry.objectRef.isFavorite
+			StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH -> entry.objectRef.showCelestialPath
+			StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> entry.objectRef.showDirection
+			StarMapSearchQuickPresetType.CATALOG_WID -> !quickPresetCatalogWid.isNullOrEmpty() && entry.catalogWid == quickPresetCatalogWid
+		}
+	}
+
+	private fun matchesQuery(entry: StarMapSearchEntry, queryLower: String): Boolean {
+		val localized = entry.objectRef.localizedName.orEmpty().lowercase(Locale.getDefault())
+		val original = entry.objectRef.name.lowercase(Locale.getDefault())
+		return localized.contains(queryLower) || original.contains(queryLower)
+	}
+
+	private fun matchesTypeFilter(
+		entry: StarMapSearchEntry,
+		visibleTonightProvider: (StarMapSearchEntry) -> Boolean
+	): Boolean {
+		return when (typeFilter) {
+			StarMapSearchTypeFilter.SHOW_ALL -> true
+			StarMapSearchTypeFilter.VISIBLE_NOW -> entry.objectRef.altitude > 0
+			StarMapSearchTypeFilter.VISIBLE_TONIGHT -> visibleTonightProvider(entry)
+		}
+	}
+
+	private fun createComparator(
+		riseSortValueProvider: (StarMapSearchEntry) -> Long,
+		setSortValueProvider: (StarMapSearchEntry) -> Long
+	): Comparator<StarMapSearchEntry> {
+		return when (sortMode) {
+			StarMapSearchSortMode.NAME_ASC -> compareBy { it.displayName.lowercase(Locale.getDefault()) }
+			StarMapSearchSortMode.NAME_DESC -> compareByDescending { it.displayName.lowercase(Locale.getDefault()) }
+			StarMapSearchSortMode.BRIGHTEST_FIRST -> compareBy { it.magnitude }
+			StarMapSearchSortMode.FAINTEST_FIRST -> compareByDescending { it.magnitude }
+			StarMapSearchSortMode.RISES_SOONEST -> compareBy(
+				{ riseSortValueProvider(it) },
+				{ it.displayName.lowercase(Locale.getDefault()) }
+			)
+			StarMapSearchSortMode.SETS_SOONEST -> compareBy(
+				{ setSortValueProvider(it) },
+				{ it.displayName.lowercase(Locale.getDefault()) }
+			)
+		}
+	}
+}
+
 internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 
 	companion object {
@@ -156,27 +243,30 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 		}
 	}
 
+	fun snapshot(): StarMapSearchStateSnapshot {
+		return StarMapSearchStateSnapshot(
+			query = query,
+			sortMode = sortMode,
+			typeFilter = typeFilter,
+			nakedEyeOnly = nakedEyeOnly,
+			quickPresetType = quickPresetType,
+			quickPresetCatalogWid = quickPresetCatalogWid,
+			selectedCategories = selectedCategories.toSet()
+		)
+	}
+
 	fun filterAndSort(
 		preparedEntries: List<StarMapSearchEntry>,
 		visibleTonightProvider: (StarMapSearchEntry) -> Boolean,
 		riseSortValueProvider: (StarMapSearchEntry) -> Long,
 		setSortValueProvider: (StarMapSearchEntry) -> Long
 	): List<StarMapSearchEntry> {
-		val filteredEntries = mutableListOf<StarMapSearchEntry>()
-		val queryLower = query.lowercase(Locale.getDefault())
-		val specificCategories = selectedCategories.filter { it != StarMapSearchCategoryFilter.ALL }.toSet()
-
-		for (entry in preparedEntries) {
-			if (!matchesQuickPreset(entry)) continue
-			if (queryLower.isNotEmpty() && !matchesQuery(entry, queryLower)) continue
-			if (!matchesTypeFilter(entry, visibleTonightProvider)) continue
-			if (nakedEyeOnly && entry.magnitude > 6.0f) continue
-			if (specificCategories.isNotEmpty() && entry.category !in specificCategories) continue
-			filteredEntries.add(entry)
-		}
-
-		filteredEntries.sortWith(createComparator(riseSortValueProvider, setSortValueProvider))
-		return filteredEntries
+		return snapshot().filterAndSort(
+			preparedEntries = preparedEntries,
+			visibleTonightProvider = visibleTonightProvider,
+			riseSortValueProvider = riseSortValueProvider,
+			setSortValueProvider = setSortValueProvider
+		)
 	}
 
 	fun calculateFilterCount(): Int {
@@ -219,59 +309,6 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 		}
 		if (selectedCategories.isEmpty()) {
 			selectedCategories.add(StarMapSearchCategoryFilter.ALL)
-		}
-	}
-
-	private fun matchesQuickPreset(entry: StarMapSearchEntry): Boolean {
-		return when (quickPresetType) {
-			StarMapSearchQuickPresetType.NONE -> true
-			StarMapSearchQuickPresetType.CATEGORY_SOLAR_SYSTEM -> entry.category == StarMapSearchCategoryFilter.SOLAR_SYSTEM
-			StarMapSearchQuickPresetType.CATEGORY_CONSTELLATIONS -> entry.category == StarMapSearchCategoryFilter.CONSTELLATIONS
-			StarMapSearchQuickPresetType.CATEGORY_STARS -> entry.category == StarMapSearchCategoryFilter.STARS
-			StarMapSearchQuickPresetType.CATEGORY_NEBULAS -> entry.category == StarMapSearchCategoryFilter.NEBULAS
-			StarMapSearchQuickPresetType.CATEGORY_STAR_CLUSTERS -> entry.category == StarMapSearchCategoryFilter.STAR_CLUSTERS
-			StarMapSearchQuickPresetType.CATEGORY_DEEP_SKY -> entry.category == StarMapSearchCategoryFilter.DEEP_SKY
-			StarMapSearchQuickPresetType.MY_DATA_FAVORITES -> entry.objectRef.isFavorite
-			StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH -> entry.objectRef.showCelestialPath
-			StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> entry.objectRef.showDirection
-			StarMapSearchQuickPresetType.CATALOG_WID -> !quickPresetCatalogWid.isNullOrEmpty() && entry.catalogWid == quickPresetCatalogWid
-		}
-	}
-
-	private fun matchesQuery(entry: StarMapSearchEntry, queryLower: String): Boolean {
-		val localized = entry.objectRef.localizedName.orEmpty().lowercase(Locale.getDefault())
-		val original = entry.objectRef.name.lowercase(Locale.getDefault())
-		return localized.contains(queryLower) || original.contains(queryLower)
-	}
-
-	private fun matchesTypeFilter(
-		entry: StarMapSearchEntry,
-		visibleTonightProvider: (StarMapSearchEntry) -> Boolean
-	): Boolean {
-		return when (typeFilter) {
-			StarMapSearchTypeFilter.SHOW_ALL -> true
-			StarMapSearchTypeFilter.VISIBLE_NOW -> entry.objectRef.altitude > 0
-			StarMapSearchTypeFilter.VISIBLE_TONIGHT -> visibleTonightProvider(entry)
-		}
-	}
-
-	private fun createComparator(
-		riseSortValueProvider: (StarMapSearchEntry) -> Long,
-		setSortValueProvider: (StarMapSearchEntry) -> Long
-	): Comparator<StarMapSearchEntry> {
-		return when (sortMode) {
-			StarMapSearchSortMode.NAME_ASC -> compareBy { it.displayName.lowercase(Locale.getDefault()) }
-			StarMapSearchSortMode.NAME_DESC -> compareByDescending { it.displayName.lowercase(Locale.getDefault()) }
-			StarMapSearchSortMode.BRIGHTEST_FIRST -> compareBy { it.magnitude }
-			StarMapSearchSortMode.FAINTEST_FIRST -> compareByDescending { it.magnitude }
-			StarMapSearchSortMode.RISES_SOONEST -> compareBy(
-				{ riseSortValueProvider(it) },
-				{ it.displayName.lowercase(Locale.getDefault()) }
-			)
-			StarMapSearchSortMode.SETS_SOONEST -> compareBy(
-				{ setSortValueProvider(it) },
-				{ it.displayName.lowercase(Locale.getDefault()) }
-			)
 		}
 	}
 }

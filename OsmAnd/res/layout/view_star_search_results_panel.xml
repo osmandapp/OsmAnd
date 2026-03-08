@@ -41,6 +41,16 @@
                 android:textSize="@dimen/default_desc_text_size" />
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/sort_progress"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
+            android:layout_marginStart="@dimen/content_padding_small"
+            android:indeterminate="true"
+            android:indeterminateTint="?attr/active_color_primary"
+            android:visibility="gone" />
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
