@@ -35,6 +35,7 @@
 	<color name="icon_color_osmand_dark">#d28521</color>
 	<color name="icon_color_active_light">#237bff</color>
 	<color name="icon_color_active_dark">#d28521</color>
+	<color name="icon_color_warning">#EE5622</color>
 	<color name="map_button_icon_color_light">#727272</color>
 	<color name="map_button_icon_color_dark">#cccccc</color>
 	<color name="map_button_background_color_light">#FFFFFF</color>
