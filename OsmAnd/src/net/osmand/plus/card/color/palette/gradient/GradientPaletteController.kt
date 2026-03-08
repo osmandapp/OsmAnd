@@ -136,15 +136,16 @@ open class GradientPaletteController(
 			)
 		}
 
-		// Duplicate (allowed for every item)
-		menuItems.add(PopUpMenuItem.Builder(activity)
-			.setTitleId(R.string.shared_string_duplicate)
-			.setIcon(getContentIcon(R.drawable.ic_action_copy))
-			.setOnClickListener {
-				runIfPurchased { duplicateGradient(item) }
-			}
-			.create()
-		)
+		if (isDuplicationSupported()) {
+			menuItems.add(PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_duplicate)
+				.setIcon(getContentIcon(R.drawable.ic_action_copy))
+				.setOnClickListener {
+					runIfPurchased { duplicateGradient(item) }
+				}
+				.create()
+			)
+		}
 
 		// Remove (only if not default and not currently selected)
 		val isSelected = isPaletteItemSelected(item)
@@ -368,13 +369,19 @@ open class GradientPaletteController(
 
 	// --- Internal helper methods ---
 
+	private fun isDuplicationSupported() = isPurchased()
+
 	private fun runIfPurchased(action: () -> Unit) {
 		val activity = getFragmentActivity()
-		if (InAppPurchaseUtils.isGradientEditorAvailable(app)) {
+		if (isPurchased()) {
 			action()
 		} else if (activity != null) {
 			ChoosePlanFragment.showInstance(activity, OsmAndFeature.ADVANCED_WIDGETS)
 		}
+	}
+
+	private fun isPurchased(): Boolean {
+		return InAppPurchaseUtils.isGradientEditorAvailable(app)
 	}
 
 	private fun updateExternalDependencies() {
