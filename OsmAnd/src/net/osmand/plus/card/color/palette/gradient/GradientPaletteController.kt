@@ -11,6 +11,8 @@ import net.osmand.plus.R
 import net.osmand.plus.card.color.palette.gradient.editor.GradientEditorController
 import net.osmand.plus.card.color.palette.gradient.editor.GradientRangeTypeController
 import net.osmand.plus.card.color.palette.gradient.editor.data.GradientDraft
+import net.osmand.plus.chooseplan.ChoosePlanFragment
+import net.osmand.plus.chooseplan.OsmAndFeature
 import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.palette.controller.BasePaletteController
 import net.osmand.plus.plugins.srtm.TerrainMode
@@ -96,7 +98,7 @@ open class GradientPaletteController(
 	}
 
 	override fun isAddingNewItemsSupported(): Boolean {
-		return paletteCategory.editable && InAppPurchaseUtils.isGradientEditorAvailable(app)
+		return paletteCategory.editable
 	}
 
 	override fun isAutoScrollSupported(): Boolean {
@@ -117,14 +119,18 @@ open class GradientPaletteController(
 			menuItems.add(PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_rename)
 				.setIcon(getContentIcon(R.drawable.ic_action_edit_outlined))
-				.setOnClickListener { showRenameDialog(activity, item, nightMode) }
+				.setOnClickListener {
+					runIfPurchased { showRenameDialog(activity, item, nightMode) }
+				}
 				.create()
 			)
 
 			menuItems.add(PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_edit)
 				.setIcon(getContentIcon(R.drawable.ic_action_appearance_outlined))
-				.setOnClickListener { editGradient(item) }
+				.setOnClickListener {
+					runIfPurchased { editGradient(item) }
+				}
 				.showTopDivider(menuItems.isNotEmpty())
 				.create()
 			)
@@ -134,7 +140,9 @@ open class GradientPaletteController(
 		menuItems.add(PopUpMenuItem.Builder(activity)
 			.setTitleId(R.string.shared_string_duplicate)
 			.setIcon(getContentIcon(R.drawable.ic_action_copy))
-			.setOnClickListener { duplicateGradient(item) }
+			.setOnClickListener {
+				runIfPurchased { duplicateGradient(item) }
+			}
 			.create()
 		)
 
@@ -337,15 +345,9 @@ open class GradientPaletteController(
 		applyingEdits = false
 	}
 
-	private fun updateExternalDependencies() {
-		if (paletteCategory.isTerrainRelated()) {
-			TerrainMode.reloadAvailableModes(app)
-		}
-	}
-
 	// --- UI Interactions ---
 
-	override fun onAddButtonClick(activity: FragmentActivity) {
+	override fun onAddButtonClick(activity: FragmentActivity) = runIfPurchased {
 		selectFileType { fileType ->
 			showGradientEditor(
 				GradientDraft(
@@ -363,4 +365,21 @@ open class GradientPaletteController(
 	}
 
 	override fun shouldKeepAllItemsScreen() = renaming || applyingEdits
+
+	// --- Internal helper methods ---
+
+	private fun runIfPurchased(action: () -> Unit) {
+		val activity = getFragmentActivity()
+		if (InAppPurchaseUtils.isGradientEditorAvailable(app)) {
+			action()
+		} else if (activity != null) {
+			ChoosePlanFragment.showInstance(activity, OsmAndFeature.ADVANCED_WIDGETS)
+		}
+	}
+
+	private fun updateExternalDependencies() {
+		if (paletteCategory.isTerrainRelated()) {
+			TerrainMode.reloadAvailableModes(app)
+		}
+	}
 }
