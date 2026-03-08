@@ -1775,10 +1775,12 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	@Nullable
 	@Override
 	public MapPosition getMapDisplayPosition() {
-		if (infoExpanded) {
+		MapActivity mapActivity = getMapActivity();
+		boolean contextMenuVisible = mapActivity != null && mapActivity.getContextMenu().isVisible();
+		if (infoExpanded || contextMenuVisible) {
 			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_END;
 		}
-		return MapPosition.CENTER;
+		return null;
 	}
 
 	private void addToGpx(FinalSaveAction finalSaveAction) {

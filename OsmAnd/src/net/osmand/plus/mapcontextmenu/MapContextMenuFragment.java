@@ -2129,6 +2129,15 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 	}
 
 	private LatLon getAdjustedMarkerLocation(int y, LatLon reqMarkerLocation, boolean center, int zoom) {
+		// Skip manual padding calculations if the map focus is already shifted from the physical center.
+		// This prevents a double-shift and ensures the marker aligns perfectly with the visual center.
+		if (center) {
+			PointF ratio = displayPositionManager.getMapRatio();
+			if (Math.abs(ratio.x - 0.5f) > 0.01f || Math.abs(ratio.y - 0.5f) > 0.01f) {
+				return reqMarkerLocation;
+			}
+		}
+
 		double markerLat = reqMarkerLocation.getLatitude();
 		double markerLon = reqMarkerLocation.getLongitude();
 		RotatedTileBox box = map.getRotatedTileBox();
