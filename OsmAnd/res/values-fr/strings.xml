@@ -3659,7 +3659,7 @@
     <string name="live_update_delete_updates_msg">Supprimer les %s mises à jour temps réel \?</string>
     <string name="on_pause">En pause</string>
     <string name="app_restart_required">Un redémarrage de l\'application est nécessaire pour appliquer certains paramètres.</string>
-    <string name="routing_attr_height_obstacles_description">Le temps de trajet estimé tiendra compte du dénivelé. La préférence d’itinéraire peut aider à éviter les fortes pentes :</string>
+    <string name="routing_attr_height_obstacles_description">Le temps de trajet estimé tiendra compte du dénivelé. Cette préférence peut aider à éviter les fortes pentes :</string>
     <string name="map_widget_distance_by_tap">Distance par appui</string>
     <string name="latest_openstreetmap_update">Dernière mise à jour d\'OpenStreetMap disponible :</string>
     <string name="updated">Mis à jour : %s</string>
@@ -4196,7 +4196,7 @@
     <string name="turn_on_public_transport_description">Activer pour afficher les itinéraires de transports en commun sur la carte.</string>
     <string name="widget_secondary_desc_part_of">Fait partie de l\'extension %1$s.</string>
     <string name="av_notes_choose_action_widget_desc">Choisir l\'action.</string>
-    <string name="coordinates_widget_secondary_desc">Vous pouvez modifier le format des coordonnées en %1$s - %2$s - %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Vous pouvez modifier le format des coordonnées dans %1$s - %2$s - %3$s.</string>
     <string name="parking_widget_desc">Indique la distance séparant le centre de l\'écran de votre lieu de stationnement.</string>
     <string name="time_to_go_desc">Temps (en minutes ou en heures) nécessaire pour atteindre votre destination.</string>
     <string name="arrival_time_widget_desc">Heure d\'arrivée à destination.</string>
