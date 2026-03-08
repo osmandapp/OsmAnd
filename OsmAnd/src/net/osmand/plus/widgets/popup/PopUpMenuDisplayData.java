@@ -23,9 +23,15 @@ public class PopUpMenuDisplayData {
 	public CustomDropDown customDropDown = CustomDropDown.AUTO_DROP_DOWN;
 	public boolean showCompound = true;
 	public boolean limitHeight = false;
+	public Integer dropDownGravity;
+	public Integer horizontalOffset;
+	public Integer verticalOffset;
 
 	public boolean hasCustomizations() {
 		if (layoutId != DEFAULT_LAYOUT_ID) {
+			return true;
+		}
+		if (dropDownGravity != null || horizontalOffset != null || verticalOffset != null) {
 			return true;
 		}
 		for (PopUpMenuItem menuItem : menuItems) {

@@ -2,30 +2,34 @@ package net.osmand.plus.plugins.astronomy
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
+import android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.PopupWindow
-import android.widget.RadioButton
 import android.widget.TextView
+import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.search.SearchBar
+import com.google.android.material.search.SearchView
 import io.github.cosinekitty.astronomy.Observer
 import io.github.cosinekitty.astronomy.Time
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseFullScreenDialogFragment
+import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
 import net.osmand.plus.settings.enums.ThemeUsageContext
@@ -33,18 +37,38 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
+import net.osmand.plus.utils.InsetsUtils.InsetSide
 import net.osmand.plus.utils.UiUtilities
+import net.osmand.plus.widgets.popup.PopUpMenu
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
+import net.osmand.plus.widgets.popup.PopUpMenuItem
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
 import java.time.ZoneId
 import java.time.ZonedDateTime
+import java.time.temporal.ChronoUnit
 import java.util.Calendar
 import java.util.Locale
-import androidx.core.graphics.drawable.toDrawable
 
 class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private enum class ScreenMode {
 		EXPLORE,
 		FULL_SEARCH
+	}
+
+	private enum class FullSearchMode {
+		BROWSE,
+		INPUT
+	}
+
+	private enum class InputPresentation {
+		EXPLORE_BAR,
+		STANDALONE
+	}
+
+	private enum class HideTarget {
+		EXPLORE,
+		BROWSE
 	}
 
 	private enum class SortMode {
@@ -105,14 +129,21 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private val preparedEntries = mutableListOf<SearchEntry>()
 	private val visibleEntries = mutableListOf<SearchEntry>()
 
+	private lateinit var searchResultsPanel: View
 	private lateinit var searchRecycler: RecyclerView
 	private lateinit var exploreContainer: View
 	private lateinit var fullSearchContainer: View
-	private lateinit var exploreSearchCard: MaterialCardView
-	private lateinit var exploreCloseButton: View
-	private lateinit var exploreSearchIcon: View
-	private lateinit var fullSearchBackButton: View
-	private lateinit var fullSearchClearButton: View
+	private lateinit var fullSearchAppBar: AppBarLayout
+	private lateinit var fullSearchResultsHost: FrameLayout
+	private lateinit var exploreSearchInputResultsHost: FrameLayout
+	private lateinit var fullSearchInputResultsHost: FrameLayout
+	private lateinit var exploreSearchBar: SearchBar
+	private lateinit var fullSearchAnchorBar: SearchBar
+	private lateinit var fullSearchBrowseHeader: CollapsingToolbarLayout
+	private lateinit var exploreSearchInputView: SearchView
+	private lateinit var fullSearchInputView: SearchView
+	private lateinit var fullSearchBrowseToolbar: MaterialToolbar
+	private lateinit var exploreSearchEditText: EditText
 	private lateinit var fullSearchEditText: EditText
 	private lateinit var sortButton: View
 	private lateinit var filterButton: View
@@ -129,10 +160,12 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private lateinit var catalogsViewAllRow: View
 	private lateinit var catalogsViewAllCount: TextView
 
-	private var sortPopup: PopupWindow? = null
-	private var filterPopup: PopupWindow? = null
+	private var sortPopup: ListPopupWindow? = null
+	private var filterPopup: ListPopupWindow? = null
 
 	private var currentMode: ScreenMode = ScreenMode.EXPLORE
+	private var currentFullSearchMode: FullSearchMode = FullSearchMode.INPUT
+	private var currentInputPresentation: InputPresentation = InputPresentation.EXPLORE_BAR
 	private var currentSortMode: SortMode = SortMode.NAME_ASC
 	private var currentTypeFilter: TypeFilter = TypeFilter.SHOW_ALL
 	private var currentNakedEyeOnly = false
@@ -141,10 +174,14 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private var currentQuickPresetCatalogWid: String? = null
 	private var currentQuery: String = ""
 	private val recentChips = mutableListOf<String>()
+	private val widToDisplayName = mutableMapOf<String, String>()
 	private var observerForComputations = Observer(0.0, 0.0, 0.0)
 	private var nowForComputations: ZonedDateTime = ZonedDateTime.now()
 	private var duskForComputations: ZonedDateTime = ZonedDateTime.now()
 	private var dawnForComputations: ZonedDateTime = ZonedDateTime.now().plusHours(12)
+	private var suppressQueryDispatch = false
+	private var pendingSearchHideTarget: HideTarget? = null
+	private var previousSoftInputMode: Int? = null
 
 	private val dataProvider: AstroDataProvider by lazy {
 		PluginsHelper.requirePlugin(AstronomyPlugin::class.java).dataProvider
@@ -162,6 +199,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		private const val KEY_MODE = "mode"
 		private const val KEY_QUERY = "query"
 		private const val KEY_SORT = "sort"
+		private const val KEY_FULL_SEARCH_MODE = "full_search_mode"
 		private const val KEY_TYPE_FILTER = "type_filter"
 		private const val KEY_NAKED_EYE = "naked_eye"
 		private const val KEY_CATEGORIES = "categories"
@@ -169,6 +207,12 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		private const val KEY_QUICK_CATALOG = "quick_catalog"
 		private const val KEY_RECENT_CHIPS = "recent_chips"
 	}
+
+	override fun getThemeId(): Int = if (nightMode) R.style.OsmandMaterialDarkTheme else R.style.OsmandMaterialLightTheme
+
+	override fun getDialogThemeId(): Int = getThemeId()
+
+	override fun getStatusBarColorId(): Int = android.R.color.transparent
 
 	override fun getThemeUsageContext(): ThemeUsageContext = ThemeUsageContext.APP
 
@@ -190,6 +234,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
 		outState.putString(KEY_MODE, currentMode.name)
+		outState.putString(KEY_FULL_SEARCH_MODE, currentFullSearchMode.name)
 		outState.putString(KEY_QUERY, currentQuery)
 		outState.putString(KEY_SORT, currentSortMode.name)
 		outState.putString(KEY_TYPE_FILTER, currentTypeFilter.name)
@@ -206,23 +251,31 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+		AndroidUiHelper.setStatusBarContentColor(view, nightMode)
 		bindViews(view)
 		refreshPreparedEntries()
 		setupSearchRecycler()
 		setupExploreContent()
 		setupListeners()
+		applySearchSoftInputMode()
 		renderRecentChips()
-		applyMode(currentMode, requestKeyboard = currentMode == ScreenMode.FULL_SEARCH)
+		applyMode(
+			currentMode,
+			requestKeyboard = currentMode == ScreenMode.FULL_SEARCH && currentFullSearchMode == FullSearchMode.INPUT
+		)
 		applyFiltersAndSort(scrollToTop = false)
 	}
 
 	override fun onHiddenChanged(hidden: Boolean) {
 		super.onHiddenChanged(hidden)
 		if (hidden) {
+			restoreSearchSoftInputMode()
 			dialog?.hide()
 			return
 		}
+		applySearchSoftInputMode()
 		dialog?.show()
+		view?.let { AndroidUiHelper.setStatusBarContentColor(it, nightMode) }
 		refreshPreparedEntries()
 		setupMyDataRows()
 		setupCatalogRows()
@@ -231,40 +284,61 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	override fun onDestroyView() {
 		dismissPopups()
+		restoreSearchSoftInputMode()
 		super.onDestroyView()
 	}
 
 	override fun getInsetTargets(): InsetTargetsCollection {
 		val collection = super.getInsetTargets()
+		collection.removeType(InsetTarget.Type.ROOT_INSET)
 		collection.add(InsetTarget.createScrollable(R.id.search_results))
 		collection.add(InsetTarget.createScrollable(R.id.explore_container))
+		collection.add(
+			InsetTarget.createCustomBuilder(R.id.explore_container)
+				.portraitSides(InsetSide.TOP)
+				.landscapeSides(InsetSide.TOP, InsetSide.LEFT, InsetSide.RIGHT)
+				.applyPadding(true)
+				.build()
+		)
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.full_search_app_bar))
 		return collection
 	}
 
 	private fun bindViews(root: View) {
 		exploreContainer = root.findViewById(R.id.explore_container)
 		fullSearchContainer = root.findViewById(R.id.full_search_container)
-		exploreSearchCard = root.findViewById(R.id.explore_search_card)
-		exploreCloseButton = root.findViewById(R.id.explore_close_button)
-		exploreSearchIcon = root.findViewById(R.id.explore_search_icon)
-		fullSearchBackButton = root.findViewById(R.id.full_search_back_button)
-		fullSearchClearButton = root.findViewById(R.id.full_search_clear_button)
-		fullSearchEditText = root.findViewById(R.id.full_search_edit_text)
-		sortButton = root.findViewById(R.id.sort_button)
-		filterButton = root.findViewById(R.id.filter_button)
-		sortIcon = root.findViewById(R.id.sort_icon)
-		sortText = root.findViewById(R.id.sort_text)
-		filterText = root.findViewById(R.id.filter_text)
-		emptyStateContainer = root.findViewById(R.id.empty_state_container)
-		emptyStateResetButton = root.findViewById(R.id.empty_state_reset_button)
+		fullSearchAppBar = root.findViewById(R.id.full_search_app_bar)
+		fullSearchResultsHost = root.findViewById(R.id.full_search_results_host)
+		exploreSearchInputResultsHost = root.findViewById(R.id.explore_search_input_results_host)
+		fullSearchInputResultsHost = root.findViewById(R.id.full_search_input_results_host)
+		exploreSearchBar = root.findViewById(R.id.explore_search_bar)
+		fullSearchAnchorBar = root.findViewById(R.id.full_search_anchor_bar)
+		fullSearchBrowseHeader = root.findViewById(R.id.full_search_browse_header)
+		exploreSearchInputView = root.findViewById(R.id.explore_search_input_view)
+		exploreSearchInputView.setVisible(false)
+		fullSearchInputView = root.findViewById(R.id.full_search_input_view)
+		fullSearchInputView.setVisible(false)
+		fullSearchBrowseToolbar = root.findViewById(R.id.full_search_browse_toolbar)
+		exploreSearchEditText = exploreSearchInputView.editText
+		fullSearchEditText = fullSearchInputView.editText
 		recentChipsContainer = root.findViewById(R.id.recent_chips_container)
 		recentChipsScroll = root.findViewById(R.id.recent_chips_scroll)
-		searchRecycler = root.findViewById(R.id.search_results)
 		categoriesContainer = root.findViewById(R.id.categories_rows_container)
 		myDataContainer = root.findViewById(R.id.my_data_rows_container)
 		catalogsContainer = root.findViewById(R.id.catalogs_rows_container)
 		catalogsViewAllRow = root.findViewById(R.id.catalogs_view_all_row)
 		catalogsViewAllCount = root.findViewById(R.id.catalogs_view_all_count)
+
+		searchResultsPanel = themedInflater.inflate(R.layout.view_star_search_results_panel, fullSearchResultsHost, false)
+		sortButton = searchResultsPanel.findViewById(R.id.sort_button)
+		filterButton = searchResultsPanel.findViewById(R.id.filter_button)
+		sortIcon = searchResultsPanel.findViewById(R.id.sort_icon)
+		sortText = searchResultsPanel.findViewById(R.id.sort_text)
+		filterText = searchResultsPanel.findViewById(R.id.filter_text)
+		emptyStateContainer = searchResultsPanel.findViewById(R.id.empty_state_container)
+		emptyStateResetButton = searchResultsPanel.findViewById(R.id.empty_state_reset_button)
+		searchRecycler = searchResultsPanel.findViewById(R.id.search_results)
+		attachSearchResultsPanel(fullSearchResultsHost)
 	}
 
 	private fun setupSearchRecycler() {
@@ -274,7 +348,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		searchRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 			override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
 				if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-					AndroidUtils.hideSoftKeyboard(requireActivity(), fullSearchEditText)
+					AndroidUtils.hideSoftKeyboard(requireActivity(), getActiveSearchEditText())
 				}
 			}
 		})
@@ -287,30 +361,120 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	}
 
 	private fun setupListeners() {
-		exploreCloseButton.setOnClickListener { dismiss() }
-		exploreSearchCard.setOnClickListener { openFullSearch(QuickPresetType.NONE, null) }
-		exploreSearchIcon.setOnClickListener { openFullSearch(QuickPresetType.NONE, null) }
-		fullSearchBackButton.setOnClickListener { applyMode(ScreenMode.EXPLORE, requestKeyboard = false) }
-		fullSearchClearButton.setOnClickListener {
-			if (currentQuery.isNotEmpty()) {
-				fullSearchEditText.setText("")
+		bindExploreSearchBarListeners()
+		fullSearchBrowseToolbar.setNavigationOnClickListener { applyMode(ScreenMode.EXPLORE, requestKeyboard = false) }
+		fullSearchBrowseToolbar.setOnMenuItemClickListener { item ->
+			if (item.itemId == R.id.action_search) {
+				switchToInputMode()
+				true
+			} else {
+				false
+			}
+		}
+		exploreSearchInputView.addTransitionListener { _, _, newState ->
+			when (newState) {
+				SearchView.TransitionState.SHOWN -> handleSearchViewShown(InputPresentation.EXPLORE_BAR)
+				SearchView.TransitionState.HIDDEN -> handleSearchViewHidden(InputPresentation.EXPLORE_BAR)
+				else -> Unit
+			}
+		}
+		fullSearchInputView.addTransitionListener { _, _, newState ->
+			when (newState) {
+				SearchView.TransitionState.SHOWN -> handleSearchViewShown(InputPresentation.STANDALONE)
+				SearchView.TransitionState.HIDDEN -> handleSearchViewHidden(InputPresentation.STANDALONE)
+				else -> Unit
 			}
 		}
 		emptyStateResetButton.setOnClickListener { resetAllSearchParams() }
 		sortButton.setOnClickListener { showSortPopup(sortButton) }
 		filterButton.setOnClickListener { showFilterPopup(filterButton) }
 
-		fullSearchEditText.addTextChangedListener(object : TextWatcher {
+		val textWatcher = object : TextWatcher {
 			override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
 			override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
 			override fun afterTextChanged(s: Editable?) {
+				if (suppressQueryDispatch) {
+					return
+				}
 				val newQuery = s?.toString().orEmpty()
 				if (newQuery != currentQuery) {
 					currentQuery = newQuery
 					applyFiltersAndSort(scrollToTop = true)
 				}
 			}
-		})
+		}
+		exploreSearchEditText.addTextChangedListener(textWatcher)
+		fullSearchEditText.addTextChangedListener(textWatcher)
+	}
+
+	private fun updateBrowseToolbarAppearance() {
+		val iconColor = ColorUtilities.getDefaultIconColor(requireContext(), nightMode)
+		exploreSearchBar.navigationIcon?.setTint(iconColor)
+		exploreSearchBar.menu.findItem(R.id.action_search)?.icon?.setTint(iconColor)
+		fullSearchAnchorBar.navigationIcon?.setTint(iconColor)
+		fullSearchBrowseToolbar.navigationIcon?.setTint(iconColor)
+		fullSearchBrowseToolbar.menu.findItem(R.id.action_search)?.icon?.setTint(iconColor)
+	}
+
+	private fun attachSearchResultsPanel(host: FrameLayout) {
+		(searchResultsPanel.parent as? ViewGroup)?.removeView(searchResultsPanel)
+		host.addView(
+			searchResultsPanel,
+			FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+		)
+	}
+
+	private fun getSearchView(presentation: InputPresentation): SearchView {
+		return if (presentation == InputPresentation.EXPLORE_BAR) {
+			exploreSearchInputView
+		} else {
+			fullSearchInputView
+		}
+	}
+
+	private fun getSearchResultsHost(presentation: InputPresentation): FrameLayout {
+		return if (presentation == InputPresentation.EXPLORE_BAR) {
+			exploreSearchInputResultsHost
+		} else {
+			fullSearchInputResultsHost
+		}
+	}
+
+	private fun getSearchEditText(presentation: InputPresentation): EditText {
+		return if (presentation == InputPresentation.EXPLORE_BAR) {
+			exploreSearchEditText
+		} else {
+			fullSearchEditText
+		}
+	}
+
+	private fun getActiveSearchView(): SearchView? {
+		return when {
+			::exploreSearchInputView.isInitialized && exploreSearchInputView.isShowing -> exploreSearchInputView
+			::fullSearchInputView.isInitialized && fullSearchInputView.isShowing -> fullSearchInputView
+			else -> null
+		}
+	}
+
+	private fun getActiveSearchEditText(): EditText {
+		return getSearchEditText(currentInputPresentation)
+	}
+
+	private fun applySearchSoftInputMode() {
+		val window = activity?.window ?: return
+		if (previousSoftInputMode == null) {
+			previousSoftInputMode = window.attributes.softInputMode
+		}
+		window.setSoftInputMode(SOFT_INPUT_ADJUST_NOTHING)
+		exploreSearchInputView.updateSoftInputMode()
+		fullSearchInputView.updateSoftInputMode()
+	}
+
+	private fun restoreSearchSoftInputMode() {
+		val window = activity?.window ?: return
+		val softInputMode = previousSoftInputMode ?: return
+		window.setSoftInputMode(softInputMode)
+		previousSoftInputMode = null
 	}
 
 	private fun restoreState(savedInstanceState: Bundle?) {
@@ -319,6 +483,9 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		}
 		currentMode = savedInstanceState.getString(KEY_MODE)?.let { runCatching { ScreenMode.valueOf(it) }.getOrNull() }
 			?: ScreenMode.EXPLORE
+		currentFullSearchMode = savedInstanceState.getString(KEY_FULL_SEARCH_MODE)?.let {
+			runCatching { FullSearchMode.valueOf(it) }.getOrNull()
+		} ?: FullSearchMode.INPUT
 		currentQuery = savedInstanceState.getString(KEY_QUERY).orEmpty()
 		currentSortMode = savedInstanceState.getString(KEY_SORT)?.let { runCatching { SortMode.valueOf(it) }.getOrNull() }
 			?: SortMode.NAME_ASC
@@ -399,6 +566,19 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			showDivider = false
 		) {
 			openFullSearch(QuickPresetType.CATEGORY_DEEP_SKY, null)
+		}
+	}
+
+	private fun bindExploreSearchBarListeners() {
+		exploreSearchBar.setNavigationOnClickListener { dismiss() }
+		exploreSearchBar.setOnClickListener { openFullSearch(QuickPresetType.NONE, null) }
+		exploreSearchBar.setOnMenuItemClickListener { item ->
+			if (item.itemId == R.id.action_search) {
+				openFullSearch(QuickPresetType.NONE, null)
+				true
+			} else {
+				false
+			}
 		}
 	}
 
@@ -501,31 +681,109 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		currentQuickPresetType = quickPresetType
 		currentQuickPresetCatalogWid = catalogWid
 		currentQuery = ""
-		applyMode(ScreenMode.FULL_SEARCH, requestKeyboard = true)
-		fullSearchEditText.setText("")
+		currentFullSearchMode = if (isCategoryPreset() || quickPresetType == QuickPresetType.CATALOG_WID ||
+			quickPresetType == QuickPresetType.MY_DATA_FAVORITES ||
+			quickPresetType == QuickPresetType.MY_DATA_DAILY_PATH ||
+			quickPresetType == QuickPresetType.MY_DATA_DIRECTIONS) {
+			FullSearchMode.BROWSE
+		} else {
+			FullSearchMode.INPUT
+		}
+		applyMode(ScreenMode.FULL_SEARCH, requestKeyboard = currentFullSearchMode == FullSearchMode.INPUT)
 		applyFiltersAndSort(scrollToTop = true)
 	}
 
 	private fun applyMode(mode: ScreenMode, requestKeyboard: Boolean) {
-		currentMode = mode
-		exploreContainer.isVisible = mode == ScreenMode.EXPLORE
-		fullSearchContainer.isVisible = mode == ScreenMode.FULL_SEARCH
-		if (mode == ScreenMode.FULL_SEARCH) {
-			if (fullSearchEditText.text.toString() != currentQuery) {
-				fullSearchEditText.setText(currentQuery)
-				fullSearchEditText.setSelection(fullSearchEditText.length())
-			}
-			if (requestKeyboard) {
-				fullSearchEditText.requestFocus()
-				AndroidUtils.showSoftKeyboard(requireActivity(), fullSearchEditText)
-			}
+		updateBrowseToolbarAppearance()
+		if (mode == ScreenMode.EXPLORE) {
+			showExploreMode()
+		} else if (currentFullSearchMode == FullSearchMode.BROWSE) {
+			showBrowseMode()
 		} else {
-			AndroidUtils.hideSoftKeyboard(requireActivity(), fullSearchEditText)
-			dismissPopups()
+			val presentation = if (hasBrowseContext()) {
+				InputPresentation.STANDALONE
+			} else {
+				InputPresentation.EXPLORE_BAR
+			}
+			showInputMode(presentation, requestKeyboard)
 		}
 		updateSortControls()
 		updateFilterControls()
 		updateEmptyStateVisibility()
+	}
+
+	private fun renderBrowseHeader() {
+		fullSearchBrowseHeader.title = getBrowseTitle()
+	}
+
+	private fun showExploreMode() {
+		currentMode = ScreenMode.EXPLORE
+		currentFullSearchMode = FullSearchMode.INPUT
+		dismissPopups()
+		getActiveSearchView()?.let { searchView ->
+			pendingSearchHideTarget = HideTarget.EXPLORE
+			searchView.hide()
+			return
+		}
+		attachSearchResultsPanel(fullSearchResultsHost)
+		fullSearchAnchorBar.isVisible = false
+		fullSearchBrowseHeader.isVisible = true
+		exploreSearchBar.setText("")
+		exploreContainer.isVisible = true
+		fullSearchContainer.isVisible = false
+		AndroidUtils.hideSoftKeyboard(requireActivity(), getActiveSearchEditText())
+	}
+
+	private fun showBrowseMode() {
+		currentMode = ScreenMode.FULL_SEARCH
+		currentFullSearchMode = FullSearchMode.BROWSE
+		dismissPopups()
+		getActiveSearchView()?.let { searchView ->
+			pendingSearchHideTarget = HideTarget.BROWSE
+			searchView.hide()
+			return
+		}
+		attachSearchResultsPanel(fullSearchResultsHost)
+		fullSearchAnchorBar.isVisible = false
+		renderBrowseHeader()
+		updateInfoCard()
+		fullSearchBrowseHeader.isVisible = true
+		exploreContainer.isVisible = false
+		fullSearchContainer.isVisible = true
+		fullSearchAppBar.setExpanded(true, false)
+		AndroidUtils.hideSoftKeyboard(requireActivity(), getActiveSearchEditText())
+	}
+
+	private fun switchToInputMode() {
+		showInputMode(InputPresentation.STANDALONE, requestKeyboard = true)
+	}
+
+	private fun showInputMode(presentation: InputPresentation, requestKeyboard: Boolean) {
+		currentMode = ScreenMode.FULL_SEARCH
+		currentFullSearchMode = FullSearchMode.INPUT
+		currentInputPresentation = presentation
+		pendingSearchHideTarget = null
+		dismissPopups()
+		attachSearchResultsPanel(getSearchResultsHost(presentation))
+		configureSearchView(presentation, requestKeyboard)
+		syncSearchQuery()
+		updateInfoCard()
+		if (presentation == InputPresentation.EXPLORE_BAR) {
+			fullSearchInputView.setVisible(false)
+			fullSearchAnchorBar.isVisible = false
+		} else {
+			exploreSearchInputView.setVisible(false)
+			fullSearchAnchorBar.isVisible = true
+		}
+		fullSearchBrowseHeader.isVisible = presentation == InputPresentation.STANDALONE
+		exploreContainer.isVisible = presentation == InputPresentation.EXPLORE_BAR
+		fullSearchContainer.isVisible = presentation == InputPresentation.STANDALONE
+		val searchView = getSearchView(presentation)
+		if (!searchView.isShowing) {
+			searchView.show()
+		} else {
+			handleSearchViewShown(presentation)
+		}
 	}
 
 	private fun handleBackPressedInternal(): Boolean {
@@ -541,15 +799,118 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			return true
 		}
 		return if (currentMode == ScreenMode.FULL_SEARCH) {
-			applyMode(ScreenMode.EXPLORE, requestKeyboard = false)
+			if (currentFullSearchMode == FullSearchMode.INPUT) {
+				pendingSearchHideTarget = if (hasBrowseContext()) HideTarget.BROWSE else HideTarget.EXPLORE
+				getSearchView(currentInputPresentation).hide()
+			} else {
+				showExploreMode()
+			}
 			true
 		} else {
 			false
 		}
 	}
 
+	private fun configureSearchView(presentation: InputPresentation, requestKeyboard: Boolean) {
+		val searchView = getSearchView(presentation)
+		searchView.setupWithSearchBar(
+			if (presentation == InputPresentation.EXPLORE_BAR) exploreSearchBar else fullSearchAnchorBar
+		)
+		searchView.setMenuItemsAnimated(false)
+		searchView.toolbar.menu.clear()
+		searchView.inflateMenu(R.menu.menu_star_search_input)
+		val iconColor = ColorUtilities.getDefaultIconColor(requireContext(), nightMode)
+		searchView.toolbar.navigationIcon?.mutate()?.setTint(iconColor)
+		searchView.toolbar.menu.findItem(R.id.action_close_search)?.icon?.mutate()?.setTint(iconColor)
+		searchView.setOnMenuItemClickListener { item ->
+			if (item.itemId == R.id.action_close_search) {
+				pendingSearchHideTarget = if (hasBrowseContext()) HideTarget.BROWSE else HideTarget.EXPLORE
+				searchView.hide()
+				true
+			} else {
+				false
+			}
+		}
+		if (presentation == InputPresentation.EXPLORE_BAR) {
+			bindExploreSearchBarListeners()
+		} else {
+			fullSearchAnchorBar.setText(currentQuery)
+		}
+		searchView.setAutoShowKeyboard(requestKeyboard)
+		searchView.updateSoftInputMode()
+	}
+
+	private fun handleSearchViewShown(presentation: InputPresentation) {
+		attachSearchResultsPanel(getSearchResultsHost(presentation))
+		if (presentation == InputPresentation.EXPLORE_BAR) {
+			exploreContainer.isVisible = false
+			fullSearchAnchorBar.isVisible = false
+			fullSearchContainer.isVisible = false
+		} else {
+			fullSearchAnchorBar.isVisible = true
+			fullSearchContainer.isVisible = true
+		}
+		val editText = getSearchEditText(presentation)
+		if (editText.text?.length ?: 0 > 0) {
+			editText.setSelection(editText.length())
+		}
+	}
+
+	private fun handleSearchViewHidden(presentation: InputPresentation) {
+		if (presentation != currentInputPresentation) {
+			return
+		}
+		attachSearchResultsPanel(fullSearchResultsHost)
+		AndroidUtils.hideSoftKeyboard(requireActivity(), getSearchEditText(presentation))
+		when (pendingSearchHideTarget ?: if (hasBrowseContext()) HideTarget.BROWSE else HideTarget.EXPLORE) {
+			HideTarget.BROWSE -> {
+				currentMode = ScreenMode.FULL_SEARCH
+				currentFullSearchMode = FullSearchMode.BROWSE
+				fullSearchAnchorBar.isVisible = false
+				renderBrowseHeader()
+				updateInfoCard()
+				fullSearchBrowseHeader.isVisible = true
+				exploreContainer.isVisible = false
+				fullSearchContainer.isVisible = true
+				fullSearchAppBar.setExpanded(true, false)
+			}
+			HideTarget.EXPLORE -> {
+				currentMode = ScreenMode.EXPLORE
+				currentFullSearchMode = FullSearchMode.INPUT
+				fullSearchAnchorBar.isVisible = false
+				fullSearchBrowseHeader.isVisible = true
+				exploreSearchBar.setText("")
+				exploreContainer.isVisible = true
+				fullSearchContainer.isVisible = false
+			}
+		}
+		pendingSearchHideTarget = null
+		updateSortControls()
+		updateFilterControls()
+		updateEmptyStateVisibility()
+	}
+
+	private fun syncSearchQuery() {
+		suppressQueryDispatch = true
+		if (exploreSearchEditText.text.toString() != currentQuery) {
+			exploreSearchEditText.setText(currentQuery)
+		}
+		if (fullSearchEditText.text.toString() != currentQuery) {
+			fullSearchEditText.setText(currentQuery)
+		}
+		fullSearchAnchorBar.setText(currentQuery)
+		exploreSearchInputView.setText(currentQuery)
+		fullSearchInputView.setText(currentQuery)
+		val editText = getSearchEditText(currentInputPresentation)
+		if ((editText.text?.length ?: 0) > 0) {
+			editText.setSelection(editText.length())
+		}
+		suppressQueryDispatch = false
+	}
+
 	private fun refreshPreparedEntries() {
 		preparedEntries.clear()
+		widToDisplayName.clear()
 		val parent = parentFragment as? StarMapFragment
 		val objects = parent?.getSearchableObjects().orEmpty()
 
@@ -574,6 +935,9 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		dawnForComputations = dawn
 
 		for (obj in objects) {
+			if (obj.wid.isNotEmpty()) {
+				widToDisplayName[obj.wid] = obj.localizedName ?: obj.name
+			}
 			preparedEntries.add(
 				SearchEntry(
 					objectRef = obj,
@@ -599,6 +963,81 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		}
 	}
 
+	private fun isCategoryPreset(): Boolean {
+		return categoryPresetFromQuickPreset() != null
+	}
+
+	private fun hasBrowseContext(): Boolean {
+		return currentQuickPresetType != QuickPresetType.NONE
+	}
+
+	private fun categoryPresetFromQuickPreset(): CategoryFilter? {
+		return when (currentQuickPresetType) {
+			QuickPresetType.CATEGORY_SOLAR_SYSTEM -> CategoryFilter.SOLAR_SYSTEM
+			QuickPresetType.CATEGORY_CONSTELLATIONS -> CategoryFilter.CONSTELLATIONS
+			QuickPresetType.CATEGORY_STARS -> CategoryFilter.STARS
+			QuickPresetType.CATEGORY_NEBULAS -> CategoryFilter.NEBULAS
+			QuickPresetType.CATEGORY_STAR_CLUSTERS -> CategoryFilter.STAR_CLUSTERS
+			QuickPresetType.CATEGORY_DEEP_SKY -> CategoryFilter.DEEP_SKY
+			else -> null
+		}
+	}
+
+	private fun shouldShowInfoHeader(): Boolean {
+		return currentMode == ScreenMode.FULL_SEARCH &&
+				currentFullSearchMode == FullSearchMode.BROWSE &&
+				categoryPresetFromQuickPreset() != null
+	}
+
+	private fun getCategoryIconRes(category: CategoryFilter): Int {
+		return when (category) {
+			CategoryFilter.SOLAR_SYSTEM -> R.drawable.ic_action_planet_outlined
+			CategoryFilter.CONSTELLATIONS -> R.drawable.ic_action_constellations
+			CategoryFilter.STARS -> R.drawable.ic_action_stars
+			CategoryFilter.NEBULAS -> R.drawable.ic_action_nebulas
+			CategoryFilter.STAR_CLUSTERS -> R.drawable.ic_action_star_clusters
+			CategoryFilter.DEEP_SKY -> R.drawable.ic_action_galaxy
+			CategoryFilter.ALL -> R.drawable.ic_action_search_dark
+		}
+	}
+
+	private fun getCategoryInfoTextRes(category: CategoryFilter): Int {
+		return when (category) {
+			CategoryFilter.SOLAR_SYSTEM -> R.string.astro_search_info_solar_system
+			CategoryFilter.CONSTELLATIONS -> R.string.astro_search_info_constellations
+			CategoryFilter.STARS -> R.string.astro_search_info_stars
+			CategoryFilter.NEBULAS -> R.string.astro_search_info_nebulas
+			CategoryFilter.STAR_CLUSTERS -> R.string.astro_search_info_star_clusters
+			CategoryFilter.DEEP_SKY -> R.string.astro_search_info_deep_sky
+			CategoryFilter.ALL -> R.string.astro_search_info_solar_system
+		}
+	}
+
+	private fun getBrowseTitle(): String {
+		return when (currentQuickPresetType) {
+			QuickPresetType.CATEGORY_SOLAR_SYSTEM -> getString(R.string.astro_solar_system)
+			QuickPresetType.CATEGORY_CONSTELLATIONS -> getString(R.string.astro_constellations)
+			QuickPresetType.CATEGORY_STARS -> getString(R.string.astro_stars)
+			QuickPresetType.CATEGORY_NEBULAS -> getString(R.string.astro_nebulas)
+			QuickPresetType.CATEGORY_STAR_CLUSTERS -> getString(R.string.astro_star_clusters)
+			QuickPresetType.CATEGORY_DEEP_SKY -> getString(R.string.astro_deep_sky)
+			QuickPresetType.MY_DATA_FAVORITES -> getString(R.string.favorites_item)
+			QuickPresetType.MY_DATA_DAILY_PATH -> getString(R.string.astro_daily_path)
+			QuickPresetType.MY_DATA_DIRECTIONS -> getString(R.string.astro_directions)
+			QuickPresetType.CATALOG_WID -> {
+				val catalog = dataProvider.getCatalogs(requireContext()).firstOrNull { it.wid == currentQuickPresetCatalogWid }
+				catalog?.name ?: getString(R.string.shared_string_search)
+			}
+			QuickPresetType.NONE -> getString(R.string.shared_string_search)
+		}
+	}
+
+	private fun updateInfoCard() {
+		if (::searchAdapter.isInitialized) {
+			searchAdapter.notifyDataSetChanged()
+		}
+	}
+
 	@SuppressLint("NotifyDataSetChanged")
 	private fun applyFiltersAndSort(scrollToTop: Boolean) {
 		visibleEntries.clear()
@@ -621,6 +1060,9 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		}
 		if (scrollToTop && ::searchRecycler.isInitialized && visibleEntries.isNotEmpty()) {
 			searchRecycler.scrollToPosition(0)
+		}
+		if (scrollToTop && currentMode == ScreenMode.FULL_SEARCH && currentFullSearchMode == FullSearchMode.BROWSE) {
+			fullSearchAppBar.setExpanded(true, false)
 		}
 		updateSortControls()
 		updateFilterControls()
@@ -727,6 +1169,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun calculateFilterCount(): Int {
 		var count = 0
+		if (currentQuickPresetType != QuickPresetType.NONE) count++
 		if (currentTypeFilter != TypeFilter.SHOW_ALL) count++
 		if (currentNakedEyeOnly) count++
 		val specificCategories = selectedCategories.filter { it != CategoryFilter.ALL }
@@ -744,12 +1187,14 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		currentSortMode = SortMode.NAME_ASC
 		currentTypeFilter = TypeFilter.SHOW_ALL
 		currentNakedEyeOnly = false
+		currentFullSearchMode = FullSearchMode.INPUT
 		selectedCategories.clear()
 		selectedCategories.add(CategoryFilter.ALL)
 		currentQuickPresetType = QuickPresetType.NONE
 		currentQuickPresetCatalogWid = null
-		if (::fullSearchEditText.isInitialized) {
-			fullSearchEditText.setText("")
+		syncSearchQuery()
+		if (currentMode == ScreenMode.FULL_SEARCH) {
+			showInputMode(InputPresentation.STANDALONE, requestKeyboard = false)
 		}
 		applyFiltersAndSort(scrollToTop = true)
 	}
@@ -797,10 +1242,9 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			chipCard.setOnClickListener {
 				currentQuickPresetType = QuickPresetType.NONE
 				currentQuickPresetCatalogWid = null
+				currentFullSearchMode = FullSearchMode.INPUT
 				currentQuery = chipTitle
-				applyMode(ScreenMode.FULL_SEARCH, requestKeyboard = true)
-				fullSearchEditText.setText(chipTitle)
-				fullSearchEditText.setSelection(chipTitle.length)
+				showInputMode(InputPresentation.EXPLORE_BAR, requestKeyboard = true)
 				applyFiltersAndSort(scrollToTop = true)
 			}
 			val lp = LinearLayout.LayoutParams(
@@ -814,170 +1258,199 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun showSortPopup(anchor: View) {
 		dismissSortPopup()
-		val popupView = themedInflater.inflate(R.layout.popup_star_search_sort, null)
 		val activeColor = ColorUtilities.getActiveColor(app, nightMode)
+		val secondaryTextColor = ColorUtilities.getSecondaryTextColor(requireContext(), nightMode)
 
-		val options = listOf(
-			Triple(R.id.row_sort_name_asc, R.id.radio_sort_name_asc, SortMode.NAME_ASC),
-			Triple(R.id.row_sort_name_desc, R.id.radio_sort_name_desc, SortMode.NAME_DESC),
-			Triple(R.id.row_sort_brightest, R.id.radio_sort_brightest, SortMode.BRIGHTEST_FIRST),
-			Triple(R.id.row_sort_faintest, R.id.radio_sort_faintest, SortMode.FAINTEST_FIRST),
-			Triple(R.id.row_sort_rises, R.id.radio_sort_rises, SortMode.RISES_SOONEST),
-			Triple(R.id.row_sort_sets, R.id.radio_sort_sets, SortMode.SETS_SOONEST)
-		)
-
-		options.forEach { (_, radioId, mode) ->
-			val radio = popupView.findViewById<RadioButton>(radioId)
-			UiUtilities.setupCompoundButton(nightMode, activeColor, radio)
-			radio.isChecked = currentSortMode == mode
-		}
-
-		options.forEach { (rowId, _, mode) ->
-			popupView.findViewById<View>(rowId).setOnClickListener {
-				currentSortMode = mode
+		val items = listOf(
+			createPopupHeaderItem(getString(R.string.sort_by), secondaryTextColor),
+			createRadioPopupItem(getString(R.string.sort_name_ascending), currentSortMode == SortMode.NAME_ASC, activeColor) {
+				currentSortMode = SortMode.NAME_ASC
 				updateSortControls()
 				applyFiltersAndSort(scrollToTop = true)
-				dismissSortPopup()
+			},
+			createRadioPopupItem(getString(R.string.sort_name_descending), currentSortMode == SortMode.NAME_DESC, activeColor) {
+				currentSortMode = SortMode.NAME_DESC
+				updateSortControls()
+				applyFiltersAndSort(scrollToTop = true)
+			},
+			createRadioPopupItem(
+				getString(R.string.astro_sort_brightest_first),
+				currentSortMode == SortMode.BRIGHTEST_FIRST,
+				activeColor,
+				showTopDivider = true
+			) {
+				currentSortMode = SortMode.BRIGHTEST_FIRST
+				updateSortControls()
+				applyFiltersAndSort(scrollToTop = true)
+			},
+			createRadioPopupItem(getString(R.string.astro_sort_faintest_first), currentSortMode == SortMode.FAINTEST_FIRST, activeColor) {
+				currentSortMode = SortMode.FAINTEST_FIRST
+				updateSortControls()
+				applyFiltersAndSort(scrollToTop = true)
+			},
+			createRadioPopupItem(
+				getString(R.string.astro_sort_rises_soonest),
+				currentSortMode == SortMode.RISES_SOONEST,
+				activeColor,
+				showTopDivider = true
+			) {
+				currentSortMode = SortMode.RISES_SOONEST
+				updateSortControls()
+				applyFiltersAndSort(scrollToTop = true)
+			},
+			createRadioPopupItem(getString(R.string.astro_sort_sets_soonest), currentSortMode == SortMode.SETS_SOONEST, activeColor) {
+				currentSortMode = SortMode.SETS_SOONEST
+				updateSortControls()
+				applyFiltersAndSort(scrollToTop = true)
 			}
-		}
-
-		sortPopup = createPopup(popupView)
-		sortPopup?.showAsDropDown(anchor)
+		)
+		sortPopup = PopUpMenu.showAndGet(
+			createPopupDisplayData(
+				anchor = anchor,
+				items = items,
+				alignEnd = false,
+				limitHeight = false,
+				layoutId = R.layout.popup_star_search_sort_menu_item
+			)
+		)
 	}
 
 	private fun showFilterPopup(anchor: View) {
 		dismissFilterPopup()
-		val popupView = themedInflater.inflate(R.layout.popup_star_search_filter, null)
 		val activeColor = ColorUtilities.getActiveColor(app, nightMode)
-
-		val typeOptions = listOf(
-			Triple(R.id.row_filter_type_all, R.id.radio_filter_type_all, TypeFilter.SHOW_ALL),
-			Triple(R.id.row_filter_type_now, R.id.radio_filter_type_now, TypeFilter.VISIBLE_NOW),
-			Triple(R.id.row_filter_type_tonight, R.id.radio_filter_type_tonight, TypeFilter.VISIBLE_TONIGHT)
-		)
-		typeOptions.forEach { (_, radioId, type) ->
-			val radio = popupView.findViewById<RadioButton>(radioId)
-			UiUtilities.setupCompoundButton(nightMode, activeColor, radio)
-			radio.isChecked = currentTypeFilter == type
-		}
-		typeOptions.forEach { (rowId, _, type) ->
-			popupView.findViewById<View>(rowId).setOnClickListener {
-				currentTypeFilter = type
+		val secondaryTextColor = ColorUtilities.getSecondaryTextColor(requireContext(), nightMode)
+		val items = listOf(
+			createPopupHeaderItem(getString(R.string.shared_string_type), secondaryTextColor),
+			createRadioPopupItem(getString(R.string.astro_filter_show_all), currentTypeFilter == TypeFilter.SHOW_ALL, activeColor,) {
+				currentTypeFilter = TypeFilter.SHOW_ALL
 				applyFiltersAndSort(scrollToTop = true)
-				showFilterPopup(anchor)
+			},
+			createRadioPopupItem(getString(R.string.astro_filter_visible_now), currentTypeFilter == TypeFilter.VISIBLE_NOW, activeColor) {
+				currentTypeFilter = TypeFilter.VISIBLE_NOW
+				applyFiltersAndSort(scrollToTop = true)
+			},
+			createRadioPopupItem(getString(R.string.astro_filter_visible_tonight), currentTypeFilter == TypeFilter.VISIBLE_TONIGHT, activeColor) {
+				currentTypeFilter = TypeFilter.VISIBLE_TONIGHT
+				applyFiltersAndSort(scrollToTop = true)
+			},
+			createCheckPopupItem(getString(R.string.astro_filter_naked_eye), currentNakedEyeOnly, activeColor, showTopDivider = true) {
+				currentNakedEyeOnly = !currentNakedEyeOnly
+				applyFiltersAndSort(scrollToTop = true)
+			},
+			createPopupHeaderItem(getString(R.string.favourites_edit_dialog_category), secondaryTextColor, showTopDivider = true),
+			createCheckPopupItem(getString(R.string.shared_string_all), selectedCategories.contains(CategoryFilter.ALL), activeColor) {
+				toggleCategoryFilter(CategoryFilter.ALL)
+				applyFiltersAndSort(scrollToTop = true)
+			},
+			createCheckPopupItem(getString(R.string.astro_solar_system), selectedCategories.contains(CategoryFilter.SOLAR_SYSTEM), activeColor) {
+				toggleCategoryFilter(CategoryFilter.SOLAR_SYSTEM)
+				applyFiltersAndSort(scrollToTop = true)
+			},
+			createCheckPopupItem(getString(R.string.astro_constellations), selectedCategories.contains(CategoryFilter.CONSTELLATIONS), activeColor) {
+				toggleCategoryFilter(CategoryFilter.CONSTELLATIONS)
+				applyFiltersAndSort(scrollToTop = true)
+			},
+			createCheckPopupItem(getString(R.string.astro_stars), selectedCategories.contains(CategoryFilter.STARS), activeColor) {
+				toggleCategoryFilter(CategoryFilter.STARS)
+				applyFiltersAndSort(scrollToTop = true)
+			},
+			createCheckPopupItem(getString(R.string.astro_nebulas), selectedCategories.contains(CategoryFilter.NEBULAS), activeColor) {
+				toggleCategoryFilter(CategoryFilter.NEBULAS)
+				applyFiltersAndSort(scrollToTop = true)
+			},
+			createCheckPopupItem(getString(R.string.astro_star_clusters), selectedCategories.contains(CategoryFilter.STAR_CLUSTERS), activeColor) {
+				toggleCategoryFilter(CategoryFilter.STAR_CLUSTERS)
+				applyFiltersAndSort(scrollToTop = true)
+			},
+			createCheckPopupItem(getString(R.string.astro_deep_sky), selectedCategories.contains(CategoryFilter.DEEP_SKY), activeColor) {
+				toggleCategoryFilter(CategoryFilter.DEEP_SKY)
+				applyFiltersAndSort(scrollToTop = true)
 			}
-		}
-
-		val nakedEyeCheck = popupView.findViewById<CheckBox>(R.id.checkbox_filter_naked_eye)
-		UiUtilities.setupCompoundButton(nightMode, activeColor, nakedEyeCheck)
-		nakedEyeCheck.isChecked = currentNakedEyeOnly
-		popupView.findViewById<View>(R.id.row_filter_naked_eye).setOnClickListener {
-			currentNakedEyeOnly = !currentNakedEyeOnly
-			applyFiltersAndSort(scrollToTop = true)
-			showFilterPopup(anchor)
-		}
-
-		setupCategoryCheckbox(
-			popupView,
-			R.id.row_filter_category_all,
-			R.id.checkbox_filter_category_all,
-			CategoryFilter.ALL,
-			activeColor,
-			anchor
 		)
-		setupCategoryCheckbox(
-			popupView,
-			R.id.row_filter_category_solar,
-			R.id.checkbox_filter_category_solar,
-			CategoryFilter.SOLAR_SYSTEM,
-			activeColor,
-			anchor
-		)
-		setupCategoryCheckbox(
-			popupView,
-			R.id.row_filter_category_constellations,
-			R.id.checkbox_filter_category_constellations,
-			CategoryFilter.CONSTELLATIONS,
-			activeColor,
-			anchor
-		)
-		setupCategoryCheckbox(
-			popupView,
-			R.id.row_filter_category_stars,
-			R.id.checkbox_filter_category_stars,
-			CategoryFilter.STARS,
-			activeColor,
-			anchor
-		)
-		setupCategoryCheckbox(
-			popupView,
-			R.id.row_filter_category_nebulas,
-			R.id.checkbox_filter_category_nebulas,
-			CategoryFilter.NEBULAS,
-			activeColor,
-			anchor
-		)
-		setupCategoryCheckbox(
-			popupView,
-			R.id.row_filter_category_clusters,
-			R.id.checkbox_filter_category_clusters,
-			CategoryFilter.STAR_CLUSTERS,
-			activeColor,
-			anchor
-		)
-		setupCategoryCheckbox(
-			popupView,
-			R.id.row_filter_category_deep_sky,
-			R.id.checkbox_filter_category_deep_sky,
-			CategoryFilter.DEEP_SKY,
-			activeColor,
-			anchor
-		)
-
-		filterPopup = createPopup(popupView)
-		filterPopup?.showAsDropDown(anchor)
+		filterPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items, alignEnd = true, limitHeight = true))
 	}
 
-	private fun setupCategoryCheckbox(
-		popupView: View,
-		rowId: Int,
-		checkId: Int,
-		categoryFilter: CategoryFilter,
+	private fun toggleCategoryFilter(categoryFilter: CategoryFilter) {
+		if (selectedCategories.contains(categoryFilter)) {
+			selectedCategories.remove(categoryFilter)
+		} else {
+			selectedCategories.add(categoryFilter)
+		}
+		if (selectedCategories.isEmpty()) {
+			selectedCategories.add(CategoryFilter.ALL)
+		}
+	}
+
+	private fun createPopupDisplayData(
+		anchor: View,
+		items: List<PopUpMenuItem>,
+		alignEnd: Boolean,
+		limitHeight: Boolean,
+		layoutId: Int = R.layout.popup_star_search_menu_item
+	): PopUpMenuDisplayData {
+		val contentPaddingHalf = resources.getDimensionPixelSize(R.dimen.content_padding_half)
+		return PopUpMenuDisplayData().apply {
+			anchorView = anchor
+			this.layoutId = layoutId
+			nightMode = this@StarMapSearchDialogFragment.nightMode
+			widthMode = PopUpMenuWidthMode.STANDARD
+			showCompound = true
+			this.limitHeight = limitHeight
+			dropDownGravity = if (alignEnd) Gravity.END or Gravity.BOTTOM else Gravity.START or Gravity.BOTTOM
+			horizontalOffset = if (alignEnd) -contentPaddingHalf else contentPaddingHalf
+			verticalOffset = -anchor.height + contentPaddingHalf
+			menuItems = items
+		}
+	}
+
+	private fun createPopupHeaderItem(
+		title: CharSequence,
+		titleColor: Int,
+		showTopDivider: Boolean = false
+	): PopUpMenuItem {
+		return PopUpMenuItem.Builder(requireContext())
+			.setTitle(title)
+			.setTitleColor(titleColor)
+			.setTitleBold(true)
+			.setDismissOnClick(true)
+			.showTopDivider(showTopDivider)
+			.create()
+	}
+
+	private fun createRadioPopupItem(
+		title: CharSequence,
+		selected: Boolean,
 		activeColor: Int,
-		anchor: View
-	) {
-		val checkBox = popupView.findViewById<CheckBox>(checkId)
-		UiUtilities.setupCompoundButton(nightMode, activeColor, checkBox)
-		checkBox.isChecked = selectedCategories.contains(categoryFilter)
-
-		popupView.findViewById<View>(rowId).setOnClickListener {
-			if (selectedCategories.contains(categoryFilter)) {
-				selectedCategories.remove(categoryFilter)
-			} else {
-				selectedCategories.add(categoryFilter)
-			}
-			if (selectedCategories.isEmpty()) {
-				selectedCategories.add(CategoryFilter.ALL)
-			}
-			applyFiltersAndSort(scrollToTop = true)
-			showFilterPopup(anchor)
-		}
+		showTopDivider: Boolean = false,
+		dismissOnClick: Boolean = true,
+		onClick: () -> Unit
+	): PopUpMenuItem {
+		return PopUpMenuItem.Builder(requireContext())
+			.setTitle(title)
+			.showCompoundBtn(activeColor, PopUpMenuItem.CompoundButtonType.RADIO)
+			.setSelected(selected)
+			.showTopDivider(showTopDivider)
+			.setDismissOnClick(dismissOnClick)
+			.setOnClickListener { onClick() }
+			.create()
 	}
 
-	private fun createPopup(contentView: View): PopupWindow {
-		val popup = PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true)
-		popup.isOutsideTouchable = true
-		popup.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
-		popup.elevation = resources.getDimension(R.dimen.content_padding_small)
-		contentView.setOnTouchListener { _, event ->
-			if (event.action == MotionEvent.ACTION_OUTSIDE) {
-				popup.dismiss()
-				true
-			} else {
-				false
-			}
-		}
-		return popup
+	private fun createCheckPopupItem(
+		title: CharSequence,
+		selected: Boolean,
+		activeColor: Int,
+		showTopDivider: Boolean = false,
+		dismissOnClick: Boolean = true,
+		onClick: () -> Unit
+	): PopUpMenuItem {
+		return PopUpMenuItem.Builder(requireContext())
+			.setTitle(title)
+			.showCompoundBtn(activeColor, PopUpMenuItem.CompoundButtonType.CHECKBOX)
+			.setSelected(selected)
+			.showTopDivider(showTopDivider)
+			.setDismissOnClick(dismissOnClick)
+			.setOnClickListener { onClick() }
+			.create()
 	}
 
 	private fun dismissSortPopup() {
@@ -996,30 +1469,76 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	}
 
 	inner class SearchAdapter : RecyclerView.Adapter<SearchViewHolder>() {
+		private val viewTypeInfo = 0
+		private val viewTypeItem = 1
+
+		override fun getItemViewType(position: Int): Int {
+			return if (shouldShowInfoHeader() && position == 0) viewTypeInfo else viewTypeItem
+		}
+
 		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-			val view = LayoutInflater.from(parent.context).inflate(R.layout.item_star_search, parent, false)
+			val layoutId = if (viewType == viewTypeInfo) {
+				R.layout.item_star_search_info
+			} else {
+				R.layout.item_star_search
+			}
+			val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
 			return SearchViewHolder(view)
 		}
 
 		override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-			holder.bind(visibleEntries[position])
+			if (getItemViewType(position) == viewTypeInfo) {
+				holder.bindInfo()
+			} else {
+				holder.bindResult(getEntryForPosition(position))
+			}
 		}
 
-		override fun getItemCount(): Int = visibleEntries.size
+		override fun getItemCount(): Int = visibleEntries.size + if (shouldShowInfoHeader()) 1 else 0
+
+		private fun getEntryForPosition(position: Int): SearchEntry {
+			val entryIndex = if (shouldShowInfoHeader()) position - 1 else position
+			return visibleEntries[entryIndex]
+		}
 	}
 
 	inner class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-		private val nameText = view.findViewById<TextView>(R.id.object_name)
-		private val infoText = view.findViewById<TextView>(R.id.object_info)
-		private val iconView = view.findViewById<ImageView>(R.id.object_icon)
+		private val nameText: TextView? = view.findViewById(R.id.object_name)
+		private val infoText: TextView? = view.findViewById(R.id.object_info)
+		private val iconView: ImageView? = view.findViewById(R.id.object_icon)
+		private val headerInfoIcon: ImageView? = view.findViewById(R.id.info_icon)
+		private val headerInfoText: TextView? = view.findViewById(R.id.info_text)
 
-		fun bind(entry: SearchEntry) {
+		fun bindInfo() {
+			val presetCategory = categoryPresetFromQuickPreset() ?: return
+			headerInfoIcon?.setImageDrawable(
+				app.uiUtilities.getIcon(
+					getCategoryIconRes(presetCategory),
+					ColorUtilities.getActiveIconColorId(nightMode)
+				)
+			)
+			headerInfoText?.setText(getCategoryInfoTextRes(presetCategory))
+			itemView.setOnClickListener(null)
+		}
+
+		fun bindResult(entry: SearchEntry) {
 			val obj = entry.objectRef
-			nameText.text = entry.displayName
-			infoText.text = buildSubtitle(entry)
+			nameText?.text = entry.displayName
+			infoText?.text = buildSubtitle(entry)
 
-			iconView.setImageDrawable(app.uiUtilities.getIcon(entry.iconRes, ColorUtilities.getDefaultIconColorId(nightMode)))
-			iconView.setColorFilter(entry.iconColor)
+			val forcedCategory = categoryPresetFromQuickPreset()
+			if (forcedCategory != null) {
+				iconView?.setImageDrawable(
+					app.uiUtilities.getIcon(
+						getCategoryIconRes(forcedCategory),
+						ColorUtilities.getDefaultIconColorId(nightMode)
+					)
+				)
+				iconView?.clearColorFilter()
+			} else {
+				iconView?.setImageDrawable(app.uiUtilities.getIcon(entry.iconRes, ColorUtilities.getDefaultIconColorId(nightMode)))
+				iconView?.setColorFilter(entry.iconColor)
+			}
 
 			itemView.setOnClickListener {
 				addRecentChip(entry.displayName)
@@ -1032,42 +1551,100 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		}
 
 		private fun buildSubtitle(entry: SearchEntry): String {
-			val typeName = AstroUtils.getObjectTypeName(itemView.context, entry.objectRef.type)
-			val magText = String.format(Locale.getDefault(), itemView.context.getString(R.string.astro_search_magnitude_short), entry.magnitude)
+			val descriptorText = buildDescriptor(entry)
+			val magText = String.format(
+				Locale.getDefault(),
+				itemView.context.getString(R.string.astro_search_magnitude_short),
+				entry.magnitude
+			)
+			if (entry.objectRef.type == SkyObject.Type.CONSTELLATION) {
+				return "$descriptorText • $magText"
+			}
 			val eventText = resolveEventText(entry)
-			return "$typeName • $magText • $eventText"
+			return "$descriptorText • $magText • $eventText"
+		}
+
+		private fun buildDescriptor(entry: SearchEntry): String {
+			val obj = entry.objectRef
+			val parentName = resolveParentName(obj)
+			val presetCategory = categoryPresetFromQuickPreset()
+			return when (presetCategory) {
+				CategoryFilter.CONSTELLATIONS -> {
+					val code = obj.catalogId?.trim().orEmpty()
+					if (code.isNotEmpty()) {
+						itemView.context.getString(
+							R.string.astro_search_constellation_with_code,
+							code.uppercase(Locale.getDefault())
+						)
+					} else {
+						itemView.context.getString(R.string.astro_search_type_constellation)
+					}
+				}
+				CategoryFilter.STARS -> {
+					if (parentName.isNullOrEmpty()) {
+						itemView.context.getString(R.string.astro_search_type_star)
+					} else {
+						itemView.context.getString(R.string.astro_search_in_location, parentName)
+					}
+				}
+				CategoryFilter.NEBULAS,
+				CategoryFilter.STAR_CLUSTERS,
+				CategoryFilter.DEEP_SKY -> {
+					val typeLabel = getSingularTypeLabel(obj.type)
+					if (parentName.isNullOrEmpty()) {
+						typeLabel
+					} else {
+						itemView.context.getString(R.string.astro_search_type_in_location, typeLabel, parentName)
+					}
+				}
+				else -> getSingularTypeLabel(obj.type)
+			}
+		}
+
+		private fun getSingularTypeLabel(type: SkyObject.Type): String {
+			return when (type) {
+				SkyObject.Type.SUN -> itemView.context.getString(R.string.astro_name_sun)
+				SkyObject.Type.MOON -> itemView.context.getString(R.string.astro_name_moon)
+				SkyObject.Type.PLANET -> itemView.context.getString(R.string.astro_search_type_planet)
+				SkyObject.Type.STAR -> itemView.context.getString(R.string.astro_search_type_star)
+				SkyObject.Type.GALAXY -> itemView.context.getString(R.string.astro_search_type_galaxy)
+				SkyObject.Type.NEBULA -> itemView.context.getString(R.string.astro_search_type_nebula)
+				SkyObject.Type.BLACK_HOLE -> itemView.context.getString(R.string.astro_search_type_black_hole)
+				SkyObject.Type.OPEN_CLUSTER -> itemView.context.getString(R.string.astro_search_type_open_cluster)
+				SkyObject.Type.GLOBULAR_CLUSTER -> itemView.context.getString(R.string.astro_search_type_globular_cluster)
+				SkyObject.Type.GALAXY_CLUSTER -> itemView.context.getString(R.string.astro_search_type_galaxy_cluster)
+				SkyObject.Type.CONSTELLATION -> itemView.context.getString(R.string.astro_search_type_constellation)
+			}
+		}
+
+		private fun resolveParentName(obj: SkyObject): String? {
+			val centerWid = obj.centerWId?.trim().orEmpty()
+			if (centerWid.isEmpty()) {
+				return null
+			}
+			val mapped = widToDisplayName[centerWid]
+			if (!mapped.isNullOrEmpty()) {
+				return mapped
+			}
+			return centerWid.replace('_', ' ').ifEmpty { null }
 		}
 
 		private fun resolveEventText(entry: SearchEntry): String {
 			ensureRiseSet(entry)
 			val rise = entry.nextRise
 			val set = entry.nextSet
-			val hasRise = rise != null
-			val hasSet = set != null
-			if (hasRise && hasSet) {
+			if (rise != null && set != null) {
 				return if (rise.isBefore(set)) {
-					itemView.context.getString(
-						R.string.astro_search_rises_at,
-						AstroUtils.formatLocalTime(Time.fromMillisecondsSince1970(rise.toInstant().toEpochMilli()))
-					)
+					formatEvent(rise, isRise = true)
 				} else {
-					itemView.context.getString(
-						R.string.astro_search_sets_at,
-						AstroUtils.formatLocalTime(Time.fromMillisecondsSince1970(set.toInstant().toEpochMilli()))
-					)
+					formatEvent(set, isRise = false)
 				}
 			}
-			if (hasRise) {
-				return itemView.context.getString(
-					R.string.astro_search_rises_at,
-					AstroUtils.formatLocalTime(Time.fromMillisecondsSince1970(rise.toInstant().toEpochMilli()))
-				)
+			if (rise != null) {
+				return formatEvent(rise, isRise = true)
 			}
-			if (hasSet) {
-				return itemView.context.getString(
-					R.string.astro_search_sets_at,
-					AstroUtils.formatLocalTime(Time.fromMillisecondsSince1970(set.toInstant().toEpochMilli()))
-				)
+			if (set != null) {
+				return formatEvent(set, isRise = false)
 			}
 			return if (entry.objectRef.altitude > 0) {
 				itemView.context.getString(R.string.astro_search_always_up)
@@ -1075,5 +1652,26 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				itemView.context.getString(R.string.astro_search_never_rises)
 			}
 		}
+
+		private fun formatEvent(time: ZonedDateTime, isRise: Boolean): String {
+			val formattedTime = AstroUtils.formatLocalTime(
+				Time.fromMillisecondsSince1970(time.toInstant().toEpochMilli())
+			)
+			val daysBetween = ChronoUnit.DAYS.between(nowForComputations.toLocalDate(), time.toLocalDate())
+			return if (daysBetween == 1L) {
+				val tomorrow = itemView.context.getString(R.string.tomorrow)
+				if (isRise) {
+					itemView.context.getString(R.string.astro_search_rises_tomorrow, tomorrow, formattedTime)
+				} else {
+					itemView.context.getString(R.string.astro_search_sets_tomorrow, tomorrow, formattedTime)
+				}
+			} else {
+				if (isRise) {
+					itemView.context.getString(R.string.astro_search_rises_at, formattedTime)
+				} else {
+					itemView.context.getString(R.string.astro_search_sets_at, formattedTime)
+				}
+			}
+		}
 	}
-}
+	}

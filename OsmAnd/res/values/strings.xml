@@ -11,11 +11,31 @@
 	Thx - Hardy
 -->
 
-	<string name="astro_search_never_rises">Never rises</string>
-	<string name="astro_search_always_up">Always up</string>
+	<string name="astro_search_info_solar_system">The Solar System is the gravitationally bound system of the Sun and the masses that orbit it, most prominently its eight planets, of which Earth is one.</string>
+	<string name="astro_search_info_constellations">A constellation is an area on the celestial sphere in which a group of visible stars forms a perceived pattern or outline.</string>
+	<string name="astro_search_info_stars">Stars are luminous astronomical objects made of plasma, held together by their own gravity.</string>
+	<string name="astro_search_info_nebulas">A nebula is a giant cloud of dust and gas in space, often a region where stars are born.</string>
+	<string name="astro_search_info_star_clusters">A star cluster is a group of stars that are gravitationally bound and formed from the same molecular cloud.</string>
+	<string name="astro_search_info_deep_sky">Deep sky objects include galaxies, nebulae, star clusters, and other distant astronomical targets.</string>
+	<string name="astro_search_type_constellation">Constellation</string>
+	<string name="astro_search_type_galaxy_cluster">Galaxy cluster</string>
+	<string name="astro_search_type_globular_cluster">Globular cluster</string>
+	<string name="astro_search_type_open_cluster">Open cluster</string>
+	<string name="astro_search_type_black_hole">Black hole</string>
+	<string name="astro_search_type_nebula">Nebula</string>
+	<string name="astro_search_type_galaxy">Galaxy</string>
+	<string name="astro_search_type_star">Star</string>
+	<string name="astro_search_type_planet">Planet</string>
+	<string name="astro_search_constellation_with_code">Constellation (%1$s)</string>
+	<string name="astro_search_type_in_location">%1$s in %2$s</string>
+	<string name="astro_search_in_location">In %1$s</string>
+	<string name="astro_search_rises_tomorrow">↗ %1$s %2$s</string>
+	<string name="astro_search_sets_tomorrow">↘ %1$s %2$s</string>
+	<string name="astro_search_never_rises">↓ Never rises</string>
+	<string name="astro_search_always_up">↑ Always up</string>
 	<string name="astro_search_sets_at">↘ Sets %1$s</string>
 	<string name="astro_search_rises_at">↗ Rises %1$s</string>
-	<string name="astro_search_magnitude_short">mag %.1f</string>
+	<string name="astro_search_magnitude_short">mag%.1f</string>
 	<string name="astro_filter_naked_eye">Naked eye visible</string>
 	<string name="astro_filter_visible_tonight">Visible tonight</string>
 	<string name="astro_filter_visible_now">Visible now</string>

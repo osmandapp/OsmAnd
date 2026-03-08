@@ -18,6 +18,7 @@
 		<item name="secondary_icon_color">@color/icon_color_secondary_dark</item>
 		<item name="icon_color_active">@color/icon_color_active_dark</item>
 		<item name="android:listDivider">@color/divider_color_dark</item>
+		<item name="list_divider">@color/divider_color_dark</item>
 		<item name="divider_color">@color/divider_color_dark</item>
 
 

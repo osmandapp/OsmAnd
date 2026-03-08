@@ -20,55 +20,19 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/content_padding">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/explore_search_card"
+            <com.google.android.material.search.SearchBar
+                android:id="@+id/explore_search_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/toolbar_height"
                 android:layout_marginStart="@dimen/content_padding"
                 android:layout_marginTop="@dimen/content_padding"
                 android:layout_marginEnd="@dimen/content_padding"
-                app:cardBackgroundColor="?attr/search_background"
-                app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
-                app:cardElevation="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/toolbar_height"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="@dimen/content_padding_small_half"
-                    android:paddingEnd="@dimen/content_padding_small_half">
-
-                    <ImageView
-                        android:id="@+id/explore_close_button"
-                        android:layout_width="@dimen/acceptable_touch_radius"
-                        android:layout_height="@dimen/acceptable_touch_radius"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-						android:contentDescription="@string/shared_string_close"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_action_remove_dark"
-                        app:tint="?attr/default_icon_color" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingHorizontal="@dimen/content_padding_small"
-                        android:text="@string/shared_string_search"
-                        android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_list_text_size" />
-
-                    <ImageView
-                        android:id="@+id/explore_search_icon"
-                        android:layout_width="@dimen/acceptable_touch_radius"
-                        android:layout_height="@dimen/acceptable_touch_radius"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-						android:contentDescription="@string/shared_string_search"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_action_search_dark"
-                        app:tint="?attr/default_icon_color" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                android:hint="@string/shared_string_search"
+                app:backgroundTint="@color/map_toolbar_switch_track_color"
+                app:defaultMarginsEnabled="false"
+                app:hideNavigationIcon="false"
+                app:menu="@menu/menu_star_search_browse"
+                app:navigationIcon="@drawable/ic_action_remove_dark" />
 
             <HorizontalScrollView
                 android:id="@+id/recent_chips_scroll"
@@ -311,137 +275,102 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/full_search_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/activity_background_color"
-        android:orientation="vertical"
         android:visibility="gone">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/full_search_app_bar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbar_height"
-            android:background="?attr/search_background"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/content_padding_small_half">
+            android:layout_height="wrap_content"
+            android:background="@color/map_toolbar_switch_track_color"
+            android:stateListAnimator="@animator/appbar_always_elevated">
 
-            <ImageView
-                android:id="@+id/full_search_back_button"
-                android:layout_width="@dimen/acceptable_touch_radius"
-                android:layout_height="@dimen/acceptable_touch_radius"
-                android:background="?attr/selectableItemBackgroundBorderless"
-				android:contentDescription="@string/shared_string_back"
-                android:scaleType="center"
-                android:src="@drawable/ic_arrow_back"
-                app:tint="?attr/default_icon_color" />
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/full_search_browse_header"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_height_expanded_large"
+                android:background="@color/map_toolbar_switch_track_color"
+                app:collapsedTitleTextAppearance="@style/AppBarTitlePrimary"
+                app:contentScrim="@color/map_toolbar_switch_track_color"
+                app:expandedTitleGravity="start|bottom"
+                app:expandedTitleMarginBottom="@dimen/content_padding"
+                app:expandedTitleMarginEnd="@dimen/content_padding"
+                app:expandedTitleMarginStart="@dimen/content_padding"
+                app:expandedTitleTextAppearance="@style/AppBarTitlePrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:statusBarScrim="@android:color/transparent"
+                app:toolbarId="@id/full_search_browse_toolbar"
+                app:titleEnabled="true">
 
-            <EditText
-                android:id="@+id/full_search_edit_text"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:gravity="center_vertical"
-                android:hint="@string/astro_search_input_hint"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="?android:textColorPrimary"
-                android:textColorHint="?android:textColorSecondary"
-                android:textSize="@dimen/default_list_text_size" />
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/full_search_browse_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:background="@android:color/transparent"
+                    app:layout_collapseMode="pin"
+                    app:menu="@menu/menu_star_search_browse"
+                    app:navigationContentDescription="@string/shared_string_back"
+                    app:navigationIcon="@drawable/ic_arrow_back"
+                    app:title="" />
 
-            <ImageView
-                android:id="@+id/full_search_clear_button"
-                android:layout_width="@dimen/acceptable_touch_radius"
-                android:layout_height="@dimen/acceptable_touch_radius"
-                android:background="?attr/selectableItemBackgroundBorderless"
-				android:contentDescription="@string/shared_string_close"
-                android:scaleType="center"
+                <com.google.android.material.search.SearchBar
+                    android:id="@+id/full_search_anchor_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:alpha="0"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:hint="@string/astro_search_input_hint"
+                    android:importantForAccessibility="no"
+                    android:visibility="gone"
+                    app:backgroundTint="@color/map_toolbar_switch_track_color"
+                    app:defaultMarginsEnabled="false"
+                    app:hideNavigationIcon="false"
+                    app:layout_collapseMode="pin"
+                    app:navigationIcon="@drawable/ic_arrow_back" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-                android:src="@drawable/ic_action_remove_dark"
-                app:tint="?attr/default_icon_color" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/sort_filter_toolbar_height"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/content_padding">
-
-            <LinearLayout
-                android:id="@+id/sort_button"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingVertical="@dimen/content_padding_small"
-                android:background="?attr/selectableItemBackground">
-
-                <ImageView
-                    android:id="@+id/sort_icon"
-                    android:layout_width="@dimen/standard_icon_size"
-                    android:layout_height="@dimen/standard_icon_size"
-                    android:src="@drawable/ic_action_sort_by_name_ascending"
-                    app:tint="?attr/active_color_primary" />
-
-                <TextView
-                    android:id="@+id/sort_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/content_padding_small"
-                    android:textColor="?attr/active_color_primary"
-                    android:textSize="@dimen/default_desc_text_size" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/filter_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/content_padding_small"
-                android:background="?attr/selectableItemBackground">
-
-                <TextView
-                    android:id="@+id/filter_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="?attr/active_color_primary"
-                    android:textSize="@dimen/default_desc_text_size" />
-
-                <ImageView
-                    android:layout_width="@dimen/standard_icon_size"
-                    android:layout_height="@dimen/standard_icon_size"
-                    android:layout_marginStart="@dimen/content_padding_small"
-                    android:src="@drawable/ic_action_filter_dark"
-                    app:tint="?attr/active_color_primary" />
-            </LinearLayout>
-        </LinearLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout
+            android:id="@+id/full_search_results_host"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/search_results"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:scrollbars="vertical" />
+    <com.google.android.material.search.SearchView
+        android:id="@+id/explore_search_input_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="@string/astro_search_input_hint"
+        app:autoShowKeyboard="true"
+        app:backgroundTint="@color/map_toolbar_switch_track_color"
+        app:hideNavigationIcon="false">
 
-            <include
-                android:id="@+id/empty_state_container"
-                layout="@layout/view_star_search_empty_state"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" />
-        </FrameLayout>
-    </LinearLayout>
+        <FrameLayout
+            android:id="@+id/explore_search_input_results_host"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.search.SearchView>
+
+    <com.google.android.material.search.SearchView
+        android:id="@+id/full_search_input_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="@string/astro_search_input_hint"
+        app:autoShowKeyboard="true"
+        app:backgroundTint="@color/map_toolbar_switch_track_color"
+        app:hideNavigationIcon="false">
+
+        <FrameLayout
+            android:id="@+id/full_search_input_results_host"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.search.SearchView>
 
 </FrameLayout>
