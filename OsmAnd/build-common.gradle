@@ -382,10 +382,15 @@ tasks.register('appStart', Exec) {
 }
 
 def getMandatoryAvdName() {
-	if (!project.hasProperty('avdName') || project.property('avdName').toString().trim().isEmpty()) {
-		throw new GradleException("\n>>> ERROR: 'avdName' is mandatory! Usage: ./gradlew <task> -PavdName=Name")
+	return getMandatoryProperty('avdName')
+}
+
+private Object getMandatoryProperty(String propertyName) {
+	def val = project.findProperty(propertyName)
+	if (val == null || val.toString().trim().isEmpty()) {
+		throw new GradleException("\n>>> ERROR: " + propertyName + " is mandatory!")
 	}
-	return project.property('avdName')
+	return val
 }
 
 tasks.register('startEmulator') {
@@ -443,11 +448,10 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
 
 	ext {
 		dbNameOnDevice = "searchable_preferences.db"
-		def baseAssetPath = "database/searchable_preferences_prepackaged"
 		def localeSuffix = project.hasProperty('locale') ? "_${project.property('locale')}" : ""
-		assetPathAndName = "${baseAssetPath}${localeSuffix}.db"
 		testClassName = "net.osmand.plus.settings.fragments.search.GeneratePreferencesDatabaseTest"
 		localeArgs = project.hasProperty('locale') ? "-e locale ${project.property('locale')}" : ""
+		dbOutputFile = "${getMandatoryProperty('dbOutputDir')}/searchable_preferences_prepackaged${localeSuffix}.db"
 	}
 	workingDir project.rootDir
     commandLine 'sh', '-c', """
@@ -455,9 +459,8 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
         appPackage="net.osmand.dev"
         adb="${android.sdkDirectory}/platform-tools/adb"
         dbNameOnDevice="${ext.dbNameOnDevice}"
-        assetPathAndName="${ext.assetPathAndName}"
         testClassName="${ext.testClassName}"
-        absoluteLocalAssetPath="${project.projectDir}/assets/\${assetPathAndName}"
+        dbOutputFile="${ext.dbOutputFile}"
         localeArgs="${ext.localeArgs}"
         
         echo ">>> Waiting for package manager to recognize the app..."
@@ -473,7 +476,7 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
             WAIT_SECONDS=\$((WAIT_SECONDS + 1))
         done
         echo ">>> Package found after \${WAIT_SECONDS} seconds."
-        mkdir -p "\$(dirname "\${absoluteLocalAssetPath}")"
+        mkdir -p "\$(dirname "\${dbOutputFile}")"
         echo ">>> Starting test to create database on device..."
         INSTRUMENTATION_OUTPUT=\$("\${adb}" shell am instrument -w -e class \${testClassName} \${localeArgs} \${appPackage}.test/androidx.test.runner.AndroidJUnitRunner 2>&1)
         echo "--- Test Output Start ---"
@@ -486,8 +489,8 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
             exit 1
         fi
-        echo ">>> Test finished. Pulling database from device to \${absoluteLocalAssetPath}..."
-        "\${adb}" exec-out run-as \${appPackage} cat "databases/\${dbNameOnDevice}" > "\${absoluteLocalAssetPath}"
+        echo ">>> Test finished. Pulling database from device to \${dbOutputFile}..."
+        "\${adb}" exec-out run-as \${appPackage} cat "databases/\${dbNameOnDevice}" > "\${dbOutputFile}"
         echo ">>> Cleaning up: Uninstalling apps..."
         "\${adb}" uninstall "\${appPackage}"
         "\${adb}" uninstall "\${appPackage}.test"
@@ -495,14 +498,15 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
     """
 }
 
-// ./gradlew generateDatabasesForLocales -PavdName=Medium_Phone -Plocales=de,en
-// ./gradlew generateDatabasesForLocales -PavdName=Medium_Phone
+// ./gradlew generateDatabasesForLocales -PavdName=Medium_Phone -Plocales=de,en -PdbOutputDir=/home/frankknoll/Downloads/OsmAnd/database
+// ./gradlew generateDatabasesForLocales -PavdName=Medium_Phone -PdbOutputDir=/home/frankknoll/Downloads/OsmAnd/database
 tasks.register('generateDatabasesForLocales') {
 	group = "Database"
 	description = "Generates databases for specified locales."
 
 	doLast {
 		def avd = getMandatoryAvdName()
+		def dbOutputDir = getMandatoryProperty('dbOutputDir')
 		def localeList = getTargetLocales()
 		println ">>> Starting database generation for ${localeList.size()} locales: ${localeList.join(', ')}"
 		localeList.each { locale ->
@@ -522,7 +526,8 @@ tasks.register('generateDatabasesForLocales') {
 							'installNightlyFreeLegacyFatDebugAndroidTest',
 							generateAndPullPreferencesDatabaseTaskName,
 							"-Plocale=${locale}",
-							"-PavdName=${avd}"
+							"-PavdName=${avd}",
+							"-PdbOutputDir=${dbOutputDir}"
 					ignoreExitValue = false
 				}
 				println ">>> SUCCESS: Locale '${locale}' processed successfully."
@@ -623,7 +628,7 @@ dependencies {
 	implementation "androidx.car.app:app-projected:1.4.0"
 
 	implementation 'com.google.android.gms:play-services-location:21.3.0'
-	implementation 'com.github.KnollFrank:SettingsSearch:d2f15f92f4'
+	implementation 'com.github.KnollFrank:SettingsSearch:2bef4f75aa'
 	// https://mvnrepository.com/artifact/com.google.guava/guava
 	implementation 'com.google.guava:guava:33.5.0-android'
 
