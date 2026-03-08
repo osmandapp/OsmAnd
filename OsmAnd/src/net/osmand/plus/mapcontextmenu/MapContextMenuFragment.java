@@ -186,6 +186,10 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		mainViewBoundsChangeListener = new BoundsChangeListener(displayPositionManager, false);
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
+		if (isForceCenterRequired()) {
+			this.centered = true;
+		}
+
 		DialogManager dialogManager = mapActivity.getApp().getDialogManager();
 		GalleryController controller = (GalleryController) dialogManager.findController(GalleryController.PROCESS_ID);
 		if (controller == null) {
@@ -1439,7 +1443,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 			bottomLayout.removeAllViews();
 			buildBottomView();
 
-			if (centered) {
+			if (centered || isForceCenterRequired()) {
 				this.initLayout = true;
 				this.centered = true;
 			}
@@ -1449,6 +1453,11 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 			updateButtonsAndProgress();
 			runLayoutListener();
 		}
+	}
+
+	private boolean isForceCenterRequired() {
+		MapActivity mapActivity = getMapActivity();
+		return mapActivity != null && mapActivity.getMapLayers().getMeasurementToolLayer().isInMeasurementMode();
 	}
 
 	private void createTransportBadges() {
