@@ -38,7 +38,6 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils.InsetSide
-import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
@@ -47,7 +46,6 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 import java.util.Calendar
-import java.util.Locale
 
 class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
@@ -71,63 +69,10 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		BROWSE
 	}
 
-	private enum class SortMode {
-		NAME_ASC,
-		NAME_DESC,
-		BRIGHTEST_FIRST,
-		FAINTEST_FIRST,
-		RISES_SOONEST,
-		SETS_SOONEST
-	}
-
-	private enum class TypeFilter {
-		SHOW_ALL,
-		VISIBLE_NOW,
-		VISIBLE_TONIGHT
-	}
-
-	enum class CategoryFilter {
-		ALL,
-		SOLAR_SYSTEM,
-		CONSTELLATIONS,
-		STARS,
-		NEBULAS,
-		STAR_CLUSTERS,
-		DEEP_SKY
-	}
-
-	private enum class QuickPresetType {
-		NONE,
-		CATEGORY_SOLAR_SYSTEM,
-		CATEGORY_CONSTELLATIONS,
-		CATEGORY_STARS,
-		CATEGORY_NEBULAS,
-		CATEGORY_STAR_CLUSTERS,
-		CATEGORY_DEEP_SKY,
-		MY_DATA_FAVORITES,
-		MY_DATA_DAILY_PATH,
-		MY_DATA_DIRECTIONS,
-		CATALOG_WID
-	}
-
-	data class SearchEntry(
-		val objectRef: SkyObject,
-		val displayName: String,
-		val magnitude: Float,
-		val category: CategoryFilter,
-		val iconRes: Int,
-		val iconColor: Int,
-		val catalogWid: String?,
-		var nextRise: ZonedDateTime? = null,
-		var nextSet: ZonedDateTime? = null,
-		var isVisibleTonight: Boolean = false,
-		var riseSetCalculated: Boolean = false,
-		var visibleTonightCalculated: Boolean = false
-	)
-
-	private lateinit var searchAdapter: SearchAdapter
-	private val preparedEntries = mutableListOf<SearchEntry>()
-	private val visibleEntries = mutableListOf<SearchEntry>()
+	private lateinit var searchAdapter: StarMapSearchResultsAdapter
+	private lateinit var searchState: StarMapSearchState
+	private val preparedEntries = mutableListOf<StarMapSearchEntry>()
+	private val visibleEntries = mutableListOf<StarMapSearchEntry>()
 
 	private lateinit var searchResultsPanel: View
 	private lateinit var searchRecycler: RecyclerView
@@ -166,14 +111,6 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private var currentMode: ScreenMode = ScreenMode.EXPLORE
 	private var currentFullSearchMode: FullSearchMode = FullSearchMode.INPUT
 	private var currentInputPresentation: InputPresentation = InputPresentation.EXPLORE_BAR
-	private var currentSortMode: SortMode = SortMode.NAME_ASC
-	private var currentTypeFilter: TypeFilter = TypeFilter.SHOW_ALL
-	private var currentNakedEyeOnly = false
-	private val selectedCategories = linkedSetOf(CategoryFilter.ALL)
-	private var currentQuickPresetType: QuickPresetType = QuickPresetType.NONE
-	private var currentQuickPresetCatalogWid: String? = null
-	private var currentQuery: String = ""
-	private val recentChips = mutableListOf<String>()
 	private val widToDisplayName = mutableMapOf<String, String>()
 	private var observerForComputations = Observer(0.0, 0.0, 0.0)
 	private var nowForComputations: ZonedDateTime = ZonedDateTime.now()
@@ -197,15 +134,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		const val TAG = "StarMapSearchDialog"
 
 		private const val KEY_MODE = "mode"
-		private const val KEY_QUERY = "query"
-		private const val KEY_SORT = "sort"
 		private const val KEY_FULL_SEARCH_MODE = "full_search_mode"
-		private const val KEY_TYPE_FILTER = "type_filter"
-		private const val KEY_NAKED_EYE = "naked_eye"
-		private const val KEY_CATEGORIES = "categories"
-		private const val KEY_QUICK_PRESET = "quick_preset"
-		private const val KEY_QUICK_CATALOG = "quick_catalog"
-		private const val KEY_RECENT_CHIPS = "recent_chips"
 	}
 
 	override fun getThemeId(): Int = if (nightMode) R.style.OsmandMaterialDarkTheme else R.style.OsmandMaterialLightTheme
@@ -218,7 +147,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		restoreState(savedInstanceState)
+		searchState = StarMapSearchState(savedInstanceState)
+		restoreUiState(savedInstanceState)
 	}
 
 	override fun createDialog(savedInstanceState: Bundle?): Dialog {
@@ -235,14 +165,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		super.onSaveInstanceState(outState)
 		outState.putString(KEY_MODE, currentMode.name)
 		outState.putString(KEY_FULL_SEARCH_MODE, currentFullSearchMode.name)
-		outState.putString(KEY_QUERY, currentQuery)
-		outState.putString(KEY_SORT, currentSortMode.name)
-		outState.putString(KEY_TYPE_FILTER, currentTypeFilter.name)
-		outState.putBoolean(KEY_NAKED_EYE, currentNakedEyeOnly)
-		outState.putStringArrayList(KEY_CATEGORIES, ArrayList(selectedCategories.map { it.name }))
-		outState.putString(KEY_QUICK_PRESET, currentQuickPresetType.name)
-		outState.putString(KEY_QUICK_CATALOG, currentQuickPresetCatalogWid)
-		outState.putStringArrayList(KEY_RECENT_CHIPS, ArrayList(recentChips))
+		searchState.save(outState)
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -342,7 +265,16 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	}
 
 	private fun setupSearchRecycler() {
-		searchAdapter = SearchAdapter()
+		searchAdapter = StarMapSearchResultsAdapter(
+			uiUtilities = app.uiUtilities,
+			nightMode = nightMode,
+			visibleEntries = visibleEntries,
+			widToDisplayName = widToDisplayName,
+			shouldShowInfoHeader = ::shouldShowInfoHeader,
+			categoryPresetProvider = searchState::categoryPreset,
+			eventTextProvider = ::resolveEventText,
+			onEntrySelected = ::onSearchEntrySelected
+		)
 		searchRecycler.layoutManager = LinearLayoutManager(context)
 		searchRecycler.adapter = searchAdapter
 		searchRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -397,8 +329,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 					return
 				}
 				val newQuery = s?.toString().orEmpty()
-				if (newQuery != currentQuery) {
-					currentQuery = newQuery
+				if (newQuery != searchState.query) {
+					searchState.query = newQuery
 					applyFiltersAndSort(scrollToTop = true)
 				}
 			}
@@ -477,7 +409,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		previousSoftInputMode = null
 	}
 
-	private fun restoreState(savedInstanceState: Bundle?) {
+	private fun restoreUiState(savedInstanceState: Bundle?) {
 		if (savedInstanceState == null) {
 			return
 		}
@@ -486,28 +418,6 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		currentFullSearchMode = savedInstanceState.getString(KEY_FULL_SEARCH_MODE)?.let {
 			runCatching { FullSearchMode.valueOf(it) }.getOrNull()
 		} ?: FullSearchMode.INPUT
-		currentQuery = savedInstanceState.getString(KEY_QUERY).orEmpty()
-		currentSortMode = savedInstanceState.getString(KEY_SORT)?.let { runCatching { SortMode.valueOf(it) }.getOrNull() }
-			?: SortMode.NAME_ASC
-		currentTypeFilter = savedInstanceState.getString(KEY_TYPE_FILTER)?.let { runCatching { TypeFilter.valueOf(it) }.getOrNull() }
-			?: TypeFilter.SHOW_ALL
-		currentNakedEyeOnly = savedInstanceState.getBoolean(KEY_NAKED_EYE, false)
-
-		selectedCategories.clear()
-		savedInstanceState.getStringArrayList(KEY_CATEGORIES)
-			?.mapNotNull { runCatching { CategoryFilter.valueOf(it) }.getOrNull() }
-			?.forEach { selectedCategories.add(it) }
-		if (selectedCategories.isEmpty()) {
-			selectedCategories.add(CategoryFilter.ALL)
-		}
-
-		currentQuickPresetType = savedInstanceState.getString(KEY_QUICK_PRESET)?.let {
-			runCatching { QuickPresetType.valueOf(it) }.getOrNull()
-		} ?: QuickPresetType.NONE
-		currentQuickPresetCatalogWid = savedInstanceState.getString(KEY_QUICK_CATALOG)
-
-		recentChips.clear()
-		recentChips.addAll(savedInstanceState.getStringArrayList(KEY_RECENT_CHIPS).orEmpty())
 	}
 
 	private fun setupCategoryRows() {
@@ -519,7 +429,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			subtitle = null,
 			count = null
 		) {
-			openFullSearch(QuickPresetType.CATEGORY_SOLAR_SYSTEM, null)
+			openFullSearch(StarMapSearchQuickPresetType.CATEGORY_SOLAR_SYSTEM, null)
 		}
 		addExploreRow(
 			container = categoriesContainer,
@@ -528,7 +438,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			subtitle = null,
 			count = null
 		) {
-			openFullSearch(QuickPresetType.CATEGORY_CONSTELLATIONS, null)
+			openFullSearch(StarMapSearchQuickPresetType.CATEGORY_CONSTELLATIONS, null)
 		}
 		addExploreRow(
 			container = categoriesContainer,
@@ -537,7 +447,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			subtitle = null,
 			count = null
 		) {
-			openFullSearch(QuickPresetType.CATEGORY_STARS, null)
+			openFullSearch(StarMapSearchQuickPresetType.CATEGORY_STARS, null)
 		}
 		addExploreRow(
 			container = categoriesContainer,
@@ -546,7 +456,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			subtitle = null,
 			count = null
 		) {
-			openFullSearch(QuickPresetType.CATEGORY_NEBULAS, null)
+			openFullSearch(StarMapSearchQuickPresetType.CATEGORY_NEBULAS, null)
 		}
 		addExploreRow(
 			container = categoriesContainer,
@@ -555,7 +465,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			subtitle = null,
 			count = null
 		) {
-			openFullSearch(QuickPresetType.CATEGORY_STAR_CLUSTERS, null)
+			openFullSearch(StarMapSearchQuickPresetType.CATEGORY_STAR_CLUSTERS, null)
 		}
 		addExploreRow(
 			container = categoriesContainer,
@@ -565,16 +475,16 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			count = null,
 			showDivider = false
 		) {
-			openFullSearch(QuickPresetType.CATEGORY_DEEP_SKY, null)
+			openFullSearch(StarMapSearchQuickPresetType.CATEGORY_DEEP_SKY, null)
 		}
 	}
 
 	private fun bindExploreSearchBarListeners() {
 		exploreSearchBar.setNavigationOnClickListener { dismiss() }
-		exploreSearchBar.setOnClickListener { openFullSearch(QuickPresetType.NONE, null) }
+		exploreSearchBar.setOnClickListener { openFullSearch(StarMapSearchQuickPresetType.NONE, null) }
 		exploreSearchBar.setOnMenuItemClickListener { item ->
 			if (item.itemId == R.id.action_search) {
-				openFullSearch(QuickPresetType.NONE, null)
+				openFullSearch(StarMapSearchQuickPresetType.NONE, null)
 				true
 			} else {
 				false
@@ -593,7 +503,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			count = config.favorites.size,
 			showDivider = true
 		) {
-			openFullSearch(QuickPresetType.MY_DATA_FAVORITES, null)
+			openFullSearch(StarMapSearchQuickPresetType.MY_DATA_FAVORITES, null)
 		}
 		addExploreRow(
 			container = myDataContainer,
@@ -603,7 +513,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			count = config.celestialPaths.size,
 			showDivider = true
 		) {
-			openFullSearch(QuickPresetType.MY_DATA_DAILY_PATH, null)
+			openFullSearch(StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH, null)
 		}
 		addExploreRow(
 			container = myDataContainer,
@@ -613,7 +523,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			count = config.directions.size,
 			showDivider = false
 		) {
-			openFullSearch(QuickPresetType.MY_DATA_DIRECTIONS, null)
+			openFullSearch(StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS, null)
 		}
 	}
 
@@ -629,12 +539,12 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				count = null,
 				showDivider = index != 2
 			) {
-				openFullSearch(QuickPresetType.CATALOG_WID, catalog.wid)
+				openFullSearch(StarMapSearchQuickPresetType.CATALOG_WID, catalog.wid)
 			}
 		}
 		catalogsViewAllCount.text = catalogs.size.toString()
 		catalogsViewAllRow.setOnClickListener {
-			openFullSearch(QuickPresetType.NONE, null)
+			openFullSearch(StarMapSearchQuickPresetType.NONE, null)
 		}
 	}
 
@@ -677,14 +587,9 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		container.addView(row)
 	}
 
-	private fun openFullSearch(quickPresetType: QuickPresetType, catalogWid: String?) {
-		currentQuickPresetType = quickPresetType
-		currentQuickPresetCatalogWid = catalogWid
-		currentQuery = ""
-		currentFullSearchMode = if (isCategoryPreset() || quickPresetType == QuickPresetType.CATALOG_WID ||
-			quickPresetType == QuickPresetType.MY_DATA_FAVORITES ||
-			quickPresetType == QuickPresetType.MY_DATA_DAILY_PATH ||
-			quickPresetType == QuickPresetType.MY_DATA_DIRECTIONS) {
+	private fun openFullSearch(quickPresetType: StarMapSearchQuickPresetType, catalogWid: String?) {
+		searchState.selectQuickPreset(quickPresetType, catalogWid)
+		currentFullSearchMode = if (searchState.shouldOpenInBrowseMode()) {
 			FullSearchMode.BROWSE
 		} else {
 			FullSearchMode.INPUT
@@ -700,7 +605,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		} else if (currentFullSearchMode == FullSearchMode.BROWSE) {
 			showBrowseMode()
 		} else {
-			val presentation = if (hasBrowseContext()) {
+			val presentation = if (searchState.hasBrowseContext()) {
 				InputPresentation.STANDALONE
 			} else {
 				InputPresentation.EXPLORE_BAR
@@ -800,7 +705,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		}
 		return if (currentMode == ScreenMode.FULL_SEARCH) {
 			if (currentFullSearchMode == FullSearchMode.INPUT) {
-				pendingSearchHideTarget = if (hasBrowseContext()) HideTarget.BROWSE else HideTarget.EXPLORE
+				pendingSearchHideTarget = if (searchState.hasBrowseContext()) HideTarget.BROWSE else HideTarget.EXPLORE
 				getSearchView(currentInputPresentation).hide()
 			} else {
 				showExploreMode()
@@ -818,23 +723,12 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		)
 		searchView.setMenuItemsAnimated(false)
 		searchView.toolbar.menu.clear()
-		searchView.inflateMenu(R.menu.menu_star_search_input)
 		val iconColor = ColorUtilities.getDefaultIconColor(requireContext(), nightMode)
 		searchView.toolbar.navigationIcon?.mutate()?.setTint(iconColor)
-		searchView.toolbar.menu.findItem(R.id.action_close_search)?.icon?.mutate()?.setTint(iconColor)
-		searchView.setOnMenuItemClickListener { item ->
-			if (item.itemId == R.id.action_close_search) {
-				pendingSearchHideTarget = if (hasBrowseContext()) HideTarget.BROWSE else HideTarget.EXPLORE
-				searchView.hide()
-				true
-			} else {
-				false
-			}
-		}
 		if (presentation == InputPresentation.EXPLORE_BAR) {
 			bindExploreSearchBarListeners()
 		} else {
-			fullSearchAnchorBar.setText(currentQuery)
+			fullSearchAnchorBar.setText(searchState.query)
 		}
 		searchView.setAutoShowKeyboard(requestKeyboard)
 		searchView.updateSoftInputMode()
@@ -862,7 +756,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		}
 		attachSearchResultsPanel(fullSearchResultsHost)
 		AndroidUtils.hideSoftKeyboard(requireActivity(), getSearchEditText(presentation))
-		when (pendingSearchHideTarget ?: if (hasBrowseContext()) HideTarget.BROWSE else HideTarget.EXPLORE) {
+		when (pendingSearchHideTarget ?: if (searchState.hasBrowseContext()) HideTarget.BROWSE else HideTarget.EXPLORE) {
 			HideTarget.BROWSE -> {
 				currentMode = ScreenMode.FULL_SEARCH
 				currentFullSearchMode = FullSearchMode.BROWSE
@@ -892,15 +786,15 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun syncSearchQuery() {
 		suppressQueryDispatch = true
-		if (exploreSearchEditText.text.toString() != currentQuery) {
-			exploreSearchEditText.setText(currentQuery)
+		if (exploreSearchEditText.text.toString() != searchState.query) {
+			exploreSearchEditText.setText(searchState.query)
 		}
-		if (fullSearchEditText.text.toString() != currentQuery) {
-			fullSearchEditText.setText(currentQuery)
+		if (fullSearchEditText.text.toString() != searchState.query) {
+			fullSearchEditText.setText(searchState.query)
 		}
-		fullSearchAnchorBar.setText(currentQuery)
-		exploreSearchInputView.setText(currentQuery)
-		fullSearchInputView.setText(currentQuery)
+		fullSearchAnchorBar.setText(searchState.query)
+		exploreSearchInputView.setText(searchState.query)
+		fullSearchInputView.setText(searchState.query)
 		val editText = getSearchEditText(currentInputPresentation)
 		if ((editText.text?.length ?: 0) > 0) {
 			editText.setSelection(editText.length())
@@ -939,11 +833,11 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				widToDisplayName[obj.wid] = obj.localizedName ?: obj.name
 			}
 			preparedEntries.add(
-				SearchEntry(
+				StarMapSearchEntry(
 					objectRef = obj,
 					displayName = obj.localizedName ?: obj.name,
 					magnitude = obj.magnitude,
-					category = mapCategory(obj),
+					category = mapStarMapSearchCategory(obj),
 					iconRes = AstroUtils.getObjectTypeIcon(obj.type),
 					iconColor = if (obj.type.isSunSystem()) obj.color else ColorUtilities.getPrimaryIconColor(requireContext(), nightMode),
 					catalogWid = obj.catalog?.wid
@@ -952,83 +846,28 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		}
 	}
 
-	private fun mapCategory(obj: SkyObject): CategoryFilter {
-		return when {
-			obj.type.isSunSystem() -> CategoryFilter.SOLAR_SYSTEM
-			obj.type == SkyObject.Type.CONSTELLATION -> CategoryFilter.CONSTELLATIONS
-			obj.type == SkyObject.Type.STAR -> CategoryFilter.STARS
-			obj.type == SkyObject.Type.NEBULA -> CategoryFilter.NEBULAS
-			obj.type == SkyObject.Type.OPEN_CLUSTER || obj.type == SkyObject.Type.GLOBULAR_CLUSTER -> CategoryFilter.STAR_CLUSTERS
-			else -> CategoryFilter.DEEP_SKY
-		}
-	}
-
-	private fun isCategoryPreset(): Boolean {
-		return categoryPresetFromQuickPreset() != null
-	}
-
-	private fun hasBrowseContext(): Boolean {
-		return currentQuickPresetType != QuickPresetType.NONE
-	}
-
-	private fun categoryPresetFromQuickPreset(): CategoryFilter? {
-		return when (currentQuickPresetType) {
-			QuickPresetType.CATEGORY_SOLAR_SYSTEM -> CategoryFilter.SOLAR_SYSTEM
-			QuickPresetType.CATEGORY_CONSTELLATIONS -> CategoryFilter.CONSTELLATIONS
-			QuickPresetType.CATEGORY_STARS -> CategoryFilter.STARS
-			QuickPresetType.CATEGORY_NEBULAS -> CategoryFilter.NEBULAS
-			QuickPresetType.CATEGORY_STAR_CLUSTERS -> CategoryFilter.STAR_CLUSTERS
-			QuickPresetType.CATEGORY_DEEP_SKY -> CategoryFilter.DEEP_SKY
-			else -> null
-		}
-	}
-
 	private fun shouldShowInfoHeader(): Boolean {
 		return currentMode == ScreenMode.FULL_SEARCH &&
-				currentFullSearchMode == FullSearchMode.BROWSE &&
-				categoryPresetFromQuickPreset() != null
-	}
-
-	private fun getCategoryIconRes(category: CategoryFilter): Int {
-		return when (category) {
-			CategoryFilter.SOLAR_SYSTEM -> R.drawable.ic_action_planet_outlined
-			CategoryFilter.CONSTELLATIONS -> R.drawable.ic_action_constellations
-			CategoryFilter.STARS -> R.drawable.ic_action_stars
-			CategoryFilter.NEBULAS -> R.drawable.ic_action_nebulas
-			CategoryFilter.STAR_CLUSTERS -> R.drawable.ic_action_star_clusters
-			CategoryFilter.DEEP_SKY -> R.drawable.ic_action_galaxy
-			CategoryFilter.ALL -> R.drawable.ic_action_search_dark
-		}
-	}
-
-	private fun getCategoryInfoTextRes(category: CategoryFilter): Int {
-		return when (category) {
-			CategoryFilter.SOLAR_SYSTEM -> R.string.astro_search_info_solar_system
-			CategoryFilter.CONSTELLATIONS -> R.string.astro_search_info_constellations
-			CategoryFilter.STARS -> R.string.astro_search_info_stars
-			CategoryFilter.NEBULAS -> R.string.astro_search_info_nebulas
-			CategoryFilter.STAR_CLUSTERS -> R.string.astro_search_info_star_clusters
-			CategoryFilter.DEEP_SKY -> R.string.astro_search_info_deep_sky
-			CategoryFilter.ALL -> R.string.astro_search_info_solar_system
-		}
+			currentFullSearchMode == FullSearchMode.BROWSE &&
+			searchState.categoryPreset() != null
 	}
 
 	private fun getBrowseTitle(): String {
-		return when (currentQuickPresetType) {
-			QuickPresetType.CATEGORY_SOLAR_SYSTEM -> getString(R.string.astro_solar_system)
-			QuickPresetType.CATEGORY_CONSTELLATIONS -> getString(R.string.astro_constellations)
-			QuickPresetType.CATEGORY_STARS -> getString(R.string.astro_stars)
-			QuickPresetType.CATEGORY_NEBULAS -> getString(R.string.astro_nebulas)
-			QuickPresetType.CATEGORY_STAR_CLUSTERS -> getString(R.string.astro_star_clusters)
-			QuickPresetType.CATEGORY_DEEP_SKY -> getString(R.string.astro_deep_sky)
-			QuickPresetType.MY_DATA_FAVORITES -> getString(R.string.favorites_item)
-			QuickPresetType.MY_DATA_DAILY_PATH -> getString(R.string.astro_daily_path)
-			QuickPresetType.MY_DATA_DIRECTIONS -> getString(R.string.astro_directions)
-			QuickPresetType.CATALOG_WID -> {
-				val catalog = dataProvider.getCatalogs(requireContext()).firstOrNull { it.wid == currentQuickPresetCatalogWid }
+		return when (searchState.quickPresetType) {
+			StarMapSearchQuickPresetType.CATEGORY_SOLAR_SYSTEM -> getString(R.string.astro_solar_system)
+			StarMapSearchQuickPresetType.CATEGORY_CONSTELLATIONS -> getString(R.string.astro_constellations)
+			StarMapSearchQuickPresetType.CATEGORY_STARS -> getString(R.string.astro_stars)
+			StarMapSearchQuickPresetType.CATEGORY_NEBULAS -> getString(R.string.astro_nebulas)
+			StarMapSearchQuickPresetType.CATEGORY_STAR_CLUSTERS -> getString(R.string.astro_star_clusters)
+			StarMapSearchQuickPresetType.CATEGORY_DEEP_SKY -> getString(R.string.astro_deep_sky)
+			StarMapSearchQuickPresetType.MY_DATA_FAVORITES -> getString(R.string.favorites_item)
+			StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH -> getString(R.string.astro_daily_path)
+			StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> getString(R.string.astro_directions)
+			StarMapSearchQuickPresetType.CATALOG_WID -> {
+				val catalog = dataProvider.getCatalogs(requireContext()).firstOrNull { it.wid == searchState.quickPresetCatalogWid }
 				catalog?.name ?: getString(R.string.shared_string_search)
 			}
-			QuickPresetType.NONE -> getString(R.string.shared_string_search)
+			StarMapSearchQuickPresetType.NONE -> getString(R.string.shared_string_search)
 		}
 	}
 
@@ -1041,20 +880,14 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	@SuppressLint("NotifyDataSetChanged")
 	private fun applyFiltersAndSort(scrollToTop: Boolean) {
 		visibleEntries.clear()
-
-		val queryLower = currentQuery.lowercase(Locale.getDefault())
-		val specificCategories = selectedCategories.filter { it != CategoryFilter.ALL }.toSet()
-
-		for (entry in preparedEntries) {
-			if (!matchesQuickPreset(entry)) continue
-			if (queryLower.isNotEmpty() && !matchesQuery(entry, queryLower)) continue
-			if (!matchesTypeFilter(entry)) continue
-			if (currentNakedEyeOnly && entry.magnitude > 6.0f) continue
-			if (specificCategories.isNotEmpty() && entry.category !in specificCategories) continue
-			visibleEntries.add(entry)
-		}
-
-		visibleEntries.sortWith(createComparator())
+		visibleEntries.addAll(
+			searchState.filterAndSort(
+				preparedEntries = preparedEntries,
+				visibleTonightProvider = ::getVisibleTonight,
+				riseSortValueProvider = ::getRiseSortValue,
+				setSortValueProvider = ::getSetSortValue
+			)
+		)
 		if (::searchAdapter.isInitialized) {
 			searchAdapter.notifyDataSetChanged()
 		}
@@ -1069,48 +902,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		updateEmptyStateVisibility()
 	}
 
-	private fun matchesQuickPreset(entry: SearchEntry): Boolean {
-		return when (currentQuickPresetType) {
-			QuickPresetType.NONE -> true
-			QuickPresetType.CATEGORY_SOLAR_SYSTEM -> entry.category == CategoryFilter.SOLAR_SYSTEM
-			QuickPresetType.CATEGORY_CONSTELLATIONS -> entry.category == CategoryFilter.CONSTELLATIONS
-			QuickPresetType.CATEGORY_STARS -> entry.category == CategoryFilter.STARS
-			QuickPresetType.CATEGORY_NEBULAS -> entry.category == CategoryFilter.NEBULAS
-			QuickPresetType.CATEGORY_STAR_CLUSTERS -> entry.category == CategoryFilter.STAR_CLUSTERS
-			QuickPresetType.CATEGORY_DEEP_SKY -> entry.category == CategoryFilter.DEEP_SKY
-			QuickPresetType.MY_DATA_FAVORITES -> entry.objectRef.isFavorite
-			QuickPresetType.MY_DATA_DAILY_PATH -> entry.objectRef.showCelestialPath
-			QuickPresetType.MY_DATA_DIRECTIONS -> entry.objectRef.showDirection
-			QuickPresetType.CATALOG_WID -> !currentQuickPresetCatalogWid.isNullOrEmpty() && entry.catalogWid == currentQuickPresetCatalogWid
-		}
-	}
-
-	private fun matchesQuery(entry: SearchEntry, queryLower: String): Boolean {
-		val localized = entry.objectRef.localizedName.orEmpty().lowercase(Locale.getDefault())
-		val original = entry.objectRef.name.lowercase(Locale.getDefault())
-		return localized.contains(queryLower) || original.contains(queryLower)
-	}
-
-	private fun matchesTypeFilter(entry: SearchEntry): Boolean {
-		return when (currentTypeFilter) {
-			TypeFilter.SHOW_ALL -> true
-			TypeFilter.VISIBLE_NOW -> entry.objectRef.altitude > 0
-			TypeFilter.VISIBLE_TONIGHT -> getVisibleTonight(entry)
-		}
-	}
-
-	private fun createComparator(): Comparator<SearchEntry> {
-		return when (currentSortMode) {
-			SortMode.NAME_ASC -> compareBy { it.displayName.lowercase(Locale.getDefault()) }
-			SortMode.NAME_DESC -> compareByDescending { it.displayName.lowercase(Locale.getDefault()) }
-			SortMode.BRIGHTEST_FIRST -> compareBy<SearchEntry> { it.magnitude }
-			SortMode.FAINTEST_FIRST -> compareByDescending<SearchEntry> { it.magnitude }
-			SortMode.RISES_SOONEST -> compareBy<SearchEntry>({ getRiseSortValue(it) }, { it.displayName.lowercase(Locale.getDefault()) })
-			SortMode.SETS_SOONEST -> compareBy<SearchEntry>({ getSetSortValue(it) }, { it.displayName.lowercase(Locale.getDefault()) })
-		}
-	}
-
-	private fun ensureRiseSet(entry: SearchEntry) {
+	private fun ensureRiseSet(entry: StarMapSearchEntry) {
 		if (entry.riseSetCalculated) {
 			return
 		}
@@ -1120,7 +912,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		entry.riseSetCalculated = true
 	}
 
-	private fun getVisibleTonight(entry: SearchEntry): Boolean {
+	private fun getVisibleTonight(entry: StarMapSearchEntry): Boolean {
 		if (entry.visibleTonightCalculated) {
 			return entry.isVisibleTonight
 		}
@@ -1137,25 +929,25 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		return entry.isVisibleTonight
 	}
 
-	private fun getRiseSortValue(entry: SearchEntry): Long {
+	private fun getRiseSortValue(entry: StarMapSearchEntry): Long {
 		ensureRiseSet(entry)
 		return entry.nextRise?.toInstant()?.toEpochMilli() ?: Long.MAX_VALUE
 	}
 
-	private fun getSetSortValue(entry: SearchEntry): Long {
+	private fun getSetSortValue(entry: StarMapSearchEntry): Long {
 		ensureRiseSet(entry)
 		return entry.nextSet?.toInstant()?.toEpochMilli() ?: Long.MAX_VALUE
 	}
 
 	private fun updateSortControls() {
 		if (!::sortText.isInitialized || !::sortIcon.isInitialized) return
-		val (iconRes, textRes) = when (currentSortMode) {
-			SortMode.NAME_ASC -> R.drawable.ic_action_sort_by_name_ascending to R.string.sort_name_ascending
-			SortMode.NAME_DESC -> R.drawable.ic_action_sort_by_name_descending to R.string.sort_name_descending
-			SortMode.BRIGHTEST_FIRST -> R.drawable.ic_action_sort_short_to_long to R.string.astro_sort_brightest_first
-			SortMode.FAINTEST_FIRST -> R.drawable.ic_action_sort_long_to_short to R.string.astro_sort_faintest_first
-			SortMode.RISES_SOONEST -> R.drawable.ic_action_sort_date_1 to R.string.astro_sort_rises_soonest
-			SortMode.SETS_SOONEST -> R.drawable.ic_action_sort_date_31 to R.string.astro_sort_sets_soonest
+		val (iconRes, textRes) = when (searchState.sortMode) {
+			StarMapSearchSortMode.NAME_ASC -> R.drawable.ic_action_sort_by_name_ascending to R.string.sort_name_ascending
+			StarMapSearchSortMode.NAME_DESC -> R.drawable.ic_action_sort_by_name_descending to R.string.sort_name_descending
+			StarMapSearchSortMode.BRIGHTEST_FIRST -> R.drawable.ic_action_sort_short_to_long to R.string.astro_sort_brightest_first
+			StarMapSearchSortMode.FAINTEST_FIRST -> R.drawable.ic_action_sort_long_to_short to R.string.astro_sort_faintest_first
+			StarMapSearchSortMode.RISES_SOONEST -> R.drawable.ic_action_sort_date_1 to R.string.astro_sort_rises_soonest
+			StarMapSearchSortMode.SETS_SOONEST -> R.drawable.ic_action_sort_date_31 to R.string.astro_sort_sets_soonest
 		}
 		sortText.setText(textRes)
 		sortIcon.setImageDrawable(app.uiUtilities.getIcon(iconRes, ColorUtilities.getActiveIconColorId(nightMode)))
@@ -1163,18 +955,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun updateFilterControls() {
 		if (!::filterText.isInitialized) return
-		val filterCount = calculateFilterCount()
-		filterText.text = getString(R.string.filter_tracks_count, filterCount)
-	}
-
-	private fun calculateFilterCount(): Int {
-		var count = 0
-		if (currentQuickPresetType != QuickPresetType.NONE) count++
-		if (currentTypeFilter != TypeFilter.SHOW_ALL) count++
-		if (currentNakedEyeOnly) count++
-		val specificCategories = selectedCategories.filter { it != CategoryFilter.ALL }
-		if (specificCategories.isNotEmpty()) count++
-		return count
+		filterText.text = getString(R.string.filter_tracks_count, searchState.calculateFilterCount())
 	}
 
 	private fun updateEmptyStateVisibility() {
@@ -1183,15 +964,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	}
 
 	private fun resetAllSearchParams() {
-		currentQuery = ""
-		currentSortMode = SortMode.NAME_ASC
-		currentTypeFilter = TypeFilter.SHOW_ALL
-		currentNakedEyeOnly = false
+		searchState.reset()
 		currentFullSearchMode = FullSearchMode.INPUT
-		selectedCategories.clear()
-		selectedCategories.add(CategoryFilter.ALL)
-		currentQuickPresetType = QuickPresetType.NONE
-		currentQuickPresetCatalogWid = null
 		syncSearchQuery()
 		if (currentMode == ScreenMode.FULL_SEARCH) {
 			showInputMode(InputPresentation.STANDALONE, requestKeyboard = false)
@@ -1200,23 +974,17 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	}
 
 	private fun addRecentChip(label: String) {
-		val normalized = label.trim()
-		if (normalized.isEmpty()) return
-		recentChips.removeAll { it.equals(normalized, ignoreCase = true) }
-		recentChips.add(0, normalized)
-		while (recentChips.size > 8) {
-			recentChips.removeAt(recentChips.lastIndex)
-		}
+		searchState.addRecentChip(label)
 		renderRecentChips()
 	}
 
 	private fun renderRecentChips() {
 		if (!::recentChipsContainer.isInitialized) return
 		recentChipsContainer.removeAllViews()
-		recentChipsScroll.isVisible = recentChips.isNotEmpty()
-		if (recentChips.isEmpty()) return
+		recentChipsScroll.isVisible = searchState.recentChips.isNotEmpty()
+		if (searchState.recentChips.isEmpty()) return
 
-		recentChips.forEach { chipTitle ->
+		searchState.recentChips.forEach { chipTitle ->
 			val chipCard = MaterialCardView(requireContext()).apply {
 				radius = resources.getDimension(R.dimen.content_padding)
 				cardElevation = 0f
@@ -1240,10 +1008,9 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			}
 			chipCard.addView(chipText)
 			chipCard.setOnClickListener {
-				currentQuickPresetType = QuickPresetType.NONE
-				currentQuickPresetCatalogWid = null
+				searchState.selectQuickPreset(StarMapSearchQuickPresetType.NONE, null)
 				currentFullSearchMode = FullSearchMode.INPUT
-				currentQuery = chipTitle
+				searchState.query = chipTitle
 				showInputMode(InputPresentation.EXPLORE_BAR, requestKeyboard = true)
 				applyFiltersAndSort(scrollToTop = true)
 			}
@@ -1256,6 +1023,58 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		}
 	}
 
+	private fun onSearchEntrySelected(entry: StarMapSearchEntry) {
+		addRecentChip(entry.displayName)
+		onObjectSelected?.invoke(entry.objectRef)
+		parentFragmentManager.beginTransaction()
+			.hide(this)
+			.addToBackStack(TAG)
+			.commit()
+	}
+
+	private fun resolveEventText(entry: StarMapSearchEntry): String {
+		ensureRiseSet(entry)
+		val rise = entry.nextRise
+		val set = entry.nextSet
+		if (rise != null && set != null) {
+			return if (rise.isBefore(set)) {
+				formatEvent(rise, isRise = true)
+			} else {
+				formatEvent(set, isRise = false)
+			}
+		}
+		if (rise != null) {
+			return formatEvent(rise, isRise = true)
+		}
+		if (set != null) {
+			return formatEvent(set, isRise = false)
+		}
+		return if (entry.objectRef.altitude > 0) {
+			getString(R.string.astro_search_always_up)
+		} else {
+			getString(R.string.astro_search_never_rises)
+		}
+	}
+
+	private fun formatEvent(time: ZonedDateTime, isRise: Boolean): String {
+		val formattedTime = AstroUtils.formatLocalTime(
+			Time.fromMillisecondsSince1970(time.toInstant().toEpochMilli())
+		)
+		val daysBetween = ChronoUnit.DAYS.between(nowForComputations.toLocalDate(), time.toLocalDate())
+		return if (daysBetween == 1L) {
+			val tomorrow = getString(R.string.tomorrow)
+			if (isRise) {
+				getString(R.string.astro_search_rises_tomorrow, tomorrow, formattedTime)
+			} else {
+				getString(R.string.astro_search_sets_tomorrow, tomorrow, formattedTime)
+			}
+		} else if (isRise) {
+			getString(R.string.astro_search_rises_at, formattedTime)
+		} else {
+			getString(R.string.astro_search_sets_at, formattedTime)
+		}
+	}
+
 	private fun showSortPopup(anchor: View) {
 		dismissSortPopup()
 		val activeColor = ColorUtilities.getActiveColor(app, nightMode)
@@ -1263,43 +1082,51 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 		val items = listOf(
 			createPopupHeaderItem(getString(R.string.sort_by), secondaryTextColor),
-			createRadioPopupItem(getString(R.string.sort_name_ascending), currentSortMode == SortMode.NAME_ASC, activeColor) {
-				currentSortMode = SortMode.NAME_ASC
+			createRadioPopupItem(getString(R.string.sort_name_ascending), searchState.sortMode == StarMapSearchSortMode.NAME_ASC, activeColor) {
+				searchState.sortMode = StarMapSearchSortMode.NAME_ASC
 				updateSortControls()
 				applyFiltersAndSort(scrollToTop = true)
 			},
-			createRadioPopupItem(getString(R.string.sort_name_descending), currentSortMode == SortMode.NAME_DESC, activeColor) {
-				currentSortMode = SortMode.NAME_DESC
+			createRadioPopupItem(getString(R.string.sort_name_descending), searchState.sortMode == StarMapSearchSortMode.NAME_DESC, activeColor) {
+				searchState.sortMode = StarMapSearchSortMode.NAME_DESC
 				updateSortControls()
 				applyFiltersAndSort(scrollToTop = true)
 			},
 			createRadioPopupItem(
 				getString(R.string.astro_sort_brightest_first),
-				currentSortMode == SortMode.BRIGHTEST_FIRST,
+				searchState.sortMode == StarMapSearchSortMode.BRIGHTEST_FIRST,
 				activeColor,
 				showTopDivider = true
 			) {
-				currentSortMode = SortMode.BRIGHTEST_FIRST
+				searchState.sortMode = StarMapSearchSortMode.BRIGHTEST_FIRST
 				updateSortControls()
 				applyFiltersAndSort(scrollToTop = true)
 			},
-			createRadioPopupItem(getString(R.string.astro_sort_faintest_first), currentSortMode == SortMode.FAINTEST_FIRST, activeColor) {
-				currentSortMode = SortMode.FAINTEST_FIRST
+			createRadioPopupItem(
+				getString(R.string.astro_sort_faintest_first),
+				searchState.sortMode == StarMapSearchSortMode.FAINTEST_FIRST,
+				activeColor
+			) {
+				searchState.sortMode = StarMapSearchSortMode.FAINTEST_FIRST
 				updateSortControls()
 				applyFiltersAndSort(scrollToTop = true)
 			},
 			createRadioPopupItem(
 				getString(R.string.astro_sort_rises_soonest),
-				currentSortMode == SortMode.RISES_SOONEST,
+				searchState.sortMode == StarMapSearchSortMode.RISES_SOONEST,
 				activeColor,
 				showTopDivider = true
 			) {
-				currentSortMode = SortMode.RISES_SOONEST
+				searchState.sortMode = StarMapSearchSortMode.RISES_SOONEST
 				updateSortControls()
 				applyFiltersAndSort(scrollToTop = true)
 			},
-			createRadioPopupItem(getString(R.string.astro_sort_sets_soonest), currentSortMode == SortMode.SETS_SOONEST, activeColor) {
-				currentSortMode = SortMode.SETS_SOONEST
+			createRadioPopupItem(
+				getString(R.string.astro_sort_sets_soonest),
+				searchState.sortMode == StarMapSearchSortMode.SETS_SOONEST,
+				activeColor
+			) {
+				searchState.sortMode = StarMapSearchSortMode.SETS_SOONEST
 				updateSortControls()
 				applyFiltersAndSort(scrollToTop = true)
 			}
@@ -1321,64 +1148,93 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		val secondaryTextColor = ColorUtilities.getSecondaryTextColor(requireContext(), nightMode)
 		val items = listOf(
 			createPopupHeaderItem(getString(R.string.shared_string_type), secondaryTextColor),
-			createRadioPopupItem(getString(R.string.astro_filter_show_all), currentTypeFilter == TypeFilter.SHOW_ALL, activeColor,) {
-				currentTypeFilter = TypeFilter.SHOW_ALL
+			createRadioPopupItem(
+				getString(R.string.astro_filter_show_all),
+				searchState.typeFilter == StarMapSearchTypeFilter.SHOW_ALL,
+				activeColor
+			) {
+				searchState.typeFilter = StarMapSearchTypeFilter.SHOW_ALL
 				applyFiltersAndSort(scrollToTop = true)
 			},
-			createRadioPopupItem(getString(R.string.astro_filter_visible_now), currentTypeFilter == TypeFilter.VISIBLE_NOW, activeColor) {
-				currentTypeFilter = TypeFilter.VISIBLE_NOW
+			createRadioPopupItem(
+				getString(R.string.astro_filter_visible_now),
+				searchState.typeFilter == StarMapSearchTypeFilter.VISIBLE_NOW,
+				activeColor
+			) {
+				searchState.typeFilter = StarMapSearchTypeFilter.VISIBLE_NOW
 				applyFiltersAndSort(scrollToTop = true)
 			},
-			createRadioPopupItem(getString(R.string.astro_filter_visible_tonight), currentTypeFilter == TypeFilter.VISIBLE_TONIGHT, activeColor) {
-				currentTypeFilter = TypeFilter.VISIBLE_TONIGHT
+			createRadioPopupItem(
+				getString(R.string.astro_filter_visible_tonight),
+				searchState.typeFilter == StarMapSearchTypeFilter.VISIBLE_TONIGHT,
+				activeColor
+			) {
+				searchState.typeFilter = StarMapSearchTypeFilter.VISIBLE_TONIGHT
 				applyFiltersAndSort(scrollToTop = true)
 			},
-			createCheckPopupItem(getString(R.string.astro_filter_naked_eye), currentNakedEyeOnly, activeColor, showTopDivider = true) {
-				currentNakedEyeOnly = !currentNakedEyeOnly
+			createCheckPopupItem(getString(R.string.astro_filter_naked_eye), searchState.nakedEyeOnly, activeColor, showTopDivider = true) {
+				searchState.nakedEyeOnly = !searchState.nakedEyeOnly
 				applyFiltersAndSort(scrollToTop = true)
 			},
 			createPopupHeaderItem(getString(R.string.favourites_edit_dialog_category), secondaryTextColor, showTopDivider = true),
-			createCheckPopupItem(getString(R.string.shared_string_all), selectedCategories.contains(CategoryFilter.ALL), activeColor) {
-				toggleCategoryFilter(CategoryFilter.ALL)
+			createCheckPopupItem(
+				getString(R.string.shared_string_all),
+				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.ALL),
+				activeColor
+			) {
+				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.ALL)
 				applyFiltersAndSort(scrollToTop = true)
 			},
-			createCheckPopupItem(getString(R.string.astro_solar_system), selectedCategories.contains(CategoryFilter.SOLAR_SYSTEM), activeColor) {
-				toggleCategoryFilter(CategoryFilter.SOLAR_SYSTEM)
+			createCheckPopupItem(
+				getString(R.string.astro_solar_system),
+				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.SOLAR_SYSTEM),
+				activeColor
+			) {
+				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.SOLAR_SYSTEM)
 				applyFiltersAndSort(scrollToTop = true)
 			},
-			createCheckPopupItem(getString(R.string.astro_constellations), selectedCategories.contains(CategoryFilter.CONSTELLATIONS), activeColor) {
-				toggleCategoryFilter(CategoryFilter.CONSTELLATIONS)
+			createCheckPopupItem(
+				getString(R.string.astro_constellations),
+				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.CONSTELLATIONS),
+				activeColor
+			) {
+				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.CONSTELLATIONS)
 				applyFiltersAndSort(scrollToTop = true)
 			},
-			createCheckPopupItem(getString(R.string.astro_stars), selectedCategories.contains(CategoryFilter.STARS), activeColor) {
-				toggleCategoryFilter(CategoryFilter.STARS)
+			createCheckPopupItem(
+				getString(R.string.astro_stars),
+				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.STARS),
+				activeColor
+			) {
+				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.STARS)
 				applyFiltersAndSort(scrollToTop = true)
 			},
-			createCheckPopupItem(getString(R.string.astro_nebulas), selectedCategories.contains(CategoryFilter.NEBULAS), activeColor) {
-				toggleCategoryFilter(CategoryFilter.NEBULAS)
+			createCheckPopupItem(
+				getString(R.string.astro_nebulas),
+				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.NEBULAS),
+				activeColor
+			) {
+				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.NEBULAS)
 				applyFiltersAndSort(scrollToTop = true)
 			},
-			createCheckPopupItem(getString(R.string.astro_star_clusters), selectedCategories.contains(CategoryFilter.STAR_CLUSTERS), activeColor) {
-				toggleCategoryFilter(CategoryFilter.STAR_CLUSTERS)
+			createCheckPopupItem(
+				getString(R.string.astro_star_clusters),
+				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.STAR_CLUSTERS),
+				activeColor
+			) {
+				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.STAR_CLUSTERS)
 				applyFiltersAndSort(scrollToTop = true)
 			},
-			createCheckPopupItem(getString(R.string.astro_deep_sky), selectedCategories.contains(CategoryFilter.DEEP_SKY), activeColor) {
-				toggleCategoryFilter(CategoryFilter.DEEP_SKY)
+			createCheckPopupItem(
+				getString(R.string.astro_deep_sky),
+				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.DEEP_SKY),
+				activeColor
+			) {
+				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.DEEP_SKY)
 				applyFiltersAndSort(scrollToTop = true)
 			}
 		)
 		filterPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items, alignEnd = true, limitHeight = true))
-	}
-
-	private fun toggleCategoryFilter(categoryFilter: CategoryFilter) {
-		if (selectedCategories.contains(categoryFilter)) {
-			selectedCategories.remove(categoryFilter)
-		} else {
-			selectedCategories.add(categoryFilter)
-		}
-		if (selectedCategories.isEmpty()) {
-			selectedCategories.add(CategoryFilter.ALL)
-		}
 	}
 
 	private fun createPopupDisplayData(
@@ -1467,211 +1323,4 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		dismissSortPopup()
 		dismissFilterPopup()
 	}
-
-	inner class SearchAdapter : RecyclerView.Adapter<SearchViewHolder>() {
-		private val viewTypeInfo = 0
-		private val viewTypeItem = 1
-
-		override fun getItemViewType(position: Int): Int {
-			return if (shouldShowInfoHeader() && position == 0) viewTypeInfo else viewTypeItem
-		}
-
-		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-			val layoutId = if (viewType == viewTypeInfo) {
-				R.layout.item_star_search_info
-			} else {
-				R.layout.item_star_search
-			}
-			val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
-			return SearchViewHolder(view)
-		}
-
-		override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-			if (getItemViewType(position) == viewTypeInfo) {
-				holder.bindInfo()
-			} else {
-				holder.bindResult(getEntryForPosition(position))
-			}
-		}
-
-		override fun getItemCount(): Int = visibleEntries.size + if (shouldShowInfoHeader()) 1 else 0
-
-		private fun getEntryForPosition(position: Int): SearchEntry {
-			val entryIndex = if (shouldShowInfoHeader()) position - 1 else position
-			return visibleEntries[entryIndex]
-		}
-	}
-
-	inner class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-		private val nameText: TextView? = view.findViewById(R.id.object_name)
-		private val infoText: TextView? = view.findViewById(R.id.object_info)
-		private val iconView: ImageView? = view.findViewById(R.id.object_icon)
-		private val headerInfoIcon: ImageView? = view.findViewById(R.id.info_icon)
-		private val headerInfoText: TextView? = view.findViewById(R.id.info_text)
-
-		fun bindInfo() {
-			val presetCategory = categoryPresetFromQuickPreset() ?: return
-			headerInfoIcon?.setImageDrawable(
-				app.uiUtilities.getIcon(
-					getCategoryIconRes(presetCategory),
-					ColorUtilities.getActiveIconColorId(nightMode)
-				)
-			)
-			headerInfoText?.setText(getCategoryInfoTextRes(presetCategory))
-			itemView.setOnClickListener(null)
-		}
-
-		fun bindResult(entry: SearchEntry) {
-			val obj = entry.objectRef
-			nameText?.text = entry.displayName
-			infoText?.text = buildSubtitle(entry)
-
-			val forcedCategory = categoryPresetFromQuickPreset()
-			if (forcedCategory != null) {
-				iconView?.setImageDrawable(
-					app.uiUtilities.getIcon(
-						getCategoryIconRes(forcedCategory),
-						ColorUtilities.getDefaultIconColorId(nightMode)
-					)
-				)
-				iconView?.clearColorFilter()
-			} else {
-				iconView?.setImageDrawable(app.uiUtilities.getIcon(entry.iconRes, ColorUtilities.getDefaultIconColorId(nightMode)))
-				iconView?.setColorFilter(entry.iconColor)
-			}
-
-			itemView.setOnClickListener {
-				addRecentChip(entry.displayName)
-				onObjectSelected?.invoke(obj)
-				parentFragmentManager.beginTransaction()
-					.hide(this@StarMapSearchDialogFragment)
-					.addToBackStack(TAG)
-					.commit()
-			}
-		}
-
-		private fun buildSubtitle(entry: SearchEntry): String {
-			val descriptorText = buildDescriptor(entry)
-			val magText = String.format(
-				Locale.getDefault(),
-				itemView.context.getString(R.string.astro_search_magnitude_short),
-				entry.magnitude
-			)
-			if (entry.objectRef.type == SkyObject.Type.CONSTELLATION) {
-				return "$descriptorText • $magText"
-			}
-			val eventText = resolveEventText(entry)
-			return "$descriptorText • $magText • $eventText"
-		}
-
-		private fun buildDescriptor(entry: SearchEntry): String {
-			val obj = entry.objectRef
-			val parentName = resolveParentName(obj)
-			val presetCategory = categoryPresetFromQuickPreset()
-			return when (presetCategory) {
-				CategoryFilter.CONSTELLATIONS -> {
-					val code = obj.catalogId?.trim().orEmpty()
-					if (code.isNotEmpty()) {
-						itemView.context.getString(
-							R.string.astro_search_constellation_with_code,
-							code.uppercase(Locale.getDefault())
-						)
-					} else {
-						itemView.context.getString(R.string.astro_search_type_constellation)
-					}
-				}
-				CategoryFilter.STARS -> {
-					if (parentName.isNullOrEmpty()) {
-						itemView.context.getString(R.string.astro_search_type_star)
-					} else {
-						itemView.context.getString(R.string.astro_search_in_location, parentName)
-					}
-				}
-				CategoryFilter.NEBULAS,
-				CategoryFilter.STAR_CLUSTERS,
-				CategoryFilter.DEEP_SKY -> {
-					val typeLabel = getSingularTypeLabel(obj.type)
-					if (parentName.isNullOrEmpty()) {
-						typeLabel
-					} else {
-						itemView.context.getString(R.string.astro_search_type_in_location, typeLabel, parentName)
-					}
-				}
-				else -> getSingularTypeLabel(obj.type)
-			}
-		}
-
-		private fun getSingularTypeLabel(type: SkyObject.Type): String {
-			return when (type) {
-				SkyObject.Type.SUN -> itemView.context.getString(R.string.astro_name_sun)
-				SkyObject.Type.MOON -> itemView.context.getString(R.string.astro_name_moon)
-				SkyObject.Type.PLANET -> itemView.context.getString(R.string.astro_search_type_planet)
-				SkyObject.Type.STAR -> itemView.context.getString(R.string.astro_search_type_star)
-				SkyObject.Type.GALAXY -> itemView.context.getString(R.string.astro_search_type_galaxy)
-				SkyObject.Type.NEBULA -> itemView.context.getString(R.string.astro_search_type_nebula)
-				SkyObject.Type.BLACK_HOLE -> itemView.context.getString(R.string.astro_search_type_black_hole)
-				SkyObject.Type.OPEN_CLUSTER -> itemView.context.getString(R.string.astro_search_type_open_cluster)
-				SkyObject.Type.GLOBULAR_CLUSTER -> itemView.context.getString(R.string.astro_search_type_globular_cluster)
-				SkyObject.Type.GALAXY_CLUSTER -> itemView.context.getString(R.string.astro_search_type_galaxy_cluster)
-				SkyObject.Type.CONSTELLATION -> itemView.context.getString(R.string.astro_search_type_constellation)
-			}
-		}
-
-		private fun resolveParentName(obj: SkyObject): String? {
-			val centerWid = obj.centerWId?.trim().orEmpty()
-			if (centerWid.isEmpty()) {
-				return null
-			}
-			val mapped = widToDisplayName[centerWid]
-			if (!mapped.isNullOrEmpty()) {
-				return mapped
-			}
-			return centerWid.replace('_', ' ').ifEmpty { null }
-		}
-
-		private fun resolveEventText(entry: SearchEntry): String {
-			ensureRiseSet(entry)
-			val rise = entry.nextRise
-			val set = entry.nextSet
-			if (rise != null && set != null) {
-				return if (rise.isBefore(set)) {
-					formatEvent(rise, isRise = true)
-				} else {
-					formatEvent(set, isRise = false)
-				}
-			}
-			if (rise != null) {
-				return formatEvent(rise, isRise = true)
-			}
-			if (set != null) {
-				return formatEvent(set, isRise = false)
-			}
-			return if (entry.objectRef.altitude > 0) {
-				itemView.context.getString(R.string.astro_search_always_up)
-			} else {
-				itemView.context.getString(R.string.astro_search_never_rises)
-			}
-		}
-
-		private fun formatEvent(time: ZonedDateTime, isRise: Boolean): String {
-			val formattedTime = AstroUtils.formatLocalTime(
-				Time.fromMillisecondsSince1970(time.toInstant().toEpochMilli())
-			)
-			val daysBetween = ChronoUnit.DAYS.between(nowForComputations.toLocalDate(), time.toLocalDate())
-			return if (daysBetween == 1L) {
-				val tomorrow = itemView.context.getString(R.string.tomorrow)
-				if (isRise) {
-					itemView.context.getString(R.string.astro_search_rises_tomorrow, tomorrow, formattedTime)
-				} else {
-					itemView.context.getString(R.string.astro_search_sets_tomorrow, tomorrow, formattedTime)
-				}
-			} else {
-				if (isRise) {
-					itemView.context.getString(R.string.astro_search_rises_at, formattedTime)
-				} else {
-					itemView.context.getString(R.string.astro_search_sets_at, formattedTime)
-				}
-			}
-		}
-	}
-	}
+}
