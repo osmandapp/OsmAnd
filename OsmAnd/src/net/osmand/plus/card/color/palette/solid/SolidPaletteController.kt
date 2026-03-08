@@ -9,6 +9,7 @@ import net.osmand.plus.track.fragments.controller.ColorPickerDialogController
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
 import net.osmand.shared.palette.data.PaletteSortMode
 import net.osmand.shared.palette.data.PaletteUtils
 import net.osmand.shared.palette.domain.Palette
@@ -156,6 +157,9 @@ open class SolidPaletteController(
 		displayData.anchorView = anchorView
 		displayData.menuItems = menuItems
 		displayData.nightMode = nightMode
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD
+		displayData.layoutId = R.layout.popup_menu_item_full_divider
+		displayData.showCompound = false
 		PopUpMenu.show(displayData)
 	}
 

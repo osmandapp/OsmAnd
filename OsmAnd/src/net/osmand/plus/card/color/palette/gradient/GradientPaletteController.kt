@@ -8,9 +8,9 @@ import androidx.fragment.app.FragmentActivity
 import net.osmand.OnResultCallback
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.card.color.palette.gradient.editor.data.GradientDraft
 import net.osmand.plus.card.color.palette.gradient.editor.GradientEditorController
 import net.osmand.plus.card.color.palette.gradient.editor.GradientRangeTypeController
+import net.osmand.plus.card.color.palette.gradient.editor.data.GradientDraft
 import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.palette.controller.BasePaletteController
 import net.osmand.plus.plugins.srtm.TerrainMode
@@ -24,13 +24,14 @@ import net.osmand.plus.widgets.alert.CustomAlert
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.palette.data.PaletteSortMode
 import net.osmand.shared.palette.data.PaletteUtils
 import net.osmand.shared.palette.domain.GradientRangeType
 import net.osmand.shared.palette.domain.Palette
-import net.osmand.shared.palette.domain.category.GradientPaletteCategory
 import net.osmand.shared.palette.domain.PaletteItem
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory
 import net.osmand.shared.palette.domain.filetype.GradientFileType
 import net.osmand.shared.util.KAlgorithms
 
@@ -124,6 +125,7 @@ open class GradientPaletteController(
 				.setTitleId(R.string.shared_string_edit)
 				.setIcon(getContentIcon(R.drawable.ic_action_appearance_outlined))
 				.setOnClickListener { editGradient(item) }
+				.showTopDivider(menuItems.isNotEmpty())
 				.create()
 			)
 		}
@@ -152,6 +154,9 @@ open class GradientPaletteController(
 		displayData.anchorView = anchorView
 		displayData.menuItems = menuItems
 		displayData.nightMode = nightMode
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD
+		displayData.layoutId = R.layout.popup_menu_item_full_divider
+		displayData.showCompound = false
 		PopUpMenu.show(displayData)
 	}
 
