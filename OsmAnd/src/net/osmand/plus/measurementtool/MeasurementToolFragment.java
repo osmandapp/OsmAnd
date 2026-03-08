@@ -1749,6 +1749,9 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		MeasurementToolLayer layer = getMeasurementLayer();
 		boolean added = editingCtx.getCommandManager().execute(new AddPointCommand(layer, true));
 		doAddOrMovePointCommonStuff();
+		if (added) {
+			closeMapContextMenuIfNeeded();
+		}
 		return added;
 	}
 
@@ -1775,12 +1778,28 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	@Nullable
 	@Override
 	public MapPosition getMapDisplayPosition() {
-		MapActivity mapActivity = getMapActivity();
-		boolean contextMenuVisible = mapActivity != null && mapActivity.getContextMenu().isVisible();
-		if (infoExpanded || contextMenuVisible) {
+		if (infoExpanded || isMapContextMenuVisible()) {
 			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_END;
 		}
 		return null;
+	}
+
+	private void closeMapContextMenuIfNeeded() {
+		MapContextMenu menu = getMapContextMenu();
+		if (menu != null && menu.isVisible()) {
+			menu.close();
+		}
+	}
+
+	private boolean isMapContextMenuVisible() {
+		MapContextMenu menu = getMapContextMenu();
+		return menu != null && menu.isVisible();
+	}
+
+	@Nullable
+	private MapContextMenu getMapContextMenu() {
+		MapActivity mapActivity = getMapActivity();
+		return mapActivity != null ? mapActivity.getContextMenu() : null;
 	}
 
 	private void addToGpx(FinalSaveAction finalSaveAction) {
