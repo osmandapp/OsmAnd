@@ -179,30 +179,6 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private boolean matchesAnyBloomToken(byte[] bloomBytes, List<String> queryTokens) {
-		if (queryTokens == null || queryTokens.isEmpty()) {
-			return true;
-		}
-		for (String queryToken : queryTokens) {
-			if (BloomFilter.matches(bloomBytes, queryToken)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private boolean matchesAnyAtomBloom(int atomBloom, List<String> queryTokens) {
-		if (queryTokens == null || queryTokens.isEmpty()) {
-			return true;
-		}
-		for (String queryToken : queryTokens) {
-			if (BloomFilter.matchesInt32(atomBloom, queryToken)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	protected void readPoiIndex(PoiRegion region, boolean readCategories) throws IOException {
 		int length;
 		long oldLimit;
@@ -532,7 +508,7 @@ public class BinaryMapPoiReaderAdapter {
 					return;
 				case POI_NAME_INDEX_DATA_KEY_BLOOM_FIELD_NUMBER:
 					byte[] keyBloomBytes = codedIS.readBytes().toByteArray();
-					boolean keyBloomMatched = matchesAnyBloomToken(keyBloomBytes, queryTokens);
+					boolean keyBloomMatched = BloomFilter.matches(keyBloomBytes, queryTokens);
 					if (!keyBloomMatched) {
 						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 						return;
@@ -593,7 +569,7 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			case POI_NAME_INDEX_DATA_ATOM_BLOOM_FIELD_NUMBER:
 				int atomBloom = codedIS.readInt32();
-				atomMatched = matchesAnyAtomBloom(atomBloom, queryTokens);
+				atomMatched = BloomFilter.matches(atomBloom, queryTokens);
 				if (!atomMatched && shift != Integer.MIN_VALUE) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}

@@ -21,7 +21,7 @@ public final class BloomFilter {
 		}
 		int bloom = 0;
 		for (String token : tokens) {
-			bloom = addTokenToInt32Bloom(bloom, token, startsFrom);
+			bloom = addToken(bloom, token, startsFrom);
 		}
 		return bloom;
 	}
@@ -37,7 +37,7 @@ public final class BloomFilter {
 		return bloom;
 	}
 
-	private static int addTokenToInt32Bloom(int bloom, String token, boolean startsFrom) {
+	private static int addToken(int bloom, String token, boolean startsFrom) {
 		if (Algorithms.isEmpty(token)) {
 			return bloom;
 		}
@@ -46,15 +46,15 @@ public final class BloomFilter {
 			return bloom;
 		}
 		if (!startsFrom) {
-			return addNormalizedTokenToInt32Bloom(bloom, normalizedToken);
+			return addToken(bloom, normalizedToken);
 		}
 		for (int endIndex = 1; endIndex <= normalizedToken.length(); endIndex++) {
-			bloom = addNormalizedTokenToInt32Bloom(bloom, normalizedToken.substring(0, endIndex));
+			bloom = addToken(bloom, normalizedToken.substring(0, endIndex));
 		}
 		return bloom;
 	}
 
-	private static int addNormalizedTokenToInt32Bloom(int bloom, String normalizedToken) {
+	private static int addToken(int bloom, String normalizedToken) {
 		int h1 = normalizedToken.hashCode();
 		int h2 = Integer.rotateLeft(h1, 16) ^ 0x9E3779B9;
 		if (h2 == 0) {
@@ -76,15 +76,15 @@ public final class BloomFilter {
 			return;
 		}
 		if (!startsFrom) {
-			addNormalizedToken(bloom, normalizedToken);
+			addToken(bloom, normalizedToken);
 			return;
 		}
 		for (int endIndex = 1; endIndex <= normalizedToken.length(); endIndex++) {
-			addNormalizedToken(bloom, normalizedToken.substring(0, endIndex));
+			addToken(bloom, normalizedToken.substring(0, endIndex));
 		}
 	}
 
-	private static void addNormalizedToken(byte[] bloom, String normalizedToken) {
+	private static void addToken(byte[] bloom, String normalizedToken) {
 		int h1 = normalizedToken.hashCode();
 		int h2 = Integer.rotateLeft(h1, 16) ^ 0x9E3779B9;
 		if (h2 == 0) {
@@ -130,7 +130,7 @@ public final class BloomFilter {
 		return true;
 	}
 
-	public static boolean matchesInt32(int bloom, String token) {
+	public static boolean matches(int bloom, String token) {
 		if (bloom == 0 || Algorithms.isEmpty(token)) {
 			return true;
 		}
@@ -159,5 +159,29 @@ public final class BloomFilter {
 		}
 		String normalizedToken = CollatorStringMatcher.alignChars(token);
 		return normalizedToken.toLowerCase(Locale.ROOT);
+	}
+
+	public static boolean matches(byte[] bloomBytes, Collection<String> queryTokens) {
+		if (queryTokens == null || queryTokens.isEmpty()) {
+			return true;
+		}
+		for (String queryToken : queryTokens) {
+			if (BloomFilter.matches(bloomBytes, queryToken)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean matches(int atomBloom, Collection<String> queryTokens) {
+		if (queryTokens == null || queryTokens.isEmpty()) {
+			return true;
+		}
+		for (String queryToken : queryTokens) {
+			if (BloomFilter.matches(atomBloom, queryToken)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
