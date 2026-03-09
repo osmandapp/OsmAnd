@@ -147,9 +147,8 @@ open class GradientPaletteController(
 			)
 		}
 
-		// Remove (only if not default and not currently selected)
-		val isSelected = isPaletteItemSelected(item)
-		if (!item.isDefault && !isSelected) {
+		// Remove (only if not default)
+		if (!item.isDefault) {
 			menuItems.add(PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_remove)
 				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
@@ -199,9 +198,7 @@ open class GradientPaletteController(
 	}
 
 	private fun removeGradient(item: PaletteItem.Gradient) {
-		repository.removePaletteItem(paletteId, item.id)
-		notifyUpdatePaletteColors(null)
-
+		removePaletteItem(item)
 		updateExternalDependencies()
 	}
 

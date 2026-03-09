@@ -72,12 +72,7 @@ open class SolidPaletteController(
 	}
 
 	private fun removeCustomColor(item: PaletteItem.Solid) {
-		repository.removePaletteItem(paletteId, item.id)
-
-		if (selectedItem?.id == item.id) {
-			selectedItem = null
-		}
-		notifyUpdatePaletteColors(null)
+		removePaletteItem(item)
 	}
 
 	// --- Selection Logic ---

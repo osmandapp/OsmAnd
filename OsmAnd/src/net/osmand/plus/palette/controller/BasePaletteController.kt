@@ -161,6 +161,16 @@ abstract class BasePaletteController(
 
 	fun getFragmentActivity() = collectActivePalettes()[0].getActivity()
 
+	// --- Internal helper methods ---
+
+	protected fun removePaletteItem(item: PaletteItem) {
+		repository.removePaletteItem(paletteId, item.id)
+		if (selectedItem?.id == item.id) {
+			selectedItem = null
+		}
+		notifyUpdatePaletteColors(null)
+	}
+
 	// --- UI Helpers ---
 
 	override fun getControlsAccentColor(nightMode: Boolean): Int {
