@@ -77,6 +77,7 @@ object WikiCoreHelper {
 
 	fun getWikiImageList(
 		tags: Map<String, String>,
+		preferredLanguage: String?,
 		listener: NetworkResponseListener? = null
 	): List<WikiImage> {
 		val wikiTagData = WikiHelper.extractWikiTagData(tags)
@@ -100,7 +101,7 @@ object WikiCoreHelper {
 			if (params.isNotEmpty()) {
 				val urlParams = params.joinToString("&")
 				val finalUrl = "$OSMAND_API_ENDPOINT$WIKI_PLACE_ACTION$urlParams&addMetaData=true"
-				getImagesOsmAndAPIRequestV2(finalUrl, wikiImages, listener)
+				getImagesOsmAndAPIRequestV2(finalUrl, wikiImages, preferredLanguage, listener)
 			}
 		} else {
 			wikidataId?.takeIf { it.isNotEmpty() }?.let { getWikidataImageWikidata(it, wikiImages) }
@@ -112,6 +113,7 @@ object WikiCoreHelper {
 
 	fun getAstroImageList(
 		wikidataId: String,
+		preferredLanguage: String?,
 		listener: NetworkResponseListener? = null
 	): List<WikiImage> {
 
@@ -129,13 +131,16 @@ object WikiCoreHelper {
 				val finalUrl = "$OSMAND_SEARCH_ENDPOINT$GET_PHOTOS_ACTION$urlParams"
 				getNearbyImagesOsmAndAPIRequest(finalUrl, images, listener)
 
-				wikiImages = parseAstroImages(images)
+				wikiImages = parseAstroImages(images, preferredLanguage)
 			}
 		}
 		return wikiImages
 	}
 
-	fun parseAstroImages(images: MutableList<OsmandApiFeatureData>): List<WikiImage> {
+	fun parseAstroImages(
+		images: MutableList<OsmandApiFeatureData>,
+		preferredLanguage: String?
+	): List<WikiImage> {
 		val wikiImages = ArrayList<WikiImage>()
 		for (data in images) {
 			if (data.properties != null && data.properties.imageTitle != null) {
@@ -157,7 +162,7 @@ object WikiCoreHelper {
 					metadata.author = data.properties.author
 				}
 				if (!data.properties.description.isNullOrEmpty()) {
-					metadata.description = data.properties.description
+					metadata.description = getLocalizedDescription(data.properties.description, preferredLanguage)
 				}
 
 				wikiImages.add(wikiImage)
@@ -166,24 +171,28 @@ object WikiCoreHelper {
 		return wikiImages
 	}
 
-	fun getAstroImagesFromJson(json: String): List<WikiImage> {
+	fun getAstroImagesFromJson(json: String, preferredLanguage: String?): List<WikiImage> {
 		return try {
 			val images: MutableList<OsmandApiFeatureData> = ArrayList()
 
 			val response = jsonParser.decodeFromString(OsmandAPIFeaturesResponse.serializer(), json)
 			response.features?.let { images.addAll(it) }
 
-			parseAstroImages(images)
+			parseAstroImages(images, preferredLanguage)
 		} catch (e: Exception) {
 			LOG.error("Failed to parse JSON from string", e)
 			ArrayList()
 		}
 	}
 
-	fun getImagesFromJson(json: String, wikiImages: MutableList<WikiImage>): List<WikiImage> {
+	fun getImagesFromJson(
+		json: String,
+		wikiImages: MutableList<WikiImage>,
+		preferredLanguage: String?
+	): List<WikiImage> {
 		return try {
 			val response = jsonParser.decodeFromString(OsmandAPIResponseV2.serializer(), json)
-			createWikiImages(response, wikiImages)
+			createWikiImages(response, wikiImages, preferredLanguage)
 		} catch (e: Exception) {
 			LOG.error("Failed to parse JSON from string", e)
 			wikiImages
@@ -202,20 +211,22 @@ object WikiCoreHelper {
 	private fun getImagesOsmAndAPIRequestV2(
 		url: String,
 		wikiImages: MutableList<WikiImage>,
+		preferredLanguage: String?,
 		listener: NetworkResponseListener?
 	): List<WikiImage> {
 		val response =
 			sendWikipediaApiRequest<OsmandAPIResponseV2>(url, useGzip = false, listener = listener)
-		return createWikiImages(response, wikiImages)
+		return createWikiImages(response, wikiImages, preferredLanguage)
 	}
 
 	private fun createWikiImages(
 		response: OsmandAPIResponseV2?,
-		wikiImages: MutableList<WikiImage>
+		wikiImages: MutableList<WikiImage>,
+		preferredLanguage: String?
 	): List<WikiImage> {
 		response?.images?.forEach { obj ->
 			if (obj is JsonObject) {
-				val wikiImage = parseImageDataWithMetaData(obj)
+				val wikiImage = parseImageDataWithMetaData(obj, preferredLanguage)
 				if (wikiImage != null && isUrlFileImage(wikiImage)) {
 					wikiImages.add(wikiImage)
 				}
@@ -268,7 +279,10 @@ object WikiCoreHelper {
 		return wikiImages
 	}
 
-	private fun parseImageDataWithMetaData(image: JsonObject): WikiImage? {
+	private fun parseImageDataWithMetaData(
+		image: JsonObject,
+		preferredLanguage: String?
+	): WikiImage? {
 		val imageUrl = image.getString("image") ?: return null
 		val wikiImage = parseImageDataFromFile(imageUrl) ?: return null
 
@@ -276,11 +290,59 @@ object WikiCoreHelper {
 		image.getString("date")?.let { metadata.date = it }
 		image.getString("author")?.let { metadata.author = it }
 		image.getString("license")?.let { metadata.license = it }
+		image.getString("description")?.let {
+			metadata.description = getLocalizedDescription(it, preferredLanguage)
+		}
 
 		val mediaIdLong = image.getString("mediaId")?.toLongOrNull() ?: -1L
 		wikiImage.setMediaId(mediaIdLong)
 
 		return wikiImage
+	}
+
+	private fun getLocalizedDescription(description: String?, preferredLanguage: String?): String? {
+		if (description.isNullOrBlank()) {
+			return null
+		}
+
+		val trimmedDescription = description.trim()
+		if (!trimmedDescription.startsWith("{")) {
+			return trimmedDescription
+		}
+
+		return try {
+			val descriptions = jsonParser.decodeFromString<JsonObject>(trimmedDescription)
+			selectDescription(descriptions, preferredLanguage)
+		} catch (e: Exception) {
+			LOG.error(e.message, null)
+			null
+		}
+	}
+
+	private fun selectDescription(descriptions: JsonObject, preferredLanguage: String?): String? {
+		buildDescriptionLanguageCandidates(preferredLanguage).forEach { language ->
+			getDescriptionValue(descriptions, language)?.takeIf { it.isNotBlank() }?.let { return it }
+		}
+		return null
+	}
+
+	private fun buildDescriptionLanguageCandidates(preferredLanguage: String?): List<String> {
+		val languages = linkedSetOf<String>()
+		preferredLanguage?.trim()?.lowercase()?.takeIf { it.isNotEmpty() }?.let { language ->
+			languages.add(language)
+			val normalizedLanguage = language.replace('_', '-')
+			languages.add(normalizedLanguage)
+			normalizedLanguage.substringBefore('-').takeIf { it.isNotEmpty() }?.let { languages.add(it) }
+		}
+		languages.add("en")
+		return languages.toList()
+	}
+
+	private fun getDescriptionValue(descriptions: JsonObject, language: String): String? {
+		return descriptions.entries.firstOrNull { it.key.equals(language, ignoreCase = true) }
+			?.value
+			?.let { it as? JsonPrimitive }
+			?.contentOrNull
 	}
 
 	private fun parseImageDataFromFile(imageUrl: String): WikiImage? {

@@ -734,7 +734,7 @@ public class MenuBuilder {
 			CacheReadTask cacheReadTask = new CacheReadTask(cacheManager, rawKey, json -> {
 				if (!Algorithms.isEmpty(json)) {
 					ImageCardsHolder holder = new ImageCardsHolder(latLon, params);
-					List<WikiImage> wikimediaImageList = WikiCoreHelper.INSTANCE.getImagesFromJson(json, wikiTagData.getWikiImages());
+					List<WikiImage> wikimediaImageList = WikiCoreHelper.INSTANCE.getImagesFromJson(json, wikiTagData.getWikiImages(), app.getLanguage());
 					for (WikiImage wikiImage : wikimediaImageList) {
 						holder.addCard(WIKIMEDIA, new WikiImageCard(mapActivity, wikiImage));
 					}
