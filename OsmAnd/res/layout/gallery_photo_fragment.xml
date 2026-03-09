@@ -92,9 +92,20 @@
 				tools:srcCompat="@drawable/ic_action_gshare_dark" />
 
 			<LinearLayout
-				android:layout_width="wrap_content"
+				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:orientation="vertical">
+				android:layout_weight="1"
+				android:orientation="vertical"
+				android:layout_marginEnd="@dimen/content_padding">
+
+				<TextView
+					android:id="@+id/description"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="2"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="Eiffel Tower, seen from the Champ de Mars, Paris, France" />
 
 				<TextView
 					android:id="@+id/date"
@@ -102,6 +113,7 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
 					android:textSize="@dimen/default_list_text_size"
+					android:maxLines="2"
 					tools:text="@string/map_widget_left" />
 
 				<TextView
@@ -110,6 +122,7 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
 					android:textSize="@dimen/default_list_text_size"
+					android:maxLines="2"
 					tools:text="@string/map_widget_left" />
 
 				<TextView
@@ -118,6 +131,7 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
 					android:textSize="@dimen/default_list_text_size"
+					android:maxLines="2"
 					tools:text="@string/map_widget_left" />
 
 			</LinearLayout>

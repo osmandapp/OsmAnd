@@ -53,9 +53,7 @@ import net.osmand.shared.wiki.WikiMetadata;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 
@@ -67,6 +65,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	private GalleryController controller;
 
 	private ImageView sourceView;
+	private TextView descriptionView;
 	private TextView dateView;
 	private TextView authorView;
 	private TextView licenseView;
@@ -186,8 +185,10 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 			licenseView.setVisibility(View.VISIBLE);
 
 			WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
+			setDescription(metadata.getDescription());
 			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
 		} else {
+			setDescription(null);
 			dateView.setVisibility(View.INVISIBLE);
 			authorView.setVisibility(View.INVISIBLE);
 			licenseView.setVisibility(View.INVISIBLE);
@@ -197,6 +198,12 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 		Drawable icon = iconId != 0 ? app.getUIUtilities().getIcon(iconId) : null;
 		sourceView.setImageDrawable(icon);
 		AndroidUiHelper.updateVisibility(sourceView, icon != null);
+	}
+
+	private void setDescription(@Nullable String description) {
+		boolean hasDescription = !Algorithms.isEmpty(description);
+		AndroidUiHelper.updateVisibility(descriptionView, hasDescription);
+		descriptionView.setText(hasDescription ? description : null);
 	}
 
 	private void setMetaData(@Nullable String author, @Nullable String date,
@@ -217,6 +224,9 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	}
 
 	private void setupMetadataRow(@NonNull ViewGroup view) {
+		descriptionView = view.findViewById(R.id.description);
+		descriptionView.setTextColor(ColorUtilities.getColor(app, R.color.text_color_tertiary_light));
+
 		dateView = view.findViewById(R.id.date);
 		dateView.setTextColor(ColorUtilities.getColor(app, R.color.text_color_tertiary_light));
 
