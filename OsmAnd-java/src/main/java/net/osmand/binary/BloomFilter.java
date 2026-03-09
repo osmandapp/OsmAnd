@@ -2,9 +2,9 @@ package net.osmand.binary;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.util.Algorithms;
+import net.sf.junidecode.Junidecode;
 
-import java.util.Collection;
-import java.util.Locale;
+import java.util.*;
 
 public final class BloomFilter {
 	private static final int DEFAULT_BITS = 512;
@@ -15,13 +15,41 @@ public final class BloomFilter {
 	private BloomFilter() {
 	}
 
+	private static Set<String> extendTokens(Collection<String> tokens) {
+		Set<String> extendedTokens = new TreeSet<>();
+		for (String token : tokens) {
+			if (Algorithms.isEmpty(token)) {
+				continue;
+			}
+			extendedTokens.add(token);
+			for (int endIndex = 1; endIndex <= token.length(); endIndex++) {
+				extendedTokens.add(token.substring(0, endIndex));
+			}
+
+			String transliteratedToken = Junidecode.unidecode(token);
+			if (!Algorithms.isEmpty(transliteratedToken) && !token.equals(transliteratedToken)) {
+				extendedTokens.add(transliteratedToken);
+				for (int endIndex = 1; endIndex <= transliteratedToken.length(); endIndex++) {
+					extendedTokens.add(transliteratedToken.substring(0, endIndex));
+				}
+			}
+		}
+		return extendedTokens;
+	}
+
 	public static int buildInt32(Collection<String> tokens, boolean startsFrom) {
 		if (tokens == null || tokens.isEmpty()) {
 			return 0;
 		}
 		int bloom = 0;
-		for (String token : tokens) {
-			bloom = addToken(bloom, token, startsFrom);
+		if (startsFrom) {
+			for (String token : extendTokens(tokens)) {
+				bloom = addToken(bloom, token);
+			}
+		} else {
+			for (String token : tokens) {
+				bloom = addToken(bloom, token);
+			}
 		}
 		return bloom;
 	}
@@ -30,14 +58,15 @@ public final class BloomFilter {
 		if (tokens == null || tokens.isEmpty()) {
 			return null;
 		}
+
 		byte[] bloom = new byte[DEFAULT_SIZE];
-		for (String token : tokens) {
-			addToken(bloom, token, startsFrom);
+		for (String token : (startsFrom ? extendTokens(tokens) : tokens)) {
+			addToken(bloom, token);
 		}
 		return bloom;
 	}
 
-	private static int addToken(int bloom, String token, boolean startsFrom) {
+	private static int addToken(int bloom, String token) {
 		if (Algorithms.isEmpty(token)) {
 			return bloom;
 		}
@@ -45,16 +74,10 @@ public final class BloomFilter {
 		if (Algorithms.isEmpty(normalizedToken)) {
 			return bloom;
 		}
-		if (!startsFrom) {
-			return addToken(bloom, normalizedToken);
-		}
-		for (int endIndex = 1; endIndex <= normalizedToken.length(); endIndex++) {
-			bloom = addToken(bloom, normalizedToken.substring(0, endIndex));
-		}
-		return bloom;
+		return addNormToken(bloom, normalizedToken);
 	}
 
-	private static int addToken(int bloom, String normalizedToken) {
+	private static int addNormToken(int bloom, String normalizedToken) {
 		int h1 = normalizedToken.hashCode();
 		int h2 = Integer.rotateLeft(h1, 16) ^ 0x9E3779B9;
 		if (h2 == 0) {
@@ -67,7 +90,7 @@ public final class BloomFilter {
 		return bloom;
 	}
 
-	private static void addToken(byte[] bloom, String token, boolean startsFrom) {
+	private static void addToken(byte[] bloom, String token) {
 		if (bloom == null || bloom.length == 0 || Algorithms.isEmpty(token)) {
 			return;
 		}
@@ -75,16 +98,10 @@ public final class BloomFilter {
 		if (Algorithms.isEmpty(normalizedToken)) {
 			return;
 		}
-		if (!startsFrom) {
-			addToken(bloom, normalizedToken);
-			return;
-		}
-		for (int endIndex = 1; endIndex <= normalizedToken.length(); endIndex++) {
-			addToken(bloom, normalizedToken.substring(0, endIndex));
-		}
+		addNormToken(bloom, normalizedToken);
 	}
 
-	private static void addToken(byte[] bloom, String normalizedToken) {
+	private static void addNormToken(byte[] bloom, String normalizedToken) {
 		int h1 = normalizedToken.hashCode();
 		int h2 = Integer.rotateLeft(h1, 16) ^ 0x9E3779B9;
 		if (h2 == 0) {
