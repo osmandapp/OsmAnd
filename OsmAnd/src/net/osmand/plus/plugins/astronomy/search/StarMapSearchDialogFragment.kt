@@ -27,6 +27,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.search.SearchBar
 import com.google.android.material.search.SearchView
+import com.google.android.material.tabs.TabLayout
 import io.github.cosinekitty.astronomy.Observer
 import io.github.cosinekitty.astronomy.Time
 import kotlinx.coroutines.Dispatchers
@@ -116,6 +117,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private lateinit var exploreSearchInputView: SearchView
 	private lateinit var fullSearchInputView: SearchView
 	private lateinit var fullSearchBrowseToolbar: MaterialToolbar
+	private lateinit var myDataTabs: TabLayout
 	private lateinit var exploreSearchEditText: EditText
 	private lateinit var fullSearchEditText: EditText
 	private lateinit var sortButton: View
@@ -125,6 +127,9 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private lateinit var filterText: TextView
 	private lateinit var sortProgress: View
 	private lateinit var emptyStateContainer: View
+	private lateinit var emptyStateIcon: ImageView
+	private lateinit var emptyStateTitle: TextView
+	private lateinit var emptyStateDescription: TextView
 	private lateinit var emptyStateResetButton: View
 	private lateinit var recentChipsContainer: LinearLayout
 	private lateinit var recentChipsScroll: View
@@ -144,6 +149,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private var currentFullSearchMode: FullSearchMode = FullSearchMode.INPUT
 	private var currentInputPresentation: InputPresentation = InputPresentation.EXPLORE_BAR
 	private var wasInfoHeaderVisible = false
+	private var defaultBrowseHeaderHeight = 0
 	private val widToDisplayName = mutableMapOf<String, String>()
 	private var observerForComputations = Observer(0.0, 0.0, 0.0)
 	private var nowForComputations: ZonedDateTime = ZonedDateTime.now()
@@ -286,6 +292,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		exploreSearchBar = root.findViewById(R.id.explore_search_bar)
 		fullSearchAnchorBar = root.findViewById(R.id.full_search_anchor_bar)
 		fullSearchBrowseHeader = root.findViewById(R.id.full_search_browse_header)
+		defaultBrowseHeaderHeight = fullSearchBrowseHeader.layoutParams.height
+		myDataTabs = root.findViewById(R.id.my_data_tabs)
 		exploreSearchInputView = root.findViewById(R.id.explore_search_input_view)
 		exploreSearchInputView.setVisible(false)
 		fullSearchInputView = root.findViewById(R.id.full_search_input_view)
@@ -310,6 +318,9 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		filterText = searchResultsPanel.findViewById(R.id.filter_text)
 		sortProgress = searchResultsPanel.findViewById(R.id.sort_progress)
 		emptyStateContainer = searchResultsPanel.findViewById(R.id.empty_state_container)
+		emptyStateIcon = searchResultsPanel.findViewById(R.id.empty_state_icon)
+		emptyStateTitle = searchResultsPanel.findViewById(R.id.empty_state_title)
+		emptyStateDescription = searchResultsPanel.findViewById(R.id.empty_state_description)
 		emptyStateResetButton = searchResultsPanel.findViewById(R.id.empty_state_reset_button)
 		searchRecycler = searchResultsPanel.findViewById(R.id.search_results)
 		attachSearchResultsPanel(fullSearchResultsHost)
@@ -357,6 +368,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	}
 
 	private fun setupListeners() {
+		setupMyDataTabs()
 		bindExploreSearchBarListeners()
 		fullSearchBrowseToolbar.setNavigationOnClickListener { handleBrowseBackNavigation() }
 		fullSearchBrowseToolbar.setOnMenuItemClickListener { item ->
@@ -381,7 +393,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				else -> Unit
 			}
 		}
-		emptyStateResetButton.setOnClickListener { resetAllSearchParams() }
+		emptyStateResetButton.setOnClickListener { handleEmptyStateAction() }
 		sortButton.setOnClickListener { showSortPopup(sortButton) }
 		filterButton.setOnClickListener { showFilterPopup(filterButton) }
 
@@ -403,6 +415,33 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		fullSearchEditText.addTextChangedListener(textWatcher)
 	}
 
+	private fun setupMyDataTabs() {
+		myDataTabs.removeAllTabs()
+		myDataTabs.addTab(myDataTabs.newTab().setText(R.string.favorites_item))
+		myDataTabs.addTab(myDataTabs.newTab().setText(R.string.astro_daily_path))
+		myDataTabs.addTab(myDataTabs.newTab().setText(R.string.astro_directions))
+		myDataTabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+			override fun onTabSelected(tab: TabLayout.Tab) {
+				val preset = when (tab.position) {
+					0 -> StarMapSearchQuickPresetType.MY_DATA_FAVORITES
+					1 -> StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH
+					else -> StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS
+				}
+				if (searchState.quickPresetType == preset) {
+					return
+				}
+				searchState.selectQuickPreset(preset, null)
+				currentFullSearchMode = FullSearchMode.BROWSE
+				applyMode(ScreenMode.FULL_SEARCH, requestKeyboard = false)
+				applyFiltersAndSort(scrollToTop = true)
+			}
+
+			override fun onTabUnselected(tab: TabLayout.Tab) = Unit
+
+			override fun onTabReselected(tab: TabLayout.Tab) = Unit
+		})
+	}
+
 	private fun updateBrowseToolbarAppearance() {
 		val iconColor = ColorUtilities.getDefaultIconColor(requireContext(), nightMode)
 		exploreSearchBar.navigationIcon?.setTint(iconColor)
@@ -410,6 +449,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		fullSearchAnchorBar.navigationIcon?.setTint(iconColor)
 		fullSearchBrowseToolbar.navigationIcon?.setTint(iconColor)
 		fullSearchBrowseToolbar.menu.findItem(R.id.action_search)?.icon?.setTint(iconColor)
+		fullSearchBrowseToolbar.menu.findItem(R.id.action_search)?.isVisible = !isMyDataMode()
 	}
 
 	private fun attachSearchResultsPanel(host: FrameLayout) {
@@ -674,6 +714,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun applyMode(mode: ScreenMode, requestKeyboard: Boolean) {
 		updateBrowseToolbarAppearance()
+		updateBrowseHeaderLayout()
 		if (mode == ScreenMode.EXPLORE) {
 			showExploreMode()
 		} else if (currentFullSearchMode == FullSearchMode.BROWSE) {
@@ -686,13 +727,76 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			}
 			showInputMode(presentation, requestKeyboard)
 		}
+		updateMyDataTabs()
 		updateSortControls()
 		updateFilterControls()
+		updateEmptyStateContent()
 		updateEmptyStateVisibility()
 	}
 
 	private fun renderBrowseHeader() {
-		fullSearchBrowseHeader.title = getBrowseTitle()
+		val title = getBrowseTitle()
+		if (isMyDataMode()) {
+			fullSearchBrowseHeader.title = ""
+			fullSearchBrowseToolbar.title = title
+		} else {
+			fullSearchBrowseToolbar.title = ""
+			fullSearchBrowseHeader.title = title
+		}
+	}
+
+	private fun updateBrowseHeaderLayout() {
+		if (!::fullSearchBrowseHeader.isInitialized || !::fullSearchBrowseToolbar.isInitialized) {
+			return
+		}
+		val isCompactHeader = isMyDataMode()
+		fullSearchBrowseHeader.isTitleEnabled = !isCompactHeader
+		val targetHeight = if (isCompactHeader) {
+			resources.getDimensionPixelSize(R.dimen.toolbar_height)
+		} else {
+			defaultBrowseHeaderHeight
+		}
+		val layoutParams = fullSearchBrowseHeader.layoutParams
+		if (layoutParams.height != targetHeight) {
+			layoutParams.height = targetHeight
+			fullSearchBrowseHeader.layoutParams = layoutParams
+		}
+		if (!isCompactHeader) {
+			fullSearchBrowseToolbar.title = ""
+		}
+	}
+
+	private fun isMyDataMode(): Boolean {
+		return when (searchState.quickPresetType) {
+			StarMapSearchQuickPresetType.MY_DATA_FAVORITES,
+			StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH,
+			StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> true
+			else -> false
+		}
+	}
+
+	private fun getSelectedMyDataTabIndex(): Int? {
+		return when (searchState.quickPresetType) {
+			StarMapSearchQuickPresetType.MY_DATA_FAVORITES -> 0
+			StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH -> 1
+			StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> 2
+			else -> null
+		}
+	}
+
+	private fun updateMyDataTabs() {
+		if (!::myDataTabs.isInitialized) {
+			return
+		}
+		val visible = currentMode == ScreenMode.FULL_SEARCH && currentFullSearchMode == FullSearchMode.BROWSE && isMyDataMode()
+		myDataTabs.isVisible = visible
+		if (!visible) {
+			return
+		}
+		val selectedIndex = getSelectedMyDataTabIndex() ?: return
+		if (myDataTabs.selectedTabPosition != selectedIndex) {
+			myDataTabs.getTabAt(selectedIndex)?.select()
+		}
 	}
 
 	private fun showExploreMode() {
@@ -996,9 +1100,9 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			StarMapSearchQuickPresetType.CATEGORY_NEBULAS -> getString(R.string.astro_nebulas)
 			StarMapSearchQuickPresetType.CATEGORY_STAR_CLUSTERS -> getString(R.string.astro_star_clusters)
 			StarMapSearchQuickPresetType.CATEGORY_DEEP_SKY -> getString(R.string.astro_deep_sky)
-			StarMapSearchQuickPresetType.MY_DATA_FAVORITES -> getString(R.string.favorites_item)
-			StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH -> getString(R.string.astro_daily_path)
-			StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> getString(R.string.astro_directions)
+			StarMapSearchQuickPresetType.MY_DATA_FAVORITES,
+			StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH,
+			StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> getString(R.string.astro_explore_my_data)
 			StarMapSearchQuickPresetType.CATALOG_WID -> {
 				val catalog = dataProvider.getCatalogs(requireContext()).firstOrNull { it.wid == searchState.quickPresetCatalogWid }
 				catalog?.name ?: getString(R.string.shared_string_search)
@@ -1231,9 +1335,52 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		filterText.text = getString(R.string.filter_tracks_count, searchState.calculateFilterCount())
 	}
 
+	private fun updateEmptyStateContent() {
+		if (!::emptyStateTitle.isInitialized || !::emptyStateDescription.isInitialized || !::emptyStateResetButton.isInitialized) {
+			return
+		}
+		val resetButton = emptyStateResetButton as? TextView
+		if (isMyDataMode()) {
+			val (iconRes, titleRes, descriptionRes) = when (searchState.quickPresetType) {
+				StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> Triple(
+					R.drawable.ic_direction_arrow,
+					R.string.astro_my_data_no_directions_title,
+					R.string.astro_my_data_no_directions_description
+				)
+				StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH -> Triple(
+					R.drawable.ic_action_target_path_off,
+					R.string.astro_my_data_no_daily_paths_title,
+					R.string.astro_my_data_no_daily_paths_description
+				)
+				else -> Triple(
+					R.drawable.ic_action_bookmark,
+					R.string.astro_my_data_no_favorites_title,
+					R.string.astro_my_data_no_favorites_description
+				)
+			}
+			emptyStateIcon.setImageDrawable(app.uiUtilities.getIcon(iconRes, ColorUtilities.getDefaultIconColorId(nightMode)))
+			emptyStateTitle.setText(titleRes)
+			emptyStateDescription.setText(descriptionRes)
+			resetButton?.setText(R.string.astro_go_to_map)
+		} else {
+			emptyStateIcon.setImageDrawable(app.uiUtilities.getIcon(R.drawable.ic_action_ufo, ColorUtilities.getDefaultIconColorId(nightMode)))
+			emptyStateTitle.setText(R.string.nothing_found)
+			emptyStateDescription.setText(R.string.astro_search_empty_description)
+			resetButton?.setText(R.string.shared_string_reset)
+		}
+	}
+
 	private fun updateEmptyStateVisibility() {
 		if (!::emptyStateContainer.isInitialized) return
 		emptyStateContainer.isVisible = currentMode == ScreenMode.FULL_SEARCH && getCurrentResultsCount() == 0
+	}
+
+	private fun handleEmptyStateAction() {
+		if (isMyDataMode()) {
+			dismiss()
+		} else {
+			resetAllSearchParams()
+		}
 	}
 
 	private fun resetAllSearchParams() {

@@ -17,6 +17,13 @@
 	<string name="astro_search_info_nebulas">A nebula is a giant cloud of dust and gas in space, often a region where stars are born.</string>
 	<string name="astro_search_info_star_clusters">A star cluster is a group of stars that are gravitationally bound and formed from the same molecular cloud.</string>
 	<string name="astro_search_info_deep_sky">Deep sky objects include galaxies, nebulae, star clusters, and other distant astronomical targets.</string>
+	<string name="astro_go_to_map">Go to map</string>
+	<string name="astro_my_data_no_favorites_title">Nothing here</string>
+	<string name="astro_my_data_no_favorites_description">You can add objects to your favorites from their context menu</string>
+	<string name="astro_my_data_no_daily_paths_title">No daily paths</string>
+	<string name="astro_my_data_no_daily_paths_description">Enable a daily path for an object from its context menu to see it here</string>
+	<string name="astro_my_data_no_directions_title">No directions set</string>
+	<string name="astro_my_data_no_directions_description">Directions allow you to keep a visible arrow pointing to an object. Enable it from the context menu.</string>
 	<plurals name="astro_catalog_objects_count">
 		<item quantity="one">%d object</item>
 		<item quantity="other">%d objects</item>

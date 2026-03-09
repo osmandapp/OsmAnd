@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/content_padding_small_half"
         android:layout_marginBottom="@dimen/content_padding"
+        android:textAlignment="center"
         android:text="@string/astro_search_empty_description"
         android:textColor="?android:textColorSecondary"
         android:textSize="@dimen/default_desc_text_size" />

@@ -318,6 +318,7 @@
                     app:menu="@menu/menu_star_search_browse"
                     app:navigationContentDescription="@string/shared_string_back"
                     app:navigationIcon="@drawable/ic_arrow_back"
+                    app:titleTextAppearance="@style/AppBarTitlePrimary"
                     app:title="" />
 
                 <com.google.android.material.search.SearchBar
@@ -337,6 +338,27 @@
                     app:navigationIcon="@drawable/ic_arrow_back"
                     app:shapeAppearanceOverlay="@style/Shape.Card8" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/my_data_tabs"
+                style="@style/Widget.Material3.TabLayout.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/active_color_secondary"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:visibility="gone"
+                app:tabBackground="@android:color/transparent"
+                app:tabGravity="fill"
+                app:tabIconTint="@null"
+                app:tabIndicatorAnimationMode="elastic"
+                app:tabIndicatorColor="?attr/icon_color_active"
+                app:tabIndicatorFullWidth="true"
+                app:tabIndicatorGravity="bottom"
+                app:tabInlineLabel="false"
+                app:tabMode="fixed"
+                app:tabTextColor="?attr/text_color_secondary"
+                app:tabSelectedTextColor="?attr/active_color_primary"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 
