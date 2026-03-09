@@ -93,6 +93,8 @@ public class ObfConstants {
 	}
 
 	// Use getOsmObjectId(MapObject) for RenderedObject
+	// Doesn't work correctly for some TransportStop (stop.getId() = 16055353830 results in osmId 8027676915 which does not exist)
+	// https://www.openstreetmap.org/node/988560310
 	public static long getOsmIdFromMapObjectId(long id) {
 		long originalId;
 		if (isIdFromPropagatedNode(id)) {

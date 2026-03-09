@@ -5755,7 +5755,7 @@
     <string name="astro_constellations">Réaltbhuíonta</string>
     <string name="astro_stars">Réaltaí</string>
     <string name="astro_galaxies">Réaltraí</string>
-    <string name="astro_nebulae">Réalta</string>
+    <string name="astro_nebulae">Réaltnéal</string>
     <string name="astro_open_clusters">Braislí Oscailte</string>
     <string name="astro_globular_clusters">Braislí Cruinneacha</string>
     <string name="astro_galaxy_clusters">Braislí Réaltra</string>
@@ -5810,7 +5810,7 @@
     <string name="map_3d">3D</string>
     <string name="astro_deep_sky">Spéir dhomhain</string>
     <string name="astro_star_clusters">Réaltbhraislí</string>
-    <string name="astro_nebulas">Néalta</string>
+    <string name="astro_nebulas">Réaltnéalta</string>
     <string name="astro_solar_system">Córas gréine</string>
     <string name="delete_groups_confirmation">Scrios grúpaí?</string>
     <string name="add_to_track">Cuir leis an rian</string>
@@ -5871,4 +5871,26 @@
     <string name="trip_recording_moving_time_widget_description">Taispeánann sé an t-am gluaiseachta atá taifeadta faoi láthair, nó an t-am don dul suas an cnoc agus síos an cnoc deireanach.</string>
     <string name="trip_recording_moving_time">Am ag bogadh</string>
     <string name="intersection">Crosbhealach</string>
+    <string name="astro_culmination">Buaicphointe</string>
+    <string name="astro_today_visibility">Infheictheacht inniu</string>
+    <string name="astro_alt_short">Alt</string>
+    <string name="astro_az_short">Az</string>
+    <string name="astronomy_schedule">Sceideal</string>
+    <string name="astro_catalogs">Catalóga</string>
+    <string name="astro_path">Cosán</string>
+    <string name="astro_direction">Treo</string>
+    <string name="astro_locate">Aimsigh</string>
+    <string name="astro_type_earth">Domhan</string>
+    <string name="astro_type_star">Réalta</string>
+    <string name="astro_type_galaxy">Réaltra</string>
+    <string name="astro_type_black_hole">Poll dubh</string>
+    <string name="astro_type_planet">Pláinéad</string>
+    <string name="astro_type_sun">Grian</string>
+    <string name="astro_type_satellite">Satailít</string>
+    <string name="astro_type_nebula">Réaltnéal</string>
+    <string name="astro_type_open_cluster">Braisle oscailte</string>
+    <string name="astro_type_globular_cluster">Braisle chruinneach</string>
+    <string name="astro_type_galaxy_cluster">Braisle réaltra</string>
+    <string name="astro_type_constellation">Réaltbhuíon</string>
+    <string name="show_layout_grid_logs">Taispeáin logaí eangaí</string>
 </resources>

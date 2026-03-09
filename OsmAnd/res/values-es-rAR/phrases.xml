@@ -5166,4 +5166,13 @@
     <string name="poi_memorial_type">Tipo de conmemoración</string>
     <string name="poi_yoga">Yoga</string>
     <string name="poi_covered_booth_filter">Cabina</string>
+    <string name="poi_rapids_filter">Grado de rápidos</string>
+    <string name="poi_rapids_grade_0">0 (aguas calmas)</string>
+    <string name="poi_rapids_grade_1">1 (fácil)</string>
+    <string name="poi_rapids_grade_2">2 (novato)</string>
+    <string name="poi_rapids_grade_3">3 (intermedio)</string>
+    <string name="poi_rapids_grade_4">4 (avanzado)</string>
+    <string name="poi_rapids_grade_5">5 (experto)</string>
+    <string name="poi_rapids_grade_6">6 (extremo)</string>
+    <string name="poi_rapids_grade_x">X (no navegables)</string>
 </resources>

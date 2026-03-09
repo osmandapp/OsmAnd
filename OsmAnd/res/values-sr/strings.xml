@@ -6026,10 +6026,23 @@
     <string name="delete_palette">Обриши палету</string>
     <string name="delete_colors_palette_dialog_summary">Да ли сте сигурни да желите да обришете палету %1$s?</string>
     <string name="shared_string_trip_average">Просечна вредност путовања</string>
-    <string name="trip_recording_avg_speed_widget_description">Приказује просечну брзину тренутног путовања или просечну брзину током последњег успона или спуста.</string>
+    <string name="trip_recording_avg_speed_widget_description">Приказује просечну брзину тренутног путовања или просечну брзину током последњег успона или дела спуста.</string>
     <string name="trip_recording_moving_time_widget_description">Приказује тренутно забележено време кретања или време за последњи успон и спуст.</string>
     <string name="trip_recording_moving_time">Време кретања</string>
     <string name="share_favorite">Подели омиљено</string>
-    <string name="copy_list">Копирај листу</string>
+    <string name="copy_list">Умножи списак</string>
     <string name="intersection">Раскршће</string>
+    <string name="show_layout_grid_logs">Прикажи логове мреже</string>
+    <string name="astro_today_visibility">Данашња видљивост</string>
+    <string name="astronomy_schedule">Распоред</string>
+    <string name="astro_catalogs">Збирке</string>
+    <string name="astro_path">Путања</string>
+    <string name="astro_direction">Правац</string>
+    <string name="astro_locate">Пронађи положај</string>
+    <string name="astro_type_earth">Земља</string>
+    <string name="astro_type_star">Звезда</string>
+    <string name="astro_type_black_hole">Црна рупа</string>
+    <string name="astro_type_planet">Планета</string>
+    <string name="astro_type_sun">Сунце</string>
+    <string name="astro_type_satellite">Сателит</string>
 </resources>
