@@ -20,6 +20,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.R as MaterialR
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.appbar.MaterialToolbar
@@ -158,6 +159,10 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 		private const val KEY_MODE = "mode"
 		private const val KEY_FULL_SEARCH_MODE = "full_search_mode"
+		private const val RISE_ARROW = "↗"
+		private const val SET_ARROW = "↘"
+		private const val UP_ARROW = "↑"
+		private const val DOWN_ARROW = "↓"
 	}
 
 	override fun getThemeId(): Int = if (nightMode) R.style.OsmandMaterialDarkTheme else R.style.OsmandMaterialLightTheme
@@ -758,7 +763,12 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		searchView.setupWithSearchBar(
 			if (presentation == InputPresentation.EXPLORE_BAR) exploreSearchBar else fullSearchAnchorBar
 		)
+		searchView.elevation = 0f
+		searchView.translationZ = 0f
 		searchView.setMenuItemsAnimated(false)
+		searchView.findViewById<View>(MaterialR.id.open_search_view_divider)?.isVisible = false
+		searchView.toolbar.elevation = 0f
+		searchView.toolbar.translationZ = 0f
 		searchView.toolbar.menu.clear()
 		val iconColor = ColorUtilities.getDefaultIconColor(requireContext(), nightMode)
 		searchView.toolbar.navigationIcon?.mutate()?.setTint(iconColor)
@@ -882,7 +892,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 						requireContext(),
 						nightMode
 					),
-					catalogWid = obj.catalog?.wid
+					catalogWids = obj.catalogs.mapTo(linkedSetOf()) { it.wid }
 				)
 			)
 		}
@@ -1161,28 +1171,41 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			.commit()
 	}
 
-	private fun resolveEventText(entry: StarMapSearchEntry): String {
+	private fun resolveEventText(entry: StarMapSearchEntry): CharSequence {
 		ensureRiseSet(entry)
 		val rise = entry.nextRise
 		val set = entry.nextSet
-		if (rise != null && set != null) {
-			return if (rise.isBefore(set)) {
-				formatEvent(rise, isRise = true)
-			} else {
-				formatEvent(set, isRise = false)
+		val eventText = when {
+			rise != null && set != null -> {
+				if (rise.isBefore(set)) {
+					formatEvent(rise, isRise = true)
+				} else {
+					formatEvent(set, isRise = false)
+				}
+			}
+			rise != null -> formatEvent(rise, isRise = true)
+			set != null -> formatEvent(set, isRise = false)
+			entry.objectRef.altitude > 0 -> {
+				getString(R.string.astro_search_always_up)
+			}
+			else -> {
+				getString(R.string.astro_search_never_rises)
 			}
 		}
-		if (rise != null) {
-			return formatEvent(rise, isRise = true)
+		return replaceEventArrowWithIcon(eventText)
+	}
+
+	private fun replaceEventArrowWithIcon(text: String): CharSequence {
+		val (arrow, iconRes) = when {
+			text.contains(RISE_ARROW) -> RISE_ARROW to R.drawable.ic_action_arrow_top_right_16
+			text.contains(SET_ARROW) -> SET_ARROW to R.drawable.ic_action_arrow_bottom_right_16
+			text.contains(UP_ARROW) -> UP_ARROW to R.drawable.ic_action_arrow_up_16
+			text.contains(DOWN_ARROW) -> DOWN_ARROW to R.drawable.ic_action_arrow_down_16
+			else -> return text
 		}
-		if (set != null) {
-			return formatEvent(set, isRise = false)
-		}
-		return if (entry.objectRef.altitude > 0) {
-			getString(R.string.astro_search_always_up)
-		} else {
-			getString(R.string.astro_search_never_rises)
-		}
+		val icon = app.uiUtilities.getIcon(iconRes, ColorUtilities.getSecondaryIconColorId(nightMode))
+		icon.setBounds(0, 0, icon.intrinsicWidth, icon.intrinsicHeight)
+		return AndroidUtils.replaceCharsWithIcon(text, icon, arrayOf(arrow))
 	}
 
 	private fun formatEvent(time: ZonedDateTime, isRise: Boolean): String {

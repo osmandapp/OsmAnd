@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.astronomy.search
 
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,6 @@ import net.osmand.plus.R
 import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
-import java.util.Locale
 
 internal class StarMapSearchResultsAdapter(
 	private val uiUtilities: UiUtilities,
@@ -19,7 +19,7 @@ internal class StarMapSearchResultsAdapter(
 	private val widToDisplayName: Map<String, String>,
 	private val shouldShowInfoHeader: () -> Boolean,
 	private val categoryPresetProvider: () -> StarMapSearchCategoryFilter?,
-	private val eventTextProvider: (StarMapSearchEntry) -> String,
+	private val eventTextProvider: (StarMapSearchEntry) -> CharSequence,
 	private val onEntrySelected: (StarMapSearchEntry) -> Unit
 ) : RecyclerView.Adapter<StarMapSearchResultsAdapter.SearchViewHolder>() {
 
@@ -98,7 +98,7 @@ private class StarMapSearchResultFormatter(
 	private val nightMode: Boolean,
 	private val widToDisplayName: Map<String, String>,
 	private val categoryPresetProvider: () -> StarMapSearchCategoryFilter?,
-	private val eventTextProvider: (StarMapSearchEntry) -> String
+	private val eventTextProvider: (StarMapSearchEntry) -> CharSequence
 ) {
 
 	fun bindIcon(iconView: ImageView?, entry: StarMapSearchEntry) {
@@ -117,13 +117,18 @@ private class StarMapSearchResultFormatter(
 		iconView?.setColorFilter(entry.iconColor)
 	}
 
-	fun buildSubtitle(itemView: View, entry: StarMapSearchEntry): String {
+	fun buildSubtitle(itemView: View, entry: StarMapSearchEntry): CharSequence {
 		val descriptorText = buildDescriptor(itemView, entry)
 		val magnitudeText = itemView.context.getString(R.string.astro_search_magnitude_short, entry.magnitude)
 		if (entry.objectRef.type == SkyObject.Type.CONSTELLATION) {
 			return "$descriptorText • $magnitudeText"
 		}
-		return "$descriptorText • $magnitudeText • ${eventTextProvider(entry)}"
+		return SpannableStringBuilder()
+			.append(descriptorText)
+			.append(" • ")
+			.append(magnitudeText)
+			.append(" • ")
+			.append(eventTextProvider(entry))
 	}
 
 	private fun buildDescriptor(itemView: View, entry: StarMapSearchEntry): String {
@@ -131,19 +136,11 @@ private class StarMapSearchResultFormatter(
 		val parentName = resolveParentName(obj)
 		return when (categoryPresetProvider()) {
 			StarMapSearchCategoryFilter.CONSTELLATIONS -> {
-				val code = obj.catalogId?.trim().orEmpty()
-				if (code.isNotEmpty()) {
-					itemView.context.getString(
-						R.string.astro_search_constellation_with_code,
-						code.uppercase(Locale.getDefault())
-					)
-				} else {
-					itemView.context.getString(R.string.astro_search_type_constellation)
-				}
+				itemView.context.getString(R.string.astro_type_constellation)
 			}
 			StarMapSearchCategoryFilter.STARS -> {
 				if (parentName.isNullOrEmpty()) {
-					itemView.context.getString(R.string.astro_search_type_star)
+					itemView.context.getString(R.string.astro_type_star)
 				} else {
 					itemView.context.getString(R.string.astro_search_in_location, parentName)
 				}
@@ -166,15 +163,15 @@ private class StarMapSearchResultFormatter(
 		return when (type) {
 			SkyObject.Type.SUN -> itemView.context.getString(R.string.astro_name_sun)
 			SkyObject.Type.MOON -> itemView.context.getString(R.string.astro_name_moon)
-			SkyObject.Type.PLANET -> itemView.context.getString(R.string.astro_search_type_planet)
-			SkyObject.Type.STAR -> itemView.context.getString(R.string.astro_search_type_star)
-			SkyObject.Type.GALAXY -> itemView.context.getString(R.string.astro_search_type_galaxy)
-			SkyObject.Type.NEBULA -> itemView.context.getString(R.string.astro_search_type_nebula)
-			SkyObject.Type.BLACK_HOLE -> itemView.context.getString(R.string.astro_search_type_black_hole)
-			SkyObject.Type.OPEN_CLUSTER -> itemView.context.getString(R.string.astro_search_type_open_cluster)
-			SkyObject.Type.GLOBULAR_CLUSTER -> itemView.context.getString(R.string.astro_search_type_globular_cluster)
-			SkyObject.Type.GALAXY_CLUSTER -> itemView.context.getString(R.string.astro_search_type_galaxy_cluster)
-			SkyObject.Type.CONSTELLATION -> itemView.context.getString(R.string.astro_search_type_constellation)
+			SkyObject.Type.PLANET -> itemView.context.getString(R.string.astro_type_planet)
+			SkyObject.Type.STAR -> itemView.context.getString(R.string.astro_type_star)
+			SkyObject.Type.GALAXY -> itemView.context.getString(R.string.astro_type_galaxy)
+			SkyObject.Type.NEBULA -> itemView.context.getString(R.string.astro_type_nebula)
+			SkyObject.Type.BLACK_HOLE -> itemView.context.getString(R.string.astro_type_black_hole)
+			SkyObject.Type.OPEN_CLUSTER -> itemView.context.getString(R.string.astro_type_open_cluster)
+			SkyObject.Type.GLOBULAR_CLUSTER -> itemView.context.getString(R.string.astro_type_globular_cluster)
+			SkyObject.Type.GALAXY_CLUSTER -> itemView.context.getString(R.string.astro_type_galaxy_cluster)
+			SkyObject.Type.CONSTELLATION -> itemView.context.getString(R.string.astro_type_constellation)
 		}
 	}
 

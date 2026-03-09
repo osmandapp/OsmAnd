@@ -28,11 +28,12 @@
                 android:layout_marginTop="@dimen/content_padding"
                 android:layout_marginEnd="@dimen/content_padding"
                 android:hint="@string/shared_string_search"
-                app:backgroundTint="@color/map_toolbar_switch_track_color"
+                app:backgroundTint="?attr/active_color_secondary"
                 app:defaultMarginsEnabled="false"
                 app:hideNavigationIcon="false"
                 app:menu="@menu/menu_star_search_browse"
-                app:navigationIcon="@drawable/ic_action_remove_dark" />
+                app:navigationIcon="@drawable/ic_action_remove_dark"
+                app:shapeAppearanceOverlay="@style/Shape.Card8" />
 
             <HorizontalScrollView
                 android:id="@+id/recent_chips_scroll"
@@ -229,7 +230,7 @@
                         android:paddingEnd="@dimen/content_padding"
                         android:paddingTop="@dimen/content_padding"
                         android:paddingBottom="@dimen/content_padding_small"
-                        android:text="@string/astro_explore_catalogs"
+                        android:text="@string/astro_catalogs"
                         android:textColor="?android:textColorPrimary"
                         android:textSize="@dimen/default_list_text_size"
                         android:textStyle="bold" />
@@ -287,16 +288,17 @@
             android:id="@+id/full_search_app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/map_toolbar_switch_track_color"
-            android:stateListAnimator="@animator/appbar_always_elevated">
+            android:background="?attr/active_color_secondary"
+            android:elevation="0dp"
+            android:stateListAnimator="@null">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/full_search_browse_header"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/toolbar_height_expanded_large"
-                android:background="@color/map_toolbar_switch_track_color"
+                android:background="?attr/active_color_secondary"
                 app:collapsedTitleTextAppearance="@style/AppBarTitlePrimary"
-                app:contentScrim="@color/map_toolbar_switch_track_color"
+                app:contentScrim="?attr/active_color_secondary"
                 app:expandedTitleGravity="start|bottom"
                 app:expandedTitleMarginBottom="@dimen/content_padding"
                 app:expandedTitleMarginEnd="@dimen/content_padding"
@@ -328,11 +330,12 @@
                     android:hint="@string/astro_search_input_hint"
                     android:importantForAccessibility="no"
                     android:visibility="gone"
-                    app:backgroundTint="@color/map_toolbar_switch_track_color"
+                    app:backgroundTint="?attr/active_color_secondary"
                     app:defaultMarginsEnabled="false"
                     app:hideNavigationIcon="false"
                     app:layout_collapseMode="pin"
-                    app:navigationIcon="@drawable/ic_arrow_back" />
+                    app:navigationIcon="@drawable/ic_arrow_back"
+                    app:shapeAppearanceOverlay="@style/Shape.Card8" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -350,7 +353,7 @@
         android:layout_height="match_parent"
         android:hint="@string/astro_search_input_hint"
         app:autoShowKeyboard="true"
-        app:backgroundTint="@color/map_toolbar_switch_track_color"
+        app:backgroundTint="?attr/active_color_secondary"
         app:hideNavigationIcon="false">
 
         <FrameLayout
@@ -365,7 +368,7 @@
         android:layout_height="match_parent"
         android:hint="@string/astro_search_input_hint"
         app:autoShowKeyboard="true"
-        app:backgroundTint="@color/map_toolbar_switch_track_color"
+        app:backgroundTint="?attr/active_color_secondary"
         app:hideNavigationIcon="false">
 
         <FrameLayout

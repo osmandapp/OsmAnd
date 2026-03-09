@@ -53,7 +53,7 @@ internal data class StarMapSearchEntry(
 	val category: StarMapSearchCategoryFilter,
 	val iconRes: Int,
 	val iconColor: Int,
-	val catalogWid: String?,
+	val catalogWids: Set<String> = emptySet(),
 	var nextRise: ZonedDateTime? = null,
 	var nextSet: ZonedDateTime? = null,
 	var isVisibleTonight: Boolean = false,
@@ -107,7 +107,7 @@ internal data class StarMapSearchStateSnapshot(
 			StarMapSearchQuickPresetType.MY_DATA_FAVORITES -> entry.objectRef.isFavorite
 			StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH -> entry.objectRef.showCelestialPath
 			StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> entry.objectRef.showDirection
-			StarMapSearchQuickPresetType.CATALOG_WID -> !quickPresetCatalogWid.isNullOrEmpty() && entry.catalogWid == quickPresetCatalogWid
+			StarMapSearchQuickPresetType.CATALOG_WID -> !quickPresetCatalogWid.isNullOrEmpty() && quickPresetCatalogWid in entry.catalogWids
 		}
 	}
 
