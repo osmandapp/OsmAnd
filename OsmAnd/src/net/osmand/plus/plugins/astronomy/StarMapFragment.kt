@@ -35,6 +35,7 @@ import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astronomy.StarChartState.StarChartType
 import net.osmand.plus.plugins.astronomy.AstronomyPluginSettings.CommonConfig
 import net.osmand.plus.plugins.astronomy.AstronomyPluginSettings.StarMapConfig
+import net.osmand.plus.plugins.astronomy.search.StarMapSearchDialogFragment
 import net.osmand.plus.plugins.astronomy.utils.StarMapARModeHelper
 import net.osmand.plus.plugins.astronomy.utils.StarMapCameraHelper
 import net.osmand.plus.plugins.astronomy.views.DateTimeSelectionView

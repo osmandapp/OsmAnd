@@ -1,6 +1,7 @@
-package net.osmand.plus.plugins.astronomy
+package net.osmand.plus.plugins.astronomy.search
 
 import android.os.Bundle
+import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.plugins.astronomy.SkyObject.Type
 import java.time.ZonedDateTime
 import java.util.Locale

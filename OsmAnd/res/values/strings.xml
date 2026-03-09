@@ -35,7 +35,7 @@
 	<string name="astro_search_always_up">↑ Always up</string>
 	<string name="astro_search_sets_at">↘ Sets %1$s</string>
 	<string name="astro_search_rises_at">↗ Rises %1$s</string>
-	<string name="astro_search_magnitude_short">mag%.1f</string>
+	<string name="astro_search_magnitude_short">mag %.1f</string>
 	<string name="astro_filter_naked_eye">Naked eye visible</string>
 	<string name="astro_filter_visible_tonight">Visible tonight</string>
 	<string name="astro_filter_visible_now">Visible now</string>

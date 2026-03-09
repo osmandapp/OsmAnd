@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astronomy
+package net.osmand.plus.plugins.astronomy.search
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
+import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import java.util.Locale

@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.astronomy
+package net.osmand.plus.plugins.astronomy.search
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -9,7 +9,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -28,25 +28,30 @@ import com.google.android.material.search.SearchBar
 import com.google.android.material.search.SearchView
 import io.github.cosinekitty.astronomy.Observer
 import io.github.cosinekitty.astronomy.Time
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
+import net.osmand.plus.plugins.astronomy.AstroDataProvider
+import net.osmand.plus.plugins.astronomy.AstronomyPlugin
+import net.osmand.plus.plugins.astronomy.AstronomyPluginSettings
+import net.osmand.plus.plugins.astronomy.SkyObject
+import net.osmand.plus.plugins.astronomy.StarMapFragment
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
-import net.osmand.plus.utils.InsetsUtils.InsetSide
+import net.osmand.plus.utils.InsetsUtils
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
@@ -240,8 +245,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		collection.add(InsetTarget.createScrollable(R.id.explore_container))
 		collection.add(
 			InsetTarget.createCustomBuilder(R.id.explore_container)
-				.portraitSides(InsetSide.TOP)
-				.landscapeSides(InsetSide.TOP, InsetSide.LEFT, InsetSide.RIGHT)
+				.portraitSides(InsetsUtils.InsetSide.TOP)
+				.landscapeSides(InsetsUtils.InsetSide.TOP, InsetsUtils.InsetSide.LEFT, InsetsUtils.InsetSide.RIGHT)
 				.applyPadding(true)
 				.build()
 		)
@@ -420,7 +425,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		if (previousSoftInputMode == null) {
 			previousSoftInputMode = window.attributes.softInputMode
 		}
-		window.setSoftInputMode(SOFT_INPUT_ADJUST_NOTHING)
+		window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
 		exploreSearchInputView.updateSoftInputMode()
 		fullSearchInputView.updateSoftInputMode()
 	}
@@ -864,7 +869,10 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 					magnitude = obj.magnitude,
 					category = mapStarMapSearchCategory(obj),
 					iconRes = AstroUtils.getObjectTypeIcon(obj.type),
-					iconColor = if (obj.type.isSunSystem()) obj.color else ColorUtilities.getPrimaryIconColor(requireContext(), nightMode),
+					iconColor = if (obj.type.isSunSystem()) obj.color else ColorUtilities.getPrimaryIconColor(
+						requireContext(),
+						nightMode
+					),
 					catalogWid = obj.catalog?.wid
 				)
 			)
@@ -930,9 +938,28 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				val filteredEntries = withContext(Dispatchers.Default) {
 					stateSnapshot.filterAndSort(
 						preparedEntries = preparedEntriesSnapshot.map { it.copy() },
-						visibleTonightProvider = { entry -> getVisibleTonight(entry, observerSnapshot, duskSnapshot, dawnSnapshot) },
-						riseSortValueProvider = { entry -> getRiseSortValue(entry, observerSnapshot, nowSnapshot) },
-						setSortValueProvider = { entry -> getSetSortValue(entry, observerSnapshot, nowSnapshot) }
+						visibleTonightProvider = { entry ->
+							getVisibleTonight(
+								entry,
+								observerSnapshot,
+								duskSnapshot,
+								dawnSnapshot
+							)
+						},
+						riseSortValueProvider = { entry ->
+							getRiseSortValue(
+								entry,
+								observerSnapshot,
+								nowSnapshot
+							)
+						},
+						setSortValueProvider = { entry ->
+							getSetSortValue(
+								entry,
+								observerSnapshot,
+								nowSnapshot
+							)
+						}
 					)
 				}
 				if (requestId != filterAndSortRequestId || view == null) {
@@ -1150,7 +1177,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun formatEvent(time: ZonedDateTime, isRise: Boolean): String {
 		val formattedTime = AstroUtils.formatLocalTime(
-			Time.fromMillisecondsSince1970(time.toInstant().toEpochMilli())
+			Time.Companion.fromMillisecondsSince1970(time.toInstant().toEpochMilli())
 		)
 		val daysBetween = ChronoUnit.DAYS.between(nowForComputations.toLocalDate(), time.toLocalDate())
 		return if (daysBetween == 1L) {
