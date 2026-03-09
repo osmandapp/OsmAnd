@@ -34,6 +34,7 @@ internal enum class StarMapSearchCategoryFilter {
 internal enum class StarMapSearchQuickPresetType {
 	NONE,
 	WATCH_NOW,
+	CATALOGS,
 	CATEGORY_SOLAR_SYSTEM,
 	CATEGORY_CONSTELLATIONS,
 	CATEGORY_STARS,
@@ -98,6 +99,7 @@ internal data class StarMapSearchStateSnapshot(
 		return when (quickPresetType) {
 			StarMapSearchQuickPresetType.NONE -> true
 			StarMapSearchQuickPresetType.WATCH_NOW -> true
+			StarMapSearchQuickPresetType.CATALOGS -> false
 			StarMapSearchQuickPresetType.CATEGORY_SOLAR_SYSTEM -> entry.category == StarMapSearchCategoryFilter.SOLAR_SYSTEM
 			StarMapSearchQuickPresetType.CATEGORY_CONSTELLATIONS -> entry.category == StarMapSearchCategoryFilter.CONSTELLATIONS
 			StarMapSearchQuickPresetType.CATEGORY_STARS -> entry.category == StarMapSearchCategoryFilter.STARS
@@ -243,6 +245,7 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 
 	fun shouldOpenInBrowseMode(): Boolean {
 		return quickPresetType == StarMapSearchQuickPresetType.WATCH_NOW ||
+			quickPresetType == StarMapSearchQuickPresetType.CATALOGS ||
 			isCategoryPreset() ||
 			quickPresetType == StarMapSearchQuickPresetType.CATALOG_WID ||
 			quickPresetType == StarMapSearchQuickPresetType.MY_DATA_FAVORITES ||
@@ -296,6 +299,7 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 		var count = 0
 		if (
 			quickPresetType != StarMapSearchQuickPresetType.NONE &&
+			quickPresetType != StarMapSearchQuickPresetType.CATALOGS &&
 			quickPresetType != StarMapSearchQuickPresetType.WATCH_NOW &&
 			!isCategoryPreset()
 		) {
