@@ -84,7 +84,7 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 				addressText = FileNameTranslationHelper.getFileNameWithRegion(app, mapReaderResource.getFile().getName());
 			} else if (item.getSearchResult().relatedObject instanceof City relatedCity &&
 					relatedCity.getReferenceFile() instanceof BinaryMapIndexReader relatedMapReaderResource) {
-				addressText = String.format("%s, %s", relatedCity, FileNameTranslationHelper.getFileNameWithRegion(app, relatedMapReaderResource.getFile().getName()));
+				addressText = String.format("%s, %s", relatedCity.getName(), FileNameTranslationHelper.getFileNameWithRegion(app, relatedMapReaderResource.getFile().getName()));
 			}
 			typeName = switch (city.getType()) {
 				case VILLAGE -> app.getString(R.string.city_type_village);
