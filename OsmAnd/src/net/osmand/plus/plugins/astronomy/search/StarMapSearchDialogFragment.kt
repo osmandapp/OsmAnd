@@ -616,7 +616,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	}
 
 	private fun openFullSearch(quickPresetType: StarMapSearchQuickPresetType, catalogWid: String?) {
-		searchState.selectQuickPreset(quickPresetType, catalogWid)
+		searchState.prepareForExploreEntry(quickPresetType, catalogWid)
 		currentFullSearchMode = if (searchState.shouldOpenInBrowseMode()) {
 			FullSearchMode.BROWSE
 		} else {

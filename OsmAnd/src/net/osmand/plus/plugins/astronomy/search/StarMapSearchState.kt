@@ -220,6 +220,17 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 		query = ""
 	}
 
+	fun prepareForExploreEntry(quickPresetType: StarMapSearchQuickPresetType, catalogWid: String?) {
+		query = ""
+		sortMode = StarMapSearchSortMode.NAME_ASC
+		typeFilter = StarMapSearchTypeFilter.SHOW_ALL
+		nakedEyeOnly = false
+		this.quickPresetType = quickPresetType
+		quickPresetCatalogWid = catalogWid
+		selectedCategories.clear()
+		selectedCategories.add(categoryPreset() ?: StarMapSearchCategoryFilter.ALL)
+	}
+
 	fun shouldOpenInBrowseMode(): Boolean {
 		return isCategoryPreset() ||
 			quickPresetType == StarMapSearchQuickPresetType.CATALOG_WID ||
@@ -272,7 +283,7 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 
 	fun calculateFilterCount(): Int {
 		var count = 0
-		if (quickPresetType != StarMapSearchQuickPresetType.NONE) count++
+		if (quickPresetType != StarMapSearchQuickPresetType.NONE && !isCategoryPreset()) count++
 		if (typeFilter != StarMapSearchTypeFilter.SHOW_ALL) count++
 		if (nakedEyeOnly) count++
 		if (selectedCategories.any { it != StarMapSearchCategoryFilter.ALL }) count++
@@ -303,6 +314,13 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 	}
 
 	fun toggleCategoryFilter(categoryFilter: StarMapSearchCategoryFilter) {
+		if (categoryFilter == StarMapSearchCategoryFilter.ALL) {
+			selectedCategories.clear()
+			selectedCategories.add(StarMapSearchCategoryFilter.ALL)
+			return
+		}
+
+		selectedCategories.remove(StarMapSearchCategoryFilter.ALL)
 		if (selectedCategories.contains(categoryFilter)) {
 			selectedCategories.remove(categoryFilter)
 		} else {
