@@ -33,6 +33,7 @@ internal enum class StarMapSearchCategoryFilter {
 
 internal enum class StarMapSearchQuickPresetType {
 	NONE,
+	WATCH_NOW,
 	CATEGORY_SOLAR_SYSTEM,
 	CATEGORY_CONSTELLATIONS,
 	CATEGORY_STARS,
@@ -96,6 +97,7 @@ internal data class StarMapSearchStateSnapshot(
 	private fun matchesQuickPreset(entry: StarMapSearchEntry): Boolean {
 		return when (quickPresetType) {
 			StarMapSearchQuickPresetType.NONE -> true
+			StarMapSearchQuickPresetType.WATCH_NOW -> true
 			StarMapSearchQuickPresetType.CATEGORY_SOLAR_SYSTEM -> entry.category == StarMapSearchCategoryFilter.SOLAR_SYSTEM
 			StarMapSearchQuickPresetType.CATEGORY_CONSTELLATIONS -> entry.category == StarMapSearchCategoryFilter.CONSTELLATIONS
 			StarMapSearchQuickPresetType.CATEGORY_STARS -> entry.category == StarMapSearchCategoryFilter.STARS
@@ -222,8 +224,16 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 
 	fun prepareForExploreEntry(quickPresetType: StarMapSearchQuickPresetType, catalogWid: String?) {
 		query = ""
-		sortMode = StarMapSearchSortMode.NAME_ASC
-		typeFilter = StarMapSearchTypeFilter.SHOW_ALL
+		sortMode = if (quickPresetType == StarMapSearchQuickPresetType.WATCH_NOW) {
+			StarMapSearchSortMode.BRIGHTEST_FIRST
+		} else {
+			StarMapSearchSortMode.NAME_ASC
+		}
+		typeFilter = if (quickPresetType == StarMapSearchQuickPresetType.WATCH_NOW) {
+			StarMapSearchTypeFilter.VISIBLE_TONIGHT
+		} else {
+			StarMapSearchTypeFilter.SHOW_ALL
+		}
 		nakedEyeOnly = false
 		this.quickPresetType = quickPresetType
 		quickPresetCatalogWid = catalogWid
@@ -232,7 +242,8 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 	}
 
 	fun shouldOpenInBrowseMode(): Boolean {
-		return isCategoryPreset() ||
+		return quickPresetType == StarMapSearchQuickPresetType.WATCH_NOW ||
+			isCategoryPreset() ||
 			quickPresetType == StarMapSearchQuickPresetType.CATALOG_WID ||
 			quickPresetType == StarMapSearchQuickPresetType.MY_DATA_FAVORITES ||
 			quickPresetType == StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH ||
@@ -283,7 +294,13 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 
 	fun calculateFilterCount(): Int {
 		var count = 0
-		if (quickPresetType != StarMapSearchQuickPresetType.NONE && !isCategoryPreset()) count++
+		if (
+			quickPresetType != StarMapSearchQuickPresetType.NONE &&
+			quickPresetType != StarMapSearchQuickPresetType.WATCH_NOW &&
+			!isCategoryPreset()
+		) {
+			count++
+		}
 		if (typeFilter != StarMapSearchTypeFilter.SHOW_ALL) count++
 		if (nakedEyeOnly) count++
 		if (selectedCategories.any { it != StarMapSearchCategoryFilter.ALL }) count++

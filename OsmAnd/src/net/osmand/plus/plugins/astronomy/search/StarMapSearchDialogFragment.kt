@@ -118,6 +118,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private lateinit var emptyStateResetButton: View
 	private lateinit var recentChipsContainer: LinearLayout
 	private lateinit var recentChipsScroll: View
+	private lateinit var watchNowRow: View
 	private lateinit var categoriesContainer: LinearLayout
 	private lateinit var myDataContainer: LinearLayout
 	private lateinit var catalogsContainer: LinearLayout
@@ -273,6 +274,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		fullSearchEditText = fullSearchInputView.editText
 		recentChipsContainer = root.findViewById(R.id.recent_chips_container)
 		recentChipsScroll = root.findViewById(R.id.recent_chips_scroll)
+		watchNowRow = root.findViewById(R.id.watch_now_row)
 		categoriesContainer = root.findViewById(R.id.categories_rows_container)
 		myDataContainer = root.findViewById(R.id.my_data_rows_container)
 		catalogsContainer = root.findViewById(R.id.catalogs_rows_container)
@@ -315,9 +317,16 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	}
 
 	private fun setupExploreContent() {
+		setupWatchNowRow()
 		setupCategoryRows()
 		setupMyDataRows()
 		setupCatalogRows()
+	}
+
+	private fun setupWatchNowRow() {
+		watchNowRow.setOnClickListener {
+			openFullSearch(StarMapSearchQuickPresetType.WATCH_NOW, null)
+		}
 	}
 
 	private fun setupListeners() {
@@ -887,6 +896,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun getBrowseTitle(): String {
 		return when (searchState.quickPresetType) {
+			StarMapSearchQuickPresetType.WATCH_NOW -> getString(R.string.astro_explore_watch_now)
 			StarMapSearchQuickPresetType.CATEGORY_SOLAR_SYSTEM -> getString(R.string.astro_solar_system)
 			StarMapSearchQuickPresetType.CATEGORY_CONSTELLATIONS -> getString(R.string.astro_constellations)
 			StarMapSearchQuickPresetType.CATEGORY_STARS -> getString(R.string.astro_stars)
