@@ -1275,7 +1275,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		dismissFilterPopup()
 		val activeColor = ColorUtilities.getActiveColor(app, nightMode)
 		val secondaryTextColor = ColorUtilities.getSecondaryTextColor(requireContext(), nightMode)
-		val items = listOf(
+		val items = mutableListOf(
 			createPopupHeaderItem(getString(R.string.shared_string_type), secondaryTextColor),
 			createRadioPopupItem(
 				getString(R.string.astro_filter_show_all),
@@ -1304,65 +1304,69 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			createCheckPopupItem(getString(R.string.astro_filter_naked_eye), searchState.nakedEyeOnly, activeColor, showTopDivider = true) {
 				searchState.nakedEyeOnly = !searchState.nakedEyeOnly
 				applyFiltersAndSort(scrollToTop = true)
-			},
-			createPopupHeaderItem(getString(R.string.favourites_edit_dialog_category), secondaryTextColor, showTopDivider = true),
-			createCheckPopupItem(
-				getString(R.string.shared_string_all),
-				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.ALL),
-				activeColor
-			) {
-				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.ALL)
-				applyFiltersAndSort(scrollToTop = true)
-			},
-			createCheckPopupItem(
-				getString(R.string.astro_solar_system),
-				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.SOLAR_SYSTEM),
-				activeColor
-			) {
-				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.SOLAR_SYSTEM)
-				applyFiltersAndSort(scrollToTop = true)
-			},
-			createCheckPopupItem(
-				getString(R.string.astro_constellations),
-				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.CONSTELLATIONS),
-				activeColor
-			) {
-				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.CONSTELLATIONS)
-				applyFiltersAndSort(scrollToTop = true)
-			},
-			createCheckPopupItem(
-				getString(R.string.astro_stars),
-				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.STARS),
-				activeColor
-			) {
-				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.STARS)
-				applyFiltersAndSort(scrollToTop = true)
-			},
-			createCheckPopupItem(
-				getString(R.string.astro_nebulas),
-				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.NEBULAS),
-				activeColor
-			) {
-				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.NEBULAS)
-				applyFiltersAndSort(scrollToTop = true)
-			},
-			createCheckPopupItem(
-				getString(R.string.astro_star_clusters),
-				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.STAR_CLUSTERS),
-				activeColor
-			) {
-				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.STAR_CLUSTERS)
-				applyFiltersAndSort(scrollToTop = true)
-			},
-			createCheckPopupItem(
-				getString(R.string.astro_deep_sky),
-				searchState.selectedCategories.contains(StarMapSearchCategoryFilter.DEEP_SKY),
-				activeColor
-			) {
-				searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.DEEP_SKY)
-				applyFiltersAndSort(scrollToTop = true)
 			}
 		)
+		if (!searchState.isCategoryPreset()) {
+			items += listOf(
+				createPopupHeaderItem(getString(R.string.favourites_edit_dialog_category), secondaryTextColor, showTopDivider = true),
+				createCheckPopupItem(
+					getString(R.string.shared_string_all),
+					searchState.selectedCategories.contains(StarMapSearchCategoryFilter.ALL),
+					activeColor
+				) {
+					searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.ALL)
+					applyFiltersAndSort(scrollToTop = true)
+				},
+				createCheckPopupItem(
+					getString(R.string.astro_solar_system),
+					searchState.selectedCategories.contains(StarMapSearchCategoryFilter.SOLAR_SYSTEM),
+					activeColor
+				) {
+					searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.SOLAR_SYSTEM)
+					applyFiltersAndSort(scrollToTop = true)
+				},
+				createCheckPopupItem(
+					getString(R.string.astro_constellations),
+					searchState.selectedCategories.contains(StarMapSearchCategoryFilter.CONSTELLATIONS),
+					activeColor
+				) {
+					searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.CONSTELLATIONS)
+					applyFiltersAndSort(scrollToTop = true)
+				},
+				createCheckPopupItem(
+					getString(R.string.astro_stars),
+					searchState.selectedCategories.contains(StarMapSearchCategoryFilter.STARS),
+					activeColor
+				) {
+					searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.STARS)
+					applyFiltersAndSort(scrollToTop = true)
+				},
+				createCheckPopupItem(
+					getString(R.string.astro_nebulas),
+					searchState.selectedCategories.contains(StarMapSearchCategoryFilter.NEBULAS),
+					activeColor
+				) {
+					searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.NEBULAS)
+					applyFiltersAndSort(scrollToTop = true)
+				},
+				createCheckPopupItem(
+					getString(R.string.astro_star_clusters),
+					searchState.selectedCategories.contains(StarMapSearchCategoryFilter.STAR_CLUSTERS),
+					activeColor
+				) {
+					searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.STAR_CLUSTERS)
+					applyFiltersAndSort(scrollToTop = true)
+				},
+				createCheckPopupItem(
+					getString(R.string.astro_deep_sky),
+					searchState.selectedCategories.contains(StarMapSearchCategoryFilter.DEEP_SKY),
+					activeColor
+				) {
+					searchState.toggleCategoryFilter(StarMapSearchCategoryFilter.DEEP_SKY)
+					applyFiltersAndSort(scrollToTop = true)
+				}
+			)
+		}
 		filterPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items, alignEnd = true, limitHeight = true))
 	}
 
