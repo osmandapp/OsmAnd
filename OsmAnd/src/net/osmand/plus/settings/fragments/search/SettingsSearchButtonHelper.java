@@ -86,6 +86,7 @@ public class SettingsSearchButtonHelper {
 								fragmentActivity,
 								fragmentContainerViewId,
 								availableAppModes),
+						DisplayLocaleProvider.getDisplayLocale(fragmentActivity.getResources()),
 						fragmentActivity,
 						preferencesDatabase,
 						new ConfigurationBundleConverter().convertForward(configuration),

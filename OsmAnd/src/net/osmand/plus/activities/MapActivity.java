@@ -122,6 +122,7 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
 import net.osmand.plus.settings.fragments.search.Configuration;
 import net.osmand.plus.settings.fragments.search.ConfigurationBundleConverter;
+import net.osmand.plus.settings.fragments.search.DisplayLocaleProvider;
 import net.osmand.plus.settings.fragments.search.PreferencesDatabaseConfigFactory;
 import net.osmand.plus.settings.fragments.search.TreeProcessorFactory;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
@@ -153,13 +154,13 @@ import org.apache.commons.logging.Log;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import de.KnollFrank.lib.settingssearch.common.Locales;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
 import de.KnollFrank.lib.settingssearch.db.preference.db.PreferencesDatabase;
 
@@ -957,19 +958,22 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		lockHelper.onStart();
 		getMyApplication().getNotificationHelper().showNotifications();
 		extendedMapActivity.onStart(this);
-		app
-				.preferencesDatabaseManager
-				.initPreferencesDatabase(
-						BuildConfig.GENERATE_PREFERENCES_DATABASE_FOR_ASSET ?
-								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile() :
-								PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(
-										Locales.getCurrentLocale(getResources()),
-										getAssets()),
-						new ActualConfigurationProvider().getActualConfiguration(),
-						new TreeProcessorFactory(),
-						new ConfigurationBundleConverter(),
-						this);
-
+		{
+			final Locale displayLocale = DisplayLocaleProvider.getDisplayLocale(getResources());
+			app
+					.preferencesDatabaseManager
+					.initPreferencesDatabase(
+							BuildConfig.GENERATE_PREFERENCES_DATABASE_FOR_ASSET ?
+									PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile() :
+									PreferencesDatabaseConfigFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(
+											displayLocale,
+											getAssets()),
+							new ActualConfigurationProvider().getActualConfiguration(),
+							displayLocale,
+							new TreeProcessorFactory(),
+							new ConfigurationBundleConverter(),
+							this);
+		}
 		// FK-FIXME: the following code block makes the magnifying glass freeze when the user clicks on it on installed OsmAnd-nightlyFree-legacy-fat-debug.apk
 //		{
 //			createSearchDatabaseTask =
