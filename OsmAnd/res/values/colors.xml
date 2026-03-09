@@ -39,6 +39,8 @@
 	<color name="map_button_icon_color_dark">#cccccc</color>
 	<color name="map_button_background_color_light">#FFFFFF</color>
 	<color name="map_button_background_color_dark">#000000</color>
+	<color name="icon_color_inverse_light">#FFFFFF</color>
+	<color name="icon_color_inverse_dark">#F2F2F2</color>
 	
 	<!-- AppBar & Status bar -->
 	<color name="app_bar_main_light">#ff8800</color>
