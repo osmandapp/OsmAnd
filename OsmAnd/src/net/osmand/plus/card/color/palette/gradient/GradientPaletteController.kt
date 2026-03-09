@@ -249,6 +249,7 @@ open class GradientPaletteController(
 		renaming = true
 		val newItem = PaletteUtils.renameGradientPalette(item, newName)
 		repository.replacePaletteItem(paletteId, item.id, newItem)
+		updateStableIdKey(item.id, newItem.id)
 		notifyUpdatePaletteColors(null)
 
 		if (item.id == selectedItem?.id) {

@@ -173,6 +173,10 @@ abstract class BasePaletteController(
 		return idMapper.getSafeId(itemId)
 	}
 
+	protected fun updateStableIdKey(oldItemId: String, newItemId: String) {
+		idMapper.updateKey(oldItemId, newItemId)
+	}
+
 	protected fun getContentIcon(@DrawableRes id: Int): Drawable? {
 		return app.uiUtilities.getThemedIcon(id)
 	}
