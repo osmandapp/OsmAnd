@@ -6064,4 +6064,18 @@
     <string name="delete_colors_palette_dialog_summary">Möchten Sie die Palette %1$s wirklich löschen?</string>
     <string name="relative_gradient_point_avg_summary">Farbe für den Durchschnittswert den Track.</string>
     <string name="relative_gradient_point_min_summary">Farbe für den kleinsten Wert, der in dem Track gefunden wurde.</string>
+    <string name="astro_type_sun">Sonne</string>
+    <string name="astro_type_satellite">Satellit</string>
+    <string name="astro_type_nebula">Nebel</string>
+    <string name="astro_direction">Richtung</string>
+    <string name="astro_type_earth">Erde</string>
+    <string name="astro_type_star">Stern</string>
+    <string name="astro_type_galaxy">Galaxie</string>
+    <string name="astro_type_black_hole">Schwarzes Loch</string>
+    <string name="astro_type_planet">Planet</string>
+    <string name="astro_type_open_cluster">Offener Sternhaufen</string>
+    <string name="astro_type_globular_cluster">Kugelsternhaufen</string>
+    <string name="astro_type_galaxy_cluster">Galaxienhaufen</string>
+    <string name="astro_type_constellation">Sternbild</string>
+    <string name="astro_culmination">Kulmination</string>
 </resources>
