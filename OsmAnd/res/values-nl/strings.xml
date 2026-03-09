@@ -6382,4 +6382,19 @@
     <string name="show_layout_grid_logs">Toon rasterlogboeken</string>
     <string name="shared_string_trip_average">Rit gemiddelde</string>
     <string name="intersection">Kruising</string>
+    <string name="astro_culmination">Culminatie</string>
+    <string name="astro_type_constellation">Constellatie</string>
+    <string name="astro_direction">Richting</string>
+    <string name="astro_locate">Lokaliseer</string>
+    <string name="astro_type_earth">Aarde</string>
+    <string name="astro_type_star">Ster</string>
+    <string name="astro_today_visibility">Zichtbaarheid vandaag</string>
+    <string name="astro_alt_short">Alt</string>
+    <string name="astro_az_short">Az</string>
+    <string name="astro_path">Baan</string>
+    <string name="astro_type_black_hole">Zwart gat</string>
+    <string name="astro_type_planet">Planeet</string>
+    <string name="astro_type_sun">Zon</string>
+    <string name="astro_type_satellite">Satelliet</string>
+    <string name="astronomy_schedule">Schema</string>
 </resources>

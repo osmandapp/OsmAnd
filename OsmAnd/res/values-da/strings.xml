@@ -6007,7 +6007,7 @@
     <string name="shared_string_step">Interval</string>
     <string name="set_step_size_summary">Vælg en intervalstørrelse til at gruppere dine spor.</string>
     <string name="set_step_size">Indstil intervalstørrelse</string>
-    <string name="group_altitude_elevation">Højde</string>
+    <string name="group_altitude_elevation">Altitude og højde</string>
     <string name="organize_by_max_altitude">Maks. højde</string>
     <string name="copy_from_portrait_layout">Kopiér fra portrætlayout</string>
     <string name="copy_from_landscape_layout">Kopiér fra landskabslayout</string>
@@ -6113,4 +6113,6 @@
     <string name="astro_type_globular_cluster">Kuglehob</string>
     <string name="astro_type_galaxy_cluster">Galaksehob</string>
     <string name="astro_type_constellation">Stjernebillede</string>
+    <string name="astro_az_short">Az</string>
+    <string name="astro_alt_short">Alt</string>
 </resources>
