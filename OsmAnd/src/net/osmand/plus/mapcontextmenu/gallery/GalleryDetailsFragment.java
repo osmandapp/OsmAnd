@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -98,6 +100,11 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 		ImageCard card = getSelectedCard();
 		WikiMetadata.Metadata metadata = card instanceof WikiImageCard ? ((WikiImageCard) card).getWikiImage().getMetadata() : null;
 
+		String description = metadata != null ? metadata.getDescription() : null;
+		if (!Algorithms.isEmpty(description)) {
+			buildDescriptionItem(container, description);
+		}
+
 		String author = metadata != null ? metadata.getAuthor() : null;
 		if (!Algorithms.isEmpty(author)) {
 			buildItem(container, getString(R.string.shared_string_author), author, R.drawable.ic_action_user, true, false);
@@ -170,6 +177,33 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 		}
 
 		container.addView(view);
+	}
+
+	private void buildDescriptionItem(@NonNull ViewGroup container, @NonNull String description) {
+		View view = inflate(R.layout.bottom_sheet_item_description_with_padding, container, false);
+		view.setMinimumHeight(0);
+
+		TextView descriptionView = view.findViewById(R.id.description);
+
+		descriptionView.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
+		descriptionView.setTextSize(16);
+		descriptionView.setText(description);
+		descriptionView.setMinHeight(0);
+		descriptionView.setMinimumHeight(0);
+
+		view.setOnLongClickListener(v -> {
+			ShareMenu.copyToClipboardWithToast(app, description, false);
+			return true;
+		});
+
+		container.addView(view);
+		View dividerContainer = inflate(R.layout.divider_half_item_with_background, container, false);
+		View divider = dividerContainer.findViewById(R.id.divider_half_item);
+		FrameLayout.LayoutParams params = new LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+		params.setMargins(dpToPx(16), 0, 0, 0);
+		divider.setLayoutParams(params);
+
+		container.addView(dividerContainer);
 	}
 
 	@Override
