@@ -18,6 +18,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.R as MaterialR
@@ -28,8 +29,6 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.search.SearchBar
 import com.google.android.material.search.SearchView
 import com.google.android.material.tabs.TabLayout
-import io.github.cosinekitty.astronomy.Observer
-import io.github.cosinekitty.astronomy.Time
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -43,7 +42,6 @@ import net.osmand.plus.plugins.astronomy.AstronomyPlugin
 import net.osmand.plus.plugins.astronomy.AstronomyPluginSettings
 import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.plugins.astronomy.StarMapFragment
-import net.osmand.plus.plugins.astronomy.utils.AstroUtils
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
@@ -54,12 +52,7 @@ import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.temporal.ChronoUnit
-import java.util.Calendar
 import java.util.Locale
-import java.util.concurrent.ConcurrentHashMap
 
 class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
@@ -83,14 +76,16 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		BROWSE
 	}
 
-	private data class RiseSetCacheEntry(
-		val nextRise: ZonedDateTime?,
-		val nextSet: ZonedDateTime?
-	)
-
 	private data class CatalogsBackState(
 		val query: String,
 		val sortMode: StarMapSearchSortMode
+	)
+
+	private data class ExploreRowConfig(
+		val quickPresetType: StarMapSearchQuickPresetType,
+		val iconRes: Int,
+		@StringRes val titleRes: Int,
+		@StringRes val subtitleRes: Int? = null
 	)
 
 	private lateinit var searchAdapter: StarMapSearchResultsAdapter
@@ -100,8 +95,12 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private val visibleEntries = mutableListOf<StarMapSearchEntry>()
 	private val preparedCatalogEntries = mutableListOf<StarMapCatalogEntry>()
 	private val visibleCatalogEntries = mutableListOf<StarMapCatalogEntry>()
-	private val riseSetCache = ConcurrentHashMap<String, RiseSetCacheEntry>()
-	private val visibleTonightCache = ConcurrentHashMap<String, Boolean>()
+	private val searchPreparedDataFactory by lazy {
+		StarMapSearchPreparedDataFactory(dataProvider, nightMode)
+	}
+	private val searchHelper by lazy {
+		StarMapSearchHelper(requireContext(), app.uiUtilities, nightMode)
+	}
 
 	private lateinit var searchResultsPanel: View
 	private lateinit var searchRecycler: RecyclerView
@@ -151,10 +150,6 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private var wasInfoHeaderVisible = false
 	private var defaultBrowseHeaderHeight = 0
 	private val widToDisplayName = mutableMapOf<String, String>()
-	private var observerForComputations = Observer(0.0, 0.0, 0.0)
-	private var nowForComputations: ZonedDateTime = ZonedDateTime.now()
-	private var duskForComputations: ZonedDateTime = ZonedDateTime.now()
-	private var dawnForComputations: ZonedDateTime = ZonedDateTime.now().plusHours(12)
 	private var suppressQueryDispatch = false
 	private var pendingSearchHideTarget: HideTarget? = null
 	private var previousSoftInputMode: Int? = null
@@ -177,10 +172,6 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		private const val KEY_FULL_SEARCH_MODE = "full_search_mode"
 		private const val KEY_CATALOGS_BACK_QUERY = "catalogs_back_query"
 		private const val KEY_CATALOGS_BACK_SORT = "catalogs_back_sort"
-		private const val RISE_ARROW = "↗"
-		private const val SET_ARROW = "↘"
-		private const val UP_ARROW = "↑"
-		private const val DOWN_ARROW = "↓"
 	}
 
 	override fun getThemeId(): Int = if (nightMode) R.style.OsmandMaterialDarkTheme else R.style.OsmandMaterialLightTheme
@@ -334,7 +325,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			widToDisplayName = widToDisplayName,
 			shouldShowInfoHeader = ::shouldShowInfoHeader,
 			categoryPresetProvider = searchState::categoryPreset,
-			eventTextProvider = ::resolveEventText,
+			eventTextProvider = searchHelper::resolveEventText,
 			onEntrySelected = ::onSearchEntrySelected
 		)
 		catalogsAdapter = StarMapCatalogsAdapter(
@@ -535,60 +526,50 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun setupCategoryRows() {
 		categoriesContainer.removeAllViews()
-		addExploreRow(
-			container = categoriesContainer,
-			iconRes = R.drawable.ic_action_planet_outlined,
-			title = getString(R.string.astro_solar_system),
-			subtitle = null,
-			count = null
-		) {
-			openFullSearch(StarMapSearchQuickPresetType.CATEGORY_SOLAR_SYSTEM, null)
-		}
-		addExploreRow(
-			container = categoriesContainer,
-			iconRes = R.drawable.ic_action_constellations,
-			title = getString(R.string.astro_constellations),
-			subtitle = null,
-			count = null
-		) {
-			openFullSearch(StarMapSearchQuickPresetType.CATEGORY_CONSTELLATIONS, null)
-		}
-		addExploreRow(
-			container = categoriesContainer,
-			iconRes = R.drawable.ic_action_stars,
-			title = getString(R.string.astro_stars),
-			subtitle = null,
-			count = null
-		) {
-			openFullSearch(StarMapSearchQuickPresetType.CATEGORY_STARS, null)
-		}
-		addExploreRow(
-			container = categoriesContainer,
-			iconRes = R.drawable.ic_action_nebulas,
-			title = getString(R.string.astro_nebulas),
-			subtitle = null,
-			count = null
-		) {
-			openFullSearch(StarMapSearchQuickPresetType.CATEGORY_NEBULAS, null)
-		}
-		addExploreRow(
-			container = categoriesContainer,
-			iconRes = R.drawable.ic_action_star_clusters,
-			title = getString(R.string.astro_star_clusters),
-			subtitle = null,
-			count = null
-		) {
-			openFullSearch(StarMapSearchQuickPresetType.CATEGORY_STAR_CLUSTERS, null)
-		}
-		addExploreRow(
-			container = categoriesContainer,
-			iconRes = R.drawable.ic_action_galaxy,
-			title = getString(R.string.astro_deep_sky),
-			subtitle = getString(R.string.astro_explore_deep_sky_subtitle),
-			count = null,
-			showDivider = false
-		) {
-			openFullSearch(StarMapSearchQuickPresetType.CATEGORY_DEEP_SKY, null)
+		val categories = listOf(
+			ExploreRowConfig(
+				quickPresetType = StarMapSearchQuickPresetType.CATEGORY_SOLAR_SYSTEM,
+				iconRes = R.drawable.ic_action_planet_outlined,
+				titleRes = R.string.astro_solar_system
+			),
+			ExploreRowConfig(
+				quickPresetType = StarMapSearchQuickPresetType.CATEGORY_CONSTELLATIONS,
+				iconRes = R.drawable.ic_action_constellations,
+				titleRes = R.string.astro_constellations
+			),
+			ExploreRowConfig(
+				quickPresetType = StarMapSearchQuickPresetType.CATEGORY_STARS,
+				iconRes = R.drawable.ic_action_stars,
+				titleRes = R.string.astro_stars
+			),
+			ExploreRowConfig(
+				quickPresetType = StarMapSearchQuickPresetType.CATEGORY_NEBULAS,
+				iconRes = R.drawable.ic_action_nebulas,
+				titleRes = R.string.astro_nebulas
+			),
+			ExploreRowConfig(
+				quickPresetType = StarMapSearchQuickPresetType.CATEGORY_STAR_CLUSTERS,
+				iconRes = R.drawable.ic_action_star_clusters,
+				titleRes = R.string.astro_star_clusters
+			),
+			ExploreRowConfig(
+				quickPresetType = StarMapSearchQuickPresetType.CATEGORY_DEEP_SKY,
+				iconRes = R.drawable.ic_action_galaxy,
+				titleRes = R.string.astro_deep_sky,
+				subtitleRes = R.string.astro_explore_deep_sky_subtitle
+			)
+		)
+		categories.forEachIndexed { index, config ->
+			addExploreRow(
+				container = categoriesContainer,
+				iconRes = config.iconRes,
+				title = getString(config.titleRes),
+				subtitle = config.subtitleRes?.let(::getString),
+				count = null,
+				showDivider = index != categories.lastIndex
+			) {
+				openFullSearch(config.quickPresetType, null)
+			}
 		}
 	}
 
@@ -608,35 +589,34 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private fun setupMyDataRows() {
 		myDataContainer.removeAllViews()
 		val config = astroSettings.getStarMapConfig()
-		addExploreRow(
-			container = myDataContainer,
-			iconRes = R.drawable.ic_action_bookmark_filled,
-			title = getString(R.string.favorites_item),
-			subtitle = null,
-			count = config.favorites.size,
-			showDivider = true
-		) {
-			openFullSearch(StarMapSearchQuickPresetType.MY_DATA_FAVORITES, null)
-		}
-		addExploreRow(
-			container = myDataContainer,
-			iconRes = R.drawable.ic_action_target_path_on,
-			title = getString(R.string.astro_daily_path),
-			subtitle = null,
-			count = config.celestialPaths.size,
-			showDivider = true
-		) {
-			openFullSearch(StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH, null)
-		}
-		addExploreRow(
-			container = myDataContainer,
-			iconRes = R.drawable.ic_action_target_direction_on,
-			title = getString(R.string.astro_directions),
-			subtitle = null,
-			count = config.directions.size,
-			showDivider = false
-		) {
-			openFullSearch(StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS, null)
+		val items = listOf(
+			ExploreRowConfig(
+				quickPresetType = StarMapSearchQuickPresetType.MY_DATA_FAVORITES,
+				iconRes = R.drawable.ic_action_bookmark_filled,
+				titleRes = R.string.favorites_item
+			) to config.favorites.size,
+			ExploreRowConfig(
+				quickPresetType = StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH,
+				iconRes = R.drawable.ic_action_target_path_on,
+				titleRes = R.string.astro_daily_path
+			) to config.celestialPaths.size,
+			ExploreRowConfig(
+				quickPresetType = StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS,
+				iconRes = R.drawable.ic_action_target_direction_on,
+				titleRes = R.string.astro_directions
+			) to config.directions.size
+		)
+		items.forEachIndexed { index, (rowConfig, count) ->
+			addExploreRow(
+				container = myDataContainer,
+				iconRes = rowConfig.iconRes,
+				title = getString(rowConfig.titleRes),
+				subtitle = null,
+				count = count,
+				showDivider = index != items.lastIndex
+			) {
+				openFullSearch(rowConfig.quickPresetType, null)
+			}
 		}
 	}
 
@@ -766,23 +746,9 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		}
 	}
 
-	private fun isMyDataMode(): Boolean {
-		return when (searchState.quickPresetType) {
-			StarMapSearchQuickPresetType.MY_DATA_FAVORITES,
-			StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH,
-			StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> true
-			else -> false
-		}
-	}
+	private fun isMyDataMode(): Boolean = searchState.quickPresetType.isMyData
 
-	private fun getSelectedMyDataTabIndex(): Int? {
-		return when (searchState.quickPresetType) {
-			StarMapSearchQuickPresetType.MY_DATA_FAVORITES -> 0
-			StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH -> 1
-			StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> 2
-			else -> null
-		}
-	}
+	private fun getSelectedMyDataTabIndex(): Int? = searchState.quickPresetType.myDataTabIndex
 
 	private fun updateMyDataTabs() {
 		if (!::myDataTabs.isInitialized) {
@@ -1017,70 +983,15 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	}
 
 	private fun refreshPreparedEntries() {
-		preparedEntries.clear()
-		preparedCatalogEntries.clear()
-		widToDisplayName.clear()
-		riseSetCache.clear()
-		visibleTonightCache.clear()
 		val parent = parentFragment as? StarMapFragment
-		val objects = parent?.getSearchableObjects().orEmpty()
-
-		val observer = parent?.starView?.observer ?: Observer(0.0, 0.0, 0.0)
-		val currentCalendar = parent?.viewModel?.currentCalendar?.value ?: Calendar.getInstance()
-		val zoneId = ZoneId.systemDefault()
-		val now = currentCalendar.toInstant().atZone(zoneId)
-		observerForComputations = observer
-		nowForComputations = now
-
-		val dayStart = now.toLocalDate().atStartOfDay(zoneId)
-		val dayEnd = dayStart.plusDays(1)
-		val twilight = AstroUtils.computeTwilight(dayStart, dayEnd, observer, zoneId)
-		val dusk = twilight.civilDusk ?: dayStart.withHour(18)
-		val dawnRaw = twilight.civilDawn
-		val dawn = when {
-			dawnRaw == null -> dusk.plusHours(12)
-			dawnRaw.isAfter(dusk) -> dawnRaw
-			else -> dawnRaw.plusDays(1)
-		}
-		duskForComputations = dusk
-		dawnForComputations = dawn
-
-		for (obj in objects) {
-			if (obj.wid.isNotEmpty()) {
-				widToDisplayName[obj.wid] = obj.localizedName ?: obj.name
-			}
-			preparedEntries.add(
-				StarMapSearchEntry(
-					objectRef = obj,
-					displayName = obj.localizedName ?: obj.name,
-					magnitude = obj.magnitude,
-					category = mapStarMapSearchCategory(obj),
-					iconRes = AstroUtils.getObjectTypeIcon(obj.type),
-					iconColor = if (obj.type.isSunSystem()) obj.color else ColorUtilities.getPrimaryIconColor(
-						requireContext(),
-						nightMode
-					),
-					catalogWids = obj.catalogs.mapTo(linkedSetOf()) { it.wid }
-				)
-			)
-		}
-		preparedCatalogEntries += buildCatalogEntries()
-	}
-
-	private fun buildCatalogEntries(): List<StarMapCatalogEntry> {
-		val context = requireContext()
-		val objectCountByCatalogWid = preparedEntries
-			.flatMap { entry -> entry.catalogWids }
-			.groupingBy { it }
-			.eachCount()
-		return dataProvider.getCatalogs(context).map { catalog ->
-			StarMapCatalogEntry(
-				catalog = catalog,
-				displayName = catalog.name,
-				description = dataProvider.getAstroArticle(context, catalog.wid)?.description,
-				objectCount = objectCountByCatalogWid[catalog.wid] ?: 0
-			)
-		}
+		val preparedData = searchPreparedDataFactory.create(requireContext(), parent)
+		preparedEntries.clear()
+		preparedEntries.addAll(preparedData.entries)
+		preparedCatalogEntries.clear()
+		preparedCatalogEntries.addAll(preparedData.catalogEntries)
+		widToDisplayName.clear()
+		widToDisplayName.putAll(preparedData.widToDisplayName)
+		searchHelper.updateComputationContext(preparedData.computationContext)
 	}
 
 	private fun shouldShowInfoHeader(): Boolean {
@@ -1150,10 +1061,6 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		val isCatalogsMode = shouldShowCatalogEntries()
 		val preparedEntriesSnapshot = preparedEntries.toList()
 		val preparedCatalogEntriesSnapshot = preparedCatalogEntries.toList()
-		val observerSnapshot = observerForComputations
-		val nowSnapshot = nowForComputations
-		val duskSnapshot = duskForComputations
-		val dawnSnapshot = dawnForComputations
 		updateResultsAdapter()
 		updateSortControls()
 		updateFilterControls()
@@ -1177,28 +1084,9 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 					val filteredEntries = withContext(Dispatchers.Default) {
 						stateSnapshot.filterAndSort(
 							preparedEntries = preparedEntriesSnapshot.map { it.copy() },
-							visibleTonightProvider = { entry ->
-								getVisibleTonight(
-									entry,
-									observerSnapshot,
-									duskSnapshot,
-									dawnSnapshot
-								)
-							},
-							riseSortValueProvider = { entry ->
-								getRiseSortValue(
-									entry,
-									observerSnapshot,
-									nowSnapshot
-								)
-							},
-							setSortValueProvider = { entry ->
-								getSetSortValue(
-									entry,
-									observerSnapshot,
-									nowSnapshot
-								)
-							}
+							visibleTonightProvider = searchHelper::getVisibleTonight,
+							riseSortValueProvider = searchHelper::getRiseSortValue,
+							setSortValueProvider = searchHelper::getSetSortValue
 						)
 					}
 					if (requestId != filterAndSortRequestId || view == null) {
@@ -1246,73 +1134,6 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		if (::sortProgress.isInitialized) {
 			sortProgress.isVisible = isVisible
 		}
-	}
-
-	private fun ensureRiseSet(
-		entry: StarMapSearchEntry,
-		observer: Observer = observerForComputations,
-		now: ZonedDateTime = nowForComputations
-	) {
-		if (entry.riseSetCalculated) {
-			return
-		}
-		riseSetCache[entry.objectRef.id]?.let { cachedRiseSet ->
-			entry.nextRise = cachedRiseSet.nextRise
-			entry.nextSet = cachedRiseSet.nextSet
-			entry.riseSetCalculated = true
-			return
-		}
-		val (rise, set) = AstroUtils.nextRiseSet(entry.objectRef, now, observer)
-		entry.nextRise = rise
-		entry.nextSet = set
-		entry.riseSetCalculated = true
-		riseSetCache[entry.objectRef.id] = RiseSetCacheEntry(rise, set)
-	}
-
-	private fun getVisibleTonight(
-		entry: StarMapSearchEntry,
-		observer: Observer = observerForComputations,
-		dusk: ZonedDateTime = duskForComputations,
-		dawn: ZonedDateTime = dawnForComputations
-	): Boolean {
-		if (entry.visibleTonightCalculated) {
-			return entry.isVisibleTonight
-		}
-		visibleTonightCache[entry.objectRef.id]?.let { cachedVisibleTonight ->
-			entry.isVisibleTonight = cachedVisibleTonight
-			entry.visibleTonightCalculated = true
-			return cachedVisibleTonight
-		}
-		val (nightRise, nightSet) = AstroUtils.nextRiseSet(
-			entry.objectRef,
-			dusk,
-			observer,
-			dusk,
-			dawn
-		)
-		val visibleAtDusk = AstroUtils.altitude(entry.objectRef, dusk, observer) > 0
-		entry.isVisibleTonight = visibleAtDusk || nightRise != null || nightSet != null
-		entry.visibleTonightCalculated = true
-		visibleTonightCache[entry.objectRef.id] = entry.isVisibleTonight
-		return entry.isVisibleTonight
-	}
-
-	private fun getRiseSortValue(
-		entry: StarMapSearchEntry,
-		observer: Observer = observerForComputations,
-		now: ZonedDateTime = nowForComputations
-	): Long {
-		ensureRiseSet(entry, observer, now)
-		return entry.nextRise?.toInstant()?.toEpochMilli() ?: Long.MAX_VALUE
-	}
-
-	private fun getSetSortValue(
-		entry: StarMapSearchEntry,
-		observer: Observer = observerForComputations,
-		now: ZonedDateTime = nowForComputations
-	): Long {
-		ensureRiseSet(entry, observer, now)
-		return entry.nextSet?.toInstant()?.toEpochMilli() ?: Long.MAX_VALUE
 	}
 
 	private fun updateSortControls() {
@@ -1474,62 +1295,6 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			sortMode = searchState.sortMode
 		)
 		openFullSearch(StarMapSearchQuickPresetType.CATALOG_WID, entry.catalog.wid)
-	}
-
-	private fun resolveEventText(entry: StarMapSearchEntry): CharSequence {
-		ensureRiseSet(entry)
-		val rise = entry.nextRise
-		val set = entry.nextSet
-		val eventText = when {
-			rise != null && set != null -> {
-				if (rise.isBefore(set)) {
-					formatEvent(rise, isRise = true)
-				} else {
-					formatEvent(set, isRise = false)
-				}
-			}
-			rise != null -> formatEvent(rise, isRise = true)
-			set != null -> formatEvent(set, isRise = false)
-			entry.objectRef.altitude > 0 -> {
-				getString(R.string.astro_search_always_up)
-			}
-			else -> {
-				getString(R.string.astro_search_never_rises)
-			}
-		}
-		return replaceEventArrowWithIcon(eventText)
-	}
-
-	private fun replaceEventArrowWithIcon(text: String): CharSequence {
-		val (arrow, iconRes) = when {
-			text.contains(RISE_ARROW) -> RISE_ARROW to R.drawable.ic_action_arrow_top_right_16
-			text.contains(SET_ARROW) -> SET_ARROW to R.drawable.ic_action_arrow_bottom_right_16
-			text.contains(UP_ARROW) -> UP_ARROW to R.drawable.ic_action_arrow_up_16
-			text.contains(DOWN_ARROW) -> DOWN_ARROW to R.drawable.ic_action_arrow_down_16
-			else -> return text
-		}
-		val icon = app.uiUtilities.getIcon(iconRes, ColorUtilities.getSecondaryIconColorId(nightMode))
-		icon.setBounds(0, 0, icon.intrinsicWidth, icon.intrinsicHeight)
-		return AndroidUtils.replaceCharsWithIcon(text, icon, arrayOf(arrow))
-	}
-
-	private fun formatEvent(time: ZonedDateTime, isRise: Boolean): String {
-		val formattedTime = AstroUtils.formatLocalTime(
-			Time.Companion.fromMillisecondsSince1970(time.toInstant().toEpochMilli())
-		)
-		val daysBetween = ChronoUnit.DAYS.between(nowForComputations.toLocalDate(), time.toLocalDate())
-		return if (daysBetween == 1L) {
-			val tomorrow = getString(R.string.tomorrow)
-			if (isRise) {
-				getString(R.string.astro_search_rises_tomorrow, tomorrow, formattedTime)
-			} else {
-				getString(R.string.astro_search_sets_tomorrow, tomorrow, formattedTime)
-			}
-		} else if (isRise) {
-			getString(R.string.astro_search_rises_at, formattedTime)
-		} else {
-			getString(R.string.astro_search_sets_at, formattedTime)
-		}
 	}
 
 	private fun showSortPopup(anchor: View) {

@@ -44,7 +44,50 @@ internal enum class StarMapSearchQuickPresetType {
 	MY_DATA_FAVORITES,
 	MY_DATA_DAILY_PATH,
 	MY_DATA_DIRECTIONS,
-	CATALOG_WID
+	CATALOG_WID;
+
+	val categoryPreset: StarMapSearchCategoryFilter?
+		get() = when (this) {
+			CATEGORY_SOLAR_SYSTEM -> StarMapSearchCategoryFilter.SOLAR_SYSTEM
+			CATEGORY_CONSTELLATIONS -> StarMapSearchCategoryFilter.CONSTELLATIONS
+			CATEGORY_STARS -> StarMapSearchCategoryFilter.STARS
+			CATEGORY_NEBULAS -> StarMapSearchCategoryFilter.NEBULAS
+			CATEGORY_STAR_CLUSTERS -> StarMapSearchCategoryFilter.STAR_CLUSTERS
+			CATEGORY_DEEP_SKY -> StarMapSearchCategoryFilter.DEEP_SKY
+			else -> null
+		}
+
+	val opensInBrowseMode: Boolean
+		get() = this != NONE
+
+	val isMyData: Boolean
+		get() = myDataTabIndex != null
+
+	val myDataTabIndex: Int?
+		get() = when (this) {
+			MY_DATA_FAVORITES -> 0
+			MY_DATA_DAILY_PATH -> 1
+			MY_DATA_DIRECTIONS -> 2
+			else -> null
+		}
+
+	fun matches(entry: StarMapSearchEntry, catalogWid: String?): Boolean {
+		return when (this) {
+			NONE,
+			WATCH_NOW -> true
+			CATALOGS -> false
+			CATEGORY_SOLAR_SYSTEM -> entry.category == StarMapSearchCategoryFilter.SOLAR_SYSTEM
+			CATEGORY_CONSTELLATIONS -> entry.category == StarMapSearchCategoryFilter.CONSTELLATIONS
+			CATEGORY_STARS -> entry.category == StarMapSearchCategoryFilter.STARS
+			CATEGORY_NEBULAS -> entry.category == StarMapSearchCategoryFilter.NEBULAS
+			CATEGORY_STAR_CLUSTERS -> entry.category == StarMapSearchCategoryFilter.STAR_CLUSTERS
+			CATEGORY_DEEP_SKY -> entry.category == StarMapSearchCategoryFilter.DEEP_SKY
+			MY_DATA_FAVORITES -> entry.objectRef.isFavorite
+			MY_DATA_DAILY_PATH -> entry.objectRef.showCelestialPath
+			MY_DATA_DIRECTIONS -> entry.objectRef.showDirection
+			CATALOG_WID -> !catalogWid.isNullOrEmpty() && catalogWid in entry.catalogWids
+		}
+	}
 }
 
 internal data class StarMapSearchEntry(
@@ -96,21 +139,7 @@ internal data class StarMapSearchStateSnapshot(
 	}
 
 	private fun matchesQuickPreset(entry: StarMapSearchEntry): Boolean {
-		return when (quickPresetType) {
-			StarMapSearchQuickPresetType.NONE -> true
-			StarMapSearchQuickPresetType.WATCH_NOW -> true
-			StarMapSearchQuickPresetType.CATALOGS -> false
-			StarMapSearchQuickPresetType.CATEGORY_SOLAR_SYSTEM -> entry.category == StarMapSearchCategoryFilter.SOLAR_SYSTEM
-			StarMapSearchQuickPresetType.CATEGORY_CONSTELLATIONS -> entry.category == StarMapSearchCategoryFilter.CONSTELLATIONS
-			StarMapSearchQuickPresetType.CATEGORY_STARS -> entry.category == StarMapSearchCategoryFilter.STARS
-			StarMapSearchQuickPresetType.CATEGORY_NEBULAS -> entry.category == StarMapSearchCategoryFilter.NEBULAS
-			StarMapSearchQuickPresetType.CATEGORY_STAR_CLUSTERS -> entry.category == StarMapSearchCategoryFilter.STAR_CLUSTERS
-			StarMapSearchQuickPresetType.CATEGORY_DEEP_SKY -> entry.category == StarMapSearchCategoryFilter.DEEP_SKY
-			StarMapSearchQuickPresetType.MY_DATA_FAVORITES -> entry.objectRef.isFavorite
-			StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH -> entry.objectRef.showCelestialPath
-			StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> entry.objectRef.showDirection
-			StarMapSearchQuickPresetType.CATALOG_WID -> !quickPresetCatalogWid.isNullOrEmpty() && quickPresetCatalogWid in entry.catalogWids
-		}
+		return quickPresetType.matches(entry, quickPresetCatalogWid)
 	}
 
 	private fun matchesQuery(entry: StarMapSearchEntry, queryLower: String): Boolean {
@@ -243,31 +272,13 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 		selectedCategories.add(categoryPreset() ?: StarMapSearchCategoryFilter.ALL)
 	}
 
-	fun shouldOpenInBrowseMode(): Boolean {
-		return quickPresetType == StarMapSearchQuickPresetType.WATCH_NOW ||
-			quickPresetType == StarMapSearchQuickPresetType.CATALOGS ||
-			isCategoryPreset() ||
-			quickPresetType == StarMapSearchQuickPresetType.CATALOG_WID ||
-			quickPresetType == StarMapSearchQuickPresetType.MY_DATA_FAVORITES ||
-			quickPresetType == StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH ||
-			quickPresetType == StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS
-	}
+	fun shouldOpenInBrowseMode(): Boolean = quickPresetType.opensInBrowseMode
 
 	fun hasBrowseContext(): Boolean = quickPresetType != StarMapSearchQuickPresetType.NONE
 
-	fun isCategoryPreset(): Boolean = categoryPreset() != null
+	fun isCategoryPreset(): Boolean = quickPresetType.categoryPreset != null
 
-	fun categoryPreset(): StarMapSearchCategoryFilter? {
-		return when (quickPresetType) {
-			StarMapSearchQuickPresetType.CATEGORY_SOLAR_SYSTEM -> StarMapSearchCategoryFilter.SOLAR_SYSTEM
-			StarMapSearchQuickPresetType.CATEGORY_CONSTELLATIONS -> StarMapSearchCategoryFilter.CONSTELLATIONS
-			StarMapSearchQuickPresetType.CATEGORY_STARS -> StarMapSearchCategoryFilter.STARS
-			StarMapSearchQuickPresetType.CATEGORY_NEBULAS -> StarMapSearchCategoryFilter.NEBULAS
-			StarMapSearchQuickPresetType.CATEGORY_STAR_CLUSTERS -> StarMapSearchCategoryFilter.STAR_CLUSTERS
-			StarMapSearchQuickPresetType.CATEGORY_DEEP_SKY -> StarMapSearchCategoryFilter.DEEP_SKY
-			else -> null
-		}
-	}
+	fun categoryPreset(): StarMapSearchCategoryFilter? = quickPresetType.categoryPreset
 
 	fun snapshot(): StarMapSearchStateSnapshot {
 		return StarMapSearchStateSnapshot(
@@ -301,7 +312,7 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 			quickPresetType != StarMapSearchQuickPresetType.NONE &&
 			quickPresetType != StarMapSearchQuickPresetType.CATALOGS &&
 			quickPresetType != StarMapSearchQuickPresetType.WATCH_NOW &&
-			!isCategoryPreset()
+			quickPresetType.categoryPreset == null
 		) {
 			count++
 		}
