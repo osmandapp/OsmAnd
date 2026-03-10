@@ -115,7 +115,7 @@ android {
 			debuggable true
 		}
 		release {
-			buildConfigField "String", "DATABASE_URL_TEMPLATE", '"https://github.com/KnollFrank/OsmAnd/releases/download/testing_v5/%s"'
+			buildConfigField "String", "DATABASE_URL_TEMPLATE", '"https://github.com/KnollFrank/OsmAnd/releases/download/testing_v6/%s"'
 			debuggable false
 		}
 	}
@@ -498,7 +498,7 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
     """
 }
 
-// ./gradlew generateDatabasesForLocales -PavdName=Medium_Phone -Plocales=de,en -PdbOutputDir=/home/frankknoll/Downloads/OsmAnd/database
+// ./gradlew generateDatabasesForLocales -PavdName=Medium_Phone -PdbOutputDir=/home/frankknoll/Downloads/OsmAnd/database -Plocales=de,en,en-GB
 // ./gradlew generateDatabasesForLocales -PavdName=Medium_Phone -PdbOutputDir=/home/frankknoll/Downloads/OsmAnd/database
 tasks.register('generateDatabasesForLocales') {
 	group = "Database"
