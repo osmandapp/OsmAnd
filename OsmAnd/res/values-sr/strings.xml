@@ -149,7 +149,7 @@
     <string name="send_report">Пошаљи извештај</string>
     <string name="none_region_found">Преузете карте на меморијској картици нису нађене.</string>
     <string name="any_poi">Било који</string>
-    <string name="layer_route">Путања</string>
+    <string name="layer_route">Рута</string>
     <string name="auto_follow_route_navigation_descr">Самоусредиштење карте само током навођења.</string>
     <string name="auto_follow_location_enabled">Самоусредиштење карте током употребе.</string>
     <string name="day_night_info_description">Излазак сунца: %1$s \nЗалазак сунца: %2$s</string>
@@ -2711,7 +2711,7 @@
     <string name="rendering_attr_surface_sand_name">Песак</string>
     <string name="rendering_attr_surface_grass_name">Трава</string>
     <string name="rendering_attr_surface_grass_paver_name">Поплочано</string>
-    <string name="rendering_attr_surface_ground_name">Земља</string>
+    <string name="rendering_attr_surface_ground_name">Тло</string>
     <string name="rendering_attr_surface_dirt_name">Прашина</string>
     <string name="rendering_attr_surface_mud_name">Блато</string>
     <string name="rendering_attr_surface_ice_name">Лед</string>
@@ -6036,7 +6036,7 @@
     <string name="astro_today_visibility">Данашња видљивост</string>
     <string name="astronomy_schedule">Распоред</string>
     <string name="astro_catalogs">Збирке</string>
-    <string name="astro_path">Путања</string>
+    <string name="astro_path">Стаза</string>
     <string name="astro_direction">Правац</string>
     <string name="astro_locate">Пронађи положај</string>
     <string name="astro_type_earth">Земља</string>
@@ -6045,4 +6045,13 @@
     <string name="astro_type_planet">Планета</string>
     <string name="astro_type_sun">Сунце</string>
     <string name="astro_type_satellite">Сателит</string>
+    <string name="astro_culmination">Кулминација</string>
+    <string name="astro_alt_short">Алт</string>
+    <string name="astro_az_short">Аз</string>
+    <string name="astro_type_galaxy">Галаксија</string>
+    <string name="astro_type_nebula">Маглина</string>
+    <string name="astro_type_open_cluster">Отворени кластер</string>
+    <string name="astro_type_globular_cluster">Кугласти кластер</string>
+    <string name="astro_type_galaxy_cluster">Галаксијски кластер</string>
+    <string name="astro_type_constellation">Сазвежђе</string>
 </resources>

@@ -5693,7 +5693,7 @@
     <string name="shared_storage_last_step">Μπορείτε να ορίσετε νέο φάκελο δεδομένων μετέπειτα.</string>
     <string name="shared_storage_third_step">Παραχωρήστε άδεια για πρόσβαση στο φάκελο. Χωρίς αυτήν το OsmAnd δε θα μπορεί να αντιγράψει αρχεία.</string>
     <string name="weather_plugin_description">Παρέχει\n- την 24ωρη και 7ήμερη πρόγνωση καιρού παρουσιάζοντας 5 επίπεδα\n- γραφικά στοιχεία με βάση την τοποθεσία\n- τις ισογραμμές θερμοκρασίας / πίεσης\n\nΤα καιρικά δεδομένα παρέχονται από το Παγκόσμιο Σύστημα Πρόγνωσης (GFS, %1$s).</string>
-    <string name="astro_nebulae">Νεφέλωμα</string>
+    <string name="astro_nebulae">Νεφελώματα</string>
     <string name="astro_open_clusters">Ανοιχτά σμήνη</string>
     <string name="astro_globular_clusters">Σφαιρωτά σμήνη</string>
     <string name="astro_galaxy_clusters">Σμήνη γαλαξιών</string>
@@ -5871,4 +5871,25 @@
     <string name="trip_recording_avg_speed_widget_description">Δείχνει την μέση ταχύτητα της τρέχουσας διαδρομής, ή την μέση ταχύτητα κατά το τελευταίο τμήμα ανηφόρας ή κατηφόρας.</string>
     <string name="trip_recording_moving_time_widget_description">Δείχνει τον τρέχον κατεγεγραμμένο χρόνο σε κίνηση, ή τον χρόνο της τελευταίας ανηφόρας και κατηφόρας.</string>
     <string name="trip_recording_moving_time">Χρόνος σε κίνηση</string>
+    <string name="astro_culmination">Μεσουράνημα</string>
+    <string name="astro_today_visibility">Ορατότητα σήμερα</string>
+    <string name="astro_alt_short">Ύψ.</string>
+    <string name="astro_az_short">Αζ.</string>
+    <string name="astronomy_schedule">Ημερολόγιο</string>
+    <string name="astro_catalogs">Κατάλογοι</string>
+    <string name="astro_path">Διαδρομή</string>
+    <string name="astro_direction">Κατεύθυνση</string>
+    <string name="astro_locate">Εντοπισμός</string>
+    <string name="astro_type_earth">Γη</string>
+    <string name="astro_type_star">Άστρο</string>
+    <string name="astro_type_galaxy">Γαλαξίας</string>
+    <string name="astro_type_black_hole">Μαύρη τρύπα</string>
+    <string name="astro_type_planet">Πλανήτης</string>
+    <string name="astro_type_sun">Ήλιος</string>
+    <string name="astro_type_satellite">Δορυφόρος</string>
+    <string name="astro_type_nebula">Νεφέλωμα</string>
+    <string name="astro_type_open_cluster">Ανοιχτό σμήνος</string>
+    <string name="astro_type_globular_cluster">Σφαιρικό σμήνος</string>
+    <string name="astro_type_galaxy_cluster">Σμήνος γαλαξία</string>
+    <string name="astro_type_constellation">Αστερισμός</string>
 </resources>

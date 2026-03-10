@@ -6271,7 +6271,7 @@
     <string name="star_altitude_name">Ster hoogte</string>
     <string name="magnitude_filter">Magnitude-filter</string>
     <string name="astro_galaxies">Sterrenstelsels</string>
-    <string name="astro_nebulae">Nevels en gaswolken</string>
+    <string name="astro_nebulae">Nevels</string>
     <string name="astro_globular_clusters">Bolvormige sterrenhopen</string>
     <string name="astro_open_clusters">Open sterrenhopen</string>
     <string name="astro_galaxy_clusters">Sterrenstelselclusters</string>
@@ -6317,7 +6317,7 @@
     <string name="map_2d">2D</string>
     <string name="map_3d">3D</string>
     <string name="astro_star_clusters">Sterrenhopen</string>
-    <string name="astro_nebulas">Nevels en gaswolken</string>
+    <string name="astro_nebulas">Nevel</string>
     <string name="astro_solar_system">Zonnestelsel</string>
     <string name="astro_rendering">Renderen</string>
     <string name="red_filter">Roodfilter</string>
