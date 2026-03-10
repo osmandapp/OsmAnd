@@ -5685,8 +5685,8 @@
     <string name="ais_cpa_warning_time">Warnzeit vor dem Punkt der größten Annäherung (CPA)</string>
     <string name="ais_cpa_warning_distance">Warnabstand für den Punkt der größten Annäherung (CPA)</string>
     <string name="map_grid">Kartenraster</string>
-    <string name="show_grids">Kartenraster anzeigen</string>
-    <string name="show_grids_description">Anzeige eines Rasters über der Karte erlauben</string>
+    <string name="show_grids">Gitternetz anzeigen</string>
+    <string name="show_grids_description">Anzeige eines Gitternetzes über der Karte erlauben</string>
     <string name="show_utm_grids">UTM statt WGS84 verwenden</string>
     <string name="show_utm_grids_description">Gitter in UTM-Metern statt in WGS84 anzeigen</string>
     <string name="no_places_available">Keine Orte im Kartenausschnitt</string>
@@ -5700,11 +5700,11 @@
     <string name="original_icon_description">Jeder Punkt behält sein individuelles Symbol.</string>
     <string name="original_shape_description">Jeder Punkt behält seine individuelle Form.</string>
     <string name="show_mercator_grids">Mercator statt WGS84 oder UTM verwenden</string>
-    <string name="show_mercator_grids_description">Gitter in Mercator km statt WGS84 oder UTM anzeigen</string>
+    <string name="show_mercator_grids_description">Gitternetz in Mercator km statt WGS84 oder UTM anzeigen</string>
     <string name="show_dms_grids">DMS statt Grad verwenden</string>
     <string name="show_dm_grids">DM statt Grad oder DMS verwenden</string>
     <string name="show_dm_grids_description">Gitter in Grad und Minuten statt in Grad oder DMS anzeigen</string>
-    <string name="show_dms_grids_description">Gitter in Grad, Minuten und Sekunden statt in Grad anzeigen</string>
+    <string name="show_dms_grids_description">Gitternetz in Grad, Minuten und Sekunden statt in Grad anzeigen</string>
     <string name="show_list">Liste anzeigen</string>
     <string name="choose_location">Wählen Sie einen Standort</string>
     <string name="shared_string_manual">Manuell</string>
@@ -6078,4 +6078,9 @@
     <string name="astro_type_galaxy_cluster">Galaxienhaufen</string>
     <string name="astro_type_constellation">Sternbild</string>
     <string name="astro_culmination">Kulmination</string>
+    <string name="astro_today_visibility">Sichtbarkeit heute</string>
+    <string name="astro_alt_short">Alt</string>
+    <string name="astro_az_short">Az</string>
+    <string name="astro_catalogs">Kataloge</string>
+    <string name="show_layout_grid_logs">Gitternetzverlauf anzeigen</string>
 </resources>
