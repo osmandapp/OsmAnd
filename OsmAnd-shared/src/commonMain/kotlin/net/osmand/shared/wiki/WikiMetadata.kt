@@ -15,6 +15,15 @@ object WikiMetadata {
 		val descriptions: Map<String, String>
 			get() = descriptionsMap ?: emptyMap()
 
+		fun getDescription(): String? {
+			return getDescription(ENGLISH_LANGUAGE)
+		}
+
+
+		fun setDescription(description: String) {
+			return putDescription(ENGLISH_LANGUAGE, description)
+		}
+
 		fun putDescription(language: String, description: String) {
 			val normalizedLanguage = normalizeLanguageKey(language) ?: return
 			if (description.isBlank()) {
@@ -25,7 +34,6 @@ object WikiMetadata {
 			}
 			descriptionsMap?.put(normalizedLanguage, description)
 		}
-
 		fun getDescription(preferredLanguage: String?): String? {
 			val localizedDescriptions = descriptionsMap ?: return null
 			val normalizedLanguage = normalizeLanguageKey(preferredLanguage)
