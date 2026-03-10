@@ -28,7 +28,7 @@ class GetAstroImagesTask(
 	override fun doInBackground(vararg voids: Void?): List<WikiImage>? {
 		TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID)
 		try {
-			val list = WikiCoreHelper.getAstroImageList(wikidataId, app.language, networkResponseListener)
+			val list = WikiCoreHelper.getAstroImageList(wikidataId, networkResponseListener)
 			return list
 		} catch (e: Exception) {
 			LOG?.error(e)

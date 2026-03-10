@@ -92,7 +92,7 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 				httpPms.put("lang", preferredLang);
 			}
 
-			List<WikiImage> wikimediaImageList = WikiCoreHelper.INSTANCE.getWikiImageList(params, app.getLanguage(), networkResponseListener);
+			List<WikiImage> wikimediaImageList = WikiCoreHelper.INSTANCE.getWikiImageList(params, networkResponseListener);
 			for (WikiImage wikiImage : wikimediaImageList) {
 				holder.addCard(WIKIMEDIA, new WikiImageCard(mapActivity, wikiImage));
 			}

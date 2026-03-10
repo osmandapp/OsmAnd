@@ -185,7 +185,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 			licenseView.setVisibility(View.VISIBLE);
 
 			WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
-			setDescription(metadata.getDescription());
+			setDescription(metadata.getDescription(app.getLanguage()));
 			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
 		} else {
 			setDescription(null);

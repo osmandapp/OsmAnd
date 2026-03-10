@@ -1071,7 +1071,7 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 				CacheReadTask(cacheManager, rawKey) { json: String? ->
 					if (!Algorithms.isEmpty(json)) {
 						val wikimediaImageList: List<WikiImage> =
-							WikiCoreHelper.getAstroImagesFromJson(json!!, app.language)
+							WikiCoreHelper.getAstroImagesFromJson(json!!)
 
 						imageCardListener.onFinish(wikimediaImageList)
 					} else {

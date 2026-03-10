@@ -100,7 +100,7 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 		ImageCard card = getSelectedCard();
 		WikiMetadata.Metadata metadata = card instanceof WikiImageCard ? ((WikiImageCard) card).getWikiImage().getMetadata() : null;
 
-		String description = metadata != null ? metadata.getDescription() : null;
+		String description = metadata != null ? metadata.getDescription(app.getLanguage()) : null;
 		if (!Algorithms.isEmpty(description)) {
 			buildDescriptionItem(container, description);
 		}
