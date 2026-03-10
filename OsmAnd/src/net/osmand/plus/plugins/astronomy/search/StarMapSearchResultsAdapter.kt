@@ -102,19 +102,14 @@ private class StarMapSearchResultFormatter(
 ) {
 
 	fun bindIcon(iconView: ImageView?, entry: StarMapSearchEntry) {
-		val forcedCategory = categoryPresetProvider()
-		if (forcedCategory != null) {
-			iconView?.setImageDrawable(
-				uiUtilities.getIcon(
-					getCategoryIconRes(forcedCategory),
-					ColorUtilities.getDefaultIconColorId(nightMode)
-				)
+		val iconCategory = categoryPresetProvider() ?: entry.category
+		iconView?.setImageDrawable(
+			uiUtilities.getIcon(
+				getCategoryIconRes(iconCategory),
+				ColorUtilities.getDefaultIconColorId(nightMode)
 			)
-			iconView?.clearColorFilter()
-			return
-		}
-		iconView?.setImageDrawable(uiUtilities.getIcon(entry.iconRes, ColorUtilities.getDefaultIconColorId(nightMode)))
-		iconView?.setColorFilter(entry.iconColor)
+		)
+		iconView?.clearColorFilter()
 	}
 
 	fun buildSubtitle(itemView: View, entry: StarMapSearchEntry): CharSequence {
