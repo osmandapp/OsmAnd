@@ -3,12 +3,14 @@ package net.osmand.plus.palette.controller
 import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.annotation.DrawableRes
+import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.palette.contract.IExternalPaletteListener
 import net.osmand.plus.palette.contract.IPaletteController
 import net.osmand.plus.palette.contract.IPaletteInteractionListener
 import net.osmand.plus.palette.contract.IPaletteView
 import net.osmand.plus.palette.utils.IdMapper
+import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.shared.palette.data.PaletteRepository
 import net.osmand.shared.palette.data.PaletteSortMode
@@ -157,9 +159,23 @@ abstract class BasePaletteController(
 
 	// --- Base UI components ---
 
-	fun isNightMode() = collectActivePalettes()[0].isNightMode()
+	fun isNightMode() = getTopActivePaletteView()?.isNightMode() ?: false
 
-	fun getFragmentActivity() = collectActivePalettes()[0].getActivity()
+	fun getFragmentActivity() = getTopActivePaletteView()?.getActivity()
+
+	private fun getTopActivePaletteView(): IPaletteView? {
+		val palettes = collectActivePalettes()
+		for (i in palettes.indices.reversed()) {
+			val view = palettes[i]
+			val activity = view.getActivity()
+
+			// Check if activity is not null AND is currently alive (not destroyed or finishing)
+			if (activity != null && AndroidUtils.isActivityNotDestroyed(activity)) {
+				return view
+			}
+		}
+		return null
+	}
 
 	// --- Internal helper methods ---
 
