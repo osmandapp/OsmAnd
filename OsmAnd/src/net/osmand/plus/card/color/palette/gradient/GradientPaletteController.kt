@@ -8,9 +8,11 @@ import androidx.fragment.app.FragmentActivity
 import net.osmand.OnResultCallback
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.card.color.palette.gradient.editor.data.GradientDraft
 import net.osmand.plus.card.color.palette.gradient.editor.GradientEditorController
 import net.osmand.plus.card.color.palette.gradient.editor.GradientRangeTypeController
+import net.osmand.plus.card.color.palette.gradient.editor.data.GradientDraft
+import net.osmand.plus.chooseplan.ChoosePlanFragment
+import net.osmand.plus.chooseplan.OsmAndFeature
 import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.palette.controller.BasePaletteController
 import net.osmand.plus.plugins.srtm.TerrainMode
@@ -24,13 +26,14 @@ import net.osmand.plus.widgets.alert.CustomAlert
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.palette.data.PaletteSortMode
 import net.osmand.shared.palette.data.PaletteUtils
 import net.osmand.shared.palette.domain.GradientRangeType
 import net.osmand.shared.palette.domain.Palette
-import net.osmand.shared.palette.domain.category.GradientPaletteCategory
 import net.osmand.shared.palette.domain.PaletteItem
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory
 import net.osmand.shared.palette.domain.filetype.GradientFileType
 import net.osmand.shared.util.KAlgorithms
 
@@ -42,9 +45,6 @@ open class GradientPaletteController(
 	private val appMode: ApplicationMode = app.settings.applicationMode
 
 	var analysis: GpxTrackAnalysis? = null
-
-	private var renaming = false
-	private var applyingEdits = false
 
 	constructor(
 		app: OsmandApplication,
@@ -95,7 +95,7 @@ open class GradientPaletteController(
 	}
 
 	override fun isAddingNewItemsSupported(): Boolean {
-		return paletteCategory.editable && InAppPurchaseUtils.isGradientEditorAvailable(app)
+		return paletteCategory.editable
 	}
 
 	override fun isAutoScrollSupported(): Boolean {
@@ -116,29 +116,36 @@ open class GradientPaletteController(
 			menuItems.add(PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_rename)
 				.setIcon(getContentIcon(R.drawable.ic_action_edit_outlined))
-				.setOnClickListener { showRenameDialog(activity, item, nightMode) }
+				.setOnClickListener {
+					runIfPurchased { showRenameDialog(activity, item, nightMode) }
+				}
 				.create()
 			)
 
 			menuItems.add(PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_edit)
 				.setIcon(getContentIcon(R.drawable.ic_action_appearance_outlined))
-				.setOnClickListener { editGradient(item) }
+				.setOnClickListener {
+					runIfPurchased { editGradient(item) }
+				}
+				.showTopDivider(menuItems.isNotEmpty())
 				.create()
 			)
 		}
 
-		// Duplicate (allowed for every item)
-		menuItems.add(PopUpMenuItem.Builder(activity)
-			.setTitleId(R.string.shared_string_duplicate)
-			.setIcon(getContentIcon(R.drawable.ic_action_copy))
-			.setOnClickListener { duplicateGradient(item) }
-			.create()
-		)
+		if (isDuplicationSupported()) {
+			menuItems.add(PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_duplicate)
+				.setIcon(getContentIcon(R.drawable.ic_action_copy))
+				.setOnClickListener {
+					runIfPurchased { duplicateGradient(item) }
+				}
+				.create()
+			)
+		}
 
-		// Remove (only if not default and not currently selected)
-		val isSelected = isPaletteItemSelected(item)
-		if (!item.isDefault && !isSelected) {
+		// Remove (only if not default)
+		if (!item.isDefault) {
 			menuItems.add(PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_remove)
 				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
@@ -152,6 +159,9 @@ open class GradientPaletteController(
 		displayData.anchorView = anchorView
 		displayData.menuItems = menuItems
 		displayData.nightMode = nightMode
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD
+		displayData.layoutId = R.layout.popup_menu_item_full_divider
+		displayData.showCompound = false
 		PopUpMenu.show(displayData)
 	}
 
@@ -185,9 +195,7 @@ open class GradientPaletteController(
 	}
 
 	private fun removeGradient(item: PaletteItem.Gradient) {
-		repository.removePaletteItem(paletteId, item.id)
-		notifyUpdatePaletteColors(null)
-
+		removePaletteItem(item)
 		updateExternalDependencies()
 	}
 
@@ -232,9 +240,9 @@ open class GradientPaletteController(
 	}
 
 	private fun renameGradientItem(item: PaletteItem.Gradient, newName: String) {
-		renaming = true
 		val newItem = PaletteUtils.renameGradientPalette(item, newName)
 		repository.replacePaletteItem(paletteId, item.id, newItem)
+		updateStableIdKey(item.id, newItem.id)
 		notifyUpdatePaletteColors(null)
 
 		if (item.id == selectedItem?.id) {
@@ -243,7 +251,6 @@ open class GradientPaletteController(
 			notifyUpdatePaletteSelection(oldSelected, newItem)
 		}
 		FileUtils.updateRenamedPaletteDependencies(app, item, newItem)
-		renaming = false
 	}
 
 	private fun editGradient(item: PaletteItem.Gradient) {
@@ -294,7 +301,6 @@ open class GradientPaletteController(
 	}
 
 	private fun onApplyGradientEdits(draft: GradientDraft) {
-		applyingEdits = true
 		val currentPalette = repository.getPalette(paletteId) as? Palette.GradientCollection ?: return
 
 		val itemToUpdate = editedItem as? PaletteItem.Gradient
@@ -329,18 +335,11 @@ open class GradientPaletteController(
 			notifyUpdatePaletteSelection(oldSelected, resultItem)
 		}
 		editedItem = null
-		applyingEdits = false
-	}
-
-	private fun updateExternalDependencies() {
-		if (paletteCategory.isTerrainRelated()) {
-			TerrainMode.reloadAvailableModes(app)
-		}
 	}
 
 	// --- UI Interactions ---
 
-	override fun onAddButtonClick(activity: FragmentActivity) {
+	override fun onAddButtonClick(activity: FragmentActivity) = runIfPurchased {
 		selectFileType { fileType ->
 			showGradientEditor(
 				GradientDraft(
@@ -357,5 +356,26 @@ open class GradientPaletteController(
 		AllGradientsPaletteFragment.showInstance(activity, this)
 	}
 
-	override fun shouldKeepAllItemsScreen() = renaming || applyingEdits
+	// --- Internal helper methods ---
+
+	private fun isDuplicationSupported() = isPurchased()
+
+	private fun runIfPurchased(action: () -> Unit) {
+		val activity = getFragmentActivity()
+		if (isPurchased()) {
+			action()
+		} else if (activity != null) {
+			ChoosePlanFragment.showInstance(activity, OsmAndFeature.ADVANCED_WIDGETS)
+		}
+	}
+
+	private fun isPurchased(): Boolean {
+		return InAppPurchaseUtils.isGradientEditorAvailable(app)
+	}
+
+	private fun updateExternalDependencies() {
+		if (paletteCategory.isTerrainRelated()) {
+			TerrainMode.reloadAvailableModes(app)
+		}
+	}
 }
