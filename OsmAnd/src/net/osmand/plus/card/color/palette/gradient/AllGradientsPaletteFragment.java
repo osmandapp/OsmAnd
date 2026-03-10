@@ -90,7 +90,10 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 
 	private void setupColorsPalette(@NonNull View view) {
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-		adapter = new AllGradientsPaletteAdapter(app, requireActivity(), controller, nightMode);
+		adapter = new AllGradientsPaletteAdapter(app, requireActivity(), controller, nightMode, () -> {
+			dismiss();
+			return kotlin.Unit.INSTANCE;
+		});
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setAdapter(adapter);
 	}
@@ -107,9 +110,6 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 		if (adapter != null) {
 			adapter.askNotifyItemChanged(oldItem);
 			adapter.askNotifyItemChanged(newItem);
-		}
-		if (controller != null && !controller.shouldKeepAllItemsScreen()) {
-			dismiss();
 		}
 	}
 
