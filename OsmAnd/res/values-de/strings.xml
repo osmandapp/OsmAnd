@@ -6083,4 +6083,5 @@
     <string name="astro_az_short">Az</string>
     <string name="astro_catalogs">Kataloge</string>
     <string name="show_layout_grid_logs">Gitternetzverlauf anzeigen</string>
+    <string name="astro_path">Bahn</string>
 </resources>
