@@ -10,6 +10,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter
 import net.osmand.plus.mapcontextmenu.gallery.GalleryPhotoPagerFragment
+import net.osmand.plus.plugins.astronomy.Catalog
 import net.osmand.plus.plugins.astronomy.SkyObject
 
 class AstroContextMenuAdapter(
@@ -21,7 +22,8 @@ class AstroContextMenuAdapter(
 	private val onGalleryToggle: (String) -> Unit,
 	private val onUpdateImage: () -> Unit,
 	private val onScheduleResetPeriod: () -> Unit,
-	private val onScheduleShiftPeriod: (daysDelta: Int) -> Unit
+	private val onScheduleShiftPeriod: (daysDelta: Int) -> Unit,
+	private val onCatalogClick: (Catalog) -> Unit
 ) :
 	RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 	var skyObject: SkyObject? = null
@@ -98,7 +100,7 @@ class AstroContextMenuAdapter(
 			VIEW_TYPE_CATALOGS -> {
 				val view = LayoutInflater.from(parent.context)
 					.inflate(R.layout.astro_context_catalogs_card, parent, false)
-				AstroCatalogsCardViewHolder(view, app)
+				AstroCatalogsCardViewHolder(view, app, onCatalogClick)
 			}
 
 			VIEW_TYPE_GALLERY -> {

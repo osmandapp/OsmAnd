@@ -35,6 +35,7 @@ import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astronomy.StarChartState.StarChartType
 import net.osmand.plus.plugins.astronomy.AstronomyPluginSettings.CommonConfig
 import net.osmand.plus.plugins.astronomy.AstronomyPluginSettings.StarMapConfig
+import net.osmand.plus.plugins.astronomy.search.StarMapSearchDialogFragment
 import net.osmand.plus.plugins.astronomy.utils.StarMapARModeHelper
 import net.osmand.plus.plugins.astronomy.utils.StarMapCameraHelper
 import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroBottomSheetBehavior
@@ -274,21 +275,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		searchButton = view.findViewById(R.id.search_button)
 		searchButton.apply {
 			setOnClickListener {
-				val tag = StarMapSearchDialogFragment.TAG
-				var dialog = childFragmentManager.findFragmentByTag(tag) as? StarMapSearchDialogFragment
-				if (dialog == null) {
-					dialog = StarMapSearchDialogFragment()
-					dialog.onObjectSelected = { obj ->
-						handleSearchObjectSelected(obj)
-					}
-					dialog.show(childFragmentManager, tag)
-				} else {
-					// FragmentManager will bring it back if it's in the backstack, and we pop it
-					// but here we just show it if it was added but not visible.
-					if (dialog.isHidden) {
-						childFragmentManager.beginTransaction().show(dialog).commit()
-					}
-				}
+				showSearchDialog()
 			}
 		}
 		settingsButton = view.findViewById(R.id.settings_button)
@@ -431,6 +418,25 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.setSelectedObject(obj, center = true, animate = true)
 			showObjectInfo(obj)
 		}
+	}
+
+	internal fun showSearchDialog(initialCatalogWid: String? = null) {
+		clearPreviousSearchDialog()
+		StarMapSearchDialogFragment.newInstance(initialCatalogWid).apply {
+			onObjectSelected = { obj ->
+				handleSearchObjectSelected(obj)
+			}
+		}.show(childFragmentManager, StarMapSearchDialogFragment.TAG)
+	}
+
+	private fun clearPreviousSearchDialog() {
+		childFragmentManager.popBackStackImmediate(
+			StarMapSearchDialogFragment.TAG,
+			FragmentManager.POP_BACK_STACK_INCLUSIVE
+		)
+		val existingDialog =
+			childFragmentManager.findFragmentByTag(StarMapSearchDialogFragment.TAG) as? StarMapSearchDialogFragment
+		existingDialog?.dismissAllowingStateLoss()
 	}
 
 	private fun applyBottomWindowInsets(view: View, reset: Boolean = false) {

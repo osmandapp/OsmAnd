@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.OsmandPlugin
+import net.osmand.plus.plugins.astronomy.search.StarMapRecentChip
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
@@ -26,6 +27,7 @@ class AstronomyPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 
 	private val astroDataProvider by lazy { AstroDataDbProvider() }
 	val dataProvider: AstroDataProvider get() = astroDataProvider
+	val recentSearchChips = mutableListOf<StarMapRecentChip>()
 
 	override fun getId(): String {
 		return OsmAndCustomizationConstants.PLUGIN_ASTRONOMY

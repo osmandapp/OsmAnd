@@ -40,6 +40,7 @@ import net.osmand.plus.mapcontextmenu.gallery.tasks.CacheReadTask
 import net.osmand.plus.mapcontextmenu.gallery.tasks.CacheWriteTask
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astronomy.AstroArticle
+import net.osmand.plus.plugins.astronomy.Catalog
 import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.plugins.astronomy.StarMapFragment
 import net.osmand.plus.plugins.astronomy.AstronomyPlugin
@@ -606,6 +607,9 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 			},
 			onScheduleShiftPeriod = { daysDelta ->
 				shiftSchedulePeriod(daysDelta)
+			},
+			onCatalogClick = { catalog ->
+				openCatalogSearch(catalog)
 			})
 
 		adapter.skyObject = skyObject
@@ -1115,5 +1119,9 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 
 		adapter.setItems(items)
 		updateBottomTabSelectionByScroll()
+	}
+
+	private fun openCatalogSearch(catalog: Catalog) {
+		parent.showSearchDialog(catalog.wid)
 	}
 }
