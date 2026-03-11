@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+// FK-TODO: use bundle.putStringArrayList() and bundle.getStringArrayList()
 public class ConfigurationBundleConverter implements de.KnollFrank.lib.settingssearch.db.preference.pojo.converters.ConfigurationBundleConverter<Configuration> {
 
 	private static final String ENABLED_PLUGINS = "enabledPlugins";

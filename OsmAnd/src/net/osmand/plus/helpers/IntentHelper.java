@@ -68,6 +68,7 @@ import net.osmand.plus.settings.fragments.ExportSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
 import net.osmand.plus.settings.fragments.search.Configuration;
+import net.osmand.plus.settings.fragments.search.DisplayLocaleProvider;
 import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -87,7 +88,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -166,15 +166,8 @@ public class IntentHelper {
 								app.getTileSourceTemplatesProvider(),
 								app.preferencesDatabaseManager.getPreferencesDatabase(),
 								actualConfiguration),
-				getLocale(),
+				DisplayLocaleProvider.getDisplayLocale(app.getResources()),
 				actualConfiguration);
-	}
-
-	private Locale getLocale() {
-		final LocaleHelper localeHelper = app.getLocaleHelper();
-		return Optional
-				.ofNullable(localeHelper.getPreferredLocale())
-				.orElseGet(localeHelper::getDefaultLocale);
 	}
 
 	private boolean parseNavigationIntent() {
