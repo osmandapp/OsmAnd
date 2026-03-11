@@ -508,7 +508,7 @@ public class BinaryMapPoiReaderAdapter {
 					return;
 				case POI_NAME_INDEX_BLOOM_FIELD_NUMBER:
 					byte[] bloom = codedIS.readBytes().toByteArray();
-					boolean bloomMatched = BloomFilter.matches(bloom, queryTokens, true);
+					boolean bloomMatched = BloomFilter.matches(bloom, queryTokens);
 					if (!bloomMatched) {
 						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 						return;
@@ -569,7 +569,7 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			case POI_NAME_BOX_BLOOM_FIELD_NUMBER:
 				byte[] bloom = codedIS.readBytes().toByteArray();
-				bloomMatched = BloomFilter.matches(bloom, queryTokens, false);
+				bloomMatched = BloomFilter.matches(bloom, queryTokens);
 				if (!bloomMatched && shift != Integer.MIN_VALUE) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}
