@@ -38,8 +38,8 @@ public class BinaryMapPoiReaderAdapter {
 	private static final int FINAL_POI_SHIFT = BinaryMapIndexReader.SHIFT_COORDINATES;// 5
 	private static final int BASE_POI_ZOOM = 31 - BASE_POI_SHIFT;// 24 zoom
 	private static final int FINAL_POI_ZOOM = 31 - FINAL_POI_SHIFT;// 26 zoom
-	private static final int POI_NAME_INDEX_DATA_KEY_BLOOM_FIELD_NUMBER = 6;
-	private static final int POI_NAME_INDEX_DATA_ATOM_BLOOM_FIELD_NUMBER = 15;
+	private static final int POI_NAME_INDEX_BLOOM_FIELD_NUMBER = 6;
+	private static final int POI_NAME_BOX_BLOOM_FIELD_NUMBER = 15;
 
 
 	public static class PoiSubType {
@@ -506,10 +506,10 @@ public class BinaryMapPoiReaderAdapter {
 			switch (tag) {
 				case 0:
 					return;
-				case POI_NAME_INDEX_DATA_KEY_BLOOM_FIELD_NUMBER:
-					byte[] keyBloomBytes = codedIS.readBytes().toByteArray();
-					boolean keyBloomMatched = BloomFilter.matches(keyBloomBytes, queryTokens);
-					if (!keyBloomMatched) {
+				case POI_NAME_INDEX_BLOOM_FIELD_NUMBER:
+					byte[] bloom = codedIS.readBytes().toByteArray();
+					boolean bloomMatched = BloomFilter.matches(bloom, queryTokens, true);
+					if (!bloomMatched) {
 						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 						return;
 					}
@@ -533,13 +533,13 @@ public class BinaryMapPoiReaderAdapter {
 		int y = 0;
 		int zoom = 15;
 		int shift = Integer.MIN_VALUE;
-		boolean atomMatched = true;
+		boolean bloomMatched = true;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if (shift != Integer.MIN_VALUE && atomMatched) {
+				if (shift != Integer.MIN_VALUE && bloomMatched) {
 					int x31 = (x << (31 - zoom));
 					int y31 = (y << (31 - zoom));
 					int x31r = ((x + 1) << (31 - zoom));
@@ -567,10 +567,10 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.ZOOM_FIELD_NUMBER:
 				zoom = codedIS.readUInt32();
 				break;
-			case POI_NAME_INDEX_DATA_ATOM_BLOOM_FIELD_NUMBER:
-				int atomBloom = codedIS.readInt32();
-				atomMatched = BloomFilter.matches(atomBloom, queryTokens);
-				if (!atomMatched && shift != Integer.MIN_VALUE) {
+			case POI_NAME_BOX_BLOOM_FIELD_NUMBER:
+				byte[] bloom = codedIS.readBytes().toByteArray();
+				bloomMatched = BloomFilter.matches(bloom, queryTokens, false);
+				if (!bloomMatched && shift != Integer.MIN_VALUE) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}
 				break;
