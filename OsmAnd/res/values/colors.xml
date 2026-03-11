@@ -229,7 +229,6 @@
 	<color name="speedometer_tolerance_units_color_dark">#4C4950</color>
 	<color name="speedometer_limit_units_color_light">#FFFFFF</color>
 	<color name="speedometer_limit_units_color_dark">#FFFFFF</color>
-	<color name="widget_units_color_dark">#8C8C8C</color>
 	<!-- widgettext_shadow_night is the same as widget background color for non-transparent night skin (from box_night_free_simple.9.png) -->
 	<color name="widgettext_shadow_night">#dc262626</color>
 	<color name="widgettext_shadow_day">#fff</color>
