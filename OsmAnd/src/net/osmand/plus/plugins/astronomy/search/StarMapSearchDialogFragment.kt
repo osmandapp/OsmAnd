@@ -156,6 +156,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private var pendingSearchHideTarget: HideTarget? = null
 	private var previousSoftInputMode: Int? = null
 	private var catalogsBackState: CatalogsBackState? = null
+	private var dismissOnBrowseBack = false
+	private var pendingInitialCatalogWid: String? = null
 
 	private val dataProvider: AstroDataProvider by lazy {
 		PluginsHelper.requirePlugin(AstronomyPlugin::class.java).dataProvider
@@ -174,10 +176,22 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	companion object {
 		const val TAG = "StarMapSearchDialog"
 
+		private const val ARG_INITIAL_CATALOG_WID = "initial_catalog_wid"
 		private const val KEY_MODE = "mode"
 		private const val KEY_FULL_SEARCH_MODE = "full_search_mode"
 		private const val KEY_CATALOGS_BACK_QUERY = "catalogs_back_query"
 		private const val KEY_CATALOGS_BACK_SORT = "catalogs_back_sort"
+		private const val KEY_DISMISS_ON_BROWSE_BACK = "dismiss_on_browse_back"
+
+		fun newInstance(initialCatalogWid: String? = null): StarMapSearchDialogFragment {
+			return StarMapSearchDialogFragment().apply {
+				arguments = Bundle().apply {
+					initialCatalogWid?.takeIf { it.isNotEmpty() }?.let {
+						putString(ARG_INITIAL_CATALOG_WID, it)
+					}
+				}
+			}
+		}
 	}
 
 	override fun getThemeId(): Int = if (nightMode) R.style.OsmandMaterialDarkTheme else R.style.OsmandMaterialLightTheme
@@ -193,6 +207,10 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		searchState = StarMapSearchState(savedInstanceState)
 		syncRecentChipsWithSession()
 		restoreUiState(savedInstanceState)
+		if (savedInstanceState == null) {
+			pendingInitialCatalogWid = arguments?.getString(ARG_INITIAL_CATALOG_WID)?.takeIf { it.isNotEmpty() }
+			dismissOnBrowseBack = pendingInitialCatalogWid != null
+		}
 	}
 
 	override fun createDialog(savedInstanceState: Bundle?): Dialog {
@@ -213,6 +231,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			outState.putString(KEY_CATALOGS_BACK_QUERY, it.query)
 			outState.putString(KEY_CATALOGS_BACK_SORT, it.sortMode.name)
 		}
+		outState.putBoolean(KEY_DISMISS_ON_BROWSE_BACK, dismissOnBrowseBack)
 		searchState.save(outState)
 	}
 
@@ -230,6 +249,12 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		setupListeners()
 		applySearchSoftInputMode()
 		renderRecentChips()
+		pendingInitialCatalogWid?.let { initialCatalogWid ->
+			pendingInitialCatalogWid = null
+			clearCatalogsBackState()
+			openFullSearch(StarMapSearchQuickPresetType.CATALOG_WID, initialCatalogWid)
+			return
+		}
 		pendingSearchQueryRestore = savedInstanceState != null
 		applyMode(
 			currentMode,
@@ -530,6 +555,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		} else {
 			null
 		}
+		dismissOnBrowseBack = savedInstanceState.getBoolean(KEY_DISMISS_ON_BROWSE_BACK, false)
 	}
 
 	private fun setupCategoryRows() {
@@ -870,7 +896,11 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun handleBrowseBackNavigation() {
 		if (!restoreCatalogsListIfNeeded()) {
-			showExploreMode()
+			if (dismissOnBrowseBack) {
+				dismiss()
+			} else {
+				showExploreMode()
+			}
 		}
 	}
 

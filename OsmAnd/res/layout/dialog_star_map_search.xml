@@ -112,7 +112,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="@dimen/content_padding"
-                        android:background="?attr/list_divider" />
+                        android:background="?attr/list_divider"
+                        android:visibility="gone"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -120,7 +121,8 @@
                         android:minHeight="@dimen/card_row_min_height"
                         android:orientation="horizontal"
                         android:paddingHorizontal="@dimen/content_padding"
-                        android:paddingVertical="@dimen/content_padding">
+                        android:paddingVertical="@dimen/content_padding"
+                        android:visibility="gone">
 
                         <ImageView
                             android:layout_width="@dimen/standard_icon_size"

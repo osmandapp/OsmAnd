@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.ChipGroup
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.plugins.astronomy.Catalog
 
 class AstroCatalogsCardViewHolder(
 	itemView: View,
-	private val app: OsmandApplication
+	private val app: OsmandApplication,
+	private val onCatalogClick: (Catalog) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
 
 	private val maxVisible = 10
@@ -26,8 +28,9 @@ class AstroCatalogsCardViewHolder(
 		val needShowMore = items.size > maxVisible
 		val visible = if (!expanded && needShowMore) items.take(maxVisible) else items
 
-		visible.forEach { text ->
-			group.addView(createCatalogChip(inflater, group, text.catalogId) {
+		visible.forEach { catalog ->
+			group.addView(createCatalogChip(inflater, group, catalog.catalogId) {
+				onCatalogClick(catalog)
 			})
 		}
 

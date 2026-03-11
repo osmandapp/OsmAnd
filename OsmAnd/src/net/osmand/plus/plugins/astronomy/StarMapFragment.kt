@@ -275,12 +275,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		searchButton = view.findViewById(R.id.search_button)
 		searchButton.apply {
 			setOnClickListener {
-				clearPreviousSearchDialog()
-				StarMapSearchDialogFragment().apply {
-					onObjectSelected = { obj ->
-						handleSearchObjectSelected(obj)
-					}
-				}.show(childFragmentManager, StarMapSearchDialogFragment.TAG)
+				showSearchDialog()
 			}
 		}
 		settingsButton = view.findViewById(R.id.settings_button)
@@ -423,6 +418,15 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			starView.setSelectedObject(obj, center = true, animate = true)
 			showObjectInfo(obj)
 		}
+	}
+
+	internal fun showSearchDialog(initialCatalogWid: String? = null) {
+		clearPreviousSearchDialog()
+		StarMapSearchDialogFragment.newInstance(initialCatalogWid).apply {
+			onObjectSelected = { obj ->
+				handleSearchObjectSelected(obj)
+			}
+		}.show(childFragmentManager, StarMapSearchDialogFragment.TAG)
 	}
 
 	private fun clearPreviousSearchDialog() {
