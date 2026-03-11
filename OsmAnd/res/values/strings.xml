@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+	<string name="no_objects_found">No objects found</string>
 	<string name="astro_search_info_solar_system">The Solar System is the gravitationally bound system of the Sun and the masses that orbit it, most prominently its eight planets, of which Earth is one.</string>
 	<string name="astro_search_info_constellations">A constellation is an area on the celestial sphere in which a group of visible stars forms a perceived pattern or outline.</string>
 	<string name="astro_search_info_stars">Stars are luminous astronomical objects made of plasma, held together by their own gravity.</string>
@@ -46,7 +47,7 @@
 	<string name="astro_sort_rises_soonest">Rises soonest</string>
 	<string name="astro_sort_faintest_first">Faintest first</string>
 	<string name="astro_sort_brightest_first">Brightest first</string>
-	<string name="astro_search_empty_description">Refine your search or adjust filters.</string>
+	<string name="astro_search_empty_description">Try changing the filters or observation time.</string>
 	<string name="astro_search_input_hint">Input text</string>
 	<string name="astro_explore_my_data">My data</string>
 	<string name="astro_explore_schedule_subtitle">Upcoming astronomical events</string>

@@ -152,6 +152,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private var defaultBrowseHeaderHeight = 0
 	private val widToDisplayName = mutableMapOf<String, String>()
 	private var suppressQueryDispatch = false
+	private var pendingSearchQueryRestore = false
 	private var pendingSearchHideTarget: HideTarget? = null
 	private var previousSoftInputMode: Int? = null
 	private var catalogsBackState: CatalogsBackState? = null
@@ -229,6 +230,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		setupListeners()
 		applySearchSoftInputMode()
 		renderRecentChips()
+		pendingSearchQueryRestore = savedInstanceState != null
 		applyMode(
 			currentMode,
 			requestKeyboard = currentMode == ScreenMode.FULL_SEARCH && currentFullSearchMode == FullSearchMode.INPUT
@@ -398,7 +400,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
 			override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
 			override fun afterTextChanged(s: Editable?) {
-				if (suppressQueryDispatch) {
+				if (suppressQueryDispatch || pendingSearchQueryRestore) {
 					return
 				}
 				val newQuery = s?.toString().orEmpty()
@@ -912,6 +914,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		val iconColor = ColorUtilities.getDefaultIconColor(requireContext(), nightMode)
 		searchView.toolbar.navigationIcon?.mutate()?.setTint(iconColor)
 		if (presentation == InputPresentation.EXPLORE_BAR) {
+			exploreSearchBar.setText(searchState.query)
 			bindExploreSearchBarListeners()
 		} else {
 			fullSearchAnchorBar.setText(searchState.query)
@@ -931,7 +934,14 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			fullSearchContainer.isVisible = true
 		}
 		val editText = getSearchEditText(presentation)
-		if (editText.text?.length ?: 0 > 0) {
+		if (pendingSearchQueryRestore) {
+			editText.post {
+				if (view != null && currentMode == ScreenMode.FULL_SEARCH && currentFullSearchMode == FullSearchMode.INPUT) {
+					syncSearchQuery()
+				}
+				pendingSearchQueryRestore = false
+			}
+		} else if ((editText.text?.length ?: 0) > 0) {
 			editText.setSelection(editText.length())
 		}
 	}
@@ -940,10 +950,16 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		if (presentation != currentInputPresentation) {
 			return
 		}
+		val hideTarget = pendingSearchHideTarget ?: if (searchState.hasBrowseContext()) HideTarget.BROWSE else HideTarget.EXPLORE
 		attachSearchResultsPanel(fullSearchResultsHost)
 		AndroidUtils.hideSoftKeyboard(requireActivity(), getSearchEditText(presentation))
-		when (pendingSearchHideTarget ?: if (searchState.hasBrowseContext()) HideTarget.BROWSE else HideTarget.EXPLORE) {
+		when (hideTarget) {
 			HideTarget.BROWSE -> {
+				val clearQuery = searchState.query.isNotEmpty()
+				if (clearQuery) {
+					searchState.query = ""
+					syncSearchQuery()
+				}
 				currentMode = ScreenMode.FULL_SEARCH
 				currentFullSearchMode = FullSearchMode.BROWSE
 				fullSearchAnchorBar.isVisible = false
@@ -953,6 +969,9 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				exploreContainer.isVisible = false
 				fullSearchContainer.isVisible = true
 				fullSearchAppBar.setExpanded(true, false)
+				if (clearQuery) {
+					applyFiltersAndSort(scrollToTop = false)
+				}
 			}
 			HideTarget.EXPLORE -> {
 				currentMode = ScreenMode.EXPLORE
@@ -972,6 +991,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun syncSearchQuery() {
 		suppressQueryDispatch = true
+		exploreSearchBar.setText(searchState.query)
 		if (exploreSearchEditText.text.toString() != searchState.query) {
 			exploreSearchEditText.setText(searchState.query)
 		}
@@ -1147,10 +1167,10 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		val (iconRes, textRes) = when (searchState.sortMode) {
 			StarMapSearchSortMode.NAME_ASC -> R.drawable.ic_action_sort_by_name_ascending to R.string.sort_name_ascending
 			StarMapSearchSortMode.NAME_DESC -> R.drawable.ic_action_sort_by_name_descending to R.string.sort_name_descending
-			StarMapSearchSortMode.BRIGHTEST_FIRST -> R.drawable.ic_action_sort_short_to_long to R.string.astro_sort_brightest_first
-			StarMapSearchSortMode.FAINTEST_FIRST -> R.drawable.ic_action_sort_long_to_short to R.string.astro_sort_faintest_first
-			StarMapSearchSortMode.RISES_SOONEST -> R.drawable.ic_action_sort_date_1 to R.string.astro_sort_rises_soonest
-			StarMapSearchSortMode.SETS_SOONEST -> R.drawable.ic_action_sort_date_31 to R.string.astro_sort_sets_soonest
+			StarMapSearchSortMode.BRIGHTEST_FIRST -> R.drawable.ic_action_sort_brightest to R.string.astro_sort_brightest_first
+			StarMapSearchSortMode.FAINTEST_FIRST -> R.drawable.ic_action_sort_faintest to R.string.astro_sort_faintest_first
+			StarMapSearchSortMode.RISES_SOONEST -> R.drawable.ic_action_sort_rises to R.string.astro_sort_rises_soonest
+			StarMapSearchSortMode.SETS_SOONEST -> R.drawable.ic_action_sort_sets to R.string.astro_sort_sets_soonest
 		}
 		sortText.setText(textRes)
 		sortIcon.setImageDrawable(app.uiUtilities.getIcon(iconRes, ColorUtilities.getActiveIconColorId(nightMode)))
@@ -1170,7 +1190,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		if (isMyDataMode()) {
 			val (iconRes, titleRes, descriptionRes) = when (searchState.quickPresetType) {
 				StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> Triple(
-					R.drawable.ic_direction_arrow,
+					R.drawable.ic_action_bookmark,
 					R.string.astro_my_data_no_directions_title,
 					R.string.astro_my_data_no_directions_description
 				)
