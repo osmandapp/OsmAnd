@@ -105,6 +105,11 @@ internal data class StarMapSearchEntry(
 	var visibleTonightCalculated: Boolean = false
 )
 
+data class StarMapRecentChip(
+	val label: String,
+	val objectId: String? = null
+)
+
 internal data class StarMapSearchStateSnapshot(
 	val query: String,
 	val sortMode: StarMapSearchSortMode,
@@ -191,6 +196,8 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 		private const val KEY_QUICK_PRESET = "quick_preset"
 		private const val KEY_QUICK_CATALOG = "quick_catalog"
 		private const val KEY_RECENT_CHIPS = "recent_chips"
+		private const val KEY_RECENT_CHIP_LABELS = "recent_chip_labels"
+		private const val KEY_RECENT_CHIP_IDS = "recent_chip_ids"
 		private const val MAX_RECENT_CHIPS = 8
 	}
 
@@ -201,7 +208,7 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 	var quickPresetType: StarMapSearchQuickPresetType = StarMapSearchQuickPresetType.NONE
 	var quickPresetCatalogWid: String? = null
 	val selectedCategories = linkedSetOf(StarMapSearchCategoryFilter.ALL)
-	val recentChips = mutableListOf<String>()
+	val recentChips = mutableListOf<StarMapRecentChip>()
 
 	init {
 		restore(savedInstanceState)
@@ -215,7 +222,8 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 		outState.putStringArrayList(KEY_CATEGORIES, ArrayList(selectedCategories.map { it.name }))
 		outState.putString(KEY_QUICK_PRESET, quickPresetType.name)
 		outState.putString(KEY_QUICK_CATALOG, quickPresetCatalogWid)
-		outState.putStringArrayList(KEY_RECENT_CHIPS, ArrayList(recentChips))
+		outState.putStringArrayList(KEY_RECENT_CHIP_LABELS, ArrayList(recentChips.map { it.label }))
+		outState.putStringArrayList(KEY_RECENT_CHIP_IDS, ArrayList(recentChips.map { it.objectId.orEmpty() }))
 	}
 
 	fun restore(savedInstanceState: Bundle?) {
@@ -244,7 +252,29 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 		}
 
 		recentChips.clear()
-		recentChips.addAll(savedInstanceState.getStringArrayList(KEY_RECENT_CHIPS).orEmpty())
+		val recentChipLabels = savedInstanceState.getStringArrayList(KEY_RECENT_CHIP_LABELS)
+		val recentChipIds = savedInstanceState.getStringArrayList(KEY_RECENT_CHIP_IDS)
+		if (recentChipLabels != null) {
+			recentChipLabels.forEachIndexed { index, label ->
+				val normalizedLabel = label.trim()
+				if (normalizedLabel.isNotEmpty()) {
+					recentChips.add(
+						StarMapRecentChip(
+							label = normalizedLabel,
+							objectId = recentChipIds?.getOrNull(index)?.takeIf { it.isNotEmpty() }
+						)
+					)
+				}
+			}
+		} else {
+			recentChips.addAll(
+				savedInstanceState.getStringArrayList(KEY_RECENT_CHIPS).orEmpty()
+					.mapNotNull { label ->
+						val normalizedLabel = label.trim()
+						normalizedLabel.takeIf { it.isNotEmpty() }?.let { StarMapRecentChip(it) }
+					}
+			)
+		}
 	}
 
 	fun selectQuickPreset(quickPresetType: StarMapSearchQuickPresetType, catalogWid: String?) {
@@ -333,16 +363,21 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 		selectedCategories.add(StarMapSearchCategoryFilter.ALL)
 	}
 
-	fun addRecentChip(label: String) {
-		val normalized = label.trim()
-		if (normalized.isEmpty()) {
+	fun addRecentChip(label: String, objectId: String) {
+		val normalizedLabel = label.trim()
+		if (normalizedLabel.isEmpty()) {
 			return
 		}
-		recentChips.removeAll { it.equals(normalized, ignoreCase = true) }
-		recentChips.add(0, normalized)
+		recentChips.removeAll { it.objectId == objectId || it.label.equals(normalizedLabel, ignoreCase = true) }
+		recentChips.add(0, StarMapRecentChip(normalizedLabel, objectId))
 		while (recentChips.size > MAX_RECENT_CHIPS) {
 			recentChips.removeAt(recentChips.lastIndex)
 		}
+	}
+
+	fun replaceRecentChips(chips: List<StarMapRecentChip>) {
+		recentChips.clear()
+		recentChips.addAll(chips.take(MAX_RECENT_CHIPS))
 	}
 
 	fun toggleCategoryFilter(categoryFilter: StarMapSearchCategoryFilter) {

@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +16,12 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.StringRes
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.R as MaterialR
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.appbar.MaterialToolbar
@@ -53,6 +53,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
 import java.util.Locale
+import com.google.android.material.R as MaterialR
 
 class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
@@ -159,8 +160,12 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		PluginsHelper.requirePlugin(AstronomyPlugin::class.java).dataProvider
 	}
 
+	private val plugin: AstronomyPlugin by lazy {
+		PluginsHelper.requirePlugin(AstronomyPlugin::class.java)
+	}
+
 	private val astroSettings: AstronomyPluginSettings by lazy {
-		PluginsHelper.requirePlugin(AstronomyPlugin::class.java).astroSettings
+		plugin.astroSettings
 	}
 
 	var onObjectSelected: ((SkyObject) -> Unit)? = null
@@ -185,6 +190,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		searchState = StarMapSearchState(savedInstanceState)
+		syncRecentChipsWithSession()
 		restoreUiState(savedInstanceState)
 	}
 
@@ -1230,9 +1236,21 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		applyFiltersAndSort(scrollToTop = true)
 	}
 
-	private fun addRecentChip(label: String) {
-		searchState.addRecentChip(label)
+	private fun addRecentChip(entry: StarMapSearchEntry) {
+		searchState.addRecentChip(entry.displayName, entry.objectRef.id)
+		plugin.recentSearchChips.apply {
+			clear()
+			addAll(searchState.recentChips)
+		}
 		renderRecentChips()
+	}
+
+	private fun syncRecentChipsWithSession() {
+		if (plugin.recentSearchChips.isEmpty()) {
+			plugin.recentSearchChips.addAll(searchState.recentChips)
+		} else {
+			searchState.replaceRecentChips(plugin.recentSearchChips)
+		}
 	}
 
 	private fun renderRecentChips() {
@@ -1241,7 +1259,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		recentChipsScroll.isVisible = searchState.recentChips.isNotEmpty()
 		if (searchState.recentChips.isEmpty()) return
 
-		searchState.recentChips.forEach { chipTitle ->
+		searchState.recentChips.forEach { recentChip ->
 			val chipCard = MaterialCardView(requireContext()).apply {
 				radius = resources.getDimension(R.dimen.content_padding)
 				cardElevation = 0f
@@ -1253,7 +1271,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				)
 			}
 			val chipText = TextView(requireContext()).apply {
-				text = chipTitle
+				text = recentChip.label
 				setTextColor(ColorUtilities.getActiveColor(app, nightMode))
 				setPadding(
 					resources.getDimensionPixelSize(R.dimen.content_padding),
@@ -1261,15 +1279,27 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 					resources.getDimensionPixelSize(R.dimen.content_padding),
 					resources.getDimensionPixelSize(R.dimen.content_padding_small)
 				)
-				textSize = 14f
+				setTextSize(TypedValue.COMPLEX_UNIT_PX,
+					resources.getDimensionPixelSize(R.dimen.default_desc_text_size).toFloat()
+				)
 			}
 			chipCard.addView(chipText)
 			chipCard.setOnClickListener {
-				searchState.selectQuickPreset(StarMapSearchQuickPresetType.NONE, null)
-				currentFullSearchMode = FullSearchMode.INPUT
-				searchState.query = chipTitle
-				showInputMode(InputPresentation.EXPLORE_BAR, requestKeyboard = true)
-				applyFiltersAndSort(scrollToTop = true)
+				val selectedEntry = recentChip.objectId?.let { objectId ->
+					preparedEntries.firstOrNull { it.objectRef.id == objectId }
+				} ?: preparedEntries.firstOrNull {
+					it.displayName.equals(recentChip.label, ignoreCase = true) ||
+						it.objectRef.name.equals(recentChip.label, ignoreCase = true)
+				}
+				if (selectedEntry != null) {
+					onSearchEntrySelected(selectedEntry)
+				} else {
+					searchState.selectQuickPreset(StarMapSearchQuickPresetType.NONE, null)
+					currentFullSearchMode = FullSearchMode.INPUT
+					searchState.query = recentChip.label
+					showInputMode(InputPresentation.EXPLORE_BAR, requestKeyboard = true)
+					applyFiltersAndSort(scrollToTop = true)
+				}
 			}
 			val lp = LinearLayout.LayoutParams(
 				ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -1281,7 +1311,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	}
 
 	private fun onSearchEntrySelected(entry: StarMapSearchEntry) {
-		addRecentChip(entry.displayName)
+		addRecentChip(entry)
 		onObjectSelected?.invoke(entry.objectRef)
 		parentFragmentManager.beginTransaction()
 			.hide(this)
