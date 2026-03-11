@@ -6050,4 +6050,26 @@
     <string name="astronomy_plugin_name">Astronómia</string>
     <string name="share_favorite">Zdieľať obľúbené</string>
     <string name="copy_list">Kopírovať zoznam</string>
+    <string name="astro_culmination">Kulminácia</string>
+    <string name="astro_today_visibility">Dnešná viditeľnosť</string>
+    <string name="astro_alt_short">Výška</string>
+    <string name="astro_az_short">Az</string>
+    <string name="astronomy_schedule">Plán</string>
+    <string name="astro_catalogs">Katalógy</string>
+    <string name="astro_path">Dráha</string>
+    <string name="astro_direction">Smer</string>
+    <string name="astro_locate">Nájsť</string>
+    <string name="astro_type_earth">Zem</string>
+    <string name="astro_type_star">Hviezda</string>
+    <string name="astro_type_galaxy">Galaxia</string>
+    <string name="astro_type_black_hole">Čierna diera</string>
+    <string name="astro_type_planet">Planéta</string>
+    <string name="astro_type_sun">Slnko</string>
+    <string name="astro_type_satellite">Satelit</string>
+    <string name="astro_type_nebula">Hmlovina</string>
+    <string name="astro_type_open_cluster">Otvorená hviezdokopa</string>
+    <string name="astro_type_globular_cluster">Guľová hviezdokopa</string>
+    <string name="astro_type_galaxy_cluster">Skupina galaxií</string>
+    <string name="astro_type_constellation">Súhvezdie</string>
+    <string name="intersection">Priesečník</string>
 </resources>

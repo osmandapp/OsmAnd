@@ -5,10 +5,11 @@
 	android:background="?attr/list_background_color">
 
 	<View
+		android:id="@+id/divider_half_item"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_marginStart="@dimen/divider_color_light_margin_start"
-		android:layout_marginLeft="@dimen/divider_color_light_margin_start"
+		android:layout_marginEnd="@dimen/divider_color_light_margin_start"
 		android:background="?attr/divider_color_basic" />
 
 </FrameLayout>

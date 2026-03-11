@@ -271,7 +271,7 @@ public class MapHudLayout extends FrameLayout {
 
 		if (DEV_GRID_LAYOUT_SHOW_LOGS) {
 			LOG.info("--------START--------");
-			LOG.info("Grid size: width " + width + "height" + height);
+			LOG.info("Grid size: width " + width + " height " + height);
 			for (ButtonPositionSize b : list) {
 				LOG.info(b + " value = " + b.toLongValue());
 			}

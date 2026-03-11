@@ -5925,8 +5925,8 @@
     <string name="ecliptic_line">Ekliptiko</string>
     <string name="magnitude_filter">Filtrilo de heleco</string>
     <string name="astro_planets">Planedoj</string>
-    <string name="astro_constellation">Stelaro</string>
-    <string name="astro_constellations">Stelaroj</string>
+    <string name="astro_constellation">Stelfiguro</string>
+    <string name="astro_constellations">Stelfiguroj</string>
     <string name="astro_stars">Steloj</string>
     <string name="astro_galaxies">Galaksioj</string>
     <string name="astro_nebulae">Nebulastroj</string>
@@ -6044,4 +6044,26 @@
     <string name="share_favorite">Kunhavigi ŝatatan ejon</string>
     <string name="copy_list">Kopii liston</string>
     <string name="intersection">Interkruciĝo</string>
+    <string name="astro_culmination">Kulmino</string>
+    <string name="astro_today_visibility">Hodiaŭa videblo</string>
+    <string name="astro_alt_short">Alt.</string>
+    <string name="astro_az_short">Az.</string>
+    <string name="astronomy_schedule">Horaro</string>
+    <string name="astro_catalogs">Katalogoj</string>
+    <string name="astro_path">Spuro</string>
+    <string name="astro_direction">Direkto al</string>
+    <string name="astro_locate">Trovi</string>
+    <string name="astro_type_earth">Tero</string>
+    <string name="astro_type_star">Stelo</string>
+    <string name="astro_type_galaxy">Galaksio</string>
+    <string name="astro_type_black_hole">Nigra truo</string>
+    <string name="astro_type_planet">Planedo</string>
+    <string name="astro_type_sun">Suno</string>
+    <string name="astro_type_satellite">Satelito</string>
+    <string name="astro_type_nebula">Nebulastro</string>
+    <string name="astro_type_open_cluster">Malferma stelamaso</string>
+    <string name="astro_type_globular_cluster">Globa stelamaso</string>
+    <string name="astro_type_galaxy_cluster">Galaksamaso</string>
+    <string name="astro_type_constellation">Stelfiguro</string>
+    <string name="show_layout_grid_logs">Montri protokolojn pri krado</string>
 </resources>

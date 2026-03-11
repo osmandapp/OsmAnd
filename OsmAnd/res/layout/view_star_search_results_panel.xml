@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_results_panel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/activity_background_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/full_search_sort_filter_row"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sort_filter_toolbar_height"
+        android:background="?attr/list_background_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/sort_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingVertical="@dimen/content_padding_small"
+            android:paddingHorizontal="@dimen/content_padding">
+
+            <ImageView
+                android:id="@+id/sort_icon"
+                android:layout_width="@dimen/standard_icon_size"
+                android:layout_height="@dimen/standard_icon_size"
+                android:src="@drawable/ic_action_sort_by_name_ascending"
+                app:tint="?attr/active_color_primary" />
+
+            <TextView
+                android:id="@+id/sort_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/content_padding_small"
+                android:textColor="?attr/active_color_primary"
+                android:textSize="@dimen/default_desc_text_size" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/sort_progress"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
+            android:layout_marginStart="@dimen/content_padding_small"
+            android:indeterminate="true"
+            android:indeterminateTint="?attr/active_color_primary"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/filter_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/content_padding">
+
+            <TextView
+                android:id="@+id/filter_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/active_color_primary"
+                android:textSize="@dimen/default_desc_text_size" />
+
+            <ImageView
+                android:layout_width="@dimen/standard_icon_size"
+                android:layout_height="@dimen/standard_icon_size"
+                android:layout_marginStart="@dimen/content_padding_small"
+                android:src="@drawable/ic_action_filter_dark"
+                app:tint="?attr/active_color_primary" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_results"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
+
+        <include
+            android:id="@+id/empty_state_container"
+            layout="@layout/view_star_search_empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </FrameLayout>
+</LinearLayout>

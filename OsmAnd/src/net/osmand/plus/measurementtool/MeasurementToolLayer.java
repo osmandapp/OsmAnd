@@ -218,6 +218,14 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled && editingCtx.getSelectedPointPosition() == -1) {
+			MapActivity mapActivity = getMapActivity();
+
+			// Ignore the tap if the context menu is visible,
+			// allowing the map to just dismiss the menu without adding a new point.
+			if (mapActivity != null && mapActivity.getContextMenu().isVisible()) {
+				return false;
+			}
+
 			boolean pointSelected = showPointsMinZoom && selectPoint(point.x, point.y, true);
 			boolean profileIconSelected = !pointSelected && selectPointForAppModeChange(point, tileBox);
 			if (!pointSelected && !profileIconSelected) {

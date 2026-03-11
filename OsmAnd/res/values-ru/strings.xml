@@ -5964,4 +5964,26 @@
     <string name="copy_list">Копировать список</string>
     <string name="share_favorite">Поделиться избранным</string>
     <string name="intersection">Пересечение</string>
+    <string name="astro_culmination">Кульминация</string>
+    <string name="astro_today_visibility">Сегодняшняя видимость</string>
+    <string name="astronomy_schedule">Расписание</string>
+    <string name="astro_catalogs">Каталоги</string>
+    <string name="astro_path">Путь</string>
+    <string name="astro_direction">Направление</string>
+    <string name="astro_locate">Разместить</string>
+    <string name="astro_type_earth">Земля</string>
+    <string name="astro_type_star">Звезда</string>
+    <string name="astro_type_galaxy">Галактика</string>
+    <string name="astro_type_black_hole">Черная дыра</string>
+    <string name="astro_type_planet">Планета</string>
+    <string name="astro_type_sun">Солнце</string>
+    <string name="astro_type_satellite">Спутник</string>
+    <string name="astro_type_nebula">Туманность</string>
+    <string name="astro_type_open_cluster">Рассеянное звёздное скопление</string>
+    <string name="astro_type_globular_cluster">Шаровое скопление</string>
+    <string name="astro_type_galaxy_cluster">Скопление галактик</string>
+    <string name="astro_type_constellation">Созвездие</string>
+    <string name="astro_az_short">Азимут</string>
+    <string name="show_layout_grid_logs">Показывать журналы сетки</string>
+    <string name="astro_alt_short">Высота</string>
 </resources>

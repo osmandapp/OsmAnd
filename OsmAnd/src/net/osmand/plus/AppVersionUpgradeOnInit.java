@@ -52,6 +52,7 @@ import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.srtm.TerrainMode;
 import net.osmand.plus.profiles.LocationIcon;
+import net.osmand.plus.profiles.ProfileIcons;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.resources.migration.MergeAssetFilesVersionAlgorithm;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -161,8 +162,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_3_00 = 5300;
 	public static final int VERSION_5_3_01 = 5301;
 	public static final int VERSION_5_3_02 = 5302;
+	public static final int VERSION_5_3_04 = 5304;
 
-	public static final int LAST_APP_VERSION = VERSION_5_3_02;
+	public static final int LAST_APP_VERSION = VERSION_5_3_04;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -325,6 +327,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_5_3_02) {
 					migrateAstronomyPreferences();
+				}
+				if (prevAppVersion < VERSION_5_3_04) {
+					migrateProfileIconsToMx(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -1090,6 +1095,16 @@ public class AppVersionUpgradeOnInit {
 			if (oldPreference.isSetForMode(appMode)) {
 				String value = oldPreference.getModeValue(appMode);
 				newPreference.setModeValue(appMode, value);
+			}
+		}
+	}
+
+	private void migrateProfileIconsToMx(@NonNull OsmandSettings settings) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			String currentIconName = settings.ICON_RES_NAME.getModeValue(mode);
+			String canonicalIconName = ProfileIcons.getCanonicalIconName(app, currentIconName);
+			if (!Algorithms.isEmpty(canonicalIconName) && !Algorithms.stringsEqual(currentIconName, canonicalIconName)) {
+				settings.ICON_RES_NAME.setModeValue(mode, canonicalIconName);
 			}
 		}
 	}

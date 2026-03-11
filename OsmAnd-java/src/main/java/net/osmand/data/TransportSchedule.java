@@ -2,6 +2,7 @@ package net.osmand.data;
 
 import gnu.trove.list.array.TIntArrayList;
 
+@Deprecated
 public class TransportSchedule {
 
 	

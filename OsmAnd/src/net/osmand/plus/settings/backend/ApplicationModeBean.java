@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.profiles.ProfileIcons;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.utils.AndroidUtils;
@@ -69,6 +70,10 @@ public class ApplicationModeBean {
 
 	private static void checkAndReplaceInvalidIconName(@NonNull OsmandApplication app,
 			@NonNull ApplicationModeBean modeBean) {
+		String canonicalIconName = ProfileIcons.getCanonicalIconName(app, modeBean.iconName);
+		if (!Algorithms.isEmpty(canonicalIconName)) {
+			modeBean.iconName = canonicalIconName;
+		}
 		if (AndroidUtils.getDrawableId(app, modeBean.iconName) == 0) {
 			ApplicationMode appMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
 			if (appMode == null) {

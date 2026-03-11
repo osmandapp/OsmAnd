@@ -324,7 +324,7 @@ public class GPXUtilities {
 			this.slopeColor = wptPt.slopeColor;
 			this.colourARGB = wptPt.colourARGB;
 			this.distance = wptPt.distance;
-			getExtensionsToWrite().putAll(wptPt.getExtensionsToWrite());
+			copyExtensions(wptPt);
 		}
 
 		public void setDistance(double dist) {

@@ -166,20 +166,26 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldShowBackToLocationButton() {
 		boolean screensAllowed = shouldShowElementOnActiveScreen(BACK_TO_LOCATION_BUTTON);
+		boolean isContextMenuVisible = isContextMenuFragmentVisible();
+		boolean isMeasurementToolVisible = isInMeasurementToolMode();
+
 		boolean additionalDialogsHide = !isInGpxApproximationMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
 				&& !isInRouteLineAppearanceMode()
-				&& !isContextMenuFragmentVisible()
+				&& !isContextMenuVisible
 				&& screensAllowed;
+
 		boolean showTopControls = !mapActivity.shouldHideTopControls()
 				|| (isInTrackMenuMode() && !isPortrait());
+
 		return showTopControls
 				&& !isInConfigureMapOptionMode()
 				&& !isInPlanRouteMode()
 				&& !(isMapLinkedToLocation() && routingHelper.isFollowingMode())
-				&& (additionalDialogsHide || !isPortrait());
+				&& !(isMeasurementToolVisible && isContextMenuVisible)
+				&& additionalDialogsHide;
 	}
 
 	public boolean shouldShowElevationProfileWidget() {

@@ -1,82 +1,404 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="?attr/list_background_color">
+    android:background="?attr/activity_background_color">
 
-    <!-- Header Toolbar -->
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/explore_container"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="4dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="ifContentScrolls"
+        android:scrollbars="vertical">
 
-        <ImageView
-            android:id="@+id/close_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:padding="12dp"
-            android:src="@drawable/ic_arrow_back"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="?attr/default_icon_color"/>
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:iconifiedByDefault="false"
-            app:searchIcon="@null"
-            app:queryHint="@string/search_poi_category_hint"
-            app:queryBackground="@android:color/transparent" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/divider_color" />
-
-    <!-- Sort Bar -->
-    <LinearLayout
-        android:id="@+id/sort_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="12dp"
-        android:background="?attr/selectableItemBackground">
-
-        <ImageView
-            android:id="@+id/sort_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_action_sort_by_name_ascending"
-            app:tint="?attr/active_color_primary"/>
-
-        <TextView
-            android:id="@+id/sort_text"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/explore_scroll"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="@string/sort_name_ascending"
-            android:textSize="14sp"
-            android:textColor="?attr/active_color_primary"/>
-    </LinearLayout>
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/content_padding">
 
-    <View
+            <com.google.android.material.search.SearchBar
+                android:id="@+id/explore_search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginTop="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:hint="@string/shared_string_search"
+                app:backgroundTint="?attr/active_color_secondary"
+                app:defaultMarginsEnabled="false"
+                app:hideNavigationIcon="false"
+                app:menu="@menu/menu_star_search_browse"
+                app:navigationIcon="@drawable/ic_action_remove_dark"
+                app:shapeAppearanceOverlay="@style/Shape.Card8" />
+
+            <HorizontalScrollView
+                android:id="@+id/recent_chips_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_padding_half"
+                android:scrollbars="none"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/recent_chips_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/content_padding"
+                    android:paddingEnd="@dimen/content_padding" />
+            </HorizontalScrollView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginTop="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                app:cardBackgroundColor="?attr/list_background_color"
+                app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/watch_now_row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/card_row_min_height"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/content_padding"
+                        android:paddingVertical="@dimen/content_padding">
+
+                        <ImageView
+                            android:layout_width="@dimen/standard_icon_size"
+                            android:layout_height="@dimen/standard_icon_size"
+                            android:layout_gravity="center_vertical"
+							android:contentDescription="@string/astro_explore_watch_now"
+							android:src="@drawable/ic_action_search_dark"
+                            app:tint="?attr/active_color_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/content_padding"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/astro_explore_watch_now"
+                                android:textColor="?android:textColorPrimary"
+                                android:textSize="@dimen/default_list_text_size" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/astro_explore_watch_now_subtitle"
+                                android:textColor="?android:textColorSecondary"
+                                android:textSize="@dimen/default_desc_text_size" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/content_padding"
+                        android:background="?attr/list_divider"
+                        android:visibility="gone"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/card_row_min_height"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/content_padding"
+                        android:paddingVertical="@dimen/content_padding"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="@dimen/standard_icon_size"
+                            android:layout_height="@dimen/standard_icon_size"
+                            android:layout_gravity="center_vertical"
+							android:contentDescription="@string/astro_explore_schedule"
+							android:src="@drawable/ic_action_calendar_month"
+                            app:tint="?attr/active_color_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/content_padding"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/astro_explore_schedule"
+                                android:textColor="?android:textColorPrimary"
+                                android:textSize="@dimen/default_list_text_size" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/astro_explore_schedule_subtitle"
+                                android:textColor="?android:textColorSecondary"
+                                android:textSize="@dimen/default_desc_text_size" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginTop="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                app:cardBackgroundColor="?attr/list_background_color"
+                app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:id="@+id/categories_rows_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginTop="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                app:cardBackgroundColor="?attr/list_background_color"
+                app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/content_padding"
+                        android:paddingEnd="@dimen/content_padding"
+                        android:paddingTop="@dimen/content_padding"
+                        android:paddingBottom="@dimen/content_padding_small"
+                        android:text="@string/astro_explore_my_data"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/default_list_text_size"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/my_data_rows_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginTop="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                app:cardBackgroundColor="?attr/list_background_color"
+                app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/content_padding"
+                        android:paddingEnd="@dimen/content_padding"
+                        android:paddingTop="@dimen/content_padding"
+                        android:paddingBottom="@dimen/content_padding_small"
+                        android:text="@string/astro_catalogs"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/default_list_text_size"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/catalogs_rows_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/content_padding"
+                        android:background="?attr/list_divider" />
+
+                    <LinearLayout
+                        android:id="@+id/catalogs_view_all_row"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/card_row_min_height"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/content_padding">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/shared_string_show_all"
+                            android:textColor="?attr/active_color_primary"
+                            android:textSize="@dimen/default_list_text_size" />
+
+                        <TextView
+                            android:id="@+id/catalogs_view_all_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_list_text_size"
+                            android:text="0" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/full_search_container"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/divider_color" />
+        android:layout_height="match_parent"
+        android:background="?attr/activity_background_color"
+        android:visibility="gone">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_results"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/full_search_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/active_color_secondary"
+            android:elevation="0dp"
+            android:stateListAnimator="@null">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/full_search_browse_header"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_height_expanded_large"
+                android:background="?attr/active_color_secondary"
+                app:collapsedTitleTextAppearance="@style/AppBarTitlePrimary"
+                app:contentScrim="?attr/active_color_secondary"
+                app:expandedTitleGravity="start|bottom"
+                app:expandedTitleMarginBottom="@dimen/content_padding"
+                app:expandedTitleMarginEnd="@dimen/content_padding"
+                app:expandedTitleMarginStart="@dimen/content_padding"
+                app:expandedTitleTextAppearance="@style/AppBarTitlePrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:statusBarScrim="@android:color/transparent"
+                app:toolbarId="@id/full_search_browse_toolbar"
+                app:titleEnabled="true">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/full_search_browse_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:background="@android:color/transparent"
+                    app:layout_collapseMode="pin"
+                    app:menu="@menu/menu_star_search_browse"
+                    app:navigationContentDescription="@string/shared_string_back"
+                    app:navigationIcon="@drawable/ic_arrow_back"
+                    app:titleTextAppearance="@style/AppBarTitlePrimary"
+                    app:title="" />
+
+                <com.google.android.material.search.SearchBar
+                    android:id="@+id/full_search_anchor_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:alpha="0"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:hint="@string/astro_search_input_hint"
+                    android:importantForAccessibility="no"
+                    android:visibility="gone"
+                    app:backgroundTint="?attr/active_color_secondary"
+                    app:defaultMarginsEnabled="false"
+                    app:hideNavigationIcon="false"
+                    app:layout_collapseMode="pin"
+                    app:navigationIcon="@drawable/ic_arrow_back"
+                    app:shapeAppearanceOverlay="@style/Shape.Card8" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/my_data_tabs"
+                style="@style/Widget.Material3.TabLayout.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/active_color_secondary"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:visibility="gone"
+                app:tabBackground="@android:color/transparent"
+                app:tabGravity="fill"
+                app:tabIconTint="@null"
+                app:tabIndicatorAnimationMode="elastic"
+                app:tabIndicatorColor="?attr/icon_color_active"
+                app:tabIndicatorFullWidth="true"
+                app:tabIndicatorGravity="bottom"
+                app:tabInlineLabel="false"
+                app:tabMode="fixed"
+                app:tabTextColor="?attr/text_color_secondary"
+                app:tabSelectedTextColor="?attr/active_color_primary"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/full_search_results_host"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.search.SearchView
+        android:id="@+id/explore_search_input_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scrollbars="vertical"
-        android:clipToPadding="false" />
+        android:layout_height="match_parent"
+        android:hint="@string/astro_search_input_hint"
+        app:autoShowKeyboard="true"
+        app:backgroundTint="?attr/active_color_secondary"
+        app:hideNavigationIcon="false">
 
-</LinearLayout>
+        <FrameLayout
+            android:id="@+id/explore_search_input_results_host"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.search.SearchView>
+
+    <com.google.android.material.search.SearchView
+        android:id="@+id/full_search_input_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="@string/astro_search_input_hint"
+        app:autoShowKeyboard="true"
+        app:backgroundTint="?attr/active_color_secondary"
+        app:hideNavigationIcon="false">
+
+        <FrameLayout
+            android:id="@+id/full_search_input_results_host"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.search.SearchView>
+
+</FrameLayout>

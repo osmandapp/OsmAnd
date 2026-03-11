@@ -52,7 +52,7 @@ class WptPt : GpxExtensions {
 		colourARGB = wptPt.colourARGB
 		distance = wptPt.distance
 		link = wptPt.link?.let { Link(it) }
-		getExtensionsToWrite().putAll(wptPt.getExtensionsToWrite())
+		copyExtensions(wptPt)
 	}
 
 	fun getColor(): Int {

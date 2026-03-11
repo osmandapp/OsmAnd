@@ -18,6 +18,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
+import java.util.Collection;
 import java.util.Map;
 
 public class RenderedObjectMenuController extends MenuController {
@@ -162,7 +163,42 @@ public class RenderedObjectMenuController extends MenuController {
 			typeStr = searchObjectNameByIconRes();
 		}
 
+		if (Algorithms.isEmpty(typeStr) && renderedObject != null && mapPoiTypes != null) {
+			Amenity amenity = builder != null ? builder.getAmenity() : null;
+			Collection<String> additionalInfoKeys = amenity != null ? amenity.getAdditionalInfoKeys() : null;
+			typeStr = searchObjectNameByRawTags(mapPoiTypes, renderedObject.getTags(), additionalInfoKeys);
+		}
+
 		return typeStr != null ? typeStr : super.getTypeStr();
+	}
+
+	@Nullable
+	private static String searchObjectNameByRawTags(@NonNull MapPoiTypes poiTypes,
+													@NonNull Map<String, String> rawTags,
+													@Nullable Collection<String> additionalInfoKeys) {
+		for (Map.Entry<String, String> entry : rawTags.entrySet()) {
+			String key = entry.getKey();
+			String value = entry.getValue();
+
+			if (additionalInfoKeys != null && additionalInfoKeys.contains(key)) {
+				continue;
+			}
+
+			String translation = null;
+			if (!Algorithms.isEmpty(value)) {
+				String complexKey = key + "_" + value;
+				translation = poiTypes.getPoiTranslation(complexKey, false);
+			}
+
+			if (Algorithms.isEmpty(translation)) {
+				translation = poiTypes.getPoiTranslation(key, false);
+			}
+
+			if (!Algorithms.isEmpty(translation)) {
+				return translation;
+			}
+		}
+		return null;
 	}
 
 	@NonNull

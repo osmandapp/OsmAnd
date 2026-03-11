@@ -181,9 +181,11 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 					}
 					if (isDayModeColorSelection && !nightMode || !isDayModeColorSelection && nightMode) {
 						srtmPlugin.apply3DBuildingsColor(solid.getColorInt());
-						MapActivity activity = requireMapActivity();
-						activity.refreshMapComplete();
-						activity.updateLayers();
+
+						callMapActivity(activity -> {
+							activity.refreshMapComplete();
+							activity.updateLayers();
+						});
 					}
 					updateApplyButton(isChangesMade());
 				}

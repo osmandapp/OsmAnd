@@ -242,8 +242,15 @@ public class GpxDisplayHelper {
 		}
 	}
 
+	@Nullable
+	public GpxSplitParams getGpxSplitParams(@NonNull SelectedGpxFile selectedGpxFile) {
+		GpxFile gpxFile = selectedGpxFile.getGpxFile();
+		GpxDataItem item = app.getGpxDbHelper().getItem(new KFile(gpxFile.getPath()));
+		return item != null ? getGpxSplitParams(item) : null;
+	}
+
 	@NonNull
-	private GpxSplitParams getGpxSplitParams(@NonNull GpxDataItem item) {
+	public GpxSplitParams getGpxSplitParams(@NonNull GpxDataItem item) {
 		Boolean joinSegments = appearanceHelper.requireParameter(item, JOIN_SEGMENTS);
 		Double splitInterval = appearanceHelper.requireParameter(item, SPLIT_INTERVAL);
 		GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(appearanceHelper.requireParameter(item, SPLIT_TYPE));

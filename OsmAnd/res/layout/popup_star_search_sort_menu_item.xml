@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/list_divider" />
+
+    <LinearLayout
+        android:id="@+id/content_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/card_row_min_height"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/content_padding_small">
+
+        <FrameLayout
+            android:id="@+id/compound_button_container"
+            android:layout_width="@dimen/acceptable_touch_radius"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/compound_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/content_padding_small"
+            android:paddingEnd="@dimen/content_padding"
+            android:paddingBottom="@dimen/content_padding_small"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone" />
+
+</LinearLayout>
