@@ -19,8 +19,8 @@ class WptPt : GpxExtensions {
 	var comment: String? = null
 	var time: Long = 0
 	var ele = Double.NaN
-	var speed = 0.0
-	var hdop = Double.NaN
+	var speed = 0.0f
+	var hdop = Float.NaN
 	var heading = Float.NaN
 	var bearing = Float.NaN
 	var deleted = false
@@ -77,8 +77,8 @@ class WptPt : GpxExtensions {
 		lon: Double,
 		time: Long,
 		ele: Double,
-		speed: Double,
-		hdop: Double
+		speed: Float,
+		hdop: Float
 	) : this(lat, lon, time, ele, speed, hdop, Float.NaN)
 
 	constructor(
@@ -86,8 +86,8 @@ class WptPt : GpxExtensions {
 		lon: Double,
 		time: Long,
 		ele: Double,
-		speed: Double,
-		hdop: Double,
+		speed: Float,
+		hdop: Float,
 		heading: Float
 	) {
 		this.lat = lat
@@ -288,8 +288,8 @@ class WptPt : GpxExtensions {
 				lonAdjusted,
 				currentTimeMillis(),
 				Double.NaN,
-				0.0,
-				Double.NaN
+				0.0f,
+				Float.NaN
 			)
 			point.name = name
 			point.category = category
