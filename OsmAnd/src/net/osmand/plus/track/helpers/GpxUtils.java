@@ -88,24 +88,24 @@ public class GpxUtils {
 		PointI previousPoint31 = NativeUtilities.getPoint31FromLatLon(firstPoint.getLat(), firstPoint.getLon());
 
 		if (NativeUtilities.isPointInsidePolygon(previousPoint31, polygon31)) {
-			WptPt secondPoint = points.get(1);
-			return Pair.create(firstPoint, secondPoint);
+			return Pair.create(firstPoint, points.get(1));
 		}
 
+		PointI currentPoint31 = new PointI();
 		for (int i = 1; i < points.size(); i++) {
 			WptPt currentPoint = points.get(i);
-			PointI currentPoint31 = NativeUtilities.getPoint31FromLatLon(currentPoint.getLat(), currentPoint.getLon());
+			currentPoint31.setX(MapUtils.get31TileNumberX(currentPoint.getLon()));
+			currentPoint31.setY(MapUtils.get31TileNumberY(currentPoint.getLat()));
 
 			boolean lineInside = NativeUtilities.isPointInsidePolygon(currentPoint31, polygon31)
 					|| NativeUtilities.isSegmentCrossingPolygon(previousPoint31, currentPoint31, polygon31);
 			if (lineInside) {
-				WptPt previousPoint = points.get(i - 1);
-				return new Pair<>(previousPoint, currentPoint);
+				return Pair.create(points.get(i - 1), currentPoint);
 			}
-
+			PointI tmp = previousPoint31;
 			previousPoint31 = currentPoint31;
+			currentPoint31 = tmp;
 		}
-
 		return null;
 	}
 
