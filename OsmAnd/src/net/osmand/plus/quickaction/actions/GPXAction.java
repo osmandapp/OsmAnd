@@ -151,7 +151,7 @@ public class GPXAction extends SelectMapLocationAction implements FileSelected {
 			}
 		} else {
 			WptPt wptPt = new WptPt(latLon.getLatitude(), latLon.getLongitude(), System.currentTimeMillis(),
-					Double.NaN, 0, Double.NaN);
+					Double.NaN, 0, Float.NaN);
 			mapActivity.getContextMenu()
 					.addWptPt(wptPt, null, 0, false, gpxFile);
 		}

@@ -137,7 +137,7 @@ public class GpxUtils {
 		projectionPoint.setHeading(prevPoint.getHeading());
 		projectionPoint.setDistance(prevPoint.getDistance() + MapUtils.getDistance(projection, prevPoint.getLat(), prevPoint.getLon()));
 		projectionPoint.setEle(getValueByDistInterpolation(projectionPoint.getDistance(), prevPoint.getDistance(), prevPoint.getEle(), nextPoint.getDistance(), nextPoint.getEle()));
-		projectionPoint.setSpeed(getValueByDistInterpolation(projectionPoint.getDistance(), prevPoint.getDistance(), prevPoint.getSpeed(), nextPoint.getDistance(), nextPoint.getSpeed()));
+		projectionPoint.setSpeed((float) getValueByDistInterpolation(projectionPoint.getDistance(), prevPoint.getDistance(), prevPoint.getSpeed(), nextPoint.getDistance(), nextPoint.getSpeed()));
 		if (prevPoint.getTime() != 0 && nextPoint.getTime() != 0) {
 			projectionPoint.setTime((long) getValueByDistInterpolation(projectionPoint.getDistance(), prevPoint.getDistance(), prevPoint.getTime(), nextPoint.getDistance(), nextPoint.getTime()));
 		}
