@@ -5977,4 +5977,25 @@
     <string name="astro_type_globular_cluster">Amas globulaire</string>
     <string name="astro_type_galaxy_cluster">Amas de galaxies</string>
     <string name="astro_type_constellation">Constellation</string>
+    <string name="no_objects_found">Aucun objet trouvé</string>
+    <string name="astro_go_to_map">Aller à la carte</string>
+    <plurals name="astro_catalog_objects_count">
+        <item quantity="one">%d objet</item>
+        <item quantity="many">%d objets</item>
+        <item quantity="other">%d objets</item>
+    </plurals>
+    <string name="astro_search_constellation_with_code">Constellation (%1$s)</string>
+    <string name="astro_search_type_in_location">%1$s dans %2$s</string>
+    <string name="astro_search_in_location">Dans %1$s</string>
+    <string name="astro_search_rises_tomorrow">↗ %1$s %2$s</string>
+    <string name="astro_search_sets_tomorrow">↘ %1$s %2$s</string>
+    <string name="astro_filter_naked_eye">Visible à l’œil nu</string>
+    <string name="astro_filter_visible_tonight">Visible de nuit</string>
+    <string name="astro_filter_visible_now">Visible maintenant</string>
+    <string name="astro_filter_show_all">Tout afficher</string>
+    <string name="astro_explore_my_data">Mes données</string>
+    <string name="astro_explore_schedule_subtitle">Prochains événements astronomiques</string>
+    <string name="astro_explore_schedule">Prévisions</string>
+    <string name="astro_explore_watch_now_subtitle">Consulter ce qu\'il y a dans le ciel ce soir</string>
+    <string name="astro_explore_watch_now">Voir maintenant</string>
 </resources>
