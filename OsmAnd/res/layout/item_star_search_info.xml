@@ -7,7 +7,7 @@
     android:layout_marginTop="@dimen/content_padding_half"
     android:layout_marginEnd="@dimen/content_padding"
     android:layout_marginBottom="@dimen/content_padding_half"
-    app:cardBackgroundColor="#E6E3F7"
+    app:cardBackgroundColor="?attr/active_color_secondary"
     app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
     app:cardElevation="0dp">
 

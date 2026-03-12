@@ -107,7 +107,7 @@
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
 						android:contentDescription="@string/shared_string_settings"
-						app:srcCompat="@drawable/ic_action_stars"
+						app:srcCompat="@drawable/ic_action_sort_brightest"
 						app:tint="#5f6e7c" />
 
 					<TextView
