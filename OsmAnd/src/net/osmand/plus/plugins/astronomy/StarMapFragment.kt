@@ -150,10 +150,19 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 	}
 
+	private val autoTimeUpdateRunnable = object : Runnable {
+		override fun run() {
+			if (view == null || !isResumed || !isTimeAutoUpdateEnabled()) return
+			viewModel.resetTime()
+			scheduleAutoTimeUpdate()
+		}
+	}
+
 	companion object {
 		val TAG: String = StarMapFragment::class.java.simpleName
 		private val LOG = LoggerFactory.getLogger(TAG)
 
+		private const val AUTO_TIME_UPDATE_INTERVAL_MS = 60_000L
 		private const val MAX_MAGNITUDE = 7.0f
 
 		@JvmStatic
@@ -295,8 +304,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 
 		resetTimeButton.setOnClickListener {
-			viewModel.resetTime()
-			resetTimeButton.visibility = View.GONE
+			setTimeAutoUpdateEnabled(true)
 		}
 
 		view.findViewById<StarCompassButton>(R.id.star_map_compass_button)?.let {
@@ -520,6 +528,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		updateWidgetsVisibility(mapActivity, View.GONE)
 		mapActivity.refreshMap()
 		updateBackPressedCallback()
+		if (isTimeAutoUpdateEnabled()) {
+			viewModel.resetTime()
+			scheduleAutoTimeUpdate()
+		}
 	}
 
 	private fun updateButtonsNightMode() {
@@ -543,6 +555,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	override fun onPause() {
 		super.onPause()
+		stopAutoTimeUpdate()
 		saveStarMapSettings()
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
@@ -553,6 +566,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		mapActivity.enableDrawer()
 		updateWidgetsVisibility(mapActivity, View.VISIBLE)
 		mapActivity.refreshMap()
+	}
+
+	override fun onDestroyView() {
+		stopAutoTimeUpdate()
+		super.onDestroyView()
 	}
 
 	override fun updateCompassValue(value: Float) {
@@ -781,6 +799,15 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			val timeFormat = SimpleDateFormat(formatString, locale)
 			timeControlBtn.text = timeFormat.format(calendar.time)
 		}
+		viewModel.isTimeAutoUpdateEnabled.observe(viewLifecycleOwner) { enabled ->
+			resetTimeButton.visibility = if (enabled) View.GONE else View.VISIBLE
+			if (enabled) {
+				viewModel.resetTime()
+				scheduleAutoTimeUpdate()
+			} else {
+				stopAutoTimeUpdate()
+			}
+		}
 		viewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
 			starView.setSkyObjects(objects)
 			starVisiblityView.setChartObjects(objects)
@@ -809,8 +836,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private fun setupListeners() {
 		timeSelectionView.setOnDateTimeChangeListener { calendar ->
+			setTimeAutoUpdateEnabled(false)
 			viewModel.updateTime(calendar)
-			resetTimeButton.visibility = View.VISIBLE
 		}
 		starView.setOnObjectClickListener { obj ->
 			selectedObject = obj
@@ -837,6 +864,27 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		starView.onViewAngleChangeListener = { fov -> cameraHelper.updateCameraZoom(fov) }
 	}
+
+	private fun setTimeAutoUpdateEnabled(enabled: Boolean) {
+		viewModel.setTimeAutoUpdateEnabled(enabled)
+	}
+
+	private fun scheduleAutoTimeUpdate() {
+		stopAutoTimeUpdate()
+		if (!isTimeAutoUpdateEnabled() || !isResumed || !::timeControlCard.isInitialized) return
+
+		val currentTime = System.currentTimeMillis()
+		val delay = AUTO_TIME_UPDATE_INTERVAL_MS - (currentTime % AUTO_TIME_UPDATE_INTERVAL_MS) + 200L
+		timeControlCard.postDelayed(autoTimeUpdateRunnable, delay)
+	}
+
+	private fun stopAutoTimeUpdate() {
+		if (::timeControlCard.isInitialized) {
+			timeControlCard.removeCallbacks(autoTimeUpdateRunnable)
+		}
+	}
+
+	private fun isTimeAutoUpdateEnabled(): Boolean = viewModel.isTimeAutoUpdateEnabled.value != false
 
 	private fun updateStarMap(updateAzimuth: Boolean = false) {
 		val tileBox = app.osmandMap.mapView.rotatedTileBox

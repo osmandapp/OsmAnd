@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="shared_string_split_by">Раздвојити по</string>
+    <string name="astro_culmination">Кулминација</string>
 </resources>

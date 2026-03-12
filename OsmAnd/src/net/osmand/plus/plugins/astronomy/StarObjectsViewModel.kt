@@ -32,6 +32,9 @@ class StarObjectsViewModel(
 	private val _currentCalendar = MutableLiveData<Calendar>()
 	val currentCalendar: LiveData<Calendar> = _currentCalendar
 
+	private val _isTimeAutoUpdateEnabled = MutableLiveData(true)
+	val isTimeAutoUpdateEnabled: LiveData<Boolean> = _isTimeAutoUpdateEnabled
+
 	class Factory(
 		private val application: Application,
 		private val settings: AstronomyPluginSettings,
@@ -97,6 +100,10 @@ class StarObjectsViewModel(
 	fun resetTime() {
 		val now = Calendar.getInstance(TimeZone.getDefault())
 		updateTime(now)
+	}
+
+	fun setTimeAutoUpdateEnabled(enabled: Boolean) {
+		_isTimeAutoUpdateEnabled.value = enabled
 	}
 
 	fun refreshSkyObjects() {
