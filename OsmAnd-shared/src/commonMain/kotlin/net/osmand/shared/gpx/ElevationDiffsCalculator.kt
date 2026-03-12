@@ -20,7 +20,7 @@ abstract class ElevationDiffsCalculator {
 		val endPointIndex: Int,
 		var elevDiff: Double,
 		var distance: Double = 0.0,
-		var maxSpeed: Double = 0.0,
+		var maxSpeed: Float = 0.0f,
         var movingTime: Long = 0L
 	)
 

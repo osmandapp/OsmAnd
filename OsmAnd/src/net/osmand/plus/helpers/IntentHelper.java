@@ -325,29 +325,26 @@ public class IntentHelper {
 		if (latLon != null) {
 			double pinLat = latLon.getLatitude();
 			double pinLon = latLon.getLongitude();
-			int zoom = settings.getLastKnownMapZoom();
 
-			BaseDetailsObject amenity = searchBaseDetailsObject(pinLat, pinLon, name, type, wikiDataId, osmId);
-			if (amenity == null) {
-				return false;
+			if (app.isApplicationInitializing()) {
+				app.getAppInitializer().addListener(new AppInitializeListener() {
+
+					@Override
+					public void onFinish(@NonNull AppInitializer init) {
+						init.removeListener(this);
+						if (!showAmenity(pinLat, pinLon, name, type, wikiDataId, osmId)) {
+							int zoom = settings.getLastKnownMapZoom();
+							settings.setMapLocationToShow(pinLat, pinLon, zoom, new PointDescription(pinLat, pinLon));
+						}
+						if (AndroidUtils.isActivityNotDestroyed(mapActivity) && settings.MAP_ACTIVITY_ENABLED) {
+							mapActivity.readLocationToShow();
+						}
+					}
+				});
+				clearIntent(intent);
+				return true;
 			}
-
-			String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-			boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-			String poiSimpleFormat = null;
-			PoiCategory category = amenity.getSyntheticAmenity().getType();
-			if (!MapPoiTypes.getDefault().isOtherCategory(category)) {
-				if (category != null && category.isWiki()) {
-					poiSimpleFormat = amenity.getSyntheticAmenity().getName(lang, transliterate);
-				} else {
-					poiSimpleFormat = Amenity.getPoiStringWithoutType(amenity.getSyntheticAmenity(), lang, transliterate);
-				}
-			}
-
-			PointDescription pointDescription = new PointDescription(POINT_TYPE_POI, poiSimpleFormat);
-			pointDescription.setIconName(getAmenityIconName(app, amenity.getSyntheticAmenity()));
-			settings.setMapLocationToShow(pinLat, pinLon, zoom, pointDescription, true, amenity);
-			return true;
+			return showAmenity(pinLat, pinLon, name, type, wikiDataId, osmId);
 		}
 
 		clearIntent(intent);
@@ -395,6 +392,33 @@ public class IntentHelper {
 		}
 
 		return false;
+	}
+
+	private boolean showAmenity(double pinLat, double pinLon, @Nullable String name, @Nullable String type,
+	                            @Nullable String wikiDataId, @Nullable String osmId) {
+		int zoom = settings.getLastKnownMapZoom();
+
+		BaseDetailsObject amenity = searchBaseDetailsObject(pinLat, pinLon, name, type, wikiDataId, osmId);
+		if (amenity == null) {
+			return false;
+		}
+
+		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+		String poiSimpleFormat = null;
+		PoiCategory category = amenity.getSyntheticAmenity().getType();
+		if (!MapPoiTypes.getDefault().isOtherCategory(category)) {
+			if (category != null && category.isWiki()) {
+				poiSimpleFormat = amenity.getSyntheticAmenity().getName(lang, transliterate);
+			} else {
+				poiSimpleFormat = Amenity.getPoiStringWithoutType(amenity.getSyntheticAmenity(), lang, transliterate);
+			}
+		}
+
+		PointDescription pointDescription = new PointDescription(POINT_TYPE_POI, poiSimpleFormat);
+		pointDescription.setIconName(getAmenityIconName(app, amenity.getSyntheticAmenity()));
+		settings.setMapLocationToShow(pinLat, pinLon, zoom, pointDescription, true, amenity);
+		return true;
 	}
 
 	@Nullable

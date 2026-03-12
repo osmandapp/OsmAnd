@@ -32,8 +32,8 @@ class GpxTrackAnalysis {
 
 	private val parameters = mutableMapOf<GpxParameter, Any?>()
 
-	var minHdop = Double.NaN
-	var maxHdop = Double.NaN
+	var minHdop = Float.NaN
+	var maxHdop = Float.NaN
 
 	var metricEnd = 0.0
 	var secondaryMetricEnd = 0.0
@@ -938,19 +938,19 @@ class GpxTrackAnalysis {
 	private fun calculateMaxSpeedForSlope(
 		slope: ElevationDiffsCalculator.SlopeInfo?,
 		segment: SplitSegment
-	): Double {
-		if (slope == null) return 0.0
+	): Float {
+		if (slope == null) return 0.0f
 		val startIdx = slope.startPointIndex
 		val endIdx = slope.endPointIndex
-		if (startIdx > endIdx) return 0.0
-		var maxSpeed = 0.0
+		if (startIdx > endIdx) return 0.0f
+		var maxSpeed = 0.0f
 		for (i in startIdx..endIdx) {
 			val pt = segment[i]
 			val hasAttributes = pt.attributes != null
-			val speed = if (hasAttributes) pt.attributes?.speed?.toDouble() else pt.speed
+			val speed = if (hasAttributes) pt.attributes?.speed else pt.speed
 			if (speed != null) {
 				if (speed > maxSpeed) {
-					maxSpeed = speed.toDouble()
+					maxSpeed = speed
 				}
 			}
 		}
@@ -978,7 +978,7 @@ class GpxTrackAnalysis {
             if (distance < 0f) {
                 distance = KMapUtils.getEllipsoidDistance(prev.lat, prev.lon, pt.lat, pt.lon).toFloat()
             }
-            var speed = pt.attributes?.speed?.toDouble() ?: pt.speed ?: 0.0
+	        var speed = pt.attributes?.speed?.takeIf { !it.isNaN() }?.toDouble() ?: pt.speed.toDouble()
             if (speed == 0.0) {
                 speed = distance / timeDiffSec.toDouble()
             }

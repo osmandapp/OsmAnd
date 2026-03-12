@@ -16,7 +16,7 @@ data class Constellation(
 	name = name,
 	ra = 0.0,
 	dec = 0.0,
-	magnitude = 100f,
+	magnitude = 2.0f,
 	color = Color.WHITE,
 	localizedName = localizedName
 )

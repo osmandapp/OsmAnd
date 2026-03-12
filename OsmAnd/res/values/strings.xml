@@ -484,6 +484,7 @@
 	<string name="obd_engine_runtime_desc">Shows shows how long the engine has been running since it was started.</string>
 	<string name="obd_engine_runtime">Engine Runtime</string>
 	<string name="obd_battery_voltage_desc">Shows the voltage level of the vehicle\'s battery</string>
+	<string name="obd_alt_battery_voltage_desc">Shows the voltage level on the OBD adapter</string>
 	<string name="obd_fuel_pressure_desc">Shows the pressure within the fuel system</string>
 	<string name="obd_throttle_position">Throttle Position</string>
 	<string name="obd_throttle_position_desc">Shows the angle of the throttle plate in the throttle body.</string>

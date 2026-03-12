@@ -65,9 +65,9 @@ class SplitSegment {
 
 	private fun approx(w1: WptPt, w2: WptPt, cf: Double): WptPt {
 		val time = value(w1.time, w2.time, 0L, cf)
-		val speed = value(w1.speed, w2.speed, 0.0, cf)
+		val speed = value(w1.speed, w2.speed, 0.0f, cf)
 		val ele = value(w1.ele, w2.ele, 0.0, cf)
-		val hdop = value(w1.hdop, w2.hdop, 0.0, cf)
+		val hdop = value(w1.hdop, w2.hdop, 0.0f, cf)
 		val lat = value(w1.lat, w2.lat, -360.0, cf)
 		val lon = value(w1.lon, w2.lon, -360.0, cf)
 		return WptPt(lat, lon, time, ele, speed, hdop)
@@ -78,6 +78,14 @@ class SplitSegment {
 			vl == none || vl.isNaN() -> vl2
 			vl2 == none || vl2.isNaN() -> vl
 			else -> vl + cf * (vl2 - vl)
+		}
+	}
+
+	private fun value(vl: Float, vl2: Float, none: Float, cf: Double): Float {
+		return when {
+			vl == none || vl.isNaN() -> vl2
+			vl2 == none || vl2.isNaN() -> vl
+			else -> (vl + cf * (vl2 - vl)).toFloat()
 		}
 	}
 

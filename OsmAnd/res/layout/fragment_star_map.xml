@@ -303,19 +303,6 @@
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
-		<LinearLayout
-			android:id="@+id/star_charts_view"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_gravity="bottom"
-			android:background="#424242"
-			android:orientation="vertical"
-			android:visibility="gone">
-
-			<include layout="@layout/star_charts_content" />
-
-		</LinearLayout>
-
 	</LinearLayout>
 
 	<FrameLayout

@@ -194,10 +194,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		ApplicationMode appMode = settings.getApplicationMode();
 		if (!appMode.isAppModeDerivedFromCar()) {
 			ApplicationMode carMode = ApplicationMode.getFirstCarMode(app);
-			if(carMode != null) {
+			if (carMode != null) {
 				settings.setApplicationMode(carMode, false);
 			}
- 		}
+		}
 		if (navigationCarSurface != null) {
 			navigationCarSurface.handleRecenter();
 		}
@@ -635,11 +635,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			this.navigationManager.setNavigationManagerCallback(new NavigationManagerCallback() {
 				@Override
 				public void onStopNavigation() {
-					if (routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
-						routingHelper.pauseNavigation();
-					} else {
+					if (!routingHelper.isRouteCalculated() || !routingHelper.isFollowingMode()) {
 						getApp().stopNavigation();
 					}
+					carNavigationShouldBeActive = false;
 				}
 
 				@Override
@@ -722,7 +721,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 						density = 1;
 					}
 					Trip trip = tripHelper.buildTrip(currentLocation, density);
-					navigationManager.updateTrip(trip);
+					if (carNavigationShouldBeActive) {
+						navigationManager.updateTrip(trip);
+					}
 
 					List<Destination> destinations = null;
 					Destination destination = tripHelper.getLastDestination();

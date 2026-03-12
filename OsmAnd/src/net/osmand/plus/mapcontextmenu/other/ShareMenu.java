@@ -267,10 +267,17 @@ public class ShareMenu extends BaseMenuController {
 				.path("map/poi/");
 
 		for (String key : params.getParams().keySet()) {
+			if ("pin".equals(key)) {
+				continue;
+			}
 			String value = params.getParams().get(key);
 			if (!Algorithms.isEmpty(value)) {
 				builder.appendQueryParameter(key, value);
 			}
+		}
+		String pinValue = params.getParams().get("pin");
+		if (!Algorithms.isEmpty(pinValue)) {
+			builder.appendQueryParameter("pin", pinValue);
 		}
 
 		if (!Algorithms.isEmpty(params.frag)) {
