@@ -54,25 +54,26 @@ class StarObjectsViewModel(
 	fun loadData() {
 		viewModelScope.launch(Dispatchers.Default) {
 			val objects = dataProvider.getSkyObjects(app).toMutableList()
+			val constellations = dataProvider.getConstellations(app).toMutableList()
 			val starMapConfig = settings.getStarMapConfig()
 			val favorites = starMapConfig.favorites
 			val directions = starMapConfig.directions
 			val celestialPaths = starMapConfig.celestialPaths
-			// Create lookup map for config items
 			val favoritesMap = favorites.associateBy { it.id }
 			val directionsMap = directions.associateBy { it.id }
 			val celestialPathsMap = celestialPaths.associateBy { it.id }
 			val indexMap = favorites.withIndex().associate { it.value.id to it.index }
 
-			objects.forEach { obj ->
+			fun applyConfig(obj: SkyObject) {
 				obj.isFavorite = favoritesMap.contains(obj.id)
 				obj.showDirection = directionsMap.contains(obj.id)
 				obj.colorIndex = directionsMap[obj.id]?.colorIndex ?: 0
 				obj.showCelestialPath = celestialPathsMap.contains(obj.id)
 			}
+			objects.forEach(::applyConfig)
+			constellations.forEach(::applyConfig)
 			objects.sortBy { indexMap[it.id] ?: Int.MAX_VALUE }
-
-			val constellations = dataProvider.getConstellations(app).toMutableList()
+			constellations.sortBy { indexMap[it.id] ?: Int.MAX_VALUE }
 
 			_skyObjects.postValue(objects)
 			_constellations.postValue(constellations)
@@ -107,7 +108,7 @@ class StarObjectsViewModel(
 	}
 
 	fun refreshSkyObjects() {
-		val objects = _skyObjects.value ?: return
-		_skyObjects.value = objects
+		_skyObjects.value = _skyObjects.value
+		_constellations.value = _constellations.value
 	}
 }

@@ -414,18 +414,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun handleSearchObjectSelected(obj: SkyObject) {
-		if (obj.type == SkyObject.Type.CONSTELLATION) {
-			val constellations = dataProvider.getConstellations(requireContext())
-			constellations.find { it.name == obj.name }?.let { c ->
-				manualAzimuth = true
-				starView.setSelectedConstellation(c, center = true, animate = true)
-				showConstellationInfo(c)
-			}
-		} else {
-			manualAzimuth = true
-			starView.setSelectedObject(obj, center = true, animate = true)
-			showObjectInfo(obj)
-		}
+		manualAzimuth = true
+		selectedObject = obj
+		starView.setSelectedObject(obj, center = true, animate = true)
+		showObjectInfo(obj)
 	}
 
 	internal fun showSearchDialog(initialCatalogWid: String? = null) {
@@ -810,8 +802,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		viewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
 			starView.setSkyObjects(objects)
-			starVisiblityView.setChartObjects(objects)
-			starAltitudeView.setChartObjects(objects)
+			updateChartObjects()
 			if (objects.isNotEmpty()) {
 				val maxMag = MAX_MAGNITUDE
 				val maxSliderVal = ((maxMag + 1.0) * 10.0).toInt()
@@ -831,6 +822,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		viewModel.constellations.observe(viewLifecycleOwner) { constellations ->
 			starView.setConstellations(constellations)
+			updateChartObjects()
 		}
 	}
 
@@ -849,7 +841,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		starView.onConstellationClickListener = { constellation ->
 			if (constellation != null) {
-				showConstellationInfo(constellation)
+				selectedObject = constellation
+				showObjectInfo(constellation)
 			} else {
 				if (selectedObject == null) hideBottomSheet()
 			}
@@ -918,6 +911,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 	}
 
+	private fun updateChartObjects() {
+		val objects = getTrackableObjects()
+		starVisiblityView.setChartObjects(objects)
+		starAltitudeView.setChartObjects(objects)
+	}
+
 	private fun clearSelectedObject() {
 		selectedObject = null
 		starView.setSelectedObject(null)
@@ -947,7 +946,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private fun showObjectInfo(obj: SkyObject) {
 		val existing = childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? AstroContextMenuFragment
-		if (existing == null || existing.arguments?.getString("skyObjectName") != obj.name) {
+		if (existing == null || existing.arguments?.getString("skyObjectId") != obj.id) {
 			val created = AstroContextMenuFragment.newInstance(obj)
 			childFragmentManager.beginTransaction()
 				.replace(
@@ -967,30 +966,25 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		return childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? AstroContextMenuFragment
 	}
 
+	internal fun getTrackableObjects(): List<SkyObject> {
+		val objects = mutableListOf<SkyObject>()
+		objects.addAll(viewModel.skyObjects.value.orEmpty())
+		objects.addAll(viewModel.constellations.value.orEmpty())
+		return objects
+	}
+
+	internal fun findTrackableObjectById(id: String): SkyObject? {
+		viewModel.skyObjects.value?.firstOrNull { it.id == id }?.let { return it }
+		return viewModel.constellations.value?.firstOrNull { it.id == id }
+	}
+
 	private fun updateBackPressedCallback() {
 		backPressedCallback.isEnabled = childFragmentManager.backStackEntryCount > 0 ||
 				(::bottomSheetBehavior.isInitialized && bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN)
 	}
 
 	internal fun getSearchableObjects(): List<SkyObject> {
-		val objects = viewModel.skyObjects.value?.toMutableList() ?: mutableListOf()
-		val constellations = dataProvider.getConstellations(requireContext())
-		constellations.forEach { c ->
-			objects.add(SkyObject(
-				id = "const_${c.name}",
-				hip = -1,
-				wid = c.wid,
-				type = SkyObject.Type.CONSTELLATION,
-				body = null,
-				name = c.name,
-				ra = c.ra,
-				dec = c.dec,
-				magnitude = 2.0f,
-				color = Color.WHITE,
-				localizedName = c.localizedName
-			))
-		}
-		return objects
+		return getTrackableObjects()
 	}
 
 	private fun updateTimeControlTheme(card: MaterialCardView, button: StarMapTimeControlButton, resetBtn: StarMapResetButton) {
