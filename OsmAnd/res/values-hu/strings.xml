@@ -6019,4 +6019,5 @@
     <string name="astro_explore_watch_now_subtitle">Tekintse meg, hogy mi látható ma éjjel az égen</string>
     <string name="astro_explore_watch_now">Megtekintés most</string>
     <string name="astro_explore_deep_sky_subtitle">Galaxisok, galaxishalmazok, fekete lyukak</string>
+    <string name="obd_alt_battery_voltage_desc">Megjeleníti az OBD-adapter feszültségszintjét</string>
 </resources>
