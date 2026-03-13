@@ -9,6 +9,26 @@ import kotlin.math.min
 object KAlgorithms {
 	private const val CHAR_TO_SPLIT = ','
 
+    private val alphabet = charArrayOf(
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', // 0 to 7
+        'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', // 8 to 15
+        'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', // 16 to 23
+        'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', // 24 to 31
+        'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', // 32 to 39
+        'o', 'p', 'q', 'r', 's', 't', 'u', 'v', // 40 to 47
+        'w', 'x', 'y', 'z', '0', '1', '2', '3', // 48 to 55
+        '4', '5', '6', '7', '8', '9', '+', '/'  // 56 to 63
+    )
+
+    fun base64IndexOf(char: Char): Int {
+        for (i in alphabet.indices) {
+            if (alphabet[i] == char) {
+                return i
+            }
+        }
+        return -1
+    }
+
 	fun isEmpty(c: Collection<*>?): Boolean {
 		return c == null || c.isEmpty()
 	}
