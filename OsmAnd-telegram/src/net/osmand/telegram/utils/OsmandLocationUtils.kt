@@ -483,8 +483,8 @@ object OsmandLocationUtils {
 			pt.lat = it.lat
 			pt.lon = it.lon
 			pt.ele = it.altitude
-			pt.speed = it.speed
-			pt.hdop = it.hdop
+			pt.speed = it.speed.toFloat()
+			pt.hdop = it.hdop.toFloat()
 			pt.time = time
 			val currentInterval = abs(time - previousTime)
 			if (track != null) {

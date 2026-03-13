@@ -292,7 +292,7 @@
     <string name="poi_traffic_calming_hump">Μειωτής ταχύτητας</string>
     <string name="poi_traffic_calming_island">Νησίδα</string>
     <string name="poi_service_tyres">Ελαστικά</string>
-    <string name="poi_vehicle_inspection">ΚΤΕΟ</string>
+    <string name="poi_vehicle_inspection">Επιθεώρηση οχήματος</string>
     <string name="poi_car_wash">Πλυντήριο αυτοκινήτων</string>
     <string name="poi_fuel">Πρατήριο καυσίμων;Βενζινάδικο</string>
     <string name="poi_fuel_diesel">Ντίζελ</string>

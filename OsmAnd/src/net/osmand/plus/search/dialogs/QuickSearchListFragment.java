@@ -118,7 +118,6 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 					((QuickSearchButtonListItem) item).getOnClickListener().onClick(view);
 				} else if (item.getType() == QuickSearchListItemType.SEARCH_RESULT) {
 					SearchResult sr = item.getSearchResult();
-
 					if (sr.objectType == POI
 							|| sr.objectType == LOCATION
 							|| sr.objectType == HOUSE
@@ -136,6 +135,7 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 							showResult = true;
 						}
 						dialogFragment.completeQueryWithObject(sr);
+						dialogFragment.onSearchResultSelected();
 					}
 				}
 			}

@@ -100,10 +100,6 @@ class OBDSimulationSource {
 				}
 
 				null -> ""
-//				OBDCommand.OBD_ALT_BATTERY_VOLTAGE_COMMAND -> {
-//					bufferToRead = "NODATA>"
-//					return@runBlocking
-//				}
 			}
 			bufferToRead = "$commandTypeCode$command$response>"
 		}
