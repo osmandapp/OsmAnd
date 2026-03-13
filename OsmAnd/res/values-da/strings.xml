@@ -6159,4 +6159,5 @@
     <string name="astro_explore_watch_now_subtitle">Se, hvad der er på himlen i aften</string>
     <string name="astro_explore_watch_now">Se nu</string>
     <string name="astro_explore_deep_sky_subtitle">Galakse, galaksehobe, sorte huller</string>
+    <string name="obd_alt_battery_voltage_desc">Viser spændingsniveauet på OBD-adapteren</string>
 </resources>
