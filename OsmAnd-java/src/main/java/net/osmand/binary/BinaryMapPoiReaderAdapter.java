@@ -38,8 +38,6 @@ public class BinaryMapPoiReaderAdapter {
 	private static final int FINAL_POI_SHIFT = BinaryMapIndexReader.SHIFT_COORDINATES;// 5
 	private static final int BASE_POI_ZOOM = 31 - BASE_POI_SHIFT;// 24 zoom
 	private static final int FINAL_POI_ZOOM = 31 - FINAL_POI_SHIFT;// 26 zoom
-	private static final int POI_NAME_INDEX_BLOOM_FIELD_NUMBER = 6;
-	private static final int POI_NAME_BOX_BLOOM_FIELD_NUMBER = 15;
 
 
 	public static class PoiSubType {
@@ -506,14 +504,6 @@ public class BinaryMapPoiReaderAdapter {
 			switch (tag) {
 				case 0:
 					return;
-				case POI_NAME_INDEX_BLOOM_FIELD_NUMBER:
-					byte[] bloom = codedIS.readBytes().toByteArray();
-					boolean bloomMatched = BloomFilter.matches(bloom, queryTokens);
-					if (!bloomMatched) {
-						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-						return;
-					}
-					break;
 				case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:
 					int len = codedIS.readRawVarint32();
 					long oldLim = codedIS.pushLimitLong((long) len);
@@ -534,12 +524,16 @@ public class BinaryMapPoiReaderAdapter {
 		int zoom = 15;
 		int shift = Integer.MIN_VALUE;
 		boolean bloomMatched = true;
+		BloomFilter filter = BloomFilter.getInstance();
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if (shift != Integer.MIN_VALUE && bloomMatched) {
+				if (!bloomMatched) {
+					return;
+				}
+				if (shift != Integer.MIN_VALUE) {
 					int x31 = (x << (31 - zoom));
 					int y31 = (y << (31 - zoom));
 					int x31r = ((x + 1) << (31 - zoom));
@@ -567,11 +561,12 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.ZOOM_FIELD_NUMBER:
 				zoom = codedIS.readUInt32();
 				break;
-			case POI_NAME_BOX_BLOOM_FIELD_NUMBER:
+				case OsmandOdb.OsmAndPoiNameIndexDataAtom.BLOOMINDEX_FIELD_NUMBER:
 				byte[] bloom = codedIS.readBytes().toByteArray();
-				bloomMatched = BloomFilter.matches(bloom, queryTokens);
+				bloomMatched = filter.matches(bloom, queryTokens);
 				if (!bloomMatched && shift != Integer.MIN_VALUE) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					return;
 				}
 				break;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SHIFTTO_FIELD_NUMBER:
@@ -580,6 +575,10 @@ public class BinaryMapPoiReaderAdapter {
 					throw new IllegalStateException();
 				}
 				shift = (int) l;
+				if (!bloomMatched) {
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					return;
+				}
 				break;
 			default:
 				skipUnknownField(t);

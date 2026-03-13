@@ -8,21 +8,22 @@ import java.util.*;
 import java.util.concurrent.atomic.LongAdder;
 
 public final class BloomFilter {
-	private static final int INDEX_BITS = 512, BOX_BITS = 256;
+	private static final int BOX_BITS = 512;
 	private static final int DEFAULT_HASHES = 5;
-	private static final int INDEX_SIZE = INDEX_BITS / Byte.SIZE, BOX_SIZE = BOX_BITS / Byte.SIZE;
+	private static final int BOX_SIZE = BOX_BITS / Byte.SIZE;
 
-	public static final LongAdder writeIndexBitAcc = new LongAdder(), writeBoxBitAcc = new LongAdder();
+	public static final LongAdder writeBoxBitAcc = new LongAdder();
 	public static final LongAdder writeBoxAcc = new LongAdder(), writeBoxCount = new LongAdder();
-	public static final LongAdder writeIndexAcc = new LongAdder(), writeIndexCount = new LongAdder();
-
-	public static final LongAdder skipIndexAcc = new LongAdder(), readIndexCount = new LongAdder();
 	public static final LongAdder skipBoxAcc = new LongAdder(), readBoxCount = new LongAdder();
 
 	private BloomFilter() {
 	}
 
-	private static Set<String> extendTokens(Collection<String> tokens) {
+	public static BloomFilter getInstance() {
+		return new BloomFilter();
+	}
+
+	private Set<String> extendTokens(Collection<String> tokens) {
 		Set<String> extendedTokens = new TreeSet<>();
 		for (String token : tokens) {
 			if (!Algorithms.isEmpty(token)) {
@@ -30,42 +31,36 @@ public final class BloomFilter {
 				for (int endIndex = 1; endIndex <= token.length(); endIndex++) {
 					extendedTokens.add(token.substring(0, endIndex));
 				}
-				/*
 				String transliteratedToken = Junidecode.unidecode(token);
 				if (!Algorithms.isEmpty(transliteratedToken) && !token.equals(transliteratedToken)) {
 					extendedTokens.add(transliteratedToken);
 					for (int endIndex = 1; endIndex <= transliteratedToken.length(); endIndex++) {
 						extendedTokens.add(transliteratedToken.substring(0, endIndex));
 					}
-				}*/
+				}
 			}
 		}
 		return extendedTokens;
 	}
 
-	public static byte[] build(Collection<String> tokens, boolean isIndex) {
+	public byte[] build(Collection<String> tokens) {
 		if (tokens == null || tokens.isEmpty()) {
 			return null;
 		}
 
-		byte[] bloom = new byte[isIndex ? INDEX_SIZE : BOX_SIZE];
+		byte[] bloom = new byte[BOX_SIZE];
 		Collection<String> extTokens = extendTokens(tokens);
 		for (String token : extTokens) {
 			addToken(bloom, token);
 		}
-		if (isIndex) {
-			writeIndexAcc.add(extTokens.size());
-			writeIndexBitAcc.add(bitCount(bloom));
-			writeIndexCount.increment();
-		} else {
-			writeBoxAcc.add(extTokens.size());
-			writeBoxBitAcc.add(bitCount(bloom));
-			writeBoxCount.increment();
-		}
+		writeBoxAcc.add(extTokens.size());
+		writeBoxBitAcc.add(bitCount(bloom));
+		writeBoxCount.increment();
+
 		return bloom;
 	}
 
-	private static long bitCount(byte[] bloom) {
+	private long bitCount(byte[] bloom) {
 		if (bloom == null) {
 			return 0;
 		}
@@ -76,7 +71,7 @@ public final class BloomFilter {
 		return sum;
 	}
 
-	private static void addToken(byte[] bloom, String token) {
+	private void addToken(byte[] bloom, String token) {
 		if (bloom == null || bloom.length == 0 || Algorithms.isEmpty(token)) {
 			return;
 		}
@@ -87,7 +82,7 @@ public final class BloomFilter {
 		addNormToken(bloom, normalizedToken);
 	}
 
-	private static void addNormToken(byte[] bloom, String normalizedToken) {
+	private void addNormToken(byte[] bloom, String normalizedToken) {
 		int h1 = normalizedToken.hashCode();
 		int h2 = Integer.rotateLeft(h1, 16) ^ 0x9E3779B9;
 		if (h2 == 0) {
@@ -109,7 +104,7 @@ public final class BloomFilter {
 		}
 	}
 
-	public static boolean matches(byte[] bloom, String token) {
+	public boolean matches(byte[] bloom, String token) {
 		if (bloom == null || bloom.length == 0 || Algorithms.isEmpty(token)) {
 			return true;
 		}
@@ -141,7 +136,7 @@ public final class BloomFilter {
 		return true;
 	}
 
-	private static String normalize(String token) {
+	private String normalize(String token) {
 		if (Algorithms.isEmpty(token)) {
 			return "";
 		}
@@ -149,33 +144,27 @@ public final class BloomFilter {
 		return normalizedToken.toLowerCase(Locale.ROOT);
 	}
 
-	public static boolean matches(byte[] bloomBytes, Collection<String> queryTokens) {
+	public boolean matches(byte[] bloomBytes, Collection<String> queryTokens) {
 		if (queryTokens == null || queryTokens.isEmpty()) {
 			return true;
 		}
 
-		boolean isIndex = bloomBytes.length == INDEX_SIZE;
-		(isIndex ? readIndexCount : readBoxCount).increment();
+		readBoxCount.increment();
 		for (String queryToken : queryTokens) {
-			if (BloomFilter.matches(bloomBytes, queryToken)) {
+			if (matches(bloomBytes, queryToken)) {
 				return true;
 			}
 		}
-		(isIndex ? skipIndexAcc: skipBoxAcc).increment();
+		skipBoxAcc.increment();
 		return false;
 	}
 
-	public static void reset() {
+	public static void resetStats() {
 		readBoxCount.reset();
-		readIndexCount.reset();
 		skipBoxAcc.reset();
-		skipIndexAcc.reset();
 
-		writeIndexAcc.reset();
-		writeIndexCount.reset();
 		writeBoxAcc.reset();
 		writeBoxCount.reset();
 		writeBoxBitAcc.reset();
-		writeIndexBitAcc.reset();
 	}
 }
