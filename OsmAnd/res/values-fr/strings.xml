@@ -6022,4 +6022,5 @@
     <string name="astro_search_empty_description">Essayez de changer les filtres ou le temps d\'observation.</string>
     <string name="astro_search_input_hint">Texte saisi</string>
     <string name="astro_explore_deep_sky_subtitle">Galaxie, amas de galaxies, trous noirs</string>
+    <string name="obd_alt_battery_voltage_desc">Affiche le niveau de tension sur l\'adaptateur OBD</string>
 </resources>
