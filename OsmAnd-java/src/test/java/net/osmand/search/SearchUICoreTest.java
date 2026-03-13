@@ -20,11 +20,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -109,21 +105,29 @@ public class SearchUICoreTest {
 		JSONObject settingsJson = sourceJson.getJSONObject("settings");
 		BinaryMapIndexReader reader = null;
 		boolean useData = settingsJson.optBoolean("useData", true);
+		JSONArray filesJson = sourceJson.optJSONArray("files");
+		List<BinaryMapIndexReader> readers = new ArrayList<>();
 		if (useData) {
 			boolean obfZipFileExists = obfZipFile.exists();
-			if (!obfZipFileExists) {
+			if (!obfZipFileExists && filesJson == null) {
 				System.out.printf("Could not find obf file: %s%n", obfZipFile.getPath());
 				return;
 			}
-			//Assert.assertTrue(obfZipFileExists);
-
-			GZIPInputStream gzin = new GZIPInputStream(new FileInputStream(obfZipFile));
-			FileOutputStream fous = new FileOutputStream(obfFile);
-			Algorithms.streamCopy(gzin, fous);
-			fous.close();
-			gzin.close();
-
-			reader = new BinaryMapIndexReader(new RandomAccessFile(obfFile.getPath(), "r"), obfFile);
+			if (filesJson != null) {
+				File directory = testFile.getParentFile();
+				for (int i = 0; i < filesJson.length(); i++) {
+					String file = filesJson.optString(i);
+					if (file != null && file.endsWith(".obf.gz")) {
+						File gzFile = new File(directory, file);
+						File obf = new File(directory, file.replace(".gz", ""));
+						unzipObf(gzFile, obf);
+						readers.add(new BinaryMapIndexReader(new RandomAccessFile(obf.getPath(), "r"), obf));
+					}
+				}
+			} else {
+				unzipObf(obfZipFile, obfFile);
+				readers.add(new BinaryMapIndexReader(new RandomAccessFile(obfFile.getPath(), "r"), obfFile));
+			}
 		}
 		 boolean disabled = settingsJson.optBoolean("disabled", false);
 		 if (disabled) {
@@ -146,8 +150,9 @@ public class SearchUICoreTest {
 		}
 
 		SearchSettings s = SearchSettings.parseJSON(settingsJson);
-		if (reader != null) {
-			s.setOfflineIndexes(Collections.singletonList(reader));
+		boolean multiSearch = readers.size() > 1;
+		if (!readers.isEmpty()) {			
+			s.setOfflineIndexes(readers);
 		}
 
 		final SearchUICore core = new SearchUICore(MapPoiTypes.getDefault(), "en", false);
@@ -207,7 +212,11 @@ public class SearchUICoreTest {
 					System.out.printf("Mismatch for '%s' != '%s'. Result: %n", expected, present);
 					System.out.println("CURRENT RESULTS: ");
 					for (SearchResult r : searchResults) {
-						System.out.printf("\t\"%s\",%n", formatResult(false, r, phrase));
+						if (multiSearch) {
+							System.out.printf("\t\"%s\",%n", formatResultMultiSearch(r, phrase));
+						} else {
+							System.out.printf("\t\"%s\",%n", formatResult(false, r, phrase));
+						}
 					
 					}
 					System.out.println("EXPECTED : ");
@@ -220,6 +229,14 @@ public class SearchUICoreTest {
 		}
 
 		obfFile.delete();
+	}
+	
+	private void unzipObf(File obfGzFile, File obfFile) throws IOException {
+		GZIPInputStream gzin = new GZIPInputStream(new FileInputStream(obfGzFile));
+		FileOutputStream fous = new FileOutputStream(obfFile);
+		Algorithms.streamCopy(gzin, fous);
+		fous.close();
+		gzin.close();
 	}
 
 	private List<SearchResult> getSearchResult(SearchPhrase phrase, ResultMatcher<SearchResult> rm, SearchUICore core){
@@ -266,6 +283,12 @@ public class SearchUICoreTest {
 				r.getUnknownPhraseMatchWeight(), //r.getSearchDistance(phrase.getSettings().getOriginalLocation())
 				dist / 1000
 				);
+	}
+	
+	private String formatResultMultiSearch(SearchResult r, SearchPhrase phrase) {
+		String format = formatResult(false, r, phrase);
+		String reg = r.file == null ? "-" : r.file.getFile().getName();
+		return String.format(Locale.US, "%s [%s]", format, reg);
 	}
 
 	static class TestSearchTranslator implements MapPoiTypes.PoiTranslator {

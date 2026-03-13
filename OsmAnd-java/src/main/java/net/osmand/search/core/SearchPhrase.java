@@ -58,6 +58,7 @@ public class SearchPhrase {
 	private AbstractPoiType unselectedPoiType;
 	private boolean acceptPrivate;
 	private QuadRect cache1kmRect;
+	private RegionPriorityProvider regionPriorityProvider;
 	
 	static {
 
@@ -90,6 +91,9 @@ public class SearchPhrase {
 	private SearchPhrase(SearchSettings settings, Collator clt) {
 		this.settings = settings;
 		this.clt = clt;
+		if (settings != null) {
+			this.regionPriorityProvider = new RegionPriorityProvider(this);
+		}
 	}
 	
 	public Collator getCollator() {
@@ -402,12 +406,28 @@ public class SearchPhrase {
 		
 	}
 
-	public Iterator<BinaryMapIndexReader> getOfflineIndexes(QuadRect rect, SearchPhraseDataType dataType) {
-		List<BinaryMapIndexReader> list = indexes != null ? indexes : settings.getOfflineIndexes();
+	public Iterator<BinaryMapIndexReader> getRadiusOfflineIndexes(int minMeters, int maxMeters, SearchPhraseDataType dataType) {
+		List<BinaryMapIndexReader> list;
+		if (regionPriorityProvider != null) {
+			list = regionPriorityProvider.getOfflineIndexes(minMeters, maxMeters);
+		} else {
+			list = indexes != null ? indexes : settings.getOfflineIndexes();
+		}
+		final QuadRect rect = getRadiusBBoxToSearch(maxMeters);
 		return getOfflineIndexes(rect, dataType, list);
 	}
 
-	public static Iterator<BinaryMapIndexReader> getOfflineIndexes(QuadRect rect, SearchPhraseDataType dataType, List<BinaryMapIndexReader> list) {
+	public Iterator<BinaryMapIndexReader> getOfflineIndexes(QuadRect rect, SearchPhraseDataType dataType) {
+		Collection<BinaryMapIndexReader> list;
+		if (regionPriorityProvider != null) {
+			list = regionPriorityProvider.getOfflineIndexes();
+		} else {
+			list = indexes != null ? indexes : settings.getOfflineIndexes();
+		}
+		return getOfflineIndexes(rect, dataType, list);
+	}
+
+	public static Iterator<BinaryMapIndexReader> getOfflineIndexes(QuadRect rect, SearchPhraseDataType dataType, Collection<BinaryMapIndexReader> list) {
 		Iterator<BinaryMapIndexReader> iterator = list.iterator();
 		return new Iterator<>() {
 			BinaryMapIndexReader next = null;
@@ -941,5 +961,19 @@ public class SearchPhrase {
 		}
 		return retName;
 	}
-	
+
+	public int getRegionPriority(SearchResult searchResult) {
+		if (regionPriorityProvider != null) {
+			return regionPriorityProvider.getRegionWeight(searchResult);
+		}
+		return 0;
+	}
+
+	public int getRegionPriority(BinaryMapIndexReader reader) {
+		if (regionPriorityProvider != null) {
+			return regionPriorityProvider.getRegionWeight(reader);
+		}
+		return 0;
+	}
+
 }
