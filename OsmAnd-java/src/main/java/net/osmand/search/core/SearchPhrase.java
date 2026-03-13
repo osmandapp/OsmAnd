@@ -418,11 +418,16 @@ public class SearchPhrase {
 	}
 
 	public Iterator<BinaryMapIndexReader> getOfflineIndexes(QuadRect rect, SearchPhraseDataType dataType) {
-		List<BinaryMapIndexReader> list = indexes != null ? indexes : settings.getOfflineIndexes();
+		Collection<BinaryMapIndexReader> list;
+		if (regionPriorityProvider != null) {
+			list = regionPriorityProvider.getOfflineIndexes();
+		} else {
+			list = indexes != null ? indexes : settings.getOfflineIndexes();
+		}
 		return getOfflineIndexes(rect, dataType, list);
 	}
 
-	public static Iterator<BinaryMapIndexReader> getOfflineIndexes(QuadRect rect, SearchPhraseDataType dataType, List<BinaryMapIndexReader> list) {
+	public static Iterator<BinaryMapIndexReader> getOfflineIndexes(QuadRect rect, SearchPhraseDataType dataType, Collection<BinaryMapIndexReader> list) {
 		Iterator<BinaryMapIndexReader> iterator = list.iterator();
 		return new Iterator<>() {
 			BinaryMapIndexReader next = null;
@@ -960,6 +965,13 @@ public class SearchPhrase {
 	public int getRegionPriority(SearchResult searchResult) {
 		if (regionPriorityProvider != null) {
 			return regionPriorityProvider.getRegionWeight(searchResult);
+		}
+		return 0;
+	}
+
+	public int getRegionPriority(BinaryMapIndexReader reader) {
+		if (regionPriorityProvider != null) {
+			return regionPriorityProvider.getRegionWeight(reader);
 		}
 		return 0;
 	}

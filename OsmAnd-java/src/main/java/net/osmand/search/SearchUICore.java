@@ -770,6 +770,17 @@ public class SearchUICore {
 							LOG.info("Finishing search <" + phrase + "> Results=" + rm.getRequestResults().size());
 						}
 						currentSearchResult = collection;
+						filterGroups(phrase, collection);
+						debugSearchGroups(phrase, collection);
+						/*if (collection.searchResults.size() > 50) {
+							int size = collection.searchResults.size();
+							SearchResultComparatorOneStep cmp = new SearchResultComparatorOneStep(phrase, ResultCompareStep.COMPARE_BY_DISTANCE);
+							collection.searchResults.subList(50, size).sort(cmp);
+							SearchResult sr = new SearchResult(phrase);
+							sr.objectType = FILTER_FINISHED;
+							currentSearchResult = collection;
+							rm.publish(sr);
+						}*/
 						if (phrase.getSettings().isExportObjects()) {
 							rm.createTestJSON(collection);
 						}
@@ -1335,6 +1346,25 @@ public class SearchUICore {
 		}
 
 	}
+	
+	public static class SearchResultComparatorOneStep extends SearchResultComparator {		
+		ResultCompareStep step;
+		
+		public SearchResultComparatorOneStep(SearchPhrase sp) {
+			super(sp);
+			this.step = ResultCompareStep.COMPARE_BY_DISTANCE;
+		}
+
+		public SearchResultComparatorOneStep(SearchPhrase sp, ResultCompareStep step) {
+			super(sp);
+			this.step = step;
+		}
+
+		@Override
+		public int compare(SearchResult o1, SearchResult o2) {
+            return step.compare(o1, o2, this);
+        }
+	}
 
 	public static String getMainCityName(String cityName) {
 		String mainCity = cityName;
@@ -1362,6 +1392,81 @@ public class SearchUICore {
 			return addr + (Algorithms.isEmpty(cityName) ? "" : ", " + cityName);
 		} else {
 			return (Algorithms.isEmpty(cityName) ? "" : (cityName + ", ")) + addr;
+		}
+	}
+
+	private void filterGroups(SearchPhrase phrase, SearchResultCollection collection) {
+		LatLon l = phrase.getLastTokenLocation();
+		if (l == null || collection.searchResults.isEmpty()) {
+			return;
+		}
+
+		List<SearchResult> filteredResults = new ArrayList<>();
+		double lastDist = -1;
+		String lastObjectType = "";
+		int currentGroupCount = 0;
+		for (SearchResult r : collection.searchResults) {
+			double dist = (r.location == null) ? 0 : MapUtils.getDistance(l, r.location);
+			String objectType = r.objectType.name();
+			boolean isNewGroup = (lastDist > 0 && dist < lastDist) ||
+					(!lastObjectType.isEmpty() && !lastObjectType.equals(objectType));
+			if (isNewGroup) {
+				currentGroupCount = 0;
+			}
+			if (currentGroupCount < 100) {
+				filteredResults.add(r);
+				currentGroupCount++;
+			}
+			lastDist = dist;
+			lastObjectType = objectType;
+		}
+		collection.searchResults.clear();
+		collection.searchResults.addAll(filteredResults);
+	}
+
+	private void debugSearchGroups(SearchPhrase phrase, SearchResultCollection collection) {
+		LatLon l = phrase.getLastTokenLocation();
+		if (l != null) {
+			double lastDist = -1;
+			int cnt = 0;
+			int i = 1;
+			String lastObjectType = "";
+			double min = -1;
+			double max = -1;
+			double minWeight = -1;
+			double maxWeight = -1;
+			SearchResult lastResult = collection.searchResults.get(collection.searchResults.size() - 1);
+			System.out.println(phrase.getUnknownSearchPhrase());
+			for (SearchResult r : collection.searchResults) {
+				double dist;
+				String objectType = r.objectType.name();
+				if (r.location == null) {
+					dist = 0;
+				} else {
+					dist = MapUtils.getDistance(l, r.location);
+				}
+				double weight = r.getUnknownPhraseMatchWeight();
+				if ((lastDist > 0 && dist < lastDist) || (!lastObjectType.isEmpty() && !lastObjectType.equals(objectType)) || lastResult == r) {
+					if (cnt == 1) {
+						System.out.printf("Group %d - 1 object [%s] - %.2fkm w:%.2f\n", i, lastObjectType, lastDist / 1000, minWeight);
+					} else {
+						System.out.printf("Group %d - %d objects [%s] - %.2fkm - %.2fkm w:[%.2f - %.2f]\n", i, cnt, lastObjectType, min / 1000, max / 1000, maxWeight, minWeight);
+					}
+					cnt = 0;
+					min = -1;
+					max = -1;
+					minWeight = -1;
+					maxWeight = -1;
+					i++;
+				}
+				cnt++;
+				lastObjectType = objectType;
+				min = min == -1 ? dist : Math.min(min, dist);
+				max = max == -1 ? dist : Math.max(max, dist);
+				minWeight = minWeight == -1 ? weight : Math.min(minWeight, weight);
+				maxWeight = maxWeight == -1 ? weight : Math.max(maxWeight, weight);
+				lastDist = dist;
+			}
 		}
 	}
 }

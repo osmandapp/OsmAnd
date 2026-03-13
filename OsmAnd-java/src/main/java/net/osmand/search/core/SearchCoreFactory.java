@@ -340,6 +340,7 @@ public class SearchCoreFactory {
 		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 50 * 1000;
 		private static final int LONG_ADDRESS_BBOX_RADIUS = 400 * 1000;
 		private static final int LIMIT = 10000;
+		private final int LIMIT_BY_REGIONS = 1000;
 
 		private final boolean longDistance;
 		
@@ -671,7 +672,9 @@ public class SearchCoreFactory {
 					}
                     offlineIterator = phrase.getOfflineIndexes(rect, SearchPhraseDataType.ADDRESS);
                 }
-				
+
+				int lastRegionPriority = 0;
+				int lastResultCount = resultMatcher.getCount();
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
@@ -743,6 +746,12 @@ public class SearchCoreFactory {
 						}
 					}
 					resultMatcher.apiSearchRegionFinished(this, r, phrase);
+					int regionPriority = phrase.getRegionPriority(r);
+					int cnt = resultMatcher.getCount() - lastResultCount;
+					if (cnt > LIMIT_BY_REGIONS && regionPriority > lastRegionPriority) {
+						break;
+					}
+					lastRegionPriority = regionPriority;
 				}
 			}
 		}
@@ -752,6 +761,7 @@ public class SearchCoreFactory {
 
 	public static class SearchAmenityByNameAPI extends SearchBaseAPI {
 		private static final int LIMIT = 10000;
+		private static final int LIMIT_BY_REGIONS = 1000;
 		private static final int BBOX_RADIUS = 500 * 1000;
 		private static final int BBOX_RADIUS_INSIDE = 5600 * 1000; // 5600 is the minimum to pass test [14: hisar]
 		private static final int BBOX_RADIUS_POI_IN_CITY = 25 * 1000;
@@ -877,11 +887,19 @@ public class SearchCoreFactory {
 				fileRequest.searchPoiByName(req);
 				resultMatcher.apiSearchRegionFinished(this, fileRequest, phrase);
 			} else {
+				int lastRegionPriority = 0;
+				int lastResultCount = resultMatcher.getCount();
 				while (offlineIterator.hasNext()) {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
 					r.searchPoiByName(r.isBasemap() ? reqUnlimited : req);
 					resultMatcher.apiSearchRegionFinished(this, r, phrase);
+					int regionPriority = phrase.getRegionPriority(r);
+					int cnt = resultMatcher.getCount() - lastResultCount;
+					if (cnt > LIMIT_BY_REGIONS && regionPriority > lastRegionPriority) {
+						break;
+					}
+					lastRegionPriority = regionPriority;
 				}
 			}
 			return true;

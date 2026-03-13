@@ -14,7 +14,7 @@ public class RegionPriorityProvider {
     private final int BBOX_STEP = 50000; // 50 km
     private final int BBOX_MAX = BBOX_STEP * 20; // 1000 km
     private final Map<Integer, List<BinaryMapIndexReader>> priorityMap;
-    private Map<BinaryMapIndexReader, Integer> regionsPriority;
+    private LinkedHashMap<BinaryMapIndexReader, Integer> regionsPriority;
     private LatLon searchLocation;
 
     public RegionPriorityProvider(SearchPhrase phrase) {
@@ -23,6 +23,11 @@ public class RegionPriorityProvider {
             this.searchLocation = phrase.getSettings().getOriginalLocation();
             initPriorityMap(phrase);
         }
+    }
+
+    public Collection<BinaryMapIndexReader> getOfflineIndexes() {
+       initRegionsPriority();
+       return regionsPriority.keySet();
     }
 
     public List<BinaryMapIndexReader> getOfflineIndexes(int minRadius, int maxRadius) {
@@ -43,24 +48,31 @@ public class RegionPriorityProvider {
         }
         return result;
     }
-
-    public int getRegionWeight(SearchResult searchResult) {
-        if (searchResult.file == null || priorityMap.isEmpty()) {
+    
+    public int getRegionWeight(BinaryMapIndexReader reader) {
+        if (reader == null || priorityMap.isEmpty()) {
             return 0;
         }
         initRegionsPriority();
-        Integer priority = regionsPriority.get(searchResult.file);
+        Integer priority = regionsPriority.get(reader);
         if (priority == null) {
             return 0;
         }
         return priority;
     }
 
+    public int getRegionWeight(SearchResult searchResult) {
+        if (searchResult.file == null || priorityMap.isEmpty()) {
+            return 0;
+        }
+        return getRegionWeight(searchResult.file);
+    }
+
     private void initRegionsPriority() {
         if (regionsPriority != null) {
             return;
         }
-        regionsPriority = new HashMap<>();
+        regionsPriority = new LinkedHashMap<>();
         for (Map.Entry<Integer, List<BinaryMapIndexReader>> entry : priorityMap.entrySet()) {
             int prority = entry.getKey();
             for (BinaryMapIndexReader reader : entry.getValue()) {
