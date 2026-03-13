@@ -5349,8 +5349,6 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="shared_string_modify">Ändra</string>
-    <string name="missing_maps_ignore">Använd nedladdade kartor</string>
-    <string name="missing_maps_ignore_details">Täcker nedladdade kartor din rutt? Navigera med dem om du är bekant med området.</string>
     <string name="shared_string_colors">Färger</string>
     <string name="use_nearby_roads_summary">Använder offlinekartor för att hitta närliggande vägar &amp; höjddata. Kan anpassa spårgeometrin.</string>
     <string name="gpx_approximation_geo_cpp">Geometri-baserad (C++, snabb)</string>

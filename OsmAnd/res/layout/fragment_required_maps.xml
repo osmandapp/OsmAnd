@@ -109,7 +109,7 @@
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:padding="@dimen/content_padding"
-								android:text="@string/calculate_online"
+								android:text="@string/actualize_maps_online"
 								android:textColor="?attr/active_color_basic" />
 
 						</LinearLayout>

@@ -5445,7 +5445,6 @@
     <string name="contact_support_retry">Prøv igjen eller kontakt brukerstøtte</string>
     <string name="shared_string_colors">Farger</string>
     <string name="key_assignment_add_action">Legg til handling</string>
-    <string name="missing_maps_ignore">Bruk nedlastede kart</string>
     <string name="map_settings_weather_wind_animation">Vindanimasjon</string>
     <string name="tomorrow">I morgen</string>
     <string name="use_nearby_roads">Bruk veier i nærheten</string>
@@ -5491,7 +5490,6 @@
     <string name="quick_action_map_overlay">Overlegg</string>
     <string name="quick_action_map_underlay">Underlag</string>
     <string name="weather_screen">Værskjerm</string>
-    <string name="missing_maps_ignore_details">Dekker nedlastede kart ruten din? Naviger med dem hvis du er kjent i området.</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="show_debug_info_description">Vis grafisk informasjon om plassering av hver karttekst</string>
     <string name="fix_north_up">Aktiver Fast nord opp</string>

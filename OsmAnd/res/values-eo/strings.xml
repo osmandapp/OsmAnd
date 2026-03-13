@@ -5296,7 +5296,6 @@
     <string name="contact_support_retry">Reprovu aŭ kontaktu nian subtenan teamon</string>
     <string name="user_palette">Propra koloro</string>
     <string name="shared_string_colors">Koloroj</string>
-    <string name="missing_maps_ignore">Uzi elŝutitajn mapojn</string>
     <string name="daynight_mode_sensor_summary">Uzas lum-sentilon de la aparato kaj agordas map-reĝimon laŭ nivelo de media lumo.</string>
     <string name="daynight_mode_app_theme_summary">La map-reĝimo agordiĝas laŭ etoso de la aplikaĵo – taga reĝimo por hela etoso kaj nokta reĝimo por malhela etoso.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Aŭtomate baskuligas inter taga kaj nokta map-reĝimoj surbaze de tempoj de sunleviĝo kaj sunsubiro.</string>
@@ -5316,7 +5315,6 @@
     <string name="weather_source_GFS_description">«Global Forecast System» de «National Centers for Environmental Prediction»</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
-    <string name="missing_maps_ignore_details">Ĉu jam elŝutitaj mapoj taŭgos por via kurso? Navigu per ili se vi ekkonis kun la regiono.</string>
     <string name="quick_action_terrain_color_scheme">Kolor-skemo de tereno</string>
     <string name="quick_action_directions_from">Komencpunkto</string>
     <string name="quick_action_destination">Celo</string>

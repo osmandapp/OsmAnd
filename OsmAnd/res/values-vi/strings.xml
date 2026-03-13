@@ -684,13 +684,11 @@
     <string name="weather_source_GFS_title">GFS</string>
     <string name="daynight_mode_sensor_summary">Dùng cảm biến ánh sáng của thiết bị để chuyển đổi giữa giao diện sáng và tối tuỳ thuộc theo độ sáng xung quanh.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Tự động chuyển đổi giữa giao diện ban ngày và ban đêm dựa trên thời gian bình minh và hoàng hôn của địa phương.</string>
-    <string name="missing_maps_ignore">Sử dụng các bản đồ đã được tải xuống</string>
     <string name="play_weather_forecast">Chơi dự báo thời tiết</string>
     <string name="quick_action_verb_show_hide">Hiện / Ẩn</string>
     <string name="button_already_assigned_to_this_action">Nút bấm đã được gán cho hành động này.</string>
     <string name="key_event_action_open_navigation_view">Mở màn hình điều hướng</string>
     <string name="avg_sensor_speed">Tốc độ cảm biến, trung bình</string>
-    <string name="missing_maps_ignore_details">Tải xuống các bản đồ có tuyến đường của bạn? Điều hướng với chúng nếu bạn biết khu vực đó.</string>
     <string name="max_sensor_speed">Tốc độ cảm biến, cao nhất</string>
     <string name="restore_from_trash">Phục hồi từ thùng rác</string>
     <string name="cloud_trash_clear_confirmation">Xoá tất cả các mục trong thùng rác vĩnh viễn?</string>

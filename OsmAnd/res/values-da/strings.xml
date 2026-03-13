@@ -5329,7 +5329,6 @@
     <string name="shared_string_colors">Farver</string>
     <string name="backup_error_failed_to_transfer_file">Kunne ikke overføre cloud-fil(er).</string>
     <string name="contact_support_retry">Prøv igen, eller kontakt support</string>
-    <string name="missing_maps_ignore">Brug downloadede kort</string>
     <string name="daynight_mode_sensor_summary">Bruger enhedens lyssensor til at skifte mellem lyse og mørke temaer alt efter det omgivende lysniveau.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Skifter automatisk mellem dag- og nattemaer baseret på lokale solopgangs- og solnedgangstider.</string>
     <string name="daynight_mode_night_summary">Viser altid kortet i et mørkt tema, der er velegnet til natlige eller svage lysforhold.</string>
@@ -5349,7 +5348,6 @@
     <string name="weather_source_ecmwf_description">Det Europæiske Center for mellemfristede vejrprognoser</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Datakilde</string>
-    <string name="missing_maps_ignore_details">Dækker downloadede kort din rute? Naviger med dem, hvis du er fortrolig med området.</string>
     <string name="quick_action_map_style">Kortstil</string>
     <string name="quick_action_terrain_color_scheme">Farvetema for terræn</string>
     <string name="quick_action_directions_from">Startpunkt</string>

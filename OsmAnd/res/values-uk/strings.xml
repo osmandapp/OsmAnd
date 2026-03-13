@@ -5304,7 +5304,6 @@
     <string name="key_assignment_add_key">Додати ключ</string>
     <string name="action_icon">Піктограма дії</string>
     <string name="key_assignment_add_action">Додати дію</string>
-    <string name="missing_maps_ignore">Використати завантажені мапи</string>
     <string name="backup_error_failed_to_transfer_file">Помилка перенесення хмарного файлу(ів).</string>
     <string name="contact_support_retry">Спробуйте ще раз або зверніться до служби підтримки</string>
     <string name="shared_string_colors">Кольори</string>
@@ -5361,7 +5360,6 @@
     <string name="shared_string_replace">Замінити</string>
     <string name="quick_action_audio_note">Аудіонотатка</string>
     <string name="quick_action_map_style">Стиль мапи</string>
-    <string name="missing_maps_ignore_details">Завантажені мапи покривають ваш маршрут? Орієнтуйтеся за ними, якщо ви знайомі з місцевістю.</string>
     <string name="quick_action_location_by_gpx">Розташування за GPX</string>
     <string name="energy_avg_info_description">Розряджання акумулятора на хвилину: %1$s
 \nСпоживання енергії (мАг): %2$s</string>

@@ -5703,7 +5703,6 @@
     <string name="location_radius">Radius lokasi</string>
     <string name="location_radius_description">Menunjukkan seberapa luas lingkaran yang menunjukkan keakuratan lokasi Anda saat ini</string>
     <string name="route_roundabout_exit">Ambil jalan keluar %1$d</string>
-    <string name="missing_maps_ignore_details">Apakah peta yang Anda unduh meliputi rute yang Anda maksud? Navigasikan rute yang Anda maksud jika Anda mengenali area tersebut.</string>
     <string name="add_widget_to_the_right">Tambahkan gawit di sisi kanan layar</string>
     <string name="add_widget_to_the_left">Tambahkan gawit di sisi kiri layar</string>
     <string name="add_widget_above">Tambahkan gawit di atas layar</string>
@@ -5727,7 +5726,6 @@
     <string name="auto_25_chars_route_tsll">Belok sedikit ke kiri</string>
     <string name="quick_action_verb_show_hide">Tampilkan / Sembunyikan</string>
     <string name="quick_action_verb_pause_resume">Jeda / Lanjutkan</string>
-    <string name="missing_maps_ignore">Gunakan peta yang sudah diunduh</string>
     <string name="shared_string_automatically">Secara otomatis</string>
     <string name="ask_every_time">Tanya setiap waktu</string>
     <string name="quick_action_location_by_gpx">Lokasi diambil dari GPX</string>

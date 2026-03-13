@@ -5245,7 +5245,6 @@
     <string name="navigation_position">Staða leiðsagnar</string>
     <string name="resting_navigation_position">Staða leiðsagnar og hvíldar</string>
     <string name="weather_source_GFS_title">GFS</string>
-    <string name="missing_maps_ignore">Nota sótt kort</string>
     <string name="clear_all_key_shortcuts">Hreinsa alla flýtilykla</string>
     <string name="assigned_keys">Úthlutaðir lyklar</string>
     <string name="quick_action_remove_next_destination">Eyða næsta áfangastað</string>
@@ -5500,7 +5499,6 @@
     <string name="quick_action_new_trip_segment">Hnappur til að byrja nýjan bút í yfirstandandi skráningu GPX-ferils.</string>
     <string name="disable_map_layers_descr">Gera öll kortalög ofan vektorkortsins óvirk (endurræsingar er krafist).</string>
     <string name="use_terrain_maps_summary">Notar yfirborðskort fyrir hæðargögn. Lögun ferils helst óbreytt.</string>
-    <string name="missing_maps_ignore_details">Ná sóttu landakortin yfir leiðina þína? Ferðastu eftir þeim ef þú kannast við svæðið.</string>
     <string name="daynight_mode_app_theme_summary">Skjár kortsins aðlagar sig aðalþema forritsins - dagsljóshamur fyrir ljóst þema og næturhamur fyrir dökkt þema</string>
     <string name="required_maps_calculate_online_summary">Listinn yfir kort sem vantar byggist á leið eftir beinni línu. Til að fá nákvæman lista yfir kort, getur OsmAnd for-reiknað leiðina þína á netinu.</string>
     <string name="lock_screen_description">Virkjar eða gerir snertiskjá óvirkan til að koma í veg fyrir óviljandi snertingar</string>

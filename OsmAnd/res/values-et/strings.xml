@@ -4346,7 +4346,6 @@
     <string name="shared_string_delete_item">Kustuta objekt</string>
     <string name="steps_per_minute_unit">Sammu minutis</string>
     <string name="key_is_already_assigned_error">„%1$s“ kiirklahv on juba on määratud tegevusele „%2$s“\\</string>
-    <string name="missing_maps_ignore">Kasuta allalaaditud kaarte</string>
     <string name="add_smart_folder">Lisa nutikas kaust</string>
     <string name="shared_string_created">Loodud</string>
     <string name="empty_name">Tühi nimi</string>

@@ -5284,7 +5284,6 @@
     <string name="shared_string_colors">Boje</string>
     <string name="backup_error_failed_to_transfer_file">Prenos datoteke/a u Cloud nije uspelo.</string>
     <string name="contact_support_retry">Pokušaj ponovo ili kontaktiraj podršku</string>
-    <string name="missing_maps_ignore">Koristi preuzete mape</string>
     <string name="tomorrow">Sutradan</string>
     <string name="map_settings_weather_wind_animation">Animacija vetra</string>
     <string name="daynight_mode_sunrise_sunset_summary">Automatski se prebacuje između dnevne i noćne teme na temelju lokalnog izlaska i zalaska sunca.</string>
@@ -5304,7 +5303,6 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Izvor podataka</string>
-    <string name="missing_maps_ignore_details">Preuzete mape pokrivaju vašu rutu? Krećite se sa njima ako ste upoznati sa područjem.</string>
     <string name="quick_action_directions_from">Polazna tačka</string>
     <string name="quick_action_destination">Odredište</string>
     <string name="quick_action_terrain_color_scheme">Šema boja terena</string>
