@@ -225,6 +225,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void onStop(@NonNull LifecycleOwner owner) {
 		OsmandApplication app = getApp();
 		routingHelper.removeListener(this);
+		app.getSettings().STOP_ON_MISSING_MAPS = false;
 
 		boolean routing = settings.FOLLOW_THE_ROUTE.get() || routingHelper.isRouteCalculated()
 				|| routingHelper.isRouteBeingCalculated();
@@ -772,18 +773,19 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void showMissingMapsScreen() {
 		CarContext carContext = getCarContext();
 		if (carContext != null) {
+			getApp().getSettings().STOP_ON_MISSING_MAPS = true;
 			carContext.getCarService(ScreenManager.class).push(new MissingMapsScreen(carContext));
 		}
 	}
 
 	@Override
 	public void onCalculationStart() {
-
+		getApp().getSettings().STOP_ON_MISSING_MAPS = true;
 	}
 
 	@Override
 	public void onUpdateCalculationProgress(int progress) {
-
+		// Think about mix of catchCurrentMissingMaps() with showMissingMapsScreen() (MapRouteInfoMenu)
 	}
 
 	@Override

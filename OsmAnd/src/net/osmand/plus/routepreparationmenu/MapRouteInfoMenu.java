@@ -158,6 +158,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean switched;
 	private boolean routeSelected;
 	private boolean currentMuteState;
+	private boolean missingMapsWarningCardDisplayed;
 
 	private AddressLookupRequest startPointRequest;
 	private AddressLookupRequest targetPointRequest;
@@ -340,6 +341,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	public void routeCalculationStarted() {
 		setRouteCalculationInProgress(true);
+		missingMapsWarningCardDisplayed = false;
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		if (fragmentRef != null && fragment.isVisible()) {
@@ -358,6 +360,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				fragment.updateInfo();
 			}
 			fragment.updateRouteCalculationProgress(progress);
+		}
+		catchCurrentMissingMaps();
+	}
+
+	private void catchCurrentMissingMaps() {
+		if (!missingMapsWarningCardDisplayed && hasCurrentMissingMaps(app)) {
+			missingMapsWarningCardDisplayed = true;
+			updateCards();
 		}
 	}
 
@@ -584,11 +594,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
 			} else if (app.getRoutingHelper().isBoatMode()) {
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
+			} else if (hasCurrentMissingMaps(app)) {
+				missingMapsWarningCardDisplayed = true;
+				menuCards.add(new MissingMapsWarningCard(mapActivity));
 			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !hasCalculatedMissingMaps) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			}
 		} else {
 			if (hasCalculatedMissingMaps) {
+				missingMapsWarningCardDisplayed = true;
 				menuCards.add(new MissingMapsWarningCard(mapActivity));
 			} else {
 				// Home/work card
@@ -654,6 +668,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private boolean hasCalculatedMissingMaps(@NonNull OsmandApplication app) {
 		return app.getRoutingHelper().getRoute().hasMissingMaps();
+	}
+
+	private boolean hasCurrentMissingMaps(@NonNull OsmandApplication app) {
+		return app.getRoutingHelper().hasCurrentMissingMaps();
 	}
 
 	private void setupCards() {
@@ -1460,6 +1478,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	public void resetRouteCalculation() {
 		menuAutoMovedAfterCalculationStarted = false;
+		missingMapsWarningCardDisplayed = false;
 		setRouteCalculationInProgress(false);
 		restoreCollapsedButtons();
 	}
