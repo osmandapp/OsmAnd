@@ -4,6 +4,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import net.osmand.plus.R;
+import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
 
 import java.util.Set;
@@ -30,7 +31,7 @@ class PreferenceSearchablePredicate implements de.KnollFrank.lib.settingssearch.
 		return NON_SEARCHABLE_LAYOUT_RESIDS.contains(preference.getLayoutResource()) ||
 				isSelectedProfilePreference(preference, hostOfPreference) ||
 				isConfigureProfilePreference(preference, hostOfPreference) ||
-				isTopographyPreference(preference);
+				isTopographyPreference(preference, hostOfPreference);
 	}
 
 	private static boolean isSelectedProfilePreference(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
@@ -41,7 +42,7 @@ class PreferenceSearchablePredicate implements de.KnollFrank.lib.settingssearch.
 		return MainSettingsFragment.CONFIGURE_PROFILE.equals(preference.getKey()) && hostOfPreference instanceof MainSettingsFragment;
 	}
 
-	private static boolean isTopographyPreference(final Preference preference) {
-		return "map.configure.terrain.category".equals(preference.getKey());
+	private static boolean isTopographyPreference(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
+		return "map.configure.terrain.category".equals(preference.getKey()) && hostOfPreference instanceof ConfigureMapFragment.ConfigureMapFragmentProxy;
 	}
 }
