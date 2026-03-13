@@ -1,7 +1,16 @@
 package net.osmand.plus.configmap;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MODE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+import static net.osmand.plus.settings.fragments.search.ctxmenu.ContextMenuItemsToScreenAdder.addContextMenuItemsToScreen;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -52,8 +61,11 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.time.Duration;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.results.Setting;
@@ -375,12 +387,10 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	public static class ConfigureMapFragmentProxy extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<ConfigureMapFragment>, PreferenceFragmentHandlerProvider {
 
 		private ConfigureMapFragment configureMapFragment;
-		private List<ContextMenuItem> items;
 
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final ConfigureMapFragment configureMapFragment) {
 			this.configureMapFragment = configureMapFragment;
-			items = configureMapFragment.adapter.getItems();
 			setArguments(configureMapFragment.getArguments());
 		}
 
@@ -394,25 +404,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(context);
 			screen.setTitle("screen title");
 			screen.setSummary("screen summary");
-			ConfigureMapFragmentProxy
-					.asPreferences(items, context)
-					.forEach(screen::addPreference);
+			addContextMenuItemsToScreen(configureMapFragment.adapter.getItems(), screen, context);
 			setPreferenceScreen(screen);
-		}
-
-		private static List<Preference> asPreferences(final List<ContextMenuItem> contextMenuItems, final Context context) {
-			return contextMenuItems
-					.stream()
-					.map(contextMenuItem -> asPreference(contextMenuItem, context))
-					.collect(Collectors.toList());
-		}
-
-		private static Preference asPreference(final ContextMenuItem contextMenuItem, final Context context) {
-			final Preference preference = new Preference(context);
-			preference.setKey(contextMenuItem.getId());
-			preference.setTitle(contextMenuItem.getTitle());
-			preference.setSummary(contextMenuItem.getDescription());
-			return preference;
 		}
 
 		@Override
