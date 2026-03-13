@@ -29,7 +29,8 @@ class PreferenceSearchablePredicate implements de.KnollFrank.lib.settingssearch.
 	private static boolean isPreferenceNonSearchable(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
 		return NON_SEARCHABLE_LAYOUT_RESIDS.contains(preference.getLayoutResource()) ||
 				isSelectedProfilePreference(preference, hostOfPreference) ||
-				isConfigureProfilePreference(preference, hostOfPreference);
+				isConfigureProfilePreference(preference, hostOfPreference) ||
+				isTopographyPreference(preference);
 	}
 
 	private static boolean isSelectedProfilePreference(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
@@ -38,5 +39,9 @@ class PreferenceSearchablePredicate implements de.KnollFrank.lib.settingssearch.
 
 	private static boolean isConfigureProfilePreference(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
 		return MainSettingsFragment.CONFIGURE_PROFILE.equals(preference.getKey()) && hostOfPreference instanceof MainSettingsFragment;
+	}
+
+	private static boolean isTopographyPreference(final Preference preference) {
+		return "map.configure.terrain.category".equals(preference.getKey());
 	}
 }
