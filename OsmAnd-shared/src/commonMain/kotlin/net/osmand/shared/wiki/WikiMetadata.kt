@@ -19,7 +19,6 @@ object WikiMetadata {
 			return getDescription(ENGLISH_LANGUAGE)
 		}
 
-
 		fun setDescription(description: String) {
 			return putDescription(ENGLISH_LANGUAGE, description)
 		}
@@ -41,6 +40,7 @@ object WikiMetadata {
 				localizedDescriptions[normalizedLanguage]?.takeIf { it.isNotBlank() }?.let { return it }
 			}
 			return localizedDescriptions[ENGLISH_LANGUAGE]?.takeIf { it.isNotBlank() }
+				?: localizedDescriptions.values.firstOrNull { it.isNotBlank() }
 		}
 	}
 
