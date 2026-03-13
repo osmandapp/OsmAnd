@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/catalogsCard"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="16dp"
+	app:cardBackgroundColor="?attr/list_background_color"
+	app:cardElevation="0dp"
+	app:shapeAppearanceOverlay="@style/Shape.Card12"
+	app:strokeWidth="0dp">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="16dp">
+
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/astro_catalogs"
+			android:textColor="?attr/colorOnSurface" />
+
+		<com.google.android.material.chip.ChipGroup
+			android:id="@+id/chipGroup"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="12dp"
+			app:chipSpacingHorizontal="10dp"
+			app:chipSpacingVertical="10dp"
+			app:singleLine="false" />
+
+	</LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

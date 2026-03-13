@@ -237,4 +237,9 @@ object AstroUtils {
 		}
 		return null
 	}
+
+	fun getAstroTypeName(context: Context, key: String): String {
+		val resId = context.resources.getIdentifier(key, "string", context.packageName)
+		return if (resId != 0) context.getString(resId) else key
+	}
 }

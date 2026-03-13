@@ -3152,7 +3152,7 @@
     <string name="rendering_attr_surface_ice_name">Led</string>
     <string name="rendering_attr_surface_mud_name">Blato</string>
     <string name="rendering_attr_surface_dirt_name">Prašina</string>
-    <string name="rendering_attr_surface_ground_name">Zemlja</string>
+    <string name="rendering_attr_surface_ground_name">Tlo</string>
     <string name="rendering_attr_surface_grass_paver_name">Popločani put</string>
     <string name="rendering_attr_surface_grass_name">Trava</string>
     <string name="rendering_attr_surface_sand_name">Pesak</string>
@@ -6032,4 +6032,26 @@
     <string name="share_favorite">Podeli omiljeno</string>
     <string name="copy_list">Kopiraj listu</string>
     <string name="intersection">Raskršće</string>
+    <string name="show_layout_grid_logs">Prikaži logove mreže</string>
+    <string name="astro_culmination">Kulminacija</string>
+    <string name="astro_alt_short">Alt</string>
+    <string name="astro_az_short">Az</string>
+    <string name="astro_today_visibility">Vidljivost danas</string>
+    <string name="astronomy_schedule">Raspored</string>
+    <string name="astro_catalogs">Katalozi</string>
+    <string name="astro_path">Staza</string>
+    <string name="astro_direction">Smer</string>
+    <string name="astro_locate">Pronađi</string>
+    <string name="astro_type_earth">Zemlja</string>
+    <string name="astro_type_star">Zvezda</string>
+    <string name="astro_type_galaxy">Galaksija</string>
+    <string name="astro_type_black_hole">Crna rupa</string>
+    <string name="astro_type_planet">Planeta</string>
+    <string name="astro_type_sun">Sunce</string>
+    <string name="astro_type_satellite">Satelit</string>
+    <string name="astro_type_nebula">Maglina</string>
+    <string name="astro_type_open_cluster">Otvoreni klaster</string>
+    <string name="astro_type_globular_cluster">Kuglasti klaster</string>
+    <string name="astro_type_galaxy_cluster">Galaksijski klaster</string>
+    <string name="astro_type_constellation">Sazvežđe</string>
 </resources>

@@ -5920,4 +5920,27 @@
     <string name="performance">Rendimiento</string>
     <string name="view_distance">Ver distancia</string>
     <string name="astronomy_plugin_name">Astronomía</string>
+    <string name="astro_culmination">Culminación</string>
+    <string name="astro_today_visibility">Visibilidad de hoy</string>
+    <string name="astro_alt_short">Alt</string>
+    <string name="astro_az_short">Az</string>
+    <string name="astro_catalogs">Catálogos</string>
+    <string name="astro_path">Camino</string>
+    <string name="astro_direction">Dirección</string>
+    <string name="astro_locate">Ubicar</string>
+    <string name="astro_type_earth">Tierra</string>
+    <string name="astro_type_star">Estrella</string>
+    <string name="astro_type_galaxy">Galaxia</string>
+    <string name="astro_type_black_hole">Agujero negro</string>
+    <string name="astro_type_planet">Planeta</string>
+    <string name="astro_type_sun">Sol</string>
+    <string name="astro_type_satellite">Satélite</string>
+    <string name="astro_type_nebula">Nebulosa</string>
+    <string name="astro_type_open_cluster">Grupo abierto</string>
+    <string name="astro_type_globular_cluster">Grupo globular</string>
+    <string name="astro_type_galaxy_cluster">Grupo de galaxia</string>
+    <string name="astro_type_constellation">Constelación</string>
+    <string name="show_layout_grid_logs">Mostrar registros de cuadrícula</string>
+    <string name="intersection">Intersección</string>
+    <string name="astronomy_schedule">Horario</string>
 </resources>
