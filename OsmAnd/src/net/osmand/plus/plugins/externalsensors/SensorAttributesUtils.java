@@ -94,8 +94,7 @@ public class SensorAttributesUtils {
 		boolean anyValueSet = attribute.hasAnySensorValueSet();
 		for (String tag : SENSOR_GPX_TAGS) {
 			if (!anyValueSet) {
-				float defaultValue = equalsToAny(tag, SENSOR_TAG_TEMPERATURE_W, SENSOR_TAG_TEMPERATURE_A) ? Float.NaN : 0;
-				float value = getPointAttribute(point, tag, defaultValue);
+				float value = getPointAttribute(point, tag, Float.NaN);
 				attribute.setAttributeValue(tag, value);
 			}
 			if (!analysis.hasData(tag) && attribute.hasValidValue(tag)) {
