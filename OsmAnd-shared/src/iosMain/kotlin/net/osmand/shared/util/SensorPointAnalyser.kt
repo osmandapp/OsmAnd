@@ -22,7 +22,7 @@ object SensorPointAnalyser {
 	)
 
 	fun onAnalysePoint(analysis: GpxTrackAnalysis, point: WptPt, attribute: PointAttributes) {
-		val anyValueSet = attribute.hasAnyValueSet()
+		val anyValueSet = attribute.hasAnySensorValueSet()
 		for (tag in SENSOR_GPX_TAGS) {
 			if (!anyValueSet) {
 				val defaultValue = if (KCollectionUtils.equalsToAny(tag, SENSOR_TAG_TEMPERATURE_W, SENSOR_TAG_TEMPERATURE_A)) Float.NaN else 0f

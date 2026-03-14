@@ -91,7 +91,7 @@ public class SensorAttributesUtils {
 	}
 
 	public static void onAnalysePoint(@NonNull GpxTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attribute) {
-		boolean anyValueSet = attribute.hasAnyValueSet();
+		boolean anyValueSet = attribute.hasAnySensorValueSet();
 		for (String tag : SENSOR_GPX_TAGS) {
 			if (!anyValueSet) {
 				float defaultValue = equalsToAny(tag, SENSOR_TAG_TEMPERATURE_W, SENSOR_TAG_TEMPERATURE_A) ? Float.NaN : 0;
