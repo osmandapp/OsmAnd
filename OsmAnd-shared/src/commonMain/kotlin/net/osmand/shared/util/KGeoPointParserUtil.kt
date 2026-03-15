@@ -509,7 +509,6 @@ object KGeoPointParserUtil {
         return null
     }
 
-    //TODO: diff?
     private fun parseAmapUri(uri: KUri, scheme: String, host: String): List<KGeoParsedPoint>? {
         /* amap (mis)uses the Fragment, which is not included in the Scheme Specific Part,
 		 * so instead we make a custom "everything but the Authority subString */
@@ -866,19 +865,17 @@ object KGeoPointParserUtil {
     }
 
     private fun parseS2ftid(ftid: String?): KLatLon? {
-        //TODO: implement later
-
-//        if (ftid != null && !ftid.isEmpty()) {
-//            try {
-//                val id = GeoPointParserSimpleS2.CellId.fromFtid(ftid!!)
-//                if (id.isValid()) {
-//                    val ll = id.toLatLon()
-//                    return KLatLon(ll[0], ll[1])
-//                }
-//            } catch (_: Exception) {
-//                return null
-//            }
-//        }
+        if (ftid != null && !ftid.isEmpty()) {
+            try {
+                val id = KGeoPointParserSimpleS2.CellId.fromFtid(ftid!!)
+                if (id.isValid()) {
+                    val ll = id.toLatLon()
+                    return KLatLon(ll[0], ll[1])
+                }
+            } catch (_: Exception) {
+                return null
+            }
+        }
         return null
     }
 

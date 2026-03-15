@@ -141,4 +141,10 @@ data class KUri(
             return value
         }
     }
+
+    override fun toString(): String {
+        return original
+    }
+
+    fun asString(): String = toString() // for shared lib
 }
