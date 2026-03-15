@@ -6066,4 +6066,18 @@
     <string name="astro_type_galaxy_cluster">Galaksamaso</string>
     <string name="astro_type_constellation">Stelfiguro</string>
     <string name="show_layout_grid_logs">Montri protokolojn pri krado</string>
+    <string name="no_objects_found">Neniu objekto trovita</string>
+    <string name="astro_search_info_solar_system">La Sunsistemo estas gravite ligita de la Suno kaj masoj orbitantaj ĝin – precipe ĝiaj ok planedoj, al kiuj apartenas la Tero.</string>
+    <string name="astro_search_info_constellations">Konstelacio estas areo sur la ĉielsfero en kiu aro da videblaj steloj formas percepteblan figuron.</string>
+    <string name="astro_search_info_stars">Stelo estas memlumanta astro konsistanta el plasmo, kunteniĝanta per sia forto de gravito.</string>
+    <string name="astro_search_info_nebulas">Nebulastro (nebulozo) estas grandspaca nubego el polvo kaj gaso en la spaco, kutime tie, kie novaj steloj naskiĝas.</string>
+    <string name="astro_search_info_star_clusters">Stelamaso estas aro da gravite ligitaj steloj, kiuj naskiĝis el komuna molekula nubo.</string>
+    <string name="astro_search_info_deep_sky">Al profund-ĉielaj objektoj apartenas galaksioj, nebulastroj kaj aliaj distancaj astroj.</string>
+    <string name="astro_go_to_map">Malfermi la ĉielmapon</string>
+    <string name="astro_my_data_no_favorites_title">Nenio tie ĉi</string>
+    <string name="astro_my_data_no_favorites_description">Aldonu objekton al la ŝatataj per ĝia kunteksta menuo.</string>
+    <string name="astro_my_data_no_daily_paths_title">Neniu taga spuro</string>
+    <string name="astro_my_data_no_daily_paths_description">Aktivigu tagan spuron por iu astro per ĝia kunteksta menuo kaj ĝi aperos tie ĉi.</string>
+    <string name="astro_my_data_no_directions_title">Neniu spurata astro</string>
+    <string name="astro_my_data_no_directions_description">Astra “direkto al” ebligas al vi havi videblan sageton al la elektita astro. Aktivigu la sageton per la kunteksta menuo.</string>
 </resources>

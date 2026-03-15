@@ -5909,4 +5909,7 @@
     <string name="astro_explore_watch_now">Δείτε τώρα</string>
     <string name="astro_search_input_hint">Εισαγωγή κειμένου</string>
     <string name="astro_my_data_no_daily_paths_title">Καμία ημερήσια διαδρομή</string>
+    <string name="astro_my_data_no_directions_title">Δεν ορίστηκαν κατευθύνσεις</string>
+    <string name="astro_search_in_location">Σε %1$s</string>
+    <string name="astro_search_type_in_location">%1$s σε %2$s</string>
 </resources>

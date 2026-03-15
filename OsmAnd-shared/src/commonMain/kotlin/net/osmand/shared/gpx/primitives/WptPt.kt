@@ -8,28 +8,66 @@ import net.osmand.shared.routing.RouteColorize
 import net.osmand.shared.util.KAlgorithms
 
 class WptPt : GpxExtensions {
-	var firstPoint = false
-	var lastPoint = false
+
 	var lat: Double = 0.0
 	var lon: Double = 0.0
-	var name: String? = null
-	var link: Link? = null
-	var category: String? = null
-	var desc: String? = null
-	var comment: String? = null
-	var time: Long = 0
-	var ele = Double.NaN
-	var speed = 0.0f
-	var hdop = Float.NaN
-	var heading = Float.NaN
-	var bearing = Float.NaN
-	var deleted = false
-	var speedColor = 0
-	var altitudeColor = 0
-	var slopeColor = 0
-	var colourARGB = 0
-	var distance = 0.0
+
+	var time: Long = 0L
+	var distance: Double = 0.0
+	var ele: Double = Double.NaN
+	var speed: Float = 0.0f
+	var hdop: Float = Float.NaN
+	var bearing: Float = Float.NaN
+	var heading: Float = Float.NaN
+
+	var colourARGB: Int = 0
+	var altitudeColor: Int = 0
+	var speedColor: Int = 0
+	var slopeColor: Int = 0
+
+	var deleted: Boolean = false
+	var firstPoint: Boolean = false
+	var lastPoint: Boolean = false
+
 	var attributes: PointAttributes? = null
+	private var metadata: WaypointMetadata? = null
+
+	var name: String?
+		get() = metadata?.name
+		set(value) = setMetadataValue(value) { name = it }
+
+	var desc: String?
+		get() = metadata?.desc
+		set(value) = setMetadataValue(value) { desc = it }
+
+	var category: String?
+		get() = metadata?.category
+		set(value) = setMetadataValue(value) { category = it }
+
+	var comment: String?
+		get() = metadata?.comment
+		set(value) = setMetadataValue(value) { comment = it }
+
+	var link: Link?
+		get() = metadata?.link
+		set(value) = setMetadataValue(value) { link = it }
+
+	private fun ensureMetadata() = metadata ?: WaypointMetadata().also { metadata = it }
+
+	private inline fun <T> setMetadataValue(value: T?, setter: WaypointMetadata.(T?) -> Unit) {
+		val data = metadata
+		if (value != null || data != null) {
+			(data ?: ensureMetadata()).setter(value)
+		}
+	}
+
+	private class WaypointMetadata {
+		var name: String? = null
+		var desc: String? = null
+		var category: String? = null
+		var comment: String? = null
+		var link: Link? = null
+	}
 
 	constructor()
 

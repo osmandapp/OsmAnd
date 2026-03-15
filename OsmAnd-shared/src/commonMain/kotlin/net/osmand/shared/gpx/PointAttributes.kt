@@ -135,7 +135,13 @@ class PointAttributes(
 		set(value) = setVehicleValue(value) { throttlePosition = it }
 
 	fun hasAnyValueSet(): Boolean = !speed.isNaN() || !elevation.isNaN() ||
-			sensorData?.hasAnyValueSet() == true || devData?.hasAnyValueSet() == true || vehicleData?.hasAnyValueSet() == true
+			hasAnySensorValueSet() || hasAnyDevValueSet() || hasAnyVehicleValueSet()
+
+	fun hasAnyDevValueSet(): Boolean = devData?.hasAnyValueSet() == true
+
+	fun hasAnySensorValueSet(): Boolean = sensorData?.hasAnyValueSet() == true
+
+	fun hasAnyVehicleValueSet(): Boolean = vehicleData?.hasAnyValueSet() == true
 
 	fun getAttributeValue(tag: String): Float? =
 		when (tag) {
