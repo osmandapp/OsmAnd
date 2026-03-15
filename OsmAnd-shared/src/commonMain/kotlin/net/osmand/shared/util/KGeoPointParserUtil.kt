@@ -676,6 +676,14 @@ object KGeoPointParserUtil {
         if (params.containsKey("saddr")) {
             return listOf(KGeoParsedPoint(params["saddr"]))
         }
+
+        //"coordinate": "50.4323371182397,30.515658259391785"
+        if (params.containsKey("coordinate")) {
+            val latlon = params["coordinate"]!!.split(",")
+            if (latlon.size > 1) {
+                return listOf(KGeoParsedPoint(latlon[0], latlon[1]))
+            }
+        }
         return null
     }
 
