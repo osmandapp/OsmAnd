@@ -6084,4 +6084,28 @@
     <string name="astro_catalogs">Kataloge</string>
     <string name="show_layout_grid_logs">Gitternetzverlauf anzeigen</string>
     <string name="astro_path">Bahn</string>
+    <string name="astro_explore_watch_now">Jetzt ansehen</string>
+    <string name="astro_explore_deep_sky_subtitle">Galaxien, Galaxienhaufen, Schwarze Löcher</string>
+    <string name="no_objects_found">Keine Objekte gefunden</string>
+    <string name="astro_go_to_map">Zur Karte gehen</string>
+    <string name="astro_my_data_no_favorites_title">Hier gibt es nichts</string>
+    <plurals name="astro_catalog_objects_count">
+        <item quantity="one">%d Objekt</item>
+        <item quantity="other">%d Objekte</item>
+    </plurals>
+    <string name="astro_search_constellation_with_code">Konstellation (%1$s)</string>
+    <string name="astro_search_type_in_location">%1$s in %2$s</string>
+    <string name="astro_search_in_location">In %1$s</string>
+    <string name="astro_search_rises_tomorrow">↗ %1$s %2$s</string>
+    <string name="astro_search_sets_tomorrow">↘ %1$s %2$s</string>
+    <string name="astro_search_never_rises">↓ Geht nie auf</string>
+    <string name="astro_search_always_up">↑ Immer oben</string>
+    <string name="astro_search_sets_at">↘ Geht unter %1$s</string>
+    <string name="astro_search_rises_at">↗ Geht auf %1$s</string>
+    <string name="astro_filter_visible_now">Jetzt sichtbar</string>
+    <string name="astro_filter_show_all">Alles anzeigen</string>
+    <string name="astro_search_input_hint">Text eingeben</string>
+    <string name="astro_explore_my_data">Meine Daten</string>
+    <string name="astro_explore_schedule_subtitle">Bevorstehende astronomische Ereignisse</string>
+    <string name="obd_alt_battery_voltage_desc">Zeigt den Spannungspegel am OBD-Adapter an</string>
 </resources>

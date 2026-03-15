@@ -6018,7 +6018,7 @@
     <string name="astro_sort_sets_soonest">Se couche le plus tôt</string>
     <string name="astro_sort_rises_soonest">Se lève le plus tôt</string>
     <string name="astro_sort_faintest_first">Le moins lumineux en premier</string>
-    <string name="astro_sort_brightest_first">Le plus brillant en premier</string>
+    <string name="astro_sort_brightest_first">Le plus lumineux en premier</string>
     <string name="astro_search_empty_description">Essayez de modifier les filtres ou l\'heure d\'observation.</string>
     <string name="astro_search_input_hint">Saisir un texte</string>
     <string name="astro_explore_deep_sky_subtitle">Galaxie, amas de galaxies, trous noirs</string>
