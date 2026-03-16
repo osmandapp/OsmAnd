@@ -113,12 +113,24 @@ android {
 	}
 }
 
-clean.doFirst {
+clean {
 	delete fileTree('assets') {
 		include '*.obf'
 		include 'fonts/**'
 		include 'voice/**'
+		include 'astro/stars.db'
+		include 'bundled_assets.json'
+		include 'proj.db'
+		include 'color-palette/**'
+		include 'poi_categories.json'
+		include 'activities.json'
+		include 'models/**'
 	}
+	delete fileTree(dir: 'res/drawable', includes: [
+			'h_*.png', 'h_*.xml',
+			'mm_*.png', 'mm_*.xml',
+			'mx_*.png', 'mx_*.xml'
+	])
 }
 
 tasks.register('validateTranslations') {
