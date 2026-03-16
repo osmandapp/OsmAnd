@@ -2,6 +2,7 @@ package net.osmand.plus.search;
 
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,12 +19,14 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import net.osmand.data.Amenity;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchWikiItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.PicassoUtils;
@@ -51,7 +54,7 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 	public final boolean nightMode;
 
 	public WikiItemViewHolder(@NonNull View view,
-			@NonNull UpdateLocationViewCache locationViewCache, boolean nightMode) {
+	                          @NonNull UpdateLocationViewCache locationViewCache, boolean nightMode) {
 		super(view);
 
 		this.app = AndroidUtils.getApp(view.getContext());
@@ -70,7 +73,7 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindItem(@NonNull QuickSearchWikiItem item, @Nullable PoiUIFilter poiUIFilter,
-			boolean useMapCenter) {
+	                     boolean useMapCenter) {
 		String address = item.getAddress();
 		String descr = item.getDescription();
 		if (description != null) {
@@ -81,7 +84,7 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 				description.setVisibility(View.GONE);
 			}
 		}
-		title.setText(item.getName());
+		title.setText(item.getTitle());
 		type.setText(item.getTypeName());
 
 		Drawable drawable = item.getIcon();
@@ -117,30 +120,27 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 			}
 		}
 
-		boolean shouldLayoutWithImages = poiUIFilter != null && poiUIFilter.showLayoutWithImages();
-		AndroidUiHelper.updateVisibility(imageViewContainer, shouldLayoutWithImages);
-		if (shouldLayoutWithImages) {
-			String wikiImageUrl = item.getImage();
-			if (image.getTag() != wikiImageUrl) {
-				image.setTag(wikiImageUrl);
-				if (wikiImageUrl != null) {
-					RequestCreator creator = Picasso.get().load(wikiImageUrl);
-					creator.into(image, new Callback() {
-						@Override
-						public void onSuccess() {
-							AndroidUiHelper.updateVisibility(image, true);
-							AndroidUiHelper.updateVisibility(errorImageView, false);
-							PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
-						}
+		String wikiImageUrl = item.getImage();
+		if (image.getTag() != wikiImageUrl) {
+			image.setTag(wikiImageUrl);
+			AndroidUiHelper.updateVisibility(imageViewContainer, wikiImageUrl != null);
+			if (wikiImageUrl != null) {
+				RequestCreator creator = Picasso.get().load(wikiImageUrl);
+				creator.into(image, new Callback() {
+					@Override
+					public void onSuccess() {
+						AndroidUiHelper.updateVisibility(image, true);
+						AndroidUiHelper.updateVisibility(errorImageView, false);
+						PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
+					}
 
-						@Override
-						public void onError(Exception e) {
-							AndroidUiHelper.updateVisibility(image, false);
-							AndroidUiHelper.updateVisibility(errorImageView, true);
-							PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, false);
-						}
-					});
-				}
+					@Override
+					public void onError(Exception e) {
+						AndroidUiHelper.updateVisibility(image, false);
+						AndroidUiHelper.updateVisibility(errorImageView, true);
+						PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, false);
+					}
+				});
 			}
 		}
 		QuickSearchListAdapter.updateCompass(itemView, item, locationViewCache, useMapCenter);

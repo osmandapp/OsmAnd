@@ -27,6 +27,7 @@ import net.osmand.shared.api.SettingsAPI
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
+import net.osmand.shared.gpx.SmartFolderHelper
 import net.osmand.shared.io.KFile
 import net.osmand.shared.settings.enums.AltitudeMetrics
 import net.osmand.shared.settings.enums.MetricsConstants
@@ -118,6 +119,8 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 
 	override fun getTrackPointsAnalyser(): TrackPointsAnalyser? =
 		PluginsHelper.getTrackPointsAnalyser()
+
+	override fun getSmartFolderHelper(): SmartFolderHelper = app.smartFolderHelper
 
 	override fun searchNearestCityName(latLon: KLatLon, callback: CityNameCallback) {
 		while (app.isApplicationInitializing) {

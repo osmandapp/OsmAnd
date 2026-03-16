@@ -36,6 +36,7 @@ object WikiCoreHelper {
 
 	const val OSMAND_API_ENDPOINT = "https://osmand.net/api/"
 	const val OSMAND_SEARCH_ENDPOINT = "https://osmand.net/search/"
+	private const val GET_PHOTOS_ACTION = "get-photos?"
 	private const val WIKI_PLACE_ACTION = "wiki_place?"
 	private const val GET_WIKI_DATA_ACTION = "get-wiki-data?"
 	private const val DEPT_CAT_LIMIT = 1
@@ -109,7 +110,78 @@ object WikiCoreHelper {
 		return wikiImages
 	}
 
-	fun getImagesFromJson(json: String, wikiImages: MutableList<WikiImage>): List<WikiImage> {
+	fun getAstroImageList(
+		wikidataId: String,
+		listener: NetworkResponseListener? = null
+	): List<WikiImage> {
+
+		var wikiImages: List<WikiImage> = ArrayList()
+		val images: MutableList<OsmandApiFeatureData> = ArrayList()
+
+		if (USE_OSMAND_WIKI_API) {
+			val params = mutableListOf<String>()
+			wikidataId.takeIf { it.isNotEmpty() }?.let {
+				params.add("wikidataId=${UrlEncoder.encode(it)}")
+			}
+
+			if (params.isNotEmpty()) {
+				val urlParams = params.joinToString("&")
+				val finalUrl = "$OSMAND_SEARCH_ENDPOINT$GET_PHOTOS_ACTION$urlParams"
+				getNearbyImagesOsmAndAPIRequest(finalUrl, images, listener)
+
+				wikiImages = parseAstroImages(images)
+			}
+		}
+		return wikiImages
+	}
+
+	fun parseAstroImages(images: MutableList<OsmandApiFeatureData>): List<WikiImage> {
+		val wikiImages = ArrayList<WikiImage>()
+		for (data in images) {
+			if (data.properties != null && data.properties.imageTitle != null) {
+				val url = data.properties.imageTitle
+				val decodedUrl = UrlEncoder.decode(url)
+
+				val imageFileName = KAlgorithms.getFileWithoutDirs(decodedUrl)
+				val wikiImage = WikiImage(imageFileName, url, url, url, url)
+				val mediaIdLong = data.properties.mediaId?.toLongOrNull() ?: -1L
+				wikiImage.setMediaId(mediaIdLong)
+				val metadata = wikiImage.metadata
+				if (!data.properties.date.isNullOrEmpty()) {
+					metadata.date = data.properties.date
+				}
+				if (!data.properties.license.isNullOrEmpty()) {
+					metadata.license = data.properties.license
+				}
+				if (!data.properties.author.isNullOrEmpty()) {
+					metadata.author = data.properties.author
+				}
+				parseDescription(metadata, data.properties.description)
+
+				wikiImages.add(wikiImage)
+			}
+		}
+		return wikiImages
+	}
+
+	fun getAstroImagesFromJson(json: String): List<WikiImage> {
+		return try {
+			val images: MutableList<OsmandApiFeatureData> = ArrayList()
+
+			val response = jsonParser.decodeFromString(OsmandAPIFeaturesResponse.serializer(), json)
+			response.features?.let { images.addAll(it) }
+
+			parseAstroImages(images)
+		} catch (e: Exception) {
+			LOG.error("Failed to parse JSON from string", e)
+			ArrayList()
+		}
+	}
+
+	fun getImagesFromJson(
+		json: String,
+		wikiImages: MutableList<WikiImage>
+	): List<WikiImage> {
 		return try {
 			val response = jsonParser.decodeFromString(OsmandAPIResponseV2.serializer(), json)
 			createWikiImages(response, wikiImages)
@@ -121,9 +193,10 @@ object WikiCoreHelper {
 
 	private fun getNearbyImagesOsmAndAPIRequest(
 		url: String,
-		wikiImages: MutableList<OsmandApiFeatureData>
+		wikiImages: MutableList<OsmandApiFeatureData>,
+		listener: NetworkResponseListener? = null
 	) {
-		val response = sendWikipediaApiRequest<OsmandAPIFeaturesResponse>(url, useGzip = true)
+		val response = sendWikipediaApiRequest<OsmandAPIFeaturesResponse>(url, useGzip = true, listener)
 		response?.features?.let { wikiImages.addAll(it) }
 	}
 
@@ -204,11 +277,35 @@ object WikiCoreHelper {
 		image.getString("date")?.let { metadata.date = it }
 		image.getString("author")?.let { metadata.author = it }
 		image.getString("license")?.let { metadata.license = it }
+		parseDescription(metadata, image.getString("description"))
 
 		val mediaIdLong = image.getString("mediaId")?.toLongOrNull() ?: -1L
 		wikiImage.setMediaId(mediaIdLong)
 
 		return wikiImage
+	}
+
+	private fun parseDescription(metadata: WikiMetadata.Metadata, description: String?) {
+		if (description.isNullOrBlank()) {
+			return
+		}
+
+		val trimmedDescription = description.trim()
+		if (!trimmedDescription.startsWith("{")) {
+			metadata.putDescription(WikiMetadata.ENGLISH_LANGUAGE, trimmedDescription)
+			return
+		}
+
+		try {
+			val descriptions = jsonParser.decodeFromString<JsonObject>(trimmedDescription)
+			descriptions.entries.forEach { (language, value) ->
+				(value as? JsonPrimitive)?.contentOrNull?.takeIf { it.isNotBlank() }?.let {
+					metadata.putDescription(language, it)
+				}
+			}
+		} catch (e: Exception) {
+			LOG.error(e.message, null)
+		}
 	}
 
 	private fun parseImageDataFromFile(imageUrl: String): WikiImage? {
@@ -299,6 +396,12 @@ object WikiCoreHelper {
 		val osmtype: Int = 0,
 		val lang: String? = null,
 		val labelsJson: String? = null,
+		val imageTitle: String? = null,
+		val date: String? = null,
+		val author: String? = null,
+		val license: String? = null,
+		val description: String? = null,
+		val mediaId: String? = null,
 	)
 
 	@Serializable
@@ -325,7 +428,7 @@ object WikiCoreHelper {
 	@Serializable
 	data class Categorymember(val title: String? = null)
 
-	interface NetworkResponseListener {
+	fun interface NetworkResponseListener {
 		fun onGetRawResponse(response: String)
 	}
 }

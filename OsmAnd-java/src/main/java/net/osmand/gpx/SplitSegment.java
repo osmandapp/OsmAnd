@@ -58,9 +58,9 @@ class SplitSegment {
 
 	private WptPt approx(WptPt w1, WptPt w2, double cf) {
 		long time = value(w1.time, w2.time, 0, cf);
-		double speed = value(w1.speed, w2.speed, 0, cf);
+		float speed = value(w1.speed, w2.speed, 0, cf);
 		double ele = value(w1.ele, w2.ele, 0, cf);
-		double hdop = value(w1.hdop, w2.hdop, 0, cf);
+		float hdop = value(w1.hdop, w2.hdop, 0, cf);
 		double lat = value(w1.lat, w2.lat, -360, cf);
 		double lon = value(w1.lon, w2.lon, -360, cf);
 		return new WptPt(lat, lon, time, ele, speed, hdop);
@@ -73,6 +73,15 @@ class SplitSegment {
 			return vl;
 		}
 		return vl + cf * (vl2 - vl);
+	}
+
+	private float value(float vl, float vl2, float none, double cf) {
+		if (vl == none || Float.isNaN(vl)) {
+			return vl2;
+		} else if (vl2 == none || Float.isNaN(vl2)) {
+			return vl;
+		}
+		return (float) (vl + cf * (vl2 - vl));
 	}
 
 	private long value(long vl, long vl2, long none, double cf) {

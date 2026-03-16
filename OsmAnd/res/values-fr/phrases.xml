@@ -197,7 +197,7 @@
     <string name="poi_craft_key_cutter">Service de reproduction de clefs</string>
     <string name="poi_kindergarten">Jardin d\'enfants</string>
     <string name="poi_kiosk">Kiosque</string>
-    <string name="poi_korfbal">Korfball</string>
+    <string name="poi_korfball">Korfball</string>
     <string name="poi_landfill">Décharge</string>
     <string name="poi_landmark">Point de repère</string>
     <string name="poi_laundry">Laverie</string>
@@ -2928,8 +2928,8 @@
     <string name="poi_map_size_region">Taille de carte : région</string>
     <string name="poi_post_housenumber">Numéro de maison</string>
     <string name="poi_ref_post">Code postal</string>
-    <string name="poi_climbing_sport_yes">Sport : oui</string>
-    <string name="poi_climbing_sport_no">Sport : non</string>
+    <string name="poi_climbing_sport_yes">Sportive : oui</string>
+    <string name="poi_climbing_sport_no">Sportive : non</string>
     <string name="poi_toilets_disposal_flush">Évacuation des toilettes : chasse d\'eau</string>
     <string name="poi_toilets_disposal_pitlatrine">Évacuation des toilettes : latrine à fosse simple</string>
     <string name="poi_toilets_disposal_chemical">Évacuation des toilettes : chimique</string>
@@ -3093,12 +3093,12 @@
     <string name="poi_water_place_access_family">Famille</string>
     <string name="poi_scooter_yes">Scooter : oui</string>
     <string name="poi_scooter_no">Scooter : non</string>
-    <string name="poi_climbing_trad_yes">Traditionnel : oui</string>
-    <string name="poi_climbing_trad_no">Traditionnel : non</string>
-    <string name="poi_climbing_ice_yes">Glace : oui</string>
-    <string name="poi_climbing_ice_no">Glace : non</string>
-    <string name="poi_climbing_mixed_yes">Mélangé : oui</string>
-    <string name="poi_climbing_mixed_no">Mélangé : non</string>
+    <string name="poi_climbing_trad_yes">Traditionnelle : oui</string>
+    <string name="poi_climbing_trad_no">Traditionnelle : non</string>
+    <string name="poi_climbing_ice_yes">Glaciaire : oui</string>
+    <string name="poi_climbing_ice_no">Glaciaire : non</string>
+    <string name="poi_climbing_mixed_yes">Mixte : oui</string>
+    <string name="poi_climbing_mixed_no">Mixte : non</string>
     <string name="poi_shop_boat">Shipchandler</string>
     <string name="poi_socket_type1_yes">Type 1</string>
     <string name="poi_socket_type2_yes">Type 2</string>
@@ -3318,9 +3318,9 @@
     <string name="poi_counselling_no">Conseils : non</string>
     <string name="poi_office_physician">Cabinet de médecin</string>
     <string name="poi_office_therapist">Bureau de thérapeute</string>
-    <string name="poi_office_podologist">Cabinet du podologue</string>
-    <string name="poi_office_healer">Bureau du guérisseur</string>
-    <string name="poi_office_psychologist">Bureau du psychologue</string>
+    <string name="poi_office_podologist">Cabinet de podologue</string>
+    <string name="poi_office_healer">Bureau de guérisseur</string>
+    <string name="poi_office_psychologist">Bureau de psychologue</string>
     <string name="poi_office_nursing_service">Service de soins infirmiers</string>
     <string name="poi_office_midwife">Cabinet de sage-femme</string>
     <string name="poi_fire_hydrant_diameter">Diamètre de la bouche d\'incendie</string>
@@ -3338,7 +3338,7 @@
     <string name="poi_cuisine_savory_pancakes">Crêpes salées</string>
     <string name="poi_animal_keeping_type_open_stable">Type : écurie ouverte</string>
     <string name="poi_tower_construction_lattice">Construction : treillis</string>
-    <string name="poi_energy_supplier">Bureau des fournisseurs d\'énergie</string>
+    <string name="poi_energy_supplier">Bureau d\'un fournisseur d\'énergie</string>
     <string name="poi_resort_kids_camp">Camp pour enfants</string>
     <string name="poi_zoo_petting_zoo">Zoo pour enfants</string>
     <string name="poi_zoo_wildlife_park">Parc animalier</string>
@@ -3432,8 +3432,8 @@
     <string name="poi_charging_station">Station de recharge</string>
     <string name="poi_depot">Dépôt</string>
     <string name="poi_money_transfer">Transfert d’argent</string>
-    <string name="poi_climbing_deepwater_yes">Solo en eau profonde : oui</string>
-    <string name="poi_climbing_deepwater_no">Solo en eau profonde : non</string>
+    <string name="poi_climbing_deepwater_yes">Psicobloc : oui</string>
+    <string name="poi_climbing_deepwater_no">Psicobloc : non</string>
     <string name="poi_climbing_length">Longueur d\'escalade</string>
     <string name="poi_climbing_length_min">Longueur minimum d\'escalade</string>
     <string name="poi_climbing_length_max">Longueur maxi d\'escalade</string>
@@ -3478,8 +3478,8 @@
     <string name="poi_climbing_boulder_no">Bloc : non</string>
     <string name="poi_climbing_toprope_yes">Moulinette : oui</string>
     <string name="poi_climbing_toprope_no">Moulinette : non</string>
-    <string name="poi_climbing_multipitch_yes">Voie en plusieurs longueurs : oui</string>
-    <string name="poi_climbing_multipitch_no">Voie en plusieurs longueurs : non</string>
+    <string name="poi_climbing_multipitch_yes">Voies en plusieurs longueurs : oui</string>
+    <string name="poi_climbing_multipitch_no">Voies en plusieurs longueurs : non</string>
     <string name="poi_climbing_bolted_yes">Mousquetons fixés : oui</string>
     <string name="poi_climbing_bolted_no">Mousquetons fixés : non</string>
     <string name="poi_circumference">Circonférence</string>
@@ -3763,7 +3763,7 @@
     <string name="poi_shop_security">Magasin d\'équipements de sécurité</string>
     <string name="poi_dive_centre">Centre de plongée</string>
     <string name="poi_sms">SMS</string>
-    <string name="poi_covered_booth">Cabine</string>
+    <string name="poi_covered_booth">Oui</string>
     <string name="poi_booth">Type de cabine</string>
     <string name="poi_tactile_paving_contrasted">Contrasté</string>
     <string name="poi_tactile_paving_primitive">Primitif</string>
@@ -4823,7 +4823,7 @@
     <string name="poi_us_maps_recreation_area_activity_group_camping">Camping de groupe</string>
     <string name="poi_us_maps_recreation_area_activity_ohv_trail_riding">Randonnée en VTT</string>
     <string name="poi_us_maps_recreation_area_open_status_open_2">Statut de l\'accès à la zone de loisirs (2) : ouvert</string>
-    <string name="poi_us_maps_recreation_area_facility_cabin">Cabine</string>
+    <string name="poi_us_maps_recreation_area_facility_cabin">Cabane</string>
     <string name="poi_property_management">Bureau de gestion immobilière</string>
     <string name="poi_us_maps_recreation_area_activity_hang_gliding">Deltaplane</string>
     <string name="poi_us_maps_recreation_area_activity_beachcombing">Pêche à pied</string>
@@ -5027,7 +5027,7 @@
     <string name="poi_bulgarian_orthodox_church">Église orthodoxe bulgare</string>
     <string name="poi_african_methodist_episcopal_church">Église épiscopale méthodiste africaine</string>
     <string name="poi_construction_company">Entreprise de construction</string>
-    <string name="poi_union">Bureau du syndicat</string>
+    <string name="poi_union">Bureau de syndicat</string>
     <string name="poi_courier">Bureau de messagerie</string>
     <string name="poi_surveyor">Bureau d\'arpentage</string>
     <string name="poi_office_university">Bureau de l\'université</string>
@@ -5165,4 +5165,14 @@
     <string name="poi_sample_collection_blood">Sang</string>
     <string name="poi_yoga">Yoga</string>
     <string name="poi_memorial_type">Type de mémorial</string>
+    <string name="poi_covered_booth_filter">Cabine</string>
+    <string name="poi_rapids_grade_1">1 (facile)</string>
+    <string name="poi_rapids_grade_2">2 (novice)</string>
+    <string name="poi_rapids_grade_3">3 (intermédiaire)</string>
+    <string name="poi_rapids_grade_4">4 (avancé)</string>
+    <string name="poi_rapids_grade_5">5 (expert)</string>
+    <string name="poi_rapids_grade_6">6 (extrême)</string>
+    <string name="poi_rapids_grade_x">X (impraticable)</string>
+    <string name="poi_rapids_filter">Niveau de rapides</string>
+    <string name="poi_rapids_grade_0">0 (eau calme)</string>
 </resources>

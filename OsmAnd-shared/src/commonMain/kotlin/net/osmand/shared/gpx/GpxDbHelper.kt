@@ -355,7 +355,7 @@ object GpxDbHelper : GpxReaderAdapter {
 
 	private fun putGpxDataItemToSmartFolder(item: GpxDataItem) {
 		val trackItem = TrackItem(item.file).apply { dataItem = item }
-		SmartFolderHelper.addTrackItemToSmartFolder(trackItem)
+		PlatformUtil.getOsmAndContext().getSmartFolderHelper().addTrackItemToSmartFolder(trackItem)
 	}
 
 	override fun onProgressUpdate(vararg dataItems: GpxDataItem) {

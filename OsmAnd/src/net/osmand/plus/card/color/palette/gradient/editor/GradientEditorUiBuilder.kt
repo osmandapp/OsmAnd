@@ -7,6 +7,8 @@ import net.osmand.plus.card.color.palette.gradient.editor.data.*
 import net.osmand.shared.ColorPalette
 import net.osmand.shared.palette.domain.GradientPoint
 import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.Locale
 
 class GradientEditorUiBuilder(
 	private val app: OsmandApplication,
@@ -17,7 +19,7 @@ class GradientEditorUiBuilder(
 		const val NO_DATA_STEP_ID = "no_data_step"
 	}
 
-	private val decimalFormat = DecimalFormat("0.#####")
+	private val decimalFormat = DecimalFormat("0.#####", DecimalFormatSymbols(Locale.US))
 
 	/**
 	 * Builds static UI data (Toolbar title, subtitle) that rarely changes.
@@ -73,11 +75,13 @@ class GradientEditorUiBuilder(
 			})
 
 			// B. Add "No Data" step
-			add(GradientStepData(
-				id = NO_DATA_STEP_ID,
-				label = app.getString(R.string.gpx_logging_no_data),
-				point = noDataPoint
-			))
+			if (fileType.supportsNoData) {
+				add(GradientStepData(
+					id = NO_DATA_STEP_ID,
+					label = app.getString(R.string.gpx_logging_no_data),
+					point = noDataPoint
+				))
+			}
 		}
 
 		val isNoDataSelected = selectedIndex == points.size

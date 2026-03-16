@@ -8,6 +8,11 @@ import androidx.annotation.Nullable;
 
 public class PopUpMenuItem {
 
+	public enum CompoundButtonType {
+		RADIO,
+		CHECKBOX
+	}
+
 	private final CharSequence title;
 	@ColorInt
 	private final Integer titleColor;
@@ -16,8 +21,11 @@ public class PopUpMenuItem {
 	private final OnPopUpMenuItemClickListener onClickListener;
 	@ColorInt
 	private final Integer compoundBtnColor;
+	private final CompoundButtonType compoundButtonType;
 	private final boolean selected;
 	private final boolean showTopDivider;
+	private final boolean titleBold;
+	private final boolean dismissOnClick;
 	private final Object tag;
 
 	private PopUpMenuItem(CharSequence title,
@@ -26,8 +34,11 @@ public class PopUpMenuItem {
 	                      Drawable icon,
 	                      OnPopUpMenuItemClickListener onClickListener,
 	                      Integer compoundBtnColor,
+	                      CompoundButtonType compoundButtonType,
 	                      boolean selected,
 	                      boolean showTopDivider,
+	                      boolean titleBold,
+	                      boolean dismissOnClick,
 	                      Object tag) {
 		this.title = title;
 		this.titleColor = titleColor;
@@ -35,8 +46,11 @@ public class PopUpMenuItem {
 		this.icon = icon;
 		this.onClickListener = onClickListener;
 		this.compoundBtnColor = compoundBtnColor;
+		this.compoundButtonType = compoundButtonType;
 		this.selected = selected;
 		this.showTopDivider = showTopDivider;
+		this.titleBold = titleBold;
+		this.dismissOnClick = dismissOnClick;
 		this.tag = tag;
 	}
 
@@ -71,6 +85,11 @@ public class PopUpMenuItem {
 		return compoundBtnColor;
 	}
 
+	@Nullable
+	public CompoundButtonType getCompoundButtonType() {
+		return compoundButtonType;
+	}
+
 	public boolean isSelected() {
 		return selected;
 	}
@@ -79,12 +98,20 @@ public class PopUpMenuItem {
 		return showTopDivider;
 	}
 
+	public boolean isTitleBold() {
+		return titleBold;
+	}
+
+	public boolean shouldDismissOnClick() {
+		return dismissOnClick;
+	}
+
 	public Object getTag() {
 		return tag;
 	}
 
 	public boolean hasCustomization() {
-		return isShowCompoundBtn() || getTitleColor() != null;
+		return isShowCompoundBtn() || getTitleColor() != null || titleBold;
 	}
 
 	public static class Builder {
@@ -92,13 +119,16 @@ public class PopUpMenuItem {
 		private CharSequence title;
 		@ColorInt
 		private Integer titleColor;
-		private Integer titleSize;
+		private Integer titleSize = 16; //SP
 		private Drawable icon;
 		private OnPopUpMenuItemClickListener onClickListener;
 		@ColorInt
 		private Integer compoundBtnColor;
+		private CompoundButtonType compoundButtonType;
 		private boolean selected;
 		private boolean showTopDivider;
+		private boolean titleBold;
+		private boolean dismissOnClick = true;
 		private Object tag;
 
 		public Builder(Context ctx) {
@@ -120,8 +150,13 @@ public class PopUpMenuItem {
 			return this;
 		}
 
-		public Builder setTitleSize(Integer titleSize) {
-			this.titleSize = titleSize;
+		/**
+		 * Sets title text size in SP units.
+		 *
+		 * @param titleSizeSp text size in scaled pixels (SP)
+		 */
+		public Builder setTitleSize(Integer titleSizeSp) {
+			this.titleSize = titleSizeSp;
 			return this;
 		}
 
@@ -137,6 +172,13 @@ public class PopUpMenuItem {
 
 		public Builder showCompoundBtn(int compoundBtnColor) {
 			this.compoundBtnColor = compoundBtnColor;
+			this.compoundButtonType = CompoundButtonType.RADIO;
+			return this;
+		}
+
+		public Builder showCompoundBtn(int compoundBtnColor, @Nullable CompoundButtonType compoundButtonType) {
+			this.compoundBtnColor = compoundBtnColor;
+			this.compoundButtonType = compoundButtonType;
 			return this;
 		}
 
@@ -150,6 +192,16 @@ public class PopUpMenuItem {
 			return this;
 		}
 
+		public Builder setTitleBold(boolean titleBold) {
+			this.titleBold = titleBold;
+			return this;
+		}
+
+		public Builder setDismissOnClick(boolean dismissOnClick) {
+			this.dismissOnClick = dismissOnClick;
+			return this;
+		}
+
 		public Builder setTag(Object tag) {
 			this.tag = tag;
 			return this;
@@ -157,7 +209,8 @@ public class PopUpMenuItem {
 
 		public PopUpMenuItem create() {
 			return new PopUpMenuItem(title, titleColor, titleSize, icon,
-					onClickListener, compoundBtnColor, selected, showTopDivider, tag);
+					onClickListener, compoundBtnColor, compoundButtonType, selected,
+					showTopDivider, titleBold, dismissOnClick, tag);
 		}
 	}
 }

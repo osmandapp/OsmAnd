@@ -186,6 +186,10 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		mainViewBoundsChangeListener = new BoundsChangeListener(displayPositionManager, false);
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
+		if (isForceCenterRequired()) {
+			this.centered = true;
+		}
+
 		DialogManager dialogManager = mapActivity.getApp().getDialogManager();
 		GalleryController controller = (GalleryController) dialogManager.findController(GalleryController.PROCESS_ID);
 		if (controller == null) {
@@ -970,7 +974,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		}
 
 		applyPosY(currentY, needCloseMenu, needMapAdjust, currentMenuState, newMenuState, 0);
-		updateNavBarColor();
+		updateNavigationBarColor();
 	}
 
 	private void restoreCustomMapRatio() {
@@ -1439,7 +1443,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 			bottomLayout.removeAllViews();
 			buildBottomView();
 
-			if (centered) {
+			if (centered || isForceCenterRequired()) {
 				this.initLayout = true;
 				this.centered = true;
 			}
@@ -1449,6 +1453,11 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 			updateButtonsAndProgress();
 			runLayoutListener();
 		}
+	}
+
+	private boolean isForceCenterRequired() {
+		MapActivity mapActivity = getMapActivity();
+		return mapActivity != null && mapActivity.getMapLayers().getMeasurementToolLayer().isInMeasurementMode();
 	}
 
 	private void createTransportBadges() {
@@ -2129,6 +2138,15 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 	}
 
 	private LatLon getAdjustedMarkerLocation(int y, LatLon reqMarkerLocation, boolean center, int zoom) {
+		// Skip manual padding calculations if the map focus is already shifted from the physical center.
+		// This prevents a double-shift and ensures the marker aligns perfectly with the visual center.
+		if (center) {
+			PointF ratio = displayPositionManager.getMapRatio();
+			if (Math.abs(ratio.x - 0.5f) > 0.01f || Math.abs(ratio.y - 0.5f) > 0.01f) {
+				return reqMarkerLocation;
+			}
+		}
+
 		double markerLat = reqMarkerLocation.getLatitude();
 		double markerLon = reqMarkerLocation.getLongitude();
 		RotatedTileBox box = map.getRotatedTileBox();

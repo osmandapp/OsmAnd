@@ -30,6 +30,7 @@ public class MapPoiTypes {
 	public static final String WIKI_LANG = "wiki_lang";
 	public static final String WIKI_PLACE = "wiki_place";
 	public static final String OSM_WIKI_CATEGORY = "osmwiki";
+	public static final String ADMINISTRATIVE_CATEGORY = "administrative";
 	public static final String SPEED_CAMERA = "speed_camera";
 
 	public static final String ROUTES = "routes";
@@ -929,15 +930,22 @@ public class MapPoiTypes {
 	}
 
 	public String getPoiTranslation(String keyName) {
+		return getPoiTranslation(keyName, true);
+	}
+
+	public String getPoiTranslation(String keyName, boolean withDefault) {
 		if (poiTranslator != null) {
 			String translation = poiTranslator.getTranslation(keyName);
 			if (!Algorithms.isEmpty(translation)) {
 				return translation;
 			}
 		}
-		String name = keyName;
-		name = name.replace('_', ' ');
-		return Algorithms.capitalizeFirstLetter(name);
+		if (withDefault) {
+			String name = keyName;
+			name = name.replace('_', ' ');
+			return Algorithms.capitalizeFirstLetter(name);
+		}
+		return null;
 	}
 
 	public boolean isRegisteredType(PoiCategory t) {

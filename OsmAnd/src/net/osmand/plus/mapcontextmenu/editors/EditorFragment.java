@@ -133,6 +133,9 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 				if (mapActivity != null) {
 					showExitDialog();
 				}
+				if (getActivity() instanceof MyPlacesActivity) {
+					showExitDialog();
+				}
 			}
 		});
 	}
@@ -167,7 +170,10 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	@Override
 	public void onResume() {
 		super.onResume();
-		requireMapActivity().disableDrawer();
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			activity.disableDrawer();
+		}
 		if (!InsetsUtils.isEdgeToEdgeSupported()) {
 			view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		}
@@ -183,7 +189,10 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	@Override
 	public void onPause() {
 		super.onPause();
-		requireMapActivity().enableDrawer();
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			activity.enableDrawer();
+		}
 		if (!InsetsUtils.isEdgeToEdgeSupported()) {
 			view.getViewTreeObserver().removeOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		}

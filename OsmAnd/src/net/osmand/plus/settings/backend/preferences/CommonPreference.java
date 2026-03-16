@@ -180,6 +180,10 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		this.defaultValue = defaultValue;
 	}
 
+	public void setDefaultValues(Map<ApplicationMode, T> defaultValues) {
+		this.defaultValues = defaultValues;
+	}
+
 	public final boolean hasDefaultValues() {
 		return defaultValues != null && !defaultValues.isEmpty();
 	}
@@ -417,6 +421,9 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		if (lastModifiedTimeStored) {
 			copy.storeLastModifiedTime();
 		}
+		copy.setDefaultValue(defaultValue);
+		copy.setDefaultValues(defaultValues);
+
 		return copy;
 	}
 

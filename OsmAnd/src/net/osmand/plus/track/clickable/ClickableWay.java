@@ -63,9 +63,29 @@ public class ClickableWay {
         if (!Algorithms.isEmpty(name)) {
             return name;
         } else {
-            String altName = gpxFile.getExtensionsToRead().get("ref");
+            String altName = findSuitableName(gpxFile.getExtensionsToRead());
             return altName != null ? altName : Long.toString(osmId);
         }
+    }
+
+    @Nullable
+    private String findSuitableName(@NonNull Map<String, String> tags) {
+        String ref = tags.get("ref");
+        if (ref != null) {
+            return ref;
+        }
+        String underscoreName = null;
+        for (Map.Entry<String, String> entry : tags.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (key.endsWith(":name")) {
+                return value;
+            }
+            if (underscoreName == null && key.endsWith("_name") && !"shield_stub_name".equals(key)) {
+                underscoreName = value;
+            }
+        }
+        return underscoreName;
     }
 
     @Nullable
@@ -80,6 +100,6 @@ public class ClickableWay {
 
     @Override
     public String toString() {
-        return getWayName();
+        return getWayName() + " (" + getOsmId() + ")";
     }
 }

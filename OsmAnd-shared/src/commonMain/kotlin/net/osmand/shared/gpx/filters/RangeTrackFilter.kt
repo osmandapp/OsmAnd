@@ -3,8 +3,6 @@ package net.osmand.shared.gpx.filters
 import kotlinx.serialization.Serializable
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.TrackItem
-import kotlin.math.ceil
-import kotlin.math.floor
 
 @Serializable(with = RangeTrackFilterSerializer::class)
 open class RangeTrackFilter<T : Comparable<T>> : BaseTrackFilter {
@@ -38,7 +36,10 @@ open class RangeTrackFilter<T : Comparable<T>> : BaseTrackFilter {
 	var valueTo: T
 
 	open fun setValueFrom(from: T, updateListeners: Boolean = true) {
-		valueFrom = maxOf(minValue, from)
+		valueFrom = from
+		if (valueFrom < minValue) {
+			minValue = valueFrom
+		}
 		valueFrom = minOf(valueFrom, valueTo)
 		if (updateListeners) {
 			filterChangedListener?.onFilterChanged()
@@ -85,10 +86,21 @@ open class RangeTrackFilter<T : Comparable<T>> : BaseTrackFilter {
 
 	override fun initWithValue(value: BaseTrackFilter) {
 		if (value is RangeTrackFilter<*>) {
-			check(value.minValue)?.let { minValue = it }
-			check(value.maxValue)?.let { maxValue = it }
+			// Smart Merge for limits: natively acts as 'if not set, take from saved'
+			check(value.minValue)?.let { minValue = minOf(minValue, it) }
+			check(value.maxValue)?.let { maxValue = maxOf(maxValue, it) }
+
+			// Load user preferences
 			check(value.valueFrom)?.let { valueFrom = it }
 			check(value.valueTo)?.let { valueTo = it }
+
+			// Auto-expand limits if user values exceed them
+			if (valueTo > maxValue) {
+				maxValue = valueTo
+			}
+			if (valueFrom < minValue) {
+				minValue = valueFrom
+			}
 			super.initWithValue(value)
 		}
 	}
@@ -102,8 +114,16 @@ open class RangeTrackFilter<T : Comparable<T>> : BaseTrackFilter {
 	}
 
 	fun setMaxValue(value: T) {
-		maxValue = getComparableValue(value)
-		valueTo = getComparableValue(value)
+		val newMax = getComparableValue(value)
+		val oldMax = maxValue
+		maxValue = newMax
+
+		if (valueTo == oldMax) {
+			valueTo = newMax
+		}
+		if (valueTo > maxValue) {
+			maxValue = valueTo
+		}
 	}
 
 	override fun equals(other: Any?): Boolean {
@@ -115,48 +135,16 @@ open class RangeTrackFilter<T : Comparable<T>> : BaseTrackFilter {
 				other.valueTo == valueTo
 	}
 
-	private fun flor(value: T): String {
-		return when (value) {
-			is Float -> {
-				floor(value as Float).toString()
-			}
-
-			is Double -> {
-				floor(value as Double).toString()
-			}
-
-			else -> {
-				value.toString()
-			}
-		}
-	}
-
 	fun ceilMaxValue(): String {
-		return ceil(maxValue)
+		return maxValue.toString()
 	}
 
 	fun ceilValueTo(): String {
-		return ceil(valueTo)
+		return valueTo.toString()
 	}
 
 	fun ceilMinValue(): String {
-		return ceil(minValue)
-	}
-
-	private fun ceil(value: T): String {
-		return when (value) {
-			is Float -> {
-				ceil(value as Float).toString()
-			}
-
-			is Double -> {
-				ceil(value as Double).toString()
-			}
-
-			else -> {
-				value.toString()
-			}
-		}
+		return minValue.toString()
 	}
 
 	private fun getProperty(): GpxParameter {

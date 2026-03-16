@@ -217,6 +217,7 @@ public class OsmandApplication extends MultiDexApplication {
 	AverageGlideComputer averageGlideComputer;
 	WeatherHelper weatherHelper;
 	DialogManager dialogManager;
+	SmartFolderHelper smartFolderHelper;
 	RouteLayersHelper routeLayersHelper;
 	Model3dHelper model3dHelper;
 	TrackSortModesHelper trackSortModesHelper;
@@ -686,7 +687,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@NonNull
 	public SmartFolderHelper getSmartFolderHelper() {
-		return SmartFolderHelper.INSTANCE;
+		return smartFolderHelper;
 	}
 
 	@NonNull

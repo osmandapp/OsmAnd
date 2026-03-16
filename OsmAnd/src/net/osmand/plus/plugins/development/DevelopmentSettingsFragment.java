@@ -47,6 +47,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String AISTRACKER_SIMULATION = "aistracker_simulation";
+	private static final String GRID_LAYOUT_SHOW_LOGS = "grid_layout_show_logs";
 	private static final String GRID_LAYOUT_DRAW_CELLS = "grid_layout_draw_cells";
 	private static final String GRID_LAYOUT_DRAW_SLOTS = "grid_layout_draw_slots";
 	private static final String GRID_LAYOUT_DRAW_BUTTON_FRAMES = "grid_layout_draw_button_frames";
@@ -265,15 +266,18 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 	private void setupGridPrefs() {
 		Preference category = findPreference("visualizing_button_grid");
+		SwitchPreferenceCompat showLogsPref = findPreference(GRID_LAYOUT_SHOW_LOGS);
 		SwitchPreferenceCompat efficientGridPref = findPreference(GRID_LAYOUT_DRAW_CELLS);
 		SwitchPreferenceCompat slotsPref = findPreference(GRID_LAYOUT_DRAW_SLOTS);
 		SwitchPreferenceCompat buttonFramesPref = findPreference(GRID_LAYOUT_DRAW_BUTTON_FRAMES);
 
+		showLogsPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_SHOW_LOGS);
 		efficientGridPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS);
 		slotsPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_DRAW_SLOTS);
 		buttonFramesPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES);
 
 		category.setIconSpaceReserved(false);
+		showLogsPref.setIconSpaceReserved(false);
 		efficientGridPref.setIconSpaceReserved(false);
 		slotsPref.setIconSpaceReserved(false);
 		buttonFramesPref.setIconSpaceReserved(false);
@@ -477,6 +481,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			return true;
 		} else if (GRID_LAYOUT_DRAW_BUTTON_FRAMES.equals(prefId)) {
 			OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES = !OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES;
+			app.getOsmandMap().getMapView().refreshMap();
+			return true;
+		} else if (GRID_LAYOUT_SHOW_LOGS.equals(prefId)) {
+			OsmandSettings.DEV_GRID_LAYOUT_SHOW_LOGS = !OsmandSettings.DEV_GRID_LAYOUT_SHOW_LOGS;
 			app.getOsmandMap().getMapView().refreshMap();
 			return true;
 		}

@@ -766,10 +766,10 @@ object GpxUtilities {
 		writeNotNullLink(serializer, p.link)
 		writeNotNullText(serializer, "type", p.category)
 		if (!p.hdop.isNaN()) {
-			writeNotNullText(serializer, "hdop", formatDecimal(p.hdop))
+			writeNotNullText(serializer, "hdop", formatDecimal(p.hdop.toDouble()))
 		}
 		if (p.speed > 0) {
-			p.getExtensionsToWrite()[POINT_SPEED] = formatDecimal(p.speed)
+			p.getExtensionsToWrite()[POINT_SPEED] = formatDecimal(p.speed.toDouble())
 		}
 		if (!p.heading.isNaN()) {
 			p.getExtensionsToWrite()["heading"] = round(p.heading).toString()
@@ -1126,7 +1126,7 @@ object GpxUtilities {
 												when (t) {
 													POINT_SPEED -> {
 														try {
-															parse.speed = value.toDouble()
+															parse.speed = value.toFloat()
 														} catch (e: NumberFormatException) {
 															println(e.message)
 														}
@@ -1327,7 +1327,7 @@ object GpxUtilities {
 										try {
 											val value = readText(parser, POINT_SPEED)
 											if (!value.isNullOrEmpty()) {
-												parse.speed = value.toDouble()
+												parse.speed = value.toFloat()
 												parse.getExtensionsToWrite()[POINT_SPEED] = value
 											}
 										} catch (_: NumberFormatException) {
@@ -1359,7 +1359,7 @@ object GpxUtilities {
 										val text = readText(parser, "hdop")
 										if (text != null) {
 											try {
-												parse.hdop = text.toDouble()
+												parse.hdop = text.toFloat()
 											} catch (_: NumberFormatException) {
 											}
 										}
@@ -1658,7 +1658,7 @@ object GpxUtilities {
 		val ele =
 			if (previous.ele.isNaN() && next.ele.isNaN()) Double.NaN else previous.ele + (next.ele - previous.ele) * projectionCoeff
 		val speed = previous.speed + (next.speed - previous.speed) * projectionCoeff
-		return WptPt(lat, lon, time, ele, speed, Double.NaN)
+		return WptPt(lat, lon, time, ele, speed.toFloat(), Float.NaN)
 	}
 
 	fun interpolateEmptyElevationWpts(pts: List<WptPt>) {

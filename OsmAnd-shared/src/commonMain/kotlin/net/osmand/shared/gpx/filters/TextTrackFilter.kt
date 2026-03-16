@@ -14,9 +14,8 @@ class TextTrackFilter
 
 	constructor(
 		trackFilterType: TrackFilterType,
-		filterChangedListener: FilterChangedListener?) : super(
-		trackFilterType,
-		filterChangedListener)
+		filterChangedListener: FilterChangedListener?
+	) : super(trackFilterType, filterChangedListener)
 
 	@Serializable
 	var value = ""

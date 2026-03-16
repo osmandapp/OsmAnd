@@ -45,10 +45,12 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	private TrackFolder currentFolder;
 	@Nullable
 	private List<BaseTrackFilter> initialSelectedFilters;
+	private volatile boolean isInitializing = false;
 
 	private OsmandApplication app;
 
-	public TracksSearchFilter(@NonNull OsmandApplication app, @NonNull List<TrackItem> trackItems, @Nullable List<BaseTrackFilter> initialSelectedFilters) {
+	public TracksSearchFilter(@NonNull OsmandApplication app, @NonNull List<TrackItem> trackItems,
+	                          @Nullable List<BaseTrackFilter> initialSelectedFilters) {
 		this(app, trackItems, null, initialSelectedFilters);
 	}
 
@@ -56,7 +58,9 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 		this(app, trackItems, null, null);
 	}
 
-	public TracksSearchFilter(@NonNull OsmandApplication app, @NonNull List<TrackItem> trackItems, @Nullable TrackFolder currentFolder, @Nullable List<BaseTrackFilter> initialSelectedFilters) {
+	public TracksSearchFilter(@NonNull OsmandApplication app, @NonNull List<TrackItem> trackItems,
+	                          @Nullable TrackFolder currentFolder,
+	                          @Nullable List<BaseTrackFilter> initialSelectedFilters) {
 		this.app = app;
 		this.trackItems = trackItems;
 		this.currentFolder = currentFolder;
@@ -67,6 +71,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	@SuppressWarnings("unchecked")
 	private void initFilters(@NonNull OsmandApplication app) {
 		recreateFilters();
+		isInitializing = true;
 
 		app.getTaskManager().runInBackground(new OsmAndTaskManager.OsmAndTaskRunnable<Void, Void, Void>() {
 			@Override
@@ -104,15 +109,16 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 						default -> {
 						}
 					}
-					if (initialSelectedFilters != null) {
-						fillFiltersWithValues(initialSelectedFilters);
-					}
+				}
+				if (initialSelectedFilters != null) {
+					fillFiltersWithValues(initialSelectedFilters);
 				}
 				return null;
 			}
 
 			@Override
 			protected void onPostExecute(Void unused) {
+				isInitializing = false;
 				onFilterChanged();
 			}
 		});
@@ -120,11 +126,11 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 
 	private void updateRangeFilterMaxValue(TrackFilterType trackFilterType) {
 		BaseTrackFilter filter = getFilterByType(trackFilterType);
-		if (filter instanceof RangeTrackFilter) {
+		if (filter instanceof RangeTrackFilter<?> rangeTrackFilter) {
 			try {
 				String maxValueInDb = app.getGpxDbHelper().getMaxParameterValue(trackFilterType.getProperty());
 				if (!Algorithms.isEmpty(maxValueInDb)) {
-					((RangeTrackFilter<?>) filter).setMaxValue(maxValueInDb);
+					rangeTrackFilter.setMaxValue(maxValueInDb);
 				}
 			} catch (NumberFormatException error) {
 				LOG.error("Can not parse max value for filter " + trackFilterType, error);
@@ -286,10 +292,10 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 
 	@Override
 	public void onFilterChanged() {
+		if (isInitializing) return;
 		for (FilterChangedListener listener : filterChangedListeners) {
 			listener.onFilterChanged();
 		}
-
 	}
 
 	public void resetFilteredItems() {

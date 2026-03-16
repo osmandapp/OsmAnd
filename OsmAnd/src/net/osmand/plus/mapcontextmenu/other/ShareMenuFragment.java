@@ -30,7 +30,7 @@ public class ShareMenuFragment extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		items.add(new TitleItem(getString(R.string.share_menu_location)));
+		items.add(new TitleItem(getString(menu.isFavorite() ? R.string.share_favorite : R.string.share_menu_location)));
 
 		View.OnClickListener itemOnClickListener = v -> {
 			dismiss();

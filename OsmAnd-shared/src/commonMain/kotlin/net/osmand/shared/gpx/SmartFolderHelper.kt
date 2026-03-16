@@ -26,65 +26,73 @@ import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.PlatformUtil
 
-object SmartFolderHelper {
+class SmartFolderHelper {
 
-	private const val TRACK_FILTERS_SETTINGS_PREF = "track_filters_settings_pref"
-	private const val METRIC_SYSTEM_PREF = "default_metric_system"
-	private const val ALTITUDE_SYSTEM_PREF = "altitude_metrics"
-	private const val SPEED_SYSTEM_PREF = "default_speed_system"
+	companion object {
+		const val TRACK_FILTERS_SETTINGS_PREF = "track_filters_settings_pref"
+        private const val METRIC_SYSTEM_PREF = "default_metric_system"
+        private const val ALTITUDE_SYSTEM_PREF = "altitude_metrics"
+        private const val SPEED_SYSTEM_PREF = "default_speed_system"
+
+		private val trackFilterSerializersModule = SerializersModule {
+			polymorphic(BaseTrackFilter::class) {
+				subclass(FolderTrackFilter::class)
+			}
+			polymorphic(OrganizeByParams::class) {
+				subclass(OrganizeByRangeParams::class)
+			}
+		}
+
+		val json = Json {
+			isLenient = true
+			ignoreUnknownKeys = true
+			useArrayPolymorphism = false
+			encodeDefaults = true
+			classDiscriminator = "className"
+			classDiscriminatorMode = ClassDiscriminatorMode.NONE
+			serializersModule = trackFilterSerializersModule
+		}
+	}
 
 	private var smartFolderCollection: List<SmartFolder> = listOf()
 	private var allAvailableTrackItems = HashSet<TrackItem>()
 	private var updateListeners: List<SmartFolderUpdateListener> = listOf()
 	private var isWritingSettings = false
-	private val osmAndSettings: SettingsAPI = PlatformUtil.getOsmAndContext().getSettings()
+	private val osmAndSettings: SettingsAPI? = try {
+		PlatformUtil.getOsmAndContext().getSettings()
+	} catch (e: Exception) {
+		null
+	}
 	private val settingsChangedListener = object : KStateChangedListener<String> {
 		override fun stateChanged(change: String) {
 			onSettingsChanged()
 		}
 	}
-	private val metricSystemListener = object : KStateChangedListener<MetricsConstants> {
-		override fun stateChanged(change: MetricsConstants) {
-			onUnitsSettingsChanged()
-		}
-	}
-	private val altitudeSystemListener = object : KStateChangedListener<AltitudeMetrics> {
-		override fun stateChanged(change: AltitudeMetrics) {
-			onUnitsSettingsChanged()
-		}
-	}
-	private val speedSystemListener = object : KStateChangedListener<SpeedConstants> {
-		override fun stateChanged(change: SpeedConstants) {
-			onUnitsSettingsChanged()
-		}
-	}
-
-	private val trackFilterSerializersModule = SerializersModule {
-		polymorphic(BaseTrackFilter::class) {
-			subclass(FolderTrackFilter::class)
-		}
-		polymorphic(OrganizeByParams::class) {
-			subclass(OrganizeByRangeParams::class)
-		}
-	}
-
-	val json = Json {
-		isLenient = true
-		ignoreUnknownKeys = true
-		useArrayPolymorphism = false
-		encodeDefaults = true
-		classDiscriminator = "className"
-		classDiscriminatorMode = ClassDiscriminatorMode.NONE
-		serializersModule = trackFilterSerializersModule
-	}
+    private val metricSystemListener = object : KStateChangedListener<MetricsConstants> {
+        override fun stateChanged(change: MetricsConstants) {
+            onUnitsSettingsChanged()
+        }
+    }
+    private val altitudeSystemListener = object : KStateChangedListener<AltitudeMetrics> {
+        override fun stateChanged(change: AltitudeMetrics) {
+            onUnitsSettingsChanged()
+        }
+    }
+    private val speedSystemListener = object : KStateChangedListener<SpeedConstants> {
+        override fun stateChanged(change: SpeedConstants) {
+            onUnitsSettingsChanged()
+        }
+    }
 
 	init {
-		osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "", global = true, shared = true)
-		osmAndSettings.addStringPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
-		osmAndSettings.addEnumPreferenceListener(METRIC_SYSTEM_PREF, metricSystemListener)
-		osmAndSettings.addEnumPreferenceListener(ALTITUDE_SYSTEM_PREF, altitudeSystemListener)
-		osmAndSettings.addEnumPreferenceListener(SPEED_SYSTEM_PREF, speedSystemListener)
-		readSettings()
+		if (osmAndSettings != null) {
+			osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "", global = true, shared = true)
+			osmAndSettings.addStringPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
+		    osmAndSettings.addEnumPreferenceListener(METRIC_SYSTEM_PREF, metricSystemListener)
+		    osmAndSettings.addEnumPreferenceListener(ALTITUDE_SYSTEM_PREF, altitudeSystemListener)
+		    osmAndSettings.addEnumPreferenceListener(SPEED_SYSTEM_PREF, speedSystemListener)
+			readSettings()
+		}
 	}
 
 	private fun onSettingsChanged() {
@@ -102,8 +110,12 @@ object SmartFolderHelper {
 	}
 
 	private fun readSettings() {
+		val settingsJson = osmAndSettings?.getStringPreference(TRACK_FILTERS_SETTINGS_PREF)
+		readJson(settingsJson)
+	}
+
+	fun readJson(settingsJson: String?) {
 		val newCollection = ArrayList<SmartFolder>()
-		val settingsJson = osmAndSettings.getStringPreference(TRACK_FILTERS_SETTINGS_PREF)
 		if (!KAlgorithms.isEmpty(settingsJson)) {
 			TrackFilterList.parseFilters(settingsJson!!)?.let { savedFilters ->
 				for (smartFolder in savedFilters) {
@@ -211,8 +223,8 @@ object SmartFolderHelper {
 
 	private fun writeSettings() {
 		isWritingSettings = true
-		val json = json.encodeToString(smartFolderCollection)
-		osmAndSettings.setStringPreference(TRACK_FILTERS_SETTINGS_PREF, json)
+		val jsonStr = json.encodeToString(smartFolderCollection)
+		osmAndSettings?.setStringPreference(TRACK_FILTERS_SETTINGS_PREF, jsonStr)
 		isWritingSettings = false
 	}
 
@@ -342,7 +354,7 @@ object SmartFolderHelper {
 		return allAvailableTrackItems
 	}
 
-	private class SmartFoldersUpdateTask : KAsyncTask<Unit, Unit, Unit>() {
+	private inner class SmartFoldersUpdateTask : KAsyncTask<Unit, Unit, Unit>() {
 
 		override suspend fun doInBackground(vararg params: Unit) {
 			readSettings()
