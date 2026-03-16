@@ -6047,9 +6047,9 @@
     <string name="gradient_no_data_point_summary">Angezeigte Farbe, wenn Daten fehlen oder undefiniert sind.</string>
     <string name="gradient_input_value_too_low_warn">Der erlaubte Minimalwert ist %1$s.</string>
     <string name="gradient_input_value_too_high_warn">Der erlaubte Maximalwert ist %1$s.</string>
-    <string name="shared_string_trip_average">Durchschnittliche Reisezeit</string>
+    <string name="shared_string_trip_average">Streckendurchschnitt</string>
     <string name="trip_recording_moving_time_widget_description">Zeigt die aktuell aufgezeichnete Bewegungszeit oder die Zeit für den letzten Anstieg und Abstieg an.</string>
-    <string name="trip_recording_moving_time">Zeit in Bewegung</string>
+    <string name="trip_recording_moving_time">Bewegungszeit</string>
     <plurals name="tracks_count">
         <item quantity="one">%d Track</item>
         <item quantity="other">%d Tracks</item>
@@ -6078,7 +6078,7 @@
     <string name="astro_type_galaxy_cluster">Galaxienhaufen</string>
     <string name="astro_type_constellation">Sternbild</string>
     <string name="astro_culmination">Kulmination</string>
-    <string name="astro_today_visibility">Sichtbarkeit heute</string>
+    <string name="astro_today_visibility">Heutige Sichtbarkeit</string>
     <string name="astro_alt_short">Alt</string>
     <string name="astro_az_short">Az</string>
     <string name="astro_catalogs">Kataloge</string>
@@ -6128,5 +6128,5 @@
     <string name="astro_explore_schedule">Zeitplan</string>
     <string name="astronomy_schedule">Zeitplan</string>
     <string name="astro_locate">Finden</string>
-    <string name="intersection">Kreuzung</string>
+    <string name="intersection">Schnittpunkt</string>
 </resources>
