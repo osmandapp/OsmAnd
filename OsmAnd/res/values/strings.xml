@@ -11,7 +11,8 @@
 	Thx - Hardy
 -->
 
-	<string name="astro_culmination">Culmination</string>
+    <string name="shared_string_radians">Radians</string>
+    <string name="astro_culmination">Culmination</string>
 	<string name="astro_today_visibility">Today visibility</string>
 	<string name="astro_alt_short">Alt</string>
 	<string name="astro_az_short">Az</string>

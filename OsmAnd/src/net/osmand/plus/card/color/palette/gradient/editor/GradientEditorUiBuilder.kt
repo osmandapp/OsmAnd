@@ -75,11 +75,13 @@ class GradientEditorUiBuilder(
 			})
 
 			// B. Add "No Data" step
-			add(GradientStepData(
-				id = NO_DATA_STEP_ID,
-				label = app.getString(R.string.gpx_logging_no_data),
-				point = noDataPoint
-			))
+			if (fileType.supportsNoData) {
+				add(GradientStepData(
+					id = NO_DATA_STEP_ID,
+					label = app.getString(R.string.gpx_logging_no_data),
+					point = noDataPoint
+				))
+			}
 		}
 
 		val isNoDataSelected = selectedIndex == points.size
