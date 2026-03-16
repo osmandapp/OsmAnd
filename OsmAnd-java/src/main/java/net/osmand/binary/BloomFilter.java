@@ -33,6 +33,10 @@ public final class BloomFilter {
 		return INSTANCE;
 	}
 	
+	public String logSkipRatio() {
+		return String.format("Skip POI box ratio: %d / %d = %.2f", skipBoxAcc.sum(), (double) readBoxCount.sum(),
+				skipBoxAcc.sum() / (double) readBoxCount.sum());
+	}
 	
 	public void logInfo() {
 		log.info("Avg box's tokens: " + writeBoxAcc.sum() + "/" + writeBoxCount.sum());
@@ -183,4 +187,5 @@ public final class BloomFilter {
 		instance.writeBoxCount.reset();
 		instance.writeBoxBitAcc.reset();
 	}
+
 }
