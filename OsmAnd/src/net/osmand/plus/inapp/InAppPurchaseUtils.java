@@ -109,6 +109,10 @@ public class InAppPurchaseUtils {
 		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app);
 	}
 
+	public static boolean isAstronomyAvailable(@NonNull OsmandApplication app) {
+		return Version.isPaidVersion(app);
+	}
+
 	public static boolean isProWidgetsAvailable(@NonNull OsmandApplication app) {
 		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app);
 	}

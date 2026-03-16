@@ -28,6 +28,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenFragment
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astronomy.AstronomyPluginSettings.CommonConfig
@@ -59,7 +60,7 @@ import kotlin.math.abs
 
 
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
-	OsmAndCompassListener {
+	OsmAndCompassListener, DownloadEvents {
 
 	private val REGULAR_MAP_HEIGHT = 300f
 	private val REGULAR_MAP_HEIGHT_LANDSCAPE = 110f
@@ -896,6 +897,26 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private fun getAstroContextMenuFragment(): AstroContextMenuFragment? {
 		return childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? AstroContextMenuFragment
+	}
+
+	private fun dispatchDownloadEvent(dispatch: (DownloadEvents) -> Unit) {
+		for (fragment in childFragmentManager.fragments) {
+			if (fragment is DownloadEvents && fragment.isAdded) {
+				dispatch(fragment)
+			}
+		}
+	}
+
+	override fun onUpdatedIndexesList() {
+		dispatchDownloadEvent { it.onUpdatedIndexesList() }
+	}
+
+	override fun downloadInProgress() {
+		dispatchDownloadEvent { it.downloadInProgress() }
+	}
+
+	override fun downloadHasFinished() {
+		dispatchDownloadEvent { it.downloadHasFinished() }
 	}
 
 	internal fun getTrackableObjects(): List<SkyObject> {

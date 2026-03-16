@@ -21,6 +21,7 @@ class AstroContextMenuAdapter(
 	private val galleryController: GalleryController?,
 	private val onGalleryToggle: (String) -> Unit,
 	private val onUpdateImage: () -> Unit,
+	private val onKnowledgeCardAction: () -> Unit,
 	private val onScheduleResetPeriod: () -> Unit,
 	private val onScheduleShiftPeriod: (daysDelta: Int) -> Unit,
 	private val onCatalogClick: (Catalog) -> Unit
@@ -35,6 +36,7 @@ class AstroContextMenuAdapter(
 		private const val VIEW_TYPE_VISIBILITY = 1
 		private const val VIEW_TYPE_SCHEDULE = 2
 		private const val VIEW_TYPE_CATALOGS = 3
+		private const val VIEW_TYPE_KNOWLEDGE = 4
 		private const val VIEW_TYPE_GALLERY = 5
 
 		const val PAYLOAD_GALLERY_STATE = "gallery_state"
@@ -63,6 +65,10 @@ class AstroContextMenuAdapter(
 
 			is AstroCatalogsCardModel -> {
 				VIEW_TYPE_CATALOGS
+			}
+
+			is AstroKnowledgeCardModel -> {
+				VIEW_TYPE_KNOWLEDGE
 			}
 
 			is AstroGalleryCardModel -> {
@@ -101,6 +107,12 @@ class AstroContextMenuAdapter(
 				val view = LayoutInflater.from(parent.context)
 					.inflate(R.layout.astro_context_catalogs_card, parent, false)
 				AstroCatalogsCardViewHolder(view, app, onCatalogClick)
+			}
+
+			VIEW_TYPE_KNOWLEDGE -> {
+				val view = LayoutInflater.from(parent.context)
+					.inflate(R.layout.astro_context_knowledge_card, parent, false)
+				AstroKnowledgeCardViewHolder(view, onKnowledgeCardAction)
 			}
 
 			VIEW_TYPE_GALLERY -> {
@@ -151,6 +163,7 @@ class AstroContextMenuAdapter(
 			is AstroVisibilityCardViewHolder -> holder.bind(item as AstroVisibilityCardModel)
 			is AstroScheduleCardViewHolder -> holder.bind(item as AstroScheduleCardModel)
 			is AstroCatalogsCardViewHolder -> holder.bind(item as AstroCatalogsCardModel)
+			is AstroKnowledgeCardViewHolder -> holder.bind(item as AstroKnowledgeCardModel, nightMode)
 			is AstroGalleryCardViewHolder -> holder.bind(item as AstroGalleryCardModel, nightMode)
 		}
 	}

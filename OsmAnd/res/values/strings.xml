@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+	<string name="astro_expand_your_universe_title">Expand your universe</string>
+	<string name="astro_expand_your_universe_description">Get access to the extended database of deep sky catalogs, Wikipedia articles and AR mode offline.</string>
+	<string name="astro_offline_knowledge_base_title">Offline Knowledge Base</string>
+	<string name="astro_offline_knowledge_base_description">Download the extended database to access Wikipedia articles and deep sky catalogs offline.</string>
 	<string name="no_objects_found">No objects found</string>
 	<string name="astro_search_info_solar_system">The Solar System is the gravitationally bound system of the Sun and the masses that orbit it, most prominently its eight planets, of which Earth is one.</string>
 	<string name="astro_search_info_constellations">A constellation is an area on the celestial sphere in which a group of visible stars forms a perceived pattern or outline.</string>

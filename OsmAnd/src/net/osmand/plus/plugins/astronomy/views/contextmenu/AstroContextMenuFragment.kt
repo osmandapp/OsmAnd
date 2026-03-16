@@ -25,10 +25,19 @@ import io.github.cosinekitty.astronomy.Direction
 import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.defineStar
 import io.github.cosinekitty.astronomy.searchRiseSet
+import net.osmand.IndexConstants
 import net.osmand.data.LatLon
 import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseMaterialFragment
+import net.osmand.plus.chooseplan.ChoosePlanFragment
+import net.osmand.plus.chooseplan.OsmAndFeature
+import net.osmand.plus.download.DownloadActivityType
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents
+import net.osmand.plus.download.DownloadValidationManager
+import net.osmand.plus.download.IndexItem
+import net.osmand.plus.helpers.FileNameTranslationHelper
+import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard
@@ -40,10 +49,10 @@ import net.osmand.plus.mapcontextmenu.gallery.tasks.CacheReadTask
 import net.osmand.plus.mapcontextmenu.gallery.tasks.CacheWriteTask
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astronomy.AstroArticle
+import net.osmand.plus.plugins.astronomy.AstronomyPlugin
 import net.osmand.plus.plugins.astronomy.Catalog
 import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.plugins.astronomy.StarMapFragment
-import net.osmand.plus.plugins.astronomy.AstronomyPlugin
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTargetsCollection
@@ -58,7 +67,7 @@ import java.util.Locale
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
-class AstroContextMenuFragment : BaseMaterialFragment() {
+class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 
 	private var galleryController: GalleryController? = null
 
@@ -84,10 +93,6 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 	private lateinit var saveButton: View
 	private lateinit var saveTitle: TextView
 	private lateinit var saveIcon: ImageView
-
-	private lateinit var locationButton: View
-	private lateinit var locationTitle: TextView
-	private lateinit var locationIcon: ImageView
 
 	private lateinit var directionButton: View
 	private lateinit var directionTitle: TextView
@@ -125,7 +130,9 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 	private var scheduleCardModel: AstroScheduleCardModel? = null
 	private var descriptionCardModel: AstroDescriptionCardModel? = null
 	private var catalogCardModel: AstroCatalogsCardModel? = null
+	private var knowledgeCardModel: AstroKnowledgeCardModel? = null
 	private var galleryCardModel: AstroGalleryCardModel? = null
+	private var requestedKnowledgeBaseIndexes = false
 
 	private val imageCardListener: GetAstroImagesTask.GetImageCardsListener =
 		object : GetAstroImagesTask.GetImageCardsListener {
@@ -164,6 +171,8 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 		private const val TAB_SCHEDULE = 2
 		private const val SHEET_CORNER_RADIUS_DP = 12f
 		private const val COLLAPSED_EXTRA_DP = 100f
+		private const val KNOWLEDGE_BASE_FILE_NAME =
+			FileNameTranslationHelper.STARS_ARTICLES + IndexConstants.STAR_MAP_INDEX_EXT
 
 		fun newInstance(skyObject: SkyObject): AstroContextMenuFragment {
 			val fragment = AstroContextMenuFragment()
@@ -260,9 +269,13 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 		} ?: AstroDescriptionCardModel(app, obj, article)
 
 		catalogCardModel = obj.catalogs.takeIf { it.isNotEmpty() }?.let { catalogs ->
-			catalogCardModel?.apply { this.catalogs = catalogs }
+			catalogCardModel?.apply {
+				this.catalogs = catalogs
+				expanded = false
+			}
 				?: AstroCatalogsCardModel(app, catalogs)
 		}
+		updateKnowledgeCard()
 
 		galleryCardModel = galleryCardModel?.apply { this.wid = obj.wid }
 			?: AstroGalleryCardModel(app, obj.wid)
@@ -293,17 +306,13 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 			)
 			saveTitle.text = app.getString(R.string.shared_string_save)
 
-			locationIcon.setImageDrawable(
-				uiUtilities.getIcon(
-					R.drawable.ic_action_location_16,
-					ColorUtilities.getActiveIconColorId(nightMode)
-				)
-			)
-			locationTitle.text = app.getString(R.string.astro_locate)
-
 			directionIcon.setImageDrawable(
 				uiUtilities.getIcon(
-					if (obj.showDirection) R.drawable.ic_direction_arrow else R.drawable.ic_direction_arrow,
+					if (obj.showDirection) {
+						R.drawable.ic_action_target_direction_on
+					} else {
+						R.drawable.ic_action_target_direction_off
+					},
 					ColorUtilities.getActiveIconColorId(nightMode)
 				)
 			)
@@ -325,11 +334,6 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 			parent.viewModel.refreshSkyObjects()
 			parent.starView.invalidate()
 
-			bindButtons()
-		}
-
-		locationButton.setOnClickListener {
-			parent.starView.setSelectedObject(obj, center = true, animate = true)
 			bindButtons()
 		}
 
@@ -494,10 +498,6 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 		saveTitle = view.findViewById(R.id.save_title)
 		saveIcon = view.findViewById(R.id.save_icon)
 
-		locationButton = view.findViewById(R.id.locate_button)
-		locationTitle = view.findViewById(R.id.locate_title)
-		locationIcon = view.findViewById(R.id.locate_icon)
-
 		directionButton = view.findViewById(R.id.direction_button)
 		directionTitle = view.findViewById(R.id.direction_title)
 		directionIcon = view.findViewById(R.id.direction_icon)
@@ -610,6 +610,9 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 			},
 			onUpdateImage = {
 				startLoadingImagesTask()
+			},
+			onKnowledgeCardAction = {
+				onKnowledgeCardAction()
 			},
 			onScheduleResetPeriod = {
 				resetScheduleToCurrentPeriod()
@@ -1106,6 +1109,10 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 	private fun loadCards() {
 		val items = ArrayList<AstroContextCard>()
 
+		knowledgeCardModel?.let {
+			items.add(it)
+		}
+
 		descriptionCardModel?.let {
 			items.add(it)
 		}
@@ -1128,6 +1135,167 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 
 		adapter.setItems(items)
 		updateBottomTabSelectionByScroll()
+	}
+
+	private fun updateKnowledgeCard() {
+		if (isKnowledgeBaseDownloaded()) {
+			knowledgeCardModel = null
+			return
+		}
+		val state = if (hasKnowledgeBaseAccess()) {
+			AstroKnowledgeCardModel.CardState.DOWNLOAD
+		} else {
+			AstroKnowledgeCardModel.CardState.UPSELL
+		}
+		val downloadItem = findKnowledgeBaseDownloadItem()
+		if (state == AstroKnowledgeCardModel.CardState.DOWNLOAD) {
+			ensureKnowledgeBaseIndexesLoaded()
+		}
+		val buttonTitle = if (state == AstroKnowledgeCardModel.CardState.DOWNLOAD) {
+			buildKnowledgeBaseButtonTitle(downloadItem)
+		} else {
+			app.getString(R.string.shared_string_get)
+		}
+		val actionEnabled = state != AstroKnowledgeCardModel.CardState.DOWNLOAD
+				|| findKnowledgeBaseActiveDownload() == null
+		knowledgeCardModel = knowledgeCardModel?.apply {
+			updateCard(state, buttonTitle, actionEnabled)
+		} ?: AstroKnowledgeCardModel(app, state, buttonTitle, actionEnabled)
+	}
+
+	private fun hasKnowledgeBaseAccess(): Boolean {
+		return InAppPurchaseUtils.isAstronomyAvailable(app)
+	}
+
+	private fun isKnowledgeBaseDownloaded(): Boolean {
+		return app.getAppPath(IndexConstants.ASTRO_DIR)
+			.resolve(KNOWLEDGE_BASE_FILE_NAME)
+			.exists()
+	}
+
+	private fun findKnowledgeBaseDownloadItem(): IndexItem? {
+		val types = listOf(DownloadActivityType.STAR_MAP_FILE)
+		return app.downloadThread.indexes.getIndexItems(types)
+			.firstOrNull(::isKnowledgeBaseIndexItem)
+	}
+
+	private fun ensureKnowledgeBaseIndexesLoaded() {
+		val downloadThread = app.downloadThread
+		val indexes = downloadThread.indexes
+		if (requestedKnowledgeBaseIndexes || indexes.isDownloadedFromInternet || indexes.downloadFromInternetFailed) {
+			return
+		}
+		requestedKnowledgeBaseIndexes = true
+		downloadThread.runReloadIndexFilesSilent()
+	}
+
+	private fun buildKnowledgeBaseButtonTitle(indexItem: IndexItem?): CharSequence {
+		val downloadThread = app.downloadThread
+		val activeDownloadItem = findKnowledgeBaseActiveDownload()
+		if (activeDownloadItem != null && downloadThread.currentDownloadingItem == activeDownloadItem && !activeDownloadItem.isDownloaded) {
+			val progress = downloadThread.currentDownloadProgress.toInt()
+			val mb = activeDownloadItem.archiveSizeMB
+			return if (progress != -1) {
+				app.getString(R.string.value_downloaded_of_mb, mb * progress / 100, mb)
+			} else {
+				app.getString(
+					R.string.shared_string_downloading_formatted,
+					activeDownloadItem.getSizeDescription(app)
+				)
+			}
+		}
+		if (activeDownloadItem != null) {
+			return app.getString(
+				R.string.shared_string_downloading_formatted,
+				activeDownloadItem.getSizeDescription(app)
+			)
+		}
+		return if (indexItem != null) {
+			app.getString(
+				R.string.ltr_or_rtl_combine_via_space,
+				app.getString(R.string.shared_string_download),
+				indexItem.getSizeDescription(app)
+			)
+		} else {
+			app.getString(R.string.shared_string_download)
+		}
+	}
+
+	private fun findKnowledgeBaseActiveDownload(): IndexItem? {
+		return app.downloadThread.currentDownloadingItems.firstOrNull(::isKnowledgeBaseIndexItem)
+	}
+
+	private fun isKnowledgeBaseIndexItem(item: IndexItem?): Boolean {
+		return item?.basename?.endsWith(FileNameTranslationHelper.STARS_ARTICLES, ignoreCase = true) == true
+	}
+
+	private fun onKnowledgeCardAction() {
+		if (!isAdded) {
+			return
+		}
+		when (knowledgeCardModel?.state) {
+			AstroKnowledgeCardModel.CardState.UPSELL -> {
+				ChoosePlanFragment.showInstance(requireMapActivity(), OsmAndFeature.OSMAND_CLOUD)
+			}
+
+			AstroKnowledgeCardModel.CardState.DOWNLOAD -> {
+				val indexItem = findKnowledgeBaseDownloadItem()
+				if (indexItem == null) {
+					ensureKnowledgeBaseIndexesLoaded()
+					app.showToastMessage(
+						if (!app.downloadThread.indexes.isDownloadedFromInternet) {
+							R.string.getting_list_of_required_maps
+						} else {
+							R.string.no_index_file_to_download
+						}
+					)
+					return
+				}
+				DownloadValidationManager(app).startDownload(requireMapActivity(), indexItem)
+			}
+
+			null -> Unit
+		}
+	}
+
+	override fun onUpdatedIndexesList() {
+		if (!isAdded) {
+			return
+		}
+		requestedKnowledgeBaseIndexes = false
+		updateKnowledgeCard()
+		loadCards()
+	}
+
+	override fun downloadHasFinished() {
+		if (!isAdded) {
+			return
+		}
+		val shouldUpdateKnowledgeCard = isKnowledgeBaseDownloaded()
+				|| findKnowledgeBaseActiveDownload() != null
+				|| knowledgeCardModel?.actionEnabled == false
+		if (!shouldUpdateKnowledgeCard) {
+			return
+		}
+		requestedKnowledgeBaseIndexes = false
+		skyObject?.let(::updateObjectInfo) ?: run {
+			updateKnowledgeCard()
+			loadCards()
+		}
+	}
+
+	override fun downloadInProgress() {
+		if (!isAdded || knowledgeCardModel?.state != AstroKnowledgeCardModel.CardState.DOWNLOAD) {
+			return
+		}
+		if (findKnowledgeBaseActiveDownload() == null) {
+			return
+		}
+		updateKnowledgeCard()
+		val position = adapter.getItemPosition<AstroKnowledgeCardModel>()
+		if (position >= 0) {
+			adapter.notifyItemChanged(position)
+		}
 	}
 
 	private fun openCatalogSearch(catalog: Catalog) {
