@@ -251,6 +251,7 @@ open class GradientPaletteController(
 			notifyUpdatePaletteSelection(oldSelected, newItem)
 		}
 		FileUtils.updateRenamedPaletteDependencies(app, item, newItem)
+		updateExternalDependencies()
 	}
 
 	private fun editGradient(item: PaletteItem.Gradient) {
