@@ -19,13 +19,14 @@ interface GradientEditorBehaviour {
 	 * Determines if the user can manually edit the value of this point.
 	 * Usually false for Min/Avg/Max in Relative mode.
 	 */
-	fun isValueEditable(point: GradientPoint): Boolean
+	fun isValueEditable(point: GradientPoint): Boolean = !isMandatoryPoint(point)
 
 	/**
 	 * Checks if the remove button should be enabled.
 	 */
 	fun isRemoveEnabled(draft: GradientDraft, selectedIndex: Int): Boolean {
-		return draft.points.size > 2 && selectedIndex != -1
+		val point = draft.points.getOrNull(selectedIndex) ?: return false
+		return !isMandatoryPoint(point) && draft.points.size > 2 && selectedIndex != -1
 	}
 
 	/**

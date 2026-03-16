@@ -20,7 +20,8 @@ enum class GradientFileType(
 	val defaultDisplayValues: List<Float> = emptyList(),        // Default steps for new palettes
 	val minLimit: Float? = null,                             // Min allowed value (in base units)
 	val maxLimit: Float? = null,                             // Max allowed value (in base units)
-	val supportsNoData: Boolean = true                  // Supports custom color for missing data
+	val supportsNoData: Boolean = true,                 // Supports custom color for missing data
+	val useNamedConstants: Boolean = true
 ) : PaletteFileType {
 
 	// --- Track / Route Data (Prefix: route_*) ---
@@ -102,9 +103,10 @@ enum class GradientFileType(
 		rangeType = GradientRangeType.RELATIVE,
 		baseUnits = PercentUnits.FRACTION,
 		displayUnits = PercentUnits.PERCENT,
-		defaultDisplayValues = listOf(0f, 50f, 100f),
-		minLimit = 0f,
-		maxLimit = 1f
+		defaultDisplayValues = listOf(-100f, 0f, 100f),
+		minLimit = -1f,
+		maxLimit = 1f,
+		useNamedConstants = false
 	),
 
 	// --- Terrain / Map Data ---

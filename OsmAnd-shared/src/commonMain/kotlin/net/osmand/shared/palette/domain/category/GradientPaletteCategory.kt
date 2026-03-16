@@ -36,7 +36,8 @@ enum class GradientPaletteCategory(
 	SLOPE(
 		id = "slope",
 		nameResId = "shared_string_slope",
-		measureUnitType = MeasureUnitType.NONE
+		measureUnitType = MeasureUnitType.NONE,
+		editable = true
 	),
 
 	// --- Terrain / Map Data ---
