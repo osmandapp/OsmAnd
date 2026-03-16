@@ -16,8 +16,7 @@ class AstroCatalogsCardViewHolder(
 	private val onCatalogClick: (Catalog) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
 
-	private val maxVisible = 10
-	private var expanded = false
+	private val maxVisible = 5
 	private val group: ChipGroup = itemView.findViewById(R.id.chipGroup)
 
 	fun bind(catalogCard: AstroCatalogsCardModel) {
@@ -26,7 +25,7 @@ class AstroCatalogsCardViewHolder(
 		val inflater = LayoutInflater.from(itemView.context)
 
 		val needShowMore = items.size > maxVisible
-		val visible = if (!expanded && needShowMore) items.take(maxVisible) else items
+		val visible = if (!catalogCard.expanded && needShowMore) items.take(maxVisible) else items
 
 		visible.forEach { catalog ->
 			group.addView(createCatalogChip(inflater, group, catalog.catalogId) {
@@ -35,9 +34,9 @@ class AstroCatalogsCardViewHolder(
 		}
 
 		if (needShowMore) {
-			val label = app.getString(if (expanded) R.string.shared_string_show_less else R.string.show_more)
+			val label = app.getString(if (catalogCard.expanded) R.string.shared_string_show_less else R.string.shared_string_ellipsis)
 			group.addView(createCatalogChip(inflater, group, label) {
-				expanded = !expanded
+				catalogCard.expanded = !catalogCard.expanded
 				bind(catalogCard)
 			})
 		}
