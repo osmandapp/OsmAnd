@@ -360,7 +360,7 @@ open class GradientPaletteController(
 
 	// --- Internal helper methods ---
 
-	private fun isDuplicationSupported() = isPurchased()
+	private fun isDuplicationSupported() = isPurchased() && paletteCategory.editable
 
 	private fun runIfPurchased(action: () -> Unit) {
 		val activity = getFragmentActivity()
