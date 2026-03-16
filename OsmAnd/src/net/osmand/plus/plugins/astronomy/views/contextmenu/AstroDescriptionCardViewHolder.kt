@@ -6,6 +6,7 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import net.osmand.plus.OsmandApplication
@@ -22,7 +23,9 @@ class AstroDescriptionCardViewHolder(itemView: View) : RecyclerView.ViewHolder(i
 		descriptionCardModel: AstroDescriptionCardModel,
 		astroContextMenuFragment: AstroContextMenuFragment
 	) {
-		descriptionCardModel.astroArticle?.apply { descriptionTv.text = description }
+		val description = descriptionCardModel.astroArticle?.description.orEmpty()
+		descriptionTv.text = description
+		descriptionTv.isVisible = description.isNotBlank()
 
 		val wikipediaString = app.getString(R.string.shared_string_wikipedia)
 		val text = app.getString(R.string.read_on, wikipediaString)
