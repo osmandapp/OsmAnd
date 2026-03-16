@@ -6108,4 +6108,25 @@
     <string name="astro_explore_my_data">Meine Daten</string>
     <string name="astro_explore_schedule_subtitle">Bevorstehende astronomische Ereignisse</string>
     <string name="obd_alt_battery_voltage_desc">Zeigt den Spannungspegel am OBD-Adapter an</string>
+    <string name="astro_explore_watch_now_subtitle">Jetzt den heutigen Nachthimmel ansehen</string>
+    <string name="astro_search_info_solar_system">Das Sonnensystem ist das per Schwerkraft verbundene System der Sonne und der Massen, die sie umkreisen, insbesondere ihrer acht Planeten, von denen die Erde einer ist.</string>
+    <string name="astro_search_info_constellations">Ein Sternbild ist ein Gebiet auf der Himmwlskugel in dem eine Gruppe sichtbarer Sterne ein wahrgenommenes Muster oder einen Umriss bilden.</string>
+    <string name="astro_search_info_stars">Sterne sind aua leuchtendem Plasma bestehende astronomische Objekte, die durch ihre eigene Schwerkraft zusammengehalten werden.</string>
+    <string name="astro_search_info_nebulas">Ein Nebel ist eine riesige aus Staub und Gas bestehende Wolke im Weltraum, häufig in einem Bereich in dem Sterne geboren werden.</string>
+    <string name="astro_search_info_star_clusters">Ein Sternhaufen ist eine Gruppe von Sternen, die per Schwerkraft verbunden sind und in derselben Molekülwolke geboren wurden.</string>
+    <string name="astro_search_info_deep_sky">Deep-Sky-Objekte umfassen Galaxien, Nebel, Sternenhaufen und andere entfernte astronomische Beobachtungsobjekte.</string>
+    <string name="astro_my_data_no_favorites_description">Sie können Objekte mittels ihres Kontextmenüs zu Ihren Favoriten hinzufügen</string>
+    <string name="astro_my_data_no_daily_paths_title">Keine Tagesbahnen</string>
+    <string name="astro_my_data_no_daily_paths_description">Aktivieren Sie die Tagesbahn eines Himmelskörpers mittels seines Kontextmenüs, um sie hier zu sehen</string>
+    <string name="astro_filter_naked_eye">Mit bloßem Auge sichtbar</string>
+    <string name="astro_filter_visible_tonight">Heute sichtbar</string>
+    <string name="astro_sort_sets_soonest">Frühester Untergang</string>
+    <string name="astro_sort_rises_soonest">Frühester Aufgang</string>
+    <string name="astro_sort_faintest_first">Lichtschwächste zuerst</string>
+    <string name="astro_sort_brightest_first">Hellste zuerst</string>
+    <string name="astro_search_empty_description">Versuchen Sie die Filter oder die Beobachtungszeit zu ändern.</string>
+    <string name="astro_explore_schedule">Zeitplan</string>
+    <string name="astronomy_schedule">Zeitplan</string>
+    <string name="astro_locate">Finden</string>
+    <string name="intersection">Kreuzung</string>
 </resources>
