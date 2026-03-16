@@ -335,6 +335,7 @@ open class GradientPaletteController(
 			selectPaletteItem(resultItem)
 			notifyUpdatePaletteSelection(oldSelected, resultItem)
 		}
+		updateExternalDependencies()
 		editedItem = null
 	}
 
