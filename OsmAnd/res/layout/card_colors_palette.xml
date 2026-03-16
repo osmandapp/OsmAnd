@@ -13,11 +13,17 @@
 			android:id="@+id/colors_list"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:paddingStart="@dimen/content_padding"
-			android:paddingEnd="0dp"
 			android:layout_marginBottom="@dimen/content_padding"
+			android:paddingHorizontal="@dimen/content_padding"
 			android:layout_gravity="top"
 			android:layout_weight="1" />
+
+		<View
+			android:layout_width="1dp"
+			android:layout_height="@dimen/dialog_button_height"
+			android:layout_gravity="top|end"
+			android:layout_marginVertical="@dimen/content_padding_small_half"
+			android:background="?attr/divider_color_basic"/>
 
 		<FrameLayout
 			android:id="@+id/add_button_container"

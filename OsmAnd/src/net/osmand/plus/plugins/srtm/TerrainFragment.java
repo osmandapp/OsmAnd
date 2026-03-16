@@ -61,6 +61,7 @@ import net.osmand.plus.widgets.style.CustomClickableSpan;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.shared.ColorPalette;
 import net.osmand.shared.palette.data.PaletteRepository;
+import net.osmand.shared.palette.data.PaletteUtils;
 import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.util.Algorithms;
@@ -179,11 +180,14 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		TerrainType type = mode.getType();
 
 		GradientPaletteCategory category = type.toPaletteCategory();
-		String paletteName = mode.getMainFileName();
+		String paletteName = PaletteUtils.INSTANCE.extractPaletteName(mode.getMainFileName());
 		ColorPalette colorPalette = null;
 
 		PaletteRepository repository = app.getPaletteRepository();
-		if (repository.findPaletteItem(category.getId(), paletteName) instanceof PaletteItem.Gradient gradient) {
+		PaletteItem paletteItem = paletteName != null
+				? repository.findPaletteItem(category.getId(), paletteName)
+				: null;
+		if (paletteItem instanceof PaletteItem.Gradient gradient) {
 			colorPalette = gradient.getColorPalette();
 		}
 

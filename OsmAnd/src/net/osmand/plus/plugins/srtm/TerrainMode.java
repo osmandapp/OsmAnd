@@ -132,7 +132,7 @@ public class TerrainMode {
 	@Nullable
 	public static TerrainMode valueOf(@NonNull TerrainType type, @NonNull String keyName) {
 		for (TerrainMode mode : cachedTerrainModes) {
-			if (mode.type == type && Algorithms.stringsEqual(mode.getKeyName(), keyName)) {
+			if (mode.type == type && mode.isIdentifiedBy(keyName)) {
 				return mode;
 			}
 		}
@@ -152,7 +152,7 @@ public class TerrainMode {
 	public static TerrainMode getByKey(String key) {
 		TerrainMode hillshade = null;
 		for (TerrainMode mode : cachedTerrainModes) {
-			if (Algorithms.stringsEqual(mode.getKeyName(), key)) {
+			if (mode.isIdentifiedBy(key)) {
 				return mode;
 			} else if (mode.isHillshade() && hillshade == null) {
 				hillshade = mode;
@@ -163,7 +163,7 @@ public class TerrainMode {
 
 	public static boolean isModeExist(@NonNull String key) {
 		for (TerrainMode m : cachedTerrainModes) {
-			if (Algorithms.stringsEqual(m.getKeyName(), key)) {
+			if (m.isIdentifiedBy(key)) {
 				return true;
 			}
 		}
@@ -243,5 +243,10 @@ public class TerrainMode {
 	@NonNull
 	public String getDescription() {
 		return translateName;
+	}
+
+	public boolean isIdentifiedBy(@NonNull String searchKey) {
+		return Algorithms.stringsEqual(this.key, searchKey)
+				|| Algorithms.stringsEqual(this.getKeyName(), searchKey);
 	}
 }

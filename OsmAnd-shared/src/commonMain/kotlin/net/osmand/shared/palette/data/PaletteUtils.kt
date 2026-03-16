@@ -35,7 +35,7 @@ object PaletteUtils {
 
 	fun extractPaletteName(fileName: String): String? {
 		val fileType = PaletteFileTypeRegistry.fromFileName(fileName) ?: return null
-		return fileName.replace(fileType.filePrefix, "").replace(TXT_EXT, "")
+		return fileName.replaceFirst(fileType.filePrefix, "").replace(TXT_EXT, "")
 	}
 
 	fun isDefaultPalette(paletteName: String): Boolean {

@@ -14,12 +14,14 @@ import net.osmand.plus.card.color.palette.gradient.editor.data.GradientStepData
 import net.osmand.plus.card.color.palette.gradient.editor.behaviour.FixedGradientBehaviour
 import net.osmand.plus.card.color.palette.gradient.editor.behaviour.GradientEditorBehaviour
 import net.osmand.plus.card.color.palette.gradient.editor.behaviour.RelativeGradientBehaviour
+import net.osmand.plus.card.color.palette.gradient.editor.behaviour.SymmetricRelativeGradientBehaviour
 import net.osmand.plus.card.color.palette.gradient.editor.data.GradientUpdateResult
 import net.osmand.plus.card.color.palette.solid.SolidPaletteController
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.widgets.alert.AlertDialogData
 import net.osmand.plus.widgets.alert.CustomAlert
 import net.osmand.shared.palette.domain.GradientRangeType
+import net.osmand.shared.palette.domain.filetype.GradientFileType
 
 class GradientEditorController(
 	app: OsmandApplication,
@@ -53,7 +55,12 @@ class GradientEditorController(
 
 	// --- Specific Behaviour for the range type ---
 	private val editorBehaviour: GradientEditorBehaviour = when (initialDraft.fileType.rangeType) {
-		GradientRangeType.RELATIVE -> RelativeGradientBehaviour()
+		GradientRangeType.RELATIVE -> {
+			when (initialDraft.fileType) {
+				GradientFileType.SLOPE_RELATIVE -> SymmetricRelativeGradientBehaviour()
+				else -> RelativeGradientBehaviour()
+			}
+		}
 		GradientRangeType.FIXED_VALUES -> FixedGradientBehaviour()
 	}
 

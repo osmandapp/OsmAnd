@@ -4,6 +4,7 @@ import net.osmand.shared.ColorPalette
 import net.osmand.shared.palette.domain.GradientPoint
 import net.osmand.shared.palette.domain.GradientRangeType
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory
+import net.osmand.shared.units.AngleUnits
 import net.osmand.shared.units.LengthUnits
 import net.osmand.shared.units.MeasurementUnit
 import net.osmand.shared.units.NoUnit
@@ -18,7 +19,9 @@ enum class GradientFileType(
 	val displayUnits: MeasurementUnit<*> = baseUnits, // Unit used for UI display (e.g., percent)
 	val defaultDisplayValues: List<Float> = emptyList(),        // Default steps for new palettes
 	val minLimit: Float? = null,                             // Min allowed value (in base units)
-	val maxLimit: Float? = null                              // Max allowed value (in base units)
+	val maxLimit: Float? = null,                             // Max allowed value (in base units)
+	val supportsNoData: Boolean = true,                 // Supports custom color for missing data
+	val useNamedConstants: Boolean = true
 ) : PaletteFileType {
 
 	// --- Track / Route Data (Prefix: route_*) ---
@@ -90,8 +93,11 @@ enum class GradientFileType(
 		filePrefix = "route_fixed_slope_",
 		category = GradientPaletteCategory.SLOPE,
 		rangeType = GradientRangeType.FIXED_VALUES,
-		baseUnits = NoUnit, // Usually degrees
-		defaultDisplayValues = listOf(0f, 10f, 20f)
+		baseUnits = AngleUnits.DEGREES,
+		defaultDisplayValues = listOf(-15f, 0f, 15f),
+		minLimit = -90f,
+		maxLimit = 90f,
+		useNamedConstants = false
 	),
 
 	SLOPE_RELATIVE(
@@ -100,9 +106,10 @@ enum class GradientFileType(
 		rangeType = GradientRangeType.RELATIVE,
 		baseUnits = PercentUnits.FRACTION,
 		displayUnits = PercentUnits.PERCENT,
-		defaultDisplayValues = listOf(0f, 50f, 100f),
-		minLimit = 0f,
-		maxLimit = 1f
+		defaultDisplayValues = listOf(-100f, 0f, 100f),
+		minLimit = -1f,
+		maxLimit = 1f,
+		useNamedConstants = false
 	),
 
 	// --- Terrain / Map Data ---
@@ -112,15 +119,19 @@ enum class GradientFileType(
 		category = GradientPaletteCategory.TERRAIN_ALTITUDE,
 		rangeType = GradientRangeType.FIXED_VALUES,
 		baseUnits = LengthUnits.METERS,
-		defaultDisplayValues = listOf(0f, 1000f, 2000f, 4000f)
+		defaultDisplayValues = listOf(0f, 1000f, 2000f, 4000f),
+		supportsNoData = false
 	),
 
 	TERRAIN_SLOPE(
 		filePrefix = "slope_",
 		category = GradientPaletteCategory.TERRAIN_SLOPE,
 		rangeType = GradientRangeType.FIXED_VALUES,
-		baseUnits = NoUnit, // Degrees
-		defaultDisplayValues = listOf(0f, 15f, 30f, 45f)
+		baseUnits = AngleUnits.DEGREES,
+		defaultDisplayValues = listOf(0f, 15f, 30f, 45f),
+		minLimit = 0f,
+		maxLimit = 90f,
+		supportsNoData = false
 	),
 
 	/**
@@ -133,7 +144,8 @@ enum class GradientFileType(
 		category = GradientPaletteCategory.TERRAIN_HILLSHADE,
 		rangeType = GradientRangeType.FIXED_VALUES,
 		baseUnits = NoUnit, // 0-255 byte value
-		defaultDisplayValues = listOf(0f, 255f)
+		defaultDisplayValues = listOf(0f, 255f),
+		supportsNoData = false
 	),
 
 	// --- Weather (Prefix: weather_*) ---
@@ -143,7 +155,8 @@ enum class GradientFileType(
 		category = GradientPaletteCategory.WEATHER,
 		rangeType = GradientRangeType.FIXED_VALUES,
 		baseUnits = NoUnit,
-		defaultDisplayValues = listOf(0f, 100f)
+		defaultDisplayValues = listOf(0f, 100f),
+		supportsNoData = false
 	);
 
 	/**

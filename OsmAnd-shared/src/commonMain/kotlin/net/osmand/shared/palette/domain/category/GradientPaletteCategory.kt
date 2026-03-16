@@ -36,21 +36,24 @@ enum class GradientPaletteCategory(
 	SLOPE(
 		id = "slope",
 		nameResId = "shared_string_slope",
-		measureUnitType = MeasureUnitType.NONE
+		measureUnitType = MeasureUnitType.NONE,
+		editable = true
 	),
 
 	// --- Terrain / Map Data ---
 
 	TERRAIN_ALTITUDE(
-		id = "HEIGHT", // Legacy key for TerrainMode
+		id = "HEIGHT",
 		nameResId = "shared_string_height",
-		measureUnitType = MeasureUnitType.ALTITUDE
+		measureUnitType = MeasureUnitType.ALTITUDE,
+		editable = true
 	),
 
 	TERRAIN_SLOPE(
-		id = "SLOPE", // Legacy key for TerrainMode
+		id = "SLOPE",
 		nameResId = "shared_string_slope",
-		measureUnitType = MeasureUnitType.NONE
+		measureUnitType = MeasureUnitType.NONE,
+		editable = true
 	),
 
 	TERRAIN_HILLSHADE(

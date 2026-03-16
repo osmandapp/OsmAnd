@@ -33,6 +33,18 @@ class IdMapper {
 	}
 
 	/**
+	 * Updates the key for an existing stable ID.
+	 * This prevents UI flickering in RecyclerView when an item's identifier changes
+	 * (e.g., during a rename) by mapping the new key to the previously generated stable ID.
+	 */
+	fun updateKey(oldKey: String, newKey: String) {
+		val existingId = idMap.remove(oldKey)
+		if (existingId != null) {
+			idMap[newKey] = existingId
+		}
+	}
+
+	/**
 	 * Clears the internal mapping and resets the counter.
 	 *
 	 * Use this method only when the data set is completely refreshed/invalidated

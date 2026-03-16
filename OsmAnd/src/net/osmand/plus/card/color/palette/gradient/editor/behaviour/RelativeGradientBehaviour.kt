@@ -7,18 +7,13 @@ import net.osmand.shared.palette.domain.filetype.GradientFileType
 
 class RelativeGradientBehaviour : GradientEditorBehaviour {
 
-
 	override fun isMandatoryPoint(point: GradientPoint): Boolean {
 		return RelativeConstants.valueOfRatio(point.value) != null
 	}
 
-	override fun isValueEditable(point: GradientPoint): Boolean {
-		return !isMandatoryPoint(point)
-	}
-
 	override fun isRemoveEnabled(draft: GradientDraft, selectedIndex: Int): Boolean {
 		val point = draft.points.getOrNull(selectedIndex) ?: return false
-		return RelativeConstants.valueOfRatio(point.value) == null && super.isRemoveEnabled(draft, selectedIndex)
+		return !isMandatoryPoint(point) && super.isRemoveEnabled(draft, selectedIndex)
 	}
 
 	override fun getStepLabel(
