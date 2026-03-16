@@ -93,8 +93,11 @@ enum class GradientFileType(
 		filePrefix = "route_fixed_slope_",
 		category = GradientPaletteCategory.SLOPE,
 		rangeType = GradientRangeType.FIXED_VALUES,
-		baseUnits = NoUnit, // Usually degrees
-		defaultDisplayValues = listOf(0f, 10f, 20f)
+		baseUnits = AngleUnits.DEGREES,
+		defaultDisplayValues = listOf(-15f, 0f, 15f),
+		minLimit = -90f,
+		maxLimit = 90f,
+		useNamedConstants = false
 	),
 
 	SLOPE_RELATIVE(
