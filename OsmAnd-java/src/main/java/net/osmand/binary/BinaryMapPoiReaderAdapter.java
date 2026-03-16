@@ -410,12 +410,49 @@ public class BinaryMapPoiReaderAdapter {
 			}
 		}
 	}
+	
+	static class BloomFilterAlgorithmDef {
+		int index;
+		byte[] data;
+		int version = -1;
+	}
+	
+	private BloomFilterAlgorithmDef readFilter(BloomFilterAlgorithmDef activeFilter, int bloomFilterIndex)
+			throws IOException {
+		BloomFilterAlgorithmDef algo = new BloomFilterAlgorithmDef();
+		algo.index = bloomFilterIndex;
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				if (algo.version == BloomFilter.VERSION) {
+					return algo;
+				}
+				return activeFilter;
+			case OsmandOdb.OsmAndBloomFilterAlgorithm.VERSION_FIELD_NUMBER: {
+				algo.version =  codedIS.readUInt32();
+				break;
+			}
+			case OsmandOdb.OsmAndBloomFilterAlgorithm.DATA_FIELD_NUMBER: {
+				algo.data =  codedIS.readBytes().toByteArray();
+				break;
+			}
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+
+	}
 
 	private TIntLongHashMap readPoiNameIndex(Collator instance, String query, SearchRequest<Amenity> req, PoiRegion region, List<Integer> nameIndexCoordinates) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		List<TIntArrayList> listOffsets = null;
 		List<String> queries = null;
 		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
+		BloomFilterAlgorithmDef activeFilter = null;
+		int bloomFilterIndex = 0;
 		long offset = 0;
 		while (true) {
 			final long subStart = req.beginSubSearchStats(), bytes = codedIS.getBytesCounter();
@@ -424,6 +461,14 @@ public class BinaryMapPoiReaderAdapter {
 			switch (tag) {
 			case 0:
 				return offsets;
+			case OsmandOdb.OsmAndPoiNameIndex.FILTERS_FIELD_NUMBER: {
+				int len = codedIS.readRawVarint32();
+				long oldLim = codedIS.pushLimitLong((long) len);
+				activeFilter = readFilter(activeFilter, bloomFilterIndex++);
+				codedIS.popLimit(oldLim);
+				
+				break;
+			}
 			case OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER: {
 				long length = readInt();
 				long oldLimit = codedIS.pushLimitLong((long) length);
@@ -452,7 +497,7 @@ public class BinaryMapPoiReaderAdapter {
 							codedIS.seek(dataOffsets.get(i) + offset);
 							int len = codedIS.readRawVarint32();
 							long oldLim = codedIS.pushLimitLong((long) len);
-							readPoiNameIndexData(offsetMap, req, region, nameIndexCoordinates, queries);
+							readPoiNameIndexData(offsetMap, req, region, activeFilter, nameIndexCoordinates, queries);
 							codedIS.popLimit(oldLim);
 							if (req.isCancelled()) {
 								codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
@@ -496,8 +541,9 @@ public class BinaryMapPoiReaderAdapter {
 
 	}
 
+
 	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
-			List<Integer> nameIndexCoordinates, List<String> queryTokens) throws IOException {
+			BloomFilterAlgorithmDef supportedBloomFilter, List<Integer> nameIndexCoordinates, List<String> queryTokens) throws IOException {
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -507,7 +553,7 @@ public class BinaryMapPoiReaderAdapter {
 				case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:
 					int len = codedIS.readRawVarint32();
 					long oldLim = codedIS.pushLimitLong((long) len);
-					readPoiNameIndexDataAtom(offsets, req, region, nameIndexCoordinates, queryTokens);
+					readPoiNameIndexDataAtom(offsets, req, region, supportedBloomFilter, nameIndexCoordinates, queryTokens);
 					codedIS.popLimit(oldLim);
 					break;
 				default:
@@ -517,20 +563,20 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
+	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region, BloomFilterAlgorithmDef bloomFilter,
 	                                      List<Integer> nameIndexCoordinates, List<String> queryTokens) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 15;
 		int shift = Integer.MIN_VALUE;
-		boolean hasBloomIndexes = false, bloomMatched = false;
-		BloomFilter filter = BloomFilter.getInstance();
+		boolean bloomMatched = true;
+		int filterIndex = 0; 
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if (hasBloomIndexes && !bloomMatched) {
+				if (!bloomMatched) {
 					return;
 				}
 				if (shift != Integer.MIN_VALUE) {
@@ -562,11 +608,11 @@ public class BinaryMapPoiReaderAdapter {
 				zoom = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.BLOOMINDEX_FIELD_NUMBER:
-				hasBloomIndexes = true;
 				byte[] bloom = codedIS.readBytes().toByteArray();
-				if (!bloomMatched) {
-					bloomMatched = filter.matches(bloom, queryTokens);
+				if (bloomFilter != null && bloomFilter.index == filterIndex) { 
+					bloomMatched &= BloomFilter.getInstance().matches(bloom, queryTokens);
 				}
+				filterIndex++;
 				break;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SHIFTTO_FIELD_NUMBER:
 				long l = readInt();
@@ -574,7 +620,7 @@ public class BinaryMapPoiReaderAdapter {
 					throw new IllegalStateException();
 				}
 				shift = (int) l;
-				if (hasBloomIndexes && !bloomMatched) {
+				if (!bloomMatched) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					return;
 				}

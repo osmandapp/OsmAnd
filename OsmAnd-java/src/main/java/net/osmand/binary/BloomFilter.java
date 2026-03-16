@@ -1,26 +1,42 @@
 package net.osmand.binary;
 
 import net.osmand.CollatorStringMatcher;
+import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;
 import net.sf.junidecode.Junidecode;
 
 import java.util.*;
 import java.util.concurrent.atomic.LongAdder;
 
+import org.apache.commons.logging.Log;
+
 public final class BloomFilter {
+	
+	public static final int VERSION = 0; // with 2026-04-01 version will be 1
+	
 	private static final int BOX_BITS = 512;
 	private static final int DEFAULT_HASHES = 5;
 	private static final int BOX_SIZE = BOX_BITS / Byte.SIZE;
+	
+	private static final Log log = PlatformUtil.getLog(BloomFilter.class);
 
-	public static final LongAdder writeBoxBitAcc = new LongAdder();
-	public static final LongAdder writeBoxAcc = new LongAdder(), writeBoxCount = new LongAdder();
-	public static final LongAdder skipBoxAcc = new LongAdder(), readBoxCount = new LongAdder();
+	private final LongAdder writeBoxBitAcc = new LongAdder();
+	private final LongAdder writeBoxAcc = new LongAdder(), writeBoxCount = new LongAdder();
+	private final LongAdder skipBoxAcc = new LongAdder(), readBoxCount = new LongAdder();
+	
+	private static BloomFilter INSTANCE = new BloomFilter();
 
 	private BloomFilter() {
 	}
 
 	public static BloomFilter getInstance() {
-		return new BloomFilter();
+		return INSTANCE;
+	}
+	
+	
+	public void logInfo() {
+		log.info("Avg box's tokens: " + writeBoxAcc.sum() + "/" + writeBoxCount.sum());
+		log.info("Avg bloom bits: " + writeBoxBitAcc.sum() + "/" + writeBoxCount.sum());
 	}
 
 	private Set<String> extendTokens(Collection<String> tokens) {
@@ -104,7 +120,7 @@ public final class BloomFilter {
 		}
 	}
 
-	public boolean matches(byte[] bloom, String token) {
+	private boolean matches(byte[] bloom, String token) {
 		if (bloom == null || bloom.length == 0 || Algorithms.isEmpty(token)) {
 			return true;
 		}
@@ -160,11 +176,11 @@ public final class BloomFilter {
 	}
 
 	public static void resetStats() {
-		readBoxCount.reset();
-		skipBoxAcc.reset();
-
-		writeBoxAcc.reset();
-		writeBoxCount.reset();
-		writeBoxBitAcc.reset();
+		BloomFilter instance = getInstance();
+		instance.readBoxCount.reset();
+		instance.skipBoxAcc.reset();
+		instance.writeBoxAcc.reset();
+		instance.writeBoxCount.reset();
+		instance.writeBoxBitAcc.reset();
 	}
 }
