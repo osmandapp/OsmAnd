@@ -165,7 +165,7 @@
     <string name="poi_curtain">Vorhanggeschäft</string>
     <string name="poi_customs">Zollamt</string>
     <string name="poi_cycling">Radsport</string>
-    <string name="poi_dairy">Geschäft für Milchprodukte</string>
+    <string name="poi_dairy">Geschäft für Molkereiprodukte</string>
     <string name="poi_dam">Staudamm</string>
     <string name="poi_dance_floor">Tanzfläche</string>
     <string name="poi_deli">Feinkostgeschäft</string>
@@ -274,7 +274,7 @@
     <string name="poi_kindergarten">Kindergarten</string>
     <string name="poi_kiosk">Kiosk</string>
     <string name="poi_kitchen">Küchengeräte</string>
-    <string name="poi_korfbal">Korfball</string>
+    <string name="poi_korfball">Korfball</string>
     <string name="poi_landfill">Mülldeponie</string>
     <string name="poi_laundry">Wäscherei</string>
     <string name="poi_lawyer">Rechtsanwalt</string>
@@ -1456,7 +1456,7 @@
     <string name="poi_denomination_nazarene">Nazaräer</string>
     <string name="poi_denomination_united_methodist">Vereinigte Methodisten</string>
     <string name="poi_denomination_old_believers">Altgläubige</string>
-    <string name="poi_denomination_spiritist">Spiritist</string>
+    <string name="poi_denomination_spiritist">Spiritistisch</string>
     <string name="poi_denomination_armenian_apostolic">Armenisch-apostolisch</string>
     <string name="poi_denomination_dutch_reformed">Niederländisch-reformiert</string>
     <string name="poi_denomination_latter_day_saints">Heilige der Letzten Tage</string>
@@ -2738,7 +2738,7 @@
     <string name="poi_service_bicycle_charging_yes">Ladestation: ja;Fahrradladestation;E-Bike-Ladestation</string>
     <string name="poi_service_bicycle_charging_no">Ladestation: nein</string>
     <string name="poi_shop_craft">Geschäft für Kunsthandwerksbedarf</string>
-    <string name="poi_fuel_avia_type">Kraftstoffart (Flugzeuge)</string>
+    <string name="poi_fuel_avia_type">Kraftstoffsorte (Luftfahrt)</string>
     <string name="poi_payment_fuel_type">Tankkarten</string>
     <string name="poi_internet_access_type">Art des Internetzugangs</string>
     <string name="poi_clothes_type">Art</string>
@@ -5157,7 +5157,7 @@
     <string name="poi_barrier_sliding_gate">Schiebetor</string>
     <string name="poi_barrier_log">Baumstammbarriere</string>
     <string name="poi_piste_downhill">Abfahrtspiste;Skipiste;Skiabfahrt</string>
-    <string name="poi_sample_collection_filter">Probenentnahme</string>
+    <string name="poi_sample_collection_filter">Probenahme</string>
     <string name="x">X (früher Twitter)</string>
     <string name="poi_sample_collection">Probenentnahme;Blut;Labor;Test</string>
     <string name="poi_sample_collection_yes">Ja</string>
@@ -5166,11 +5166,13 @@
     <string name="poi_yoga">Yoga</string>
     <string name="poi_memorial_type">Art des Denkmals</string>
     <string name="poi_covered_booth_filter">Häuschen</string>
-    <string name="poi_rapids_grade_0">0 (Flachwasser)</string>
-    <string name="poi_rapids_grade_1">1 (leicht)</string>
-    <string name="poi_rapids_grade_2">2 (Anfänger)</string>
-    <string name="poi_rapids_grade_3">3 (mittel)</string>
-    <string name="poi_rapids_grade_4">4 (fortgeschritten)</string>
-    <string name="poi_rapids_grade_5">5 (Experte)</string>
-    <string name="poi_rapids_grade_6">6 (Extrem)</string>
+    <string name="poi_rapids_grade_0">0 (Zahmwasser)</string>
+    <string name="poi_rapids_grade_1">1 (unschwierig)</string>
+    <string name="poi_rapids_grade_2">2 (mäßig schwierig)</string>
+    <string name="poi_rapids_grade_3">3 (schwierig)</string>
+    <string name="poi_rapids_grade_4">4 (sehr schwierig)</string>
+    <string name="poi_rapids_grade_5">5 (äußerst schwierig)</string>
+    <string name="poi_rapids_grade_6">6 (Grenze der Befahrbarkeit)</string>
+    <string name="poi_rapids_filter">Wildwasserschwierigkeit</string>
+    <string name="poi_rapids_grade_x">X (nicht befahrbar)</string>
 </resources>

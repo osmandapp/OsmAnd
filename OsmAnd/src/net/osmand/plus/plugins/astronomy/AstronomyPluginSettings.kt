@@ -11,7 +11,6 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 	companion object {
 		private const val KEY_COMMON = "common"
 		private const val KEY_SHOW_REGULAR_MAP = "showRegularMap"
-		private const val KEY_SHOW_STAR_CHART = "showStarChart"
 		private const val KEY_IS_2D_MODE = "is2DMode"
 
 		private const val KEY_STAR_MAP = "star_map"
@@ -87,7 +86,6 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 
 	data class CommonConfig(
 		val showRegularMap: Boolean,
-		val showStarChart: Boolean
 	)
 
 	data class StarMapConfig(
@@ -169,9 +167,8 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		val settings = root.optJSONObject(KEY_COMMON)
 
 		val showStarMap = settings?.optBoolean(KEY_SHOW_REGULAR_MAP, false) ?: false
-		val showStarChart = settings?.optBoolean(KEY_SHOW_STAR_CHART, false) ?: false
 
-		return CommonConfig(showStarMap, showStarChart)
+		return CommonConfig(showStarMap)
 	}
 
 	fun setCommonConfig(config: CommonConfig) {
@@ -179,7 +176,6 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		val settings = root.optJSONObject(KEY_COMMON) ?: JSONObject()
 
 		settings.put(KEY_SHOW_REGULAR_MAP, config.showRegularMap)
-		settings.put(KEY_SHOW_STAR_CHART, config.showStarChart)
 
 		root.put(KEY_COMMON, settings)
 		setSettingsJson(root)

@@ -40,6 +40,7 @@ import net.osmand.plus.mapcontextmenu.gallery.tasks.CacheReadTask
 import net.osmand.plus.mapcontextmenu.gallery.tasks.CacheWriteTask
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astronomy.AstroArticle
+import net.osmand.plus.plugins.astronomy.Catalog
 import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.plugins.astronomy.StarMapFragment
 import net.osmand.plus.plugins.astronomy.AstronomyPlugin
@@ -157,6 +158,7 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 
 	companion object {
 		val TAG: String = AstroContextMenuFragment::class.java.simpleName
+		private const val ARG_SKY_OBJECT_ID = "skyObjectId"
 		private const val TAB_OVERVIEW = 0
 		private const val TAB_VISIBILITY = 1
 		private const val TAB_SCHEDULE = 2
@@ -166,7 +168,7 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 		fun newInstance(skyObject: SkyObject): AstroContextMenuFragment {
 			val fragment = AstroContextMenuFragment()
 			val args = Bundle()
-			args.putString("skyObjectName", skyObject.name)
+			args.putString(ARG_SKY_OBJECT_ID, skyObject.id)
 			fragment.arguments = args
 			return fragment
 		}
@@ -202,11 +204,12 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 		setupRecyclerView()
 		loadCards()
 
-		arguments?.getString("skyObjectName")?.let { name ->
-			parent.viewModel.skyObjects.value?.find { it.name == name }?.let {
-				updateObjectInfo(it)
+		val resolvedObject = arguments?.getString(ARG_SKY_OBJECT_ID)
+			?.let(parent::findTrackableObjectById)
+			?: arguments?.getString("skyObjectName")?.let { name ->
+				parent.getTrackableObjects().firstOrNull { it.name == name }
 			}
-		}
+		resolvedObject?.let(::updateObjectInfo)
 
 		return view
 	}
@@ -256,8 +259,8 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 			updateCard(obj, article)
 		} ?: AstroDescriptionCardModel(app, obj, article)
 
-		obj.catalogs.takeIf { it.isNotEmpty() }?.let { catalogs ->
-			catalogCardModel = catalogCardModel?.apply { this.catalogs = catalogs }
+		catalogCardModel = obj.catalogs.takeIf { it.isNotEmpty() }?.let { catalogs ->
+			catalogCardModel?.apply { this.catalogs = catalogs }
 				?: AstroCatalogsCardModel(app, catalogs)
 		}
 
@@ -319,6 +322,7 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 			obj.isFavorite = !obj.isFavorite
 			val swSettings = PluginsHelper.requirePlugin(AstronomyPlugin::class.java).astroSettings
 			if (obj.isFavorite) swSettings.addFavorite(obj.id) else swSettings.removeFavorite(obj.id)
+			parent.viewModel.refreshSkyObjects()
 			parent.starView.invalidate()
 
 			bindButtons()
@@ -332,9 +336,12 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 		directionButton.setOnClickListener {
 			obj.showDirection = !obj.showDirection
 			val swSettings = PluginsHelper.requirePlugin(AstronomyPlugin::class.java).astroSettings
-			if (obj.showDirection) swSettings.addDirection(obj.id) else swSettings.removeDirection(
-				obj.id
-			)
+			if (obj.showDirection) {
+				obj.colorIndex = swSettings.addDirection(obj.id)
+			} else {
+				swSettings.removeDirection(obj.id)
+			}
+			parent.viewModel.refreshSkyObjects()
 			parent.starView.invalidate()
 			bindButtons()
 		}
@@ -342,10 +349,13 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 		pathButton.setOnClickListener {
 			obj.showCelestialPath = !obj.showCelestialPath
 			val swSettings = PluginsHelper.requirePlugin(AstronomyPlugin::class.java).astroSettings
-			if (obj.showCelestialPath) swSettings.addCelestialPath(obj.id) else swSettings.removeCelestialPath(
-				obj.id
-			)
+			if (obj.showCelestialPath) {
+				swSettings.addCelestialPath(obj.id)
+			} else {
+				swSettings.removeCelestialPath(obj.id)
+			}
 			parent.starView.setObjectPinned(obj, obj.showCelestialPath, true)
+			parent.viewModel.refreshSkyObjects()
 			parent.starView.invalidate()
 			bindButtons()
 		}
@@ -606,6 +616,9 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 			},
 			onScheduleShiftPeriod = { daysDelta ->
 				shiftSchedulePeriod(daysDelta)
+			},
+			onCatalogClick = { catalog ->
+				openCatalogSearch(catalog)
 			})
 
 		adapter.skyObject = skyObject
@@ -1115,5 +1128,9 @@ class AstroContextMenuFragment : BaseMaterialFragment() {
 
 		adapter.setItems(items)
 		updateBottomTabSelectionByScroll()
+	}
+
+	private fun openCatalogSearch(catalog: Catalog) {
+		parent.showSearchDialog(catalog.wid)
 	}
 }

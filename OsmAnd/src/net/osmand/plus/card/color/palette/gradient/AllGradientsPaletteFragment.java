@@ -22,9 +22,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.palette.contract.IPaletteController;
 import net.osmand.plus.palette.contract.IPaletteView;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.palette.controller.BasePaletteController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -89,13 +89,15 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 	}
 
 	private void setupColorsPalette(@NonNull View view) {
-		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-		adapter = new AllGradientsPaletteAdapter(app, requireActivity(), controller, nightMode, () -> {
-			dismiss();
-			return kotlin.Unit.INSTANCE;
-		});
-		recyclerView.setLayoutManager(new LinearLayoutManager(app));
-		recyclerView.setAdapter(adapter);
+		if (controller != null) {
+			RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+			adapter = new AllGradientsPaletteAdapter(app, requireActivity(), controller, nightMode, () -> {
+				dismiss();
+				return kotlin.Unit.INSTANCE;
+			});
+			recyclerView.setLayoutManager(new LinearLayoutManager(app));
+			recyclerView.setAdapter(adapter);
+		}
 	}
 
 	@Override

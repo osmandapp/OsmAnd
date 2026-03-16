@@ -96,6 +96,16 @@
 	<color name="divider_color_dark">#2c3033</color>
 	<color name="divider_color">#ccc</color>
 
+	<!-- Progress bar-->
+	<color name="routing_fast_progress_fill_light">#16C866</color>
+    <color name="routing_fast_progress_fill_dark">#16C866</color>
+    <color name="routing_fast_progress_track_light">#CDE4D8</color>
+    <color name="routing_fast_progress_track_dark">#20603D</color>
+	<color name="routing_standard_progress_fill_light">#237BFF</color>
+    <color name="routing_standard_progress_fill_dark">#237BFF</color>
+    <color name="routing_standard_progress_track_light">#D3E5FF</color> 
+    <color name="routing_standard_progress_track_dark">#2D3C53</color>
+
 	<!-- User created points -->
 	<color name="marker_blue">#2196f3</color>
 	<color name="marker_green">#73b825</color>
@@ -224,6 +234,12 @@
 	<color name="color_black_transparent">#90000000</color>
 	<color name="widgettext_night">#ffC8C8C8</color>
 	<color name="widgettext_day">#000</color>
+	<color name="widget_units_color_light">#666666</color>
+	<color name="widget_units_color_dark">#8C8C8C</color>
+	<color name="speedometer_tolerance_units_color_light">#4C4950</color>
+	<color name="speedometer_tolerance_units_color_dark">#4C4950</color>
+	<color name="speedometer_limit_units_color_light">#FFFFFF</color>
+	<color name="speedometer_limit_units_color_dark">#FFFFFF</color>
 	<!-- widgettext_shadow_night is the same as widget background color for non-transparent night skin (from box_night_free_simple.9.png) -->
 	<color name="widgettext_shadow_night">#dc262626</color>
 	<color name="widgettext_shadow_day">#fff</color>

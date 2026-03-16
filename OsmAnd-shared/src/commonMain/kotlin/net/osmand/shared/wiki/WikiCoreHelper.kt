@@ -156,9 +156,7 @@ object WikiCoreHelper {
 				if (!data.properties.author.isNullOrEmpty()) {
 					metadata.author = data.properties.author
 				}
-				if (!data.properties.description.isNullOrEmpty()) {
-					metadata.description = data.properties.description
-				}
+				parseDescription(metadata, data.properties.description)
 
 				wikiImages.add(wikiImage)
 			}
@@ -180,7 +178,10 @@ object WikiCoreHelper {
 		}
 	}
 
-	fun getImagesFromJson(json: String, wikiImages: MutableList<WikiImage>): List<WikiImage> {
+	fun getImagesFromJson(
+		json: String,
+		wikiImages: MutableList<WikiImage>
+	): List<WikiImage> {
 		return try {
 			val response = jsonParser.decodeFromString(OsmandAPIResponseV2.serializer(), json)
 			createWikiImages(response, wikiImages)
@@ -276,11 +277,35 @@ object WikiCoreHelper {
 		image.getString("date")?.let { metadata.date = it }
 		image.getString("author")?.let { metadata.author = it }
 		image.getString("license")?.let { metadata.license = it }
+		parseDescription(metadata, image.getString("description"))
 
 		val mediaIdLong = image.getString("mediaId")?.toLongOrNull() ?: -1L
 		wikiImage.setMediaId(mediaIdLong)
 
 		return wikiImage
+	}
+
+	private fun parseDescription(metadata: WikiMetadata.Metadata, description: String?) {
+		if (description.isNullOrBlank()) {
+			return
+		}
+
+		val trimmedDescription = description.trim()
+		if (!trimmedDescription.startsWith("{")) {
+			metadata.putDescription(WikiMetadata.ENGLISH_LANGUAGE, trimmedDescription)
+			return
+		}
+
+		try {
+			val descriptions = jsonParser.decodeFromString<JsonObject>(trimmedDescription)
+			descriptions.entries.forEach { (language, value) ->
+				(value as? JsonPrimitive)?.contentOrNull?.takeIf { it.isNotBlank() }?.let {
+					metadata.putDescription(language, it)
+				}
+			}
+		} catch (e: Exception) {
+			LOG.error(e.message, null)
+		}
 	}
 
 	private fun parseImageDataFromFile(imageUrl: String): WikiImage? {
