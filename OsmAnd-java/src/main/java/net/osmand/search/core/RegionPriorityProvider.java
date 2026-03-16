@@ -61,13 +61,6 @@ public class RegionPriorityProvider {
         return priority;
     }
 
-    public int getRegionWeight(SearchResult searchResult) {
-        if (searchResult.file == null || priorityMap.isEmpty()) {
-            return 0;
-        }
-        return getRegionWeight(searchResult.file);
-    }
-
     private void initRegionsPriority() {
         if (regionsPriority != null) {
             return;

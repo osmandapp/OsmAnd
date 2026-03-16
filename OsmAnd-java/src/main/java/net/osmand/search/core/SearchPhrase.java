@@ -7,7 +7,6 @@ import net.osmand.OsmAndCollator;
 import net.osmand.StringMatcher;
 import net.osmand.binary.Abbreviations;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.CommonWords;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -960,13 +959,6 @@ public class SearchPhrase {
 			}
 		}
 		return retName;
-	}
-
-	public int getRegionPriority(SearchResult searchResult) {
-		if (regionPriorityProvider != null) {
-			return regionPriorityProvider.getRegionWeight(searchResult);
-		}
-		return 0;
 	}
 
 	public int getRegionPriority(BinaryMapIndexReader reader) {

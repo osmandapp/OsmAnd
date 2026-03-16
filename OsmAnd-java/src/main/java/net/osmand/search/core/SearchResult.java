@@ -63,7 +63,6 @@ public class SearchResult {
 	public String localeRelatedObjectName;
 	public Object relatedObject;
 	public double distRelatedObjectName;
-	private int regionPriority = -1;
 
 	private boolean impreciseCoordinates;
 	private double unknownPhraseMatchWeight = 0;
@@ -113,7 +112,10 @@ public class SearchResult {
 
 
 	private double getSumPhraseMatchWeight(SearchResult exactResult) {
-		double res = ObjectType.getTypeWeight(objectType);
+		double res = 1;
+		if (objectType == ObjectType.HOUSE) {
+			res = ObjectType.getTypeWeight(objectType);
+		}
 		completeMatchRes = new CheckWordsMatchCount();
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
@@ -202,6 +204,10 @@ public class SearchResult {
 				res += 1;
 			}
 			// range 60 - 91
+		}
+		if (res < MAX_TYPES_BASE_10 * 4) {
+			// equalize all unmatched results
+			res = MAX_TYPES_BASE_10;
 		}
 		return res;
 	}
@@ -504,12 +510,5 @@ public class SearchResult {
 			otherNames = oth;
 		}
 		return backup;
-	}
-
-	public int getRegionPriority() {
-		if (regionPriority == -1) {
-			regionPriority = requiredSearchPhrase.getRegionPriority(this);
-		}
-		return regionPriority;
 	}
 }
