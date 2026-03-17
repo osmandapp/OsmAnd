@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments.search;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_CATEGORY_ID;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -43,6 +45,6 @@ class PreferenceSearchablePredicate implements de.KnollFrank.lib.settingssearch.
 	}
 
 	private static boolean isTopographyPreference(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
-		return "map.configure.terrain.category".equals(preference.getKey()) && hostOfPreference instanceof ConfigureMapFragment.ConfigureMapFragmentProxy;
+		return TERRAIN_CATEGORY_ID.equals(preference.getKey()) && hostOfPreference instanceof ConfigureMapFragment.ConfigureMapFragmentProxy;
 	}
 }
