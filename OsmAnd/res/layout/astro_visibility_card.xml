@@ -43,12 +43,6 @@
 				android:foreground="?attr/selectableItemBackgroundBorderless"
 				android:visibility="gone">
 
-				<FrameLayout
-					android:layout_width="40dp"
-					android:layout_height="40dp"
-					android:layout_gravity="center"
-					android:background="@drawable/bg_circle" />
-
 				<ImageView
 					android:id="@+id/calendar_icon"
 					android:layout_width="24dp"

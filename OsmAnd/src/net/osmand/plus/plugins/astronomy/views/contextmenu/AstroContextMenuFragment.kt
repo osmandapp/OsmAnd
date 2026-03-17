@@ -211,6 +211,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 
 		setTitle(obj.localizedName ?: obj.name)
 		headerType.text = buildHeaderTypeText(obj)
+		updateBottomTabIcons(obj.type)
 
 		updateMetrics(obj)
 		updateButtons(obj)
@@ -654,13 +655,13 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		bottomTabs.addTab(
 			bottomTabs.newTab()
 				.setText(R.string.shared_string_overview)
-				.setIcon(R.drawable.ic_action_planet_outlined),
+				.setIcon(getOverviewTabIconRes(skyObject?.type)),
 			true
 		)
 		bottomTabs.addTab(
 			bottomTabs.newTab()
 				.setText(R.string.gpx_visibility_txt)
-				.setIcon(R.drawable.ic_action_ais_object_visibility)
+				.setIcon(R.drawable.ic_action_telescope)
 		)
 		bottomTabs.addTab(
 			bottomTabs.newTab()
@@ -689,6 +690,30 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		}
 		bottomTabs.addOnTabSelectedListener(tabSelectedListener!!)
 		bottomTabs.getTabAt(selectedBottomTab.coerceIn(0, bottomTabs.tabCount - 1))?.select()
+	}
+
+	private fun updateBottomTabIcons(type: SkyObject.Type?) {
+		if (!::bottomTabs.isInitialized || bottomTabs.tabCount < 2) {
+			return
+		}
+		bottomTabs.getTabAt(TAB_OVERVIEW)?.setIcon(getOverviewTabIconRes(type))
+	}
+
+	private fun getOverviewTabIconRes(type: SkyObject.Type?): Int {
+		return when (type) {
+			null -> R.drawable.ic_action_planet_outlined
+			SkyObject.Type.SUN,
+			SkyObject.Type.MOON,
+			SkyObject.Type.PLANET -> R.drawable.ic_action_planet_outlined
+			SkyObject.Type.CONSTELLATION -> R.drawable.ic_action_constellations
+			SkyObject.Type.STAR -> R.drawable.ic_action_stars
+			SkyObject.Type.NEBULA -> R.drawable.ic_action_nebulas
+			SkyObject.Type.OPEN_CLUSTER,
+			SkyObject.Type.GLOBULAR_CLUSTER -> R.drawable.ic_action_star_clusters
+			SkyObject.Type.GALAXY,
+			SkyObject.Type.GALAXY_CLUSTER,
+			SkyObject.Type.BLACK_HOLE -> R.drawable.ic_action_galaxy
+		}
 	}
 
 	private fun scrollToSelectedTab(tabPosition: Int) {
@@ -1094,7 +1119,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		}
 		when (currentKnowledgeCardState()) {
 			AstroKnowledgeCardState.UPSELL -> {
-				ChoosePlanFragment.showInstance(requireMapActivity(), OsmAndFeature.OSMAND_CLOUD)
+				ChoosePlanFragment.showInstance(requireMapActivity(), OsmAndFeature.ASTRONOMY)
 			}
 
 			AstroKnowledgeCardState.DOWNLOAD -> {

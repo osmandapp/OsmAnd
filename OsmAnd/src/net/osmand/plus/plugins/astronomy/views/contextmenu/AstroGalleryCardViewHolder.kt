@@ -139,7 +139,7 @@ class AstroGalleryCardViewHolder(
 	}
 
 	private fun applyViewAllStyle(nightMode: Boolean) {
-		viewAllButton.buttonView.setBackgroundResource(R.drawable.bg_catalog_chip)
+		viewAllButton.buttonView.setBackgroundResource(R.drawable.bg_catalog_chip_6)
 		val textView = viewAllButton.findViewById<TextView>(R.id.button_text)
 		textView?.setTextColor(ColorUtilities.getActiveColor(app, nightMode))
 	}

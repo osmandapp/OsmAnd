@@ -4,6 +4,7 @@ import android.net.Uri
 import net.osmand.plus.plugins.astronomy.AstroArticle
 import net.osmand.plus.plugins.astronomy.SkyObject
 import org.json.JSONObject
+import java.util.Locale
 
 class AstroContextCardFactory {
 
@@ -48,7 +49,14 @@ class AstroContextCardFactory {
 
 	private fun buildWikiUri(obj: SkyObject, astroArticle: AstroArticle?): Uri {
 		val pageUrl = astroArticle?.summaryJson?.let(::extractWikiPageUrl)
-		return (pageUrl ?: "https://www.wikidata.org/wiki/${obj.wid}").let(Uri::parse)
+		return (pageUrl ?: buildWikipediaArticleUrl(obj, astroArticle)).let(Uri::parse)
+	}
+
+	private fun buildWikipediaArticleUrl(obj: SkyObject, astroArticle: AstroArticle?): String {
+		val language = astroArticle?.lang?.takeIf { it.isNotBlank() } ?: "en"
+		val title = astroArticle?.title?.takeIf { it.isNotBlank() } ?: obj.name
+		val normalizedTitle = title.replace(' ', '_')
+		return "https://${language.lowercase(Locale.US)}.wikipedia.org/wiki/${Uri.encode(normalizedTitle)}"
 	}
 
 	private fun extractWikiPageUrl(summaryJson: String): String? = runCatching {

@@ -41,6 +41,7 @@ class AstroDescriptionCardViewHolder(itemView: View) : RecyclerView.ViewHolder(i
 		}
 
 		readButton.text = sp
+		readButton.setTypeface(readButton.typeface, android.graphics.Typeface.NORMAL)
 		readButton.icon = app.uiUtilities.getPaintedIcon(
 			R.drawable.ic_plugin_wikipedia,
 			ColorUtilities.getDefaultIconColor(app, nightMode)
