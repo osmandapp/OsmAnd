@@ -133,6 +133,7 @@
 	<color name="activity_background_transparent_color_dark">#ea17181a</color>
 	<color name="material_text_input_layout_bg">#4DCCCCCC</color>
 
+	<!-- Buttons -->
 	<color name="active_buttons_and_links_bg_pressed_light">#0f67eb</color>
 	<color name="active_buttons_and_links_bg_pressed_dark">#b87114</color>
 	<color name="inactive_buttons_and_links_bg_light">#f0f0f0</color>
@@ -143,6 +144,47 @@
 	<color name="stroked_buttons_and_links_bg_dark">#0017181a</color>
 	<color name="stroked_buttons_and_links_outline_light">#cccccc</color>
 	<color name="stroked_buttons_and_links_outline_dark">#303336</color>
+
+	<color name="btn_bg_primary_light">#237BFF</color>
+    <color name="btn_bg_primary_dark">#237BFF</color>
+
+    <color name="btn_bg_primary_pressed_light">#0F67EB</color>
+    <color name="btn_bg_primary_pressed_dark">#004BBD</color>
+
+    <color name="btn_bg_secondary_light">#F0F0F0</color>
+    <color name="btn_bg_secondary_dark">#303436</color>
+
+    <color name="btn_bg_secondary_pressed_light">#D6D6D6</color>
+    <color name="btn_bg_secondary_pressed_dark">#181A1B</color>
+
+    <color name="btn_bg_accent_light">#DEEBFF</color>
+    <color name="btn_bg_accent_dark">#16396E</color>
+
+    <color name="btn_bg_accent_pressed_light">#ADCEFF</color>
+    <color name="btn_bg_accent_pressed_dark">#131C2A</color>
+
+    <color name="btn_bg_disabled_light">#F0F0F0</color>
+    <color name="btn_bg_disabled_dark">#303436</color>
+
+
+    <color name="btn_outline_secondary_light">#CCCCCC</color>
+    <color name="btn_outline_secondary_dark">#484D51</color>
+
+    <color name="btn_outline_accent_light">#80B2FF</color>
+    <color name="btn_outline_accent_dark">#2765C3</color>
+
+    <color name="btn_outline_primary_focused_light">#0D5ACE</color>
+    <color name="btn_outline_primary_focused_dark">#0D5ACE</color>
+
+
+    <color name="btn_text_on_primary_light">#FFFFFF</color>
+    <color name="btn_text_on_primary_dark">#FFFFFF</color>
+
+    <color name="btn_text_on_secondary_light">#237BFF</color>
+    <color name="btn_text_on_secondary_dark">#237BFF</color>
+
+    <color name="btn_text_on_disabled_light">#666666</color>
+    <color name="btn_text_on_disabled_dark">#666666</color>
 
 	<color name="subscription_active_bg_color_light">#fff9b2</color>
 	<color name="subscription_active_bg_color_dark">#43453b</color>
