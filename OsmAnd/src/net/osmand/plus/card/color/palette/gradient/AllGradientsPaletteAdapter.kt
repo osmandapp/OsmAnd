@@ -24,7 +24,8 @@ class AllGradientsPaletteAdapter(
 	private val app: OsmandApplication,
 	private val activity: FragmentActivity,
 	private val controller: BasePaletteController,
-	private val nightMode: Boolean
+	private val nightMode: Boolean,
+	private val onItemClicked: () -> Unit
 ) : RecyclerView.Adapter<AllGradientsPaletteAdapter.GradientViewHolder>() {
 
 	private var items: List<PaletteItem> = controller.getPaletteItems(PaletteSortMode.LAST_USED_TIME)
@@ -118,6 +119,7 @@ class AllGradientsPaletteAdapter(
 				// 3. Clicks
 				itemView.setOnClickListener {
 					controller.onPaletteItemClick(item, markAsUsed = false)
+					onItemClicked.invoke()
 				}
 
 				// 4. Menu Button

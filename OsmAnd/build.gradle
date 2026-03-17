@@ -184,9 +184,7 @@ android {
 		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
 		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
 			println(osmandTask.getName())
-			osmandTask.dependsOn(copyMapShaderIcons)
-			osmandTask.dependsOn(copyMapPOIIcons)
-			osmandTask.dependsOn(copyLargePOIIcons)
+			osmandTask.dependsOn(copyIcons)
 		}
 		def mergeResources= "merge${taskName}Resources"
 		tasks.named(mergeResources).configure { osmandTask ->

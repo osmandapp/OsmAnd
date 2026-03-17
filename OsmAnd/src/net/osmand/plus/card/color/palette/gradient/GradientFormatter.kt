@@ -95,7 +95,7 @@ object GradientFormatter {
 				// SCENARIO 2: Relative + No Data (Abstract Preview)
 				// Show constants (Min/Max) or percentages.
 				val constant = RelativeConstants.valueOfRatio(value)
-				if (constant != null) {
+				if (constant != null && fileType.useNamedConstants) {
 					valueStr = constant.getName(useFullName = false)
 					unitsSrt = ""
 				} else {

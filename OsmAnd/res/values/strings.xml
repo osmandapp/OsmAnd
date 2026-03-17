@@ -19,6 +19,7 @@
 	<string name="astro_visibility_show_today">Show today visibility</string>
 	<string name="astro_schedule_show_current_week">Show current week</string>
 	<string name="astro_next_day_suffix">⁺¹</string>
+    <string name="shared_string_radians">Radians</string>
 	<string name="no_objects_found">No objects found</string>
 	<string name="astro_search_info_solar_system">The Solar System is the gravitationally bound system of the Sun and the masses that orbit it, most prominently its eight planets, of which Earth is one.</string>
 	<string name="astro_search_info_constellations">A constellation is an area on the celestial sphere in which a group of visible stars forms a perceived pattern or outline.</string>
