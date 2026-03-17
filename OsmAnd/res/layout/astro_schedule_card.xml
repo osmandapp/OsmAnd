@@ -14,13 +14,14 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
-		android:padding="16dp">
+		android:paddingVertical="16dp">
 
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:baselineAligned="false"
 			android:gravity="center_vertical"
+			android:paddingHorizontal="16dp"
 			android:orientation="horizontal">
 
 			<LinearLayout
@@ -57,13 +58,14 @@
 					android:id="@+id/schedule_date_button"
 					android:layout_width="44dp"
 					android:layout_height="44dp"
-					android:background="?attr/selectableItemBackgroundBorderless">
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:visibility="gone">
 
 					<ImageView
 						android:layout_width="24dp"
 						android:layout_height="24dp"
 						android:layout_gravity="center"
-						android:contentDescription="@string/astronomy_schedule"
+						android:contentDescription="@string/astro_schedule_show_current_week"
 						android:src="@drawable/ic_action_calendar_month"
 						app:tint="?attr/icon_color_active" />
 				</FrameLayout>
@@ -80,8 +82,7 @@
 						android:layout_height="24dp"
 						android:layout_gravity="center"
 						android:contentDescription="@string/shared_string_previous"
-						android:scaleX="-1"
-						android:src="@drawable/ic_action_arrow_forward_16"
+						android:src="@drawable/ic_arrow_back"
 						app:tint="?attr/icon_color_active" />
 				</FrameLayout>
 
@@ -97,7 +98,7 @@
 						android:layout_height="24dp"
 						android:layout_gravity="center"
 						android:contentDescription="@string/shared_string_next"
-						android:src="@drawable/ic_action_arrow_forward_16"
+						android:src="@drawable/ic_arrow_forward"
 						app:tint="?attr/icon_color_active" />
 				</FrameLayout>
 			</LinearLayout>
@@ -109,6 +110,16 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="12dp"
 			android:orientation="vertical" />
+
+		<TextView
+			android:id="@+id/schedule_note"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="12dp"
+			android:paddingHorizontal="16dp"
+			android:text="@string/astro_schedule_next_day_note"
+			android:textColor="?android:attr/textColorSecondary"
+			android:textSize="14sp" />
 
 	</LinearLayout>
 

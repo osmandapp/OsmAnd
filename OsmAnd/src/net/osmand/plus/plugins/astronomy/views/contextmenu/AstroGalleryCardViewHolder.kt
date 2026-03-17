@@ -22,7 +22,6 @@ class AstroGalleryCardViewHolder(
 	itemView: View,
 	private val app: OsmandApplication,
 	private val mapActivity: MapActivity,
-	private val getShowAllTitle: () -> String?,
 	private val listener: GalleryGridAdapter.ImageCardListener,
 	private val onToggle: (String) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
@@ -35,30 +34,31 @@ class AstroGalleryCardViewHolder(
 	private val arrowCard: ImageView = itemView.findViewById(R.id.arrow_icon)
 	private var galleryGridAdapter: GalleryGridAdapter? = null
 	private var adapterNightMode: Boolean? = null
+	private var showAllTitle: String? = null
 
 	init {
 		setupViewAllButton()
 	}
 
-	fun bind(model: AstroGalleryCardModel, nightMode: Boolean) {
+	fun bind(item: AstroGalleryCardItem, nightMode: Boolean) {
 		ensureRecyclerInitialized(nightMode)
 		progressBar.visibility = View.GONE
 		applyViewAllStyle(nightMode)
+		showAllTitle = item.showAllTitle
 
 		collapseButton.setOnClickListener {
-			onToggle(model.wid)
+			onToggle(item.wid)
 		}
 
-		when (val state = model.state) {
-			is AstroGalleryCardModel.GalleryState.Collapsed -> showCollapsed()
-			is AstroGalleryCardModel.GalleryState.Loading -> showLoading()
-			is AstroGalleryCardModel.GalleryState.Ready -> showCards(state.cards)
-			is AstroGalleryCardModel.GalleryState.Error -> showError(state.message)
+		when (val state = item.state) {
+			is AstroGalleryCardState.Collapsed -> showCollapsed()
+			is AstroGalleryCardState.Loading -> showLoading()
+			is AstroGalleryCardState.Ready -> showCards(state.cards)
 		}
 
 		arrowCard.setImageDrawable(
 			app.uiUtilities.getIcon(
-				if (model.state is AstroGalleryCardModel.GalleryState.Collapsed) {
+				if (item.state is AstroGalleryCardState.Collapsed) {
 					R.drawable.ic_action_arrow_down
 				} else {
 					R.drawable.ic_action_arrow_up
@@ -66,49 +66,6 @@ class AstroGalleryCardViewHolder(
 				ColorUtilities.getDefaultIconColorId(nightMode)
 			)
 		)
-	}
-
-	fun bindGallery(model: AstroGalleryCardModel, nightMode: Boolean) {
-		ensureRecyclerInitialized(nightMode)
-		applyViewAllStyle(nightMode)
-
-		when (model.state) {
-			is AstroGalleryCardModel.GalleryState.Collapsed -> {
-				contentContainer.visibility = View.GONE
-				progressBar.visibility = View.GONE
-			}
-
-			is AstroGalleryCardModel.GalleryState.Loading -> {
-				progressBar.visibility = View.VISIBLE
-				contentContainer.visibility = View.GONE
-			}
-
-			is AstroGalleryCardModel.GalleryState.Ready -> {
-				showCards(ArrayList<Any>((model.state as AstroGalleryCardModel.GalleryState.Ready).cards.filterNotNull()))
-				progressBar.visibility = View.GONE
-			}
-
-			else -> {
-				progressBar.visibility = View.GONE
-				contentContainer.visibility = View.VISIBLE
-			}
-		}
-
-		arrowCard.setImageDrawable(
-			app.uiUtilities.getIcon(
-				if (model.state is AstroGalleryCardModel.GalleryState.Collapsed) {
-					R.drawable.ic_action_arrow_down
-				} else {
-					R.drawable.ic_action_arrow_up
-				},
-				ColorUtilities.getDefaultIconColorId(nightMode)
-			)
-		)
-	}
-
-	private fun showError(message: String) {
-		progressBar.visibility = View.GONE
-		contentContainer.visibility = View.VISIBLE
 	}
 
 	private fun showLoading() {
@@ -177,7 +134,7 @@ class AstroGalleryCardViewHolder(
 	private fun setupViewAllButton() {
 		viewAllButton.setTitleId(R.string.shared_string_show_all)
 		viewAllButton.setOnClickListener {
-			GalleryGridFragment.showInstance(mapActivity, getShowAllTitle())
+			GalleryGridFragment.showInstance(mapActivity, showAllTitle)
 		}
 	}
 

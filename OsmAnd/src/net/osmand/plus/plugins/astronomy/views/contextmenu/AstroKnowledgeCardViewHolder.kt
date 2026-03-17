@@ -18,13 +18,13 @@ class AstroKnowledgeCardViewHolder(
 	private val description: TextView = itemView.findViewById(R.id.description)
 	private val actionButton: DialogButton = itemView.findViewById(R.id.action_button)
 
-	fun bind(card: AstroKnowledgeCardModel, nightMode: Boolean) {
-		icon.setImageResource(card.getIconResId(nightMode))
-		title.setText(card.getTitleId())
-		description.setText(card.getDescriptionId())
+	fun bind(item: AstroKnowledgeCardItem) {
+		icon.setImageResource(item.getIconResId())
+		title.setText(item.getTitleId())
+		description.setText(item.getDescriptionId())
 		actionButton.setButtonType(DialogButtonType.SECONDARY)
-		actionButton.setTitle(card.buttonTitle)
-		actionButton.isEnabled = card.actionEnabled
+		actionButton.setTitle(item.buttonTitle)
+		actionButton.isEnabled = item.actionEnabled
 		actionButton.setOnClickListener { onActionClick() }
 	}
 }

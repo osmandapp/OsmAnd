@@ -7,8 +7,14 @@ import net.osmand.plus.R
 import net.osmand.util.Algorithms
 import androidx.core.view.isVisible
 
-class AstroVisibilityCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class AstroVisibilityCardViewHolder(
+	itemView: View,
+	private val onResetToToday: () -> Unit,
+	private val onCursorTimeChanged: (Long) -> Unit
+) : RecyclerView.ViewHolder(itemView) {
 
+	private val titleView: TextView = itemView.findViewById(R.id.visibility_title)
+	private val resetButton: View = itemView.findViewById(R.id.calendar_button)
 	private val graphView: AstroVisibilityGraphView = itemView.findViewById(R.id.visibilityGraphView)
 	private val riseContainer: View = itemView.findViewById(R.id.rise_container)
 	private val culminationContainer: View = itemView.findViewById(R.id.culmination_container)
@@ -22,39 +28,43 @@ class AstroVisibilityCardViewHolder(itemView: View) : RecyclerView.ViewHolder(it
 	private val culminationSymbol: TextView = itemView.findViewById(R.id.culmination_symbol)
 	private val setTime: TextView = itemView.findViewById(R.id.set_time)
 	private val setSymbol: TextView = itemView.findViewById(R.id.set_symbol)
+	private val locationRow: View = itemView.findViewById(R.id.location_row)
 	private val locationText: TextView = itemView.findViewById(R.id.location_text)
 
-	fun bind(model: AstroVisibilityCardModel) {
-		graphView.submitObject(
-			objectToRender = model.skyObject,
-			observer = model.observer,
-			date = model.date,
-			zoneId = model.zoneId
-		)
-		culminationSymbol.setTextColor(model.culminationColor)
+	fun bind(item: AstroVisibilityCardItem) {
+		titleView.text = item.titleText
+		resetButton.isVisible = item.showResetButton
+		resetButton.contentDescription = itemView.context.getString(R.string.astro_visibility_show_today)
+		resetButton.setOnClickListener { onResetToToday() }
+		graphView.submitGraph(item.graph, item.cursorReferenceTimeMillis)
+		graphView.onCursorTimeChanged = { cursorMillis ->
+			onCursorTimeChanged(cursorMillis)
+		}
+		culminationSymbol.setTextColor(item.culminationColor)
 
 		bindEvent(
 			container = riseContainer,
 			timeView = riseTime,
 			symbolView = riseSymbol,
-			time = model.riseTime,
+			time = item.riseTime,
 			symbol = "▲"
 		)
 		bindEvent(
 			container = culminationContainer,
 			timeView = culminationTime,
 			symbolView = culminationSymbol,
-			time = model.culminationTime,
+			time = item.culminationTime,
 			symbol = "●"
 		)
 		bindEvent(
 			container = setContainer,
 			timeView = setTime,
 			symbolView = setSymbol,
-			time = model.setTime,
+			time = item.setTime,
 			symbol = "▼"
 		)
-		locationText.text = model.locationText
+		locationText.text = item.locationText
+		locationRow.isVisible = !Algorithms.isEmpty(item.locationText)
 		updateDividers()
 	}
 

@@ -1,7 +1,8 @@
 package net.osmand.plus.plugins.astronomy.views.contextmenu
 
+import android.content.Intent
 import android.content.res.ColorStateList
-import android.os.AsyncTask
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
@@ -20,33 +22,13 @@ import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.android.material.tabs.TabLayout
-import io.github.cosinekitty.astronomy.Body
-import io.github.cosinekitty.astronomy.Direction
-import io.github.cosinekitty.astronomy.Time
-import io.github.cosinekitty.astronomy.defineStar
-import io.github.cosinekitty.astronomy.searchRiseSet
-import net.osmand.IndexConstants
-import net.osmand.data.LatLon
-import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseMaterialFragment
 import net.osmand.plus.chooseplan.ChoosePlanFragment
 import net.osmand.plus.chooseplan.OsmAndFeature
-import net.osmand.plus.download.DownloadActivityType
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents
 import net.osmand.plus.download.DownloadValidationManager
-import net.osmand.plus.download.IndexItem
-import net.osmand.plus.helpers.FileNameTranslationHelper
-import net.osmand.plus.inapp.InAppPurchaseUtils
-import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard
-import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController
-import net.osmand.plus.mapcontextmenu.gallery.ImageCardType
-import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder
-import net.osmand.plus.mapcontextmenu.gallery.PhotoCacheManager
-import net.osmand.plus.mapcontextmenu.gallery.tasks.CacheReadTask
-import net.osmand.plus.mapcontextmenu.gallery.tasks.CacheWriteTask
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astronomy.AstroArticle
 import net.osmand.plus.plugins.astronomy.AstronomyPlugin
@@ -56,12 +38,10 @@ import net.osmand.plus.plugins.astronomy.StarMapFragment
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTargetsCollection
-import net.osmand.plus.wikipedia.WikiImageCard
-import net.osmand.shared.wiki.WikiCoreHelper
-import net.osmand.shared.wiki.WikiImage
-import net.osmand.util.Algorithms
 import java.time.Instant
 import java.time.LocalDate
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 import kotlin.math.abs
@@ -70,9 +50,15 @@ import kotlin.math.roundToInt
 class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 
 	private var galleryController: GalleryController? = null
+	private var galleryLoader: AstroGalleryLoader? = null
 
 	private var skyObject: SkyObject? = null
 	private var article: AstroArticle? = null
+	private var uiState = AstroContextUiState()
+	private val visibilityController by lazy { AstroVisibilityCardController(app) }
+	private val scheduleController by lazy { AstroScheduleCardController(app) }
+	private val knowledgeBaseController by lazy { AstroKnowledgeBaseController(app) }
+	private val cardFactory by lazy { AstroContextCardFactory() }
 	private val parent: StarMapFragment
 		get() = requireParentFragment() as StarMapFragment
 
@@ -124,45 +110,6 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	private var recyclerScrollListener: RecyclerView.OnScrollListener? = null
 	private var isSyncingTabSelection = false
 
-	private var getAstroImagesTask: GetAstroImagesTask? = null
-
-	private var visibilityCardModel: AstroVisibilityCardModel? = null
-	private var scheduleCardModel: AstroScheduleCardModel? = null
-	private var descriptionCardModel: AstroDescriptionCardModel? = null
-	private var catalogCardModel: AstroCatalogsCardModel? = null
-	private var knowledgeCardModel: AstroKnowledgeCardModel? = null
-	private var galleryCardModel: AstroGalleryCardModel? = null
-	private var requestedKnowledgeBaseIndexes = false
-
-	private val imageCardListener: GetAstroImagesTask.GetImageCardsListener =
-		object : GetAstroImagesTask.GetImageCardsListener {
-			override fun onTaskStarted() {
-
-			}
-
-			override fun onFinish(images: List<WikiImage>?) {
-				if (skyObject == null || images == null) {
-					return
-				}
-
-				val latLon = LatLon(0.0, 0.0)
-				val params = HashMap<String, String>()
-				params["wikidataId"] = skyObject!!.wid
-				galleryController?.currentCardsHolder = ImageCardsHolder(latLon, params).apply {
-					for (wikiImage in images) {
-						mapActivity?.let {
-							this.addCard(
-								ImageCardType.ASTRONOMY,
-								WikiImageCard(it, wikiImage)
-							)
-						}
-					}
-					setOnlinePhotosCards(this.astronomyCards)
-				}
-			}
-		}
-
-
 	companion object {
 		val TAG: String = AstroContextMenuFragment::class.java.simpleName
 		private const val ARG_SKY_OBJECT_ID = "skyObjectId"
@@ -171,8 +118,6 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		private const val TAB_SCHEDULE = 2
 		private const val SHEET_CORNER_RADIUS_DP = 12f
 		private const val COLLAPSED_EXTRA_DP = 100f
-		private const val KNOWLEDGE_BASE_FILE_NAME =
-			FileNameTranslationHelper.STARS_ARTICLES + IndexConstants.STAR_MAP_INDEX_EXT
 
 		fun newInstance(skyObject: SkyObject): AstroContextMenuFragment {
 			val fragment = AstroContextMenuFragment()
@@ -200,6 +145,14 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			galleryController =
 				dialogManager.findController(GalleryController.PROCESS_ID) as GalleryController?
 		}
+		galleryController?.let { controller ->
+			galleryLoader = AstroGalleryLoader(
+				app = app,
+				galleryController = controller,
+				mapActivityProvider = { mapActivity },
+				onStateChanged = ::onGalleryStateChanged
+			)
+		}
 	}
 
 	override fun onCreateView(
@@ -211,7 +164,8 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 
 		initializeViews(view)
 		setupRecyclerView()
-		loadCards()
+		bindControllerCallbacks()
+		submitCards()
 
 		val resolvedObject = arguments?.getString(ARG_SKY_OBJECT_ID)
 			?.let(parent::findTrackableObjectById)
@@ -228,8 +182,26 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		if (!isAdded) {
 			return
 		}
-
-		adapter.skyObject = obj
+		val currentTime = getCurrentGraphTime()
+		val currentDate = currentTime.toLocalDate()
+		val objectChanged = uiState.selectedObjectId != obj.id
+		uiState = if (objectChanged) {
+			galleryLoader?.cancel()
+			AstroContextUiState(
+				selectedObjectId = obj.id,
+				currentLocalDate = currentDate,
+				visibilityCursorReferenceTimeMillis = currentTime.toInstant().toEpochMilli(),
+				schedulePeriodStart = currentDate
+			)
+		} else {
+			uiState.copy(
+				selectedObjectId = obj.id,
+				currentLocalDate = currentDate,
+				visibilityCursorReferenceTimeMillis = uiState.visibilityCursorReferenceTimeMillis
+					?: currentTime.toInstant().toEpochMilli(),
+				schedulePeriodStart = uiState.schedulePeriodStart ?: currentDate
+			)
+		}
 		article =
 			PluginsHelper.requirePlugin(AstronomyPlugin::class.java).dataProvider.getAstroArticle(
 				app,
@@ -238,62 +210,67 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			)
 
 		setTitle(obj.localizedName ?: obj.name)
-		val typeName = AstroUtils.getAstroTypeName(app, obj.type.titleKey)
-		var parentGroup: String = app.getString(R.string.astro_deep_sky)
-		val type = obj.type
-		if (type == SkyObject.Type.MOON) {
-			parentGroup = app.getString(R.string.astro_type_earth)
-		} else if (type.isSunSystem()) {
-			parentGroup = app.getString(R.string.astro_solar_system)
-		} else if (type == SkyObject.Type.STAR) {
-			parentGroup = parent.viewModel.constellations.value
-				?.firstOrNull { constellation ->
-					constellation.lines.any { (a, b) -> a == obj.hip || b == obj.hip }
-				}
-				?.let { it.localizedName ?: it.name }.toString()
-		}
-		if (parentGroup == null || parentGroup.isEmpty() || parentGroup == "null") {
-			parentGroup = app.getString(R.string.astro_deep_sky)
-		}
-
-		headerType.text =
-			app.getString(R.string.ltr_or_rtl_combine_via_bold_point, typeName, parentGroup)
+		headerType.text = buildHeaderTypeText(obj)
 
 		updateMetrics(obj)
 		updateButtons(obj)
 		updateVisibilityCard(obj)
 		updateScheduleCard(obj)
-
-		descriptionCardModel = descriptionCardModel?.apply {
-			updateCard(obj, article)
-		} ?: AstroDescriptionCardModel(app, obj, article)
-
-		catalogCardModel = obj.catalogs.takeIf { it.isNotEmpty() }?.let { catalogs ->
-			catalogCardModel?.apply {
-				this.catalogs = catalogs
-				expanded = false
-			}
-				?: AstroCatalogsCardModel(app, catalogs)
+		ensureKnowledgeCardPrerequisites()
+		if (uiState.galleryState == AstroGalleryCardState.Loading) {
+			galleryLoader?.startLoading(obj.wid)
 		}
-		updateKnowledgeCard()
-
-		galleryCardModel = galleryCardModel?.apply { this.wid = obj.wid }
-			?: AstroGalleryCardModel(app, obj.wid)
-
-		loadCards()
+		submitCards()
 	}
 
-	private fun setOnlinePhotosCards(onlinePhotosCards: MutableList<ImageCard?>) {
-		val cards: MutableList<AbstractCard?> = ArrayList(onlinePhotosCards)
-		if (onlinePhotosCards.isEmpty() && mapActivity != null) {
-			cards.add(NoImagesCard(mapActivity))
+	fun onTimeChanged() {
+		val obj = skyObject ?: return
+		if (!isAdded) {
+			return
+		}
+		updateMetrics(obj, useTargetCoordinates = true)
+
+		val currentDate = getCurrentGraphTime().toLocalDate()
+		val previousDate = uiState.currentLocalDate
+		if (previousDate == currentDate) {
+			return
 		}
 
-		galleryCardModel?.state = AstroGalleryCardModel.GalleryState.Ready(cards)
-		adapter.notifyItemChanged(
-			adapter.getItemPosition<AstroGalleryCardModel>(),
-			AstroContextMenuAdapter.Companion.PAYLOAD_GALLERY_CONTENT
+		val currentScheduleStart = uiState.schedulePeriodStart
+		val shouldShiftSchedulePeriod =
+			currentScheduleStart == null || currentScheduleStart == previousDate
+		uiState = uiState.copy(
+			currentLocalDate = currentDate,
+			schedulePeriodStart = if (shouldShiftSchedulePeriod) currentDate else currentScheduleStart
 		)
+
+		if (uiState.selectedVisibilityDateOverride == null) {
+			updateVisibilityCard(obj)
+		}
+		if (shouldShiftSchedulePeriod) {
+			updateScheduleCard(obj, currentDate)
+		}
+		submitCards()
+	}
+
+	private fun buildHeaderTypeText(obj: SkyObject): String {
+		val typeName = AstroUtils.getAstroTypeName(app, obj.type.titleKey)
+		val type = obj.type
+		val parentGroup = when {
+			type == SkyObject.Type.MOON -> app.getString(R.string.astro_type_earth)
+			type.isSunSystem() -> app.getString(R.string.astro_solar_system)
+			type == SkyObject.Type.STAR -> {
+				parent.viewModel.constellations.value
+					?.firstOrNull { constellation ->
+						constellation.lines.any { (a, b) -> a == obj.hip || b == obj.hip }
+					}
+					?.let { it.localizedName ?: it.name }
+			}
+
+			else -> null
+		}.takeUnless { it.isNullOrBlank() || it == "null" } ?: app.getString(R.string.astro_deep_sky)
+
+		return app.getString(R.string.ltr_or_rtl_combine_via_bold_point, typeName, parentGroup)
 	}
 
 	private fun updateButtons(obj: SkyObject) {
@@ -367,13 +344,15 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		bindButtons()
 	}
 
-	private fun updateMetrics(obj: SkyObject) {
+	private fun updateMetrics(obj: SkyObject, useTargetCoordinates: Boolean = false) {
 		val metrics = ArrayList<MetricsAdapter.MetricUi>()
 
-		val az = String.format(Locale.getDefault(), "%.1f°", obj.azimuth)
+		val azimuth = if (useTargetCoordinates) obj.targetAzimuth else obj.azimuth
+		val altitude = if (useTargetCoordinates) obj.targetAltitude else obj.altitude
+		val az = String.format(Locale.getDefault(), "%.1f°", azimuth)
 		metrics.add(MetricsAdapter.MetricUi(az, getString(R.string.shared_string_azimuth)))
 
-		val alt = String.format(Locale.getDefault(), "%.1f°", obj.altitude)
+		val alt = String.format(Locale.getDefault(), "%.1f°", altitude)
 		metrics.add(MetricsAdapter.MetricUi(alt, getString(R.string.altitude)))
 
 		metrics.add(
@@ -383,43 +362,46 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			)
 		)
 
+		val currentTime = getCurrentGraphTime()
+		val timeFormatter = createUiTimeFormatter()
+		val startLocal = currentTime.toLocalDate().atTime(12, 0).atZone(currentTime.zone)
+		val endLocal = startLocal.plusDays(1)
 		val observer = parent.starView.observer
-		val bodyToCheck: Body? = if (!obj.type.isSunSystem()) {
-			defineStar(Body.Star2, obj.ra, obj.dec, 1000.0); Body.Star2
-		} else obj.body
+		val (riseTime, setTime) = AstroUtils.nextRiseSet(
+			obj = obj,
+			startSearch = startLocal,
+			obs = observer,
+			windowStart = startLocal,
+			windowEnd = endLocal
+		)
 
-		if (bodyToCheck != null) {
-			val calendar = (parent.viewModel.currentCalendar.value
-				?: Calendar.getInstance()).clone() as Calendar
-			calendar.set(Calendar.HOUR_OF_DAY, 0)
-			calendar.set(Calendar.MINUTE, 0)
-			calendar.set(Calendar.SECOND, 0)
-			calendar.set(Calendar.MILLISECOND, 0)
-			val searchStart = Time.fromMillisecondsSince1970(calendar.timeInMillis)
-
-			val riseTime = searchRiseSet(bodyToCheck, observer, Direction.Rise, searchStart, 1.2)
-			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, searchStart, 1.2)
-
-			if (riseTime != null) {
-				metrics.add(
-					MetricsAdapter.MetricUi(
-						AstroUtils.formatLocalTime(riseTime),
-						getString(R.string.astro_rise)
-					)
+		if (riseTime != null) {
+			metrics.add(
+				MetricsAdapter.MetricUi(
+					riseTime.format(timeFormatter),
+					getString(R.string.astro_rise)
 				)
-			}
+			)
+		}
 
-			if (setTime != null) {
-				metrics.add(
-					MetricsAdapter.MetricUi(
-						AstroUtils.formatLocalTime(setTime),
-						getString(R.string.astro_set)
-					)
+		if (setTime != null) {
+			metrics.add(
+				MetricsAdapter.MetricUi(
+					setTime.format(timeFormatter),
+					getString(R.string.astro_set)
 				)
-			}
+			)
 		}
 
 		metricsAdapter.submit(metrics)
+	}
+
+	private fun createUiTimeFormatter(): DateTimeFormatter {
+		return if (android.text.format.DateFormat.is24HourFormat(app)) {
+			DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
+		} else {
+			DateTimeFormatter.ofPattern("h:mm a", Locale.getDefault())
+		}
 	}
 
 	private fun setTitle(name: String) {
@@ -521,81 +503,78 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	}
 
 	private fun updateVisibilityCard(obj: SkyObject) {
-		val currentCalendar =
-			(parent.viewModel.currentCalendar.value ?: Calendar.getInstance()).clone() as Calendar
-		val graphZoneId = currentCalendar.timeZone.toZoneId()
-		val graphDate =
-			Instant.ofEpochMilli(currentCalendar.timeInMillis).atZone(graphZoneId).toLocalDate()
-		visibilityCardModel = visibilityCardModel?.apply {
-			updateCard(
-				skyObject = obj,
-				observer = parent.starView.observer,
-				date = graphDate,
-				zoneId = graphZoneId
-			)
-		} ?: AstroVisibilityCardModel(app).apply {
-			updateCard(
-				skyObject = obj,
-				observer = parent.starView.observer,
-				date = graphDate,
-				zoneId = graphZoneId
-			)
-		}
-		visibilityCardModel?.onDataChanged = { notifyVisibilityCardChanged() }
+		val currentTime = getCurrentGraphTime()
+		val graphZoneId = currentTime.zone
+		val graphDate = uiState.selectedVisibilityDateOverride ?: currentTime.toLocalDate()
+		val isTodayVisibility = graphDate == currentTime.toLocalDate()
+		val cursorReferenceTimeMillis =
+			uiState.visibilityCursorReferenceTimeMillis ?: currentTime.toInstant().toEpochMilli()
+		visibilityController.update(
+			skyObject = obj,
+			observer = parent.starView.observer,
+			date = graphDate,
+			zoneId = graphZoneId,
+			cursorReferenceTimeMillis = cursorReferenceTimeMillis,
+			isTodayVisibility = isTodayVisibility
+		)
 	}
 
-	private fun notifyVisibilityCardChanged() {
-		if (!isAdded || !::adapter.isInitialized) {
-			return
-		}
-		val position = adapter.getItemPosition<AstroVisibilityCardModel>()
-		if (position >= 0) {
-			adapter.notifyItemChanged(position)
-		}
+	private fun onVisibilityCursorChanged(referenceTimeMillis: Long) {
+		uiState = uiState.copy(visibilityCursorReferenceTimeMillis = referenceTimeMillis)
 	}
 
 	private fun updateScheduleCard(obj: SkyObject, periodStartOverride: LocalDate? = null) {
-		val currentCalendar =
-			(parent.viewModel.currentCalendar.value ?: Calendar.getInstance()).clone() as Calendar
-		val graphZoneId = currentCalendar.timeZone.toZoneId()
-		val defaultStartDate =
-			Instant.ofEpochMilli(currentCalendar.timeInMillis).atZone(graphZoneId).toLocalDate()
-		val periodStart = periodStartOverride ?: scheduleCardModel?.periodStart ?: defaultStartDate
-		val model = scheduleCardModel ?: AstroScheduleCardModel(app).also {
-			scheduleCardModel = it
-		}
-		model.onDataChanged = { notifyScheduleCardChanged() }
-		model.updateCard(
+		val currentTime = getCurrentGraphTime()
+		val graphZoneId = currentTime.zone
+		val defaultStartDate = currentTime.toLocalDate()
+		val periodStart =
+			periodStartOverride ?: uiState.schedulePeriodStart ?: scheduleController.periodStart
+			?: defaultStartDate
+		uiState = uiState.copy(schedulePeriodStart = periodStart, currentLocalDate = defaultStartDate)
+		scheduleController.update(
 			skyObject = obj,
 			observer = parent.starView.observer,
 			periodStart = periodStart,
-			zoneId = graphZoneId
+			zoneId = graphZoneId,
+			showResetPeriodButton = periodStart != defaultStartDate
 		)
 	}
 
 	private fun shiftSchedulePeriod(daysDelta: Int) {
 		val obj = skyObject ?: return
-		val currentStart = scheduleCardModel?.periodStart ?: return
+		val currentStart = uiState.schedulePeriodStart ?: scheduleController.periodStart
 		updateScheduleCard(obj, currentStart.plusDays(daysDelta.toLong()))
 	}
 
 	private fun resetScheduleToCurrentPeriod() {
 		val obj = skyObject ?: return
-		val currentCalendar = (parent.viewModel.currentCalendar.value
-			?: Calendar.getInstance()).clone() as Calendar
-		val zoneId = currentCalendar.timeZone.toZoneId()
-		val today = LocalDate.now(zoneId)
+		val today = getCurrentGraphTime().toLocalDate()
 		updateScheduleCard(obj, today)
 	}
 
-	private fun notifyScheduleCardChanged() {
-		if (!::adapter.isInitialized) {
+	private fun selectVisibilityDate(date: LocalDate) {
+		val currentDate = getCurrentGraphTime().toLocalDate()
+		uiState = uiState.copy(
+			selectedVisibilityDateOverride = if (date == currentDate) null else date
+		)
+		skyObject?.let(::updateVisibilityCard)
+		submitCards()
+	}
+
+	private fun resetVisibilityToToday() {
+		if (uiState.selectedVisibilityDateOverride == null) {
 			return
 		}
-		val position = adapter.getItemPosition<AstroScheduleCardModel>()
-		if (position >= 0) {
-			adapter.notifyItemChanged(position)
-		}
+		uiState = uiState.copy(selectedVisibilityDateOverride = null)
+		skyObject?.let(::updateVisibilityCard)
+		submitCards()
+	}
+
+	private fun getCurrentGraphTime(): ZonedDateTime {
+		val currentCalendar =
+			(parent.viewModel.currentCalendar.value ?: Calendar.getInstance()).clone() as Calendar
+		val zoneId = currentCalendar.timeZone.toZoneId()
+		return Instant.ofEpochMilli(currentCalendar.timeInMillis).atZone(zoneId)
 	}
 
 	private fun setupRecyclerView() {
@@ -603,16 +582,24 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			app,
 			requireMapActivity(),
 			nightMode,
-			this,
 			galleryController,
+			onDescriptionRead = { uri ->
+				openUri(uri)
+			},
 			onGalleryToggle = { wid ->
 				onGalleryToggle(wid)
 			},
 			onUpdateImage = {
-				startLoadingImagesTask()
+				skyObject?.wid?.let(::loadGallery)
 			},
 			onKnowledgeCardAction = {
 				onKnowledgeCardAction()
+			},
+			onVisibilityResetToToday = {
+				resetVisibilityToToday()
+			},
+			onVisibilityCursorChanged = { referenceTimeMillis ->
+				onVisibilityCursorChanged(referenceTimeMillis)
 			},
 			onScheduleResetPeriod = {
 				resetScheduleToCurrentPeriod()
@@ -620,15 +607,20 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			onScheduleShiftPeriod = { daysDelta ->
 				shiftSchedulePeriod(daysDelta)
 			},
+			onScheduleSelectDate = { date ->
+				selectVisibilityDate(date)
+			},
+			onCatalogsToggleExpanded = {
+				toggleCatalogsExpanded()
+			},
 			onCatalogClick = { catalog ->
 				openCatalogSearch(catalog)
 			})
 
-		adapter.skyObject = skyObject
-
 		val layoutManager = LinearLayoutManager(requireContext())
 		recyclerView.layoutManager = layoutManager
 		recyclerView.adapter = adapter
+		(recyclerView.itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
 
 		recyclerView.isNestedScrollingEnabled = true
 		recyclerScrollListener?.let { recyclerView.removeOnScrollListener(it) }
@@ -708,7 +700,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 
 			TAB_VISIBILITY -> {
 				collapseHeaderCard()
-				val visibilityPosition = adapter.getItemPosition<AstroVisibilityCardModel>()
+				val visibilityPosition = adapter.getItemPosition(AstroContextCardKey.VISIBILITY)
 				if (visibilityPosition >= 0) {
 					scrollToAdapterPosition(visibilityPosition)
 				}
@@ -717,7 +709,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			TAB_SCHEDULE -> {
 				collapseHeaderCard()
 				val schedulePosition =
-					adapter.getItemPosition<AstroScheduleCardModel>().let { cardPosition ->
+					adapter.getItemPosition(AstroContextCardKey.SCHEDULE).let { cardPosition ->
 						if (cardPosition >= 0) {
 							cardPosition
 						} else {
@@ -745,11 +737,11 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		if (!::adapter.isInitialized || !::bottomTabs.isInitialized || bottomTabs.tabCount == 0) {
 			return
 		}
-		val visibilityPosition = adapter.getItemPosition<AstroVisibilityCardModel>()
+		val visibilityPosition = adapter.getItemPosition(AstroContextCardKey.VISIBILITY)
 		if (visibilityPosition < 0) {
 			return
 		}
-		val schedulePosition = adapter.getItemPosition<AstroScheduleCardModel>()
+		val schedulePosition = adapter.getItemPosition(AstroContextCardKey.SCHEDULE)
 		val layoutManager = recyclerView.layoutManager as? LinearLayoutManager ?: return
 		val visibilityView = layoutManager.findViewByPosition(visibilityPosition)
 		val scheduleView =
@@ -855,6 +847,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			override fun onStateChanged(bottomSheet: View, newState: Int) {
 				if (newState == BottomSheetBehavior.STATE_HIDDEN) {
 					resetBottomSheetVisualState()
+					return
 				}
 				updateBottomSheetVisuals(bottomSheet.top)
 			}
@@ -875,6 +868,9 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		val behavior = bottomSheetBehavior ?: return false
 		val container = bottomSheetContainer ?: return false
 		val parentHeight = (container.parent as? View)?.height ?: return false
+		if (parentHeight <= 0) {
+			return false
+		}
 		val preferredPeekHeight = getPreferredCollapsedVisibleHeightPx().coerceIn(1, parentHeight)
 		if (preferredPeekHeight <= 1) {
 			return false
@@ -907,7 +903,12 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	}
 
 	private fun updateBottomSheetVisuals(sheetTop: Int) {
-		bottomSheetContainer ?: return
+		val container = bottomSheetContainer ?: return
+		ensureBottomSheetBackground()
+		if (container.background !== bottomSheetBackground) {
+			container.background = bottomSheetBackground
+		}
+		container.clipToOutline = true
 		val revealProgress = if (systemTopInset > 0) {
 			(systemTopInset - sheetTop).coerceIn(0, systemTopInset).toFloat() / systemTopInset
 		} else {
@@ -962,10 +963,10 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	}
 
 	override fun onDestroyView() {
-		visibilityCardModel?.cancelPendingLookups()
-		visibilityCardModel?.onDataChanged = null
-		scheduleCardModel?.cancelPendingComputations()
-		scheduleCardModel?.onDataChanged = null
+		galleryLoader?.cancel()
+		visibilityController.cancelPendingWork()
+		scheduleController.cancelPendingWork()
+		unbindControllerCallbacks()
 		tabSelectedListener?.let { listener ->
 			if (::bottomTabs.isInitialized) {
 				bottomTabs.removeOnTabSelectedListener(listener)
@@ -989,259 +990,117 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		super.onDestroyView()
 	}
 
+	private fun bindControllerCallbacks() {
+		visibilityController.onDataChanged = { submitCards() }
+		scheduleController.onDataChanged = { submitCards() }
+	}
+
+	private fun unbindControllerCallbacks() {
+		visibilityController.onDataChanged = null
+		scheduleController.onDataChanged = null
+	}
+
 	private fun onGalleryToggle(wid: String) {
-		val model = galleryCardModel ?: return
-
-		when (model.state) {
-			AstroGalleryCardModel.GalleryState.Collapsed -> {
-				model.state = AstroGalleryCardModel.GalleryState.Loading
-				adapter.notifyItemChanged(
-					adapter.getItemPosition<AstroGalleryCardModel>(),
-					AstroContextMenuAdapter.PAYLOAD_GALLERY_STATE
-				)
-
-				startLoadingImagesTask()
+		when (uiState.galleryState) {
+			AstroGalleryCardState.Collapsed -> {
+				loadGallery(wid)
 			}
 
-			is AstroGalleryCardModel.GalleryState.Ready -> {
-				model.state = AstroGalleryCardModel.GalleryState.Collapsed
-				adapter.notifyItemChanged(
-					adapter.getItemPosition<AstroGalleryCardModel>(),
-					AstroContextMenuAdapter.PAYLOAD_GALLERY_STATE
-				)
+			is AstroGalleryCardState.Ready -> {
+				uiState = uiState.copy(galleryState = AstroGalleryCardState.Collapsed)
+				submitCards()
 			}
 
-			AstroGalleryCardModel.GalleryState.Loading -> Unit
-			is AstroGalleryCardModel.GalleryState.Error -> {
-				model.state = AstroGalleryCardModel.GalleryState.Loading
-				adapter.notifyItemChanged(
-					adapter.getItemPosition<AstroGalleryCardModel>(),
-					AstroContextMenuAdapter.PAYLOAD_GALLERY_STATE
-				)
-				startLoadingImagesTask()
-			}
+			AstroGalleryCardState.Loading -> Unit
 		}
 	}
 
-	private fun startLoadingImagesTask() {
-		if (galleryController == null || skyObject == null) {
+	private fun loadGallery(wid: String) {
+		uiState = uiState.copy(galleryState = AstroGalleryCardState.Loading)
+		submitCards()
+		galleryLoader?.startLoading(wid) ?: run {
+			onGalleryStateChanged(wid, AstroGalleryCardState.Ready(emptyList()))
+		}
+	}
+
+	private fun onGalleryStateChanged(wid: String, state: AstroGalleryCardState) {
+		if (skyObject?.wid != wid || uiState.galleryState == state) {
 			return
 		}
-
-		val latLon = LatLon(0.0, 0.0)
-		val params = HashMap<String, String>()
-		params["wikidataId"] = skyObject!!.wid
-		val cacheManager = PhotoCacheManager(app)
-		val builder = StringBuilder()
-		builder.append("wikidataId=").append(skyObject!!.wid)
-		val rawKey = builder.toString()
-
-		if (galleryController!!.isCurrentHolderEquals(latLon, params)) {
-			galleryController?.currentCardsHolder?.apply {
-				setOnlinePhotosCards(this.astronomyCards)
-			}
-		} else if (!app.getSettings().isInternetConnectionAvailable) {
-			loadFromCache(cacheManager, rawKey)
-		} else {
-			stopLoadingImagesTask()
-			galleryController!!.clearHolder()
-
-			val holder = ImageCardsHolder(latLon, params)
-			getAstroImagesTask = GetAstroImagesTask(
-				app, holder, skyObject!!.wid,
-				imageCardListener, { response: String? ->
-					savePhotoListToCache(
-						cacheManager,
-						rawKey,
-						response
-					)
-				})
-
-			OsmAndTaskManager.executeTask<Void?, GetAstroImagesTask?>(getAstroImagesTask as GetAstroImagesTask)
-		}
+		uiState = uiState.copy(galleryState = state)
+		submitCards()
 	}
 
-	private fun savePhotoListToCache(
-		cacheManager: PhotoCacheManager,
-		rawKey: String,
-		response: String?
-	) {
-		if (!Algorithms.isEmpty(response)) {
-			val cacheWriteTask = CacheWriteTask(cacheManager, rawKey, response!!)
-			OsmAndTaskManager.executeTask<Void?, CacheWriteTask?>(cacheWriteTask)
-		}
-	}
-
-	private fun stopLoadingImagesTask() {
-		if (getAstroImagesTask != null && getAstroImagesTask?.status == AsyncTask.Status.RUNNING) {
-			getAstroImagesTask?.cancel(false)
-		}
-	}
-
-	private fun loadFromCache(
-		cacheManager: PhotoCacheManager, rawKey: String
-	) {
-		if (cacheManager.exists(rawKey)) {
-			imageCardListener.onTaskStarted()
-			val cacheReadTask =
-				CacheReadTask(cacheManager, rawKey) { json: String? ->
-					if (!Algorithms.isEmpty(json)) {
-						val wikimediaImageList: List<WikiImage> =
-							WikiCoreHelper.getAstroImagesFromJson(json!!)
-
-						imageCardListener.onFinish(wikimediaImageList)
-					} else {
-						imageCardListener.onFinish(null)
-					}
-					true
-				}
-			OsmAndTaskManager.executeTask<Void?, CacheReadTask?>(cacheReadTask)
-		} else {
-			val cards: MutableList<AbstractCard?> = ArrayList()
-			galleryCardModel?.state = AstroGalleryCardModel.GalleryState.Ready(cards)
-			adapter.notifyItemChanged(
-				adapter.getItemPosition<AstroGalleryCardModel>(),
-				AstroContextMenuAdapter.Companion.PAYLOAD_GALLERY_CONTENT
-			)
-		}
-	}
-
-	private fun loadCards() {
-		val items = ArrayList<AstroContextCard>()
-
-		knowledgeCardModel?.let {
-			items.add(it)
-		}
-
-		descriptionCardModel?.let {
-			items.add(it)
-		}
-
-		catalogCardModel?.let {
-			items.add(it)
-		}
-
-		galleryCardModel?.let {
-			items.add(it)
-		}
-
-		visibilityCardModel?.let {
-			items.add(it)
-		}
-
-		scheduleCardModel?.let {
-			items.add(it)
-		}
-
-		adapter.setItems(items)
-		updateBottomTabSelectionByScroll()
-	}
-
-	private fun updateKnowledgeCard() {
-		if (isKnowledgeBaseDownloaded()) {
-			knowledgeCardModel = null
+	private fun submitCards() {
+		if (!::adapter.isInitialized) {
 			return
 		}
-		val state = if (hasKnowledgeBaseAccess()) {
-			AstroKnowledgeCardModel.CardState.DOWNLOAD
-		} else {
-			AstroKnowledgeCardModel.CardState.UPSELL
-		}
-		val downloadItem = findKnowledgeBaseDownloadItem()
-		if (state == AstroKnowledgeCardModel.CardState.DOWNLOAD) {
-			ensureKnowledgeBaseIndexesLoaded()
-		}
-		val buttonTitle = if (state == AstroKnowledgeCardModel.CardState.DOWNLOAD) {
-			buildKnowledgeBaseButtonTitle(downloadItem)
-		} else {
-			app.getString(R.string.shared_string_get)
-		}
-		val actionEnabled = state != AstroKnowledgeCardModel.CardState.DOWNLOAD
-				|| findKnowledgeBaseActiveDownload() == null
-		knowledgeCardModel = knowledgeCardModel?.apply {
-			updateCard(state, buttonTitle, actionEnabled)
-		} ?: AstroKnowledgeCardModel(app, state, buttonTitle, actionEnabled)
-	}
-
-	private fun hasKnowledgeBaseAccess(): Boolean {
-		return InAppPurchaseUtils.isAstronomyAvailable(app)
-	}
-
-	private fun isKnowledgeBaseDownloaded(): Boolean {
-		return app.getAppPath(IndexConstants.ASTRO_DIR)
-			.resolve(KNOWLEDGE_BASE_FILE_NAME)
-			.exists()
-	}
-
-	private fun findKnowledgeBaseDownloadItem(): IndexItem? {
-		val types = listOf(DownloadActivityType.STAR_MAP_FILE)
-		return app.downloadThread.indexes.getIndexItems(types)
-			.firstOrNull(::isKnowledgeBaseIndexItem)
-	}
-
-	private fun ensureKnowledgeBaseIndexesLoaded() {
-		val downloadThread = app.downloadThread
-		val indexes = downloadThread.indexes
-		if (requestedKnowledgeBaseIndexes || indexes.isDownloadedFromInternet || indexes.downloadFromInternetFailed) {
+		val items = cardFactory.buildCards(
+			skyObject = skyObject,
+			article = article,
+			uiState = uiState,
+			knowledgeItem = buildKnowledgeCardItem(),
+			visibilityItem = visibilityController.buildItem(),
+			scheduleItem = scheduleController.buildItem()
+		)
+		if (adapter.currentList == items) {
+			updateBottomTabSelectionByScroll()
 			return
 		}
-		requestedKnowledgeBaseIndexes = true
-		downloadThread.runReloadIndexFilesSilent()
-	}
-
-	private fun buildKnowledgeBaseButtonTitle(indexItem: IndexItem?): CharSequence {
-		val downloadThread = app.downloadThread
-		val activeDownloadItem = findKnowledgeBaseActiveDownload()
-		if (activeDownloadItem != null && downloadThread.currentDownloadingItem == activeDownloadItem && !activeDownloadItem.isDownloaded) {
-			val progress = downloadThread.currentDownloadProgress.toInt()
-			val mb = activeDownloadItem.archiveSizeMB
-			return if (progress != -1) {
-				app.getString(R.string.value_downloaded_of_mb, mb * progress / 100, mb)
-			} else {
-				app.getString(
-					R.string.shared_string_downloading_formatted,
-					activeDownloadItem.getSizeDescription(app)
-				)
-			}
-		}
-		if (activeDownloadItem != null) {
-			return app.getString(
-				R.string.shared_string_downloading_formatted,
-				activeDownloadItem.getSizeDescription(app)
-			)
-		}
-		return if (indexItem != null) {
-			app.getString(
-				R.string.ltr_or_rtl_combine_via_space,
-				app.getString(R.string.shared_string_download),
-				indexItem.getSizeDescription(app)
-			)
-		} else {
-			app.getString(R.string.shared_string_download)
+		adapter.submitItems(items) {
+			updateBottomTabSelectionByScroll()
 		}
 	}
 
-	private fun findKnowledgeBaseActiveDownload(): IndexItem? {
-		return app.downloadThread.currentDownloadingItems.firstOrNull(::isKnowledgeBaseIndexItem)
+	private fun toggleCatalogsExpanded() {
+		uiState = uiState.copy(catalogsExpanded = !uiState.catalogsExpanded)
+		submitCards()
 	}
 
-	private fun isKnowledgeBaseIndexItem(item: IndexItem?): Boolean {
-		return item?.basename?.endsWith(FileNameTranslationHelper.STARS_ARTICLES, ignoreCase = true) == true
+	private fun openUri(uri: Uri) {
+		val intent = Intent(Intent.ACTION_VIEW, uri)
+		try {
+			startActivity(intent)
+		} catch (_: Exception) {
+		}
+	}
+
+	private fun currentKnowledgeCardState(): AstroKnowledgeCardState? {
+		return knowledgeBaseController.currentState()
+	}
+
+	private fun buildKnowledgeCardItem(): AstroKnowledgeCardItem? {
+		return knowledgeBaseController.buildCardItem()
+	}
+
+	private fun ensureKnowledgeCardPrerequisites() {
+		if (currentKnowledgeCardState() == AstroKnowledgeCardState.DOWNLOAD) {
+			knowledgeBaseController.ensureIndexesLoaded()
+		}
+	}
+
+	private fun wasKnowledgeActionDisabled(): Boolean {
+		if (!::adapter.isInitialized) {
+			return false
+		}
+		val position = adapter.getItemPosition(AstroContextCardKey.KNOWLEDGE)
+		val item = if (position >= 0) adapter.currentList[position] as? AstroKnowledgeCardItem else null
+		return item?.actionEnabled == false
 	}
 
 	private fun onKnowledgeCardAction() {
 		if (!isAdded) {
 			return
 		}
-		when (knowledgeCardModel?.state) {
-			AstroKnowledgeCardModel.CardState.UPSELL -> {
+		when (currentKnowledgeCardState()) {
+			AstroKnowledgeCardState.UPSELL -> {
 				ChoosePlanFragment.showInstance(requireMapActivity(), OsmAndFeature.OSMAND_CLOUD)
 			}
 
-			AstroKnowledgeCardModel.CardState.DOWNLOAD -> {
-				val indexItem = findKnowledgeBaseDownloadItem()
+			AstroKnowledgeCardState.DOWNLOAD -> {
+				val indexItem = knowledgeBaseController.findDownloadItem()
 				if (indexItem == null) {
-					ensureKnowledgeBaseIndexesLoaded()
+					knowledgeBaseController.ensureIndexesLoaded()
 					app.showToastMessage(
 						if (!app.downloadThread.indexes.isDownloadedFromInternet) {
 							R.string.getting_list_of_required_maps
@@ -1262,40 +1121,33 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		if (!isAdded) {
 			return
 		}
-		requestedKnowledgeBaseIndexes = false
-		updateKnowledgeCard()
-		loadCards()
+		knowledgeBaseController.resetIndexesReloadFlag()
+		submitCards()
 	}
 
 	override fun downloadHasFinished() {
 		if (!isAdded) {
 			return
 		}
-		val shouldUpdateKnowledgeCard = isKnowledgeBaseDownloaded()
-				|| findKnowledgeBaseActiveDownload() != null
-				|| knowledgeCardModel?.actionEnabled == false
+		val shouldUpdateKnowledgeCard =
+			knowledgeBaseController.shouldRefreshAfterDownload(wasKnowledgeActionDisabled())
 		if (!shouldUpdateKnowledgeCard) {
 			return
 		}
-		requestedKnowledgeBaseIndexes = false
+		knowledgeBaseController.resetIndexesReloadFlag()
 		skyObject?.let(::updateObjectInfo) ?: run {
-			updateKnowledgeCard()
-			loadCards()
+			submitCards()
 		}
 	}
 
 	override fun downloadInProgress() {
-		if (!isAdded || knowledgeCardModel?.state != AstroKnowledgeCardModel.CardState.DOWNLOAD) {
+		if (!isAdded || currentKnowledgeCardState() != AstroKnowledgeCardState.DOWNLOAD) {
 			return
 		}
-		if (findKnowledgeBaseActiveDownload() == null) {
+		if (knowledgeBaseController.findActiveDownload() == null) {
 			return
 		}
-		updateKnowledgeCard()
-		val position = adapter.getItemPosition<AstroKnowledgeCardModel>()
-		if (position >= 0) {
-			adapter.notifyItemChanged(position)
-		}
+		submitCards()
 	}
 
 	private fun openCatalogSearch(catalog: Catalog) {

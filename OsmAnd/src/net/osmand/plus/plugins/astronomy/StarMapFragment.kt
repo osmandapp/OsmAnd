@@ -737,7 +737,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private fun setupObservers() {
 		viewModel.currentTime.observe(viewLifecycleOwner) { time ->
 			starView.setDateTime(time, animate = true)
-			updateBottomSheetInfo()
+			getAstroContextMenuFragment()?.onTimeChanged()
 		}
 		viewModel.currentCalendar.observe(viewLifecycleOwner) { calendar ->
 			timeSelectionView.setDateTime(calendar)
@@ -809,7 +809,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				if (selectedObject == null) hideBottomSheet()
 			}
 		}
-		starView.onAnimationFinished = { updateBottomSheetInfo() }
+		starView.onAnimationFinished = null
 		starView.onAzimuthManualChangeListener = { azimuth ->
 			if (!cameraHelper.isCameraOverlayEnabled) {
 				if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode()
@@ -859,22 +859,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	fun hideBottomSheet() {
 		bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-	}
-
-	private fun updateBottomSheetInfo() {
-		getAstroContextMenuFragment()?.let { fragment ->
-			selectedObject?.let { obj -> fragment.updateObjectInfo(obj) }
-		}
-	}
-
-	private fun showConstellationInfo(c: Constellation) {
-		val existing = childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? ConstellationInfoFragment
-		if (existing == null || existing.arguments?.getString("name") != c.name) {
-			childFragmentManager.beginTransaction()
-				.replace(R.id.bottom_sheet_container, ConstellationInfoFragment.newInstance(c))
-				.commitNow()
-		}
-		bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 	}
 
 	private fun showObjectInfo(obj: SkyObject) {
