@@ -221,8 +221,15 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 						clearOutlineCollection();
 						VectorLinesCollection outlineCollection = new VectorLinesCollection();
 						QVectorPointI points = new QVectorPointI();
+						double cx = 0.0;
+						double cy = 0.0;
+						double s = (double) x.size();
 						for (int i = 0; i < x.size(); i++) {
-							points.add(new PointI(x.get(i), y.get(i)));
+							int ix = x.get(i);
+							int iy = y.get(i);
+							points.add(new PointI(ix, iy));
+							cx += (double) ix / s;
+							cy += (double) iy / s;
 						}
 						VectorLineBuilder builder = new VectorLineBuilder();
 						builder.setPoints(points)
@@ -235,6 +242,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 						builder.buildAndAddToCollection(outlineCollection);
 						this.outlineCollection = outlineCollection;
 						mapRenderer.addSymbolsProvider(outlineCollection);
+						mapRenderer.add3DObjectColor(new PointI((int) cx, (int) cy), NativeUtilities.createFColorRGB(outlinePaint.getColor()));
 					}
 				} else {
 					float px, py, prevX, prevY;
@@ -381,6 +389,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 		if (mapRenderer != null && outlineCollection != null) {
 			mapRenderer.removeSymbolsProvider(outlineCollection);
 			outlineCollection = null;
+			mapRenderer.removeAll3DObjectColors();
 		}
 	}
 
