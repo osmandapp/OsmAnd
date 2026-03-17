@@ -6020,4 +6020,5 @@
     <string name="astro_explore_watch_now">Megtekintés most</string>
     <string name="astro_explore_deep_sky_subtitle">Galaxisok, galaxishalmazok, fekete lyukak</string>
     <string name="obd_alt_battery_voltage_desc">Megjeleníti az OBD-adapter feszültségszintjét</string>
+    <string name="shared_string_radians">Radián</string>
 </resources>

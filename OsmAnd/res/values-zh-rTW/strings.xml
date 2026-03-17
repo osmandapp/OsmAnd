@@ -5938,4 +5938,6 @@
     <string name="astro_explore_watch_now_subtitle">今晚星空概覽</string>
     <string name="astro_explore_watch_now">立刻觀看</string>
     <string name="astro_explore_deep_sky_subtitle">星系、星系團、黑洞</string>
+    <string name="shared_string_radians">弧度</string>
+    <string name="obd_alt_battery_voltage_desc">顯示 OBD 轉接器的電壓值</string>
 </resources>

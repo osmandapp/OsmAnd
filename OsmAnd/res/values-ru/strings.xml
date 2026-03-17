@@ -6033,4 +6033,5 @@
     <string name="astro_explore_watch_now">Наблюдать сейчас</string>
     <string name="astro_explore_deep_sky_subtitle">Галактика, скопления галактик, чёрные дыры</string>
     <string name="obd_alt_battery_voltage_desc">Показывает уровень напряжения на OBD-адаптере</string>
+    <string name="shared_string_radians">Радианы</string>
 </resources>
