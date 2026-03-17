@@ -42,8 +42,8 @@ public abstract class BaseDialogController implements IDialogController {
 	@Nullable
 	public FragmentActivity getActivity() {
 		IDialog dialog = getDialog();
-		if (dialog instanceof IContextDialog contextDialog) {
-			return contextDialog.getActivity();
+		if (dialog instanceof IOsmAndFragment fragmentDialog) {
+			return fragmentDialog.getActivity();
 		}
 		return null;
 	}

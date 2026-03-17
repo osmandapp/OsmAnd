@@ -15,6 +15,8 @@ import net.osmand.plus.R
 import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider
+import net.osmand.plus.inapp.InAppPurchaseHelper
+import net.osmand.plus.inapp.InAppPurchaseUtils.isOrganizeByTypeApplicable
 import net.osmand.plus.myplaces.tracks.controller.OrganizeTracksByController
 import net.osmand.plus.myplaces.tracks.controller.OrganizeTracksByController.Companion.PROCESS_ID
 import net.osmand.plus.settings.backend.ApplicationMode
@@ -23,9 +25,10 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.widgets.dialogbutton.DialogButton
+import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDialogCompletely,
-	IDialogNightModeInfoProvider {
+	IDialogNightModeInfoProvider, OrganizeTracksByAdapter.OrganizeByTypeClickListener, InAppPurchaseHelper.InAppPurchaseListener {
 
 	companion object {
 
@@ -124,7 +127,7 @@ class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDial
 	private fun setupRecycler(view: View) {
 		val currentController = controller ?: return
 
-		adapter = OrganizeTracksByAdapter(app, appMode, currentController)
+		adapter = OrganizeTracksByAdapter(app, appMode, nightMode, this)
 		val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
 		recyclerView.layoutManager = LinearLayoutManager(activity)
 		recyclerView.adapter = adapter
@@ -134,7 +137,7 @@ class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDial
 
 	private fun setupApplyButton(view: View) {
 		view.findViewById<DialogButton>(R.id.save_button).setOnClickListener {
-			controller?.askSaveChanges(activity)
+			controller?.askSaveChanges()
 			dismiss()
 		}
 	}
@@ -148,24 +151,37 @@ class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDial
 		adapter?.setScreenItems(currentController.populateScreenItems())
 	}
 
-	override fun onResume() {
-		super.onResume()
-		callMapActivity {
-			it.disableDrawer()
-			controller?.fragmentActivity = it
-		}
-	}
-
-	override fun onPause() {
-		super.onPause()
-		callMapActivity {
-			it.enableDrawer()
-		}
-		controller?.fragmentActivity = null
-	}
-
 	override fun onDestroy() {
 		super.onDestroy()
 		controller?.finishProcessIfNeeded(activity)
+	}
+
+	override fun updateNightMode() {
+		super.updateNightMode()
+		adapter?.isNightMode = nightMode
+	}
+
+	override fun onItemClicked(organizeByType: OrganizeByType?) {
+		if (isOrganizeByTypeApplicable(app, organizeByType)) {
+			adapter?.setSelectedType(organizeByType)
+			controller?.selectType(organizeByType)
+		} else {
+			if (organizeByType?.isRangeRelated() == true) {
+				controller?.selectType(organizeByType)
+				controller?.askSaveChanges()
+				dismiss()
+			} else {
+				controller?.onGetProTypeClicked(organizeByType)
+			}
+		}
+	}
+
+	override fun onItemPurchaseClicked(organizeByType: OrganizeByType) {
+		controller?.onGetProTypeClicked(organizeByType)
+	}
+
+	override fun onItemPurchased(sku: String?, active: Boolean) {
+		super.onItemPurchased(sku, active)
+		adapter?.notifyDataSetChanged()
 	}
 }
