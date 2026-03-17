@@ -150,11 +150,30 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	companion object {
 		val TAG: String = StarMapFragment::class.java.simpleName
 		private val LOG = LoggerFactory.getLogger(TAG)
+		private val RED_FILTER_MATRIX = ColorMatrix(
+			floatArrayOf(
+				0.33f, 0.33f, 0.33f, 0f, 0f,
+				0f, 0f, 0f, 0f, 0f,
+				0f, 0f, 0f, 0f, 0f,
+				0f, 0f, 0f, 1f, 0f
+			)
+		)
 
 		private const val AUTO_TIME_UPDATE_INTERVAL_MS = 60_000L
 		private const val MAX_MAGNITUDE = 7.0f
 
 		@JvmStatic
+		fun applyRedFilterToViews(enabled: Boolean, vararg views: View?) {
+			val layerType = if (enabled) View.LAYER_TYPE_HARDWARE else View.LAYER_TYPE_NONE
+			val paint = if (enabled) {
+				Paint().apply { colorFilter = ColorMatrixColorFilter(RED_FILTER_MATRIX) }
+			} else {
+				null
+			}
+			views.forEach { view ->
+				view?.setLayerType(layerType, paint)
+			}
+		}
 
 		fun showInstance(manager: FragmentManager) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
@@ -342,6 +361,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			}
 			override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 		})
+		applyRedFilterToViews(starView.showRedFilter, bottomSheetContainer)
 
 		return view
 	}
@@ -979,21 +999,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun updateRedMode(enabled: Boolean) {
-		if (context == null) return
-		val paint = if (enabled) {
-			val lumToRed = ColorMatrix(floatArrayOf(
-				0.33f, 0.33f, 0.33f, 0f, 0f,
-				0f, 0f, 0f, 0f, 0f,
-				0f, 0f, 0f, 0f, 0f,
-				0f, 0f, 0f, 1f, 0f
-			))
-			Paint().apply { colorFilter = ColorMatrixColorFilter(lumToRed) }
-		} else {
-			null
-		}
-
-		val layerType = if (enabled) View.LAYER_TYPE_HARDWARE else View.LAYER_TYPE_NONE
-
 		val viewsToFilter = mutableListOf<View>()
 		if (::timeControlCard.isInitialized) viewsToFilter.add(timeControlCard)
 		if (::timeSelectionView.isInitialized) viewsToFilter.add(timeSelectionView)
@@ -1007,7 +1012,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (::searchButton.isInitialized) viewsToFilter.add(searchButton)
 		if (::settingsButton.isInitialized) viewsToFilter.add(settingsButton)
 		if (::sliderContainer.isInitialized) viewsToFilter.add(sliderContainer)
+		if (::bottomSheetContainer.isInitialized) viewsToFilter.add(bottomSheetContainer)
 
-		viewsToFilter.forEach { it.setLayerType(layerType, paint) }
+		applyRedFilterToViews(enabled, *viewsToFilter.toTypedArray())
+		(childFragmentManager.findFragmentByTag(AstroConfigureViewBottomSheet.TAG) as? AstroConfigureViewBottomSheet)
+			?.applyRedFilter(enabled)
+		(childFragmentManager.findFragmentByTag(StarMapSearchDialogFragment.TAG) as? StarMapSearchDialogFragment)
+			?.applyRedFilter(enabled)
 	}
+
 }

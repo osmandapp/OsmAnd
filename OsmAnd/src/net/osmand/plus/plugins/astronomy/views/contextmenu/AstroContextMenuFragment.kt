@@ -449,6 +449,15 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		updateBottomSheetPeekHeightFromContent()
 	}
 
+	override fun onResume() {
+		super.onResume()
+		if (!::adapter.isInitialized) {
+			return
+		}
+		ensureKnowledgeCardPrerequisites()
+		submitCards()
+	}
+
 	override fun onApplyInsets(insets: WindowInsetsCompat) {
 		super.onApplyInsets(insets)
 		val systemInsets =
@@ -661,7 +670,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		bottomTabs.addTab(
 			bottomTabs.newTab()
 				.setText(R.string.gpx_visibility_txt)
-				.setIcon(R.drawable.ic_action_telescope)
+				.setIcon(R.drawable.ic_action_telescope_colored)
 		)
 		bottomTabs.addTab(
 			bottomTabs.newTab()

@@ -22,7 +22,7 @@ class AstroKnowledgeCardViewHolder(
 		icon.setImageResource(item.getIconResId())
 		title.setText(item.getTitleId())
 		description.setText(item.getDescriptionId())
-		actionButton.setButtonType(DialogButtonType.SECONDARY)
+		actionButton.setButtonType(DialogButtonType.SECONDARY_ACTIVE)
 		actionButton.setTitle(item.buttonTitle)
 		actionButton.isEnabled = item.actionEnabled
 		actionButton.setOnClickListener { onActionClick() }

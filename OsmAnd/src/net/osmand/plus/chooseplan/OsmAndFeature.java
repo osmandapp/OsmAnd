@@ -92,7 +92,8 @@ public enum OsmAndFeature {
 			NAUTICAL,
 			WEATHER,
 			RELIEF_3D,
-			VEHICLE_METRICS
+			VEHICLE_METRICS,
+			ASTRONOMY
 	);
 
 	public static final List<OsmAndFeature> OSMAND_PRO_PREVIEW_FEATURES = Arrays.asList(
@@ -108,7 +109,8 @@ public enum OsmAndFeature {
 			NAUTICAL,
 			WEATHER,
 			RELIEF_3D,
-			VEHICLE_METRICS
+			VEHICLE_METRICS,
+			ASTRONOMY
 	);
 
 	public static final List<OsmAndFeature> MAPS_PLUS_FEATURES = Arrays.asList(
@@ -120,7 +122,8 @@ public enum OsmAndFeature {
 			WIKIVOYAGE,
 			EXTERNAL_SENSORS_SUPPORT,
 			TERRAIN,
-			NAUTICAL);
+			NAUTICAL,
+			ASTRONOMY);
 
 	public static final List<OsmAndFeature> MAPS_PLUS_PREVIEW_FEATURES = Arrays.asList(
 			OSMAND_CLOUD,
@@ -133,6 +136,7 @@ public enum OsmAndFeature {
 			COMBINED_WIKI,
 			EXTERNAL_SENSORS_SUPPORT,
 			TERRAIN,
-			NAUTICAL
+			NAUTICAL,
+			ASTRONOMY
 	);
 }

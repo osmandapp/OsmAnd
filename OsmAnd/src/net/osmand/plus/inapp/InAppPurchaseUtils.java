@@ -110,7 +110,7 @@ public class InAppPurchaseUtils {
 	}
 
 	public static boolean isAstronomyAvailable(@NonNull OsmandApplication app) {
-		return Version.isPaidVersion(app);
+		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app) || InAppPurchaseUtils.isMapsPlusAvailable(app);
 	}
 
 	public static boolean isProWidgetsAvailable(@NonNull OsmandApplication app) {

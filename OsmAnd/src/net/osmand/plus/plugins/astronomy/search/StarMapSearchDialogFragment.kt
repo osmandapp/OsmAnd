@@ -242,6 +242,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		AndroidUiHelper.setStatusBarContentColor(view, nightMode)
+		applyRedFilter(isRedFilterEnabled())
 		bindViews(view)
 		refreshPreparedEntries()
 		setupSearchRecycler()
@@ -261,6 +262,15 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			requestKeyboard = currentMode == ScreenMode.FULL_SEARCH && currentFullSearchMode == FullSearchMode.INPUT
 		)
 		applyFiltersAndSort(scrollToTop = false)
+	}
+
+	fun applyRedFilter(enabled: Boolean) {
+		StarMapFragment.applyRedFilterToViews(enabled, view)
+	}
+
+	private fun isRedFilterEnabled(): Boolean {
+		return (parentFragment as? StarMapFragment)?.starView?.showRedFilter
+			?: astroSettings.getStarMapConfig().showRedFilter
 	}
 
 	override fun onHiddenChanged(hidden: Boolean) {
