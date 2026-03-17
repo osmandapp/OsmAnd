@@ -71,7 +71,7 @@ object KGeoPointParserUtil {
         var lon = 0
         var shift = kMaxCoordBits - 3
         for (i in s.indices) {
-            val a = KAlgorithms.base64IndexOf(s[i])
+            val a = base64IndexOf(s[i])
             if (a < 0) {
                 return null
             }
@@ -329,7 +329,7 @@ object KGeoPointParserUtil {
         if (qry.length < 10) {
             return null
         }
-        val indZoom = KAlgorithms.base64IndexOf(qry[0])
+        val indZoom = base64IndexOf(qry[0])
         var zoom = 15
         if (indZoom >= 0) {
             zoom = indZoom / 4 + 4
@@ -893,5 +893,25 @@ object KGeoPointParserUtil {
         }
         val lowerUrl = url.lowercase()
         return lowerUrl.startsWith("http") && lowerUrl.contains("goo.gl/")
+    }
+
+    private val alphabet = charArrayOf(
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', // 0 to 7
+        'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', // 8 to 15
+        'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', // 16 to 23
+        'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', // 24 to 31
+        'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', // 32 to 39
+        'o', 'p', 'q', 'r', 's', 't', 'u', 'v', // 40 to 47
+        'w', 'x', 'y', 'z', '0', '1', '2', '3', // 48 to 55
+        '4', '5', '6', '7', '8', '9', '+', '/'  // 56 to 63
+    )
+
+    private fun base64IndexOf(char: Char): Int {
+        for (i in alphabet.indices) {
+            if (alphabet[i] == char) {
+                return i
+            }
+        }
+        return -1
     }
 }
