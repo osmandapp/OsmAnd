@@ -6100,4 +6100,5 @@
     <string name="astro_explore_watch_now">Гледајте сада</string>
     <string name="astro_explore_deep_sky_subtitle">Галаксија, кластери галаксија, црне рупе</string>
     <string name="obd_alt_battery_voltage_desc">Приказује ниво напона на ДНВ адаптеру</string>
+    <string name="shared_string_radians">Радијана</string>
 </resources>
