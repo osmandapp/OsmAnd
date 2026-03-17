@@ -27,4 +27,6 @@ interface IModernSliderDialogController : IDisplayDataProvider {
 	fun onDestroy(activity: FragmentActivity?)
 
 	fun formatValue(number: Number): String = number.toString()
+
+	fun getRightButtonResId(): Int? = null
 }

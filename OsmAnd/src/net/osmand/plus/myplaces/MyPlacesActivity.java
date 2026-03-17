@@ -68,7 +68,8 @@ public class MyPlacesActivity extends TabActivity {
 	private LockableViewPager viewPager;
 	private PagerSlidingTabStrip mSlidingTabLayout;
 	private AppBarLayout appBar;
-	@Nullable private ValueAnimator tabsHeightAnimator;
+	@Nullable
+	private ValueAnimator tabsHeightAnimator;
 
 	private final List<WeakReference<FragmentStateHolder>> fragmentsStateList = new ArrayList<>();
 	private int tabSize;
@@ -174,7 +175,8 @@ public class MyPlacesActivity extends TabActivity {
 			v.setLayoutParams(lp);
 		});
 		tabsHeightAnimator.addListener(new android.animation.AnimatorListenerAdapter() {
-			@Override public void onAnimationEnd(android.animation.Animator animation) {
+			@Override
+			public void onAnimationEnd(android.animation.Animator animation) {
 				if (endAction != null) endAction.run();
 			}
 		});
@@ -422,5 +424,9 @@ public class MyPlacesActivity extends TabActivity {
 	public <T> T getFragment(String fragmentTag) {
 		Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
 		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (T) fragment : null;
+	}
+
+	public boolean isInAppPurchaseAllowed() {
+		return true;
 	}
 }

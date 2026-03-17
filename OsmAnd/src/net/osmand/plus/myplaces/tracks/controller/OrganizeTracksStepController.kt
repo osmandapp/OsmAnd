@@ -8,6 +8,9 @@ import net.osmand.plus.base.containers.Limits
 import net.osmand.plus.base.dialog.BaseDialogController
 import net.osmand.plus.base.dialog.data.DialogExtra
 import net.osmand.plus.base.dialog.data.DisplayData
+import net.osmand.plus.chooseplan.ChoosePlanFragment
+import net.osmand.plus.chooseplan.OsmAndFeature
+import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.bottomsheets.ModernSliderBottomSheet
 import net.osmand.plus.settings.controllers.IModernSliderDialogController
@@ -32,7 +35,11 @@ class OrganizeTracksStepController(
 			type: OrganizeByType,
 			initialValue: Int
 		) {
-			val controller = OrganizeTracksStepController(app, folderId, type, initialValue)
+			val controller = OrganizeTracksStepController(
+				app,
+				folderId,
+				type,
+				initialValue)
 			app.dialogManager.register(PROCESS_ID, controller)
 			ModernSliderBottomSheet.showInstance(fragmentManager, appMode, PROCESS_ID)
 		}
@@ -66,9 +73,15 @@ class OrganizeTracksStepController(
 	}
 
 	override fun onApplyChanges() {
-		if (initialValue != selectedValue) {
-			setOrganizeByStep(selectedValue)
-			applyChanges = true
+		if (!InAppPurchaseUtils.isOrganizeByTypeApplicable(app, organizeByType)) {
+			activity?.let {
+				ChoosePlanFragment.showInstance(it, OsmAndFeature.ADVANCED_WIDGETS)
+			}
+		} else {
+			if (initialValue != selectedValue) {
+				setOrganizeByStep(selectedValue)
+				applyChanges = true
+			}
 		}
 	}
 
@@ -111,5 +124,13 @@ class OrganizeTracksStepController(
 		displayData.putExtra(DialogExtra.TITLE, getString(R.string.set_step_size))
 		displayData.putExtra(DialogExtra.SUBTITLE, getString(R.string.set_step_size_summary))
 		return displayData
+	}
+
+	override fun getRightButtonResId(): Int? {
+		return if (InAppPurchaseUtils.isOrganizeByTypeApplicable(app, organizeByType)) {
+			super.getRightButtonResId()
+		} else {
+			R.string.shared_string_unlock
+		}
 	}
 }

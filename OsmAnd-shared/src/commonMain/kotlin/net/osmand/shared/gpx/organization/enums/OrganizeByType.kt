@@ -14,7 +14,8 @@ enum class OrganizeByType(
 	val filterType: TrackFilterType,
 	val category: OrganizeByCategory,
 	val stepRange: Limits? = null,
-	val strategy: OrganizeByStrategy
+	val strategy: OrganizeByStrategy,
+	val isPro: Boolean = true
 ) {
 	// General
 	ACTIVITY(
@@ -22,7 +23,8 @@ enum class OrganizeByType(
 		nameResId = "shared_string_activity",
 		filterType = TrackFilterType.ACTIVITY,
 		category = OrganizeByCategory.GENERAL,
-		strategy = OrganizeByListStrategy
+		strategy = OrganizeByListStrategy,
+		isPro = false
 	),
 	DURATION(
 		iconResId = "ic_action_time_span_75",
@@ -55,7 +57,8 @@ enum class OrganizeByType(
 		nameResId = "year_of_creation",
 		filterType = TrackFilterType.DATE_CREATION,
 		category = OrganizeByCategory.DATE_TIME,
-		strategy = OrganizeByDateStrategy
+		strategy = OrganizeByDateStrategy,
+		isPro = false
 	),
 	MONTH_AND_YEAR(
 		iconResId = "ic_action_calendar_month",
@@ -71,7 +74,8 @@ enum class OrganizeByType(
 		nameResId = "nearest_city",
 		filterType = TrackFilterType.CITY,
 		category = OrganizeByCategory.LOCATION,
-		strategy = OrganizeByListStrategy
+		strategy = OrganizeByListStrategy,
+		isPro = false
 	),
 
 	// Speed
