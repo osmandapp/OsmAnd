@@ -216,7 +216,7 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 	private void updateHeader() {
 		View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 
-		if (getGpx() != null && !getGpx().isShowCurrentTrack() && adapter.getCount() > 0) {
+		if (getGpx() != null && adapter.getCount() > 0) {
 			setupSplitIntervalView(splitIntervalView);
 			if (options.isEmpty()) {
 				prepareSplitIntervalAdapterData();
