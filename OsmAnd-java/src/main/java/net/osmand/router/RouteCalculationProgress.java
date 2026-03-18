@@ -50,7 +50,7 @@ public class RouteCalculationProgress implements Serializable {
 
 	public long routeCalculationStartTime;
 
-	public boolean hasMissingMapsNow; // pass to native routing
+	public boolean hasMissingMapsNow; // passed to the native routing
 	public MissingMapsCalculationResult missingMapsCalculationResult;
 
 	private int hhIterationStep = HHIteration.HH_NOT_STARTED.ordinal();
@@ -60,6 +60,7 @@ public class RouteCalculationProgress implements Serializable {
 
 	private static final float INITIAL_PROGRESS = 0.05f;
 	private static final float FIRST_ITERATION = 0.72f;
+	public boolean isSlowRoutingActive = false;
 
 	public static RouteCalculationProgress capture(RouteCalculationProgress cp) {
 		RouteCalculationProgress p = new RouteCalculationProgress();
@@ -131,7 +132,7 @@ public class RouteCalculationProgress implements Serializable {
 		return map;
 	}
 
-	public float getLinearProgressHH() {
+	private float getLinearProgressHH() {
 		float progress = 0;
 		for (HHIteration i : HHIteration.values()) {
 			if (i.ordinal() == hhIterationStep) {
@@ -152,7 +153,7 @@ public class RouteCalculationProgress implements Serializable {
 	}
 
 	public float getLinearProgress() {
-		if(hhIterationStep != HHIteration.HH_NOT_STARTED.ordinal()) {
+		if (hhIterationStep != HHIteration.HH_NOT_STARTED.ordinal()) {
 			return getLinearProgressHH();
 		}
 		float p = Math.max(distanceFromBegin, distanceFromEnd);
