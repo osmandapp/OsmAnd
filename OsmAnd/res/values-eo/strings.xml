@@ -6112,4 +6112,5 @@
     <string name="astro_explore_deep_sky_subtitle">Galaksioj, galaksiamasoj, nigraj truoj</string>
     <string name="obd_alt_battery_voltage_desc">Montras tension ĉe la OBD-adaptilo</string>
     <string name="shared_string_radians">Radianoj</string>
+    <string name="shared_string_unlock">Malŝlosi</string>
 </resources>
