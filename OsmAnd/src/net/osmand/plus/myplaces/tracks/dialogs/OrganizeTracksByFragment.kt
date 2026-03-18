@@ -28,7 +28,8 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDialogCompletely,
-	IDialogNightModeInfoProvider, OrganizeTracksByAdapter.OrganizeByTypeClickListener, InAppPurchaseHelper.InAppPurchaseListener {
+	IDialogNightModeInfoProvider, OrganizeTracksByAdapter.OrganizeByTypeClickListener,
+	InAppPurchaseHelper.InAppPurchaseListener {
 
 	companion object {
 
@@ -125,14 +126,15 @@ class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDial
 	}
 
 	private fun setupRecycler(view: View) {
-		val currentController = controller ?: return
-
-		adapter = OrganizeTracksByAdapter(app, appMode, nightMode, this)
-		val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
-		recyclerView.layoutManager = LinearLayoutManager(activity)
-		recyclerView.adapter = adapter
-		recyclerView.layoutManager?.isItemPrefetchEnabled = false
-		recyclerView.isSaveEnabled = true
+		controller?.let { currentController ->
+			adapter = OrganizeTracksByAdapter(app, appMode, nightMode, this)
+			adapter?.setSelectedType(currentController.selectedType)
+			val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
+			recyclerView.layoutManager = LinearLayoutManager(activity)
+			recyclerView.adapter = adapter
+			recyclerView.layoutManager?.isItemPrefetchEnabled = false
+			recyclerView.isSaveEnabled = true
+		}
 	}
 
 	private fun setupApplyButton(view: View) {

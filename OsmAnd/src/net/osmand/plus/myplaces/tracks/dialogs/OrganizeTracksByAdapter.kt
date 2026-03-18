@@ -108,14 +108,14 @@ class OrganizeTracksByAdapter(
 
 
 				holder.rbRadio?.isChecked =
-					isSelected && isOrganizeByTypeApplicable(app, organizeByType)
+					isSelected && isItemAvailable(organizeByType)
 				UiUtilities.setupCompoundButton(nightMode, activeColor, holder.rbRadio)
 				AndroidUiHelper.updateVisibility(
 					holder.rbRadio,
-					isOrganizeByTypeApplicable(app, organizeByType))
+					isItemAvailable(organizeByType))
 				AndroidUiHelper.updateVisibility(
 					holder.ivPro,
-					!isOrganizeByTypeApplicable(app, organizeByType))
+					!isItemAvailable(organizeByType))
 
 				holder.ivPro?.setOnClickListener {
 					if (organizeByType != null) {
@@ -128,6 +128,12 @@ class OrganizeTracksByAdapter(
 				setupSelectableBackground(holder.itemView, activeColor)
 			}
 		}
+	}
+
+	private fun isItemAvailable(organizeByType: OrganizeByType?): Boolean {
+		return isOrganizeByTypeApplicable(
+			app,
+			organizeByType) || organizeByType == OrganizeByType.LENGTH
 	}
 
 	@SuppressLint("NotifyDataSetChanged")
