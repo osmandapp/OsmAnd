@@ -1200,11 +1200,11 @@ public class SearchUICore {
 			case OBF_RESOURCE:
 				boolean fp1 = o1.isFullPhraseEqualLocaleName();
 				boolean fp2 = o2.isFullPhraseEqualLocaleName();
-				// sort order: DETAILED, WIKIPEDIA, BASEMAP, TRAVEL
-				int ord1 = fp1 ? 0 : o1.getResourceType().ordinal();
-				int ord2 = fp2 ? 0 : o2.getResourceType().ordinal();
-				if (ord1 != ord2) {
-					return ord2 > ord1 ? -1 : 1;
+				// sort order: DETAILED|BASEMAP, WIKIPEDIA, TRAVEL
+				int weight1 = fp1 ? 0 : o1.getResourceType().getWeight();
+				int weight2 = fp2 ? 0 : o2.getResourceType().getWeight();
+				if (weight1 != weight2) {
+					return weight2 > weight1 ? 1 : -1;
 				}
 				break;
 			case UNKNOWN_PHRASE_MATCH_WEIGHT:

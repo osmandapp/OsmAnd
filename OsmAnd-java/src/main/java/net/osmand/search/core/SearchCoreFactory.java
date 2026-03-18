@@ -98,8 +98,9 @@ public class SearchCoreFactory {
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 600;
 	public static final int SEARCH_ADDRESS_BY_NAME_LONG_API_PRIORITY = 700;
 	
-	private static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
-	private static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
+	private static final double SEARCH_ADDRESS_BY_NAME_CITY_PRIORITY_DISTANCE = 0.4;
+	private static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.5;
+	private static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.7;
 	
 	public static final int SEARCH_OLC_WITH_CITY_PRIORITY = 8;
 	public static final int SEARCH_OLC_WITH_CITY_TOTAL_LIMIT = 500;
@@ -477,7 +478,7 @@ public class SearchCoreFactory {
 					res.relatedObject = res.file;
 					res.location = c.getLocation();
 					res.priority = SEARCH_ADDRESS_BY_NAME_PRIORITY;
-					res.priorityDistance = 0.1;
+					res.priorityDistance = SEARCH_ADDRESS_BY_NAME_CITY_PRIORITY_DISTANCE;
 					res.objectType = ObjectType.CITY;
 					if (phrase.isEmptyQueryAllowed() && phrase.isEmpty()) {
 						resultMatcher.publish(res);
@@ -558,7 +559,7 @@ public class SearchCoreFactory {
 									return false;
 								}
 								sr.objectType = ObjectType.CITY;
-								sr.priorityDistance = 0.1;
+								sr.priorityDistance = SEARCH_ADDRESS_BY_NAME_CITY_PRIORITY_DISTANCE;
 							} else if (type == CityType.POSTCODE) {
 								if ((locSpecified && !postcodeBbox.contains(x, y, x, y))
 										|| !phrase.isSearchTypeAllowed(ObjectType.POSTCODE)) {
