@@ -224,6 +224,6 @@ public class InAppPurchaseUtils {
 	}
 
 	public static boolean isOrganizeByTypeApplicable(OsmandApplication app, OrganizeByType organizeByType) {
-		return organizeByType == null || isOsmAndProAvailable(app) || !organizeByType.isPro() || organizeByType == OrganizeByType.LENGTH;
+		return organizeByType == null || isOsmAndProAvailable(app) || !organizeByType.isPro();
 	}
 }
