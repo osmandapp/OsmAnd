@@ -6036,4 +6036,5 @@
     <string name="building_3d_far_distance_content_desc">Edificios en 3D (distancia lejana)</string>
     <string name="astronomy_plugin_name">Astronomía</string>
     <string name="obd_alt_battery_voltage_desc">Muestra el nivel de voltaje en el adaptador OBD</string>
+    <string name="shared_string_radians">Radianes</string>
 </resources>

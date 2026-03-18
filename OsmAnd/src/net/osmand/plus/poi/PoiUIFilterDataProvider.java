@@ -1,5 +1,8 @@
 package net.osmand.plus.poi;
 
+import static net.osmand.data.DataSourceType.OFFLINE;
+import static net.osmand.data.DataSourceType.ONLINE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -29,20 +32,16 @@ public class PoiUIFilterDataProvider {
         this.explorePlacesProvider = app.getExplorePlacesProvider();
     }
 
-    public DataSourceType getDataSourceType() {
-        if (filter.isTopWikiFilter()) {
-            return app.getSettings().WIKI_DATA_SOURCE_TYPE.get() == DataSourceType.ONLINE
-                    ? DataSourceType.ONLINE : DataSourceType.OFFLINE;
-        } else {
-            return DataSourceType.OFFLINE;
-        }
-    }
+	@NonNull
+	public DataSourceType getDataSourceType() {
+		return filter.isTopWikiFilter() ? app.getSettings().WIKI_DATA_SOURCE_TYPE.get() : OFFLINE;
+	}
 
     List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
                                   double bottomLatitude, double leftLongitude,
                                   double rightLongitude, int zoom,
                                   @Nullable ResultMatcher<Amenity> matcher) {
-        if (filter.isTopWikiFilter() && getDataSourceType() == DataSourceType.ONLINE) {
+        if (filter.isTopWikiFilter() && getDataSourceType() == ONLINE) {
             return searchWikiOnline(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude,
                     filter.wrapResultMatcher(matcher));
         } else {

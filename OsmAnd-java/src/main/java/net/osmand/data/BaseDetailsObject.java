@@ -242,12 +242,8 @@ public class BaseDetailsObject {
 		syntheticAmenity = new Amenity();
 
 		sortObjects();
-		Set<String> contentLocales = new TreeSet<>();
 		for (Object object : objects) {
-			mergeObject(object, contentLocales, objects.size() == 1);
-		}
-		if (!Algorithms.isEmpty(contentLocales)) {
-			syntheticAmenity.updateContentLocales(contentLocales);
+			mergeObject(object, objects.size() == 1);
 		}
 		if (this.objectCompleteness.ordinal() < ObjectCompleteness.FULL.ordinal()) {
 			this.objectCompleteness = syntheticAmenity.getType() == null ? ObjectCompleteness.EMPTY : ObjectCompleteness.COMBINED;
@@ -259,13 +255,13 @@ public class BaseDetailsObject {
 		}
 	}
 
-	protected void mergeObject(Object object, Set<String> contentLocales, boolean isSingleObject) {
+	protected void mergeObject(Object object, boolean isSingleObject) {
 		if (object instanceof Amenity amenity) {
-			processAmenity(amenity, contentLocales, isSingleObject);
+			processAmenity(amenity, isSingleObject);
 		} else if (object instanceof TransportStop transportStop) {
 			Amenity amenity = transportStop.getAmenity();
 			if (amenity != null) {
-				processAmenity(amenity, contentLocales, isSingleObject);
+				processAmenity(amenity, isSingleObject);
 			} else {
 				processId(transportStop);
 				syntheticAmenity.copyNames(transportStop);
@@ -301,12 +297,16 @@ public class BaseDetailsObject {
 	}
 
 	protected void processId(MapObject object) {
+		processId(syntheticAmenity, object);
+	}
+
+	protected static void processId(Amenity syntheticAmenity, MapObject object) {
 		if (syntheticAmenity.getId() == null && ObfConstants.isOsmUrlAvailable(object)) {
 			syntheticAmenity.setId(object.getId());
 		}
 	}
 
-	private void updateAmenitySubTypes(Amenity amenity, String subTypesToAdd) {
+	private static void updateAmenitySubTypes(Amenity amenity, String subTypesToAdd) {
 		if (amenity.getSubType() == null) {
 			amenity.setSubType(subTypesToAdd);
 		} else {
@@ -325,8 +325,12 @@ public class BaseDetailsObject {
 		}
 	}
 
-	protected void processAmenity(Amenity amenity, Set<String> contentLocales, boolean isSingleObject) {
-		processId(amenity);
+	protected void processAmenity(Amenity amenity, boolean isSingleObject) {
+		mergeAmenityData(syntheticAmenity, amenity, lang, isSingleObject);
+	}
+
+	public static void mergeAmenityData(Amenity syntheticAmenity, Amenity amenity, String lang, boolean isSingleObject) {
+		processId(syntheticAmenity, amenity);
 
 		LatLon location = amenity.getLocation();
 		if (syntheticAmenity.getLocation() == null && location != null) {
@@ -337,7 +341,7 @@ public class BaseDetailsObject {
 			syntheticAmenity.setType(type);
 		}
 		String subType = amenity.getSubType();
-		if (subType != null) {
+		if (subType != null && !Algorithms.stringsEqual(subType, syntheticAmenity.getSubType())) {
 			updateAmenitySubTypes(syntheticAmenity, subType);
 		}
 		String mapIconName = amenity.getMapIconName();
@@ -358,16 +362,23 @@ public class BaseDetailsObject {
 		}
 		syntheticAmenity.copyNames(amenity);
 		boolean shouldCopyAdditionalInfo = getResourceType(amenity) != SearchResultResource.TRAVEL
-				|| getLangForTravel(amenity).equals(this.lang); // avoid articles in another language
+				|| getLangForTravel(amenity).equals(lang); // avoid articles in another language
 		if (isSingleObject || shouldCopyAdditionalInfo) {
 			syntheticAmenity.copyAdditionalInfo(amenity, false);
 		}
-		processPolygonCoordinates(amenity.getX(), amenity.getY());
+		processPolygonCoordinates(syntheticAmenity, amenity.getX(), amenity.getY());
 
-		contentLocales.addAll(amenity.getSupportedContentLocales());
+		Set<String> contentLocales = amenity.getSupportedContentLocales();
+		if (!Algorithms.isEmpty(contentLocales)) {
+			syntheticAmenity.updateContentLocales(contentLocales);
+		}
 	}
 
 	private void processPolygonCoordinates(TIntArrayList x, TIntArrayList y) {
+		processPolygonCoordinates(syntheticAmenity, x, y);
+	}
+
+	private static void processPolygonCoordinates(Amenity syntheticAmenity, TIntArrayList x, TIntArrayList y) {
 		if (syntheticAmenity.getX().isEmpty() && !x.isEmpty()) {
 			syntheticAmenity.getX().addAll(x);
 		}

@@ -89,7 +89,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 		actionButton.setOnClickListener(v -> listener.onAddButtonClick(requireActivity()));
 		actionButton.setImageDrawable(getIcon(R.drawable.ic_action_add_no_bg));
 		actionButton.setContentDescription(getString(R.string.shared_string_add));
-		AndroidUiHelper.updateVisibility(actionButton, true);
+		AndroidUiHelper.updateVisibility(actionButton, controller.isAddingNewItemsSupported());
 	}
 
 	private void setupColorsPalette(@NonNull View view) {

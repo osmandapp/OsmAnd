@@ -5996,7 +5996,7 @@
     <string name="building_3d_night_color_content_desc">Koloro de 3-dimensiaj konstruaĵoj (nokta haŭto)</string>
     <string name="stars_articles">Astroj: artikoloj</string>
     <string name="astro_directions">Direktoj al</string>
-    <string name="astro_daily_path">Tagaj spuroj</string>
+    <string name="astro_daily_path">Tagnoktaj spuroj</string>
     <string name="building_3d_low_details_content_desc">3-dimensiaj konstruaĵoj: malaltaj detaloj</string>
     <string name="building_3d_high_details_content_desc">3-dimensiaj konstruaĵoj: altaj detaloj</string>
     <string name="building_3d_near_distance_content_desc">3-dimensiaj konstruaĵoj: malalta viddistanco</string>
@@ -6067,7 +6067,7 @@
     <string name="astro_type_constellation">Konstelacio</string>
     <string name="show_layout_grid_logs">Montri protokolojn pri krado</string>
     <string name="no_objects_found">Neniu objekto trovita</string>
-    <string name="astro_search_info_solar_system">La Sunsistemo estas gravite ligita de la Suno kaj masoj orbitantaj ĝin – precipe ĝiaj ok planedoj, al kiuj apartenas la Tero.</string>
+    <string name="astro_search_info_solar_system">La Sunsistemo estas gravite ligita sistemo de la Suno kaj masoj orbitantaj ĝin – precipe ĝiaj ok planedoj, al kiuj apartenas la Tero.</string>
     <string name="astro_search_info_constellations">Konstelacio estas areo sur la ĉielsfero en kiu aro da videblaj steloj formas percepteblan figuron.</string>
     <string name="astro_search_info_stars">Stelo estas memlumanta astro konsistanta el plasmo, kunteniĝanta per sia forto de gravito.</string>
     <string name="astro_search_info_nebulas">Nebulastro (nebulozo) estas grandspaca nubego el polvo kaj gaso en la spaco, kutime tie, kie novaj steloj naskiĝas.</string>
@@ -6076,8 +6076,8 @@
     <string name="astro_go_to_map">Malfermi la ĉielmapon</string>
     <string name="astro_my_data_no_favorites_title">Nenio tie ĉi</string>
     <string name="astro_my_data_no_favorites_description">Aldonu objekton al la ŝatataj per ĝia kunteksta menuo.</string>
-    <string name="astro_my_data_no_daily_paths_title">Neniu taga spuro</string>
-    <string name="astro_my_data_no_daily_paths_description">Aktivigu tagan spuron por iu astro per ĝia kunteksta menuo kaj ĝi aperos tie ĉi.</string>
+    <string name="astro_my_data_no_daily_paths_title">Neniu tagnokta spuro</string>
+    <string name="astro_my_data_no_daily_paths_description">Aktivigu tagnoktan spuron por iu astro per ĝia kunteksta menuo kaj ĝi aperos tie ĉi.</string>
     <string name="astro_my_data_no_directions_title">Neniu spurata astro</string>
     <string name="astro_my_data_no_directions_description">Astra “direkto al” ebligas al vi havi videblan sageton al la elektita astro. Aktivigu la sageton per la kunteksta menuo.</string>
     <plurals name="astro_catalog_objects_count">
@@ -6094,9 +6094,9 @@
     <string name="astro_search_sets_at">↘ subiro: %1$s</string>
     <string name="astro_search_rises_at">↗ leviĝo: %1$s</string>
     <string name="astro_search_magnitude_short">mag %.1f</string>
-    <string name="astro_filter_naked_eye">Nudokule videbla</string>
-    <string name="astro_filter_visible_tonight">Videbla hodiaŭnokte</string>
-    <string name="astro_filter_visible_now">Videbla nun</string>
+    <string name="astro_filter_naked_eye">Nudokule videblaj</string>
+    <string name="astro_filter_visible_tonight">Videblaj hodiaŭnokte</string>
+    <string name="astro_filter_visible_now">Videblaj nunj</string>
     <string name="astro_filter_show_all">Ĉiuj</string>
     <string name="astro_sort_sets_soonest">plej frua subiro</string>
     <string name="astro_sort_rises_soonest">plej frua leviĝo</string>
@@ -6111,4 +6111,5 @@
     <string name="astro_explore_watch_now">Nun observeblaj</string>
     <string name="astro_explore_deep_sky_subtitle">Galaksioj, galaksiamasoj, nigraj truoj</string>
     <string name="obd_alt_battery_voltage_desc">Montras tension ĉe la OBD-adaptilo</string>
+    <string name="shared_string_radians">Radianoj</string>
 </resources>
