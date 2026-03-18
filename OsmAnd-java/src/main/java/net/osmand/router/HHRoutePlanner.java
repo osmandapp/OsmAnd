@@ -236,7 +236,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			calcCount++;
 			if (recalc) {
 				int maxCount = progress.hasMissingMapsNow ?
-						hctx.config.MAX_COUNT_REITERATION_WITH_MISSED_MAPS : hctx.config.MAX_COUNT_REITERATION;
+						hctx.config.MAX_COUNT_REITERATION_WITH_MISSING_MAPS : hctx.config.MAX_COUNT_REITERATION;
 				if (calcCount > maxCount) {
 					if (SL >= 0) {
 						printFinalMessage(" [too many cancelled]", start, end, startTime, hctx);
@@ -1069,7 +1069,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				hctx.rctx.getRouter().getMaxSpeed();
 		if (progress != null && progress.hhGetCalcCounter() > 0) {
 			int maxCount = progress.hasMissingMapsNow ?
-					hctx.config.MAX_COUNT_REITERATION_WITH_MISSED_MAPS : hctx.config.MAX_COUNT_REITERATION;
+					hctx.config.MAX_COUNT_REITERATION_WITH_MISSING_MAPS : hctx.config.MAX_COUNT_REITERATION;
 			progress.hhIterationProgress((double) progress.hhGetCalcCounter() / maxCount);
 		}
 		while (true) {
@@ -1307,7 +1307,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			boolean routeSegments, RouteCalculationProgress progress) throws SQLException, InterruptedException, IOException {
 		if (progress != null && progress.hhGetCalcCounter() > 0) {
 			int maxCount = progress.hasMissingMapsNow ?
-					hctx.config.MAX_COUNT_REITERATION_WITH_MISSED_MAPS : hctx.config.MAX_COUNT_REITERATION;
+					hctx.config.MAX_COUNT_REITERATION_WITH_MISSING_MAPS : hctx.config.MAX_COUNT_REITERATION;
 			progress.hhIterationProgress((double) progress.hhGetCalcCounter() / maxCount);
 		}
 		for (int i = 0; i < route.segments.size(); i++) {
