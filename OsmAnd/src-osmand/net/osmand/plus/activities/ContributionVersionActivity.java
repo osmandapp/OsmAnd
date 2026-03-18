@@ -142,6 +142,13 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	}
 
 	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createHorizontalLandscape(getListView()));
+		collection.add(InsetTarget.createScrollable(getListView()));
+		return collection;
+	}
+	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		VERSIONS_THREAD.setActivity(null);
