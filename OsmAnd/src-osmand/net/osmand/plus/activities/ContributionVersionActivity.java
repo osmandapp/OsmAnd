@@ -148,6 +148,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		collection.add(InsetTarget.createScrollable(getListView()));
 		return collection;
 	}
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
