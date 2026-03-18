@@ -2,6 +2,7 @@ package net.osmand.search;
 
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.Amenity;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.SearchUICore.SearchResultCollection;
@@ -278,8 +279,16 @@ public class SearchUICoreTest {
 		if (r.location != null) {
 			dist = MapUtils.getDistance(r.location, phrase.getLastTokenLocation());
 		}
+		String subType = "";
+		if (r.objectType == ObjectType.POI) {
+			Amenity am = (Amenity) r.object;
+			String subtype = am.getSubType();
+			if ("town".equals(subtype) || "city".equals(subtype)) {
+				subType = " (" + subtype + ")";
+			}
+		}
 		return String.format(Locale.US, "%s [[%d, %s, %.3f, %.2f km]]", r.toString(),
-				r.getFoundWordCount(), r.objectType.toString(),
+				r.getFoundWordCount(), r.objectType.toString() + subType,
 				r.getUnknownPhraseMatchWeight(), //r.getSearchDistance(phrase.getSettings().getOriginalLocation())
 				dist / 1000
 				);

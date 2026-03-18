@@ -1201,8 +1201,9 @@ public class SearchUICore {
 				boolean fp1 = o1.isFullPhraseEqualLocaleName();
 				boolean fp2 = o2.isFullPhraseEqualLocaleName();
 				// sort order: DETAILED|BASEMAP, WIKIPEDIA, TRAVEL
-				int weight1 = fp1 ? 0 : o1.getResourceType().getWeight();
-				int weight2 = fp2 ? 0 : o2.getResourceType().getWeight();
+				int maxWeight = SearchResult.SearchResultResource.DETAILED.getWeight();
+				int weight1 = fp1 ? maxWeight : o1.getResourceType().getWeight();
+				int weight2 = fp2 ? maxWeight : o2.getResourceType().getWeight();
 				if (weight1 != weight2) {
 					return weight2 > weight1 ? 1 : -1;
 				}
