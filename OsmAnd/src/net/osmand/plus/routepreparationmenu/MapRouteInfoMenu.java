@@ -360,12 +360,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				fragment.updateInfo();
 			}
 			fragment.updateRouteCalculationProgress(progress);
+			catchCurrentMissingMaps();
 		}
-		catchCurrentMissingMaps();
 	}
 
 	private void catchCurrentMissingMaps() {
-		if (!missingMapsWarningCardDisplayed && hasCurrentMissingMaps(app)) {
+		if (app != null && !missingMapsWarningCardDisplayed && hasCurrentMissingMaps(app)) {
 			missingMapsWarningCardDisplayed = true;
 			updateCards();
 		}
