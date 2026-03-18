@@ -7,6 +7,7 @@ import static net.osmand.plus.quickaction.ButtonAppearanceParams.SMALL_SIZE_DP;
 import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES;
 import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS;
 import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_DRAW_SLOTS;
+import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_SHOW_LOGS;
 import static net.osmand.shared.grid.ButtonPositionSize.*;
 
 import android.content.Context;
@@ -265,21 +266,25 @@ public class MapHudLayout extends FrameLayout {
 		Map<View, ButtonPositionSize> map = collectPositions();
 		List<ButtonPositionSize> list = new ArrayList<>(map.values());
 
-//		LOG.info("--------START--------");
-//		for (ButtonPositionSize b : list) {
-//			LOG.info(b + " value = " + b.toLongValue());
-//		}
-//		LOG.info("--------");
-
 		int width = Math.round(getWidth() / dpToPx / CELL_SIZE_DP);
 		int height = Math.round(getHeight() / dpToPx / CELL_SIZE_DP);
+
+		if (DEV_GRID_LAYOUT_SHOW_LOGS) {
+			LOG.info("--------START--------");
+			LOG.info("Grid size: width " + width + " height " + height);
+			for (ButtonPositionSize b : list) {
+				LOG.info(b + " value = " + b.toLongValue());
+			}
+			LOG.info("--------");
+		}
 		ButtonPositionSize.Companion.computeNonOverlap(1, list, width, height);
 
-//		for (ButtonPositionSize b : list) {
-//			LOG.info(b + " value = " + b.toLongValue());
-//		}
-//		LOG.info("--------END--------");
-
+		if (DEV_GRID_LAYOUT_SHOW_LOGS) {
+			for (ButtonPositionSize b : list) {
+				LOG.info(b + " value = " + b.toLongValue());
+			}
+			LOG.info("--------END--------");
+		}
 		return map;
 	}
 

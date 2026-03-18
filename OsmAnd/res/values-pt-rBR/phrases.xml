@@ -413,7 +413,7 @@
     <string name="poi_horse_racing">Turfe</string>
     <string name="poi_ice_skating">Patinação no gelo</string>
     <string name="poi_ice_stock">Curling bávaro</string>
-    <string name="poi_korfbal">Corfebol</string>
+    <string name="poi_korfball">Corfebol</string>
     <string name="poi_sport_motor">Esporte automotivo</string>
     <string name="poi_sport_multi">Poliesportivo</string>
     <string name="poi_orienteering">Orientação</string>
@@ -2012,7 +2012,7 @@
     <string name="poi_ramp_bicycle_no">Rampa para bicicletas: não</string>
     <string name="poi_ramp_luggage_yes">Rampa para bagagem: sim</string>
     <string name="poi_ramp_luggage_no">Rampa para bagagem: não</string>
-    <string name="poi_defibrillator">Desfibrilador</string>
+    <string name="poi_defibrillator">Desfibrilhador;DAE;AED</string>
     <string name="poi_defibrillator_yes">Desfibrilador: sim</string>
     <string name="poi_tomb_war_grave">Tipo: túmulo de guerra</string>
     <string name="poi_tomb_tumulus">Tipo: túmulo</string>
@@ -3761,7 +3761,7 @@
     <string name="poi_video_telephone">Vídeo</string>
     <string name="poi_sms_yes">Sim;SMS</string>
     <string name="poi_sms_no">Não</string>
-    <string name="poi_covered_booth">Cabine</string>
+    <string name="poi_covered_booth">Sim</string>
     <string name="poi_booth">Tipo de cabine</string>
     <string name="poi_video_yes">Sim;Vídeo</string>
     <string name="poi_video_no">Não</string>
@@ -5156,11 +5156,21 @@
     <string name="poi_historic_spacecraft">Nave espacial histórica</string>
     <string name="poi_barrier_chain">Barreira de corrente</string>
     <string name="poi_barrier_sliding_gate">Porta deslizante</string>
-    <string name="poi_sample_collection">Coleta de amostras</string>
+    <string name="poi_sample_collection">Coleta de amostra;Sangue;Laboratório;Exame</string>
     <string name="poi_sample_collection_yes">Sim</string>
     <string name="poi_sample_collection_covid19">COVID19</string>
     <string name="poi_sample_collection_blood">Sangue</string>
     <string name="poi_hazard_queues_likely">Filas prováveis</string>
     <string name="poi_memorial_type">Tipo de memorial</string>
     <string name="poi_yoga">Yoga</string>
+    <string name="poi_rapids_filter">Classificação das corredeiras</string>
+    <string name="poi_rapids_grade_0">0 (águas calmas)</string>
+    <string name="poi_rapids_grade_1">1 (fácil)</string>
+    <string name="poi_rapids_grade_2">2 (iniciante)</string>
+    <string name="poi_rapids_grade_3">3 (intermediário)</string>
+    <string name="poi_rapids_grade_4">4 (avançado)</string>
+    <string name="poi_rapids_grade_5">5 (especialista)</string>
+    <string name="poi_rapids_grade_6">6 (extremo)</string>
+    <string name="poi_rapids_grade_x">X (impossível de executar)</string>
+    <string name="poi_piste_downhill">Pista de descida;Pista de esqui</string>
 </resources>

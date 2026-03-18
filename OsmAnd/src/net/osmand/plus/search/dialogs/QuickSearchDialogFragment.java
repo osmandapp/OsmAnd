@@ -114,6 +114,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment implements OsmAndCompassListener,
 		OsmAndLocationListener, DownloadEvents, OnPreferenceChanged {
@@ -205,6 +206,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private static boolean isDebugMode = SearchUICore.isDebugMode();
 	private ProcessTopIndex processTopIndexAfterLoad = ProcessTopIndex.NO;
+	private final Stack<SearchPhrase> addressSearchStack = new Stack<>();
 
 	private enum ProcessTopIndex {
 		FILTER,
@@ -647,9 +649,15 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void onBackButtonPressed() {
 		if (tabBarHidden) {
-			hideKeyboard();
-			searchEditText.setText("");
-			updateTabBarVisibility(true);
+			if (!addressSearchStack.isEmpty()) {
+				String newText = addressSearchStack.pop().getFullSearchPhrase();
+				searchEditText.setText(newText);
+				searchEditText.setSelection(newText.length());
+			} else {
+				hideKeyboard();
+				searchEditText.setText("");
+				updateTabBarVisibility(true);
+			}
 		} else if (!processBackAction()) {
 			Dialog dialog = getDialog();
 			if (dialog != null) {
@@ -786,6 +794,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		paused = false;
 		cancelPrev = false;
 		hidden = false;
+		addressSearchStack.clear();
 		if (interruptedSearch) {
 			addMoreButton(true);
 			interruptedSearch = false;
@@ -2158,8 +2167,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		PluginsHelper.onNewDownloadIndexes(this);
 		updateContent(heading);
 		List<Fragment> childFragment = getChildFragmentManager().getFragments();
-		for(Fragment fragment : childFragment) {
-			if(fragment instanceof DownloadEvents downloadEventsFragment) {
+		for (Fragment fragment : childFragment) {
+			if (fragment instanceof DownloadEvents downloadEventsFragment) {
 				downloadEventsFragment.onUpdatedIndexesList();
 			}
 		}
@@ -2169,8 +2178,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public void downloadInProgress() {
 		updateContent(heading);
 		List<Fragment> childFragment = getChildFragmentManager().getFragments();
-		for(Fragment fragment : childFragment) {
-			if(fragment instanceof DownloadEvents downloadEventsFragment) {
+		for (Fragment fragment : childFragment) {
+			if (fragment instanceof DownloadEvents downloadEventsFragment) {
 				downloadEventsFragment.downloadInProgress();
 			}
 		}
@@ -2180,8 +2189,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public void downloadHasFinished() {
 		updateContent(heading);
 		List<Fragment> childFragment = getChildFragmentManager().getFragments();
-		for(Fragment fragment : childFragment) {
-			if(fragment instanceof DownloadEvents downloadEventsFragment) {
+		for (Fragment fragment : childFragment) {
+			if (fragment instanceof DownloadEvents downloadEventsFragment) {
 				downloadEventsFragment.downloadHasFinished();
 			}
 		}
@@ -2265,5 +2274,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 		collection.addSearchResults(results, false, false);
 		return collection;
+	}
+
+	public void onSearchResultSelected() {
+		SearchResultCollection searchResult = searchHelper.getCore().getCurrentSearchResult();
+		addressSearchStack.push(searchResult.getPhrase());
 	}
 }

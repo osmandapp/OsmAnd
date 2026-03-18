@@ -2858,7 +2858,7 @@
     <string name="angular_measeurement">יחידה זוויתית</string>
     <string name="angular_measeurement_descr">החלפת יחידת המידה לאזימוט.</string>
     <string name="routing_attr_avoid_sett_name">ללא ריצוף חלוקי נחל או אבנים משתלבות</string>
-    <string name="routing_attr_avoid_sett_description">נמנע מריצוף חלוקי נחל ואבנים משתלבות</string>
+    <string name="routing_attr_avoid_sett_description">הימנעות מריצוף אבנים משתלבות</string>
     <string name="routing_attr_avoid_tram_name">ללא חשמליות</string>
     <string name="routing_attr_avoid_tram_description">נמנע מחשמליות</string>
     <string name="routing_attr_avoid_bus_name">ללא אוטובוסים</string>
@@ -5012,4 +5012,5 @@
     <string name="pin_folder">נעיצת תיקייה</string>
     <string name="favorite_search_empty_state_description">אפשר לכוון את החיפוש או המסננים שלך ולראות אם זה עוזר</string>
     <string name="favorites_empty_folder_description">לתיקייה הזאת אין נקודות עדיין.</string>
+    <string name="no_objects_found">לא נמצאו פריטים</string>
 </resources>

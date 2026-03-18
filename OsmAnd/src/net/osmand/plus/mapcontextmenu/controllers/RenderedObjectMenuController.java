@@ -14,10 +14,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.RenderedObjectMenuBuilder;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.mapcontextmenu.other.SharePoiParams;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
+import java.util.Collection;
 import java.util.Map;
 
 public class RenderedObjectMenuController extends MenuController {
@@ -162,7 +165,42 @@ public class RenderedObjectMenuController extends MenuController {
 			typeStr = searchObjectNameByIconRes();
 		}
 
+		if (Algorithms.isEmpty(typeStr) && renderedObject != null && mapPoiTypes != null) {
+			Amenity amenity = builder != null ? builder.getAmenity() : null;
+			Collection<String> additionalInfoKeys = amenity != null ? amenity.getAdditionalInfoKeys() : null;
+			typeStr = searchObjectNameByRawTags(mapPoiTypes, renderedObject.getTags(), additionalInfoKeys);
+		}
+
 		return typeStr != null ? typeStr : super.getTypeStr();
+	}
+
+	@Nullable
+	private static String searchObjectNameByRawTags(@NonNull MapPoiTypes poiTypes,
+													@NonNull Map<String, String> rawTags,
+													@Nullable Collection<String> additionalInfoKeys) {
+		for (Map.Entry<String, String> entry : rawTags.entrySet()) {
+			String key = entry.getKey();
+			String value = entry.getValue();
+
+			if (additionalInfoKeys != null && additionalInfoKeys.contains(key)) {
+				continue;
+			}
+
+			String translation = null;
+			if (!Algorithms.isEmpty(value)) {
+				String complexKey = key + "_" + value;
+				translation = poiTypes.getPoiTranslation(complexKey, false);
+			}
+
+			if (Algorithms.isEmpty(translation)) {
+				translation = poiTypes.getPoiTranslation(key, false);
+			}
+
+			if (!Algorithms.isEmpty(translation)) {
+				return translation;
+			}
+		}
+		return null;
 	}
 
 	@NonNull
@@ -193,6 +231,33 @@ public class RenderedObjectMenuController extends MenuController {
 	@Override
 	public boolean needTypeStr() {
 		return !Algorithms.isEmpty(getNameOnlyStr());
+	}
+
+	@Override
+	public void share(LatLon latLon, String title, String address) {
+		String name = getNameOnlyStr();
+		String type = getTypeStr();
+
+		Long osmId = null;
+		if (builder != null && builder.getAmenity() != null) {
+			osmId = builder.getAmenity().getOsmId();
+		}
+		if (Algorithms.isEmpty(name) && Algorithms.isEmpty(type) && osmId == null) {
+			super.share(latLon, title, address);
+			return;
+		}
+
+		SharePoiParams params = new SharePoiParams(latLon);
+		params.addName(name);
+		params.addType(type);
+		if (Algorithms.isEmpty(name)) {
+			params.addOsmId(osmId);
+		}
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			ShareMenu.show(latLon, title, address, ShareMenu.buildOsmandPoiUri(params), mapActivity);
+		}
 	}
 
 	private boolean isStartingWithRTLChar(String s) {

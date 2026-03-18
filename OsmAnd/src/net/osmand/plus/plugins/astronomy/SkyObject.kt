@@ -9,8 +9,7 @@ open class SkyObject(
 	open val id: String,
 	open val hip: Int, // Hipparcos catalog ID
 
-	open var catalog: Catalog? = null,
-	open var catalogId: String? = null,
+	open var catalogs: List<Catalog> = ArrayList(),
 	open val wid: String, // Wikipedia ID
 	open val centerWId: String? = null, // Wikipedia ID of parent object like Sun for Earth
 	open val type: Type,
@@ -47,13 +46,21 @@ open class SkyObject(
 	// Cache helper
 	open var lastUpdateTime: Double = -1.0
 ) {
-	enum class Type {
-		STAR, GALAXY, BLACK_HOLE, PLANET, SUN, MOON,
-		NEBULA, OPEN_CLUSTER, GLOBULAR_CLUSTER, GALAXY_CLUSTER, CONSTELLATION;
+	enum class Type(val titleKey: String) {
+		STAR("astro_type_star"),
+		GALAXY("astro_type_galaxy"),
+		BLACK_HOLE("astro_type_black_hole"),
+		PLANET("astro_type_planet"),
+		SUN("astro_type_star"),
+		MOON("astro_type_satellite"),
 
-		fun isSunSystem(): Boolean {
-			return this == SUN || this == MOON || this == PLANET
-		}
+		NEBULA("astro_type_nebula"),
+		OPEN_CLUSTER("astro_type_open_cluster"),
+		GLOBULAR_CLUSTER("astro_type_globular_cluster"),
+		GALAXY_CLUSTER("astro_type_galaxy_cluster"),
+		CONSTELLATION("astro_type_constellation");
+
+		fun isSunSystem(): Boolean = this == SUN || this == MOON || this == PLANET
 	}
 
 	override fun equals(other: Any?): Boolean {

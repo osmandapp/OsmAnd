@@ -6415,4 +6415,30 @@
         <item quantity="many">%d trilhas</item>
         <item quantity="other">%d trilhas</item>
     </plurals>
+    <string name="astro_culmination">Culminação</string>
+    <string name="astro_today_visibility">Visibilidade hoje</string>
+    <string name="astronomy_schedule">Cronograma</string>
+    <string name="astro_catalogs">Catálogos</string>
+    <string name="astro_path">Caminho</string>
+    <string name="astro_direction">Direção</string>
+    <string name="astro_type_earth">Terra</string>
+    <string name="astro_type_star">Estrela</string>
+    <string name="astro_type_galaxy">Galáxia</string>
+    <string name="astro_type_black_hole">Buraco negro</string>
+    <string name="astro_type_planet">Planeta</string>
+    <string name="astro_type_sun">Sol</string>
+    <string name="astro_type_satellite">Satélite</string>
+    <string name="astro_type_nebula">Nebulosa</string>
+    <string name="astro_type_open_cluster">Aglomerado aberto</string>
+    <string name="astro_type_globular_cluster">Aglomerado globular</string>
+    <string name="astro_type_galaxy_cluster">Aglomerado de galáxias</string>
+    <string name="astro_type_constellation">Constelação</string>
+    <string name="show_layout_grid_logs">Mostrar registros da grade</string>
+    <string name="share_favorite">Compartilhar favorito</string>
+    <string name="copy_list">Copiar lista</string>
+    <string name="intersection">Interseção</string>
+    <string name="astro_alt_short">Alt</string>
+    <string name="astro_az_short">Az</string>
+    <string name="astro_locate">Localizar</string>
+    <string name="shared_string_ratio">proporção</string>
 </resources>

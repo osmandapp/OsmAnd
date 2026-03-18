@@ -90,7 +90,9 @@ class ModernSliderBottomSheet : CustomizableBottomSheet() {
 
 	override fun getDismissButtonTextId(): Int = R.string.shared_string_cancel
 
-	override fun getRightBottomButtonTextId(): Int = R.string.shared_string_apply
+	override fun getRightBottomButtonTextId(): Int  {
+		return controller?.getRightButtonResId() ?: R.string.shared_string_apply
+	}
 
 	override fun onRightBottomButtonClick() {
 		controller?.onApplyChanges()

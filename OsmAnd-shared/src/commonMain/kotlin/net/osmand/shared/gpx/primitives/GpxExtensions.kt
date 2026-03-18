@@ -1,12 +1,16 @@
 package net.osmand.shared.gpx.primitives
 
 import net.osmand.shared.gpx.GpxUtilities
+import net.osmand.shared.gpx.GpxUtilities.COLOR_NAME_EXTENSION
+import net.osmand.shared.gpx.GpxUtilities.GpxExtensionsWriter
+import net.osmand.shared.gpx.GpxUtilities.LINE_WIDTH_EXTENSION
 import net.osmand.shared.util.KAlgorithms
 
 open class GpxExtensions {
+
 	var extensions: MutableMap<String, String>? = null
 	var deferredExtensions: MutableMap<String, String>? = null
-	var extensionsWriters: MutableMap<String, GpxUtilities.GpxExtensionsWriter>? = null
+	var extensionsWriters: MutableMap<String, GpxExtensionsWriter>? = null
 
 	fun getExtensionsToRead(): Map<String, String> {
 		return extensions ?: emptyMap()
@@ -30,18 +34,18 @@ open class GpxExtensions {
 		return deferredExtensions!!
 	}
 
-	fun getExtensionsWritersToWrite(): MutableMap<String, GpxUtilities.GpxExtensionsWriter> {
+	fun getExtensionsWritersToWrite(): MutableMap<String, GpxExtensionsWriter> {
 		if (extensionsWriters == null) {
 			extensionsWriters = LinkedHashMap()
 		}
 		return extensionsWriters!!
 	}
 
-	fun getExtensionsWriter(key: String?): GpxUtilities.GpxExtensionsWriter? {
+	fun getExtensionsWriter(key: String?): GpxExtensionsWriter? {
 		return extensionsWriters?.get(key)
 	}
 
-	fun setExtensionsWriter(key: String, extensionsWriter: GpxUtilities.GpxExtensionsWriter) {
+	fun setExtensionsWriter(key: String, extensionsWriter: GpxExtensionsWriter) {
 		getExtensionsWritersToWrite()[key] = extensionsWriter
 	}
 
@@ -50,9 +54,9 @@ open class GpxExtensions {
 	}
 
 	fun copyExtensions(e: GpxExtensions) {
-		val extensionsToRead = e.getExtensionsToRead().toMap()
+		val extensionsToRead = e.getExtensionsToRead()
 		if (extensionsToRead.isNotEmpty()) {
-			getExtensionsToWrite().putAll(extensionsToRead)
+			getExtensionsToWrite().putAll(extensionsToRead.toMap())
 		}
 	}
 
@@ -60,7 +64,7 @@ open class GpxExtensions {
 		var clrValue: String? = null
 		val extensions = this.extensions
 		if (extensions != null) {
-			clrValue = extensions[GpxUtilities.COLOR_NAME_EXTENSION]
+			clrValue = extensions[COLOR_NAME_EXTENSION]
 			if (clrValue == null) {
 				clrValue = extensions["colour"]
 			}
@@ -80,19 +84,19 @@ open class GpxExtensions {
 
 	fun setColor(color: String?) {
 		color?.let {
-			getExtensionsToWrite()[GpxUtilities.COLOR_NAME_EXTENSION] = it
+			getExtensionsToWrite()[COLOR_NAME_EXTENSION] = it
 		}
 	}
 
 	fun removeColor() {
-		getExtensionsToWrite().remove(GpxUtilities.COLOR_NAME_EXTENSION)
+		getExtensionsToWrite().remove(COLOR_NAME_EXTENSION)
 	}
 
-	fun getWidth(defaultWidth: String?) = this.extensions?.get(GpxUtilities.LINE_WIDTH_EXTENSION) ?: defaultWidth
+	fun getWidth(defaultWidth: String?) = extensions?.get(LINE_WIDTH_EXTENSION) ?: defaultWidth
 
 	fun setWidth(width: String?) {
 		width?.let {
-			getExtensionsToWrite()[GpxUtilities.LINE_WIDTH_EXTENSION] = it
+			getExtensionsToWrite()[LINE_WIDTH_EXTENSION] = it
 		}
 	}
 }

@@ -249,6 +249,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getInverseIconColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getInverseIconColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getInverseIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_inverse_dark : R.color.icon_color_inverse_light;
+	}
+
+	@ColorInt
 	public static int getButtonSecondaryTextColor(@NonNull Context ctx, boolean nightMode) {
 		return getColor(ctx, getButtonSecondaryTextColorId(nightMode));
 	}
@@ -286,6 +296,16 @@ public class ColorUtilities {
 	@ColorRes
 	public static int getActivityListBgColorId(boolean nightMode) {
 		return nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light;
+	}
+
+	@ColorInt
+	public static int getActiveButtonsAndLinksBgPressedColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getActiveButtonsAndLinksBgPressedColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getActiveButtonsAndLinksBgPressedColorId(boolean nightMode) {
+		return nightMode ? R.color.active_buttons_and_links_bg_pressed_dark : R.color.active_buttons_and_links_bg_pressed_light;
 	}
 
 	@ColorInt
