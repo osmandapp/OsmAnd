@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/bottomSheetContainer"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@android:color/transparent">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/bottomSheet"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@android:color/transparent"
+		app:behavior_hideable="true"
+		app:layout_collapseMode="pin">
+
+		<androidx.coordinatorlayout.widget.CoordinatorLayout
+			android:id="@+id/innerCoordinator"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:background="@android:color/transparent"
+			android:foreground="@android:color/transparent"
+			app:layout_constraintBottom_toTopOf="@id/bottom_buttons_container"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent">
+
+			<com.google.android.material.appbar.AppBarLayout
+				android:id="@+id/appBarLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@null"
+				app:elevation="0dp"
+				app:liftOnScroll="false"
+				app:liftOnScrollColor="@android:color/transparent">
+
+				<com.google.android.material.appbar.CollapsingToolbarLayout
+					android:id="@+id/collapsingToolbar"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@android:color/transparent"
+					android:foreground="@android:color/transparent"
+					android:minHeight="68dp"
+					app:contentScrim="@android:color/transparent"
+					app:layout_scrollFlags="scroll|exitUntilCollapsed"
+					app:scrimAnimationDuration="0"
+					app:statusBarScrim="@android:color/transparent">
+
+					<com.google.android.material.card.MaterialCardView
+						android:id="@+id/headerCard"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:cardBackgroundColor="?attr/list_background_color"
+						app:layout_collapseMode="none"
+						app:layout_collapseParallaxMultiplier="0.5"
+						app:shapeAppearanceOverlay="@style/Shape.BottomSheet">
+
+						<androidx.constraintlayout.widget.ConstraintLayout
+							android:id="@+id/headerContent"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content">
+
+							<View
+								android:id="@+id/header_drag"
+								android:layout_width="16dp"
+								android:layout_height="2dp"
+								android:layout_gravity="center_horizontal"
+								android:layout_marginTop="6dp"
+								android:layout_marginBottom="2dp"
+								android:background="@drawable/rectangle_rounded"
+								android:backgroundTint="?attr/secondary_icon_color"
+								app:layout_constraintEnd_toEndOf="parent"
+								app:layout_constraintStart_toStartOf="parent"
+								app:layout_constraintTop_toTopOf="parent" />
+
+							<LinearLayout
+								android:id="@+id/header"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:layout_marginBottom="6dp"
+								android:minHeight="54dp"
+								android:orientation="horizontal"
+								android:paddingStart="16dp"
+								android:paddingEnd="4dp"
+								app:layout_constraintEnd_toEndOf="parent"
+								app:layout_constraintStart_toStartOf="parent"
+								app:layout_constraintTop_toBottomOf="@+id/header_drag">
+
+								<LinearLayout
+									android:layout_width="0dp"
+									android:layout_height="wrap_content"
+									android:layout_weight="1"
+									android:orientation="vertical">
+
+									<TextView
+										android:id="@+id/header_title"
+										style="@style/MaterialAlertDialog.Material3.Title.Text"
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										android:layout_gravity="center_vertical"
+										android:layout_marginTop="6dp"
+										android:gravity="center_vertical"
+										android:lines="1"
+										tools:text="Sun"
+										android:textAppearance="?attr/textAppearanceHeadlineSmall"
+										android:textColor="?android:attr/textColorPrimary"
+										android:textSize="24sp"
+										android:textStyle="bold" />
+
+									<TextView
+										android:id="@+id/header_subtitle"
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										tools:text="Star • Solar system"
+										android:textColor="?android:attr/textColorSecondary"
+										android:textSize="14sp" />
+
+								</LinearLayout>
+
+
+								<FrameLayout
+									android:id="@+id/header_close_button"
+									android:layout_width="48dp"
+									android:layout_height="48dp"
+									android:layout_gravity="top|center_horizontal"
+									android:layout_marginEnd="4dp"
+									android:background="?attr/selectableItemBackground">
+
+									<FrameLayout
+										android:layout_width="32dp"
+										android:layout_height="32dp"
+										android:layout_gravity="center"
+										android:background="@drawable/bg_circle">
+
+									</FrameLayout>
+
+									<com.google.android.material.imageview.ShapeableImageView
+										android:layout_width="24dp"
+										android:layout_height="24dp"
+										android:layout_gravity="center"
+										android:contentDescription="@string/shared_string_close"
+										android:foregroundGravity="center"
+										android:src="@drawable/ic_action_close_rounded"
+										android:tint="?attr/default_icon_color" />
+
+								</FrameLayout>
+
+							</LinearLayout>
+
+							<LinearLayout
+								android:id="@+id/expandableContent"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="6dp"
+								android:orientation="vertical"
+								app:layout_constraintStart_toStartOf="parent"
+								app:layout_constraintTop_toBottomOf="@id/header">
+
+								<androidx.recyclerview.widget.RecyclerView
+									android:id="@+id/metrics_list"
+									android:layout_width="match_parent"
+									android:layout_height="wrap_content"
+									android:clipToPadding="false"
+									android:nestedScrollingEnabled="false"
+									android:orientation="horizontal"
+									android:overScrollMode="never"
+									android:paddingStart="8dp"
+									android:paddingTop="6dp" />
+
+								<LinearLayout
+									android:layout_width="match_parent"
+									android:layout_height="wrap_content"
+									android:layout_marginTop="12dp"
+									android:layout_marginBottom="16dp"
+									android:gravity="center"
+									android:orientation="horizontal"
+									android:paddingHorizontal="16dp">
+
+									<com.google.android.material.card.MaterialCardView
+										android:id="@+id/save_button"
+										style="@style/Widget.App.Material.ActionTileCard"
+										android:layout_width="0dp"
+										android:layout_height="66dp"
+										android:layout_marginEnd="10dp"
+										android:layout_weight="1"
+										android:checkable="true"
+										android:clickable="true"
+										android:focusable="true"
+										app:checkedIconVisible="false">
+
+										<FrameLayout
+											android:layout_width="match_parent"
+											android:layout_height="match_parent"
+											android:duplicateParentState="true"
+											android:gravity="center"
+											android:orientation="vertical"
+											android:paddingTop="12dp"
+											android:paddingBottom="10dp">
+
+											<ImageView
+												android:id="@+id/save_icon"
+												android:layout_width="24dp"
+												android:layout_height="24dp"
+												android:layout_gravity="center_horizontal|top"
+												tools:src="@drawable/ic_map" />
+
+											<TextView
+												android:id="@+id/save_title"
+												android:layout_width="wrap_content"
+												android:layout_height="wrap_content"
+												android:layout_gravity="center_horizontal|bottom"
+												android:textColor="?attr/icon_color_active"
+												android:textSize="12sp"
+												tools:text="Title" />
+
+										</FrameLayout>
+
+									</com.google.android.material.card.MaterialCardView>
+
+									<com.google.android.material.card.MaterialCardView
+										android:id="@+id/locate_button"
+										style="@style/Widget.App.Material.ActionTileCard"
+										android:layout_width="0dp"
+										android:layout_height="66dp"
+										android:layout_marginEnd="10dp"
+										android:layout_weight="1"
+										android:checkable="true"
+										android:clickable="true"
+										android:focusable="true"
+										app:checkedIconVisible="false">
+
+										<FrameLayout
+											android:layout_width="match_parent"
+											android:layout_height="match_parent"
+											android:duplicateParentState="true"
+											android:gravity="center"
+											android:orientation="vertical"
+											android:paddingTop="12dp"
+											android:paddingBottom="10dp">
+
+											<ImageView
+												android:id="@+id/locate_icon"
+												android:layout_width="24dp"
+												android:layout_height="24dp"
+												android:layout_gravity="center_horizontal|top"
+												tools:src="@drawable/ic_map" />
+
+											<TextView
+												android:id="@+id/locate_title"
+												android:layout_width="wrap_content"
+												android:layout_height="wrap_content"
+												android:layout_gravity="center_horizontal|bottom"
+												android:textColor="?attr/icon_color_active"
+												android:textSize="12sp"
+												tools:text="Title" />
+
+										</FrameLayout>
+
+									</com.google.android.material.card.MaterialCardView>
+
+									<com.google.android.material.card.MaterialCardView
+										android:id="@+id/direction_button"
+										style="@style/Widget.App.Material.ActionTileCard"
+										android:layout_width="0dp"
+										android:layout_height="66dp"
+										android:layout_marginEnd="10dp"
+										android:layout_weight="1"
+										android:checkable="true"
+										android:clickable="true"
+										android:focusable="true"
+										app:checkedIconVisible="false">
+
+										<FrameLayout
+											android:layout_width="match_parent"
+											android:layout_height="match_parent"
+											android:duplicateParentState="true"
+											android:gravity="center"
+											android:orientation="vertical"
+											android:paddingTop="12dp"
+											android:paddingBottom="10dp">
+
+											<ImageView
+												android:id="@+id/direction_icon"
+												android:layout_width="24dp"
+												android:layout_height="24dp"
+												android:layout_gravity="center_horizontal|top"
+												tools:src="@drawable/ic_map" />
+
+											<TextView
+												android:id="@+id/direction_title"
+												android:layout_width="wrap_content"
+												android:layout_height="wrap_content"
+												android:layout_gravity="center_horizontal|bottom"
+												android:textColor="?attr/icon_color_active"
+												android:textSize="12sp"
+												tools:text="Title" />
+
+										</FrameLayout>
+
+									</com.google.android.material.card.MaterialCardView>
+
+									<com.google.android.material.card.MaterialCardView
+										android:id="@+id/path_button"
+										style="@style/Widget.App.Material.ActionTileCard"
+										android:layout_width="0dp"
+										android:layout_height="66dp"
+										android:layout_weight="1"
+										android:checkable="true"
+										android:clickable="true"
+										android:focusable="true"
+										app:checkedIconVisible="false">
+
+										<FrameLayout
+											android:layout_width="match_parent"
+											android:layout_height="match_parent"
+											android:duplicateParentState="true"
+											android:gravity="center"
+											android:orientation="vertical"
+											android:paddingTop="12dp"
+											android:paddingBottom="10dp">
+
+											<ImageView
+												android:id="@+id/path_icon"
+												android:layout_width="24dp"
+												android:layout_height="24dp"
+												android:layout_gravity="center_horizontal|top"
+												tools:src="@drawable/ic_map" />
+
+											<TextView
+												android:id="@+id/path_title"
+												android:layout_width="wrap_content"
+												android:layout_height="wrap_content"
+												android:layout_gravity="center_horizontal|bottom"
+												android:textColor="?attr/icon_color_active"
+												android:textSize="12sp"
+												tools:text="Title" />
+
+										</FrameLayout>
+
+									</com.google.android.material.card.MaterialCardView>
+								</LinearLayout>
+
+							</LinearLayout>
+
+						</androidx.constraintlayout.widget.ConstraintLayout>
+
+					</com.google.android.material.card.MaterialCardView>
+
+					<androidx.constraintlayout.widget.ConstraintLayout
+						android:id="@+id/collapsedToolbar"
+						android:layout_width="match_parent"
+						android:layout_height="68dp"
+						android:alpha="0"
+						android:background="@android:color/transparent"
+						android:elevation="0dp"
+						android:foreground="@android:color/transparent"
+						app:layout_collapseMode="pin">
+
+						<com.google.android.material.card.MaterialCardView
+							android:id="@+id/collapsed_card"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							app:cardBackgroundColor="?attr/list_background_color"
+							app:layout_collapseMode="none"
+							app:layout_collapseParallaxMultiplier="0.5"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toTopOf="parent"
+							app:shapeAppearanceOverlay="@style/Shape.BottomSheet">
+
+							<androidx.constraintlayout.widget.ConstraintLayout
+								android:id="@+id/collapsed_content"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content">
+
+								<View
+									android:id="@+id/collapsed_drag"
+									android:layout_width="16dp"
+									android:layout_height="2dp"
+									android:layout_gravity="center_horizontal"
+									android:layout_marginTop="6dp"
+									android:layout_marginBottom="2dp"
+									android:background="@drawable/rectangle_rounded"
+									android:backgroundTint="?attr/secondary_icon_color"
+									app:layout_constraintEnd_toEndOf="parent"
+									app:layout_constraintStart_toStartOf="parent"
+									app:layout_constraintTop_toTopOf="parent" />
+
+								<LinearLayout
+									android:layout_width="match_parent"
+									android:layout_height="wrap_content"
+									android:layout_marginBottom="6dp"
+									android:minHeight="52dp"
+									android:orientation="horizontal"
+									android:paddingStart="16dp"
+									android:paddingEnd="4dp"
+									app:layout_constraintBottom_toBottomOf="parent"
+									app:layout_constraintEnd_toEndOf="parent"
+									app:layout_constraintStart_toStartOf="parent"
+									app:layout_constraintTop_toBottomOf="@+id/collapsed_drag">
+
+									<TextView
+										android:id="@+id/collapsed_title"
+										style="@style/MaterialAlertDialog.Material3.Title.Text"
+										android:layout_width="0dp"
+										android:layout_height="wrap_content"
+										android:layout_gravity="center_vertical"
+										android:layout_weight="1"
+										android:gravity="center_vertical"
+										android:lines="1"
+										tools:text="Sun"
+										android:textAppearance="?attr/textAppearanceHeadlineSmall"
+										android:textColor="?android:attr/textColorPrimary"
+										android:textSize="24sp"
+										android:textStyle="bold" />
+
+									<FrameLayout
+										android:id="@+id/collapsed_close_button"
+										android:layout_width="48dp"
+										android:layout_height="48dp"
+										android:layout_gravity="center"
+										android:layout_marginEnd="4dp"
+										android:background="?attr/selectableItemBackground">
+
+										<FrameLayout
+											android:layout_width="32dp"
+											android:layout_height="32dp"
+											android:layout_gravity="center"
+											android:background="@drawable/bg_circle">
+
+										</FrameLayout>
+
+										<com.google.android.material.imageview.ShapeableImageView
+											android:layout_width="24dp"
+											android:layout_height="24dp"
+											android:layout_gravity="center"
+											android:contentDescription="@string/shared_string_close"
+											android:foregroundGravity="center"
+											android:src="@drawable/ic_action_close_rounded"
+											android:tint="?attr/default_icon_color" />
+
+									</FrameLayout>
+
+								</LinearLayout>
+
+
+							</androidx.constraintlayout.widget.ConstraintLayout>
+
+						</com.google.android.material.card.MaterialCardView>
+
+					</androidx.constraintlayout.widget.ConstraintLayout>
+
+				</com.google.android.material.appbar.CollapsingToolbarLayout>
+
+			</com.google.android.material.appbar.AppBarLayout>
+
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/cardsRecyclerView"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:clipToPadding="false"
+				android:nestedScrollingEnabled="true"
+				app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+		</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+		<LinearLayout
+			android:id="@+id/bottom_buttons_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/list_background_color"
+			android:elevation="1dp"
+			android:orientation="vertical"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent">
+
+			<com.google.android.material.tabs.TabLayout
+				android:id="@+id/bottomTabs"
+				style="@style/Widget.Material3.TabLayout.Secondary"
+				android:layout_width="match_parent"
+				android:layout_height="56dp"
+				android:background="?attr/list_background_color"
+				android:paddingStart="6dp"
+				android:paddingEnd="6dp"
+				app:tabGravity="fill"
+				app:tabIconTint="@null"
+				app:tabIndicatorAnimationMode="elastic"
+				app:tabIndicatorColor="?attr/icon_color_active"
+				app:tabIndicatorGravity="top"
+				app:tabInlineLabel="false"
+				app:tabMode="fixed"
+				app:tabTextAppearance="?attr/textAppearanceBodySmall"
+				app:tabTextColor="?attr/text_color_secondary" />
+
+		</LinearLayout>
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

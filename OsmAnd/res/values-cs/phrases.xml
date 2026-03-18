@@ -487,7 +487,7 @@
     <string name="poi_horse_racing">Koňské dostihy</string>
     <string name="poi_ice_skating">Bruslení</string>
     <string name="poi_ice_stock">Bavorská metaná</string>
-    <string name="poi_korfbal">Korfbal</string>
+    <string name="poi_korfball">Korfbal</string>
     <string name="poi_sport_motor">Motoristické závody</string>
     <string name="poi_sport_multi">Více sportů</string>
     <string name="poi_orienteering">Orientační běh</string>
@@ -3750,7 +3750,7 @@
     <string name="poi_video_telephone">Video</string>
     <string name="poi_sms_yes">Ano;SMS</string>
     <string name="poi_sms_no">Ne</string>
-    <string name="poi_covered_booth">Budka</string>
+    <string name="poi_covered_booth">Ano</string>
     <string name="poi_booth">Typ budky</string>
     <string name="poi_video_yes">Ano;Video</string>
     <string name="poi_video_no">Ne</string>
@@ -5165,4 +5165,13 @@
     <string name="poi_sample_collection_blood">Krev</string>
     <string name="poi_yoga">Jóga</string>
     <string name="poi_memorial_type">Typ památníku</string>
+    <string name="poi_covered_booth_filter">Budka</string>
+    <string name="poi_rapids_grade_0">0 (hladina)</string>
+    <string name="poi_rapids_grade_1">1 (snadný)</string>
+    <string name="poi_rapids_grade_2">2 (začátečník)</string>
+    <string name="poi_rapids_grade_3">3 (středně pokročilý)</string>
+    <string name="poi_rapids_grade_4">4 (pokročilý)</string>
+    <string name="poi_rapids_grade_5">5 (expert)</string>
+    <string name="poi_rapids_grade_6">6 (extrémní)</string>
+    <string name="poi_rapids_grade_x">X (ne spustitelné)</string>
 </resources>

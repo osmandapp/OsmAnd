@@ -2047,7 +2047,7 @@
     <string name="poi_bowls">Keiluspil</string>
     <string name="poi_canadian_football">Kanadískur fótbolti</string>
     <string name="poi_ice_stock">Bæversk krulla</string>
-    <string name="poi_korfbal">Korfbolti</string>
+    <string name="poi_korfball">Korfbolti</string>
     <string name="poi_sport_multi">Fjöl-íþrótta</string>
     <string name="poi_paddle_tennis">Spaðatennis (paddle)</string>
     <string name="poi_pelota">Pelota</string>
@@ -3756,7 +3756,7 @@
     <string name="poi_video_telephone">Myndskeið</string>
     <string name="poi_sms_yes">Já;SMS</string>
     <string name="poi_sms_no">Nei</string>
-    <string name="poi_covered_booth">Bás</string>
+    <string name="poi_covered_booth">Já</string>
     <string name="poi_booth">Tegund af bás</string>
     <string name="poi_video_yes">Já;Skjár</string>
     <string name="poi_video_no">Nei</string>

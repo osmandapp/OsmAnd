@@ -107,7 +107,7 @@
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
 						android:contentDescription="@string/shared_string_settings"
-						app:srcCompat="@drawable/ic_action_stars"
+						app:srcCompat="@drawable/ic_action_sort_brightest"
 						app:tint="#5f6e7c" />
 
 					<TextView
@@ -303,19 +303,6 @@
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
-		<LinearLayout
-			android:id="@+id/star_charts_view"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_gravity="bottom"
-			android:background="#424242"
-			android:orientation="vertical"
-			android:visibility="gone">
-
-			<include layout="@layout/star_charts_content" />
-
-		</LinearLayout>
-
 	</LinearLayout>
 
 	<FrameLayout
@@ -324,6 +311,6 @@
 		android:layout_height="wrap_content"
 		app:behavior_hideable="true"
 		app:behavior_peekHeight="0dp"
-		app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
+		app:layout_behavior="net.osmand.plus.plugins.astronomy.views.contextmenu.AstroBottomSheetBehavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

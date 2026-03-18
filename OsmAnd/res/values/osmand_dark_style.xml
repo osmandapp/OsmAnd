@@ -134,6 +134,7 @@
         <item name="text_color_tab_active_white">@color/text_color_tab_active_dark</item>
         <item name="app_bar_primary_item_color">@color/active_buttons_and_links_text_dark</item>
         <item name="inactive_text_color">@color/icon_color_default_dark</item>
+	    <item name="text_color_secondary">@color/text_color_secondary_dark</item>
 
         <item name="appbar_layout_theme">@style/OsmandDarkTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandDarkTheme.SearchTabbar</item>

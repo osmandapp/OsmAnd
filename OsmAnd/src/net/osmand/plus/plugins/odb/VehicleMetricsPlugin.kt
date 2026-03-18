@@ -224,13 +224,12 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 				customId,
 				widgetsPanel)
 
-			// TODO: OBD Battery widget
-//			WidgetType.OBD_ALT_BATTERY_VOLTAGE -> return OBDTextWidget(
-//				mapActivity,
-//				WidgetType.OBD_ALT_BATTERY_VOLTAGE,
-//				OBDDataComputer.OBDTypeWidget.ADAPTER_BATTERY_VOLTAGE,
-//				customId,
-//				widgetsPanel)
+			WidgetType.OBD_ALT_BATTERY_VOLTAGE -> return OBDTextWidget(
+				mapActivity,
+				WidgetType.OBD_ALT_BATTERY_VOLTAGE,
+				OBDDataComputer.OBDTypeWidget.ADAPTER_BATTERY_VOLTAGE,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_BATTERY_VOLTAGE -> return OBDTextWidget(
 				mapActivity,

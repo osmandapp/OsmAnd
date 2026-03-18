@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.gallery;
 
+import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.ASTRONOMY;
 import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.MAPILLARY;
 import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.MAPILLARY_AMENITY;
 import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.OTHER;
@@ -11,7 +12,6 @@ import androidx.annotation.NonNull;
 import net.osmand.data.LatLon;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.wikipedia.WikiImageCard;
-import net.osmand.shared.wiki.WikiMetadata;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -42,12 +42,17 @@ public class ImageCardsHolder {
 
 	@NonNull
 	public List<ImageCard> getOrderedCards() {
-		return getCardsWithTypes(MAPILLARY_AMENITY, WIKIDATA, WIKIMEDIA, OTHER);
+		return getCardsWithTypes(MAPILLARY_AMENITY, WIKIDATA, WIKIMEDIA, OTHER, ASTRONOMY);
 	}
 
 	@NonNull
 	public List<ImageCard> getMapillaryCards() {
 		return getCardsWithTypes(MAPILLARY);
+	}
+
+	@NonNull
+	public List<ImageCard> getAstronomyCards() {
+		return getCardsWithTypes(ASTRONOMY);
 	}
 
 	@NonNull
