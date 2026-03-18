@@ -20,11 +20,11 @@ public final class BloomFilter {
 	
 	private static final Log log = PlatformUtil.getLog(BloomFilter.class);
 
-	private final LongAdder writeBoxBitAcc = new LongAdder();
-	private final LongAdder writeBoxAcc = new LongAdder(), writeBoxCount = new LongAdder();
-	private final LongAdder skipBoxAcc = new LongAdder(), readBoxCount = new LongAdder();
+	private static final LongAdder writeBoxBitAcc = new LongAdder();
+	private static final LongAdder writeBoxAcc = new LongAdder(), writeBoxCount = new LongAdder();
+	private static final LongAdder skipBoxAcc = new LongAdder(), readBoxCount = new LongAdder(), falsePsitiveBoxAcc = new LongAdder();
 	
-	private static BloomFilter INSTANCE = new BloomFilter();
+	private static final BloomFilter INSTANCE = new BloomFilter();
 
 	private BloomFilter() {
 	}
@@ -34,8 +34,14 @@ public final class BloomFilter {
 	}
 	
 	public String logSkipRatio() {
-		return String.format("Skip POI box ratio: %d / %d = %.2f", skipBoxAcc.sum(), (double) readBoxCount.sum(),
-				skipBoxAcc.sum() / (double) readBoxCount.sum());
+		return String.format("True ratio: %d / %d = %.2f, False ratio: %d / %d = %.2f", skipBoxAcc.sum(), readBoxCount.sum(),
+				100 * skipBoxAcc.sum() / (double) readBoxCount.sum(),
+				falsePsitiveBoxAcc.sum(), readBoxCount.sum(),
+				100 * falsePsitiveBoxAcc.sum() / (double) readBoxCount.sum());
+	}
+
+	public static void incFalsePositive() {
+		falsePsitiveBoxAcc.increment();
 	}
 	
 	public void logInfo() {
@@ -180,12 +186,13 @@ public final class BloomFilter {
 	}
 
 	public static void resetStats() {
-		BloomFilter instance = getInstance();
-		instance.readBoxCount.reset();
-		instance.skipBoxAcc.reset();
-		instance.writeBoxAcc.reset();
-		instance.writeBoxCount.reset();
-		instance.writeBoxBitAcc.reset();
+		readBoxCount.reset();
+		falsePsitiveBoxAcc.reset();
+		skipBoxAcc.reset();
+
+		writeBoxAcc.reset();
+		writeBoxCount.reset();
+		writeBoxBitAcc.reset();
 	}
 
 }

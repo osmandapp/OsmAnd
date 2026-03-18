@@ -308,6 +308,12 @@ public class BinaryMapPoiReaderAdapter {
 		return query.replace("\"", "").toLowerCase();
 	}
 
+	private static class PoiNameObjectReadMetrics {
+		long payloadBytesParsed;
+		long decodeTimeNs;
+		long matcherTimeNs;
+	}
+
 	protected void searchPoiByName(PoiRegion region, SearchRequest<Amenity> req) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		String query = normalizeSearchPoiByNameQuery(req.nameQuery);
@@ -326,6 +332,8 @@ public class BinaryMapPoiReaderAdapter {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				return;
 			case OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER:
 				long length = readInt();
@@ -333,6 +341,8 @@ public class BinaryMapPoiReaderAdapter {
 				// here offsets are sorted by distance
 				offsets = readPoiNameIndex(matcher.getCollator(), query, req, region, nameIndexCoordinates);
 				codedIS.popLimit(oldLimit);
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER:
 				length = readInt();
@@ -356,6 +366,9 @@ public class BinaryMapPoiReaderAdapter {
 						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_GROUPS_BBOXES, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
+				long bytesLoadedStart = codedIS.getBytesLoadedByReadCounter();
+				long bytesSkippedBySeekStart = codedIS.getBytesSkippedBySeekCounter();
+				PoiNameObjectReadMetrics metrics = new PoiNameObjectReadMetrics();
 				// also offsets can be randomly skipped by limit
 				Integer[] offKeys = new Integer[offsets.size()];
 				if (offsets.size() > 0) {
@@ -386,23 +399,35 @@ public class BinaryMapPoiReaderAdapter {
 
 //				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) +
 //						"ms. Found " + offKeys.length + " subtrees");
+				boolean found = false;
 				for (int j = 0; j < offKeys.length; j++) {
 					codedIS.seek(offKeys[j] + indexOffset);
 					long len = readInt();
+					long payloadStart = codedIS.getTotalBytesRead();
 					long oldLim = codedIS.pushLimitLong((long) len);
-					readPoiData(matcher, req, region);
+					found = found || readPoiData(matcher, req, region, metrics);
 					codedIS.popLimit(oldLim);
+					metrics.payloadBytesParsed += codedIS.getTotalBytesRead() - payloadStart;
 					if (req.isCancelled() || req.limitExceeded()) {
 						req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
-								BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
+								BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes,
+								codedIS.getBytesLoadedByReadCounter() - bytesLoadedStart,
+								codedIS.getBytesSkippedBySeekCounter() - bytesSkippedBySeekStart,
+								metrics.payloadBytesParsed, metrics.decodeTimeNs, metrics.matcherTimeNs);
 						return;
 					}
+				}
+				if (!found) {
+					BloomFilter.incFalsePositive();
 				}
 //				LOG.info("Whole poi by name search is done in " + (System.currentTimeMillis() - time) +
 //						"ms. Found " + req.getSearchResults().size());
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
-						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes,
+						codedIS.getBytesLoadedByReadCounter() - bytesLoadedStart,
+						codedIS.getBytesSkippedBySeekCounter() - bytesSkippedBySeekStart,
+						metrics.payloadBytesParsed, metrics.decodeTimeNs, metrics.matcherTimeNs);
 				return;
 			default:
 				skipUnknownField(t);
@@ -724,19 +749,21 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private void readPoiData(CollatorStringMatcher matcher, SearchRequest<Amenity> req, PoiRegion region) throws IOException {
+	private boolean readPoiData(CollatorStringMatcher matcher, SearchRequest<Amenity> req, PoiRegion region,
+			PoiNameObjectReadMetrics metrics) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 0;
+		boolean found = false;
 		while (true) {
 			if (req.isCancelled() || req.limitExceeded()) {
-				return;
+				return found;
 			}
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				return;
+				return found;
 			case OsmandOdb.OsmAndPoiBoxData.X_FIELD_NUMBER:
 				x = codedIS.readUInt32();
 				break;
@@ -749,9 +776,12 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER:
 				int len = codedIS.readRawVarint32();
 				long oldLim = codedIS.pushLimitLong((long) len);
+				long decodeStartNs = System.nanoTime();
 				Amenity am = readPoiPoint(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, x, y, zoom, req, region, false);
+				metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
 				codedIS.popLimit(oldLim);
 				if (am != null) {
+					long matcherStartNs = System.nanoTime();
 					boolean matches = matcher.matches(am.getName().toLowerCase())
 							|| matcher.matches(am.getEnName(true).toLowerCase());
 					if (!matches) {
@@ -775,9 +805,11 @@ public class BinaryMapPoiReaderAdapter {
 							}
 						}
 					}
+					metrics.matcherTimeNs += System.nanoTime() - matcherStartNs;
 					if (matches) {
 						req.collectRawData(am);
 						req.publish(am);
+						found = true;
 					}
 				}
 				break;

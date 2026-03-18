@@ -1863,6 +1863,16 @@ public class BinaryMapIndexReader {
 			}
 		}
 
+		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api,
+				BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName op, String obf, long bytes,
+				long bytesLoaded, long bytesSkippedBySeek, long payloadBytesParsed,
+				long decodeTimeNs, long matcherTimeNs) {
+			if (statReq > 0 && searchStat != null) {
+				searchStat.endSubSearchStats(statReq, api, op, obf, getSearchResults().size(), bytes,
+						bytesLoaded, bytesSkippedBySeek, payloadBytesParsed, decodeTimeNs, matcherTimeNs);
+			}
+		}
+
 		public long getTileHashOnPath(double lat, double lon) {
 			long x = (int) MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, lon);
 			long y = (int) MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, lat);
