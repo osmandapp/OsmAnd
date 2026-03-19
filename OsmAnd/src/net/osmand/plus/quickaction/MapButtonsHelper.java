@@ -39,6 +39,7 @@ import java.util.*;
 public class MapButtonsHelper {
 
 	public final static String KEY_EVENT_KEY = "key_event";
+	public static final String ANDROID_AUTO_BUTTON_ID = "android_auto_custom_button";
 
 	public interface QuickActionUpdatesListener {
 
@@ -120,6 +121,7 @@ public class MapButtonsHelper {
 	private ConfigureMapButtonState configureMapButtonState;
 	private DrawerMenuButtonState drawerMenuButtonState;
 	private CompassButtonState compassButtonState;
+	private QuickActionButtonState androidAutoButtonState;
 	private List<QuickActionButtonState> quickActionStates = new ArrayList<>();
 
 	private List<QuickActionType> enabledTypes = new ArrayList<>();
@@ -149,6 +151,8 @@ public class MapButtonsHelper {
 		quickSearchButtonState = new QuickSearchButtonState(app);
 		zoomInButtonState = new ZoomInButtonState(app);
 		zoomOutButtonState = new ZoomOutButtonState(app);
+		androidAutoButtonState = new QuickActionButtonState(app, ANDROID_AUTO_BUTTON_ID);
+		androidAutoButtonState.parseQuickActions(gson);
 	}
 
 	public void addUpdatesListener(@NonNull QuickActionUpdatesListener listener) {
@@ -217,6 +221,11 @@ public class MapButtonsHelper {
 	@NonNull
 	public List<QuickActionButtonState> getQuickActionButtonsStates() {
 		return quickActionStates;
+	}
+
+	@Nullable
+	public QuickActionButtonState getAndroidAutoButtonState() {
+		return androidAutoButtonState;
 	}
 
 	@NonNull
@@ -437,6 +446,9 @@ public class MapButtonsHelper {
 
 	public void updateActiveActions() {
 		quickActionStates = createButtonsStates();
+		if (androidAutoButtonState != null) {
+			androidAutoButtonState.parseQuickActions(gson);
+		}
 	}
 
 	@NonNull
@@ -582,6 +594,9 @@ public class MapButtonsHelper {
 
 	@Nullable
 	public QuickActionButtonState getActionButtonStateById(@NonNull String id) {
+		if (Algorithms.stringsEqual(id, ANDROID_AUTO_BUTTON_ID)) {
+			return androidAutoButtonState;
+		}
 		for (QuickActionButtonState buttonState : quickActionStates) {
 			if (Algorithms.stringsEqual(buttonState.getId(), id)) {
 				return buttonState;
@@ -603,6 +618,9 @@ public class MapButtonsHelper {
 	@Nullable
 	public QuickActionButtonState getButtonStateByAction(@NonNull QuickAction action) {
 		long id = action.getId();
+		if (androidAutoButtonState != null && androidAutoButtonState.getQuickAction(id) != null) {
+			return androidAutoButtonState;
+		}
 		for (QuickActionButtonState buttonState : quickActionStates) {
 			if (buttonState.getQuickAction(id) != null) {
 				return buttonState;
