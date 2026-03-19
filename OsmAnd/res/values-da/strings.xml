@@ -6161,4 +6161,5 @@
     <string name="astro_explore_deep_sky_subtitle">Galakse, galaksehobe, sorte huller</string>
     <string name="obd_alt_battery_voltage_desc">Viser spændingsniveauet på OBD-adapteren</string>
     <string name="shared_string_radians">Radianer</string>
+    <string name="shared_string_unlock">Lås op</string>
 </resources>

@@ -6024,4 +6024,5 @@
     <string name="astro_explore_deep_sky_subtitle">Galaxie, amas de galaxies, trous noirs</string>
     <string name="obd_alt_battery_voltage_desc">Affiche le niveau de tension sur l\'adaptateur OBD</string>
     <string name="shared_string_radians">Radians</string>
+    <string name="shared_string_unlock">Déverrouiller</string>
 </resources>
