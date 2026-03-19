@@ -42,6 +42,7 @@ public abstract class InAppPurchases {
 	protected static final int LIVE_UPDATES_ID = 5;
 	protected static final int OSMAND_PRO_ID = 6;
 	protected static final int MAPS_ID = 7;
+	protected static final int ASTRONOMY_ID = 8;
 
 	protected static final int[] LIVE_UPDATES_SCOPE = new int[]{
 			FULL_VERSION_ID,
@@ -343,6 +344,10 @@ public abstract class InAppPurchases {
 
 		public boolean isMaps() {
 			return featureId == MAPS_ID || featureId == FULL_VERSION_ID;
+		}
+
+		public boolean isAstronomy() {
+			return featureId == ASTRONOMY_ID;
 		}
 
 		public int getFeatureId() {
@@ -1512,6 +1517,7 @@ public abstract class InAppPurchases {
 			boolean featureMaps = json.getString("feature_maps").equals("true");
 			boolean featureContour = json.getString("feature_contours").equals("true");
 			boolean featureNautical = json.getString("feature_nautical").equals("true");
+			boolean featureAstronomy = json.optString("feature_astronomy").equals("true");
 
 			int featureId;
 			if (featurePro) {
@@ -1522,6 +1528,8 @@ public abstract class InAppPurchases {
 				featureId = CONTOUR_LINES_ID;
 			} else if (featureNautical) {
 				featureId = DEPTH_CONTOURS_ID;
+			} else if (featureAstronomy) {
+				featureId = ASTRONOMY_ID;
 			} else {
 				throw new IllegalArgumentException("InApp is not supported");
 			}

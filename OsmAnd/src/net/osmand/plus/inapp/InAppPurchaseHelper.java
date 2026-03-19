@@ -699,13 +699,16 @@ public abstract class InAppPurchaseHelper {
 
 		boolean purchasedFullVersion = isPurchasedLocalFullVersion() || isPurchasedExternalFullVersion();
 		boolean depthContoursPurchased = isPurchasedLocalDeepContours();
+		boolean astronomyPurchased = isPurchasedExternalAstronomy();
 		if (purchasedFullVersion) {
 			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 		}
 		if (depthContoursPurchased) {
 			ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
 		}
-
+		if (astronomyPurchased ) {
+			ctx.getSettings().ASTRONOMY_PURCHASED.set(true);
+		}
 		boolean subscribedToLiveUpdates = isSubscribedToLocalLiveUpdates();
 		boolean subscribedToMaps = isSubscribedToLocalMaps() || isSubscribedToExternalMaps();
 		boolean subscribedToOsmAndPro = isSubscribedToLocalOsmAndPro() || isSubscribedToExternalOsmAndPro() || isPurchasedExternalOsmAndPro();
@@ -754,6 +757,15 @@ public abstract class InAppPurchaseHelper {
 		return false;
 	}
 
+	protected boolean isPurchasedExternalAstronomy() {
+		for (InAppStateHolder holder : inAppStateMap.values()) {
+			if (hasAstronomyFeature(holder.linkedPurchase)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	protected boolean isSubscribedToExternalOsmAndPro() {
 		for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
 			if (holder.linkedSubscription != null && holder.linkedSubscription.isOsmAndPro()) {
@@ -770,6 +782,10 @@ public abstract class InAppPurchaseHelper {
 			}
 		}
 		return false;
+	}
+
+	private boolean hasAstronomyFeature(@Nullable InAppPurchase purchase) {
+		return purchase != null && (purchase.isAstronomy());
 	}
 
 	public void checkPromoAsync(@Nullable CallbackWithObject<Boolean> listener) {

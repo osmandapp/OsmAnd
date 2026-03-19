@@ -8,6 +8,8 @@ import net.osmand.aidlapi.OsmAndCustomizationConstants
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.chooseplan.OsmAndFeature
+import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.plugins.OsmandPlugin
 import net.osmand.plus.plugins.astronomy.search.StarMapRecentChip
 import net.osmand.plus.settings.backend.preferences.CommonPreference
@@ -44,6 +46,18 @@ class AstronomyPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 
 	override fun getLogoResourceId(): Int {
 		return R.drawable.ic_action_favorite
+	}
+
+	override fun isPaid(): Boolean {
+		return true
+	}
+
+	override fun isLocked(): Boolean {
+		return !InAppPurchaseUtils.isAstronomyAvailable(app)
+	}
+
+	override fun getOsmAndFeature(): OsmAndFeature {
+		return OsmAndFeature.ASTRONOMY
 	}
 
 	override fun getAssetResourceImage(): Drawable? {

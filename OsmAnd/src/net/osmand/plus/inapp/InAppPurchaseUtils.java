@@ -41,6 +41,10 @@ public class InAppPurchaseUtils {
 		return app.getSettings().DEPTH_CONTOURS_PURCHASED.get();
 	}
 
+	public static boolean isAstronomyPurchased(@NonNull OsmandApplication app) {
+		return app.getSettings().ASTRONOMY_PURCHASED.get();
+	}
+
 	public static boolean isPromoSubscribed(@NonNull OsmandApplication app) {
 		return app.getSettings().BACKUP_PURCHASE_ACTIVE.get();
 	}
@@ -108,6 +112,11 @@ public class InAppPurchaseUtils {
 
 	public static boolean isVehicleMetricsAvailable(@NonNull OsmandApplication app) {
 		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app);
+	}
+
+	public static boolean isAstronomyAvailable(@NonNull OsmandApplication app) {
+		return isAstronomyPurchased(app) || Version.isPaidVersion(app) ||
+				checkDeveloperBuildIfNeeded(app, true);
 	}
 
 	public static boolean isProWidgetsAvailable(@NonNull OsmandApplication app) {

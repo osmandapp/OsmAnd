@@ -1519,6 +1519,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> FULL_VERSION_PURCHASED = new BooleanPreference(this, "billing_full_version_purchased", false).makeGlobal();
 	public final OsmandPreference<Boolean> DEPTH_CONTOURS_PURCHASED = new BooleanPreference(this, "billing_sea_depth_purchased", false).makeGlobal();
 	public final OsmandPreference<Boolean> CONTOUR_LINES_PURCHASED = new BooleanPreference(this, "billing_srtm_purchased", false).makeGlobal();
+	public final OsmandPreference<Boolean> ASTRONOMY_PURCHASED = new BooleanPreference(this, "billing_astronomy_purchased", false).makeGlobal();
 	public final OsmandPreference<Boolean> EMAIL_SUBSCRIBED = new BooleanPreference(this, "email_subscribed", false).makeGlobal();
 	public final OsmandPreference<Boolean> OSMAND_PRO_PURCHASED = new BooleanPreference(this, "billing_osmand_pro_purchased", false).makeGlobal();
 	public final OsmandPreference<Boolean> OSMAND_MAPS_PURCHASED = new BooleanPreference(this, "billing_osmand_maps_purchased", false).makeGlobal();
