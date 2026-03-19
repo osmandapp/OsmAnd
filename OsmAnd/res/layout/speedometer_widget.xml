@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/speedometer_widget"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
 	android:clipChildren="false"
 	android:clipToPadding="false"
 	android:orientation="horizontal"
-	android:paddingTop="@dimen/content_padding"
+	android:paddingTop="@dimen/content_padding_half"
 	android:paddingBottom="@dimen/content_padding_half"
 	android:paddingHorizontal="@dimen/measurement_tool_menu_title_padding_bottom">
 
