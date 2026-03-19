@@ -29,6 +29,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import net.osmand.search.core.SearchSettings;
 import org.apache.commons.logging.Log;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -1851,14 +1852,14 @@ public class BinaryMapIndexReader {
 		}
 
 		public long beginSubSearchStats() {
-			if (searchStat != null) {
+			if (searchStat != null && SearchSettings.subApiMetricsEnabled) {
 				return searchStat.beginSubSearchStats(getSearchResults().size());
 			}
 			return 0;
 		}
 
 		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName op, String obf, long bytes) {
-			if (statReq > 0 && searchStat != null) {
+			if (statReq > 0 && searchStat != null && SearchSettings.subApiMetricsEnabled) {
 				searchStat.endSubSearchStats(statReq, api, op, obf, getSearchResults().size(), bytes);
 			}
 		}
@@ -1868,7 +1869,7 @@ public class BinaryMapIndexReader {
 				long bytesLoaded, long bytesSkippedBySeek, long payloadBytesParsed,
 				long decodeTimeNs, long matcherTimeNs,
 				long blocksLoaded, long objectsLoaded, long matchedObjects, long maxObjectsPerBlock) {
-			if (statReq > 0 && searchStat != null) {
+			if (statReq > 0 && searchStat != null && SearchSettings.subApiMetricsEnabled) {
 				searchStat.endSubSearchStats(statReq, api, op, obf, getSearchResults().size(), bytes,
 						bytesLoaded, bytesSkippedBySeek, payloadBytesParsed, decodeTimeNs, matcherTimeNs,
 						blocksLoaded, objectsLoaded, matchedObjects, maxObjectsPerBlock);
