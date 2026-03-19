@@ -5,7 +5,8 @@
 	android:id="@+id/map_alarm_warning"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
-	android:paddingHorizontal="@dimen/content_padding_minimal">
+	android:paddingVertical="@dimen/content_padding_minimal"
+	android:paddingHorizontal="@dimen/context_menu_subtitle_margin">
 
 	<FrameLayout
 		android:layout_width="@dimen/map_alarm_size"
