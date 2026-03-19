@@ -367,7 +367,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		if (mapActivity == null || mainView == null || view == null) {
 			return;
 		}
-//		boolean isFastRouting = shouldDrawFastRoutingProgressBar(); // TODO UI colors
+		boolean isFastRouting = shouldDrawFastRoutingProgressBar(); // TODO UI colors
 		boolean indeterminate = isPublicTransportMode() || !isOsmandRouting();
 		ProgressBar progressBar = mainView.findViewById(R.id.progress_bar);
 		if (progressBar != null) {

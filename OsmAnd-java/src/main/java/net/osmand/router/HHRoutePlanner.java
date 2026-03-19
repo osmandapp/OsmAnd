@@ -45,6 +45,7 @@ import net.osmand.router.HHRouteDataStructure.NetworkDBPointCost;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPointRouteInfo;
 import net.osmand.router.HHRouteDataStructure.NetworkDBSegment;
 import net.osmand.router.HHRouteDataStructure.RoutingStats;
+import net.osmand.router.RouteCalculationProgress.FastRoutingComplication;
 import net.osmand.router.RouteCalculationProgress.HHIteration;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RoutingConfiguration.Builder;
@@ -157,6 +158,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	}
 
 	public static <T extends NetworkDBPoint> HHNetworkRouteRes cancelledStatus(HHRoutingContext<T> hctx, TLongObjectHashMap<T> stPoints, TLongObjectHashMap<T> endPoints) {
+		hctx.rctx.calculationProgress.updateFastRoutingComplication(FastRoutingComplication.CANCELLED);
 		hctx.clearAll(stPoints, endPoints);
 		return new HHNetworkRouteRes("Routing was cancelled.");
 	}
@@ -186,6 +188,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			config.cacheCtx = (HHRoutingContext<NetworkDBPoint>) hctx;
 		}
 		if (hctx == null) {
+			progress.updateFastRoutingComplication(FastRoutingComplication.FAILED_NO_HH_ROUTING_DATA);
 			return new HHNetworkRouteRes("Files for hh routing were not initialized. Route couldn't be calculated.");
 		}
 
@@ -223,6 +226,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (finalPnt == null) {
 				printf(SL > 0, " finalPnt is null (stop)\n");
 				hctx.clearAll(stPoints, endPoints);
+				progress.applyFastRoutingFailureStatus();
 				return new HHNetworkRouteRes("No finalPnt found (points might be filtered by params)");
 			}
 			if (progress.isCancelled) {
@@ -250,6 +254,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						printFinalMessage(" [too many cancelled]", start, end, startTime, hctx);
 					}
 					hctx.clearAll(stPoints, endPoints);
+					progress.applyFastRoutingFailureStatus();
 					return new HHNetworkRouteRes("Too many recalculations (outdated maps or unsupported parameters).");
 				}
 				hctx.clearVisited(stPoints, endPoints);
@@ -315,6 +320,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (SL >= 0) {
 			printFinalMessage("", start, end, startTime, hctx);
 		}
+		progress.updateFastRoutingComplication(FastRoutingComplication.SUCCESS);
 		return route;
 	}
 
