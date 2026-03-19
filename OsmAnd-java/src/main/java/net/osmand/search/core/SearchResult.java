@@ -211,7 +211,6 @@ public class SearchResult {
 			}
 			// range 60 - 91
 		}
-		// TODO basemap +1
 		if (res < MAX_TYPES_BASE_10 * 4) {
 			// equalize unmatched results
 			res = MAX_TYPES_BASE_10;
