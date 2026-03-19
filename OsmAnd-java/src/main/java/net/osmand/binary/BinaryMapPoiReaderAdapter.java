@@ -409,7 +409,7 @@ public class BinaryMapPoiReaderAdapter {
 					long len = readInt();
 					long payloadStart = codedIS.getTotalBytesRead();
 					long oldLim = codedIS.pushLimitLong((long) len);
-					found = found || readPoiData(matcher, req, region, metrics);
+					found = readPoiData(matcher, req, region, metrics) || found;
 					codedIS.popLimit(oldLim);
 					metrics.blocksLoaded++;
 
