@@ -6096,7 +6096,7 @@
     <string name="astro_search_magnitude_short">mag %.1f</string>
     <string name="astro_filter_naked_eye">Nudokule videblaj</string>
     <string name="astro_filter_visible_tonight">Videblaj hodiaŭnokte</string>
-    <string name="astro_filter_visible_now">Videblaj nunj</string>
+    <string name="astro_filter_visible_now">Videblaj nun</string>
     <string name="astro_filter_show_all">Ĉiuj</string>
     <string name="astro_sort_sets_soonest">plej frua subiro</string>
     <string name="astro_sort_rises_soonest">plej frua leviĝo</string>
