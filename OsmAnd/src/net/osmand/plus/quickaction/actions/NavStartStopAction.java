@@ -28,7 +28,8 @@ public class NavStartStopAction extends QuickAction {
 			"nav.startstop", NavStartStopAction.class)
 			.nameRes(R.string.shared_string_navigation).iconRes(R.drawable.ic_action_start_navigation).nonEditable()
 			.category(QuickActionType.NAVIGATION)
-			.nameActionRes(R.string.quick_action_verb_start_stop);
+			.nameActionRes(R.string.quick_action_verb_start_stop)
+			.allowedInAndroidAuto(true);
 
 	public NavStartStopAction() {
 		super(TYPE);

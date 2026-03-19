@@ -25,7 +25,8 @@ public class DayNightModeAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(DAY_NIGHT_MODE_ACTION_ID,
 			"daynight.switch", DayNightModeAction.class).
 			nameRes(R.string.map_mode).iconRes(R.drawable.ic_action_map_day).nonEditable().
-			category(QuickActionType.CONFIGURE_MAP).nameActionRes(R.string.shared_string_change);
+			category(QuickActionType.CONFIGURE_MAP).nameActionRes(R.string.shared_string_change)
+			.allowedInAndroidAuto(true);
 
 	public DayNightModeAction() {super(TYPE);}
 

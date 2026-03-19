@@ -514,8 +514,12 @@ public class MapButtonsHelper {
 				set.add(action.getActionType().getId());
 			}
 		}
+		boolean androidAutoOnly = buttonState != null && Algorithms.stringsEqual(buttonState.getId(), ANDROID_AUTO_BUTTON_ID);
 		for (QuickActionType type : enabledTypes) {
 			if (type.getCategory() == filter.getCategory()) {
+				if (androidAutoOnly && !type.isAllowedInAndroidAuto()) {
+					continue;
+				}
 				if (!type.isActionEditable()) {
 					boolean instanceInList = set.contains(type.getId());
 					if (!instanceInList) {
