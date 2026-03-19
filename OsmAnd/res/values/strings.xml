@@ -10,8 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
-    <string name="shared_string_radians">Radians</string>
+	<string name="purchases_feature_desc_astronomy">Explore the night sky with an offline map and celestial catalog. Plan observations using smart visibility graphs, daily schedules, and an interactive AR mode.</string>
+	<string name="shared_string_radians">Radians</string>
 	<string name="shared_string_unlock">Unlock</string>
 	<string name="no_objects_found">No objects found</string>
 	<string name="astro_search_info_solar_system">The Solar System is the gravitationally bound system of the Sun and the masses that orbit it, most prominently its eight planets, of which Earth is one.</string>
