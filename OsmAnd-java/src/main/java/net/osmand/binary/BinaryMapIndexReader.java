@@ -1866,10 +1866,12 @@ public class BinaryMapIndexReader {
 		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api,
 				BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName op, String obf, long bytes,
 				long bytesLoaded, long bytesSkippedBySeek, long payloadBytesParsed,
-				long decodeTimeNs, long matcherTimeNs) {
+				long decodeTimeNs, long matcherTimeNs,
+				long blocksLoaded, long objectsLoaded, long matchedObjects, long maxObjectsPerBlock) {
 			if (statReq > 0 && searchStat != null) {
 				searchStat.endSubSearchStats(statReq, api, op, obf, getSearchResults().size(), bytes,
-						bytesLoaded, bytesSkippedBySeek, payloadBytesParsed, decodeTimeNs, matcherTimeNs);
+						bytesLoaded, bytesSkippedBySeek, payloadBytesParsed, decodeTimeNs, matcherTimeNs,
+						blocksLoaded, objectsLoaded, matchedObjects, maxObjectsPerBlock);
 			}
 		}
 

@@ -312,6 +312,10 @@ public class BinaryMapPoiReaderAdapter {
 		long payloadBytesParsed;
 		long decodeTimeNs;
 		long matcherTimeNs;
+		long blocksLoaded;
+		long objectsLoaded;
+		long matchedObjectsLoaded;
+		long maxObjectsPerBlock;
 	}
 
 	protected void searchPoiByName(PoiRegion region, SearchRequest<Amenity> req) throws IOException {
@@ -401,19 +405,26 @@ public class BinaryMapPoiReaderAdapter {
 //						"ms. Found " + offKeys.length + " subtrees");
 				boolean found = false;
 				for (int j = 0; j < offKeys.length; j++) {
+					long existedBeforeBlock = metrics.objectsLoaded;
 					codedIS.seek(offKeys[j] + indexOffset);
 					long len = readInt();
 					long payloadStart = codedIS.getTotalBytesRead();
 					long oldLim = codedIS.pushLimitLong((long) len);
 					found = found || readPoiData(matcher, req, region, metrics);
 					codedIS.popLimit(oldLim);
+					metrics.blocksLoaded++;
+
+					long objectsInBlock = metrics.objectsLoaded - existedBeforeBlock;
+					metrics.maxObjectsPerBlock = Math.max(metrics.maxObjectsPerBlock, objectsInBlock);
 					metrics.payloadBytesParsed += codedIS.getTotalBytesRead() - payloadStart;
 					if (req.isCancelled() || req.limitExceeded()) {
 						req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
 								BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes,
 								codedIS.getBytesLoadedByReadCounter() - bytesLoadedStart,
 								codedIS.getBytesSkippedBySeekCounter() - bytesSkippedBySeekStart,
-								metrics.payloadBytesParsed, metrics.decodeTimeNs, metrics.matcherTimeNs);
+								metrics.payloadBytesParsed, metrics.decodeTimeNs, metrics.matcherTimeNs,
+								metrics.blocksLoaded, metrics.objectsLoaded,
+								metrics.matchedObjectsLoaded, metrics.maxObjectsPerBlock);
 						return;
 					}
 				}
@@ -427,7 +438,9 @@ public class BinaryMapPoiReaderAdapter {
 						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes,
 						codedIS.getBytesLoadedByReadCounter() - bytesLoadedStart,
 						codedIS.getBytesSkippedBySeekCounter() - bytesSkippedBySeekStart,
-						metrics.payloadBytesParsed, metrics.decodeTimeNs, metrics.matcherTimeNs);
+						metrics.payloadBytesParsed, metrics.decodeTimeNs, metrics.matcherTimeNs,
+						metrics.blocksLoaded, metrics.objectsLoaded,
+						metrics.matchedObjectsLoaded, metrics.maxObjectsPerBlock);
 				return;
 			default:
 				skipUnknownField(t);
@@ -774,6 +787,7 @@ public class BinaryMapPoiReaderAdapter {
 				y = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER:
+				metrics.objectsLoaded++;
 				int len = codedIS.readRawVarint32();
 				long oldLim = codedIS.pushLimitLong((long) len);
 				long decodeStartNs = System.nanoTime();
@@ -807,6 +821,7 @@ public class BinaryMapPoiReaderAdapter {
 					}
 					metrics.matcherTimeNs += System.nanoTime() - matcherStartNs;
 					if (matches) {
+						metrics.matchedObjectsLoaded++;
 						req.collectRawData(am);
 						req.publish(am);
 						found = true;
