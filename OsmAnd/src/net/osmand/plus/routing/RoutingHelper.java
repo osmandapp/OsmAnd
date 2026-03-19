@@ -972,6 +972,10 @@ public class RoutingHelper {
 		}
 	}
 
+	public boolean isCurrentSlowRoutingActive() {
+		return routeRecalculationHelper != null && routeRecalculationHelper.isCurrentSlowRoutingActive();
+	}
+
 	public boolean hasCurrentMissingMaps() {
 		return routeRecalculationHelper != null && routeRecalculationHelper.hasCurrentMissingMaps();
 	}

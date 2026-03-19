@@ -337,14 +337,20 @@ class RouteRecalculationHelper {
 		}
 	}
 
-	public boolean hasCurrentMissingMaps() {
+	protected boolean isCurrentSlowRoutingActive() {
+		return lastTask != null
+				&& lastTask.params.calculationProgress != null
+				&& lastTask.params.calculationProgress.isSlowRoutingActive;
+	}
+
+	protected boolean hasCurrentMissingMaps() {
 		return lastTask != null
 				&& lastTask.params.calculationProgress != null
 				&& lastTask.params.calculationProgress.hasMissingMapsNow;
 	}
 
 	@Nullable
-	public MissingMapsCalculationResult getCurrentMissingMapsCalculationResult() {
+	protected MissingMapsCalculationResult getCurrentMissingMapsCalculationResult() {
 		return lastTask != null && lastTask.params.calculationProgress != null ?
 				lastTask.params.calculationProgress.missingMapsCalculationResult : null;
 	}

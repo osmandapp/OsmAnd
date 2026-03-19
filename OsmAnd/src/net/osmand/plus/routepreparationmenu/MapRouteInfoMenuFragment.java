@@ -27,7 +27,6 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -357,6 +356,10 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		return app.getRoutingHelper().isOsmandRouting();
 	}
 
+	private boolean shouldDrawFastRoutingProgressBar() {
+		return !app.getRoutingHelper().isCurrentSlowRoutingActive();
+	}
+
 	public void updateRouteCalculationProgress(int progress) {
 		MapActivity mapActivity = getMapActivity();
 		View mainView = getMainView();
@@ -364,6 +367,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		if (mapActivity == null || mainView == null || view == null) {
 			return;
 		}
+//		boolean isFastRouting = shouldDrawFastRoutingProgressBar(); // TODO UI colors
 		boolean indeterminate = isPublicTransportMode() || !isOsmandRouting();
 		ProgressBar progressBar = mainView.findViewById(R.id.progress_bar);
 		if (progressBar != null) {
