@@ -6120,4 +6120,5 @@
     <string name="astro_explore_deep_sky_subtitle">Galaxie, Skupiny galaxií, Čierne diery</string>
     <string name="shared_string_radians">Radiány</string>
     <string name="obd_alt_battery_voltage_desc">Zobrazuje úroveň napätia na adaptéri OBD</string>
+    <string name="shared_string_unlock">Odomknúť</string>
 </resources>
