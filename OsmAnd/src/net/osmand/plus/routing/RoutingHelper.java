@@ -25,6 +25,7 @@ import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.MissingMapsCalculationResult;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RouteSegmentResult;
@@ -978,6 +979,11 @@ public class RoutingHelper {
 
 	public boolean hasCurrentMissingMaps() {
 		return routeRecalculationHelper != null && routeRecalculationHelper.hasCurrentMissingMaps();
+	}
+
+	@Nullable
+	public RouteCalculationProgress.FastRoutingComplication getCurrentFastRoutingComplication() {
+		return routeRecalculationHelper != null ? routeRecalculationHelper.getCurrentFastRoutingComplication() : null;
 	}
 
 	@Nullable

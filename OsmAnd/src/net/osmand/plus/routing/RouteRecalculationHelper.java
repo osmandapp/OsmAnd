@@ -350,6 +350,12 @@ class RouteRecalculationHelper {
 	}
 
 	@Nullable
+	protected RouteCalculationProgress.FastRoutingComplication getCurrentFastRoutingComplication() {
+		return lastTask != null && lastTask.params.calculationProgress != null
+				? lastTask.params.calculationProgress.getFastRoutingComplication() : null;
+	}
+
+	@Nullable
 	protected MissingMapsCalculationResult getCurrentMissingMapsCalculationResult() {
 		return lastTask != null && lastTask.params.calculationProgress != null ?
 				lastTask.params.calculationProgress.missingMapsCalculationResult : null;

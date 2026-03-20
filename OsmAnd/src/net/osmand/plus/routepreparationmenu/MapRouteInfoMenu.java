@@ -55,6 +55,8 @@ import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingPara
 import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.router.RouteCalculationProgress;
+import net.osmand.router.RouteCalculationProgress.FastRoutingComplication;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -154,7 +156,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean switched;
 	private boolean routeSelected;
 	private boolean currentMuteState;
-	private boolean missingMapsWarningCardDisplayed;
+
+	@Nullable
+	private FastRoutingComplication lastFastRoutingComplication = null;
 
 	private AddressLookupRequest startPointRequest;
 	private AddressLookupRequest targetPointRequest;
@@ -336,8 +340,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void routeCalculationStarted() {
+		lastFastRoutingComplication = null;
 		setRouteCalculationInProgress(true);
-		missingMapsWarningCardDisplayed = false;
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		if (fragmentRef != null && fragment.isVisible()) {
@@ -361,9 +365,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void catchCurrentMissingMaps() {
-		if (app != null && !missingMapsWarningCardDisplayed && hasCurrentMissingMaps(app)) {
-			missingMapsWarningCardDisplayed = true;
-			updateCards();
+		if (app != null && hasCurrentMissingMaps(app)) {
+			FastRoutingComplication complication = app.getRoutingHelper().getCurrentFastRoutingComplication();
+			if (complication != lastFastRoutingComplication) {
+				lastFastRoutingComplication = complication;
+				System.err.printf("XXX complication = %s\n", complication); // TODO remove
+				updateCards();
+			}
 		}
 	}
 
@@ -591,14 +599,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			} else if (app.getRoutingHelper().isBoatMode()) {
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
 			} else if (hasCurrentMissingMaps(app)) {
-				missingMapsWarningCardDisplayed = true;
 				menuCards.add(new MissingMapsWarningCard(mapActivity));
 			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !hasCalculatedMissingMaps) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			}
 		} else {
 			if (hasCalculatedMissingMaps) {
-				missingMapsWarningCardDisplayed = true;
 				menuCards.add(new MissingMapsWarningCard(mapActivity));
 			} else {
 				// Home/work card
@@ -1474,8 +1480,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	public void resetRouteCalculation() {
 		menuAutoMovedAfterCalculationStarted = false;
-		missingMapsWarningCardDisplayed = false;
 		setRouteCalculationInProgress(false);
+		lastFastRoutingComplication = null;
 		restoreCollapsedButtons();
 	}
 

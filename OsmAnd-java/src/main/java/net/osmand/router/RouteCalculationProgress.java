@@ -211,6 +211,10 @@ public class RouteCalculationProgress implements Serializable {
 		SUCCESS
 	}
 
+	public FastRoutingComplication getFastRoutingComplication() {
+		return FastRoutingComplication.values()[fastRoutingComplication];
+	}
+
 	public void resetFastRoutingComplication() {
 		fastRoutingComplication = FastRoutingComplication.READY.ordinal();
 	}
