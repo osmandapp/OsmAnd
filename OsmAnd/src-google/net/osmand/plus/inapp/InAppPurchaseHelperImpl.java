@@ -14,6 +14,7 @@ import com.android.billingclient.api.AccountIdentifiers;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ProductDetails;
+import com.android.billingclient.api.ProductDetails.SubscriptionOfferDetails;
 import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.QueryProductDetailsResult;
@@ -593,11 +594,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			inAppPurchase.restorePurchaseInfo(ctx);
 		}
 		if (BillingClient.ProductType.SUBS.equals(productDetails.getProductType())) {
-			List<ProductDetails.SubscriptionOfferDetails> basePlans = getBasePlans(productDetails);
+			List<SubscriptionOfferDetails> basePlans = getBasePlans(productDetails);
 			if (!Algorithms.isEmpty(basePlans)) {
-				ProductDetails.SubscriptionOfferDetails basePlan = basePlans.get(0);
-				List<ProductDetails.SubscriptionOfferDetails> basePlanOffers = getBasePlanOffers(productDetails, basePlan.getBasePlanId());
-				ProductDetails.SubscriptionOfferDetails offer = Algorithms.isEmpty(basePlanOffers) ? basePlan : basePlanOffers.get(0);
+				SubscriptionOfferDetails basePlan = basePlans.get(0);
+				List<SubscriptionOfferDetails> basePlanOffers = getBasePlanOffers(productDetails, basePlan.getBasePlanId());
+				SubscriptionOfferDetails offer = Algorithms.isEmpty(basePlanOffers) ? basePlan : basePlanOffers.get(0);
 				List<ProductDetails.PricingPhase> offerPricingPhases = offer.getPricingPhases().getPricingPhaseList();
 				List<ProductDetails.PricingPhase> basePlanPricingPhases = basePlan.getPricingPhases().getPricingPhaseList();
 				ProductDetails.PricingPhase pricingPhrase = basePlanPricingPhases.get(basePlanPricingPhases.size() - 1);
@@ -663,13 +664,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Nullable
-	private List<ProductDetails.SubscriptionOfferDetails> getBasePlans(@NonNull ProductDetails productDetails) {
-		List<ProductDetails.SubscriptionOfferDetails> offerDetails = productDetails.getSubscriptionOfferDetails();
+	private List<SubscriptionOfferDetails> getBasePlans(@NonNull ProductDetails productDetails) {
+		List<SubscriptionOfferDetails> offerDetails = productDetails.getSubscriptionOfferDetails();
 		if (Algorithms.isEmpty(offerDetails)) {
 			return null;
 		}
-		ArrayList<ProductDetails.SubscriptionOfferDetails> basePlans = new ArrayList<>();
-		for (ProductDetails.SubscriptionOfferDetails offer : offerDetails) {
+		ArrayList<SubscriptionOfferDetails> basePlans = new ArrayList<>();
+		for (SubscriptionOfferDetails offer : offerDetails) {
 			if (offer.getOfferId() == null) {
 				basePlans.add(offer);
 			}
@@ -678,18 +679,34 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Nullable
-	private List<ProductDetails.SubscriptionOfferDetails> getBasePlanOffers(@NonNull ProductDetails productDetails, @NonNull String basePlanId) {
-		List<ProductDetails.SubscriptionOfferDetails> offerDetails = productDetails.getSubscriptionOfferDetails();
+	private List<SubscriptionOfferDetails> getBasePlanOffers(@NonNull ProductDetails productDetails, @NonNull String basePlanId) {
+		List<SubscriptionOfferDetails> offerDetails = productDetails.getSubscriptionOfferDetails();
 		if (Algorithms.isEmpty(offerDetails)) {
 			return null;
 		}
-		ArrayList<ProductDetails.SubscriptionOfferDetails> offers = new ArrayList<>();
-		for (ProductDetails.SubscriptionOfferDetails offer : offerDetails) {
+		ArrayList<SubscriptionOfferDetails> offers = new ArrayList<>();
+		for (SubscriptionOfferDetails offer : offerDetails) {
 			if (basePlanId.equals(offer.getBasePlanId()) && offer.getOfferId() != null) {
 				offers.add(offer);
 			}
 		}
 		return offers;
+	}
+
+	private int getSelectedSubscriptionOfferIndex(@NonNull ProductDetails productDetails) {
+		List<SubscriptionOfferDetails> offerDetails = productDetails.getSubscriptionOfferDetails();
+		if (Algorithms.isEmpty(offerDetails)) {
+			return 0;
+		}
+		List<SubscriptionOfferDetails> basePlans = getBasePlans(productDetails);
+		if (Algorithms.isEmpty(basePlans)) {
+			return 0;
+		}
+		SubscriptionOfferDetails basePlan = basePlans.get(0);
+		List<SubscriptionOfferDetails> basePlanOffers = getBasePlanOffers(productDetails, basePlan.getBasePlanId());
+		SubscriptionOfferDetails selectedOffer = Algorithms.isEmpty(basePlanOffers) ? basePlan : basePlanOffers.get(0);
+		int selectedOfferIndex = offerDetails.indexOf(selectedOffer);
+		return selectedOfferIndex >= 0 ? selectedOfferIndex : 0;
 	}
 
 	@Override
@@ -704,7 +721,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						BillingManager billingManager = getBillingManager();
 						if (billingManager != null) {
 							billingManager.setObfuscatedAccountId(userInfo);
-							billingManager.initiatePurchaseFlow(a, productDetails, 0);
+							billingManager.initiatePurchaseFlow(a, productDetails, getSelectedSubscriptionOfferIndex(productDetails));
 						} else {
 							throw new IllegalStateException("BillingManager disposed");
 						}

@@ -42,6 +42,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -556,7 +557,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		QListMapMarker markers = mapMarkersCollection.getMarkers();
 		for (int i = 0; i < markers.size(); i++) {
 			net.osmand.core.jni.MapMarker m = markers.get(i);
-			if (m.getPosition().getX() == movableObject.getX() && m.getPosition().getY() == movableObject.getY()) {
+			if (NativeUtilities.arePointsEqual(m.getPosition(), movableObject)) {
 				m.setPosition(new PointI(x, y));
 				m.setIsHidden(false);
 				movableObject = null;
@@ -574,7 +575,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		QListMapMarker markers = mapMarkersCollection.getMarkers();
 		for (int i = 0; i < markers.size(); i++) {
 			net.osmand.core.jni.MapMarker m = markers.get(i);
-			if (m.getPosition().getX() == movableObject.getX() && m.getPosition().getY() == movableObject.getY()) {
+			if (NativeUtilities.arePointsEqual(m.getPosition(), movableObject)) {
 				m.setIsHidden(false);
 				movableObject = null;
 				break;
