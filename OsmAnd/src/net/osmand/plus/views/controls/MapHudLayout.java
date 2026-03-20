@@ -39,6 +39,7 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.shared.grid.ButtonPositionSize;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -74,6 +75,8 @@ public class MapHudLayout extends FrameLayout {
 	private SideWidgetsPanel rightWidgetsPanel;
 	private VerticalWidgetPanel topWidgetsPanel;
 	private VerticalWidgetPanel bottomWidgetsPanel;
+	private View layerParamLayout;
+	private View mapTransparencyLayout;
 
 	private final float dpToPx;
 	private final int topButtonsMargin;
@@ -147,6 +150,8 @@ public class MapHudLayout extends FrameLayout {
 		rightWidgetsPanel = findViewById(R.id.map_right_widgets_panel);
 		topWidgetsPanel = findViewById(R.id.top_widgets_panel);
 		bottomWidgetsPanel = findViewById(R.id.map_bottom_widgets_panel);
+		layerParamLayout = findViewById(R.id.layer_param_layout);
+		mapTransparencyLayout = findViewById(R.id.map_transparency_layout);
 
 		setupPositions();
 	}
@@ -167,6 +172,9 @@ public class MapHudLayout extends FrameLayout {
 
 		addWidget(speedometerWidget);
 		addWidget(alarmWidget);
+
+		addWidget(layerParamLayout);
+		addWidget(mapTransparencyLayout);
 
 		refresh();
 	}
@@ -342,8 +350,12 @@ public class MapHudLayout extends FrameLayout {
 			return 1;
 		} else if (R.id.measurement_buttons == id) {
 			return 2;
-		} else if (R.id.map_ruler_layout == id) {
+		} else if (R.id.layer_param_layout == id) {
 			return 3;
+		} else if (R.id.map_transparency_layout == id) {
+			return 4;
+		} else if (R.id.map_ruler_layout == id) {
+			return 5;
 		}
 		return 100;
 	}
@@ -401,6 +413,10 @@ public class MapHudLayout extends FrameLayout {
 		} else if (id == R.id.measurement_buttons) {
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
+		} else if (id == R.id.layer_param_layout || id == R.id.map_transparency_layout) {
+			position.setMoveVertical();
+			position.setPositionVertical(POS_BOTTOM);
+			position.setPositionHorizontal(POS_LEFT);
 		}
 		return updateWidgetPosition(view, position);
 	}
@@ -452,6 +468,10 @@ public class MapHudLayout extends FrameLayout {
 		} else if (id == R.id.lanes_widget_special_position) {
 			calcGridPositionFromPixel(view, position);
 			position.setMarginY(0);
+		} else if (id == R.id.layer_param_layout || id == R.id.map_transparency_layout) {
+			calcGridPositionFromPixel(view, position);
+			int marginY = getResources().getDimensionPixelSize(R.dimen.map_button_size);
+			position.setMarginY((int) AndroidUtils.pxToDpF(getContext(), marginY) / 8);
 		}
 		return position;
 	}
@@ -569,11 +589,12 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	private boolean shouldIgnoreGravity(@NonNull ButtonPositionSize position) {
-		return Algorithms.objectEquals("lanes_widget_special_position", position.getId());
+		return CollectionUtils.equalsToAny(position.getId(), "lanes_widget_special_position", "layer_param_layout", "map_transparency_layout");
+
 	}
 
 	private boolean shouldIgnoreHorizontalMargins(@NonNull ButtonPositionSize position) {
-		return Algorithms.objectEquals("lanes_widget_special_position", position.getId());
+		return CollectionUtils.equalsToAny(position.getId(), "lanes_widget_special_position", "layer_param_layout", "map_transparency_layout");
 	}
 
 	private boolean shouldIgnoreVerticalMargins(@NonNull ButtonPositionSize position) {
