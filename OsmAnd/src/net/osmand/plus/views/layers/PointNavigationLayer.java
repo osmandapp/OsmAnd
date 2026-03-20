@@ -19,6 +19,7 @@ import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListMapMarker;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -62,6 +63,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	//OpenGL
 	private TextRasterizer.Style captionStyle;
 	private List<TargetPoint> renderedPoints;
+	private int outlineColor;
 	private boolean nightMode;
 
 	public PointNavigationLayer(@NonNull Context context) {
@@ -88,6 +90,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		super.initLayer(view);
 
 		initUI();
+		outlineColor = getColor(R.color.osmand_orange);
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 
@@ -366,7 +369,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	private void drawMarkerOpenGL(@NonNull MapMarkersCollection markersCollection,
 	                              @NonNull Bitmap bitmap, @NonNull PointI position, @Nullable String caption) {
-		if (!getMapView().hasMapRenderer()) {
+		MapRendererView mapRenderer = getMapView().getMapRenderer();
+		if (mapRenderer == null) {
 			return;
 		}
 
@@ -387,6 +391,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 					.setCaption(caption);
 		}
 		mapMarkerBuilder.buildAndAddToCollection(markersCollection);
+
+		mapRenderer.add3DObjectColor(position, NativeUtilities.createFColorRGB(outlineColor));
 	}
 
 	private void initCaptionStyleOpenGL() {
@@ -466,5 +472,22 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			canvas.drawText(label, x + marginX, y - 3 * marginY / 5f, mTextPaint);
 		}
 		canvas.restore();
+	}
+
+	/**OpenGL*/
+	@Override
+	protected void clearMapMarkersCollections() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && mapMarkersCollection != null) {
+			QListMapMarker markers = mapMarkersCollection.getMarkers();
+			for (int i = 0; i < markers.size(); ++i) {
+				MapMarker mapMarker = markers.get(i);
+				PointI position = mapMarker != null ? mapMarker.getPosition() : null;
+				if (position != null) {
+					mapRenderer.remove3DObjectColor(position);
+				}
+			}
+		}
+		super.clearMapMarkersCollections();
 	}
 }

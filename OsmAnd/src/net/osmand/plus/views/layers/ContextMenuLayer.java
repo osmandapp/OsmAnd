@@ -385,10 +385,17 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 
 	private void clearContextMarkerCollection() {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null && contextMarkerCollection != null) {
-			mapRenderer.removeSymbolsProvider(contextMarkerCollection);
-			contextMarkerCollection = null;
-			mapRenderer.removeAll3DObjectColors();
+		if (mapRenderer != null) {
+			if (contextCoreMarker != null) {
+				PointI position = contextCoreMarker.getPosition();
+				if (position != null) {
+					mapRenderer.remove3DObjectColor(position);
+				}
+			}
+			if (contextMarkerCollection != null) {
+				mapRenderer.removeSymbolsProvider(contextMarkerCollection);
+				contextMarkerCollection = null;
+			}
 		}
 	}
 
