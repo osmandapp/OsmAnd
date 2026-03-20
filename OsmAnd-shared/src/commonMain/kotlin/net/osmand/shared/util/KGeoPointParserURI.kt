@@ -1,6 +1,6 @@
 package net.osmand.shared.util
 
-data class KUri(
+data class KGeoPointParserURI(
     val original: String,
     val scheme: String?,
     val host: String?,
@@ -13,7 +13,7 @@ data class KUri(
     val rawSchemeSpecificPart: String
 ) {
     companion object {
-        fun create(uriString: String): KUri? {
+        fun create(uriString: String): KGeoPointParserURI? {
             val schemeMatch = Regex("^([A-Za-z][A-Za-z0-9+\\-.]*):(.*)$").find(uriString) ?: return null
             val scheme = schemeMatch.groupValues[1]
             val afterScheme = schemeMatch.groupValues[2]
@@ -24,7 +24,7 @@ data class KUri(
             val isOpaque = !afterScheme.startsWith("//")
             if (isOpaque) {
                 schemeSpecificPart = decodePlusOutsideQuery(rawSchemeSpecificPart)
-                return KUri(
+                return KGeoPointParserURI(
                     original = uriString,
                     scheme = scheme,
                     host = null,
@@ -73,7 +73,7 @@ data class KUri(
                 if (fragment != null) append("#").append(fragment)
             }
 
-            return KUri(
+            return KGeoPointParserURI(
                 original = uriString,
                 scheme = scheme,
                 host = if (host.isEmpty()) null else host,

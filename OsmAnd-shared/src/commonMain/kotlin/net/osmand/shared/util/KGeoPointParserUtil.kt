@@ -4,7 +4,7 @@ import net.osmand.shared.data.KLatLon
 
 object KGeoPointParserUtil {
 
-    private fun getQueryParameter(param: String, uri: KUri): String? {
+    private fun getQueryParameter(param: String, uri: KGeoPointParserURI): String? {
         val query = uri.query
         var value: String? = null
         if (query != null && query.contains(param)) {
@@ -30,7 +30,7 @@ object KGeoPointParserUtil {
      * @return {@link Map<String, String>} a Map of the query parameters
      */
 
-    internal fun getQueryParameters(uri: KUri): Map<String, String> {
+    internal fun getQueryParameters(uri: KGeoPointParserURI): Map<String, String> {
         var query: String? = null
         if (uri.isOpaque && uri.schemeSpecificPart != null) {
             val schemeSpecificPart = uri.schemeSpecificPart
@@ -122,7 +122,7 @@ object KGeoPointParserUtil {
 		return null
 	}
 
-    fun createUri(uriString: String): KUri? {
+    fun createUri(uriString: String): KGeoPointParserURI? {
         try {
             // amap.com uses | in their URLs, which is an illegal character for a URL
             val normalized = uriString.trim()
@@ -132,13 +132,13 @@ object KGeoPointParserUtil {
                 .replace("|", ";")
                 .replace(Regex("\\(\\(\\S+\\)\\)"), "")
 
-            return KUri.create(normalized)
+            return KGeoPointParserURI.create(normalized)
         } catch (_: Throwable) {
         }
         return null
     }
 
-    private fun parseLinkUri(uri: KUri, scheme: String): List<KGeoParsedPoint>? {
+    private fun parseLinkUri(uri: KGeoPointParserURI, scheme: String): List<KGeoParsedPoint>? {
         var host = uri.host
         var params = getQueryParameters(uri)
         if (scheme == "google.navigation") {
@@ -203,7 +203,7 @@ object KGeoPointParserUtil {
         return null
     }
 
-    private fun parseOsmUri(uri: KUri, path: String, fragment: String?): List<KGeoParsedPoint>? {
+    private fun parseOsmUri(uri: KGeoPointParserURI, path: String, fragment: String?): List<KGeoParsedPoint>? {
         if (path.startsWith("/go/")) {  // short URL form
             val match = Regex("^/go/([A-Za-z0-9_@~]+-*)(?:.*)").matchEntire(path)
             if (match != null) {
@@ -339,7 +339,7 @@ object KGeoPointParserUtil {
     }
 
     private fun parseSimpleDomainsUri(
-        uri: KUri,
+        uri: KGeoPointParserURI,
         path: String,
         params: Map<String, String>,
         fragment: String?
@@ -395,7 +395,7 @@ object KGeoPointParserUtil {
     }
 
     private fun parseGoogleUri(
-        uri: KUri,
+        uri: KGeoPointParserURI,
         path: String,
         params: Map<String, String>,
         fragment: String?,
@@ -509,7 +509,7 @@ object KGeoPointParserUtil {
         return null
     }
 
-    private fun parseAmapUri(uri: KUri, scheme: String, host: String): List<KGeoParsedPoint>? {
+    private fun parseAmapUri(uri: KGeoPointParserURI, scheme: String, host: String): List<KGeoParsedPoint>? {
         /* amap (mis)uses the Fragment, which is not included in the Scheme Specific Part,
 		 * so instead we make a custom "everything but the Authority subString */
         // +4 for the :// and the /
@@ -687,7 +687,7 @@ object KGeoPointParserUtil {
         return null
     }
 
-    private fun parseGeoUri(uri: KUri): List<KGeoParsedPoint>? {
+    private fun parseGeoUri(uri: KGeoPointParserURI): List<KGeoParsedPoint>? {
         var schemeSpecific = uri.schemeSpecificPart
         if (schemeSpecific == null) {
             return null
