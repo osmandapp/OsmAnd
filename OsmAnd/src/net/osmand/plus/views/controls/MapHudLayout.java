@@ -350,11 +350,11 @@ public class MapHudLayout extends FrameLayout {
 			return 1;
 		} else if (R.id.measurement_buttons == id) {
 			return 2;
-		} else if (R.id.layer_param_layout == id) {
-			return 3;
-		} else if (R.id.map_transparency_layout == id) {
-			return 4;
 		} else if (R.id.map_ruler_layout == id) {
+			return 3;
+		} else if (R.id.layer_param_layout == id) {
+			return 4;
+		} else if (R.id.map_transparency_layout == id) {
 			return 5;
 		}
 		return 100;

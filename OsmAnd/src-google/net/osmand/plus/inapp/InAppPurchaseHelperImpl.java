@@ -422,22 +422,22 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 					if (hasDetails(s.getSku())) {
 						Purchase purchase = getPurchase(s.getSku());
-						ProductDetails liveUpdatesDetails = getProductDetails(s.getSku());
-						if (liveUpdatesDetails != null) {
-							fetchInAppPurchase(s, liveUpdatesDetails, purchase);
+						ProductDetails productDetails = getProductDetails(s.getSku());
+						if (productDetails != null) {
+							fetchInAppPurchase(s, productDetails, purchase);
 						}
 						allOwnedSubscriptionProducts.remove(s.getSku());
 					}
 				}
 				for (String products : allOwnedSubscriptionProducts) {
 					Purchase purchase = getPurchase(products);
-					ProductDetails liveUpdatesDetails = getProductDetails(products);
-					if (liveUpdatesDetails != null) {
+					ProductDetails productDetails = getProductDetails(products);
+					if (productDetails != null) {
 						InAppSubscription s = getSubscriptions().upgradeSubscription(products);
 						if (s == null) {
-							s = new InAppPurchaseLiveUpdatesOldSubscription(liveUpdatesDetails);
+							s = new InAppPurchaseLiveUpdatesOldSubscription(productDetails);
 						}
-						fetchInAppPurchase(s, liveUpdatesDetails, purchase);
+						fetchInAppPurchase(s, productDetails, purchase);
 					}
 				}
 
@@ -598,10 +598,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				ProductDetails.SubscriptionOfferDetails basePlan = basePlans.get(0);
 				List<ProductDetails.SubscriptionOfferDetails> basePlanOffers = getBasePlanOffers(productDetails, basePlan.getBasePlanId());
 				ProductDetails.SubscriptionOfferDetails offer = Algorithms.isEmpty(basePlanOffers) ? basePlan : basePlanOffers.get(0);
-				ProductDetails.PricingPhase pricingPhrase = offer.getPricingPhases().getPricingPhaseList().get(0);
+				List<ProductDetails.PricingPhase> offerPricingPhases = offer.getPricingPhases().getPricingPhaseList();
+				List<ProductDetails.PricingPhase> basePlanPricingPhases = basePlan.getPricingPhases().getPricingPhaseList();
+				ProductDetails.PricingPhase pricingPhrase = basePlanPricingPhases.get(basePlanPricingPhases.size() - 1);
 				if (pricingPhrase != null) {
 					inAppPurchase.setPrice(pricingPhrase.getFormattedPrice());
-					inAppPurchase.setOriginalPrice(basePlan.getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice());
+					inAppPurchase.setOriginalPrice(pricingPhrase.getFormattedPrice());
 					inAppPurchase.setPriceCurrencyCode(pricingPhrase.getPriceCurrencyCode());
 					if (pricingPhrase.getPriceAmountMicros() > 0) {
 						inAppPurchase.setPriceValue(pricingPhrase.getPriceAmountMicros() / 1000000d);
@@ -618,7 +620,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						}
 					}
 					if (inAppPurchase instanceof InAppSubscription s) {
-                        s.restoreState(ctx);
+						s.restoreState(ctx);
 						s.restoreExpireTime(ctx);
 						SubscriptionStateHolder stateHolder = subscriptionStateMap.get(s.getSku());
 						if (stateHolder != null) {
@@ -629,8 +631,9 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 							ctx.getSettings().LIVE_UPDATES_EXPIRED_FIRST_DLG_SHOWN_TIME.set(0L);
 							ctx.getSettings().LIVE_UPDATES_EXPIRED_SECOND_DLG_SHOWN_TIME.set(0L);
 						}
+						s.setIntroductoryInfo(null);
 						if (!Algorithms.isEmpty(basePlanOffers)) {
-							ProductDetails.PricingPhase introPricingPhase = basePlanOffers.get(0).getPricingPhases().getPricingPhaseList().get(0);
+							ProductDetails.PricingPhase introPricingPhase = offerPricingPhases.get(0);
 							if (introPricingPhase != null) {
 								String introductoryPrice = introPricingPhase.getFormattedPrice();
 								String introductoryPricePeriod = introPricingPhase.getBillingPeriod();

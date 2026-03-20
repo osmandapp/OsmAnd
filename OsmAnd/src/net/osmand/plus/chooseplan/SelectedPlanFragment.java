@@ -28,6 +28,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.chooseplan.button.PriceButton;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -318,13 +321,15 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	private void updateSelectedPriceButton() {
 		if (selectedPriceButton != null) {
 			View applyButton = mainView.findViewById(R.id.apply_button);
+			TextView tvTitle = applyButton.findViewById(R.id.title);
 			TextView tvPrice = applyButton.findViewById(R.id.description);
-			CharSequence price = selectedPriceButton.getPrice();
+			tvTitle.setText(getApplyButtonTitle(selectedPriceButton));
+			CharSequence price = getApplyButtonDescription(selectedPriceButton);
 			if (price instanceof SpannableStringBuilder) {
 				SpannableStringBuilder formattedPrice = (SpannableStringBuilder) price;
 				ForegroundColorSpan[] textColorSpans =
 						formattedPrice.getSpans(0, formattedPrice.length(), ForegroundColorSpan.class);
-				int textColor = ((TextView) applyButton.findViewById(R.id.title)).getCurrentTextColor();
+				int textColor = tvTitle.getCurrentTextColor();
 				if (textColorSpans.length > 0) {
 					updateSpanColor(formattedPrice, textColorSpans[0], textColor);
 				}
@@ -335,6 +340,36 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 			}
 			tvPrice.setText(price);
 		}
+	}
+
+	@NonNull
+	private CharSequence getApplyButtonTitle(@NonNull PriceButton<?> button) {
+		InAppSubscriptionIntroductoryInfo introductoryInfo = getFreeTrialInfo(button);
+		if (introductoryInfo != null) {
+			return getString(R.string.start_free_trial);
+		}
+		return getString(R.string.complete_purchase);
+	}
+
+	@NonNull
+	private CharSequence getApplyButtonDescription(@NonNull PriceButton<?> button) {
+		InAppSubscriptionIntroductoryInfo introductoryInfo = getFreeTrialInfo(button);
+		if (introductoryInfo != null) {
+			return introductoryInfo.getRenewDescription(app);
+		}
+		return button.getPrice();
+	}
+
+	@Nullable
+	private InAppSubscriptionIntroductoryInfo getFreeTrialInfo(@NonNull PriceButton<?> button) {
+		InAppPurchase purchaseItem = button.getPurchaseItem();
+		if (purchaseItem instanceof InAppSubscription subscription) {
+			InAppSubscriptionIntroductoryInfo introductoryInfo = subscription.getIntroductoryInfo();
+			if (introductoryInfo != null && introductoryInfo.isFreeTrial()) {
+				return introductoryInfo;
+			}
+		}
+		return null;
 	}
 
 	private void updateSpanColor(SpannableStringBuilder spannable, ForegroundColorSpan span, @ColorInt int color) {

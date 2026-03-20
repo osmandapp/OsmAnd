@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="start_free_trial">Start free trial</string>
+    <string name="subscription_free_trial_with_price">%1$s free, then %2$s</string>
+    <string name="subscription_then_price">then %1$s</string>
     <string name="shared_string_radians">Radians</string>
 	<string name="shared_string_unlock">Unlock</string>
 	<string name="no_objects_found">No objects found</string>

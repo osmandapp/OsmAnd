@@ -31,7 +31,7 @@
         android:paddingBottom="@dimen/content_padding_half"
         android:textColor="?attr/wikivoyage_primary_btn_text_color"
         android:textSize="@dimen/default_desc_text_size"
-        app:typefaceWeight="medium"
+        app:typefaceWeight="normal"
         tools:text="€ 11,99 / year" />
 
 </LinearLayout>

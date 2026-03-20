@@ -354,13 +354,17 @@ public class SelectedGpxFile {
 	}
 
 	public void setSplitGroups(List<GpxDisplayGroup> displayGroups, OsmandApplication app) {
+		setSplitGroups(displayGroups, app, false);
+	}
+
+	public void setSplitGroups(List<GpxDisplayGroup> displayGroups, OsmandApplication app, boolean forceUpdate) {
 		if (filteredSelectedGpxFile != null) {
 			filteredSelectedGpxFile.setSplitGroups(displayGroups, app);
 		} else {
 			this.splitProcessed = true;
 			this.splitGroups = displayGroups;
 
-			if (modifiedTime != gpxFile.getModifiedTime()) {
+			if (modifiedTime != gpxFile.getModifiedTime() || forceUpdate) {
 				update(app);
 			}
 		}
