@@ -97,6 +97,7 @@ import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
+import net.osmand.plus.plugins.audionotes.AudioVideoNoteRecordingMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
@@ -127,6 +128,7 @@ import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapLayers;
@@ -864,6 +866,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			boolean transparent = settings.getTransparentMapThemePreference(layoutMode).get();
 			if (panel != null && panel.getVisibility() == View.VISIBLE && panel.isAnyRowVisible() && !transparent) {
 				return ColorUtilities.getWidgetBackgroundColorId(isNightMode());
+			}
+			if (AddGpxPointBottomSheetHelper.isVisible(this)
+					|| AudioVideoNoteRecordingMenu.isVisible(this)) {
+				return ColorUtilities.getListBgColorId(isNightMode());
 			}
 		}
 		return super.getNavigationBarColorId();

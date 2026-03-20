@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -100,11 +101,19 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 		}
 		exitApplyPositionMode();
 		view.setVisibility(View.VISIBLE);
+		onVisibilityChange();
 	}
 
 	public void hide() {
 		exitApplyPositionMode();
 		view.setVisibility(View.GONE);
+		onVisibilityChange();
+	}
+
+	private void onVisibilityChange() {
+		if (mapActivity != null) {
+			mapActivity.updateNavigationBarColor();
+		}
 	}
 
 	public void enterApplyPositionMode() {
@@ -138,6 +147,11 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 		} else {
 			TrackMenuFragment.openTrack(mapActivity, new File(newGpxPoint.getGpx().getPath()), null);
 		}
+	}
+
+	public static boolean isVisible(@NonNull FragmentActivity activity) {
+		View view = activity.findViewById(R.id.add_gpx_point_bottom_sheet);
+		return view != null && view.getVisibility() == View.VISIBLE;
 	}
 
 	public static class NewGpxPoint {

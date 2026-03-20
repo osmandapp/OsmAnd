@@ -12,26 +12,9 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
-		<LinearLayout
-			android:id="@+id/alarms_container"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="bottom|start"
-			android:layout_marginBottom="@dimen/map_alarm_bottom_margin"
-			android:orientation="vertical">
+		<include layout="@layout/map_alarm_warning" />
 
-			<include
-				android:id="@+id/map_alarm_warning"
-				layout="@layout/map_alarm_warning"
-				android:layout_width="@dimen/map_alarm_size"
-				android:layout_height="@dimen/map_alarm_size"
-				android:layout_marginStart="@dimen/content_padding_minimal" />
-
-			<include
-				android:id="@+id/speedometer_widget"
-				layout="@layout/speedometer_widget" />
-
-		</LinearLayout>
+		<include layout="@layout/speedometer_widget" />
 
 		<LinearLayout
 			android:id="@+id/map_transparency_layout"

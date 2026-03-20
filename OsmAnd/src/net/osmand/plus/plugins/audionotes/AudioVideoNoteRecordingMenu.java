@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.Insets;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -124,6 +125,7 @@ public class AudioVideoNoteRecordingMenu {
 		if (plugin.getCurrentRecording().getType() != AVActionType.REC_PHOTO) {
 			startCounter();
 		}
+		onVisibilityChange();
 	}
 
 	public void hide() {
@@ -131,6 +133,18 @@ public class AudioVideoNoteRecordingMenu {
 		view.setVisibility(View.GONE);
 		plugin.stopCamera();
 		viewfinder.removeAllViews();
+		onVisibilityChange();
+	}
+
+	private void onVisibilityChange() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.updateNavigationBarColor();
+		}
+	}
+
+	public boolean isVisible() {
+		return view.getVisibility() == View.VISIBLE;
 	}
 
 	public void update() {
@@ -334,5 +348,10 @@ public class AudioVideoNoteRecordingMenu {
 			topInset = inset.top;
 			bottomInset = inset.bottom;
 		}
+	}
+
+	public static boolean isVisible(@NonNull FragmentActivity activity) {
+		View view = activity.findViewById(R.id.recording_note_layout);
+		return view != null && view.getVisibility() == View.VISIBLE;
 	}
 }

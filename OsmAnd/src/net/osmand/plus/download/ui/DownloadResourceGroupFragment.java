@@ -149,8 +149,11 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 		if (!isInnerDialog) {
 			collection.removeType(Type.ROOT_INSET);
 		} else{
-			collection.add(InsetTarget.createHorizontalLandscape(R.id.sliding_tabs_container, R.id.freeVersionBanner, R.id.downloadProgressLayout, R.id.toolbar).build());
+			collection.add(InsetTarget.createHorizontalLandscape(
+					R.id.sliding_tabs_container, R.id.freeVersionBanner,
+					R.id.downloadProgressLayout, R.id.toolbar).build());
 		}
+		collection.add(InsetTarget.createScrollable(listView));
 		return collection;
 	}
 

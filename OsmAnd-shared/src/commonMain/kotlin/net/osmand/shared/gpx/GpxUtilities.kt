@@ -1211,7 +1211,9 @@ object GpxUtilities {
 
 									"time" -> {
 										val text = readText(parser, "time")
-										parse.time = parseTime(text!!)
+										text?.let {
+											parse.time = parseTime(it)
+										}
 									}
 
 									"keywords" -> parse.keywords = readText(parser, "keywords")
