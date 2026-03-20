@@ -5912,4 +5912,5 @@
     <string name="astro_my_data_no_directions_title">Δεν ορίστηκαν κατευθύνσεις</string>
     <string name="astro_search_in_location">Σε %1$s</string>
     <string name="astro_search_type_in_location">%1$s σε %2$s</string>
+    <string name="shared_string_unlock">Ξεκλείδωμα</string>
 </resources>
