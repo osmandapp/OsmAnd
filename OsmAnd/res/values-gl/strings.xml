@@ -3992,4 +3992,6 @@
     <string name="location_source">Fonte da localización</string>
     <string name="quick_action_map_overlay">Capa superposta</string>
     <string name="quick_action_map_underlay">Capa subxacente</string>
+    <string name="shared_string_radians">Radiáns</string>
+    <string name="shared_string_unlock">Desbloquear</string>
 </resources>
