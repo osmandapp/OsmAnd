@@ -26,8 +26,8 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ShiftedBitmap;
-import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -62,6 +62,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	//OpenGL
 	private TextRasterizer.Style captionStyle;
 	private List<TargetPoint> renderedPoints;
+	private int outlineColor;
 	private boolean nightMode;
 
 	public PointNavigationLayer(@NonNull Context context) {
@@ -88,6 +89,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		super.initLayer(view);
 
 		initUI();
+		outlineColor = getColor(R.color.osmand_orange);
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 
@@ -366,7 +368,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	private void drawMarkerOpenGL(@NonNull MapMarkersCollection markersCollection,
 	                              @NonNull Bitmap bitmap, @NonNull PointI position, @Nullable String caption) {
-		if (!getMapView().hasMapRenderer()) {
+		MapRendererView mapRenderer = getMapView().getMapRenderer();
+		if (mapRenderer == null) {
 			return;
 		}
 
@@ -387,6 +390,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 					.setCaption(caption);
 		}
 		mapMarkerBuilder.buildAndAddToCollection(markersCollection);
+
+		mapRenderer.add3DObjectColor(position, NativeUtilities.createFColorRGB(outlineColor));
 	}
 
 	private void initCaptionStyleOpenGL() {
@@ -466,5 +471,16 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			canvas.drawText(label, x + marginX, y - 3 * marginY / 5f, mTextPaint);
 		}
 		canvas.restore();
+	}
+
+	/**OpenGL*/
+	@Override
+	protected void clearMapMarkersCollections() {
+		super.clearMapMarkersCollections();
+
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.removeAll3DObjectColors();
+		}
 	}
 }

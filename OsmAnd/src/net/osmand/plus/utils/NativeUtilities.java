@@ -547,4 +547,8 @@ public class NativeUtilities {
 		boolean ok = OsmAndCore.copyPixels(iconData.getBitmap(), bitmap);
 		return ok ? bitmap : null;
 	}
+
+	public static boolean arePointsEqual(@Nullable PointI first, @Nullable PointI second) {
+		return first != null && second != null && first.getX() == second.getX() && first.getY() == second.getY();
+	}
 }
