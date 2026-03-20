@@ -974,22 +974,21 @@ public class RoutingHelper {
 	}
 
 	public boolean isCurrentSlowRoutingActive() {
-		return routeRecalculationHelper != null && routeRecalculationHelper.isCurrentSlowRoutingActive();
+		return routeRecalculationHelper.isCurrentSlowRoutingActive();
 	}
 
 	public boolean hasCurrentMissingMaps() {
-		return routeRecalculationHelper != null && routeRecalculationHelper.hasCurrentMissingMaps();
+		return routeRecalculationHelper.hasCurrentMissingMaps();
 	}
 
 	@Nullable
 	public RouteCalculationProgress.FastRoutingComplication getCurrentFastRoutingComplication() {
-		return routeRecalculationHelper != null ? routeRecalculationHelper.getCurrentFastRoutingComplication() : null;
+		return routeRecalculationHelper.getCurrentFastRoutingComplication();
 	}
 
 	@Nullable
 	public MissingMapsCalculationResult getCurrentMissingMapsCalculationResult() {
-		return routeRecalculationHelper != null ?
-				routeRecalculationHelper.getCurrentMissingMapsCalculationResult() : null;
+		return routeRecalculationHelper.getCurrentMissingMapsCalculationResult();
 	}
 
 	public void stopCalculationImmediately() {
