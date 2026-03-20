@@ -19,7 +19,6 @@ import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QListMapMarker;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -27,8 +26,8 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ShiftedBitmap;
-import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -477,17 +476,11 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	/**OpenGL*/
 	@Override
 	protected void clearMapMarkersCollections() {
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null && mapMarkersCollection != null) {
-			QListMapMarker markers = mapMarkersCollection.getMarkers();
-			for (int i = 0; i < markers.size(); ++i) {
-				MapMarker mapMarker = markers.get(i);
-				PointI position = mapMarker != null ? mapMarker.getPosition() : null;
-				if (position != null) {
-					mapRenderer.remove3DObjectColor(position);
-				}
-			}
-		}
 		super.clearMapMarkersCollections();
+
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.removeAll3DObjectColors();
+		}
 	}
 }
