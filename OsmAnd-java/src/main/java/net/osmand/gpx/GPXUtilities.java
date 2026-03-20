@@ -289,8 +289,8 @@ public class GPXUtilities {
 		// by default
 		public long time = 0;
 		public double ele = Double.NaN;
-		public double speed = 0;
-		public double hdop = Double.NaN;
+		public float speed = 0f;
+		public float hdop = Float.NaN;
 		public float heading = Float.NaN;
 		public float bearing = Float.NaN;
 		public boolean deleted = false;
@@ -324,7 +324,7 @@ public class GPXUtilities {
 			this.slopeColor = wptPt.slopeColor;
 			this.colourARGB = wptPt.colourARGB;
 			this.distance = wptPt.distance;
-			getExtensionsToWrite().putAll(wptPt.getExtensionsToWrite());
+			copyExtensions(wptPt);
 		}
 
 		public void setDistance(double dist) {
@@ -356,11 +356,11 @@ public class GPXUtilities {
 			this.lon = lon;
 		}
 
-		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop) {
+		public WptPt(double lat, double lon, long time, double ele, float speed, float hdop) {
 			this(lat, lon, time, ele, speed, hdop, Float.NaN);
 		}
 
-		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop, float heading) {
+		public WptPt(double lat, double lon, long time, double ele, float speed, float hdop, float heading) {
 			this.lat = lat;
 			this.lon = lon;
 			this.time = time;
@@ -541,7 +541,7 @@ public class GPXUtilities {
 		                                        String amenityOriginName, Map<String, String> amenityExtensions) {
 			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
 			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
-			WptPt point = new WptPt(latAdjusted, lonAdjusted, System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
+			WptPt point = new WptPt(latAdjusted, lonAdjusted, System.currentTimeMillis(), Double.NaN, 0, Float.NaN);
 			point.name = name;
 			point.category = category;
 			point.desc = description;
@@ -2141,8 +2141,8 @@ public class GPXUtilities {
 		double ele = Double.isNaN(previous.ele + next.ele)
 				? Double.NaN
 				: previous.ele + (next.ele - previous.ele) * projectionCoeff;
-		double speed = previous.speed + (next.speed - previous.speed) * projectionCoeff;
-		return new WptPt(lat, lon, time, ele, speed, Double.NaN);
+		float speed = (float) (previous.speed + (next.speed - previous.speed) * projectionCoeff);
+		return new WptPt(lat, lon, time, ele, speed, Float.NaN);
 	}
 
 	public static void interpolateEmptyElevationWpts(List<WptPt> pts) {

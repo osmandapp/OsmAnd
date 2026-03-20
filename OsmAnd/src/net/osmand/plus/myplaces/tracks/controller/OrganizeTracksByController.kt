@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentManager
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.base.containers.ScreenItem
 import net.osmand.plus.base.dialog.BaseDialogController
+import net.osmand.plus.chooseplan.ChoosePlanFragment
+import net.osmand.plus.chooseplan.OsmAndFeature
 import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.DIALOG_SUMMARY
 import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.DIVIDER_FULL
 import net.osmand.plus.myplaces.tracks.dialogs.OrganizeTracksByAdapter.Companion.DIVIDER_WITH_PADDING
@@ -45,8 +47,6 @@ class OrganizeTracksByController(
 			return app.dialogManager.findController(PROCESS_ID) as? OrganizeTracksByController
 		}
 	}
-
-	var fragmentActivity: FragmentActivity? = null
 
 	// Current selection state (null represents "None")
 	var selectedType: OrganizeByType? = null
@@ -90,6 +90,12 @@ class OrganizeTracksByController(
 		)
 	}
 
+	fun onGetProTypeClicked(type: OrganizeByType?) {
+		activity?.let {
+			ChoosePlanFragment.showInstance(it, OsmAndFeature.ADVANCED_WIDGETS)
+		}
+	}
+
 	fun selectType(type: OrganizeByType?) {
 		if (selectedType != type) {
 			selectedType = type
@@ -97,7 +103,7 @@ class OrganizeTracksByController(
 		}
 	}
 
-	fun askSaveChanges(activity: FragmentActivity?) {
+	fun askSaveChanges() {
 		val type = selectedType
 		val newParams: OrganizeByParams? = if (type != null) {
 			if (type.isRangeRelated()) {
@@ -120,20 +126,27 @@ class OrganizeTracksByController(
 			// Selection cleared (None)
 			null
 		}
-
-		app.smartFolderHelper.setOrganizeByParams(folderId, newParams)
-		showStepSizeDialogIfNeeded(activity)
+		if (!showStepSizeDialogIfNeeded(activity, newParams)) {
+			app.smartFolderHelper.setOrganizeByParams(folderId, newParams)
+		}
 	}
 
-	private fun showStepSizeDialogIfNeeded(activity: FragmentActivity?) {
-		val type = selectedType ?: return
+	private fun showStepSizeDialogIfNeeded(
+		activity: FragmentActivity?,
+		newParams: OrganizeByParams?): Boolean {
+		val type = selectedType ?: return false
 		if (type.isRangeRelated()) {
-			val manager = activity?.supportFragmentManager ?: return
-			val params = app.smartFolderHelper.getOrganizeByParams(folderId)
-			if (params is OrganizeByRangeParams) {
-				val stepSize = type.getDisplayUnits().fromBase(params.stepSize).toInt()
-				OrganizeTracksStepController.showDialog(app, manager, appMode, folderId, type, stepSize)
+			val manager = activity?.supportFragmentManager ?: return false
+			if (newParams is OrganizeByRangeParams) {
+				OrganizeTracksStepController.showDialog(
+					app,
+					manager,
+					appMode,
+					folderId,
+					newParams)
+				return true
 			}
 		}
+		return false
 	}
 }

@@ -17,6 +17,7 @@ import android.util.Pair;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
@@ -59,6 +60,9 @@ import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
@@ -954,6 +958,18 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		lp.weight = 1;
 		ll.addView(scrollView, lp);
 		scrollView.addView(view);
+
+		dialog.setOnShowListener(d -> {
+			Window window = dialog.getWindow();
+			View decorView = window != null ? window.getDecorView() : null;
+			if (decorView != null) {
+				InsetsUtils.setWindowInsetsListener(decorView, (v, insets) -> {
+					InsetTargetsCollection targetsCollection = new InsetTargetsCollection();
+					targetsCollection.add(InsetTarget.createRootInset());
+					InsetsUtils.processInsets(decorView, targetsCollection, insets);
+				}, false);
+			}
+		});
 
 		dialog.setContentView(ll);
 		dialog.setCancelable(true);

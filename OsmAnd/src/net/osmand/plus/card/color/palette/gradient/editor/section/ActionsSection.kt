@@ -33,7 +33,7 @@ class ActionsSection(
 			val enabled = newState.enabled
 
 			val iconColor = if (enabled) {
-				ColorUtilities.getColor(app, R.color.design_default_color_error)
+				ColorUtilities.getColor(app, R.color.icon_color_warning)
 			} else {
 				ColorUtilities.getDefaultIconColor(app, nightMode)
 			}
