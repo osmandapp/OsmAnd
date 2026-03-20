@@ -87,52 +87,6 @@ data class KUri(
             )
         }
 
-        fun urlDecode(value: String): String {
-            if (value.isEmpty()) return value
-
-            val bytes = mutableListOf<Byte>()
-            val out = StringBuilder()
-            var i = 0
-
-            fun flushBytes() {
-                if (bytes.isNotEmpty()) {
-                    out.append(bytes.toByteArray().decodeToString())
-                    bytes.clear()
-                }
-            }
-
-            while (i < value.length) {
-                val c = value[i]
-                when {
-                    c == '+' -> {
-                        flushBytes()
-                        out.append(' ')
-                        i++
-                    }
-                    c == '%' && i + 2 < value.length -> {
-                        val hex = value.substring(i + 1, i + 3)
-                        val byte = hex.toIntOrNull(16)
-                        if (byte != null) {
-                            bytes.add(byte.toByte())
-                            i += 3
-                        } else {
-                            flushBytes()
-                            out.append(c)
-                            i++
-                        }
-                    }
-                    else -> {
-                        flushBytes()
-                        out.append(c)
-                        i++
-                    }
-                }
-            }
-
-            flushBytes()
-            return out.toString()
-        }
-
         private fun decodePlusOutsideQuery(value: String): String {
             return value
         }

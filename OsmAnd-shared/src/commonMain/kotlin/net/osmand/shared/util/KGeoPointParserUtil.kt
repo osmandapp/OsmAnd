@@ -55,7 +55,7 @@ object KGeoPointParserUtil {
                 if (keyValue.size == 1) {
                     map[keyValue[0]] = ""
                 } else if (keyValue.size > 1) {
-                    map[keyValue[0]] = KUri.urlDecode(keyValue[1])
+                    map[keyValue[0]] = UrlEncoder.decode(keyValue[1])
                 }
             }
         }
@@ -699,7 +699,7 @@ object KGeoPointParserUtil {
         var name: String? = null
         val nameMatch = Regex("[\\+\\s]*\\((.*)\\)[\\+\\s]*$").find(schemeSpecific)
         if (nameMatch != null) {
-            name = KUri.urlDecode(nameMatch.groupValues[1])
+            name = UrlEncoder.decode(nameMatch.groupValues[1])
             schemeSpecific = schemeSpecific.substring(0, nameMatch.range.first)
         }
 
@@ -743,13 +743,13 @@ object KGeoPointParserUtil {
             if (paramName == "z" && paramValue != null) {
                 zoom = paramValue.toFloat().toInt()
             } else if (paramName == "q" && paramValue != null) {
-                searchRequest = KUri.urlDecode(paramValue)
+                searchRequest = UrlEncoder.decode(paramValue)
             }
         }
 
         if (searchRequest != null) {
             val searchPattern = Regex("(?:\\.|,|\\s+|\\+|[+-]?\\d+(?:\\.\\d+)?)")
-            val search = searchRequest.split(searchPattern)
+            val search = searchRequest.split(searchPattern).dropLastWhile { it.isEmpty() }
             if (search.isNotEmpty()) {
                 return listOf(KGeoParsedPoint(searchRequest))
             }
@@ -792,11 +792,11 @@ object KGeoPointParserUtil {
 
         if (path.contains("+")) {
             val plusIndex = path.indexOf("+")
-            path = path.substring(0, plusIndex)   // TODO: Ask is this correct code? Maybe we need to run "descr" code line before "path" line. Because "path" overwrites itself and "descr" should be always empty.
             descr = path.substring(plusIndex + 1)
             if (descr.contains(")")) {
                 descr = descr.substring(0, descr.indexOf(")"))
             }
+            path = path.substring(0, plusIndex)
         }
 
         if (mutableParams.containsKey("z")) {
@@ -834,7 +834,7 @@ object KGeoPointParserUtil {
             }
         }
 
-        return listOf(KGeoParsedPoint(KUri.urlDecode(opath)))
+        return listOf(KGeoParsedPoint(UrlEncoder.decode(opath)))
     }
 
     private fun silentSplit(vl: String?, split: String): Array<String>? {
