@@ -6113,4 +6113,7 @@
     <string name="obd_alt_battery_voltage_desc">Montras tension ĉe la OBD-adaptilo</string>
     <string name="shared_string_radians">Radianoj</string>
     <string name="shared_string_unlock">Malŝlosi</string>
+    <string name="start_free_trial">Komenci senpagan provperiodon</string>
+    <string name="subscription_free_trial_with_price">%1$s senpage, poste %2$s</string>
+    <string name="subscription_then_price">poste %1$s</string>
 </resources>
