@@ -49,7 +49,11 @@ public class RouteCalculationProgress implements Serializable {
 	public boolean requestPrivateAccessRouting;
 
 	public long routeCalculationStartTime;
+
+	public boolean hasMissingMapsNow; // One-way to JNI
 	public MissingMapsCalculationResult missingMapsCalculationResult;
+	public boolean isSlowRoutingActive = false; // Not for JNI (updated in RoutePlannerFrontEnd.java)
+	private int fastRoutingComplication = FastRoutingComplication.READY.ordinal(); // Two-way from/to JNI
 
 	private int hhIterationStep = HHIteration.HH_NOT_STARTED.ordinal();
 	private int hhTargetsDone, hhTargetsTotal;
@@ -129,7 +133,7 @@ public class RouteCalculationProgress implements Serializable {
 		return map;
 	}
 
-	public float getLinearProgressHH() {
+	private float getLinearProgressHH() {
 		float progress = 0;
 		for (HHIteration i : HHIteration.values()) {
 			if (i.ordinal() == hhIterationStep) {
@@ -150,7 +154,7 @@ public class RouteCalculationProgress implements Serializable {
 	}
 
 	public float getLinearProgress() {
-		if(hhIterationStep != HHIteration.HH_NOT_STARTED.ordinal()) {
+		if (hhIterationStep != HHIteration.HH_NOT_STARTED.ordinal()) {
 			return getLinearProgressHH();
 		}
 		float p = Math.max(distanceFromBegin, distanceFromEnd);
@@ -186,6 +190,55 @@ public class RouteCalculationProgress implements Serializable {
 	public void nextIteration() {
 		iteration++;
 		totalEstimatedDistance = 0;
+	}
+
+	public enum FastRoutingComplication {
+		READY,
+
+		// MissingMapsCalculator
+		MIXED_MAPS_INTERMEDIATES,
+		MISSING_MAPS_INTERMEDIATES,
+		MIXED_MAPS_AT_START_OR_END,
+		MISSING_MAPS_AT_START_OR_END,
+
+		// HHRoutePlanner
+		FAILED_WITH_MIXED_MAPS,
+		FAILED_WITH_MISSING_MAPS,
+		FAILED_NO_HH_ROUTING_DATA, // pedestrian profile, ancient maps, etc
+		FAILED_WITHOUT_MAP_ISSUES, // unsupported parameters, unusual geometry (Roma to Barcelona), etc
+
+		CANCELLED,
+		SUCCESS
+	}
+
+	public FastRoutingComplication getFastRoutingComplication() {
+		return FastRoutingComplication.values()[fastRoutingComplication];
+	}
+
+	public void resetFastRoutingComplication() {
+		fastRoutingComplication = FastRoutingComplication.READY.ordinal();
+	}
+
+	public void updateFastRoutingComplication(FastRoutingComplication reason) {
+		if (reason.ordinal() > fastRoutingComplication) {
+			fastRoutingComplication = reason.ordinal();
+		}
+	}
+
+	public void applyFastRoutingFailureStatus() {
+		if (fastRoutingComplication == FastRoutingComplication.FAILED_WITH_MIXED_MAPS.ordinal()
+				|| fastRoutingComplication == FastRoutingComplication.MIXED_MAPS_INTERMEDIATES.ordinal()
+				|| fastRoutingComplication == FastRoutingComplication.MIXED_MAPS_AT_START_OR_END.ordinal()) {
+			updateFastRoutingComplication(FastRoutingComplication.FAILED_WITH_MIXED_MAPS);
+
+		} else if (fastRoutingComplication == FastRoutingComplication.FAILED_WITH_MISSING_MAPS.ordinal()
+				|| fastRoutingComplication == FastRoutingComplication.MISSING_MAPS_INTERMEDIATES.ordinal()
+				|| fastRoutingComplication == FastRoutingComplication.MISSING_MAPS_AT_START_OR_END.ordinal()) {
+			updateFastRoutingComplication(FastRoutingComplication.FAILED_WITH_MISSING_MAPS);
+
+		} else {
+			updateFastRoutingComplication(FastRoutingComplication.FAILED_WITHOUT_MAP_ISSUES);
+		}
 	}
 
 	public enum HHIteration {

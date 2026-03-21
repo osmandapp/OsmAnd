@@ -55,6 +55,8 @@ import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingPara
 import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.router.RouteCalculationProgress;
+import net.osmand.router.RouteCalculationProgress.FastRoutingComplication;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -115,15 +117,11 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import org.apache.commons.logging.Log;
-
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.*;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
-
-	private static final Log LOG = PlatformUtil.getLog(MapRouteInfoMenu.class);
 
 	private static final int BUTTON_ANIMATION_DELAY = 2000;
 	public static final int DEFAULT_MENU_STATE = 0;
@@ -158,6 +156,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean switched;
 	private boolean routeSelected;
 	private boolean currentMuteState;
+
+	@Nullable
+	private FastRoutingComplication lastFastRoutingComplication = null;
 
 	private AddressLookupRequest startPointRequest;
 	private AddressLookupRequest targetPointRequest;
@@ -339,6 +340,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void routeCalculationStarted() {
+		lastFastRoutingComplication = null;
 		setRouteCalculationInProgress(true);
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
@@ -358,6 +360,18 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				fragment.updateInfo();
 			}
 			fragment.updateRouteCalculationProgress(progress);
+			catchCurrentMissingMaps();
+		}
+	}
+
+	private void catchCurrentMissingMaps() {
+		if (app != null && hasCurrentMissingMaps(app)) {
+			FastRoutingComplication complication = app.getRoutingHelper().getCurrentFastRoutingComplication();
+			if (complication != lastFastRoutingComplication) {
+				lastFastRoutingComplication = complication;
+				System.err.printf("XXX complication = %s\n", complication); // TODO remove
+				updateCards();
+			}
 		}
 	}
 
@@ -584,6 +598,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
 			} else if (app.getRoutingHelper().isBoatMode()) {
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
+			} else if (hasCurrentMissingMaps(app)) {
+				menuCards.add(new MissingMapsWarningCard(mapActivity));
 			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !hasCalculatedMissingMaps) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			}
@@ -654,6 +670,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private boolean hasCalculatedMissingMaps(@NonNull OsmandApplication app) {
 		return app.getRoutingHelper().getRoute().hasMissingMaps();
+	}
+
+	private boolean hasCurrentMissingMaps(@NonNull OsmandApplication app) {
+		return app.getRoutingHelper().hasCurrentMissingMaps();
 	}
 
 	private void setupCards() {
@@ -1461,6 +1481,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void resetRouteCalculation() {
 		menuAutoMovedAfterCalculationStarted = false;
 		setRouteCalculationInProgress(false);
+		lastFastRoutingComplication = null;
 		restoreCollapsedButtons();
 	}
 

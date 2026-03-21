@@ -37,6 +37,7 @@ public class RoutePlannerFrontEnd {
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	public static boolean CALCULATE_MISSING_MAPS = true;
+	public static boolean CONTINUE_ON_MISSING_MAPS = true;
 	static boolean TRACE_ROUTING = false;
 	private boolean useSmartRouteRecalculation = true;
 	private boolean useGeometryBasedApproximation = false;
@@ -403,7 +404,11 @@ public class RoutePlannerFrontEnd {
 		if (CALCULATE_MISSING_MAPS) {
 			MissingMapsCalculator calculator = new MissingMapsCalculator(osmandRegions);
 			if (calculator.checkIfThereAreMissingMaps(ctx, start, targets, hhRoutingConfig != null)) {
-				return new RouteCalcResult(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
+				if (CONTINUE_ON_MISSING_MAPS) {
+					log.info(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
+				} else {
+					return new RouteCalcResult(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
+				}
 			}
 		}
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
@@ -428,6 +433,8 @@ public class RoutePlannerFrontEnd {
 				}
 			}
 		}
+
+		ctx.calculationProgress.isSlowRoutingActive = true; // entry point for BRP-java and BRP-cpp
 
 		double maxDistance = MapUtils.getDistance(start, end);
 		if (!intermediatesEmpty) {

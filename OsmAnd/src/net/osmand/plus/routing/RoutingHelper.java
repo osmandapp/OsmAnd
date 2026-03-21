@@ -24,6 +24,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GpxRouteApproximation;
+import net.osmand.router.MissingMapsCalculationResult;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RouteSegmentResult;
@@ -969,5 +971,27 @@ public class RoutingHelper {
 		if (route.isCalculated()) {
 			voiceRouter.newRouteIsCalculated(true);
 		}
+	}
+
+	public boolean isCurrentSlowRoutingActive() {
+		return routeRecalculationHelper.isCurrentSlowRoutingActive();
+	}
+
+	public boolean hasCurrentMissingMaps() {
+		return routeRecalculationHelper.hasCurrentMissingMaps();
+	}
+
+	@Nullable
+	public RouteCalculationProgress.FastRoutingComplication getCurrentFastRoutingComplication() {
+		return routeRecalculationHelper.getCurrentFastRoutingComplication();
+	}
+
+	@Nullable
+	public MissingMapsCalculationResult getCurrentMissingMapsCalculationResult() {
+		return routeRecalculationHelper.getCurrentMissingMapsCalculationResult();
+	}
+
+	public void stopCalculationImmediately() {
+		routeRecalculationHelper.stopCalculation();
 	}
 }
