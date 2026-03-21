@@ -6054,7 +6054,7 @@
     <string name="astro_type_globular_cluster">Кугласти кластер</string>
     <string name="astro_type_galaxy_cluster">Галаксијски кластер</string>
     <string name="astro_type_constellation">Сазвежђе</string>
-    <string name="no_objects_found">Није пронађен ниједан објекат</string>
+    <string name="no_objects_found">Нема пронађених предмета</string>
     <string name="astro_search_info_solar_system">Сунчев систем је гравитационо везан систем Сунца и маса које круже око њега, а најзначајније његових осам планета, од којих је Земља једна.</string>
     <string name="astro_search_info_constellations">Сазвежђе је подручје на небеској сфери у којем група видљивих звезда формира перципирани образац или обрис.</string>
     <string name="astro_search_info_stars">Звезде су светлећи астрономски објекти направљени од плазме, које држи на окупу сопствена гравитација.</string>

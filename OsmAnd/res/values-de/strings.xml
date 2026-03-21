@@ -6131,4 +6131,6 @@
     <string name="astro_my_data_no_directions_title">Zielführung nicht aktiv</string>
     <string name="astro_my_data_no_directions_description">Zielführung ermöglicht Ihnen einen Pfeil anzeigen zu lassen, der auf einen Himmelskörper zeigt. Sie können sie mittels des Kontextmenüs aktivieren.</string>
     <string name="astro_search_magnitude_short">mag %.1f</string>
+    <string name="shared_string_radians">Radien</string>
+    <string name="shared_string_unlock">Entsperren</string>
 </resources>
