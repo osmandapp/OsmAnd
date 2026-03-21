@@ -1329,7 +1329,7 @@
     <string name="parked_at">остављена у</string>
     <string name="pick_up_till">Покупити до</string>
     <string name="without_time_limit">Без временског ограничења</string>
-    <string name="context_menu_read_full_article">Читати цео чланак</string>
+    <string name="context_menu_read_full_article">Прочитај цео чланак</string>
     <string name="context_menu_read_article">Читати чланак</string>
     <string name="context_menu_points_of_group">Све тачке групе</string>
     <string name="open_from">Отворено од</string>
@@ -4525,7 +4525,7 @@
     <string name="map_rendering_engine_descr">Верзија 1 је била подразумевана пре ОсмАнд 4.3 и одговара старијим уређајима.\n\nВерзија 2 (ОпенГЛ) је напреднија и додаје функције попут 3Д приказа.</string>
     <string name="map_rendering_engine">Погон приказа карата</string>
     <string name="external_sensors_support">Подршка спољних пријемника</string>
-    <string name="external_sensor_widgets">Спољашњи пријемници</string>
+    <string name="external_sensor_widgets">Спољни сензори</string>
     <string name="map_widget_camera_tilt_desc">Приказује нагнутост камере у прегледу простора. Подразумевана нагнутост је 90° (без нагињања).</string>
     <string name="map_widget_camera_distance_desc">Приказује уздигнуће камере изнад површи.</string>
     <string name="map_widget_ant_bicycle_dist">Растојање бицикла</string>
@@ -4664,7 +4664,7 @@
     <string name="shared_string_original">Оригинал</string>
     <string name="movement_speed">Брзина кретања</string>
     <string name="shared_string_inches">инчи</string>
-    <string name="x_axis">X-осовина</string>
+    <string name="x_axis">Х-оса</string>
     <string name="selected_value">Одабрана вредност</string>
     <string name="sort_duration_ascending">Најпре најкраће трајање</string>
     <string name="sort_duration_descending">Најпре најдуже трајање</string>
@@ -4685,7 +4685,7 @@
     <string name="sound_beep_complex_loud">Бип: бучaн сложен</string>
     <string name="sound_beep_simple">Бип: једноставан</string>
     <string name="sound_beep_simple_loud">Бип: једноставан бучан</string>
-    <string name="y_axis">Y-осовина</string>
+    <string name="y_axis">Y-оса</string>
     <string name="approximate_bearing_descr">Изведите усмерење из путање навођења.</string>
     <string name="approximate_bearing">Приближно одреди усмерење у простору</string>
     <string name="shared_string_cross_buy">Унакрсна куповина</string>
@@ -4814,7 +4814,7 @@
     <string name="external_device_forget_sensor">Заборави пријемник</string>
     <string name="clear_online_cache_description">Ово ће очистити захват за мрежне временске плочице.</string>
     <string name="clear_online_cache">Очисти мрежни захват</string>
-    <string name="shared_string_alt_name">Заменско име</string>
+    <string name="shared_string_alt_name">Алтернативни назив</string>
     <string name="token_is_not_valid">Тока није вредећа</string>
     <string name="device_connected">Неповезан је %1$s</string>
     <string name="ant_plus_nothing_found_description">Проверите да ли је:
@@ -5391,7 +5391,7 @@
     <string name="delete_widget">Обрисати справицу?</string>
     <string name="delete_widget_description">Ова ће справица бити обрисана. Можете је повратити касније у поставкама приказа.</string>
     <string name="battery_saving_mode">Режим уштеде батерије</string>
-    <string name="graph_axis">Сликовна оса</string>
+    <string name="graph_axis">Графичка оса</string>
     <string name="app_mode_suv">СУВ</string>
     <string name="y_axis_description">Изаберите до две могућности за осу У.</string>
     <string name="rendering_attr_alpineHiking_name">Степен тежине пешачких стаза</string>
@@ -5887,8 +5887,8 @@
     <string name="copy_link">Копирај везу</string>
     <string name="show_spherical_map">Приказ земаљске кугле</string>
     <string name="enable_3d_objects">Просторни приказ зграда</string>
-    <string name="has_vehicle_metrics">Са подацима ОБДИИ</string>
-    <string name="vehicle_metrics_chart_category">Мерења са возила</string>
+    <string name="has_vehicle_metrics">Са подацима ДНВII</string>
+    <string name="vehicle_metrics_chart_category">Метрика возила</string>
     <string name="delete_folder_description">Да ли избрисати омот „%1$s“?</string>
     <string name="buildings_3d_detail_level">Подробни просторни приказ зграда</string>
     <string name="lang_mi">Маорски</string>
@@ -6102,4 +6102,7 @@
     <string name="obd_alt_battery_voltage_desc">Приказује ниво напона на ДНВ адаптеру</string>
     <string name="shared_string_radians">Радијана</string>
     <string name="shared_string_unlock">Откључај</string>
+    <string name="start_free_trial">Започните бесплатни период</string>
+    <string name="subscription_free_trial_with_price">%1$s бесплатно, затим %2$s</string>
+    <string name="subscription_then_price">затим %1$s</string>
 </resources>
