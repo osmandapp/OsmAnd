@@ -336,7 +336,7 @@ public class BinaryMapIndexReaderStats {
 				sb.append("\n");
 				sb.append(padRight(c1, w1)).append(", ")
 						.append(padRight(c2, w2)).append(", ").append(padRight(c3, w3)).append(", ")
-						.append(padRight(c4, w4)).append(", ").append(padRight(c5, w5)).append(", ")
+						.append(padRight(c4, w4)).append(", ").append(padRight(c5, w5)).append(", ").append(padRight(c6, w6)).append(", ")
 						.append(padRight(c8, w8)).append(", ").append(padRight(c9, w9)).append(", ")
 						.append(padRight(c10, w10)).append(", ").append(padRight(c11, w11)).append(", ")
 						.append(padRight(c12, w12)).append(", ").append(padRight(c13, w13)).append(", ")
