@@ -1,7 +1,5 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.BUILDINGS_3D;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.ProgressHelper;
-import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -32,10 +28,6 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
-import net.osmand.render.RenderingRuleProperty;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Buildings3DFragment extends BaseFullScreenFragment {
 
@@ -117,7 +109,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		colorStyleTv.setText(Buildings3DColorType.Companion.getById(plugin.BUILDINGS_3D_COLOR_STYLE.get()).getLabelId());
 		container.findViewById(R.id.color_scheme_button).setOnClickListener((v) -> callMapActivity(mapActivity -> {
 			mapActivity.getDashboard().hideDashboard();
-			Buildings3DColorFragment.showInstance(mapActivity.getSupportFragmentManager());
+			Buildings3DColorScreenController.showDialog(mapActivity.getSupportFragmentManager(), app);
 		}));
 		container.findViewById(R.id.opacity_container).setOnClickListener((v) -> callMapActivity(mapActivity -> {
 			mapActivity.getDashboard().hideDashboard();

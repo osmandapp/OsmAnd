@@ -66,11 +66,6 @@ public class MapColorPaletteFragment extends ConfigureMapOptionFragment implemen
 	}
 
 	@Override
-	protected void updateApplyButton(boolean enable) {
-		super.updateApplyButton(enable);
-	}
-
-	@Override
 	public void onResume() {
 		super.onResume();
 		controller.onResume();
