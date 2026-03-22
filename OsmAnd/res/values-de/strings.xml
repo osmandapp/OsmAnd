@@ -4496,7 +4496,7 @@
     <string name="map_widget_camera_tilt">Kameraneigung</string>
     <string name="developer_widgets">Entwickler-Widgets</string>
     <string name="map_widget_target_distance_desc">Zeigt die Entfernung zwischen Kamera und Zielort an.</string>
-    <string name="external_sensor_widgets">Externe Sensoren</string>
+    <string name="external_sensor_widgets">Externer Sensor</string>
     <string name="map_widget_target_distance">Entfernung zwischen Kamera und Ziel</string>
     <string name="favorites_backup">Gesicherte Favoriten</string>
     <string name="map_widget_ant_bicycle_dist">Fahrradentfernung</string>
@@ -5754,7 +5754,7 @@
     <string name="show_debug_tile">Kachelinformationen anzeigen</string>
     <string name="show_debug_tile_description">Infos zu den Kartensymbolen der einzelnen Kacheln anzeigen</string>
     <string name="unit_of_temperature_description">Ausgewählte Einheiten werden auf alle temperaturbezogenen Daten im aktuellen Profil angewendet.</string>
-    <string name="travel_guides">Leitfäden</string>
+    <string name="travel_guides">Touristenführer</string>
     <string name="hmd_promo_description_years">Kostenloser Zugang zu Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für %1$s Jahre</string>
     <string name="uphill_downhill_split">Berg-/Talfahrt</string>
     <string name="set_parking_position">Parkposition festlegen</string>
@@ -5921,7 +5921,7 @@
     <string name="vehicle_metrics_chart_category">Fahrzeugdaten</string>
     <string name="delete_folder_description">Ordner „%1$s“ löschen?</string>
     <string name="slots">Slots</string>
-    <string name="has_vehicle_metrics">Mit OBD-II-Daten</string>
+    <string name="has_vehicle_metrics">Mit OBDII-Daten</string>
     <string name="buildings_3d_detail_level">Detaillierung von 3D-Gebäuden</string>
     <string name="show_spherical_map">Globusansicht</string>
     <string name="visualizing_button_grid">Raster der Karten-Schaltflächen</string>
@@ -6126,11 +6126,14 @@
     <string name="astro_explore_schedule">Zeitplan</string>
     <string name="astronomy_schedule">Zeitplan</string>
     <string name="astro_locate">Finden</string>
-    <string name="intersection">Schnittpunkt</string>
+    <string name="intersection">Kreuzung</string>
     <string name="stars_articles">Sternen-Artikel</string>
     <string name="astro_my_data_no_directions_title">Zielführung nicht aktiv</string>
     <string name="astro_my_data_no_directions_description">Zielführung ermöglicht Ihnen einen Pfeil anzeigen zu lassen, der auf einen Himmelskörper zeigt. Sie können sie mittels des Kontextmenüs aktivieren.</string>
     <string name="astro_search_magnitude_short">mag %.1f</string>
     <string name="shared_string_radians">Radien</string>
     <string name="shared_string_unlock">Entsperren</string>
+    <string name="start_free_trial">Gratiszeitraum starten</string>
+    <string name="subscription_free_trial_with_price">%1$s kostenlos, dann %2$s</string>
+    <string name="subscription_then_price">dann %1$s</string>
 </resources>
