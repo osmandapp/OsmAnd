@@ -114,7 +114,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		}));
 		container.findViewById(R.id.opacity_container).setOnClickListener((v) -> callMapActivity(mapActivity -> {
 			mapActivity.getDashboard().hideDashboard();
-			Buildings3DVisibilityFragment.showInstance(mapActivity.getSupportFragmentManager());
+			Buildings3DVisibilityController.showDialog(app, mapActivity.getSupportFragmentManager());
 		}));
 	}
 

@@ -346,10 +346,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		getTerrainMode().resetTransparencyToDefault();
 	}
 
-	public void reset3DBuildingAlphaToDefault() {
-		BUILDINGS_3D_ALPHA.set(BUILDINGS_3D_ALPHA_DEF_VALUE);
-	}
-
 	public void resetVerticalExaggerationToDefault() {
 		app.getSettings().VERTICAL_EXAGGERATION_SCALE.resetToDefault();
 	}
