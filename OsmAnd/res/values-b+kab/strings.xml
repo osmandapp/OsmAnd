@@ -1328,4 +1328,9 @@
     <string name="routing_settings_2">Iɣewwaren n tunigin</string>
     <string name="osmand_settings">Iɣewwaren n OsmAnd</string>
     <string name="plugins_settings">Iɣewwaren n usiɣzaf</string>
+    <string name="navigate_point_format_D">DDD.DDDDD</string>
+    <string name="ant_plus_open_settings">Ldi iɣewwaren</string>
+    <string name="global_app_settings">Iɣewwaren imuta n wesnas</string>
+    <string name="pref_raster_map">Iɣewwaren n weɣbalu n tkarḍa</string>
+    <string name="configure_profile_info">Iɣewwaren n umaɣnu:</string>
 </resources>
