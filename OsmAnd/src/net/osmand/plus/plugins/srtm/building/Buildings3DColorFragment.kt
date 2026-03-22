@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.srtm
+package net.osmand.plus.plugins.srtm.building
 
 import android.view.View
 import android.view.ViewGroup

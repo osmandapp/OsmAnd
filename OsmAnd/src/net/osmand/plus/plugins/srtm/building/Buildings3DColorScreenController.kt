@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.srtm
+package net.osmand.plus.plugins.srtm.building
 
 import android.view.View
 import androidx.fragment.app.FragmentManager
@@ -8,6 +8,7 @@ import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.configmap.MultiStateColorPaletteController
 import net.osmand.plus.dashboard.DashboardType.BUILDINGS_3D
 import net.osmand.plus.plugins.PluginsHelper
+import net.osmand.plus.plugins.srtm.SRTMPlugin
 import net.osmand.plus.settings.enums.DayNightMode
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.widgets.popup.PopUpMenu

@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.srtm;
+package net.osmand.plus.plugins.srtm.building;
 
 import static net.osmand.plus.dashboard.DashboardType.BUILDINGS_3D;
 
@@ -18,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
