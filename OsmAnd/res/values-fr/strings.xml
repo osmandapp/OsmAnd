@@ -5624,7 +5624,7 @@
     <string name="saved_to_device">Enregistré sur l\'appareil</string>
     <string name="save_to_device_error">Erreur d\'enregistrement sur l\'appareil</string>
     <string name="save_to_device">Enregistrer sur l\'appareil</string>
-    <string name="travel_guides">Guides de Voyage</string>
+    <string name="travel_guides">Guides de voyage</string>
     <string name="show_debug_tile_description">Afficher les informations à propos des symboles de la carte sur chaque tuile</string>
     <string name="show_debug_tile">Afficher les informations de la tuile</string>
     <string name="deactivated_map">Carte désactivée</string>
