@@ -4557,7 +4557,7 @@
     <string name="map_widget_ant_heart_rate_desc">يعرض معدل ضربات قلب المستخدم أثناء نشاط معين في الوقت الفعلي</string>
     <string name="map_widget_ant_heart_rate">معدل ضربات القلب</string>
     <string name="ant_read_data">قراءة البيانات</string>
-    <string name="external_sensor_widgets">ودجت مستشعر ANT+</string>
+    <string name="external_sensor_widgets">مجسات خارجية</string>
     <string name="ant_write_to_gpx">كتابة البيانات للمسار</string>
     <string name="ant_heart_rate_write_gpx_desc">تضمين معدل نبضات القلب للمسار</string>
     <string name="nautical_depth_points">نقاط العمق البحري</string>
@@ -4797,7 +4797,7 @@
     <string name="weather_forecast_is_outdated">التوقعات قديمة.</string>
     <string name="clear_online_cache_description">سيؤدي هذا إلى مسح جميع الملفات المؤقتة لطبقات الطقس المتصلة بالانترنت.</string>
     <string name="clear_online_cache">مسح ذاكرة تخزين الانترنت المؤقت</string>
-    <string name="shared_string_alt_name">الاسم البديل</string>
+    <string name="shared_string_alt_name">اسم بديل</string>
     <string name="shared_string_all_world">كل العالم</string>
     <string name="weather_forecast">توقعات الطقس</string>
     <string name="offline_weather_forecast">توقعات الطقس دون اتصال</string>
@@ -6207,4 +6207,7 @@
     <string name="obd_alt_battery_voltage_desc">يعرض مستوى الجهد على محول OBD</string>
     <string name="backup_deleted_all_data">تم حذف البيانات.</string>
     <string name="backup_deleting_all_data">جاري حذف جميع البيانات…</string>
+    <string name="start_free_trial">ابدأ تجربتك المجانية</string>
+    <string name="subscription_free_trial_with_price">%1$s مجانا, ثم%2$s</string>
+    <string name="subscription_then_price">ثم%1$s</string>
 </resources>
