@@ -13,9 +13,8 @@
 	<LinearLayout
 		android:id="@+id/details_lvl_container"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/setting_list_item_large_height"
-		android:orientation="horizontal"
-		android:paddingStart="@dimen/content_padding">
+		android:layout_height="@dimen/bottom_sheet_medium_list_item_height"
+		android:orientation="horizontal">
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:layout_width="0dp"
@@ -24,12 +23,13 @@
 			android:layout_weight="1"
 			android:text="@string/level_of_details"
 			android:textColor="?android:textColorPrimary"
+			android:paddingHorizontal="@dimen/content_padding"
 			android:textSize="@dimen/default_list_text_size" />
 
 		<include
 			layout="@layout/custom_icon_radio_buttons"
-			android:layout_width="112dp"
-			android:layout_height="36dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_marginEnd="@dimen/content_padding" />
 
@@ -37,15 +37,13 @@
 
 	<include
 		android:id="@+id/detail_lvl_divider"
-		layout="@layout/divider"
-		android:layout_marginStart="@dimen/content_padding" />
+		layout="@layout/divider" />
 
 	<LinearLayout
 		android:id="@+id/view_distance_container"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/setting_list_item_large_height"
-		android:orientation="horizontal"
-		android:paddingStart="@dimen/content_padding">
+		android:layout_height="@dimen/bottom_sheet_medium_list_item_height"
+		android:orientation="horizontal">
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:layout_width="0dp"
@@ -54,12 +52,13 @@
 			android:layout_weight="1"
 			android:text="@string/view_distance"
 			android:textColor="?android:textColorPrimary"
+			android:paddingHorizontal="@dimen/content_padding"
 			android:textSize="@dimen/default_list_text_size" />
 
 		<include
 			layout="@layout/custom_icon_radio_buttons"
-			android:layout_width="112dp"
-			android:layout_height="36dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_marginEnd="@dimen/content_padding" />
 

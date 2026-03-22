@@ -26,7 +26,6 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 
@@ -38,11 +37,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 
 	private ViewGroup contentContainer;
 
-
-	private TextView stateTv;
-	private CompoundButton compoundButton;
-	private ImageView iconIv;
-	private View titleDivider;
+	private View view;
 	private IconToggleButton detailsLevelToggleButton;
 	private IconToggleButton viewDistanceToggleButton;
 
@@ -54,40 +49,70 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-			@Nullable Bundle savedInstanceState) {
+	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_3d_buildings, container, false);
-
-		setupHeader(view);
+		view = inflate(R.layout.fragment_3d_buildings, container, false);
+		showHideTopShadow();
+		setupMainToggle();
 		setupContent(view);
-
 		updateUiMode();
-
 		return view;
 	}
 
-	protected void setupHeader(@NonNull View view) {
-		stateTv = view.findViewById(R.id.state_tv);
-		iconIv = view.findViewById(R.id.icon_iv);
-		titleDivider = view.findViewById(R.id.title_divider);
+	private void setupMainToggle() {
+		View button = view.findViewById(R.id.main_toggle);
+		boolean enabled = isEnabled();
+		int profileColor = getAppModeColor(nightMode);
 
-		TextView titleTv = view.findViewById(R.id.title_tv);
-		titleTv.setText(R.string.enable_3d_objects);
+		TextView tvTitle = button.findViewById(R.id.title_tv);
+		tvTitle.setText(R.string.enable_3d_objects);
+		updateUiMode();
 
-		compoundButton = view.findViewById(R.id.switch_compat);
-		compoundButton.setClickable(false);
-		compoundButton.setFocusable(false);
-		compoundButton.setChecked(plugin.ENABLE_3D_MAP_OBJECTS.get());
+		CompoundButton cb = button.findViewById(R.id.switch_compat);
+		cb.setChecked(enabled);
+		cb.setVisibility(View.VISIBLE);
+		UiUtilities.setupCompoundButton(nightMode, profileColor, cb);
 
-		view.findViewById(R.id.header_container).setOnClickListener(v -> {
-			boolean enabled = !plugin.ENABLE_3D_MAP_OBJECTS.get();
-			compoundButton.setChecked(enabled);
-			plugin.ENABLE_3D_MAP_OBJECTS.set(enabled);
+		cb.setOnCheckedChangeListener((buttonView, isChecked) -> {
+			cb.setChecked(isChecked);
+			plugin.ENABLE_3D_MAP_OBJECTS.set(isChecked);
 			refreshMap();
 			updateUiMode();
 		});
-		showHideTopShadow(view);
-		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.PROFILE_DEPENDENT);
+
+		button.setOnClickListener(v -> {
+			boolean newState = !cb.isChecked();
+			cb.setChecked(newState);
+		});
+
+		updateUiMode();
+		setupSelectableBackground(button);
+	}
+
+	private void updateUiMode() {
+		boolean enabled = isEnabled();
+		View button = view.findViewById(R.id.main_toggle);
+		int defIconColor = ColorUtilities.getSecondaryIconColor(app, nightMode);
+		int profileColor = getAppModeColor(nightMode);
+
+		ImageView ivIcon = button.findViewById(R.id.icon_iv);
+		ivIcon.setImageResource(R.drawable.ic_action_3d_buildings);
+		ivIcon.setColorFilter(enabled ? profileColor : defIconColor);
+
+		TextView tvSummary = button.findViewById(R.id.state_tv);
+		tvSummary.setText(enabled ? R.string.shared_string_on : R.string.shared_string_off);
+
+		AndroidUiHelper.updateVisibility(contentContainer, enabled);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.title_divider), !enabled);
+	}
+
+	private boolean isEnabled() {
+		return plugin.ENABLE_3D_MAP_OBJECTS.get();
+	}
+
+	private void showHideTopShadow() {
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 	}
 
 	protected void setupContent(@NonNull View view) {
@@ -100,22 +125,30 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 	private void setupAppearance(@NonNull ViewGroup container) {
 		View appearanceContainer = container.findViewById(R.id.appearance_container);
 		AndroidUtils.setBackgroundColor(appearanceContainer.getContext(), appearanceContainer, ColorUtilities.getListBgColorId(nightMode));
+
 		TextViewEx title = appearanceContainer.findViewById(R.id.title);
 		title.setText(R.string.shared_string_appearance);
 		float alpha = plugin.BUILDINGS_3D_ALPHA.get();
 		int progress = ProgressHelper.normalizeProgressPercent((int) (alpha * 100));
+
 		TextView visibilityTv = container.findViewById(R.id.opacity_value);
 		visibilityTv.setText(String.format("%s%%", progress));
 		TextView colorStyleTv = container.findViewById(R.id.color_scheme_name);
 		colorStyleTv.setText(Buildings3DColorType.Companion.getById(plugin.BUILDINGS_3D_COLOR_STYLE.get()).getLabelId());
-		container.findViewById(R.id.color_scheme_button).setOnClickListener((v) -> callMapActivity(mapActivity -> {
+
+		View btnColor = container.findViewById(R.id.color_container);
+		btnColor.setOnClickListener((v) -> callMapActivity(mapActivity -> {
 			mapActivity.getDashboard().hideDashboard();
 			Buildings3DColorScreenController.showDialog(mapActivity.getSupportFragmentManager(), app);
 		}));
-		container.findViewById(R.id.opacity_container).setOnClickListener((v) -> callMapActivity(mapActivity -> {
+		setupSelectableBackground(btnColor);
+
+		View btnVisibility = container.findViewById(R.id.opacity_container);
+		btnVisibility.setOnClickListener((v) -> callMapActivity(mapActivity -> {
 			mapActivity.getDashboard().hideDashboard();
 			Buildings3DVisibilityController.showDialog(app, mapActivity.getSupportFragmentManager());
 		}));
+		setupSelectableBackground(btnVisibility);
 	}
 
 	private void setupPerformance(@NonNull ViewGroup container) {
@@ -186,25 +219,6 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		viewDistanceToggleButton.setSelectedItem(selectItem);
 	}
 
-	private void showHideTopShadow(@NonNull View view) {
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
-	}
-
-	private void updateUiMode() {
-		boolean enabled = plugin.ENABLE_3D_MAP_OBJECTS.get();
-		if (enabled) {
-			int profileColor = settings.getApplicationMode().getProfileColor(nightMode);
-			iconIv.setImageDrawable(getPaintedIcon(R.drawable.ic_action_3d_buildings, profileColor));
-			stateTv.setText(R.string.shared_string_on);
-		} else {
-			iconIv.setImageDrawable(getIcon(R.drawable.ic_action_3d_buildings, ColorUtilities.getSecondaryIconColorId(nightMode)));
-			stateTv.setText(R.string.shared_string_off);
-		}
-		AndroidUiHelper.updateVisibility(contentContainer, enabled);
-		AndroidUiHelper.updateVisibility(titleDivider, !enabled);
-	}
-
 	protected void refreshMap() {
 		callMapActivity(MapActivity::refreshMap);
 	}
@@ -215,6 +229,10 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		collection.replace(InsetTarget.createBottomContainer(R.id.main_container).landscapeLeftSided(true));
 		collection.removeType(Type.ROOT_INSET);
 		return collection;
+	}
+
+	private void setupSelectableBackground(@NonNull View view) {
+		UiUtilities.setupListItemBackground(view.getContext(), view, getAppModeColor(nightMode));
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
