@@ -292,6 +292,9 @@ public class BaseDetailsObject {
 			if (syntheticAmenity.getLocation() == null) {
 				syntheticAmenity.setLocation(renderedObject.getLabelLatLon());
 			}
+			if (syntheticAmenity.getMapIconName() == null) {
+				syntheticAmenity.setMapIconName(renderedObject.getIconRes());
+			}
 			processPolygonCoordinates(renderedObject.getX(), renderedObject.getY());
 		}
 	}

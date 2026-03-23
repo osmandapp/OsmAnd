@@ -5,11 +5,17 @@ import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -396,6 +402,15 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
+		if (amenity.getMapIconName() != null) {
+			Drawable ic = RenderingIcons.getBigIcon(getMapActivity(), amenity.getMapIconName());
+			if (ic != null) {
+				if (isDrawableWhite(ic)) {
+					DrawableCompat.setTint(ic, Color.parseColor("#FFA500"));
+				}
+				return getCroppedIcon(ic);
+			}
+		}
 		String region = amenity.getAdditionalInfo("subway_region");
 		if (region != null) {
 			return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
@@ -404,5 +419,98 @@ public class AmenityMenuController extends MenuController {
 		return isClickableWay || amenity.isRouteTrack()
 				? NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, getApplication(), !isLight(), isClickableWay)
 				: null;
+	}
+
+	public boolean isDrawableWhite(Drawable drawable) {
+		int width = drawable.getIntrinsicWidth();
+		int height = drawable.getIntrinsicHeight();
+		if (width > 100 || height > 100) {
+			return false;
+		}
+		Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmap);
+		Rect oldBounds = new Rect(drawable.getBounds());
+		drawable.setBounds(0, 0, width, height);
+		drawable.draw(canvas);
+		drawable.setBounds(oldBounds);
+
+		int[] pixels = new int[width * height];
+		bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+
+		for (int pixel : pixels) {
+			int alpha = (pixel >>> 24);
+			if (alpha > 10) {
+				int r = (pixel >> 16) & 0xFF;
+				int g = (pixel >> 8) & 0xFF;
+				int b = pixel & 0xFF;
+				if (r < 250 || g < 250 || b < 250) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public Drawable getCroppedIcon(Drawable drawable) {
+		if (drawable == null || getMapActivity() == null)
+			return null;
+
+		int w = drawable.getIntrinsicWidth();
+		int h = drawable.getIntrinsicHeight();
+		if (w <= 0 || h <= 0) {
+			return drawable;
+		}
+
+		Bitmap rawBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(rawBitmap);
+		drawable.setBounds(0, 0, w, h);
+		drawable.draw(canvas);
+		Bitmap croppedBitmap = cropTransparencySquare(rawBitmap);
+		if (rawBitmap != croppedBitmap) {
+			rawBitmap.recycle();
+		}
+		return new BitmapDrawable(getMapActivity().getResources(), croppedBitmap);
+	}
+
+	public Bitmap cropTransparencySquare(Bitmap source) {
+		int width = source.getWidth();
+		int height = source.getHeight();
+		int[] pixels = new int[width * height];
+		source.getPixels(pixels, 0, width, 0, 0, width, height);
+
+		int top = -1, bottom = -1, left = -1, right = -1;
+
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				if ((pixels[y * width + x] >>> 24) > 10) {
+					if (top == -1) top = y;
+					bottom = y;
+				}
+			}
+		}
+		if (top == -1) {
+			return source;
+		}
+
+		for (int x = 0; x < width; x++) {
+			for (int y = top; y <= bottom; y++) {
+				if ((pixels[y * width + x] >>> 24) > 10) {
+					if (left == -1) left = x;
+					right = x;
+				}
+			}
+		}
+
+		int contentW = right - left + 1;
+		int contentH = bottom - top + 1;
+		int maxSide = Math.max(contentW, contentH);
+		Bitmap squareBitmap = Bitmap.createBitmap(maxSide, maxSide, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(squareBitmap);
+		int posX = (maxSide - contentW) / 2;
+		int posY = (maxSide - contentH) / 2;
+		Rect srcRect = new Rect(left, top, right + 1, bottom + 1);
+		Rect dstRect = new Rect(posX, posY, posX + contentW, posY + contentH);
+		canvas.drawBitmap(source, srcRect, dstRect, null);
+		return squareBitmap;
 	}
 }
