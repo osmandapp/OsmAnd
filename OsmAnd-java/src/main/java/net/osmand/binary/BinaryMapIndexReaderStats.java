@@ -85,6 +85,38 @@ public class BinaryMapIndexReaderStats {
 		public long getCount() {
 			return count;
 		}
+
+		public long getBytesSkippedBySeek() {
+			return bytesSkippedBySeek;
+		}
+
+		public long getPayloadBytesParsed() {
+			return payloadBytesParsed;
+		}
+
+		public long getDecodeTime() {
+			return decodeTimeNs;
+		}
+
+		public long getMatcherTime() {
+			return matcherTimeNs;
+		}
+
+		public long getBlocksLoaded() {
+			return blocksLoaded;
+		}
+
+		public long getObjectsLoaded() {
+			return objectsLoaded;
+		}
+
+		public long getMatchedObjects() {
+			return matchedObjects;
+		}
+
+		public long getMaxObjectsPerBlock() {
+			return maxObjectsPerBlock;
+		}
 	}
 	
 	public static class StatByAPI {
@@ -242,13 +274,6 @@ public class BinaryMapIndexReaderStats {
 			}
 			SubStatByAPI subStatByAPI = statByAPI.getSubApi(op, obf);
 			subStatByAPI.add(timeCall, size - subSize, bytes);
-		}
-
-		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryMapIndexReaderSubApiName op,
-				String obf, int size, long bytes, long bytesSkippedBySeek,
-				long payloadBytesParsed, long decodeTimeNs, long matcherTimeNs) {
-			endSubSearchStats(statReq, api, op, obf, size, bytes, bytesSkippedBySeek,
-					payloadBytesParsed, decodeTimeNs, matcherTimeNs, 0, 0, 0, 0);
 		}
 
 		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryMapIndexReaderSubApiName op,
