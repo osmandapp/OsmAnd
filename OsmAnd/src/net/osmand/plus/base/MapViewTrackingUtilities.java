@@ -531,7 +531,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		};
 		Runnable finishAnimationCallback = () -> {
 			movingToMyLocation = false;
-			if (isMapLinkedToLocation && myLocation != null) {
+			if (isMapLinkedToLocation && myLocation != null
+					&& mapView != null && !mapView.isUserMapInteractionActive()) {
 				app.runInUIThread(() -> updateLocation(myLocation));
 			}
 		};

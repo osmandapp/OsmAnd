@@ -253,6 +253,8 @@ public class PointLocationLayer extends OsmandMapLayer
 		if (isMarkerLinkedToMapTarget()) {
 			Location location = getPointLocation();
 			updateMarker(location, mapRenderer.getTarget(), 0);
+		} else if (isUserInterruptingMovingToMyLocation()) {
+			updateMarker(getPointLocation(), null, 0);
 		} else if (isMapLinkedToLocation() && !isMovingToMyLocation()) {
 			updateMarker(getPointLocation(), null, 0);
 		}
@@ -413,7 +415,12 @@ public class PointLocationLayer extends OsmandMapLayer
 
 	private boolean isMarkerLinkedToMapTarget() {
 		return isMapLinkedToLocation() && !isMovingToMyLocation()
-				&& view != null && !view.isMapTargetChanged();
+				&& view != null && !view.isUserMapInteractionActive()
+				&& !view.isMapTargetChanged();
+	}
+
+	private boolean isUserInterruptingMovingToMyLocation() {
+		return isMovingToMyLocation() && view != null && view.isUserMapInteractionActive();
 	}
 
 	private void updateMarker(@Nullable Location location, @Nullable PointI target31, long animationDuration) {
@@ -598,6 +605,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		if (isMapLinkedToLocation()
 				&& !MapViewTrackingUtilities.isSmallSpeedForAnimation(lastKnownLocation)
 				&& !isMovingToMyLocation()
+				&& !view.isUserMapInteractionActive()
 				&& !view.isMapTargetChanged()) {
 			locationX = box.getCenterPixelX();
 			locationY = box.getCenterPixelY();
@@ -709,23 +717,32 @@ public class PointLocationLayer extends OsmandMapLayer
 			return;
 		}
 		if (mapRenderer != null && !isMarkerLinkedToMapTarget()) {
-			boolean dataChanged = !MapUtils.areLatLonEqual(prevLocation, location, HIGH_LATLON_PRECISION);
+			boolean userInterruptingMovingToMyLocation = isUserInterruptingMovingToMyLocation();
+			Location markerLocation = userInterruptingMovingToMyLocation ? getPointLocation() : location;
+			if (markerLocation == null) {
+				markerLocation = location;
+			}
+			boolean dataChanged = !MapUtils.areLatLonEqual(prevLocation, markerLocation, HIGH_LATLON_PRECISION);
 			if (dataChanged) {
-				long movingTime = prevLocation != null ? location.getTime() - prevLocation.getTime() : 0;
+				long movingTime = prevLocation != null ? markerLocation.getTime() - prevLocation.getTime() : 0;
 				boolean animatePosition = settings.ANIMATE_MY_LOCATION.get();
+				long animationDuration = userInterruptingMovingToMyLocation ? 0
+						: isAnimateMyLocation() ? movingTime : 0;
 				Integer interpolationPercent = settings.LOCATION_INTERPOLATION_PERCENT.get();
-				if (prevLocation != null && getApplication().getRoutingHelper().isFollowingMode() && interpolationPercent > 0 && animatePosition) {
+				if (!userInterruptingMovingToMyLocation
+						&& prevLocation != null && getApplication().getRoutingHelper().isFollowingMode()
+						&& interpolationPercent > 0 && animatePosition) {
 					List<Location> predictedLocations = RoutingHelperUtils.predictLocations(prevLocation, location,
 							movingTime / 1000.0, getApplication().getRoutingHelper().getRoute(), interpolationPercent);
 					if (!predictedLocations.isEmpty()) {
 						// At the moment we get the first predicted location, but there may be several of them
 						Location predictedLocation = predictedLocations.get(0);
-						updateMarker(predictedLocation, null, isAnimateMyLocation() ? movingTime : 0);
+						updateMarker(predictedLocation, null, animationDuration);
 					}
 				} else {
-					updateMarker(location, null, isAnimateMyLocation() ? movingTime : 0);
+					updateMarker(markerLocation, null, animationDuration);
 				}
-				prevLocation = location;
+				prevLocation = markerLocation;
 			}
 		}
 	}
