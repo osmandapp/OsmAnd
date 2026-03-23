@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/knowledgeCard"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="16dp"
+	app:cardBackgroundColor="?attr/list_background_color"
+	app:cardElevation="0dp"
+	app:shapeAppearanceOverlay="@style/Shape.Card12"
+	app:strokeWidth="0dp">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingStart="16dp"
+		android:paddingTop="18dp"
+		android:paddingEnd="16dp">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<ImageView
+				android:id="@+id/icon"
+				android:layout_width="24dp"
+				android:layout_height="24dp"
+				android:layout_marginEnd="32dp" />
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/title"
+					android:textStyle="bold"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="16sp" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/description"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="6dp"
+					android:lineSpacingExtra="3sp"
+					android:layout_marginBottom="10dp"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="14sp" />
+
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
+					android:id="@+id/action_button"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+
+					app:dialogButtonBottomMargin="16dp"
+					app:dialogButtonTitle="@string/shared_string_get"
+					app:dialogButtonTopMargin="6dp"
+					app:dialogButtonType="secondary" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

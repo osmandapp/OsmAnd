@@ -32,6 +32,7 @@ class AstroConfigureViewBottomSheet :
 
 	private lateinit var mainView: View
 	private var behavior: BottomSheetBehavior<FrameLayout>? = null
+	private var redFilterTarget: View? = null
 
 
 	companion object {
@@ -97,6 +98,19 @@ class AstroConfigureViewBottomSheet :
 			val scroll = mainView.findViewById<NestedScrollView>(R.id.configureViewRoot)
 			scroll.scrollTo(0, 0)
 		}
+		applyRedFilter(requireStarMap().starView.showRedFilter)
+	}
+
+	fun applyRedFilter(enabled: Boolean) {
+		val bottomSheet =
+			(dialog as? BottomSheetDialog)
+				?.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
+		val target = bottomSheet ?: if (::mainView.isInitialized) mainView else null
+		if (redFilterTarget !== target) {
+			StarMapFragment.applyRedFilterToViews(false, redFilterTarget)
+			redFilterTarget = target
+		}
+		StarMapFragment.applyRedFilterToViews(enabled, target)
 	}
 
 	private fun bindMapActions(root: View) {
@@ -458,4 +472,5 @@ class AstroConfigureViewBottomSheet :
 	private fun applyConfigChange(newConfig: AstronomyPluginSettings.StarMapConfig) {
 		requireStarMap().setStarMapSettings(newConfig)
 	}
+
 }

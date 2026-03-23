@@ -38,12 +38,12 @@ class GetAstroImagesTask(
 	}
 
 	override fun onPostExecute(holder: List<WikiImage>?) {
-		getImageCardsListener?.onFinish(holder)
+		getImageCardsListener?.onFinish(wikidataId, holder)
 	}
 
 	interface GetImageCardsListener {
 		fun onTaskStarted()
 
-		fun onFinish(images: List<WikiImage>?)
+		fun onFinish(wikidataId: String, images: List<WikiImage>?)
 	}
 }

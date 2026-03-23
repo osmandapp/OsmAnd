@@ -53,14 +53,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.base.containers.ShiftedBitmap;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.search.AmenitySearcher;
-import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -74,8 +72,10 @@ import net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -152,6 +152,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private List<VectorLinePair> lines;
 	private MapMarkersCollection distanceMarkersCollection;
 	private final List<MapMarker> displayedMarkers = new ArrayList<>();
+	private final HashMap<Integer, String> distanceMarkerCaptions = new HashMap<>();
 	private int displayedWidgets;
 	private List<WptPt> cachedPoints = null;
 	private Renderable.RenderableSegment cachedRenderer;
@@ -579,9 +580,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (longTapDetector != null && !longTapDetector.onTouchEvent(event)) {
 			switch (event.getAction()) {
 				case MotionEvent.ACTION_DOWN:
-					float x = event.getX();
-					float y = event.getY();
-					fingerLocation = NativeUtilities.getLatLonFromElevatedPixel(getMapRenderer(), tileBox, x, y);
+					updateFingerLocation(tileBox, event.getX(), event.getY());
 					hasMoved = false;
 					moving = true;
 					break;
@@ -612,6 +611,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		}
 		return super.onTouchEvent(event, tileBox);
+	}
+
+	private boolean updateFingerLocation(@NonNull RotatedTileBox tileBox, float x, float y) {
+		LatLon newFingerLocation = NativeUtilities.getLatLonFromElevatedPixel(getMapRenderer(), tileBox, x, y);
+		boolean changed = !Algorithms.objectEquals(fingerLocation, newFingerLocation)
+				&& !MapUtils.areLatLonEqual(fingerLocation, newFingerLocation);
+		fingerLocation = newFingerLocation;
+		return changed;
 	}
 
 	private void cancelFingerAction() {
@@ -876,9 +883,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		distanceMarkersCollection = new MapMarkersCollection();
 		vectorLinesCollection = new VectorLinesCollection();
+		distanceMarkerCaptions.clear();
 
 		lines = new ArrayList<>(objectsCount);
 
+		int baseOrder = getLinesBaseOrder();
 		double strokeWidth = 20.0d;
 
 		VectorDouble inlinePattern = new VectorDouble();
@@ -903,7 +912,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 			VectorLineBuilder inlineBuilder = new VectorLineBuilder();
 			inlineBuilder.setIsHidden(true);
-			inlineBuilder.setBaseOrder(getBaseOrder() + lineId);
+			inlineBuilder.setBaseOrder(baseOrder + lineId);
 			inlineBuilder.setLineId(lineId);
 			inlineBuilder.setLineWidth(strokeWidth);
 			inlineBuilder.setLineDash(inlinePattern);
@@ -915,7 +924,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			TextRasterizer.Style style = MapTextLayer.getTextStyle(getContext(), false, getTextScale(), view.getDensity());
 
 			MapMarkerBuilder distanceMarkerBuilder = new MapMarkerBuilder();
-			distanceMarkerBuilder.setBaseOrder(getBaseOrder() + lineId);
+			distanceMarkerBuilder.setBaseOrder(baseOrder + lineId);
 			distanceMarkerBuilder.setMarkerId(lineId);
 			distanceMarkerBuilder.setIsHidden(true);
 			distanceMarkerBuilder.setUpdateAfterCreated(true);
@@ -928,7 +937,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 			VectorLineBuilder outlineBuilder = new VectorLineBuilder();
 			outlineBuilder.setIsHidden(true);
-			outlineBuilder.setBaseOrder(getBaseOrder() + lineId);
+			outlineBuilder.setBaseOrder(baseOrder + lineId);
 			outlineBuilder.setLineId(lineId);
 			outlineBuilder.setLineWidth(strokeWidth * 1.5);
 			outlineBuilder.setLineDash(outlinePattern);
@@ -941,9 +950,13 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 	}
 
+	private int getLinesBaseOrder() {
+		return getApplication().getOsmandMap().getMapLayers().getLocationLayer().getBaseOrder() + 1000;
+	}
+
 	void updateVectorLine(@NonNull MapRendererView mapRenderer, int index, int color, PointI start,
 						  PointI end, boolean nightMode, String distance) {
-		if (index > lines.size()) {
+		if (index >= lines.size()) {
 			return;
 		}
 
@@ -955,17 +968,32 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		points.add(end);
 
 		VectorLinePair linePair = lines.get(index);
-
 		QVectorMapMarker distanceMarkers = linePair.outline.getAttachedMarkers();
-		if (!distanceMarkers.isEmpty()) {
+		String cachedCaption = distanceMarkerCaptions.get(index);
+		if (!distanceMarkers.isEmpty() && Algorithms.stringsEqual(cachedCaption, distance)) {
+			distanceMarkers.get(0).setIsHidden(false);
+		} else {
+			if (!distanceMarkers.isEmpty()) {
+				net.osmand.core.jni.MapMarker oldDistanceMarker = distanceMarkers.get(0);
+				linePair.outline.detachMarker(oldDistanceMarker);
+				distanceMarkersCollection.removeMarker(oldDistanceMarker);
+			}
+
+			int baseOrder = getLinesBaseOrder();
 			TextRasterizer.Style style = MapTextLayer.getTextStyle(getContext(), nightMode, getTextScale(), view.getDensity());
-			net.osmand.core.jni.MapMarker distanceMarker = distanceMarkers.get(0);
-			distanceMarker.setIsHidden(false);
-			// If marker is hidden when setCaption is called caption will not be created
-			// TODO: fix in engine?
-			distanceMarker.setCaption(distance);
-			distanceMarker.setCaptionStyle(style);
-			distanceMarker.setUpdateAfterCreated(true);
+			MapMarkerBuilder distanceMarkerBuilder = new MapMarkerBuilder();
+			distanceMarkerBuilder.setBaseOrder(baseOrder + linePair.outline.getLineId());
+			distanceMarkerBuilder.setMarkerId(linePair.outline.getLineId());
+			distanceMarkerBuilder.setIsHidden(false);
+			distanceMarkerBuilder.setUpdateAfterCreated(true);
+			distanceMarkerBuilder.setCaption(distance);
+			distanceMarkerBuilder.setCaptionStyle(style);
+
+			net.osmand.core.jni.MapMarker distanceMarker =
+					distanceMarkerBuilder.buildAndAddToCollection(distanceMarkersCollection);
+			distanceMarker.setOffsetFromLine(LABEL_OFFSET);
+			linePair.outline.attachMarker(distanceMarker);
+			distanceMarkerCaptions.put(index, distance);
 		}
 
 		linePair.inline.setIsHidden(false);
@@ -980,9 +1008,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	 */
 	protected void clearVectorLinesCollections() {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null) {
+		if (mapRenderer != null && vectorLinesCollection != null && distanceMarkersCollection != null) {
 			QListVectorLine lines = vectorLinesCollection.getLines();
 			QListMapMarker markers = distanceMarkersCollection.getMarkers();
+			distanceMarkerCaptions.clear();
 
 			for (int i = 0; i < lines.size(); ++i) {
 				lines.get(i).setIsHidden(true);
@@ -1052,11 +1081,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return;
 		}
 
-		if (savedLoc != null && !MapUtils.areLatLonEqual(myLoc, savedLoc)) {
-			clearVectorLinesCollections();
-		}
-		savedLoc = myLoc;
 		OsmandSettings settings = app.getSettings();
+		if (savedLoc != null && !MapUtils.areLatLonEqual(myLoc, savedLoc)) {
+			cachedPaths.clear();
+		}
+		savedLoc = new Location(myLoc);
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
 		if (displayedWidgets != settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get()) {
@@ -1123,7 +1152,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 			if (mapRenderer != null) {
 				PointI target31 = mapRenderer.getTarget();
-				if (NativeUtilities.arePointsEqual(cachedTarget31, target31)) {
+				if (!NativeUtilities.arePointsEqual(cachedTarget31, target31)) {
 					cachedPaths.clear();
 				}
 				cachedTarget31 = target31;

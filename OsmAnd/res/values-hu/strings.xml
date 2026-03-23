@@ -3772,7 +3772,7 @@
     <string name="local_backup_descr">Biztonsági mentés vagy visszaállítás helyi fájl segítségével.</string>
     <string name="duration_ago">Ennyi idővel ezelőtt: %1$s</string>
     <string name="last_backup">Legutóbbi biztonsági mentés</string>
-    <string name="backup_and_restore">Biztonsági másolat és visszaállítás</string>
+    <string name="backup_and_restore">Biztonsági mentés és visszaállítás</string>
     <string name="select_nav_profile_dialog_message">A „Navigáció típusával” jelölheti ki az útvonal tervezésének módját a rendelkezésre álló offline és online útvonaltervezők közül.</string>
     <string name="delete_all_confirmation">Igen, törlődjön mind</string>
     <string name="backup_delete_old_data">Régi változatok eltávolítása</string>
@@ -3876,7 +3876,7 @@
     <string name="shared_string_progress">Haladás</string>
     <string name="backup_do_not_have_any">Még nincs online biztonsági mentése</string>
     <string name="backup_dont_have_any_descr">Állítson be automatikus biztonsági mentést, hogy ne kelljen aggódnia adatvesztés miatt.</string>
-    <string name="backup_welcome_back">Isten hozta újra!</string>
+    <string name="backup_welcome_back">Üdvözöljük újra!</string>
     <string name="backup_welcome_back_descr">Az eszközön lévő adatok visszaállítása az OsmAnd Cloud használatával.</string>
     <string name="backup_setup">Biztonsági mentés beállítása</string>
     <string name="backup_restore_now">Visszaállítás most</string>
@@ -4656,7 +4656,7 @@
     <string name="metric_lbs">font</string>
     <string name="shared_string_pounds">font</string>
     <string name="common_weight_limit_error">A minimális érték: „%1$s” %2$s. Használja a(z) „%3$s” profilt, ha a jármű tömege kisebb, mint a minimális érték.</string>
-    <string name="free_maps_updates">Ingyenes frissítések (vészhelyzet)</string>
+    <string name="free_maps_updates">Ingyenes frissítések (vészhelyzeti)</string>
     <string name="rendering_value_defaultMedium_name">Alapértelmezett (közepes)</string>
     <string name="select_layer">Réteg választása</string>
     <string name="speak_route_deviation">Az útvonaltól való eltérés bemondása</string>
@@ -4797,14 +4797,14 @@
     <string name="action_cannot_be_undone">A művelet nem visszavonható.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Minden adat %1$s lesz az OsmAnd Cloudból. Az eszközön lévő adatok érintetlenek maradnak.</string>
     <string name="folder_export_empty_error">Nincs mit exportálni, a mappa üres</string>
-    <string name="free_favorites_backup">Kedvencek mentése ingyenesen</string>
+    <string name="free_favorites_backup">Kedvencek biztonsági mentése ingyenesen</string>
     <string name="get_osmand_cloud">Szerezze be az OsmAnd Cloudot</string>
     <string name="free_account">Ingyenes fiók</string>
-    <string name="release_4_5">• BLE/ANT+ érzékelők: átdolgozott kapcsolódás, fogadott adatok írása és megtekintése GPX-ben \n \n • Biztonsági másolat ingyenesen a kedvencekről és a beállításokról az OsmAnd Cloudba \n \n • Új formátumú domborzati térképek 3D domborzat támogatással \n \n • Nyomvonalak kezelése: frissített felület, rendezés hozzáadása, beágyazott mappák támogatása \n \n • Android Auto: új start menü a kedvencek, nyomvonalak és POI kategóriák eléréséhez \n \n • Egyforma modullista az alsó/felső panelhez \n \n • Új vonat profil, vasúti útvonalak megtervezéséhez \n \n • Szintvonalak minden térképforráshoz \n \n • Kibővített lista a külső billentyűzetek alapértelmezett műveleteihez \n \n • Egyéni útvonalfájlok, törlési és felülírási lehetőség \n \n • „Útvonaltól való eltérés bemondása” funkció \n \n • Kezdőképernyő: OsmAnd állapotának helyreállítása fájlból \n \n • Veszélyes anyagok osztályai hozzáadva a teherautós navigációhoz (Észak-Amerika) \n \n • „Via ferrata” (felszerelt hegyi út) támogatása gyalogos útvonaltervezéshez \n \n • CAI (Club Alpino Italiano) skála az útvonalak nehézségének osztályozásához \n \n • Javítva az alkalmazásonkénti nyelvválasztás funkció \n \n • Témaikonok támogatása \n \n • OsmAnd Cloud: fiók törlésének lehetősége \n \n • Akadálymentesítés: a gombok érzékelési területe 48 dp-re módosítva; javítva a képernyőolvasók számára látható térkép kezelőfelületével kapcsolatos probléma \n \n • A japán hangutasítások átdolgozva \n \n • A magasságváltozás és a lejtés átdolgozva</string>
-    <string name="free_favorites_backup_description">Regisztráljon az OsmAnd Cloudba, hogy ingyenesen biztonsági másolatot készíthessen a kedvencekről és a beállításokról.</string>
+    <string name="release_4_5">• BLE/ANT+ érzékelők: átdolgozott kapcsolódás, fogadott adatok írása és megtekintése GPX-ben \n \n • Biztonsági mentés ingyenesen a kedvencekről és a beállításokról az OsmAnd Cloudba \n \n • Új formátumú domborzati térképek 3D domborzat támogatással \n \n • Nyomvonalak kezelése: frissített felület, rendezés hozzáadása, beágyazott mappák támogatása \n \n • Android Auto: új start menü a kedvencek, nyomvonalak és POI kategóriák eléréséhez \n \n • Egyforma modullista az alsó/felső panelhez \n \n • Új vonat profil, vasúti útvonalak megtervezéséhez \n \n • Szintvonalak minden térképforráshoz \n \n • Kibővített lista a külső billentyűzetek alapértelmezett műveleteihez \n \n • Egyéni útvonalfájlok, törlési és felülírási lehetőség \n \n • „Útvonaltól való eltérés bemondása” funkció \n \n • Kezdőképernyő: OsmAnd állapotának helyreállítása fájlból \n \n • Veszélyes anyagok osztályai hozzáadva a teherautós navigációhoz (Észak-Amerika) \n \n • „Via ferrata” (felszerelt hegyi út) támogatása gyalogos útvonaltervezéshez \n \n • CAI (Club Alpino Italiano) skála az útvonalak nehézségének osztályozásához \n \n • Javítva az alkalmazásonkénti nyelvválasztás funkció \n \n • Témaikonok támogatása \n \n • OsmAnd Cloud: fiók törlésének lehetősége \n \n • Akadálymentesítés: a gombok érzékelési területe 48 dp-re módosítva; javítva a képernyőolvasók számára látható térkép kezelőfelületével kapcsolatos probléma \n \n • A japán hangutasítások átdolgozva \n \n • A magasságváltozás és a lejtés átdolgozva</string>
+    <string name="free_favorites_backup_description">Regisztráljon az OsmAnd Cloudba, hogy biztonsági mentést készíthessen ingyenesen a kedvencekről és a beállításokról.</string>
     <string name="cache_size">Gyorsítótár méret</string>
     <string name="shared_string_avoid">Elkerülés</string>
-    <string name="free_settings_backup">Beállítások ingyenes lementése</string>
+    <string name="free_settings_backup">Biztonsági mentés a beállításokról ingyenesen</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Raszteres sqlitedb használata domborzatárnyékoláshoz/lejtőhöz</string>
     <string name="may_be_used_if_there_is_shortcut">Használható, ha van parancsikon</string>
     <string name="routing_attr_allow_via_ferrata_description">Mászóútvonal rögzített kábelekkel, fellépőkkel, létrákkal és hidakkal.</string>
@@ -5314,7 +5314,7 @@
     <string name="delete_widget">Biztosan törli a modult?</string>
     <string name="battery_saving_mode">Energiatakarékos mód</string>
     <string name="y_axis_description">Válasszon legfeljebb két opciót az Y-tengelyhez.</string>
-    <string name="graph_axis">Grafikon tengely</string>
+    <string name="graph_axis">Grafikontengely</string>
     <string name="app_mode_suv">SUV</string>
     <string name="rendering_attr_alpineHiking_name">Túraútvonalak nehézségi szintje</string>
     <string name="background_opacity">Háttér átlátszatlansága</string>
@@ -5381,7 +5381,7 @@
     <string name="obd_rpm_desc">Megjeleníti a jármű fordulatszámmérőjével mért értéket az OBD-érzékelőn keresztül</string>
     <string name="obd_fuel_type_hybrid_electric_combustion">Hibrid elektromos és belső égésű motor</string>
     <string name="obd_fuel_type_hybrid_regenerative">Hibrid regeneratív</string>
-    <string name="obd_widget_group">Járműmetrika</string>
+    <string name="obd_widget_group">Járműadatok</string>
     <string name="obd_fuel_level_desc">Megjeleníti az üzemanyagszintet az OBD-érzékelőn keresztül</string>
     <string name="obd_fuel_left_distance_desc">Megjeleníti a fennmaradó üzemanyaggal megtehető távolságot az OBD-érzékelőn keresztül</string>
     <string name="obd_fuel_type_desc">Megjeleníti az üzemanyag típusát az OBD-érzékelőn keresztül</string>
@@ -5395,14 +5395,14 @@
     <string name="obd_fuel_type">Üzemanyagtípus</string>
     <string name="obd_plugin_description">Kövesse nyomon a legfontosabb járműmutatókat az OBD-II protokoll segítségével. Hozzáférhet az alábbi adatokhoz:\n• Motorfordulatszám, a motor indítása óta eltelt idő, számított motorterhelés\n• Üzemanyag-fogyasztás, üzemanyag nyomása, maradék üzemanyag\n• Beszívott levegő hőmérséklete, környezeti hőmérséklet, hűtőfolyadék hőmérséklete, motorolaj hőmérséklete\n• Jármű sebessége, fojtószelep helyzete, akkumulátor töltöttsége\n</string>
     <string name="obd_support">OBD-támogatás</string>
-    <string name="obd_plugin_name">Járműmetrika</string>
+    <string name="obd_plugin_name">Járműadatok</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hidrogénnel működő Bifuel</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hibrid hidrogén</string>
     <string name="obd_fuel_type_bifuel_propane">Propánnal működő Bifuel</string>
     <string name="reset_average_speed">Átlagsebesség nullázása</string>
     <string name="unknown_bt_device">Ismeretlen eszköz</string>
     <string name="obd_vin_desc">OBD-n keresztül kiolvasott alvázszám</string>
-    <string name="vehicle_metrics_plugin_settings">Járműmetrika beállítások</string>
+    <string name="vehicle_metrics_plugin_settings">Járműadatok beállítása</string>
     <string name="obd_vin">Alvázszám</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s – %2$s</string>
     <string name="quick_action_save_recorded_trip_and_continue">Rögzített utazás mentése és folytatás</string>
@@ -5423,7 +5423,7 @@
     <string name="quick_action_showhide_osm_edits_descr">Gomb OSM-szerkesztések megjelenítésére vagy rejtésére a térképen.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Krosszmotor utak</string>
     <string name="liter_per_hour">l/óra</string>
-    <string name="release_4_9">• Teljes képernyős képgaléria a Wikimedia képekhez\n\n • Új Járműmetrika-bővítmény a jármű teljesítményének az OBD-II protokollon keresztüli nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyors-műveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testre szabható térképgomb és precíz rácsok\n\n • Helyi menü és egy Átlagsebesség-visszaállítási művelet a moduloknál\n\n • Új motokrossz utak útvonalréteg\n\n •Nyomvonal automatikus rögzítése navigáció közben javítása\n\n • Javítva a jobbról balra író nyelveknél a koordináták felcserélése\n\n • Javítva a hiányzó érzékelőadatok a jelenleg rögzített nyomvonalnál\n\n • Információk a kiválasztott pont környékéről\n\n • Gyors-művelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy az útvonal attribútumainak megjelenítéséhez</string>
+    <string name="release_4_9">• Teljes képernyős képgaléria a Wikimedia képekhez\n\n • Új Járműadat-bővítmény a jármű teljesítményének az OBD-II protokollon keresztüli nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyors-műveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testre szabható térképgomb és precíz rácsok\n\n • Helyi menü és egy Átlagsebesség-visszaállítási művelet a moduloknál\n\n • Új motokrossz utak útvonalréteg\n\n •Nyomvonal automatikus rögzítése navigáció közben javítása\n\n • Javítva a jobbról balra író nyelveknél a koordináták felcserélése\n\n • Javítva a hiányzó érzékelőadatok a jelenleg rögzített nyomvonalnál\n\n • Információk a kiválasztott pont környékéről\n\n • Gyors-művelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy az útvonal attribútumainak megjelenítéséhez</string>
     <string name="screen_is_unlocked">Az érintőképernyő feloldva.</string>
     <string name="screen_is_locked_by_action_button">Az érintőképernyő le van zárva. Koppintson a gombra a feloldáshoz.</string>
     <string name="screen_is_locked_by_external_button">Az érintőképernyő le van zárva. A feloldáshoz nyomja meg a(z) %1$s gombot vagy koppintson a képernyőn megjelenő gombra.</string>
@@ -5496,7 +5496,7 @@
     <string name="average_temperature">Átlaghőmérséklet</string>
     <string name="show_minor_turns_descr">A sávok minden érintett kereszteződésnél megjelennek, függetlenül a hangutasításoktól</string>
     <string name="show_minor_turns">Kijelzés kisebb kereszteződéseknél, ha egyenesen navigál</string>
-    <string name="vehicle_metrics_obd_ii">Járműmetrika (OBD-II)</string>
+    <string name="vehicle_metrics_obd_ii">Járműadatok (OBD-II)</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
     <string name="shared_string_hour">Óra</string>
     <string name="obd_fuel_consumption_desc">Megjeleníti motor üzemanyag-felhasználásának számított mértékét a maradék üzemanyag, a tank mérete és a GPS által meghatározott megtett távolság alapján.</string>
@@ -5807,7 +5807,7 @@
     <string name="copy_link">Hivatkozás másolása</string>
     <string name="routing_attr_pt_limit_name">N legjobb útvonal megjelenítése</string>
     <string name="routing_attr_pt_limit_description">Adja meg a megjelenítendő legjobb útvonalak darabszámát</string>
-    <string name="vehicle_metrics_chart_category">Járműmetrikák</string>
+    <string name="vehicle_metrics_chart_category">Járműadatok</string>
     <string name="delete_folder_description">Biztosan törli a(z) „%1$s” mappát?</string>
     <string name="show_spherical_map">Földgömbnézet</string>
     <string name="enable_3d_objects">3D épületek</string>
@@ -6022,4 +6022,7 @@
     <string name="obd_alt_battery_voltage_desc">Megjeleníti az OBD-adapter feszültségszintjét</string>
     <string name="shared_string_radians">Radián</string>
     <string name="shared_string_unlock">Feloldás</string>
+    <string name="start_free_trial">Ingyenes próbaidőszak megkezdése</string>
+    <string name="subscription_free_trial_with_price">%1$s ingyen, utána: %2$s</string>
+    <string name="subscription_then_price">utána: %1$s</string>
 </resources>

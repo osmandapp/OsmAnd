@@ -11,26 +11,16 @@ import android.graphics.Path
 import android.graphics.RectF
 import android.graphics.Shader
 import android.graphics.drawable.Drawable
+import android.text.format.DateFormat
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
-import io.github.cosinekitty.astronomy.Observer
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import net.osmand.plus.R
-import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.utils.AndroidUtils
 import java.time.Instant
-import java.time.LocalDate
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlin.math.floor
@@ -39,53 +29,14 @@ import kotlin.math.min
 import kotlin.math.roundToInt
 import androidx.core.graphics.withClip
 import androidx.core.graphics.createBitmap
-import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroChartMath.VISIBILITY_SAMPLE_COUNT
+
+private typealias Model = AstroVisibilityGraphSnapshot
 
 class AstroVisibilityGraphView @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
-
-	private data class Model(
-		val startMillis: Long,
-		val endMillis: Long,
-		val zoneId: ZoneId,
-		val objectAltitudes: DoubleArray,
-		val objectAzimuths: DoubleArray,
-		val sunAltitudes: DoubleArray
-	) {
-		val size: Int
-			get() = objectAltitudes.size
-
-		override fun equals(other: Any?): Boolean {
-			if (this === other) return true
-			if (javaClass != other?.javaClass) return false
-
-			other as Model
-
-			if (startMillis != other.startMillis) return false
-			if (endMillis != other.endMillis) return false
-			if (zoneId != other.zoneId) return false
-			if (!objectAltitudes.contentEquals(other.objectAltitudes)) return false
-			if (!objectAzimuths.contentEquals(other.objectAzimuths)) return false
-			if (!sunAltitudes.contentEquals(other.sunAltitudes)) return false
-			if (size != other.size) return false
-
-			return true
-		}
-
-		override fun hashCode(): Int {
-			var result = startMillis.hashCode()
-			result = 31 * result + endMillis.hashCode()
-			result = 31 * result + zoneId.hashCode()
-			result = 31 * result + objectAltitudes.contentHashCode()
-			result = 31 * result + objectAzimuths.contentHashCode()
-			result = 31 * result + sunAltitudes.contentHashCode()
-			result = 31 * result + size
-			return result
-		}
-	}
 
 	private data class PlotArea(
 		val left: Float,
@@ -106,13 +57,6 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		val type: ZeroCrossingType
 	)
 
-	private var viewScope = createScope()
-	private var computeJob: Job? = null
-
-	private var skyObject: SkyObject? = null
-	private var observer: Observer? = null
-	private var date: LocalDate = LocalDate.now()
-	private var zoneId: ZoneId = ZoneId.systemDefault()
 	private var model: Model? = null
 	private var palette: AstroChartColorPalette? = null
 	private var staticLayerInvalidate = true
@@ -122,8 +66,8 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 	private var isTouchTracking = false
 	private var cursorVisible = false
 	private var cursorX = 0f
-
-	private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
+	private var cursorReferenceTimeMillis: Long? = null
+	var onCursorTimeChanged: ((Long) -> Unit)? = null
 	private val sunriseDrawable: Drawable? by lazy {
 		ContextCompat.getDrawable(context, R.drawable.ic_action_sunrise_12)
 	}
@@ -192,44 +136,40 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		refreshThemeResources()
 	}
 
-	fun submitObject(
-		objectToRender: SkyObject?,
-		observer: Observer?,
-		date: LocalDate,
-		zoneId: ZoneId
+	fun submitGraph(
+		graph: AstroVisibilityGraphSnapshot?,
+		cursorReferenceTimeMillis: Long
 	) {
-		skyObject = objectToRender
-		this.observer = observer
-		this.date = date
-		this.zoneId = zoneId
-		triggerAsyncRebuild()
+		val dataChanged = model != graph
+		model = graph
+		this.cursorReferenceTimeMillis = cursorReferenceTimeMillis
+		if (graph == null) {
+			cursorVisible = false
+			invalidateStaticLayer()
+			invalidate()
+		} else if (dataChanged) {
+			invalidateStaticLayer()
+			syncCursorToReference(graph)
+			invalidate()
+		} else {
+			syncCursorToReference(graph)
+			invalidate()
+		}
 	}
 
 	override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
 		super.onSizeChanged(w, h, oldw, oldh)
 		invalidateStaticLayer()
-		if (w > 0 && h > 0) {
-			triggerAsyncRebuild()
-		}
+		model?.let(::syncCursorToReference)
 	}
 
 	override fun onAttachedToWindow() {
 		super.onAttachedToWindow()
 		refreshThemeResources()
-		triggerAsyncRebuild()
-	}
-
-	override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-		super.onLayout(changed, left, top, right, bottom)
-		if (model == null && width > 0 && height > 0 && skyObject != null && observer != null) {
-			triggerAsyncRebuild()
-		}
 	}
 
 	override fun onDetachedFromWindow() {
 		super.onDetachedFromWindow()
-		computeJob?.cancel()
-		computeJob = null
 		clearStaticLayer()
 	}
 
@@ -259,7 +199,7 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 				}
 				parent?.requestDisallowInterceptTouchEvent(true)
 				isTouchTracking = true
-				updateCursor(event.x, chartArea)
+				updateCursor(event.x, chartArea, notifyCallback = true)
 				return true
 			}
 
@@ -268,7 +208,7 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 					return false
 				}
 				parent?.requestDisallowInterceptTouchEvent(true)
-				updateCursor(event.x, chartArea)
+				updateCursor(event.x, chartArea, notifyCallback = true)
 				return true
 			}
 
@@ -277,75 +217,20 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 					return false
 				}
 				isTouchTracking = false
-				updateCursor(event.x, chartArea)
+				updateCursor(event.x, chartArea, notifyCallback = true)
 				parent?.requestDisallowInterceptTouchEvent(false)
 				return true
 			}
 
 			MotionEvent.ACTION_CANCEL -> {
 				isTouchTracking = false
-				cursorVisible = false
+				model?.let(::syncCursorToReference) ?: run { cursorVisible = false }
 				invalidate()
 				parent?.requestDisallowInterceptTouchEvent(false)
 				return true
 			}
 		}
 		return super.onTouchEvent(event)
-	}
-
-	private fun triggerAsyncRebuild() {
-		val localObject = skyObject
-		val localObserver = observer
-		if (width == 0 || height == 0 || localObject == null || localObserver == null) {
-			model = null
-			invalidateStaticLayer()
-			invalidate()
-			return
-		}
-		val sampleCount = VISIBILITY_SAMPLE_COUNT
-
-		computeJob?.cancel()
-		ensureScope()
-		computeJob = viewScope.launch {
-			val result = withContext(Dispatchers.Default) {
-				computeModel(localObject, localObserver, date, zoneId, sampleCount)
-			}
-			if (isActive) {
-				if (model != result) {
-					model = result
-					invalidateStaticLayer()
-				}
-				invalidate()
-			}
-		}
-	}
-
-	private fun computeModel(
-		objectToRender: SkyObject,
-		observer: Observer,
-		date: LocalDate,
-		zoneId: ZoneId,
-		sampleCount: Int
-	): Model {
-		val startLocal = date.atTime(12, 0).atZone(zoneId)
-		val endLocal = startLocal.plusDays(1)
-		val samples = AstroChartMath.computeDaySamples(
-			objectToRender = objectToRender,
-			observer = observer,
-			startLocal = startLocal,
-			endLocal = endLocal,
-			sampleCount = sampleCount,
-			includeAzimuth = true
-		)
-
-		return Model(
-			startMillis = samples.startMillis,
-			endMillis = samples.endMillis,
-			zoneId = zoneId,
-			objectAltitudes = samples.objectAltitudes,
-			objectAzimuths = samples.objectAzimuths ?: DoubleArray(samples.objectAltitudes.size),
-			sunAltitudes = samples.sunAltitudes
-		)
 	}
 
 	private fun ensureStaticLayer(
@@ -432,14 +317,18 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		val labelY = area.bottom + dp(X_LABEL_TO_GRAPH_GAP_DP) - fm.ascent
 		val leftClip = dp(LABEL_EDGE_MIN_DP)
 		val rightClip = width - dp(LABEL_EDGE_MIN_DP)
+		val startLocalDateTime = Instant.ofEpochMilli(model.startMillis)
+			.atZone(model.zoneId)
+			.toLocalDateTime()
 		for (step in 0..6) {
-			val millis = model.startMillis + step * FOUR_HOURS_MILLIS
+			val tickLocalDateTime = startLocalDateTime.plusHours((step * 4).toLong())
+			val tickTime = tickLocalDateTime.atZone(model.zoneId)
+			val millis = tickTime.toInstant().toEpochMilli()
 			val x = timeToX(millis, area, model)
 			canvas.drawLine(x, tickTop, x, tickBottom, xTickPaint)
-			val label = Instant.ofEpochMilli(millis)
-				.atZone(model.zoneId)
+			val label = tickLocalDateTime
 				.toLocalTime()
-				.format(timeFormatter)
+				.format(createAxisTimeFormatter())
 			val half = xAxisLabelPaint.measureText(label) / 2f
 			val clampedX = x.coerceIn(leftClip + half, rightClip - half)
 			canvas.drawText(label, clampedX, labelY, xAxisLabelPaint)
@@ -577,7 +466,7 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		val timeLabel = Instant.ofEpochMilli(millis)
 			.atZone(model.zoneId)
 			.toLocalTime()
-			.format(timeFormatter)
+			.format(createMarkerTimeFormatter())
 		val altitudeLabel =
 			"${altitude.roundToInt()}° ${context.getString(R.string.astro_alt_short)}"
 		val azimuthLabel = "${azimuth.roundToInt()}° ${context.getString(R.string.astro_az_short)}"
@@ -702,10 +591,41 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		return fm.descent - fm.ascent
 	}
 
-	private fun updateCursor(x: Float, area: PlotArea) {
+	private fun updateCursor(x: Float, area: PlotArea, notifyCallback: Boolean) {
 		cursorX = x.coerceIn(area.left, area.right)
 		cursorVisible = true
+		if (notifyCallback) {
+			val currentModel = model
+			if (currentModel != null) {
+				onCursorTimeChanged?.invoke(cursorXToTime(cursorX, area, currentModel))
+			}
+		}
 		invalidate()
+	}
+
+	private fun syncCursorToReference(model: Model) {
+		val area = getPlotArea() ?: return
+		val referenceMillis = cursorReferenceTimeMillis ?: run {
+			cursorVisible = false
+			return
+		}
+		val cursorMillis = resolveCursorMillis(referenceMillis, model)
+		cursorX = timeToX(cursorMillis, area, model)
+		cursorVisible = true
+	}
+
+	private fun resolveCursorMillis(referenceMillis: Long, model: Model): Long {
+		val start = Instant.ofEpochMilli(model.startMillis).atZone(model.zoneId)
+		val end = Instant.ofEpochMilli(model.endMillis).atZone(model.zoneId)
+		val referenceTime = Instant.ofEpochMilli(referenceMillis).atZone(model.zoneId).toLocalTime()
+		var candidate = start.toLocalDate().atTime(referenceTime).atZone(model.zoneId)
+		if (candidate.isBefore(start)) {
+			candidate = candidate.plusDays(1)
+		}
+		if (candidate.isAfter(end)) {
+			candidate = end
+		}
+		return candidate.toInstant().toEpochMilli().coerceIn(model.startMillis, model.endMillis)
 	}
 
 	private fun altitudeToY(altitude: Double, area: PlotArea): Float {
@@ -719,6 +639,15 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		val passed = (millis - model.startMillis).coerceIn(0L, total)
 		val fraction = passed.toFloat() / total.toFloat()
 		return area.left + area.width * fraction
+	}
+
+	private fun cursorXToTime(x: Float, area: PlotArea, model: Model): Long {
+		val fraction = ((x - area.left) / area.width).coerceIn(0f, 1f)
+		return lerp(
+			model.startMillis.toDouble(),
+			model.endMillis.toDouble(),
+			fraction.toDouble()
+		).toLong()
 	}
 
 	private fun isInPlotArea(x: Float, y: Float, area: PlotArea): Boolean {
@@ -801,21 +730,25 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 	private fun dp(value: Float): Float = AndroidUtils.dpToPxF(context, value)
 	private fun sp(value: Float): Float = AndroidUtils.spToPxF(context, value)
 
-	private fun createScope(): CoroutineScope {
-		return CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+	private fun createAxisTimeFormatter(): DateTimeFormatter {
+		return if (DateFormat.is24HourFormat(context)) {
+			DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
+		} else {
+			DateTimeFormatter.ofPattern("h a", Locale.getDefault())
+		}
 	}
 
-	private fun ensureScope() {
-		val scopeJob = viewScope.coroutineContext[Job]
-		if (scopeJob == null || !scopeJob.isActive) {
-			viewScope = createScope()
+	private fun createMarkerTimeFormatter(): DateTimeFormatter {
+		return if (DateFormat.is24HourFormat(context)) {
+			DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
+		} else {
+			DateTimeFormatter.ofPattern("h:mm a", Locale.getDefault())
 		}
 	}
 
 	companion object {
 		const val MIN_ALTITUDE_RENDER = -40.0
 		const val MAX_ALTITUDE_RENDER = 95.0
-		const val FOUR_HOURS_MILLIS = 4L * 60L * 60L * 1000L
 
 		const val BG_STRIPE_STEP_DETAIL_PX = 1f
 		const val BG_STRIPE_STEP_DEFAULT_PX = 2f
@@ -849,7 +782,7 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		const val MARKER_TEXT_SP = 14f
 		const val MARKER_BORDER_STROKE_DP = 1f
 		const val MARKER_SEPARATOR_STROKE_DP = 1f
-		const val MARKER_CORNER_DP = 9f
+		const val MARKER_CORNER_DP = 6f
 		const val MARKER_H_PADDING_DP = 10f
 		const val MARKER_HEIGHT_DP = 24f
 		const val MARKER_SEPARATOR_INSET_DP = 2f

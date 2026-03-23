@@ -9,14 +9,16 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical">
+		android:orientation="vertical"
+		android:paddingTop="16dp"
+		android:paddingBottom="16dp">
 
 		<TextView
 			android:id="@+id/description"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginHorizontal="16dp"
-			android:layout_marginVertical="12dp"
+			android:layout_marginBottom="12dp"
 			android:lineSpacingExtra="5sp"
 			android:text="@string/personal_category_name"
 			android:textColor="?android:attr/textColorPrimary"
@@ -28,8 +30,6 @@
 			android:layout_width="wrap_content"
 			android:layout_height="36dp"
 			android:layout_marginStart="16dp"
-			android:layout_marginTop="12dp"
-			android:layout_marginBottom="16dp"
 			android:gravity="center_vertical"
 			android:insetLeft="0dp"
 			android:insetTop="0dp"
@@ -38,16 +38,18 @@
 			android:minHeight="48dp"
 			android:paddingStart="14dp"
 			android:paddingEnd="14dp"
+			android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
 			android:textAllCaps="false"
 			android:textColor="?android:attr/textColorSecondary"
 			android:textSize="16sp"
+			android:textStyle="normal"
 			app:backgroundTint="@android:color/transparent"
-			app:cornerRadius="12dp"
+			app:cornerRadius="6dp"
 			app:iconGravity="textStart"
 			app:iconPadding="10dp"
 			app:iconTint="?attr/default_icon_color"
 			app:rippleColor="?attr/colorControlHighlight"
-			app:strokeColor="@android:color/darker_gray"
+			app:strokeColor="?attr/stroked_buttons_and_links_outline"
 			app:strokeWidth="1dp" />
 
 	</LinearLayout>

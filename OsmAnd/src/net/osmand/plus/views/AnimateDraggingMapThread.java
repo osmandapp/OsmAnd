@@ -1180,7 +1180,11 @@ public class AnimateDraggingMapThread implements TouchListener {
 	@Override
 	public void onTouchEvent(@NonNull MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			stopAnimating();
+			if (app.getMapViewTrackingUtilities().isMovingToMyLocation()) {
+				stopAnimatingSync();
+			} else {
+				stopAnimating();
+			}
 		}
 	}
 }

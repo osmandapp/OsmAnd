@@ -237,14 +237,10 @@ public class NativeUtilities {
 		if (mapRenderer != null) {
 			point31 = get31FromElevatedPixel(mapRenderer, x, y);
 		}
-
 		if (point31 == null) {
 			return tileBox.getLatLonFromPixel(x, y);
 		}
-
-		double lat = MapUtils.get31LatitudeY(point31.getY());
-		double lon = MapUtils.get31LongitudeX(point31.getX());
-		return new LatLon(lat, lon);
+		return getLatLonFromPoint31(point31);
 	}
 
 	@Nullable
@@ -261,9 +257,14 @@ public class NativeUtilities {
 	                                        @NonNull PointI screenPoint) {
 		PointI point31 = get31FromPixel(mapRenderer, tileBox, screenPoint, false);
 		if (point31 != null) {
-			return new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
+			return getLatLonFromPoint31(point31);
 		}
 		return null;
+	}
+
+	@NonNull
+	public static LatLon getLatLonFromPoint31(@NonNull PointI point31) {
+		return new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
 	}
 
 	@NonNull

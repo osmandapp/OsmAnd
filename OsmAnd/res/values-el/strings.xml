@@ -5913,4 +5913,5 @@
     <string name="astro_search_in_location">Σε %1$s</string>
     <string name="astro_search_type_in_location">%1$s σε %2$s</string>
     <string name="shared_string_unlock">Ξεκλείδωμα</string>
+    <string name="start_free_trial">Ξεκινήστε δωρεάν δοκιμή</string>
 </resources>

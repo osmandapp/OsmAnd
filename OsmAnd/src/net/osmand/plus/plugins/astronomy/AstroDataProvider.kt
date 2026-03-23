@@ -50,6 +50,7 @@ abstract class AstroDataProvider {
 	@Synchronized
 	fun clearCache() {
 		cachedSkyObjects = null
+		cachedCatalogs = null
 		cachedConstellations = null
 	}
 
