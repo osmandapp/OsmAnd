@@ -208,7 +208,7 @@ public class SearchUICoreTest {
 					System.out.println("CURRENT RESULTS: ");
 					for (SearchResult r : searchResults) {
 						System.out.printf("\t\"%s\",%n", formatResult(false, r, phrase));
-					
+
 					}
 					System.out.println("EXPECTED : ");
 					for (String r : result) {
