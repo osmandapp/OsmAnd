@@ -58,7 +58,6 @@
 				<FrameLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:paddingBottom="@dimen/content_padding_round_medium"
 					android:background="?attr/list_background_color">
 
 					<include

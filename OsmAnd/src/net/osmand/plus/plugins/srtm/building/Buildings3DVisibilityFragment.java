@@ -74,7 +74,7 @@ public class Buildings3DVisibilityFragment extends ConfigureMapOptionFragment {
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		View view = inflate(R.layout.buildings_3d_visibility_fragment, container, false);
+		View view = inflate(R.layout.fragment_buildings_3d_visibility, container, false);
 		visibilitySlider = view.findViewById(R.id.transparency_slider);
 		tvVisibility = view.findViewById(R.id.transparency_value_tv);
 
