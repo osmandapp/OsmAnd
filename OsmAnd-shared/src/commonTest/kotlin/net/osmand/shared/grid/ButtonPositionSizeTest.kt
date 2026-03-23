@@ -19,11 +19,11 @@ class ButtonPositionSizeTest {
 		ButtonPositionSize.DEBUG_PRINT = true;
 		val buttons = listOf(
 			ButtonPositionSize("map_right_widgets_panel", 15, false, true).
-				setSize(15, 21).setMoveDescendantsHorizontal(),
+			setSize(15, 21).setMoveDescendantsHorizontal(),
 			ButtonPositionSize("map_top_widgets_panel", 114, true, true).
-				setSize(114, 12).setMargin(0, 0).setMoveDescendantsVertical(),
+			setSize(114, 12).setMargin(0, 0).setMoveDescendantsVertical(),
 			ButtonPositionSize("map_bottom_widgets_panel", 68, true, false).
-				setSize(68, 9).setMargin(22, 0).setMoveDescendantsVertical(),
+			setSize(68, 9).setMargin(22, 0).setMoveDescendantsVertical(),
 
 			ButtonPositionSize("map.view.layers", 6, true, true),
 			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveHorizontal(),
@@ -73,13 +73,13 @@ class ButtonPositionSizeTest {
 //		ButtonPositionSize.ALTERNATIVE_ALGORITHM = true;
 		val buttons = listOf(
 			ButtonPositionSize("map_right_widgets_panel", 12, false, true).
-				setSize(12, 4),
+			setSize(12, 4),
 			ButtonPositionSize("top_widgets_panel", 68, true, true).
-				setSize(68, 7).setMargin(22, 0),
+			setSize(68, 7).setMargin(22, 0),
 			ButtonPositionSize("map_bottom_widgets_panel", 68, true, false).
-				setSize(68, 9).setMargin(22, 0),
+			setSize(68, 9).setMargin(22, 0),
 			ButtonPositionSize("recording_note_layout", 40, true, false).
-				setSize(40, 45),
+			setSize(40, 45),
 			ButtonPositionSize("map.view.zoom_out", 7, false, false),
 			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveVertical(),
 			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveHorizontal()
@@ -145,4 +145,278 @@ class ButtonPositionSizeTest {
 		assertTrue { !check(buttons, "map.view.zoom_out", 44.0, 1.0) }
 		assertTrue { !check(buttons, "map.view.back_to_loc", 36.0, 1.0) }
 	}
+
+	@Test
+	fun testLandscapeRotation_searchShouldStayNearConfigureMap() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("map_left_widgets_panel", 17, true, true)
+				.setSize(17, 12).setMoveVertical(),
+			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveHorizontal(),
+			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_out", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveHorizontal(),
+			ButtonPositionSize("map.view.menu", 7, true, false).setMoveHorizontal(),
+			ButtonPositionSize("map.view.route_planning", 7, true, false).setMoveHorizontal(),
+			ButtonPositionSize("quick_actions", 7, false, true).setMargin(0, 18).setMoveVertical(),
+			ButtonPositionSize("map_ruler_layout", 7, true, false).setSize(7, 3).setMoveHorizontal(),
+		)
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 109, 42)
+		assertTrue(computed)
+
+		val layers = buttons.first { it.id == "map.view.layers" }
+		val search = buttons.first { it.id == "map.view.quick_search" }
+		val leftPanel = buttons.first { it.id == "map_left_widgets_panel" }
+
+		// Expected: search is near Configure Map (planet), on the same row and with 1-cell spacing.
+		assertTrue { search.bounds.top == layers.bounds.top }
+		assertTrue { search.bounds.left == layers.bounds.right + 1.0 }
+
+		// Bug condition: search "jumps" to top row near left widget panel.
+		assertTrue { search.bounds.top >= leftPanel.bounds.bottom }
+	}
+
+	@Test
+	fun testLandscapeRotation_threeDigitSpeedWidget_searchNearConfigureAndCompassBelow() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("map_left_widgets_panel", 17, true, true)
+				.setSize(17, 12).setMoveVertical(),
+			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveHorizontal(),
+			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_out", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveHorizontal(),
+			ButtonPositionSize("map.view.menu", 7, true, false).setMoveHorizontal(),
+			ButtonPositionSize("map.view.route_planning", 7, true, false).setMoveHorizontal(),
+			ButtonPositionSize("quick_actions", 7, false, true).setMargin(0, 18).setMoveVertical(),
+			ButtonPositionSize("map_ruler_layout", 12, true, false).setSize(12, 3).setMoveHorizontal(),
+		)
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 109, 42)
+		assertTrue(computed)
+
+		// Expected layout in landscape:
+		// layers at (0,13), search at (7,13), compass at (0,20).
+		assertTrue { check(buttons, "map_left_widgets_panel", 0.0, 0.0) }
+		assertTrue { check(buttons, "map.view.layers", 0.0, 13.0) }
+		assertTrue { check(buttons, "map.view.quick_search", 7.0, 13.0) }
+		assertTrue { check(buttons, "map.view.compass", 0.0, 20.0) }
+		assertTrue { check(buttons, "map.view.menu", 0.0, 35.0) }
+
+		// Bug guard: search must not jump to top row near speed widget panel.
+		assertTrue { !check(buttons, "map.view.quick_search", 18.0, 0.0) }
+	}
+
+	@Test
+	fun testLandscapeRotation_alarmsContainerShouldBeAboveBottomMenu() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("alarms_container", 14, true, false).setSize(14, 7).setMoveVertical().apply {
+				marginX = 0
+				marginY = 0
+			},
+			ButtonPositionSize("map.view.menu", 7, true, false).setMoveHorizontal().apply {
+				marginX = 0
+				marginY = 0
+			},
+			ButtonPositionSize("map.view.route_planning", 7, true, false).setMoveHorizontal().apply {
+				marginX = 0
+				marginY = 0
+			}
+		)
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 109, 42)
+		assertTrue(computed)
+
+		val alarms = buttons.first { it.id == "alarms_container" }
+		val menu = buttons.first { it.id == "map.view.menu" }
+		val routePlanning = buttons.first { it.id == "map.view.route_planning" }
+
+		// Alarm block should sit above bottom-left menu controls.
+		assertTrue(
+			alarms.bounds.bottom <= menu.bounds.top - 1.0 &&
+				alarms.bounds.bottom <= routePlanning.bounds.top - 1.0,
+			"alarms=${alarms.bounds}, menu=${menu.bounds}, route=${routePlanning.bounds}"
+		)
+	}
+
+	@Test
+	fun testLandscapeRotation_leftPanel4h_searchRightOfConfigureAndCompassBelow() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("top_widgets_panel", 65, true, true)
+				.setSize(65, 9).setMargin(21, 0).setMoveVertical(),
+			ButtonPositionSize("map_bottom_widgets_panel", 65, true, false)
+				.setSize(65, 14).setMargin(21, 0).setMoveVertical(),
+			ButtonPositionSize("map_left_widgets_panel", 14, true, true)
+				.setSize(14, 4).setMoveAny(),
+			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_out", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveAny(),
+			ButtonPositionSize("alarms_container", 19, true, false).setSize(19, 12).setMoveAny(),
+			ButtonPositionSize("map.view.menu", 7, true, false).setMoveAny(),
+			ButtonPositionSize("map.view.route_planning", 7, true, false).setMoveAny(),
+			ButtonPositionSize("map_ruler_layout", 12, true, false).setSize(12, 3).setMoveAny(),
+		)
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 109, 42)
+		assertTrue(computed)
+
+		assertTrue { check(buttons, "map.view.layers", 0.0, 5.0) }
+		assertTrue { check(buttons, "map.view.quick_search", 7.0, 5.0) }
+		assertTrue { check(buttons, "map.view.compass", 0.0, 12.0) }
+
+		val alarms = buttons.first { it.id == "alarms_container" }
+		val menu = buttons.first { it.id == "map.view.menu" }
+		val routePlanning = buttons.first { it.id == "map.view.route_planning" }
+		val ruler = buttons.first { it.id == "map_ruler_layout" }
+		assertTrue(
+			alarms.bounds.bottom <= menu.bounds.top - 1.0 &&
+				alarms.bounds.bottom <= routePlanning.bounds.top - 1.0 &&
+				alarms.bounds.bottom <= ruler.bounds.top - 1.0,
+			"alarms=${alarms.bounds}, menu=${menu.bounds}, route=${routePlanning.bounds}, ruler=${ruler.bounds}"
+		)
+	}
+
+	@Test
+	fun testLandscapeRotation_leftPanel8h_searchRightOfConfigureAndCompassBelow() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("top_widgets_panel", 65, true, true)
+				.setSize(65, 9).setMargin(21, 0).setMoveVertical(),
+			ButtonPositionSize("map_bottom_widgets_panel", 65, true, false)
+				.setSize(65, 14).setMargin(21, 0).setMoveVertical(),
+			ButtonPositionSize("map_left_widgets_panel", 13, true, true)
+				.setSize(13, 8).setMoveAny(),
+			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_out", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveAny(),
+			ButtonPositionSize("alarms_container", 10, true, false).setSize(10, 12).setMoveAny(),
+			ButtonPositionSize("map.view.menu", 7, true, false).setMoveAny(),
+			ButtonPositionSize("map.view.route_planning", 7, true, false).setMoveAny(),
+			ButtonPositionSize("map_ruler_layout", 12, true, false).setSize(12, 3).setMoveAny(),
+		)
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 109, 42)
+		assertTrue(computed)
+
+		assertTrue { check(buttons, "map.view.layers", 0.0, 9.0) }
+		assertTrue { check(buttons, "map.view.quick_search", 7.0, 9.0) }
+		assertTrue { check(buttons, "map.view.compass", 0.0, 16.0) }
+
+		val alarms = buttons.first { it.id == "alarms_container" }
+		val menu = buttons.first { it.id == "map.view.menu" }
+		val routePlanning = buttons.first { it.id == "map.view.route_planning" }
+		val ruler = buttons.first { it.id == "map_ruler_layout" }
+		assertTrue(
+			alarms.bounds.bottom <= menu.bounds.top - 1.0 &&
+				alarms.bounds.bottom <= routePlanning.bounds.top - 1.0 &&
+				alarms.bounds.bottom <= ruler.bounds.top - 1.0,
+			"alarms=${alarms.bounds}, menu=${menu.bounds}, route=${routePlanning.bounds}, ruler=${ruler.bounds}"
+		)
+	}
+
+	@Test
+	fun testLandscapeRotation_leftPanel8hWideAlerts_withoutMenu_shouldStayLowAndNotJumpTop() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("top_widgets_panel", 65, true, true)
+				.setSize(65, 9).setMargin(21, 0).setMoveVertical(),
+			ButtonPositionSize("map_bottom_widgets_panel", 65, true, false)
+				.setSize(65, 14).setMargin(21, 0).setMoveVertical(),
+			ButtonPositionSize("map_left_widgets_panel", 13, true, true)
+				.setSize(13, 8).setMoveAny(),
+			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_out", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveAny(),
+			ButtonPositionSize("alarms_container", 31, true, false).setSize(31, 12).setMoveAny(),
+			ButtonPositionSize("map_ruler_layout", 9, true, false).setSize(9, 3).setMoveAny(),
+		)
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 109, 42)
+		assertTrue(computed)
+
+		val alarms = buttons.first { it.id == "alarms_container" }
+		val bottomPanel = buttons.first { it.id == "map_bottom_widgets_panel" }
+
+		// Regression: do not jump to top (bott->27 in logs).
+		assertTrue(alarms.marginY <= 20, "alarms.marginY=${alarms.marginY}, bounds=${alarms.bounds}")
+		// Alerts should stay above bottom widgets stack.
+		assertTrue { alarms.bounds.bottom <= bottomPanel.bounds.top - 1.0 }
+	}
+
+	@Test
+	fun testPlanRoute_rulerShouldBeRightOfMeasurementButtons() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("widget_top_bar").setSize(51, 7).setNonMoveable()
+				.setMoveDescendantsVertical().apply {
+					posH = POS_FULL_WIDTH
+					posV = POS_TOP
+				},
+			ButtonPositionSize("map_left_widgets_panel", 17, true, true)
+				.setSize(17, 12).setMoveVertical(),
+			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_out", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveAny(),
+			ButtonPositionSize("measurement_buttons", 8, true, false).setSize(8, 7).setMoveAny(),
+			ButtonPositionSize("map_ruler_layout", 7, true, false).setSize(7, 3).setMoveAny(),
+		)
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 51, 82)
+		assertTrue(computed)
+
+		val measurement = buttons.first { it.id == "measurement_buttons" }
+		val ruler = buttons.first { it.id == "map_ruler_layout" }
+
+		// Fixed behavior: ruler should be to the right of measurement_buttons (not above it).
+		assertTrue(
+			ruler.bounds.left >= measurement.bounds.right + 1.0,
+			"ruler=${ruler.bounds}, measurement=${measurement.bounds}"
+		)
+		assertTrue(
+			ruler.bounds.bottom == measurement.bounds.bottom,
+			"ruler=${ruler.bounds}, measurement=${measurement.bounds}"
+		)
+		assertTrue(
+			!(ruler.bounds.left == measurement.bounds.left && ruler.bounds.top < measurement.bounds.top),
+			"ruler=${ruler.bounds}, measurement=${measurement.bounds}"
+		)
+	}
+
+	@Test
+	fun testMapMarkers_rulerShouldStayBottomLeftWhenAlone() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("widget_top_bar").setSize(51, 7).setNonMoveable()
+				.setMoveDescendantsVertical().apply {
+					posH = POS_FULL_WIDTH
+					posV = POS_TOP
+				},
+			ButtonPositionSize("map_ruler_layout", 7, true, false).setSize(7, 3).setMoveAny(),
+		)
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 51, 27)
+		assertTrue(computed)
+
+		// Map Markers: ruler remains in bottom-left corner.
+		assertTrue { check(buttons, "map_ruler_layout", 0.0, 24.0) }
+	}
+
+
+
 }
