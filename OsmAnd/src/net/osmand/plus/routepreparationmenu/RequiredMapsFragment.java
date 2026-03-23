@@ -119,7 +119,7 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 		if (activity != null && !activity.isChangingConfigurations()) {
 			controller.askCancelOnlineCalculation();
 			app.getDialogManager().unregister(PROCESS_ID);
-			app.getSettings().STOP_ON_MISSING_MAPS = false;
+			app.getSettings().setStopOnMissingMaps(false);
 		}
 	}
 

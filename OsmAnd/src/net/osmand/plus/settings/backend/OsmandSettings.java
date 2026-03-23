@@ -3552,4 +3552,8 @@ public class OsmandSettings {
 			}
 		}
 	}
+
+	public void setStopOnMissingMaps(boolean state) {
+		STOP_ON_MISSING_MAPS = state;
+	}
 }

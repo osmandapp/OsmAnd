@@ -25,7 +25,7 @@ public class MissingMapsWarningCard extends MapBaseCard {
 	}
 
 	private void showMissingMapsDialog() {
-		app.getSettings().STOP_ON_MISSING_MAPS = true;
+		app.getSettings().setStopOnMissingMaps(true);
 		app.getRoutingHelper().stopCalculationImmediately();
 		RequiredMapsController.showDialog(getMapActivity());
 		// TODO UI different warnings based on app.getRoutingHelper().getCurrentFastRoutingComplication();
