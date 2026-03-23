@@ -371,6 +371,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				}
 
 			}
+			remove3DObjectColor(oldPoint.getLatLon());
+
 			result = true;
 		}
 		if (callback != null) {
