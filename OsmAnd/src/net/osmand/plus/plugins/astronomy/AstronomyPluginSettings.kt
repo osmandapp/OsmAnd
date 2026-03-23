@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.astronomy
 
+import net.osmand.plus.R
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import org.json.JSONArray
 import org.json.JSONObject
@@ -10,7 +11,6 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 	companion object {
 		private const val KEY_COMMON = "common"
 		private const val KEY_SHOW_REGULAR_MAP = "showRegularMap"
-		private const val KEY_SHOW_STAR_CHART = "showStarChart"
 		private const val KEY_IS_2D_MODE = "is2DMode"
 
 		private const val KEY_STAR_MAP = "star_map"
@@ -45,11 +45,26 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		private const val KEY_DIRECTIONS = "directions"
 		private const val KEY_CELESTIAL_PATHS = "celestialPaths"
 		private const val KEY_ID = "id"
+		private const val KEY_COLOR_INDEX = "colorIndex"
+	}
+
+	enum class DirectionColor(val colorResId: Int) {
+		BLUE(R.color.marker_blue),
+		GREEN(R.color.marker_green),
+		ORANGE(R.color.marker_orange),
+		RED(R.color.marker_red),
+		YELLOW(R.color.marker_yellow),
+		TEAL(R.color.marker_teal),
+		PURPLE(R.color.marker_purple)
 	}
 
 	abstract class Config(
 		open val id: String,
-	)
+	) {
+		open fun serialize(obj: JSONObject) {
+			obj.put(KEY_ID, id)
+		}
+	}
 
 	data class FavoriteConfig(
 		override val id: String,
@@ -57,7 +72,13 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 
 	data class DirectionConfig(
 		override val id: String,
-	) : Config(id)
+		val colorIndex: Int = 0
+	) : Config(id) {
+		override fun serialize(obj: JSONObject) {
+			super.serialize(obj)
+			obj.put(KEY_COLOR_INDEX, colorIndex)
+		}
+	}
 
 	data class CelestialPathConfig(
 		override val id: String,
@@ -65,7 +86,6 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 
 	data class CommonConfig(
 		val showRegularMap: Boolean,
-		val showStarChart: Boolean
 	)
 
 	data class StarMapConfig(
@@ -115,7 +135,7 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		settingsPref.set(json.toString())
 	}
 
-	private fun <T : Config> parseItems(json: JSONObject?, key: String, factory: (String) -> T): List<T> {
+	private fun <T : Config> parseItems(json: JSONObject?, key: String, factory: (JSONObject, String) -> T): List<T> {
 		val itemsList = mutableListOf<T>()
 		val itemsJson = json?.optJSONArray(key)
 
@@ -124,7 +144,7 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 				val itemObj = itemsJson.optJSONObject(i)
 				val id = itemObj?.optString(KEY_ID)
 				if (!id.isNullOrEmpty()) {
-					itemsList.add(factory(id))
+					itemsList.add(factory(itemObj, id))
 				}
 			}
 		}
@@ -136,7 +156,7 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		val array = JSONArray()
 		items.forEach { item ->
 			val obj = JSONObject()
-			obj.put(KEY_ID, item.id)
+			item.serialize(obj)
 			array.put(obj)
 		}
 		return array
@@ -146,10 +166,9 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		val root = getSettingsJson()
 		val settings = root.optJSONObject(KEY_COMMON)
 
-		val showStarMap = settings?.optBoolean(KEY_SHOW_REGULAR_MAP, true) ?: true
-		val showStarChart = settings?.optBoolean(KEY_SHOW_STAR_CHART, false) ?: false
+		val showStarMap = settings?.optBoolean(KEY_SHOW_REGULAR_MAP, false) ?: false
 
-		return CommonConfig(showStarMap, showStarChart)
+		return CommonConfig(showStarMap)
 	}
 
 	fun setCommonConfig(config: CommonConfig) {
@@ -157,7 +176,6 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		val settings = root.optJSONObject(KEY_COMMON) ?: JSONObject()
 
 		settings.put(KEY_SHOW_REGULAR_MAP, config.showRegularMap)
-		settings.put(KEY_SHOW_STAR_CHART, config.showStarChart)
 
 		root.put(KEY_COMMON, settings)
 		setSettingsJson(root)
@@ -197,9 +215,12 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		val showMagnitudeFilter = mapSettings?.optBoolean(KEY_SHOW_MAGNITUDE_FILTER, false) ?: false
 		val magnitudeFilter = mapSettings?.optDouble(KEY_MAGNITUDE_FILTER)?.takeIf { !it.isNaN() }
 
-		val favorites = parseItems(mapSettings, KEY_FAVORITES) { FavoriteConfig(it) }
-		val directions = parseItems(mapSettings, KEY_DIRECTIONS) { DirectionConfig(it) }
-		val celestialPaths = parseItems(mapSettings, KEY_CELESTIAL_PATHS) { CelestialPathConfig(it) }
+		val favorites = parseItems(mapSettings, KEY_FAVORITES) { _, id -> FavoriteConfig(id) }
+		var nextColor = 0
+		val directions = parseItems(mapSettings, KEY_DIRECTIONS) { obj, id ->
+			DirectionConfig(id, obj.optInt(KEY_COLOR_INDEX, nextColor++ % DirectionColor.entries.size))
+		}
+		val celestialPaths = parseItems(mapSettings, KEY_CELESTIAL_PATHS) { _, id -> CelestialPathConfig(id) }
 
 		return StarMapConfig(
 			showAzimuthalGrid = showAzimuthal,
@@ -307,13 +328,17 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		}
 	}
 
-	fun addDirection(id: String) {
+	fun addDirection(id: String): Int {
 		val config = getStarMapConfig()
 		if (config.directions.none { it.id == id }) {
 			val directions = config.directions.toMutableList()
-			directions.add(DirectionConfig(id))
+			val maxColor = directions.maxOfOrNull { it.colorIndex } ?: -1
+			val nextColor = (maxColor + 1) % DirectionColor.entries.size
+			directions.add(DirectionConfig(id, nextColor))
 			setStarMapConfig(config.copy(directions = directions))
+			return nextColor
 		}
+		return config.directions.find { it.id == id }?.colorIndex ?: 0
 	}
 
 	fun removeDirection(id: String) {

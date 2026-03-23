@@ -6,6 +6,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.shared.gpx.organization.enums.OrganizeByType;
 
 import java.util.Calendar;
 
@@ -109,6 +110,10 @@ public class InAppPurchaseUtils {
 		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app);
 	}
 
+	public static boolean isAstronomyAvailable(@NonNull OsmandApplication app) {
+		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app) || InAppPurchaseUtils.isMapsPlusAvailable(app);
+	}
+
 	public static boolean isProWidgetsAvailable(@NonNull OsmandApplication app) {
 		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app);
 	}
@@ -150,6 +155,10 @@ public class InAppPurchaseUtils {
 
 	public static boolean isGridColorAvailable(@NonNull OsmandApplication app) {
 		return Version.isPaidVersion(app) || checkDeveloperBuildIfNeeded(app, true);
+	}
+
+	public static boolean isGradientEditorAvailable(@NonNull OsmandApplication app) {
+		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app);
 	}
 
 	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication app) {
@@ -216,5 +225,9 @@ public class InAppPurchaseUtils {
 			return calendar.getTimeInMillis();
 		}
 		return 0;
+	}
+
+	public static boolean isOrganizeByTypeApplicable(OsmandApplication app, OrganizeByType organizeByType) {
+		return organizeByType == null || isOsmAndProAvailable(app) || !organizeByType.isPro();
 	}
 }

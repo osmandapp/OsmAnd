@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks.controller
 
-import android.view.View
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import net.osmand.plus.OsmandApplication
@@ -9,21 +8,19 @@ import net.osmand.plus.base.containers.Limits
 import net.osmand.plus.base.dialog.BaseDialogController
 import net.osmand.plus.base.dialog.data.DialogExtra
 import net.osmand.plus.base.dialog.data.DisplayData
-import net.osmand.plus.card.base.headed.IHeadedContentCard
-import net.osmand.plus.card.base.slider.ISliderCard
-import net.osmand.plus.card.base.slider.SliderCard
+import net.osmand.plus.chooseplan.ChoosePlanFragment
+import net.osmand.plus.chooseplan.OsmAndFeature
+import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.settings.backend.ApplicationMode
-import net.osmand.plus.settings.bottomsheets.CustomizableSliderBottomSheet
-import net.osmand.plus.settings.controllers.ICustomizableSliderDialogController
+import net.osmand.plus.settings.bottomsheets.ModernSliderBottomSheet
+import net.osmand.plus.settings.controllers.IModernSliderDialogController
 import net.osmand.shared.gpx.organization.OrganizeByRangeParams
-import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 class OrganizeTracksStepController(
-	val app: OsmandApplication,
+	app: OsmandApplication,
 	private val folderId: String,
-	private val organizeByType: OrganizeByType,
-	private val initialValue: Int
-) : BaseDialogController(app), ICustomizableSliderDialogController {
+	newParams: OrganizeByRangeParams
+) : BaseDialogController(app), IModernSliderDialogController {
 
 	companion object {
 		const val PROCESS_ID = "select_step_to_organize_tracks"
@@ -33,54 +30,45 @@ class OrganizeTracksStepController(
 			fragmentManager: FragmentManager,
 			appMode: ApplicationMode,
 			folderId: String,
-			type: OrganizeByType,
-			initialValue: Int
+			newParams: OrganizeByRangeParams
 		) {
-			val controller = OrganizeTracksStepController(app, folderId, type, initialValue)
+			val controller = OrganizeTracksStepController(
+				app,
+				folderId,
+				newParams)
 			app.dialogManager.register(PROCESS_ID, controller)
-			CustomizableSliderBottomSheet.showInstance(fragmentManager, appMode, PROCESS_ID)
+			ModernSliderBottomSheet.showInstance(fragmentManager, appMode, PROCESS_ID)
 		}
+	}
+
+	private val organizeByType = newParams.type
+	private var initialParams = app.smartFolderHelper.getOrganizeByParams(folderId)
+	private val initialValue = organizeByType.getDisplayUnits().fromBase(newParams.stepSize).toInt()
+
+	init {
+		app.smartFolderHelper.setOrganizeByParams(folderId, newParams)
 	}
 
 	private var selectedValue = organizeByType.stepRange!!.clamp(initialValue).toInt()
 	private var applyChanges = false
 
-	private var sliderCard: ISliderCard? = null
-	private var headedCard: IHeadedContentCard? = null
-
 	override fun getProcessId() = PROCESS_ID
 
-	// ----------- IHeadedCardController implementation -----------
+// ----------- IModernSliderDialogController implementation -----------
 
-	override fun bindComponent(cardInstance: IHeadedContentCard) {
-		this.headedCard = cardInstance
-	}
+	override fun getSliderTitle(): String = getString(R.string.shared_string_step)
 
-	override fun getCardTitle(): String = getString(R.string.shared_string_step)
-
-	override fun getCardSummary() = formatValueWithUnits(selectedValue)
-
-	override fun getCardContentView(activity: FragmentActivity, nightMode: Boolean): View {
-		val innerSliderCard = SliderCard(activity, this, false)
-		return innerSliderCard.build()
-	}
-
-	// ----------- ISliderCardController implementation -----------
-
-	override fun bindComponent(cardInstance: ISliderCard) {
-		sliderCard = cardInstance
-	}
+	override fun getSliderSummary() = formatValueWithUnits(selectedValue)
 
 	override fun getSliderLimits(): Limits<Int> {
 		val range = organizeByType.stepRange!!
 		return Limits(range.min.toInt(), range.max.toInt())
 	}
 
-	override fun getSelectedSliderValue() = selectedValue
+	override fun getSelectedValue() = selectedValue
 
-	override fun onChangeSliderValue(newValue: Float) {
+	override fun onChangeValue(newValue: Float) {
 		selectedValue = newValue.toInt()
-		headedCard?.updateCardSummary()
 		setOrganizeByStep(selectedValue)
 	}
 
@@ -88,7 +76,21 @@ class OrganizeTracksStepController(
 		return formatValueWithUnits(number.toInt())
 	}
 
-	// ----------- implement specific ICustomizableSliderDialogController methods -----------
+	override fun onApplyChanges() {
+		if (!InAppPurchaseUtils.isOrganizeByTypeApplicable(app, organizeByType)) {
+			activity?.let {
+				ChoosePlanFragment.showInstance(it, OsmAndFeature.ADVANCED_WIDGETS)
+			}
+		} else {
+			applyChanges = true
+		}
+	}
+
+	override fun onDestroy(activity: FragmentActivity?) {
+		finishProcessIfNeeded(activity)
+	}
+
+// ----------- Specific logic methods -----------
 
 	private fun setOrganizeByStep(value: Int) {
 		val currentParams = app.smartFolderHelper.getOrganizeByParams(folderId)
@@ -98,28 +100,21 @@ class OrganizeTracksStepController(
 		}
 	}
 
-	override fun onApplyChanges() {
-		if (initialValue != selectedValue) {
-			setOrganizeByStep(selectedValue)
-			applyChanges = true
-		}
-	}
-
-	override fun onDestroy(activity: FragmentActivity?) {
-		finishProcessIfNeeded(activity)
+	private fun resetParams() {
+		app.smartFolderHelper.setOrganizeByParams(folderId, initialParams)
 	}
 
 	override fun finishProcessIfNeeded(activity: FragmentActivity?): Boolean {
 		if (super.finishProcessIfNeeded(activity)) {
 			if (!applyChanges) {
-				setOrganizeByStep(initialValue)
+				resetParams()
 			}
 			return true
 		}
 		return false
 	}
 
-	// ----------- Utilities methods -----------
+// ----------- Utilities methods -----------
 
 	private fun formatValueWithUnits(value: Int): String {
 		return "$value ${organizeByType.getDisplayUnits().getSymbol()}"
@@ -134,5 +129,13 @@ class OrganizeTracksStepController(
 		displayData.putExtra(DialogExtra.TITLE, getString(R.string.set_step_size))
 		displayData.putExtra(DialogExtra.SUBTITLE, getString(R.string.set_step_size_summary))
 		return displayData
+	}
+
+	override fun getRightButtonResId(): Int? {
+		return if (InAppPurchaseUtils.isOrganizeByTypeApplicable(app, organizeByType)) {
+			super.getRightButtonResId()
+		} else {
+			R.string.shared_string_unlock
+		}
 	}
 }

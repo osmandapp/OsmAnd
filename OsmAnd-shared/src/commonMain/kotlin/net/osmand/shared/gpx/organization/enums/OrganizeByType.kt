@@ -14,7 +14,8 @@ enum class OrganizeByType(
 	val filterType: TrackFilterType,
 	val category: OrganizeByCategory,
 	val stepRange: Limits? = null,
-	val strategy: OrganizeByStrategy
+	val strategy: OrganizeByStrategy,
+	val isPro: Boolean = true
 ) {
 	// General
 	ACTIVITY(
@@ -22,14 +23,15 @@ enum class OrganizeByType(
 		nameResId = "shared_string_activity",
 		filterType = TrackFilterType.ACTIVITY,
 		category = OrganizeByCategory.GENERAL,
-		strategy = OrganizeByListStrategy
+		strategy = OrganizeByListStrategy,
+		isPro = false
 	),
 	DURATION(
 		iconResId = "ic_action_time_span_75",
 		nameResId = "duration",
 		filterType = TrackFilterType.DURATION,
 		category = OrganizeByCategory.GENERAL,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 60),
 		strategy = OrganizeByRangeStrategy
 	),
 	TIME_IN_MOTION(
@@ -37,7 +39,7 @@ enum class OrganizeByType(
 		nameResId = "moving_time",
 		filterType = TrackFilterType.TIME_IN_MOTION,
 		category = OrganizeByCategory.GENERAL,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 60),
 		strategy = OrganizeByRangeStrategy
 	),
 	LENGTH(
@@ -45,7 +47,7 @@ enum class OrganizeByType(
 		nameResId = "shared_string_length",
 		filterType = TrackFilterType.LENGTH,
 		category = OrganizeByCategory.GENERAL,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 100),
 		strategy = OrganizeByRangeStrategy
 	),
 
@@ -55,7 +57,8 @@ enum class OrganizeByType(
 		nameResId = "year_of_creation",
 		filterType = TrackFilterType.DATE_CREATION,
 		category = OrganizeByCategory.DATE_TIME,
-		strategy = OrganizeByDateStrategy
+		strategy = OrganizeByDateStrategy,
+		isPro = false
 	),
 	MONTH_AND_YEAR(
 		iconResId = "ic_action_calendar_month",
@@ -71,7 +74,8 @@ enum class OrganizeByType(
 		nameResId = "nearest_city",
 		filterType = TrackFilterType.CITY,
 		category = OrganizeByCategory.LOCATION,
-		strategy = OrganizeByListStrategy
+		strategy = OrganizeByListStrategy,
+		isPro = false
 	),
 
 	// Speed
@@ -80,7 +84,7 @@ enum class OrganizeByType(
 		nameResId = "organize_by_max_speed",
 		filterType = TrackFilterType.MAX_SPEED,
 		category = OrganizeByCategory.SPEED,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 50),
 		strategy = OrganizeByRangeStrategy
 	),
 	AVG_SPEED(
@@ -88,7 +92,7 @@ enum class OrganizeByType(
 		nameResId = "avg_speed",
 		filterType = TrackFilterType.AVERAGE_SPEED,
 		category = OrganizeByCategory.SPEED,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 50),
 		strategy = OrganizeByRangeStrategy
 	),
 
@@ -132,7 +136,7 @@ enum class OrganizeByType(
 		nameResId = "max_sensor_speed",
 		filterType = TrackFilterType.MAX_SENSOR_SPEED,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 50),
 		strategy = OrganizeByRangeStrategy
 	),
 	SENSOR_SPEED_AVG(
@@ -140,7 +144,7 @@ enum class OrganizeByType(
 		nameResId = "avg_sensor_speed",
 		filterType = TrackFilterType.AVERAGE_SENSOR_SPEED,
 		category = OrganizeByCategory.SENSORS,
-		stepRange = Limits(1, 180),
+		stepRange = Limits(1, 50),
 		strategy = OrganizeByRangeStrategy
 	),
 	HEART_RATE_MAX(

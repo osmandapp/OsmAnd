@@ -6,6 +6,7 @@ import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -83,6 +84,7 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 
 	private long modifiedTime = -1;
 	private List<GpxDisplayGroup> displayGroups;
+	private List<GpxDisplayGroup> oldSplitGroups;
 
 	private View headerView;
 	private ListView listView;
@@ -103,6 +105,7 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 				selectedGpxFile = new SelectedGpxFile();
 				selectedGpxFile.setGpxFile(gpxFile, app);
 			}
+			oldSplitGroups = selectedGpxFile.getSplitGroups(app);
 
 			GpxDataItemCallback callback = new GpxDataItemCallback() {
 				@Override
@@ -216,7 +219,7 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 	private void updateHeader() {
 		View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 
-		if (getGpx() != null && !getGpx().isShowCurrentTrack() && adapter.getCount() > 0) {
+		if (getGpx() != null && adapter.getCount() > 0) {
 			setupSplitIntervalView(splitIntervalView);
 			if (options.isEmpty()) {
 				prepareSplitIntervalAdapterData();
@@ -276,20 +279,11 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 			splitType = GpxSplitType.TIME;
 			splitInterval = timeSplit.get(selectedSplitInterval);
 		}
-		saveNewSplit(splitType, splitInterval);
 
 		SplitTrackListener listener = getSplitTrackListener(selectedGpxFile);
 		GpxSplitParams params = new GpxSplitParams(splitType, splitInterval, false);
 
 		app.getGpxDisplayHelper().splitTrackAsync(selectedGpxFile, groups, params, listener);
-	}
-
-	private void saveNewSplit(@NonNull GpxSplitType splitType, double splitInterval) {
-		if (gpxDataItem != null) {
-			gpxDataItem.setParameter(SPLIT_TYPE, splitType.getType());
-			gpxDataItem.setParameter(SPLIT_INTERVAL, splitInterval);
-			gpxDbHelper.updateDataItem(gpxDataItem);
-		}
 	}
 
 	@NonNull
@@ -352,7 +346,7 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 		}
 	}
 
-	private void addLabelOption(@StringRes int resId){
+	private void addLabelOption(@StringRes int resId) {
 		options.add(app.getString(resId));
 		distanceSplit.add(-1d);
 		timeSplit.add(-1);
@@ -516,5 +510,11 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 			PointDescription pointDescription = mapLayers.getGpxLayer().getObjectName(gpxPoint);
 			mapLayers.getContextMenuLayer().showContextMenu(latLon, pointDescription, gpxPoint, null);
 		}
+	}
+
+	@Override
+	public void onDismiss(@NonNull DialogInterface dialog) {
+		super.onDismiss(dialog);
+		selectedGpxFile.setSplitGroups(oldSplitGroups, app, true);
 	}
 }

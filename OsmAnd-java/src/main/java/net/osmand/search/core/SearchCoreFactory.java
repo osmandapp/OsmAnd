@@ -88,15 +88,19 @@ public class SearchCoreFactory {
 	// context less (slow)
 	public static final int SEARCH_ADDRESS_BY_NAME_API_PRIORITY = 500;
 	public static final int SEARCH_ADDRESS_BY_NAME_API_PRIORITY_RADIUS2 = 500;
+	// results priority
 	public static final int SEARCH_ADDRESS_BY_NAME_PRIORITY = 500;
 	public static final int SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2 = 500;
 
 	// context less (slower)
 	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 500;
-	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 500;
-	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 500;
-	private static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
-	private static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
+	// api priority
+	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 600;
+	public static final int SEARCH_ADDRESS_BY_NAME_LONG_API_PRIORITY = 700;
+	
+	private static final double SEARCH_ADDRESS_BY_NAME_CITY_PRIORITY_DISTANCE = 0.4;
+	private static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.5;
+	private static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.7;
 	
 	public static final int SEARCH_OLC_WITH_CITY_PRIORITY = 8;
 	public static final int SEARCH_OLC_WITH_CITY_TOTAL_LIMIT = 500;
@@ -334,24 +338,25 @@ public class SearchCoreFactory {
 
 	public static class SearchAddressByNameAPI extends SearchBaseAPI {
 
-		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 100 * 1000;
+		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 50 * 1000;
+		private static final int LONG_ADDRESS_BBOX_RADIUS = 400 * 1000;
 		private static final int LIMIT = 10000;
+		private final int MAX_ADRESS_RESULTS_BY_REGIONS = 1000;
 
-		private Set<String> townCitiesInit = new LinkedHashSet<>();
-		private QuadTree<City> townCitiesQR = new QuadTree<City>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
-				12, 0.55f);
-		private QuadTree<City> boundariesQR = new QuadTree<City>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
-				12, 0.55f);
-		private List<City> resArray = new ArrayList<>();
+		private final boolean longDistance;
+		
 		private SearchStreetByCityAPI cityApi;
 		private SearchBuildingAndIntersectionsByStreetAPI streetsApi;
+		private final TownCitiesCache townCitiesCache;
 
 		public SearchAddressByNameAPI(SearchBuildingAndIntersectionsByStreetAPI streetsApi,
-									  SearchStreetByCityAPI cityApi) {
+									  SearchStreetByCityAPI cityApi, boolean longDistance, TownCitiesCache townCitiesCache) {
 			super(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.BOUNDARY, ObjectType.POSTCODE,
 					ObjectType.STREET, ObjectType.HOUSE, ObjectType.STREET_INTERSECTION);
 			this.streetsApi = streetsApi;
 			this.cityApi = cityApi;
+			this.longDistance = longDistance;
+			this.townCitiesCache = townCitiesCache;
 		}
 
 		@Override
@@ -359,8 +364,11 @@ public class SearchCoreFactory {
 			if (!p.isNoSelectedType() && p.getRadiusLevel() == 1) {
 				return -1;
 			}
-			if(p.isLastWord(ObjectType.POI) || p.isLastWord(ObjectType.POI_TYPE)) {
+			if (p.isLastWord(ObjectType.POI) || p.isLastWord(ObjectType.POI_TYPE)) {
 				return -1;
+			}
+			if (longDistance) {
+				return SEARCH_ADDRESS_BY_NAME_LONG_API_PRIORITY;
 			}
 			if (p.isNoSelectedType()) {
 				return SEARCH_ADDRESS_BY_NAME_API_PRIORITY;
@@ -376,11 +384,13 @@ public class SearchCoreFactory {
 
 		@Override
 		public int getMinimalSearchRadius(SearchPhrase phrase) {
+			// ?LONG? 2 radiuses 
 			return phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
 		}
 
 		@Override
 		public int getNextSearchRadius(SearchPhrase phrase) {
+			// ?LONG? 2 radiuses 
 			return phrase.getNextRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
 		}
 
@@ -402,13 +412,22 @@ public class SearchCoreFactory {
 		}
 
 		private void initAndSearchCities(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			QuadRect bbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
-			Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes(bbox, SearchPhraseDataType.ADDRESS);
+			QuadRect bbox = null;
+			Iterator<BinaryMapIndexReader> offlineIndexes = null;
+			int longRadius = LONG_ADDRESS_BBOX_RADIUS * 5;
+			int defRadius = DEFAULT_ADDRESS_BBOX_RADIUS * 5;
+			if (longDistance) {
+				bbox = phrase.getRadiusBBoxToSearch(longRadius);
+				offlineIndexes = phrase.getRadiusOfflineIndexes(defRadius, longRadius, SearchPhraseDataType.ADDRESS);
+			} else {
+				bbox = phrase.getRadiusBBoxToSearch(defRadius);
+				offlineIndexes = phrase.getRadiusOfflineIndexes(0, defRadius, SearchPhraseDataType.ADDRESS);
+			}
 			while (offlineIndexes.hasNext()) {
 				BinaryMapIndexReader r = offlineIndexes.next();
-				if (!townCitiesInit.contains(r.getRegionName())) {
+				if (!townCitiesCache.contains(r.getRegionName())) {
 					List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE, null, phrase.getSettings().getStat());
-					townCitiesInit.add(r.getRegionName());
+					townCitiesCache.add(r.getRegionName());
 					for (City c  : l) {
 						if (phrase.getSettings().isExportObjects()) {
 							resultMatcher.exportCity(phrase, c);
@@ -423,7 +442,7 @@ public class SearchCoreFactory {
 						if (bbox31 != null) {
 							qr = new QuadRect(bbox31[0], bbox31[1], bbox31[2], bbox31[3]);
 						}
-						townCitiesQR.insert(c, qr);
+						townCitiesCache.insertCityQR(c, qr);
 					}
 					l = r.getCities(null, CityBlocks.BOUNDARY_TYPE, null, phrase.getSettings().getStat());
 					for (City c  : l) {
@@ -439,7 +458,7 @@ public class SearchCoreFactory {
 						if (bbox31 != null) {
 							qr = new QuadRect(bbox31[0], bbox31[1], bbox31[2], bbox31[3]);
 						}
-						boundariesQR.insert(c, qr);
+						townCitiesCache.insertBoundaryQR(c, qr);
 					}
 				}
 			}
@@ -447,10 +466,9 @@ public class SearchCoreFactory {
 					&& (phrase.isUnknownSearchWordPresent() || phrase.isEmptyQueryAllowed())
 					&& phrase.isSearchTypeAllowed(ObjectType.CITY)) {
 				NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
-				resArray.clear();
-				resArray = townCitiesQR.queryInBox(bbox, resArray);
+				List<City>  cacheResArray = townCitiesCache.queryCities(bbox);
 				int limit = 0;
-				for (City c : resArray) {
+				for (City c : cacheResArray) {
 					SearchResult res = new SearchResult(phrase);
 					res.object = c;
 					res.file = (BinaryMapIndexReader) c.getReferenceFile();
@@ -460,7 +478,7 @@ public class SearchCoreFactory {
 					res.relatedObject = res.file;
 					res.location = c.getLocation();
 					res.priority = SEARCH_ADDRESS_BY_NAME_PRIORITY;
-					res.priorityDistance = 0.1;
+					res.priorityDistance = SEARCH_ADDRESS_BY_NAME_CITY_PRIORITY_DISTANCE;
 					res.objectType = ObjectType.CITY;
 					if (phrase.isEmptyQueryAllowed() && phrase.isEmpty()) {
 						resultMatcher.publish(res);
@@ -489,10 +507,10 @@ public class SearchCoreFactory {
 				final boolean locSpecified = phrase.getLastTokenLocation() != null;
 				LatLon loc = phrase.getLastTokenLocation();
 				final List<SearchResult> immediateResults = new ArrayList<>();
-//				final QuadRect streetBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
-				final QuadRect postcodeBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
-				final QuadRect villagesBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 3);
-				final QuadRect cityBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5); // covered by separate radius before
+				int searchRadius =  longDistance ? LONG_ADDRESS_BBOX_RADIUS : DEFAULT_ADDRESS_BBOX_RADIUS;
+				final QuadRect postcodeBbox = phrase.getRadiusBBoxToSearch(searchRadius * 5);
+				final QuadRect villagesBbox = phrase.getRadiusBBoxToSearch(searchRadius * 3);
+				final QuadRect cityBbox = phrase.getRadiusBBoxToSearch(searchRadius * 5); // covered by separate radius before
 				final int priority = phrase.isNoSelectedType() ?
 						SEARCH_ADDRESS_BY_NAME_PRIORITY : SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2;
 				final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
@@ -541,7 +559,7 @@ public class SearchCoreFactory {
 									return false;
 								}
 								sr.objectType = ObjectType.CITY;
-								sr.priorityDistance = 0.1;
+								sr.priorityDistance = SEARCH_ADDRESS_BY_NAME_CITY_PRIORITY_DISTANCE;
 							} else if (type == CityType.POSTCODE) {
 								if ((locSpecified && !postcodeBbox.contains(x, y, x, y))
 										|| !phrase.isSearchTypeAllowed(ObjectType.POSTCODE)) {
@@ -565,7 +583,7 @@ public class SearchCoreFactory {
 								}
 								City closestCity = null;
 								if (closestCities == null) {
-									closestCities = townCitiesQR.queryInBox(villagesBbox, new ArrayList<City>());
+									closestCities = townCitiesCache.queryCities(villagesBbox);
 								}
 								double minDist = -1;
 								double pDist = -1;
@@ -617,7 +635,13 @@ public class SearchCoreFactory {
 				}
 
 				SearchWord lastWord = phrase.getLastSelectedWord();
-				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5, SearchPhraseDataType.ADDRESS);
+				int minRadius = 0;
+				int maxRadius = DEFAULT_ADDRESS_BBOX_RADIUS * 5;
+				if (longDistance) {
+					minRadius = maxRadius;
+					maxRadius = LONG_ADDRESS_BBOX_RADIUS * 5;
+				}
+				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(minRadius, maxRadius, SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
 				Set<String> wordToSearchSplit = splitAddressSearchNames(wordToSearch);
 				if (wordToSearchSplit.size() > 1) {
@@ -643,13 +667,15 @@ public class SearchCoreFactory {
 							req.setBBoxRadius(c.getLocation().getLatitude(), c.getLocation().getLongitude(), radius);
 						}
 					} else {
-						int radius = phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
+						int radius = phrase.getRadiusSearch(maxRadius);
 						rect = SearchPhrase.calculateBbox(radius, loc);
 						req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(), radius);
 					}
                     offlineIterator = phrase.getOfflineIndexes(rect, SearchPhraseDataType.ADDRESS);
                 }
-				
+
+				int lastRegionPriority = 0;
+				int lastResultCount = resultMatcher.getCount();
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
@@ -677,10 +703,9 @@ public class SearchCoreFactory {
 								if (match) {
 									newParentSearchResult = cityResult;
 								} else {
-									resArray.clear();
 									QuadRect bbox = SearchPhrase.calculateBbox(1000, res.location);
-									resArray = boundariesQR.queryInBox(bbox, resArray);
-									for (City boundary : resArray) {
+									List<City>  cacheResArray = townCitiesCache.queryBoundaries(bbox);
+									for (City boundary : cacheResArray) {
 										int[] bb = boundary.getBbox31();
 										if (bb == null) {
 											continue;
@@ -722,14 +747,22 @@ public class SearchCoreFactory {
 						}
 					}
 					resultMatcher.apiSearchRegionFinished(this, r, phrase);
+					int regionPriority = phrase.getRegionPriority(r);
+					int cnt = resultMatcher.getCount() - lastResultCount;
+					if (cnt > MAX_ADRESS_RESULTS_BY_REGIONS && regionPriority > lastRegionPriority) {
+						break;
+					}
+					lastRegionPriority = regionPriority;
 				}
 			}
 		}
 		
 	}
 
-		public static class SearchAmenityByNameAPI extends SearchBaseAPI {
+
+	public static class SearchAmenityByNameAPI extends SearchBaseAPI {
 		private static final int LIMIT = 10000;
+		private static final int MAX_POI_RESULTS_BY_REGIONS = 1000;
 		private static final int BBOX_RADIUS = 500 * 1000;
 		private static final int BBOX_RADIUS_INSIDE = 5600 * 1000; // 5600 is the minimum to pass test [14: hisar]
 		private static final int BBOX_RADIUS_POI_IN_CITY = 25 * 1000;
@@ -752,6 +785,7 @@ public class SearchCoreFactory {
 			// BEFORE: it was searching exact match of whole phrase.getUnknownSearchPhrase() [ Check feedback ] 
 
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
+			// ?LONG? 2 radiuses !!!
 			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,
 					SearchPhraseDataType.POI);
 			String searchWord = phrase.getUnknownWordToSearch();
@@ -854,11 +888,19 @@ public class SearchCoreFactory {
 				fileRequest.searchPoiByName(req);
 				resultMatcher.apiSearchRegionFinished(this, fileRequest, phrase);
 			} else {
+				int lastRegionPriority = 0;
+				int lastResultCount = resultMatcher.getCount();
 				while (offlineIterator.hasNext()) {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
 					r.searchPoiByName(r.isBasemap() ? reqUnlimited : req);
 					resultMatcher.apiSearchRegionFinished(this, r, phrase);
+					int regionPriority = phrase.getRegionPriority(r);
+					int cnt = resultMatcher.getCount() - lastResultCount;
+					if (cnt > MAX_POI_RESULTS_BY_REGIONS && regionPriority > lastRegionPriority) {
+						break;
+					}
+					lastRegionPriority = regionPriority;
 				}
 			}
 			return true;
@@ -1831,6 +1873,42 @@ public class SearchCoreFactory {
 				return -1;
 			}
 			return SEARCH_BUILDING_BY_STREET_PRIORITY;
+		}
+	}
+	
+	public static class TownCitiesCache {
+		private Set<String> townCitiesInit = new LinkedHashSet<>();
+		private QuadTree<City> townCitiesQR = new QuadTree<City>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
+				12, 0.55f);
+		private QuadTree<City> boundariesQR = new QuadTree<City>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
+				12, 0.55f);
+		
+		public boolean contains(String value) {
+			return townCitiesInit.contains(value);
+		}
+		
+		public void add(String value) {
+			townCitiesInit.add(value);
+		}
+		
+		public void insertCityQR(City c, QuadRect r) {
+			townCitiesQR.insert(c, r);
+		}
+		
+		public void insertBoundaryQR(City c, QuadRect r) {
+			boundariesQR.insert(c, r);
+		}
+		
+		public List<City> queryCities(QuadRect bbox) {
+			List<City> cacheResArray = new ArrayList<>();
+			townCitiesQR.queryInBox(bbox, cacheResArray);
+			return cacheResArray;
+		}
+
+		public List<City> queryBoundaries(QuadRect bbox) {
+			List<City> cacheResArray = new ArrayList<>();
+			boundariesQR.queryInBox(bbox, cacheResArray);
+			return cacheResArray;
 		}
 	}
 

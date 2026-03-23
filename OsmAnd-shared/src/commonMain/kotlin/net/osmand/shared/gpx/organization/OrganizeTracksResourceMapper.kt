@@ -8,6 +8,7 @@ import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import net.osmand.shared.util.SharedDateFormatter
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.Localization
+import kotlin.math.roundToInt
 
 object OrganizeTracksResourceMapper {
 
@@ -46,8 +47,9 @@ object OrganizeTracksResourceMapper {
 			val min = value.min.toDouble()
 			val max = value.max.toDouble()
 
-			val from = displayUnits.fromBase(min).toInt()
-			val to = displayUnits.fromBase(max).toInt()
+			val from = displayUnits.fromBase(min).roundToInt()
+			val to = displayUnits.fromBase(max).roundToInt()
+
 			val formattedRange = Localization.getString(
 				"ltr_or_rtl_combine_via_dash",
 				from.toString(),

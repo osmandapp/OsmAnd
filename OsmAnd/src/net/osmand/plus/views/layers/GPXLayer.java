@@ -2,6 +2,7 @@ package net.osmand.plus.views.layers;
 
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.track.GpxSplitType.NO_SPLIT;
 
 import android.content.Context;
 import android.graphics.*;
@@ -54,6 +55,7 @@ import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.*;
+import net.osmand.plus.track.helpers.GpxDisplayHelper.GpxSplitParams;
 import net.osmand.plus.track.helpers.ParseGpxRouteTask.ParseGpxRouteListener;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -87,6 +89,7 @@ import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
+import net.osmand.shared.palette.data.PaletteChangeEvent;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -143,6 +146,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private GpxDbHelper gpxDbHelper;
+	private GpxDisplayHelper gpxDisplayHelper;
 	private MapMarkersHelper mapMarkersHelper;
 	private GpxSelectionHelper selectedGpxHelper;
 
@@ -212,6 +216,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		app = view.getApplication();
 		settings = app.getSettings();
 		gpxDbHelper = app.getGpxDbHelper();
+		gpxDisplayHelper = app.getGpxDisplayHelper();
 		mapMarkersHelper = app.getMapMarkersHelper();
 		selectedGpxHelper = app.getSelectedGpxHelper();
 		osmandRenderer = app.getResourceManager().getRenderer().getRenderer();
@@ -368,6 +373,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 		setInvalidated(false);
 		mapActivityInvalidated = false;
+	}
+
+	public void onPaletteChanged(@NonNull PaletteChangeEvent event) {
+		if (event instanceof PaletteChangeEvent.Updated updated) {
+			String paletteName = updated.getItem().getId();
+			for (CachedTrack cachedTrack : segmentsCache.values()) {
+				cachedTrack.onPaletteUpdated(paletteName);
+			}
+		}
 	}
 
 	private boolean updateTmpVisibleTrack(@NonNull List<SelectedGpxFile> visibleGPXFiles) {
@@ -531,9 +545,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private void drawSelectedFilesSplits(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
 	                                     @NonNull List<SelectedGpxFile> selectedGPXFiles) {
 		if (tileBox.getZoom() >= START_ZOOM) {
-			// request to load
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
-				List<GpxDisplayGroup> groups = selectedGpxFile.getSplitGroups(app);
+				List<GpxDisplayGroup> groups = getSplitGroups(selectedGpxFile);
 				if (!Algorithms.isEmpty(groups)) {
 					GpxFile gpxFile = selectedGpxFile.getGpxFile();
 					KFile file = new KFile(gpxFile.getPath());
@@ -604,7 +617,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						}
 					}
 				}
-				List<GpxDisplayGroup> groups = selectedGpxFile.getSplitGroups(app);
+				List<GpxDisplayGroup> groups = getSplitGroups(selectedGpxFile);
 				if (!Algorithms.isEmpty(groups)) {
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
 					for (GpxDisplayItem item : items) {
@@ -654,7 +667,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						}
 					}
 				}
-				List<GpxDisplayGroup> groups = selectedGpxFile.getSplitGroups(app);
+				List<GpxDisplayGroup> groups = getSplitGroups(selectedGpxFile);
 				if (!Algorithms.isEmpty(groups)) {
 					int trackColor = appearanceHelper.getTrackColor(gpxFile, cachedColor, gpxItem, dirItem, selected);
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
@@ -693,6 +706,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			splitLabelsCountCached = 0;
 			clearSelectedFilesSplits();
 		}
+	}
+
+	@Nullable
+	private List<GpxDisplayGroup> getSplitGroups(@NonNull SelectedGpxFile selectedGpxFile) {
+		GpxSplitParams params = gpxDisplayHelper.getGpxSplitParams(selectedGpxFile);
+		return params != null && params.splitType() != NO_SPLIT ? selectedGpxFile.getSplitGroups(app) : null;
 	}
 
 	private boolean updateBitmaps() {

@@ -292,7 +292,7 @@
     <string name="poi_traffic_calming_hump">Μειωτής ταχύτητας</string>
     <string name="poi_traffic_calming_island">Νησίδα</string>
     <string name="poi_service_tyres">Ελαστικά</string>
-    <string name="poi_vehicle_inspection">ΚΤΕΟ</string>
+    <string name="poi_vehicle_inspection">Επιθεώρηση οχήματος</string>
     <string name="poi_car_wash">Πλυντήριο αυτοκινήτων</string>
     <string name="poi_fuel">Πρατήριο καυσίμων;Βενζινάδικο</string>
     <string name="poi_fuel_diesel">Ντίζελ</string>
@@ -647,7 +647,7 @@
     <string name="poi_ice_skating">Παγοδρομία</string>
     <string name="poi_sport_motor">Μηχανοκίνητος αθλητισμός</string>
     <string name="poi_ice_stock">Άις στοκ</string>
-    <string name="poi_korfbal">Κόρφμπολ</string>
+    <string name="poi_korfball">Κόρφμπολ</string>
     <string name="poi_sport_multi">Πολυάθλημα</string>
     <string name="poi_orienteering">Ανάγνωση χαρτών</string>
     <string name="poi_paddle_tennis">Αντισφαίριση με κουπί</string>
@@ -3789,7 +3789,7 @@
     <string name="poi_internet_access_fee_customers">Πρόσβαση Διαδικτύου: πελάτες</string>
     <string name="poi_video_no">Όχι</string>
     <string name="poi_booth">Τύπος θαλάμου</string>
-    <string name="poi_covered_booth">Θάλαμος</string>
+    <string name="poi_covered_booth">Ναι</string>
     <string name="poi_sms_yes">Ναι;SMS</string>
     <string name="poi_dive_centre">Κέντρο αυτόνομης κατάδυσης</string>
     <string name="poi_resort_hunting">Βάση κυνηγιού</string>

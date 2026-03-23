@@ -32,7 +32,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.main.data.DefaultColors;
+import net.osmand.plus.card.color.palette.solid.data.DefaultColors;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.NativeUtilities;
@@ -279,7 +279,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 	@Override
 	public boolean supportsNaturalObtainDataAsync() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -299,7 +299,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 	@Override
 	public boolean waitForLoading() {
-		return true;
+		return false;
 	}
 
 	private boolean isMapRendererLost() {

@@ -32,8 +32,8 @@ class GpxTrackAnalysis {
 
 	private val parameters = mutableMapOf<GpxParameter, Any?>()
 
-	var minHdop = Double.NaN
-	var maxHdop = Double.NaN
+	var minHdop = Float.NaN
+	var maxHdop = Float.NaN
 
 	var metricEnd = 0.0
 	var secondaryMetricEnd = 0.0
@@ -595,20 +595,21 @@ class GpxTrackAnalysis {
 					}
 				}
 
-				var attributes = point.attributes
-				if (attributes == null) {
-					attributes = PointAttributes(distance, timeDiff.toFloat(), firstPoint, lastPoint).apply {
-						this.speed = speed
-						this.elevation = elevation
-					}
-				} else {
-					attributes.distance = distance
-					attributes.timeDiff = timeDiff.toFloat()
-					attributes.firstPoint = firstPoint
-					attributes.lastPoint = lastPoint
-					attributes.speed = speed
-					attributes.elevation = elevation
+				// Reuse existing PointAttributes to avoid per‑point allocation
+				val attributes = point.attributes ?: run {
+					val a = PointAttributes(0f, 0f, false, false)
+					point.attributes = a
+					a
 				}
+
+				// Update fields (no new object created)
+				attributes.distance = distance
+				attributes.timeDiff = timeDiff.toFloat()
+				attributes.firstPoint = firstPoint
+				attributes.lastPoint = lastPoint
+				attributes.speed = speed
+				attributes.elevation = elevation
+
 				addWptAttribute(point, attributes, pointsAnalyser)
 				if (attributes.sensorSpeed > 0 && !attributes.sensorSpeed.isInfinite()) {
 					_maxSensorSpeed = maxOf(attributes.sensorSpeed, _maxSensorSpeed)
@@ -937,19 +938,19 @@ class GpxTrackAnalysis {
 	private fun calculateMaxSpeedForSlope(
 		slope: ElevationDiffsCalculator.SlopeInfo?,
 		segment: SplitSegment
-	): Double {
-		if (slope == null) return 0.0
+	): Float {
+		if (slope == null) return 0.0f
 		val startIdx = slope.startPointIndex
 		val endIdx = slope.endPointIndex
-		if (startIdx > endIdx) return 0.0
-		var maxSpeed = 0.0
+		if (startIdx > endIdx) return 0.0f
+		var maxSpeed = 0.0f
 		for (i in startIdx..endIdx) {
 			val pt = segment[i]
 			val hasAttributes = pt.attributes != null
-			val speed = if (hasAttributes) pt.attributes?.speed?.toDouble() else pt.speed
+			val speed = if (hasAttributes) pt.attributes?.speed else pt.speed
 			if (speed != null) {
 				if (speed > maxSpeed) {
-					maxSpeed = speed.toDouble()
+					maxSpeed = speed
 				}
 			}
 		}
@@ -977,7 +978,7 @@ class GpxTrackAnalysis {
             if (distance < 0f) {
                 distance = KMapUtils.getEllipsoidDistance(prev.lat, prev.lon, pt.lat, pt.lon).toFloat()
             }
-            var speed = pt.attributes?.speed?.toDouble() ?: pt.speed ?: 0.0
+	        var speed = pt.attributes?.speed?.takeIf { !it.isNaN() }?.toDouble() ?: pt.speed.toDouble()
             if (speed == 0.0) {
                 speed = distance / timeDiffSec.toDouble()
             }

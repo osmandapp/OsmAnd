@@ -20,7 +20,7 @@ abstract class ElevationDiffsCalculator {
 		val endPointIndex: Int,
 		var elevDiff: Double,
 		var distance: Double = 0.0,
-		var maxSpeed: Double = 0.0,
+		var maxSpeed: Float = 0.0f,
         var movingTime: Long = 0L
 	)
 
@@ -28,10 +28,8 @@ abstract class ElevationDiffsCalculator {
 	private var lastDownhill: SlopeInfo? = null
 
 	abstract fun getPointDistance(index: Int): Double
-
 	abstract fun getPointElevation(index: Int): Double
 	abstract fun getPointIndex(index: Int): Int
-
 	abstract fun getPointsCount(): Int
 
 	fun getDiffElevationUp(): Double {

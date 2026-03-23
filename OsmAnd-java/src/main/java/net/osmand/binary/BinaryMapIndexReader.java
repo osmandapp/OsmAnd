@@ -1518,13 +1518,13 @@ public class BinaryMapIndexReader {
 		req.numberOfReadSubtrees = 0;
 		List<PoiRegion> lst = onlyIndex == null ? poiIndexes : Collections.singletonList(onlyIndex);
 		for (PoiRegion poiIndex : lst) {
-			long statReq = req.beginSearchStats(BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
+			long statReq = req.beginSearchStats(BinaryMapIndexReaderApiName.POI_BY_TYPE, req, poiIndex, codedIS);
 			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
 			long old = codedIS.pushLimitLong((long) poiIndex.length);
 			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 			codedIS.popLimit(old);
-			req.endSearchStats(statReq, BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
+			req.endSearchStats(statReq, BinaryMapIndexReaderApiName.POI_BY_TYPE, req, poiIndex, codedIS);
 		}
 		return req.getSearchResults();
 	}
@@ -2620,6 +2620,7 @@ req.setSearchStat(stat);
 	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
 			TIntArrayList matchedCharacters) throws IOException {
 		boolean[] matched = new boolean[matchedCharacters.size()];
+		boolean[] matchedSubtables = new boolean[matchedCharacters.size()];
 		String key = null;
 		boolean shouldWeReadSubtable = false;
 		while (true) {
@@ -2634,7 +2635,7 @@ req.setSearchStat(stat);
 					key = prefix + key;
 				}
 				shouldWeReadSubtable = matchIndexByNameKey(instance, queries, listOffsets, matchedCharacters, key,
-						matched);
+						matched, matchedSubtables);
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
 				int val = (int) readInt(); // FIXME for 64 bit support
@@ -2651,7 +2652,7 @@ req.setSearchStat(stat);
 					List<String> subqueries = new ArrayList<>(queries);
 					// reset query so we don't search what was not matched
 					for(int i = 0; i < queries.size(); i++) {
-						if(!matched[i]) {
+						if(!matchedSubtables[i]) {
 							subqueries.set(i, null);
 						}
 					}
@@ -2669,18 +2670,27 @@ req.setSearchStat(stat);
 	}
 
 	private boolean matchIndexByNameKey(Collator instance, List<String> queries, List<TIntArrayList> listOffsets,
-			TIntArrayList matchedCharacters, String key, boolean[] matched) {
+			TIntArrayList matchedCharacters, String key, boolean[] matched, boolean[] matchedSubtables) {
 		boolean shouldWeReadSubtable = false;
 		for (int i = 0; i < queries.size(); i++) {
 			int charMatches = matchedCharacters.get(i);
 			String query = queries.get(i);
 			matched[i] = false;
+			matchedSubtables[i] = false;
 			if (query == null) {
 				continue;
 			}
 			
+			boolean keyStartsWithQuery = CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+			boolean queryStartsWithKey = CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+			// Subtable traversal must not be gated by matchedCharacters, otherwise alternative branches
+			// (e.g. 'mu*' vs 'mü*') could be pruned before reaching same-length terminal keys.
+			boolean potentialBranchMatch = keyStartsWithQuery || queryStartsWithKey;
+			matchedSubtables[i] = potentialBranchMatch;
+			shouldWeReadSubtable |= potentialBranchMatch;
+
 			// check query is part of key (the best matching)
-			if (CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+			if (keyStartsWithQuery) {
 				if (query.length() >= charMatches) {
 					if (query.length() > charMatches) {
 						matchedCharacters.set(i, query.length());
@@ -2689,7 +2699,7 @@ req.setSearchStat(stat);
 					matched[i] = true;
 				}
 				// check key is part of query
-			} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+			} else if (queryStartsWithKey) {
 				if (key.length() >= charMatches) {
 					if (key.length() > charMatches) {
 						matchedCharacters.set(i, key.length());
@@ -2698,7 +2708,6 @@ req.setSearchStat(stat);
 					matched[i] = true;
 				}
 			}
-			shouldWeReadSubtable |= matched[i];
 		}
 		return shouldWeReadSubtable;
 	}

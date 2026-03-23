@@ -17,18 +17,11 @@
 		app:topPanel="true" />
 
 	<FrameLayout
-		android:id="@+id/top_controls_container"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
-
-		<FrameLayout
-			android:id="@+id/lanes_widget_special_position"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_horizontal|top"
-			android:layout_marginTop="@dimen/map_button_margin" />
-
-	</FrameLayout>
+		android:id="@+id/lanes_widget_special_position"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal|top"
+		android:layout_marginTop="@dimen/map_button_margin" />
 
 	<net.osmand.plus.views.controls.SideWidgetsPanel
 		android:id="@+id/map_left_widgets_panel"

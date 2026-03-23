@@ -3,7 +3,7 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/card"
-	style="@style/Widget.App.Material.ActionTileCard"
+	style="@style/Widget.App.Material.ActionCheckableTileCard"
 	android:layout_width="match_parent"
 	android:layout_height="66dp"
 	android:clickable="true"

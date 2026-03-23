@@ -20,26 +20,27 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
+import net.osmand.plus.card.color.palette.solid.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.solid.SolidPaletteController;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
-import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
-import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ColorCardController;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.mapcontextmenu.editors.controller.EditorColorController;
+import net.osmand.plus.palette.contract.IExternalPaletteListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
-import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.palette.domain.PaletteItem;
 
 import java.util.List;
 import java.util.Locale;
 
-public class Buildings3DColorFragment extends ConfigureMapOptionFragment implements BaseCard.CardListener {
+public class Buildings3DColorFragment extends ConfigureMapOptionFragment implements BaseCard.CardListener, DayNightHelper.MapThemeProvider {
 	public static final String DAY_COLOR = "day_color";
 	public static final String NIGHT_COLOR = "night_color";
 	public static final String COLOR_TYPE = "color_type";
@@ -93,7 +94,7 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 
 	@Override
 	public void onDestroy() {
-		if(initialColorType != colorType) {
+		if (initialColorType != colorType) {
 			srtmPlugin.BUILDINGS_3D_COLOR_STYLE.set(initialColorType.getId());
 		}
 		srtmPlugin.apply3DBuildingsColorStyle(Buildings3DColorType.Companion.getById(srtmPlugin.BUILDINGS_3D_COLOR_STYLE.get()));
@@ -166,24 +167,33 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 		if (mapActivity != null) {
 			colorsPaletteCard = new ColorsPaletteCard(mapActivity, getColorController());
 			cardsContainer.addView(colorsPaletteCard.build(cardsContainer.getContext()));
-			getColorController().selectColor(isDayModeColorSelection ? dayColor : nightColor);
-			colorsPaletteCard.updatePaletteColors(getColorController().getSelectedColor());
+			getColorController().selectPaletteItem(isDayModeColorSelection ? dayColor : nightColor, false);
+			colorsPaletteCard.updatePaletteItems(getColorController().getSelectedPaletteItem());
 		}
-		getColorController().setPaletteListener(paletteColor -> {
-			if (isDayModeColorSelection) {
-				dayColor = paletteColor.getColor();
-			} else {
-				nightColor = paletteColor.getColor();
-			}
-			if (isDayModeColorSelection && !nightMode || !isDayModeColorSelection && nightMode) {
-				srtmPlugin.apply3DBuildingsColor(paletteColor.getColor());
-				MapActivity activity = getMapActivity();
-				if (activity != null) {
-					activity.refreshMapComplete();
-					activity.updateLayers();
+		getColorController().setPaletteListener(new IExternalPaletteListener() {
+			@Override
+			public void onPaletteItemSelected(@NonNull PaletteItem item) {
+				if (item instanceof PaletteItem.Solid solid) {
+					if (isDayModeColorSelection) {
+						dayColor = solid.getColorInt();
+					} else {
+						nightColor = solid.getColorInt();
+					}
+					if (isDayModeColorSelection && !nightMode || !isDayModeColorSelection && nightMode) {
+						srtmPlugin.apply3DBuildingsColor(solid.getColorInt());
+
+						callMapActivity(activity -> {
+							activity.refreshMapComplete();
+							activity.updateLayers();
+						});
+					}
+					updateApplyButton(isChangesMade());
 				}
 			}
-			updateApplyButton(isChangesMade());
+
+			@Override
+			public void onPaletteItemAdded(@Nullable PaletteItem oldItem, @NonNull PaletteItem newItem) {
+			}
 		});
 
 		colorTypeTv = view.findViewById(R.id.coloring_type);
@@ -204,8 +214,8 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 		TextToggleButton.TextRadioItem day = new TextToggleButton.TextRadioItem(app.getString(R.string.daynight_mode_day));
 		day.setOnClickListener((radioItem, v) -> {
 			isDayModeColorSelection = true;
-			getColorController().selectColor(dayColor);
-			colorsPaletteCard.updatePaletteColors(getColorController().getSelectedColor());
+			getColorController().selectPaletteItem(dayColor, false);
+			colorsPaletteCard.updatePaletteItems(getColorController().getSelectedPaletteItem());
 			updateDayNightSelection();
 			return true;
 		});
@@ -214,8 +224,8 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 		TextToggleButton.TextRadioItem night = new TextToggleButton.TextRadioItem(app.getString(R.string.daynight_mode_night));
 		night.setOnClickListener((radioItem, v) -> {
 			isDayModeColorSelection = false;
-			getColorController().selectColor(nightColor);
-			colorsPaletteCard.updatePaletteColors(getColorController().getSelectedColor());
+			getColorController().selectPaletteItem(nightColor, false);
+			colorsPaletteCard.updatePaletteItems(getColorController().getSelectedPaletteItem());
 			updateDayNightSelection();
 			return true;
 		});
@@ -239,9 +249,9 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 	}
 
 	private void updateDayNightSelection() {
-		getColorController().selectColor(isDayModeColorSelection ? dayColor : nightColor);
+		getColorController().selectPaletteItem(isDayModeColorSelection ? dayColor : nightColor, false);
 		if (colorsPaletteCard != null) {
-			colorsPaletteCard.updatePaletteColors(getColorController().getSelectedColor());
+			colorsPaletteCard.updatePaletteItems(getColorController().getSelectedPaletteItem());
 		}
 		dayNightToggleButton.setSelectedItem(isDayModeColorSelection ? 0 : 1);
 	}
@@ -279,12 +289,29 @@ public class Buildings3DColorFragment extends ConfigureMapOptionFragment impleme
 	}
 
 	@NonNull
-	private ColorsPaletteController getColorController() {
+	private SolidPaletteController getColorController() {
 		return EditorColorController.getInstance(app, this, getColor());
 	}
 
 	@ColorInt
 	public int getColor() {
 		return isDayModeColorSelection ? dayColor : nightColor;
+	}
+
+	@Override
+	public DayNightMode getMapTheme() {
+		return colorType == Buildings3DColorType.CUSTOM ? isDayModeColorSelection ? DayNightMode.DAY : DayNightMode.NIGHT : null;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		app.getDaynightHelper().setExternalMapThemeProvider(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		app.getDaynightHelper().setExternalMapThemeProvider(null);
 	}
 }

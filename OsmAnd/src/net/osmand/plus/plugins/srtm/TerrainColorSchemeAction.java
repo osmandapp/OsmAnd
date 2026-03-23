@@ -20,8 +20,8 @@ import androidx.appcompat.widget.SwitchCompat;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.card.color.palette.gradient.GradientUiHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.palette.view.binder.GradientViewBinder;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -241,7 +241,7 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 				public void collectingPalletFinished(@Nullable ColorPalette colorPalette) {
 					if (colorPalette != null) {
 						List<ColorValue> colorsList = colorPalette.getColors();
-						imageView.setImageDrawable(GradientUiHelper.getGradientDrawable(app, colorsList, GradientDrawable.OVAL));
+						imageView.setImageDrawable(GradientViewBinder.createGradientDrawable(app, colorsList, GradientDrawable.OVAL));
 					} else {
 						TerrainColorSchemeAction.super.setIcon(app, item, imageView, iconProgressBar);
 					}

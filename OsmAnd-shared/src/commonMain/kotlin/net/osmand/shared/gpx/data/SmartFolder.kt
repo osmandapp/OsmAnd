@@ -55,10 +55,32 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		return trackItems
 	}
 
-	fun addTrackItem(trackItem: TrackItem) {
-		if (!getTrackItems().contains(trackItem)) {
-			trackItems = KCollectionUtils.addToList(getTrackItems(), trackItem)
-			folderAnalysis = null
+	/**
+	 * Ensures the track is present in the folder and forces a cache update.
+	 * Since [TrackItem] is mutable, its properties (e.g., Activity) might have changed
+	 * even if it's already in the list, requiring a re-evaluation of organized groups.
+	 */
+	fun addTrackItem(trackItem: TrackItem, forceInvalidate: Boolean = false) {
+		var added = false
+		val currentItems = getTrackItems()
+		if (!currentItems.contains(trackItem)) {
+			trackItems = KCollectionUtils.addToList(currentItems, trackItem)
+			added = true
+		}
+		if (added || forceInvalidate) {
+			invalidateCache()
+		}
+	}
+
+	fun removeTrackItem(trackItem: TrackItem, forceInvalidate: Boolean = false) {
+		var removed = false
+		val currentItems = getTrackItems()
+		if (currentItems.contains(trackItem)) {
+			trackItems = KCollectionUtils.removeFromList(currentItems, trackItem)
+			removed = true
+		}
+		if (removed || forceInvalidate) {
+			invalidateCache()
 		}
 	}
 
@@ -96,17 +118,21 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	override fun lastModified() = creationTime
 
-	fun resetItems() {
-		trackItems = ArrayList()
-		tracksOrganizer.clearCache()
-		folderAnalysis = null
-	}
-
 	fun getOrganizeByType(): OrganizeByType? {
 		return tracksOrganizer.params?.type
 	}
 
 	fun initTracksOrganizer() {
 		tracksOrganizer.initParams(organizeByParams)
+	}
+
+	fun resetItems() {
+		trackItems = ArrayList()
+		invalidateCache()
+	}
+
+	fun invalidateCache() {
+		tracksOrganizer.clearCache()
+		folderAnalysis = null
 	}
 }

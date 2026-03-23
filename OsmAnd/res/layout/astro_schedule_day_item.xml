@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical"
+	android:minHeight="56dp">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:baselineAligned="false"
+		android:minHeight="55dp"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:paddingHorizontal="16dp">
+
+		<TextView
+			android:id="@+id/schedule_day_label"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="6dp"
+			android:layout_weight="0.9"
+			android:ellipsize="end"
+			android:maxLines="1"
+			android:textColor="?android:attr/textColorPrimary"
+			android:textSize="16sp" />
+
+		<LinearLayout
+			android:id="@+id/schedule_rise_block"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1.15"
+			android:baselineAligned="false"
+			android:gravity="end|center_vertical"
+			android:minHeight="24dp"
+			android:orientation="horizontal">
+
+			<TextView
+				android:id="@+id/schedule_rise_arrow"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginEnd="4dp"
+				android:includeFontPadding="false"
+				android:textColor="?android:attr/textColorSecondary"
+				android:textSize="12sp" />
+
+			<TextView
+				android:id="@+id/schedule_rise_time_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:includeFontPadding="false"
+				android:maxLines="1"
+				android:textColor="?android:attr/textColorSecondary"
+				android:textSize="16sp" />
+
+			<TextView
+				android:id="@+id/schedule_rise_time_meridiem"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="2dp"
+				android:includeFontPadding="false"
+				android:maxLines="1"
+				android:textColor="?android:attr/textColorSecondary"
+				android:textSize="11sp" />
+		</LinearLayout>
+
+		<net.osmand.plus.plugins.astronomy.views.contextmenu.AstroScheduleGraphView
+			android:id="@+id/schedule_day_graph"
+			android:layout_width="0dp"
+			android:layout_height="24dp"
+			android:layout_marginStart="10dp"
+			android:layout_marginEnd="10dp"
+			android:layout_weight="1.4" />
+
+		<FrameLayout
+			android:id="@+id/schedule_set_block_container"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1.35"
+			android:minHeight="24dp"
+			android:paddingEnd="12dp">
+
+			<LinearLayout
+				android:id="@+id/schedule_set_block"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="start|center_vertical"
+				android:baselineAligned="false"
+				android:gravity="start|center_vertical"
+				android:orientation="horizontal">
+
+				<TextView
+					android:id="@+id/schedule_set_arrow"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_marginEnd="4dp"
+					android:includeFontPadding="false"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="12sp" />
+
+				<TextView
+					android:id="@+id/schedule_set_time_main"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:includeFontPadding="false"
+					android:maxLines="1"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/schedule_set_time_meridiem"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="2dp"
+					android:includeFontPadding="false"
+					android:maxLines="1"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="11sp" />
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/schedule_set_next_day"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top|end"
+				android:includeFontPadding="false"
+				android:textColor="?android:attr/textColorSecondary"
+				android:textSize="16sp"
+				android:visibility="gone" />
+		</FrameLayout>
+	</LinearLayout>
+
+	<View
+		android:id="@+id/schedule_row_divider"
+		android:layout_width="match_parent"
+		android:layout_marginHorizontal="16dp"
+		android:layout_height="1dp"
+		android:background="?attr/divider_color" />
+
+</LinearLayout>

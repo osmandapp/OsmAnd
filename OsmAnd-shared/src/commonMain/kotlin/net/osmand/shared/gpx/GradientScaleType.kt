@@ -1,5 +1,6 @@
 package net.osmand.shared.gpx
 
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory
 import net.osmand.shared.routing.RouteColorize
 import net.osmand.shared.util.Localization
 
@@ -36,6 +37,14 @@ enum class GradientScaleType(
 			ALTITUDE -> RouteColorize.ColorizationType.ELEVATION
 			SLOPE -> RouteColorize.ColorizationType.SLOPE
 			else -> RouteColorize.ColorizationType.NONE
+		}
+	}
+
+	fun toPaletteCategory(): GradientPaletteCategory {
+		return when (this) {
+			SPEED -> GradientPaletteCategory.SPEED
+			ALTITUDE -> GradientPaletteCategory.ALTITUDE
+			SLOPE -> GradientPaletteCategory.SLOPE
 		}
 	}
 

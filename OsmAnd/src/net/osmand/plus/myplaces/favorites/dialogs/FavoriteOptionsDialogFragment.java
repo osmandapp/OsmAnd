@@ -165,9 +165,13 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 						b.setView(container);
 						b.setNegativeButton(R.string.shared_string_cancel, null);
 						b.setPositiveButton(R.string.shared_string_save, (dialog, which) -> {
-							String name = nameEditText.getText().toString();
+							String name = nameEditText.getText().toString().trim();
 							boolean nameChanged = !Algorithms.objectEquals(group.getName(), name);
 							if (nameChanged) {
+								if (helper.groupExists(name)) {
+									app.showShortToastMessage(R.string.favorite_category_dublicate_message);
+									return;
+								}
 								helper.updateGroupName(group, name, true);
 								updateAll();
 							}

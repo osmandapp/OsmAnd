@@ -35,11 +35,17 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import org.apache.commons.logging.Log;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 
@@ -57,6 +63,9 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 
 	private DialogButton cancelButton;
 	private DialogButton applyButton;
+
+	private RulerWidget rulerWidget;
+	private List<MapButton> mapButtons = new ArrayList<>();
 
 	private boolean editMode;
 	private boolean continued;
@@ -131,12 +140,13 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer controlsLayer = mapLayers.getMapControlsLayer();
 
-		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_zoom_in_button));
-		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_zoom_out_button));
-		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_my_location_button));
+		mapButtons.add(view.findViewById(R.id.map_zoom_in_button));
+		mapButtons.add(view.findViewById(R.id.map_zoom_out_button));
+		mapButtons.add(view.findViewById(R.id.map_my_location_button));
+		controlsLayer.addCustomizedDefaultMapButtons(mapButtons);
 
-		RulerWidget mapRuler = view.findViewById(R.id.map_ruler_layout);
-		mapLayers.getMapInfoLayer().setupRulerWidget(mapRuler);
+		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
+		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout));
 	}
 
 	private void setupActionButtons(@NonNull View view) {
@@ -211,9 +221,12 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 		if (fragment != null && !continued) {
 			fragment.onActivityResult(REQUEST_CODE, CANCEL_RESULT_CODE, null);
 		}
-		if (!continued) {
-			refreshControlsButtons();
+		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
+		mapLayers.getMapControlsLayer().removeCustomMapButtons(mapButtons);
+		if (rulerWidget != null) {
+			mapLayers.getMapInfoLayer().removeRulerWidgets(Collections.singletonList(rulerWidget));
 		}
+		refreshControlsButtons();
 	}
 
 	private void refreshControlsButtons() {

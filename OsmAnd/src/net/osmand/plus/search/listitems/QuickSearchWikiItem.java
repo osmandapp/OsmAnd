@@ -1,5 +1,8 @@
 package net.osmand.plus.search.listitems;
 
+import static net.osmand.data.Amenity.CONTENT;
+import static net.osmand.data.Amenity.DESCRIPTION;
+
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -42,7 +45,10 @@ public class QuickSearchWikiItem extends QuickSearchListItem {
 		String lang = amenity.getContentLanguage("content", articleLang, "en");
 		this.title = amenity.getName();
 
-		String text = amenity.getDescription(lang);
+		String text = amenity.getTagContent(CONTENT, lang);
+		if (Algorithms.isEmpty(text)) {
+			text = amenity.getTagContent(DESCRIPTION, lang);
+		}
 		boolean html = !Algorithms.isEmpty(text) && Algorithms.isHtmlText(text);
 		this.description = html ? WikiArticleHelper.getPartialContent(text) : text;
 		this.type = getPoiTypeTranslation(app, amenity);
@@ -54,22 +60,6 @@ public class QuickSearchWikiItem extends QuickSearchListItem {
 	@NonNull
 	public Amenity getAmenity() {
 		return amenity;
-	}
-
-	@NonNull
-	private String getPoiTypeTranslation(@NonNull OsmandApplication app, @NonNull Amenity amenity) {
-		String itemType = getPoiTypeKey(amenity);
-		PoiType subType = app.getPoiTypes().getPoiTypeByKey(itemType);
-		return subType != null ? subType.getTranslation() : "";
-	}
-
-	@NonNull
-	private String getPoiTypeKey(@NonNull Amenity amenity) {
-		String itemType = amenity.getOsmandPoiKey();
-		if (itemType == null) {
-			itemType = amenity.getSubType();
-		}
-		return itemType;
 	}
 
 	@NonNull

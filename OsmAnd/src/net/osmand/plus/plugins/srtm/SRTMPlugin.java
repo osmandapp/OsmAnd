@@ -17,6 +17,7 @@ import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -50,6 +51,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.shared.ColorPalette;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 
@@ -117,7 +119,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	public SRTMPlugin(OsmandApplication app) {
 		super(app);
 
-		ENABLE_3D_MAP_OBJECTS = registerBooleanPreference("enable_3d_map_objects", false).makeProfile().cache();
+		ENABLE_3D_MAP_OBJECTS = registerBooleanPreference("enable_3d_map_objects", false, false).makeProfile().cache();
 		BUILDINGS_3D_ALPHA = registerFloatPreference("3d_buildings_alpha", BUILDINGS_3D_ALPHA_DEF_VALUE).makeProfile().cache();
 		BUILDINGS_3D_VIEW_DISTANCE = registerIntPreference("3d_buildings_view_distance", 1).makeProfile().cache();
 
@@ -412,6 +414,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 			if (isLocked()) {
 				addTerrainDescriptionItem(adapter, mapActivity);
+				addBuildin3DItem(adapter, mapActivity);
 			} else {
 				createContextMenuItems(adapter, mapActivity);
 			}
@@ -546,6 +549,14 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		);
 
+		addBuildin3DItem(adapter, mapActivity);
+
+		if (app.useOpenGlRenderer()) {
+			add3DReliefItem(adapter, mapActivity, listener);
+		}
+	}
+
+	private void addBuildin3DItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
 		boolean enabled = ENABLE_3D_MAP_OBJECTS.get();
 		adapter.addItem(new ContextMenuItem(TERRAIN_3D_MAP_OBJECTS)
 				.setTitleId(R.string.enable_3d_objects, mapActivity)
@@ -582,11 +593,6 @@ public class SRTMPlugin extends OsmandPlugin {
 						return true;
 					}
 				}).setItemDeleteAction(ENABLE_3D_MAP_OBJECTS));
-
-
-		if (app.useOpenGlRenderer()) {
-			add3DReliefItem(adapter, mapActivity, listener);
-		}
 	}
 
 	private int get3DBuildingDetailLvlDescription() {
@@ -801,7 +807,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void getTerrainModeIcon(@NonNull String modeKey, @NonNull CollectColorPalletListener listener) {
-		app.getColorPaletteHelper().getColorPaletteAsync(modeKey, listener);
+		TerrainMode mode = TerrainMode.getByKey(modeKey);
+		String fileName = mode.getMainFileName();
+		CollectColorPalletTask.execute(app, fileName, listener);
 	}
 
 	public void apply3DBuildingsDetalization() {

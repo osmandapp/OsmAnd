@@ -357,7 +357,7 @@
     <string name="poi_orienteering">Orientare</string>
     <string name="poi_sport_multi">Sporturi multiple</string>
     <string name="poi_sport_motor">Automobilism sportiv</string>
-    <string name="poi_korfbal">Corfball</string>
+    <string name="poi_korfball">Corfball</string>
     <string name="poi_ice_stock">Stoc de gheață</string>
     <string name="poi_ice_skating">Patinaj pe gheață</string>
     <string name="poi_horse_racing">Curse de cai</string>
@@ -659,7 +659,7 @@
     <string name="poi_apartment">Apartament</string>
     <string name="poi_chalet">Cabană;Adăpost</string>
     <string name="poi_alpine_hut">Cabană alpină;Adăpost</string>
-    <string name="poi_motel">Motelul</string>
+    <string name="poi_motel">Motel</string>
     <string name="poi_attraction_water_slide">Tobogan de apă</string>
     <string name="poi_attraction_train">Tren (atracție)</string>
     <string name="poi_attraction_swing_carousel">Carusel de leagăn</string>

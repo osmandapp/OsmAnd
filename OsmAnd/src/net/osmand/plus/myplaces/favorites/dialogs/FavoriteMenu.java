@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces.favorites.dialogs;
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
 import static net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment.IMPORT_FAVOURITES_REQUEST;
+import static net.osmand.plus.utils.AndroidUtils.truncateWithEllipsis;
 import static net.osmand.plus.utils.UiUtilities.getThemedContext;
 import static net.osmand.shared.gpx.GpxFile.DEFAULT_WPT_GROUP_NAME;
 
@@ -60,6 +61,7 @@ import java.util.List;
 import java.util.Set;
 
 public class FavoriteMenu {
+	private final static int MAX_TITLE_NAME_SYMBOLS = 24;
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
 	private final MyPlacesActivity activity;
@@ -79,7 +81,7 @@ public class FavoriteMenu {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		items.add(new PopUpMenuItem.Builder(activity)
-				.setTitle(favouritePoint.getDisplayName(app))
+				.setTitle(truncateWithEllipsis(favouritePoint.getDisplayName(app), MAX_TITLE_NAME_SYMBOLS))
 				.setTitleColor(ColorUtilities.getSecondaryTextColor(app, nightMode))
 				.setTitleSize(14)
 				.create());
@@ -100,7 +102,7 @@ public class FavoriteMenu {
 
 		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_move)
-				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_folder_move))
+				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_folder_move_outlined))
 				.setOnClickListener(v -> {
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
 					SelectFavouriteGroupBottomSheet.showInstance(fragmentManager, favouritePoint.getCategory(), selectionListener);
@@ -115,7 +117,8 @@ public class FavoriteMenu {
 					LatLon latLon = new LatLon(favouritePoint.getLatitude(), favouritePoint.getLongitude());
 					SharePoiParams params = new SharePoiParams(latLon);
 					params.addName(favouritePoint.getName());
-					ShareMenu.show(latLon, favouritePoint.getName(), favouritePoint.getAddress(), ShareMenu.buildOsmandPoiUri(params), app, activity);
+					ShareMenu.show(latLon, favouritePoint.getName(), favouritePoint.getAddress(),
+							ShareMenu.buildOsmandPoiUri(params), app, activity, true);
 				})
 				.showTopDivider(true)
 				.create());
@@ -312,7 +315,7 @@ public class FavoriteMenu {
 
 		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_move)
-				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_folder_move))
+				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_folder_move_outlined))
 				.setOnClickListener(v -> {
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
 					SelectFavouriteGroupBottomSheet.showInstance(

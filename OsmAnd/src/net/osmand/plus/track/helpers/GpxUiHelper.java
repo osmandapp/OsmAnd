@@ -859,4 +859,9 @@ public class GpxUiHelper {
 		}
 		return analysis;
 	}
+
+	@NonNull
+	public static String formatTracksCount(@NonNull Context context, int count) {
+		return context.getResources().getQuantityString(R.plurals.tracks_count, count, count);
+	}
 }

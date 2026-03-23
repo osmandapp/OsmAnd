@@ -12,6 +12,6 @@ class StarMapResetButton @JvmOverloads constructor(
 
     override fun updateTheme() {
         super.updateTheme()
-        setColorFilter(ColorUtilities.getLinksColor(context, nightMode))
+        if (!active) setColorFilter(ColorUtilities.getLinksColor(context, nightMode))
     }
 }

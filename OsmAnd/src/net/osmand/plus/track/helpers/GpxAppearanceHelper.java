@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.ColoringStyle;
-import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.CachedTrack;
@@ -26,6 +25,9 @@ import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.util.Algorithms;
@@ -33,6 +35,9 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 
 public class GpxAppearanceHelper {
+
+	private static final int MAX_START_FINISH_DEFAULT_POINTS = 10;
+	private static final int MAX_START_FINISH_ALLOWED_POINTS = 100;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -97,7 +102,12 @@ public class GpxAppearanceHelper {
 		TrackDrawInfo drawInfo = getTrackDrawInfoForTrack(gpxFile);
 		if (drawInfo != null) {
 			return drawInfo.isShowStartFinish();
-		} else if (gpxFile.isShowCurrentTrack()) {
+		}
+		int startFinishPointsCount = getStartFinishPointsCount(gpxFile);
+		if (startFinishPointsCount > MAX_START_FINISH_ALLOWED_POINTS) {
+			return false;
+		}
+		if (gpxFile.isShowCurrentTrack()) {
 			return settings.CURRENT_TRACK_SHOW_START_FINISH.get();
 		} else if (gpxItem != null) {
 			Boolean show = getAppearanceParameter(gpxItem, dirItem, SHOW_START_FINISH);
@@ -105,7 +115,19 @@ public class GpxAppearanceHelper {
 				return show;
 			}
 		}
-		return gpxFile.isShowStartFinish();
+		return gpxFile.isShowStartFinish(startFinishPointsCount <= MAX_START_FINISH_DEFAULT_POINTS);
+	}
+
+	private int getStartFinishPointsCount(@NonNull GpxFile gpxFile) {
+		int count = 0;
+		for (Track track : gpxFile.getTracks()) {
+			for (TrkSegment segment : track.getSegments()) {
+				if (segment.getPoints().size() >= 2) {
+					count += 2;
+				}
+			}
+		}
+		return count;
 	}
 
 	public Gpx3DVisualizationType getTrackVisualizationForTrack(@NonNull GpxFile gpxFile, @Nullable GpxDataItem gpxItem, @Nullable GpxDirItem dirItem) {
@@ -337,7 +359,7 @@ public class GpxAppearanceHelper {
 	public String getTrackGradientPalette(@NonNull GpxFile gpxFile, @Nullable GpxDataItem gpxItem,
 			@Nullable GpxDirItem dirItem, boolean selected) {
 		String gradientPaletteName = getGradientPaletteName(gpxFile, gpxItem, dirItem);
-		return !Algorithms.isEmpty(gradientPaletteName) ? gradientPaletteName : PaletteGradientColor.DEFAULT_NAME;
+		return !Algorithms.isEmpty(gradientPaletteName) ? gradientPaletteName : PaletteConstants.DEFAULT_NAME;
 	}
 
 	public String getAvailableOrDefaultColoringType(@NonNull CachedTrack cachedTrack,

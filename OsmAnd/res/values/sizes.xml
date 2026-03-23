@@ -286,6 +286,7 @@
 	<dimen name="content_padding_double">32dp</dimen>
 	<dimen name="content_padding_small">12dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
+	<dimen name="content_padding_half_inverted">-8dp</dimen>
 	<dimen name="content_padding_small_half">6dp</dimen>
 	<dimen name="content_padding_medium">9dp</dimen>
 	<dimen name="content_padding_round_medium">10dp</dimen>
@@ -384,6 +385,7 @@
 	<dimen name="route_info_legend_item_size">40dp</dimen>
 
 	<dimen name="multi_selection_header_height">52dp</dimen>
+	<dimen name="sort_filter_toolbar_height">52dp</dimen>
 
 	<dimen name="wikipedia_button_left_padding">19dp</dimen>
 	<dimen name="wikipedia_options_button_width">48dp</dimen>

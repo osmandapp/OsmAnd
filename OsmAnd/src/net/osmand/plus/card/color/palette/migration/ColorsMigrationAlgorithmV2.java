@@ -5,14 +5,12 @@ import static net.osmand.plus.utils.ColorUtilities.getColor;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.DefaultPaletteColors;
-import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
+import net.osmand.plus.card.color.palette.migration.data_v2.ColorsCollection;
+import net.osmand.plus.card.color.palette.migration.data_v2.FileColorsCollection;
 import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionBundle;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
-import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
+import net.osmand.plus.card.color.palette.migration.data_v2.PaletteColor;
 import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionV1;
-import net.osmand.plus.card.color.palette.main.data.DefaultColors;
+import net.osmand.plus.card.color.palette.solid.data.DefaultColors;
 import net.osmand.plus.card.color.palette.migration.data.PaletteColorV1;
 import net.osmand.plus.card.color.palette.migration.data.PredefinedPaletteColor;
 import net.osmand.plus.profiles.ProfileIconColors;
@@ -22,6 +20,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.track.AppearanceListItem;
 import net.osmand.plus.track.GpxAppearanceAdapter;
+import net.osmand.shared.palette.domain.DefaultPaletteColors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -71,8 +70,8 @@ public class ColorsMigrationAlgorithmV2 {
 	private void executeImpl() {
 		// Collect available colors from the user palette file
 		ColorsCollection newCollection = new FileColorsCollection(app);
-		newCollection.addAllUniqueColors(DefaultPaletteColors.valuesList());
-		List<PaletteColor> originalOrder = newCollection.getColors(PaletteSortingMode.ORIGINAL);
+		newCollection.addAllUniqueColors(DefaultPaletteColors.values());
+		List<PaletteColor> originalOrder = newCollection.getColorsInOriginalOrder();
 
 		// Collect available colors from the old preferences
 		List<ColorsCollectionV1> oldCollections = new ArrayList<>();
@@ -119,7 +118,7 @@ public class ColorsMigrationAlgorithmV2 {
 
 		// Save all unique colors to the user's palette file
 		List<PaletteColor> lastUsedOrder = new ArrayList<>(originalOrder);
-		lastUsedOrder.sort(new Comparator<PaletteColor>() {
+		lastUsedOrder.sort(new Comparator<>() {
 			@Override
 			public int compare(PaletteColor o1, PaletteColor o2) {
 				return Long.compare(getLastUsedTime(o2), getLastUsedTime(o1));
@@ -134,6 +133,7 @@ public class ColorsMigrationAlgorithmV2 {
 		newCollection.setColors(originalOrder, lastUsedOrder);
 	}
 
+	@NonNull
 	public ColorsCollectionV1 getFavoritesColorCollection() {
 		ColorsCollectionBundle bundle = new ColorsCollectionBundle();
 		bundle.predefinedColors = Arrays.asList(DefaultColors.values());
@@ -142,6 +142,7 @@ public class ColorsMigrationAlgorithmV2 {
 		return new ColorsCollectionV1(bundle);
 	}
 
+	@NonNull
 	public ColorsCollectionV1 getProfileColorCollection(@NonNull OsmandApplication app,
 	                                                    @NonNull ApplicationMode appMode) {
 		List<PaletteColorV1> predefinedColors = new ArrayList<>();
@@ -157,6 +158,7 @@ public class ColorsMigrationAlgorithmV2 {
 		return new ColorsCollectionV1(bundle);
 	}
 
+	@NonNull
 	public ColorsCollectionV1 getRouteLineColorCollection() {
 		ColorsCollectionBundle bundle = new ColorsCollectionBundle();
 		bundle.predefinedColors = Arrays.asList(DefaultColors.values());
@@ -164,6 +166,7 @@ public class ColorsMigrationAlgorithmV2 {
 		return new ColorsCollectionV1(bundle);
 	}
 
+	@NonNull
 	public ColorsCollectionV1 getTrackColorCollection(@NonNull OsmandApplication app) {
 		List<PaletteColorV1> predefinedColors = new ArrayList<>();
 		for (AppearanceListItem item : GpxAppearanceAdapter.getUniqueTrackColorItems(app)) {

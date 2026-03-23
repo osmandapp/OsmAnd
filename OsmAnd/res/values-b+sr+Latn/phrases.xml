@@ -538,7 +538,7 @@
     <string name="poi_hockey">Hokej</string>
     <string name="poi_horse_racing">Trke konja</string>
     <string name="poi_ice_skating">Skijanje na ledu</string>
-    <string name="poi_korfbal">Korfbol</string>
+    <string name="poi_korfball">Korfbol</string>
     <string name="poi_sport_motor">Moto trke</string>
     <string name="poi_sport_multi">Više sportova</string>
     <string name="poi_orienteering">Orijentiring</string>
@@ -3776,7 +3776,7 @@
     <string name="poi_video_no">Ne</string>
     <string name="poi_video_yes">Da;Video</string>
     <string name="poi_booth">Tip govornice</string>
-    <string name="poi_covered_booth">Javna govornica</string>
+    <string name="poi_covered_booth">Da</string>
     <string name="poi_sms_no">Ne</string>
     <string name="poi_sms_yes">Da;SMS</string>
     <string name="poi_dive_centre">Ronilački centar</string>
@@ -4769,7 +4769,7 @@
     <string name="poi_us_maps_recreation_area_activity_poi">Tačka od interesa</string>
     <string name="poi_us_maps_recreation_area_activity_scenic_overlook">Vidikovac; Panoramski pogled</string>
     <string name="poi_us_maps_recreation_area_activity_day_use_site">Zona dnevnog korišćenja;Igralište za dnevne upotrebe;Zona dnevnog korišćenja;Igralište za dnevne upotrebe;Zona dnevne rekreacije;Igralište za dnevni odmor</string>
-    <string name="poi_us_maps_recreation_area_facility_cabin">Kabina</string>
+    <string name="poi_us_maps_recreation_area_facility_cabin">Koliba</string>
     <string name="poi_us_maps_recreation_area_facility_airplane_landing_strip">Traka za sletanje aviona</string>
     <string name="poi_us_maps_recreation_area_facility_ranger_station_office">Stanica rendžera/Terenska kancelarija</string>
     <string name="poi_us_maps_recreation_area_facility_boat_launch">Navoz</string>
@@ -5165,4 +5165,14 @@
     <string name="poi_sample_collection_blood">Krv</string>
     <string name="poi_yoga">Joga</string>
     <string name="poi_memorial_type">Tip spomenika</string>
+    <string name="poi_covered_booth_filter">Kabina</string>
+    <string name="poi_rapids_filter">Nivoi brzaka</string>
+    <string name="poi_rapids_grade_0">0 (mirna voda)</string>
+    <string name="poi_rapids_grade_1">1 (laki)</string>
+    <string name="poi_rapids_grade_2">2 (početnički)</string>
+    <string name="poi_rapids_grade_3">3 (srednji)</string>
+    <string name="poi_rapids_grade_4">4 (napredni)</string>
+    <string name="poi_rapids_grade_5">5 (stručni)</string>
+    <string name="poi_rapids_grade_6">6 (ekstremno)</string>
+    <string name="poi_rapids_grade_x">X (ne može se kretati)</string>
 </resources>

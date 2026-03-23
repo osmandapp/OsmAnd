@@ -137,7 +137,7 @@ public class WptPtEditor extends PointEditor {
 		gpxSelected = selectedGpxFile != null;
 
 		wpt = new WptPt(latLon.getLatitude(), latLon.getLongitude(),
-				System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
+				System.currentTimeMillis(), Double.NaN, 0, Float.NaN);
 		wpt.setName(title);
 
 		if (mapObject instanceof Amenity amenity) {
