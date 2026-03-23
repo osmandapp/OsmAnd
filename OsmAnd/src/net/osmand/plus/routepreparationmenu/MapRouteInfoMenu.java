@@ -369,7 +369,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			FastRoutingComplication complication = app.getRoutingHelper().getCurrentFastRoutingComplication();
 			if (complication != lastFastRoutingComplication) {
 				lastFastRoutingComplication = complication;
-				System.err.printf("XXX complication = %s\n", complication); // TODO remove
 				updateCards();
 			}
 		}

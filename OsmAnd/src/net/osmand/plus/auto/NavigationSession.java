@@ -804,7 +804,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (app != null && app.getRoutingHelper().hasCurrentMissingMaps()) {
 			FastRoutingComplication complication = app.getRoutingHelper().getCurrentFastRoutingComplication();
 			if (complication != lastFastRoutingComplication) {
-				System.err.printf("XXX aa-complication = %s\n", complication); // TODO remove
 				lastFastRoutingComplication = complication;
 				if (complication == FastRoutingComplication.SUCCESS) {
 					closeMissingMapsScreen();
