@@ -250,10 +250,11 @@ public class PointLocationLayer extends OsmandMapLayer
 	@Override
 	public void onUpdateFrame(MapRendererView mapRenderer) {
 		super.onUpdateFrame(mapRenderer);
-		if (isMapLinkedToLocation() && !isMovingToMyLocation()) {
+		if (isMarkerLinkedToMapTarget()) {
 			Location location = getPointLocation();
-			PointI target31 = mapRenderer.getTarget();
-			updateMarker(location, target31, 0);
+			updateMarker(location, mapRenderer.getTarget(), 0);
+		} else if (isMapLinkedToLocation() && !isMovingToMyLocation()) {
+			updateMarker(getPointLocation(), null, 0);
 		}
 		lastMarkerLocation = getCurrentMarkerLocation();
 	}
@@ -408,6 +409,11 @@ public class PointLocationLayer extends OsmandMapLayer
 		double tx = pixel.x;
 		double ty = pixel.y;
 		return tx >= 0 && tx <= tb.getPixWidth() && ty >= 0 && ty <= tb.getPixHeight();
+	}
+
+	private boolean isMarkerLinkedToMapTarget() {
+		return isMapLinkedToLocation() && !isMovingToMyLocation()
+				&& view != null && !view.isMapTargetChanged();
 	}
 
 	private void updateMarker(@Nullable Location location, @Nullable PointI target31, long animationDuration) {
@@ -591,7 +597,8 @@ public class PointLocationLayer extends OsmandMapLayer
 		int locationY;
 		if (isMapLinkedToLocation()
 				&& !MapViewTrackingUtilities.isSmallSpeedForAnimation(lastKnownLocation)
-				&& !isMovingToMyLocation()) {
+				&& !isMovingToMyLocation()
+				&& !view.isMapTargetChanged()) {
 			locationX = box.getCenterPixelX();
 			locationY = box.getCenterPixelY();
 		} else {
@@ -668,7 +675,7 @@ public class PointLocationLayer extends OsmandMapLayer
 			if (markersRecreated || stateUpdated) {
 				lastBearingCached = null;
 				lastHeadingCached = null;
-				if (!isMapLinkedToLocation()) {
+				if (!isMarkerLinkedToMapTarget()) {
 					updateMarker(lastKnownLocation, null, 0);
 				}
 			}
@@ -701,7 +708,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		if (view == null || (mapRenderer == null && view.getZoom() < MIN_ZOOM) || location == null) {
 			return;
 		}
-		if (mapRenderer != null && (!isMapLinkedToLocation() || isMovingToMyLocation())) {
+		if (mapRenderer != null && !isMarkerLinkedToMapTarget()) {
 			boolean dataChanged = !MapUtils.areLatLonEqual(prevLocation, location, HIGH_LATLON_PRECISION);
 			if (dataChanged) {
 				long movingTime = prevLocation != null ? location.getTime() - prevLocation.getTime() : 0;
