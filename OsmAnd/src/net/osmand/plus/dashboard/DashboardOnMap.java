@@ -66,7 +66,7 @@ import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment;
 import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
-import net.osmand.plus.plugins.srtm.Buildings3DFragment;
+import net.osmand.plus.plugins.srtm.building.Buildings3DFragment;
 import net.osmand.plus.plugins.srtm.ContourLinesMenu;
 import net.osmand.plus.plugins.srtm.Relief3DFragment;
 import net.osmand.plus.plugins.srtm.TerrainFragment;
@@ -694,7 +694,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, MAP_ROUTES, RENDERING_CLASS, TRAVEL_ROUTES,
 				OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH,
-				COORDINATE_GRID)) {
+				COORDINATE_GRID, BUILDINGS_3D)) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
 		} else {
