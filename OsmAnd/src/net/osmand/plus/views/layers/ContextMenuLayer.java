@@ -32,8 +32,8 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
-import net.osmand.data.LatLon;
 import net.osmand.data.BaseDetailsObject;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
@@ -318,14 +318,14 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 			boolean wasHidden = contextCoreMarker.isHidden();
 			boolean changed = !NativeUtilities.arePointsEqual(target, previous);
 			if (changed && !wasHidden && previous != null) {
-				mapRenderer.remove3DObjectColor(previous);
+				remove3DObjectColor(NativeUtilities.getLatLonFromPoint31(previous));
 			}
 			if (target != null) {
 				if (changed) {
 					contextCoreMarker.setPosition(target);
 				}
-				if (changed || wasHidden) {
-					mapRenderer.add3DObjectColor(target, NativeUtilities.createFColorRGB(outlinePaint.getColor()));
+				if (!hasHighlight3dObjectColor(latLon)) {
+					add3DObjectColor(latLon, outlinePaint.getColor());
 				}
 			}
 			contextCoreMarker.setIsHidden(target == null);
@@ -386,11 +386,16 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 	private void clearContextMarkerCollection() {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
+			if (contextCoreMarker != null) {
+				PointI position = contextCoreMarker.getPosition();
+				if (position != null) {
+					remove3DObjectColor(NativeUtilities.getLatLonFromPoint31(position));
+				}
+			}
 			if (contextMarkerCollection != null) {
 				mapRenderer.removeSymbolsProvider(contextMarkerCollection);
 				contextMarkerCollection = null;
 			}
-			mapRenderer.removeAll3DObjectColors();
 		}
 	}
 

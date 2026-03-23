@@ -14,11 +14,13 @@ import android.graphics.PointF;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListMapMarker;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -36,11 +38,15 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PointNavigationLayer extends OsmandMapLayer implements
 		IContextMenuProvider, IMoveObjectProvider {
+
+	private static final Log LOG = PlatformUtil.getLog(PointNavigationLayer.class);
 
 	private static final float CAPTION_TEXT_SIZE = 18f;
 
@@ -195,6 +201,13 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				}
 				mapRenderer.addSymbolsProvider(markersCollection);
 				this.mapMarkersCollection = markersCollection;
+			}
+			for (int i = 0; i < allPoints.size(); i++) {
+				TargetPoint point = allPoints.get(i);
+				LatLon latLon = point.getLatLon();
+				if (!hasHighlight3dObjectColor(latLon)) {
+					add3DObjectColor(latLon, outlineColor);
+				}
 			}
 			this.renderedPoints = allPoints;
 		}
@@ -358,6 +371,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				}
 
 			}
+			remove3DObjectColor(oldPoint.getLatLon());
+
 			result = true;
 		}
 		if (callback != null) {
@@ -390,8 +405,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 					.setCaption(caption);
 		}
 		mapMarkerBuilder.buildAndAddToCollection(markersCollection);
-
-		mapRenderer.add3DObjectColor(position, NativeUtilities.createFColorRGB(outlineColor));
 	}
 
 	private void initCaptionStyleOpenGL() {
@@ -476,11 +489,21 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	/**OpenGL*/
 	@Override
 	protected void clearMapMarkersCollections() {
+		remove3DObjectColors();
 		super.clearMapMarkersCollections();
+	}
 
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null) {
-			mapRenderer.removeAll3DObjectColors();
+	private void remove3DObjectColors() {
+		if (mapMarkersCollection != null) {
+			QListMapMarker markers = mapMarkersCollection.getMarkers();
+			for (int i = 0; i < markers.size(); ++i) {
+				MapMarker mapMarker = markers.get(i);
+				PointI position = mapMarker != null ? mapMarker.getPosition() : null;
+				LatLon latLon = position != null ? NativeUtilities.getLatLonFromPoint31(position) : null;
+				if (latLon != null) {
+					remove3DObjectColor(latLon);
+				}
+			}
 		}
 	}
 }
