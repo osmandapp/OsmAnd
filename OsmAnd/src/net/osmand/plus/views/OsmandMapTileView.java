@@ -907,6 +907,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return touchActive || animatedDraggingThread.isUserAnimationsActive();
 	}
 
+	public boolean isMapTargetChanged() {
+		return targetChanged;
+	}
+
 	public float getZoomFloatPart() {
 		return (float) currentViewport.getZoomFloatPart();
 	}

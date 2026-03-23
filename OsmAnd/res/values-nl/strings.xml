@@ -6448,4 +6448,6 @@
     <string name="astro_type_globular_cluster">Bolvormige sterrenhoop</string>
     <string name="astro_explore_schedule">Schema</string>
     <string name="obd_alt_battery_voltage_desc">Toont het spanningsniveau op de OBD-adapter</string>
+    <string name="shared_string_radians">Radialen</string>
+    <string name="shared_string_unlock">Ontgrendel</string>
 </resources>

@@ -6,6 +6,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.shared.gpx.organization.enums.OrganizeByType;
 
 import java.util.Calendar;
 
@@ -224,5 +225,9 @@ public class InAppPurchaseUtils {
 			return calendar.getTimeInMillis();
 		}
 		return 0;
+	}
+
+	public static boolean isOrganizeByTypeApplicable(OsmandApplication app, OrganizeByType organizeByType) {
+		return organizeByType == null || isOsmAndProAvailable(app) || !organizeByType.isPro();
 	}
 }

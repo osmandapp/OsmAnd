@@ -997,7 +997,7 @@
     <string name="poi_instagram">إنستجرام</string>
     <string name="vk">في كونتاكت</string>
     <string name="poi_google_plus">جوجل +</string>
-    <string name="poi_mobile">جوال/موبايل</string>
+    <string name="poi_mobile">هاتف</string>
     <string name="poi_service_times">أوقات الخدمة</string>
     <string name="poi_maxheight">الحد الأقصى للارتفاع</string>
     <string name="poi_maxweight">الحد الأقصى للوزن</string>
@@ -2231,7 +2231,7 @@
     <string name="poi_cuisine_chicken">دجاج</string>
     <string name="poi_cuisine_kebab">كباب</string>
     <string name="poi_cuisine_sandwich">ساندويتش</string>
-    <string name="poi_cuisine">المأكولات/المشروبات</string>
+    <string name="poi_cuisine">مطبخ</string>
     <string name="poi_cuisine_coffee_shop">قهوة</string>
     <string name="poi_cuisine_burger">برجر</string>
     <string name="poi_cuisine_pizza">بيتزا</string>

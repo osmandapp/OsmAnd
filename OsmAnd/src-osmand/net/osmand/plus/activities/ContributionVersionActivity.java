@@ -23,6 +23,8 @@ import androidx.core.content.FileProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmandListActivity;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 import java.io.File;
 import java.lang.annotation.Retention;
@@ -139,6 +141,14 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	@Override
 	public OsmandBuildsAdapter getListAdapter() {
 		return (OsmandBuildsAdapter) super.getListAdapter();
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createHorizontalLandscape(getListView()));
+		collection.add(InsetTarget.createScrollable(getListView()));
+		return collection;
 	}
 
 	@Override

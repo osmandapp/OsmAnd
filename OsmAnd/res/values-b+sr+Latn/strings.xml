@@ -2945,7 +2945,7 @@
     <string name="open_from">Otvoreno od</string>
     <string name="context_menu_points_of_group">Sve tačke grupe</string>
     <string name="context_menu_read_article">Čitanje članka</string>
-    <string name="context_menu_read_full_article">Čitanje celog članka</string>
+    <string name="context_menu_read_full_article">Pročitaj ceo članak</string>
     <string name="without_time_limit">Bez vremenskog ograničenja</string>
     <string name="pick_up_till">Pokupiti do</string>
     <string name="parked_at">parkiran na</string>
@@ -4462,7 +4462,7 @@
     <string name="compass_desc">Pokazuje smer prema severu.</string>
     <string name="next_live_update_time">Sledeće ažuriranje u %1$s.</string>
     <string name="shared_string_inches">inči</string>
-    <string name="y_axis">Y osa</string>
+    <string name="y_axis">Y-osa</string>
     <string name="ant_missing_dependency_descr">Neuspešno pronalaženje odgovarajuće službe \"%1$s\"\nTreba da ugradiš ili osvežiš ANT + službu priključaka \nDa li želiš da pokreneš skladište igara za to?</string>
     <string name="worldwide_maps">Mape sveta</string>
     <string name="favorite_delete_group">Obriši grupu</string>
@@ -4950,7 +4950,7 @@
     <string name="ant_plus_pair_new_sensor_ant_plus">Upari senzor ANT+</string>
     <string name="clear_online_cache">Očisti internet keš</string>
     <string name="offline_cache">Internet keš</string>
-    <string name="shared_string_alt_name">Alternativno ime</string>
+    <string name="shared_string_alt_name">Alternativni naziv</string>
     <string name="generate_slope_from_3d_maps">Stvaranje rasterskih mapa nagiba na temelju 3D mapa</string>
     <string name="enable_3d_maps">Omogući 3D mape</string>
     <string name="selected_value">Odabrana vrednost</string>
@@ -4963,7 +4963,7 @@
     <string name="local_version_do_not_exist">Ne postoji lokalna verzija.</string>
     <string name="shared_string_in_progress">U toku</string>
     <string name="last_synchronized">Poslednja sinhronizacija</string>
-    <string name="x_axis">X osa</string>
+    <string name="x_axis">X-osa</string>
     <string name="si_nm_mt">Nautičke milje/metri</string>
     <string name="si_nm_ft">Nautičke milje/stope</string>
     <string name="av_audio_format_bottom_sheet_descr">Označi format zvučnog zapisa. Vrsta zvučnog fajla je 3GPP (.3gp).</string>
@@ -5716,7 +5716,7 @@
     <string name="save_to_device_error">Greška pri upisu na uređaju</string>
     <string name="save_to_device">Sačuvaj na uređaju</string>
     <string name="saved_to_device">Sačuvano na uređaju</string>
-    <string name="travel_guides">Vodič</string>
+    <string name="travel_guides">Vodiči</string>
     <string name="show_debug_tile_description">Prikaz informacija o simbolima na mapi svakog tila</string>
     <string name="show_debug_tile">Prikaži informacije o tilovima</string>
     <string name="deactivated_map">Deaktivirana mapa</string>
@@ -5887,7 +5887,7 @@
     <string name="routing_attr_pt_limit_description">Navedite broj najboljih ruta za prikaz</string>
     <string name="buildings_3d_detail_level">Detaljne 3D zgrade</string>
     <string name="lang_mi">Maorski</string>
-    <string name="has_vehicle_metrics">Sa OBDII podacima</string>
+    <string name="has_vehicle_metrics">Sa podacima OBDII</string>
     <string name="vehicle_metrics_chart_category">Metrika vozila</string>
     <string name="delete_folder_description">Obrisati „%1$s“ folder?</string>
     <string name="show_spherical_map">Globusni prikaz</string>
@@ -6100,4 +6100,9 @@
     <string name="astro_explore_watch_now">Gledajte sada</string>
     <string name="astro_explore_deep_sky_subtitle">Galaksija, klasteri galaksija, crne rupe</string>
     <string name="obd_alt_battery_voltage_desc">Prikazuje nivo napona na OBD adapteru</string>
+    <string name="shared_string_radians">Radijana</string>
+    <string name="shared_string_unlock">Otključaj</string>
+    <string name="start_free_trial">Započnite besplatni period</string>
+    <string name="subscription_free_trial_with_price">%1$s besplatno, zatim %2$s</string>
+    <string name="subscription_then_price">zatim %1$s</string>
 </resources>

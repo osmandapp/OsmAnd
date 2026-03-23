@@ -416,14 +416,15 @@ public class AmenitySearcher {
         return false;
     }
 
-    public List<Amenity> filterUniqueAmenitiesByOsmIdOrWikidata(List<Amenity> amenities) {
-        if (amenities.size() < 2) {
+    public List<Amenity> mergeAmenities(List<Amenity> amenities, Settings settings) {
+        if (amenities == null || amenities.size() < 2) {
             return amenities;
         }
-        int size = amenities.size();
-        Set<Long> seenOsmIds = new HashSet<>(size);
-        Set<String> seenWikidata = new HashSet<>(size);
-        List<Amenity> result = new ArrayList<>(size);
+        String lang = settings.language.get();
+        List<Amenity> result = new ArrayList<>(amenities.size());
+        Map<Long, Amenity> osmMap = new HashMap<>(amenities.size());
+        Map<String, Amenity> wikiMap = new HashMap<>(amenities.size());
+        IdentityHashMap<Amenity, Amenity> redirects = new IdentityHashMap<>();
 
         for (Amenity amenity : amenities) {
             if (amenity.isRouteTrack()) {
@@ -436,14 +437,51 @@ public class AmenitySearcher {
             String wikidata = amenity.getWikidata();
             wikidata = Algorithms.isEmpty(wikidata) ? null : wikidata;
 
-            boolean duplicateByOsmId = osmId != null && !seenOsmIds.add(osmId);
-            boolean duplicateByWikidata = wikidata != null && !seenWikidata.add(wikidata);
+            Amenity byOsm = resolveRedirect(osmId != null ? osmMap.get(osmId) : null, redirects);
+            Amenity byWiki = resolveRedirect(wikidata != null ? wikiMap.get(wikidata) : null, redirects);
 
-            if (!duplicateByOsmId && !duplicateByWikidata) {
+            if (byOsm == null && byWiki == null) {
                 result.add(amenity);
+                if (osmId != null) {
+                    osmMap.put(osmId, amenity);
+                }
+                if (wikidata != null) {
+                    wikiMap.put(wikidata, amenity);
+                }
+
+            } else {
+                Amenity target = (byOsm != null) ? byOsm : byWiki;
+                if (byOsm != null && byWiki != null && byOsm != byWiki) {
+                    BaseDetailsObject.mergeAmenityData(byOsm, byWiki, lang, false);
+                    redirects.put(byWiki, byOsm);
+                }
+                BaseDetailsObject.mergeAmenityData(target, amenity, lang, false);
+
+                if (osmId != null) {
+                    osmMap.put(osmId, target);
+                }
+                if (wikidata != null) {
+                    wikiMap.put(wikidata, target);
+                }
             }
         }
-        return result;
+        if (redirects.isEmpty()) {
+            return result;
+        }
+        List<Amenity> compact = new ArrayList<>(result.size() - redirects.size());
+        for (Amenity a : result) {
+            if (!redirects.containsKey(a)) {
+                compact.add(a);
+            }
+        }
+        return compact;
+    }
+
+    private Amenity resolveRedirect(Amenity amenity, IdentityHashMap<Amenity, Amenity> redirects) {
+        while (amenity != null && redirects.containsKey(amenity)) {
+            amenity = redirects.get(amenity);
+        }
+        return amenity;
     }
 
     public void addAmenityRepository(String fileName, AmenityIndexRepository repository) {

@@ -686,6 +686,61 @@ public abstract class InAppPurchases {
 			}
 		}
 
+		private String getDurationString(@NonNull Context ctx) {
+			long totalPeriods = getTotalPeriods();
+			String unitStr = getTotalUnitsString(ctx, false).toLowerCase();
+			if (AndroidUtils.isLayoutRtl(ctx)) {
+				return unitStr + " " + totalPeriods;
+			} else {
+				return totalPeriods + " " + unitStr;
+			}
+		}
+
+		private String getOriginalPricePeriodString(@NonNull Context ctx) {
+			Period subscriptionPeriod = subscription.getSubscriptionPeriod();
+			long originalNumberOfUnits = subscriptionPeriod != null ? subscriptionPeriod.getNumberOfUnits() : 1;
+			String originalUnitsStr = getTotalUnitsString(ctx, true).toLowerCase();
+			String originalPriceStr = subscription.getOriginalPrice(ctx);
+			if (AndroidUtils.isLayoutRtl(ctx)) {
+				if (subscriptionPeriod != null && originalNumberOfUnits == 3 && subscriptionPeriod.getUnit() == PeriodUnit.MONTH) {
+					return ctx.getString(R.string.months_3).toLowerCase() + " / " + originalPriceStr;
+				} else if (originalNumberOfUnits > 1) {
+					return originalUnitsStr + " " + originalNumberOfUnits + " / " + originalPriceStr;
+				}
+				return originalUnitsStr + " / " + originalPriceStr;
+			} else {
+				if (subscriptionPeriod != null && originalNumberOfUnits == 3 && subscriptionPeriod.getUnit() == PeriodUnit.MONTH) {
+					return originalPriceStr + " / " + ctx.getString(R.string.months_3).toLowerCase();
+				} else if (originalNumberOfUnits > 1) {
+					return originalPriceStr + " / " + originalNumberOfUnits + " " + originalUnitsStr;
+				}
+				return originalPriceStr + " / " + originalUnitsStr;
+			}
+		}
+
+		public boolean isFreeTrial() {
+			return introductoryPriceAmountMicros == 0;
+		}
+
+		@NonNull
+		public CharSequence getFreeTrialDescription(@NonNull Context ctx) {
+			String renewDescription = ctx.getString(R.string.subscription_then_price, getOriginalPricePeriodString(ctx));
+			String description = ctx.getString(R.string.subscription_free_trial_with_price, getDurationString(ctx),
+					getOriginalPricePeriodString(ctx));
+			SpannableStringBuilder formattedDescription = new SpannableStringBuilder(description);
+			int renewStart = description.indexOf(renewDescription);
+			if (renewStart >= 0) {
+				formattedDescription.setSpan(new CustomTypefaceSpan(DEFAULT), renewStart, description.length(),
+						Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			}
+			return formattedDescription;
+		}
+
+		@NonNull
+		public CharSequence getRenewDescription(@NonNull Context ctx) {
+			return ctx.getString(R.string.subscription_then_price, getOriginalPricePeriodString(ctx));
+		}
+
 		public Pair<Spannable, Spannable> getFormattedDescription(@NonNull Context ctx, @ColorInt int textColor) {
 			long totalPeriods = getTotalPeriods();
 			String singleUnitStr = getUnitString(ctx).toLowerCase();
@@ -1121,7 +1176,7 @@ public abstract class InAppPurchases {
 
 		@Override
 		public CharSequence getTitle(Context ctx) {
-			return ctx.getString(R.string.osm_live_payment_monthly_title);
+			return ctx.getString(R.string.monthly_subscription);
 		}
 
 		@Override
@@ -1180,7 +1235,7 @@ public abstract class InAppPurchases {
 
 		@Override
 		public CharSequence getTitle(Context ctx) {
-			return ctx.getString(R.string.osm_live_payment_3_months_title);
+			return ctx.getString(R.string.three_months_subscription);
 		}
 
 		@Override
@@ -1234,7 +1289,7 @@ public abstract class InAppPurchases {
 
 		@Override
 		public CharSequence getTitle(Context ctx) {
-			return ctx.getString(R.string.osm_live_payment_annual_title);
+			return ctx.getString(R.string.annual_subscription);
 		}
 
 		@Override
@@ -1347,15 +1402,15 @@ public abstract class InAppPurchases {
 		@Override
 		public CharSequence getTitle(Context ctx) {
 			if (monthlyDuration == 1) {
-				return ctx.getString(R.string.osm_live_payment_monthly_title);
+				return ctx.getString(R.string.monthly_subscription);
 			} else if (monthlyDuration == 3) {
-				return ctx.getString(R.string.osm_live_payment_3_months_title);
+				return ctx.getString(R.string.three_months_subscription);
 			} else if (monthlyDuration == 12) {
-				return ctx.getString(R.string.osm_live_payment_annual_title);
+				return ctx.getString(R.string.annual_subscription);
 			} else if (monthlyDuration == 36) {
 				return ctx.getString(R.string.osm_live_payment_3_years_title);
 			} else {
-				return ctx.getString(R.string.osm_live_payment_monthly_title);
+				return ctx.getString(R.string.monthly_subscription);
 			}
 		}
 
@@ -1624,4 +1679,3 @@ public abstract class InAppPurchases {
 		}
 	}
 }
-
