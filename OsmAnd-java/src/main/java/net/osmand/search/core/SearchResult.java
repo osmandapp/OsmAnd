@@ -13,10 +13,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.Street;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
-import net.osmand.osm.PoiType;
+import net.osmand.osm.*;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -69,10 +66,20 @@ public class SearchResult {
 	private CheckWordsMatchCount completeMatchRes = null;
 
 	public enum SearchResultResource {
-		DETAILED,
-		WIKIPEDIA,
-		BASEMAP,
-		TRAVEL
+		DETAILED(3),
+		BASEMAP(3),
+		WIKIPEDIA(2),
+		TRAVEL(1);
+
+		private final int weight;
+		
+		private SearchResultResource(int weight) {
+			this.weight = weight;
+		}
+		
+		public int getWeight() {
+			return weight;
+		}
 	}
 
 	private SearchResultResource searchResultResource;
@@ -112,12 +119,14 @@ public class SearchResult {
 
 
 	private double getSumPhraseMatchWeight(SearchResult exactResult) {
-		double res = ObjectType.getTypeWeight(objectType);
+		double res = 1;
 		completeMatchRes = new CheckWordsMatchCount();
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
 		} else if (objectType == ObjectType.POI_TYPE) {
 			// don't overload with poi types
+		} else if (isPublicTransport()) {
+			res -= 0.1;
 		} else {
 			boolean matched = localeName != null && allWordsMatched(localeName, exactResult, completeMatchRes);
 			// incorrect fix
@@ -201,6 +210,10 @@ public class SearchResult {
 				res += 1;
 			}
 			// range 60 - 91
+		}
+		if (res < MAX_TYPES_BASE_10 * 4) {
+			// equalize unmatched results
+			res = MAX_TYPES_BASE_10;
 		}
 		return res;
 	}
@@ -503,5 +516,14 @@ public class SearchResult {
 			otherNames = oth;
 		}
 		return backup;
+	}
+	
+	private boolean isPublicTransport() {
+		if (objectType != ObjectType.POI) {
+			return false;
+		}
+		Amenity am = (Amenity) object; 
+		List<String> transportTypes = MapPoiTypes.getDefault().getPublicTransportTypes();
+		return transportTypes.contains(am.getSubType());
 	}
 }
