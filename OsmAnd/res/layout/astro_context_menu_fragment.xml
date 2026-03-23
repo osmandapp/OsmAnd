@@ -219,47 +219,6 @@
 									</com.google.android.material.card.MaterialCardView>
 
 									<com.google.android.material.card.MaterialCardView
-										android:id="@+id/locate_button"
-										style="@style/Widget.App.Material.ActionTileCard"
-										android:layout_width="0dp"
-										android:layout_height="66dp"
-										android:layout_marginEnd="10dp"
-										android:layout_weight="1"
-										android:checkable="true"
-										android:clickable="true"
-										android:focusable="true"
-										app:checkedIconVisible="false">
-
-										<FrameLayout
-											android:layout_width="match_parent"
-											android:layout_height="match_parent"
-											android:duplicateParentState="true"
-											android:gravity="center"
-											android:orientation="vertical"
-											android:paddingTop="12dp"
-											android:paddingBottom="10dp">
-
-											<ImageView
-												android:id="@+id/locate_icon"
-												android:layout_width="24dp"
-												android:layout_height="24dp"
-												android:layout_gravity="center_horizontal|top"
-												tools:src="@drawable/ic_map" />
-
-											<TextView
-												android:id="@+id/locate_title"
-												android:layout_width="wrap_content"
-												android:layout_height="wrap_content"
-												android:layout_gravity="center_horizontal|bottom"
-												android:textColor="?attr/icon_color_active"
-												android:textSize="12sp"
-												tools:text="Title" />
-
-										</FrameLayout>
-
-									</com.google.android.material.card.MaterialCardView>
-
-									<com.google.android.material.card.MaterialCardView
 										android:id="@+id/direction_button"
 										style="@style/Widget.App.Material.ActionTileCard"
 										android:layout_width="0dp"
