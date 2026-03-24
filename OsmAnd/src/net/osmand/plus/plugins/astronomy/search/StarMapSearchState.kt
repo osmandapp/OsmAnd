@@ -346,7 +346,12 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 		) {
 			count++
 		}
-		if (typeFilter != StarMapSearchTypeFilter.SHOW_ALL) count++
+		val defaultTypeFilter = if (quickPresetType == StarMapSearchQuickPresetType.WATCH_NOW) {
+			StarMapSearchTypeFilter.VISIBLE_TONIGHT
+		} else {
+			StarMapSearchTypeFilter.SHOW_ALL
+		}
+		if (typeFilter != defaultTypeFilter) count++
 		if (nakedEyeOnly) count++
 		if (selectedCategories.any { it != StarMapSearchCategoryFilter.ALL }) count++
 		return count
