@@ -208,7 +208,34 @@ public class RouteCalculationProgress implements Serializable {
 		FAILED_WITHOUT_MAP_ISSUES, // unsupported parameters, unusual geometry (Roma to Barcelona), etc
 
 		CANCELLED,
-		SUCCESS
+		SUCCESS;
+
+		public boolean isSuccess() {
+			return this == SUCCESS;
+		}
+
+		public boolean isCancelled() {
+			return this == CANCELLED;
+		}
+
+		public boolean isFailed() {
+			return this == FAILED_WITH_MIXED_MAPS
+					|| this == FAILED_WITH_MISSING_MAPS
+					|| this == FAILED_NO_HH_ROUTING_DATA
+					|| this == FAILED_WITHOUT_MAP_ISSUES;
+		}
+
+		public boolean isMixedMaps() {
+			return this == FAILED_WITH_MIXED_MAPS
+					|| this == MIXED_MAPS_INTERMEDIATES
+					|| this == MIXED_MAPS_AT_START_OR_END;
+		}
+
+		public boolean isMissingMaps() {
+			return this == FAILED_WITH_MISSING_MAPS
+					|| this == MISSING_MAPS_INTERMEDIATES
+					|| this == MISSING_MAPS_AT_START_OR_END;
+		}
 	}
 
 	public FastRoutingComplication getFastRoutingComplication() {
@@ -226,16 +253,10 @@ public class RouteCalculationProgress implements Serializable {
 	}
 
 	public void applyFastRoutingFailureStatus() {
-		if (fastRoutingComplication == FastRoutingComplication.FAILED_WITH_MIXED_MAPS.ordinal()
-				|| fastRoutingComplication == FastRoutingComplication.MIXED_MAPS_INTERMEDIATES.ordinal()
-				|| fastRoutingComplication == FastRoutingComplication.MIXED_MAPS_AT_START_OR_END.ordinal()) {
+		if (getFastRoutingComplication().isMixedMaps()) {
 			updateFastRoutingComplication(FastRoutingComplication.FAILED_WITH_MIXED_MAPS);
-
-		} else if (fastRoutingComplication == FastRoutingComplication.FAILED_WITH_MISSING_MAPS.ordinal()
-				|| fastRoutingComplication == FastRoutingComplication.MISSING_MAPS_INTERMEDIATES.ordinal()
-				|| fastRoutingComplication == FastRoutingComplication.MISSING_MAPS_AT_START_OR_END.ordinal()) {
+		} else if (getFastRoutingComplication().isMissingMaps()) {
 			updateFastRoutingComplication(FastRoutingComplication.FAILED_WITH_MISSING_MAPS);
-
 		} else {
 			updateFastRoutingComplication(FastRoutingComplication.FAILED_WITHOUT_MAP_ISSUES);
 		}

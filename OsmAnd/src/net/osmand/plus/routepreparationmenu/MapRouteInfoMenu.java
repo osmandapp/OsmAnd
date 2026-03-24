@@ -367,7 +367,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void catchCurrentMissingMaps() {
 		if (app != null && hasCurrentMissingMaps(app)) {
 			FastRoutingComplication complication = app.getRoutingHelper().getCurrentFastRoutingComplication();
-			if (complication != lastFastRoutingComplication) {
+			if (complication != null && complication != lastFastRoutingComplication) {
 				lastFastRoutingComplication = complication;
 				updateCards();
 			}

@@ -803,23 +803,15 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		OsmandApplication app = getApp();
 		if (app != null && app.getRoutingHelper().hasCurrentMissingMaps()) {
 			FastRoutingComplication complication = app.getRoutingHelper().getCurrentFastRoutingComplication();
-			if (complication != lastFastRoutingComplication) {
+			if (complication != null && complication != lastFastRoutingComplication) {
 				lastFastRoutingComplication = complication;
-				if (complication == FastRoutingComplication.SUCCESS) {
+				if (complication.isSuccess() || complication.isCancelled()) {
 					closeMissingMapsScreen();
 				} else {
-					showMissingMapsScreen(allowContinueOnFastRoutingComplication(complication));
+					showMissingMapsScreen(!complication.isFailed());
 				}
 			}
 		}
-	}
-
-	private boolean allowContinueOnFastRoutingComplication(FastRoutingComplication complication) {
-		return complication != FastRoutingComplication.CANCELLED
-				&& complication != FastRoutingComplication.FAILED_WITH_MIXED_MAPS
-				&& complication != FastRoutingComplication.FAILED_WITH_MISSING_MAPS
-				&& complication != FastRoutingComplication.FAILED_NO_HH_ROUTING_DATA
-				&& complication != FastRoutingComplication.FAILED_WITHOUT_MAP_ISSUES;
 	}
 
 	@Override
