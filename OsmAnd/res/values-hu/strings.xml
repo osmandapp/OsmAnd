@@ -5393,7 +5393,7 @@
     <string name="obd_fuel_consumption_rate">Fogyasztás</string>
     <string name="obd_fuel_consumption_rate_desc">Megjeleníti az üzemanyag-fogyasztást az OBD adatai alapján</string>
     <string name="obd_fuel_type">Üzemanyagtípus</string>
-    <string name="obd_plugin_description">Kövesse nyomon a legfontosabb járműmutatókat az OBD-II protokoll segítségével. Hozzáférhet az alábbi adatokhoz:\n• Motorfordulatszám, a motor indítása óta eltelt idő, számított motorterhelés\n• Üzemanyag-fogyasztás, üzemanyag nyomása, maradék üzemanyag\n• Beszívott levegő hőmérséklete, környezeti hőmérséklet, hűtőfolyadék hőmérséklete, motorolaj hőmérséklete\n• Jármű sebessége, fojtószelep helyzete, akkumulátor töltöttsége\n</string>
+    <string name="obd_plugin_description">Kövesse nyomon a legfontosabb járműadatokat az OBD-II protokoll segítségével. Hozzáférhet az alábbi adatokhoz:\n• Motorfordulatszám, a motor indítása óta eltelt idő, számított motorterhelés\n• Üzemanyag-fogyasztás, üzemanyag nyomása, maradék üzemanyag\n• Beszívott levegő hőmérséklete, környezeti hőmérséklet, hűtőfolyadék hőmérséklete, motorolaj hőmérséklete\n• Jármű sebessége, fojtószelep helyzete, akkumulátor töltöttsége\n</string>
     <string name="obd_support">OBD-támogatás</string>
     <string name="obd_plugin_name">Járműadatok</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hidrogénnel működő Bifuel</string>
@@ -6025,4 +6025,13 @@
     <string name="start_free_trial">Ingyenes próbaidőszak megkezdése</string>
     <string name="subscription_free_trial_with_price">%1$s ingyen, utána: %2$s</string>
     <string name="subscription_then_price">utána: %1$s</string>
+    <string name="purchases_feature_desc_astronomy">Fedezze fel az éjszakai égboltot offline térkép és csillagászati katalógus segítségével. Tervezze meg a megfigyeléseket az intelligens láthatósági grafikonok, napi ütemtervek és az interaktív AR-mód használatával.</string>
+    <string name="astro_expand_your_universe_description">Szerezzen hozzáférést az offline működő mélyég-katalógusok, a Wikipédia-cikkek és az AR-mód kibővített adatbázisaihoz.</string>
+    <string name="astro_offline_knowledge_base_title">Offline tudásbázis</string>
+    <string name="astro_offline_knowledge_base_description">Töltse le a kibővített adatbázist, hogy offline is hozzáférhessen a Wikipédia-cikkekhez és a mélyég-katalógusokhoz.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Másnap.</string>
+    <string name="astro_visibility_show_today">Mai láthatóság megjelenítése</string>
+    <string name="astro_schedule_show_current_week">Jelenlegi hét megjelenítése</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="astro_expand_your_universe_title">Fedezze fel az univerzumot</string>
 </resources>

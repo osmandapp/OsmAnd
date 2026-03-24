@@ -2278,7 +2278,7 @@
     <string name="yesterday">Вчера</string>
     <string name="last_seven_days">За последние 7 дней</string>
     <string name="this_year">В этом году</string>
-    <string name="plan_route">Проект маршрута</string>
+    <string name="plan_route">План маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
     <string name="move_to_history">Переместить в историю</string>
     <string name="group_will_be_removed_after_restart">Группа будет выключена при следующем запуске приложения.</string>
@@ -4906,7 +4906,7 @@
     <string name="help_article_navigation_routing_straight_line_routing_name">Прямая линия (воздушное судно)</string>
     <string name="help_article_navigation_routing_train_routing_name">Поезд</string>
     <string name="help_article_personal_import_export_name">Импорт/экспорт</string>
-    <string name="help_article_plan_route_name">Проект маршрута</string>
+    <string name="help_article_plan_route_name">План маршрута</string>
     <string name="help_article_plan_route_coordinate_input_name">Ввод координат</string>
     <string name="help_article_plan_route_web_name">Веб-планировщик маршрутов</string>
     <string name="help_article_purchases_android_name">Покупки на Android</string>
@@ -5646,7 +5646,7 @@
     <string name="saved_to_device">Сохранено на устройстве</string>
     <string name="save_to_device">Сохранить на устройстве</string>
     <string name="save_to_device_error">Ошибка сохранения на устройстве</string>
-    <string name="travel_guides">Справочники</string>
+    <string name="travel_guides">Путеводители</string>
     <string name="show_debug_tile_description">Показывать отладочную информацию о каждом тайле</string>
     <string name="show_debug_tile">Показывать информацию о тайле</string>
     <string name="unit_of_temperature_description">Выбранные единицы измерения будут применены ко всем данным, связанным с температурой, в текущем профиле.</string>
