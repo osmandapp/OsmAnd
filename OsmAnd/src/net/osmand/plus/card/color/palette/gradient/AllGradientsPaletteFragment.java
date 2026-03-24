@@ -22,9 +22,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.palette.contract.IPaletteController;
 import net.osmand.plus.palette.contract.IPaletteView;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.palette.controller.BasePaletteController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -47,14 +47,18 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 		super.onCreate(savedInstanceState);
 		DialogManager dialogManager = app.getDialogManager();
 		controller = (BasePaletteController) dialogManager.findController(ALL_PALETTE_ITEMS_PROCESS_ID);
+
 		if (controller != null) {
 			controller.attachView(this);
+		} else {
+			dismissAllowingStateLoss();
 		}
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		if (controller == null) return null;
 		updateNightMode();
 		View view = inflate(R.layout.fragment_gradients_palette, container, false);
 		setupToolbar(view);
@@ -74,17 +78,26 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 		closeButton.setOnClickListener(v -> dismiss());
 
 		ImageView actionButton = toolbar.findViewById(R.id.action_button);
-		actionButton.setOnClickListener(v -> controller.onAddButtonClick(requireActivity()));
+		actionButton.setOnClickListener(v -> {
+			if (controller != null) {
+				controller.onAddButtonClick(requireActivity());
+			}
+		});
 		actionButton.setImageDrawable(getIcon(R.drawable.ic_action_add_no_bg));
 		actionButton.setContentDescription(getString(R.string.shared_string_add));
-		AndroidUiHelper.updateVisibility(actionButton, true);
+		AndroidUiHelper.updateVisibility(actionButton, controller.isAddingNewItemsSupported());
 	}
 
 	private void setupColorsPalette(@NonNull View view) {
-		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-		adapter = new AllGradientsPaletteAdapter(app, requireActivity(), controller, nightMode);
-		recyclerView.setLayoutManager(new LinearLayoutManager(app));
-		recyclerView.setAdapter(adapter);
+		if (controller != null) {
+			RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+			adapter = new AllGradientsPaletteAdapter(app, requireActivity(), controller, nightMode, () -> {
+				dismiss();
+				return kotlin.Unit.INSTANCE;
+			});
+			recyclerView.setLayoutManager(new LinearLayoutManager(app));
+			recyclerView.setAdapter(adapter);
+		}
 	}
 
 	@Override
@@ -100,9 +113,6 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 			adapter.askNotifyItemChanged(oldItem);
 			adapter.askNotifyItemChanged(newItem);
 		}
-		if (!controller.shouldKeepAllItemsScreen()) {
-			dismiss();
-		}
 	}
 
 	@Override
@@ -113,14 +123,19 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.detachView(this);
+		if (controller != null) {
+			controller.detachView(this);
+		}
 		FragmentActivity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
-			// Automatically unregister controller when close the dialog
+			// Automatically unregister controller when closing the dialog
 			// to avoid any possible memory leaks
 			DialogManager manager = app.getDialogManager();
 			manager.unregister(ALL_PALETTE_ITEMS_PROCESS_ID);
-			controller.onPaletteScreenClosed();
+
+			if (controller != null) {
+				controller.onPaletteScreenClosed();
+			}
 		}
 	}
 

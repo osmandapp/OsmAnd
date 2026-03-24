@@ -303,14 +303,16 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				}
 				registerUnregisterSensor(location, smallSpeedForCompass);
 
-				if (mapRenderer != null && !settings.USE_DISCRETE_AUTO_ZOOM.get()) {
-					setMyLocationV2(mapView, mapRenderer, location, predictedLocation, movingTime, rotation);
-				} else {
-					setMyLocationV1(mapView, location, movingTime, rotation, pendingRotation);
+				if (!movingToMyLocation) {
+					if (mapRenderer != null && !settings.USE_DISCRETE_AUTO_ZOOM.get()) {
+						setMyLocationV2(mapView, mapRenderer, location, predictedLocation, movingTime, rotation);
+					} else {
+						setMyLocationV1(mapView, location, movingTime, rotation, pendingRotation);
+					}
 				}
-			} else if (location != null) {
-				showViewAngle = (tb != null && NativeUtilities.containsLatLon(mapRenderer, tb, location.getLatitude(), location.getLongitude()));
-				registerUnregisterSensor(location, false);
+				} else if (location != null) {
+					showViewAngle = (tb != null && NativeUtilities.containsLatLon(mapRenderer, tb, location.getLatitude(), location.getLongitude()));
+					registerUnregisterSensor(location, false);
 			}
 			this.showViewAngle = showViewAngle;
 			followingMode = routingHelper.isFollowingMode();
@@ -527,7 +529,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				setMapLinkedToLocation(true);
 			}
 		};
-		Runnable finishAnimationCallback = () -> movingToMyLocation = false;
+		Runnable finishAnimationCallback = () -> {
+			movingToMyLocation = false;
+			if (isMapLinkedToLocation && myLocation != null
+					&& mapView != null && !mapView.isUserMapInteractionActive()) {
+				app.runInUIThread(() -> updateLocation(myLocation));
+			}
+		};
 		thread.startMoving(location.getLatitude(), location.getLongitude(), targetZoom, targetZoomFloatPart,
 				false, true, startAnimationCallback, finishAnimationCallback);
 	}

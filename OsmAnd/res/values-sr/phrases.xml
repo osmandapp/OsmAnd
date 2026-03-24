@@ -538,7 +538,7 @@
     <string name="poi_hockey">Хокеј</string>
     <string name="poi_horse_racing">Трке коња</string>
     <string name="poi_ice_skating">Скијање на леду</string>
-    <string name="poi_korfbal">Корфбол</string>
+    <string name="poi_korfball">Корфбол</string>
     <string name="poi_sport_motor">Мото трке</string>
     <string name="poi_sport_multi">Више спортова</string>
     <string name="poi_orienteering">Оријентиринг</string>
@@ -2343,7 +2343,7 @@
     <string name="poi_fitness_centre">Теретана</string>
     <string name="poi_fitness">Фитнес</string>
     <string name="poi_car_wash_yes">Да; Прање кола</string>
-    <string name="poi_cuisine">Тип кухиње</string>
+    <string name="poi_cuisine">Кухиња</string>
     <string name="poi_cuisine_pizza">Пице</string>
     <string name="poi_cuisine_burger">Пљескавице</string>
     <string name="poi_cuisine_coffee_shop">Кафа</string>

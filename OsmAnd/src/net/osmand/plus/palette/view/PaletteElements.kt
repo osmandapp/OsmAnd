@@ -1,7 +1,9 @@
 package net.osmand.plus.palette.view
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.RippleDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +12,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.graphics.drawable.DrawableCompat
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.utils.ColorUtilities
@@ -48,17 +51,50 @@ class PaletteElements(context: Context, private val nightMode: Boolean) {
 	}
 
 	fun createAddButtonView(rootView: ViewGroup): View {
-		val itemView = createCircleView(rootView)
+		val itemView = themedInflater.inflate(R.layout.point_editor_styled_button, rootView, false)
 		val icon = itemView.findViewById<ImageView>(R.id.icon)
 		val outline = itemView.findViewById<View>(R.id.outline)
 		val background = itemView.findViewById<ImageView>(R.id.background)
 
-		val bgColorId = ColorUtilities.getActivityBgColorId(nightMode)
-		val backgroundIcon = getIcon(R.drawable.bg_point_circle, bgColorId)
-		background.setImageDrawable(backgroundIcon)
+		val activeColor = ColorUtilities.getActiveColor(app, nightMode)
+		val inverseIconColor = ColorUtilities.getInverseIconColor(app, nightMode)
 
-		val activeColorResId = if (nightMode) R.color.icon_color_active_dark else R.color.icon_color_active_light
-		icon.setImageDrawable(getIcon(R.drawable.ic_action_plus, activeColorResId))
+		val iconStates = arrayOf(
+			intArrayOf(android.R.attr.state_pressed),
+			intArrayOf()
+		)
+		val iconColors = intArrayOf(
+			inverseIconColor,
+			activeColor
+		)
+
+		val plusDrawable = androidx.core.content.ContextCompat.getDrawable(app, R.drawable.ic_action_plus)?.mutate()
+		if (plusDrawable != null) {
+			DrawableCompat.setTintList(
+				plusDrawable,
+				ColorStateList(iconStates, iconColors)
+			)
+			icon.setImageDrawable(plusDrawable)
+		}
+
+		val bgColorId = ColorUtilities.getActivityBgColorId(nightMode)
+		val normalBgColor = androidx.core.content.ContextCompat.getColor(app, bgColorId)
+		val pressedBgColor = ColorUtilities.getActiveButtonsAndLinksBgPressedColor(app, nightMode)
+
+		val backgroundIcon = androidx.core.content.ContextCompat.getDrawable(app, R.drawable.bg_point_circle)?.mutate()
+		backgroundIcon?.setTint(normalBgColor)
+
+		val rippleDrawable = RippleDrawable(
+			ColorStateList.valueOf(pressedBgColor),
+			backgroundIcon,
+			null
+		)
+		background.setImageDrawable(rippleDrawable)
+
+		icon.background = null
+		icon.isDuplicateParentStateEnabled = true
+		background.isDuplicateParentStateEnabled = true
+
 		icon.visibility = View.VISIBLE
 		outline.visibility = View.INVISIBLE
 		return itemView

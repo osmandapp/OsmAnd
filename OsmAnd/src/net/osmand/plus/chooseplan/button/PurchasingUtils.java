@@ -49,11 +49,18 @@ public class PurchasingUtils {
 
 			InAppSubscriptionIntroductoryInfo info = subscription.getIntroductoryInfo();
 			if (info != null) {
-				Pair<Spannable, Spannable> pair = info.getFormattedDescription(app, primaryTextColor);
-				subscriptionButton.setDiscount(discount);
-				subscriptionButton.setDiscountApplied(!Algorithms.isEmpty(discount));
-				subscriptionButton.setPrice(pair.first.toString());
-				subscriptionButton.setDescription(pair.second.toString());
+				if (info.isFreeTrial()) {
+					subscriptionButton.setDiscount("");
+					subscriptionButton.setDiscountApplied(false);
+					subscriptionButton.setPrice(info.getFreeTrialDescription(app));
+					subscriptionButton.setDescription("");
+				} else {
+					Pair<Spannable, Spannable> pair = info.getFormattedDescription(app, primaryTextColor);
+					subscriptionButton.setDiscount(discount);
+					subscriptionButton.setDiscountApplied(!Algorithms.isEmpty(discount));
+					subscriptionButton.setPrice(pair.first.toString());
+					subscriptionButton.setDescription(pair.second.toString());
+				}
 			} else {
 				subscriptionButton.setPrice(subscription.getPriceWithPeriod(app));
 

@@ -92,14 +92,30 @@ public class PopUpMenu {
 		}
 		listPopupWindow.setOnItemClickListener((parent, view, position, id) -> {
 			if (position < menuItems.size()) {
-				notifyItemClicked(displayData, menuItems.get(position));
+				PopUpMenuItem item = menuItems.get(position);
+				notifyItemClicked(displayData, item);
+				if (item.shouldDismissOnClick()) {
+					listPopupWindow.dismiss();
+				}
+			} else {
+				listPopupWindow.dismiss();
 			}
-			listPopupWindow.dismiss();
 		});
 		return listPopupWindow;
 	}
 
 	private void setDropDown(@NonNull ListPopupWindow listPopupWindow, @NonNull View anchorView, @NonNull Context ctx){
+		if (displayData.dropDownGravity != null) {
+			listPopupWindow.setDropDownGravity(displayData.dropDownGravity);
+			if (displayData.horizontalOffset != null) {
+				listPopupWindow.setHorizontalOffset(displayData.horizontalOffset);
+			}
+			if (displayData.verticalOffset != null) {
+				listPopupWindow.setVerticalOffset(displayData.verticalOffset);
+			}
+			return;
+		}
+
 		int contentPaddingHalf = getDimension(ctx, R.dimen.content_padding_half);
 
 		switch (displayData.customDropDown) {
@@ -197,12 +213,20 @@ public class PopUpMenu {
 		popupMenu.show();
 	}
 
-	public static void show(@NonNull PopUpMenuDisplayData displayData) {
+	@Nullable
+	public static ListPopupWindow showAndGet(@NonNull PopUpMenuDisplayData displayData) {
 		if (displayData.hasCustomizations()) {
 			PopUpMenu popUpMenu = new PopUpMenu(displayData);
-			popUpMenu.createCustomListPopUpWindow().show();
+			ListPopupWindow listPopupWindow = popUpMenu.createCustomListPopUpWindow();
+			listPopupWindow.show();
+			return listPopupWindow;
 		} else {
 			showNativePopUpMenu(displayData);
+			return null;
 		}
+	}
+
+	public static void show(@NonNull PopUpMenuDisplayData displayData) {
+		showAndGet(displayData);
 	}
 }

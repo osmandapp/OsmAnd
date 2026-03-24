@@ -1,11 +1,12 @@
 package net.osmand.plus.plugins.astronomy.views.contextmenu
 
-import android.content.Intent
+import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import net.osmand.plus.OsmandApplication
@@ -19,10 +20,12 @@ class AstroDescriptionCardViewHolder(itemView: View) : RecyclerView.ViewHolder(i
 	fun bind(
 		app: OsmandApplication,
 		nightMode: Boolean,
-		descriptionCardModel: AstroDescriptionCardModel,
-		astroContextMenuFragment: AstroContextMenuFragment
+		item: AstroDescriptionCardItem,
+		onReadClick: (Uri) -> Unit
 	) {
-		descriptionCardModel.astroArticle?.apply { descriptionTv.text = description }
+		val description = item.description
+		descriptionTv.text = description
+		descriptionTv.isVisible = description.isNotBlank()
 
 		val wikipediaString = app.getString(R.string.shared_string_wikipedia)
 		val text = app.getString(R.string.read_on, wikipediaString)
@@ -38,18 +41,14 @@ class AstroDescriptionCardViewHolder(itemView: View) : RecyclerView.ViewHolder(i
 		}
 
 		readButton.text = sp
+		readButton.setTypeface(readButton.typeface, android.graphics.Typeface.NORMAL)
 		readButton.icon = app.uiUtilities.getPaintedIcon(
 			R.drawable.ic_plugin_wikipedia,
 			ColorUtilities.getDefaultIconColor(app, nightMode)
 		)
 
 		readButton.setOnClickListener {
-			val uri = descriptionCardModel.getWikiUri()
-			val intent = Intent(Intent.ACTION_VIEW, uri)
-			try {
-				astroContextMenuFragment.startActivity(intent)
-			} catch (_: Exception) {
-			}
+			onReadClick(item.wikiUri)
 		}
 	}
 }

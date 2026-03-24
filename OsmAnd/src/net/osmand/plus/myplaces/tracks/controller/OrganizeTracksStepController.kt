@@ -8,17 +8,18 @@ import net.osmand.plus.base.containers.Limits
 import net.osmand.plus.base.dialog.BaseDialogController
 import net.osmand.plus.base.dialog.data.DialogExtra
 import net.osmand.plus.base.dialog.data.DisplayData
+import net.osmand.plus.chooseplan.ChoosePlanFragment
+import net.osmand.plus.chooseplan.OsmAndFeature
+import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.bottomsheets.ModernSliderBottomSheet
 import net.osmand.plus.settings.controllers.IModernSliderDialogController
 import net.osmand.shared.gpx.organization.OrganizeByRangeParams
-import net.osmand.shared.gpx.organization.enums.OrganizeByType
 
 class OrganizeTracksStepController(
-	val app: OsmandApplication,
+	app: OsmandApplication,
 	private val folderId: String,
-	private val organizeByType: OrganizeByType,
-	private val initialValue: Int
+	newParams: OrganizeByRangeParams
 ) : BaseDialogController(app), IModernSliderDialogController {
 
 	companion object {
@@ -29,13 +30,23 @@ class OrganizeTracksStepController(
 			fragmentManager: FragmentManager,
 			appMode: ApplicationMode,
 			folderId: String,
-			type: OrganizeByType,
-			initialValue: Int
+			newParams: OrganizeByRangeParams
 		) {
-			val controller = OrganizeTracksStepController(app, folderId, type, initialValue)
+			val controller = OrganizeTracksStepController(
+				app,
+				folderId,
+				newParams)
 			app.dialogManager.register(PROCESS_ID, controller)
 			ModernSliderBottomSheet.showInstance(fragmentManager, appMode, PROCESS_ID)
 		}
+	}
+
+	private val organizeByType = newParams.type
+	private var initialParams = app.smartFolderHelper.getOrganizeByParams(folderId)
+	private val initialValue = organizeByType.getDisplayUnits().fromBase(newParams.stepSize).toInt()
+
+	init {
+		app.smartFolderHelper.setOrganizeByParams(folderId, newParams)
 	}
 
 	private var selectedValue = organizeByType.stepRange!!.clamp(initialValue).toInt()
@@ -43,7 +54,7 @@ class OrganizeTracksStepController(
 
 	override fun getProcessId() = PROCESS_ID
 
-	// ----------- IModernSliderDialogController implementation -----------
+// ----------- IModernSliderDialogController implementation -----------
 
 	override fun getSliderTitle(): String = getString(R.string.shared_string_step)
 
@@ -66,8 +77,11 @@ class OrganizeTracksStepController(
 	}
 
 	override fun onApplyChanges() {
-		if (initialValue != selectedValue) {
-			setOrganizeByStep(selectedValue)
+		if (!InAppPurchaseUtils.isOrganizeByTypeApplicable(app, organizeByType)) {
+			activity?.let {
+				ChoosePlanFragment.showInstance(it, OsmAndFeature.ADVANCED_WIDGETS)
+			}
+		} else {
 			applyChanges = true
 		}
 	}
@@ -76,7 +90,7 @@ class OrganizeTracksStepController(
 		finishProcessIfNeeded(activity)
 	}
 
-	// ----------- Specific logic methods -----------
+// ----------- Specific logic methods -----------
 
 	private fun setOrganizeByStep(value: Int) {
 		val currentParams = app.smartFolderHelper.getOrganizeByParams(folderId)
@@ -86,17 +100,21 @@ class OrganizeTracksStepController(
 		}
 	}
 
+	private fun resetParams() {
+		app.smartFolderHelper.setOrganizeByParams(folderId, initialParams)
+	}
+
 	override fun finishProcessIfNeeded(activity: FragmentActivity?): Boolean {
 		if (super.finishProcessIfNeeded(activity)) {
 			if (!applyChanges) {
-				setOrganizeByStep(initialValue)
+				resetParams()
 			}
 			return true
 		}
 		return false
 	}
 
-	// ----------- Utilities methods -----------
+// ----------- Utilities methods -----------
 
 	private fun formatValueWithUnits(value: Int): String {
 		return "$value ${organizeByType.getDisplayUnits().getSymbol()}"
@@ -111,5 +129,13 @@ class OrganizeTracksStepController(
 		displayData.putExtra(DialogExtra.TITLE, getString(R.string.set_step_size))
 		displayData.putExtra(DialogExtra.SUBTITLE, getString(R.string.set_step_size_summary))
 		return displayData
+	}
+
+	override fun getRightButtonResId(): Int? {
+		return if (InAppPurchaseUtils.isOrganizeByTypeApplicable(app, organizeByType)) {
+			super.getRightButtonResId()
+		} else {
+			R.string.shared_string_unlock
+		}
 	}
 }

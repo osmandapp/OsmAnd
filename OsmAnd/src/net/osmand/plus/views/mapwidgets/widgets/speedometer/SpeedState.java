@@ -7,18 +7,21 @@ import net.osmand.plus.R;
 import net.osmand.plus.utils.ColorUtilities;
 
 public enum SpeedState {
-	SAFE(Color.TRANSPARENT),
-	WARNING(Color.parseColor("#FFFFD700")),
-	EXCEED(Color.parseColor("#FFD92A2A"));
+	SAFE(R.color.color_transparent, R.color.color_transparent),
+	WARNING(R.color.speedometer_bg_tolerance_day, R.color.speedometer_bg_tolerance_night),
+	EXCEED(R.color.speedometer_bg_limit_day, R.color.speedometer_bg_limit_night);
 
-	final int alertColor;
+	final int alertColorDay;
+	final int alertColorNight;
 
-	SpeedState(int alertColor) {
-		this.alertColor = alertColor;
+	SpeedState(int alertColorDay, int alertColorNight) {
+		this.alertColorDay = alertColorDay;
+		this.alertColorNight = alertColorNight;
 	}
 
-	public int getAlertColor() {
-		return alertColor;
+	public int getAlertColor(Context context, boolean nightMode) {
+		int colorRes = nightMode ? alertColorNight : alertColorDay;
+		return context.getColor(colorRes);
 	}
 
 	public int getSpeedTextColor(Context context, boolean nightMode) {
@@ -34,9 +37,9 @@ public enum SpeedState {
 	public int getSpeedUnitTextColor(Context context, boolean nightMode) {
 		int color = 0;
 		switch (this) {
-			case SAFE -> color = ColorUtilities.getSecondaryTextColor(context, nightMode);
-			case WARNING -> color = context.getColor(R.color.speed_limit_tolerance_units);
-			case EXCEED -> color = context.getColor(R.color.speeding_units);
+			case SAFE -> color = context.getColor(nightMode ? R.color.widget_units_color_dark : R.color.widget_units_color_light);
+			case WARNING -> color = context.getColor(nightMode ? R.color.speedometer_tolerance_units_color_dark : R.color.speedometer_tolerance_units_color_light);
+			case EXCEED -> color = context.getColor(nightMode ? R.color.speedometer_limit_units_color_dark : R.color.speedometer_limit_units_color_light);
 		}
 		return color;
 	}

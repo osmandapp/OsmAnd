@@ -643,7 +643,7 @@
     <string name="poi_roller_skating">Patinaje sobre ruedas</string>
     <string name="poi_skiing">Esquí</string>
     <string name="poi_surfing">Surf</string>
-    <string name="poi_korfbal">Balonkorf</string>
+    <string name="poi_korfball">Balonkorf</string>
     <string name="poi_boundary_stone">Mojón</string>
     <string name="poi_attraction_amusement_ride">Atracción de feria</string>
     <string name="poi_attraction_big_wheel">Rueda de la fortuna;Noria;Vuelta al mundo;Viaje a la luna;Rueda moscovita;Rueda de Chicago;Rueda chicagua;Rueda gigante;Rueda ferris</string>
@@ -787,7 +787,7 @@
     <string name="poi_leather">Marroquinería;Tienda de cueros</string>
     <string name="poi_music">Disquería;Tienda de música</string>
     <string name="poi_scuba_diving_shop">Artículos de buceo</string>
-    <string name="poi_tyres">Tienda de neumáticos</string>
+    <string name="poi_tyres">Neumáticos;Neumático;Tienda de neumáticos;Neumáticos</string>
     <string name="poi_energy">Equipamiento energético</string>
     <string name="poi_watches">Relojes de pulsera</string>
     <string name="poi_swimming_pool_shop">Artículos de piscina</string>
@@ -2850,8 +2850,8 @@
     <string name="poi_cuisine_burger">Hamburguesas</string>
     <string name="poi_cuisine_coffee_shop">Café</string>
     <string name="poi_cuisine_sandwich">Sándwich;Emparedados</string>
-    <string name="poi_cuisine_kebab">Kebab;Brochetas</string>
-    <string name="poi_cuisine_doner">Döner kebab (shawarma)</string>
+    <string name="poi_cuisine_kebab">Kebab;Plato</string>
+    <string name="poi_cuisine_doner">Döner kebab (shawarma);Plato</string>
     <string name="poi_cuisine_chicken">Pollo</string>
     <string name="poi_cuisine_ice_cream">Helado</string>
     <string name="poi_cuisine_sushi">Sushi</string>
@@ -2861,7 +2861,7 @@
     <string name="poi_cuisine_noodle">Fideos</string>
     <string name="poi_cuisine_donut">Rosquillas;Donas</string>
     <string name="poi_cuisine_ramen">Ramen;Sopa de fideos</string>
-    <string name="poi_cuisine_crepe">Crepe;Panqueques</string>
+    <string name="poi_cuisine_crepe">Crepa;Crepes</string>
     <string name="poi_cuisine_breakfast">Desayuno</string>
     <string name="poi_cuisine_beef_bowl">Gyūdon;Bol de ternera</string>
     <string name="poi_cuisine_steak">Filete/bistec (carne roja)</string>
@@ -3432,7 +3432,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">Reparación de la transmisión</string>
     <string name="poi_service_vehicle_motor_yes">Motores</string>
     <string name="poi_service_vehicle_insurance_yes">Aseguradora</string>
-    <string name="poi_service_vehicle_tyres_yes">Neumáticos</string>
+    <string name="poi_service_vehicle_tyres_yes">Neumáticos;Neumático;Neumático;Neumáticos</string>
     <string name="poi_aerialway_zip_line">Tirolesa</string>
     <string name="poi_climbing_adventure">Aventura de escalada</string>
     <string name="poi_via_ferrata">Vía ferrata</string>
@@ -3774,7 +3774,7 @@
     <string name="poi_traffic_signals_sound_locate">Sólo para encontrar el poste</string>
     <string name="poi_internet_access_fee_customers">Conexión a Internet: clientes</string>
     <string name="poi_booth">Tipo de cabina</string>
-    <string name="poi_covered_booth">Cabina</string>
+    <string name="poi_covered_booth">Sí</string>
     <string name="poi_dive_centre">Centro de buceo</string>
     <string name="poi_resort_hunting">Base de caza</string>
     <string name="poi_piste_ref">Número de referencia de la pista</string>
@@ -5159,4 +5159,20 @@
     <string name="poi_hazard_children">Niños</string>
     <string name="poi_hazard_animal_crossing">Paso de fauna</string>
     <string name="poi_hazard_shooting_range">Polígono de tiro</string>
+    <string name="poi_covered_booth_filter">Stand</string>
+    <string name="poi_rapids_filter">Grado de rápidos</string>
+    <string name="poi_piste_downhill">Pista de descenso; pista de esquí; pendiente para esquiar</string>
+    <string name="poi_barrier_chain">Barrera de cadena</string>
+    <string name="poi_hazard_hole">Agujero</string>
+    <string name="poi_hazard_queues_likely">Posible embotellamiento</string>
+    <string name="poi_hazard_side_winds">Vientos cruzados</string>
+    <string name="poi_sample_collection">Toma de muestras; Sangre; Laboratorio; Análisis</string>
+    <string name="poi_rapids_grade_0">0 (aguas tranquilas)</string>
+    <string name="poi_rapids_grade_1">1 (fácil)</string>
+    <string name="poi_rapids_grade_2">2 (principiante)</string>
+    <string name="poi_rapids_grade_3">3 (intermedio)</string>
+    <string name="poi_rapids_grade_4">4 (avanzado)</string>
+    <string name="poi_rapids_grade_5">5 (experto)</string>
+    <string name="poi_rapids_grade_6">6 (extremo)</string>
+    <string name="poi_rapids_grade_x">X (no ejecutable)</string>
 </resources>

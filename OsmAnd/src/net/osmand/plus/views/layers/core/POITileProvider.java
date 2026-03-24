@@ -279,7 +279,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 	@Override
 	public boolean supportsNaturalObtainDataAsync() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -299,7 +299,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 	@Override
 	public boolean waitForLoading() {
-		return true;
+		return false;
 	}
 
 	private boolean isMapRendererLost() {

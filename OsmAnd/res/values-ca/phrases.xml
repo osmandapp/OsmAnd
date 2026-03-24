@@ -276,7 +276,7 @@
     <string name="poi_horse_racing">Curses de cavalls</string>
     <string name="poi_ice_skating">Patinatge sobre gel</string>
     <string name="poi_ice_stock">Icestock</string>
-    <string name="poi_korfbal">Corfbol</string>
+    <string name="poi_korfball">Corfbol</string>
     <string name="poi_sport_motor">Esport de motor</string>
     <string name="poi_orienteering">Cursa d\'orientació</string>
     <string name="poi_paddle_tennis">Pàdel</string>
@@ -697,7 +697,7 @@
     <string name="poi_money_lender">Usurer</string>
     <string name="poi_pawnbroker">Casa de penyores</string>
     <string name="poi_bureau_de_change">Canvi de moneda</string>
-    <string name="poi_cave_entrance">Entrada a la cova</string>
+    <string name="poi_cave_entrance">Entrada a una cova</string>
     <string name="poi_saddle">Coll</string>
     <string name="poi_ridge">Cresta</string>
     <string name="poi_beacon_cardinal">Balisa direccional</string>

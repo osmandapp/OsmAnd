@@ -89,6 +89,7 @@ public class SearchUICore {
 			Arrays.asList("building", "internet_access_yes"));
 
 	private Function<String, String> httpRedirectRequester = null;
+	private static final int MIN_COMPLETE_MATCH_WEIGHT = 40;
 
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this.poiTypes = poiTypes;
@@ -554,9 +555,9 @@ public class SearchUICore {
 		apis.add(streetsApi);
 		SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
 		apis.add(cityApi);
-		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false));
-		// ?LONG?
-//		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false));
+		SearchCoreFactory.TownCitiesCache townCitiesCache = new SearchCoreFactory.TownCitiesCache();
+		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache));
+		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache));
 	}
 
 	public void clearCustomSearchPoiFilters() {
@@ -1199,11 +1200,12 @@ public class SearchUICore {
 			case OBF_RESOURCE:
 				boolean fp1 = o1.isFullPhraseEqualLocaleName();
 				boolean fp2 = o2.isFullPhraseEqualLocaleName();
-				// sort order: DETAILED, WIKIPEDIA, BASEMAP, TRAVEL
-				int ord1 = fp1 ? 0 : o1.getResourceType().ordinal();
-				int ord2 = fp2 ? 0 : o2.getResourceType().ordinal();
-				if (ord1 != ord2) {
-					return ord2 > ord1 ? -1 : 1;
+				// sort order: DETAILED|BASEMAP, WIKIPEDIA, TRAVEL
+				int maxWeight = SearchResult.SearchResultResource.DETAILED.getWeight();
+				int weight1 = fp1 ? maxWeight : o1.getResourceType().getWeight();
+				int weight2 = fp2 ? maxWeight : o2.getResourceType().getWeight();
+				if (weight1 != weight2) {
+					return weight2 > weight1 ? 1 : -1;
 				}
 				break;
 			case UNKNOWN_PHRASE_MATCH_WEIGHT:
@@ -1326,6 +1328,25 @@ public class SearchUICore {
 			return 0;
 		}
 
+	}
+	
+	public static class SearchResultComparatorOneStep extends SearchResultComparator {		
+		ResultCompareStep step;
+		
+		public SearchResultComparatorOneStep(SearchPhrase sp) {
+			super(sp);
+			this.step = ResultCompareStep.COMPARE_BY_DISTANCE;
+		}
+
+		public SearchResultComparatorOneStep(SearchPhrase sp, ResultCompareStep step) {
+			super(sp);
+			this.step = step;
+		}
+
+		@Override
+		public int compare(SearchResult o1, SearchResult o2) {
+            return step.compare(o1, o2, this);
+        }
 	}
 
 	public static String getMainCityName(String cityName) {

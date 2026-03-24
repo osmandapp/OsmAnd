@@ -61,23 +61,17 @@ android {
 		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
 		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
 			println(osmandTask.getName())
-			osmandTask.dependsOn(copyMapShaderIcons)
-			osmandTask.dependsOn(copyMapPOIIcons)
-			osmandTask.dependsOn(copyLargePOIIcons)
+			osmandTask.dependsOn(copyIcons)
 		}
 		def packageResources= "package${taskName}Resources"
 		tasks.named(packageResources).configure { osmandTask ->
 			println(osmandTask.getName())
-			osmandTask.dependsOn(copyMapShaderIcons)
-			osmandTask.dependsOn(copyMapPOIIcons)
-			osmandTask.dependsOn(copyLargePOIIcons)
+			osmandTask.dependsOn(copyIcons)
 		}
 		def generateResources= "generate${taskName}Resources"
 		tasks.named(generateResources).configure { osmandTask ->
 			println(osmandTask.getName() + " generate resources")
-			osmandTask.dependsOn(copyMapShaderIcons)
-			osmandTask.dependsOn(copyMapPOIIcons)
-			osmandTask.dependsOn(copyLargePOIIcons)
+			osmandTask.dependsOn(copyIcons)
 		}
 	}
 }
