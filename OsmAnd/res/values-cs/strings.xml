@@ -6085,4 +6085,5 @@
     <string name="delete_colors_palette_dialog_summary">Opravdu chcete odstranit paletu %1$s?</string>
     <string name="intersection">Průsečík</string>
     <string name="shared_string_radians">Radiány</string>
+    <string name="shared_string_unlock">Odemknout</string>
 </resources>

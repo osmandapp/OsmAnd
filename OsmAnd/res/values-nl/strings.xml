@@ -6449,4 +6449,8 @@
     <string name="astro_explore_schedule">Schema</string>
     <string name="obd_alt_battery_voltage_desc">Toont het spanningsniveau op de OBD-adapter</string>
     <string name="shared_string_radians">Radialen</string>
+    <string name="shared_string_unlock">Ontgrendel</string>
+    <string name="start_free_trial">Start gratis proefperiode</string>
+    <string name="subscription_free_trial_with_price">%1$s gratis, daarna %2$s</string>
+    <string name="subscription_then_price">daarna %1$s</string>
 </resources>

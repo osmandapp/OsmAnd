@@ -29,6 +29,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.poi.PoiFilterUtils.AmenityNameFilter;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.POIMapLayer.PoiUIFilterResultMatcher;
@@ -194,8 +195,9 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		if (!filterUnique) {
 			return new ArrayList<>(currentSearchResult);
 		}
-		AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
-		return amenitySearcher.filterUniqueAmenitiesByOsmIdOrWikidata(currentSearchResult);
+		ResourceManager resourceManager = app.getResourceManager();
+		AmenitySearcher.Settings settings = resourceManager.getDefaultAmenitySearchSettings();
+		return resourceManager.getAmenitySearcher().mergeAmenities(currentSearchResult, settings);
 	}
 
 	public DataSourceType getDataSourceType() {
@@ -421,8 +423,9 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			resultList.sort((p1, p2) -> p2.getTravelEloNumber() - p1.getTravelEloNumber());
 		}
 		if (filterUnique) {
-			AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
-			resultList = amenitySearcher.filterUniqueAmenitiesByOsmIdOrWikidata(resultList);
+			ResourceManager resourceManager = app.getResourceManager();
+			AmenitySearcher.Settings settings = resourceManager.getDefaultAmenitySearchSettings();
+			resultList = resourceManager.getAmenitySearcher().mergeAmenities(resultList, settings);
 		}
 		return resultList;
 	}

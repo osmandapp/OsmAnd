@@ -833,13 +833,13 @@
     <string name="poi_website">Веб-сайт</string>
     <string name="poi_email">Эл. почта</string>
     <string name="poi_fax">Факс</string>
-    <string name="poi_mobile">Сотовый телефон</string>
+    <string name="poi_mobile">Мобильный</string>
     <string name="poi_service_times">Время обслуживания</string>
     <string name="poi_abandoned">Заброшено</string>
     <string name="poi_abandoned_poi">Заброшенный объект</string>
     <string name="poi_disused">Не используется по назначению</string>
     <string name="poi_operator">Оператор</string>
-    <string name="poi_brand">Торговая марка;Бренд</string>
+    <string name="poi_brand">Бренд</string>
     <string name="poi_fee">Оплата</string>
     <string name="poi_fee_yes">Да;Платно</string>
     <string name="poi_fee_no">Нет</string>
@@ -3983,7 +3983,7 @@
     <string name="poi_authentication_chip_card_no">Авторизация по чип-карте: нет</string>
     <string name="poi_authentication_contactless_no">Бесконтактная авторизация: нет</string>
     <string name="poi_share_taxi_yes">Маршрутное такси: да</string>
-    <string name="poi_power_portal">Энергораспределительный пункт</string>
+    <string name="poi_power_portal">Опора ЛЭП</string>
     <string name="poi_arch">Арка</string>
     <string name="poi_shelter_filter">Укрытие</string>
     <string name="poi_shelter_no">Укрытие: нет</string>
@@ -4110,7 +4110,7 @@
     <string name="poi_computer_sales_yes">Есть;Продажа компьютеров</string>
     <string name="poi_computer_repair_yes">Есть;Ремонт компьютеров</string>
     <string name="poi_computer_parts_yes">Есть;Компьютерные комплектующие</string>
-    <string name="poi_computer_parts_no">Компьютерные детали: нет</string>
+    <string name="poi_computer_parts_no">Комплектующие для ПК: нет</string>
     <string name="poi_escape_game">Квест в реальности</string>
     <string name="poi_generator_method_combustion">Метод генерации: сжигание</string>
     <string name="poi_generator_method_gasification">Метод генерации: газификация</string>
@@ -4396,7 +4396,7 @@
     <string name="poi_second_hand_filter">Товары, бывшие в употреблении</string>
     <string name="poi_antenna">Антенна</string>
     <string name="poi_aboriginal_lands">Земли аборигенов</string>
-    <string name="poi_property_management">Офис по управлению недвижимостью</string>
+    <string name="poi_property_management">Офис по управлению недвижимостью;Управляющая компания;ЖКХ</string>
     <string name="poi_lock_name">Шлюз</string>
     <string name="poi_lock_ref">Номер шлюза</string>
     <string name="poi_border_zone">Пограничная зона</string>

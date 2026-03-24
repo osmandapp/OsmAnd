@@ -11,6 +11,18 @@
 	Thx - Hardy
 -->
 
+	<string name="purchases_feature_desc_astronomy">Explore the night sky with an offline map and celestial catalog. Plan observations using smart visibility graphs, daily schedules, and an interactive AR mode.</string>
+	<string name="astro_expand_your_universe_title">Expand your universe</string>
+	<string name="astro_expand_your_universe_description">Get access to the extended database of deep sky catalogs, Wikipedia articles and AR mode offline.</string>
+	<string name="astro_offline_knowledge_base_title">Offline Knowledge Base</string>
+	<string name="astro_offline_knowledge_base_description">Download the extended database to access Wikipedia articles and deep sky catalogs offline.</string>
+	<string name="astro_schedule_next_day_note">⁺¹ Next day.</string>
+	<string name="astro_visibility_show_today">Show today visibility</string>
+	<string name="astro_schedule_show_current_week">Show current week</string>
+	<string name="astro_next_day_suffix">⁺¹</string>
+    <string name="start_free_trial">Start free trial</string>
+    <string name="subscription_free_trial_with_price">%1$s free, then %2$s</string>
+    <string name="subscription_then_price">then %1$s</string>
     <string name="shared_string_radians">Radians</string>
 	<string name="shared_string_unlock">Unlock</string>
 	<string name="no_objects_found">No objects found</string>

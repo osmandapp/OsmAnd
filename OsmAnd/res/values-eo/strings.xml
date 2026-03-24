@@ -6096,7 +6096,7 @@
     <string name="astro_search_magnitude_short">mag %.1f</string>
     <string name="astro_filter_naked_eye">Nudokule videblaj</string>
     <string name="astro_filter_visible_tonight">Videblaj hodiaŭnokte</string>
-    <string name="astro_filter_visible_now">Videblaj nunj</string>
+    <string name="astro_filter_visible_now">Videblaj nun</string>
     <string name="astro_filter_show_all">Ĉiuj</string>
     <string name="astro_sort_sets_soonest">plej frua subiro</string>
     <string name="astro_sort_rises_soonest">plej frua leviĝo</string>
@@ -6112,4 +6112,8 @@
     <string name="astro_explore_deep_sky_subtitle">Galaksioj, galaksiamasoj, nigraj truoj</string>
     <string name="obd_alt_battery_voltage_desc">Montras tension ĉe la OBD-adaptilo</string>
     <string name="shared_string_radians">Radianoj</string>
+    <string name="shared_string_unlock">Malŝlosi</string>
+    <string name="start_free_trial">Komenci senpagan provperiodon</string>
+    <string name="subscription_free_trial_with_price">%1$s senpage, poste %2$s</string>
+    <string name="subscription_then_price">poste %1$s</string>
 </resources>

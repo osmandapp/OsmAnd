@@ -8,6 +8,8 @@ import net.osmand.aidlapi.OsmAndCustomizationConstants
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.download.DownloadActivityType
+import net.osmand.plus.download.IndexItem
 import net.osmand.plus.plugins.OsmandPlugin
 import net.osmand.plus.plugins.astronomy.search.StarMapRecentChip
 import net.osmand.plus.settings.backend.preferences.CommonPreference
@@ -75,5 +77,11 @@ class AstronomyPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 
 	fun showSkymap(mapActivity: MapActivity) {
 		StarMapFragment.showInstance(mapActivity.supportFragmentManager)
+	}
+
+	override fun onIndexItemDownloaded(item: IndexItem, updatingFile: Boolean) {
+		if (item.type == DownloadActivityType.STAR_MAP_FILE) {
+			astroDataProvider.clearCache()
+		}
 	}
 }

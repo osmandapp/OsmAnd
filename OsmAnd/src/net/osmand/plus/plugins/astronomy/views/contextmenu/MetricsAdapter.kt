@@ -4,16 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
 
-class MetricsAdapter : RecyclerView.Adapter<MetricsAdapter.VH>() {
-	private val items = mutableListOf<MetricUi>()
-
+class MetricsAdapter : ListAdapter<MetricsAdapter.MetricUi, MetricsAdapter.VH>(DiffCallback()) {
 	fun submit(list: List<MetricUi>) {
-		items.clear()
-		items.addAll(list)
-		notifyDataSetChanged()
+		submitList(list)
 	}
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
@@ -23,11 +21,9 @@ class MetricsAdapter : RecyclerView.Adapter<MetricsAdapter.VH>() {
 	}
 
 	override fun onBindViewHolder(holder: VH, position: Int) {
-		val isLast = position == items.lastIndex
-		holder.bind(items[position], showDivider = !isLast)
+		val isLast = position == currentList.lastIndex
+		holder.bind(getItem(position), showDivider = !isLast)
 	}
-
-	override fun getItemCount() = items.size
 
 	class VH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 		private val value = itemView.findViewById<TextView>(R.id.value)
@@ -45,4 +41,14 @@ class MetricsAdapter : RecyclerView.Adapter<MetricsAdapter.VH>() {
 		val value: String,
 		val label: String
 	)
+
+	private class DiffCallback : DiffUtil.ItemCallback<MetricUi>() {
+		override fun areItemsTheSame(oldItem: MetricUi, newItem: MetricUi): Boolean {
+			return oldItem.label == newItem.label
+		}
+
+		override fun areContentsTheSame(oldItem: MetricUi, newItem: MetricUi): Boolean {
+			return oldItem == newItem
+		}
+	}
 }

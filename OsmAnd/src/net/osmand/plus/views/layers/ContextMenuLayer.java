@@ -32,8 +32,8 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
-import net.osmand.data.LatLon;
 import net.osmand.data.BaseDetailsObject;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
@@ -221,15 +221,10 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 						clearOutlineCollection();
 						VectorLinesCollection outlineCollection = new VectorLinesCollection();
 						QVectorPointI points = new QVectorPointI();
-						double cx = 0.0;
-						double cy = 0.0;
-						double s = (double) x.size();
 						for (int i = 0; i < x.size(); i++) {
 							int ix = x.get(i);
 							int iy = y.get(i);
 							points.add(new PointI(ix, iy));
-							cx += (double) ix / s;
-							cy += (double) iy / s;
 						}
 						VectorLineBuilder builder = new VectorLineBuilder();
 						builder.setPoints(points)
@@ -242,7 +237,6 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 						builder.buildAndAddToCollection(outlineCollection);
 						this.outlineCollection = outlineCollection;
 						mapRenderer.addSymbolsProvider(outlineCollection);
-						mapRenderer.add3DObjectColor(new PointI((int) cx, (int) cy), NativeUtilities.createFColorRGB(outlinePaint.getColor()));
 					}
 				} else {
 					float px, py, prevX, prevY;
@@ -289,7 +283,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 			return;
 		}
 
-		boolean showMarker = false;
+		LatLon latLon = null;
 		if (mInChangeMarkerPositionMode) {
 			// is it needed?
 			if (menu != null && menu.getObject() == null) {
@@ -303,31 +297,44 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 				mAddGpxPointBottomSheetHelper.onDraw(box);
 			}
 		} else if (!markerCustomized) {
-			LatLon latLon = null;
 			if (menu != null && menu.isActive()) {
 				latLon = menu.getLatLon();
 			} else if (mapActivity.getFragmentsHelper().getTrackMenuFragment() != null) {
 				latLon = mapActivity.getFragmentsHelper().getTrackMenuFragment().getLatLon();
 			}
-			if (latLon != null) {
-				if (hasMapRenderer) {
-					PointI loc31 = new PointI(
-							MapUtils.get31TileNumberX(latLon.getLongitude()),
-							MapUtils.get31TileNumberY(latLon.getLatitude()));
-					contextCoreMarker.setPosition(loc31);
-					showMarker = true;
-				} else {
-					int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-					int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-					canvas.translate(x - contextMarker.getWidth() / 2f, y - contextMarker.getHeight());
-					contextMarker.draw(canvas);
+		}
+		drawContextMarker(canvas, box, mapRenderer, latLon);
+
+		mapActivityInvalidated = false;
+	}
+
+	private void drawContextMarker(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
+			@Nullable MapRendererView mapRenderer, @Nullable LatLon latLon) {
+		if (mapRenderer != null) {
+			PointI previous = contextCoreMarker.getPosition();
+			PointI target = latLon != null ? new PointI(MapUtils.get31TileNumberX(latLon.getLongitude()),
+					MapUtils.get31TileNumberY(latLon.getLatitude())) : null;
+
+			boolean wasHidden = contextCoreMarker.isHidden();
+			boolean changed = !NativeUtilities.arePointsEqual(target, previous);
+			if (changed && !wasHidden && previous != null) {
+				remove3DObjectColor(NativeUtilities.getLatLonFromPoint31(previous));
+			}
+			if (target != null) {
+				if (changed) {
+					contextCoreMarker.setPosition(target);
+				}
+				if (!hasHighlight3dObjectColor(latLon)) {
+					add3DObjectColor(latLon, outlinePaint.getColor());
 				}
 			}
+			contextCoreMarker.setIsHidden(target == null);
+		} else if (latLon != null) {
+			int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			canvas.translate(x - contextMarker.getWidth() / 2f, y - contextMarker.getHeight());
+			contextMarker.draw(canvas);
 		}
-		if (hasMapRenderer) {
-			contextCoreMarker.setIsHidden(!showMarker);
-		}
-		mapActivityInvalidated = false;
 	}
 
 	@Nullable
@@ -378,9 +385,18 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 
 	private void clearContextMarkerCollection() {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null && contextMarkerCollection != null) {
-			mapRenderer.removeSymbolsProvider(contextMarkerCollection);
-			contextMarkerCollection = null;
+		if (mapRenderer != null) {
+			if (contextCoreMarker != null) {
+				PointI position = contextCoreMarker.getPosition();
+				LatLon latLon = position != null ? NativeUtilities.getLatLonFromPoint31(position) : null;
+				if (latLon != null && hasHighlight3dObjectColor(latLon)) {
+					remove3DObjectColor(latLon);
+				}
+			}
+			if (contextMarkerCollection != null) {
+				mapRenderer.removeSymbolsProvider(contextMarkerCollection);
+				contextMarkerCollection = null;
+			}
 		}
 	}
 
@@ -389,7 +405,6 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 		if (mapRenderer != null && outlineCollection != null) {
 			mapRenderer.removeSymbolsProvider(outlineCollection);
 			outlineCollection = null;
-			mapRenderer.removeAll3DObjectColors();
 		}
 	}
 

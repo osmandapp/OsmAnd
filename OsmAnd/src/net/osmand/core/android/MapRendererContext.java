@@ -83,8 +83,10 @@ public class MapRendererContext {
 	private boolean useAppLocale;
 	private final float density;
 
-	// сached objects
+	// cached objects
 	private final Map<String, ResolvedMapStyle> mapStyles = new HashMap<>();
+	private final Map<LatLon, Integer> highlight3dObjects = new HashMap<>();
+
 	private CachedMapPresentation cachedMapPresentation;
 	private MapPresentationEnvironment mapPresentationEnvironment;
 	private MapPrimitiviser mapPrimitiviser;
@@ -538,6 +540,10 @@ public class MapRendererContext {
 				int buildings3DCustomColor = srtmPlugin.getBuildings3dColor();
 				map3DObjectsProvider = new Map3DObjectsTiledProvider(mapPrimitivesProvider, mapPresentationEnvironment, buildings3DColorType == Buildings3DColorType.CUSTOM, NativeUtilities.createFColorRGB(buildings3DCustomColor));
 				mapRendererView.setMap3DObjectsProvider(map3DObjectsProvider);
+
+				for (Map.Entry<LatLon, Integer> entry : highlight3dObjects.entrySet()) {
+					add3DObjectColor(mapRendererView, entry.getKey(), entry.getValue());
+				}
 			} else {
 				mapRendererView.resetMap3DObjectsProvider();
 				map3DObjectsProvider = null;
@@ -553,6 +559,34 @@ public class MapRendererContext {
 			mapRendererView.resetMap3DObjectsProvider();
 		}
 		map3DObjectsProvider = null;
+	}
+
+	@Nullable
+	public Integer getHighlight3dObjectColor(@NonNull LatLon latLon) {
+		return highlight3dObjects.get(latLon);
+	}
+
+	private boolean add3DObjectColor(@NonNull MapRendererView mapRenderer, @NonNull LatLon latLon, int color) {
+		PointI pointI = NativeUtilities.getPoint31FromLatLon(latLon);
+		FColorRGB fColorRGB = NativeUtilities.createFColorRGB(color);
+		return mapRenderer.add3DObjectColor(pointI, fColorRGB);
+	}
+
+	public void add3DObjectColor(@NonNull LatLon latLon, int color) {
+		MapRendererView mapRenderer = this.mapRendererView;
+		if (mapRenderer != null && add3DObjectColor(mapRenderer, latLon, color)) {
+			highlight3dObjects.put(latLon, color);
+		}
+	}
+
+	public void remove3DObjectColor(@NonNull LatLon latLon) {
+		MapRendererView mapRenderer = this.mapRendererView;
+		if (mapRenderer != null) {
+			PointI pointI = NativeUtilities.getPoint31FromLatLon(latLon);
+			if (mapRenderer.remove3DObjectColor(pointI)) {
+				highlight3dObjects.remove(latLon);
+			}
+		}
 	}
 
 	public void updateElevationConfiguration() {

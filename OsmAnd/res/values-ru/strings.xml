@@ -2278,7 +2278,7 @@
     <string name="yesterday">Вчера</string>
     <string name="last_seven_days">За последние 7 дней</string>
     <string name="this_year">В этом году</string>
-    <string name="plan_route">Проект маршрута</string>
+    <string name="plan_route">План маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
     <string name="move_to_history">Переместить в историю</string>
     <string name="group_will_be_removed_after_restart">Группа будет выключена при следующем запуске приложения.</string>
@@ -2462,7 +2462,7 @@
     <string name="parked_at">припаркован в</string>
     <string name="pick_up_till">Забрать до</string>
     <string name="without_time_limit">Без ограничения по времени</string>
-    <string name="context_menu_read_full_article">Полный текст статьи</string>
+    <string name="context_menu_read_full_article">Прочитать статью полностью</string>
     <string name="context_menu_read_article">Читать статью</string>
     <string name="context_menu_points_of_group">Все точки группы</string>
     <string name="open_from">Откроется в</string>
@@ -4906,7 +4906,7 @@
     <string name="help_article_navigation_routing_straight_line_routing_name">Прямая линия (воздушное судно)</string>
     <string name="help_article_navigation_routing_train_routing_name">Поезд</string>
     <string name="help_article_personal_import_export_name">Импорт/экспорт</string>
-    <string name="help_article_plan_route_name">Проект маршрута</string>
+    <string name="help_article_plan_route_name">План маршрута</string>
     <string name="help_article_plan_route_coordinate_input_name">Ввод координат</string>
     <string name="help_article_plan_route_web_name">Веб-планировщик маршрутов</string>
     <string name="help_article_purchases_android_name">Покупки на Android</string>
@@ -5345,7 +5345,7 @@
     <string name="delete_widget">Удалить виджет?</string>
     <string name="battery_saving_mode">Режим экономии батареи</string>
     <string name="delete_widget_description">Этот виджет будет удален. Вы сможете восстановить его позже в настройках экрана.</string>
-    <string name="y_axis_description">Выберите не более двух параметров.</string>
+    <string name="y_axis_description">Выберите до двух вариантов для оси Y.</string>
     <string name="graph_axis">Ось графика</string>
     <string name="quick_action_search_view_desc">Переключатель для открытия или закрытия режима поиска.</string>
     <string name="shared_string_interface">Интерфейс</string>
@@ -5812,7 +5812,7 @@
     <string name="rendering_attr_safetyContour_description">Контур безопасной глубины</string>
     <string name="response">Ответ</string>
     <string name="download_wikipedia_label">Скачать Википедию</string>
-    <string name="has_vehicle_metrics">С данными OBD-II</string>
+    <string name="has_vehicle_metrics">С данными OBDII</string>
     <string name="reverse_mode_original_track_desc">Точно следовать по маршруту обратно к началу.\nПредупреждение: Это может быть опасно, так как игнорирует одностороннее движение на дорогах.</string>
     <string name="reverse_mode">Реверсивный режим</string>
     <string name="release_5_2">• Добавлены данные о улице и городе в результаты поиска\n\n• Новые виджеты записи поездки: максимальная скорость, средний уклон и улучшенные показатели подъёмов/спусков\n\n• Новый морской навигационный стиль карты с широкими возможностями настройки\n\n• Улучшена скорость отрисовки карты\n\n• Повышена стабильность подключения к адаптерам OBDII BLE\n\n• Добавлены показатели пульса в разделе «Анализ по интервалам»\n\n• Добавлено отображение длительности для запланированных треков\n\n• Единицы измерения высоты теперь можно задавать отдельно от единиц измерения расстояния\n\n• Улучшено быстрое действие ориентации карты с выбором режима компаса\n\n• Для Android Auto добавлены предварительные уведомления о недостающих картах и частных дорогах\n\n• Исправлена ошибка с неправильными параметрами размера для виджета «Радиусная линейка»\n\n• Добавлены инверсные ориентации экрана\n\n• Улучшен интерфейс пользователя для указания параметров грузовика</string>
@@ -5822,7 +5822,7 @@
     <string name="buildings_3d_detail_level">Детализация 3D зданий</string>
     <string name="access_pinch_zoom_magnification">Увеличение с помощью жеста «щипок»</string>
     <string name="access_pinch_zoom_magnification_descr">Использовать масштабирование области просмотра вместо дискретных уровней увеличения при жестах увеличения.</string>
-    <string name="vehicle_metrics_chart_category">Показатели ТС</string>
+    <string name="vehicle_metrics_chart_category">Показатели транспортного средства</string>
     <string name="imprecise_coordinates">Примерные координаты</string>
     <string name="show_expand_button">Показать кнопку \"развернуть\"</string>
     <string name="astronomy_plugin_description">Карта звёзд в 3D</string>
@@ -6034,4 +6034,8 @@
     <string name="astro_explore_deep_sky_subtitle">Галактика, скопления галактик, чёрные дыры</string>
     <string name="obd_alt_battery_voltage_desc">Показывает уровень напряжения на OBD-адаптере</string>
     <string name="shared_string_radians">Радианы</string>
+    <string name="shared_string_unlock">Разблокировать</string>
+    <string name="start_free_trial">Попробуйте бесплатно</string>
+    <string name="subscription_free_trial_with_price">%1$s бесплатно, затем %2$s</string>
+    <string name="subscription_then_price">затем %1$s</string>
 </resources>

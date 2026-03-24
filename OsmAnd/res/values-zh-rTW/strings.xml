@@ -5940,4 +5940,8 @@
     <string name="astro_explore_deep_sky_subtitle">星系、星系團、黑洞</string>
     <string name="shared_string_radians">弧度</string>
     <string name="obd_alt_battery_voltage_desc">顯示 OBD 轉接器的電壓值</string>
+    <string name="shared_string_unlock">解鎖</string>
+    <string name="start_free_trial">開始免費試用</string>
+    <string name="subscription_free_trial_with_price">%1$s 免費，然後 %2$s</string>
+    <string name="subscription_then_price">然後 %1$s</string>
 </resources>
