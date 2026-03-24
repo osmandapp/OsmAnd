@@ -80,6 +80,10 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	private lateinit var saveTitle: TextView
 	private lateinit var saveIcon: ImageView
 
+	private lateinit var locationButton: View
+	private lateinit var locationTitle: TextView
+	private lateinit var locationIcon: ImageView
+
 	private lateinit var directionButton: View
 	private lateinit var directionTitle: TextView
 	private lateinit var directionIcon: ImageView
@@ -284,6 +288,14 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			)
 			saveTitle.text = app.getString(R.string.shared_string_save)
 
+			locationIcon.setImageDrawable(
+				uiUtilities.getIcon(
+					R.drawable.ic_action_location_16,
+					ColorUtilities.getActiveIconColorId(nightMode)
+				)
+			)
+			locationTitle.text = app.getString(R.string.astro_locate)
+
 			directionIcon.setImageDrawable(
 				uiUtilities.getIcon(
 					if (obj.showDirection) {
@@ -312,6 +324,11 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			parent.viewModel.refreshSkyObjects()
 			parent.starView.invalidate()
 
+			bindButtons()
+		}
+
+		locationButton.setOnClickListener {
+			parent.starView.setSelectedObject(obj, center = true, animate = true)
 			bindButtons()
 		}
 
@@ -489,6 +506,10 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		saveButton = view.findViewById(R.id.save_button)
 		saveTitle = view.findViewById(R.id.save_title)
 		saveIcon = view.findViewById(R.id.save_icon)
+
+		locationButton = view.findViewById(R.id.locate_button)
+		locationTitle = view.findViewById(R.id.locate_title)
+		locationIcon = view.findViewById(R.id.locate_icon)
 
 		directionButton = view.findViewById(R.id.direction_button)
 		directionTitle = view.findViewById(R.id.direction_title)
