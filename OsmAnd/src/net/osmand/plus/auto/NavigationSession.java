@@ -792,6 +792,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onCalculationStart() {
+		lastFastRoutingComplication = null;
 	}
 
 	@Override
