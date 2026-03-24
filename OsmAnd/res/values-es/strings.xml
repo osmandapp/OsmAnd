@@ -5969,8 +5969,8 @@
     <string name="astro_search_sets_tomorrow">↘ %1$s %2$s</string>
     <string name="astro_search_never_rises">↓ Nunca sale</string>
     <string name="astro_search_always_up">↑ Siempre arriba</string>
-    <string name="astro_search_sets_at">↘ Establece %1$s</string>
-    <string name="astro_search_rises_at">↗ Aumenta %1$s</string>
+    <string name="astro_search_sets_at">↘ Oculto a las %1$s</string>
+    <string name="astro_search_rises_at">↗ Sale a las %1$s</string>
     <string name="astro_search_magnitude_short">mag. %.1f</string>
     <string name="astro_filter_naked_eye">Visible a simple vista</string>
     <string name="astro_filter_visible_tonight">Visible esta noche</string>
