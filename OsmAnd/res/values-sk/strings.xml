@@ -6124,4 +6124,13 @@
     <string name="start_free_trial">Začať skúšku zdarma</string>
     <string name="subscription_free_trial_with_price">%1$s zdarma, potom %2$s</string>
     <string name="subscription_then_price">potom %1$s</string>
+    <string name="purchases_feature_desc_astronomy">Preskúmajte nočnú oblohu s offline mapou a katalógom hviezd. Plánujte pozorovania pomocou šikovných grafov viditeľnosti, dennými rozvrhmi a interaktívnym režimom rozšírenej reality.</string>
+    <string name="astro_expand_your_universe_title">Rozšírte svoj vesmír</string>
+    <string name="astro_expand_your_universe_description">Získajte prístup k rozšírenej databáze katalógov hlbokého vesmíru, článkov Wikipédie a režimu rozšírenej reality offline.</string>
+    <string name="astro_offline_knowledge_base_title">Báza znalostí offline</string>
+    <string name="astro_offline_knowledge_base_description">Stiahnite si rozšírenú databázu pre prístup k článkom Wikipédie a katalógom hlbokého vesmíru offline.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Nasledujúci deň.</string>
+    <string name="astro_visibility_show_today">Zobraziť viditeľnosť dnes</string>
+    <string name="astro_schedule_show_current_week">Zobraziť tento týždeň</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
 </resources>
