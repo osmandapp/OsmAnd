@@ -13,6 +13,8 @@
 
 	<string name="purchases_feature_desc_astronomy">Explore the night sky with an offline map and celestial catalog. Plan observations using smart visibility graphs, daily schedules, and an interactive AR mode.</string>
 	<string name="shared_string_clear_filters">Clear filters</string>
+	<string name="astro_sort_newest_first">Newest first</string>
+	<string name="astro_sort_oldest_first">Oldest first</string>
 	<string name="astro_expand_your_universe_title">Expand your universe</string>
 	<string name="astro_expand_your_universe_description">Get access to the extended database of deep sky catalogs, Wikipedia articles and AR mode offline.</string>
 	<string name="astro_offline_knowledge_base_title">Offline Knowledge Base</string>

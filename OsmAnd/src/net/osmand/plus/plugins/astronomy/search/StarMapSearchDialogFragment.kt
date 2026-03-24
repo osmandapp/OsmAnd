@@ -1155,12 +1155,14 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 					visibleCatalogEntries.addAll(filteredCatalogs)
 					catalogsAdapter.notifyDataSetChanged()
 				} else {
+					val insertionOrderById = getMyDataInsertionOrderMap(stateSnapshot.quickPresetType)
 					val filteredEntries = withContext(Dispatchers.Default) {
 						stateSnapshot.filterAndSort(
 							preparedEntries = preparedEntriesSnapshot.map { it.copy() },
 							visibleTonightProvider = searchHelper::getVisibleTonight,
 							riseSortValueProvider = searchHelper::getRiseSortValue,
-							setSortValueProvider = searchHelper::getSetSortValue
+							setSortValueProvider = searchHelper::getSetSortValue,
+							insertionOrderProvider = { entry -> insertionOrderById[entry.objectRef.id] }
 						)
 					}
 					if (requestId != filterAndSortRequestId || view == null) {
@@ -1213,6 +1215,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private fun updateSortControls() {
 		if (!::sortText.isInitialized || !::sortIcon.isInitialized) return
 		val (iconRes, textRes) = when (searchState.sortMode) {
+			StarMapSearchSortMode.NEWEST_FIRST -> R.drawable.ic_action_sort_date_1 to R.string.astro_sort_newest_first
+			StarMapSearchSortMode.OLDEST_FIRST -> R.drawable.ic_action_sort_date_31 to R.string.astro_sort_oldest_first
 			StarMapSearchSortMode.NAME_ASC -> R.drawable.ic_action_sort_by_name_ascending to R.string.sort_name_ascending
 			StarMapSearchSortMode.NAME_DESC -> R.drawable.ic_action_sort_by_name_descending to R.string.sort_name_descending
 			StarMapSearchSortMode.BRIGHTEST_FIRST -> R.drawable.ic_action_sort_brightest to R.string.astro_sort_brightest_first
@@ -1471,9 +1475,13 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				}
 			)
 		} else {
-			listOf(
+			val items = mutableListOf(
 				createPopupHeaderItem(getString(R.string.sort_by), secondaryTextColor),
-				createRadioPopupItem(getString(R.string.sort_name_ascending), searchState.sortMode == StarMapSearchSortMode.NAME_ASC, activeColor) {
+				createRadioPopupItem(
+					getString(R.string.sort_name_ascending),
+					searchState.sortMode == StarMapSearchSortMode.NAME_ASC,
+					activeColor
+				) {
 					searchState.sortMode = StarMapSearchSortMode.NAME_ASC
 					updateSortControls()
 					applyFiltersAndSort(scrollToTop = true)
@@ -1522,6 +1530,32 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 					applyFiltersAndSort(scrollToTop = true)
 				}
 			)
+			if (isMyDataMode()) {
+				items.add(
+					createRadioPopupItem(
+						getString(R.string.astro_sort_newest_first),
+						searchState.sortMode == StarMapSearchSortMode.NEWEST_FIRST,
+						activeColor,
+						showTopDivider = true
+					) {
+						searchState.sortMode = StarMapSearchSortMode.NEWEST_FIRST
+						updateSortControls()
+						applyFiltersAndSort(scrollToTop = true)
+					}
+				)
+				items.add(
+					createRadioPopupItem(
+						getString(R.string.astro_sort_oldest_first),
+						searchState.sortMode == StarMapSearchSortMode.OLDEST_FIRST,
+						activeColor
+					) {
+						searchState.sortMode = StarMapSearchSortMode.OLDEST_FIRST
+						updateSortControls()
+						applyFiltersAndSort(scrollToTop = true)
+					}
+				)
+			}
+			items
 		}
 		sortPopup = PopUpMenu.showAndGet(
 			createPopupDisplayData(
@@ -1532,6 +1566,16 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				layoutId = R.layout.popup_star_search_sort_menu_item
 			)
 		)
+	}
+
+	private fun getMyDataInsertionOrderMap(quickPresetType: StarMapSearchQuickPresetType): Map<String, Int> {
+		val ids = when (quickPresetType) {
+			StarMapSearchQuickPresetType.MY_DATA_FAVORITES -> astroSettings.getStarMapConfig().favorites.map { it.id }
+			StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH -> astroSettings.getStarMapConfig().celestialPaths.map { it.id }
+			StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> astroSettings.getStarMapConfig().directions.map { it.id }
+			else -> emptyList()
+		}
+		return ids.withIndex().associate { indexedValue -> indexedValue.value to indexedValue.index }
 	}
 
 	private fun showFilterPopup(anchor: View) {

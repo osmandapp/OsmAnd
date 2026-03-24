@@ -7,6 +7,8 @@ import java.time.ZonedDateTime
 import java.util.Locale
 
 internal enum class StarMapSearchSortMode {
+	NEWEST_FIRST,
+	OLDEST_FIRST,
 	NAME_ASC,
 	NAME_DESC,
 	BRIGHTEST_FIRST,
@@ -124,7 +126,8 @@ internal data class StarMapSearchStateSnapshot(
 		preparedEntries: List<StarMapSearchEntry>,
 		visibleTonightProvider: (StarMapSearchEntry) -> Boolean,
 		riseSortValueProvider: (StarMapSearchEntry) -> Long,
-		setSortValueProvider: (StarMapSearchEntry) -> Long
+		setSortValueProvider: (StarMapSearchEntry) -> Long,
+		insertionOrderProvider: (StarMapSearchEntry) -> Int?
 	): List<StarMapSearchEntry> {
 		val filteredEntries = mutableListOf<StarMapSearchEntry>()
 		val queryLower = query.lowercase(Locale.getDefault())
@@ -139,7 +142,7 @@ internal data class StarMapSearchStateSnapshot(
 			filteredEntries.add(entry)
 		}
 
-		filteredEntries.sortWith(createComparator(riseSortValueProvider, setSortValueProvider))
+		filteredEntries.sortWith(createComparator(riseSortValueProvider, setSortValueProvider, insertionOrderProvider))
 		return filteredEntries
 	}
 
@@ -166,9 +169,16 @@ internal data class StarMapSearchStateSnapshot(
 
 	private fun createComparator(
 		riseSortValueProvider: (StarMapSearchEntry) -> Long,
-		setSortValueProvider: (StarMapSearchEntry) -> Long
+		setSortValueProvider: (StarMapSearchEntry) -> Long,
+		insertionOrderProvider: (StarMapSearchEntry) -> Int?
 	): Comparator<StarMapSearchEntry> {
 		return when (sortMode) {
+			StarMapSearchSortMode.NEWEST_FIRST -> compareBy<StarMapSearchEntry> { insertionOrderProvider(it) == null }
+				.thenByDescending { insertionOrderProvider(it) ?: Int.MIN_VALUE }
+				.thenBy { it.displayName.lowercase(Locale.getDefault()) }
+			StarMapSearchSortMode.OLDEST_FIRST -> compareBy<StarMapSearchEntry> { insertionOrderProvider(it) == null }
+				.thenBy { insertionOrderProvider(it) ?: Int.MAX_VALUE }
+				.thenBy { it.displayName.lowercase(Locale.getDefault()) }
 			StarMapSearchSortMode.NAME_ASC -> compareBy { it.displayName.lowercase(Locale.getDefault()) }
 			StarMapSearchSortMode.NAME_DESC -> compareByDescending { it.displayName.lowercase(Locale.getDefault()) }
 			StarMapSearchSortMode.BRIGHTEST_FIRST -> compareBy { it.magnitude }
@@ -281,15 +291,14 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 		this.quickPresetType = quickPresetType
 		quickPresetCatalogWid = catalogWid
 		query = ""
+		if (quickPresetType.isMyData) {
+			sortMode = defaultSortModeForPreset(quickPresetType)
+		}
 	}
 
 	fun prepareForExploreEntry(quickPresetType: StarMapSearchQuickPresetType, catalogWid: String?) {
 		query = ""
-		sortMode = if (quickPresetType == StarMapSearchQuickPresetType.WATCH_NOW) {
-			StarMapSearchSortMode.BRIGHTEST_FIRST
-		} else {
-			StarMapSearchSortMode.NAME_ASC
-		}
+		sortMode = defaultSortModeForPreset(quickPresetType)
 		typeFilter = if (quickPresetType == StarMapSearchQuickPresetType.WATCH_NOW) {
 			StarMapSearchTypeFilter.VISIBLE_TONIGHT
 		} else {
@@ -326,13 +335,15 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 		preparedEntries: List<StarMapSearchEntry>,
 		visibleTonightProvider: (StarMapSearchEntry) -> Boolean,
 		riseSortValueProvider: (StarMapSearchEntry) -> Long,
-		setSortValueProvider: (StarMapSearchEntry) -> Long
+		setSortValueProvider: (StarMapSearchEntry) -> Long,
+		insertionOrderProvider: (StarMapSearchEntry) -> Int?
 	): List<StarMapSearchEntry> {
 		return snapshot().filterAndSort(
 			preparedEntries = preparedEntries,
 			visibleTonightProvider = visibleTonightProvider,
 			riseSortValueProvider = riseSortValueProvider,
-			setSortValueProvider = setSortValueProvider
+			setSortValueProvider = setSortValueProvider,
+			insertionOrderProvider = insertionOrderProvider
 		)
 	}
 
@@ -366,6 +377,13 @@ internal class StarMapSearchState(savedInstanceState: Bundle? = null) {
 		quickPresetCatalogWid = null
 		selectedCategories.clear()
 		selectedCategories.add(StarMapSearchCategoryFilter.ALL)
+	}
+
+	private fun defaultSortModeForPreset(quickPresetType: StarMapSearchQuickPresetType): StarMapSearchSortMode {
+		return when {
+			quickPresetType == StarMapSearchQuickPresetType.WATCH_NOW -> StarMapSearchSortMode.BRIGHTEST_FIRST
+			else -> StarMapSearchSortMode.NAME_ASC
+		}
 	}
 
 	fun addRecentChip(label: String, objectId: String) {
