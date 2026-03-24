@@ -388,8 +388,9 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 		if (mapRenderer != null) {
 			if (contextCoreMarker != null) {
 				PointI position = contextCoreMarker.getPosition();
-				if (position != null) {
-					remove3DObjectColor(NativeUtilities.getLatLonFromPoint31(position));
+				LatLon latLon = position != null ? NativeUtilities.getLatLonFromPoint31(position) : null;
+				if (latLon != null && hasHighlight3dObjectColor(latLon)) {
+					remove3DObjectColor(latLon);
 				}
 			}
 			if (contextMarkerCollection != null) {
