@@ -125,10 +125,13 @@ private class StarMapSearchResultFormatter(
 
 	fun buildSubtitle(itemView: View, entry: StarMapSearchEntry): CharSequence {
 		val descriptorText = buildDescriptor(itemView, entry)
-		val magnitudeText = itemView.context.getString(R.string.astro_search_magnitude_short, entry.magnitude)
 		if (entry.objectRef.type == SkyObject.Type.CONSTELLATION) {
-			return "$descriptorText • $magnitudeText"
+			return SpannableStringBuilder()
+				.append(descriptorText)
+				.append(" • ")
+				.append(eventTextProvider(entry))
 		}
+		val magnitudeText = itemView.context.getString(R.string.astro_search_magnitude_short, entry.magnitude)
 		return SpannableStringBuilder()
 			.append(descriptorText)
 			.append(" • ")
