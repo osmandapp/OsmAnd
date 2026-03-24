@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astronomy.SkyObject
@@ -18,6 +19,7 @@ internal class StarMapSearchResultsAdapter(
 	private val visibleEntries: List<StarMapSearchEntry>,
 	private val widToDisplayName: Map<String, String>,
 	private val shouldShowInfoHeader: () -> Boolean,
+	private val useExploreRowLayout: () -> Boolean,
 	private val categoryPresetProvider: () -> StarMapSearchCategoryFilter?,
 	private val eventTextProvider: (StarMapSearchEntry) -> CharSequence,
 	private val onEntrySelected: (StarMapSearchEntry) -> Unit
@@ -32,14 +34,18 @@ internal class StarMapSearchResultsAdapter(
 	)
 
 	override fun getItemViewType(position: Int): Int {
-		return if (shouldShowInfoHeader() && position == 0) VIEW_TYPE_INFO else VIEW_TYPE_ITEM
+		return when {
+			shouldShowInfoHeader() && position == 0 -> VIEW_TYPE_INFO
+			useExploreRowLayout() -> VIEW_TYPE_EXPLORE_ROW
+			else -> VIEW_TYPE_ITEM
+		}
 	}
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-		val layoutId = if (viewType == VIEW_TYPE_INFO) {
-			R.layout.item_star_search_info
-		} else {
-			R.layout.item_star_search
+		val layoutId = when (viewType) {
+			VIEW_TYPE_INFO -> R.layout.item_star_search_info
+			VIEW_TYPE_EXPLORE_ROW -> R.layout.item_astro_explore_row
+			else -> R.layout.item_star_search
 		}
 		val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
 		return SearchViewHolder(view)
@@ -61,9 +67,10 @@ internal class StarMapSearchResultsAdapter(
 	}
 
 	inner class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-		private val nameText: TextView? = view.findViewById(R.id.object_name)
-		private val infoText: TextView? = view.findViewById(R.id.object_info)
-		private val iconView: ImageView? = view.findViewById(R.id.object_icon)
+		private val nameText: TextView? = view.findViewById(R.id.object_name) ?: view.findViewById(R.id.row_title)
+		private val infoText: TextView? = view.findViewById(R.id.object_info) ?: view.findViewById(R.id.row_subtitle)
+		private val iconView: ImageView? = view.findViewById(R.id.object_icon) ?: view.findViewById(R.id.row_icon)
+		private val countView: TextView? = view.findViewById(R.id.row_count)
 		private val headerInfoIcon: ImageView? = view.findViewById(R.id.info_icon)
 		private val headerInfoText: TextView? = view.findViewById(R.id.info_text)
 
@@ -80,9 +87,12 @@ internal class StarMapSearchResultsAdapter(
 		}
 
 		fun bindResult(entry: StarMapSearchEntry) {
+			val subtitle = resultFormatter.buildSubtitle(itemView, entry)
 			nameText?.text = entry.displayName
-			infoText?.text = resultFormatter.buildSubtitle(itemView, entry)
+			infoText?.text = subtitle
+			infoText?.isVisible = subtitle.isNotEmpty()
 			resultFormatter.bindIcon(iconView, entry)
+			countView?.isVisible = false
 			itemView.setOnClickListener { onEntrySelected(entry) }
 		}
 	}
@@ -90,6 +100,7 @@ internal class StarMapSearchResultsAdapter(
 	private companion object {
 		const val VIEW_TYPE_INFO = 0
 		const val VIEW_TYPE_ITEM = 1
+		const val VIEW_TYPE_EXPLORE_ROW = 2
 	}
 }
 

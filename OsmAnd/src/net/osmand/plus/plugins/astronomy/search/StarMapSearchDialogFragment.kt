@@ -17,6 +17,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -48,6 +49,7 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils
+import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
@@ -130,7 +132,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private lateinit var emptyStateIcon: ImageView
 	private lateinit var emptyStateTitle: TextView
 	private lateinit var emptyStateDescription: TextView
-	private lateinit var emptyStateResetButton: View
+	private lateinit var emptyStateResetButton: DialogButton
 	private lateinit var recentChipsContainer: LinearLayout
 	private lateinit var recentChipsScroll: View
 	private lateinit var watchNowRow: View
@@ -356,6 +358,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		emptyStateTitle = searchResultsPanel.findViewById(R.id.empty_state_title)
 		emptyStateDescription = searchResultsPanel.findViewById(R.id.empty_state_description)
 		emptyStateResetButton = searchResultsPanel.findViewById(R.id.empty_state_reset_button)
+		applyEmptyStateButtonStyle()
 		searchRecycler = searchResultsPanel.findViewById(R.id.search_results)
 		attachSearchResultsPanel(fullSearchResultsHost)
 	}
@@ -367,6 +370,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			visibleEntries = visibleEntries,
 			widToDisplayName = widToDisplayName,
 			shouldShowInfoHeader = ::shouldShowInfoHeader,
+			useExploreRowLayout = ::isMyDataMode,
 			categoryPresetProvider = searchState::categoryPreset,
 			eventTextProvider = searchHelper::resolveEventText,
 			onEntrySelected = ::onSearchEntrySelected
@@ -671,6 +675,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			addExploreRow(
 				container = catalogsContainer,
 				iconRes = R.drawable.ic_action_book_info,
+				iconColorRes = ColorUtilities.getDefaultIconColorId(nightMode),
 				title = catalog.name,
 				subtitle = null,
 				count = null,
@@ -689,6 +694,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private fun addExploreRow(
 		container: LinearLayout,
 		iconRes: Int,
+		iconColorRes: Int = ColorUtilities.getActiveIconColorId(nightMode),
 		title: String,
 		subtitle: String?,
 		count: Int?,
@@ -702,7 +708,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		val countView = row.findViewById<TextView>(R.id.row_count)
 		val divider = row.findViewById<View>(R.id.row_divider)
 
-		icon.setImageDrawable(app.uiUtilities.getIcon(iconRes, ColorUtilities.getActiveIconColorId(nightMode)))
+		icon.setImageDrawable(app.uiUtilities.getIcon(iconRes, iconColorRes))
 		titleView.text = title
 		subtitleView.text = subtitle
 		subtitleView.isVisible = !subtitle.isNullOrEmpty()
@@ -1226,7 +1232,6 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		if (!::emptyStateTitle.isInitialized || !::emptyStateDescription.isInitialized || !::emptyStateResetButton.isInitialized) {
 			return
 		}
-		val resetButton = emptyStateResetButton as? TextView
 		if (isMyDataMode()) {
 			val (iconRes, titleRes, descriptionRes) = when (searchState.quickPresetType) {
 				StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> Triple(
@@ -1248,13 +1253,37 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			emptyStateIcon.setImageDrawable(app.uiUtilities.getIcon(iconRes, ColorUtilities.getDefaultIconColorId(nightMode)))
 			emptyStateTitle.setText(titleRes)
 			emptyStateDescription.setText(descriptionRes)
-			resetButton?.setText(R.string.astro_go_to_map)
+			emptyStateResetButton.setTitleId(R.string.astro_go_to_map)
 		} else {
 			emptyStateIcon.setImageDrawable(app.uiUtilities.getIcon(R.drawable.ic_action_ufo, ColorUtilities.getDefaultIconColorId(nightMode)))
 			emptyStateTitle.setText(R.string.nothing_found)
 			emptyStateDescription.setText(R.string.astro_search_empty_description)
-			resetButton?.setText(R.string.shared_string_reset)
+			emptyStateResetButton.setTitleId(R.string.shared_string_reset)
 		}
+	}
+
+	private fun applyEmptyStateButtonStyle() {
+		val context = emptyStateResetButton.context
+		AndroidUtils.setBackground(
+			context,
+			emptyStateResetButton.buttonView,
+			nightMode,
+			R.drawable.dlg_btn_secondary_light,
+			R.drawable.dlg_btn_secondary_dark
+		)
+		AndroidUtils.setBackground(
+			context,
+			emptyStateResetButton.findViewById(R.id.button_container),
+			nightMode,
+			R.drawable.ripple_solid_light,
+			R.drawable.ripple_solid_dark
+		)
+		emptyStateResetButton.findViewById<TextView>(R.id.button_text)?.setTextColor(
+			AppCompatResources.getColorStateList(
+				context,
+				if (nightMode) R.color.dlg_btn_secondary_text_dark else R.color.dlg_btn_secondary_text_light
+			)
+		)
 	}
 
 	private fun updateEmptyStateVisibility() {
