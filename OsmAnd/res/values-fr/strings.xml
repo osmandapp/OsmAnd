@@ -6028,4 +6028,7 @@
     <string name="start_free_trial">Commencer l\'essai gratuit</string>
     <string name="subscription_free_trial_with_price">%1$s gratuit, puis %2$s</string>
     <string name="subscription_then_price">puis %1$s</string>
+    <string name="astro_expand_your_universe_title">Augmentez votre Univers</string>
+    <string name="purchases_feature_desc_astronomy">Explorez le ciel nocturne avec une carte hors-ligne et un catalogue céleste. Planifiez vos observations avec les graphiques à visibilité intelligente, les planifications quotidiennes, et le mode AR interactif.</string>
+    <string name="astro_expand_your_universe_description">Accédez à la base de données des catalogues de cieux profonds, articles Wikipedia et au mode AR hors-ligne.</string>
 </resources>
