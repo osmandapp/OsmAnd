@@ -42,7 +42,6 @@ import androidx.transition.TransitionListenerAdapter;
 import androidx.transition.TransitionManager;
 
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.data.*;
 import net.osmand.plus.routepreparationmenu.data.PointType;
@@ -55,7 +54,6 @@ import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingPara
 import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteCalculationProgress.FastRoutingComplication;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
@@ -157,6 +155,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean routeSelected;
 	private boolean currentMuteState;
 
+	@Nullable
+	private Boolean lastIsFastRouting = null;
 	@Nullable
 	private FastRoutingComplication lastFastRoutingComplication = null;
 
@@ -340,6 +340,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void routeCalculationStarted() {
+		lastIsFastRouting = null;
 		lastFastRoutingComplication = null;
 		setRouteCalculationInProgress(true);
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
@@ -360,17 +361,26 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				fragment.updateInfo();
 			}
 			fragment.updateRouteCalculationProgress(progress);
-			catchCurrentMissingMaps();
+			catchFastRoutingComplications();
 		}
 	}
 
-	private void catchCurrentMissingMaps() {
-		if (app != null && hasCurrentMissingMaps(app)) {
+	private void catchFastRoutingComplications() {
+		if (app == null) {
+			return;
+		}
+		if (hasCurrentMissingMaps(app)) {
 			FastRoutingComplication complication = app.getRoutingHelper().getCurrentFastRoutingComplication();
 			if (complication != null && complication != lastFastRoutingComplication) {
 				lastFastRoutingComplication = complication;
+				updateOptionsButtons();
 				updateCards();
 			}
+		}
+		boolean isFastRouting = app.getRoutingHelper().shouldDrawFastRoutingProgressBar();
+		if (lastIsFastRouting == null || isFastRouting != lastIsFastRouting) {
+			lastIsFastRouting = isFastRouting;
+			updateOptionsButtons();
 		}
 	}
 
@@ -1053,13 +1063,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			startButtonText.setText(R.string.shared_string_control_start);
 		}
 
-		if (hasCalculatedMissingMaps) {
-			startButton.setClickable(false);
-			startButton.setEnabled(false);
-		} else {
-			startButton.setEnabled(true);
-			startButton.setClickable(true);
-		}
+		startButton.setEnabled(routeCalculated);
+		startButton.setClickable(routeCalculated);
 
 		startButton.setOnClickListener(v -> clickRouteGo());
 		startButton.setFocusable(true);
@@ -1078,7 +1083,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void setupRouteCalculationButtonProgressBar(@NonNull ProgressBar pb, @NonNull TextViewExProgress textProgress, @ColorRes int progressTextColor, @ColorRes int bgTextColor) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			int progressColor = ColorUtilities.getActiveColor(mapActivity, nightMode);
+			boolean isFastRouting = app != null && app.getRoutingHelper().shouldDrawFastRoutingProgressBar();
+			int fillColorId = isFastRouting
+					? (nightMode ? R.color.routing_fast_progress_fill_dark : R.color.routing_fast_progress_fill_light)
+					: (nightMode ? R.color.routing_standard_progress_fill_dark : R.color.routing_standard_progress_fill_light);
+			int progressColor = ContextCompat.getColor(mapActivity, fillColorId);
 			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(ColorUtilities.getTransparentColor(mapActivity), ColorUtilities.getColor(mapActivity, progressTextColor)));
 			textProgress.paint.setColor(progressColor);
 			textProgress.setTextColor(ContextCompat.getColor(mapActivity, bgTextColor));
@@ -1480,6 +1489,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void resetRouteCalculation() {
 		menuAutoMovedAfterCalculationStarted = false;
 		setRouteCalculationInProgress(false);
+		lastIsFastRouting = null;
 		lastFastRoutingComplication = null;
 		restoreCollapsedButtons();
 	}

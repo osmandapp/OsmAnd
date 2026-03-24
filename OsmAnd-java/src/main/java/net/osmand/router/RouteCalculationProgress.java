@@ -60,7 +60,7 @@ public class RouteCalculationProgress implements Serializable {
 	private double hhCurrentStepProgress;
 	private int hhCalcCounter;
 
-	private static final float INITIAL_PROGRESS = 0.05f;
+	private static final float INITIAL_PROGRESS = 0.01f;
 	private static final float FIRST_ITERATION = 0.72f;
 
 	public static RouteCalculationProgress capture(RouteCalculationProgress cp) {

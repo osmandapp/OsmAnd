@@ -973,8 +973,8 @@ public class RoutingHelper {
 		}
 	}
 
-	public boolean isCurrentSlowRoutingActive() {
-		return routeRecalculationHelper.isCurrentSlowRoutingActive();
+	public boolean shouldDrawFastRoutingProgressBar() {
+		return !routeRecalculationHelper.isCurrentSlowRoutingActive();
 	}
 
 	public boolean hasCurrentMissingMaps() {
