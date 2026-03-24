@@ -6034,4 +6034,10 @@
     <string name="astro_explore_watch_now_subtitle">Se hva som er på himmelen i natt</string>
     <string name="astro_explore_watch_now">Se nå</string>
     <string name="astro_explore_deep_sky_subtitle">Galakser, Galaksehoper, Svarte hull</string>
+    <string name="shared_string_radians">Radianer</string>
+    <string name="shared_string_unlock">Lås opp</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="astro_schedule_show_current_week">Vis gjeldende uke</string>
+    <string name="astro_visibility_show_today">Vis synlighet i dag</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Neste dag.</string>
 </resources>

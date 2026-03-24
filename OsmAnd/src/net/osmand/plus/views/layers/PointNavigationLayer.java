@@ -371,8 +371,10 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				}
 
 			}
-			remove3DObjectColor(oldPoint.getLatLon());
-
+			LatLon latLon = oldPoint.getLatLon();
+			if (hasHighlight3dObjectColor(latLon)) {
+				remove3DObjectColor(latLon);
+			}
 			result = true;
 		}
 		if (callback != null) {
@@ -500,7 +502,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				MapMarker mapMarker = markers.get(i);
 				PointI position = mapMarker != null ? mapMarker.getPosition() : null;
 				LatLon latLon = position != null ? NativeUtilities.getLatLonFromPoint31(position) : null;
-				if (latLon != null) {
+				if (latLon != null && hasHighlight3dObjectColor(latLon)) {
 					remove3DObjectColor(latLon);
 				}
 			}

@@ -5612,7 +5612,7 @@
     <string name="background_opacity">Bakgrundens genomskinlighet</string>
     <string name="quick_action_previous_screen_title">Föregående skärm</string>
     <string name="quick_action_switch_compass_desc">En knapp för att ändra kartorientering.</string>
-    <string name="y_axis_description">Välj upp till två valmöjligheter för Y-axeln.</string>
+    <string name="y_axis_description">Välj upp till två alternativ för Y-axeln.</string>
     <string name="delete_widget_description">Denna wiget kommer att tas bort. Du kan återställa den senare i Konfigurera skärmen.</string>
     <string name="delete_widget">Ta bort widget?</string>
     <string name="add_widget_below">Lägg till widget nedanför</string>
@@ -5900,11 +5900,11 @@
     <string name="routing_attr_pt_limit_name">Visa N bästa rutter</string>
     <string name="routing_attr_pt_limit_description">Ange antalet bästa rutter som ska visas</string>
     <string name="lang_mi">Maori</string>
-    <string name="vehicle_metrics_chart_category">Fordonsstatistik</string>
+    <string name="vehicle_metrics_chart_category">Fordonets mätvärden</string>
     <string name="delete_folder_description">Ta bort mappen \"%1$s\"?</string>
     <string name="show_spherical_map">Globvy</string>
     <string name="enable_3d_objects">3D-byggnader</string>
-    <string name="has_vehicle_metrics">Med OBDII data</string>
+    <string name="has_vehicle_metrics">Med OBDII-data</string>
     <string name="buildings_3d_detail_level">3D-byggnader detalisering</string>
     <string name="astronomy_plugin_description">Stjärndiagram, 3D-stjärnkarta</string>
     <string name="star_map">Stjärnkarta</string>

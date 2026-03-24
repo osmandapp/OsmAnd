@@ -6017,4 +6017,42 @@
         <item quantity="many">%d треків</item>
         <item quantity="other">%d трека</item>
     </plurals>
+    <string name="start_free_trial">Почати безкоштовний пробний період</string>
+    <string name="subscription_free_trial_with_price">Безкоштовно %1$s, потім %2$s</string>
+    <string name="subscription_then_price">потім %1$s</string>
+    <string name="shared_string_radians">Радіани</string>
+    <string name="shared_string_unlock">Розблокувати</string>
+    <string name="no_objects_found">Не знайдено жодних об\'єктів</string>
+    <string name="astro_search_info_solar_system">The Solar System is the gravitationally bound system of the Sun and the masses that orbit it, most prominently its eight planets, of which Earth is one.</string>
+    <string name="astro_search_info_constellations">Сузір\'я — це область на небесній сфері, в якій група видимих зірок утворює сприйнятий візерунок або контур.</string>
+    <string name="astro_search_info_stars">Зірки — це світні астрономічні об’єкти, що складаються з плазми та утримуються разом завдяки власній гравітації.</string>
+    <string name="astro_search_info_nebulas">Туманність — це гігантська хмара пилу та газу в космосі, часто область, де народжуються зірки.</string>
+    <string name="astro_search_info_star_clusters">Зоряне скупчення — це група зірок, гравітаційно зв\'язаних та утворених з однієї молекулярної хмари.</string>
+    <string name="astro_search_info_deep_sky">До об\'єктів глибокого космосу належать галактики, туманності, зоряні скупчення та інші віддалені астрономічні цілі.</string>
+    <string name="astro_go_to_map">Перейти до карти</string>
+    <string name="astro_my_data_no_favorites_title">Тут нічого немає</string>
+    <string name="astro_my_data_no_favorites_description">Ви можете додавати об\'єкти до обраного з їхнього контекстного меню</string>
+    <string name="astro_my_data_no_daily_paths_title">Немає щоденних маршрутів</string>
+    <string name="astro_my_data_no_daily_paths_description">Увімкніть щоденний шлях для об\'єкта з його контекстного меню, щоб побачити його тут</string>
+    <string name="astro_my_data_no_directions_title">Немає вказівок</string>
+    <string name="astro_my_data_no_directions_description">Вказівки дозволяють вам залишати видимою стрілку, що вказує на об\'єкт. Увімкніть цю функцію в контекстному меню.</string>
+    <plurals name="astro_catalog_objects_count">
+        <item quantity="one">%d об\'єкт</item>
+        <item quantity="few">%d об\'єкти</item>
+        <item quantity="many">%d об\'єктів</item>
+        <item quantity="other">%d об\'єктів</item>
+    </plurals>
+    <string name="astro_search_constellation_with_code">Сузір\'я (%1$s)</string>
+    <string name="astro_search_type_in_location">%1$s у %2$s</string>
+    <string name="astro_search_in_location">У %1$s</string>
+    <string name="astro_search_rises_tomorrow">↗ %1$s %2$s</string>
+    <string name="astro_search_sets_tomorrow">↘ %1$s %2$s</string>
+    <string name="astro_search_never_rises">↓ Ніколи не піднімається</string>
+    <string name="astro_search_always_up">↑ Завжди вгорі</string>
+    <string name="astro_search_sets_at">↘ Встановлює %1$s</string>
+    <string name="astro_search_rises_at">↗ Підйоми %1$s</string>
+    <string name="astro_filter_naked_eye">Видно неозброєним оком</string>
+    <string name="astro_filter_visible_tonight">Видно сьогодні ввечері</string>
+    <string name="astro_filter_visible_now">Видно зараз</string>
+    <string name="astro_filter_show_all">Показати всі</string>
 </resources>

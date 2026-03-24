@@ -417,8 +417,8 @@
     <string name="shared_string_deselect_all">Kkes afran i meṛṛa</string>
     <string name="shared_string_clear">Sfeḍ</string>
     <string name="shared_string_rename">Snifel isem</string>
-    <string name="shared_string_delete">Ekkes</string>
-    <string name="shared_string_delete_all">Kkes-it meṛṛa</string>
+    <string name="shared_string_delete">Kkes</string>
+    <string name="shared_string_delete_all">Kkes-iten akk</string>
     <string name="shared_string_control_start">Bdu</string>
     <string name="shared_string_control_stop">Seḥbes</string>
     <string name="shared_string_import">Ssekcem</string>

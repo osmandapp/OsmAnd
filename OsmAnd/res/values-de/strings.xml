@@ -1082,7 +1082,7 @@
     <string name="speak_title">Ansagen …</string>
     <string name="speak_descr">Ansagen zu Straßennamen, Verkehrswarnungen (Stoppzeichen, Rüttelschwellen), Blitzerwarnern und Tempolimits konfigurieren.</string>
     <string name="speak_street_names">Straßennamen (TTS)</string>
-    <string name="driving_region_descr">Verkehrsregion wählen: USA, Europa, GB, Asien u. a.</string>
+    <string name="driving_region_descr">Verkehrsregion wählen: USA, Europa, Großbritannien, Asien und andere.</string>
     <string name="driving_region_japan">Japan</string>
     <string name="driving_region_us">Vereinigte Staaten</string>
     <string name="driving_region_canada">Kanada</string>
@@ -2253,7 +2253,7 @@
     <string name="save_poi_too_many_uppercase">Der Name enthält zu viele Großbuchstaben. Vorgang fortsetzen?</string>
     <string name="display_zoom_level">Darstellung ab Zoomstufe: %1$s</string>
     <string name="routing_attr_allow_private_name">Privatzugang erlauben</string>
-    <string name="routing_attr_allow_private_description">Zugang zu Privatgrund erlauben.</string>
+    <string name="routing_attr_allow_private_description">Zugang zu Privatgrundstücken erlauben.</string>
     <string name="srtm_color_scheme">Farbschema</string>
     <string name="quick_action_showhide_osmbugs_descr">Schaltfläche zum Ein- oder Ausblenden von OSM-Hinweisen auf der Karte.</string>
     <string name="sorted_by_distance">Nach Entfernung sortiert</string>
@@ -2877,7 +2877,7 @@
     <string name="routing_attr_allow_advanced_description">Schwierige Routen, mit gefährlichen Hindernissen und steilen Abschnitten.</string>
     <string name="routing_attr_allow_expert_name">Extreme Abfahrten zulassen</string>
     <string name="routing_attr_allow_expert_description">Extrem schwere Routen, mit gefährlichen Hindernissen und schwieriger Umgebung.</string>
-    <string name="routing_attr_allow_classic_only_name">Nur klassische Routen zulassen</string>
+    <string name="routing_attr_allow_classic_only_name">Nur Loipen für klassischen Stil zulassen</string>
     <string name="routing_attr_difficulty_preference_name">Bevorzugter Schwierigkeitsgrad</string>
     <string name="routing_attr_piste_type_downhill_name">Ski Alpin und Abfahrtslauf</string>
     <string name="routing_attr_piste_type_downhill_description">Pisten für Ski Alpin oder Abfahrtslauf und Zugang zu den Skiliften.</string>
@@ -2905,8 +2905,8 @@
     <string name="app_mode_scooter">Roller</string>
     <string name="precision_hdop_and_vdop">Horizontale Genauigkeit: %1$s, vertikal: %2$s</string>
     <string name="precision_hdop">Horizontale Genauigkeit: %s</string>
-    <string name="routing_attr_allow_skating_only_name">Nur Skating-Routen zulassen</string>
-    <string name="routing_attr_allow_skating_only_description">Nur für Freestyle oder Skating präparierte Routen, keine klassischen Loipen.</string>
+    <string name="routing_attr_allow_skating_only_name">Nur Loipen für Skating-Stil zulassen</string>
+    <string name="routing_attr_allow_skating_only_description">Nur für Freestyle oder Skating präparierte Loipen, keine Loipen für klassischen Stil.</string>
     <string name="routing_attr_allow_classic_only_description">Für den klassischen Stil präparierte Loipen, keine Skating-Pisten. Einschließlich durch kleinere Schneemobile präparierte Routen mit lockerer Piste und durch Skifahrer selbst gespurte Bahnen.</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="app_mode_personal_transporter">Einpersonen-Transportmittel</string>
@@ -3949,14 +3949,14 @@
     <string name="purchases_feature_desc_unlimited_map_download">Erhalten Sie unbegrenzte Downloads für Offline-Karten aller Kontinente und Regionen.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Erhalten Sie Zugang zu den gewöhnlichen monatlichen Aktualisierungen für Offline-Karten.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Erhalten Sie Zugang zu häufigeren Kartenaktualisierungen. Wählen Sie zwischen stündlichen, täglichen oder wöchentlichen Aktualisierungen. Aktualisierungen erfolgen inkrementell, nur der geänderte Bereich wird heruntergeladen.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Holen Sie sich OsmAnd Cloud, um alle OsmAnd-Daten online zu speichern. Kein Datenverlust mehr nach einer Neuinstallation, alle Informationen problemlos sichern und wiederherstellen.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Holen Sie sich „OsmAnd Cloud“, um alle OsmAnd-Daten online zu speichern. Kein Datenverlust mehr nach einer Neuinstallation, alle Informationen problemlos sichern und wiederherstellen.</string>
     <string name="you_can_get_feature_as_part_of_pattern">Erhalten Sie „%1$s“ als Teil des Tarifs %2$s. Vergleich:</string>
     <string name="not_available_with">Nicht verfügbar mit %1$s</string>
     <string name="redeem_promo_code">Aktionscode einlösen</string>
     <string name="from_with_param">Von %1$s</string>
     <string name="continue_with">Mit %1$s fortfahren</string>
     <string name="osmand_maps_plus_tagline">Erweiterte Features erhalten</string>
-    <string name="osmand_pro_tagline">Alle Features erhalten</string>
+    <string name="osmand_pro_tagline">Alle Funktionen erhalten</string>
     <string name="backup_delete_types">Deaktivierte Datentypen löschen</string>
     <string name="shared_string_discussion">Diskussion</string>
     <string name="shared_string_view_all">Alle anzeigen</string>
@@ -3975,7 +3975,7 @@
     <string name="release_4_0">• Datensicherung in der Cloud \n \n • Nachtmodus für den Kartenstil \"Topo\" hinzugefügt \n \n • Option zum Herunterladen von Höhenlinien in Fuß zugefügt \n \n • Tracks können jetzt nach Höhe, Geschwindigkeit oder Neigung eingefärbt werden \n \n • Dialog \"Streckenaufzeichnung\" aktualisiert \n \n • Entfernung durch Antippen aus dem Radiuslineal in eine separate Option verschoben \n \n • Route planen: Sie können jetzt die Navigationsoptionen ändern, auf die Kartenkonfiguration zugreifen und suchen, ohne die Routenplanung zu verlassen \n \n • Neuer \"Kaufen\"-Bildschirm mit detaillierten Kaufinformationen \n \n • Option hinzugefügt, um das Aussehen der Routenlinie zu ändern \n \n • OsmAnd Live-Aktualisierungen nach \"Downloads &gt; Aktualisierungen\" verschoben</string>
     <string name="duration_moment_ago">gerade eben</string>
     <string name="purchases_feature_desc_wikivoyage">Erkunden Sie Wikivoyage offline. Artikel sind nach Ländern und Regionen unterteilt und in allen Sprachen verfügbar.</string>
-    <string name="backup_error_subscription_was_expired_descr">Ihr OsmAnd Pro-Abonnement ist abgelaufen. Erneuern Sie es, um die Datensicherung zu nutzen. Sie können weiterhin Daten aus der Cloud wiederherstellen.</string>
+    <string name="backup_error_subscription_was_expired_descr">Ihr Abonnement „OsmAnd Pro“ ist abgelaufen. Erneuern Sie es, um die Datensicherung zu nutzen. Sie können weiterhin Daten aus der Cloud wiederherstellen.</string>
     <string name="contour_lines_hillshade_slope">Höhenlinien, Relief, Hangneigung</string>
     <string name="hillshade_slope">Relief, Hangneigung</string>
     <string name="logout_from_osmand_cloud">Abmelden aus OsmAnd Cloud</string>
@@ -3999,8 +3999,8 @@
     <string name="active_till">Aktiv bis %1$s</string>
     <string name="promo_subscription">Promo-Abonnement</string>
     <string name="track_has_no_needed_data">Dem Track fehlen die entsprechenden Daten.</string>
-    <string name="option_available_only_in_osmand_pro">Verfügbar im Rahmen des OsmAnd Pro-Abonnements.</string>
-    <string name="purchases_feature_desc_pro_widgets">Erhalten Sie Zugang zu den Funktionen von OsmAnd Pro: Routeneinfärbung und mehr.</string>
+    <string name="option_available_only_in_osmand_pro">Verfügbar im Rahmen des Abonnements „OsmAnd Pro“.</string>
+    <string name="purchases_feature_desc_pro_widgets">Erhalten Sie Zugang zu den Funktionen von „OsmAnd Pro“: Routeneinfärbung und mehr.</string>
     <string name="explore_osmnad_plans_to_find_suitable">OsmAnd-Angebote entdecken, um das Passende für Sie zu finden.</string>
     <string name="routes_color_by_type">Routen einfärben nach …</string>
     <string name="shared_string_relation">Relation</string>
@@ -4084,7 +4084,7 @@
     <string name="shortcut_navigate_to_home">„Nach Hause“ navigieren</string>
     <string name="android_auto_map_placeholder_title">Die Karte wird auf dem Bildschirm des Fahrzeugs angezeigt.</string>
     <string name="android_auto_map_placeholder_descr">Trennen Sie Ihr Gerät von Android Auto, um die Karte in der App anzuzeigen.</string>
-    <string name="android_auto_purchase_request_title">Kaufen Sie OsmAnd Pro oder Maps+, um OsmAnd mit Android Auto zu verwenden</string>
+    <string name="android_auto_purchase_request_title">Kaufen Sie „OsmAnd Pro“ oder „Maps+“, um OsmAnd mit Android Auto zu verwenden</string>
     <string name="location_access_request_title">OsmAnd benötigt die Erlaubnis, auf den Standort zuzugreifen, um zu navigieren.</string>
     <string name="transparent_status_bar">Transparente Statusleiste</string>
     <string name="markers_history_is_disabled_descr">Verlauf aktivieren, um eine Liste der besuchten Kartenmarkierungen zu speichern.</string>
@@ -4883,7 +4883,7 @@
     <string name="relief_3d">3D-Relief</string>
     <string name="relief_3d_description">Besitzen und beobachten Sie das maßstabsgetreue Modell Ihrer Nachbarschaft oder des ganzen Kontinents.</string>
     <string name="osmand_cloud_delete_account_confirmation">Konto löschen\?</string>
-    <string name="osmand_cloud_deletion_subscriptions_warning">Dadurch wird Ihr OsmAnd Pro-Abonnement nicht gekündigt.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Dadurch wird Ihr Abonnement „OsmAnd Pro“ nicht gekündigt.</string>
     <string name="manage_subscriptions">Abonnements verwalten.</string>
     <string name="delete_account_warning">Konto %1$s löschen?</string>
     <string name="shared_string_deleting">Wird gelöscht</string>
@@ -5055,7 +5055,7 @@
     <string name="help_article_widgets_markers_name">Markierungs-Widgets</string>
     <string name="release_4_6">• Android Auto: 3D-Modus hinzugefügt \n \n• Tracks: Filter und intelligente Ordner eingeführt, Speicheroptimierung für größere Dateien \n \n• Verbesserte obere und untere Widget-Leisten, um alle Widgets unterzubringen \n \n• Verbessertes lokales Ressourcenmanagement \n \n• Anpassbare Tastenbelegung für externe Controller \n \n• Neue Widgets: Gleitzahl und „Sonnenposition“ \n \n• OsmAnd Cloud: jetzt Zugriff auf gelöschte Dateien \n \n• VerbesserteTrack Einfärbung im Hangneigungsmodus mit neuem symmetrischen Gradienten \n \n• Probleme mit transparenter Statusleiste behoben \n \n• Unterstützung für ANT+ Temperatur Widget hinzugefügt \n \n• Widget für verfügbaren RAM eingeführt</string>
     <string name="help_article_map_tracks_on_map_name">Tracks und Routen</string>
-    <string name="help_article_navigation_routing_direct_to_point_routing_name">Punkt-zu-Punkt-Routing (Boot)</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Punkt-zu-Punkt-Routenführung (Boot)</string>
     <string name="app_mode_baby_transport">Babytransport</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigieren nach Track</string>
     <string name="add_smart_folder">Intelligenten Ordner hinzufügen</string>
@@ -5067,7 +5067,7 @@
     <string name="help_article_widgets_map_buttons_name">Schaltflächen der Karte</string>
     <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenten Ordner „%1$s“. (Tracks werden nicht gelöscht.)</string>
     <string name="help_article_widgets_info_widgets_name">Informations-Widgets</string>
-    <string name="help_article_navigation_routing_horse_routing_name">Reitrouting</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Routenführung für Reiter</string>
     <string name="help_article_widgets_name">Kartenwidgets</string>
     <string name="help_article_widgets_nav_widgets_name">Navigations-Widgets</string>
     <string name="shared_string_loading">Wird geladen</string>
@@ -5403,7 +5403,7 @@
     <string name="auto_25_chars_route_tsll">Leicht links abbiegen</string>
     <string name="auto_25_chars_route_tu">Wenden</string>
     <string name="driving_region_india">Indien</string>
-    <string name="driving_region_uk">GB und andere</string>
+    <string name="driving_region_uk">Großbritannien und ähnliche</string>
     <string name="hugerock_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Relief usw. für %1$s Monat</string>
     <string name="hugerock_promo">Hugerock-Promo für %1$s Monate</string>
     <string name="shared_string_automatically">Automatisch</string>
@@ -6131,7 +6131,7 @@
     <string name="astro_my_data_no_directions_title">Zielführung nicht aktiv</string>
     <string name="astro_my_data_no_directions_description">Zielführung ermöglicht Ihnen einen Pfeil anzeigen zu lassen, der auf einen Himmelskörper zeigt. Sie können sie mittels des Kontextmenüs aktivieren.</string>
     <string name="astro_search_magnitude_short">mag %.1f</string>
-    <string name="shared_string_radians">Radien</string>
+    <string name="shared_string_radians">Bogenmaß</string>
     <string name="shared_string_unlock">Entsperren</string>
     <string name="start_free_trial">Gratiszeitraum starten</string>
     <string name="subscription_free_trial_with_price">%1$s kostenlos, dann %2$s</string>

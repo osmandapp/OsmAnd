@@ -6165,4 +6165,13 @@
     <string name="start_free_trial">Start gratis prøveperiode</string>
     <string name="subscription_free_trial_with_price">%1$s gratis, derefter %2$s</string>
     <string name="subscription_then_price">derefter %1$s</string>
+    <string name="purchases_feature_desc_astronomy">Udforsk nattehimlen med et offlinekort og et stjernekatalog. Planlæg dine observationer ved hjælp af smarte synlighedsdiagrammer, daglige tidsplaner og en interaktiv AR-tilstand.</string>
+    <string name="astro_expand_your_universe_title">Udvid dit univers</string>
+    <string name="astro_expand_your_universe_description">Få adgang til den udvidede database med kataloger over det dybe rum, Wikipedia-artikler og AR-tilstand offline.</string>
+    <string name="astro_offline_knowledge_base_title">Offline-vidensdatabase</string>
+    <string name="astro_offline_knowledge_base_description">Download den udvidede database for at få adgang til Wikipedia-artikler og kataloger over dybrumsobjekter, når du ikke er online.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Næste dag.</string>
+    <string name="astro_visibility_show_today">Vis dagens synlighed</string>
+    <string name="astro_schedule_show_current_week">Vis den aktuelle uge</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
 </resources>

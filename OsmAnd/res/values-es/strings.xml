@@ -4537,7 +4537,7 @@
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolíneas de las ráfagas de viento</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolíneas de las precipitaciones</string>
     <string name="shared_string_open">Abrir</string>
-    <string name="open_weather_action_description">Permite abrir una pantalla con información meteorológica detallada.</string>
+    <string name="open_weather_action_description">Le permite abrir una pantalla con información meteorológica detallada.</string>
     <string name="open_weather_action">Ver meteorología</string>
     <string name="shared_string_purchased_on">Comprado el</string>
     <string name="shared_string_expires">Expira</string>
@@ -5248,17 +5248,17 @@
     <string name="shared_string_set">Definir</string>
     <string name="quick_action_move_map_left">Mapa a la izquierda</string>
     <string name="quick_action_destination">Destino</string>
-    <string name="quick_action_move_map_down">Mapa hacia abajo</string>
+    <string name="quick_action_move_map_down">Mapa abajo</string>
     <string name="quick_action_to_my_location">A mi ubicación</string>
     <string name="quick_action_move_map_right">Mapa a la derecha</string>
-    <string name="quick_action_move_map_up">Mapa hacia arriba</string>
-    <string name="quick_action_new_route">Nueva ruta</string>
+    <string name="quick_action_move_map_up">Mapa arriba</string>
+    <string name="quick_action_new_route">Ruta nueva</string>
     <string name="quick_action_previous_app_profile">Perfil anterior de la aplicación</string>
     <string name="quick_action_display_position_in_center">Mostrar ubicación siempre en el centro</string>
     <string name="shared_string_create">Crear</string>
     <string name="quick_action_parking_place">Lugar de estacionamiento</string>
     <string name="quick_action_verb_show_hide">Mostrar / Ocultar</string>
-    <string name="weather_screen">Pantalla meteorológica</string>
+    <string name="weather_screen">Pantalla de meteorología</string>
     <string name="quick_action_map_style">Estilo del mapa</string>
     <string name="energy_avg_info_description">Nivel de batería por minuto: %1$s
 \nConsumo de energía (mAh): %2$s</string>
@@ -5686,7 +5686,7 @@
     <string name="average_elevation">Elevación media</string>
     <string name="ascent">Ascenso</string>
     <string name="descent">Descenso</string>
-    <string name="map_orientations_choose_description">Deja este campo en blanco para cambiar entre todos los modos disponibles o añadir solo los que prefieras.</string>
+    <string name="map_orientations_choose_description">Déjelo vacío para cambiar entre todos los modos disponibles, o añada solo sus preferidos.</string>
     <string name="map_orientations">Orientaciones del mapa</string>
     <string name="altitude_metrics_description">Establece la unidad mostrada para la altitud tanto en los widgets como en las estadísticas.</string>
     <string name="write_location_provider_description">Guardar proveedor de ubicación en cada punto del recorrido durante la grabación</string>
