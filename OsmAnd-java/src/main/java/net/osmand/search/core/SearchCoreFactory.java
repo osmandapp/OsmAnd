@@ -338,8 +338,8 @@ public class SearchCoreFactory {
 
 	public static class SearchAddressByNameAPI extends SearchBaseAPI {
 
-		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 50 * 1000;
-		private static final int LONG_ADDRESS_BBOX_RADIUS = 400 * 1000;
+		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 40 * 1000;
+		private static final int LONG_ADDRESS_BBOX_RADIUS = 100 * 1000;
 		private static final int LIMIT = 10000;
 		private final int MAX_ADRESS_RESULTS_BY_REGIONS = 1000;
 
@@ -384,13 +384,11 @@ public class SearchCoreFactory {
 
 		@Override
 		public int getMinimalSearchRadius(SearchPhrase phrase) {
-			// ?LONG? 2 radiuses 
 			return phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
 		}
 
 		@Override
 		public int getNextSearchRadius(SearchPhrase phrase) {
-			// ?LONG? 2 radiuses 
 			return phrase.getNextRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
 		}
 
