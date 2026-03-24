@@ -279,7 +279,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 	@Override
 	public boolean supportsNaturalObtainDataAsync() {
-		return false;
+		return true;
 	}
 
 	@Override

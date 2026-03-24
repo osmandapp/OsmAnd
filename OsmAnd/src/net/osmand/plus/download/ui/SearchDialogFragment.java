@@ -1,6 +1,5 @@
 package net.osmand.plus.download.ui;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -44,7 +43,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.utils.InsetTarget;
-import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.download.CityItem;
@@ -132,7 +130,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 		banner = new BannerAndDownloadFreeVersion(view, getDownloadActivity(), false);
 
 		LinearLayout ll = (LinearLayout) view;
-		ExpandableListView expandablelistView = view.findViewById(android.R.id.list);
+		ExpandableListView expandablelistView = view.findViewById(R.id.category_list);
 		ll.removeView(expandablelistView);
 
 		listView = new ListView(themedContext);

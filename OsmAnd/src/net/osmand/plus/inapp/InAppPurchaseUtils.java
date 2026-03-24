@@ -110,6 +110,10 @@ public class InAppPurchaseUtils {
 		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app);
 	}
 
+	public static boolean isAstronomyAvailable(@NonNull OsmandApplication app) {
+		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app) || InAppPurchaseUtils.isMapsPlusAvailable(app);
+	}
+
 	public static boolean isProWidgetsAvailable(@NonNull OsmandApplication app) {
 		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app);
 	}
@@ -224,6 +228,6 @@ public class InAppPurchaseUtils {
 	}
 
 	public static boolean isOrganizeByTypeApplicable(OsmandApplication app, OrganizeByType organizeByType) {
-		return organizeByType == null || isOsmAndProAvailable(app) || !organizeByType.isPro() || organizeByType == OrganizeByType.LENGTH;
+		return organizeByType == null || isOsmAndProAvailable(app) || !organizeByType.isPro();
 	}
 }

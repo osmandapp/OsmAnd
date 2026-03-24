@@ -5941,4 +5941,9 @@
     <string name="astro_explore_deep_sky_subtitle">Réaltra, Braislí Réaltra, Poill Dhubha</string>
     <string name="obd_alt_battery_voltage_desc">Taispeánann sé an leibhéal voltais ar an oiriúntóir OBD</string>
     <string name="astro_search_magnitude_short">mag %.1f</string>
+    <string name="shared_string_radians">Raidiáin</string>
+    <string name="shared_string_unlock">Díghlasáil</string>
+    <string name="start_free_trial">Tosaigh triail saor in aisce</string>
+    <string name="subscription_free_trial_with_price">%1$s saor in aisce, ansin %2$s</string>
+    <string name="subscription_then_price">ansin %1$s</string>
 </resources>

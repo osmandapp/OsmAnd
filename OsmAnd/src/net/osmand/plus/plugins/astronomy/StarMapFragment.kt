@@ -28,6 +28,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenFragment
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astronomy.AstronomyPluginSettings.CommonConfig
@@ -59,7 +60,7 @@ import kotlin.math.abs
 
 
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
-	OsmAndCompassListener {
+	OsmAndCompassListener, DownloadEvents {
 
 	private val REGULAR_MAP_HEIGHT = 300f
 	private val REGULAR_MAP_HEIGHT_LANDSCAPE = 110f
@@ -149,11 +150,30 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	companion object {
 		val TAG: String = StarMapFragment::class.java.simpleName
 		private val LOG = LoggerFactory.getLogger(TAG)
+		private val RED_FILTER_MATRIX = ColorMatrix(
+			floatArrayOf(
+				0.33f, 0.33f, 0.33f, 0f, 0f,
+				0f, 0f, 0f, 0f, 0f,
+				0f, 0f, 0f, 0f, 0f,
+				0f, 0f, 0f, 1f, 0f
+			)
+		)
 
 		private const val AUTO_TIME_UPDATE_INTERVAL_MS = 60_000L
 		private const val MAX_MAGNITUDE = 7.0f
 
 		@JvmStatic
+		fun applyRedFilterToViews(enabled: Boolean, vararg views: View?) {
+			val layerType = if (enabled) View.LAYER_TYPE_HARDWARE else View.LAYER_TYPE_NONE
+			val paint = if (enabled) {
+				Paint().apply { colorFilter = ColorMatrixColorFilter(RED_FILTER_MATRIX) }
+			} else {
+				null
+			}
+			views.forEach { view ->
+				view?.setLayerType(layerType, paint)
+			}
+		}
 
 		fun showInstance(manager: FragmentManager) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
@@ -341,6 +361,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			}
 			override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 		})
+		applyRedFilterToViews(starView.showRedFilter, bottomSheetContainer)
 
 		return view
 	}
@@ -736,7 +757,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private fun setupObservers() {
 		viewModel.currentTime.observe(viewLifecycleOwner) { time ->
 			starView.setDateTime(time, animate = true)
-			updateBottomSheetInfo()
+			getAstroContextMenuFragment()?.onTimeChanged()
 		}
 		viewModel.currentCalendar.observe(viewLifecycleOwner) { calendar ->
 			timeSelectionView.setDateTime(calendar)
@@ -808,7 +829,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				if (selectedObject == null) hideBottomSheet()
 			}
 		}
-		starView.onAnimationFinished = { updateBottomSheetInfo() }
+		starView.onAnimationFinished = null
 		starView.onAzimuthManualChangeListener = { azimuth ->
 			if (!cameraHelper.isCameraOverlayEnabled) {
 				if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode()
@@ -860,22 +881,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 	}
 
-	private fun updateBottomSheetInfo() {
-		getAstroContextMenuFragment()?.let { fragment ->
-			selectedObject?.let { obj -> fragment.updateObjectInfo(obj) }
-		}
-	}
-
-	private fun showConstellationInfo(c: Constellation) {
-		val existing = childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? ConstellationInfoFragment
-		if (existing == null || existing.arguments?.getString("name") != c.name) {
-			childFragmentManager.beginTransaction()
-				.replace(R.id.bottom_sheet_container, ConstellationInfoFragment.newInstance(c))
-				.commitNow()
-		}
-		bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-	}
-
 	private fun showObjectInfo(obj: SkyObject) {
 		val existing = childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? AstroContextMenuFragment
 		if (existing == null || existing.arguments?.getString("skyObjectId") != obj.id) {
@@ -896,6 +901,26 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private fun getAstroContextMenuFragment(): AstroContextMenuFragment? {
 		return childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? AstroContextMenuFragment
+	}
+
+	private fun dispatchDownloadEvent(dispatch: (DownloadEvents) -> Unit) {
+		for (fragment in childFragmentManager.fragments) {
+			if (fragment is DownloadEvents && fragment.isAdded) {
+				dispatch(fragment)
+			}
+		}
+	}
+
+	override fun onUpdatedIndexesList() {
+		dispatchDownloadEvent { it.onUpdatedIndexesList() }
+	}
+
+	override fun downloadInProgress() {
+		dispatchDownloadEvent { it.downloadInProgress() }
+	}
+
+	override fun downloadHasFinished() {
+		dispatchDownloadEvent { it.downloadHasFinished() }
 	}
 
 	internal fun getTrackableObjects(): List<SkyObject> {
@@ -974,21 +999,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun updateRedMode(enabled: Boolean) {
-		if (context == null) return
-		val paint = if (enabled) {
-			val lumToRed = ColorMatrix(floatArrayOf(
-				0.33f, 0.33f, 0.33f, 0f, 0f,
-				0f, 0f, 0f, 0f, 0f,
-				0f, 0f, 0f, 0f, 0f,
-				0f, 0f, 0f, 1f, 0f
-			))
-			Paint().apply { colorFilter = ColorMatrixColorFilter(lumToRed) }
-		} else {
-			null
-		}
-
-		val layerType = if (enabled) View.LAYER_TYPE_HARDWARE else View.LAYER_TYPE_NONE
-
 		val viewsToFilter = mutableListOf<View>()
 		if (::timeControlCard.isInitialized) viewsToFilter.add(timeControlCard)
 		if (::timeSelectionView.isInitialized) viewsToFilter.add(timeSelectionView)
@@ -1002,7 +1012,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (::searchButton.isInitialized) viewsToFilter.add(searchButton)
 		if (::settingsButton.isInitialized) viewsToFilter.add(settingsButton)
 		if (::sliderContainer.isInitialized) viewsToFilter.add(sliderContainer)
+		if (::bottomSheetContainer.isInitialized) viewsToFilter.add(bottomSheetContainer)
 
-		viewsToFilter.forEach { it.setLayerType(layerType, paint) }
+		applyRedFilterToViews(enabled, *viewsToFilter.toTypedArray())
+		(childFragmentManager.findFragmentByTag(AstroConfigureViewBottomSheet.TAG) as? AstroConfigureViewBottomSheet)
+			?.applyRedFilter(enabled)
+		(childFragmentManager.findFragmentByTag(StarMapSearchDialogFragment.TAG) as? StarMapSearchDialogFragment)
+			?.applyRedFilter(enabled)
 	}
+
 }
