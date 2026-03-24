@@ -39,6 +39,7 @@ import net.osmand.plus.plugins.astronomy.StarMapFragment
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTargetsCollection
+import net.osmand.plus.utils.InsetsUtils
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZonedDateTime
@@ -434,6 +435,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		setupBottomSheet()
+		applyLegacyInsetsFallbackIfNeeded()
 
 		appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBar, offset ->
 
@@ -483,10 +485,21 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		super.onApplyInsets(insets)
 		val systemInsets =
 			insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
-		systemTopInset = systemInsets.top
+		applyResolvedSystemInsets(systemInsets.top, systemInsets.bottom)
+	}
 
+	private fun applyLegacyInsetsFallbackIfNeeded() {
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			return
+		}
+		val systemInsets = InsetsUtils.getSysBars(requireContext(), lastRootInsets) ?: return
+		applyResolvedSystemInsets(systemInsets.top, systemInsets.bottom)
+	}
+
+	private fun applyResolvedSystemInsets(topInset: Int, bottomInset: Int) {
+		systemTopInset = topInset
 		updateTopInsetReveal()
-		bottomTabsContainer.updatePadding(bottom = tabsContainerBaseBottomPadding + systemInsets.bottom)
+		bottomTabsContainer.updatePadding(bottom = tabsContainerBaseBottomPadding + bottomInset)
 		updateRecyclerBottomPadding()
 		updateBottomSheetPeekHeightFromContent()
 	}
