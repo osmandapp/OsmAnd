@@ -6029,8 +6029,8 @@
     <string name="subscription_free_trial_with_price">%1$s gratuit, puis %2$s</string>
     <string name="subscription_then_price">puis %1$s</string>
     <string name="astro_expand_your_universe_title">Augmentez votre Univers</string>
-    <string name="purchases_feature_desc_astronomy">Explorez le ciel nocturne grâce à une carte hors ligne et à un catalogue astronomique. Planifiez vos observations à l\'aide de graphiques de visibilité intelligents, d\'horaires quotidiens et d\'un mode AR interactif.</string>
-    <string name="astro_expand_your_universe_description">Accédez à la base de données étendue comprenant des catalogues du ciel profond, des articles Wikipédia et le mode AR hors ligne.</string>
+    <string name="purchases_feature_desc_astronomy">Explorez le ciel nocturne grâce à une carte hors ligne et à un catalogue astronomique. Planifiez vos observations à l\'aide de graphiques de visibilité intelligents, d\'horaires quotidiens et d\'un mode de réalité augmentée interactif.</string>
+    <string name="astro_expand_your_universe_description">Accédez à la base de données étendue comprenant des catalogues du ciel profond, des articles Wikipédia et le mode de réalité augmentée hors ligne.</string>
     <string name="astro_offline_knowledge_base_title">Base de connaissances hors ligne</string>
     <string name="astro_offline_knowledge_base_description">Téléchargez la base de données étendue pour accéder hors ligne aux articles de Wikipédia et aux catalogues du ciel profond.</string>
     <string name="astro_schedule_next_day_note">⁺¹ Le lendemain.</string>
