@@ -300,7 +300,9 @@ public class SensorTextWidget extends SimpleWidget {
 		if (isConnected) {
 			return isShowSensorData() ? nightMode ? fieldType.nightIconId : fieldType.dayIconId : nightMode ? fieldType.nightBatteryIconId : fieldType.dayBatteryIconId;
 		} else {
-			return isShowSensorData() ? fieldType.disconnectedIconId : fieldType.disconnectedBatteryIconId;
+			//temporary, until new icons be ready
+			return isShowSensorData() ? nightMode ? fieldType.nightIconId : fieldType.dayIconId : nightMode ? fieldType.nightBatteryIconId : fieldType.dayBatteryIconId;
+//			return isShowSensorData() ? fieldType.disconnectedIconId : fieldType.disconnectedBatteryIconId;
 		}
 	}
 
