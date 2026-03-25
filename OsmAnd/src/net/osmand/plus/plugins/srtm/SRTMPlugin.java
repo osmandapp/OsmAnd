@@ -153,20 +153,10 @@ public class SRTMPlugin extends OsmandPlugin {
 		});
 		settings.ENABLE_3D_MAPS.addListener(enable3DMapsListener);
 
-		terrainListener = change -> app.runInUIThread(() -> {
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				mapContext.updateElevationConfiguration();
-			}
-		});
+		terrainListener = change -> app.runInUIThread(this::updateElevationConfiguration);
 		TERRAIN.addListener(terrainListener);
 
-		terrainModeListener = change -> app.runInUIThread(() -> {
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				mapContext.updateElevationConfiguration();
-			}
-		});
+		terrainModeListener = change -> app.runInUIThread(this::updateElevationConfiguration);
 		TERRAIN_MODE.addListener(terrainModeListener);
 		verticalExaggerationListener = scale -> {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
@@ -191,21 +181,19 @@ public class SRTMPlugin extends OsmandPlugin {
 		};
 		ENABLE_3D_MAP_OBJECTS.addListener(map3DObjectsListener);
 
-		hillshadeSunAngleListener = change -> app.runInUIThread(() -> {
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				mapContext.updateElevationConfiguration();
-			}
-		});
+		hillshadeSunAngleListener = change -> app.runInUIThread(this::updateElevationConfiguration);
 		HILLSHADE_SUN_ANGLE.addListener(hillshadeSunAngleListener);
 
-		hillshadeSunAzimuthListener = change -> app.runInUIThread(() -> {
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				mapContext.updateElevationConfiguration();
-			}
-		});
+		hillshadeSunAzimuthListener = change -> app.runInUIThread(this::updateElevationConfiguration);
 		HILLSHADE_SUN_AZIMUTH.addListener(hillshadeSunAzimuthListener);
+	}
+
+	public void updateElevationConfiguration() {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.updateElevationConfiguration();
+			mapContext.updateVerticalExaggerationScale();
+		}
 	}
 
 	@Override
