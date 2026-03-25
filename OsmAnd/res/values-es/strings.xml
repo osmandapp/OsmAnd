@@ -4647,7 +4647,7 @@
     <string name="offline_weather_forecast_desc">Puede descargar la previsión meteorológica para 7 días.</string>
     <string name="clear_online_cache_description">Esto vaciará la memoria caché de las teselas meteorológicas en línea.</string>
     <string name="free_maps_updates">Actualizaciones gratuitas (emergencia)</string>
-    <string name="metric_lbs">libras</string>
+    <string name="metric_lbs">lbs</string>
     <string name="common_weight_limit_error">El valor mínimo es «%1$s» %2$s. Usa el perfil «%3$s» si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="shared_string_pounds">libras</string>
     <string name="rendering_value_defaultMedium_name">Predefinido (medio)</string>
@@ -5192,7 +5192,7 @@
     <string name="clear_key_assignment_summary">Se vaciará la asignación de tecla para la acción seleccionada.</string>
     <string name="clear_all_key_shortcuts_summary">Todas las asignaciones de tecla para el tipo seleccionado serán borradas.</string>
     <string name="clear_all_key_shortcuts">Borrar todos los atajos</string>
-    <string name="no_assigned_keys_desc">Selecciona una acción y asígnale una tecla presionando el botón de \'Añadir\'.</string>
+    <string name="no_assigned_keys_desc">Seleccione una acción y asígnele una tecla presionando el botón «Añadir».</string>
     <string name="no_assigned_keys">Sin teclas asignadas</string>
     <string name="new_key_assignment">Nueva asignación de tecla</string>
     <string name="key_assignment_add_key">Añadir clave</string>
@@ -5735,9 +5735,9 @@
     <string name="rendering_attr_hideTidalFlats_name">Llanuras de marea</string>
     <string name="rendering_attr_hideTidalFlats_description">Ocultar llanuras de marea</string>
     <string name="rendering_attr_depthColorScheme_name">Esquema de colores de profundidad</string>
-    <string name="rendering_attr_depthColorScheme_description">Esquema de color de profundidad</string>
-    <string name="rendering_attr_depthContoursDashed_name">Contornos de profundidad discontínuos</string>
-    <string name="rendering_attr_depthContoursDashed_description">Contornos de profundidad discontínuos</string>
+    <string name="rendering_attr_depthColorScheme_description">Esquema de colores de profundidad</string>
+    <string name="rendering_attr_depthContoursDashed_name">Contornos de profundidad discontinuos</string>
+    <string name="rendering_attr_depthContoursDashed_description">Contornos de profundidad discontinuos</string>
     <string name="rendering_attr_fairwayStyle_name">Color del canal</string>
     <string name="rendering_attr_fairwayStyle_description">Color de los canales</string>
     <string name="rendering_attr_safetyContour_name">Contorno de profundidad de seguridad</string>
@@ -5951,16 +5951,16 @@
     <string name="astro_search_info_star_clusters">Un cúmulo estelar es un grupo de estrellas unidas por la gravedad y formadas a partir de la misma nube molecular.</string>
     <string name="astro_search_info_deep_sky">Los objetos del cielo profundo incluyen galaxias, nebulosas, cúmulos estelares y otros objetivos astronómicos distantes.</string>
     <string name="astro_go_to_map">Ir al mapa</string>
-    <string name="astro_my_data_no_favorites_title">Aquí no hay nada ¯\\_(ツ)_/¯</string>
-    <string name="astro_my_data_no_favorites_description">Puedes añadir elementos a tus favoritos desde su menú contextual</string>
+    <string name="astro_my_data_no_favorites_title">No hay nada aquí</string>
+    <string name="astro_my_data_no_favorites_description">Puede añadir elementos a sus favoritos desde su menú contextual</string>
     <string name="astro_my_data_no_daily_paths_title">Sin rutas diarias</string>
     <string name="astro_my_data_no_daily_paths_description">Activa la ruta diaria de un objeto desde su menú contextual para verlo aquí</string>
     <string name="astro_my_data_no_directions_title">No se han establecido direcciones</string>
-    <string name="astro_my_data_no_directions_description">La función de indicaciones te permite mantener una flecha visible que apunta hacia un objeto. Actívala desde el menú contextual.</string>
+    <string name="astro_my_data_no_directions_description">La función de indicaciones le permite mantener una flecha visible que apunta hacia un objeto. Actívela desde el menú contextual.</string>
     <plurals name="astro_catalog_objects_count">
-        <item quantity="one">%d Objeto</item>
-        <item quantity="many">%d Objetos</item>
-        <item quantity="other">%d Objeto(s)</item>
+        <item quantity="one">%d objeto</item>
+        <item quantity="many">%d de objetos</item>
+        <item quantity="other">%d objetos</item>
     </plurals>
     <string name="astro_search_constellation_with_code">Constelación (%1$s)</string>
     <string name="astro_search_type_in_location">%1$s en %2$s</string>
@@ -5969,7 +5969,7 @@
     <string name="astro_search_sets_tomorrow">↘ %1$s %2$s</string>
     <string name="astro_search_never_rises">↓ Nunca sale</string>
     <string name="astro_search_always_up">↑ Siempre arriba</string>
-    <string name="astro_search_sets_at">↘ Oculto a las %1$s</string>
+    <string name="astro_search_sets_at">↘ Se pone a las %1$s</string>
     <string name="astro_search_rises_at">↗ Sale a las %1$s</string>
     <string name="astro_search_magnitude_short">mag. %.1f</string>
     <string name="astro_filter_naked_eye">Visible a simple vista</string>
@@ -5985,7 +5985,7 @@
     <string name="astro_explore_my_data">Mis datos</string>
     <string name="astro_explore_schedule_subtitle">Próximos eventos astronómicos</string>
     <string name="astro_explore_schedule">Calendario</string>
-    <string name="astro_explore_watch_now_subtitle">Descubre qué hay en el cielo esta noche</string>
+    <string name="astro_explore_watch_now_subtitle">Descubra qué hay en el cielo esta noche</string>
     <string name="astro_explore_watch_now">Ver ahora</string>
     <string name="astro_explore_deep_sky_subtitle">Galaxias, cúmulos de galaxias, agujeros negros</string>
     <string name="astro_culmination">Culminación</string>
@@ -6038,9 +6038,9 @@
     <string name="obd_alt_battery_voltage_desc">Muestra el nivel de voltaje en el adaptador OBD</string>
     <string name="shared_string_radians">Radianes</string>
     <string name="purchases_feature_desc_astronomy">Explora el cielo nocturno con un mapa sin conexión y catálogo celestial. Planea observaciones usando gráficas de visibilidad inteligentes, horarios diurnos y un modo de realidad aumentada interactivo.</string>
-    <string name="astro_expand_your_universe_title">Expande tu universo</string>
-    <string name="astro_expand_your_universe_description">Obtén acceso a la base de datos extendida de catálogos de cielo profundo, artículos de Wikipedia y al modo de realidad aumentada sin conexión.</string>
-    <string name="astro_offline_knowledge_base_title">información sin conexión</string>
+    <string name="astro_expand_your_universe_title">Expanda su universo</string>
+    <string name="astro_expand_your_universe_description">Obtenga acceso a la base de datos ampliada de catálogos de cielo profundo, artículos de Wikipedia y al modo de realidad aumentada sin conexión.</string>
+    <string name="astro_offline_knowledge_base_title">Base de conocimientos sin conexión</string>
     <string name="astro_offline_knowledge_base_description">Descarga la base de datos extendida para acceder a artículos de Wikipedia y catálogos del cielo profundo sin conexión.</string>
     <string name="astro_schedule_next_day_note">⁺¹ Día siguiente.</string>
     <string name="astro_visibility_show_today">Mostrar la visibilidad de hoy</string>
@@ -6048,6 +6048,6 @@
     <string name="astro_next_day_suffix">⁺¹</string>
     <string name="start_free_trial">Comenzar la prueba gratuita</string>
     <string name="shared_string_unlock">Desbloquear</string>
-    <string name="subscription_free_trial_with_price">%1$s free, then %2$s</string>
-    <string name="subscription_then_price">then %1$s</string>
+    <string name="subscription_free_trial_with_price">%1$s gratis, luego %2$s</string>
+    <string name="subscription_then_price">luego %1$s</string>
 </resources>
