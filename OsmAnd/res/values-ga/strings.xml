@@ -5946,4 +5946,13 @@
     <string name="start_free_trial">Tosaigh triail saor in aisce</string>
     <string name="subscription_free_trial_with_price">%1$s saor in aisce, ansin %2$s</string>
     <string name="subscription_then_price">ansin %1$s</string>
+    <string name="purchases_feature_desc_astronomy">Taiscéal spéir na hoíche le léarscáil as líne agus catalóg neamhaí. Pleanáil breathnóireachtaí ag baint úsáide as graif infheictheachta cliste, sceidil laethúla, agus mód idirghníomhach AR.</string>
+    <string name="astro_expand_your_universe_title">Leathnaigh do chruinne</string>
+    <string name="astro_expand_your_universe_description">Faigh rochtain ar an mbunachar sonraí leathnaithe de chatalóga spéire doimhne, ailt Vicipéide agus mód AR as líne.</string>
+    <string name="astro_offline_knowledge_base_title">Bunachar Eolais As Líne</string>
+    <string name="astro_offline_knowledge_base_description">Íoslódáil an bunachar sonraí leathnaithe chun rochtain a fháil ar ailt Vicipéid agus ar chatalóga Deep Sky as líne.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ An lá dár gcionn.</string>
+    <string name="astro_visibility_show_today">Taispeáin infheictheacht an lae inniu</string>
+    <string name="astro_schedule_show_current_week">Taispeáin an tseachtain reatha</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
 </resources>

@@ -157,6 +157,10 @@ public class InAppPurchaseUtils {
 		return Version.isPaidVersion(app) || checkDeveloperBuildIfNeeded(app, true);
 	}
 
+	public static boolean isBuildingsCustomColorAvailable(@NonNull OsmandApplication app) {
+		return Version.isPaidVersion(app) || checkDeveloperBuildIfNeeded(app, true);
+	}
+
 	public static boolean isGradientEditorAvailable(@NonNull OsmandApplication app) {
 		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app);
 	}

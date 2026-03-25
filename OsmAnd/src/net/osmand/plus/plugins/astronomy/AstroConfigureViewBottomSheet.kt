@@ -394,7 +394,7 @@ class AstroConfigureViewBottomSheet :
 
 		addSwitchRow(
 			parent = renderingContainer,
-			iconRes = R.drawable.ic_action_galaxy,
+			iconRes = R.drawable.ic_action_galaxy_line,
 			titleRes = R.string.galactic_line,
 			checked = current.showGalacticLine,
 			showDivider = false

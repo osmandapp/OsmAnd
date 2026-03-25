@@ -3,6 +3,7 @@ package net.osmand.plus.routing;
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -13,6 +14,8 @@ import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.router.FastRoutingState;
+import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.util.Algorithms;
 
@@ -333,6 +336,30 @@ class RouteRecalculationHelper {
 				listener.onCalculationFinish();
 			}
 		}
+	}
+
+	protected boolean isCurrentSlowRoutingActive() {
+		return lastTask != null
+				&& lastTask.params.calculationProgress != null
+				&& lastTask.params.calculationProgress.isSlowRoutingActive();
+	}
+
+	protected boolean hasCurrentMissingMaps() {
+		return lastTask != null
+				&& lastTask.params.calculationProgress != null
+				&& lastTask.params.calculationProgress.hasMixedOrMissingMaps();
+	}
+
+	@Nullable
+	protected FastRoutingState.Status getCurrentFastRoutingComplication() {
+		return lastTask != null && lastTask.params.calculationProgress != null
+				? lastTask.params.calculationProgress.getFastRoutingStatus() : null;
+	}
+
+	@Nullable
+	protected MissingMapsCalculationResult getCurrentMissingMapsCalculationResult() {
+		return lastTask != null && lastTask.params.calculationProgress != null ?
+				lastTask.params.calculationProgress.missingMapsCalculationResult : null;
 	}
 
 	private class RouteRecalculationTask implements Runnable {

@@ -2,6 +2,7 @@ package net.osmand.plus.base;
 
 import android.os.Bundle;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -16,6 +17,11 @@ public interface AppModeDependentComponent {
 	ApplicationMode getAppMode();
 
 	void setAppMode(@NonNull ApplicationMode appMode);
+
+	@ColorInt
+	default int getAppModeColor(boolean nightMode) {
+		return getAppMode().getProfileColor(nightMode);
+	}
 
 	@NonNull
 	default ApplicationMode restoreAppMode(@NonNull OsmandApplication app, @Nullable ApplicationMode appMode,

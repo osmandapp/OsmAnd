@@ -87,6 +87,10 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		RouteCalculationResult route = app.getRoutingHelper().getRoute();
 		MissingMapsCalculationResult result = route.getMissingMapsCalculationResult();
 
+		if (result == null) {
+			result = app.getRoutingHelper().getCurrentMissingMapsCalculationResult();
+		}
+
 		List<WorldRegion> used = result != null ? result.getUsedMaps() : Collections.emptyList();
 		List<WorldRegion> missing = result != null ? result.getMissingMaps() : Collections.emptyList();
 		List<WorldRegion> download = result != null ? result.getMapsToDownload() : Collections.emptyList();

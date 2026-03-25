@@ -66,7 +66,7 @@ import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment;
 import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
-import net.osmand.plus.plugins.srtm.Buildings3DFragment;
+import net.osmand.plus.plugins.srtm.building.Buildings3DFragment;
 import net.osmand.plus.plugins.srtm.ContourLinesMenu;
 import net.osmand.plus.plugins.srtm.Relief3DFragment;
 import net.osmand.plus.plugins.srtm.TerrainFragment;
@@ -88,6 +88,7 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
@@ -694,7 +695,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, MAP_ROUTES, RENDERING_CLASS, TRAVEL_ROUTES,
 				OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH,
-				COORDINATE_GRID)) {
+				COORDINATE_GRID, BUILDINGS_3D)) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
 		} else {
@@ -702,7 +703,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 
 		if (planRouteProgressBar != null) {
-			mapActivity.setupRouteCalculationProgressBar(planRouteProgressBar);
+			UiUtilities.setupRouteCalculationProgressBar(planRouteProgressBar);
 		}
 	}
 

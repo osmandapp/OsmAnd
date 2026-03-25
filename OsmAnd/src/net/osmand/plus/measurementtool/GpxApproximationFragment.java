@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -90,7 +91,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment implemen
 
 		pbProgress = mainView.findViewById(R.id.progress_bar);
 		if (pbProgress != null) {
-			requireMapActivity().setupRouteCalculationProgressBar(pbProgress);
+			UiUtilities.setupRouteCalculationProgressBar(pbProgress);
 			pbProgress.setIndeterminate(false);
 		}
 

@@ -493,7 +493,7 @@
 				<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 					android:id="@+id/progress_bar"
 					android:layout_width="match_parent"
-					android:layout_height="2dp"
+					android:layout_height="6dp"
 					android:layout_gravity="bottom"
 					android:max="100"
 					android:visibility="gone"
