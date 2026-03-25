@@ -88,6 +88,7 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
@@ -702,7 +703,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 
 		if (planRouteProgressBar != null) {
-			mapActivity.setupRouteCalculationProgressBar(planRouteProgressBar);
+			UiUtilities.setupRouteCalculationProgressBar(planRouteProgressBar);
 		}
 	}
 

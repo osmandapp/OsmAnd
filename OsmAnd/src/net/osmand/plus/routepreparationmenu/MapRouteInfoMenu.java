@@ -42,6 +42,7 @@ import androidx.transition.TransitionListenerAdapter;
 import androidx.transition.TransitionManager;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.data.*;
 import net.osmand.plus.routepreparationmenu.data.PointType;
@@ -115,11 +116,15 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.*;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
+
+	private static final Log LOG = PlatformUtil.getLog(MapRouteInfoMenu.class);
 
 	private static final int BUTTON_ANIMATION_DELAY = 2000;
 	public static final int DEFAULT_MENU_STATE = 0;
@@ -377,10 +382,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				updateCards();
 			}
 		}
-		boolean isFastRouting = app.getRoutingHelper().shouldDrawFastRoutingProgressBar();
-		if (lastIsFastRouting == null || isFastRouting != lastIsFastRouting) {
-			lastIsFastRouting = isFastRouting;
+		boolean fastRouting = app.getRoutingHelper().shouldDrawFastRoutingProgressBar();
+		if (lastIsFastRouting == null || fastRouting != lastIsFastRouting) {
+			lastIsFastRouting = fastRouting;
 			updateOptionsButtons();
+			setupRouteCalculationProgressBar();
 		}
 	}
 
@@ -1812,6 +1818,30 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(AppCompatResources.getDrawable(mapActivity,
 					mapActivity.getApp().getTargetPointsHelper().getPointToStart() == null
 							? locationIconResByStatus : R.drawable.list_startpoint));
+		}
+	}
+
+	public void setupRouteCalculationProgressBar() {
+		View mainView = getMainView();
+		ProgressBar progressBar = mainView != null ? mainView.findViewById(R.id.progress_bar) : null;
+		if (progressBar != null) {
+			Context context = progressBar.getContext();
+			OsmandApplication app = AndroidUtils.getApp(context);
+			RoutingHelper routingHelper = app.getRoutingHelper();
+
+			boolean fastRouting = routingHelper.shouldDrawFastRoutingProgressBar();
+			boolean indeterminate = routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting();
+
+			int trackColorId = fastRouting
+					? (nightMode ? R.color.routing_fast_progress_track_dark : R.color.routing_fast_progress_track_light)
+					: (nightMode ? R.color.routing_standard_progress_track_dark : R.color.routing_standard_progress_track_light);
+			int fillColorId = fastRouting
+					? (nightMode ? R.color.routing_fast_progress_fill_dark : R.color.routing_fast_progress_fill_light)
+					: (nightMode ? R.color.routing_standard_progress_fill_dark : R.color.routing_standard_progress_fill_light);
+			int progressColor = ContextCompat.getColor(context, fillColorId);
+			int backgroundColor = ContextCompat.getColor(context, trackColorId);
+
+			UiUtilities.setupProgressBar(progressBar, progressColor, backgroundColor, indeterminate);
 		}
 	}
 

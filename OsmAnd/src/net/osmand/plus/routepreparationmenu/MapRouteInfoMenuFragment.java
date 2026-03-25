@@ -1,6 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,9 +18,6 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.utils.InsetTarget;
-import net.osmand.plus.utils.InsetTargetsCollection;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
@@ -31,7 +27,10 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.TextViewExProgress;
+import net.osmand.shared.gpx.GpxFile;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		implements OnSegmentSelectedListener, DownloadEvents {
@@ -357,26 +356,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		return app.getRoutingHelper().isOsmandRouting();
 	}
 
-	private void setupRouteCalculationProgressBar(@NonNull ProgressBar progressBar, boolean isFastRouting) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
-		}
-		boolean nightMode = isNightMode();
-		int trackColorId = isFastRouting
-				? (nightMode ? R.color.routing_fast_progress_track_dark : R.color.routing_fast_progress_track_light)
-				: (nightMode ? R.color.routing_standard_progress_track_dark : R.color.routing_standard_progress_track_light);
-		int fillColorId = isFastRouting
-				? (nightMode ? R.color.routing_fast_progress_fill_dark : R.color.routing_fast_progress_fill_light)
-				: (nightMode ? R.color.routing_standard_progress_fill_dark : R.color.routing_standard_progress_fill_light);
-		int trackColor = ContextCompat.getColor(mapActivity, trackColorId);
-		int fillColor = ContextCompat.getColor(mapActivity, fillColorId);
-		progressBar.setProgressDrawable(AndroidUtils.createProgressDrawable(trackColor, fillColor));
-		if (progressBar.getIndeterminateDrawable() != null) {
-			progressBar.getIndeterminateDrawable().setColorFilter(fillColor, PorterDuff.Mode.SRC_IN);
-		}
-	}
-
 	public void updateRouteCalculationProgress(int progress) {
 		MapActivity mapActivity = getMapActivity();
 		View mainView = getMainView();
@@ -384,11 +363,9 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		if (mapActivity == null || mainView == null || view == null) {
 			return;
 		}
-		boolean isFastRouting = app.getRoutingHelper().shouldDrawFastRoutingProgressBar();
 		boolean indeterminate = isPublicTransportMode() || !isOsmandRouting();
 		ProgressBar progressBar = mainView.findViewById(R.id.progress_bar);
 		if (progressBar != null) {
-			setupRouteCalculationProgressBar(progressBar, isFastRouting);
 			if (progress == 0) {
 				progressBar.setIndeterminate(indeterminate);
 			}
@@ -492,10 +469,8 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		((TextView) mainView.findViewById(R.id.ViaSubView)).setTextColor(descriptionColor);
 		((TextView) mainView.findViewById(R.id.toTitle)).setTextColor(descriptionColor);
 
-		boolean isFastRouting = app.getRoutingHelper().shouldDrawFastRoutingProgressBar();
-		ProgressBar progressBar = mainView.findViewById(R.id.progress_bar);
-		if (progressBar != null) {
-			setupRouteCalculationProgressBar(progressBar, isFastRouting);
+		if (menu != null) {
+			menu.setupRouteCalculationProgressBar();
 		}
 	}
 

@@ -28,6 +28,7 @@ import android.view.ViewParent;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.*;
@@ -55,11 +56,14 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.help.HelpArticleUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -858,5 +862,31 @@ public class UiUtilities {
 					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
 		}
 		return bitmap;
+	}
+
+	public static void setupRouteCalculationProgressBar(@NonNull ProgressBar progressBar) {
+		Context context = progressBar.getContext();
+		OsmandApplication app = AndroidUtils.getApp(context);
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		DayNightHelper dayNightHelper = app.getDaynightHelper();
+
+		boolean nightMode = dayNightHelper.isNightMode(OVER_MAP);
+		boolean useRouteLineColor = nightMode == dayNightHelper.isNightMode(ThemeUsageContext.MAP);
+		boolean indeterminate = routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting();
+
+		int bgColorId = nightMode ? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light;
+		int backgroundColor = ContextCompat.getColor(context, bgColorId);
+
+		int progressColor = useRouteLineColor ? app.getOsmandMap().getMapLayers().getRouteLayer().getRouteLineColor(nightMode)
+				: ContextCompat.getColor(context, R.color.active_color_primary_light);
+
+		setupProgressBar(progressBar, progressColor, backgroundColor, indeterminate);
+	}
+
+	public static void setupProgressBar(@NonNull ProgressBar progressBar, @ColorInt int progressColor,
+			@ColorInt int backgroundColor, boolean indeterminate) {
+		progressBar.setProgressDrawable(AndroidUtils.createProgressDrawable(backgroundColor, progressColor));
+		progressBar.setIndeterminate(indeterminate);
+		progressBar.getIndeterminateDrawable().setColorFilter(progressColor, PorterDuff.Mode.SRC_IN);
 	}
 }
