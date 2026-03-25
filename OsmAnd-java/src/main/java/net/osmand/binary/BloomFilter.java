@@ -14,15 +14,16 @@ public final class BloomFilter {
 	
 	public static final int VERSION = 0; // with 2026-04-01 version will be 1
 	
-	private static final int BOX_BITS = 512;
+	public static final int BLOOM_BITS = 512;
 	private static final int DEFAULT_HASHES = 5;
-	private static final int BOX_SIZE = BOX_BITS / Byte.SIZE;
-	
+	private static final int BLOOM_SIZE = BLOOM_BITS / Byte.SIZE;
+	public static final int MAX_SATURATION_BITS = 384;
+	public static final int MIN_BLOOM_CONTINUATION_PREFIX_LENGTH = 0; // Min suffix length to be included in bloomIndex.
+
 	private static final Log log = PlatformUtil.getLog(BloomFilter.class);
 
-	private static final LongAdder writeBoxBitAcc = new LongAdder();
-	private static final LongAdder writeBoxAcc = new LongAdder(), writeBoxCount = new LongAdder();
-	private static final LongAdder skipBoxAcc = new LongAdder(), readBoxCount = new LongAdder(), falsePsitiveBoxAcc = new LongAdder();
+	private static final LongAdder writeTokensCount = new LongAdder(), writeBoxCount = new LongAdder();
+	private static final LongAdder skipCount = new LongAdder(), readBoxCount = new LongAdder(), falsePositive = new LongAdder();
 	
 	private static final BloomFilter INSTANCE = new BloomFilter();
 
@@ -34,34 +35,30 @@ public final class BloomFilter {
 	}
 	
 	public String logSkipRatio() {
-		return String.format("True ratio: %d / %d = %.2f, False ratio: %d / %d = %.2f", skipBoxAcc.sum(), readBoxCount.sum(),
-				100 * skipBoxAcc.sum() / (double) readBoxCount.sum(),
-				falsePsitiveBoxAcc.sum(), readBoxCount.sum(),
-				100 * falsePsitiveBoxAcc.sum() / (double) readBoxCount.sum());
+		return String.format("True ratio: %d / %d = %.2f, False ratio: %d / %d = %.2f", skipCount.sum(), readBoxCount.sum(),
+				100 * skipCount.sum() / (double) readBoxCount.sum(),
+				falsePositive.sum(), readBoxCount.sum(),
+				100 * falsePositive.sum() / (double) readBoxCount.sum());
 	}
 
 	public static void incFalsePositive() {
-		falsePsitiveBoxAcc.increment();
-	}
-	
-	public void logInfo() {
-		log.info("Avg box's tokens: " + writeBoxAcc.sum() + "/" + writeBoxCount.sum());
-		log.info("Avg bloom bits: " + writeBoxBitAcc.sum() + "/" + writeBoxCount.sum());
+		falsePositive.increment();
 	}
 
-	private Set<String> extendTokens(Collection<String> tokens) {
-		Set<String> extendedTokens = new TreeSet<>();
+	private Set<String> extendTokens(Collection<String> tokens, boolean transliterate) {
+		Set<String> extendedTokens = new TreeSet<>(tokens);
 		for (String token : tokens) {
-			if (!Algorithms.isEmpty(token)) {
-				extendedTokens.add(token);
-				for (int endIndex = 1; endIndex <= token.length(); endIndex++) {
-					extendedTokens.add(token.substring(0, endIndex));
-				}
+			if (Algorithms.isEmpty(token))
+				continue;
+			for (int i = MIN_BLOOM_CONTINUATION_PREFIX_LENGTH; i < token.length(); i++) {
+				extendedTokens.add(token.substring(0, i));
+			}
+			if (transliterate) {
 				String transliteratedToken = Junidecode.unidecode(token);
 				if (!Algorithms.isEmpty(transliteratedToken) && !token.equals(transliteratedToken)) {
 					extendedTokens.add(transliteratedToken);
-					for (int endIndex = 1; endIndex <= transliteratedToken.length(); endIndex++) {
-						extendedTokens.add(transliteratedToken.substring(0, endIndex));
+					for (int i = MIN_BLOOM_CONTINUATION_PREFIX_LENGTH; i <= transliteratedToken.length(); i++) {
+						extendedTokens.add(transliteratedToken.substring(0, i));
 					}
 				}
 			}
@@ -74,16 +71,26 @@ public final class BloomFilter {
 			return null;
 		}
 
-		byte[] bloom = new byte[BOX_SIZE];
-		Collection<String> extTokens = extendTokens(tokens);
-		for (String token : extTokens) {
+		byte[] bloom = new byte[BLOOM_SIZE];
+		Collection<String> bloomTokens = extendTokens(tokens, true);
+		for (String token : bloomTokens) {
 			addToken(bloom, token);
 		}
-		writeBoxAcc.add(extTokens.size());
-		writeBoxBitAcc.add(bitCount(bloom));
+		writeTokensCount.add(bloomTokens.size());
 		writeBoxCount.increment();
 
 		return bloom;
+	}
+
+	public int countExactBits(Collection<String> tokens) {
+		if (tokens == null || tokens.isEmpty()) {
+			return 0;
+		}
+		byte[] bloom = new byte[BLOOM_SIZE];
+		for (String token : extendTokens(tokens, true)) {
+			addToken(bloom, token);
+		}
+		return (int) bitCount(bloom);
 	}
 
 	private long bitCount(byte[] bloom) {
@@ -181,18 +188,17 @@ public final class BloomFilter {
 				return true;
 			}
 		}
-		skipBoxAcc.increment();
+		skipCount.increment();
 		return false;
 	}
 
 	public static void resetStats() {
 		readBoxCount.reset();
-		falsePsitiveBoxAcc.reset();
-		skipBoxAcc.reset();
+		falsePositive.reset();
+		skipCount.reset();
 
-		writeBoxAcc.reset();
+		writeTokensCount.reset();
 		writeBoxCount.reset();
-		writeBoxBitAcc.reset();
 	}
 
 }
