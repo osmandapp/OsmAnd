@@ -54,7 +54,7 @@ import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingPara
 import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.router.RouteCalculationProgress.FastRoutingComplication;
+import net.osmand.router.FastRoutingState;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -158,7 +158,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	@Nullable
 	private Boolean lastIsFastRouting = null;
 	@Nullable
-	private FastRoutingComplication lastFastRoutingComplication = null;
+	private FastRoutingState.Status lastFastRoutingComplication = null;
 
 	private AddressLookupRequest startPointRequest;
 	private AddressLookupRequest targetPointRequest;
@@ -370,7 +370,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			return;
 		}
 		if (hasCurrentMissingMaps(app)) {
-			FastRoutingComplication complication = app.getRoutingHelper().getCurrentFastRoutingComplication();
+			FastRoutingState.Status complication = app.getRoutingHelper().getCurrentFastRoutingComplication();
 			if (complication != null && complication != lastFastRoutingComplication) {
 				lastFastRoutingComplication = complication;
 				updateOptionsButtons();

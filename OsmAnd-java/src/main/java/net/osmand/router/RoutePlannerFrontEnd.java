@@ -434,8 +434,6 @@ public class RoutePlannerFrontEnd {
 			}
 		}
 
-		ctx.calculationProgress.isSlowRoutingActive = true; // entry point for BRP-java and BRP-cpp
-
 		double maxDistance = MapUtils.getDistance(start, end);
 		if (!intermediatesEmpty) {
 			LatLon b = start;

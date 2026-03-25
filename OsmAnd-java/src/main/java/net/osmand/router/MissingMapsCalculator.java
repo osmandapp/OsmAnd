@@ -20,7 +20,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
-import net.osmand.router.RouteCalculationProgress.FastRoutingComplication;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
@@ -177,22 +176,20 @@ public class MissingMapsCalculator {
 
 		if (!result.hasMissingMaps()) {
 			ctx.calculationProgress.missingMapsCalculationResult = null;
-			ctx.calculationProgress.resetFastRoutingComplication();
-			ctx.calculationProgress.hasMissingMapsNow = false;
+			ctx.calculationProgress.resetFastRoutingStatus();
 			return false;
 		}
 
 		if (missingMapsAtStartOrEnd) {
-			ctx.calculationProgress.updateFastRoutingComplication(FastRoutingComplication.MISSING_MAPS_AT_START_OR_END);
+			ctx.calculationProgress.raiseFastRoutingStatus(FastRoutingState.Status.MISSING_MAPS_AT_START_OR_END);
 		} else if (mixedMapsAtStartOrEnd) {
-			ctx.calculationProgress.updateFastRoutingComplication(FastRoutingComplication.MIXED_MAPS_AT_START_OR_END);
+			ctx.calculationProgress.raiseFastRoutingStatus(FastRoutingState.Status.MIXED_MAPS_AT_START_OR_END);
 		} else if (missingMapsIntermediates) {
-			ctx.calculationProgress.updateFastRoutingComplication(FastRoutingComplication.MISSING_MAPS_INTERMEDIATES);
+			ctx.calculationProgress.raiseFastRoutingStatus(FastRoutingState.Status.MISSING_MAPS_INTERMEDIATES);
 		} else if (mixedMapsIntermediates) {
-			ctx.calculationProgress.updateFastRoutingComplication(FastRoutingComplication.MIXED_MAPS_INTERMEDIATES);
+			ctx.calculationProgress.raiseFastRoutingStatus(FastRoutingState.Status.MIXED_MAPS_INTERMEDIATES);
 		}
 
-		ctx.calculationProgress.hasMissingMapsNow = true;
 		ctx.calculationProgress.missingMapsCalculationResult = result.prepare(or);
 
 		LOG.info(String.format("Check missing maps %d points %.2f sec", pointsToCheck.size(),

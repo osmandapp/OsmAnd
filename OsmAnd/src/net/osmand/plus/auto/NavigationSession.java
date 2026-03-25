@@ -65,7 +65,7 @@ import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.router.RouteCalculationProgress.FastRoutingComplication;
+import net.osmand.router.FastRoutingState;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.shared.gpx.GpxFile;
@@ -129,7 +129,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private boolean carNavigationShouldBeActive; // it could set true before init navigationManager
 	private TripHelper tripHelper;
 
-	private FastRoutingComplication lastFastRoutingComplication = null;
+	private FastRoutingState.Status lastFastRoutingComplication = null;
 
 	NavigationSession() {
 		getLifecycle().addObserver(this);
@@ -803,13 +803,14 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private void catchCurrentMissingMaps() {
 		OsmandApplication app = getApp();
 		if (app != null && app.getRoutingHelper().hasCurrentMissingMaps()) {
-			FastRoutingComplication complication = app.getRoutingHelper().getCurrentFastRoutingComplication();
+			FastRoutingState.Status complication = app.getRoutingHelper().getCurrentFastRoutingComplication();
 			if (complication != null && complication != lastFastRoutingComplication) {
 				lastFastRoutingComplication = complication;
-				if (complication.isSuccess() || complication.isCancelled()) {
+				if (FastRoutingState.isSuccessStatus(complication)
+						|| FastRoutingState.isCancelledStatus(complication)) {
 					closeMissingMapsScreen();
 				} else {
-					showMissingMapsScreen(!complication.isFailed());
+					showMissingMapsScreen(!FastRoutingState.isFailedStatus(complication));
 				}
 			}
 		}
