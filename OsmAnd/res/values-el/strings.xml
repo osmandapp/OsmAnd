@@ -5917,4 +5917,8 @@
     <string name="subscription_free_trial_with_price">%1$s δωρεάν, μετά %2$s</string>
     <string name="subscription_then_price">μετά %1$s</string>
     <string name="shared_string_radians">Ακτίνια</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Επόμενη μέρα.</string>
+    <string name="astro_visibility_show_today">Εμφάνιση σημερινής ορατότητας</string>
+    <string name="astro_schedule_show_current_week">Εμφάνιση τρέχουσας εβδομάδας</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
 </resources>
