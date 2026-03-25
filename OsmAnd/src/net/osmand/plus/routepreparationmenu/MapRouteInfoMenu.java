@@ -377,9 +377,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				updateCards();
 			}
 		}
-		boolean fastRouting = app.getRoutingHelper().shouldDrawFastRoutingProgressBar();
-		if (lastIsFastRouting == null || fastRouting != lastIsFastRouting) {
-			lastIsFastRouting = fastRouting;
+		boolean isFastRouting = app.getRoutingHelper().shouldDrawFastRoutingProgressBar();
+		if (lastIsFastRouting == null || isFastRouting != lastIsFastRouting) {
+			lastIsFastRouting = isFastRouting;
 			updateOptionsButtons();
 			setupRouteCalculationProgressBar();
 		}
@@ -1824,13 +1824,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			OsmandApplication app = AndroidUtils.getApp(context);
 			RoutingHelper routingHelper = app.getRoutingHelper();
 
-			boolean fastRouting = routingHelper.shouldDrawFastRoutingProgressBar();
+			boolean isFastRouting = routingHelper.shouldDrawFastRoutingProgressBar();
 			boolean indeterminate = routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting();
 
-			int trackColorId = fastRouting
+			int trackColorId = isFastRouting
 					? (nightMode ? R.color.routing_fast_progress_track_dark : R.color.routing_fast_progress_track_light)
 					: (nightMode ? R.color.routing_standard_progress_track_dark : R.color.routing_standard_progress_track_light);
-			int fillColorId = fastRouting
+			int fillColorId = isFastRouting
 					? (nightMode ? R.color.routing_fast_progress_fill_dark : R.color.routing_fast_progress_fill_light)
 					: (nightMode ? R.color.routing_standard_progress_fill_dark : R.color.routing_standard_progress_fill_light);
 			int progressColor = ContextCompat.getColor(context, fillColorId);
