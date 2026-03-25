@@ -21,6 +21,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.RadiusRulerControlLayer;
 
 import java.util.Locale;
 
@@ -76,7 +77,7 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 
 	private void setupSliders() {
 		int azimuth = controller.getValidAzimuth();
-		tvAzimuth.setText(formatDegrees(azimuth));
+		tvAzimuth.setText(formatAzimuth(azimuth));
 		azimuthSlider.addOnChangeListener(azimuthSliderChangeListener);
 		azimuthSlider.setValueFrom(controller.getMinAzimuth());
 		azimuthSlider.setValueTo(controller.getMaxAzimuth());
@@ -84,7 +85,7 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		UiUtilities.setupSlider(azimuthSlider, nightMode, getAppModeColor(nightMode));
 
 		int altitude = controller.getValidAltitude();
-		tvAltitude.setText(formatDegrees(altitude));
+		tvAltitude.setText(formatAltitude(altitude));
 		altitudeSlider.addOnChangeListener(altitudeSliderChangeListener);
 		altitudeSlider.setValueFrom(controller.getMinAltitude());
 		altitudeSlider.setValueTo(controller.getMaxAltitude());
@@ -98,7 +99,7 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 			if (fromUser) {
 				int val = (int) value;
 				controller.setAzimuth(val);
-				tvAzimuth.setText(formatDegrees(val));
+				tvAzimuth.setText(formatAzimuth(val));
 				updateApplyButton(controller.hasChanges());
 				refreshMap();
 			}
@@ -111,7 +112,7 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 			if (fromUser) {
 				int val = (int) value;
 				controller.setAltitude(val);
-				tvAltitude.setText(formatDegrees(val));
+				tvAltitude.setText(formatAltitude(val));
 				updateApplyButton(controller.hasChanges());
 				refreshMap();
 			}
@@ -141,8 +142,14 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 	}
 
 	@NonNull
-	private String formatDegrees(int value) {
+	private String formatAltitude(int value) {
 		return String.format(Locale.getDefault(), "%d°", value);
+	}
+
+	@NonNull
+	private String formatAzimuth(int value) {
+		String cardinalDirection = RadiusRulerControlLayer.getCardinalDirectionForDegrees(value);
+		return String.format(Locale.getDefault(), "%d°, %s", value, cardinalDirection);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager manager) {
