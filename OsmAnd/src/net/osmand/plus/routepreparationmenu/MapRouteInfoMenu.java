@@ -42,7 +42,6 @@ import androidx.transition.TransitionListenerAdapter;
 import androidx.transition.TransitionManager;
 
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.data.*;
 import net.osmand.plus.routepreparationmenu.data.PointType;
@@ -116,15 +115,11 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import org.apache.commons.logging.Log;
-
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.*;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
-
-	private static final Log LOG = PlatformUtil.getLog(MapRouteInfoMenu.class);
 
 	private static final int BUTTON_ANIMATION_DELAY = 2000;
 	public static final int DEFAULT_MENU_STATE = 0;
