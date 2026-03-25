@@ -5299,7 +5299,7 @@
     <string name="delete_widget_description">Ce widget sera supprimé. Vous pourrez le restaurer plus tard dans Configurer l’écran.</string>
     <string name="delete_widget">Supprimer le widget ?</string>
     <string name="battery_saving_mode">Mode économie d\'énergie</string>
-    <string name="graph_axis">Axe du graphique</string>
+    <string name="graph_axis">Axes du graphique</string>
     <string name="y_axis_description">Sélectionnez jusqu\'à deux options d\'ordonnées.</string>
     <string name="app_mode_suv">SUV</string>
     <string name="shared_string_interface">Interface</string>
@@ -5811,7 +5811,7 @@
     <string name="delete_folder_description">Supprimer le dossier « %1$s » ?</string>
     <string name="show_spherical_map">Vue Globe terrestre</string>
     <string name="enable_3d_objects">Bâtiments 3D</string>
-    <string name="vehicle_metrics_chart_category">Caractéristiques techniques du véhicule</string>
+    <string name="vehicle_metrics_chart_category">Mesures du véhicule</string>
     <string name="lang_mi">Māori</string>
     <string name="buildings_3d_detail_level">Détail des bâtiments 3D</string>
     <string name="has_vehicle_metrics">À partir des données OBDII</string>
@@ -6029,7 +6029,7 @@
     <string name="subscription_free_trial_with_price">%1$s gratuit, puis %2$s</string>
     <string name="subscription_then_price">puis %1$s</string>
     <string name="astro_expand_your_universe_title">Augmentez votre Univers</string>
-    <string name="purchases_feature_desc_astronomy">Explorez le ciel nocturne grâce à une carte hors ligne et à un catalogue astronomique. Planifiez vos observations à l\'aide de graphiques de visibilité intelligents, de calendriers quotidiens et d\'un mode AR interactif.</string>
+    <string name="purchases_feature_desc_astronomy">Explorez le ciel nocturne grâce à une carte hors ligne et à un catalogue astronomique. Planifiez vos observations à l\'aide de graphiques de visibilité intelligents, d\'horaires quotidiens et d\'un mode AR interactif.</string>
     <string name="astro_expand_your_universe_description">Accédez à la base de données étendue comprenant des catalogues du ciel profond, des articles Wikipédia et le mode AR hors ligne.</string>
     <string name="astro_offline_knowledge_base_title">Base de connaissances hors ligne</string>
     <string name="astro_offline_knowledge_base_description">Téléchargez la base de données étendue pour accéder hors ligne aux articles de Wikipédia et aux catalogues du ciel profond.</string>
