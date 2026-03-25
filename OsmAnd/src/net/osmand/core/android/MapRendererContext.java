@@ -3,6 +3,7 @@ package net.osmand.core.android;
 import static net.osmand.IndexConstants.GEOTIFF_DIR;
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
 import static net.osmand.IndexConstants.OPENGL_SHADERS_CACHE_DIR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.BUILDINGS_3D_DEFAULT_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.FOG_DEFAULT_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.FOG_NIGHTMODE_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
@@ -531,12 +532,17 @@ public class MapRendererContext {
 				map3DObjectsProvider = null;
 				return;
 			}
-
 			SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 			if (srtmPlugin != null && srtmPlugin.ENABLE_3D_MAP_OBJECTS.get()) {
-				Buildings3DColorType buildings3DColorType = srtmPlugin.get3DBuildingsColorStyle();
-				int buildings3DCustomColor = srtmPlugin.getBuildings3dColor();
-				map3DObjectsProvider = new Map3DObjectsTiledProvider(mapPrimitivesProvider, mapPresentationEnvironment, buildings3DColorType == Buildings3DColorType.CUSTOM, NativeUtilities.createFColorRGB(buildings3DCustomColor));
+				Buildings3DColorType colorType = srtmPlugin.get3DBuildingsColorStyle();
+				boolean useCustomColor = colorType == Buildings3DColorType.CUSTOM;
+				int customColor = useCustomColor
+						? srtmPlugin.getBuildings3dCustomColor(nightMode)
+						: BUILDINGS_3D_DEFAULT_COLOR;
+				map3DObjectsProvider = new Map3DObjectsTiledProvider(
+						mapPrimitivesProvider, mapPresentationEnvironment,
+						useCustomColor, NativeUtilities.createFColorRGB(customColor)
+				);
 				mapRendererView.setMap3DObjectsProvider(map3DObjectsProvider);
 			} else {
 				mapRendererView.resetMap3DObjectsProvider();

@@ -101,7 +101,7 @@ class Buildings3DColorScreenController(
 			} else {
 				plugin.BUILDINGS_3D_CUSTOM_DAY_COLOR.get()
 			}
-			plugin.apply3DBuildingsColor(colorToRestore ?: SRTMPlugin.BUILDINGS_3D_DEFAULT_COLOR)
+			plugin.apply3DBuildingsCustomColor(isNightMap, colorToRestore ?: SRTMPlugin.BUILDINGS_3D_DEFAULT_COLOR)
 		}
 		activity.supportFragmentManager.popBackStack()
 		activity.dashboard.setDashboardVisibility(true, BUILDINGS_3D, false)
@@ -163,7 +163,7 @@ class Buildings3DColorScreenController(
 		if (paletteItem is PaletteItem.Solid) {
 			setSavedColor(paletteItem.colorInt, isNightMap)
 			loadSavedColors()
-			plugin.apply3DBuildingsColor(paletteItem.colorInt)
+			plugin.apply3DBuildingsCustomColor(isNightMap, paletteItem.colorInt)
 			externalListener?.onPaletteItemSelected(paletteItem)
 		}
 	}
