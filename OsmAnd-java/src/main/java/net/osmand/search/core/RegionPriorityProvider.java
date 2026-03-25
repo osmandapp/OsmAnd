@@ -1,5 +1,6 @@
 package net.osmand.search.core;
 
+import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -92,12 +93,19 @@ public class RegionPriorityProvider {
 
 
     private int calculatePriorityValue(BinaryMapIndexReader region) {
+        int lowPriority = BBOX_MAX / BBOX_STEP + 1;
+        if (region.getFile() != null) {
+            if (region.getFile().getName().contains(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT) || 
+                region.getFile().getName().contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
+                return lowPriority;
+            }
+        }
         for (int i = 0; i * BBOX_STEP <= BBOX_MAX; i++) {
             QuadRect rect = SearchPhrase.calculateBbox(i * BBOX_STEP + 50, searchLocation);
             if (region.containsPoiData((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom)) {
                 return i;
             }
         }
-        return BBOX_MAX / BBOX_STEP + 1;
+        return lowPriority;
     }
 }
