@@ -120,6 +120,8 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 
 		setupAppearance(contentContainer);
 		setupPerformance(contentContainer);
+
+		setupSunParameters(contentContainer);
 	}
 
 	private void setupAppearance(@NonNull ViewGroup container) {
@@ -159,6 +161,21 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 
 		setupDetailsLevelToggleButtons(performanceContainer.findViewById(R.id.details_lvl_container));
 		setupViewDistanceToggleButtons(performanceContainer.findViewById(R.id.view_distance_container));
+	}
+
+	private void setupSunParameters(@NonNull ViewGroup container) {
+		View sunContainer = container.findViewById(R.id.sun_container);
+		AndroidUtils.setBackgroundColor(sunContainer.getContext(), sunContainer, ColorUtilities.getListBgColorId(nightMode));
+
+		sunContainer.setOnClickListener((v) -> callMapActivity(mapActivity -> {
+			mapActivity.getDashboard().hideDashboard();
+			SunParametersController.showDialog(app, mapActivity.getSupportFragmentManager());
+		}));
+		setupSelectableBackground(sunContainer);
+
+		boolean visible = PluginsHelper.isDevelopment();
+		AndroidUiHelper.updateVisibility(container.findViewById(R.id.sun_divider), visible);
+		AndroidUiHelper.updateVisibility(container.findViewById(R.id.sun_parameters_container), visible);
 	}
 
 	private void setupDetailsLevelToggleButtons(@NonNull View view) {
