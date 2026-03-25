@@ -3,10 +3,12 @@ package net.osmand.shared.gpx.filters
 import net.osmand.shared.settings.enums.AltitudeMetrics
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.shared.settings.enums.SpeedConstants
+import net.osmand.shared.units.AngleUnits
 import net.osmand.shared.units.HeartRateUnits
 import net.osmand.shared.units.LengthUnits
 import net.osmand.shared.units.MeasurementUnit
 import net.osmand.shared.units.NoUnit
+import net.osmand.shared.units.PercentUnits
 import net.osmand.shared.units.PowerUnits
 import net.osmand.shared.units.RotationUnits
 import net.osmand.shared.units.SpeedUnits
@@ -24,6 +26,8 @@ enum class MeasureUnitType {
 	POWER,
 	TEMPERATURE,
 	BPM,
+	ANGLE,
+	PERCENT,
 	NONE;
 
 	fun getFilterUnitText(mc: MetricsConstants, am: AltitudeMetrics) = getUnit(mc, am).getSymbol()
@@ -44,6 +48,8 @@ enum class MeasureUnitType {
 			ROTATIONS -> RotationUnits.RPM
 			POWER -> PowerUnits.WATTS
 			BPM -> HeartRateUnits.BPM
+			ANGLE -> AngleUnits.DEGREES
+			PERCENT -> PercentUnits.PERCENT
 			else -> NoUnit
 		}
 	}
