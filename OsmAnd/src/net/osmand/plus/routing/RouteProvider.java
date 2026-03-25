@@ -302,6 +302,7 @@ public class RouteProvider {
 		OsmandSettings settings = params.ctx.getSettings();
 
 		RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS = !OsmandSettings.IGNORE_MISSING_MAPS;
+		RoutePlannerFrontEnd.CONTINUE_ON_MISSING_MAPS = !OsmandSettings.STOP_ON_MISSING_MAPS;
 
 		RoutingType routingType = settings.ROUTING_TYPE.getModeValue(params.mode);
 		if (routingType.isHHRouting()) {

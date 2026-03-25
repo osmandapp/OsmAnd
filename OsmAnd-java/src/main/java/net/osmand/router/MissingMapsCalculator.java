@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,6 +35,7 @@ public class MissingMapsCalculator {
 	private List<String> lastKeyNames ;
 
 	private static class Point {
+		boolean isStartEnd;
 		List<String> regions;
 		long[] hhEditions; // 0 means routing data present but no HH data, null means no data at all
 		TreeSet<Long> editionsUnique;
@@ -91,13 +91,16 @@ public class MissingMapsCalculator {
 				// skip intermediate points that are too close together
 				continue;
 			}
-			split(ctx, knownMaps, pointsToCheck, prev, end);
+			split(knownMaps, pointsToCheck, prev, end, i == 0);
 			prev = end;
 		}
 		if (end != null) {
-			addPoint(ctx, knownMaps, pointsToCheck, end);
+			addPoint(knownMaps, pointsToCheck, end, true);
 		}
-		
+
+		boolean mixedMapsAtStartOrEnd = false, missingMapsAtStartOrEnd = false;
+		boolean mixedMapsIntermediates = false, missingMapsIntermediates = false;
+
 		List<LatLon> points = CollectionUtils.asOneList(Collections.singletonList(start), targets);
 		MissingMapsCalculationResult result = new MissingMapsCalculationResult(ctx, points);
 		Set<Long> presentTimestamps = null;
@@ -105,6 +108,11 @@ public class MissingMapsCalculator {
 			if (p.hhEditions == null) {
 				for (String reg : p.regions) {
 					if (!isRoadOnlyMap(reg)) {
+						if (p.isStartEnd) {
+							missingMapsAtStartOrEnd = true;
+						} else {
+							missingMapsIntermediates = true;
+						}
 						result.addMissingMaps(reg);
 						break;
 					}
@@ -118,7 +126,6 @@ public class MissingMapsCalculator {
 			} else {
 				if (p.regions.size() > 0) {
 					result.addUsedMaps(p.regions.get(0));
-					
 				}
 			}
 		}
@@ -144,6 +151,11 @@ public class MissingMapsCalculator {
 				}
 				if (region != null) {
 					if (!fresh) {
+						if (p.isStartEnd) {
+							mixedMapsAtStartOrEnd = true;
+						} else {
+							mixedMapsIntermediates = true;
+						}
 						result.addMapToUpdate(region);
 					} else {
 						result.addUsedMaps(region);
@@ -162,8 +174,20 @@ public class MissingMapsCalculator {
 			}
 		}
 
-		if(!result.hasMissingMaps()) {
+		if (!result.hasMissingMaps()) {
+			ctx.calculationProgress.missingMapsCalculationResult = null;
+			ctx.calculationProgress.resetFastRoutingStatus();
 			return false;
+		}
+
+		if (missingMapsAtStartOrEnd) {
+			ctx.calculationProgress.raiseFastRoutingStatus(FastRoutingState.Status.MISSING_MAPS_AT_START_OR_END);
+		} else if (mixedMapsAtStartOrEnd) {
+			ctx.calculationProgress.raiseFastRoutingStatus(FastRoutingState.Status.MIXED_MAPS_AT_START_OR_END);
+		} else if (missingMapsIntermediates) {
+			ctx.calculationProgress.raiseFastRoutingStatus(FastRoutingState.Status.MISSING_MAPS_INTERMEDIATES);
+		} else if (mixedMapsIntermediates) {
+			ctx.calculationProgress.raiseFastRoutingStatus(FastRoutingState.Status.MIXED_MAPS_INTERMEDIATES);
 		}
 
 		ctx.calculationProgress.missingMapsCalculationResult = result.prepare(or);
@@ -185,7 +209,8 @@ public class MissingMapsCalculator {
 	}
 
 
-	private void addPoint(RoutingContext ctx, Map<String, RegisteredMap> knownMaps, List<Point> pointsToCheck, LatLon loc) throws IOException {
+	private void addPoint(Map<String, RegisteredMap> knownMaps,List<Point> pointsToCheck,
+						  LatLon loc, boolean isStartEnd) throws IOException {
 		List<BinaryMapDataObject> resList = or.getRegionsToDownload(loc.getLatitude(), loc.getLongitude());
 		boolean onlyJointMap = true;
 		List<String> regions = new ArrayList<String>();
@@ -203,16 +228,13 @@ public class MissingMapsCalculator {
 				}
 			}
 		}
-		Collections.sort(regions, new Comparator<String>() {
 
-			@Override
-			public int compare(String o1, String o2) {
-				return -Integer.compare(o1.length(), o2.length());
-			}
-		});
-		if ((pointsToCheck.size() == 0 || !regions.equals(lastKeyNames)) && !onlyJointMap) {
+		regions.sort((o1, o2) -> -Integer.compare(o1.length(), o2.length()));
+
+		if ((pointsToCheck.isEmpty() || isStartEnd || !regions.equals(lastKeyNames)) && !onlyJointMap) {
 			Point pnt = new Point();
 			lastKeyNames = regions;
+			pnt.isStartEnd = isStartEnd;
 			pnt.regions = new ArrayList<String>(regions);
 			boolean hasHHEdition = addMapEditions(knownMaps, pnt);
 			if (!hasHHEdition) {
@@ -250,15 +272,16 @@ public class MissingMapsCalculator {
 		return hhEditionPresent;
 	}
 
-	private void split(RoutingContext ctx, Map<String, RegisteredMap> knownMaps, List<Point> pointsToCheck, LatLon pnt, LatLon next) throws IOException {
+	private void split(Map<String, RegisteredMap> knownMaps, List<Point> pointsToCheck,
+					   LatLon pnt, LatLon next, boolean isStartEnd) throws IOException {
 		double dist = MapUtils.getDistance(pnt, next);
 		if (dist < DISTANCE_SPLIT) {
-			addPoint(ctx, knownMaps, pointsToCheck, pnt);
+			addPoint(knownMaps, pointsToCheck, pnt, isStartEnd);
 			// pointsToCheck.add(e); // add only start end is separate
 		} else {
 			LatLon mid = MapUtils.calculateMidPoint(pnt, next);
-			split(ctx, knownMaps, pointsToCheck, pnt, mid);
-			split(ctx, knownMaps, pointsToCheck, mid, next);
+			split(knownMaps, pointsToCheck, pnt, mid, isStartEnd);
+			split(knownMaps, pointsToCheck, mid, next, false);
 		}
 	}
 
