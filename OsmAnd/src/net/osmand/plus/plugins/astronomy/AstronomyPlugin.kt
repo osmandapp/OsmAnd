@@ -41,11 +41,11 @@ class AstronomyPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 	}
 
 	override fun getDescription(linksEnabled: Boolean): CharSequence {
-		return app.getString(R.string.astronomy_plugin_description)
+		return app.getString(R.string.purchases_feature_desc_astronomy)
 	}
 
 	override fun getLogoResourceId(): Int {
-		return R.drawable.ic_action_favorite
+		return R.drawable.ic_action_telescope
 	}
 
 	override fun getAssetResourceImage(): Drawable? {
@@ -64,7 +64,7 @@ class AstronomyPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 			helper.addItem(
 				ContextMenuItem(OsmAndCustomizationConstants.DRAWER_STAR_MAP_ID)
 					.setTitleId(R.string.star_map, mapActivity)
-					.setIcon(R.drawable.ic_action_favorite)
+					.setIcon(R.drawable.ic_action_telescope)
 					.setOrder(18)
 					.setListener { _: OnDataChangeUiAdapter?, _: View?, _: ContextMenuItem?, _: Boolean ->
 						app.logEvent("skymapOpen")

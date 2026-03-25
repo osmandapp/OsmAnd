@@ -12,7 +12,9 @@ import org.apache.commons.logging.Log;
 
 public final class BloomFilter {
 	
+	
 	public static final int VERSION = 0; // with 2026-04-01 version will be 1
+	public static final boolean PUBLISH = VERSION > 0;
 	
 	public static final int BLOOM_BITS = 512;
 	private static final int DEFAULT_HASHES = 5;

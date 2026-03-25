@@ -5839,4 +5839,10 @@
     <string name="panels_layout_wide">Amplada</string>
     <string name="panels_layout">Disposició dels panells</string>
     <string name="panels_layout_descr">Seleccioneu una disposició dels panells superior i inferior. Poden ser amples, abastant tota l\'amplada de la pantalla, o compactes, encaixant entre els panells laterals i els botons.</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="astro_schedule_show_current_week">Mostra la setmana actual</string>
+    <string name="astro_expand_your_universe_title">Expandiu el vostre univers</string>
+    <string name="astro_offline_knowledge_base_title">Base de coneixement fora de línia</string>
+    <string name="astro_schedule_next_day_note">⁺¹ L\'endemà.</string>
+    <string name="astro_visibility_show_today">Mostra la visibilitat d\'avui</string>
 </resources>

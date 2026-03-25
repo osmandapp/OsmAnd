@@ -28,7 +28,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.srtm.Buildings3DColorType;
+import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
@@ -521,7 +521,6 @@ public class MapRendererContext {
 			mapRendererView.addSymbolsProvider(providerType.symbolsSectionIndex, obfMapSymbolsProvider);
 		}
 		recreateHeightmapProvider();
-		updateVerticalExaggerationScale();
 		setMapBackgroundColor();
 	}
 
@@ -601,16 +600,18 @@ public class MapRendererContext {
 			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
 		}
+		if (plugin != null) {
+			elevationConfiguration.setZScaleFactor(plugin.getVerticalExaggerationScale());
+			elevationConfiguration.setHillshadeSunAngle(plugin.HILLSHADE_SUN_ANGLE.get());
+			elevationConfiguration.setHillshadeSunAzimuth(plugin.HILLSHADE_SUN_AZIMUTH.get());
+		}
 		mapRendererView.setElevationConfiguration(elevationConfiguration);
 	}
 
 	public void updateVerticalExaggerationScale() {
 		MapRendererView mapRendererView = this.mapRendererView;
-		if (mapRendererView == null) {
-			return;
-		}
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		if (plugin != null) {
+		if (mapRendererView != null && plugin != null) {
 			mapRendererView.setElevationScaleFactor(plugin.getVerticalExaggerationScale());
 		}
 	}
