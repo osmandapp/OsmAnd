@@ -521,7 +521,6 @@ public class MapRendererContext {
 			mapRendererView.addSymbolsProvider(providerType.symbolsSectionIndex, obfMapSymbolsProvider);
 		}
 		recreateHeightmapProvider();
-		updateVerticalExaggerationScale();
 		setMapBackgroundColor();
 	}
 
@@ -602,6 +601,7 @@ public class MapRendererContext {
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
 		}
 		if (plugin != null) {
+			elevationConfiguration.setZScaleFactor(plugin.getVerticalExaggerationScale());
 			elevationConfiguration.setHillshadeSunAngle(plugin.HILLSHADE_SUN_ANGLE.get());
 			elevationConfiguration.setHillshadeSunAzimuth(plugin.HILLSHADE_SUN_AZIMUTH.get());
 		}
@@ -610,11 +610,8 @@ public class MapRendererContext {
 
 	public void updateVerticalExaggerationScale() {
 		MapRendererView mapRendererView = this.mapRendererView;
-		if (mapRendererView == null) {
-			return;
-		}
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		if (plugin != null) {
+		if (mapRendererView != null && plugin != null) {
 			mapRendererView.setElevationScaleFactor(plugin.getVerticalExaggerationScale());
 		}
 	}

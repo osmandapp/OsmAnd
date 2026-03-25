@@ -192,7 +192,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.updateElevationConfiguration();
-			mapContext.updateVerticalExaggerationScale();
 		}
 	}
 
@@ -800,7 +799,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) {
 		mapRendererContext.updateElevationConfiguration();
 		mapRendererContext.recreateHeightmapProvider();
-		mapRendererContext.updateVerticalExaggerationScale();
 		MapRendererView rendererView = mapRendererContext.getMapRendererView();
 		if (rendererView != null) {
 			rendererView.set3DBuildingsAlpha(BUILDINGS_3D_ALPHA.get());
