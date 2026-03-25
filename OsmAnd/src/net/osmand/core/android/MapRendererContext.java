@@ -601,6 +601,10 @@ public class MapRendererContext {
 			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
 		}
+		if (plugin != null) {
+			elevationConfiguration.setHillshadeSunAngle(plugin.HILLSHADE_SUN_ANGLE.get());
+			elevationConfiguration.setHillshadeSunAzimuth(plugin.HILLSHADE_SUN_AZIMUTH.get());
+		}
 		mapRendererView.setElevationConfiguration(elevationConfiguration);
 	}
 

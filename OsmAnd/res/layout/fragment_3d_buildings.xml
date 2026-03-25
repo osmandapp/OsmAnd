@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:descendantFocusability="blocksDescendants"
 	android:orientation="vertical">
 
@@ -28,7 +29,7 @@
                     android:id="@+id/main_toggle"
                     layout="@layout/item_title_with_description_icon_switch" />
 
-            </FrameLayout>
+			</FrameLayout>
 
 			<include
 				android:id="@+id/title_divider"
@@ -65,6 +66,48 @@
 						layout="@layout/building_3d_performance_card" />
 
 				</FrameLayout>
+
+				<include
+					android:id="@+id/sun_divider"
+					layout="@layout/list_item_divider" />
+
+				<LinearLayout
+					android:id="@+id/sun_parameters_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/list_background_color"
+					android:minHeight="@dimen/bottom_sheet_medium_list_item_height"
+					android:orientation="horizontal">
+
+					<LinearLayout
+						android:id="@+id/sun_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:minHeight="@dimen/bottom_sheet_medium_list_item_height"
+						android:orientation="horizontal">
+
+						<androidx.appcompat.widget.AppCompatImageView
+							android:layout_width="@dimen/standard_icon_size"
+							android:layout_height="@dimen/standard_icon_size"
+							android:layout_marginStart="@dimen/content_padding"
+							android:layout_marginTop="@dimen/content_padding"
+							android:layout_marginBottom="@dimen/content_padding"
+							android:tint="?attr/default_icon_color"
+							app:srcCompat="@drawable/ic_action_sun" />
+
+						<net.osmand.plus.widgets.TextViewEx
+							style="@style/TitleStyle"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							android:layout_marginStart="@dimen/content_padding_double"
+							android:layout_weight="1"
+							android:text="@string/astro_name_sun"
+							android:textColor="?android:textColorPrimary" />
+
+					</LinearLayout>
+
+				</LinearLayout>
 
 				<include
 					android:id="@+id/download_container_bottom_divider"
