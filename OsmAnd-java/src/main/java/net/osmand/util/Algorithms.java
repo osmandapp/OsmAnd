@@ -119,6 +119,13 @@ public class Algorithms {
 		}
 		return sb.toString();
 	}
+	
+	public static String removeQuotes(String s) {
+		if (!s.contains("«") && !s.contains("»")) {
+			return s;
+		}
+		return s.replace("«", "").replace("»", "");
+	}
 
 	/**
 	 * Split string by words and convert to lowercase, use as delimiter all chars except letters and digits

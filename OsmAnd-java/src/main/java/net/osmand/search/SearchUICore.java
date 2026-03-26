@@ -376,26 +376,23 @@ public class SearchUICore {
 					List<SearchResult> sr = entry.getValue();
 					int indexToUpdate = entry.getKey();
 					SearchResult r = output.get(indexToUpdate);
-					sr.add(r);
-					sr.sort(new Comparator<SearchResult>() {
-						@Override
-						public int compare(SearchResult s1, SearchResult s2) {
-							SearchResult.SearchResultResource r1 = s1.getResourceType();
-							SearchResult.SearchResultResource r2 = s2.getResourceType();
-							if (r1.getWeight() != r2.getWeight()) {
-								return r1.getWeight() > r2.getWeight() ? -1 : 1;
-							}
-							if (s1.object instanceof Amenity am1 && am1.isRouteArticle() &&
-								s2.object instanceof Amenity am2 && am2.isRouteArticle()) {
-								String l1 = BaseDetailsObject.getLangForTravel(am1);
-								String l2 = BaseDetailsObject.getLangForTravel(am2);
-								if (!l1.equals(l2)) {
-									return l1.equals(lang) ? -1 : 1;
-								}
-							}
-							return 0;
-						}
-					});
+					sr.add(0, r);
+					sr.sort((s1, s2) -> {
+                        SearchResult.SearchResultResource r1 = s1.getResourceType();
+                        SearchResult.SearchResultResource r2 = s2.getResourceType();
+                        if (r1.getWeight() != r2.getWeight()) {
+                            return r1.getWeight() > r2.getWeight() ? -1 : 1;
+                        }
+                        if (s1.object instanceof Amenity am1 && am1.isRouteArticle() &&
+                            s2.object instanceof Amenity am2 && am2.isRouteArticle()) {
+                            String l1 = BaseDetailsObject.getLangForTravel(am1);
+                            String l2 = BaseDetailsObject.getLangForTravel(am2);
+                            if (!l1.equals(l2)) {
+                                return l1.equals(lang) ? -1 : 1;
+                            }
+                        }
+                        return 0;
+                    });
 					output.set(indexToUpdate, uniteData(sr));
 				}
 			}
@@ -1206,7 +1203,6 @@ public class SearchUICore {
 	private enum ResultCompareStep {
 		TOP_VISIBLE,
 		FOUND_WORD_COUNT, // more is better (top)
-		OBF_RESOURCE,
 		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
 		SEARCH_DISTANCE_IF_NOT_BY_NAME,
 		COMPARE_FIRST_NUMBER_IN_NAME,
@@ -1230,17 +1226,6 @@ public class SearchUICore {
 			case FOUND_WORD_COUNT: 
 				if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
 					return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
-				}
-				break;
-			case OBF_RESOURCE:
-				boolean fp1 = o1.isFullPhraseEqualLocaleName();
-				boolean fp2 = o2.isFullPhraseEqualLocaleName();
-				// sort order: DETAILED|BASEMAP, WIKIPEDIA, TRAVEL
-				int maxWeight = SearchResult.SearchResultResource.DETAILED.getWeight();
-				int weight1 = fp1 ? maxWeight : o1.getResourceType().getWeight();
-				int weight2 = fp2 ? maxWeight : o2.getResourceType().getWeight();
-				if (weight1 != weight2) {
-					return weight2 > weight1 ? 1 : -1;
 				}
 				break;
 			case UNKNOWN_PHRASE_MATCH_WEIGHT:
