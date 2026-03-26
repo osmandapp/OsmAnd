@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.google.android.material.appbar.AppBarLayout
@@ -38,6 +39,7 @@ import net.osmand.plus.plugins.astronomy.StarMapFragment
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTargetsCollection
+import net.osmand.plus.utils.InsetsUtils
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZonedDateTime
@@ -80,6 +82,10 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	private lateinit var saveTitle: TextView
 	private lateinit var saveIcon: ImageView
 
+	private lateinit var locationButton: View
+	private lateinit var locationTitle: TextView
+	private lateinit var locationIcon: ImageView
+
 	private lateinit var directionButton: View
 	private lateinit var directionTitle: TextView
 	private lateinit var directionIcon: ImageView
@@ -109,6 +115,9 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	private var tabSelectedListener: TabLayout.OnTabSelectedListener? = null
 	private var recyclerScrollListener: RecyclerView.OnScrollListener? = null
 	private var isSyncingTabSelection = false
+	private var isProgrammaticSectionScroll = false
+	private var pendingProgrammaticSectionTab: Int? = null
+	private var programmaticSectionScrollToken = 0
 
 	companion object {
 		val TAG: String = AstroContextMenuFragment::class.java.simpleName
@@ -284,6 +293,14 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			)
 			saveTitle.text = app.getString(R.string.shared_string_save)
 
+			locationIcon.setImageDrawable(
+				uiUtilities.getIcon(
+					R.drawable.ic_action_location_16,
+					ColorUtilities.getActiveIconColorId(nightMode)
+				)
+			)
+			locationTitle.text = app.getString(R.string.astro_locate)
+
 			directionIcon.setImageDrawable(
 				uiUtilities.getIcon(
 					if (obj.showDirection) {
@@ -312,6 +329,11 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			parent.viewModel.refreshSkyObjects()
 			parent.starView.invalidate()
 
+			bindButtons()
+		}
+
+		locationButton.setOnClickListener {
+			parent.starView.setSelectedObject(obj, center = true, animate = true)
 			bindButtons()
 		}
 
@@ -413,6 +435,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		setupBottomSheet()
+		applyLegacyInsetsFallbackIfNeeded()
 
 		appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBar, offset ->
 
@@ -462,10 +485,21 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		super.onApplyInsets(insets)
 		val systemInsets =
 			insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
-		systemTopInset = systemInsets.top
+		applyResolvedSystemInsets(systemInsets.top, systemInsets.bottom)
+	}
 
+	private fun applyLegacyInsetsFallbackIfNeeded() {
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			return
+		}
+		val systemInsets = InsetsUtils.getSysBars(requireContext(), lastRootInsets) ?: return
+		applyResolvedSystemInsets(systemInsets.top, systemInsets.bottom)
+	}
+
+	private fun applyResolvedSystemInsets(topInset: Int, bottomInset: Int) {
+		systemTopInset = topInset
 		updateTopInsetReveal()
-		bottomTabsContainer.updatePadding(bottom = tabsContainerBaseBottomPadding + systemInsets.bottom)
+		bottomTabsContainer.updatePadding(bottom = tabsContainerBaseBottomPadding + bottomInset)
 		updateRecyclerBottomPadding()
 		updateBottomSheetPeekHeightFromContent()
 	}
@@ -489,6 +523,10 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		saveButton = view.findViewById(R.id.save_button)
 		saveTitle = view.findViewById(R.id.save_title)
 		saveIcon = view.findViewById(R.id.save_icon)
+
+		locationButton = view.findViewById(R.id.locate_button)
+		locationTitle = view.findViewById(R.id.locate_title)
+		locationIcon = view.findViewById(R.id.locate_icon)
 
 		directionButton = view.findViewById(R.id.direction_button)
 		directionTitle = view.findViewById(R.id.direction_title)
@@ -636,7 +674,18 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		recyclerScrollListener?.let { recyclerView.removeOnScrollListener(it) }
 		recyclerScrollListener = object : RecyclerView.OnScrollListener() {
 			override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-				updateBottomTabSelectionByScroll()
+				syncBottomTabSelection()
+			}
+
+			override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+				if (!isProgrammaticSectionScroll) {
+					return
+				}
+				if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+					cancelProgrammaticSectionScroll(syncBottomTabSelection = true)
+				} else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+					finishProgrammaticSectionScroll(programmaticSectionScrollToken)
+				}
 			}
 		}
 		recyclerView.addOnScrollListener(recyclerScrollListener!!)
@@ -726,31 +775,31 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	}
 
 	private fun scrollToSelectedTab(tabPosition: Int) {
+		val targetPosition = resolveAdapterPositionForTab(tabPosition) ?: return
+		cancelProgrammaticSectionScroll(syncBottomTabSelection = false)
+		recyclerView.stopScroll()
+		val scrollToken = beginProgrammaticSectionScroll(tabPosition)
 		when (tabPosition) {
 			TAB_OVERVIEW -> {
-				appBarLayout.setExpanded(true, true)
-				scrollToAdapterPosition(0)
-			}
-
-			TAB_VISIBILITY -> {
-				collapseHeaderCard()
-				val visibilityPosition = adapter.getItemPosition(AstroContextCardKey.VISIBILITY)
-				if (visibilityPosition >= 0) {
-					scrollToAdapterPosition(visibilityPosition)
+				scrollToAdapterPositionExactly(targetPosition)
+				recyclerView.post {
+					if (!isCurrentProgrammaticSectionScroll(scrollToken)) {
+						return@post
+					}
+					appBarLayout.setExpanded(true, true)
+					finishProgrammaticSectionScroll(scrollToken)
 				}
 			}
 
+			TAB_VISIBILITY,
 			TAB_SCHEDULE -> {
 				collapseHeaderCard()
-				val schedulePosition =
-					adapter.getItemPosition(AstroContextCardKey.SCHEDULE).let { cardPosition ->
-						if (cardPosition >= 0) {
-							cardPosition
-						} else {
-							(adapter.itemCount - 1).coerceAtLeast(0)
-						}
+				recyclerView.post {
+					if (!isCurrentProgrammaticSectionScroll(scrollToken)) {
+						return@post
 					}
-				scrollToAdapterPosition(schedulePosition)
+					smoothScrollToAdapterPosition(targetPosition, scrollToken)
+				}
 			}
 		}
 	}
@@ -759,12 +808,106 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		appBarLayout.setExpanded(false, false)
 	}
 
-	private fun scrollToAdapterPosition(preferredPosition: Int) {
+	private fun resolveAdapterPositionForTab(tabPosition: Int): Int? {
+		if (!::adapter.isInitialized || adapter.itemCount == 0) {
+			return null
+		}
+		return when (tabPosition) {
+			TAB_OVERVIEW -> 0
+			TAB_VISIBILITY -> adapter.getItemPosition(AstroContextCardKey.VISIBILITY).takeIf { it >= 0 }
+			TAB_SCHEDULE -> {
+				adapter.getItemPosition(AstroContextCardKey.SCHEDULE).let { cardPosition ->
+					if (cardPosition >= 0) {
+						cardPosition
+					} else {
+						(adapter.itemCount - 1).coerceAtLeast(0)
+					}
+				}
+			}
+
+			else -> null
+		}
+	}
+
+	private fun beginProgrammaticSectionScroll(tabPosition: Int): Int {
+		programmaticSectionScrollToken += 1
+		isProgrammaticSectionScroll = true
+		pendingProgrammaticSectionTab = tabPosition
+		selectBottomTabWithoutScroll(tabPosition)
+		return programmaticSectionScrollToken
+	}
+
+	private fun cancelProgrammaticSectionScroll(syncBottomTabSelection: Boolean) {
+		if (!isProgrammaticSectionScroll) {
+			return
+		}
+		programmaticSectionScrollToken += 1
+		isProgrammaticSectionScroll = false
+		pendingProgrammaticSectionTab = null
+		if (syncBottomTabSelection) {
+			syncBottomTabSelection()
+		}
+	}
+
+	private fun isCurrentProgrammaticSectionScroll(scrollToken: Int): Boolean {
+		return isProgrammaticSectionScroll && programmaticSectionScrollToken == scrollToken
+	}
+
+	private fun smoothScrollToAdapterPosition(preferredPosition: Int, scrollToken: Int) {
+		if (!isCurrentProgrammaticSectionScroll(scrollToken) || !::adapter.isInitialized || adapter.itemCount == 0) {
+			return
+		}
+		val layoutManager = recyclerView.layoutManager as? LinearLayoutManager ?: return
+		val position = preferredPosition.coerceIn(0, adapter.itemCount - 1)
+		val targetView = layoutManager.findViewByPosition(position)
+		if (targetView != null) {
+			val scrollDelta = layoutManager.getDecoratedTop(targetView) - recyclerView.paddingTop
+			if (scrollDelta == 0) {
+				recyclerView.post {
+					finishProgrammaticSectionScroll(scrollToken)
+				}
+			} else {
+				recyclerView.smoothScrollBy(0, scrollDelta)
+			}
+			return
+		}
+		val smoothScroller = object : LinearSmoothScroller(recyclerView.context) {
+			override fun getVerticalSnapPreference(): Int = SNAP_TO_START
+		}
+		smoothScroller.targetPosition = position
+		layoutManager.startSmoothScroll(smoothScroller)
+	}
+
+	private fun scrollToAdapterPositionExactly(preferredPosition: Int) {
 		if (!::adapter.isInitialized || adapter.itemCount == 0) {
 			return
 		}
+		val layoutManager = recyclerView.layoutManager as? LinearLayoutManager ?: return
 		val position = preferredPosition.coerceIn(0, adapter.itemCount - 1)
-		recyclerView.smoothScrollToPosition(position)
+		layoutManager.scrollToPositionWithOffset(position, 0)
+	}
+
+	private fun finishProgrammaticSectionScroll(scrollToken: Int) {
+		if (!isCurrentProgrammaticSectionScroll(scrollToken)) {
+			return
+		}
+		recyclerView.post {
+			if (!isCurrentProgrammaticSectionScroll(scrollToken)) {
+				return@post
+			}
+			isProgrammaticSectionScroll = false
+			pendingProgrammaticSectionTab = null
+			syncBottomTabSelection()
+		}
+	}
+
+	private fun syncBottomTabSelection() {
+		val pendingTabPosition = pendingProgrammaticSectionTab
+		if (isProgrammaticSectionScroll && pendingTabPosition != null) {
+			selectBottomTabWithoutScroll(pendingTabPosition)
+		} else {
+			updateBottomTabSelectionByScroll()
+		}
 	}
 
 	private fun updateBottomTabSelectionByScroll() {
@@ -777,26 +920,12 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		}
 		val schedulePosition = adapter.getItemPosition(AstroContextCardKey.SCHEDULE)
 		val layoutManager = recyclerView.layoutManager as? LinearLayoutManager ?: return
-		val visibilityView = layoutManager.findViewByPosition(visibilityPosition)
-		val scheduleView =
-			if (schedulePosition >= 0) layoutManager.findViewByPosition(schedulePosition) else null
-		val viewportTop = recyclerView.paddingTop
-		val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
-		val topBoundaryY = viewportTop
-
-		val visibilityReached = if (visibilityView != null) {
-			visibilityView.top <= topBoundaryY
-		} else {
-			firstVisiblePosition >= visibilityPosition
-		}
-		val scheduleReached = if (schedulePosition >= 0) {
-			if (scheduleView != null) {
-				scheduleView.top <= topBoundaryY
-			} else {
-				firstVisiblePosition >= schedulePosition
-			}
-		} else {
-			false
+		val anchorY = getSectionSelectionAnchorY()
+		val visibilityReached = hasCardReachedAnchor(layoutManager, visibilityPosition, anchorY)
+		val scheduleReached = when {
+			schedulePosition < 0 -> false
+			!recyclerView.canScrollVertically(1) && isCardVisible(layoutManager, schedulePosition) -> true
+			else -> hasCardReachedAnchor(layoutManager, schedulePosition, anchorY)
 		}
 
 		val targetTab = when {
@@ -805,6 +934,44 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			else -> TAB_OVERVIEW
 		}
 		selectBottomTabWithoutScroll(targetTab)
+	}
+
+	private fun getSectionSelectionAnchorY(): Int {
+		val visibleHeight = (recyclerView.height - recyclerView.paddingTop - recyclerView.paddingBottom)
+			.coerceAtLeast(0)
+		return recyclerView.paddingTop + visibleHeight / 2
+	}
+
+	private fun hasCardReachedAnchor(
+		layoutManager: LinearLayoutManager,
+		position: Int,
+		anchorY: Int
+	): Boolean {
+		if (position < 0) {
+			return false
+		}
+		val targetView = layoutManager.findViewByPosition(position)
+		return if (targetView != null) {
+			layoutManager.getDecoratedTop(targetView) <= anchorY
+		} else {
+			layoutManager.findFirstVisibleItemPosition() >= position
+		}
+	}
+
+	private fun isCardVisible(layoutManager: LinearLayoutManager, position: Int): Boolean {
+		if (position < 0) {
+			return false
+		}
+		val targetView = layoutManager.findViewByPosition(position)
+		if (targetView != null) {
+			return layoutManager.getDecoratedBottom(targetView) > recyclerView.paddingTop &&
+				layoutManager.getDecoratedTop(targetView) < recyclerView.height - recyclerView.paddingBottom
+		}
+		val firstVisible = layoutManager.findFirstVisibleItemPosition()
+		val lastVisible = layoutManager.findLastVisibleItemPosition()
+		return firstVisible != RecyclerView.NO_POSITION &&
+			lastVisible != RecyclerView.NO_POSITION &&
+			position in firstVisible..lastVisible
 	}
 
 	private fun selectBottomTabWithoutScroll(tabPosition: Int) {
@@ -1014,6 +1181,9 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		tabSelectedListener = null
 		recyclerScrollListener = null
 		isSyncingTabSelection = false
+		isProgrammaticSectionScroll = false
+		pendingProgrammaticSectionTab = null
+		programmaticSectionScrollToken += 1
 		bottomSheetCallback?.let { callback ->
 			bottomSheetBehavior?.removeBottomSheetCallback(callback)
 		}
@@ -1078,11 +1248,11 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			scheduleItem = scheduleController.buildItem()
 		)
 		if (adapter.currentList == items) {
-			updateBottomTabSelectionByScroll()
+			syncBottomTabSelection()
 			return
 		}
 		adapter.submitItems(items) {
-			updateBottomTabSelectionByScroll()
+			syncBottomTabSelection()
 		}
 	}
 
