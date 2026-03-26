@@ -164,7 +164,7 @@ data class AstroScheduleDayItem(
 	val dayLabel: String,
 	val riseTime: String?,
 	val setTime: String?,
-	val setNextDay: Boolean,
+	val setDayOffset: Int,
 	val graph: AstroScheduleDayGraphSnapshot
 )
 
