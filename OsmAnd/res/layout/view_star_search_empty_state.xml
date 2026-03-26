@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/list_background_color"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingTop="@dimen/content_padding_large"
@@ -38,13 +39,13 @@
         android:textColor="?android:textColorSecondary"
         android:textSize="@dimen/default_desc_text_size" />
 
-    <com.google.android.material.button.MaterialButton
+    <net.osmand.plus.widgets.dialogbutton.DialogButton
         android:id="@+id/empty_state_reset_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/content_padding_small_half"
-        android:minHeight="@dimen/context_menu_buttons_bottom_height"
-        android:text="@string/shared_string_reset"
-        android:textAllCaps="false" />
+        android:layout_height="@dimen/context_menu_buttons_bottom_height"
+        app:dialogButtonHeight="36dp"
+        app:dialogButtonTitle="@string/shared_string_reset"
+        app:dialogButtonTopMargin="@dimen/content_padding_small_half"
+        app:dialogButtonType="secondary" />
 
 </LinearLayout>
