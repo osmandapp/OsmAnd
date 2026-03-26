@@ -290,38 +290,43 @@ public class SearchUICore {
 			}
 		}
 
-		private void copyData(SearchResult unique, SearchResult iterated) {
+		private SearchResult uniteData(List<SearchResult> list) {
+			SearchResult unique = list.remove(0);
 			BaseDetailsObject base = new BaseDetailsObject(unique.object, phrase.getSettings().getLang());
-			base.addObject(iterated.object);
+			for (SearchResult iterated : list) {
+				base.addObject(iterated.object);
 
-			unique.object = base.getSyntheticAmenity();
-			if (iterated.otherNames != null) {
-				if (!iterated.localeName.equals(unique.localeName)) {
-					iterated.otherNames.add(iterated.localeName);
-				}
-				if (unique.otherNames == null)
-					unique.otherNames = new ArrayList<>();
-				for (String name : iterated.otherNames) {
-					if (!unique.otherNames.contains(name)) {
-						unique.otherNames.add(name);
+				unique.object = base.getSyntheticAmenity();
+				if (iterated.otherNames != null) {
+					if (!iterated.localeName.equals(unique.localeName)) {
+						iterated.otherNames.add(iterated.localeName);
+					}
+					if (unique.otherNames == null)
+						unique.otherNames = new ArrayList<>();
+					for (String name : iterated.otherNames) {
+						if (!unique.otherNames.contains(name)) {
+							unique.otherNames.add(name);
+						}
 					}
 				}
-			}
-			if (iterated.getOtherWordsMatch() != null) {
-				if (unique.getOtherWordsMatch() == null) {
-					unique.setOtherWordsMatch(new TreeSet<>());
+				if (iterated.getOtherWordsMatch() != null) {
+					if (unique.getOtherWordsMatch() == null) {
+						unique.setOtherWordsMatch(new TreeSet<>());
+					}
+					unique.getOtherWordsMatch().addAll(iterated.getOtherWordsMatch());
 				}
-				unique.getOtherWordsMatch().addAll(iterated.getOtherWordsMatch());
+				if (iterated.getUnknownPhraseMatchWeight() > unique.getUnknownPhraseMatchWeight()) {
+					unique.setUnknownPhraseMatchWeight(iterated.getUnknownPhraseMatchWeight());
+				}
 			}
-			if (iterated.getUnknownPhraseMatchWeight() > unique.getUnknownPhraseMatchWeight()) {
-				unique.setUnknownPhraseMatchWeight(iterated.getUnknownPhraseMatchWeight());
-			}
+			return unique;
 		}
 
 		private void uniteSearchResultsByOsmIdOrWikidata(List<SearchResult> input) {
 			List<SearchResult> output = new ArrayList<>();
 			Map<Long, Integer> osmIdMap = new HashMap<>();
 			Map<String, Integer> wikidataMap = new HashMap<>();
+			Map<Integer, List<SearchResult>> copyDataMap = new HashMap<>();
 			for (SearchResult sr : input) {
 				if (sr.object instanceof Amenity that) {
 					Long osmId = that.getOsmId();
@@ -351,7 +356,8 @@ public class SearchUICore {
 						output.add(sr);
 						indexToUpdate = output.size() - 1;
 					} else {
-						copyData(output.get(indexToUpdate), sr);
+						copyDataMap.computeIfAbsent(indexToUpdate, k -> new ArrayList<>());
+						copyDataMap.get(indexToUpdate).add(sr);
 					}
 
 					if (osmId != null) {
@@ -362,6 +368,35 @@ public class SearchUICore {
 					}
 				} else {
 					output.add(sr);
+				}
+			}
+			if (!copyDataMap.isEmpty()) {
+				String lang = phrase.getSettings().getLang();
+				for (Map.Entry<Integer, List<SearchResult>> entry : copyDataMap.entrySet()) {
+					List<SearchResult> sr = entry.getValue();
+					int indexToUpdate = entry.getKey();
+					SearchResult r = output.get(indexToUpdate);
+					sr.add(r);
+					sr.sort(new Comparator<SearchResult>() {
+						@Override
+						public int compare(SearchResult s1, SearchResult s2) {
+							SearchResult.SearchResultResource r1 = s1.getResourceType();
+							SearchResult.SearchResultResource r2 = s2.getResourceType();
+							if (r1.getWeight() != r2.getWeight()) {
+								return r1.getWeight() > r2.getWeight() ? -1 : 1;
+							}
+							if (s1.object instanceof Amenity am1 && am1.isRouteArticle() &&
+								s2.object instanceof Amenity am2 && am2.isRouteArticle()) {
+								String l1 = BaseDetailsObject.getLangForTravel(am1);
+								String l2 = BaseDetailsObject.getLangForTravel(am2);
+								if (!l1.equals(l2)) {
+									return l1.equals(lang) ? -1 : 1;
+								}
+							}
+							return 0;
+						}
+					});
+					output.set(indexToUpdate, uniteData(sr));
 				}
 			}
 			if (input.size() != output.size()) {
