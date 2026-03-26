@@ -10,6 +10,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -97,7 +98,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	public final CommonPreference<Float> BUILDINGS_3D_ALPHA;
 	public final CommonPreference<Integer> BUILDINGS_3D_VIEW_DISTANCE;
 	public final CommonPreference<Integer> BUILDINGS_3D_COLOR_STYLE;
-	public final CommonPreference<String> BUILDINGS_3D_COLOR;
 	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_NIGHT_COLOR;
 	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_DAY_COLOR;
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM;
@@ -134,7 +134,6 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		BUILDINGS_3D_DETAIL_LEVEL = settings.getCustomRenderBooleanProperty("show3DbuildingParts");
 		BUILDINGS_3D_ENABLE_COLORING = settings.getCustomRenderBooleanProperty("useDefaultBuildingColor");
-		BUILDINGS_3D_COLOR = settings.getCustomRenderProperty("base3DBuildingsColor");
 
 		TERRAIN = registerBooleanPreference("terrain_layer", true).makeProfile();
 		TerrainMode[] tms = TerrainMode.values(app);
@@ -840,10 +839,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	public void apply3DBuildingsColorStyle(Buildings3DColorType style) {
 		BUILDINGS_3D_ENABLE_COLORING.set(false);
 		BUILDINGS_3D_COLOR_STYLE.set(style.getId());
-		if (style == Buildings3DColorType.CUSTOM) {
-			boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.MAP);
-			apply3DBuildingsColor(nightMode ? BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get() : BUILDINGS_3D_CUSTOM_DAY_COLOR.get());
-		}
 		updateMapPresentationEnvironment();
 	}
 
@@ -853,20 +848,19 @@ public class SRTMPlugin extends OsmandPlugin {
 		return Buildings3DColorType.Companion.getById(styleId);
 	}
 
-	public void apply3DBuildingsColor(int color) {
-		BUILDINGS_3D_COLOR.set(Algorithms.colorToString(color));
+	public void apply3DBuildingsCustomColor(boolean nightMode, @ColorInt int color) {
+		if (nightMode) {
+			BUILDINGS_3D_CUSTOM_NIGHT_COLOR.set(color);
+		} else {
+			BUILDINGS_3D_CUSTOM_DAY_COLOR.set(color);
+		}
 		updateMapPresentationEnvironment();
 	}
 
-	public int getBuildings3dColor() {
-		String color = BUILDINGS_3D_COLOR.get();
-		if(Algorithms.isEmpty(color)) {
-			return 0;
-		}
-		if(!color.startsWith("#")) {
-			color = String.format("#%s", color);
-		}
-		return Algorithms.parseColor(color);
+	public int getBuildings3dCustomColor(boolean nightMode) {
+		return nightMode
+				? BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get()
+				: BUILDINGS_3D_CUSTOM_DAY_COLOR.get();
 	}
 
 	private void updateMapPresentationEnvironment() {
@@ -875,5 +869,4 @@ public class SRTMPlugin extends OsmandPlugin {
 			updateMapPresentationEnvironment(mapRenderer);
 		}
 	}
-
 }
