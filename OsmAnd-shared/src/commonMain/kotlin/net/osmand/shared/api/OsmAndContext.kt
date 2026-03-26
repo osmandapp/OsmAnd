@@ -27,7 +27,7 @@ interface OsmAndContext {
 	fun getMetricSystem(): MetricsConstants?
 	fun getAltitudeMetric(): AltitudeMetrics?
 	fun getAngularSystem(): AngularConstants?
-	fun getTemperatureUnits(): TemperatureUnits
+	fun getTemperatureUnits(): TemperatureUnits?
 
 	fun isGpxFileVisible(path: String): Boolean
 	fun getSelectedFileByPath(path: String): GpxFile?

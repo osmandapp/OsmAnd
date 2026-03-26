@@ -13,11 +13,13 @@ import net.osmand.shared.units.PercentUnits
 import net.osmand.shared.units.PowerUnits
 import net.osmand.shared.units.RotationUnits
 import net.osmand.shared.units.SpeedUnits
+import net.osmand.shared.units.TemperatureUnits
 import net.osmand.shared.units.TimeUnits
 import net.osmand.shared.util.PlatformUtil
 
 enum class MeasureUnitType {
 	TIME_DURATION,
+	DATE,
 	SPEED,
 	ALTITUDE,
 	DISTANCE,
@@ -37,20 +39,21 @@ enum class MeasureUnitType {
 		mc: MetricsConstants? = PlatformUtil.getOsmAndContext().getMetricSystem(),
 		am: AltitudeMetrics? = PlatformUtil.getOsmAndContext().getAltitudeMetric(),
 		sc: SpeedConstants? = PlatformUtil.getOsmAndContext().getSpeedSystem(),
-		ac: AngularConstants? = PlatformUtil.getOsmAndContext().getAngularSystem()
+		ac: AngularConstants? = PlatformUtil.getOsmAndContext().getAngularSystem(),
+		tu: TemperatureUnits? = PlatformUtil.getOsmAndContext().getTemperatureUnits()
 	): MeasurementUnit<*> {
 		return when (this) {
 			DISTANCE -> mc?.getDistanceUnit() ?: LengthUnits.METERS
 			ALTITUDE -> am?.getUnits() ?: LengthUnits.METERS
 			SPEED -> sc?.toUnits() ?: mc?.getSpeedUnit() ?: SpeedUnits.KILOMETERS_PER_HOUR
-			TEMPERATURE -> PlatformUtil.getOsmAndContext().getTemperatureUnits()
+			TEMPERATURE -> tu ?: TemperatureUnits.CELSIUS
 			TIME_DURATION -> TimeUnits.MINUTES
 			ROTATIONS -> RotationUnits.RPM
 			POWER -> PowerUnits.WATTS
 			BPM -> HeartRateUnits.BPM
 			ANGLE -> ac?.toUnit() ?: AngleUnits.DEGREES
 			PERCENT -> PercentUnits.PERCENT
-			NONE -> NoUnit
+			else -> NoUnit
 		}
 	}
 }
