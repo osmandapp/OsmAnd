@@ -39,6 +39,7 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 
 	public final TextView titleTv;
 	public final TextView addressTv;
+	public final TextView distanceToCity;
 	public final View addressDotDivider;
 	public final TextView type;
 	public final ImageView icon;
@@ -55,6 +56,7 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 		this.locationViewCache = locationViewCache;
 
 		titleTv = view.findViewById(R.id.item_title);
+		distanceToCity = view.findViewById(R.id.distance_to_city);
 		addressTv = view.findViewById(R.id.address);
 		addressDotDivider = view.findViewById(R.id.address_dot_divider);
 		type = view.findViewById(R.id.item_type);
@@ -72,6 +74,8 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 		MapObject mapObject = (MapObject) item.getSearchResult().object;
 		String addressText = item.getAddress();
 		String typeName = item.getTypeName();
+		AndroidUiHelper.updateVisibility(distanceToCity, mapObject instanceof City &&
+				((City) mapObject).getType() == City.CityType.VILLAGE);
 
 		if (mapObject instanceof City city) {
 			BinaryMapIndexReader mapReaderResource = null;
@@ -94,6 +98,14 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 				case POSTCODE -> app.getString(R.string.postcode);
 				default -> app.getString(R.string.city_type_city);
 			};
+			if (city.getType() == City.CityType.VILLAGE) {
+				String distanceToCityStr = QuickSearchListItem.getDistanceToCity(app, item.getSearchResult());
+				if (distanceToCityStr != null) {
+					distanceToCity.setText(distanceToCityStr);
+				} else {
+					AndroidUiHelper.updateVisibility(distanceToCity, false);
+				}
+			}
 		} else if (mapObject instanceof Street street) {
 			if (street.getNamesMap(false).containsKey(OLD_NAME_TAG)) {
 				title = String.format("%s (%s)", title, street.getName(OLD_NAME_TAG));
