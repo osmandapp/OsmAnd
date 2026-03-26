@@ -6037,4 +6037,8 @@
     <string name="astro_visibility_show_today">Afficher la visibilité d\'aujourd\'hui</string>
     <string name="astro_schedule_show_current_week">Afficher la semaine en cours</string>
     <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="release_5_3">• Prise en charge des bâtiments en 3D ajoutée\n\n • Affichage de la carte en vue sphérique\n\n • Module d\'extension d\'astronomie avec carte nocturne et base de données des étoiles\n\n • Nouveaux modes de couleur pour le compteur de vitesse : tolérance et excès de vitesse\n\n • Dispositions distinctes des widgets pour les modes paysage et portrait\n\n • Widgets d\'enregistrement de trajet : vitesse de déplacement et vitesse moyenne\n\n • Widget de tension de l\'adaptateur pour les données du véhicule\n\n • Données du véhicule dans l\'analyseur de parcours\n\n • Organisation automatique des parcours par année, longueur, activité et plus encore\n\n • Éditeur de palette pour la visualisation du terrain et des parcours\n\n • Algorithmes de recherche améliorés et interface utilisateur actualisée\n\n • Profils d\'altitude corrigés pour les itinéraires\n\n • Favoris : nouvelles options de tri et interface utilisateur actualisée\n\n • Partage de lien vers n\'importe quel point d\'intérêt\n\n • Aperçu des points de cheminement sans fermer la liste\n\n • Paramètre de largeur du vélo pour éviter les routes étroites\n\n • Descriptions des photos provenant de Wikimedia</string>
+    <string name="shared_string_clear_filters">Effacer les filtres</string>
+    <string name="astro_sort_newest_first">Les plus récents en premier</string>
+    <string name="astro_sort_oldest_first">Les plus anciens en premier</string>
 </resources>
