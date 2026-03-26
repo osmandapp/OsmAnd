@@ -10,7 +10,25 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="release_5_3">
+        • 3D Buildings support added\n\n
+        • Spherical map view\n\n
+        • Astronomy plugin with night map and star database\n\n
+        • New color modes for Speedometer: tolerance and speeding\n\n
+        • Separate widget layouts for Landscape and Portrait\n\n
+        • Trip recording widgets: Moving speed and Average speed\n\n
+        • Adapter voltage widget for Vehicle Metrics\n\n
+        • Vehicle metrics data in Track Analyzer\n\n
+        • Auto-organize tracks by year, length, activity &amp; more\n\n
+        • Palette editor for Terrain and Track visualization\n\n
+        • Improved search algorithms &amp; refreshed UI\n\n
+        • Elevation profiles fixed for Routes\n\n
+        • Favorites: new sorting options and UI refresh\n\n
+        • Share link to any POI\n\n
+        • Waypoint preview without closing the list\n\n
+        • Bicycle width parameter to avoid narrow roads\n\n
+        • Photo descriptions from Wikimedia\n\n
+    </string>
 	<string name="purchases_feature_desc_astronomy">Explore the night sky with an offline map and celestial catalog. Plan observations using smart visibility graphs, daily schedules, and an interactive AR mode.</string>
 	<string name="shared_string_clear_filters">Clear filters</string>
 	<string name="astro_sort_newest_first">Newest first</string>
