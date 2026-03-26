@@ -200,6 +200,20 @@ public class QuickSearchListItem {
 		return itemType;
 	}
 
+	@Nullable
+	public static String getDistanceToCity(@NonNull OsmandApplication app, @Nullable SearchResult searchResult) {
+		if (searchResult != null && searchResult.objectType == ObjectType.VILLAGE) {
+			if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
+				if (searchResult.distRelatedObjectName > 0) {
+					return OsmAndFormatter.getFormattedDistance((float) searchResult.distRelatedObjectName, app)
+							+ " " + app.getString(R.string.shared_string_from) + " "
+							+ searchResult.localeRelatedObjectName;
+				}
+			}
+		}
+		return null;
+	}
+
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {
 		switch (searchResult.objectType) {
 			case CITY:

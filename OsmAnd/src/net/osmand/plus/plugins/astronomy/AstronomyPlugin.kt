@@ -8,8 +8,10 @@ import net.osmand.aidlapi.OsmAndCustomizationConstants
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.chooseplan.OsmAndFeature
 import net.osmand.plus.download.DownloadActivityType
 import net.osmand.plus.download.IndexItem
+import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.plugins.OsmandPlugin
 import net.osmand.plus.plugins.astronomy.search.StarMapRecentChip
 import net.osmand.plus.settings.backend.preferences.CommonPreference
@@ -54,6 +56,18 @@ class AstronomyPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 
 	override fun init(app: OsmandApplication, activity: Activity?): Boolean {
 		return true
+	}
+
+	override fun isPaid(): Boolean {
+		return true
+	}
+
+	override fun isLocked(): Boolean {
+		return !InAppPurchaseUtils.isAstronomyAvailable(app)
+	}
+
+	override fun getOsmAndFeature(): OsmAndFeature {
+		return OsmAndFeature.ASTRONOMY
 	}
 
 	private fun getSettingsPref(): CommonPreference<String> =
