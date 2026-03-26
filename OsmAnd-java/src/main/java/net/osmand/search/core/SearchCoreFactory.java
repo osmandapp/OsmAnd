@@ -829,9 +829,6 @@ public class SearchCoreFactory {
 								phrase.getSettings().isTransliterate());
 					}
 					if (!nm.matches(sr.localeName) && !nm.matches(sr.otherNames)) {
-						if (object.isRoutePoint()) {
-							return false;
-						}
 						for(String k : object.getAdditionalInfoKeys()) {
 							if ((isTagIndexedForSearchAsName(k)
 									|| isTagIndexedForSearchAsId(k))
