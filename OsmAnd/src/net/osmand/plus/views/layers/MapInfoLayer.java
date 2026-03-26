@@ -266,7 +266,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	}
 
 	public boolean hasTopToolbar() {
-		return topToolbarView != null && topToolbarView.getTopController() != null;
+		return getTopToolbarController() != null;
 	}
 
 	public TopToolbarController getTopToolbarController() {
