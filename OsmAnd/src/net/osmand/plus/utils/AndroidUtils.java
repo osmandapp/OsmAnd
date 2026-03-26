@@ -1544,4 +1544,13 @@ public class AndroidUtils {
 		int endIndex = text.offsetByCodePoints(0, maxSymbolNumber - 1);
 		return text.substring(0, endIndex) + "…";
 	}
+
+	@NonNull
+	public static String getViewName(@NonNull View view) {
+		try {
+			return view.getResources().getResourceEntryName(view.getId());
+		} catch (Resources.NotFoundException e) {
+			return view.toString();
+		}
+	}
 }

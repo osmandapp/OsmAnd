@@ -147,11 +147,11 @@ object AstroUtils {
 		startSearch: ZonedDateTime,
 		obs: Observer,
 		windowStart: ZonedDateTime? = null,
-		windowEnd: ZonedDateTime? = null
+		windowEnd: ZonedDateTime? = null,
+		limitDays: Double = 2.0
 	): Pair<ZonedDateTime?, ZonedDateTime?> {
 		val searchStartUtc = startSearch.toAstroTime()
 		val zone = startSearch.zone
-		val limitDays = 2.0
 
 		val nextRise = searchRiseSet(body, obs, Direction.Rise, searchStartUtc, limitDays)
 		val nextSet  = searchRiseSet(body, obs, Direction.Set, searchStartUtc, limitDays)
@@ -175,14 +175,15 @@ object AstroUtils {
 		startSearch: ZonedDateTime,
 		obs: Observer,
 		windowStart: ZonedDateTime? = null,
-		windowEnd: ZonedDateTime? = null
+		windowEnd: ZonedDateTime? = null,
+		limitDays: Double = 2.0
 	): Pair<ZonedDateTime?, ZonedDateTime?> {
 		val body = obj.body
 		return if (body != null) {
-			nextRiseSet(body, startSearch, obs, windowStart, windowEnd)
+			nextRiseSet(body, startSearch, obs, windowStart, windowEnd, limitDays)
 		} else {
 			withCustomStar(obj.ra, obj.dec) { star ->
-				nextRiseSet(star, startSearch, obs, windowStart, windowEnd)
+				nextRiseSet(star, startSearch, obs, windowStart, windowEnd, limitDays)
 			}
 		}
 	}

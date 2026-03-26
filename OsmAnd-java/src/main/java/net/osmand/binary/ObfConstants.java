@@ -214,6 +214,9 @@ public class ObfConstants {
 
 	public static boolean isTagIndexedForSearchAsName(String tag) {
 		if (tag != null) {
+			if (tag.startsWith("route_name")) {
+				return false;
+			}
 			return tag.contains("name") || tag.contains("brand");
 		}
 		return false;

@@ -9,6 +9,7 @@
         android:id="@+id/explore_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/list_background_color"
         android:fillViewport="true"
         android:overScrollMode="ifContentScrolls"
         android:scrollbars="vertical">
@@ -17,47 +18,62 @@
             android:id="@+id/explore_scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/activity_background_color"
             android:orientation="vertical"
             android:paddingBottom="@dimen/content_padding">
-
-            <com.google.android.material.search.SearchBar
-                android:id="@+id/explore_search_bar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/toolbar_height"
-                android:layout_marginStart="@dimen/content_padding"
-                android:layout_marginTop="@dimen/content_padding"
-                android:layout_marginEnd="@dimen/content_padding"
-                android:hint="@string/shared_string_search"
-                app:backgroundTint="?attr/active_color_secondary"
-                app:defaultMarginsEnabled="false"
-                app:hideNavigationIcon="false"
-                app:menu="@menu/menu_star_search_browse"
-                app:navigationIcon="@drawable/ic_action_remove_dark"
-                app:shapeAppearanceOverlay="@style/Shape.Card8" />
-
-            <HorizontalScrollView
-                android:id="@+id/recent_chips_scroll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/content_padding_half"
-                android:scrollbars="none"
-                android:visibility="gone">
-
-                <LinearLayout
-                    android:id="@+id/recent_chips_container"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="@dimen/content_padding"
-                    android:paddingEnd="@dimen/content_padding" />
-            </HorizontalScrollView>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/content_padding"
+                app:cardBackgroundColor="?attr/list_background_color"
+                app:cardElevation="0dp"
+                app:shapeAppearanceOverlay="@style/Shape.TopSearchSurface"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/content_padding">
+
+                    <com.google.android.material.search.SearchBar
+                        android:id="@+id/explore_search_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/toolbar_height"
+                        android:layout_marginStart="@dimen/content_padding"
+                        android:layout_marginTop="@dimen/content_padding"
+                        android:layout_marginEnd="@dimen/content_padding"
+                        android:hint="@string/shared_string_search"
+                        app:backgroundTint="?attr/active_color_secondary"
+                        app:defaultMarginsEnabled="false"
+                        app:hideNavigationIcon="false"
+                        app:menu="@menu/menu_star_search_browse"
+                        app:navigationIcon="@drawable/ic_action_remove_dark"
+                        app:shapeAppearanceOverlay="@style/Shape.Card8" />
+
+                    <HorizontalScrollView
+                        android:id="@+id/recent_chips_scroll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/content_padding_half"
+                        android:scrollbars="none"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:id="@+id/recent_chips_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingStart="@dimen/content_padding"
+                            android:paddingEnd="@dimen/content_padding" />
+                    </HorizontalScrollView>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/content_padding"
-                android:layout_marginEnd="@dimen/content_padding"
                 app:cardBackgroundColor="?attr/list_background_color"
                 app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
                 app:cardElevation="0dp">
@@ -81,7 +97,7 @@
                             android:layout_height="@dimen/standard_icon_size"
                             android:layout_gravity="center_vertical"
 							android:contentDescription="@string/astro_explore_watch_now"
-							android:src="@drawable/ic_action_search_dark"
+							android:src="@drawable/ic_action_telescope"
                             app:tint="?attr/active_color_primary" />
 
                         <LinearLayout
@@ -161,9 +177,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/content_padding"
                 android:layout_marginTop="@dimen/content_padding"
-                android:layout_marginEnd="@dimen/content_padding"
                 app:cardBackgroundColor="?attr/list_background_color"
                 app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
                 app:cardElevation="0dp">
@@ -178,9 +192,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/content_padding"
                 android:layout_marginTop="@dimen/content_padding"
-                android:layout_marginEnd="@dimen/content_padding"
                 app:cardBackgroundColor="?attr/list_background_color"
                 app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
                 app:cardElevation="0dp">
@@ -213,9 +225,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/content_padding"
                 android:layout_marginTop="@dimen/content_padding"
-                android:layout_marginEnd="@dimen/content_padding"
                 app:cardBackgroundColor="?attr/list_background_color"
                 app:cardCornerRadius="@dimen/bottom_sheet_content_padding_small"
                 app:cardElevation="0dp">
@@ -262,7 +272,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/shared_string_show_all"
+                            android:text="@string/shared_string_view_all"
                             android:textColor="?attr/active_color_primary"
                             android:textSize="@dimen/default_list_text_size" />
 

@@ -214,6 +214,12 @@ public class SearchResult {
 		if (res < MAX_TYPES_BASE_10 * 4) {
 			// equalize unmatched results
 			res = MAX_TYPES_BASE_10;
+			if (getResourceType() == SearchResultResource.BASEMAP) {
+				res += 1;
+			}
+			if (objectType == ObjectType.STREET_INTERSECTION) {
+				res -= 1;
+			}
 		}
 		return res;
 	}

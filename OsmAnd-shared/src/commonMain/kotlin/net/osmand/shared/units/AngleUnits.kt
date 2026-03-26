@@ -28,7 +28,7 @@ enum class AngleUnits(
 
 	MILLIRADIANS(
 		nameKey = "shared_string_milliradians",
-		symbolKey = "mrad",
+		symbolKey = "mil",
 		conversionCoefficient = AngleConstants.MILLIRADIANS_IN_DEGREE
 	);
 

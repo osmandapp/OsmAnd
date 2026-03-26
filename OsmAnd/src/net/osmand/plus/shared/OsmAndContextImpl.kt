@@ -30,8 +30,10 @@ import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
 import net.osmand.shared.gpx.SmartFolderHelper
 import net.osmand.shared.io.KFile
 import net.osmand.shared.settings.enums.AltitudeMetrics
+import net.osmand.shared.settings.enums.AngularConstants
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.shared.settings.enums.SpeedConstants
+import net.osmand.shared.units.TemperatureUnits
 import net.osmand.shared.util.KLock
 import net.osmand.shared.util.KStringMatcher
 import net.osmand.shared.util.synchronized
@@ -81,6 +83,10 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 	override fun getMetricSystem(): MetricsConstants? = app.settings.METRIC_SYSTEM.get()
 
 	override fun getAltitudeMetric(): AltitudeMetrics? = app.settings.ALTITUDE_METRIC.get()
+
+	override fun getAngularSystem(): AngularConstants? = app.settings.ANGULAR_UNITS.get()
+
+	override fun getTemperatureUnits(): TemperatureUnits = app.settings.temperatureUnit.toMeasurementUnits()
 
 	override fun isGpxFileVisible(path: String): Boolean =
 		app.selectedGpxHelper.getSelectedFileByPath(path) != null

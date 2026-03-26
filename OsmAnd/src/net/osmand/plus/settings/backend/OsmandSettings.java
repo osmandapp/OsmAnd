@@ -112,6 +112,7 @@ import net.osmand.shared.obd.OBDDataComputer;
 import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
+import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;

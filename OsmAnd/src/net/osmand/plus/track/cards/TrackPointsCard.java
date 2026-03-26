@@ -32,6 +32,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndTaskManager;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -565,7 +566,21 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 					updateSelectionMode();
 				});
 			}
-			if (GpxDisplayItemType.TRACK_POINTS == group.getType()) {
+			ImageView goToLocationIcon = row.findViewById(R.id.go_to_point_location_icon);
+			View goToLocationView = row.findViewById(R.id.go_to_point_location);
+			boolean isTrackPoint = GpxDisplayItemType.TRACK_POINTS == group.getType();
+			AndroidUiHelper.updateVisibility(goToLocationView, isTrackPoint);
+			goToLocationView.setOnClickListener((v) -> {
+				OsmandMapTileView mapView = mapActivity.getMapView();
+				WptPt wpt = gpxItem.locationStart;
+				double lon = wpt.getLon();
+				double lat = wpt.getLat();
+				mapView.getAnimatedDraggingThread().startMoving(lat, lon, mapView.getZoom(), mapView.getZoomFloatPart());
+			});
+			int iconColor = ColorUtilities.getSecondaryIconColorId(nightMode);
+			goToLocationIcon.setImageDrawable(getColoredIcon(R.drawable.ic_action_marker_dark, iconColor));
+			goToLocationIcon.setContentDescription(String.format(app.getString(R.string.show_something_on_map), gpxItem.name));
+			if (isTrackPoint) {
 				WptPt wpt = gpxItem.locationStart;
 				int groupColor = wpt.getColor(group.getColor());
 				if (groupColor == 0) {

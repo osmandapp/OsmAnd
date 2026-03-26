@@ -8,7 +8,7 @@ enum class TemperatureUnits(
 ) : MeasurementUnit<TemperatureUnits> {
 
 	CELSIUS(
-		nameKey = "degree_celsius",
+		nameKey = "weather_temperature_celsius",
 		symbolKey = "°C",
 		conversionCoefficient = 1.0,
 		system = MeasurementSystem.METRIC

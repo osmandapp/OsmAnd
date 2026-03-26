@@ -144,7 +144,7 @@ public abstract class MapButton extends FrameLayoutEx implements OnAttachStateCh
 	@NonNull
 	public String getButtonId() {
 		MapButtonState buttonState = getButtonState();
-		return buttonState != null ? buttonState.getId() : "";
+		return buttonState != null ? buttonState.getId() : AndroidUtils.getViewName(this);
 	}
 
 	@NonNull

@@ -76,19 +76,21 @@
 			android:layout_marginEnd="10dp"
 			android:layout_weight="1.4" />
 
-		<FrameLayout
+		<LinearLayout
 			android:id="@+id/schedule_set_block_container"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1.35"
+			android:baselineAligned="false"
+			android:gravity="start|center_vertical"
 			android:minHeight="24dp"
+			android:orientation="horizontal"
 			android:paddingEnd="12dp">
 
 			<LinearLayout
 				android:id="@+id/schedule_set_block"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="start|center_vertical"
 				android:baselineAligned="false"
 				android:gravity="start|center_vertical"
 				android:orientation="horizontal">
@@ -127,12 +129,14 @@
 				android:id="@+id/schedule_set_next_day"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="top|end"
+				android:layout_marginStart="4dp"
 				android:includeFontPadding="false"
+				android:layout_gravity="top"
+				android:gravity="top"
 				android:textColor="?android:attr/textColorSecondary"
-				android:textSize="16sp"
+				android:textSize="10sp"
 				android:visibility="gone" />
-		</FrameLayout>
+		</LinearLayout>
 	</LinearLayout>
 
 	<View

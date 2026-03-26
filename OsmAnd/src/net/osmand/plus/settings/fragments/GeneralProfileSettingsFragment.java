@@ -33,7 +33,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet;
 import net.osmand.plus.settings.controllers.CompassModeDialogController;
-import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.ScreenOrientation;
@@ -43,6 +42,7 @@ import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GeneralRouter;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
+import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -214,13 +214,13 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 		for (int i = 0; i < entries.length; i++) {
 			if (ac[i] == AngularConstants.DEGREES) {
-				entries[i] = AngularConstants.DEGREES.toHumanString(app) + " 180";
+				entries[i] = AngularConstants.DEGREES.toHumanString() + " 180";
 				entryValues[i] = AngularConstants.DEGREES.ordinal();
 			} else if (ac[i] == AngularConstants.DEGREES360) {
-				entries[i] = AngularConstants.DEGREES.toHumanString(app) + " 360";
+				entries[i] = AngularConstants.DEGREES.toHumanString() + " 360";
 				entryValues[i] = AngularConstants.DEGREES360.ordinal();
 			} else {
-				entries[i] = ac[i].toHumanString(app);
+				entries[i] = ac[i].toHumanString();
 				entryValues[i] = AngularConstants.MILLIRADS.ordinal();
 			}
 		}
