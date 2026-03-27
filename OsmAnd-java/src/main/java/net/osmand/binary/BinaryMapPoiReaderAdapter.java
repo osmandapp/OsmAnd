@@ -402,14 +402,13 @@ public class BinaryMapPoiReaderAdapter {
 
 //				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) +
 //						"ms. Found " + offKeys.length + " subtrees");
-				boolean found = false;
 				for (int j = 0; j < offKeys.length; j++) {
 					long existedBeforeBlock = metrics.objectsLoaded;
 					codedIS.seek(offKeys[j] + indexOffset);
 					long len = readInt();
 					long payloadStart = codedIS.getTotalBytesRead();
 					long oldLim = codedIS.pushLimitLong((long) len);
-					found |= readPoiData(matcher, req, region, metrics);
+					readPoiData(matcher, req, region, metrics);
 					codedIS.popLimit(oldLim);
 					metrics.blocksLoaded++;
 
@@ -425,9 +424,6 @@ public class BinaryMapPoiReaderAdapter {
 								metrics.matchedObjectsLoaded, metrics.maxObjectsPerBlock);
 						return;
 					}
-				}
-				if (!found) {
-					BloomFilter.incFalsePositive();
 				}
 //				LOG.info("Whole poi by name search is done in " + (System.currentTimeMillis() - time) +
 //						"ms. Found " + req.getSearchResults().size());
@@ -778,21 +774,20 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private boolean readPoiData(CollatorStringMatcher matcher, SearchRequest<Amenity> req, PoiRegion region,
+	private void readPoiData(CollatorStringMatcher matcher, SearchRequest<Amenity> req, PoiRegion region,
 			PoiNameObjectReadMetrics metrics) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 0;
-		boolean found = false;
 		while (true) {
 			if (req.isCancelled() || req.limitExceeded()) {
-				return found;
+				return;
 			}
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				return found;
+				return;
 			case OsmandOdb.OsmAndPoiBoxData.X_FIELD_NUMBER:
 				x = codedIS.readUInt32();
 				break;
@@ -840,7 +835,6 @@ public class BinaryMapPoiReaderAdapter {
 						metrics.matchedObjectsLoaded++;
 						req.collectRawData(am);
 						req.publish(am);
-						found = true;
 					}
 				}
 				break;
