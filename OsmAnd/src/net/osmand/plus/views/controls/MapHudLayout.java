@@ -368,14 +368,10 @@ public class MapHudLayout extends FrameLayout {
 			position.setPositionHorizontal(shouldCenterVerticalPanels() ? POS_LEFT : POS_FULL_WIDTH);
 			position.setMoveVertical();
 		} else if (view instanceof SideWidgetsPanel panel) {
-			if (portrait) {
-				position.setMoveDescendantsVertical();
-			} else {
-				position.setMoveDescendantsAny();
-			}
+			position.setMoveVertical();
+			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_TOP);
 			position.setPositionHorizontal(panel.isRightSide() ? POS_RIGHT : POS_LEFT);
-			position.setMoveVertical();
 		} else if (id == R.id.left_side_menu) {
 			position.setMoveDescendantsHorizontal();
 			position.setPositionVertical(POS_TOP);
@@ -434,9 +430,23 @@ public class MapHudLayout extends FrameLayout {
 				calcGridPositionFromPixel(view, position);
 			}
 			position.setMarginY(0);
-		} else if (view instanceof RulerWidget || view instanceof SideWidgetsPanel || id == R.id.measurement_buttons) {
+		} else if (view instanceof RulerWidget || id == R.id.measurement_buttons) {
 			position.setMarginX(0);
 			position.setMarginY(0);
+		} else if (view instanceof SideWidgetsPanel) {
+			position.setMarginX(0);
+			position.setMarginY(0);
+
+			if (portrait) {
+				position.setMoveDescendantsVertical();
+			} else {
+				float maxHeight = getHeight() - topButtonsMargin;
+				if (view.getHeight() > maxHeight) {
+					position.setMoveDescendantsAny();
+				} else {
+					position.setMoveDescendantsVertical();
+				}
+			}
 		} else if (id == R.id.speedometer_widget || id == R.id.map_alarm_warning) {
 			int margin = getResources().getDimensionPixelSize(R.dimen.map_alarm_bottom_margin);
 			position.setMarginX(0);
