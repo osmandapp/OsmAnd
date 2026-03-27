@@ -317,6 +317,19 @@ public class LocationParser {
 			if (ch == '(' && locPhrase.length() > 1) {
 				ch = Character.toLowerCase(locPhrase.charAt(1)); // (0.1234,5.6789)
 			}
+			int cntLetter = 0;
+			int cntDigits = 0;
+			for (int i = 0; i < locPhrase.length(); i++) {
+				char c = Character.toLowerCase(locPhrase.charAt(i));
+				if (Character.isLetter(c) && c != 's' && c != 'n' && c != 'w' && c != 'e')
+					cntLetter++;
+				if (Character.isDigit(c))
+					cntDigits++;
+			}
+			if (!locPhrase.contains("://") && cntLetter > cntDigits) {
+				// 5c Hazelmere road, nw6 6
+				return false;
+			}
 			return ch == '-' || Character.isDigit(ch) || ch == 's' || ch == 'n' || locPhrase.contains("://");
 		}
 		return false;

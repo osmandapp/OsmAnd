@@ -320,6 +320,7 @@
 	<dimen name="bottom_sheet_title_height">52dp</dimen>
 	<dimen name="bottom_sheet_descr_height">44dp</dimen>
 	<dimen name="bottom_sheet_list_item_height">48dp</dimen>
+	<dimen name="bottom_sheet_medium_list_item_height">56dp</dimen>
 	<dimen name="bottom_sheet_large_list_item_height">64dp</dimen>
 	<dimen name="bottom_sheet_icon_margin">24dp</dimen>
 	<dimen name="bottom_sheet_title_padding_top">10dp</dimen>
@@ -385,6 +386,7 @@
 	<dimen name="route_info_legend_item_size">40dp</dimen>
 
 	<dimen name="multi_selection_header_height">52dp</dimen>
+	<dimen name="sort_filter_toolbar_height">52dp</dimen>
 
 	<dimen name="wikipedia_button_left_padding">19dp</dimen>
 	<dimen name="wikipedia_options_button_width">48dp</dimen>

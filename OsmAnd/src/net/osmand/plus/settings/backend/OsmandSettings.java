@@ -112,6 +112,7 @@ import net.osmand.shared.obd.OBDDataComputer;
 import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
+import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
@@ -1654,6 +1655,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference(this, "fast_route_mode", true).makeProfile();
 
 	public static boolean IGNORE_MISSING_MAPS = false;
+	public static boolean STOP_ON_MISSING_MAPS = false;
 	public final CommonPreference<RoutingType> ROUTING_TYPE = new EnumStringPreference<>(this, "routing_method", HH_CPP, RoutingType.values()).makeProfile().cache();
 	public final CommonPreference<ApproximationType> APPROXIMATION_TYPE = new EnumStringPreference<>(this, "approximation_method_r49_default", APPROX_GEO_CPP, ApproximationType.values()).makeProfile().cache();
 
@@ -3550,5 +3552,9 @@ public class OsmandSettings {
 				preference.setModeValue(mode, allow);
 			}
 		}
+	}
+
+	public void setStopOnMissingMaps(boolean state) {
+		STOP_ON_MISSING_MAPS = state;
 	}
 }

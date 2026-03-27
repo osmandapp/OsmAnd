@@ -7,6 +7,8 @@ import net.osmand.plus.card.color.palette.gradient.editor.data.*
 import net.osmand.shared.ColorPalette
 import net.osmand.shared.palette.domain.GradientPoint
 import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.Locale
 
 class GradientEditorUiBuilder(
 	private val app: OsmandApplication,
@@ -17,7 +19,7 @@ class GradientEditorUiBuilder(
 		const val NO_DATA_STEP_ID = "no_data_step"
 	}
 
-	private val decimalFormat = DecimalFormat("0.#####")
+	private val decimalFormat = DecimalFormat("0.#####", DecimalFormatSymbols(Locale.US))
 
 	/**
 	 * Builds static UI data (Toolbar title, subtitle) that rarely changes.
@@ -32,7 +34,7 @@ class GradientEditorUiBuilder(
 		)
 
 		val fileType = initialDraft.fileType
-		val units = fileType.displayUnits.getSymbol()
+		val units = fileType.displayUnitsType.getUnit().getSymbol()
 
 		val toolbarSubtitle = app.getString(
 			R.string.ltr_or_rtl_combine_with_brackets,
@@ -73,11 +75,13 @@ class GradientEditorUiBuilder(
 			})
 
 			// B. Add "No Data" step
-			add(GradientStepData(
-				id = NO_DATA_STEP_ID,
-				label = app.getString(R.string.gpx_logging_no_data),
-				point = noDataPoint
-			))
+			if (fileType.supportsNoData) {
+				add(GradientStepData(
+					id = NO_DATA_STEP_ID,
+					label = app.getString(R.string.gpx_logging_no_data),
+					point = noDataPoint
+				))
+			}
 		}
 
 		val isNoDataSelected = selectedIndex == points.size
@@ -85,7 +89,7 @@ class GradientEditorUiBuilder(
 		val selectedPoint = if (isNoDataSelected) noDataPoint else points.getOrNull(selectedIndex)
 
 		val baseUnits = fileType.baseUnits
-		val displayUnits = fileType.displayUnits
+		val displayUnits = fileType.displayUnitsType.getUnit()
 
 		// 2. Build Value State via Behaviour
 		// We inject the validation error from the dataState here
@@ -105,7 +109,7 @@ class GradientEditorUiBuilder(
 					label = if (mandatory) {
 						behaviour.getStepLabel(selectedPoint, fileType, useFullName = true)
 					} else {
-						fileType.displayUnits.getSymbol()
+						displayUnits.getSymbol()
 					},
 					text = if (mandatory) {
 						""

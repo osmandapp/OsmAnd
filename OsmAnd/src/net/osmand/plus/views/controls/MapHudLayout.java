@@ -11,7 +11,6 @@ import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_SH
 import static net.osmand.shared.grid.ButtonPositionSize.*;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
@@ -38,7 +37,7 @@ import net.osmand.plus.views.mapwidgets.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.shared.grid.ButtonPositionSize;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -67,12 +66,15 @@ public class MapHudLayout extends FrameLayout {
 	private PanelsLayoutMode panelsLayoutMode;
 	private StateChangedListener<PanelsLayoutMode> panelsLayoutModeListener;
 
-	private View alarmsContainer;
+	private View alarmWidget;
+	private View speedometerWidget;
 	private TopToolbarView topToolbarView;
 	private SideWidgetsPanel leftWidgetsPanel;
 	private SideWidgetsPanel rightWidgetsPanel;
 	private VerticalWidgetPanel topWidgetsPanel;
 	private VerticalWidgetPanel bottomWidgetsPanel;
+	private View layerParamLayout;
+	private View mapTransparencyLayout;
 
 	private final float dpToPx;
 	private final int topButtonsMargin;
@@ -140,11 +142,14 @@ public class MapHudLayout extends FrameLayout {
 		super.onFinishInflate();
 
 		topToolbarView = findViewById(R.id.widget_top_bar);
-		alarmsContainer = findViewById(R.id.alarms_container);
+		alarmWidget = findViewById(R.id.map_alarm_warning);
+		speedometerWidget = findViewById(R.id.speedometer_widget);
 		leftWidgetsPanel = findViewById(R.id.map_left_widgets_panel);
 		rightWidgetsPanel = findViewById(R.id.map_right_widgets_panel);
 		topWidgetsPanel = findViewById(R.id.top_widgets_panel);
 		bottomWidgetsPanel = findViewById(R.id.map_bottom_widgets_panel);
+		layerParamLayout = findViewById(R.id.layer_param_layout);
+		mapTransparencyLayout = findViewById(R.id.map_transparency_layout);
 
 		setupPositions();
 	}
@@ -163,7 +168,11 @@ public class MapHudLayout extends FrameLayout {
 		addPosition(findViewById(R.id.recording_note_layout));
 		addPosition(findViewById(R.id.add_gpx_point_bottom_sheet));
 
-		addWidget(alarmsContainer);
+		addWidget(speedometerWidget);
+		addWidget(alarmWidget);
+
+		addWidget(layerParamLayout);
+		addWidget(mapTransparencyLayout);
 
 		refresh();
 	}
@@ -270,8 +279,7 @@ public class MapHudLayout extends FrameLayout {
 		int height = Math.round(getHeight() / dpToPx / CELL_SIZE_DP);
 
 		if (DEV_GRID_LAYOUT_SHOW_LOGS) {
-			LOG.info("--------START--------");
-			LOG.info("Grid size: width " + width + "height" + height);
+			LOG.info("--------START-------- Grid size: width " + width + " height " + height);
 			for (ButtonPositionSize b : list) {
 				LOG.info(b + " value = " + b.toLongValue());
 			}
@@ -303,7 +311,7 @@ public class MapHudLayout extends FrameLayout {
 		}
 		for (MapButton button : mapButtons) {
 			if (button.getVisibility() == VISIBLE) {
-				ButtonPositionSize position = button.getDefaultPositionSize();
+				ButtonPositionSize position = updateButtonPosition(button, button.getDefaultPositionSize());
 				if (position != null && position.getHeight() > 0 && position.getWidth() > 0) {
 					map.put(button, position);
 				}
@@ -333,12 +341,18 @@ public class MapHudLayout extends FrameLayout {
 
 	private int getAdditionalWidgetPriority(@NonNull View view) {
 		int id = view.getId();
-		if (R.id.alarms_container == id) {
+		if (R.id.speedometer_widget == id) {
 			return 0;
-		} else if (R.id.measurement_buttons == id) {
+		} else if (R.id.map_alarm_warning == id) {
 			return 1;
-		} else if (R.id.map_ruler_layout == id) {
+		} else if (R.id.measurement_buttons == id) {
 			return 2;
+		} else if (R.id.map_ruler_layout == id) {
+			return 3;
+		} else if (R.id.layer_param_layout == id) {
+			return 4;
+		} else if (R.id.map_transparency_layout == id) {
+			return 5;
 		}
 		return 100;
 	}
@@ -346,7 +360,7 @@ public class MapHudLayout extends FrameLayout {
 	@NonNull
 	private ButtonPositionSize createWidgetPosition(@NonNull View view) {
 		int id = view.getId();
-		String name = getViewName(view);
+		String name = AndroidUtils.getViewName(view);
 		ButtonPositionSize position = new ButtonPositionSize(name);
 		if (view instanceof VerticalWidgetPanel panel) {
 			position.setMoveDescendantsVertical();
@@ -354,14 +368,10 @@ public class MapHudLayout extends FrameLayout {
 			position.setPositionHorizontal(shouldCenterVerticalPanels() ? POS_LEFT : POS_FULL_WIDTH);
 			position.setMoveVertical();
 		} else if (view instanceof SideWidgetsPanel panel) {
-			if (portrait) {
-				position.setMoveDescendantsVertical();
-			} else {
-				position.setMoveDescendantsAny();
-			}
+			position.setMoveVertical();
+			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_TOP);
 			position.setPositionHorizontal(panel.isRightSide() ? POS_RIGHT : POS_LEFT);
-			position.setMoveVertical();
 		} else if (id == R.id.left_side_menu) {
 			position.setMoveDescendantsHorizontal();
 			position.setPositionVertical(POS_TOP);
@@ -385,7 +395,7 @@ public class MapHudLayout extends FrameLayout {
 			position.setMoveHorizontal();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
-		} else if (id == R.id.alarms_container) {
+		} else if (id == R.id.map_alarm_warning || id == R.id.speedometer_widget) {
 			position.setMoveVertical();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
@@ -396,17 +406,12 @@ public class MapHudLayout extends FrameLayout {
 		} else if (id == R.id.measurement_buttons) {
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
+		} else if (id == R.id.layer_param_layout || id == R.id.map_transparency_layout) {
+			position.setMoveVertical();
+			position.setPositionVertical(POS_BOTTOM);
+			position.setPositionHorizontal(POS_LEFT);
 		}
 		return updateWidgetPosition(view, position);
-	}
-
-	@NonNull
-	private String getViewName(@NonNull View view) {
-		try {
-			return getResources().getResourceEntryName(view.getId());
-		} catch (Resources.NotFoundException e) {
-			return view.toString();
-		}
 	}
 
 	@NonNull
@@ -425,18 +430,51 @@ public class MapHudLayout extends FrameLayout {
 				calcGridPositionFromPixel(view, position);
 			}
 			position.setMarginY(0);
-		} else if (view instanceof RulerWidget || view instanceof SideWidgetsPanel || id == R.id.measurement_buttons) {
+		} else if (view instanceof RulerWidget || id == R.id.measurement_buttons) {
 			position.setMarginX(0);
 			position.setMarginY(0);
-		} else if (id == R.id.alarms_container) {
+		} else if (view instanceof SideWidgetsPanel panel) {
+			position.setMarginX(0);
+			position.setMarginY(0);
+
+			if (!portrait && shouldMoveDescendantsAny(panel)) {
+				position.setMoveDescendantsAny();
+			} else {
+				position.setMoveDescendantsVertical();
+			}
+		} else if (id == R.id.speedometer_widget || id == R.id.map_alarm_warning) {
 			int margin = getResources().getDimensionPixelSize(R.dimen.map_alarm_bottom_margin);
 			position.setMarginX(0);
 			position.setMarginY((int) AndroidUtils.pxToDpF(getContext(), margin) / 8);
 		} else if (id == R.id.lanes_widget_special_position) {
 			calcGridPositionFromPixel(view, position);
 			position.setMarginY(0);
+		} else if (id == R.id.layer_param_layout || id == R.id.map_transparency_layout) {
+			calcGridPositionFromPixel(view, position);
+			int marginY = getResources().getDimensionPixelSize(R.dimen.map_button_size);
+			position.setMarginY((int) AndroidUtils.pxToDpF(getContext(), marginY) / 8);
 		}
 		return position;
+	}
+
+	@Nullable
+	private ButtonPositionSize updateButtonPosition(@NonNull MapButton button, @Nullable ButtonPositionSize position) {
+		if (position != null) {
+			int id = button.getId();
+			if (id == R.id.map_compass_button) {
+				ButtonPositionSize panelPosition = widgetPositions.get(leftWidgetsPanel);
+				position.setXMove(panelPosition != null && panelPosition.isMoveDescendantsAny());
+			}
+		}
+		return position;
+	}
+
+	private boolean shouldMoveDescendantsAny(@Nullable SideWidgetsPanel panel) {
+		if (panel == null || panel.getVisibility() != VISIBLE) {
+			return false;
+		}
+		float availableHeight = getHeight() - topButtonsMargin;
+		return panel.getHeight() > availableHeight;
 	}
 
 	private void calcGridPositionFromPixel(@NonNull View view, @NonNull ButtonPositionSize position) {
@@ -552,11 +590,12 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	private boolean shouldIgnoreGravity(@NonNull ButtonPositionSize position) {
-		return Algorithms.objectEquals("lanes_widget_special_position", position.getId());
+		return CollectionUtils.equalsToAny(position.getId(), "lanes_widget_special_position", "layer_param_layout", "map_transparency_layout");
+
 	}
 
 	private boolean shouldIgnoreHorizontalMargins(@NonNull ButtonPositionSize position) {
-		return Algorithms.objectEquals("lanes_widget_special_position", position.getId());
+		return CollectionUtils.equalsToAny(position.getId(), "lanes_widget_special_position", "layer_param_layout", "map_transparency_layout");
 	}
 
 	private boolean shouldIgnoreVerticalMargins(@NonNull ButtonPositionSize position) {

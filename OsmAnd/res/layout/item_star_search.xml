@@ -1,40 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="12dp"
-    android:background="?android:attr/selectableItemBackground">
-
-    <ImageView
-        android:id="@+id/object_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="16dp"
-        app:tint="?attr/active_color_secondary" />
+    android:background="?attr/list_background_color"
+    android:foreground="?attr/selectableItemBackground"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:minHeight="72dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/content_padding"
+        android:paddingVertical="@dimen/content_padding_small">
 
-        <TextView
-            android:id="@+id/object_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/object_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="?android:attr/textColorSecondary" />
+            <TextView
+                android:id="@+id/object_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_list_text_size" />
+
+            <TextView
+                android:id="@+id/object_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_padding_small_half"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_desc_text_size" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/object_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="@dimen/content_padding"
+            android:src="@drawable/ic_action_ufo" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/content_padding"
+        android:background="?attr/list_divider" />
 
 </LinearLayout>

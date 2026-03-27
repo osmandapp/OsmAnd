@@ -24,7 +24,7 @@ class AstroScheduleGraphView @JvmOverloads constructor(
 	defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-	private var model: AstroScheduleCardModel.ScheduleDayGraphData? = null
+	private var model: AstroScheduleDayGraphSnapshot? = null
 	private var palette: AstroChartColorPalette? = null
 	private var staticLayerInvalidate = true
 	private var staticLayerBitmap: Bitmap? = null
@@ -43,7 +43,7 @@ class AstroScheduleGraphView @JvmOverloads constructor(
 		refreshThemeResources()
 	}
 
-	fun submitModel(model: AstroScheduleCardModel.ScheduleDayGraphData?) {
+	fun submitModel(model: AstroScheduleDayGraphSnapshot?) {
 		this.model = model
 		invalidateStaticLayer()
 		invalidate()
@@ -78,7 +78,7 @@ class AstroScheduleGraphView @JvmOverloads constructor(
 	}
 
 	private fun ensureStaticLayer(
-		localModel: AstroScheduleCardModel.ScheduleDayGraphData,
+		localModel: AstroScheduleDayGraphSnapshot,
 		palette: AstroChartColorPalette
 	) {
 		if (!staticLayerInvalidate && staticLayerBitmap != null) {
@@ -102,7 +102,7 @@ class AstroScheduleGraphView @JvmOverloads constructor(
 
 	private fun drawSunBackground(
 		canvas: Canvas,
-		localModel: AstroScheduleCardModel.ScheduleDayGraphData,
+		localModel: AstroScheduleDayGraphSnapshot,
 		palette: AstroChartColorPalette
 	) {
 		val drawStep = if (width > MAX_FINE_SAMPLES_WIDTH) 2 else 1
@@ -118,7 +118,7 @@ class AstroScheduleGraphView @JvmOverloads constructor(
 
 	private fun drawObjectVisibilityOverlay(
 		canvas: Canvas,
-		localModel: AstroScheduleCardModel.ScheduleDayGraphData,
+		localModel: AstroScheduleDayGraphSnapshot,
 		palette: AstroChartColorPalette
 	) {
 		val objectBandHeight = dp(OBJECT_BAND_HEIGHT_DP).coerceAtMost(height.toFloat())

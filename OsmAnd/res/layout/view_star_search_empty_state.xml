@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/list_background_color"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/content_padding_large"
+    android:paddingBottom="@dimen/content_padding"
+    android:paddingStart="@dimen/dialog_content_margin"
+    android:paddingEnd="@dimen/dialog_content_margin">
+
+    <ImageView
+        android:id="@+id/empty_state_icon"
+        android:layout_width="@dimen/icon_size_double"
+        android:layout_height="@dimen/icon_size_double"
+        android:layout_marginBottom="@dimen/dialog_content_margin"
+        android:src="@drawable/ic_action_ufo"
+        app:tint="?attr/default_icon_color" />
+
+    <TextView
+        android:id="@+id/empty_state_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_objects_found"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/default_list_text_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/empty_state_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_padding_small_half"
+        android:layout_marginBottom="@dimen/content_padding"
+        android:textAlignment="center"
+        android:text="@string/astro_search_empty_description"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="@dimen/default_desc_text_size" />
+
+    <net.osmand.plus.widgets.dialogbutton.DialogButton
+        android:id="@+id/empty_state_reset_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/context_menu_buttons_bottom_height"
+        app:dialogButtonHeight="36dp"
+        app:dialogButtonTitle="@string/shared_string_reset"
+        app:dialogButtonTopMargin="@dimen/content_padding_small_half"
+        app:dialogButtonType="secondary" />
+
+</LinearLayout>

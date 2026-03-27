@@ -7,7 +7,6 @@ import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
 import static net.osmand.plus.settings.enums.ThemeUsageContext.MAP;
-import static net.osmand.plus.settings.enums.ThemeUsageContext.OVER_MAP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
 import android.Manifest;
@@ -31,7 +30,6 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -97,6 +95,7 @@ import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
+import net.osmand.plus.plugins.audionotes.AudioVideoNoteRecordingMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
@@ -109,7 +108,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
@@ -127,6 +125,7 @@ import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapLayers;
@@ -510,29 +509,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
 	}
 
-	public void setupRouteCalculationProgressBar(@NonNull ProgressBar pb) {
-		RoutingHelper routingHelper = getRoutingHelper();
-		setupProgressBar(pb, routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting());
-	}
-
-	public void setupProgressBar(@NonNull ProgressBar pb, boolean indeterminate) {
-		DayNightHelper dayNightHelper = app.getDaynightHelper();
-
-		boolean nightMode = dayNightHelper.isNightMode(OVER_MAP);
-		boolean useRouteLineColor = nightMode == dayNightHelper.isNightMode(ThemeUsageContext.MAP);
-
-		int bgColorId = nightMode ? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light;
-		int bgColor = ContextCompat.getColor(this, bgColorId);
-
-		int progressColor = useRouteLineColor
-				? getMapLayers().getRouteLayer().getRouteLineColor(nightMode)
-				: ContextCompat.getColor(this, R.color.active_color_primary_light);
-
-		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
-		pb.setIndeterminate(indeterminate);
-		pb.getIndeterminateDrawable().setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN);
-	}
-
 	public ImportHelper getImportHelper() {
 		return importHelper;
 	}
@@ -864,6 +840,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			boolean transparent = settings.getTransparentMapThemePreference(layoutMode).get();
 			if (panel != null && panel.getVisibility() == View.VISIBLE && panel.isAnyRowVisible() && !transparent) {
 				return ColorUtilities.getWidgetBackgroundColorId(isNightMode());
+			}
+			if (AddGpxPointBottomSheetHelper.isVisible(this)
+					|| AudioVideoNoteRecordingMenu.isVisible(this)) {
+				return ColorUtilities.getListBgColorId(isNightMode());
 			}
 		}
 		return super.getNavigationBarColorId();

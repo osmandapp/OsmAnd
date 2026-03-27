@@ -40,21 +40,16 @@
 				android:layout_height="44dp"
 				android:layout_marginEnd="8dp"
 				android:background="?attr/selectableItemBackgroundBorderless"
-				android:foreground="?attr/selectableItemBackgroundBorderless">
-
-				<FrameLayout
-					android:layout_width="40dp"
-					android:layout_height="40dp"
-					android:layout_gravity="center"
-					android:background="@drawable/bg_circle" />
+				android:foreground="?attr/selectableItemBackgroundBorderless"
+				android:visibility="gone">
 
 				<ImageView
 					android:id="@+id/calendar_icon"
 					android:layout_width="24dp"
 					android:layout_height="24dp"
 					android:layout_gravity="center"
-					android:contentDescription="@string/astronomy_schedule"
-					android:src="@drawable/ic_action_calendar_month"
+					android:contentDescription="@string/astro_visibility_show_today"
+					android:src="@drawable/ic_action_date_start"
 					app:tint="?attr/icon_color_active" />
 			</FrameLayout>
 		</LinearLayout>

@@ -19,13 +19,17 @@ object WikiMetadata {
 			return getDescription(ENGLISH_LANGUAGE)
 		}
 
-
-		fun setDescription(description: String) {
-			return putDescription(ENGLISH_LANGUAGE, description)
+		fun setDescription(description: String?) {
+			putDescription(ENGLISH_LANGUAGE, description)
 		}
 
-		fun putDescription(language: String, description: String) {
+		fun putDescription(language: String, description: String?) {
 			val normalizedLanguage = normalizeLanguageKey(language) ?: return
+
+			if (description == null) {
+				descriptionsMap?.remove(normalizedLanguage)
+				return
+			}
 			if (description.isBlank()) {
 				return
 			}
@@ -34,6 +38,7 @@ object WikiMetadata {
 			}
 			descriptionsMap?.put(normalizedLanguage, description)
 		}
+
 		fun getDescription(preferredLanguage: String?): String? {
 			val localizedDescriptions = descriptionsMap ?: return null
 			val normalizedLanguage = normalizeLanguageKey(preferredLanguage)
@@ -41,6 +46,7 @@ object WikiMetadata {
 				localizedDescriptions[normalizedLanguage]?.takeIf { it.isNotBlank() }?.let { return it }
 			}
 			return localizedDescriptions[ENGLISH_LANGUAGE]?.takeIf { it.isNotBlank() }
+				?: localizedDescriptions.values.firstOrNull { it.isNotBlank() }
 		}
 	}
 

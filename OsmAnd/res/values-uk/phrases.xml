@@ -644,7 +644,7 @@
     <string name="poi_diving">Занурювання</string>
     <string name="poi_ice_hockey">Хокей</string>
     <string name="poi_ice_stock">Айсшток</string>
-    <string name="poi_korfbal">Корфбол</string>
+    <string name="poi_korfball">Корфбол</string>
     <string name="poi_sport_multi">Універсальний спортмайданчик</string>
     <string name="poi_orienteering">Спортивне орієнтування</string>
     <string name="poi_paragliding">Парапланеризм</string>
@@ -4998,7 +4998,7 @@
     <string name="poi_hazard_additional_yes">Небезпека</string>
     <string name="poi_hazard_yes">Небезпека</string>
     <string name="poi_footway">Доріжка</string>
-    <string name="poi_area_highway">Пішохідна зона</string>
+    <string name="poi_area_highway">Зона мобільності</string>
     <string name="poi_area_highway_footway">Прогулянкова зона</string>
     <string name="poi_travel_agency">Турагентство</string>
     <string name="poi_steps">Кроки</string>

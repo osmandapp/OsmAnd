@@ -274,7 +274,7 @@
     <string name="poi_kindergarten">Kindergarten</string>
     <string name="poi_kiosk">Kiosk</string>
     <string name="poi_kitchen">Küchengeräte</string>
-    <string name="poi_korfbal">Korfball</string>
+    <string name="poi_korfball">Korfball</string>
     <string name="poi_landfill">Mülldeponie</string>
     <string name="poi_laundry">Wäscherei</string>
     <string name="poi_lawyer">Rechtsanwalt</string>
@@ -334,7 +334,7 @@
     <string name="poi_organic">Bioprodukte</string>
     <string name="poi_orienteering">Orientierungslauf</string>
     <string name="poi_outdoor">Outdoorgeschäft</string>
-    <string name="poi_paddle_tennis">Padel-Tennis</string>
+    <string name="poi_paddle_tennis">Paddle-Tennis</string>
     <string name="poi_paint">Farbengeschäft</string>
     <string name="poi_craft_painter">Maler</string>
     <string name="poi_palaeontological_site">Paläontologischer Ort</string>
@@ -476,7 +476,7 @@
     <string name="poi_historic_ship">Historisches Schiff</string>
     <string name="poi_craft_shoemaker">Schuster</string>
     <string name="poi_shoes">Schuhgeschäft</string>
-    <string name="poi_shooting">Schießen</string>
+    <string name="poi_shooting">Sportschießen</string>
     <string name="poi_farm">Hofladen</string>
     <string name="poi_tea">Teeladen</string>
     <string name="poi_sinkhole">Senkgrube</string>
@@ -527,7 +527,7 @@
     <string name="poi_craft_tiler">Fliesenleger</string>
     <string name="poi_craft_tinsmith">Klempner</string>
     <string name="poi_tobacco">Tabakwarengeschäft</string>
-    <string name="poi_toboggan">Rodel</string>
+    <string name="poi_toboggan">Rutschturm</string>
     <string name="poi_toilets">Toilette</string>
     <string name="poi_toll_booth">Mautstelle</string>
     <string name="poi_information">Information</string>
@@ -666,7 +666,7 @@
     <string name="poi_fuel_electricity">Strom</string>
     <string name="poi_public_transport_stop_position">Halteposition öffentlicher Verkehrsmittel</string>
     <string name="poi_railway_buffer_stop">Eisenbahnprellbock</string>
-    <string name="poi_junction">Kreuzung</string>
+    <string name="poi_junction">ABZWEIGUNG</string>
     <string name="poi_rest_area">Rastplatz</string>
     <string name="poi_observation_tower">Aussichtsturm</string>
     <string name="poi_bell_tower">Glockenturm</string>

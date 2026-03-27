@@ -14,6 +14,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 
 public class MapRouteCalculationProgressListener implements RouteCalculationProgressListener {
 
@@ -35,7 +36,7 @@ public class MapRouteCalculationProgressListener implements RouteCalculationProg
 	public void onCalculationStart() {
 		app.runInUIThread(() -> {
 			ProgressBar progressBar = activity.findViewById(R.id.map_horizontal_progress);
-			activity.setupRouteCalculationProgressBar(progressBar);
+			UiUtilities.setupRouteCalculationProgressBar(progressBar);
 			activity.getMapRouteInfoMenu().routeCalculationStarted();
 
 			if (routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting()) {

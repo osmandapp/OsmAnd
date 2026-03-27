@@ -24,8 +24,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.utils.OsmAndFormatterParams;
+import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
@@ -87,7 +87,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private final Path redCompassLines = new Path();
 
 	private final double[] degrees = new double[72];
-	private final String[] cardinalDirections = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
+	public static final String[] CARDINAL_DIRECTIONS = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
 
 	private final int[] arcColors = {
 			Algorithms.parseColor("#00237BFF"),
@@ -732,32 +732,32 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	private String getCardinalDirection(int i) {
 		if (i == 0) {
-			return cardinalDirections[6];
+			return CARDINAL_DIRECTIONS[6];
 		} else if (i == 9) {
-			return cardinalDirections[5];
+			return CARDINAL_DIRECTIONS[5];
 		} else if (i == 18) {
-			return cardinalDirections[4];
+			return CARDINAL_DIRECTIONS[4];
 		} else if (i == 27) {
-			return cardinalDirections[3];
+			return CARDINAL_DIRECTIONS[3];
 		} else if (i == 36) {
-			return cardinalDirections[2];
+			return CARDINAL_DIRECTIONS[2];
 		} else if (i == 45) {
-			return cardinalDirections[1];
+			return CARDINAL_DIRECTIONS[1];
 		} else if (i == 54) {
-			return cardinalDirections[0];
+			return CARDINAL_DIRECTIONS[0];
 		} else if (i == 63) {
-			return cardinalDirections[7];
+			return CARDINAL_DIRECTIONS[7];
 		}
 		return null;
 	}
 
-	private String getCardinalDirectionForDegrees(double degrees) {
+	public static String getCardinalDirectionForDegrees(double degrees) {
 		while (degrees < 0) {
 			degrees += 360;
 		}
 		int index = (int) Math.floor(((degrees + 22.5) % 360) / 45);
-		if (index >= 0 && cardinalDirections.length > index) {
-			return cardinalDirections[index];
+		if (index >= 0 && CARDINAL_DIRECTIONS.length > index) {
+			return CARDINAL_DIRECTIONS[index];
 		} else {
 			return "";
 		}

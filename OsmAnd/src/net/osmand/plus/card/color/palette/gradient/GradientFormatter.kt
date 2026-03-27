@@ -67,7 +67,7 @@ object GradientFormatter {
 		showUnits: Boolean,
 		realDataLimits: RealDataLimits? = null
 	): String {
-		var displayUnits = fileType.displayUnits
+		var displayUnits = fileType.displayUnitsType.getUnit()
 		var baseUnits = fileType.baseUnits
 
 		val valueStr: String
@@ -95,7 +95,7 @@ object GradientFormatter {
 				// SCENARIO 2: Relative + No Data (Abstract Preview)
 				// Show constants (Min/Max) or percentages.
 				val constant = RelativeConstants.valueOfRatio(value)
-				if (constant != null) {
+				if (constant != null && fileType.useNamedConstants) {
 					valueStr = constant.getName(useFullName = false)
 					unitsSrt = ""
 				} else {

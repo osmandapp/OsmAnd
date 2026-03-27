@@ -58,7 +58,6 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
 					android:layout_marginEnd="@dimen/content_padding"
-					android:layout_marginRight="@dimen/content_padding"
 					android:clickable="false"
 					android:focusable="false" />
 
