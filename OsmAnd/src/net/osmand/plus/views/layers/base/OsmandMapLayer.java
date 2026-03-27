@@ -23,6 +23,7 @@ import androidx.annotation.StringRes;
 import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.MapRendererView.MapRendererViewListener;
 import net.osmand.core.android.NativeCore;
@@ -42,7 +43,9 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -556,7 +559,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		QListMapMarker markers = mapMarkersCollection.getMarkers();
 		for (int i = 0; i < markers.size(); i++) {
 			net.osmand.core.jni.MapMarker m = markers.get(i);
-			if (m.getPosition().getX() == movableObject.getX() && m.getPosition().getY() == movableObject.getY()) {
+			if (NativeUtilities.arePointsEqual(m.getPosition(), movableObject)) {
 				m.setPosition(new PointI(x, y));
 				m.setIsHidden(false);
 				movableObject = null;
@@ -574,7 +577,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		QListMapMarker markers = mapMarkersCollection.getMarkers();
 		for (int i = 0; i < markers.size(); i++) {
 			net.osmand.core.jni.MapMarker m = markers.get(i);
-			if (m.getPosition().getX() == movableObject.getX() && m.getPosition().getY() == movableObject.getY()) {
+			if (NativeUtilities.arePointsEqual(m.getPosition(), movableObject)) {
 				m.setIsHidden(false);
 				movableObject = null;
 				break;
@@ -585,6 +588,28 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	/** OpenGL */
 	public static boolean isMapRendererLost(@NonNull Context ctx) {
 		return !((OsmandApplication) ctx.getApplicationContext()).getOsmandMap().getMapView().hasMapRenderer();
+	}
+
+	/** OpenGL */
+	public boolean hasHighlight3dObjectColor(@NonNull LatLon latLon) {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		return mapContext != null && mapContext.getHighlight3dObjectColor(latLon) != null;
+	}
+
+	/** OpenGL */
+	public void add3DObjectColor(@NonNull LatLon latLon, int color) {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.add3DObjectColor(latLon, color);
+		}
+	}
+
+	/** OpenGL */
+	public void remove3DObjectColor(@NonNull LatLon latLon) {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.remove3DObjectColor(latLon);
+		}
 	}
 
 	public static class TileBoxRequest {

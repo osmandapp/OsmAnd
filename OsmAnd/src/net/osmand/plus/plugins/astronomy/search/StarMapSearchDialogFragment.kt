@@ -17,6 +17,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -48,6 +49,7 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils
+import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
@@ -130,7 +132,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private lateinit var emptyStateIcon: ImageView
 	private lateinit var emptyStateTitle: TextView
 	private lateinit var emptyStateDescription: TextView
-	private lateinit var emptyStateResetButton: View
+	private lateinit var emptyStateResetButton: DialogButton
 	private lateinit var recentChipsContainer: LinearLayout
 	private lateinit var recentChipsScroll: View
 	private lateinit var watchNowRow: View
@@ -242,6 +244,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		AndroidUiHelper.setStatusBarContentColor(view, nightMode)
+		applyRedFilter(isRedFilterEnabled())
 		bindViews(view)
 		refreshPreparedEntries()
 		setupSearchRecycler()
@@ -263,20 +266,29 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		applyFiltersAndSort(scrollToTop = false)
 	}
 
+	override fun onStart() {
+		super.onStart()
+		syncDialogVisibilityWithFragmentState()
+	}
+
+	fun applyRedFilter(enabled: Boolean) {
+		StarMapFragment.applyRedFilterToViews(enabled, view)
+	}
+
+	private fun isRedFilterEnabled(): Boolean {
+		return (parentFragment as? StarMapFragment)?.starView?.showRedFilter
+			?: astroSettings.getStarMapConfig().showRedFilter
+	}
+
 	override fun onHiddenChanged(hidden: Boolean) {
 		super.onHiddenChanged(hidden)
-		if (hidden) {
-			restoreSearchSoftInputMode()
-			dialog?.hide()
-			return
+		syncDialogVisibilityWithFragmentState()
+		if (!hidden) {
+			refreshPreparedEntries()
+			setupMyDataRows()
+			setupCatalogRows()
+			applyFiltersAndSort(scrollToTop = false)
 		}
-		applySearchSoftInputMode()
-		dialog?.show()
-		view?.let { AndroidUiHelper.setStatusBarContentColor(it, nightMode) }
-		refreshPreparedEntries()
-		setupMyDataRows()
-		setupCatalogRows()
-		applyFiltersAndSort(scrollToTop = false)
 	}
 
 	override fun onDestroyView() {
@@ -346,6 +358,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		emptyStateTitle = searchResultsPanel.findViewById(R.id.empty_state_title)
 		emptyStateDescription = searchResultsPanel.findViewById(R.id.empty_state_description)
 		emptyStateResetButton = searchResultsPanel.findViewById(R.id.empty_state_reset_button)
+		applyEmptyStateButtonStyle()
 		searchRecycler = searchResultsPanel.findViewById(R.id.search_results)
 		attachSearchResultsPanel(fullSearchResultsHost)
 	}
@@ -357,6 +370,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			visibleEntries = visibleEntries,
 			widToDisplayName = widToDisplayName,
 			shouldShowInfoHeader = ::shouldShowInfoHeader,
+			useExploreRowLayout = ::isMyDataMode,
 			categoryPresetProvider = searchState::categoryPreset,
 			eventTextProvider = searchHelper::resolveEventText,
 			onEntrySelected = ::onSearchEntrySelected
@@ -537,6 +551,18 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		previousSoftInputMode = null
 	}
 
+	private fun syncDialogVisibilityWithFragmentState() {
+		if (isHidden) {
+			restoreSearchSoftInputMode()
+			dialog?.hide()
+			return
+		}
+		val rootView = view ?: return
+		applySearchSoftInputMode()
+		dialog?.show()
+		AndroidUiHelper.setStatusBarContentColor(rootView, nightMode)
+	}
+
 	private fun restoreUiState(savedInstanceState: Bundle?) {
 		if (savedInstanceState == null) {
 			return
@@ -661,6 +687,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			addExploreRow(
 				container = catalogsContainer,
 				iconRes = R.drawable.ic_action_book_info,
+				iconColorRes = ColorUtilities.getDefaultIconColorId(nightMode),
 				title = catalog.name,
 				subtitle = null,
 				count = null,
@@ -679,6 +706,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private fun addExploreRow(
 		container: LinearLayout,
 		iconRes: Int,
+		iconColorRes: Int = ColorUtilities.getActiveIconColorId(nightMode),
 		title: String,
 		subtitle: String?,
 		count: Int?,
@@ -692,7 +720,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		val countView = row.findViewById<TextView>(R.id.row_count)
 		val divider = row.findViewById<View>(R.id.row_divider)
 
-		icon.setImageDrawable(app.uiUtilities.getIcon(iconRes, ColorUtilities.getActiveIconColorId(nightMode)))
+		icon.setImageDrawable(app.uiUtilities.getIcon(iconRes, iconColorRes))
 		titleView.text = title
 		subtitleView.text = subtitle
 		subtitleView.isVisible = !subtitle.isNullOrEmpty()
@@ -1111,7 +1139,11 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	@SuppressLint("NotifyDataSetChanged")
 	private fun applyFiltersAndSort(scrollToTop: Boolean) {
+		if (view == null) {
+			return
+		}
 		filterAndSortJob?.cancel()
+		normalizeTypeFilterForCurrentPreset()
 		val requestId = ++filterAndSortRequestId
 		val stateSnapshot = searchState.snapshot()
 		val isCatalogsMode = shouldShowCatalogEntries()
@@ -1120,6 +1152,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		updateResultsAdapter()
 		updateSortControls()
 		updateFilterControls()
+		updateEmptyStateContent()
 		updateSortProgressVisibility(true)
 		if (::emptyStateContainer.isInitialized) {
 			emptyStateContainer.isVisible = false
@@ -1137,12 +1170,14 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 					visibleCatalogEntries.addAll(filteredCatalogs)
 					catalogsAdapter.notifyDataSetChanged()
 				} else {
+					val insertionOrderById = getMyDataInsertionOrderMap(stateSnapshot.quickPresetType)
 					val filteredEntries = withContext(Dispatchers.Default) {
 						stateSnapshot.filterAndSort(
 							preparedEntries = preparedEntriesSnapshot.map { it.copy() },
 							visibleTonightProvider = searchHelper::getVisibleTonight,
 							riseSortValueProvider = searchHelper::getRiseSortValue,
-							setSortValueProvider = searchHelper::getSetSortValue
+							setSortValueProvider = searchHelper::getSetSortValue,
+							insertionOrderProvider = { entry -> insertionOrderById[entry.objectRef.id] }
 						)
 					}
 					if (requestId != filterAndSortRequestId || view == null) {
@@ -1195,6 +1230,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private fun updateSortControls() {
 		if (!::sortText.isInitialized || !::sortIcon.isInitialized) return
 		val (iconRes, textRes) = when (searchState.sortMode) {
+			StarMapSearchSortMode.NEWEST_FIRST -> R.drawable.ic_action_sort_date_1 to R.string.astro_sort_newest_first
+			StarMapSearchSortMode.OLDEST_FIRST -> R.drawable.ic_action_sort_date_31 to R.string.astro_sort_oldest_first
 			StarMapSearchSortMode.NAME_ASC -> R.drawable.ic_action_sort_by_name_ascending to R.string.sort_name_ascending
 			StarMapSearchSortMode.NAME_DESC -> R.drawable.ic_action_sort_by_name_descending to R.string.sort_name_descending
 			StarMapSearchSortMode.BRIGHTEST_FIRST -> R.drawable.ic_action_sort_brightest to R.string.astro_sort_brightest_first
@@ -1212,11 +1249,24 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		filterText.text = getString(R.string.filter_tracks_count, searchState.calculateFilterCount())
 	}
 
+	private fun shouldHideShowAllTypeFilter(): Boolean {
+		return searchState.quickPresetType == StarMapSearchQuickPresetType.WATCH_NOW
+	}
+
+	private fun normalizeTypeFilterForCurrentPreset() {
+		if (shouldHideShowAllTypeFilter() && searchState.typeFilter == StarMapSearchTypeFilter.SHOW_ALL) {
+			searchState.typeFilter = StarMapSearchTypeFilter.VISIBLE_TONIGHT
+		}
+	}
+
+	private fun shouldShowWatchNowClearFiltersAction(): Boolean {
+		return searchState.quickPresetType == StarMapSearchQuickPresetType.WATCH_NOW && searchState.query.isBlank()
+	}
+
 	private fun updateEmptyStateContent() {
 		if (!::emptyStateTitle.isInitialized || !::emptyStateDescription.isInitialized || !::emptyStateResetButton.isInitialized) {
 			return
 		}
-		val resetButton = emptyStateResetButton as? TextView
 		if (isMyDataMode()) {
 			val (iconRes, titleRes, descriptionRes) = when (searchState.quickPresetType) {
 				StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> Triple(
@@ -1238,13 +1288,39 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			emptyStateIcon.setImageDrawable(app.uiUtilities.getIcon(iconRes, ColorUtilities.getDefaultIconColorId(nightMode)))
 			emptyStateTitle.setText(titleRes)
 			emptyStateDescription.setText(descriptionRes)
-			resetButton?.setText(R.string.astro_go_to_map)
+			emptyStateResetButton.setTitleId(R.string.astro_go_to_map)
 		} else {
 			emptyStateIcon.setImageDrawable(app.uiUtilities.getIcon(R.drawable.ic_action_ufo, ColorUtilities.getDefaultIconColorId(nightMode)))
 			emptyStateTitle.setText(R.string.nothing_found)
 			emptyStateDescription.setText(R.string.astro_search_empty_description)
-			resetButton?.setText(R.string.shared_string_reset)
+			emptyStateResetButton.setTitleId(
+				if (shouldShowWatchNowClearFiltersAction()) R.string.shared_string_clear_filters else R.string.shared_string_reset
+			)
 		}
+	}
+
+	private fun applyEmptyStateButtonStyle() {
+		val context = emptyStateResetButton.context
+		AndroidUtils.setBackground(
+			context,
+			emptyStateResetButton.buttonView,
+			nightMode,
+			R.drawable.dlg_btn_secondary_light,
+			R.drawable.dlg_btn_secondary_dark
+		)
+		AndroidUtils.setBackground(
+			context,
+			emptyStateResetButton.findViewById(R.id.button_container),
+			nightMode,
+			R.drawable.ripple_solid_light,
+			R.drawable.ripple_solid_dark
+		)
+		emptyStateResetButton.findViewById<TextView>(R.id.button_text)?.setTextColor(
+			AppCompatResources.getColorStateList(
+				context,
+				if (nightMode) R.color.dlg_btn_secondary_text_dark else R.color.dlg_btn_secondary_text_light
+			)
+		)
 	}
 
 	private fun updateEmptyStateVisibility() {
@@ -1255,9 +1331,19 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private fun handleEmptyStateAction() {
 		if (isMyDataMode()) {
 			dismiss()
+		} else if (shouldShowWatchNowClearFiltersAction()) {
+			resetWatchNowFilters()
 		} else {
 			resetAllSearchParams()
 		}
+	}
+
+	private fun resetWatchNowFilters() {
+		searchState.typeFilter = StarMapSearchTypeFilter.VISIBLE_TONIGHT
+		searchState.nakedEyeOnly = false
+		searchState.selectedCategories.clear()
+		searchState.selectedCategories.add(StarMapSearchCategoryFilter.ALL)
+		applyFiltersAndSort(scrollToTop = true)
 	}
 
 	private fun resetAllSearchParams() {
@@ -1404,9 +1490,13 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				}
 			)
 		} else {
-			listOf(
+			val items = mutableListOf(
 				createPopupHeaderItem(getString(R.string.sort_by), secondaryTextColor),
-				createRadioPopupItem(getString(R.string.sort_name_ascending), searchState.sortMode == StarMapSearchSortMode.NAME_ASC, activeColor) {
+				createRadioPopupItem(
+					getString(R.string.sort_name_ascending),
+					searchState.sortMode == StarMapSearchSortMode.NAME_ASC,
+					activeColor
+				) {
 					searchState.sortMode = StarMapSearchSortMode.NAME_ASC
 					updateSortControls()
 					applyFiltersAndSort(scrollToTop = true)
@@ -1455,6 +1545,32 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 					applyFiltersAndSort(scrollToTop = true)
 				}
 			)
+			if (isMyDataMode()) {
+				items.add(
+					createRadioPopupItem(
+						getString(R.string.astro_sort_newest_first),
+						searchState.sortMode == StarMapSearchSortMode.NEWEST_FIRST,
+						activeColor,
+						showTopDivider = true
+					) {
+						searchState.sortMode = StarMapSearchSortMode.NEWEST_FIRST
+						updateSortControls()
+						applyFiltersAndSort(scrollToTop = true)
+					}
+				)
+				items.add(
+					createRadioPopupItem(
+						getString(R.string.astro_sort_oldest_first),
+						searchState.sortMode == StarMapSearchSortMode.OLDEST_FIRST,
+						activeColor
+					) {
+						searchState.sortMode = StarMapSearchSortMode.OLDEST_FIRST
+						updateSortControls()
+						applyFiltersAndSort(scrollToTop = true)
+					}
+				)
+			}
+			items
 		}
 		sortPopup = PopUpMenu.showAndGet(
 			createPopupDisplayData(
@@ -1467,23 +1583,37 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		)
 	}
 
+	private fun getMyDataInsertionOrderMap(quickPresetType: StarMapSearchQuickPresetType): Map<String, Int> {
+		val ids = when (quickPresetType) {
+			StarMapSearchQuickPresetType.MY_DATA_FAVORITES -> astroSettings.getStarMapConfig().favorites.map { it.id }
+			StarMapSearchQuickPresetType.MY_DATA_DAILY_PATH -> astroSettings.getStarMapConfig().celestialPaths.map { it.id }
+			StarMapSearchQuickPresetType.MY_DATA_DIRECTIONS -> astroSettings.getStarMapConfig().directions.map { it.id }
+			else -> emptyList()
+		}
+		return ids.withIndex().associate { indexedValue -> indexedValue.value to indexedValue.index }
+	}
+
 	private fun showFilterPopup(anchor: View) {
 		if (shouldShowCatalogEntries()) {
 			return
 		}
+		normalizeTypeFilterForCurrentPreset()
 		dismissFilterPopup()
 		val activeColor = ColorUtilities.getActiveColor(app, nightMode)
 		val secondaryTextColor = ColorUtilities.getSecondaryTextColor(requireContext(), nightMode)
-		val items = mutableListOf(
-			createPopupHeaderItem(getString(R.string.shared_string_type), secondaryTextColor),
-			createRadioPopupItem(
+		val items = mutableListOf<PopUpMenuItem>()
+		items += createPopupHeaderItem(getString(R.string.shared_string_type), secondaryTextColor)
+		if (!shouldHideShowAllTypeFilter()) {
+			items += createRadioPopupItem(
 				getString(R.string.astro_filter_show_all),
 				searchState.typeFilter == StarMapSearchTypeFilter.SHOW_ALL,
 				activeColor
 			) {
 				searchState.typeFilter = StarMapSearchTypeFilter.SHOW_ALL
 				applyFiltersAndSort(scrollToTop = true)
-			},
+			}
+		}
+		items += listOf(
 			createRadioPopupItem(
 				getString(R.string.astro_filter_visible_now),
 				searchState.typeFilter == StarMapSearchTypeFilter.VISIBLE_NOW,

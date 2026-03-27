@@ -5941,4 +5941,16 @@
     <string name="shared_string_radians">弧度</string>
     <string name="obd_alt_battery_voltage_desc">顯示 OBD 轉接器的電壓值</string>
     <string name="shared_string_unlock">解鎖</string>
+    <string name="start_free_trial">開始免費試用</string>
+    <string name="subscription_free_trial_with_price">%1$s 免費，然後 %2$s</string>
+    <string name="subscription_then_price">然後 %1$s</string>
+    <string name="purchases_feature_desc_astronomy">透過離線地圖與天體目錄，探索夜空。利用智慧可見度圖表、每日行程表以及互動式 AR 模式來規劃觀測行程。</string>
+    <string name="astro_expand_your_universe_title">拓展您的宇宙</string>
+    <string name="astro_expand_your_universe_description">離線存取擴充天體目錄、維基百科條目及 AR 模式資料庫。</string>
+    <string name="astro_offline_knowledge_base_title">離線知識庫</string>
+    <string name="astro_offline_knowledge_base_description">下載擴充資料庫，即可離線瀏覽維基百科條目及深空星表。</string>
+    <string name="astro_schedule_next_day_note">⁺¹ 隔天。</string>
+    <string name="astro_visibility_show_today">顯示今日能見度</string>
+    <string name="astro_schedule_show_current_week">顯示目前週</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
 </resources>

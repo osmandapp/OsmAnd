@@ -429,6 +429,14 @@
 		<item name="cornerSize">8dp</item>
 	</style>
 
+	<style name="Shape.TopSearchSurface">
+		<item name="cornerFamily">rounded</item>
+		<item name="cornerSizeTopLeft">0dp</item>
+		<item name="cornerSizeTopRight">0dp</item>
+		<item name="cornerSizeBottomLeft">8dp</item>
+		<item name="cornerSizeBottomRight">8dp</item>
+	</style>
+
 	<style name="Shape.Card6">
 		<item name="cornerFamily">rounded</item>
 		<item name="cornerSize">6dp</item>

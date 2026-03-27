@@ -4376,7 +4376,7 @@
     <string name="map_widget_target_distance_desc">Indique la distance entre l\'appareil photo et la destination.</string>
     <string name="map_widget_zoom_level">Niveau de zoom</string>
     <string name="map_widget_camera_distance">Altitude de l\'appareil photo</string>
-    <string name="external_sensor_widgets">Widgets ANT+</string>
+    <string name="external_sensor_widgets">Capteurs externes</string>
     <string name="ant_missing_dependency">Dépendance manquante</string>
     <string name="ant_go_to_store">Accéder à la boutique</string>
     <string name="ant_read_data">Lire les données</string>
@@ -4564,8 +4564,8 @@
     <string name="si_nm_mt">Milles nautiques/mètres</string>
     <string name="av_audio_format_bottom_sheet_descr">Sélectionner un format audio. Les fichiers audio sont au format 3GPP (.3gp).</string>
     <string name="set_up_backup">Paramétrer la sauvegarde</string>
-    <string name="x_axis">Axe des abscisses</string>
-    <string name="y_axis">Axe des ordonnées</string>
+    <string name="x_axis">Abscisses</string>
+    <string name="y_axis">Ordonnées</string>
     <string name="value_downloaded_of_mb">Téléchargement %1$.1f/%2$.1f MB</string>
     <string name="share_link">Partager le lien</string>
     <string name="share_as_file">Partager en tant que fichier</string>
@@ -4623,7 +4623,7 @@
     <string name="clear_online_cache">Vider le cache en ligne</string>
     <string name="app_mode_climbing">Escalade</string>
     <string name="offline_cache">Cache hors ligne</string>
-    <string name="shared_string_alt_name">Autre dénomination</string>
+    <string name="shared_string_alt_name">Autre nom</string>
     <string name="token_is_not_valid">Le jeton n\'est pas valide</string>
     <string name="metric_lbs">livres</string>
     <string name="weather_forecast_is_outdated">Les prévisions ne sont pas à jour.</string>
@@ -5300,7 +5300,7 @@
     <string name="delete_widget">Supprimer le widget ?</string>
     <string name="battery_saving_mode">Mode économie d\'énergie</string>
     <string name="graph_axis">Axes du graphique</string>
-    <string name="y_axis_description">Sélectionner jusqu\'à deux options pour l\'axe Y.</string>
+    <string name="y_axis_description">Sélectionnez jusqu\'à deux options d\'ordonnées.</string>
     <string name="app_mode_suv">SUV</string>
     <string name="shared_string_interface">Interface</string>
     <string name="quick_action_previous_screen_desc">Une bascule pour naviguer vers l\'écran précédent.</string>
@@ -5624,7 +5624,7 @@
     <string name="saved_to_device">Enregistré sur l\'appareil</string>
     <string name="save_to_device_error">Erreur d\'enregistrement sur l\'appareil</string>
     <string name="save_to_device">Enregistrer sur l\'appareil</string>
-    <string name="travel_guides">Guides</string>
+    <string name="travel_guides">Guides de voyage</string>
     <string name="show_debug_tile_description">Afficher les informations à propos des symboles de la carte sur chaque tuile</string>
     <string name="show_debug_tile">Afficher les informations de la tuile</string>
     <string name="deactivated_map">Carte désactivée</string>
@@ -5811,10 +5811,10 @@
     <string name="delete_folder_description">Supprimer le dossier « %1$s » ?</string>
     <string name="show_spherical_map">Vue Globe terrestre</string>
     <string name="enable_3d_objects">Bâtiments 3D</string>
-    <string name="vehicle_metrics_chart_category">Paramètres du véhicule</string>
+    <string name="vehicle_metrics_chart_category">Mesures du véhicule</string>
     <string name="lang_mi">Māori</string>
     <string name="buildings_3d_detail_level">Détail des bâtiments 3D</string>
-    <string name="has_vehicle_metrics">Avec les données OBDII</string>
+    <string name="has_vehicle_metrics">À partir des données OBDII</string>
     <string name="show_expand_button">Afficher le bouton Développer</string>
     <string name="imprecise_coordinates">Coordonnées imprécises</string>
     <string name="astronomy_plugin_description">Cartes stellaires, carte du ciel en 3D</string>
@@ -6025,4 +6025,16 @@
     <string name="obd_alt_battery_voltage_desc">Affiche le niveau de tension sur l\'adaptateur OBD</string>
     <string name="shared_string_radians">Radians</string>
     <string name="shared_string_unlock">Déverrouiller</string>
+    <string name="start_free_trial">Commencer l\'essai gratuit</string>
+    <string name="subscription_free_trial_with_price">%1$s gratuit, puis %2$s</string>
+    <string name="subscription_then_price">puis %1$s</string>
+    <string name="astro_expand_your_universe_title">Augmentez votre Univers</string>
+    <string name="purchases_feature_desc_astronomy">Explorez le ciel nocturne grâce à une carte hors ligne et à un catalogue astronomique. Planifiez vos observations à l\'aide de graphiques de visibilité intelligents, d\'horaires quotidiens et d\'un mode de réalité augmentée interactif.</string>
+    <string name="astro_expand_your_universe_description">Accédez à la base de données étendue comprenant des catalogues du ciel profond, des articles Wikipédia et le mode de réalité augmentée hors ligne.</string>
+    <string name="astro_offline_knowledge_base_title">Base de connaissances hors ligne</string>
+    <string name="astro_offline_knowledge_base_description">Téléchargez la base de données étendue pour accéder hors ligne aux articles de Wikipédia et aux catalogues du ciel profond.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Le lendemain.</string>
+    <string name="astro_visibility_show_today">Afficher la visibilité d\'aujourd\'hui</string>
+    <string name="astro_schedule_show_current_week">Afficher la semaine en cours</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
 </resources>

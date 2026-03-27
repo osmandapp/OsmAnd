@@ -49,14 +49,16 @@ public class RouteCalculationProgress implements Serializable {
 	public boolean requestPrivateAccessRouting;
 
 	public long routeCalculationStartTime;
-	public MissingMapsCalculationResult missingMapsCalculationResult;
+
+	public MissingMapsCalculationResult missingMapsCalculationResult = null;
+	private int fastRoutingStatusOrdinal = FastRoutingState.Status.READY.ordinal(); // Two-way from/to JNI
 
 	private int hhIterationStep = HHIteration.HH_NOT_STARTED.ordinal();
 	private int hhTargetsDone, hhTargetsTotal;
 	private double hhCurrentStepProgress;
 	private int hhCalcCounter;
 
-	private static final float INITIAL_PROGRESS = 0.05f;
+	private static final float INITIAL_PROGRESS = 0.01f;
 	private static final float FIRST_ITERATION = 0.72f;
 
 	public static RouteCalculationProgress capture(RouteCalculationProgress cp) {
@@ -129,7 +131,7 @@ public class RouteCalculationProgress implements Serializable {
 		return map;
 	}
 
-	public float getLinearProgressHH() {
+	private float getLinearProgressHH() {
 		float progress = 0;
 		for (HHIteration i : HHIteration.values()) {
 			if (i.ordinal() == hhIterationStep) {
@@ -150,7 +152,7 @@ public class RouteCalculationProgress implements Serializable {
 	}
 
 	public float getLinearProgress() {
-		if(hhIterationStep != HHIteration.HH_NOT_STARTED.ordinal()) {
+		if (hhIterationStep != HHIteration.HH_NOT_STARTED.ordinal()) {
 			return getLinearProgressHH();
 		}
 		float p = Math.max(distanceFromBegin, distanceFromEnd);
@@ -229,5 +231,29 @@ public class RouteCalculationProgress implements Serializable {
 
 	public int hhGetCalcCounter() {
 		return this.hhCalcCounter;
+	}
+
+	public boolean isSlowRoutingActive() {
+		return FastRoutingState.isSlowRoutingActive(fastRoutingStatusOrdinal);
+	}
+
+	public boolean hasMixedOrMissingMaps() {
+		return FastRoutingState.isMixedOrMissingMaps(fastRoutingStatusOrdinal);
+	}
+
+	public FastRoutingState.Status getFastRoutingStatus() {
+		return FastRoutingState.get(fastRoutingStatusOrdinal);
+	}
+
+	public void resetFastRoutingStatus() {
+		fastRoutingStatusOrdinal = FastRoutingState.reset();
+	}
+
+	public void failFastRoutingStatus() {
+		fastRoutingStatusOrdinal = FastRoutingState.fail(fastRoutingStatusOrdinal);
+	}
+
+	public void raiseFastRoutingStatus(FastRoutingState.Status status) {
+		fastRoutingStatusOrdinal = FastRoutingState.raise(fastRoutingStatusOrdinal, status);
 	}
 }

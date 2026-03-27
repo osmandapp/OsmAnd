@@ -2494,7 +2494,7 @@
     <string name="context_menu_read_article">Lees artikel</string>
     <string name="context_menu_points_of_group">Alle punten van de groep</string>
     <string name="additional_actions">Bijkomende acties</string>
-    <string name="modify_the_search_query">Zoekopdracht wijzigen.</string>
+    <string name="modify_the_search_query">Wijzig je zoekopdracht.</string>
     <string name="shared_string_actions">Acties</string>
     <string name="shared_string_marker">Markering</string>
     <string name="empty_state_osm_edits">OpenStreetMap-objecten aanmaken of wijzigen</string>
@@ -6450,4 +6450,16 @@
     <string name="obd_alt_battery_voltage_desc">Toont het spanningsniveau op de OBD-adapter</string>
     <string name="shared_string_radians">Radialen</string>
     <string name="shared_string_unlock">Ontgrendel</string>
+    <string name="start_free_trial">Start gratis proefperiode</string>
+    <string name="subscription_free_trial_with_price">%1$s gratis, daarna %2$s</string>
+    <string name="subscription_then_price">daarna %1$s</string>
+    <string name="purchases_feature_desc_astronomy">Verken de sterrenhemel met een offline kaart en een astronomische catalogi. Plan observaties met behulp van slimme zichtbaarheidsgrafieken, dagelijkse schema\'s en een interactieve AR-modus.</string>
+    <string name="astro_expand_your_universe_title">Vergroot je universum</string>
+    <string name="astro_expand_your_universe_description">Krijg toegang tot de uitgebreide database met deepsky-catalogi, Wikipedia-artikelen en de AR-modus offline.</string>
+    <string name="astro_offline_knowledge_base_title">Offline kennisbank</string>
+    <string name="astro_offline_knowledge_base_description">Download de uitgebreide database om offline toegang te krijgen tot Wikipedia-artikelen en deepsky-catalogi.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Volgende dag.</string>
+    <string name="astro_visibility_show_today">De zichtbaarheid van vandaag weergeven</string>
+    <string name="astro_schedule_show_current_week">Toon huidige week</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
 </resources>

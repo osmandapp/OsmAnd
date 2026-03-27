@@ -10,6 +10,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -17,7 +18,6 @@ import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
-import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -33,6 +33,8 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
+import net.osmand.plus.plugins.srtm.building.Building3DDetailLevel;
+import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -51,7 +53,6 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
-import net.osmand.shared.ColorPalette;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 
@@ -80,6 +81,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final int TERRAIN_MIN_SUPPORTED_ZOOM = 4;
 	public static final int TERRAIN_MAX_SUPPORTED_ZOOM = 19;
 
+	public static final int DEFAULT_HILLSHADE_SUN_ANGLE = 45;
+	public static final int DEFAULT_HILLSHADE_SUN_AZIMUTH = 315;
+
 	public static final float MIN_VERTICAL_EXAGGERATION = 1.0f;
 	public static final float MAX_VERTICAL_EXAGGERATION = 3.0f;
 	public static final float BUILDINGS_3D_ALPHA_DEF_VALUE = 0.5f;
@@ -94,15 +98,16 @@ public class SRTMPlugin extends OsmandPlugin {
 	public final CommonPreference<Float> BUILDINGS_3D_ALPHA;
 	public final CommonPreference<Integer> BUILDINGS_3D_VIEW_DISTANCE;
 	public final CommonPreference<Integer> BUILDINGS_3D_COLOR_STYLE;
-	public final CommonPreference<String> BUILDINGS_3D_COLOR;
 	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_NIGHT_COLOR;
 	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_DAY_COLOR;
-
-
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM;
+	public final CommonPreference<Integer> HILLSHADE_SUN_ANGLE;
+	public final CommonPreference<Integer> HILLSHADE_SUN_AZIMUTH;
 
 	private final StateChangedListener<Boolean> enable3DMapsListener;
 	private final StateChangedListener<Boolean> terrainListener;
+	private final StateChangedListener<Integer> hillshadeSunAngleListener;
+	private final StateChangedListener<Integer> hillshadeSunAzimuthListener;
 	private final StateChangedListener<String> terrainModeListener;
 	private final StateChangedListener<Float> verticalExaggerationListener;
 	private final StateChangedListener<MetricsConstants> metricSystemListener;
@@ -127,16 +132,17 @@ public class SRTMPlugin extends OsmandPlugin {
 		BUILDINGS_3D_CUSTOM_NIGHT_COLOR = registerIntPreference("buildings_3d_custom_night_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
 		BUILDINGS_3D_CUSTOM_DAY_COLOR = registerIntPreference("buildings_3d_custom_day_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
 
-
 		BUILDINGS_3D_DETAIL_LEVEL = settings.getCustomRenderBooleanProperty("show3DbuildingParts");
 		BUILDINGS_3D_ENABLE_COLORING = settings.getCustomRenderBooleanProperty("useDefaultBuildingColor");
-		BUILDINGS_3D_COLOR = settings.getCustomRenderProperty("base3DBuildingsColor");
 
 		TERRAIN = registerBooleanPreference("terrain_layer", true).makeProfile();
 		TerrainMode[] tms = TerrainMode.values(app);
 		TERRAIN_MODE = registerStringPreference("terrain_mode", tms.length == 0 ? "" : tms[0].getKeyName()).makeProfile();
 
 		CONTOUR_LINES_ZOOM = registerStringPreference("contour_lines_zoom", null).makeProfile().cache();
+
+		HILLSHADE_SUN_ANGLE = registerIntPreference("hillshade_sun_angle", DEFAULT_HILLSHADE_SUN_ANGLE).makeGlobal().cache();
+		HILLSHADE_SUN_AZIMUTH = registerIntPreference("hillshade_sun_azimuth", DEFAULT_HILLSHADE_SUN_AZIMUTH).makeGlobal().cache();
 
 		enable3DMapsListener = change -> app.runInUIThread(() -> {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
@@ -146,20 +152,10 @@ public class SRTMPlugin extends OsmandPlugin {
 		});
 		settings.ENABLE_3D_MAPS.addListener(enable3DMapsListener);
 
-		terrainListener = change -> app.runInUIThread(() -> {
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				mapContext.updateElevationConfiguration();
-			}
-		});
+		terrainListener = change -> app.runInUIThread(this::updateElevationConfiguration);
 		TERRAIN.addListener(terrainListener);
 
-		terrainModeListener = change -> app.runInUIThread(() -> {
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				mapContext.updateElevationConfiguration();
-			}
-		});
+		terrainModeListener = change -> app.runInUIThread(this::updateElevationConfiguration);
 		TERRAIN_MODE.addListener(terrainModeListener);
 		verticalExaggerationListener = scale -> {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
@@ -183,6 +179,19 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		};
 		ENABLE_3D_MAP_OBJECTS.addListener(map3DObjectsListener);
+
+		hillshadeSunAngleListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		HILLSHADE_SUN_ANGLE.addListener(hillshadeSunAngleListener);
+
+		hillshadeSunAzimuthListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		HILLSHADE_SUN_AZIMUTH.addListener(hillshadeSunAzimuthListener);
+	}
+
+	public void updateElevationConfiguration() {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.updateElevationConfiguration();
+		}
 	}
 
 	@Override
@@ -344,10 +353,6 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public void resetTransparencyToDefault() {
 		getTerrainMode().resetTransparencyToDefault();
-	}
-
-	public void reset3DBuildingAlphaToDefault() {
-		BUILDINGS_3D_ALPHA.set(BUILDINGS_3D_ALPHA_DEF_VALUE);
 	}
 
 	public void resetVerticalExaggerationToDefault() {
@@ -793,7 +798,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) {
 		mapRendererContext.updateElevationConfiguration();
 		mapRendererContext.recreateHeightmapProvider();
-		mapRendererContext.updateVerticalExaggerationScale();
 		MapRendererView rendererView = mapRendererContext.getMapRendererView();
 		if (rendererView != null) {
 			rendererView.set3DBuildingsAlpha(BUILDINGS_3D_ALPHA.get());
@@ -835,10 +839,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	public void apply3DBuildingsColorStyle(Buildings3DColorType style) {
 		BUILDINGS_3D_ENABLE_COLORING.set(false);
 		BUILDINGS_3D_COLOR_STYLE.set(style.getId());
-		if (style == Buildings3DColorType.CUSTOM) {
-			boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.MAP);
-			apply3DBuildingsColor(nightMode ? BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get() : BUILDINGS_3D_CUSTOM_DAY_COLOR.get());
-		}
 		updateMapPresentationEnvironment();
 	}
 
@@ -848,20 +848,19 @@ public class SRTMPlugin extends OsmandPlugin {
 		return Buildings3DColorType.Companion.getById(styleId);
 	}
 
-	public void apply3DBuildingsColor(int color) {
-		BUILDINGS_3D_COLOR.set(Algorithms.colorToString(color));
+	public void apply3DBuildingsCustomColor(boolean nightMode, @ColorInt int color) {
+		if (nightMode) {
+			BUILDINGS_3D_CUSTOM_NIGHT_COLOR.set(color);
+		} else {
+			BUILDINGS_3D_CUSTOM_DAY_COLOR.set(color);
+		}
 		updateMapPresentationEnvironment();
 	}
 
-	public int getBuildings3dColor() {
-		String color = BUILDINGS_3D_COLOR.get();
-		if(Algorithms.isEmpty(color)) {
-			return 0;
-		}
-		if(!color.startsWith("#")) {
-			color = String.format("#%s", color);
-		}
-		return Algorithms.parseColor(color);
+	public int getBuildings3dCustomColor(boolean nightMode) {
+		return nightMode
+				? BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get()
+				: BUILDINGS_3D_CUSTOM_DAY_COLOR.get();
 	}
 
 	private void updateMapPresentationEnvironment() {
@@ -870,5 +869,4 @@ public class SRTMPlugin extends OsmandPlugin {
 			updateMapPresentationEnvironment(mapRenderer);
 		}
 	}
-
 }

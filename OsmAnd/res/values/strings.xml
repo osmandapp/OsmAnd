@@ -10,7 +10,44 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+	<string name="compass_calibration_needed">Compass calibration needed</string>
+	<string name="sensors_not_available_for_ar">Sensors not available for AR</string>
+	<string name="ar_mode_enabled">AR Mode Enabled</string>
+	<string name="ar_mode_disabled">AR Mode Disabled</string>
+    <string name="release_5_3">
+        • 3D Buildings support added\n\n
+        • Spherical map view\n\n
+        • Astronomy plugin with night map and star database\n\n
+        • New color modes for Speedometer: tolerance and speeding\n\n
+        • Separate widget layouts for Landscape and Portrait\n\n
+        • Trip recording widgets: Moving speed and Average speed\n\n
+        • Adapter voltage widget for Vehicle Metrics\n\n
+        • Vehicle metrics data in Track Analyzer\n\n
+        • Auto-organize tracks by year, length, activity &amp; more\n\n
+        • Palette editor for Terrain and Track visualization\n\n
+        • Improved search algorithms &amp; refreshed UI\n\n
+        • Elevation profiles fixed for Routes\n\n
+        • Favorites: new sorting options and UI refresh\n\n
+        • Share link to any POI\n\n
+        • Waypoint preview without closing the list\n\n
+        • Bicycle width parameter to avoid narrow roads\n\n
+        • Photo descriptions from Wikimedia\n\n
+    </string>
+	<string name="purchases_feature_desc_astronomy">Explore the night sky with an offline map and celestial catalog. Plan observations using smart visibility graphs, daily schedules, and an interactive AR mode.</string>
+	<string name="shared_string_clear_filters">Clear filters</string>
+	<string name="astro_sort_newest_first">Newest first</string>
+	<string name="astro_sort_oldest_first">Oldest first</string>
+	<string name="astro_expand_your_universe_title">Expand your universe</string>
+	<string name="astro_expand_your_universe_description">Get access to the extended database of deep sky catalogs, Wikipedia articles and AR mode offline.</string>
+	<string name="astro_offline_knowledge_base_title">Offline Knowledge Base</string>
+	<string name="astro_offline_knowledge_base_description">Download the extended database to access Wikipedia articles and deep sky catalogs offline.</string>
+	<string name="astro_schedule_next_day_note">⁺¹ Next day.</string>
+	<string name="astro_visibility_show_today">Show today visibility</string>
+	<string name="astro_schedule_show_current_week">Show current week</string>
+	<string name="astro_next_day_suffix">⁺¹</string>
+    <string name="start_free_trial">Start free trial</string>
+    <string name="subscription_free_trial_with_price">%1$s free, then %2$s</string>
+    <string name="subscription_then_price">then %1$s</string>
     <string name="shared_string_radians">Radians</string>
 	<string name="shared_string_unlock">Unlock</string>
 	<string name="no_objects_found">No objects found</string>

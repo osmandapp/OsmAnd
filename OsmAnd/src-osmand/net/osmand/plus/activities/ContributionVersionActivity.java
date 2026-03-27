@@ -23,6 +23,8 @@ import androidx.core.content.FileProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmandListActivity;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 import java.io.File;
 import java.lang.annotation.Retention;
