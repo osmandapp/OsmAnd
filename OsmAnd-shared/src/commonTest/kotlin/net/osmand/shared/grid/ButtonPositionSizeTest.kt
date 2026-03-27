@@ -417,6 +417,113 @@ class ButtonPositionSizeTest {
 		assertTrue { check(buttons, "map_ruler_layout", 0.0, 24.0) }
 	}
 
+	@Test
+	fun testPlanRoute_transparencySliderShouldStayAtBottomExpectedPosition() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("widget_top_bar").setSize(51, 7).setNonMoveable()
+				.setMoveDescendantsVertical().apply {
+					posH = POS_FULL_WIDTH
+					posV = POS_TOP
+				},
+			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_out", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveAny(),
+			ButtonPositionSize("measurement_buttons", 8, true, false).setSize(8, 7).setMoveAny(),
+			ButtonPositionSize("map_ruler_layout", 9, true, false).setSize(9, 3).setMoveAny(),
+			ButtonPositionSize("map_transparency_layout", 11, true, false)
+				.setSize(11, 6).setMargin(19, 6).setMoveAny(),
+		)
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 51, 82)
+		assertTrue(computed)
+
+		// From log: x=(left ->19), y=(bott->6) => top = 82 - 6 - 6 = 70
+		assertTrue { check(buttons, "map_transparency_layout", 19.0, 70.0) }
+	}
+
+	@Test
+	fun testPlanRoute_transparencySliderShouldMoveUpWhenBottomWidgetAdded() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("widget_top_bar").setSize(51, 7).setNonMoveable()
+				.setMoveDescendantsVertical().apply {
+					posH = POS_FULL_WIDTH
+					posV = POS_TOP
+				},
+			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_out", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveAny(),
+			ButtonPositionSize("measurement_buttons", 8, true, false).setSize(8, 7).setMoveAny(),
+			ButtonPositionSize("map_ruler_layout", 9, true, false).setSize(9, 3).setMoveAny(),
+			// Simulates newly added bottom widget in slider area.
+			ButtonPositionSize("added_bottom_widget", 11, true, false)
+				.setSize(11, 10).setMargin(19, 0).setNonMoveable(),
+			ButtonPositionSize("map_transparency_layout", 11, true, false)
+				.setSize(11, 6).setMargin(19, 6).setMoveAny(),
+		)
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 51, 82)
+		assertTrue(computed)
+
+		val slider = buttons.first { it.id == "map_transparency_layout" }
+		val added = buttons.first { it.id == "added_bottom_widget" }
+
+		// Regression: slider must move up to avoid overlap with added bottom widget.
+		assertTrue(
+			slider.marginY > 6,
+			"slider.marginY=${slider.marginY}, slider=${slider.bounds}, added=${added.bounds}"
+		)
+		assertTrue(!slider.overlap(added), "slider=${slider.bounds}, added=${added.bounds}")
+	}
+
+	@Test
+	fun testPlanRoute_transparencySliderShouldNotJumpTooHigh() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("widget_top_bar").setSize(51, 7).setNonMoveable()
+				.setMoveDescendantsVertical().apply {
+					posH = POS_FULL_WIDTH
+					posV = POS_TOP
+				},
+			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_out", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveAny(),
+			ButtonPositionSize("measurement_buttons", 8, true, false).setSize(8, 7).setMoveAny(),
+			ButtonPositionSize("map_ruler_layout", 9, true, false).setSize(9, 3).setMoveAny(),
+			ButtonPositionSize("map_transparency_layout", 11, true, false)
+				.setSize(11, 6).setMargin(19, 6).setMoveAny(),
+		)
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 51, 82)
+		assertTrue(computed)
+
+		val slider = buttons.first { it.id == "map_transparency_layout" }
+		val measurement = buttons.first { it.id == "measurement_buttons" }
+		val ruler = buttons.first { it.id == "map_ruler_layout" }
+
+		// Regression guard: without bottom conflicts the transparency slider should stay near bottom.
+		assertTrue(
+			slider.marginY <= 12,
+			"slider.marginY=${slider.marginY}, slider=${slider.bounds}"
+		)
+		assertTrue(
+			slider.bounds.top >= 64.0,
+			"slider unexpectedly too high: slider=${slider.bounds}"
+		)
+		assertTrue(!slider.overlap(measurement), "slider=${slider.bounds}, measurement=${measurement.bounds}")
+		assertTrue(!slider.overlap(ruler), "slider=${slider.bounds}, ruler=${ruler.bounds}")
+	}
+
 
 
 }
