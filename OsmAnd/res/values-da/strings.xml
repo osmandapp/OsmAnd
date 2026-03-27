@@ -4759,7 +4759,6 @@
     <string name="token_is_not_valid">Token er ikke gyldig</string>
     <string name="app_mode_climbing">Klatring</string>
     <string name="weather_forecast_is_outdated">Prognose er forældet.</string>
-    <string name="shared_string_all_world">Hele verden</string>
     <string name="weather_forecast">Vejrudsigt</string>
     <string name="offline_weather_forecast_desc">Du kan hente vejrudsigt for 7 dage.</string>
     <string name="clear_online_cache_description">Dette vil rydde cachehukommelsen for online vejrfliser.</string>

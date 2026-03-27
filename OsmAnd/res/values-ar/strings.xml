@@ -4798,7 +4798,6 @@
     <string name="clear_online_cache_description">سيؤدي هذا إلى مسح جميع الملفات المؤقتة لطبقات الطقس المتصلة بالانترنت.</string>
     <string name="clear_online_cache">مسح ذاكرة تخزين الانترنت المؤقت</string>
     <string name="shared_string_alt_name">اسم بديل</string>
-    <string name="shared_string_all_world">كل العالم</string>
     <string name="weather_forecast">توقعات الطقس</string>
     <string name="offline_weather_forecast">توقعات الطقس دون اتصال</string>
     <string name="offline_weather_forecast_desc">يمكنك تنزيل توقعات الطقس لمدة 7 أيام.</string>

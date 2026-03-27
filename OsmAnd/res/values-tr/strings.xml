@@ -5272,7 +5272,6 @@
     <string name="shared_string_purchased_on">Satın alındı</string>
     <string name="map_widget_camera_distance">Kamera yüksekliği</string>
     <string name="get_osmand_cloud">OsmAnd Bulut\'u edinin</string>
-    <string name="shared_string_all_world">Tüm dünya</string>
     <string name="set_up_backup">Yedeklemeyi ayarla</string>
     <string name="send_uuid_preference">Benzersiz Kullanıcı Tanımlayıcısı (UUID) Gönder</string>
     <string name="external_sensor_widgets">Harici sensörler</string>

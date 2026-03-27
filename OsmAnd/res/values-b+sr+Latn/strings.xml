@@ -4782,7 +4782,6 @@
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Brzina kretanja</string>
     <string name="shared_string_apply_changes">Primeni izmene</string>
-    <string name="shared_string_all_world">Svetska vremenska prognoza</string>
     <string name="offline_weather_forecast_desc">Možeš preuzeti sedmodnevnu vremensku prognozu.</string>
     <string name="share_as_file">Deli kao fajl</string>
     <string name="precipitation_layer">Nivo padavina</string>

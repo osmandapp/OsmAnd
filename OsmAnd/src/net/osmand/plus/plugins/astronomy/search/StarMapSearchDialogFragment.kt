@@ -266,6 +266,11 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		applyFiltersAndSort(scrollToTop = false)
 	}
 
+	override fun onStart() {
+		super.onStart()
+		syncDialogVisibilityWithFragmentState()
+	}
+
 	fun applyRedFilter(enabled: Boolean) {
 		StarMapFragment.applyRedFilterToViews(enabled, view)
 	}
@@ -277,18 +282,13 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	override fun onHiddenChanged(hidden: Boolean) {
 		super.onHiddenChanged(hidden)
-		if (hidden) {
-			restoreSearchSoftInputMode()
-			dialog?.hide()
-			return
+		syncDialogVisibilityWithFragmentState()
+		if (!hidden) {
+			refreshPreparedEntries()
+			setupMyDataRows()
+			setupCatalogRows()
+			applyFiltersAndSort(scrollToTop = false)
 		}
-		applySearchSoftInputMode()
-		dialog?.show()
-		view?.let { AndroidUiHelper.setStatusBarContentColor(it, nightMode) }
-		refreshPreparedEntries()
-		setupMyDataRows()
-		setupCatalogRows()
-		applyFiltersAndSort(scrollToTop = false)
 	}
 
 	override fun onDestroyView() {
@@ -549,6 +549,18 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		val softInputMode = previousSoftInputMode ?: return
 		window.setSoftInputMode(softInputMode)
 		previousSoftInputMode = null
+	}
+
+	private fun syncDialogVisibilityWithFragmentState() {
+		if (isHidden) {
+			restoreSearchSoftInputMode()
+			dialog?.hide()
+			return
+		}
+		val rootView = view ?: return
+		applySearchSoftInputMode()
+		dialog?.show()
+		AndroidUiHelper.setStatusBarContentColor(rootView, nightMode)
 	}
 
 	private fun restoreUiState(savedInstanceState: Bundle?) {
@@ -1127,6 +1139,9 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	@SuppressLint("NotifyDataSetChanged")
 	private fun applyFiltersAndSort(scrollToTop: Boolean) {
+		if (view == null) {
+			return
+		}
 		filterAndSortJob?.cancel()
 		normalizeTypeFilterForCurrentPreset()
 		val requestId = ++filterAndSortRequestId

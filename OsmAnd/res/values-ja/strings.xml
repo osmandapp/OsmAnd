@@ -4825,7 +4825,6 @@ POIの更新は利用できません</string>
     <string name="enable_3d_maps">3Dマップを有効にする</string>
     <string name="disable_vertex_hillshade_3d">3Dでの頂点部の陰影を無効にする</string>
     <string name="weather_forecast_is_outdated">天気予報データが古くなっています。</string>
-    <string name="shared_string_all_world">全世界</string>
     <string name="common_weight_limit_error">最小値は\"%1$s\"%2$sです。車両重量が最小値以下の場合は、プロファイル\"%3$s\"を使用してください。</string>
     <string name="weather_forecast">天気予報</string>
     <string name="metric_lbs">ポンド</string>

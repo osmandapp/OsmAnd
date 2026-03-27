@@ -261,8 +261,10 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements C
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		if (layoutMode[0] != null) {
-			outState.putSerializable(SCREEN_LAYOUT_MODE, layoutMode);
+
+		ScreenLayoutMode mode = layoutMode[0];
+		if (mode != null) {
+			outState.putSerializable(SCREEN_LAYOUT_MODE, mode);
 		}
 	}
 

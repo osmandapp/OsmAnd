@@ -4981,7 +4981,6 @@
     <string name="enable_3d_maps">Activează hărțile 3D</string>
     <string name="shared_string_pounds">lbs</string>
     <string name="metric_lbs">lbs</string>
-    <string name="shared_string_all_world">Toată lumea</string>
     <string name="generate_hillshade_from_3d_maps">Generare de hărți raster cu relief umbrit, din hărți 3D</string>
     <string name="disable_vertex_hillshade_3d">Dezactivare vertexuri relief umbrit în 3D</string>
     <string name="common_weight_limit_error">Valoarea minimă este \"%1$s\" %2$s. Utilizați profilul \"%3$s\" dacă greutatea vehiculului este mai mică decât valoarea minimă.</string>

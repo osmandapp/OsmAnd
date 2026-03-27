@@ -4676,7 +4676,6 @@
     <string name="shared_string_pounds">фунтов</string>
     <string name="metric_lbs">фунт</string>
     <string name="weather_forecast_is_outdated">Прогноз устарел.</string>
-    <string name="shared_string_all_world">Весь мир</string>
     <string name="weather_forecast">Прогноз погоды</string>
     <string name="offline_weather_forecast">Прогноз погоды офлайн</string>
     <string name="offline_weather_forecast_desc">Вы можете скачать прогноз погоды на 7 дней.</string>

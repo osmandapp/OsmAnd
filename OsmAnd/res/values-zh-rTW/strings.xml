@@ -4572,7 +4572,6 @@
     <string name="clear_online_cache_description">這將會清除線上天氣圖磚的快取。</string>
     <string name="weather_forecast_is_outdated">預報已過期。</string>
     <string name="offline_weather_forecast_desc">您可以下載七天的天氣預報。</string>
-    <string name="shared_string_all_world">全世界</string>
     <string name="offline_weather_forecast">離線天氣預測</string>
     <string name="free_maps_updates">免費更新（緊急）</string>
     <string name="shared_string_pounds">英磅</string>
@@ -5944,4 +5943,13 @@
     <string name="start_free_trial">開始免費試用</string>
     <string name="subscription_free_trial_with_price">%1$s 免費，然後 %2$s</string>
     <string name="subscription_then_price">然後 %1$s</string>
+    <string name="purchases_feature_desc_astronomy">透過離線地圖與天體目錄，探索夜空。利用智慧可見度圖表、每日行程表以及互動式 AR 模式來規劃觀測行程。</string>
+    <string name="astro_expand_your_universe_title">拓展您的宇宙</string>
+    <string name="astro_expand_your_universe_description">離線存取擴充天體目錄、維基百科條目及 AR 模式資料庫。</string>
+    <string name="astro_offline_knowledge_base_title">離線知識庫</string>
+    <string name="astro_offline_knowledge_base_description">下載擴充資料庫，即可離線瀏覽維基百科條目及深空星表。</string>
+    <string name="astro_schedule_next_day_note">⁺¹ 隔天。</string>
+    <string name="astro_visibility_show_today">顯示今日能見度</string>
+    <string name="astro_schedule_show_current_week">顯示目前週</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
 </resources>

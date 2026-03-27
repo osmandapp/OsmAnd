@@ -41,6 +41,7 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 	protected WindowInsetsCompat rootInsets;
 
 	private StateChangedListener<DayNightMode> stateChangedListener;
+
 	@ColorRes
 	protected int getStatusBarColorId() {
 		boolean nightMode = app.getDaynightHelper().isNightMode(APP);

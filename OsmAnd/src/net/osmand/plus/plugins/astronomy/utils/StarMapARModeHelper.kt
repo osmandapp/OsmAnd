@@ -11,6 +11,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import net.osmand.Location
 import net.osmand.plus.plugins.astronomy.views.StarView
+import net.osmand.plus.R
 import kotlin.math.abs
 import kotlin.math.asin
 import kotlin.math.atan2
@@ -83,12 +84,12 @@ class StarMapARModeHelper(
 		isArModeEnabled = newState
 		if (isArModeEnabled) {
 			registerSensors()
-			Toast.makeText(context, "AR Mode Enabled", Toast.LENGTH_SHORT).show()
+			Toast.makeText(context, context.getString(R.string.ar_mode_enabled), Toast.LENGTH_SHORT).show()
 		} else {
 			unregisterSensors()
 			// Reset roll when exiting AR mode
 			starView.roll = 0.0
-			Toast.makeText(context, "AR Mode Disabled", Toast.LENGTH_SHORT).show()
+			Toast.makeText(context, context.getString(R.string.ar_mode_disabled), Toast.LENGTH_SHORT).show()
 		}
 		onArModeChanged(isArModeEnabled)
 	}
@@ -100,7 +101,7 @@ class StarMapARModeHelper(
 			sensorManager.registerListener(this, sensorAccelerometer, SensorManager.SENSOR_DELAY_GAME)
 			sensorManager.registerListener(this, sensorMagnetic, SensorManager.SENSOR_DELAY_GAME)
 		} else {
-			Toast.makeText(context, "Sensors not available for AR", Toast.LENGTH_SHORT).show()
+			Toast.makeText(context, context.getString(R.string.sensors_not_available_for_ar), Toast.LENGTH_SHORT).show()
 			isArModeEnabled = false
 			onArModeChanged(false)
 		}
@@ -208,7 +209,7 @@ class StarMapARModeHelper(
 				if (event.accuracy == SensorManager.SENSOR_STATUS_UNRELIABLE || event.accuracy == SensorManager.SENSOR_STATUS_ACCURACY_LOW) {
 					val currentTime = System.currentTimeMillis()
 					if (currentTime - lastAccuracyWarningTime > 10000) { // Warn every 10s max
-						Toast.makeText(context, "Compass calibration needed", Toast.LENGTH_SHORT).show()
+						Toast.makeText(context, context.getString(R.string.compass_calibration_needed), Toast.LENGTH_SHORT).show()
 						lastAccuracyWarningTime = currentTime
 					}
 				}

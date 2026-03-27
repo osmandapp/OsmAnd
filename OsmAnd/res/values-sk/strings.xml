@@ -4729,7 +4729,6 @@
     <string name="offline_cache">Offline vyrovnávacia pamäť</string>
     <string name="shared_string_alt_name">Alternatívny názov</string>
     <string name="token_is_not_valid">Token nie je platný</string>
-    <string name="shared_string_all_world">Celý svet</string>
     <string name="weather_forecast">Predpoveď počasia</string>
     <string name="offline_weather_forecast_desc">Môžete stiahnuť predpoveď počasia na 7 dní.</string>
     <string name="weather_forecast_is_outdated">Predpoveď je zastaralá.</string>

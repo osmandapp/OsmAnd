@@ -1064,7 +1064,6 @@
     <string name="shared_string_on_map">在地圖上</string>
     <string name="display_position_automatic_descr">取決於地圖方向：底部為移動方向，中心為其他所有方向。</string>
     <string name="weather_forecast_is_outdated">預報已過期。</string>
-    <string name="shared_string_all_world">全世界</string>
     <string name="weather_forecast">天氣預報</string>
     <string name="offline_weather_forecast">離線天氣預報</string>
     <string name="offline_weather_forecast_desc">您可以下載七天的天氣預報。</string>

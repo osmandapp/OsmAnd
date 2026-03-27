@@ -79,7 +79,11 @@ public class BaseDetailsObject {
 	}
 
 	public boolean isObjectFull() {
-		return objectCompleteness == ObjectCompleteness.FULL || objectCompleteness == ObjectCompleteness.COMBINED;
+		return objectCompleteness == ObjectCompleteness.FULL;
+	}
+
+	public boolean isObjectCombined() {
+		return objectCompleteness == ObjectCompleteness.COMBINED;
 	}
 
 	public boolean isObjectEmpty() {
@@ -544,7 +548,7 @@ public class BaseDetailsObject {
 		return SearchResultResource.DETAILED;
 	}
 
-	private static String getLangForTravel(Object object) {
+	public static String getLangForTravel(Object object) {
 		Amenity amenity = null;
 		if (object instanceof Amenity) {
 			amenity = (Amenity) object;

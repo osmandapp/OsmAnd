@@ -4772,7 +4772,6 @@
     <string name="switch_folder">Skipta um möppu</string>
     <string name="show_all_tracks">Birta alla ferla</string>
     <string name="weather_forecast_is_outdated">Spáin er úrelt.</string>
-    <string name="shared_string_all_world">Allur heimurinn</string>
     <string name="offline_weather_forecast">Veðurspá án nettengingar</string>
     <string name="offline_weather_forecast_desc">Þú getur sótt veðurspá fyrir næstu 7 daga.</string>
     <string name="rendering_value_defaultMedium_name">Sjálfgefið (miðlungs)</string>

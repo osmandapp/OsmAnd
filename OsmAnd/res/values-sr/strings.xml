@@ -4732,7 +4732,6 @@
     <string name="external_device_details_received_data">Примљени подаци</string>
     <string name="shutter_sound">Звук окидача</string>
     <string name="offline_cache">Очисти ванмрежни захват</string>
-    <string name="shared_string_all_world">Цели свет</string>
     <string name="external_device_characteristic_diastolic">Дијастолички</string>
     <string name="external_device_characteristic_systolic">Систолички</string>
     <string name="common_weight_limit_error">Најмања вредност је \"%1$s\" %2$s. Користите пресек \"%3$s\" ако је тежина возила мања од најмање вредности.</string>

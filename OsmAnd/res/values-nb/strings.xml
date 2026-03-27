@@ -4971,7 +4971,6 @@
     <string name="shared_string_alt_name">Alternativt navn</string>
     <string name="token_is_not_valid">Symbolet er ikke gyldig</string>
     <string name="offline_weather_forecast">Frakoblet værmelding</string>
-    <string name="shared_string_all_world">Hele verden</string>
     <string name="weather_forecast">Værmelding</string>
     <string name="offline_weather_forecast_desc">Du kan laste ned 7-dagers værmelding.</string>
     <string name="camera_app">Kameraprogram</string>

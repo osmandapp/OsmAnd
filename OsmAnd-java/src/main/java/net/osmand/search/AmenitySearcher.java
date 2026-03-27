@@ -224,9 +224,16 @@ public class AmenitySearcher {
                 completeGeometry(detailsObject, detailsObject.getObjects().get(0));
                 return detailsObject;
             }
+            BaseDetailsObject searched = null;
             if (!detailsObject.getObjects().isEmpty()) {
                 Object obj = detailsObject.getObjects().get(0);
-                return searchDetailedObject(obj, settings);
+                searched = searchDetailedObject(obj, settings);
+            }
+            if (searched != null) {
+                return searched;
+            } else if (detailsObject.isObjectCombined()) {
+                completeGeometry(detailsObject, detailsObject.getObjects().get(0));
+                return detailsObject;
             }
         }
         BaseDetailsObject detailsObject = null;

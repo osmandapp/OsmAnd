@@ -86,13 +86,25 @@ open class RangeTrackFilter<T : Comparable<T>> : BaseTrackFilter {
 
 	override fun initWithValue(value: BaseTrackFilter) {
 		if (value is RangeTrackFilter<*>) {
+			// Detect if the previous state was undefined
+			val wasMinUndefined = value.valueFrom == value.minValue
+			val wasMaxUndefined = value.valueTo == value.maxValue
+
 			// Smart Merge for limits: natively acts as 'if not set, take from saved'
 			check(value.minValue)?.let { minValue = minOf(minValue, it) }
 			check(value.maxValue)?.let { maxValue = maxOf(maxValue, it) }
 
-			// Load user preferences
-			check(value.valueFrom)?.let { valueFrom = it }
-			check(value.valueTo)?.let { valueTo = it }
+			// Load user preferences, retaining the "undefined" state dynamically
+			if (wasMinUndefined) {
+				valueFrom = minValue
+			} else {
+				check(value.valueFrom)?.let { valueFrom = it }
+			}
+			if (wasMaxUndefined) {
+				valueTo = maxValue
+			} else {
+				check(value.valueTo)?.let { valueTo = it }
+			}
 
 			// Auto-expand limits if user values exceed them
 			if (valueTo > maxValue) {
@@ -126,13 +138,18 @@ open class RangeTrackFilter<T : Comparable<T>> : BaseTrackFilter {
 		}
 	}
 
-	override fun equals(other: Any?): Boolean {
-		return super.equals(other) &&
-				other is RangeTrackFilter<*> &&
-				other.minValue == minValue &&
-				other.maxValue == maxValue &&
-				other.valueFrom == valueFrom &&
-				other.valueTo == valueTo
+	fun clearValueFrom(updateListeners: Boolean = true) {
+		valueFrom = minValue
+		if (updateListeners) {
+			filterChangedListener?.onFilterChanged()
+		}
+	}
+
+	fun clearValueTo(updateListeners: Boolean = true) {
+		valueTo = maxValue
+		if (updateListeners) {
+			filterChangedListener?.onFilterChanged()
+		}
 	}
 
 	fun ceilMaxValue(): String {
@@ -155,6 +172,10 @@ open class RangeTrackFilter<T : Comparable<T>> : BaseTrackFilter {
 		return getProperty().getComparableValue(value)
 	}
 
+	override fun isValid(): Boolean {
+		return maxValue > minValue
+	}
+
 	override fun hashCode(): Int {
 		var result = minValue.hashCode()
 		result = 31 * result + maxValue.hashCode()
@@ -163,7 +184,12 @@ open class RangeTrackFilter<T : Comparable<T>> : BaseTrackFilter {
 		return result
 	}
 
-	override fun isValid(): Boolean {
-		return maxValue > minValue
+	override fun equals(other: Any?): Boolean {
+		return super.equals(other) &&
+				other is RangeTrackFilter<*> &&
+				other.minValue == minValue &&
+				other.maxValue == maxValue &&
+				other.valueFrom == valueFrom &&
+				other.valueTo == valueTo
 	}
 }
