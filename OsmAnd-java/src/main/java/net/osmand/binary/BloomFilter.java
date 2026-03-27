@@ -19,10 +19,8 @@ public final class BloomFilter {
 	public static final int BLOOM_BITS = 512;
 	private static final int DEFAULT_HASHES = 5;
 	private static final int BLOOM_SIZE = BLOOM_BITS / Byte.SIZE;
-	public static final int MAX_SATURATION_BITS = 284;
+	public static final int MAX_SATURATION_BITS = 384;
 	public static final int MIN_BLOOM_CONTINUATION_PREFIX_LENGTH = 1; // Min suffix length to be included in bloomIndex.
-
-	private static final Log log = PlatformUtil.getLog(BloomFilter.class);
 
 	private static final LongAdder writeTokensCount = new LongAdder(), writeBoxCount = new LongAdder();
 	private static final LongAdder skipCount = new LongAdder(), readBoxCount = new LongAdder(), falsePositive = new LongAdder();
