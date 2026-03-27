@@ -585,7 +585,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		if (divider != null) {
 			Object o = getItem(position);
 			if (position == getCount() - 1 || getItem(position + 1).getType() == HEADER
-					|| getItem(position + 1).getType() == BOTTOM_SHADOW) {
+					|| getItem(position + 1).getType() == BOTTOM_SHADOW || getItem(position + 1).getType() == CARD_DIVIDER) {
 				divider.setVisibility(View.GONE);
 			} else {
 				divider.setVisibility(View.VISIBLE);
