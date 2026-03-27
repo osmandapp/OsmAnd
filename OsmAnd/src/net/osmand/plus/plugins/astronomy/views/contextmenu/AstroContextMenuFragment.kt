@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.astronomy.views.contextmenu
 
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -995,7 +996,16 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 
 	private fun updateRecyclerBottomPadding() {
 		val tabsHeight = if (::bottomTabsContainer.isInitialized) bottomTabsContainer.height else 0
-		recyclerView.updatePadding(bottom = recyclerBaseBottomPadding + tabsHeight)
+		val visibleRect = Rect()
+		val hiddenHeight = if (recyclerView.height > 0 && recyclerView.getGlobalVisibleRect(visibleRect)) {
+			(recyclerView.height - visibleRect.height()).coerceAtLeast(0)
+		} else {
+			0
+		}
+		val bottomPadding = recyclerBaseBottomPadding + tabsHeight + hiddenHeight
+		if (recyclerView.paddingBottom != bottomPadding) {
+			recyclerView.updatePadding(bottom = bottomPadding)
+		}
 	}
 
 	private fun updateTopInsetReveal() {
@@ -1119,6 +1129,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		updateBottomSheetCorner(bottomSheetCornerRadiusPx * (1f - revealProgress))
 		currentSheetTop = sheetTop
 		updateTopInsetReveal()
+		updateRecyclerBottomPadding()
 	}
 
 	private fun resetBottomSheetVisualState() {
