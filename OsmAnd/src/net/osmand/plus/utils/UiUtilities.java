@@ -752,9 +752,7 @@ public class UiUtilities {
 		textView.setHighlightColor(ColorUtilities.getActiveColor(textView.getContext(), nightMode));
 	}
 
-	public static void updateStatusBarColor(@NonNull MapActivity activity) {
-		int colorId = -1;
-		boolean nightModeForContent = true;
+	public static void updateSystemBarColors(@NonNull MapActivity activity) {
 		OsmandApplication app = activity.getApp();
 		OsmandSettings settings = app.getSettings();
 		MapLayers mapLayers = activity.getMapLayers();
@@ -763,24 +761,33 @@ public class UiUtilities {
 		BaseFullScreenFragment fragmentAboveDashboard = fragmentsHelper.getVisibleBaseFullScreenFragment(R.id.fragmentContainer);
 		BaseSettingsFragment settingsFragmentAboveDashboard = fragmentsHelper.getVisibleBaseSettingsFragment(R.id.fragmentContainer);
 		BaseFullScreenFragment fragmentBelowDashboard = fragmentsHelper.getVisibleBaseFullScreenFragment(R.id.routeMenuContainer, R.id.topFragmentContainer, R.id.bottomFragmentContainer);
+
+		int statusBarColorId = -1;
+		int navigationBarColorId = -1;
+		boolean nightModeForContent = true;
 		if (fragmentAboveDashboard != null) {
-			colorId = fragmentAboveDashboard.getStatusBarColorId();
+			statusBarColorId = fragmentAboveDashboard.getStatusBarColorId();
+			navigationBarColorId = fragmentAboveDashboard.getNavigationBarColorId();
 			nightModeForContent = fragmentAboveDashboard.getContentStatusBarNightMode();
 		} else if (settingsFragmentAboveDashboard != null) {
-			colorId = settingsFragmentAboveDashboard.getStatusBarColorId();
+			statusBarColorId = settingsFragmentAboveDashboard.getStatusBarColorId();
+			navigationBarColorId = settingsFragmentAboveDashboard.getNavigationBarColorId();
 			nightModeForContent = settingsFragmentAboveDashboard.getContentStatusBarNightMode();
-
 		} else if (activity.getDashboard().isVisible()) {
-			colorId = activity.getDashboard().getStatusBarColor();
+			statusBarColorId = activity.getDashboard().getStatusBarColor();
 		} else if (fragmentBelowDashboard != null) {
-			colorId = fragmentBelowDashboard.getStatusBarColorId();
+			statusBarColorId = fragmentBelowDashboard.getStatusBarColorId();
+			navigationBarColorId = fragmentBelowDashboard.getNavigationBarColorId();
 			nightModeForContent = fragmentBelowDashboard.getContentStatusBarNightMode();
 		} else if (mapLayers.getMapQuickActionLayer() != null
 				&& mapLayers.getMapQuickActionLayer().isWidgetVisible()) {
-			colorId = R.color.status_bar_transparent_gradient;
+			statusBarColorId = R.color.status_bar_transparent_gradient;
 		}
-		if (colorId != -1) {
-			AndroidUiHelper.setStatusBarColor(activity, ContextCompat.getColor(activity, colorId));
+		if (navigationBarColorId != -1) {
+			AndroidUiHelper.setNavigationBarColor(activity, ContextCompat.getColor(activity, navigationBarColorId), nightModeForContent);
+		}
+		if (statusBarColorId != -1) {
+			AndroidUiHelper.setStatusBarColor(activity, ContextCompat.getColor(activity, statusBarColorId));
 			AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
 			return;
 		}
@@ -802,9 +809,8 @@ public class UiUtilities {
 			if (colorIdForTopWidget != -1) {
 				nightModeForContent = getStatusBarContentNightMode(activity, appMode, nightMode);
 			}
-
-			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
-			color = ContextCompat.getColor(activity, colorId);
+			statusBarColorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
+			color = ContextCompat.getColor(activity, statusBarColorId);
 		}
 		AndroidUiHelper.setStatusBarColor(activity, color);
 		AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
