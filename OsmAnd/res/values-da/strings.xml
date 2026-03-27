@@ -6173,4 +6173,8 @@
     <string name="astro_visibility_show_today">Vis dagens synlighed</string>
     <string name="astro_schedule_show_current_week">Vis den aktuelle uge</string>
     <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="release_5_3">• Understøttelse af 3D-bygninger tilføjet\n\n • Visning af sfærisk kort\n\n • Astronomi-udvidelse med natkort og stjernedatabase\n\n • Nye farveindstillinger til hastighedsmåleren: tolerance og hastighedsoverskridelse\n\n • Separate modul-layouts til liggende og stående format\n\n • Moduler til turoptagelse: Kørselshastighed og gennemsnitshastighed\n\n • Modul for adapterspænding til køretøjsdata\n\n • Køretøjsdata i sporanalysatoren\n\n • Sorter spor automatisk efter år, længde, aktivitet og mere\n\n • Paletredigeringsværktøj til visualisering af terræn og spor\n\n • Forbedrede søgealgoritmer og opdateret brugergrænseflade\n\n • Højdeprofiler rettet for ruter\n\n • Favoritter: nye sorteringsmuligheder og opdateret brugergrænseflade\n\n • Del link til et hvilket som helst interessepunkt\n\n • Visning af rutepunkt uden at lukke listen\n\n • Parameter for cykelbredde for at undgå smalle veje\n\n • Billedbeskrivelser fra Wikimedia</string>
+    <string name="shared_string_clear_filters">Ryd filtre</string>
+    <string name="astro_sort_newest_first">Nyeste først</string>
+    <string name="astro_sort_oldest_first">Ældste først</string>
 </resources>

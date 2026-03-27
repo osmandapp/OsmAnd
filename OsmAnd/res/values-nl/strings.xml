@@ -92,7 +92,7 @@
     <string name="live_monitoring_interval">Interval voor online tracking</string>
     <string name="live_monitoring_url_descr">Specificeer het webadres met parameters: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Webadres voor online tracking</string>
-    <string name="gpx_monitoring_disabled_warn">GPX-track opnemen met de GPX-widget of via de \'GPX-track\'-instellingen.</string>
+    <string name="gpx_monitoring_disabled_warn">Registreer een track via de GPX-widget of via de \'Ritregistratie\'-instellingen.</string>
     <string name="show_current_gpx_title">Toon huidige GPX-track</string>
     <string name="free_version_message">%1$s kaarten te downloaden of updaten.</string>
     <string name="free_version_title">Gratis versie</string>
@@ -532,7 +532,7 @@
     <string name="save_current_track_descr">Huidige GPX-track nu opslaan.</string>
     <string name="save_current_track">Huidige GPX-track opslaan</string>
     <string name="save_track_interval">Logging-interval gedurende navigatie</string>
-    <string name="save_track_interval_descr">Stel het logging-interval in voor track-opname tijdens navigatie</string>
+    <string name="save_track_interval_descr">Stel het registratie-interval in voor trackregistratie tijdens het navigeren</string>
     <string name="save_track_to_gpx">GPX-Track automatisch opnemen tijdens navigatie</string>
     <string name="update_tile">Updaten</string>
     <string name="reload_tile">Herlaad kaartsegment</string>
@@ -815,7 +815,7 @@
     <string name="intermediate_point">Tussenpunt %1$s</string>
     <string name="gps_not_available">Schakel GPS in via de instellingen</string>
     <string name="map_widget_show_destination_arrow">Richting van de bestemming tonen</string>
-    <string name="enable_plugin_monitoring_services">Activeer de \"GPX-Track opnemen\" Plug-in om de afgelegde weg vast te leggen (GPX-track, online tracking)</string>
+    <string name="enable_plugin_monitoring_services">Activeer de \"Ritregistratie\" plug-in om positie-registratiediensten te gebruiken (GPX-registratie, online tracking)</string>
     <string name="non_optimal_route_calculation">Bereken mogelijk niet-optimale route voor lange afstanden</string>
     <string name="rendering_attr_roadColors_description">Kies kleurschema voor wegen:</string>
     <string name="rendering_attr_roadColors_name">Kleurschema voor wegen</string>
@@ -904,7 +904,7 @@
     <string name="osmand_play_title_30_chars">OsmAnd Kaarten &amp; Navigatie</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Kaarten &amp; Navigatie</string>
     <string name="hno">Huisnummer</string>
-    <string name="monitoring_settings">Track opnemen</string>
+    <string name="monitoring_settings">Ritregistratie</string>
     <string name="monitoring_settings_descr">Stel in hoe je trips op te nemen.</string>
     <string name="street_name">Straatnaam</string>
     <string name="choose_osmand_theme_descr">Aanpassen van app-vertoning aan je wensen.</string>
@@ -1225,7 +1225,7 @@
     <string name="speak_poi">Dichtbij POI</string>
     <string name="shared_string_all">Alles</string>
     <string name="index_tours">Reizen</string>
-    <string name="record_plugin_name">Trip opnames</string>
+    <string name="record_plugin_name">Ritregistraties</string>
     <string name="int_hour">u.</string>
     <string name="duration">Duur</string>
     <string name="distance">Afstand</string>
@@ -1459,7 +1459,7 @@
     <string name="shared_string_my_location">Huidige Positie</string>
     <string name="shared_string_my_favorites">Favorieten</string>
     <string name="shared_string_tracks">GPX-tracks</string>
-    <string name="shared_string_currently_recording_track">GPX-track opname wordt gemaakt</string>
+    <string name="shared_string_currently_recording_track">Momenteel geregistreerde track</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d wijziging(en) naar OSM versturen\?</string>
     <string name="confirmation_to_clear_history">Wil je de geschiedenis verwijderen?</string>
     <string name="osmand_parking_overdue">overschreden</string>
@@ -1533,7 +1533,7 @@
     <string name="lang_th">Thais</string>
     <string name="archive_wikipedia_data">Je hebt nog verouderde, onverenigbare Wikipedia-gegevens. Wil je deze bewaren\?</string>
     <string name="download_wikipedia_files">Aanvullende Wikipedia-gegevens downloaden (%1$s MB)\?</string>
-    <string name="disable_recording_once_app_killed">Voorkom loggen als app wordt gesloten</string>
+    <string name="disable_recording_once_app_killed">Voorkom zelfstandige registratie</string>
     <string name="shared_string_import2osmand">Importeren in OsmAnd</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="rendering_value_default13_name">Standaard (13)</string>
@@ -1609,7 +1609,7 @@
     <string name="min_mile">min/mijl</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
-    <string name="shared_string_trip_recording">Reisopnamen</string>
+    <string name="shared_string_trip_recording">Ritregistratie</string>
     <string name="shared_string_navigation">Navigatie</string>
     <string name="favourites_edit_dialog_title">Informatie over favoriet</string>
     <string name="simulate_your_location_stop_descr">Positiesimulatie beëindigen.</string>
@@ -2022,8 +2022,8 @@
     <string name="gpx_no_tracks_title_folder">U kunt ook trackbestanden toevoegen aan de map</string>
     <string name="gpx_add_track">Meer toevoegen…</string>
     <string name="shared_string_appearance">Uiterlijk</string>
-    <string name="trip_rec_notification_settings">Activeer snel opnemen</string>
-    <string name="trip_rec_notification_settings_desc">Toon systeemmelding waarmee reisopname gestart kan worden.</string>
+    <string name="trip_rec_notification_settings">Activeer snel registreren</string>
+    <string name="trip_rec_notification_settings_desc">Toon een systeemnotifcatie waarmee ritregistratie gestart kan worden.</string>
     <string name="shared_string_notifications">Meldingen</string>
     <string name="route_calculation">Route berekening</string>
     <string name="rendering_value_fine_name">Fijn</string>
@@ -2043,7 +2043,7 @@
     <string name="rendering_attr_contourWidth_name">Contourlijn dikte</string>
     <string name="rendering_attr_hideWaterPolygons_description">Watervlakten</string>
     <string name="rendering_attr_hideWaterPolygons_name">Watervlakten</string>
-    <string name="auto_split_recording_title">Opname automatisch splitsen na een onderbreking</string>
+    <string name="auto_split_recording_title">Registraties automatisch splitsen na een onderbreking</string>
     <string name="auto_split_recording_descr">Start een nieuw segment na een onderbreking van zes minuten. Begin een nieuwe track na een onderbreking van twee uur of na een lange onderbreking als de datum is veranderd.</string>
     <string name="navigate_point_olc">Open Location Code (OLC)</string>
     <string name="navigate_point_olc_info_invalid">Ongeldige OLC
@@ -3196,7 +3196,7 @@
 \n</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Knooppuntennetwerk</string>
     <string name="add_new_profile_q">Het nieuwe profiel \'%1$s\' toevoegen\?</string>
-    <string name="save_heading_descr">Sla koers naar elk trackpunt op tijdens het opnemen.</string>
+    <string name="save_heading_descr">Sla de bewegingsrichting op bij elk trackpunt tijdens het registreren.</string>
     <string name="save_heading">Richting toevoegen</string>
     <string name="personal_category_name">Persoonlijk</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
@@ -3230,7 +3230,7 @@
     <string name="multimedia_notes_prefs_descr">Afbeeldingsgrootte, geluids- en videokwaliteit</string>
     <string name="osm_editing_prefs_descr">Login, wachtwoord, offline bewerken</string>
     <string name="accessibility_prefs_descr">Kies icoon, kleur en naam</string>
-    <string name="live_monitoring_descr">Laat het delen van je positie met behulp van track-opname toe.</string>
+    <string name="live_monitoring_descr">Laat het delen van je positie met behulp van ritregistratie toe.</string>
     <string name="live_monitoring">Online volgen</string>
     <string name="save_track_logging_accuracy">Logging nauwkeurigheid</string>
     <string name="tracks_view_descr">De opgenomen tracks zijn opgeslagen in %1$s, of in de OsmAnd-map.</string>
@@ -3387,7 +3387,7 @@
     <string name="sort_by_category">Sorteer op categorie</string>
     <string name="shared_string_resume">Hervatten</string>
     <string name="monitoring_min_distance_descr_side_effect">Neveneffecten: Perioden zonder beweging worden helemaal niet geregistreerd of met slechts één punt per stuk. Kleine bewegingen (bijvoorbeeld zijwaarts, om een mogelijke afslag tijdens je reis te markeren) kunnen worden uitgefilterd. Het bestand bevat minder informatie voor nabewerking, en kan desondanks wel GPS-artifacten opslaan die worden veroorzaakt door slechte ontvangst of chipset-effecten.</string>
-    <string name="monitoring_min_distance_descr">Door deze filter aan te zetten, vermijdt u verdere dataopname als er bijna geen beweging wordt waargenomen. Dit verbetert ook de ruimtelijke weergave van tracks zonder verdere verwerking.</string>
+    <string name="monitoring_min_distance_descr">Door deze filter aan te zetten, vermijdt u verdere dataregistratie als er bijna geen beweging wordt waargenomen. Dit verbetert ook de ruimtelijke weergave van tracks zonder verdere verwerking.</string>
     <string name="monitoring_min_accuracy_descr_remark">Opmerking: als GPS was uitgeschakeld vlak voor het begin van een opname, kan het eerste gemeten punt een verminderde nauwkeurigheid hebben, dus in onze software willen we misschien een seconde wachten voordat we een punt opnemen (of het beste van 3 opeenvolgende punten opnemen, enz.), maar dit is nog niet geïmplementeerd.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Aanbeveling: Het is moeilijk te voorspellen wat er wordt opgenomen en wat niet, het is misschien beter om dit filter uit te schakelen.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Neveneffect: Als gevolg van filteren op nauwkeurigheid, kunnen punten volledig ontbreken, b.v. onder bruggen, onder bomen, tussen hoge gebouwen of bij bepaalde weersomstandigheden.</string>
@@ -3557,10 +3557,10 @@
     <string name="app_mode_wheelchair_forward">Rolstoel vooraanzicht</string>
     <string name="osm_edit_closed_note">Opgeloste OSM-opmerking</string>
     <string name="app_mode_go_cart">Kart</string>
-    <string name="map_widget_monitoring">Track opnemen</string>
-    <string name="save_global_track_interval_descr">Specificeer het logging-interval voor de algemene track-opname (ingeschakeld via de track-widget op de kaart).</string>
-    <string name="gpx_monitoring_stop">Pauzeer track opname</string>
-    <string name="gpx_monitoring_start">Hervat track opnemen</string>
+    <string name="map_widget_monitoring">Ritregistratie</string>
+    <string name="save_global_track_interval_descr">Specificeer het registratie-interval voor de algemene trackregistratie (ingeschakeld via de \'Ritregistratie\' widget op de kaart).</string>
+    <string name="gpx_monitoring_stop">Pauzeer ritregistratie</string>
+    <string name="gpx_monitoring_start">Hervat ritregistratie</string>
     <string name="street_level_imagery">Beelden op straatniveau</string>
     <string name="select_track_width">Selecteer breedte</string>
     <string name="track_show_start_finish_icons">Toon start en aankomst pictogrammen</string>
@@ -3709,7 +3709,7 @@
     <string name="access_hint_enter_address">Geef adres in</string>
     <string name="shared_string_file_name">Bestandsnaam</string>
     <string name="number_of_gpx_files_selected_pattern">%s trackbestanden geselecteerd</string>
-    <string name="disable_recording_once_app_killed_descrp">Trackregistratie wordt onderbroken als de app wordt uitgeschakeld (via recente apps). (OsmAnd-achtergrondindicatie verdwijnt uit de Android-berichtenbalk.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Trackregistratie pauzeert als de app wordt afgesloten (via recente apps). (De OsmAnd-achtergrondindicatie verdwijnt dan uit de Android-notificatiebalk.)</string>
     <string name="previous_segment">Vorig segment</string>
     <string name="all_previous_segments">Alle voorgaande segmenten</string>
     <string name="only_selected_segment_recalc">Alleen het geselecteerde segment wordt opnieuw berekend met het geselecteerde profiel.</string>
@@ -3864,7 +3864,7 @@
     <string name="announcement_time_intervals">Tijd- en afstandsintervallen</string>
     <string name="announcement_time_descr">De timing van de aankondiging van de verschillende spraakprompts hangt af van het type prompt, de huidige navigatiesnelheid en de standaard navigatiesnelheid.</string>
     <string name="announcement_time_title">Aankondigingstijd</string>
-    <string name="start_recording">Start opname</string>
+    <string name="start_recording">Start registratie</string>
     <string name="show_track_on_map">Toon GPX-track op de kaart</string>
     <string name="routing_engine_vehicle_type_wheelchair">Rolstoel</string>
     <string name="routing_engine_vehicle_type_hiking">Hiken</string>
@@ -3892,8 +3892,7 @@
     <string name="uploading_count">Aan het opladen %1$d van %2$d</string>
     <string name="uploaded_count">Opgeladen %1$d van %2$d</string>
     <string name="toast_select_edits_for_upload">Selecteer de op te laden wijzigingen</string>
-    <string name="track_recording_description">Stoppen met opnemen\?
-\nAlle niet-opgeslagen gegevens gaan verloren.</string>
+    <string name="track_recording_description">Stoppen met registreren? \nAlle niet-opgeslagen gegevens gaan verloren.</string>
     <string name="select_segments">Selecteer segmenten</string>
     <string name="select_segments_description">%1$s bevat meer dan één segment, u moet het gedeelte voor navigatie specificeren.</string>
     <string name="segments_count">Segment %1$d</string>
@@ -3919,8 +3918,8 @@
     <string name="shared_strings_all_regions">Alle regio\'s</string>
     <string name="delete_number_files_question">Wis %1$d bestanden\?</string>
     <string name="track_recording_stop_without_saving">Stop zonder opslaan</string>
-    <string name="track_recording_save_and_stop">Bewaar en stop de opname</string>
-    <string name="track_recording_title">Trackopname gestopt</string>
+    <string name="track_recording_save_and_stop">Bewaar en stop de registratie</string>
+    <string name="track_recording_title">Trackregistratie gestopt</string>
     <string name="on_pause">Pauze</string>
     <string name="app_restart_required">Herstarten van de app is vereist om bepaalde instellingen toe te passen.</string>
     <string name="routing_attr_height_obstacles_description">Geschatte reistijd zal de invloed van hoogte meenemen. Routevoorkeur kan helpen om sterke hellingen vermijden:</string>
@@ -3934,14 +3933,14 @@
     <string name="live_update_delete_updates_msg">Alle %s live updates verwijderen\?</string>
     <string name="purchases">Aankopen</string>
     <string name="select_category_descr">Selecteer een categorie of voeg een nieuwe toe</string>
-    <string name="track_recording_will_be_continued">De opname wordt voortgezet.</string>
+    <string name="track_recording_will_be_continued">De registratie wordt voortgezet.</string>
     <string name="copy_poi_name">Kopieer POI-naam</string>
     <string name="quick_action_show_hide_title">Tonen/verbergen</string>
     <string name="shared_string_interval">Interval</string>
     <string name="track_has_no_altitude">De track bevat geen hoogtegegevens.</string>
     <string name="track_has_no_speed">De track bevat geen snelheidsgegevens.</string>
     <string name="select_another_colorization">Selecteer een ander inkleuring.</string>
-    <string name="trip_recording_show_start_dialog_setting">Indien uitgeschakeld zal de opname direct starten na het tikken op de widget of het menu-item, waarbij er geen bevestiging zal worden gevraagd.</string>
+    <string name="trip_recording_show_start_dialog_setting">Indien uitgeschakeld, start de registratie direct na het tikken op de widget of het menu-item, zonder bevestiging.</string>
     <string name="trip_recording_save_and_continue">Opslaan en doorgaan</string>
     <string name="lost_data_warning">Niet-opgeslagen gegevens zullen verloren gaan.</string>
     <string name="no_purchases">U heeft geen aankopen gedaan</string>
@@ -4206,7 +4205,7 @@
     <string name="map_markers_history">Geschiedenis van mapmarkeringen</string>
     <string name="navigation_history">Navigatie geschiedenis</string>
     <string name="history_preferences_descr">Je kan het verzamelen van geschiedenis voor ieder item individueel uitschakelen.</string>
-    <string name="shortcut_start_recording">Opname starten</string>
+    <string name="shortcut_start_recording">Registratie starten</string>
     <string name="shortcut_navigate_to">Navigeer naar…</string>
     <string name="shortcut_navigate_to_work">Navigeer naar \'Werk\'</string>
     <string name="shortcut_navigate_to_home">Navigeer naar \'Huis\'</string>
@@ -4385,7 +4384,7 @@
     <string name="shared_string_mode">Modus</string>
     <string name="map_widget_time_to_destination">Tijd tot bestemming</string>
     <string name="explore_plans">Plannen verkennen</string>
-    <string name="map_widget_trip_recording_duration">Tijdsduur</string>
+    <string name="map_widget_trip_recording_duration">Ritduur</string>
     <string name="map_widget_distance">Afstand</string>
     <string name="shared_string_widget">Widget</string>
     <string name="audio_video_notes_desc">Laat eenvoudig toe een opname te starten of stoppen (audio, video of foto).</string>
@@ -4557,7 +4556,7 @@
     <string name="auto_25_chars_route_tr_kl">Sla rechtsaf en houd links aan</string>
     <string name="auto_25_chars_route_tr_kr">Sla rechtsaf en houd rechts aan</string>
     <string name="auto_25_chars_route_roundabout_kr">Afslag %1$d nemen en rechts aanhouden</string>
-    <string name="trip_recording_duration_widget_desc">Toont de tijdsduur van deze opgenomen rit.</string>
+    <string name="trip_recording_duration_widget_desc">Toont de momenteel geregistreerde ritduur.</string>
     <string name="nautical_depth_points">Dieptepunten van de zee</string>
     <string name="map_marker_interval_dialog_desc">Vermeld het tijdsinterval waarin de gemiddelde snelheid zal worden berekend, voor de verwachte aankomsttijd.</string>
     <string name="compass_desc">Toont richting naar het noorden.</string>
@@ -4830,7 +4829,7 @@
     <string name="rendering_attr_showRunningRoutes_description">Toon hardlooproutes</string>
     <string name="estimated_download_size">Verwachte bestandsgrootte</string>
     <string name="gpx_no_routes_descr">U kunt \"%1$s\" gebruiken om een route aan het bestand toe te voegen.</string>
-    <string name="save_track_to_gpx_descrp">Automatisch starten met opname van track tijdens navigeren, en achteraf automatisch opslaan.</string>
+    <string name="save_track_to_gpx_descrp">Start automatisch het registeren van een track tijdens het navigeren en sla deze daarna automatisch op.</string>
     <string name="rendering_attr_seabedDetail_description">Meer informatie over de zeebodem, bodemtypes, categorie en soort wier of zeegras</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">\'Fixme\' labels</string>
     <string name="turn_arrows_descr">Kies of Afslaan Pijlen zijn aangegeven op de route lijn.</string>
@@ -5091,7 +5090,7 @@
     <string name="routing_attr_hazmat_category_usa_6_name">Giftige en infectueuze stoffen</string>
     <string name="dangerous_goods">Gevaarlijke goederen</string>
     <string name="free_ride">Vrij rijden</string>
-    <string name="write_bearing_description">Koers opslaan voor elk track tijdens het opnemen</string>
+    <string name="write_bearing_description">Richting opslaan voor elk trackpunt tijdens het registreren</string>
     <string name="write_bearing">Koers opschrijven</string>
     <string name="shared_string_included">Inclusief</string>
     <string name="feature_available_as_part_of_plan">%1$s beschikbaar als onderdeel van het %2$s abonnement</string>
@@ -5134,7 +5133,7 @@
     <string name="verify_account">Je account verifiëren</string>
     <string name="slope_legend_description">De hellingshoek visualiseert de steilheid van het terrein met kleuren. Je kunt meer lezen over hellingen in %1$s.</string>
     <string name="calculate_offline_altitude_descr">Bereken de hoogte offline op basis van terreinkaartgegevens (3D). Verschillen ten opzichte van de door het apparaat geregistreerde hoogte kunnen worden gebruikt als hoogtecorrectie.</string>
-    <string name="write_data_from_sensor_to_track">Schrijf de gegevens van externe sensoren naar de GPX tijdens de trip opname.</string>
+    <string name="write_data_from_sensor_to_track">Schrijf de gegevens van externe sensoren naar de GPX tijdens de ritregistratie.</string>
     <string name="save_track_external_sensors_data">Gegevens</string>
     <string name="there_are_no_connected_sensors_of_this_type">Er zijn geen aangesloten sensoren van dit type</string>
     <string name="external_sensors_not_found">Geen sensoren gevonden</string>
@@ -5551,7 +5550,7 @@
     <string name="shared_string_reset_all">Alles herstellen</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="filter_tracks_count">Filter: %d</string>
-    <string name="help_article_troubleshooting_track_recording_issues_name">Track-opnamen maken</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Trackregistratie</string>
     <string name="local_indexes_category_terrain">Terreinkaarten (3D)</string>
     <string name="terrain_map">Terreinkaart (3D)</string>
     <string name="approximate_bearing">Koersbenadering</string>
@@ -5570,7 +5569,7 @@
     <string name="write_heading">Richting opschrijven</string>
     <string name="empty_smart_folder_title">Geen overeenkomende track</string>
     <string name="open_issue_on_github">Open een issue op GitHub</string>
-    <string name="write_heading_description">Sla richting op voor ieder trackpunt tijdens het opnemen</string>
+    <string name="write_heading_description">Sla de bewegingsrichting op bij elk trackpunt tijdens het registreren</string>
     <string name="avg_sensor_bycicle_power">Fietsvermogen, gemiddeld</string>
     <string name="complex_widget_alert">%1$s widget kan alleen op zijn eigen rij geplaatst worden.</string>
     <string name="previous_row_has_complex_widget">Vorige row heeft complex widget</string>
@@ -5834,7 +5833,7 @@
     <string name="ski_route_switch_style_description">Verken onder andere ski-routes, skipistes &amp; liften met de Winter- en Skikaartstijl.</string>
     <string name="sensor_data">Sensordata</string>
     <string name="shared_string_engine">Motor</string>
-    <string name="vehicle_metrics_recording_description">Selecteer de parameters die opgenomen moeten worden in het GPX-bestand.</string>
+    <string name="vehicle_metrics_recording_description">Selecteer de parameters die geregistreerd moeten worden in het GPX-bestand.</string>
     <string name="auto_zoom_3d_angle">Automatische zoom 3D-hoek</string>
     <string name="av_audio_sample_rate">Audio-bemonsteringsfrequentie</string>
     <string name="av_audio_sample_rate_descr">Selecteer de audio-bemonsteringsfrequentie.</string>
@@ -5957,14 +5956,14 @@
     <string name="lock_screen_description">Schakelt de functionaliteit van het aanraakscherm in of uit om onbedoelde aanrakingen te voorkomen</string>
     <string name="lock_screen">Vergrendel scherm</string>
     <string name="track_does_not_contain_data_to_save">Track bevat geen gegevens om op te slaan.</string>
-    <string name="quick_action_finish_trip_recording_summary">Een knop om de GPX-track op te slaan en de opname te stoppen.</string>
-    <string name="start_trip_recording_first_m">Start eerst de reisopname.</string>
-    <string name="new_segment_started_m">Startte een nieuw segment van de reisopname.</string>
-    <string name="quick_action_save_recorded_trip_and_continue_summary">Een knop om de huidige reisopname op te slaan als GPX-bestand en zonder onderbreking een nieuwe opname te starten.</string>
+    <string name="quick_action_finish_trip_recording_summary">Een knop om de GPX-track op te slaan en de registratie te stoppen.</string>
+    <string name="start_trip_recording_first_m">Start eerst de ritregistratie.</string>
+    <string name="new_segment_started_m">Startte een nieuw segment van de ritregistratie.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Een knop om de huidige ritregistratie op te slaan als GPX-bestand en zonder onderbreking een nieuwe ritregistratie te starten.</string>
     <string name="quick_action_save_recorded_trip_and_continue">Reisopname &amp; doorgaan</string>
-    <string name="quick_action_new_trip_segment">Een knop om een nieuw segment te starten in de lopende GPX-reisopname.</string>
+    <string name="quick_action_new_trip_segment">Een knop om een nieuw segment te starten in de lopende GPX-trackregistratie.</string>
     <string name="new_trip_segment">Nieuw reisopname-segment</string>
-    <string name="quick_action_start_pause_recording">Een knop om het opnemen van de GPX-reisopname te starten, pauzeren of hervatten.</string>
+    <string name="quick_action_start_pause_recording">Een knop om de registratie van de GPX-track te starten, pauzeren of hervatten.</string>
     <string name="lang_zh_hant">Traditioneel Chinees</string>
     <string name="lang_zh_hans">Vereenvoudigd Chinees</string>
     <string name="wiki_around">Nabijgelegen populaire plaatsen</string>
@@ -6007,7 +6006,7 @@
     <string name="obd_widget_group">Voertuigmetingen</string>
     <string name="vehicle_metrics_plugin_settings">Instellingen voor voertuigmetingen</string>
     <string name="write_location_provider">Locatie-aanbieder opschrijven</string>
-    <string name="write_location_provider_description">Sla de locatie-aanbieder op bij elk trackpunt tijdens het opnemen</string>
+    <string name="write_location_provider_description">Sla de locatie-aanbieder op bij elk trackpunt tijdens het registreren</string>
     <string name="third_links">Links van derden</string>
     <string name="shared_string_source">Bron</string>
     <string name="shared_string_decrease">Verlaag</string>
@@ -6198,11 +6197,11 @@
     <string name="track_folder_appearance">Uiterlijk van de track-map</string>
     <string name="update_maps">Update kaarten</string>
     <string name="reconnect">Opnieuw verbinden</string>
-    <string name="trip_recording_downhill_widget_desc">Toont de som van alle afdalingen of de laatste afdaling van deze opgenomen rit.</string>
-    <string name="trip_recording_uphill_widget_desc">Toont de som van alle beklimmingen of de laatste beklimming van de momenteel opgenomen reis.</string>
-    <string name="trip_recording_distance_widget_desc">Toont de totale afstand van je momenteel opgenomen reis, met modi om de afstand te zien van de laatste beklimming en afdaling.</string>
-    <string name="trip_recording_max_speed_widget_description">Toont de maximale snelheid van de momenteel opgenomen reis. Tik om de wisselen tussen de algehele snelheid en de maximale snelheid van de laatste beklimming of afdaling.</string>
-    <string name="trip_recording_average_slope_widget_description">Toont de gemiddelde helling van het laatste afdaling- of beklimmingssegment van de momenteel opgenomen reis.</string>
+    <string name="trip_recording_downhill_widget_desc">Toont de som van alle afdalingen of de laatste afdaling van de momenteel geregistreerde rit.</string>
+    <string name="trip_recording_uphill_widget_desc">Toont de som van alle beklimmingen of de laatste beklimming van de momenteel geregistreerde rit.</string>
+    <string name="trip_recording_distance_widget_desc">Toont de totale afstand van je momenteel geregistreerde rit, met modi om de afstand te zien van de laatste beklimming en afdaling.</string>
+    <string name="trip_recording_max_speed_widget_description">Toont de maximale snelheid van de momenteel geregistreerde rit. Tik om de wisselen tussen de algehele snelheid en de maximale snelheid van de laatste beklimming of afdaling.</string>
+    <string name="trip_recording_average_slope_widget_description">Toont de gemiddelde helling van het laatste afdaling- of beklimmingssegment van de momenteel geregistreerde rit.</string>
     <string name="average_slope">Gemiddelde helling</string>
     <string name="shared_string_last_uphill">Laatste beklimming</string>
     <string name="shared_string_last_downhill">Laatste afdaling</string>
@@ -6376,7 +6375,7 @@
     <string name="share_favorite">Deel favoriet</string>
     <string name="copy_list">Kopieer lijst</string>
     <string name="trip_recording_avg_speed_widget_description">Toont de gemiddelde snelheid van de huidige rit of toont de gemiddelde snelheid tijdens de laatste beklimming of afdaling.</string>
-    <string name="trip_recording_moving_time_widget_description">Toont de momenteel opgenomen bewegingstijd of de tijd voor de laatste beklimming en afdaling.</string>
+    <string name="trip_recording_moving_time_widget_description">Toont de momenteel geregistreerde bewegingstijd of de tijd voor de laatste beklimming en afdaling.</string>
     <string name="trip_recording_moving_time">Bewegingstijd</string>
     <string name="show_layout_grid_logs">Toon rasterlogboeken</string>
     <string name="shared_string_trip_average">Rit gemiddelde</string>
@@ -6461,4 +6460,8 @@
     <string name="astro_visibility_show_today">De zichtbaarheid van vandaag weergeven</string>
     <string name="astro_schedule_show_current_week">Toon huidige week</string>
     <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="release_5_3">• Ondersteuning voor 3D-gebouwen toegevoegd\n\n • Bolvormige kaartweergave\n\n • Astronomie-plugin met nachtkaart en sterrendatabase\n\n • Nieuwe kleurmodi voor de snelheidsmeter: tolerantiesnelheid en overschrijding\n\n • Aparte kaartschermindelingen voor landschaps- en portretmodus\n\n • Ritregistratiewidgets: bewegingstijd en gemiddelde snelheid\n\n • Adapterspanningswidget voor Voertuigdiagnostiek\n\n • Voertuigdiagnostiek in Track Analyse\n\n • Tracks automatisch groeperen op jaar, lengte, activiteit, enz.\n\n • Paletbewerker voor terrein- en trackvisualisatie\n\n • Verbeterde zoekalgoritmes &amp; vernieuwde gebruikersinterface\n\n • Hoogteprofielen voor routes gerepareerd\n\n • Favorieten: nieuwe sorteermogelijkheden en een vernieuwd gebruikersinterface\n\n • Deel een link naar elke POI\n\n • Voorvertoning van routepunten zonder de lijst te sluiten\n\n • Fietsbreedte-parameter om smalle wegen te vermijden\n\n • Fotobeschrijvingen van Wikimedia</string>
+    <string name="shared_string_clear_filters">Filters wissen</string>
+    <string name="astro_sort_newest_first">Nieuwste eerst</string>
+    <string name="astro_sort_oldest_first">Oudste eerst</string>
 </resources>

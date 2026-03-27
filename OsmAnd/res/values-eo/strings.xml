@@ -6115,4 +6115,15 @@
     <string name="start_free_trial">Komenci senpagan provperiodon</string>
     <string name="subscription_free_trial_with_price">%1$s senpage, poste %2$s</string>
     <string name="subscription_then_price">poste %1$s</string>
+    <string name="release_5_3">• subteno por 3-dimensiaj konstruaĵoj\n\n• bildigi sferecon de Tero\n\n• kromprogramo “Astronomio” kun stelmapo kaj datumbazo de astroj\n\n• novaj koloroj de rapidmezurilo – alia norme kaj alia kiam superigita\n\n• apartaj aranĝoj de fenestraĵoj por horizontala kaj vertikala orientiĝoj\n\n• novaj fenestraĵoj de Spur-registrilo: “Mezuma rapido” kaj “Tempo dum movo”\n\n• nova fenestraĵo de Statistikoj pri veturilo: “Tensio de adaptilo”\n\n• datumoj el Statistikoj pri veturilo en analizilo de spuro sur la mapo\n\n• aŭtomate grupigi spurojn laŭ jaro, longo, aktiveco, ktp.\n\n• eblo redakti paletrojn uzatajn por bildigi terenon kaj spuron\n\n• plibonigitaj algoritmoj de serĉo kaj modernigita uzant-fasado\n\n• riparita profilo de tereno por kurso\n\n• ŝatataj punktoj: novaj manieroj de ordigo kaj modernigita uzant-fasado\n\n• eblo kunhavigi ligilon al ĉiu interesejo\n\n• antaŭrigardi navigadpunkton sen fermi la liston\n\n• eblo agordi larĝon de biciklo por eviti mallarĝajn stratetojn\n\n• priskriboj de fotoj el Vikimedia Komunejo</string>
+    <string name="purchases_feature_desc_astronomy">Malkovru la noktan ĉielon kun la malkonekta stelmapo kaj katalogo de astroj. Planu observojn kun diagramoj de videblo, horaroj kaj kun la reĝimo de pliigita realo.</string>
+    <string name="shared_string_clear_filters">Nuligi filtrilojn</string>
+    <string name="astro_sort_newest_first">dato (de plej novaj)</string>
+    <string name="astro_sort_oldest_first">dato (de plej malnovaj)</string>
+    <string name="astro_offline_knowledge_base_title">Malkonekta datumbazo de scio</string>
+    <string name="astro_offline_knowledge_base_description">Elŝutu la plivastigitan datumbazon por aliri artikolojn el Vikipedio kaj katalogojn de profunda ĉielo malkonekte.</string>
+    <string name="astro_schedule_next_day_note">⁺¹: sekva tago.</string>
+    <string name="astro_visibility_show_today">Montri hodiaŭan videblon</string>
+    <string name="astro_schedule_show_current_week">Montri nunan semajnon</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
 </resources>

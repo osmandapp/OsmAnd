@@ -297,7 +297,7 @@
     <string name="poi_internet_access_type_terminal">Anemdu</string>
     <string name="poi_internet_access_type_wlan">Wi-Fi</string>
     <string name="poi_shelter_type_building">Azadaɣ</string>
-    <string name="poi_shelter_type_weather_shelter">Anezwi</string>
+    <string name="poi_shelter_type_weather_shelter">Tignewt</string>
     <string name="poi_bin_yes">Iḍumman</string>
     <string name="poi_bench_yes">Ih</string>
     <string name="poi_beach_sand">Ijdi</string>
@@ -471,10 +471,10 @@
     <string name="poi_basin">Amdun</string>
     <string name="poi_allotments">Talmat n twacult</string>
     <string name="poi_landfill">Agudu</string>
-    <string name="poi_recycling_furniture">Ameublement</string>
-    <string name="poi_recycling_hardcore">Hardcore</string>
-    <string name="poi_recycling_computers">Tasarut n turagt d tameɣtut i yiwen n useqdac u tzemreḍ ad tt-tesqedceḍ alam 3 n iselkimen. Asermed yuḥwaǧ tuqqna ɣer internet.</string>
-    <string name="poi_recycling_metal">Métal</string>
+    <string name="poi_recycling_furniture"></string>
+    <string name="poi_recycling_hardcore"></string>
+    <string name="poi_recycling_computers">Iselkimen</string>
+    <string name="poi_recycling_metal">Uzzal</string>
     <string name="poi_recycling_aluminium">Aluminyum</string>
     <string name="poi_recycling_wood">Amadeɣ</string>
     <string name="poi_recycling_batteries">Tibaṭriyin</string>
@@ -485,7 +485,7 @@
     <string name="poi_weir">Uggug</string>
     <string name="poi_rest_area">Amḍiq n ustaɛfu</string>
     <string name="poi_speed_camera">Takamiṛat n urured</string>
-    <string name="poi_bridge">Pont</string>
+    <string name="poi_bridge">Tiqenṭert</string>
     <string name="poi_tunnel">Ifri</string>
     <string name="poi_cuisine_wine">Crab</string>
     <string name="poi_cuisine_fast_food">Učči arurad</string>
@@ -701,7 +701,7 @@
     <string name="poi_man_made">Afares n umdan</string>
     <string name="poi_water_transport">Asiweḍ deg waman</string>
     <string name="poi_air_transport">Asiweḍ deg yigenni</string>
-    <string name="poi_public_transport">Asiweḍ azayez</string>
+    <string name="poi_public_transport">Amesni azayez</string>
     <string name="poi_personal_transport">Asiweḍ udmawan</string>
     <string name="poi_traffic_signals_arrow">Aneccab</string>
     <string name="poi_traffic_signals_vibration">Anhaz</string>
@@ -770,4 +770,8 @@
     <string name="poi_payment_euroshell_yes">Euroshell</string>
     <string name="poi_payment_kitcard_yes">KITCard</string>
     <string name="poi_payment_westfalen_card_yes">Westfalen</string>
+    <string name="poi_museum_language">Tutlayt</string>
+    <string name="poi_training_language">Aselmed : tutlayt</string>
+    <string name="poi_board_type_public_transport">Amesni azayez</string>
+    <string name="poi_shelter_type_public_transport">Amesni azayez</string>
 </resources>
