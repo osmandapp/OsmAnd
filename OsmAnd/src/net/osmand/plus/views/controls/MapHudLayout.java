@@ -311,7 +311,7 @@ public class MapHudLayout extends FrameLayout {
 		}
 		for (MapButton button : mapButtons) {
 			if (button.getVisibility() == VISIBLE) {
-				ButtonPositionSize position = button.getDefaultPositionSize();
+				ButtonPositionSize position = updateButtonPosition(button, button.getDefaultPositionSize());
 				if (position != null && position.getHeight() > 0 && position.getWidth() > 0) {
 					map.put(button, position);
 				}
@@ -433,19 +433,14 @@ public class MapHudLayout extends FrameLayout {
 		} else if (view instanceof RulerWidget || id == R.id.measurement_buttons) {
 			position.setMarginX(0);
 			position.setMarginY(0);
-		} else if (view instanceof SideWidgetsPanel) {
+		} else if (view instanceof SideWidgetsPanel panel) {
 			position.setMarginX(0);
 			position.setMarginY(0);
 
-			if (portrait) {
-				position.setMoveDescendantsVertical();
+			if (!portrait && shouldMoveDescendantsAny(panel)) {
+				position.setMoveDescendantsAny();
 			} else {
-				float maxHeight = getHeight() - topButtonsMargin;
-				if (view.getHeight() > maxHeight) {
-					position.setMoveDescendantsAny();
-				} else {
-					position.setMoveDescendantsVertical();
-				}
+				position.setMoveDescendantsVertical();
 			}
 		} else if (id == R.id.speedometer_widget || id == R.id.map_alarm_warning) {
 			int margin = getResources().getDimensionPixelSize(R.dimen.map_alarm_bottom_margin);
@@ -460,6 +455,26 @@ public class MapHudLayout extends FrameLayout {
 			position.setMarginY((int) AndroidUtils.pxToDpF(getContext(), marginY) / 8);
 		}
 		return position;
+	}
+
+	@Nullable
+	private ButtonPositionSize updateButtonPosition(@NonNull MapButton button, @Nullable ButtonPositionSize position) {
+		if (position != null) {
+			int id = button.getId();
+			if (id == R.id.map_compass_button) {
+				ButtonPositionSize panelPosition = widgetPositions.get(leftWidgetsPanel);
+				position.setXMove(panelPosition != null && panelPosition.isMoveDescendantsAny());
+			}
+		}
+		return position;
+	}
+
+	private boolean shouldMoveDescendantsAny(@Nullable SideWidgetsPanel panel) {
+		if (panel == null || panel.getVisibility() != VISIBLE) {
+			return false;
+		}
+		float availableHeight = getHeight() - topButtonsMargin;
+		return panel.getHeight() > availableHeight;
 	}
 
 	private void calcGridPositionFromPixel(@NonNull View view, @NonNull ButtonPositionSize position) {
