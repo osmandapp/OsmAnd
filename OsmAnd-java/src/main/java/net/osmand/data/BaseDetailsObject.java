@@ -544,7 +544,7 @@ public class BaseDetailsObject {
 		return SearchResultResource.DETAILED;
 	}
 
-	private static String getLangForTravel(Object object) {
+	public static String getLangForTravel(Object object) {
 		Amenity amenity = null;
 		if (object instanceof Amenity) {
 			amenity = (Amenity) object;
