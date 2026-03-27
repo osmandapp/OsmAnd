@@ -356,6 +356,67 @@ class ButtonPositionSizeTest {
 		assertTrue { alarms.bounds.bottom <= bottomPanel.bounds.top - 1.0 }
 	}
 
+	@Test
+	fun testPlanRoute_rulerShouldBeRightOfMeasurementButtons() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("widget_top_bar").setSize(51, 7).setNonMoveable()
+				.setMoveDescendantsVertical().apply {
+					posH = POS_FULL_WIDTH
+					posV = POS_TOP
+				},
+			ButtonPositionSize("map_left_widgets_panel", 17, true, true)
+				.setSize(17, 12).setMoveVertical(),
+			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_out", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveAny(),
+			ButtonPositionSize("measurement_buttons", 8, true, false).setSize(8, 7).setMoveAny(),
+			ButtonPositionSize("map_ruler_layout", 7, true, false).setSize(7, 3).setMoveAny(),
+		)
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 51, 82)
+		assertTrue(computed)
+
+		val measurement = buttons.first { it.id == "measurement_buttons" }
+		val ruler = buttons.first { it.id == "map_ruler_layout" }
+
+		// Fixed behavior: ruler should be to the right of measurement_buttons (not above it).
+		assertTrue(
+			ruler.bounds.left >= measurement.bounds.right + 1.0,
+			"ruler=${ruler.bounds}, measurement=${measurement.bounds}"
+		)
+		assertTrue(
+			ruler.bounds.bottom == measurement.bounds.bottom,
+			"ruler=${ruler.bounds}, measurement=${measurement.bounds}"
+		)
+		assertTrue(
+			!(ruler.bounds.left == measurement.bounds.left && ruler.bounds.top < measurement.bounds.top),
+			"ruler=${ruler.bounds}, measurement=${measurement.bounds}"
+		)
+	}
+
+	@Test
+	fun testMapMarkers_rulerShouldStayBottomLeftWhenAlone() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("widget_top_bar").setSize(51, 7).setNonMoveable()
+				.setMoveDescendantsVertical().apply {
+					posH = POS_FULL_WIDTH
+					posV = POS_TOP
+				},
+			ButtonPositionSize("map_ruler_layout", 7, true, false).setSize(7, 3).setMoveAny(),
+		)
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 51, 27)
+		assertTrue(computed)
+
+		// Map Markers: ruler remains in bottom-left corner.
+		assertTrue { check(buttons, "map_ruler_layout", 0.0, 24.0) }
+	}
+
 
 
 }
