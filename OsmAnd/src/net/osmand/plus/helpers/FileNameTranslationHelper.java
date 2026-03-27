@@ -140,7 +140,7 @@ public class FileNameTranslationHelper {
 	public static String getWeatherName(Context ctx, OsmandRegions regions, String basename) {
 		basename = basename.replace(" ", "_");
 		if (WORLD.equalsIgnoreCase(basename)) {
-			return ctx.getString(R.string.shared_string_all_world);
+			return ctx.getString(R.string.shared_string_world_weather_map);
 		} else {
 			return regions.getLocaleName(basename.trim(), false);
 		}

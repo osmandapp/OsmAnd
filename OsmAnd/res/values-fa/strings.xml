@@ -5740,7 +5740,6 @@
     <string name="shared_string_on_map">روی نقشه</string>
     <string name="display_position_automatic_descr">بستگی به جهت‌گیری نقشه دارد: پایین برای جهت حرکت، مرکز برای سایر موارد.</string>
     <string name="weather_forecast_is_outdated">پیش‌بینی منسوخ شده است.</string>
-    <string name="shared_string_all_world">همه جهان</string>
     <string name="weather_forecast">پیش‌بینی آب‌وهوا</string>
     <string name="offline_weather_forecast">پیش‌بینی آب‌وهوای آفلاین</string>
     <string name="offline_weather_forecast_desc">می‌توانید پیش‌بینی آب‌وهوا را برای ۷ روز بارگیری کنید.</string>

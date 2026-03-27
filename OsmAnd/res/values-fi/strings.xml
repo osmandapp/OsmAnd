@@ -4439,7 +4439,6 @@
     <string name="shared_string_visible_on_map">Näkyvissä kartalla</string>
     <string name="rendering_attr_lightDetail_name">Vähän yksityiskohtia</string>
     <string name="external_sensor_widgets">Ulkoiset anturit</string>
-    <string name="shared_string_all_world">Koko maailma</string>
     <string name="offline_weather_forecast">Offline-sääennuste</string>
     <string name="map_3d_mode_hint">Napin paikkaa voi vaihtaa painamalla sitä pitkään.</string>
     <string name="dangerous_goods">Vaaralliset aineet</string>
