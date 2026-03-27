@@ -30,6 +30,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
+import net.osmand.map.WorldRegion;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
@@ -385,10 +386,19 @@ public class RoutingContext {
 		List<RoutingSubregionTile> collection = null;
 		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
 			BinaryMapIndexReader reader = r.getKey();
-			boolean isLiveUpdate = reader.getHHRoutingIndexes().size() == 0;
-			if (!isLiveUpdate && mapIndexReaderFilter.size() > 0 && !mapIndexReaderFilter.contains(r.getKey())) {
-				continue;
+
+			if (!mapIndexReaderFilter.isEmpty()) {
+				boolean isUnwantedMap = !mapIndexReaderFilter.contains(reader);
+				boolean containsFastRouting = !reader.getHHRoutingIndexes().isEmpty();
+				if (isUnwantedMap && containsFastRouting) {
+					continue;
+				}
+				boolean isWorldMap = reader.getFile().getName().toLowerCase().startsWith(WorldRegion.WORLD + "_");
+				if (isWorldMap) {
+					continue;
+				}
 			}
+
 			// NOTE: load headers same as we do in non-native (it is not native optimized)
 			try {
 				boolean intersect = false;
