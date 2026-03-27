@@ -1568,7 +1568,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_on_map">On map</string>
     <string name="display_position_automatic_descr">Depends on Map orientation: bottom for movement direction, center for all others.</string>
     <string name="weather_forecast_is_outdated">Forecast is outdated.</string>
-    <string name="shared_string_all_world">All world</string>
+    <string name="shared_string_world_weather_map">World weather map</string>
     <string name="weather_forecast">Weather forecast</string>
     <string name="offline_weather_forecast">Offline weather forecast</string>
     <string name="offline_weather_forecast_desc">You can download weather forecast for 7 days.</string>

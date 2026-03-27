@@ -4994,7 +4994,6 @@
     <string name="clear_online_cache">Garbitu lineako cachea</string>
     <string name="offline_cache">Lineaz kanpoko cachea</string>
     <string name="weather_forecast_is_outdated">Iragarpena zaharkituta dago.</string>
-    <string name="shared_string_all_world">Mundu guztia</string>
     <string name="offline_weather_forecast">Lineaz kanpoko eguraldiaren iragarpena</string>
     <string name="app_mode_climbing">Eskalada</string>
     <string name="common_weight_limit_error">Gutxieneko balioa \"%1$s\" %2$s da. Erabili \"%3$s\" profila ibilgailuaren pisua gutxieneko balioa baino txikiagoa bada.</string>

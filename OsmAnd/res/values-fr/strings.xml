@@ -4627,7 +4627,6 @@
     <string name="token_is_not_valid">Le jeton n\'est pas valide</string>
     <string name="metric_lbs">livres</string>
     <string name="weather_forecast_is_outdated">Les prévisions ne sont pas à jour.</string>
-    <string name="shared_string_all_world">Monde entier</string>
     <string name="shared_string_pounds">livres</string>
     <string name="free_maps_updates">Mises à jour gratuites (urgence)</string>
     <string name="common_weight_limit_error">La valeur minimale est « %1$s » %2$s. Si le poids de votre véhicule est inférieur à cette valeur, utilisez le profil « %3$s ».</string>

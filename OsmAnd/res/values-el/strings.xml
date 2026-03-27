@@ -3914,7 +3914,6 @@
     <string name="trash_alert_card_desc">Τα αντικείμενα στον κάδο θα διαγραφούν μετά από %1$s μέρες.</string>
     <string name="action_cannot_be_undone">Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.</string>
     <string name="help_article_navigation_routing_horse_routing_name">Δρομολόγηση με άλογο</string>
-    <string name="shared_string_all_world">Όλος ο κόσμος</string>
     <string name="shared_storage_second_step">Επιλέξτε \"Χρήση αυτού του φακέλου\".</string>
     <string name="external_sensor_name_property_description">Όνομα αισθητήρα</string>
     <string name="row_number">Σειρά %1$s</string>

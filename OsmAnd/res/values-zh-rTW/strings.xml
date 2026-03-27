@@ -4572,7 +4572,6 @@
     <string name="clear_online_cache_description">這將會清除線上天氣圖磚的快取。</string>
     <string name="weather_forecast_is_outdated">預報已過期。</string>
     <string name="offline_weather_forecast_desc">您可以下載七天的天氣預報。</string>
-    <string name="shared_string_all_world">全世界</string>
     <string name="offline_weather_forecast">離線天氣預測</string>
     <string name="free_maps_updates">免費更新（緊急）</string>
     <string name="shared_string_pounds">英磅</string>
