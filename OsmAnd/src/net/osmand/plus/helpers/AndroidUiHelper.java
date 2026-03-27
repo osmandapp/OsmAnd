@@ -220,7 +220,6 @@ public class AndroidUiHelper {
 		} else {
 			window.setNavigationBarColor(color);
 		}
-
 		setNavigationBarContentColor(window, lightContent);
 	}
 
