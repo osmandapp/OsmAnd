@@ -341,9 +341,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				return Collections.emptyList();
 			}
 		}
-		if (zoom < ZOOM_TO_SHOW_SELECTION) {
-			return Collections.emptyList();
-		}
 
 		int left = MapUtils.get31TileNumberX(latLonBounds.left);
 		int right = MapUtils.get31TileNumberX(latLonBounds.right);
@@ -352,9 +349,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 		try {
 			List<BinaryMapDataObject> result = osmandRegions.query(left, right, top, bottom, false);
-			return osmandRegions.filterQueryResultsByPoint(result, left / 2 + right / 2, top / 2 + bottom / 2);
+			if (zoom >= ZOOM_TO_SHOW_SELECTION) {
+				return osmandRegions.filterQueryResultsByPoint(result, left / 2 + right / 2, top / 2 + bottom / 2);
+			}
+			return result;
 		} catch (IOException e) {
-			return Collections.emptyList();
+			return null;
 		}
 	}
 
