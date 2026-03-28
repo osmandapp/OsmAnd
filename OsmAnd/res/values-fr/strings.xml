@@ -6040,4 +6040,9 @@
     <string name="shared_string_clear_filters">Effacer les filtres</string>
     <string name="astro_sort_newest_first">Récents en premier</string>
     <string name="astro_sort_oldest_first">Anciens en premier</string>
+    <string name="compass_calibration_needed">Étalonnage de la boussole nécessaire</string>
+    <string name="sensors_not_available_for_ar">Capteur indisponible pour l\'AR</string>
+    <string name="ar_mode_enabled">Mode AR activé</string>
+    <string name="ar_mode_disabled">Mode AR désactivé</string>
+    <string name="shared_string_world_weather_map">Carte météorologique mondiale</string>
 </resources>
