@@ -6054,8 +6054,8 @@
     <string name="astro_type_galaxy_cluster">Галаксијско сазвежђе</string>
     <string name="astro_type_constellation">Сазвежђе</string>
     <string name="no_objects_found">Нема пронађених предмета</string>
-    <string name="astro_search_info_solar_system">Сунчев систем је гравитационо везан систем Сунца и маса које круже око њега, а најзначајније његових осам планета, од којих је Земља једна.</string>
-    <string name="astro_search_info_constellations">Сазвежђе је подручје на небеској сфери у којем група видљивих звезда образује привидни образац или обрис.</string>
+    <string name="astro_search_info_solar_system">Сунчев систем је тежом везан Сунчев систем и маса које круже око њега, а најзначајније његових осам планета, од којих је Земља једна.</string>
+    <string name="astro_search_info_constellations">Сазвежђе је подручје на небеској лопти у којем група видљивих звезда образује привидни образац или обрис.</string>
     <string name="astro_search_info_stars">Звезде су светлећи небески предмети од плазме, које држи на окупу сопствена привлачна сила.</string>
     <string name="astro_search_info_nebulas">Маглина је огроман облак прашине и гаса у свемиру, често подручје где се рађају звезде.</string>
     <string name="astro_search_info_star_clusters">Звездано јато је група звезда које су повезане привлачном силом и створене из истог молекуларног облака.</string>
@@ -6104,4 +6104,21 @@
     <string name="start_free_trial">Започните бесплатну пробу</string>
     <string name="subscription_free_trial_with_price">%1$s бесплатно, затим %2$s</string>
     <string name="subscription_then_price">затим %1$s</string>
+    <string name="compass_calibration_needed">Неопходно је баждарење компаса</string>
+    <string name="shared_string_clear_filters">Поништи услове</string>
+    <string name="astro_visibility_show_today">Приказуј данашњу видљивост</string>
+    <string name="astro_schedule_show_current_week">Приказуј тренутну седмицу</string>
+    <string name="purchases_feature_desc_astronomy">Истражујте ноћно небо картама ван мреже и небеском збирком. Планирајте посматрања паметним цртежима видљивости, дневним роковником и судејствени обогаћени приказ.</string>
+    <string name="sensors_not_available_for_ar">Нема доступних пријемника за обогаћени приказ</string>
+    <string name="ar_mode_enabled">Обогаћени приказ је омогућен</string>
+    <string name="ar_mode_disabled">Обогаћени приказ је онемогућен</string>
+    <string name="astro_sort_newest_first">Прво најновији</string>
+    <string name="astro_sort_oldest_first">Прво најстарији</string>
+    <string name="astro_expand_your_universe_title">Проширите свој свемир</string>
+    <string name="astro_expand_your_universe_description">Приступите проширеном складишту података збирки дубоког свемира, чланцима Википедије и обогаћеном приказу без мрежне везе.</string>
+    <string name="astro_offline_knowledge_base_title">Складиште знања без мрежне везе</string>
+    <string name="astro_offline_knowledge_base_description">Преузмите проширено складиште ради приступу чланцима Википедије и збирци дубоког свемира ван мреже.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ следећи дан.</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="release_5_3">•Просторни приказ зграда (додата подршка)\n\n •Лоптасти приказ карте\n\n •Астрономски додатак са ноћном картом и складиштем звезда\n\n •Нове боје брзиномера: дозвољено одступање и прекорачење\n\n •Посебни распореди справица за усправно и положено сучеље\n\n •Справице за снимање пута: брзина кретања и просек\n\n •Справица за напон у подацима о возилу\n\n •Подаци о возилу у обради трага\n\n •Разврставање трагова по години, дужини, занимању и другом\n\n •Уређивач боја за изглед терена и трагова\n\n •Боља претрага и освежено сучеље\n\n •Висински профили за путање (исправљено)\n\n •Омиљена места: нови распоред и изглед\n\n •Дељење везе за било коју занимљиву тачку\n\n •Преглед тачака без затварања списка\n\n •Ширина бицикла ради избегавања уских пролаза\n\n •Описи слика са Викимедије</string>
 </resources>
