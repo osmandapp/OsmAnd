@@ -6177,4 +6177,9 @@
     <string name="shared_string_clear_filters">Ryd filtre</string>
     <string name="astro_sort_newest_first">Nyeste først</string>
     <string name="astro_sort_oldest_first">Ældste først</string>
+    <string name="compass_calibration_needed">Kompasset skal kalibreres</string>
+    <string name="sensors_not_available_for_ar">Sensorer er ikke tilgængelige til AR</string>
+    <string name="ar_mode_enabled">AR-tilstand aktiveret</string>
+    <string name="ar_mode_disabled">AR-tilstand deaktiveret</string>
+    <string name="shared_string_world_weather_map">Verdenskort over vejret</string>
 </resources>
