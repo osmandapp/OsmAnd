@@ -531,9 +531,9 @@
     <string name="additional_settings">Extra instellingen</string>
     <string name="save_current_track_descr">Huidige GPX-track nu opslaan.</string>
     <string name="save_current_track">Huidige GPX-track opslaan</string>
-    <string name="save_track_interval">Logging-interval gedurende navigatie</string>
+    <string name="save_track_interval">Registratie-interval tijdens het navigeren</string>
     <string name="save_track_interval_descr">Stel het registratie-interval in voor trackregistratie tijdens het navigeren</string>
-    <string name="save_track_to_gpx">GPX-Track automatisch opnemen tijdens navigatie</string>
+    <string name="save_track_to_gpx">Start automatisch het registeren van een track tijdens het navigeren</string>
     <string name="update_tile">Updaten</string>
     <string name="reload_tile">Herlaad kaartsegment</string>
     <string name="mark_point">Doel</string>
@@ -1229,14 +1229,12 @@
     <string name="int_hour">u.</string>
     <string name="duration">Duur</string>
     <string name="distance">Afstand</string>
-    <string name="record_plugin_description">Neem je reizen of trainingen in GPX formaat en analyseer de gegevens zoals snelheid, opgebouwde beklimmingen en afdalingen, hoogteprofiel, etc. Opgenomen tracks kunnen worden gearchiveerd, gedeeld met vrienden, bewerkt en verwerkt worden in andere programma\'s.
-\n
-\nLees verder op %1$s.</string>
+    <string name="record_plugin_description">Registreer je ritten of trainingen en analyseer de gegevens op snelheid, cumulatieve beklimmingen en afdalingen, hoogteprofiel, enz. Geregistreerde tracks kunnen worden gearchiveerd, gedeeld met vrienden, bewerkt en nabewerkt.\n\nLees verder op %1$s.</string>
     <string name="save_track_to_gpx_globally_descr">Het registreren van de afgelegde weg in een GPX-bestand kan worden aan- en uitgeschakeld met de GPX opname widget op het kaartscherm.</string>
-    <string name="save_track_interval_globally">Logging interval</string>
+    <string name="save_track_interval_globally">Registratie-interval</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus- en pendeltaxilijnen</string>
     <string name="confirm_every_run">Altijd vragen</string>
-    <string name="save_global_track_interval">Standaard logging-interval</string>
+    <string name="save_global_track_interval">Algemeen registratie-interval</string>
     <string name="traffic_warning_speed_limit">Maximum snelheid</string>
     <string name="traffic_warning_border_control">Grenscontrole</string>
     <string name="traffic_warning_payment">Tolpoortje</string>
@@ -6464,4 +6462,9 @@
     <string name="shared_string_clear_filters">Filters wissen</string>
     <string name="astro_sort_newest_first">Nieuwste eerst</string>
     <string name="astro_sort_oldest_first">Oudste eerst</string>
+    <string name="compass_calibration_needed">Kompas kalibratie nodig</string>
+    <string name="sensors_not_available_for_ar">Sensors niet beschikbaar voor AR</string>
+    <string name="ar_mode_enabled">AR-modus ingeschakeld</string>
+    <string name="ar_mode_disabled">AR-modus uitgeschakeld</string>
+    <string name="shared_string_world_weather_map">Wereld weerkaart</string>
 </resources>
