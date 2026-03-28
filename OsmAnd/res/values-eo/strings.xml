@@ -5578,7 +5578,7 @@
     <string name="obd_battery_voltage_desc">Montras tension de baterio de la veturilo</string>
     <string name="obd_ambient_air_temp_desc">Montras temperaturon ekster la veturilo.</string>
     <string name="learn_more_about_obd_sensors">Pliaj informoj pri sentiloj.</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Spuru bazajn datumojn via veturilo per la protokolo OBD-II. Observu bazajn parametrojn: rapidon, rivoluan rapidon de motoro, konsumon de brulaĵo kaj pli.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Spuru bazajn datumojn de via veturilo per la protokolo OBD-II. Observu bazajn parametrojn: rapidon, rivoluan rapidon de motoro, konsumon de brulaĵo kaj pli.</string>
     <string name="release_4_9">• nova plenekrana galeria vidigilo por Vikimediaj fotoj\n\n• nova kromprogramo “Statistikoj pri veturilo” por observi parametrojn de aŭtomobilo per la protokolo OBD-II\n\n• eblo asigni aktivecojn al spuroj kaj filtri ilin\n\n• novaj rapidaj agoj por registri kurson kaj por ŝlosi ekranon\n\n• alĝustigeblaj kaj moveblaj butonoj sur la mapo\n\n• aldonis kuntekstan menuon kaj la agon “Nuligi mezuman rapidon” al fenestraĵoj\n\n• nova tavolo de kursoj: “Teren-motorciklaj kursoj”\n\n• riparis problemon pri “Aŭtomate registri spuron dum navigi”\n\n• riparis problemon pri inversaj koordinatoj en lingvoj skribataj maldekstren\n\n• riparis mankantajn sentilajn datumojn por nune registrata spuro\n\n• aldonis informojn pri proksimaj areoj de la elektita punkto\n\n• butono de rapida ago por alĝustigi videblon de OSM-redaktoj\n\n• apartaj videblaj parametroj por kolorigi terenon\n\n• aldonis premeblan bildsimbolon por vidigi aliron kaj aliajn atributojn de vojoj</string>
     <string name="obd_fuel_consumption_desc">Montras kiel rapide brulaĵo estas uzata de la motoro, kalkulita konsiderante restantan brulaĵon, enhavecon de brulaĵujo kaj distancon determinitan per GPS.</string>
     <string name="average_temperature_slider_description">Elekti tempdaŭron por mezuri la mezuman temperaturon.</string>
@@ -6115,8 +6115,8 @@
     <string name="start_free_trial">Komenci senpagan provperiodon</string>
     <string name="subscription_free_trial_with_price">%1$s senpage, poste %2$s</string>
     <string name="subscription_then_price">poste %1$s</string>
-    <string name="release_5_3">• subteno por 3-dimensiaj konstruaĵoj\n\n• bildigi sferecon de Tero\n\n• kromprogramo “Astronomio” kun stelmapo kaj datumbazo de astroj\n\n• novaj koloroj de rapidmezurilo – alia norme kaj alia kiam superigita\n\n• apartaj aranĝoj de fenestraĵoj por horizontala kaj vertikala orientiĝoj\n\n• novaj fenestraĵoj de Spur-registrilo: “Mezuma rapido” kaj “Tempo dum movo”\n\n• nova fenestraĵo de Statistikoj pri veturilo: “Tensio de adaptilo”\n\n• datumoj el Statistikoj pri veturilo en analizilo de spuro sur la mapo\n\n• aŭtomate grupigi spurojn laŭ jaro, longo, aktiveco, ktp.\n\n• eblo redakti paletrojn uzatajn por bildigi terenon kaj spuron\n\n• plibonigitaj algoritmoj de serĉo kaj modernigita uzant-fasado\n\n• riparita profilo de tereno por kurso\n\n• ŝatataj punktoj: novaj manieroj de ordigo kaj modernigita uzant-fasado\n\n• eblo kunhavigi ligilon al ĉiu interesejo\n\n• antaŭrigardi navigadpunkton sen fermi la liston\n\n• eblo agordi larĝon de biciklo por eviti mallarĝajn stratetojn\n\n• priskriboj de fotoj el Vikimedia Komunejo</string>
-    <string name="purchases_feature_desc_astronomy">Malkovru la noktan ĉielon kun la malkonekta stelmapo kaj katalogo de astroj. Planu observojn kun diagramoj de videblo, horaroj kaj kun la reĝimo de pliigita realo.</string>
+    <string name="release_5_3">• subteno por 3-dimensiaj konstruaĵoj\n\n• bildigi sferecon de Tero\n\n• kromprogramo “Astronomio” kun stelmapo kaj datumbazo de astroj\n\n• novaj koloroj de rapidmezurilo – alia norme kaj alia kiam superigita\n\n• apartaj aranĝoj de fenestraĵoj por horizontala kaj vertikala orientiĝoj\n\n• novaj fenestraĵoj de Spur-registrilo: “Mezuma rapido” kaj “Tempo dum movo”\n\n• nova fenestraĵo de Statistikoj pri veturilo: “Tensio de adaptilo”\n\n• datumoj el Statistikoj pri veturilo en analizilo de spuro sur la mapo\n\n• aŭtomate grupigi spurojn laŭ jaro, longo, aktiveco, ktp.\n\n• eblo redakti paletrojn uzatajn por bildigi terenon kaj spuron\n\n• plibonigitaj algoritmoj de serĉo kaj modernigita uzant-fasado\n\n• riparita profilo de tereno por kurso\n\n• ŝatataj punktoj: novaj manieroj de ordigo kaj modernigita uzant-fasado\n\n• eblo kunhavigi ligilon de ĉiu interesejo\n\n• antaŭrigardi navigadpunkton sen fermi la liston\n\n• eblo agordi larĝon de biciklo por eviti mallarĝajn stratetojn\n\n• priskriboj de fotoj el Vikimedia Komunejo</string>
+    <string name="purchases_feature_desc_astronomy">Ebligas malkovri la noktan ĉielon kun la malkonekta stelmapo kaj katalogo de astroj. Planu observojn kun diagramoj de videblo, horaroj kaj kun la reĝimo de pliigita realo.</string>
     <string name="shared_string_clear_filters">Nuligi filtrilojn</string>
     <string name="astro_sort_newest_first">dato (de plej novaj)</string>
     <string name="astro_sort_oldest_first">dato (de plej malnovaj)</string>
@@ -6126,4 +6126,11 @@
     <string name="astro_visibility_show_today">Montri hodiaŭan videblon</string>
     <string name="astro_schedule_show_current_week">Montri nunan semajnon</string>
     <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="compass_calibration_needed">Kalibrigo de kompaso estas necesa</string>
+    <string name="sensors_not_available_for_ar">Sentiloj estas necesaj por reĝimo de pliigita realo</string>
+    <string name="ar_mode_enabled">Reĝimo de pliigita realo aktiva</string>
+    <string name="ar_mode_disabled">Reĝimo de pliigita realo malaktiva</string>
+    <string name="astro_expand_your_universe_title">Etendi vian universon</string>
+    <string name="astro_expand_your_universe_description">Akiru malkonektan aliron al etendita datumbazo de objektoj de profunda ĉielo, al artikolojn el Vikipedio kaj al reĝimo de pliigita realo.</string>
+    <string name="shared_string_world_weather_map">Vetero: mapo de mondo</string>
 </resources>
