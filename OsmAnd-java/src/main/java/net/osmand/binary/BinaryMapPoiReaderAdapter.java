@@ -370,7 +370,6 @@ public class BinaryMapPoiReaderAdapter {
 						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_GROUPS_BBOXES, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
-				long bytesSkippedBySeekStart = codedIS.getBytesSkippedBySeekCounter();
 				PoiNameObjectReadMetrics metrics = new PoiNameObjectReadMetrics();
 				// also offsets can be randomly skipped by limit
 				Integer[] offKeys = new Integer[offsets.size()];
@@ -418,7 +417,6 @@ public class BinaryMapPoiReaderAdapter {
 					if (req.isCancelled() || req.limitExceeded()) {
 						req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
 								BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes,
-								codedIS.getBytesSkippedBySeekCounter() - bytesSkippedBySeekStart,
 								metrics.payloadBytesParsed, metrics.decodeTimeNs, metrics.matcherTimeNs,
 								metrics.blocksLoaded, metrics.objectsLoaded,
 								metrics.matchedObjectsLoaded, metrics.maxObjectsPerBlock);
@@ -430,7 +428,6 @@ public class BinaryMapPoiReaderAdapter {
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
 						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes,
-						codedIS.getBytesSkippedBySeekCounter() - bytesSkippedBySeekStart,
 						metrics.payloadBytesParsed, metrics.decodeTimeNs, metrics.matcherTimeNs,
 						metrics.blocksLoaded, metrics.objectsLoaded,
 						metrics.matchedObjectsLoaded, metrics.maxObjectsPerBlock);
