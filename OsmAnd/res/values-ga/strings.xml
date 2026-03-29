@@ -5954,4 +5954,13 @@
     <string name="astro_visibility_show_today">Taispeáin infheictheacht an lae inniu</string>
     <string name="astro_schedule_show_current_week">Taispeáin an tseachtain reatha</string>
     <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="compass_calibration_needed">Calabrú compáis ag teastáil</string>
+    <string name="sensors_not_available_for_ar">Braiteoirí nach bhfuil ar fáil le haghaidh AR</string>
+    <string name="ar_mode_enabled">Mód AR Cumasaithe</string>
+    <string name="ar_mode_disabled">Mód AR Díchumasaithe</string>
+    <string name="release_5_3">• Tacaíocht Foirgnimh 3T curtha leis\n\n• Radharc léarscáile sféarúil\n\n• Breiseán Réalteolaíochta le léarscáil oíche agus bunachar sonraí réalta\n\n• Modhanna datha nua don Luasmhéadar: caoinfhulaingt agus luasghéarú\n\n• Leagan amach giuirléidí ar leithligh don Tírdhreach agus don Phortráid\n\n• Giuirléidí taifeadta turais: Luas gluaiseachta agus Meánluas\n\n• Giuirléid voltais oiriúnaitheora do Mhéadracht Feithiclí\n\n• Sonraí méadrachta feithiclí in Anailíseoir Rian\n\n• Uath-eagraigh rianta de réir bliana, faid, gníomhaíochta &amp; níos mó\n\n• Eagarthóir pailéid le haghaidh léirshamhlú Tír-raoin agus Rian\n\n• Algartaim chuardaigh feabhsaithe &amp; Comhéadan Úsáideora athnuaite\n\n• Próifílí airde socraithe do Bhealaí\n\n• Is Fearr Leat: roghanna sórtála nua agus athnuachan Comhéadain Úsáideora\n\n• Roinn nasc le haon POI\n\n• Réamhamharc ar phointe bealaigh gan an liosta a dhúnadh\n\n• Paraiméadar leithead rothair chun bóithre cúnga a sheachaint\n\n• Tuairiscí grianghraf ó Wikimedia</string>
+    <string name="shared_string_clear_filters">Glan scagairí</string>
+    <string name="astro_sort_newest_first">Is nuaí ar dtús</string>
+    <string name="astro_sort_oldest_first">Is sine ar dtús</string>
+    <string name="shared_string_world_weather_map">Léarscáil aimsire an domhain</string>
 </resources>
