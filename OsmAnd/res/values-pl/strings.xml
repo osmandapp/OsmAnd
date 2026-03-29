@@ -4976,7 +4976,6 @@
 \n</string>
     <string name="clear_online_cache">Wyczyść pamięć podręczną online</string>
     <string name="display_position_automatic_descr">Zależy od orientacji mapy: dół dla kierunku ruchu, środek dla wszystkich innych.</string>
-    <string name="shared_string_all_world">Cały świat</string>
     <string name="common_weight_limit_error">Minimalna wartość to \"%1$s\" %2$s. Użyj profilu \"%3$s\", jeśli masa pojazdu jest mniejsza niż wartość minimalna.</string>
     <string name="generate_slope_from_3d_maps">Generuj mapy rastrowe zboczy z map 3D</string>
     <string name="no_visible_tracks">Brak ścieżek na mapie</string>

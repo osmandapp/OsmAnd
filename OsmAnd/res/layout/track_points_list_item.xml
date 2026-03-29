@@ -69,12 +69,12 @@
 					android:id="@+id/waypoint_description"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:maxLines="2"
 					android:ellipsize="end"
+					android:letterSpacing="@dimen/description_letter_spacing"
+					android:maxLines="2"
 					android:scrollbars="none"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
-					android:letterSpacing="@dimen/description_letter_spacing"
 					android:textStyle="normal"
 					app:lineHeight="@dimen/default_desc_line_height"
 					tools:text="Point description\nNew line with long useless text" />
@@ -101,9 +101,9 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginStart="@dimen/content_padding_small_half"
+						android:letterSpacing="@dimen/description_letter_spacing"
 						android:maxLines="1"
 						android:textSize="@dimen/default_desc_text_size"
-						android:letterSpacing="@dimen/description_letter_spacing"
 						android:textStyle="normal"
 						tools:text="1.23 km"
 						tools:textColor="@color/icon_color_active_light" />
@@ -112,9 +112,9 @@
 						android:id="@+id/bullet_icon"
 						android:layout_width="@dimen/list_item_button_padding"
 						android:layout_height="@dimen/list_item_button_padding"
+						android:layout_gravity="start|center_vertical"
 						android:layout_marginStart="@dimen/content_padding"
 						android:layout_marginTop="@dimen/map_button_inset"
-						android:layout_gravity="start|center_vertical"
 						android:tint="?attr/default_icon_color"
 						app:srcCompat="@drawable/circle_background_light" />
 
@@ -123,16 +123,42 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layout_marginStart="@dimen/content_padding"
-						android:maxLines="1"
 						android:ellipsize="end"
+						android:letterSpacing="@dimen/description_letter_spacing"
+						android:maxLines="1"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						android:letterSpacing="@dimen/description_letter_spacing"
 						android:textStyle="normal"
 						tools:text="Frunze street" />
 
 				</LinearLayout>
 			</LinearLayout>
+
+			<View
+				android:id="@+id/vertical_divider"
+				android:layout_width="1dp"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_gravity="center"
+				android:background="?attr/divider_color_basic"
+				tools:visibility="visible" />
+
+			<FrameLayout
+				android:id="@+id/go_to_point_location"
+				android:layout_width="@dimen/acceptable_touch_radius"
+				android:layout_height="@dimen/acceptable_touch_radius"
+				android:layout_marginEnd="@dimen/list_item_button_padding">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/go_to_point_location_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:background="?attr/dashboard_button"
+					android:contentDescription="@string/shared_string_more"
+					android:visibility="visible"
+					app:srcCompat="@drawable/ic_action_marker_dark" />
+			</FrameLayout>
+
 		</LinearLayout>
 	</FrameLayout>
 </LinearLayout>

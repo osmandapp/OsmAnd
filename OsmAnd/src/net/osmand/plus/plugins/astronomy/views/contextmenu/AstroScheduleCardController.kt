@@ -15,6 +15,7 @@ import net.osmand.plus.plugins.astronomy.utils.AstroUtils
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.ArrayList
 import java.util.Locale
 
@@ -172,10 +173,25 @@ class AstroScheduleCardController(
 		val startLocal = day.atStartOfDay(zoneId)
 		val endLocal = startLocal.plusDays(1)
 		val dayEndInclusive = endLocal.minusNanos(1)
-		val (rise, _) = AstroUtils.nextRiseSet(obj, startLocal, observer, startLocal, dayEndInclusive)
-		val set = AstroUtils.nextRiseSet(obj, startLocal, observer).second?.takeIf {
-			val localDate = it.toLocalDate()
-			localDate == day || localDate == day.plusDays(1)
+		val (rise, _) = AstroUtils.nextRiseSet(
+			obj = obj,
+			startSearch = startLocal,
+			obs = observer,
+			windowStart = startLocal,
+			windowEnd = dayEndInclusive
+		)
+		val set = rise?.let {
+			AstroUtils.nextRiseSet(
+				obj = obj,
+				startSearch = it,
+				obs = observer,
+				limitDays = SET_SEARCH_LIMIT_DAYS
+			).second
+		}
+		val setDayOffset = if (set != null) {
+			ChronoUnit.DAYS.between(day, set.toLocalDate()).toInt().coerceAtLeast(0)
+		} else {
+			0
 		}
 		val samples = AstroChartMath.computeDaySamples(
 			objectToRender = obj,
@@ -191,7 +207,7 @@ class AstroScheduleCardController(
 			dayLabel = dayLabelFormatter.format(day),
 			riseTime = rise?.format(timeFormatter),
 			setTime = set?.format(timeFormatter),
-			setNextDay = set?.toLocalDate() == day.plusDays(1),
+			setDayOffset = setDayOffset,
 			graph = AstroScheduleDayGraphSnapshot(
 				sunAltitudes = samples.sunAltitudes,
 				objectAltitudes = samples.objectAltitudes
@@ -221,5 +237,6 @@ class AstroScheduleCardController(
 	companion object {
 		const val PERIOD_DAYS: Int = 7
 		private const val SAMPLE_COUNT: Int = AstroChartMath.SCHEDULE_SAMPLE_COUNT
+		private const val SET_SEARCH_LIMIT_DAYS = 5.0
 	}
 }

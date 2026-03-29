@@ -1921,7 +1921,6 @@
     <string name="shared_string_downloading_formatted">Sćahnu %s</string>
     <string name="offline_maps_required_descr">Někotre za tutu čaru trěbne offline-karty pobrachuja.</string>
     <string name="follow_track">Čaru sćěhować</string>
-    <string name="shared_string_all_world">Wšón swět</string>
     <string name="rendering_attr_depthContourWidth_name">Šěrokosć smužki</string>
     <string name="dismiss_changes_descr">Wšě změny so zaćisnu.</string>
     <string name="auto_25_chars_route_roundabout_kl">wzmi %1$d. wujězd a wostań nalěwo</string>

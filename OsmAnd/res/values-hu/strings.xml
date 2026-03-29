@@ -4645,7 +4645,6 @@
     <string name="app_mode_climbing">Mászás</string>
     <string name="shared_string_alt_name">Alternatív név</string>
     <string name="token_is_not_valid">A token nem érvényes</string>
-    <string name="shared_string_all_world">Az egész világ</string>
     <string name="weather_forecast">Időjárás-előrejelzés</string>
     <string name="offline_weather_forecast_desc">Hét napra szóló időjárás-előrejelzést tölthet le.</string>
     <string name="clear_online_cache_description">Ez törli az online időjárási csempék gyorsítótárát.</string>
@@ -6034,4 +6033,13 @@
     <string name="astro_schedule_show_current_week">Jelenlegi hét megjelenítése</string>
     <string name="astro_next_day_suffix">⁺¹</string>
     <string name="astro_expand_your_universe_title">Fedezze fel az univerzumot</string>
+    <string name="astro_sort_oldest_first">Legrégebbi elől</string>
+    <string name="astro_sort_newest_first">Legújabb elöl</string>
+    <string name="shared_string_clear_filters">Szűrők törlése</string>
+    <string name="release_5_3">• 3D-épületek támogatása\n\n• Földgömb alakú térképnézet\n\n• Csillagászati bővítmény éjszakai térképpel és csillagadatbázissal\n\n• Új színmódok a sebességmérőhöz: tolerancia és sebességtúllépés\n\n• Külön modulelrendezések fekvő és álló tájoláshoz\n\n• Útvonalrögzítő modulok: haladási sebesség és átlagsebesség\n\n• Adapterfeszültség-modul a járműadatokhoz\n\n• Járműadatok a nyomvonal-elemzőben\n\n• Nyomvonalak automatikus rendszerezése év, hossz, tevékenység és egyebek szerint\n\n• Palettaszerkesztő a terep és a nyomvonalak megjelenítéséhez\n\n• Továbbfejlesztett keresési algoritmusok és megújult felület\n\n• Javított magassági profilok az útvonalakhoz\n\n• Kedvencek: új rendezési lehetőségek és frissített felület\n\n• Bármely POI hivatkozásának megosztása\n\n• Útpont-előnézet a lista bezárása nélkül\n\n• Kerékpárszélesség-paraméter a szűk utak elkerüléséhez\n\n• Fotóleírások a Wikimédiáról</string>
+    <string name="compass_calibration_needed">Iránytűkalibrálás szükséges</string>
+    <string name="sensors_not_available_for_ar">Nincsenek elérhető érzékelők az AR számára</string>
+    <string name="ar_mode_enabled">AR-mód engedélyezve</string>
+    <string name="ar_mode_disabled">AR-mód letiltva</string>
+    <string name="shared_string_world_weather_map">Időjárás-világtérkép</string>
 </resources>

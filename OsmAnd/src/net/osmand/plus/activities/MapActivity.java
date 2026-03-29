@@ -828,8 +828,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void updateStatusBarColor() {
-		updateNavigationBarColor();
-		UiUtilities.updateStatusBarColor(this);
+		UiUtilities.updateSystemBarColors(this);
 	}
 
 	@Override

@@ -4730,7 +4730,6 @@
     <string name="common_weight_limit_error">Minimální hodnota je „%1$s“ %2$s. Pokud je hmotnost vozidla nižší než minimální hodnota, použijte profil „%3$s“.</string>
     <string name="shared_string_pounds">libry</string>
     <string name="metric_lbs">lbs</string>
-    <string name="shared_string_all_world">Celý svět</string>
     <string name="weather_forecast_is_outdated">Předpověď je zastaralá.</string>
     <string name="weather_forecast">Předpověď počasí</string>
     <string name="offline_weather_forecast">Offline předpověď počasí</string>

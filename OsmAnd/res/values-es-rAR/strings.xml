@@ -4612,7 +4612,6 @@
     <string name="common_weight_limit_error">El valor mínimo es «%1$s» %2$s. Usá el perfil «%3$s» si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="shared_string_pounds">libras</string>
     <string name="weather_forecast_is_outdated">Pronóstico desactualizado.</string>
-    <string name="shared_string_all_world">Todo el mundo</string>
     <string name="weather_forecast">Previsión meteorológica</string>
     <string name="offline_weather_forecast">Previsión meteorológica sin conexión</string>
     <string name="free_maps_updates">Actualizaciones gratuitas (emergencia)</string>

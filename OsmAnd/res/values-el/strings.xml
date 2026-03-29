@@ -3914,7 +3914,6 @@
     <string name="trash_alert_card_desc">Τα αντικείμενα στον κάδο θα διαγραφούν μετά από %1$s μέρες.</string>
     <string name="action_cannot_be_undone">Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.</string>
     <string name="help_article_navigation_routing_horse_routing_name">Δρομολόγηση με άλογο</string>
-    <string name="shared_string_all_world">Όλος ο κόσμος</string>
     <string name="shared_storage_second_step">Επιλέξτε \"Χρήση αυτού του φακέλου\".</string>
     <string name="external_sensor_name_property_description">Όνομα αισθητήρα</string>
     <string name="row_number">Σειρά %1$s</string>
@@ -5917,4 +5916,11 @@
     <string name="subscription_free_trial_with_price">%1$s δωρεάν, μετά %2$s</string>
     <string name="subscription_then_price">μετά %1$s</string>
     <string name="shared_string_radians">Ακτίνια</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Επόμενη μέρα.</string>
+    <string name="astro_visibility_show_today">Εμφάνιση σημερινής ορατότητας</string>
+    <string name="astro_schedule_show_current_week">Εμφάνιση τρέχουσας εβδομάδας</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="shared_string_clear_filters">Καθαρισμός φίλτρων</string>
+    <string name="astro_sort_newest_first">Νεώτερα πρώτα</string>
+    <string name="astro_sort_oldest_first">Παλαιότερα πρώτα</string>
 </resources>
