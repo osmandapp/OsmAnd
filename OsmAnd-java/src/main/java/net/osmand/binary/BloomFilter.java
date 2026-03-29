@@ -1,14 +1,10 @@
 package net.osmand.binary;
 
 import net.osmand.CollatorStringMatcher;
-import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;
 import net.sf.junidecode.Junidecode;
 
 import java.util.*;
-import java.util.concurrent.atomic.LongAdder;
-
-import org.apache.commons.logging.Log;
 
 public final class BloomFilter {
 	
@@ -22,9 +18,6 @@ public final class BloomFilter {
 	public static final int MAX_SATURATION_BITS = 384;
 	public static final int MIN_BLOOM_CONTINUATION_PREFIX_LENGTH = 1; // Min suffix length to be included in bloomIndex.
 
-	private static final LongAdder writeTokensCount = new LongAdder(), writeBoxCount = new LongAdder();
-	private static final LongAdder skipCount = new LongAdder(), readBoxCount = new LongAdder(), falsePositive = new LongAdder();
-	
 	private static final BloomFilter INSTANCE = new BloomFilter();
 
 	private BloomFilter() {
@@ -32,17 +25,6 @@ public final class BloomFilter {
 
 	public static BloomFilter getInstance() {
 		return INSTANCE;
-	}
-	
-	public String logSkipRatio() {
-		return String.format("True ratio: %d / %d = %.2f, False ratio: %d / %d = %.2f", skipCount.sum(), readBoxCount.sum(),
-				100 * skipCount.sum() / (double) readBoxCount.sum(),
-				falsePositive.sum(), readBoxCount.sum(),
-				100 * falsePositive.sum() / (double) readBoxCount.sum());
-	}
-
-	public static void incFalsePositive() {
-		falsePositive.increment();
 	}
 
 	private Set<String> extendTokens(Collection<String> tokens, boolean transliterate) {
@@ -76,8 +58,6 @@ public final class BloomFilter {
 		for (String token : bloomTokens) {
 			addToken(bloom, token);
 		}
-		writeTokensCount.add(bloomTokens.size());
-		writeBoxCount.increment();
 
 		return bloom;
 	}
@@ -182,23 +162,11 @@ public final class BloomFilter {
 			return true;
 		}
 
-		readBoxCount.increment();
 		for (String queryToken : queryTokens) {
 			if (matches(bloomBytes, queryToken)) {
 				return true;
 			}
 		}
-		skipCount.increment();
 		return false;
 	}
-
-	public static void resetStats() {
-		readBoxCount.reset();
-		falsePositive.reset();
-		skipCount.reset();
-
-		writeTokensCount.reset();
-		writeBoxCount.reset();
-	}
-
 }
