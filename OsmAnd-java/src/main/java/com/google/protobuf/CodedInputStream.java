@@ -642,7 +642,7 @@ public final class CodedInputStream {
   }
 
   /**
-   * Resets the current size counter to zero (see {@link #setSizeLimit(long)}).
+   * Resets the current size counter to zero (see {@link #setSizeLimit(int)}).
    */
   public void resetSizeCounter() {
     totalBytesRetired = -bufferPos;
@@ -964,7 +964,6 @@ public final class CodedInputStream {
       if(raf != null) {
          bufferPos = 0;
          bufferSize = 0;
-         bytesSkippedBySeek += (size - pos);
          raf.seek(raf.getFilePointer() + (size - pos));
          totalBytesRetired = raf.getFilePointer();
       } else {
@@ -983,7 +982,7 @@ public final class CodedInputStream {
   }
   
   // OSMAND change
-  long bytesCounter = 0, bytesSkippedBySeek = 0;
+  long bytesCounter = 0;
   public long resetBytesCounter() {
 	  long p = bytesCounter;
 	  bytesCounter = 0;
@@ -993,10 +992,6 @@ public final class CodedInputStream {
   public long getBytesCounter() {
 	return bytesCounter;
 }
-
-  public long getBytesSkippedBySeekCounter() {
-	return bytesSkippedBySeek;
-  }
   
   public void seek(long pointer) throws IOException {
 	  if (pointer - totalBytesRetired >= 0 && pointer - totalBytesRetired < bufferSize) {
