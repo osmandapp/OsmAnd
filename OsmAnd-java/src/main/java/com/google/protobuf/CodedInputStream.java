@@ -988,7 +988,7 @@ public final class CodedInputStream {
 	  bytesCounter = 0;
 	  return p;
   }
-
+  
   public long getBytesCounter() {
 	return bytesCounter;
 }
