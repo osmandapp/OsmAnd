@@ -6104,4 +6104,22 @@
     <string name="start_free_trial">Započnite besplatni period</string>
     <string name="subscription_free_trial_with_price">%1$s besplatno, zatim %2$s</string>
     <string name="subscription_then_price">zatim %1$s</string>
+    <string name="compass_calibration_needed">Potrebna je kalibracija kompasa</string>
+    <string name="sensors_not_available_for_ar">Senzori nisu dostupni za AR</string>
+    <string name="ar_mode_enabled">AR režim je omogućen</string>
+    <string name="ar_mode_disabled">AR režim je onemogućen</string>
+    <string name="purchases_feature_desc_astronomy">Istražite noćno nebo pomoću oflajn mape i nebeskog kataloga. Planirajte posmatranja koristeći pametne grafikone vidljivosti, dnevne rasporede i interaktivni AR režim.</string>
+    <string name="shared_string_clear_filters">Obriši filtere</string>
+    <string name="astro_sort_newest_first">Najnovije prvo</string>
+    <string name="astro_sort_oldest_first">Najstarije prvo</string>
+    <string name="astro_expand_your_universe_title">Proširite svoj univerzum</string>
+    <string name="astro_expand_your_universe_description">Pristupite proširenoj bazi podataka kataloga dubokog neba, člancima Vikipedije i AR režimu van mreže.</string>
+    <string name="astro_offline_knowledge_base_title">База знања ван мреже</string>
+    <string name="astro_offline_knowledge_base_description">Preuzmite proširenu bazu podataka da biste pristupili člancima Vikipedije i katalozima dubokog neba van mreže.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Sledećeg dana.</string>
+    <string name="astro_visibility_show_today">Prikaži vidljivost danas</string>
+    <string name="astro_schedule_show_current_week">Prikaži tekuću nedelju</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="shared_string_world_weather_map">Svetska vremenska mapa</string>
+    <string name="release_5_3">• Dodata je podrška za 3D zgrade\n\n • Sferni prikaz mape\n\n • Astronomski dodatak sa noćnom mapom i bazom podataka zvezda\n\n • Novi režimi boja za brzinomer: tolerancija i prekoračenje brzine\n\n • Odvojeni rasporedi vidžeta za pejzažni i portretni režim\n\n • Vidžeti za snimanje putovanja: Brzina kretanja i Prosečna brzina\n\n • Vidžet za napon adaptera za metriku vozila\n\n • Podaci o metrici vozila u Analizatoru putanje\n\n • Automatsko organizovanje putanja po godini, dužini, aktivnosti i još mnogo toga\n\n • Uređivač palete za vizuelizaciju terena i putanje\n\n • Poboljšani algoritmi pretrage i osveženi korisnički interfejs\n\n • Popravljeni profili nadmorske visine za rute\n\n • Omiljeni: nove opcije sortiranja i osvežavanje korisničkog interfejsa\n\n • Deljenje veze do bilo koje TOI\n\n • Pregled tačke puta bez zatvaranja liste\n\n • Parametar širine bicikla za izbegavanje uskih puteva\n\n • Opisi fotografija sa Vikimedije</string>
 </resources>
