@@ -12,14 +12,15 @@ public final class BloomFilter {
 	public static final int VERSION = 1; // with 2026-04-01 version will be 1
 	public static final boolean PUBLISH = VERSION > 0;
 	
-	public static final int BLOOM_BITS = 1024;
+	public static final int BLOOM_BITS = 512;
 	private static final int DEFAULT_HASHES = 5;
 	private static final int BLOOM_SIZE = BLOOM_BITS / Byte.SIZE;
 	public static final int MAX_SATURATION_BITS = BLOOM_BITS * 3 / 4;
 	public static final int MIN_BLOOM_CONTINUATION_PREFIX_LENGTH = 1; // Min suffix length to be included in bloomIndex.
 
 	private static final BloomFilter INSTANCE = new BloomFilter();
-
+	private static final boolean transliterate = false;
+	
 	private BloomFilter() {
 	}
 
@@ -27,7 +28,7 @@ public final class BloomFilter {
 		return INSTANCE;
 	}
 
-	private Set<String> extendTokens(Collection<String> tokens, boolean transliterate) {
+	private Set<String> extendTokens(Collection<String> tokens) {
 		Set<String> extendedTokens = new TreeSet<>(tokens);
 		for (String token : tokens) {
 			if (Algorithms.isEmpty(token))
@@ -54,7 +55,7 @@ public final class BloomFilter {
 		}
 
 		byte[] bloom = new byte[BLOOM_SIZE];
-		Collection<String> bloomTokens = extendTokens(tokens, true);
+		Collection<String> bloomTokens = extendTokens(tokens);
 		for (String token : bloomTokens) {
 			addToken(bloom, token);
 		}
@@ -67,7 +68,7 @@ public final class BloomFilter {
 			return 0;
 		}
 		byte[] bloom = new byte[BLOOM_SIZE];
-		for (String token : extendTokens(tokens, true)) {
+		for (String token : extendTokens(tokens)) {
 			addToken(bloom, token);
 		}
 		return (int) bitCount(bloom);
