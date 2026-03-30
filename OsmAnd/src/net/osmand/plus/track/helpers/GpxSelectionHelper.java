@@ -254,6 +254,7 @@ public class GpxSelectionHelper {
 				boolean save = false;
 				for (int i = 0; i < ar.length(); i++) {
 					JSONObject obj = ar.getJSONObject(i);
+					boolean backup = obj.has(BACKUP);
 					boolean selectedByUser = obj.optBoolean(SELECTED_BY_USER, true);
 					if (obj.has(FILE)) {
 						File fl = new File(obj.getString(FILE));
@@ -267,7 +268,7 @@ public class GpxSelectionHelper {
 						}
 						if (gpx.getError() != null) {
 							save = true;
-						} else if (obj.has(BACKUP)) {
+						} else if (backup) {
 							selectedGpxFilesBackUp.put(gpx, gpx.getModifiedTime());
 						} else {
 							save = true;
@@ -282,7 +283,13 @@ public class GpxSelectionHelper {
 					} else if (obj.has(CURRENT_TRACK)) {
 						SelectedGpxFile file = savingTrackHelper.getCurrentTrack();
 						file.selectedByUser = selectedByUser;
-						updateSelected(true, file);
+
+						if (backup) {
+							long backupTime = obj.optLong(BACKUP_MODIFIED_TIME, file.getModifiedTime());
+							selectedGpxFilesBackUp.put(file.getGpxFile(), backupTime);
+						} else {
+							updateSelected(true, file);
+						}
 					}
 				}
 				if (save) {
