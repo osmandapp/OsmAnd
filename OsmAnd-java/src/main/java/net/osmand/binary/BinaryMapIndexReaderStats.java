@@ -446,7 +446,7 @@ public class BinaryMapIndexReaderStats {
 						.append(", OBFs=").append(obfNames.size())
 						.append(", Word entries=").append(wordStats == null ? 0 : wordStats.size());
 				sb.append("\nOBF count: ").append(obfNames.size());
-				sb.append("\nname, Time (s), Loaded (KB), Payload (KB), Blocks, Objects, Matched");
+				sb.append("\nname, Time (s), Payload (KB), Blocks, Objects, Matched");
 				for (SubStatByAPI obfTotal : orderedObfTotals) {
 					if (obfTotal == null || obfTotal.mapName == null || obfTotal.mapName.isEmpty()) {
 						continue;

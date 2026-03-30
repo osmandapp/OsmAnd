@@ -19,7 +19,7 @@ public final class BloomFilter {
 	public static final int MIN_BLOOM_CONTINUATION_PREFIX_LENGTH = 1; // Min suffix length to be included in bloomIndex.
 
 	private static final BloomFilter INSTANCE = new BloomFilter();
-	private static final boolean transliterate = false;
+	private static final boolean transliterate = true;
 	
 	private BloomFilter() {
 	}
