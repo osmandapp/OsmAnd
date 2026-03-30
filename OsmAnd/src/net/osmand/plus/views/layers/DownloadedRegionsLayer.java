@@ -335,6 +335,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		canvas.drawPath(path, paint);
 	}
 
+	@Nullable
 	private List<BinaryMapDataObject> queryData(@NonNull QuadRect latLonBounds, int zoom) {
 		if (zoom >= ZOOM_AFTER_BASEMAP) {
 			if (!checkIfMapEmpty(zoom)) {
