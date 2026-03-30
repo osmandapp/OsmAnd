@@ -136,6 +136,13 @@ public abstract class MapRenderingTypes {
 				res.add(g.getValue());
 			}
 		}
+		if (res.isEmpty()) {
+			if (!Algorithms.isEmpty(type)) {
+				common.remove(ATTACHED_KEY);
+				common.put("seamark", type);
+			}
+			res.add(common);
+		}
 		return res;
 	}	
 	
