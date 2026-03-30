@@ -151,6 +151,7 @@ public class BinaryMapIndexReaderStats {
 	
 	public static class SearchStat {
 		private static final boolean TO_DETAILED_STRING = false;
+		private static final int DEFAULT_TOP_K_OBF = 2;
 		long lastReq = 0, subSize = 0;
 		public long totalTime = 0;
 		public long totalBytes = 0;
@@ -295,8 +296,12 @@ public class BinaryMapIndexReaderStats {
 		}
 
 		public String toDetailedString() {
-			DetailedStringData data = buildDetailedStringData();
-			return data.renderDetailedString(wordStats, totalTime, totalBytes);
+			return toDetailedString(DEFAULT_TOP_K_OBF);
+		}
+
+		public String toDetailedString(int topKObf) {
+			DetailedStringData data = buildDetailedStringData(Math.max(0, topKObf));
+			return data.renderDetailedString(wordStats, totalTime, totalBytes, Math.max(0, topKObf));
 		}
 
 		private record DetailedStringData(String c1, String c2, String c3, String c4, String c5, String c6,
@@ -309,7 +314,7 @@ public class BinaryMapIndexReaderStats {
 		                                  Map<String, SubStatByAPI> totalsByObf,
 		                                  int subApiCount) {
 
-			private String renderDetailedString(Map<String, WordSearchStat>  wordStats, long totalTime, long totalBytes) {
+			private String renderDetailedString(Map<String, WordSearchStat>  wordStats, long totalTime, long totalBytes, int topKObf) {
 				int w1 = c1.length(), w2 = c2.length(), w3 = c3.length(), w4 = c4.length(), w5 = c5.length(), w6 = c6.length(),
 						w9 = c9.length(), w10 = c10.length(), w11 = c11.length(),
 						w12 = c12.length(), w13 = c13.length(), w14 = c14.length(), w15 = c15.length();
@@ -412,7 +417,7 @@ public class BinaryMapIndexReaderStats {
 
 						List<SubStatByAPI> detail = rows.getOrDefault(api, Collections.emptyMap()).getOrDefault(subApi, Collections.emptyList());
 						detail.sort((a, b) -> Long.compare(b.time, a.time));
-						for (int i = 0; i < detail.size() && i < 2; i++) {
+						for (int i = 0; i < detail.size() && i < topKObf; i++) {
 							SubStatByAPI st = detail.get(i);
 							if (st == null) {
 								continue;
@@ -441,7 +446,7 @@ public class BinaryMapIndexReaderStats {
 						.append(", OBFs=").append(obfNames.size())
 						.append(", Word entries=").append(wordStats == null ? 0 : wordStats.size());
 				sb.append("\nOBF count: ").append(obfNames.size());
-				sb.append("\nname, time (s), loaded (KB), seek (KB), payload (KB)");
+				sb.append("\nname, Time (s), Loaded (KB), Payload (KB), Blocks, Objects, Matched");
 				for (SubStatByAPI obfTotal : orderedObfTotals) {
 					if (obfTotal == null || obfTotal.mapName == null || obfTotal.mapName.isEmpty()) {
 						continue;
@@ -449,14 +454,17 @@ public class BinaryMapIndexReaderStats {
 					sb.append("\n")
 							.append(obfTotal.mapName)
 							.append(", ").append(String.format(Locale.US, "%.2f", obfTotal.time / 1e9))
-							.append(",").append(String.format(Locale.US, "% d", obfTotal.payloadBytesParsed / 1024));
+							.append(",").append(String.format(Locale.US, "% d", obfTotal.payloadBytesParsed / 1024))
+							.append(", ").append(String.format(Locale.US, "%d", obfTotal.blocksLoaded))
+							.append(", ").append(String.format(Locale.US, "%d", obfTotal.objectsLoaded))
+							.append(", ").append(String.format(Locale.US, "%d", obfTotal.matchedObjects));
 				}
 				return sb.toString();
 			}
 		}
 
-		private DetailedStringData buildDetailedStringData() {
-			String c1 = "API       ", c2 = "Sub-API / Top-2 OBF                             ", c3 = "Time (s)",
+		private DetailedStringData buildDetailedStringData(int topKObf) {
+			String c1 = "API       ", c2 = String.format(Locale.US, "Sub-API / Top-%d OBF                             ", topKObf), c3 = "Time (s)",
 					c4 = "Count (O)", c5 = "Volume (KB)", c6 = "Calls",
 					c9 = "Payload (KB)", c10 = "Decode (ms)", c11 = "Matcher (ms)",
 					c12 = "Blocks", c13 = "Objects", c14 = "Matched", c15 = "Max Obj/Block";
