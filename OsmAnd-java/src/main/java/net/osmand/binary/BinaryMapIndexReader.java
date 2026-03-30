@@ -1852,14 +1852,14 @@ public class BinaryMapIndexReader {
 		}
 
 		public long beginSubSearchStats() {
-			if (searchStat != null && SearchSettings.subApiMetricsEnabled) {
+			if (searchStat != null) {
 				return searchStat.beginSubSearchStats(getSearchResults().size());
 			}
 			return 0;
 		}
 
 		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName op, String obf, long bytes) {
-			if (statReq > 0 && searchStat != null && SearchSettings.subApiMetricsEnabled) {
+			if (statReq > 0 && searchStat != null) {
 				searchStat.endSubSearchStats(statReq, api, op, obf, getSearchResults().size(), bytes);
 			}
 		}
@@ -1868,7 +1868,7 @@ public class BinaryMapIndexReader {
 				BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName op, String obf, long bytes,
 				long payloadBytesParsed, long decodeTimeNs, long matcherTimeNs,
 				long blocksLoaded, long objectsLoaded, long matchedObjects, long maxObjectsPerBlock) {
-			if (statReq > 0 && searchStat != null && SearchSettings.subApiMetricsEnabled) {
+			if (statReq > 0 && searchStat != null) {
 				searchStat.endSubSearchStats(statReq, api, op, obf, getSearchResults().size(), bytes,
 						payloadBytesParsed, decodeTimeNs, matcherTimeNs,
 						blocksLoaded, objectsLoaded, matchedObjects, maxObjectsPerBlock);
