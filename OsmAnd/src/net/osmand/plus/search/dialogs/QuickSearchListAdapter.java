@@ -456,7 +456,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		QuickSearchWikiItem wikiItem = new QuickSearchWikiItem(app, item.getSearchResult());
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_nearby_item_vertical);
 		WikiItemViewHolder holder = new WikiItemViewHolder(view, updateLocationViewCache, nightMode);
-		holder.bindItem(wikiItem, poiUIFilter, useMapCenter);
+		holder.bindItem(wikiItem, poiUIFilter, useMapCenter,
+				getPoiUIFilter() != null && getPoiUIFilter().isTopWikiFilter());
 		return view;
 	}
 
