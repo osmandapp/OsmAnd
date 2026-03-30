@@ -5923,4 +5923,7 @@
     <string name="shared_string_clear_filters">Καθαρισμός φίλτρων</string>
     <string name="astro_sort_newest_first">Νεώτερα πρώτα</string>
     <string name="astro_sort_oldest_first">Παλαιότερα πρώτα</string>
+    <string name="ar_mode_enabled">Λειτουργία AR Ενεργή</string>
+    <string name="ar_mode_disabled">Λειτουργία AR Ανενεργή</string>
+    <string name="sensors_not_available_for_ar">Οι αισθητήρες δεν είναι διαθέσιμοι για AR</string>
 </resources>

@@ -5956,4 +5956,9 @@
     <string name="shared_string_clear_filters">清除篩選條件</string>
     <string name="astro_sort_newest_first">由新至舊</string>
     <string name="astro_sort_oldest_first">由舊至新</string>
+    <string name="compass_calibration_needed">需要校正指南針</string>
+    <string name="sensors_not_available_for_ar">AR 無法使用感測器</string>
+    <string name="ar_mode_enabled">已啟用 AR 模式</string>
+    <string name="ar_mode_disabled">已停用 AR 模式</string>
+    <string name="shared_string_world_weather_map">世界天氣地圖</string>
 </resources>
