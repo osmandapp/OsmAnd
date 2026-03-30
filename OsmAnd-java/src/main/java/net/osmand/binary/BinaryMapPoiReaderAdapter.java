@@ -308,16 +308,6 @@ public class BinaryMapPoiReaderAdapter {
 		return query.replace("\"", "").toLowerCase();
 	}
 
-	private static class PoiNameObjectReadMetrics {
-		long payloadBytesParsed;
-		long decodeTimeNs;
-		long matcherTimeNs;
-		long blocksLoaded;
-		long objectsLoaded;
-		long matchedObjectsLoaded;
-		long maxObjectsPerBlock;
-	}
-
 	protected void searchPoiByName(PoiRegion region, SearchRequest<Amenity> req) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		String query = normalizeSearchPoiByNameQuery(req.nameQuery);
@@ -370,7 +360,7 @@ public class BinaryMapPoiReaderAdapter {
 						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_GROUPS_BBOXES, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
-				PoiNameObjectReadMetrics metrics = new PoiNameObjectReadMetrics();
+				BinaryMapIndexReaderStats.PoiReadMetricSet metrics = new BinaryMapIndexReaderStats.PoiReadMetricSet();
 				// also offsets can be randomly skipped by limit
 				Integer[] offKeys = new Integer[offsets.size()];
 				if (offsets.size() > 0) {
@@ -416,10 +406,8 @@ public class BinaryMapPoiReaderAdapter {
 					metrics.payloadBytesParsed += codedIS.getTotalBytesRead() - payloadStart;
 					if (req.isCancelled() || req.limitExceeded()) {
 						req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
-								BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes,
-								metrics.payloadBytesParsed, metrics.decodeTimeNs, metrics.matcherTimeNs,
-								metrics.blocksLoaded, metrics.objectsLoaded,
-								metrics.matchedObjectsLoaded, metrics.maxObjectsPerBlock);
+								BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, 
+								map.getFile().getName(), codedIS.getBytesCounter() - bytes, metrics);
 						return;
 					}
 				}
@@ -427,10 +415,8 @@ public class BinaryMapPoiReaderAdapter {
 //						"ms. Found " + req.getSearchResults().size());
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
-						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes,
-						metrics.payloadBytesParsed, metrics.decodeTimeNs, metrics.matcherTimeNs,
-						metrics.blocksLoaded, metrics.objectsLoaded,
-						metrics.matchedObjectsLoaded, metrics.maxObjectsPerBlock);
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, 
+						map.getFile().getName(), codedIS.getBytesCounter() - bytes, metrics);
 				return;
 			default:
 				skipUnknownField(t);
@@ -750,7 +736,7 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	private void readPoiData(CollatorStringMatcher matcher, SearchRequest<Amenity> req, PoiRegion region,
-			PoiNameObjectReadMetrics metrics) throws IOException {
+			BinaryMapIndexReaderStats.PoiReadMetricSet metrics) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 0;

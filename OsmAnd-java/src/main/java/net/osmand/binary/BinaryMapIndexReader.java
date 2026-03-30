@@ -1863,14 +1863,10 @@ public class BinaryMapIndexReader {
 			}
 		}
 
-		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api,
-				BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName op, String obf, long bytes,
-				long payloadBytesParsed, long decodeTimeNs, long matcherTimeNs,
-				long blocksLoaded, long objectsLoaded, long matchedObjects, long maxObjectsPerBlock) {
+		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName op, 
+									  String obf, long bytes, BinaryMapIndexReaderStats.PoiReadMetricSet metrics) {
 			if (statReq > 0 && searchStat != null) {
-				searchStat.endSubSearchStats(statReq, api, op, obf, getSearchResults().size(), bytes,
-						payloadBytesParsed, decodeTimeNs, matcherTimeNs,
-						blocksLoaded, objectsLoaded, matchedObjects, maxObjectsPerBlock);
+				searchStat.endSubSearchStats(statReq, api, op, obf, getSearchResults().size(), bytes, metrics);
 			}
 		}
 

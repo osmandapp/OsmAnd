@@ -30,6 +30,17 @@ public class BinaryMapIndexReaderStats {
 		POI_NAME_OBJECTS,
 		POI_NAME_GROUPS_BBOXES
 	}
+
+
+	public static class PoiReadMetricSet {
+		long payloadBytesParsed;
+		long decodeTimeNs;
+		long matcherTimeNs;
+		long blocksLoaded;
+		long objectsLoaded;
+		long matchedObjectsLoaded;
+		long maxObjectsPerBlock;
+	}
 	
 	public static class SubStatByAPI {
 		public final BinaryMapIndexReaderApiName api;
@@ -52,18 +63,17 @@ public class BinaryMapIndexReaderStats {
 			calls++;
 		}
 
-		void add(long timeNs, long count, long bytes, long payloadBytesParsed, long decodeTimeNs, long matcherTimeNs,
-				long poiBlocksRead, long existedPoiObjectsInReadBlocks, long matchedPoiObjectsInReadBlocks, long maxObjectsPerBlock) {
+		void add(long timeNs, long count, long bytes, PoiReadMetricSet metrics) {
 			this.time += timeNs;
 			this.count += count;
 			this.bytes += bytes;
-			this.payloadBytesParsed += payloadBytesParsed;
-			this.decodeTimeNs += decodeTimeNs;
-			this.matcherTimeNs += matcherTimeNs;
-			this.blocksLoaded += poiBlocksRead;
-			this.objectsLoaded += existedPoiObjectsInReadBlocks;
-			this.matchedObjects += matchedPoiObjectsInReadBlocks;
-			this.maxObjectsPerBlock = Math.max(this.maxObjectsPerBlock, maxObjectsPerBlock);
+			this.payloadBytesParsed +=  metrics.payloadBytesParsed;
+			this.decodeTimeNs +=  metrics.decodeTimeNs;
+			this.matcherTimeNs +=  metrics.matcherTimeNs;
+			this.blocksLoaded += metrics.blocksLoaded;
+			this.objectsLoaded += metrics.objectsLoaded;
+			this.matchedObjects += metrics.matchedObjectsLoaded;
+			this.maxObjectsPerBlock = Math.max(this.maxObjectsPerBlock,  metrics.maxObjectsPerBlock);
 			calls++;
 		}
 
@@ -270,9 +280,7 @@ public class BinaryMapIndexReaderStats {
 		}
 
 		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryMapIndexReaderSubApiName op,
-				String obf, int size, long bytes, long payloadBytesParsed, long decodeTimeNs, long matcherTimeNs,
-				long poiBlocksRead, long existedPoiObjectsInReadBlocks,
-				long matchedPoiObjectsInReadBlocks, long maxObjectsPerBlock) {
+				String obf, int size, long bytes, PoiReadMetricSet metrics) {
 			long timeCall = System.nanoTime() - statReq;
 			StatByAPI statByAPI = byApis.get(api);
 			if (statByAPI == null) {
@@ -281,9 +289,7 @@ public class BinaryMapIndexReaderStats {
 				byApis.put(api, statByAPI);
 			}
 			SubStatByAPI subStatByAPI = statByAPI.getSubApi(op, obf);
-			subStatByAPI.add(timeCall, size - subSize, bytes,
-					payloadBytesParsed, decodeTimeNs, matcherTimeNs, poiBlocksRead,
-					existedPoiObjectsInReadBlocks, matchedPoiObjectsInReadBlocks, maxObjectsPerBlock);
+			subStatByAPI.add(timeCall, size - subSize, bytes, metrics);
 		}
 
 		@Override
