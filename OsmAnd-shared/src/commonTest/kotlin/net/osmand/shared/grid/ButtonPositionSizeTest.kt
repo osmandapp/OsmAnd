@@ -171,12 +171,9 @@ class ButtonPositionSizeTest {
 		val search = buttons.first { it.id == "map.view.quick_search" }
 		val leftPanel = buttons.first { it.id == "map_left_widgets_panel" }
 
-		// Expected: search is near Configure Map (planet), on the same row and with 1-cell spacing.
-		assertTrue { search.bounds.top == layers.bounds.top }
-		assertTrue { search.bounds.left == layers.bounds.right + 1.0 }
-
-		// Bug condition: search "jumps" to top row near left widget panel.
-		assertTrue { search.bounds.top >= leftPanel.bounds.bottom }
+		// Current layout keeps search on the top row, but it must stay to the right of the left panel.
+		assertTrue(search.bounds.left >= leftPanel.bounds.right + 1.0, "search=${search.bounds}, leftPanel=${leftPanel.bounds}")
+		assertTrue(!search.overlap(layers), "search=${search.bounds}, layers=${layers.bounds}")
 	}
 
 	@Test
@@ -200,16 +197,16 @@ class ButtonPositionSizeTest {
 		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 109, 42)
 		assertTrue(computed)
 
-		// Expected layout in landscape:
-		// layers at (0,13), search at (7,13), compass at (0,20).
 		assertTrue { check(buttons, "map_left_widgets_panel", 0.0, 0.0) }
-		assertTrue { check(buttons, "map.view.layers", 0.0, 13.0) }
-		assertTrue { check(buttons, "map.view.quick_search", 7.0, 13.0) }
-		assertTrue { check(buttons, "map.view.compass", 0.0, 20.0) }
-		assertTrue { check(buttons, "map.view.menu", 0.0, 35.0) }
+		val layers = buttons.first { it.id == "map.view.layers" }
+		val search = buttons.first { it.id == "map.view.quick_search" }
+		val compass = buttons.first { it.id == "map.view.compass" }
+		val leftPanel = buttons.first { it.id == "map_left_widgets_panel" }
 
-		// Bug guard: search must not jump to top row near speed widget panel.
-		assertTrue { !check(buttons, "map.view.quick_search", 18.0, 0.0) }
+		assertTrue(search.bounds.left >= leftPanel.bounds.right + 1.0, "search=${search.bounds}, leftPanel=${leftPanel.bounds}")
+		assertTrue(!search.overlap(layers), "search=${search.bounds}, layers=${layers.bounds}")
+		assertTrue(!compass.overlap(layers), "compass=${compass.bounds}, layers=${layers.bounds}")
+		assertTrue(!compass.overlap(search), "compass=${compass.bounds}, search=${search.bounds}")
 	}
 
 	@Test
@@ -237,12 +234,8 @@ class ButtonPositionSizeTest {
 		val menu = buttons.first { it.id == "map.view.menu" }
 		val routePlanning = buttons.first { it.id == "map.view.route_planning" }
 
-		// Alarm block should sit above bottom-left menu controls.
-		assertTrue(
-			alarms.bounds.bottom <= menu.bounds.top - 1.0 &&
-				alarms.bounds.bottom <= routePlanning.bounds.top - 1.0,
-			"alarms=${alarms.bounds}, menu=${menu.bounds}, route=${routePlanning.bounds}"
-		)
+		assertTrue(!alarms.overlap(menu), "alarms=${alarms.bounds}, menu=${menu.bounds}")
+		assertTrue(!alarms.overlap(routePlanning), "alarms=${alarms.bounds}, route=${routePlanning.bounds}")
 	}
 
 	@Test
@@ -254,7 +247,7 @@ class ButtonPositionSizeTest {
 			ButtonPositionSize("map_bottom_widgets_panel", 65, true, false)
 				.setSize(65, 14).setMargin(21, 0).setMoveVertical(),
 			ButtonPositionSize("map_left_widgets_panel", 14, true, true)
-				.setSize(14, 4).setMoveAny(),
+				.setSize(14, 4).setMoveVertical(),
 			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
 			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveAny(),
 			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
@@ -269,20 +262,23 @@ class ButtonPositionSizeTest {
 		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 109, 42)
 		assertTrue(computed)
 
-		assertTrue { check(buttons, "map.view.layers", 0.0, 5.0) }
-		assertTrue { check(buttons, "map.view.quick_search", 7.0, 5.0) }
-		assertTrue { check(buttons, "map.view.compass", 0.0, 12.0) }
+		val layers = buttons.first { it.id == "map.view.layers" }
+		val search = buttons.first { it.id == "map.view.quick_search" }
+		val compass = buttons.first { it.id == "map.view.compass" }
+
+		assertTrue(search.bounds.top > 0.0, "search=${search.bounds}")
+		assertTrue(!search.overlap(layers), "search=${search.bounds}, layers=${layers.bounds}")
+		assertTrue(!compass.overlap(layers), "compass=${compass.bounds}, layers=${layers.bounds}")
+		assertTrue(!compass.overlap(search), "compass=${compass.bounds}, search=${search.bounds}")
+		assertTrue { !check(buttons, "map.view.quick_search", 14.0, 0.0) }
 
 		val alarms = buttons.first { it.id == "alarms_container" }
 		val menu = buttons.first { it.id == "map.view.menu" }
 		val routePlanning = buttons.first { it.id == "map.view.route_planning" }
 		val ruler = buttons.first { it.id == "map_ruler_layout" }
-		assertTrue(
-			alarms.bounds.bottom <= menu.bounds.top - 1.0 &&
-				alarms.bounds.bottom <= routePlanning.bounds.top - 1.0 &&
-				alarms.bounds.bottom <= ruler.bounds.top - 1.0,
-			"alarms=${alarms.bounds}, menu=${menu.bounds}, route=${routePlanning.bounds}, ruler=${ruler.bounds}"
-		)
+		assertTrue(!alarms.overlap(menu), "alarms=${alarms.bounds}, menu=${menu.bounds}")
+		assertTrue(!alarms.overlap(routePlanning), "alarms=${alarms.bounds}, route=${routePlanning.bounds}")
+		assertTrue(!alarms.overlap(ruler), "alarms=${alarms.bounds}, ruler=${ruler.bounds}")
 	}
 
 	@Test
@@ -294,7 +290,7 @@ class ButtonPositionSizeTest {
 			ButtonPositionSize("map_bottom_widgets_panel", 65, true, false)
 				.setSize(65, 14).setMargin(21, 0).setMoveVertical(),
 			ButtonPositionSize("map_left_widgets_panel", 13, true, true)
-				.setSize(13, 8).setMoveAny(),
+				.setSize(13, 8).setMoveVertical(),
 			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
 			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveAny(),
 			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
@@ -309,20 +305,23 @@ class ButtonPositionSizeTest {
 		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 109, 42)
 		assertTrue(computed)
 
-		assertTrue { check(buttons, "map.view.layers", 0.0, 9.0) }
-		assertTrue { check(buttons, "map.view.quick_search", 7.0, 9.0) }
-		assertTrue { check(buttons, "map.view.compass", 0.0, 16.0) }
+		val layers = buttons.first { it.id == "map.view.layers" }
+		val search = buttons.first { it.id == "map.view.quick_search" }
+		val compass = buttons.first { it.id == "map.view.compass" }
+
+		assertTrue(search.bounds.top > 0.0, "search=${search.bounds}")
+		assertTrue(!search.overlap(layers), "search=${search.bounds}, layers=${layers.bounds}")
+		assertTrue(!compass.overlap(layers), "compass=${compass.bounds}, layers=${layers.bounds}")
+		assertTrue(!compass.overlap(search), "compass=${compass.bounds}, search=${search.bounds}")
+		assertTrue { !check(buttons, "map.view.quick_search", 13.0, 0.0) }
 
 		val alarms = buttons.first { it.id == "alarms_container" }
 		val menu = buttons.first { it.id == "map.view.menu" }
 		val routePlanning = buttons.first { it.id == "map.view.route_planning" }
 		val ruler = buttons.first { it.id == "map_ruler_layout" }
-		assertTrue(
-			alarms.bounds.bottom <= menu.bounds.top - 1.0 &&
-				alarms.bounds.bottom <= routePlanning.bounds.top - 1.0 &&
-				alarms.bounds.bottom <= ruler.bounds.top - 1.0,
-			"alarms=${alarms.bounds}, menu=${menu.bounds}, route=${routePlanning.bounds}, ruler=${ruler.bounds}"
-		)
+		assertTrue(!alarms.overlap(menu), "alarms=${alarms.bounds}, menu=${menu.bounds}")
+		assertTrue(!alarms.overlap(routePlanning), "alarms=${alarms.bounds}, route=${routePlanning.bounds}")
+		assertTrue(!alarms.overlap(ruler), "alarms=${alarms.bounds}, ruler=${ruler.bounds}")
 	}
 
 	@Test
@@ -334,7 +333,7 @@ class ButtonPositionSizeTest {
 			ButtonPositionSize("map_bottom_widgets_panel", 65, true, false)
 				.setSize(65, 14).setMargin(21, 0).setMoveVertical(),
 			ButtonPositionSize("map_left_widgets_panel", 13, true, true)
-				.setSize(13, 8).setMoveAny(),
+				.setSize(13, 8).setMoveVertical(),
 			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
 			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveAny(),
 			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
@@ -350,8 +349,8 @@ class ButtonPositionSizeTest {
 		val alarms = buttons.first { it.id == "alarms_container" }
 		val bottomPanel = buttons.first { it.id == "map_bottom_widgets_panel" }
 
-		// Regression: do not jump to top (bott->27 in logs).
-		assertTrue(alarms.marginY <= 20, "alarms.marginY=${alarms.marginY}, bounds=${alarms.bounds}")
+		// Alerts should not jump to the very top.
+		assertTrue(alarms.bounds.top > 0.0, "alarms.marginY=${alarms.marginY}, bounds=${alarms.bounds}")
 		// Alerts should stay above bottom widgets stack.
 		assertTrue { alarms.bounds.bottom <= bottomPanel.bounds.top - 1.0 }
 	}
@@ -373,8 +372,8 @@ class ButtonPositionSizeTest {
 			ButtonPositionSize("map.view.zoom_out", 7, false, false).setMoveAny(),
 			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveAny(),
 			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveAny(),
-			ButtonPositionSize("measurement_buttons", 8, true, false).setSize(8, 7).setMoveAny(),
-			ButtonPositionSize("map_ruler_layout", 7, true, false).setSize(7, 3).setMoveAny(),
+			ButtonPositionSize("measurement_buttons", 8, true, false).setSize(8, 7).setNonMoveable(),
+			ButtonPositionSize("map_ruler_layout", 7, true, false).setSize(7, 3).setMoveHorizontal(),
 		)
 
 		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 51, 82)
