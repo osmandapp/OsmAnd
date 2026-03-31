@@ -51,8 +51,8 @@ public class WorldRegion implements Serializable {
 	protected boolean regionJoinRoadsDownload;
 	protected LatLon regionCenter;
 	protected QuadRect boundingBox;
-	protected List<LatLon> polygon; // the biggest polygon of the region (CountryOcbfGeneration)
-	protected List<List<LatLon>> additionalPolygons = new ArrayList<>(); // all the inclusions and exclusions
+	protected double[] polygon; // the biggest polygon of the region (CountryOcbfGeneration)
+	protected List<double[]> additionalPolygons = new ArrayList<>(); // all the inclusions and exclusions
 
 	public static class RegionParams {
 		protected String regionLeftHandDriving;
@@ -196,7 +196,6 @@ public class WorldRegion implements Serializable {
 		this.regionDownloadName = downloadName;
 		superregion = null;
 		subregions = new LinkedList<>();
-
 	}
 
 	public WorldRegion(String id) {
@@ -263,19 +262,20 @@ public class WorldRegion implements Serializable {
 				boundingBox.contains(rectangle);
 	}
 
-	private boolean containsPolygon(List<LatLon> another) {
-		return (polygon != null && another != null) &&
-				Algorithms.isFirstPolygonInsideSecond(another, polygon);
+	private boolean containsPolygon(double[] another) {
+		return (polygon != null && another != null) && Algorithms.isFirstPolygonInsideSecond(another, polygon);
 	}
 
 	public boolean containsPoint(LatLon latLon) {
 		int intersections = 0;
 		if (polygon != null) {
-			if (Algorithms.isPointInsidePolygon(latLon, polygon)) {
+			double lat = latLon.getLatitude();
+			double lon = latLon.getLongitude();
+			if (Algorithms.isPointInsidePolygon(lat, lon, polygon)) {
 				intersections++;
 			}
-			for (List<LatLon> additional : additionalPolygons) {
-				if (Algorithms.isPointInsidePolygon(latLon, additional)) {
+			for (double[] additional : additionalPolygons) {
+				if (Algorithms.isPointInsidePolygon(lat, lon, additional)) {
 					if (++intersections % 2 == 0) {
 						break; // optimize
 					}
@@ -344,8 +344,8 @@ public class WorldRegion implements Serializable {
 		return boundingBox;
 	}
 
-	public List<List<LatLon>> getPolygons() {
-		List<List<LatLon>> polygons = new ArrayList<>();
+	public List<double[]> getPolygons() {
+		List<double[]> polygons = new ArrayList<>();
 		if (polygon != null) {
 			polygons.add(polygon);
 		}
@@ -355,18 +355,23 @@ public class WorldRegion implements Serializable {
 
 	public List<QuadRect> getAllPolygonsBounds() {
 		List<QuadRect> allBounds = new ArrayList<>();
-
-		for (List<LatLon> polygon : getPolygons()) {
-			QuadRect bounds = new QuadRect();
-			for (LatLon ll : polygon) {
-				double x = ll.getLongitude();
-				double y = ll.getLatitude();
-				bounds.expand(x, y, x, y);
-			}
-			allBounds.add(bounds);
+		if (polygon != null) {
+			allBounds.add(calculateBoundingBox(polygon));
 		}
-
+		for (double[] poly : additionalPolygons) {
+			allBounds.add(calculateBoundingBox(poly));
+		}
 		return allBounds;
+	}
+
+	private QuadRect calculateBoundingBox(double[] polygon) {
+		QuadRect bounds = new QuadRect();
+		for (int i = 0; i < polygon.length; i += 2) {
+			double y = polygon[i];     // latitude
+			double x = polygon[i + 1]; // longitude
+			bounds.expand(x, y, x, y);
+		}
+		return bounds;
 	}
 
 	@Override

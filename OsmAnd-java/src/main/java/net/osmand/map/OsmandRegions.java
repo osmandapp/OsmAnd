@@ -589,22 +589,25 @@ public class OsmandRegions {
 		return rd;
 	}
 
-	private void findBoundaries(WorldRegion rd, BinaryMapDataObject object) {
-		if (object.getPointsLength() == 0) {
+	private void findBoundaries(WorldRegion region, BinaryMapDataObject object) {
+		int pointsLength = object.getPointsLength();
+		if (pointsLength == 0) {
 			return;
 		}
-
-		List<LatLon> polygon = new ArrayList<>();
+		double[] polygon = new double[pointsLength * 2];
 		double x = MapUtils.get31LongitudeX(object.getPoint31XTile(0));
 		double y = MapUtils.get31LatitudeY(object.getPoint31YTile(0));
-		polygon.add(new LatLon(y, x));
+
+		polygon[0] = y; // Latitude
+		polygon[1] = x; // Longitude
+
 		double minX = x;
 		double maxX = x;
 		double minY = y;
 		double maxY = y;
 
-		if (object.getPointsLength() > 1) {
-			for (int i = 1; i < object.getPointsLength(); i++) {
+		if (pointsLength > 1) {
+			for (int i = 1; i < pointsLength; i++) {
 				x = MapUtils.get31LongitudeX(object.getPoint31XTile(i));
 				y = MapUtils.get31LatitudeY(object.getPoint31YTile(i));
 				if (x > maxX) {
@@ -617,12 +620,12 @@ public class OsmandRegions {
 				} else if (y > minY) {
 					minY = y;
 				}
-				polygon.add(new LatLon(y, x));
+				polygon[i * 2] = y;     // Latitude
+				polygon[i * 2 + 1] = x; // Longitude
 			}
 		}
-
-		rd.boundingBox = new QuadRect(minX, minY, maxX, maxY);
-		rd.polygon = polygon;
+		region.polygon = polygon;
+		region.boundingBox = new QuadRect(minX, minY, maxX, maxY);
 	}
 
 	private String getSearchIndex(BinaryMapDataObject object) {
@@ -986,19 +989,18 @@ public class OsmandRegions {
 	}
 
 	private void addPolygonToRegion(BinaryMapDataObject mapObject, WorldRegion worldRegion) {
-		if (mapObject.getPointsLength() < 3) {
+		int pointsLength = mapObject.getPointsLength();
+		if (pointsLength < 3) {
 			return;
 		}
-
-		List<LatLon> polygon = new ArrayList<>();
-		for (int i = 0; i < mapObject.getPointsLength(); i++) {
+		double[] polygon = new double[pointsLength * 2];
+		for (int i = 0; i < pointsLength; i++) {
 			int x = mapObject.getPoint31XTile(i);
 			int y = mapObject.getPoint31YTile(i);
-			double lat = MapUtils.get31LatitudeY(y);
-			double lon = MapUtils.get31LongitudeX(x);
-			polygon.add(new LatLon(lat, lon));
-		}
 
+			polygon[i * 2] = MapUtils.get31LatitudeY(y);
+			polygon[i * 2 + 1] = MapUtils.get31LongitudeX(x);
+		}
 		worldRegion.additionalPolygons.add(polygon);
 	}
 
