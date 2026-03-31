@@ -301,13 +301,13 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	                                    @NonNull List<BinaryMapDataObject> mapObjects,
 	                                    @NonNull Path path,
 	                                    @NonNull Paint paint) {
-		List<double[]> polygons = new ArrayList<>();
+		List<float[]> polygons = new ArrayList<>();
 		for (BinaryMapDataObject mapObject : mapObjects) {
 			int pointsLength = mapObject.getPointsLength();
-			double[] polygon = new double[pointsLength * 2];
+			float[] polygon = new float[pointsLength * 2];
 			for (int i = 0; i < pointsLength; i++) {
-				polygon[i * 2] = MapUtils.get31LatitudeY(mapObject.getPoint31YTile(i));
-				polygon[i * 2 + 1] = MapUtils.get31LongitudeX(mapObject.getPoint31XTile(i));
+				polygon[i * 2] = (float) MapUtils.get31LatitudeY(mapObject.getPoint31YTile(i));
+				polygon[i * 2 + 1] = (float) MapUtils.get31LongitudeX(mapObject.getPoint31XTile(i));
 			}
 			polygons.add(polygon);
 		}
@@ -316,14 +316,14 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	private void drawPolygons(@NonNull Canvas canvas,
 	                          @NonNull RotatedTileBox tileBox,
-	                          @NonNull List<double[]> polygons,
+	                          @NonNull List<float[]> polygons,
 	                          @NonNull Path path,
 	                          @NonNull Paint paint) {
 		path.reset();
-		for (double[] polygon : polygons) {
+		for (float[] polygon : polygons) {
 			for (int i = 0; i < polygon.length; i += 2) {
-				double lat = polygon[i];
-				double lon = polygon[i + 1];
+				float lat = polygon[i];
+				float lon = polygon[i + 1];
 				int pixX = tileBox.getPixXFromLonNoRot(lon);
 				int pixY = tileBox.getPixYFromLatNoRot(lat);
 				if (i == 0) {
@@ -659,7 +659,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			polygonsCollection = new PolygonsCollection(ZoomLevel.ZoomLevel3, ZoomLevel.ZoomLevel7);
 		}
 		for (WorldRegion region : regionList) {
-			for (double[] polygon : region.getPolygons()) {
+			for (float[] polygon : region.getPolygons()) {
 				QVectorPointI points = new QVectorPointI();
 				for (int i = 0; i < polygon.length; i += 2) {
 					int x = MapUtils.get31TileNumberX(polygon[i + 1]);
