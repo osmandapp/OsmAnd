@@ -767,4 +767,31 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	public void setGpxPointIndex(int gpxPointIndex) {
 		this.gpxPointIndex = gpxPointIndex;
 	}
+
+	public boolean hasExitInfo() {
+		if (object.hasMotorwayJunctionNode()) {
+			String nodeRef = object.getNodeRef();
+			String nodeName = object.getNodeName();
+			if (nodeRef != null || nodeName != null) {
+				for (RouteSegmentResult attached : getAttachedRoutes(getStartPointIndex())) {
+					if (nodeRef != null && nodeRef.equals(attached.getObject().getJunctionRef())) {
+						return false;
+					}
+					if (nodeName != null && nodeName.equals(attached.getObject().getJunctionName())) {
+						return false;
+					}
+				}
+				if (isLinkRoad()) {
+					return true;
+				}
+			}
+		}
+
+		return object.getJunctionRef() != null || object.getJunctionName() != null;
+	}
+
+	private boolean isLinkRoad() {
+		String highway = object.getHighway();
+		return highway != null && highway.endsWith("_link");
+	}
 }
