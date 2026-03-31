@@ -594,22 +594,22 @@ public class OsmandRegions {
 		if (pointsLength == 0) {
 			return;
 		}
-		double[] polygon = new double[pointsLength * 2];
-		double x = MapUtils.get31LongitudeX(object.getPoint31XTile(0));
-		double y = MapUtils.get31LatitudeY(object.getPoint31YTile(0));
+		float[] polygon = new float[pointsLength * 2];
+		float x = (float) MapUtils.get31LongitudeX(object.getPoint31XTile(0));
+		float y = (float) MapUtils.get31LatitudeY(object.getPoint31YTile(0));
 
 		polygon[0] = y; // Latitude
 		polygon[1] = x; // Longitude
 
-		double minX = x;
-		double maxX = x;
-		double minY = y;
-		double maxY = y;
+		float minX = x;
+		float maxX = x;
+		float minY = y;
+		float maxY = y;
 
 		if (pointsLength > 1) {
 			for (int i = 1; i < pointsLength; i++) {
-				x = MapUtils.get31LongitudeX(object.getPoint31XTile(i));
-				y = MapUtils.get31LatitudeY(object.getPoint31YTile(i));
+				x = (float) MapUtils.get31LongitudeX(object.getPoint31XTile(i));
+				y = (float) MapUtils.get31LatitudeY(object.getPoint31YTile(i));
 				if (x > maxX) {
 					maxX = x;
 				} else if (x < minX) {
@@ -993,13 +993,13 @@ public class OsmandRegions {
 		if (pointsLength < 3) {
 			return;
 		}
-		double[] polygon = new double[pointsLength * 2];
+		float[] polygon = new float[pointsLength * 2];
 		for (int i = 0; i < pointsLength; i++) {
 			int x = mapObject.getPoint31XTile(i);
 			int y = mapObject.getPoint31YTile(i);
 
-			polygon[i * 2] = MapUtils.get31LatitudeY(y);
-			polygon[i * 2 + 1] = MapUtils.get31LongitudeX(x);
+			polygon[i * 2] = (float) MapUtils.get31LatitudeY(y);
+			polygon[i * 2 + 1] = (float) MapUtils.get31LongitudeX(x);
 		}
 		worldRegion.additionalPolygons.add(polygon);
 	}

@@ -251,10 +251,10 @@ public class Algorithms {
 		return true;
 	}
 
-	public static boolean isFirstPolygonInsideSecond(double[] firstPolygon, double[] secondPolygon) {
+	public static boolean isFirstPolygonInsideSecond(float[] firstPolygon, float[] secondPolygon) {
 		for (int i = 0; i < firstPolygon.length; i += 2) {
-			double lat = firstPolygon[i];
-			double lon = firstPolygon[i + 1];
+			float lat = firstPolygon[i];
+			float lon = firstPolygon[i + 1];
 			if (!isPointInsidePolygon(lat, lon, secondPolygon)) {
 				// if at least one point is not inside the boundary, return false
 				return false;
@@ -290,7 +290,7 @@ public class Algorithms {
 		return oddNodes;
 	}
 
-	public static boolean isPointInsidePolygon(double lat, double lon, double[] polygon) {
+	public static boolean isPointInsidePolygon(float lat, float lon, float[] polygon) {
 		boolean oddNodes = false;
 		for (int i = 0, j = polygon.length - 2; i < polygon.length; j = i, i += 2) {
 			double x1 = polygon[i + 1];
