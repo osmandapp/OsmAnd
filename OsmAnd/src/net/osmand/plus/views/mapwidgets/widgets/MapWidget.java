@@ -161,6 +161,10 @@ public abstract class MapWidget {
 		return getView().getVisibility() == View.VISIBLE;
 	}
 
+	public boolean isAttached() {
+		return view != null && view.getParent() != null;
+	}
+
 	protected void setPanel(@NonNull WidgetsPanel panel) {
 		this.panel = panel;
 	}
