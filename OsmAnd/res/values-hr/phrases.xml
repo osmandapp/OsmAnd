@@ -462,7 +462,7 @@
     <string name="poi_suburb">Predgrađe</string>
     <string name="poi_quarter">Kvartal</string>
     <string name="poi_place_farm">Farma</string>
-    <string name="poi_pharmacy">Apoteka</string>
+    <string name="poi_pharmacy">Ljekarna</string>
     <string name="poi_hospital">Bolnica</string>
     <string name="poi_doctors">Liječnici</string>
     <string name="poi_clinic">Klinika</string>
@@ -1495,9 +1495,9 @@
     <string name="poi_manufacturer">Proizvođač</string>
     <string name="poi_country_store">Poljoprivredna prodavaonica</string>
     <string name="poi_trailhead">Početak puta</string>
-    <string name="poi_sports_hall">Sportska sala</string>
+    <string name="poi_sports_hall">Sportska dvorana</string>
     <string name="poi_winery">Vinarija</string>
-    <string name="poi_wine_region">Područje vina</string>
+    <string name="poi_wine_region">Vinska regija</string>
     <string name="poi_wine_grape">Grožđe</string>
     <string name="poi_wine_vineyard">Vinograd</string>
     <string name="poi_wine_type">Vrsta;Sorta grožđa</string>
@@ -1518,7 +1518,7 @@
     <string name="poi_medical_supply_diabetic">Dijabetes</string>
     <string name="poi_medical_supply_diagnostic">Dijagnostika</string>
     <string name="poi_beauty_salon_spa">Spa</string>
-    <string name="poi_beauty_salon_hair_removal">Uklanjanje kose</string>
+    <string name="poi_beauty_salon_hair_removal">Depilacija</string>
     <string name="poi_massage_chiropractic">Kiropraktika</string>
     <string name="poi_massage_shiatsu">Shiatsu</string>
     <string name="poi_agrarian_yes">Da;Poljoprivreda</string>
@@ -2226,7 +2226,7 @@
     <string name="poi_palaeontological_site">Paleontološko nalazište</string>
     <string name="poi_alcohol">Prodavaonica alkoholnih pića</string>
     <string name="poi_chocolate">Prodavaonica čokolade</string>
-    <string name="poi_convenience">Prodavaonica potrepština</string>
+    <string name="poi_convenience">Trgovina mješovitom robom</string>
     <string name="poi_mall">Trgovački centar</string>
     <string name="poi_beverages">Prodavaonica pića</string>
     <string name="poi_farm">Poljoprivredna trgovina</string>
@@ -2302,4 +2302,10 @@
     <string name="poi_vending_type">Vrsta automata</string>
     <string name="poi_fuel_diesel">Dizel</string>
     <string name="poi_min_age">Minimalna dob</string>
+    <string name="poi_parcel_locker">Ormarić za pakete</string>
+    <string name="poi_copyshop">Fotokopiraona</string>
+    <string name="poi_community_centre">Društveni centar</string>
+    <string name="poi_consulate">Konzulat</string>
+    <string name="poi_bicycle_parking">Parkiralište za bicikle</string>
+    <string name="poi_hearing_aids">Prodavaonica slušnih pomagala</string>
 </resources>
