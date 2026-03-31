@@ -88,6 +88,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.List;
 import java.util.Set;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -824,10 +825,11 @@ public class UiUtilities {
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		Set<MapWidgetInfo> topWidgetsInfo = widgetRegistry.getWidgetsForPanel(WidgetsPanel.TOP);
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 
 		for (MapWidgetInfo widgetInfo : topWidgetsInfo) {
 			MapWidget widget = widgetInfo.widget;
-			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
+			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility)) {
 				continue;
 			}
 			if (widget instanceof StreetNameWidget) {
@@ -848,10 +850,11 @@ public class UiUtilities {
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		Set<MapWidgetInfo> topWidgetsInfo = widgetRegistry.getWidgetsForPanel(WidgetsPanel.TOP);
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 
 		for (MapWidgetInfo widgetInfo : topWidgetsInfo) {
 			MapWidget widget = widgetInfo.widget;
-			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
+			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility)) {
 				continue;
 			}
 			if (widget instanceof SimpleWidget || widget instanceof CoordinatesBaseWidget || widget instanceof IComplexWidget) {
