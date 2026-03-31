@@ -1547,10 +1547,15 @@ public class AndroidUtils {
 
 	@NonNull
 	public static String getViewName(@NonNull View view) {
+		return getResName(view.getResources(), view.getId());
+	}
+
+	@NonNull
+	public static String getResName(@NonNull Resources res, @AnyRes int resid) {
 		try {
-			return view.getResources().getResourceEntryName(view.getId());
+			return res.getResourceEntryName(resid);
 		} catch (Resources.NotFoundException e) {
-			return view.toString();
+			return String.valueOf(resid);
 		}
 	}
 }
