@@ -51,8 +51,8 @@ public class WorldRegion implements Serializable {
 	protected boolean regionJoinRoadsDownload;
 	protected LatLon regionCenter;
 	protected QuadRect boundingBox;
-	protected double[] polygon; // the biggest polygon of the region (CountryOcbfGeneration)
-	protected List<double[]> additionalPolygons = new ArrayList<>(); // all the inclusions and exclusions
+	protected float[] polygon; // the biggest polygon of the region (CountryOcbfGeneration)
+	protected List<float[]> additionalPolygons = new ArrayList<>(); // all the inclusions and exclusions
 
 	public static class RegionParams {
 		protected String regionLeftHandDriving;
@@ -262,7 +262,7 @@ public class WorldRegion implements Serializable {
 				boundingBox.contains(rectangle);
 	}
 
-	private boolean containsPolygon(double[] another) {
+	private boolean containsPolygon(float[] another) {
 		return (polygon != null && another != null) && Algorithms.isFirstPolygonInsideSecond(another, polygon);
 	}
 
@@ -271,11 +271,11 @@ public class WorldRegion implements Serializable {
 		if (polygon != null) {
 			double lat = latLon.getLatitude();
 			double lon = latLon.getLongitude();
-			if (Algorithms.isPointInsidePolygon(lat, lon, polygon)) {
+			if (Algorithms.isPointInsidePolygon((float) lat, (float) lon, polygon)) {
 				intersections++;
 			}
-			for (double[] additional : additionalPolygons) {
-				if (Algorithms.isPointInsidePolygon(lat, lon, additional)) {
+			for (float[] additional : additionalPolygons) {
+				if (Algorithms.isPointInsidePolygon((float) lat, (float) lon, additional)) {
 					if (++intersections % 2 == 0) {
 						break; // optimize
 					}
@@ -344,8 +344,8 @@ public class WorldRegion implements Serializable {
 		return boundingBox;
 	}
 
-	public List<double[]> getPolygons() {
-		List<double[]> polygons = new ArrayList<>();
+	public List<float[]> getPolygons() {
+		List<float[]> polygons = new ArrayList<>();
 		if (polygon != null) {
 			polygons.add(polygon);
 		}
@@ -358,17 +358,17 @@ public class WorldRegion implements Serializable {
 		if (polygon != null) {
 			allBounds.add(calculateBoundingBox(polygon));
 		}
-		for (double[] poly : additionalPolygons) {
+		for (float[] poly : additionalPolygons) {
 			allBounds.add(calculateBoundingBox(poly));
 		}
 		return allBounds;
 	}
 
-	private QuadRect calculateBoundingBox(double[] polygon) {
+	private QuadRect calculateBoundingBox(float[] polygon) {
 		QuadRect bounds = new QuadRect();
 		for (int i = 0; i < polygon.length; i += 2) {
-			double y = polygon[i];     // latitude
-			double x = polygon[i + 1]; // longitude
+			float y = polygon[i];     // latitude
+			float x = polygon[i + 1]; // longitude
 			bounds.expand(x, y, x, y);
 		}
 		return bounds;
