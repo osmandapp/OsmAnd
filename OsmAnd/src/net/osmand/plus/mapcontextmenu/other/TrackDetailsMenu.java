@@ -592,6 +592,7 @@ public class TrackDetailsMenu {
 		}
 
 		ElevationChart chart = parentView.findViewById(R.id.chart);
+		GPXDataSetType[] chartTypes = gpxItem.chartTypes;
 
 		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 			@Override
@@ -683,39 +684,14 @@ public class TrackDetailsMenu {
 		ChartUtils.setupElevationChart(chart, appearance);
 
 		List<ILineDataSet> dataSets = new ArrayList<>();
-		if (gpxItem.chartTypes != null) {
-			for (GPXDataSetType dataSetType : gpxItem.chartTypes) {
-				OrderedLineDataSet dataSet = null;
-				boolean withoutGaps = selectedGpxFile != null && (!selectedGpxFile.isJoinSegments() && gpxItem.isGeneralTrack());
-				switch (dataSetType) {
-					case ALTITUDE: {
-						dataSet = ChartUtils.createGPXElevationDataSet(app, chart, analysis,
-								dataSetType, gpxItem.chartAxisType, false, true, withoutGaps);
-						break;
-					}
-					case SPEED: {
-						boolean setYAxisMinimum = true;
-						for (GPXDataSetType type : gpxItem.chartTypes) {
-							if (type == GPXDataSetType.ZOOM_ANIMATED || type == GPXDataSetType.ZOOM_NON_ANIMATED) {
-								setYAxisMinimum = false;
-								break;
-							}
-						}
-						dataSet = ChartUtils.createGPXSpeedDataSet(app, chart, analysis,
-								dataSetType, gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, setYAxisMinimum, true, withoutGaps);
-						break;
-					}
-					case SLOPE: {
-						boolean useRightAxis = gpxItem.chartTypes[0] != GPXDataSetType.SLOPE;
-						dataSet = ChartUtils.createGPXSlopeDataSet(app, chart, analysis,
-								dataSetType, gpxItem.chartAxisType, null, useRightAxis, true, withoutGaps);
-						break;
-					}
-					default: {
-						boolean useRightAxis = !dataSets.isEmpty();
-						dataSet = PluginsHelper.getOrderedLineDataSet(chart, analysis, dataSetType, gpxItem.chartAxisType, withoutGaps, useRightAxis);
-					}
-				}
+		if (chartTypes != null) {
+			boolean withoutGaps = shouldCalculateWithoutGaps(gpxItem);
+			for (int i = 0; i < chartTypes.length; i++) {
+				GPXDataSetType dataSetType = chartTypes[i];
+				GPXDataSetType otherDataSetType = chartTypes.length == 2 ? chartTypes[1 - i] : null;
+				boolean useRightAxis = !dataSets.isEmpty();
+				OrderedLineDataSet dataSet = ChartUtils.getDataSet(app, chart, analysis,
+						dataSetType, otherDataSetType, gpxItem.chartAxisType, withoutGaps, useRightAxis);
 				if (dataSet != null) {
 					dataSets.add(dataSet);
 				}
@@ -736,8 +712,8 @@ public class TrackDetailsMenu {
 		View yAxisArrow = parentView.findViewById(R.id.y_axis_arrow);
 		List<GPXDataSetType> availableTypes = getAvailableYTypes(analysis);
 
-		yAxisIcon.setImageDrawable(getImageDrawable(app, gpxItem.chartTypes));
-		yAxisTitle.setText(getGpxDataSetsName(app, gpxItem.chartTypes));
+		yAxisIcon.setImageDrawable(getImageDrawable(app, chartTypes));
+		yAxisTitle.setText(getGpxDataSetsName(app, chartTypes));
 		if (!availableTypes.isEmpty()) {
 			yAxis.setOnClickListener(v -> ChartModeBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), getGraphModeListener(analysis, gpxItem), true));
 			yAxisArrow.setVisibility(View.VISIBLE);
@@ -802,12 +778,22 @@ public class TrackDetailsMenu {
 
 			@Override
 			public List<GPXDataSetType> getSelectedDataSetTypes() {
-				if (mapActivity != null) {
-					return ChartUtils.getSavedGeneralYAxis(mapActivity.getApp().getSettings());
-				}
 				return Arrays.asList(item.chartTypes);
 			}
 		};
+	}
+
+	private boolean shouldCalculateWithoutGaps(@NonNull GpxDisplayItem gpxItem) {
+		if (selectedGpxFile == null || !gpxItem.isGeneralTrack()) {
+			return false;
+		}
+		if (selectedGpxFile.isShowCurrentTrack()) {
+			GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+			return !selectedGpxFile.isJoinSegments()
+					&& gpxFile != null
+					&& (Algorithms.isEmpty(gpxFile.getTracks()) || gpxFile.getTracks().get(0).isGeneralTrack());
+		}
+		return selectedGpxFile.isJoinSegments();
 	}
 
 	@NonNull

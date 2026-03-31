@@ -974,7 +974,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					editingContext.setGpxData(gpxData);
 					MeasurementToolFragment.showInstance(getSupportFragmentManager(), editingContext, PLAN_ROUTE_MODE, true);
 				} else {
-					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
+					if (mapContextMenu.isVisible()) {
+						mapContextMenu.update(latLonToShow, mapLabelToShow, toShow);
+					} else {
+						mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
+					}
 				}
 				if (editToShow) {
 					mapContextMenu.openEditor();

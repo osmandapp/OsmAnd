@@ -139,6 +139,8 @@ public class OsmandSettings {
 	public static final String RENDERER_PREFERENCE_PREFIX = "nrenderer_";
 	public static final String ROUTING_PREFERENCE_PREFIX = "prouting_";
 
+	private static final Map<String, String> PREFERENCES_NAMES_CACHE = new LinkedHashMap<>();
+
 	public static final float SIM_MIN_SPEED = 5 / 3.6f;
 	/// Settings variables
 	private final OsmandApplication ctx;
@@ -283,9 +285,13 @@ public class OsmandSettings {
 		String sharedPreferencesName = !Algorithms.isEmpty(CUSTOM_SHARED_PREFERENCES_NAME) ? CUSTOM_SHARED_PREFERENCES_NAME : SHARED_PREFERENCES_NAME;
 		if (modeKey == null) {
 			return sharedPreferencesName;
-		} else {
-			return sharedPreferencesName + "." + modeKey.toLowerCase();
 		}
+		String result = PREFERENCES_NAMES_CACHE.get(modeKey);
+		if (result == null || !result.startsWith(sharedPreferencesName)) {
+			result = sharedPreferencesName + "." + modeKey.toLowerCase();
+			PREFERENCES_NAMES_CACHE.put(modeKey, result);
+		}
+		return result;
 	}
 
 	public static boolean areSettingsCustomizedForPreference(String sharedPreferencesName, OsmandApplication app) {

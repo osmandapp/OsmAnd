@@ -18,6 +18,8 @@ import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 public class FPSTextInfoWidget extends SimpleWidget {
 
 	private final OsmandMapTileView mapView;
+	private float cachedFps = -1f;
+	private int cachedSecondaryFps = -1;
 
 	public FPSTextInfoWidget(@NonNull MapActivity activity, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(activity, DEV_FPS, customId, panel);
@@ -36,12 +38,24 @@ public class FPSTextInfoWidget extends SimpleWidget {
 		MapRendererView renderer = mapView.getMapRenderer();
 		if (renderer != null) {
 			float fps = mapView.calculateRenderFps();
-			setText(OsmAndFormatter.formatFps(fps), "FPS");
+			// Round to 1 decimal place to match "%.1f" formatting
+			float roundedFps = Math.round(fps * 10f) / 10f;
+			if (isUpdateNeeded() || cachedFps != roundedFps) {
+				cachedFps = roundedFps;
+				setText(OsmAndFormatter.formatFps(roundedFps), "FPS");
+			}
 		} else {
 			if (!mapView.isMeasureFPS()) {
 				mapView.setMeasureFPS(true);
 			}
-			setText(String.valueOf((int) mapView.getFPS()), (int) mapView.getSecondaryFPS() + " FPS");
+			int fps = (int) mapView.getFPS();
+			int secondaryFps = (int) mapView.getSecondaryFPS();
+
+			if (isUpdateNeeded() || cachedFps != fps || cachedSecondaryFps != secondaryFps) {
+				cachedFps = fps;
+				cachedSecondaryFps = secondaryFps;
+				setText(String.valueOf(fps), secondaryFps + " FPS");
+			}
 		}
 	}
 }

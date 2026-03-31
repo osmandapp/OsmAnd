@@ -565,8 +565,12 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		if (activity != null) {
 			ApplicationMode appMode = settings.getApplicationMode();
 			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(requireMapActivity());
+			List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
+
 			for (MapWidgetInfo widgetInfo : widgetRegistry.getWidgets(activity, appMode, layoutMode)) {
-				if (widgetInfo.isEnabledForAppMode(appMode, layoutMode) || widgetInfo instanceof CenterWidgetInfo) {
+				boolean enabled = widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility);
+				boolean forceUpdate = (widgetInfo instanceof CenterWidgetInfo) && widgetInfo.widget.isAttached();
+				if (enabled || forceUpdate) {
 					widgetInfo.widget.updateInfo(drawSettings);
 				}
 			}

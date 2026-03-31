@@ -251,26 +251,57 @@ public class Algorithms {
 		return true;
 	}
 
+	public static boolean isFirstPolygonInsideSecond(float[] firstPolygon, float[] secondPolygon) {
+		for (int i = 0; i < firstPolygon.length; i += 2) {
+			float lat = firstPolygon[i];
+			float lon = firstPolygon[i + 1];
+			if (!isPointInsidePolygon(lat, lon, secondPolygon)) {
+				// if at least one point is not inside the boundary, return false
+				return false;
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * @see <a href="http://alienryderflex.com/polygon/">Determining Whether A Point Is Inside A Complex Polygon</a>
 	 * @param point
 	 * @param polygon
 	 * @return true if the point is in the area of the polygon
 	 */
-	public static boolean isPointInsidePolygon(LatLon point,
-	                                           List<LatLon> polygon) {
-		double px = point.getLongitude();
-		double py = point.getLatitude();
+	public static boolean isPointInsidePolygon(LatLon point, List<LatLon> polygon) {
 		boolean oddNodes = false;
+		double lat = point.getLatitude();
+		double lon = point.getLongitude();
+
 		for (int i = 0, j = polygon.size() - 1; i < polygon.size(); j = i++) {
 			double x1 = polygon.get(i).getLongitude();
 			double y1 = polygon.get(i).getLatitude();
 			double x2 = polygon.get(j).getLongitude();
 			double y2 = polygon.get(j).getLatitude();
-			if ((y1 < py && y2 >= py
-					|| y2 < py && y1 >= py)
-					&& (x1 <= px || x2 <= px)) {
-				if (x1 + (py - y1) / (y2 - y1) * (x2 - x1) < px) {
+			if ((y1 < lat && y2 >= lat
+					|| y2 < lat && y1 >= lat)
+					&& (x1 <= lon || x2 <= lon)) {
+				if (x1 + (lat - y1) / (y2 - y1) * (x2 - x1) < lon) {
+					oddNodes = !oddNodes;
+				}
+			}
+		}
+		return oddNodes;
+	}
+
+	public static boolean isPointInsidePolygon(float lat, float lon, float[] polygon) {
+		boolean oddNodes = false;
+		for (int i = 0, j = polygon.length - 2; i < polygon.length; j = i, i += 2) {
+			double x1 = polygon[i + 1];
+			double y1 = polygon[i];
+			double x2 = polygon[j + 1];
+			double y2 = polygon[j];
+
+			if ((y1 < lat && y2 >= lat
+					|| y2 < lat && y1 >= lat)
+					&& (x1 <= lon || x2 <= lon)) {
+				if (x1 + (lat - y1) / (y2 - y1) * (x2 - x1) < lon) {
 					oddNodes = !oddNodes;
 				}
 			}

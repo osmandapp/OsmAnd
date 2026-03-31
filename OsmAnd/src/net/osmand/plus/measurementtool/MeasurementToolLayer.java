@@ -26,6 +26,7 @@ import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
 import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable.RenderableSegment;
 import net.osmand.plus.views.Renderable.StandardTrack;
@@ -138,11 +139,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	private void createResources(@NonNull OsmandMapTileView view) {
-		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
-		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
-		pointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_day);
-		oldMovedPointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_day_disable);
-		applyingPointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_move_day);
+		centerIconDay = UiUtilities.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
+		centerIconNight = UiUtilities.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
+		pointIcon = UiUtilities.decodeResource(view.getResources(), R.drawable.map_measure_point_day);
+		oldMovedPointIcon = UiUtilities.decodeResource(view.getResources(), R.drawable.map_measure_point_day_disable);
+		applyingPointIcon = UiUtilities.decodeResource(view.getResources(), R.drawable.map_measure_point_move_day);
 		highlightedPointImage = chartPointsHelper.createHighlightedPointBitmap();
 
 		multiProfileGeometryWayContext = new MultiProfileGeometryWayContext(getContext(),

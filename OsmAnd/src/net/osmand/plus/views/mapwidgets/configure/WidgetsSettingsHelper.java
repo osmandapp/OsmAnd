@@ -110,6 +110,7 @@ public class WidgetsSettingsHelper {
 		int previousPage = -1;
 		List<List<String>> newPagedOrder = new ArrayList<>();
 		List<MapWidgetInfo> defaultWidgetInfos = getDefaultWidgetInfos(panel);
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 
 		for (MapWidgetInfo widgetInfoToCopy : widgetInfosToCopy) {
 			if (!WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfoToCopy.key, appMode)) {
@@ -123,7 +124,7 @@ public class WidgetsSettingsHelper {
 
 			if (defaultWidgetInfo != null) {
 				String widgetIdToAdd;
-				boolean disabled = !defaultWidgetInfo.isEnabledForAppMode(appMode, layoutMode);
+				boolean disabled = !defaultWidgetInfo.isEnabledForAppMode(appMode, widgetsVisibility);
 				boolean inAnotherPanel = defaultWidgetInfo.getWidgetPanel() != panel;
 				if (duplicateNotPossible || (disabled && !inAnotherPanel)) {
 					widgetRegistry.enableDisableWidgetForMode(appMode, defaultWidgetInfo, true, layoutMode, false);

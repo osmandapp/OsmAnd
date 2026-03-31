@@ -21,7 +21,7 @@ import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 public class TargetDistanceWidget extends SimpleWidget {
 
 	private final OsmandMapTileView mapView;
-	private float cachedTargetDistance = -1;
+	private int cachedTargetDistance = -1;
 
 	public TargetDistanceWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, DEV_TARGET_DISTANCE, customId, widgetsPanel);
@@ -37,7 +37,7 @@ public class TargetDistanceWidget extends SimpleWidget {
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
-		float targetDistance = getTargetDistanceInMeters();
+		int targetDistance = getTargetDistanceInMeters();
 		if (isUpdateNeeded() || targetDistance != cachedTargetDistance) {
 			cachedTargetDistance = targetDistance;
 			if (cachedTargetDistance > 0) {
@@ -49,7 +49,7 @@ public class TargetDistanceWidget extends SimpleWidget {
 		}
 	}
 
-	private float getTargetDistanceInMeters() {
+	private int getTargetDistanceInMeters() {
 		MapRendererView mapRenderer = mapView.getMapRenderer();
 		if (mapRenderer != null) {
 			PointI screenPoint = mapRenderer.getTargetScreenPosition();
@@ -59,7 +59,7 @@ public class TargetDistanceWidget extends SimpleWidget {
 			}
 			PointI location = new PointI();
 			if (mapRenderer.getLocationFromElevatedPoint(screenPoint, location)) {
-				return mapRenderer.getMapTargetDistance(location, true) * 1000;
+				return (int) (mapRenderer.getMapTargetDistance(location, true) * 1000);
 			}			
 		}
 		return 0;

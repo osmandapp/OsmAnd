@@ -4,7 +4,6 @@ import static net.osmand.plus.plugins.mapillary.MapillaryImage.CAPTURED_AT_KEY;
 import static net.osmand.plus.plugins.mapillary.MapillaryImage.IS_PANORAMIC_KEY;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -40,6 +39,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.MapUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -96,7 +96,7 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 		if (drawable != null) {
 			bitmapPoint = AndroidUtils.createScaledBitmap(drawable, 1.0f);
 		} else {
-			bitmapPoint = BitmapFactory.decodeResource(app.getResources(), R.drawable.map_mapillary_photo_dot);
+			bitmapPoint = UiUtilities.decodeResource(app.getResources(), R.drawable.map_mapillary_photo_dot);
 		}
 		paintLine = new Paint();
 		paintLine.setStyle(Paint.Style.STROKE);

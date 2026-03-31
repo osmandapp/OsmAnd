@@ -419,11 +419,12 @@ public class StreetNameWidget extends MapWidget {
 		return updatedVisibility;
 	}
 
-	private boolean isAnyStreetNameEnabledForMode(@NonNull FragmentActivity activity,
-			@NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
+	private boolean isAnyStreetNameEnabledForMode(@NonNull FragmentActivity activity, @NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode appMode) {
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
+
 		for (MapWidgetInfo widgetInfo : widgets) {
-			if (widgetInfo.getWidgetType() == STREET_NAME && widgetInfo.isEnabledForAppMode(mode, layoutMode)) {
+			if (widgetInfo.getWidgetType() == STREET_NAME && widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility)) {
 				return true;
 			}
 		}

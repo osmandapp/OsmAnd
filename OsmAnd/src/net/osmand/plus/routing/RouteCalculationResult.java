@@ -454,7 +454,7 @@ public class RouteCalculationResult {
 
 					RouteDataObject rdoWithShield = null;
 					RouteDataObject rdoWithoutShield = null;
-					if (s.getObject().isExitPoint()) {
+					if (s.hasExitInfo()) {
 						ExitInfo exitInfo = new ExitInfo();
 						exitInfo.setRef(current.getObject().getExitRef());
 						exitInfo.setExitStreetName(current.getObject().getExitName());

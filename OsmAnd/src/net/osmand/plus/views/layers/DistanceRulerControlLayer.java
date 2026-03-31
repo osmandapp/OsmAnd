@@ -1,16 +1,9 @@
 package net.osmand.plus.views.layers;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.graphics.*;
 import android.graphics.Paint.Style;
-import android.graphics.Path;
-import android.graphics.PathEffect;
-import android.graphics.PathMeasure;
 import android.graphics.PointF;
-import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Pair;
@@ -23,18 +16,9 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.*;
 import net.osmand.core.jni.MapMarker.PinIconHorisontalAlignment;
 import net.osmand.core.jni.MapMarker.PinIconVerticalAlignment;
-import net.osmand.core.jni.MapMarkerBuilder;
-import net.osmand.core.jni.MapMarkersCollection;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QVectorPointI;
-import net.osmand.core.jni.TextRasterizer;
-import net.osmand.core.jni.VectorDouble;
-import net.osmand.core.jni.VectorLine;
-import net.osmand.core.jni.VectorLineBuilder;
-import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -44,6 +28,7 @@ import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.settings.enums.DistanceByTapTextSize;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer;
@@ -159,8 +144,8 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void createBitmaps(@NonNull OsmandMapTileView view) {
-		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
-		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
+		centerIconDay = UiUtilities.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
+		centerIconNight = UiUtilities.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
 	}
 
 	@Override

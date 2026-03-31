@@ -344,7 +344,11 @@ public class IntentHelper {
 				clearIntent(intent);
 				return true;
 			}
-			return showAmenity(pinLat, pinLon, name, type, wikiDataId, osmId);
+			boolean shown = showAmenity(pinLat, pinLon, name, type, wikiDataId, osmId);
+			if (shown) {
+				clearIntent(intent);
+			}
+			return shown;
 		}
 
 		clearIntent(intent);
@@ -369,6 +373,7 @@ public class IntentHelper {
 				pointDescription.setName(name);
 				settings.setMapLocationToShow(latLon.getLatitude(), latLon.getLongitude(), zoom, pointDescription);
             }
+			clearIntent(intent);
             return true;
         }
 		clearIntent(intent);

@@ -62,7 +62,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -84,12 +83,12 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.MeasurementToolMode;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
+import net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.SegmentActionsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.SplitSegmentDialogFragment;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteListener;
-import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -1196,9 +1195,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					segmentsCard.updateContent();
 				}
 			} else if (buttonIndex == ANALYZE_ON_MAP_BUTTON_INDEX) {
-				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, null);
-				OsmAndTaskManager.executeTask(detailsTask);
-				hide();
+				openTrackAnalyzeOnMap(gpxFile);
 			} else if (buttonIndex == ANALYZE_BY_INTERVALS_BUTTON_INDEX) {
 				TrkSegment segment = gpxFile.getGeneralSegment();
 				if (segment == null) {
@@ -1540,6 +1537,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		trackDetailsMenu.setSelectedGpxFile(selectedGpxFile);
 		trackDetailsMenu.show();
 		hide();
+	}
+
+	private void openTrackAnalyzeOnMap(@NonNull GpxFile gpxFile) {
+		GpxTrackAnalysis analysis = this.analysis != null ? this.analysis : selectedGpxFile.getTrackAnalysisToDisplay(app);
+		GpxDisplayItem gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, TrackDetailsMenu.ChartPointLayer.GPX, analysis);
+		if (gpxItem != null) {
+			GPXItemPagerAdapter.prepareGpxItemChartTypes(gpxItem, null, app.getSettings());
+			openAnalyzeOnMap(gpxItem);
+		}
 	}
 
 	@Override

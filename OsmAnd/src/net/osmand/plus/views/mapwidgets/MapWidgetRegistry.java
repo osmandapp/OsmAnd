@@ -68,9 +68,11 @@ public class MapWidgetRegistry {
 	public boolean isAnyWidgetOfTypeVisible(@NonNull MapActivity activity, @NonNull WidgetType widgetType) {
 		ApplicationMode appMode = settings.getApplicationMode();
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
+
 		List<MapWidgetInfo> widgets = getWidgetInfoForType(widgetType);
 		for (MapWidgetInfo widgetInfo : widgets) {
-			if (widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
+			if (widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility)) {
 				return true;
 			}
 		}
@@ -300,6 +302,7 @@ public class MapWidgetRegistry {
 			includedWidgetTypes.add(SimpleWidgetInfo.class);
 		}
 		Set<MapWidgetInfo> filteredWidgets = new TreeSet<>();
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 		for (MapWidgetInfo widget : widgetInfos) {
 			boolean panelSupported = false;
 			if (sidePanel) {
@@ -315,8 +318,8 @@ public class MapWidgetRegistry {
 				boolean defaultMode = (filterModes & DEFAULT_MODE) == DEFAULT_MODE;
 				boolean matchingPanelsMode = (filterModes & MATCHING_PANELS_MODE) == MATCHING_PANELS_MODE;
 
-				boolean passDisabled = !disabledMode || !widget.isEnabledForAppMode(appMode, layoutMode);
-				boolean passEnabled = !enabledMode || widget.isEnabledForAppMode(appMode, layoutMode);
+				boolean passDisabled = !disabledMode || !widget.isEnabledForAppMode(appMode, widgetsVisibility);
+				boolean passEnabled = !enabledMode || widget.isEnabledForAppMode(appMode, widgetsVisibility);
 				boolean passAvailable = !availableMode || WidgetsAvailabilityHelper.isWidgetAvailable(app, widget.key, appMode);
 				boolean defaultAvailable = !defaultMode || !widget.isCustomWidget();
 				boolean passMatchedPanels = !matchingPanelsMode || panels.contains(widget.getUpdatedPanel(layoutMode));
