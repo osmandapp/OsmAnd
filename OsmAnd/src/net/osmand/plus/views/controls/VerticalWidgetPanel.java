@@ -280,17 +280,18 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 	}
 
 	@NonNull
-	protected List<Set<MapWidgetInfo>> getWidgetsToShow(ApplicationMode mode, List<MapWidget> widgetsToShow) {
+	protected List<Set<MapWidgetInfo>> getWidgetsToShow(ApplicationMode appMode, List<MapWidget> widgetsToShow) {
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
 		Set<MapWidgetInfo> allPanelWidget = widgetRegistry.getWidgetsForPanel(getWidgetsPanel());
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 
 		Map<Integer, Set<MapWidgetInfo>> rowWidgetMap = new TreeMap<>();
 		for (MapWidgetInfo widgetInfo : allPanelWidget) {
-			if (widgetInfo.isEnabledForAppMode(mode, layoutMode)) {
+			if (widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility)) {
 				addWidgetViewToPage(rowWidgetMap, widgetInfo.pageIndex, widgetInfo);
 				widgetsToShow.add(widgetInfo.widget);
 			} else {
-				widgetInfo.widget.detachView(getWidgetsPanel(), new ArrayList<>(allPanelWidget), mode);
+				widgetInfo.widget.detachView(getWidgetsPanel(), new ArrayList<>(allPanelWidget), appMode);
 			}
 		}
 		return new ArrayList<>(rowWidgetMap.values());
@@ -355,9 +356,11 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 
 			ApplicationMode appMode = settings.getApplicationMode();
 			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
+			List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
+
 			for (int j = 0; j < rowWidgets.size(); j++) {
 				MapWidgetInfo widgetInfo = rowWidgets.get(j);
-				if (widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
+				if (widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility)) {
 					enabledMapWidgets.add(widgetInfo);
 				} else {
 					widgetInfo.widget.detachView(getWidgetsPanel(), rowWidgets, appMode);

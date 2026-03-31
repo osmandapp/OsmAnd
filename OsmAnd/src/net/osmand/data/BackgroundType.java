@@ -3,13 +3,13 @@ package net.osmand.data;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
+import net.osmand.plus.utils.UiUtilities;
 
 public enum BackgroundType {
 
@@ -71,7 +71,7 @@ public enum BackgroundType {
 		Resources res = ctx.getResources();
 		String iconName = res.getResourceEntryName(getIconId());
 		String suffix = isSmall ? "_small" : "";
-		return BitmapFactory.decodeResource(res, res.getIdentifier("ic_" + iconName + "_" + layer + suffix,
+		return UiUtilities.decodeResource(res, res.getIdentifier("ic_" + iconName + "_" + layer + suffix,
 				"drawable", ctx.getPackageName()));
 	}
 }

@@ -24,19 +24,20 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.utils.OsmAndFormatterParams;
-import net.osmand.shared.settings.enums.AngularConstants;
-import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.shared.settings.enums.AngularConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -170,8 +171,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		bitmapOptions.inScreenDensity = densityDpi;
 		bitmapOptions.inTargetDensity = densityDpi;
 		bitmapOptions.inScaled = true;
-		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day, bitmapOptions);
-		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night, bitmapOptions);
+		centerIconDay = UiUtilities.decodeResource(view.getResources(), R.drawable.map_ruler_center_day, bitmapOptions);
+		centerIconNight = UiUtilities.decodeResource(view.getResources(), R.drawable.map_ruler_center_night, bitmapOptions);
 	}
 
 	@Override

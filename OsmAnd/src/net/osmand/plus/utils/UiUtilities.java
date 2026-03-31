@@ -5,8 +5,10 @@ import static net.osmand.plus.views.mapwidgets.TopToolbarController.NO_COLOR;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -86,6 +88,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.List;
 import java.util.Set;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -822,10 +825,11 @@ public class UiUtilities {
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		Set<MapWidgetInfo> topWidgetsInfo = widgetRegistry.getWidgetsForPanel(WidgetsPanel.TOP);
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 
 		for (MapWidgetInfo widgetInfo : topWidgetsInfo) {
 			MapWidget widget = widgetInfo.widget;
-			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
+			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility)) {
 				continue;
 			}
 			if (widget instanceof StreetNameWidget) {
@@ -846,10 +850,11 @@ public class UiUtilities {
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		Set<MapWidgetInfo> topWidgetsInfo = widgetRegistry.getWidgetsForPanel(WidgetsPanel.TOP);
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 
 		for (MapWidgetInfo widgetInfo : topWidgetsInfo) {
 			MapWidget widget = widgetInfo.widget;
-			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
+			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility)) {
 				continue;
 			}
 			if (widget instanceof SimpleWidget || widget instanceof CoordinatesBaseWidget || widget instanceof IComplexWidget) {
@@ -861,8 +866,16 @@ public class UiUtilities {
 		return true;
 	}
 
+	public static Bitmap decodeResource(Resources res, int id) {
+		return decodeResource(res, id, null);
+	}
+
+	public static Bitmap decodeResource(Resources res, int id, Options opts) {
+		return BitmapFactory.decodeResource(res, id, opts);
+	}
+
 	public Bitmap getScaledBitmap(@UiContext Context context, @DrawableRes int drawableId, float scale) {
-		Bitmap bitmap = BitmapFactory.decodeResource(context == null ? app.getResources() : context.getResources(), drawableId);
+		Bitmap bitmap = decodeResource(context == null ? app.getResources() : context.getResources(), drawableId);
 		if (bitmap != null && scale != 1f && scale > 0) {
 			bitmap = AndroidUtils.scaleBitmap(bitmap,
 					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
