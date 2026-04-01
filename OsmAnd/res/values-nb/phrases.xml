@@ -1778,7 +1778,7 @@
     <string name="poi_parking_fee_filter">Parkeringsavgift</string>
     <string name="poi_runway">Landingsbane</string>
     <string name="poi_power_substation">Trafostasjon</string>
-    <string name="poi_power_pole">Elverksstolpe</string>
+    <string name="poi_power_pole">Strømstolpe</string>
     <string name="poi_waste_disposal">Avfallshåndtering</string>
     <string name="poi_paediatrics">Pediatri</string>
     <string name="poi_denomination_russian_orthodox">Russisk-ortodoks</string>
@@ -2025,4 +2025,10 @@
     <string name="poi_recycling_second_hand">Brukt</string>
     <string name="poi_recycling_small_metal">Små metalldeler</string>
     <string name="poi_recycling_refund_bottles">Panteflasker</string>
+    <string name="poi_flagpole">Flaggstang</string>
+    <string name="poi_video_yes">Ja;Video</string>
+    <string name="poi_piste_downhill">Utforløype;Skiløype;Skibakke</string>
+    <string name="poi_skiing">Ski</string>
+    <string name="poi_route_activity_type_waterskiing">Vannski</string>
+    <string name="poi_sample_collection">Prøvetaking;Blod;Laboratorie;Test</string>
 </resources>

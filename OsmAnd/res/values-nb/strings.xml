@@ -6039,4 +6039,8 @@
     <string name="astro_schedule_show_current_week">Vis gjeldende uke</string>
     <string name="astro_visibility_show_today">Vis synlighet i dag</string>
     <string name="astro_schedule_next_day_note">⁺¹ Neste dag.</string>
+    <string name="compass_calibration_needed">Kompasskalibrering trengs</string>
+    <string name="shared_string_clear_filters">Tøm filtre</string>
+    <string name="astro_sort_newest_first">Nyeste først</string>
+    <string name="astro_sort_oldest_first">Eldste først</string>
 </resources>
