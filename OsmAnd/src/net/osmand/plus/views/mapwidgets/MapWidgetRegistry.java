@@ -65,28 +65,6 @@ public class MapWidgetRegistry {
 		notifyWidgetsCleared();
 	}
 
-	public boolean isAnyWidgetOfTypeVisible(@NonNull MapActivity activity, @NonNull WidgetType widgetType) {
-		ApplicationMode appMode = settings.getApplicationMode();
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
-		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
-
-		List<MapWidgetInfo> widgets = getWidgetInfoForType(widgetType);
-		for (MapWidgetInfo widgetInfo : widgets) {
-			if (widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean isWidgetVisible(@NonNull MapActivity activity, @NonNull String widgetId) {
-		ApplicationMode appMode = settings.getApplicationMode();
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
-
-		MapWidgetInfo widgetInfo = getWidgetInfoById(widgetId);
-		return widgetInfo != null && widgetInfo.isEnabledForAppMode(appMode, layoutMode);
-	}
-
 	public void enableDisableWidgetForMode(@NonNull ApplicationMode appMode,
 	                                       @NonNull MapWidgetInfo widgetInfo,
 	                                       @Nullable Boolean enabled,
@@ -206,6 +184,30 @@ public class MapWidgetRegistry {
 			}
 		}
 		return null;
+	}
+
+	public void collectWidgetsInfo(@NonNull List<MapWidgetInfo> widgetInfos,
+			@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode,
+			@Nullable String widgetId, @Nullable WidgetType widgetType, @Nullable Boolean enabled) {
+		boolean checkId = widgetId != null;
+		boolean checkType = widgetType != null;
+		boolean checkState = enabled != null;
+		List<String> visibility = checkState ? MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode) : null;
+
+		for (Set<MapWidgetInfo> panelWidgets : allWidgets.values()) {
+			for (MapWidgetInfo widget : panelWidgets) {
+				if (checkId && !Algorithms.stringsEqual(widgetId, widget.key)) {
+					continue;
+				}
+				if (checkType && widgetType != widget.getWidgetType()) {
+					continue;
+				}
+				if (checkState && enabled != widget.isEnabledForAppMode(appMode, visibility)) {
+					continue;
+				}
+				widgetInfos.add(widget);
+			}
+		}
 	}
 
 	@NonNull

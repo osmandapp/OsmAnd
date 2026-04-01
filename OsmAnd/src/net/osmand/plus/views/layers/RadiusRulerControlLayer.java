@@ -23,7 +23,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.NativeUtilities;
@@ -97,7 +99,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	};
 
 	private float cachedHeading;
-	private boolean isCarViewMap = false;
 
 	public RadiusRulerControlLayer(@NonNull Context ctx) {
 		super(ctx);
@@ -243,18 +244,21 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		}
 	}
 
-	public boolean isRulerWidgetOn() {
-		boolean isWidgetVisible = false;
-		List<MapWidgetInfo> widgets = widgetRegistry.getWidgetInfoForType(RADIUS_RULER);
-		for (MapWidgetInfo widget : widgets) {
-			isWidgetVisible = isWidgetVisible(widget) && isPanelVisible(widget.getWidgetPanel());
-			if (isWidgetVisible) break;
-		}
-		return isWidgetVisible;
-	}
+	private final List<MapWidgetInfo> rulerWidgets = new ArrayList<>();
 
-	private boolean isWidgetVisible(@NonNull MapWidgetInfo widgetInfo) {
-		return widgetRegistry.isWidgetVisible(requireMapActivity(), widgetInfo.key);
+	public boolean isRulerWidgetOn() {
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(requireMapActivity());
+
+		rulerWidgets.clear();
+		widgetRegistry.collectWidgetsInfo(rulerWidgets, appMode, layoutMode, null, RADIUS_RULER, true);
+
+		for (int i = 0; i < rulerWidgets.size(); i++) {
+			if (isPanelVisible(rulerWidgets.get(i).getWidgetPanel())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean isPanelVisible(WidgetsPanel widgetsPanel) {
