@@ -112,6 +112,7 @@ import net.osmand.shared.obd.OBDDataComputer;
 import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
+import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
@@ -137,6 +138,8 @@ public class OsmandSettings {
 
 	public static final String RENDERER_PREFERENCE_PREFIX = "nrenderer_";
 	public static final String ROUTING_PREFERENCE_PREFIX = "prouting_";
+
+	private static final Map<String, String> PREFERENCES_NAMES_CACHE = new LinkedHashMap<>();
 
 	public static final float SIM_MIN_SPEED = 5 / 3.6f;
 	/// Settings variables
@@ -282,9 +285,13 @@ public class OsmandSettings {
 		String sharedPreferencesName = !Algorithms.isEmpty(CUSTOM_SHARED_PREFERENCES_NAME) ? CUSTOM_SHARED_PREFERENCES_NAME : SHARED_PREFERENCES_NAME;
 		if (modeKey == null) {
 			return sharedPreferencesName;
-		} else {
-			return sharedPreferencesName + "." + modeKey.toLowerCase();
 		}
+		String result = PREFERENCES_NAMES_CACHE.get(modeKey);
+		if (result == null || !result.startsWith(sharedPreferencesName)) {
+			result = sharedPreferencesName + "." + modeKey.toLowerCase();
+			PREFERENCES_NAMES_CACHE.put(modeKey, result);
+		}
+		return result;
 	}
 
 	public static boolean areSettingsCustomizedForPreference(String sharedPreferencesName, OsmandApplication app) {
@@ -1654,6 +1661,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference(this, "fast_route_mode", true).makeProfile();
 
 	public static boolean IGNORE_MISSING_MAPS = false;
+	public static boolean STOP_ON_MISSING_MAPS = false;
 	public final CommonPreference<RoutingType> ROUTING_TYPE = new EnumStringPreference<>(this, "routing_method", HH_CPP, RoutingType.values()).makeProfile().cache();
 	public final CommonPreference<ApproximationType> APPROXIMATION_TYPE = new EnumStringPreference<>(this, "approximation_method_r49_default", APPROX_GEO_CPP, ApproximationType.values()).makeProfile().cache();
 
@@ -3550,5 +3558,9 @@ public class OsmandSettings {
 				preference.setModeValue(mode, allow);
 			}
 		}
+	}
+
+	public void setStopOnMissingMaps(boolean state) {
+		STOP_ON_MISSING_MAPS = state;
 	}
 }

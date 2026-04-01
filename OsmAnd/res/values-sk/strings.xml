@@ -4729,7 +4729,6 @@
     <string name="offline_cache">Offline vyrovnávacia pamäť</string>
     <string name="shared_string_alt_name">Alternatívny názov</string>
     <string name="token_is_not_valid">Token nie je platný</string>
-    <string name="shared_string_all_world">Celý svet</string>
     <string name="weather_forecast">Predpoveď počasia</string>
     <string name="offline_weather_forecast_desc">Môžete stiahnuť predpoveď počasia na 7 dní.</string>
     <string name="weather_forecast_is_outdated">Predpoveď je zastaralá.</string>
@@ -6124,4 +6123,22 @@
     <string name="start_free_trial">Začať skúšku zdarma</string>
     <string name="subscription_free_trial_with_price">%1$s zdarma, potom %2$s</string>
     <string name="subscription_then_price">potom %1$s</string>
+    <string name="purchases_feature_desc_astronomy">Preskúmajte nočnú oblohu s offline mapou a katalógom hviezd. Plánujte pozorovania pomocou šikovných grafov viditeľnosti, dennými rozvrhmi a interaktívnym režimom rozšírenej reality.</string>
+    <string name="astro_expand_your_universe_title">Rozšírte svoj vesmír</string>
+    <string name="astro_expand_your_universe_description">Získajte prístup k rozšírenej databáze katalógov hlbokého vesmíru, článkov Wikipédie a režimu rozšírenej reality offline.</string>
+    <string name="astro_offline_knowledge_base_title">Báza znalostí offline</string>
+    <string name="astro_offline_knowledge_base_description">Stiahnite si rozšírenú databázu pre prístup k článkom Wikipédie a katalógom hlbokého vesmíru offline.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Nasledujúci deň.</string>
+    <string name="astro_visibility_show_today">Zobraziť viditeľnosť dnes</string>
+    <string name="astro_schedule_show_current_week">Zobraziť tento týždeň</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="compass_calibration_needed">Je potrebná kalibrácia kompasu</string>
+    <string name="sensors_not_available_for_ar">Nie sú dostupné senzory pre rozšírenú realitu</string>
+    <string name="ar_mode_enabled">Režim rozšírenej reality zapnutý</string>
+    <string name="ar_mode_disabled">Režim rozšírenej reality vypnutý</string>
+    <string name="shared_string_clear_filters">Vymazať filtre</string>
+    <string name="astro_sort_newest_first">Od najnovšieho</string>
+    <string name="astro_sort_oldest_first">Od najstaršieho</string>
+    <string name="shared_string_world_weather_map">Svetová mapa počasia</string>
+    <string name="release_5_3">• Pridané 3D budovy\n\n • Guľaté zobrazenie mapy\n\n • Modul Astronómia s nočnou oblohou a databázou hviezd\n\n • Nové farebné režimy pre Tachometer: tolerancia a prekročenie rýchlosti\n\n • Samostatné rozloženie nástrojov pre režim na výšku a na šírku\n\n • Nástroj nahrávania výletu: Rýchlosť pohybu a priemerná rýchlosť\n\n • Nástroj napätia adaptéra pre merania vozidla\n\n • Údaje merania vozidla pri analýze stôp\n\n • Automatický organizátor stôp podľa roku, dĺžky, aktivity a ďalších vlastností\n\n • Editor palety pre zobrazenie terénu a stôp\n\n • Vylepšený algoritmus vyhľadávania a zlepšené rozhranie\n\n • Opravené profily nadmorskej výšky pre trasy\n\n • Obľúbené: nové možnosti triedenia a vylepšenie rozhrania\n\n • Linka pre zdieľanie ľubovoľného bodu záujmu\n\n • Náhľad bodu trasy bez zatvorenia zoznamu\n\n • Parameter šírky bicykla pre vyhnutie sa úzkym cestám\n\n • Popisy fotografií z Wikimedia</string>
 </resources>

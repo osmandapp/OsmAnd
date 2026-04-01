@@ -4627,7 +4627,6 @@
     <string name="token_is_not_valid">Le jeton n\'est pas valide</string>
     <string name="metric_lbs">livres</string>
     <string name="weather_forecast_is_outdated">Les prévisions ne sont pas à jour.</string>
-    <string name="shared_string_all_world">Monde entier</string>
     <string name="shared_string_pounds">livres</string>
     <string name="free_maps_updates">Mises à jour gratuites (urgence)</string>
     <string name="common_weight_limit_error">La valeur minimale est « %1$s » %2$s. Si le poids de votre véhicule est inférieur à cette valeur, utilisez le profil « %3$s ».</string>
@@ -5299,7 +5298,7 @@
     <string name="delete_widget_description">Ce widget sera supprimé. Vous pourrez le restaurer plus tard dans Configurer l’écran.</string>
     <string name="delete_widget">Supprimer le widget ?</string>
     <string name="battery_saving_mode">Mode économie d\'énergie</string>
-    <string name="graph_axis">Axe du graphique</string>
+    <string name="graph_axis">Axes du graphique</string>
     <string name="y_axis_description">Sélectionnez jusqu\'à deux options d\'ordonnées.</string>
     <string name="app_mode_suv">SUV</string>
     <string name="shared_string_interface">Interface</string>
@@ -5809,9 +5808,9 @@
     <string name="routing_attr_pt_limit_name">Afficher les N meilleurs itinéraires</string>
     <string name="routing_attr_pt_limit_description">Spécifiez le nombre de meilleurs itinéraires à afficher</string>
     <string name="delete_folder_description">Supprimer le dossier « %1$s » ?</string>
-    <string name="show_spherical_map">Vue Globe terrestre</string>
+    <string name="show_spherical_map">Vue globe terrestre</string>
     <string name="enable_3d_objects">Bâtiments 3D</string>
-    <string name="vehicle_metrics_chart_category">Caractéristiques techniques du véhicule</string>
+    <string name="vehicle_metrics_chart_category">Mesures du véhicule</string>
     <string name="lang_mi">Māori</string>
     <string name="buildings_3d_detail_level">Détail des bâtiments 3D</string>
     <string name="has_vehicle_metrics">À partir des données OBDII</string>
@@ -6029,6 +6028,21 @@
     <string name="subscription_free_trial_with_price">%1$s gratuit, puis %2$s</string>
     <string name="subscription_then_price">puis %1$s</string>
     <string name="astro_expand_your_universe_title">Augmentez votre Univers</string>
-    <string name="purchases_feature_desc_astronomy">Explorez le ciel nocturne avec une carte hors-ligne et un catalogue céleste. Planifiez vos observations avec les graphiques à visibilité intelligente, les planifications quotidiennes, et le mode AR interactif.</string>
-    <string name="astro_expand_your_universe_description">Accédez à la base de données des catalogues de cieux profonds, articles Wikipedia et au mode AR hors-ligne.</string>
+    <string name="purchases_feature_desc_astronomy">Explorez le ciel nocturne grâce à une carte hors ligne et à un catalogue astronomique. Planifiez vos observations à l\'aide de graphiques de visibilité intelligents, d\'horaires quotidiens et d\'un mode de réalité augmentée interactif.</string>
+    <string name="astro_expand_your_universe_description">Accédez à la base de données étendue comprenant des catalogues du ciel profond, des articles Wikipédia et le mode de réalité augmentée hors ligne.</string>
+    <string name="astro_offline_knowledge_base_title">Base de connaissances hors ligne</string>
+    <string name="astro_offline_knowledge_base_description">Téléchargez la base de données étendue pour accéder hors ligne aux articles de Wikipédia et aux catalogues du ciel profond.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Le lendemain.</string>
+    <string name="astro_visibility_show_today">Afficher la visibilité d\'aujourd\'hui</string>
+    <string name="astro_schedule_show_current_week">Afficher la semaine en cours</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="release_5_3">• Prise en charge des bâtiments en 3D ajoutée\n\n • Affichage de la carte en vue sphérique\n\n • Module d\'extension d\'astronomie avec carte nocturne et base de données des étoiles\n\n • Nouveaux modes de couleur pour le compteur de vitesse : tolérance et excès de vitesse\n\n • Dispositions distinctes des widgets pour les modes paysage et portrait\n\n • Widgets d\'enregistrement de trajet : vitesse de déplacement et vitesse moyenne\n\n • Widget de tension de l\'adaptateur pour les données du véhicule\n\n • Données du véhicule dans l\'analyseur de parcours\n\n • Organisation automatique des parcours par année, longueur, activité et plus encore\n\n • Éditeur de palette pour la visualisation du terrain et des parcours\n\n • Algorithmes de recherche améliorés et interface utilisateur actualisée\n\n • Profils d\'altitude corrigés pour les itinéraires\n\n • Favoris : nouvelles options de tri et interface utilisateur actualisée\n\n • Partage de lien vers n\'importe quel point d\'intérêt\n\n • Aperçu des points de cheminement sans fermer la liste\n\n • Paramètre de largeur du vélo pour éviter les routes étroites\n\n • Descriptions des photos provenant de Wikimedia</string>
+    <string name="shared_string_clear_filters">Effacer les filtres</string>
+    <string name="astro_sort_newest_first">Récents en premier</string>
+    <string name="astro_sort_oldest_first">Anciens en premier</string>
+    <string name="compass_calibration_needed">Étalonnage de la boussole nécessaire</string>
+    <string name="sensors_not_available_for_ar">Capteur indisponible pour l\'AR</string>
+    <string name="ar_mode_enabled">Mode AR activé</string>
+    <string name="ar_mode_disabled">Mode AR désactivé</string>
+    <string name="shared_string_world_weather_map">Carte météorologique mondiale</string>
 </resources>

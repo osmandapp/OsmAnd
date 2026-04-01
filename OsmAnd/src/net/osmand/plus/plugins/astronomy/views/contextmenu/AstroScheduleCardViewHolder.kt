@@ -33,6 +33,7 @@ class AstroScheduleCardViewHolder(
 	)
 
 	private val rangeText: TextView = itemView.findViewById(R.id.schedule_range)
+	private val noteText: TextView = itemView.findViewById(R.id.schedule_note)
 	private val dateButton: View = itemView.findViewById(R.id.schedule_date_button)
 	private val prevButton: View = itemView.findViewById(R.id.schedule_prev_button)
 	private val nextButton: View = itemView.findViewById(R.id.schedule_next_button)
@@ -41,6 +42,7 @@ class AstroScheduleCardViewHolder(
 
 	fun bind(item: AstroScheduleCardItem) {
 		rangeText.text = item.rangeLabel
+		noteText.isVisible = item.days.any { day -> day.setDayOffset > 0 }
 		dateButton.isVisible = item.showResetPeriodButton
 		dateButton.setOnClickListener { onResetPeriod() }
 		prevButton.setOnClickListener { onShiftPeriod(-AstroScheduleCardController.PERIOD_DAYS) }
@@ -101,8 +103,8 @@ class AstroScheduleCardViewHolder(
 			block = row.setViews,
 			time = dayEntry.setTime,
 			arrow = SET_ARROW,
-			suffix = if (dayEntry.setNextDay) {
-				itemView.context.getString(R.string.astro_next_day_suffix)
+			suffix = if (dayEntry.setDayOffset > 0) {
+				"+${dayEntry.setDayOffset}"
 			} else {
 				null
 			}

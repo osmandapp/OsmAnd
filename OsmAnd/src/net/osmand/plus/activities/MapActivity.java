@@ -7,7 +7,6 @@ import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
 import static net.osmand.plus.settings.enums.ThemeUsageContext.MAP;
-import static net.osmand.plus.settings.enums.ThemeUsageContext.OVER_MAP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
 import android.Manifest;
@@ -31,7 +30,6 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -110,7 +108,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
@@ -512,29 +509,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
 	}
 
-	public void setupRouteCalculationProgressBar(@NonNull ProgressBar pb) {
-		RoutingHelper routingHelper = getRoutingHelper();
-		setupProgressBar(pb, routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting());
-	}
-
-	public void setupProgressBar(@NonNull ProgressBar pb, boolean indeterminate) {
-		DayNightHelper dayNightHelper = app.getDaynightHelper();
-
-		boolean nightMode = dayNightHelper.isNightMode(OVER_MAP);
-		boolean useRouteLineColor = nightMode == dayNightHelper.isNightMode(ThemeUsageContext.MAP);
-
-		int bgColorId = nightMode ? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light;
-		int bgColor = ContextCompat.getColor(this, bgColorId);
-
-		int progressColor = useRouteLineColor
-				? getMapLayers().getRouteLayer().getRouteLineColor(nightMode)
-				: ContextCompat.getColor(this, R.color.active_color_primary_light);
-
-		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
-		pb.setIndeterminate(indeterminate);
-		pb.getIndeterminateDrawable().setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN);
-	}
-
 	public ImportHelper getImportHelper() {
 		return importHelper;
 	}
@@ -854,8 +828,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void updateStatusBarColor() {
-		updateNavigationBarColor();
-		UiUtilities.updateStatusBarColor(this);
+		UiUtilities.updateSystemBarColors(this);
 	}
 
 	@Override
@@ -1001,7 +974,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					editingContext.setGpxData(gpxData);
 					MeasurementToolFragment.showInstance(getSupportFragmentManager(), editingContext, PLAN_ROUTE_MODE, true);
 				} else {
-					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
+					if (mapContextMenu.isVisible()) {
+						mapContextMenu.update(latLonToShow, mapLabelToShow, toShow);
+					} else {
+						mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
+					}
 				}
 				if (editToShow) {
 					mapContextMenu.openEditor();

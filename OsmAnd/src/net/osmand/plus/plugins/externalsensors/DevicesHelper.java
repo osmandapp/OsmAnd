@@ -326,7 +326,9 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 
 	void updateDevice(@Nullable Activity activity, @NonNull AbstractDevice<?> device) {
 		if (isDeviceEnabled(device) && device.isDisconnected()) {
-			connectDevice(activity, device);
+			if (device instanceof AntAbstractDevice<?> || (activity != null && BLEUtils.INSTANCE.isBLEEnabled(activity))) {
+				connectDevice(activity, device);
+			}
 		} else if (!isDeviceEnabled(device) && device.isConnected()) {
 			disconnectDevice(device);
 		}

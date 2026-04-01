@@ -4676,7 +4676,6 @@
     <string name="shared_string_pounds">фунтов</string>
     <string name="metric_lbs">фунт</string>
     <string name="weather_forecast_is_outdated">Прогноз устарел.</string>
-    <string name="shared_string_all_world">Весь мир</string>
     <string name="weather_forecast">Прогноз погоды</string>
     <string name="offline_weather_forecast">Прогноз погоды офлайн</string>
     <string name="offline_weather_forecast_desc">Вы можете скачать прогноз погоды на 7 дней.</string>
@@ -6038,4 +6037,22 @@
     <string name="start_free_trial">Попробуйте бесплатно</string>
     <string name="subscription_free_trial_with_price">%1$s бесплатно, затем %2$s</string>
     <string name="subscription_then_price">затем %1$s</string>
+    <string name="compass_calibration_needed">Требуется калибровка компаса</string>
+    <string name="sensors_not_available_for_ar">Датчики, недоступные для ДР</string>
+    <string name="ar_mode_enabled">Включен режим дополненной реальности</string>
+    <string name="ar_mode_disabled">Режим дополненной реальности отключен</string>
+    <string name="release_5_3">• Добавлена поддержка 3D-зданий\n\n • Сферический вид карты\n\n • Астрономический плагин с ночной картой и базой данных звезд\n\n • Новые цветовые режимы для спидометра: допустимое превышение скорости и превышение скорости\n\n • Отдельные макеты виджетов для альбомной и портретной ориентации\n\n • Виджеты для записи поездок: скорость движения и средняя скорость\n\n • Виджет с напряжением адаптера для Показателей транспортного средства\n\n • Данные о технических характеристиках автомобиля в Анализаторе треков\n\n • Автоматическая сортировка треков по годам, продолжительности, активности и другим параметрам\n\n • Редактор палитры для визуализации рельефа и треков\n\n • Улучшенные алгоритмы поиска и обновленный пользовательский интерфейс\n\n • Фиксированные профили высот для маршрутов\n\n • Избранное: новые возможности сортировки и обновленный интерфейс\n\n • Поделитесь ссылкой на любую точку интереса\n\n • Предварительный просмотр путевых точек без закрытия списка\n\n • Параметр ширины велосипеда для езды по узким дорогам\n\n • Описания фотографий из Викимедиа</string>
+    <string name="purchases_feature_desc_astronomy">Исследуйте ночное небо с помощью офлайн-карты и каталога небесных тел. Планируйте наблюдения с помощью удобных графиков видимости, ежедневных расписаний и интерактивного режима дополненной реальности.</string>
+    <string name="shared_string_clear_filters">Очистить фильтры</string>
+    <string name="astro_sort_newest_first">Самый новый в начале</string>
+    <string name="astro_sort_oldest_first">Самый старый в начале</string>
+    <string name="astro_expand_your_universe_title">Расширяйте свою вселенную</string>
+    <string name="astro_expand_your_universe_description">Получите доступ к расширенной базе данных каталогов объектов дальнего космоса, статьям Википедии и режиму дополненной реальности в автономном режиме.</string>
+    <string name="astro_offline_knowledge_base_title">Автономная база знаний</string>
+    <string name="astro_offline_knowledge_base_description">Скачать расширенную базу данных, чтобы получать доступ к статьям Википедии и каталогам объектов дальнего космоса без подключения к интернету.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Следующий день.</string>
+    <string name="astro_visibility_show_today">Показать сегодняшнюю видимость</string>
+    <string name="astro_schedule_show_current_week">Показать текущую неделю</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="shared_string_world_weather_map">Карта погоды в мире</string>
 </resources>

@@ -4754,7 +4754,6 @@
     <string name="shared_string_pounds">Pfund</string>
     <string name="metric_lbs">lbs</string>
     <string name="weather_forecast_is_outdated">Die Vorhersage ist veraltet.</string>
-    <string name="shared_string_all_world">Die ganze Welt</string>
     <string name="weather_forecast">Wettervorhersage</string>
     <string name="free_maps_updates">Kostenlose Aktualisierung (Notfall)</string>
     <string name="token_is_not_valid">Token ist ungültig</string>
@@ -6136,4 +6135,22 @@
     <string name="start_free_trial">Gratiszeitraum starten</string>
     <string name="subscription_free_trial_with_price">%1$s kostenlos, dann %2$s</string>
     <string name="subscription_then_price">dann %1$s</string>
+    <string name="shared_string_world_weather_map">Welt-Wetterkarte</string>
+    <string name="compass_calibration_needed">Kompass-Kalibrierung erforderlich</string>
+    <string name="sensors_not_available_for_ar">Sensoren nicht verfügbar für AR</string>
+    <string name="ar_mode_enabled">AR-Modus aktiv</string>
+    <string name="ar_mode_disabled">AR-Modus aus</string>
+    <string name="purchases_feature_desc_astronomy">Erkunde den Nachthimmel durch Offline-Karte und Sternenatlas. Plane Beobachtungen durch intelligente Sichtbarkeitsdiagramme, Tagesgänge und einen interaktiven AR-Modus.</string>
+    <string name="shared_string_clear_filters">Filter deaktivieren</string>
+    <string name="astro_sort_newest_first">Neueste zuerst</string>
+    <string name="astro_sort_oldest_first">Älteste zuerst</string>
+    <string name="astro_expand_your_universe_title">Erweitere dein Universum</string>
+    <string name="astro_expand_your_universe_description">Erhalte Zugang zur erweiterten Datenbank mit Deep-Sky-Katalogen, Wikipedia-Artikeln und Offline-AR-Modus.</string>
+    <string name="astro_offline_knowledge_base_title">Offline-Wissensdatenbank</string>
+    <string name="astro_offline_knowledge_base_description">Lade die erweiterte Datenbank herunter, um offline auf Wikipedia-Artikel und Deep-Sky-Kataloge zuzugreifen.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ am nächsten Tag.</string>
+    <string name="astro_visibility_show_today">Heutige Sichtbarkeit anzeigen</string>
+    <string name="astro_schedule_show_current_week">Diese Woche anzeigen</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="release_5_3">• Unterstützung für 3D-Gebäude hinzugefügt\n\n • Globusansicht\n\n• Astronomie-Erweiterung mit Karte des Nachthimmels und Sternen-Datenbank\n\n• Neue Farb-Modi für Tacho: Toleranz und Überschreitung\n\n• Unterschiedliche Widget-Darstellung für Quer- und Hochformat\n\n• Widgets für Fahrtaufzeichnung: Bewegungsgeschwindigkeit und Durchschnittsgeschwindigkeit\n\n• Widget für Adapter-Spannung für Fahrzeugdaten\n\n• Fahrzeugdaten im Track-Analyzer\n\n• Automatische Sortierung von Tracks nach Jahr, Länge, Aktivität &amp; mehr\n\n• Paletten-Editor für Visualisierung von Gelände und Tracks\n\n• Verbesserte Suchalgorithmen und neue Benutzerschnittstelle\n\n• Höhenprofile für Strecken repariert\n\n• Favoriten: Neue Sortierfilter und neue Benutzerschnittstelle\n\n• Link zu beliebigem POI teilenI\n\n• Wegpunkt-Vorschau ohne die Liste zu schließen\n\n• Parameter „Fahrradbreite“ um schmale Straßen zu vermeiden\n\n• Bildbeschreibungen von Wikimedia</string>
 </resources>

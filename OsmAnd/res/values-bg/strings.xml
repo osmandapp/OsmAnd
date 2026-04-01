@@ -3166,7 +3166,6 @@
     <string name="sort_distance_descending">Първо дългите</string>
     <string name="sort_distance_ascending">Първо кратките</string>
     <string name="sort_duration_descending">Първо продължителните</string>
-    <string name="shared_string_all_world">Целият свят</string>
     <string name="common_weight_limit_error">Минималната стойност е „%1$s“ %2$s. Използвайте профила „%3$s“, ако теглото на превозното средство е по-малко от минималната стойност.</string>
     <string name="cloud_conflicts">Конфликти</string>
     <string name="upload_all">Изпращане всички</string>

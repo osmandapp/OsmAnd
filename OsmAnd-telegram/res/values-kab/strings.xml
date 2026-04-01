@@ -3,12 +3,12 @@
     <string name="proxy_settings">Iɣewwaṛen n upruksi</string>
     <string name="not_logged_in">Ur teqqineḍ ara</string>
     <string name="closing">Amdal</string>
-    <string name="logging_out">Tuffγa</string>
-    <string name="initialization">Tanekra</string>
+    <string name="logging_out">Tuffɣa</string>
+    <string name="initialization">Asekker</string>
     <string name="show_on_map">Sken ɣef tkarḍa</string>
     <string name="shared_string_live">Srid</string>
     <string name="in_time">di %1$s</string>
-    <string name="initializing">Tanekra</string>
+    <string name="initializing">Asekker</string>
     <string name="device_added_successfully">%1$s ittwarna.</string>
     <string name="shared_string_sort_by">Smizwer s</string>
     <string name="by_group">Segrew s</string>
@@ -32,7 +32,7 @@
     <string name="map_and_text">Takarḍa akked uḍris</string>
     <string name="send_location_as_descr">Fren udem n yiznan i igebren adig-ik.</string>
     <string name="send_location_as">Azen adig</string>
-    <string name="open_in_osmand">sken deg OsmAnd</string>
+    <string name="open_in_osmand">Sken-d deg OsmAnd</string>
     <string name="average_speed">Arured alemmas</string>
     <string name="average_altitude">Awrir alemmas</string>
     <string name="time_on_the_move">Tanzagt n tikli</string>
@@ -95,16 +95,16 @@
     <string name="si_nm">Miles iwlalen</string>
     <string name="si_m_s">Imitren di tasint (m/tasint)</string>
     <string name="si_mph">Imilen deg usrag</string>
-    <string name="si_kmh">Kilometr deg usrag</string>
+    <string name="si_kmh">Kilumetr deg usrag</string>
     <string name="mile_per_hour">m/tasint</string>
-    <string name="km_h">h</string>
+    <string name="km_h">km/sr</string>
     <string name="m_s">m/s</string>
     <string name="nm_h">nmi/h</string>
     <string name="min_km">tasint</string>
     <string name="min_mile">tasint</string>
     <string name="m">m</string>
     <string name="km">km</string>
-    <string name="mile">Maori</string>
+    <string name="mile">mi</string>
     <string name="yard">yd</string>
     <string name="shared_string_welcome">Ansuf yiswen</string>
     <string name="shared_string_authorization">Asuter n tsiregt tettwaqbel</string>
@@ -143,7 +143,7 @@
     <string name="share_location_as">Bḍu adɣar</string>
     <string name="add_device">Rnu ibenk</string>
     <string name="shared_string_save">Sekles</string>
-    <string name="shared_string_disable">Désactiver</string>
+    <string name="shared_string_disable">Kkes armad</string>
     <string name="no_internet_connection">Ulac tuqqna Internet</string>
     <string name="shared_string_status">Addad</string>
     <string name="not_found_yet">ulac-it</string>
@@ -176,7 +176,7 @@
     <string name="shared_string_enable">Rmed</string>
     <string name="shared_string_connection">Tuqqna</string>
     <string name="proxy_server">Aqeddac</string>
-    <string name="proxy_port">Port</string>
+    <string name="proxy_port">Tawwurt</string>
     <string name="proxy_credentials">Inekcam n umeẓlu n uḥraz</string>
     <string name="proxy_username">Nom d\'utilisateur</string>
     <string name="proxy_password">Awal n uɛeddi</string>
@@ -244,8 +244,8 @@
     <string name="enter_phone_number">Sekcem uṭṭun n tiliɣri</string>
     <string name="do_not_have_telegram">Ur sɛiɣ ara amiḍan Telegram</string>
     <string name="already_registered_in_telegram">Tesriḍ ad tjerrdeḍ s umiḍan ɣer Telegram akked wuṭṭun n tiliɣri</string>
-    <string name="get_telegram_after_creating_account">Tzemreḍ sakin ad tesqedceḍ asnas-a.</string>
-    <string name="get_telegram_description_continue">Ttxil-k sbedd Telegram daɣen rnu amiḍan.</string>
+    <string name="get_telegram_after_creating_account">Sakin, tzemreḍ ad tesqedceḍ asnas-a.</string>
+    <string name="get_telegram_description_continue">Ttxil-k sbedd Telegram daɣen snulfu-d amiḍan.</string>
     <string name="get_telegram_account_first">Tesriḍ amiḍan Telegram akken ad tesqedceḍ beṭṭu n wadig.</string>
     <string name="get_telegram_title">Ajerred ɣer Telegram</string>
     <string name="open_osmand">Ldi OsmAnd</string>
@@ -273,4 +273,5 @@
     <string name="send_report">Azen aneqqis</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="shared_string_error">Tuccḍa</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>

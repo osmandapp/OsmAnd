@@ -5,8 +5,10 @@ import static net.osmand.plus.views.mapwidgets.TopToolbarController.NO_COLOR;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -28,6 +30,7 @@ import android.view.ViewParent;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.*;
@@ -55,11 +58,14 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.help.HelpArticleUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -82,6 +88,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.List;
 import java.util.Set;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -748,9 +755,7 @@ public class UiUtilities {
 		textView.setHighlightColor(ColorUtilities.getActiveColor(textView.getContext(), nightMode));
 	}
 
-	public static void updateStatusBarColor(@NonNull MapActivity activity) {
-		int colorId = -1;
-		boolean nightModeForContent = true;
+	public static void updateSystemBarColors(@NonNull MapActivity activity) {
 		OsmandApplication app = activity.getApp();
 		OsmandSettings settings = app.getSettings();
 		MapLayers mapLayers = activity.getMapLayers();
@@ -759,24 +764,33 @@ public class UiUtilities {
 		BaseFullScreenFragment fragmentAboveDashboard = fragmentsHelper.getVisibleBaseFullScreenFragment(R.id.fragmentContainer);
 		BaseSettingsFragment settingsFragmentAboveDashboard = fragmentsHelper.getVisibleBaseSettingsFragment(R.id.fragmentContainer);
 		BaseFullScreenFragment fragmentBelowDashboard = fragmentsHelper.getVisibleBaseFullScreenFragment(R.id.routeMenuContainer, R.id.topFragmentContainer, R.id.bottomFragmentContainer);
+
+		int statusBarColorId = -1;
+		int navigationBarColorId = -1;
+		boolean nightModeForContent = true;
 		if (fragmentAboveDashboard != null) {
-			colorId = fragmentAboveDashboard.getStatusBarColorId();
+			statusBarColorId = fragmentAboveDashboard.getStatusBarColorId();
+			navigationBarColorId = fragmentAboveDashboard.getNavigationBarColorId();
 			nightModeForContent = fragmentAboveDashboard.getContentStatusBarNightMode();
 		} else if (settingsFragmentAboveDashboard != null) {
-			colorId = settingsFragmentAboveDashboard.getStatusBarColorId();
+			statusBarColorId = settingsFragmentAboveDashboard.getStatusBarColorId();
+			navigationBarColorId = settingsFragmentAboveDashboard.getNavigationBarColorId();
 			nightModeForContent = settingsFragmentAboveDashboard.getContentStatusBarNightMode();
-
 		} else if (activity.getDashboard().isVisible()) {
-			colorId = activity.getDashboard().getStatusBarColor();
+			statusBarColorId = activity.getDashboard().getStatusBarColor();
 		} else if (fragmentBelowDashboard != null) {
-			colorId = fragmentBelowDashboard.getStatusBarColorId();
+			statusBarColorId = fragmentBelowDashboard.getStatusBarColorId();
+			navigationBarColorId = fragmentBelowDashboard.getNavigationBarColorId();
 			nightModeForContent = fragmentBelowDashboard.getContentStatusBarNightMode();
 		} else if (mapLayers.getMapQuickActionLayer() != null
 				&& mapLayers.getMapQuickActionLayer().isWidgetVisible()) {
-			colorId = R.color.status_bar_transparent_gradient;
+			statusBarColorId = R.color.status_bar_transparent_gradient;
 		}
-		if (colorId != -1) {
-			AndroidUiHelper.setStatusBarColor(activity, ContextCompat.getColor(activity, colorId));
+		if (navigationBarColorId != -1) {
+			AndroidUiHelper.setNavigationBarColor(activity, ContextCompat.getColor(activity, navigationBarColorId), nightModeForContent);
+		}
+		if (statusBarColorId != -1) {
+			AndroidUiHelper.setStatusBarColor(activity, ContextCompat.getColor(activity, statusBarColorId));
 			AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
 			return;
 		}
@@ -798,9 +812,8 @@ public class UiUtilities {
 			if (colorIdForTopWidget != -1) {
 				nightModeForContent = getStatusBarContentNightMode(activity, appMode, nightMode);
 			}
-
-			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
-			color = ContextCompat.getColor(activity, colorId);
+			statusBarColorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
+			color = ContextCompat.getColor(activity, statusBarColorId);
 		}
 		AndroidUiHelper.setStatusBarColor(activity, color);
 		AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
@@ -812,10 +825,11 @@ public class UiUtilities {
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		Set<MapWidgetInfo> topWidgetsInfo = widgetRegistry.getWidgetsForPanel(WidgetsPanel.TOP);
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 
 		for (MapWidgetInfo widgetInfo : topWidgetsInfo) {
 			MapWidget widget = widgetInfo.widget;
-			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
+			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility)) {
 				continue;
 			}
 			if (widget instanceof StreetNameWidget) {
@@ -836,10 +850,11 @@ public class UiUtilities {
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		Set<MapWidgetInfo> topWidgetsInfo = widgetRegistry.getWidgetsForPanel(WidgetsPanel.TOP);
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 
 		for (MapWidgetInfo widgetInfo : topWidgetsInfo) {
 			MapWidget widget = widgetInfo.widget;
-			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
+			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility)) {
 				continue;
 			}
 			if (widget instanceof SimpleWidget || widget instanceof CoordinatesBaseWidget || widget instanceof IComplexWidget) {
@@ -851,12 +866,46 @@ public class UiUtilities {
 		return true;
 	}
 
+	public static Bitmap decodeResource(Resources res, int id) {
+		return decodeResource(res, id, null);
+	}
+
+	public static Bitmap decodeResource(Resources res, int id, Options opts) {
+		return BitmapFactory.decodeResource(res, id, opts);
+	}
+
 	public Bitmap getScaledBitmap(@UiContext Context context, @DrawableRes int drawableId, float scale) {
-		Bitmap bitmap = BitmapFactory.decodeResource(context == null ? app.getResources() : context.getResources(), drawableId);
+		Bitmap bitmap = decodeResource(context == null ? app.getResources() : context.getResources(), drawableId);
 		if (bitmap != null && scale != 1f && scale > 0) {
 			bitmap = AndroidUtils.scaleBitmap(bitmap,
 					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
 		}
 		return bitmap;
+	}
+
+	public static void setupRouteCalculationProgressBar(@NonNull ProgressBar progressBar) {
+		Context context = progressBar.getContext();
+		OsmandApplication app = AndroidUtils.getApp(context);
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		DayNightHelper dayNightHelper = app.getDaynightHelper();
+
+		boolean nightMode = dayNightHelper.isNightMode(OVER_MAP);
+		boolean useRouteLineColor = nightMode == dayNightHelper.isNightMode(ThemeUsageContext.MAP);
+		boolean indeterminate = routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting();
+
+		int bgColorId = nightMode ? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light;
+		int backgroundColor = ContextCompat.getColor(context, bgColorId);
+
+		int progressColor = useRouteLineColor ? app.getOsmandMap().getMapLayers().getRouteLayer().getRouteLineColor(nightMode)
+				: ContextCompat.getColor(context, R.color.active_color_primary_light);
+
+		setupProgressBar(progressBar, progressColor, backgroundColor, indeterminate);
+	}
+
+	public static void setupProgressBar(@NonNull ProgressBar progressBar, @ColorInt int progressColor,
+			@ColorInt int backgroundColor, boolean indeterminate) {
+		progressBar.setProgressDrawable(AndroidUtils.createProgressDrawable(backgroundColor, progressColor));
+		progressBar.setIndeterminate(indeterminate);
+		progressBar.getIndeterminateDrawable().setColorFilter(progressColor, PorterDuff.Mode.SRC_IN);
 	}
 }

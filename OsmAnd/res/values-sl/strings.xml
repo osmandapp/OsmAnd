@@ -4929,7 +4929,6 @@
     <string name="common_weight_limit_error">Najmanjša vrednost je »%1$s« %2$s. Če je masa vozila manjša od najmanjše vrednosti, uporabi profil »%3$s«.</string>
     <string name="weather_forecast_is_outdated">Napoved je zastarela.</string>
     <string name="weather_forecast">Vremenska napoved</string>
-    <string name="shared_string_all_world">Ves svet</string>
     <string name="offline_weather_forecast">Vremenska napoved brez povezave</string>
     <string name="app_mode_moped">Moped</string>
     <string name="disable_vertex_hillshade_3d">Onemogoči senčenja terena vrhov v 3D</string>

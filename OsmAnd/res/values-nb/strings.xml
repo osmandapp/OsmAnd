@@ -4971,7 +4971,6 @@
     <string name="shared_string_alt_name">Alternativt navn</string>
     <string name="token_is_not_valid">Symbolet er ikke gyldig</string>
     <string name="offline_weather_forecast">Frakoblet værmelding</string>
-    <string name="shared_string_all_world">Hele verden</string>
     <string name="weather_forecast">Værmelding</string>
     <string name="offline_weather_forecast_desc">Du kan laste ned 7-dagers værmelding.</string>
     <string name="camera_app">Kameraprogram</string>
@@ -6040,4 +6039,8 @@
     <string name="astro_schedule_show_current_week">Vis gjeldende uke</string>
     <string name="astro_visibility_show_today">Vis synlighet i dag</string>
     <string name="astro_schedule_next_day_note">⁺¹ Neste dag.</string>
+    <string name="compass_calibration_needed">Kompasskalibrering trengs</string>
+    <string name="shared_string_clear_filters">Tøm filtre</string>
+    <string name="astro_sort_newest_first">Nyeste først</string>
+    <string name="astro_sort_oldest_first">Eldste først</string>
 </resources>

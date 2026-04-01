@@ -31,6 +31,7 @@ public class ModedColorsPaletteCard extends ColorsPaletteCard {
 	                              @Nullable ApplicationMode appMode, boolean usedOnMap) {
 		super(activity, controller, appMode, usedOnMap);
 		this.controller = controller;
+		controller.updateSelection();
 	}
 
 	@Override

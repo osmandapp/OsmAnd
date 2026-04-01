@@ -5193,7 +5193,6 @@
     <string name="shared_string_on_map">En el mapa</string>
     <string name="display_position_automatic_descr">Depends on Map orientation: bottom for movement direction, center for all others (en anglès).</string>
     <string name="weather_forecast_is_outdated">La previsió està antiquada.</string>
-    <string name="shared_string_all_world">Tot el món</string>
     <string name="weather_forecast">Previsió meteorològica</string>
     <string name="offline_weather_forecast">Previsió meteorològica fora de línia</string>
     <string name="offline_weather_forecast_desc">Es pot descarregar la previsió meteorològica durant 7 dies.</string>
@@ -5839,4 +5838,10 @@
     <string name="panels_layout_wide">Amplada</string>
     <string name="panels_layout">Disposició dels panells</string>
     <string name="panels_layout_descr">Seleccioneu una disposició dels panells superior i inferior. Poden ser amples, abastant tota l\'amplada de la pantalla, o compactes, encaixant entre els panells laterals i els botons.</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="astro_schedule_show_current_week">Mostra la setmana actual</string>
+    <string name="astro_expand_your_universe_title">Expandiu el vostre univers</string>
+    <string name="astro_offline_knowledge_base_title">Base de coneixement fora de línia</string>
+    <string name="astro_schedule_next_day_note">⁺¹ L\'endemà.</string>
+    <string name="astro_visibility_show_today">Mostra la visibilitat d\'avui</string>
 </resources>

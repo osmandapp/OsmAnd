@@ -4198,7 +4198,6 @@
     <string name="shutter_sound">Slutarljud</string>
     <string name="speak_route_deviation">Meddela avvikelser från rutten</string>
     <string name="offline_cache">Offline-cache</string>
-    <string name="shared_string_all_world">Hela världen</string>
     <string name="proxy_port_max_warning">Maximalt portvärde är %1$s</string>
     <string name="camera_app">Kamera-app</string>
     <string name="shared_string_pounds">pund</string>
