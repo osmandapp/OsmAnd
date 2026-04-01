@@ -666,7 +666,7 @@
     <string name="poi_fuel_electricity">Strom</string>
     <string name="poi_public_transport_stop_position">Halteposition öffentlicher Verkehrsmittel</string>
     <string name="poi_railway_buffer_stop">Eisenbahnprellbock</string>
-    <string name="poi_junction">ABZWEIGUNG</string>
+    <string name="poi_junction">Abzweigung</string>
     <string name="poi_rest_area">Rastplatz</string>
     <string name="poi_observation_tower">Aussichtsturm</string>
     <string name="poi_bell_tower">Glockenturm</string>
