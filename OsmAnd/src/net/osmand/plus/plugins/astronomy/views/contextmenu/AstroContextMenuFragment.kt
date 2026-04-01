@@ -195,6 +195,9 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		val currentTime = getCurrentGraphTime()
 		val currentDate = currentTime.toLocalDate()
 		val objectChanged = uiState.selectedObjectId != obj.id
+		if (objectChanged) {
+			resetOverviewStateForNewObject()
+		}
 		uiState = if (objectChanged) {
 			galleryLoader?.cancel()
 			AstroContextUiState(
@@ -773,6 +776,23 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			SkyObject.Type.GALAXY_CLUSTER,
 			SkyObject.Type.BLACK_HOLE -> R.drawable.ic_action_galaxy
 		}
+	}
+
+	private fun resetOverviewStateForNewObject() {
+		selectedBottomTab = TAB_OVERVIEW
+		if (!::recyclerView.isInitialized || !::appBarLayout.isInitialized) {
+			return
+		}
+		cancelProgrammaticSectionScroll(syncBottomTabSelection = false)
+		recyclerView.stopScroll()
+		selectBottomTabWithoutScroll(TAB_OVERVIEW)
+		scrollToAdapterPositionExactly(0)
+		appBarLayout.setExpanded(true, false)
+		headerCard.alpha = 1f
+		headerCard.isClickable = true
+		collapsedToolbar.alpha = 0f
+		collapsedToolbar.isClickable = false
+		bottomSheetContainer?.let { updateBottomSheetVisuals(it.top) }
 	}
 
 	private fun scrollToSelectedTab(tabPosition: Int) {
