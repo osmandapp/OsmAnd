@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.utils;
 
-
-import static java.lang.String.format;
+import static net.osmand.plus.views.mapwidgets.WidgetType.GLIDE_AVERAGE;
 
 import android.content.Context;
 
@@ -12,13 +11,14 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
+import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.widgets.GlideAverageWidget;
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -36,20 +36,34 @@ public class AverageGlideComputer extends AverageValueComputer {
 	public static final float MAX_VALUE_TO_FORMAT = 100.f;
 	public static final float MIN_ACCEPTABLE_VALUE = 0.1f;
 
+	private final List<Location> locationsToUse = new ArrayList<>();
+	private final List<MapWidgetInfo> glideWidgets = new ArrayList<>();
+
 	public AverageGlideComputer(@NonNull OsmandApplication app) {
 		super(app);
 	}
 
 	@Override
 	protected boolean isEnabled() {
+		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
+		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
+		if (mapInfoLayer == null) {
+			return false;
+		}
+		MapActivity activity = mapInfoLayer.getMapActivity();
+		if (activity == null) {
+			return false;
+		}
 		ApplicationMode appMode = settings.getApplicationMode();
-		MapWidgetRegistry registry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
+		MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
 
-		for (MapWidgetInfo widgetInfo : registry.getAllWidgets()) {
-			MapWidget widget = widgetInfo.widget;
-			if (widget instanceof GlideAverageWidget
-					&& widgetInfo.isEnabledForAppMode(appMode, ScreenLayoutMode.getDefault(widget.getMapActivity()))
-					&& WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, appMode)) {
+		glideWidgets.clear();
+		widgetRegistry.collectWidgetsInfo(glideWidgets, appMode, layoutMode, null, GLIDE_AVERAGE, true);
+
+		for (int i = 0; i < glideWidgets.size(); i++) {
+			MapWidgetInfo info = glideWidgets.get(i);
+			if (WidgetsAvailabilityHelper.isWidgetAvailable(app, info.key, appMode)) {
 				return true;
 			}
 		}
@@ -68,7 +82,8 @@ public class AverageGlideComputer extends AverageValueComputer {
 
 	@Nullable
 	public String getFormattedAverageGlideRatio(long measuredInterval) {
-		List<Location> locationsToUse = new ArrayList<>();
+		locationsToUse.clear();
+
 		long now = System.currentTimeMillis();
 		for (Location location : locations) {
 			long locationTime = location.getTime();
@@ -77,7 +92,6 @@ public class AverageGlideComputer extends AverageValueComputer {
 				locationsToUse.add(location);
 			}
 		}
-
 		if (!Algorithms.isEmpty(locationsToUse)) {
 			double distance = calculateTotalDistance(locationsToUse);
 			double difference = calculateAltitudeDifference(locationsToUse);
@@ -137,16 +151,15 @@ public class AverageGlideComputer extends AverageValueComputer {
 
 		String pattern = ctx.getString(R.string.ltr_or_rtl_combine_via_colon_with_space);
 		if (absRatio > MAX_VALUE_TO_DISPLAY || (absRatio == 1 && divider == 0)) {
-			return format(pattern, "1", "0");
+			return String.format(pattern, "1", "0");
 		} else if (absRatio > MAX_VALUE_TO_FORMAT) {
-			return format(pattern, "" + (int) absRatio * sign, "" + divider);
+			return String.format(pattern, "" + (int) absRatio * sign, "" + divider);
 		} else {
-			return format(pattern, GLIDE_RATIO_FORMATTER.format(absRatio * sign), "" + divider);
+			return String.format(pattern, GLIDE_RATIO_FORMATTER.format(absRatio * sign), "" + divider);
 		}
 	}
 
 	public static boolean areAltitudesEqual(@Nullable Double a1, @Nullable Double a2) {
-		return a1 == null && a2 == null
-				|| a1 != null && a2 != null && Math.abs(a1 - a2) > 0.01;
+		return a1 == null && a2 == null || a1 != null && a2 != null && Math.abs(a1 - a2) > 0.01;
 	}
 }

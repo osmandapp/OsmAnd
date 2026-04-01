@@ -198,6 +198,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (!appMode.isAppModeDerivedFromCar()) {
 			ApplicationMode carMode = ApplicationMode.getFirstCarMode(app);
 			if (carMode != null) {
+				originalAppMode = appMode;
 				settings.setApplicationMode(carMode, false);
 			}
 		}

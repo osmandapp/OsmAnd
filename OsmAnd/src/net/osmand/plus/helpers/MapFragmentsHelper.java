@@ -247,8 +247,7 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 
 	@Nullable
 	public FirstUsageWizardFragment getFirstUsageWizardFragment() {
-		FirstUsageWizardFragment fragment = (FirstUsageWizardFragment) getSupportFragmentManager()
-				.findFragmentByTag(FirstUsageWizardFragment.TAG);
+		FirstUsageWizardFragment fragment = getFragment(FirstUsageWizardFragment.TAG);
 		return fragment != null && !fragment.isDetached() ? fragment : null;
 	}
 
@@ -261,10 +260,10 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 
 	@MainThread
 	public boolean removeFragment(String tag) {
-		FragmentManager fm = getSupportFragmentManager();
-		Fragment fragment = fm.findFragmentByTag(tag);
+		FragmentManager manager = getSupportFragmentManager();
+		Fragment fragment = manager.findFragmentByTag(tag);
 		if (fragment != null) {
-			fm.beginTransaction()
+			manager.beginTransaction()
 					.remove(fragment)
 					.commitNowAllowingStateLoss();
 			return true;
