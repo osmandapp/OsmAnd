@@ -1,7 +1,6 @@
 package net.osmand;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 
 import org.apache.commons.logging.Log;
 
@@ -9,9 +8,19 @@ import com.ibm.icu.text.ArabicShaping;
 import com.ibm.icu.text.ArabicShapingException;
 import com.ibm.icu.text.Bidi;
 import com.ibm.icu.text.BidiRun;
+import com.ibm.icu.text.Transliterator;
 
 public class Reshaper {
 	private final static Log LOG = PlatformUtil.getLog(Reshaper.class);
+	private static final String ID = "NFD; [:Mn:] Remove; NFC";
+	private static final Transliterator ACCENTS_CONVERTER = Transliterator.getInstance(ID);
+
+	public static String stripAccentsAndDiacritics(String input) {
+		if (input == null || input.isEmpty()) {
+			return input;
+		}
+		return ACCENTS_CONVERTER.transliterate(input);
+	}
 	
 	public static String reshape(byte[] bytes) {
 		try {
@@ -125,6 +134,14 @@ public class Reshaper {
 		test3();
 		test4();
 		test5();
+		test6();
+	}
+
+	public static void test6() {
+		String s = "Київська";
+		String expected = "Киівська";
+		String reshape = stripAccentsAndDiacritics(s);
+		check(s, reshape, expected);
 	}
 	
 	public static void test3() {
