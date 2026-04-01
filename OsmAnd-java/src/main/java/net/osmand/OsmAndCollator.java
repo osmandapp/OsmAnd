@@ -31,6 +31,8 @@ public class OsmAndCollator {
 
 			@Override
 			public boolean equals(String source, String target) {
+				source = normalizeUkrainian(source);
+				target = normalizeUkrainian(target);
 				return instance.equals(source, target);
 			}
 
@@ -46,7 +48,12 @@ public class OsmAndCollator {
 					String normalized = ArabicNormalizer.normalize(s);
 					s = normalized == null ? s : normalized;
 				}
+				s = normalizeUkrainian(s);
 				return s;
+			}
+
+			private String normalizeUkrainian(String s) {
+				return s.replace('ї', 'і').replace('Ї', 'І');
 			}
 		};
 	}
