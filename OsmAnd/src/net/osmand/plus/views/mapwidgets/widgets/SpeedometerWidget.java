@@ -604,22 +604,26 @@ public class SpeedometerWidget {
 		} else {
 			revealBackgroundColor = Color.TRANSPARENT;
 		}
-		switch (currentState) {
-			case SAFE -> {
-				if (targetState == SpeedState.WARNING) {
-					revealColor = SpeedState.WARNING.getAlertColor(app, lastNightMode);
-				} else {
-					revealColor = SpeedState.EXCEED.getAlertColor(app, lastNightMode);
+		if (currentState == targetState) {
+			revealColor = currentState.getAlertColor(app, lastNightMode);
+		} else {
+			switch (currentState) {
+				case SAFE -> {
+					if (targetState == SpeedState.WARNING) {
+						revealColor = SpeedState.WARNING.getAlertColor(app, lastNightMode);
+					} else {
+						revealColor = SpeedState.EXCEED.getAlertColor(app, lastNightMode);
+					}
 				}
-			}
-			case WARNING -> {
-				if (targetState == SpeedState.SAFE) {
-					revealColor = SpeedState.WARNING.getAlertColor(app, lastNightMode);
-				} else {
-					revealColor = SpeedState.EXCEED.getAlertColor(app, lastNightMode);
+				case WARNING -> {
+					if (targetState == SpeedState.SAFE) {
+						revealColor = SpeedState.WARNING.getAlertColor(app, lastNightMode);
+					} else {
+						revealColor = SpeedState.EXCEED.getAlertColor(app, lastNightMode);
+					}
 				}
+				case EXCEED -> revealColor = SpeedState.EXCEED.getAlertColor(app, lastNightMode);
 			}
-			case EXCEED -> revealColor = SpeedState.EXCEED.getAlertColor(app, lastNightMode);
 		}
 		if (currentState == SpeedState.SAFE || currentState == SpeedState.WARNING && targetState == SpeedState.EXCEED) {
 			targetSpeedAlertProgress = 1f;
