@@ -1596,6 +1596,7 @@ public class OpeningHoursParser {
 					if (firstYearDayMonth != null) {
 						opened = firstYearDayMonth[month][dmonth];
 					} else {
+						// Year-only and year+month rules do not populate day-month masks, so use the month range directly.
 						opened = firstYearMonths[month] > 0 && (!hasDayMonths() || dayMonths[month][dmonth]);
 					}
 				} else {
@@ -1606,6 +1607,7 @@ public class OpeningHoursParser {
 						if (lastYearDayMonth != null) {
 							opened = lastYearDayMonth[month][dmonth];
 						} else {
+							// Mirror the first-year fallback for the final year of a multi-year range.
 							opened = lastYear > 0 && (!hasDayMonths() || dayMonths[month][dmonth]);
 						}
 					} else {
@@ -1962,6 +1964,8 @@ public class OpeningHoursParser {
 							}
 							int ruleYear = basic.year;
 							if ((ruleYear > 0 || prevYearToken != null) && firstMonthToken != null && lastMonthToken != null) {
+								// Support shorthand like "2024-2025 Jan 1-Dec 31" by treating the last seen year
+								// as the range end while preserving the first year already stored in basic.year.
 								int endYear = prevYearToken != null ? prevYearToken.mainNumber : ruleYear;
 								int startYear = ruleYear > 0 ? ruleYear : endYear;
 								if (basic.firstYearMonths == null) {
@@ -2081,6 +2085,8 @@ public class OpeningHoursParser {
 					if (t.type == TokenType.TOKEN_DAY_MONTH && prevToken != null && prevToken.type == TokenType.TOKEN_MONTH) {
 						t.parent = prevToken;
 					} else if (t.type == TokenType.TOKEN_YEAR) {
+						// Keep the second year inside the current pair so the existing month/day range code
+						// can build a proper multi-year span instead of collapsing to the first year only.
 						prevYearToken = t;
 					}
 				}
