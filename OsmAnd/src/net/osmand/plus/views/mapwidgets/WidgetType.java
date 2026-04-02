@@ -384,6 +384,8 @@ public enum WidgetType {
 			return new AverageGlideWidgetInfoFragment();
 		} else if (this == DEV_ZOOM_LEVEL) {
 			return new ZoomLevelInfoFragment();
+		} else if (this == DEV_MEMORY) {
+			return new MemoryInfoFragment();
 		} else if (this == LANES) {
 			return new LanesWidgetInfoFragment();
 		} else if (this == ROUTE_INFO) {
