@@ -247,15 +247,18 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private final List<MapWidgetInfo> rulerWidgets = new ArrayList<>();
 
 	public boolean isRulerWidgetOn() {
-		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(requireMapActivity());
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			ApplicationMode appMode = app.getSettings().getApplicationMode();
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
 
-		rulerWidgets.clear();
-		widgetRegistry.collectWidgetsInfo(rulerWidgets, appMode, layoutMode, null, RADIUS_RULER, true);
+			rulerWidgets.clear();
+			widgetRegistry.collectWidgetsInfo(rulerWidgets, appMode, layoutMode, null, RADIUS_RULER, true);
 
-		for (int i = 0; i < rulerWidgets.size(); i++) {
-			if (isPanelVisible(rulerWidgets.get(i).getWidgetPanel())) {
-				return true;
+			for (int i = 0; i < rulerWidgets.size(); i++) {
+				if (isPanelVisible(rulerWidgets.get(i).getWidgetPanel())) {
+					return true;
+				}
 			}
 		}
 		return false;
