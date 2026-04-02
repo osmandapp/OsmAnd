@@ -1608,7 +1608,7 @@ public class OpeningHoursParser {
 							opened = lastYearDayMonth[month][dmonth];
 						} else {
 							// Mirror the first-year fallback for the final year of a multi-year range.
-							opened = lastYear > 0 && (!hasDayMonths() || dayMonths[month][dmonth]);
+							opened = lastYearMonths[month] > 0 && (!hasDayMonths() || dayMonths[month][dmonth]);
 						}
 					} else {
 						opened = false;

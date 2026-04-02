@@ -637,9 +637,6 @@ public class OpeningHoursParserTest {
 	}
 
 	private void testYearFormats() throws ParseException {
-		OpeningHoursParser.initLocalStrings(Locale.UK);
-		OpeningHoursParser.setTwelveHourFormattingEnabled(false, Locale.UK);
-
 		OpeningHours hours = parseOpenedHours("2024 Jan-Dec");
 		testOpened("31.12.2023 23:59", hours, false);
 		testOpened("01.01.2024 00:00", hours, true);
