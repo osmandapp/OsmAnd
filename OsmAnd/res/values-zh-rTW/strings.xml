@@ -2348,7 +2348,7 @@
     <string name="total_donations">捐款總計</string>
     <string name="parked_at">停在</string>
     <string name="without_time_limit">沒有時間限制</string>
-    <string name="context_menu_read_full_article">閱讀全文</string>
+    <string name="context_menu_read_full_article">閱讀文章全文</string>
     <string name="context_menu_read_article">閱讀文章</string>
     <string name="context_menu_points_of_group">群組的全部標點</string>
     <string name="open_from">開業時間：由</string>
@@ -4566,7 +4566,7 @@
     <string name="app_mode_climbing">攀岩</string>
     <string name="clear_online_cache">清除線上快取</string>
     <string name="offline_cache">離線快取</string>
-    <string name="shared_string_alt_name">替代名稱</string>
+    <string name="shared_string_alt_name">別名</string>
     <string name="token_is_not_valid">存取憑證無效</string>
     <string name="weather_forecast">天氣預報</string>
     <string name="clear_online_cache_description">這將會清除線上天氣圖磚的快取。</string>
@@ -5232,8 +5232,8 @@
     <string name="battery_saving_mode">省電模式</string>
     <string name="delete_widget_description">這個小工具將被刪除。您稍後可以在組態畫面中將其還原。</string>
     <string name="delete_widget">刪除小工具？</string>
-    <string name="graph_axis">圖表軸</string>
-    <string name="y_axis_description">最多為 Y 軸選取兩個選項。</string>
+    <string name="graph_axis">圖譜軸線</string>
+    <string name="y_axis_description">為 Y 軸選取兩個變項。</string>
     <string name="app_mode_suv">SUV</string>
     <string name="rendering_attr_alpineHiking_name">健行路線難度分級</string>
     <string name="shared_string_interface">介面</string>
@@ -5557,7 +5557,7 @@
     <string name="saved_to_device">儲存到裝置</string>
     <string name="save_to_device_error">儲存到裝置時發生錯誤</string>
     <string name="save_to_device">儲存到裝置</string>
-    <string name="travel_guides">指南</string>
+    <string name="travel_guides">指標</string>
     <string name="show_debug_tile_description">顯示每個圖磚的地圖符號資訊</string>
     <string name="show_debug_tile">顯示圖磚資訊</string>
     <string name="deactivated_map">已停用的地圖</string>
@@ -5727,12 +5727,12 @@
     <string name="copy_link">複製連結</string>
     <string name="routing_attr_pt_limit_name">顯示 N 條最佳路線</string>
     <string name="routing_attr_pt_limit_description">指定要顯示的最佳路線數量</string>
-    <string name="vehicle_metrics_chart_category">車輛指標</string>
+    <string name="vehicle_metrics_chart_category">汽車數據</string>
     <string name="delete_folder_description">刪除「%1$s」資料夾？</string>
     <string name="show_spherical_map">環球檢視</string>
     <string name="enable_3d_objects">3D 建築物</string>
     <string name="lang_mi">毛利語</string>
-    <string name="has_vehicle_metrics">使用 OBDII 資料</string>
+    <string name="has_vehicle_metrics">有 OBDII 資料</string>
     <string name="buildings_3d_detail_level">3D 建築物細節化處理</string>
     <string name="show_expand_button">顯示展開按鈕</string>
     <string name="imprecise_coordinates">不精確的座標</string>
