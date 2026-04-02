@@ -176,7 +176,6 @@
     <string name="poi_traffic_calming_choker">減速帯・減速用車線</string>
     <string name="poi_traffic_signals">信号機</string>
     <string name="poi_car_repair">車両修理</string>
-    <string name="poi_service_tyres">タイヤ</string>
     <string name="poi_vehicle_inspection">自動車検査</string>
     <string name="poi_fuel">ガソリンスタンド</string>
     <string name="poi_electricity_combined_charging">充電ステーション;電気自動車充電ステーション;EV充電ステーション;電気充電ポイント;充電ポイント;電動機充電ステーション;電気自動車供給設備</string>
@@ -1313,7 +1312,6 @@
     <string name="poi_cuisine_yogurt">ヨーグルト</string>
     <string name="poi_cuisine_gyros">ギロピタ・ドネルケバブ</string>
     <string name="poi_cuisine_empanada">エンパナーダ・具入りパン</string>
-    <string name="poi_cuisine_crepes">クレープ</string>
     <string name="poi_cuisine_yakiniku">焼肉</string>
     <string name="poi_cuisine_udon">うどん</string>
     <string name="poi_cuisine_brasserie">ブラッスリー・カフェレストラン</string>
@@ -2567,7 +2565,6 @@
     <string name="poi_training_art">教室:アート</string>
     <string name="poi_training_cooking">教室:料理</string>
     <string name="poi_training_computer">教室:コンピューター</string>
-    <string name="poi_training_yoga">教室:ヨガ</string>
     <string name="poi_training_martial_art">教室:武術</string>
     <string name="poi_training_aviation">教室:航空</string>
     <string name="poi_training_hairdressing">教室:理髪</string>

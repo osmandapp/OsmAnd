@@ -4899,8 +4899,6 @@
     <string name="restore_from_trash">Çöp kutusundan geri yükle</string>
     <string name="all_folders">Tüm klasörler</string>
     <string name="save_as_smart_folder">Akıllı klasör olarak kaydet</string>
-    <string name="widget_available_ram_desc">OsmAnd için ayrılan kullanılabilir belleği görüntüler.</string>
-    <string name="widget_available_ram">Kullanılabilir RAM</string>
     <string name="shared_string_reset_all">Tümünü sıfırla</string>
     <string name="date_of_creation">Oluşturulma tarihi</string>
     <string name="help_article_map_legend_osmand_name">OsmAnd harita tarzı</string>

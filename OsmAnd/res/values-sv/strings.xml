@@ -4553,7 +4553,6 @@
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="shared_string_cache">Cache</string>
-    <string name="widget_available_ram_desc">Visar tillgängligt ram-minne allokerat för OsmAnd.</string>
     <string name="sort_size_descending">Störst storlek först</string>
     <string name="delete_map">Radera kartan</string>
     <string name="standard_maps">Standardkartor</string>
@@ -4567,7 +4566,6 @@
     <string name="shared_string_show_icon">Visa ikon</string>
     <string name="map_is_up_to_date">Kartan %1$s är uppdaterad.</string>
     <string name="sort_size_ascending">Minst storlek först</string>
-    <string name="widget_available_ram">Tillgängligt minne</string>
     <string name="terrain_maps">Terrängkartor</string>
     <string name="sort_country_name_descending">Land: Ö - A</string>
     <string name="delete_map_description">Radera kartan %1$s?</string>

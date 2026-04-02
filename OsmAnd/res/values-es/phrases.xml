@@ -390,7 +390,6 @@
     <string name="poi_traffic_calming_cushion">Cojín berlinés</string>
     <string name="poi_traffic_calming_rumble_strip">Banda sonora</string>
     <string name="poi_traffic_calming_choker">Calzada reducida;Gargantilla</string>
-    <string name="poi_service_tyres">Neumáticos</string>
     <string name="poi_fuel_octane_80">80 octanos</string>
     <string name="poi_fuel_octane_91">91 octanos</string>
     <string name="poi_fuel_octane_92">92 octanos</string>
@@ -1795,7 +1794,6 @@
     <string name="poi_training_art">Capacitación: arte</string>
     <string name="poi_training_cooking">Capacitación: cocina</string>
     <string name="poi_training_computer">Capacitación: computación</string>
-    <string name="poi_training_yoga">Capacitación: yoga</string>
     <string name="poi_training_martial_art">Capacitación: artes marciales</string>
     <string name="poi_training_aviation">Capacitación: aviación</string>
     <string name="poi_training_hairdressing">Capacitación: peluquería</string>
@@ -2905,7 +2903,6 @@
     <string name="poi_cuisine_yogurt">Yogur</string>
     <string name="poi_cuisine_gyros">Gyros;Carne asada en horno vertical</string>
     <string name="poi_cuisine_empanada">Empanadas</string>
-    <string name="poi_cuisine_crepes">Crepes;Panqueques</string>
     <string name="poi_cuisine_yakiniku">Yakiniku;Carne asada japonesa</string>
     <string name="poi_cuisine_suki">Suki</string>
     <string name="poi_cuisine_brasserie">Brasserie (café-restaurante de ambiente relajado)</string>
@@ -4901,7 +4898,6 @@
     <string name="poi_shinto_shrine">Santuario de Shinto</string>
     <string name="poi_synagogue">Sinagoga</string>
     <string name="poi_hazard_landslide">Peligro: deslizamiento de tierra</string>
-    <string name="poi_hazard_additional_yes">Advertencia de peligro</string>
     <string name="poi_hazard_falling_rocks">Rocas en descenso</string>
     <string name="poi_hazard_contamination">Contaminación</string>
     <string name="poi_aerodrome_type_airfield">Aeródromo</string>

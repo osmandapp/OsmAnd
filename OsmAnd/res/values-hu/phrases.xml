@@ -51,7 +51,6 @@
     <string name="poi_border_control">Határátkelő</string>
     <string name="poi_traffic_signals">Jelzőlámpa</string>
     <string name="poi_car_repair">Autószerelő</string>
-    <string name="poi_service_tyres">Kerék, autógumi</string>
     <string name="poi_car_wash">Autómosó</string>
     <string name="poi_fuel">Benzinkút;Töltőállomás;Gázolajtöltő-állomás</string>
     <string name="poi_electricity_combined_charging">Elektromos töltőállomás;Elektromos autó töltése;Villanyautó töltése;Elektromos töltőpont</string>
@@ -1979,7 +1978,6 @@
     <string name="poi_training_art">Művészeti oktatás</string>
     <string name="poi_training_cooking">Főzésoktatás</string>
     <string name="poi_training_computer">Számítógépes oktatás</string>
-    <string name="poi_training_yoga">Jógaoktatás</string>
     <string name="poi_training_martial_art">Harcművészeti oktatás</string>
     <string name="poi_training_aviation">Repülésoktatás</string>
     <string name="poi_training_hairdressing">Fodrászképzés</string>
@@ -2283,7 +2281,6 @@
     <string name="poi_cuisine_snack">Falatozó</string>
     <string name="poi_cuisine_yogurt">Joghurt</string>
     <string name="poi_cuisine_gyros">Gyros</string>
-    <string name="poi_cuisine_crepes">Crêpes (francia palacsinta)</string>
     <string name="poi_cuisine_suki">Szuki</string>
     <string name="poi_cuisine_brasserie">Söröző (brasserie)</string>
     <string name="poi_cuisine_meat">Hús</string>
@@ -4989,7 +4986,6 @@
     <string name="poi_route_activity_type_track_racing">Pályaverseny</string>
     <string name="poi_route_activity_type_snowshoeing">Hótalpazás</string>
     <string name="poi_route_article_point">Utazási cél</string>
-    <string name="poi_hazard_additional_yes">Veszély</string>
     <string name="poi_hazard_falling_rocks">Sziklaomlás</string>
     <string name="poi_hazard_contamination">Szennyeződés</string>
     <string name="poi_hazard_landslide">Földcsuszamlás</string>

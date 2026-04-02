@@ -111,7 +111,6 @@
     <string name="poi_traffic_calming_choker">초커</string>
     <string name="poi_traffic_signals">빛을 중지</string>
     <string name="poi_car_repair">자동차 수리</string>
-    <string name="poi_service_tyres">타이어</string>
     <string name="poi_vehicle_inspection">차량 검사</string>
     <string name="poi_car_wash">세차장</string>
     <string name="poi_fuel">LPG 주유소</string>

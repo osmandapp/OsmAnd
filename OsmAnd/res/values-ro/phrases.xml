@@ -799,7 +799,6 @@
     <string name="poi_fuel">Benzinărie;Stație de benzină;Stație de alimentare;Benzinărie</string>
     <string name="poi_car_wash">Spălătorie auto</string>
     <string name="poi_vehicle_inspection">Inspecție vehicul</string>
-    <string name="poi_service_tyres">Anvelope</string>
     <string name="poi_car_repair">Service auto</string>
     <string name="poi_traffic_signals">Semafor</string>
     <string name="poi_traffic_calming_island">Insulă de trafic</string>
@@ -2150,7 +2149,6 @@
     <string name="poi_training_hairdressing">Formare: coafură</string>
     <string name="poi_training_aviation">Formare: aviație</string>
     <string name="poi_training_martial_art">Antrenament: arte marțiale</string>
-    <string name="poi_training_yoga">Formare: yoga</string>
     <string name="poi_training_computer">Formare: calculator</string>
     <string name="poi_training_cooking">Formare: gătit</string>
     <string name="poi_training_art">Formare: artă</string>
@@ -3181,7 +3179,6 @@
     <string name="poi_cuisine_udon">Udon</string>
     <string name="poi_cuisine_suki">Suki</string>
     <string name="poi_cuisine_yakiniku">Yakiniku</string>
-    <string name="poi_cuisine_crepes">Clătite (crepes)</string>
     <string name="poi_cuisine_empanada">Empanada</string>
     <string name="poi_cuisine_gyros">Gyros</string>
     <string name="poi_cuisine_yogurt">Iaurt</string>
@@ -4989,7 +4986,6 @@
     <string name="poi_evangelical_church">Biserica evanghelică</string>
     <string name="poi_presbyterian_church">Biserica prezbiteriană</string>
     <string name="poi_access_main_tag">Acces</string>
-    <string name="poi_hazard_additional_yes">Pericol</string>
     <string name="poi_hazard_falling_rocks">Căderi de pietre</string>
     <string name="poi_hazard_contamination">Contaminare</string>
     <string name="poi_hazard_yes">Pericol</string>

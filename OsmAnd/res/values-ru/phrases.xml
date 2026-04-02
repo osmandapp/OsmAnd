@@ -141,7 +141,6 @@
     <string name="poi_traffic_signals">Светофор</string>
     <string name="poi_car_repair">Автосервис</string>
     <string name="poi_service_general">Услуги</string>
-    <string name="poi_service_tyres">Шиномонтаж</string>
     <string name="poi_vehicle_inspection">Пункт техосмотра;Техосмотр</string>
     <string name="poi_car_wash">Автомойка</string>
     <string name="poi_fuel">АЗС;Автозаправочная станция;Автозаправка;Автомобильная заправка;Бензоколонка;Бензозаправка;Заправка</string>
@@ -1696,7 +1695,6 @@
     <string name="poi_training_art">Обучение: искусство</string>
     <string name="poi_training_cooking">Обучение: приготовление пищи</string>
     <string name="poi_training_computer">Обучение: работа на компьютере</string>
-    <string name="poi_training_yoga">Обучение: йога</string>
     <string name="poi_training_martial_art">Обучение: боевые искусства</string>
     <string name="poi_training_aviation">Обучение: авиация</string>
     <string name="poi_training_hairdressing">Обучение: парикмахер</string>
@@ -2880,7 +2878,6 @@
     <string name="poi_cuisine_yogurt">Йогурт</string>
     <string name="poi_cuisine_gyros">Гирос</string>
     <string name="poi_cuisine_empanada">Эмпанада</string>
-    <string name="poi_cuisine_crepes">Тонкие блинчики</string>
     <string name="poi_cuisine_yakiniku">Якинику</string>
     <string name="poi_cuisine_udon">Удон</string>
     <string name="poi_cuisine_brasserie">Брассери</string>
@@ -4622,7 +4619,6 @@
     <string name="poi_aerodrome_type_airfield">Аэродром</string>
     <string name="poi_consulate">Консульство</string>
     <string name="poi_travel_agency">Туристическое агентство</string>
-    <string name="poi_hazard_additional_yes">Опасность</string>
     <string name="poi_hazard_falling_rocks">Камнепад</string>
     <string name="poi_hazard_landslide">Опасность: оползень</string>
     <string name="poi_hazard_yes">Опасность</string>

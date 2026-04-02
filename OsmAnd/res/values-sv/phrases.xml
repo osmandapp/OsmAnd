@@ -284,7 +284,6 @@
     <string name="poi_traffic_calming_island">Refug</string>
     <string name="poi_traffic_signals">Stoppljus</string>
     <string name="poi_car_repair">Bilverkstad</string>
-    <string name="poi_service_tyres">Däck</string>
     <string name="poi_vehicle_inspection">Bilprovning</string>
     <string name="poi_car_wash">Biltvätt</string>
     <string name="poi_fuel">Bensinstation;Bränslestation;Bränsle</string>
@@ -1998,7 +1997,6 @@
     <string name="poi_training_art">Utbildning: konst</string>
     <string name="poi_training_cooking">Utbildning: matlagning</string>
     <string name="poi_training_computer">Utbildning: dator</string>
-    <string name="poi_training_yoga">Utbildning: yoga</string>
     <string name="poi_training_martial_art">Utbildning: kampsport</string>
     <string name="poi_training_aviation">Utbildning: flygning</string>
     <string name="poi_training_hairdressing">Utbildning: frisör</string>
@@ -2885,7 +2883,6 @@
     <string name="poi_cuisine_yogurt">Yoghurt</string>
     <string name="poi_cuisine_gyros">Gyros</string>
     <string name="poi_cuisine_empanada">Empanada</string>
-    <string name="poi_cuisine_crepes">Crêpes</string>
     <string name="poi_cuisine_yakiniku">Yakiniku</string>
     <string name="poi_cuisine_suki">Suki</string>
     <string name="poi_cuisine_udon">Udon</string>
@@ -4932,7 +4929,6 @@
     <string name="poi_lit">Belysning</string>
     <string name="poi_piste_oneway">Pist enkelriktad</string>
     <string name="poi_hazard_landslide">Fara: jordskred</string>
-    <string name="poi_hazard_additional_yes">Fara</string>
     <string name="poi_hazard_contamination">Förorening</string>
     <string name="poi_hazard_yes">Fara</string>
     <string name="poi_steps">Trappa</string>

@@ -3894,7 +3894,6 @@
     <string name="topography_maps">Карти на релефа</string>
     <string name="swap_two_places">Разменяне местата на %1$s и %2$s</string>
     <string name="markers_remove_dialog_msg">Премахване на маркера „%s“?</string>
-    <string name="widget_available_ram">Достъпна оперативна памет</string>
     <string name="empty_state_markers_active">Създайте маркери на картата!</string>
     <string name="shared_string_cache">Временни файлове</string>
     <string name="weather_online">Времето от интернет</string>
@@ -3904,7 +3903,6 @@
     <string name="delete_map">Премахване на карта</string>
     <string name="rendering_styles">Стилове за карти</string>
     <string name="map_settings_weather_wind_animation">Анимиран вятър</string>
-    <string name="widget_available_ram_desc">Показва достъпната за OsmAnd памет.</string>
     <string name="select_another_track">Изберете друго трасе</string>
     <string name="sorted_by_distance">Сортирано по разстояние</string>
     <string name="sort_by_category">Сортиране по категория</string>

@@ -720,7 +720,6 @@
     <string name="poi_ambulance_station">Ambulansestasjon</string>
     <string name="poi_mountain_pass">Fjellpass</string>
     <string name="poi_traffic_calming_chicane">Sjikane</string>
-    <string name="poi_service_tyres">Dekk</string>
     <string name="poi_vehicle_inspection">Kjøretøykontroll</string>
     <string name="poi_fuel_diesel">Diesel</string>
     <string name="poi_fuel_ethanol">Etanol</string>

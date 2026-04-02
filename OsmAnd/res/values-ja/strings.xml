@@ -4840,7 +4840,6 @@ POIの更新は利用できません</string>
     <string name="empty_smart_folder_description">一致するすべての経路がここに自動的に表示されます</string>
     <string name="configure_filter">フィルターを設定</string>
     <string name="restore_from_trash">ごみ箱から復元する</string>
-    <string name="widget_available_ram_desc">OsmAndに割り当てられた利用可能メモリを表示します。</string>
     <string name="sort_size_descending">大きいサイズから</string>
     <string name="smart_folder_saved">スマートフォルダーが保存されました</string>
     <string name="delete_map">マップの削除</string>
@@ -4880,7 +4879,6 @@ POIの更新は利用できません</string>
     <string name="trash_alert_card_desc">ごみ箱内のアイテムは%1$s日後に消去されます。</string>
     <string name="discard_filter_changes_prompt">すべてのフィルターをリセットしてもよろしいですか？</string>
     <string name="no_config_smart_folder_description">スマートフォルダーを使用すると、適用されたフィルターによって経路をグループ化できます</string>
-    <string name="widget_available_ram">利用可能なRAM</string>
     <string name="trash_is_empty">ごみ箱は空です</string>
     <string name="terrain_maps">地形マップ</string>
     <string name="shared_string_trash">ごみ</string>

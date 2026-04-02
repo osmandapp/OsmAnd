@@ -5097,7 +5097,6 @@
     <string name="maps_and_resources">خرائط ومصادر</string>
     <string name="shared_string_cache">الذاكرة المؤقتة</string>
     <string name="with_waypoints">مع نقاط الطريق</string>
-    <string name="widget_available_ram_desc">يعرض الذاكرة المتاحة المخصصة لأوسماند.</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="standard_maps">الخرائط العادية</string>
     <string name="max_altitude">أقصى ارتفاع</string>
@@ -5112,7 +5111,6 @@
     <string name="weather_online">الطقس عبر الإنترنت</string>
     <string name="date_of_creation">تاريخ الإنشاء</string>
     <string name="filter_screen_title">فلتر</string>
-    <string name="widget_available_ram">ذاكرة الوصول العشوائي المتاحة</string>
     <string name="terrain_maps">خرائط التضاريس</string>
     <string name="smart_folder_name_present">هذا المجلد الذكي موجود بالفعل</string>
     <string name="smart_folder_saved">تم حفظ الملف الذكي</string>

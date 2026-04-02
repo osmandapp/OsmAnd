@@ -118,7 +118,6 @@
     <string name="poi_traffic_calming_choker">Звужэнне</string>
     <string name="poi_traffic_signals">Святлафор</string>
     <string name="poi_car_repair">Аўтасэрвіс</string>
-    <string name="poi_service_tyres">Шынамантаж</string>
     <string name="poi_vehicle_inspection">Пункт тэхагляду</string>
     <string name="poi_car_wash">Аўтамыйка</string>
     <string name="poi_fuel">Запраўка;АЗС;Аўтазаправачная станцыя</string>
@@ -1794,7 +1793,6 @@
     <string name="poi_training_art">Навучанне: мастацтва</string>
     <string name="poi_training_cooking">Навучанне: гатаванне ежы</string>
     <string name="poi_training_computer">Навучанне: праца на камп\'ютары</string>
-    <string name="poi_training_yoga">Навучанне: ёга</string>
     <string name="poi_training_martial_art">Навучанне: баявыя мастацтвы</string>
     <string name="poi_training_aviation">Навучанне: авіяцыя</string>
     <string name="poi_training_hairdressing">Навучанне: цырульнік</string>
@@ -2895,7 +2893,6 @@
     <string name="poi_cuisine_yogurt">Ёгурт</string>
     <string name="poi_cuisine_gyros">Гірас</string>
     <string name="poi_cuisine_empanada">Эмпанада</string>
-    <string name="poi_cuisine_crepes">Тонкія блінцы</string>
     <string name="poi_cuisine_yakiniku">Якініку</string>
     <string name="poi_cuisine_udon">Удон</string>
     <string name="poi_cuisine_brasserie">Брасэры</string>

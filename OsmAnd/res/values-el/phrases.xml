@@ -291,7 +291,6 @@
     <string name="poi_traffic_calming_bump">Σαμαράκι</string>
     <string name="poi_traffic_calming_hump">Μειωτής ταχύτητας</string>
     <string name="poi_traffic_calming_island">Νησίδα</string>
-    <string name="poi_service_tyres">Ελαστικά</string>
     <string name="poi_vehicle_inspection">Επιθεώρηση οχήματος</string>
     <string name="poi_car_wash">Πλυντήριο αυτοκινήτων</string>
     <string name="poi_fuel">Πρατήριο καυσίμων;Βενζινάδικο</string>
@@ -1997,7 +1996,6 @@
     <string name="poi_training_art">Εκπαίδευση: τέχνες</string>
     <string name="poi_training_cooking">Εκπαίδευση: μαγειρική</string>
     <string name="poi_training_computer">Εκπαίδευση: πληροφορική</string>
-    <string name="poi_training_yoga">Εκπαίδευση: γιόγκα</string>
     <string name="poi_training_martial_art">Εκπαίδευση: πολεμικές τέχνες</string>
     <string name="poi_service_bicycle_chaintool_yes">Εργαλείο αλυσίδας;Εργαλείο αλυσίδας ποδηλάτου;Εργαλείο αλυσίδας δίκυκλου</string>
     <string name="poi_service_bicycle_chaintool_no">Εργαλείο αλυσίδας ποδηλάτου: όχι</string>
@@ -2944,7 +2942,6 @@
     <string name="poi_cuisine_yogurt">Γιαούρτι</string>
     <string name="poi_cuisine_gyros">Γύρος</string>
     <string name="poi_cuisine_empanada">Εμπανάδα</string>
-    <string name="poi_cuisine_crepes">Κρέπες</string>
     <string name="poi_cuisine_yakiniku">Γιακινίκου</string>
     <string name="poi_cuisine_suki">Σούκι</string>
     <string name="poi_cuisine_udon">Ούντον</string>
@@ -3884,7 +3881,6 @@
     <string name="poi_aerodrome_type_airfield">Αεροδρόμιο</string>
     <string name="poi_consulate">Προξενείο</string>
     <string name="poi_hazard_landslide">Κατολίσθηση</string>
-    <string name="poi_hazard_additional_yes">Κίνδυνος</string>
     <string name="poi_hazard_falling_rocks">Πτώση βράχων</string>
     <string name="poi_hazard_contamination">Μόλυνση</string>
     <string name="poi_pentecostal_church">Εκκλησία Πεντηκοστής</string>

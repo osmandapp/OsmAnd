@@ -3724,7 +3724,6 @@
     <string name="proxy_port_max_warning">Η μέγιστη τιμή θύρας είναι %1$s</string>
     <string name="terrain_map">Χάρτης εδάφους (3D)</string>
     <string name="ant_plus_bluetooth_off_description">Ενεργοποιήστε το Bluetooth για να βρείτε και να κάνετε σύζευξη με αισθητήρες.</string>
-    <string name="widget_available_ram_desc">Εμφανίζει την διαθέσιμη μνήμη που έχει κατανεμηθεί για το OsmAnd.</string>
     <string name="external_device_characteristic_stride_length">Μήκος διασκελισμού</string>
     <string name="bluetooth_disconnected">Αποσυνδέθηκε, %s</string>
     <string name="shared_storage">Κοινόχρηστος χώρος αποθήκευσης</string>
@@ -3921,7 +3920,6 @@
     <string name="bluetooth_not_supported">Το Bluetooth δεν υποστηρίζεται</string>
     <string name="number_of_tracks">%1$s ίχνη</string>
     <string name="rendering_value_sector3_name">Τομέας 3</string>
-    <string name="widget_available_ram">Διαθέσιμη RAM</string>
     <string name="trash_is_empty">Ο κάδος είναι άδειος</string>
     <string name="external_device_forget_sensor_description">Ο αισθητήρας θα αφαιρεθεί από την λίστα. Θα μπορείτε να κάνετε ξανά σύζευξη αυτού του αισθητήρα οποιαδήποτε στιγμή.</string>
     <string name="key_event_action_move_to_my_location">Μετακίνηση σε Τοποθεσία μου</string>

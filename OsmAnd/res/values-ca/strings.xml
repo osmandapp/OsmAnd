@@ -4974,8 +4974,6 @@
     <string name="wikipedia_and_travel_maps">Wikipedia i mapes de viatges</string>
     <string name="standard_maps">Mapes estàndard</string>
     <string name="terrain_maps">Mapes de terreny</string>
-    <string name="widget_available_ram_desc">Mostra la memòria disponible assignada per a OsmAnd.</string>
-    <string name="widget_available_ram">RAM disponible</string>
     <string name="app_mode_hang_gliding">Penjat de lliscament</string>
     <string name="max_altitude">Alçada màxima</string>
     <string name="app_mode_baby_transport">Transport per a nadons</string>

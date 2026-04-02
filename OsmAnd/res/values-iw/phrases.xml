@@ -381,7 +381,6 @@
     <string name="poi_traffic_calming_island">אי תנועה</string>
     <string name="poi_traffic_signals">רמזור</string>
     <string name="poi_car_repair">מוסך</string>
-    <string name="poi_service_tyres">צמיגים;צמיג</string>
     <string name="poi_vehicle_inspection">מבחן רישוי שנתי לרכב</string>
     <string name="poi_car_wash">שטיפת רכב</string>
     <string name="poi_fuel">תחנת דלק;תחנת תדלוק;תחנת מילוי דלק;תחנת בנזין</string>
@@ -865,7 +864,6 @@
     <string name="poi_cuisine_yogurt">יוגורט</string>
     <string name="poi_cuisine_gyros">גירוס</string>
     <string name="poi_cuisine_empanada">אמפנדה</string>
-    <string name="poi_cuisine_crepes">קרפים</string>
     <string name="poi_cuisine_yakiniku">יקיניקו</string>
     <string name="poi_cuisine_suki">סוקי</string>
     <string name="poi_cuisine_udon">אוּדוֹן</string>
@@ -2241,7 +2239,6 @@
     <string name="poi_industrial_oil">סוג: תעשיית הדלק</string>
     <string name="poi_training_hairdressing">הכשרה: עיצוב שיער</string>
     <string name="poi_training_aviation">הכשרה: תעופה</string>
-    <string name="poi_training_yoga">הכשרה: יוגה</string>
     <string name="poi_training_computer">הכשרה: מחשבים</string>
     <string name="poi_training_cooking">הכשרה: בישול</string>
     <string name="poi_training_art">הכשרה: אומנות</string>

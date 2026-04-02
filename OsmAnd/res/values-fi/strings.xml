@@ -4346,7 +4346,6 @@
     <string name="help_article_navigation_routing_straight_line_routing_name">Linnuntiereititys (lentokone)</string>
     <string name="empty_tracks">Sinulla ei ole jälkitiedostoja.</string>
     <string name="discard_filter_changes_prompt">Alustetaanko kaikki suodattimet?</string>
-    <string name="widget_available_ram">Saatavilla oleva RAM</string>
     <string name="help_article_start_with_main_menu_name">Päävalikko</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Räjähteet</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Kaasut</string>
@@ -4477,7 +4476,6 @@
     <string name="row_number">Rivi %1$s</string>
     <string name="sort_size_descending">Isoin koko ensin</string>
     <string name="add_smart_folder">Lisää älykansio</string>
-    <string name="widget_available_ram_desc">Näyttää OsmAndille varatun vapaan muistin.</string>
     <string name="one_image_per_tile">Yksi kuva ruutua kohden</string>
     <string name="shared_string_show_icon">Näytä kuvake</string>
     <string name="smart_folder_name_present">Tällainen älykansio on jo olemassa</string>

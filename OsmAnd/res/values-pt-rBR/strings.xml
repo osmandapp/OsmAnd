@@ -5252,7 +5252,6 @@
     <string name="help_article_plan_route_coordinate_input_name">Entrada de coordenadas</string>
     <string name="help_article_map_vector_maps_name">Mapas vetoriais (estilos de mapa)</string>
     <string name="help_article_start_with_main_menu_name">Menu principal</string>
-    <string name="widget_available_ram_desc">Exibe a memória disponível alocada para OsmAnd.</string>
     <string name="contact_us">Fale conosco</string>
     <string name="glide_ratio_to_target">Razão de planeio para o alvo</string>
     <string name="sort_size_descending">Tamanho grande primeiro</string>
@@ -5318,7 +5317,6 @@
     <string name="help_article_widgets_info_widgets_name">Widgets informativos</string>
     <string name="filter_screen_title">Filtro</string>
     <string name="external_sensor_name_property_description">Nome do sensor</string>
-    <string name="widget_available_ram">RAM disponível</string>
     <string name="help_article_widgets_name">Widgets no mapa</string>
     <string name="help_article_personal_name">Meus dados</string>
     <string name="help_article_purchases_android_name">Compras no Android</string>

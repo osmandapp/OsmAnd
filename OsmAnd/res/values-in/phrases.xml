@@ -470,7 +470,6 @@
     <string name="poi_fuel">SPBU;Stasiun pengisian;SPBU</string>
     <string name="poi_car_wash">Cuci mobil</string>
     <string name="poi_vehicle_inspection">Inspeksi kendaraan</string>
-    <string name="poi_service_tyres">Ban</string>
     <string name="poi_car_repair">Perbaikan mobil</string>
     <string name="poi_traffic_signals">Lampu lalu lintas</string>
     <string name="poi_toll_booth">Pintu tol</string>
@@ -1087,7 +1086,6 @@
     <string name="poi_provided_for_infant_no">Disediakan untuk bayi: tidak</string>
     <string name="poi_provided_for_infant_yes">Disediakan untuk bayi: ya</string>
     <string name="poi_monument_yes">Obyek monumental</string>
-    <string name="poi_training_yoga">Pelatihan: yoga</string>
     <string name="poi_training_computer">Pelatihan: komputer</string>
     <string name="poi_training_cooking">Pelatihan: memasak</string>
     <string name="poi_training_art">Pelatihan: seni</string>
@@ -3170,7 +3168,6 @@
     <string name="poi_cuisine_bakery">Toko roti</string>
     <string name="poi_cuisine_tacos">Taco</string>
     <string name="poi_cuisine_souvlaki">Souvlaki</string>
-    <string name="poi_cuisine_crepes">Krep</string>
     <string name="poi_cuisine_yakiniku">Yakiniku</string>
     <string name="poi_cuisine_suki">Suki</string>
     <string name="poi_cuisine_yakitori">Yakitori</string>
@@ -4858,7 +4855,6 @@
     <string name="poi_presbyterian_church">Gereja Presbiterian</string>
     <string name="poi_aerodrome_type_airfield">Lapangan Terbang</string>
     <string name="poi_hazard_landslide">Bahaya: tanah longsor</string>
-    <string name="poi_hazard_additional_yes">Bahaya</string>
     <string name="poi_hazard_falling_rocks">Batu jatuh</string>
     <string name="poi_hazard_contamination">Kontaminasi</string>
     <string name="poi_hazard_yes">Bahaya</string>

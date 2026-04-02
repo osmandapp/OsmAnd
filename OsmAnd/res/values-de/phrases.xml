@@ -468,7 +468,6 @@
     <string name="poi_topmark">Toppzeichen</string>
     <string name="poi_seamark_wreck">Wrack</string>
     <string name="poi_second_hand">Gebrauchtwarenladen</string>
-    <string name="poi_service_tyres">Reifen</string>
     <string name="poi_disaster_response">Katastrophenhilfe-Station</string>
     <string name="poi_sewing">Nähbedarf</string>
     <string name="poi_shelter">Unterstand</string>
@@ -2001,7 +2000,6 @@
     <string name="poi_training_art">Ausbildung: Kunst</string>
     <string name="poi_training_cooking">Ausbildung: Kochen</string>
     <string name="poi_training_computer">Ausbildung: Computer</string>
-    <string name="poi_training_yoga">Ausbildung: Yoga</string>
     <string name="poi_training_martial_art">Ausbildung: Kampfkunst</string>
     <string name="poi_training_aviation">Ausbildung: Luftfahrt</string>
     <string name="poi_training_hairdressing">Ausbildung: Frisör</string>
@@ -2879,7 +2877,6 @@
     <string name="poi_cuisine_yogurt">Joghurt</string>
     <string name="poi_cuisine_gyros">Gyros</string>
     <string name="poi_cuisine_empanada">Empanada</string>
-    <string name="poi_cuisine_crepes">Crêpes</string>
     <string name="poi_cuisine_suki">Suki</string>
     <string name="poi_cuisine_bubble_tea">Bubble Tea</string>
     <string name="poi_cuisine_meat">Fleisch</string>
@@ -4990,7 +4987,6 @@
     <string name="poi_aerodrome_type_airfield">Flugfeld</string>
     <string name="poi_consulate">Konsulat</string>
     <string name="poi_hazard_landslide">Gefahr: Erdrutsch</string>
-    <string name="poi_hazard_additional_yes">Gefahr</string>
     <string name="poi_hazard_falling_rocks">Herabfallende Felsen</string>
     <string name="poi_hazard_contamination">Kontamination</string>
     <string name="poi_hazard_yes">Gefahr</string>

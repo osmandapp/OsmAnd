@@ -3399,8 +3399,6 @@
     <string name="shared_string_rows">행</string>
     <string name="standard_maps">표준 맵</string>
     <string name="terrain_maps">지형 지도</string>
-    <string name="widget_available_ram_desc">OsmAnd에 할당된 사용 가능한 메모리를 표시합니다.</string>
-    <string name="widget_available_ram">사용 가능한 RAM</string>
     <string name="app_mode_hang_gliding">행글라이딩</string>
     <string name="help_article_navigation_routing_moped_routing_name">오토바이 라우팅</string>
     <string name="help_article_navigation_routing_online_routing_name">온라인 라우팅</string>

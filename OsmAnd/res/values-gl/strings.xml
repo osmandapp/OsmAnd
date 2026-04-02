@@ -3894,7 +3894,6 @@
     <string name="configure_filter">Configurar filtro</string>
     <string name="internal_app_storage_description">Almacenamento interno, oculto para todos os usuarios e outras aplicacións, polo que só OsmAnd pode acceder aos teus datos.</string>
     <string name="map_widget_altitude">Altitude da localización actual</string>
-    <string name="widget_available_ram_desc">Mostra a memoria dispoñible asignada para OsmAnd.</string>
     <string name="contact_us">Contacta connosco</string>
     <string name="sort_size_descending">Tamaño grande primeiro</string>
     <string name="smart_folder_saved">Gardouse o cartafol intelixente</string>
@@ -3930,7 +3929,6 @@
     <string name="sort_size_ascending">Tamaño pequeno primeiro</string>
     <string name="discard_filter_changes_prompt">¿Estás seguro de que queres restablecer todos os filtros?</string>
     <string name="no_config_smart_folder_description">Os cartafoles intelixentes permiten agrupar pistas por filtros aplicados</string>
-    <string name="widget_available_ram">RAM dispoñible</string>
     <string name="select_nav_profile_dialog_message">O \'Tipo de navegación\' selecciona como calculánse as rutas, con motores de rutas en liña e fóra de liña dispoñibles.</string>
     <string name="terrain_maps">Mapas do terreo</string>
     <string name="save_track_to_gpx_descrp">Inicia de xeito automático a gravación da pista mentres navegas e gárdarase despois.</string>

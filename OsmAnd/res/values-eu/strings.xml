@@ -5435,7 +5435,6 @@
     <string name="lang_zh_hans">Txinera sinplifikatua</string>
     <string name="configure_filter">Iragazkia konfiguratu</string>
     <string name="all_folders">Karpeta guztiak</string>
-    <string name="widget_available_ram_desc">OsmAnd-i esleitutako memoria erabilgarria bistaratzen du.</string>
     <string name="sort_size_descending">Tamaina handikoa lehenik</string>
     <string name="smart_folder_saved">Karpeta adimenduna gorde da</string>
     <string name="delete_map">Ezabatu mapa</string>
@@ -5468,7 +5467,6 @@
     <string name="trash_alert_card_desc">Zakarrontziko elementuak %1$s egun igaro ondoren ezabatuko dira.</string>
     <string name="discard_filter_changes_prompt">Iragazki guztiak berrezarri?</string>
     <string name="no_config_smart_folder_description">Karpeta adimendunek arrastoak iragazkien arabera taldekatzeko aukera ematen dute</string>
-    <string name="widget_available_ram">RAM erabilgarria</string>
     <string name="trash_is_empty">Zakarrontzia hutsa dago</string>
     <string name="terrain_maps">Lurreko mapak</string>
     <string name="shared_string_trash">Zakarrontzia</string>
