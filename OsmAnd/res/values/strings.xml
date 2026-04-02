@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="memory_used">Used memory</string>
+	<string name="memory_limit">Memory limit</string>
+	<string name="memory_graphics">Graphics memory</string>
 	<string name="compass_calibration_needed">Compass calibration needed</string>
 	<string name="sensors_not_available_for_ar">Sensors not available for AR</string>
 	<string name="ar_mode_enabled">AR Mode Enabled</string>
