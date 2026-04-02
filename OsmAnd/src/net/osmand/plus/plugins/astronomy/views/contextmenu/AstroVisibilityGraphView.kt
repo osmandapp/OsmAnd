@@ -470,7 +470,9 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		val altitudeLabel =
 			"${altitude.roundToInt()}° ${context.getString(R.string.astro_alt_short)}"
 		val azimuthLabel = "${azimuth.roundToInt()}° ${context.getString(R.string.astro_az_short)}"
-		drawCursorMarker(canvas, area, x, timeLabel, altitudeLabel, azimuthLabel, lineTop)
+		val azimuthDirectionLabel = formatAzimuthDirection(azimuth)
+		val azimuthLabelWithDirection = "$azimuthLabel ($azimuthDirectionLabel)"
+		drawCursorMarker(canvas, area, x, timeLabel, altitudeLabel, azimuthLabelWithDirection, lineTop)
 	}
 
 	private fun drawCursorMarker(
@@ -702,6 +704,26 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		var az = value % 360.0
 		if (az < 0) az += 360.0
 		return az
+	}
+
+	private fun formatAzimuthDirection(azimuth: Double): String {
+		val normalizedAzimuth = normalizeAzimuth(azimuth)
+		val north = context.getString(R.string.north_abbreviation)
+		val east = context.getString(R.string.east_abbreviation)
+		val south = context.getString(R.string.south_abbreviation)
+		val west = context.getString(R.string.west_abbreviation)
+		val directions = arrayOf(
+			north,
+			north + east,
+			east,
+			south + east,
+			south,
+			south + west,
+			west,
+			north + west
+		)
+		val sectorIndex = (((normalizedAzimuth + 22.5) % 360.0) / 45.0).toInt()
+		return directions[sectorIndex]
 	}
 
 	private fun lerp(start: Double, end: Double, t: Double): Double {
