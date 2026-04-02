@@ -142,7 +142,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 			DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, surfaceRenderer.getDensity());
 
 			alarmWidget.updateInfo(drawSettings, true);
-			speedometerWidget.updateInfo(drawSettings, true, drawSettings.isNightMode());
+			speedometerWidget.updateInfo(drawSettings, drawSettings.isNightMode());
 
 			Bitmap alarmBitmap = alarmWidget.getWidgetBitmap();
 			Bitmap speedometerBitmap = speedometerWidget.getWidgetBitmap();
