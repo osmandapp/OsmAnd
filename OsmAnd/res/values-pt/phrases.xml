@@ -203,7 +203,6 @@
     <string name="poi_traffic_calming_island">Ilha de trânsito</string>
     <string name="poi_traffic_signals">Semáforo</string>
     <string name="poi_car_repair">Oficina automóvel</string>
-    <string name="poi_service_tyres">Pneus;Pneu</string>
     <string name="poi_vehicle_inspection">Inspeção de veículos</string>
     <string name="poi_car_wash">Lavagem de automóveis</string>
     <string name="poi_fuel">Posto de combustível</string>
@@ -2008,7 +2007,6 @@
     <string name="poi_training_art">Formação: arte</string>
     <string name="poi_training_cooking">Formação: cozinhar</string>
     <string name="poi_training_computer">Formação: computação</string>
-    <string name="poi_training_yoga">Formação: ioga</string>
     <string name="poi_training_martial_art">Formação: arte marcial</string>
     <string name="poi_training_aviation">Formação: aviação</string>
     <string name="poi_training_hairdressing">Formação: cabeleireiro/a</string>
@@ -2952,7 +2950,6 @@
     <string name="poi_cuisine_yogurt">Iogurtes</string>
     <string name="poi_cuisine_gyros">Gyros (grego)</string>
     <string name="poi_cuisine_empanada">Empanadas</string>
-    <string name="poi_cuisine_crepes">Crepes</string>
     <string name="poi_cuisine_yakiniku">Yakiniku (japonês)</string>
     <string name="poi_cuisine_suki">Suki tailandês</string>
     <string name="poi_cuisine_udon">Udon (japonês)</string>
@@ -5051,7 +5048,6 @@
     <string name="poi_travel_agency">Agência de viagens</string>
     <string name="poi_network_cycling">Rede de rotas (ciclismo)</string>
     <string name="poi_hazard_landslide">Perigo: deslizamento de terra</string>
-    <string name="poi_hazard_additional_yes">Perigo</string>
     <string name="poi_hazard_falling_rocks">Pedras caindo</string>
     <string name="poi_hazard_contamination">Contaminação</string>
     <string name="poi_hazard_yes">Perigo</string>

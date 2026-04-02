@@ -5596,8 +5596,6 @@
     <string name="help_article_navigation_routing_car_based_routing_name">Autoroutes (Vrachtwagen, Motor)</string>
     <string name="help_article_start_with_main_menu_name">Hoofdmenu</string>
     <string name="rendering_styles">Rendering stijlen</string>
-    <string name="widget_available_ram_desc">Laat beschikbaar geheugen zien dat is toegewezen aan OsmAnd.</string>
-    <string name="widget_available_ram">Beschikbaar RAM</string>
     <string name="with_waypoints">Met tussenstops</string>
     <string name="delete_smart_folder_dialog_message">Hiermee wordt de slimme map \"%1$s\" verwijderd. (Tracks worden niet verwijderd.)</string>
     <string name="max_sensor_temperature">Temperatuur, maximaal</string>

@@ -294,7 +294,6 @@
     <string name="poi_bank">Bankejo</string>
     <string name="poi_beach">Sablobordo</string>
     <string name="poi_car_repair">Aŭtomobil-riparejo</string>
-    <string name="poi_service_tyres">pneŭoj;pneuoj;bendoj;aerbendoj;radoj</string>
     <string name="poi_vehicle_inspection">Aŭtomobil-kontrolejo</string>
     <string name="poi_fuel_diesel">dizeloleo</string>
     <string name="poi_fuel_gtl_diesel">dizeloleo sinteza</string>
@@ -1794,7 +1793,6 @@
     <string name="poi_training_art">Lernado: arto</string>
     <string name="poi_training_cooking">Lernado: kuiro</string>
     <string name="poi_training_computer">Lernado: komputilo</string>
-    <string name="poi_training_yoga">Lernado: jogo</string>
     <string name="poi_training_martial_art">Lernado: batal-arto</string>
     <string name="poi_training_aviation">Lernado: aviado</string>
     <string name="poi_training_hairdressing">Lernado: hair-tondado</string>
@@ -2895,7 +2893,6 @@
     <string name="poi_cuisine_yogurt">jogurtoj</string>
     <string name="poi_cuisine_gyros">giros</string>
     <string name="poi_cuisine_empanada">empanada/pastel (pana ĉirkaŭvolvaĵo)</string>
-    <string name="poi_cuisine_crepes">patkukoj maldikaj (crêpe)</string>
     <string name="poi_cuisine_yakiniku">jakiniku (japana rostita viandaĵo)</string>
     <string name="poi_cuisine_suki">suki (taja varmega poto)</string>
     <string name="poi_cuisine_udon">udonoj (japanaj nudeloj)</string>
@@ -4990,7 +4987,6 @@
     <string name="poi_aerodrome_type_airfield">Malgranda</string>
     <string name="poi_consulate">Konsulejo</string>
     <string name="poi_hazard_landslide">Terglito</string>
-    <string name="poi_hazard_additional_yes">Danĝero</string>
     <string name="poi_hazard_falling_rocks">Danĝero: falantaj ŝtonoj</string>
     <string name="poi_hazard_contamination">Danĝero: ĥemia poluo</string>
     <string name="poi_hazard_yes">Danĝero</string>

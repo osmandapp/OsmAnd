@@ -5019,7 +5019,6 @@
     <string name="shared_string_temperature">Temperaturo</string>
     <string name="shared_string_cache">Kaŝmemoro</string>
     <string name="with_waypoints">Kun navigadpunktoj</string>
-    <string name="widget_available_ram_desc">Montras disponeblan memoron asignitan al OsmAnd.</string>
     <string name="sort_size_descending">grando (malkreskante)</string>
     <string name="delete_map">Forigi mapon</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
@@ -5040,7 +5039,6 @@
     <string name="map_is_up_to_date">La mapo de %1$s estas ĝisdata.</string>
     <string name="sort_size_ascending">grando (kreskante)</string>
     <string name="filter_screen_title">Filtri</string>
-    <string name="widget_available_ram">Disponebla RAM</string>
     <string name="terrain_maps">Terenaj mapoj</string>
     <string name="sort_country_name_descending">landnomo (Z → A)</string>
     <string name="delete_map_description">Ĉu forigi la mapon: %1$s?</string>

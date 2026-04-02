@@ -63,7 +63,6 @@
     <string name="poi_city_wall">Muralla</string>
     <string name="poi_border_control">Controlo aduaneiro</string>
     <string name="poi_traffic_calming_bump">Lomba curta de redución de velocidade</string>
-    <string name="poi_service_tyres">Pneumáticos;Rodas</string>
     <string name="poi_vehicle_inspection">Inspección técnica de vehículos</string>
     <string name="poi_car_wash">Lavado de automóbeis</string>
     <string name="poi_fuel">Gasolineira;Estación de servizo;Combustíbeis</string>
@@ -2335,7 +2334,6 @@
     <string name="poi_training_art">Formación: arte</string>
     <string name="poi_training_cooking">Formación: cociña</string>
     <string name="poi_training_computer">Formación: informática</string>
-    <string name="poi_training_yoga">Formación: ioga</string>
     <string name="poi_training_martial_art">Formación: artes marciais</string>
     <string name="poi_training_aviation">Formación: aviación</string>
     <string name="poi_training_hairdressing">Formación: perrucaría</string>
@@ -2558,7 +2556,6 @@
     <string name="poi_cuisine_yogurt">Iogures</string>
     <string name="poi_cuisine_gyros">Gyros</string>
     <string name="poi_cuisine_empanada">Empanadas</string>
-    <string name="poi_cuisine_crepes">Filloas ou creps</string>
     <string name="poi_cuisine_yakiniku">Yakiniku</string>
     <string name="poi_cuisine_suki">Sukis</string>
     <string name="poi_cuisine_udon">Udons</string>
@@ -4993,7 +4990,6 @@
     <string name="poi_aerodrome_type_airfield">Aeródromo</string>
     <string name="poi_consulate">Consulate</string>
     <string name="poi_hazard_landslide">Perigo: corremento de terra</string>
-    <string name="poi_hazard_additional_yes">Perigo</string>
     <string name="poi_hazard_falling_rocks">Caendo rochas</string>
     <string name="poi_hazard_contamination">Contamination</string>
     <string name="poi_hazard_yes">Perigo</string>

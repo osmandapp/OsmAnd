@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets.widgetstates;
 
+import android.content.Context;
+
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -33,7 +36,7 @@ public class MemoryWidgetState extends WidgetState {
 	@NonNull
 	@Override
 	public String getTitle() {
-		return app.getString(R.string.widget_available_ram);
+		return app.getString(R.string.map_widget_memory_info);
 	}
 
 	@Override
@@ -66,21 +69,36 @@ public class MemoryWidgetState extends WidgetState {
 	}
 
 	public enum MemoryInfoType {
-		USED(R.string.memory_used, "Used"),
-		AVAILABLE(R.string.widget_available_ram, "Avail"),
-		ALLOCATED(R.string.global_app_allocated_memory, "Alloc"),
-		LIMIT(R.string.memory_limit, "Limit"),
-		NATIVE(R.string.native_app_allocated_memory, "Native"),
-		GRAPHICS(R.string.memory_graphics, "GPU");
+		USED(R.string.memory_used_settings, R.string.shared_string_heap, R.string.shared_string_used),
+		ALLOCATED(R.string.memory_allocated_settings, R.string.shared_string_heap, R.string.shared_string_allocated),
+		LIMIT(R.string.memory_limit_settings, R.string.shared_string_heap, R.string.shared_string_limit),
+		NATIVE(R.string.memory_native_settings, R.string.shared_string_native, R.string.shared_string_allocated),
+		GRAPHICS(R.string.memory_graphics_settings, R.string.shared_string_gpu, R.string.shared_string_memory);
 
 		@StringRes
 		public final int titleId;
-		@NonNull
-		public final String shortName;
+		@StringRes
+		public final int prefixId;
+		@StringRes
+		public final int suffixId;
 
-		MemoryInfoType(@StringRes int titleId, @NonNull String shortName) {
+		MemoryInfoType(@StringRes int titleId, @StringRes int prefixId, @StringRes int suffixId) {
 			this.titleId = titleId;
-			this.shortName = shortName;
+			this.prefixId = prefixId;
+			this.suffixId = suffixId;
+		}
+
+		@DrawableRes
+		public int getIconId(boolean nightMode) {
+			if (this == GRAPHICS) {
+				return nightMode ? R.drawable.widget_developer_memory_gpu_night : R.drawable.widget_developer_memory_gpu_day;
+			}
+			return nightMode ? R.drawable.widget_developer_ram_night : R.drawable.widget_developer_ram_day;
+		}
+
+		@NonNull
+		public String getMapLabel(@NonNull Context ctx) {
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_colon, ctx.getString(prefixId), ctx.getString(suffixId));
 		}
 
 		@NonNull

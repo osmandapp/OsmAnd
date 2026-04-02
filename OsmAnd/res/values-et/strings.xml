@@ -4611,8 +4611,6 @@
     <string name="corner_radius">Nurga raadius</string>
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Eelista suusatamist väljaspool ettevalmistatud radu</string>
     <string name="quick_action_navigation_view_title">Tee juhatamine</string>
-    <string name="widget_available_ram_desc">OsmAndi jaoks kasutatava muutmälu mahu näitaja.</string>
-    <string name="widget_available_ram">Kasutatav muutmälu</string>
     <string name="widget_with_dot">Vidin.</string>
     <string name="smart_folder_saved">Nutikas kaust on salvestatud</string>
     <string name="map_settings_weather_wind_animation">Tuule animatsioon</string>

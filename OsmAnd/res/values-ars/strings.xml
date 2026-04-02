@@ -1375,7 +1375,6 @@
     <string name="incremental_search_street">اختيار تدريجي للشارع</string>
     <string name="display_position_automatic_descr">يعتمد على اتجاه الخريطة: الجزء السفلي لاتجاه الحركة ، المركز للبقية.</string>
     <string name="select_month_and_country">حدد الشهر والبلد:</string>
-    <string name="widget_available_ram_desc">يعرض الذاكرة المتاحة المخصصة لأوسماند.</string>
     <string name="light_rs_render_descr">أسلوب قيادة بسيط. الوضع الليلي اللطيف ، وخطوط الكنتور ، مقارنة بالطرق ذات اللون البرتقالي ، يعتم الكائنات في الخريطة الثانوية.</string>
     <string name="access_default_color">اللون الافتراضي</string>
     <string name="sqlite_db_file">ملف SQLiteDB</string>
@@ -4440,7 +4439,6 @@
     <string name="monitoring_min_accuracy_descr_side_effect">الآثار الجانبية: نتيجة التصفية بدقة ، قد تكون النقاط مفقودة تماماً على سبيل المثال أسفل الجسور ، تحت الأشجار ، بين المباني العالية ، أو مع بعض الظروف الجوية.</string>
     <string name="lang_pms">بقر بيدمونتيز</string>
     <string name="purchases_feature_desc_cross_buy">استخدم ميزات اشتراكك على منصات مختلفة (Android / iOS / Web) دون أي تكلفة إضافية.</string>
-    <string name="widget_available_ram">ذاكرة الوصول العشوائي المتاحة</string>
     <string name="plugin_distance_point_hdop">الدقة</string>
     <string name="waypoint_visit_after">زيارة بعد</string>
     <string name="rendering_attr_lightDetail_name">تفاصيل خفيفة</string>

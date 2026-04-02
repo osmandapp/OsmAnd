@@ -670,7 +670,6 @@
     <string name="poi_traffic_calming_rumble_strip">مطب تحذيري</string>
     <string name="poi_traffic_calming_table">مطب مرتفع وطويل</string>
     <string name="poi_traffic_signals">اشارة توقف ضوئية</string>
-    <string name="poi_service_tyres">إطارات</string>
     <string name="poi_fuel_hgv_diesel">ديزل HGV</string>
     <string name="poi_photo_studio">استوديو صور</string>
     <string name="poi_locomotive">قاطرة</string>
@@ -2180,7 +2179,6 @@
     <string name="poi_cuisine_udon">أودون</string>
     <string name="poi_cuisine_suki">سوكي</string>
     <string name="poi_cuisine_yakiniku">ياكينيكو</string>
-    <string name="poi_cuisine_crepes">كريب</string>
     <string name="poi_cuisine_empanada">امبانادا</string>
     <string name="poi_cuisine_gyros">جيروس</string>
     <string name="poi_cuisine_yogurt">زبادي</string>
@@ -3691,7 +3689,6 @@
     <string name="poi_piste">الزحلقه</string>
     <string name="poi_training_hairdressing">التدريب: تصفيف الشعر</string>
     <string name="poi_training_aviation">التدريب: الطيران</string>
-    <string name="poi_training_yoga">التدريب: اليوغا</string>
     <string name="poi_training_computer">التدريب: الحاسوب</string>
     <string name="poi_training_art">التدريب: فن</string>
     <string name="poi_training_sport">التدريب: رياضة</string>

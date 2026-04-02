@@ -66,7 +66,6 @@
     <string name="poi_city_wall">Gradske zidine</string>
     <string name="poi_traffic_signals">Semafor</string>
     <string name="poi_car_repair">Popravljanje automobila</string>
-    <string name="poi_service_tyres">Gume</string>
     <string name="poi_fuel_gtl_diesel">GTL dizl</string>
     <string name="poi_fuel_lpg">LPG</string>
     <string name="poi_fuel_octane_80">80 oktana</string>
@@ -1053,7 +1052,6 @@
     <string name="poi_cuisine_yogurt">Jogurt</string>
     <string name="poi_cuisine_gyros">Giros</string>
     <string name="poi_cuisine_empanada">Empanada</string>
-    <string name="poi_cuisine_crepes">Tanke palačinke</string>
     <string name="poi_cuisine_brasserie">Pivovara</string>
     <string name="poi_cuisine_bubble_tea">Čaj s mjehurićima</string>
     <string name="poi_cuisine_meat">Meso</string>
