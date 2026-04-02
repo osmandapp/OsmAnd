@@ -6043,4 +6043,15 @@
     <string name="ar_mode_enabled">Mode AR activé</string>
     <string name="ar_mode_disabled">Mode AR désactivé</string>
     <string name="shared_string_world_weather_map">Carte météorologique mondiale</string>
+    <string name="map_widget_memory_info">Informations sur la mémoire</string>
+    <string name="map_widget_memory_info_desc">Surveille le tas Java, les allocations natives et la mémoire graphique.</string>
+    <string name="memory_used_settings">Utilisation du tas Java</string>
+    <string name="memory_allocated_settings">Tas Java alloué</string>
+    <string name="memory_limit_settings">Limite maximale de la mémoire du tas Java</string>
+    <string name="memory_native_settings">Mémoire allouée nativement</string>
+    <string name="memory_graphics_settings">Mémoire graphique</string>
+    <string name="shared_string_heap">Tas</string>
+    <string name="shared_string_native">Natif</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="shared_string_allocated">Alloué</string>
 </resources>
