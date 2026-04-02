@@ -2028,7 +2028,7 @@ public class OpeningHoursParser {
 						basic.comment = l[0].text;
 					}
 				} else if (currentParse == TokenType.TOKEN_YEAR) {
-					if (i < tokens.size() && listOfPairs.size() > 1) {
+					if (listOfPairs.size() > 1) {
 						// Comma-separated years have set semantics, so expand each year / year-range pair
 						// into an independent rule that shares the same month/day tail.
 						for (Token[] pair : listOfPairs) {
@@ -2042,7 +2042,9 @@ public class OpeningHoursParser {
 							if (pair[1] != null) {
 								yearTokens.add(pair[1]);
 							}
-							yearTokens.addAll(tokens.subList(i, tokens.size()));
+							if (i < tokens.size()) {
+								yearTokens.addAll(tokens.subList(i, tokens.size()));
+							}
 							buildRule(newRule, yearTokens, rules);
 						}
 						return;

@@ -663,6 +663,15 @@ public class OpeningHoursParserTest {
 		testOpened("31.12.2024 23:59", hours, true);
 		testOpened("01.01.2025 00:00", hours, false);
 
+		hours = parseOpenedHours("2024,2026");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("15.06.2025 12:00", hours, false);
+		testOpened("01.01.2026 00:00", hours, true);
+		testOpened("31.12.2026 23:59", hours, true);
+		testOpened("01.01.2027 00:00", hours, false);
+
 		hours = parseOpenedHours("2024,2026 Jan 1-Dec 31");
 		testOpened("31.12.2023 23:59", hours, false);
 		testOpened("01.01.2024 00:00", hours, true);
