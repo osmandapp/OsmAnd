@@ -633,6 +633,38 @@ public class OpeningHoursParserTest {
 
 		testAmPm();
 		testComma();
+		testYearFormats();
+	}
+
+	private void testYearFormats() throws ParseException {
+		OpeningHoursParser.initLocalStrings(Locale.UK);
+		OpeningHoursParser.setTwelveHourFormattingEnabled(false, Locale.UK);
+
+		OpeningHours hours = parseOpenedHours("2024 Jan-Dec");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("01.01.2025 00:00", hours, false);
+
+		hours = parseOpenedHours("2024-2025 Jan 1-Dec 31");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("31.12.2025 23:59", hours, true);
+		testOpened("01.01.2026 00:00", hours, false);
+
+		hours = parseOpenedHours("2024,2025 Jan 1-Dec 31");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("31.12.2025 23:59", hours, true);
+		testOpened("01.01.2026 00:00", hours, false);
+
+		hours = parseOpenedHours("2024");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("01.01.2025 00:00", hours, false);
 	}
 	
 	private void testComma() throws ParseException {

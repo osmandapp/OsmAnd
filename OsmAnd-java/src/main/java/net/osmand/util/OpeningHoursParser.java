@@ -1595,13 +1595,19 @@ public class OpeningHoursParser {
 				} else if (year == this.year) {
 					if (firstYearDayMonth != null) {
 						opened = firstYearDayMonth[month][dmonth];
+					} else {
+						opened = firstYearMonths[month] > 0 && (!hasDayMonths() || dayMonths[month][dmonth]);
 					}
 				} else {
 					int lastYear = lastYearMonths[month];
 					if (year < lastYear) {
 						opened = true;
 					} else if (year == lastYear) {
-						opened = lastYearDayMonth[month][dmonth];
+						if (lastYearDayMonth != null) {
+							opened = lastYearDayMonth[month][dmonth];
+						} else {
+							opened = lastYear > 0 && (!hasDayMonths() || dayMonths[month][dmonth]);
+						}
 					} else {
 						opened = false;
 					}
@@ -1997,9 +2003,6 @@ public class OpeningHoursParser {
 								}
 								if (array != null) {
 									array[pair[0].mainNumber] = true;
-									if (prevYearToken != null) {
-										basic.year = prevYearToken.mainNumber;
-									}
 								}
 							}
 						}
@@ -2021,9 +2024,23 @@ public class OpeningHoursParser {
 						basic.comment = l[0].text;
 					}
 				} else if (currentParse == TokenType.TOKEN_YEAR) {
-					Token[] l = listOfPairs.get(0);
-					if (l[0] != null && l[0].mainNumber > 1000) {
-						prevYearToken = l[0];
+					Token firstYearToken = null;
+					Token lastYearToken = null;
+					for (Token[] pair : listOfPairs) {
+						for (Token yearToken : pair) {
+							if (yearToken != null && yearToken.mainNumber > 1000) {
+								if (firstYearToken == null) {
+									firstYearToken = yearToken;
+								}
+								lastYearToken = yearToken;
+							}
+						}
+					}
+					if (firstYearToken != null) {
+						if (basic.year == 0) {
+							basic.year = firstYearToken.mainNumber;
+						}
+						prevYearToken = lastYearToken;
 					}
 				}
 				listOfPairs.clear();
@@ -2038,7 +2055,9 @@ public class OpeningHoursParser {
 						t.parent = prevToken;
 						currentParseParent = prevToken.type;
 					} else if (t.type == TokenType.TOKEN_MONTH && prevToken != null && prevToken.type == TokenType.TOKEN_YEAR) {
-						basic.year = prevToken.mainNumber; // add first year for ("2019 Oct - 2024 dec")
+						if (basic.year == 0) {
+							basic.year = prevToken.mainNumber; // add first year for ("2019 Oct - 2024 dec")
+						}
 					}
 				}
 			} else if (t.type.ord() < currentParseParent.ord() && indexP == 0 && tokens.size() > i) {
@@ -2056,15 +2075,17 @@ public class OpeningHoursParser {
 				}
 			} else if (t.type == TokenType.TOKEN_DASH) {
 
-			} else if (t.type == TokenType.TOKEN_YEAR) {
-				prevYearToken = t;
 			} else if (t.type.ord() == currentParse.ord()) {
 				if (indexP < 2) {
 					currentPair[indexP++] = t;
 					if (t.type == TokenType.TOKEN_DAY_MONTH && prevToken != null && prevToken.type == TokenType.TOKEN_MONTH) {
 						t.parent = prevToken;
+					} else if (t.type == TokenType.TOKEN_YEAR) {
+						prevYearToken = t;
 					}
 				}
+			} else if (t.type == TokenType.TOKEN_YEAR) {
+				prevYearToken = t;
 			}
 			prevToken = t;
 		}
