@@ -97,6 +97,9 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 				case BOUNDARY -> app.getString(R.string.poi_boundary_stone);
 				case POSTCODE -> app.getString(R.string.postcode);
 				case HAMLET -> app.getString(R.string.city_type_hamlet);
+				case NEIGHBOURHOOD -> app.getString(R.string.city_type_neighbourhood);
+				case DISTRICT -> app.getString(R.string.city_type_district);
+				case BOROUGH -> app.getString(R.string.poi_borough);
 				default -> app.getString(R.string.city_type_city);
 			};
 			if (city.getType() == City.CityType.VILLAGE) {
