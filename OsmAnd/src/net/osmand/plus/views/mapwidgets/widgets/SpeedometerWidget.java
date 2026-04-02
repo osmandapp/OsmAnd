@@ -332,7 +332,9 @@ public class SpeedometerWidget {
 			setSpeedLimitText(String.valueOf(PREVIEW_VALUE));
 			setSpeedLimitDescription();
 			if (speedLimitContainer != null) {
-				speedLimitContainer.setVisibility(settings.SHOW_SPEED_LIMIT_WARNING.getModeValue(mode) == ALWAYS ? View.VISIBLE : View.INVISIBLE);
+				boolean show = settings.SHOW_SPEED_LIMIT_WARNING.getModeValue(mode) == ALWAYS;
+				speedLimitContainer.setVisibility(show ? View.VISIBLE : View.GONE);
+				speedLimitContainer.setAlpha(show ? 1f : 0f);
 			}
 		}
 	}

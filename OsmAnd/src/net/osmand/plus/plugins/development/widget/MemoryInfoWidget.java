@@ -14,6 +14,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils.FormattedSize;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
@@ -37,6 +38,7 @@ public class MemoryInfoWidget extends SimpleWidget {
 			@Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, DEV_MEMORY, customId, widgetsPanel);
 		this.widgetState = widgetState;
+		this.memoryInfoType = widgetState.getMemoryInfoType();
 	}
 
 	@NonNull
@@ -48,7 +50,7 @@ public class MemoryInfoWidget extends SimpleWidget {
 	protected void setupView(@NonNull View view) {
 		super.setupView(view);
 		updateSimpleWidgetInfo(null);
-		setIcons(DEV_MEMORY);
+		updateIcons();
 	}
 
 	@Override
@@ -63,7 +65,7 @@ public class MemoryInfoWidget extends SimpleWidget {
 	@Nullable
 	@Override
 	protected String getWidgetName() {
-		return widgetState != null ? app.getString(widgetState.getMemoryInfoType().titleId) : null;
+		return memoryInfoType.getMapLabel(app);
 	}
 
 	@Nullable
@@ -83,18 +85,31 @@ public class MemoryInfoWidget extends SimpleWidget {
 		MemoryInfoType newType = widgetState.getMemoryInfoType();
 		boolean typeChanged = newType != memoryInfoType;
 
-		if (isTimeToUpdate() || typeChanged) {
-			lastUpdateTime = System.currentTimeMillis();
-
-			long newMemoryValue = calculateMemoryValue(newType);
-			if (typeChanged || cachedMemoryValue != newMemoryValue) {
-				memoryInfoType = newType;
-				cachedMemoryValue = newMemoryValue;
-
-				String text = AndroidUtils.formatSize(app, cachedMemoryValue, true);
-				setText(text, memoryInfoType.shortName);
-			}
+		if (!typeChanged && !isTimeToUpdate()) {
+			return;
 		}
+		lastUpdateTime = System.currentTimeMillis();
+		long newMemoryValue = calculateMemoryValue(newType);
+
+		if (!typeChanged && cachedMemoryValue == newMemoryValue) {
+			return;
+		}
+		memoryInfoType = newType;
+		cachedMemoryValue = newMemoryValue;
+
+		if (typeChanged) {
+			updateIcons();
+		}
+		FormattedSize formattedSize = AndroidUtils.formatSize(cachedMemoryValue, true);
+		if (formattedSize != null) {
+			setText(formattedSize.num, formattedSize.numSuffix);
+		} else {
+			setText(NO_VALUE, null);
+		}
+	}
+
+	private void updateIcons() {
+		setIcons(memoryInfoType.getIconId(false), memoryInfoType.getIconId(true));
 	}
 
 	private boolean isTimeToUpdate() {
@@ -103,31 +118,28 @@ public class MemoryInfoWidget extends SimpleWidget {
 
 	private long calculateMemoryValue(@NonNull MemoryInfoType infoType) {
 		Runtime runtime = Runtime.getRuntime();
-		long maxMemory = runtime.maxMemory();
-		long freeMemory = runtime.freeMemory();
-		long totalMemory = runtime.totalMemory();
-		long usedMemory = totalMemory - freeMemory;
-		long effectiveMax = (maxMemory == Long.MAX_VALUE) ? totalMemory : maxMemory;
 
-		switch (infoType) {
-			case LIMIT:
-				return effectiveMax;
-			case ALLOCATED:
-				return totalMemory;
-			case AVAILABLE:
-				return Math.max(0L, effectiveMax - usedMemory);
-			case NATIVE:
-				return Debug.getNativeHeapAllocatedSize();
-			case GRAPHICS:
-				if (memoryInfo == null) {
-					memoryInfo = new Debug.MemoryInfo();
-				}
-				Debug.getMemoryInfo(memoryInfo);
-				String graphics = memoryInfo.getMemoryStat("summary.graphics");
-				return Algorithms.parseLongSilently(graphics, 0) * 1024L;
-			case USED:
-			default:
-				return usedMemory;
+		return switch (infoType) {
+			case USED -> runtime.totalMemory() - runtime.freeMemory();
+			case ALLOCATED -> runtime.totalMemory();
+			case LIMIT -> {
+				long maxMemory = runtime.maxMemory();
+				yield maxMemory == Long.MAX_VALUE ? runtime.totalMemory() : maxMemory;
+			}
+			case NATIVE -> Debug.getNativeHeapAllocatedSize();
+			case GRAPHICS -> {
+				String graphics = getMemoryInfo().getMemoryStat("summary.graphics");
+				yield Algorithms.parseLongSilently(graphics, 0) * 1024L;
+			}
+		};
+	}
+
+	@NonNull
+	private Debug.MemoryInfo getMemoryInfo() {
+		if (memoryInfo == null) {
+			memoryInfo = new Debug.MemoryInfo();
 		}
+		Debug.getMemoryInfo(memoryInfo);
+		return memoryInfo;
 	}
 }

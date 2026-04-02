@@ -160,7 +160,6 @@
     <string name="poi_traffic_calming_choker">路面縮窄</string>
     <string name="poi_traffic_signals">交通號誌</string>
     <string name="poi_car_repair">汽車修理廠</string>
-    <string name="poi_service_tyres">輪胎</string>
     <string name="poi_vehicle_inspection">車輛檢修</string>
     <string name="poi_car_wash">洗車場</string>
     <string name="poi_fuel">加油站</string>
@@ -1795,7 +1794,6 @@
     <string name="poi_training_art">培訓：藝術</string>
     <string name="poi_training_cooking">培訓：烹飪</string>
     <string name="poi_training_computer">培訓：電腦</string>
-    <string name="poi_training_yoga">培訓：瑜伽</string>
     <string name="poi_training_martial_art">培訓：武術</string>
     <string name="poi_training_aviation">培訓：航空</string>
     <string name="poi_training_hairdressing">培訓：美容美髮</string>
@@ -2930,7 +2928,6 @@
     <string name="poi_cuisine_yogurt">優格</string>
     <string name="poi_cuisine_gyros">希臘旋轉烤肉</string>
     <string name="poi_cuisine_empanada">拉丁餡餅</string>
-    <string name="poi_cuisine_crepes">可麗餅</string>
     <string name="poi_cuisine_yakiniku">烤肉</string>
     <string name="poi_cuisine_suki">泰式火鍋</string>
     <string name="poi_cuisine_udon">烏龍麵</string>
@@ -4993,7 +4990,6 @@
     <string name="poi_hazard_falling_rocks">落石</string>
     <string name="poi_hazard_contamination">污染</string>
     <string name="poi_hazard_yes">災害</string>
-    <string name="poi_hazard_additional_yes">災害</string>
     <string name="poi_network_rhn">區域馬匹網路 (RHN)</string>
     <string name="poi_network_lhn">在地馬匹網路 (LHN)</string>
     <string name="poi_network_nhn">國家馬匹網路 (NHN)</string>

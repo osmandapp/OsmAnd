@@ -4939,7 +4939,6 @@
     <string name="date_of_creation">Létrehozás dátuma</string>
     <string name="filter_screen_title">Szűrő</string>
     <string name="shared_string_cache">Gyorsítótár</string>
-    <string name="widget_available_ram_desc">Megjeleníti az OsmAnd számára elérhető memória mennyiségét.</string>
     <string name="sort_size_descending">Nagy méretűek elöl</string>
     <string name="delete_map">Térkép törlése</string>
     <string name="standard_maps">Normál térképek</string>
@@ -4950,7 +4949,6 @@
     <string name="weather_online">Online időjárás</string>
     <string name="map_is_up_to_date">%1$s térképe naprakész.</string>
     <string name="sort_size_ascending">Kis méretűek elöl</string>
-    <string name="widget_available_ram">Elérhető memória</string>
     <string name="terrain_maps">Domborzati térképek</string>
     <string name="sort_country_name_descending">Országnév Z - A</string>
     <string name="delete_map_description">Törli %1$s térképét?</string>

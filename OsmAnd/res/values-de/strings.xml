@@ -5028,7 +5028,6 @@
     <string name="date_of_creation">Erstellungsdatum</string>
     <string name="filter_screen_title">Filter</string>
     <string name="shared_string_cache">Zwischenspeicher</string>
-    <string name="widget_available_ram_desc">Zeigt den für OsmAnd verfügbaren, zugewiesenen Speicher an.</string>
     <string name="sort_size_descending">Große Größe zuerst</string>
     <string name="delete_map">Karte löschen</string>
     <string name="standard_maps">Standardkarten</string>
@@ -5038,7 +5037,6 @@
     <string name="shared_string_show_icon">Symbol anzeigen</string>
     <string name="map_is_up_to_date">Die Karte %1$s ist auf dem neuesten Stand.</string>
     <string name="sort_size_ascending">Kleine Größe zuerst</string>
-    <string name="widget_available_ram">Verfügbarer RAM</string>
     <string name="terrain_maps">Geländekarten</string>
     <string name="sort_country_name_descending">Landesname: Z – A</string>
     <string name="delete_map_description">Karte %1$s löschen?</string>

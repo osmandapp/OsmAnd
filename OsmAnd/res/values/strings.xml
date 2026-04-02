@@ -10,9 +10,17 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-	<string name="memory_used">Used memory</string>
-	<string name="memory_limit">Memory limit</string>
-	<string name="memory_graphics">Graphics memory</string>
+	<string name="map_widget_memory_info">Memory info</string>
+	<string name="map_widget_memory_info_desc">Monitors Java heap, native allocations, and graphics memory.</string>
+	<string name="memory_used_settings">Used Java Heap</string>
+	<string name="memory_allocated_settings">Allocated Java Heap</string>
+	<string name="memory_limit_settings">Max Java Heap Limit</string>
+	<string name="memory_native_settings">Native Heap Allocated</string>
+	<string name="memory_graphics_settings">Graphics Memory</string>
+	<string name="shared_string_heap">Heap</string>
+	<string name="shared_string_native">Native</string>
+	<string name="shared_string_gpu">GPU</string>
+	<string name="shared_string_allocated">Allocated</string>
 	<string name="compass_calibration_needed">Compass calibration needed</string>
 	<string name="sensors_not_available_for_ar">Sensors not available for AR</string>
 	<string name="ar_mode_enabled">AR Mode Enabled</string>
@@ -1199,8 +1207,6 @@ You will be able to pair this scanner again at any time.</string>
     <string name="wikipedia_and_travel_maps">Wikipedia and Travel maps</string>
     <string name="standard_maps">Standard maps</string>
     <string name="terrain_maps">Terrain maps</string>
-    <string name="widget_available_ram_desc">Displays available memory allocated for OsmAnd.</string>
-    <string name="widget_available_ram">Available RAM</string>
     <string name="app_mode_hang_gliding">Hang gliding</string>
     <string name="app_mode_paragliding">Paragliding</string>
     <string name="max_altitude">Max altitude</string>

@@ -116,7 +116,6 @@
     <string name="poi_traffic_calming_choker">نقطهٔ گازانبری</string>
     <string name="poi_traffic_signals">چراغ راهنما</string>
     <string name="poi_car_repair">تعمیر خودرو</string>
-    <string name="poi_service_tyres">پنچرگیری</string>
     <string name="poi_vehicle_inspection">معاینه فنی خودرو</string>
     <string name="poi_car_wash">کارواش</string>
     <string name="poi_fuel">جایگاه سوخت; جایگاه سوخت‌گیری; پمپ بنزین; پمپ گاز</string>
@@ -1313,7 +1312,6 @@
     <string name="poi_training_art">آموزش: هنر</string>
     <string name="poi_training_cooking">آموزش: آشپزی</string>
     <string name="poi_training_computer">آموزش: کامپیوتر</string>
-    <string name="poi_training_yoga">آموزش: یوگا</string>
     <string name="poi_training_martial_art">آموزش: هنرهای رزمی</string>
     <string name="poi_animal_training_dog">سگ</string>
     <string name="poi_animal_training_horse">اسب</string>
