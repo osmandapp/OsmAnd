@@ -53,7 +53,7 @@
     <string name="background_router_service">OsmAnd im Hintergrund ausführen</string>
     <string name="background_service_int_descr">Vom Hintergrunddienst verwendetes Aufwachintervall:</string>
     <string name="background_service_int">GPS-Aufwachintervall</string>
-    <string name="save_track_to_gpx_globally_headline">Spurenaufzeichnung bei Bedarf</string>
+    <string name="save_track_to_gpx_globally_headline">Track Aufzeichnung bei Bedarf</string>
     <string name="save_track_to_gpx_globally_descr">Generelle Positionserfassung kann mit der Schaltfläche „GPX“ direkt auf dem Kartenbildschirm aktiviert oder deaktiviert werden.</string>
     <string name="save_current_track">Aktuellen Track speichern</string>
     <string name="save_current_track_descr">Aktuellen Track jetzt als GPX-Datei speichern.</string>
@@ -5405,7 +5405,7 @@
     <string name="hugerock_promo">Hugerock-Promo für %1$s Monate</string>
     <string name="shared_string_automatically">Automatisch</string>
     <string name="ask_every_time">Jedes Mal fragen</string>
-    <string name="detailed_track_guidance">Detaillierte Spurführung</string>
+    <string name="detailed_track_guidance">Detaillierte Track Navigation</string>
     <string name="detailed_track_guidance_description">OsmAnd gleicht Ihren Weg mit nahe gelegenen Straßen ab, um die Abbiegehinweise zu verbessern.</string>
     <string name="quick_action_routes_summary">Ein Schalter, um %1$s auf der Karte anzuzeigen oder auszublenden.</string>
     <string name="compass_click_north_is_up">Klicken und halten Sie, um den Ausrichtungsmodus zu ändern</string>
