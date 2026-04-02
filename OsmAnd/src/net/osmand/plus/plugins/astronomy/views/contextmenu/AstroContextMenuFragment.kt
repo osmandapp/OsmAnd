@@ -38,6 +38,7 @@ import net.osmand.plus.plugins.astronomy.Catalog
 import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.plugins.astronomy.StarMapFragment
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
+import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils
@@ -306,21 +307,27 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			locationTitle.text = app.getString(R.string.astro_locate)
 
 			directionIcon.setImageDrawable(
-				uiUtilities.getIcon(
-					if (obj.showDirection) {
-						R.drawable.ic_action_target_direction_on
-					} else {
-						R.drawable.ic_action_target_direction_off
-					},
-					ColorUtilities.getActiveIconColorId(nightMode)
+				AndroidUtils.getDrawableForDirection(
+					app,
+					uiUtilities.getIcon(
+						if (obj.showDirection) {
+							R.drawable.ic_action_target_direction_on
+						} else {
+							R.drawable.ic_action_target_direction_off
+						},
+						ColorUtilities.getActiveIconColorId(nightMode)
+					)
 				)
 			)
 			directionTitle.text = app.getString(R.string.astro_direction)
 
 			pathIcon.setImageDrawable(
-				uiUtilities.getIcon(
-					if (obj.showCelestialPath) R.drawable.ic_action_target_path_on else R.drawable.ic_action_target_path_off,
-					ColorUtilities.getActiveIconColorId(nightMode)
+				AndroidUtils.getDrawableForDirection(
+					app,
+					uiUtilities.getIcon(
+						if (obj.showCelestialPath) R.drawable.ic_action_target_path_on else R.drawable.ic_action_target_path_off,
+						ColorUtilities.getActiveIconColorId(nightMode)
+					)
 				)
 			)
 			pathTitle.text = app.getString(R.string.astro_path)
