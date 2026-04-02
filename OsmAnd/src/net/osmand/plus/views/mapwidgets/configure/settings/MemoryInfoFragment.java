@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -56,12 +57,13 @@ public class MemoryInfoFragment extends BaseSimpleWidgetInfoFragment {
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		inflate(R.layout.fragment_widget_settings_zoom_level, container);
+		inflate(R.layout.fragment_widget_settings_memory, container);
 
-		View memoryInfoTypeContainer = container.findViewById(R.id.zoom_level_type_container);
-		memoryInfoTypeContainer.setOnClickListener(v -> showMemoryInfoTypeSelectionDialog());
-		memoryInfoTypeContainer.setBackground(getPressedStateDrawable());
-		updateSelectedMemoryInfoTypeText();
+		View modeContainer = container.findViewById(R.id.mode_container);
+		modeContainer.setOnClickListener(v -> showMemoryInfoTypeSelectionDialog());
+		modeContainer.setBackground(getPressedStateDrawable());
+
+		updateModeUI();
 	}
 
 	private void showMemoryInfoTypeSelectionDialog() {
@@ -74,18 +76,21 @@ public class MemoryInfoFragment extends BaseSimpleWidgetInfoFragment {
 			items[type.ordinal()] = getString(type.titleId);
 		}
 		AlertDialogData dialogData = new AlertDialogData(context, nightMode)
-				.setTitle(R.string.shared_string_show)
+				.setTitle(R.string.shared_string_mode)
 				.setControlsColor(ColorUtilities.getActiveColor(app, nightMode));
 
 		CustomAlert.showSingleSelection(dialogData, items, memoryInfoType.ordinal(), v -> {
 			int which = (int) v.getTag();
 			memoryInfoType = MemoryInfoType.values()[which];
-			updateSelectedMemoryInfoTypeText();
+			updateModeUI();
 		});
 	}
 
-	private void updateSelectedMemoryInfoTypeText() {
-		TextView selectedType = view.findViewById(R.id.selected_zoom_level_type);
+	private void updateModeUI() {
+		ImageView modeIcon = view.findViewById(R.id.mode_icon);
+		TextView selectedType = view.findViewById(R.id.selected_mode_type);
+
 		selectedType.setText(memoryInfoType.titleId);
+		modeIcon.setImageResource(memoryInfoType.getIconId(nightMode));
 	}
 }

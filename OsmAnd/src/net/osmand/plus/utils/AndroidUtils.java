@@ -375,7 +375,7 @@ public class AndroidUtils {
 	}
 
 	@Nullable
-	private static FormattedSize formatSize(long sizeBytes, boolean round) {
+	public static FormattedSize formatSize(long sizeBytes, boolean round) {
 		if (sizeBytes <= 0) {
 			return null;
 		}
@@ -394,9 +394,9 @@ public class AndroidUtils {
 		return result;
 	}
 
-	final static class FormattedSize {
-		String num;
-		String numSuffix;
+	public final static class FormattedSize {
+		public String num;
+		public String numSuffix;
 	}
 
 	private static float roundIfNeeded(float value, boolean round) {
