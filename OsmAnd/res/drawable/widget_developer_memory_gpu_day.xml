@@ -6,18 +6,18 @@
     android:viewportHeight="24">
   <path
       android:pathData="M23,17C23,18.3541 22.1024,19.497 20.8701,19.8701C20.497,21.1024 19.3541,22 18,22C17.2305,22 16.531,21.7077 16,21.2314C15.469,21.7077 14.7695,22 14,22C13.2305,22 12.531,21.7077 12,21.2314C11.469,21.7077 10.7695,22 10,22C9.2305,22 8.531,21.7077 8,21.2314C7.469,21.7077 6.7695,22 6,22C4.6458,22 3.5019,21.1025 3.1289,19.8701C1.8971,19.4967 1,18.3538 1,17V7C1,5.6462 1.8969,4.5022 3.1289,4.1289C3.5022,2.8969 4.6462,2 6,2C6.7695,2 7.469,2.2923 8,2.7685C8.531,2.2923 9.2305,2 10,2C10.7695,2 11.469,2.2923 12,2.7685C12.531,2.2923 13.2305,2 14,2C14.7695,2 15.469,2.2923 16,2.7685C16.531,2.2923 17.2305,2 18,2C19.3538,2 20.4967,2.8971 20.8701,4.1289C22.1025,4.5019 23,5.6458 23,7V17Z"
-      android:fillColor="#505762"/>
+      android:fillColor="#393E46"/>
   <path
       android:pathData="M21,17C21,17.5523 20.5523,18 20,18H4C3.4477,18 3,17.5523 3,17V7C3,6.4477 3.4477,6 4,6H20C20.5523,6 21,6.4477 21,7V17Z">
     <aapt:attr name="android:fillColor">
       <gradient 
-          android:startY="6"
+          android:startY="6.5"
           android:startX="12"
           android:endY="18"
           android:endX="12"
           android:type="linear">
-        <item android:offset="0" android:color="#FF1AB281"/>
-        <item android:offset="1" android:color="#FF17A074"/>
+        <item android:offset="0" android:color="#FF1D73FA"/>
+        <item android:offset="1" android:color="#FF0560F0"/>
       </gradient>
     </aapt:attr>
   </path>
@@ -46,14 +46,13 @@
       android:pathData="M18,4C18.5523,4 19,4.4477 19,5V6H17V5C17,4.4477 17.4477,4 18,4Z"
       android:fillColor="#D9CF34"/>
   <path
-      android:pathData="M7.5,9C8.0523,9 8.5,9.4477 8.5,10V12L8.4951,12.1025C8.4472,12.573 8.073,12.9472 7.6025,12.9951L7.5,13L8.5,15H7.5L6.5,13H6V15H5V9H7.5ZM6,12H7.5V10H6V12Z"
+      android:pathData="M8,9C8.5523,9 9,9.4477 9,10V10.5H8V10H6V14H8V13H7V12H9V14C9,14.5523 8.5523,15 8,15H6C5.4477,15 5,14.5523 5,14V10C5,9.4477 5.4477,9 6,9H8Z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M13,9C13.5523,9 14,9.4477 14,10V12C14,12.5523 13.5523,13 13,13H11V15H10V9H13ZM11,12H13V10H11V12Z"
       android:fillColor="#ffffff"
       android:fillType="evenOdd"/>
   <path
-      android:pathData="M13.5,15H12.5L12.25,14H10.75L10.5,15H9.5L11,9H12L13.5,15ZM11,13H12L11.5,11L11,13Z"
-      android:fillColor="#ffffff"
-      android:fillType="evenOdd"/>
-  <path
-      android:pathData="M16.75,13.7998L17.75,9H19V15H18V12L17,15H16.5L15.5,12V15H14.5V9H15.75L16.75,13.7998Z"
+      android:pathData="M16,14H18V9H19V14C19,14.5523 18.5523,15 18,15H16C15.4477,15 15,14.5523 15,14V9H16V14Z"
       android:fillColor="#ffffff"/>
 </vector>
