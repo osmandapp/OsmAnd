@@ -95,7 +95,6 @@
     <string name="poi_traffic_calming_rumble_strip">Banda rugosa</string>
     <string name="poi_traffic_calming_table">Plataforma reductora</string>
     <string name="poi_traffic_signals">Semàfor</string>
-    <string name="poi_service_tyres">Pneumàtics</string>
     <string name="poi_parking">Aparcament</string>
     <string name="poi_motorcycle_parking">Aparcament per a motocicletes</string>
     <string name="poi_parking_entrance">Entrada d\'aparcament</string>
@@ -1724,7 +1723,6 @@
     <string name="poi_training_art">Formació: art</string>
     <string name="poi_training_cooking">Formació: cuina</string>
     <string name="poi_training_computer">Formació: informàtica</string>
-    <string name="poi_training_yoga">Formació: ioga</string>
     <string name="poi_training_martial_art">Formació: arts marcials</string>
     <string name="poi_training_aviation">Formació: aviació</string>
     <string name="poi_training_hairdressing">Formació: perruqueria</string>

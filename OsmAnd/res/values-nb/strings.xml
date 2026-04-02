@@ -5265,7 +5265,6 @@
     <string name="filter_screen_title">Filter</string>
     <string name="shared_string_temperature">Temperatur</string>
     <string name="shared_string_cache">Hurtiglager</string>
-    <string name="widget_available_ram_desc">Viser tilgjengelig minne tildelt OsmAnd.</string>
     <string name="sort_size_descending">Stor størrelse først</string>
     <string name="delete_map">Slett kart</string>
     <string name="standard_maps">Standardkart</string>
@@ -5277,7 +5276,6 @@
     <string name="shared_string_show_icon">Vis ikon</string>
     <string name="map_is_up_to_date">Kartet %1$s er oppdatert.</string>
     <string name="sort_size_ascending">Liten størrelse først</string>
-    <string name="widget_available_ram">Tilgjengelig RAM</string>
     <string name="terrain_maps">Terrengkart</string>
     <string name="sort_country_name_descending">Landets navn: Å – A</string>
     <string name="delete_map_description">Er du sikker på at du vil slette kartet %1$s?</string>

@@ -5154,7 +5154,6 @@
     <string name="terrain_category_description">Теренске контурне линије, осенчен рељеф у сивим тоновима и ознаке нагиба у скали боја, ради приказа висина и низина.</string>
     <string name="shared_string_show_icon">Прикажи икону</string>
     <string name="map_is_up_to_date">%1$s мапа је ажурирана.</string>
-    <string name="widget_available_ram">Доступан РАМ</string>
     <string name="filter_by_name">Филтер по имену</string>
     <string name="special_routing_cpp">Нарочита врста одређивања путање</string>
     <string name="delete_smart_folder_dialog_message">Ово ће уклонити паметану фасциклу \"%1$s\". (Ниједан траг неће бити избрисан.)</string>
@@ -5168,7 +5167,6 @@
     <string name="lang_zh_hant">Традиционални Кинески</string>
     <string name="external_sensors_not_found">Сензори нису нађени</string>
     <string name="weather_online">Онлајн прогноза</string>
-    <string name="widget_available_ram_desc">Приказује расположиву меморију додељену ОсмАнду.</string>
     <string name="add_button">Додај дугме</string>
     <string name="custom_buttons">Прилагођена дугмад</string>
     <string name="default_buttons">Подразумевана дугмад</string>

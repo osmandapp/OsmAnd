@@ -4972,7 +4972,6 @@
     <string name="all_folders">Todas as pastas</string>
     <string name="help_article_map_vector_maps_name">Mapas vetoriais (estilos de mapa)</string>
     <string name="help_article_start_with_main_menu_name">Menu principal</string>
-    <string name="widget_available_ram_desc">Mostra a memória disponível atribuída ao OsmAnd.</string>
     <string name="press_button_to_link_with_action">Pressione o botão no seu dispositivo para vinculá-lo à ação: %1$s</string>
     <string name="contact_us">Contacte-nos</string>
     <string name="glide_ratio_to_target">Rácio de deslizamento até ao objetivo</string>
@@ -5091,7 +5090,6 @@
     <string name="discard_filter_changes_prompt">Repor todos os filtros?</string>
     <string name="key_bindings">Atalhos de teclado</string>
     <string name="no_config_smart_folder_description">As pastas inteligentes permitem agrupar trilhos por filtros aplicados</string>
-    <string name="widget_available_ram">RAM disponível</string>
     <string name="trash_is_empty">O lixo está vazio</string>
     <string name="key_event_action_move_to_my_location">Mover para minha localização</string>
     <string name="not_specified">Não especificado</string>

@@ -5080,8 +5080,6 @@
     <string name="wikipedia_and_travel_maps">نقشه‌های ویکی‌پدیا و سفر</string>
     <string name="standard_maps">نقشه‌های استاندارد</string>
     <string name="terrain_maps">نقشه‌های ناهمواری</string>
-    <string name="widget_available_ram_desc">حافظه در دسترس اختصاص‌یافته برای OsmAnd را نمایش می‌دهد.</string>
-    <string name="widget_available_ram">حافظه رم در دسترس</string>
     <string name="app_mode_hang_gliding">گلایدر سواری</string>
     <string name="app_mode_paragliding">پاراگلایدر</string>
     <string name="max_altitude">حداکثر ارتفاع</string>

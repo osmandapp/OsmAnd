@@ -4750,9 +4750,7 @@
     <string name="key_event_action_open_navigation_view">Otvori ekran navigacije</string>
     <string name="key_event_action_next_app_profile">Sledeći profil aplikacije</string>
     <string name="weather_online">Online prognoza</string>
-    <string name="widget_available_ram_desc">Prikazuje raspoloživu memoriju, dodjeljenu za OsmAnd.</string>
     <string name="rendering_styles">Stilovi renderinga</string>
-    <string name="widget_available_ram">Dostupan RAM</string>
     <string name="terrain_maps">Reljefne mape</string>
     <string name="shared_string_created">Kreirano</string>
     <string name="delete_map_description">Brišeš %1$s mapu?</string>

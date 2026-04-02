@@ -795,7 +795,6 @@
     <string name="sort_country_name_ascending">Tên quốc gia: A - Z</string>
     <string name="help_article_search_search_poi_name">Tìm POI</string>
     <string name="terrain_maps">Những bản đồ địa hình</string>
-    <string name="widget_available_ram">RAM có</string>
     <string name="filter_screen_title">Lọc</string>
     <string name="help_article_navigation_routing_moped_routing_name">Tìm đường cho xe gắn máy</string>
     <string name="help_article_navigation_routing_boat_navigation_name">Tìm đường cho tàu thuỷ</string>
@@ -846,7 +845,6 @@
     <string name="help_article_map_track_context_menu_name">Menu ngữ cảnh của các đường dẫn</string>
     <string name="help_article_map_vector_maps_name">Những bản đồ Véc-tơ (Những giao diện bản đồ)</string>
     <string name="help_article_widgets_markers_name">Widget đánh dấu</string>
-    <string name="widget_available_ram_desc">Hiển thị bộ nhớ hiện có được phân bổ cho OsmAnd.</string>
     <string name="shared_string_temperature">Nhiệt độ</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Tìm đường cho Ô tô (Xe tải, Xe máy)</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Tìm đường trực tiếp đến điểm (Tàu thuỷ)</string>

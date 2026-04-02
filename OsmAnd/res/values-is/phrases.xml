@@ -262,7 +262,6 @@
     <string name="poi_traffic_calming_table">Hraðahindrun - Pallur</string>
     <string name="poi_traffic_calming_island">Umferðareyja</string>
     <string name="poi_traffic_signals">Umferðarljós</string>
-    <string name="poi_service_tyres">Hjólbarðar;Hjólbarði;Dekk</string>
     <string name="poi_car_wash">Bílaþvottastöð</string>
     <string name="poi_fuel">Bensínstöð;Eldsneytisáfylling;Eldsneytisafgreiðsla</string>
     <string name="poi_fuel_diesel">Dísel</string>
@@ -1149,7 +1148,6 @@
     <string name="poi_training_art">Þjálfun: listir</string>
     <string name="poi_training_cooking">Þjálfun: matreiðsla</string>
     <string name="poi_training_computer">Þjálfun: tölvur</string>
-    <string name="poi_training_yoga">Þjálfun: jóga</string>
     <string name="poi_training_martial_art">Þjálfun: bardagaíþróttir</string>
     <string name="poi_training_aviation">Þjálfun: flug</string>
     <string name="poi_training_hairdressing">Þjálfun: hárgreiðsla</string>
@@ -1506,7 +1504,6 @@
     <string name="poi_cuisine_souvlaki">Souflaki</string>
     <string name="poi_cuisine_snack">Snakk</string>
     <string name="poi_cuisine_yogurt">Jógúrt</string>
-    <string name="poi_cuisine_crepes">Krepur</string>
     <string name="poi_cuisine_yakiniku">Yakiniku</string>
     <string name="poi_cuisine_suki">Suki</string>
     <string name="poi_cuisine_udon">Udon-núðlur</string>
@@ -4990,7 +4987,6 @@
     <string name="poi_presbyterian_church">Presbýterakirkja</string>
     <string name="poi_aerodrome_type_airfield">Flugvöllur</string>
     <string name="poi_consulate">Ræðismaður</string>
-    <string name="poi_hazard_additional_yes">Slysahætta</string>
     <string name="poi_hazard_falling_rocks">Grjóthrun</string>
     <string name="poi_hazard_contamination">Smithætta</string>
     <string name="poi_hazard_yes">Slysahætta</string>
