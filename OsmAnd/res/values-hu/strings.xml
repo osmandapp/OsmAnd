@@ -6040,4 +6040,15 @@
     <string name="ar_mode_enabled">AR-mód engedélyezve</string>
     <string name="ar_mode_disabled">AR-mód letiltva</string>
     <string name="shared_string_world_weather_map">Időjárás-világtérkép</string>
+    <string name="map_widget_memory_info">Memóriainformáció</string>
+    <string name="memory_graphics_settings">Grafikus memória</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="shared_string_allocated">Lefoglalt</string>
+    <string name="map_widget_memory_info_desc">Java memóriakupac, natív memóriafoglalások és grafikus memória figyelése.</string>
+    <string name="memory_used_settings">Használt Java memóriakupac</string>
+    <string name="memory_allocated_settings">Lefoglalt Java memóriakupac</string>
+    <string name="memory_native_settings">Lefoglalt natív memóriakupac</string>
+    <string name="shared_string_heap">Memóriakupac</string>
+    <string name="shared_string_native">Natív</string>
+    <string name="memory_limit_settings">Legnagyobb megengedett Java memóriakupac</string>
 </resources>
