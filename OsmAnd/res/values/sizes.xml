@@ -355,6 +355,8 @@
 	<dimen name="gallery_standard_icon_size">72dp</dimen>
 	<dimen name="gallery_big_icon_size">156dp</dimen>
 
+	<dimen name="astro_search_empty_state_padding_top">48dp</dimen>
+
 	<!--Route info-->
 	<dimen name="route_info_buttons_padding_top_bottom">16dp</dimen>
 	<dimen name="route_info_buttons_padding_left_right">22dp</dimen>
