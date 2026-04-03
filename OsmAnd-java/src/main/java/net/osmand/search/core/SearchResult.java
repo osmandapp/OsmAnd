@@ -56,6 +56,7 @@ public class SearchResult {
 	public String addressName;
 	public String cityName;
 	public Collection<String> otherNames;
+	public String matchedName;
 
 	public String localeRelatedObjectName;
 	public Object relatedObject;

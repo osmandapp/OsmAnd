@@ -2,6 +2,7 @@ package net.osmand.search;
 
 import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.search.core.ObjectType.ONLINE_SEARCH;
+import static net.osmand.search.core.ObjectType.STREET;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Collator;
@@ -1034,8 +1035,12 @@ public class SearchUICore {
 				if (object.otherNames != null) {
 					for (String s : object.otherNames) {
 						if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
-							object.localeName = s;
-							updateName = true;
+							if (object.objectType != STREET) {
+								object.localeName = s;
+								updateName = true;
+							} else {
+								object.matchedName = s;	
+							}							
 							break;
 						}
 					}
