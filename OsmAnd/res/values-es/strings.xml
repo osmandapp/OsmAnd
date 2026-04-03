@@ -5368,7 +5368,7 @@
     <string name="obd_fuel_type_hybrid_ethanol">Híbrido a etanol</string>
     <string name="obd_fuel_type_hybrid_diesel">Híbrido a diésel</string>
     <string name="obd_fuel_type_hybrid_electric">Híbrido eléctrico</string>
-    <string name="obd_fuel_type_hybrid_electric_combustion">Híbrido eléctrico y a combustión</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Híbrido eléctrico y de combustión</string>
     <string name="obd_fuel_type_hybrid_regenerative">Híbrido regenerativo</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Combustible dual con hidrógeno</string>
     <string name="obd_fuel_type_hydrogen">Hidrógeno</string>
