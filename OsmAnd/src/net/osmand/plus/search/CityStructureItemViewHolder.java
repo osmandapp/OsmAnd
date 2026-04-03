@@ -114,7 +114,16 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 			if (street.getNamesMap(false).containsKey(OLD_NAME_TAG)) {
 				title = String.format("%s (%s)", title, street.getName(OLD_NAME_TAG));
 			}
-			addressText = street.getCity().getName();
+			StringBuilder streetAddressBuilder = new StringBuilder();
+			String cityPart = QuickSearchListItem.getStreetCityPart(item.getSearchResult());
+			if (cityPart != null) {
+				streetAddressBuilder.append(cityPart);
+			}
+			if (!Algorithms.isEmpty(streetAddressBuilder)) {
+				streetAddressBuilder.append(", ");
+			}
+			streetAddressBuilder.append(street.getCity().getName());
+			addressText = streetAddressBuilder.toString();
 			if (item.getSearchResult().objectType == ObjectType.STREET) {
 				typeName = app.getString(R.string.search_address_street);
 			} else if (item.getSearchResult().objectType == ObjectType.STREET_INTERSECTION) {
