@@ -719,7 +719,13 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun getFeaturedCatalogEntries(): List<StarMapCatalogEntry> {
 		val entriesByWid = preparedCatalogEntries.associateBy { it.catalog.wid }
-		return FEATURED_CATALOG_WIDS.mapNotNull(entriesByWid::get).take(FEATURED_CATALOGS_COUNT)
+		val prioritizedEntries = FEATURED_CATALOG_WIDS.mapNotNull(entriesByWid::get)
+		if (prioritizedEntries.size >= FEATURED_CATALOGS_COUNT) {
+			return prioritizedEntries.take(FEATURED_CATALOGS_COUNT)
+		}
+		val selectedWids = prioritizedEntries.mapTo(linkedSetOf()) { it.catalog.wid }
+		val fallbackEntries = preparedCatalogEntries.filter { it.catalog.wid !in selectedWids }
+		return (prioritizedEntries + fallbackEntries).take(FEATURED_CATALOGS_COUNT)
 	}
 
 	private fun addExploreRow(
