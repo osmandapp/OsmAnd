@@ -3,37 +3,21 @@ package net.osmand.plus.views.layers.geometry;
 import static net.osmand.plus.track.Gpx3DLinePositionType.BOTTOM;
 import static net.osmand.plus.track.Gpx3DLinePositionType.TOP;
 import static net.osmand.plus.track.Gpx3DLinePositionType.TOP_BOTTOM;
+import static net.osmand.plus.views.layers.geometry.GeometryWayStyle.COLORIZATION_GRADIENT;
+import static net.osmand.plus.views.layers.geometry.GeometryWayStyle.COLORIZATION_NONE;
 import static net.osmand.shared.routing.Gpx3DWallColorType.NONE;
 import static net.osmand.shared.routing.Gpx3DWallColorType.SOLID;
 import static net.osmand.shared.routing.Gpx3DWallColorType.UPWARD_GRADIENT;
-import static net.osmand.plus.views.layers.geometry.GeometryWayStyle.COLORIZATION_GRADIENT;
-import static net.osmand.plus.views.layers.geometry.GeometryWayStyle.COLORIZATION_NONE;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Path;
+import android.graphics.*;
 import android.graphics.PointF;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.core.jni.FColorARGB;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QListFColorARGB;
-import net.osmand.core.jni.QListFloat;
-import net.osmand.core.jni.QListVectorLine;
-import net.osmand.core.jni.QVectorPointI;
-import net.osmand.core.jni.VectorDouble;
-import net.osmand.core.jni.VectorLine;
-import net.osmand.core.jni.VectorLineBuilder;
-import net.osmand.core.jni.VectorLinesCollection;
+import net.osmand.core.jni.*;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.Gpx3DLinePositionType;
@@ -41,7 +25,6 @@ import net.osmand.plus.track.Gpx3DVisualizationType;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.geometry.GeometryWayStyle.ColorizationType;
 import net.osmand.shared.routing.Gpx3DWallColorType;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -72,18 +55,17 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	}
 
 	public static class DrawPathData31 {
-		List<Integer> indexes;
-		List<Integer> tx;
-		List<Integer> ty;
-		List<Float> heights;
-		List<Float> distances;
-		GeometryWayStyle<?> style;
 
-		int lineId;
+		public int[] indexes;
+		public int[] tx;
+		public int[] ty;
+		public float[] heights;
+		public float[] distances;
+		public GeometryWayStyle<?> style;
 
-		public DrawPathData31(@NonNull List<Integer> indexes,
-		                      @NonNull List<Integer> tx, @NonNull List<Integer> ty,
-		                      @Nullable GeometryWayStyle<?> style) {
+		public int lineId;
+
+		public DrawPathData31(@NonNull int[] indexes, @NonNull int[] tx, @NonNull int[] ty, @Nullable GeometryWayStyle<?> style) {
 			this.indexes = indexes;
 			this.tx = tx;
 			this.ty = ty;
@@ -198,11 +180,11 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			linePositionType = style.trackLinePositionType;
 		}
 		for (DrawPathData31 data : pathsData) {
-			for (int i = 0; i < data.tx.size(); i++) {
-				points.add(new PointI(data.tx.get(i), data.ty.get(i)));
+			for (int i = 0; i < data.tx.length; i++) {
+				points.add(new PointI(data.tx[i], data.ty[i]));
 				if (showRaised) {
-					if (data.heights != null && i < data.heights.size()) {
-						heights.add(data.heights.get(i));
+					if (data.heights != null && i < data.heights.length) {
+						heights.add(data.heights[i]);
 					}
 				}
 			}
