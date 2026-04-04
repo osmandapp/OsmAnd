@@ -32,7 +32,7 @@
                 android:id="@+id/object_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/content_padding_small_half"
+                android:layout_marginTop="@dimen/text_margin_small"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_desc_text_size" />
         </LinearLayout>

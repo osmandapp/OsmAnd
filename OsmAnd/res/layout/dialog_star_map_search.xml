@@ -3,72 +3,79 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/activity_background_color">
+    android:background="?attr/list_background_color">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/explore_container"
+    <LinearLayout
+        android:id="@+id/explore_mode_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/list_background_color"
-        android:fillViewport="true"
-        android:overScrollMode="ifContentScrolls"
-        android:scrollbars="vertical">
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/explore_scroll"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/activity_background_color"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/content_padding">
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
 
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="?attr/list_background_color"
-                app:cardElevation="0dp"
-                app:shapeAppearanceOverlay="@style/Shape.TopSearchSurface"
-                app:strokeWidth="0dp">
+                android:orientation="vertical"
+	            android:background="?attr/list_background_color"
+                android:paddingBottom="@dimen/content_padding">
 
-                <LinearLayout
+                <com.google.android.material.search.SearchBar
+                    android:id="@+id/explore_search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:layout_marginStart="@dimen/content_padding"
+                    android:layout_marginTop="@dimen/content_padding"
+                    android:layout_marginEnd="@dimen/content_padding"
+                    android:hint="@string/shared_string_search"
+                    app:backgroundTint="?attr/active_color_secondary"
+                    app:defaultMarginsEnabled="false"
+                    app:hideNavigationIcon="false"
+                    app:menu="@menu/menu_star_search_browse"
+                    app:navigationIcon="@drawable/ic_action_remove_dark"
+                    app:shapeAppearanceOverlay="@style/Shape.Card8" />
+
+                <HorizontalScrollView
+                    android:id="@+id/recent_chips_scroll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingBottom="@dimen/content_padding">
+                    android:layout_marginTop="@dimen/content_padding_half"
+                    android:scrollbars="none"
+                    android:visibility="gone">
 
-                    <com.google.android.material.search.SearchBar
-                        android:id="@+id/explore_search_bar"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/toolbar_height"
-                        android:layout_marginStart="@dimen/content_padding"
-                        android:layout_marginTop="@dimen/content_padding"
-                        android:layout_marginEnd="@dimen/content_padding"
-                        android:hint="@string/shared_string_search"
-                        app:backgroundTint="?attr/active_color_secondary"
-                        app:defaultMarginsEnabled="false"
-                        app:hideNavigationIcon="false"
-                        app:menu="@menu/menu_star_search_browse"
-                        app:navigationIcon="@drawable/ic_action_remove_dark"
-                        app:shapeAppearanceOverlay="@style/Shape.Card8" />
-
-                    <HorizontalScrollView
-                        android:id="@+id/recent_chips_scroll"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:id="@+id/recent_chips_container"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/content_padding_half"
-                        android:scrollbars="none"
-                        android:visibility="gone">
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/content_padding"
+                        android:paddingEnd="@dimen/content_padding" />
+                </HorizontalScrollView>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-                        <LinearLayout
-                            android:id="@+id/recent_chips_container"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingStart="@dimen/content_padding"
-                            android:paddingEnd="@dimen/content_padding" />
-                    </HorizontalScrollView>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/explore_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true"
+            android:overScrollMode="ifContentScrolls"
+	        android:background="?attr/activity_background_color"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:id="@+id/explore_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/activity_background_color"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/content_padding">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -286,8 +293,9 @@
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/full_search_container"

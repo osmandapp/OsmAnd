@@ -1595,13 +1595,21 @@ public class OpeningHoursParser {
 				} else if (year == this.year) {
 					if (firstYearDayMonth != null) {
 						opened = firstYearDayMonth[month][dmonth];
+					} else {
+						// Year-only and year+month rules do not populate day-month masks, so use the month range directly.
+						opened = firstYearMonths[month] > 0 && (!hasDayMonths() || dayMonths[month][dmonth]);
 					}
 				} else {
 					int lastYear = lastYearMonths[month];
 					if (year < lastYear) {
 						opened = true;
 					} else if (year == lastYear) {
-						opened = lastYearDayMonth[month][dmonth];
+						if (lastYearDayMonth != null) {
+							opened = lastYearDayMonth[month][dmonth];
+						} else {
+							// Mirror the first-year fallback for the final year of a multi-year range.
+							opened = lastYearMonths[month] > 0 && (!hasDayMonths() || dayMonths[month][dmonth]);
+						}
 					} else {
 						opened = false;
 					}
@@ -1956,6 +1964,8 @@ public class OpeningHoursParser {
 							}
 							int ruleYear = basic.year;
 							if ((ruleYear > 0 || prevYearToken != null) && firstMonthToken != null && lastMonthToken != null) {
+								// Support shorthand like "2024-2025 Jan 1-Dec 31" by treating the last seen year
+								// as the range end while preserving the first year already stored in basic.year.
 								int endYear = prevYearToken != null ? prevYearToken.mainNumber : ruleYear;
 								int startYear = ruleYear > 0 ? ruleYear : endYear;
 								if (basic.firstYearMonths == null) {
@@ -1997,9 +2007,6 @@ public class OpeningHoursParser {
 								}
 								if (array != null) {
 									array[pair[0].mainNumber] = true;
-									if (prevYearToken != null) {
-										basic.year = prevYearToken.mainNumber;
-									}
 								}
 							}
 						}
@@ -2021,9 +2028,44 @@ public class OpeningHoursParser {
 						basic.comment = l[0].text;
 					}
 				} else if (currentParse == TokenType.TOKEN_YEAR) {
-					Token[] l = listOfPairs.get(0);
-					if (l[0] != null && l[0].mainNumber > 1000) {
-						prevYearToken = l[0];
+					if (listOfPairs.size() > 1) {
+						// Comma-separated years have set semantics, so expand each year / year-range pair
+						// into an independent rule that shares the same month/day tail.
+						for (Token[] pair : listOfPairs) {
+							BasicOpeningHourRule newRule = new BasicOpeningHourRule(basic.getSequenceIndex());
+							newRule.fallback = basic.fallback;
+							newRule.setComment(basic.getComment());
+							List<Token> yearTokens = new ArrayList<>();
+							if (pair[0] != null) {
+								yearTokens.add(pair[0]);
+							}
+							if (pair[1] != null) {
+								yearTokens.add(pair[1]);
+							}
+							if (i < tokens.size()) {
+								yearTokens.addAll(tokens.subList(i, tokens.size()));
+							}
+							buildRule(newRule, yearTokens, rules);
+						}
+						return;
+					}
+					Token firstYearToken = null;
+					Token lastYearToken = null;
+					for (Token[] pair : listOfPairs) {
+						for (Token yearToken : pair) {
+							if (yearToken != null && yearToken.mainNumber > 1000) {
+								if (firstYearToken == null) {
+									firstYearToken = yearToken;
+								}
+								lastYearToken = yearToken;
+							}
+						}
+					}
+					if (firstYearToken != null) {
+						if (basic.year == 0) {
+							basic.year = firstYearToken.mainNumber;
+						}
+						prevYearToken = lastYearToken;
 					}
 				}
 				listOfPairs.clear();
@@ -2038,7 +2080,9 @@ public class OpeningHoursParser {
 						t.parent = prevToken;
 						currentParseParent = prevToken.type;
 					} else if (t.type == TokenType.TOKEN_MONTH && prevToken != null && prevToken.type == TokenType.TOKEN_YEAR) {
-						basic.year = prevToken.mainNumber; // add first year for ("2019 Oct - 2024 dec")
+						if (basic.year == 0) {
+							basic.year = prevToken.mainNumber; // add first year for ("2019 Oct - 2024 dec")
+						}
 					}
 				}
 			} else if (t.type.ord() < currentParseParent.ord() && indexP == 0 && tokens.size() > i) {
@@ -2056,15 +2100,19 @@ public class OpeningHoursParser {
 				}
 			} else if (t.type == TokenType.TOKEN_DASH) {
 
-			} else if (t.type == TokenType.TOKEN_YEAR) {
-				prevYearToken = t;
 			} else if (t.type.ord() == currentParse.ord()) {
 				if (indexP < 2) {
 					currentPair[indexP++] = t;
 					if (t.type == TokenType.TOKEN_DAY_MONTH && prevToken != null && prevToken.type == TokenType.TOKEN_MONTH) {
 						t.parent = prevToken;
+					} else if (t.type == TokenType.TOKEN_YEAR) {
+						// Keep the second year inside the current pair so the existing month/day range code
+						// can build a proper multi-year span instead of collapsing to the first year only.
+						prevYearToken = t;
 					}
 				}
+			} else if (t.type == TokenType.TOKEN_YEAR) {
+				prevYearToken = t;
 			}
 			prevToken = t;
 		}

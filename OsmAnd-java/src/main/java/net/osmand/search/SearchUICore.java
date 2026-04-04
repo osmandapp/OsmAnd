@@ -670,6 +670,11 @@ public class SearchUICore {
 		return true;
 	}
 
+	public void resetSearch() {
+		phrase = SearchPhrase.emptyPhrase(searchSettings);
+		currentSearchResult = new SearchResultCollection(phrase);
+	}
+
 	public SearchPhrase resetPhrase() {
 		this.phrase = this.phrase.generateNewPhrase("", searchSettings);
 		return this.phrase;

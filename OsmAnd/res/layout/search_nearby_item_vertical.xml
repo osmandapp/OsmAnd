@@ -83,8 +83,8 @@
 
 					<ImageView
 						android:id="@+id/item_icon"
-						android:layout_width="16dp"
-						android:layout_height="16dp"
+						android:layout_width="12dp"
+						android:layout_height="12dp"
 						android:layout_gravity="center_vertical"
 						android:layout_marginEnd="6dp" />
 
@@ -130,8 +130,8 @@
 
 					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/time_icon"
-						android:layout_width="16sp"
-						android:layout_height="16sp"
+						android:layout_width="12sp"
+						android:layout_height="12sp"
 						android:layout_gravity="center_vertical"
 						android:layout_marginEnd="@dimen/gpx_small_icon_margin"
 						android:layout_marginRight="@dimen/gpx_small_icon_margin"
@@ -198,7 +198,7 @@
 		android:ellipsize="end"
 		android:maxLines="2"
 		android:textColor="?android:textColorSecondary"
-		android:textSize="16sp"
+		android:textSize="14sp"
 		tools:text="Eiffel Tower - super tower" />
 
 	<include

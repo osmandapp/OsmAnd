@@ -456,7 +456,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		QuickSearchWikiItem wikiItem = new QuickSearchWikiItem(app, item.getSearchResult());
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_nearby_item_vertical);
 		WikiItemViewHolder holder = new WikiItemViewHolder(view, updateLocationViewCache, nightMode);
-		holder.bindItem(wikiItem, poiUIFilter, useMapCenter);
+		holder.bindItem(wikiItem, poiUIFilter, useMapCenter,
+				getPoiUIFilter() != null && getPoiUIFilter().isTopWikiFilter());
 		return view;
 	}
 
@@ -585,7 +586,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		if (divider != null) {
 			Object o = getItem(position);
 			if (position == getCount() - 1 || getItem(position + 1).getType() == HEADER
-					|| getItem(position + 1).getType() == BOTTOM_SHADOW) {
+					|| getItem(position + 1).getType() == BOTTOM_SHADOW || getItem(position + 1).getType() == CARD_DIVIDER) {
 				divider.setVisibility(View.GONE);
 			} else {
 				divider.setVisibility(View.VISIBLE);

@@ -240,11 +240,9 @@ public class QuickSearchListItem {
 				}
 			case STREET:
 				StringBuilder streetBuilder = new StringBuilder();
-				if (searchResult.localeName.endsWith(")")) {
-					int i = searchResult.localeName.indexOf('(');
-					if (i > 0) {
-						streetBuilder.append(searchResult.localeName.substring(i + 1, searchResult.localeName.length() - 1));
-					}
+				String cityPart = getStreetCityPart(searchResult);
+				if (cityPart != null) {
+					streetBuilder.append(cityPart);
 				}
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
 					if (streetBuilder.length() > 0) {
@@ -377,6 +375,17 @@ public class QuickSearchListItem {
 
 	public Drawable getIcon() {
 		return getIcon(app, searchResult);
+	}
+
+	@Nullable
+	public static String getStreetCityPart(SearchResult searchResult) {
+		if (searchResult.localeName.endsWith(")")) {
+			int i = searchResult.localeName.indexOf('(');
+			if (i > 0) {
+				return searchResult.localeName.substring(i + 1, searchResult.localeName.length() - 1);
+			}
+		}
+		return null;
 	}
 
 	public static String getAmenityIconName(@NonNull Context ctx, @NonNull Amenity amenity) {

@@ -151,14 +151,14 @@ class SkyObjectInfoFragment : Fragment() {
 			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, searchStart, 1.2)
 
 			if (riseTime != null) {
-				sheetRiseTime.text = "Rise: ↑${AstroUtils.formatLocalTime(riseTime)}"
+				sheetRiseTime.text = "Rise: ↑${AstroUtils.formatLocalTime(requireContext(), riseTime)}"
 				sheetRiseTime.isVisible = true
 			} else {
 				sheetRiseTime.isVisible = false
 			}
 
 			if (setTime != null) {
-				sheetSetTime.text = "Set: ↓${AstroUtils.formatLocalTime(setTime)}"
+				sheetSetTime.text = "Set: ↓${AstroUtils.formatLocalTime(requireContext(), setTime)}"
 				sheetSetTime.isVisible = true
 			} else {
 				sheetSetTime.isVisible = false

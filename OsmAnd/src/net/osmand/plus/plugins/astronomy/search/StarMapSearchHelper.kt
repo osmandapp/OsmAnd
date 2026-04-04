@@ -110,6 +110,7 @@ internal class StarMapSearchHelper(
 
 	private fun formatEvent(time: ZonedDateTime, isRise: Boolean): String {
 		val formattedTime = AstroUtils.formatLocalTime(
+			context,
 			Time.fromMillisecondsSince1970(time.toInstant().toEpochMilli())
 		)
 		val daysBetween = ChronoUnit.DAYS.between(computationContext.now.toLocalDate(), time.toLocalDate())
@@ -131,12 +132,13 @@ internal class StarMapSearchHelper(
 		val (arrow, iconRes) = when {
 			text.contains(RISE_ARROW) -> RISE_ARROW to R.drawable.ic_action_arrow_top_right_16
 			text.contains(SET_ARROW) -> SET_ARROW to R.drawable.ic_action_arrow_bottom_right_16
-			text.contains(UP_ARROW) -> UP_ARROW to R.drawable.ic_action_arrow_up_16
+			text.contains(UP_ARROW) -> UP_ARROW to R.drawable.ic_action_arrow_up2_16
 			text.contains(DOWN_ARROW) -> DOWN_ARROW to R.drawable.ic_action_arrow_down_16
 			else -> return text
 		}
 		val icon = uiUtilities.getIcon(iconRes, ColorUtilities.getSecondaryIconColorId(nightMode))
-		icon.setBounds(0, 0, icon.intrinsicWidth, icon.intrinsicHeight)
+		val iconSize = AndroidUtils.dpToPx(context, 16f)
+		icon.setBounds(0, 0, iconSize, iconSize)
 		return AndroidUtils.replaceCharsWithIcon(text, icon, arrayOf(arrow))
 	}
 
