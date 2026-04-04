@@ -17,11 +17,14 @@ import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
 
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -34,7 +37,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 	private static final Log log = PlatformUtil.getLog(NominatimPoiFilter.class);
 
 	private static final String FILTER_ID = "name_finder";
-	private static final String NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
+	private static final String NOMINATIM_API = "https://photon.adrianofrongillo.ovh/api";
 	private static final int MIN_SEARCH_DISTANCE_ON_MAP = 20000;
 	private static final int LIMIT = 300;
 
@@ -90,97 +93,83 @@ public class NominatimPoiFilter extends PoiUIFilter {
 				+ "," + ((float) rightLongitude) + "," + ((float) topLatitude);
 		try {
 			lastError = "";
-			String urlq = NOMINATIM_API + "?format=xml" +
-					"&accept-language=" + Locale.getDefault().getLanguage() +
-					"&q=" + URLEncoder.encode(getFilterByName()) +
-					"&extratags=1" +
-					"&addressdetails=1" + // nclude a breakdown of the address into elements
-					"&limit=" + LIMIT;
-			if (bboxSearch) {
-				urlq += "&bounded=1&" + viewbox;
-			}
+			String urlq = NOMINATIM_API + "?q=" + URLEncoder.encode(getFilterByName()) +
+					"&lat=" + lat + "&lon=" + lon + "&limit=" + LIMIT;
+
 			log.info("Online search: " + urlq);
 			URLConnection connection = NetworkUtils.getHttpURLConnection(urlq); //$NON-NLS-1$
 			connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
 
 			InputStream stream = connection.getInputStream();
-			XmlPullParser parser = PlatformUtil.newXMLPullParser();
-			parser.setInput(stream, "UTF-8"); //$NON-NLS-1$
-			int eventType;
-			int namedDepth = 0;
-			Amenity a = null;
-			boolean extratags = false;
+			BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
+			StringBuilder responseBuilder = new StringBuilder();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				responseBuilder.append(line);
+			}
+			stream.close();
+
 			MapPoiTypes poiTypes = ((OsmandApplication) getApplication()).getPoiTypes();
-			while ((eventType = parser.next()) != XmlPullParser.END_DOCUMENT) {
-				if (eventType == XmlPullParser.START_TAG) {
-					if (parser.getName().equals("searchresults")) { //$NON-NLS-1$
-						String err = parser.getAttributeValue("", "error"); //$NON-NLS-1$ //$NON-NLS-2$
-						if (err != null && err.length() > 0) {
-							lastError = err;
-							stream.close();
-							break;
-						}
-					}
-					if (parser.getName().equals("place")) { //$NON-NLS-1$
-						namedDepth++;
-						if (namedDepth == 1) {
-							try {
-								a = new Amenity();
-								a.setLocation(Double.parseDouble(parser.getAttributeValue("", "lat")), //$NON-NLS-1$//$NON-NLS-2$
-										Double.parseDouble(parser.getAttributeValue("", "lon"))); //$NON-NLS-1$//$NON-NLS-2$
-								long osmId = Long.parseLong(parser.getAttributeValue("", "osm_id"));
-								EntityType osmType = EntityType.valueOf(parser.getAttributeValue("", "osm_type").toUpperCase());
+
+			try {
+				JSONObject root = new JSONObject(responseBuilder.toString());
+				if (root.has("features")) {
+					JSONArray features = root.getJSONArray("features");
+					for (int i = 0; i < features.length(); i++) {
+						JSONObject feature = features.getJSONObject(i);
+						JSONObject properties = feature.optJSONObject("properties");
+						JSONObject geometry = feature.optJSONObject("geometry");
+						if (properties != null && geometry != null) {
+							JSONArray coordinates = geometry.optJSONArray("coordinates");
+							if (coordinates != null && coordinates.length() >= 2) {
+								Amenity a = new Amenity();
+								double featureLon = coordinates.getDouble(0);
+								double featureLat = coordinates.getDouble(1);
+								a.setLocation(featureLat, featureLon);
+
+								long osmId = properties.optLong("osm_id", 0);
+								String osmTypeStr = properties.optString("osm_type", "N").toUpperCase();
+								EntityType osmType;
+								if ("N".equals(osmTypeStr)) osmType = EntityType.NODE;
+								else if ("W".equals(osmTypeStr)) osmType = EntityType.WAY;
+								else if ("R".equals(osmTypeStr)) osmType = EntityType.RELATION;
+								else osmType = EntityType.NODE;
+
 								long id = ObfConstants.createMapObjectIdFromCleanOsmId(osmId, osmType);
 								a.setId(id);
-								String name = parser.getAttributeValue("", "display_name"); //$NON-NLS-1$//$NON-NLS-2$
+
+								String name = properties.optString("name", "");
+								if (name.isEmpty()) {
+									// Fallback if name is empty, create a display name from other fields
+									String street = properties.optString("street", "");
+									String housenumber = properties.optString("housenumber", "");
+									String city = properties.optString("city", "");
+									if (!street.isEmpty()) {
+										name = street + (housenumber.isEmpty() ? "" : " " + housenumber) + (city.isEmpty() ? "" : ", " + city);
+									}
+								}
 								a.setName(name);
 								a.setEnName(TransliterationHelper.transliterate(name));
-								a.setSubType(parser.getAttributeValue("", "type")); //$NON-NLS-1$//$NON-NLS-2$
+
+								String subType = properties.optString("osm_value", "");
+								a.setSubType(subType);
 								PoiType pt = poiTypes.getPoiTypeByKey(a.getSubType());
 								a.setType(pt != null ? pt.getCategory() : poiTypes.getOtherPoiCategory());
+
 								if (matcher == null || matcher.publish(a)) {
 									currentSearchResult.add(a);
 								}
-							} catch (NumberFormatException e) {
-								log.info("Invalid attributes", e); //$NON-NLS-1$
 							}
 						}
-					}
-					if (extratags && a != null) {
-						String tag = parser.getAttributeValue("", "key");
-						String val = parser.getAttributeValue("", "value");
-						a.setAdditionalInfo(tag, val);
-					}
-					if (parser.getName().equals("extratags")) {
-						extratags = true;
-					}
-					if (a != null && parser.getName().equals(a.getSubType())) {
-						if (parser.next() == XmlPullParser.TEXT) {
-							String name = parser.getText();
-							if (name != null) {
-								a.setName(name);
-								a.setEnName(TransliterationHelper.transliterate(name));
-							}
-						}
-					}
-				} else if (eventType == XmlPullParser.END_TAG) {
-					if (parser.getName().equals("place")) { //$NON-NLS-1$
-						namedDepth--;
-						if (namedDepth == 0) {
-							a = null;
-						}
-					}
-					if (parser.getName().equals("extratags")) {
-						extratags = false;
 					}
 				}
+			} catch (JSONException e) {
+				log.error("Error parsing photon poi json", e);
+				lastError = getApplication().getString(R.string.shared_string_io_error);
 			}
-			stream.close();
+
 		} catch (IOException e) {
 			log.error("Error loading name finder poi", e); //$NON-NLS-1$
-			lastError = getApplication().getString(R.string.shared_string_io_error); //$NON-NLS-1$
-		} catch (XmlPullParserException e) {
-			log.error("Error parsing name finder poi", e); //$NON-NLS-1$
 			lastError = getApplication().getString(R.string.shared_string_io_error); //$NON-NLS-1$
 		}
 		MapUtils.sortListOfMapObject(currentSearchResult, lat, lon);

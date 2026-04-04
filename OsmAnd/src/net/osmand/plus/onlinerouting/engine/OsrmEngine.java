@@ -58,7 +58,7 @@ public class OsrmEngine extends JsonOnlineRoutingEngine {
 	@NonNull
 	@Override
 	public String getStandardUrl() {
-		return "https://router.project-osrm.org/route/v1/";
+		return "https://valhalla.adrianofrongillo.ovh/route";
 	}
 
 	@Override
@@ -89,20 +89,24 @@ public class OsrmEngine extends JsonOnlineRoutingEngine {
 
 	@Override
 	protected void makeFullUrl(@NonNull StringBuilder sb, @NonNull List<LatLon> path, @Nullable Float startBearing) {
-		String vehicleKey = getVehicleKeyForUrl();
-		if (!isEmpty(vehicleKey)) {
-			sb.append(vehicleKey).append('/');
-		}
+		sb.append("?json={\"locations\":[");
 		for (int i = 0; i < path.size(); i++) {
 			LatLon point = path.get(i);
-			sb.append(point.getLongitude()).append(',').append(point.getLatitude());
+			sb.append("{\"lat\":").append(point.getLatitude()).append(",\"lon\":").append(point.getLongitude()).append("}");
 			if (i < path.size() - 1) {
-				sb.append(';');
+				sb.append(',');
 			}
 		}
-		sb.append('?');
-		sb.append("overview=full");
-		sb.append('&').append("steps=true");
+
+		String costing = "auto";
+		String vehicleKey = getVehicleKeyForUrl();
+		if ("bike".equals(vehicleKey) || "bicycle".equals(vehicleKey)) {
+			costing = "bicycle";
+		} else if ("foot".equals(vehicleKey) || "pedestrian".equals(vehicleKey)) {
+			costing = "pedestrian";
+		}
+
+		sb.append("],\"costing\":\"").append(costing).append("\",\"units\":\"km\",\"language\":\"it-IT\"}");
 	}
 
 	@Nullable

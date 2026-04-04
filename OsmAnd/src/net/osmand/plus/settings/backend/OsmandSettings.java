@@ -892,7 +892,7 @@ public class OsmandSettings {
 
 	public static final String NUMBER_OF_FREE_DOWNLOADS_ID = "free_downloads_v3";
 
-	private final OsmandPreference<String> PLUGINS = new StringPreference(this, "enabled_plugins", "").makeGlobal().makeShared();
+	private final OsmandPreference<String> PLUGINS = new StringPreference(this, "enabled_plugins", "osmand.monitoring").makeGlobal().makeShared();
 
 	public Set<String> getEnabledPlugins() {
 		String plugs = PLUGINS.get();
@@ -1836,14 +1836,14 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference(this, "show_trip_recording_notification", false).makeProfile();
 
 
-	public final CommonPreference<Boolean> LIVE_MONITORING = new BooleanPreference(this, "live_monitoring", false).makeProfile();
+	public final CommonPreference<Boolean> LIVE_MONITORING = new BooleanPreference(this, "live_monitoring", true).makeProfile();
 
 	public final CommonPreference<Integer> LIVE_MONITORING_INTERVAL = new IntPreference(this, "live_monitoring_interval", 5000).makeProfile();
 
 	public final CommonPreference<Integer> LIVE_MONITORING_MAX_INTERVAL_TO_SEND = new IntPreference(this, "live_monitoring_maximum_interval_to_send", 900000).makeProfile();
 
 	public final CommonPreference<String> LIVE_MONITORING_URL = new StringPreference(this, "live_monitoring_url",
-			"https://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeProfile();
+			"https://traccarapi.adrianofrongillo.ovh/?id={0}&lat={1}&lon={2}&timestamp={3}&hdop={4}&altitude={5}&speed={6}&bearing={7}").makeProfile();
 
 	public final CommonPreference<String> GPS_STATUS_APP = new StringPreference(this, "gps_status_app", "").makeGlobal().makeShared();
 
