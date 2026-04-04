@@ -43,7 +43,7 @@ public class TileSourceManager {
 	private static final String RULE_TEMPLATE_1 = "template:1";
 	private static final String RND_ALG_WIKIMAPIA = "wikimapia";
 
-	private static final String MAPNIK_URL = "https://tile.osmand.net/hd/{0}/{1}/{2}.png";
+	private static final String MAPNIK_URL = "https://tileserver.adrianofrongillo.ovh/styles/osm-liberty/{0}/{1}/{2}.png";
 	private static final String MAPILLARY_VECTOR_URL = "https://tiles.mapillary.com/maps/vtp/mly1_public/2/{0}/{1}/{2}/?access_token="
 			+ MAPILLARY_ACCESS_TOKEN;
 
