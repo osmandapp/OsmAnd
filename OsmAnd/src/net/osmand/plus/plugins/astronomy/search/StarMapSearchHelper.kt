@@ -133,7 +133,7 @@ internal class StarMapSearchHelper(
 			text.contains(RISE_ARROW) -> RISE_ARROW to R.drawable.ic_action_arrow_top_right_16
 			text.contains(SET_ARROW) -> SET_ARROW to R.drawable.ic_action_arrow_bottom_right_16
 			text.contains(UP_ARROW) -> UP_ARROW to R.drawable.ic_action_arrow_up2_16
-			text.contains(DOWN_ARROW) -> DOWN_ARROW to R.drawable.ic_action_arrow_down2_16
+			text.contains(DOWN_ARROW) -> DOWN_ARROW to R.drawable.ic_action_arrow_down_16
 			else -> return text
 		}
 		val icon = uiUtilities.getIcon(iconRes, ColorUtilities.getSecondaryIconColorId(nightMode))
