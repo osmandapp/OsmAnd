@@ -6120,4 +6120,15 @@
     <string name="astro_next_day_suffix">⁺¹</string>
     <string name="release_5_3">•Просторни приказ зграда (додата подршка)\n\n •Лоптасти приказ карте\n\n •Астрономски додатак са ноћном картом и складиштем звезда\n\n •Нове боје брзиномера: дозвољено одступање и прекорачење\n\n •Посебни распореди справица за усправно и положено сучеље\n\n •Справице за снимање пута: брзина кретања и просек\n\n •Справица за напон у подацима о возилу\n\n •Подаци о возилу у обради трага\n\n •Разврставање трагова по години, дужини, занимању и другом\n\n •Уређивач боја за изглед терена и трагова\n\n •Боља претрага и освежено сучеље\n\n •Висински профили за путање (исправљено)\n\n •Омиљена места: нови распоред и изглед\n\n •Дељење везе за било коју занимљиву тачку\n\n •Преглед тачака без затварања списка\n\n •Ширина бицикла ради избегавања уских пролаза\n\n •Описи слика са Викимедије</string>
     <string name="shared_string_world_weather_map">Светска временска мапа</string>
+    <string name="map_widget_memory_info">Информације о меморији</string>
+    <string name="map_widget_memory_info_desc">Прати Јава хип, изворне алокације и графичку меморију.</string>
+    <string name="memory_used_settings">Коришћен Јава хип</string>
+    <string name="memory_allocated_settings">Додељен Јава хип</string>
+    <string name="memory_limit_settings">Максимално ограничење Јава хипа</string>
+    <string name="memory_native_settings">Додељена изворна хип меморија</string>
+    <string name="memory_graphics_settings">Графичка меморија</string>
+    <string name="shared_string_heap">Хип</string>
+    <string name="shared_string_native">Изворно</string>
+    <string name="shared_string_gpu">ГПЈ</string>
+    <string name="shared_string_allocated">Додељено</string>
 </resources>

@@ -5959,4 +5959,8 @@
     <string name="ar_mode_enabled">已啟用 AR 模式</string>
     <string name="ar_mode_disabled">已停用 AR 模式</string>
     <string name="shared_string_world_weather_map">世界天氣地圖</string>
+    <string name="map_widget_memory_info">記憶體狀態</string>
+    <string name="map_widget_memory_info_desc">監控 Java 堆疊、本機分配與圖形記憶體。</string>
+    <string name="memory_used_settings">使用過的 Java 堆疊</string>
+    <string name="memory_allocated_settings">分配過的 Java 堆疊</string>
 </resources>

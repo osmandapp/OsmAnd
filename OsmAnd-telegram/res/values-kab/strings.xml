@@ -210,7 +210,7 @@
     <string name="welcome_descr"><b>Aneḍfaṛ OsmAnd </b> ad k-yeǧǧ ad tebḍuḍ adig-ik daɣen ad twaliḍ wid-nniḍen deg OsmAnd.<br/><br/>Asnas iseqdac API n Telegram, ihi tesriḍ amiḍan Telegram.</string>
     <string name="si_mi_meters">Amayel / Amitr</string>
     <string name="si_km_m">Ikilumitren/imitren</string>
-    <string name="si_mi_yard">Miles/yards</string>
+    <string name="si_mi_yard"></string>
     <string name="si_mi_feet">Amayel/aḍar</string>
     <string name="si_nm_h">Amayel n waman deg usrag (tikerras)</string>
     <string name="si_min_m">Tisdatin deg umayl</string>
