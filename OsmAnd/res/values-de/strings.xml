@@ -5982,7 +5982,7 @@
     <string name="backup_deleted_all_data">Gelöschte Daten.</string>
     <string name="backup_deleting_all_data">Lösche Daten…</string>
     <string name="pin_folder">Ordner anpinnen</string>
-    <string name="view_distance">Sichtweite</string>
+    <string name="view_distance">Entfernung anzeigen</string>
     <string name="equator_line">Äquatorlinie</string>
     <string name="copy_from_portrait_layout">Aus Hochformat kopieren</string>
     <string name="delete_groups_confirmation">Gruppen löschen?</string>
@@ -5993,7 +5993,7 @@
     <string name="map_2d">2D</string>
     <string name="map_3d">3D</string>
     <string name="astro_nebulas">Nebel</string>
-    <string name="level_of_details">Detaillierungsgrad</string>
+    <string name="level_of_details">Detailtiefe</string>
     <string name="performance">Leistung</string>
     <string name="astro_rendering">Rendering</string>
     <string name="unpin_folder">Ordner lösen</string>
@@ -6007,9 +6007,9 @@
     <string name="building_3d_high_details_content_desc">3D-Gebäude mit hohen Details</string>
     <string name="building_3d_near_distance_content_desc">3D-Gebäude in der Nähe</string>
     <string name="building_3d_far_distance_content_desc">3D-Gebäude weit entfernt</string>
-    <string name="free_custom_color_description">Passt 3D-Gebäude mit beliebigen Farben an. Perfekt, um sie an das Thema einer Karte anzupassen oder den Kontrast zu verbessern.</string>
+    <string name="free_custom_color_description">3D-Gebäude können mit beliebigen Farben angepasst werden. Ideal, um sie an ein Kartendesign anzupassen oder den Kontrast zu verbessern.</string>
     <string name="buildings_3d_use_map_style_color_description">Standardfarbe des Kartenstils (%s) verwenden.</string>
-    <string name="buildings_3d_visibility_description">Passt die Deckkraft von 3D-Strukturen auf der Karte an.</string>
+    <string name="buildings_3d_visibility_description">Passe die Deckkraft der 3D-Strukturen auf der Karte an.</string>
     <string name="galactic_line">Galaktische Linie</string>
     <string name="meridian_line">Meridianlinie</string>
     <string name="panels_layout">Anordnung der Bedienfelder</string>
@@ -6151,4 +6151,15 @@
     <string name="astro_schedule_show_current_week">Diese Woche anzeigen</string>
     <string name="astro_next_day_suffix">⁺¹</string>
     <string name="release_5_3">• Unterstützung für 3D-Gebäude hinzugefügt\n\n • Globusansicht\n\n• Astronomie-Erweiterung mit Karte des Nachthimmels und Sternen-Datenbank\n\n• Neue Farb-Modi für Tacho: Toleranz und Überschreitung\n\n• Unterschiedliche Widget-Darstellung für Quer- und Hochformat\n\n• Widgets für Fahrtaufzeichnung: Bewegungsgeschwindigkeit und Durchschnittsgeschwindigkeit\n\n• Widget für Adapter-Spannung für Fahrzeugdaten\n\n• Fahrzeugdaten im Track-Analyzer\n\n• Automatische Sortierung von Tracks nach Jahr, Länge, Aktivität &amp; mehr\n\n• Paletten-Editor für Visualisierung von Gelände und Tracks\n\n• Verbesserte Suchalgorithmen und neue Benutzerschnittstelle\n\n• Höhenprofile für Strecken repariert\n\n• Favoriten: Neue Sortierfilter und neue Benutzerschnittstelle\n\n• Link zu beliebigem POI teilenI\n\n• Wegpunkt-Vorschau ohne die Liste zu schließen\n\n• Parameter „Fahrradbreite“ um schmale Straßen zu vermeiden\n\n• Bildbeschreibungen von Wikimedia</string>
+    <string name="map_widget_memory_info">Speicherinformationen</string>
+    <string name="map_widget_memory_info_desc">Überwacht den Java-Heap, native Speicherzuweisungen und den Grafikspeicher.</string>
+    <string name="memory_used_settings">Verwendeter Java-Heap</string>
+    <string name="memory_allocated_settings">Zugewiesener Java-Heap</string>
+    <string name="memory_limit_settings">Maximale Java-Heap-Größe</string>
+    <string name="memory_native_settings">Auf dem nativen Heap zugewiesen</string>
+    <string name="memory_graphics_settings">Grafikspeicher</string>
+    <string name="shared_string_heap">Heap</string>
+    <string name="shared_string_native">Nativ</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="shared_string_allocated">Zugewiesen</string>
 </resources>

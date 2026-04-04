@@ -5883,7 +5883,7 @@
     <string name="bicycle_width_limit_description">Обезбедите ширину свог бицикла како бисте избегли уске бициклистичке стазе.</string>
     <string name="copy_link">Копирај везу</string>
     <string name="show_spherical_map">Приказ земаљске кугле</string>
-    <string name="enable_3d_objects">Просторни приказ зграда</string>
+    <string name="enable_3d_objects">3Д зграде</string>
     <string name="has_vehicle_metrics">Са подацима ДНВII</string>
     <string name="vehicle_metrics_chart_category">Метрика возила</string>
     <string name="delete_folder_description">Да ли избрисати омот „%1$s“?</string>
@@ -5987,8 +5987,8 @@
     <string name="free_custom_color_description">Прилагодите 3Д зграде било којом бојом. Савршено за усклађивање са предметом карте или побољшање супротности осветљења.</string>
     <string name="buildings_3d_use_map_style_color_description">Користи подразумевану боју начина приказа карте (%s).</string>
     <string name="buildings_3d_visibility_description">Подесите непрозирност 3Д предмета на карти.</string>
-    <string name="level_of_details">Разина појединости</string>
-    <string name="performance">Учинак</string>
+    <string name="level_of_details">Ниво детаља</string>
+    <string name="performance">Перформансе</string>
     <string name="view_distance">Удаљеност видљивости</string>
     <string name="stars_articles">Чланци о звездама</string>
     <string name="astronomy_plugin_name">Астрономија</string>
