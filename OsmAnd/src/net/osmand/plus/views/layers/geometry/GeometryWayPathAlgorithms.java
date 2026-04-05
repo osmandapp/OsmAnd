@@ -12,6 +12,7 @@ import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import gnu.trove.list.array.TByteArrayList;
@@ -146,51 +147,60 @@ public class GeometryWayPathAlgorithms {
 	public static List<DrawPathData31> calculatePath(@NonNull List<GeometryWayPoint> points) {
 		List<DrawPathData31> pathsData = new ArrayList<>();
 		GeometryWayPoint firstPoint = points.get(0);
-		GeometryWayStyle<?> style = points.get(0).style;
-		List<Integer> ind = new ArrayList<>();
-		List<Integer> tx = new ArrayList<>();
-		List<Integer> ty = new ArrayList<>();
-		List<Float> heights = new ArrayList<>();
-		List<Float> distances = new ArrayList<>();
-		ind.add(firstPoint.index);
-		tx.add(firstPoint.tx31);
-		ty.add(firstPoint.ty31);
-		heights.add(firstPoint.height);
-		distances.add(0f);
-		for (int i = 1; i < points.size(); i++) {
+		GeometryWayStyle<?> style = firstPoint.style;
+
+		int count = 1;
+		int size = points.size();
+		int[] ind = new int[size];
+		int[] tx = new int[size];
+		int[] ty = new int[size];
+		float[] heights = new float[size];
+		float[] distances = new float[size];
+
+		ind[0] = firstPoint.index;
+		tx[0] = firstPoint.tx31;
+		ty[0] = firstPoint.ty31;
+		heights[0] = firstPoint.height;
+		distances[0] = 0f;
+
+		for (int i = 1; i < size; i++) {
 			GeometryWayPoint pnt = points.get(i);
-			ind.add(pnt.index);
-			tx.add(pnt.tx31);
-			ty.add(pnt.ty31);
-			heights.add(pnt.height);
-			distances.add((float) pnt.distance);
+
+			ind[count] = pnt.index;
+			tx[count] = pnt.tx31;
+			ty[count] = pnt.ty31;
+			heights[count] = pnt.height;
+			distances[count] = (float) pnt.distance;
+
+			count++;
 			if (style != null) {
 				GeometryWayStyle<?> newStyle = pnt.style;
 				if (!style.equals(newStyle) || newStyle.isUnique()) {
-					DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, style);
-					newPathData.heights = heights;
-					newPathData.distances = distances;
-					pathsData.add(newPathData);
-					ind = new ArrayList<>();
-					tx = new ArrayList<>();
-					ty = new ArrayList<>();
-					heights = new ArrayList<>();
-					distances = new ArrayList<>();
-					ind.add(pnt.index);
-					tx.add(pnt.tx31);
-					ty.add(pnt.ty31);
-					heights.add(pnt.height);
-					distances.add(0f);
+					addPathData(pathsData, ind, tx, ty, heights, distances, style, count);
+
+					ind[0] = pnt.index;
+					tx[0] = pnt.tx31;
+					ty[0] = pnt.ty31;
+					heights[0] = pnt.height;
+					distances[0] = 0f;
+
+					count = 1;
 					style = newStyle;
 				}
 			}
 		}
-		if (tx.size() > 1) {
-			DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, style);
-			newPathData.heights = heights;
-			newPathData.distances = distances;
-			pathsData.add(newPathData);
+		if (count > 1) {
+			addPathData(pathsData, ind, tx, ty, heights, distances, style, count);
 		}
 		return pathsData;
+	}
+
+	private static void addPathData(@NonNull List<DrawPathData31> pathsData, @NonNull int[] ind,
+			@NonNull int[] tx, @NonNull int[] ty, @NonNull float[] heights, @NonNull float[] distances,
+			@Nullable GeometryWayStyle<?> style, int count) {
+		DrawPathData31 data = new DrawPathData31(Arrays.copyOf(ind, count), Arrays.copyOf(tx, count), Arrays.copyOf(ty, count), style);
+		data.heights = Arrays.copyOf(heights, count);
+		data.distances = Arrays.copyOf(distances, count);
+		pathsData.add(data);
 	}
 }

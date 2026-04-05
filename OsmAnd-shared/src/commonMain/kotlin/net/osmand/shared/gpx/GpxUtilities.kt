@@ -43,6 +43,7 @@ import okio.IOException
 import okio.Sink
 import okio.Source
 import okio.buffer
+import kotlin.jvm.JvmOverloads
 import kotlin.math.round
 
 
@@ -899,29 +900,40 @@ object GpxUtilities {
 	@Throws(XmlParserException::class, IOException::class)
 	fun readText(parser: XmlPullParser, key: String): String? {
 		var tok: Int
-		var text: StringBuilder? = null
+		var singleText: String? = null
+		var textBuilder: StringBuilder? = null
+
 		while (parser.next().also { tok = it } != XmlPullParser.END_DOCUMENT) {
 			if (tok == XmlPullParser.END_TAG && parser.getName() == key) {
 				break
 			} else if (tok == XmlPullParser.TEXT) {
-				if (text == null) {
-					text = StringBuilder()
+				val currentText = parser.getText()
+				if (singleText == null && textBuilder == null) {
+					singleText = currentText
+				} else {
+					if (textBuilder == null) {
+						textBuilder = StringBuilder(singleText!!)
+						singleText = null
+					}
+					textBuilder.append(currentText)
 				}
-				text.append(parser.getText())
 			}
 		}
-		return text?.toString()
+		return textBuilder?.toString() ?: singleText
 	}
 
 	@Throws(XmlParserException::class, IOException::class)
 	fun readTextMap(parser: XmlPullParser, key: String): Map<String, String> {
 		var tok: Int
 		var text: StringBuilder? = null
-		val result: MutableMap<String, String> = HashMap()
+		var result: MutableMap<String, String>? = null
 		while (parser.next().also { tok = it } != XmlPullParser.END_DOCUMENT) {
 			if (tok == XmlPullParser.END_TAG) {
 				val tag = parser.getName()
 				if (tag != null && text != null && text.toString().trim().isNotEmpty()) {
+					if (result == null) {
+						result = HashMap()
+					}
 					result[tag] = text.toString()
 				}
 				if (tag == key) {
@@ -937,7 +949,7 @@ object GpxUtilities {
 				text.append(parser.getText())
 			}
 		}
-		return result
+		return result ?: emptyMap()
 	}
 
 	fun formatTime(time: Long): String {
@@ -945,9 +957,10 @@ object GpxUtilities {
 		return format.format(Instant.fromEpochMilliseconds(time).toLocalDateTime(TimeZone.UTC))
 	}
 
-	fun parseTime(iso8601text: String): Long {
+	@JvmOverloads
+	fun parseTime(iso8601text: String, localFormats: MutableList<DateTimeFormat<DateTimeComponents>>? = null): Long {
 		var milliseconds = 0.0
-		var noFractionalSeconds = iso8601text;
+		var noFractionalSeconds = iso8601text
 		val isIndex = noFractionalSeconds.indexOf('.')
 
 		if (isIndex > 0) {
@@ -963,10 +976,19 @@ object GpxUtilities {
 		// Replace Date-Time space-delimiter -> "T" (RFC3339 in ISO8601)
 		val rfc3339 = noFractionalSeconds.trim().replaceFirst(' ', 'T');
 
-		for (fmt in TimePatterns.formats) {
+		val formatsToUse = localFormats ?: TimePatterns.formats
+		for (i in formatsToUse.indices) {
+			val fmt = formatsToUse[i]
 			try {
-				return fmt.parse(rfc3339).toInstantUsingOffset()
+				val time = fmt.parse(rfc3339).toInstantUsingOffset()
 					.toEpochMilliseconds() + (milliseconds * 1000).toLong()
+
+				// Move successful format to the front of the local list
+				if (localFormats != null && i > 0) {
+					localFormats.removeAt(i)
+					localFormats.add(0, fmt)
+				}
+				return time
 			} catch (e: Exception) {
 				// Continue to the next format
 			}
@@ -1055,6 +1077,7 @@ object GpxUtilities {
 			} else {
 				throw KException("Input file or source is not defined")
 			}
+			val localTimeFormats = TimePatterns.formats.toMutableList()
 			val routeTrack = Track()
 			val routeTrackSegment = TrkSegment()
 			routeTrack.segments.add(routeTrackSegment)
@@ -1212,7 +1235,7 @@ object GpxUtilities {
 									"time" -> {
 										val text = readText(parser, "time")
 										text?.let {
-											parse.time = parseTime(it)
+											parse.time = parseTime(it, localTimeFormats)
 										}
 									}
 
@@ -1369,7 +1392,7 @@ object GpxUtilities {
 
 									"time" -> {
 										val text = readText(parser, "time")
-										parse.time = parseTime(text!!)
+										parse.time = parseTime(text!!, localTimeFormats)
 									}
 								}
 							}
