@@ -8,7 +8,6 @@ import kotlinx.datetime.format.DateTimeFormat
 import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.toLocalDateTime
-import kotlinx.datetime.toInstant
 import net.osmand.shared.KException
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.currentTimeMillis
@@ -91,7 +90,12 @@ object GpxUtilities {
 
 	private var oneOffLogParseTimeErrors = true
 	private const val GPX_TIME_FORMATTER = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+	private const val DAYS_PER_400_YEAR_ERA = 146_097L
+	private const val MILLIS_PER_SECOND = 1_000L
 	private const val MILLIS_PER_MINUTE = 60_000L
+	private const val MILLIS_PER_HOUR = 3_600_000L
+	private const val MILLIS_PER_DAY = 86_400_000L
+	private const val UNIX_EPOCH_DAY_FROM_CIVIL_ZERO = 719_468L
 
 	class TimePatterns {
 		companion object {
@@ -1079,18 +1083,75 @@ object GpxUtilities {
 				else -> return null
 			}
 
-			LocalDateTime(
-				year = year,
-				monthNumber = month,
-				dayOfMonth = day,
-				hour = hour,
-				minute = minute,
-				second = second,
-				nanosecond = milliseconds * 1_000_000
-			).toInstant(TimeZone.UTC).toEpochMilliseconds() - offsetMinutes * MILLIS_PER_MINUTE
+			toEpochMilliseconds(year, month, day, hour, minute, second, milliseconds) -
+					offsetMinutes * MILLIS_PER_MINUTE
 		} catch (_: Exception) {
 			null
 		}
+	}
+
+	private fun toEpochMilliseconds(
+		year: Int,
+		month: Int,
+		day: Int,
+		hour: Int,
+		minute: Int,
+		second: Int,
+		milliseconds: Int
+	): Long {
+		validateDateTime(year, month, day, hour, minute, second, milliseconds)
+		return toEpochDay(year, month, day) * MILLIS_PER_DAY +
+				hour * MILLIS_PER_HOUR +
+				minute * MILLIS_PER_MINUTE +
+				second * MILLIS_PER_SECOND +
+				milliseconds
+	}
+
+	private fun validateDateTime(
+		year: Int,
+		month: Int,
+		day: Int,
+		hour: Int,
+		minute: Int,
+		second: Int,
+		milliseconds: Int
+	) {
+		if (month !in 1..12) {
+			throw IllegalArgumentException("Invalid month")
+		}
+		if (day !in 1..daysInMonth(year, month)) {
+			throw IllegalArgumentException("Invalid day")
+		}
+		if (hour !in 0..23 || minute !in 0..59 || second !in 0..59) {
+			throw IllegalArgumentException("Invalid time")
+		}
+		if (milliseconds !in 0..999) {
+			throw IllegalArgumentException("Invalid milliseconds")
+		}
+	}
+
+	private fun toEpochDay(year: Int, month: Int, day: Int): Long {
+		var adjustedYear = year.toLong()
+		val adjustedMonth = month.toLong()
+		adjustedYear -= if (adjustedMonth <= 2L) 1L else 0L
+		val era = if (adjustedYear >= 0) adjustedYear / 400 else (adjustedYear - 399) / 400
+		val yearOfEra = adjustedYear - era * 400
+		val monthPrime = adjustedMonth + if (adjustedMonth > 2L) -3L else 9L
+		val dayOfYear = (153 * monthPrime + 2) / 5 + day - 1L
+		val dayOfEra = yearOfEra * 365 + yearOfEra / 4 - yearOfEra / 100 + dayOfYear
+		// Convert the March-based civil date into days since the Unix epoch (1970-01-01).
+		return era * DAYS_PER_400_YEAR_ERA + dayOfEra - UNIX_EPOCH_DAY_FROM_CIVIL_ZERO
+	}
+
+	private fun daysInMonth(year: Int, month: Int): Int = when (month) {
+		1, 3, 5, 7, 8, 10, 12 -> 31
+		4, 6, 9, 11 -> 30
+		2 -> if (isLeapYear(year)) 29 else 28
+		else -> throw IllegalArgumentException("Invalid month")
+	}
+
+	private fun isLeapYear(year: Int): Boolean {
+		return (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0)
 	}
 
 	private fun parseNumber(input: String, start: Int, end: Int): Int {

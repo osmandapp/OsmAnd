@@ -33,6 +33,7 @@ class ParseTimeTest {
         assertEquals(1323785716000, GpxUtilities.parseTime("2011-12-13T14:15:16.000Z"));
         assertEquals(1323785716000, GpxUtilities.parseTime("2011-12-13T14:15:16.0Z"));
         assertEquals(1323785716000, GpxUtilities.parseTime("2011-12-13T14:15:16.Z"));
+        assertEquals(951868799000, GpxUtilities.parseTime("2000-02-29T23:59:59Z"));
 
         // GPX_TIME_PATTERN_NO_TZ
         assertEquals(1323785716000, GpxUtilities.parseTime("2011-12-13T14:15:16"));
@@ -60,6 +61,7 @@ class ParseTimeTest {
 
         // Malformed input
         assertEquals(0, GpxUtilities.parseTime("not-a-date"));
+        assertEquals(0, GpxUtilities.parseTime("2011-02-29T14:15:16Z"));
         assertEquals(0, GpxUtilities.parseTime("2011-12-13T14:15:16+02"));
         assertEquals(0, GpxUtilities.parseTime("2011-12-13T14:15:16+24:00"));
     }
