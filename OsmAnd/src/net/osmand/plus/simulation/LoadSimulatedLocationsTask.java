@@ -62,7 +62,7 @@ public class LoadSimulatedLocationsTask extends AsyncTask<Void, Integer, List<Si
 				publishProgress(progress);
 
 				RouteSegmentResult segment = segments.get(routeInd);
-				prepareRouteSegmentResult(locations, segment, routeInd, segmentsSize);
+				prepareRouteSegmentResult(locationMap, segment, routeInd, segmentsSize);
 			}
 		}
 		return locations;
