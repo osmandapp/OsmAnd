@@ -110,7 +110,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private static final int DEFAULT_WIDTH_MULTIPLIER = 7;
 	private static final int START_ZOOM = 7;
 	private static final int MAX_SUPPORTED_TRACK_WIDTH_DP = 48;
-	private static final long MANY_POINTS_VISIBLE_WARNING_THRESHOLD = 1_000_000L;
+	private static final long MANY_POINTS_VISIBLE_WARNING_THRESHOLD = 500_000L;
 
 	private Paint paint;
 	private Paint borderPaint;

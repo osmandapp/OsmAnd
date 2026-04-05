@@ -1766,28 +1766,38 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	public static void loadSelectedGpxFile(@NonNull MapActivity mapActivity, @Nullable String path,
+	public static void loadSelectedGpxFile(@NonNull MapActivity activity, @Nullable String path,
 	                                       boolean showCurrentTrack,
 	                                       @NonNull CallbackWithObject<SelectedGpxFile> callback) {
-		OsmandApplication app = mapActivity.getApp();
-		SelectedGpxFile selectedGpxFile;
-		if (showCurrentTrack) {
-			selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-		} else {
-			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(path);
-		}
+		OsmandApplication app = AndroidUtils.getApp(activity);
+
+		SelectedGpxFile selectedGpxFile = showCurrentTrack
+				? app.getSavingTrackHelper().getCurrentTrack()
+				: app.getSelectedGpxHelper().getSelectedFileByPath(path);
+
 		if (selectedGpxFile != null) {
 			callback.processResult(selectedGpxFile);
 		} else if (!Algorithms.isEmpty(path)) {
-			GpxFileLoaderTask.loadGpxFile(new File(path), mapActivity, gpx -> {
-				GpxSelectionParams params = GpxSelectionParams.newInstance().showOnMap()
-						.syncGroup().selectedByUser().addToHistory().addToMarkers().saveSelection();
-				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, params);
-				if (sf != null) {
-					callback.processResult(sf);
-				}
-				return true;
-			});
+			GpxFile gpxFile = app.getSelectedGpxHelper().getBackupedFileByPath(path);
+			if (gpxFile != null) {
+				selectAndProcessGpx(app, gpxFile, callback);
+			} else {
+				GpxFileLoaderTask.loadGpxFile(new File(path), activity, gpx -> {
+					selectAndProcessGpx(app, gpx, callback);
+					return true;
+				});
+			}
+		}
+	}
+
+	private static void selectAndProcessGpx(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
+	                                        @NonNull CallbackWithObject<SelectedGpxFile> callback) {
+		GpxSelectionParams params = GpxSelectionParams.newInstance().showOnMap().syncGroup()
+				.selectedByUser().addToHistory().addToMarkers().saveSelection();
+
+		SelectedGpxFile selectGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
+		if (selectGpxFile != null) {
+			callback.processResult(selectGpxFile);
 		}
 	}
 
