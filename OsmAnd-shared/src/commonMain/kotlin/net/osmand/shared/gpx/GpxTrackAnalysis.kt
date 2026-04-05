@@ -518,14 +518,14 @@ class GpxTrackAnalysis {
 				}
 				updateBounds(point)
 
-				var speed = point.speed.toFloat()
+				var speed = point.speed
 				if (speed > 0) {
 					hasSpeedInTrack = true
 				}
 				updateHdop(point)
 
 				var distance = point.attributes?.distance ?: -1f
-				if(j == 1 && s.startCoeff > 0) {
+				if (j == 1 && s.startCoeff > 0) {
 					distance = -1f
 				}
 				if (j > 0) {
@@ -644,86 +644,100 @@ class GpxTrackAnalysis {
 					totalSensorPowerSum += attributes.bikePower
 				}
 
-				attributes.engineLoad.takeIf { !it.isNaN() }?.let {
-					maxObdEngineLoad = maxOf(maxObdEngineLoad, it)
-					totalObdEngineLoad += it
+				val engineLoad = attributes.engineLoad
+				if (!engineLoad.isNaN()) {
+					maxObdEngineLoad = maxOf(maxObdEngineLoad, engineLoad)
+					totalObdEngineLoad += engineLoad
 					obdEngineLoadCount++
 				}
 
-				attributes.throttlePosition.takeIf { !it.isNaN() }?.let {
-					maxObdThrottlePosition = maxOf(maxObdThrottlePosition, it)
-					totalObdThrottle += it
+				val throttlePosition = attributes.throttlePosition
+				if (!throttlePosition.isNaN()) {
+					maxObdThrottlePosition = maxOf(maxObdThrottlePosition, throttlePosition)
+					totalObdThrottle += throttlePosition
 					obdThrottleCount++
 				}
 
-				attributes.rpmSpeed.takeIf { !it.isNaN() }?.let {
-					val rpm = it.toInt()
+				val rpmSpeed = attributes.rpmSpeed
+				if (!rpmSpeed.isNaN()) {
+					val rpm = rpmSpeed.toInt()
 					maxObdEngineRpm = maxOf(maxObdEngineRpm, rpm)
 					totalObdRpm += rpm
 					obdRpmCount++
 				}
 
-				attributes.runtimeEngine.takeIf { !it.isNaN() }?.let {
-					val runtime = it.toLong()
+				val runtimeEngine = attributes.runtimeEngine
+				if (!runtimeEngine.isNaN()) {
+					val runtime = runtimeEngine.toLong()
 					maxObdEngineRuntime = maxOf(maxObdEngineRuntime, runtime)
 					totalObdRuntime += runtime
 					obdRuntimeCount++
 				}
 
-				attributes.fuelPressure.takeIf { !it.isNaN() }?.let {
-					val fuelP = it.toInt()
+				val fuelPressure = attributes.fuelPressure
+				if (!fuelPressure.isNaN()) {
+					val fuelP = fuelPressure.toInt()
 					maxObdFuelPressure = maxOf(maxObdFuelPressure, fuelP)
 					totalObdFuelPressure += fuelP
 					obdFuelPressureCount++
 				}
 
-				attributes.batteryVoltage.takeIf { !it.isNaN() }?.let {
-					maxObdBatteryVoltage = maxOf(maxObdBatteryVoltage, it)
-					totalObdBatteryVoltage += it
+				val batteryVoltage = attributes.batteryVoltage
+				if (!batteryVoltage.isNaN()) {
+					maxObdBatteryVoltage = maxOf(maxObdBatteryVoltage, batteryVoltage)
+					totalObdBatteryVoltage += batteryVoltage
 					obdBatteryVoltageCount++
 				}
 
-				attributes.vehicleSpeed.takeIf { !it.isNaN() }?.let {
-					val _speed = it.toInt()
+				val vehicleSpeed = attributes.vehicleSpeed
+				if (!vehicleSpeed.isNaN()) {
+					val _speed = vehicleSpeed.toInt()
 					maxObdVehicleSpeed = maxOf(maxObdVehicleSpeed, _speed)
 					totalObdVehicleSpeed += _speed
 					obdVehicleSpeedCount++
 				}
 
-				attributes.fuelConsumption.takeIf { !it.isNaN() }?.let {
-					maxObdFuelConsumptionRate = maxOf(maxObdFuelConsumptionRate, it)
-					totalObdFuelConsumption += it
+				val fuelConsumption = attributes.fuelConsumption
+				if (!fuelConsumption.isNaN()) {
+					maxObdFuelConsumptionRate = maxOf(maxObdFuelConsumptionRate, fuelConsumption)
+					totalObdFuelConsumption += fuelConsumption
 					obdFuelConsumptionCount++
 				}
 
-				attributes.fuelRemaining.takeIf { !it.isNaN() }?.let {
-					maxObdFuelLevel = maxOf(maxObdFuelLevel, it)
-					totalObdFuelLevel += it
+				val fuelRemaining = attributes.fuelRemaining
+				if (!fuelRemaining.isNaN()) {
+					maxObdFuelLevel = maxOf(maxObdFuelLevel, fuelRemaining)
+					totalObdFuelLevel += fuelRemaining
 					obdFuelLevelCount++
 				}
-				attributes.intakeTemp.takeIf { it.isFinite() }?.let {
-					val temp = it.toInt()
+
+				val intakeTemp = attributes.intakeTemp
+				if (intakeTemp.isFinite()) {
+					val temp = intakeTemp.toInt()
 					maxObdAirIntakeTemperature = maxOf(maxObdAirIntakeTemperature, temp)
 					totalObdTempIntake += temp
 					obdTempIntakeCount++
 				}
 
-				attributes.coolantTemp.takeIf { it.isFinite() }?.let {
-					val temp = it.toInt()
+				val coolantTemp = attributes.coolantTemp
+				if (coolantTemp.isFinite()) {
+					val temp = coolantTemp.toInt()
 					maxObdEngineCoolantTemperature = maxOf(maxObdEngineCoolantTemperature, temp)
 					totalObdTempCoolant += temp
 					obdTempCoolantCount++
 				}
 
-				attributes.engineOilTemp.takeIf { it.isFinite() }?.let {
-					val temp = it.toInt()
+				val engineOilTemp = attributes.engineOilTemp
+				if (engineOilTemp.isFinite()) {
+					val temp = engineOilTemp.toInt()
 					maxObdEngineOilTemperature = maxOf(maxObdEngineOilTemperature, temp)
 					totalObdTempOil += temp
 					obdTempOilCount++
 				}
 
-				attributes.ambientTemp.takeIf { it.isFinite() }?.let {
-					val temp = it.toInt()
+				val ambientTemp = attributes.ambientTemp
+				if (ambientTemp.isFinite()) {
+					val temp = ambientTemp.toInt()
 					maxObdAmbientAirTemperature = maxOf(maxObdAmbientAirTemperature, temp)
 					totalObdTempAmbient += temp
 					obdTempAmbientCount++
@@ -783,7 +797,6 @@ class GpxTrackAnalysis {
 
 		return this
 	}
-
 
 	private fun addWptAttribute(
 		point: WptPt, attributes: PointAttributes, pointsAnalyser: TrackPointsAnalyser?
@@ -946,12 +959,11 @@ class GpxTrackAnalysis {
 		var maxSpeed = 0.0f
 		for (i in startIdx..endIdx) {
 			val pt = segment[i]
-			val hasAttributes = pt.attributes != null
-			val speed = if (hasAttributes) pt.attributes?.speed else pt.speed
-			if (speed != null) {
-				if (speed > maxSpeed) {
-					maxSpeed = speed
-				}
+			val attributes = pt.attributes
+			val speed = if (attributes != null && !attributes.speed.isNaN()) attributes.speed else pt.speed
+
+			if (speed > maxSpeed) {
+				maxSpeed = speed
 			}
 		}
 		return maxSpeed
@@ -974,15 +986,17 @@ class GpxTrackAnalysis {
             val timeDiffMillis = maxOf(0L, pt.time - prev.time)
             val timeDiffSec = (timeDiffMillis / 1000).toInt()
             if (timeDiffSec <= 0) continue
-            var distance = pt.attributes?.distance ?: -1f
+
+            val attributes = pt.attributes
+            var distance = attributes?.distance ?: -1f
             if (distance < 0f) {
                 distance = KMapUtils.getEllipsoidDistance(prev.lat, prev.lon, pt.lat, pt.lon).toFloat()
             }
-	        var speed = pt.attributes?.speed?.takeIf { !it.isNaN() }?.toDouble() ?: pt.speed.toDouble()
-            if (speed == 0.0) {
-                speed = distance / timeDiffSec.toDouble()
+            var speed = if (attributes != null && !attributes.speed.isNaN()) attributes.speed else pt.speed
+            if (speed == 0.0f) {
+                speed = distance / timeDiffSec.toFloat()
             }
-            if (speed > 0 && distance > timeDiffMillis / 10000f) {
+            if (speed > 0f && distance > timeDiffMillis / 10000f) {
                 movingTime += timeDiffMillis
             }
         }
@@ -1030,8 +1044,6 @@ class GpxTrackAnalysis {
 			}
 		}
 	}
-
-
 
 	fun hasAnyObdMetric(): Boolean {
 		val obdParameters = GpxParameter.getObdParameters()
