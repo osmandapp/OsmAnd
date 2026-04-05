@@ -89,7 +89,7 @@ class GpxFile : GpxExtensions {
 			if (track.generalTrack) continue
 			for (segment in track.segments) {
 				if (segment.generalSegment) continue
-				count += segment.points.size
+				count += segment.getPointsSize()
 			}
 		}
 		return count
@@ -100,7 +100,7 @@ class GpxFile : GpxExtensions {
 			if (track.generalTrack) continue
 			for (segment in track.segments) {
 				if (segment.generalSegment) continue
-				destination.addAll(segment.points)
+				segment.addPointsTo(destination)
 			}
 		}
 	}
@@ -270,20 +270,17 @@ class GpxFile : GpxExtensions {
 
 	private fun buildGeneralSegment(markInnerSegments: Boolean) {
 		val segment = TrkSegment()
+		val sourceSegments = mutableListOf<TrkSegment>()
 		for (track in tracks) {
 			for (trkSegment in track.segments) {
 				segment.routeSegments.addAll(trkSegment.routeSegments)
-				if (trkSegment.points.isNotEmpty()) {
-					val waypoints = trkSegment.points.map { WptPt(it) }.toMutableList()
-					if (markInnerSegments) {
-						waypoints.first().firstPoint = true
-						waypoints.last().lastPoint = true
-					}
-					segment.points.addAll(waypoints)
+				if (!trkSegment.isPointsEmpty()) {
+					sourceSegments.add(trkSegment)
 				}
 			}
 		}
-		if (segment.points.isNotEmpty()) {
+		if (sourceSegments.isNotEmpty()) {
+			segment.setJoinedPointSources(sourceSegments, markInnerSegments)
 			segment.generalSegment = true
 			generalSegment = segment
 		}
@@ -370,7 +367,7 @@ class GpxFile : GpxExtensions {
 			for (segment in subtrack.segments) {
 				if (!segment.generalSegment) {
 					analysis.totalTracks += 1
-					if (segment.points.size > 1) {
+					if (segment.getPointsSize() > 1) {
 						splitSegments.add(createSplitSegment(segment, fromDistance, toDistance))
 					}
 				}
@@ -470,7 +467,7 @@ class GpxFile : GpxExtensions {
 	fun hasTrkPt(): Boolean {
 		for (track in tracks) {
 			for (segment in track.segments) {
-				if (segment.points.isNotEmpty()) {
+				if (!segment.isPointsEmpty()) {
 					return true
 				}
 			}
@@ -482,7 +479,7 @@ class GpxFile : GpxExtensions {
 		val segments = mutableListOf<TrkSegment>()
 		for (track in tracks) {
 			for (segment in track.segments) {
-				if (!segment.generalSegment && segment.points.isNotEmpty() && (!routesOnly || segment.hasRoute())) {
+				if (!segment.generalSegment && !segment.isPointsEmpty() && (!routesOnly || segment.hasRoute())) {
 					segments.add(segment)
 				}
 			}
@@ -494,7 +491,9 @@ class GpxFile : GpxExtensions {
 		removeGeneralTrackIfExists()
 
 		val segment = TrkSegment()
-		segment.points.addAll(points)
+		for (point in points) {
+			segment.appendParsedPoint(point)
+		}
 
 		if (tracks.isEmpty()) {
 			tracks.add(Track())
@@ -599,12 +598,12 @@ class GpxFile : GpxExtensions {
 			for (segment in track.segments) {
 				val segmentColor = segment.getColor(trackColor)
 				val segmentWidth = segment.getWidth(trackWidth)
-				if (!segment.generalSegment && segment.points.isNotEmpty()) {
+				if (!segment.generalSegment && !segment.isPointsEmpty()) {
 					val ts = TrkSegment()
 					tpoints.add(ts)
 					ts.setColor(segmentColor)
 					ts.setWidth(segmentWidth)
-					ts.points.addAll(segment.points)
+					segment.addPointsTo(ts.points)
 				}
 			}
 		}
@@ -612,14 +611,14 @@ class GpxFile : GpxExtensions {
 	}
 
 	fun getLastPoint(): WptPt? {
-		return tracks.lastOrNull()?.segments?.lastOrNull()?.points?.lastOrNull()
+		return tracks.lastOrNull()?.segments?.lastOrNull()?.getLastPointSnapshot()
 	}
 
 	fun findPointToShow(): WptPt? {
 		for (track in tracks) {
 			for (segment in track.segments) {
-				if (segment.points.isNotEmpty()) {
-					return segment.points[0]
+				if (!segment.isPointsEmpty()) {
+					return segment.getFirstPointSnapshot()
 				}
 			}
 		}
@@ -634,7 +633,7 @@ class GpxFile : GpxExtensions {
 	fun isEmpty(): Boolean {
 		for (track in tracks) {
 			for (segment in track.segments) {
-				if (segment.points.isNotEmpty()) {
+				if (!segment.isPointsEmpty()) {
 					return false
 				}
 			}
@@ -655,11 +654,11 @@ class GpxFile : GpxExtensions {
 	}
 
 	fun getNonEmptyTracksCount(): Int {
-		return tracks.count { track -> track.segments.any { it.points.isNotEmpty() } }
+		return tracks.count { track -> track.segments.any { !it.isPointsEmpty() } }
 	}
 
 	fun getNonEmptySegmentsCount(): Int {
-		return tracks.sumOf { track -> track.segments.count { it.points.isNotEmpty() } }
+		return tracks.sumOf { track -> track.segments.count { !it.isPointsEmpty() } }
 	}
 
 	fun getWaypointCategories(): Set<String> {
@@ -675,8 +674,22 @@ class GpxFile : GpxExtensions {
 			KQuadRect(defaultMissingLon, defaultMissingLat, defaultMissingLon, defaultMissingLat)
 		for (track in tracks) {
 			for (segment in track.segments) {
-				for (p in segment.points) {
-					updateQR(qr, p, defaultMissingLat, defaultMissingLon)
+				for (index in 0 until segment.getPointsSize()) {
+					val lat = segment.getPointLat(index)
+					val lon = segment.getPointLon(index)
+					if (qr.left == defaultMissingLon && qr.top == defaultMissingLat &&
+						qr.right == defaultMissingLon && qr.bottom == defaultMissingLat
+					) {
+						qr.left = lon
+						qr.right = lon
+						qr.top = lat
+						qr.bottom = lat
+					} else {
+						qr.left = minOf(qr.left, lon)
+						qr.right = maxOf(qr.right, lon)
+						qr.top = maxOf(qr.top, lat)
+						qr.bottom = minOf(qr.bottom, lat)
+					}
 				}
 			}
 		}
@@ -842,7 +855,7 @@ class GpxFile : GpxExtensions {
 			size += route.points.size
 		}
 		for (segment in getNonEmptyTrkSegments(false)) {
-			size += segment.points.size
+			size += segment.getPointsSize()
 		}
 
 		size++ // metadata
@@ -868,8 +881,8 @@ class GpxFile : GpxExtensions {
 			for (segmentIndex in track.segments.lastIndex downTo 0) {
 				val segment = track.segments[segmentIndex]
 				if (segment.generalSegment) continue
-				for (pointIndex in segment.points.lastIndex downTo 0) {
-					val time = segment.points[pointIndex].time
+				for (pointIndex in segment.getPointsSize() - 1 downTo 0) {
+					val time = segment.getPointTime(pointIndex)
 					if (time > 0) {
 						return time
 					}
@@ -980,11 +993,11 @@ class GpxFile : GpxExtensions {
 		val dest = TrkSegment()
 		dest.name = source.name
 		dest.generalSegment = source.generalSegment
-		val kPoints = mutableListOf<WptPt>()
-		for (point in source.points.toList()) {
-			kPoints.add(WptPt(point))
+		for (index in 0 until source.getPointsSize()) {
+			val point = WptPt()
+			source.copyPointTo(index, point)
+			dest.appendParsedPoint(point)
 		}
-		dest.points = kPoints
 		val routeSegments = mutableListOf<RouteSegment>()
 		for (rs in source.routeSegments.toList()) {
 			routeSegments.add(cloneRouteSegment(rs))

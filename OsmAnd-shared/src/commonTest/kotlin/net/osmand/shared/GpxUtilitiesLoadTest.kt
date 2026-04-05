@@ -97,6 +97,70 @@ class GpxUtilitiesLoadTest {
 		assertTrue(generalSegment.points[3].lastPoint)
 	}
 
+	@Test
+	fun testLoadGpxFileParsesCsvAttributesIntoTrackPoints() {
+		val gpxFile = loadGpx(
+			"""
+			<gpx version="1.1" creator="test">
+			  <trk>
+			    <trkseg>
+			      <csvattributes>
+			        20.0,10.0,100.0
+			        20.1,10.1,101.5
+			      </csvattributes>
+			    </trkseg>
+			  </trk>
+			</gpx>
+			""".trimIndent(),
+			addGeneralTrack = false
+		)
+
+		assertNull(gpxFile.error)
+		val segment = gpxFile.tracks[0].segments[0]
+		assertEquals(2, segment.getPointsSize())
+		assertEquals(10.0, segment.getPointLat(0))
+		assertEquals(20.1, segment.getPointLon(1))
+		assertEquals(100.0, segment.getPointEle(0))
+		assertEquals(101.5, segment.getPointEle(1))
+	}
+
+	@Test
+	fun testClonePreservesCompactTrackPointFields() {
+		val gpxFile = loadGpx(
+			"""
+			<gpx version="1.1" creator="test">
+			  <trk>
+			    <trkseg>
+			      <trkpt lat="10.0" lon="20.0">
+			        <time>2024-01-01T00:00:00Z</time>
+			        <ele>123.4</ele>
+			        <name>first</name>
+			        <cmt>note</cmt>
+			        <type>category</type>
+			        <link href="https://example.com/point" />
+			        <extensions>
+			          <speed>5.5</speed>
+			          <bearing>42.0</bearing>
+			        </extensions>
+			      </trkpt>
+			    </trkseg>
+			  </trk>
+			</gpx>
+			""".trimIndent(),
+			addGeneralTrack = false
+		)
+
+		val cloned = gpxFile.clone()
+		val point = cloned.tracks[0].segments[0].points[0]
+		assertEquals("first", point.name)
+		assertEquals("note", point.comment)
+		assertEquals("category", point.category)
+		assertEquals("https://example.com/point", point.link?.href)
+		assertEquals(123.4, point.ele)
+		assertEquals(5.5f, point.speed)
+		assertEquals(42.0f, point.bearing)
+	}
+
 	private fun buildTimedTrackGpx(pointsCount: Int, startTime: Long): String {
 		return buildString {
 			append("<gpx version=\"1.1\" creator=\"test\"><trk><trkseg>")

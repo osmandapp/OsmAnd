@@ -76,10 +76,10 @@ abstract class SplitMetric {
 				}
 				prev = point
 			}
-			if (segment.points.isNotEmpty() && !(sp.endPointInd == segment.points.size - 1 && sp.startCoeff == 1.0)) {
+			if (!segment.isPointsEmpty() && !(sp.endPointInd == segment.getPointsSize() - 1 && sp.startCoeff == 1.0)) {
 				sp.metricEnd = total
 				sp.secondaryMetricEnd = secondaryMetricEnd
-				sp.setLastPoint(segment.points.size - 2, 1.0)
+				sp.setLastPoint(segment.getPointsSize() - 2, 1.0)
 				splitSegments.add(sp)
 			}
 		}
