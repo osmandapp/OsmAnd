@@ -1771,8 +1771,8 @@ object GpxUtilities {
 			val latStr = parser.getAttributeValue("", "lat")
 			val lonStr = parser.getAttributeValue("", "lon")
 			if (!latStr.isNullOrEmpty() && !lonStr.isNullOrEmpty()) {
-				lat = latStr.toDouble()
-				lon = lonStr.toDouble()
+				lat = toDouble(latStr)
+				lon = toDouble(lonStr)
 			}
 		} catch (_: NumberFormatException) {
 		}
