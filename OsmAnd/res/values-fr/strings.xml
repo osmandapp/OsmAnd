@@ -5807,7 +5807,7 @@
     <string name="routing_attr_pt_limit_description">Spécifiez le nombre de meilleurs itinéraires à afficher</string>
     <string name="delete_folder_description">Supprimer le dossier « %1$s » ?</string>
     <string name="show_spherical_map">Vue globe terrestre</string>
-    <string name="enable_3d_objects">Bâtiments 3D</string>
+    <string name="enable_3d_objects">Bâtiments en 3D</string>
     <string name="vehicle_metrics_chart_category">Mesures du véhicule</string>
     <string name="lang_mi">Māori</string>
     <string name="buildings_3d_detail_level">Détail des bâtiments 3D</string>
@@ -5907,7 +5907,7 @@
     <string name="building_3d_high_details_content_desc">Bâtiments en 3D élevés</string>
     <string name="building_3d_near_distance_content_desc">Distance entre les bâtiments en 3D à proximité</string>
     <string name="building_3d_far_distance_content_desc">Bâtiments en 3D éloignés</string>
-    <string name="free_custom_color_description">Personnalisez les bâtiments en 3D avec n\'importe quelle couleur. Idéal pour assortir le thème d\'une carte ou améliorer le contraste.</string>
+    <string name="free_custom_color_description">Personnalisez les bâtiments 3D avec n\'importe quelle couleur. Idéal pour harmoniser votre carte avec son thème ou améliorer le contraste.</string>
     <string name="buildings_3d_use_map_style_color_description">Utiliser la couleur par défaut du style de carte (%s).</string>
     <string name="buildings_3d_visibility_description">Ajustez l\'opacité des structures 3D sur la carte.</string>
     <string name="level_of_details">Niveau de détail</string>

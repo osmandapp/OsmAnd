@@ -5,7 +5,7 @@
     <string name="poi_mooring">Múráil</string>
     <string name="poi_lock_basin">Glasáil báisín</string>
     <string name="poi_notice">Fógra, seamark</string>
-    <string name="poi_pile">Carn</string>
+    <string name="poi_pile">Carnán</string>
     <string name="poi_radar_transponder">Trasfhreagróir radair, seamark</string>
     <string name="poi_radio_station">Stáisiún raidió, seamark</string>
     <string name="poi_signal_station_warning">Stáisiún comharthaíochta, rabhadh</string>
@@ -1152,7 +1152,7 @@
     <string name="poi_changing_table_count">Líon na dtáblaí á athrú</string>
     <string name="poi_changing_table_fee_yes">Táille tábla a athrú: tá</string>
     <string name="poi_changing_table_fee_no">Táille tábla a athrú: níl</string>
-    <string name="poi_charcoal_pile">Carn gualaigh</string>
+    <string name="poi_charcoal_pile">Carnán gualaigh</string>
     <string name="poi_vehicle_forestry">Rochtain ar fheithiclí: foraoiseacht</string>
     <string name="poi_vehicle_delivery">Rochtain ar fheithiclí: seachadadh</string>
     <string name="poi_motorcar_yes">Tá; Mótarcharr</string>

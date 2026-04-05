@@ -3446,7 +3446,7 @@
     <string name="shared_string_all_languages">Wszystkie języki</string>
     <string name="wiki_menu_download_descr">Potrzebne są dodatkowe mapy, żeby przeglądać UM Wikipedii na mapie.</string>
     <string name="some_articles_may_not_available_in_lang">Pewne artykuły Wikipedii mogą być nie dostępne w wybranym języku.</string>
-    <string name="custom_color">Dostosowany kolor</string>
+    <string name="custom_color">Kolor niestandardowy</string>
     <string name="select_wikipedia_article_langs">Wybierz języki, w których na mapie będą pojawiać się artykuły z Wikipedii. Możesz przełączać się pomiędzy dostępnymi językami podczas czytania artykułu.</string>
     <string name="lang_zhyue">Kantoński</string>
     <string name="lang_uz">Uzbecki</string>
@@ -6193,4 +6193,16 @@
     <string name="map_2d">2D</string>
     <string name="map_3d">3D</string>
     <string name="astro_solar_system">Układ słoneczny</string>
+    <string name="view_distance">Podgląd odległości</string>
+    <string name="map_widget_memory_info">Informacje o pamięci</string>
+    <string name="map_widget_memory_info_desc">Monitoruje pamięć sterty Java, natywne alokacje i pamięć graficzną.</string>
+    <string name="memory_used_settings">Użyta pamięć sterty Java</string>
+    <string name="memory_allocated_settings">Alokowana pamięć sterty Java</string>
+    <string name="memory_limit_settings">Maksymalny limit pamięci sterty Java</string>
+    <string name="memory_native_settings">Alokowana natywna pamięć sterty</string>
+    <string name="memory_graphics_settings">Pamięć graficzna</string>
+    <string name="shared_string_heap">Pamięć sterty</string>
+    <string name="shared_string_native">Natywna</string>
+    <string name="shared_string_gpu">Procesor graficzny</string>
+    <string name="shared_string_allocated">Alokowane</string>
 </resources>
