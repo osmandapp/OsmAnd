@@ -8,6 +8,7 @@ import kotlinx.datetime.format.DateTimeFormat
 import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.toLocalDateTime
+import kotlinx.datetime.toInstant
 import net.osmand.shared.KException
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.currentTimeMillis
@@ -90,6 +91,7 @@ object GpxUtilities {
 
 	private var oneOffLogParseTimeErrors = true
 	private const val GPX_TIME_FORMATTER = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+	private const val MILLIS_PER_MINUTE = 60_000L
 
 	class TimePatterns {
 		companion object {
@@ -922,36 +924,6 @@ object GpxUtilities {
 		return textBuilder?.toString() ?: singleText
 	}
 
-	@Throws(XmlParserException::class, IOException::class)
-	fun readTextMap(parser: XmlPullParser, key: String): Map<String, String> {
-		var tok: Int
-		var text: StringBuilder? = null
-		var result: MutableMap<String, String>? = null
-		while (parser.next().also { tok = it } != XmlPullParser.END_DOCUMENT) {
-			if (tok == XmlPullParser.END_TAG) {
-				val tag = parser.getName()
-				if (tag != null && text != null && text.toString().trim().isNotEmpty()) {
-					if (result == null) {
-						result = HashMap()
-					}
-					result[tag] = text.toString()
-				}
-				if (tag == key) {
-					break
-				}
-				text = null
-			} else if (tok == XmlPullParser.START_TAG) {
-				text = null
-			} else if (tok == XmlPullParser.TEXT) {
-				if (text == null) {
-					text = StringBuilder()
-				}
-				text.append(parser.getText())
-			}
-		}
-		return result ?: emptyMap()
-	}
-
 	fun formatTime(time: Long): String {
 		val format = getTimeFormatter()
 		return format.format(Instant.fromEpochMilliseconds(time).toLocalDateTime(TimeZone.UTC))
@@ -959,29 +931,19 @@ object GpxUtilities {
 
 	@JvmOverloads
 	fun parseTime(iso8601text: String, localFormats: MutableList<DateTimeFormat<DateTimeComponents>>? = null): Long {
-		var milliseconds = 0.0
-		var noFractionalSeconds = iso8601text
-		val isIndex = noFractionalSeconds.indexOf('.')
+		val normalized = normalizeIso8601Input(iso8601text)
+		parseTimeFast(normalized)?.let { return it }
 
-		if (isIndex > 0) {
-			var esIndex = isIndex + 1
-			while (esIndex < noFractionalSeconds.length && noFractionalSeconds[esIndex].isDigit()) {
-				esIndex++
-			}
-			milliseconds = ("0" + noFractionalSeconds.substring(isIndex, esIndex)).toDouble()
-			noFractionalSeconds = noFractionalSeconds.substring(0, isIndex) + noFractionalSeconds.substring(esIndex)
-		}
-
-		// Do trim ([ \t\r\n] etc) to avoid XML-tag parsing nuances.
-		// Replace Date-Time space-delimiter -> "T" (RFC3339 in ISO8601)
-		val rfc3339 = noFractionalSeconds.trim().replaceFirst(' ', 'T');
+		val strippedFraction = stripFractionalSeconds(normalized)
+		val rfc3339 = strippedFraction.first
+		val milliseconds = strippedFraction.second
 
 		val formatsToUse = localFormats ?: TimePatterns.formats
 		for (i in formatsToUse.indices) {
 			val fmt = formatsToUse[i]
 			try {
 				val time = fmt.parse(rfc3339).toInstantUsingOffset()
-					.toEpochMilliseconds() + (milliseconds * 1000).toLong()
+					.toEpochMilliseconds() + milliseconds
 
 				// Move successful format to the front of the local list
 				if (localFormats != null && i > 0) {
@@ -999,6 +961,162 @@ object GpxUtilities {
 			log.error("Failed to parse date: '$iso8601text'")
 		}
 		return 0
+	}
+
+	private fun normalizeIso8601Input(input: String): String {
+		var start = 0
+		var end = input.length
+		while (start < end && input[start].isXmlWhitespace()) {
+			start++
+		}
+		while (end > start && input[end - 1].isXmlWhitespace()) {
+			end--
+		}
+		val needsTrim = start != 0 || end != input.length
+		val delimiterIndex = start + 10
+		val needsSpaceReplacement = end - start > 10 &&
+				delimiterIndex < input.length &&
+				input[delimiterIndex] == ' '
+		if (!needsTrim && !needsSpaceReplacement) {
+			return input
+		}
+
+		val trimmed = if (needsTrim) input.substring(start, end) else input
+		if (trimmed.length > 10 && trimmed[10] == ' ') {
+			val chars = trimmed.toCharArray()
+			chars[10] = 'T'
+			return chars.concatToString()
+		}
+		return trimmed
+	}
+
+	private fun stripFractionalSeconds(input: String): Pair<String, Long> {
+		val dotIndex = input.indexOf('.')
+		if (dotIndex <= 0) {
+			return input to 0L
+		}
+
+		var endIndex = dotIndex + 1
+		var milliseconds = 0L
+		var digits = 0
+		while (endIndex < input.length && input[endIndex].isDigit()) {
+			if (digits < 3) {
+				milliseconds = milliseconds * 10 + (input[endIndex] - '0')
+			}
+			digits++
+			endIndex++
+		}
+		while (digits in 1..2) {
+			milliseconds *= 10
+			digits++
+		}
+		return buildString(input.length - (endIndex - dotIndex)) {
+			append(input, 0, dotIndex)
+			append(input, endIndex, input.length)
+		} to milliseconds
+	}
+
+	private fun parseTimeFast(input: String): Long? {
+		if (input.length < 16 ||
+			input[4] != '-' ||
+			input[7] != '-' ||
+			input[10] != 'T' ||
+			input[13] != ':'
+		) {
+			return null
+		}
+
+		return try {
+			val year = parseNumber(input, 0, 4)
+			val month = parseNumber(input, 5, 7)
+			val day = parseNumber(input, 8, 10)
+			val hour = parseNumber(input, 11, 13)
+			val minute = parseNumber(input, 14, 16)
+			var second = 0
+			var milliseconds = 0
+			var index = 16
+
+			if (index < input.length && input[index] == ':') {
+				second = parseNumber(input, index + 1, index + 3)
+				index += 3
+			}
+
+			if (index < input.length && input[index] == '.') {
+				index++
+				var digits = 0
+				while (index < input.length && input[index].isDigit()) {
+					if (digits < 3) {
+						milliseconds = milliseconds * 10 + (input[index] - '0')
+					}
+					digits++
+					index++
+				}
+				while (digits in 1..2) {
+					milliseconds *= 10
+					digits++
+				}
+			}
+
+			val offsetMinutes = when {
+				index == input.length -> 0L
+				input[index] == 'Z' && index == input.lastIndex -> 0L
+				(index + 5 == input.length) && (input[index] == '+' || input[index] == '-') -> {
+					parseOffsetMinutes(
+						sign = if (input[index] == '-') -1 else 1,
+						hours = parseNumber(input, index + 1, index + 3),
+						minutes = parseNumber(input, index + 3, index + 5)
+					)
+				}
+				(index + 6 == input.length) &&
+						(input[index] == '+' || input[index] == '-') &&
+						input[index + 3] == ':' -> {
+					parseOffsetMinutes(
+						sign = if (input[index] == '-') -1 else 1,
+						hours = parseNumber(input, index + 1, index + 3),
+						minutes = parseNumber(input, index + 4, index + 6)
+					)
+				}
+				else -> return null
+			}
+
+			LocalDateTime(
+				year = year,
+				monthNumber = month,
+				dayOfMonth = day,
+				hour = hour,
+				minute = minute,
+				second = second,
+				nanosecond = milliseconds * 1_000_000
+			).toInstant(TimeZone.UTC).toEpochMilliseconds() - offsetMinutes * MILLIS_PER_MINUTE
+		} catch (_: Exception) {
+			null
+		}
+	}
+
+	private fun parseNumber(input: String, start: Int, end: Int): Int {
+		if (end > input.length || start >= end) {
+			throw IllegalArgumentException("Invalid number range")
+		}
+		var result = 0
+		for (index in start until end) {
+			val char = input[index]
+			if (!char.isDigit()) {
+				throw IllegalArgumentException("Invalid digit '$char'")
+			}
+			result = result * 10 + (char - '0')
+		}
+		return result
+	}
+
+	private fun parseOffsetMinutes(sign: Int, hours: Int, minutes: Int): Long {
+		if (hours !in 0..23 || minutes !in 0..59) {
+			throw IllegalArgumentException("Invalid offset")
+		}
+		return sign * (hours * 60L + minutes)
+	}
+
+	private fun Char.isXmlWhitespace(): Boolean {
+		return this == ' ' || this == '\t' || this == '\r' || this == '\n'
 	}
 
 	fun getCreationTime(gpxFile: GpxFile?): Long {
@@ -1139,32 +1257,7 @@ object GpxUtilities {
 										parser
 									)
 								) {
-									val values = readTextMap(parser, tag)
-									if (values.isNotEmpty()) {
-										for ((t, value) in values) {
-											val supportedTag =
-												getExtensionsSupportedTag(t.lowercase())
-											parse.getExtensionsToWrite()[supportedTag] = value
-											if (parse is WptPt) {
-												when (t) {
-													POINT_SPEED -> {
-														try {
-															parse.speed = value.toFloat()
-														} catch (e: NumberFormatException) {
-															println(e.message)
-														}
-													}
-
-													POINT_BEARING -> {
-														try {
-															parse.bearing = value.toFloat()
-														} catch (ignored: NumberFormatException) {
-														}
-													}
-												}
-											}
-										}
-									}
+									readExtensionsText(parser, tag, parse)
 								}
 							}
 						}
@@ -1519,6 +1612,56 @@ object GpxUtilities {
 	private fun getExtensionsSupportedTag(tag: String): String {
 		val supportedTag = SUPPORTED_EXTENSION_TAGS[tag]
 		return supportedTag ?: tag.replace(XML_COLON, ":")
+	}
+
+	@Throws(XmlParserException::class, IOException::class)
+	private fun readExtensionsText(parser: XmlPullParser, key: String, target: GpxExtensions) {
+		var tok: Int
+		var text: StringBuilder? = null
+		while (parser.next().also { tok = it } != XmlPullParser.END_DOCUMENT) {
+			if (tok == XmlPullParser.END_TAG) {
+				val tag = parser.getName()
+				if (tag != null && text != null) {
+					val value = text.toString()
+					if (!value.isBlank()) {
+						applyExtensionValue(target, tag, value)
+					}
+				}
+				if (tag == key) {
+					break
+				}
+				text = null
+			} else if (tok == XmlPullParser.START_TAG) {
+				text = null
+			} else if (tok == XmlPullParser.TEXT) {
+				if (text == null) {
+					text = StringBuilder()
+				}
+				text.append(parser.getText())
+			}
+		}
+	}
+
+	private fun applyExtensionValue(target: GpxExtensions, tag: String, value: String) {
+		val normalizedTag = tag.lowercase()
+		target.getExtensionsToWrite()[getExtensionsSupportedTag(normalizedTag)] = value
+		if (target is WptPt) {
+			when (normalizedTag) {
+				POINT_SPEED -> {
+					try {
+						target.speed = value.toFloat()
+					} catch (_: NumberFormatException) {
+					}
+				}
+
+				POINT_BEARING -> {
+					try {
+						target.bearing = value.toFloat()
+					} catch (_: NumberFormatException) {
+					}
+				}
+			}
+		}
 	}
 
 	private fun parseRouteKeyAttributes(parser: XmlPullParser): Map<String, String> {
