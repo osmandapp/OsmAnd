@@ -1581,12 +1581,63 @@ object GpxUtilities {
 			val latStr = parser.getAttributeValue("", "lat")
 			val lonStr = parser.getAttributeValue("", "lon")
 			if (!latStr.isNullOrEmpty() && !lonStr.isNullOrEmpty()) {
-				wpt.lat = latStr.toDouble()
-				wpt.lon = lonStr.toDouble()
+				wpt.lat = fastToCoordinateDouble(latStr)
+				wpt.lon = fastToCoordinateDouble(lonStr)
 			}
 		} catch (_: NumberFormatException) {
 		}
 		return wpt
+	}
+
+	fun fastToCoordinateDouble(value: String?): Double {
+		if (value.isNullOrEmpty()) return Double.NaN
+
+		var i = 0
+		val len = value.length
+		var negative = false
+
+		if (value[i] == '-' || value[i] == '+') {
+			negative = value[i] == '-'
+			i++
+			if (i == len) return Double.NaN
+		}
+
+		var intPart = 0L
+		var fracPart = 0L
+		var fracDiv = 1.0
+		var hasDigits = false
+		var hasDot = false
+
+		while (i < len) {
+			val c = value[i]
+			when {
+				c in '0'..'9' -> {
+					hasDigits = true
+					val digit = c - '0'
+					if (hasDot) {
+						fracPart = fracPart * 10 + digit
+						fracDiv *= 10.0
+					} else {
+						intPart = intPart * 10 + digit
+					}
+					i++
+				}
+				c == '.' && !hasDot -> {
+					hasDot = true
+					i++
+				}
+				c == 'e' || c == 'E' -> {
+					// fallback for scientific notation
+					return value.toDouble()
+				}
+				else -> return Double.NaN
+			}
+		}
+		if (!hasDigits) return Double.NaN
+
+		var result = intPart + fracPart / fracDiv
+		if (negative) result = -result
+		return result
 	}
 
 	private fun parseRouteSegmentAttributes(parser: XmlPullParser): RouteSegment {
