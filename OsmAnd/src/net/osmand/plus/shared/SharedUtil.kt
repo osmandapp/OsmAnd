@@ -250,9 +250,9 @@ object SharedUtil {
 		val jSegment = GPXUtilities.TrkSegment()
 		jSegment.name = segment.name
 		jSegment.generalSegment = segment.generalSegment
-		val jPoints: MutableList<GPXUtilities.WptPt> = ArrayList()
-		for (point in segment.points) {
-			jPoints.add(jWptPt(point))
+		val jPoints: MutableList<GPXUtilities.WptPt> = ArrayList(segment.getPointsSize())
+		for (index in 0 until segment.getPointsSize()) {
+			jPoints.add(jWptPt(segment.getPointSnapshot(index)))
 		}
 		jSegment.points = jPoints
 		val jRouteSegments: MutableList<GPXUtilities.RouteSegment> = ArrayList()
@@ -479,11 +479,9 @@ object SharedUtil {
 		val kSegment = TrkSegment()
 		kSegment.name = segment.name
 		kSegment.generalSegment = segment.generalSegment
-		val kPoints: MutableList<WptPt> = ArrayList()
 		for (point in segment.points) {
-			kPoints.add(kWptPt(point))
+			kSegment.appendParsedPoint(kWptPt(point))
 		}
-		kSegment.points = kPoints
 		val kRouteSegments: MutableList<RouteSegment> = ArrayList()
 		for (rs in segment.routeSegments) {
 			kRouteSegments.add(kRouteSegment(rs))

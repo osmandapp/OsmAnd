@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 public class SharedUtilGpxInteropTest {
 
 	@Test
-	public void testJGpxFileCopiesDetachedDataWithoutPreClone() {
+	public void testJGpxFileCopiesDetachedData() {
 		GpxFile source = new GpxFile((String) null);
 
 		Track track = new Track();

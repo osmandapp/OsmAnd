@@ -423,8 +423,15 @@ object GpxUtilities {
 		)
 		var updated = false
 		for (segment in segments) {
-			if (segment.points.isNotEmpty()) {
-				updateBounds(trackBounds, segment.points, 0)
+			if (!segment.isPointsEmpty()) {
+				for (index in 0 until segment.getPointsSize()) {
+					val lat = segment.getPointLat(index)
+					val lon = segment.getPointLon(index)
+					trackBounds.right = maxOf(trackBounds.right, lon)
+					trackBounds.left = minOf(trackBounds.left, lon)
+					trackBounds.top = maxOf(trackBounds.top, lat)
+					trackBounds.bottom = minOf(trackBounds.bottom, lat)
+				}
 				updated = true
 			}
 		}
@@ -442,7 +449,7 @@ object GpxUtilities {
 	}
 
 	fun calculateTrackPoints(segments: List<TrkSegment>): Int {
-		return segments.sumOf { it.points.size }
+		return segments.sumOf { it.getPointsSize() }
 	}
 
 	fun updateQR(q: KQuadRect, p: WptPt, defLat: Double, defLon: Double) {
@@ -653,7 +660,8 @@ object GpxUtilities {
 				for (segment in track.segments) {
 					serializer.startTag(null, "trkseg")
 					writeNotNullText(serializer, "name", segment.name)
-					for (p in segment.points) {
+					for (index in 0 until segment.getPointsSize()) {
+						val p = segment.getPointSnapshot(index)
 						serializer.startTag(null, "trkpt")
 						writeWpt(serializer, p, progress, file)
 						serializer.endTag(null, "trkpt")
@@ -1261,6 +1269,7 @@ object GpxUtilities {
 			val routeTrackSegment = TrkSegment()
 			routeTrack.segments.add(routeTrackSegment)
 			val parserState = ArrayDeque<GpxExtensions>()
+			val parsedTrackPoint = ParsedTrackPoint()
 			var firstSegment: TrkSegment? = null
 			var extensionReadMode = false
 			var routePointExtension = false
@@ -1304,7 +1313,13 @@ object GpxUtilities {
 								routePointExtension = true
 								if (parse is WptPt) {
 									parse.getExtensionsToWrite()["offset"] =
-										routeTrackSegment.points.size.toString()
+										routeTrackSegment.getPointsSize().toString()
+								} else if (parse is ParsedTrackPoint) {
+									parse.segment.putPointExtension(
+										parse.pointIndex,
+										"offset",
+										routeTrackSegment.getPointsSize().toString()
+									)
 								}
 							}
 
@@ -1318,7 +1333,11 @@ object GpxUtilities {
 										parser
 									)
 								) {
-									readExtensionsText(parser, tag, parse)
+									if (parse is ParsedTrackPoint) {
+										readExtensionsText(parser, tag, parse.segment, parse.pointIndex)
+									} else {
+										readExtensionsText(parser, tag, parse)
+									}
 								}
 							}
 						}
@@ -1326,9 +1345,7 @@ object GpxUtilities {
 						extensionReadMode = true
 					} else if (routePointExtension) {
 						if (tag == "rpt") {
-							val wptPt = parseWptAttributes(parser)
-							routeTrackSegment.points.add(wptPt)
-							parserState.add(wptPt)
+							parserState.add(startParsedTrackPoint(parser, routeTrackSegment, parsedTrackPoint))
 						}
 					} else {
 						when (parse) {
@@ -1456,12 +1473,12 @@ object GpxUtilities {
 									}
 
 									"trkpt", "rpt" -> {
-										val wptPt = parseWptAttributes(parser)
 										if (parse.segments.isEmpty()) {
 											parse.segments.add(TrkSegment())
 										}
-										parse.segments.last().points.add(wptPt)
-										parserState.add(wptPt)
+										parserState.add(
+											startParsedTrackPoint(parser, parse.segments.last(), parsedTrackPoint)
+										)
 									}
 								}
 							}
@@ -1470,9 +1487,7 @@ object GpxUtilities {
 								when (tag) {
 									"name" -> parse.name = readText(parser, "name")
 									"trkpt", "rpt" -> {
-										val wptPt = parseWptAttributes(parser)
-										parse.points.add(wptPt)
-										parserState.add(wptPt)
+										parserState.add(startParsedTrackPoint(parser, parse, parsedTrackPoint))
 									}
 
 									"csvattributes" -> {
@@ -1482,17 +1497,68 @@ object GpxUtilities {
 											val pointAttrs = pointsArr[i].split(",").toTypedArray()
 											try {
 												if (pointAttrs.size > 1) {
-													val wptPt = WptPt()
-													wptPt.lon = pointAttrs[0].toDouble()
-													wptPt.lat = pointAttrs[1].toDouble()
-													parse.points.add(wptPt)
+													val pointIndex = parse.appendParsedPoint(
+														pointAttrs[1].toDouble(),
+														pointAttrs[0].toDouble()
+													)
 													if (pointAttrs.size > 2) {
-														wptPt.ele = pointAttrs[2].toDouble()
+														parse.setPointElevation(pointIndex, pointAttrs[2].toDouble())
 													}
 												}
 											} catch (_: NumberFormatException) {
 											}
 										}
+									}
+								}
+							}
+
+							is ParsedTrackPoint -> {
+								when (tag) {
+									"name" -> parse.segment.setPointName(parse.pointIndex, readText(parser, "name"))
+									"desc" -> parse.segment.setPointDesc(parse.pointIndex, readText(parser, "desc"))
+									"cmt" -> parse.segment.setPointComment(parse.pointIndex, readText(parser, "cmt"))
+									POINT_SPEED -> {
+										try {
+											val value = readText(parser, POINT_SPEED)
+											if (!value.isNullOrEmpty()) {
+												parse.segment.setPointSpeed(parse.pointIndex, value.toFloat())
+												parse.segment.putPointExtension(parse.pointIndex, POINT_SPEED, value)
+											}
+										} catch (_: NumberFormatException) {
+										}
+									}
+									"link" -> {
+										val link = Link(parser.getAttributeValue("", "href"))
+										parse.segment.setPointLink(parse.pointIndex, link)
+										parserState.add(link)
+									}
+									"category" -> parse.segment.setPointCategory(parse.pointIndex, readText(parser, "category"))
+									"type" -> {
+										if (parse.segment.getPointCategory(parse.pointIndex) == null) {
+											parse.segment.setPointCategory(parse.pointIndex, readText(parser, "type"))
+										}
+									}
+									POINT_ELEVATION -> {
+										val text = readText(parser, POINT_ELEVATION)
+										if (text != null) {
+											try {
+												parse.segment.setPointElevation(parse.pointIndex, text.toDouble())
+											} catch (_: NumberFormatException) {
+											}
+										}
+									}
+									"hdop" -> {
+										val text = readText(parser, "hdop")
+										if (text != null) {
+											try {
+												parse.segment.setPointHdop(parse.pointIndex, text.toFloat())
+											} catch (_: NumberFormatException) {
+											}
+										}
+									}
+									"time" -> {
+										val text = readText(parser, "time")
+										parse.segment.setPointTime(parse.pointIndex, parseTime(text!!, localTimeFormats))
 									}
 								}
 							}
@@ -1607,7 +1673,9 @@ object GpxUtilities {
 						}
 
 						"trkpt" -> {
-							val pop = parserState.removeLast()
+							if (parse is ParsedTrackPoint || parse is WptPt) {
+								parserState.removeLast()
+							}
 						}
 
 						"wpt" -> {
@@ -1640,12 +1708,14 @@ object GpxUtilities {
 						}
 
 						"rpt" -> {
-							val pop = parserState.removeLast()
+							if (parse is ParsedTrackPoint || parse is WptPt) {
+								parserState.removeLast()
+							}
 						}
 					}
 				}
 			}
-			if (routeTrackSegment.points.isNotEmpty()) {
+			if (!routeTrackSegment.isPointsEmpty()) {
 				gpxFile.tracks.add(routeTrack)
 			}
 			if (routeSegments.isNotEmpty() && routeTypes.isNotEmpty() && firstSegment != null) {
@@ -1675,6 +1745,40 @@ object GpxUtilities {
 		return supportedTag ?: tag.replace(XML_COLON, ":")
 	}
 
+	private class ParsedTrackPoint : GpxExtensions() {
+		lateinit var segment: TrkSegment
+		var pointIndex: Int = -1
+
+		fun reset(segment: TrkSegment, pointIndex: Int) {
+			this.segment = segment
+			this.pointIndex = pointIndex
+		}
+	}
+
+	private fun startParsedTrackPoint(
+		parser: XmlPullParser,
+		segment: TrkSegment,
+		state: ParsedTrackPoint
+	): ParsedTrackPoint {
+		state.reset(segment, appendParsedTrackPoint(parser, segment))
+		return state
+	}
+
+	private fun appendParsedTrackPoint(parser: XmlPullParser, segment: TrkSegment): Int {
+		var lat = 0.0
+		var lon = 0.0
+		try {
+			val latStr = parser.getAttributeValue("", "lat")
+			val lonStr = parser.getAttributeValue("", "lon")
+			if (!latStr.isNullOrEmpty() && !lonStr.isNullOrEmpty()) {
+				lat = toDouble(latStr)
+				lon = toDouble(lonStr)
+			}
+		} catch (_: NumberFormatException) {
+		}
+		return segment.appendParsedPoint(lat, lon)
+	}
+
 	@Throws(XmlParserException::class, IOException::class)
 	private fun readExtensionsText(parser: XmlPullParser, key: String, target: GpxExtensions) {
 		var tok: Int
@@ -1686,6 +1790,34 @@ object GpxUtilities {
 					val value = text.toString()
 					if (!value.isBlank()) {
 						applyExtensionValue(target, tag, value)
+					}
+				}
+				if (tag == key) {
+					break
+				}
+				text = null
+			} else if (tok == XmlPullParser.START_TAG) {
+				text = null
+			} else if (tok == XmlPullParser.TEXT) {
+				if (text == null) {
+					text = StringBuilder()
+				}
+				text.append(parser.getText())
+			}
+		}
+	}
+
+	@Throws(XmlParserException::class, IOException::class)
+	private fun readExtensionsText(parser: XmlPullParser, key: String, segment: TrkSegment, pointIndex: Int) {
+		var tok: Int
+		var text: StringBuilder? = null
+		while (parser.next().also { tok = it } != XmlPullParser.END_DOCUMENT) {
+			if (tok == XmlPullParser.END_TAG) {
+				val tag = parser.getName()
+				if (tag != null && text != null) {
+					val value = text.toString()
+					if (!value.isBlank()) {
+						applyExtensionValue(segment, pointIndex, tag, value)
 					}
 				}
 				if (tag == key) {
@@ -1720,6 +1852,26 @@ object GpxUtilities {
 						target.bearing = value.toFloat()
 					} catch (_: NumberFormatException) {
 					}
+				}
+			}
+		}
+	}
+
+	private fun applyExtensionValue(segment: TrkSegment, pointIndex: Int, tag: String, value: String) {
+		val normalizedTag = tag.lowercase()
+		segment.putPointExtension(pointIndex, getExtensionsSupportedTag(normalizedTag), value)
+		when (normalizedTag) {
+			POINT_SPEED -> {
+				try {
+					segment.setPointSpeed(pointIndex, value.toFloat())
+				} catch (_: NumberFormatException) {
+				}
+			}
+
+			POINT_BEARING -> {
+				try {
+					segment.setPointBearing(pointIndex, value.toFloat())
+				} catch (_: NumberFormatException) {
 				}
 			}
 		}

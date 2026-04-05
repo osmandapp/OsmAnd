@@ -19,7 +19,7 @@ class SplitSegment {
 	constructor(segment: TrkSegment) {
 		startPointInd = 0
 		startCoeff = 0.0
-		endPointInd = segment.points.size - 2
+		endPointInd = segment.getPointsSize() - 2
 		endCoeff = 1.0
 		this.segment = segment
 	}

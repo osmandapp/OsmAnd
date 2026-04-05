@@ -13,7 +13,14 @@ import kotlin.math.absoluteValue
 class TrkSegment : GpxExtensions() {
 	var name: String? = null
 	var generalSegment = false
-	var points = mutableListOf<WptPt>()
+	private var materializedPoints: MutableList<WptPt>? = mutableListOf()
+	private var pointSource: TrackPointSource? = null
+	var points: MutableList<WptPt>
+		get() = materializePoints()
+		set(value) {
+			materializedPoints = value
+			pointSource = null
+		}
 	var renderer: Any? = null
 	var routeSegments = mutableListOf<GpxUtilities.RouteSegment>()
 	var routeTypes = mutableListOf<GpxUtilities.RouteType>()
@@ -22,6 +29,198 @@ class TrkSegment : GpxExtensions() {
 
 	fun hasRoute(): Boolean {
 		return routeSegments.isNotEmpty() && routeTypes.isNotEmpty()
+	}
+
+	fun getPointsSize(): Int = pointSource?.size ?: materializedPoints?.size ?: 0
+
+	fun isPointsEmpty(): Boolean = getPointsSize() == 0
+
+	fun addPointsTo(destination: MutableList<WptPt>) {
+		materializedPoints?.let {
+			destination.addAll(it)
+			return
+		}
+		for (index in 0 until getPointsSize()) {
+			destination.add(getPointSnapshot(index))
+		}
+	}
+
+	fun getPointSnapshot(index: Int): WptPt {
+		val materialized = materializedPoints
+		if (materialized != null) {
+			return materialized[index]
+		}
+		return WptPt().also { copyPointTo(index, it) }
+	}
+
+	internal fun copyPointTo(index: Int, destination: WptPt) {
+		val materialized = materializedPoints
+		if (materialized != null) {
+			copyPoint(materialized[index], destination)
+		} else {
+			pointSource!!.copyPointTo(index, destination)
+		}
+	}
+
+	fun getPointLat(index: Int): Double = materializedPoints?.get(index)?.lat ?: pointSource!!.getLat(index)
+
+	fun getPointLon(index: Int): Double = materializedPoints?.get(index)?.lon ?: pointSource!!.getLon(index)
+
+	fun getPointTime(index: Int): Long = materializedPoints?.get(index)?.time ?: pointSource!!.getTime(index)
+
+	fun getPointEle(index: Int): Double = materializedPoints?.get(index)?.ele ?: pointSource!!.getEle(index)
+
+	fun getFirstPointSnapshot(): WptPt? = if (isPointsEmpty()) null else getPointSnapshot(0)
+
+	fun getLastPointSnapshot(): WptPt? =
+		if (isPointsEmpty()) null else getPointSnapshot(getPointsSize() - 1)
+
+	fun appendParsedPoint(lat: Double, lon: Double): Int {
+		return ensureMutablePointSource().addPoint(lat, lon)
+	}
+
+	fun appendParsedPoint(point: WptPt): Int {
+		return ensureMutablePointSource().addPoint(point)
+	}
+
+	fun setPointTime(index: Int, value: Long) {
+		ensureMutablePointSource().setTime(index, value)
+	}
+
+	fun setPointDistance(index: Int, value: Double) {
+		ensureMutablePointSource().setDistance(index, value)
+	}
+
+	fun setPointElevation(index: Int, value: Double) {
+		ensureMutablePointSource().setEle(index, value)
+	}
+
+	fun setPointSpeed(index: Int, value: Float) {
+		ensureMutablePointSource().setSpeed(index, value)
+	}
+
+	fun setPointHdop(index: Int, value: Float) {
+		ensureMutablePointSource().setHdop(index, value)
+	}
+
+	fun setPointBearing(index: Int, value: Float) {
+		ensureMutablePointSource().setBearing(index, value)
+	}
+
+	fun setPointHeading(index: Int, value: Float) {
+		ensureMutablePointSource().setHeading(index, value)
+	}
+
+	fun setPointName(index: Int, value: String?) {
+		ensureMutablePointSource().setName(index, value)
+	}
+
+	fun setPointDesc(index: Int, value: String?) {
+		ensureMutablePointSource().setDesc(index, value)
+	}
+
+	fun setPointCategory(index: Int, value: String?) {
+		ensureMutablePointSource().setCategory(index, value)
+	}
+
+	fun getPointCategory(index: Int): String? {
+		val materialized = materializedPoints
+		return if (materialized != null) {
+			materialized[index].category
+		} else {
+			(pointSource as? MutableTrackPointSource)?.getCategory(index)
+		}
+	}
+
+	fun setPointComment(index: Int, value: String?) {
+		ensureMutablePointSource().setComment(index, value)
+	}
+
+	fun setPointLink(index: Int, value: Link?) {
+		ensureMutablePointSource().setLink(index, value)
+	}
+
+	fun putPointExtension(index: Int, key: String, value: String) {
+		ensureMutablePointSource().putExtension(index, key, value)
+	}
+
+	fun setPointFirst(index: Int, value: Boolean) {
+		ensureMutablePointSource().setFirstPoint(index, value)
+	}
+
+	fun setPointLast(index: Int, value: Boolean) {
+		ensureMutablePointSource().setLastPoint(index, value)
+	}
+
+	fun setJoinedPointSources(segments: List<TrkSegment>, markInnerSegments: Boolean) {
+		materializedPoints = null
+		pointSource = JoinedTrackPointSource(segments.map { JoinedSegmentSource(it) }, markInnerSegments)
+	}
+
+	private fun materializePoints(): MutableList<WptPt> {
+		val currentPoints = materializedPoints
+		if (currentPoints != null) {
+			return currentPoints
+		}
+		val source = pointSource ?: return mutableListOf<WptPt>().also { materializedPoints = it }
+		val points = ArrayList<WptPt>(source.size)
+		for (index in 0 until source.size) {
+			points.add(WptPt().also { source.copyPointTo(index, it) })
+		}
+		materializedPoints = points
+		pointSource = null
+		return points
+	}
+
+	private fun ensureMutablePointSource(): MutableTrackPointSource {
+		val source = pointSource
+		if (source is MutableTrackPointSource) {
+			return source
+		}
+		val mutableSource = MutableTrackPointSource(getPointsSize())
+		materializedPoints?.let { points ->
+			for (point in points) {
+				mutableSource.addPoint(point)
+			}
+		} ?: source?.let {
+			for (index in 0 until it.size) {
+				val point = WptPt()
+				it.copyPointTo(index, point)
+				mutableSource.addPoint(point)
+			}
+		}
+		materializedPoints = null
+		pointSource = mutableSource
+		return mutableSource
+	}
+
+	private fun copyPoint(source: WptPt, destination: WptPt) {
+		destination.lat = source.lat
+		destination.lon = source.lon
+		destination.time = source.time
+		destination.distance = source.distance
+		destination.ele = source.ele
+		destination.speed = source.speed
+		destination.hdop = source.hdop
+		destination.bearing = source.bearing
+		destination.heading = source.heading
+		destination.colourARGB = source.colourARGB
+		destination.altitudeColor = source.altitudeColor
+		destination.speedColor = source.speedColor
+		destination.slopeColor = source.slopeColor
+		destination.deleted = source.deleted
+		destination.firstPoint = source.firstPoint
+		destination.lastPoint = source.lastPoint
+		destination.name = source.name
+		destination.desc = source.desc
+		destination.category = source.category
+		destination.comment = source.comment
+		destination.link = source.link?.let { Link(it) }
+		destination.attributes = source.attributes
+		val extensions = source.getExtensionsToRead()
+		if (extensions.isNotEmpty()) {
+			destination.getExtensionsToWrite().putAll(extensions)
+		}
 	}
 
 	enum class SegmentSlopeType(val symbol: String) {
