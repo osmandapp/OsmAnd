@@ -1785,15 +1785,15 @@ object GpxUtilities {
 			val latStr = parser.getAttributeValue("", "lat")
 			val lonStr = parser.getAttributeValue("", "lon")
 			if (!latStr.isNullOrEmpty() && !lonStr.isNullOrEmpty()) {
-				wpt.lat = fastToCoordinateDouble(latStr)
-				wpt.lon = fastToCoordinateDouble(lonStr)
+				wpt.lat = toDouble(latStr)
+				wpt.lon = toDouble(lonStr)
 			}
 		} catch (_: NumberFormatException) {
 		}
 		return wpt
 	}
 
-	fun fastToCoordinateDouble(value: String?): Double {
+	fun toDouble(value: String?): Double {
 		if (value.isNullOrEmpty()) return Double.NaN
 
 		var i = 0
