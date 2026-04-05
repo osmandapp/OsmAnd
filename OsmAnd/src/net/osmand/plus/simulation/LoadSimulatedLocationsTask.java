@@ -14,7 +14,9 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.router.RouteSegmentResult;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LoadSimulatedLocationsTask extends AsyncTask<Void, Integer, List<SimulatedLocation>> {
 
@@ -43,8 +45,15 @@ public class LoadSimulatedLocationsTask extends AsyncTask<Void, Integer, List<Si
 		List<SimulatedLocation> locations = new ArrayList<>();
 		prepareImmutableLocations(locations);
 
+		Map<LatLon, SimulatedLocation> locationMap = new HashMap<>(locations.size());
+		for (SimulatedLocation loc : locations) {
+			LatLon key = new LatLon(loc.getLatitude(), loc.getLongitude());
+			locationMap.put(key, loc);
+		}
+
 		List<RouteSegmentResult> segments = route.getImmutableAllSegments();
 		int segmentsSize = segments.size();
+		
 		for (int routeInd = 0; routeInd < segmentsSize; routeInd++) {
 			if (isCancelled()) {
 				break;
@@ -59,23 +68,22 @@ public class LoadSimulatedLocationsTask extends AsyncTask<Void, Integer, List<Si
 		return locations;
 	}
 
-	private void prepareRouteSegmentResult(@NonNull List<SimulatedLocation> locations, @NonNull RouteSegmentResult segmentResult, int routeInd, int segmentsSize) {
+	private void prepareRouteSegmentResult(@NonNull Map<LatLon, SimulatedLocation> locationMap, @NonNull RouteSegmentResult segmentResult, int routeInd, int segmentsSize) {
 		boolean plus = segmentResult.getStartPointIndex() < segmentResult.getEndPointIndex();
 		int startPointIndex = segmentResult.getStartPointIndex();
+		int endPointIndex = segmentResult.getEndPointIndex();
 
-		while (startPointIndex != segmentResult.getEndPointIndex() || routeInd == segmentsSize - 1) {
+		while (startPointIndex != endPointIndex || routeInd == segmentsSize - 1) {
 			LatLon point = segmentResult.getPoint(startPointIndex);
-			for (SimulatedLocation location : locations) {
-				LatLon latLon = new LatLon(location.getLatitude(), location.getLongitude());
-				if (latLon.equals(point)) {
-					location.setHighwayType(segmentResult.getObject().getHighway());
-					location.setSpeedLimit(segmentResult.getObject().getMaximumSpeed(true));
-					if (segmentResult.getObject().hasTrafficLightAt(startPointIndex)) {
-						location.setTrafficLight(true);
-					}
+			SimulatedLocation location = locationMap.get(point);
+			if (location != null) {
+				location.setHighwayType(segmentResult.getObject().getHighway());
+				location.setSpeedLimit(segmentResult.getObject().getMaximumSpeed(true));
+				if (segmentResult.getObject().hasTrafficLightAt(startPointIndex)) {
+					location.setTrafficLight(true);
 				}
 			}
-			if (startPointIndex == segmentResult.getEndPointIndex()) {
+			if (startPointIndex == endPointIndex) {
 				break;
 			}
 			startPointIndex += plus ? 1 : -1;
@@ -91,7 +99,6 @@ public class LoadSimulatedLocationsTask extends AsyncTask<Void, Integer, List<Si
 	@Override
 	protected void onProgressUpdate(Integer... values) {
 		Integer progress = values[0];
-
 		if (listener != null) {
 			listener.onLocationsLoadingProgress(progress);
 		}
