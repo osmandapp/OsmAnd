@@ -187,7 +187,7 @@
     <string name="app_name_osmand">OsmAnd</string>
     <string name="building_number">Uṭṭun n Uzadaɣ</string>
     <string name="roads">Iberdan</string>
-    <string name="buy">AƔ</string>
+    <string name="buy">Aɣ</string>
     <string name="value_downloaded_of_max">%1$.1f ɣef %2$.1f MAṬ</string>
     <string name="file_size_in_mb">%.1f MAṬ</string>
     <string name="update_all">Sedɣi iten akk (%1$s MB)</string>
@@ -274,7 +274,7 @@
     <string name="phone">Tiliɣri</string>
     <string name="map_widget_renderer">Aɣanib n tkarḍa</string>
     <string name="shared_string_description">Asnummel</string>
-    <string name="user_password">Awal-ik uffir n OSM</string>
+    <string name="user_password">Awal n uɛeddi</string>
     <string name="city_type_hamlet">Aḥriq</string>
     <string name="amenity_type_tourism">Tamerrit</string>
     <string name="amenity_type_transportation">Amesni</string>
@@ -306,7 +306,7 @@
     <string name="srtm_color_scheme">Initen n ugrudem n tedbelt</string>
     <string name="favorite_group_name">Isem n wegraw</string>
     <string name="shared_string_overview">Agzul</string>
-    <string name="shared_string_in_name">"di  %1$s"</string>
+    <string name="shared_string_in_name">di %1$s</string>
     <string name="subscribe_email_error">Tuccḍa</string>
     <string name="shared_string_visible">Uman</string>
     <string name="shared_string_automatic">Awurman</string>
@@ -430,7 +430,7 @@
     <string name="shared_string_close">Mdel</string>
     <string name="shared_string_exit">Tuffɣa</string>
     <string name="shared_string_collapse">Ḍfes</string>
-    <string name="shared_string_show_on_map">"Sken ɣef  tkarḍa"</string>
+    <string name="shared_string_show_on_map">Sken-it-id ɣef tkarḍa</string>
     <string name="shared_string_map">Takarḍa</string>
     <string name="shared_string_favorite">Menyif</string>
     <string name="shared_string_favorites">Imenyafen</string>
@@ -469,7 +469,7 @@
     <string name="local_index_gpx_info_show">"
 \n
 \nIɣewwaṛen n usiti ɣezzifen"</string>
-    <string name="gpx_selection_segment_title">Segment</string>
+    <string name="gpx_selection_segment_title"></string>
     <string name="misc_pref_title">Ayen nniḍen</string>
     <string name="localization_pref_title">Asideg</string>
     <string name="lang_pt_br">Tapurtugit (Birizil)</string>
@@ -488,7 +488,7 @@
     <string name="lang_sv">Taswidit</string>
     <string name="lang_zh_tw">Tacinwat (Tamansayt)</string>
     <string name="lang_cy">Takusit</string>
-    <string name="about_version">"Lqem: "</string>
+    <string name="about_version">Lqem:</string>
     <string name="shared_string_about">Ɣef</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="driving_region_australia">Ustṛalya</string>
@@ -524,7 +524,7 @@
     <string name="accessibility_mode">Askar n tnekcumt</string>
     <string name="altitude">Awrir</string>
     <string name="arrival_distance_factor_normally">Amagnu</string>
-    <string name="local_openstreetmap_uploading">Asali...</string>
+    <string name="local_openstreetmap_uploading">Asali…</string>
     <string name="index_name_asia">Asya</string>
     <string name="amenity_type_user_defined">Aseqdac arussin</string>
     <string name="routing_settings">Asnirem</string>
@@ -607,7 +607,7 @@
     <string name="shared_string_show_description">Sken aglam.</string>
     <string name="lang_vi">Tabyatnamit</string>
     <string name="context_menu_item_search">Nadi di liqrib</string>
-    <string name="empty_state_osm_edits">Rnu neɣ ẓreg ifarisen n OSM</string>
+    <string name="empty_state_osm_edits">Rnu neɣ ẓreg ifarisen n OpenStreetMap</string>
     <string name="shared_string_deleted">Ittwakkes</string>
     <string name="shared_string_edited">Ittwaẓreg</string>
     <string name="search_favorites">Anadi ɣef imenyafen</string>
@@ -689,7 +689,7 @@
     <string name="rendering_attr_piste_type_connection_name">Tuqqna</string>
     <string name="shared_string_other">Wayeḍ</string>
     <string name="reset_to_default">Err-d azalen s lexṣas</string>
-    <string name="analytics_pref_title">Analytics</string>
+    <string name="analytics_pref_title"></string>
     <string name="price_free">Ilelli</string>
     <string name="years_5">Iseggasen</string>
     <string name="years_2_4">Iseggasen</string>
@@ -764,7 +764,7 @@
     <string name="west_abbreviation">M</string>
     <string name="east_abbreviation">S</string>
     <string name="shared_string_current">Amiran</string>
-    <string name="day_off_label">off</string>
+    <string name="day_off_label">yemdel</string>
     <string name="lang_lo">Talawsit</string>
     <string name="tap_on_map_to_hide_interface">Askar n ugdil aččuran</string>
     <string name="coordinates_format">Amasal n tsidegt</string>
@@ -862,7 +862,7 @@
     <string name="min_mile">tasint</string>
     <string name="mile">mi</string>
     <string name="osmand_service">Agilal</string>
-    <string name="ltr_or_rtl_combine_via_comma">"%1$s, %2$s "</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="lang_zhyue">Takuntunit</string>
     <string name="lang_yo">Tayurubit</string>
     <string name="lang_uz">Tuzbikt</string>
@@ -896,7 +896,7 @@
     <string name="keep_both">Ḥrez</string>
     <string name="shared_string_profiles">Imaɣnuten</string>
     <string name="shared_string_poi_types">Tiwsiyin</string>
-    <string name="profile_type_custom_string">Amaɣnu Gaia udmawan…</string>
+    <string name="profile_type_custom_string">Amaɣnu udmawan</string>
     <string name="shared_string_app_default_w_val">Amezwer (%S)</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s %2$s Asuddim i %3$s</string>
     <string name="open_settings">Ldi iɣewwaren</string>
@@ -926,17 +926,17 @@
     <string name="app_mode_utv">Côte à côte</string>
     <string name="rendering_attr_piste_difficulty_expert_name">a muzay</string>
     <string name="rendering_attr_piste_difficulty_intermediate_name">2: Alemmas</string>
-    <string name="shared_string_select_folder">akaram</string>
+    <string name="shared_string_select_folder">Akaram…</string>
     <string name="data_storage_preference_summary">%1$s di %2$s</string>
     <string name="shared_string_by_default">[Amezwer]</string>
     <string name="list_of_installed_plugins">Isiɣzifen ittusbedden</string>
     <string name="map_look">Takarḍa</string>
     <string name="map_look_descr">Arwes</string>
     <string name="wake_time">Akud</string>
-    <string name="navigate_point_format_olc">Ldi adeg…</string>
+    <string name="navigate_point_format_olc">Angal Open Location</string>
     <string name="navigate_point_format_utm">UTM Aslugan</string>
     <string name="price_and_discount">%1$S %2$S</string>
-    <string name="get_discount_second_part">"di  %1$s"</string>
+    <string name="get_discount_second_part">Sakin %1$s</string>
     <string name="shared_string_open_track">ḍfeṛ</string>
     <string name="routeInfo_roadClass_name">Anaw</string>
     <string name="routeInfo_road_types_name">Tiwsiyin</string>
@@ -977,7 +977,7 @@
     <string name="powered_by_osmand">OsmAnd</string>
     <string name="osm_live_payment_current_subscription">Beddel ajerred amiran ar uɣawas n 2 n iseggasen</string>
     <string name="osm_live_payment_discount_descr">%1$S</string>
-    <string name="thank_you_for_feedback">Tanemmirt ɣef tickti!</string>
+    <string name="thank_you_for_feedback">Tanemmirt ɣef tickti-nwen</string>
     <string name="send_search_query">Azen tuttra-k n unadi?</string>
     <string name="shared_string_world">azul-i-medden-meṛṛa</string>
     <string name="coord_input_add_point">Taneqqiḍt</string>
@@ -1005,7 +1005,7 @@
     <string name="by_date">Azemz d</string>
     <string name="go_to_next_field">Urti</string>
     <string name="import_file">Kter</string>
-    <string name="show_map">"Sken ɣef  tkarḍa"</string>
+    <string name="show_map">Sken-d takarḍa</string>
     <string name="rendering_value_darkyellow_name">Awraɣ</string>
     <string name="osn_modify_dialog_title">Beddel</string>
     <string name="shared_string_markers">Ticṛaḍ</string>
@@ -1032,7 +1032,7 @@
     <string name="quick_action_map_source_title">Iɣbula</string>
     <string name="quick_action_map_styles">Iɣunab</string>
     <string name="quick_action_poi_list">Umuɣ</string>
-    <string name="quick_action_add_configure_map">Swel…</string>
+    <string name="quick_action_add_configure_map">Swel takarḍa</string>
     <string name="quick_action_poi_hide">Ffer %1$S</string>
     <string name="quick_action_poi_show">Sken %1$S</string>
     <string name="quick_actions_delete">Kkes tigawt</string>
@@ -1040,7 +1040,7 @@
     <string name="quick_action_navigation_voice_on">Taɣect:</string>
     <string name="upload_poi">Ali</string>
     <string name="rendering_value_fine_name">Ṣeggem akken iwat anadi-ik</string>
-    <string name="gpx_add_track">Rnu ugar...</string>
+    <string name="gpx_add_track">Rnu ugar…</string>
     <string name="shared_string_recorded">Imeslawen i yessekles {author}</string>
     <string name="rendering_value_dark_brown_name">Aqehwi</string>
     <string name="edit_filter">Taggayin</string>
@@ -1080,30 +1080,30 @@
     <string name="app_settings">Iɣewwaren n usnas</string>
     <string name="reload_tile">Smiren</string>
     <string name="update_tile">leqqem</string>
-    <string name="loading_data">Asali...</string>
+    <string name="loading_data">Aɛebbi n yisefka…</string>
     <string name="error_occurred_saving_gpx">Ur izmir ara ad isekles afaylu</string>
-    <string name="loading_poi_obj">Asali...</string>
+    <string name="loading_poi_obj">Aɛebbi n POI…</string>
     <string name="search_nothing_found">Ulac ayen yettwafen</string>
-    <string name="uploading_data">Asali...</string>
+    <string name="uploading_data">Asali n yisefka…</string>
     <string name="context_menu_item_update_poi">leqqem</string>
     <string name="search_nearby">Nadi di liqrib</string>
     <string name="first_time_continue">Ticki</string>
     <string name="show_poi_filter">Imsizdeg</string>
     <string name="hide_poi_filter">Imsizdeg</string>
     <string name="context_menu_item_search_poi">Nadi</string>
-    <string name="layer_map">aɣbalu</string>
+    <string name="layer_map">Aɣbalu n tkarḍa…</string>
     <string name="error_occurred_loading_gpx">\"ur izmir ara ad yali: \"</string>
     <string name="rotate_map_to">Taɣda n tkarḍa</string>
     <string name="rotate_map_to_descr">Areyyec</string>
     <string name="poi_context_menu_delete">Kkes</string>
     <string name="poi_context_menu_modify">Beddel</string>
-    <string name="show_point_options">Adig</string>
+    <string name="show_point_options">Seqdec adig…</string>
     <string name="shared_string_download_map">Sader-d tamkarḍa</string>
     <string name="amenity_type_emergency">Annar n trusi n utrab</string>
     <string name="send_location">Adig</string>
     <string name="send_location_way_choose_title">Bḍu adig</string>
     <string name="error_doing_search">Ur izmir ara ad iselkem anadi</string>
-    <string name="install_more">Sebded</string>
+    <string name="install_more">Rnu ugar…</string>
     <string name="tts_missing_language_data_title">Xuṣṣen isefka</string>
     <string name="ttsvoice">Taɣect:</string>
     <string name="local_indexes_cat_poi">Isefka</string>
@@ -1154,14 +1154,14 @@
     <string name="cancel_navigation">Seḥbes tunigin</string>
     <string name="install_paid">lqem</string>
     <string name="gpx_file_name">Isem n ufaylu</string>
-    <string name="plugin_distance_point_ele"></string>
+    <string name="plugin_distance_point_ele"/>
     <string name="settings_preset">Amaɣnu amezwer</string>
     <string name="app_mode_default">Snirem</string>
     <string name="map_magnifier">Tasemɣert</string>
     <string name="map_widget_map_rendering">Tiririt n tkarḍa</string>
     <string name="app_modes_choose">Imaɣnuten n usnas</string>
     <string name="route_descr_select_destination">Taniɣert</string>
-    <string name="select_gpx">Fren...</string>
+    <string name="select_gpx">Fren GPX…</string>
     <string name="gpx_selection_number_of_points">%1$s n tneqqidin</string>
     <string name="rendering_value_browse_map_name">Snirem</string>
     <string name="monitoring_settings">Asekles</string>
@@ -1171,7 +1171,7 @@
     <string name="confirm_every_run">Sutur yal tikelt</string>
     <string name="traffic_warning_stop">Seḥbes</string>
     <string name="search_radius_proximity">Deg</string>
-    <string name="configure_map">Swel…</string>
+    <string name="configure_map">Swel takarḍa</string>
     <string name="map_widget_left">Agalis azelmaḍ</string>
     <string name="download_tab_downloads">Sken akkw isidar</string>
     <string name="rendering_attr_roadStyle_description">Aɣanib:</string>
@@ -1212,7 +1212,7 @@
     <string name="map_downloaded">yettusider</string>
     <string name="shared_string_qr_code">Tangalt</string>
     <string name="lang_als">Talbanit</string>
-    <string name="osn_close_dialog_success">imdel</string>
+    <string name="osn_close_dialog_success">Tettwamdel tezmilt</string>
     <string name="osn_close_dialog_title">Mdel</string>
     <string name="osn_add_dialog_title">rnu</string>
     <string name="osn_bug_name">Ldi tamawt n OSM</string>
@@ -1258,7 +1258,7 @@
     <string name="extra_maps_menu_group">Tikarḍiwin-nniḍen</string>
     <string name="si_mi_meters">Amayel / Amitr</string>
     <string name="si_km_m">Ikilumitren/imitren</string>
-    <string name="si_mi_yard">Miles/yards</string>
+    <string name="si_mi_yard"></string>
     <string name="si_mi_feet">Amayel/aḍar</string>
     <string name="si_min_m">Tisdatin deg umayl</string>
     <string name="si_min_km">Tisdatin deg ukilumitr</string>

@@ -729,8 +729,6 @@
     <string name="wikipedia_and_travel_maps">維基百科與旅行地圖</string>
     <string name="standard_maps">標準地圖</string>
     <string name="terrain_maps">地形圖</string>
-    <string name="widget_available_ram_desc">顯示分配給 OsmAnd 的可用記憶體。</string>
-    <string name="widget_available_ram">可用 RAM</string>
     <string name="app_mode_hang_gliding">懸掛式滑翔翼</string>
     <string name="app_mode_paragliding">滑翔傘</string>
     <string name="max_altitude">最高海拔</string>

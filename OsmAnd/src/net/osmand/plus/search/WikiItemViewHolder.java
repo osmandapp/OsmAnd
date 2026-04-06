@@ -73,7 +73,7 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindItem(@NonNull QuickSearchWikiItem item, @Nullable PoiUIFilter poiUIFilter,
-	                     boolean useMapCenter) {
+	                     boolean useMapCenter, boolean useBigPhoto) {
 		String address = item.getAddress();
 		String descr = item.getDescription();
 		if (description != null) {
@@ -125,6 +125,17 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 			image.setTag(wikiImageUrl);
 			AndroidUiHelper.updateVisibility(imageViewContainer, wikiImageUrl != null);
 			if (wikiImageUrl != null) {
+				ViewGroup.LayoutParams lp = imageViewContainer.getLayoutParams();
+				int size;
+				if (useBigPhoto) {
+					size = app.getResources().getDimensionPixelSize(R.dimen.nearby_place_image_vertical_size);
+				} else {
+					size = AndroidUtils.dpToPx(app, 24f);
+				}
+				lp.width = size;
+				lp.height = size;
+				imageViewContainer.setLayoutParams(lp);
+
 				RequestCreator creator = Picasso.get().load(wikiImageUrl);
 				creator.into(image, new Callback() {
 					@Override

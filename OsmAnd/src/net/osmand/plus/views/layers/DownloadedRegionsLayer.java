@@ -301,13 +301,13 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	                                    @NonNull List<BinaryMapDataObject> mapObjects,
 	                                    @NonNull Path path,
 	                                    @NonNull Paint paint) {
-		List<List<LatLon>> polygons = new ArrayList<>();
+		List<float[]> polygons = new ArrayList<>();
 		for (BinaryMapDataObject mapObject : mapObjects) {
-			List<LatLon> polygon = new ArrayList<>();
-			for (int i = 0; i < mapObject.getPointsLength(); i++) {
-				double lat = MapUtils.get31LatitudeY(mapObject.getPoint31YTile(i));
-				double lon = MapUtils.get31LongitudeX(mapObject.getPoint31XTile(i));
-				polygon.add(new LatLon(lat, lon));
+			int pointsLength = mapObject.getPointsLength();
+			float[] polygon = new float[pointsLength * 2];
+			for (int i = 0; i < pointsLength; i++) {
+				polygon[i * 2] = (float) MapUtils.get31LatitudeY(mapObject.getPoint31YTile(i));
+				polygon[i * 2 + 1] = (float) MapUtils.get31LongitudeX(mapObject.getPoint31XTile(i));
 			}
 			polygons.add(polygon);
 		}
@@ -316,15 +316,16 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	private void drawPolygons(@NonNull Canvas canvas,
 	                          @NonNull RotatedTileBox tileBox,
-	                          @NonNull List<List<LatLon>> polygons,
+	                          @NonNull List<float[]> polygons,
 	                          @NonNull Path path,
 	                          @NonNull Paint paint) {
 		path.reset();
-		for (List<LatLon> polygon : polygons) {
-			for (int i = 0; i < polygon.size(); i++) {
-				LatLon latLon = polygon.get(i);
-				int pixX = tileBox.getPixXFromLonNoRot(latLon.getLongitude());
-				int pixY = tileBox.getPixYFromLatNoRot(latLon.getLatitude());
+		for (float[] polygon : polygons) {
+			for (int i = 0; i < polygon.length; i += 2) {
+				float lat = polygon[i];
+				float lon = polygon[i + 1];
+				int pixX = tileBox.getPixXFromLonNoRot(lon);
+				int pixY = tileBox.getPixYFromLatNoRot(lat);
 				if (i == 0) {
 					path.moveTo(pixX, pixY);
 				} else {
@@ -335,14 +336,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		canvas.drawPath(path, paint);
 	}
 
+	@Nullable
 	private List<BinaryMapDataObject> queryData(@NonNull QuadRect latLonBounds, int zoom) {
 		if (zoom >= ZOOM_AFTER_BASEMAP) {
 			if (!checkIfMapEmpty(zoom)) {
 				return Collections.emptyList();
 			}
-		}
-		if (zoom < ZOOM_TO_SHOW_SELECTION) {
-			return Collections.emptyList();
 		}
 
 		int left = MapUtils.get31TileNumberX(latLonBounds.left);
@@ -352,9 +351,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 		try {
 			List<BinaryMapDataObject> result = osmandRegions.query(left, right, top, bottom, false);
-			return osmandRegions.filterQueryResultsByPoint(result, left / 2 + right / 2, top / 2 + bottom / 2);
+			if (zoom >= ZOOM_TO_SHOW_SELECTION) {
+				return osmandRegions.filterQueryResultsByPoint(result, left / 2 + right / 2, top / 2 + bottom / 2);
+			}
+			return result;
 		} catch (IOException e) {
-			return Collections.emptyList();
+			return null;
 		}
 	}
 
@@ -657,11 +659,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			polygonsCollection = new PolygonsCollection(ZoomLevel.ZoomLevel3, ZoomLevel.ZoomLevel7);
 		}
 		for (WorldRegion region : regionList) {
-			for (List<LatLon> polygon : region.getPolygons()) {
+			for (float[] polygon : region.getPolygons()) {
 				QVectorPointI points = new QVectorPointI();
-				for (LatLon latLon : polygon) {
-					int x = MapUtils.get31TileNumberX(latLon.getLongitude());
-					int y = MapUtils.get31TileNumberY(latLon.getLatitude());
+				for (int i = 0; i < polygon.length; i += 2) {
+					int x = MapUtils.get31TileNumberX(polygon[i + 1]);
+					int y = MapUtils.get31TileNumberY(polygon[i]);
 					points.add(new PointI(x, y));
 				}
 				FColorARGB colorARGB = NativeUtilities.createFColorARGB(paint.getColor());

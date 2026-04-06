@@ -214,7 +214,6 @@
     <string name="weather_wind_miles_per_hour">Mílte san uair</string>
     <string name="recording_context_menu_show">Taispeáin</string>
     <string name="display_position_automatic_descr">Braitheann sé ar threoshuíomh na léarscáile: ar bun i gcomhair treo na gluaiseachta, sa lár do gach rud eile.</string>
-    <string name="widget_available_ram_desc">Taispeántar an chuimhne dáilte d\'OsmAnd atá ar fáil.</string>
     <string name="arrival_distance_factor_early">Go luath</string>
     <string name="shared_string_address">Seoladh</string>
     <string name="route_from">Ó:</string>
@@ -832,7 +831,6 @@
     <string name="speak_title">Fógair…</string>
     <string name="shared_string_selected">Roghnaithe</string>
     <string name="lang_pms">Píodmaintis</string>
-    <string name="widget_available_ram">RAM atá ar fáil</string>
     <string name="plugin_distance_point_hdop">cruinneas</string>
     <string name="weather_pressure_hectopascals">Heicteaphascail</string>
     <string name="shared_string_rename">Athainmnigh</string>
@@ -5963,4 +5961,15 @@
     <string name="astro_sort_newest_first">Is nuaí ar dtús</string>
     <string name="astro_sort_oldest_first">Is sine ar dtús</string>
     <string name="shared_string_world_weather_map">Léarscáil aimsire an domhain</string>
+    <string name="map_widget_memory_info">Eolas cuimhne</string>
+    <string name="map_widget_memory_info_desc">Déanann monatóireacht ar charn Java, leithdháiltí dúchasacha, agus cuimhne grafaicí.</string>
+    <string name="memory_used_settings">Carn Java Úsáidte</string>
+    <string name="memory_allocated_settings">Carn Java Leithdháilte</string>
+    <string name="memory_limit_settings">Uasteorainn Carn Java</string>
+    <string name="memory_native_settings">Carn Dúchasach Leithdháilte</string>
+    <string name="memory_graphics_settings">Cuimhne Grafaicí</string>
+    <string name="shared_string_heap">Carn</string>
+    <string name="shared_string_native">Dúchasach</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="shared_string_allocated">Leithdháilte</string>
 </resources>

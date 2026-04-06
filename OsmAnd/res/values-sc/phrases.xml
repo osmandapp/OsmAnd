@@ -99,7 +99,6 @@
     <string name="poi_traffic_calming_chicane">Chicane</string>
     <string name="poi_traffic_signals">Lughe de stop</string>
     <string name="poi_car_repair">Mecànicu</string>
-    <string name="poi_service_tyres">Gommista</string>
     <string name="poi_vehicle_inspection">Tzentru revisiones</string>
     <string name="poi_parking">Parchègiu</string>
     <string name="poi_motorcycle_parking">Parchègiu pro mototzicletas</string>
@@ -1434,7 +1433,6 @@
     <string name="poi_training_art">Annestru: arte</string>
     <string name="poi_training_cooking">Annestru: coghina</string>
     <string name="poi_training_computer">Annestru: informàtica</string>
-    <string name="poi_training_yoga">Annestru: yoga</string>
     <string name="poi_training_martial_art">Annestru: artes martziales</string>
     <string name="poi_training_aviation">Annestru: aviatzione</string>
     <string name="poi_training_hairdressing">Annestru: pilucheria</string>
@@ -3080,7 +3078,6 @@
     <string name="poi_cuisine_yogurt">Yogurt</string>
     <string name="poi_cuisine_gyros">Gyros</string>
     <string name="poi_cuisine_empanada">Empanadas</string>
-    <string name="poi_cuisine_crepes">Crepes</string>
     <string name="poi_cuisine_yakiniku">Yakiniku</string>
     <string name="poi_cuisine_suki">Suki</string>
     <string name="poi_cuisine_udon">Udon</string>

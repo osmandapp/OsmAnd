@@ -417,35 +417,7 @@ public class BinaryMapPoiReaderAdapter {
 		int version = -1;
 	}
 	
-	private BloomFilterAlgorithmDef readFilter(BloomFilterAlgorithmDef activeFilter, int bloomFilterIndex)
-			throws IOException {
-		BloomFilterAlgorithmDef algo = new BloomFilterAlgorithmDef();
-		algo.index = bloomFilterIndex;
-		while (true) {
-			int t = codedIS.readTag();
-			int tag = WireFormat.getTagFieldNumber(t);
-			switch (tag) {
-			case 0:
-				if (algo.version == BloomFilter.VERSION) {
-					return algo;
-				}
-				return activeFilter;
-			case OsmandOdb.OsmAndBloomFilterAlgorithm.VERSION_FIELD_NUMBER: {
-				algo.version =  codedIS.readUInt32();
-				break;
-			}
-			case OsmandOdb.OsmAndBloomFilterAlgorithm.DATA_FIELD_NUMBER: {
-				algo.data =  codedIS.readBytes().toByteArray();
-				break;
-			}
-			default:
-				skipUnknownField(t);
-				break;
-			}
-		}
-
-	}
-
+	
 	private TIntLongHashMap readPoiNameIndex(Collator instance, String query, SearchRequest<Amenity> req, PoiRegion region, List<Integer> nameIndexCoordinates) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		List<TIntArrayList> listOffsets = null;
@@ -461,14 +433,6 @@ public class BinaryMapPoiReaderAdapter {
 			switch (tag) {
 			case 0:
 				return offsets;
-			case OsmandOdb.OsmAndPoiNameIndex.FILTERS_FIELD_NUMBER: {
-				int len = codedIS.readRawVarint32();
-				long oldLim = codedIS.pushLimitLong((long) len);
-				activeFilter = readFilter(activeFilter, bloomFilterIndex++);
-				codedIS.popLimit(oldLim);
-				
-				break;
-			}
 			case OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER: {
 				long length = readInt();
 				long oldLimit = codedIS.pushLimitLong((long) length);
@@ -570,7 +534,6 @@ public class BinaryMapPoiReaderAdapter {
 		int zoom = 15;
 		int shift = Integer.MIN_VALUE;
 		boolean bloomMatched = true;
-		int filterIndex = 0; 
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -606,13 +569,6 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.ZOOM_FIELD_NUMBER:
 				zoom = codedIS.readUInt32();
-				break;
-			case OsmandOdb.OsmAndPoiNameIndexDataAtom.BLOOMINDEX_FIELD_NUMBER:
-				byte[] bloom = codedIS.readBytes().toByteArray();
-				if (bloomFilter != null && bloomFilter.index == filterIndex) { 
-					bloomMatched &= BloomFilter.getInstance().matches(bloom, queryTokens);
-				}
-				filterIndex++;
 				break;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SHIFTTO_FIELD_NUMBER:
 				long l = readInt();

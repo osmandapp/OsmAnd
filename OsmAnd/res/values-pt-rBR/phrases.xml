@@ -165,7 +165,6 @@
     <string name="poi_traffic_calming_choker">Estreitamento</string>
     <string name="poi_traffic_signals">Semáforo</string>
     <string name="poi_car_repair">Oficina mecânica</string>
-    <string name="poi_service_tyres">Pneus</string>
     <string name="poi_vehicle_inspection">Inspeção veicular</string>
     <string name="poi_car_wash">Lavagem de carro</string>
     <string name="poi_fuel">Posto de combustível;Posto de abastecimento;Posto de gasolina;Bomba de gasolina</string>
@@ -1798,7 +1797,6 @@
     <string name="poi_training_art">Treinamento: arte</string>
     <string name="poi_training_cooking">Treinamento: cozinhar</string>
     <string name="poi_training_computer">Treinamento: computação</string>
-    <string name="poi_training_yoga">Treinamento: ioga</string>
     <string name="poi_training_martial_art">Treinamento: arte marcial</string>
     <string name="poi_training_aviation">Treinamento: aviação</string>
     <string name="poi_training_hairdressing">Treinamento: cabeleireiro</string>
@@ -2972,7 +2970,6 @@
     <string name="poi_cuisine_yogurt">Iogurtes</string>
     <string name="poi_cuisine_gyros">Gyros</string>
     <string name="poi_cuisine_empanada">Empanadas</string>
-    <string name="poi_cuisine_crepes">Crepes</string>
     <string name="poi_cuisine_yakiniku">Yakiniku</string>
     <string name="poi_cuisine_suki">Suki</string>
     <string name="poi_cuisine_udon">Udon</string>
@@ -4971,7 +4968,6 @@
     <string name="poi_pentecostal_church">Igreja pentecostal</string>
     <string name="poi_evangelical_church">Igreja evangélica</string>
     <string name="poi_hazard_landslide">Perigo: deslizamento de terra</string>
-    <string name="poi_hazard_additional_yes">Perigo</string>
     <string name="poi_hazard_falling_rocks">Pedras caindo</string>
     <string name="poi_hazard_contamination">Contaminação</string>
     <string name="poi_hazard_yes">Perigo</string>

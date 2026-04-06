@@ -5321,7 +5321,6 @@
     <string name="help_article_widgets_nav_widgets_name">Widgeturi navigaționale</string>
     <string name="shared_string_setup">Configurează</string>
     <string name="shared_string_cache">Cache-ul</string>
-    <string name="widget_available_ram_desc">Afișează memoria disponibilă alocată pentru OsmAnd.</string>
     <string name="sort_size_descending">Mărimea mare întâi</string>
     <string name="delete_map">Ștergere hartă</string>
     <string name="standard_maps">Hărți standard</string>
@@ -5332,7 +5331,6 @@
     <string name="weather_online">Vremea online</string>
     <string name="map_is_up_to_date">Harta %1$s este la zi.</string>
     <string name="sort_size_ascending">Mărimea mică întâi</string>
-    <string name="widget_available_ram">RAM disponibil</string>
     <string name="terrain_maps">Hărți de teren</string>
     <string name="sort_country_name_descending">Nume țară: Z – A</string>
     <string name="delete_map_description">Ștergeți harta %1$s?</string>

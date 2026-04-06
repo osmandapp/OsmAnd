@@ -3,14 +3,7 @@ package net.osmand.plus.views.layers;
 import static net.osmand.data.PointDescription.POINT_TYPE_BLOCKED_ROAD;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.graphics.Rect;
+import android.graphics.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,10 +21,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
-import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.avoidroads.AvoidRoadsCallback;
+import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.base.containers.ShiftedBitmap;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -80,7 +74,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	private void createResources(){
-		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_pin_avoid_road);
+		roadWorkIcon = UiUtilities.decodeResource(view.getResources(), R.drawable.ic_pin_avoid_road);
 	}
 
 	@Override

@@ -5030,7 +5030,6 @@
     <string name="date_of_creation">Дата створення</string>
     <string name="filter_screen_title">Фільтр</string>
     <string name="shared_string_cache">Кеш</string>
-    <string name="widget_available_ram_desc">Показує доступну пам\'ять, виділену для OsmAnd.</string>
     <string name="sort_size_descending">Спочатку більшого розміру</string>
     <string name="delete_map">Видалити мапу</string>
     <string name="standard_maps">Стандартні карти</string>
@@ -5041,7 +5040,6 @@
     <string name="weather_online">Погода онлайн</string>
     <string name="map_is_up_to_date">Мапа %1$s оновлена.</string>
     <string name="sort_size_ascending">Спочатку меншого розміру</string>
-    <string name="widget_available_ram">Доступна оперативна пам\'ять</string>
     <string name="terrain_maps">Мапи рельєфу</string>
     <string name="sort_country_name_descending">Назва країни: Я – А</string>
     <string name="delete_map_description">Видалити мапу %1$s?</string>
@@ -6054,4 +6052,22 @@
     <string name="astro_filter_visible_tonight">Видно сьогодні ввечері</string>
     <string name="astro_filter_visible_now">Видно зараз</string>
     <string name="astro_filter_show_all">Показати всі</string>
+    <string name="map_widget_memory_info">Інформація про пам\'ять</string>
+    <string name="map_widget_memory_info_desc">Моніторинг купи Java, вбудованих розподілів пам\'яті та графічної пам\'яті.</string>
+    <string name="memory_used_settings">Використана купа Java</string>
+    <string name="memory_allocated_settings">Виділена купа Java</string>
+    <string name="memory_limit_settings">Максимальний ліміт купи Java</string>
+    <string name="memory_native_settings">Виділено власну купу</string>
+    <string name="memory_graphics_settings">Графічна пам\'ять</string>
+    <string name="shared_string_heap">Купа</string>
+    <string name="shared_string_native">Рідний</string>
+    <string name="shared_string_gpu">Графічний процесор</string>
+    <string name="shared_string_allocated">Виділено</string>
+    <string name="compass_calibration_needed">Потрібне калібрування компаса</string>
+    <string name="sensors_not_available_for_ar">Датчики недоступні для доповненої реальності</string>
+    <string name="ar_mode_enabled">Режим доповненої реальності ввімкнено</string>
+    <string name="ar_mode_disabled">Режим доповненої реальності вимкнено</string>
+    <string name="release_5_3">• Додано підтримку 3D-будівель\n\n• Сферичний вигляд карти\n\n• Плагін астрономії з нічною картою та базою даних зірок\n\n• Нові колірні режими для спідометра: допуск та перевищення швидкості\n\n• Окремі макети віджетів для альбомної та портретної орієнтації\n\n• Віджети запису подорожей: швидкість руху та середня швидкість\n\n• Віджет напруги адаптера для показників транспортних засобів\n\n• Дані показників транспортних засобів в аналізаторі треків\n\n• Автоматичне впорядкування треків за роком, довжиною, активністю тощо\n\n• Редактор палітри для візуалізації ландшафту та треків\n\n• Покращені алгоритми пошуку та оновлений інтерфейс користувача\n\n• Виправлені профілі висот для маршрутів\n\n• Улюблені: нові опції сортування та оновлення інтерфейсу користувача\n\n• Поділитися посиланням на будь-яку точку інтересу\n\n• Попередній перегляд точок маршруту без закриття списку\n\n• Параметр ширини велосипеда для уникнення вузьких доріг\n\n• Описи фотографій з Вікімедіа</string>
+    <string name="purchases_feature_desc_astronomy">Досліджуйте нічне небо за допомогою офлайн-карти та небесного каталогу. Плануйте спостереження, використовуючи розумні графіки видимості, щоденні розклади та інтерактивний режим доповненої реальності.</string>
+    <string name="shared_string_clear_filters">Очистити фільтри</string>
 </resources>

@@ -128,7 +128,6 @@
     <string name="poi_traffic_calming_table">Veľký spomaľovač</string>
     <string name="poi_traffic_signals">Semafor</string>
     <string name="poi_car_repair">Autoservis</string>
-    <string name="poi_service_tyres">Pneuservis;Pneumatiky</string>
     <string name="poi_vehicle_inspection">Kontrola vozidla (technická/emisná)</string>
     <string name="poi_car_wash">Autoumyváreň</string>
     <string name="poi_fuel">Benzínová pumpa;Čerpacia stanica</string>
@@ -2324,7 +2323,6 @@
     <string name="poi_training_art">Výcvik: umenie</string>
     <string name="poi_training_cooking">Výcvik: varenie</string>
     <string name="poi_training_computer">Výcvik: práca s počítačom</string>
-    <string name="poi_training_yoga">Výcvik: joga</string>
     <string name="poi_training_martial_art">Výcvik: bojové umenie</string>
     <string name="poi_training_aviation">Výcvik: letectvo</string>
     <string name="poi_training_hairdressing">Výcvik: kaderníctvo</string>
@@ -2966,7 +2964,6 @@
     <string name="poi_xmas_location">Vianoce: poloha</string>
     <string name="poi_xmas_url">Vianoce: webstránka</string>
     <string name="poi_cuisine_empanada">Empanada</string>
-    <string name="poi_cuisine_crepes">Francúzske palacinky</string>
     <string name="poi_cuisine_udon">Udon</string>
     <string name="poi_cuisine_bubble_tea">Bublinkový čaj (Bubble tea)</string>
     <string name="poi_cuisine_sub">Prekrojený sendvič (sub)</string>
@@ -4556,7 +4553,6 @@
     <string name="poi_network_lhn">Lokálne trasy pre kone (LHN)</string>
     <string name="poi_hazard_falling_rocks">Padajúce skaly</string>
     <string name="poi_hazard_yes">Nebezpečenstvo</string>
-    <string name="poi_hazard_additional_yes">Nebezpečenstvo</string>
     <string name="poi_hazard_contamination">Zamorenie</string>
     <string name="poi_travel_agency">Cestovná kancelária</string>
     <string name="poi_steps">Schody</string>
