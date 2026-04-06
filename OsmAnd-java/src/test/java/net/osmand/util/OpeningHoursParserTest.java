@@ -72,13 +72,21 @@ public class OpeningHoursParserTest {
 	 * @param sequenceIndex sequence index of rules separated by ||
 	 */
 	private void testInfo(String time, OpeningHours hours, String expected, int sequenceIndex) throws ParseException {
+		testInfo(time, hours, expected, sequenceIndex, false);
+	}
+
+	private void testShortInfo(String time, OpeningHours hours, String expected) throws ParseException {
+		testInfo(time, hours, expected, OpeningHours.ALL_SEQUENCES, true);
+	}
+
+	private void testInfo(String time, OpeningHours hours, String expected, int sequenceIndex, boolean brief) throws ParseException {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.US).parse(time));
 
 		OpeningHours.Info info = sequenceIndex == OpeningHours.ALL_SEQUENCES
 				? hours.getCombinedInfo(cal)
 				: hours.getInfo(cal).get(sequenceIndex);
-		String description = info.getInfo();
+		String description = brief ? info.getShortInfo() : info.getInfo();
 		boolean result = expected.equalsIgnoreCase(description.replace("\u202F", " "));
 
 		String fmt = String.format("  %sok: Expected %s (%s): %s (rule %s)\n",
@@ -634,6 +642,26 @@ public class OpeningHoursParserTest {
 		testAmPm();
 		testComma();
 		testYearFormats();
+		testGetShortInfo();
+	}
+
+	private void testGetShortInfo() throws ParseException {
+		OpeningHoursParser.initLocalStrings(Locale.UK);
+		OpeningHoursParser.setTwelveHourFormattingEnabled(false, Locale.UK);
+		OpeningHours hours = parseOpenedHours("24/7");
+		testShortInfo("16.02.2018 12:00", hours, "24/7");
+
+		hours = parseOpenedHours("Mo-Fr 12:00-15:00, Tu-Fr 17:00-23:00, Sa 12:00-23:00, Su 14:00-23:00");
+		testShortInfo("16.02.2018 09:45", hours, "12:00");
+		testShortInfo("16.02.2018 12:00", hours, "Till 15:00");
+		testShortInfo("16.02.2018 14:00", hours, "Until 15:00");
+		testShortInfo("16.02.2018 16:00", hours, "17:00");
+
+		hours = parseOpenedHours("Mo-Fr 09:00-18:00");
+		testShortInfo("18.02.2018 12:00", hours, "Tomorrow 09:00");
+
+		hours = parseOpenedHours("Mo-Fr 08:00-12:00, Mo,Tu,Th 15:00-17:00; PH off");
+		testShortInfo("09.08.2019 15:00", hours, "08:00 Mon");
 	}
 
 	private void testYearFormats() throws ParseException {

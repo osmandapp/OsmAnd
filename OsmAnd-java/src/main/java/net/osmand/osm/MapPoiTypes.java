@@ -340,13 +340,15 @@ public class MapPoiTypes {
 		if (name.equals("historic") && !create) {
 			name = "tourism";
 		}
-		for (PoiCategory p : categories) {
-			if (p.getKeyName().equalsIgnoreCase(name)) {
-				return p;
+		int size = categories.size();
+		for (int i = 0; i < size; i++) {
+			PoiCategory category = categories.get(i);
+			if (category.getKeyName().equalsIgnoreCase(name)) {
+				return category;
 			}
 		}
 		if (create) {
-			PoiCategory lastCategory = new PoiCategory(this, name, categories.size());
+			PoiCategory lastCategory = new PoiCategory(this, name, size);
 			if (!lastCategory.getKeyName().equals(OTHER_MAP_CATEGORY)) {
 				lastCategory.setTopVisible(true);
 			}
