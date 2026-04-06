@@ -655,6 +655,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				searchEditText.setSelection(newText.length());
 			} else {
 				hideKeyboard();
+				searchUICore.resetSearch();
 				searchEditText.setText("");
 				updateTabBarVisibility(true);
 			}

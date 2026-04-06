@@ -63,9 +63,9 @@ class GpxFile : GpxExtensions {
 	}
 
 	fun getAllPoints(): List<WptPt> {
-		val total = mutableListOf<WptPt>()
+		val total = ArrayList<WptPt>(points.size + getAllTrackPointsCount())
 		total.addAll(getPointsList())
-		total.addAll(getAllSegmentsPoints())
+		addTrackPointsTo(total)
 		return total
 	}
 
@@ -78,15 +78,31 @@ class GpxFile : GpxExtensions {
 	}
 
 	fun getAllSegmentsPoints(): List<WptPt> {
-		val points = mutableListOf<WptPt>()
+		val points = ArrayList<WptPt>(getAllTrackPointsCount())
+		addTrackPointsTo(points)
+		return points
+	}
+
+	private fun getAllTrackPointsCount(): Int {
+		var count = 0
 		for (track in tracks) {
 			if (track.generalTrack) continue
 			for (segment in track.segments) {
 				if (segment.generalSegment) continue
-				points.addAll(segment.points)
+				count += segment.points.size
 			}
 		}
-		return points
+		return count
+	}
+
+	private fun addTrackPointsTo(destination: MutableList<WptPt>) {
+		for (track in tracks) {
+			if (track.generalTrack) continue
+			for (segment in track.segments) {
+				if (segment.generalSegment) continue
+				destination.addAll(segment.points)
+			}
+		}
 	}
 
 	fun isPointsEmpty(): Boolean {
@@ -378,15 +394,29 @@ class GpxFile : GpxExtensions {
 	}
 
 	fun getPointIndexByDistance(points: List<WptPt>, distance: Double): Int {
-		return points.indexOf(points.minByOrNull { kotlin.math.abs(it.distance - distance) })
+		var closestIndex = -1
+		var closestDistance = Double.MAX_VALUE
+		for (index in points.indices) {
+			val currentDistance = kotlin.math.abs(points[index].distance - distance)
+			if (currentDistance < closestDistance) {
+				closestDistance = currentDistance
+				closestIndex = index
+			}
+		}
+		return closestIndex
 	}
 
 	fun containsRoutePoint(point: WptPt): Boolean {
-		return getRoutePoints().contains(point)
+		for (route in routes) {
+			if (route.points.contains(point)) {
+				return true
+			}
+		}
+		return false
 	}
 
 	fun getRoutePoints(): List<WptPt> {
-		val points = mutableListOf<WptPt>()
+		val points = ArrayList<WptPt>(getAllRoutePointsCount())
 		for (route in routes) {
 			points.addAll(route.points)
 		}
@@ -394,24 +424,34 @@ class GpxFile : GpxExtensions {
 	}
 
 	fun getRoutePoints(routeIndex: Int): List<WptPt> {
-		val points = mutableListOf<WptPt>()
-		if (routes.size > routeIndex) {
-			points.addAll(routes[routeIndex].points)
+		if (routeIndex >= 0 && routes.size > routeIndex) {
+			val routePoints = routes[routeIndex].points
+			val points = ArrayList<WptPt>(routePoints.size)
+			points.addAll(routePoints)
+			return points
 		}
-		return points
+		return emptyList()
+	}
+
+	private fun getAllRoutePointsCount(): Int {
+		var count = 0
+		for (route in routes) {
+			count += route.points.size
+		}
+		return count
 	}
 
 	fun isAttachedToRoads(): Boolean {
-		val points = getRoutePoints()
-		if (points.isNotEmpty()) {
-			for (wptPt in points) {
+		var hasRoutePoints = false
+		for (route in routes) {
+			for (wptPt in route.points) {
+				hasRoutePoints = true
 				if (wptPt.getProfileType().isNullOrEmpty()) {
 					return false
 				}
 			}
-			return true
 		}
-		return false
+		return hasRoutePoints
 	}
 
 	fun hasRtePt(): Boolean {
@@ -815,15 +855,51 @@ class GpxFile : GpxExtensions {
 	}
 
 	fun getLastPointTime(): Long {
-		return listOf(
-			getLastPointTime(getAllSegmentsPoints()),
-			getLastPointTime(getRoutePoints()),
-			getLastPointTime(getPointsList())
-		).firstOrNull { it > 0 } ?: 0
+		return getLastTrackPointTime()
+			.takeIf { it > 0 }
+			?: getLastRoutePointTime().takeIf { it > 0 }
+			?: getLastWaypointTime()
 	}
 
-	private fun getLastPointTime(points: List<WptPt>): Long {
-		return points.asReversed().firstOrNull { it.time > 0 }?.time ?: 0
+	private fun getLastTrackPointTime(): Long {
+		for (trackIndex in tracks.lastIndex downTo 0) {
+			val track = tracks[trackIndex]
+			if (track.generalTrack) continue
+			for (segmentIndex in track.segments.lastIndex downTo 0) {
+				val segment = track.segments[segmentIndex]
+				if (segment.generalSegment) continue
+				for (pointIndex in segment.points.lastIndex downTo 0) {
+					val time = segment.points[pointIndex].time
+					if (time > 0) {
+						return time
+					}
+				}
+			}
+		}
+		return 0
+	}
+
+	private fun getLastRoutePointTime(): Long {
+		for (routeIndex in routes.lastIndex downTo 0) {
+			val route = routes[routeIndex]
+			for (pointIndex in route.points.lastIndex downTo 0) {
+				val time = route.points[pointIndex].time
+				if (time > 0) {
+					return time
+				}
+			}
+		}
+		return 0
+	}
+
+	private fun getLastWaypointTime(): Long {
+		for (pointIndex in points.lastIndex downTo 0) {
+			val time = points[pointIndex].time
+			if (time > 0) {
+				return time
+			}
+		}
+		return 0
 	}
 
 	fun clone(): GpxFile {
