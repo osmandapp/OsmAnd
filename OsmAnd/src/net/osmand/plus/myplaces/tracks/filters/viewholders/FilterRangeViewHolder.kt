@@ -67,7 +67,7 @@ open class FilterRangeViewHolder(
 
 				if (valueFrom >= slider.valueFrom && valueTo <= slider.valueTo) {
 
-					// Update left input ONLY if the active thumb is the left one
+					// Update 'From' (min) input ONLY if the active thumb is the minimum boundary
 					if (value == values[0]) {
 						val fromStr = valueFrom.toInt().toString()
 						if (valueFromInput.text.toString() != fromStr) {
@@ -75,7 +75,7 @@ open class FilterRangeViewHolder(
 						}
 					}
 
-					// Update right input ONLY if the active thumb is the right one
+					// Update 'To' (max) input ONLY if the active thumb is the maximum boundary
 					if (value == values[1]) {
 						val toStr = valueTo.toInt().toString()
 						if (valueToInput.text.toString() != toStr) {
