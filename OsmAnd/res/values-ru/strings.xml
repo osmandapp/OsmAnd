@@ -778,7 +778,7 @@
     <string name="hint_search_online">Онлайн-поиск: номер дома, улица, город</string>
     <string name="search_offline_address">Локальный поиск</string>
     <string name="search_online_address">Онлайн-поиск</string>
-    <string name="max_level_download_tile">Уровень детализации</string>
+    <string name="max_level_download_tile">Максимальное увеличение в режиме онлайн</string>
     <string name="max_level_download_tile_descr">Выберите максимальный масштаб для загрузки тайлов карт из интернета.</string>
     <string name="route_general_information">Общая протяжённость = %1$s, время в пути = %2$d ч %3$d мин.</string>
     <string name="router_service_descr">Онлайн или локальный сервис для прокладки маршрута.</string>
@@ -5712,7 +5712,7 @@
     <string name="rendering_attr_watercolor_name">Цвет воды</string>
     <string name="rendering_attr_watercolor_description">Цвет воды</string>
     <string name="show_spherical_map_description">Отображение сфероидальной модели Земли</string>
-    <string name="enable_3d_objects">3D-здания</string>
+    <string name="enable_3d_objects">Трехмерные здания</string>
     <string name="enable_3d_objects_description">Отображение 3D-объектов зданий на карте</string>
     <string name="show_rasterization_debug_tile">Показать информацию о растеризации тайла</string>
     <string name="enable_msaa">Включить MSAA</string>
@@ -5910,12 +5910,12 @@
     <string name="pin_folder">Закрепить папку</string>
     <string name="favorite_search_empty_state_description">Попробуйте изменить параметры поиска или фильтры, возможно это поможет</string>
     <string name="favorites_empty_folder_description">В этой папке пока нет избранных точек.</string>
-    <string name="free_custom_color_description">Придайте 3D-зданиям любой цвет. Идеально подходит для соответствия теме карты или улучшения контраста.</string>
+    <string name="free_custom_color_description">Настройте 3D-модели зданий в любом цвете. Идеально подходит для создания карты в едином стиле или для усиления контраста.</string>
     <string name="buildings_3d_use_map_style_color_description">Использовать цвета стиля карты (%s).</string>
-    <string name="buildings_3d_visibility_description">Отрегулируйте непрозрачность 3D-структур на карте.</string>
-    <string name="level_of_details">Детализация</string>
+    <string name="buildings_3d_visibility_description">Отрегулируйте прозрачность 3D-структур на карте.</string>
+    <string name="level_of_details">Уровень детализации</string>
     <string name="performance">Производительность</string>
-    <string name="view_distance">Дальность видимости</string>
+    <string name="view_distance">Видимость</string>
     <string name="astro_min_magnitude">Мин. величина</string>
     <string name="building_3d_day_color_content_desc">Тема цвета 3d-зданий днём</string>
     <string name="building_3d_night_color_content_desc">Тема цвета 3d-зданий ночью</string>
@@ -6053,4 +6053,15 @@
     <string name="astro_schedule_show_current_week">Показать текущую неделю</string>
     <string name="astro_next_day_suffix">⁺¹</string>
     <string name="shared_string_world_weather_map">Карта погоды в мире</string>
+    <string name="map_widget_memory_info">Информация о памяти</string>
+    <string name="map_widget_memory_info_desc">Отслеживает кучу Java, собственные выделения памяти и графическую память.</string>
+    <string name="memory_used_settings">Используемая куча Java</string>
+    <string name="memory_allocated_settings">Выделенная память кучи Java</string>
+    <string name="memory_limit_settings">Максимальный предел кучи Java</string>
+    <string name="memory_native_settings">Выделение памяти в Собственной куче</string>
+    <string name="memory_graphics_settings">Графическая память</string>
+    <string name="shared_string_heap">Куча</string>
+    <string name="shared_string_native">Собственная</string>
+    <string name="shared_string_gpu">Графический процессор</string>
+    <string name="shared_string_allocated">Зарезервированная</string>
 </resources>

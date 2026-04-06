@@ -2684,9 +2684,9 @@
     <string name="touring_view_render_descr">Turstil med høy kontrast og maksimalt med detaljer. Inkluderer alle alternativene til standardstilen til OsmAnd, med visning av så mange detaljer som mulig, i særdeleshet veier, stier og andre måter å reise på. Tydelig \"reiseatlas\"-skille mellom veityper. Egnet for dag, natt og utendørs bruk.</string>
     <string name="default_render_descr">Stil for generell bruk. Tettbebygde byer vises klart. Har ruter, overflatekvalitet, adgangsbegrensninger, veinummer, stiopptegning i henhold til SAC/CAI-skala, rafting/elvepadling-elementer, topografiske funksjoner som koter.</string>
     <string name="read_wikipedia_offline_description">Skaff OsmAnd Live-abonnement for å lese Wikipedia og Wikivoyage-artikler på nett.</string>
-    <string name="how_to_open_link">Hvordan åpne lenken\?</string>
+    <string name="how_to_open_link">Hvordan åpne lenken?</string>
     <string name="read_wikipedia_offline">Les Wikipedia frakoblet</string>
-    <string name="download_all">Last ned alt</string>
+    <string name="download_all">Last ned alle</string>
     <string name="shared_string_restart">Programomstart</string>
     <string name="purchase_cancelled_dialog_title">Du har kansellert ditt OsmAnd Live-abonnement</string>
     <string name="purchase_cancelled_dialog_descr">Forny abonnement for å fortsette å bruke alle funksjonene:</string>
@@ -6041,4 +6041,8 @@
     <string name="shared_string_clear_filters">Tøm filtre</string>
     <string name="astro_sort_newest_first">Nyeste først</string>
     <string name="astro_sort_oldest_first">Eldste først</string>
+    <string name="map_widget_memory_info">Minneinfo</string>
+    <string name="memory_graphics_settings">Grafikkminne</string>
+    <string name="astro_expand_your_universe_title">Utvid ditt univers</string>
+    <string name="gradient_no_data_point_summary">Farge som brukes når data mangler eller ikke definert.</string>
 </resources>

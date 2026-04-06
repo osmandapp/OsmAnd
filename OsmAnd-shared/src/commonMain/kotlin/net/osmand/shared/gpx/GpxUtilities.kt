@@ -1483,11 +1483,11 @@ object GpxUtilities {
 											try {
 												if (pointAttrs.size > 1) {
 													val wptPt = WptPt()
-													wptPt.lon = pointAttrs[0].toDouble()
-													wptPt.lat = pointAttrs[1].toDouble()
+													wptPt.lon = toDouble(pointAttrs[0])
+													wptPt.lat = toDouble(pointAttrs[1])
 													parse.points.add(wptPt)
 													if (pointAttrs.size > 2) {
-														wptPt.ele = pointAttrs[2].toDouble()
+														wptPt.ele = toDouble(pointAttrs[2])
 													}
 												}
 											} catch (_: NumberFormatException) {
@@ -1506,7 +1506,7 @@ object GpxUtilities {
 										try {
 											val value = readText(parser, POINT_SPEED)
 											if (!value.isNullOrEmpty()) {
-												parse.speed = value.toFloat()
+												parse.speed = toDouble(value).toFloat()
 												parse.getExtensionsToWrite()[POINT_SPEED] = value
 											}
 										} catch (_: NumberFormatException) {
@@ -1528,7 +1528,7 @@ object GpxUtilities {
 										val text = readText(parser, POINT_ELEVATION)
 										if (text != null) {
 											try {
-												parse.ele = text.toDouble()
+												parse.ele = toDouble(text)
 											} catch (_: NumberFormatException) {
 											}
 										}
@@ -1538,7 +1538,7 @@ object GpxUtilities {
 										val text = readText(parser, "hdop")
 										if (text != null) {
 											try {
-												parse.hdop = text.toFloat()
+												parse.hdop = toDouble(text).toFloat()
 											} catch (_: NumberFormatException) {
 											}
 										}
@@ -1710,14 +1710,14 @@ object GpxUtilities {
 			when (normalizedTag) {
 				POINT_SPEED -> {
 					try {
-						target.speed = value.toFloat()
+						target.speed = toDouble(value).toFloat()
 					} catch (_: NumberFormatException) {
 					}
 				}
 
 				POINT_BEARING -> {
 					try {
-						target.bearing = value.toFloat()
+						target.bearing = toDouble(value).toFloat()
 					} catch (_: NumberFormatException) {
 					}
 				}
@@ -1889,16 +1889,16 @@ object GpxUtilities {
 				maxlon = parser.getAttributeValue("", "maxLon")
 			}
 			if (minlat != null) {
-				bounds.minlat = minlat.toDouble()
+				bounds.minlat = toDouble(minlat)
 			}
 			if (minlon != null) {
-				bounds.minlon = minlon.toDouble()
+				bounds.minlon = toDouble(minlon)
 			}
 			if (maxlat != null) {
-				bounds.maxlat = maxlat.toDouble()
+				bounds.maxlat = toDouble(maxlat)
 			}
 			if (maxlon != null) {
-				bounds.maxlon = maxlon.toDouble()
+				bounds.maxlon = toDouble(maxlon)
 			}
 		} catch (_: NumberFormatException) {
 		}
