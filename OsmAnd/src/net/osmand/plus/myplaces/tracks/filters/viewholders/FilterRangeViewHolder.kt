@@ -135,12 +135,8 @@ open class FilterRangeViewHolder(
 					if (getDisplayValueFrom(filter) != newValue
 						&& newValue < getDisplayValueTo(filter)) {
 
-						if (newValue <= getDisplayMinValue(filter)) {
-							filter.clearValueFrom()
-						} else {
-							filter.setValueFrom(newValue.toString())
-						}
-						updateValues()
+						filter.setValueFrom(newValue.toString())
+						updateValues(isTextInput = true)
 					}
 				}
 			}
@@ -159,12 +155,8 @@ open class FilterRangeViewHolder(
 					if (getDisplayValueTo(filter) != newValue
 						&& newValue > getDisplayValueFrom(filter)) {
 
-						if (newValue >= getDisplayMaxValue(filter)) {
-							filter.clearValueTo()
-						} else {
-							filter.setValueTo(newValue.toString())
-						}
-						updateValues()
+						filter.setValueTo(newValue.toString())
+						updateValues(isTextInput = true)
 					}
 				}
 			}
@@ -198,7 +190,7 @@ open class FilterRangeViewHolder(
 		AndroidUiHelper.updateVisibility(minMaxContainer, expanded)
 	}
 
-	private fun updateValues() {
+	private fun updateValues(isTextInput: Boolean = false) {
 		isBinding = true
 		val valueFrom = getDisplayValueFrom(filter)
 		var valueTo = getDisplayValueTo(filter)
@@ -219,13 +211,30 @@ open class FilterRangeViewHolder(
 		}
 
 		// Leave text fields empty if they represent the absolute min/max limit
-		val fromText = if (valueFrom <= minValue) "" else valueFrom.toString()
-		if (valueFromInput.text.toString() != fromText) {
+		// but preserve the text if the user typed new limits
+		val currentFromText = valueFromInput.text.toString()
+		val fromText = if (valueFrom <= minValue) {
+			val parsed = currentFromText.toIntOrNull()
+			if (isTextInput || parsed == getDisplayValueFrom(filter) || parsed == minValue) {
+				currentFromText
+			} else ""
+		} else {
+			valueFrom.toString()
+		}
+		if (currentFromText != fromText) {
 			valueFromInput.setText(fromText)
 			valueFromInput.setSelection(valueFromInput.length())
 		}
-		val toText = if (valueTo >= maxValue) "" else valueTo.toString()
-		if (valueToInput.text.toString() != toText) {
+		val currentToText = valueToInput.text.toString()
+		val toText = if (valueTo >= maxValue) {
+			val parsed = currentToText.toIntOrNull()
+			if (isTextInput || parsed == getDisplayValueTo(filter) || parsed == maxValue) {
+				currentToText
+			} else ""
+		} else {
+			valueTo.toString()
+		}
+		if (currentToText != toText) {
 			valueToInput.setText(toText)
 			valueToInput.setSelection(valueToInput.length())
 		}
@@ -248,13 +257,13 @@ open class FilterRangeViewHolder(
 	open fun getDisplayMaxValue(filter: RangeTrackFilter<*>): Int {
 		val formattedValue =
 			getFormattedValue(filter.trackFilterType.measureUnitType, filter.ceilMaxValue())
-		return ceil(formattedValue.valueSrc).toInt()
+		return ceil(formattedValue.valueSrc.toDouble() - 0.0001).toInt()
 	}
 
 	open fun getDisplayMinValue(filter: RangeTrackFilter<*>): Int {
 		val formattedValue =
 			getFormattedValue(filter.trackFilterType.measureUnitType, filter.ceilMinValue())
-		return floor(formattedValue.valueSrc).toInt()
+		return floor(formattedValue.valueSrc.toDouble() + 0.0001).toInt()
 	}
 
 	open fun getDisplayValueFrom(filter: RangeTrackFilter<*>): Int {
