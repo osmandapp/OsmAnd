@@ -149,10 +149,15 @@ public class MapDisplayPositionManager implements ViewportListener {
 		if (hasCustomMapRatio()) {
 			clearVisibleMapRectData();
 		} else {
-			MapPosition positionFromProviders = getPositionFromProviders();
-			if (positionFromProviders != null) {
-				mapPosition = positionFromProviders;
-				clearVisibleMapRectData();
+			DisplayPositionData positionData = getPositionFromProviders();
+			if (positionData != null) {
+				mapPosition = positionData.position;
+				if (positionData.projectToVisibleMapRect) {
+					visibleMapRect = calculateVisibleMapRect();
+					projectedMapRatio = projectRatioToVisibleMapRect(mapPosition.getRatio(shiftedX, isRtl()));
+				} else {
+					clearVisibleMapRectData();
+				}
 			} else {
 				mapPosition = getPositionFromPreferences();
 				visibleMapRect = calculateVisibleMapRect();
@@ -233,11 +238,11 @@ public class MapDisplayPositionManager implements ViewportListener {
 	}
 
 	@Nullable
-	private MapPosition getPositionFromProviders() {
+	private DisplayPositionData getPositionFromProviders() {
 		for (IMapDisplayPositionProvider provider : displayPositionProviders) {
 			MapPosition position = provider.getMapDisplayPosition();
 			if (position != null) {
-				return position;
+				return new DisplayPositionData(position, provider.shouldProjectMapDisplayPositionToVisibleRect(position));
 			}
 		}
 		return null;
@@ -294,6 +299,10 @@ public class MapDisplayPositionManager implements ViewportListener {
 	public interface IMapDisplayPositionProvider {
 		@Nullable
 		MapPosition getMapDisplayPosition();
+
+		default boolean shouldProjectMapDisplayPositionToVisibleRect(@NonNull MapPosition position) {
+			return false;
+		}
 	}
 
 	public interface ICoveredScreenRectProvider {
@@ -323,5 +332,10 @@ public class MapDisplayPositionManager implements ViewportListener {
 				displayPositionManager.updateMapDisplayPosition(refreshMap);
 			}
 		}
+	}
+
+	private record DisplayPositionData(@NonNull MapPosition position,
+	                                   boolean projectToVisibleMapRect) {
+
 	}
 }
