@@ -393,7 +393,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				.setTitleId(R.string.analyze_on_map)
 				.setIcon(getContentIcon(R.drawable.ic_action_info_dark))
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, result -> {
-					OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(activity, result, null);
+					OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(activity, result, null, null);
 					OsmAndTaskManager.executeTask(detailsTask);
 					dismiss();
 					return true;

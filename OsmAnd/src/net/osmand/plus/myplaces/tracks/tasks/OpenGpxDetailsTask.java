@@ -8,6 +8,7 @@ import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
 import static net.osmand.plus.charts.GPXDataSetType.SPEED;
 
 import android.content.Context;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,11 +38,14 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 
 	private final GpxFile gpxFile;
 	private final WptPt selectedPoint;
+	private final Bundle previousIntentBundle;
 
-	public OpenGpxDetailsTask(@NonNull FragmentActivity activity, @NonNull GpxFile gpxFile, @Nullable WptPt selectedPoint) {
+	public OpenGpxDetailsTask(@NonNull FragmentActivity activity, @NonNull GpxFile gpxFile,
+	                          @Nullable WptPt selectedPoint, @Nullable Bundle previousIntentBundle) {
 		super(activity);
 		this.gpxFile = gpxFile;
 		this.selectedPoint = selectedPoint;
+		this.previousIntentBundle = previousIntentBundle;
 	}
 
 	@Nullable
@@ -96,13 +100,12 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 					gpxItem);
 
 			FragmentActivity activity = activityRef.get();
-			if (activity instanceof MapActivity) {
-				MapActivity mapActivity = (MapActivity) activity;
+			if (activity instanceof MapActivity mapActivity) {
 				mapActivity.getContextMenu().hide();
 				mapActivity.getDashboard().hideDashboard();
 			}
 			Context context = activity != null ? activity : app;
-			MapActivity.launchMapActivityMoveToTop(context);
+			MapActivity.launchMapActivityMoveToTop(context, previousIntentBundle, null, null);
 		}
 	}
 
