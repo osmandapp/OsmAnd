@@ -51,12 +51,19 @@ public class OpeningHoursParser {
 		additionalStrings.put("off", "off");
 		additionalStrings.put("is_open", "Open");
 		additionalStrings.put("is_open_24_7", "Open 24/7");
+		additionalStrings.put("is_open_24_7_short", "24/7");
 		additionalStrings.put("will_open_at", "Will open at");
+		additionalStrings.put("will_open_at_short", "");
 		additionalStrings.put("open_from", "Open from");
+		additionalStrings.put("open_from_short", "");
 		additionalStrings.put("will_close_at", "Will close at");
+		additionalStrings.put("will_close_at_short", "Until");
 		additionalStrings.put("open_till", "Open till");
+		additionalStrings.put("open_till_short", "Till");
 		additionalStrings.put("will_open_tomorrow_at", "Will open tomorrow at");
+		additionalStrings.put("will_open_tomorrow_at_short", "Tomorrow");
 		additionalStrings.put("will_open_on", "Will open on");
+		additionalStrings.put("will_open_on_short", "");
 	}
 
 	private static void initLocalStrings() {
@@ -176,31 +183,48 @@ public class OpeningHoursParser {
 			}
 
 			public String getInfo() {
+				return getInfo(false);
+			}
+
+			public String getShortInfo() {
+				return getInfo(true);
+			}
+
+			private String getInfo(boolean brief) {
 				if (isOpened24_7()) {
 					if (!isFallback()) {
 						if (!Algorithms.isEmpty(ruleString)) {
+							if (brief) {
+								return ruleString;
+							}
 							return additionalStrings.get("is_open") + " " + ruleString;
 						} else {
-							return additionalStrings.get("is_open_24_7");
+							return additionalStrings.get(brief ? "is_open_24_7_short" : "is_open_24_7");
 						}
 					} else {
 						return !Algorithms.isEmpty(ruleString) ? ruleString : "";
 					}
 				} else if (!Algorithms.isEmpty(nearToOpeningTime)) {
-					return additionalStrings.get("will_open_at") + " " + nearToOpeningTime;
+					return formatInfo(brief ? "will_open_at_short" : "will_open_at", nearToOpeningTime);
 				} else if (!Algorithms.isEmpty(openingTime)) {
-					return additionalStrings.get("open_from") + " " + openingTime;
+					return formatInfo(brief ? "open_from_short" : "open_from", openingTime);
 				} else if (!Algorithms.isEmpty(nearToClosingTime)) {
-					return additionalStrings.get("will_close_at") + " " + nearToClosingTime;
+					return formatInfo(brief ? "will_close_at_short" : "will_close_at", nearToClosingTime);
 				} else if (!Algorithms.isEmpty(closingTime)) {
-					return additionalStrings.get("open_till") + " " + closingTime;
+					return formatInfo(brief ? "open_till_short" : "open_till", closingTime);
 				} else if (!Algorithms.isEmpty(openingTomorrow)) {
-					return additionalStrings.get("will_open_tomorrow_at") + " " + openingTomorrow;
+					return formatInfo(brief ? "will_open_tomorrow_at_short" : "will_open_tomorrow_at", openingTomorrow);
 				} else if (!Algorithms.isEmpty(openingDay)) {
-					return additionalStrings.get("will_open_on") + " " + openingDay + ".";
+					String value = brief ? openingDay : openingDay + ".";
+					return formatInfo(brief ? "will_open_on_short" : "will_open_on", value);
 				} else {
 					return !Algorithms.isEmpty(ruleString) ? ruleString : "";
 				}
+			}
+
+			private String formatInfo(String key, String value) {
+				String prefix = additionalStrings.get(key);
+				return Algorithms.isEmpty(prefix) ? value : prefix + " " + value;
 			}
 		}
 
