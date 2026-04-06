@@ -47,7 +47,7 @@ public class BinaryMapIndexReaderStats {
 		public final BinaryMapIndexReaderSubApiName subApi;
 		public final String mapName;
 		private long time = 0, count = 0, calls = 0, bytes = 0;
-		private long payloadBytesParsed = 0, decodeTimeNs = 0, matcherTimeNs = 0;
+		private long payloadBytesParsed = 0, decodeTime = 0, matcherTime = 0;
 		private long blocksLoaded = 0, objectsLoaded = 0, matchedObjects = 0, maxObjectsPerBlock = 0;
 
 		SubStatByAPI(BinaryMapIndexReaderApiName api, BinaryMapIndexReaderSubApiName subApi, String mapName) {
@@ -68,8 +68,8 @@ public class BinaryMapIndexReaderStats {
 			this.count += count;
 			this.bytes += bytes;
 			this.payloadBytesParsed +=  metrics.payloadBytesParsed;
-			this.decodeTimeNs +=  metrics.decodeTimeNs;
-			this.matcherTimeNs +=  metrics.matcherTimeNs;
+			this.decodeTime +=  metrics.decodeTimeNs;
+			this.matcherTime +=  metrics.matcherTimeNs;
 			this.blocksLoaded += metrics.blocksLoaded;
 			this.objectsLoaded += metrics.objectsLoaded;
 			this.matchedObjects += metrics.matchedObjectsLoaded;
@@ -98,11 +98,11 @@ public class BinaryMapIndexReaderStats {
 		}
 
 		public long getDecodeTime() {
-			return decodeTimeNs;
+			return decodeTime;
 		}
 
 		public long getMatcherTime() {
-			return matcherTimeNs;
+			return matcherTime;
 		}
 
 		public long getBlocksLoaded() {
@@ -195,8 +195,8 @@ public class BinaryMapIndexReaderStats {
 					agg.count += st.count;
 					agg.bytes += st.bytes;
 					agg.payloadBytesParsed += st.payloadBytesParsed;
-					agg.decodeTimeNs += st.decodeTimeNs;
-					agg.matcherTimeNs += st.matcherTimeNs;
+					agg.decodeTime += st.decodeTime;
+					agg.matcherTime += st.matcherTime;
 					agg.blocksLoaded += st.blocksLoaded;
 					agg.objectsLoaded += st.objectsLoaded;
 					agg.matchedObjects += st.matchedObjects;
@@ -385,8 +385,8 @@ public class BinaryMapIndexReaderStats {
 							.append(padLeft(String.format(Locale.US, "% d", apiTotal.bytes / 1024), w5)).append(", ")
 							.append(padLeft(String.format(Locale.US, "% d", apiTotal.calls), w6)).append(", ")
 							.append(padLeft(String.format(Locale.US, "% d", apiTotal.payloadBytesParsed / 1024), w9)).append(", ")
-							.append(padLeft(String.format(Locale.US, "%.2f", apiTotal.decodeTimeNs / 1e6), w10)).append(", ")
-							.append(padLeft(String.format(Locale.US, "%.2f", apiTotal.matcherTimeNs / 1e6), w11)).append(", ")
+							.append(padLeft(String.format(Locale.US, "%.2f", apiTotal.decodeTime / 1e6), w10)).append(", ")
+							.append(padLeft(String.format(Locale.US, "%.2f", apiTotal.matcherTime / 1e6), w11)).append(", ")
 							.append(padLeft(String.format(Locale.US, "% d", apiTotal.blocksLoaded), w12)).append(", ")
 							.append(padLeft(String.format(Locale.US, "% d", apiTotal.objectsLoaded), w13)).append(", ")
 							.append(padLeft(String.format(Locale.US, "% d", apiTotal.matchedObjects), w14)).append(", ")
@@ -414,8 +414,8 @@ public class BinaryMapIndexReaderStats {
 								.append(padLeft(String.format(Locale.US, "% d", subTotal.bytes / 1024), w5)).append(", ")
 								.append(padLeft(String.format(Locale.US, "% d", subTotal.calls), w6)).append(", ")
 								.append(padLeft(String.format(Locale.US, "% d", subTotal.payloadBytesParsed / 1024), w9)).append(", ")
-								.append(padLeft(String.format(Locale.US, "%.2f", subTotal.decodeTimeNs / 1e6), w10)).append(", ")
-								.append(padLeft(String.format(Locale.US, "%.2f", subTotal.matcherTimeNs / 1e6), w11)).append(", ")
+								.append(padLeft(String.format(Locale.US, "%.2f", subTotal.decodeTime / 1e6), w10)).append(", ")
+								.append(padLeft(String.format(Locale.US, "%.2f", subTotal.matcherTime / 1e6), w11)).append(", ")
 								.append(padLeft(String.format(Locale.US, "% d", subTotal.blocksLoaded), w12)).append(", ")
 								.append(padLeft(String.format(Locale.US, "% d", subTotal.objectsLoaded), w13)).append(", ")
 								.append(padLeft(String.format(Locale.US, "% d", subTotal.matchedObjects), w14)).append(", ")
@@ -436,8 +436,8 @@ public class BinaryMapIndexReaderStats {
 									.append(padLeft(String.format(Locale.US, "% d", st.bytes / 1024), w5)).append(", ")
 									.append(padLeft(String.format(Locale.US, "% d", st.calls), w6)).append(", ")
 									.append(padLeft(String.format(Locale.US, "% d", st.payloadBytesParsed / 1024), w9)).append(", ")
-									.append(padLeft(String.format(Locale.US, "%.2f", st.decodeTimeNs / 1e6), w10)).append(", ")
-									.append(padLeft(String.format(Locale.US, "%.2f", st.matcherTimeNs / 1e6), w11)).append(", ")
+									.append(padLeft(String.format(Locale.US, "%.2f", st.decodeTime / 1e6), w10)).append(", ")
+									.append(padLeft(String.format(Locale.US, "%.2f", st.matcherTime / 1e6), w11)).append(", ")
 									.append(padLeft(String.format(Locale.US, "% d", st.blocksLoaded), w12)).append(", ")
 									.append(padLeft(String.format(Locale.US, "% d", st.objectsLoaded), w13)).append(", ")
 									.append(padLeft(String.format(Locale.US, "% d", st.matchedObjects), w14)).append(", ")
@@ -507,8 +507,8 @@ public class BinaryMapIndexReaderStats {
 							obfTotal.count += st.count;
 							obfTotal.bytes += st.bytes;
 							obfTotal.payloadBytesParsed += st.payloadBytesParsed;
-							obfTotal.decodeTimeNs += st.decodeTimeNs;
-							obfTotal.matcherTimeNs += st.matcherTimeNs;
+							obfTotal.decodeTime += st.decodeTime;
+							obfTotal.matcherTime += st.matcherTime;
 							obfTotal.blocksLoaded += st.blocksLoaded;
 							obfTotal.objectsLoaded += st.objectsLoaded;
 							obfTotal.matchedObjects += st.matchedObjects;
@@ -526,8 +526,8 @@ public class BinaryMapIndexReaderStats {
 						subTotal.count += st.count;
 						subTotal.bytes += st.bytes;
 						subTotal.payloadBytesParsed += st.payloadBytesParsed;
-						subTotal.decodeTimeNs += st.decodeTimeNs;
-						subTotal.matcherTimeNs += st.matcherTimeNs;
+						subTotal.decodeTime += st.decodeTime;
+						subTotal.matcherTime += st.matcherTime;
 						subTotal.blocksLoaded += st.blocksLoaded;
 						subTotal.objectsLoaded += st.objectsLoaded;
 						subTotal.matchedObjects += st.matchedObjects;
@@ -540,8 +540,8 @@ public class BinaryMapIndexReaderStats {
 						apiTotal.count += st.count;
 						apiTotal.bytes += st.bytes;
 						apiTotal.payloadBytesParsed += st.payloadBytesParsed;
-						apiTotal.decodeTimeNs += st.decodeTimeNs;
-						apiTotal.matcherTimeNs += st.matcherTimeNs;
+						apiTotal.decodeTime += st.decodeTime;
+						apiTotal.matcherTime += st.matcherTime;
 						apiTotal.blocksLoaded += st.blocksLoaded;
 						apiTotal.objectsLoaded += st.objectsLoaded;
 						apiTotal.matchedObjects += st.matchedObjects;
