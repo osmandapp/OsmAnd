@@ -824,11 +824,12 @@ public class SearchCoreFactory {
 					SearchResult sr = new SearchResult(phrase);
 					sr.otherNames = object.getOtherNames(true);
 					sr.localeName = object.getName(phrase.getSettings().getLang());
-					if (!nm.matches(sr.localeName)) {
-						sr.localeName = object.getName(phrase.getSettings().getLang(),
-								phrase.getSettings().isTransliterate());
+					boolean matchLocalName = nm.matches(sr.localeName);
+					if (!matchLocalName) {
+						sr.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+						matchLocalName = nm.matches(sr.localeName);
 					}
-					if (!nm.matches(sr.localeName) && !nm.matches(sr.otherNames)) {
+					if (!matchLocalName && !nm.matches(sr.otherNames)) {
 						for(String k : object.getAdditionalInfoKeys()) {
 							if ((isTagIndexedForSearchAsName(k)
 									|| isTagIndexedForSearchAsId(k))
