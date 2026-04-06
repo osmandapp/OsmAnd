@@ -467,7 +467,7 @@ public class BinaryMapPoiReaderAdapter {
 							codedIS.seek(dataOffsets.get(i) + offset);
 							int len = codedIS.readRawVarint32();
 							long oldLim = codedIS.pushLimitLong((long) len);
-							readPoiNameIndexData(offsetMap, req, region, activeFilter, nameIndexCoordinates, queries);
+							readPoiNameIndexData(offsetMap, req, region, nameIndexCoordinates);
 							codedIS.popLimit(oldLim);
 							if (req.isCancelled()) {
 								codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
@@ -513,7 +513,7 @@ public class BinaryMapPoiReaderAdapter {
 
 
 	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
-			BloomFilterAlgorithmDef supportedBloomFilter, List<Integer> nameIndexCoordinates, List<String> queryTokens) throws IOException {
+			List<Integer> nameIndexCoordinates) throws IOException {
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -523,7 +523,7 @@ public class BinaryMapPoiReaderAdapter {
 				case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:
 					int len = codedIS.readRawVarint32();
 					long oldLim = codedIS.pushLimitLong((long) len);
-					readPoiNameIndexDataAtom(offsets, req, region, supportedBloomFilter, nameIndexCoordinates, queryTokens);
+					readPoiNameIndexDataAtom(offsets, req, region, nameIndexCoordinates);
 					codedIS.popLimit(oldLim);
 					break;
 				default:
@@ -533,8 +533,8 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region, BloomFilterAlgorithmDef bloomFilter,
-	                                      List<Integer> nameIndexCoordinates, List<String> queryTokens) throws IOException {
+	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
+	                                      List<Integer> nameIndexCoordinates) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 15;
