@@ -784,7 +784,7 @@
     <string name="map_widget_intermediate_distance">Köztes célpont</string>
     <string name="ending_point_too_far">Az úti cél közelében nem található út.</string>
     <string name="add_tag">Címke hozzáadása</string>
-    <string name="btn_advanced_mode">Speciális mód…</string>
+    <string name="btn_advanced_mode">Haladó mód…</string>
     <string name="poi_filter_parking">Parkoló</string>
     <string name="poi_filter_emergency">Vészhelyzet</string>
     <string name="poi_filter_public_transport">Tömegközlekedés</string>
@@ -1808,7 +1808,7 @@
     <string name="add_time_span">Időtartam megadása</string>
     <string name="road_blocked">Lezárt út</string>
     <string name="shared_string_select">Kijelölés</string>
-    <string name="switch_start_finish">Kiindulási pont és az úti cél felcserélése</string>
+    <string name="switch_start_finish">A kiindulási pont és az úti cél felcserélése</string>
     <string name="rendering_attr_hideIcons_name">Érdekes helyek ikonjai</string>
     <string name="item_removed">Elem eltávolítva</string>
     <string name="n_items_removed">elem eltávolítva</string>
@@ -4197,7 +4197,7 @@
     <string name="available_widgets">Elérhető modulok</string>
     <string name="snackbar_page_removed">A(z) „%1$s oldal” el lett távolítva.</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Csak ha szükséges</string>
-    <string name="routing_attr_freeride_policy_allow_name">Engedélyezve</string>
+    <string name="routing_attr_freeride_policy_allow_name">Engedélyezés</string>
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Elsősorban pályán kívül</string>
     <string name="routing_attr_difficulty_preference_beginner_name">Kezdő</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Tapasztalt</string>
@@ -5837,7 +5837,7 @@
     <string name="astro_constellations">Csillagképek</string>
     <string name="astro_stars">Csillagok</string>
     <string name="astro_galaxies">Galaxisok</string>
-    <string name="astro_nebulae">Ködfoltok</string>
+    <string name="astro_nebulae">Csillagközi gázfelhők</string>
     <string name="astro_open_clusters">Nyílthalmazok</string>
     <string name="astro_globular_clusters">Gömbhalmazok</string>
     <string name="astro_galaxy_clusters">Galaxishalmazok</string>
