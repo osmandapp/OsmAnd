@@ -445,6 +445,19 @@ class GpxTrackAnalysis {
 		var _maxSensorHr = 0
 		var _maxSensorTemperature = 0
 		var _maxSensorPower = 0
+		var _maxObdEngineLoad = maxObdEngineLoad
+		var _maxObdThrottlePosition = maxObdThrottlePosition
+		var _maxObdEngineRpm = maxObdEngineRpm
+		var _maxObdEngineRuntime = maxObdEngineRuntime
+		var _maxObdFuelPressure = maxObdFuelPressure
+		var _maxObdBatteryVoltage = maxObdBatteryVoltage
+		var _maxObdVehicleSpeed = maxObdVehicleSpeed
+		var _maxObdFuelConsumptionRate = maxObdFuelConsumptionRate
+		var _maxObdFuelLevel = maxObdFuelLevel
+		var _maxObdAirIntakeTemperature = maxObdAirIntakeTemperature
+		var _maxObdEngineCoolantTemperature = maxObdEngineCoolantTemperature
+		var _maxObdEngineOilTemperature = maxObdEngineOilTemperature
+		var _maxObdAmbientAirTemperature = maxObdAmbientAirTemperature
 
 		var obdEngineLoadCount = 0
 		var totalObdEngineLoad = 0.0
@@ -476,7 +489,12 @@ class GpxTrackAnalysis {
 		_diffElevationUp = 0.0
 		_diffElevationDown = 0.0
 
-		pointAttributes = mutableListOf()
+		var estimatedPointCount = 0
+		for (segment in splitSegments) {
+			estimatedPointCount += segment.getNumberOfPoints()
+		}
+
+		pointAttributes = ArrayList(estimatedPointCount)
 		availableAttributes = mutableSetOf()
 
 		for (s in splitSegments) {
@@ -646,14 +664,14 @@ class GpxTrackAnalysis {
 
 				val engineLoad = attributes.engineLoad
 				if (!engineLoad.isNaN()) {
-					maxObdEngineLoad = maxOf(maxObdEngineLoad, engineLoad)
+					_maxObdEngineLoad = maxOf(_maxObdEngineLoad, engineLoad)
 					totalObdEngineLoad += engineLoad
 					obdEngineLoadCount++
 				}
 
 				val throttlePosition = attributes.throttlePosition
 				if (!throttlePosition.isNaN()) {
-					maxObdThrottlePosition = maxOf(maxObdThrottlePosition, throttlePosition)
+					_maxObdThrottlePosition = maxOf(_maxObdThrottlePosition, throttlePosition)
 					totalObdThrottle += throttlePosition
 					obdThrottleCount++
 				}
@@ -661,7 +679,7 @@ class GpxTrackAnalysis {
 				val rpmSpeed = attributes.rpmSpeed
 				if (!rpmSpeed.isNaN()) {
 					val rpm = rpmSpeed.toInt()
-					maxObdEngineRpm = maxOf(maxObdEngineRpm, rpm)
+					_maxObdEngineRpm = maxOf(_maxObdEngineRpm, rpm)
 					totalObdRpm += rpm
 					obdRpmCount++
 				}
@@ -669,7 +687,7 @@ class GpxTrackAnalysis {
 				val runtimeEngine = attributes.runtimeEngine
 				if (!runtimeEngine.isNaN()) {
 					val runtime = runtimeEngine.toLong()
-					maxObdEngineRuntime = maxOf(maxObdEngineRuntime, runtime)
+					_maxObdEngineRuntime = maxOf(_maxObdEngineRuntime, runtime)
 					totalObdRuntime += runtime
 					obdRuntimeCount++
 				}
@@ -677,14 +695,14 @@ class GpxTrackAnalysis {
 				val fuelPressure = attributes.fuelPressure
 				if (!fuelPressure.isNaN()) {
 					val fuelP = fuelPressure.toInt()
-					maxObdFuelPressure = maxOf(maxObdFuelPressure, fuelP)
+					_maxObdFuelPressure = maxOf(_maxObdFuelPressure, fuelP)
 					totalObdFuelPressure += fuelP
 					obdFuelPressureCount++
 				}
 
 				val batteryVoltage = attributes.batteryVoltage
 				if (!batteryVoltage.isNaN()) {
-					maxObdBatteryVoltage = maxOf(maxObdBatteryVoltage, batteryVoltage)
+					_maxObdBatteryVoltage = maxOf(_maxObdBatteryVoltage, batteryVoltage)
 					totalObdBatteryVoltage += batteryVoltage
 					obdBatteryVoltageCount++
 				}
@@ -692,21 +710,21 @@ class GpxTrackAnalysis {
 				val vehicleSpeed = attributes.vehicleSpeed
 				if (!vehicleSpeed.isNaN()) {
 					val _speed = vehicleSpeed.toInt()
-					maxObdVehicleSpeed = maxOf(maxObdVehicleSpeed, _speed)
+					_maxObdVehicleSpeed = maxOf(_maxObdVehicleSpeed, _speed)
 					totalObdVehicleSpeed += _speed
 					obdVehicleSpeedCount++
 				}
 
 				val fuelConsumption = attributes.fuelConsumption
 				if (!fuelConsumption.isNaN()) {
-					maxObdFuelConsumptionRate = maxOf(maxObdFuelConsumptionRate, fuelConsumption)
+					_maxObdFuelConsumptionRate = maxOf(_maxObdFuelConsumptionRate, fuelConsumption)
 					totalObdFuelConsumption += fuelConsumption
 					obdFuelConsumptionCount++
 				}
 
 				val fuelRemaining = attributes.fuelRemaining
 				if (!fuelRemaining.isNaN()) {
-					maxObdFuelLevel = maxOf(maxObdFuelLevel, fuelRemaining)
+					_maxObdFuelLevel = maxOf(_maxObdFuelLevel, fuelRemaining)
 					totalObdFuelLevel += fuelRemaining
 					obdFuelLevelCount++
 				}
@@ -714,7 +732,7 @@ class GpxTrackAnalysis {
 				val intakeTemp = attributes.intakeTemp
 				if (intakeTemp.isFinite()) {
 					val temp = intakeTemp.toInt()
-					maxObdAirIntakeTemperature = maxOf(maxObdAirIntakeTemperature, temp)
+					_maxObdAirIntakeTemperature = maxOf(_maxObdAirIntakeTemperature, temp)
 					totalObdTempIntake += temp
 					obdTempIntakeCount++
 				}
@@ -722,7 +740,7 @@ class GpxTrackAnalysis {
 				val coolantTemp = attributes.coolantTemp
 				if (coolantTemp.isFinite()) {
 					val temp = coolantTemp.toInt()
-					maxObdEngineCoolantTemperature = maxOf(maxObdEngineCoolantTemperature, temp)
+					_maxObdEngineCoolantTemperature = maxOf(_maxObdEngineCoolantTemperature, temp)
 					totalObdTempCoolant += temp
 					obdTempCoolantCount++
 				}
@@ -730,7 +748,7 @@ class GpxTrackAnalysis {
 				val engineOilTemp = attributes.engineOilTemp
 				if (engineOilTemp.isFinite()) {
 					val temp = engineOilTemp.toInt()
-					maxObdEngineOilTemperature = maxOf(maxObdEngineOilTemperature, temp)
+					_maxObdEngineOilTemperature = maxOf(_maxObdEngineOilTemperature, temp)
 					totalObdTempOil += temp
 					obdTempOilCount++
 				}
@@ -738,7 +756,7 @@ class GpxTrackAnalysis {
 				val ambientTemp = attributes.ambientTemp
 				if (ambientTemp.isFinite()) {
 					val temp = ambientTemp.toInt()
-					maxObdAmbientAirTemperature = maxOf(maxObdAmbientAirTemperature, temp)
+					_maxObdAmbientAirTemperature = maxOf(_maxObdAmbientAirTemperature, temp)
 					totalObdTempAmbient += temp
 					obdTempAmbientCount++
 				}
@@ -768,6 +786,19 @@ class GpxTrackAnalysis {
 		maxSensorHr = _maxSensorHr
 		maxSensorTemperature = _maxSensorTemperature
 		maxSensorPower = _maxSensorPower
+		maxObdEngineLoad = _maxObdEngineLoad
+		maxObdThrottlePosition = _maxObdThrottlePosition
+		maxObdEngineRpm = _maxObdEngineRpm
+		maxObdEngineRuntime = _maxObdEngineRuntime
+		maxObdFuelPressure = _maxObdFuelPressure
+		maxObdBatteryVoltage = _maxObdBatteryVoltage
+		maxObdVehicleSpeed = _maxObdVehicleSpeed
+		maxObdFuelConsumptionRate = _maxObdFuelConsumptionRate
+		maxObdFuelLevel = _maxObdFuelLevel
+		maxObdAirIntakeTemperature = _maxObdAirIntakeTemperature
+		maxObdEngineCoolantTemperature = _maxObdEngineCoolantTemperature
+		maxObdEngineOilTemperature = _maxObdEngineOilTemperature
+		maxObdAmbientAirTemperature = _maxObdAmbientAirTemperature
 		diffElevationUp = _diffElevationUp
 		diffElevationDown = _diffElevationDown
 
