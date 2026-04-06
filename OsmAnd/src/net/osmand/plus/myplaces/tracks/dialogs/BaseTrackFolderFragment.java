@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
@@ -59,6 +60,7 @@ import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
+import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.shared.gpx.enums.TracksSortScope;
 import net.osmand.plus.settings.enums.TracksSortMode;
@@ -325,6 +327,21 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 			TrackMenuFragment.openTrack(activity, file != null ? SharedUtil.jFile(file) : null,
 					bundle, screenName, OVERVIEW, temporary);
 		}
+	}
+
+	public void showAnalyzeOnMap(@NonNull TrackItem trackItem) {
+		callActivity(activity -> {
+			selectedItemPath = trackItem.getPath();
+
+			Bundle bundle = storeState();
+			KFile file = trackItem.getFile();
+
+			GpxSelectionHelper.getGpxFile(activity, file == null ? null : SharedUtil.jFile(file), true, result -> {
+				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(activity, result, null, bundle);
+				OsmAndTaskManager.executeTask(detailsTask);
+				return true;
+			});
+		});
 	}
 
 	public void dismiss() {
