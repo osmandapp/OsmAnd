@@ -49,14 +49,22 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	@Nullable
 	private SortFavoriteListener sortListener;
 	private final boolean nightMode;
+	private final boolean showFolderNameOnSecondLine;
 	private FavoriteListSortMode sortMode;
 	private boolean selectionMode;
 
 	private final FavoriteAdapterListener listener;
 
 	public FavoriteFoldersAdapter(@NonNull Context context, boolean nightMode, FavoriteAdapterListener listener) {
+		this(context, nightMode, false, listener);
+	}
+
+	public FavoriteFoldersAdapter(@NonNull Context context, boolean nightMode,
+	                              boolean showFolderNameOnSecondLine,
+	                              FavoriteAdapterListener listener) {
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.nightMode = nightMode;
+		this.showFolderNameOnSecondLine = showFolderNameOnSecondLine;
 		this.listener = listener;
 		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 		sortMode = FavoriteListSortMode.NAME_ASCENDING;
@@ -181,7 +189,8 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			viewHolder.bindView(hasTrackItems());
 		} else if (holder instanceof FavoriteViewHolder viewHolder) {
 			FavouritePoint favouritePoint = (FavouritePoint) items.get(position);
-			viewHolder.bindView(sortMode, favouritePoint, !lastItem, selectionMode, listener);
+			viewHolder.bindView(sortMode, favouritePoint, !lastItem,
+					showFolderNameOnSecondLine, selectionMode, listener);
 		} else if (holder instanceof FavoriteFolderViewHolder viewHolder) {
 			FavoriteGroup favFolder = (FavoriteGroup) items.get(position);
 			viewHolder.bindView(favFolder, !lastPinned && !lastItem, lastPinned && !lastItem, selectionMode, listener);
@@ -225,7 +234,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 				} else if (p == LOCATION_UPDATE_PAYLOAD) {
 					if (holder instanceof FavoriteViewHolder viewHolder) {
 						FavouritePoint favouritePoint = (FavouritePoint) items.get(position);
-						viewHolder.bindLocation(sortMode, favouritePoint);
+						viewHolder.bindLocation(sortMode, favouritePoint, showFolderNameOnSecondLine);
 					}
 					return;
 				}
