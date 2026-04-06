@@ -17,6 +17,7 @@ import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCo
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
@@ -62,6 +63,8 @@ import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
+import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvider;
 import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
 import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -133,7 +136,8 @@ import java.util.Locale;
 public class MeasurementToolFragment extends BaseFullScreenFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
 		SaveAsNewTrackFragmentListener, MapControlsThemeProvider, GpsFilterFragmentLister,
-		OnFileUploadCallback, CalculateAltitudeListener, IMapDisplayPositionProvider, CallbackWithObject<String> {
+		OnFileUploadCallback, CalculateAltitudeListener, IMapDisplayPositionProvider,
+		ICoveredScreenRectProvider, CallbackWithObject<String> {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
@@ -172,6 +176,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	private RadioItem pointsBtn;
 	private RadioItem graphBtn;
 	private View mainView;
+	private View mainContentView;
 	private View bottomMapControls;
 	private View topMapControls;
 	private ImageView upDownBtn;
@@ -184,6 +189,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	private MapHudLayout mapHudLayout;
 
 	private OnBackPressedCallback onBackPressedCallback;
+	private BoundsChangeListener mainContentBoundsChangeListener;
 	private OnGlobalLayoutListener widgetsLayoutListener;
 
 	private String filePath;
@@ -276,6 +282,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mapDisplayPositionManager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
+		mainContentBoundsChangeListener = new BoundsChangeListener(mapDisplayPositionManager, true);
 		if (editingCtx == null) {
 			editingCtx = new MeasurementEditingContext(app);
 		}
@@ -351,6 +358,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		View view = inflate(R.layout.fragment_measurement_tool, container, false);
 
 		mainView = view.findViewById(R.id.main_view);
+		mainContentView = view.findViewById(R.id.main_content);
 		detailsMenu = new GraphDetailsMenu(mainView);
 		LinearLayout infoButtonsContainer = mainView.findViewById(R.id.custom_radio_buttons);
 		if (portrait) {
@@ -778,6 +786,10 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	public void onResume() {
 		super.onResume();
 		mapDisplayPositionManager.registerMapPositionProvider(this);
+		mapDisplayPositionManager.registerCoveredScreenRectProvider(this);
+		if (mainContentView != null) {
+			mainContentView.addOnLayoutChangeListener(mainContentBoundsChangeListener);
+		}
 		callMapActivity(mapActivity -> {
 			if (mapActivity.getMapLayers().hasMapActivity()) {
 				mapActivity.getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
@@ -798,6 +810,10 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	@Override
 	public void onPause() {
 		super.onPause();
+		if (mainContentView != null) {
+			mainContentView.removeOnLayoutChangeListener(mainContentBoundsChangeListener);
+		}
+		mapDisplayPositionManager.unregisterCoveredScreenRectProvider(this);
 		mapDisplayPositionManager.unregisterMapPositionProvider(this);
 		callMapActivity(mapActivity -> {
 			mapActivity.getMapLayers().getMapControlsLayer().removeThemeInfoProviderTag(TAG);
@@ -821,6 +837,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		MeasurementToolLayer layer = getMeasurementLayer();
 		layer.setOnSingleTapListener(null);
 		layer.setOnEnterMovePointModeListener(null);
+		mainContentView = null;
 	}
 
 	@Override
@@ -1781,7 +1798,19 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		if (infoExpanded || isMapContextMenuVisible()) {
 			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_END;
 		}
-		return null;
+		return MapPosition.CENTER;
+	}
+
+	@Override
+	public boolean shouldProjectMapDisplayPositionToVisibleRect(@NonNull MapPosition position) {
+		return position == MapPosition.CENTER;
+	}
+
+	@NonNull
+	@Override
+	public List<Rect> getCoveredScreenRects() {
+		Rect rect = mainContentView == null ? null : AndroidUtils.getViewBoundOnScreen(mainContentView);
+		return rect != null ? Collections.singletonList(rect) : Collections.emptyList();
 	}
 
 	private void closeMapContextMenuIfNeeded() {
