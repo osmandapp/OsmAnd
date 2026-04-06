@@ -1196,7 +1196,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					segmentsCard.updateContent();
 				}
 			} else if (buttonIndex == ANALYZE_ON_MAP_BUTTON_INDEX) {
-				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, null);
+				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, null, null);
 				OsmAndTaskManager.executeTask(detailsTask);
 				hide();
 			} else if (buttonIndex == ANALYZE_BY_INTERVALS_BUTTON_INDEX) {
