@@ -71,8 +71,10 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		Preference globalSettings = requirePreference("global_settings");
 		globalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
 		setupBackupAndRestorePref();
-		Preference purchasesSettings = requirePreference(PURCHASES_SETTINGS);
-		purchasesSettings.setIcon(getContentIcon(R.drawable.ic_action_purchases));
+		Preference purchasesSettings = findPreference(PURCHASES_SETTINGS);
+		if (purchasesSettings != null) {
+			purchasesSettings.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_purchases, colorId));
+		}
 		PreferenceCategory selectedProfile = requirePreference(SELECTED_PROFILE);
 		selectedProfile.setIconSpaceReserved(false);
 		setupConfigureProfilePref();
@@ -165,17 +167,22 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	private void setupLocalBackup() {
 		setupBackupToFilePref();
 		setupRestoreFromFilePref();
-		findPreference(LOCAL_BACKUP).setIconSpaceReserved(false);
+		Preference localBackup = findPreference(LOCAL_BACKUP);
+		if (localBackup != null) localBackup.setIconSpaceReserved(false);
 	}
 
 	private void setupBackupToFilePref() {
 		Preference backupToFile = findPreference(EXPORT_TO_FILE);
-		backupToFile.setIcon(getIcon(R.drawable.ic_action_save_to_file, getActiveColorRes()));
+		if (backupToFile != null) {
+			backupToFile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_save_to_file, colorId));
+		}
 	}
 
 	private void setupRestoreFromFilePref() {
 		Preference restoreFromFile = findPreference(IMPORT_FROM_FILE);
-		restoreFromFile.setIcon(getIcon(R.drawable.ic_action_read_from_file, getActiveColorRes()));
+		if (restoreFromFile != null) {
+			restoreFromFile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_read_from_file, colorId));
+		}
 	}
 
 	private void setupConfigureProfilePref() {

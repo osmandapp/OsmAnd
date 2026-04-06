@@ -345,17 +345,20 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			return;
 		}
 		Preference configureMap = findPreference(CONFIGURE_MAP);
-		configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers));
-
-		Intent intent = new Intent(ctx, MapActivity.class);
-		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
-		intent.putExtra(APP_MODE_KEY, getSelectedAppMode().getStringKey());
-		configureMap.setIntent(intent);
+		if (configureMap != null) {
+			configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers));
+			Intent intent = new Intent(ctx, MapActivity.class);
+			intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
+			intent.putExtra(APP_MODE_KEY, getSelectedAppMode().getStringKey());
+			configureMap.setIntent(intent);
+		}
 	}
 
 	private void setupConfigureScreenPref() {
 		Preference configureMap = findPreference(CONFIGURE_SCREEN);
-		configureMap.setIcon(getContentIcon(R.drawable.ic_configure_screen_dark));
+		if (configureMap != null) {
+			configureMap.setIcon(getContentIcon(R.drawable.ic_configure_screen_dark));
+		}
 	}
 
 	private void setupProfileAppearancePref() {
@@ -364,8 +367,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			return;
 		}
 		Preference profileAppearance = findPreference(PROFILE_APPEARANCE);
-		profileAppearance.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
-		profileAppearance.setFragment(ProfileAppearanceFragment.TAG);
+		if (profileAppearance != null) {
+			profileAppearance.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
+			profileAppearance.setFragment(ProfileAppearanceFragment.TAG);
+		}
 	}
 
 	private void setupCopyProfileSettingsPref() {
@@ -404,19 +409,21 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	private void setupOsmandPluginsPref() {
 		Context context = requireContext();
 		PreferenceCategory category = findPreference(PLUGIN_SETTINGS);
-		List<OsmandPlugin> plugins = PluginsHelper.getEnabledSettingsScreenPlugins();
-		if (plugins.size() != 0) {
-			for (OsmandPlugin plugin : plugins) {
-				Preference preference = new Preference(context);
-				preference.setPersistent(false);
-				preference.setKey(plugin.getId());
-				preference.setTitle(plugin.getName());
-				preference.setSummary(plugin.getPrefsDescription());
-				preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
-				preference.setLayoutResource(R.layout.preference_with_descr);
-				preference.setFragment(plugin.getSettingsScreenType().fragmentName);
+		if (category != null) {
+			List<OsmandPlugin> plugins = PluginsHelper.getEnabledSettingsScreenPlugins();
+			if (plugins.size() != 0) {
+				for (OsmandPlugin plugin : plugins) {
+					Preference preference = new Preference(context);
+					preference.setPersistent(false);
+					preference.setKey(plugin.getId());
+					preference.setTitle(plugin.getName());
+					preference.setSummary(plugin.getPrefsDescription());
+					preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
+					preference.setLayoutResource(R.layout.preference_with_descr);
+					preference.setFragment(plugin.getSettingsScreenType().fragmentName);
 
-				category.addPreference(preference);
+					category.addPreference(preference);
+				}
 			}
 		}
 	}

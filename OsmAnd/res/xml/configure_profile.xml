@@ -37,48 +37,19 @@
 		app:fragment="net.osmand.plus.settings.fragments.NavigationFragment"
 		tools:icon="@drawable/ic_action_gdirections_dark" />
 
-	<Preference
-		android:key="configure_map"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
-		android:summary="@string/map_look_descr"
-		android:title="@string/configure_map"
-		tools:icon="@drawable/ic_action_layers" />
 
-	<Preference
-		android:key="configure_screen"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
-		android:summary="@string/edit_profile_screen_options_subtitle"
-		android:title="@string/map_widget_config"
-		tools:icon="@drawable/ic_configure_screen_dark" />
 
-	<Preference
-		android:key="profile_appearance"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
-		android:summary="@string/choose_icon_color_name"
-		android:title="@string/profile_appearance"
-		tools:icon="@drawable/ic_action_offroad" />
 
-	<Preference
-		android:key="ui_customization"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
-		android:summary="@string/ui_customization_short_descr"
-		android:title="@string/ui_customization"
-		tools:icon="@drawable/ic_action_ui_customization" />
+
+
+
+
 
 	<Preference
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
-	<PreferenceCategory
-		android:key="plugin_settings"
-		android:layout="@layout/preference_plugin_settings"
-		android:title="@string/plugins_settings"
-		android:summary="@string/no_plugins_enabled"
-		android:icon="@drawable/ic_action_info_dark" />
+
 
 	<Preference
 		android:layout="@layout/list_item_divider"

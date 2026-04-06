@@ -501,15 +501,7 @@ public class MapActivityActions extends MapActions {
 					return true;
 				}));
 
-		adapter.addItem(new ContextMenuItem(DRAWER_CONFIGURE_MAP_ID)
-				.setTitleId(R.string.configure_map, activity)
-				.setIcon(R.drawable.ic_action_layers)
-				.setListener((uiAdapter, view, item, isChecked) -> {
-					app.logEvent("drawer_config_map_open");
-					MapActivity.clearPrevActivityIntent();
-					activity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, AndroidUtils.getCenterViewCoordinates(view));
-					return false;
-				}));
+		// Configure Map removed to simplify UI
 
 		String d = getString(R.string.maps_and_resources);
 		if (app.getDownloadThread().getIndexes().isDownloadedFromInternet) {
