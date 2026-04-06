@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.FormattedValue;
-import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -21,7 +20,7 @@ import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 public class CameraDistanceWidget extends SimpleWidget {
 
 	private final OsmandMapTileView mapView;
-	private float cachedCameraDistance = -1;
+	private int cachedCameraDistance = -1;
 
 	public CameraDistanceWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, WidgetType.DEV_CAMERA_DISTANCE, customId, widgetsPanel);
@@ -37,11 +36,10 @@ public class CameraDistanceWidget extends SimpleWidget {
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
-		float cameraDistance = getCameraHeightInMeters();
+		int cameraDistance = getCameraHeightInMeters();
 		if (isUpdateNeeded() || cameraDistance != cachedCameraDistance) {
 			cachedCameraDistance = cameraDistance;
 			if (cameraDistance > 0) {
-				MetricsConstants metricsConstants = settings.METRIC_SYSTEM.get();
 				FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(cachedCameraDistance, app);
 				setText(formattedDistance.value, formattedDistance.unit);
 			} else {
@@ -50,10 +48,10 @@ public class CameraDistanceWidget extends SimpleWidget {
 		}
 	}
 
-	private float getCameraHeightInMeters() {
+	private int getCameraHeightInMeters() {
 		MapRendererView mapRenderer = mapView.getMapRenderer();
 		if (mapRenderer != null) {
-			return mapRenderer.getCameraHeightInMeters();
+			return (int) mapRenderer.getCameraHeightInMeters();
 		}
 		return 0;
 	}

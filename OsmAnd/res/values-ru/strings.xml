@@ -778,7 +778,7 @@
     <string name="hint_search_online">Онлайн-поиск: номер дома, улица, город</string>
     <string name="search_offline_address">Локальный поиск</string>
     <string name="search_online_address">Онлайн-поиск</string>
-    <string name="max_level_download_tile">Уровень детализации</string>
+    <string name="max_level_download_tile">Максимальное увеличение в режиме онлайн</string>
     <string name="max_level_download_tile_descr">Выберите максимальный масштаб для загрузки тайлов карт из интернета.</string>
     <string name="route_general_information">Общая протяжённость = %1$s, время в пути = %2$d ч %3$d мин.</string>
     <string name="router_service_descr">Онлайн или локальный сервис для прокладки маршрута.</string>
@@ -4964,7 +4964,6 @@
     <string name="sort_country_name_descending">Названия стран: Я – А</string>
     <string name="delete_map_description">Удалить карту %1$s?</string>
     <string name="maps_and_resources">Карты и ресурсы</string>
-    <string name="widget_available_ram_desc">Отображает доступную память, выделенную для OsmAnd.</string>
     <string name="glide_ratio_to_target">Коэффициент планирования к цели</string>
     <string name="average_glide_ratio">Средний коэффициент планирования</string>
     <string name="release_4_6">• Android Auto: добавлен 3D-режим \n \n• Треки: добавлены фильтры и смарт-папки, оптимизирована память для файлов большего размера \n \n• Улучшены верхняя и нижняя панели виджетов для размещения всех вариантов виджетов \n \n• Улучшено управление локальными ресурсами \n \n• Настраиваемое назначение кнопок для внешних контроллеров \n \n• Новые виджеты: «Коэффициент планирования» и «Положение солнца» \n \n• OsmAnd Cloud: доступ к удаленным файлам \n \n• Улучшена окраска линии маршрута в режиме уклона с новым симметричным градиентом \n \n• Исправлены проблемы с прозрачной строкой состояния \n \n• Добавлена поддержка виджета температуры ANT+ \n \n• Добавлен виджет «Доступная оперативная память»</string>
@@ -4972,7 +4971,6 @@
     <string name="map_widget_group_glide_ratio">Коэффициент планирования</string>
     <string name="app_mode_hang_gliding">Дельтапланеризм</string>
     <string name="may_be_used_if_there_is_shortcut">Может быть использован при наличии ярлыка</string>
-    <string name="widget_available_ram">Доступная оперативная память</string>
     <string name="shared_string_created">Дата создания</string>
     <string name="live_monitoring_adress_descr">Укажите веб-адрес используя следующий синтаксис: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="shared_string_show_icon">Показать значок</string>
@@ -5714,7 +5712,7 @@
     <string name="rendering_attr_watercolor_name">Цвет воды</string>
     <string name="rendering_attr_watercolor_description">Цвет воды</string>
     <string name="show_spherical_map_description">Отображение сфероидальной модели Земли</string>
-    <string name="enable_3d_objects">3D-здания</string>
+    <string name="enable_3d_objects">Трехмерные здания</string>
     <string name="enable_3d_objects_description">Отображение 3D-объектов зданий на карте</string>
     <string name="show_rasterization_debug_tile">Показать информацию о растеризации тайла</string>
     <string name="enable_msaa">Включить MSAA</string>
@@ -5912,12 +5910,12 @@
     <string name="pin_folder">Закрепить папку</string>
     <string name="favorite_search_empty_state_description">Попробуйте изменить параметры поиска или фильтры, возможно это поможет</string>
     <string name="favorites_empty_folder_description">В этой папке пока нет избранных точек.</string>
-    <string name="free_custom_color_description">Придайте 3D-зданиям любой цвет. Идеально подходит для соответствия теме карты или улучшения контраста.</string>
+    <string name="free_custom_color_description">Настройте 3D-модели зданий в любом цвете. Идеально подходит для создания карты в едином стиле или для усиления контраста.</string>
     <string name="buildings_3d_use_map_style_color_description">Использовать цвета стиля карты (%s).</string>
-    <string name="buildings_3d_visibility_description">Отрегулируйте непрозрачность 3D-структур на карте.</string>
-    <string name="level_of_details">Детализация</string>
+    <string name="buildings_3d_visibility_description">Отрегулируйте прозрачность 3D-структур на карте.</string>
+    <string name="level_of_details">Уровень детализации</string>
     <string name="performance">Производительность</string>
-    <string name="view_distance">Дальность видимости</string>
+    <string name="view_distance">Видимость</string>
     <string name="astro_min_magnitude">Мин. величина</string>
     <string name="building_3d_day_color_content_desc">Тема цвета 3d-зданий днём</string>
     <string name="building_3d_night_color_content_desc">Тема цвета 3d-зданий ночью</string>
@@ -6037,4 +6035,33 @@
     <string name="start_free_trial">Попробуйте бесплатно</string>
     <string name="subscription_free_trial_with_price">%1$s бесплатно, затем %2$s</string>
     <string name="subscription_then_price">затем %1$s</string>
+    <string name="compass_calibration_needed">Требуется калибровка компаса</string>
+    <string name="sensors_not_available_for_ar">Датчики, недоступные для ДР</string>
+    <string name="ar_mode_enabled">Включен режим дополненной реальности</string>
+    <string name="ar_mode_disabled">Режим дополненной реальности отключен</string>
+    <string name="release_5_3">• Добавлена поддержка 3D-зданий\n\n • Сферический вид карты\n\n • Астрономический плагин с ночной картой и базой данных звезд\n\n • Новые цветовые режимы для спидометра: допустимое превышение скорости и превышение скорости\n\n • Отдельные макеты виджетов для альбомной и портретной ориентации\n\n • Виджеты для записи поездок: скорость движения и средняя скорость\n\n • Виджет с напряжением адаптера для Показателей транспортного средства\n\n • Данные о технических характеристиках автомобиля в Анализаторе треков\n\n • Автоматическая сортировка треков по годам, продолжительности, активности и другим параметрам\n\n • Редактор палитры для визуализации рельефа и треков\n\n • Улучшенные алгоритмы поиска и обновленный пользовательский интерфейс\n\n • Фиксированные профили высот для маршрутов\n\n • Избранное: новые возможности сортировки и обновленный интерфейс\n\n • Поделитесь ссылкой на любую точку интереса\n\n • Предварительный просмотр путевых точек без закрытия списка\n\n • Параметр ширины велосипеда для езды по узким дорогам\n\n • Описания фотографий из Викимедиа</string>
+    <string name="purchases_feature_desc_astronomy">Исследуйте ночное небо с помощью офлайн-карты и каталога небесных тел. Планируйте наблюдения с помощью удобных графиков видимости, ежедневных расписаний и интерактивного режима дополненной реальности.</string>
+    <string name="shared_string_clear_filters">Очистить фильтры</string>
+    <string name="astro_sort_newest_first">Самый новый в начале</string>
+    <string name="astro_sort_oldest_first">Самый старый в начале</string>
+    <string name="astro_expand_your_universe_title">Расширяйте свою вселенную</string>
+    <string name="astro_expand_your_universe_description">Получите доступ к расширенной базе данных каталогов объектов дальнего космоса, статьям Википедии и режиму дополненной реальности в автономном режиме.</string>
+    <string name="astro_offline_knowledge_base_title">Автономная база знаний</string>
+    <string name="astro_offline_knowledge_base_description">Скачать расширенную базу данных, чтобы получать доступ к статьям Википедии и каталогам объектов дальнего космоса без подключения к интернету.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Следующий день.</string>
+    <string name="astro_visibility_show_today">Показать сегодняшнюю видимость</string>
+    <string name="astro_schedule_show_current_week">Показать текущую неделю</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="shared_string_world_weather_map">Карта погоды в мире</string>
+    <string name="map_widget_memory_info">Информация о памяти</string>
+    <string name="map_widget_memory_info_desc">Отслеживает кучу Java, собственные выделения памяти и графическую память.</string>
+    <string name="memory_used_settings">Используемая куча Java</string>
+    <string name="memory_allocated_settings">Выделенная память кучи Java</string>
+    <string name="memory_limit_settings">Максимальный предел кучи Java</string>
+    <string name="memory_native_settings">Выделение памяти в Собственной куче</string>
+    <string name="memory_graphics_settings">Графическая память</string>
+    <string name="shared_string_heap">Куча</string>
+    <string name="shared_string_native">Собственная</string>
+    <string name="shared_string_gpu">Графический процессор</string>
+    <string name="shared_string_allocated">Зарезервированная</string>
 </resources>

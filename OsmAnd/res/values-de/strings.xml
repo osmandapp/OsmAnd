@@ -53,7 +53,7 @@
     <string name="background_router_service">OsmAnd im Hintergrund ausführen</string>
     <string name="background_service_int_descr">Vom Hintergrunddienst verwendetes Aufwachintervall:</string>
     <string name="background_service_int">GPS-Aufwachintervall</string>
-    <string name="save_track_to_gpx_globally_headline">Spurenaufzeichnung bei Bedarf</string>
+    <string name="save_track_to_gpx_globally_headline">Track Aufzeichnung bei Bedarf</string>
     <string name="save_track_to_gpx_globally_descr">Generelle Positionserfassung kann mit der Schaltfläche „GPX“ direkt auf dem Kartenbildschirm aktiviert oder deaktiviert werden.</string>
     <string name="save_current_track">Aktuellen Track speichern</string>
     <string name="save_current_track_descr">Aktuellen Track jetzt als GPX-Datei speichern.</string>
@@ -5028,7 +5028,6 @@
     <string name="date_of_creation">Erstellungsdatum</string>
     <string name="filter_screen_title">Filter</string>
     <string name="shared_string_cache">Zwischenspeicher</string>
-    <string name="widget_available_ram_desc">Zeigt den für OsmAnd verfügbaren, zugewiesenen Speicher an.</string>
     <string name="sort_size_descending">Große Größe zuerst</string>
     <string name="delete_map">Karte löschen</string>
     <string name="standard_maps">Standardkarten</string>
@@ -5038,7 +5037,6 @@
     <string name="shared_string_show_icon">Symbol anzeigen</string>
     <string name="map_is_up_to_date">Die Karte %1$s ist auf dem neuesten Stand.</string>
     <string name="sort_size_ascending">Kleine Größe zuerst</string>
-    <string name="widget_available_ram">Verfügbarer RAM</string>
     <string name="terrain_maps">Geländekarten</string>
     <string name="sort_country_name_descending">Landesname: Z – A</string>
     <string name="delete_map_description">Karte %1$s löschen?</string>
@@ -5407,7 +5405,7 @@
     <string name="hugerock_promo">Hugerock-Promo für %1$s Monate</string>
     <string name="shared_string_automatically">Automatisch</string>
     <string name="ask_every_time">Jedes Mal fragen</string>
-    <string name="detailed_track_guidance">Detaillierte Spurführung</string>
+    <string name="detailed_track_guidance">Detaillierte Track Navigation</string>
     <string name="detailed_track_guidance_description">OsmAnd gleicht Ihren Weg mit nahe gelegenen Straßen ab, um die Abbiegehinweise zu verbessern.</string>
     <string name="quick_action_routes_summary">Ein Schalter, um %1$s auf der Karte anzuzeigen oder auszublenden.</string>
     <string name="compass_click_north_is_up">Klicken und halten Sie, um den Ausrichtungsmodus zu ändern</string>
@@ -5421,7 +5419,7 @@
     <string name="delete_widget">Widget löschen?</string>
     <string name="delete_widget_description">Dieses Widget wird gelöscht. Sie können es später im Bildschirm Konfigurieren wiederherstellen.</string>
     <string name="battery_saving_mode">Akkusparmodus</string>
-    <string name="graph_axis">Grafik-Achse</string>
+    <string name="graph_axis">Diagramm-Achse</string>
     <string name="y_axis_description">Wählen Sie bis zu zwei Optionen für die Y-Achse.</string>
     <string name="app_mode_suv">SUV</string>
     <string name="rendering_attr_alpineHiking_name">Schwierigkeitsgrad der Wanderwege</string>
@@ -5984,7 +5982,7 @@
     <string name="backup_deleted_all_data">Gelöschte Daten.</string>
     <string name="backup_deleting_all_data">Lösche Daten…</string>
     <string name="pin_folder">Ordner anpinnen</string>
-    <string name="view_distance">Sichtweite</string>
+    <string name="view_distance">Entfernung anzeigen</string>
     <string name="equator_line">Äquatorlinie</string>
     <string name="copy_from_portrait_layout">Aus Hochformat kopieren</string>
     <string name="delete_groups_confirmation">Gruppen löschen?</string>
@@ -5995,7 +5993,7 @@
     <string name="map_2d">2D</string>
     <string name="map_3d">3D</string>
     <string name="astro_nebulas">Nebel</string>
-    <string name="level_of_details">Detaillierungsgrad</string>
+    <string name="level_of_details">Detailtiefe</string>
     <string name="performance">Leistung</string>
     <string name="astro_rendering">Rendering</string>
     <string name="unpin_folder">Ordner lösen</string>
@@ -6009,9 +6007,9 @@
     <string name="building_3d_high_details_content_desc">3D-Gebäude mit hohen Details</string>
     <string name="building_3d_near_distance_content_desc">3D-Gebäude in der Nähe</string>
     <string name="building_3d_far_distance_content_desc">3D-Gebäude weit entfernt</string>
-    <string name="free_custom_color_description">Passt 3D-Gebäude mit beliebigen Farben an. Perfekt, um sie an das Thema einer Karte anzupassen oder den Kontrast zu verbessern.</string>
+    <string name="free_custom_color_description">3D-Gebäude können mit beliebigen Farben angepasst werden. Ideal, um sie an ein Kartendesign anzupassen oder den Kontrast zu verbessern.</string>
     <string name="buildings_3d_use_map_style_color_description">Standardfarbe des Kartenstils (%s) verwenden.</string>
-    <string name="buildings_3d_visibility_description">Passt die Deckkraft von 3D-Strukturen auf der Karte an.</string>
+    <string name="buildings_3d_visibility_description">Passe die Deckkraft der 3D-Strukturen auf der Karte an.</string>
     <string name="galactic_line">Galaktische Linie</string>
     <string name="meridian_line">Meridianlinie</string>
     <string name="panels_layout">Anordnung der Bedienfelder</string>
@@ -6135,4 +6133,33 @@
     <string name="start_free_trial">Gratiszeitraum starten</string>
     <string name="subscription_free_trial_with_price">%1$s kostenlos, dann %2$s</string>
     <string name="subscription_then_price">dann %1$s</string>
+    <string name="shared_string_world_weather_map">Welt-Wetterkarte</string>
+    <string name="compass_calibration_needed">Kompass-Kalibrierung erforderlich</string>
+    <string name="sensors_not_available_for_ar">Sensoren nicht verfügbar für AR</string>
+    <string name="ar_mode_enabled">AR-Modus aktiv</string>
+    <string name="ar_mode_disabled">AR-Modus aus</string>
+    <string name="purchases_feature_desc_astronomy">Erkunde den Nachthimmel durch Offline-Karte und Sternenatlas. Plane Beobachtungen durch intelligente Sichtbarkeitsdiagramme, Tagesgänge und einen interaktiven AR-Modus.</string>
+    <string name="shared_string_clear_filters">Filter deaktivieren</string>
+    <string name="astro_sort_newest_first">Neueste zuerst</string>
+    <string name="astro_sort_oldest_first">Älteste zuerst</string>
+    <string name="astro_expand_your_universe_title">Erweitere dein Universum</string>
+    <string name="astro_expand_your_universe_description">Erhalte Zugang zur erweiterten Datenbank mit Deep-Sky-Katalogen, Wikipedia-Artikeln und Offline-AR-Modus.</string>
+    <string name="astro_offline_knowledge_base_title">Offline-Wissensdatenbank</string>
+    <string name="astro_offline_knowledge_base_description">Lade die erweiterte Datenbank herunter, um offline auf Wikipedia-Artikel und Deep-Sky-Kataloge zuzugreifen.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ am nächsten Tag.</string>
+    <string name="astro_visibility_show_today">Heutige Sichtbarkeit anzeigen</string>
+    <string name="astro_schedule_show_current_week">Diese Woche anzeigen</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="release_5_3">• Unterstützung für 3D-Gebäude hinzugefügt\n\n • Globusansicht\n\n• Astronomie-Erweiterung mit Karte des Nachthimmels und Sternen-Datenbank\n\n• Neue Farb-Modi für Tacho: Toleranz und Überschreitung\n\n• Unterschiedliche Widget-Darstellung für Quer- und Hochformat\n\n• Widgets für Fahrtaufzeichnung: Bewegungsgeschwindigkeit und Durchschnittsgeschwindigkeit\n\n• Widget für Adapter-Spannung für Fahrzeugdaten\n\n• Fahrzeugdaten im Track-Analyzer\n\n• Automatische Sortierung von Tracks nach Jahr, Länge, Aktivität &amp; mehr\n\n• Paletten-Editor für Visualisierung von Gelände und Tracks\n\n• Verbesserte Suchalgorithmen und neue Benutzerschnittstelle\n\n• Höhenprofile für Strecken repariert\n\n• Favoriten: Neue Sortierfilter und neue Benutzerschnittstelle\n\n• Link zu beliebigem POI teilenI\n\n• Wegpunkt-Vorschau ohne die Liste zu schließen\n\n• Parameter „Fahrradbreite“ um schmale Straßen zu vermeiden\n\n• Bildbeschreibungen von Wikimedia</string>
+    <string name="map_widget_memory_info">Speicherinformationen</string>
+    <string name="map_widget_memory_info_desc">Überwacht den Java-Heap, native Speicherzuweisungen und den Grafikspeicher.</string>
+    <string name="memory_used_settings">Verwendeter Java-Heap</string>
+    <string name="memory_allocated_settings">Zugewiesener Java-Heap</string>
+    <string name="memory_limit_settings">Maximale Java-Heap-Größe</string>
+    <string name="memory_native_settings">Auf dem nativen Heap zugewiesen</string>
+    <string name="memory_graphics_settings">Grafikspeicher</string>
+    <string name="shared_string_heap">Heap</string>
+    <string name="shared_string_native">Nativ</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="shared_string_allocated">Zugewiesen</string>
 </resources>

@@ -5,7 +5,7 @@
     <string name="poi_mooring">Múráil</string>
     <string name="poi_lock_basin">Glasáil báisín</string>
     <string name="poi_notice">Fógra, seamark</string>
-    <string name="poi_pile">Carn</string>
+    <string name="poi_pile">Carnán</string>
     <string name="poi_radar_transponder">Trasfhreagróir radair, seamark</string>
     <string name="poi_radio_station">Stáisiún raidió, seamark</string>
     <string name="poi_signal_station_warning">Stáisiún comharthaíochta, rabhadh</string>
@@ -409,7 +409,6 @@
     <string name="poi_traffic_calming_hump">Hump Luas</string>
     <string name="poi_traffic_calming_island">Oileán tráchta</string>
     <string name="poi_car_repair">Deisiú carranna</string>
-    <string name="poi_service_tyres">Boinn; Boinn; Boinn</string>
     <string name="poi_vehicle_inspection">Cigireacht feithicle</string>
     <string name="poi_car_wash">Nigh carranna</string>
     <string name="poi_fuel">Stáisiún gáis; Stáisiún gásailín; Stáisiún líonta; Stáisiún peitril</string>
@@ -1153,7 +1152,7 @@
     <string name="poi_changing_table_count">Líon na dtáblaí á athrú</string>
     <string name="poi_changing_table_fee_yes">Táille tábla a athrú: tá</string>
     <string name="poi_changing_table_fee_no">Táille tábla a athrú: níl</string>
-    <string name="poi_charcoal_pile">Carn gualaigh</string>
+    <string name="poi_charcoal_pile">Carnán gualaigh</string>
     <string name="poi_vehicle_forestry">Rochtain ar fheithiclí: foraoiseacht</string>
     <string name="poi_vehicle_delivery">Rochtain ar fheithiclí: seachadadh</string>
     <string name="poi_motorcar_yes">Tá; Mótarcharr</string>
@@ -2559,7 +2558,6 @@
     <string name="poi_route_funicular_ref">Funicular</string>
     <string name="poi_service_bicycle_diy_no">Uirlisí rothar le haghaidh deisiú DIY: níl</string>
     <string name="poi_training_computer">Oiliúint: ríomhaire</string>
-    <string name="poi_training_yoga">Oiliúint: ióga</string>
     <string name="poi_industrial_refinery">Cineál: scaglann</string>
     <string name="poi_technical_monument">Séadchomhartha teicniúil</string>
     <string name="poi_clothes_leather">Leathar</string>
@@ -4024,7 +4022,6 @@
     <string name="poi_cuisine_burrito">BurritoName</string>
     <string name="poi_cuisine_gyros">GyrosName</string>
     <string name="poi_cuisine_empanada">Taosrán</string>
-    <string name="poi_cuisine_crepes">Creipíní</string>
     <string name="poi_cuisine_meat">Feoil</string>
     <string name="poi_cuisine_wings">Sciatháin</string>
     <string name="poi_cuisine_wine">Fíon</string>
@@ -4987,7 +4984,6 @@
     <string name="poi_presbyterian_church">Eaglais Phreispitéireach</string>
     <string name="poi_access_main_tag">Rochtain</string>
     <string name="poi_osmwiki">áiteanna coitianta (Vicipéid)</string>
-    <string name="poi_hazard_additional_yes">Guais</string>
     <string name="poi_hazard_contamination">Éilliú</string>
     <string name="poi_hazard_yes">Guais</string>
     <string name="poi_hazard_landslide">Guais: sciorrtha talún</string>

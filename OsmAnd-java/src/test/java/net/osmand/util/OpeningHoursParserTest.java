@@ -633,6 +633,79 @@ public class OpeningHoursParserTest {
 
 		testAmPm();
 		testComma();
+		testYearFormats();
+	}
+
+	private void testYearFormats() throws ParseException {
+		OpeningHours hours = parseOpenedHours("2024 Jan-Dec");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("01.01.2025 00:00", hours, false);
+
+		hours = parseOpenedHours("2024-2025 Jan 1-Dec 31");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("31.12.2025 23:59", hours, true);
+		testOpened("01.01.2026 00:00", hours, false);
+
+		hours = parseOpenedHours("2024,2025 Jan 1-Dec 31");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("31.12.2025 23:59", hours, true);
+		testOpened("01.01.2026 00:00", hours, false);
+
+		hours = parseOpenedHours("2024");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("01.01.2025 00:00", hours, false);
+
+		hours = parseOpenedHours("2024,2026");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("15.06.2025 12:00", hours, false);
+		testOpened("01.01.2026 00:00", hours, true);
+		testOpened("31.12.2026 23:59", hours, true);
+		testOpened("01.01.2027 00:00", hours, false);
+
+		hours = parseOpenedHours("2024,2026 Jan 1-Dec 31");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("15.06.2025 12:00", hours, false);
+		testOpened("01.01.2026 00:00", hours, true);
+		testOpened("31.12.2026 23:59", hours, true);
+		testOpened("01.01.2027 00:00", hours, false);
+
+		hours = parseOpenedHours("2024,2026-2027 Jan 1-Dec 31");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("15.06.2025 12:00", hours, false);
+		testOpened("01.01.2026 00:00", hours, true);
+		testOpened("31.12.2027 23:59", hours, true);
+		testOpened("01.01.2028 00:00", hours, false);
+
+		hours = parseOpenedHours("2024-2025,2027-2028 Jan 1-Dec 31");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2025 23:59", hours, true);
+		testOpened("15.06.2026 12:00", hours, false);
+		testOpened("01.01.2027 00:00", hours, true);
+		testOpened("31.12.2028 23:59", hours, true);
+		testOpened("01.01.2029 00:00", hours, false);
+
+		hours = parseOpenedHours("2024,2026,2028 Jan 1-Dec 31");
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("15.06.2025 12:00", hours, false);
+		testOpened("01.01.2026 00:00", hours, true);
+		testOpened("15.06.2027 12:00", hours, false);
+		testOpened("01.01.2028 00:00", hours, true);
+		testOpened("01.01.2029 00:00", hours, false);
 	}
 	
 	private void testComma() throws ParseException {

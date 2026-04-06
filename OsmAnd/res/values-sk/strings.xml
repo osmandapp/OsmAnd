@@ -4748,7 +4748,6 @@
     <string name="contact_us">Kontaktujte nás</string>
     <string name="live_monitoring_adress_descr">Zadajte webovú adresu pomocou syntaxe parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="shared_string_cache">Vyrovnávacia pamäť</string>
-    <string name="widget_available_ram_desc">Zobrazí dostupnú pamäť pridelenú pre OsmAnd.</string>
     <string name="delete_map">Vymazať mapu</string>
     <string name="standard_maps">Štandardné mapy</string>
     <string name="max_altitude">Max. nadm. výška</string>
@@ -4759,7 +4758,6 @@
     <string name="rendering_styles">Štýly vykresľovania</string>
     <string name="app_mode_hang_gliding">Závesné lietanie</string>
     <string name="map_is_up_to_date">Mapa %1$s je aktuálna.</string>
-    <string name="widget_available_ram">Dostupná pamať RAM</string>
     <string name="terrain_maps">Mapy terénu</string>
     <string name="shared_string_temperature">Teplota</string>
     <string name="key_assignments_already_cleared_message">Všetky priradenia kláves už boli vymazané</string>
@@ -6132,4 +6130,24 @@
     <string name="astro_visibility_show_today">Zobraziť viditeľnosť dnes</string>
     <string name="astro_schedule_show_current_week">Zobraziť tento týždeň</string>
     <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="compass_calibration_needed">Je potrebná kalibrácia kompasu</string>
+    <string name="sensors_not_available_for_ar">Nie sú dostupné senzory pre rozšírenú realitu</string>
+    <string name="ar_mode_enabled">Režim rozšírenej reality zapnutý</string>
+    <string name="ar_mode_disabled">Režim rozšírenej reality vypnutý</string>
+    <string name="shared_string_clear_filters">Vymazať filtre</string>
+    <string name="astro_sort_newest_first">Od najnovšieho</string>
+    <string name="astro_sort_oldest_first">Od najstaršieho</string>
+    <string name="shared_string_world_weather_map">Svetová mapa počasia</string>
+    <string name="release_5_3">• Pridané 3D budovy\n\n • Guľaté zobrazenie mapy\n\n • Modul Astronómia s nočnou oblohou a databázou hviezd\n\n • Nové farebné režimy pre Tachometer: tolerancia a prekročenie rýchlosti\n\n • Samostatné rozloženie nástrojov pre režim na výšku a na šírku\n\n • Nástroj nahrávania výletu: Rýchlosť pohybu a priemerná rýchlosť\n\n • Nástroj napätia adaptéra pre merania vozidla\n\n • Údaje merania vozidla pri analýze stôp\n\n • Automatický organizátor stôp podľa roku, dĺžky, aktivity a ďalších vlastností\n\n • Editor palety pre zobrazenie terénu a stôp\n\n • Vylepšený algoritmus vyhľadávania a zlepšené rozhranie\n\n • Opravené profily nadmorskej výšky pre trasy\n\n • Obľúbené: nové možnosti triedenia a vylepšenie rozhrania\n\n • Linka pre zdieľanie ľubovoľného bodu záujmu\n\n • Náhľad bodu trasy bez zatvorenia zoznamu\n\n • Parameter šírky bicykla pre vyhnutie sa úzkym cestám\n\n • Popisy fotografií z Wikimedia</string>
+    <string name="map_widget_memory_info">Informácie o pamäti</string>
+    <string name="map_widget_memory_info_desc">Sleduje pamäť Javy, alokácie systému a grafickú pamäť.</string>
+    <string name="memory_used_settings">Použitá pamäť Javy</string>
+    <string name="memory_allocated_settings">Alokovaná pamäť Javy</string>
+    <string name="memory_limit_settings">Maximálna pamäť Javy</string>
+    <string name="memory_native_settings">Alokovaná pamäť systému</string>
+    <string name="memory_graphics_settings">Grafická pamäť</string>
+    <string name="shared_string_heap">Java</string>
+    <string name="shared_string_native">Systém</string>
+    <string name="shared_string_gpu">Graf.</string>
+    <string name="shared_string_allocated">Alokované</string>
 </resources>

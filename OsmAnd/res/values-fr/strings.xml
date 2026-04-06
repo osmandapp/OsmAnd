@@ -4925,7 +4925,6 @@
     <string name="date_of_creation">Date de création</string>
     <string name="filter_screen_title">Filtrer</string>
     <string name="shared_string_cache">Cache</string>
-    <string name="widget_available_ram_desc">Affiche la mémoire disponible allouée pour OsmAnd.</string>
     <string name="sort_size_descending">Taille grande en premier</string>
     <string name="delete_map">Supprimer la carte</string>
     <string name="standard_maps">Cartes standard</string>
@@ -4936,7 +4935,6 @@
     <string name="weather_online">Météo en ligne</string>
     <string name="map_is_up_to_date">La carte %1$s est à jour.</string>
     <string name="sort_size_ascending">Taille petite en premier</string>
-    <string name="widget_available_ram">RAM disponible</string>
     <string name="terrain_maps">Cartes de terrain</string>
     <string name="sort_country_name_descending">Nom de pays : Z – A</string>
     <string name="delete_map_description">Effacer la carte %1$s ?</string>
@@ -5808,8 +5806,8 @@
     <string name="routing_attr_pt_limit_name">Afficher les N meilleurs itinéraires</string>
     <string name="routing_attr_pt_limit_description">Spécifiez le nombre de meilleurs itinéraires à afficher</string>
     <string name="delete_folder_description">Supprimer le dossier « %1$s » ?</string>
-    <string name="show_spherical_map">Vue Globe terrestre</string>
-    <string name="enable_3d_objects">Bâtiments 3D</string>
+    <string name="show_spherical_map">Vue globe terrestre</string>
+    <string name="enable_3d_objects">Bâtiments en 3D</string>
     <string name="vehicle_metrics_chart_category">Mesures du véhicule</string>
     <string name="lang_mi">Māori</string>
     <string name="buildings_3d_detail_level">Détail des bâtiments 3D</string>
@@ -5909,7 +5907,7 @@
     <string name="building_3d_high_details_content_desc">Bâtiments en 3D élevés</string>
     <string name="building_3d_near_distance_content_desc">Distance entre les bâtiments en 3D à proximité</string>
     <string name="building_3d_far_distance_content_desc">Bâtiments en 3D éloignés</string>
-    <string name="free_custom_color_description">Personnalisez les bâtiments en 3D avec n\'importe quelle couleur. Idéal pour assortir le thème d\'une carte ou améliorer le contraste.</string>
+    <string name="free_custom_color_description">Personnalisez les bâtiments 3D avec n\'importe quelle couleur. Idéal pour harmoniser votre carte avec son thème ou améliorer le contraste.</string>
     <string name="buildings_3d_use_map_style_color_description">Utiliser la couleur par défaut du style de carte (%s).</string>
     <string name="buildings_3d_visibility_description">Ajustez l\'opacité des structures 3D sur la carte.</string>
     <string name="level_of_details">Niveau de détail</string>
@@ -6045,4 +6043,15 @@
     <string name="ar_mode_enabled">Mode AR activé</string>
     <string name="ar_mode_disabled">Mode AR désactivé</string>
     <string name="shared_string_world_weather_map">Carte météorologique mondiale</string>
+    <string name="map_widget_memory_info">Informations sur la mémoire</string>
+    <string name="map_widget_memory_info_desc">Surveille le tas Java, les allocations natives et la mémoire graphique.</string>
+    <string name="memory_used_settings">Utilisation du tas Java</string>
+    <string name="memory_allocated_settings">Tas Java alloué</string>
+    <string name="memory_limit_settings">Limite maximale de la mémoire du tas Java</string>
+    <string name="memory_native_settings">Mémoire allouée nativement</string>
+    <string name="memory_graphics_settings">Mémoire graphique</string>
+    <string name="shared_string_heap">Tas</string>
+    <string name="shared_string_native">Natif</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="shared_string_allocated">Alloué</string>
 </resources>

@@ -115,7 +115,6 @@
     <string name="poi_traffic_calming_choker">Zwężka</string>
     <string name="poi_traffic_signals">Sygnalizacja świetlna</string>
     <string name="poi_car_repair">Warsztat samochodowy</string>
-    <string name="poi_service_tyres">Opony</string>
     <string name="poi_vehicle_inspection">Stacja kontroli pojazdów</string>
     <string name="poi_car_wash">Myjnia samochodowa</string>
     <string name="poi_fuel">Stacja benzynowa;Stacja paliw;CPN;Tanksztela</string>
@@ -1994,7 +1993,6 @@
     <string name="poi_training_art">Nauka: umiejętności artystyczne</string>
     <string name="poi_training_cooking">Nauka: gotowanie</string>
     <string name="poi_training_computer">Nauka: komputer</string>
-    <string name="poi_training_yoga">Nauka: joga</string>
     <string name="poi_training_martial_art">Nauka: sztuki walki</string>
     <string name="poi_training_aviation">Nauka: latanie</string>
     <string name="poi_training_hairdressing">Nauka: strzyżenie włosów</string>
@@ -2887,7 +2885,6 @@
     <string name="poi_cuisine_yogurt">Jogurty</string>
     <string name="poi_cuisine_gyros">Gyros</string>
     <string name="poi_cuisine_empanada">Empanada/pastel (pierożek)</string>
-    <string name="poi_cuisine_crepes">Crêpe (cienkie naleśniki)</string>
     <string name="poi_cuisine_yakiniku">Yakiniku (japońskie grilowane mięso)</string>
     <string name="poi_cuisine_suki">Suki (tajski gorący kociełek)</string>
     <string name="poi_cuisine_udon">Udon (japoński makaron)</string>

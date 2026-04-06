@@ -1146,7 +1146,6 @@
     <string name="poi_religion">宗教用品</string>
     <string name="poi_ford_stepping_stones">脚踏石桥</string>
     <string name="poi_traffic_signals">交通信号灯</string>
-    <string name="poi_service_tyres">轮胎</string>
     <string name="poi_fuel_biodiesel">生物柴油</string>
     <string name="poi_parking_entrance">停车场入口</string>
     <string name="poi_public_transport_platform">公共交通站点</string>
@@ -1696,7 +1695,6 @@
     <string name="poi_training_language">培训：语言</string>
     <string name="poi_training_music">培训：音乐</string>
     <string name="poi_training_sport">培训：体育</string>
-    <string name="poi_training_yoga">培训：瑜伽</string>
     <string name="poi_training_martial_art">训练：武术</string>
     <string name="poi_training_aviation">培训：航空</string>
     <string name="poi_location_kiosk">位置： 亭子</string>

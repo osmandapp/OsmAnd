@@ -62,7 +62,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -84,12 +83,12 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.MeasurementToolMode;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
+import net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.SegmentActionsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.SplitSegmentDialogFragment;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteListener;
-import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -1196,9 +1195,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					segmentsCard.updateContent();
 				}
 			} else if (buttonIndex == ANALYZE_ON_MAP_BUTTON_INDEX) {
-				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, null);
-				OsmAndTaskManager.executeTask(detailsTask);
-				hide();
+				openTrackAnalyzeOnMap(gpxFile);
 			} else if (buttonIndex == ANALYZE_BY_INTERVALS_BUTTON_INDEX) {
 				TrkSegment segment = gpxFile.getGeneralSegment();
 				if (segment == null) {
@@ -1542,6 +1539,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		hide();
 	}
 
+	private void openTrackAnalyzeOnMap(@NonNull GpxFile gpxFile) {
+		GpxTrackAnalysis analysis = this.analysis != null ? this.analysis : selectedGpxFile.getTrackAnalysisToDisplay(app);
+		GpxDisplayItem gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, TrackDetailsMenu.ChartPointLayer.GPX, analysis);
+		if (gpxItem != null) {
+			GPXItemPagerAdapter.prepareGpxItemChartTypes(gpxItem, null, app.getSettings());
+			openAnalyzeOnMap(gpxItem);
+		}
+	}
+
 	@Override
 	public void openGetAltitudeBottomSheet(@NonNull GpxDisplayItem gpxItem) {
 		showTrackAltitudeDialog(getSegmentIndex(gpxItem));
@@ -1760,28 +1766,38 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	public static void loadSelectedGpxFile(@NonNull MapActivity mapActivity, @Nullable String path,
+	public static void loadSelectedGpxFile(@NonNull MapActivity activity, @Nullable String path,
 	                                       boolean showCurrentTrack,
 	                                       @NonNull CallbackWithObject<SelectedGpxFile> callback) {
-		OsmandApplication app = mapActivity.getApp();
-		SelectedGpxFile selectedGpxFile;
-		if (showCurrentTrack) {
-			selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-		} else {
-			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(path);
-		}
+		OsmandApplication app = AndroidUtils.getApp(activity);
+
+		SelectedGpxFile selectedGpxFile = showCurrentTrack
+				? app.getSavingTrackHelper().getCurrentTrack()
+				: app.getSelectedGpxHelper().getSelectedFileByPath(path);
+
 		if (selectedGpxFile != null) {
 			callback.processResult(selectedGpxFile);
 		} else if (!Algorithms.isEmpty(path)) {
-			GpxFileLoaderTask.loadGpxFile(new File(path), mapActivity, gpx -> {
-				GpxSelectionParams params = GpxSelectionParams.newInstance().showOnMap()
-						.syncGroup().selectedByUser().addToHistory().addToMarkers().saveSelection();
-				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, params);
-				if (sf != null) {
-					callback.processResult(sf);
-				}
-				return true;
-			});
+			GpxFile gpxFile = app.getSelectedGpxHelper().getBackupedFileByPath(path);
+			if (gpxFile != null) {
+				selectAndProcessGpx(app, gpxFile, callback);
+			} else {
+				GpxFileLoaderTask.loadGpxFile(new File(path), activity, gpx -> {
+					selectAndProcessGpx(app, gpx, callback);
+					return true;
+				});
+			}
+		}
+	}
+
+	private static void selectAndProcessGpx(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
+	                                        @NonNull CallbackWithObject<SelectedGpxFile> callback) {
+		GpxSelectionParams params = GpxSelectionParams.newInstance().showOnMap().syncGroup()
+				.selectedByUser().addToHistory().addToMarkers().saveSelection();
+
+		SelectedGpxFile selectGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
+		if (selectGpxFile != null) {
+			callback.processResult(selectGpxFile);
 		}
 	}
 

@@ -3,22 +3,31 @@ package net.osmand.plus.views.mapwidgets.utils;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
+import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
-import net.osmand.plus.views.mapwidgets.widgets.MapMarkerSideWidget;
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.shared.settings.enums.SpeedConstants;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AverageSpeedComputer extends AverageValueComputer {
+
+	private final List<MapWidgetInfo> widgetInfos = new ArrayList<>();
 
 	public AverageSpeedComputer(@NonNull OsmandApplication app) {
 		super(app);
@@ -26,16 +35,30 @@ public class AverageSpeedComputer extends AverageValueComputer {
 
 	@Override
 	protected boolean isEnabled() {
+		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
+		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
+		if (mapInfoLayer == null) {
+			return false;
+		}
+		MapActivity activity = mapInfoLayer.getMapActivity();
+		if (activity == null) {
+			return false;
+		}
 		ApplicationMode appMode = settings.getApplicationMode();
-		MapWidgetRegistry registry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
+		MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
 
-		for (MapWidgetInfo widgetInfo : registry.getAllWidgets()) {
-			MapWidget widget = widgetInfo.widget;
-			boolean usesAverageSpeed = widget instanceof AverageSpeedWidget || widget instanceof MapMarkerSideWidget;
-			if (usesAverageSpeed
-					&& widgetInfo.isEnabledForAppMode(appMode, ScreenLayoutMode.getDefault(widget.getMapActivity()))
-					&& WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, appMode)) {
-				return true;
+		widgetInfos.clear();
+		widgetRegistry.collectWidgetsInfo(widgetInfos, appMode, layoutMode, null, null, true);
+
+		for (int i = 0; i < widgetInfos.size(); i++) {
+			MapWidgetInfo widgetInfo = widgetInfos.get(i);
+			WidgetType type = widgetInfo.getWidgetType();
+
+			if (type == AVERAGE_SPEED || type == SIDE_MARKER_1 || type == SIDE_MARKER_2) {
+				if (WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, appMode)) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -74,10 +97,8 @@ public class AverageSpeedComputer extends AverageValueComputer {
 		int countedLocations = 0;
 		float speedToSkip = getSpeedToSkipInMetersPerSecond();
 
-		// Iterate over the concurrent queue
 		for (Location location : locations) {
 			long locationTime = location.getTime();
-
 			// Check if the location is within the measured interval and after the start timestamp
 			if (locationTime >= startTimestamp && now - locationTime <= measuredInterval) {
 				if (!skipLowSpeed || location.getSpeed() >= speedToSkip) {
@@ -90,17 +111,10 @@ public class AverageSpeedComputer extends AverageValueComputer {
 	}
 
 	public static int getConvertedSpeedToSkip(@NonNull SpeedConstants speedSystem) {
-		switch (speedSystem) {
-			case METERS_PER_SECOND:
-			case KILOMETERS_PER_HOUR:
-			case MILES_PER_HOUR:
-			case NAUTICALMILES_PER_HOUR:
-				return 1;
-			case MINUTES_PER_KILOMETER:
-			case MINUTES_PER_MILE:
-				return 60;
-			default:
-				throw new IllegalStateException("Unsupported speed system");
-		}
+		return switch (speedSystem) {
+			case METERS_PER_SECOND, KILOMETERS_PER_HOUR, MILES_PER_HOUR, NAUTICALMILES_PER_HOUR -> 1;
+			case MINUTES_PER_KILOMETER, MINUTES_PER_MILE -> 60;
+			default -> throw new IllegalStateException("Unsupported speed system");
+		};
 	}
 }
