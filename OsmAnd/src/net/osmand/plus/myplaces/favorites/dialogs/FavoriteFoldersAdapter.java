@@ -61,7 +61,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 		sortMode = FavoriteListSortMode.NAME_ASCENDING;
 
-		setHasStableIds(true);
+		setHasStableIds(false);
 	}
 
 	public void setItems(@NonNull List<Object> items) {
@@ -237,20 +237,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	@Override
 	public long getItemId(int position) {
-		Object object = items.get(position);
-
-		if (object instanceof Integer integer) {
-			return integer.longValue();
-		} else {
-			if (object instanceof FavouritePoint favouritePoint) {
-				return favouritePoint.hashCode();
-			} else if (object instanceof FavoriteGroup favoriteGroup) {
-				return favoriteGroup.hashCode();
-			} else if (object instanceof FavoriteFolderAnalysis) {
-				return TYPE_FOLDER_STATS;
-			}
-		}
-		return super.getItemId(position);
+		return RecyclerView.NO_ID;
 	}
 
 	@Override
