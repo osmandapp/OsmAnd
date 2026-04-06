@@ -47,6 +47,7 @@ public class MapPoiTypes {
 	Map<String, PoiType> defaultPoiTypesByTag = new HashMap<String, PoiType>();
 	Map<String, String> deprecatedTags = new LinkedHashMap<String, String>();
 	Map<String, String> poiAdditionalCategoryIconNames = new LinkedHashMap<String, String>();
+	Map<String, Integer> poiCategoryIndex = new HashMap<>();
 	List<PoiType> textPoiAdditionals = new ArrayList<PoiType>();
 
 	public Map<String, PoiType> topIndexPoiAdditional = new LinkedHashMap<String, PoiType>();
@@ -340,6 +341,10 @@ public class MapPoiTypes {
 		if (name.equals("historic") && !create) {
 			name = "tourism";
 		}
+		if (poiCategoryIndex.containsKey(name)) {
+			int ind = poiCategoryIndex.get(name);
+			return categories.get(ind);
+		}
 		int size = categories.size();
 		for (int i = 0; i < size; i++) {
 			PoiCategory category = categories.get(i);
@@ -362,6 +367,7 @@ public class MapPoiTypes {
 		List<PoiCategory> categories = new ArrayList<>(this.categories);
 		categories.add(category);
 		this.categories = categories;
+		reindexCategories();
 	}
 	
 	public List<PoiCategory> getCategories() {
@@ -377,6 +383,7 @@ public class MapPoiTypes {
 		List<PoiCategory> categories = new ArrayList<>(this.categories);
 		sortList(categories);
 		this.categories = categories;
+		reindexCategories();
 	}
 
 	public void init() {
@@ -612,6 +619,7 @@ public class MapPoiTypes {
 			}
 		}
 		this.categories = categoriesList;
+		reindexCategories();
 		this.poiTypesByTag = poiTypesByTag;
 		this.deprecatedTags = deprecatedTags;
 		this.poiAdditionalCategoryIconNames = poiAdditionalCategoryIconNames;
@@ -1145,5 +1153,14 @@ public class MapPoiTypes {
 			}
 		}
 		return publicTransportTypes;
+	}
+
+	private void reindexCategories() {
+		poiCategoryIndex.clear();
+		for (int i = 0; i < categories.size(); i++) {
+			PoiCategory pc = categories.get(i);
+			String keyName = pc.getKeyName();
+			poiCategoryIndex.put(keyName, i);
+		}
 	}
 }
