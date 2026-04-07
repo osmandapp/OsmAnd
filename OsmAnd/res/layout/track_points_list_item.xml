@@ -148,10 +148,10 @@
 				android:layout_height="@dimen/acceptable_touch_radius"
 				android:layout_marginEnd="@dimen/list_item_button_padding">
 
-				<androidx.appcompat.widget.AppCompatImageView
+				<ImageButton
 					android:id="@+id/go_to_point_location_icon"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
+					android:layout_width="@dimen/acceptable_touch_radius"
+					android:layout_height="@dimen/acceptable_touch_radius"
 					android:layout_gravity="center"
 					android:background="?attr/dashboard_button"
 					android:contentDescription="@string/shared_string_more"

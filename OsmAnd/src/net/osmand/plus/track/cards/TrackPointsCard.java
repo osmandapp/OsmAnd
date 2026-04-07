@@ -21,6 +21,7 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -568,18 +569,17 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 					updateSelectionMode();
 				});
 			}
-			ImageView goToLocationIcon = row.findViewById(R.id.go_to_point_location_icon);
-			View goToLocationView = row.findViewById(R.id.go_to_point_location);
+			ImageButton goToLocationIcon = row.findViewById(R.id.go_to_point_location_icon);
 			boolean isTrackPoint = GpxDisplayItemType.TRACK_POINTS == group.getType();
-			AndroidUiHelper.updateVisibility(goToLocationView, isTrackPoint);
-			goToLocationView.setOnClickListener((v) -> {
+			AndroidUiHelper.updateVisibility(goToLocationIcon, isTrackPoint);
+			goToLocationIcon.setOnClickListener((v) -> {
 				WptPt wpt = gpxItem.locationStart;
 				double lon = wpt.getLon();
 				double lat = wpt.getLat();
 				selectedWptLatLon = new LatLon(lat, lon);
 				notifyButtonPressed(OptionsCard.CENTER_MAP_ON_LOCATION_BUTTON_INDEX);
 			});
-			int iconColor = ColorUtilities.getSecondaryIconColorId(nightMode);
+			int iconColor = ColorUtilities.getDefaultIconColorId(nightMode);
 			goToLocationIcon.setImageDrawable(getColoredIcon(R.drawable.ic_action_marker_dark, iconColor));
 			goToLocationIcon.setContentDescription(String.format(app.getString(R.string.show_something_on_map), gpxItem.name));
 			if (isTrackPoint) {
