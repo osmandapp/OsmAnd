@@ -1,12 +1,18 @@
 package net.osmand.plus.plugins.astronomy.views.contextmenu
 
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.AbsoluteSizeSpan
+import android.text.style.SuperscriptSpan
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
+import net.osmand.plus.utils.AndroidUtils
 import java.time.LocalDate
 
 class AstroScheduleCardViewHolder(
@@ -18,9 +24,7 @@ class AstroScheduleCardViewHolder(
 
 	private data class TimeBlockViews(
 		val arrowView: TextView,
-		val timeMainView: TextView,
-		val meridiemView: TextView,
-		val suffixView: TextView? = null
+		val timeView: TextView
 	)
 
 	private data class DayRowViews(
@@ -36,11 +40,18 @@ class AstroScheduleCardViewHolder(
 	private val noteText: TextView = itemView.findViewById(R.id.schedule_note)
 	private val dateButton: View = itemView.findViewById(R.id.schedule_date_button)
 	private val prevButton: View = itemView.findViewById(R.id.schedule_prev_button)
+	private val prevButtonIcon: ImageView = itemView.findViewById(R.id.schedule_prev_icon)
 	private val nextButton: View = itemView.findViewById(R.id.schedule_next_button)
+	private val nextButtonIcon: ImageView = itemView.findViewById(R.id.schedule_next_icon)
 	private val daysContainer: LinearLayout = itemView.findViewById(R.id.schedule_days_container)
+	private val meridiemTextSizePx: Int =
+		itemView.resources.getDimensionPixelSize(R.dimen.astro_schedule_meridiem_text_size)
+	private val suffixTextSizePx: Int =
+		itemView.resources.getDimensionPixelSize(R.dimen.astro_schedule_suffix_text_size)
 	private val rowViews = ArrayList<DayRowViews>(AstroScheduleCardController.PERIOD_DAYS)
 
 	fun bind(item: AstroScheduleCardItem) {
+		updateNavigationIcons()
 		rangeText.text = item.rangeLabel
 		noteText.isVisible = item.days.any { day -> day.setDayOffset > 0 }
 		dateButton.isVisible = item.showResetPeriodButton
@@ -73,14 +84,11 @@ class AstroScheduleCardViewHolder(
 				dayLabelView = rowView.findViewById(R.id.schedule_day_label),
 				riseViews = TimeBlockViews(
 					arrowView = rowView.findViewById(R.id.schedule_rise_arrow),
-					timeMainView = rowView.findViewById(R.id.schedule_rise_time_main),
-					meridiemView = rowView.findViewById(R.id.schedule_rise_time_meridiem)
+					timeView = rowView.findViewById(R.id.schedule_rise_time_main)
 				),
 				setViews = TimeBlockViews(
 					arrowView = rowView.findViewById(R.id.schedule_set_arrow),
-					timeMainView = rowView.findViewById(R.id.schedule_set_time_main),
-					meridiemView = rowView.findViewById(R.id.schedule_set_time_meridiem),
-					suffixView = rowView.findViewById(R.id.schedule_set_next_day)
+					timeView = rowView.findViewById(R.id.schedule_set_time_main)
 				),
 				dayGraphView = rowView.findViewById(R.id.schedule_day_graph),
 				divider = rowView.findViewById(R.id.schedule_row_divider)
@@ -103,11 +111,7 @@ class AstroScheduleCardViewHolder(
 			block = row.setViews,
 			time = dayEntry.setTime,
 			arrow = SET_ARROW,
-			suffix = if (dayEntry.setDayOffset > 0) {
-				"+${dayEntry.setDayOffset}"
-			} else {
-				null
-			}
+			suffix = nextDaySuffix(dayEntry.setDayOffset)
 		)
 		row.dayGraphView.submitModel(dayEntry.graph)
 		row.root.setOnClickListener { onSelectDate(dayEntry.date) }
@@ -130,15 +134,8 @@ class AstroScheduleCardViewHolder(
 		arrow: String,
 		suffix: String? = null
 	) {
-		val parts = splitTimeParts(time)
 		block.arrowView.text = arrow
-		block.timeMainView.text = parts.main
-		block.meridiemView.isVisible = !parts.meridiem.isNullOrBlank()
-		block.meridiemView.text = parts.meridiem.orEmpty()
-		block.suffixView?.let { suffixView ->
-			suffixView.isVisible = !suffix.isNullOrBlank()
-			suffixView.text = suffix.orEmpty()
-		}
+		block.timeView.text = buildTimeText(time, suffix)
 	}
 
 	private fun splitTimeParts(time: String?): TimeParts {
@@ -153,6 +150,50 @@ class AstroScheduleCardViewHolder(
 			main = tokens.dropLast(1).joinToString(" "),
 			meridiem = tokens.last()
 		)
+	}
+
+	private fun buildTimeText(time: String?, suffix: String?): CharSequence {
+		val parts = splitTimeParts(time)
+		if (parts.main == EMPTY_TIME) {
+			return EMPTY_TIME
+		}
+		return SpannableStringBuilder(parts.main).apply {
+			if (!parts.meridiem.isNullOrBlank()) {
+				append(' ')
+				val meridiemStart = length
+				append(parts.meridiem)
+				setSpan(
+					AbsoluteSizeSpan(meridiemTextSizePx),
+					meridiemStart,
+					length,
+					Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+				)
+			}
+			if (!suffix.isNullOrBlank()) {
+				val suffixStart = length
+				append(suffix)
+				setSpan(
+					SuperscriptSpan(),
+					suffixStart,
+					length,
+					Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+				)
+				setSpan(
+					AbsoluteSizeSpan(suffixTextSizePx),
+					suffixStart,
+					length,
+					Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+				)
+			}
+		}
+	}
+
+	private fun nextDaySuffix(dayOffset: Int): String? = if (dayOffset > 0) "+$dayOffset" else null
+
+	private fun updateNavigationIcons() {
+		val isLayoutRtl = AndroidUtils.isLayoutRtl(itemView.context)
+		prevButtonIcon.setImageResource(if (isLayoutRtl) R.drawable.ic_arrow_forward else R.drawable.ic_arrow_back)
+		nextButtonIcon.setImageResource(if (isLayoutRtl) R.drawable.ic_arrow_back else R.drawable.ic_arrow_forward)
 	}
 
 	private companion object {
