@@ -358,40 +358,13 @@ class AstroVisibilityCardController(
 
 	private fun searchBasemapCities(latLon: LatLon): MutableList<Amenity> {
 		val rect = MapUtils.calculateLatLonBbox(latLon.latitude, latLon.longitude, CITY_SEARCH_RADIUS_METERS)
-		val top31 = MapUtils.get31TileNumberY(rect.top)
-		val left31 = MapUtils.get31TileNumberX(rect.left)
-		val bottom31 = MapUtils.get31TileNumberY(rect.bottom)
-		val right31 = MapUtils.get31TileNumberX(rect.right)
-		val closedAmenities = HashSet<Long>()
-		val cities = ArrayList<Amenity>()
-		val repositories = app.resourceManager.amenitySearcher.getAmenityRepositories(false, null)
-
-		for (repository in repositories) {
-			if (!repository.isWorldMap || !repository.checkContainsInt(top31, left31, bottom31, right31)) {
-				continue
-			}
-			val foundAmenities = repository.searchAmenities(
-				top31,
-				left31,
-				bottom31,
-				right31,
-				-1,
-				cityFilter,
-				null,
-				null
-			) ?: continue
-			for (amenity in foundAmenities) {
-				val amenityId = amenity.id
-				if (amenity.isClosed) {
-					if (amenityId != null) {
-						closedAmenities.add(amenityId)
-					}
-				} else if (amenityId == null || !closedAmenities.contains(amenityId)) {
-					cities.add(amenity)
-				}
-			}
-		}
-		return cities
+		return app.resourceManager.amenitySearcher.searchWorldMapAmenities(
+			cityFilter,
+			rect,
+			false,
+			null,
+			null
+		).toMutableList()
 	}
 
 	private fun sortCities(cities: MutableList<Amenity>, latLon: LatLon) {

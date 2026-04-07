@@ -752,15 +752,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	public static String getCardinalDirectionForDegrees(double degrees) {
-		while (degrees < 0) {
-			degrees += 360;
-		}
-		int index = (int) Math.floor(((degrees + 22.5) % 360) / 45);
-		if (index >= 0 && CARDINAL_DIRECTIONS.length > index) {
-			return CARDINAL_DIRECTIONS[index];
-		} else {
-			return "";
-		}
+		return OsmAndFormatter.getCardinalDirectionForDegrees(degrees);
 	}
 
 	private enum TextAlignment {
