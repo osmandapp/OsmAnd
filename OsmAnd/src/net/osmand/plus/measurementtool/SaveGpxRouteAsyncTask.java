@@ -170,8 +170,13 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
         }
 
         ApplicationMode appMode = editingCtx.getAppMode();
-        String selectedId = app.getSettings().CURRENT_TRACK_ROUTE_ACTIVITY.getModeValue(appMode);
-        metadata.setRouteActivity(helper.findRouteActivity(selectedId));
+        if (appMode == MeasurementEditingContext.DEFAULT_APP_MODE) {
+            appMode = app.getSettings().getApplicationMode();
+        }
+        String activityId = app.getSettings().CURRENT_TRACK_ROUTE_ACTIVITY.getProfileDefaultValue(appMode);
+        if (!Algorithms.isEmpty(activityId)) {
+            metadata.setRouteActivity(helper.findRouteActivity(activityId));
+        }
     }
 
     @Override
