@@ -9,13 +9,21 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.osmand.binary.BinaryMapIndexReader
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter
+import net.osmand.data.Amenity
+import net.osmand.data.City.CityType
 import net.osmand.data.LatLon
 import net.osmand.plus.GeocodingLookupService
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
+import net.osmand.plus.utils.OsmAndFormatter
+import net.osmand.plus.utils.OsmAndFormatterParams
+import net.osmand.osm.PoiCategory
 import net.osmand.util.Algorithms
+import net.osmand.util.MapUtils
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -25,6 +33,10 @@ import kotlin.math.abs
 class AstroVisibilityCardController(
 	private val app: OsmandApplication
 ) {
+
+	companion object {
+		private const val CITY_SEARCH_RADIUS_METERS = 50 * 1000
+	}
 
 	var skyObject: SkyObject? = null
 		private set
@@ -55,6 +67,7 @@ class AstroVisibilityCardController(
 
 	private var lastLocationLatLon: LatLon? = null
 	private var locationLookupRequest: GeocodingLookupService.AddressLookupRequest? = null
+	private var locationResolveJob: Job? = null
 	private var graphSnapshot: AstroVisibilityGraphSnapshot? = null
 	private var graphObjectId: String? = null
 	private var graphObserverLat = Double.NaN
@@ -63,6 +76,16 @@ class AstroVisibilityCardController(
 	private var computeScope = createScope()
 	private var computeJob: Job? = null
 	private val titleDateFormatter = DateTimeFormatter.ofPattern("EEEE, MMMM d", Locale.getDefault())
+	private val cityTypes = CityType.entries.associateBy { it.name.lowercase(Locale.ROOT) }
+	private val cityFilter = object : SearchPoiTypeFilter {
+		override fun accept(type: PoiCategory, subcategory: String): Boolean {
+			return cityTypes.containsKey(subcategory)
+		}
+
+		override fun isEmpty(): Boolean {
+			return false
+		}
+	}
 
 	fun update(
 		skyObject: SkyObject?,
@@ -122,9 +145,9 @@ class AstroVisibilityCardController(
 		val locationChanged = lastLocationLatLon != location
 		lastLocationLatLon = location
 		if (locationChanged) {
-			requestAddress(location)
-		} else if (Algorithms.isEmpty(locationText) && locationLookupRequest == null) {
-			requestAddress(location)
+			requestLocationText(location)
+		} else if (Algorithms.isEmpty(locationText) && locationLookupRequest == null && locationResolveJob == null) {
+			requestLocationText(location)
 		}
 	}
 
@@ -152,6 +175,8 @@ class AstroVisibilityCardController(
 	}
 
 	private fun cancelPendingLookups() {
+		locationResolveJob?.cancel()
+		locationResolveJob = null
 		locationLookupRequest?.let { request ->
 			app.geocodingLookupService.cancel(request)
 		}
@@ -243,9 +268,36 @@ class AstroVisibilityCardController(
 		}
 	}
 
-	private fun requestAddress(latLon: LatLon) {
+	private fun requestLocationText(latLon: LatLon) {
 		cancelPendingLookups()
+		ensureScope()
+		locationResolveJob = computeScope.launch {
+			val coords = formatCoordinates(latLon.latitude, latLon.longitude)
+			val hasDetailedMap = withContext(Dispatchers.Default) {
+				hasDetailedMap(latLon)
+			}
+			if (!isActive || lastLocationLatLon != latLon) {
+				return@launch
+			}
+			if (hasDetailedMap) {
+				locationResolveJob = null
+				requestAddress(latLon)
+				return@launch
+			}
+			val resolvedText = withContext(Dispatchers.Default) {
+				findNearestBasemapCity(latLon)?.let { nearbyCity ->
+					formatNearbyCity(nearbyCity)
+				} ?: coords
+			}
+			if (!isActive || lastLocationLatLon != latLon) {
+				return@launch
+			}
+			updateLocationText(resolvedText)
+			locationResolveJob = null
+		}
+	}
 
+	private fun requestAddress(latLon: LatLon) {
 		var createdRequest: GeocodingLookupService.AddressLookupRequest? = null
 		val resultCallback = GeocodingLookupService.OnAddressLookupResult { address ->
 			if (locationLookupRequest !== createdRequest) {
@@ -254,10 +306,7 @@ class AstroVisibilityCardController(
 			val currentLocation = lastLocationLatLon ?: latLon
 			val coords = formatCoordinates(currentLocation.latitude, currentLocation.longitude)
 			val resolvedText = extractCity(address) ?: coords
-			if (locationText != resolvedText) {
-				locationText = resolvedText
-				onDataChanged?.invoke()
-			}
+			updateLocationText(resolvedText)
 			locationLookupRequest = null
 		}
 		val progressCallback = GeocodingLookupService.OnAddressLookupProgress {
@@ -267,6 +316,81 @@ class AstroVisibilityCardController(
 			GeocodingLookupService.AddressLookupRequest(latLon, resultCallback, progressCallback)
 		locationLookupRequest = createdRequest
 		app.geocodingLookupService.lookupAddress(createdRequest)
+	}
+
+	private fun hasDetailedMap(latLon: LatLon): Boolean {
+		val x31 = MapUtils.get31TileNumberX(latLon.longitude)
+		val y31 = MapUtils.get31TileNumberY(latLon.latitude)
+		for (resource in app.resourceManager.fileReaders) {
+			val shallowReader = resource.shallowReader ?: continue
+			if (!shallowReader.isBasemap &&
+				shallowReader.containsMapData(
+					x31,
+					y31,
+					x31,
+					y31,
+					BinaryMapIndexReader.DETAILED_MAP_MIN_ZOOM
+				)
+			) {
+				return true
+			}
+		}
+		return false
+	}
+
+	private fun findNearestBasemapCity(latLon: LatLon): NearbyCity? {
+		val cities = searchBasemapCities(latLon)
+		if (cities.isEmpty()) {
+			return null
+		}
+		sortCities(cities, latLon)
+		val city = cities.first()
+		val lang = app.settings.MAP_PREFERRED_LOCALE.get()
+		val transliterate = app.settings.MAP_TRANSLITERATE_NAMES.get()
+		val cityName = city.getName(lang, transliterate).trim()
+			.ifEmpty { city.name.trim() }
+			.ifEmpty { return null }
+		return NearbyCity(
+			name = cityName,
+			distanceMeters = MapUtils.getDistance(latLon, city.location)
+		)
+	}
+
+	private fun searchBasemapCities(latLon: LatLon): MutableList<Amenity> {
+		val rect = MapUtils.calculateLatLonBbox(latLon.latitude, latLon.longitude, CITY_SEARCH_RADIUS_METERS)
+		return app.resourceManager.amenitySearcher.searchWorldMapAmenities(
+			cityFilter,
+			rect,
+			false,
+			null,
+			null
+		).toMutableList()
+	}
+
+	private fun sortCities(cities: MutableList<Amenity>, latLon: LatLon) {
+		cities.sortWith { first, second ->
+			val firstRadius = cityTypes[first.subType]?.radius ?: 1000.0
+			val secondRadius = cityTypes[second.subType]?.radius ?: 1000.0
+			val firstDistance = MapUtils.getDistance(latLon, first.location) / firstRadius
+			val secondDistance = MapUtils.getDistance(latLon, second.location) / secondRadius
+			firstDistance.compareTo(secondDistance)
+		}
+	}
+
+	private fun formatNearbyCity(city: NearbyCity): String {
+		val formattedDistance = OsmAndFormatter.getFormattedDistance(
+			city.distanceMeters.toFloat(),
+			app,
+			OsmAndFormatterParams.NO_TRAILING_ZEROS
+		)
+		return "${city.name} ($formattedDistance)"
+	}
+
+	private fun updateLocationText(resolvedText: String) {
+		if (locationText != resolvedText) {
+			locationText = resolvedText
+			onDataChanged?.invoke()
+		}
 	}
 
 	private fun createTimeFormatter(): DateTimeFormatter {
@@ -314,4 +438,9 @@ class AstroVisibilityCardController(
 			computeScope = createScope()
 		}
 	}
+
+	private data class NearbyCity(
+		val name: String,
+		val distanceMeters: Double
+	)
 }

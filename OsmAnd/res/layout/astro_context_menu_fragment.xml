@@ -79,10 +79,11 @@
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:layout_marginBottom="6dp"
+								android:gravity="center_vertical"
 								android:minHeight="54dp"
 								android:orientation="horizontal"
 								android:paddingStart="16dp"
-								android:paddingEnd="4dp"
+								android:paddingEnd="16dp"
 								app:layout_constraintEnd_toEndOf="parent"
 								app:layout_constraintStart_toStartOf="parent"
 								app:layout_constraintTop_toBottomOf="@+id/header_drag">
@@ -90,18 +91,22 @@
 								<LinearLayout
 									android:layout_width="0dp"
 									android:layout_height="wrap_content"
+									android:layout_marginEnd="4dp"
 									android:layout_weight="1"
+									android:gravity="center_vertical"
 									android:orientation="vertical">
 
 									<TextView
 										android:id="@+id/header_title"
 										style="@style/MaterialAlertDialog.Material3.Title.Text"
-										android:layout_width="wrap_content"
+										android:layout_width="match_parent"
 										android:layout_height="wrap_content"
 										android:layout_gravity="center_vertical"
 										android:layout_marginTop="6dp"
-										android:gravity="center_vertical"
+										android:ellipsize="end"
+										android:gravity="start|center_vertical"
 										android:lines="1"
+										android:textAlignment="viewStart"
 										tools:text="Sun"
 										android:textAppearance="?attr/textAppearanceHeadlineSmall"
 										android:textColor="?android:attr/textColorPrimary"
@@ -110,8 +115,10 @@
 
 									<TextView
 										android:id="@+id/header_subtitle"
-										android:layout_width="wrap_content"
+										android:layout_width="match_parent"
 										android:layout_height="wrap_content"
+										android:gravity="start|center_vertical"
+										android:textAlignment="viewStart"
 										tools:text="Star • Solar system"
 										android:textColor="?android:attr/textColorSecondary"
 										android:textSize="14sp" />
@@ -124,7 +131,7 @@
 									android:layout_width="48dp"
 									android:layout_height="48dp"
 									android:layout_gravity="top|center_horizontal"
-									android:layout_marginEnd="4dp"
+									android:layout_marginEnd="0dp"
 									android:background="?attr/selectableItemBackground">
 
 									<FrameLayout
@@ -391,10 +398,11 @@
 									android:layout_width="match_parent"
 									android:layout_height="wrap_content"
 									android:layout_marginBottom="6dp"
+									android:gravity="center_vertical"
 									android:minHeight="52dp"
 									android:orientation="horizontal"
 									android:paddingStart="16dp"
-									android:paddingEnd="4dp"
+									android:paddingEnd="16dp"
 									app:layout_constraintBottom_toBottomOf="parent"
 									app:layout_constraintEnd_toEndOf="parent"
 									app:layout_constraintStart_toStartOf="parent"
@@ -406,9 +414,12 @@
 										android:layout_width="0dp"
 										android:layout_height="wrap_content"
 										android:layout_gravity="center_vertical"
+										android:layout_marginEnd="4dp"
 										android:layout_weight="1"
-										android:gravity="center_vertical"
+										android:ellipsize="end"
+										android:gravity="start|center_vertical"
 										android:lines="1"
+										android:textAlignment="viewStart"
 										tools:text="Sun"
 										android:textAppearance="?attr/textAppearanceHeadlineSmall"
 										android:textColor="?android:attr/textColorPrimary"
@@ -420,7 +431,7 @@
 										android:layout_width="48dp"
 										android:layout_height="48dp"
 										android:layout_gravity="center"
-										android:layout_marginEnd="4dp"
+										android:layout_marginEnd="0dp"
 										android:background="?attr/selectableItemBackground">
 
 										<FrameLayout

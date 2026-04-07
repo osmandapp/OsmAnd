@@ -38,6 +38,7 @@ import net.osmand.plus.plugins.astronomy.Catalog
 import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.plugins.astronomy.StarMapFragment
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
+import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils
@@ -195,6 +196,9 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		val currentTime = getCurrentGraphTime()
 		val currentDate = currentTime.toLocalDate()
 		val objectChanged = uiState.selectedObjectId != obj.id
+		if (objectChanged) {
+			resetOverviewStateForNewObject()
+		}
 		uiState = if (objectChanged) {
 			galleryLoader?.cancel()
 			AstroContextUiState(
@@ -303,21 +307,27 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			locationTitle.text = app.getString(R.string.astro_locate)
 
 			directionIcon.setImageDrawable(
-				uiUtilities.getIcon(
-					if (obj.showDirection) {
-						R.drawable.ic_action_target_direction_on
-					} else {
-						R.drawable.ic_action_target_direction_off
-					},
-					ColorUtilities.getActiveIconColorId(nightMode)
+				AndroidUtils.getDrawableForDirection(
+					app,
+					uiUtilities.getIcon(
+						if (obj.showDirection) {
+							R.drawable.ic_action_target_direction_on
+						} else {
+							R.drawable.ic_action_target_direction_off
+						},
+						ColorUtilities.getActiveIconColorId(nightMode)
+					)
 				)
 			)
 			directionTitle.text = app.getString(R.string.astro_direction)
 
 			pathIcon.setImageDrawable(
-				uiUtilities.getIcon(
-					if (obj.showCelestialPath) R.drawable.ic_action_target_path_on else R.drawable.ic_action_target_path_off,
-					ColorUtilities.getActiveIconColorId(nightMode)
+				AndroidUtils.getDrawableForDirection(
+					app,
+					uiUtilities.getIcon(
+						if (obj.showCelestialPath) R.drawable.ic_action_target_path_on else R.drawable.ic_action_target_path_off,
+						ColorUtilities.getActiveIconColorId(nightMode)
+					)
 				)
 			)
 			pathTitle.text = app.getString(R.string.astro_path)
@@ -773,6 +783,23 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			SkyObject.Type.GALAXY_CLUSTER,
 			SkyObject.Type.BLACK_HOLE -> R.drawable.ic_action_galaxy
 		}
+	}
+
+	private fun resetOverviewStateForNewObject() {
+		selectedBottomTab = TAB_OVERVIEW
+		if (!::recyclerView.isInitialized || !::appBarLayout.isInitialized) {
+			return
+		}
+		cancelProgrammaticSectionScroll(syncBottomTabSelection = false)
+		recyclerView.stopScroll()
+		selectBottomTabWithoutScroll(TAB_OVERVIEW)
+		scrollToAdapterPositionExactly(0)
+		appBarLayout.setExpanded(true, false)
+		headerCard.alpha = 1f
+		headerCard.isClickable = true
+		collapsedToolbar.alpha = 0f
+		collapsedToolbar.isClickable = false
+		bottomSheetContainer?.let { updateBottomSheetVisuals(it.top) }
 	}
 
 	private fun scrollToSelectedTab(tabPosition: Int) {

@@ -27,28 +27,44 @@ class AstroDescriptionCardViewHolder(itemView: View) : RecyclerView.ViewHolder(i
 		descriptionTv.text = description
 		descriptionTv.isVisible = description.isNotBlank()
 
-		val wikipediaString = app.getString(R.string.shared_string_wikipedia)
-		val text = app.getString(R.string.read_on, wikipediaString)
-		val start = text.indexOf(wikipediaString)
-		val end = start + wikipediaString.length
+		val readMoreUri = item.readMoreUri
+		val linkType = item.linkType
+		readButton.isVisible = readMoreUri != null && linkType != null
+		if (readMoreUri == null || linkType == null) {
+			readButton.setOnClickListener(null)
+			return
+		}
+
+		val targetName = when (linkType) {
+			AstroDescriptionLinkType.WIKIPEDIA -> app.getString(R.string.shared_string_wikipedia)
+			AstroDescriptionLinkType.WIKIDATA -> app.getString(R.string.wikidata)
+		}
+		val text = app.getString(R.string.read_on, targetName)
+		val start = text.indexOf(targetName)
+		val end = start + targetName.length
 		val sp = SpannableString(text).apply {
-			setSpan(
-				ForegroundColorSpan(ColorUtilities.getActiveColor(app, nightMode)),
-				start,
-				end,
-				Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-			)
+			if (start >= 0) {
+				setSpan(
+					ForegroundColorSpan(ColorUtilities.getActiveColor(app, nightMode)),
+					start,
+					end,
+					Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+				)
+			}
 		}
 
 		readButton.text = sp
 		readButton.setTypeface(readButton.typeface, android.graphics.Typeface.NORMAL)
 		readButton.icon = app.uiUtilities.getPaintedIcon(
-			R.drawable.ic_plugin_wikipedia,
+			when (linkType) {
+				AstroDescriptionLinkType.WIKIPEDIA -> R.drawable.ic_plugin_wikipedia
+				AstroDescriptionLinkType.WIKIDATA -> R.drawable.ic_action_logo_wikidata
+			},
 			ColorUtilities.getDefaultIconColor(app, nightMode)
 		)
 
 		readButton.setOnClickListener {
-			onReadClick(item.wikiUri)
+			onReadClick(readMoreUri)
 		}
 	}
 }

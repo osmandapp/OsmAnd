@@ -90,6 +90,7 @@ public class OsmAndFormatter {
 	private static final String[] localDaysStr = getLettersStringArray(DateFormatSymbols.getInstance().getShortWeekdays(), 3);
 
 	public static final float MILS_IN_DEGREE = 17.777778f;
+	private static final String[] CARDINAL_DIRECTIONS = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
 
 	public static final int FORMAT_DEGREES_SHORT = 8;
 	public static final int FORMAT_DEGREES = LocationConvert.FORMAT_DEGREES;
@@ -352,6 +353,36 @@ public class OsmAndFormatter {
 
 	public static String getFormattedAzimuth(float bearing, OsmandApplication app) {
 		return getFormattedAzimuth(bearing, app.getSettings().ANGULAR_UNITS.get());
+	}
+
+	public static int getCardinalDirectionIndex(double degrees) {
+		while (degrees < 0) {
+			degrees += 360;
+		}
+		return (int) Math.floor(((degrees + 22.5) % 360) / 45);
+	}
+
+	@NonNull
+	public static String getCardinalDirectionForDegrees(double degrees) {
+		return CARDINAL_DIRECTIONS[getCardinalDirectionIndex(degrees)];
+	}
+
+	@NonNull
+	public static String getLocalizedCardinalDirection(@NonNull Context context, double degrees) {
+		String north = context.getString(R.string.north_abbreviation);
+		String east = context.getString(R.string.east_abbreviation);
+		String south = context.getString(R.string.south_abbreviation);
+		String west = context.getString(R.string.west_abbreviation);
+		return switch (getCardinalDirectionIndex(degrees)) {
+			case 0 -> north;
+			case 1 -> north + east;
+			case 2 -> east;
+			case 3 -> south + east;
+			case 4 -> south;
+			case 5 -> south + west;
+			case 6 -> west;
+			default -> north + west;
+		};
 	}
 
 	public static String getFormattedAzimuth(float bearing, AngularConstants angularConstant) {

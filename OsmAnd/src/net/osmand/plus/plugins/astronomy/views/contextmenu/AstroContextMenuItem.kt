@@ -25,6 +25,11 @@ enum class AstroKnowledgeCardState {
 	DOWNLOAD
 }
 
+enum class AstroDescriptionLinkType {
+	WIKIPEDIA,
+	WIKIDATA
+}
+
 sealed class AstroGalleryCardState {
 	data object Collapsed : AstroGalleryCardState()
 	data object Loading : AstroGalleryCardState()
@@ -62,7 +67,8 @@ data class AstroKnowledgeCardItem(
 
 data class AstroDescriptionCardItem(
 	val description: String,
-	val wikiUri: Uri
+	val readMoreUri: Uri? = null,
+	val linkType: AstroDescriptionLinkType? = null
 ) : AstroContextMenuItem {
 	override val key: AstroContextCardKey = AstroContextCardKey.DESCRIPTION
 }

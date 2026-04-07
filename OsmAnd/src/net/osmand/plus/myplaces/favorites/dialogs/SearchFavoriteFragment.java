@@ -168,7 +168,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		}
 		helper = app.getFavoritesHelper();
 
-		adapter = new FavoriteFoldersAdapter(requireMyPlacesActivity(), nightMode, getFavoriteFolderListener());
+		adapter = new FavoriteFoldersAdapter(requireMyPlacesActivity(), nightMode, true, getFavoriteFolderListener());
 		adapter.setSortFavoriteListener(this);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);

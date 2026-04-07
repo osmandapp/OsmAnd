@@ -466,7 +466,7 @@
 
 	<style name="Shape.CatalogChip">
 		<item name="cornerFamily">rounded</item>
-		<item name="cornerSize">12dp</item>
+		<item name="cornerSize">6dp</item>
 	</style>
 
 	<style name="Widget.App.Material.Switch"
