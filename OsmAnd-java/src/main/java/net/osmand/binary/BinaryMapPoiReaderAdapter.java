@@ -145,9 +145,6 @@ public class BinaryMapPoiReaderAdapter {
 	private record PoiNameQueryTokenMatch(String queryToken, String matchedPrefix) {
 	}
 
-	private record PoiNameSuffixDictionaryEntry(String resolvedSuffix) {
-	}
-
 	protected BinaryMapPoiReaderAdapter(BinaryMapIndexReader map) {
 		this.codedIS = map.codedIS;
 		this.map = map;
@@ -539,7 +536,7 @@ public class BinaryMapPoiReaderAdapter {
 
 	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
 			List<Integer> nameIndexCoordinates, PoiNameQueryTokenMatch tokenMatch) throws IOException {
-		List<PoiNameSuffixDictionaryEntry> suffixDictionary = Collections.emptyList();
+		List<String> suffixDictionary = Collections.emptyList();
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -562,12 +559,12 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private List<PoiNameSuffixDictionaryEntry> readSuffixDictionary(List<PoiNameSuffixDictionaryEntry> suffixDictionary) throws IOException {
-		List<PoiNameSuffixDictionaryEntry> dictionaryEntries = suffixDictionary == null || suffixDictionary.isEmpty()
+	private List<String> readSuffixDictionary(List<String> suffixDictionary) throws IOException {
+		List<String> dictionaryEntries = suffixDictionary == null || suffixDictionary.isEmpty()
 				? new ArrayList<>() : new ArrayList<>(suffixDictionary);
 		String encodedSuffix = codedIS.readString();
 		String resolvedSuffix = decodeSuffixDictionaryEntry(dictionaryEntries, encodedSuffix);
-		dictionaryEntries.add(new PoiNameSuffixDictionaryEntry(resolvedSuffix));
+		dictionaryEntries.add(resolvedSuffix);
 		return dictionaryEntries;
 	}
 
@@ -582,7 +579,7 @@ public class BinaryMapPoiReaderAdapter {
 		return encodedSuffix;
 	}
 
-	private static String decodeSuffixDictionaryEntry(List<PoiNameSuffixDictionaryEntry> dictionaryEntries, String encodedSuffix) {
+	private static String decodeSuffixDictionaryEntry(List<String> dictionaryEntries, String encodedSuffix) {
 		if (encodedSuffix.isEmpty()) {
 			return "";
 		}
@@ -590,7 +587,7 @@ public class BinaryMapPoiReaderAdapter {
 		boolean blockStart = dictionaryIndex % MARKER_BLOCK_SIZE == 0;
 		int markerCodePoint = encodedSuffix.codePointAt(0);
 		if (!blockStart && markerCodePoint >= MARKER_BASE && markerCodePoint <= MARKER_MAX) {
-            String previousSuffix = dictionaryEntries.get(dictionaryEntries.size() - 1).resolvedSuffix();
+            String previousSuffix = dictionaryEntries.get(dictionaryEntries.size() - 1);
 			int commonPrefixCodePointLength = markerCodePoint - MARKER_BASE;
 			int prefixEndOffset = previousSuffix.offsetByCodePoints(0,
 					Math.min(commonPrefixCodePointLength, previousSuffix.codePointCount(0, previousSuffix.length())));
@@ -601,7 +598,7 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	private boolean matchesSuffixDictionary(PoiNameQueryTokenMatch tokenMatch,
-											List<PoiNameSuffixDictionaryEntry> suffixDictionary, List<Integer> suffixBitsetWords) {
+											List<String> suffixDictionary, List<Integer> suffixBitsetWords) {
 		if (tokenMatch == null || tokenMatch.queryToken == null || tokenMatch.matchedPrefix == null) {
 			return true;
 		}
@@ -621,9 +618,8 @@ public class BinaryMapPoiReaderAdapter {
 			if ((word & (1 << (dictionaryIndex & 31))) == 0) {
 				continue;
 			}
-			PoiNameSuffixDictionaryEntry dictionaryEntry = suffixDictionary.get(dictionaryIndex);
-			if (dictionaryEntry.resolvedSuffix.equals(querySuffix)
-					|| dictionaryEntry.resolvedSuffix.startsWith(querySuffix)) {
+			String dictionaryEntry = suffixDictionary.get(dictionaryIndex);
+			if (dictionaryEntry.equals(querySuffix) || dictionaryEntry.startsWith(querySuffix)) {
 				return true;
 			}
 		}
@@ -632,7 +628,7 @@ public class BinaryMapPoiReaderAdapter {
 
 	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
 	                                      List<Integer> nameIndexCoordinates, PoiNameQueryTokenMatch tokenMatch,
-	                                      List<PoiNameSuffixDictionaryEntry> suffixDictionary) throws IOException {
+	                                      List<String> suffixDictionary) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 15;
@@ -816,9 +812,6 @@ public class BinaryMapPoiReaderAdapter {
 				long oldLim = codedIS.pushLimitLong((long) len);
 				long decodeStartNs = System.nanoTime();
 				Amenity am = readPoiPoint(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, x, y, zoom, req, region, false);
-				if (am != null)
-					System.out.println("Amenity: " + am.getName());
-				
 				metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
 				codedIS.popLimit(oldLim);
 				if (am != null) {
