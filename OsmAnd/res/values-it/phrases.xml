@@ -1073,9 +1073,9 @@
     <string name="poi_garden_style_english">Giardino di stile: inglese</string>
     <string name="poi_garden_style_japanese">Giardino di stile: giapponese</string>
     <string name="poi_capacity">Capacità</string>
-    <string name="poi_capacity_disabled_yes">Sì;Area disabili</string>
-    <string name="poi_capacity_disabled_no">Nessuno spazio dedicato per disabili</string>
-    <string name="poi_capacity_disabled">Spazi dedicati per disabili</string>
+    <string name="poi_capacity_disabled_yes">Sì;Area per persone con disabilità</string>
+    <string name="poi_capacity_disabled_no">Nessuno spazio dedicato a persone con disabilità</string>
+    <string name="poi_capacity_disabled">Spazi dedicati a persone con disabilità</string>
     <string name="poi_capacity_women_yes">Spazi dedicati per donne</string>
     <string name="poi_capacity_women_no">Nessuno spazio dedicato per donne</string>
     <string name="poi_capacity_women">Spazi dedicati per donne</string>
@@ -1641,7 +1641,7 @@
     <string name="poi_social_facility_for_senior">Anziani</string>
     <string name="poi_social_facility_for_child">Bambini</string>
     <string name="poi_social_facility_for_orphan">Orfani</string>
-    <string name="poi_social_facility_for_disabled">Disabili</string>
+    <string name="poi_social_facility_for_disabled">Persone con disabilità</string>
     <string name="poi_social_facility_for_mental_health">Pazienti con disturbi mentali</string>
     <string name="poi_social_facility_for_homeless">Senzatetto</string>
     <string name="poi_social_facility_for_migrant">Migranti</string>
@@ -2577,8 +2577,8 @@
     <string name="poi_hgv_designated">Riservato;Accesso riservato ai camion</string>
     <string name="poi_goods_yes">Sì;Accesso veicoli commerciali leggeri</string>
     <string name="poi_goods_designated">Riservato;Accesso riservato a veicoli commerciali leggeri</string>
-    <string name="poi_disabled_yes">Sì;Disabili</string>
-    <string name="poi_disabled_designated">Riservato;Accesso riservato per disabili</string>
+    <string name="poi_disabled_yes">Sì;Persone con disabilità</string>
+    <string name="poi_disabled_designated">Riservato;Accesso riservato a persone con disabilità</string>
     <string name="poi_denomination_united_methodist">Metodista Unita</string>
     <string name="poi_snowmobile_filter">Accesso alle motoslitte</string>
     <string name="poi_access_bus">Accesso agli autobus</string>
@@ -2590,7 +2590,7 @@
     <string name="poi_access_mofa">Accesso ai mofa</string>
     <string name="poi_access_hgv">Accesso ai mezzi pesanti</string>
     <string name="poi_access_goods">Accesso ai veicoli commerciali leggeri</string>
-    <string name="poi_access_disabled">Accesso ai mezzi per disabili</string>
+    <string name="poi_access_disabled">Accesso ai mezzi per persone con disabilità</string>
     <string name="poi_cash_withdrawal_bank_card">Prelievo di contanti</string>
     <string name="poi_craft_builder">Muratore</string>
     <string name="poi_craft_joiner">Falegname</string>
@@ -2642,7 +2642,7 @@
     <string name="poi_taxi_yes">Accesso taxi: sì</string>
     <string name="poi_taxi_designated">Accesso taxi: riservato</string>
     <string name="poi_taxi_no">Accesso taxi: no</string>
-    <string name="poi_disabled_no">Accesso per disabili: no</string>
+    <string name="poi_disabled_no">Accesso per persone con disabilità: no</string>
     <string name="poi_motorcycle_destination">Destinazione;Accesso a destinazione per i motocicli</string>
     <string name="poi_hgv_destination">Destinazione;Accesso a destinazione per i camion</string>
     <string name="poi_hgv_delivery">Consegna;Accesso ai camion per consegne</string>
