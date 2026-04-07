@@ -13,9 +13,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
@@ -81,6 +83,7 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
             String fileName = outFile.getName();
             String trackName = fileName.substring(0, fileName.length() - GPX_FILE_EXT.length());
             GpxFile gpx = generateGpxFile(editingContext, trackName, new GpxFile(Version.getFullVersion(app)));
+            savePreselectedRouteActivity(editingContext, app, gpx);
             res = SharedUtil.writeGpxFile(outFile, gpx);
             gpx.setPath(outFile.getAbsolutePath());
             savedGpxFile = gpx;
@@ -92,6 +95,7 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
             String trackName = Algorithms.getFileNameWithoutExtension(outFile);
             GpxFile gpx = generateGpxFile(editingContext, trackName, gpxFile);
             gpx.setMetadata(new Metadata(gpxFile.getMetadata()));
+            savePreselectedRouteActivity(editingContext, app, gpx);
             if (!gpx.isShowCurrentTrack()) {
                 res = SharedUtil.writeGpxFile(outFile, gpx);
             }
@@ -154,6 +158,20 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
             }
         }
         return gpx;
+    }
+
+    private void savePreselectedRouteActivity(@NonNull MeasurementEditingContext editingCtx,
+                                              @NonNull OsmandApplication app,
+                                              @NonNull GpxFile gpxFile) {
+        RouteActivityHelper helper = app.getRouteActivityHelper();
+        Metadata metadata = gpxFile.getMetadata();
+        if (metadata.getRouteActivity(helper.getActivities()) != null) {
+            return;
+        }
+
+        ApplicationMode appMode = editingCtx.getAppMode();
+        String selectedId = app.getSettings().CURRENT_TRACK_ROUTE_ACTIVITY.getModeValue(appMode);
+        metadata.setRouteActivity(helper.findRouteActivity(selectedId));
     }
 
     @Override
