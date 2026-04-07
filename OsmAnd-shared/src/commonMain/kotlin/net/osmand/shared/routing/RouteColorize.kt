@@ -113,7 +113,7 @@ class RouteColorize {
 		latitudes = listToArray(latList)
 		longitudes = listToArray(lonList)
 		values = if (type == ColorizationType.SLOPE) {
-			calculateSlopesByElevations(
+			SlopeCalculator.calculateSlopesByElevations(
 				latitudes,
 				longitudes,
 				listToArray(valList),
@@ -139,114 +139,6 @@ class RouteColorize {
 
 	private fun isValidPalette(palette: ColorPalette?): Boolean {
 		return palette != null && palette.colors.size >= 2
-	}
-
-	/**
-	 * Calculate slopes from elevations needs for right colorizing
-	 *
-	 * @param slopeRange - in what range calculate the derivative, usually we used
-	 * 150 meters
-	 * @return slopes array, in the begin and the end present NaN values!
-	 */
-	fun calculateSlopesByElevations(
-		latitudes: DoubleArray, longitudes: DoubleArray, elevations: DoubleArray,
-		slopeRange: Double
-	): DoubleArray {
-		var elevations = elevations
-		correctElevations(latitudes, longitudes, elevations)
-		val newElevations = elevations
-		for (i in 2 until elevations.size - 2) {
-			newElevations[i] =
-				(elevations[i - 2] + elevations[i - 1] + elevations[i] + elevations[i + 1]
-						+ elevations[i + 2])
-			newElevations[i] /= 5.0
-		}
-		elevations = newElevations
-		val slopes = DoubleArray(elevations.size)
-		if (latitudes.size != longitudes.size || latitudes.size != elevations.size) {
-			LOG.warn("Sizes of arrays latitudes, longitudes and values are not match")
-			return slopes
-		}
-		val distances = DoubleArray(elevations.size)
-		var totalDistance = 0.0
-		distances[0] = totalDistance
-		for (i in 0 until elevations.size - 1) {
-			totalDistance += KMapUtils.getDistance(
-				latitudes[i],
-				longitudes[i], latitudes[i + 1], longitudes[i + 1]
-			)
-			distances[i + 1] = totalDistance
-		}
-		for (i in elevations.indices) {
-			if (distances[i] < slopeRange / 2 || distances[i] > totalDistance - slopeRange / 2) {
-				slopes[i] = Double.NaN
-			} else {
-				val arg = findDerivativeArguments(distances, elevations, i, slopeRange)
-				slopes[i] = (arg[1] - arg[0]) / (arg[3] - arg[2])
-			}
-		}
-		return slopes
-	}
-
-	private fun correctElevations(
-		latitudes: DoubleArray,
-		longitudes: DoubleArray,
-		elevations: DoubleArray
-	) {
-		for (i in elevations.indices) {
-			if (elevations[i].isNaN()) {
-				var leftDist = MAX_CORRECT_ELEVATION_DISTANCE
-				var rightDist = MAX_CORRECT_ELEVATION_DISTANCE
-				var leftElevation = Double.NaN
-				var rightElevation = Double.NaN
-				var left = i - 1
-				while (left > 0 && leftDist <= MAX_CORRECT_ELEVATION_DISTANCE) {
-					if (!elevations[left].isNaN()) {
-						val dist: Double = KMapUtils.getDistance(
-							latitudes[left], longitudes[left], latitudes[i],
-							longitudes[i]
-						)
-						if (dist < leftDist) {
-							leftDist = dist
-							leftElevation = elevations[left]
-						} else {
-							break
-						}
-					}
-					left--
-				}
-				var right = i + 1
-				while (right < elevations.size && rightDist <= MAX_CORRECT_ELEVATION_DISTANCE) {
-					if (!elevations[right].isNaN()) {
-						val dist: Double = KMapUtils.getDistance(
-							latitudes[right], longitudes[right], latitudes[i],
-							longitudes[i]
-						)
-						if (dist < rightDist) {
-							rightElevation = elevations[right]
-							rightDist = dist
-						} else {
-							break
-						}
-					}
-					right++
-				}
-				if (!leftElevation.isNaN() && !rightElevation.isNaN()) {
-					elevations[i] = (leftElevation + rightElevation) / 2
-				} else if (leftElevation.isNaN() && !rightElevation.isNaN()) {
-					elevations[i] = rightElevation
-				} else if (!leftElevation.isNaN() && rightElevation.isNaN()) {
-					elevations[i] = leftElevation
-				} else {
-					for (right in i + 1 until elevations.size) {
-						if (!elevations[right].isNaN()) {
-							elevations[i] = elevations[right]
-							break
-						}
-					}
-				}
-			}
-		}
 	}
 
 	val result: List<RouteColorizationPoint>
@@ -388,68 +280,6 @@ class RouteColorize {
 			}
 		}
 		result.add(subDataList[subDataList.size - 1])
-		return result
-	}
-
-	/**
-	 * @return double[minElevation, maxElevation, minDist, maxDist]
-	 */
-	private fun findDerivativeArguments(
-		distances: DoubleArray,
-		elevations: DoubleArray,
-		index: Int,
-		slopeRange: Double
-	): DoubleArray {
-		val result = DoubleArray(4)
-		val minDist = distances[index] - slopeRange / 2
-		val maxDist = distances[index] + slopeRange / 2
-		result[0] = Double.NaN
-		result[1] = Double.NaN
-		result[2] = minDist
-		result[3] = maxDist
-		var closestMaxIndex = -1
-		var closestMinIndex = -1
-		for (i in index until distances.size) {
-			if (distances[i] == maxDist) {
-				result[1] = elevations[i]
-				break
-			}
-			if (distances[i] > maxDist) {
-				closestMaxIndex = i
-				break
-			}
-		}
-		for (i in index downTo 0) {
-			if (distances[i] == minDist) {
-				result[0] = elevations[i]
-				break
-			}
-			if (distances[i] < minDist) {
-				closestMinIndex = i
-				break
-			}
-		}
-		if (closestMaxIndex > 0) {
-			val diff = distances[closestMaxIndex] - distances[closestMaxIndex - 1]
-			val coef = (maxDist - distances[closestMaxIndex - 1]) / diff
-			if (coef > 1 || coef < 0) {
-				LOG.warn("Coefficient fo max must be 0..1 , coef=$coef")
-			}
-			result[1] =
-				(1 - coef) * elevations[closestMaxIndex - 1] + coef * elevations[closestMaxIndex]
-		}
-		if (closestMinIndex >= 0) {
-			val diff = distances[closestMinIndex + 1] - distances[closestMinIndex]
-			val coef = (minDist - distances[closestMinIndex]) / diff
-			if (coef > 1 || coef < 0) {
-				LOG.warn("Coefficient for min must be 0..1 , coef=$coef")
-			}
-			result[0] =
-				(1 - coef) * elevations[closestMinIndex] + coef * elevations[closestMinIndex + 1]
-		}
-		if (result[0].isNaN() || result[1].isNaN()) {
-			LOG.warn("Elevations wasn't calculated")
-		}
 		return result
 	}
 
