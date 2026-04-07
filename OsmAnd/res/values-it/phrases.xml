@@ -1073,7 +1073,7 @@
     <string name="poi_garden_style_english">Giardino di stile: inglese</string>
     <string name="poi_garden_style_japanese">Giardino di stile: giapponese</string>
     <string name="poi_capacity">Capacità</string>
-    <string name="poi_capacity_disabled_yes">Sì;Area per persone con disabilità</string>
+    <string name="poi_capacity_disabled_yes">Sì;Spazio per persone con disabilità</string>
     <string name="poi_capacity_disabled_no">Nessuno spazio dedicato a persone con disabilità</string>
     <string name="poi_capacity_disabled">Spazi dedicati a persone con disabilità</string>
     <string name="poi_capacity_women_yes">Spazi dedicati per donne</string>
@@ -2590,7 +2590,7 @@
     <string name="poi_access_mofa">Accesso ai mofa</string>
     <string name="poi_access_hgv">Accesso ai mezzi pesanti</string>
     <string name="poi_access_goods">Accesso ai veicoli commerciali leggeri</string>
-    <string name="poi_access_disabled">Accesso ai mezzi per persone con disabilità</string>
+    <string name="poi_access_disabled">Accesso per persone con disabilità</string>
     <string name="poi_cash_withdrawal_bank_card">Prelievo di contanti</string>
     <string name="poi_craft_builder">Muratore</string>
     <string name="poi_craft_joiner">Falegname</string>
