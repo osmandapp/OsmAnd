@@ -6054,4 +6054,6 @@
     <string name="shared_string_native">Natif</string>
     <string name="shared_string_gpu">GPU</string>
     <string name="shared_string_allocated">Alloué</string>
+    <string name="will_close_at_short">Jusqu\'à</string>
+    <string name="open_till_short">De</string>
 </resources>
