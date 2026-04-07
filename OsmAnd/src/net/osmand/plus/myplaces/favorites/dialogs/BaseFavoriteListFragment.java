@@ -103,12 +103,17 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 	}
 
 	protected void setupViews(@NonNull View view){
-		adapter = new FavoriteFoldersAdapter(requireMyActivity(), nightMode, false, getFavoriteFolderListener());
+		adapter = createAdapter();
 		adapter.setSortFavoriteListener(this);
 
 		recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setAdapter(adapter);
+	}
+
+	@NonNull
+	protected FavoriteFoldersAdapter createAdapter() {
+		return new FavoriteFoldersAdapter(requireMyActivity(), nightMode, false, getFavoriteFolderListener());
 	}
 
 	@Override

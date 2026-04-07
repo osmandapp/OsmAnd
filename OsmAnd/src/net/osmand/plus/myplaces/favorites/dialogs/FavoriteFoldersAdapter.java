@@ -1,12 +1,12 @@
 package net.osmand.plus.myplaces.favorites.dialogs;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
@@ -16,8 +16,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.SortFavoriteViewHolder.SortFavoriteListener;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.enums.FavoriteListSortMode;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
@@ -32,6 +32,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final Object SELECTION_TOGGLE_PAYLOAD = new Object();
 	public static final Object LOCATION_UPDATE_PAYLOAD = new Object();
 
+	public static final int TYPE_FREE_BACKUP_CARD = -1;
 	public static final int TYPE_SORT_FAVORITE = 0;
 	public static final int TYPE_FOLDER = 1;
 	public static final int TYPE_FAVORITE = 2;
@@ -43,11 +44,14 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 
 	private final OsmandApplication app;
+	private final FragmentActivity activity;
 	private final UpdateLocationViewCache locationViewCache;
 	private final List<Object> items = new ArrayList<>();
 
 	@Nullable
 	private SortFavoriteListener sortListener;
+	@Nullable
+	private final CardListener cardListener;
 	private final boolean nightMode;
 	private final boolean showFolderNameOnSecondLine;
 	private FavoriteListSortMode sortMode;
@@ -55,18 +59,27 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	private final FavoriteAdapterListener listener;
 
-	public FavoriteFoldersAdapter(@NonNull Context context, boolean nightMode, FavoriteAdapterListener listener) {
-		this(context, nightMode, false, listener);
+	public FavoriteFoldersAdapter(@NonNull FragmentActivity activity, boolean nightMode, FavoriteAdapterListener listener) {
+		this(activity, nightMode, false, listener);
 	}
 
-	public FavoriteFoldersAdapter(@NonNull Context context, boolean nightMode,
+	public FavoriteFoldersAdapter(@NonNull FragmentActivity activity, boolean nightMode,
 	                              boolean showFolderNameOnSecondLine,
 	                              FavoriteAdapterListener listener) {
-		this.app = (OsmandApplication) context.getApplicationContext();
+		this(activity, nightMode, showFolderNameOnSecondLine, listener, null);
+	}
+
+	public FavoriteFoldersAdapter(@NonNull FragmentActivity activity, boolean nightMode,
+	                              boolean showFolderNameOnSecondLine,
+	                              FavoriteAdapterListener listener,
+	                              @Nullable CardListener cardListener) {
+		this.app = (OsmandApplication) activity.getApplicationContext();
+		this.activity = activity;
 		this.nightMode = nightMode;
 		this.showFolderNameOnSecondLine = showFolderNameOnSecondLine;
 		this.listener = listener;
-		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
+		this.cardListener = cardListener;
+		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
 		sortMode = FavoriteListSortMode.NAME_ASCENDING;
 
 		setHasStableIds(false);
@@ -96,8 +109,11 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 		switch (viewType) {
+			case TYPE_FREE_BACKUP_CARD:
+				View view = inflater.inflate(R.layout.favorite_free_backup_card_item, parent, false);
+				return new FavoriteFreeBackupCardViewHolder(view, activity, cardListener);
 			case TYPE_FAVORITE:
-				View view = inflater.inflate(R.layout.track_list_item, parent, false);
+				view = inflater.inflate(R.layout.track_list_item, parent, false);
 				return new FavoriteViewHolder(view, locationViewCache, nightMode);
 			case TYPE_FOLDER:
 				view = inflater.inflate(R.layout.track_list_item, parent, false);
@@ -136,7 +152,9 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			return TYPE_FOLDER_STATS;
 		} else if (object instanceof Integer) {
 			int item = (Integer) object;
-			if (TYPE_SORT_FAVORITE == item) {
+			if (TYPE_FREE_BACKUP_CARD == item) {
+				return TYPE_FREE_BACKUP_CARD;
+			} else if (TYPE_SORT_FAVORITE == item) {
 				return TYPE_SORT_FAVORITE;
 			} else if (TYPE_EMPTY_FOLDER == item) {
 				return TYPE_EMPTY_FOLDER;
@@ -185,7 +203,9 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		boolean lastItem = isLastItem(position);
 		boolean lastPinned = isLastPinnedFolder(position);
 
-		if (holder instanceof SortFavoriteViewHolder viewHolder) {
+		if (holder instanceof FavoriteFreeBackupCardViewHolder viewHolder) {
+			viewHolder.bindView();
+		} else if (holder instanceof SortFavoriteViewHolder viewHolder) {
 			viewHolder.bindView(hasTrackItems());
 		} else if (holder instanceof FavoriteViewHolder viewHolder) {
 			FavouritePoint favouritePoint = (FavouritePoint) items.get(position);
@@ -242,11 +262,6 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		} else {
 			onBindViewHolder(holder, position);
 		}
-	}
-
-	@Override
-	public long getItemId(int position) {
-		return RecyclerView.NO_ID;
 	}
 
 	@Override

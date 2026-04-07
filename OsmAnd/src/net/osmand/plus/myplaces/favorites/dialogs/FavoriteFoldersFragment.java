@@ -9,7 +9,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,13 +22,13 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.FavoriteAdapterListener;
 import net.osmand.plus.myplaces.favorites.dialogs.SortFavoriteViewHolder.SortFavoriteListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -44,15 +43,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class FavoriteFoldersFragment extends BaseFavoriteListFragment
-		implements SortFavoriteListener, FragmentStateHolder, CategorySelectionListener {
+		implements SortFavoriteListener, FragmentStateHolder, CategorySelectionListener, BaseCard.CardListener {
 
 	protected static final String SELECTED_GROUPS_KEY = "selected_groups_key";
 
 	protected final ItemsSelectionHelper<FavoriteGroup> selectionHelper = new ItemsSelectionHelper<>();
 
 	private final List<FavoriteGroup> groups = new ArrayList<>();
-	private View freeBackupCardContainer;
-	private View freeBackupCard;
 
 	@Override
 	protected int getLayoutId() {
@@ -92,17 +89,15 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 	}
 
 	@Override
-	protected void setupViews(@NonNull View view) {
-		super.setupViews(view);
-		freeBackupCardContainer = view.findViewById(R.id.free_backup_card_container);
-		freeBackupCard = view.findViewById(R.id.free_backup_card);
-		setupFreeBackupCard();
+	@NonNull
+	protected FavoriteFoldersAdapter createAdapter() {
+		return new FavoriteFoldersAdapter(requireMyActivity(), nightMode, false, getFavoriteFolderListener(), this);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		updateFreeBackupCardVisibility();
+		updateContent();
 	}
 
 	protected FavoriteAdapterListener getFavoriteFolderListener(){
@@ -166,7 +161,6 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 
 		adapter.setSortMode(sortMode);
 		adapter.setItems(items);
-		updateFreeBackupCardVisibility();
 	}
 
 	@Override
@@ -210,9 +204,11 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 		groups.clear();
 
 		List<Object> items = new ArrayList<>();
-		items.add(TYPE_SORT_FAVORITE);
-
 		List<FavoriteGroup> favoriteGroups = helper.getFavoriteGroups();
+		if (FavoritesFreeBackupCard.shouldShow(app, favoriteGroups)) {
+			items.add(TYPE_FREE_BACKUP_CARD);
+		}
+		items.add(TYPE_SORT_FAVORITE);
 
 		if (Algorithms.isEmpty(favoriteGroups)) {
 			items.add(TYPE_EMPTY_FOLDERS);
@@ -223,34 +219,6 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 		}
 
 		return items;
-	}
-
-	private void setupFreeBackupCard() {
-		if (freeBackupCard == null) {
-			return;
-		}
-		ImageView closeButton = freeBackupCard.findViewById(R.id.btn_close);
-		closeButton.setOnClickListener(v -> {
-			app.getSettings().FAVORITES_FREE_ACCOUNT_CARD_DISMISSED.set(true);
-			updateFreeBackupCardVisibility();
-		});
-		closeButton.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_cancel, nightMode));
-		freeBackupCard.findViewById(R.id.dismiss_button_container).setOnClickListener(v -> requireMyActivity().showOsmAndCloud(this));
-	}
-
-	private void updateFreeBackupCardVisibility() {
-		if (freeBackupCardContainer == null) {
-			return;
-		}
-		AndroidUiHelper.updateVisibility(freeBackupCardContainer, shouldShowFreeBackupCard());
-	}
-
-	private boolean shouldShowFreeBackupCard() {
-		boolean hasFavorites = !Algorithms.isEmpty(groups);
-		boolean backupAvailable = InAppPurchaseUtils.isBackupAvailable(app);
-		boolean registered = app.getBackupHelper().isRegistered();
-		boolean dismissed = app.getSettings().FAVORITES_FREE_ACCOUNT_CARD_DISMISSED.get();
-		return hasFavorites && !backupAvailable && !registered && !dismissed;
 	}
 
 	@Override
@@ -362,5 +330,20 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 			helper.saveSelectedGroupsIntoFile(Collections.singletonList(group), true);
 		}
 		reloadData();
+	}
+
+	@Override
+	public void onCardPressed(@NonNull BaseCard card) {
+		if (card instanceof FavoritesFreeBackupCard) {
+			updateContent();
+		}
+	}
+
+	@Override
+	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+		if (card instanceof FavoritesFreeBackupCard
+				&& buttonIndex == FavoritesFreeBackupCard.GET_OSMAND_CLOUD_BUTTON_INDEX) {
+			requireMyActivity().showOsmAndCloud(this);
+		}
 	}
 }
