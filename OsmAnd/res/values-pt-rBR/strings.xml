@@ -6511,4 +6511,11 @@
     <string name="release_5_3">• Adicionado suporte a edifícios em 3D\n\n • Visualização esférica do mapa\n\n • Plug-in de astronomia com mapa noturno e banco de dados de estrelas\n\n • Novos modos de cor para o velocímetro: tolerância e excesso de velocidade\n\n • Layouts de widget separados para paisagem e retrato\n\n • Widgets de registro de viagem: velocidade de deslocamento e velocidade média\n\n • Widget de tensão do adaptador para métricas do veículo\n\n • Dados de métricas do veículo no Analisador de Trajeto\n\n • Organização automática de trilhas por ano, duração, atividade e mais\n\n • Editor de paleta para visualização de terreno e trilha\n\n • Algoritmos de pesquisa aprimorados e interface do usuário renovada\n\n • Perfis de elevação corrigidos para rotas\n\n • Favoritos: novas opções de classificação e interface do usuário renovada\n\n • Compartilhar link para qualquer Ponto de Interesse (POI)\n\n • Visualização de waypoints sem fechar a lista\n\n • Parâmetro de largura da bicicleta para evitar estradas estreitas\n\n • Descrições de fotos da Wikimedia</string>
     <string name="map_widget_memory_info">Informação de memória</string>
     <string name="map_widget_memory_info_desc">Monitora o heap Java, as alocações nativas e a memória gráfica.</string>
+    <string name="memory_allocated_settings">Heap alocado em Java</string>
+    <string name="memory_native_settings">Alocado na pilha nativa</string>
+    <string name="memory_graphics_settings">Memória gráfica</string>
+    <string name="shared_string_heap">Pilha</string>
+    <string name="shared_string_native">Nativo</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="shared_string_allocated">Alocado</string>
 </resources>
