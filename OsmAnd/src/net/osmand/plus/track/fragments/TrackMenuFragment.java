@@ -11,6 +11,7 @@ import static net.osmand.plus.track.cards.OptionsCard.ALTITUDE_CORRECTION_BUTTON
 import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.CENTER_MAP_ON_LOCATION_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.DELETE_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
@@ -944,6 +945,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void onDestroyView() {
 		super.onDestroyView();
 		updateStatusBarColor();
+		OsmandMapTileView mapView = requireMapActivity().getMapView();
+		mapView.restoreScreenCenter();
 	}
 
 	@Override
@@ -1280,6 +1283,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 			} else if (buttonIndex == OPEN_WAYPOINT_INDEX) {
 				dismiss();
+			} else if (buttonIndex == CENTER_MAP_ON_LOCATION_BUTTON_INDEX) {
+				if (pointsCard != null) {
+					LatLon latLon = pointsCard.getSelectedWptLatLon();
+					if (latLon != null) {
+						setCustomMapRatio(latLon);
+					}
+				}
 			}
 		} else if (card instanceof PointsGroupsCard) {
 			PointsGroupsCard groupsCard = (PointsGroupsCard) card;
@@ -1292,6 +1302,19 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					fitTrackOnMap();
 				}
 			}
+		}
+	}
+
+	private void setCustomMapRatio(LatLon latLon) {
+		View view = getView();
+		if (view != null) {
+			view = view.findViewById(R.id.main_view);
+			OsmandMapTileView mapView = requireMapActivity().getMapView();
+			RotatedTileBox tb = mapView.getRotatedTileBox();
+			float ratioX = (float) view.getWidth() / tb.getPixWidth() / 2;
+			float ratioY = (float) view.getHeight() / tb.getPixHeight() / 2;
+			app.getMapViewTrackingUtilities().getMapDisplayPositionManager().setCustomMapRatio(ratioX, ratioY);
+			mapView.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), mapView.getZoom(), mapView.getZoomFloatPart());
 		}
 	}
 
@@ -1766,28 +1789,38 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	public static void loadSelectedGpxFile(@NonNull MapActivity mapActivity, @Nullable String path,
+	public static void loadSelectedGpxFile(@NonNull MapActivity activity, @Nullable String path,
 	                                       boolean showCurrentTrack,
 	                                       @NonNull CallbackWithObject<SelectedGpxFile> callback) {
-		OsmandApplication app = mapActivity.getApp();
-		SelectedGpxFile selectedGpxFile;
-		if (showCurrentTrack) {
-			selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-		} else {
-			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(path);
-		}
+		OsmandApplication app = AndroidUtils.getApp(activity);
+
+		SelectedGpxFile selectedGpxFile = showCurrentTrack
+				? app.getSavingTrackHelper().getCurrentTrack()
+				: app.getSelectedGpxHelper().getSelectedFileByPath(path);
+
 		if (selectedGpxFile != null) {
 			callback.processResult(selectedGpxFile);
 		} else if (!Algorithms.isEmpty(path)) {
-			GpxFileLoaderTask.loadGpxFile(new File(path), mapActivity, gpx -> {
-				GpxSelectionParams params = GpxSelectionParams.newInstance().showOnMap()
-						.syncGroup().selectedByUser().addToHistory().addToMarkers().saveSelection();
-				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, params);
-				if (sf != null) {
-					callback.processResult(sf);
-				}
-				return true;
-			});
+			GpxFile gpxFile = app.getSelectedGpxHelper().getBackupedFileByPath(path);
+			if (gpxFile != null) {
+				selectAndProcessGpx(app, gpxFile, callback);
+			} else {
+				GpxFileLoaderTask.loadGpxFile(new File(path), activity, gpx -> {
+					selectAndProcessGpx(app, gpx, callback);
+					return true;
+				});
+			}
+		}
+	}
+
+	private static void selectAndProcessGpx(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
+	                                        @NonNull CallbackWithObject<SelectedGpxFile> callback) {
+		GpxSelectionParams params = GpxSelectionParams.newInstance().showOnMap().syncGroup()
+				.selectedByUser().addToHistory().addToMarkers().saveSelection();
+
+		SelectedGpxFile selectGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
+		if (selectGpxFile != null) {
+			callback.processResult(selectGpxFile);
 		}
 	}
 

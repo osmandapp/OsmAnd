@@ -20,6 +20,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import net.osmand.plus.R
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.utils.OsmAndFormatter
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -470,7 +471,9 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 		val altitudeLabel =
 			"${altitude.roundToInt()}° ${context.getString(R.string.astro_alt_short)}"
 		val azimuthLabel = "${azimuth.roundToInt()}° ${context.getString(R.string.astro_az_short)}"
-		drawCursorMarker(canvas, area, x, timeLabel, altitudeLabel, azimuthLabel, lineTop)
+		val azimuthDirectionLabel = OsmAndFormatter.getLocalizedCardinalDirection(context, azimuth)
+		val azimuthLabelWithDirection = "$azimuthLabel ($azimuthDirectionLabel)"
+		drawCursorMarker(canvas, area, x, timeLabel, altitudeLabel, azimuthLabelWithDirection, lineTop)
 	}
 
 	private fun drawCursorMarker(

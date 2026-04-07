@@ -28,6 +28,7 @@ import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.FavoriteAdapterListener;
 import net.osmand.plus.myplaces.favorites.dialogs.SortFavoriteViewHolder.SortFavoriteListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -42,7 +43,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class FavoriteFoldersFragment extends BaseFavoriteListFragment
-		implements SortFavoriteListener, FragmentStateHolder, CategorySelectionListener {
+		implements SortFavoriteListener, FragmentStateHolder, CategorySelectionListener, BaseCard.CardListener {
 
 	protected static final String SELECTED_GROUPS_KEY = "selected_groups_key";
 
@@ -85,6 +86,18 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 
 	private void setupSelectionHelper() {
 		selectionHelper.setAllItems(groups);
+	}
+
+	@Override
+	@NonNull
+	protected FavoriteFoldersAdapter createAdapter() {
+		return new FavoriteFoldersAdapter(requireMyActivity(), nightMode, false, getFavoriteFolderListener(), this);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		updateContent();
 	}
 
 	protected FavoriteAdapterListener getFavoriteFolderListener(){
@@ -191,9 +204,11 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 		groups.clear();
 
 		List<Object> items = new ArrayList<>();
-		items.add(TYPE_SORT_FAVORITE);
-
 		List<FavoriteGroup> favoriteGroups = helper.getFavoriteGroups();
+		if (FavoritesFreeBackupCard.shouldShow(app, favoriteGroups)) {
+			items.add(TYPE_FREE_BACKUP_CARD);
+		}
+		items.add(TYPE_SORT_FAVORITE);
 
 		if (Algorithms.isEmpty(favoriteGroups)) {
 			items.add(TYPE_EMPTY_FOLDERS);
@@ -315,5 +330,20 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 			helper.saveSelectedGroupsIntoFile(Collections.singletonList(group), true);
 		}
 		reloadData();
+	}
+
+	@Override
+	public void onCardPressed(@NonNull BaseCard card) {
+		if (card instanceof FavoritesFreeBackupCard) {
+			updateContent();
+		}
+	}
+
+	@Override
+	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+		if (card instanceof FavoritesFreeBackupCard
+				&& buttonIndex == FavoritesFreeBackupCard.GET_OSMAND_CLOUD_BUTTON_INDEX) {
+			requireMyActivity().showOsmAndCloud(this);
+		}
 	}
 }
