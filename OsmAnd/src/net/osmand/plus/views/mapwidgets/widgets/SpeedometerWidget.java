@@ -21,6 +21,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.os.SystemClock;
 import android.text.TextPaint;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -124,7 +125,6 @@ public class SpeedometerWidget {
 	private static final int SPEED_LIMIT_WIDGET_OVERLAP_MARGIN = 6;
 	private static final int UNDEFINED_SPEED = -1;
 
-
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final RoutingHelper routingHelper;
@@ -167,7 +167,7 @@ public class SpeedometerWidget {
 	private int previousSpeedUnitTextColor = 0;
 	private int speedValueTextColor = 0;
 	private int speedUnitTextColor = 0;
-	private float speedLimitSize;
+	private int speedLimitSize;
 	private final Paint revealPaint = new Paint();
 	private float revealLastProgress;
 	private boolean drawBitmap;
@@ -178,6 +178,10 @@ public class SpeedometerWidget {
 	private float targetSpeedLimitAlpha = 0;
 	private final Paint speedLimitPaint = new Paint();
 	private final ThemeUsageContext widgetNightModeUsageContext;
+
+	private long lastSpeedAlertFrameTime = 0;
+	private float speedAlertProgress = 0;
+	private float targetSpeedAlertProgress = 0;
 
 	public SpeedometerWidget(@NonNull OsmandApplication app, @NonNull ThemeUsageContext usageContext) {
 		this(app, null, null, usageContext);
@@ -328,17 +332,19 @@ public class SpeedometerWidget {
 			setSpeedLimitText(String.valueOf(PREVIEW_VALUE));
 			setSpeedLimitDescription();
 			if (speedLimitContainer != null) {
-				speedLimitContainer.setVisibility(settings.SHOW_SPEED_LIMIT_WARNING.getModeValue(mode) == ALWAYS ? View.VISIBLE : View.INVISIBLE);
+				boolean show = settings.SHOW_SPEED_LIMIT_WARNING.getModeValue(mode) == ALWAYS;
+				speedLimitContainer.setVisibility(show ? View.VISIBLE : View.GONE);
+				speedLimitContainer.setAlpha(show ? 1f : 0f);
 			}
 		}
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		boolean nightMode = drawSettings != null ? drawSettings.isNightMode() : app.getDaynightHelper().isNightMode(settings.getApplicationMode(), widgetNightModeUsageContext);
-		updateInfo(drawSettings, false, nightMode);
+		updateInfo(drawSettings, nightMode);
 	}
 
-	public void updateInfo(@Nullable DrawSettings drawSettings, boolean drawBitmap, boolean nightMode) {
+	public void updateInfo(@Nullable DrawSettings drawSettings, boolean nightMode) {
 		setupWidget();
 		if (view != null) {
 			updateColor(nightMode);
@@ -401,7 +407,7 @@ public class SpeedometerWidget {
 						formattedSpeed.valueSrc > cachedWarningSpeedLimit && !speedExceed;
 
 				if ((speedExceed != isExceeding || speedExceedWarning != isExceedWarning) &&
-						(!drawBitmap || !speedAlertAnimator.isRunning())) {
+						(!drawBitmap || targetSpeedAlertProgress == speedAlertProgress)) {
 					isExceeding = speedExceed;
 					isExceedWarning = speedExceedWarning;
 					updateBackgroundColors(nightMode);
@@ -415,22 +421,33 @@ public class SpeedometerWidget {
 				AndroidUiHelper.updateVisibility(view, false);
 			}
 			setSpeedLimitDescription();
-			updateTextColor(speedAlertAnimator.getAnimatedFraction());
+
+			calculateProgress();
+			float animatorProgress = getAnimationProgress();
+			updateTextColor(animatorProgress);
 			if (drawBitmap) {
-				if (isChanged || revealLastProgress != animationDrawable.getProgress() || speedLimitAlpha != lastSpeedLimitAlpha) {
-					revealLastProgress = animationDrawable.getProgress();
+				boolean needToUpdateBgColor = targetSpeedAlertProgress == speedAlertProgress && revealColor != currentState.getAlertColor(app, nightMode);
+				if (isChanged ||
+						revealLastProgress != animatorProgress ||
+						speedLimitAlpha != lastSpeedLimitAlpha ||
+						needToUpdateBgColor
+				) {
+					if (needToUpdateBgColor) {
+						updateBackgroundColors(nightMode);
+					}
+					revealLastProgress = animatorProgress;
 					lastSpeedLimitAlpha = speedLimitAlpha;
 					float density = (drawSettings == null || drawSettings.getDensity() == 0) ? 1 : drawSettings.getDensity() * 0.77f;
 					Paint paint = new Paint();
 					paint.setMaskFilter(new BlurMaskFilter(40, BlurMaskFilter.Blur.NORMAL));
 					int shadowColor = Color.BLACK;
 					WidgetSize newWidgetSize = settings.SPEEDOMETER_SIZE.getModeValue(mode);
-					float speedometerWidth = (newWidgetSize == WidgetSize.LARGE ? SPEEDOMETER_WIDTH_AA_L : newWidgetSize == WidgetSize.SMALL ? SPEEDOMETER_WIDTH_AA_S : SPEEDOMETER_WIDTH_M_AA) * density;
-					float speedometerHeight = (newWidgetSize == WidgetSize.LARGE ? SPEEDOMETER_HEIGHT_AA_L : newWidgetSize == WidgetSize.SMALL ? SPEEDOMETER_HEIGHT_AA_S : SPEEDOMETER_HEIGHT_AA_M) * density;
+					int speedometerWidth = (int) ((newWidgetSize == WidgetSize.LARGE ? SPEEDOMETER_WIDTH_AA_L : newWidgetSize == WidgetSize.SMALL ? SPEEDOMETER_WIDTH_AA_S : SPEEDOMETER_WIDTH_M_AA) * density);
+					int speedometerHeight = (int) ((newWidgetSize == WidgetSize.LARGE ? SPEEDOMETER_HEIGHT_AA_L : newWidgetSize == WidgetSize.SMALL ? SPEEDOMETER_HEIGHT_AA_S : SPEEDOMETER_HEIGHT_AA_M) * density);
 					float speedLimitWidth = 0;
 					float speedLimitHeight = 0;
 					Bitmap speedLimitBitmap = null;
-					speedLimitSize = (newWidgetSize == WidgetSize.LARGE ? SPEED_LIMIT_SIZE_L : newWidgetSize == WidgetSize.SMALL ? SPEED_LIMIT_SIZE_S : SPEED_LIMIT_SIZE_M) * density;
+					speedLimitSize = (int) ((newWidgetSize == WidgetSize.LARGE ? SPEED_LIMIT_SIZE_L : newWidgetSize == WidgetSize.SMALL ? SPEED_LIMIT_SIZE_S : SPEED_LIMIT_SIZE_M) * density);
 					speedLimitWidth = speedLimitSize;
 					speedLimitHeight = speedLimitSize;
 					if (cachedSpeedLimitText != null) {
@@ -460,6 +477,25 @@ public class SpeedometerWidget {
 			widgetBitmap = null;
 			widgetRevealBitmap = null;
 			AndroidUiHelper.updateVisibility(view, false);
+		}
+	}
+
+	private float getAnimationProgress() {
+		return drawBitmap ? speedAlertProgress : (speedAlertAnimator.getAnimatedFraction());
+	}
+
+	private void calculateProgress() {
+		if (drawBitmap) {
+			long currentTime = SystemClock.elapsedRealtime();
+			if (lastSpeedAlertFrameTime != 0) {
+				float delta = (float) (currentTime - lastSpeedAlertFrameTime) / SPEED_REVEAL_ANIM_DURATION;
+				if (speedAlertProgress < targetSpeedAlertProgress) {
+					speedAlertProgress = Math.min(targetSpeedAlertProgress, speedAlertProgress + delta);
+				} else if (speedAlertProgress > targetSpeedAlertProgress) {
+					speedAlertProgress = Math.max(targetSpeedAlertProgress, speedAlertProgress - delta);
+				}
+			}
+			lastSpeedAlertFrameTime = currentTime;
 		}
 	}
 
@@ -493,7 +529,6 @@ public class SpeedometerWidget {
 		}
 	}
 
-
 	private void updateBackgroundColors(boolean nightMode) {
 		SpeedState targetState = SpeedState.SAFE;
 		if (isExceeding) {
@@ -511,15 +546,23 @@ public class SpeedometerWidget {
 		int themeBg = ColorUtilities.getWidgetBackgroundColor(app, nightMode);
 		if (targetState != currentState) {
 			updateBackgroundColorsForState(targetState, themeBg);
-		} else if (!speedAlertAnimator.isRunning()) {
+		} else if (!drawBitmap && !speedAlertAnimator.isRunning()) {
 			int activeAlert = (currentState == SpeedState.SAFE) ? themeBg : currentState.getAlertColor(app, nightMode);
 			animationDrawable.setColors(themeBg, activeAlert);
 			animationDrawable.setProgress(currentState == SpeedState.SAFE ? 0f : 1f);
 		}
 	}
 
+	private boolean isAnimating() {
+		return drawBitmap &&
+				targetSpeedAlertProgress != speedAlertProgress &&
+				lastSpeedAlertFrameTime != 0
+				||
+				!drawBitmap && speedAlertAnimator.isRunning();
+	}
+
 	private void updateBackgroundColorsForState(SpeedState targetState, int themeBg) {
-		if (!speedAlertAnimator.isRunning()) {
+		if (!isAnimating()) {
 			if (drawBitmap) {
 				updateBackgroundColorsForBitmapMode(targetState);
 			} else {
@@ -561,28 +604,33 @@ public class SpeedometerWidget {
 		} else {
 			revealBackgroundColor = Color.TRANSPARENT;
 		}
-		switch (currentState) {
-			case SAFE -> {
-				if (targetState == SpeedState.WARNING) {
-					revealColor = SpeedState.WARNING.getAlertColor(app, lastNightMode);
-				} else {
-					revealColor = SpeedState.EXCEED.getAlertColor(app, lastNightMode);
+		if (currentState == targetState) {
+			revealColor = currentState.getAlertColor(app, lastNightMode);
+		} else {
+			switch (currentState) {
+				case SAFE -> {
+					if (targetState == SpeedState.WARNING) {
+						revealColor = SpeedState.WARNING.getAlertColor(app, lastNightMode);
+					} else {
+						revealColor = SpeedState.EXCEED.getAlertColor(app, lastNightMode);
+					}
 				}
-			}
-			case WARNING -> {
-				if (targetState == SpeedState.SAFE) {
-					revealColor = SpeedState.WARNING.getAlertColor(app, lastNightMode);
-				} else {
-					revealColor = SpeedState.EXCEED.getAlertColor(app, lastNightMode);
+				case WARNING -> {
+					if (targetState == SpeedState.SAFE) {
+						revealColor = SpeedState.WARNING.getAlertColor(app, lastNightMode);
+					} else {
+						revealColor = SpeedState.EXCEED.getAlertColor(app, lastNightMode);
+					}
 				}
+				case EXCEED -> revealColor = SpeedState.EXCEED.getAlertColor(app, lastNightMode);
 			}
-			case EXCEED -> revealColor = SpeedState.EXCEED.getAlertColor(app, lastNightMode);
 		}
 		if (currentState == SpeedState.SAFE || currentState == SpeedState.WARNING && targetState == SpeedState.EXCEED) {
-			startFloatValueAnimator(speedAlertAnimator, false);
+			targetSpeedAlertProgress = 1f;
 		} else {
-			startFloatValueAnimator(speedAlertAnimator, true);
+			targetSpeedAlertProgress = 0f;
 		}
+		lastSpeedAlertFrameTime = SystemClock.elapsedRealtime();
 	}
 
 	public boolean isMetricUpdateNeeded() {
@@ -603,24 +651,25 @@ public class SpeedometerWidget {
 	}
 
 	private float drawSpeedometerPart(boolean nightMode, float density,
-	                                  WidgetSize newWidgetSize, float speedometerWidth,
-	                                  float speedometerHeight, Canvas widgetCanvas, boolean speedExceed) {
+	                                  WidgetSize newWidgetSize, int speedometerWidth,
+	                                  int speedometerHeight, Canvas widgetCanvas, boolean speedExceed) {
 		LayerDrawable speedometerDrawable = (LayerDrawable) app.getUIUtilities().getIcon(R.drawable.speedometer_aa_shape);
 		setDrawableColor((GradientDrawable) speedometerDrawable.getDrawable(0), nightMode);
 		GradientDrawable bg = ((GradientDrawable) speedometerDrawable.findDrawableByLayerId(R.id.background));
 		GradientDrawable stroke = ((GradientDrawable) speedometerDrawable.findDrawableByLayerId(R.id.stroke));
 		bg.setColor(ColorUtilities.getWidgetBackgroundColor(app, nightMode));
+		int strokeWidth = Math.round(SPEEDOMETER_AA_STROKE * density);
 		speedometerDrawable.setLayerInset(speedometerDrawable.findIndexByLayerId(R.id.background),
-				(int) (SPEEDOMETER_AA_STROKE * density),
-				(int) (SPEEDOMETER_AA_STROKE * density),
-				(int) (SPEEDOMETER_AA_STROKE * density),
-				(int) (SPEEDOMETER_AA_STROKE * density));
+				strokeWidth,
+				strokeWidth,
+				strokeWidth,
+				strokeWidth);
 		bg.setCornerRadius(8 * density);
 		stroke.setCornerRadius(10 * density);
 
 		stroke.setColor(app.getColor(nightMode ? R.color.map_window_stroke_dark : R.color.map_alert_stroke_light));
-		Bitmap speedometerBg = getDrawableBitmap(speedometerDrawable, (int) speedometerWidth, (int) speedometerHeight);
-		Bitmap speedometerBgWoStroke = getDrawableBitmap(speedometerDrawable.findDrawableByLayerId(R.id.background), (int) (speedometerWidth - SPEEDOMETER_AA_STROKE * density * 2), (int) (speedometerHeight - SPEEDOMETER_AA_STROKE * density * 2));
+		Bitmap speedometerBg = getDrawableBitmap(speedometerDrawable, speedometerWidth, speedometerHeight);
+		Bitmap speedometerBgWoStroke = getDrawableBitmap(speedometerDrawable.findDrawableByLayerId(R.id.background), (int) (speedometerWidth - strokeWidth * 2), (int) (speedometerHeight - strokeWidth * 2));
 		float speedometerLeft = widgetBitmap.getWidth() - speedometerWidth;
 		float speedometerTop = (float) widgetBitmap.getHeight() / 2 - speedometerHeight / 2;
 		widgetCanvas.drawBitmap(speedometerBg, speedometerLeft, speedometerTop, null);
@@ -637,6 +686,7 @@ public class SpeedometerWidget {
 				tmpCanvas.drawRect(speedometerLeft, speedometerTop, widgetBitmap.getWidth(), widgetBitmap.getHeight(), revealPaint);
 			}
 			revealPaint.setColor(revealColor);
+			revealLastProgress = drawBitmap ? speedAlertProgress : (targetSpeedAlertProgress == 1f ? 1f : 0f);
 			tmpCanvas.drawCircle(revealCx, revealCy, revealMaxRadius * revealLastProgress, revealPaint);
 			widgetCanvas.drawBitmap(widgetRevealBitmap, 0, 0, null);
 		}
@@ -821,7 +871,6 @@ public class SpeedometerWidget {
 		}
 	}
 
-
 	@NonNull
 	private Bitmap getDrawableBitmap(@NonNull Drawable drawable, int width, int height) {
 		return getDrawableBitmap(drawable, width, height, 0);
@@ -870,7 +919,8 @@ public class SpeedometerWidget {
 
 	private void updateColor(boolean nightMode) {
 		updateBackgroundColors(nightMode);
-		updateTextColor(speedAlertAnimator.getAnimatedFraction());
+		float progress = drawBitmap ? speedAlertProgress : speedAlertAnimator.getAnimatedFraction();
+		updateTextColor(progress);
 		if (!drawBitmap) {
 			speedLimitContainer.setBackground(getSpeedLimitDrawable(nightMode, app.getResources().getDisplayMetrics().density));
 			int limitColor = getSpeedLimitColor(nightMode);
@@ -953,8 +1003,15 @@ public class SpeedometerWidget {
 	}
 
 	private void updateTextColor(float progress) {
-		int currentTextColor = ColorUtils.blendARGB(previousSpeedValueTextColor, currentState.getSpeedTextColor(app, lastNightMode), progress);
-		int currentSpeedUnitColor = ColorUtils.blendARGB(previousSpeedUnitTextColor, currentState.getSpeedUnitTextColor(app, lastNightMode), progress);
+		int currentTextColor;
+		int currentSpeedUnitColor;
+		if (targetSpeedAlertProgress == 1 || !drawBitmap) {
+			currentTextColor = ColorUtils.blendARGB(previousSpeedValueTextColor, currentState.getSpeedTextColor(app, lastNightMode), progress);
+			currentSpeedUnitColor = ColorUtils.blendARGB(previousSpeedUnitTextColor, currentState.getSpeedUnitTextColor(app, lastNightMode), progress);
+		} else {
+			currentTextColor = ColorUtils.blendARGB(currentState.getSpeedTextColor(app, lastNightMode), previousSpeedValueTextColor, progress);
+			currentSpeedUnitColor = ColorUtils.blendARGB(currentState.getSpeedUnitTextColor(app, lastNightMode), previousSpeedUnitTextColor, progress);
+		}
 		if (drawBitmap) {
 			speedValueTextColor = 0xff000000 | currentTextColor;
 			speedUnitTextColor = 0xff000000 | currentSpeedUnitColor;

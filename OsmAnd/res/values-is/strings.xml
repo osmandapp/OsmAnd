@@ -4967,7 +4967,6 @@
     <string name="key_event_action_zoom_in">Renna að</string>
     <string name="sort_country_name_descending">Landsheiti: Ö-A</string>
     <string name="shared_string_cache">Skyndiminni</string>
-    <string name="widget_available_ram">Tiltækt vinnsluminni</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="row_number">Röð %1$s</string>
     <string name="shared_string_additional">Viðbótar</string>
@@ -5121,7 +5120,6 @@
     <string name="enable_to_use_external_input_device">Virkja notkun á utanáliggjandi inntakstæki með OsmAnd</string>
     <string name="key_bindings">Lyklasamsetningar</string>
     <string name="trash_is_empty_banner_desc">Skrár sem fjarlægðar eru úr OsmAnd Cloud-tölvuskýi verða tiltækar hér í %1$s daga á eftir.</string>
-    <string name="widget_available_ram_desc">Birtir tiltækt minni úthlutað fyrir OsmAnd.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Aukatæki verða skráð út úr OsmAnd Cloud-tölvuskýi og missa aðgang að greiddum eiginleikum.</string>
     <string name="shared_string_extensions">Viðaukar</string>
     <string name="clear_key_assignment_desc">Lyklasamsetning fyrir völdu aðgerðina verður hreinsuð og stillt á \"Ekkert\".</string>

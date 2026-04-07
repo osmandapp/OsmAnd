@@ -4748,7 +4748,6 @@
     <string name="contact_us">Kontaktujte nás</string>
     <string name="live_monitoring_adress_descr">Zadajte webovú adresu pomocou syntaxe parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="shared_string_cache">Vyrovnávacia pamäť</string>
-    <string name="widget_available_ram_desc">Zobrazí dostupnú pamäť pridelenú pre OsmAnd.</string>
     <string name="delete_map">Vymazať mapu</string>
     <string name="standard_maps">Štandardné mapy</string>
     <string name="max_altitude">Max. nadm. výška</string>
@@ -4759,7 +4758,6 @@
     <string name="rendering_styles">Štýly vykresľovania</string>
     <string name="app_mode_hang_gliding">Závesné lietanie</string>
     <string name="map_is_up_to_date">Mapa %1$s je aktuálna.</string>
-    <string name="widget_available_ram">Dostupná pamať RAM</string>
     <string name="terrain_maps">Mapy terénu</string>
     <string name="shared_string_temperature">Teplota</string>
     <string name="key_assignments_already_cleared_message">Všetky priradenia kláves už boli vymazané</string>

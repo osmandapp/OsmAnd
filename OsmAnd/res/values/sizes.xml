@@ -358,6 +358,7 @@
 	<dimen name="astro_schedule_time_text_size">16sp</dimen>
 	<dimen name="astro_schedule_meridiem_text_size">11sp</dimen>
 	<dimen name="astro_schedule_suffix_text_size">10sp</dimen>
+	<dimen name="astro_search_empty_state_padding_top">48dp</dimen>
 
 	<!--Route info-->
 	<dimen name="route_info_buttons_padding_top_bottom">16dp</dimen>

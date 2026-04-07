@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.mapillary;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
@@ -12,8 +11,9 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.R;
-import net.osmand.plus.views.layers.MapTileLayer;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapTileLayer;
 
 class MapillaryRasterLayer extends MapTileLayer implements MapillaryLayer {
 
@@ -35,8 +35,8 @@ class MapillaryRasterLayer extends MapTileLayer implements MapillaryLayer {
 	}
 
 	private void createImages(@NonNull OsmandMapTileView view) {
-		selectedImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location);
-		headingImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location_view_angle);
+		selectedImage = UiUtilities.decodeResource(view.getResources(), R.drawable.map_mapillary_location);
+		headingImage = UiUtilities.decodeResource(view.getResources(), R.drawable.map_mapillary_location_view_angle);
 	}
 
 	@Override

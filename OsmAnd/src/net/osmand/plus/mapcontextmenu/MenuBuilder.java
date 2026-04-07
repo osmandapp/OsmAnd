@@ -680,7 +680,7 @@ public class MenuBuilder {
 		Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, latLon.getLatitude(), latLon.getLongitude(), true);
 		String title = Objects.requireNonNull(locationData.remove(PointDescription.LOCATION_LIST_HEADER));
 		buildRow(view, new BuildRowAttrs.Builder().setText(title).setIconId(R.drawable.ic_action_get_my_location)
-				.setTextPrefix(app.getString(R.string.coordinates)).setCollapsable(true)
+				.setTextPrefix(app.getString(R.string.coordinates)).setClipboardText(title).setCollapsable(true)
 				.setCollapsableView(getLocationCollapsableView(locationData))
 				.setTextLinesLimit(1).build());
 	}
@@ -843,6 +843,7 @@ public class MenuBuilder {
 		}
 		String textPrefix = attrs.getTextPrefix();
 		String text = attrs.getText();
+		String clipboardText = attrs.getClipboardText();
 		String secondaryText = attrs.getSecondaryText();
 
 		LinearLayout baseView = new LinearLayout(view.getContext());
@@ -856,7 +857,9 @@ public class MenuBuilder {
 		ll.setLayoutParams(llParams);
 		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		ll.setOnLongClickListener(v -> {
-			String textToCopy = Algorithms.isEmpty(textPrefix) ? text : textPrefix + ": " + text;
+			String textToCopy = clipboardText != null
+					? clipboardText
+					: (Algorithms.isEmpty(textPrefix) ? text : textPrefix + ": " + text);
 			copyToClipboard(textToCopy, view.getContext());
 			return true;
 		});

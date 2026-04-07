@@ -4,7 +4,6 @@ import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.JOIN_SEGMENTS;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -23,6 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.Renderable.CurrentTrack;
 import net.osmand.plus.views.Renderable.RenderableSegment;
 import net.osmand.plus.views.Renderable.StandardTrack;
@@ -61,7 +61,7 @@ public class TrackBitmapDrawer extends MapBitmapDrawer {
 		paint.setStrokeWidth(AndroidUtils.dpToPx(app, 4f));
 
 		currentTrackColor = app.getSettings().CURRENT_TRACK_COLOR.get();
-		pointSmall = BitmapFactory.decodeResource(app.getResources(), R.drawable.ic_white_shield_small);
+		pointSmall = UiUtilities.decodeResource(app.getResources(), R.drawable.ic_white_shield_small);
 		locationIcon = AppCompatResources.getDrawable(app, R.drawable.map_location_default);
 
 		addListener(new MapBitmapDrawerListener() {

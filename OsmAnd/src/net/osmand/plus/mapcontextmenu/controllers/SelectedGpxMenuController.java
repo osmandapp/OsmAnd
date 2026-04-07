@@ -47,7 +47,7 @@ public class SelectedGpxMenuController extends MenuController {
 				WptPt selectedPoint = selectedGpxPoint.getSelectedPoint();
 				GpxFile gpxFile = selectedGpxPoint.getSelectedGpxFile().getGpxFile();
 
-				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, selectedPoint);
+				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, selectedPoint, null);
 				OsmAndTaskManager.executeTask(detailsTask);
 			}
 		};

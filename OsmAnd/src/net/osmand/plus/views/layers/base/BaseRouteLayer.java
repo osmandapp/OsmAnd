@@ -22,6 +22,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -108,7 +109,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	}
 
 	protected void initIcons() {
-		actionArrow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_action_arrow, null);
+		actionArrow = UiUtilities.decodeResource(view.getResources(), R.drawable.map_action_arrow);
 	}
 
 	protected void updateRouteColors(boolean night) {

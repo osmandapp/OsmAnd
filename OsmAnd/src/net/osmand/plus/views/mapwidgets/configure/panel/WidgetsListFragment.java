@@ -227,10 +227,11 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 	private void applyWidgetsVisibility(@NonNull List<String> enabledWidgetsIds) {
 		ApplicationMode appMode = getAppMode();
 		ScreenLayoutMode layoutMode = getScreenLayoutMode();
-		WidgetsPanel panel = selectedPanel;
-		for (MapWidgetInfo widget : widgetRegistry.getWidgetsForPanel(panel)) {
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
+
+		for (MapWidgetInfo widget : widgetRegistry.getWidgetsForPanel(selectedPanel)) {
 			boolean enabledFromApply = enabledWidgetsIds.contains(widget.key);
-			if (widget.isEnabledForAppMode(appMode, layoutMode) != enabledFromApply) {
+			if (widget.isEnabledForAppMode(appMode, widgetsVisibility) != enabledFromApply) {
 				widgetRegistry.enableDisableWidgetForMode(appMode, widget, enabledFromApply, layoutMode, false);
 			}
 		}
