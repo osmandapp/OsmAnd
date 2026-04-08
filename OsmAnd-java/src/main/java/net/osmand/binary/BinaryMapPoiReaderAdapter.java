@@ -751,7 +751,7 @@ public class BinaryMapPoiReaderAdapter {
 		int zoom = 0;
 		boolean read = false;
 		while (true) {
-			if (req.isCancelled()) {
+			if (req.isCancelled() || req.limitExceeded()) {
 				return read;
 			}
 			int t = codedIS.readTag();

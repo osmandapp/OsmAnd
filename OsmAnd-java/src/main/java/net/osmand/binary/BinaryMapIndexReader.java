@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -1817,6 +1818,8 @@ public class BinaryMapIndexReader {
 		int numberOfReadSubtrees = 0;
 		int numberOfAcceptedSubtrees = 0;
 		boolean interrupted = false;
+		PriorityQueue<T> priorityQueue;
+		int priorityQueueLimit;
 
 		public MapObjectStat getStat() {
 			return stat;
@@ -1893,7 +1896,14 @@ public class BinaryMapIndexReader {
 
 		public boolean publish(T obj) {
 			if (resultMatcher == null || resultMatcher.publish(obj)) {
-				searchResults.add(obj);
+				if (priorityQueue != null) {
+					priorityQueue.add(obj);
+					if (priorityQueue.size() > priorityQueueLimit) {
+						priorityQueue.poll();
+					}
+				} else {
+					searchResults.add(obj);
+				}
 				return true;
 			}
 			return false;
@@ -1914,7 +1924,16 @@ public class BinaryMapIndexReader {
 		}
 
 		public List<T> getSearchResults() {
-			return searchResults;
+			if (priorityQueue != null) {
+				List<T> results = new ArrayList<>();
+				while (!priorityQueue.isEmpty()) {
+					results.add(priorityQueue.poll());
+				}
+				results.sort(Collections.reverseOrder());
+				return results;
+			} else {
+				return searchResults;
+			}
 		}
 
 		public void setInterrupted(boolean interrupted) {
@@ -2022,6 +2041,11 @@ public class BinaryMapIndexReader {
 
 		public void setMatcherMode(StringMatcherMode mode) {
 			matcherMode = mode;
+		}
+
+		public void initPriorityQueue(Comparator<T> reverseComparator, int limit) {
+			priorityQueueLimit = limit;
+			priorityQueue = new PriorityQueue<T>(limit, reverseComparator);
 		}
     }
 

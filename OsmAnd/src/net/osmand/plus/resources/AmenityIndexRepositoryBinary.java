@@ -33,6 +33,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -176,10 +177,14 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	@Override
 	public synchronized List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom,
-	                                                  SearchPoiTypeFilter filter, SearchPoiAdditionalFilter additionalFilter, ResultMatcher<Amenity> matcher) {
+													  SearchPoiTypeFilter filter, SearchPoiAdditionalFilter additionalFilter,
+													  ResultMatcher<Amenity> matcher, Comparator<Amenity> cmp) {
 		long now = System.currentTimeMillis();
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom,
 				filter, additionalFilter, matcher);
+		if (cmp != null) {
+			req.initPriorityQueue(cmp, 1000);
+		}
 		List<Amenity> result = null;
 		try {
 			BinaryMapIndexReader reader = getOpenReader();
