@@ -5732,7 +5732,7 @@
     <string name="save_to_device">Uložit do zařízení</string>
     <string name="save_to_device_error">Chyba při ukládání do zařízení</string>
     <string name="travel_guides">Průvodci</string>
-    <string name="show_debug_tile">Zobrazit informace o dlaždicích</string>
+    <string name="show_debug_tile">Zobrazit informace o dlaždici</string>
     <string name="show_debug_tile_description">Zobrazení informací o mapových symbolech jednotlivých dlaždic</string>
     <string name="deactivated_map">Deaktivovaná mapa</string>
     <string name="suggest_activate_map_msg">Mapa %1$s je deaktivovaná,\naktivujte ji, abyste mohli zobrazit tuto oblast.</string>
@@ -6140,4 +6140,31 @@
     <string name="astro_filter_show_all">Ukázat vše</string>
     <string name="obd_alt_battery_voltage_desc">Zobrazuje úroveň napětí na adaptéru OBD</string>
     <string name="shared_string_world_weather_map">Světová mapa počasí</string>
+    <string name="open_till_short">Do</string>
+    <string name="will_close_at_short">Do</string>
+    <string name="memory_graphics_settings">Grafická paměť</string>
+    <string name="shared_string_heap">Heap</string>
+    <string name="astro_my_data_no_directions_description">Směrníky umožňují ponechat viditelnou šipku ukazující na object. Zapnete je z kontextového menu.</string>
+    <string name="astro_my_data_no_directions_title">Nejsou nastavené žádné směrníky</string>
+    <plurals name="astro_catalog_objects_count">
+        <item quantity="one">%d objekt</item>
+        <item quantity="few">%d objekty</item>
+        <item quantity="many">%d objektů</item>
+        <item quantity="other">%d objektů</item>
+    </plurals>
+    <string name="astro_sort_sets_soonest">Zapadá nejdříve</string>
+    <string name="astro_sort_rises_soonest">Vychází nejdříve</string>
+    <string name="astro_sort_faintest_first">Nejméně jasné jako první</string>
+    <string name="astro_sort_brightest_first">Nejjasnější jako první</string>
+    <string name="astro_search_empty_description">Zkuste změnit filtry nebo čas pozorování.</string>
+    <string name="astro_search_input_hint">Zadejte text</string>
+    <string name="astro_explore_my_data">Moje údaje</string>
+    <string name="astro_explore_schedule_subtitle">Nadcházející astronomické události</string>
+    <string name="astro_explore_schedule">Plán</string>
+    <string name="astro_explore_watch_now_subtitle">Podívejte se, co je dnes na obloze</string>
+    <string name="astro_explore_watch_now">Pozorovat teď</string>
+    <string name="astro_explore_deep_sky_subtitle">Galaxie, skupiny galaxií, černé díry</string>
+    <string name="astro_az_short">Az</string>
+    <string name="astro_locate">Najít</string>
+    <string name="show_layout_grid_logs">Ukázat záznamy mřížky</string>
 </resources>
