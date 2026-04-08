@@ -4,6 +4,9 @@ import net.osmand.shared.io.KFile
 import net.osmand.shared.util.LoggerFactory
 import okio.IOException
 import okio.buffer
+import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.roundToInt
 
 class ColorPalette {
 
@@ -167,11 +170,32 @@ class ColorPalette {
 
 	constructor()
 
-	constructor(c: ColorPalette, minVal: Double, maxVal: Double) {
+	/**
+	 * Creates a new palette by scaling a base relative palette to fit actual data extremes.
+	 * This is primarily used for generating relative palettes tailored to a specific track.
+	 *
+	 * @param c The base relative palette (typically normalized from 0.0 to 1.0, or -1.0 to 1.0).
+	 * @param minVal The actual minimum value found in the track data.
+	 * @param maxVal The actual maximum value found in the track data.
+	 * @param isBipolar If true, applies independent zero-anchored scaling for negative and positive values.
+	 */
+	constructor(c: ColorPalette, minVal: Double, maxVal: Double, isBipolar: Boolean = false) {
+		val scaleLeft = if (minVal < 0.0) abs(minVal) else max(maxVal, 1.0)
+		val scaleRight = if (maxVal > 0.0) maxVal else max(abs(minVal), 1.0)
+
 		for (cv in c.colors) {
-			val value = cv.value * (maxVal - minVal) + minVal
+			val value = if (isBipolar) {
+				when {
+					cv.value < 0.0 -> abs(cv.value) * -scaleLeft
+					cv.value > 0.0 -> cv.value * scaleRight
+					else -> 0.0
+				}
+			} else {
+				cv.value * (maxVal - minVal) + minVal
+			}
 			colors.add(ColorValue(value, cv.clr))
 		}
+		noDataColor = c.noDataColor
 	}
 
 	/**

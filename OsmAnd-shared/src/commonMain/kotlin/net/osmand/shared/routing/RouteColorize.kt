@@ -20,11 +20,13 @@ class RouteColorize {
 	private var dataList: MutableList<RouteColorizationPoint>? = null
 	private var colorizationType: ColorizationType? = null
 
-	enum class ColorizationType {
+	enum class ColorizationType(
+		val bipolar: Boolean = false
+	) {
 		ELEVATION,
 		SPEED,
-		SLOPE,
-		NONE
+		SLOPE(bipolar = true),
+		NONE;
 	}
 
 	/**
@@ -52,8 +54,7 @@ class RouteColorize {
 			calculateMinMaxValue()
 		}
 		if (palette == null || palette.colors.size < 2) {
-			this.palette =
-				ColorPalette(ColorPalette.MIN_MAX_PALETTE, minValue, maxValue)
+			this.palette = ColorPalette(ColorPalette.MIN_MAX_PALETTE, minValue, maxValue)
 		} else {
 			this.palette = palette
 		}
@@ -125,15 +126,13 @@ class RouteColorize {
 		calculateMinMaxValue(analysis, maxProfileSpeed)
 		if (fixedValues) {
 			this.palette = if (isValidPalette(palette)) palette!! else getDefaultPalette(type)
-		} else if (type == ColorizationType.SLOPE) {
-			this.palette =
-				if (isValidPalette(palette)) palette!! else ColorPalette.SLOPE_PALETTE
 		} else {
-			this.palette = ColorPalette(
-				if (isValidPalette(palette)) palette!! else ColorPalette.MIN_MAX_PALETTE,
-				minValue,
-				maxValue
-			)
+			val originalPalette = if (isValidPalette(palette)) {
+				palette!!
+			} else {
+				ColorPalette.MIN_MAX_PALETTE
+			}
+			this.palette = ColorPalette(originalPalette, minValue, maxValue, type.bipolar)
 		}
 	}
 
@@ -302,8 +301,11 @@ class RouteColorize {
 		maxProfileSpeed: Float
 	) {
 		calculateMinMaxValue()
-		// set strict limitations for maxValue
-		maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed.toDouble())
+
+		// set strict limitations for maxValue ONLY for linear (non-bipolar) types
+		if (colorizationType?.bipolar == false) {
+			maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed.toDouble())
+		}
 	}
 
 	private fun listToArray(doubleList: List<Double>): DoubleArray {
