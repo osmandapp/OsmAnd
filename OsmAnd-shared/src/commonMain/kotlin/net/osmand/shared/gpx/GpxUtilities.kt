@@ -1820,7 +1820,7 @@ object GpxUtilities {
 					hasDigits = true
 					val digit = c - '0'
 					if (hasDot) {
-						if (fracDigits < 18) {
+						if (fracDigits < 10) {
 							fracPart = fracPart * 10 + digit
 							fracDiv *= 10.0
 							fracDigits++
