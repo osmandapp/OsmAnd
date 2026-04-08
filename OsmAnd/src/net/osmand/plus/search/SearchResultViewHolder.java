@@ -153,7 +153,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 	public static void bindPOISearchResult(@NonNull View view, @NonNull QuickSearchListItem item,
 	                                       boolean nightMode, Calendar calendar) {
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
-		TextView title = view.findViewById(R.id.title);
+		TextView titleTv = view.findViewById(R.id.title);
 		TextView subtitle = view.findViewById(R.id.subtitle);
 		TextView addressTv = view.findViewById(R.id.address);
 		ImageView imageView = view.findViewById(R.id.imageView);
@@ -165,8 +165,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		boolean hasRouteShield = false;
 
 		String address = item.getAddress();
-		String name = item.getName();
-		String altName = item.getAltName();
+		CharSequence title = QuickSearchListItem.completeWithAltNames(app, item.getName(), item.getSearchResult(), nightMode);
 		String typeName = QuickSearchListItem.getTypeName(app, item.getSearchResult());
 		if (!Algorithms.isEmpty(typeName)) {
 			int typenameComaPosition = typeName.indexOf(",");
@@ -175,9 +174,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			}
 		}
 		Amenity amenity = (Amenity) item.getSearchResult().object;
-		if (Algorithms.isEmpty(altName)) {
-			altName = amenity.getName(Amenity.ALT_NAME_TAG);
-		}
+		titleTv.setText(title);
 
 		String description = null;
 		String photoUrl = null;
@@ -189,15 +186,6 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 				hasRouteShield = QuickSearchListItem.getRouteShieldDrawable(app, amenity) != null;
 				address = String.format("%s • %s", AmenityExtensionsHelper.getAmenityMetricsFormatted(amenity, app), address);
 			}
-		}
-
-		if (!Algorithms.isEmpty(altName) && !Algorithms.stringsEqual(name, altName)) {
-			name = String.format("%s (%s)", name, altName);
-			int textColor = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
-			SpannableString spannableName = UiUtilities.createColorSpannable(name, view.getContext().getColor(textColor), false, altName);
-			title.setText(spannableName);
-		} else {
-			title.setText(item.getSpannableName());
 		}
 
 		AndroidUiHelper.setTextAndChangeVisibility(addressTv, address);
@@ -296,7 +284,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 				imageContainer.setBackground(null);
 				imageContainer.setPadding(margin, margin, margin, margin);
 			} else {
-				int topPadding = title.getLineCount() > 1 ? AndroidUtils.dpToPx(app, 8) : 0;
+				int topPadding = titleTv.getLineCount() > 1 ? AndroidUtils.dpToPx(app, 8) : 0;
 				imageContainer.setPadding(0, topPadding, 0, 0);
 			}
 			if (!hasRouteShield) {
