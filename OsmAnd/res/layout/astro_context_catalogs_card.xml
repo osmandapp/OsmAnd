@@ -18,10 +18,13 @@
 
 		<TextView
 			android:id="@+id/title"
+			style="@style/MaterialAlertDialog.Material3.Title.Text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/astro_catalogs"
-			android:textColor="?attr/colorOnSurface" />
+			android:textColor="?android:attr/textColorPrimary"
+			android:textSize="16sp"
+			android:textStyle="bold" />
 
 		<com.google.android.material.chip.ChipGroup
 			android:id="@+id/chipGroup"

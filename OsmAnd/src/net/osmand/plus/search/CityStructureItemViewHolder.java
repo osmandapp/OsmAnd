@@ -33,7 +33,6 @@ import net.osmand.util.Algorithms;
 
 public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 
-	public static final String OLD_NAME_TAG = "old_name";
 	public final OsmandApplication app;
 	public final UpdateLocationViewCache locationViewCache;
 
@@ -71,6 +70,9 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 
 	public void bindItem(@NonNull QuickSearchListItem item, boolean useMapCenter) {
 		CharSequence title = item.getSpannableName();
+		if(!Algorithms.isEmpty(title)) {
+			title = QuickSearchListItem.completeWithAltNames(app, title.toString(), item.getSearchResult(), nightMode);
+		}
 		MapObject mapObject = (MapObject) item.getSearchResult().object;
 		String addressText = item.getAddress();
 		String typeName = item.getTypeName();
@@ -111,9 +113,6 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 				}
 			}
 		} else if (mapObject instanceof Street street) {
-			if (street.getNamesMap(false).containsKey(OLD_NAME_TAG)) {
-				title = String.format("%s (%s)", title, street.getName(OLD_NAME_TAG));
-			}
 			StringBuilder streetAddressBuilder = new StringBuilder();
 			String cityPart = QuickSearchListItem.getStreetCityPart(item.getSearchResult());
 			if (cityPart != null) {

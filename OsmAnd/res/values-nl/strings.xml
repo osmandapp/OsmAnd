@@ -6476,4 +6476,6 @@
     <string name="shared_string_native">Native</string>
     <string name="shared_string_gpu">GPU</string>
     <string name="shared_string_allocated">Toegewezen</string>
+    <string name="will_close_at_short">Tot</string>
+    <string name="open_till_short">Tot</string>
 </resources>

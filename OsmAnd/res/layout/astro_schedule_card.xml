@@ -78,6 +78,7 @@
 					android:background="?attr/selectableItemBackgroundBorderless">
 
 					<ImageView
+						android:id="@+id/schedule_prev_icon"
 						android:layout_width="24dp"
 						android:layout_height="24dp"
 						android:layout_gravity="center"
@@ -94,6 +95,7 @@
 					android:background="?attr/selectableItemBackgroundBorderless">
 
 					<ImageView
+						android:id="@+id/schedule_next_icon"
 						android:layout_width="24dp"
 						android:layout_height="24dp"
 						android:layout_gravity="center"

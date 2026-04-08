@@ -57,8 +57,7 @@
 		<net.osmand.plus.plugins.astronomy.views.contextmenu.AstroVisibilityGraphView
 			android:id="@+id/visibilityGraphView"
 			android:layout_width="match_parent"
-			android:layout_height="220dp"
-			android:layout_marginTop="8dp" />
+			android:layout_height="220dp" />
 
 		<LinearLayout
 			android:id="@+id/events_row"

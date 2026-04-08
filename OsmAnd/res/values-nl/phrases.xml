@@ -116,7 +116,7 @@
     <string name="poi_fuel">Tankstation;Benzinestation;Benzinetankstation;Benzinepomp</string>
     <string name="poi_parking">Parkeerterrein</string>
     <string name="poi_motorcycle_parking">Motorparkeerplaats</string>
-    <string name="poi_parking_entrance">Parkeerplaats-toegang</string>
+    <string name="poi_parking_entrance">Parkeerterrein-ingang</string>
     <string name="poi_garages">Garages</string>
     <string name="poi_public_transport_platform">Halte Openbaar Vervoer</string>
     <string name="poi_public_transport_platform_bus">Bushalte</string>
@@ -4848,4 +4848,5 @@
     <string name="poi_driver_training">Verkeerstrainingsgebied</string>
     <string name="poi_wine_region">Wijnstreek</string>
     <string name="poi_massage_shiatsu">Shiatsu</string>
+    <string name="poi_playground_structure">Speeltoestel</string>
 </resources>

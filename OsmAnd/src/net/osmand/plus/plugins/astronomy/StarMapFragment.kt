@@ -883,7 +883,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private fun showObjectInfo(obj: SkyObject) {
 		val existing = childFragmentManager.findFragmentById(R.id.bottom_sheet_container) as? AstroContextMenuFragment
-		if (existing == null || existing.arguments?.getString("skyObjectId") != obj.id) {
+		if (existing == null) {
 			val created = AstroContextMenuFragment.newInstance(obj)
 			childFragmentManager.beginTransaction()
 				.replace(

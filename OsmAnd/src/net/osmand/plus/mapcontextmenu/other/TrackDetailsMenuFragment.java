@@ -253,15 +253,17 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 	}
 
 	public void dismiss(boolean backPressed) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		callMapActivity(mapActivity -> {
+			if (!backPressed) {
+				MapActivity.clearPrevActivityIntent();
+			}
 			try {
 				mapActivity.getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 				mapActivity.getMapRouteInfoMenu().onDismiss(this, 0, null, backPressed);
 			} catch (Exception e) {
 				// ignore
 			}
-		}
+		});
 	}
 
 	public void applyDayNightMode() {

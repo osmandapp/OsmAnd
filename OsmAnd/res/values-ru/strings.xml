@@ -5264,7 +5264,7 @@
     <string name="quick_action_move_map_right">Подвинуть карту вправо</string>
     <string name="quick_action_move_map_down">Сдвинуть карту ниже</string>
     <string name="quick_action_move_map_up">Сдвинуть карту вверх</string>
-    <string name="quick_action_previous_app_profile">К предыдущему Профилю приложения</string>
+    <string name="quick_action_previous_app_profile">К предыдущему профилю</string>
     <string name="app_profile">Профиль приложения</string>
     <string name="shared_string_create">Создать</string>
     <string name="shared_string_replace">Заменить</string>
@@ -5292,7 +5292,7 @@
     <string name="quick_action_map_underlay">Подложка</string>
     <string name="quick_action_directions_from">Маршрут от этой точки</string>
     <string name="quick_action_remove_next_destination">Следующий пункт назначения</string>
-    <string name="quick_action_next_app_profile">К следующему Профилю приложения</string>
+    <string name="quick_action_next_app_profile">К следующему профилю</string>
     <string name="energy_avg_info_description">Расход батареи в минуту: %1$s
 \nПотребление энергии (мАч): %2$s</string>
     <string name="rendering_avg_info">Статистика рендеринга (в среднем за 1/5/15 минут)</string>
@@ -5712,7 +5712,7 @@
     <string name="rendering_attr_watercolor_name">Цвет воды</string>
     <string name="rendering_attr_watercolor_description">Цвет воды</string>
     <string name="show_spherical_map_description">Отображение сфероидальной модели Земли</string>
-    <string name="enable_3d_objects">Трехмерные здания</string>
+    <string name="enable_3d_objects">3D-здания</string>
     <string name="enable_3d_objects_description">Отображение 3D-объектов зданий на карте</string>
     <string name="show_rasterization_debug_tile">Показать информацию о растеризации тайла</string>
     <string name="enable_msaa">Включить MSAA</string>
@@ -5877,15 +5877,15 @@
     <string name="organize_by_max_altitude">Макс. высота</string>
     <string name="copy_from_portrait_layout">Копировать с портретной ориентации</string>
     <string name="copy_from_landscape_layout">Копировать с альбомной ориентации</string>
-    <string name="panels_layout_compact">Компактный</string>
-    <string name="panels_layout_wide">Широкий</string>
-    <string name="panels_layout">Расположение панелей</string>
+    <string name="panels_layout_compact">Компактная</string>
+    <string name="panels_layout_wide">Широкая</string>
+    <string name="panels_layout">Компоновка панелей</string>
     <string name="panels_layout_descr">Выберите расположение верхней и нижней панелей. Они могут быть широкими, занимающими всю ширину экрана, или компактными, располагающимися между боковыми панелями и кнопками.</string>
     <string name="single_layout">Единый макет</string>
     <string name="separate_layouts">Отдельные макеты</string>
     <string name="use_separate_layouts">Использовать отдельные макеты</string>
     <string name="map_screen_layout">Макет экрана карты</string>
-    <string name="map_screen_layout_descr">Выберите, использовать ли единый макет для всех ориентаций или настроить портретную и альбомную ориентацию отдельно.</string>
+    <string name="map_screen_layout_descr">Выберите, использовать ли единый макет для всех ориентаций или настроить книжную и альбомную ориентацию отдельно.</string>
     <string name="meridian_line">Линия меридиана</string>
     <string name="equator_line">Линия экватора</string>
     <string name="galactic_line">Галактическая координатная линия</string>
