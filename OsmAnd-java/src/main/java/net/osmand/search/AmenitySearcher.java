@@ -158,8 +158,19 @@ public class AmenitySearcher {
 
     public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, QuadRect rect, boolean includeTravel,
             Predicate<String> travelFileVisibility, ResultMatcher<Amenity> matcher) {
+        return searchAmenities(filter, rect, includeTravel, travelFileVisibility, matcher, null);
+    }
+
+    public List<Amenity> searchWorldMapAmenities(SearchPoiTypeFilter filter, QuadRect rect, boolean includeTravel,
+            Predicate<String> travelFileVisibility, ResultMatcher<Amenity> matcher) {
+        return searchAmenities(filter, rect, includeTravel, travelFileVisibility, matcher, AmenityIndexRepository::isWorldMap);
+    }
+
+    private List<Amenity> searchAmenities(SearchPoiTypeFilter filter, QuadRect rect, boolean includeTravel,
+            Predicate<String> travelFileVisibility, ResultMatcher<Amenity> matcher,
+            Predicate<AmenityIndexRepository> repositoryFilter) {
         return searchAmenities(filter, null, rect.top, rect.left, rect.bottom, rect.right,
-                -1, includeTravel, travelFileVisibility, matcher, null);
+                -1, includeTravel, travelFileVisibility, matcher, repositoryFilter);
     }
 
     public List<Amenity> searchAmenities(BinaryMapIndexReader.SearchPoiTypeFilter filter,
@@ -167,8 +178,7 @@ public class AmenitySearcher {
                                          double topLatitude, double leftLongitude, double bottomLatitude,
                                          double rightLongitude, int zoom, boolean includeTravel,
                                          Predicate<String> travelFileVisibility,
-                                         ResultMatcher<Amenity> matcher,
-                                         Comparator<Amenity> comparator) {
+                                         ResultMatcher<Amenity> matcher) {
 
         Set<Long> closedAmenities = new HashSet<>();
         List<Amenity> actualAmenities = new ArrayList<>();
@@ -189,7 +199,8 @@ public class AmenitySearcher {
                 if (matcher != null && matcher.isCancelled()) {
                     break;
                 }
-                if (repo.checkContainsInt(top31, left31, bottom31, right31)) {
+                if ((repositoryFilter == null || repositoryFilter.test(repo))
+                        && repo.checkContainsInt(top31, left31, bottom31, right31)) {
                     List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
                             zoom, filter, additionalFilter, matcher, comparator);
                     if (foundAmenities != null) {

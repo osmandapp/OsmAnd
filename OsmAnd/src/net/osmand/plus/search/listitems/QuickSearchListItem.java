@@ -41,6 +41,8 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.util.List;
 import java.util.Objects;
@@ -54,6 +56,18 @@ public class QuickSearchListItem {
 	public QuickSearchListItem(OsmandApplication app, SearchResult searchResult) {
 		this.app = app;
 		this.searchResult = searchResult;
+	}
+
+	enum AlternativeNameTags {
+		LOC_NAME_TAG("loc_name"),
+		ALT_NAME_TAG("alt_name"),
+		OLD_NAME_TAG("old_name");
+
+		AlternativeNameTags(String tagName) {
+			this.tagName = tagName;
+		}
+
+		final String tagName;
 	}
 
 	public QuickSearchListItemType getType() {
@@ -674,4 +688,28 @@ public class QuickSearchListItem {
 	public String toString() {
 		return getName();
 	}
+
+	public static CharSequence completeWithAltNames(@NonNull Context ctx, @NotNull String mainPart, @NotNull SearchResult searchResult, boolean nightMode) {
+		if (!Algorithms.isEmpty(searchResult.alternateName)) {
+			return addPartInParentheses(ctx, mainPart, searchResult.alternateName, nightMode);
+		}
+		if (searchResult.object instanceof MapObject mapObject) {
+			for (int i = 0; i < AlternativeNameTags.values().length; i++) {
+				AlternativeNameTags tag = AlternativeNameTags.values()[i];
+				if (mapObject.getNamesMap(false).containsKey(tag.tagName)) {
+					return addPartInParentheses(ctx, mainPart, mapObject.getName(tag.tagName), nightMode);
+				}
+			}
+		}
+		return mainPart;
+	}
+
+	@NonNull
+	private static CharSequence addPartInParentheses(Context ctx, @NonNull CharSequence mainPart, String partToAdd, boolean nightMode) {
+		int textColor = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+		String altName = String.format("(%s)", partToAdd);
+		mainPart = String.format("%s %s", mainPart, altName);
+		return UiUtilities.createColorSpannable(mainPart.toString(), ctx.getColor(textColor), false, altName);
+	}
+
 }

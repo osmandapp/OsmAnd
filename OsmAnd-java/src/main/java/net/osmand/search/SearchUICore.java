@@ -241,7 +241,7 @@ public class SearchUICore {
 				}
 			}
 			for (SearchResult s : searchResults) {
-				if (s.object instanceof Amenity amenity && Algorithms.isEmpty(s.alternateName)) {
+				if (s.object instanceof Amenity amenity && Algorithms.isEmpty(s.addressName)) {
 					updateSearchResultAddress(s, amenity, dominatedCity);
 				}
 			}
@@ -1039,7 +1039,9 @@ public class SearchUICore {
 				if (object.otherNames != null) {
 					for (String s : object.otherNames) {
 						if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
-							object.localeName = s;
+							// previous implementation didn't fit enough 
+//							object.localeName = s;
+							object.alternateName = s;
 							updateName = true;
 							break;
 						}

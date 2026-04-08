@@ -4,7 +4,6 @@ import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -44,7 +43,6 @@ import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteTracksTask;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteTracksTask.GpxFilesDeletionListener;
 import net.osmand.plus.myplaces.tracks.tasks.MoveTrackFoldersTask;
-import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
@@ -215,17 +213,13 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setOnClickListener(v -> fragment.showTrackOnMap(trackItem))
 				.create());
 
-		KFile file = trackItem.getFile();
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.analyze_on_map)
 				.setIcon(getContentIcon(R.drawable.ic_action_info_dark))
-				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file == null ? null : SharedUtil.jFile(file), true, result -> {
-					OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(activity, result, null);
-					OsmAndTaskManager.executeTask(detailsTask);
-					return true;
-				}))
+				.setOnClickListener(v -> fragment.showAnalyzeOnMap(trackItem))
 				.create());
 
+		KFile file = trackItem.getFile();
 		if (file != null) {
 			File jFile = SharedUtil.jFile(file);
 			items.add(new PopUpMenuItem.Builder(app)
