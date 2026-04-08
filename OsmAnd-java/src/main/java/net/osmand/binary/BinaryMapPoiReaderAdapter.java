@@ -472,7 +472,7 @@ public class BinaryMapPoiReaderAdapter {
 						CollatorStringMatcher suffixMatcher = null;
 						if (queryToken.length() > matchedPrefixLength) {
 							String querySuffix = queryToken.substring(matchedPrefixLength);
-							suffixMatcher = new CollatorStringMatcher(querySuffix, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+							suffixMatcher = new CollatorStringMatcher(querySuffix, req.matcherMode);
 						}
 						tokenMatches.add(new QueryTokenMatch(queryToken, matchedPrefix, suffixMatcher));
 					}
