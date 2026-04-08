@@ -125,10 +125,10 @@ public abstract class MapObject implements Comparable<MapObject> {
 				if (localeName != null && localeName.equals(name)) {
 					continue;
 				}
-				l.add(names.get(key));
+				l.add(name);
 			}
 		}
-		if (localeName != null && !localeName.equals(name)) {
+		if (!Algorithms.isEmpty(name) && localeName != null && !localeName.equals(name)) {
 			l.add(name);
 		}
 		return l;
