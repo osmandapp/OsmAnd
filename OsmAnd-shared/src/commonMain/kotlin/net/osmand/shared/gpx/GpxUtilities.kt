@@ -1811,6 +1811,7 @@ object GpxUtilities {
 		var fracDiv = 1.0
 		var hasDigits = false
 		var hasDot = false
+		var fracDigits = 0
 
 		while (i < len) {
 			val c = value[i]
@@ -1819,8 +1820,11 @@ object GpxUtilities {
 					hasDigits = true
 					val digit = c - '0'
 					if (hasDot) {
-						fracPart = fracPart * 10 + digit
-						fracDiv *= 10.0
+						if (fracDigits < 10) {
+							fracPart = fracPart * 10 + digit
+							fracDiv *= 10.0
+							fracDigits++
+						}
 					} else {
 						intPart = intPart * 10 + digit
 					}
