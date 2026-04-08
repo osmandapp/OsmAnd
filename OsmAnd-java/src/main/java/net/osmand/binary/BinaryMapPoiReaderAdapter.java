@@ -142,7 +142,7 @@ public class BinaryMapPoiReaderAdapter {
 
 	private MapPoiTypes poiTypes;
 
-	private record PoiNameQueryTokenMatch(String queryToken, String matchedPrefix) {
+	private record QueryTokenMatch(String queryToken, String matchedPrefix, CollatorStringMatcher suffixMatcher) {
 	}
 
 	protected BinaryMapPoiReaderAdapter(BinaryMapIndexReader map) {
@@ -437,7 +437,7 @@ public class BinaryMapPoiReaderAdapter {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		List<TIntArrayList> listOffsets = null;
 		List<String> queries = null;
-		List<PoiNameQueryTokenMatch> tokenMatches = null;
+		List<QueryTokenMatch> tokenMatches = null;
 		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
 
 		long offset = 0;
@@ -465,11 +465,16 @@ public class BinaryMapPoiReaderAdapter {
 					String queryToken = queries.get(i);
 					int matchedCharacters = charsList.get(i);
 					if (queryToken == null) {
-						tokenMatches.add(new PoiNameQueryTokenMatch(null, null));
+						tokenMatches.add(new QueryTokenMatch(null, null, null));
 					} else {
 						int matchedPrefixLength = Math.min(matchedCharacters, queryToken.length());
 						String matchedPrefix = queryToken.substring(0, matchedPrefixLength);
-						tokenMatches.add(new PoiNameQueryTokenMatch(queryToken, matchedPrefix));
+						CollatorStringMatcher suffixMatcher = null;
+						if (queryToken.length() > matchedPrefixLength) {
+							String querySuffix = queryToken.substring(matchedPrefixLength);
+							suffixMatcher = new CollatorStringMatcher(querySuffix, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+						}
+						tokenMatches.add(new QueryTokenMatch(queryToken, matchedPrefix, suffixMatcher));
 					}
 				}
 				codedIS.popLimit(oldLimit);
@@ -485,7 +490,7 @@ public class BinaryMapPoiReaderAdapter {
 						TIntLongHashMap offsetMap = new TIntLongHashMap();
 						listOfSepOffsets.add(offsetMap);
 						dataOffsets.sort(); // 1104125
-						PoiNameQueryTokenMatch tokenMatch = tokenMatches == null ? null : tokenMatches.get(tokenIndex);
+						QueryTokenMatch tokenMatch = tokenMatches == null ? null : tokenMatches.get(tokenIndex);
 						for (int i = 0; i < dataOffsets.size(); i++) {
 							codedIS.seek(dataOffsets.get(i) + offset);
 							int len = codedIS.readRawVarint32();
@@ -535,7 +540,7 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
-			List<Integer> nameIndexCoordinates, PoiNameQueryTokenMatch tokenMatch) throws IOException {
+			List<Integer> nameIndexCoordinates, QueryTokenMatch tokenMatch) throws IOException {
 		List<String> suffixDictionary = Collections.emptyList();
 		while (true) {
 			int t = codedIS.readTag();
@@ -568,7 +573,7 @@ public class BinaryMapPoiReaderAdapter {
 		return dictionaryEntries;
 	}
 
-	private static String decodeRawPoiNameSuffix(String encodedSuffix) {
+	private static String decodeRawSuffix(String encodedSuffix) {
 		if (encodedSuffix.isEmpty()) {
 			return "";
 		}
@@ -594,10 +599,10 @@ public class BinaryMapPoiReaderAdapter {
 			String suffixRemainder = encodedSuffix.substring(Character.charCount(markerCodePoint));
 			return Normalizer.normalize(previousSuffix.substring(0, prefixEndOffset) + suffixRemainder, Normalizer.Form.NFC);
 		}
-		return Normalizer.normalize(decodeRawPoiNameSuffix(encodedSuffix), Normalizer.Form.NFC);
+		return Normalizer.normalize(decodeRawSuffix(encodedSuffix), Normalizer.Form.NFC);
 	}
 
-	private boolean matchesSuffixDictionary(PoiNameQueryTokenMatch tokenMatch,
+	private boolean matchesSuffixDictionary(QueryTokenMatch tokenMatch,
 											List<String> suffixDictionary, List<Integer> suffixBitsetWords) {
 		if (tokenMatch == null || tokenMatch.queryToken == null || tokenMatch.matchedPrefix == null) {
 			return true;
@@ -608,7 +613,10 @@ public class BinaryMapPoiReaderAdapter {
 		if (suffixDictionary == null || suffixDictionary.isEmpty() || suffixBitsetWords == null || suffixBitsetWords.isEmpty()) {
 			return true;
 		}
-		String querySuffix = Normalizer.normalize(tokenMatch.queryToken.substring(tokenMatch.matchedPrefix.length()), Normalizer.Form.NFC);
+		CollatorStringMatcher suffixMatcher = tokenMatch.suffixMatcher();
+		if (suffixMatcher == null) {
+			return true;
+		}
 		for (int dictionaryIndex = 0; dictionaryIndex < suffixDictionary.size(); dictionaryIndex++) {
 			int wordIndex = dictionaryIndex >> 5;
 			if (wordIndex >= suffixBitsetWords.size()) {
@@ -619,7 +627,7 @@ public class BinaryMapPoiReaderAdapter {
 				continue;
 			}
 			String dictionaryEntry = suffixDictionary.get(dictionaryIndex);
-			if (dictionaryEntry.equals(querySuffix) || dictionaryEntry.startsWith(querySuffix)) {
+			if (suffixMatcher.matches(dictionaryEntry)) {
 				return true;
 			}
 		}
@@ -627,7 +635,7 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
-	                                      List<Integer> nameIndexCoordinates, PoiNameQueryTokenMatch tokenMatch,
+	                                      List<Integer> nameIndexCoordinates, QueryTokenMatch tokenMatch,
 	                                      List<String> suffixDictionary) throws IOException {
 		int x = 0;
 		int y = 0;
@@ -923,7 +931,7 @@ public class BinaryMapPoiReaderAdapter {
 					.getLatitude(), locations.get(i - 1).getLongitude(), locations.get(i).getLatitude(),
 					locations.get(i).getLongitude());
 			if (d < dist) {
-				arp = new AmenityRoutePoint();
+				arp = new Amenity.AmenityRoutePoint();
 				dist = d;
 				arp.deviateDistance = dist;
 				arp.pointA = locations.get(i - 1);
