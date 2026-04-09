@@ -917,8 +917,11 @@ public class Amenity extends MapObject {
 		if (Algorithms.isEmpty(tagGroups)) {
 			return null;
 		}
+		String singleName = null;
+		CityType singleType = null;
 		String nameLangTag = "name:" + lang;
 		EnumMap<CityType, String> names = null;
+
 		for (Map.Entry<Integer, List<TagValuePair>> entry : tagGroups.entrySet()) {
 			CityType type = null;
 			String translated = null;
@@ -932,19 +935,27 @@ public class Amenity extends MapObject {
 				} else if (tagValue.tag.endsWith("name")) {
 					nonTranslated = tagValue.value;
 				} else if (tagValue.tag.equals("place")) {
-					type = CityType.valueFromString(tagValue.value.toUpperCase());
+					type = CityType.valueFromString(tagValue.value);
 				}
 			}
 			String name = Algorithms.isEmpty(translated) ? nonTranslated : translated;
 			if (!Algorithms.isEmpty(name) && isCityTypeAccept(type)) {
-				if (names == null) {
+				if (names != null) {
+					names.put(type, name);
+				} else if (singleType == null) {
+					singleType = type;
+					singleName = name;
+				} else if (singleType == type) {
+					singleName = name;
+				} else {
 					names = new EnumMap<>(CityType.class);
+					names.put(singleType, singleName);
+					names.put(type, name);
 				}
-				names.put(type, name);
 			}
 		}
-		if (Algorithms.isEmpty(names)) {
-			return "";
+		if (names == null) {
+			return singleType == null ? "" : singleName;
 		}
 		StringBuilder result = new StringBuilder();
 		for (String name : names.values()) {
