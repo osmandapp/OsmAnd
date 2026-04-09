@@ -165,7 +165,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		boolean hasRouteShield = false;
 
 		String address = item.getAddress();
-		CharSequence title = QuickSearchListItem.completeWithAltNames(app, item.getName(), item.getSearchResult(), nightMode);
+		CharSequence title = item.getMapObjectTitleWithAltName(app, nightMode);
 		String typeName = QuickSearchListItem.getTypeName(app, item.getSearchResult());
 		if (!Algorithms.isEmpty(typeName)) {
 			int typenameComaPosition = typeName.indexOf(",");
