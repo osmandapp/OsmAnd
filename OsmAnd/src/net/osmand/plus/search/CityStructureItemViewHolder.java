@@ -69,10 +69,7 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindItem(@NonNull QuickSearchListItem item, boolean useMapCenter) {
-		CharSequence title = item.getSpannableName();
-		if(!Algorithms.isEmpty(title)) {
-			title = QuickSearchListItem.completeWithAltNames(app, title.toString(), item.getSearchResult(), nightMode);
-		}
+		CharSequence title = item.getMapObjectTitleWithAltName(app, nightMode);
 		MapObject mapObject = (MapObject) item.getSearchResult().object;
 		String addressText = item.getAddress();
 		String typeName = item.getTypeName();

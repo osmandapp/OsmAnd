@@ -94,8 +94,7 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 			viewHolder.bindItem(item, false);
 		} else if (holder instanceof WikiItemViewHolder viewHolder) {
 			QuickSearchWikiItem wikiItem = (QuickSearchWikiItem) item;
-			viewHolder.bindItem(wikiItem, poiUIFilter, false,
-					poiUIFilter != null && poiUIFilter.isTopWikiFilter());
+			viewHolder.bindItem(wikiItem, false);
 		} else if (holder instanceof SearchResultViewHolder viewHolder) {
 			SearchResultViewHolder.bindPOISearchResult(holder.itemView, item, nightMode, calendar);
 		}
