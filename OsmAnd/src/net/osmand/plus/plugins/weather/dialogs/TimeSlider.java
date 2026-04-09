@@ -13,13 +13,11 @@ import android.util.AttributeSet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.material.slider.Slider;
-
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
-
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.TimeFormatter;
+import net.osmand.plus.widgets.SliderEx;
 
 import org.apache.commons.logging.Log;
 
@@ -27,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class TimeSlider extends Slider {
+public class TimeSlider extends SliderEx {
 
 	private static final Log log = PlatformUtil.getLog(TimeSlider.class);
 

@@ -79,7 +79,7 @@
 			
 		</LinearLayout>
 		
-		<com.google.android.material.slider.Slider
+		<net.osmand.plus.widgets.SliderEx
 			android:id="@+id/filter_slider"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
 			android:saveEnabled="false"
 			tools:visibility="visible" />
 
-		<com.google.android.material.slider.RangeSlider
+		<net.osmand.plus.widgets.RangeSliderEx
 			android:id="@+id/filter_range_slider"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"

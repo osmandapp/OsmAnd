@@ -38,7 +38,7 @@
 
 	</FrameLayout>
 
-	<com.google.android.material.slider.Slider
+	<net.osmand.plus.widgets.SliderEx
 		android:id="@+id/slider"
 		android:layout_marginLeft="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding"

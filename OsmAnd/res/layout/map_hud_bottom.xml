@@ -24,7 +24,7 @@
 			android:layout_marginBottom="@dimen/map_button_size"
 			android:orientation="horizontal">
 
-			<com.google.android.material.slider.Slider
+			<net.osmand.plus.widgets.SliderEx
 				android:id="@+id/map_transparency_slider"
 				android:layout_width="@dimen/map_trans_seek_size"
 				android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
 			android:orientation="horizontal"
 			android:visibility="gone">
 
-			<com.google.android.material.slider.Slider
+			<net.osmand.plus.widgets.SliderEx
 				android:id="@+id/layer_param_slider"
 				android:layout_width="140dp"
 				android:layout_height="wrap_content"

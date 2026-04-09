@@ -1547,15 +1547,29 @@ public class AndroidUtils {
 
 	@NonNull
 	public static String getViewName(@NonNull View view) {
-		return getResName(view.getResources(), view.getId());
+		String name = getResName(view.getResources(), view.getId());
+		return name != null ? name : view.getClass().getSimpleName();
+	}
+
+	@Nullable
+	public static String getResName(@Nullable Resources res, @AnyRes int resid) {
+		try {
+			return (res != null && resid != View.NO_ID) ? res.getResourceEntryName(resid) : null;
+		} catch (Resources.NotFoundException e) {
+			return null;
+		}
 	}
 
 	@NonNull
-	public static String getResName(@NonNull Resources res, @AnyRes int resid) {
-		try {
-			return res.getResourceEntryName(resid);
-		} catch (Resources.NotFoundException e) {
-			return String.valueOf(resid);
+	public static String getViewPath(@NonNull View view, int maxDepth) {
+		StringBuilder builder = new StringBuilder(getViewName(view));
+		int currentDepth = 0;
+		ViewParent parent = view.getParent();
+		while (parent instanceof View && currentDepth < maxDepth) {
+			builder.insert(0, getViewName((View) parent) + " -> ");
+			parent = parent.getParent();
+			currentDepth++;
 		}
+		return builder.toString();
 	}
 }

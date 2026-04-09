@@ -71,7 +71,7 @@
             android:textSize="@dimen/default_list_text_size"
             tools:text="3" />
 
-        <com.google.android.material.slider.RangeSlider
+        <net.osmand.plus.widgets.RangeSliderEx
             android:id="@+id/zoom_slider"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

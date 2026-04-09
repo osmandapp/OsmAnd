@@ -76,7 +76,7 @@
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding">
 
-		<com.google.android.material.slider.RangeSlider
+		<net.osmand.plus.widgets.RangeSliderEx
 			android:id="@+id/interval_slider"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"

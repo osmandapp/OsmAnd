@@ -118,7 +118,7 @@
 
             </LinearLayout>
 
-            <com.google.android.material.slider.Slider
+            <net.osmand.plus.widgets.SliderEx
                 android:id="@+id/angle_slider"
                 android:valueTo="90"
                 android:stepSize="5"

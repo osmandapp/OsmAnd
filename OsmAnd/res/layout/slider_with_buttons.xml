@@ -33,7 +33,7 @@
 				tools:src="@drawable/ic_zoom_out"
 				tools:tint="?attr/secondary_icon_color" />
 
-			<com.google.android.material.slider.Slider
+			<net.osmand.plus.widgets.SliderEx
 				android:id="@+id/slider"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"

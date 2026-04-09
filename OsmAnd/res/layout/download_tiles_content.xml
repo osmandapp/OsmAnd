@@ -105,7 +105,7 @@
 			android:textColor="?android:textColorSecondary"
 			tools:text="8" />
 
-		<com.google.android.material.slider.RangeSlider
+		<net.osmand.plus.widgets.RangeSliderEx
 			android:id="@+id/zooms_range_slider"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"

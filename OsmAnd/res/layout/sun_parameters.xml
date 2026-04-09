@@ -37,7 +37,7 @@
 
 		</LinearLayout>
 
-		<com.google.android.material.slider.Slider
+		<net.osmand.plus.widgets.SliderEx
 			android:id="@+id/azimuth_slider"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
 
 		</LinearLayout>
 
-		<com.google.android.material.slider.Slider
+		<net.osmand.plus.widgets.SliderEx
 			android:id="@+id/altitude_slider"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"

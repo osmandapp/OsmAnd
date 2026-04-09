@@ -29,7 +29,7 @@
 
 	</LinearLayout>
 
-	<com.google.android.material.slider.Slider
+	<net.osmand.plus.widgets.SliderEx
 		android:id="@+id/slider"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

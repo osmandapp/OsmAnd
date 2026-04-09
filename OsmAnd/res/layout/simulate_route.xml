@@ -34,7 +34,7 @@
 			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_marginStart="@dimen/dialog_content_margin" />
 
-		<com.google.android.material.slider.Slider
+		<net.osmand.plus.widgets.SliderEx
 			android:id="@+id/Speedup"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
