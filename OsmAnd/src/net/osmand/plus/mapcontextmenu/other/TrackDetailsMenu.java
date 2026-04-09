@@ -762,6 +762,7 @@ public class TrackDetailsMenu {
 				fitTrackOnMapForbidden = false;
 				if (mapActivity != null) {
 					OsmandSettings settings = mapActivity.getApp().getSettings();
+					ChartUtils.saveGeneralXAxis(settings, gpxDataSetAxisType);
 					ChartUtils.saveGeneralYAxis(settings, gpxDataSetTypes);
 				}
 			}

@@ -689,6 +689,22 @@ public class QuickSearchListItem {
 		return getName();
 	}
 
+	@NonNull
+	public CharSequence getMapObjectTitleWithAltName(@NonNull OsmandApplication app, boolean nightMode) {
+		SearchResult searchResult = getSearchResult();
+		String mapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		if (Algorithms.isEmpty(mapLang) && searchResult != null) {
+			CharSequence spannableName = getSpannableName();
+			return completeWithAltNames(app, spannableName != null ? getSpannableName().toString() : "", searchResult, nightMode);
+		} else if (searchResult != null && searchResult.object instanceof MapObject mapObject) {
+			String title = mapObject.getName(mapLang);
+			String altName = Algorithms.isEmpty(searchResult.alternateName) ? mapObject.getName() : searchResult.alternateName;
+			return addPartInParentheses(app, title, altName, nightMode);
+		} else {
+			return getSpannableName();
+		}
+	}
+
 	public static CharSequence completeWithAltNames(@NonNull Context ctx, @NotNull String mainPart, @NotNull SearchResult searchResult, boolean nightMode) {
 		if (!Algorithms.isEmpty(searchResult.alternateName)) {
 			return addPartInParentheses(ctx, mainPart, searchResult.alternateName, nightMode);

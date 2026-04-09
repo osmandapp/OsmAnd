@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -219,7 +220,11 @@ public class MenuRowBuilder {
 	}
 
 	public void copyToClipboard(String text, Context ctx) {
-		ShareMenu.copyToClipboardWithToast(ctx, text, false);
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+			ShareMenu.copyToClipboardWithToast(ctx, text, false);
+		} else {
+			ShareMenu.copyToClipboard(ctx, text);
+		}
 	}
 
 	@NonNull
