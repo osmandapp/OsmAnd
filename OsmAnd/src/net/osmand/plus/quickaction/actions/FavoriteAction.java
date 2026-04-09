@@ -33,6 +33,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.FavouritesLayer;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
+import net.osmand.util.Algorithms;
 
 import java.util.Objects;
 
@@ -230,7 +231,7 @@ public class FavoriteAction extends SelectMapLocationAction {
 
 	@ColorInt
 	private int getCategoryColor() {
-		return Integer.parseInt(getParams().getOrDefault(KEY_CATEGORY_COLOR, "0"));
+		return Algorithms.parseIntSilently(getParams().getOrDefault(KEY_CATEGORY_COLOR, "0"), 0);
 	}
 
 	private interface DialogOnClickListener {
