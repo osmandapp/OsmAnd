@@ -1,7 +1,5 @@
 package net.osmand.plus.myplaces.favorites.dialogs;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
@@ -42,6 +41,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.AlertDialogExtra;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
@@ -96,11 +98,14 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 			title.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 		}
 		int color = group.getColor() == 0 ? getColor(R.color.color_favorite) : group.getColor();
-		if (group.isVisible()) {
+		int hiddenColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		if (group.isPinned()) {
+			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_pin,
+					group.isVisible() ? color : hiddenColor));
+		} else if (group.isVisible()) {
 			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color));
 		} else {
-			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_hidden,
-					ColorUtilities.getDefaultIconColor(app, nightMode)));
+			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_hidden, hiddenColor));
 		}
 		AndroidUiHelper.updateVisibility(groupView.findViewById(R.id.direction_icon), false);
 		AndroidUiHelper.updateVisibility(checkboxContainer, false);
@@ -148,38 +153,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 				.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
 				.setTitle(getString(R.string.shared_string_rename))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(v -> {
-					Activity activity = getActivity();
-					if (activity != null) {
-						Context themedContext = getThemedContext();
-						AlertDialog.Builder b = new AlertDialog.Builder(themedContext);
-						b.setTitle(R.string.favorite_category_name);
-						EditText nameEditText = new EditText(themedContext);
-						nameEditText.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-						nameEditText.setText(group.getName());
-						LinearLayout container = new LinearLayout(themedContext);
-						int sidePadding = dpToPx(24f);
-						int topPadding = dpToPx(4f);
-						container.setPadding(sidePadding, topPadding, sidePadding, topPadding);
-						container.addView(nameEditText);
-						b.setView(container);
-						b.setNegativeButton(R.string.shared_string_cancel, null);
-						b.setPositiveButton(R.string.shared_string_save, (dialog, which) -> {
-							String name = nameEditText.getText().toString().trim();
-							boolean nameChanged = !Algorithms.objectEquals(group.getName(), name);
-							if (nameChanged) {
-								if (helper.groupExists(name)) {
-									app.showShortToastMessage(R.string.favorite_category_dublicate_message);
-									return;
-								}
-								helper.updateGroupName(group, name, true);
-								updateAll();
-							}
-							dismiss();
-						});
-						b.show();
-					}
-				})
+				.setOnClickListener(v -> showRenameDialog())
 				.create();
 		items.add(editNameItem);
 
@@ -324,6 +298,36 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 		BaseFavoriteListFragment baseFavoriteListFragment = getFavoriteListFragment();
 		if (baseFavoriteListFragment != null) {
 			baseFavoriteListFragment.reloadData();
+		}
+	}
+
+	private void showRenameDialog() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			int controlsColor = ColorUtilities.getDefaultIconColor(app, isNightMode());
+			AlertDialogData dialogData = new AlertDialogData(activity, isNightMode())
+					.setTitle(R.string.shared_string_rename)
+					.setControlsColor(controlsColor)
+					.setNegativeButton(R.string.shared_string_cancel, null);
+			dialogData.setPositiveButton(R.string.shared_string_apply, (dialog, which) -> {
+				Object extra = dialogData.getExtra(AlertDialogExtra.EDIT_TEXT);
+				if (extra instanceof EditText editText) {
+					String newName = editText.getText().toString().trim();
+					String newGroupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(app, newName);
+					boolean nameChanged = !Algorithms.stringsEqual(group.getName(), newGroupIdName);
+					if (nameChanged) {
+						if (helper.groupExists(newName)) {
+							app.showShortToastMessage(R.string.favorite_category_dublicate_message);
+							return;
+						}
+						helper.updateGroupName(group, newGroupIdName, true);
+						updateAll();
+					}
+					dismiss();
+				}
+			});
+			String caption = activity.getString(R.string.enter_new_name);
+			CustomAlert.showInput(dialogData, activity, group.getDisplayName(app), caption);
 		}
 	}
 
