@@ -59,6 +59,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class QuickSearchListFragment extends BaseNestedListFragment {
@@ -76,6 +77,8 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 		ADDRESS,
 		MAIN
 	}
+
+	private List<ObjectType> separatedObjectTypes = Arrays.asList(POI_TYPE, INDEX_ITEM, LOCATION);
 
 	@NonNull
 	public abstract SearchListFragmentType getType();
@@ -379,7 +382,7 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 		SearchResult searchResult = item != null ? item.getSearchResult() : null;
 		if (searchResult != null) {
 			ObjectType firstItemObjectType = searchResult.objectType;
-			if (firstItemObjectType == POI_TYPE || firstItemObjectType == INDEX_ITEM) {
+			if (separatedObjectTypes.contains(firstItemObjectType)) {
 				int separateTypeLastIndex = 0;
 				for (int i = 1; i < listItems.size() - 1; i++) {
 					item = listItems.get(i);

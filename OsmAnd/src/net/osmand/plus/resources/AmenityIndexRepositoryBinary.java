@@ -36,6 +36,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
@@ -176,10 +177,13 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	@Override
 	public synchronized List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom,
-	                                                  SearchPoiTypeFilter filter, SearchPoiAdditionalFilter additionalFilter, ResultMatcher<Amenity> matcher) {
+													  SearchPoiTypeFilter filter, SearchPoiAdditionalFilter additionalFilter,
+													  ResultMatcher<Amenity> matcher, PriorityQueue<Amenity> priorityQueue,
+													  int priorityQueueLimit) {
 		long now = System.currentTimeMillis();
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom,
 				filter, additionalFilter, matcher);
+		req.setPriorityQueue(priorityQueue, priorityQueueLimit);
 		List<Amenity> result = null;
 		try {
 			BinaryMapIndexReader reader = getOpenReader();

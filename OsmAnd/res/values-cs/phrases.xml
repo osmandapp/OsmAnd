@@ -997,7 +997,7 @@
     <string name="poi_instagram">Instagram</string>
     <string name="vk">VKontakte</string>
     <string name="poi_google_plus">Google+</string>
-    <string name="poi_mobile">Mobilní telefon</string>
+    <string name="poi_mobile">Mobilní</string>
     <string name="poi_height">Výška</string>
     <string name="poi_ele">Nadmořská výška</string>
     <string name="poi_fee_no">Ne</string>
@@ -3278,18 +3278,18 @@
     <string name="poi_outcrop">Skalní odkryv</string>
     <string name="poi_payment_contactless_yes">Lze platit bezkontaktně</string>
     <string name="poi_payment_contactless_no">Nelze platit bezkontaktně</string>
-    <string name="poi_socket_type1">Počet konektorů Yazaki (Typ 1, SAE J1772)</string>
-    <string name="poi_socket_type1_current">Maximální proud konektoru Yazaki (Typ 1, SAE J1772) [A]</string>
-    <string name="poi_socket_type1_output">Maximální výkon konektoru Yazaki (Typ 1, SAE J1772) [kW]</string>
-    <string name="poi_socket_type2">Počet konektorů Mennekes (Typ 2, IEC 62196-2)</string>
-    <string name="poi_socket_type2_current">Maximální proud konektoru Mennekes (Typ 2, IEC 62196-2) [A]</string>
-    <string name="poi_socket_type2_output">Maximální výkon konektoru Mennekes (Typ 2, IEC 62196-2) [kW]</string>
-    <string name="poi_socket_type1_combo">Počet konektorů CCS1 (Typ 1 Combo)</string>
-    <string name="poi_socket_type1_combo_current">Maximální proud konektoru CCS1 (Typ 1 Combo) [A]</string>
-    <string name="poi_socket_type1_combo_output">Maximální výkon konektoru CCS1 (Typ 1 Combo) [kW]</string>
-    <string name="poi_socket_type2_combo">Počet konektorů CCS2 (Typ 2 Combo)</string>
-    <string name="poi_socket_type2_combo_current">Maximální proud konektoru CCS2 (Typ 2 Combo) [A]</string>
-    <string name="poi_socket_type2_combo_output">Maximální výkon konektoru CCS2 (Typ 2 Combo) [kW]</string>
+    <string name="poi_socket_type1">Zásuvka: Typ 1</string>
+    <string name="poi_socket_type1_current">Zásuvka: Typ 1: proud</string>
+    <string name="poi_socket_type1_output">Zásuvka: Typ 1: výstup</string>
+    <string name="poi_socket_type2">Zásuvka: Typ 2</string>
+    <string name="poi_socket_type2_current">Zásuvka: Typ 2: proud</string>
+    <string name="poi_socket_type2_output">Zásuvka: Typ 2: výstup</string>
+    <string name="poi_socket_type1_combo">Zásuvka: Typ 1 combo</string>
+    <string name="poi_socket_type1_combo_current">Zásuvka: Typ 1 combo: proud</string>
+    <string name="poi_socket_type1_combo_output">Zásuvka: Typ 1 combo: výstup</string>
+    <string name="poi_socket_type2_combo">Zásuvka: Typ 2 combo</string>
+    <string name="poi_socket_type2_combo_current">Zásuvka: Typ 2 combo: proud</string>
+    <string name="poi_socket_type2_combo_output">Zásuvka: Typ 2 combo: výstup</string>
     <string name="poi_socket_chademo">Počet konektorů CHAdeMO</string>
     <string name="poi_socket_chademo_current">Maximální proud konektoru CHAdeMO [A]</string>
     <string name="poi_socket_chademo_output">Maximální výkon konektoru CHAdeMO [kW]</string>
@@ -5170,4 +5170,5 @@
     <string name="poi_rapids_grade_5">5 (expert)</string>
     <string name="poi_rapids_grade_6">6 (extrémní)</string>
     <string name="poi_rapids_grade_x">X (ne spustitelné)</string>
+    <string name="poi_rapids_filter">Klasifikace peřejí</string>
 </resources>

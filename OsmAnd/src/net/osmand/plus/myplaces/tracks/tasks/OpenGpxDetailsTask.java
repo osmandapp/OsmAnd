@@ -110,6 +110,8 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 	}
 
 	private void setItemChartType(@NonNull GpxDisplayItem gpxItem) {
+		gpxItem.chartAxisType = ChartUtils.getSavedGeneralXAxis(settings, gpxItem.analysis);
+
 		List<GPXDataSetType> result = getSavedSupportedTypes(gpxItem, settings);
 
 		if (Algorithms.isEmpty(result)) {

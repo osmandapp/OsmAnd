@@ -84,14 +84,12 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 
 		int color = group.getColor() == 0 ? getColor(app, R.color.color_favorite) : group.getColor();
 		int hiddenColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		if (!group.isPersonal()) {
-			if (group.isPinned()) {
-				icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_pin, group.isVisible() ? color : hiddenColor));
-			} else if (group.isVisible()) {
-				icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color));
-			} else {
-				icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_hidden, hiddenColor));
-			}
+		if (group.isPinned()) {
+			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_pin, group.isVisible() ? color : hiddenColor));
+		} else if (group.isVisible()) {
+			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color));
+		} else {
+			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_hidden, hiddenColor));
 		}
 		AndroidUiHelper.updateVisibility(divider, showDivider);
 		AndroidUiHelper.updateVisibility(fullDivider, showFullDivider);

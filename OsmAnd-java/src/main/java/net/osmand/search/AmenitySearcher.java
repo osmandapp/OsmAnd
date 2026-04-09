@@ -116,6 +116,8 @@ public class AmenitySearcher {
     public static final int AMENITY_SEARCH_RADIUS = 50;
     private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
     private final MapPoiTypes mapPoiTypes; // nullable
+    private PriorityQueue<Amenity> priorityQueue;
+    private int priorityQueueLimit;
 
     public AmenitySearcher(MapPoiTypes mapPoiTypes) {
         this.mapPoiTypes = mapPoiTypes;
@@ -213,8 +215,8 @@ public class AmenitySearcher {
                 if ((repositoryFilter == null || repositoryFilter.test(repo))
                         && repo.checkContainsInt(top31, left31, bottom31, right31)) {
                     List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
-                            zoom, filter, additionalFilter, matcher);
-                    if (foundAmenities != null) {
+                            zoom, filter, additionalFilter, matcher, priorityQueue, priorityQueueLimit);
+                    if (foundAmenities != null && priorityQueue == null) {
                         for (Amenity amenity : foundAmenities) {
                             Long id = amenity.getId();
                             if (amenity.isClosed()) {
@@ -226,6 +228,19 @@ public class AmenitySearcher {
                     }
                 }
             }
+        }
+        if (priorityQueue != null) {
+            actualAmenities = new ArrayList<>(priorityQueue.size());
+            while (!priorityQueue.isEmpty()) {
+                Amenity am = priorityQueue.poll();
+                Long id = am.getId();
+                if (am.isClosed()) {
+                    closedAmenities.add(id);
+                } else if (!closedAmenities.contains(id)) {
+                    actualAmenities.add(am);
+                }
+            }
+            Collections.reverse(actualAmenities);
         }
 
         return actualAmenities;
@@ -828,5 +843,12 @@ public class AmenitySearcher {
             }
         }
         return pointsLength > 0;
+    }
+
+    public void setComparator(Comparator<Amenity> cmp, int searchResultsLimit) {
+        if (cmp != null) {
+            priorityQueue = new PriorityQueue<>(searchResultsLimit, cmp);
+            priorityQueueLimit = searchResultsLimit;
+        }
     }
 }

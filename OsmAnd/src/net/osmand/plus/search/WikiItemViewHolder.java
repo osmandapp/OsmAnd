@@ -72,8 +72,7 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 		timeLayout = view.findViewById(R.id.time_layout);
 	}
 
-	public void bindItem(@NonNull QuickSearchWikiItem item, @Nullable PoiUIFilter poiUIFilter,
-	                     boolean useMapCenter, boolean useBigPhoto) {
+	public void bindItem(@NonNull QuickSearchWikiItem item, boolean useMapCenter) {
 		String address = item.getAddress();
 		String descr = item.getDescription();
 		if (description != null) {
@@ -125,17 +124,6 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 			image.setTag(wikiImageUrl);
 			AndroidUiHelper.updateVisibility(imageViewContainer, wikiImageUrl != null);
 			if (wikiImageUrl != null) {
-				ViewGroup.LayoutParams lp = imageViewContainer.getLayoutParams();
-				int size;
-				if (useBigPhoto) {
-					size = app.getResources().getDimensionPixelSize(R.dimen.nearby_place_image_vertical_size);
-				} else {
-					size = AndroidUtils.dpToPx(app, 24f);
-				}
-				lp.width = size;
-				lp.height = size;
-				imageViewContainer.setLayoutParams(lp);
-
 				RequestCreator creator = Picasso.get().load(wikiImageUrl);
 				creator.into(image, new Callback() {
 					@Override
@@ -152,6 +140,10 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 						PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, false);
 					}
 				});
+			} else {
+				image.setImageDrawable(drawable);
+				AndroidUiHelper.updateVisibility(image, false);
+				AndroidUiHelper.updateVisibility(errorImageView, true);
 			}
 		}
 		QuickSearchListAdapter.updateCompass(itemView, item, locationViewCache, useMapCenter);

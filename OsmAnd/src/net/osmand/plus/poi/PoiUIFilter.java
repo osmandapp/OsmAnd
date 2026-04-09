@@ -44,6 +44,7 @@ import net.osmand.util.OpeningHoursParser.OpeningHours;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -438,12 +439,16 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	                                                double bottomLatitude, double leftLongitude,
 	                                                double rightLongitude, int zoom,
 	                                                ResultMatcher<Amenity> matcher) {
-		List<Amenity> tempSearchResult = dataProvider.searchAmenities(
-				lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, zoom, matcher);
+		Comparator<Amenity> comparator = null;
+		int limit = -1; // no limit
 		if (isTopWikiFilter()) {
-			Collections.sort(tempSearchResult, (p1, p2) -> p2.getTravelEloNumber() - p1.getTravelEloNumber());
+			comparator = Comparator.comparingInt(Amenity::getTravelEloNumber);
+			limit = 1000;
 		}
-		currentSearchResult = tempSearchResult;
+        currentSearchResult = dataProvider.searchAmenities(
+				lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude,
+				zoom, matcher, comparator, limit
+		);
 		return currentSearchResult;
 	}
 

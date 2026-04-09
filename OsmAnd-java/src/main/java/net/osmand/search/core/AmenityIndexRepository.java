@@ -11,6 +11,7 @@ import net.osmand.data.Amenity;
 
 import java.io.File;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public interface AmenityIndexRepository {
 
@@ -24,8 +25,9 @@ public interface AmenityIndexRepository {
 	 * Search amenities in the specified box doesn't cache results
 	 */
 	List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom,
-			SearchPoiTypeFilter filter, SearchPoiAdditionalFilter additionalFilter,
-			ResultMatcher<Amenity> matcher);
+								  SearchPoiTypeFilter filter, SearchPoiAdditionalFilter additionalFilter,
+								  ResultMatcher<Amenity> matcher, PriorityQueue<Amenity> priorityQueue,
+								  int priorityQueueLimit);
 
 	List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius,
 			SearchPoiTypeFilter filter, ResultMatcher<Amenity> matcher);

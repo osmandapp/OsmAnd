@@ -5715,7 +5715,7 @@
     <string name="saved_to_device">Sačuvano na uređaju</string>
     <string name="travel_guides">Vodiči</string>
     <string name="show_debug_tile_description">Prikaz informacija o simbolima na mapi svakog tila</string>
-    <string name="show_debug_tile">Prikaži informacije o tilovima</string>
+    <string name="show_debug_tile">Prikaži informaciju o pločici</string>
     <string name="deactivated_map">Deaktivirana mapa</string>
     <string name="suggest_activate_map_msg">%1$s mapa je deaktivirana,\naktivirajte da biste videli ovu oblast.</string>
     <string name="unit_of_temperature_description">Izabrane jedinice će biti primenjene na sve podatke vezane za temperaturu u trenutnom profilu.</string>
@@ -6131,4 +6131,6 @@
     <string name="shared_string_native">Izvorno</string>
     <string name="shared_string_gpu">GPJ</string>
     <string name="shared_string_allocated">Dodeljeno</string>
+    <string name="will_close_at_short">Do</string>
+    <string name="open_till_short">Do</string>
 </resources>

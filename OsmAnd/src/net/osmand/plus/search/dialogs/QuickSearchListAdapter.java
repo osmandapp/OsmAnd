@@ -246,9 +246,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		) {
 			view = bindAdministrativeItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.SEARCH_RESULT &&
-				(poiUIFilter != null && poiUIFilter.isWikiFilter() ||
-						searchResult != null && searchResult.object instanceof Amenity amenity &&
-								amenity.getType().isWiki())) {
+				(poiUIFilter != null && poiUIFilter.isWikiFilter())) {
 			return bindWikiItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.DISABLED_HISTORY) {
 			view = bindDisabledHistoryItem(listItem, convertView);
@@ -456,8 +454,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		QuickSearchWikiItem wikiItem = new QuickSearchWikiItem(app, item.getSearchResult());
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_nearby_item_vertical);
 		WikiItemViewHolder holder = new WikiItemViewHolder(view, updateLocationViewCache, nightMode);
-		holder.bindItem(wikiItem, poiUIFilter, useMapCenter,
-				getPoiUIFilter() != null && getPoiUIFilter().isTopWikiFilter());
+		holder.bindItem(wikiItem, useMapCenter);
 		return view;
 	}
 

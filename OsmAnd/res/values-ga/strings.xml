@@ -5972,4 +5972,6 @@
     <string name="shared_string_native">Dúchasach</string>
     <string name="shared_string_gpu">GPU</string>
     <string name="shared_string_allocated">Leithdháilte</string>
+    <string name="will_close_at_short">Go dtí</string>
+    <string name="open_till_short">Go</string>
 </resources>

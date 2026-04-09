@@ -431,6 +431,8 @@ public class RouteCalculationResult {
 			TurnType turn = s.getTurnType();
 
 			if (turn != null) {
+				String actualExitRef = null, actualExitName = null;
+				String currentExitRef = null, currentExitName = null;
 				RouteDirectionInfo info = new RouteDirectionInfo(s.getSegmentSpeed(), turn);
 				if (routeInd < list.size()) {
 					int lind = routeInd;
@@ -454,10 +456,14 @@ public class RouteCalculationResult {
 
 					RouteDataObject rdoWithShield = null;
 					RouteDataObject rdoWithoutShield = null;
+					currentExitRef = current.getObject().getExitRef();
+					currentExitName = current.getObject().getExitName();
 					if (s.hasExitInfo()) {
 						ExitInfo exitInfo = new ExitInfo();
-						exitInfo.setRef(current.getObject().getExitRef());
-						exitInfo.setExitStreetName(current.getObject().getExitName());
+						actualExitRef = currentExitRef;
+						exitInfo.setRef(currentExitRef);
+						actualExitName = currentExitName;
+						exitInfo.setExitStreetName(currentExitName);
 						info.setExitInfo(exitInfo);
 						if (!exitInfo.isEmpty() && info.getDestinationRef() == null && routeInd > 0) {
 							// set ref and road name (or shield icon) from previous segment because exit point is not consist of highway ref
@@ -497,9 +503,19 @@ public class RouteCalculationResult {
 				String[] pointNames = s.getObject().getPointNames(s.getStartPointIndex());
 				if (pointNames != null) {
 					for (int t = 0; t < pointNames.length; t++) {
-						description = description.trim();
-						description += " " + pointNames[t];
+						String pointName = pointNames[t];
+						if (Algorithms.isEmpty(pointName)
+								|| pointName.equals(currentExitRef) || pointName.equals(currentExitName)) {
+							continue;
+						}
+						description += " " + pointName;
 					}
+				}
+				if (actualExitRef != null) {
+					description += " " + actualExitRef;
+				}
+				if (actualExitName != null) {
+					description += " " + actualExitName;
 				}
 				info.setDescriptionRoute(description);
 				info.routePointOffset = prevLocationSize;
