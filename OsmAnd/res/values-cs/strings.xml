@@ -6141,7 +6141,6 @@
     <string name="obd_alt_battery_voltage_desc">Zobrazuje úroveň napětí na adaptéru OBD</string>
     <string name="shared_string_world_weather_map">Světová mapa počasí</string>
     <string name="open_till_short">Do</string>
-    <string name="will_close_at_short">Do</string>
     <string name="memory_graphics_settings">Grafická paměť</string>
     <string name="shared_string_heap">Heap</string>
     <string name="astro_my_data_no_directions_description">Směrníky umožňují ponechat viditelnou šipku ukazující na object. Zapnete je z kontextového menu.</string>

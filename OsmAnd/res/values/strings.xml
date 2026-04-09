@@ -10,7 +10,6 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-	<string name="will_close_at_short">Until</string>
 	<string name="open_till_short">Till</string>
 	<string name="map_widget_memory_info">Memory info</string>
 	<string name="map_widget_memory_info_desc">Monitors Java heap, native allocations, and graphics memory.</string>

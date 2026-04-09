@@ -6064,6 +6064,5 @@
     <string name="shared_string_native">Собственная</string>
     <string name="shared_string_gpu">Графический процессор</string>
     <string name="shared_string_allocated">Зарезервированная</string>
-    <string name="will_close_at_short">Закроется в</string>
     <string name="open_till_short">Открыто до</string>
 </resources>
