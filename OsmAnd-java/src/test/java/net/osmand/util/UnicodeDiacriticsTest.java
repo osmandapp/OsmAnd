@@ -33,7 +33,12 @@ public class UnicodeDiacriticsTest {
 	}
 
 	@Test
-	public void testKyivskaStreet() {
+	public void testSupplementaryPlaneCombiningMarkStripped() {
+		Assert.assertEquals("a", UnicodeDiacritics.stripDiacritics("a\uD800\uDDFD"));
+	}
+
+	@Test
+	public void testKyiivskaStreetVariantMatchesKyivska() {
 		String nameFromData = "Київська вулиця";
 		String userQuery = "Киівська вулиця";
 		Assert.assertEquals(

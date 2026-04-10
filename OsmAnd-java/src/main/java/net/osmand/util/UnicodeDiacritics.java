@@ -1,37 +1,73 @@
 package net.osmand.util;
 
+import java.nio.CharBuffer;
 import java.text.Normalizer;
 
 /**
  * Strips Unicode combining characters (diacritics) via NFD decomposition, matching the fast path
  * used in OsmAnd-core {@code ICU::stripDiacritics} (see osmandapp/OsmAnd-core#1031).
  * <p>
- * A BMP lookup table mirrors {@code s_isUnsafeChar}: code units that are combining marks or that
- * are not already NFD-normalized, so most strings skip {@link Normalizer} work entirely.
+ * BMP entries are cached lazily (see review: avoid huge one-time cost at class load). Supplementary
+ * code points are checked on demand without precomputing the whole BMP at class initialization.
  */
 public final class UnicodeDiacritics {
 
-	private static final boolean[] BMP_NEEDS_DIACRITIC_PROCESSING = new boolean[65536];
+	private static final byte BMP_UNKNOWN = 0;
+	private static final byte BMP_DOES_NOT_NEED = 1;
+	private static final byte BMP_NEEDS = 2;
 
-	static {
-		for (int i = 0; i < 65536; i++) {
-			char ch = (char) i;
-			int type = Character.getType(ch);
-			if (type == Character.NON_SPACING_MARK
-					|| type == Character.COMBINING_SPACING_MARK
-					|| type == Character.ENCLOSING_MARK
-					|| !Normalizer.isNormalized(String.valueOf(ch), Normalizer.Form.NFD)) {
-				BMP_NEEDS_DIACRITIC_PROCESSING[i] = true;
-			}
-		}
-	}
+	private static final byte[] BMP_DIACRITIC_CACHE = new byte[65536];
+	private static final char[] NORM_BUF = new char[2];
 
 	private UnicodeDiacritics() {
 	}
 
+	private static boolean bmpCodePointNeedsDiacriticProcessing(int cp) {
+		byte v = BMP_DIACRITIC_CACHE[cp];
+		if (v != BMP_UNKNOWN) {
+			return v == BMP_NEEDS;
+		}
+		synchronized (NORM_BUF) {
+			v = BMP_DIACRITIC_CACHE[cp];
+			if (v != BMP_UNKNOWN) {
+				return v == BMP_NEEDS;
+			}
+			boolean needs = computeMayNeedDiacriticProcessingNoSync(cp);
+			BMP_DIACRITIC_CACHE[cp] = needs ? BMP_NEEDS : BMP_DOES_NOT_NEED;
+			return needs;
+		}
+	}
+
+	private static boolean computeMayNeedDiacriticProcessingNoSync(int cp) {
+		int type = Character.getType(cp);
+		if (type == Character.NON_SPACING_MARK
+				|| type == Character.COMBINING_SPACING_MARK
+				|| type == Character.ENCLOSING_MARK) {
+			return true;
+		}
+		int n = Character.toChars(cp, NORM_BUF, 0);
+		return !Normalizer.isNormalized(CharBuffer.wrap(NORM_BUF, 0, n), Normalizer.Form.NFD);
+	}
+
+	private static boolean supplementaryMayNeedDiacriticProcessing(int cp) {
+		int type = Character.getType(cp);
+		if (type == Character.NON_SPACING_MARK
+				|| type == Character.COMBINING_SPACING_MARK
+				|| type == Character.ENCLOSING_MARK) {
+			return true;
+		}
+		return !Normalizer.isNormalized(new String(Character.toChars(cp)), Normalizer.Form.NFD);
+	}
+
 	private static boolean stringMayNeedDiacriticProcessing(CharSequence input) {
-		for (int i = 0, len = input.length(); i < len; i++) {
-			if (BMP_NEEDS_DIACRITIC_PROCESSING[input.charAt(i) & 0xffff]) {
+		for (int i = 0, len = input.length(); i < len; ) {
+			int cp = Character.codePointAt(input, i);
+			i += Character.charCount(cp);
+			if (cp < 65536) {
+				if (bmpCodePointNeedsDiacriticProcessing(cp)) {
+					return true;
+				}
+			} else if (supplementaryMayNeedDiacriticProcessing(cp)) {
 				return true;
 			}
 		}
