@@ -188,8 +188,8 @@ class PlacesDatabaseHelper {
 				val missingLangs = filterByLang && foundLangs.size < languages.size
 				if (missingLangs) {
 					LOG.debug("Missing languages for z:$zoom x:$tileX y:$tileY. Requested: $languages, Found: $foundLangs")
-					return true
 				}
+				return missingLangs
 			}
 			LOG.debug("No data found for z:$zoom x:$tileX y:$tileY")
 			return true // Data is expired if it doesn't exist
