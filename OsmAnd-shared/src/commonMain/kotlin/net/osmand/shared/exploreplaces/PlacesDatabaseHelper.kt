@@ -6,6 +6,7 @@ import kotlinx.serialization.json.Json
 import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
 import net.osmand.shared.api.SQLiteAPI.SQLiteCursor
 import net.osmand.shared.extensions.currentTimeMillis
+import net.osmand.shared.extensions.format
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KLock
@@ -97,10 +98,17 @@ class PlacesDatabaseHelper {
 						LOG.error("Failed to serialize places for insert", e)
 						continue
 					}
-					db.execSQL(
-						INSERT_OR_REPLACE,
-						arrayOf(zoom, tileX, tileY, lang, dataJson, currentTimeMillis())
-					)
+					val mbSize = dataJson.length / (1024f * 1024f)
+					val formattedSize = "%.2f".format(mbSize)
+					LOG.debug("insertPlaces: z:$zoom x:$tileX y:$tileY lang=$lang, items=${places.size}, size=$formattedSize MB")
+					try {
+						db.execSQL(
+							INSERT_OR_REPLACE,
+							arrayOf(zoom, tileX, tileY, lang, dataJson, currentTimeMillis())
+						)
+					} catch (e: Throwable) {
+						LOG.error("insertPlaces: execSQL CRASHED for lang=$lang", e)
+					}
 				}
 				db.setTransactionSuccessful()
 			} finally {
@@ -194,7 +202,7 @@ class PlacesDatabaseHelper {
 			LOG.debug("No data found for z:$zoom x:$tileX y:$tileY")
 			return true // Data is expired if it doesn't exist
 		} catch (e: Throwable) {
-			LOG.error("Failed check places expired", e)
+			LOG.error("Failed check places expired for z:$zoom x:$tileX y:$tileY", e)
 			return true
 		} finally {
 			runCatching { cursor?.close() }
