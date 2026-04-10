@@ -914,41 +914,60 @@ public class Amenity extends MapObject {
 	}
 
 	public String getCityFromTagGroups(String lang) {
-		if (tagGroups == null) {
+		if (Algorithms.isEmpty(tagGroups)) {
 			return null;
 		}
-		TreeMap<CityType, String> names = new TreeMap<City.CityType, String>(); 
+		String singleName = null;
+		CityType singleType = null;
+		String nameLangTag = "name:" + lang;
+		EnumMap<CityType, String> names = null;
+
 		for (Map.Entry<Integer, List<TagValuePair>> entry : tagGroups.entrySet()) {
-			String translated = "";
-			String nonTranslated = "";
-			City.CityType type = null;
-			for (TagValuePair tagValue : entry.getValue()) {
-				if (tagValue.tag.endsWith("name:" + lang)) {
+			CityType type = null;
+			String translated = null;
+			String nonTranslated = null;
+
+			List<TagValuePair> tagValues = entry.getValue();
+			for (int i = 0; i < tagValues.size(); i++) {
+				TagValuePair tagValue = tagValues.get(i);
+				if (tagValue.tag.endsWith(nameLangTag)) {
 					translated = tagValue.value;
-				}
-				if (tagValue.tag.endsWith("name")) {
+				} else if (tagValue.tag.endsWith("name")) {
 					nonTranslated = tagValue.value;
-				}
-				if (tagValue.tag.equals("place")) {
-					type = City.CityType.valueFromString(tagValue.value.toUpperCase());
+				} else if (tagValue.tag.equals("place")) {
+					type = CityType.valueFromString(tagValue.value);
 				}
 			}
-			String name = translated.isEmpty() ? nonTranslated : translated;
-			if (!name.isEmpty() && isCityTypeAccept(type)) {
-				names.put(type, name);
+			String name = Algorithms.isEmpty(translated) ? nonTranslated : translated;
+			if (!Algorithms.isEmpty(name) && isCityTypeAccept(type)) {
+				if (names != null) {
+					names.put(type, name);
+				} else if (singleType == null) {
+					singleType = type;
+					singleName = name;
+				} else if (singleType == type) {
+					singleName = name;
+				} else {
+					names = new EnumMap<>(CityType.class);
+					names.put(singleType, singleName);
+					names.put(type, name);
+				}
 			}
 		}
-		String result = "";
-		for (String nm : names.values()) {
+		if (names == null) {
+			return singleType == null ? "" : singleName;
+		}
+		StringBuilder result = new StringBuilder();
+		for (String name : names.values()) {
 			if (result.length() > 0) {
-				result += ", ";
+				result.append(", ");
 			}
-			result += nm;
+			result.append(name);
 		}
-		return result;
+		return result.toString();
 	}
 
-	private boolean isCityTypeAccept(City.CityType type) {
+	private boolean isCityTypeAccept(CityType type) {
 		if (type == null) {
 			return false;
 		}

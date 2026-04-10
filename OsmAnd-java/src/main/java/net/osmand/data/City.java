@@ -1,37 +1,39 @@
 package net.osmand.data;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.*;
 
 
 public class City extends MapObject {
+
 	public enum CityType {
-		// that's tricky way to play with that numbers (to avoid including suburbs in city & vice verse)
+		// that's a tricky way to play with that numbers (to avoid including suburbs in city & vice verse)
 		CITY(10000, 100000), // 0. City
 		TOWN(4000, 20000), // 1. Town
 		VILLAGE(1300, 1000), // 2. Village 
 		HAMLET(1000, 100), // 3. Hamlet - Small village
 		SUBURB(1500, 5000), // 4. Mostly district of the city (introduced to avoid duplicate streets in city) - 
 						   // however BOROUGH, DISTRICT, NEIGHBOURHOOD could be used as well for that purpose
-						   // Main difference stores own streets to search and list by it  
+						   // Main difference stores own streets to search and list by it
 		// 5.2 stored in city / villages sections written as city type
 		BOUNDARY(0, 0), // 5. boundary no streets
 		// 5.3 stored in city / villages sections written as city type
 		POSTCODE(500, 1000), // 6. write this could be activated after 5.2 release
 		
 		// not stored entities but registered to uniquely identify streets as SUBURB
-		BOROUGH(2000, 2500),  
+		BOROUGH(2000, 2500),
 		DISTRICT(1000, 10000),
 		NEIGHBOURHOOD(500, 500),
-		CENSUS(2000, 2500),
-		;
-		
+		CENSUS(2000, 2500);
+
+		private static final CityType[] VALUES = CityType.values();
+
 		private final double radius;
 		private final int population;
 		
@@ -80,16 +82,14 @@ public class City extends MapObject {
 			if ("township".equals(place)) {
 				return CityType.TOWN;
 			}
-			for (CityType t : CityType.values()) {
-				if (t.name().equalsIgnoreCase(place) 
-						&& t != BOUNDARY && t != POSTCODE) {
-					return t;
+			for (int i = 0; i < VALUES.length; i++) {
+				CityType type = VALUES[i];
+				if (type != BOUNDARY && type != POSTCODE && type.name().equalsIgnoreCase(place)) {
+					return type;
 				}
 			}
 			return null;
 		}
-		
-		
 	}
 
 	private CityType type = null;

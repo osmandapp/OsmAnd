@@ -262,36 +262,36 @@ public class SearchCoreFactory {
 			return false;
 		}
 		
-		Set<String> splitAddressSearchNames(String name) {
-			int prev = -1;
-			Set<String> namesToAdd = new HashSet<>();
-
-			for (int i = 0; i <= name.length(); i++) {
-				boolean isHyphenNearNumber = i != name.length() && name.charAt(i) == '-'
-						&& ((i + 1 < name.length() && Character.isDigit(name.charAt(i + 1)))
-								|| (i - 1 >= 0 && Character.isDigit(name.charAt(i - 1))));
-				if (i == name.length() || (!Character.isLetter(name.charAt(i)) && !Character.isDigit(name.charAt(i))
-						&& name.charAt(i) != '\'' && !isHyphenNearNumber)) {
-					if (prev != -1) {
-						String substr = name.substring(prev, i);
-						namesToAdd.add(substr.toLowerCase());
-						prev = -1;
-					}
-				} else {
-					if (prev == -1) {
-						prev = i;
-					}
-				}
-			}
-			return namesToAdd;
-		}
-
-
 
 		@Override
 		public String toString() {
 			return getClass().getSimpleName();
 		}
+	}
+	
+	
+	public static Set<String> splitSearchNames(String name) {
+		int prev = -1;
+		Set<String> namesToAdd = new HashSet<>();
+
+		for (int i = 0; i <= name.length(); i++) {
+			boolean isHyphenNearNumber = i != name.length() && name.charAt(i) == '-'
+					&& ((i + 1 < name.length() && Character.isDigit(name.charAt(i + 1)))
+							|| (i - 1 >= 0 && Character.isDigit(name.charAt(i - 1))));
+			if (i == name.length() || (!Character.isLetter(name.charAt(i)) && !Character.isDigit(name.charAt(i))
+					&& name.charAt(i) != '\'' && !isHyphenNearNumber)) {
+				if (prev != -1) {
+					String substr = name.substring(prev, i);
+					namesToAdd.add(substr.toLowerCase());
+					prev = -1;
+				}
+			} else {
+				if (prev == -1) {
+					prev = i;
+				}
+			}
+		}
+		return namesToAdd;
 	}
 
 	public static class SearchRegionByNameAPI extends SearchBaseAPI {
@@ -641,7 +641,7 @@ public class SearchCoreFactory {
 				}
 				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(minRadius, maxRadius, SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
-				Set<String> wordToSearchSplit = splitAddressSearchNames(wordToSearch);
+				Set<String> wordToSearchSplit = splitSearchNames(wordToSearch);
 				if (wordToSearchSplit.size() > 1) {
 					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
 				}
@@ -874,12 +874,14 @@ public class SearchCoreFactory {
 					(int) bbox.centerX(), (int) bbox.centerY(), searchWord,
 					(int) bbox.left, (int) bbox.right, (int) bbox.top, (int) bbox.bottom,
 					matcher, rawDataCollector);
+//			req.setMatcherMode(nm.getStringMatcher().getMode()); // enable it once tested
 			req.setSearchStat(phrase.getSettings().getStat());
 
 			SearchRequest<Amenity> reqUnlimited = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int) bbox.centerX(), (int) bbox.centerY(), searchWord,
 					0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
 					matcher, rawDataCollector);
+//			reqUnlimited.setMatcherMode(nm.getStringMatcher().getMode()); // enable it once tested
 			reqUnlimited.setSearchStat(phrase.getSettings().getStat());
 
 			BinaryMapIndexReader fileRequest = phrase.getFileRequest();

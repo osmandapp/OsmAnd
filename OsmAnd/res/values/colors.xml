@@ -239,8 +239,8 @@
 	<color name="plugin_details_install_header_bg_light">#dbdbdb</color>
 	<color name="plugin_details_install_header_bg_dark">#2d3438</color>
 
-	<color name="list_item_light_pressed">#8cffffff</color>
-	<color name="list_item_dark_pressed">#be222526</color>
+	<color name="list_item_light_pressed">#b2e6e6e6</color>
+	<color name="list_item_dark_pressed">#cc3b3b3b</color>
 
 	<color name="fab_color">#ff8f00</color>
 	<color name="fab_color_pressed">#e58200</color>

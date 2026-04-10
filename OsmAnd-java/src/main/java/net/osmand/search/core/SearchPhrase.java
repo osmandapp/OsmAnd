@@ -785,6 +785,10 @@ public class SearchPhrase {
 			}
 			return false;
 		}
+		
+		public CollatorStringMatcher getStringMatcher() {
+			return sm;
+		}
 
 		@Override
 		public boolean matches(String name) {

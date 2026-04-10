@@ -36,6 +36,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
+import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.SearchResult;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,15 +52,14 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapter.OnItemClickListener {
 
 	private static final int DISPLAY_ITEMS = 25;
-	private static final int SEARCH_POI_RADIUS = 15000;
-
 	private static final Log log = LogFactory.getLog(NearbyPlacesCard.class);
 
 	private final OsmandApplication app;
 	private final WikipediaPlugin plugin = PluginsHelper.requirePlugin(WikipediaPlugin.class);
 	private PoiUIFilter wikiFilter;
 
-	private SearchAmenitiesTask searchAmenitiesTask;
+	private SearchResultCollection collection;
+	private SearchPopularPlacesTask searchPopularPlacesTask;
 
 	private boolean collapsed;
 	private ImageView explicitIndicator;
@@ -66,7 +67,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	private RecyclerView nearByList;
 	private MaterialProgressBar progressBar;
 	private NearbyPlacesAdapter adapter;
-	private NearbyPlacesAdapter.NearbyItemClickListener clickListener;
+	private final NearbyItemClickListener clickListener;
 	private View noInternetCard;
 	private View emptyView;
 	private View noCardsFound;
@@ -74,15 +75,14 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	private ShimmerFrameLayout cardContent;
 	private boolean isLoadingItems;
 
-	private RecyclerView downloadRecyclerView;
 	private View downloadMapsCard;
 	private DownloadItemsAdapter downloadItemsAdapter;
-	private List<Object> items = new ArrayList<>();
+	private final List<Object> items = new ArrayList<>();
 	private DownloadIndexesThread downloadThread;
-	private boolean nightMode;
+	private final boolean nightMode;
 
 	public NearbyPlacesCard(@NonNull MapActivity activity,
-	                        @NonNull NearbyItemClickListener listener, boolean nightMode, boolean loadItemsOnInit) {
+			@NonNull NearbyItemClickListener listener, boolean nightMode, boolean loadItemsOnInit) {
 		super(activity);
 		app = (OsmandApplication) activity.getApplicationContext();
 		this.clickListener = listener;
@@ -104,9 +104,10 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 		showAllBtn = findViewById(R.id.show_all_button);
 		cardContent = findViewById(R.id.card_content);
 		downloadMapsCard = findViewById(R.id.download_maps_card);
-		downloadRecyclerView = emptyView.findViewById(R.id.download_recycler_view);
+
+		RecyclerView downloadRecyclerView = emptyView.findViewById(R.id.download_recycler_view);
 		downloadRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		downloadItemsAdapter = new DownloadItemsAdapter(app, this, nightMode); // Pass 'this' as the listener
+		downloadItemsAdapter = new DownloadItemsAdapter(app, this, nightMode);
 		downloadRecyclerView.setAdapter(downloadItemsAdapter);
 		noInternetCard.findViewById(R.id.try_again_button).setOnClickListener((v) -> {
 			if (app.getSettings().isInternetConnectionAvailable(true)) {
@@ -125,9 +126,10 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 		showAllBtn.setOnClickListener(v -> {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
+				PoiUIFilter filter = getWikiFilter();
 				QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
-				if (dialogFragment != null && getWikiFilter() != null) {
-					dialogFragment.showResult(getWikiFilter());
+				if (dialogFragment != null && filter != null && collection != null) {
+					dialogFragment.showResult(filter, collection);
 				}
 			}
 		});
@@ -172,7 +174,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	}
 
 	public void onLoadingFinished() {
-		searchAmenitiesTask = null;
+		searchPopularPlacesTask = null;
 		adapter.setLoading(false);
 		isLoadingItems = false;
 		cardContent.stopShimmer();
@@ -194,8 +196,8 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	}
 
 	public void onPause() {
-		if (searchAmenitiesTask != null) {
-			searchAmenitiesTask.cancel(false);
+		if (searchPopularPlacesTask != null) {
+			searchPopularPlacesTask.cancel(false);
 		}
 	}
 
@@ -218,18 +220,34 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 			isLoadingItems = true;
 			adapter.setLoading(true);
 			LatLon latLon = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
-			searchAmenitiesTask = new SearchAmenitiesTask(getWikiFilter(), latLon, SEARCH_POI_RADIUS, amenities -> {
-				amenities = amenities.subList(0, Math.min(DISPLAY_ITEMS, amenities.size()));
+			searchPopularPlacesTask = new SearchPopularPlacesTask(app, getWikiFilter(), latLon, collection -> {
+				this.collection = collection;
+
+				List<Amenity> amenities = getTopAmenities(collection);
 				updateItems(amenities);
 				onLoadingFinished();
 				return false;
 			});
-			OsmAndTaskManager.executeTask(searchAmenitiesTask);
+			OsmAndTaskManager.executeTask(searchPopularPlacesTask);
 			AndroidUiHelper.updateVisibility(progressBar, true);
-			if(!getNearbyAdapter().hasData()) {
+			if (!getNearbyAdapter().hasData()) {
 				cardContent.startShimmer();
 			}
 		}
+	}
+
+	@NonNull
+	private List<Amenity> getTopAmenities(@NonNull SearchResultCollection collection) {
+		List<Amenity> amenities = new ArrayList<>();
+		for (SearchResult result : collection.getCurrentSearchResults()) {
+			if (result.object instanceof Amenity amenity) {
+				amenities.add(amenity);
+			}
+			if (amenities.size() >= DISPLAY_ITEMS) {
+				break;
+			}
+		}
+		return amenities;
 	}
 
 	@Nullable
@@ -263,8 +281,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 		} else {
 			try {
 				MapViewTrackingUtilities utilities = app.getMapViewTrackingUtilities();
-				items.addAll(DownloadResources.findIndexItemsAt(app, utilities.getMapLocation(), WIKIPEDIA_FILE,
-						false, -1, true));
+				items.addAll(DownloadResources.findIndexItemsAt(app, utilities.getMapLocation(), WIKIPEDIA_FILE, false, -1, true));
 				haveWikiMapsToDownload = !items.isEmpty();
 				if (haveWikiMapsToDownload) {
 					downloadItemsAdapter.setItems(items);

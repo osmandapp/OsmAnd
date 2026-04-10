@@ -168,12 +168,18 @@ public class MapHudLayout extends FrameLayout {
 		addPosition(findViewById(R.id.recording_note_layout));
 		addPosition(findViewById(R.id.add_gpx_point_bottom_sheet));
 
-		addWidget(speedometerWidget);
-		addWidget(alarmWidget);
-
-		addWidget(layerParamLayout);
-		addWidget(mapTransparencyLayout);
-
+		if (speedometerWidget != null) {
+			addWidget(speedometerWidget);
+		}
+		if (alarmWidget != null) {
+			addWidget(alarmWidget);
+		}
+		if (layerParamLayout != null) {
+			addWidget(layerParamLayout);
+		}
+		if (mapTransparencyLayout != null) {
+			addWidget(mapTransparencyLayout);
+		}
 		refresh();
 	}
 

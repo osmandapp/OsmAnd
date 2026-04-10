@@ -33,6 +33,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -63,6 +64,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -160,12 +163,13 @@ import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.Collections;
 import java.util.List;
 
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
 		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener, GpsFilterFragmentLister,
-		DisplayPointGroupsCallback, CalculateAltitudeListener, OnSaveDescriptionCallback {
+		DisplayPointGroupsCallback, CalculateAltitudeListener, OnSaveDescriptionCallback, MapDisplayPositionManager.ICoveredScreenRectProvider, MapDisplayPositionManager.IMapDisplayPositionProvider {
 
 	public static final String TAG = TrackMenuFragment.class.getName();
 
@@ -233,6 +237,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private boolean menuTypeChanged;
 	private boolean overviewInitialHeight = true;
 	private int overviewInitialPosY;
+	private MapDisplayPositionManager mapDisplayPositionManager;
+	private View mainContentView;
 
 	public enum TrackMenuTab {
 		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),
@@ -320,6 +326,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		FragmentActivity activity = requireMyActivity();
+		mapDisplayPositionManager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
 
 		displayHelper = new TrackDisplayHelper(app);
 		gpxSelectionHelper = app.getSelectedGpxHelper();
@@ -469,6 +476,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			searchContainer = view.findViewById(R.id.search_container);
 			backButtonContainer = view.findViewById(R.id.back_button_container);
 			displayGroupsWidget = view.findViewById(R.id.display_groups_button_container);
+			mainContentView = view.findViewById(R.id.main_view);
 
 			if (isPortrait()) {
 				AndroidUiHelper.updateVisibility(getTopShadow(), true);
@@ -945,19 +953,22 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void onDestroyView() {
 		super.onDestroyView();
 		updateStatusBarColor();
-		OsmandMapTileView mapView = requireMapActivity().getMapView();
-		mapView.restoreScreenCenter();
+		mainContentView = null;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
+		mapDisplayPositionManager.registerMapPositionProvider(this);
+		mapDisplayPositionManager.registerCoveredScreenRectProvider(this);
 		onHiddenChanged(false);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		mapDisplayPositionManager.unregisterCoveredScreenRectProvider(this);
+		mapDisplayPositionManager.unregisterMapPositionProvider(this);
 		onHiddenChanged(true);
 	}
 
@@ -1287,7 +1298,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				if (pointsCard != null) {
 					LatLon latLon = pointsCard.getSelectedWptLatLon();
 					if (latLon != null) {
-						setCustomMapRatio(latLon);
+						OsmandMapTileView mapView = requireMapActivity().getMapView();
+						mapDisplayPositionManager.updateMapDisplayPosition();
+						mapView.getAnimatedDraggingThread().startMoving(latLon.getLatitude(),
+								latLon.getLongitude(),
+								mapView.getZoom(),
+								mapView.getZoomFloatPart(),
+								false, true, null,
+								mapView::showAndHideMapPosition);
 					}
 				}
 			}
@@ -1302,19 +1320,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					fitTrackOnMap();
 				}
 			}
-		}
-	}
-
-	private void setCustomMapRatio(LatLon latLon) {
-		View view = getView();
-		if (view != null) {
-			view = view.findViewById(R.id.main_view);
-			OsmandMapTileView mapView = requireMapActivity().getMapView();
-			RotatedTileBox tb = mapView.getRotatedTileBox();
-			float ratioX = (float) view.getWidth() / tb.getPixWidth() / 2;
-			float ratioY = (float) view.getHeight() / tb.getPixHeight() / 2;
-			app.getMapViewTrackingUtilities().getMapDisplayPositionManager().setCustomMapRatio(ratioX, ratioY);
-			mapView.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), mapView.getZoom(), mapView.getZoomFloatPart());
 		}
 	}
 
@@ -1673,7 +1678,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					params.hideFromMap();
 				}
 				selectedGpxFile = gpxSelectionHelper.selectGpxFile(gpx, params);
-				SaveGpxHelper.saveGpx(new File(gpx.getPath()), gpx,  errorMessage -> {
+				SaveGpxHelper.saveGpx(new File(gpx.getPath()), gpx, errorMessage -> {
 					SelectedGpxFile selectedGpxFile = showOnMap ? this.selectedGpxFile : null;
 					if (selectedGpxFile != null) {
 						List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(
@@ -1905,5 +1910,23 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			return true;
 		}
 		return false;
+	}
+
+	@NonNull
+	@Override
+	public List<Rect> getCoveredScreenRects() {
+		Rect rect = mainContentView == null ? null : AndroidUtils.getViewBoundOnScreen(mainContentView);
+		return rect != null ? Collections.singletonList(rect) : Collections.emptyList();
+	}
+
+	@Nullable
+	@Override
+	public MapPosition getMapDisplayPosition() {
+		return MapPosition.CENTER;
+	}
+
+	@Override
+	public boolean shouldProjectMapDisplayPositionToVisibleRect(@NonNull MapPosition position) {
+		return true;
 	}
 }

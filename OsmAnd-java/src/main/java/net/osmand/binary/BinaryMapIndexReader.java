@@ -1796,6 +1796,7 @@ public class BinaryMapIndexReader {
 
 		String nameQuery = null;
 		StringMatcherMode matcherMode = StringMatcherMode.CHECK_STARTS_FROM_SPACE;
+		
 		SearchFilter searchFilter = null;
 
 		SearchPoiTypeFilter poiTypeFilter = null;
