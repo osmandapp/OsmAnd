@@ -1,16 +1,6 @@
 package net.osmand.plus.search.dialogs;
 
-import static net.osmand.search.core.ObjectType.CITY;
-import static net.osmand.search.core.ObjectType.HOUSE;
-import static net.osmand.search.core.ObjectType.LOCATION;
-import static net.osmand.search.core.ObjectType.ONLINE_SEARCH;
-import static net.osmand.search.core.ObjectType.PARTIAL_LOCATION;
-import static net.osmand.search.core.ObjectType.POI_TYPE;
-import static net.osmand.search.core.ObjectType.POSTCODE;
-import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
-import static net.osmand.search.core.ObjectType.STREET;
-import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
-import static net.osmand.search.core.ObjectType.VILLAGE;
+import static net.osmand.search.core.ObjectType.*;
 import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
 
 import android.annotation.SuppressLint;
@@ -61,13 +51,11 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmAndTaskManager;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
-import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -1914,7 +1902,6 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void updateSearchResult(SearchResultCollection res, boolean append) {
-
 		if (!paused && mainSearchFragment != null) {
 			List<QuickSearchListItem> rows = new ArrayList<>();
 			if (res != null && !res.getCurrentSearchResults().isEmpty()) {
@@ -2245,36 +2232,16 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		return null;
 	}
 
-	public void showResult(@NonNull PoiUIFilter filter) {
+	public void showResult(@NonNull PoiUIFilter filter, @NonNull SearchResultCollection collection) {
 		buttonToolbarText.setText(R.string.shared_string_show_on_map);
 		mainSearchFragment.getAdapter().clear();
-		updateSearchResult(createSearchResultCollection(app, filter.getCurrentSearchResult(true)), true);
+		updateSearchResult(collection, true);
 		((QuickSearchListAdapter) mainSearchFragment.getAdapter()).setPoiUIFilter(filter);
 		updateTabBarVisibility(false);
 		toolbarEdit.setVisibility(View.GONE);
 		searchEditText.setHint(R.string.popular_places);
 		searchEditText.setEnabled(false);
 		toolbar.setVisibility(View.VISIBLE);
-	}
-
-	@NonNull
-	public static SearchResultCollection createSearchResultCollection(
-			@NonNull OsmandApplication app, @NonNull List<Amenity> amenities) {
-		SearchUICore core = app.getSearchUICore().getCore();
-		String locale = LocaleHelper.getPreferredPlacesLanguage(app);
-		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-		SearchSettings settings = core.getSearchSettings().setLang(locale, transliterate);
-
-		SearchPhrase phrase = SearchPhrase.emptyPhrase(settings);
-		SearchResultCollection collection = new SearchResultCollection(phrase);
-
-		List<SearchResult> results = new ArrayList<>();
-		for (Amenity amenity : amenities) {
-			SearchResult result = SearchCoreFactory.createSearchResult(amenity, phrase, core.getPoiTypes());
-			results.add(result);
-		}
-		collection.addSearchResults(results, false, false);
-		return collection;
 	}
 
 	public void onSearchResultSelected() {
