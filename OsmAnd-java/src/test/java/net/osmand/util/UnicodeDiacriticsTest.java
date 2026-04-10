@@ -10,7 +10,7 @@ import java.util.Locale;
 public class UnicodeDiacriticsTest {
 
 	@Test
-	public void testAlignCharsGermanStreetMatchesCommentInCollatorStringMatcher() {
+	public void testAlignCharsGermanStreet() {
 		Assert.assertEquals("auhofstrasse",
 				CollatorStringMatcher.alignChars("Auhofstraße").toLowerCase(Locale.ROOT));
 	}
