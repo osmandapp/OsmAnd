@@ -625,7 +625,7 @@ public class SpeedometerWidget {
 				case EXCEED -> revealColor = SpeedState.EXCEED.getAlertColor(app, lastNightMode);
 			}
 		}
-		if (currentState == SpeedState.SAFE || currentState == SpeedState.WARNING && targetState == SpeedState.EXCEED) {
+		if (currentState == targetState || currentState == SpeedState.SAFE || currentState == SpeedState.WARNING && targetState == SpeedState.EXCEED) {
 			targetSpeedAlertProgress = 1f;
 		} else {
 			targetSpeedAlertProgress = 0f;
