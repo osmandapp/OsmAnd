@@ -31,7 +31,7 @@ class GetExplorePlacesImagesTask(
 		} catch (error: Exception) {
 			LOG.debug("Load nearby images error $error")
 		}
-		LOG.debug("Finish loading nearby places. Found ${list.size} items (rect: $mapRect, zoom: $zoom, langs: $languages)")
+		LOG.debug("Finish loading nearby places. Found ${list.size} items")
 		return list
 	}
 

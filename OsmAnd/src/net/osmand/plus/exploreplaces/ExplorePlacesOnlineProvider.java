@@ -86,11 +86,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		public int hashCode() {
 			return Objects.hash(zoom, tileX, tileY);
 		}
-
-		@Override
-		public String toString() {
-			return "z:" + zoom + " x:" + tileX + " y:" + tileY;
-		}
 	}
 
 	public ExplorePlacesOnlineProvider(OsmandApplication app) {
@@ -149,26 +144,14 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 	@NonNull
 	public List<Amenity> getDataCollection(QuadRect rect, int limit) {
-		LOG.debug("getDataCollection START: rect=[" + (rect != null ? rect.left + "," + rect.top + " to " + rect.right + "," + rect.bottom : "null") + "], limit=" + limit);
 		synchronized (loadingTasks) {
 			if (rect == null) {
-				LOG.debug("getDataCollection: rect is null, cancelling all " + loadingTasks.size() + " tasks.");
 				loadingTasks.values().removeIf(KAsyncTask::cancel);
 				return Collections.emptyList();
 			}
-
 			KQuadRect kRect = SharedUtil.kQuadRect(rect);
-			loadingTasks.values().removeIf(task -> {
-				boolean outOfBounds = !kRect.contains(task.getMapRect()) && !KQuadRect.Companion.intersects(kRect, task.getMapRect());
-				boolean shouldRemove = !task.isRunning() || outOfBounds;
-
-				if (shouldRemove) {
-					boolean cancelled = task.cancel();
-					LOG.debug("getDataCollection: Cancelling task out of bounds/not running. cancelled=" + cancelled + ", outOfBounds=" + outOfBounds);
-					return true;
-				}
-				return false;
-			});
+			loadingTasks.values().removeIf(task -> (!task.isRunning()
+					|| !kRect.contains(task.getMapRect()) && !KQuadRect.Companion.intersects(kRect, task.getMapRect())) && task.cancel());
 		}
 		// Calculate the initial zoom level
 		int zoom = MAX_LEVEL_ZOOM_CACHE;
@@ -191,7 +174,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		boolean loadAll = zoom == MAX_LEVEL_ZOOM_CACHE
 				&& (Math.abs(maxTileX - minTileX) <= LOAD_ALL_TINY_RECT || Math.abs(maxTileY - minTileY) <= LOAD_ALL_TINY_RECT);
 
-		LOG.debug("getDataCollection: Computed bounds -> zoom=" + zoom + ", tilesX[" + minTileX + " to " + maxTileX + "], tilesY[" + minTileY + " to " + maxTileY + "]");
 		// Fetch data for all tiles within the bounds
 		List<Amenity> filteredAmenities = new ArrayList<>();
 		Set<Long> uniqueIds = new HashSet<>(); // Use a Set to track unique IDs
@@ -200,9 +182,8 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		// Iterate over the tiles and load data
 		for (int tileX = (int) minTileX; tileX <= (int) maxTileX; tileX++) {
 			for (int tileY = (int) minTileY; tileY <= (int) maxTileY; tileY++) {
-				TileKey tileKey = new TileKey(zoom, tileX, tileY);
-				boolean isExpired = dbHelper.isDataExpired(zoom, tileX, tileY, languages);
-				if (!isExpired) {
+				if (!dbHelper.isDataExpired(zoom, tileX, tileY, languages)) {
+					TileKey tileKey = new TileKey(zoom, tileX, tileY);
 					List<Amenity> cachedPlaces = tilesCache.get(tileKey);
 					if (cachedPlaces != null) {
 						for (Amenity amenity : cachedPlaces) {
@@ -234,7 +215,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		if (limit > 0 && filteredAmenities.size() > limit) {
 			filteredAmenities = filteredAmenities.subList(0, limit);
 		}
-		LOG.debug("getDataCollection END: Returning " + filteredAmenities.size() + " amenities.");
+
 		return filteredAmenities;
 	}
 
@@ -339,7 +320,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		TileKey tileKey = new TileKey(zoom, tileX, tileY);
 		synchronized (loadingTasks) {
 			if (loadingTasks.containsKey(tileKey)) {
-				LOG.debug("loadTile: Task already enqueued/running for " + tileKey + ". Skipping.");
 				return;
 			}
 		}
@@ -349,18 +329,15 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		double bottom = MapUtils.getLatitudeFromTile(zoom, tileY + 1);
 
 		KQuadRect tileRect = new KQuadRect(left, top, right, bottom);
-		LOG.info("loadTile: Sceduling NEW network task for " + tileKey + " Rect=" + tileRect);
 		synchronized (loadingTasks) {
 			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(tileRect, zoom, languages, new GetImageCardsListener() {
 
 				@Override
 				public void onTaskStarted() {
-					LOG.debug("loadTile.onTaskStarted: Task began execution for " + tileKey);
 				}
 
 				@Override
 				public void onFinish(@NonNull List<OsmandApiFeatureData> result) {
-					LOG.debug("loadTile.onFinish: Task finished for " + tileKey + ". Items downloaded=" + result.size());
 					synchronized (ExplorePlacesOnlineProvider.this) {
 						notifyListeners(isLoading());
 					}
@@ -379,12 +356,10 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 					for (String lang : languages) {
 						map.putIfAbsent(lang, Collections.emptyList());
 					}
-					LOG.debug("loadTile.onFinish: Inserting results into database for " + tileKey);
 					dbHelper.insertPlaces(zoom, tileX, tileY, map);
 
 					synchronized (loadingTasks) {
 						loadingTasks.remove(tileKey);
-						LOG.debug("loadTile.onFinish: Removed task from loadingTasks for " + tileKey + ". Total remaining tasks: " + loadingTasks.size());
 					}
 				}
 			});
