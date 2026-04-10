@@ -130,7 +130,7 @@ class RouteColorize {
 			val originalPalette = if (isValidPalette(palette)) {
 				palette!!
 			} else {
-				ColorPalette.MIN_MAX_PALETTE
+				getDefaultRelativePalette(type)
 			}
 			this.palette = ColorPalette(originalPalette, minValue, maxValue, type.bipolar)
 		}
@@ -358,6 +358,14 @@ class RouteColorize {
 		fun getDefaultPalette(colorizationType: ColorizationType): ColorPalette {
 			return if (colorizationType == ColorizationType.SLOPE) {
 				ColorPalette.SLOPE_PALETTE
+			} else {
+				ColorPalette.MIN_MAX_PALETTE
+			}
+		}
+
+		fun getDefaultRelativePalette(colorizationType: ColorizationType): ColorPalette {
+			return if (colorizationType.bipolar) {
+				ColorPalette.BIPOLAR_MIN_MAX_PALETTE
 			} else {
 				ColorPalette.MIN_MAX_PALETTE
 			}

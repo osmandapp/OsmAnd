@@ -52,6 +52,14 @@ class ColorPalette {
 			)
 		)
 
+		val BIPOLAR_MIN_MAX_PALETTE = parsePalette(
+			arrayOf(
+				doubleArrayOf(-1.0, GREEN.toDouble()),
+				doubleArrayOf(0.0, LIGHT_GREY.toDouble()),
+				doubleArrayOf(1.0, RED.toDouble())
+			)
+		)
+
 		fun rgbaToDecimal(r: Int, g: Int, b: Int, a: Int): Int {
 			return (a and 0xFF shl 24) or (r and 0xFF shl 16) or (g and 0xFF shl 8) or (b and 0xFF shl 0)
 		}
@@ -180,6 +188,8 @@ class ColorPalette {
 	 * @param isBipolar If true, applies independent zero-anchored scaling for negative and positive values.
 	 */
 	constructor(c: ColorPalette, minVal: Double, maxVal: Double, isBipolar: Boolean = false) {
+		// Fallback scale for absent negative/positive side.
+		// Safe because input values will also stay on the existing side of zero.
 		val scaleLeft = if (minVal < 0.0) abs(minVal) else max(maxVal, 1.0)
 		val scaleRight = if (maxVal > 0.0) maxVal else max(abs(minVal), 1.0)
 

@@ -98,8 +98,8 @@ enum class GradientFileType(
 		baseUnits = PercentUnits.FRACTION,
 		displayUnitsType = MeasureUnitType.PERCENT,
 		defaultDisplayValues = listOf(-15f, 0f, 15f),
-		minLimit = -90f,
-		maxLimit = 90f,
+		minLimit = -5f,
+		maxLimit = 5f,
 		useNamedConstants = false
 	),
 
