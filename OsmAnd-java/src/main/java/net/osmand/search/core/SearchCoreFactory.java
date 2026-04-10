@@ -34,12 +34,8 @@ import net.osmand.osm.PoiType;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
-import net.osmand.util.Algorithms;
-import net.osmand.util.GeoParsedPoint;
-import net.osmand.util.GeoPointParserUtil;
-import net.osmand.util.LocationParser;
+import net.osmand.util.*;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
-import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -294,6 +290,18 @@ public class SearchCoreFactory {
 		return namesToAdd;
 	}
 
+	public static List<String> splitAndNormalize(String query) {
+		String normalizedQuery = Algorithms.normalizeSearchText(query);
+		Set<String> queryTokens = new HashSet<>(SearchCoreFactory.splitSearchNames(normalizedQuery));
+		if (ArabicNormalizer.isSpecialArabic(normalizedQuery)) {
+			String arabic = ArabicNormalizer.normalize(normalizedQuery);
+			if (arabic != null && !arabic.equals(normalizedQuery)) {
+				queryTokens.addAll(SearchCoreFactory.splitSearchNames(arabic));
+			}
+		}
+		return new ArrayList<>(queryTokens);
+	}
+	
 	public static class SearchRegionByNameAPI extends SearchBaseAPI {
 
 		public SearchRegionByNameAPI() {

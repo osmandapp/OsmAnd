@@ -18,14 +18,14 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.util.ArabicNormalizer;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.text.Normalizer;
 import java.util.*;
+
+import static net.osmand.search.core.SearchCoreFactory.splitAndNormalize;
 
 public class BinaryMapPoiReaderAdapter {
 	private static final Log LOG = PlatformUtil.getLog(BinaryMapPoiReaderAdapter.class);
@@ -714,22 +714,6 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			}
 		}
-	}
-
-	private List<String> splitAndNormalize(String query) {
-		String normalizedQuery = Algorithms.normalizeSearchText(query);
-		List<String> queryTokens = new ArrayList<>(Algorithms.splitByWordsLowercase(normalizedQuery));
-		if (ArabicNormalizer.isSpecialArabic(normalizedQuery)) {
-			String arabic = ArabicNormalizer.normalize(normalizedQuery);
-			if (arabic != null && !arabic.equals(normalizedQuery)) {
-				for (String arabicToken : Algorithms.splitByWordsLowercase(arabic)) {
-					if (!queryTokens.contains(arabicToken)) {
-						queryTokens.add(arabicToken);
-					}
-				}
-			}
-		}
-		return queryTokens;
 	}
 
 	protected void searchPoiIndex(int left31, int right31, int top31, int bottom31,
