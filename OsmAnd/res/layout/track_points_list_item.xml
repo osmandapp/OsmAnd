@@ -142,22 +142,16 @@
 				android:background="?attr/divider_color_basic"
 				tools:visibility="visible" />
 
-			<FrameLayout
-				android:id="@+id/go_to_point_location"
+			<ImageButton
+				android:id="@+id/go_to_point_location_icon"
 				android:layout_width="@dimen/acceptable_touch_radius"
 				android:layout_height="@dimen/acceptable_touch_radius"
-				android:layout_marginEnd="@dimen/list_item_button_padding">
-
-				<ImageButton
-					android:id="@+id/go_to_point_location_icon"
-					android:layout_width="@dimen/acceptable_touch_radius"
-					android:layout_height="@dimen/acceptable_touch_radius"
-					android:layout_gravity="center"
-					android:background="?attr/dashboard_button"
-					android:contentDescription="@string/shared_string_more"
-					android:visibility="visible"
-					app:srcCompat="@drawable/ic_action_marker_dark" />
-			</FrameLayout>
+				android:layout_gravity="center"
+				android:layout_marginEnd="@dimen/list_item_button_padding"
+				android:background="?attr/controlBackground"
+				android:contentDescription="@string/shared_string_more"
+				android:visibility="visible"
+				app:srcCompat="@drawable/ic_action_marker_dark" />
 
 		</LinearLayout>
 	</FrameLayout>
