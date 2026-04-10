@@ -185,13 +185,8 @@ class PlacesDatabaseHelper {
 					foundLangs.add(lang)
 				} while (cursor.moveToNext())
 
-				val missingLangs = filterByLang && foundLangs.size < languages.size
-				if (missingLangs) {
-					LOG.debug("Missing languages for z:$zoom x:$tileX y:$tileY. Requested: $languages, Found: $foundLangs")
-					return true
-				}
+				return filterByLang && foundLangs.size < languages.size
 			}
-			LOG.debug("No data found for z:$zoom x:$tileX y:$tileY")
 			return true // Data is expired if it doesn't exist
 		} catch (e: Throwable) {
 			LOG.error("Failed check places expired", e)
