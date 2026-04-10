@@ -268,26 +268,43 @@ public class SearchUICore {
 		}
 
 		private void filterSearchDuplicateResults(List<SearchResult> lst) {
-			ListIterator<SearchResult> it = lst.listIterator();
-			LinkedList<SearchResult> lstUnique = new LinkedList<SearchResult>();
-			while (it.hasNext()) {
-				SearchResult r = it.next();
+			List<SearchResult> lstUnique = new ArrayList<>();
+			int i = 0;
+			int size = lst.size();
+
+			while (i < size) {
+				SearchResult current = lst.get(i);
+				List<SearchResult> sameList = new ArrayList<>();
+				sameList.add(current);
+
+				int j = i + 1;
+				while (j < size && sameSearchResult(current, lst.get(j))) {
+					sameList.add(lst.get(j));
+					j++;
+				}
+
+				if (sameList.size() > 1) {
+					sameList.sort((s1, s2) -> {
+                        return ObjectType.getTypeWeight(s2.objectType) - ObjectType.getTypeWeight(s1.objectType);
+                    });
+					current = sameList.get(0);
+				}
+
 				boolean same = false;
 				for (SearchResult rs : lstUnique) {
-					same = sameSearchResult(rs, r);
-					if (same) {
+					if (sameSearchResult(rs, current)) {
+						same = true;
 						break;
 					}
 				}
-				if (same) {
-					it.remove();
-				} else {
-					lstUnique.add(r);
-					if (lstUnique.size() > DEPTH_TO_CHECK_SAME_SEARCH_RESULTS) {
-						lstUnique.remove(0);
-					}
+				if (!same) {
+					lstUnique.add(current);
 				}
+				i = j;
 			}
+
+			lst.clear();
+			lst.addAll(lstUnique);
 		}
 
 		private SearchResult uniteData(List<SearchResult> list) {
