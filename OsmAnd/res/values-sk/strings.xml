@@ -6150,4 +6150,5 @@
     <string name="shared_string_native">Systém</string>
     <string name="shared_string_gpu">Graf.</string>
     <string name="shared_string_allocated">Alokované</string>
+    <string name="open_till_short">Od</string>
 </resources>

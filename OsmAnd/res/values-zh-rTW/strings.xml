@@ -5963,4 +5963,12 @@
     <string name="map_widget_memory_info_desc">監控 Java 堆疊、本機分配與圖形記憶體。</string>
     <string name="memory_used_settings">使用過的 Java 堆疊</string>
     <string name="memory_allocated_settings">分配過的 Java 堆疊</string>
+    <string name="open_till_short">直到</string>
+    <string name="memory_limit_settings">Java 堆疊上限</string>
+    <string name="memory_native_settings">由原生堆疊分配</string>
+    <string name="memory_graphics_settings">顯示記憶體</string>
+    <string name="shared_string_heap">堆疊</string>
+    <string name="shared_string_native">原生</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="shared_string_allocated">已分配</string>
 </resources>

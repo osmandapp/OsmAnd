@@ -11,6 +11,17 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1785,6 +1796,7 @@ public class BinaryMapIndexReader {
 
 		String nameQuery = null;
 		StringMatcherMode matcherMode = StringMatcherMode.CHECK_STARTS_FROM_SPACE;
+		
 		SearchFilter searchFilter = null;
 
 		SearchPoiTypeFilter poiTypeFilter = null;
@@ -1807,6 +1819,8 @@ public class BinaryMapIndexReader {
 		int numberOfReadSubtrees = 0;
 		int numberOfAcceptedSubtrees = 0;
 		boolean interrupted = false;
+		PriorityQueue<T> priorityQueue;
+		int priorityQueueLimit;
 
 		public MapObjectStat getStat() {
 			return stat;
@@ -1890,7 +1904,14 @@ public class BinaryMapIndexReader {
 
 		public boolean publish(T obj) {
 			if (resultMatcher == null || resultMatcher.publish(obj)) {
-				searchResults.add(obj);
+				if (priorityQueue != null) {
+					priorityQueue.add(obj);
+					if (priorityQueue.size() > priorityQueueLimit) {
+						priorityQueue.poll();
+					}
+				} else {
+					searchResults.add(obj);
+				}
 				return true;
 			}
 			return false;
@@ -2019,6 +2040,11 @@ public class BinaryMapIndexReader {
 
 		public void setMatcherMode(StringMatcherMode mode) {
 			matcherMode = mode;
+		}
+
+		public void setPriorityQueue(PriorityQueue<T> priorityQueue, int priorityQueueLimit) {
+			this.priorityQueue = priorityQueue;
+			this.priorityQueueLimit = priorityQueueLimit;
 		}
     }
 

@@ -6045,4 +6045,5 @@
     <string name="memory_graphics_settings">Grafikkminne</string>
     <string name="astro_expand_your_universe_title">Utvid ditt univers</string>
     <string name="gradient_no_data_point_summary">Farge som brukes når data mangler eller ikke definert.</string>
+    <string name="open_till_short">Til</string>
 </resources>
