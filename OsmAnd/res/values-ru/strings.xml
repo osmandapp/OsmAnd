@@ -1042,7 +1042,7 @@
     <string name="osmand_parking_position_name">Место парковки</string>
     <string name="osmand_parking_plugin_description">Отметьте, где припаркован ваш автомобиль, и сообщите в своем календаре, когда закончится срок действия парковочного счетчика. Чтобы разместить метку, выберите место на карте, перейдите в раздел \"Действия\" и нажмите \"Добавить парковку\".</string>
     <string name="osmand_parking_plugin_name">Место парковки</string>
-    <string name="context_menu_item_add_parking_point">Отметить как место для парковки</string>
+    <string name="context_menu_item_add_parking_point">Отметить место парковки</string>
     <string name="context_menu_item_delete_parking_point">Удалить парковку</string>
     <string name="starting_point_too_far">Пункт отправления слишком далеко от ближайшей дороги.</string>
     <string name="shared_location">Общие места</string>

@@ -379,7 +379,8 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 					for (String lang : languages) {
 						map.putIfAbsent(lang, Collections.emptyList());
 					}
-					LOG.debug("loadTile.onFinish: Inserting results into database for " + tileKey);
+
+					LOG.debug("loadTile.onFinish: Handing off to DB Helper. Total items=" + result.size() + ", App Requested Languages=" + languages);
 					dbHelper.insertPlaces(zoom, tileX, tileY, map);
 
 					synchronized (loadingTasks) {
