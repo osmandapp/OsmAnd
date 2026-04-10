@@ -653,8 +653,8 @@ public class OpeningHoursParserTest {
 
 		hours = parseOpenedHours("Mo-Fr 12:00-15:00, Tu-Fr 17:00-23:00, Sa 12:00-23:00, Su 14:00-23:00");
 		testShortInfo("16.02.2018 09:45", hours, "12:00");
-		testShortInfo("16.02.2018 12:00", hours, "Till 15:00");
-		testShortInfo("16.02.2018 14:00", hours, "Till 15:00");
+		testShortInfo("16.02.2018 12:00", hours, "Until 15:00");
+		testShortInfo("16.02.2018 14:00", hours, "Until 15:00");
 		testShortInfo("16.02.2018 16:00", hours, "17:00");
 
 		hours = parseOpenedHours("Mo-Fr 09:00-18:00");
