@@ -10,18 +10,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -2622,6 +2612,101 @@ req.setSearchStat(stat);
 			street.put(key, street.get(key) + 1);
 		}
 
+	}
+
+	List<List<BinaryMapPoiReaderAdapter.TokenPrefix>> readIndexedStringTablePrefixes(Collator instance, List<String> queries)
+			throws IOException {
+		List<Map<String, TIntArrayList>> prefixesByQuery = new ArrayList<>(queries.size());
+		for (int i = 0; i < queries.size(); i++) {
+			prefixesByQuery.add(new LinkedHashMap<>());
+		}
+		readIndexedStringTablePrefixes(instance, queries, "", prefixesByQuery);
+		
+		List<List<BinaryMapPoiReaderAdapter.TokenPrefix>> result = new ArrayList<>(queries.size());
+		for (Map<String, TIntArrayList> prefixes : prefixesByQuery) {
+			List<BinaryMapPoiReaderAdapter.TokenPrefix> tokenPrefixes = new ArrayList<>(prefixes.size());
+			for (Map.Entry<String, TIntArrayList> entry : prefixes.entrySet()) {
+				tokenPrefixes.add(new BinaryMapPoiReaderAdapter.TokenPrefix(entry.getKey(), entry.getValue()));
+			}
+			result.add(tokenPrefixes);
+		}
+		return result;
+	}
+
+	private void readIndexedStringTablePrefixes(Collator instance, List<String> queries, String prefix,
+			List<Map<String, TIntArrayList>> prefixesByQuery) throws IOException {
+		boolean[] matched = new boolean[queries.size()];
+		boolean[] matchedSubtables = new boolean[queries.size()];
+		String key = null;
+		boolean shouldWeReadSubtable = false;
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
+				key = codedIS.readString();
+				if (prefix.length() > 0) {
+					key = prefix + key;
+				}
+				shouldWeReadSubtable = matchIndexedStringTablePrefix(instance, queries, key, matched, matchedSubtables);
+				break;
+			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
+				int val = (int) readInt();
+				for (int i = 0; i < queries.size(); i++) {
+					if (matched[i] && key != null) {
+						Map<String, TIntArrayList> tokenPrefixes = prefixesByQuery.get(i);
+						TIntArrayList tokenOffsets = tokenPrefixes.get(key);
+						if (tokenOffsets == null) {
+							tokenOffsets = new TIntArrayList();
+							tokenPrefixes.put(key, tokenOffsets);
+						}
+						tokenOffsets.add(val);
+					}
+				}
+				break;
+			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
+				long len = codedIS.readRawVarint32();
+				long oldLim = codedIS.pushLimitLong((long) len);
+				if (shouldWeReadSubtable && key != null) {
+					List<String> subqueries = new ArrayList<>(queries);
+					for (int i = 0; i < queries.size(); i++) {
+						if (!matchedSubtables[i]) {
+							subqueries.set(i, null);
+						}
+					}
+					readIndexedStringTablePrefixes(instance, subqueries, key, prefixesByQuery);
+				} else {
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				}
+				codedIS.popLimit(oldLim);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+
+	private boolean matchIndexedStringTablePrefix(Collator instance, List<String> queries, String key, boolean[] matched,
+			boolean[] matchedSubtables) {
+		boolean shouldWeReadSubtable = false;
+		for (int i = 0; i < queries.size(); i++) {
+			String query = queries.get(i);
+			matched[i] = false;
+			matchedSubtables[i] = false;
+			if (query == null) {
+				continue;
+			}
+			boolean keyStartsWithQuery = CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+			boolean queryStartsWithKey = CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+			boolean potentialBranchMatch = keyStartsWithQuery || queryStartsWithKey;
+			matched[i] = potentialBranchMatch;
+			matchedSubtables[i] = potentialBranchMatch;
+			shouldWeReadSubtable |= potentialBranchMatch;
+		}
+		return shouldWeReadSubtable;
 	}
 
 	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
