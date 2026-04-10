@@ -128,7 +128,7 @@ public class RouteStatisticsHelper {
 				}
 			}
 		}
-		if (attributeNames.isEmpty()) {
+		if (attributeNames.isEmpty() && defaultRenderer != null) {
 			for (String s : defaultRenderer.getRenderingAttributeNames()) {
 				if (s.startsWith(ROUTE_INFO_PREFIX)) {
 					attributeNames.add(s);

@@ -173,27 +173,29 @@ public abstract class MapWidget {
 		return panel.isPanelVertical();
 	}
 
-	public static void updateTextColor(@NonNull TextView text, @Nullable TextView textShadow,
-			@ColorInt int textColor, @ColorInt int textShadowColor,
-			boolean boldText, int shadowRadius) {
+	public static void updateTextColor(@Nullable TextView text, @Nullable TextView textShadow,
+			@ColorInt int textColor, @ColorInt int textShadowColor, boolean boldText, int shadowRadius) {
 		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
 
 		updateTextShadow(textShadow, textShadowColor, shadowRadius, typefaceStyle);
 
-		text.setTextColor(textColor);
-		text.setTypeface(Typeface.DEFAULT, typefaceStyle);
+		if (text != null) {
+			text.setTextColor(textColor);
+			text.setTypeface(Typeface.DEFAULT, typefaceStyle);
+		}
 	}
 
-	public static void updateTextColor(@NonNull OutlinedTextContainer text, @Nullable TextView textShadow,
-			@ColorInt int textColor, @ColorInt int textShadowColor,
-			boolean boldText, int shadowRadius) {
+	public static void updateTextColor(@Nullable OutlinedTextContainer text, @Nullable TextView textShadow,
+			@ColorInt int textColor, @ColorInt int textShadowColor, boolean boldText, int shadowRadius) {
 		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
 
 		updateTextShadow(textShadow, textShadowColor, shadowRadius, typefaceStyle);
 
-		text.setTextColor(textColor);
-		text.setTypeface(Typeface.DEFAULT, typefaceStyle);
-		text.showOutline(false);
+		if (text != null) {
+			text.setTextColor(textColor);
+			text.setTypeface(Typeface.DEFAULT, typefaceStyle);
+			text.showOutline(false);
+		}
 	}
 
 	private static void updateTextShadow(@Nullable TextView textShadow, @ColorInt int textShadowColor, int shadowRadius, int typefaceStyle){
