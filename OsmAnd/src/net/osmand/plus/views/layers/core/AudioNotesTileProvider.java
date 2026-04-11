@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
@@ -107,7 +108,7 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
     }
 
     @Override
-    public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
+    public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom, IMapTiledSymbolsProvider.Request request) {
         return new QListMapTiledCollectionPoint();
     }
 
