@@ -469,7 +469,7 @@
     <string name="local_index_gpx_info_show">"
 \n
 \nIɣewwaṛen n usiti ɣezzifen"</string>
-    <string name="gpx_selection_segment_title"></string>
+    <string name="gpx_selection_segment_title"/>
     <string name="misc_pref_title">Ayen nniḍen</string>
     <string name="localization_pref_title">Asideg</string>
     <string name="lang_pt_br">Tapurtugit (Birizil)</string>
@@ -689,7 +689,7 @@
     <string name="rendering_attr_piste_type_connection_name">Tuqqna</string>
     <string name="shared_string_other">Wayeḍ</string>
     <string name="reset_to_default">Err-d azalen s lexṣas</string>
-    <string name="analytics_pref_title"></string>
+    <string name="analytics_pref_title"/>
     <string name="price_free">Ilelli</string>
     <string name="years_5">Iseggasen</string>
     <string name="years_2_4">Iseggasen</string>
@@ -1258,7 +1258,7 @@
     <string name="extra_maps_menu_group">Tikarḍiwin-nniḍen</string>
     <string name="si_mi_meters">Amayel / Amitr</string>
     <string name="si_km_m">Ikilumitren/imitren</string>
-    <string name="si_mi_yard"></string>
+    <string name="si_mi_yard"/>
     <string name="si_mi_feet">Amayel/aḍar</string>
     <string name="si_min_m">Tisdatin deg umayl</string>
     <string name="si_min_km">Tisdatin deg ukilumitr</string>

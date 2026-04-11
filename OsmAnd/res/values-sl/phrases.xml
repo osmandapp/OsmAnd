@@ -1188,7 +1188,7 @@
     <string name="poi_denomination_reformed">Reformirana</string>
     <string name="poi_denomination_evangelical">Evangeličanska</string>
     <string name="poi_denomination_anglican">Anglikanska</string>
-    <string name="poi_stone">Izjemen kamen</string>
+    <string name="poi_stone">Posebna skala</string>
     <string name="poi_boat_sharing">Skupna raba čolna</string>
     <string name="poi_car_pooling">Točka za souporabo avtomobilov</string>
     <string name="poi_funeral_directors">Pogrebne storitve</string>
@@ -2112,7 +2112,7 @@
     <string name="poi_surface_concrete">Površina: beton</string>
     <string name="poi_surface_asphalt">Površina: asfalt</string>
     <string name="poi_surface_paved">Površina: tlakovano</string>
-    <string name="poi_surface_unpaved">Površina: netlakovano</string>
+    <string name="poi_surface_unpaved">Površina: neasfaltirana</string>
     <string name="poi_bridge_movable_bascule">Tip premičnega mostu: gibljivi</string>
     <string name="poi_architecture_umgebinde">Arhitektura: umgebinde</string>
     <string name="poi_surface_metal">Površina: kovina</string>
@@ -2694,7 +2694,7 @@
     <string name="poi_fair_trade_only">Samo izdelki pravične trgovine</string>
     <string name="poi_fair_trade_no">Pravična trgovina: ne</string>
     <string name="poi_fair_trade_yes">Pravična trgovina: da</string>
-    <string name="poi_street_cabinet">Ulična omarica</string>
+    <string name="poi_street_cabinet">Ulična el. omarica</string>
     <string name="poi_construction_yes">V gradnji</string>
     <string name="poi_inscription_se">Napis:JV</string>
     <string name="poi_inscription_nw">Napis:SZ</string>
