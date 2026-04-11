@@ -152,7 +152,7 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
    }
 
    @Override
-   public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
+   public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom, IMapTiledSymbolsProvider.Request request) {
       return new QListMapTiledCollectionPoint();
    }
 
