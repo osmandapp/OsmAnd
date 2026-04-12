@@ -783,4 +783,8 @@
     <string name="poi_water_supply_water_well">Lbir n waman</string>
     <string name="poi_water_filter">Aman;Aman n tissit</string>
     <string name="poi_us_maps_recreation_area_activity_other_activities">Irmad nniḍen</string>
+    <string name="poi_us_maps_recreation_area_open_status_open">Yeldi</string>
+    <string name="poi_us_maps_recreation_area_open_status_closed">Yemdel</string>
+    <string name="poi_us_maps_recreation_area_open_status_unreachable">Ur yettwakcam ara</string>
+    <string name="poi_name_left">Isem ɣef tama tazelmaḍt</string>
 </resources>
