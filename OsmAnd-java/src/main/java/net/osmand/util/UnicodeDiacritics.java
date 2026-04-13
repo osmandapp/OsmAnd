@@ -2,14 +2,17 @@ package net.osmand.util;
 
 import java.text.Normalizer;
 import java.util.BitSet;
+import java.util.Locale;
 
 /**
  * Same semantics as OsmAnd-core {@code ICU::stripDiacritics} (b7285ce): NFD, drop only Mn, NFC;
- * BMP bitset fast path like {@code initializeCharFilter} / {@code s_isUnsafeChar}.
+ * BMP bitset fast path. Optional search-scoped timing via {@link #beginStripDiacriticsSearchTiming()}.
  */
 public final class UnicodeDiacritics {
 
 	private static final BitSet BMP_MAY_NEED_DIACRITIC_PROCESSING = new BitSet(65536);
+
+	private static final ThreadLocal<StripDiacriticsSearchTiming> SEARCH_TIMING = new ThreadLocal<>();
 
 	static {
 		char[] buf = new char[2];
@@ -21,6 +24,32 @@ public final class UnicodeDiacritics {
 	}
 
 	private UnicodeDiacritics() {
+	}
+
+	public static void beginStripDiacriticsSearchTiming() {
+		SEARCH_TIMING.set(new StripDiacriticsSearchTiming());
+	}
+
+	public static StripDiacriticsSearchTiming endStripDiacriticsSearchTiming() {
+		StripDiacriticsSearchTiming t = SEARCH_TIMING.get();
+		SEARCH_TIMING.remove();
+		return t;
+	}
+
+	public static final class StripDiacriticsSearchTiming {
+		long sumNanos;
+		int count;
+
+		public int getInvocationCount() {
+			return count;
+		}
+
+		public String formatLogLine() {
+			double summMs = sumNanos / 1_000_000.0;
+			double averMs = count == 0 ? 0.0 : (sumNanos / (double) count) / 1_000_000.0;
+			return String.format(Locale.US, "stripDiacritics: summ: %.3f ms, cnt: %d, aver: %.9f ms",
+					summMs, count, averMs);
+		}
 	}
 
 	private static boolean bmpCodePointNeedsDiacriticProcessingInit(int cp, char[] buf) {
@@ -61,12 +90,30 @@ public final class UnicodeDiacritics {
 	}
 
 	public static String stripDiacritics(String input) {
+		StripDiacriticsSearchTiming timing = SEARCH_TIMING.get();
+		if (timing != null) {
+			long t0 = System.nanoTime();
+			try {
+				return stripDiacriticsBody(input);
+			} finally {
+				timing.sumNanos += System.nanoTime() - t0;
+				timing.count++;
+			}
+		}
+		return stripDiacriticsBody(input);
+	}
+
+	private static String stripDiacriticsBody(String input) {
 		if (input == null || input.isEmpty()) {
 			return input;
 		}
 		if (!stringMayNeedDiacriticProcessing(input)) {
 			return input;
 		}
+		return stripDiacriticsNormalizeAndStrip(input);
+	}
+
+	private static String stripDiacriticsNormalizeAndStrip(String input) {
 		String decomposed = Normalizer.normalize(input, Normalizer.Form.NFD);
 		StringBuilder filtered = new StringBuilder(decomposed.length());
 		for (int i = 0, len = decomposed.length(); i < len; ) {
