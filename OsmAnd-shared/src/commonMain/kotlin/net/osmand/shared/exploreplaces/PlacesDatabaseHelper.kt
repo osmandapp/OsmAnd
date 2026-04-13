@@ -6,7 +6,6 @@ import kotlinx.serialization.json.Json
 import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
 import net.osmand.shared.api.SQLiteAPI.SQLiteCursor
 import net.osmand.shared.extensions.currentTimeMillis
-import net.osmand.shared.extensions.format
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KLock
@@ -14,6 +13,8 @@ import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.PlatformUtil
 import net.osmand.shared.util.synchronized
 import net.osmand.shared.wiki.WikiCoreHelper.OsmandApiFeatureData
+import okio.FileSystem
+import okio.SYSTEM
 
 class PlacesDatabaseHelper {
 
@@ -23,7 +24,7 @@ class PlacesDatabaseHelper {
 		private val DB_LOCK = KLock()
 
 		private const val DATABASE_NAME = "places.db"
-		private const val DATABASE_VERSION = 2
+		private const val DATABASE_VERSION = 3
 
 		private const val DATA_EXPIRATION_TIME = 30L * 24 * 60 * 60 * 1000 // 1 month
 		private const val EMPTY_DATA_EXPIRATION_TIME = 7L * 24 * 60 * 60 * 1000 // 7 days
@@ -33,8 +34,13 @@ class PlacesDatabaseHelper {
 		private const val COLUMN_TILE_X = "tileX"
 		private const val COLUMN_TILE_Y = "tileY"
 		private const val COLUMN_LANG = "lang"
+		private const val COLUMN_DATA_CHUNK = "dataChunk"
 		private const val COLUMN_DATA = "data"
 		private const val COLUMN_TIMESTAMP = "timestamp"
+		private const val ALL_LANGUAGES_MARKER_LANG = "all_langs"
+		private const val ALL_LANGUAGES_EMPTY_MARKER_DATA = "[]"
+		private const val ALL_LANGUAGES_NON_EMPTY_MARKER_DATA = "[ ]"
+		private const val MAX_DATA_CHUNK_SIZE = 256 * 1024
 
 		private const val CREATE_TABLE_PLACES =
 			"CREATE TABLE IF NOT EXISTS $TABLE_PLACES (" +
@@ -42,15 +48,19 @@ class PlacesDatabaseHelper {
 					"$COLUMN_TILE_X INTEGER," +
 					"$COLUMN_TILE_Y INTEGER," +
 					"$COLUMN_LANG TEXT," +
+					"$COLUMN_DATA_CHUNK INTEGER," +
 					"$COLUMN_DATA TEXT," +
 					"$COLUMN_TIMESTAMP INTEGER," +
-					"PRIMARY KEY ($COLUMN_ZOOM, $COLUMN_TILE_X, $COLUMN_TILE_Y, $COLUMN_LANG)" +
+					"PRIMARY KEY ($COLUMN_ZOOM, $COLUMN_TILE_X, $COLUMN_TILE_Y, $COLUMN_LANG, $COLUMN_DATA_CHUNK)" +
 					")"
 
 		private const val INSERT_OR_REPLACE =
 			"INSERT OR REPLACE INTO $TABLE_PLACES " +
-					"($COLUMN_ZOOM, $COLUMN_TILE_X, $COLUMN_TILE_Y, $COLUMN_LANG, $COLUMN_DATA, $COLUMN_TIMESTAMP) " +
-					"VALUES (?, ?, ?, ?, ?, ?)"
+					"($COLUMN_ZOOM, $COLUMN_TILE_X, $COLUMN_TILE_Y, $COLUMN_LANG, $COLUMN_DATA_CHUNK, $COLUMN_DATA, $COLUMN_TIMESTAMP) " +
+					"VALUES (?, ?, ?, ?, ?, ?, ?)"
+
+		private const val DELETE_LANGUAGE_DATA =
+			"DELETE FROM $TABLE_PLACES WHERE $COLUMN_ZOOM=? AND $COLUMN_TILE_X=? AND $COLUMN_TILE_Y=? AND $COLUMN_LANG=?"
 	}
 
 	@OptIn(ExperimentalSerializationApi::class)
@@ -64,6 +74,11 @@ class PlacesDatabaseHelper {
 
 	private val serializer = ListSerializer(OsmandApiFeatureData.serializer())
 
+	init {
+		val cacheDir = PlatformUtil.getOsmAndContext().getCacheDir()
+		//FileSystem.SYSTEM.delete(KFile(cacheDir, DATABASE_NAME).path)
+	}
+
 	private fun onCreate(db: SQLiteConnection) {
 		db.execSQL(CREATE_TABLE_PLACES)
 	}
@@ -74,7 +89,7 @@ class PlacesDatabaseHelper {
 	}
 
 	private fun onUpgrade(db: SQLiteConnection, oldVersion: Int, newVersion: Int) {
-		if (oldVersion < 2) {
+		if (oldVersion < 3) {
 			db.execSQL("DROP TABLE IF EXISTS $TABLE_PLACES")
 			onCreate(db)
 		}
@@ -84,11 +99,12 @@ class PlacesDatabaseHelper {
 		zoom: Int,
 		tileX: Int,
 		tileY: Int,
-		placesByLang: Map<String, List<OsmandApiFeatureData>>
-	) {
+		placesByLang: Map<String, List<OsmandApiFeatureData>>,
+		allLanguagesEmptyResult: Boolean?
+	): Boolean {
 		var db: SQLiteConnection? = null
 		try {
-			db = openConnection(readOnly = false) ?: return
+			db = openConnection(readOnly = false) ?: return false
 			db.beginTransaction()
 			try {
 				for ((lang, places) in placesByLang) {
@@ -96,29 +112,76 @@ class PlacesDatabaseHelper {
 						json.encodeToString(serializer, places)
 					} catch (e: Throwable) {
 						LOG.error("Failed to serialize places for insert", e)
-						continue
+						return false
 					}
-					val mbSize = dataJson.length / (1024f * 1024f)
-					val formattedSize = "%.2f".format(mbSize)
-					LOG.debug("insertPlaces: z:$zoom x:$tileX y:$tileY lang=$lang, items=${places.size}, size=$formattedSize MB")
-					try {
-						db.execSQL(
-							INSERT_OR_REPLACE,
-							arrayOf(zoom, tileX, tileY, lang, dataJson, currentTimeMillis())
-						)
-					} catch (e: Throwable) {
-						LOG.error("insertPlaces: execSQL CRASHED for lang=$lang", e)
-					}
+					insertPlaceData(db, zoom, tileX, tileY, lang, dataJson)
+				}
+				if (allLanguagesEmptyResult != null) {
+					insertAllLanguagesRow(db, zoom, tileX, tileY, allLanguagesEmptyResult)
 				}
 				db.setTransactionSuccessful()
 			} finally {
 				db.endTransaction()
 			}
+			return true
 		} catch (e: Throwable) {
 			LOG.error("Failed insert places", e)
+			return false
 		} finally {
 			runCatching { db?.close() }
 		}
+	}
+
+	private fun insertAllLanguagesRow(
+		db: SQLiteConnection,
+		zoom: Int,
+		tileX: Int,
+		tileY: Int,
+		emptyResult: Boolean
+	) {
+		insertPlaceData(
+			db,
+			zoom,
+			tileX,
+			tileY,
+			ALL_LANGUAGES_MARKER_LANG,
+			if (emptyResult) ALL_LANGUAGES_EMPTY_MARKER_DATA else ALL_LANGUAGES_NON_EMPTY_MARKER_DATA
+		)
+	}
+
+	private fun insertPlaceData(
+		db: SQLiteConnection,
+		zoom: Int,
+		tileX: Int,
+		tileY: Int,
+		lang: String,
+		dataJson: String
+	) {
+		db.execSQL(DELETE_LANGUAGE_DATA, arrayOf(zoom, tileX, tileY, lang))
+		val timestamp = currentTimeMillis()
+		var chunk = 0
+		var start = 0
+		do {
+			val end = getChunkEnd(dataJson, start)
+			db.execSQL(
+				INSERT_OR_REPLACE,
+				arrayOf(zoom, tileX, tileY, lang, chunk, dataJson.substring(start, end), timestamp)
+			)
+			chunk++
+			start = end
+		} while (start < dataJson.length)
+	}
+
+	private fun getChunkEnd(dataJson: String, start: Int): Int {
+		var end = minOf(start + MAX_DATA_CHUNK_SIZE, dataJson.length)
+		if (end < dataJson.length && isHighSurrogate(dataJson[end - 1])) {
+			end--
+		}
+		return end
+	}
+
+	private fun isHighSurrogate(ch: Char): Boolean {
+		return ch.code in 0xD800..0xDBFF
 	}
 
 	fun getPlaces(
@@ -131,26 +194,41 @@ class PlacesDatabaseHelper {
 		var cursor: SQLiteCursor? = null
 		val places = mutableListOf<OsmandApiFeatureData>()
 		try {
-			db = openConnection(readOnly = true) ?: return places
+			db = openConnection(readOnly = true) ?: return emptyList()
 			val (selection, args) = getSelectionWithArgs(zoom, tileX, tileY, languages)
-			val sql = "SELECT $COLUMN_DATA, $COLUMN_TIMESTAMP FROM $TABLE_PLACES WHERE $selection"
+			val sql = "SELECT $COLUMN_LANG, $COLUMN_DATA_CHUNK, $COLUMN_DATA FROM $TABLE_PLACES WHERE $selection " +
+					"ORDER BY $COLUMN_LANG, $COLUMN_DATA_CHUNK"
 
 			cursor = db.rawQuery(sql, args)
+			val chunksByLang = LinkedHashMap<String, StringBuilder>()
 			if (cursor != null && cursor.moveToFirst()) {
+				val langIndex = cursor.getColumnIndex(COLUMN_LANG)
 				val dataIndex = cursor.getColumnIndex(COLUMN_DATA)
 				do {
-					val jsonStr = cursor.getString(dataIndex)
-					if (jsonStr.isNotEmpty()) {
-						try {
-							places.addAll(json.decodeFromString(serializer, jsonStr))
-						} catch (e: Throwable) {
-							LOG.error("Failed to parse places JSON", e)
-						}
+					val lang = cursor.getString(langIndex)
+					if (lang == ALL_LANGUAGES_MARKER_LANG) {
+						continue
+					}
+					val dataChunk = cursor.getString(dataIndex)
+					if (dataChunk.isNotEmpty()) {
+						chunksByLang.getOrPut(lang) { StringBuilder() }.append(dataChunk)
 					}
 				} while (cursor.moveToNext())
 			}
+			for ((_, dataBuilder) in chunksByLang) {
+				val jsonStr = dataBuilder.toString()
+				if (jsonStr.isNotEmpty()) {
+					try {
+						places.addAll(json.decodeFromString(serializer, jsonStr))
+					} catch (e: Throwable) {
+						LOG.error("Failed to parse places JSON", e)
+						return emptyList()
+					}
+				}
+			}
 		} catch (e: Throwable) {
 			LOG.error("Failed get places", e)
+			return emptyList()
 		} finally {
 			runCatching { cursor?.close() }
 			runCatching { db?.close() }
@@ -170,8 +248,10 @@ class PlacesDatabaseHelper {
 
 		try {
 			db = openConnection(readOnly = true) ?: return true
-			val (selection, args) = getSelectionWithArgs(zoom, tileX, tileY, languages)
-			val sql = "SELECT $COLUMN_LANG, $COLUMN_TIMESTAMP, length($COLUMN_DATA) as data_length FROM $TABLE_PLACES WHERE $selection"
+			val langsToCheck = if (filterByLang) languages else listOf(ALL_LANGUAGES_MARKER_LANG)
+			val (selection, args) = getSelectionWithArgs(zoom, tileX, tileY, langsToCheck)
+			val sql = "SELECT $COLUMN_LANG, min($COLUMN_TIMESTAMP) as $COLUMN_TIMESTAMP, " +
+					"sum(length($COLUMN_DATA)) as data_length FROM $TABLE_PLACES WHERE $selection GROUP BY $COLUMN_LANG"
 
 			cursor = db.rawQuery(sql, args)
 			if (cursor != null && cursor.moveToFirst()) {
@@ -183,26 +263,24 @@ class PlacesDatabaseHelper {
 				do {
 					val lang = cursor.getString(langIndex)
 					val ts = cursor.getLong(timestampIndex)
-					val dataLen = if (cursor.isNull(dataLengthIndex)) 0 else cursor.getInt(dataLengthIndex)
-					val emptyData = dataLen <= 2 // Check for empty JSON array "[]"
+					val dataLen = if (cursor.isNull(dataLengthIndex)) 0L else cursor.getLong(dataLengthIndex)
+					val emptyData = dataLen <= 2L // Check for empty JSON array "[]"
 
 					val expirationTime = if (emptyData) EMPTY_DATA_EXPIRATION_TIME else DATA_EXPIRATION_TIME
-					if ((currentTime - ts) > expirationTime){
+					if ((currentTime - ts) > expirationTime) {
 						return true
 					}
 					foundLangs.add(lang)
 				} while (cursor.moveToNext())
 
-				val missingLangs = filterByLang && foundLangs.size < languages.size
-				if (missingLangs) {
-					LOG.debug("Missing languages for z:$zoom x:$tileX y:$tileY. Requested: $languages, Found: $foundLangs")
+				if (filterByLang) {
+					return foundLangs.size < languages.size
 				}
-				return missingLangs
+				return false
 			}
-			LOG.debug("No data found for z:$zoom x:$tileX y:$tileY")
 			return true // Data is expired if it doesn't exist
 		} catch (e: Throwable) {
-			LOG.error("Failed check places expired for z:$zoom x:$tileX y:$tileY", e)
+			LOG.error("Failed check places expired", e)
 			return true
 		} finally {
 			runCatching { cursor?.close() }

@@ -20,7 +20,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
-import net.osmand.shared.KAsyncTask;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.exploreplaces.GetExplorePlacesImagesTask;
 import net.osmand.shared.exploreplaces.GetExplorePlacesImagesTask.GetImageCardsListener;
@@ -39,8 +38,20 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 // Extra: display new categories from web
 
@@ -54,23 +65,29 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	private static final int MAX_TILES_PER_QUAD_RECT = 12;
 	private static final int MAX_TILES_PER_CACHE = MAX_TILES_PER_QUAD_RECT * 2;
 	private static final double LOAD_ALL_TINY_RECT = 0.5;
+	private static final String LANGUAGE_SCOPE_SEPARATOR = "|";
 
 	private final OsmandApplication app;
 	private final PlacesDatabaseHelper dbHelper;
+	private final Object tilesLock = new Object();
+	private final ExecutorService tilePersistenceExecutor = Executors.newSingleThreadExecutor();
 
 	private final Map<TileKey, GetExplorePlacesImagesTask> loadingTasks = new HashMap<>();
 	private final Map<TileKey, List<Amenity>> tilesCache = new HashMap<>(); // Memory cache for recent tiles
 
 
 	private static class TileKey {
-		int zoom;
-		int tileX;
-		int tileY;
+		final int zoom;
+		final int tileX;
+		final int tileY;
+		@NonNull
+		final String languageScope;
 
-		public TileKey(int zoom, int tileX, int tileY) {
+		public TileKey(int zoom, int tileX, int tileY, @NonNull String languageScope) {
 			this.zoom = zoom;
 			this.tileX = tileX;
 			this.tileY = tileY;
+			this.languageScope = languageScope;
 		}
 
 		@Override
@@ -79,17 +96,13 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 			if (!(o instanceof TileKey tileKey)) {
 				return false;
 			}
-			return zoom == tileKey.zoom && tileX == tileKey.tileX && tileY == tileKey.tileY;
+			return zoom == tileKey.zoom && tileX == tileKey.tileX && tileY == tileKey.tileY
+					&& Objects.equals(languageScope, tileKey.languageScope);
 		}
 
 		@Override
 		public int hashCode() {
-			return Objects.hash(zoom, tileX, tileY);
-		}
-
-		@Override
-		public String toString() {
-			return "z:" + zoom + " x:" + tileX + " y:" + tileY;
+			return Objects.hash(zoom, tileX, tileY, languageScope);
 		}
 	}
 
@@ -149,26 +162,24 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 	@NonNull
 	public List<Amenity> getDataCollection(QuadRect rect, int limit) {
-		LOG.debug("getDataCollection START: rect=[" + (rect != null ? rect.left + "," + rect.top + " to " + rect.right + "," + rect.bottom : "null") + "], limit=" + limit);
-		synchronized (loadingTasks) {
+		synchronized (tilesLock) {
 			if (rect == null) {
-				LOG.debug("getDataCollection: rect is null, cancelling all " + loadingTasks.size() + " tasks.");
-				loadingTasks.values().removeIf(KAsyncTask::cancel);
+				Iterator<Entry<TileKey, GetExplorePlacesImagesTask>> iterator = loadingTasks.entrySet().iterator();
+				while (iterator.hasNext()) {
+					iterator.next().getValue().cancel();
+					iterator.remove();
+				}
 				return Collections.emptyList();
 			}
-
 			KQuadRect kRect = SharedUtil.kQuadRect(rect);
-			loadingTasks.values().removeIf(task -> {
-				boolean outOfBounds = !kRect.contains(task.getMapRect()) && !KQuadRect.Companion.intersects(kRect, task.getMapRect());
-				boolean shouldRemove = !task.isRunning() || outOfBounds;
-
-				if (shouldRemove) {
-					boolean cancelled = task.cancel();
-					LOG.debug("getDataCollection: Cancelling task out of bounds/not running. cancelled=" + cancelled + ", outOfBounds=" + outOfBounds);
-					return true;
+			Iterator<Entry<TileKey, GetExplorePlacesImagesTask>> iterator = loadingTasks.entrySet().iterator();
+			while (iterator.hasNext()) {
+				GetExplorePlacesImagesTask task = iterator.next().getValue();
+				if (!kRect.contains(task.getMapRect()) && !KQuadRect.Companion.intersects(kRect, task.getMapRect())) {
+					task.cancel();
+					iterator.remove();
 				}
-				return false;
-			});
+			}
 		}
 		// Calculate the initial zoom level
 		int zoom = MAX_LEVEL_ZOOM_CACHE;
@@ -191,7 +202,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		boolean loadAll = zoom == MAX_LEVEL_ZOOM_CACHE
 				&& (Math.abs(maxTileX - minTileX) <= LOAD_ALL_TINY_RECT || Math.abs(maxTileY - minTileY) <= LOAD_ALL_TINY_RECT);
 
-		LOG.debug("getDataCollection: Computed bounds -> zoom=" + zoom + ", tilesX[" + minTileX + " to " + maxTileX + "], tilesY[" + minTileY + " to " + maxTileY + "]");
 		// Fetch data for all tiles within the bounds
 		List<Amenity> filteredAmenities = new ArrayList<>();
 		Set<Long> uniqueIds = new HashSet<>(); // Use a Set to track unique IDs
@@ -200,28 +210,28 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		// Iterate over the tiles and load data
 		for (int tileX = (int) minTileX; tileX <= (int) maxTileX; tileX++) {
 			for (int tileY = (int) minTileY; tileY <= (int) maxTileY; tileY++) {
-				TileKey tileKey = new TileKey(zoom, tileX, tileY);
-				boolean isExpired = dbHelper.isDataExpired(zoom, tileX, tileY, languages);
-				if (!isExpired) {
-					List<Amenity> cachedPlaces = tilesCache.get(tileKey);
-					if (cachedPlaces != null) {
-						for (Amenity amenity : cachedPlaces) {
+				TileKey tileKey = createTileKey(zoom, tileX, tileY, languages);
+				List<Amenity> cachedPlaces;
+				synchronized (tilesLock) {
+					cachedPlaces = tilesCache.get(tileKey);
+				}
+				if (cachedPlaces != null) {
+					filterAmenities(cachedPlaces, filteredAmenities, rect, uniqueIds, loadAll);
+				} else if (!dbHelper.isDataExpired(zoom, tileX, tileY, languages)) {
+					List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, languages);
+					cachedPlaces = new ArrayList<>();
+					for (OsmandApiFeatureData item : places) {
+						Amenity amenity = createAmenity(item);
+						if (amenity != null) {
 							filterAmenity(amenity, filteredAmenities, rect, uniqueIds, loadAll);
+							cachedPlaces.add(amenity);
 						}
-					} else {
-						List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, languages);
-						cachedPlaces = new ArrayList<>();
-						for (OsmandApiFeatureData item : places) {
-							Amenity amenity = createAmenity(item);
-							if (amenity != null) {
-								filterAmenity(amenity, filteredAmenities, rect, uniqueIds, loadAll);
-								cachedPlaces.add(amenity);
-							}
-						}
+					}
+					synchronized (tilesLock) {
 						tilesCache.put(tileKey, cachedPlaces);
 					}
 				} else {
-					loadTile(zoom, tileX, tileY, languages);
+					loadTile(tileKey, zoom, tileX, tileY, languages);
 				}
 			}
 		}
@@ -234,8 +244,18 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		if (limit > 0 && filteredAmenities.size() > limit) {
 			filteredAmenities = filteredAmenities.subList(0, limit);
 		}
-		LOG.debug("getDataCollection END: Returning " + filteredAmenities.size() + " amenities.");
+
 		return filteredAmenities;
+	}
+
+	@NonNull
+	private TileKey createTileKey(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
+		return new TileKey(zoom, tileX, tileY, getLanguageScope(languages));
+	}
+
+	@NonNull
+	private String getLanguageScope(@NonNull List<String> languages) {
+		return String.join(LANGUAGE_SCOPE_SEPARATOR, languages);
 	}
 
 	private void filterAmenity(@NonNull Amenity amenity, @NonNull List<Amenity> filteredAmenities,
@@ -247,25 +267,34 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		}
 	}
 
-	private void clearCache(int zoom, int minTileX, int maxTileX, int minTileY, int maxTileY) {
-		Iterator<Entry<TileKey, List<Amenity>>> iterator = tilesCache.entrySet().iterator();
-		while (iterator.hasNext()) {
-			TileKey key = iterator.next().getKey();
-			if (key.zoom != zoom) {
-				iterator.remove();
-			}
+	private void filterAmenities(@NonNull List<Amenity> amenities, @NonNull List<Amenity> filteredAmenities,
+			@NonNull QuadRect rect, @NonNull Set<Long> uniqueIds, boolean loadAll) {
+		for (Amenity amenity : amenities) {
+			filterAmenity(amenity, filteredAmenities, rect, uniqueIds, loadAll);
 		}
-		int numTiles = tilesCache.size();
-		if (numTiles > MAX_TILES_PER_CACHE) {
-			List<TileKey> currentZoomKeys = new ArrayList<>(tilesCache.keySet());
-			currentZoomKeys.sort(Comparator.comparingInt(key -> {
-				int dx = Math.max(0, Math.max(minTileX - key.tileX, key.tileX - maxTileX));
-				int dy = Math.max(0, Math.max(minTileY - key.tileY, key.tileY - maxTileY));
-				return dx + dy;
-			}));
-			for (int i = MAX_TILES_PER_CACHE; i < numTiles; i++) {
-				TileKey keyToRemove = currentZoomKeys.get(i);
-				tilesCache.remove(keyToRemove);
+	}
+
+	private void clearCache(int zoom, int minTileX, int maxTileX, int minTileY, int maxTileY) {
+		synchronized (tilesLock) {
+			Iterator<Entry<TileKey, List<Amenity>>> iterator = tilesCache.entrySet().iterator();
+			while (iterator.hasNext()) {
+				TileKey key = iterator.next().getKey();
+				if (key.zoom != zoom) {
+					iterator.remove();
+				}
+			}
+			int numTiles = tilesCache.size();
+			if (numTiles > MAX_TILES_PER_CACHE) {
+				List<TileKey> currentZoomKeys = new ArrayList<>(tilesCache.keySet());
+				currentZoomKeys.sort(Comparator.comparingInt(key -> {
+					int dx = Math.max(0, Math.max(minTileX - key.tileX, key.tileX - maxTileX));
+					int dy = Math.max(0, Math.max(minTileY - key.tileY, key.tileY - maxTileY));
+					return dx + dy;
+				}));
+				for (int i = MAX_TILES_PER_CACHE; i < numTiles; i++) {
+					TileKey keyToRemove = currentZoomKeys.get(i);
+					tilesCache.remove(keyToRemove);
+				}
 			}
 		}
 	}
@@ -335,58 +364,27 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	}
 
 	@SuppressLint("DefaultLocale")
-	private void loadTile(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
-		TileKey tileKey = new TileKey(zoom, tileX, tileY);
-		synchronized (loadingTasks) {
-			if (loadingTasks.containsKey(tileKey)) {
-				LOG.debug("loadTile: Task already enqueued/running for " + tileKey + ". Skipping.");
-				return;
-			}
-		}
+	private void loadTile(@NonNull TileKey tileKey, int zoom, int tileX, int tileY, @NonNull List<String> languages) {
 		double left = MapUtils.getLongitudeFromTile(zoom, tileX);
 		double right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
 		double top = MapUtils.getLatitudeFromTile(zoom, tileY);
 		double bottom = MapUtils.getLatitudeFromTile(zoom, tileY + 1);
 
 		KQuadRect tileRect = new KQuadRect(left, top, right, bottom);
-		LOG.info("loadTile: Sceduling NEW network task for " + tileKey + " Rect=" + tileRect);
-		synchronized (loadingTasks) {
-			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(tileRect, zoom, languages, new GetImageCardsListener() {
+		List<String> requestLanguages = new ArrayList<>(languages);
+		synchronized (tilesLock) {
+			if (loadingTasks.containsKey(tileKey)) {
+				return;
+			}
+			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(tileRect, zoom, requestLanguages, new GetImageCardsListener() {
 
 				@Override
 				public void onTaskStarted() {
-					LOG.debug("loadTile.onTaskStarted: Task began execution for " + tileKey);
 				}
 
 				@Override
 				public void onFinish(@NonNull List<OsmandApiFeatureData> result) {
-					LOG.debug("loadTile.onFinish: Task finished for " + tileKey + ". Items downloaded=" + result.size());
-					synchronized (ExplorePlacesOnlineProvider.this) {
-						notifyListeners(isLoading());
-					}
-					Map<String, List<OsmandApiFeatureData>> map = new HashMap<>();
-					if (!Algorithms.isEmpty(result)) {
-						for (OsmandApiFeatureData data : result) {
-							WikiDataProperties properties = data.getProperties();
-							String lang = properties.getLang();
-							if (Algorithms.isEmpty(lang)) {
-								lang = properties.getWikiLang();
-							}
-							List<OsmandApiFeatureData> list = map.computeIfAbsent(lang, k -> new ArrayList<>());
-							list.add(data);
-						}
-					}
-					for (String lang : languages) {
-						map.putIfAbsent(lang, Collections.emptyList());
-					}
-
-					LOG.debug("loadTile.onFinish: Handing off to DB Helper. Total items=" + result.size() + ", App Requested Languages=" + languages);
-					dbHelper.insertPlaces(zoom, tileX, tileY, map);
-
-					synchronized (loadingTasks) {
-						loadingTasks.remove(tileKey);
-						LOG.debug("loadTile.onFinish: Removed task from loadingTasks for " + tileKey + ". Total remaining tasks: " + loadingTasks.size());
-					}
+					schedulePersistLoadedTile(tileKey, zoom, tileX, tileY, requestLanguages, result);
 				}
 			});
 			loadingTasks.put(tileKey, task);
@@ -394,16 +392,92 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		}
 	}
 
+	private void schedulePersistLoadedTile(@NonNull TileKey tileKey, int zoom, int tileX, int tileY,
+			@NonNull List<String> languages, @NonNull List<OsmandApiFeatureData> result) {
+		tilePersistenceExecutor.execute(() -> persistLoadedTile(tileKey, zoom, tileX, tileY, languages, result));
+	}
+
+	private void persistLoadedTile(@NonNull TileKey tileKey, int zoom, int tileX, int tileY,
+			@NonNull List<String> languages, @NonNull List<OsmandApiFeatureData> result) {
+		boolean isPartial;
+		List<Amenity> cachedPlaces;
+		try {
+			cachedPlaces = createCachedPlaces(result);
+		} catch (Exception e) {
+			LOG.error("Failed to create cached explore places tile", e);
+			cachedPlaces = Collections.emptyList();
+		}
+		try {
+			Map<String, List<OsmandApiFeatureData>> placesByLang = groupPlacesByLanguage(result, languages);
+			Boolean allLanguagesEmptyResult = Algorithms.isEmpty(languages)
+					? Algorithms.isEmpty(result)
+					: null;
+			boolean persisted = dbHelper.insertPlaces(
+					zoom, tileX, tileY, placesByLang, allLanguagesEmptyResult);
+			if (!persisted) {
+				LOG.error("Failed to persist explore places tile");
+			}
+		} catch (Exception e) {
+			LOG.error("Failed to persist loaded explore places tile", e);
+		}
+		synchronized (tilesLock) {
+			tilesCache.put(tileKey, cachedPlaces);
+			loadingTasks.remove(tileKey);
+			isPartial = !loadingTasks.isEmpty();
+		}
+		notifyListeners(isPartial);
+	}
+
+	@NonNull
+	private Map<String, List<OsmandApiFeatureData>> groupPlacesByLanguage(@NonNull List<OsmandApiFeatureData> result,
+			@NonNull List<String> languages) {
+		Map<String, List<OsmandApiFeatureData>> map = new HashMap<>();
+		if (!Algorithms.isEmpty(result)) {
+			for (OsmandApiFeatureData data : result) {
+				WikiDataProperties properties = data.getProperties();
+				String lang = properties.getLang();
+				if (Algorithms.isEmpty(lang)) {
+					lang = properties.getWikiLang();
+				}
+				List<OsmandApiFeatureData> list = map.computeIfAbsent(lang, k -> new ArrayList<>());
+				list.add(data);
+			}
+		}
+		for (String lang : languages) {
+			map.putIfAbsent(lang, Collections.emptyList());
+		}
+		return map;
+	}
+
+	@NonNull
+	private List<Amenity> createCachedPlaces(@NonNull List<OsmandApiFeatureData> places) {
+		List<Amenity> amenities = new ArrayList<>();
+		Set<Long> uniqueIds = new HashSet<>();
+		for (OsmandApiFeatureData item : places) {
+			Amenity amenity = createAmenity(item);
+			if (amenity == null) {
+				continue;
+			}
+			Long id = amenity.getId();
+			if (id == null || uniqueIds.add(id)) {
+				amenities.add(amenity);
+			}
+		}
+		return amenities;
+	}
+
 	@Override
 	public boolean isLoading() {
-		return !loadingTasks.isEmpty();
+		synchronized (tilesLock) {
+			return !loadingTasks.isEmpty();
+		}
 	}
 
 	public boolean isLoadingRect(@NonNull QuadRect rect) {
 		KQuadRect kRect = SharedUtil.kQuadRect(rect);
-		synchronized (loadingTasks) {
+		synchronized (tilesLock) {
 			for (GetExplorePlacesImagesTask task : loadingTasks.values()) {
-				if (task.getMapRect().contains(kRect)) {
+				if (KQuadRect.Companion.intersects(kRect, task.getMapRect())) {
 					return true;
 				}
 			}
