@@ -3,6 +3,7 @@ package net.osmand.plus.track.cards;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.data.Amenity.DESCRIPTION;
 import static net.osmand.data.Amenity.NAME;
+import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.shared.gpx.GpxUtilities.ACTIVITY_TYPE;
 
 import android.graphics.drawable.Drawable;
@@ -145,6 +146,8 @@ public class TrackTagsInfoCard extends BaseMetadataCard {
 		List<TagsRow> rows = new ArrayList<>();
 		Map<String, TagsRow> rowsByKey = new HashMap<>();
 
+		boolean isOsmRoute = routeKey.tags.stream().anyMatch((t) -> ROUTE_ID.equals(routeKey.getKeyFromTag(t)));
+
 		for (String tag : routeKey.tags) {
 			String key = routeKey.getKeyFromTag(tag);
 			String value = routeKey.getValue(key);
@@ -167,6 +170,10 @@ public class TrackTagsInfoCard extends BaseMetadataCard {
 			RouteTag routeTag = new RouteTag(key, value);
 
 			if (routeTag.poiType != null && routeTag.poiType.isHidden()) {
+				continue;
+			}
+
+			if (!isOsmRoute && containsUnwantedOsmRouteTags(routeTag)) {
 				continue;
 			}
 
@@ -201,6 +208,19 @@ public class TrackTagsInfoCard extends BaseMetadataCard {
 		});
 
 		return rows;
+	}
+
+	private boolean containsUnwantedOsmRouteTags(RouteTag routeTag) {
+		if (Algorithms.isEmpty(routeTag.value)) {
+			return true;
+		}
+		for (OsmRouteType rt : OsmRouteType.getAllValues()) {
+			String rtName = rt.getName();
+			if (routeTag.key.startsWith(rtName + "_") || routeTag.key.startsWith("route_" + rtName)) {
+				return true; // hiking_*, route_hiking, route_hiking_*, etc.
+			}
+		}
+		return false;
 	}
 
 	@NonNull
