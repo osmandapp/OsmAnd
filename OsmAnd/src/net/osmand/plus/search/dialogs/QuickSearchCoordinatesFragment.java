@@ -42,6 +42,7 @@ import net.osmand.LocationConvert;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.DutchGridApproximation;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -166,7 +167,8 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 					defaultMgrs = text.trim();
 				} else if (CURRENT_FORMAT == PointDescription.OLC_FORMAT) {
 					defaultOlc = text.trim();
-				} else if (CURRENT_FORMAT == PointDescription.SWISS_GRID_FORMAT || CURRENT_FORMAT == PointDescription.SWISS_GRID_PLUS_FORMAT) {
+				} else if (CURRENT_FORMAT == PointDescription.SWISS_GRID_FORMAT || CURRENT_FORMAT == PointDescription.SWISS_GRID_PLUS_FORMAT
+						|| CURRENT_FORMAT == PointDescription.RD_FORMAT) {
 					defaultSwissGridEast = text.trim();
 				} else {
 					defaultLat = text.trim();
@@ -493,7 +495,8 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				break;
 			}
 			case PointDescription.SWISS_GRID_FORMAT:
-			case PointDescription.SWISS_GRID_PLUS_FORMAT: {
+			case PointDescription.SWISS_GRID_PLUS_FORMAT:
+			case PointDescription.RD_FORMAT: {
 				view.findViewById(R.id.eastingLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.northingLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.zoneLayout).setVisibility(View.GONE);
@@ -579,7 +582,8 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 					zoneEdit.setText(mgrsEdit.getText());
 					northingEdit.setText("");
 					eastingEdit.setText("");
-				} else if (prevFormat == PointDescription.SWISS_GRID_FORMAT || prevFormat == PointDescription.SWISS_GRID_PLUS_FORMAT) {
+				} else if (prevFormat == PointDescription.SWISS_GRID_FORMAT || prevFormat == PointDescription.SWISS_GRID_PLUS_FORMAT
+						|| prevFormat == PointDescription.RD_FORMAT) {
 					zoneEdit.setText("");
 					northingEdit.setText(swissGridNorthEdit.getText());
 					eastingEdit.setText(swissGridEastEdit.getText());
@@ -597,7 +601,8 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 					mgrsEdit.setText(zoneEdit.getText());
 				} else if (prevFormat == PointDescription.OLC_FORMAT) {
 					mgrsEdit.setText(olcEdit.getText());
-				} else if (prevFormat == PointDescription.SWISS_GRID_FORMAT || prevFormat == PointDescription.SWISS_GRID_PLUS_FORMAT) {
+				} else if (prevFormat == PointDescription.SWISS_GRID_FORMAT || prevFormat == PointDescription.SWISS_GRID_PLUS_FORMAT
+						|| prevFormat == PointDescription.RD_FORMAT) {
 					mgrsEdit.setText(swissGridEastEdit.getText());
 				} else {
 					mgrsEdit.setText(latEdit.getText());
@@ -610,7 +615,8 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 					olcEdit.setText(zoneEdit.getText());
 				} else if (prevFormat == PointDescription.MGRS_FORMAT) {
 					olcEdit.setText(mgrsEdit.getText());
-				} else if (prevFormat == PointDescription.SWISS_GRID_FORMAT || prevFormat == PointDescription.SWISS_GRID_PLUS_FORMAT) {
+				} else if (prevFormat == PointDescription.SWISS_GRID_FORMAT || prevFormat == PointDescription.SWISS_GRID_PLUS_FORMAT
+						|| prevFormat == PointDescription.RD_FORMAT) {
 					olcEdit.setText(swissGridEastEdit.getText());
 				} else {
 					olcEdit.setText(latEdit.getText());
@@ -639,7 +645,31 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				} else if (prevFormat == PointDescription.OLC_FORMAT) {
 					swissGridEastEdit.setText(olcEdit.getText());
 					swissGridNorthEdit.setText("");
-				} else if (prevFormat != PointDescription.SWISS_GRID_PLUS_FORMAT) {
+				} else if (prevFormat != PointDescription.SWISS_GRID_PLUS_FORMAT
+						&& prevFormat != PointDescription.RD_FORMAT) {
+					swissGridEastEdit.setText(latEdit.getText());
+					swissGridNorthEdit.setText("");
+				}
+			} else if (CURRENT_FORMAT == PointDescription.RD_FORMAT) {
+				if (latLon != null) {
+					double[] rd = DutchGridApproximation.convertWGS84ToRD(latLon);
+					DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
+					formatSymbols.setDecimalSeparator('.');
+					formatSymbols.setGroupingSeparator(' ');
+					DecimalFormat rdFormat = new DecimalFormat("###,###.##", formatSymbols);
+					swissGridEastEdit.setText(rdFormat.format(rd[0]));
+					swissGridNorthEdit.setText(rdFormat.format(rd[1]));
+				} else if (prevFormat == PointDescription.UTM_FORMAT) {
+					swissGridEastEdit.setText(zoneEdit.getText());
+					swissGridNorthEdit.setText("");
+				} else if (prevFormat == PointDescription.MGRS_FORMAT) {
+					swissGridEastEdit.setText(mgrsEdit.getText());
+					swissGridNorthEdit.setText("");
+				} else if (prevFormat == PointDescription.OLC_FORMAT) {
+					swissGridEastEdit.setText(olcEdit.getText());
+					swissGridNorthEdit.setText("");
+				} else if (prevFormat != PointDescription.SWISS_GRID_FORMAT
+						&& prevFormat != PointDescription.SWISS_GRID_PLUS_FORMAT) {
 					swissGridEastEdit.setText(latEdit.getText());
 					swissGridNorthEdit.setText("");
 				}
@@ -657,7 +687,8 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				} else if (prevFormat == PointDescription.OLC_FORMAT) {
 					latEdit.setText(olcEdit.getText());
 					lonEdit.setText("");
-				} else if (prevFormat == PointDescription.SWISS_GRID_FORMAT || prevFormat == PointDescription.SWISS_GRID_PLUS_FORMAT) {
+				} else if (prevFormat == PointDescription.SWISS_GRID_FORMAT || prevFormat == PointDescription.SWISS_GRID_PLUS_FORMAT
+						|| prevFormat == PointDescription.RD_FORMAT) {
 					latEdit.setText(swissGridEastEdit.getText());
 					lonEdit.setText(swissGridNorthEdit.getText());
 				}
@@ -701,6 +732,10 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				double eastCoordinate = Double.parseDouble(swissGridEastEdit.getText().toString().replaceAll("\\s+", ""));
 				double northCoordinate = Double.parseDouble(swissGridNorthEdit.getText().toString().replaceAll("\\s+", ""));
 				loc = SwissGridApproximation.convertLV95ToWGS84(eastCoordinate, northCoordinate);
+			} else if (CURRENT_FORMAT == LocationConvert.RD_FORMAT) {
+				double eastCoordinate = Double.parseDouble(swissGridEastEdit.getText().toString().replaceAll("\\s+", ""));
+				double northCoordinate = Double.parseDouble(swissGridNorthEdit.getText().toString().replaceAll("\\s+", ""));
+				loc = DutchGridApproximation.convertRDToWGS84(eastCoordinate, northCoordinate);
 			} else {
 				double lat = LocationConvert.convert(latEdit.getText().toString(), true);
 				double lon = LocationConvert.convert(lonEdit.getText().toString(), true);

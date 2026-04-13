@@ -27,6 +27,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.DutchGridApproximation;
 import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -101,6 +102,7 @@ public class OsmAndFormatter {
 	public static final int MGRS_FORMAT = LocationConvert.MGRS_FORMAT;
 	public static final int SWISS_GRID_FORMAT = LocationConvert.SWISS_GRID_FORMAT;
 	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
+	public static final int RD_FORMAT = LocationConvert.RD_FORMAT;
 	private static final char DELIMITER_DEGREES = '°';
 	private static final char DELIMITER_MINUTES = '\'';
 	private static final char DELIMITER_SECONDS = '″';
@@ -960,6 +962,13 @@ public class OsmAndFormatter {
 			formatSymbols.setGroupingSeparator(' ');
 			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
 			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
+		} else if (outputFormat == RD_FORMAT) {
+			double[] rd = DutchGridApproximation.convertWGS84ToRD(new LatLon(lat, lon));
+			DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
+			formatSymbols.setDecimalSeparator('.');
+			formatSymbols.setGroupingSeparator(' ');
+			DecimalFormat rdFormat = new DecimalFormat("###,###.##", formatSymbols);
+			result.append(rdFormat.format(rd[0])).append(", ").append(rdFormat.format(rd[1]));
 		}
 		String formattedCoordinates = result.toString();
 		return forceLTR ? TextDirectionUtil.markAsLTR(formattedCoordinates) : formattedCoordinates;

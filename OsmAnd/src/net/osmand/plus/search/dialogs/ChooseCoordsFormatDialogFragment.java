@@ -33,7 +33,8 @@ public class ChooseCoordsFormatDialogFragment extends BaseAlertDialogFragment {
 				PointDescription.formatToHumanString(app, OLC_FORMAT),
 				PointDescription.formatToHumanString(app, MGRS_FORMAT),
 				PointDescription.formatToHumanString(app, SWISS_GRID_FORMAT),
-				PointDescription.formatToHumanString(app, SWISS_GRID_PLUS_FORMAT)
+				PointDescription.formatToHumanString(app, SWISS_GRID_PLUS_FORMAT),
+				PointDescription.formatToHumanString(app, RD_FORMAT)
 		};
 
 		AlertDialog.Builder builder = createDialogBuilder();

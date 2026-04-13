@@ -37,6 +37,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 	private static final String OLC_FORMAT = "olc_format";
 	private static final String SWISS_GRID_FORMAT = "swiss_grid_format";
 	private static final String SWISS_GRID_PLUS_FORMAT = "swiss_grid_plus_format";
+	private static final String RD_FORMAT = "rd_format";
 
 	@Override
 	protected void setupPreferences() {
@@ -48,6 +49,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		CheckBoxPreference olcPref = findPreference(OLC_FORMAT);
 		CheckBoxPreference swissGridPref = findPreference(SWISS_GRID_FORMAT);
 		CheckBoxPreference swissGridPlusPref = findPreference(SWISS_GRID_PLUS_FORMAT);
+		CheckBoxPreference rdPref = findPreference(RD_FORMAT);
 
 		Location loc = app.getLocationProvider().getLastKnownLocation();
 
@@ -59,6 +61,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		olcPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.OLC_FORMAT));
 		swissGridPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.SWISS_GRID_FORMAT));
 		swissGridPlusPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.SWISS_GRID_PLUS_FORMAT));
+		rdPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.RD_FORMAT));
 
 		int currentFormat = settings.COORDINATES_FORMAT.getModeValue(getSelectedAppMode());
 		String currentPrefKey = getCoordinatesKeyForFormat(currentFormat);
@@ -197,6 +200,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				return PointDescription.SWISS_GRID_FORMAT;
 			case SWISS_GRID_PLUS_FORMAT:
 				return PointDescription.SWISS_GRID_PLUS_FORMAT;
+			case RD_FORMAT:
+				return PointDescription.RD_FORMAT;
 			default:
 				return -1;
 		}
@@ -220,6 +225,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				return SWISS_GRID_FORMAT;
 			case PointDescription.SWISS_GRID_PLUS_FORMAT:
 				return SWISS_GRID_PLUS_FORMAT;
+			case PointDescription.RD_FORMAT:
+				return RD_FORMAT;
 			default:
 				return "Unknown format";
 		}

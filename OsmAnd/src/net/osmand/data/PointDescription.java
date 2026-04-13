@@ -187,6 +187,7 @@ public class PointDescription {
 		String mgrs = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.MGRS_FORMAT);
 		String swissGrid = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.SWISS_GRID_FORMAT);
 		String swissGridPlus = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.SWISS_GRID_PLUS_FORMAT);
+		String rdGrid = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.RD_FORMAT);
 
 		try {
 			latLonString = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.FORMAT_DEGREES_SHORT);
@@ -209,6 +210,7 @@ public class PointDescription {
 		results.put(OsmAndFormatter.MGRS_FORMAT, mgrs);
 		results.put(OsmAndFormatter.SWISS_GRID_FORMAT, swissGrid);
 		results.put(OsmAndFormatter.SWISS_GRID_PLUS_FORMAT, swissGridPlus);
+		results.put(OsmAndFormatter.RD_FORMAT, rdGrid);
 
 		try {
 			int zoom = ctx.getMapView().getZoom();
@@ -239,6 +241,8 @@ public class PointDescription {
 			results.put(LOCATION_LIST_HEADER, swissGrid);
 		} else if (format == PointDescription.SWISS_GRID_PLUS_FORMAT) {
 			results.put(LOCATION_LIST_HEADER, swissGridPlus);
+		} else if (format == PointDescription.RD_FORMAT) {
+			results.put(LOCATION_LIST_HEADER, rdGrid);
 		} else if (format == PointDescription.FORMAT_DEGREES) {
 			results.put(LOCATION_LIST_HEADER, latLonDeg);
 		} else if (format == PointDescription.FORMAT_MINUTES) {
@@ -434,6 +438,7 @@ public class PointDescription {
 	public static final int MGRS_FORMAT = LocationConvert.MGRS_FORMAT;
 	public static final int SWISS_GRID_FORMAT = LocationConvert.SWISS_GRID_FORMAT;
 	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
+	public static final int RD_FORMAT = LocationConvert.RD_FORMAT;
 
 	public static String formatToHumanString(Context ctx, int format) {
 		return switch (format) {
@@ -448,6 +453,8 @@ public class PointDescription {
 					ctx.getString(R.string.navigate_point_format_swiss_grid);
 			case LocationConvert.SWISS_GRID_PLUS_FORMAT ->
 					ctx.getString(R.string.navigate_point_format_swiss_grid_plus);
+			case LocationConvert.RD_FORMAT ->
+					ctx.getString(R.string.navigate_point_format_rd);
 			default -> "Unknown format";
 		};
 	}

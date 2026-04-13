@@ -18,6 +18,7 @@ import net.osmand.LocationConvert;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.DutchGridApproximation;
 import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.activities.MapActivity;
@@ -160,6 +161,8 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 			showSwissGrid(lat, lon, false);
 		} else if (format == PointDescription.SWISS_GRID_PLUS_FORMAT) {
 			showSwissGrid(lat, lon, true);
+		} else if (format == PointDescription.RD_FORMAT) {
+			showRdGrid(lat, lon);
 		} else {
 			showStandardCoordinates(lat, lon, format);
 		}
@@ -197,6 +200,21 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 
 		setFirstCoordinateText(swissGridFormat.format(swissGrid[0]));
 		setSecondCoordinateText(swissGridFormat.format(swissGrid[1]));
+	}
+
+	private void showRdGrid(double lat, double lon) {
+		LatLon latLon = new LatLon(lat, lon);
+		double[] rd = DutchGridApproximation.convertWGS84ToRD(latLon);
+		DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
+		formatSymbols.setDecimalSeparator('.');
+		formatSymbols.setGroupingSeparator(' ');
+		DecimalFormat rdFormat = new DecimalFormat("###,###.##", formatSymbols);
+
+		firstIcon.setImageDrawable(getLatitudeIcon(lat));
+		secondIcon.setImageDrawable(getLongitudeIcon(lon));
+
+		setFirstCoordinateText(rdFormat.format(rd[0]));
+		setSecondCoordinateText(rdFormat.format(rd[1]));
 	}
 
 	private void setupForNonStandardFormat() {
