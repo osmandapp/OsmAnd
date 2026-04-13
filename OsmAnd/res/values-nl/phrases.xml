@@ -100,7 +100,7 @@
     <string name="poi_fire_water_pond">Blusvijver</string>
     <string name="poi_grit_bin">Gritkist</string>
     <string name="poi_ambulance_station">Ambulancepost</string>
-    <string name="poi_disaster_response">Nooddiensten</string>
+    <string name="poi_disaster_response">Rampenbestrijdingspost</string>
     <string name="poi_emergency_access_point">Nood-toegangspunt</string>
     <string name="poi_ford">Doorwaadbare plaats</string>
     <string name="poi_mountain_pass">Bergpas</string>
@@ -131,7 +131,7 @@
     <string name="poi_subway_entrance">Metro-ingang</string>
     <string name="poi_subway_station">Ja;Metrostation</string>
     <string name="poi_taxi">Taxistandplaats</string>
-    <string name="poi_aerodrome">Luchthaven</string>
+    <string name="poi_aerodrome">Luchthaven;Vliegveld</string>
     <string name="poi_helipad">Helikopterplatform</string>
     <string name="poi_runway">Landingsbaan</string>
     <string name="poi_aeroway_terminal">Terminal</string>
@@ -518,7 +518,7 @@
     <string name="poi_user_defined_other">door de gebruiker gedefinieerd</string>
     <string name="poi_wine">Wijnhandel</string>
     <string name="poi_public_transport_stop_position">Halte openbaar vervoer</string>
-    <string name="poi_halt">Treinhalte</string>
+    <string name="poi_halt">Treinhalte;Halte;Stopplaats;Spoorweghalte;Spoorwegstation;Treinstation;Station</string>
     <string name="poi_railway_buffer_stop">Stootblok</string>
     <string name="poi_orienteering">Oriëntatieloop</string>
     <string name="poi_paragliding">Parapenten</string>
@@ -730,7 +730,7 @@
     <string name="poi_leather">Lederwarenzaak</string>
     <string name="poi_music">Muziekwinkel</string>
     <string name="poi_scuba_diving_shop">Duiktoebehoren</string>
-    <string name="poi_tyres">Autobanden</string>
+    <string name="poi_tyres">Banden;Band;Autobanden;Bandenwinkel</string>
     <string name="poi_energy">Energie</string>
     <string name="poi_watches">Horloges</string>
     <string name="poi_swimming_pool_shop">Zwembadtoebehoren</string>
