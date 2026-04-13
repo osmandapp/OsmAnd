@@ -3789,7 +3789,7 @@
     <string name="reverse_all_points">Reverser alle punkter</string>
     <string name="routing_engine_vehicle_type_small_truck">Liten lastebil</string>
     <string name="routing_engine_vehicle_type_truck">Lastebil</string>
-    <string name="cannot_upload_image">Kan ikke laste opp bilde. Prøv igjen senere.</string>
+    <string name="cannot_upload_image">Kan ikke laste opp bilde, prøv igjen senere</string>
     <string name="approximate_file_size">Omtrentlig filstørrelse</string>
     <string name="export_not_enough_space">Det er ikke nok plass</string>
     <string name="select_items_for_import">Velg elementer å importere.</string>
@@ -3955,7 +3955,7 @@
     <string name="backup_version_history">Versjonshistorikk</string>
     <string name="osmand_cloud_login_descr">Skriv inn e-postadressen du brukte for registrering. Du vil bli tilsendt et engangspassord.</string>
     <string name="file_size_needed_for_import">Trengs for import</string>
-    <string name="toast_select_edits_for_upload">Velg redigeringer å laste opp</string>
+    <string name="toast_select_edits_for_upload">Velg redigeringer for opplasting</string>
     <string name="offline_wikipeadia">Frakoblet Wikipedia</string>
     <string name="offline_wikivoyage">Frakoblet Wikivoyage</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s eller %2$s</string>
@@ -3984,7 +3984,7 @@
     <string name="on_pause">Satt på pause</string>
     <string name="track_recording_description">Stopp opptak\?
 \nAll ulagret data vil gå tapt.</string>
-    <string name="restart">Start på ny</string>
+    <string name="restart">Start på nytt</string>
     <string name="track_recording_save_and_stop">Lagre og stopp opptak</string>
     <string name="contact_support_description">Hvis du har spørsmål kan du kontakte oss på %1$s.</string>
     <string name="empty_purchases_description">Hvis kjøpene dine ikke vises her kan du trykke «%1$s» eller kontakte vår brukerstøtte.</string>
@@ -4107,7 +4107,7 @@
     <string name="output">Resultat</string>
     <string name="purchases_feature_desc_unlimited_map_download">Få ubegrensede nedlastinger for alle kontinenter og regionale frakoblede kart.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Få tilgang til hyppige kartoppdateringer. Timevise, daglige, eller ukentlige oppdateringer. Oppdateringer lastes ned i rekkefølge, kun for endret område.</string>
-    <string name="select_segments_description">%1$s inneholder mer enn ett segment. Du må angi delen som skal brukes for navigasjon.</string>
+    <string name="select_segments_description">%1$s inneholder mer enn ett segment. Du må angi delen for navigeringen.</string>
     <string name="gpx_upload_private_visibility_descr">«Privat» betyr at sporet ikke vises i noen offentlige oppføringer, men sporingspunkter fra dem i ukronologisk rekkefølge er tilgjengelig gjennom det offentlige GPS-API-et uten tidsstempler.</string>
     <string name="gpx_upload_identifiable_visibility_descr">«Identifiserbart» betyr at sporet vises offentlig i dine GPS-spor og i offentlige GPS-sporingsoppføringer. Altså vil andre kunne laste ned rå sporingsdata og tilknytte den til brukernavnet ditt. Sporingspunktsdata med offentlige tidsstempel fra GPS-API-et servert via sporingspunkts-API-et vil vise til din opprinnelige sporingsside.</string>
     <string name="trip_recording_logging_interval_info">Loggingsintervall setter tidsperioden mellom hver gang OsmAnd forespør nåværende posisjonsdata.</string>
@@ -4115,7 +4115,7 @@
     <string name="backup_error_subscription_was_expired_descr">Ditt OsmAnd Pro-abonnement har utløpt. Forny det nå for å bruke sikkerhetskopi. Du kan fremdeles gjenopprette data fra OsmAnd-sky.</string>
     <string name="use_dev_url_descr">Bytt til dev.openstreetmap.org istedenfor openstreetmap.org for testopplasting av OSM-notat/POI/GPX.</string>
     <string name="temporary_conditional_routing_descr">Bruk veibegrensninger som er aktive nå på kartet</string>
-    <string name="routing_attr_driving_style_description">Velg kjøreformål for å få kortere, raskere, eller tryggere rute</string>
+    <string name="routing_attr_driving_style_description">Velg kjøreformål for å få kortere, raskere eller tryggere rute</string>
     <string name="app_restart_required">Programomstart kreves for å bruke noen innstillinger.</string>
     <string name="voice_prompts_timetable">Talemeldingstider</string>
     <string name="update_all_maps_added">Oppdater alle kart lagt til i %1$s\?</string>
@@ -6045,4 +6045,9 @@
     <string name="memory_graphics_settings">Grafikkminne</string>
     <string name="astro_expand_your_universe_title">Utvid ditt univers</string>
     <string name="gradient_no_data_point_summary">Farge som brukes når data mangler eller ikke definert.</string>
+    <string name="open_till_short">Til</string>
+    <string name="shared_string_minimum">Minimum</string>
+    <string name="button_frames">Knapperammer</string>
+    <string name="ais_port_nmea_server">TCP-port for NMEA-datakilde</string>
+    <string name="ais_port_nmea_server_description">Definer TCP-portnummer for NMEA-datakilden</string>
 </resources>

@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AreaI;
+import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
@@ -198,19 +199,19 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 	}
 
 	@Override
-	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
+	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom, IMapTiledSymbolsProvider.Request request) {
 		if (isMapRendererLost()) {
 			return new QListMapTiledCollectionPoint();
 		}
 
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 		RotatedTileBox tb = app.getOsmandMap().getMapView().getRotatedTileBox();
-		TileBoxRequest request = new TileBoxRequest(tb);
-		MapLayerData<List<Amenity>>.DataReadyCallback dataReadyCallback = layerData.getDataReadyCallback(request);
+		TileBoxRequest tileBoxRequest = new TileBoxRequest(tb);
+		MapLayerData<List<Amenity>>.DataReadyCallback dataReadyCallback = layerData.getDataReadyCallback(tileBoxRequest);
 		layerData.addDataReadyCallback(dataReadyCallback);
 		long[] start = {System.currentTimeMillis()};
 		app.runInUIThread(() -> {
-			layerData.queryNewData(request);
+			layerData.queryNewData(tileBoxRequest);
 			start[0] = System.currentTimeMillis();
 		});
 		while (System.currentTimeMillis() - start[0] < layerData.DATA_REQUEST_TIMEOUT) {

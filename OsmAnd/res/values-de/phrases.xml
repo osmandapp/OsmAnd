@@ -68,7 +68,7 @@
     <string name="poi_bitcoin_yes">Bitcoin-Bezahlmöglichkeit</string>
     <string name="poi_craft_blacksmith">Schmied</string>
     <string name="poi_blood_bank">Blutbank</string>
-    <string name="poi_boat_sharing">Bootsverleih</string>
+    <string name="poi_boat_sharing">Boots-Sharing</string>
     <string name="poi_craft_boatbuilder">Schiffsbauer</string>
     <string name="poi_boatyard">Schiffsanlegeplatz</string>
     <string name="poi_craft_bookbinder">Buchbinder</string>
@@ -595,7 +595,7 @@
     <string name="poi_attraction_carousel">Karussell</string>
     <string name="poi_attraction_maze">Labyrinth</string>
     <string name="poi_attraction_roller_coaster">Achterbahn</string>
-    <string name="poi_attraction_slide">Rutschbahn</string>
+    <string name="poi_attraction_slide">Rutsche</string>
     <string name="poi_attraction_summer_toboggan">Sommerrodelbahn</string>
     <string name="poi_attraction_swing_carousel">Kettenkarussell</string>
     <string name="poi_attraction_train">Eisenbahn (Attraktion)</string>
@@ -3131,7 +3131,7 @@
     <string name="poi_reservation_no">Nein</string>
     <string name="poi_reservation_members_only">Nur für Mitglieder</string>
     <string name="poi_boat_rental_type">Mietboote</string>
-    <string name="poi_boat_rental">Bootsvermietung</string>
+    <string name="poi_boat_rental">Bootsverleih/Bootsvermietung</string>
     <string name="poi_boat_motorboat_rental_yes">Motorboote: ja</string>
     <string name="poi_boat_motorboat_rental_no">Motorboote: nein</string>
     <string name="poi_boat_houseboat_rental_yes">Hausboote: ja</string>

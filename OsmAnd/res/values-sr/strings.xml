@@ -5713,7 +5713,7 @@
     <string name="saved_to_device">Сачувано на уређају</string>
     <string name="save_to_device_error">Грешка при упису на уређају</string>
     <string name="travel_guides">Водичи</string>
-    <string name="show_debug_tile">Прикажи информације о плочицама</string>
+    <string name="show_debug_tile">Прикажи информацију о плочици</string>
     <string name="show_debug_tile_description">Прикажите информације о симболима мапе сваке плочице</string>
     <string name="deactivated_map">Искључена карта</string>
     <string name="unit_of_temperature_description">Изабране јединице ће бити примењене на све податке везане за температуру у тренутном профилу.</string>
@@ -6131,4 +6131,5 @@
     <string name="shared_string_native">Изворно</string>
     <string name="shared_string_gpu">ГПЈ</string>
     <string name="shared_string_allocated">Додељено</string>
+    <string name="open_till_short">До</string>
 </resources>
