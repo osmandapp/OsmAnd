@@ -22,7 +22,7 @@ import net.osmand.plus.dialogs.MapRenderingEngineDialog;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
-import net.osmand.plus.helpers.LocaleHelper;
+import net.osmand.plus.helpers.SupportedLocale;
 import net.osmand.plus.profiles.SelectDefaultProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -213,7 +213,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			preference.setIcon(getContentIcon(R.drawable.ic_action_map_language));
 			preference.setSummary(settings.PREFERRED_LOCALE.get());
 
-			Map<String, String> preferredLanguages = LocaleHelper.getPreferredDisplayLanguages(app);
+			Map<String, String> preferredLanguages = SupportedLocale.getPreferredDisplayLanguages(app);
 			String[] languagesNames = preferredLanguages.values().toArray(new String[0]);
 			String[] languagesIds = preferredLanguages.keySet().toArray(new String[0]);
 			preference.setEntries(languagesNames);
