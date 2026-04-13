@@ -418,7 +418,8 @@ public class RoutePlannerFrontEnd {
 			calculateRegionsWithAllRoutePoints(ctx, osmandRegions, start, targets);
 			if (ctx.nativeLib == null || hhRoutingType == HHRoutingType.JAVA) {
 				HHNetworkRouteRes r = runHHRoute(ctx, start, targets);
-				if ((r != null && r.isCorrect()) || useOnlyHHRouting) {
+				boolean hasAnyMissingMaps = ctx.calculationProgress.hasAnyMissingMaps();
+				if ((r != null && r.isCorrect()) || hasAnyMissingMaps || useOnlyHHRouting) {
 					return r;
 				}
 			} else {
@@ -427,7 +428,8 @@ public class RoutePlannerFrontEnd {
 				RouteCalcResult r = runNativeRouting(ctx, null, hhRoutingConfig);
 				ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
 				RouteResultPreparation.printResults(ctx, start, end, r.detailed);
-				if ((!r.detailed.isEmpty() && r.isCorrect()) || useOnlyHHRouting) {
+				boolean hasAnyMissingMaps = ctx.calculationProgress.hasAnyMissingMaps();
+				if ((!r.detailed.isEmpty() && r.isCorrect()) || hasAnyMissingMaps || useOnlyHHRouting) {
 					makeStartEndPointsPrecise(ctx, r, start, end, intermediates);
 					return r;
 				}

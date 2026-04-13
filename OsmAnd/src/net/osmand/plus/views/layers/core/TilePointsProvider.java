@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
@@ -164,7 +163,7 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 	}
 
 	@Override
-	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom, IMapTiledSymbolsProvider.Request request) {
+	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 		if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
 			return new QListMapTiledCollectionPoint();

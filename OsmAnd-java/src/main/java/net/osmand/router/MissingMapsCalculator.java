@@ -182,10 +182,10 @@ public class MissingMapsCalculator {
 
 		if (missingMapsAtStartOrEnd) {
 			ctx.calculationProgress.raiseFastRoutingStatus(FastRoutingState.Status.MISSING_MAPS_AT_START_OR_END);
-		} else if (mixedMapsAtStartOrEnd) {
-			ctx.calculationProgress.raiseFastRoutingStatus(FastRoutingState.Status.MIXED_MAPS_AT_START_OR_END);
 		} else if (missingMapsIntermediates) {
 			ctx.calculationProgress.raiseFastRoutingStatus(FastRoutingState.Status.MISSING_MAPS_INTERMEDIATES);
+		} else if (mixedMapsAtStartOrEnd) {
+			ctx.calculationProgress.raiseFastRoutingStatus(FastRoutingState.Status.MIXED_MAPS_AT_START_OR_END);
 		} else if (mixedMapsIntermediates) {
 			ctx.calculationProgress.raiseFastRoutingStatus(FastRoutingState.Status.MIXED_MAPS_INTERMEDIATES);
 		}

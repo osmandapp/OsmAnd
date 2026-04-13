@@ -510,6 +510,7 @@
 					android:id="@+id/context_menu_bottom_view"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:paddingBottom="@dimen/content_padding_large"
 					android:orientation="vertical"
 					tools:background="?attr/activity_background_color">
 				</LinearLayout>

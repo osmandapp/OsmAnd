@@ -699,7 +699,13 @@ public class QuickSearchListItem {
 		} else if (searchResult != null && searchResult.object instanceof MapObject mapObject) {
 			String title = mapObject.getName(mapLang);
 			String altName = Algorithms.isEmpty(searchResult.alternateName) ? mapObject.getName() : searchResult.alternateName;
-			return addPartInParentheses(app, title, altName, nightMode);
+			if (Algorithms.isEmpty(title) && Algorithms.isEmpty(altName)) {
+				return getSpannableName();
+			} else if (Algorithms.isEmpty(title)) {
+				return title;
+			} else {
+				return addPartInParentheses(app, title, altName, nightMode);
+			}
 		} else {
 			return getSpannableName();
 		}
@@ -722,10 +728,14 @@ public class QuickSearchListItem {
 
 	@NonNull
 	private static CharSequence addPartInParentheses(Context ctx, @NonNull CharSequence mainPart, String partToAdd, boolean nightMode) {
-		int textColor = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
-		String altName = String.format("(%s)", partToAdd);
-		mainPart = String.format("%s %s", mainPart, altName);
-		return UiUtilities.createColorSpannable(mainPart.toString(), ctx.getColor(textColor), false, altName);
+		if (Algorithms.isEmpty(partToAdd)) {
+			return mainPart;
+		} else {
+			int textColor = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+			String altName = String.format("(%s)", partToAdd);
+			mainPart = String.format("%s %s", mainPart, altName);
+			return UiUtilities.createColorSpannable(mainPart.toString(), ctx.getColor(textColor), false, altName);
+		}
 	}
 
 }

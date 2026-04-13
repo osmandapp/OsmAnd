@@ -6,8 +6,8 @@ public class FastRoutingState {
 
         // MissingMapsCalculator
         MIXED_MAPS_INTERMEDIATES,
-        MISSING_MAPS_INTERMEDIATES,
         MIXED_MAPS_AT_START_OR_END,
+        MISSING_MAPS_INTERMEDIATES,
         MISSING_MAPS_AT_START_OR_END,
 
         // HHRoutePlanner
@@ -65,13 +65,13 @@ public class FastRoutingState {
         return isFailedStatus(get(ordinal));
     }
 
-    private static boolean isMixedMaps(int ordinal) {
+    protected static boolean isMixedMaps(int ordinal) {
         return ordinal == Status.FAILED_WITH_MIXED_MAPS.ordinal()
                 || ordinal == Status.MIXED_MAPS_INTERMEDIATES.ordinal()
                 || ordinal == Status.MIXED_MAPS_AT_START_OR_END.ordinal();
     }
 
-    private static boolean isMissingMaps(int ordinal) {
+    protected static boolean isMissingMaps(int ordinal) {
         return ordinal == Status.FAILED_WITH_MISSING_MAPS.ordinal()
                 || ordinal == Status.MISSING_MAPS_INTERMEDIATES.ordinal()
                 || ordinal == Status.MISSING_MAPS_AT_START_OR_END.ordinal();
