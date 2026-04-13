@@ -7,6 +7,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
+import net.osmand.shared.util.KGeoParsedPoint;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -454,7 +455,7 @@ public class MapUtils {
 		return str;
 	}
 
-	public static GeoParsedPoint decodeShortLinkString(String s) {
+	public static KGeoParsedPoint decodeShortLinkString(String s) {
 		// convert old shortlink format to current one
 		s = s.replaceAll("@", "~");
 		int i = 0;
@@ -491,11 +492,11 @@ public class MapUtils {
 			if (i + 1 < s.length() && s.charAt(i + 1) == '-')
 				z++;
 		}
-		return new GeoParsedPoint(lat, lon, z);
+		return new KGeoParsedPoint(lat, lon, z);
 	}
 
 	public static QuadRect decodeShortLinkToQuadRect(String shortLink) {
-		GeoParsedPoint point = decodeShortLinkString(shortLink);
+		KGeoParsedPoint point = decodeShortLinkString(shortLink);
 		double bottom = point.getLatitude();
 		double left = point.getLongitude();
 

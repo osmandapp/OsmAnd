@@ -37,7 +37,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
-import net.osmand.util.GeoParsedPoint;
+import net.osmand.shared.util.KGeoParsedPoint;
 import net.osmand.util.TextDirectionUtil;
 
 import org.apache.commons.logging.Log;
@@ -199,7 +199,7 @@ public class ShareMenu extends BaseMenuController {
 			String latStr = formattedLatLon.first;
 			String lonStr = formattedLatLon.second;
 
-			GeoParsedPoint parsedPoint = new GeoParsedPoint(latVal, lonVal, zoom, title);
+			KGeoParsedPoint parsedPoint = new KGeoParsedPoint(latVal, lonVal, zoom, title);
 			geoUrl = parsedPoint.getGeoUriString(5);
 
 			if (Algorithms.isEmpty(urlLink)) {

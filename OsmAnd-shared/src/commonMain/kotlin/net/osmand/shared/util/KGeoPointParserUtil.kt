@@ -1,6 +1,7 @@
 package net.osmand.shared.util
 
 import net.osmand.shared.data.KLatLon
+import kotlin.jvm.JvmStatic
 
 object KGeoPointParserUtil {
 
@@ -99,6 +100,7 @@ object KGeoPointParserUtil {
      * @param uriString The URI as a String
      * @return {@link GeoParsedPoint}
      */
+    @JvmStatic
 	fun parse(uriString: String): KGeoParsedPoint? {
 		val points = parsePoints(uriString)
 		if (points != null && !points.isEmpty()) {
@@ -107,6 +109,7 @@ object KGeoPointParserUtil {
 		return null
 	}
 
+    @JvmStatic
 	fun parsePoints(uriString: String): List<KGeoParsedPoint>? {
 		val uri = createUri(uriString)
 		var scheme = uri?.scheme
@@ -122,6 +125,7 @@ object KGeoPointParserUtil {
 		return null
 	}
 
+    @JvmStatic
     fun createUri(uriString: String): KGeoPointParserURI? {
         try {
             // amap.com uses | in their URLs, which is an illegal character for a URL
@@ -887,6 +891,7 @@ object KGeoPointParserUtil {
         return null
     }
 
+    @JvmStatic
     fun isGooGlUrl(url: String?): Boolean {
         if (url == null) {
             return false

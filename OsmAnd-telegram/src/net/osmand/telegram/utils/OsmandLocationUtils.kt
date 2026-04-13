@@ -12,8 +12,8 @@ import net.osmand.telegram.helpers.LocationMessages.LocationMessage
 import net.osmand.telegram.helpers.ShowLocationHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
-import net.osmand.util.GeoParsedPoint
-import net.osmand.util.GeoPointParserUtil
+import net.osmand.shared.util.KGeoParsedPoint;
+import net.osmand.shared.util.KGeoPointParserUtil;
 import net.osmand.util.MapUtils
 import org.drinkless.tdlib.TdApi
 import java.io.File
@@ -254,7 +254,7 @@ object OsmandLocationUtils {
 								)
 							) {
 								val url = (urlTextEntity.type as TdApi.TextEntityTypeTextUrl).url
-								val point: GeoParsedPoint? = GeoPointParserUtil.parse(url)
+								val point: KGeoParsedPoint? = KGeoPointParserUtil.parse(url)
 								if (point != null) {
 									res.lat = point.latitude
 									res.lon = point.longitude

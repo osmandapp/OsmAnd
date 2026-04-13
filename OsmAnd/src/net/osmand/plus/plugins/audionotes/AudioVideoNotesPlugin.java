@@ -89,7 +89,7 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
-import net.osmand.util.GeoParsedPoint;
+import net.osmand.shared.util.KGeoParsedPoint;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -1360,7 +1360,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			otherName = otherName.substring(0, i);
 		}
 		recording.setFile(file);
-		GeoParsedPoint geo = MapUtils.decodeShortLinkString(otherName);
+		KGeoParsedPoint geo = MapUtils.decodeShortLinkString(otherName);
 		recording.setLatitude(geo.getLatitude());
 		recording.setLongitude(geo.getLongitude());
 		Float heading = app.getLocationProvider().getHeading();

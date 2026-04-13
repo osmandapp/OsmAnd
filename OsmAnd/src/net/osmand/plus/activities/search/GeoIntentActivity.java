@@ -19,8 +19,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmandListActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
-import net.osmand.util.GeoParsedPoint;
-import net.osmand.util.GeoPointParserUtil;
+import net.osmand.shared.util.KGeoParsedPoint;
+import net.osmand.shared.util.KGeoPointParserUtil;
 
 import org.apache.commons.logging.Log;
 
@@ -56,7 +56,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 		}
 	}
 
-	private class GeoIntentTask extends AsyncTask<Void, Void, List<GeoParsedPoint>> {
+	private class GeoIntentTask extends AsyncTask<Void, Void, List<KGeoParsedPoint>> {
 
 		private final Intent intent;
 		private final ProgressDialog progress;
@@ -78,14 +78,14 @@ public class GeoIntentActivity extends OsmandListActivity {
 		 * @return
 		 */
 		@Override
-		protected List<GeoParsedPoint> doInBackground(Void... nothing) {
+		protected List<KGeoParsedPoint> doInBackground(Void... nothing) {
 			try {
 				while (app.isApplicationInitializing()) {
 					Thread.sleep(200);
 				}
 				Uri uri = intent.getData();
 				if (uri != null) {
-					return GeoPointParserUtil.parsePoints(uri.toString());
+					return KGeoPointParserUtil.parsePoints(uri.toString());
 				}
 			} catch (Exception e) {
 				LOG.error(e);
@@ -94,7 +94,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 		}
 
 		@Override
-		protected void onPostExecute(List<GeoParsedPoint> points) {
+		protected void onPostExecute(List<KGeoParsedPoint> points) {
 			if (progress != null && progress.isShowing()) {
 				try {
 					progress.dismiss();
@@ -106,7 +106,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 				return;
 			}
 			try {
-				GeoParsedPoint point = points.get(0);
+				KGeoParsedPoint point = points.get(0);
 				if (point != null && point.isGeoPoint()) {
 					PointDescription pd = new PointDescription(point.getLatitude(), point.getLongitude());
 					if (!Algorithms.isEmpty(point.getLabel())) {

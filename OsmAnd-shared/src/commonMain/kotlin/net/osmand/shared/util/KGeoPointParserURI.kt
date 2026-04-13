@@ -1,5 +1,7 @@
 package net.osmand.shared.util
 
+import kotlin.jvm.JvmStatic
+
 data class KGeoPointParserURI(
     val original: String,
     val scheme: String?,
@@ -13,6 +15,7 @@ data class KGeoPointParserURI(
     val rawSchemeSpecificPart: String
 ) {
     companion object {
+        @JvmStatic
         fun create(uriString: String): KGeoPointParserURI? {
             val schemeMatch = Regex("^([A-Za-z][A-Za-z0-9+\\-.]*):(.*)$").find(uriString) ?: return null
             val scheme = schemeMatch.groupValues[1]

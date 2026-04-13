@@ -85,8 +85,8 @@ import net.osmand.search.AmenitySearcher;
 import net.osmand.search.AmenitySearcher.Request;
 import net.osmand.search.AmenitySearcher.Settings;
 import net.osmand.util.Algorithms;
-import net.osmand.util.GeoParsedPoint;
-import net.osmand.util.GeoPointParserUtil;
+import net.osmand.shared.util.KGeoParsedPoint;
+import net.osmand.shared.util.KGeoPointParserUtil;
 
 import org.apache.commons.logging.Log;
 
@@ -206,10 +206,10 @@ public class IntentHelper {
 				clearIntent(intent);
 				return true;
 			} else {
-				List<GeoParsedPoint> points = GeoPointParserUtil.parsePoints(data.toString());
+				List<KGeoParsedPoint> points = KGeoPointParserUtil.parsePoints(data.toString());
 				if (points != null && points.size() > 1) {
-					GeoParsedPoint startPoint = points.get(0);
-					GeoParsedPoint endPoint = points.get(points.size() - 1);
+					KGeoParsedPoint startPoint = points.get(0);
+					KGeoParsedPoint endPoint = points.get(points.size() - 1);
 
 					LatLon startLatLon = startPoint != null ? new LatLon(startPoint.getLatitude(), startPoint.getLongitude()) : null;
 					LatLon endLatLon = endPoint != null ? new LatLon(endPoint.getLatitude(), endPoint.getLongitude()) : null;

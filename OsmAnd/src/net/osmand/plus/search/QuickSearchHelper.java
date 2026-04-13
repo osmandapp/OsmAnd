@@ -52,8 +52,9 @@ import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
+import net.osmand.shared.util.KGeoPointParserURI;
 import net.osmand.util.Algorithms;
-import net.osmand.util.GeoPointParserUtil;
+import net.osmand.shared.util.KGeoPointParserUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -694,7 +695,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	@Nullable
 	private String httpRedirectRequester(@NonNull String url) {
-		URI uri = GeoPointParserUtil.createUri(url);
+		KGeoPointParserURI uri = KGeoPointParserUtil.createUri(url);
 		if (uri != null && app.getSettings().isInternetConnectionAvailable()) {
 			return AndroidNetworkUtils.okHttpRedirectRequester(uri.toString());
 		}

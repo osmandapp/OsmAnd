@@ -70,8 +70,8 @@ import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
-import net.osmand.util.GeoParsedPoint;
-import net.osmand.util.GeoPointParserUtil;
+import net.osmand.shared.util.KGeoParsedPoint;
+import net.osmand.shared.util.KGeoPointParserUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -357,7 +357,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void processNavigationIntent(@NonNull Uri uri) {
-		GeoParsedPoint point = GeoPointParserUtil.parse(uri.toString());
+		KGeoParsedPoint point = KGeoPointParserUtil.parse(uri.toString());
 		if (point != null) {
 			CarContext context = getCarContext();
 			ScreenManager screenManager = getScreenManager();

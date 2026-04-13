@@ -35,8 +35,8 @@ import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
 import net.osmand.util.Algorithms;
-import net.osmand.util.GeoParsedPoint;
-import net.osmand.util.GeoPointParserUtil;
+import net.osmand.shared.util.KGeoParsedPoint;
+import net.osmand.shared.util.KGeoPointParserUtil;
 import net.osmand.util.LocationParser;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 import net.osmand.util.MapUtils;
@@ -2173,13 +2173,13 @@ public class SearchCoreFactory {
 		private boolean parseUrl(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
 			String lines = phrase.getUnknownSearchPhrase().replace("\r\n", "\n");
 
-			GeoParsedPoint pnt = null;
+			KGeoParsedPoint pnt = null;
 			for (String text : lines.split("\n")) {
-				pnt = GeoPointParserUtil.parse(text);
-				if (pnt == null && httpRedirectRequester != null && GeoPointParserUtil.isGooGlUrl(text)) {
+				pnt = KGeoPointParserUtil.parse(text);
+				if (pnt == null && httpRedirectRequester != null && KGeoPointParserUtil.INSTANCE.isGooGlUrl(text)) {
 					text = httpRedirectRequester.apply(text);
 					if (text != null) {
-						pnt = GeoPointParserUtil.parse(text);
+						pnt = KGeoPointParserUtil.parse(text);
 					}
 				}
 				if (pnt != null) {
