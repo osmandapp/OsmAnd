@@ -53,9 +53,9 @@ public class OpeningHoursParser {
 		additionalStrings.put("is_open_24_7", "Open 24/7");
 		additionalStrings.put("is_open_24_7_short", "24/7");
 		additionalStrings.put("will_open_at", "Will open at");
-		additionalStrings.put("will_open_at_short", "");
+		additionalStrings.put("will_open_at_short", "From");
 		additionalStrings.put("open_from", "Open from");
-		additionalStrings.put("open_from_short", "");
+		additionalStrings.put("open_from_short", "From");
 		additionalStrings.put("will_close_at", "Will close at");
 		additionalStrings.put("will_close_at_short", "Until");
 		additionalStrings.put("open_till", "Open until");
@@ -63,7 +63,7 @@ public class OpeningHoursParser {
 		additionalStrings.put("will_open_tomorrow_at", "Will open tomorrow at");
 		additionalStrings.put("will_open_tomorrow_at_short", "Tomorrow");
 		additionalStrings.put("will_open_on", "Will open on");
-		additionalStrings.put("will_open_on_short", "");
+		additionalStrings.put("will_open_on_short", "From");
 	}
 
 	private static void initLocalStrings() {

@@ -369,7 +369,9 @@ public class AppInitializer implements IProgress {
 		OpeningHoursParser.setAdditionalString("is_open", app.getString(R.string.poi_dialog_opening_hours));
 		OpeningHoursParser.setAdditionalString("is_open_24_7", app.getString(R.string.shared_string_is_open_24_7));
 		OpeningHoursParser.setAdditionalString("will_open_at", app.getString(R.string.will_open_at));
+		OpeningHoursParser.setAdditionalString("will_open_at_short", app.getString(R.string.open_from_short));
 		OpeningHoursParser.setAdditionalString("open_from", app.getString(R.string.open_from));
+		OpeningHoursParser.setAdditionalString("open_from_short", app.getString(R.string.open_from_short));
 		OpeningHoursParser.setAdditionalString("will_close_at", app.getString(R.string.will_close_at));
 		OpeningHoursParser.setAdditionalString("will_close_at_short", app.getString(R.string.open_till_short));
 		OpeningHoursParser.setAdditionalString("open_till", app.getString(R.string.open_till));
@@ -377,6 +379,7 @@ public class AppInitializer implements IProgress {
 		OpeningHoursParser.setAdditionalString("will_open_tomorrow_at", app.getString(R.string.will_open_tomorrow_at));
 		OpeningHoursParser.setAdditionalString("will_open_tomorrow_at_short", app.getString(R.string.tomorrow));
 		OpeningHoursParser.setAdditionalString("will_open_on", app.getString(R.string.will_open_on));
+		OpeningHoursParser.setAdditionalString("will_open_on_short", app.getString(R.string.open_from_short));
 	}
 
 	private void updateRegionVars() {
