@@ -92,6 +92,6 @@ public class PoiUIFilterDataProvider {
             }
         }
         MapUtils.sortListOfMapObject(result, lat, lon);
-        return result;
+        return data;
     }
 }
