@@ -18,6 +18,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
@@ -459,7 +460,7 @@ public class BinaryMapPoiReaderAdapter {
 					if (queryToken == null) {
 						tokenMatches.add(new QueryTokenMatch(null, Collections.emptyList(), instance, req.matcherMode));
 					} else {
-						List<TokenPrefix> strongestPrefixes = filterStrongestTokenPrefixes(prefixCandidates.get(i));
+						List<TokenPrefix> strongestPrefixes = filterStrongestTokenPrefixes(prefixCandidates.get(i), queryToken);
 						tokenMatches.add(new QueryTokenMatch(queryToken, strongestPrefixes, instance, req.matcherMode));
 					}
 				}
@@ -526,7 +527,7 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private List<TokenPrefix> filterStrongestTokenPrefixes(List<TokenPrefix> prefixes) {
+	private List<TokenPrefix> filterStrongestTokenPrefixes(List<TokenPrefix> prefixes, String queryToken) {
 		if (prefixes == null || prefixes.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -541,16 +542,28 @@ public class BinaryMapPoiReaderAdapter {
 		
 		List<TokenPrefix> strongestPrefixes = new ArrayList<>();
 		for (TokenPrefix candidate : sortedPrefixes) {
+			boolean candidateMatchesQuery = !Algorithms.isEmpty(queryToken) && candidate.key() != null
+					&& candidate.key().startsWith(queryToken);
+			TokenPrefix tp = new TokenPrefix(candidate.key(), candidate.offsets());
+			if (candidateMatchesQuery) {
+				strongestPrefixes.add(tp);
+				continue;
+			}
 			boolean dominated = false;
 			for (TokenPrefix strongestPrefix : strongestPrefixes) {
 				String strongestKey = strongestPrefix.key();
-				if (strongestKey.length() > candidate.key().length() && strongestKey.startsWith(candidate.key())) {
+				if (strongestKey == null) {
+					continue;
+				}
+				boolean strongestMatchesQuery = !Algorithms.isEmpty(queryToken) && strongestKey.startsWith(queryToken);
+				if (strongestMatchesQuery && candidate.key() != null && strongestKey.length() > candidate.key().length() 
+						&& strongestKey.startsWith(candidate.key())) {
 					dominated = true;
 					break;
 				}
 			}
 			if (!dominated) {
-				strongestPrefixes.add(new TokenPrefix(candidate.key(), candidate.offsets()));
+				strongestPrefixes.add(tp);
 			}
 		}
 		return strongestPrefixes;
