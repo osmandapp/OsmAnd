@@ -1,5 +1,6 @@
 package net.osmand.shared.gpx.primitives
 
+import kotlin.jvm.Transient
 import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.gpx.GpxUtilities.COLOR_NAME_EXTENSION
 import net.osmand.shared.gpx.GpxUtilities.GpxExtensionsWriter
@@ -10,6 +11,9 @@ open class GpxExtensions {
 
 	var extensions: MutableMap<String, String>? = null
 	var deferredExtensions: MutableMap<String, String>? = null
+
+	/** JVM transient: Gson cannot instantiate [GpxExtensionsWriter]; writers are XML-only, not JSON. */
+	@Transient
 	var extensionsWriters: MutableMap<String, GpxExtensionsWriter>? = null
 
 	fun getExtensionsToRead(): Map<String, String> {
