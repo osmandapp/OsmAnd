@@ -14,7 +14,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
-import net.osmand.core.jni.IQueryController;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
@@ -206,15 +205,8 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		}
 
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-		IQueryController queryController = request.getQueryController();
 		RotatedTileBox tb = app.getOsmandMap().getMapView().getRotatedTileBox();
 		TileBoxRequest tileBoxRequest = new TileBoxRequest(tb);
-		AreaI tileBBox31 = Utilities.tileBoundingBox31(tileId, zoom);
-		QuadRect latLonBounds = new QuadRect(
-				MapUtils.get31LongitudeX(tileBBox31.getTopLeft().getX()),
-				MapUtils.get31LatitudeY(tileBBox31.getTopLeft().getY()),
-				MapUtils.get31LongitudeX(tileBBox31.getBottomRight().getX()),
-				MapUtils.get31LatitudeY(tileBBox31.getBottomRight().getY()));
 		MapLayerData<List<Amenity>>.DataReadyCallback dataReadyCallback = layerData.getDataReadyCallback(tileBoxRequest);
 		layerData.addDataReadyCallback(dataReadyCallback);
 		long[] start = {System.currentTimeMillis()};
@@ -223,11 +215,11 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 			start[0] = System.currentTimeMillis();
 		});
 		while (System.currentTimeMillis() - start[0] < layerData.DATA_REQUEST_TIMEOUT) {
-			if (isMapRendererLost() || (queryController != null && queryController.isAborted())) {
+			if (isMapRendererLost()) {
 				return new QListMapTiledCollectionPoint();
 			}
 			synchronized (dataReadyCallback.getSync()) {
-				if (isDataReady(dataReadyCallback, latLonBounds) || isStaleData(latLonBounds)) {
+				if (dataReadyCallback.isReady()) {
 					break;
 				}
 				try {
@@ -238,10 +230,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		}
 		layerData.removeDataReadyCallback(dataReadyCallback);
 
-		if (isMapRendererLost() || (queryController != null && queryController.isAborted())) {
-			return new QListMapTiledCollectionPoint();
-		}
-		if (!isDataReady(dataReadyCallback, latLonBounds)) {
+		if (isMapRendererLost()) {
 			return new QListMapTiledCollectionPoint();
 		}
 
@@ -249,6 +238,12 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		if (Algorithms.isEmpty(results)) {
 			return new QListMapTiledCollectionPoint();
 		}
+		AreaI tileBBox31 = Utilities.tileBoundingBox31(tileId, zoom);
+		QuadRect latLonBounds = new QuadRect(
+				MapUtils.get31LongitudeX(tileBBox31.getTopLeft().getX()),
+				MapUtils.get31LatitudeY(tileBBox31.getTopLeft().getY()),
+				MapUtils.get31LongitudeX(tileBBox31.getBottomRight().getX()),
+				MapUtils.get31LatitudeY(tileBBox31.getBottomRight().getY()));
 
 		QListMapTiledCollectionPoint res = new QListMapTiledCollectionPoint();
 		for (Amenity amenity : results) {
@@ -259,9 +254,6 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 				res.add(point.instantiateProxy(true));
 				point.swigReleaseOwnership();
 			}
-		}
-		if (isMapRendererLost() || (queryController != null && queryController.isAborted())) {
-			return new QListMapTiledCollectionPoint();
 		}
 		return res;
 	}
@@ -313,17 +305,5 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 	private boolean isMapRendererLost() {
 		return !((OsmandApplication) ctx.getApplicationContext()).getOsmandMap().getMapView().hasMapRenderer();
-	}
-
-	private boolean isDataReady(@NonNull MapLayerData<List<Amenity>>.DataReadyCallback dataReadyCallback,
-								@NonNull QuadRect tileBBox) {
-		TileBoxRequest readyRequest = dataReadyCallback.getReadyRequest();
-		return dataReadyCallback.isReady()
-				&& readyRequest != null
-				&& readyRequest.getLatLonBounds().contains(tileBBox);
-	}
-
-	private boolean isStaleData(@NonNull QuadRect tileBBox) {
-		return !layerData.isRequestedDataContains(tileBBox);
 	}
 }

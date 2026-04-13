@@ -306,6 +306,13 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 		String id = properties.getId();
 		amenity.setAdditionalInfo(WIKIDATA, app.getString(R.string.wikidata_id_pattern, id));
+		String lang = properties.getLang();
+		if (Algorithms.isEmpty(lang)) {
+			lang = properties.getWikiLang();
+		}
+		if (lang != null && !lang.isEmpty()) {
+			amenity.setAdditionalInfo("wiki_lang:" + lang, "yes");
+		}
 		amenity.setName(properties.getWikiTitle());
 		amenity.setEnName(TransliterationHelper.transliterate(amenity.getName()));
 		amenity.setDescription(properties.getWikiDesc());

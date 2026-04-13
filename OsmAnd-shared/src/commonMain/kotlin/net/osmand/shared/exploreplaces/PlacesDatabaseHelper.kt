@@ -13,8 +13,6 @@ import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.PlatformUtil
 import net.osmand.shared.util.synchronized
 import net.osmand.shared.wiki.WikiCoreHelper.OsmandApiFeatureData
-import okio.FileSystem
-import okio.SYSTEM
 
 class PlacesDatabaseHelper {
 
@@ -73,11 +71,6 @@ class PlacesDatabaseHelper {
 	}
 
 	private val serializer = ListSerializer(OsmandApiFeatureData.serializer())
-
-	init {
-		val cacheDir = PlatformUtil.getOsmAndContext().getCacheDir()
-		//FileSystem.SYSTEM.delete(KFile(cacheDir, DATABASE_NAME).path)
-	}
 
 	private fun onCreate(db: SQLiteConnection) {
 		db.execSQL(CREATE_TABLE_PLACES)

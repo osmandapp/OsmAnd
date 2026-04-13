@@ -752,7 +752,6 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 			private final TileBoxRequest request;
 			private T results;
 			private T displayedResults;
-			private TileBoxRequest readyRequest;
 			private boolean ready;
 			private final Object sync = new Object();
 
@@ -774,11 +773,6 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 				return displayedResults;
 			}
 
-			@Nullable
-			public TileBoxRequest getReadyRequest() {
-				return readyRequest;
-			}
-
 			public boolean isReady() {
 				return ready;
 			}
@@ -790,7 +784,6 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 			private void onDataReady(@Nullable T results, @Nullable T displayedResults) {
 				this.results = results;
 				this.displayedResults = displayedResults;
-				this.readyRequest = queriedRequest;
 				synchronized (sync) {
 					ready = true;
 					sync.notifyAll();
@@ -804,33 +797,6 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 		public TileBoxRequest getQueriedRequest() {
 			return queriedRequest;
-		}
-
-		public boolean isRequestedDataContains(@NonNull QuadRect bounds) {
-			boolean hasTask = false;
-			if (currentTask != null) {
-				hasTask = true;
-				if (taskRequestedDataContains(currentTask, bounds)) {
-					return true;
-				}
-			}
-			if (pendingTask != null) {
-				hasTask = true;
-				if (taskRequestedDataContains(pendingTask, bounds)) {
-					return true;
-				}
-			}
-			return !hasTask;
-		}
-
-		private boolean taskRequestedDataContains(@NonNull Task task, @NonNull QuadRect bounds) {
-			TileBoxRequest request = task.getExtendedBoxRequest();
-			if (request != null) {
-				return request.getLatLonBounds().contains(bounds);
-			}
-			RotatedTileBox box = task.getExtendedBox();
-			QuadRect boxBounds = box != null ? box.getLatLonBounds() : null;
-			return boxBounds != null && boxBounds.contains(bounds);
 		}
 
 		@Nullable

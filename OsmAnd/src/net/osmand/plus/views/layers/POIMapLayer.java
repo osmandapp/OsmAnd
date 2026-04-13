@@ -348,11 +348,14 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				topPlacesBitmaps.keySet().retainAll(places.keySet());
 			}
 			topPlacesList = topPlaces.values();
+			LOG.debug("updateTopPlaces: Updated " + topPlacesList.size() + " top places for the current view");
 		}
-		if (topPlacesList == null || topPlacesList.isEmpty()) {
-			cancelLoadingImages();
-		} else {
-			fetchImages(topPlacesList);
+		if (topPlacesList != null) {
+			if (!topPlacesList.isEmpty()) {
+				fetchImages(topPlacesList);
+			} else {
+				cancelLoadingImages();
+			}
 		}
 	}
 
@@ -373,6 +376,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			return false;
 		});
 
+		LOG.debug("fetchImages: Preparing to fetch images for " + places.size() + " top places");
 		for (Amenity place : places) {
 			Long placeId = place.getId();
 			String url = place.getWikiIconUrl();
@@ -414,12 +418,14 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private void cancelLoadingImages() {
+		LOG.debug("cancelLoadingImages: Cancelling all top places image load tasks");
 		if (loadingImages != null) {
 			loadingImages.values().forEach(LoadingImage::cancel);
 			loadingImages = null;
+			topPlaces = null;
+			topPlacesBitmaps = null;
+			visiblePlaces = null;
 		}
-		topPlaces = null;
-		topPlacesBitmaps = null;
 	}
 
 	@NonNull
@@ -456,6 +462,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				break;
 			}
 		}
+		LOG.debug("obtainTopPlacesToDisplay: Filtered " + res.size() + " top places to display out of " + places.size() + " total places");
 		return res;
 	}
 
@@ -468,6 +475,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 		List<Amenity> places = topPlaces != null ? new ArrayList<>(topPlaces.values()) : null;
 		if (places == null) {
+			LOG.debug("updateTopPlacesCollection: clearing top places markers collection (places list is null)");
 			clearMapMarkersCollections();
 			return;
 		}
@@ -506,6 +514,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				mapMarkersCollection.removeMarker(existingMapPoints.get(i));
 			}
 		}
+		LOG.debug("updateTopPlacesCollection: Displaying " + mapPlaces.size() + " top places on map");
 		for (MapTopPlace place : mapPlaces) {
 			if (place.alreadyExists) {
 				continue;
@@ -784,7 +793,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			} else {
 				clearPoiTileProvider();
 				clearMapMarkersCollections();
-				visiblePlaces = null;
 				cancelLoadingImages();
 			}
 			mapActivityInvalidated = false;
@@ -871,7 +879,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	protected void cleanupResources() {
 		super.cleanupResources();
 		imageCircleBitmap = null;
-		visiblePlaces = null;
 		clearSelectedTopPlaceCollection();
 		clearPoiTileProvider();
 	}
