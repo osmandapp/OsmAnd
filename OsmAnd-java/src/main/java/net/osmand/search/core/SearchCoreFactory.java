@@ -271,11 +271,9 @@ public class SearchCoreFactory {
 		Set<String> namesToAdd = new HashSet<>();
 
 		for (int i = 0; i <= name.length(); i++) {
-			boolean isHyphenNearNumber = i != name.length() && name.charAt(i) == '-'
-					&& ((i + 1 < name.length() && Character.isDigit(name.charAt(i + 1)))
-							|| (i - 1 >= 0 && Character.isDigit(name.charAt(i - 1))));
-			if (i == name.length() || (!Character.isLetter(name.charAt(i)) && !Character.isDigit(name.charAt(i))
-					&& name.charAt(i) != '\'' && !isHyphenNearNumber)) {
+			boolean tokenCharacter = i != name.length()
+					&& (isTokenCharacter(name, i, prev != -1) || name.charAt(i) == '\'');
+			if (!tokenCharacter) {
 				if (prev != -1) {
 					String substr = name.substring(prev, i);
 					namesToAdd.add(substr.toLowerCase());
@@ -290,13 +288,30 @@ public class SearchCoreFactory {
 		return namesToAdd;
 	}
 
+	private static boolean isTokenCharacter(String value, int index, boolean tokenAlreadyStarted) {
+		char character = value.charAt(index);
+		if (Character.isLetter(character) || Character.isDigit(character)) {
+			return true;
+		}
+		boolean isHyphenNearNumber = character == '-'
+				&& ((index + 1 < value.length() && Character.isDigit(value.charAt(index + 1)))
+				|| (index - 1 >= 0 && Character.isDigit(value.charAt(index - 1))));
+		if (isHyphenNearNumber) {
+			return true;
+		}
+		int characterType = Character.getType(character);
+		return tokenAlreadyStarted && (characterType == Character.NON_SPACING_MARK
+				|| characterType == Character.COMBINING_SPACING_MARK
+				|| characterType == Character.ENCLOSING_MARK);
+	}
+	
 	public static List<String> splitAndNormalize(String query) {
 		String normalizedQuery = Algorithms.normalizeSearchText(query);
-		Set<String> queryTokens = new HashSet<>(SearchCoreFactory.splitSearchNames(normalizedQuery));
+		Set<String> queryTokens = splitSearchNames(normalizedQuery);
 		if (ArabicNormalizer.isSpecialArabic(normalizedQuery)) {
 			String arabic = ArabicNormalizer.normalize(normalizedQuery);
 			if (arabic != null && !arabic.equals(normalizedQuery)) {
-				queryTokens.addAll(SearchCoreFactory.splitSearchNames(arabic));
+                queryTokens.addAll(splitSearchNames(arabic));
 			}
 		}
 		return new ArrayList<>(queryTokens);
