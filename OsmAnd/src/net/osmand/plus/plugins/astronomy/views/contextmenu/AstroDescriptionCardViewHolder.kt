@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.astronomy.views.contextmenu
 
-import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
@@ -21,7 +20,7 @@ class AstroDescriptionCardViewHolder(itemView: View) : RecyclerView.ViewHolder(i
 		app: OsmandApplication,
 		nightMode: Boolean,
 		item: AstroDescriptionCardItem,
-		onReadClick: (Uri) -> Unit
+		onReadClick: (AstroDescriptionCardItem) -> Unit
 	) {
 		val description = item.description
 		descriptionTv.text = description
@@ -29,8 +28,8 @@ class AstroDescriptionCardViewHolder(itemView: View) : RecyclerView.ViewHolder(i
 
 		val readMoreUri = item.readMoreUri
 		val linkType = item.linkType
-		readButton.isVisible = readMoreUri != null && linkType != null
-		if (readMoreUri == null || linkType == null) {
+		readButton.isVisible = (readMoreUri != null || item.hasOfflineArticle) && linkType != null
+		if (!readButton.isVisible || linkType == null) {
 			readButton.setOnClickListener(null)
 			return
 		}
@@ -64,7 +63,7 @@ class AstroDescriptionCardViewHolder(itemView: View) : RecyclerView.ViewHolder(i
 		)
 
 		readButton.setOnClickListener {
-			onReadClick(readMoreUri)
+			onReadClick(item)
 		}
 	}
 }
