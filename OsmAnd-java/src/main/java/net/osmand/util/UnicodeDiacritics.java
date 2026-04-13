@@ -3,6 +3,10 @@ package net.osmand.util;
 import java.text.Normalizer;
 import java.util.BitSet;
 
+/**
+ * Same semantics as OsmAnd-core {@code ICU::stripDiacritics} (b7285ce): NFD, drop only Mn, NFC;
+ * BMP bitset fast path like {@code initializeCharFilter} / {@code s_isUnsafeChar}.
+ */
 public final class UnicodeDiacritics {
 
 	private static final BitSet BMP_MAY_NEED_DIACRITIC_PROCESSING = new BitSet(65536);
@@ -37,15 +41,21 @@ public final class UnicodeDiacritics {
 
 	private static boolean stringMayNeedDiacriticProcessing(CharSequence input) {
 		for (int i = 0, len = input.length(); i < len; ) {
-			int cp = Character.codePointAt(input, i);
-			i += Character.charCount(cp);
-			if (cp <= 0xFFFF) {
-				if (BMP_MAY_NEED_DIACRITIC_PROCESSING.get(cp)) {
-					return true;
-				}
-			} else if (Character.getType(cp) == Character.NON_SPACING_MARK) {
+			char ch = input.charAt(i);
+			int cp;
+			int step;
+			if (Character.isHighSurrogate(ch) && i + 1 < len && Character.isLowSurrogate(input.charAt(i + 1))) {
+				cp = Character.toCodePoint(ch, input.charAt(i + 1));
+				step = 2;
+			} else {
+				cp = ch;
+				step = 1;
+			}
+			if ((cp <= 0xFFFF && BMP_MAY_NEED_DIACRITIC_PROCESSING.get(cp))
+					|| (cp > 0xFFFF && Character.getType(cp) == Character.NON_SPACING_MARK)) {
 				return true;
 			}
+			i += step;
 		}
 		return false;
 	}
@@ -66,6 +76,7 @@ public final class UnicodeDiacritics {
 				filtered.appendCodePoint(cp);
 			}
 		}
-		return Normalizer.normalize(filtered.toString(), Normalizer.Form.NFC);
+		String result = Normalizer.normalize(filtered.toString(), Normalizer.Form.NFC);
+		return result.equals(input) ? input : result;
 	}
 }
