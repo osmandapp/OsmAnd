@@ -543,10 +543,10 @@ public class BinaryMapPoiReaderAdapter {
 		List<TokenPrefix> strongestPrefixes = new ArrayList<>();
 		for (TokenPrefix candidate : sortedPrefixes) {
 			boolean candidateMatchesQuery = !Algorithms.isEmpty(queryToken) && candidate.key() != null
-					&& candidate.key().startsWith(queryToken);
-			TokenPrefix tp = new TokenPrefix(candidate.key(), candidate.offsets());
+					&& queryToken.startsWith(candidate.key());
+			TokenPrefix candidatePrefix = new TokenPrefix(candidate.key(), candidate.offsets());
 			if (candidateMatchesQuery) {
-				strongestPrefixes.add(tp);
+				strongestPrefixes.add(candidatePrefix);
 				continue;
 			}
 			boolean dominated = false;
@@ -555,7 +555,7 @@ public class BinaryMapPoiReaderAdapter {
 				if (strongestKey == null) {
 					continue;
 				}
-				boolean strongestMatchesQuery = !Algorithms.isEmpty(queryToken) && strongestKey.startsWith(queryToken);
+				boolean strongestMatchesQuery = !Algorithms.isEmpty(queryToken) && queryToken.startsWith(strongestKey);
 				if (strongestMatchesQuery && candidate.key() != null && strongestKey.length() > candidate.key().length() 
 						&& strongestKey.startsWith(candidate.key())) {
 					dominated = true;
@@ -563,7 +563,7 @@ public class BinaryMapPoiReaderAdapter {
 				}
 			}
 			if (!dominated) {
-				strongestPrefixes.add(tp);
+				strongestPrefixes.add(candidatePrefix);
 			}
 		}
 		return strongestPrefixes;
