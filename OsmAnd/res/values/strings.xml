@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="astro_designations">Designations</string>
 	<string name="map_widget_memory_info">Memory info</string>
 	<string name="map_widget_memory_info_desc">Monitors Java heap, native allocations, and graphics memory.</string>
 	<string name="memory_used_settings">Used Java Heap</string>
