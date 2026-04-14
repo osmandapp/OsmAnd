@@ -91,10 +91,32 @@ enum class SupportedLocale(
 
 	companion object {
 
-		/**
-		 * Safely creates a java.util.Locale object directly from any OsmAnd legacy or modern tag.
-		 * Eliminates the need for manual parsing of '_' and '+'.
-		 */
+		@JvmStatic
+		fun fromTag(tag: String?): SupportedLocale? {
+			if (tag.isNullOrEmpty()) return SYSTEM_DEFAULT
+
+			// Handle old Java anomaly: OS returning "in" instead of "id"
+			val normalizedTag = if (tag.equals("in", ignoreCase = true)) "id" else tag
+
+			return entries.find {
+				it.modernTag.equals(normalizedTag, ignoreCase = true) ||
+						it.osmandTag.equals(normalizedTag, ignoreCase = true)
+			}
+		}
+
+		@JvmStatic
+		fun normalizeToOsmandLegacy(systemTag: String?): String {
+			if (systemTag.isNullOrEmpty()) return ""
+
+			val knownLocale = fromTag(systemTag)
+			if (knownLocale != null) {
+				return knownLocale.osmandTag
+			}
+
+			// Fallback for languages absent from UI but present in OS
+			return systemTag.replace('-', '_')
+		}
+
 		@JvmStatic
 		fun createLocale(tag: String?): Locale? {
 			if (tag.isNullOrEmpty()) return null
@@ -112,42 +134,6 @@ enum class SupportedLocale(
 			return Locale.forLanguageTag(fallbackTag)
 		}
 
-		/**
-		 * Safely converts any system BCP-47 tag to the OsmAndSettings legacy format.
-		 */
-		@JvmStatic
-		fun normalizeToOsmandLegacy(systemTag: String?): String {
-			if (systemTag.isNullOrEmpty()) return ""
-
-			val knownLocale = fromTag(systemTag)
-			if (knownLocale != null) {
-				return knownLocale.osmandTag
-			}
-
-			// Fallback for languages entirely absent from our UI list
-			return systemTag.replace('-', '_')
-		}
-
-		/**
-		 * Finds the corresponding SupportedLocale by ANY known tag (modern or legacy).
-		 */
-		@JvmStatic
-		fun fromTag(tag: String?): SupportedLocale? {
-			if (tag.isNullOrEmpty()) return SYSTEM_DEFAULT
-
-			// Single line protection for the old Java anomaly where OS might return "in" instead of "id"
-			val normalizedTag = if (tag.equals("in", ignoreCase = true)) "id" else tag
-
-			return entries.find {
-				it.modernTag.equals(normalizedTag, ignoreCase = true) ||
-						it.osmandTag.equals(normalizedTag, ignoreCase = true)
-			}
-		}
-
-		/**
-		 * Generates the sorted map of languages for the UI Preference screen.
-		 * Maps osmandTag (DB key) to the fully resolved human-readable string.
-		 */
 		@JvmStatic
 		fun getPreferredDisplayLanguages(context: Context): Map<String, String> {
 			val incompleteSuffix = " (${context.getString(R.string.incomplete_locale)})"

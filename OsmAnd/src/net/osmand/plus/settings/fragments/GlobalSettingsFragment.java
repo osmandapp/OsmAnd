@@ -146,7 +146,13 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		if (prefId.equals(settings.PREFERRED_LOCALE.getId())) {
 			// recreate activity to update locale
 			callActivity(activity -> {
-				app.getLocaleHelper().checkPreferredLocale();
+				// On Android 13+ (Tiramisu), the OS applies per-app locales asynchronously.
+				// Calling checkPreferredLocale() immediately after a change causes an IPC race condition:
+				// the OS returns the old locale (not yet updated), which incorrectly overwrites the user's new choice.
+				// For older Android versions, we still must manually force the locale update before restarting.
+				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+					app.getLocaleHelper().checkPreferredLocale();
+				}
 				RestartActivity.doRestart(activity);
 			});
 		} else if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
@@ -206,23 +212,19 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupPreferredLocalePref() {
-		boolean visible = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU;
 		ListPreferenceEx preference = requirePreference(settings.PREFERRED_LOCALE.getId());
-		preference.setVisible(visible);
-		if (visible) {
-			preference.setIcon(getContentIcon(R.drawable.ic_action_map_language));
-			preference.setSummary(settings.PREFERRED_LOCALE.get());
+		preference.setIcon(getContentIcon(R.drawable.ic_action_map_language));
+		preference.setSummary(settings.PREFERRED_LOCALE.get());
 
-			Map<String, String> preferredLanguages = SupportedLocale.getPreferredDisplayLanguages(app);
-			String[] languagesNames = preferredLanguages.values().toArray(new String[0]);
-			String[] languagesIds = preferredLanguages.keySet().toArray(new String[0]);
-			preference.setEntries(languagesNames);
-			preference.setEntryValues(languagesIds);
+		Map<String, String> preferredLanguages = SupportedLocale.getPreferredDisplayLanguages(app);
+		String[] languagesNames = preferredLanguages.values().toArray(new String[0]);
+		String[] languagesIds = preferredLanguages.keySet().toArray(new String[0]);
+		preference.setEntries(languagesNames);
+		preference.setEntryValues(languagesIds);
 
-			// Add " (Display language)" to menu title in Latin letters for all non-en languages
-			if (!getString(R.string.preferred_locale).equals(getString(R.string.preferred_locale_no_translate))) {
-				preference.setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
-			}
+		// Add " (Display language)" to menu title in Latin letters for all non-en languages
+		if (!getString(R.string.preferred_locale).equals(getString(R.string.preferred_locale_no_translate))) {
+			preference.setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
 		}
 	}
 

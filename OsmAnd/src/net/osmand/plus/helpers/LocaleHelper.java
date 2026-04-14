@@ -9,6 +9,7 @@ import android.text.format.DateFormat;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.LocaleManagerCompat;
 import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
 
@@ -53,12 +54,15 @@ public class LocaleHelper {
 	private void onPreferredLocaleChanged() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 			String preferredLocale = app.getSettings().PREFERRED_LOCALE.get();
+
 			if (!Algorithms.isEmpty(preferredLocale)) {
 				Locale locale = parseLanguageTag(preferredLocale);
 				if (locale != null) {
 					Locale.setDefault(locale);
 					app.runInUIThread(() -> AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale)));
 				}
+			} else {
+				app.runInUIThread(() -> AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList()));
 			}
 		}
 	}
@@ -68,10 +72,18 @@ public class LocaleHelper {
 		String locale = settings.PREFERRED_LOCALE.get();
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			String currentLocale = Locale.getDefault().toLanguageTag();
+			LocaleListCompat appLocales = LocaleManagerCompat.getApplicationLocales(app);
+			String currentLocale = appLocales.isEmpty() ? "" : appLocales.get(0).toLanguageTag();
+			currentLocale = SupportedLocale.normalizeToOsmandLegacy(currentLocale);
+
 			if (!Algorithms.stringsEqual(currentLocale, locale)) {
-				locale = currentLocale;
-				settings.PREFERRED_LOCALE.set(locale);
+				if (Algorithms.isEmpty(currentLocale) && !Algorithms.isEmpty(locale)) {
+					// Ignore empty OS response if vendor firmware rejected a rare tag (e.g., "sc").
+				} else {
+					// Sync with OS if user changed the language via Android App Info.
+					locale = currentLocale;
+					settings.PREFERRED_LOCALE.set(locale);
+				}
 			}
 		}
 
@@ -114,8 +126,12 @@ public class LocaleHelper {
 	 */
 	@Nullable
 	private Locale parseLanguageTag(@NonNull String languageTag) {
-		Locale locale = Locale.forLanguageTag(languageTag);
-		return Algorithms.isEmpty(locale.toString()) ? parseLegacyLanguageTag(languageTag) : locale;
+		Locale locale = SupportedLocale.createLocale(languageTag);
+
+		if (locale == null || Algorithms.isEmpty(locale.toString())) {
+			return parseLegacyLanguageTag(languageTag);
+		}
+		return locale;
 	}
 
 	/**
