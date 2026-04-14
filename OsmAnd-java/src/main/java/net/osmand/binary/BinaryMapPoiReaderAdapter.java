@@ -460,7 +460,7 @@ public class BinaryMapPoiReaderAdapter {
 					if (queryToken == null) {
 						tokenMatches.add(new QueryTokenMatch(null, Collections.emptyList(), instance, req.matcherMode));
 					} else {
-						List<TokenPrefix> strongestPrefixes = filterStrongestTokenPrefixes(prefixCandidates.get(i), queryToken);
+						List<TokenPrefix> strongestPrefixes = filterStrongestTokenPrefixes(prefixCandidates.get(i), queryToken, instance);
 						tokenMatches.add(new QueryTokenMatch(queryToken, strongestPrefixes, instance, req.matcherMode));
 					}
 				}
@@ -527,7 +527,7 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private List<TokenPrefix> filterStrongestTokenPrefixes(List<TokenPrefix> prefixes, String queryToken) {
+	private List<TokenPrefix> filterStrongestTokenPrefixes(List<TokenPrefix> prefixes, String queryToken, Collator collator) {
 		if (prefixes == null || prefixes.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -542,10 +542,10 @@ public class BinaryMapPoiReaderAdapter {
 		
 		List<TokenPrefix> strongestPrefixes = new ArrayList<>();
 		for (TokenPrefix candidate : sortedPrefixes) {
-			boolean candidateMatchesQuery = !Algorithms.isEmpty(queryToken) && candidate.key() != null
-					&& queryToken.startsWith(candidate.key());
+			boolean matchesQuery = !Algorithms.isEmpty(queryToken) && candidate.key() != null
+					&& CollatorStringMatcher.cmatches(collator, candidate.key(), queryToken, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 			TokenPrefix candidatePrefix = new TokenPrefix(candidate.key(), candidate.offsets());
-			if (candidateMatchesQuery) {
+			if (matchesQuery) {
 				strongestPrefixes.add(candidatePrefix);
 				continue;
 			}
@@ -555,7 +555,8 @@ public class BinaryMapPoiReaderAdapter {
 				if (strongestKey == null) {
 					continue;
 				}
-				boolean strongestMatchesQuery = !Algorithms.isEmpty(queryToken) && queryToken.startsWith(strongestKey);
+				boolean strongestMatchesQuery = !Algorithms.isEmpty(queryToken) 
+						&& CollatorStringMatcher.cmatches(collator, queryToken, strongestKey, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 				if (strongestMatchesQuery && candidate.key() != null && strongestKey.length() > candidate.key().length() 
 						&& strongestKey.startsWith(candidate.key())) {
 					dominated = true;
