@@ -121,8 +121,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private int topPlacesLimit = TOP_PLACES_LIMIT;
 
 	private static final int SELECTED_MARKER_ID = -1;
-	private static final int IMAGE_ICON_BORDER_DP = 2;
-	private static final int IMAGE_ICON_SIZE_DP = 45;
+	private static final int IMAGE_ICON_BORDER_DP = 4;
+	private static final int IMAGE_ICON_SIZE_DP = 48;
 	private static final int IMAGE_ICON_OUTER_COLOR = 0xffffffff;
 	private static Bitmap imageCircleBitmap;
 	private NetworkImageLoader imageLoader;
@@ -1172,6 +1172,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		contextMenu.show(topPlace.getLocation(), QuickSearchWikiItem.getPointDescription(app, amenity), object);
 	}
 
+	@NonNull
 	private Bitmap createImageBitmap(Bitmap bitmap, boolean isSelected) {
 		OsmandApplication app = getApplication();
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
@@ -1185,7 +1186,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		canvas.drawBitmap(circle, 0f, 0f, bitmapPaint);
 		int cx = circle.getWidth() / 2;
 		int cy = circle.getHeight() / 2;
-		int radius = (Math.min(cx, cy) - borderWidth * 2);
+		int radius = Math.min(cx, cy) - borderWidth;
 		canvas.save();
 //		canvas.clipRect(0, 0, circle.getWidth(), circle.getHeight());
 		Path circularPath = new Path();
@@ -1217,7 +1218,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private int getBigIconSize() {
-		return (int) (AndroidUtils.dpToPxAuto(getContext(), IMAGE_ICON_SIZE_DP) * getTextScale() / app.getOsmandMap().getCarDensityScaleCoef());
+		int totalSize = IMAGE_ICON_SIZE_DP + IMAGE_ICON_BORDER_DP * 2;
+		return (int) (AndroidUtils.dpToPxAuto(getContext(), totalSize) * getTextScale() / app.getOsmandMap().getCarDensityScaleCoef());
 	}
 
 	@Override
