@@ -118,7 +118,7 @@ enum class SupportedLocale(
 		}
 
 		@JvmStatic
-		fun createLocale(tag: String?): Locale? {
+		fun parseLocale(tag: String?): Locale? {
 			if (tag.isNullOrEmpty()) return null
 
 			val knownLocale = fromTag(tag)
