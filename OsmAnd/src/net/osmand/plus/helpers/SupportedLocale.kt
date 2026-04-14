@@ -18,7 +18,7 @@ import java.util.TreeMap
  */
 
 enum class SupportedLocale(
-	val modernTag: String,
+	val bcp47Tag: String,
 	val osmandTag: String,
 	@StringRes val nameResId: Int,
 	val incomplete: Boolean = false
@@ -99,7 +99,7 @@ enum class SupportedLocale(
 			val normalizedTag = if (tag.equals("in", ignoreCase = true)) "id" else tag
 
 			return entries.find {
-				it.modernTag.equals(normalizedTag, ignoreCase = true) ||
+				it.bcp47Tag.equals(normalizedTag, ignoreCase = true) ||
 						it.osmandTag.equals(normalizedTag, ignoreCase = true)
 			}
 		}
@@ -118,13 +118,13 @@ enum class SupportedLocale(
 		}
 
 		@JvmStatic
-		fun createLocale(tag: String?): Locale? {
+		fun parseLocale(tag: String?): Locale? {
 			if (tag.isNullOrEmpty()) return null
 
 			val knownLocale = fromTag(tag)
 			if (knownLocale != null) {
 				// Use the modern BCP-47 tag to guarantee valid Locale creation without legacy parsing
-				return Locale.forLanguageTag(knownLocale.modernTag)
+				return Locale.forLanguageTag(knownLocale.bcp47Tag)
 			}
 
 			// Ultimate fallback for custom/unknown tags (if any)
