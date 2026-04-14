@@ -370,7 +370,7 @@ public class BinaryMapPoiReaderAdapter {
 						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_GROUPS_BBOXES, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
-				BinaryMapIndexReaderStats.PoiReadMetricSet metrics = new BinaryMapIndexReaderStats.PoiReadMetricSet();
+				BinaryMapIndexReaderStats.PoiReadMetricSet metrics = req.searchStat == null ? null : new BinaryMapIndexReaderStats.PoiReadMetricSet();
 				// also offsets can be randomly skipped by limit
 				Integer[] offKeys = new Integer[offsets.size()];
 				if (offsets.size() > 0) {
@@ -402,18 +402,21 @@ public class BinaryMapPoiReaderAdapter {
 //				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) +
 //						"ms. Found " + offKeys.length + " subtrees");
 				for (int j = 0; j < offKeys.length; j++) {
-					long existedBeforeBlock = metrics.objectsLoaded;
+					long existedBeforeBlock = metrics != null ? metrics.objectsLoaded : 0;
 					codedIS.seek(offKeys[j] + indexOffset);
 					long len = readInt();
 					long payloadStart = codedIS.getTotalBytesRead();
 					long oldLim = codedIS.pushLimitLong((long) len);
 					readPoiData(matcher, req, region, metrics);
 					codedIS.popLimit(oldLim);
-					metrics.blocksLoaded++;
+					if (metrics != null) {
+						metrics.blocksLoaded++;
 
-					long objectsInBlock = metrics.objectsLoaded - existedBeforeBlock;
-					metrics.maxObjectsPerBlock = Math.max(metrics.maxObjectsPerBlock, objectsInBlock);
-					metrics.payloadBytesParsed += codedIS.getTotalBytesRead() - payloadStart;
+						long objectsInBlock = metrics.objectsLoaded - existedBeforeBlock;
+						metrics.maxObjectsPerBlock = Math.max(metrics.maxObjectsPerBlock, objectsInBlock);
+						metrics.payloadBytesParsed += codedIS.getTotalBytesRead() - payloadStart;
+					}
+					
 					if (req.isCancelled() || req.limitExceeded()) {
 						req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
 								BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, 
@@ -830,12 +833,12 @@ public class BinaryMapPoiReaderAdapter {
 				y = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER:
-				metrics.objectsLoaded++;
+				if (metrics != null) metrics.objectsLoaded++;
 				int len = codedIS.readRawVarint32();
 				long oldLim = codedIS.pushLimitLong((long) len);
 				long decodeStartNs = System.nanoTime();
 				Amenity am = readPoiPoint(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, x, y, zoom, req, region, false);
-				metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
+				if (metrics != null) metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
 				codedIS.popLimit(oldLim);
 				if (am != null) {
 					long matcherStartNs = System.nanoTime();
@@ -865,10 +868,10 @@ public class BinaryMapPoiReaderAdapter {
 					if (matches) {
 						req.collectRawData(am);
 						if (req.publish(am)) {
-							metrics.matchedObjectsLoaded++;
+							if (metrics != null) metrics.matchedObjectsLoaded++;
 						}
 					}
-					metrics.matcherTimeNs += System.nanoTime() - matcherStartNs;
+					if (metrics != null) metrics.matcherTimeNs += System.nanoTime() - matcherStartNs;
 				}
 				break;
 			default:
