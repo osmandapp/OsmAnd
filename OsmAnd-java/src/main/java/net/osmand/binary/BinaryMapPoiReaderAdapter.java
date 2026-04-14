@@ -861,12 +861,13 @@ public class BinaryMapPoiReaderAdapter {
 							}
 						}
 					}
-					metrics.matcherTimeNs += System.nanoTime() - matcherStartNs;
 					if (matches) {
-						metrics.matchedObjectsLoaded++;
 						req.collectRawData(am);
-						req.publish(am);
+						if (req.publish(am)) {
+							metrics.matchedObjectsLoaded++;
+						}
 					}
+					metrics.matcherTimeNs += System.nanoTime() - matcherStartNs;
 				}
 				break;
 			default:
