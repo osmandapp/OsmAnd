@@ -219,7 +219,7 @@ public class CollatorStringMatcher implements StringMatcher {
 			fullText = normalized == null ? fullText : normalized;
 		}
 		int i;
-		fullText = Algorithms.removeApostrophes(fullText);
+		// fullText = Algorithms.removeApostrophes(fullText);
 		while ((i = fullText.indexOf('ß')) != -1) {
 			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i + 1);
 		}
