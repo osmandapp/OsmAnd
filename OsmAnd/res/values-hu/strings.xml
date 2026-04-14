@@ -6052,4 +6052,5 @@
     <string name="shared_string_native">Natív</string>
     <string name="memory_limit_settings">Legnagyobb megengedett Java memóriakupac</string>
     <string name="open_till_short">Ekkor:</string>
+    <string name="open_from_short">Ettől:</string>
 </resources>
