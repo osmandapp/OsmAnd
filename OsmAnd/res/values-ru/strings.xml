@@ -6065,4 +6065,5 @@
     <string name="shared_string_gpu">Графический процессор</string>
     <string name="shared_string_allocated">Зарезервированная</string>
     <string name="open_till_short">До</string>
+    <string name="open_from_short">C</string>
 </resources>
