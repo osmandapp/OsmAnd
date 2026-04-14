@@ -56,7 +56,7 @@ public class LocaleHelper {
 			String preferredLocale = app.getSettings().PREFERRED_LOCALE.get();
 
 			if (!Algorithms.isEmpty(preferredLocale)) {
-				Locale locale = parseLanguageTag(preferredLocale);
+				Locale locale = SupportedLocale.parseLocale(preferredLocale);
 				if (locale != null) {
 					Locale.setDefault(locale);
 					app.runInUIThread(() -> AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale)));
@@ -89,7 +89,7 @@ public class LocaleHelper {
 
 		boolean useSystemDefault = Algorithms.isEmpty(locale);
 		if (!useSystemDefault) {
-			Locale parsed = parseLanguageTag(locale);
+			Locale parsed = SupportedLocale.parseLocale(locale);
 			if (parsed != null) {
 				preferredLocale = parsed;
 			}
@@ -119,68 +119,6 @@ public class LocaleHelper {
 
 			localizedConf = new Configuration(newConfig);
 		}
-	}
-
-	/**
-	 * @deprecated Use {@link SupportedLocale#createLocale(String)} instead.
-	 */
-	@Nullable
-	private Locale parseLanguageTag(@NonNull String languageTag) {
-		Locale locale = SupportedLocale.createLocale(languageTag);
-
-		if (locale == null || Algorithms.isEmpty(locale.toString())) {
-			return parseLegacyLanguageTag(languageTag);
-		}
-		return locale;
-	}
-
-	/**
-	 * @deprecated Use {@link SupportedLocale#createLocale(String)} instead.
-	 */
-	@Nullable
-	private Locale parseLegacyLanguageTag(@NonNull String locale) {
-		// Split locale into language, region, and script
-		String[] scriptSplit = locale.split("\\+");
-		String baseLocale = scriptSplit[0];
-		String script = (scriptSplit.length > 1) ? scriptSplit[1] : "";
-
-		String[] localeSplit = baseLocale.split("_");
-		String lang = localeSplit[0];
-		String country = (localeSplit.length > 1) ? localeSplit[1] : "";
-
-		// Construct Locale using Builder
-		if (!Algorithms.isEmpty(lang)) {
-			Locale.Builder builder = new Locale.Builder();
-			lang = backwardCompatibleNonIsoCodes(lang);
-			for (String isoLang : Locale.getISOLanguages()) {
-				if (isoLang.equalsIgnoreCase(lang)) {
-					builder.setLanguage(isoLang);
-					break;
-				}
-			}
-			if (!Algorithms.isEmpty(country)) {
-				builder.setRegion(country);
-			}
-			if (!Algorithms.isEmpty(script)) {
-				builder.setScript(script);
-			}
-			return builder.build();
-		}
-		return null;
-	}
-
-	/**
-	 * @deprecated Hardcoded language mappings are now handled inside {@link SupportedLocale}.
-	 */
-	private String backwardCompatibleNonIsoCodes(String lang) {
-		if (lang.equalsIgnoreCase("iw")) {
-			return "he";
-		} else if (lang.equalsIgnoreCase("ji")) {
-			return "yi";
-		} else if (lang.equalsIgnoreCase("id")) {
-			return "in";
-		}
-		return lang;
 	}
 
 	public void setLanguage(@NonNull Context context) {
