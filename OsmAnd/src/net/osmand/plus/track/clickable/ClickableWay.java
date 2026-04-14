@@ -81,7 +81,7 @@ public class ClickableWay {
             if (key.endsWith(":name")) {
                 return value;
             }
-            if (underscoreName == null && key.endsWith("_name") && !"shield_stub_name".equals(key)) {
+            if (underscoreName == null && key.endsWith("_name") && !key.endsWith("stub_name")) {
                 underscoreName = value;
             }
         }
