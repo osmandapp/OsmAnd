@@ -6055,4 +6055,5 @@
     <string name="shared_string_gpu">GPU</string>
     <string name="shared_string_allocated">Alloué</string>
     <string name="open_till_short">Jusqu\'à</string>
+    <string name="open_from_short">De</string>
 </resources>
