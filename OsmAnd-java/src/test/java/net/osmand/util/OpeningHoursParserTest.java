@@ -652,16 +652,19 @@ public class OpeningHoursParserTest {
 		testShortInfo("16.02.2018 12:00", hours, "24/7");
 
 		hours = parseOpenedHours("Mo-Fr 12:00-15:00, Tu-Fr 17:00-23:00, Sa 12:00-23:00, Su 14:00-23:00");
-		testShortInfo("16.02.2018 09:45", hours, "12:00");
+		testShortInfo("16.02.2018 09:45", hours, "From 12:00");
 		testShortInfo("16.02.2018 12:00", hours, "Until 15:00");
 		testShortInfo("16.02.2018 14:00", hours, "Until 15:00");
-		testShortInfo("16.02.2018 16:00", hours, "17:00");
+		testShortInfo("16.02.2018 16:00", hours, "From 17:00");
 
 		hours = parseOpenedHours("Mo-Fr 09:00-18:00");
 		testShortInfo("18.02.2018 12:00", hours, "Tomorrow 09:00");
 
 		hours = parseOpenedHours("Mo-Fr 08:00-12:00, Mo,Tu,Th 15:00-17:00; PH off");
-		testShortInfo("09.08.2019 15:00", hours, "08:00 Mon");
+		testShortInfo("09.08.2019 15:00", hours, "From 08:00 Mon");
+
+		hours = parseOpenedHours("Mo-Fr; PH off");
+		testShortInfo("09.08.2019 15:00", hours, "Mon-Fri");
 	}
 
 	private void testYearFormats() throws ParseException {

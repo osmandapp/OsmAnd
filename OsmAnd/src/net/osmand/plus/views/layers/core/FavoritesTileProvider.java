@@ -142,7 +142,7 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 	}
 
 	@Override
-	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom, IMapTiledSymbolsProvider.Request request) {
+	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
 		return new QListMapTiledCollectionPoint();
 	}
 
