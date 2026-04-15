@@ -2634,7 +2634,7 @@ public class OsmandAidlApi {
 		if (Algorithms.isEmpty(fileName) || fileName.contains("/")) {
 			return true;
 		}
-		return !Algorithms.isEmpty(destinationDir) && (destinationDir.contains("/../")
+		return Algorithms.isNotEmpty(destinationDir) && (destinationDir.contains("/../")
 				|| destinationDir.startsWith("../") || destinationDir.endsWith("/.."));
 	}
 
