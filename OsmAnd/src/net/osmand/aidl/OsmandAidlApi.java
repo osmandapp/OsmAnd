@@ -2631,10 +2631,11 @@ public class OsmandAidlApi {
 	}
 
 	private static boolean hasUnsafeCopyPath(@Nullable String destinationDir, @Nullable String fileName) {
-		if (Algorithms.isEmpty(fileName) || fileName.contains("/") || fileName.contains("\\") || fileName.contains("..")) {
+		if (Algorithms.isEmpty(fileName) || fileName.contains("/")) {
 			return true;
 		}
-		return !Algorithms.isEmpty(destinationDir) && (destinationDir.contains("..") || new File(destinationDir).isAbsolute());
+		return Algorithms.isNotEmpty(destinationDir) && (destinationDir.contains("/../")
+				|| destinationDir.startsWith("../") || destinationDir.endsWith("/.."));
 	}
 
 	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GpxFile> {
