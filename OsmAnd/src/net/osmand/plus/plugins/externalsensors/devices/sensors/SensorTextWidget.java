@@ -29,6 +29,8 @@ import java.util.List;
 
 public class SensorTextWidget extends SimpleWidget {
 
+	protected static final String NOT_ACTUAL_VALUE = "0";
+
 	private final ExternalSensorsPlugin plugin;
 	private final SensorWidgetDataFieldType fieldType;
 	private final CommonPreference<String> deviceIdPref;
@@ -170,11 +172,16 @@ public class SensorTextWidget extends SimpleWidget {
 					}
 				}
 				if (field != null) {
-					if (isUpdateNeeded() || !Algorithms.objectEquals(cachedNumber, field.getNumberValue())) {
-						cachedNumber = field.getNumberValue();
+					Number correctValue = sensor.hasActualData() ? field.getNumberValue() : 0;
+					if (isUpdateNeeded() || !Algorithms.objectEquals(cachedNumber, correctValue)) {
+						cachedNumber = correctValue;
 						FormattedValue formattedValue = field.getFormattedValue(app);
 						if (formattedValue != null) {
-							setText(formattedValue.value, formattedValue.unit);
+							if (sensor.hasActualData()) {
+								setText(formattedValue.value, formattedValue.unit);
+							} else {
+								setText(NOT_ACTUAL_VALUE, formattedValue.unit);
+							}
 						} else {
 							setText(NO_VALUE, null);
 						}
@@ -184,7 +191,7 @@ public class SensorTextWidget extends SimpleWidget {
 				}
 			} else {
 				AbstractDevice<?> device = sensor.getDevice();
-				if(device.hasBatteryLevel()) {
+				if (device.hasBatteryLevel()) {
 					setText(String.valueOf(device.getBatteryLevel()), "%");
 				} else {
 					setText(app.getString(R.string.n_a), null);

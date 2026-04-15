@@ -17,6 +17,7 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDistanceWidgetDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
+import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -137,5 +138,10 @@ public class AntBikeDistanceSensor extends AntAbstractSensor<AntPlusBikeSpeedDis
 		if (accumulatedDistance > 0) {
 			json.put(SENSOR_TAG_DISTANCE, DECIMAL_FORMAT.format(accumulatedDistance));
 		}
+	}
+
+	@Override
+	public boolean hasActualData() {
+		return !Algorithms.isEmpty(getLastSensorDataList());
 	}
 }
