@@ -1946,7 +1946,7 @@ public class OsmandAidlApi {
 	public boolean isAppEnabled(@NonNull String pack) {
 		ConnectedApp connectedApp = connectedApps.get(pack);
 		if (connectedApp == null) {
-			connectedApp = new ConnectedApp(app, pack, true);
+			connectedApp = new ConnectedApp(app, pack, false);
 			connectedApps.put(pack, connectedApp);
 			saveConnectedApps();
 		}
