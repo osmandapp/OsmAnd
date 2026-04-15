@@ -36,6 +36,7 @@ import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
@@ -325,7 +326,11 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 					contextCoreMarker.setPosition(target);
 				}
 				if (!hasHighlight3dObjectColor(latLon)) {
-					add3DObjectColor(latLon, outlinePaint.getColor());
+					OsmandApplication app = getApplication();
+					Integer customColor = app.getAppCustomization().getHighlight3dObjectsColor();
+					int color = customColor != null ? customColor : outlinePaint.getColor();
+
+					add3DObjectColor(latLon, color);
 				}
 			}
 			contextCoreMarker.setIsHidden(target == null);
