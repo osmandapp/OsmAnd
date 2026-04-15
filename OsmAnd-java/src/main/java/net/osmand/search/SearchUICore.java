@@ -47,9 +47,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -268,24 +266,23 @@ public class SearchUICore {
 		}
 
 		private void filterSearchDuplicateResults(List<SearchResult> lst) {
-			ListIterator<SearchResult> it = lst.listIterator();
-			LinkedList<SearchResult> lstUnique = new LinkedList<SearchResult>();
-			while (it.hasNext()) {
-				SearchResult r = it.next();
-				boolean same = false;
-				for (SearchResult rs : lstUnique) {
-					same = sameSearchResult(rs, r);
-					if (same) {
-						break;
+			for (int i = 0; i < lst.size();) {
+				SearchResult current = lst.get(i);
+				boolean duplicate = false;
+				for (int j = i - 1; j >= Math.max(i - DEPTH_TO_CHECK_SAME_SEARCH_RESULTS, 0); j--) {
+					SearchResult prevAdded = lst.get(j);
+					if (sameSearchResult(prevAdded, current)) {
+						duplicate = true;
+						double wDiff = Math.abs(current.getUnknownPhraseMatchWeight() - prevAdded.getUnknownPhraseMatchWeight());
+						if (ObjectType.getTypeWeight(current.objectType) > ObjectType.getTypeWeight(prevAdded.objectType) && wDiff <= 1) {
+							lst.set(j, current);
+						}
 					}
 				}
-				if (same) {
-					it.remove();
+				if (duplicate) {
+					lst.remove(i);
 				} else {
-					lstUnique.add(r);
-					if (lstUnique.size() > DEPTH_TO_CHECK_SAME_SEARCH_RESULTS) {
-						lstUnique.remove(0);
-					}
+					i++;
 				}
 			}
 		}
@@ -1049,8 +1046,8 @@ public class SearchUICore {
 				}
 				if (!updateName && object.object instanceof Amenity) {
 					for (String key : ((Amenity) object.object).getAdditionalInfoKeys()) {
-						if (!ObfConstants.isTagIndexedForSearchAsId(key)
-								&& !ObfConstants.isTagIndexedForSearchAsName(key)) {
+						if ((!ObfConstants.isTagIndexedForSearchAsId(key)
+								&& !ObfConstants.isTagIndexedForSearchAsName(key))) {
 							continue;
 						}
 						String vl = ((Amenity) object.object).getAdditionalInfo(key);

@@ -36,6 +36,7 @@ import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
@@ -325,7 +326,11 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 					contextCoreMarker.setPosition(target);
 				}
 				if (!hasHighlight3dObjectColor(latLon)) {
-					add3DObjectColor(latLon, outlinePaint.getColor());
+					OsmandApplication app = getApplication();
+					Integer customColor = app.getAppCustomization().getHighlight3dObjectsColor();
+					int color = customColor != null ? customColor : outlinePaint.getColor();
+
+					add3DObjectColor(latLon, color);
 				}
 			}
 			contextCoreMarker.setIsHidden(target == null);
@@ -355,12 +360,41 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 	}
 
 	public void updateContextMenu() {
+		resolveMoveableObjectProvider(selectedObject);
+	}
+
+	@Nullable
+	private Object resolveMoveableObject(@Nullable Object object) {
+		if (object instanceof PlaceDetailsObject detailsObject) {
+			Object moveableObject = detailsObject.getFavouritePoint();
+			if (moveableObject == null) {
+				moveableObject = detailsObject.getWptPt();
+			}
+			return moveableObject;
+		}
+		return object;
+	}
+
+	@Nullable
+	private IContextMenuProvider resolveMoveableObjectProvider(@Nullable Object object) {
+		Object moveableObject = resolveMoveableObject(object);
+		if (moveableObject == null) {
+			selectedObjectContextMenuProvider = null;
+			return null;
+		}
+		if (selectedObjectContextMenuProvider instanceof IMoveObjectProvider moveObjectProvider
+				&& moveObjectProvider.isObjectMovable(moveableObject)) {
+			return selectedObjectContextMenuProvider;
+		}
+		selectedObjectContextMenuProvider = null;
 		for (OsmandMapLayer layer : view.getLayers()) {
-			if (layer instanceof IMoveObjectProvider && ((IMoveObjectProvider) layer).isObjectMovable(selectedObject)) {
-				selectedObjectContextMenuProvider = (IContextMenuProvider) layer;
+			if (layer instanceof IContextMenuProvider provider && layer instanceof IMoveObjectProvider moveObjectProvider
+					&& moveObjectProvider.isObjectMovable(moveableObject)) {
+				selectedObjectContextMenuProvider = provider;
 				break;
 			}
 		}
+		return selectedObjectContextMenuProvider;
 	}
 
 	private void recreateContextMarkerCollection() {
@@ -462,7 +496,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 	}
 
 	public Object getMoveableObject() {
-		return mInChangeMarkerPositionMode ? menu.getObject() : null;
+		return mInChangeMarkerPositionMode && menu != null ? resolveMoveableObject(menu.getObject()) : null;
 	}
 
 	public boolean isInChangeMarkerPositionMode() {
@@ -478,20 +512,15 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 	}
 
 	public boolean isObjectMoveable(Object o) {
-		if (o != null && selectedObjectContextMenuProvider != null
-				&& selectedObjectContextMenuProvider instanceof IMoveObjectProvider l) {
-			return l.isObjectMovable(o);
-		}
-		return false;
+		Object moveableObject = resolveMoveableObject(o);
+		return moveableObject != null && resolveMoveableObjectProvider(o) != null;
 	}
 
 	public void applyMovedObject(Object o, LatLon position, ApplyMovedObjectCallback callback) {
-		if (selectedObjectContextMenuProvider != null && !isInAddGpxPointMode()) {
-			if (selectedObjectContextMenuProvider instanceof IMoveObjectProvider l) {
-				if (l.isObjectMovable(o)) {
-					l.applyNewObjectPosition(o, position, callback);
-				}
-			}
+		Object moveableObject = resolveMoveableObject(o);
+		IContextMenuProvider provider = resolveMoveableObjectProvider(o);
+		if (provider instanceof IMoveObjectProvider moveObjectProvider && moveableObject != null && !isInAddGpxPointMode()) {
+			moveObjectProvider.applyNewObjectPosition(moveableObject, position, callback);
 		} else if (mInChangeMarkerPositionMode || mInAddGpxPointMode) {
 			callback.onApplyMovedObject(true, null);
 		}
@@ -500,13 +529,13 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 	@Nullable
 	@Override
 	public Object getChangeMarkerPositionObject() {
-		return menu.getObject();
+		return menu != null ? resolveMoveableObject(menu.getObject()) : null;
 	}
 
 	@Nullable
 	@Override
 	public IContextMenuProvider getSelectedObjectContextMenuProvider() {
-		return selectedObjectContextMenuProvider;
+		return menu != null ? resolveMoveableObjectProvider(menu.getObject()) : null;
 	}
 
 	public void applyNewMarkerPosition(@NonNull LatLon latLon) {

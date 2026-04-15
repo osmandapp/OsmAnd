@@ -16,7 +16,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 @SuppressLint("DefaultLocale")
@@ -68,7 +67,8 @@ public class DownloadResourceGroup {
 		if (this.region == region) {
 			res = this;
 		} else if (groups != null) {
-			for (DownloadResourceGroup group : groups) {
+			for (int i = 0; i < groups.size(); i++) {
+				DownloadResourceGroup group = groups.get(i);
 				if (group.region == region) {
 					res = group;
 					break;
@@ -84,15 +84,12 @@ public class DownloadResourceGroup {
 	}
 
 	public void trimEmptyGroups() {
-		if (groups != null) {
-			for (DownloadResourceGroup gr : groups) {
-				gr.trimEmptyGroups();
-			}
-			Iterator<DownloadResourceGroup> gr = groups.iterator();
-			while (gr.hasNext()) {
-				DownloadResourceGroup group = gr.next();
+		if (!Algorithms.isEmpty(groups)) {
+			for (int i = groups.size() - 1; i >= 0; i--) {
+				DownloadResourceGroup group = groups.get(i);
+				group.trimEmptyGroups();
 				if (group.isEmpty()) {
-					gr.remove();
+					groups.remove(i);
 				}
 			}
 		}
@@ -126,9 +123,10 @@ public class DownloadResourceGroup {
 				}
 			}
 			DownloadResourceGroup subregs = getSubGroupById(DownloadResourceGroupType.SUBREGIONS.getDefaultId());
-			if (subregs != null) {
-				for (DownloadResourceGroup g : subregs.getGroups()) {
-					g.createHillshadeSRTMGroups();
+			List<DownloadResourceGroup> subGroups = subregs != null ? subregs.getGroups() : null;
+			if (subGroups != null) {
+				for (int i = 0; i < subGroups.size(); i++) {
+					subGroups.get(i).createHillshadeSRTMGroups();
 				}
 			}
 		}
@@ -225,7 +223,8 @@ public class DownloadResourceGroup {
 	public List<IndexItem> getIndividualResources() {
 		List<IndexItem> individualResources = new ArrayList<>();
 		if (individualDownloadItems != null) {
-			for (DownloadItem item : individualDownloadItems) {
+			for (int i = 0; i < individualDownloadItems.size(); i++) {
+				DownloadItem item = individualDownloadItems.get(i);
 				if (item instanceof IndexItem) {
 					individualResources.add((IndexItem) item);
 				}
@@ -254,10 +253,13 @@ public class DownloadResourceGroup {
 	}
 
 	private DownloadResourceGroup getSubGroupById(String[] lst, int subInd) {
-		for (DownloadResourceGroup rg : groups) {
-			DownloadResourceGroup r = rg.getGroupById(lst, subInd);
-			if (r != null) {
-				return r;
+		if (groups != null) {
+			for (int i = 0; i < groups.size(); i++) {
+				DownloadResourceGroup rg = groups.get(i);
+				DownloadResourceGroup r = rg.getGroupById(lst, subInd);
+				if (r != null) {
+					return r;
+				}
 			}
 		}
 		return null;
@@ -291,7 +293,8 @@ public class DownloadResourceGroup {
 			downloadItems.addAll(individualDownloadItems);
 		}
 		if (groups != null) {
-			for (DownloadResourceGroup resourceGroup : groups) {
+			for (int i = 0; i < groups.size(); i++) {
+				DownloadResourceGroup resourceGroup = groups.get(i);
 				List<DownloadItem> items = resourceGroup.getIndividualDownloadItems();
 				if (items != null) {
 					downloadItems.addAll(items);

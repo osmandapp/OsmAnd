@@ -21,6 +21,10 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
+import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsId;
+import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsName;
+import static net.osmand.binary.ObfConstants.isTagIndexedAsSearchRelated;
+
 import java.io.IOException;
 import java.text.Normalizer;
 import java.util.*;
@@ -814,14 +818,13 @@ public class BinaryMapPoiReaderAdapter {
 						}
 						if (!matches) {
 							for (String key : am.getAdditionalInfoKeys()) {
-								if (!key.contains("_name") && !key.equals("brand") &&
-										!key.contains("wikidata") && !key.equals("route_id") &&
-										!key.equals("route_members_ids")) {
-									continue;
-								}
-								matches = matcher.matches(am.getAdditionalInfo(key));
-								if (matches) {
-									break;
+								if (isTagIndexedForSearchAsName(key) || isTagIndexedForSearchAsId(key)
+										|| isTagIndexedAsSearchRelated(key)) {
+									// isTagIndexedAsSearchRelated could be toggled off to avoid unnecessary matches
+									matches = matcher.matches(am.getAdditionalInfo(key));
+									if (matches) {
+										break;
+									}
 								}
 							}
 						}

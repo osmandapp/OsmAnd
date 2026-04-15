@@ -241,6 +241,10 @@ public class RouteCalculationProgress implements Serializable {
 		return FastRoutingState.isMixedOrMissingMaps(fastRoutingStatusOrdinal);
 	}
 
+	public boolean hasAnyMissingMaps() {
+		return FastRoutingState.isMissingMaps(fastRoutingStatusOrdinal);
+	}
+
 	public FastRoutingState.Status getFastRoutingStatus() {
 		return FastRoutingState.get(fastRoutingStatusOrdinal);
 	}

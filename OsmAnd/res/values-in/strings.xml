@@ -6350,4 +6350,7 @@
     <string name="level_of_details">Tingkat detail</string>
     <string name="performance">Performa</string>
     <string name="view_distance">Jarak pandang</string>
+    <string name="open_till_short">Sampai</string>
+    <string name="backup_deleted_all_data">Data dihapus.</string>
+    <string name="backup_deleting_all_data">Menghapus data…</string>
 </resources>
