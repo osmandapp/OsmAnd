@@ -215,7 +215,7 @@ public class ObfConstants {
 	public static boolean isTagIndexedForSearchAsName(String tag) {
 		if (tag != null) {
 			if (tag.equals(Amenity.ROUTE_NAME)) {
-				// search realted but not direct
+				// search related but not direct
 				return false;
 			}
 			return tag.contains("name") || tag.contains("brand");
