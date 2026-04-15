@@ -18,7 +18,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
@@ -33,7 +32,6 @@ public class BinaryMapPoiReaderAdapter {
 	public static final char MARKER_RAW_ESCAPE = '\uE000';
 	public static final int MARKER_BASE = 0xE100;
 	public static final int MARKER_MAX = 0xF8FF;
-	public static final int MARKER_BLOCK_SIZE = 32;
 
 	public static final int SHIFT_BITS_CATEGORY = 7;
 	private static final int CATEGORY_MASK = (1 << SHIFT_BITS_CATEGORY) - 1;
@@ -142,10 +140,6 @@ public class BinaryMapPoiReaderAdapter {
 	private final BinaryMapIndexReader map;
 
 	private MapPoiTypes poiTypes;
-
-	public record TokenPrefix(String key, TIntArrayList offsets) {}
-
-	private record QueryTokenMatch(String queryToken, List<TokenPrefix> prefixes, Collator collator, StringMatcherMode matcherMode) {}
 
 	protected BinaryMapPoiReaderAdapter(BinaryMapIndexReader map) {
 		this.codedIS = map.codedIS;
@@ -443,7 +437,7 @@ public class BinaryMapPoiReaderAdapter {
 		long offset = 0;
 		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
 		List<String> queries = null;
-		List<QueryTokenMatch> tokenMatches = null;
+		List<QueryToken> queryTokens = null;
 		while (true) {
 			final long subStart = req.beginSubSearchStats(), bytes = codedIS.getBytesCounter();
 			int t = codedIS.readTag();
@@ -456,16 +450,12 @@ public class BinaryMapPoiReaderAdapter {
 				long oldLimit = codedIS.pushLimitLong((long) length);
 				offset = codedIS.getTotalBytesRead();
 				queries = splitAndNormalize(query);
-				List<List<TokenPrefix>> prefixCandidates = map.readIndexedStringTablePrefixes(instance, queries);
-				tokenMatches = new ArrayList<>(queries.size());
+				
+				List<List<QueryToken.TokenPrefix>> prefixCandidates = map.readIndexedStringTablePrefixes(instance, queries);
+				queryTokens = new ArrayList<>(queries.size());
 				for (int i = 0; i < queries.size(); i++) {
 					String queryToken = queries.get(i);
-					if (queryToken == null) {
-						tokenMatches.add(new QueryTokenMatch(null, Collections.emptyList(), instance, req.matcherMode));
-					} else {
-						List<TokenPrefix> strongestPrefixes = filterStrongestTokenPrefixes(prefixCandidates.get(i), queryToken, instance);
-						tokenMatches.add(new QueryTokenMatch(queryToken, strongestPrefixes, instance, req.matcherMode));
-					}
+					queryTokens.add(new QueryToken(queryToken, instance, req.matcherMode, prefixCandidates.get(i)));
 				}
 				codedIS.popLimit(oldLimit);
 				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
@@ -474,12 +464,12 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			}
 			case OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER: {
-				if (tokenMatches != null) {
-					for (int tokenIndex = 0; tokenIndex < tokenMatches.size(); tokenIndex++) {
-						QueryTokenMatch tokenMatch = tokenMatches.get(tokenIndex);
+				if (queryTokens != null) {
+					for (int tokenIndex = 0; tokenIndex < queryTokens.size(); tokenIndex++) {
+						QueryToken tokenMatch = queryTokens.get(tokenIndex);
 						TIntLongHashMap offsetMap = new TIntLongHashMap();
 						listOfSepOffsets.add(offsetMap);
-						for (TokenPrefix prefix : tokenMatch.prefixes()) {
+						for (QueryToken.TokenPrefix prefix : tokenMatch.prefixes) {
 							TIntArrayList dataOffsets = prefix.offsets();
 							dataOffsets.sort();
 							for (int i = 0; i < dataOffsets.size(); i++) {
@@ -528,54 +518,14 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			}
 		}
+
 	}
 
-	private List<TokenPrefix> filterStrongestTokenPrefixes(List<TokenPrefix> prefixes, String queryToken, Collator collator) {
-		if (prefixes == null || prefixes.isEmpty()) {
-			return Collections.emptyList();
-		}
-		List<TokenPrefix> sortedPrefixes = new ArrayList<>(prefixes);
-		sortedPrefixes.sort((left, right) -> {
-			int lengthCompare = Integer.compare(right.key.length(), left.key().length());
-			if (lengthCompare != 0) {
-				return lengthCompare;
-			}
-			return left.key().compareTo(right.key());
-		});
-		
-		List<TokenPrefix> strongestPrefixes = new ArrayList<>();
-		for (TokenPrefix candidate : sortedPrefixes) {
-			boolean matchesQuery = !Algorithms.isEmpty(queryToken) && candidate.key() != null
-					&& CollatorStringMatcher.cmatches(collator, candidate.key(), queryToken, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
-			TokenPrefix candidatePrefix = new TokenPrefix(candidate.key(), candidate.offsets());
-			if (matchesQuery) {
-				strongestPrefixes.add(candidatePrefix);
-				continue;
-			}
-			boolean dominated = false;
-			for (TokenPrefix strongestPrefix : strongestPrefixes) {
-				String strongestKey = strongestPrefix.key();
-				if (strongestKey == null) {
-					continue;
-				}
-				boolean strongestMatchesQuery = !Algorithms.isEmpty(queryToken) 
-						&& CollatorStringMatcher.cmatches(collator, queryToken, strongestKey, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
-				if (strongestMatchesQuery && candidate.key() != null && strongestKey.length() > candidate.key().length() 
-						&& strongestKey.startsWith(candidate.key())) {
-					dominated = true;
-					break;
-				}
-			}
-			if (!dominated) {
-				strongestPrefixes.add(candidatePrefix);
-			}
-		}
-		return strongestPrefixes;
-	}
 
 	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
-			List<Integer> nameIndexCoordinates, QueryTokenMatch tokenMatch, TokenPrefix prefix) throws IOException {
+			List<Integer> nameIndexCoordinates, QueryToken token, QueryToken.TokenPrefix prefix) throws IOException {
 		List<String> suffixDictionary = null;
+		SuffixMask mask = null;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -584,11 +534,15 @@ public class BinaryMapPoiReaderAdapter {
 					return;
 				case OsmAndPoiNameIndexData.SUFFIXESDICTIONARY_FIELD_NUMBER:
 					suffixDictionary = readSuffixDictionary(suffixDictionary);
+					if (mask == null) {
+						mask = new SuffixMask(token, prefix);
+					}
+					mask.setDictionary(suffixDictionary);
 					break;
 				case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:
 					int len = codedIS.readRawVarint32();
 					long oldLim = codedIS.pushLimitLong((long) len);
-					readPoiNameIndexDataAtom(offsets, req, region, nameIndexCoordinates, tokenMatch, prefix, suffixDictionary);
+					readPoiNameIndexDataAtom(offsets, req, region, nameIndexCoordinates, mask == null ? null : mask.masks);
 					codedIS.popLimit(oldLim);
 					break;
 				default:
@@ -622,10 +576,8 @@ public class BinaryMapPoiReaderAdapter {
 		if (encodedSuffix.isEmpty()) {
 			return "";
 		}
-		int dictionaryIndex = dictionaryEntries.size();
-		boolean blockStart = dictionaryIndex % MARKER_BLOCK_SIZE == 0;
 		int markerCodePoint = encodedSuffix.codePointAt(0);
-		if (!blockStart && markerCodePoint >= MARKER_BASE && markerCodePoint <= MARKER_MAX) {
+		if (markerCodePoint >= MARKER_BASE && markerCodePoint <= MARKER_MAX) {
             String previousSuffix = dictionaryEntries.get(dictionaryEntries.size() - 1);
 			int commonPrefixCodePointLength = markerCodePoint - MARKER_BASE;
 			int prefixEndOffset = previousSuffix.offsetByCodePoints(0,
@@ -636,52 +588,57 @@ public class BinaryMapPoiReaderAdapter {
 		return Normalizer.normalize(decodeRawSuffix(encodedSuffix), Normalizer.Form.NFC);
 	}
 
-	private boolean matchesSuffixDictionary(QueryTokenMatch tokenMatch, TokenPrefix prefix,
-											List<String> suffixDictionary, List<Integer> suffixBitsetWords) {
-		if (suffixDictionary == null || tokenMatch == null || tokenMatch.queryToken() == null || prefix.key == null) {
-			return true;
-		}
-		if (CollatorStringMatcher.cmatches(tokenMatch.collator(), prefix.key, tokenMatch.queryToken(), tokenMatch.matcherMode())) {
-			return true;
-		}
-		if (suffixDictionary.size() == 1 && suffixDictionary.get(0).isEmpty()) {
-			return false;
-		}
-		if (suffixDictionary.isEmpty() || suffixBitsetWords == null || suffixBitsetWords.isEmpty()) {
-			return false;
-		}
-		for (int dictionaryIndex = 0; dictionaryIndex < suffixDictionary.size(); dictionaryIndex++) {
-			int wordIndex = dictionaryIndex >> 5;
-			if (wordIndex >= suffixBitsetWords.size()) {
-				break;
-			}
-			int word = suffixBitsetWords.get(wordIndex);
-			if ((word & (1 << (dictionaryIndex & 31))) == 0) {
-				continue;
-			}
-			String dictionaryEntry = suffixDictionary.get(dictionaryIndex);
-			String fullKey = prefix.key + dictionaryEntry;
-			if (CollatorStringMatcher.cmatches(tokenMatch.collator(), fullKey, tokenMatch.queryToken(), tokenMatch.matcherMode())) {
-				return true;
+	private static class SuffixMask {
+		final TIntArrayList masks;
+		final QueryToken.TokenPrefix prefix;
+		final QueryToken tokenMatch;
+		
+		SuffixMask(QueryToken tokenMatch, QueryToken.TokenPrefix prefix) {
+			this.prefix = prefix;
+			this.tokenMatch = tokenMatch;
+			if (tokenMatch == null || tokenMatch.query == null || prefix.key() == null) {
+				masks = null;
+			} else if (CollatorStringMatcher.cmatches(tokenMatch.collator, prefix.key(), tokenMatch.query, tokenMatch.matcherMode)) {
+				masks = null;
+			} else {
+				masks = new TIntArrayList();
 			}
 		}
-		return false;
+		
+		void setDictionary(List<String> suffixDictionary) {
+			if (masks == null) {
+				return;
+			}
+			int index = suffixDictionary.size() - 1;
+			if (index < 0) {
+				return;
+			}
+			String entry = suffixDictionary.get(index);
+			String fullKey = prefix.key() + entry;
+			if (CollatorStringMatcher.cmatches(tokenMatch.collator, fullKey, tokenMatch.query, tokenMatch.matcherMode)) {
+				int wordIndex = index >> 5;
+				while (masks.size() <= wordIndex) {
+					masks.add(0);
+				}
+				masks.set(wordIndex, masks.get(wordIndex) | (1 << (index & 31)));
+			}
+		}
 	}
 
 	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
-	                                      List<Integer> nameIndexCoordinates, QueryTokenMatch tokenMatch, TokenPrefix prefix,
-	                                      List<String> suffixDictionary) throws IOException {
+	                                      List<Integer> nameIndexCoordinates, TIntArrayList suffixMasks) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 15;
 		int shift = Integer.MIN_VALUE;
-		List<Integer> suffixBitsetWords = new ArrayList<>();
+		boolean matched = suffixMasks == null;
+		int maskIndex = 0;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if (!matchesSuffixDictionary(tokenMatch, prefix, suffixDictionary, suffixBitsetWords)) {
+				if (!matched) {
 					return;
 				}
 				if (shift != Integer.MIN_VALUE) {
@@ -713,7 +670,11 @@ public class BinaryMapPoiReaderAdapter {
 				zoom = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SUFFIXESBITSET_FIELD_NUMBER:
-				suffixBitsetWords.add(codedIS.readUInt32());
+				int mask = codedIS.readUInt32();
+				if (!matched && suffixMasks != null && maskIndex < suffixMasks.size() && (suffixMasks.get(maskIndex) & mask) != 0) {
+					matched = true;
+				}
+				maskIndex++;
 				break;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SHIFTTO_FIELD_NUMBER:
 				long l = readInt();
@@ -721,7 +682,7 @@ public class BinaryMapPoiReaderAdapter {
 					throw new IllegalStateException();
 				}
 				shift = (int) l;
-				if (!matchesSuffixDictionary(tokenMatch, prefix, suffixDictionary, suffixBitsetWords)) {
+				if (!matched) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					return;
 				}
