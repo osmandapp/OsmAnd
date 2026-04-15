@@ -46,6 +46,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiContext;
 import androidx.core.text.util.LocalePreferences;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKey;
 
 import net.osmand.IndexConstants;
 import net.osmand.Period;
@@ -123,6 +125,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.*;
 
 public class OsmandSettings {
@@ -146,6 +149,7 @@ public class OsmandSettings {
 	private final OsmandApplication ctx;
 	private SettingsAPI settingsAPI;
 	private Object globalPreferences;
+	private SharedPreferences securePreferences;
 	private Object profilePreferences;
 	private ApplicationMode currentMode;
 	private final Map<String, OsmandPreference<?>> registeredPreferences = new LinkedHashMap<>();
@@ -184,8 +188,51 @@ public class OsmandSettings {
 		setCustomized();
 	}
 
+	private static final String[] SECURE_PREF_KEYS = {
+		"billing_user_id", "billing_user_token",
+		"backup_user_email", "backup_device_id", "backup_access_token"
+	};
+
+	private SharedPreferences createSecurePreferences() {
+		try {
+			MasterKey masterKey = new MasterKey.Builder(ctx)
+					.setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+					.build();
+			return EncryptedSharedPreferences.create(ctx, "osmand_secure_prefs", masterKey,
+					EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+					EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM);
+		} catch (GeneralSecurityException | IOException e) {
+			LOG.error("Failed to initialize encrypted preferences, falling back to global", e);
+			return (SharedPreferences) globalPreferences;
+		}
+	}
+
+	private void migrateToSecurePreferences() {
+		SharedPreferences plain = (SharedPreferences) globalPreferences;
+		SharedPreferences.Editor secureEditor = securePreferences.edit();
+		SharedPreferences.Editor plainEditor = plain.edit();
+		boolean needsCommit = false;
+		for (String key : SECURE_PREF_KEYS) {
+			if (plain.contains(key) && !securePreferences.contains(key)) {
+				secureEditor.putString(key, plain.getString(key, ""));
+				plainEditor.remove(key);
+				needsCommit = true;
+			}
+		}
+		if (needsCommit) {
+			secureEditor.apply();
+			plainEditor.apply();
+		}
+	}
+
+	public SharedPreferences getSecurePreferences() {
+		return securePreferences;
+	}
+
 	private void initPrefs() {
 		globalPreferences = settingsAPI.getPreferenceObject(getSharedPreferencesName(null));
+		securePreferences = createSecurePreferences();
+		migrateToSecurePreferences();
 		currentMode = readApplicationMode();
 		profilePreferences = getProfilePreferences(currentMode);
 		registeredPreferences.put(APPLICATION_MODE.getId(), APPLICATION_MODE);
@@ -1511,8 +1558,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> INAPPS_READ = new BooleanPreference(this, "inapps_read", false).makeGlobal();
 
-	public final OsmandPreference<String> BILLING_USER_ID = new StringPreference(this, "billing_user_id", "").makeGlobal();
-	public final OsmandPreference<String> BILLING_USER_TOKEN = new StringPreference(this, "billing_user_token", "").makeGlobal();
+	public final OsmandPreference<String> BILLING_USER_ID = new StringPreference(this, "billing_user_id", "").makeSecure();
+	public final OsmandPreference<String> BILLING_USER_TOKEN = new StringPreference(this, "billing_user_token", "").makeSecure();
 	public final OsmandPreference<String> BILLING_USER_NAME = new StringPreference(this, "billing_user_name", "").makeGlobal();
 	public final OsmandPreference<String> BILLING_USER_EMAIL = new StringPreference(this, "billing_user_email", "").makeGlobal();
 	public final OsmandPreference<String> BILLING_USER_COUNTRY = new StringPreference(this, "billing_user_country", "").makeGlobal();
@@ -1536,11 +1583,11 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> DISCOUNT_TOTAL_SHOW = new IntPreference(this, "discount_total_show", 0).makeGlobal();
 	public final OsmandPreference<Long> DISCOUNT_SHOW_DATETIME_MS = new LongPreference(this, "show_discount_datetime_ms", 0).makeGlobal();
 
-	public final OsmandPreference<String> BACKUP_USER_EMAIL = new StringPreference(this, "backup_user_email", "").makeGlobal();
+	public final OsmandPreference<String> BACKUP_USER_EMAIL = new StringPreference(this, "backup_user_email", "").makeSecure();
 	public final OsmandPreference<String> BACKUP_USER_ID = new StringPreference(this, "backup_user_id", "").makeGlobal();
-	public final OsmandPreference<String> BACKUP_DEVICE_ID = new StringPreference(this, "backup_device_id", "").makeGlobal();
+	public final OsmandPreference<String> BACKUP_DEVICE_ID = new StringPreference(this, "backup_device_id", "").makeSecure();
 	public final OsmandPreference<String> BACKUP_NATIVE_DEVICE_ID = new StringPreference(this, "backup_native_device_id", "").makeGlobal();
-	public final OsmandPreference<String> BACKUP_ACCESS_TOKEN = new StringPreference(this, "backup_access_token", "").makeGlobal();
+	public final OsmandPreference<String> BACKUP_ACCESS_TOKEN = new StringPreference(this, "backup_access_token", "").makeSecure();
 	public final OsmandPreference<String> BACKUP_ACCESS_TOKEN_UPDATE_TIME = new StringPreference(this, "backup_access_token_update_time", "").makeGlobal();
 
 	public final OsmandPreference<String> BACKUP_PROMOCODE = new StringPreference(this, "backup_promocode", "").makeGlobal();
