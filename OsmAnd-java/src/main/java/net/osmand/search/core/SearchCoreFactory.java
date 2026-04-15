@@ -832,8 +832,7 @@ public class SearchCoreFactory {
 					}
 					if (!matchLocalName && !nm.matches(sr.otherNames)) {
 						for(String k : object.getAdditionalInfoKeys()) {
-							if (!k.startsWith(ROUTE_NAME)
-									&& (isTagIndexedForSearchAsName(k) || isTagIndexedForSearchAsId(k))
+							if ((isTagIndexedForSearchAsName(k) || isTagIndexedForSearchAsId(k))
 									&& nm.matches(object.getAdditionalInfo(k))) {
 								sr.alternateName = object.getAdditionalInfo(k);
 								break;

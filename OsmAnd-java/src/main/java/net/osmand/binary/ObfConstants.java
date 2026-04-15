@@ -214,14 +214,26 @@ public class ObfConstants {
 
 	public static boolean isTagIndexedForSearchAsName(String tag) {
 		if (tag != null) {
+			if (tag.equals(Amenity.ROUTE_NAME)) {
+				// search realted but not direct
+				return false;
+			}
 			return tag.contains("name") || tag.contains("brand");
 		}
 		return false;
 	}
 	
+	
 	public static boolean isTagIndexedForSearchAsId(String tag) {
 		if (tag != null) {
 			return tag.equals(Amenity.WIKIDATA) || tag.equals(Amenity.ROUTE_ID);
+		}
+		return false;
+	}
+	
+	public static boolean isTagIndexedAsSearchRelated(String tag) {
+		if (tag != null) {
+			return tag.equals(Amenity.ROUTE_MEMBERS_IDS) || tag.equals(Amenity.ROUTE_NAME);
 		}
 		return false;
 	}

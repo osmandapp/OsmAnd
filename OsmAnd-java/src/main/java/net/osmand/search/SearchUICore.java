@@ -1049,8 +1049,7 @@ public class SearchUICore {
 				}
 				if (!updateName && object.object instanceof Amenity) {
 					for (String key : ((Amenity) object.object).getAdditionalInfoKeys()) {
-						if (key.startsWith(ROUTE_NAME)
-								|| (!ObfConstants.isTagIndexedForSearchAsId(key)
+						if ((!ObfConstants.isTagIndexedForSearchAsId(key)
 								&& !ObfConstants.isTagIndexedForSearchAsName(key))) {
 							continue;
 						}
