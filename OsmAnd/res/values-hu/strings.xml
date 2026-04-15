@@ -1963,7 +1963,7 @@
     <string name="trip_rec_notification_settings_desc">Az utazásrögzítés megkezdését lehetővé tevő rendszerértesítés megjelenítése.</string>
     <string name="shared_string_notifications">Értesítések</string>
     <string name="shared_string_pause">Szünet</string>
-    <string name="shared_string_trip">Túra</string>
+    <string name="shared_string_trip">Útvonal</string>
     <string name="shared_string_recorded">Rögzített</string>
     <string name="shared_string_record">Rögzítés</string>
     <string name="save_track_min_speed">Legkisebb naplózási sebesség</string>
@@ -5405,12 +5405,12 @@
     <string name="quick_action_save_recorded_trip_and_continue">Rögzített utazás mentése és folytatás</string>
     <string name="quick_action_new_trip_segment">Gomb egy új szakasz indításához a jelenleg rögzített GPX-nyomvonalban.</string>
     <string name="help_article_personal_color_palette_schemes_name">Színsémák</string>
-    <string name="quick_action_save_recorded_trip_and_continue_summary">Egy gomb a jelenleg rögzített túra GPX-fájlként történő mentéséhez, és egy új nyomvonal zökkenőmentes rögzítéséhez.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Egy gomb a jelenleg rögzített útvonal GPX-fájlként történő mentéséhez, és egy új nyomvonal zökkenőmentes rögzítéséhez.</string>
     <string name="track_does_not_contain_data_to_save">A nyomvonal nem tartalmaz mentendő adatokat.</string>
     <string name="quick_action_finish_trip_recording_summary">Gomb a GPX-nyomvonal mentéséhez és a rögzítés befejezéséhez.</string>
-    <string name="start_trip_recording_first_m">Előbb kezdje el a túra rögzítését.</string>
+    <string name="start_trip_recording_first_m">Előbb kezdje el az útvonal rögzítését.</string>
     <string name="new_segment_started_m">Új nyomvonalszakasz rögzítése elindítva.</string>
-    <string name="new_trip_segment">Új túraszakasz</string>
+    <string name="new_trip_segment">Új útvonalszakasz</string>
     <string name="movies_list">Filmlista</string>
     <string name="quick_action_start_pause_recording">Gomb a GPX-nyomvonal rögzítésének indításához, szüneteltetéséhez vagy folytatásához.</string>
     <string name="quick_action_verb_start_pause">Indítás / szüneteltetés</string>
@@ -5943,7 +5943,7 @@
     <string name="delete_palette">Paletta törlése</string>
     <string name="delete_colors_palette_dialog_summary">Biztosan törölni szeretné a(z) %1$s palettát?</string>
     <string name="remove_step">Lépés eltávolítása</string>
-    <string name="shared_string_trip_average">Túra átlaga</string>
+    <string name="shared_string_trip_average">Útvonal átlaga</string>
     <string name="trip_recording_avg_speed_widget_description">Megjeleníti a jelenlegi túra átlagos sebességét, vagy az utolsó emelkedő vagy lejtő szakaszának átlagos sebességét.</string>
     <string name="trip_recording_moving_time_widget_description">Megjeleníti a jelenleg rögzített mozgással töltött időt, vagy az utolsó emelkedő és lejtő idejét.</string>
     <string name="trip_recording_moving_time">Mozgással töltött idő</string>
@@ -6052,4 +6052,5 @@
     <string name="shared_string_native">Natív</string>
     <string name="memory_limit_settings">Legnagyobb megengedett Java memóriakupac</string>
     <string name="open_till_short">Ekkor:</string>
+    <string name="open_from_short">Ettől:</string>
 </resources>

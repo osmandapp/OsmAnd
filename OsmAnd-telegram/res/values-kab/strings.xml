@@ -100,8 +100,8 @@
     <string name="km_h">km/sr</string>
     <string name="m_s">m/s</string>
     <string name="nm_h">nmi/h</string>
-    <string name="min_km">tasint</string>
-    <string name="min_mile">tasint</string>
+    <string name="min_km">min/km</string>
+    <string name="min_mile">min/m</string>
     <string name="m">m</string>
     <string name="km">km</string>
     <string name="mile">mi</string>
@@ -113,7 +113,7 @@
     <string name="osmand_service">Agilal</string>
     <string name="shared_string_cancel">Sefsex</string>
     <string name="shared_string_continue">Kemmel</string>
-    <string name="shared_string_logout">Tuffɣa</string>
+    <string name="shared_string_logout">Gzem tuqqna</string>
     <string name="shared_string_login">Tuqqna</string>
     <string name="enter_password">Sekcem awal n uffir</string>
     <string name="authentication_code">Tangalt n usesteb s snat n tarrayin</string>
@@ -210,7 +210,7 @@
     <string name="welcome_descr"><b>Aneḍfaṛ OsmAnd </b> ad k-yeǧǧ ad tebḍuḍ adig-ik daɣen ad twaliḍ wid-nniḍen deg OsmAnd.<br/><br/>Asnas iseqdac API n Telegram, ihi tesriḍ amiḍan Telegram.</string>
     <string name="si_mi_meters">Amayel / Amitr</string>
     <string name="si_km_m">Ikilumitren/imitren</string>
-    <string name="si_mi_yard"></string>
+    <string name="si_mi_yard"/>
     <string name="si_mi_feet">Amayel/aḍar</string>
     <string name="si_nm_h">Amayel n waman deg usrag (tikerras)</string>
     <string name="si_min_m">Tisdatin deg umayl</string>

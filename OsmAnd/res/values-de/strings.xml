@@ -5279,7 +5279,7 @@
     <string name="title_3d_track">3D-Track</string>
     <string name="explore_3d_track_description">Erkunden Sie den Track in interaktivem 3D! Visualisieren Sie Höhe, Geschwindigkeit und mehr direkt auf der Karte.</string>
     <string name="gpx_approximation_geo_cpp">Geometriebasiert (C++, schnell)</string>
-    <string name="allow_display_on_top">Anzeige oben zulassen</string>
+    <string name="allow_display_on_top">Anzeige übereinander zulassen</string>
     <string name="allow_display_on_top_description">Kartentexte übereinander anzeigen lassen</string>
     <string name="show_debug_info">Debug-Informationen anzeigen</string>
     <string name="show_debug_info_description">Grafische Informationen über die Platzierung jedes Kartentextes anzeigen</string>
