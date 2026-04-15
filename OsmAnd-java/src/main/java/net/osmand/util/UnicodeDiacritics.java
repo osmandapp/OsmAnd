@@ -10,8 +10,19 @@ import java.util.BitSet;
 public final class UnicodeDiacritics {
 
 	private static final BitSet BMP_MAY_NEED_DIACRITIC_PROCESSING = new BitSet(65536);
+	private String lastKey;
+	private String lastValue;
 
-	static {
+	private static UnicodeDiacritics instance;
+
+	public static UnicodeDiacritics getInstance() {
+		if (instance == null) {
+			instance = new UnicodeDiacritics();
+		}
+		return instance;
+	}
+
+	private UnicodeDiacritics() {
 		char[] buf = new char[2];
 		for (int cp = 0; cp < 65536; cp++) {
 			if (bmpCodePointNeedsDiacriticProcessingInit(cp, buf)) {
@@ -20,10 +31,7 @@ public final class UnicodeDiacritics {
 		}
 	}
 
-	private UnicodeDiacritics() {
-	}
-
-	private static boolean bmpCodePointNeedsDiacriticProcessingInit(int cp, char[] buf) {
+	private boolean bmpCodePointNeedsDiacriticProcessingInit(int cp, char[] buf) {
 		if (Character.getType(cp) == Character.NON_SPACING_MARK) {
 			return true;
 		}
@@ -39,7 +47,7 @@ public final class UnicodeDiacritics {
 		return false;
 	}
 
-	private static boolean stringMayNeedDiacriticProcessing(CharSequence input) {
+	private boolean stringMayNeedDiacriticProcessing(CharSequence input) {
 		for (int i = 0, len = input.length(); i < len; ) {
 			char ch = input.charAt(i);
 			int cp;
@@ -60,12 +68,15 @@ public final class UnicodeDiacritics {
 		return false;
 	}
 
-	public static String stripDiacritics(String input) {
+	public String stripDiacritics(String input) {
 		if (input == null || input.isEmpty()) {
 			return input;
 		}
 		if (!stringMayNeedDiacriticProcessing(input)) {
 			return input;
+		}
+		if (input.equals(lastKey)) {
+			return lastValue;
 		}
 		String decomposed = Normalizer.normalize(input, Normalizer.Form.NFD);
 		StringBuilder filtered = new StringBuilder(decomposed.length());
@@ -77,6 +88,8 @@ public final class UnicodeDiacritics {
 			}
 		}
 		String result = Normalizer.normalize(filtered.toString(), Normalizer.Form.NFC);
+		lastKey = input;
+		lastValue = result;
 		return result.equals(input) ? input : result;
 	}
 }

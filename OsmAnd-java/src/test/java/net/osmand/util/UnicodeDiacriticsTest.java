@@ -25,24 +25,24 @@ public class UnicodeDiacriticsTest {
 
 	@Test
 	public void testStripDiacriticsCafe() {
-		Assert.assertEquals("cafe", UnicodeDiacritics.stripDiacritics("café").toLowerCase(Locale.ROOT));
+		Assert.assertEquals("cafe", UnicodeDiacritics.getInstance().stripDiacritics("café").toLowerCase(Locale.ROOT));
 	}
 
 	@Test
 	public void testAsciiFastPathReturnsSameInstance() {
 		String ascii = "plain road123";
-		Assert.assertSame(ascii, UnicodeDiacritics.stripDiacritics(ascii));
+		Assert.assertSame(ascii, UnicodeDiacritics.getInstance().stripDiacritics(ascii));
 	}
 
 	@Test
 	public void testCombiningStripped() {
-		Assert.assertEquals("e", UnicodeDiacritics.stripDiacritics("\u00e9"));
-		Assert.assertEquals("E", UnicodeDiacritics.stripDiacritics("\u0045\u0301"));
+		Assert.assertEquals("e", UnicodeDiacritics.getInstance().stripDiacritics("\u00e9"));
+		Assert.assertEquals("E", UnicodeDiacritics.getInstance().stripDiacritics("\u0045\u0301"));
 	}
 
 	@Test
 	public void testSupplementaryPlaneCombiningMarkStripped() {
-		Assert.assertEquals("a", UnicodeDiacritics.stripDiacritics("a\uD800\uDDFD"));
+		Assert.assertEquals("a", UnicodeDiacritics.getInstance().stripDiacritics("a\uD800\uDDFD"));
 	}
 
 	@Test
@@ -50,8 +50,8 @@ public class UnicodeDiacriticsTest {
 		String nameFromData = "Київська вулиця";
 		String userQuery = "Киівська вулиця";
 		Assert.assertEquals(
-				UnicodeDiacritics.stripDiacritics(nameFromData).toLowerCase(Locale.ROOT),
-				UnicodeDiacritics.stripDiacritics(userQuery).toLowerCase(Locale.ROOT));
+				UnicodeDiacritics.getInstance().stripDiacritics(nameFromData).toLowerCase(Locale.ROOT),
+				UnicodeDiacritics.getInstance().stripDiacritics(userQuery).toLowerCase(Locale.ROOT));
 	}
 
 	@Test
@@ -99,7 +99,7 @@ public class UnicodeDiacriticsTest {
 			String name = (String) row[0];
 			String in = (String) row[1];
 			String expected = (String) row[2];
-			String actual = UnicodeDiacritics.stripDiacritics(in);
+			String actual = UnicodeDiacritics.getInstance().stripDiacritics(in);
 			Assert.assertEquals("case: " + name, expected, actual);
 		}
 	}

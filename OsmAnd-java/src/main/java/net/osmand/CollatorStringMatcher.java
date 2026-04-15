@@ -213,7 +213,7 @@ public class CollatorStringMatcher implements StringMatcher {
 		while ((i = fullText.indexOf('ß')) != -1) {
 			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i + 1);
 		}
-		return UnicodeDiacritics.stripDiacritics(fullText);
+		return UnicodeDiacritics.getInstance().stripDiacritics(fullText);
 	}
 
 	private static boolean isSpace(char c){
