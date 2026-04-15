@@ -144,7 +144,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	@Override
 	public void onPreferenceChanged(@NonNull String prefId) {
 		if (prefId.equals(settings.PREFERRED_LOCALE.getId())) {
-			// recreate activity to update locale
 			callActivity(activity -> {
 				// On Android 13+ (Tiramisu), the OS applies per-app locales asynchronously.
 				// Calling checkPreferredLocale() immediately after a change causes an IPC race condition:
@@ -153,7 +152,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
 					app.getLocaleHelper().checkPreferredLocale();
 				}
-				RestartActivity.doRestart(activity);
+				RestartActivity.requestRestart(activity);
 			});
 		} else if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
 			setupUninstallSpeedCamerasPref();
