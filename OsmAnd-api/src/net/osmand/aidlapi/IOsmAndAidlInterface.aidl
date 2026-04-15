@@ -720,6 +720,7 @@ interface IOsmAndAidlInterface {
      * Method to copy files to OsmAnd part by part. For now supports only sqlitedb format.
      * Part size (bytearray) should not exceed 256k.
      *
+     * @param destinationDir (String) - relative target directory (can be empty)
      * @param fileName (String) - name of file
      * @param filePartData (byte[]) - parts of file, byte[] with size 256k or less.
      * @param startTime (long) - timestamp of copying start.
