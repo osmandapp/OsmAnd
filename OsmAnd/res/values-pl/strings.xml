@@ -4658,7 +4658,7 @@
     <string name="precipitation_widget_desc">Pokazuje opady dla bieżącego centrum mapy.</string>
     <string name="weather_widget_group_desc">Zestaw widżetów pokazujących różne informacje o pogodzie.</string>
     <string name="action_not_supported_with_map_style">Ta czynność nie jest obsługiwana przez wybrany styl mapy.</string>
-    <string name="map_rendering_engine_descr">Wersja 1 była domyślna przed OsmAnd 4.3 i nadal jest preferowana dla starszych urządzeń.\nWersja 2 (OpenGL) to bardziej wydajny silnik renderujący mapy, oferujący również widok 2,5W.</string>
+    <string name="map_rendering_engine_descr">Wersja 1 była domyślna przed OsmAnd 4.3 i jest odpowiednia dla starszych urządzeń.\n\nWersja 2 (OpenGL) jest bardziej zaawansowana i oferuje dodatkowe funkcje, takie jak widok 3D.</string>
     <string name="map_widget_rendering_fps">FPS renderowania mapy</string>
     <string name="map_widget_rendering_fps_desc">Pokazuje, jak szybko mapa i jej elementy są wyświetlane i odświeżane, wyrażone w klatkach na sekundę (FPS).</string>
     <string name="purchases_feature_desc_cross_buy">Korzystaj z funkcji subskrypcji na różnych platformach (Android/iOS/web) bez dodatkowych kosztów.</string>
@@ -5624,7 +5624,7 @@
     <string name="quick_action_map_overlay">Nakładka</string>
     <string name="vehicle_metrics_recording_description">Wybierz parametry, które mają zostać zapisane w pliku GPX.</string>
     <string name="battery_saving_mode">Tryb oszczędzania baterii</string>
-    <string name="preview_next_turn">Podgląd następnego ruchu</string>
+    <string name="preview_next_turn">Podgląd następnego zakrętu</string>
     <string name="obd_throttle_position_desc">Pokazuje kąt płyty przepustnicy w korpusie przepustnicy.</string>
     <string name="obd_calculated_engine_load_desc">Pokazuje procent dostępnej mocy silnika wykorzystywanej w danym momencie.</string>
     <string name="obd_speed_desc">Pokazuje prędkość z czujnika prędkości pojazdu (VSS).</string>
@@ -6205,4 +6205,15 @@
     <string name="shared_string_native">Natywna</string>
     <string name="shared_string_gpu">Procesor graficzny</string>
     <string name="shared_string_allocated">Alokowane</string>
+    <string name="start_free_trial">Rozpocznij wersję próbną</string>
+    <string name="shared_string_radians">Radianów</string>
+    <string name="compass_calibration_needed">Wymagana kalibracja kompasu</string>
+    <string name="sensors_not_available_for_ar">Sensory nie są dostępne w AR</string>
+    <string name="ar_mode_enabled">Włączono Tryb AR</string>
+    <string name="ar_mode_disabled">Wyłączono tryb AR</string>
+    <string name="shared_string_clear_filters">Wyczyść filtry</string>
+    <string name="astro_sort_newest_first">Od najnowszych</string>
+    <string name="astro_sort_oldest_first">Od najstarszych</string>
+    <string name="backup_deleting_all_data">Usuwanie danych…</string>
+    <string name="backup_deleted_all_data">Usunięto dane.</string>
 </resources>
