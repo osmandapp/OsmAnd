@@ -5842,4 +5842,10 @@
     <string name="astro_offline_knowledge_base_title">Base de coneixement fora de línia</string>
     <string name="astro_schedule_next_day_note">⁺¹ L\'endemà.</string>
     <string name="astro_visibility_show_today">Mostra la visibilitat d\'avui</string>
+    <string name="astro_search_constellation_with_code">Constel·lació (%1$s)</string>
+    <plurals name="astro_catalog_objects_count">
+        <item quantity="one">%d objecte</item>
+        <item quantity="many">%d d\'objectes</item>
+        <item quantity="other">%d objectes</item>
+    </plurals>
 </resources>
