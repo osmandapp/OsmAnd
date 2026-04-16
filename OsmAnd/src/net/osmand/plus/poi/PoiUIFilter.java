@@ -442,7 +442,12 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		Comparator<Amenity> comparator = null;
 		int limit = -1; // no limit
 		if (isTopWikiFilter()) {
-			comparator = Comparator.comparingInt(Amenity::getTravelEloNumber);
+			comparator = (a, b) -> {
+				if (a == b) return 0;
+				if (a == null) return 1;
+				if (b == null) return -1;
+				return Integer.compare(a.getTravelEloNumber(), b.getTravelEloNumber());
+			};
 			limit = 1000;
 		}
         currentSearchResult = dataProvider.searchAmenities(
