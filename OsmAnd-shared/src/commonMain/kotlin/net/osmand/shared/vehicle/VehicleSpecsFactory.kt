@@ -1,12 +1,13 @@
-package net.osmand.plus.settings.vehiclespecs
+package net.osmand.shared.vehicle
 
-import net.osmand.plus.settings.vehiclespecs.profiles.BicycleSpecs
-import net.osmand.plus.settings.vehiclespecs.profiles.BoatSpecs
-import net.osmand.plus.settings.vehiclespecs.profiles.CarSpecs
-import net.osmand.plus.settings.vehiclespecs.profiles.MotorcycleSpecs
-import net.osmand.plus.settings.vehiclespecs.profiles.TruckSpecs
-import net.osmand.plus.settings.vehiclespecs.profiles.VehicleSpecs
-import net.osmand.router.GeneralRouter.GeneralRouterProfile
+import net.osmand.shared.routing.GeneralRouterProfile
+import net.osmand.shared.vehicle.profiles.BicycleSpecs
+import net.osmand.shared.vehicle.profiles.BoatSpecs
+import net.osmand.shared.vehicle.profiles.CarSpecs
+import net.osmand.shared.vehicle.profiles.MotorcycleSpecs
+import net.osmand.shared.vehicle.profiles.TruckSpecs
+import net.osmand.shared.vehicle.profiles.VehicleSpecs
+import kotlin.jvm.JvmStatic
 
 object VehicleSpecsFactory {
 

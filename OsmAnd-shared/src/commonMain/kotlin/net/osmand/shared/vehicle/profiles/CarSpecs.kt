@@ -1,16 +1,15 @@
-package net.osmand.plus.settings.vehiclespecs.profiles
+package net.osmand.shared.vehicle.profiles
 
-import net.osmand.plus.R
-import net.osmand.plus.settings.enums.LengthUnits
-import net.osmand.plus.settings.enums.WeightUnits
-import net.osmand.plus.settings.vehiclespecs.SpecificationType
+import net.osmand.shared.units.LengthUnits
+import net.osmand.shared.units.WeightUnits
+import net.osmand.shared.vehicle.SpecificationType
 
 class CarSpecs : VehicleSpecs(
     mapOf(
         SpecificationType.WIDTH to createSpecification(
-            iconDayId = R.drawable.img_help_width_limit_day,
-            iconNightId = R.drawable.img_help_width_limit_night,
-            descriptionId = R.string.width_limit_description,
+            iconDayResName = "img_help_width_limit_day",
+            iconNightResName = "img_help_width_limit_night",
+            descriptionResName = "width_limit_description",
             metricUnits = LengthUnits.METERS,
             metricValues = listOf(1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f),
             imperialUnits = LengthUnits.INCHES,
@@ -18,9 +17,9 @@ class CarSpecs : VehicleSpecs(
         ),
 
         SpecificationType.HEIGHT to createSpecification(
-            iconDayId = R.drawable.img_help_height_limit_day,
-            iconNightId = R.drawable.img_help_height_limit_night,
-            descriptionId = R.string.height_limit_description,
+            iconDayResName = "img_help_height_limit_day",
+            iconNightResName = "img_help_height_limit_night",
+            descriptionResName = "height_limit_description",
             metricUnits = LengthUnits.METERS,
             metricValues = listOf(1.5f, 2.0f, 2.5f, 3.0f, 3.5f, 4.0f, 4.5f),
             imperialUnits = LengthUnits.FEET,
@@ -28,9 +27,9 @@ class CarSpecs : VehicleSpecs(
         ),
 
         SpecificationType.LENGTH to createSpecification(
-            iconDayId = R.drawable.img_help_length_limit_day,
-            iconNightId = R.drawable.img_help_length_limit_night,
-            descriptionId = R.string.lenght_limit_description,
+            iconDayResName = "img_help_length_limit_day",
+            iconNightResName = "img_help_length_limit_night",
+            descriptionResName = "lenght_limit_description",
             metricUnits = LengthUnits.METERS,
             metricValues = listOf(1.5f, 2.0f, 2.5f, 3.0f, 3.5f, 4.0f, 4.5f, 5.0f, 5.5f, 6.0f),
             imperialUnits = LengthUnits.FEET,
@@ -38,10 +37,10 @@ class CarSpecs : VehicleSpecs(
         ),
 
         SpecificationType.WEIGHT to createSpecification(
-            iconDayId = R.drawable.img_help_weight_limit_day,
-            iconNightId = R.drawable.img_help_weight_limit_night,
-            descriptionId = R.string.weight_limit_description,
-            metricUnits = WeightUnits.TONES,
+            iconDayResName = "img_help_weight_limit_day",
+            iconNightResName = "img_help_weight_limit_night",
+            descriptionResName = "weight_limit_description",
+            metricUnits = WeightUnits.TONS,
             metricValues = listOf(0.7f, 1.0f, 1.5f, 2.0f, 2.5f, 3.0f, 3.5f),
             imperialUnits = WeightUnits.POUNDS,
             imperialValues = listOf(1500f, 2200f, 3500f, 4500f, 5500f, 6500f, 7500f)

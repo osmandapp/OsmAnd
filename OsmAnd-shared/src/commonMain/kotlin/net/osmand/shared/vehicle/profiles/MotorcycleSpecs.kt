@@ -1,16 +1,15 @@
-package net.osmand.plus.settings.vehiclespecs.profiles
+package net.osmand.shared.vehicle.profiles
 
-import net.osmand.plus.R
-import net.osmand.plus.settings.enums.LengthUnits
-import net.osmand.plus.settings.enums.WeightUnits
-import net.osmand.plus.settings.vehiclespecs.SpecificationType
+import net.osmand.shared.units.LengthUnits
+import net.osmand.shared.units.WeightUnits
+import net.osmand.shared.vehicle.SpecificationType
 
 class MotorcycleSpecs : VehicleSpecs(
     mapOf(
         SpecificationType.WIDTH to createSpecification(
-            iconDayId = R.drawable.img_help_width_limit_day,
-            iconNightId = R.drawable.img_help_width_limit_night,
-            descriptionId = R.string.width_limit_description,
+            iconDayResName = "img_help_width_limit_day",
+            iconNightResName = "img_help_width_limit_night",
+            descriptionResName = "width_limit_description",
             metricUnits = LengthUnits.METERS,
             metricValues = listOf(0.7f, 0.8f, 0.9f, 1.0f),
             imperialUnits = LengthUnits.INCHES,
@@ -18,9 +17,9 @@ class MotorcycleSpecs : VehicleSpecs(
         ),
 
         SpecificationType.HEIGHT to createSpecification(
-            iconDayId = R.drawable.img_help_height_limit_day,
-            iconNightId = R.drawable.img_help_height_limit_night,
-            descriptionId = R.string.height_limit_description,
+            iconDayResName = "img_help_height_limit_day",
+            iconNightResName = "img_help_height_limit_night",
+            descriptionResName = "height_limit_description",
             metricUnits = LengthUnits.METERS,
             metricValues = listOf(0.6f, 0.8f, 1.0f, 1.2f, 1.4f, 1.6f, 1.8f, 2.0f),
             imperialUnits = LengthUnits.FEET,
@@ -28,9 +27,9 @@ class MotorcycleSpecs : VehicleSpecs(
         ),
 
         SpecificationType.LENGTH to createSpecification(
-            iconDayId = R.drawable.img_help_length_limit_day,
-            iconNightId = R.drawable.img_help_length_limit_night,
-            descriptionId = R.string.lenght_limit_description,
+            iconDayResName = "img_help_length_limit_day",
+            iconNightResName = "img_help_length_limit_night",
+            descriptionResName = "lenght_limit_description",
             metricUnits = LengthUnits.METERS,
             metricValues = listOf(1.5f, 1.7f, 1.9f, 2.1f, 2.3f, 2.5f),
             imperialUnits = LengthUnits.FEET,
@@ -38,9 +37,9 @@ class MotorcycleSpecs : VehicleSpecs(
         ),
 
         SpecificationType.WEIGHT to createSpecification(
-            iconDayId = R.drawable.img_help_weight_limit_day,
-            iconNightId = R.drawable.img_help_weight_limit_night,
-            descriptionId = R.string.weight_limit_description,
+            iconDayResName = "img_help_weight_limit_day",
+            iconNightResName = "img_help_weight_limit_night",
+            descriptionResName = "weight_limit_description",
             metricUnits = WeightUnits.KILOGRAMS,
             metricValues = listOf(60f, 100f, 150f, 200f, 250f, 300f),
             imperialUnits = WeightUnits.POUNDS,

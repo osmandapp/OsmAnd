@@ -1,13 +1,14 @@
-package net.osmand.plus.settings.vehiclespecs
+package net.osmand.shared.vehicle
 
-import net.osmand.plus.settings.enums.MeasurementUnits
-import net.osmand.plus.settings.vehiclespecs.containers.Assets
+import net.osmand.shared.units.MeasurementUnit
 
 data class SpecificationData(
-    val assets: Assets,
-    val metricUnits: MeasurementUnits,
+    val iconDayResName: String,
+    val iconNightResName: String,
+    val descriptionResName: String,
+    val metricUnits: MeasurementUnit<*>,
     val metricValues: List<Float>,
-    val imperialUnits: MeasurementUnits,
+    val imperialUnits: MeasurementUnit<*>,
     val imperialValues: List<Float>
 ) {
     fun getDisplayUnits(isMetric: Boolean) = if (isMetric) metricUnits else imperialUnits

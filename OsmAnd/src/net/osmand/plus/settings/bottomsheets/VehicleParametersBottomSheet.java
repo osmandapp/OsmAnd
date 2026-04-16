@@ -16,9 +16,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.enums.MeasurementUnits;
-import net.osmand.plus.settings.vehiclespecs.SpecificationType;
-import net.osmand.plus.settings.vehiclespecs.profiles.VehicleSpecs;
+import net.osmand.shared.vehicle.SpecificationType;
+import net.osmand.shared.vehicle.profiles.VehicleSpecs;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.VehicleSpecificationPreference;
@@ -26,6 +25,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.shared.units.MeasurementUnit;
+import net.osmand.shared.util.SharedNumberFormatter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -53,16 +54,18 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 
 		title.setText(preference.getTitle().toString());
 
-		Drawable icon = getIcon(vehicleSpecs.getIconId(type, nightMode));
+		Drawable icon = getIcon(vehicleSpecs.getIconName(type, nightMode));
 		ivImage.setImageDrawable(icon);
 
-		String description = getString(vehicleSpecs.getDescriptionId(type));
+		String description = vehicleSpecs.getDescription(type);
 		tvDescription.setText(description);
 
-		MeasurementUnits units = vehicleSpecs.getMeasurementUnits(type, useMetricSystem);
-		tvMetric.setText(units.getNameResId());
+		MeasurementUnit<?> units = vehicleSpecs.getMeasurementUnits(type, useMetricSystem);
+		tvMetric.setText(units.getName());
 
-		currentValue = vehicleSpecs.readSavedValue(preference);
+		currentValue = (float) vehicleSpecs.readSavedValue(
+				preference.getValue(), preference.getSpecificationType(),
+				preference.isUseMetricSystem());
 		etText.setText(formatInputValue(currentValue));
 		etText.clearFocus();
 		etText.setOnTouchListener((v, event) -> {
@@ -76,7 +79,7 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 			public void afterTextChanged(Editable s) {
 				currentValue = (float) Algorithms.parseDoubleSilently(s.toString(), 0.0f);
 				String error;
-				if (currentValue == 0.0f || (error = vehicleSpecs.checkValue(app, type, useMetricSystem, currentValue)).isEmpty()) {
+				if (currentValue == 0.0f || (error = vehicleSpecs.checkValue(type, useMetricSystem, currentValue)).isEmpty()) {
 					onCorrectInput();
 					updateChips();
 				} else {
@@ -105,11 +108,11 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 		chips.add(chip);
 
 		// Add predefined values
-		MeasurementUnits units = vehicleSpecs.getMeasurementUnits(type, useMetricSystem);
-		String symbol = getString(units.getSymbolResId());
+		MeasurementUnit<?> units = vehicleSpecs.getMeasurementUnits(type, useMetricSystem);
+		String symbol = units.getSymbol();
 		for (Float value : vehicleSpecs.getPredefinedValues(type, units.isMetricSystem())) {
 			String pattern = getString(R.string.ltr_or_rtl_combine_via_space);
-			String valueStr = units.formatValue(value);
+			String valueStr = SharedNumberFormatter.formatDecimal(value, 1);
 			String title = String.format(pattern, valueStr, symbol);
 			chip = new ChipItem(title);
 			chip.title = title;
@@ -142,10 +145,20 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 		if (getTargetFragment() instanceof OnConfirmPreferenceChange callback) {
 			String preferenceId = getPreference().getKey();
 			VehicleSpecs vehicleSpecs = preference.getSpecifications();
-			String value = String.valueOf(vehicleSpecs.prepareValueToSave(preference, currentValue));
-			callback.onConfirmPreferenceChange(preferenceId, value, ApplyQueryType.SNACK_BAR);
+			double value = vehicleSpecs.prepareValueToSave(
+					preference.getSpecificationType(),
+					preference.isUseMetricSystem(),
+					currentValue);
+			String valueStr = String.valueOf(value);
+			callback.onConfirmPreferenceChange(preferenceId, valueStr, ApplyQueryType.SNACK_BAR);
 		}
 		dismiss();
+	}
+
+	@Nullable
+	protected Drawable getIcon(@NonNull String iconName) {
+		int iconId = AndroidUtils.getDrawableId(app, iconName, R.drawable.ic_action_info_outlined);
+		return getIcon(iconId);
 	}
 
 	@Override
