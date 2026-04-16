@@ -103,7 +103,7 @@ public class GpxAppearanceHelper {
 		if (drawInfo != null) {
 			return drawInfo.isShowStartFinish();
 		}
-		int startFinishPointsCount = getStartFinishPointsCount(gpxFile);
+		int startFinishPointsCount = gpxFile.getNonEmptySegmentsCount();
 		if (startFinishPointsCount > MAX_START_FINISH_ALLOWED_POINTS) {
 			return false;
 		}
@@ -115,19 +115,9 @@ public class GpxAppearanceHelper {
 				return show;
 			}
 		}
-		return gpxFile.isShowStartFinish(startFinishPointsCount <= MAX_START_FINISH_DEFAULT_POINTS);
-	}
-
-	private int getStartFinishPointsCount(@NonNull GpxFile gpxFile) {
-		int count = 0;
-		for (Track track : gpxFile.getTracks()) {
-			for (TrkSegment segment : track.getSegments()) {
-				if (segment.getPoints().size() >= 2) {
-					count += 2;
-				}
-			}
-		}
-		return count;
+		boolean withinDefaultLimit = startFinishPointsCount <= MAX_START_FINISH_DEFAULT_POINTS;
+		boolean defaultValue = withinDefaultLimit ? (Boolean) SHOW_START_FINISH.getDefaultValue() : false;
+		return gpxFile.isShowStartFinish(defaultValue);
 	}
 
 	public Gpx3DVisualizationType getTrackVisualizationForTrack(@NonNull GpxFile gpxFile, @Nullable GpxDataItem gpxItem, @Nullable GpxDirItem dirItem) {
