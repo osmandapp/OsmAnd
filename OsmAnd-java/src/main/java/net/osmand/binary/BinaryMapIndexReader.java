@@ -1897,7 +1897,7 @@ public class BinaryMapIndexReader {
 
 		public boolean publish(T obj) {
 			if (resultMatcher == null || resultMatcher.publish(obj)) {
-				if (priorityQueue != null) {
+				if (priorityQueue != null && obj != null) {
 					priorityQueue.add(obj);
 					if (priorityQueue.size() > priorityQueueLimit) {
 						priorityQueue.poll();

@@ -601,6 +601,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			recreate();
 			return;
 		}
+		RestartActivity.showRestartDialogIfNeeded(this);
+
 		importHelper.setUiActivity(this);
 		app.getLocationProvider().ensureLatestLocation();
 

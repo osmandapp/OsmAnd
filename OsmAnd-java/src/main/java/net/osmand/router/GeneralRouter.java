@@ -719,9 +719,12 @@ public class GeneralRouter implements VehicleRouter {
 		if (prevTs != ts) {
 			totalPenalty += Math.abs(ts - prevTs) / 2;
 		}
-		
-		if (segment.getRoad().roundabout() && !prev.getRoad().roundabout()) {
-			double rt = getRoundaboutTurnPenalty();
+
+		boolean currentRoundAbout = segment.getRoad().roundabout();
+		boolean previousRoundAbout = prev.getRoad().roundabout();
+
+		if ((currentRoundAbout && !previousRoundAbout) || (!currentRoundAbout && previousRoundAbout)) {
+			float rt = getRoundaboutTurnPenalty() / 2;
 			if (rt > 0) {
 				totalPenalty += rt;
 			}

@@ -138,6 +138,7 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 
 				group.addView(container, position);
 				buildNearestRowDividerIfMissing(group, position);
+				requestMenuRelayout(group);
 			}
 			return true;
 		});

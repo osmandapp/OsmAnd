@@ -6050,4 +6050,9 @@
     <string name="button_frames">Knapperammer</string>
     <string name="ais_port_nmea_server">TCP-port for NMEA-datakilde</string>
     <string name="ais_port_nmea_server_description">Definer TCP-portnummer for NMEA-datakilden</string>
+    <string name="ais_address_settings_description">Velg NMEA-protokollen (UDP/TCP) og angi de tilhørende adressene og portene</string>
+    <string name="ais_address_settings">IP-adresseinnstillinger</string>
+    <string name="ais_address_nmea_server">IP-adresse for NMEA-datakilde</string>
+    <string name="ais_address_nmea_server_description">Definer IP-adresse for NMEA-datakilden (hvis TCP brukes)</string>
+    <string name="open_from_short">Fra</string>
 </resources>

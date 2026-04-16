@@ -22,6 +22,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -272,14 +273,41 @@ public class LocalItemUtils {
 		String divider = ", ";
 		String name = FileNameTranslationHelper.getFileName(context, regions, fileName, divider, includingParent, reversed);
 		if (!Algorithms.isEmpty(name)) {
-			int index = name.indexOf(divider);
-			if (index != -1) {
-				int color = AndroidUtils.getColorFromAttr(context, android.R.attr.textColorSecondary);
-				return UiUtilities.createColorSpannable(name, color, name.substring(index));
-			}
-			return name;
+			return styleNameSecondaryPart(context, name);
 		}
 		return Algorithms.getFileNameWithoutExtension(fileName).replace('_', ' ');
+	}
+
+	@NonNull
+	public static CharSequence getGroupedItemName(@NonNull Context context, @NonNull LocalItem item) {
+		return styleNameSecondaryPart(context, getGroupedItemDisplayName(context, item));
+	}
+
+	@NonNull
+	public static String getGroupedItemDisplayName(@NonNull Context context, @NonNull LocalItem item) {
+		LocalItemType type = item.getType();
+		if (!type.isSortingByCountrySupported()) {
+			return getItemName(context, item, false).toString();
+		}
+
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		OsmandRegions regions = app.getResourceManager().getOsmandRegions();
+		String baseName = FileNameTranslationHelper.getBasename(context, item.getFileName());
+		WorldRegion region = regions.getRegionDataByDownloadName(baseName);
+		if (region == null) {
+			return getItemName(context, item, false).toString();
+		}
+
+		String regionName = region.getLocaleName();
+		WorldRegion country = region.getCountryRegion();
+		WorldRegion parent = region.getSuperregion();
+		if (parent == null || parent.equals(country) || WorldRegion.WORLD.equals(parent.getRegionId())) {
+			return regionName;
+		}
+
+		boolean reversed = !getSortModePref(app, type).get().isCountryMode();
+		String parentName = parent.getLocaleName();
+		return reversed ? regionName + ", " + parentName : parentName + ", " + regionName;
 	}
 
 	@NonNull
@@ -318,6 +346,16 @@ public class LocalItemUtils {
 		String formattedSize = AndroidUtils.formatSize(context, calculateItemsSize(items));
 		String prefix = isSizeCalculated(items) ? "" : "≥ ";
 		return prefix + formattedSize;
+	}
+
+	@NonNull
+	private static CharSequence styleNameSecondaryPart(@NonNull Context context, @NonNull String name) {
+		int index = name.indexOf(", ");
+		if (index != -1) {
+			int color = AndroidUtils.getColorFromAttr(context, android.R.attr.textColorSecondary);
+			return UiUtilities.createColorSpannable(name, color, name.substring(index));
+		}
+		return name;
 	}
 
 	public static boolean isSizeCalculated(@NonNull Collection<BaseLocalItem> items) {

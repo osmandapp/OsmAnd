@@ -202,11 +202,15 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				mapRenderer.addSymbolsProvider(markersCollection);
 				this.mapMarkersCollection = markersCollection;
 			}
+			OsmandApplication app = getApplication();
+			Integer customColor = app.getAppCustomization().getHighlight3dObjectsColor();
+			int color = customColor != null ? customColor : outlineColor;
+
 			for (int i = 0; i < allPoints.size(); i++) {
 				TargetPoint point = allPoints.get(i);
 				LatLon latLon = point.getLatLon();
 				if (!hasHighlight3dObjectColor(latLon)) {
-					add3DObjectColor(latLon, outlineColor);
+					add3DObjectColor(latLon, color);
 				}
 			}
 			this.renderedPoints = allPoints;

@@ -7,7 +7,6 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FR
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsId;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsName;
 import static net.osmand.data.Amenity.POPULATION;
-import static net.osmand.data.Amenity.ROUTE_NAME;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.search.core.ObjectType.POI;
@@ -832,8 +831,7 @@ public class SearchCoreFactory {
 					}
 					if (!matchLocalName && !nm.matches(sr.otherNames)) {
 						for(String k : object.getAdditionalInfoKeys()) {
-							if (!k.startsWith(ROUTE_NAME)
-									&& (isTagIndexedForSearchAsName(k) || isTagIndexedForSearchAsId(k))
+							if ((isTagIndexedForSearchAsName(k) || isTagIndexedForSearchAsId(k))
 									&& nm.matches(object.getAdditionalInfo(k))) {
 								sr.alternateName = object.getAdditionalInfo(k);
 								break;

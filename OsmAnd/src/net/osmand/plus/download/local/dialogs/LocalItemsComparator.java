@@ -6,6 +6,8 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.BaseLocalItem;
+import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.settings.enums.LocalSortMode;
 
 import java.util.Comparator;
@@ -15,10 +17,17 @@ public class LocalItemsComparator implements Comparator<BaseLocalItem> {
 	public final OsmandApplication app;
 	public final LocalSortMode sortMode;
 	public final Collator collator = OsmAndCollator.primaryCollator();
+	private final boolean useGroupedMapNames;
 
 	public LocalItemsComparator(@NonNull OsmandApplication app, @NonNull LocalSortMode sortMode) {
+		this(app, sortMode, false);
+	}
+
+	public LocalItemsComparator(@NonNull OsmandApplication app, @NonNull LocalSortMode sortMode,
+	                            boolean useGroupedMapNames) {
 		this.app = app;
 		this.sortMode = sortMode;
+		this.useGroupedMapNames = useGroupedMapNames;
 	}
 
 	@Override
@@ -43,7 +52,16 @@ public class LocalItemsComparator implements Comparator<BaseLocalItem> {
 	}
 
 	private int compareItemNames(@NonNull BaseLocalItem item1, @NonNull BaseLocalItem item2) {
-		return compareNames(item1.getName(app).toString(), item2.getName(app).toString());
+		return compareNames(getComparableName(item1), getComparableName(item2));
+	}
+
+	@NonNull
+	private String getComparableName(@NonNull BaseLocalItem item) {
+		if (useGroupedMapNames && item instanceof LocalItem localItem
+				&& localItem.getType().isSortingByCountrySupported()) {
+			return LocalItemUtils.getGroupedItemDisplayName(app, localItem);
+		}
+		return item.getName(app).toString();
 	}
 
 	private int compareNames(@NonNull String name1, @NonNull String name2) {

@@ -49,7 +49,7 @@ public class LocalItemsCollector {
 
 		if (folder != null) {
 			List<BaseLocalItem> folderItems = new ArrayList<>(folder.getItems());
-			sortItems(localGroup.getType(), folderItems);
+			sortItems(localGroup.getType(), folderItems, true);
 			return new LocalItemsCollection(new ArrayList<>(folderItems), folder);
 		} else {
 			// Folder no longer exists (e.g. empty or merged), fallback to root
@@ -76,8 +76,8 @@ public class LocalItemsCollector {
 			backupedItems = groupItemsByCountry(type, backupedItems, "deactivated");
 		}
 
-		sortItems(type, activeItems);
-		sortItems(type, backupedItems);
+		sortItems(type, activeItems, false);
+		sortItems(type, backupedItems, false);
 
 		List<Object> result = new ArrayList<>(activeItems);
 		if (!Algorithms.isEmpty(backupedItems)) {
@@ -136,10 +136,11 @@ public class LocalItemsCollector {
 		return result;
 	}
 
-	private void sortItems(@NonNull LocalItemType type, @NonNull List<BaseLocalItem> items) {
+	private void sortItems(@NonNull LocalItemType type, @NonNull List<BaseLocalItem> items,
+	                       boolean groupedFolder) {
 		if (type.isSortingSupported()) {
 			LocalSortMode sortMode = LocalItemUtils.getSortModePref(app, type).get();
-			items.sort(new LocalItemsComparator(app, sortMode));
+			items.sort(new LocalItemsComparator(app, sortMode, groupedFolder));
 		} else {
 			Collator collator = OsmAndCollator.primaryCollator();
 			items.sort((o1, o2) -> collator.compare(o1.getName(app).toString(), o2.getName(app).toString()));

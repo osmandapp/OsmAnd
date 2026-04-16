@@ -196,6 +196,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			if (selectedGpxFile.isShowCurrentTrack()) {
 				trackDrawInfo = new TrackDrawInfo(app, TrackDrawInfo.CURRENT_RECORDING);
 			} else {
+				GpxFile gpxFile = selectedGpxFile.getGpxFile();
 				GpxDataItemCallback callback = new GpxDataItemCallback() {
 					@Override
 					public boolean isCancelled() {
@@ -205,15 +206,14 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 					@Override
 					public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 						gpxDataItem = item;
-						trackDrawInfo.updateParams(app, item);
+						trackDrawInfo.updateParams(app, gpxFile, item);
 						if (view != null) {
 							initContent();
 						}
 					}
 				};
-				String filePath = selectedGpxFile.getGpxFile().getPath();
-				gpxDataItem = gpxDbHelper.getItem(new KFile(filePath), callback);
-				trackDrawInfo = new TrackDrawInfo(app, filePath, gpxDataItem);
+				gpxDataItem = gpxDbHelper.getItem(new KFile(gpxFile.getPath()), callback);
+				trackDrawInfo = new TrackDrawInfo(app, gpxFile, gpxDataItem);
 			}
 		}
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {

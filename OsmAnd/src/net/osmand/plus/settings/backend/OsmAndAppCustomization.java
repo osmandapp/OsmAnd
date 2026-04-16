@@ -87,6 +87,9 @@ public class OsmAndAppCustomization {
 	private boolean featuresCustomized;
 	private boolean widgetsCustomized;
 
+	@Nullable
+	private Integer highlight3dObjectsColor;
+
 	private final List<OsmAndAppCustomizationListener> listeners = new ArrayList<>();
 
 	public interface OsmAndAppCustomizationListener {
@@ -560,6 +563,15 @@ public class OsmAndAppCustomization {
 	public void setZoomLimits(int minZoom, int maxZoom) {
 		this.minZoom = minZoom;
 		this.maxZoom = maxZoom;
+	}
+
+	@Nullable
+	public Integer getHighlight3dObjectsColor() {
+		return highlight3dObjectsColor;
+	}
+
+	public void setHighlight3dObjectsColor(@Nullable Integer color) {
+		this.highlight3dObjectsColor = color;
 	}
 
 	public boolean isFeatureEnabled(@NonNull String id) {

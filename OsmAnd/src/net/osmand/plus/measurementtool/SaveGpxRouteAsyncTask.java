@@ -165,7 +165,8 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
                                               @NonNull GpxFile gpxFile) {
         RouteActivityHelper helper = app.getRouteActivityHelper();
         Metadata metadata = gpxFile.getMetadata();
-        if (metadata.getRouteActivity(helper.getActivities()) != null) {
+        boolean syncWithEditedProfile = shouldSyncRouteActivityWithEditedProfile(editingCtx);
+        if (!syncWithEditedProfile && metadata.getRouteActivity(helper.getActivities()) != null) {
             return;
         }
 
@@ -174,9 +175,15 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
             appMode = app.getSettings().getApplicationMode();
         }
         String activityId = app.getSettings().CURRENT_TRACK_ROUTE_ACTIVITY.getProfileDefaultValue(appMode);
-        if (!Algorithms.isEmpty(activityId)) {
+        if (syncWithEditedProfile) {
+            metadata.setRouteActivity(helper.findRouteActivity(activityId));
+        } else if (!Algorithms.isEmpty(activityId)) {
             metadata.setRouteActivity(helper.findRouteActivity(activityId));
         }
+    }
+
+    private boolean shouldSyncRouteActivityWithEditedProfile(@NonNull MeasurementEditingContext editingCtx) {
+        return !editingCtx.isNewData() && editingCtx.hasRoutePoints() && !editingCtx.isInMultiProfileMode();
     }
 
     @Override

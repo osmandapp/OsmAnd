@@ -430,7 +430,7 @@ class GpxFile : GpxExtensions {
 			points.addAll(routePoints)
 			return points
 		}
-		return emptyList()
+		return ArrayList()
 	}
 
 	private fun getAllRoutePointsCount(): Int {

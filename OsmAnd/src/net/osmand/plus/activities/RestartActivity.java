@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
@@ -29,6 +30,8 @@ public class RestartActivity extends AppCompatActivity {
 
 	private static final String RESTART_INTENT_KEY = "restart_intent_key";
 	private static final String MAIN_PROCESS_PID_KEY = "main_process_pid_key";
+
+	private static boolean keepRestartDialog = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,24 +83,40 @@ public class RestartActivity extends AppCompatActivity {
 		return false;
 	}
 
-	public static void doRestart(@NonNull Context ctx, boolean silent) {
+	public static void requestRestart(@NonNull FragmentActivity activity) {
+		keepRestartDialog = true;
+		showRestartDialogIfNeeded(activity);
+	}
+
+	public static void showRestartDialogIfNeeded(@NonNull FragmentActivity activity) {
+		if (!keepRestartDialog) {
+			return;
+		}
+		doRestart(activity, activity.getString(R.string.restart_is_required));
+	}
+
+	public static void doRestart(@NonNull FragmentActivity activity, boolean silent) {
 		if (silent) {
-			RestartActivity.doRestartSilent(ctx);
+			RestartActivity.doRestartSilent(activity);
 		} else {
-			RestartActivity.doRestart(ctx);
+			RestartActivity.doRestart(activity);
 		}
 	}
 
-	public static void doRestart(@NonNull Context ctx) {
-		doRestart(ctx, ctx.getString(R.string.restart_is_required));
+	public static void doRestart(@NonNull FragmentActivity activity) {
+		doRestart(activity, activity.getString(R.string.restart_is_required));
 	}
 
-	public static void doRestart(@NonNull Context ctx, @Nullable String message) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+	public static void doRestart(@NonNull FragmentActivity activity, @Nullable String message) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.shared_string_restart);
 		builder.setMessage(message);
-		builder.setNegativeButton(R.string.later, null);
-		builder.setPositiveButton(R.string.restart_now, (dialog, which) -> doRestartSilent(ctx));
+		builder.setOnCancelListener(dialog -> keepRestartDialog = false);
+		builder.setNegativeButton(R.string.later, (dialog, which) -> keepRestartDialog = false);
+		builder.setPositiveButton(R.string.restart_now, (dialog, which) -> {
+			keepRestartDialog = false;
+			doRestartSilent(activity);
+		});
 		builder.show();
 	}
 
