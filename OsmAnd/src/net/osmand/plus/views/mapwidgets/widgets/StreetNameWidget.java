@@ -71,6 +71,7 @@ public class StreetNameWidget extends MapWidget {
 
 	private static final int MAX_MARKER_DISTANCE = 50;
 	public static final int MAX_SHIELDS_QUANTITY = 3;
+	public static final int SHIELD_ZOOM = 16; // motorway=7, primary=10, secondary=12, tertiary=14, residential=16
 
 	private final WaypointHelper waypointHelper;
 	private final RendererRegistry rendererRegistry;
@@ -276,7 +277,7 @@ public class StreetNameWidget extends MapWidget {
 			String tag = routeTypeRule.getTag();
 			String value = routeTypeRule.getValue();
 			if (tag.equals("highway") || tag.equals("route")) {
-				rreq.setInitialTagValueZoom(tag, value, 13, null);
+				rreq.setInitialTagValueZoom(tag, value, SHIELD_ZOOM, null);
 			} else {
 				additional.append(tag).append("=").append(value).append(";");
 			}
