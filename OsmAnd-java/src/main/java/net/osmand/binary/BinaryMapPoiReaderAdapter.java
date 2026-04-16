@@ -400,20 +400,13 @@ public class BinaryMapPoiReaderAdapter {
 //				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) +
 //						"ms. Found " + offKeys.length + " subtrees");
 				for (int j = 0; j < offKeys.length; j++) {
-					long existedBeforeBlock = metrics != null ? metrics.objectsLoaded : 0;
+					if (metrics != null) metrics.beginReadPoiData(codedIS);
 					codedIS.seek(offKeys[j] + indexOffset);
 					long len = readInt();
-					long payloadStart = codedIS.getTotalBytesRead();
 					long oldLim = codedIS.pushLimitLong((long) len);
 					readPoiData(matcher, req, region, metrics);
 					codedIS.popLimit(oldLim);
-					if (metrics != null) {
-						metrics.blocksLoaded++;
-
-						long objectsInBlock = metrics.objectsLoaded - existedBeforeBlock;
-						metrics.maxObjectsPerBlock = Math.max(metrics.maxObjectsPerBlock, objectsInBlock);
-						metrics.payloadBytesParsed += codedIS.getTotalBytesRead() - payloadStart;
-					}
+					if (metrics != null) metrics.endReadPoiData(codedIS);
 					
 					if (req.isCancelled() || req.limitExceeded()) {
 						req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,

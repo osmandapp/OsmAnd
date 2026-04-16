@@ -40,6 +40,20 @@ public class BinaryMapIndexReaderStats {
 		long objectsLoaded;
 		long matchedObjectsLoaded;
 		long maxObjectsPerBlock;
+		private long objectsLoadedBefore, payloadBytesParsedBefore;
+		
+		void beginReadPoiData(CodedInputStream stream) {
+			objectsLoadedBefore = objectsLoaded;
+			payloadBytesParsedBefore = stream.getTotalBytesRead();
+		}
+
+		void endReadPoiData(CodedInputStream stream) {
+			blocksLoaded++;
+
+			long objectsInBlock = objectsLoaded - objectsLoadedBefore;
+			maxObjectsPerBlock = Math.max(maxObjectsPerBlock, objectsInBlock);
+			payloadBytesParsed += stream.getTotalBytesRead() - payloadBytesParsedBefore;
+		}
 	}
 	
 	public static class SubStatByAPI {
