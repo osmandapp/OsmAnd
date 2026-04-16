@@ -278,6 +278,13 @@ public class MenuBuilder {
 		this.mapContextMenu = mapContextMenu;
 	}
 
+	protected void requestMenuRelayout(@NonNull View anchor) {
+		MapContextMenu mapContextMenu = getMapContextMenu();
+		if (!isHidden() && mapContextMenu != null) {
+			anchor.post(mapContextMenu::updateLayout);
+		}
+	}
+
 	public boolean isShowNearestWiki() {
 		return showNearestWiki;
 	}
@@ -541,6 +548,7 @@ public class MenuBuilder {
 				viewGroup.addView(amenitiesRow, insertIndex);
 
 				buildNearestRowDividerIfMissing(viewGroup, insertIndex);
+				requestMenuRelayout(viewGroup);
 			}
 		});
 	}
@@ -572,6 +580,7 @@ public class MenuBuilder {
 					viewGroup.addView(amenitiesRow, insertIndex);
 
 					buildNearestRowDividerIfMissing(viewGroup, insertIndex);
+					requestMenuRelayout(viewGroup);
 				}
 			});
 		}
@@ -622,6 +631,7 @@ public class MenuBuilder {
 				.setCollapsable(true).setCollapsableView(collapsableView).build());
 		viewGroup1.addView(amenitiesRow, position);
 		buildNearestRowDividerIfMissing(viewGroup1, position);
+		requestMenuRelayout(viewGroup1);
 	}
 
 	protected View createRowContainer(Context context, String tag) {

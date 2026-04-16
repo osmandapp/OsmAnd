@@ -311,6 +311,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			group.addView(amenitiesRow, position);
 
 			buildNearestRowDividerIfMissing(group, position);
+			requestMenuRelayout(group);
 		});
 	}
 
@@ -345,6 +346,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			group.addView(amenitiesRow, insertIndex);
 
 			buildNearestRowDividerIfMissing(group, insertIndex);
+			requestMenuRelayout(group);
 		});
 	}
 
