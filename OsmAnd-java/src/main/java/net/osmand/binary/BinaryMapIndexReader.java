@@ -2673,7 +2673,7 @@ req.setSearchStat(stat);
 				return;
 			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
 				key = codedIS.readString();
-				if (prefix.length() > 0) {
+				if (!prefix.isEmpty()) {
 					key = prefix + key;
 				}
 				shouldWeReadSubtable = matchIndexedStringTablePrefix(instance, queries, key, matched, matchedSubtables);
@@ -2683,19 +2683,15 @@ req.setSearchStat(stat);
 				for (int i = 0; i < queries.size(); i++) {
 					if (matched[i] && key != null) {
 						Map<String, TIntArrayList> tokenPrefixes = prefixesByQuery.get(i);
-						TIntArrayList tokenOffsets = tokenPrefixes.get(key);
-						if (tokenOffsets == null) {
-							tokenOffsets = new TIntArrayList();
-							tokenPrefixes.put(key, tokenOffsets);
-						}
-						tokenOffsets.add(val);
+                        TIntArrayList tokenOffsets = tokenPrefixes.computeIfAbsent(key, k -> new TIntArrayList());
+                        tokenOffsets.add(val);
 					}
 				}
 				break;
 			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
 				long len = codedIS.readRawVarint32();
 				long oldLim = codedIS.pushLimitLong((long) len);
-				if (shouldWeReadSubtable && key != null) {
+				if (shouldWeReadSubtable) {
 					List<String> subqueries = new ArrayList<>(queries);
 					for (int i = 0; i < queries.size(); i++) {
 						if (!matchedSubtables[i]) {

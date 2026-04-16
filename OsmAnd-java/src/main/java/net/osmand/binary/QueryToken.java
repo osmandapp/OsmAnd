@@ -77,7 +77,7 @@ public class QueryToken {
         List<Prefix> strongestPrefixes = new ArrayList<>();
         for (Prefix candidate : sortedPrefixes) {
             boolean matchesQuery = !Algorithms.isEmpty(query) && candidate.key() != null
-                    && CollatorStringMatcher.cmatches(collator, candidate.key(), query, CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+                    && CollatorStringMatcher.cmatches(collator, candidate.key(), query, CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH);
             Prefix candidatePrefix = new Prefix(candidate.key(), candidate.offsets());
             if (matchesQuery) {
                 strongestPrefixes.add(candidatePrefix);
@@ -90,7 +90,7 @@ public class QueryToken {
                     continue;
                 }
                 boolean strongestMatchesQuery = !Algorithms.isEmpty(query)
-                        && CollatorStringMatcher.cmatches(collator, query, strongestKey, CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+                        && CollatorStringMatcher.cmatches(collator, query, strongestKey, CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH);
                 if (strongestMatchesQuery && candidate.key() != null && strongestKey.length() > candidate.key().length()
                         && strongestKey.startsWith(candidate.key())) {
                     dominated = true;

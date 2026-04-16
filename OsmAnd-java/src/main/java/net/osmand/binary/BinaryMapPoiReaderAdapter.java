@@ -24,18 +24,13 @@ import org.apache.commons.logging.Log;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsId;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsName;
 import static net.osmand.binary.ObfConstants.isTagIndexedAsSearchRelated;
+import static net.osmand.util.SearchAlgorithms.*;
 
 import java.io.IOException;
-import java.text.Normalizer;
 import java.util.*;
-
-import static net.osmand.search.core.SearchCoreFactory.splitAndNormalize;
 
 public class BinaryMapPoiReaderAdapter {
 	private static final Log LOG = PlatformUtil.getLog(BinaryMapPoiReaderAdapter.class);
-	public static final char MARKER_RAW_ESCAPE = '\uE000';
-	public static final int MARKER_BASE = 0xE100;
-	public static final int MARKER_MAX = 0xF8FF;
 
 	public static final int SHIFT_BITS_CATEGORY = 7;
 	private static final int CATEGORY_MASK = (1 << SHIFT_BITS_CATEGORY) - 1;
@@ -521,7 +516,7 @@ public class BinaryMapPoiReaderAdapter {
 
 	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
 			List<Integer> nameIndexCoordinates, QueryToken token, QueryToken.Prefix prefix) throws IOException {
-		List<String> suffixDictionary = null;
+		List<String> suffixDictionary = new ArrayList<>();
 		QueryToken.SuffixMask mask = null;
 		while (true) {
 			int t = codedIS.readTag();
@@ -530,7 +525,11 @@ public class BinaryMapPoiReaderAdapter {
 				case 0:
 					return;
 				case OsmAndPoiNameIndexData.SUFFIXESDICTIONARY_FIELD_NUMBER:
-					suffixDictionary = readSuffixDictionary(suffixDictionary);
+					String encodedSuffix = codedIS.readString();
+					String prevSuffix = suffixDictionary.isEmpty() ? null : suffixDictionary.get(suffixDictionary.size() - 1);
+					String entry = decodeSuffixDictionaryEntry(prevSuffix, encodedSuffix);
+					suffixDictionary.add(entry);
+
 					if (mask == null) {
 						mask = token.new SuffixMask(prefix);
 					}
@@ -547,42 +546,6 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			}
 		}
-	}
-
-	private List<String> readSuffixDictionary(List<String> suffixDictionary) throws IOException {
-		List<String> dictionaryEntries = suffixDictionary == null || suffixDictionary.isEmpty()
-				? new ArrayList<>() : new ArrayList<>(suffixDictionary);
-		String encodedSuffix = codedIS.readString();
-		String resolvedSuffix = decodeSuffixDictionaryEntry(dictionaryEntries, encodedSuffix);
-		dictionaryEntries.add(resolvedSuffix);
-		return dictionaryEntries;
-	}
-
-	private static String decodeRawSuffix(String encodedSuffix) {
-		if (encodedSuffix.isEmpty()) {
-			return "";
-		}
-		int markerCodePoint = encodedSuffix.codePointAt(0);
-		if (markerCodePoint == MARKER_RAW_ESCAPE) {
-			return encodedSuffix.substring(Character.charCount(markerCodePoint));
-		}
-		return encodedSuffix;
-	}
-
-	private static String decodeSuffixDictionaryEntry(List<String> dictionaryEntries, String encodedSuffix) {
-		if (encodedSuffix.isEmpty()) {
-			return "";
-		}
-		int markerCodePoint = encodedSuffix.codePointAt(0);
-		if (markerCodePoint >= MARKER_BASE && markerCodePoint <= MARKER_MAX) {
-            String previousSuffix = dictionaryEntries.get(dictionaryEntries.size() - 1);
-			int commonPrefixCodePointLength = markerCodePoint - MARKER_BASE;
-			int prefixEndOffset = previousSuffix.offsetByCodePoints(0,
-					Math.min(commonPrefixCodePointLength, previousSuffix.codePointCount(0, previousSuffix.length())));
-			String suffixRemainder = encodedSuffix.substring(Character.charCount(markerCodePoint));
-			return Normalizer.normalize(previousSuffix.substring(0, prefixEndOffset) + suffixRemainder, Normalizer.Form.NFC);
-		}
-		return Normalizer.normalize(decodeRawSuffix(encodedSuffix), Normalizer.Form.NFC);
 	}
 
 	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
@@ -754,15 +717,21 @@ public class BinaryMapPoiReaderAdapter {
 				y = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER:
-				if (metrics != null) metrics.objectsLoaded++;
+				long decodeStartNs = 0, matcherStartNs = 0;
+				if (metrics != null) {
+					metrics.objectsLoaded++;
+					decodeStartNs = System.nanoTime();
+				}
 				int len = codedIS.readRawVarint32();
 				long oldLim = codedIS.pushLimitLong((long) len);
-				long decodeStartNs = System.nanoTime();
+
 				Amenity am = readPoiPoint(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, x, y, zoom, req, region, false);
-				if (metrics != null) metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
+				if (metrics != null)  {
+					metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
+					matcherStartNs = System.nanoTime();
+				}
 				codedIS.popLimit(oldLim);
 				if (am != null) {
-					long matcherStartNs = System.nanoTime();
 					boolean matches = matcher.matches(am.getName().toLowerCase())
 							|| matcher.matches(am.getEnName(true).toLowerCase());
 					if (!matches) {

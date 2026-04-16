@@ -11,6 +11,7 @@ import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.search.core.ObjectType.POI;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
+import static net.osmand.util.SearchAlgorithms.splitSearchNames;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -263,58 +264,6 @@ public class SearchCoreFactory {
 		public String toString() {
 			return getClass().getSimpleName();
 		}
-	}
-	
-	
-	public static Set<String> splitSearchNames(String name) {
-		int prev = -1;
-		Set<String> namesToAdd = new HashSet<>();
-
-		for (int i = 0; i <= name.length(); i++) {
-			boolean tokenCharacter = i != name.length()
-					&& (isTokenCharacter(name, i, prev != -1) || name.charAt(i) == '\'');
-			if (!tokenCharacter) {
-				if (prev != -1) {
-					String substr = name.substring(prev, i);
-					namesToAdd.add(substr.toLowerCase());
-					prev = -1;
-				}
-			} else {
-				if (prev == -1) {
-					prev = i;
-				}
-			}
-		}
-		return namesToAdd;
-	}
-
-	private static boolean isTokenCharacter(String value, int index, boolean tokenAlreadyStarted) {
-		char character = value.charAt(index);
-		if (Character.isLetter(character) || Character.isDigit(character)) {
-			return true;
-		}
-		boolean isHyphenNearNumber = character == '-'
-				&& ((index + 1 < value.length() && Character.isDigit(value.charAt(index + 1)))
-				|| (index - 1 >= 0 && Character.isDigit(value.charAt(index - 1))));
-		if (isHyphenNearNumber) {
-			return true;
-		}
-		int characterType = Character.getType(character);
-		return tokenAlreadyStarted && (characterType == Character.NON_SPACING_MARK
-				|| characterType == Character.COMBINING_SPACING_MARK
-				|| characterType == Character.ENCLOSING_MARK);
-	}
-	
-	public static List<String> splitAndNormalize(String query) {
-		String normalizedQuery = Algorithms.normalizeSearchText(query);
-		Set<String> queryTokens = splitSearchNames(normalizedQuery);
-		if (ArabicNormalizer.isSpecialArabic(normalizedQuery)) {
-			String arabic = ArabicNormalizer.normalize(normalizedQuery);
-			if (arabic != null && !arabic.equals(normalizedQuery)) {
-                queryTokens.addAll(splitSearchNames(arabic));
-			}
-		}
-		return new ArrayList<>(queryTokens);
 	}
 	
 	public static class SearchRegionByNameAPI extends SearchBaseAPI {
