@@ -279,9 +279,13 @@ public class MenuBuilder {
 	}
 
 	protected void requestMenuRelayout(@NonNull View anchor) {
-		MapContextMenu mapContextMenu = getMapContextMenu();
-		if (!isHidden() && mapContextMenu != null) {
-			anchor.post(mapContextMenu::updateLayout);
+		if (!isHidden()) {
+			anchor.post(() -> {
+				MapContextMenu mapContextMenu = getMapContextMenu();
+				if (!isHidden() && mapContextMenu != null) {
+					mapContextMenu.updateLayout();
+				}
+			});
 		}
 	}
 
