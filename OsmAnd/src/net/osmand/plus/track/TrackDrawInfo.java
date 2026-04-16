@@ -112,12 +112,12 @@ public class TrackDrawInfo {
 		appearanceType = bundle.getInt(TRACK_APPEARANCE_TYPE);
 	}
 
-	public TrackDrawInfo(@NonNull OsmandApplication app, @NonNull String filePath, @Nullable GpxDataItem gpxDataItem) {
+	public TrackDrawInfo(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @Nullable GpxDataItem gpxDataItem) {
 		this.appearanceType = GPX_FILE;
 		if (gpxDataItem != null) {
-			updateParams(app, gpxDataItem);
+			updateParams(app, gpxFile, gpxDataItem);
 		}
-		this.filePath = filePath;
+		this.filePath = gpxFile.getPath();
 	}
 
 	private void initCurrentTrackParams(@NonNull OsmandApplication app) {
@@ -143,7 +143,7 @@ public class TrackDrawInfo {
 		routeInfoAttribute = ColoringType.Companion.getRouteInfoAttribute(null);
 	}
 
-	public void updateParams(@NonNull OsmandApplication app, @NonNull GpxDataItem item) {
+	public void updateParams(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {
 		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
 
 		width = helper.getParameter(item, WIDTH);
@@ -155,7 +155,7 @@ public class TrackDrawInfo {
 		splitInterval = helper.requireParameter(item, SPLIT_INTERVAL);
 		joinSegments = helper.requireParameter(item, JOIN_SEGMENTS);
 		showArrows = helper.requireParameter(item, SHOW_ARROWS);
-		showStartFinish = helper.requireParameter(item, SHOW_START_FINISH);
+		showStartFinish = helper.isShowStartFinishForTrack(gpxFile, item, null);
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
 		trackWallColorType = Gpx3DWallColorType.Companion.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
