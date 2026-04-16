@@ -455,7 +455,7 @@ public class BinaryMapPoiReaderAdapter {
 				offset = codedIS.getTotalBytesRead();
 				queries = splitAndNormalize(query);
 				
-				List<List<QueryToken.TokenPrefix>> prefixCandidates = map.readIndexedStringTablePrefixes(instance, queries);
+				List<List<QueryToken.Prefix>> prefixCandidates = map.readIndexedStringTablePrefixes(instance, queries);
 				queryTokens = new ArrayList<>(queries.size());
 				for (int i = 0; i < queries.size(); i++) {
 					String queryToken = queries.get(i);
@@ -473,7 +473,7 @@ public class BinaryMapPoiReaderAdapter {
 						QueryToken tokenMatch = queryTokens.get(tokenIndex);
 						TIntLongHashMap offsetMap = new TIntLongHashMap();
 						listOfSepOffsets.add(offsetMap);
-						for (QueryToken.TokenPrefix prefix : tokenMatch.prefixes) {
+						for (QueryToken.Prefix prefix : tokenMatch.prefixes) {
 							TIntArrayList dataOffsets = prefix.offsets();
 							dataOffsets.sort();
 							for (int i = 0; i < dataOffsets.size(); i++) {
@@ -527,9 +527,9 @@ public class BinaryMapPoiReaderAdapter {
 
 
 	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
-			List<Integer> nameIndexCoordinates, QueryToken token, QueryToken.TokenPrefix prefix) throws IOException {
+			List<Integer> nameIndexCoordinates, QueryToken token, QueryToken.Prefix prefix) throws IOException {
 		List<String> suffixDictionary = null;
-		SuffixMask mask = null;
+		QueryToken.SuffixMask mask = null;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -539,7 +539,7 @@ public class BinaryMapPoiReaderAdapter {
 				case OsmAndPoiNameIndexData.SUFFIXESDICTIONARY_FIELD_NUMBER:
 					suffixDictionary = readSuffixDictionary(suffixDictionary);
 					if (mask == null) {
-						mask = new SuffixMask(token, prefix);
+						mask = token.new SuffixMask(prefix);
 					}
 					mask.setDictionary(suffixDictionary);
 					break;
@@ -590,43 +590,6 @@ public class BinaryMapPoiReaderAdapter {
 			return Normalizer.normalize(previousSuffix.substring(0, prefixEndOffset) + suffixRemainder, Normalizer.Form.NFC);
 		}
 		return Normalizer.normalize(decodeRawSuffix(encodedSuffix), Normalizer.Form.NFC);
-	}
-
-	private static class SuffixMask {
-		final TIntArrayList masks;
-		final QueryToken.TokenPrefix prefix;
-		final QueryToken tokenMatch;
-		
-		SuffixMask(QueryToken tokenMatch, QueryToken.TokenPrefix prefix) {
-			this.prefix = prefix;
-			this.tokenMatch = tokenMatch;
-			if (tokenMatch == null || tokenMatch.query == null || prefix.key() == null) {
-				masks = null;
-			} else if (CollatorStringMatcher.cmatches(tokenMatch.collator, prefix.key(), tokenMatch.query, tokenMatch.matcherMode)) {
-				masks = null;
-			} else {
-				masks = new TIntArrayList();
-			}
-		}
-		
-		void setDictionary(List<String> suffixDictionary) {
-			if (masks == null) {
-				return;
-			}
-			int index = suffixDictionary.size() - 1;
-			if (index < 0) {
-				return;
-			}
-			String entry = suffixDictionary.get(index);
-			String fullKey = prefix.key() + entry;
-			if (CollatorStringMatcher.cmatches(tokenMatch.collator, fullKey, tokenMatch.query, tokenMatch.matcherMode)) {
-				int wordIndex = index >> 5;
-				while (masks.size() <= wordIndex) {
-					masks.add(0);
-				}
-				masks.set(wordIndex, masks.get(wordIndex) | (1 << (index & 31)));
-			}
-		}
 	}
 
 	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,

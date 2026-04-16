@@ -2640,7 +2640,7 @@ req.setSearchStat(stat);
 
 	}
 
-	List<List<QueryToken.TokenPrefix>> readIndexedStringTablePrefixes(Collator instance, List<String> queries)
+	List<List<QueryToken.Prefix>> readIndexedStringTablePrefixes(Collator instance, List<String> queries)
 			throws IOException {
 		List<Map<String, TIntArrayList>> prefixesByQuery = new ArrayList<>(queries.size());
 		for (int i = 0; i < queries.size(); i++) {
@@ -2648,11 +2648,11 @@ req.setSearchStat(stat);
 		}
 		readIndexedStringTablePrefixes(instance, queries, "", prefixesByQuery);
 		
-		List<List<QueryToken.TokenPrefix>> result = new ArrayList<>(queries.size());
+		List<List<QueryToken.Prefix>> result = new ArrayList<>(queries.size());
 		for (Map<String, TIntArrayList> prefixes : prefixesByQuery) {
-			List<QueryToken.TokenPrefix> tokenPrefixes = new ArrayList<>(prefixes.size());
+			List<QueryToken.Prefix> tokenPrefixes = new ArrayList<>(prefixes.size());
 			for (Map.Entry<String, TIntArrayList> entry : prefixes.entrySet()) {
-				tokenPrefixes.add(new QueryToken.TokenPrefix(entry.getKey(), entry.getValue()));
+				tokenPrefixes.add(new QueryToken.Prefix(entry.getKey(), entry.getValue()));
 			}
 			result.add(tokenPrefixes);
 		}
