@@ -6519,4 +6519,5 @@
     <string name="shared_string_gpu">GPU</string>
     <string name="shared_string_allocated">Alocado</string>
     <string name="open_till_short">Até</string>
+    <string name="open_from_short">De</string>
 </resources>
