@@ -695,10 +695,16 @@ public class BinaryMapAddressReaderAdapter {
 				indexOffset = codedIS.getTotalBytesRead();
 				long oldLimit = codedIS.pushLimitLong((long) length);
 				// here offsets are sorted by distance
-				TIntArrayList charsList = new TIntArrayList();
-				charsList.add(0);
-				map.readIndexedStringTable(stringMatcher.getCollator(), Collections.singletonList(req.nameQuery),
-						"", Collections.singletonList(loffsets), charsList);
+				List<QueryToken.Prefix> prefixCandidates = map.readIndexedStringTablePrefixes(
+						stringMatcher.getCollator(), Collections.singletonList(req.nameQuery)).get(0);
+				QueryToken queryToken = new QueryToken(req.nameQuery, stringMatcher.getCollator(), req.matcherMode,
+						prefixCandidates);
+				TIntHashSet uniqueOffsets = new TIntHashSet();
+				for (QueryToken.Prefix prefix : queryToken.prefixes) {
+					if (uniqueOffsets.add(prefix.offset())) {
+						loffsets.add(prefix.offset());
+					}
+				}
 				codedIS.popLimit(oldLimit);
 				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.ADDRESS_BY_NAME,
 						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.ADDRESS_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
