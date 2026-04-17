@@ -1772,12 +1772,20 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		return zoom;
 	}
 
+	private float getMapRatioY() {
+		if (menu.isLandscapeLayout()) {
+			return displayPositionManager.getNavigationMapPosition() == MapPosition.BOTTOM ? 0.15f : 0.5f;
+		}
+		float ratioY = displayPositionManager.getMapRatio().y;
+		return 1f - ratioY;
+	}
+
 	private LatLon calculateCenterLatLon(LatLon latLon, int zoom, boolean updateOrigXY) {
 		double flat = latLon.getLatitude();
 		double flon = latLon.getLongitude();
 
 		RotatedTileBox cp = map.getRotatedTileBox();
-		cp.setCenterLocation(0.5f, displayPositionManager.getNavigationMapPosition() == MapPosition.BOTTOM ? 0.15f : 0.5f);
+		cp.setCenterLocation(0.5f, getMapRatioY());
 		cp.setLatLonCenter(flat, flon);
 		cp.setZoom(zoom);
 		flat = cp.getLatFromPixel(cp.getPixWidth() / 2f, cp.getPixHeight() / 2f);
@@ -2150,7 +2158,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		double markerLat = reqMarkerLocation.getLatitude();
 		double markerLon = reqMarkerLocation.getLongitude();
 		RotatedTileBox box = map.getRotatedTileBox();
-		box.setCenterLocation(0.5f, displayPositionManager.getNavigationMapPosition() == MapPosition.BOTTOM ? 0.15f : 0.5f);
+		box.setCenterLocation(0.5f, getMapRatioY());
 		box.setZoom(zoom);
 		boolean hasMapCenter = mapCenter != null;
 		int markerMapCenterX = 0;
