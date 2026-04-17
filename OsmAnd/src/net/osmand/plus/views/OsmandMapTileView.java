@@ -589,11 +589,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public int getViewHeight() {
-		if (view != null) {
-			return view.getHeight();
-		} else {
-			return 0;
-		}
+		return view != null ? view.getHeight() : 0;
 	}
 
 	@NonNull
@@ -1049,8 +1045,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public float getCarViewDensity() {
-		if (view instanceof CarSurfaceView) {
-			return ((CarSurfaceView) view).getDensity();
+		if (view instanceof CarSurfaceView surfaceView) {
+			return surfaceView.getDensity();
 		}
 		return 0;
 	}
@@ -1527,6 +1523,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	private void setLatLonImpl(double latitude, double longitude, float ratiox, float ratioy) {
+		if (view == null) {
+			return;
+		}
 		int cx = (int) (ratiox * view.getWidth());
 		int cy = (int) (ratioy * view.getHeight());
 		if (currentViewport.getCenterPixelY() == cy && currentViewport.getCenterPixelX() == cx) {
@@ -2424,7 +2423,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					}
 					// Scale and shift around the pinch center
 					mapRenderer.setViewportScale(relativeToStart, false);
-					mapRenderer.setViewportShift(multiTouchFirstX, view.getHeight() - multiTouchFirstY,  false);
+					mapRenderer.setViewportShift(multiTouchFirstX, getViewHeight() - multiTouchFirstY,  false);
 					// Re-center so the same initial tile stays under the finger
 					mapRenderer.setMapTarget(new PointI(multiTouchFirstX, multiTouchFirstY), initialFirstLocation);
 					float calcRotate = initialViewport.getRotate() + relAngle;
