@@ -1360,7 +1360,7 @@
     <string name="back_to_map">Terug naar kaart</string>
     <string name="share_note">Deel notitie</string>
     <string name="location_on_map">Locatie:\n Lat %1$s\n Lon %2$s</string>
-    <string name="notes">Audio/Video-notities</string>
+    <string name="notes">A/V-notities</string>
     <string name="online_map">Online kaart</string>
     <string name="roads_only">Alleen wegen</string>
     <string name="free">%1$s beschikbaar</string>
@@ -1456,7 +1456,7 @@
     <string name="shared_string_collapse">Inklappen</string>
     <string name="shared_string_my_location">Huidige Positie</string>
     <string name="shared_string_my_favorites">Favorieten</string>
-    <string name="shared_string_tracks">GPX-tracks</string>
+    <string name="shared_string_tracks">Tracks</string>
     <string name="shared_string_currently_recording_track">Momenteel geregistreerde track</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d wijziging(en) naar OSM versturen\?</string>
     <string name="confirmation_to_clear_history">Wil je de geschiedenis verwijderen?</string>
@@ -6477,4 +6477,5 @@
     <string name="shared_string_gpu">GPU</string>
     <string name="shared_string_allocated">Toegewezen</string>
     <string name="open_till_short">Tot</string>
+    <string name="open_from_short">Vanaf</string>
 </resources>

@@ -116,7 +116,7 @@ public class AmenitySearcher {
     public static final int AMENITY_SEARCH_RADIUS = 50;
     private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
     private final MapPoiTypes mapPoiTypes; // nullable
-    private PriorityQueue<Amenity> priorityQueue;
+    private Comparator<Amenity> comparator;
     private int priorityQueueLimit;
 
     public AmenitySearcher(MapPoiTypes mapPoiTypes) {
@@ -200,6 +200,7 @@ public class AmenitySearcher {
         if (isEmpty && additionalFilter != null) {
             filter = null;
         }
+        PriorityQueue<Amenity> priorityQueue = comparator != null ? new PriorityQueue<>(priorityQueueLimit, comparator) : null;
         if (!isEmpty || additionalFilter != null) {
             int top31 = MapUtils.get31TileNumberY(topLatitude);
             int left31 = MapUtils.get31TileNumberX(leftLongitude);
@@ -845,10 +846,8 @@ public class AmenitySearcher {
         return pointsLength > 0;
     }
 
-    public void setComparator(Comparator<Amenity> cmp, int searchResultsLimit) {
-        if (cmp != null) {
-            priorityQueue = new PriorityQueue<>(searchResultsLimit, cmp);
-            priorityQueueLimit = searchResultsLimit;
-        }
+    public void setComparator(Comparator<Amenity> comparator, int searchResultsLimit) {
+        this.comparator = comparator;
+        this.priorityQueueLimit = searchResultsLimit;
     }
 }
