@@ -29,13 +29,14 @@ import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.VehicleSpecificationPreference;
-import net.osmand.plus.settings.vehiclespecs.SpecificationType;
-import net.osmand.plus.settings.vehiclespecs.profiles.VehicleSpecs;
-import net.osmand.plus.settings.vehiclespecs.VehicleSpecsFactory;
+import net.osmand.shared.vehicle.SpecificationType;
+import net.osmand.shared.vehicle.profiles.VehicleSpecs;
+import net.osmand.shared.vehicle.VehicleSpecsFactory;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GeneralRouter;
 import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.routing.GeneralRouterProfile;
 
 import java.util.Map;
 

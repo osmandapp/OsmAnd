@@ -6,9 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.preference.DialogPreference;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.enums.MeasurementUnits;
-import net.osmand.plus.settings.vehiclespecs.SpecificationType;
-import net.osmand.plus.settings.vehiclespecs.profiles.VehicleSpecs;
+import net.osmand.shared.vehicle.SpecificationType;
+import net.osmand.shared.vehicle.profiles.VehicleSpecs;
+import net.osmand.shared.units.MeasurementUnit;
+import net.osmand.shared.util.SharedNumberFormatter;
 
 public class VehicleSpecificationPreference extends DialogPreference {
 
@@ -53,16 +54,16 @@ public class VehicleSpecificationPreference extends DialogPreference {
 
 	@Override
 	public CharSequence getSummary() {
-		float value = specifications.readSavedValue(this);
+		double value = specifications.readSavedValue(getValue(), getSpecificationType(), isUseMetricSystem());
 		String none = getString(R.string.shared_string_none);
-		if (value == 0.0f) {
+		if (value == 0.0) {
 			return none;
 		}
 		try {
-			MeasurementUnits units = specifications.getMeasurementUnits(specificationType, useMetricSystem);
+			MeasurementUnit<?> units = specifications.getMeasurementUnits(specificationType, useMetricSystem);
 			String pattern = getString(R.string.ltr_or_rtl_combine_via_space);
-			String valueStr = units.formatValue(value);
-			String symbolStr = getString(units.getSymbolResId());
+			String valueStr = SharedNumberFormatter.formatDecimal(value, 1);
+			String symbolStr = units.getSymbol();
 			return String.format(pattern, valueStr, symbolStr);
 		} catch (NumberFormatException e) {
 			return none;
