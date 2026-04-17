@@ -109,16 +109,10 @@ public class NetworkRouteSelector {
 	}
 
 	public static boolean containsUnclickableRouteTags(Map<String, String> tags) {
-		for (OsmRouteType routeType : OsmRouteType.getAllValues()) {
-			if (routeType.getRenderingPropertyAttr() == null) {
-				String routeName = "route_" + routeType.getName();
-				String routeNameWithSuffixFirst = routeName + "_1";
-				if (tags.containsKey(routeName) || tags.containsKey(routeNameWithSuffixFirst)) {
-					return true;
-				}
-			}
+		if (tags.containsKey("highway") && (tags.containsKey("route_road") || tags.containsKey("route_road_1"))) {
+			return true; // avoid road shields but allow click on bus/tram/train/railway
 		}
-		return ".".equals(tags.get("shield_stub_name"));
+		return ".".equals(tags.get("shield_stub_name")); // avoid double-click on empty shields (v1 only)
 	}
 
 	public static class RouteKey {
