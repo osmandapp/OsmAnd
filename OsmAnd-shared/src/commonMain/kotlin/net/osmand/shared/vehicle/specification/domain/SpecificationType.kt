@@ -1,4 +1,4 @@
-package net.osmand.shared.vehicle
+package net.osmand.shared.vehicle.specification.domain
 
 import kotlin.jvm.JvmStatic
 
