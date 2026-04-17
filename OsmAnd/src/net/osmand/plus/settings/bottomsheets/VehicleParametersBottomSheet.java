@@ -16,8 +16,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.shared.vehicle.SpecificationType;
-import net.osmand.shared.vehicle.profiles.VehicleSpecs;
+import net.osmand.shared.vehicle.specification.data.VehicleValueConverter;
+import net.osmand.shared.vehicle.specification.data.validator.SpecificationValidator;
+import net.osmand.shared.vehicle.specification.domain.SpecificationType;
+import net.osmand.shared.vehicle.specification.domain.profiles.VehicleSpecs;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.VehicleSpecificationPreference;
@@ -47,7 +49,7 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 	@SuppressLint("ClickableViewAccessibility")
 	protected BaseBottomSheetItem createBottomSheetItem(@NonNull OsmandApplication app, @NonNull View mainView) {
 		preference = (VehicleSpecificationPreference) getPreference();
-		boolean useMetricSystem = preference.isUseMetricSystem();
+		boolean useMetricSystem = preference.isMetric();
 		VehicleSpecs vehicleSpecs = preference.getSpecifications();
 		SpecificationType type = preference.getSpecificationType();
 		List<ChipItem> chips = collectChipItems(vehicleSpecs, type, useMetricSystem);
@@ -57,15 +59,13 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 		Drawable icon = getIcon(vehicleSpecs.getIconName(type, nightMode));
 		ivImage.setImageDrawable(icon);
 
-		String description = vehicleSpecs.getDescription(type);
+		String description = vehicleSpecs.getSummary(type);
 		tvDescription.setText(description);
 
 		MeasurementUnit<?> units = vehicleSpecs.getMeasurementUnits(type, useMetricSystem);
 		tvMetric.setText(units.getName());
 
-		currentValue = (float) vehicleSpecs.readSavedValue(
-				preference.getValue(), preference.getSpecificationType(),
-				preference.isUseMetricSystem());
+		currentValue = (float) VehicleValueConverter.readSavedValue(preference.getValue(), units);
 		etText.setText(formatInputValue(currentValue));
 		etText.clearFocus();
 		etText.setOnTouchListener((v, event) -> {
@@ -79,7 +79,8 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 			public void afterTextChanged(Editable s) {
 				currentValue = (float) Algorithms.parseDoubleSilently(s.toString(), 0.0f);
 				String error;
-				if (currentValue == 0.0f || (error = vehicleSpecs.checkValue(type, useMetricSystem, currentValue)).isEmpty()) {
+				SpecificationValidator validator = vehicleSpecs.getSpecification(type).getValidator();
+				if (currentValue == 0.0f || (error = validator.validate(currentValue, useMetricSystem)).isEmpty()) {
 					onCorrectInput();
 					updateChips();
 				} else {
@@ -144,11 +145,11 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 	protected void onRightBottomButtonClick() {
 		if (getTargetFragment() instanceof OnConfirmPreferenceChange callback) {
 			String preferenceId = getPreference().getKey();
-			VehicleSpecs vehicleSpecs = preference.getSpecifications();
-			double value = vehicleSpecs.prepareValueToSave(
-					preference.getSpecificationType(),
-					preference.isUseMetricSystem(),
-					currentValue);
+			SpecificationType type = preference.getSpecificationType();
+			VehicleSpecs specs = preference.getSpecifications();
+			MeasurementUnit<?> units = specs.getMeasurementUnits(type, preference.isMetric());
+
+			double value = VehicleValueConverter.prepareValueToSave(currentValue, units);
 			String valueStr = String.valueOf(value);
 			callback.onConfirmPreferenceChange(preferenceId, valueStr, ApplyQueryType.SNACK_BAR);
 		}

@@ -6,8 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.preference.DialogPreference;
 
 import net.osmand.plus.R;
-import net.osmand.shared.vehicle.SpecificationType;
-import net.osmand.shared.vehicle.profiles.VehicleSpecs;
+import net.osmand.shared.vehicle.specification.data.VehicleValueConverter;
+import net.osmand.shared.vehicle.specification.domain.SpecificationType;
+import net.osmand.shared.vehicle.specification.domain.profiles.VehicleSpecs;
 import net.osmand.shared.units.MeasurementUnit;
 import net.osmand.shared.util.SharedNumberFormatter;
 
@@ -15,7 +16,7 @@ public class VehicleSpecificationPreference extends DialogPreference {
 
 	private SpecificationType specificationType;
 	private VehicleSpecs specifications;
-	private boolean useMetricSystem;
+	private boolean isMetric;
 	private String defaultValue;
 
 	public VehicleSpecificationPreference(Context context) {
@@ -40,12 +41,12 @@ public class VehicleSpecificationPreference extends DialogPreference {
 		this.specificationType = specificationType;
 	}
 
-	public void setUseMetricSystem(boolean useMetricSystem) {
-		this.useMetricSystem = useMetricSystem;
+	public void setMetric(boolean metric) {
+		this.isMetric = metric;
 	}
 
-	public boolean isUseMetricSystem() {
-		return useMetricSystem;
+	public boolean isMetric() {
+		return isMetric;
 	}
 
 	public void setDefaultValue(String defaultValue) {
@@ -54,13 +55,13 @@ public class VehicleSpecificationPreference extends DialogPreference {
 
 	@Override
 	public CharSequence getSummary() {
-		double value = specifications.readSavedValue(getValue(), getSpecificationType(), isUseMetricSystem());
+		MeasurementUnit<?> units = specifications.getMeasurementUnits(specificationType, isMetric);
+		double value = VehicleValueConverter.readSavedValue(getValue(), units);
 		String none = getString(R.string.shared_string_none);
 		if (value == 0.0) {
 			return none;
 		}
 		try {
-			MeasurementUnit<?> units = specifications.getMeasurementUnits(specificationType, useMetricSystem);
 			String pattern = getString(R.string.ltr_or_rtl_combine_via_space);
 			String valueStr = SharedNumberFormatter.formatDecimal(value, 1);
 			String symbolStr = units.getSymbol();
