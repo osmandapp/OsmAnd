@@ -4717,7 +4717,7 @@
     <string name="delete_folder">Borrar carpeta</string>
     <string name="shared_string_new_track">Nueva traza</string>
     <string name="delete_track_folder_dialog_message">Quitarás la carpeta «%1$s» y sus %2$s trazas incluidas.</string>
-    <string name="map_widget_rssi">RSSI</string>
+    <string name="map_widget_rssi">Indicador de fuerza de la señal recibida (RSSI)</string>
     <string name="track_not_recorded">No grabado</string>
     <string name="show_all_tracks_on_the_map">Mostrar todas las trazas en el mapa</string>
     <string name="rssi_widget_desc">Muestra el nivel RSSI del dispositivo externo.</string>
@@ -6021,4 +6021,5 @@
     <string name="astro_sort_newest_first">Más reciente primero</string>
     <string name="astro_sort_oldest_first">Más viejo primero</string>
     <string name="shared_string_world_weather_map">Mapamundi del clima</string>
+    <string name="open_from_short">Desde</string>
 </resources>
