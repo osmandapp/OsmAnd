@@ -17,22 +17,17 @@ public class QueryToken {
     record Prefix(String key, int offset) {}
 
     class SuffixMask {
-        final TIntArrayList masks;
+        TIntArrayList masks;
         final Prefix prefix;
+        final boolean enabled;
 
         SuffixMask(Prefix prefix) {
             this.prefix = prefix;
-            if (query == null || prefix.key() == null) {
-                masks = null;
-            } else if (CollatorStringMatcher.cmatches(collator, prefix.key(), query, matcherMode)) {
-                masks = null;
-            } else {
-                masks = new TIntArrayList();
-            }
+            enabled = query != null && prefix.key() != null && !CollatorStringMatcher.cmatches(collator, prefix.key(), query, matcherMode);
         }
 
         void setDictionary(List<String> suffixDictionary) {
-            if (suffixDictionary == null || masks == null) {
+            if (!enabled || suffixDictionary == null) {
                 return;
             }
             int index = suffixDictionary.size() - 1;
@@ -46,6 +41,9 @@ public class QueryToken {
             String fullKey = prefix.key() + entry;
             if (CollatorStringMatcher.cmatches(collator, fullKey, query, matcherMode)) {
                 int wordIndex = index >> 5;
+                if (masks == null) {
+                    masks = new TIntArrayList();
+                }
                 while (masks.size() <= wordIndex) {
                     masks.add(0);
                 }
