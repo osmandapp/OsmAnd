@@ -14,7 +14,7 @@ public class QueryToken {
     final CollatorStringMatcher.StringMatcherMode matcherMode;
     final Map<String, Set<String>> suffixes = new HashMap<>();
     
-    record Prefix(String key, TIntArrayList offsets) {}
+    record Prefix(String key, int offset) {}
 
     class SuffixMask {
         final TIntArrayList masks;
@@ -78,7 +78,7 @@ public class QueryToken {
         for (Prefix candidate : sortedPrefixes) {
             boolean matchesQuery = !Algorithms.isEmpty(query) && candidate.key() != null
                     && CollatorStringMatcher.cmatches(collator, candidate.key(), query, CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH);
-            Prefix candidatePrefix = new Prefix(candidate.key(), candidate.offsets());
+            Prefix candidatePrefix = new Prefix(candidate.key(), candidate.offset());
             if (matchesQuery) {
                 strongestPrefixes.add(candidatePrefix);
                 continue;

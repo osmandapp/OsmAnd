@@ -2642,16 +2642,16 @@ req.setSearchStat(stat);
 
 	List<List<QueryToken.Prefix>> readIndexedStringTablePrefixes(Collator instance, List<String> queries)
 			throws IOException {
-		List<Map<String, TIntArrayList>> prefixesByQuery = new ArrayList<>(queries.size());
+		List<Map<String, Integer>> prefixesByQuery = new ArrayList<>(queries.size());
 		for (int i = 0; i < queries.size(); i++) {
 			prefixesByQuery.add(new LinkedHashMap<>());
 		}
 		readIndexedStringTablePrefixes(instance, queries, "", prefixesByQuery);
 		
 		List<List<QueryToken.Prefix>> result = new ArrayList<>(queries.size());
-		for (Map<String, TIntArrayList> prefixes : prefixesByQuery) {
+		for (Map<String, Integer> prefixes : prefixesByQuery) {
 			List<QueryToken.Prefix> tokenPrefixes = new ArrayList<>(prefixes.size());
-			for (Map.Entry<String, TIntArrayList> entry : prefixes.entrySet()) {
+			for (Map.Entry<String, Integer> entry : prefixes.entrySet()) {
 				tokenPrefixes.add(new QueryToken.Prefix(entry.getKey(), entry.getValue()));
 			}
 			result.add(tokenPrefixes);
@@ -2660,7 +2660,7 @@ req.setSearchStat(stat);
 	}
 
 	private void readIndexedStringTablePrefixes(Collator instance, List<String> queries, String prefix,
-			List<Map<String, TIntArrayList>> prefixesByQuery) throws IOException {
+			List<Map<String, Integer>> prefixesByQuery) throws IOException {
 		boolean[] matched = new boolean[queries.size()];
 		boolean[] matchedSubtables = new boolean[queries.size()];
 		String key = null;
@@ -2682,9 +2682,11 @@ req.setSearchStat(stat);
 				int val = (int) readInt();
 				for (int i = 0; i < queries.size(); i++) {
 					if (matched[i] && key != null) {
-						Map<String, TIntArrayList> tokenPrefixes = prefixesByQuery.get(i);
-                        TIntArrayList tokenOffsets = tokenPrefixes.computeIfAbsent(key, k -> new TIntArrayList());
-                        tokenOffsets.add(val);
+						Map<String, Integer> tokenPrefixes = prefixesByQuery.get(i);
+						Integer previousOffset = tokenPrefixes.putIfAbsent(key, val);
+						if (previousOffset != null && previousOffset != val) {
+							throw new IllegalStateException("Indexed string table contains multiple offsets for key: " + key);
+						}
 					}
 				}
 				break;

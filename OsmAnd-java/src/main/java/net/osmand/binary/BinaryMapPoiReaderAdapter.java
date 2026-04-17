@@ -462,21 +462,17 @@ public class BinaryMapPoiReaderAdapter {
 						TIntLongHashMap offsetMap = new TIntLongHashMap();
 						listOfSepOffsets.add(offsetMap);
 						for (QueryToken.Prefix prefix : tokenMatch.prefixes) {
-							TIntArrayList dataOffsets = prefix.offsets();
-							dataOffsets.sort();
-							for (int i = 0; i < dataOffsets.size(); i++) {
-								codedIS.seek(dataOffsets.get(i) + offset);
-								int len = codedIS.readRawVarint32();
-								long oldLim = codedIS.pushLimitLong((long) len);
-								readPoiNameIndexData(offsetMap, req, region, nameIndexCoordinates, tokenMatch, prefix);
-								codedIS.popLimit(oldLim);
-								if (req.isCancelled()) {
-									codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-									req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
-											BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_REFERENCES,
-											map.getFile().getName(), codedIS.getBytesCounter() - bytes);
-									return offsets;
-								}
+							codedIS.seek(prefix.offset() + offset);
+							int len = codedIS.readRawVarint32();
+							long oldLim = codedIS.pushLimitLong((long) len);
+							readPoiNameIndexData(offsetMap, req, region, nameIndexCoordinates, tokenMatch, prefix);
+							codedIS.popLimit(oldLim);
+							if (req.isCancelled()) {
+								codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+								req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+										BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_REFERENCES,
+										map.getFile().getName(), codedIS.getBytesCounter() - bytes);
+								return offsets;
 							}
 						}
 					}
