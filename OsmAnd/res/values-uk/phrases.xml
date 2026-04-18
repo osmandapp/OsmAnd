@@ -3763,7 +3763,7 @@
     <string name="poi_video_telephone">Відео</string>
     <string name="poi_sms_yes">Так;СМС</string>
     <string name="poi_sms_no">Ні</string>
-    <string name="poi_covered_booth">Стенд</string>
+    <string name="poi_covered_booth">Так</string>
     <string name="poi_booth">Вид стенда</string>
     <string name="poi_video_yes">Так;Відео</string>
     <string name="poi_video_no">Ні</string>
