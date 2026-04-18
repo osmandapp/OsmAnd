@@ -59,7 +59,7 @@
 						android:layout_marginStart="2dp"
 						android:gravity="center_vertical"
 						android:textColor="?android:textColorSecondary"
-						android:textSize="@dimen/default_sub_text_size"
+						android:textSize="@dimen/default_desc_text_size"
 						tools:text="100500 km" />
 
 					<TextView
@@ -149,7 +149,7 @@
 						android:scrollHorizontally="true"
 						android:singleLine="true"
 						android:textColor="?android:textColorSecondary"
-						android:textSize="@dimen/default_sub_text_size"
+						android:textSize="@dimen/default_desc_text_size"
 						tools:text="10-12 am" />
 				</LinearLayout>
 			</LinearLayout> <!--address open hours-->
@@ -198,7 +198,7 @@
 		android:ellipsize="end"
 		android:maxLines="2"
 		android:textColor="?android:textColorSecondary"
-		android:textSize="14sp"
+		android:textSize="@dimen/default_desc_text_size"
 		tools:text="Eiffel Tower - super tower" />
 
 	<include
