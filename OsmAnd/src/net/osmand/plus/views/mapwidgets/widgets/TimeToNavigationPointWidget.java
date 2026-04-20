@@ -25,14 +25,14 @@ import java.util.concurrent.TimeUnit;
 
 public class TimeToNavigationPointWidget extends SimpleWidget {
 
-	public static final long UPDATE_INTERVAL_SECONDS = 30;
+	public static final long UPDATE_INTERVAL_SECONDS = 15;
 
 	private final RoutingHelper routingHelper;
 	private final TimeToNavigationPointWidgetState widgetState;
 	private final OsmandPreference<Boolean> arrivalTimeOtherwiseTimeToGoPref;
 
 	private boolean cachedArrivalTimeOtherwiseTimeToGo;
-	private long cachedTargetSeconds = -1;
+	private long cachedMetric = -1;
 
 	public TimeToNavigationPointWidget(@NonNull MapActivity mapActivity, @NonNull TimeToNavigationPointWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, getWidgetType(widgetState.isIntermediate()), customId, widgetsPanel);
@@ -98,23 +98,21 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 
 		if (routingHelper.isRouteCalculated()) {
 			leftSeconds = widgetState.isIntermediate() ? routingHelper.getLeftTimeNextIntermediate() : routingHelper.getLeftTime();
-			long targetLeftSeconds = leftSeconds;
-			if (targetLeftSeconds != 0) {
-				targetLeftSeconds += System.currentTimeMillis() / 1000;
-			}
-			boolean updateIntervalPassed = Math.abs(targetLeftSeconds - cachedTargetSeconds) > UPDATE_INTERVAL_SECONDS;
-			if (leftSeconds != 0 && (updateIntervalPassed || timeModeUpdated)) {
-				cachedTargetSeconds = targetLeftSeconds;
-				if (arrivalTimeOtherwiseTimeToGoPref.get()) {
-					updateArrivalTime(leftSeconds);
-				} else {
-					updateTimeToGo(leftSeconds);
+			if (leftSeconds != 0) {
+				long currentMetric = cachedArrivalTimeOtherwiseTimeToGo ? leftSeconds + (System.currentTimeMillis() / 1000L) : leftSeconds;
+				if (timeModeUpdated || Math.abs(currentMetric - cachedMetric) >= UPDATE_INTERVAL_SECONDS) {
+					cachedMetric = currentMetric;
+					if (cachedArrivalTimeOtherwiseTimeToGo) {
+						updateArrivalTime(leftSeconds);
+					} else {
+						updateTimeToGo(leftSeconds);
+					}
 				}
 			}
 		}
 
-		if (leftSeconds == 0 && cachedTargetSeconds != 0) {
-			cachedTargetSeconds = 0;
+		if (leftSeconds == 0 && cachedMetric != 0) {
+			cachedMetric = 0;
 			setText(null, null);
 		}
 	}

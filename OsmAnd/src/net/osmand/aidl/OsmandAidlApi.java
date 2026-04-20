@@ -1946,7 +1946,7 @@ public class OsmandAidlApi {
 	public boolean isAppEnabled(@NonNull String pack) {
 		ConnectedApp connectedApp = connectedApps.get(pack);
 		if (connectedApp == null) {
-			connectedApp = new ConnectedApp(app, pack, true);
+			connectedApp = new ConnectedApp(app, pack, false);
 			connectedApps.put(pack, connectedApp);
 			saveConnectedApps();
 		}
@@ -2531,7 +2531,7 @@ public class OsmandAidlApi {
 	}
 
 	int copyFile(String fileName, byte[] filePartData, long startTime, boolean done) {
-		if (Algorithms.isEmpty(fileName) || filePartData == null) {
+		if (filePartData == null || hasUnsafeCopyPath(null, fileName)) {
 			return COPY_FILE_PARAMS_ERROR;
 		}
 		if (filePartData.length > COPY_FILE_PART_SIZE_LIMIT) {
@@ -2545,7 +2545,7 @@ public class OsmandAidlApi {
 	}
 
 	int copyFileV2(String destinationDir, String fileName, byte[] filePartData, long startTime, boolean done) {
-		if (Algorithms.isEmpty(fileName) || filePartData == null) {
+		if (filePartData == null || hasUnsafeCopyPath(destinationDir, fileName)) {
 			return COPY_FILE_PARAMS_ERROR;
 		}
 		if (filePartData.length > COPY_FILE_PART_SIZE_LIMIT) {
@@ -2628,6 +2628,14 @@ public class OsmandAidlApi {
 		}
 		copyFilesCache.remove(fileName);
 		return res;
+	}
+
+	private static boolean hasUnsafeCopyPath(@Nullable String destinationDir, @Nullable String fileName) {
+		if (Algorithms.isEmpty(fileName) || fileName.contains("/")) {
+			return true;
+		}
+		return Algorithms.isNotEmpty(destinationDir) && (destinationDir.contains("/../")
+				|| destinationDir.startsWith("../") || destinationDir.endsWith("/.."));
 	}
 
 	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GpxFile> {

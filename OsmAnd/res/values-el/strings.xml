@@ -5924,4 +5924,12 @@
     <string name="ar_mode_enabled">Λειτουργία AR Ενεργή</string>
     <string name="ar_mode_disabled">Λειτουργία AR Ανενεργή</string>
     <string name="sensors_not_available_for_ar">Οι αισθητήρες δεν είναι διαθέσιμοι για AR</string>
+    <string name="map_widget_memory_info">Πληροφορίες μνήμης</string>
+    <string name="memory_graphics_settings">Μνήμη γραφικών</string>
+    <string name="shared_string_heap">Σωρός</string>
+    <string name="shared_string_native">Εγγενής</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="memory_used_settings">Χρησιμοποιημένος Σωρός Java</string>
+    <string name="open_till_short">Έως</string>
+    <string name="open_from_short">Από</string>
 </resources>

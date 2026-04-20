@@ -3577,7 +3577,7 @@
     <string name="use_live_routing">Datumoj OsmAnd Live</string>
     <string name="complex_routing_descr">Du-faza difinado de kurso por aŭtomobila navigo.</string>
     <string name="use_native_pt">Indiĝena metodo de publik-transporta navigo</string>
-    <string name="use_native_pt_desc">Aktivigi (sekuran) metodon por kalkuli kursojn de publika transporto uzante programlingvon Java</string>
+    <string name="use_native_pt_desc">Aktivigi (sekuran) metodon por kalkuli kursojn de publika transporto uzante la programlingvon Ĝavo</string>
     <string name="perform_oauth_authorization_description">Ensaluti per OAuth por redakti la mapon OSM</string>
     <string name="perform_oauth_authorization">Ensaluti per OAuth</string>
     <string name="clear_osm_token">Forigi ĵetonon OpenStreetMap OAuth</string>
@@ -5202,7 +5202,7 @@
     <string name="auto_zoom">Aŭtomata pligrandigo</string>
     <string name="auto_zoom_smooth">Kontinua</string>
     <string name="auto_zoom_discrete">Diskreta</string>
-    <string name="java_safe">Java (malpli panea)</string>
+    <string name="java_safe">Ĝavo (malpli panea)</string>
     <string name="gpx_approximation">Alproksimigo al GPX</string>
     <string name="routing_type">Speco de kurs-difinado</string>
     <string name="routing_type_a_star_2_phase">A* 2-faza</string>
@@ -5221,8 +5221,8 @@
     <string name="fix_north_up_descr">Ne permesi al turni mapon per gestoj dum la map-orientiĝo “Nordo supre”</string>
     <string name="fix_north_up">Nordo ĉiam supre</string>
     <string name="gpx_approximation_cpp">Surbaze de kurso (C++)</string>
-    <string name="gpx_approximation_java">Surbaze de kurso (Java)</string>
-    <string name="gpx_approximation_geo_java">Surbaze de geometrio (Java) (rapide)</string>
+    <string name="gpx_approximation_java">Surbaze de kurso (Ĝavo)</string>
+    <string name="gpx_approximation_geo_java">Surbaze de geometrio (Ĝavo) (rapide)</string>
     <string name="use_nearby_roads_summary">Uzas malkonektan mapon por akiri proksimajn vojojn kaj iliajn datumojn pri altitudo. Geometrio de la spuro povos ŝanĝiĝi.</string>
     <string name="use_nearby_roads">Uzi proksimajn vojojn</string>
     <string name="use_terrain_maps">Uzi terenajn mapojn</string>
@@ -6131,4 +6131,17 @@
     <string name="astro_expand_your_universe_title">Etendi vian universon</string>
     <string name="astro_expand_your_universe_description">Akiru malkonektan aliron al etendita datumbazo de objektoj de profunda ĉielo, al artikolojn el Vikipedio kaj al reĝimo de pliigita realo.</string>
     <string name="shared_string_world_weather_map">Vetero: mapo de mondo</string>
+    <string name="open_till_short">ĝis</string>
+    <string name="map_widget_memory_info">Memoro</string>
+    <string name="map_widget_memory_info_desc">Montras informojn pri memoro: dinamika memorareo de Ĝavo, indiĝena asigno kaj grafika.</string>
+    <string name="memory_used_settings">Uzata dinamika memorareo de Ĝavo</string>
+    <string name="memory_allocated_settings">Asignita dinamika memorareo de Ĝavo</string>
+    <string name="memory_limit_settings">Maks. limigo de dinamika memorareo de Ĝavo</string>
+    <string name="memory_native_settings">Asignita indiĝena dinamika memorareo</string>
+    <string name="memory_graphics_settings">Grafika memoro</string>
+    <string name="shared_string_heap">Dinamika memorareo</string>
+    <string name="shared_string_native">Indiĝena</string>
+    <string name="shared_string_gpu">Grafika procesoro</string>
+    <string name="shared_string_allocated">Asignita</string>
+    <string name="open_from_short">ekde</string>
 </resources>

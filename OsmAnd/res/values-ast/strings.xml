@@ -4275,4 +4275,13 @@
     <string name="exit_pan_mode_descr">Press Select to exit the pan mode</string>
     <string name="icon_group_nautical">Nautical</string>
     <string name="continue_on_phone">Continue on Phone</string>
+    <string name="map_2d_mode_action">Mou 2D</string>
+    <string name="map_3d_mode_action">Mou 3D</string>
+    <string name="astro_search_constellation_with_code">Constelación (%1$s)</string>
+    <plurals name="astro_catalog_objects_count">
+        <item quantity="one">%d oxetu</item>
+        <item quantity="other">%d oxetos</item>
+    </plurals>
+    <string name="co2_mission">Emisión de CO₂</string>
+    <string name="kg">kg</string>
 </resources>

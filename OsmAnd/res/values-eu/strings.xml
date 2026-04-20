@@ -5980,4 +5980,12 @@
     <string name="rendering_attr_showSkiSlopes_description">Erakutsi sinplifikatutako eski-pistak</string>
     <string name="shared_string_price">Prezioa</string>
     <string name="hmd_promo_description">Funtzioetarako sarbide librea, besteak beste, mapak mugarik gabe deskargatzea, 3D erliebea eta abar. %1$s hilabetean</string>
+    <string name="map_widget_memory_info">Memoriaren informazioa</string>
+    <string name="map_widget_memory_info_desc">Java heap, jatorrizko esleipenak eta memoria grafikoa monitorizatzen ditu.</string>
+    <string name="memory_used_settings">Java Heap erabili du</string>
+    <string name="memory_allocated_settings">Esleitutako Java Heap</string>
+    <string name="memory_limit_settings">Gehienezko Java Heap muga</string>
+    <string name="memory_graphics_settings">Memoria grafikoa</string>
+    <string name="shared_string_native">Jatorrizkoa</string>
+    <string name="shared_string_gpu">GPU</string>
 </resources>

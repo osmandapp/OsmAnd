@@ -121,8 +121,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private int topPlacesLimit = TOP_PLACES_LIMIT;
 
 	private static final int SELECTED_MARKER_ID = -1;
-	private static final int IMAGE_ICON_BORDER_DP = 2;
-	private static final int IMAGE_ICON_SIZE_DP = 45;
+	private static final int IMAGE_ICON_BORDER_DP = 4;
+	private static final int IMAGE_ICON_SIZE_DP = 48;
 	private static final int IMAGE_ICON_OUTER_COLOR = 0xffffffff;
 	private static Bitmap imageCircleBitmap;
 	private NetworkImageLoader imageLoader;
@@ -348,6 +348,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				topPlacesBitmaps.keySet().retainAll(places.keySet());
 			}
 			topPlacesList = topPlaces.values();
+			LOG.debug("updateTopPlaces: Updated " + topPlacesList.size() + " top places for the current view");
 		}
 		if (topPlacesList != null) {
 			if (!topPlacesList.isEmpty()) {
@@ -375,6 +376,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			return false;
 		});
 
+		LOG.debug("fetchImages: Preparing to fetch images for " + places.size() + " top places");
 		for (Amenity place : places) {
 			Long placeId = place.getId();
 			String url = place.getWikiIconUrl();
@@ -416,6 +418,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private void cancelLoadingImages() {
+		LOG.debug("cancelLoadingImages: Cancelling all top places image load tasks");
 		if (loadingImages != null) {
 			loadingImages.values().forEach(LoadingImage::cancel);
 			loadingImages = null;
@@ -459,6 +462,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				break;
 			}
 		}
+		LOG.debug("obtainTopPlacesToDisplay: Filtered " + res.size() + " top places to display out of " + places.size() + " total places");
 		return res;
 	}
 
@@ -471,6 +475,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 		List<Amenity> places = topPlaces != null ? new ArrayList<>(topPlaces.values()) : null;
 		if (places == null) {
+			LOG.debug("updateTopPlacesCollection: clearing top places markers collection (places list is null)");
 			clearMapMarkersCollections();
 			return;
 		}
@@ -509,6 +514,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				mapMarkersCollection.removeMarker(existingMapPoints.get(i));
 			}
 		}
+		LOG.debug("updateTopPlacesCollection: Displaying " + mapPlaces.size() + " top places on map");
 		for (MapTopPlace place : mapPlaces) {
 			if (place.alreadyExists) {
 				continue;
@@ -1172,6 +1178,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		contextMenu.show(topPlace.getLocation(), QuickSearchWikiItem.getPointDescription(app, amenity), object);
 	}
 
+	@NonNull
 	private Bitmap createImageBitmap(Bitmap bitmap, boolean isSelected) {
 		OsmandApplication app = getApplication();
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
@@ -1185,7 +1192,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		canvas.drawBitmap(circle, 0f, 0f, bitmapPaint);
 		int cx = circle.getWidth() / 2;
 		int cy = circle.getHeight() / 2;
-		int radius = (Math.min(cx, cy) - borderWidth * 2);
+		int radius = Math.min(cx, cy) - borderWidth;
 		canvas.save();
 //		canvas.clipRect(0, 0, circle.getWidth(), circle.getHeight());
 		Path circularPath = new Path();
@@ -1217,7 +1224,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private int getBigIconSize() {
-		return (int) (AndroidUtils.dpToPxAuto(getContext(), IMAGE_ICON_SIZE_DP) * getTextScale() / app.getOsmandMap().getCarDensityScaleCoef());
+		int totalSize = IMAGE_ICON_SIZE_DP + IMAGE_ICON_BORDER_DP * 2;
+		return (int) (AndroidUtils.dpToPxAuto(getContext(), totalSize) * getTextScale() / app.getOsmandMap().getCarDensityScaleCoef());
 	}
 
 	@Override

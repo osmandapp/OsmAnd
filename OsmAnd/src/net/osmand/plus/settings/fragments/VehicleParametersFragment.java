@@ -29,13 +29,14 @@ import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.VehicleSpecificationPreference;
-import net.osmand.plus.settings.vehiclespecs.SpecificationType;
-import net.osmand.plus.settings.vehiclespecs.profiles.VehicleSpecs;
-import net.osmand.plus.settings.vehiclespecs.VehicleSpecsFactory;
+import net.osmand.shared.vehicle.specification.domain.SpecificationType;
+import net.osmand.shared.vehicle.specification.domain.profiles.VehicleSpecs;
+import net.osmand.shared.vehicle.specification.data.VehicleSpecsFactory;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GeneralRouter;
 import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.routing.GeneralRouterProfile;
 
 import java.util.Map;
 
@@ -174,7 +175,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		uiPreference.setSpecificationType(type);
 		uiPreference.setSpecifications(vehicle);
 		uiPreference.setDefaultValue(defValue);
-		uiPreference.setUseMetricSystem(shouldUseMetricSystem(type, appMode));
+		uiPreference.setMetric(shouldUseMetricSystem(type, appMode));
 		uiPreference.setTitle(title);
 		uiPreference.setSummary(description);
 		uiPreference.setIcon(getPreferenceIcon(parameterId));

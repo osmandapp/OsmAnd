@@ -2938,7 +2938,7 @@
     <string name="special_routing_type">Roteamento especial</string>
     <string name="third_party_routing_type">Roteamento de terceiros</string>
     <string name="application_profiles_descr">Perfis que serão visíveis no aplicativo.</string>
-    <string name="application_profiles">Perfis de aplicação</string>
+    <string name="application_profiles">Perfis do aplicativo</string>
     <string name="quick_action_need_to_add_item_to_list">Adicionar ao menos um item à lista nas configurações de \'Ação rápida\'</string>
     <string name="routing_attr_piste_type_downhill_name">Esqui alpino e downhill</string>
     <string name="routing_attr_piste_type_downhill_description">Pistas de esqui alpino ou de downhill e acesso a teleféricos.</string>
@@ -3577,7 +3577,7 @@
     <string name="shared_string_night_map">Mapa noturno</string>
     <string name="turn_screen_on_power_button_disabled">Desativado. Requer \'manter a tela ligada\' em \'tempo limite após a ativação\'.</string>
     <string name="add_online_source">Adicionar fonte online</string>
-    <string name="clear_tiles_warning">A aplicação dessas alterações limpará os dados em cache dessa origem de bloco</string>
+    <string name="clear_tiles_warning">O aplicativo dessas alterações limpará os dados em cache dessa origem de bloco</string>
     <string name="vessel_height_warning_link">Definir altura da embarcação</string>
     <string name="vessel_height_warning">Defina uma altura da embarcação para evitar pontes baixas. Se a ponte for móvel, a altura quando aberta é usada.</string>
     <string name="vessel_height_limit_description">Defina a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
@@ -6509,4 +6509,15 @@
     <string name="astro_search_sets_at">↘ Define %1$s</string>
     <string name="astro_search_magnitude_short">mag %.1f</string>
     <string name="release_5_3">• Adicionado suporte a edifícios em 3D\n\n • Visualização esférica do mapa\n\n • Plug-in de astronomia com mapa noturno e banco de dados de estrelas\n\n • Novos modos de cor para o velocímetro: tolerância e excesso de velocidade\n\n • Layouts de widget separados para paisagem e retrato\n\n • Widgets de registro de viagem: velocidade de deslocamento e velocidade média\n\n • Widget de tensão do adaptador para métricas do veículo\n\n • Dados de métricas do veículo no Analisador de Trajeto\n\n • Organização automática de trilhas por ano, duração, atividade e mais\n\n • Editor de paleta para visualização de terreno e trilha\n\n • Algoritmos de pesquisa aprimorados e interface do usuário renovada\n\n • Perfis de elevação corrigidos para rotas\n\n • Favoritos: novas opções de classificação e interface do usuário renovada\n\n • Compartilhar link para qualquer Ponto de Interesse (POI)\n\n • Visualização de waypoints sem fechar a lista\n\n • Parâmetro de largura da bicicleta para evitar estradas estreitas\n\n • Descrições de fotos da Wikimedia</string>
+    <string name="map_widget_memory_info">Informação de memória</string>
+    <string name="map_widget_memory_info_desc">Monitora o heap Java, as alocações nativas e a memória gráfica.</string>
+    <string name="memory_allocated_settings">Heap alocado em Java</string>
+    <string name="memory_native_settings">Alocado na pilha nativa</string>
+    <string name="memory_graphics_settings">Memória gráfica</string>
+    <string name="shared_string_heap">Pilha</string>
+    <string name="shared_string_native">Nativo</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="shared_string_allocated">Alocado</string>
+    <string name="open_till_short">Até</string>
+    <string name="open_from_short">De</string>
 </resources>

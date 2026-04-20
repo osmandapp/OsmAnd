@@ -133,7 +133,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 					SpannableString openHours = MenuController.getSpannableOpeningHours(
 							rs.getInfo(),
 							ContextCompat.getColor(app, colorOpen),
-							ContextCompat.getColor(app, colorClosed));
+							ContextCompat.getColor(app, colorClosed), true);
 					int colorId = rs.isOpenedForTime(calendar) ? colorOpen : colorClosed;
 					timeLayout.setVisibility(View.VISIBLE);
 
@@ -201,7 +201,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 					SpannableString openHours = MenuController.getSpannableOpeningHours(
 							openHourInfo,
 							ContextCompat.getColor(app, colorOpen),
-							ContextCompat.getColor(app, colorClosed));
+							ContextCompat.getColor(app, colorClosed), true);
 					int colorId = rs.isOpenedForTime(calendar) ? colorOpen : colorClosed;
 					if (Algorithms.isEmpty(openHours)) {
 						String openHoursStr = rs.toLocalString();

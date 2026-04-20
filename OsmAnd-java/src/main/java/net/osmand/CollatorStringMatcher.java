@@ -2,6 +2,7 @@ package net.osmand;
 
 import net.osmand.util.Algorithms;
 import net.osmand.util.ArabicNormalizer;
+import net.osmand.util.UnicodeDiacritics;
 
 import java.util.Locale;
 
@@ -212,7 +213,7 @@ public class CollatorStringMatcher implements StringMatcher {
 		while ((i = fullText.indexOf('ß')) != -1) {
 			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i + 1);
 		}
-		return fullText;
+		return UnicodeDiacritics.getInstance().stripDiacritics(fullText);
 	}
 
 	private static boolean isSpace(char c){

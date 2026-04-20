@@ -157,12 +157,24 @@ public class Algorithms {
 		return c == null || c.size() == 0;
 	}
 
+	public static boolean isNotEmpty(Collection<?> c) {
+		return !isEmpty(c);
+	}
+
 	public static boolean isEmpty(Map<?, ?> map) {
 		return map == null || map.size() == 0;
 	}
 
+	public static boolean isNotEmpty(Map<?, ?> map) {
+		return !isEmpty(map);
+	}
+
 	public static <T> boolean isEmpty(T[] array) {
 		return array == null || array.length == 0;
+	}
+
+	public static <T> boolean isNotEmpty(T[] array) {
+		return !isEmpty(array);
 	}
 
 	public static String emptyIfNull(String s) {
@@ -175,6 +187,10 @@ public class Algorithms {
 
 	public static boolean isEmpty(CharSequence s) {
 		return s == null || s.length() == 0;
+	}
+
+	public static boolean isNotEmpty(CharSequence s) {
+		return !isEmpty(s);
 	}
 
 	public static boolean isBlank(String s) {
