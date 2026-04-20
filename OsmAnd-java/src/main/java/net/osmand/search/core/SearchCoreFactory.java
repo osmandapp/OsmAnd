@@ -18,6 +18,7 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
+import net.osmand.DedupResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -778,8 +779,9 @@ public class SearchCoreFactory {
 					}
 				};
 			}
-			ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
+			DedupResultMatcher<Amenity> matcher = new DedupResultMatcher<Amenity>() {
 				int limit = 0;
+				boolean isSkipped = false;
 
 				@Override
 				public boolean publish(Amenity object) {
@@ -791,6 +793,7 @@ public class SearchCoreFactory {
 					}
 					String poiID = object.getType().getKeyName() + "_" + object.getId();
 					if (ids.contains(poiID)) {
+						isSkipped = true;
 						return false;
 					}
 					SearchResult sr = new SearchResult(phrase);
@@ -838,6 +841,11 @@ public class SearchCoreFactory {
 				@Override
 				public boolean isCancelled() {
 					return resultMatcher.isCancelled() && (limit < LIMIT);
+				}
+				
+				@Override
+				public boolean isSkippedDuplication() {
+					return isSkipped;
 				}
 			};
 

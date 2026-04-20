@@ -30,6 +30,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import net.osmand.*;
 import org.apache.commons.logging.Log;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -48,15 +49,7 @@ import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
-import net.osmand.Collator;
-import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.IndexConstants;
-import net.osmand.Location;
-import net.osmand.OsmAndCollator;
-import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
@@ -1902,6 +1895,10 @@ public class BinaryMapIndexReader {
 			this.bottom = bottom;
 		}
 
+		public boolean isSkippedDuplication() {
+			return resultMatcher != null && ((DedupResultMatcher<?>)resultMatcher).isSkippedDuplication();
+		}
+		
 		public boolean publish(T obj) {
 			if (resultMatcher == null || resultMatcher.publish(obj)) {
 				if (priorityQueue != null && obj != null) {
