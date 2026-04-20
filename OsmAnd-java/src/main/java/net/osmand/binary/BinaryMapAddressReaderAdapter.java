@@ -790,21 +790,10 @@ public class BinaryMapAddressReaderAdapter {
 								continue;
 							}
 							codedIS.seek(offset);
-							if (metrics != null) {
-								metrics.beginReadPoiData(codedIS);
-							}
 							long len = codedIS.readRawVarint32();
 							long old = codedIS.pushLimitLong((long) len);
-							long decodeStartNs = metrics == null ? 0 : System.nanoTime();
 							City obj = readCityHeader(req, null, offset, reg.attributeTagsTable);
-							if (metrics != null) {
-								metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
-								metrics.objectsLoaded++;
-							}
 							codedIS.popLimit(old);
-							if (metrics != null) {
-								metrics.endReadPoiData(codedIS);
-							}
 							streetGroups.put(offset, obj);
 						}
 						for (int j = 0; j < list.size(); j++) {
@@ -819,9 +808,8 @@ public class BinaryMapAddressReaderAdapter {
 							City obj = streetGroups.get(offset);
 							if (obj != null) {
 								codedIS.seek(offset);
-								if (metrics != null) {
-									metrics.beginReadPoiData(codedIS);
-								}
+								if (metrics != null) metrics.beginLoadObject(codedIS);
+								
 								long len = codedIS.readRawVarint32();
 								long old = codedIS.pushLimitLong((long) len);
 								LatLon l = obj.getLocation();
@@ -846,19 +834,13 @@ public class BinaryMapAddressReaderAdapter {
 										}
 									}
 								}
-								if (metrics != null) {
-									metrics.matcherTimeNs += System.nanoTime() - matcherStartNs;
-								}
+								if (metrics != null) metrics.matcherTimeNs += System.nanoTime() - matcherStartNs;
 								if (matches) {
 									req.publish(s);
-									if (metrics != null) {
-										metrics.matchedObjectsLoaded++;
-									}
+									if (metrics != null) metrics.matchedObjectsLoaded++;
 								}
 								codedIS.popLimit(old);
-								if (metrics != null) {
-									metrics.endReadPoiData(codedIS);
-								}
+								if (metrics != null) metrics.endLoadObject(codedIS);
 							}
 						}
 					} else {
@@ -870,9 +852,8 @@ public class BinaryMapAddressReaderAdapter {
 								continue;
 							}
 							codedIS.seek(offset);
-							if (metrics != null) {
-								metrics.beginReadPoiData(codedIS);
-							}
+							if (metrics != null) metrics.beginLoadObject(codedIS);
+							
 							long len = codedIS.readRawVarint32();
 							long old = codedIS.pushLimitLong((long) len);
 							long decodeStartNs = metrics == null ? 0 : System.nanoTime();
@@ -885,14 +866,10 @@ public class BinaryMapAddressReaderAdapter {
 							if (obj != null && !published.contains(offset)) {
 								req.publish(obj);
 								published.add(offset);
-								if (metrics != null) {
-									metrics.matchedObjectsLoaded++;
-								}
+								if (metrics != null) metrics.matchedObjectsLoaded++;
 							}
 							codedIS.popLimit(old);
-							if (metrics != null) {
-								metrics.endReadPoiData(codedIS);
-							}
+							if (metrics != null) metrics.endLoadObject(codedIS);
 						}
 					}
 				}

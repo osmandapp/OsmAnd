@@ -42,12 +42,12 @@ public class BinaryMapIndexReaderStats {
 		long maxObjectsPerBlock;
 		private long objectsLoadedBefore, payloadBytesParsedBefore;
 		
-		void beginReadPoiData(CodedInputStream stream) {
+		void beginLoadObject(CodedInputStream stream) {
 			objectsLoadedBefore = objectsLoaded;
 			payloadBytesParsedBefore = stream.getTotalBytesRead();
 		}
 
-		void endReadPoiData(CodedInputStream stream) {
+		void endLoadObject(CodedInputStream stream) {
 			blocksLoaded++;
 
 			long objectsInBlock = objectsLoaded - objectsLoadedBefore;
@@ -219,7 +219,7 @@ public class BinaryMapIndexReaderStats {
 				}
 			}
 			List<SubStatByAPI> result = new ArrayList<>(grouped.values());
-			result.sort((a, b) -> Long.compare(b.time, a.time));
+			result.sort((a, b) -> Long.compare(b.bytes, a.bytes));
 			return result;
 		}
 		
@@ -348,14 +348,14 @@ public class BinaryMapIndexReaderStats {
 						continue;
 					}
 					List<BinaryMapIndexReaderSubApiName> subApis = new ArrayList<>(bySub.keySet());
-					subApis.sort((a, b) -> Long.compare(bySub.get(b).time, bySub.get(a).time));
+					subApis.sort((a, b) -> Long.compare(bySub.get(b).bytes, bySub.get(a).bytes));
 					for (BinaryMapIndexReaderSubApiName subApi : subApis) {
 						if (subApi == null) {
 							continue;
 						}
 						w2 = Math.max(w2, subApi.name().length());
 						List<SubStatByAPI> detail = rows.getOrDefault(api, Collections.emptyMap()).getOrDefault(subApi, Collections.emptyList());
-						detail.sort((a, b) -> Long.compare(b.time, a.time));
+						detail.sort((a, b) -> Long.compare(b.bytes, a.bytes));
 					}
 				}
 				List<SubStatByAPI> orderedObfTotals = new ArrayList<>(totalsByApiObf.values());
@@ -364,13 +364,13 @@ public class BinaryMapIndexReaderStats {
 					if (compareApi != 0) {
 						return compareApi;
 					}
-					int compareTime = Long.compare(b.time, a.time);
-					if (compareTime != 0) {
-						return compareTime;
-					}
 					int compareLoaded = Long.compare(b.bytes, a.bytes);
 					if (compareLoaded != 0) {
 						return compareLoaded;
+					}
+					int compareTime = Long.compare(b.time, a.time);
+					if (compareTime != 0) {
+						return compareTime;
 					}
 					return a.mapName.compareTo(b.mapName);
 				});
@@ -415,7 +415,7 @@ public class BinaryMapIndexReaderStats {
 						continue;
 					}
 					List<BinaryMapIndexReaderSubApiName> subApis = new ArrayList<>(bySub.keySet());
-					subApis.sort((a, b) -> Long.compare(bySub.get(b).time, bySub.get(a).time));
+					subApis.sort((a, b) -> Long.compare(bySub.get(b).bytes, bySub.get(a).bytes));
 					for (BinaryMapIndexReaderSubApiName subApi : subApis) {
 						if (subApi == null) {
 							continue;
@@ -440,7 +440,7 @@ public class BinaryMapIndexReaderStats {
 								.append(padLeft(String.format(Locale.US, "% d", subTotal.maxObjectsPerBlock), w15));
 
 						List<SubStatByAPI> detail = rows.getOrDefault(api, Collections.emptyMap()).getOrDefault(subApi, Collections.emptyList());
-						detail.sort((a, b) -> Long.compare(b.time, a.time));
+						detail.sort((a, b) -> Long.compare(b.bytes, a.bytes));
 						for (int i = 0; i < detail.size() && i < topKObf; i++) {
 							SubStatByAPI st = detail.get(i);
 							if (st == null) {

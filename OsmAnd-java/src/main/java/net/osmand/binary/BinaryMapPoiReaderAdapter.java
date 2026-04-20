@@ -395,13 +395,13 @@ public class BinaryMapPoiReaderAdapter {
 //				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) +
 //						"ms. Found " + offKeys.length + " subtrees");
 				for (int j = 0; j < offKeys.length; j++) {
-					if (metrics != null) metrics.beginReadPoiData(codedIS);
+					if (metrics != null) metrics.beginLoadObject(codedIS);
 					codedIS.seek(offKeys[j] + indexOffset);
 					long len = readInt();
 					long oldLim = codedIS.pushLimitLong((long) len);
 					readPoiData(matcher, req, region, metrics);
 					codedIS.popLimit(oldLim);
-					if (metrics != null) metrics.endReadPoiData(codedIS);
+					if (metrics != null) metrics.endLoadObject(codedIS);
 					
 					if (req.isCancelled() || req.limitExceeded()) {
 						req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
