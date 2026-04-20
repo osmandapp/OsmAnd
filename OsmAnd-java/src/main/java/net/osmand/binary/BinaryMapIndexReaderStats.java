@@ -175,7 +175,7 @@ public class BinaryMapIndexReaderStats {
 	
 	public static class SearchStat {
 		private static final boolean TO_DETAILED_STRING = false;
-		private static final int DEFAULT_TOP_K_OBF = 2;
+		private static final int DEFAULT_TOP_K_OBF = 3;
 		long lastReq = 0, subSize = 0;
 		public long totalTime = 0;
 		public long totalBytes = 0;
@@ -331,7 +331,7 @@ public class BinaryMapIndexReaderStats {
 		                                  Map<BinaryMapIndexReaderApiName, SubStatByAPI> totalsByApi,
 		                                  List<BinaryMapIndexReaderApiName> apis,
 		                                  List<String> obfNames,
-		                                  Map<String, SubStatByAPI> totalsByObf,
+		                                  Map<String, SubStatByAPI> totalsByApiObf,
 		                                  int subApiCount) {
 
 			private String renderDetailedString(Map<String, WordSearchStat>  wordStats, long totalTime, long totalBytes, int topKObf) {
@@ -358,8 +358,12 @@ public class BinaryMapIndexReaderStats {
 						detail.sort((a, b) -> Long.compare(b.time, a.time));
 					}
 				}
-				List<SubStatByAPI> orderedObfTotals = new ArrayList<>(totalsByObf.values());
+				List<SubStatByAPI> orderedObfTotals = new ArrayList<>(totalsByApiObf.values());
 				orderedObfTotals.sort((a, b) -> {
+					int compareApi = compareApiForMetricsSummary(a.api, b.api);
+					if (compareApi != 0) {
+						return compareApi;
+					}
 					int compareTime = Long.compare(b.time, a.time);
 					if (compareTime != 0) {
 						return compareTime;
@@ -466,12 +470,17 @@ public class BinaryMapIndexReaderStats {
 						.append(", OBFs=").append(obfNames.size())
 						.append(", Word entries=").append(wordStats == null ? 0 : wordStats.size());
 				sb.append("\nOBF count: ").append(obfNames.size());
-				sb.append("\nname, Time (s), Payload (KB), Blocks, Objects, Matched");
+				sb.append("\ncategory, name, Time (s), Payload (KB), Blocks, Objects, Matched");
 				for (SubStatByAPI obfTotal : orderedObfTotals) {
-					if (obfTotal == null || obfTotal.mapName == null || obfTotal.mapName.isEmpty()) {
+					if (obfTotal == null || obfTotal.api == null || obfTotal.mapName == null || obfTotal.mapName.isEmpty()) {
+						continue;
+					}
+					if (obfTotal.api != BinaryMapIndexReaderApiName.POI_BY_NAME && obfTotal.api != BinaryMapIndexReaderApiName.ADDRESS_BY_NAME) {
 						continue;
 					}
 					sb.append("\n")
+							.append(obfTotal.api.name())
+							.append(", ")
 							.append(obfTotal.mapName)
 							.append(", ").append(String.format(Locale.US, "%.2f", obfTotal.time / 1e9))
 							.append(",").append(String.format(Locale.US, "% d", obfTotal.payloadBytesParsed / 1024))
@@ -480,6 +489,20 @@ public class BinaryMapIndexReaderStats {
 							.append(", ").append(String.format(Locale.US, "%d", obfTotal.matchedObjects));
 				}
 				return sb.toString();
+			}
+
+			private static int compareApiForMetricsSummary(BinaryMapIndexReaderApiName left, BinaryMapIndexReaderApiName right) {
+				return Integer.compare(getApiMetricsSummaryOrder(left), getApiMetricsSummaryOrder(right));
+			}
+
+			private static int getApiMetricsSummaryOrder(BinaryMapIndexReaderApiName api) {
+				if (api == BinaryMapIndexReaderApiName.POI_BY_NAME) {
+					return 0;
+				}
+				if (api == BinaryMapIndexReaderApiName.ADDRESS_BY_NAME) {
+					return 1;
+				}
+				return 2;
 			}
 		}
 
@@ -492,7 +515,7 @@ public class BinaryMapIndexReaderStats {
 			Map<BinaryMapIndexReaderApiName, Map<BinaryMapIndexReaderSubApiName, List<SubStatByAPI>>> rows = new HashMap<>();
 			Map<BinaryMapIndexReaderApiName, Map<BinaryMapIndexReaderSubApiName, SubStatByAPI>> totalsByApiSubApi = new HashMap<>();
 			Map<BinaryMapIndexReaderApiName, SubStatByAPI> totalsByApi = new HashMap<>();
-			Map<String, SubStatByAPI> totalsByObf = new HashMap<>();
+			Map<String, SubStatByAPI> totalsByApiObf = new HashMap<>();
 			Set<String> obfNames = new TreeSet<>();
 			Set<BinaryMapIndexReaderSubApiName> usedSubApis = new HashSet<>();
 			for (StatByAPI apiStats : byApis.values()) {
@@ -515,7 +538,8 @@ public class BinaryMapIndexReaderStats {
 						usedSubApis.add(st.subApi);
 						if (st.mapName != null && !st.mapName.isEmpty()) {
 							obfNames.add(st.mapName);
-							SubStatByAPI obfTotal = totalsByObf.computeIfAbsent(st.mapName,
+							String apiObfKey = st.api.name() + '|' + st.mapName;
+							SubStatByAPI obfTotal = totalsByApiObf.computeIfAbsent(apiObfKey,
 									k -> new SubStatByAPI(st.api, st.subApi, st.mapName));
 							obfTotal.time += st.time;
 							obfTotal.count += st.count;
@@ -567,7 +591,7 @@ public class BinaryMapIndexReaderStats {
 			List<BinaryMapIndexReaderApiName> apis = new ArrayList<>(totalsByApi.keySet());
 			apis.sort((a, b) -> Long.compare(totalsByApi.get(b).time, totalsByApi.get(a).time));
 			return new DetailedStringData(c1, c2, c3, c4, c5, c6, c9, c10, c11, c12, c13, c14, c15,
-					rows, totalsByApiSubApi, totalsByApi, apis, new ArrayList<>(obfNames), totalsByObf, usedSubApis.size());
+					rows, totalsByApiSubApi, totalsByApi, apis, new ArrayList<>(obfNames), totalsByApiObf, usedSubApis.size());
 		}
 
 		private static String padRight(String value, int width) {
