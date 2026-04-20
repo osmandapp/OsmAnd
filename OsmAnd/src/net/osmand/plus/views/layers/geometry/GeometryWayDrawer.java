@@ -160,6 +160,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	                               @Nullable QListFColorARGB colorizationMapping,
 	                               @Nullable QListFColorARGB outlineColorizationMapping,
 	                               @ColorizationType int colorizationScheme, @NonNull List<DrawPathData31> pathsData) {
+		log.info("[GPX_DEBUG] buildVectorLine: Pushing NEW line to OpenGL. lineId=" + lineId);
 		long startBuildVectorLineTime = System.currentTimeMillis();
 		QVectorPointI points = new QVectorPointI();
 		QListFloat heights = new QListFloat();
@@ -323,6 +324,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 	protected void updateVectorLine(@NonNull VectorLinesCollection collection,
 									int lineId, float startingDistance) {
+		log.info("[GPX_DEBUG] updateVectorLine: Updating existing line distance. lineId=" + lineId);
 		QListVectorLine lines = collection.getLines();
 		for (int i = 0; i < lines.size(); i++) {
 			VectorLine line = lines.get(i);

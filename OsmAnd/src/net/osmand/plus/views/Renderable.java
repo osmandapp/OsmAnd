@@ -10,6 +10,7 @@ import android.graphics.Shader;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.QuadRect;
@@ -27,6 +28,8 @@ import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -39,6 +42,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Renderable {
+
+    private static final Log log = PlatformUtil.getLog(Renderable.class);
 
     private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
     private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
@@ -199,6 +204,16 @@ public class Renderable {
             return changed;
         }
 
+        public boolean updateBounds() {
+            if (points.size() != pointSize) {
+                int prevSize = pointSize;
+                pointSize = points.size();
+                GpxUtilities.INSTANCE.updateBounds(trackBounds, points, prevSize);
+                return true;
+            }
+            return false;
+        }
+
         public void drawGeometry(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
                                  @NonNull QuadRect quadRect, int trackColor, float trackWidth,
                                  @Nullable float[] dashPattern) {
@@ -209,6 +224,7 @@ public class Renderable {
                                  @NonNull QuadRect quadRect, int trackColor, float trackWidth,
                                  @Nullable float[] dashPattern, boolean drawArrows,
                                  @Nullable Track3DStyle track3DStyle, boolean recreateSegments) {
+            log.info("[GPX_DEBUG] drawGeometry called. recreateSegments=" + recreateSegments + ", points empty? " + Algorithms.isEmpty(getPointsForDrawing()));
             if (geometryWay != null) {
                 List<WptPt> points = coloringType.isRouteInfoAttribute() ? this.points : getPointsForDrawing();
                 if (!Algorithms.isEmpty(points)) {
@@ -439,15 +455,12 @@ public class Renderable {
 
         public CurrentTrack(List<WptPt> pt) {
             super(pt, 0);
+            log.info("[GPX_DEBUG] New renderer instantiated!");
         }
 
         @Override
         public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
-            if (points.size() != pointSize) {
-                int prevSize = pointSize;
-                pointSize = points.size();
-                GpxUtilities.INSTANCE.updateBounds(trackBounds, points, prevSize);
-            }
+            updateBounds();
             drawSingleSegment(zoom, p, canvas, tileBox);
         }
 

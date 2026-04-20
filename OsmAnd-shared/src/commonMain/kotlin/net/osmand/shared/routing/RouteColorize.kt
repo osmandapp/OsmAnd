@@ -58,6 +58,7 @@ class RouteColorize {
 		} else {
 			this.palette = palette
 		}
+		LOG.info("[GPX_DEBUG] Constructor A. fixedValues=$fixedValues")
 	}
 
 	/**
@@ -134,6 +135,7 @@ class RouteColorize {
 			}
 			this.palette = ColorPalette(originalPalette, minValue, maxValue, type.bipolar)
 		}
+		LOG.info("[GPX_DEBUG] Constructor B. Full calculation performed. Latitudes size: ${latitudes.size}")
 	}
 
 	private fun isValidPalette(palette: ColorPalette?): Boolean {
@@ -142,6 +144,7 @@ class RouteColorize {
 
 	val result: List<RouteColorizationPoint>
 		get() {
+			LOG.info("[GPX_DEBUG] result requested. Generating ${latitudes.size} points.")
 			val result = mutableListOf<RouteColorizationPoint>()
 			for (i in latitudes.indices) {
 				result.add(

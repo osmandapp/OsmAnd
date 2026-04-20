@@ -120,6 +120,7 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 		this.styleMap = styleMap == null ? Collections.emptyMap() : styleMap;
 		this.mapDensity = tb.getMapDensity();
 		this.zooms = new TreeMap<>();
+		log.info("[GPX_DEBUG] updateWay called. Triggering clearPathCache.");
 		clearPathCache();
 	}
 
@@ -132,6 +133,7 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 		this.styleMap = styleMap == null ? Collections.emptyMap() : styleMap;
 		this.mapDensity = tb.getMapDensity();
 		this.zooms = new TreeMap<>();
+		log.info("[GPX_DEBUG] updateWay (locations list) called. Triggering clearPathCache.");
 		clearPathCache();
 	}
 
@@ -144,6 +146,7 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 	}
 
 	private void clearPathCache() {
+		log.info("[GPX_DEBUG] clearPathCache: OpenGL Cache CLEARED! pathsData31Cache size was " + pathsData31Cache.size());
 		pathsData31Cache.clear();
 	}
 
@@ -205,10 +208,16 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 		MapRendererView mapRenderer = getMapRenderer();
 		boolean hasMapRenderer = mapRenderer != null;
 		if (hasMapRenderer && !pathsData31Cache.isEmpty()) {
+			log.info("[GPX_DEBUG] drawSegments: Appending to cache via cutStartOfCachedPath.");
 			cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, lastProjection);
 			return;
 		}
 
+		if (!hasMapRenderer) {
+			log.info("[GPX_DEBUG] drawSegments: Rebuilding full line geometry loop (No Cache / No Map Renderer).");
+		} else {
+			log.info("[GPX_DEBUG] drawSegments: Rebuilding full line geometry loop (Cache EMPTY).");
+		}
 		PathGeometryZoom geometryZoom = !hasMapRenderer ? getGeometryZoom(tb) : null;
 		TByteArrayList simplification = geometryZoom != null ? geometryZoom.getSimplifyPoints() : null;
 		List<Double> odistances = geometryZoom != null ? geometryZoom.getDistances() : null;
@@ -555,6 +564,7 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 					mapRenderer.removeSymbolsProvider(vectorLinesCollection);
 				}
 				collection = new VectorLinesCollection(newLine3DState);
+				log.info("[GPX_DEBUG] drawPathLine: new VectorLinesCollection created");
 				collection.setPriority(linesPriority);
 			} else {
 				collection = vectorLinesCollection;

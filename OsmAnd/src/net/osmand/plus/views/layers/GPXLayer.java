@@ -1284,6 +1284,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					if (renderedSegment.getRenderer() instanceof RenderableSegment renderableSegment) {
 						oldSegments.add(renderedSegment);
 					} else {
+						log.info("[GPX_DEBUG] Identity Mismatch! Resetting symbol providers for segment: " + renderedSegment);
 						resetSymbolProviders(renderedSegment);
 					}
 					it.remove();
@@ -1330,22 +1331,42 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			boolean updated = updatePaints(color, width, selectedGpxFile.isRoutePoints(), currentTrack, settings, tileBox)
 					|| mapActivityInvalidated || invalidated || newTsRenderer || !renderedSegments.contains(ts);
 			if (ts.getRenderer() instanceof RenderableSegment renderableSegment) {
-				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
+				boolean trackParamsChanged = renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
+				updated |= trackParamsChanged;
 				if (hasMapRenderer || coloringType.isRouteInfoAttribute()) {
 					boolean showArrows = appearanceHelper.isShowArrowsForTrack(gpxFile, gpxItem, dirItem, selected);
-					if (coloringType.isRouteInfoAttribute() || currentTrack) {
-						updated |= renderableSegment.setRoute(getCachedRouteSegments(cachedTrack, segmentIdx));
+					boolean routeChanged = false;
+					if (coloringType.isRouteInfoAttribute()) {
+						routeChanged = renderableSegment.setRoute(getCachedRouteSegments(cachedTrack, segmentIdx));
+						updated |= routeChanged;
 					}
-					updated |= renderableSegment.setDrawArrows(showArrows);
-					updated |= renderableSegment.setTrack3DStyle(track3DStyle);
+					boolean boundsChanged = false;
+					if (currentTrack) {
+						boundsChanged = renderableSegment.updateBounds();
+						updated |= boundsChanged;
+					}
+					boolean arrowsChanged = renderableSegment.setDrawArrows(showArrows);
+					updated |= arrowsChanged;
+
+					boolean styleChanged = renderableSegment.setTrack3DStyle(track3DStyle);
+					updated |= styleChanged;
+
+					log.info("[GPX_DEBUG] RenderableSegment flags: trackParams=" + trackParamsChanged
+							+ ", route=" + routeChanged
+							+ ", bounds=" + boundsChanged
+							+ ", arrows=" + arrowsChanged
+							+ ", style=" + styleChanged
+							+ " -> TOTAL updated=" + updated);
+
 					if (updated || !hasMapRenderer) {
 						float[] intervals = null;
 						PathEffect pathEffect = paint.getPathEffect();
 						if (pathEffect instanceof OsmandDashPathEffect) {
 							intervals = ((OsmandDashPathEffect) pathEffect).getIntervals();
 						}
+						boolean recreateSegments = invalidated || boundsChanged;
 						renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect,
-								paint.getColor(), paint.getStrokeWidth(), intervals, showArrows, track3DStyle, invalidated);
+								paint.getColor(), paint.getStrokeWidth(), intervals, showArrows, track3DStyle, recreateSegments);
 						renderedSegments.add(ts);
 					}
 				} else {
@@ -1403,7 +1424,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (routeSegments == null) {
 			loadRouteSegments(cachedTrack, nonEmptySegmentIdx);
 		}
-		return routeSegments != null ? routeSegments : new ArrayList<>();
+		if (routeSegments == null) {
+			log.info("[GPX_DEBUG] getCachedRouteSegments: Cache is NULL! Returning a Collections.emptyList()");
+			return Collections.emptyList();
+		}
+		return routeSegments;
 	}
 
 	private void loadRouteSegments(@NonNull CachedTrack cachedTrack, int nonEmptySegmentIdx) {
