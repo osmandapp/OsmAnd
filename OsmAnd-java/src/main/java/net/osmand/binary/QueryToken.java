@@ -17,7 +17,7 @@ public class QueryToken {
     record Prefix(String key, int offset) {}
 
     class SuffixMask {
-        TIntArrayList masks = null;
+        TIntArrayList masks;
         final Prefix prefix;
         final boolean enabled;
 
@@ -30,6 +30,10 @@ public class QueryToken {
             if (!enabled || suffixDictionary == null) {
                 return;
             }
+            if (masks == null) {
+                masks = new TIntArrayList();
+            }
+            
             int index = suffixDictionary.size() - 1;
             if (index < 0) {
                 return;
@@ -41,9 +45,6 @@ public class QueryToken {
             String fullKey = prefix.key() + entry;
             if (CollatorStringMatcher.cmatches(collator, fullKey, query, matcherMode)) {
                 int wordIndex = index >> 5;
-                if (masks == null) {
-                    masks = new TIntArrayList();
-                }
                 while (masks.size() <= wordIndex) {
                     masks.add(0);
                 }
