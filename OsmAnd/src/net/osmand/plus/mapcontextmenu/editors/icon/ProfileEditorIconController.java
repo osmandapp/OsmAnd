@@ -2,6 +2,8 @@ package net.osmand.plus.mapcontextmenu.editors.icon;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
@@ -37,13 +39,14 @@ public class ProfileEditorIconController extends EditorIconController {
 
 	@Override
 	protected void sortCategories() {
+		Collator collator = OsmAndCollator.primaryCollator();
 		categories.sort((c1, c2) -> {
 			int order1 = getCategoryOrder(c1.getKey());
 			int order2 = getCategoryOrder(c2.getKey());
 			if (order1 != order2) {
 				return Integer.compare(order1, order2);
 			}
-			return c1.getTranslation().compareTo(c2.getTranslation());
+			return collator.compare(c1.getTranslation(), c2.getTranslation());
 		});
 	}
 
