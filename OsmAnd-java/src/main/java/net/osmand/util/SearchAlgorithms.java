@@ -20,9 +20,14 @@ public class SearchAlgorithms {
         int prev = -1;
         Set<String> namesToAdd = new HashSet<>();
 
-        for (int i = 0; i <= name.length(); i++) {
-            boolean tokenCharacter = i != name.length()
-                    && (isTokenCharacter(name, i, prev != -1) || name.charAt(i) == '\'');
+        for (int i = 0; i <= name.length(); ) {
+            boolean tokenCharacter = false;
+            int currentCodePointCharCount = 1;
+            if (i != name.length()) {
+                int codePoint = name.codePointAt(i);
+                currentCodePointCharCount = Character.charCount(codePoint);
+                tokenCharacter = isTokenCharacter(name, i, prev != -1) || codePoint == '\'';
+            }
             if (!tokenCharacter) {
                 if (prev != -1) {
                     String substr = name.substring(prev, i);
@@ -34,18 +39,21 @@ public class SearchAlgorithms {
                     prev = i;
                 }
             }
+            i += currentCodePointCharCount;
         }
         return namesToAdd;
     }
 
     private static boolean isTokenCharacter(String value, int index, boolean tokenAlreadyStarted) {
-        char character = value.charAt(index);
+        int character = value.codePointAt(index);
         if (Character.isLetter(character) || Character.isDigit(character)) {
             return true;
         }
+        int nextIndex = index + Character.charCount(character);
+        int previousIndex = index > 0 ? value.offsetByCodePoints(index, -1) : -1;
         boolean isHyphenNearNumber = character == '-'
-                && ((index + 1 < value.length() && Character.isDigit(value.charAt(index + 1)))
-                || (index - 1 >= 0 && Character.isDigit(value.charAt(index - 1))));
+                && ((nextIndex < value.length() && Character.isDigit(value.codePointAt(nextIndex)))
+                || (previousIndex >= 0 && Character.isDigit(value.codePointAt(previousIndex))));
         if (isHyphenNearNumber) {
             return true;
         }

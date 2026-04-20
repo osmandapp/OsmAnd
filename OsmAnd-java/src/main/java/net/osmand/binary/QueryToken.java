@@ -17,7 +17,7 @@ public class QueryToken {
     record Prefix(String key, int offset) {}
 
     class SuffixMask {
-        TIntArrayList masks;
+        TIntArrayList masks = null;
         final Prefix prefix;
         final boolean enabled;
 
