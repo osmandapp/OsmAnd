@@ -4,4 +4,10 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Connexión</string>
     <string name="rendering_attr_piste_type_connection_name">Connexión</string>
     <string name="external_device_details_connection">Connexión</string>
+    <plurals name="astro_catalog_objects_count">
+        <item quantity="one">%d obchecto</item>
+        <item quantity="other">%d obchectos</item>
+    </plurals>
+    <string name="astro_search_constellation_with_code">Constelación (%1$s)</string>
+    <string name="lang_mk">Macedonyo</string>
 </resources>

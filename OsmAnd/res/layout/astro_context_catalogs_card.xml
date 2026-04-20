@@ -21,7 +21,7 @@
 			style="@style/MaterialAlertDialog.Material3.Title.Text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/astro_catalogs"
+			android:text="@string/astro_designations"
 			android:textColor="?android:attr/textColorPrimary"
 			android:textSize="16sp"
 			android:textStyle="bold" />

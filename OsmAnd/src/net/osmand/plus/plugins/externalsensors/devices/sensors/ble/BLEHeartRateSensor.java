@@ -183,6 +183,15 @@ public class BLEHeartRateSensor extends BLEAbstractSensor {
 		} else {
 			format = BluetoothGattCharacteristic.FORMAT_UINT8;
 		}
+		int contactStatus = (flag >> 1) & 0x03;
+		// According to spec (as AI said):
+		// 0 / 1 — unsupported or not detected
+		// 2 — no contact (Sensor Contact is NOT detected)
+		// 3 — contact present (Sensor Contact is detected)
+		if (contactStatus == 2) {
+			lastTimeDifferentValue = 0;
+		}
+
 		int heartRate = characteristic.getIntValue(format, 1);
 
 		HeartRateData data = new HeartRateData(System.currentTimeMillis(), heartRate);

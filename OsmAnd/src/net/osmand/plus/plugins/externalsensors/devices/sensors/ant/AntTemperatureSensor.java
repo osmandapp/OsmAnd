@@ -13,6 +13,7 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
+import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -135,5 +136,10 @@ public class AntTemperatureSensor extends AntAbstractSensor<AntPlusEnvironmentPc
 		if (computedTemperature > 0) {
 			json.put(SENSOR_TAG_TEMPERATURE_A, computedTemperature);
 		}
+	}
+
+	@Override
+	public boolean hasActualData() {
+		return !Algorithms.isEmpty(getLastSensorDataList());
 	}
 }

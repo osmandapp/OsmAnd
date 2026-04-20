@@ -223,7 +223,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 				app.localeHelper.language
 			)
 
-		setTitle(obj.localizedName ?: obj.name)
+		setTitle(obj.niceName())
 		headerType.text = buildHeaderTypeText(obj)
 		updateBottomTabIcons(obj.type)
 
@@ -642,8 +642,8 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			requireMapActivity(),
 			nightMode,
 			galleryController,
-			onDescriptionRead = { uri ->
-				openUri(uri)
+			onDescriptionRead = { item ->
+				openDescriptionCard(item)
 			},
 			onGalleryToggle = { wid ->
 				onGalleryToggle(wid)
@@ -735,7 +735,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		bottomTabs.addTab(
 			bottomTabs.newTab()
 				.setText(R.string.astronomy_schedule)
-				.setIcon(R.drawable.ic_action_calendar_month)
+				.setIcon(R.drawable.ic_action_date_start)
 		)
 
 		tabSelectedListener?.let { bottomTabs.removeOnTabSelectedListener(it) }
@@ -1305,6 +1305,25 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			startActivity(intent)
 		} catch (_: Exception) {
 		}
+	}
+
+	private fun openDescriptionCard(item: AstroDescriptionCardItem) {
+		if (!app.settings.isInternetConnectionAvailable && item.hasOfflineArticle && showOfflineArticle()) {
+			return
+		}
+		item.readMoreUri?.let(::openUri)
+	}
+
+	private fun showOfflineArticle(): Boolean {
+		val currentArticle = article ?: return false
+		if (!currentArticle.hasOfflineContent()) {
+			return false
+		}
+		return AstroArticleDialogFragment.showInstance(
+			parentFragmentManager,
+			currentArticle.wikidata,
+			currentArticle.lang
+		)
 	}
 
 	private fun currentKnowledgeCardState(): AstroKnowledgeCardState? {

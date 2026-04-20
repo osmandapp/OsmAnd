@@ -1798,6 +1798,7 @@ public class OsmandSettings {
 	}
 
 	public final ListStringPreference LAST_USED_FAV_ICONS = (ListStringPreference) new ListStringPreference(this, "last_used_favorite_icons", null, ",").makeShared().makeGlobal();
+	public final ListStringPreference LAST_USED_PROFILE_ICONS = (ListStringPreference) new ListStringPreference(this, "last_used_profile_icons", null, ",").makeShared().makeGlobal();
 
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference(this, "save_track_interval", 5000).makeProfile();
 

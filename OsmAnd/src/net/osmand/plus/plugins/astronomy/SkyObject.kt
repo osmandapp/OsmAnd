@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.astronomy
 
 import io.github.cosinekitty.astronomy.Body
+import net.osmand.util.Algorithms
 
 /**
  * Unified data class for any object rendered on the sky.
@@ -46,6 +47,12 @@ open class SkyObject(
 	// Cache helper
 	open var lastUpdateTime: Double = -1.0
 ) {
+	companion object {
+		private const val HD_CATALOG_WID = "Q111130"
+		private const val HIC_CATALOG_WID = "Q28914996"
+		private const val HIP_CATALOG_WID = "Q537199"
+	}
+
 	enum class Type(val titleKey: String) {
 		STAR("astro_type_star"),
 		GALAXY("astro_type_galaxy"),
@@ -73,7 +80,71 @@ open class SkyObject(
 		return id.hashCode()
 	}
 
-	fun niceName() = localizedName ?: name
+	fun niceName() = getDisplayName()
+
+	fun hasMissingPrimaryName(): Boolean = getPrimaryDisplayName() == null
+
+	fun getDisplayName(): String {
+		val primaryName = getPrimaryDisplayName()
+		if (primaryName != null) {
+			return primaryName
+		}
+
+		val catalogName = getCatalogFallbackName()
+		if (catalogName != null) {
+			return catalogName
+		}
+
+		val hipName = getHipFallbackName()
+		if (hipName != null) {
+			return hipName
+		}
+
+		if (!Algorithms.isEmpty(wid)) {
+			return wid
+		}
+
+		return name
+	}
+
+	private fun getPrimaryDisplayName(): String? {
+		val localized = localizedName
+		if (!Algorithms.isEmpty(localized)) {
+			return localized
+		}
+
+		if (!Algorithms.isEmpty(name) && !name.equals(wid, ignoreCase = true)) {
+			return name
+		}
+
+		return null
+	}
+
+	private fun getCatalogFallbackName(): String? {
+		var catalogId = catalogs.firstOrNull { it.wid == HD_CATALOG_WID }?.catalogId
+		if (!Algorithms.isEmpty(catalogId)) {
+			return catalogId
+		}
+
+		catalogId = catalogs.firstOrNull { it.wid == HIC_CATALOG_WID }?.catalogId
+		if (!Algorithms.isEmpty(catalogId)) {
+			return catalogId
+		}
+
+		catalogId = catalogs.firstOrNull { it.wid == HIP_CATALOG_WID }?.catalogId
+		if (!Algorithms.isEmpty(catalogId)) {
+			return catalogId
+		}
+
+		return null
+	}
+
+	private fun getHipFallbackName(): String? {
+		if (hip > 0) {
+			return "HIP $hip"
+		}
+		return null
+	}
 
 	override fun toString(): String {
 		return "SkyObject(id='$id', name='$name', type=$type)"

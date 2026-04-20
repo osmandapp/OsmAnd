@@ -4849,4 +4849,5 @@
     <string name="poi_wine_region">Wijnstreek</string>
     <string name="poi_massage_shiatsu">Shiatsu</string>
     <string name="poi_playground_structure">Speeltoestel</string>
+    <string name="poi_local_ref">Lokale referentie</string>
 </resources>

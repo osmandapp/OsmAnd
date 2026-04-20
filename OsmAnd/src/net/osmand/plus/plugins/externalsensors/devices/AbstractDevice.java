@@ -174,7 +174,7 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 
 	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		for (T sensor : sensors) {
-			if (sensor.getSupportedWidgetDataFieldTypes().contains(widgetDataFieldType)) {
+			if (sensor.getSupportedWidgetDataFieldTypes().contains(widgetDataFieldType) && sensor.hasActualData()) {
 				sensor.writeSensorDataToJson(json, widgetDataFieldType);
 			}
 		}

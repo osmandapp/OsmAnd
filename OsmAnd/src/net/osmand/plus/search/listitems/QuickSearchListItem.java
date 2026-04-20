@@ -702,7 +702,7 @@ public class QuickSearchListItem {
 			if (Algorithms.isEmpty(title) && Algorithms.isEmpty(altName)) {
 				return getSpannableName();
 			} else if (Algorithms.isEmpty(title)) {
-				return title;
+				return altName;
 			} else {
 				return addPartInParentheses(app, title, altName, nightMode);
 			}
@@ -728,7 +728,7 @@ public class QuickSearchListItem {
 
 	@NonNull
 	private static CharSequence addPartInParentheses(Context ctx, @NonNull CharSequence mainPart, String partToAdd, boolean nightMode) {
-		if (Algorithms.isEmpty(partToAdd)) {
+		if (Algorithms.isEmpty(partToAdd) || Algorithms.stringsEqual(mainPart.toString(), partToAdd)) {
 			return mainPart;
 		} else {
 			int textColor = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;

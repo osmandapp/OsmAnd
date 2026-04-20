@@ -122,7 +122,6 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 		String wikiImageUrl = item.getImage();
 		if (image.getTag() != wikiImageUrl) {
 			image.setTag(wikiImageUrl);
-			AndroidUiHelper.updateVisibility(imageViewContainer, wikiImageUrl != null);
 			if (wikiImageUrl != null) {
 				RequestCreator creator = Picasso.get().load(wikiImageUrl);
 				creator.into(image, new Callback() {

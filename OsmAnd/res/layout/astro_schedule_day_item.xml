@@ -15,14 +15,15 @@
 		android:minHeight="55dp"
 		android:gravity="center_vertical"
 		android:orientation="horizontal"
-		android:paddingHorizontal="16dp">
+		android:paddingStart="16dp"
+		android:paddingEnd="4dp">
 
 		<TextView
 			android:id="@+id/schedule_day_label"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_marginEnd="6dp"
-			android:layout_weight="0.9"
+			android:layout_weight="1"
 			android:ellipsize="end"
 			android:maxLines="1"
 			android:textColor="?android:attr/textColorPrimary"
@@ -64,7 +65,7 @@
 			android:layout_height="24dp"
 			android:layout_marginStart="10dp"
 			android:layout_marginEnd="10dp"
-			android:layout_weight="1.4" />
+			android:layout_weight="1.6" />
 
 		<LinearLayout
 			android:id="@+id/schedule_set_block_container"

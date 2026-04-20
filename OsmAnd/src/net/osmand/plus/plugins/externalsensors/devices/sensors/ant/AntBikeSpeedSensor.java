@@ -25,11 +25,13 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 
 public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistancePcc> {
 
 
 	private BikeSpeedData lastBikeSpeedData;
+	private BigDecimal lastData;
 
 	public static class BikeSpeedData implements SensorData {
 
@@ -122,6 +124,10 @@ public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistan
 			pcc.subscribeCalculatedSpeedEvent(new CalculatedSpeedReceiver(BigDecimal.valueOf(getBikeSpeedDistanceDevice().getWheelCircumference())) {
 				@Override
 				public void onNewCalculatedSpeed(long estTimestamp, EnumSet<EventFlag> enumSet, BigDecimal calculatedSpeed) {
+					if (!Objects.equals(lastData, calculatedSpeed)) {
+						lastTimeDifferentValue = System.currentTimeMillis();
+						lastData = calculatedSpeed;
+					}
 					lastBikeSpeedData = new BikeSpeedData(estTimestamp, calculatedSpeed.doubleValue());//m/s
 					getDevice().fireSensorDataEvent(AntBikeSpeedSensor.this, lastBikeSpeedData);
 				}

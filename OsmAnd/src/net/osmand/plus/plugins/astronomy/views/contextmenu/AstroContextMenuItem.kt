@@ -68,7 +68,8 @@ data class AstroKnowledgeCardItem(
 data class AstroDescriptionCardItem(
 	val description: String,
 	val readMoreUri: Uri? = null,
-	val linkType: AstroDescriptionLinkType? = null
+	val linkType: AstroDescriptionLinkType? = null,
+	val hasOfflineArticle: Boolean = false
 ) : AstroContextMenuItem {
 	override val key: AstroContextCardKey = AstroContextCardKey.DESCRIPTION
 }

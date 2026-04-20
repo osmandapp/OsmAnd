@@ -20,12 +20,12 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.router.GeneralRouter;
-import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.MissingMapsCalculator;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
+import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 

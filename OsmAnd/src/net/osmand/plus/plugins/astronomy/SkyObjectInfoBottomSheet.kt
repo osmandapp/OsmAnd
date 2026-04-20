@@ -86,7 +86,7 @@ class SkyObjectInfoFragment : Fragment() {
 			return
 		}
 
-		sheetTitle.text = obj.localizedName ?: obj.name
+		sheetTitle.text = obj.niceName()
 		val az = String.format(Locale.getDefault(), "%.1f°", obj.azimuth)
 		val alt = String.format(Locale.getDefault(), "%.1f°", obj.altitude)
 		val coordsText = "${getString(R.string.shared_string_azimuth)}: $az  •  ${getString(R.string.altitude)}: $alt"
