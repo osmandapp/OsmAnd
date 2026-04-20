@@ -794,6 +794,15 @@ public class RouteResultPreparation {
 				}
 			}
 			printAdditionalPointInfo(res);
+			if (res.getTurnType() != null) {
+				System.out.println("-----");
+				System.out.println(res.getTurnType() + " angle - " + res.getTurnType().getTurnAngle());
+				RoadSplitStructure str = res.getTurnType().getRoadSplitStructure();
+				if (str != null) {
+					System.out.println(res.getTurnType().getRoadSplitStructure());
+				}
+				System.out.println("-----");
+			}
 		}
 		if (serializer != null) {
 			try {
@@ -1414,7 +1423,7 @@ public class RouteResultPreparation {
 
 	private TurnType attachKeepLeftInfoAndLanes(boolean leftSide, RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, boolean twiceRoadPresent) {
 		List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
-		if(attachedRoutes == null || attachedRoutes.isEmpty()) {
+		if (attachedRoutes == null || attachedRoutes.isEmpty()) {
 			return null;
 		}
 		String turnLanesPrevSegm = twiceRoadPresent ? null : getTurnLanesString(prevSegm);
@@ -1432,7 +1441,6 @@ public class RouteResultPreparation {
 		// turn lanes don't exist
 		if (rs.keepLeft || rs.keepRight) {
 			return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
-			
 		}
 		return null;
 	}
@@ -1463,6 +1471,7 @@ public class RouteResultPreparation {
 		if (activeBeginIndex == -1 || activeEndIndex == -1 || activeBeginIndex > activeEndIndex) {
 			// something went wrong
 			return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
+			
 		}
 		boolean leftOrRightKeep = (rs.keepLeft && !rs.keepRight) || (!rs.keepLeft && rs.keepRight);
 		if (leftOrRightKeep) {
@@ -1775,6 +1784,7 @@ public class RouteResultPreparation {
 		// Set properties for the TurnType object
 		t.setSkipToSpeak(!rs.speak);
 		t.setLanes(lanes);
+		t.setRoadSplitStructure(rs);
 		return t;
 	}
 
@@ -2478,6 +2488,7 @@ public class RouteResultPreparation {
 			}
 		}
 		TurnType t = TurnType.valueOf(tp, leftSide);
+		t.setRoadSplitStructure(oldTurnType.getRoadSplitStructure());
 		// mute when most lanes have a straight/slight direction
 		if (cnt >= 3 && TurnType.isSlightTurn(t.getValue())) {
 			t.setSkipToSpeak(true);
