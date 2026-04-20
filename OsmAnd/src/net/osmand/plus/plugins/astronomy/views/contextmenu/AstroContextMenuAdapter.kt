@@ -1,6 +1,4 @@
 package net.osmand.plus.plugins.astronomy.views.contextmenu
-
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -21,7 +19,7 @@ class AstroContextMenuAdapter(
 	private val mapActivity: MapActivity,
 	private val nightMode: Boolean,
 	private val galleryController: GalleryController?,
-	private val onDescriptionRead: (Uri) -> Unit,
+	private val onDescriptionRead: (AstroDescriptionCardItem) -> Unit,
 	private val onGalleryToggle: (String) -> Unit,
 	private val onUpdateImage: () -> Unit,
 	private val onKnowledgeCardAction: () -> Unit,

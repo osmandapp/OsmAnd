@@ -1,11 +1,10 @@
 package net.osmand.plus.plugins.astronomy.views.contextmenu
 
 import android.net.Uri
+import androidx.core.net.toUri
 import net.osmand.plus.plugins.astronomy.AstroArticle
 import net.osmand.plus.plugins.astronomy.SkyObject
 import net.osmand.plus.wikipedia.WikiAlgorithms
-import org.json.JSONObject
-import androidx.core.net.toUri
 
 class AstroContextCardFactory {
 
@@ -34,7 +33,7 @@ class AstroContextCardFactory {
 			add(
 				AstroGalleryCardItem(
 					wid = skyObject.wid,
-					showAllTitle = skyObject.localizedName ?: skyObject.name,
+					showAllTitle = skyObject.niceName(),
 					state = uiState.galleryState
 				)
 			)
@@ -48,25 +47,26 @@ class AstroContextCardFactory {
 		astroArticle: AstroArticle?
 	): AstroDescriptionCardItem? {
 		val description = astroArticle?.description?.trim().orEmpty()
-		val wikipediaUri = astroArticle?.summaryJson
-			?.let(::extractWikiPageUrl)
-			?.let(Uri::parse)
+		val hasOfflineArticle = astroArticle?.hasOfflineContent() == true
+		val wikipediaUri = astroArticle?.getOnlineArticleUrl()?.let(Uri::parse)
+		val hasWikipediaArticle = hasOfflineArticle || wikipediaUri != null
 		val wikidataUri = obj.wid
-			.takeIf { it.isNotBlank() && shouldOpenWikidata(obj, wikipediaUri) }
+			.takeIf { it.isNotBlank() && shouldOpenWikidata(obj, hasWikipediaArticle) }
 			?.let(::buildWikidataUri)
 		val readMoreUri = wikipediaUri ?: wikidataUri
 		val linkType = when {
-			wikipediaUri != null -> AstroDescriptionLinkType.WIKIPEDIA
+			hasWikipediaArticle -> AstroDescriptionLinkType.WIKIPEDIA
 			wikidataUri != null -> AstroDescriptionLinkType.WIKIDATA
 			else -> null
 		}
-		if (description.isBlank() && readMoreUri == null) {
+		if (description.isBlank() && readMoreUri == null && !hasOfflineArticle) {
 			return null
 		}
 		return AstroDescriptionCardItem(
 			description = description,
 			readMoreUri = readMoreUri,
-			linkType = linkType
+			linkType = linkType,
+			hasOfflineArticle = hasOfflineArticle
 		)
 	}
 
@@ -74,22 +74,10 @@ class AstroContextCardFactory {
 		return (WikiAlgorithms.WIKI_DATA_BASE_URL + Uri.encode(wikidataId)).toUri()
 	}
 
-	private fun shouldOpenWikidata(obj: SkyObject, wikipediaUri: Uri?): Boolean {
-		if (wikipediaUri != null) {
+	private fun shouldOpenWikidata(obj: SkyObject, hasWikipediaArticle: Boolean): Boolean {
+		if (hasWikipediaArticle) {
 			return false
 		}
-		val displayName = obj.localizedName?.trim()
-			?.takeIf { it.isNotBlank() }
-			?: obj.name.trim()
-		return displayName.isBlank() || displayName.equals(obj.wid, ignoreCase = true)
+		return obj.hasMissingPrimaryName()
 	}
-
-	private fun extractWikiPageUrl(summaryJson: String): String? = runCatching {
-		val json = JSONObject(summaryJson)
-		val content = json.optJSONObject("content_urls") ?: return null
-		content.optJSONObject("mobile")?.optString("page")
-			?.takeIf { it.isNotBlank() }
-			?: content.optJSONObject("desktop")?.optString("page")
-				?.takeIf { it.isNotBlank() }
-	}.getOrNull()
 }

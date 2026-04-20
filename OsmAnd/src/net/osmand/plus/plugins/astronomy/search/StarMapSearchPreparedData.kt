@@ -39,11 +39,11 @@ internal class StarMapSearchPreparedDataFactory(
 
 		val entries = objects.map { obj ->
 			if (obj.wid.isNotEmpty()) {
-				widToDisplayName[obj.wid] = obj.localizedName ?: obj.name
+				widToDisplayName[obj.wid] = obj.niceName()
 			}
 			StarMapSearchEntry(
 				objectRef = obj,
-				displayName = obj.localizedName ?: obj.name,
+				displayName = obj.niceName(),
 				magnitude = obj.magnitude,
 				category = mapStarMapSearchCategory(obj),
 				iconRes = AstroUtils.getObjectTypeIcon(obj.type),
