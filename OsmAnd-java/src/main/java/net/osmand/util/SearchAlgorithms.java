@@ -16,6 +16,37 @@ public class SearchAlgorithms {
     
     private SearchAlgorithms() {}
 
+    private record CodePointPrefixMatch(int leftOffset, int rightOffset, int commonPrefixCodePointLength) {}
+
+    private static CodePointPrefixMatch startWith(String token, String prefix) {
+        int leftOffset = 0;
+        int rightOffset = 0;
+        int commonPrefixCodePointLength = 0;
+        while (leftOffset < token.length() && rightOffset < prefix.length()) {
+            int leftCodePoint = token.codePointAt(leftOffset);
+            int rightCodePoint = prefix.codePointAt(rightOffset);
+            if (leftCodePoint != rightCodePoint) {
+                break;
+            }
+            leftOffset += Character.charCount(leftCodePoint);
+            rightOffset += Character.charCount(rightCodePoint);
+            commonPrefixCodePointLength++;
+        }
+        return new CodePointPrefixMatch(leftOffset, rightOffset, commonPrefixCodePointLength);
+    }
+
+    public static int commonPrefixLength(String left, String right) {
+        return startWith(left, right).commonPrefixCodePointLength;
+    }
+
+    public static int suffixOffsetAfterPrefix(String token, String prefix) {
+        CodePointPrefixMatch prefixMatch = startWith(token, prefix);
+        if (prefixMatch.rightOffset != prefix.length()) {
+            return -1;
+        }
+        return prefixMatch.leftOffset < token.length() ? prefixMatch.leftOffset : -1;
+    }
+
     public static Set<String> splitSearchNames(String name) {
         int prev = -1;
         Set<String> namesToAdd = new HashSet<>();
