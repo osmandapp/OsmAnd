@@ -37,6 +37,7 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEAbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEBatterySensor;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -181,7 +182,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			gatt.requestConnectionPriority(BluetoothGatt.CONNECTION_PRIORITY_HIGH);
 			List<BluetoothGattService> services = gatt.getServices();
 			LOG.debug(String.format(Locale.US, "discovered %d services for '%s'", services.size(), gatt.getDevice().getName()));
-			if (cachedCharacteristics == null) {
+			if (Algorithms.isEmpty(cachedCharacteristics)) {
 				cachedCharacteristics = getCharacteristics();
 			}
 			for (BLEAbstractSensor sensor : sensors) {
@@ -238,6 +239,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		                                    BluetoothGattCharacteristic characteristic) {
 			callbackHandler.post(() -> {
 				for (BLEAbstractSensor sensor : sensors) {
+					sensor.checkStaleData(characteristic);
 					sensor.onCharacteristicChanged(gatt, characteristic);
 				}
 			});

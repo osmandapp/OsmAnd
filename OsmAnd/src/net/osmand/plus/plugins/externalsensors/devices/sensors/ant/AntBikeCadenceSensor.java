@@ -18,12 +18,15 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataF
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class AntBikeCadenceSensor extends AntAbstractSensor<AntPlusBikeCadencePcc> {
 
 	private BikeCadenceData lastBikeCadenceData;
+	private BigDecimal lastData;
 
 	public static class BikeCadenceData implements SensorData {
 
@@ -110,6 +113,10 @@ public class AntBikeCadenceSensor extends AntAbstractSensor<AntPlusBikeCadencePc
 		if (pcc != null) {
 			pcc.subscribeCalculatedCadenceEvent(null);
 			pcc.subscribeCalculatedCadenceEvent((estTimestamp, eventFlags, calculatedCadence) -> {
+				if (!Objects.equals(lastData, calculatedCadence)) {
+					lastTimeDifferentValue = System.currentTimeMillis();
+					lastData = calculatedCadence;
+				}
 				lastBikeCadenceData = new BikeCadenceData(estTimestamp, calculatedCadence.intValue());
 				getDevice().fireSensorDataEvent(this, lastBikeCadenceData);
 			});

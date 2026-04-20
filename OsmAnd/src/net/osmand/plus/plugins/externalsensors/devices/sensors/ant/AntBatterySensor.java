@@ -13,6 +13,7 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
+import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -120,4 +121,8 @@ public class AntBatterySensor<T extends AntPlusCommonPcc> extends AntAbstractSen
 	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 	}
 
+	@Override
+	public boolean hasActualData() {
+		return !Algorithms.isEmpty(getLastSensorDataList());
+	}
 }
