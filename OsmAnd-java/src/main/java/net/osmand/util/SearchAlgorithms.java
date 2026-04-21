@@ -226,11 +226,16 @@ public class SearchAlgorithms {
             suffixesByObject.put(object, objectSuffixes);
             for (String token : tokenSupplier.apply(object)) {
                 int suffixOffset = suffixOffsetAfterPrefix(token, prefix);
+                String suffix;
                 if (suffixOffset < 0) {
-                    continue;
+                    if (!Objects.equals(token, prefix)) {
+                        continue;
+                    }
+                    suffix = "";
+                } else {
+                    suffix = Normalizer.normalize(token.substring(suffixOffset), Normalizer.Form.NFC);
                 }
-                String suffix = Normalizer.normalize(token.substring(suffixOffset), Normalizer.Form.NFC);
-                if (suffix.isEmpty()) {
+                if (suffix == null) {
                     continue;
                 }
                 objectSuffixes.add(suffix);

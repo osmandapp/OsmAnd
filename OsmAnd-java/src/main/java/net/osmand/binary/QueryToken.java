@@ -28,7 +28,7 @@ public class QueryToken {
                 return;
             }
             
-            if (suffixDictionary.isEmpty()) {
+            if (masks == null) {
                 masks = new TIntArrayList();
             }
             suffixes.put(prefix.key(), new LinkedHashSet<>(suffixDictionary));
@@ -43,9 +43,6 @@ public class QueryToken {
         private void addSuffix(int index, String suffix) {
             if (suffix == null || index < 0) {
                 return;
-            }
-            if (masks == null) {
-                masks = new TIntArrayList();
             }
             String fullKey = prefix.key() + suffix;
             if (CollatorStringMatcher.cmatches(collator, fullKey, query, matcherMode)) {
