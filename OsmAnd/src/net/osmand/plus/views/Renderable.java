@@ -10,6 +10,7 @@ import android.graphics.Shader;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.QuadRect;
@@ -27,6 +28,8 @@ import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -39,6 +42,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Renderable {
+
+    private static final Log log = PlatformUtil.getLog(Renderable.class);
 
     private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
     private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
@@ -197,6 +202,16 @@ public class Renderable {
             boolean changed = this.routeSegments != routeSegments;
             this.routeSegments = routeSegments;
             return changed;
+        }
+
+        public boolean updateBounds() {
+            if (points.size() != pointSize) {
+                int prevSize = pointSize;
+                pointSize = points.size();
+                GpxUtilities.INSTANCE.updateBounds(trackBounds, points, prevSize);
+                return true;
+            }
+            return false;
         }
 
         public void drawGeometry(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
@@ -443,11 +458,7 @@ public class Renderable {
 
         @Override
         public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
-            if (points.size() != pointSize) {
-                int prevSize = pointSize;
-                pointSize = points.size();
-                GpxUtilities.INSTANCE.updateBounds(trackBounds, points, prevSize);
-            }
+            updateBounds();
             drawSingleSegment(zoom, p, canvas, tileBox);
         }
 

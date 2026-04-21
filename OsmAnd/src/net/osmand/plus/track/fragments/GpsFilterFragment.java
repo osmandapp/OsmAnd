@@ -423,7 +423,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public void onSaveAsNewTrack(@NonNull String folderPath, @NonNull String fileName,
 	                             boolean showOnMap, boolean simplifiedTrack) {
-		if (selectedGpxFile.getFilteredSelectedGpxFile() != null) {
+		if (selectedGpxFile.hasFilters()) {
 			File fileDir = new File(folderPath);
 			File destFile = new File(fileDir, fileName + GPX_FILE_EXT);
 
