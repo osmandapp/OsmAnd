@@ -737,7 +737,7 @@ public class BinaryMapAddressReaderAdapter {
 						}
 					}
 					boolean suffixDictionaryInitialized = false;
-					List<String> suffixDictionary = new ArrayList<>();
+					List<String> suffixDictionary = null;
 					QueryToken.SuffixMask suffixMask = null;
 					if (queryToken != null && matchedPrefix != null) {
 						suffixMask = queryToken.new SuffixMask(matchedPrefix);
@@ -747,6 +747,9 @@ public class BinaryMapAddressReaderAdapter {
 						int st = codedIS.readTag();
 						stag = WireFormat.getTagFieldNumber(st);
 						if (stag == AddressNameIndexData.SUFFIXESDICTIONARY_FIELD_NUMBER) {
+							if (suffixDictionary == null) {
+								suffixDictionary = new ArrayList<>();
+							}
 							String encodedSuffix = codedIS.readString();
 							String previousSuffix = suffixDictionary.isEmpty() ? null : suffixDictionary.get(suffixDictionary.size() - 1);
 							String decodedSuffix = SearchAlgorithms.decodeSuffixDictionaryEntry(previousSuffix, encodedSuffix);

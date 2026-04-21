@@ -512,7 +512,7 @@ public class BinaryMapPoiReaderAdapter {
 
 	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
 			List<Integer> nameIndexCoordinates, QueryToken token, QueryToken.Prefix prefix) throws IOException {
-		List<String> suffixDictionary = new ArrayList<>();
+		List<String> suffixDictionary = null;
 		QueryToken.SuffixMask mask = token == null || prefix == null ? null : token.new SuffixMask(prefix);
 		boolean suffixDictionaryInitialized = false;
 		while (true) {
@@ -523,6 +523,9 @@ public class BinaryMapPoiReaderAdapter {
 					return;
 				case OsmAndPoiNameIndexData.SUFFIXESDICTIONARY_FIELD_NUMBER:
 					String encodedSuffix = codedIS.readString();
+					if (suffixDictionary == null) {
+						suffixDictionary = new ArrayList<>();
+					}
 					String prevSuffix = suffixDictionary.isEmpty() ? null : suffixDictionary.get(suffixDictionary.size() - 1);
 					String entry = decodeSuffixDictionaryEntry(prevSuffix, encodedSuffix);
 					suffixDictionary.add(entry);
