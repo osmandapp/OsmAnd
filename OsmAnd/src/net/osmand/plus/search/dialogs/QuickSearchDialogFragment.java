@@ -1674,7 +1674,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void showLocationToolbar() {
 		app.runInUIThread(() -> {
 			foundPartialLocation = true;
-			updateToolbarButton();
+			if (isAdded()) {
+				updateToolbarButton();
+			}
 		});
 	}
 

@@ -304,13 +304,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					.setOrder(1000)
 					.build();
 
+			int safePosition = Math.min(position, group.getChildCount());
 			View amenitiesRow = createRowContainer(context, NEAREST_WIKI_KEY);
 
-			firstRow = position == 0 || isDividerAtPosition(group, position - 1);
+			firstRow = safePosition == 0 || isDividerAtPosition(group, safePosition - 1);
 			amenityUIHelper.buildAmenityRow(amenitiesRow, wikiInfo);
-			group.addView(amenitiesRow, position);
+			group.addView(amenitiesRow, safePosition);
 
-			buildNearestRowDividerIfMissing(group, position);
+			buildNearestRowDividerIfMissing(group, safePosition);
 			requestMenuRelayout(group);
 		});
 	}
