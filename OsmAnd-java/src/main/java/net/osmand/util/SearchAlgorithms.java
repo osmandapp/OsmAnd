@@ -1,10 +1,8 @@
 package net.osmand.util;
 
 import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
 
 /**
  * Basic algorithms that are used in Search
@@ -133,5 +131,98 @@ public class SearchAlgorithms {
             return encodedSuffix.substring(Character.charCount(markerCodePoint));
         }
         return encodedSuffix;
+    }
+
+    private static final int MARKER_LCP_LENGTH = SUFFIX_DICT_MARKER_MAX - SUFFIX_DICT_MARKER_BASE;
+    public record SuffixEntry(String resolvedSuffix, String encodedSuffix) {}
+    public static final String EMPTY_POI_SUFFIX_DICTIONARY_SENTINEL = "";
+    
+    public static class SuffixDictionaryData<T> {
+        public final List<SuffixEntry> dictionaryEntries = new ArrayList<>();
+        public final Map<String, Integer> resolvedSuffixToIndex = new HashMap<>();
+        public final Map<T, int[]> bitsets = new LinkedHashMap<>();
+    }
+
+    private static boolean startsWithSuffixMarker(String value) {
+        if (value.isEmpty()) {
+            return false;
+        }
+        int markerCodePoint = value.codePointAt(0);
+        return markerCodePoint == SUFFIX_DICT_MARKER_RAW_ESCAPE
+                || (markerCodePoint >= SUFFIX_DICT_MARKER_BASE && markerCodePoint <= SUFFIX_DICT_MARKER_MAX);
+    }
+    
+    private static String encodeSuffix(String suffix) {
+        return startsWithSuffixMarker(suffix) ? SUFFIX_DICT_MARKER_RAW_ESCAPE + suffix : suffix;
+    }
+
+    private static int countCodePoints(String value) {
+        return value.codePointCount(0, value.length());
+    }
+    
+    public static String encodeSuffix(String suffix, String previousSuffix) {
+        String encodedRawSuffix = encodeSuffix(suffix);
+        if (previousSuffix == null) {
+            return encodedRawSuffix;
+        }
+        int commonPrefixCodePointLength = commonPrefixLength(previousSuffix, suffix);
+        if (commonPrefixCodePointLength > MARKER_LCP_LENGTH) {
+            return encodedRawSuffix;
+        }
+        int offset = suffix.offsetByCodePoints(0, commonPrefixCodePointLength);
+        String suffixRemainder = suffix.substring(offset);
+        String deltaEncodedSuffix = new String(Character.toChars(SUFFIX_DICT_MARKER_BASE + commonPrefixCodePointLength))
+                + suffixRemainder;
+        return countCodePoints(deltaEncodedSuffix) < countCodePoints(encodedRawSuffix) ? deltaEncodedSuffix : encodedRawSuffix;
+    }
+
+    public static <T> SuffixDictionaryData<T> buildSuffixDictionary(String prefix, List<T> objects,
+                                                                    Function<T, Collection<String>> tokenSupplier) {
+        SuffixDictionaryData<T> data = new SuffixDictionaryData<>();
+        TreeSet<String> sortedSuffixes = new TreeSet<>();
+        Map<T, Set<String>> suffixesByObject = new LinkedHashMap<>();
+        for (T object : objects) {
+            Set<String> objectSuffixes = new LinkedHashSet<>();
+            suffixesByObject.put(object, objectSuffixes);
+            for (String token : tokenSupplier.apply(object)) {
+                int suffixOffset = suffixOffsetAfterPrefix(token, prefix);
+                if (suffixOffset < 0) {
+                    continue;
+                }
+                String suffix = Normalizer.normalize(token.substring(suffixOffset), Normalizer.Form.NFC);
+                if (suffix.isEmpty()) {
+                    continue;
+                }
+                objectSuffixes.add(suffix);
+                sortedSuffixes.add(suffix);
+            }
+        }
+        String previousSuffix = null;
+        for (String suffix : sortedSuffixes) {
+            String encodedSuffix = encodeSuffix(suffix, previousSuffix);
+            SuffixEntry entry = new SuffixEntry(suffix, encodedSuffix);
+            data.resolvedSuffixToIndex.put(entry.resolvedSuffix(), data.dictionaryEntries.size());
+            data.dictionaryEntries.add(entry);
+            previousSuffix = suffix;
+        }
+        int dictionaryWordCount = (data.dictionaryEntries.size() + Integer.SIZE - 1) / Integer.SIZE;
+        if (dictionaryWordCount == 0) {
+            return data;
+        }
+        for (T object : objects) {
+            int[] bitsetWords = new int[dictionaryWordCount];
+            Set<String> objectSuffixes = suffixesByObject.get(object);
+            if (objectSuffixes != null) {
+                for (String suffix : objectSuffixes) {
+                    Integer suffixIndex = data.resolvedSuffixToIndex.get(suffix);
+                    if (suffixIndex == null) {
+                        continue;
+                    }
+                    bitsetWords[suffixIndex >> 5] |= 1 << (suffixIndex & 31);
+                }
+            }
+            data.bitsets.put(object, bitsetWords);
+        }
+        return data;
     }
 }
