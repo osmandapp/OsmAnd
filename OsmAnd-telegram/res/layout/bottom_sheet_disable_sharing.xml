@@ -78,6 +78,7 @@
 	</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 	<LinearLayout
+		android:id="@+id/bottom_sheet_actions"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/buttons_bottom_bar_height"
 		android:background="?attr/card_bg_color"

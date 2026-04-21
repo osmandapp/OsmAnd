@@ -50,6 +50,7 @@
 	</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 	<FrameLayout
+		android:id="@+id/bottom_sheet_actions"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/card_bg_color">
