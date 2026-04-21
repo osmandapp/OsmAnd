@@ -178,7 +178,9 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 
 	private void updateBoundsChangeListener(boolean listen) {
 		displayPositionManager.updateCoveredScreenRectProvider(this, listen);
-		mainView.addOnLayoutChangeListener(boundsChangeListener);
+		if (mainView != null) {
+			mainView.addOnLayoutChangeListener(boundsChangeListener);
+		}
 		displayPositionManager.updateMapDisplayPosition();
 	}
 

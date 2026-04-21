@@ -26,6 +26,7 @@ import net.osmand.telegram.ui.TimelineTabFragment.LiveNowListAdapter.BaseViewHol
 import net.osmand.telegram.ui.views.EmptyStateRecyclerView
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.telegram.utils.applyTopSystemWindowInsets
 import java.util.*
 
 
@@ -59,7 +60,7 @@ class TimelineTabFragment : Fragment() {
 
 		calendar = Calendar.getInstance()
 
-		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
+		appBarLayout.applyTopSystemWindowInsets()
 		adapter = LiveNowListAdapter()
 
 		val emptyView = mainView.findViewById<LinearLayout>(R.id.empty_view)

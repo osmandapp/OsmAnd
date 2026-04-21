@@ -3231,7 +3231,7 @@
     <string name="lang_ba">巴什基爾語</string>
     <string name="lang_an">亞拉岡語</string>
     <string name="lang_lmo">倫巴底語</string>
-    <string name="custom_color">自訂顏色</string>
+    <string name="custom_color">客製顏色</string>
     <string name="extra_maps_menu_group">額外地圖</string>
     <string name="download_unsupported_action">不支援的選項 %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
@@ -5557,7 +5557,7 @@
     <string name="save_to_device">儲存到裝置</string>
     <string name="travel_guides">指標</string>
     <string name="show_debug_tile_description">顯示每個圖磚的地圖符號資訊</string>
-    <string name="show_debug_tile">顯示圖磚資訊</string>
+    <string name="show_debug_tile">顯示標題資訊</string>
     <string name="deactivated_map">已停用的地圖</string>
     <string name="unit_of_temperature_description">選定的單位將會套用至目前設定檔中所有的溫度相關資料。</string>
     <string name="suggest_activate_map_msg">%1$s 地圖已停用，\n啟用以檢視此區域。</string>
@@ -5728,7 +5728,7 @@
     <string name="vehicle_metrics_chart_category">汽車數據</string>
     <string name="delete_folder_description">刪除「%1$s」資料夾？</string>
     <string name="show_spherical_map">環球檢視</string>
-    <string name="enable_3d_objects">3D 建築物</string>
+    <string name="enable_3d_objects">3D 建築</string>
     <string name="lang_mi">毛利語</string>
     <string name="has_vehicle_metrics">有 OBDII 資料</string>
     <string name="buildings_3d_detail_level">3D 建築物細節化處理</string>
@@ -5828,10 +5828,10 @@
     <string name="building_3d_high_details_content_desc">3D 建築高</string>
     <string name="building_3d_near_distance_content_desc">3D 建築距離近</string>
     <string name="building_3d_far_distance_content_desc">3D 建築距離遠</string>
-    <string name="free_custom_color_description">以任何顏色自訂 3D 建築，適合匹配地圖主題或是增加對比。</string>
+    <string name="free_custom_color_description">任何顏色的客製化 3D 建築，能夠完美吻合地圖主題或是增進對比。</string>
     <string name="buildings_3d_use_map_style_color_description">使用地圖樣式 (%s) 的預設顏色。</string>
-    <string name="buildings_3d_visibility_description">調整地圖上 3D 結構的透明度。</string>
-    <string name="level_of_details">細節的層次</string>
+    <string name="buildings_3d_visibility_description">調整地圖上的 3D 結構的透明度。</string>
+    <string name="level_of_details">詳細內容的程度</string>
     <string name="performance">效能</string>
     <string name="view_distance">檢視距離</string>
     <string name="astronomy_plugin_name">天文</string>

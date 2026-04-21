@@ -21,7 +21,6 @@ import com.android.billingclient.api.QueryProductDetailsResult;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -35,8 +34,6 @@ import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
-
-import org.json.JSONException;
 
 import java.lang.ref.WeakReference;
 import java.text.ParseException;
@@ -475,22 +472,6 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				purchasedLocalFullVersion = fullVersionPurchased;
 				if (fullVersionPurchased) {
 					completePurchases.add(fullVersionPurchase);
-				}
-
-				if (fullVersion != null && !fullVersionPurchased && Version.isFullVersion(ctx)) {
-					String json = "{ \"orderId\" : \"" + OSMAND_PLUS_APP_ORDER_ID + "\"," +
-							"\"packageName\" : \"" + ctx.getPackageName() + "\"," +
-							"\"productId\" : \"" + fullVersion.getSku() + "\"," +
-							"\"purchaseTime\" : " + Version.getInstallTime(ctx) + "," +
-							"\"purchaseState\" : 0," +
-							"\"purchaseToken\" : \"" + OSMAND_PLUS_APP_ORDER_ID + "\"," +
-							"\"acknowledged\" : true }";
-					try {
-						Purchase purchase = new Purchase(json, "");
-						completePurchases.add(purchase);
-					} catch (JSONException e) {
-						LOG.error("Error creating full version purchase", e);
-					}
 				}
 
 				Purchase depthContoursPurchase = depthContours != null ? getPurchase(depthContours.getSku()) : null;

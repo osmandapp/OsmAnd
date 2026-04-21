@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import net.osmand.telegram.R
+import net.osmand.telegram.utils.applyBottomSheetWindowInsets
+import net.osmand.telegram.utils.applyHorizontalSystemWindowInsets
+import net.osmand.telegram.utils.setupTelegramEdgeToEdge
 
 class BottomSheetDialog(ctx: Context) : Dialog(ctx, R.style.AppTheme_BottomSheet) {
 
@@ -19,6 +22,7 @@ class BottomSheetDialog(ctx: Context) : Dialog(ctx, R.style.AppTheme_BottomSheet
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		window?.apply {
+			setupTelegramEdgeToEdge()
 			if (Build.VERSION.SDK_INT >= 21) {
 				clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
 				addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -44,9 +48,10 @@ class BottomSheetDialog(ctx: Context) : Dialog(ctx, R.style.AppTheme_BottomSheet
 		layoutResId: Int,
 		view: View?,
 		params: ViewGroup.LayoutParams?
-	): View {
+		): View {
 		val res = View.inflate(context, R.layout.bottom_sheet_dialog, null)
 		val container = res.findViewById<ViewGroup>(R.id.content_container)
+		container.applyHorizontalSystemWindowInsets()
 		var v = view
 
 		if (layoutResId != 0 && v == null) {
@@ -57,6 +62,7 @@ class BottomSheetDialog(ctx: Context) : Dialog(ctx, R.style.AppTheme_BottomSheet
 		} else {
 			container.addView(v, params)
 		}
+		v?.applyBottomSheetWindowInsets()
 
 		res.findViewById<View>(R.id.touch_outside).setOnClickListener {
 			cancel()

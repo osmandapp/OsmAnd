@@ -751,8 +751,11 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	@NonNull
 	private ApplicationMode getPointAppMode(int pointPosition) {
-		String profileType = getPoints().get(pointPosition).getProfileType();
-		return ApplicationMode.valueOfStringKey(profileType, DEFAULT_APP_MODE);
+		List<WptPt> points = getPoints();
+		if (pointPosition < 0 || pointPosition >= points.size()){
+			return DEFAULT_APP_MODE;
+		}
+		return ApplicationMode.valueOfStringKey(points.get(pointPosition).getProfileType(), DEFAULT_APP_MODE);
 	}
 
 	public void scheduleRouteCalculateIfNotEmpty() {
