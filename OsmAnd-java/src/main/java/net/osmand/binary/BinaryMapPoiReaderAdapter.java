@@ -513,7 +513,8 @@ public class BinaryMapPoiReaderAdapter {
 	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
 			List<Integer> nameIndexCoordinates, QueryToken token, QueryToken.Prefix prefix) throws IOException {
 		List<String> suffixDictionary = new ArrayList<>();
-		QueryToken.SuffixMask mask = null;
+		QueryToken.SuffixMask mask = token == null || prefix == null ? null : token.new SuffixMask(prefix);
+		boolean suffixDictionaryInitialized = false;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -525,13 +526,12 @@ public class BinaryMapPoiReaderAdapter {
 					String prevSuffix = suffixDictionary.isEmpty() ? null : suffixDictionary.get(suffixDictionary.size() - 1);
 					String entry = decodeSuffixDictionaryEntry(prevSuffix, encodedSuffix);
 					suffixDictionary.add(entry);
-
-					if (mask == null) {
-						mask = token.new SuffixMask(prefix);
-					}
-					mask.setDictionary(suffixDictionary);
 					break;
 				case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:
+					if (!suffixDictionaryInitialized && mask != null) {
+						mask.setDictionary(suffixDictionary);
+						suffixDictionaryInitialized = true;
+					}
 					int len = codedIS.readRawVarint32();
 					long oldLim = codedIS.pushLimitLong((long) len);
 					readPoiNameIndexDataAtom(offsets, req, region, nameIndexCoordinates, mask == null ? null : mask.masks);

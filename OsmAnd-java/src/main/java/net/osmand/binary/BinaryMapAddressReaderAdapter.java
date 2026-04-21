@@ -736,6 +736,7 @@ public class BinaryMapAddressReaderAdapter {
 							}
 						}
 					}
+					boolean suffixDictionaryInitialized = false;
 					List<String> suffixDictionary = new ArrayList<>();
 					QueryToken.SuffixMask suffixMask = null;
 					if (queryToken != null && matchedPrefix != null) {
@@ -750,10 +751,13 @@ public class BinaryMapAddressReaderAdapter {
 							String previousSuffix = suffixDictionary.isEmpty() ? null : suffixDictionary.get(suffixDictionary.size() - 1);
 							String decodedSuffix = SearchAlgorithms.decodeSuffixDictionaryEntry(previousSuffix, encodedSuffix);
 							suffixDictionary.add(decodedSuffix);
-							if (suffixMask != null) {
-								suffixMask.setDictionary(suffixDictionary);
-							}
 						} else if (stag == AddressNameIndexData.ATOM_FIELD_NUMBER) {
+							if (!suffixDictionaryInitialized && suffixMask != null) {
+								suffixMask.setDictionary(suffixDictionary);
+								suffixDictionaryInitialized = true;
+								
+								System.out.println(map.getFile().getName() + ", " + suffixMask.prefix + ", suffixDictionary: " + suffixDictionary);
+							}
 							long slen = codedIS.readRawVarint32();
 							long soldLim = codedIS.pushLimitLong((long) slen);
 							readAddressNameData(req, refs, refsToCities, fp, suffixMask == null ? null : suffixMask.masks);
