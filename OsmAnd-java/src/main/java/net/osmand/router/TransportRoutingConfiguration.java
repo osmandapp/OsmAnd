@@ -30,6 +30,8 @@ public class TransportRoutingConfiguration {
 	public int maxRouteDistance = 0; // distance for maxRouteTime
 	public int maxRouteIncreaseSpeed = 30; // speed to increase route time
 
+	public int minSegmentDistToIncreaseSpeed = 1000;
+	public int upperSegmentDistToIncreaseSpeed = 30000;
 
 	public GeneralRouter router;
 	// cache values from router for fast access
@@ -158,7 +160,12 @@ public class TransportRoutingConfiguration {
 			
 			combineAltRoutesDiffStops = router.getIntAttribute("combineAltRoutesDiffStops", combineAltRoutesDiffStops);
 			combineAltRoutesSumDiffStops = router.getIntAttribute("combineAltRoutesSumDiffStops", combineAltRoutesSumDiffStops);
-			
+
+			minSegmentDistToIncreaseSpeed =
+					router.getIntAttribute("minSegmentDistToIncreaseSpeed", minSegmentDistToIncreaseSpeed);
+			upperSegmentDistToIncreaseSpeed =
+					router.getIntAttribute("upperSegmentDistToIncreaseSpeed", upperSegmentDistToIncreaseSpeed);
+
 			maxNumberOfChanges =
 					(int) RoutingConfiguration.parseSilentFloat(params.get("max_num_changes"), maxNumberOfChanges);
 			ptLimitResultsByNumber =

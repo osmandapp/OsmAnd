@@ -112,6 +112,8 @@ public class TransportRoutePlanner {
 			if (routeTravelSpeed == 0) {
 				continue;
 			}
+			final float routeTravelSpeedMax = ctx.cfg.getSpeedByRouteType(segment.road.getType() + "-max");
+
 			TransportStop prevStop = segment.getStop(segment.segStart);
 			List<TransportRouteSegment> sgms = new ArrayList<TransportRouteSegment>();
 			if (TRACE_ONBOARD_ID != 0) {
@@ -136,7 +138,15 @@ public class TransportRoutePlanner {
 					travelTime += interval * 10;
 				} else {
 					int stopTime = ctx.cfg.getStopTime(segment.road.getType());
-					travelTime += stopTime + segmentDist / routeTravelSpeed;
+					if (routeTravelSpeedMax > 0 && segmentDist > ctx.cfg.minSegmentDistToIncreaseSpeed) {
+						int min = ctx.cfg.minSegmentDistToIncreaseSpeed;
+						int upper = ctx.cfg.upperSegmentDistToIncreaseSpeed;
+						double k = Math.max(0, Math.min(1, (segmentDist - min) / (upper - min)));
+						double increasedSpeed = routeTravelSpeed + (routeTravelSpeedMax - routeTravelSpeed) * k * k;
+						travelTime += stopTime + segmentDist / increasedSpeed;
+					} else {
+						travelTime += stopTime + segmentDist / routeTravelSpeed;
+					}
 				}
 				if (segment.distFromStart + travelTime > finishTime * ctx.cfg.increaseForAlternativesRoutes) {
 					break;
