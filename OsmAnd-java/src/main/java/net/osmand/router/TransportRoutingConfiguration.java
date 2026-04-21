@@ -116,11 +116,11 @@ public class TransportRoutingConfiguration {
 	}
 
 	
-	public float getSpeedByRouteType(String routeType) {
+	public float getSpeedByRouteType(String routeType, boolean useDefaultSpeed) {
 		Float sl = speed.get(routeType);
 		if(sl == null) {
 			RouteAttributeContext spds = router.getObjContext(RouteDataObjectAttribute.ROAD_SPEED);
-			sl = spds.evaluateFloat(getRawBitset("route", routeType), defaultTravelSpeed);
+			sl = spds.evaluateFloat(getRawBitset("route", routeType), useDefaultSpeed ? defaultTravelSpeed : 0);
 			speed.put(routeType, sl);
 		}
 		return sl.floatValue();

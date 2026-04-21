@@ -108,11 +108,11 @@ public class TransportRoutePlanner {
 			int seconds = segment.road.calcIntervalInSeconds();
 			double travelTime = seconds > 0 ? (double) seconds / 2 : ctx.cfg.getBoardingTime(segment.road.getType());
 
-			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
+			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType(), true);
 			if (routeTravelSpeed == 0) {
 				continue;
 			}
-			final float routeTravelSpeedMax = ctx.cfg.getSpeedByRouteType(segment.road.getType() + "-max");
+			final float routeTravelSpeedMax = ctx.cfg.getSpeedByRouteType(segment.road.getType() + "-max", false);
 
 			TransportStop prevStop = segment.getStop(segment.segStart);
 			List<TransportRouteSegment> sgms = new ArrayList<TransportRouteSegment>();
