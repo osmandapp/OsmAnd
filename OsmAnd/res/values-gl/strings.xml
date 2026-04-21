@@ -3992,4 +3992,8 @@
     <string name="quick_action_map_underlay">Capa subxacente</string>
     <string name="shared_string_radians">Radiáns</string>
     <string name="shared_string_unlock">Desbloquear</string>
+    <string name="open_from_short">Desde</string>
+    <string name="open_till_short">Ata</string>
+    <string name="map_widget_memory_info">Información sobre memoria</string>
+    <string name="years_3">3 anos</string>
 </resources>
