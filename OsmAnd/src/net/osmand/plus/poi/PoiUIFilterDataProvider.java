@@ -50,10 +50,9 @@ public class PoiUIFilterDataProvider {
         } else {
             AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
             AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
-            amenitySearcher.setComparator(comparator, comparatorLimit);
             return amenitySearcher.searchAmenities(filter, filter.additionalFilter, topLatitude, leftLongitude,
                     bottomLatitude, rightLongitude, zoom, true, settings.fileVisibility(),
-                    filter.wrapResultMatcher(matcher));
+                    filter.wrapResultMatcher(matcher), null, comparator, comparatorLimit);
         }
     }
 
