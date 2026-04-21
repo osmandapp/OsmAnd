@@ -24,7 +24,8 @@ import org.apache.commons.logging.Log;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsId;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsName;
 import static net.osmand.binary.ObfConstants.isTagIndexedAsSearchRelated;
-import static net.osmand.util.SearchAlgorithms.*;
+import static net.osmand.util.SearchAlgorithms.decodeSuffixDictionaryEntry;
+import static net.osmand.util.SearchAlgorithms.splitSearchNames;
 
 import java.io.IOException;
 import java.util.*;
@@ -428,7 +429,7 @@ public class BinaryMapPoiReaderAdapter {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		long offset = 0;
 		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
-		List<String> queries = splitAndNormalize(query);
+		List<String> queries = splitSearchNames(query);
 		List<QueryToken> queryTokens = null;
 		while (true) {
 			final long subStart = req.beginSubSearchStats(), bytes = codedIS.getBytesCounter();

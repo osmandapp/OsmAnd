@@ -56,9 +56,9 @@ public class SearchAlgorithms {
         return value.substring(0, value.offsetByCodePoints(0, codePointCount));
     }
 
-    public static Set<String> splitSearchNames(String name) {
+    public static List<String> splitSearchNames(String name) {
         int prev = -1;
-        Set<String> namesToAdd = new HashSet<>();
+        Set<String> namesToAdd = new LinkedHashSet<>();
 
         for (int i = 0; i <= name.length(); ) {
             boolean tokenCharacter = false;
@@ -81,9 +81,32 @@ public class SearchAlgorithms {
             }
             i += currentCodePointCharCount;
         }
-        return namesToAdd;
+        return new ArrayList<>(namesToAdd);
     }
 
+    public static List<String> splitAndNormalize(String query) {
+        String normalizedQuery = Algorithms.normalizeSearchText(query);
+        Set<String> queryTokens = new LinkedHashSet<>();
+        for (String token : splitSearchNames(normalizedQuery)) {
+            String normalizedToken = normalizeToken(token);
+            if (!normalizedToken.isEmpty()) {
+                queryTokens.add(normalizedToken);
+            }
+        }
+        if (ArabicNormalizer.isSpecialArabic(normalizedQuery)) {
+            String arabic = ArabicNormalizer.normalize(normalizedQuery);
+            if (arabic != null && !arabic.equals(normalizedQuery)) {
+                for (String token : splitSearchNames(arabic)) {
+                    String normalizedToken = normalizeToken(token);
+                    if (!normalizedToken.isEmpty()) {
+                        queryTokens.add(normalizedToken);
+                    }
+                }
+            }
+        }
+        return new ArrayList<>(queryTokens);
+    }
+    
     private static String normalizeToken(String token) {
         if (token == null) {
             return "";
@@ -119,29 +142,6 @@ public class SearchAlgorithms {
         return tokenAlreadyStarted && (characterType == Character.NON_SPACING_MARK
                 || characterType == Character.COMBINING_SPACING_MARK
                 || characterType == Character.ENCLOSING_MARK);
-    }
-
-    public static List<String> splitAndNormalize(String query) {
-        String normalizedQuery = Algorithms.normalizeSearchText(query);
-        Set<String> queryTokens = new LinkedHashSet<>();
-        for (String token : splitSearchNames(normalizedQuery)) {
-            String normalizedToken = normalizeToken(token);
-            if (!normalizedToken.isEmpty()) {
-                queryTokens.add(normalizedToken);
-            }
-        }
-        if (ArabicNormalizer.isSpecialArabic(normalizedQuery)) {
-            String arabic = ArabicNormalizer.normalize(normalizedQuery);
-            if (arabic != null && !arabic.equals(normalizedQuery)) {
-                for (String token : splitSearchNames(arabic)) {
-                    String normalizedToken = normalizeToken(token);
-                    if (!normalizedToken.isEmpty()) {
-                        queryTokens.add(normalizedToken);
-                    }
-                }
-            }
-        }
-        return new ArrayList<>(queryTokens);
     }
 
     public static String decodeSuffixDictionaryEntry(String previousSuffix, String encodedSuffix) {
