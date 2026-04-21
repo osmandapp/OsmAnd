@@ -45,6 +45,17 @@ public class SearchAlgorithms {
         return prefixMatch.leftOffset < token.length() ? prefixMatch.leftOffset : -1;
     }
 
+    private static String substringByCodePoints(String value, int codePointCount) {
+        if (codePointCount <= 0 || value.isEmpty()) {
+            return "";
+        }
+        int availableCodePointCount = value.codePointCount(0, value.length());
+        if (codePointCount >= availableCodePointCount) {
+            return value;
+        }
+        return value.substring(0, value.offsetByCodePoints(0, codePointCount));
+    }
+
     public static Set<String> splitSearchNames(String name) {
         int prev = -1;
         Set<String> namesToAdd = new HashSet<>();
@@ -73,6 +84,24 @@ public class SearchAlgorithms {
         return namesToAdd;
     }
 
+    private static String normalizeToken(String token) {
+        if (token == null) {
+            return "";
+        }
+        return Normalizer.normalize(token, Normalizer.Form.NFC).toLowerCase(Locale.ROOT);
+    }
+
+    public static String buildIndexedPrefix(String token, int maxPrefixLength) {
+        String normalizedToken = normalizeToken(token);
+	    if (maxPrefixLength <= 0) {
+		    return "";
+	    }
+        if (normalizedToken.codePointCount(0, normalizedToken.length()) > maxPrefixLength) {
+	        return substringByCodePoints(normalizedToken, maxPrefixLength);
+        }
+        return normalizedToken;
+    }
+
     private static boolean isTokenCharacter(String value, int index, boolean tokenAlreadyStarted) {
         int character = value.codePointAt(index);
         if (Character.isLetter(character) || Character.isDigit(character)) {
@@ -94,11 +123,22 @@ public class SearchAlgorithms {
 
     public static List<String> splitAndNormalize(String query) {
         String normalizedQuery = Algorithms.normalizeSearchText(query);
-        Set<String> queryTokens = splitSearchNames(normalizedQuery);
+        Set<String> queryTokens = new LinkedHashSet<>();
+        for (String token : splitSearchNames(normalizedQuery)) {
+            String normalizedToken = normalizeToken(token);
+            if (!normalizedToken.isEmpty()) {
+                queryTokens.add(normalizedToken);
+            }
+        }
         if (ArabicNormalizer.isSpecialArabic(normalizedQuery)) {
             String arabic = ArabicNormalizer.normalize(normalizedQuery);
             if (arabic != null && !arabic.equals(normalizedQuery)) {
-                queryTokens.addAll(splitSearchNames(arabic));
+                for (String token : splitSearchNames(arabic)) {
+                    String normalizedToken = normalizeToken(token);
+                    if (!normalizedToken.isEmpty()) {
+                        queryTokens.add(normalizedToken);
+                    }
+                }
             }
         }
         return new ArrayList<>(queryTokens);

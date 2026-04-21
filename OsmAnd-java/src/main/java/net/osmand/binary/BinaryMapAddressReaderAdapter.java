@@ -755,8 +755,6 @@ public class BinaryMapAddressReaderAdapter {
 							if (!suffixDictionaryInitialized && suffixMask != null) {
 								suffixMask.setDictionary(suffixDictionary);
 								suffixDictionaryInitialized = true;
-								
-								System.out.println(map.getFile().getName() + ", " + suffixMask.prefix + ", suffixDictionary: " + suffixDictionary);
 							}
 							long slen = codedIS.readRawVarint32();
 							long soldLim = codedIS.pushLimitLong((long) slen);
