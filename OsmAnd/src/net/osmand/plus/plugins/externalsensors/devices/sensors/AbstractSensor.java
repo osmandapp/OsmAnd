@@ -15,6 +15,7 @@ public abstract class AbstractSensor {
 
 	protected final AbstractDevice<?> device;
 	protected final String sensorId;
+	protected long lastTimeDifferentValue = 0;
 
 	public AbstractSensor(@NonNull AbstractDevice<?> device, @NonNull String sensorId) {
 		this.device = device;
@@ -63,5 +64,13 @@ public abstract class AbstractSensor {
 	@Override
 	public String toString() {
 		return getName() + " (" + getSensorId() + ")";
+	}
+
+	public boolean hasActualData() {
+		return System.currentTimeMillis() - lastTimeDifferentValue < getDataUpdateTimePeriod();
+	}
+
+	protected long getDataUpdateTimePeriod() {
+		return 10000;
 	}
 }

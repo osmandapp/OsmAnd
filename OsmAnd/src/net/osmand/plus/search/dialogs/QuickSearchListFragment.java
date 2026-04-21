@@ -377,10 +377,14 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 		}
 	}
 
+	protected boolean needToSeparateTopItemsInList() {
+		return true;
+	}
+
 	private void insertListDecorations(List<QuickSearchListItem> items, List<QuickSearchListItem> listItems, boolean addShadows) {
 		QuickSearchListItem item = listItems.get(0);
 		SearchResult searchResult = item != null ? item.getSearchResult() : null;
-		if (searchResult != null) {
+		if (searchResult != null && needToSeparateTopItemsInList()) {
 			ObjectType firstItemObjectType = searchResult.objectType;
 			if (separatedObjectTypes.contains(firstItemObjectType)) {
 				int separateTypeLastIndex = 0;

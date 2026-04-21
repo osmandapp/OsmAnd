@@ -5,6 +5,7 @@ import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LatLon;
+import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
@@ -13,7 +14,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.osmand.router.GeneralRouter.GeneralRouterProfile;
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;

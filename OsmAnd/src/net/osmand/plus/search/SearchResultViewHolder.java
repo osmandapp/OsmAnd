@@ -198,11 +198,23 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 				if (openHourInfo != null) {
 					int colorOpen = R.color.text_color_positive;
 					int colorClosed = R.color.text_color_negative;
+					int colorNearToOpen = R.color.icon_color_warning;
 					SpannableString openHours = MenuController.getSpannableOpeningHours(
 							openHourInfo,
 							ContextCompat.getColor(app, colorOpen),
 							ContextCompat.getColor(app, colorClosed), true);
-					int colorId = rs.isOpenedForTime(calendar) ? colorOpen : colorClosed;
+
+					String nearToOpen = rs.getNearToOpeningTime(calendar, OpeningHours.ALL_SEQUENCES);
+					boolean isNearToOpen = !Algorithms.isEmpty(nearToOpen);
+
+					int colorId;
+					if (rs.isOpenedForTime(calendar)) {
+						colorId = colorOpen;
+					} else if (isNearToOpen) {
+						colorId = colorNearToOpen;
+					} else {
+						colorId = colorClosed;
+					}
 					if (Algorithms.isEmpty(openHours)) {
 						String openHoursStr = rs.toLocalString();
 						openHours = UiUtilities.createColorSpannable(openHoursStr, app.getColor(colorId), openHoursStr);
@@ -214,7 +226,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 						TextView timeText = view.findViewById(R.id.time);
 						ImageView timeIcon = view.findViewById(R.id.time_icon);
 						timeText.setText(openHours);
-						timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_opening_hour_16, colorId));
+						timeIcon.setImageDrawable(app.getUIUtilities().getIcon(isNearToOpen ? R.drawable.ic_action_closed_hours_16 : R.drawable.ic_action_opening_hour_16, colorId));
 					}
 				} else {
 					timeLayout.setVisibility(View.GONE);

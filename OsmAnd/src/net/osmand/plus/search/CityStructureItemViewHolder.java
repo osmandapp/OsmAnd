@@ -68,14 +68,28 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 		this.nightMode = nightMode;
 	}
 
+	private void processDistanceToCity(@NonNull OsmandApplication app, @NonNull QuickSearchListItem item) {
+		MapObject mapObject = (MapObject) item.getSearchResult().object;
+		boolean needToShowDistanceToCity = false;
+		if (mapObject instanceof City city) {
+			City.CityType cityType = city.getType();
+			if (cityType == City.CityType.VILLAGE || cityType == City.CityType.HAMLET) {
+				needToShowDistanceToCity = true;
+			}
+		}
+		if (needToShowDistanceToCity) {
+			String distanceToCityStr = QuickSearchListItem.getDistanceToCity(app, item.getSearchResult());
+			distanceToCity.setText(distanceToCityStr);
+		}
+		AndroidUiHelper.updateVisibility(distanceToCity, needToShowDistanceToCity && !Algorithms.isEmpty(distanceToCity.getText()));
+	}
+
 	public void bindItem(@NonNull QuickSearchListItem item, boolean useMapCenter) {
 		CharSequence title = item.getMapObjectTitleWithAltName(app, nightMode);
 		MapObject mapObject = (MapObject) item.getSearchResult().object;
 		String addressText = item.getAddress();
 		String typeName = item.getTypeName();
-		AndroidUiHelper.updateVisibility(distanceToCity, mapObject instanceof City &&
-				((City) mapObject).getType() == City.CityType.VILLAGE);
-
+		processDistanceToCity(app, item);
 		if (mapObject instanceof City city) {
 			BinaryMapIndexReader mapReaderResource = null;
 			if (mapObject.getReferenceFile() instanceof BinaryMapIndexReader) {
@@ -101,14 +115,6 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 				case BOROUGH -> app.getString(R.string.poi_borough);
 				default -> app.getString(R.string.city_type_city);
 			};
-			if (city.getType() == City.CityType.VILLAGE) {
-				String distanceToCityStr = QuickSearchListItem.getDistanceToCity(app, item.getSearchResult());
-				if (distanceToCityStr != null) {
-					distanceToCity.setText(distanceToCityStr);
-				} else {
-					AndroidUiHelper.updateVisibility(distanceToCity, false);
-				}
-			}
 		} else if (mapObject instanceof Street street) {
 			StringBuilder streetAddressBuilder = new StringBuilder();
 			String cityPart = QuickSearchListItem.getStreetCityPart(item.getSearchResult());
