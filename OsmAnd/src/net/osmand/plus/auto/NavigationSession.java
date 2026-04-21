@@ -727,7 +727,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					}
 					Trip trip = tripHelper.buildTrip(currentLocation, density);
 					if (carNavigationShouldBeActive) {
-						navigationManager.updateTrip(trip);
+						try {
+							navigationManager.updateTrip(trip);
+						} catch (IllegalStateException e) {
+							carNavigationShouldBeActive = false;
+							LOG.warn("NavigationManager is no longer in started state, stop sending trip updates", e);
+						}
 					}
 
 					List<Destination> destinations = null;
