@@ -428,7 +428,7 @@ public class BinaryMapPoiReaderAdapter {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		long offset = 0;
 		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
-		List<String> queries = null;
+		List<String> queries = splitAndNormalize(query);
 		List<QueryToken> queryTokens = null;
 		while (true) {
 			final long subStart = req.beginSubSearchStats(), bytes = codedIS.getBytesCounter();
@@ -441,7 +441,6 @@ public class BinaryMapPoiReaderAdapter {
 				long length = readInt();
 				long oldLimit = codedIS.pushLimitLong((long) length);
 				offset = codedIS.getTotalBytesRead();
-				queries = splitAndNormalize(query);
 				
 				List<List<QueryToken.Prefix>> prefixCandidates = map.readIndexedStringTablePrefixes(instance, queries);
 				queryTokens = new ArrayList<>(queries.size());
