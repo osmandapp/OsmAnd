@@ -917,7 +917,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public double getSettingsMapDensity() {
 		OsmandMap map = app.getOsmandMap();
-		return (map != null ? map.getMapDensity() : getSettings().MAP_DENSITY.get())
+		float mapDensityPref = getSettings().MAP_DENSITY.get();
+		float aaMapDensityPref = getSettings().AA_MAP_DENSITY.get();
+		boolean aaMapDensitySet = getSettings().AA_MAP_DENSITY_SET.get();
+		float densityToSet;
+		if(map != null && map.getMapView().isCarView() && aaMapDensitySet) {
+			densityToSet = aaMapDensityPref;
+		} else {
+			densityToSet = mapDensityPref;
+		}
+		return (map != null ? map.getMapDensity() : densityToSet)
 				* Math.max(1, getDensity());
 	}
 
