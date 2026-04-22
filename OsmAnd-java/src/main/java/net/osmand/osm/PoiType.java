@@ -36,6 +36,7 @@ public class PoiType extends AbstractPoiType {
 	private int maxPerMap;
 	private int minCount;
 	private boolean defaultForCategory = false;
+	private String contextMenuHeaderIcon;
 
 
 	public PoiType(MapPoiTypes poiTypes, PoiCategory category, PoiFilter filter, String keyName, String iconName) {
@@ -273,6 +274,14 @@ public class PoiType extends AbstractPoiType {
 
 	public boolean isHidden() {
 		return hidden;
+	}
+
+	public void setContextMenuHeaderIcon(String contextMenuHeaderIcon) {
+		this.contextMenuHeaderIcon = contextMenuHeaderIcon;
+	}
+
+	public String getContextMenuHeaderIcon() {
+		return contextMenuHeaderIcon;
 	}
 
 	@Override

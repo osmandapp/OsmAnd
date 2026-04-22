@@ -396,6 +396,13 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
+		String headerIcon = amenity.getContextMenuHeaderIcon();
+		if (headerIcon != null) {
+			Drawable ic = RenderingIcons.getBigIcon(getMapActivity(), headerIcon);
+			if (ic != null) {
+				return ic;
+			}
+		}
 		String region = amenity.getAdditionalInfo("subway_region");
 		if (region != null) {
 			return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
