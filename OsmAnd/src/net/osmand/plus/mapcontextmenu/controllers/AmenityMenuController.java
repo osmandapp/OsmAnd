@@ -396,7 +396,7 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
-		String headerIcon = amenity.getContextMenuHeaderIcon();
+		String headerIcon = amenity.getIcon();
 		if (headerIcon != null) {
 			Drawable ic = RenderingIcons.getBigIcon(getMapActivity(), headerIcon);
 			if (ic != null) {

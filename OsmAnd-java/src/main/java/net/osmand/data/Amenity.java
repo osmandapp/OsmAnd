@@ -1070,7 +1070,7 @@ public class Amenity extends MapObject {
 		return result;
 	}
 
-	public String getContextMenuHeaderIcon() {
+	public String getIcon() {
 		if (type == null || subType == null) {
 			return null;
 		}
@@ -1078,10 +1078,10 @@ public class Amenity extends MapObject {
 		if (pt == null) {
 			return null;
 		}
-		String icon = pt.getContextMenuHeaderIcon();
+		String icon = pt.getOriginalIconName();
 		if (icon == null && !pt.getPoiAdditionals().isEmpty()) {
 			for (PoiType ad : pt.getPoiAdditionals()) {
-				String headerIcon = ad.getContextMenuHeaderIcon();
+				String headerIcon = ad.getOriginalIconName();
 				if (headerIcon != null && getAdditionalInfo(ad.getKeyName()) != null) {
 					icon = headerIcon;
 					break;

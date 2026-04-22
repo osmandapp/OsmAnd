@@ -665,7 +665,6 @@ public class MapPoiTypes {
 		ref.setText(poiAdditional.isText());
 		ref.setOrder(poiAdditional.getOrder());
 		ref.setHidden(poiAdditional.isHidden());
-		ref.setContextMenuHeaderIcon(poiAdditional.getContextMenuHeaderIcon());
 		ref.setOsmTag(poiAdditional.getOsmTag());
 		ref.setNotEditableOsm(poiAdditional.isNotEditableOsm());
 		ref.setOsmValue(poiAdditional.getOsmValue());
@@ -706,7 +705,6 @@ public class MapPoiTypes {
 		tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
 		tp.setHidden(Boolean.parseBoolean(parser.getAttributeValue("", "hidden")));
-		tp.setContextMenuHeaderIcon(parser.getAttributeValue("", "context_menu_header_icon"));
 		String orderStr = parser.getAttributeValue("", "order");
 		if (!Algorithms.isEmpty(orderStr)) {
 			tp.setOrder(Integer.parseInt(orderStr));
@@ -766,7 +764,6 @@ public class MapPoiTypes {
 		tp.setOsmValue2(parser.getAttributeValue("", "value2"));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
 		tp.setHidden(Boolean.parseBoolean(parser.getAttributeValue("", "hidden")));
-		tp.setContextMenuHeaderIcon(parser.getAttributeValue("", "context_menu_header_icon"));
 		String orderStr = parser.getAttributeValue("", "order");
 		if (!Algorithms.isEmpty(orderStr)) {
 			tp.setOrder(Integer.parseInt(orderStr));
