@@ -56,7 +56,7 @@ public class SearchAlgorithms {
         return value.substring(0, value.offsetByCodePoints(0, codePointCount));
     }
 
-    public static List<String> splitSearchNames(String name) {
+    private static List<String> split(String name) {
         int prev = -1;
         Set<String> namesToAdd = new LinkedHashSet<>();
 
@@ -87,7 +87,7 @@ public class SearchAlgorithms {
     public static List<String> splitAndNormalize(String query) {
         String normalizedQuery = Algorithms.normalizeSearchText(query);
         Set<String> queryTokens = new LinkedHashSet<>();
-        for (String token : splitSearchNames(normalizedQuery)) {
+        for (String token : split(normalizedQuery)) {
             String normalizedToken = normalizeToken(token);
             if (!normalizedToken.isEmpty()) {
                 queryTokens.add(normalizedToken);
@@ -96,7 +96,7 @@ public class SearchAlgorithms {
         if (ArabicNormalizer.isSpecialArabic(normalizedQuery)) {
             String arabic = ArabicNormalizer.normalize(normalizedQuery);
             if (arabic != null && !arabic.equals(normalizedQuery)) {
-                for (String token : splitSearchNames(arabic)) {
+                for (String token : split(arabic)) {
                     String normalizedToken = normalizeToken(token);
                     if (!normalizedToken.isEmpty()) {
                         queryTokens.add(normalizedToken);
