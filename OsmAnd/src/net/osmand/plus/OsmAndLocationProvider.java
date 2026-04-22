@@ -192,15 +192,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 						net.osmand.Location location = null;
 						if (!locations.isEmpty()) {
 							location = locations.get(locations.size() - 1);
-							if (PluginsHelper.isDevelopment()) {
-								LOG.info("Received GPS location from helper: Lat=" + location.getLatitude() + ", Lon=" + location.getLongitude());
-							}
+
+							LOG.info("Received GPS location from helper: Lat=" +
+									String.format(java.util.Locale.US, "%.2f", location.getLatitude()) + ", Lon=" +
+									String.format(java.util.Locale.US, "%.2f", location.getLongitude()));
 							if (useOnlyGPS() && location.hasAccuracy() &&
 									location.getAccuracy() > ACCURACY_FOR_GPX_AND_ROUTING) {
 								// fused provider could return network locations
-								if (PluginsHelper.isDevelopment()) {
-									LOG.warn("GPS location ignored due to low accuracy: " + location.getAccuracy());
-								}
+								LOG.warn("GPS location ignored due to low accuracy: " + location.getAccuracy());
 								return;
 							}
 							lastTimeGPSLocationFixed = System.currentTimeMillis();
@@ -212,14 +211,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				});
 			} catch (SecurityException e) {
 				// Location service permission not granted
-				if (PluginsHelper.isDevelopment()) {
-					LOG.debug("Location service permission not granted", e);
-				}
+				LOG.debug("Location service permission not granted", e);
 			} catch (IllegalArgumentException e) {
 				// GPS location provider not available
-				if (PluginsHelper.isDevelopment()) {
-					LOG.debug("GPS location provider not available", e);
-				}
+				LOG.debug("GPS location provider not available", e);
 			}
 			// try to always ask for network provide : it is faster way to find location
 			if (locationServiceHelper.isNetworkLocationUpdatesSupported()) {
@@ -227,25 +222,21 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					@Override
 					public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
 						if (!locations.isEmpty() && !useOnlyGPS() && !locationSimulation.isRouteAnimating()) {
-							if (PluginsHelper.isDevelopment()) {
-								LOG.info("Received Network location from helper: Lat=" + locations.get(locations.size() - 1).getLatitude() + ", Lon=" + locations.get(locations.size() - 1).getLongitude());
-							}
+							LOG.info("Received Network location from helper: Lat=" +
+									String.format(java.util.Locale.US, "%.2f", locations.get(locations.size() - 1).getLatitude()) + ", Lon=" +
+									String.format(java.util.Locale.US, "%.2f", locations.get(locations.size() - 1).getLongitude()));
 							setLocation(locations.get(locations.size() - 1));
 						}
 					}
 				});
 			}
 		} else {
-			if (PluginsHelper.isDevelopment()) {
-				LOG.warn("Cannot resume updates: Location permission is NOT available.");
-			}
+			LOG.warn("Cannot resume updates: Location permission is NOT available.");
 		}
 	}
 
 	public void redownloadAGPS() {
-		if (PluginsHelper.isDevelopment()) {
-			LOG.info("Attempting to redownload AGPS data...");
-		}
+		LOG.info("Attempting to redownload AGPS data...");
 		try {
 			LocationManager service = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 			// Issue 6410: Test not forcing cold start here
@@ -254,13 +245,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			service.sendExtraCommand(GPS_PROVIDER, "force_xtra_injection", bundle);
 			service.sendExtraCommand(GPS_PROVIDER, "force_time_injection", bundle);
 			app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(System.currentTimeMillis());
-			if (PluginsHelper.isDevelopment()) {
-				LOG.info("AGPS data redownload commands sent successfully.");
-			}
+			LOG.info("AGPS data redownload commands sent successfully.");
 		} catch (Exception e) {
-			if (PluginsHelper.isDevelopment()) {
-				LOG.debug("Exception while redownloading AGPS", e);
-			}
+			LOG.debug("Exception while redownloading AGPS", e);
 			app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
 		}
 	}
@@ -270,13 +257,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (hasFineLocationPermission(app)) {
 			gpsStatusListener = new GpsStatusListener(gpsInfo);
 			service.registerGnssStatusCallback(gpsStatusListener, null);
-			if (PluginsHelper.isDevelopment()) {
-				LOG.info("GNSS Status Callback registered successfully.");
-			}
+			LOG.info("GNSS Status Callback registered successfully.");
 		} else {
-			if (PluginsHelper.isDevelopment()) {
-				LOG.warn("Failed to register GNSS Status Callback: Missing FINE_LOCATION permission.");
-			}
+			LOG.warn("Failed to register GNSS Status Callback: Missing FINE_LOCATION permission.");
 		}
 	}
 
@@ -311,9 +294,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private void addLocationSourceListener() {
 		locationSourceListener = change -> {
-			if (PluginsHelper.isDevelopment()) {
-				LOG.info("Location Source changed in settings. Reinitializing helpers...");
-			}
+			LOG.info("Location Source changed in settings. Reinitializing helpers...");
 			pauseAllUpdates();
 			locationServiceHelper = app.createLocationServiceHelper();
 			resumeAllUpdates();
@@ -322,14 +303,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	@Nullable
-	public net.osmand.Location getFirstTimeRunDefaultLocation(@Nullable OsmAndLocationListener locationListener) {
+	public net.osmand.Location getFirstTimeRunDefaultLocation(
+			@Nullable OsmAndLocationListener locationListener) {
 		if (isLocationPermissionAvailable(app)) {
 			LocationCallback callback = locationListener == null ? null : new LocationCallback() {
 				@Override
 				public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
-					if (PluginsHelper.isDevelopment()) {
-						LOG.info("getFirstTimeRunDefaultLocation callback received locations. Empty? " + locations.isEmpty());
-					}
+					LOG.info("getFirstTimeRunDefaultLocation callback received locations. Empty? " + locations.isEmpty());
 					locationListener.updateLocation(locations.isEmpty() ? null : locations.get(0));
 				}
 			};
@@ -583,16 +563,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			locationServiceHelper.removeLocationUpdates();
 		} catch (SecurityException e) {
 			// Location service permission not granted
-			if (PluginsHelper.isDevelopment()) {
-				LOG.debug("Location service permission not granted during stopLocationRequests", e);
-			}
+			LOG.debug("Location service permission not granted during stopLocationRequests", e);
 		}
 	}
 
 	public void pauseAllUpdates() {
-		if (PluginsHelper.isDevelopment()) {
-			LOG.info("Pausing all location updates...");
-		}
+		LOG.info("Pausing all location updates...");
 		stopLocationRequests();
 		registerOrUnregisterCompassListener(false);
 	}
@@ -691,7 +667,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return prevLocation != null && location != null && prevLocation.getTime() == location.getTime();
 	}
 
-	private net.osmand.Location setLocationForRouting(net.osmand.Location location, RoutingHelper routingHelper) {
+	private net.osmand.Location setLocationForRouting(net.osmand.Location location,
+			RoutingHelper routingHelper) {
 		net.osmand.Location updatedLocation = location;
 		if (routingHelper.isFollowingMode()) {
 			if (location == null || isPointAccurateForRouting(location)) {
@@ -707,9 +684,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public void setLocationFromService(net.osmand.Location location) {
-		if (PluginsHelper.isDevelopment()) {
-			LOG.info("setLocationFromService triggered. Source: " + (location != null ? location.getProvider() : "null"));
-		}
+		LOG.info("setLocationFromService triggered. Source: " + (location != null ? location.getProvider() : "null"));
 		if (locationSimulation.isRouteAnimating() || shouldIgnoreLocation(location)) {
 			return;
 		}
@@ -743,9 +718,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private void setLocation(@Nullable net.osmand.Location location) {
-		if (PluginsHelper.isDevelopment()) {
-			LOG.info("Internal setLocation triggered. Source: " + (location != null ? location.getProvider() : "null"));
-		}
+		LOG.info("Internal setLocation triggered. Source: " + (location != null ? location.getProvider() : "null"));
 		if (shouldIgnoreLocation(location)) {
 			return;
 		}
@@ -844,13 +817,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public boolean getRouteSegment(net.osmand.Location loc,
-	                               @Nullable ApplicationMode appMode,
-	                               boolean cancelPreviousSearch,
-	                               ResultMatcher<RouteDataObject> result) {
+			@Nullable ApplicationMode appMode,
+			boolean cancelPreviousSearch,
+			ResultMatcher<RouteDataObject> result) {
 		return currentPositionHelper.getRouteSegment(loc, appMode, cancelPreviousSearch, result);
 	}
 
-	public boolean getGeocodingResult(net.osmand.Location loc, ResultMatcher<GeocodingResult> result) {
+	public boolean getGeocodingResult(net.osmand.Location loc,
+			ResultMatcher<GeocodingResult> result) {
 		return currentPositionHelper.getGeocodingResult(loc, result);
 	}
 
@@ -861,9 +835,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			int counter = locationRequestsCounter.incrementAndGet();
 			if (counter >= REQUESTS_BEFORE_CHECK_LOCATION && locationRequestsCounter.compareAndSet(counter, 0)) {
 				if (System.currentTimeMillis() - lastTimeLocationFixed > LOCATION_TIMEOUT_TO_BE_STALE) {
-					if (PluginsHelper.isDevelopment()) {
-						LOG.info("Location timed out and is considered stale. Nullifying location.");
-					}
+					LOG.info("Location timed out and is considered stale. Nullifying location.");
 					location = null;
 				}
 			}
@@ -931,9 +903,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			LocationManager manager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 			return manager.isProviderEnabled(GPS_PROVIDER);
 		} catch (Exception e) {
-			if (PluginsHelper.isDevelopment()) {
-				LOG.debug("Exception in isGPSEnabled", e);
-			}
+			LOG.debug("Exception in isGPSEnabled", e);
 		}
 		return false;
 	}
@@ -943,9 +913,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			LocationManager manager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 			return manager.isProviderEnabled(NETWORK_PROVIDER);
 		} catch (Exception e) {
-			if (PluginsHelper.isDevelopment()) {
-				LOG.debug("Exception in isNetworkEnabled", e);
-			}
+			LOG.debug("Exception in isNetworkEnabled", e);
 		}
 		return false;
 	}

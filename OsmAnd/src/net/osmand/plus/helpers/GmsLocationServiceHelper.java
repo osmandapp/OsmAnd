@@ -21,7 +21,6 @@ import com.google.android.gms.tasks.Task;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.PluginsHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -57,12 +56,12 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 		fusedLocationCallback = new com.google.android.gms.location.LocationCallback() {
 			@Override
 			public void onLocationResult(@NonNull LocationResult locationResult) {
-				if (PluginsHelper.isDevelopment()) {
 					Location loc = locationResult.getLastLocation();
 					if (loc != null) {
-						LOG.info("SUCCESS! Received GMS Fused location: Lat=" + loc.getLatitude() + ", Lon=" + loc.getLongitude() + ", Acc=" + loc.getAccuracy());
+						LOG.info("SUCCESS! Received GMS Fused location: Lat=" +
+								String.format(java.util.Locale.US, "%.2f", loc.getLatitude()) + ", Lon=" +
+								String.format(java.util.Locale.US, "%.2f", loc.getLongitude()) + ", Acc=" + loc.getAccuracy());
 					}
-				}
 				LocationCallback locationCallback = GmsLocationServiceHelper.this.locationCallback;
 				if (locationCallback != null) {
 					Location location = locationResult.getLastLocation();
@@ -73,9 +72,7 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 
 			@Override
 			public void onLocationAvailability(@NonNull LocationAvailability locationAvailability) {
-				if (PluginsHelper.isDevelopment()) {
 					LOG.info("System fired GMS onLocationAvailability: " + locationAvailability.isLocationAvailable());
-				}
 				LocationCallback locationCallback = GmsLocationServiceHelper.this.locationCallback;
 				if (locationCallback != null) {
 					locationCallback.onLocationAvailability(locationAvailability.isLocationAvailable());
@@ -87,16 +84,12 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 	@Override
 	public void requestLocationUpdates(@NonNull LocationCallback locationCallback) {
 		this.locationCallback = locationCallback;
-		if (PluginsHelper.isDevelopment()) {
 			LOG.info("Requesting GMS Fused location updates...");
-		}
 		// request location updates
 		try {
 			fusedLocationProviderClient.requestLocationUpdates(
 					fusedLocationRequest, fusedLocationCallback, Looper.myLooper());
-			if (PluginsHelper.isDevelopment()) {
 				LOG.info("Successfully registered GMS Fused listener.");
-			}
 		} catch (SecurityException e) {
 			LOG.debug("Location service permission not granted", e);
 			throw e;
@@ -116,7 +109,6 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 		this.networkLocationCallback = locationCallback;
 		// request location updates
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
-		if (PluginsHelper.isDevelopment()) {
 			boolean isLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
 					locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 			LOG.info("Global location enabled state: " + isLocationEnabled);
@@ -127,7 +119,6 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 			if (!enabledProviders.contains(LocationManager.NETWORK_PROVIDER)) {
 				LOG.warn("NETWORK_PROVIDER is NOT in the enabled list!");
 			}
-		}
 		List<String> providers = locationManager.getProviders(true);
 		for (String provider : providers) {
 			if (provider == null
@@ -135,17 +126,13 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 					|| provider.equals(LocationManager.FUSED_PROVIDER)) {
 				continue;
 			}
-			if (PluginsHelper.isDevelopment()) {
 				LOG.info("Attempting to request network updates from provider: [" + provider + "]");
-			}
 			try {
 				NetworkListener networkListener = new NetworkListener(provider);
 				LocationManagerCompat.requestLocationUpdates(locationManager, provider, networkLocationRequest,
 						networkListener, Looper.myLooper());
 				networkListeners.add(networkListener);
-				if (PluginsHelper.isDevelopment()) {
 					LOG.info("Successfully registered network listener for [" + provider + "]");
-				}
 			} catch (SecurityException e) {
 				LOG.debug(provider + " location service permission not granted", e);
 			} catch (IllegalArgumentException e) {
@@ -156,9 +143,7 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 
 	@Override
 	public void removeLocationUpdates() {
-		if (PluginsHelper.isDevelopment()) {
 			LOG.info("Removing GMS Fused location updates...");
-		}
 		// remove location updates
 		try {
 			fusedLocationProviderClient.removeLocationUpdates(fusedLocationCallback);
@@ -175,19 +160,15 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 		if (locationCallback == null) {
 			return null;
 		}
-		if (PluginsHelper.isDevelopment()) {
 			LOG.info("Attempting to get first-time run default location via GMS Fused API...");
-		}
 		try {
 			Task<Location> lastLocation = fusedLocationProviderClient.getLastLocation();
 			lastLocation.addOnSuccessListener(loc -> {
-				if (PluginsHelper.isDevelopment()) {
 					if (loc != null) {
 						LOG.info("Success! Found valid cached GMS location.");
 					} else {
 						LOG.info("GMS getLastLocation returned null.");
 					}
-				}
 				locationCallback.onLocationResult(loc != null ? Collections.singletonList(convertLocation(loc)) : Collections.emptyList());
 			});
 		} catch (SecurityException e) {
