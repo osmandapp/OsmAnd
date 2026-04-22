@@ -545,10 +545,10 @@
     <string name="shared_string_about">Om</string>
     <string name="about_settings_descr">Versjonsinformasjon, lisenser, prosjektmedlemmer</string>
     <string name="local_index_tile_data_downloadable">Nedlastbar: %1$s</string>
-    <string name="local_index_tile_data_maxzoom">Maksimum zoom: %1$s</string>
-    <string name="local_index_tile_data_minzoom">Minimum zoom: %1$s</string>
-    <string name="edit_tilesource_maxzoom">Maks.-zoom</string>
-    <string name="edit_tilesource_minzoom">Minste forstørrelse</string>
+    <string name="local_index_tile_data_maxzoom">Maksimal zoom: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimumszoom: %1$s</string>
+    <string name="edit_tilesource_maxzoom">Maksimal zoom</string>
+    <string name="edit_tilesource_minzoom">Minimumszoom</string>
     <string name="edit_tilesource_url_to_load">Nettadresse</string>
     <string name="edit_tilesource_choose_existing">Velg eksisterende…</string>
     <string name="maps_define_edit">Definer/rediger…</string>
@@ -1315,7 +1315,7 @@
     <string name="rendering_attr_roadStyle_description">Veistil</string>
     <string name="routing_attr_avoid_borders_name">Ingen grensepasseringer</string>
     <string name="routing_attr_height_name">Høyde</string>
-    <string name="routing_attr_height_description">Spesifiser kjøretøyhøyde som tillates på ruter.</string>
+    <string name="routing_attr_height_description">Angi kjøretøyhøyde som tillates på ruter.</string>
     <string name="voices">Talemeldinger</string>
     <string name="downloads_left_template">%1$s nedlastinger igjen</string>
     <string name="other_menu_group">Annet</string>
@@ -1575,7 +1575,7 @@
     <string name="rendering_value_light_brown_name">Lysebrun</string>
     <string name="rendering_value_dark_brown_name">Mørkebrun</string>
     <string name="rendering_attr_contourColorScheme_name">Fargeskjema for koter</string>
-    <string name="search_hint">Tast by, adresse, interessepunktnavn</string>
+    <string name="search_hint">Skriv inn by, adresse, interessepunktnavn</string>
     <string name="search_map_hint">By eller region</string>
     <string name="routing_attr_allow_motorway_name">Bruk motorveier</string>
     <string name="routing_attr_allow_motorway_description">Tillater motorveier.</string>
@@ -6055,4 +6055,5 @@
     <string name="ais_address_nmea_server">IP-adresse for NMEA-datakilde</string>
     <string name="ais_address_nmea_server_description">Definer IP-adresse for NMEA-datakilden (hvis TCP brukes)</string>
     <string name="open_from_short">Fra</string>
+    <string name="astro_designations">Betegnelser</string>
 </resources>
