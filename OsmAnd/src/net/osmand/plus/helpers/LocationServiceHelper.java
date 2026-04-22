@@ -13,6 +13,9 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.PluginsHelper;
+
+import org.apache.commons.logging.Log;
 
 import org.apache.commons.logging.Log;
 
@@ -39,10 +42,27 @@ public abstract class LocationServiceHelper {
 
 		@Override
 		public void onLocationChanged(@NonNull android.location.Location location) {
+			if (PluginsHelper.isDevelopment()) {
+				LOG.info("SUCCESS! Received location from [" + location.getProvider() + "]: Lat=" + location.getLatitude() + ", Lon=" + location.getLongitude() + ", Acc=" + location.getAccuracy());
+			}
 			LocationCallback locationCallback = LocationServiceHelper.this.networkLocationCallback;
 			if (locationCallback != null) {
 				net.osmand.Location l = convertLocation(location);
 				locationCallback.onLocationResult(l == null ? Collections.emptyList() : Collections.singletonList(l));
+			}
+		}
+
+		@Override
+		public void onProviderEnabled(@NonNull String provider) {
+			if (PluginsHelper.isDevelopment()) {
+				LOG.info("System fired onProviderEnabled for [" + provider + "]");
+			}
+		}
+
+		@Override
+		public void onProviderDisabled(@NonNull String provider) {
+			if (PluginsHelper.isDevelopment()) {
+				LOG.warn("System fired onProviderDisabled for [" + provider + "]. Hardware disabled by user or OS.");
 			}
 		}
 	}
@@ -57,10 +77,16 @@ public abstract class LocationServiceHelper {
 	}
 
 	protected void removeNetworkLocationUpdates() {
+		if (PluginsHelper.isDevelopment()) {
+			LOG.info("Removing network location updates. Active listeners count: " + networkListeners.size());
+		}
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 		while (!networkListeners.isEmpty()) {
 			LocationListener listener = networkListeners.poll();
 			if (listener != null) {
+				if (PluginsHelper.isDevelopment()) {
+					LOG.info("Removing a network listener instance");
+				}
 				locationManager.removeUpdates(listener);
 			}
 		}

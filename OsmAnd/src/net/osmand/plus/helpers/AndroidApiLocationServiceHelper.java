@@ -12,6 +12,7 @@ import androidx.core.location.LocationListenerCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.PluginsHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -25,7 +26,7 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 
 	private LocationCallback locationCallback;
 
-	public AndroidApiLocationServiceHelper(@NonNull OsmandApplication app) {
+	public AndroidApiLocationServiceHelper(OsmandApplication app) {
 		super(app);
 	}
 
@@ -33,19 +34,20 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 	public void requestLocationUpdates(@NonNull LocationCallback locationCallback) {
 		this.locationCallback = locationCallback;
 		// request location updates
-		requestLocationUpdatesImpl();
-	}
-
-	protected void requestLocationUpdatesImpl() {
-		String provider = LocationManager.GPS_PROVIDER;
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
+		if (PluginsHelper.isDevelopment()) {
+			LOG.info("Requesting GPS location updates...");
+		}
 		try {
-			locationManager.requestLocationUpdates(provider, 0, 0, this);
+			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+			if (PluginsHelper.isDevelopment()) {
+				LOG.info("Successfully registered listener for [gps]");
+			}
 		} catch (SecurityException e) {
-			LOG.debug(provider + " location service permission not granted", e);
+			LOG.debug("Location service permission not granted", e);
 			throw e;
 		} catch (IllegalArgumentException e) {
-			LOG.debug(provider + " location provider not available", e);
+			LOG.debug("GPS location provider not available", e);
 			throw e;
 		}
 	}
@@ -60,18 +62,58 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 		this.networkLocationCallback = locationCallback;
 		// request location updates
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
+
+		if (PluginsHelper.isDevelopment()) {
+			boolean isLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+					locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+			LOG.info("Global location enabled state: " + isLocationEnabled);
+			LOG.info("All installed providers: " + locationManager.getAllProviders());
+			List<String> enabledProviders = locationManager.getProviders(true);
+			LOG.info("Currently ENABLED providers: " + enabledProviders);
+
+			if (!enabledProviders.contains(LocationManager.NETWORK_PROVIDER)) {
+				LOG.warn("NETWORK_PROVIDER is NOT in the enabled list!");
+			}
+		}
+		try {
+			if (locationManager.getAllProviders().contains(LocationManager.NETWORK_PROVIDER)) {
+				if (PluginsHelper.isDevelopment()) {
+					LOG.info("Attempting to explicitly request updates from provider: [" + LocationManager.NETWORK_PROVIDER + "]");
+				}
+				NetworkListener networkListener = new NetworkListener();
+				locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, networkListener);
+				networkListeners.add(networkListener);
+				if (PluginsHelper.isDevelopment()) {
+					LOG.info("Successfully registered explicit listener for [" + LocationManager.NETWORK_PROVIDER + "]");
+				}
+			}
+		} catch (SecurityException e) {
+			LOG.debug("network location service permission not granted", e);
+		} catch (IllegalArgumentException e) {
+			LOG.debug("network location provider not available", e);
+		} catch (Exception e) {
+			if (PluginsHelper.isDevelopment()) LOG.error("Unexpected error explicitly registering network provider", e);
+		}
 		List<String> providers = locationManager.getProviders(true);
 		for (String provider : providers) {
 			if (provider == null
 					|| provider.equals(LocationManager.GPS_PROVIDER)
 					|| provider.equals(LocationManager.PASSIVE_PROVIDER)
-					|| provider.equals(LocationManager.FUSED_PROVIDER)) {
+					|| provider.equals(LocationManager.FUSED_PROVIDER)
+					|| provider.equals(LocationManager.NETWORK_PROVIDER)) {
 				continue;
 			}
+			if (PluginsHelper.isDevelopment()) {
+				LOG.info("Attempting to request updates from dynamic provider: [" + provider + "]");
+			}
 			try {
-				NetworkListener networkListener = new NetworkListener(provider);
+				NetworkListener networkListener = new NetworkListener();
 				locationManager.requestLocationUpdates(provider, 0, 0, networkListener);
 				networkListeners.add(networkListener);
+
+				if (PluginsHelper.isDevelopment()) {
+					LOG.info("Successfully registered listener for [" + provider + "]");
+				}
 			} catch (SecurityException e) {
 				LOG.debug(provider + " location service permission not granted", e);
 			} catch (IllegalArgumentException e) {
@@ -82,6 +124,9 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 
 	@Override
 	public void removeLocationUpdates() {
+		if (PluginsHelper.isDevelopment()) {
+			LOG.info("Removing all location updates...");
+		}
 		// remove location updates
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 		try {
@@ -96,6 +141,9 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 
 	@Nullable
 	public net.osmand.Location getFirstTimeRunDefaultLocation(@Nullable LocationCallback locationCallback) {
+		if (PluginsHelper.isDevelopment()) {
+			LOG.info("Attempting to get first-time run default location (Last Known Location)...");
+		}
 		LocationManager locationManager = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
 		List<String> providers = new ArrayList<>(locationManager.getProviders(true));
 		// note, passive provider is from API_LEVEL 8 but it is a constant, we can check for it.
@@ -108,21 +156,39 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 		// find location
 		for (String provider : providers) {
 			try {
+				if (PluginsHelper.isDevelopment()) {
+					LOG.info("Checking last known location from provider: [" + provider + "]");
+				}
 				net.osmand.Location location = convertLocation(locationManager.getLastKnownLocation(provider));
 				if (location != null) {
+					if (PluginsHelper.isDevelopment()) {
+						LOG.info("Success! Found valid cached location from [" + provider + "]");
+					}
 					return location;
 				}
 			} catch (SecurityException e) {
-				LOG.debug(provider + " location service permission not granted", e);
+				// location service permission not granted
+				if (PluginsHelper.isDevelopment()) {
+					LOG.warn("SecurityException checking last known location for [" + provider + "]", e);
+				}
 			} catch (IllegalArgumentException e) {
-				LOG.debug(provider + " location provider not available", e);
+				// location provider not available
+				if (PluginsHelper.isDevelopment()) {
+					LOG.warn("IllegalArgumentException checking last known location for [" + provider + "]", e);
+				}
 			}
+		}
+		if (PluginsHelper.isDevelopment()) {
+			LOG.info("Failed to find any cached last known location.");
 		}
 		return null;
 	}
 
 	@Override
 	public void onLocationChanged(@NonNull Location location) {
+		if (PluginsHelper.isDevelopment()) {
+			LOG.info("SUCCESS! Received GPS location: Lat=" + location.getLatitude() + ", Lon=" + location.getLongitude() + ", Acc=" + location.getAccuracy());
+		}
 		LocationCallback locationCallback = this.locationCallback;
 		if (locationCallback != null) {
 			net.osmand.Location l = convertLocation(location);
@@ -132,6 +198,9 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 
 	@Override
 	public void onProviderEnabled(@NonNull String provider) {
+		if (PluginsHelper.isDevelopment()) {
+			LOG.info("System fired onProviderEnabled for GPS [" + provider + "]");
+		}
 		LocationCallback locationCallback = this.locationCallback;
 		if (locationCallback != null) {
 			locationCallback.onLocationAvailability(true);
@@ -140,6 +209,9 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 
 	@Override
 	public void onProviderDisabled(@NonNull String provider) {
+		if (PluginsHelper.isDevelopment()) {
+			LOG.warn("System fired onProviderDisabled for GPS [" + provider + "]. Hardware disabled by user or OS.");
+		}
 		LocationCallback locationCallback = this.locationCallback;
 		if (locationCallback != null) {
 			locationCallback.onLocationAvailability(false);
