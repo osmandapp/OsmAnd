@@ -156,7 +156,7 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 		)
 
 		readFullArticleButton.isVisible =
-			!onlineArticleUrl.isNullOrBlank() && app.settings.isInternetConnectionAvailable
+			!onlineArticleUrl.isNullOrBlank() && app.settings.isInternetConnectionAvailable(true)
 		readFullArticleButton.setOnClickListener {
 			if (!onlineArticleUrl.isNullOrBlank()) {
 				AndroidUtils.openUrl(requireContext(), onlineArticleUrl, nightMode)
