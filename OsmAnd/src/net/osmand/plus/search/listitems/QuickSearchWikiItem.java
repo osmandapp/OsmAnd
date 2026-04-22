@@ -12,11 +12,11 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
@@ -66,12 +66,9 @@ public class QuickSearchWikiItem extends QuickSearchListItem {
 	private Drawable getPoiTypeIcon(@NonNull OsmandApplication app, @NonNull Amenity amenity) {
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_info_dark, nightMode);
-		PoiType subType = app.getPoiTypes().getPoiTypeByKey(getPoiTypeKey(amenity));
-		if (subType != null) {
-			Drawable renderingIcon = app.getUIUtilities().getRenderingIcon(app, subType.getKeyName(), nightMode);
-			if (renderingIcon != null) {
-				drawable = renderingIcon;
-			}
+		Drawable iconDrawable = getAmenityTypeIcon(app, amenity, ColorUtilities.getSecondaryIconColorId(nightMode), true);
+		if (iconDrawable != null) {
+			drawable = iconDrawable;
 		}
 		return drawable;
 	}

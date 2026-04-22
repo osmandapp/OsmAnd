@@ -88,8 +88,8 @@
 
 						<ImageView
 							android:id="@+id/item_icon"
-							android:layout_width="12dp"
-							android:layout_height="12dp"
+							android:layout_width="12sp"
+							android:layout_height="12sp"
 							android:layout_gravity="center_vertical"
 							android:layout_marginEnd="6dp" />
 
