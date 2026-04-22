@@ -64,6 +64,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class SearchFavoriteFragment extends BaseFullScreenDialogFragment implements
 		SortFavoriteListener, FragmentStateHolder, CategorySelectionListener, FavoriteActionListener,
@@ -275,7 +276,8 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 					selectedPoint = point;
 					FavoriteMenu menu = new FavoriteMenu(app, app.getUIUtilities(), requireMyPlacesActivity());
 					menu.showPointOptionsMenu(anchor, point, nightMode,
-							SearchFavoriteFragment.this, SearchFavoriteFragment.this, SearchFavoriteFragment.this);
+							createCategorySelectionListener(pointsGroup -> moveFavorite(point, pointsGroup)),
+							SearchFavoriteFragment.this, SearchFavoriteFragment.this);
 				}
 			}
 
@@ -443,9 +445,11 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 
 		actionButton.setOnClickListener(v -> {
 			if (selectionMode) {
+				Set<FavouritePoint> selectedPoints = selectionHelper.getSelectedItems();
 				FavoriteMenu favoriteMenu = new FavoriteMenu(app, app.getUIUtilities(), requireMyPlacesActivity());
-				favoriteMenu.showPointsSelectOptionsMenu(actionButton, selectionHelper.getSelectedItems(), null, nightMode,
-						SearchFavoriteFragment.this, SearchFavoriteFragment.this, SearchFavoriteFragment.this);
+				favoriteMenu.showPointsSelectOptionsMenu(actionButton, selectedPoints, null, nightMode,
+						createCategorySelectionListener(pointsGroup -> moveFavorites(selectedPoints, pointsGroup)),
+						SearchFavoriteFragment.this, SearchFavoriteFragment.this);
 			}
 		});
 
@@ -552,6 +556,52 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		updateToolbar();
 	}
 
+	@NonNull
+	private CategorySelectionListener createCategorySelectionListener(@NonNull Consumer<PointsGroup> onCategorySelected) {
+		return new CategorySelectionListener() {
+			@Override
+			public void onCategorySelected(PointsGroup pointsGroup) {
+				onCategorySelected.accept(pointsGroup);
+			}
+
+			@Override
+			public void onAddGroupOpened() {
+				if (isAdded()) {
+					dismissAllowingStateLoss();
+				}
+			}
+		};
+	}
+
+	private void moveFavorite(@NonNull FavouritePoint point, @NonNull PointsGroup pointsGroup) {
+		String category = FavoriteGroup.getCategoryFromPointGroup(app, pointsGroup);
+		helper.editFavouriteName(point, point.getName(), category, point.getDescription(), point.getAddress());
+		updateAfterMove();
+	}
+
+	private void moveFavorites(@NonNull Set<FavouritePoint> points, @NonNull PointsGroup pointsGroup) {
+		if (!points.isEmpty()) {
+			String category = FavoriteGroup.getCategoryFromPointGroup(app, pointsGroup);
+			helper.editFavouritesGroup(new ArrayList<>(points), category);
+		}
+		selectionHelper.clearSelectedItems();
+		updateAfterMove();
+	}
+
+	private void updateAfterMove() {
+		if (isAdded() && getView() != null && adapter != null) {
+			updatePoints();
+			updateContent();
+			updateToolbar();
+		} else {
+			Fragment fragment = getTargetFragment();
+			if (fragment instanceof BaseFavoriteListFragment favoriteListFragment
+					&& favoriteListFragment.isAdded() && favoriteListFragment.getView() != null) {
+				favoriteListFragment.reloadData();
+			}
+		}
+	}
+
 	@Override
 	public void updateCompassValue(float heading) {
 		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
@@ -613,14 +663,11 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 
 	@Override
 	public void onCategorySelected(PointsGroup pointsGroup) {
-		String category = FavoriteGroup.getCategoryFromPointGroup(app, pointsGroup);
 		if (selectionMode) {
-			helper.editFavouritesGroup(new ArrayList<>(selectionHelper.getSelectedItems()), category);
-		} else {
-			helper.editFavouriteName(selectedPoint, selectedPoint.getName(), category, selectedPoint.getDescription(), selectedPoint.getAddress());
+			moveFavorites(selectionHelper.getSelectedItems(), pointsGroup);
+		} else if (selectedPoint != null) {
+			moveFavorite(selectedPoint, pointsGroup);
 		}
-
-		updateContent();
 	}
 
 	@Override
