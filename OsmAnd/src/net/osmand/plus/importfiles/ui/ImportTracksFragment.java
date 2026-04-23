@@ -329,13 +329,15 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 
 	@Override
 	public void onImportAsOneTrackClicked() {
-		String existingFilePath = ImportHelper.getExistingFilePath(app, fileName, fileSize);
+		File destinationDir = new File(selectedFolder);
+		String existingFilePath = ImportHelper.getExistingFilePath(fileName, destinationDir);
+		SaveImportedGpxListener saveGpxListener = getSaveGpxListener(() -> saveAsOneTrackTask = null);
 		if (existingFilePath != null) {
-			app.showToastMessage(R.string.file_already_imported);
-			dismissAndOpenTracks();
+			FileExistBottomSheet.showInstance(getParentFragmentManager(), fileName, overwrite -> {
+				saveAsOneTrackTask = new SaveGpxAsyncTask(app, gpxFile, destinationDir, fileName, saveGpxListener, overwrite);
+				OsmAndTaskManager.executeTask(saveAsOneTrackTask);
+			});
 		} else {
-			File destinationDir = new File(selectedFolder);
-			SaveImportedGpxListener saveGpxListener = getSaveGpxListener(() -> saveAsOneTrackTask = null);
 			saveAsOneTrackTask = new SaveGpxAsyncTask(app, gpxFile, destinationDir, fileName, saveGpxListener, false);
 			OsmAndTaskManager.executeTask(saveAsOneTrackTask);
 		}
