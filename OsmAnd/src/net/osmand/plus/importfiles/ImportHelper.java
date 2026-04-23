@@ -534,7 +534,7 @@ public class ImportHelper {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
 						FragmentManager manager = activity.getSupportFragmentManager();
 						ImportTracksFragment.showInstance(manager, result, name,
-								destinationDir.getAbsolutePath(), gpxImportListener, fileSize);
+								destinationDir.getAbsolutePath(), gpxImportListener);
 					}
 				} else {
 					importAsOneTrack(result, name, destinationDir, showSnackbar, onGpxImport);

@@ -4,10 +4,14 @@ import net.osmand.shared.gpx.GpxFile;
 
 public abstract class MultipleTracksImportListener implements GpxImportListener {
 
-	private final int filesSize;
+	private int filesSize;
 	private int importCounter;
 
 	public MultipleTracksImportListener(int filesSize) {
+		this.filesSize = filesSize;
+	}
+
+	public void setFilesSize(int filesSize) {
 		this.filesSize = filesSize;
 	}
 

@@ -41,6 +41,7 @@ import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.MultipleTracksImportListener;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.importfiles.tasks.CollectTracksTask;
 import net.osmand.plus.importfiles.tasks.CollectTracksTask.CollectTracksListener;
@@ -83,7 +84,6 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 	private GpxFile gpxFile;
 	private String fileName;
 	private String selectedFolder;
-	private long fileSize;
 
 	private GpxImportListener importListener;
 
@@ -299,9 +299,16 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 
 	private void importTracks() {
 		File folder = new File(selectedFolder);
+		updateImportListenerFilesSize(selectedTracks.size());
 		SaveImportedGpxListener saveGpxListener = getSaveGpxListener(() -> saveTracksTask = null);
 		saveTracksTask = new SaveTracksTask(app, new ArrayList<>(selectedTracks), folder, saveGpxListener);
 		OsmAndTaskManager.executeTask(saveTracksTask);
+	}
+
+	private void updateImportListenerFilesSize(int filesSize) {
+		if (importListener instanceof MultipleTracksImportListener) {
+			((MultipleTracksImportListener) importListener).setFilesSize(filesSize);
+		}
 	}
 
 	private void collectTracks() {
@@ -496,14 +503,12 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 	                                @NonNull GpxFile gpxFile,
 	                                @NonNull String fileName,
 	                                @Nullable String selectedFolder,
-	                                @Nullable GpxImportListener importListener,
-	                                long fileSize) {
+	                                @Nullable GpxImportListener importListener) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ImportTracksFragment fragment = new ImportTracksFragment();
 			fragment.gpxFile = gpxFile;
 			fragment.fileName = fileName;
 			fragment.selectedFolder = selectedFolder;
-			fragment.fileSize = fileSize;
 			fragment.importListener = importListener;
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
