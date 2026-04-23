@@ -62,10 +62,11 @@ sealed class MediaItem {
 	// Represents media hosted on external servers (http:// or https://).
 	// Can be any media type (photo, video, audio).
 	data class Remote(
-		val sourceUrl: String,
+		val sourceUrl: String, // Direct link to the binary file for loading pixels
 		override val title: String,
 		override val type: MediaType,
 		val previewContent: MediaContent? = null,
+		val webpageUrl: String? = null, // Optional link to the source webpage for viewing in a browser
 		override val origin: MediaOrigin = MediaOrigin.UNKNOWN
 	) : MediaItem()
 
