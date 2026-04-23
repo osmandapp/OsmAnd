@@ -34,13 +34,27 @@ class AstroDescriptionCardViewHolder(itemView: View) : RecyclerView.ViewHolder(i
 			return
 		}
 
-		val targetName = when (linkType) {
-			AstroDescriptionLinkType.WIKIPEDIA -> app.getString(R.string.shared_string_wikipedia)
-			AstroDescriptionLinkType.WIKIDATA -> app.getString(R.string.wikidata)
+		val opensOfflineArticle = linkType == AstroDescriptionLinkType.WIKIPEDIA
+				&& item.hasOfflineArticle
+		val text = if (opensOfflineArticle) {
+			app.getString(R.string.context_menu_read_full_article)
+		} else {
+			val targetName = when (linkType) {
+				AstroDescriptionLinkType.WIKIPEDIA -> app.getString(R.string.shared_string_wikipedia)
+				AstroDescriptionLinkType.WIKIDATA -> app.getString(R.string.wikidata)
+			}
+			app.getString(R.string.read_on, targetName)
 		}
-		val text = app.getString(R.string.read_on, targetName)
-		val start = text.indexOf(targetName)
-		val end = start + targetName.length
+		val activeText = if (opensOfflineArticle) {
+			text
+		} else {
+			when (linkType) {
+				AstroDescriptionLinkType.WIKIPEDIA -> app.getString(R.string.shared_string_wikipedia)
+				AstroDescriptionLinkType.WIKIDATA -> app.getString(R.string.wikidata)
+			}
+		}
+		val start = text.indexOf(activeText)
+		val end = start + activeText.length
 		val sp = SpannableString(text).apply {
 			if (start >= 0) {
 				setSpan(

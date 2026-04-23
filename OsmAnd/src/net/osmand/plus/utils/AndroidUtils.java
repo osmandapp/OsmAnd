@@ -38,6 +38,7 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Parcelable;
 import android.os.StatFs;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -1422,11 +1423,22 @@ public class AndroidUtils {
 	}
 
 	@Nullable
+	@SuppressWarnings({"deprecation", "unchecked"})
 	public static <T extends Serializable> T getSerializable(@NonNull Bundle bundle, @NonNull String key, @NonNull Class<T> clazz) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 			return bundle.getSerializable(key, clazz);
 		} else {
 			return (T) bundle.getSerializable(key);
+		}
+	}
+
+	@Nullable
+	@SuppressWarnings({"deprecation", "unchecked"})
+	public static <T extends Parcelable> T getParcelable(@NonNull Bundle bundle, @NonNull String key, @NonNull Class<T> clazz) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			return bundle.getParcelable(key, clazz);
+		} else {
+			return (T) bundle.getParcelable(key);
 		}
 	}
 

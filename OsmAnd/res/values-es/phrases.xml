@@ -1670,7 +1670,7 @@
     <string name="poi_artwork_type_graffiti">Tipo de obra: graffiti</string>
     <string name="poi_artwork_type_stele">Tipo de obra: estela</string>
     <string name="poi_artwork_type_fountain">Tipo de obra: fuente</string>
-    <string name="poi_width">Ancho</string>
+    <string name="poi_width">Anchura</string>
     <string name="poi_architect_name">Arquitecto/a;Arquitecta</string>
     <string name="poi_architecture_modern">Arquitectura: moderna</string>
     <string name="poi_architecture_stalinist_neoclassicism">Arquitectura: neoclasista stalinista</string>
@@ -1960,7 +1960,7 @@
     <string name="poi_social_facility_outreach">Alcance</string>
     <string name="poi_social_facility_food_bank">Banco de alimentos</string>
     <string name="poi_social_facility_shelter">Refugio</string>
-    <string name="poi_social_facility_ambulatory_care">Asistencia sanitaria</string>
+    <string name="poi_social_facility_ambulatory_care">Atención ambulatoria</string>
     <string name="poi_social_facility_workshop">Centro laboral</string>
     <string name="poi_social_facility_day_care">Guardería infantil</string>
     <string name="poi_social_facility_for_senior">Jubilados</string>
@@ -3742,7 +3742,7 @@
     <string name="poi_volcano_type_mud">Tierra (lodosa)</string>
     <string name="poi_volcano_last_eruption">Última erupción</string>
     <string name="poi_volcano_status_extinct">Extinto</string>
-    <string name="poi_volcano_status_dormant">Latente o dormido</string>
+    <string name="poi_volcano_status_dormant">Latente</string>
     <string name="poi_volcano_status_active">Activo</string>
     <string name="poi_volcano_status_inactive">Inactivo</string>
     <string name="poi_volcano_number_of_eruptions">Número de erupciones</string>

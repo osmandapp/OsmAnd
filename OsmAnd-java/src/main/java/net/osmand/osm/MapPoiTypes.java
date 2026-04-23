@@ -341,9 +341,9 @@ public class MapPoiTypes {
 		if (name.equals("historic") && !create) {
 			name = "tourism";
 		}
-		if (poiCategoryIndex.containsKey(name)) {
-			int ind = poiCategoryIndex.get(name);
-			return categories.get(ind);
+		Integer index = poiCategoryIndex.get(name);
+		if (index != null) {
+			return categories.get(index);
 		}
 		int size = categories.size();
 		for (int i = 0; i < size; i++) {
