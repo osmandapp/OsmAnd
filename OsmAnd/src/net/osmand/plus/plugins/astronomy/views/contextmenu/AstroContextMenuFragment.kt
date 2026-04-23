@@ -1308,7 +1308,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	}
 
 	private fun openDescriptionCard(item: AstroDescriptionCardItem) {
-		if (!app.settings.isInternetConnectionAvailable && item.hasOfflineArticle && showOfflineArticle()) {
+		if (item.hasOfflineArticle && showOfflineArticle()) {
 			return
 		}
 		item.readMoreUri?.let(::openUri)

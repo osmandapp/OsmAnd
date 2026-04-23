@@ -33,7 +33,10 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 
 		private const val ARG_WIKIDATA_ID = "wikidataId"
 		private const val ARG_LANG = "lang"
-		private const val DEFAULT_BASE_URL = "https://wikipedia.org/"
+		private val BODY_CONTENT_REGEX = Regex(
+			"<body[^>]*>([\\s\\S]*?)</body>",
+			RegexOption.IGNORE_CASE
+		)
 
 		fun showInstance(fragmentManager: FragmentManager, wikidataId: String, lang: String): Boolean {
 			if (!AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
@@ -155,8 +158,7 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 			onlineArticleUrl
 		)
 
-		readFullArticleButton.isVisible =
-			!onlineArticleUrl.isNullOrBlank() && app.settings.isInternetConnectionAvailable
+		readFullArticleButton.isVisible = !onlineArticleUrl.isNullOrBlank()
 		readFullArticleButton.setOnClickListener {
 			if (!onlineArticleUrl.isNullOrBlank()) {
 				AndroidUtils.openUrl(requireContext(), onlineArticleUrl, nightMode)
@@ -184,10 +186,27 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 	override fun showPopupLangMenu(view: View, langSelected: String) = Unit
 
 	override fun createHtmlContent(): String {
-		return articleHtml.orEmpty()
+		val currentArticle = article
+		val lang = currentArticle?.lang
+		val bodyTag = if (rtlLanguages.contains(lang)) "<body dir=\"rtl\">\n" else "<body>\n"
+		val nightModeClass = if (nightMode) " nightmode" else ""
+		val bodyContent = extractBodyContent(articleHtml.orEmpty())
+		return buildString {
+			append(HEADER_INNER)
+			append(bodyTag)
+			append("<div class=\"main")
+			append(nightModeClass)
+			append("\">\n")
+			append(bodyContent)
+			append(FOOTER_INNER)
+		}
 	}
 
 	override fun getBaseUrl(): String {
-		return article?.getOnlineArticleUrl() ?: DEFAULT_BASE_URL
+		return super.getBaseUrl()
+	}
+
+	private fun extractBodyContent(html: String): String {
+		return BODY_CONTENT_REGEX.find(html)?.groups?.get(1)?.value ?: html
 	}
 }
