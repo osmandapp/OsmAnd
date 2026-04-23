@@ -1,24 +1,15 @@
 package net.osmand.plus.importfiles;
 
 import static android.app.Activity.RESULT_OK;
-import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-import static net.osmand.IndexConstants.SQLITE_CHART_FILE_EXT;
-import static net.osmand.IndexConstants.SQLITE_EXT;
-import static net.osmand.IndexConstants.WPT_CHART_FILE_EXT;
-import static net.osmand.IndexConstants.ZIP_EXT;
+import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.helpers.IntentHelper.REQUEST_CODE_CREATE_FILE;
 import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.EXPORT_TYPE_LIST_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_LATEST_CHANGES_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_VERSION_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
@@ -48,28 +39,16 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmAndTaskManager;
-import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.importfiles.tasks.CopyToFileTask;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.shared.SharedUtil;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.plus.AppInitializer;
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.importfiles.tasks.FavoritesImportTask;
-import net.osmand.plus.importfiles.tasks.GeoTiffImportTask;
-import net.osmand.plus.importfiles.tasks.GpxImportTask;
-import net.osmand.plus.importfiles.tasks.ObfImportTask;
-import net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask;
-import net.osmand.plus.importfiles.tasks.SettingsImportTask;
-import net.osmand.plus.importfiles.tasks.SqliteTileImportTask;
-import net.osmand.plus.importfiles.tasks.UriImportTask;
-import net.osmand.plus.importfiles.tasks.XmlImportTask;
-import net.osmand.plus.importfiles.tasks.ZipImportTask;
+import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.importfiles.tasks.*;
 import net.osmand.plus.importfiles.ui.FileExistBottomSheet;
 import net.osmand.plus.importfiles.ui.FileExistBottomSheet.SaveExistingFileListener;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
@@ -78,12 +57,15 @@ import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -341,7 +323,8 @@ public class ImportHelper {
 
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras) {
 		fileName = fileName.replace(ZIP_EXT, "");
-		if (extras != null && CollectionUtils.containsAny(extras.keySet(), SETTINGS_VERSION_KEY, SETTINGS_LATEST_CHANGES_KEY)) {
+		boolean authorized = extras != null && OsmandAidlApi.hasAuthToken(app, extras);
+		if (extras != null && authorized && CollectionUtils.containsAny(extras.keySet(), SETTINGS_VERSION_KEY, SETTINGS_LATEST_CHANGES_KEY)) {
 			int version = extras.getInt(SETTINGS_VERSION_KEY, -1);
 			String latestChanges = extras.getString(SETTINGS_LATEST_CHANGES_KEY);
 			boolean replace = extras.getBoolean(REPLACE_KEY);
