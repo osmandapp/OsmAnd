@@ -17,6 +17,7 @@ import static net.osmand.shared.gpx.GpxParameter.FILE_LAST_MODIFIED_TIME;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -214,6 +215,7 @@ public class OsmandAidlApi {
 	private static final String AIDL_LOCK_STATE = "lock_state";
 	private static final String AIDL_EXIT_APP = "exit_app";
 	private static final String AIDL_EXIT_APP_RESTART = "exit_app_restart";
+	private static final String AIDL_AUTH_TOKEN = "aidl_auth_token";
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
@@ -2292,11 +2294,24 @@ public class OsmandAidlApi {
 
 	private final Map<String, FileCopyInfo> copyFilesCache = new ConcurrentHashMap<>();
 
+
+	public static void addAuthToken(@NonNull Context context, @NonNull Bundle bundle) {
+		PendingIntent token = PendingIntent.getActivity(context, 0, new Intent(),  PendingIntent.FLAG_IMMUTABLE);
+		bundle.putParcelable(AIDL_AUTH_TOKEN, token);
+	}
+
+	public static boolean hasAuthToken(@NonNull Context context, @NonNull Bundle bundle) {
+		PendingIntent token = AndroidUtils.getParcelable(bundle, AIDL_AUTH_TOKEN, PendingIntent.class);
+		return token != null && context.getPackageName().equals(token.getCreatorPackage());
+	}
+
 	public boolean importProfile(Uri profileUri, String latestChanges, int version) {
 		if (profileUri != null) {
 			Bundle bundle = new Bundle();
 			bundle.putString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY, latestChanges);
 			bundle.putInt(SettingsHelper.SETTINGS_VERSION_KEY, version);
+
+			addAuthToken(app, bundle);
 
 			MapActivity.launchMapActivityMoveToTop(app, null, profileUri, bundle);
 			return true;
@@ -2313,6 +2328,8 @@ public class OsmandAidlApi {
 			bundle.putBoolean(SILENT_IMPORT_KEY, silent);
 			bundle.putString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY, latestChanges);
 			bundle.putInt(SettingsHelper.SETTINGS_VERSION_KEY, version);
+
+			addAuthToken(app, bundle);
 
 			MapActivity.launchMapActivityMoveToTop(app, null, profileUri, bundle);
 			return true;
