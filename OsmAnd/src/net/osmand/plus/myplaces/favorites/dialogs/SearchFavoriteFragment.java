@@ -64,10 +64,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
 public class SearchFavoriteFragment extends BaseFullScreenDialogFragment implements
-		SortFavoriteListener, FragmentStateHolder, CategorySelectionListener, FavoriteActionListener,
+		SortFavoriteListener, FragmentStateHolder, FavoriteActionListener,
 		FavoritesListener, OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = SearchFavoriteFragment.class.getSimpleName();
@@ -79,7 +78,6 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 	private FavouritesHelper helper;
 
 	private String groupKey;
-	private FavouritePoint selectedPoint;
 	private List<FavouritePoint> points = new ArrayList<>();
 
 	protected boolean selectionMode;
@@ -273,10 +271,9 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 			@Override
 			public void onActionButtonClick(@NonNull Object object, @NonNull View anchor) {
 				if (object instanceof FavouritePoint point) {
-					selectedPoint = point;
 					FavoriteMenu menu = new FavoriteMenu(app, app.getUIUtilities(), requireMyPlacesActivity());
 					menu.showPointOptionsMenu(anchor, point, nightMode,
-							createCategorySelectionListener(pointsGroup -> moveFavorite(point, pointsGroup)),
+							createCategorySelectionListener(point, null),
 							SearchFavoriteFragment.this, SearchFavoriteFragment.this);
 				}
 			}
@@ -448,7 +445,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 				Set<FavouritePoint> selectedPoints = selectionHelper.getSelectedItems();
 				FavoriteMenu favoriteMenu = new FavoriteMenu(app, app.getUIUtilities(), requireMyPlacesActivity());
 				favoriteMenu.showPointsSelectOptionsMenu(actionButton, selectedPoints, null, nightMode,
-						createCategorySelectionListener(pointsGroup -> moveFavorites(selectedPoints, pointsGroup)),
+						createCategorySelectionListener(null, selectedPoints),
 						SearchFavoriteFragment.this, SearchFavoriteFragment.this);
 			}
 		});
@@ -557,11 +554,22 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 	}
 
 	@NonNull
-	private CategorySelectionListener createCategorySelectionListener(@NonNull Consumer<PointsGroup> onCategorySelected) {
+	private CategorySelectionListener createCategorySelectionListener(@Nullable FavouritePoint pointToMove,
+	                                                                 @Nullable Set<FavouritePoint> pointsToMove) {
 		return new CategorySelectionListener() {
 			@Override
 			public void onCategorySelected(PointsGroup pointsGroup) {
-				onCategorySelected.accept(pointsGroup);
+				String category = FavoriteGroup.getCategoryFromPointGroup(app, pointsGroup);
+				if (pointsToMove != null) {
+					if (!pointsToMove.isEmpty()) {
+						helper.editFavouritesGroup(new ArrayList<>(pointsToMove), category);
+					}
+					selectionHelper.clearSelectedItems();
+				} else if (pointToMove != null) {
+					helper.editFavouriteName(pointToMove, pointToMove.getName(), category,
+							pointToMove.getDescription(), pointToMove.getAddress());
+				}
+				updateAfterMove();
 			}
 
 			@Override
@@ -571,21 +579,6 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 				}
 			}
 		};
-	}
-
-	private void moveFavorite(@NonNull FavouritePoint point, @NonNull PointsGroup pointsGroup) {
-		String category = FavoriteGroup.getCategoryFromPointGroup(app, pointsGroup);
-		helper.editFavouriteName(point, point.getName(), category, point.getDescription(), point.getAddress());
-		updateAfterMove();
-	}
-
-	private void moveFavorites(@NonNull Set<FavouritePoint> points, @NonNull PointsGroup pointsGroup) {
-		if (!points.isEmpty()) {
-			String category = FavoriteGroup.getCategoryFromPointGroup(app, pointsGroup);
-			helper.editFavouritesGroup(new ArrayList<>(points), category);
-		}
-		selectionHelper.clearSelectedItems();
-		updateAfterMove();
 	}
 
 	private void updateAfterMove() {
@@ -658,15 +651,6 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 				filter = (Set<?>) results.values;
 				updateContent();
 			}
-		}
-	}
-
-	@Override
-	public void onCategorySelected(PointsGroup pointsGroup) {
-		if (selectionMode) {
-			moveFavorites(selectionHelper.getSelectedItems(), pointsGroup);
-		} else if (selectedPoint != null) {
-			moveFavorite(selectedPoint, pointsGroup);
 		}
 	}
 
