@@ -7,6 +7,7 @@ import net.osmand.shared.util.ImageLoaderCallback
 import net.osmand.shared.util.LoadingImage
 import net.osmand.shared.util.NetworkImageLoader
 
+// TODO: remove or update docs, implement loading for other types
 /**
  * Temporary provider that extracts existing online image loading logic from UI components
  * and adapts it to the new MediaItem model.
