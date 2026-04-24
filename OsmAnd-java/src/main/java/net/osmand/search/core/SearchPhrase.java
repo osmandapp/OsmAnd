@@ -144,7 +144,7 @@ public class SearchPhrase {
 											   String textToSearch) {
 		SearchPhrase sp = new SearchPhrase(settings, this.clt);
 		sp.words = foundWords;
-		sp.fullTextSearchPhrase = fullText;
+		sp.fullTextSearchPhrase = UnicodeDiacritics.getInstance().stripDiacritics(fullText);
 		sp.unknownSearchPhrase = textToSearch;
 		
 		sp.lastUnknownSearchWordComplete = isTextComplete(fullText) ;
