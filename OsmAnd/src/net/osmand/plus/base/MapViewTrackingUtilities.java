@@ -1,5 +1,6 @@
 package net.osmand.plus.base;
 
+import static net.osmand.plus.OsmAndLocationProvider.formatLocationForLog;
 import static net.osmand.plus.settings.enums.CompassMode.COMPASS_DIRECTION;
 import static net.osmand.plus.settings.enums.CompassMode.MANUALLY_ROTATED;
 import static net.osmand.plus.settings.enums.CompassMode.NORTH_IS_UP;
@@ -14,6 +15,7 @@ import androidx.core.util.Pair;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -31,8 +33,6 @@ import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.resources.DetectRegionTask;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.NextDirectionInfo;
@@ -50,11 +50,15 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Zoom.ComplexZoom;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, MapMarkerChangedListener {
+
+	private static final Log LOG = PlatformUtil.getLog(MapViewTrackingUtilities.class);
 
 	public static final float COMPASS_HEADING_THRESHOLD = 1.0f;
 	private static final int MAP_LINKED_LOCATION_TIME_MS = 60 * 60 * 1000;
@@ -241,6 +245,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	@Override
 	public void updateLocation(Location location) {
+		LOG.warn("LOC_DIAG MapViewTrackingUtilities.updateLocation: incoming=" + formatLocationForLog(location)
+				+ ", prevMyLocation=" + formatLocationForLog(myLocation)
+				+ ", mapView=" + mapView
+				+ ", isMapLinked=" + isMapLinkedToLocation()
+				+ ", movingToMyLocation=" + movingToMyLocation
+				+ ", followingMode=" + routingHelper.isFollowingMode()
+				+ ", routePlanningMode=" + routePlanningMode);
 		Location prevLocation = myLocation;
 		long prevLocationTime = myLocationTime;
 
@@ -492,6 +503,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			Location lastKnownLocation = locationProvider.getLastKnownLocation();
 			Location lastStaleKnownLocation = locationProvider.getLastStaleKnownLocation();
 			Location location = lastKnownLocation != null ? lastKnownLocation : lastStaleKnownLocation;
+			LOG.warn("backToLocationImpl: lastKnown=" + formatLocationForLog(lastKnownLocation)
+					+ ", lastStale=" + formatLocationForLog(lastStaleKnownLocation)
+					+ ", selected=" + formatLocationForLog(location)
+					+ ", isMapLinked=" + isMapLinkedToLocation()
+					+ ", followingMode=" + routingHelper.isFollowingMode()
+					+ ", routePlanningMode=" + routePlanningMode
+					+ ", mapView=" + mapView);
 			if (!isMapLinkedToLocation()) {
 				if (location != null) {
 					animateBackToLocation(location, zoom, forceZoom);
@@ -502,6 +520,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 			if (location == null) {
 				//Hardy, 2019-12-15: Inject A-GPS data if backToLocationImpl fails with no fix:
+				LOG.error("showing unknown_location toast");
 				if (app.getSettings().isInternetConnectionAvailable(true)) {
 					locationProvider.redownloadAGPS();
 					app.showToastMessage(app.getString(R.string.unknown_location) + "\n\n" + app.getString(R.string.agps_data_last_downloaded, (new SimpleDateFormat("yyyy-MM-dd  HH:mm")).format(app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.get())));

@@ -189,23 +189,27 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				locationServiceHelper.requestLocationUpdates(new LocationCallback() {
 					@Override
 					public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
-						net.osmand.Location location = null;
+						net.osmand.Location location = !locations.isEmpty() ? locations.get(locations.size() - 1) : null;
+						LOG.warn("GPS callback: empty=" + locations.isEmpty()
+								+ ", location=" + formatLocationForLog(location)
+								+ ", useOnlyGPS=" + useOnlyGPS()
+								+ ", routeAnimating=" + locationSimulation.isRouteAnimating()
+								+ ", followingMode=" + app.getRoutingHelper().isFollowingMode()
+								+ ", routePlanningMode=" + app.getRoutingHelper().isRoutePlanningMode());
 						if (!locations.isEmpty()) {
-							location = locations.get(locations.size() - 1);
-
-							LOG.info("Received GPS location from helper: Lat=" +
-									String.format(java.util.Locale.US, "%.2f", location.getLatitude()) + ", Lon=" +
-									String.format(java.util.Locale.US, "%.2f", location.getLongitude()));
 							if (useOnlyGPS() && location.hasAccuracy() &&
 									location.getAccuracy() > ACCURACY_FOR_GPX_AND_ROUTING) {
+								LOG.warn("GPS ignored by accuracy filter: location=" + formatLocationForLog(location) + ", threshold=" + ACCURACY_FOR_GPX_AND_ROUTING);
 								// fused provider could return network locations
-								LOG.warn("GPS location ignored due to low accuracy: " + location.getAccuracy());
 								return;
 							}
 							lastTimeGPSLocationFixed = System.currentTimeMillis();
 						}
 						if (!locationSimulation.isRouteAnimating()) {
+							LOG.warn("GPS passed to setLocation: " + formatLocationForLog(location));
 							setLocation(location);
+						} else {
+							LOG.warn("GPS ignored because route simulation is active");
 						}
 					}
 				});
@@ -221,11 +225,26 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				locationServiceHelper.requestNetworkLocationUpdates(new LocationCallback() {
 					@Override
 					public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
-						if (!locations.isEmpty() && !useOnlyGPS() && !locationSimulation.isRouteAnimating()) {
-							LOG.info("Received Network location from helper: Lat=" +
-									String.format(java.util.Locale.US, "%.2f", locations.get(locations.size() - 1).getLatitude()) + ", Lon=" +
-									String.format(java.util.Locale.US, "%.2f", locations.get(locations.size() - 1).getLongitude()));
-							setLocation(locations.get(locations.size() - 1));
+						net.osmand.Location location = locations.isEmpty() ? null : locations.get(locations.size() - 1);
+						boolean onlyGps = useOnlyGPS();
+						boolean routeAnimating = locationSimulation.isRouteAnimating();
+
+						LOG.warn("NETWORK callback decision: empty=" + locations.isEmpty()
+								+ ", location=" + formatLocationForLog(location)
+								+ ", useOnlyGPS=" + onlyGps
+								+ ", routeAnimating=" + routeAnimating
+								+ ", followingMode=" + app.getRoutingHelper().isFollowingMode()
+								+ ", routePlanningMode=" + app.getRoutingHelper().isRoutePlanningMode()
+								+ ", lastGpsAgeMs=" + (lastTimeGPSLocationFixed > 0
+								? System.currentTimeMillis() - lastTimeGPSLocationFixed : -1));
+
+						if (location != null && !onlyGps && !routeAnimating) {
+							LOG.warn("NETWORK accepted: " + formatLocationForLog(location));
+							setLocation(location);
+						} else {
+							LOG.warn("NETWORK ignored: empty=" + locations.isEmpty()
+									+ ", useOnlyGPS=" + onlyGps
+									+ ", routeAnimating=" + routeAnimating);
 						}
 					}
 				});
@@ -303,8 +322,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	@Nullable
-	public net.osmand.Location getFirstTimeRunDefaultLocation(
-			@Nullable OsmAndLocationListener locationListener) {
+	public net.osmand.Location getFirstTimeRunDefaultLocation(@Nullable OsmAndLocationListener locationListener) {
 		if (isLocationPermissionAvailable(app)) {
 			LocationCallback callback = locationListener == null ? null : new LocationCallback() {
 				@Override
@@ -552,8 +570,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private void stopLocationRequests() {
-		LOG.info(">>>> stopLocationRequests");
-
+		LOG.warn("LOC_DIAG stopLocationRequests: stored=" + formatLocationForLog(location) + ", cached=" + formatLocationForLog(cachedLocation));
 		gpsInfo.reset();
 		LocationManager service = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 		if (gpsStatusListener != null) {
@@ -568,7 +585,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public void pauseAllUpdates() {
-		LOG.info("Pausing all location updates...");
+		LOG.warn("LOC_DIAG pauseAllUpdates: stored=" + formatLocationForLog(location)
+				+ ", cached=" + formatLocationForLog(cachedLocation) + ", lastFixAgeMs=" + (lastTimeLocationFixed > 0
+				? System.currentTimeMillis() - lastTimeLocationFixed : -1));
 		stopLocationRequests();
 		registerOrUnregisterCompassListener(false);
 	}
@@ -661,14 +680,27 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private boolean shouldIgnoreLocation(net.osmand.Location location) {
+		boolean ignored;
+		String reason;
 		if (customLocation != null && timeToNotUseOtherGPS >= System.currentTimeMillis()) {
-			return location == null || !Algorithms.stringsEqual(customLocation.getProvider(), location.getProvider());
+			ignored = location == null || !Algorithms.stringsEqual(customLocation.getProvider(), location.getProvider());
+			reason = "customLocationActive";
+		} else {
+			ignored = prevLocation != null && location != null && prevLocation.getTime() == location.getTime();
+			reason = "sameTimestamp";
 		}
-		return prevLocation != null && location != null && prevLocation.getTime() == location.getTime();
+
+		if (ignored) {
+			LOG.warn("ignoring location: reason=" + reason
+					+ ", incoming=" + formatLocationForLog(location)
+					+ ", prev=" + formatLocationForLog(prevLocation)
+					+ ", custom=" + formatLocationForLog(customLocation)
+					+ ", timeToNotUseOtherGPSLeftMs=" + Math.max(0, timeToNotUseOtherGPS - System.currentTimeMillis()));
+		}
+		return ignored;
 	}
 
-	private net.osmand.Location setLocationForRouting(net.osmand.Location location,
-			RoutingHelper routingHelper) {
+	private net.osmand.Location setLocationForRouting(net.osmand.Location location, RoutingHelper routingHelper) {
 		net.osmand.Location updatedLocation = location;
 		if (routingHelper.isFollowingMode()) {
 			if (location == null || isPointAccurateForRouting(location)) {
@@ -718,12 +750,18 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private void setLocation(@Nullable net.osmand.Location location) {
-		LOG.info("Internal setLocation triggered. Source: " + (location != null ? location.getProvider() : "null"));
+		LOG.warn("setLocation START: incoming=" + formatLocationForLog(location)
+				+ ", storedBefore=" + formatLocationForLog(this.location)
+				+ ", prev=" + formatLocationForLog(prevLocation)
+				+ ", custom=" + formatLocationForLog(customLocation));
 		if (shouldIgnoreLocation(location)) {
+			LOG.warn("setLocation RETURN ignored: incoming=" + formatLocationForLog(location)
+					+ ", storedStill=" + formatLocationForLog(this.location));
 			return;
 		}
 		prevLocation = location;
 		if (location == null) {
+			LOG.warn("setLocation incoming null -> gpsInfo.reset()");
 			gpsInfo.reset();
 		}
 		enhanceLocation(location);
@@ -731,6 +769,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (location != null) {
 			// use because there is a bug on some devices with location.getTime()
 			lastTimeLocationFixed = System.currentTimeMillis();
+			LOG.warn("setLocation accepted fix: " + formatLocationForLog(location) + ", lastTimeLocationFixed=" + lastTimeLocationFixed);
 			if (isPointAccurateForRouting(location) && !isTunnelLocationSimulated(location)) {
 				simulatePosition = null;
 				notifyGpsLocationRecovered();
@@ -749,11 +788,30 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 		// 2. routing
 		net.osmand.Location updatedLocation = setLocationForRouting(location, routingHelper);
+		LOG.warn("setLocation routing result: incoming=" + formatLocationForLog(location)
+				+ ", updated=" + formatLocationForLog(updatedLocation)
+				+ ", followingMode=" + routingHelper.isFollowingMode()
+				+ ", routePlanningMode=" + routingHelper.isRoutePlanningMode()
+				+ ", routeCalculated=" + routingHelper.isRouteCalculated()
+				+ ", pointToStart=" + app.getSettings().getPointToStart()
+				+ ", snapToRoad=" + app.getSettings().SNAP_TO_ROAD.get());
+
 		app.getWaypointHelper().locationChanged(location);
 		this.location = updatedLocation;
-
+		LOG.warn("setLocation STORED: storedAfter=" + formatLocationForLog(this.location));
 		// Update information
 		updateLocation(this.location);
+	}
+
+	public static String formatLocationForLog(@Nullable net.osmand.Location location) {
+		if (location == null) {
+			return "null";
+		}
+		return "provider=" + location.getProvider()
+				+ ", lat=" + String.format(java.util.Locale.US, "%.3f", location.getLatitude())
+				+ ", lon=" + String.format(java.util.Locale.US, "%.3f", location.getLongitude())
+				+ ", acc=" + (location.hasAccuracy() ? location.getAccuracy() : -1)
+				+ ", time=" + location.getTime();
 	}
 
 	public void ensureLatestLocation() {
@@ -817,25 +875,26 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public boolean getRouteSegment(net.osmand.Location loc,
-			@Nullable ApplicationMode appMode,
-			boolean cancelPreviousSearch,
-			ResultMatcher<RouteDataObject> result) {
+	                               @Nullable ApplicationMode appMode,
+	                               boolean cancelPreviousSearch,
+	                               ResultMatcher<RouteDataObject> result) {
 		return currentPositionHelper.getRouteSegment(loc, appMode, cancelPreviousSearch, result);
 	}
 
-	public boolean getGeocodingResult(net.osmand.Location loc,
-			ResultMatcher<GeocodingResult> result) {
+	public boolean getGeocodingResult(net.osmand.Location loc, ResultMatcher<GeocodingResult> result) {
 		return currentPositionHelper.getGeocodingResult(loc, result);
 	}
 
 	@Nullable
 	public net.osmand.Location getLastKnownLocation() {
 		net.osmand.Location loc = this.location;
+		LOG.info("getLastKnownLocation start: stored=" + formatLocationForLog(loc) + ", lastTimeLocationFixedAgeMs="
+				+ (lastTimeLocationFixed > 0 ? System.currentTimeMillis() - lastTimeLocationFixed : -1));
 		if (loc != null) {
 			int counter = locationRequestsCounter.incrementAndGet();
 			if (counter >= REQUESTS_BEFORE_CHECK_LOCATION && locationRequestsCounter.compareAndSet(counter, 0)) {
 				if (System.currentTimeMillis() - lastTimeLocationFixed > LOCATION_TIMEOUT_TO_BE_STALE) {
-					LOG.info("Location timed out and is considered stale. Nullifying location.");
+					LOG.warn("getLastKnownLocation stale timeout: nullifying stored location=" + formatLocationForLog(loc));
 					location = null;
 				}
 			}
@@ -847,16 +906,20 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public net.osmand.Location getLastStaleKnownLocation() {
 		net.osmand.Location newLoc = getLastKnownLocation();
 		if (newLoc == null && cachedLocation != null) {
+			LOG.info("getLastStaleKnownLocation using cached: cached=" + formatLocationForLog(cachedLocation)
+					+ ", cachedAgeMs=" + (cachedLocationTimeFix > 0 ? System.currentTimeMillis() - cachedLocationTimeFix : -1));
 			int counter = staleLocationRequestsCounter.incrementAndGet();
 			if (counter >= REQUESTS_BEFORE_CHECK_LOCATION && staleLocationRequestsCounter.compareAndSet(counter, 0)) {
 				net.osmand.Location cached = cachedLocation;
 				if (cached != null && System.currentTimeMillis() - cachedLocationTimeFix > STALE_LOCATION_TIMEOUT_TO_BE_GONE) {
+					LOG.warn("cached location expired: " + formatLocationForLog(cached));
 					cachedLocation = null;
 				}
 			}
 		} else {
 			cachedLocation = newLoc;
 			cachedLocationTimeFix = lastTimeLocationFixed;
+			LOG.info("getLastStaleKnownLocation cache updated: newLoc=" + formatLocationForLog(newLoc));
 		}
 		return cachedLocation;
 	}

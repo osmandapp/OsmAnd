@@ -16,8 +16,6 @@ import net.osmand.plus.OsmandApplication;
 
 import org.apache.commons.logging.Log;
 
-import org.apache.commons.logging.Log;
-
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -33,36 +31,42 @@ public abstract class LocationServiceHelper {
 	// Working with location checkListeners
 	protected class NetworkListener implements LocationListenerCompat {
 
-		private final String provider;
+		private final String requestedProvider;
 
-		protected NetworkListener(@NonNull String provider) {
-			this.provider = provider;
+		protected NetworkListener(@NonNull String requestedProvider) {
+			this.requestedProvider = requestedProvider;
 		}
 
 		@Override
 		public void onLocationChanged(@NonNull android.location.Location location) {
-			LOG.info("SUCCESS! Received location from [" + location.getProvider() + "]: Lat=" +
-					String.format(java.util.Locale.US, "%.2f", location.getLatitude()) + ", Lon=" +
-					String.format(java.util.Locale.US, "%.2f", location.getLongitude()) + ", Acc=" + location.getAccuracy());
+			LOG.info("network callback: requestedProvider=[" + requestedProvider
+					+ "], actualProvider=[" + location.getProvider()
+					+ "], lat=" + String.format(java.util.Locale.US, "%.3f", location.getLatitude())
+					+ ", lon=" + String.format(java.util.Locale.US, "%.3f", location.getLongitude())
+					+ ", acc=" + (location.hasAccuracy() ? location.getAccuracy() : -1)
+					+ ", time=" + location.getTime());
+
 			LocationCallback locationCallback = LocationServiceHelper.this.networkLocationCallback;
 			if (locationCallback != null) {
 				net.osmand.Location l = convertLocation(location);
 				locationCallback.onLocationResult(l == null ? Collections.emptyList() : Collections.singletonList(l));
+			} else {
+				LOG.warn("network callback dropped: networkLocationCallback is null");
 			}
 		}
 
 		@Override
 		public void onProviderEnabled(@NonNull String provider) {
-			LOG.info("System fired onProviderEnabled for [" + provider + "]");
+			LOG.info("provider enabled: requestedProvider=[" + requestedProvider + "], provider=[" + provider + "]");
 		}
 
 		@Override
 		public void onProviderDisabled(@NonNull String provider) {
-			LOG.warn("System fired onProviderDisabled for [" + provider + "]. Hardware disabled by user or OS.");
+			LOG.warn("provider disabled: requestedProvider=[" + requestedProvider + "], provider=[" + provider + "]");
 		}
 	}
 
-	public LocationServiceHelper(@NonNull OsmandApplication app) {
+	public LocationServiceHelper(OsmandApplication app) {
 		this.app = app;
 	}
 
@@ -91,6 +95,5 @@ public abstract class LocationServiceHelper {
 
 	public abstract void removeLocationUpdates();
 
-	public abstract Location getFirstTimeRunDefaultLocation(
-			@Nullable LocationCallback locationCallback);
+	public abstract Location getFirstTimeRunDefaultLocation(@Nullable LocationCallback locationCallback);
 }

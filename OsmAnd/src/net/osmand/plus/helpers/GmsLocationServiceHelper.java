@@ -56,12 +56,12 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 		fusedLocationCallback = new com.google.android.gms.location.LocationCallback() {
 			@Override
 			public void onLocationResult(@NonNull LocationResult locationResult) {
-					Location loc = locationResult.getLastLocation();
-					if (loc != null) {
-						LOG.info("SUCCESS! Received GMS Fused location: Lat=" +
-								String.format(java.util.Locale.US, "%.2f", loc.getLatitude()) + ", Lon=" +
-								String.format(java.util.Locale.US, "%.2f", loc.getLongitude()) + ", Acc=" + loc.getAccuracy());
-					}
+				Location loc = locationResult.getLastLocation();
+				if (loc != null) {
+					LOG.info("SUCCESS! Received GMS Fused location: Lat=" +
+							String.format(java.util.Locale.US, "%.3f", loc.getLatitude()) + ", Lon=" +
+							String.format(java.util.Locale.US, "%.3f", loc.getLongitude()) + ", Acc=" + loc.getAccuracy());
+				}
 				LocationCallback locationCallback = GmsLocationServiceHelper.this.locationCallback;
 				if (locationCallback != null) {
 					Location location = locationResult.getLastLocation();
@@ -72,7 +72,7 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 
 			@Override
 			public void onLocationAvailability(@NonNull LocationAvailability locationAvailability) {
-					LOG.info("System fired GMS onLocationAvailability: " + locationAvailability.isLocationAvailable());
+				LOG.info("System fired GMS onLocationAvailability: " + locationAvailability.isLocationAvailable());
 				LocationCallback locationCallback = GmsLocationServiceHelper.this.locationCallback;
 				if (locationCallback != null) {
 					locationCallback.onLocationAvailability(locationAvailability.isLocationAvailable());
@@ -84,12 +84,12 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 	@Override
 	public void requestLocationUpdates(@NonNull LocationCallback locationCallback) {
 		this.locationCallback = locationCallback;
-			LOG.info("Requesting GMS Fused location updates...");
+		LOG.info("Requesting GMS Fused location updates...");
 		// request location updates
 		try {
 			fusedLocationProviderClient.requestLocationUpdates(
 					fusedLocationRequest, fusedLocationCallback, Looper.myLooper());
-				LOG.info("Successfully registered GMS Fused listener.");
+			LOG.info("Successfully registered GMS Fused listener.");
 		} catch (SecurityException e) {
 			LOG.debug("Location service permission not granted", e);
 			throw e;
@@ -109,16 +109,9 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 		this.networkLocationCallback = locationCallback;
 		// request location updates
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
-			boolean isLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-					locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-			LOG.info("Global location enabled state: " + isLocationEnabled);
-			LOG.info("All installed providers: " + locationManager.getAllProviders());
-			List<String> enabledProviders = locationManager.getProviders(true);
-			LOG.info("Currently ENABLED providers: " + enabledProviders);
-
-			if (!enabledProviders.contains(LocationManager.NETWORK_PROVIDER)) {
-				LOG.warn("NETWORK_PROVIDER is NOT in the enabled list!");
-			}
+		LOG.info("GMS requestNetworkLocationUpdates()");
+		LOG.info("GMS allProviders=" + locationManager.getAllProviders());
+		LOG.info("GMS enabledProviders=" + locationManager.getProviders(true));
 		List<String> providers = locationManager.getProviders(true);
 		for (String provider : providers) {
 			if (provider == null
@@ -126,24 +119,25 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 					|| provider.equals(LocationManager.FUSED_PROVIDER)) {
 				continue;
 			}
-				LOG.info("Attempting to request network updates from provider: [" + provider + "]");
+			LOG.info("GMS requesting network updates from provider=[" + provider + "]");
 			try {
 				NetworkListener networkListener = new NetworkListener(provider);
-				LocationManagerCompat.requestLocationUpdates(locationManager, provider, networkLocationRequest,
-						networkListener, Looper.myLooper());
+				LocationManagerCompat.requestLocationUpdates(locationManager, provider, networkLocationRequest, networkListener, Looper.getMainLooper());
 				networkListeners.add(networkListener);
-					LOG.info("Successfully registered network listener for [" + provider + "]");
+				LOG.info("GMS successfully registered network listener for [" + provider + "]");
 			} catch (SecurityException e) {
-				LOG.debug(provider + " location service permission not granted", e);
+				LOG.warn("GMS " + provider + " location service permission not granted", e);
 			} catch (IllegalArgumentException e) {
-				LOG.debug(provider + " location provider not available", e);
+				LOG.warn("GMS " + provider + " location provider not available", e);
+			} catch (Exception e) {
+				LOG.error("GMS unexpected error registering provider=[" + provider + "]", e);
 			}
 		}
 	}
 
 	@Override
 	public void removeLocationUpdates() {
-			LOG.info("Removing GMS Fused location updates...");
+		LOG.info("Removing GMS Fused location updates...");
 		// remove location updates
 		try {
 			fusedLocationProviderClient.removeLocationUpdates(fusedLocationCallback);
@@ -160,15 +154,15 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 		if (locationCallback == null) {
 			return null;
 		}
-			LOG.info("Attempting to get first-time run default location via GMS Fused API...");
+		LOG.info("Attempting to get first-time run default location via GMS Fused API...");
 		try {
 			Task<Location> lastLocation = fusedLocationProviderClient.getLastLocation();
 			lastLocation.addOnSuccessListener(loc -> {
-					if (loc != null) {
-						LOG.info("Success! Found valid cached GMS location.");
-					} else {
-						LOG.info("GMS getLastLocation returned null.");
-					}
+				if (loc != null) {
+					LOG.info("Success! Found valid cached GMS location.");
+				} else {
+					LOG.info("GMS getLastLocation returned null.");
+				}
 				locationCallback.onLocationResult(loc != null ? Collections.singletonList(convertLocation(loc)) : Collections.emptyList());
 			});
 		} catch (SecurityException e) {
