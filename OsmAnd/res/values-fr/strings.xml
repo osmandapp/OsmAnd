@@ -5801,7 +5801,7 @@
     <string name="is_parking_time_limited">La durée de stationnement est-elle limitée ?</string>
     <string name="centimeter">cm</string>
     <string name="shared_string_centimeters">centimètres</string>
-    <string name="bicycle_width_limit_description">Indiquez la largeur de votre vélo pour éviter les pistes cyclables étroites.</string>
+    <string name="bicycle_width_limit_description">Indiquez la largeur de votre vélo afin d\'éviter les pistes cyclables étroites.</string>
     <string name="copy_link">Copier le lien</string>
     <string name="routing_attr_pt_limit_name">Afficher les N meilleurs itinéraires</string>
     <string name="routing_attr_pt_limit_description">Spécifiez le nombre de meilleurs itinéraires à afficher</string>
@@ -5812,7 +5812,7 @@
     <string name="lang_mi">Māori</string>
     <string name="buildings_3d_detail_level">Détail des bâtiments 3D</string>
     <string name="has_vehicle_metrics">À partir des données OBDII</string>
-    <string name="show_expand_button">Afficher le bouton Développer</string>
+    <string name="show_expand_button">Afficher le bouton d\'expansion</string>
     <string name="imprecise_coordinates">Coordonnées imprécises</string>
     <string name="astronomy_plugin_description">Cartes stellaires, carte du ciel en 3D</string>
     <string name="star_map">Carte du ciel</string>
