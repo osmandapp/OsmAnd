@@ -5800,7 +5800,7 @@
     <string name="is_parking_time_limited">A parkolási idő korlátozott?</string>
     <string name="centimeter">cm</string>
     <string name="shared_string_centimeters">centiméter</string>
-    <string name="bicycle_width_limit_description">Adja meg a kerékpár szélességét a keskeny kerékpárutak elkerülése érdekében.</string>
+    <string name="bicycle_width_limit_description">Adja meg a kerékpár szélességét, hogy elkerülje a szűk kerékpárutakat.</string>
     <string name="copy_link">Hivatkozás másolása</string>
     <string name="routing_attr_pt_limit_name">N legjobb útvonal megjelenítése</string>
     <string name="routing_attr_pt_limit_description">Adja meg a megjelenítendő legjobb útvonalak darabszámát</string>
