@@ -156,18 +156,7 @@ public class RoutePlannerFrontEnd {
 		}
 		for (RouteDataObject r : dataObjects) {
 			if (r.getPointsLength() > 1) {
-				RouteSegmentPoint road = null;
-				for (int j = 1; j < r.getPointsLength(); j++) {
-					QuadPointDouble pr = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(j - 1),
-							r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j));
-					double currentsDistSquare = squareDist((int) pr.x, (int) pr.y, px, py);
-					if (road == null || currentsDistSquare < road.distToProj) {
-						RouteDataObject ro = new RouteDataObject(r);
-						road = new RouteSegmentPoint(ro, j - 1, j, currentsDistSquare);
-						road.preciseX = (int) pr.x;
-						road.preciseY = (int) pr.y;
-					}
-				}
+				RouteSegmentPoint road = calcPreciseRouteSegmentPoint(r, px, py);
 				if (road != null) {
 					if (!transportStop) {
 						float prio = ctx.getRouter().defineDestinationPriority(road.road);
@@ -179,7 +168,6 @@ public class RoutePlannerFrontEnd {
 					} else {
 						list.add(road);
 					}
-					
 				}
 			}
 		}
@@ -219,6 +207,22 @@ public class RoutePlannerFrontEnd {
 			return ps;
 		}
 		return null;
+	}
+
+	public static RouteSegmentPoint calcPreciseRouteSegmentPoint(RouteDataObject r, int x, int y) {
+		RouteSegmentPoint road = null;
+		for (int i = 1; i < r.getPointsLength(); i++) {
+			QuadPointDouble pr = MapUtils.getProjectionPoint31(x, y, r.getPoint31XTile(i - 1),
+					r.getPoint31YTile(i - 1), r.getPoint31XTile(i), r.getPoint31YTile(i));
+			double currentsDistSquare = squareDist((int) pr.x, (int) pr.y, x, y);
+			if (road == null || currentsDistSquare < road.distToProj) {
+				RouteDataObject ro = new RouteDataObject(r);
+				road = new RouteSegmentPoint(ro, i - 1, i, currentsDistSquare);
+				road.preciseX = (int) pr.x;
+				road.preciseY = (int) pr.y;
+			}
+		}
+		return road;
 	}
 
 	public RouteCalcResult searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates) throws IOException, InterruptedException {

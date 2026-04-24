@@ -1009,6 +1009,14 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						pnt.endY = o.getEndPointY();
 						int preciseY = reverse? hctx.startY : hctx.endY;
 						int preciseX = reverse? hctx.startX : hctx.endX;
+
+						RouteSegmentPoint road =
+								RoutePlannerFrontEnd.calcPreciseRouteSegmentPoint(o.getRoad(), preciseX, preciseY);
+						if (road != null) {
+							preciseX = road.preciseX;
+							preciseY = road.preciseY;
+						}
+
 						o.distanceFromStart += planner.calculatePreciseStartTime(hctx.rctx, preciseX, preciseY, o);
 					} else {
 						float obstacle = hctx.rctx.getRouter().defineRoutingObstacle(
