@@ -11,7 +11,6 @@ public class QueryToken {
     final List<Prefix> prefixes;
     final Collator collator;
     final CollatorStringMatcher.StringMatcherMode matcherMode;
-    final Map<String, Set<String>> suffixes = new HashMap<>();
     
     record Prefix(String key, int offset) {}
 
@@ -31,7 +30,6 @@ public class QueryToken {
             if (masks == null) {
                 masks = new TIntArrayList();
             }
-            suffixes.put(prefix.key(), new LinkedHashSet<>(suffixDictionary));
             if (query == null) {
                 return;
             }
@@ -46,11 +44,14 @@ public class QueryToken {
             }
             String fullKey = prefix.key() + suffix;
             if (CollatorStringMatcher.cmatches(collator, fullKey, query, matcherMode)) {
-                int wordIndex = index >> 5;
-                while (masks.size() <= wordIndex) {
+                int intWordIndex = index >> 5; // word selection where index >> 5 == index / 32
+                while (masks.size() <= intWordIndex) { // each int word in masks list holds 32 suffix flags
                     masks.add(0);
                 }
-                masks.set(wordIndex, masks.get(wordIndex) | (1 << (index & 31)));
+                int bitOffset = index & 31; // selection of bit inside the word where index & 31 == index % 32 and stays in 0..31
+                int wordMask = 1 << bitOffset; // building a one-bit mask
+                int prev = masks.get(intWordIndex);
+                masks.set(intWordIndex, prev | wordMask);
             }
         }
     }
