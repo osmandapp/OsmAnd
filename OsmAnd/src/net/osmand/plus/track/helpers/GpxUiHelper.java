@@ -92,6 +92,41 @@ public class GpxUiHelper {
 		return getColorValue(clr, value, true);
 	}
 
+
+
+	@NonNull
+	public static String getTrackShortDescription(@NonNull Context context,
+	                                              @NonNull GpxTrackAnalysis analysis,
+	                                              @Nullable KFile file,
+	                                              boolean shouldShowFolder) {
+		OsmandApplication app = context instanceof OsmandApplication
+				? (OsmandApplication) context
+				: (OsmandApplication) context.getApplicationContext();
+		boolean accessibilityEnabled = app.accessibilityEnabled();
+
+		StringBuilder description = new StringBuilder();
+		description.append(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
+		if (analysis.isTimeSpecified()) {
+			description.append(" • ");
+			description.append(formatDuration(analysis.getDurationInSeconds(), accessibilityEnabled));
+		}
+		if (analysis.getWptPoints() > 0) {
+			description.append(" • ");
+			description.append(analysis.getWptPoints());
+		}
+		if (shouldShowFolder && file != null) {
+			File parentDir = SharedUtil.jFile(file).getParentFile();
+			if (parentDir != null) {
+				String folderName = getFolderName(context, parentDir);
+				if (!Algorithms.isEmpty(folderName)) {
+					description.append(" | ");
+					description.append(Algorithms.capitalizeFirstLetter(folderName));
+				}
+			}
+		}
+		return description.toString();
+	}
+
 	public static String getDescription(OsmandApplication app, GpxTrackAnalysis analysis, boolean html) {
 		StringBuilder description = new StringBuilder();
 		String nl = html ? "<br/>" : "\n";
