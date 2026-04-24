@@ -968,6 +968,7 @@ public class CommonWords {
 		addCommon("улица");
 		addCommon("спуск");
 		addCommon("straße");
+		addCommon("strasse"); // needed as well
 		addCommon("chemin");
 		addCommon("way");
 
