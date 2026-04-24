@@ -888,8 +888,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	@Nullable
 	public net.osmand.Location getLastKnownLocation() {
 		net.osmand.Location loc = this.location;
-		LOG.info("getLastKnownLocation start: stored=" + formatLocationForLog(loc) + ", lastTimeLocationFixedAgeMs="
-				+ (lastTimeLocationFixed > 0 ? System.currentTimeMillis() - lastTimeLocationFixed : -1));
 		if (loc != null) {
 			int counter = locationRequestsCounter.incrementAndGet();
 			if (counter >= REQUESTS_BEFORE_CHECK_LOCATION && locationRequestsCounter.compareAndSet(counter, 0)) {
@@ -906,8 +904,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public net.osmand.Location getLastStaleKnownLocation() {
 		net.osmand.Location newLoc = getLastKnownLocation();
 		if (newLoc == null && cachedLocation != null) {
-			LOG.info("getLastStaleKnownLocation using cached: cached=" + formatLocationForLog(cachedLocation)
-					+ ", cachedAgeMs=" + (cachedLocationTimeFix > 0 ? System.currentTimeMillis() - cachedLocationTimeFix : -1));
 			int counter = staleLocationRequestsCounter.incrementAndGet();
 			if (counter >= REQUESTS_BEFORE_CHECK_LOCATION && staleLocationRequestsCounter.compareAndSet(counter, 0)) {
 				net.osmand.Location cached = cachedLocation;
