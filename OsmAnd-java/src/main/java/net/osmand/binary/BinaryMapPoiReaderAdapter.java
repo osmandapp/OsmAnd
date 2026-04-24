@@ -526,7 +526,7 @@ public class BinaryMapPoiReaderAdapter {
 						suffixDictionary = new ArrayList<>();
 					}
 					String prevSuffix = suffixDictionary.isEmpty() ? null : suffixDictionary.get(suffixDictionary.size() - 1);
-					String entry = decodeSuffixDictionaryEntry(prevSuffix, encodedSuffix);
+					String entry = nameIndexDecodeDictionarySuffix(prevSuffix, encodedSuffix);
 					suffixDictionary.add(entry);
 					break;
 				case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:

@@ -1,7 +1,7 @@
 package net.osmand;
 
-import net.osmand.util.Algorithms;
 import net.osmand.util.ArabicNormalizer;
+import net.osmand.util.SearchAlgorithms;
 import net.osmand.util.UnicodeDiacritics;
 
 import java.util.Locale;
@@ -220,7 +220,7 @@ public class CollatorStringMatcher implements StringMatcher {
 			fullText = normalized == null ? fullText : normalized;
 		}
 		int i;
-		fullText = Algorithms.removeApostrophes(fullText);
+		fullText = SearchAlgorithms.removeApostrophes(fullText);
 		while ((i = fullText.indexOf('ß')) != -1) {
 			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i + 1);
 		}

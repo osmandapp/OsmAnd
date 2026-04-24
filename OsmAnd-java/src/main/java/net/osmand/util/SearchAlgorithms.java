@@ -11,6 +11,9 @@ public class SearchAlgorithms {
     public static final char SUFFIX_DICT_MARKER_RAW_ESCAPE = '\uE000';
     public static final int SUFFIX_DICT_MARKER_BASE = 0xE100;
     public static final int SUFFIX_DICT_MARKER_MAX = 0xF8FF;
+    private static final char[] CHARS_TO_NORMALIZE_KEY = {'’', 'ʼ', '(', ')', '´', '`', '′', '‵', 'ʹ'}; // remove () subcities
+    private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\'', '\'', ' ', ' ', '\'', '\'', '\'', '\'', '\''};
+    private static final char[] APOSTROPHES = {'\'', '’', 'ʼ', '´', '`', '′', '‵', 'ʹ'};
     
     private SearchAlgorithms() {}
 
@@ -33,11 +36,7 @@ public class SearchAlgorithms {
         return new CodePointPrefixMatch(leftOffset, rightOffset, commonPrefixCodePointLength);
     }
 
-    public static int commonPrefixLength(String left, String right) {
-        return startWith(left, right).commonPrefixCodePointLength;
-    }
-
-    public static int suffixOffsetAfterPrefix(String token, String prefix) {
+    private static int suffixOffsetAfterPrefix(String token, String prefix) {
         CodePointPrefixMatch prefixMatch = startWith(token, prefix);
         if (prefixMatch.rightOffset != prefix.length()) {
             return -1;
@@ -84,8 +83,11 @@ public class SearchAlgorithms {
         return new ArrayList<>(namesToAdd);
     }
 
+    /**
+     * Produces unique normalized tokens from the query, plus Arabic-normalized variants when applicable.
+     */
     public static List<String> splitAndNormalize(String query) {
-        String normalizedQuery = Algorithms.normalizeSearchText(query);
+        String normalizedQuery = canonicalizePunctuation(query);
         Set<String> queryTokens = new LinkedHashSet<>();
         for (String token : split(normalizedQuery)) {
             String normalizedToken = normalizeToken(token);
@@ -114,7 +116,74 @@ public class SearchAlgorithms {
         return Normalizer.normalize(token, Normalizer.Form.NFC).toLowerCase(Locale.ROOT);
     }
 
-    public static String buildIndexedPrefix(String token, int maxPrefixLength) {
+    /**
+    * Canonicalizes punctuation variants so equivalent search text is tokenized the same way.
+    */
+    public static String canonicalizePunctuation(String s) {
+        boolean norm = Algorithms.containsChar(s, CHARS_TO_NORMALIZE_KEY);
+        if (!norm) {
+            return s;
+        }
+        for (int k = 0; k < CHARS_TO_NORMALIZE_KEY.length; k++) {
+            s = s.replace(CHARS_TO_NORMALIZE_KEY[k], CHARS_TO_NORMALIZE_VALUE[k]);
+        }
+        return s;
+    }
+
+    /**
+     * Split string by words and convert to lowercase, use as delimiter all chars except letters and digits
+     * @param str input string
+     * @return result words list
+     */
+    public static List<String> splitByWordsLowercase(String str) {
+        List<String> splitStr = new ArrayList<>();
+        int prev = -1;
+        for (int i = 0; i <= str.length(); i++) {
+            if (i == str.length() ||
+                    (!Character.isLetter(str.charAt(i)) && !Character.isDigit(str.charAt(i)))) {
+                if (prev != -1) {
+                    String subStr = str.substring(prev, i);
+                    splitStr.add(subStr.toLowerCase());
+                    prev = -1;
+                }
+            } else {
+                if (prev == -1) {
+                    prev = i;
+                }
+            }
+        }
+        return splitStr;
+    }
+
+    public static String removeQuotes(String s) {
+        if (!s.contains("«") && !s.contains("»")) {
+            return s;
+        }
+        return s.replace("«", "").replace("»", "");
+    }
+    
+    public static String removeApostrophes(String s) {
+        if (!Algorithms.containsChar(s, APOSTROPHES)) {
+            return s;
+        }
+        StringBuilder sb = new StringBuilder(s.length());
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            boolean apostroph = false;
+            for (char d : APOSTROPHES) {
+                if (d == c) {
+                    apostroph = true;
+                    break;
+                }
+            }
+            if (!apostroph) {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+    
+    public static String nameIndexPreparePrefix(String token, int maxPrefixLength) {
         String normalizedToken = normalizeToken(token);
 	    if (maxPrefixLength <= 0) {
 		    return "";
@@ -144,7 +213,10 @@ public class SearchAlgorithms {
                 || characterType == Character.ENCLOSING_MARK);
     }
 
-    public static String decodeSuffixDictionaryEntry(String previousSuffix, String encodedSuffix) {
+    /**
+     * Decodes either a raw suffix entry or a delta entry that reuses a prefix from the previous suffix.
+     */
+    public static String nameIndexDecodeDictionarySuffix(String previousSuffix, String encodedSuffix) {
         if (encodedSuffix.isEmpty()) {
             return "";
         }
@@ -177,7 +249,7 @@ public class SearchAlgorithms {
     public record SuffixEntry(String resolvedSuffix, String encodedSuffix) {}
     public static final String EMPTY_POI_SUFFIX_DICTIONARY_SENTINEL = "";
     
-    public static class SuffixDictionaryData<T> {
+    public static class SuffixDictionary<T> {
         public final List<SuffixEntry> dictionaryEntries = new ArrayList<>();
         public final Map<String, Integer> resolvedSuffixToIndex = new HashMap<>();
         public final Map<T, int[]> bitsets = new LinkedHashMap<>();
@@ -192,7 +264,7 @@ public class SearchAlgorithms {
                 || (markerCodePoint >= SUFFIX_DICT_MARKER_BASE && markerCodePoint <= SUFFIX_DICT_MARKER_MAX);
     }
     
-    private static String encodeSuffix(String suffix) {
+    private static String nameIndexEncodeSuffix(String suffix) {
         return startsWithSuffixMarker(suffix) ? SUFFIX_DICT_MARKER_RAW_ESCAPE + suffix : suffix;
     }
 
@@ -200,12 +272,12 @@ public class SearchAlgorithms {
         return value.codePointCount(0, value.length());
     }
     
-    public static String encodeSuffix(String suffix, String previousSuffix) {
-        String encodedRawSuffix = encodeSuffix(suffix);
+    public static String nameIndexEncodeSuffix(String suffix, String previousSuffix) {
+        String encodedRawSuffix = nameIndexEncodeSuffix(suffix);
         if (previousSuffix == null) {
             return encodedRawSuffix;
         }
-        int commonPrefixCodePointLength = commonPrefixLength(previousSuffix, suffix);
+        int commonPrefixCodePointLength = startWith(previousSuffix, suffix).commonPrefixCodePointLength;
         if (commonPrefixCodePointLength > MARKER_LCP_LENGTH) {
             return encodedRawSuffix;
         }
@@ -216,9 +288,12 @@ public class SearchAlgorithms {
         return countCodePoints(deltaEncodedSuffix) < countCodePoints(encodedRawSuffix) ? deltaEncodedSuffix : encodedRawSuffix;
     }
 
-    public static <T> SuffixDictionaryData<T> buildSuffixDictionary(String prefix, List<T> objects,
-                                                                    Function<T, Collection<String>> tokenSupplier) {
-        SuffixDictionaryData<T> data = new SuffixDictionaryData<>();
+    /**
+     * Collects unique suffixes for the prefix, stores them once in sorted encoded form, and builds per-object bitsets.
+     */
+    public static <T> SuffixDictionary<T> nameIndexBuildSuffixDictionary(String prefix, List<T> objects,
+                                                                         Function<T, Collection<String>> tokenSupplier) {
+        SuffixDictionary<T> data = new SuffixDictionary<>();
         TreeSet<String> sortedSuffixes = new TreeSet<>();
         Map<T, Set<String>> suffixesByObject = new LinkedHashMap<>();
         for (T object : objects) {
@@ -244,7 +319,7 @@ public class SearchAlgorithms {
         }
         String previousSuffix = null;
         for (String suffix : sortedSuffixes) {
-            String encodedSuffix = encodeSuffix(suffix, previousSuffix);
+            String encodedSuffix = nameIndexEncodeSuffix(suffix, previousSuffix);
             SuffixEntry entry = new SuffixEntry(suffix, encodedSuffix);
             data.resolvedSuffixToIndex.put(entry.resolvedSuffix(), data.dictionaryEntries.size());
             data.dictionaryEntries.add(entry);

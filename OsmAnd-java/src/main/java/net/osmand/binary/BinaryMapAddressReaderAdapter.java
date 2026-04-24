@@ -752,7 +752,7 @@ public class BinaryMapAddressReaderAdapter {
 							}
 							String encodedSuffix = codedIS.readString();
 							String previousSuffix = suffixDictionary.isEmpty() ? null : suffixDictionary.get(suffixDictionary.size() - 1);
-							String decodedSuffix = SearchAlgorithms.decodeSuffixDictionaryEntry(previousSuffix, encodedSuffix);
+							String decodedSuffix = SearchAlgorithms.nameIndexDecodeDictionarySuffix(previousSuffix, encodedSuffix);
 							suffixDictionary.add(decodedSuffix);
 						} else if (stag == AddressNameIndexData.ATOM_FIELD_NUMBER) {
 							if (!suffixDictionaryInitialized && suffixMask != null) {
