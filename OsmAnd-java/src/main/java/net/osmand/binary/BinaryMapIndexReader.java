@@ -1896,7 +1896,7 @@ public class BinaryMapIndexReader {
 		}
 
 		public boolean isSkippedDuplication() {
-			return resultMatcher != null && ((DedupResultMatcher<?>)resultMatcher).isSkippedDuplication();
+			return resultMatcher != null && resultMatcher.isSkippedDuplication();
 		}
 		
 		public boolean publish(T obj) {

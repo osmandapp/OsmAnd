@@ -18,7 +18,6 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
-import net.osmand.DedupResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -779,7 +778,7 @@ public class SearchCoreFactory {
 					}
 				};
 			}
-			DedupResultMatcher<Amenity> matcher = new DedupResultMatcher<Amenity>() {
+			ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
 				int limit = 0;
 				boolean isSkipped = false;
 
