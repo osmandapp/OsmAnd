@@ -199,6 +199,10 @@ public class SearchSettings {
 		return s;
 	}
 
+	public void updateSearchTypes(ObjectType... searchTypes) {
+		this.searchTypes = searchTypes;
+	}
+
 	public SearchSettings resetSearchTypes() {
 		SearchSettings s = new SearchSettings(this);
 		s.searchTypes = null;

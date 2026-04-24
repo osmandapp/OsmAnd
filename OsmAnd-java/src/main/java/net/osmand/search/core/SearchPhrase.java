@@ -11,10 +11,7 @@ import net.osmand.binary.CommonWords;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
-import net.osmand.util.Algorithms;
-import net.osmand.util.ArabicNormalizer;
-import net.osmand.util.LocationParser;
-import net.osmand.util.MapUtils;
+import net.osmand.util.*;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -106,11 +103,11 @@ public class SearchPhrase {
 	
 	
 	public SearchPhrase generateNewPhrase(String text, SearchSettings settings) {
-		String textToSearch = Algorithms.normalizeSearchText(text);
+		String textToSearch = SearchAlgorithms.canonicalizePunctuation(text);
 		List<SearchWord> leftWords = this.words;
 		String thisTxt = getText(true);
 		List<SearchWord> foundWords = new ArrayList<>();
-		thisTxt = Algorithms.normalizeSearchText(thisTxt);
+		thisTxt = SearchAlgorithms.canonicalizePunctuation(thisTxt);
 		if (textToSearch.startsWith(thisTxt)) {
 			// string is longer
 			textToSearch = textToSearch.substring(getText(false).length());
