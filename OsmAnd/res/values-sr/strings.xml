@@ -5879,8 +5879,8 @@
     <string name="routing_attr_pt_limit_name">Приказуј Б најбољих путања</string>
     <string name="routing_attr_pt_limit_description">Наведите број најбољих путања за приказ</string>
     <string name="centimeter">cm</string>
-    <string name="shared_string_centimeters">центиметара</string>
-    <string name="bicycle_width_limit_description">Обезбедите ширину свог бицикла како бисте избегли уске бициклистичке стазе.</string>
+    <string name="shared_string_centimeters">центиметри</string>
+    <string name="bicycle_width_limit_description">Доставите ширину вашег бицикла како бисте избегли уске бициклистичке стазе.</string>
     <string name="copy_link">Копирај везу</string>
     <string name="show_spherical_map">Приказ земаљске кугле</string>
     <string name="enable_3d_objects">3Д зграде</string>
