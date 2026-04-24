@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
+import java.util.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,7 +23,6 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +30,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import net.osmand.*;
 import org.apache.commons.logging.Log;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -48,15 +49,7 @@ import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
-import net.osmand.Collator;
-import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.IndexConstants;
-import net.osmand.Location;
-import net.osmand.OsmAndCollator;
-import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
@@ -1867,6 +1860,13 @@ public class BinaryMapIndexReader {
 			}
 		}
 
+		public void endSubSearchStats(long statReq, BinaryMapIndexReaderApiName api, BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName op, 
+									  String obf, long bytes, BinaryMapIndexReaderStats.PoiReadMetricSet metrics) {
+			if (statReq > 0 && searchStat != null) {
+				searchStat.endSubSearchStats(statReq, api, op, obf, getSearchResults().size(), bytes, metrics);
+			}
+		}
+
 		public long getTileHashOnPath(double lat, double lon) {
 			long x = (int) MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, lon);
 			long y = (int) MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, lat);
@@ -1895,6 +1895,10 @@ public class BinaryMapIndexReader {
 			this.bottom = bottom;
 		}
 
+		public boolean isSkippedDuplication() {
+			return resultMatcher != null && resultMatcher.isSkippedDuplication();
+		}
+		
 		public boolean publish(T obj) {
 			if (resultMatcher == null || resultMatcher.publish(obj)) {
 				if (priorityQueue != null && obj != null) {
@@ -2633,10 +2637,29 @@ req.setSearchStat(stat);
 
 	}
 
-	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
-			TIntArrayList matchedCharacters) throws IOException {
-		boolean[] matched = new boolean[matchedCharacters.size()];
-		boolean[] matchedSubtables = new boolean[matchedCharacters.size()];
+	List<List<QueryToken.Prefix>> readIndexedStringTablePrefixes(Collator instance, List<String> queries)
+			throws IOException {
+		List<Map<String, Integer>> prefixesByQuery = new ArrayList<>(queries.size());
+		for (int i = 0; i < queries.size(); i++) {
+			prefixesByQuery.add(new LinkedHashMap<>());
+		}
+		readIndexedStringTablePrefixes(instance, queries, "", prefixesByQuery);
+		
+		List<List<QueryToken.Prefix>> result = new ArrayList<>(queries.size());
+		for (Map<String, Integer> prefixes : prefixesByQuery) {
+			List<QueryToken.Prefix> tokenPrefixes = new ArrayList<>(prefixes.size());
+			for (Map.Entry<String, Integer> entry : prefixes.entrySet()) {
+				tokenPrefixes.add(new QueryToken.Prefix(entry.getKey(), entry.getValue()));
+			}
+			result.add(tokenPrefixes);
+		}
+		return result;
+	}
+
+	private void readIndexedStringTablePrefixes(Collator instance, List<String> queries, String prefix,
+			List<Map<String, Integer>> prefixesByQuery) throws IOException {
+		boolean[] matched = new boolean[queries.size()];
+		boolean[] matchedSubtables = new boolean[queries.size()];
 		String key = null;
 		boolean shouldWeReadSubtable = false;
 		while (true) {
@@ -2647,32 +2670,34 @@ req.setSearchStat(stat);
 				return;
 			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
 				key = codedIS.readString();
-				if (prefix.length() > 0) {
+				if (!prefix.isEmpty()) {
 					key = prefix + key;
 				}
-				shouldWeReadSubtable = matchIndexByNameKey(instance, queries, listOffsets, matchedCharacters, key,
-						matched, matchedSubtables);
+				shouldWeReadSubtable = matchIndexedStringTablePrefix(instance, queries, key, matched, matchedSubtables);
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
 				int val = (int) readInt(); // FIXME for 64 bit support
 				for (int i = 0; i < queries.size(); i++) {
-					if (matched[i]) {
-						listOffsets.get(i).add(val);
+					if (matched[i] && key != null) {
+						Map<String, Integer> tokenPrefixes = prefixesByQuery.get(i);
+						Integer previousOffset = tokenPrefixes.putIfAbsent(key, val);
+						if (previousOffset != null && previousOffset != val) {
+							throw new IllegalStateException("Indexed string table contains multiple offsets for key: " + key);
+						}
 					}
 				}
 				break;
 			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
 				long len = codedIS.readRawVarint32();
 				long oldLim = codedIS.pushLimitLong((long) len);
-				if (shouldWeReadSubtable && key != null) {
+				if (shouldWeReadSubtable) {
 					List<String> subqueries = new ArrayList<>(queries);
-					// reset query so we don't search what was not matched
-					for(int i = 0; i < queries.size(); i++) {
-						if(!matchedSubtables[i]) {
+					for (int i = 0; i < queries.size(); i++) {
+						if (!matchedSubtables[i]) {
 							subqueries.set(i, null);
 						}
 					}
-					readIndexedStringTable(instance, subqueries, key, listOffsets, matchedCharacters);
+					readIndexedStringTablePrefixes(instance, subqueries, key, prefixesByQuery);
 				} else {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}
@@ -2685,45 +2710,22 @@ req.setSearchStat(stat);
 		}
 	}
 
-	private boolean matchIndexByNameKey(Collator instance, List<String> queries, List<TIntArrayList> listOffsets,
-			TIntArrayList matchedCharacters, String key, boolean[] matched, boolean[] matchedSubtables) {
+	private boolean matchIndexedStringTablePrefix(Collator instance, List<String> queries, String key, boolean[] matched,
+			boolean[] matchedSubtables) {
 		boolean shouldWeReadSubtable = false;
 		for (int i = 0; i < queries.size(); i++) {
-			int charMatches = matchedCharacters.get(i);
 			String query = queries.get(i);
 			matched[i] = false;
 			matchedSubtables[i] = false;
 			if (query == null) {
 				continue;
 			}
-			
 			boolean keyStartsWithQuery = CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 			boolean queryStartsWithKey = CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
-			// Subtable traversal must not be gated by matchedCharacters, otherwise alternative branches
-			// (e.g. 'mu*' vs 'mü*') could be pruned before reaching same-length terminal keys.
 			boolean potentialBranchMatch = keyStartsWithQuery || queryStartsWithKey;
+			matched[i] = potentialBranchMatch;
 			matchedSubtables[i] = potentialBranchMatch;
 			shouldWeReadSubtable |= potentialBranchMatch;
-
-			// check query is part of key (the best matching)
-			if (keyStartsWithQuery) {
-				if (query.length() >= charMatches) {
-					if (query.length() > charMatches) {
-						matchedCharacters.set(i, query.length());
-						listOffsets.get(i).clear();
-					}
-					matched[i] = true;
-				}
-				// check key is part of query
-			} else if (queryStartsWithKey) {
-				if (key.length() >= charMatches) {
-					if (key.length() > charMatches) {
-						matchedCharacters.set(i, key.length());
-						listOffsets.get(i).clear();
-					}
-					matched[i] = true;
-				}
-			}
 		}
 		return shouldWeReadSubtable;
 	}

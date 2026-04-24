@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class CommonWords {
-	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>();
+	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>(); 
 	private static Map<String, Integer> frequentlyUsedWordsDictionary = new LinkedHashMap<>();
 	private static Set<String> regionNames = new HashSet<>();
 	
@@ -17,9 +17,13 @@ public class CommonWords {
 	private static String NUMBER_WITH_LESS_THAN_2_LETTERS = "NUMBER_WITH_LESS_THAN_2_LETTERS";
 	
 	private static void addCommon(String string) {
+		// 1. add variant with "ß" -> "ss"
+		// 2. add variant with dyacritics
 		commonWordsDictionary.put(string, commonWordsDictionary.size());
 	}
 	private static void addFrequentlyUsed(String string) {
+		// 1. add variant with "ß" -> "ss"
+		// 2. add variant with dyacritics
 		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
 	}
 
@@ -968,6 +972,7 @@ public class CommonWords {
 		addCommon("улица");
 		addCommon("спуск");
 		addCommon("straße");
+		addCommon("strasse"); // needed as well
 		addCommon("chemin");
 		addCommon("way");
 

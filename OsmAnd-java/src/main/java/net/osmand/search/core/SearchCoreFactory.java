@@ -11,6 +11,7 @@ import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.search.core.ObjectType.POI;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
+import static net.osmand.util.SearchAlgorithms.splitAndNormalize;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -34,12 +35,8 @@ import net.osmand.osm.PoiType;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
-import net.osmand.util.Algorithms;
-import net.osmand.util.GeoParsedPoint;
-import net.osmand.util.GeoPointParserUtil;
-import net.osmand.util.LocationParser;
+import net.osmand.util.*;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
-import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -269,31 +266,6 @@ public class SearchCoreFactory {
 		}
 	}
 	
-	
-	public static Set<String> splitSearchNames(String name) {
-		int prev = -1;
-		Set<String> namesToAdd = new HashSet<>();
-
-		for (int i = 0; i <= name.length(); i++) {
-			boolean isHyphenNearNumber = i != name.length() && name.charAt(i) == '-'
-					&& ((i + 1 < name.length() && Character.isDigit(name.charAt(i + 1)))
-							|| (i - 1 >= 0 && Character.isDigit(name.charAt(i - 1))));
-			if (i == name.length() || (!Character.isLetter(name.charAt(i)) && !Character.isDigit(name.charAt(i))
-					&& name.charAt(i) != '\'' && !isHyphenNearNumber)) {
-				if (prev != -1) {
-					String substr = name.substring(prev, i);
-					namesToAdd.add(substr.toLowerCase());
-					prev = -1;
-				}
-			} else {
-				if (prev == -1) {
-					prev = i;
-				}
-			}
-		}
-		return namesToAdd;
-	}
-
 	public static class SearchRegionByNameAPI extends SearchBaseAPI {
 
 		public SearchRegionByNameAPI() {
@@ -641,7 +613,7 @@ public class SearchCoreFactory {
 				}
 				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(minRadius, maxRadius, SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
-				Set<String> wordToSearchSplit = splitSearchNames(wordToSearch);
+				List<String> wordToSearchSplit = splitAndNormalize(wordToSearch);
 				if (wordToSearchSplit.size() > 1) {
 					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
 				}
@@ -808,6 +780,7 @@ public class SearchCoreFactory {
 			}
 			ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
 				int limit = 0;
+				boolean isSkipped = false;
 
 				@Override
 				public boolean publish(Amenity object) {
@@ -819,6 +792,7 @@ public class SearchCoreFactory {
 					}
 					String poiID = object.getType().getKeyName() + "_" + object.getId();
 					if (ids.contains(poiID)) {
+						isSkipped = true;
 						return false;
 					}
 					SearchResult sr = new SearchResult(phrase);
@@ -866,6 +840,11 @@ public class SearchCoreFactory {
 				@Override
 				public boolean isCancelled() {
 					return resultMatcher.isCancelled() && (limit < LIMIT);
+				}
+				
+				@Override
+				public boolean isSkippedDuplication() {
+					return isSkipped;
 				}
 			};
 

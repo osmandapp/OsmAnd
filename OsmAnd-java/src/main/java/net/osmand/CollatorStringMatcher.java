@@ -1,7 +1,8 @@
 package net.osmand;
 
-import net.osmand.util.Algorithms;
 import net.osmand.util.ArabicNormalizer;
+import net.osmand.util.SearchAlgorithms;
+
 
 import java.util.Locale;
 
@@ -176,7 +177,7 @@ public class CollatorStringMatcher implements StringMatcher {
 		}
 		if (checkSpaces) {
 			for (int i = 1; i <= searchInLength - startLength; i++) {
-				if (isSpace(searchIn.charAt(i - 1)) && !isSpace(searchIn.charAt(i))) {
+				if (isWordStart(searchIn, i, theStart)) {
 					if (collator.equals(searchIn.substring(i, i + startLength), theStart)) {
 						if(equals) {
 							if (i + startLength == searchInLength || 
@@ -195,6 +196,17 @@ public class CollatorStringMatcher implements StringMatcher {
 		}
 		return false;
 	}
+
+	private static boolean isWordStart(String searchIn, int index, String part) {
+		if (!isSpace(searchIn.charAt(index - 1))) {
+			return false;
+		}
+		char current = searchIn.charAt(index);
+		if (!isSpace(current)) {
+			return true;
+		}
+		return current == '-' && part.length() > 1 && part.charAt(0) == '-'	&& Character.isDigit(part.charAt(1));
+	}
 	
 	private static String lowercaseAndAlignChars(String fullText) {
 		fullText = fullText.toLowerCase(Locale.getDefault());
@@ -208,7 +220,7 @@ public class CollatorStringMatcher implements StringMatcher {
 			fullText = normalized == null ? fullText : normalized;
 		}
 		int i;
-		fullText = Algorithms.removeApostrophes(fullText);
+		fullText = SearchAlgorithms.removeApostrophes(fullText);
 		while ((i = fullText.indexOf('ß')) != -1) {
 			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i + 1);
 		}
