@@ -2676,7 +2676,7 @@ req.setSearchStat(stat);
 				shouldWeReadSubtable = matchIndexedStringTablePrefix(instance, queries, key, matched, matchedSubtables);
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
-				int val = (int) readInt();
+				int val = (int) readInt(); // FIXME for 64 bit support
 				for (int i = 0; i < queries.size(); i++) {
 					if (matched[i] && key != null) {
 						Map<String, Integer> tokenPrefixes = prefixesByQuery.get(i);
