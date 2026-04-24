@@ -14,6 +14,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridFragment
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridItemDecorator
+import net.osmand.plus.mapcontextmenu.gallery.GalleryListener
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.util.Algorithms
@@ -22,7 +23,7 @@ class AstroGalleryCardViewHolder(
 	itemView: View,
 	private val app: OsmandApplication,
 	private val mapActivity: MapActivity,
-	private val listener: GalleryGridAdapter.ImageCardListener,
+	private val listener: GalleryListener,
 	private val onToggle: (String) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
 

@@ -18,41 +18,59 @@ import net.osmand.shared.media.domain.MediaType
 object LegacyMediaConverter {
 
 	/**
-	 * Iterates through the list provided to the adapter and replaces valid ImageCards
-	 * with MediaItems, while keeping UI-specific cards untouched.
+	 * Iterates through the legacy list and maps items to strictly typed GalleryItems.
 	 */
-	fun convertList(legacyItems: List<Any>): List<Any> {
-		return legacyItems.map { item ->
-			when (item) {
-				// IMPORTANT: MapillaryContributeCard is a UI action button, not a media item.
-				// We must bypass it so the adapter can render it as MAPILLARY_CONTRIBUTE_TYPE.
-				is MapillaryContributeCard -> item
+	fun convertList(legacyItems: List<Any>): List<GalleryItem> {
+		return legacyItems.mapNotNull { item -> convertItem(item, legacyItems) }
+	}
 
-				// Convert valid media cards
-				is WikiImageCard -> MediaItem.Wiki(item.wikiImage)
-				is MapillaryImageCard -> convertMapillary(item)
-				is UrlImageCard -> convertUrlImage(item)
+	fun convertItem(item: Any, legacyItems: List<Any>): GalleryItem? {
+		return when (item) {
+			is MapillaryContributeCard -> GalleryItem.MapillaryContribute
 
-				// Fallback for base ImageCard instances
-				is ImageCard -> convertGenericImage(item)
+			is WikiImageCard ->
+				GalleryItem.Media(MediaItem.Wiki(item.wikiImage), item.isImageDownloadFailed)
 
-				// Pass through other UI states (ProgressCard, Integers, NoImagesCard, etc.)
-				else -> item
+			is MapillaryImageCard ->
+				GalleryItem.Media(convertMapillary(item), item.isImageDownloadFailed)
+
+			is UrlImageCard ->
+				GalleryItem.Media(convertUrlImage(item), item.isImageDownloadFailed, showProgress = true)
+
+			is ImageCard ->
+				GalleryItem.Media(convertGenericImage(item), item.isImageDownloadFailed)
+
+			is net.osmand.plus.mapcontextmenu.builders.cards.ProgressCard -> GalleryItem.Progress
+
+			is net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard -> GalleryItem.NoImages
+
+			// Handle legacy integer types (5 = NO_INTERNET, 6 = IMAGES_COUNT)
+			is Int -> {
+				when (item) {
+					5 -> GalleryItem.NoInternet(isLoading = false)
+					6 -> GalleryItem.ImagesCount(count = legacyItems.size - 1)
+					else -> null
+				}
 			}
+
+			else -> null
 		}
 	}
 
-	private fun convertMapillary(card: MapillaryImageCard): MediaItem.Remote {
-		return MediaItem.Remote(
+	private fun convertMapillary(card: MapillaryImageCard): MediaItem.Mapillary {
+		return MediaItem.Mapillary(
+			key = card.key ?: "",
+			latitude = card.location?.latitude,
+			longitude = card.location?.longitude,
+			cameraAngle = card.ca,
 			sourceUrl = card.imageUrl ?: "",
 			title = card.title ?: "",
-			type = MediaType.PHOTO, // Legacy items are always photos
 			previewContent = MediaContent(
 				standardUrl = card.imageUrl ?: "",
 				thumbnailUrl = card.thumbnailUrl ?: card.imageUrl ?: "",
 				hiResUrl = card.galleryFullSizeUrl ?: card.imageUrl ?: ""
 			),
-			origin = MediaOrigin.MAPILLARY
+			webpageUrl = card.url
 		)
 	}
 
@@ -76,7 +94,7 @@ object LegacyMediaConverter {
 
 	private fun convertGenericImage(card: ImageCard): MediaItem.Remote {
 		return MediaItem.Remote(
-			sourceUrl = card.url ?: card.imageUrl ?: "",
+			sourceUrl = card.imageUrl ?: "",
 			title = card.title ?: "",
 			type = MediaType.PHOTO,
 			previewContent = MediaContent(
@@ -84,7 +102,8 @@ object LegacyMediaConverter {
 				thumbnailUrl = card.thumbnailUrl ?: card.imageUrl ?: "",
 				hiResUrl = card.galleryFullSizeUrl ?: card.imageHiresUrl ?: card.imageUrl ?: ""
 			),
-			origin = MediaOrigin.UNKNOWN
+			origin = MediaOrigin.UNKNOWN,
+			webpageUrl = card.url
 		)
 	}
 }

@@ -9,7 +9,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
 
@@ -60,7 +59,7 @@ public class GalleryController implements IDialogController {
 				&& Algorithms.objectEquals(currentCardsHolder.getParams(), params);
 	}
 
-	public int getImageCardFromUrl(@NonNull String imageUrl) {
+	public int getItemIndexFromUrl(@NonNull String imageUrl) {
 		for (int i = 0; i < getOnlinePhotoCards().size(); i++) {
 			ImageCard card = getOnlinePhotoCards().get(i);
 			if (imageUrl.equals(card.getImageUrl())) {

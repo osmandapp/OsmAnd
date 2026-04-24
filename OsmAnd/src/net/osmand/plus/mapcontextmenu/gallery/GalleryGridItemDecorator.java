@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.gallery;
 
-import static net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder.*;
-
 import android.graphics.Rect;
 import android.view.View;
 
@@ -11,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder;
+import net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType;
 import net.osmand.plus.mapcontextmenu.gallery.holders.MapillaryContributeHolder;
 import net.osmand.plus.utils.AndroidUtils;
 

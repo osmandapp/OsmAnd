@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController
-import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter
+import net.osmand.plus.mapcontextmenu.gallery.GalleryListener
 import net.osmand.plus.mapcontextmenu.gallery.GalleryPhotoPagerFragment
 import net.osmand.plus.plugins.astronomy.Catalog
+import net.osmand.shared.media.domain.MediaItem
 import java.time.LocalDate
 
 class AstroContextMenuAdapter(
@@ -109,18 +109,18 @@ class AstroContextMenuAdapter(
 					itemView = view,
 					app = app,
 					mapActivity = mapActivity,
-					listener = object : GalleryGridAdapter.ImageCardListener {
+					listener = object : GalleryListener {
 
-						override fun onImageClicked(imageCard: ImageCard) {
+						override fun onMediaItemClicked(mediaItem: MediaItem) {
 							galleryController?.let { controller ->
 								GalleryPhotoPagerFragment.showInstance(
 									mapActivity,
-									controller.getImageCardFromUrl(imageCard.imageUrl)
+									controller.getItemIndexFromUrl(mediaItem.sourceUri)
 								)
 							}
 						}
 
-						override fun onReloadImages() {
+						override fun onReloadMediaItems() {
 							onUpdateImage()
 						}
 					},

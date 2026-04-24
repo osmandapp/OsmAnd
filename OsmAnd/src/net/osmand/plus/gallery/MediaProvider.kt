@@ -4,6 +4,7 @@ import android.content.Context
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaType
 import net.osmand.shared.util.ImageLoaderCallback
+import net.osmand.shared.util.ImageRequestListener
 import net.osmand.shared.util.LoadingImage
 import net.osmand.shared.util.NetworkImageLoader
 
@@ -20,24 +21,40 @@ class MediaProvider(context: Context) {
 
 	private val imageLoader = NetworkImageLoader(context, useDiskCache = true)
 
-	fun loadThumbnail(item: MediaItem, callback: ImageLoaderCallback): LoadingImage? {
-		return load(resolveUrl(item, ImageResolution.THUMBNAIL), callback)
+	fun loadThumbnail(
+		item: MediaItem,
+		callback: ImageLoaderCallback,
+		requestListener: ImageRequestListener? = null
+	): LoadingImage? {
+		return load(resolveUrl(item, ImageResolution.THUMBNAIL), callback, requestListener)
 	}
 
-	fun loadStandardImage(item: MediaItem, callback: ImageLoaderCallback): LoadingImage? {
-		return load(resolveUrl(item, ImageResolution.STANDARD), callback)
+	fun loadStandardImage(
+		item: MediaItem,
+		callback: ImageLoaderCallback,
+		requestListener: ImageRequestListener? = null
+	): LoadingImage? {
+		return load(resolveUrl(item, ImageResolution.STANDARD), callback, requestListener)
 	}
 
-	fun loadHiResImage(item: MediaItem, callback: ImageLoaderCallback): LoadingImage? {
-		return load(resolveUrl(item, ImageResolution.HI_RES), callback)
+	fun loadHiResImage(
+		item: MediaItem,
+		callback: ImageLoaderCallback,
+		requestListener: ImageRequestListener? = null
+	): LoadingImage? {
+		return load(resolveUrl(item, ImageResolution.HI_RES), callback, requestListener)
 	}
 
-	private fun load(url: String?, callback: ImageLoaderCallback): LoadingImage? {
+	private fun load(
+		url: String?,
+		callback: ImageLoaderCallback,
+		requestListener: ImageRequestListener?
+	): LoadingImage? {
 		if (url.isNullOrEmpty()) {
 			callback.onError()
 			return null
 		}
-		return imageLoader.loadImage(url, callback, handlePlaceholder = false)
+		return imageLoader.loadImage(url, callback, requestListener, handlePlaceholder = false)
 	}
 
 	private enum class ImageResolution { THUMBNAIL, STANDARD, HI_RES }
@@ -49,6 +66,11 @@ class MediaProvider(context: Context) {
 
 		return when (item) {
 			is MediaItem.Remote -> when (resolution) {
+				ImageResolution.THUMBNAIL -> item.previewContent?.thumbnailUrl ?: item.sourceUrl
+				ImageResolution.STANDARD -> item.previewContent?.standardUrl ?: item.sourceUrl
+				ImageResolution.HI_RES -> item.previewContent?.hiResUrl ?: item.sourceUrl
+			}
+			is MediaItem.Mapillary -> when (resolution) {
 				ImageResolution.THUMBNAIL -> item.previewContent?.thumbnailUrl ?: item.sourceUrl
 				ImageResolution.STANDARD -> item.previewContent?.standardUrl ?: item.sourceUrl
 				ImageResolution.HI_RES -> item.previewContent?.hiResUrl ?: item.sourceUrl

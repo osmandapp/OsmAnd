@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -18,7 +19,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.ImageCardListener;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryListener;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridFragment;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridItemDecorator;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryPhotoPagerFragment;
@@ -26,6 +27,7 @@ import net.osmand.plus.plugins.mapillary.MapillaryImageDialog;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -91,7 +93,7 @@ public class CardsRowBuilder {
 		RecyclerView recyclerView = galleryView.findViewById(R.id.recycler_view);
 
 		List<Object> items = new ArrayList<>();
-		ImageCardListener listener = getImageCardListener(controller, onlinePhotos);
+		GalleryListener listener = getImageCardListener(controller, onlinePhotos);
 		galleryGridAdapter = new GalleryGridAdapter(mapActivity, listener, null, onlinePhotos, nightMode);
 
 		if (!app.getSettings().isInternetConnectionAvailable()) {
@@ -128,21 +130,27 @@ public class CardsRowBuilder {
 	}
 
 	@NonNull
-	private ImageCardListener getImageCardListener(@NonNull GalleryController controller, boolean onlinePhotos) {
-		return new ImageCardListener() {
+	private GalleryListener getImageCardListener(@NonNull GalleryController controller, boolean onlinePhotos) {
+		return new GalleryListener() {
 			@Override
-			public void onImageClicked(@NonNull ImageCard imageCard) {
+			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
 				if (onlinePhotos) {
-					GalleryPhotoPagerFragment.showInstance(mapActivity, controller.getImageCardFromUrl(imageCard.imageUrl));
-				} else {
+					GalleryPhotoPagerFragment.showInstance(mapActivity, controller.getItemIndexFromUrl(mediaItem.getSourceUri()));
+				} else if (mediaItem instanceof MediaItem.Mapillary mapillary) {
 					mapActivity.getContextMenu().close();
-					MapillaryImageDialog.show(mapActivity, imageCard.getKey(), imageCard.getImageHiresUrl(), imageCard.getUrl(), imageCard.getLocation(),
-							imageCard.getCa(), app.getString(R.string.mapillary), null, true);
+
+					LatLon location = null;
+					if (mapillary.getLatitude() != null && mapillary.getLongitude() != null) {
+						location = new LatLon(mapillary.getLatitude(), mapillary.getLongitude());
+					}
+					MapillaryImageDialog.show(mapActivity, mapillary.getKey(),
+							mapillary.getHiResUrl(), mapillary.getWebpageUrl(), location,
+							mapillary.getCameraAngle(), app.getString(R.string.mapillary), null, true);
 				}
 			}
 
 			@Override
-			public void onReloadImages() {
+			public void onReloadMediaItems() {
 				if (!app.getSettings().isInternetConnectionAvailable()) {
 					app.showShortToastMessage(R.string.shared_string_no_internet_connection);
 				} else {

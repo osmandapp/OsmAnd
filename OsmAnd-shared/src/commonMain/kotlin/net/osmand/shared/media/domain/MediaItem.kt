@@ -37,6 +37,7 @@ sealed class MediaItem {
 	abstract val title: String
 	abstract val type: MediaType
 	abstract val origin: MediaOrigin
+	abstract val sourceUri: String
 
 	// 1. Internal Media
 	// Represents files physically stored within the app's internal storage (e.g., A/V notes).
@@ -46,7 +47,9 @@ sealed class MediaItem {
 		override val title: String,
 		override val type: MediaType,
 		override val origin: MediaOrigin = MediaOrigin.UNKNOWN
-	) : MediaItem()
+	) : MediaItem() {
+		override val sourceUri: String = relativePath
+	}
 
 	// 2. System Gallery Media
 	// Represents files located outside the app's internal storage, chosen by the user.
@@ -56,7 +59,9 @@ sealed class MediaItem {
 		override val title: String,
 		override val type: MediaType,
 		override val origin: MediaOrigin = MediaOrigin.UNKNOWN
-	) : MediaItem()
+	) : MediaItem() {
+		override val sourceUri: String = uri
+	}
 
 	// 3. Remote Web Media
 	// Represents media hosted on external servers (http:// or https://).
@@ -68,7 +73,9 @@ sealed class MediaItem {
 		val previewContent: MediaContent? = null,
 		val webpageUrl: String? = null, // Optional link to the source webpage for viewing in a browser
 		override val origin: MediaOrigin = MediaOrigin.UNKNOWN
-	) : MediaItem()
+	) : MediaItem() {
+		override val sourceUri: String = sourceUrl
+	}
 
 	// 4. Wikipedia Media
 	// Legacy wrapper for the existing WikiImage data structure.
@@ -78,5 +85,25 @@ sealed class MediaItem {
 	) : MediaItem() {
 		override val title: String = wikiImage.imageName
 		override val type: MediaType = MediaType.PHOTO
+		override val sourceUri: String = wikiImage.imageStubUrl
+	}
+
+	// 5. Mapillary Media
+	// Contains specific metadata required by the Mapillary plugin (key, coordinates, camera angle).
+	data class Mapillary(
+		val key: String,
+		val latitude: Double?,
+		val longitude: Double?,
+		val cameraAngle: Double, // Double.NaN if not provided
+		val sourceUrl: String,
+		override val title: String,
+		override val type: MediaType = MediaType.PHOTO,
+		val previewContent: MediaContent? = null,
+		val webpageUrl: String? = null,
+		override val origin: MediaOrigin = MediaOrigin.MAPILLARY
+	) : MediaItem() {
+		override val sourceUri: String = sourceUrl
+
+		fun getHiResUrl() = previewContent?.hiResUrl ?: sourceUrl
 	}
 }

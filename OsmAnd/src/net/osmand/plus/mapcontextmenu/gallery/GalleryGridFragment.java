@@ -26,11 +26,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.ImageCardListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -136,9 +136,20 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	}
 
 	@NonNull
-	private ImageCardListener getImageCardListener() {
-		return imageCard -> GalleryPhotoPagerFragment.showInstance(requireMapActivity(),
-				controller.getImageCardFromUrl(imageCard.getImageUrl()));
+	private GalleryListener getImageCardListener() {
+		return new GalleryListener() {
+			@Override
+			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
+				callMapActivity(activity -> {
+					int index = controller.getItemIndexFromUrl(mediaItem.getSourceUri());
+					GalleryPhotoPagerFragment.showInstance(activity, index);
+				});
+			}
+
+			@Override
+			public void onReloadMediaItems() {
+			}
+		};
 	}
 
 	private void setupScaleDetector() {

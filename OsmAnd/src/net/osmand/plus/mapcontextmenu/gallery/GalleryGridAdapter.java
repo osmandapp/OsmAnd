@@ -1,8 +1,8 @@
 package net.osmand.plus.mapcontextmenu.gallery;
 
-import static net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder.ImageHolderType.MAIN;
-import static net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder.ImageHolderType.SPAN_RESIZABLE;
-import static net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder.ImageHolderType.STANDARD;
+import static net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType.MAIN;
+import static net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType.SPAN_RESIZABLE;
+import static net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType.STANDARD;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.gallery.GalleryItem;
+import net.osmand.plus.gallery.LegacyMediaConverter;
+import net.osmand.plus.gallery.MediaProvider;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ProgressCard;
 import net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder;
-import net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder.ImageHolderType;
+import net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType;
 import net.osmand.plus.mapcontextmenu.gallery.holders.ImagesCountHolder;
 import net.osmand.plus.mapcontextmenu.gallery.holders.MapillaryContributeHolder;
 import net.osmand.plus.mapcontextmenu.gallery.holders.NoImagesHolder;
@@ -49,7 +52,7 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 	private final List<Object> items = new ArrayList<>();
 
-	private final ImageCardListener listener;
+	private final GalleryListener listener;
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
 	private final MapActivity mapActivity;
@@ -60,8 +63,9 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	private boolean loadingImages = false;
 	private final Integer viewWidth;
 
-	private final NetworkImageLoader imageLoader;
-	public GalleryGridAdapter(@NonNull MapActivity mapActivity, @NonNull ImageCardListener listener,
+	private MediaProvider mediaProvider;
+
+	public GalleryGridAdapter(@NonNull MapActivity mapActivity, @NonNull GalleryListener listener,
 	                          @Nullable Integer viewWidth, boolean isOnlinePhotos, boolean nightMode) {
 		this.listener = listener;
 		this.nightMode = nightMode;
@@ -69,7 +73,7 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getApp();
 		this.viewWidth = viewWidth;
-		this.imageLoader = new NetworkImageLoader(app, true);
+		this.mediaProvider = new MediaProvider(app);
 		themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 	}
 
@@ -135,7 +139,10 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			Object item = items.get(position);
 			if (item instanceof ImageCard imageCard) {
 				ImageHolderType type = resizeBySpanCount ? SPAN_RESIZABLE : position == 0 ? MAIN : STANDARD;
-				viewHolder.bindView(mapActivity, listener, imageCard, type, viewWidth, imageLoader, nightMode);
+				GalleryItem galleryItem = LegacyMediaConverter.INSTANCE.convertItem(imageCard, items);
+				if (galleryItem instanceof GalleryItem.Media media) {
+					viewHolder.bindView(mapActivity, listener, media, type, viewWidth, mediaProvider, nightMode);
+				}
 			}
 		} else if (holder instanceof MapillaryContributeHolder viewHolder) {
 			viewHolder.bindView(nightMode, mapActivity);
@@ -208,13 +215,5 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 	public void setResizeBySpanCount(boolean resizeBySpanCount) {
 		this.resizeBySpanCount = resizeBySpanCount;
-	}
-
-	public interface ImageCardListener {
-
-		void onImageClicked(@NonNull ImageCard imageCard);
-
-		default void onReloadImages() {
-		}
 	}
 }
